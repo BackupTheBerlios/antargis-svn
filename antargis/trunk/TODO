@@ -24,6 +24,10 @@ ok * correct saving of players
 ok * formation - partly
 ok * differentiate between running and going
 ok * big maps (view)
+* normal for minimap in decast
+* Minimap
+* big map support in editing
+* support item placing in edit mode
 
 * Player-AI improvements:
   1. nur Sitzen

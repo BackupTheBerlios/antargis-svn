@@ -3,8 +3,11 @@
 
 #include <vector>
 #include <sstream>
+#include <map>
+
 
 #include "ag_debug.h"
+#include "ant_geometry.h"
 #include "store.h"
 #include "md5.h"
 #include "random_map.h"
@@ -310,6 +313,13 @@ class SplineMap
             b[P(i,j)]=values[P(x+i,y+j)];
         return SplineMap<T,order>(b);
       }
+      
+    Pos3D getNormal(float x,float y) const
+    {
+      Pos3D p(0,1,0);
+      
+      return p;
+    }
 
     T get
       (float x,float y) const
