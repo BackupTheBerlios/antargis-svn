@@ -4,7 +4,7 @@ ok 3) HeroEntity
 ok 4) HeroEntity move 
 ok => 4a) Eigenschaften/Position nach IsoView ¸bernehmen
 ok 4) ManEntity, der HeroEntity folgt
-ok 5) K‰mpfen
+ok 5) Figting
 ok 6) Computer-Spieler
 ok => 6a) Figuren einf‰rben
 ok * K‰mpfen - abwehren
@@ -22,8 +22,8 @@ ok * rudimentary formation-support
 ok * name-support
 ok * correct saving of players
 ok * formation - partly
-ok * Unterscheidung Laufen & Gehen !!!
-* groﬂe Karten
+ok * differentiate between running and going
+ok * big maps (view)
 
 * Player-AI improvements:
   1. nur Sitzen

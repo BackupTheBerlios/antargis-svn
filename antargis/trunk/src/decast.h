@@ -34,10 +34,17 @@ class Bitmap:public std::vector<T>
       assert(p.first>=0 && p.second>=0 && p.first<w && p.second<h);
       return std::vector<T>::operator[](p.first+p.second*w);
     }
+    
+    std::string toString() const
+    {
+      const T *p=&(front());
+      
+      return std::string((char*)const_cast<T*>(p),w*h*sizeof(T));
+    }
 
     const T &operator[](std::pair<int,int> p) const
       {
-        static int maxx=0,maxy=0;
+//        static int maxx=0,maxy=0;
         /*if(p.first>maxx||p.second>maxy)
           {
             maxx=std::max(p.first,maxx);
@@ -243,13 +250,14 @@ class SplineMap
 
     std::string toString() const
       {
+      /*
         std::ostringstream os;
 
         os<<"sp";
         for(int i=0;i<h;i++)
           for(int j=0;j<w;j++)
-            os<<"_"<<values[P(j,i)];
-        return md5(os.str());
+            os<<"_"<<values[P(j,i)];*/
+        return md5(values.toString());//os.str());
       }
       
     T getPoint(int x,int y) const

@@ -32,9 +32,15 @@ class IsoView:public AntargisView
     std::set
       <AVItem*> mSelected;
     bool shallUpdate;
-
+    Pos3D maxPos;
+    
   public:
     IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map);
+    void completeUpdate()
+    {
+      initTileCache();
+      update();
+    }
     void update();
     void checkView();
 

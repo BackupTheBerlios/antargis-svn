@@ -388,7 +388,7 @@ void AntEntity::move(float pTime)
 
 Rect2D AntEntity::getRect() const
   {
-    return Rect2D(mPos.x,mPos.y,32,32);
+    return Rect2D((int)mPos.x,(int)mPos.y,32,32);
   }
 
 void AntEntity::jobFinished()

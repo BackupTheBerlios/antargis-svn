@@ -288,7 +288,7 @@ AGRect AntargisView::getRect(AVItem *item) const
 {
       AGRect ar;
       Pos2D p(item->getCenter());
-      ar=item->getRect(mPos)+AGPoint(-p.x,-p.y+height()+32);
+      ar=item->getRect(mPos)+AGPoint((int)-p.x,(int)(-p.y+height()+32));
   return ar;
 }
 

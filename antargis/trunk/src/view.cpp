@@ -31,7 +31,7 @@ float getTimeDiff()
 
 
 IsoView::IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
-    AntargisView(parent,r,p,false),mMap(map),mRain(r.w,r.h,0),shallUpdate(false)
+    AntargisView(parent,r,p,false),mMap(map),mRain(r.w,r.h,0),shallUpdate(false),maxPos(0,0,0)
 {
   cdebug("IsoView-Rect:"<<r);
   inited=false;
@@ -51,27 +51,31 @@ void IsoView::update()
 
 void IsoView::init()
 {
-//  initTileCache();
   Uint32 t1=SDL_GetTicks();
 
   // screen size
   int mw=width()/64+2;
   int mh=height()/16+4;
 
-  
-  // goes to max of map
-  //mw=mMap->width()/2-3;
-  //mh=mMap->height()-6;
-
-
-  //      mh=mw=11;
-
   // 800x600 0<=x<13   0<=y<40
   // 1400x1024 0<=x<23   0<=y<74
 
-  for(int y=0;y<mh;y++) // 40
+  cdebug(mPos);
+  
+  int sx=0;
+  int sy=0;
+  
+  sx=mPos.x/TILE_WIDTH;
+  if(sx<0)  
+    sx=0;
+  sy=mPos.y/(TILE_WIDTH/4);
+  if(sy<0)  
+    sy=0;
+   
+  
+  for(int y=sy;y<mh+sy;y++) // 40
     {
-      for(int x=0;x<mw;x++) // 13  for 800x600
+      for(int x=sx;x<mw+sx;x++) // 13  for 800x600
         {
           int mx=x*(POINTS_PER_TILE);
           int my=y*(POINTS_PER_TILE/2);
@@ -86,19 +90,12 @@ void IsoView::init()
           IVTile tile;
           tile.x=mx;
           tile.y=my;
-          AVItem *i=mTileCache[tile];
-          insert(i);
-          mTiles[i]=tile;
-/*
-          VoxelImage *i=getSurface(h,g);
-          i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
-          IVTile tile;
-          tile.x=mx;
-          tile.y=my;
-          mTiles[i]=tile;
-
-          insert(i);
-*/
+          AVItem *i=mTileCache[tile]; // get AVItem from cache
+          if(i)
+          {
+            insert(i);
+            mTiles[i]=tile;
+          }
         }
     }
   Uint32 t2=SDL_GetTicks();
@@ -125,6 +122,18 @@ void IsoView::init()
 
 void IsoView::initTileCache()
 {
+  maxPos.x=(mMap->width()/2-4)*TILE_WIDTH-width();
+  maxPos.y=(mMap->height()-8)*TILE_WIDTH/4-height();
+
+
+  // FIXME: this should be called only once and updates done incrementally
+  // first clear old tile cache 
+  std::map<IVTile,AVItem*>::iterator k=mTileCache.begin();
+  for(;k!=mTileCache.end();k++)
+    delete k->second;
+  mTileCache.clear();
+
+
   int mw,mh;
   
   // goes to max of map
@@ -382,6 +391,15 @@ bool CompleteIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
       if(getButtonState()==SDL_BUTTON(SDL_BUTTON_RIGHT))
         {
           mPos=Pos3D(mPos.x-pDiff.x,mPos.y+pDiff.y,mPos.z);
+          if(mPos.x<0)
+            mPos.x=0;
+          if(mPos.y<0)
+            mPos.y=0;
+            
+          if(mPos.x>maxPos.x)
+            mPos.x=maxPos.x;
+          if(mPos.y>maxPos.y)
+            mPos.y=maxPos.y;
           //update();//checkView();
           shallUpdate=true; // delay update til drawing - as this may be called several times a frame
           return true;
@@ -582,6 +600,8 @@ void EditIsoView::editAt(const Pos3D &p,bool dir)
     getMap()->addFlat(x,z,30,1);
   else
     getMap()->addFlat(x,z,-30,1);
+  
+  completeUpdate();
 }
 void EditIsoView::init()
 {

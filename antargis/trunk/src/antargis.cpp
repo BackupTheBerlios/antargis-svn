@@ -37,7 +37,7 @@ class AntargisApp:public MyApp
   EditIsoView *mainView;
   
   public:
-  AntargisApp(int W,int H):map(256,256),w(W),h(H)
+  AntargisApp(int W,int H):map(128,128),w(W),h(H)
   {
     paused=false;
   }
@@ -156,7 +156,7 @@ class AntargisApp:public MyApp
   bool loadClick(const char *,const AGEvent *)
   {
     getMap()->loadMap("dummy.antlvl");
-    mainView->update();
+    mainView->completeUpdate();
     return true;
   }
   bool quitClick(const char *,const AGEvent *)

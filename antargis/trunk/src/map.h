@@ -209,7 +209,7 @@ class AntEntity
         }
     }
 
-    virtual void gotFight(AntEntity *e)
+    virtual void gotFight(AntEntity *)
     {}
 
     virtual AntHero *getHero()
@@ -566,7 +566,7 @@ class AntPlayer
       mHeroes.erase(pHero);
     }
 
-    void move(float pTime)
+    void move(float /*pTime*/)
     {
       // so add some heuristic here
 
