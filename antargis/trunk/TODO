@@ -18,6 +18,8 @@ ok * show Editing-point
 ok * Water
 ok * Editing on/off toggling
 ok * added snow/rain
+ok * rudimentary formation-support
+ok * name-support
 * correct saving of players
 * Formation
   Sitzen:
@@ -25,6 +27,7 @@ ok * added snow/rain
   Laufen:
     - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
   => 2 speeds: Laufen, gehen
+* Unterscheidung Laufen & Gehen !!!
 
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da

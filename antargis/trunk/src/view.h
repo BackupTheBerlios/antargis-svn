@@ -86,7 +86,7 @@ class Rain
     }
   }
   
-  virtual void draw(const AGRect&r)
+  virtual void draw(const AGRect&)
   {
     move();
     std::list<AGPoint>::iterator i=rainSprites.begin();
@@ -109,7 +109,7 @@ class Rain
     std::list<AGPoint>::iterator i=rainSprites.begin();
     for(;i!=rainSprites.end();)
     {
-      Uint32 add=rainSpeed*diff*0.001;
+      Uint32 add=(Uint32)(rainSpeed*diff*0.001);
       i->x+=add;
       i->y+=add;
     
@@ -125,7 +125,7 @@ class Rain
     i=snowSprites.begin();
     for(;i!=snowSprites.end();)
     {
-      Uint32 add=snowSpeed*diff*0.001;
+      Uint32 add=(Uint32)(snowSpeed*diff*0.001);
       i->x+=add;
       i->y+=add;
     
@@ -139,7 +139,7 @@ class Rain
     }
 
     size_t s=snowSprites.size()+rainSprites.size();
-    if(s<mAmount)
+    if((long)s<mAmount)
       addRain(mAmount-s);
 
         
@@ -170,7 +170,7 @@ class IsoView:public AntargisView
 
   public:
     IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
-        AntargisView(parent,r,p),mMap(map),mRain(r.w,r.h,600)
+        AntargisView(parent,r,p),mMap(map),mRain(r.w,r.h,0)
     {
       cdebug("IsoView-Rect:"<<r);
       inited=false;
@@ -379,7 +379,7 @@ class IsoView:public AntargisView
           getScreen().drawRect(ar,getSelectColor());
         }
 
-      std::map<AVItem*,AntEntity*>::iterator k=mEntities.begin();
+      std::map<AVItem*,AntEntity*>::iterator k=mEntities.end();// FIXME: don't draw anything ATM begin();
       for(;k!=mEntities.end();k++)
         {
           AGRect ar=getRect(k->first);
@@ -650,8 +650,8 @@ class EditIsoView: public CompleteIsoView
     
     void editAt(const Pos3D &p,bool dir)
     {
-      int x=2*p.x/TILE_WIDTH+2;
-      int z=2*p.z/TILE_WIDTH+1;
+      int x=(int)(2*p.x/TILE_WIDTH+2);
+      int z=(int)(2*p.z/TILE_WIDTH+1);
       if(dir)
         getMap()->addFlat(x,z,30,1);
       else

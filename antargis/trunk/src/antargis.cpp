@@ -54,17 +54,30 @@ class AntargisApp:public MyApp
   
   AntHero *hero;
   
-  map.insertEntity(hero=new AntHero(Pos2D(700,702),0));
+  map.insertEntity(hero=new AntHero(Pos2D(700,702),0,"David"));
   
   map.insertEntity(new AntMan(Pos2D(600,600),0,hero));
   map.insertEntity(new AntMan(Pos2D(800,600),0,hero));
   map.insertEntity(new AntMan(Pos2D(500,600),0,hero));
   map.insertEntity(new AntMan(Pos2D(900,600),0,hero));
   
-  map.insertEntity(hero=new AntHero(Pos2D(200,702),1));
+  map.insertEntity(new AntMan(Pos2D(600,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(800,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(500,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(900,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(600,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(800,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(500,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(900,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(600,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(800,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(500,600),0,hero));
+  map.insertEntity(new AntMan(Pos2D(900,600),0,hero));
   
-  map.insertEntity(new AntMan(Pos2D(200,600),1,hero));
-  map.insertEntity(new AntMan(Pos2D(230,600),1,hero));
+  map.insertEntity(hero=new AntHero(Pos2D(200,702),1,"Brutus"));
+  
+  //map.insertEntity(new AntMan(Pos2D(200,600),1,hero));
+  //map.insertEntity(new AntMan(Pos2D(230,600),1,hero));
   
   AntPlayer player;
   player.insertHero(hero);

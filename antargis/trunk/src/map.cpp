@@ -454,7 +454,7 @@ void AntTree::loadXML(const xmlpp::Node &node)
 /************************************************************************
 * AntHero
 ************************************************************************/
-AntHero::AntHero(const Pos2D &p,int pTypeID):AntEntity(p),typeID(pTypeID)
+AntHero::AntHero(const Pos2D &p,int pTypeID,const std::string &pName):AntEntity(p),typeID(pTypeID),mName(pName)
 {}
 AntHero::~AntHero()
 {
@@ -476,6 +476,7 @@ VoxelImage *AntHero::getSurface() const
     im->setPosition(mPos);
     //im->setCenter(Pos2D(100,150)+Pos2D(0,64));
     im->setVirtualY(40);
+    im->setName(mName);
     return im;
   }
 
@@ -565,11 +566,13 @@ void AntHero::saveXML(xmlpp::Node &node) const
 {
   AntEntity::saveXML(node);
   node.set("typeID",toString(typeID));
+  node.set("name",mName);
 }
 void AntHero::loadXML(const xmlpp::Node &node)
 {
   AntEntity::loadXML(node);
   typeID=toInt(node.get("typeID"));
+  mName=node.get("name");
 }
 
 

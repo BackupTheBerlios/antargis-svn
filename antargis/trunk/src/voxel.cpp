@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "decast.h"
 #include "ag_color.h"
+#include "ag_fontengine.h"
 #include "texture_cache.h"
 
 #include <map>
@@ -230,6 +231,12 @@ int AVItem::getZ(const Pos3D &pPos) const
     return (int)(mPos.z-pPos.z-mTexture.height()+mCenter.y-virtualY);//-(mTexture.height()-mCenter.y);
   }
 
+void AVItem::draw(AntargisView *view,const AGRect &r)
+{
+  AGRect ar=view->getRect(this);
+  ar=r.project(ar);
+  getScreen().blit(getTexture(),ar);
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -264,6 +271,8 @@ void AntargisView::draw(const AGRect &r)
 
   for(i=mItems.begin();i!=mItems.end();i++)
     {
+      (*i)->draw(this,mr);
+      /*
       AGTexture m=(*i)->getTexture();
       AGRect ar;
       //Pos2D p((*i)->getCenter());
@@ -271,7 +280,7 @@ void AntargisView::draw(const AGRect &r)
       //registerItem(ar,*i);
       ar=getRect(*i);
       ar=mr.project(ar);
-      getScreen().blit(m,ar); 
+      getScreen().blit(m,ar); */
     }
 }
 
@@ -324,6 +333,22 @@ void VoxelImage::setTexture(const std::string &pFilename)
   setCenter(Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4));
 }
 
+void VoxelImage::setName(const std::string &pName)
+  {
+    mName=pName;
+  }
+void VoxelImage::draw(AntargisView *view,const AGRect &r)
+{
+  AVItem::draw(view,r);
+  if(mName.length())
+  {
+    AGRect ar=view->getRect(this);
+    ar=r.project(ar);
+  
+    ar.y-=14;
+    AGFontEngine::renderText(&getScreen(),ar,ar.x,ar.y,mName,AGFont("data/Arial.ttf",13));
+  }
+}
 
 
 void VoxelImage::init()

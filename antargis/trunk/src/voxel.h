@@ -65,6 +65,7 @@ class VoxelSpace
   T get(Pos3D p);
 };
 
+class AntargisView;
 
 
 class AVItem
@@ -99,6 +100,10 @@ class AVItem
   {
     virtualY=v;
   }
+  
+//  virtual void draw(const Pos3D &diff,const AGRect &r);
+  virtual void draw(AntargisView *view,const AGRect &r);
+
 
  private:
   bool inited;
@@ -137,15 +142,19 @@ class AntargisView:public AGWidget
 
 class VoxelImage:public AVItem
 {
+  std::string mName;
  public:
   VoxelImage(AGSurface pSurface,Pos3D pPos);
   VoxelImage(const std::string &pFilename);
   virtual void init();
   
   void setTexture(const std::string &pFilename);
+  
 
   void save(const std::string &pFilename);
 
+  void setName(const std::string &pName);
+  virtual void draw(AntargisView *view,const AGRect &r);
 };
 
 class VoxelView:public AVItem

@@ -38,7 +38,7 @@ class MoveJob:public Job
     float speed;
     int near;
   public:
-    MoveJob(int p,const Pos2D &pTarget,int pnear=10):Job(p),mTarget(pTarget),near(pnear)
+    MoveJob(int p,const Pos2D &pTarget,int pnear=0):Job(p),mTarget(pTarget),near(pnear)
     {
       speed=70; // pixels per second
     }
@@ -273,6 +273,8 @@ class AntMan;
 class AntHero:public AntEntity
   {
     int typeID;
+    
+    std::string mName;
 
     std::set
       <AntMan*> mMen;
@@ -281,7 +283,7 @@ class AntHero:public AntEntity
     AntHero():typeID(0)
     {
     }
-    AntHero(const Pos2D &p,int ID);
+    AntHero(const Pos2D &p,int ID,const std::string &pName);
     virtual ~AntHero();
     VoxelImage *getSurface() const;
     void signUp(AntMan *man);
@@ -304,6 +306,26 @@ class AntHero:public AntEntity
             fightHero(h);
         }
     }
+    
+    Pos2D getFormation(AntMan *m) const
+    {
+      size_t count=mMen.size();
+      
+      // if(count>20) FIXME: do second circle
+      
+      std::set<AntMan*>::const_iterator j=mMen.begin();
+      size_t c=0;
+      for(;j!=mMen.end() && *j!=m;j++,c++);
+      if(j==mMen.end())
+        return Pos2D(0,0);
+      else
+      {
+        float angle=float(c)/float(count)*M_PI*2.0;
+        return Pos2D(sin(angle)*64,cos(angle)*64);
+      }
+        
+    }
+    
     virtual AntHero *getHero()
     {
       return this;
@@ -346,7 +368,7 @@ class AntMan: public AntEntity
     {
       if(mHero && !mJob)
         {
-          setJob(new MoveJob(0,mHero->getPos2D()));
+          setJob(new MoveJob(0,mHero->getPos2D()+mHero->getFormation(this)));//Pos2D()));
         }
       else
         {
@@ -418,7 +440,7 @@ class AntPlayer
     {
       mHeroes.erase(pHero);
     }
-
+    
     void move(float pTime)
     {
       // so add some heuristic here
