@@ -1,3 +1,4 @@
+SUBDIRS = lua
 lib_LTLIBRARIES = libantargisruby.la
 libantargisruby_la_SOURCES = antargisswig.cc
 
