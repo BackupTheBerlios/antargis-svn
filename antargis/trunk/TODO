@@ -20,7 +20,7 @@ ok * Editing on/off toggling
 ok * added snow/rain
 ok * rudimentary formation-support
 ok * name-support
-* correct saving of players
+ok * correct saving of players
 * Formation
   Sitzen:
     - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
@@ -64,3 +64,7 @@ ok * name-support
 	- overlay tiles with black rectangles (alpha=0.3 or so), maybe align rectangles (or better quads, or even better 3 points per iso-border) along tiles. maybe even use blending alpha
 	  from 0.3 to 0.8 or so 
 	- this can also be used for fog of war
+	- using stencil buffer
+	- overwriting with texture decreases stencil (or sets it to 0)
+	- overwriting with rectangle incs stencil (or sets it to 1), but only if stencil=0
+	- feiern!!!!!!!!!

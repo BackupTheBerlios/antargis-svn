@@ -167,6 +167,7 @@ class AntargisMap
     std::list<AntEntity*> mEntList;
     std::set
       <AntPlayer*> mPlayers;
+    std::map<int,AntEntity*> mEntityMap;
       
     bool paused;
     int mW,mH;
@@ -207,6 +208,14 @@ class AntargisMap
     void removePlayer(AntPlayer *p)
     {
       mPlayers.erase(p);
+    }
+    
+    AntEntity *getEntity(int id) const
+    {
+      std::map<int,AntEntity*>::const_iterator i=mEntityMap.find(id);
+      if(i==mEntityMap.end())
+        return 0;
+      return i->second;
     }
 
     void killHero(AntHero *h);
@@ -350,11 +359,13 @@ class AntMan: public AntEntity
   {
     int typeID;
     AntHero *mHero;
+    int mHeroID;
+    
   public:
-    AntMan():typeID(0),mHero(0)
+    AntMan():typeID(0),mHero(0),mHeroID(0)
     {
     }
-    AntMan(const Pos2D &p,int pTypeID,AntHero *pHero):AntEntity(p),typeID(pTypeID),mHero(pHero)
+    AntMan(const Pos2D &p,int pTypeID,AntHero *pHero):AntEntity(p),typeID(pTypeID),mHero(pHero),mHeroID(0)
     {
       if(pHero)
         pHero->signUp(this);
@@ -366,6 +377,12 @@ class AntMan: public AntEntity
     }
     virtual void move(float pTime)
     {
+      if(mHeroID && !mHero)
+      {
+        mHero=dynamic_cast<AntHero*>(getMap()->getEntity(mHeroID));
+        mHeroID=0;
+        mHero->signUp(this);
+      }
       if(mHero && !mJob)
         {
           setJob(new MoveJob(0,mHero->getPos2D()+mHero->getFormation(this)));//Pos2D()));
@@ -423,7 +440,7 @@ class AntPlayer
       <AntHero*> mHeroes;
     int id;
   public:
-    AntPlayer()
+    AntPlayer(int pID):id(pID)
     {
       getMap()->addPlayer(this);
     }

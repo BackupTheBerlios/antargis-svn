@@ -79,7 +79,7 @@ class AntargisApp:public MyApp
   //map.insertEntity(new AntMan(Pos2D(200,600),1,hero));
   //map.insertEntity(new AntMan(Pos2D(230,600),1,hero));
   
-  AntPlayer player;
+  AntPlayer player(1);
   player.insertHero(hero);
   
 #ifdef EDITING

@@ -63,6 +63,7 @@ void AntargisMap::insertEntity(AntEntity *e)
 {
   mEntities.insert(e);
   mEntList.push_back(e);
+  mEntityMap[e->getID()]=e;
 }
 
 std::list<AntEntity*> AntargisMap::getEntities(const AntRect&r)
@@ -108,6 +109,7 @@ void AntargisMap::addFlat(int x,int y,int h,int r)
   else
   {
     float mmin,mmax;
+    mmin=mmax=0.0f;
     bool aset=false;
     for(int i=-r;i<=r;i++)
       for(int j=-r;j<=r;j++)
@@ -229,7 +231,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
         e=new AntMan;
        else if(i->getName()=="player")
         {
-          AntPlayer *p=new AntPlayer;
+          AntPlayer *p=new AntPlayer(-1);
           p->loadXML(*i);
           mPlayers.insert(p);
         }
@@ -253,6 +255,7 @@ void AntargisMap::clear()
   mPlayers.clear();
   mEntities.clear();
   mEntList.clear();
+  mEntityMap.clear();
 }
 
 void AntargisMap::saveMap(const std::string &pFilename)
@@ -583,11 +586,15 @@ void AntMan::saveXML(xmlpp::Node &node) const
 {
   AntEntity::saveXML(node);
   node.set("typeID",toString(typeID));
+  if(mHero)
+    node.set("heroID",toString(mHero->getID()));
 }
 void AntMan::loadXML(const xmlpp::Node &node)
 {
   AntEntity::loadXML(node);
   typeID=toInt(node.get("typeID"));
+  if(node.get("heroID").length())
+    mHeroID=toInt(node.get("heroID"));
 }
 
 /************************************************************************
@@ -607,5 +614,18 @@ void AntPlayer::loadXML(const xmlpp::Node &node)
 {
   std::set<int> mHIDs;
   // FIXME: load heroes
+  xmlpp::Node::const_iterator i=node.begin();
+  for(;i!=node.end();i++)
+  {
+    if(i->getName()=="hero")
+    {
+      int id=toInt(i->get("heroID"));
+      AntHero *h=dynamic_cast<AntHero*>(getMap()->getEntity(id));
+      if(!h)
+        cdebug("Hero not found!");
+      else
+        mHeroes.insert(h);
+    }
+  }
 }
 
