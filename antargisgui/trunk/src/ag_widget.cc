@@ -10,8 +10,9 @@ AGWidget *agNoParent=0;
 
 
 AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
-  sigMouseEnter("sigMouseEnter"),
-  sigMouseLeave("sigMouseLeave"),
+  sigMouseEnter(this,"sigMouseEnter"),
+  sigMouseLeave(this,"sigMouseLeave"),
+  sigClick(this,"sigClick"),
   mr(r),mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mMenu(0),hasFocus(false),mFocus(0)
 

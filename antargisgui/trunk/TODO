@@ -1,3 +1,8 @@
+FIXME: 
+* mGLMode should be set correctly
+* STUBS must be filled
+* AGSurfacePainter should be tested in gl and sdl-mode
+
 * Window fails correct drawing
 
 ComboBox

@@ -5,7 +5,7 @@
 
 class AGRadio;
 
-class AGRadioGroup
+class AGRadioGroup:public AGMessageObject
 {
  public:
   AGRadioGroup();

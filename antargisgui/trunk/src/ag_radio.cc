@@ -7,7 +7,7 @@
 
 
 AGRadioGroup::AGRadioGroup():
-  sigChanged("changed")
+  sigChanged(this,"sigChanged")
 {
 }
 AGRadioGroup::~AGRadioGroup()

@@ -326,10 +326,11 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
                                                         0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
 
   //  cdebug((int)(image->format->BitsPerPixel));
-  if (false)// image->format->BitsPerPixel != 32 )
+  if (image->format->BitsPerPixel != 32 )
     {
       //      TRACE;
       SDL_BlitSurface( image, 0, openGLSurface, 0 );
+      SDL_Flip(openGLSurface);
     }
   else
     {

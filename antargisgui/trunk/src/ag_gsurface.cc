@@ -6,6 +6,8 @@
 
 // AGPainter stubs
 
+bool mGLMode=true;
+
 void AGPainter::putPixel(int x,int y,const AGColor &c)
 {
   STUB;
@@ -20,7 +22,7 @@ AGColor AGPainter::getPixel(int x,int y)
 
 AGSurfacePainter::AGSurfacePainter(AGSurface &pSurface):mSurface(pSurface)
 {
-  STUB;
+  //  STUB;
 }
 
 void AGSurfacePainter::putPixel(int x,int y,const AGColor &c)
@@ -35,7 +37,30 @@ AGColor AGSurfacePainter::getPixel(int x,int y)
 
 void AGSurfacePainter::blit(const AGSurface &pSource,const AGRect &pDest)
 {
-  STUB;
+  SDL_Rect sr;
+  sr.x=sr.y=0;
+  sr.w=pDest.w;
+  sr.h=pDest.h;
+  SDL_BlitSurface(pSource.s,&sr,mSurface.s,const_cast<AGRect*>(&pDest));
+  SDL_Flip(mSurface.s);
+}
+void AGSurfacePainter::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  if(mGLMode)
+    {
+      int x,y;
+      AGSurfacePainter o(const_cast<AGSurface&>(pSource));
+      for(x=0;x<pSrc.w;x++)
+	for(y=0;y<pSrc.h;y++)
+	  {
+	    putPixel(x+pDest.x,y+pDest.y,o.getPixel(x+pSrc.x,y+pSrc.y));
+	  }
+    }
+  else
+    {
+      SDL_BlitSurface(pSource.s,const_cast<AGRect*>(&pSrc),mSurface.s,const_cast<AGRect*>(&pDest));
+      SDL_Flip(mSurface.s);
+    }
 }
 void AGSurfacePainter::tile(const AGSurface &pSource)
 {

@@ -41,13 +41,15 @@ class AGMouseEvent:public AGEvent
   ~AGMouseEvent();
 };
 
+class AGMessageObject;
+
 
 class AGListener
 {
  public:
   AGListener();
   virtual ~AGListener();
-  virtual bool signal(const char*pName,const AGEvent *m);
+  virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller);
   
   
 };
@@ -55,7 +57,7 @@ class AGListener
 class AGCPPListener
 {
  public:
-  virtual bool signal(const char*pName,const AGEvent *m) const=0;
+  virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
 };
 
 
@@ -65,7 +67,6 @@ class AGSlot:public AGCPPListener
  public:
   typedef bool (T::*FKT)(const char*pName,const AGEvent *m);
   T *base;
-  //  bool (T::*f)(const char*pName,const AGEvent *m);
   FKT f;
   
   AGSlot(T *pBase,FKT pF):
@@ -76,23 +77,52 @@ class AGSlot:public AGCPPListener
       {
       }
 
-    virtual bool signal(const char*pName,const AGEvent *m) const
+    virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *) const
     {
       return (base->*f)(pName,m);
     }
 };
 
 template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const char*pName,const AGEvent *m))
+class AGSlot2:public AGCPPListener
+{
+ public:
+  typedef bool (T::*FKT)(const char*pName,const AGEvent *m,AGMessageObject *pCaller);
+  T *base;
+  FKT f;
+
+  
+  AGSlot2(T *pBase,FKT pF):
+    base(pBase),f(pF)
+    {
+    }
+    virtual ~AGSlot2()
+      {
+      }
+
+    virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller) const
+    {
+      return (base->*f)(pName,m,pCaller);
+    }
+};
+
+template<class T>
+AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *))
 {
   return new AGSlot<T>(base,f);
+}
+
+template<class T>
+AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *,AGMessageObject *))
+{
+  return new AGSlot2<T>(base,f);
 }
 
 class AGSignal
 {
  public:
-  AGSignal();
-  AGSignal(const std::string &pName);
+  AGSignal(AGMessageObject *pCaller);
+  AGSignal(AGMessageObject *pCaller,const std::string &pName);
   void connect(AGListener &pListener);
   void disconnect(AGListener &pListener);
 
@@ -108,6 +138,7 @@ class AGSignal
   std::set<AGCPPListener*> mSimpleListeners;
 
   std::string mName;
+  AGMessageObject *mCaller;
 };
 
 class AGMessageObject:public AGListener

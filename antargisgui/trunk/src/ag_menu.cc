@@ -11,6 +11,7 @@ using namespace std;
 
 AGMenu::AGMenu(AGWidget *pParent,AGPoint pWishPos,const std::string &pName):
   AGVTiler(pParent,AGRect(pWishPos.x,pWishPos.y,1,1)),
+  sigSelected(this,"sigSelected"),
   mName(pName),
   mWishPos(pWishPos)
 {

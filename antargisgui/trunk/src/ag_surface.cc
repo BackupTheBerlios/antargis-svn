@@ -103,6 +103,9 @@ AGSurface &AGSurface::operator=(const AGSurface &p)
   s=0;
   if(p.valid())
     {
+
+      if(true)
+	{
       //      s=sge_CreateAlphaSurface(SDL_SWSURFACE,p.width(),p.height());
       s=AGCreate32BitSurface(p.width(),p.height());
       
@@ -117,6 +120,14 @@ AGSurface &AGSurface::operator=(const AGSurface &p)
 	    sge_PutPixel(s,x,y,SDL_MapRGBA(s->format,r,g,b,a));
 	  }
       //      SDL_BlitSurface(p.s,0,s,0);
+	}
+      else
+	{
+	  //s=sge_CreateAlphaSurface(SDL_SWSURFACE,p.width(),p.height());
+	  s=AGCreate32BitSurface(p.width(),p.height());
+	  SDL_BlitSurface(p.s,0,s,0);
+	  SDL_Flip(s);
+	}
     }
   return *this;
 }

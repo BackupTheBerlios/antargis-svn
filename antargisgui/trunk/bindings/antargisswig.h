@@ -50,6 +50,7 @@ public:
     virtual void tile(AGSurface const &pSource);
     virtual void tile(AGSurface const &pSource, AGRect const &pDest);
     virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
 };
 
@@ -106,7 +107,7 @@ class SwigDirector_AGListener : public AGListener, public Swig::Director {
 
 public:
     SwigDirector_AGListener(VALUE self, bool disown = false);
-    virtual bool signal(char const *pName, AGEvent const *m);
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -114,7 +115,7 @@ class SwigDirector_AGCPPListener : public AGCPPListener, public Swig::Director {
 
 public:
     SwigDirector_AGCPPListener(VALUE self, bool disown = true);
-    virtual bool signal(char const *pName, AGEvent const *m) const;
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) const;
 };
 
 
@@ -133,7 +134,7 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -149,7 +150,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
@@ -168,6 +168,7 @@ public:
     virtual void drawAll(AGRect const &r);
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setWidth(int w);
     virtual void setHeight(int w);
     virtual void setTop(int y);
@@ -187,7 +188,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual void addChild(AGWidget *w);
@@ -206,6 +206,7 @@ public:
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual void draw(AGRect const &r);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setTop(int y);
     virtual void setLeft(int x);
     virtual void setWidth(int w);
@@ -226,11 +227,11 @@ public:
     virtual bool eventKeyUp(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventQuit(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m2);
     virtual bool eventFrame(float pTime);
     virtual bool eventIdle();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -246,7 +247,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
@@ -265,6 +265,7 @@ public:
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual void draw(AGRect const &r);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setWidth(int w);
     virtual void setHeight(int w);
     virtual void setTop(int y);
@@ -288,7 +289,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m);
@@ -298,6 +298,7 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -327,7 +328,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m);
@@ -337,6 +337,7 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -373,7 +374,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m);
@@ -383,6 +383,7 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -408,7 +409,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
@@ -427,6 +427,7 @@ public:
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual void draw(AGRect const &r);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setWidth(int w);
     virtual void setHeight(int w);
     virtual void setTop(int y);
@@ -458,7 +459,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
     virtual bool eventQuit(AGEvent const *m);
@@ -468,6 +468,7 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventKeyUp(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -497,7 +498,6 @@ public:
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m);
@@ -508,6 +508,7 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -525,7 +526,19 @@ class SwigDirector_AGRadioGroup : public AGRadioGroup, public Swig::Director {
 
 public:
     SwigDirector_AGRadioGroup(VALUE self, bool disown = false);
+    virtual bool eventResize(AGEvent const *m);
+    virtual bool eventSysWM(AGEvent const *m);
+    virtual bool eventQuitModal(AGEvent const *m);
+    virtual bool eventQuit(AGEvent const *m);
+    virtual bool eventMouseButtonUp(AGEvent const *m);
+    virtual bool eventMouseButtonDown(AGEvent const *m);
+    virtual bool eventMouseMotion(AGEvent const *m);
+    virtual bool eventKeyUp(AGEvent const *m);
+    virtual bool eventKeyDown(AGEvent const *m);
+    virtual bool eventActive(AGEvent const *m);
+    virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual void eventChange(std::string const &p);
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -544,7 +557,6 @@ public:
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m);
@@ -555,6 +567,7 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -580,7 +593,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
@@ -599,6 +611,7 @@ public:
     virtual void drawAll(AGRect const &r);
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setTop(int y);
     virtual void setLeft(int x);
     virtual void setWidth(int w);
@@ -618,7 +631,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonUp(AGEvent const *m);
@@ -637,6 +649,7 @@ public:
     virtual void drawAll(AGRect const &r);
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setTop(int y);
     virtual void setLeft(int x);
     virtual void setWidth(int w);
@@ -656,7 +669,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
@@ -675,6 +687,7 @@ public:
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual void draw(AGRect const &r);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setWidth(int w);
     virtual void setHeight(int w);
     virtual void setTop(int y);
@@ -694,7 +707,6 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool signal(char const *pName, AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
@@ -713,6 +725,7 @@ public:
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual void draw(AGRect const &pRect);
     virtual bool eventShow();
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setWidth(int w);
     virtual void setHeight(int w);
     virtual void setTop(int y);

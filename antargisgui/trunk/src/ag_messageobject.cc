@@ -89,7 +89,7 @@ AGListener::AGListener()
 AGListener::~AGListener()
 {
 }
-bool AGListener::signal(const char*pName,const AGEvent *m)
+bool AGListener::signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller)
 {
   return false;
 }
@@ -97,12 +97,12 @@ bool AGListener::signal(const char*pName,const AGEvent *m)
 
 // AGSignal
 
-AGSignal::AGSignal()
+AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
 {
 }
 
-AGSignal::AGSignal(const std::string &pName):
-  mName(pName)
+AGSignal::AGSignal(AGMessageObject *pCaller,const std::string &pName):
+  mName(pName),mCaller(pCaller)
 {
 }
 void AGSignal::connect(AGListener &pListener)
@@ -129,14 +129,14 @@ bool AGSignal::signal(const AGEvent *m)
   bool value=false;
   for(;i!=mListeners.end();i++)
     {
-      if((*i)->signal(mName.c_str(),m))
+      if((*i)->signal(mName.c_str(),m,mCaller))
 	value=true;
     }
 
   std::set<AGCPPListener*>::iterator j=mSimpleListeners.begin();
   for(;j!=mSimpleListeners.end();j++)
     {
-      if((*j)->signal(mName.c_str(),m))
+      if((*j)->signal(mName.c_str(),m,mCaller))
 	value=true;
     }
 
@@ -155,15 +155,15 @@ AGMessageObject *AGMessageObject::captureObject=0;
 
 
 AGMessageObject::AGMessageObject():
-  sigActive("sigActive"),
-  sigKeyDown("sigKeyDown"),
-  sigKeyUp("sigKeyUp"),
-  sigMouseMotion("sigMouseMotion"),
-  sigMouseButtonDown("sigMouseButtonDown"),
-  sigMouseButtonUp("sigMouseButtonUp"),
-  sigQuit("sigQuit"),
-  sigSysWM("sigSysWM"),
-  sigVideoResize("sigVideoResize"),
+  sigActive(this,"sigActive"),
+  sigKeyDown(this,"sigKeyDown"),
+  sigKeyUp(this,"sigKeyUp"),
+  sigMouseMotion(this,"sigMouseMotion"),
+  sigMouseButtonDown(this,"sigMouseButtonDown"),
+  sigMouseButtonUp(this,"sigMouseButtonUp"),
+  sigQuit(this,"sigQuit"),
+  sigSysWM(this,"sigSysWM"),
+  sigVideoResize(this,"sigVideoResize"),
   mCanReceiveMessages(true)
 {
 }

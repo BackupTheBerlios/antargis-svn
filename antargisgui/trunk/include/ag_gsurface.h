@@ -7,6 +7,8 @@
 
 class AGColor;
 
+extern bool mGLMode;
+
 // Generic classes - for OpenGL and "normal" SDL
 class AGSurface
 {
@@ -96,6 +98,7 @@ class AGSurfacePainter:public AGPainter
   virtual AGColor getPixel(int x,int y);
 
   virtual void blit(const AGSurface &pSource,const AGRect &pDest);
+  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void tile(const AGSurface &pSource);
   virtual void tile(const AGSurface &pSource,const AGRect &pDest);
   virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
