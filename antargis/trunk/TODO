@@ -37,6 +37,10 @@ ok * correct saving of players
 	- (later: some browsing facility, which lets you choose scenes)
 	- sentence id: scene=>number(person)=>text
 
+* Player-AI improvements:
+  - 
+  
+  
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da
 9) HouseEntity
@@ -68,3 +72,4 @@ ok * correct saving of players
 	- overwriting with texture decreases stencil (or sets it to 0)
 	- overwriting with rectangle incs stencil (or sets it to 1), but only if stencil=0
 	- feiern!!!!!!!!!
+  - einfacher mit VertexColors, beim blitting!! wird auch nur da gemalt, wo es sein soll!
