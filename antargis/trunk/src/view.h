@@ -400,11 +400,21 @@ class IsoView:public AntargisView
     {
       std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
 
+      std::string tName;
+      
       std::list<AntEntity*>::iterator i=ents.begin();
       for(;i!=ents.end();i++)
         {
           AVItem *image=mEntitiesInv[*i];
           image->setPosition((*i)->getPos3D());
+          
+          VoxelImage *vi=dynamic_cast<VoxelImage*>(image);
+          if(vi)
+          {
+            tName=(*i)->getTexture();
+            if(tName.length())
+              vi->setTexture(tName);
+          }
         }
     }
 

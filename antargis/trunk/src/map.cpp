@@ -287,15 +287,18 @@ void AntargisMap::loadMap(const std::string &pFilename)
 
 AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
 {
+  mDirNum=1;
   mID=getMap()->getNewID();
 }
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
 {
+  mDirNum=1;
   mID=getMap()->getNewID();
 }
 
 AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
 {
+  mDirNum=1;
   mID=getMap()->getNewID();
 }
 
@@ -428,6 +431,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
   if(norm-near>ptime*aspeed)
     {
       diff=diff.normalized();
+      e->setDirection(diff*(-1));
       e->setPos2D(e->getPos2D()-diff*ptime*aspeed);
     }
   else

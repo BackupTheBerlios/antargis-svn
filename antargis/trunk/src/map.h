@@ -89,6 +89,7 @@ class AntEntity
     float mConditionFall; // when used, how much per time -- hero is stronger here
     float mConditionHeal; // refilling
 
+    int mDirNum;
   public:
     AntEntity();
     AntEntity(const Pos3D &p);
@@ -110,6 +111,43 @@ class AntEntity
       }
 
     void setJob(Job *pJob);
+    
+    virtual std::string getTexture() const
+    {
+      return "";
+    }
+    
+    virtual void setDirection(const Pos2D &p)
+    {
+      Pos2D p2=p.normalized();
+      if(p2.x<-0.38) // sin(PI/4)
+        {
+          if(p2.y<-0.38)
+            mDirNum=1; // down left
+          else if(p2.y<0.38)
+            mDirNum=8; // left
+          else
+            mDirNum=7; // up left
+        }
+      else if(p2.x<0.38)
+        {
+          if(p2.y<-0.38)
+            mDirNum=2; // down
+          else if(p2.y<0.38)
+            mDirNum=1; // undefinied
+          else
+            mDirNum=6; // up
+        }
+      else
+      {
+          if(p2.y<-0.38)
+            mDirNum=3; // down right
+          else if(p2.y<0.38)
+            mDirNum=4; // right
+          else
+            mDirNum=5; // up right
+      }
+    }
 
     void setPos2D(const Pos2D &p);
 
@@ -432,6 +470,15 @@ class AntMan: public AntEntity
       if(mHero)
         mHero->discard(this);
     }
+    
+    virtual std::string getTexture() const
+    {
+      std::ostringstream os;
+      os<<"man"<<mDirNum;
+      return os.str();
+    }
+
+    
     virtual void move(float pTime)
     {
       if(mHeroID && !mHero)
@@ -453,10 +500,11 @@ class AntMan: public AntEntity
     VoxelImage *getSurface() const
       {
         std::ostringstream os;
-        if(typeID==0)
+        os<<"man1";
+/*        if(typeID==0)
           os<<"man1dl";
         else
-          os<<"man2dl";
+          os<<"man2dl";*/
         VoxelImage *im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
         im->setPosition(mPos);
         //im->setCenter(Pos2D(100,150)+Pos2D(0,64));
