@@ -7,6 +7,8 @@
 #include "ag_color.h"
 #include "texture_cache.h"
 
+#include <map>
+
 #define interval(v,mi,ma) std::min(std::max(mi,v),ma)
 
 //#define VOXELHEIGHT 128
@@ -331,7 +333,7 @@ void VoxelImage::save(const std::string &pFilename)
 {
   std::string c=toPNG(mSurface.surface());
   
-  SDL_SaveBMP(mSurface.surface(),"savetest.bmp");
+  //SDL_SaveBMP(mSurface.surface(),"savetest.bmp");
 
   saveFile(pFilename+".png",c);
 }
@@ -1141,6 +1143,8 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
   int w=TILE_WIDTH;
   FastVoxelView v(w,w*2,Pos3D(0,0,0),true);
 
+  if(true)
+  {
   for(int x=0;x<w;x++)
     for(int z=0;z<w;z++)
       //    for(int z=w/2-4;z<w/2;z++)
@@ -1213,6 +1217,45 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
      }
      
   */
+  }
+  /** add water **/
+  
+  srand(0);
+{  
+  float a=18;
+
+  SplineMapD wh((int)a,(int)a,3,1,3,true);
+
+  for(int x=0;x<w;x++)
+    for(int z=0;z<w;z++)
+      {
+        float mx=x-z+w/2;
+        float mz=x+z-w/2;
+        
+        mx/=w;
+        mz/=w;
+        while(mx>1)
+          mx-=1;
+        while(mx<0)
+          mx+=1;
+        while(mz>1)
+          mz-=1;
+        while(mz<0)
+          mz+=1;
+
+        float h=wh.get(a*float(mx),a*float(mz))+6;
+
+        for(int y=0;y<h;y++)
+          {
+            float f=std::min(1.0f,h-y);
+            v.set(Pos3D(x,y,z),Color(0,0,0xAA,f));
+          }
+      }
+ } 
+  
+  
+  /** till here */
+  
   Uint32 t2=SDL_GetTicks();
 
   cdebug("TIME:"<<t2-t1);
@@ -1223,7 +1266,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
 
   cdebug("TIME:"<<t1-t2);
   
-  SDL_SaveBMP(s.surface(),"hupe.bmp");
+  //SDL_SaveBMP(s.surface(),"hupe.bmp");
 
 
   //return new ComplexVoxelImage(Pos3D(0,0,0),s,v.getDepthMap(),v.getShadowMap());
@@ -1249,7 +1292,7 @@ AGSurface makeWaterTile()
 
         float h=wh.get(a*float(mx)/w,a*float(mz)/w)+6;
 
-        for(int y=0;y<h;y++)
+        for(int y=std::max(0.0f,h-3);y<h;y++)
           {
             float f=std::min(1.0f,h-y);
             v.set(Pos3D(x,y,z),Color(0,0,0xAA,f));

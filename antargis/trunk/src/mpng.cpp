@@ -169,8 +169,8 @@ std::string toPNG(const SDL_Surface *s)
 
   std::string ns(mem,nsize+1);
 
-  ofstream os("huhu.png");
-  os<<ns;
+//  ofstream os("huhu.png");
+//  os<<ns;
   delete mem;
   return ns;
 }

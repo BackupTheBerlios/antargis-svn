@@ -204,8 +204,9 @@ class SplineMap
     Bitmap<T> values;
     int w,h;
     RandomMap rMap;
+    bool realRandom;
   public:
-    SplineMap(int W,int H,int tile,int pmin,int pmax):
+    SplineMap(int W,int H,int tile,int pmin,int pmax,bool rrand=false):
         values(W,H),w(W),h(H),
 #ifdef EDITING        
         rMap(tile,1)
@@ -214,16 +215,24 @@ class SplineMap
 #endif        
         
     {
+      realRandom=rrand;
       // init
       int x,y;
       for(x=0;x<w;x++)
         for(y=0;y<h;y++)
           {
+            if(rrand)
+            {
+              values[P(x,y)]=(rand()%tile)/float(tile-1)*(float)(pmax-pmin)+pmin;
+            }
+            else
+            {
             int i=rMap.get(x)+rMap.get(y);
             if(tile<=1)
               values[P(x,y)]=(pmax+pmin)/2;
             else              
               values[P(x,y)]=rMap.get(i)/float(tile-1)*(pmax-pmin)+pmin;
+             }
           }
 
     }
@@ -235,16 +244,10 @@ class SplineMap
       {
         std::ostringstream os;
 
-        T mmin=values[P(0,0)];
-
-        for(int i=0;i<h;i++)
-          for(int j=0;j<w;j++)
-            mmin=std::min(mmin,values[P(j,i)]);
-
         os<<"sp";
         for(int i=0;i<h;i++)
           for(int j=0;j<w;j++)
-            os<<"_"<<values[P(j,i)]-mmin;
+            os<<"_"<<values[P(j,i)];
         return md5(os.str());
       }
       

@@ -15,11 +15,9 @@ canceled * reduced SplineMap - quadratic patches ? (look at SystemRequirements)
 ok * XML-InString loading
 ok * SplineMap-saving/loading
 ok * show Editing-point
+ok * Water
+ok * Editing on/off toggling
 * correct saving of players
-* Water
-* Editing on/off toggling
-* Editing mode: heightstep (+/-), radius (through buttons or so)
-* saving/loading-dialog
 
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da
@@ -45,3 +43,5 @@ ok * show Editing-point
   => 2 speeds: Laufen, gehen
 
 * Level-Unterstützung per ruby
+* Editing mode: heightstep (+/-), radius (through buttons or so)
+* saving/loading-dialog
