@@ -1,0 +1,44 @@
+ok 1) Tiles selektieren
+ok 2) Entites selektierbar machen
+ok 3) HeroEntity
+ok 4) HeroEntity move 
+ok => 4a) Eigenschaften/Position nach IsoView übernehmen
+ok 4) ManEntity, der HeroEntity folgt
+ok 5) Kämpfen
+ok 6) Computer-Spieler
+ok => 6a) Figuren einfärben
+ok * Kämpfen - abwehren
+ok * Healing
+canceled * LOD-Map:
+
+* reduced SplineMap - quadratic patches ?
+* SplineMap-saving/loading
+* show Editing-point
+* Water
+* Editing on/off toggling
+* Editing mode: heightstep (+/-), radius (through buttons or so)
+
+7) Schafe/Futteranzeige
+8) Sterben/Abhauen wenn kein Futter da
+9) HouseEntity
+10) HouseEntity-Player
+	a) Futter sammeln
+	b) Fortpflanzung
+11) Loyalität implementieren
+	a) zu viele Kämpfe => runter
+	b) Kampf gewonnen => hoch!!
+	c) Gut im Futter => hoch
+	d) rasten => hoch
+	e) schlechter Wetter =>runter
+	
+	f) wenn runter => abhauen zu nächstem HouseEntity (sowohl für HouseEntities as auch für Heros als Ausgangsposition)
+12) Scrolling
+13) Speichern
+14) Formationen
+  Sitzen:
+    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
+  Laufen:
+    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
+  => 2 speeds: Laufen, gehen
+
+* Level-Unterstützung per ruby
