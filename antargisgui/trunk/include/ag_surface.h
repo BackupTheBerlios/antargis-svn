@@ -1,7 +1,9 @@
 #ifndef __GUI_SURFACE_H
 #define __GUI_SURFACE_H
 
+#ifdef USE_RUBY
 #include "ruby.h"
+#endif
 #include "ag_gsurface.h"
 
 class AGSDLScreen:public AGGScreen
@@ -37,7 +39,9 @@ class AGSDLScreen:public AGGScreen
  private:
   SDL_Surface *s;
  public:
+#ifdef USE_RUBY
   VALUE mRUBY;
+#endif
 };
 
 #endif

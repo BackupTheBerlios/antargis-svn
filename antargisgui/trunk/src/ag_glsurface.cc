@@ -2,6 +2,7 @@
 #include "ag_color.h"
 #include "ag_debug.h"
 #include <GL/gl.h>
+#include <GL/glext.h>
 #include <GL/glu.h>
 #include <assert.h>
 #include <set>
@@ -12,7 +13,7 @@
 
 #include <SDL.h>
 
-#include "vector.h"
+#include "ag_vector.h"
 
 
 std::set<SDL_Surface *> glTestSurfaces;

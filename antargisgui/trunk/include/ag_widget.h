@@ -4,7 +4,9 @@
 #include "ag_geometry.h"
 #include "ag_messageobject.h"
 
+#ifdef USE_RUBY
 #include "ruby.h"
+#endif
 #include <list>
 
 class AGMenu;
@@ -111,7 +113,9 @@ class AGWidget:public AGMessageObject
   friend void AGWidget_markfunc(void *ptr);
 
  public:
+#ifdef USE_RUBY
   VALUE mRUBY;
+#endif
 };
 
 

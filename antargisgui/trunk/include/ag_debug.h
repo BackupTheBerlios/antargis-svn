@@ -77,6 +77,10 @@ private:
 
 #define STUB cdebug("STUB in File "<<__FILE__<<" line:"<<__LINE__<<" function:"<<__PRETTY_FUNCTION__)
 
+#ifdef __WIN32__
+#define CHECK_ZERO(x) assert(x);
+#else
 #define CHECK_ZERO(x) if(!x) throw AGException(std::string(__STRING(x))+" is zero in "+__FILE__+" line:"+toString(__LINE__)+" functin:"+__PRETTY_FUNCTION__);
+#endif
 
 #endif

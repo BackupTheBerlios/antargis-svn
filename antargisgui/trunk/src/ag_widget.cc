@@ -430,10 +430,12 @@ bool AGWidget::getFocus() const
 
 
 
+#ifdef USE_RUBY
 #include "ruby.h"
-
+#endif
 void AGWidget_markfunc(void *ptr)
 {
+#ifdef USE_RUBY
   AGWidget *cppAnimal;
   VALUE   rubyAnimal;
   AGWidget *zoo;
@@ -451,6 +453,7 @@ void AGWidget_markfunc(void *ptr)
       rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
       rb_gc_mark(rubyAnimal);
     }
+#endif
 }
 
 
