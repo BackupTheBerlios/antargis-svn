@@ -52,6 +52,15 @@ float AntargisMap::getGHeight(const Pos2D &p) const
 
     return mGrass.get(mx,mz);
   }
+  
+Pos3D AntargisMap::getNormal(int x,int y) const
+ {
+    float mx=float(x*POINTS_PER_TILE)/TILE_WIDTH;
+    float my=float(y*POINTS_PER_TILE)/TILE_WIDTH;
+
+   return mHeight.getNormal(mx,my);
+ }
+
 
 SplineMapD AntargisMap::getPatchH(int x,int y) const
   {

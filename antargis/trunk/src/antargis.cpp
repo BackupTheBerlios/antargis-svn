@@ -8,6 +8,7 @@
 #include "ag_debug.h"
 #include "ag_theme.h"
 
+#include "minimap.h"
 #include "myapp.h"
 
 #include "map.h"
@@ -35,6 +36,7 @@ class AntargisApp:public MyApp
   int w,h;
   bool paused;
   EditIsoView *mainView;
+  MiniMap *miniMap;
   
   public:
   AntargisApp(int W,int H):map(128,128),w(W),h(H)
@@ -83,7 +85,7 @@ class AntargisApp:public MyApp
   
   
   
-  
+  // Start of GUI-making
   
 #ifdef EDITING
   mainView=new EditIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
@@ -91,6 +93,12 @@ class AntargisApp:public MyApp
 #else
   mainView=new CompleteIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
 #endif  
+
+
+  // Minimap
+  miniMap=new MiniMap(mainView,AGRect(w-129,h-129,128,128),&map);
+  mainView->addChild(miniMap);
+
   AGButton *b;
   mainView->addChild(b=new AGButton(mainView,AGRect(0,0,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/pointer1.png"),false);
@@ -131,6 +139,8 @@ class AntargisApp:public MyApp
 
 
   setMainWidget(mainView);
+  
+  // end of GUI
     
   
     MyApp::run();
@@ -157,6 +167,7 @@ class AntargisApp:public MyApp
   {
     getMap()->loadMap("dummy.antlvl");
     mainView->completeUpdate();
+    miniMap->update();
     return true;
   }
   bool quitClick(const char *,const AGEvent *)

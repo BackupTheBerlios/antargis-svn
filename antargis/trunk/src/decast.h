@@ -37,17 +37,17 @@ class Bitmap:public std::vector<T>
       assert(p.first>=0 && p.second>=0 && p.first<w && p.second<h);
       return std::vector<T>::operator[](p.first+p.second*w);
     }
-    
+
     std::string toString() const
-    {
-      const T *p=&(front());
-      
-      return std::string((char*)const_cast<T*>(p),w*h*sizeof(T));
-    }
+      {
+        const T *p=&(front());
+
+        return std::string((char*)const_cast<T*>(p),w*h*sizeof(T));
+      }
 
     const T &operator[](std::pair<int,int> p) const
       {
-//        static int maxx=0,maxy=0;
+        //        static int maxx=0,maxy=0;
         /*if(p.first>maxx||p.second>maxy)
           {
             maxx=std::max(p.first,maxx);
@@ -136,6 +136,34 @@ T spline(double x,T a0,T a1,T a2,T a3)
 }
 
 template<class T>
+T spline_derive(double x,T a0,T a1,T a2,T a3)
+{
+  double i;
+
+  i=(x+2.0)/3.0;
+  T b0=a0*(1.0-i)+a1*i;
+
+  i=(x+1.0)/3.0;
+  T b1=a1*(1.0-i)+a2*i;
+
+  i=x/3.0;
+  T b2=a2*(1.0-i)+a3*i;
+
+
+  i=(x+1.0)*0.5;
+  T c0=b0*(1.0-i)+b1*i;
+
+  i-=0.5;
+  T c1=b1*(1.0-i)+b2*i;
+
+
+  i=x;
+  T d0=3*(c1-c0);//c0*(1.0-i)+c1*i;
+
+  return d0;
+}
+
+template<class T>
 T spline(double x,T a0,T a1,T a2)
 {
   double i;
@@ -219,12 +247,12 @@ class SplineMap
   public:
     SplineMap(int W,int H,int tile,int pmin,int pmax,bool rrand=false):
         values(W,H),w(W),h(H),
-#ifdef EDITING        
+#ifdef EDITING
         rMap(tile,1)
 #else
         rMap(tile,4)
-#endif        
-        
+#endif
+
     {
       realRandom=rrand;
       // init
@@ -233,58 +261,58 @@ class SplineMap
         for(y=0;y<h;y++)
           {
             if(rrand)
-            {
-              values[P(x,y)]=(rand()%tile)/float(tile-1)*(float)(pmax-pmin)+pmin;
-            }
+              {
+                values[P(x,y)]=(rand()%tile)/float(tile-1)*(float)(pmax-pmin)+pmin;
+              }
             else
-            {
-            int i=rMap.get(x)+rMap.get(y);
-            if(tile<=1)
-              values[P(x,y)]=(pmax+pmin)/2;
-            else              
-              values[P(x,y)]=rMap.get(i)/float(tile-1)*(pmax-pmin)+pmin;
-             }
+              {
+                int i=rMap.get(x)+rMap.get(y);
+                if(tile<=1)
+                  values[P(x,y)]=(pmax+pmin)/2;
+                else
+                  values[P(x,y)]=rMap.get(i)/float(tile-1)*(pmax-pmin)+pmin;
+              }
           }
 
     }
 
     SplineMap(Bitmap<T> b):values(b),w(b.w),h(b.h),rMap(1)
-    {}
+  {}
 
     std::string toString() const
       {
-      /*
-        std::ostringstream os;
+        /*
+          std::ostringstream os;
 
-        os<<"sp";
-        for(int i=0;i<h;i++)
-          for(int j=0;j<w;j++)
-            os<<"_"<<values[P(j,i)];*/
+          os<<"sp";
+          for(int i=0;i<h;i++)
+            for(int j=0;j<w;j++)
+              os<<"_"<<values[P(j,i)];*/
         return md5(values.toString());//os.str());
       }
-      
+
     T getPoint(int x,int y) const
-    {
-      if(x>=0 && y>=0 && x<w && y<h)
-        return values[P(x,y)];
-      else
-        return 0;
-    }
-    
+      {
+        if(x>=0 && y>=0 && x<w && y<h)
+          return values[P(x,y)];
+        else
+          return 0;
+      }
+
     void setPoint(int x,int y,const T&t)
     {
       if(x>=0 && y>=0 && x<w && y<h)
         values[P(x,y)]=t;
     }
-      
+
     void edit(int x,int y,int v)
     {
       cdebug("edit:"<<x<<","<<y<<","<<v);
       if(x>=0 && y>=0 && x<w && y<h)
-      {
-        cdebug("settingt:"<<x<<","<<y<<","<<v);
-        values[P(x,y)]+=v;
-      }
+        {
+          cdebug("settingt:"<<x<<","<<y<<","<<v);
+          values[P(x,y)]+=v;
+        }
     }
 
     std::string nice() const
@@ -313,13 +341,72 @@ class SplineMap
             b[P(i,j)]=values[P(x+i,y+j)];
         return SplineMap<T,order>(b);
       }
-      
+
     Pos3D getNormal(float x,float y) const
-    {
-      Pos3D p(0,1,0);
-      
-      return p;
-    }
+      {
+        float mdx=dx(x,y);
+        float mdy=dy(x,y);
+//        if(mdx!=0 || mdy!=0)
+//          cdebug(mdx<<"///"<<mdy);
+        return Pos3D(mdx,1,mdy).normalized();
+      }
+
+    T dy(float x,float y) const
+      {
+        int ix((int)x);
+        int iy((int)y);
+
+        T v1=spline(x-ix,
+                    values[P(ix  ,iy  )],
+                    values[P(ix+1,iy  )],
+                    values[P(ix+2,iy  )],
+                    values[P(ix+3,iy  )]);
+        T v2=spline(x-ix,
+                    values[P(ix  ,iy+1)],
+                    values[P(ix+1,iy+1)],
+                    values[P(ix+2,iy+1)],
+                    values[P(ix+3,iy+1)]);
+        T v3=spline(x-ix,
+                    values[P(ix  ,iy+2)],
+                    values[P(ix+1,iy+2)],
+                    values[P(ix+2,iy+2)],
+                    values[P(ix+3,iy+2)]);
+        T v4=spline(x-ix,
+                    values[P(ix  ,iy+3)],
+                    values[P(ix+1,iy+3)],
+                    values[P(ix+2,iy+3)],
+                    values[P(ix+3,iy+3)]);
+        return spline_derive(y-iy,v1,v2,v3,v4);
+      }
+
+    T dx(float x,float y) const
+      {
+        int ix((int)x);
+        int iy((int)y);
+
+        T v1=spline(y-iy,
+                    values[P(ix  ,iy  )],
+                    values[P(ix  ,iy+1)],
+                    values[P(ix  ,iy+2)],
+                    values[P(ix  ,iy+3)]);
+        T v2=spline(y-iy,
+                    values[P(ix+1,iy  )],
+                    values[P(ix+1,iy+1)],
+                    values[P(ix+1,iy+2)],
+                    values[P(ix+1,iy+3)]);
+        T v3=spline(y-iy,
+                    values[P(ix+2,iy  )],
+                    values[P(ix+2,iy+1)],
+                    values[P(ix+2,iy+2)],
+                    values[P(ix+3,iy+3)]);
+        T v4=spline(y-iy,
+                    values[P(ix+3,iy  )],
+                    values[P(ix+3,iy+1)],
+                    values[P(ix+3,iy+2)],
+                    values[P(ix+3,iy+3)]);
+        return spline_derive(x-ix,v1,v2,v3,v4);
+      }
+
 
     T get
       (float x,float y) const

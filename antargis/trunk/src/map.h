@@ -255,6 +255,8 @@ class AntargisMap
     SplineMapD getPatchG(int x,int y) const;
 
     int getNewID();
+    
+    Pos3D getNormal(int x,int y) const;
 
     void insertEntity(AntEntity *e);
 
