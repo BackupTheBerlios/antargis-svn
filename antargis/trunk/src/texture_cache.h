@@ -1,14 +1,3 @@
-//
-// C++ Interface: %{MODULE}
-//
-// Description:
-//
-//
-// Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
 #ifndef __TEXTURE_CACHE_H__
 #define __TEXTURE_CACHE_H__
 
