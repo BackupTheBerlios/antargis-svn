@@ -14,6 +14,8 @@ class MiniMap:public AGWidget
     virtual void draw(const AGRect &r);
 
     void update();
+    void drawEntities(const AGPoint &p0);
+
     
     AGSignal moveMap;
 

@@ -263,6 +263,7 @@ class AntargisMap
     void addFlat(int x,int y,int h,int r);
 
     std::list<AntEntity*> getEntities(const AntRect&r);
+    std::list<AntEntity*> getAllEntities();
 
     Pos3D getPos3D(const Pos2D &p) const;
 

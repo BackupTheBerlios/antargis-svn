@@ -13,8 +13,37 @@ MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRec
   mBG=AGTexture(getScreen().loadSurface("data/minimap_bg.png"));
 }
 
+void MiniMap::drawEntities(const AGPoint &p0)
+{
+//  CTRACE;
+  Pos2D maxPos=mMap->getMaxPos();
+  std::list<AntEntity*> l=mMap->getAllEntities();
+  std::list<AntEntity*>::iterator i=l.begin();
+  for(;i!=l.end();i++)
+  {
+    AGColor c;
+    int x,y;
+    Pos2D pos=(*i)->getPos2D();
+    AntMan *m=dynamic_cast<AntMan*>(*i);
+    AntHero *h=dynamic_cast<AntHero*>(*i);
+    if(m)
+      c=AGColor(0xFF,0,0);
+    else if(h)
+      c=AGColor(0,0xFF,0);
+    else
+      c=AGColor(0x77,0x77,0x77);
+      
+      
+    x=pos.x*mSurface.width()/maxPos.x;
+    y=mSurface.height()-1-pos.y*mSurface.height()/maxPos.y;
+    
+    getScreen().drawRect(AGRect(p0.x+x,p0.y+y,2,2),c);
+  }
+}
+
 void MiniMap::update()
 {
+//  CTRACE;
   mustUpdate=true;
   AGSurfacePainter p(mSurface);
   float zoom=2;
@@ -44,6 +73,7 @@ void MiniMap::update()
 
 void MiniMap::draw(const AGRect &r)
 {
+//  CTRACE;
   AGRect mr=r.project(getRect());
   if(mustUpdate)
     mTexture=AGTexture(mSurface);
@@ -55,6 +85,8 @@ void MiniMap::draw(const AGRect &r)
   mr.h-=16;
   
   getScreen().blit(mTexture,mr);
+  
+  drawEntities(mr.getPosition());
 /*
   // draw viewing Rect  
   float sx0=mViewRect.x;

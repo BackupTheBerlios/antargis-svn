@@ -23,6 +23,12 @@ AntargisMap::AntargisMap(int w,int h):
   paused=false;
   maxID=0;
 }
+
+std::list<AntEntity*> AntargisMap::getAllEntities()
+{
+  return mEntList;
+}
+
     
 Pos2D AntargisMap::truncPos(const Pos2D &p) const
 {

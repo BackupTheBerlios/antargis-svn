@@ -1,58 +1,43 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <!DOCTYPE KDevPrjSession>
 <KDevPrjSession>
- <DocsAndViews NumberOfDocuments="17" >
+ <DocsAndViews NumberOfDocuments="12" >
   <Doc0 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/map.cpp" >
-   <View0 Type="Source" />
+   <View0 line="439" Type="Source" />
   </Doc0>
-  <Doc1 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/rain.h" >
-   <View0 Type="Source" />
+  <Doc1 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/minimap.cpp" >
+   <View0 line="44" Type="Source" />
   </Doc1>
-  <Doc2 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/view.h" >
-   <View0 Type="Source" />
+  <Doc2 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/minimap.h" >
+   <View0 line="11" Type="Source" />
   </Doc2>
-  <Doc3 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/rain.cpp" >
-   <View0 Type="Source" />
+  <Doc3 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/voxel.cpp" >
+   <View0 line="220" Type="Source" />
   </Doc3>
-  <Doc4 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/view.cpp" >
-   <View0 Type="Source" />
+  <Doc4 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/antargis.cpp" >
+   <View0 line="99" Type="Source" />
   </Doc4>
-  <Doc5 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/antargis.cpp" >
-   <View0 Type="Source" />
+  <Doc5 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/voxel.h" >
+   <View0 line="107" Type="Source" />
   </Doc5>
-  <Doc6 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/decast.h" >
-   <View0 Type="Source" />
+  <Doc6 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/view.cpp" >
+   <View0 line="21" Type="Source" />
   </Doc6>
-  <Doc7 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/map.h" >
-   <View0 Type="Source" />
+  <Doc7 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/view.h" >
+   <View0 line="41" Type="Source" />
   </Doc7>
-  <Doc8 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/voxel.h" >
-   <View0 Type="Source" />
+  <Doc8 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/cvinfo.h" >
+   <View0 line="96" Type="Source" />
   </Doc8>
-  <Doc9 NumberOfViews="1" URL="file:/usr/include/c%2B%2B/3.3/bits/stl_tree.h" >
-   <View0 Type="Source" />
+  <Doc9 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/TODO" >
+   <View0 line="29" Type="Source" />
   </Doc9>
-  <Doc10 NumberOfViews="1" URL="file:/usr/include/c%2B%2B/3.3/bits/stl_map.h" >
-   <View0 Type="Source" />
+  <Doc10 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/map.h" >
+   <View0 line="353" Type="Source" />
   </Doc10>
-  <Doc11 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/voxel.cpp" >
-   <View0 Type="Source" />
+  <Doc11 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/game.h" >
+   <View0 line="6" Type="Source" />
   </Doc11>
-  <Doc12 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/cvinfo.h" >
-   <View0 Type="Source" />
-  </Doc12>
-  <Doc13 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/TODO" >
-   <View0 Type="Source" />
-  </Doc13>
-  <Doc14 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/minimap.h" >
-   <View0 Type="Source" />
-  </Doc14>
-  <Doc15 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/minimap.cpp" >
-   <View0 Type="Source" />
-  </Doc15>
-  <Doc16 NumberOfViews="1" URL="file:/home/david/projects/antargis/trunk/src/ant_geometry.h" >
-   <View0 line="37" Type="Source" />
-  </Doc16>
  </DocsAndViews>
  <pluginList>
   <kdevsubversion>
