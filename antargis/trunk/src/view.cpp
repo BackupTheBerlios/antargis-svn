@@ -540,6 +540,12 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
   allWater->sigClick.connect(slot(this,&EditIsoView::setAll));
   
+  /*addChild(allWater=new AGButton(this,AGRect(50*8,height()-51,50,50),"allWater"));
+  allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
+  allWater->sigClick.connect(slot(this,&EditIsoView::setAll));*/
+  
+  
+  
 }
 
     bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
