@@ -12,6 +12,8 @@
 	
 	function page($view="")
 	{
+		if(substr($view,0,4)=="http")
+			return $view;
 		if($view=="")
 			$view=getInput("page");
 		return "index.php?page=$view&dummy=".rand();
@@ -56,16 +58,11 @@
 			$status=tr(td($status,"side_menu"));
 			
 		$title=getTitle();
-		$title=anchor("index.php",$title);
+		$title=anchor("index.php?page=about",$title);
 		
-		return body(table(tr(td($title,"title","",2)).tr(td(showMenu($menu),"side_menu").td($body)),"full_width"));
+		$host='Hosted by:<a href="http://developer.berlios.de" title="BerliOS Developer"> <img src="http://developer.berlios.de/bslogo.php?group_id=3474" width="124px" height="32px" border="0" alt="BerliOS Developer Logo"></a>';
 		
-		return body(table(
-									tr(
-										td($title,"side_menu").td("","menu_distance").
-										td($body,"","","",4)).
-										$status.
-									tr(td(showMenu($menu),"side_menu")).tr(td(showInfo()))),"");
+		return body(table(tr(td($title,"title","",2)).tr(td(showMenu($menu),"side_menu").td($body)).tr(td($host,"title","",2)),"full_width"));
 	}
 
 ?>

@@ -50,7 +50,7 @@ td
 	border-style:groove;
 	border-width:0px;
 	border-color:#6666FF;
-
+	padding:2px;
 }
 .window_inset_title
 {
@@ -119,11 +119,11 @@ a:hover
 /* menues */
 .menu
 {
-	border-style:outset;
+	/*border-style:outset;
 	border-width:2px;
 	background-color:#9999FF;
-	background-image:url(../pics/menu_bg.png);
-	border-color:#9999FF;
+	background-image:url(../pics/bg_wood.jpg);
+	border-color:#9999FF;*/
 	color:#000000;
 	font-family:Helvetica;
 	width:100%;
@@ -171,10 +171,11 @@ a:hover
 	border-style:outset;
 	border-width:2px;
 	background-color:#b36912;
+	background-image:url(../pics/bg_wood.jpg);
 	border-color:#b36912;
 	color:#FFF200;
-	font-size:200%;
 	text-align:right;
+	margin:2px;
 }
 
 /* form */
