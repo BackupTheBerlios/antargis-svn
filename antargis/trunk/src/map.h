@@ -3,7 +3,7 @@
 
 #include "decast.h"
 #include "quadtree.h"
-#include "voxel.h"
+#include "voxel_gen.h"
 #include "tree.h"
 
 #include "xml.h"

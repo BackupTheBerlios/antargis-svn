@@ -1,4 +1,5 @@
 #include "tree.h"
+#include "voxel.h"
 
 void drawBall(FastVoxelView &vv,Pos3D mp,float s,Color c)
 {

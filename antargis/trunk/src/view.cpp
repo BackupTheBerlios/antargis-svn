@@ -60,10 +60,10 @@ void IsoView::init()
   int sx=0;
   int sy=0;
   
-  sx=mPos.x/TILE_WIDTH;
+  sx=(int)(mPos.x/TILE_WIDTH);
   if(sx<0)  
     sx=0;
-  sy=mPos.y/(TILE_WIDTH/4);
+  sy=(int)(mPos.y/(TILE_WIDTH/4));
   if(sy<0)  
     sy=0;
    

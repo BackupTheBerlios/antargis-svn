@@ -2,7 +2,6 @@
 #define __ANT_ISOVIEW
 
 #include "rain.h"
-//#include "voxel.h"
 #include "map.h"
 #include <math.h>
 

@@ -1,7 +1,7 @@
 //
 // C++ Interface: %{MODULE}
 //
-// Description: 
+// Description:
 //
 //
 // Author: %{AUTHOR} <%{EMAIL}>, (C) %{YEAR}
@@ -21,32 +21,16 @@
 #include "mpng.h"
 
 class TextureCache
-{
-    TextureCache()
-    {
-      CTRACE;
-    }
+  {
+    TextureCache();
   public:
-    const AGTexture &get(const std::string &pTexture)
-    {
-      
-      std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
-      if(i==mTextures.end())
-      {
-        // load
-        std::string c=loadFile(pTexture);
-
-        AGSurface ms(fromPNG(c));
-        AGTexture mTexture(ms);
-        mTextures[pTexture]=mTexture;
-      }
-      return mTextures[pTexture];
-    }
+    const AGTexture &get
+    (const std::string &pTexture);
   private:
     std::map<std::string,AGTexture> mTextures;
-    
+
     friend TextureCache *getTextureCache();
-};
+  };
 
 TextureCache *getTextureCache();
 
