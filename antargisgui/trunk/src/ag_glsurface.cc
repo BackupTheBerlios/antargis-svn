@@ -365,6 +365,11 @@ AGSurface AGGLScreen::loadSurface(const std::string &pFilename)
 {
   //  CTRACE;
   SDL_Surface *s=IMG_Load(pFilename.c_str());
+  if(!s)
+   {
+	std::cout<<"Error loading file:"<<pFilename<<std::endl;
+	return AGSurface();
+   }
   int w,h;
   w=s->w;
   h=s->h;

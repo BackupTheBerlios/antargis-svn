@@ -17,6 +17,15 @@ inline std::string toString(const T&t)
   return os.str();
 }
 
+template<>
+inline std::string toString(const bool&b)
+{
+  if(b)
+    return "true";
+  else
+    return "false";
+}
+
 #define debug(c) mydebug(toString(__FILE__),toString(__LINE__),c)
 
 template<class T>
