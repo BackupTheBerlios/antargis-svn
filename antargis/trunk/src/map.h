@@ -301,6 +301,8 @@ class AntargisMap
     {
       paused=false;
     }
+    
+    Pos2D getMaxPos() const;
 
     void saveMap(const std::string &pFilename);
     void loadMap(const std::string &pFilename);

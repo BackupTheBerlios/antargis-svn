@@ -76,6 +76,12 @@ Pos3D AntargisMap::getPos3D(const Pos2D &p) const
     return Pos3D(p.x,getHeight(p),p.y);
   }
 
+Pos2D AntargisMap::getMaxPos() const
+{
+  return Pos2D(mW*TILE_WIDTH/POINTS_PER_TILE-2,mH*TILE_WIDTH/POINTS_PER_TILE-2);
+}
+  
+  
 void AntargisMap::insertEntity(AntEntity *e)
 {
   mEntities.insert(e);

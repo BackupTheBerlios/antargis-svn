@@ -18,6 +18,7 @@ class MiniMap:public AGWidget
   private:
     AntargisMap *mMap;
     AGTexture mTexture;
+    AGTexture mBG;
     AGSurface mSurface;
     bool mustUpdate;
   };
