@@ -2,6 +2,8 @@
 #include "tree.h"
 #include <ag_color.h>
 #include <ag_button.h>
+#include "tree.h"
+
 
 /***********************************************************
  * globals
@@ -60,15 +62,15 @@ void IsoView::init()
 
   int sx=0;
   int sy=0;
-  
+
   sx=(int)(mPos.x/TILE_WIDTH);
-  if(sx<0)  
+  if(sx<0)
     sx=0;
   sy=(int)(mPos.y/(TILE_WIDTH/4));
-  if(sy<0)  
+  if(sy<0)
     sy=0;
-   
-  
+
+
   for(int y=sy;y<mh+sy;y++) // 40
     {
       for(int x=sx;x<mw+sx;x++) // 13  for 800x600
@@ -78,18 +80,18 @@ void IsoView::init()
           if(y&1)
             mx+=(POINTS_PER_TILE/2);
 
-            
-          AVItem *i;            
+
+          AVItem *i;
           // insert water tile
           i=getWaterTile();
           i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
           i->setVirtualY(-42);
           insert(i);
-            
-            
-          // now insert terrain (that it's after water)  
-//          cdebug("mx:"<<mx<<"//"<<my);
-          // insert terrain tile  
+
+
+          // now insert terrain (that it's after water)
+          //          cdebug("mx:"<<mx<<"//"<<my);
+          // insert terrain tile
           SplineMapD h=mMap->getPatchH(mx,my);          // insert water tile
           i=getWaterTile();
           i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
@@ -103,13 +105,13 @@ void IsoView::init()
           tile.y=my;
           i=mTileCache[tile]; // get AVItem from cache
           if(i)
-          {
-            i->setVirtualY(-32);
-            insert(i);
-            mTiles[i]=tile;
-          }
-          
-          
+            {
+              i->setVirtualY(-32);
+              insert(i);
+              mTiles[i]=tile;
+            }
+
+
         }
     }
 
@@ -135,7 +137,7 @@ void IsoView::initTileCache()
 
 
   // FIXME: this should be called only once and updates done incrementally
-  // first clear old tile cache 
+  // first clear old tile cache
   std::map<IVTile,AVItem*>::iterator k=mTileCache.begin();
   for(;k!=mTileCache.end();k++)
     delete k->second;
@@ -143,7 +145,7 @@ void IsoView::initTileCache()
 
 
   int mw,mh;
-  
+
   // goes to max of map
   mw=mMap->width()/2-3;
   mh=mMap->height()-6;
@@ -156,11 +158,11 @@ void IsoView::initTileCache()
           if(y&1)
             mx+=(POINTS_PER_TILE/2);
 
-//          cdebug("mx:"<<mx<<"//"<<my);
-            
+          //          cdebug("mx:"<<mx<<"//"<<my);
+
           SplineMapD h=mMap->getPatchH(mx,my);
           SplineMapD g=mMap->getPatchG(mx,my);
-          
+
           VoxelImage *i=getSurface(h,g);
           i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
 
@@ -195,11 +197,11 @@ VoxelImage *IsoView::getTree()
 VoxelImage *IsoView::getWaterTile()
 {
   if(!fileExists(TILEDIR+"water.png"))
-  {
-    VoxelImage *i=makeWaterTile();
-    i->save("water");
-    delete i;
-  }
+    {
+      VoxelImage *i=makeWaterTile();
+      i->save("water");
+      delete i;
+    }
   VoxelImage *i=new VoxelImage("water");
   return i;
 }
@@ -296,10 +298,10 @@ void IsoView::draw(const AGRect &r)
       shallUpdate=false;
     }
   if(shallUpdate)
-  {
-    update();
-    shallUpdate=false;
-  }
+    {
+      update();
+      shallUpdate=false;
+    }
 
   updatePositions();
 
@@ -378,8 +380,8 @@ void IsoView::checkView()
 {
   // AntargisView::checkView // FIXME: delete objects, which are not in range
   clear(); // FIXME: delete this
-  
-  
+
+
 }
 
 
@@ -415,7 +417,7 @@ bool CompleteIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
             mPos.x=0;
           if(mPos.y<0)
             mPos.y=0;
-            
+
           if(mPos.x>maxPos.x)
             mPos.x=maxPos.x;
           if(mPos.y>maxPos.y)
@@ -512,63 +514,87 @@ bool CompleteIsoView::isMyHero(AntHero *h)
  ***********************************************************/
 
 EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
-  CompleteIsoView(parent,r,p,map),sigMapEdited(this,"sigMapEdited")
+    CompleteIsoView(parent,r,p,map),sigMapEdited(this,"sigMapEdited")
 {
   mOldPoint=0;
   mShowPoints=true;
   mEditing=false;
   AGButton *b;
-  
+
   char *editNames[]={"edit1.png","edit2.png","edit3.png","edit4.png","edit5.png","edit10.png","edit15.png",""};
   int editSizes[]={1,2,3,4,5,10,15};
-  
+
   editSize=1;
-  
+
   // add edit buttons at the bottom
   for(int i=0;i<10 && std::string(editNames[i]).length();i++)
-  {
-    addChild(b=new AGButton(this,AGRect(50*i,height()-51,50,50),"test Window"));
-    b->setSurface(getScreen().loadSurface(std::string("data/")+editNames[i]),false);
-    b->sigClick.connect(slot(this,&EditIsoView::selectSize));
-    mEditButtons[b]=editSizes[i];
-  }
-  
+    {
+      addChild(b=new AGButton(this,AGRect(50*i,height()-51,50,50),"test Window"));
+      mEditWidgets.push_back(b);
+      b->setSurface(getScreen().loadSurface(std::string("data/")+editNames[i]),false);
+      b->sigClick.connect(slot(this,&EditIsoView::selectSize));
+      mEditButtons[b]=editSizes[i];
+    }
+
   addChild(allGrass=new AGButton(this,AGRect(50*7,height()-51,50,50),"allGrass"));
   allGrass->setSurface(getScreen().loadSurface("data/grass2.png"),false);
   allGrass->sigClick.connect(slot(this,&EditIsoView::setAll));
   addChild(allWater=new AGButton(this,AGRect(50*8,height()-51,50,50),"allWater"));
   allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
   allWater->sigClick.connect(slot(this,&EditIsoView::setAll));
-  
-  /*addChild(allWater=new AGButton(this,AGRect(50*8,height()-51,50,50),"allWater"));
-  allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
-  allWater->sigClick.connect(slot(this,&EditIsoView::setAll));*/
-  
-  
-  
+
+  AGButton *addTree1;
+
+  addChild(addTree1=new AGButton(this,AGRect(50*9,height()-51,50,50),"addTree1"));
+  addTree1->setSurface(getScreen().loadSurface("data/small_tree.png"),false);
+  addTree1->sigClick.connect(slot(this,&EditIsoView::addEntity));
+
+  mEditWidgets.push_back(allGrass);
+  mEditWidgets.push_back(allWater);
+  mEditWidgets.push_back(addTree1);
+
+
 }
 
-    bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
-    {
-      editSize=mEditButtons[pCaller];
-      return true;
-    }
-    bool EditIsoView::setAll(const char *,const AGEvent *,AGMessageObject *pCaller)
-    {
-      if(pCaller==allWater)
-        getMap()->setAllWater();
-      if(pCaller==allGrass)
-        getMap()->setAllLand();
+bool EditIsoView::addEntity(const char *,const AGEvent *,AGMessageObject *pCaller)
+{
+  mAddEntity="tree1";
+  return true;
+}
+bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
+{
+  editSize=mEditButtons[pCaller];
+  mAddEntity="";
+  return true;
+}
+bool EditIsoView::setAll(const char *,const AGEvent *,AGMessageObject *pCaller)
+{
+  if(pCaller==allWater)
+    getMap()->setAllWater();
+  if(pCaller==allGrass)
+    getMap()->setAllLand();
   completeUpdate();
   sigMapEdited(0);
-      return true;
-    }
+  return true;
+}
 
 
 void EditIsoView::toggleEdit()
 {
   mEditing=!mEditing;
   update();
+  if(mEditing)
+  {
+    std::list<AGWidget*>::iterator i=mEditWidgets.begin();
+    for(;i!=mEditWidgets.end();i++)
+      (*i)->show();
+  }
+  else
+  {
+    std::list<AGWidget*>::iterator i=mEditWidgets.begin();
+    for(;i!=mEditWidgets.end();i++)
+      (*i)->hide();
+  }
 }
 
 // moving about
@@ -600,7 +626,14 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
           if(e->getButton()==SDL_BUTTON_LEFT||e->getButton()==SDL_BUTTON_RIGHT)
             {
               if(mOldPoint)
-                editAt(mOldPoint->getPosition(),e->getButton()==SDL_BUTTON_LEFT);
+              {
+                Pos3D p=mOldPoint->getPosition();
+                if(mAddEntity=="")
+                  editAt(p,e->getButton()==SDL_BUTTON_LEFT);
+                else if(mAddEntity=="tree1")
+                  getMap()->insertEntity(new AntTree(Pos2D(p.x,p.z),0));
+                  
+              }
 
               update();
               return true;
@@ -668,7 +701,7 @@ void EditIsoView::editAt(const Pos3D &p,bool dir)
     getMap()->addFlat(x,z,30,editSize);
   else
     getMap()->addFlat(x,z,-30,editSize);
-  
+
   completeUpdate();
   sigMapEdited(0);
 }
@@ -698,15 +731,15 @@ void EditIsoView::init()
 
   int sx=0;
   int sy=0;
-  
+
   sx=(int)(mPos.x/(TILE_WIDTH/2));
-  if(sx<0)  
+  if(sx<0)
     sx=0;
-    
+
   sy=(int)(mPos.y/(TILE_WIDTH/4));
-  if(sy<0)  
+  if(sy<0)
     sy=0;
-  
+
   for(int y=-1+sy;y<mh+sy;y++)
     {
       for(int x=-1+sx;x<mw+sx;x++)
