@@ -2,7 +2,7 @@ These are the rules, which have to be implemented:
 (Reasons to be found below)
 
 1) Tiles have to be cubic with 5x5 control points.
-
+2) Running speed is in half dependent on energy.
 
 
 

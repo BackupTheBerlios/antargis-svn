@@ -311,7 +311,7 @@ class AntHero:public AntEntity
     virtual float getHealSpeed() const
     {
       if(hasJob())
-        return mHealSpeed*0.5;
+        return mHealSpeed*0.2;
       else
         return mHealSpeed;
     }
@@ -381,7 +381,7 @@ class AntMan: public AntEntity
     virtual float getHealSpeed() const
     {
       if(hasJob())
-        return mHealSpeed*0.5;
+        return mHealSpeed*0.2;
       else
         return mHealSpeed;
     }
@@ -431,7 +431,7 @@ class AntPlayer
           if(h)
             {
               // ok, is fighting - check for stats
-              float factor=1.5; // as this hero shouldn't give up to early
+              float factor=3.5; // as this hero shouldn't give up to early
               // is fighting - check for stats
               if(h->calcTroupStrength()>(*i)->calcTroupStrength()*factor)
                 {

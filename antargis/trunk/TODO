@@ -19,6 +19,12 @@ ok * Water
 ok * Editing on/off toggling
 ok * added snow/rain
 * correct saving of players
+* Formation
+  Sitzen:
+    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
+  Laufen:
+    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
+  => 2 speeds: Laufen, gehen
 
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da
@@ -34,15 +40,10 @@ ok * added snow/rain
 	e) schlechter Wetter =>runter
 	
 	f) wenn runter => abhauen zu nächstem HouseEntity (sowohl für HouseEntities as auch für Heros als Ausgangsposition)
-12) Scrolling
-13) Speichern
-14) Formationen
-  Sitzen:
-    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
-  Laufen:
-    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
-  => 2 speeds: Laufen, gehen
 
+  
+* scrolling-borders  
 * Level-Unterstützung per ruby
 * Editing mode: heightstep (+/-), radius (through buttons or so)
 * saving/loading-dialog
+* integrate winter/summer into AntargisMap
