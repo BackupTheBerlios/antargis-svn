@@ -8,13 +8,12 @@ ok 5) Kämpfen
 ok 6) Computer-Spieler
 ok => 6a) Figuren einfärben
 ok * Kämpfen - abwehren
-
 ok * Healing
-
 canceled * LOD-Map:
 
 * reduced SplineMap - quadratic patches ?
 * SplineMap-saving/loading
+* show Editing-point
 * Water
 * Editing on/off toggling
 * Editing mode: heightstep (+/-), radius (through buttons or so)
