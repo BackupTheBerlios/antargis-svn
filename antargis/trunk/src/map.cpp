@@ -285,16 +285,16 @@ void AntargisMap::loadMap(const std::string &pFilename)
 * AntEntity
 *****************************************************************/
 
-AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(false)
+AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
 {
   mID=getMap()->getNewID();
 }
-AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(true)
+AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
 {
   mID=getMap()->getNewID();
 }
 
-AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false)
+AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
 {
   mID=getMap()->getNewID();
 }
@@ -398,10 +398,25 @@ void AntEntity::mapChanged()
 // Jobs
 void MoveJob::move(AntEntity *e,float ptime)
 {
+  float aspeed;
+  
+  if(mRun && e->getCondition()>0.0)
+  {
+    // decrease condition and if condition is zero - switch of running
+    float newtime=e->decCondition(ptime);
+    moveBy(e,ptime-newtime,runSpeed);// take same runSpeed always
+    
+    ptime=newtime;
+  }
+  aspeed=0.5*speed+0.5*e->getEnergy()*speed;
+  moveBy(e,ptime,aspeed); // use rest of time
+  
+}
+
+void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
+{
   Pos2D diff=e->getPos2D()-mTarget;
   float norm=diff.norm();
-  float aspeed=0.5*speed+0.5*e->getEnergy()*speed;
-  
   if(norm-near>ptime*aspeed)
     {
       diff=diff.normalized();
@@ -422,6 +437,8 @@ void MoveJob::move(AntEntity *e,float ptime)
 // FightJobs
 void FightJob::move(AntEntity *e,float ptime)
 {
+  if(mTarget->getEnergy()==0.0)
+    e->jobFinished();
   // if target is too far away run there, otherwise fight
   Pos2D diff=e->getPos2D()-mTarget->getPos2D();
   float norm=diff.norm();
