@@ -11,7 +11,7 @@ ok * Kämpfen - abwehren
 ok * Healing
 canceled * LOD-Map:
 
-* reduced SplineMap - quadratic patches ?
+canceled * reduced SplineMap - quadratic patches ? (look at SystemRequirements)
 * SplineMap-saving/loading
 * show Editing-point
 * Water

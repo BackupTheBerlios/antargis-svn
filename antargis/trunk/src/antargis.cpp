@@ -14,6 +14,8 @@
 #include "map.h"
 #include "view.h"
 
+#include <exception>
+#include <iostream>
 
 #define EDITING
 
@@ -76,14 +78,24 @@ class AntargisApp:public MyApp
   AGButton *b;
   av->addChild(b=new AGButton(av,AGRect(0,0,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/pointer1.png"),false);
+  
+  // Edit
   av->addChild(b=new AGButton(av,AGRect(0,50,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/edit.png"),false);
-  //b->setSurface(getScreen().loadSurface("data/rnew_button_bg0.png"));
+  
+  // Save
   av->addChild(b=new AGButton(av,AGRect(0,100,50,50),"test Window"));
-  //b->setSurface(getScreen().loadSurface("data/rnew_button_bg0.png"));
+  b->setSurface(getScreen().loadSurface("data/save.png"),false);
+  
+  // load
+  av->addChild(b=new AGButton(av,AGRect(0,150,50,50),"test Window"));
+  b->setSurface(getScreen().loadSurface("data/load.png"),false);
 
+  // any
   av->addChild(b=new AGButton(av,AGRect(1023-50,0,50,50),""));
   b->setSurface(getScreen().loadSurface("data/door.png"),false);
+  
+  // Pause
   av->addChild(b=new AGButton(av,AGRect(1023-100,0,50,50),""));
   b->setSurface(getScreen().loadSurface("data/pause.png"),false);
   b->sigClick.connect(slot(this,&AntargisApp::pause));
@@ -108,6 +120,8 @@ class AntargisApp:public MyApp
 
 int main(int argc,char *argv[])
 {
+  try
+  {
   assert(argc>=1);
   initFS(argv[0]);
 
@@ -124,6 +138,11 @@ int main(int argc,char *argv[])
   
 
   app.run();
+  }
+  catch(std::exception &e)
+  {
+    std::cout<<e.what()<<std::endl;
+  }
   return 0;
 }
 

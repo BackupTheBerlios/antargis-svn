@@ -96,12 +96,23 @@ void AntargisMap::editHeightAt(int x,int y,int h,int r)
   for(int i=-r;i<=r;i++)
     for(int j=-r;j<=r;j++)
       mHeight.edit(x+i,y+j,h*sqrt(i*i+j*j)/r);
+      
+  // tell entities, that map has changed
+  std::list<AntEntity*>::iterator i=mEntList.begin();
+  for(;i!=mEntList.end();i++)
+    (*i)->mapChanged();
+
 }
 
 
 /*****************************************************************
 * AntEntity
 *****************************************************************/
+    
+AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(false)
+    {}
+AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(true)
+    {}
 
 Pos3D AntEntity::getPos3D() const
   {
@@ -167,6 +178,13 @@ void AntEntity::jobFinished()
     mJobFinished=true;
 }
 
+  void AntEntity::mapChanged()
+  {
+    if(onGround)
+      mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
+  }
+
+
 /************************************************************************
 * MoveJob
 ************************************************************************/
@@ -215,7 +233,7 @@ void FightJob::move(AntEntity *e,float ptime)
 /************************************************************************
 * AntHero
 ************************************************************************/
-AntHero::AntHero(const Pos2D &p,int ID):AntEntity(getMap()->getPos3D(p)),id(ID)
+AntHero::AntHero(const Pos2D &p,int ID):AntEntity(p),id(ID)
 {}
 AntHero::~AntHero()
 {

@@ -74,16 +74,19 @@ class AntEntity
     bool mJobFinished;
     float mEnergy;
     float mHealSpeed;
+    bool onGround;
+    
   public:
-    AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0)
-    {}
+    AntEntity(const Pos3D &p);
+    AntEntity(const Pos2D &p);
     Pos3D getPos3D() const;
     Pos2D getPos2D() const;
 
     void setJob(Job *pJob);
 
     void setPos2D(const Pos2D &p);
-
+    
+    void mapChanged();
     virtual VoxelImage*getSurface() const=0;
 
     /** do anything in given time frame */
@@ -200,7 +203,7 @@ class AntTree:public AntEntity
   {
     int id;
   public:
-    AntTree(const Pos2D &p,int ID):AntEntity(getMap()->getPos3D(p)),id(ID)
+    AntTree(const Pos2D &p,int ID):AntEntity(p),id(ID)
     {}
     VoxelImage *getSurface() const
       {
@@ -275,7 +278,7 @@ class AntMan: public AntEntity
     int id;
     AntHero *mHero;
   public:
-    AntMan(const Pos2D &p,int ID,AntHero *pHero):AntEntity(getMap()->getPos3D(p)),id(ID),mHero(pHero)
+    AntMan(const Pos2D &p,int ID,AntHero *pHero):AntEntity(p),id(ID),mHero(pHero)
     {
       if(pHero)
         pHero->signUp(this);
