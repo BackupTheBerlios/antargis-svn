@@ -186,3 +186,7 @@ AGButton AGButton::test()
   return b;
 }
 */
+std::string AGButton::getName() const
+{
+  return mText;
+}

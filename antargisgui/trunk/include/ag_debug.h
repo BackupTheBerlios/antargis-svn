@@ -9,6 +9,9 @@
 
 #include "ag_exception.h"
 
+
+std::string replace(const std::string &s,const std::string &a,const std::string &b);
+
 template<class T>
 inline std::string toString(const T&t)
 {

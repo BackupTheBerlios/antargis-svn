@@ -34,6 +34,8 @@ class AGButton:public AGWidget
   virtual void setWidth(int w);
   virtual void setHeight(int w);
 
+  virtual std::string getName() const;
+
  private:
   std::string mText;
   int mID;

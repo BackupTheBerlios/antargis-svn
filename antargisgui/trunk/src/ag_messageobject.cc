@@ -281,7 +281,7 @@ Uint8 AGMessageObject::getButtonState() const
 AGPoint AGMessageObject::getMousePosition() const
 {
   int x,y;
-  Uint8 b=SDL_GetMouseState(&x,&y);
+  SDL_GetMouseState(&x,&y);
   return AGPoint(x,y);
 }
 

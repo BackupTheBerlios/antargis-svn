@@ -18991,13 +18991,13 @@ RUBY_INSTALL_DIR=`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir'
 # Checks for header files.
 
 
-CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g"
+CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g -DUSE_RUBY"
 LDFLAGS="$LDFLAGS `sdl-config --libs`"
 
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
-                                                  ac_config_files="$ac_config_files Makefile src/Makefile include/Makefile bindings/Makefile test/Makefile"
+                                                            ac_config_files="$ac_config_files Makefile src/Makefile include/Makefile bindings/Makefile bindings/lua/Makefile test/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -19553,6 +19553,7 @@ do
   "src/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "bindings/Makefile" ) CONFIG_FILES="$CONFIG_FILES bindings/Makefile" ;;
+  "bindings/lua/Makefile" ) CONFIG_FILES="$CONFIG_FILES bindings/lua/Makefile" ;;
   "test/Makefile" ) CONFIG_FILES="$CONFIG_FILES test/Makefile" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}

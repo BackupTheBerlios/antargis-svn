@@ -643,8 +643,8 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
 
   float x0=pDest.x;
   float y0=h-1-(pDest.y);
-  float x1=pDest.x+pSrc.w;
-  float y1=h-1-(pDest.y+pSrc.h);
+  //  float x1=pDest.x+pSrc.w;
+  //  float y1=h-1-(pDest.y+pSrc.h);
 
   SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
 

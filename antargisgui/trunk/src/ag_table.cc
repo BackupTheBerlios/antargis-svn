@@ -124,7 +124,7 @@ void AGTable::arrange()
 	    AGWidget *wd=children[mx+my*w];
 	    if(wd)
 	      {
-		wd->setWidth((width()-mfx)*cols[mx]/xw);
+		wd->setWidth((int)((width()-mfx)*cols[mx]/xw));
 	      }
 	  }
 	if(rows[my]>0.0)
@@ -132,7 +132,7 @@ void AGTable::arrange()
 	    AGWidget *wd=children[mx+my*w];
 	    if(wd)
 	      {
-		wd->setHeight((height()-mfy)*rows[my]/yw);
+		wd->setHeight((int)((height()-mfy)*rows[my]/yw));
 	      }
 	  }
       }

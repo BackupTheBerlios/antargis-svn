@@ -29,7 +29,7 @@ AC_SUBST(RUBY_INSTALL_DIR)
 # Checks for header files.
 
 
-CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g"
+CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g -DUSE_RUBY"
 LDFLAGS="$LDFLAGS `sdl-config --libs`"
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -40,4 +40,5 @@ Makefile \
 src/Makefile \
 include/Makefile \
 bindings/Makefile \
+bindings/lua/Makefile \
 test/Makefile ])
