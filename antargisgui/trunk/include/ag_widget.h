@@ -1,0 +1,122 @@
+#ifndef AG_WIDGET_H
+#define AG_WIDGET_H
+
+#include "ag_geometry.h"
+#include "ag_messageobject.h"
+
+#include "ruby.h"
+#include <list>
+
+class AGMenu;
+
+class AGWidget:public AGMessageObject
+{
+ public:
+  AGWidget(AGWidget *pParent,const AGRect &r);
+  virtual ~AGWidget();
+  
+  virtual void draw(const AGRect &r);
+  virtual void drawAll(const AGRect &r);
+  AGRect getRect() const;
+  void setRect(const AGRect &pRect);
+  
+  AGWidget *getParent();
+
+  virtual bool eventShow();
+  virtual bool eventHide();
+
+  virtual bool eventMouseMotion(const AGEvent *m);
+
+  virtual bool eventMouseEnter();
+  virtual bool eventMouseLeave();
+  virtual bool eventMouseClick(const AGEvent *m);
+
+  virtual bool eventMouseButtonDown(const AGEvent *m);
+  virtual bool eventMouseButtonUp(const AGEvent *m);
+
+  virtual bool eventGotFocus();
+  virtual bool eventLostFocus();
+
+  virtual bool canFocus() const;
+
+  void setMenu(AGMenu *pMenu);
+
+  bool processEvent(const AGEvent *event);
+
+  AGSignal sigMouseEnter;
+  AGSignal sigMouseLeave;
+  AGSignal sigClick;
+
+  virtual int minWidth() const;
+  virtual int minHeight() const;
+
+  int width() const;
+  int height() const;
+  int top() const;
+  int left() const;
+
+  virtual void setWidth(int w);
+  virtual void setHeight(int w);
+  virtual void setTop(int y);
+  virtual void setLeft(int x);
+
+  bool fixedWidth() const;
+  bool fixedHeight() const;
+
+  void show();
+  void hide();
+
+
+  virtual void addChild(AGWidget *w);
+  virtual void addChildBack(AGWidget *w);
+
+  AGRect getScreenRect() const;
+  AGPoint fromScreen(const AGPoint &p) const;
+
+
+  // focus
+
+  /** should only be called by a child */
+  void gainFocus(AGWidget *pWidget);
+
+
+  virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
+
+  bool getFocus() const;
+
+ private:
+
+  void checkFocus();
+
+
+
+  AGRect mr;
+  AGWidget *mParent;
+  bool mChildrenEventFirst;
+  bool mChildrenDrawFirst;
+  bool mMouseIn;
+  bool mButtonDown;
+  bool mFixedWidth,mFixedHeight;
+  bool mVisible;
+  AGMenu *mMenu;
+
+  bool hasFocus;
+  AGWidget *mFocus;
+
+  AGPoint mOldMousePos;
+
+ protected:
+  std::list<AGWidget*> mChildren;
+
+  friend void AGWidget_markfunc(void *ptr);
+
+ public:
+  VALUE mRUBY;
+};
+
+
+void AGWidget_markfunc(void *ptr);
+
+extern AGWidget *agNoParent;
+
+#endif
