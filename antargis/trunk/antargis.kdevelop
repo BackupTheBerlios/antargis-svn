@@ -2,60 +2,22 @@
 <kdevelop>
   <general>
     <author>David Kamphausen</author>
-    <email>david.kamphausen@rwth-aachen.de</email>
+    <email>david.kamphausen@web.de</email>
     <version>$VERSION$</version>
     <projectmanagement>KDevCustomProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <ignoreparts/>
-    <projectdirectory>.</projectdirectory>
-    <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
-    <secondaryLanguages/>
   </general>
   <kdevcustomproject>
     <run>
       <mainprogram>antargis</mainprogram>
       <directoryradio>executable</directoryradio>
-      <customdirectory>/</customdirectory>
-      <programargs/>
-      <terminal>false</terminal>
-      <autocompile>true</autocompile>
-      <envvars/>
     </run>
-    <build>
-      <buildtool>make</buildtool>
-      <builddir/>
-    </build>
-    <make>
-      <abortonerror>false</abortonerror>
-      <numberofjobs>1</numberofjobs>
-      <prio>0</prio>
-      <dontact>false</dontact>
-      <makebin/>
-      <makeoptions/>
-      <selectedenvironment>default</selectedenvironment>
-      <environments>
-        <default/>
-      </environments>
-    </make>
   </kdevcustomproject>
   <kdevdebugger>
     <general>
       <dbgshell/>
-      <programargs/>
-      <gdbpath/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
-      <breakonloadinglibs>true</breakonloadinglibs>
-      <separatetty>false</separatetty>
-      <floatingtoolbar>false</floatingtoolbar>
     </general>
-    <display>
-      <staticmembers>false</staticmembers>
-      <demanglenames>true</demanglenames>
-      <outputradix>10</outputradix>
-    </display>
   </kdevdebugger>
   <kdevdoctreeview>
     <ignoretocs>
@@ -136,10 +98,4 @@
       <hidenonlocation>false</hidenonlocation>
     </groups>
   </kdevfileview>
-  <cppsupportpart>
-    <filetemplates>
-      <interfacesuffix>.h</interfacesuffix>
-      <implementationsuffix>.cpp</implementationsuffix>
-    </filetemplates>
-  </cppsupportpart>
 </kdevelop>
