@@ -3,6 +3,6 @@
 
 #include "voxel_gen.h"
 
-VoxelImage *makeTree();
+VoxelImage *makeTree(int t=0);
 
 #endif

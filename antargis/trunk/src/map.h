@@ -333,15 +333,17 @@ class AntTree:public AntEntity
       {
         std::ostringstream os;
         VoxelImage *im=0;
-        if(typeID==0)
+        
+        os<<"tree"<<typeID;
+        
+        if(!fileExists(TILEDIR+os.str()+".png"))
         {
-          os<<"tree";//_"<<id;
-          if(!fileExists("tree.png"))
-          {
-            im=makeTree();
-            im->save("tree");
-          }
+          im=makeTree();
+          im->save(os.str());
+          delete im;
+          im=0;
         }
+        /*
         else if(typeID==2)
           os<<"tower2";//_"<<id;
         else if(typeID==1)
@@ -351,7 +353,7 @@ class AntTree:public AntEntity
         else if(typeID==4)
           os<<"blacksmith2";
         else if(typeID==5)
-          os<<"monument";
+          os<<"monument";*/
         if(!im)
           im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
         im->setPosition(mPos);

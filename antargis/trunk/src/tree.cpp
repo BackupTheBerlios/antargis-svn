@@ -17,24 +17,24 @@ void drawBall(FastVoxelView &vv,Pos3D mp,float s,Color c)
 
   float xd,yd,zd;
 
-//  float s2=s*s;
+  //  float s2=s*s;
   for(x=x0,xd=x5;x<=x1;x++,xd++)
     for(y=y0,yd=y5;y<=y1;y++,yd++)
       for(z=z0,zd=z5;z<=z1;z++,zd++)
-	{
-	  float diff=sqrt(xd*xd+yd*yd+zd*zd);
-	  if(diff<s+3)
-	    {
-	      float a=s-diff;
-	      if(a<0)
-		a=0;
+        {
+          float diff=sqrt(xd*xd+yd*yd+zd*zd);
+          if(diff<s+3)
+            {
+              float a=s-diff;
+              if(a<0)
+                a=0;
 
-	      c.a=a;
+              c.a=a;
 
-	      if(a>0)
-		vv.set(Pos3D(x,y,z),c);
-	    }
-	}
+              if(a>0)
+                vv.set(Pos3D(x,y,z),c);
+            }
+        }
 }
 
 void draw3Line(FastVoxelView &vv,Pos3D p1,Pos3D p2,Pos3D p3,Color c,int a,float s,float s2)
@@ -54,20 +54,20 @@ void draw3Line(FastVoxelView &vv,Pos3D p1,Pos3D p2,Pos3D p3,Color c,int a,float 
 }
 
 struct Trunk
-{
-  Pos3D p1,p2,p3;
-  int w1,w2;
-  Trunk(Pos3D P1,Pos3D P2,Pos3D P3,int W1,int W2):p1(P1),p2(P2),p3(P3),w1(W1),w2(W2)
   {
+    Pos3D p1,p2,p3;
+    float w1,w2;
+    Trunk(Pos3D P1,Pos3D P2,Pos3D P3,int W1,int W2):p1(P1),p2(P2),p3(P3),w1(W1),w2(W2)
+    {}
   }
-};
+;
 
 Pos3D getRandPos(int s)
 {
   int s2=s*2;
   return Pos3D((rand()%s2)/float(s)-1,
-	       (rand()%s2)/float(s)-1,
-	       (rand()%s2)/float(s)-1);
+               (rand()%s2)/float(s)-1,
+               (rand()%s2)/float(s)-1);
 }
 
 Pos3D getRandDirOrtho(Pos3D dir)
@@ -110,7 +110,7 @@ std::list<Pos3D> splitDir(Pos3D dir,int count,float angle,float sp_noise,float t
 
   Pos3D myNorm=getRandDirOrtho(dir).normalized();
   Pos3D myBinorm=(dir%myNorm).normalized();
-  
+
   for(int i=0;i<count;i++)
     {
       float ma=i*2*M_PI/count + getRandEq()*sp_noise;
@@ -122,15 +122,16 @@ std::list<Pos3D> splitDir(Pos3D dir,int count,float angle,float sp_noise,float t
   return l;
 }
 
-void drawTree(FastVoxelView &vv,Pos3D base,float h)
+void drawTree(FastVoxelView &vv,Pos3D base,float h,float angle=M_PI/1.5,float start=0.25,bool highTree=false,bool leaves=true)
 {
   Pos3D p1(0,0,0),p2(0,0,0),p3(0,0,0);
-  Color c(0x99,0x69,0);
-  Color bc(0,0xAA,0);
+  Color c(0x99,0x69,0x0);  // brown 0x99,0x69,0
+  // half grey 685216 ac8e3d
+  Color bc(0x33,0xFF,0x33); // orig green 0,0xaa,0
 
   p1=base;
-  p2=base+Pos3D(0,1,0)*h*0.25;
-  p3=base+Pos3D(0,1,0)*h*0.5;
+  p2=base+Pos3D(0,1,0)*h*start;
+  p3=base+Pos3D(0,1,0)*h*start*2;
 
   cdebug(p1<<p2<<p3);
 
@@ -142,9 +143,15 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h)
 
   int rw=(int)(h/4);
 
-  float angle=M_PI/1.5; // 30 degrees
+  //  float angle=M_PI/1.5; // 30 degrees
 
-  int last=5;
+
+  //  angle=M_PI/2;
+
+  int last=5; // was 5
+  
+  if(!leaves)
+    last=4;
 
   for(int i=0;i<=last;i++)
     {
@@ -152,57 +159,84 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h)
       std::list<Trunk>::iterator k=tlist.begin();
 
       for(;k!=tlist.end();k++)
-	{
-	  Pos3D dir=k->p3 - k->p2;
+        {
+          Pos3D dir=k->p3 - k->p2;
 
-	  int count=4;
+          int count=4;
+          float add=1;
 
-	  std::list<Pos3D> l=splitDir(dir,count,angle,M_PI/count/8.0,0);//M_PI/count,angle/3);
+          /*if(highTree && i<2)
+            add=1.2;*/
+          
+          std::list<Pos3D> l=splitDir(dir,count,angle*add,M_PI/count/8.0,0);//M_PI/count,angle/3);
 
-	  std::list<Pos3D>::iterator j=l.begin();
+          std::list<Pos3D>::iterator j=l.begin();
 
-	  for(;j!=l.end();j++)
-	    {
+          for(;j!=l.end();j++)
+            {
 
-	      Pos3D r=*j;
-
-
-	      r=r*rw;
-
-	      /*	      drawBall(vv,k->p1,4,c);
-	      drawBall(vv,k->p2,3,c);
-	      drawBall(vv,k->p3,2,c);*/
-
-	      	  
-	      draw3Line(vv,k->p1,k->p2,k->p3,c,40,k->w1,k->w2);
-	      if(i==last)
-		draw3Line(vv,k->p1,k->p2,k->p2,bc,4,2,1);
+              Pos3D r=*j;
 
 
-	      
-	      float start=0.6;
+              r=r*rw;
+              
+              /*
+              if(highTree && i<2)
+                {
+                  float d=r.normalized().y;
+                  d-=0.5;
+                  d=d*d;
+                  d=std::min(d,1.0f);
+                  r=r*(d*0.33+0.66);
+                }
+              */
 
-	      start+=getRandEq()*0.3;
+              /*        drawBall(vv,k->p1,4,c);
+              drawBall(vv,k->p2,3,c);
+              drawBall(vv,k->p3,2,c);*/
 
-	      Pos3D sp=bezier(start,
-			       k->p1,k->p2,k->p3);
-	      //	      Pos3D np(k->p3*2-k->p2+Pos3D(rx,ry,rz));
-	      Pos3D np(k->p3*2-k->p2+r);
-	      
+              
+              Pos3D p1=k->p1;
+              Pos3D p2=k->p2;
+              Pos3D p3=k->p3;
+              if(highTree)
+                {
+                    p1.y*=1.5;
+                    p2.y*=1.5;
+                    p3.y*=1.5;
+                  
+                }
+                
+              draw3Line(vv,p1,p2,p3,c,40,k->w1,k->w2);
+              if(i==last && leaves)
+//                draw3Line(vv,p1,p2,p2,bc,4,2,1);
+                draw3Line(vv,p2,p3,p3,bc,4,2,1); // FIXME: variate this for spring,summer and so on
+
+
+
+              float start=0.6;
+
+              start+=getRandEq()*0.3;
+
+              Pos3D sp=bezier(start,
+                              k->p1,k->p2,k->p3);
+              //        Pos3D np(k->p3*2-k->p2+Pos3D(rx,ry,rz));
+              Pos3D np(k->p3*2-k->p2+r);
 
 
 
 
-	      Trunk nt(sp,
-		       sp*0.5+np*0.5+getRandPos(rw),
-		       np,
-		       k->w2,k->w2-1);
-	      nlist.push_back(nt);
+
+              Trunk nt(sp,
+                       sp*0.5+np*0.5+getRandPos(rw),
+                       np,
+                       k->w2,std::max(1.0,k->w2-1.2));
+              nlist.push_back(nt);
 
 
-	    }
+            }
 
-	}
+        }
       rw=(int)(rw*0.9);
       tlist.clear();
       cdebug(nlist.size());
@@ -213,14 +247,14 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h)
 
   // roots
   std::list<Pos3D> l=splitDir(Pos3D(0,-1,0),4,M_PI/4,0,0);
-  
+
   std::list<Pos3D>::iterator j=l.begin();
   for(;j!=l.end();j++)
     {
       Pos3D n=*j * 10 + base;
       draw3Line(vv,base,base*0.5+n*0.5,n,c,40,t.w1,t.w2);
     }
-  
+
 
 }
 
@@ -232,12 +266,27 @@ void drawPlane(FastVoxelView &vv,int vw)
       vv.set(Pos3D(x,0,y),Color(1,1,1,1));
 }
 
-VoxelImage *makeTree()
+// normal tree
+
+
+VoxelImage *makeTree(int typ)
 {
   int vw=256;
 
   FastVoxelView vv(vw,vw,Pos3D(256,512,0),false,1);
   drawPlane(vv,vw);
-  drawTree(vv,Pos3D(128,0,128),140);
+
+  typ=4;
+  // normal tree
+  if(typ==0)
+    drawTree(vv,Pos3D(128,0,128),140);
+  else if(typ==1)
+    drawTree(vv,Pos3D(128,0,128),80,M_PI/2);
+  else if(typ==2)
+    drawTree(vv,Pos3D(128,0,128),120,M_PI/1.5,0.1); //bush
+  else if(typ==3)
+    drawTree(vv,Pos3D(128,0,128),120,M_PI/1.5,0.20,true);
+  else if(typ==4)
+    drawTree(vv,Pos3D(128,0,128),120,M_PI/1.5,0.20,true,false);
   return new VoxelImage(vv.getSurface(),Pos3D(0,0,0));
 }

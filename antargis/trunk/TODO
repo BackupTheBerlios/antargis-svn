@@ -30,10 +30,15 @@ ok * Water and terrain parted
 ok * fixed strange error when generating images
 ok * entities in minimap
 ok * big map support in editing
-* smaller image saving (discard unused parts) - saves about 2/3 of memory usage
+ok * smaller image saving (discard unused parts) - saves about 2/3 of memory usage
+* some other trees/plants
+* some stones/rocks
+* support different grass heights by drawing
 * support item placing in edit mode
 * game-object with scripting
 * ant_geometry restructure
+* prevent flickering with constant sorting (somehow)
+* check lighting (is adding white light - should be multiplication)
 
 
 * Player-AI improvements:

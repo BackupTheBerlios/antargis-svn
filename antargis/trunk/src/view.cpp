@@ -179,19 +179,14 @@ VoxelImage *IsoView::getTree()
 {
   std::string name="tree";
 
-  if(fileExists(TILEDIR+name+".png"))
-    {
-      //ComplexVoxelImage *i=new ComplexVoxelImage(name);
-      VoxelImage *i=new VoxelImage(name);
-      return i;
-    }
-  else
+  if(!fileExists(TILEDIR+"tree.png"))
     {
       VoxelImage *i=makeTree();
-
       i->save(name);
       return i;
     }
+  VoxelImage *i=new VoxelImage(name);
+      return i;
 }
 
 VoxelImage *IsoView::getWaterTile()
