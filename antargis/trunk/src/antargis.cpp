@@ -51,6 +51,9 @@ class AntargisApp:public MyApp
   
   map.insertEntity(new AntTree(Pos2D(600,402),1));
   map.insertEntity(new AntTree(Pos2D(400,902),2));
+  map.insertEntity(new AntTree(Pos2D(600,902),3));
+  map.insertEntity(new AntTree(Pos2D(900,902),4));
+  map.insertEntity(new AntTree(Pos2D(700,902),5));
   
   AntHero *hero;
   
@@ -84,7 +87,7 @@ class AntargisApp:public MyApp
   
 #ifdef EDITING
   mainView=new EditIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
-  map.pause();
+  //map.pause();
 #else
   mainView=new CompleteIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
 #endif  

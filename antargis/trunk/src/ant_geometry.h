@@ -138,6 +138,11 @@ struct Pos2D
 
   float norm2() const;
   float norm() const;
+  
+  Pos2D normal() const
+  {
+    return Pos2D(y,-x);
+  }
 
   Pos2D operator+(const Pos2D &p) const;
   Pos2D operator-(const Pos2D &p) const;

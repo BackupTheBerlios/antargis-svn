@@ -21,13 +21,14 @@ ok * added snow/rain
 ok * rudimentary formation-support
 ok * name-support
 ok * correct saving of players
-* Formation
-  Sitzen:
-    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
-  Laufen:
-    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
-  => 2 speeds: Laufen, gehen
-* Unterscheidung Laufen & Gehen !!!
+ok * formation - partly
+ok * Unterscheidung Laufen & Gehen !!!
+* große Karten
+
+* Player-AI improvements:
+  1. nur Sitzen
+  2. greift auch an, sobald irgendwie Vorrat zu ende
+  3. 
 
 * story-telling
 	- some window popping up, telling some sentences, can be clicked away, but simply clicking on it.
@@ -36,10 +37,31 @@ ok * correct saving of players
 	- to the left there is a picture of the speaking person (or an image of the book or so)
 	- (later: some browsing facility, which lets you choose scenes)
 	- sentence id: scene=>number(person)=>text
-
-* Player-AI improvements:
-  - 
   
+* story
+  * Am Anfang kurzes Intro:
+    * verschleierter Rückblick auf Powermonger (Thorn & Tisch); danach Auszug; am Schluß irgendein Sieg
+  * 1.Szene: mit Kutsche und ein paar Leichen; auf der Seite sind noch die Angreifer
+  * 2.Szene: Höhle mit Druide
+
+* Formation
+  Sitzen:
+    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
+  Laufen:
+    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
+  => 2 speeds: Laufen, gehen
+  
+* tiles:
+  - aufteilen wasser/land
+  - land speichern mit minimum bildung, wenn minimale höhe höher als wasser
+  - bilder schneiden /rundum - um platz zu sparen
+  - speichern der 0-position in XML-File
+  - (Bilder zusammen in große Sammlung speichern)
+
+* Grafik:
+  - Schnee: einteilen der Bilder in Schnee/non-Schnee und dann langsam hinzufügen?
+  - Blumen
+  - Büsche
   
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da
@@ -73,3 +95,5 @@ ok * correct saving of players
 	- overwriting with rectangle incs stencil (or sets it to 1), but only if stencil=0
 	- feiern!!!!!!!!!
   - einfacher mit VertexColors, beim blitting!! wird auch nur da gemalt, wo es sein soll!
+  
+* fallende Bäume - einfach die Kontrollpunkte in Baum speichern, erst danach rendern, Kontrollpunkte drehen um Fußpunkt, dabei immer über 0-Ebene halten - so kollidiert der Baum auch mit Erde

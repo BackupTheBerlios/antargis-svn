@@ -371,6 +371,8 @@ void AntEntity::move(float pTime)
     }
   if(mJob)
     mJob->move(this,pTime);
+    
+  mCondition+=mConditionHeal*pTime;
 }
 
 Rect2D AntEntity::getRect() const
@@ -412,6 +414,12 @@ void MoveJob::move(AntEntity *e,float ptime)
   moveBy(e,ptime,aspeed); // use rest of time
   
 }
+
+Pos2D MoveJob::getDirection(const AntEntity *e) const
+{
+  return (mTarget-e->getPos2D()).normalized();
+}
+
 
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
@@ -508,6 +516,7 @@ int AntHero::getTypeID() const
 
 void AntHero::fightHero(AntHero *h)
 {
+  CTRACE;
   // myselfs attacks other hero
   setJob(new FightJob(0,h));
 

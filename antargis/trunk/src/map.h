@@ -4,8 +4,10 @@
 #include "decast.h"
 #include "quadtree.h"
 #include "voxel.h"
+#include "tree.h"
 
 #include "xml.h"
+#include "fs.h"
 
 #include <set>
 #include <vector>
@@ -45,6 +47,7 @@ class MoveJob:public Job
       runSpeed=100;
     }
     void move(AntEntity *e,float ptime);
+    Pos2D getDirection(const AntEntity *e) const;
   private:
     void moveBy(AntEntity *e,float ptime,float aspeed);
   };
@@ -281,15 +284,25 @@ class AntTree:public AntEntity
     VoxelImage *getSurface() const
       {
         std::ostringstream os;
+        VoxelImage *im=0;
         if(typeID==0)
+        {
           os<<"tree";//_"<<id;
+          if(!fileExists("tree.png"))
+            im=makeTree();
+        }
         else if(typeID==2)
-          os<<"tower1a";//_"<<id;
+          os<<"tower2";//_"<<id;
         else if(typeID==1)
-          os<<"house1b";
+          os<<"house2a";
         else if(typeID==3)
-          os<<"man1dl";
-        VoxelImage *im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
+          os<<"barn1a";
+        else if(typeID==4)
+          os<<"blacksmith2";
+        else if(typeID==5)
+          os<<"monument";
+        if(!im)
+          im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
         im->setPosition(mPos);
         /*        if(typeID==1)
                   im->setCenter(Pos2D(100,150)+Pos2D(0,64));
@@ -359,6 +372,18 @@ class AntHero:public AntEntity
           return Pos2D(0,0);
         else
           {
+            
+            if(hasJob())
+            {
+              MoveJob *j=dynamic_cast<MoveJob*>(mJob);
+              if(j)
+              {
+                Pos2D dir=j->getDirection(this);
+                Pos2D normal=dir.normal();
+                Pos2D t=dir*(-1)*(c/6)*32+normal*((c%6)-2.5)*16;
+                return t;
+              }
+            }
             float angle=float(c)/float(count)*M_PI*2.0;
             return Pos2D(sin(angle)*64,cos(angle)*64);
           }
@@ -509,7 +534,9 @@ class AntPlayer
             }
           else if(!(*i)->hasJob())
             {
-              flee(*i,Pos2D(-10+rand()%20,-10+rand()%20),10,0);
+              // do nothing at all
+              
+              //flee(*i,Pos2D(-10+rand()%20,-10+rand()%20),10,0);
               // hero is not fighting, so do something stupid
             }
         }

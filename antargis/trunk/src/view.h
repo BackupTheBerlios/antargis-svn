@@ -651,7 +651,7 @@ class EditIsoView: public CompleteIsoView
     void editAt(const Pos3D &p,bool dir)
     {
       int x=(int)(2*p.x/TILE_WIDTH+2);
-      int z=(int)(2*p.z/TILE_WIDTH+1);
+      int z=(int)(2*p.z/TILE_WIDTH+3);
       if(dir)
         getMap()->addFlat(x,z,30,1);
       else
@@ -697,16 +697,14 @@ class EditIsoView: public CompleteIsoView
         {
           for(int x=-1;x<mw;x++)
             {
-              int mx=x*(POINTS_PER_TILE);
-              int my=y*(POINTS_PER_TILE/2);
-              if(y&1)
-                mx+=(POINTS_PER_TILE/2);
+              int mx=x;
+              int my=y;
                 
               mx*=TILE_WIDTH/POINTS_PER_TILE;
               my*=TILE_WIDTH/POINTS_PER_TILE;
               
-              mx-=TILE_WIDTH/2;
-              my-=TILE_WIDTH/2;
+              //mx-=TILE_WIDTH/2;
+              //my-=TILE_WIDTH/2;
 
               Pos3D mp(mx,getMap()->getHeight(Pos2D(mx,my)),my); // start one into zeroness 
               VoxelImage *i=new VoxelImage("white_pin");
