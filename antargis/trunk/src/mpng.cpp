@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <assert.h>
 
 using namespace std;
 #include <SDL_image.h>
@@ -55,6 +56,7 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
         int i;
         int colortype;
         int result = -1;
+        bool done=false;
 
         png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, png_user_error, png_user_warn);
 
@@ -69,16 +71,20 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
         if (info_ptr == NULL)
         {
                 IMG_SetError("Couldn't create image information for PNG file");
-                goto done;
+            //    goto done;
         }
+        else
+        {
 
         /* Set error handling. */
-        if (setjmp(png_ptr->jmpbuf))
+        if (false)//setjmp(png_ptr->jmpbuf))
         {
                 /* If we get here, we had a problem reading the file */
                 IMG_SetError("Error writing the PNG file");
-                goto done;
+           //     goto done;
         }
+        else
+        {
 
         png_set_write_fn(png_ptr, src, png_write_data, png_io_flush);
 
@@ -103,8 +109,11 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
                 if (!palette)
                 {
                         IMG_SetError("Couldn't allocate memory for PNG palette");
-                        goto done;
+                        done=true;
+//                        goto done;
                 }
+                if(!done)
+                {
 
                 for (i = 0; i < surface->format->palette->ncolors; i++)
                 {
@@ -114,7 +123,10 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
                 }
 
                 png_set_PLTE(png_ptr, info_ptr, palette, surface->format->palette->ncolors);
+                }
         }
+        if(!done)
+        {
 
         /* Write the file header information.  REQUIRED */
         png_write_info(png_ptr, info_ptr);
@@ -128,8 +140,10 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
         if ( (row_pointers == NULL) ) 
         {
                 IMG_SetError("Couldn't allocate PNG row pointers");
-                goto done;
+         //       goto done;
         }
+        else
+        {
 
         for (i = 0; i < surface->h; i++)
                 row_pointers[i] = (png_bytep)(Uint8 *)surface->pixels + i*surface->pitch;
@@ -138,8 +152,11 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
         png_write_image(png_ptr, row_pointers);
         png_write_end(png_ptr, info_ptr);
         result = 0;  /* success! */
-
-done:
+        }
+        }
+}
+}
+//done:
         if (row_pointers)
                 delete [] row_pointers;
 
@@ -161,7 +178,10 @@ std::string toPNG(const SDL_Surface *s)
 
   int res=IMG_SavePNG_RW(const_cast<SDL_Surface*>(s),ops);
 
-  //  cout<<"res:"<<res<<endl;
+  cout<<"res:"<<res<<endl;
+  cout<<SDL_GetError()<<endl;
+  
+  assert(res==0);
 
   size_t nsize=SDL_RWtell(ops);
 

@@ -17,7 +17,7 @@ class MiniMap:public AGWidget
     void drawEntities(const AGPoint &p0);
 
     
-    AGSignal moveMap;
+    AGSignal sigMoveMap;
 
   private:
     AntargisMap *mMap;

@@ -13,9 +13,27 @@
 
 #define MAP_SPLINE_ORDER 3
 
+#define TILEDIR std::string("tiles/")
+
 #define SplineMapD SplineMap<float,4> //int brings some small improvement - but makes problems with water
 
 class AntargisView;
+
+class VoxelImageData
+{
+  std::map<std::string,Pos2D> mPositions;
+  public:
+    VoxelImageData();
+    virtual ~VoxelImageData();
+    Pos2D getCenter(const std::string &pFilename);
+    void setCenter(const std::string &pFilename,const Pos2D &pPos);
+
+    private:
+void loadXML(const xmlpp::Node &n);
+void saveXML(xmlpp::Node &n) const;
+};
+
+VoxelImageData *getVoxelID();
 
 
 class AVItem
@@ -58,6 +76,7 @@ class AVItem
  private:
   bool inited;
   Pos3D mPos;
+  protected:
   Pos2D mCenter;
   
   int virtualY;
@@ -102,6 +121,9 @@ class VoxelImage:public AVItem
 
   void setName(const std::string &pName);
   virtual void draw(AntargisView *view,const AGRect &r);
+  
+  void cutBorders();
+
 };
 
 

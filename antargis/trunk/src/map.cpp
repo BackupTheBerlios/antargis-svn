@@ -139,6 +139,26 @@ void AntargisMap::killHero(AntHero *h)
 
 }
 
+void AntargisMap::setAllWater()
+{
+  int x,y;
+  for(x=0;x<mHeight.width();x++)
+    for(y=0;y<mHeight.height();y++)
+    {
+      mHeight.setPoint(x,y,0);
+    }
+}
+void AntargisMap::setAllLand()
+{
+  int x,y;
+  for(x=0;x<mHeight.width();x++)
+    for(y=0;y<mHeight.height();y++)
+    {
+      mHeight.setPoint(x,y,15);
+    }
+  
+}
+
 void AntargisMap::addFlat(int x,int y,int h,int r)
 {
   if(r==0)
@@ -151,6 +171,8 @@ void AntargisMap::addFlat(int x,int y,int h,int r)
     for(int i=-r;i<=r;i++)
       for(int j=-r;j<=r;j++)
       {
+        if(i*i+j*j<r*r)
+        {
         float v=mHeight.getPoint(x+i,y+j);
         if(!aset)
           mmin=mmax=v;
@@ -161,15 +183,26 @@ void AntargisMap::addFlat(int x,int y,int h,int r)
           if(mmax<v)
             mmax=v;
         }
+        }
       }
     float nv;
     if(abs((int)(mmin-mmax))<1)
       nv=mmin+h;
     else
       nv=(mmin+mmax)*0.5;
+      
+    nv=float((int(nv)/5)*5);
+    
+    if(nv<WATER_HEIGHT)
+      nv=0;
+    
+    
     for(int i=-r;i<=r;i++)
       for(int j=-r;j<=r;j++)
+        if(i*i+j*j<r*r)
+        {
         mHeight.setPoint(x+i,y+j,nv);
+        }
   }
   
   // tell entities, that map has changed

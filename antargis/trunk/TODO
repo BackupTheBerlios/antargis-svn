@@ -29,9 +29,11 @@ ok * Minimap
 ok * Water and terrain parted
 ok * fixed strange error when generating images
 ok * entities in minimap
-* big map support in editing
+ok * big map support in editing
+* smaller image saving (discard unused parts) - saves about 2/3 of memory usage
 * support item placing in edit mode
 * game-object with scripting
+* ant_geometry restructure
 
 
 * Player-AI improvements:

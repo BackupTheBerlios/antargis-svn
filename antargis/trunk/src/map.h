@@ -261,6 +261,8 @@ class AntargisMap
     // r = radius
     void addPyramid(int x,int y,int h,int r);
     void addFlat(int x,int y,int h,int r);
+    void setAllWater();
+    void setAllLand();
 
     std::list<AntEntity*> getEntities(const AntRect&r);
     std::list<AntEntity*> getAllEntities();

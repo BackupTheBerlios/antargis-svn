@@ -6,7 +6,7 @@
 #define MINIMAP_ALPHA 0xFF
 
 MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect):
-  AGWidget(pParent,r),mMap(pMap),mSurface(r.w-16,r.h-16),mViewRect(pViewRect)
+  AGWidget(pParent,r),sigMoveMap(this,"sigMoveMap"),mMap(pMap),mSurface(r.w-16,r.h-16),mViewRect(pViewRect)
 {
   mustUpdate=true;
   update();
@@ -34,8 +34,8 @@ void MiniMap::drawEntities(const AGPoint &p0)
       c=AGColor(0x77,0x77,0x77);
       
       
-    x=pos.x*mSurface.width()/maxPos.x;
-    y=mSurface.height()-1-pos.y*mSurface.height()/maxPos.y;
+    x=(int)(pos.x*mSurface.width()/maxPos.x);
+    y=(int)(mSurface.height()-1-pos.y*mSurface.height()/maxPos.y);
     
     getScreen().drawRect(AGRect(p0.x+x,p0.y+y,2,2),c);
   }
@@ -46,7 +46,6 @@ void MiniMap::update()
 //  CTRACE;
   mustUpdate=true;
   AGSurfacePainter p(mSurface);
-  float zoom=2;
   float mx,my;
   
   Pos2D maxPos=mMap->getMaxPos();
@@ -57,7 +56,7 @@ void MiniMap::update()
     {
       mx=float(x)/mSurface.width()*maxPos.x;
       my=float(y)/mSurface.height()*maxPos.y;
-      Pos3D normal=mMap->getNormal(mx,my);
+      Pos3D normal=mMap->getNormal((int)mx,(int)my);
       float l=normal*Pos3D(1,1,-1).normalized();
       l+=3;
       l*=0.25;

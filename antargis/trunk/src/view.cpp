@@ -1,6 +1,7 @@
 #include "view.h"
 #include "tree.h"
 #include <ag_color.h>
+#include <ag_button.h>
 
 /***********************************************************
  * globals
@@ -77,15 +78,30 @@ void IsoView::init()
           if(y&1)
             mx+=(POINTS_PER_TILE/2);
 
+            
+          AVItem *i;            
+          // insert water tile
+          i=getWaterTile();
+          i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
+          i->setVirtualY(-42);
+          insert(i);
+            
+            
+          // now insert terrain (that it's after water)  
 //          cdebug("mx:"<<mx<<"//"<<my);
           // insert terrain tile  
-          SplineMapD h=mMap->getPatchH(mx,my);
+          SplineMapD h=mMap->getPatchH(mx,my);          // insert water tile
+          i=getWaterTile();
+          i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
+          i->setVirtualY(-42);
+          insert(i);
+
           SplineMapD g=mMap->getPatchG(mx,my);
 
           IVTile tile;
           tile.x=mx;
           tile.y=my;
-          AVItem *i=mTileCache[tile]; // get AVItem from cache
+          i=mTileCache[tile]; // get AVItem from cache
           if(i)
           {
             i->setVirtualY(-32);
@@ -93,11 +109,6 @@ void IsoView::init()
             mTiles[i]=tile;
           }
           
-          // insert water tile
-          i=getWaterTile();
-          i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
-          i->setVirtualY(-42);
-          insert(i);
           
         }
     }
@@ -166,7 +177,7 @@ VoxelImage *IsoView::getTree()
 {
   std::string name="tree";
 
-  if(fileExists(name+".png"))
+  if(fileExists(TILEDIR+name+".png"))
     {
       //ComplexVoxelImage *i=new ComplexVoxelImage(name);
       VoxelImage *i=new VoxelImage(name);
@@ -183,7 +194,7 @@ VoxelImage *IsoView::getTree()
 
 VoxelImage *IsoView::getWaterTile()
 {
-  if(!fileExists("water.png"))
+  if(!fileExists(TILEDIR+"water.png"))
   {
     VoxelImage *i=makeWaterTile();
     i->save("water");
@@ -198,7 +209,7 @@ VoxelImage *IsoView::getSurface(const SplineMapD &h,const SplineMapD &g)
   std::string name=h.toString()+g.toString(); // FIXME: this is too slow
   //return new VoxelImage("man1dl");
 
-  if(!fileExists(name+".png"))
+  if(!fileExists(TILEDIR+name+".png"))
     {
       VoxelImage *i=makeTerrainTile(h,g,0,0);
 
@@ -500,12 +511,53 @@ bool CompleteIsoView::isMyHero(AntHero *h)
  * EditIsoView
  ***********************************************************/
 
-EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):CompleteIsoView(parent,r,p,map)
+EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
+  CompleteIsoView(parent,r,p,map),sigMapEdited(this,"sigMapEdited")
 {
   mOldPoint=0;
   mShowPoints=true;
   mEditing=false;
+  AGButton *b;
+  
+  char *editNames[]={"edit1.png","edit2.png","edit3.png","edit4.png","edit5.png","edit10.png","edit15.png",""};
+  int editSizes[]={1,2,3,4,5,10,15};
+  
+  editSize=1;
+  
+  // add edit buttons at the bottom
+  for(int i=0;i<10 && std::string(editNames[i]).length();i++)
+  {
+    addChild(b=new AGButton(this,AGRect(50*i,height()-51,50,50),"test Window"));
+    b->setSurface(getScreen().loadSurface(std::string("data/")+editNames[i]),false);
+    b->sigClick.connect(slot(this,&EditIsoView::selectSize));
+    mEditButtons[b]=editSizes[i];
+  }
+  
+  addChild(allGrass=new AGButton(this,AGRect(50*7,height()-51,50,50),"allGrass"));
+  allGrass->setSurface(getScreen().loadSurface("data/grass2.png"),false);
+  allGrass->sigClick.connect(slot(this,&EditIsoView::setAll));
+  addChild(allWater=new AGButton(this,AGRect(50*8,height()-51,50,50),"allWater"));
+  allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
+  allWater->sigClick.connect(slot(this,&EditIsoView::setAll));
+  
 }
+
+    bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
+    {
+      editSize=mEditButtons[pCaller];
+      return true;
+    }
+    bool EditIsoView::setAll(const char *,const AGEvent *,AGMessageObject *pCaller)
+    {
+      if(pCaller==allWater)
+        getMap()->setAllWater();
+      if(pCaller==allGrass)
+        getMap()->setAllLand();
+  completeUpdate();
+  sigMapEdited(0);
+      return true;
+    }
+
 
 void EditIsoView::toggleEdit()
 {
@@ -524,6 +576,7 @@ bool EditIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
       if(getButtonState()==SDL_BUTTON(SDL_BUTTON_MIDDLE))
         {
           mPos=Pos3D(mPos.x-pDiff.x,mPos.y+pDiff.y,mPos.z);
+          shallUpdate=true; // delay update til drawing - as this may be called several times a frame
           return true;
         }
     }
@@ -606,11 +659,12 @@ void EditIsoView::editAt(const Pos3D &p,bool dir)
   int x=(int)(2*p.x/TILE_WIDTH+2);
   int z=(int)(2*p.z/TILE_WIDTH+3);
   if(dir)
-    getMap()->addFlat(x,z,30,1);
+    getMap()->addFlat(x,z,30,editSize);
   else
-    getMap()->addFlat(x,z,-30,1);
+    getMap()->addFlat(x,z,-30,editSize);
   
   completeUpdate();
+  sigMapEdited(0);
 }
 void EditIsoView::init()
 {
@@ -621,8 +675,8 @@ void EditIsoView::init()
       CompleteIsoView::init();
       return;
     }
-  CTRACE;
-  IsoView::init();
+  //CTRACE;
+  CompleteIsoView::init();
 
 
   if(!mShowPoints)
@@ -636,9 +690,20 @@ void EditIsoView::init()
   mw*=2;
   mh*=2;
 
-  for(int y=-1;y<mh;y++)
+  int sx=0;
+  int sy=0;
+  
+  sx=(int)(mPos.x/(TILE_WIDTH/2));
+  if(sx<0)  
+    sx=0;
+    
+  sy=(int)(mPos.y/(TILE_WIDTH/4));
+  if(sy<0)  
+    sy=0;
+  
+  for(int y=-1+sy;y<mh+sy;y++)
     {
-      for(int x=-1;x<mw;x++)
+      for(int x=-1+sx;x<mw+sx;x++)
         {
           int mx=x;
           int my=y;

@@ -278,17 +278,19 @@ class SplineMap
 
     SplineMap(Bitmap<T> b):values(b),w(b.w),h(b.h),rMap(1)
   {}
+  
+    int width() const
+    {
+      return w;
+    }
+    int height() const
+    {
+      return h;
+    }
 
     std::string toString() const
       {
-        /*
-          std::ostringstream os;
-
-          os<<"sp";
-          for(int i=0;i<h;i++)
-            for(int j=0;j<w;j++)
-              os<<"_"<<values[P(j,i)];*/
-        return md5(values.toString());//os.str());
+        return md5(values.toString());
       }
 
     T getPoint(int x,int y) const

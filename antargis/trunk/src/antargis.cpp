@@ -98,6 +98,7 @@ class AntargisApp:public MyApp
 
   // Minimap
   miniMap=new MiniMap(mainView,AGRect(w-minimapsize-1,h-minimapsize-1,minimapsize,minimapsize),&map,AGRect(0,0,10,10));
+  mainView->sigMapEdited.connect(slot(this,&AntargisApp::mapEdited));
   mainView->addChild(miniMap);
 
   AGButton *b;
@@ -171,6 +172,11 @@ class AntargisApp:public MyApp
     miniMap->update();
     return true;
   }
+  bool mapEdited(const char *,const AGEvent *)
+  {
+    miniMap->update();
+    return true;
+  }
   bool quitClick(const char *,const AGEvent *)
   {
     tryQuit();
@@ -214,6 +220,8 @@ int main(int argc,char *argv[])
   {
     std::cout<<e.what()<<std::endl;
   }
+  
+  delete getVoxelID(); // FIXME: eliminate Singletons
   return 0;
 }
 

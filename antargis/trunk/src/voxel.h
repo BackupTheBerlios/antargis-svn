@@ -17,6 +17,9 @@
 #include "cvinfo.h"
 #include "voxel_gen.h"
 
+
+extern bool gDrawingTerrain; // changes lighting to optimize for terrain, if set
+
 struct Color
 {
   float r,g,b,a; // values between 0 and 1

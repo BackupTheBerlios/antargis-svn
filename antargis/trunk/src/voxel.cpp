@@ -15,6 +15,8 @@
 //#define VOXELHEIGHT 128
 int VOXELHEIGHT;
 
+bool gDrawingTerrain=false;
+
 #define BAD_ALPHA
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -406,8 +408,18 @@ float VoxelView::diffuseLight(Pos3D p)
   // f=32, a=32 for trees
   // f=64, a=16 for terrain
   
-  float f=(32/256.0);//32
-  float a=(32/256.0);//32;
+  float a,f;
+  
+  if(gDrawingTerrain)
+  {
+     f=(64/256.0);//32
+    a=(16/256.0);//32;
+  }
+  else
+  {
+     f=(32/256.0);//32
+    a=(32/256.0);//32;
+  }
 
   //    nz=0;
 

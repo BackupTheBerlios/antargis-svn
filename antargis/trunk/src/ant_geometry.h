@@ -2,7 +2,6 @@
 #define ANT_GEOMETRY_H
 
 #include <iostream>
-#include "serialize.h"
 #include "xml.h"
 
 struct Pos3D
@@ -135,6 +134,17 @@ struct Pos2D
   float x,y;
   
   Pos2D(float px,float py);
+  Pos2D(const std::string &s)
+  {
+    char c;
+    std::istringstream is(s);
+    is>>x>>c>>y;
+  }
+  
+  bool operator==(const Pos2D &p) const
+  {
+    return x==p.x && y==p.y;
+  }
 
   float norm2() const;
   float norm() const;
@@ -157,6 +167,10 @@ struct Pos2D
     float n=1.0/sqrt(x*x+y*y);
     return Pos2D(x*n,y*n);
   }
+  std::string toString() const
+  {
+    return ::toString((int)x)+";"+::toString((int)y);
+  }
 
 };
 
@@ -170,18 +184,6 @@ inline std::ostream &operator<<(std::ostream &o,const Pos2D &p)
 {
   o<<"("<<p.x<<","<<p.y<<")";
   return o;
-}
-
-inline Serial&operator<<(Serial &s,const Pos2D &p)
-{
-  s<<p.x<<p.y;
-  return s;
-}
-
-inline Serial&operator>>(Serial &s,Pos2D &p)
-{
-  s>>p.x>>p.y;
-  return s;
 }
 
 struct AntRect

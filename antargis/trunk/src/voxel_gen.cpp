@@ -5,6 +5,78 @@
 #include <ag_color.h>
 #include <ag_fontengine.h>
 
+
+///////////////////////////////////////////////////////////////////////////////
+// VoxelImageData
+///////////////////////////////////////////////////////////////////////////////
+
+VoxelImageData::VoxelImageData()
+{
+  std::string pFilename="voxelimagedata.xml";
+  Document d;
+  if(fileExists(pFilename))
+  {
+    std::string c=loadFile(pFilename);
+    if(c.length())
+      {
+        d.parse_memory(c);
+        loadXML(d.root());
+      }
+  }
+}
+
+VoxelImageData::~VoxelImageData()
+{
+  std::string pFilename="voxelimagedata.xml";
+  xmlpp::Document d;
+  Node *root=createRootNode(d,"antargisLevel");
+  saveXML(*root);
+  std::string c=toString(d);
+  cdebug(c);
+  saveFile(pFilename,c);
+}
+
+void VoxelImageData::loadXML(const xmlpp::Node &n)
+{
+  mPositions.clear();
+  xmlpp::Node::const_iterator i=n.begin();
+  for(;i!=n.end();i++)
+  {
+    mPositions.insert(std::make_pair((*i)->get("name"),Pos2D((*i)->get("pos"))));
+  }
+}
+void VoxelImageData::saveXML(xmlpp::Node &n) const
+{
+  std::map<std::string,Pos2D>::const_iterator i=mPositions.begin();
+  for(;i!=mPositions.end();i++)
+  {
+    xmlpp::Node &c=n.newChild("position");
+    c.set("name",i->first);
+    c.set("pos",i->second.toString());
+  }
+
+}
+Pos2D VoxelImageData::getCenter(const std::string &pFilename)
+{
+  std::map<std::string,Pos2D>::const_iterator i=mPositions.find(pFilename);
+  if(i==mPositions.end())
+    return Pos2D(0,0);
+  return i->second;
+}
+void VoxelImageData::setCenter(const std::string &pFilename,const Pos2D &pPos)
+{
+  mPositions.insert(std::make_pair(pFilename,pPos));
+}
+
+VoxelImageData *mVoxelImageData=0;
+VoxelImageData *getVoxelID()
+{
+  if(!mVoxelImageData)
+    mVoxelImageData=new VoxelImageData;
+  return mVoxelImageData;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // AVItem
 ///////////////////////////////////////////////////////////////////////////////
@@ -92,7 +164,7 @@ AGRect AVItem::getRect(const Pos3D &pPos) const
 
 int AVItem::getZ(const Pos3D &pPos) const
   {
-    return (int)(mPos.z-pPos.z-mTexture.height()+mCenter.y-virtualY);//-(mTexture.height()-mCenter.y);
+    return (int)(mPos.z-pPos.z-virtualY);//-(mTexture.height()-mCenter.y);
   }
 
 void AVItem::draw(AntargisView *view,const AGRect &r)
@@ -177,9 +249,16 @@ VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
 VoxelImage::VoxelImage(const std::string &pFilename):
     AVItem(Pos3D(0,0,0))
 {
-  mTexture=getTextureCache()->get(pFilename+".png");
+  mTexture=getTextureCache()->get(TILEDIR+pFilename+".png");
   // FIXME: Check this
-  setCenter(Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4));
+  
+  Pos2D c=getVoxelID()->getCenter(pFilename);
+  if(c==Pos2D(0,0))
+  {
+    c=Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4);
+  }
+  
+  setCenter(c);//Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4)+c);
 }
 
 void VoxelImage::setTexture(const std::string &pFilename)
@@ -210,11 +289,77 @@ void VoxelImage::draw(AntargisView *view,const AGRect &r)
 void VoxelImage::init()
 {}
 
+
+// returns diff from uppper left corner
+void VoxelImage::cutBorders()
+{
+  AGSurfacePainter p(mSurface);
+  int minx,miny,maxx,maxy;
+  bool found=false;
+  
+  minx=maxx=miny=maxy=0;
+  
+  cdebug(mSurface.width()<<"///"<<mSurface.height());
+  for(int x=0;x<mSurface.width();x++)
+    for(int y=0;y<mSurface.height();y++)
+    {
+      AGColor c=p.getPixel(x,y);
+      if(c.a>0)
+      {
+        if(found)
+        {
+          minx=std::min(minx,x);
+          miny=std::min(miny,y);
+          maxx=std::max(maxx,x);
+          maxy=std::max(maxy,y);
+          //cdebug("x:"<<x<<" y:"<<y);
+          //cdebug(minx<<"/"<<maxx<<","<<miny<<",m:"<<maxy);
+        }
+        else
+        {
+          minx=maxx=x;
+          miny=maxy=y;
+          found=true;
+        }
+      }
+      
+    }
+    
+  cdebug(minx<<";"<<maxx<<";"<<miny<<";"<<maxy);
+  cdebug(mSurface.width()<<"///"<<mSurface.height());
+    
+  if(!found)
+  {
+    maxx=maxy=5;
+    minx=miny=0;
+   }
+  int w=maxx-minx+1;
+  int h=maxy-miny+1;
+  
+  w=std::max(10,w); // workaround for bad libpng calls
+  h=std::max(10,h);
+  
+  if(w<=0 || h<=0)
+    std::cerr<<"Error cutting! "<<w<<","<<h<<std::endl;
+    
+  AGSurface ns(w,h);
+  AGSurfacePainter p2(ns);
+  p2.blit(mSurface,AGRect(0,0,w,h),AGRect(minx,miny,w,h));
+  mSurface=ns;
+  mCenter=mCenter-Pos2D(minx,miny);
+  
+  if(w==0 || h==0)
+    mSurface=AGSurface(1,1); // FIXME: this is some workaround
+}
+
 void VoxelImage::save(const std::string &pFilename)
 {
+  cutBorders();
+  getVoxelID()->setCenter(pFilename,mCenter);  
+  
   std::string c=toPNG(mSurface.surface());
 
-  saveFile(pFilename+".png",c);
+  saveFile(TILEDIR+pFilename+".png",c);
 }
 
 
@@ -227,10 +372,11 @@ void VoxelImage::save(const std::string &pFilename)
 VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int py)
 //ComplexVoxelImage *makeTerrainTile(const SplineMap<float> &m,const SplineMap<float> &gm,int px,int py)
 {
+  gDrawingTerrain=true;
   Uint32 t1=SDL_GetTicks();
 
   int w=TILE_WIDTH;
-  FastVoxelView v(w,w*2,Pos3D(0,0,0),true);
+  FastVoxelView v(w,w*4,Pos3D(0,0,0),true);
 
   if(true)
   {
@@ -366,6 +512,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
 
   //return new ComplexVoxelImage(Pos3D(0,0,0),s,v.getDepthMap(),v.getShadowMap());
 
+  gDrawingTerrain=false;
   return new VoxelImage(s,Pos3D(0,0,0));
 }
 

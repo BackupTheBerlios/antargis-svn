@@ -4,6 +4,7 @@
 #include "rain.h"
 #include "map.h"
 #include <math.h>
+#include <ag_button.h>
 
 class IsoView:public AntargisView
   {
@@ -88,10 +89,18 @@ class EditIsoView: public CompleteIsoView
     VoxelImage *mOldPoint;
     bool mShowPoints;
     bool mEditing;
+    int editSize;
+    
+    std::map<AGMessageObject*,int> mEditButtons;
+    AGButton *allWater,*allGrass;
+    
   public:
     EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map);
 
     void toggleEdit();
+    
+    bool selectSize(const char *name,const AGEvent *e,AGMessageObject *pCaller);
+    bool setAll(const char *name,const AGEvent *e,AGMessageObject *pCaller);
 
     // moving about
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
@@ -102,6 +111,9 @@ class EditIsoView: public CompleteIsoView
     bool eventMouseMotion(const AGEvent *m);
 
     void editAt(const Pos3D &p,bool dir);
+    
+    AGSignal sigMapEdited;
+    
   protected:
     virtual void init();
   };
