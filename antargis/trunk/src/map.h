@@ -281,6 +281,8 @@ class AntargisMap
     {
       mPlayers.erase(p);
     }
+    
+    void removeEntity(AntEntity *p);
    
     // align to rect / >0 and <width and so 
     Pos2D truncPos(const Pos2D &p) const;
@@ -367,6 +369,36 @@ class AntTree:public AntEntity
     virtual std::string xmlName() const
       {
         return "antTree";
+      }
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
+  };
+
+class AntDeco:public AntEntity
+  {
+    int typeID;
+  public:
+    AntDeco():typeID(0)
+    {}
+    AntDeco(const Pos2D &p,int ID):AntEntity(p),typeID(ID)
+    {}
+    VoxelImage *getSurface() const
+      {
+        std::ostringstream os;
+        VoxelImage *im=0;
+        
+        os<<"deco"<<typeID;
+        
+        if(!fileExists(TILEDIR+os.str()+".png"))
+          throw std::string("File not found")+os.str();
+        im=new VoxelImage(os.str());
+        im->setPosition(mPos);
+        im->setVirtualY(100);
+        return im;
+      }
+    virtual std::string xmlName() const
+      {
+        return "antDeco";
       }
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);

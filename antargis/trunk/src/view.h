@@ -106,6 +106,7 @@ class EditIsoView: public CompleteIsoView
     bool selectSize(const char *name,const AGEvent *e,AGMessageObject *pCaller);
     bool setAll(const char *name,const AGEvent *e,AGMessageObject *pCaller);
     bool addEntity(const char *name,const AGEvent *e,AGMessageObject *pCaller);
+    bool setRubber(const char *name,const AGEvent *e,AGMessageObject *pCaller);
 
     // moving about
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);

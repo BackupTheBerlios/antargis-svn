@@ -16,15 +16,14 @@ void initFS(const char *argv0)
 
 std::string loadFile(const std::string &pName)
 {
-  //  TRACE;
   assert(FSinited);
-  
+
   if(!fileExists(pName))
-  {
-    std::cerr<<"File not "<<pName<<" does not exist!"<<std::endl;
-    return "";
-  }
-  
+    {
+      std::cerr<<"File not "<<pName<<" does not exist!"<<std::endl;
+      return "";
+    }
+
   PHYSFS_file *f=PHYSFS_openRead(pName.c_str());
   std::string o;
 
@@ -35,29 +34,22 @@ std::string loadFile(const std::string &pName)
     {
       c=PHYSFS_read(f,buf,1,1000);
       o+=std::string(buf,c);
-    }while(c);
+    }
+  while(c);
 
   PHYSFS_close(f);
-
-  //  cdebug("o.len:"<<o.length());
   return o;
 }
 void saveFile(const std::string &pName,const std::string &pContent)
 {
   assert(FSinited);
-  
+
   PHYSFS_file *f=PHYSFS_openWrite(pName.c_str());
-  /*  if(!f)
-    cdebug("PHYSFSError:"<<PHYSFS_getLastError());
-  
-  cdebug("f:"<<f);
-  cdebug("saved:"<<pName);
-  cdebug("writedir:"<<PHYSFS_getWriteDir());
-  */
+
   assert(f);
 
   PHYSFS_write(f,pContent.c_str(),1,pContent.length());
- 
+
   PHYSFS_close(f);
 }
 

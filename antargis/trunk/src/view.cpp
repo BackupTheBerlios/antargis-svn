@@ -538,22 +538,48 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
   allWater->sigClick.connect(slot(this,&EditIsoView::setAll));
 
-  AGButton *addTree1;
+  AGButton *addTree1,*rubber,*stones;
 
-  addChild(addTree1=new AGButton(this,AGRect(50*9,height()-51,50,50),"addTree1"));
+  addChild(rubber=new AGButton(this,AGRect(50*9,height()-51,50,50),"rubber1"));
+  rubber->setSurface(getScreen().loadSurface("data/rubber.png"),false);
+  rubber->sigClick.connect(slot(this,&EditIsoView::setRubber));
+  
+  addChild(addTree1=new AGButton(this,AGRect(50*10,height()-51,50,50),"addTree1"));
   addTree1->setSurface(getScreen().loadSurface("data/small_tree.png"),false);
   addTree1->sigClick.connect(slot(this,&EditIsoView::addEntity));
+  
+  addChild(stones=new AGButton(this,AGRect(50*11,height()-51,50,50),"stones1"));
+  stones->setSurface(getScreen().loadSurface("data/stones1a.png"),false);
+  stones->sigClick.connect(slot(this,&EditIsoView::addEntity));
 
   mEditWidgets.push_back(allGrass);
   mEditWidgets.push_back(allWater);
   mEditWidgets.push_back(addTree1);
+  mEditWidgets.push_back(rubber);
+  mEditWidgets.push_back(stones);
 
+  std::list<AGWidget*>::iterator i=mChildren.begin();
+  for(;i!=mChildren.end();i++)
+    (*i)->hide();
+ 
 
+}
+
+bool EditIsoView::setRubber(const char *,const AGEvent *,AGMessageObject *pCaller)
+{
+  mAddEntity="rubber";
+  return true;
 }
 
 bool EditIsoView::addEntity(const char *,const AGEvent *,AGMessageObject *pCaller)
 {
-  mAddEntity="tree1";
+  AGButton *b=dynamic_cast<AGButton*>(pCaller);
+  if(b)
+  {
+    std::string n=b->getName();
+    mAddEntity=n;
+    cdebug(mAddEntity);
+  }
   return true;
 }
 bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
@@ -625,8 +651,20 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
                 Pos3D p=mOldPoint->getPosition();
                 if(mAddEntity=="")
                   editAt(p,e->getButton()==SDL_BUTTON_LEFT);
-                else if(mAddEntity=="tree1")
-                  getMap()->insertEntity(new AntTree(Pos2D(p.x,p.z),0));
+                else if(mAddEntity=="rubber")
+                {
+                  // getEntity and delete
+                  std::list<AntEntity *> es=getEntity(e->getMousePosition());
+                  if(es.size())
+                  {
+                    for(std::list<AntEntity*>::iterator i=es.begin();i!=es.end();i++)
+                      getMap()->removeEntity(*i);
+                  }
+                }
+                else if(mAddEntity=="addTree1")
+                  getMap()->insertEntity(new AntTree(Pos2D(p.x,p.z),rand()%11));
+                else if(mAddEntity=="stones1")
+                  getMap()->insertEntity(new AntDeco(Pos2D(p.x,p.z),rand()%2));
                   
               }
 

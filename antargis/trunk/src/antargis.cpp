@@ -197,6 +197,7 @@ class AntargisApp:public MyApp
 
 int main(int argc,char *argv[])
 {
+
   try
   {
   assert(argc>=1);
@@ -219,6 +220,10 @@ int main(int argc,char *argv[])
   catch(std::exception &e)
   {
     std::cout<<e.what()<<std::endl;
+  }
+  catch(std::string &s)
+  {
+    std::cout<<s<<std::endl;
   }
   
   delete getVoxelID(); // FIXME: eliminate Singletons

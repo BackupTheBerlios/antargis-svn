@@ -40,6 +40,7 @@ struct Pos3D
   }
   void saveXML(xmlpp::Node &pNode) const;
   void loadXML(const xmlpp::Node &pNode);
+//  bool operator<(const Pos3D &p) const;
 };
 
 

@@ -85,7 +85,7 @@ class QuadTree
           {
             if(ts.find(t)!=ts.end())
               {
-                ts.remove(t);
+                ts.erase(t);
                 return;
               }
             if(children.size())

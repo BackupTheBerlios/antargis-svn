@@ -40,7 +40,12 @@ void Pos3D::loadXML(const xmlpp::Node &pNode)
   y=toFloat(pNode.get("y"));
   z=toFloat(pNode.get("z"));
 }
-
+/*
+see above
+bool Pos3D::operator<(const Pos3D &p) const
+{
+  return x<p.x || (x==p.x && (y<p.y || (y==p.y && z<p.y)));
+}*/
 
 
 ///////////////////////////////////////////////////////////////////////////////

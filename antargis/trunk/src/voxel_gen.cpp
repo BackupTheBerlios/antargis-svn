@@ -192,7 +192,10 @@ class CompareAVItem
     {}
     bool operator()(const AVItem *i1,const AVItem *i2) const
       {
-        return i1->getZ(mPos)>i2->getZ(mPos);
+        float z1=i1->getZ(mPos);
+        float z2=i2->getZ(mPos);
+      
+        return z1>z2 ||(z1==z2 && i2->getPosition()<i1->getPosition());//i1->getZ(mPos)>i2->getZ(mPos);
       }
   };
 

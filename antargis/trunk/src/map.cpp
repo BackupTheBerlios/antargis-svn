@@ -102,6 +102,15 @@ void AntargisMap::insertEntity(AntEntity *e)
   mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
 }
+    
+void AntargisMap::removeEntity(AntEntity *p)
+{
+  mEntities.remove(p);
+  std::list<AntEntity*>::iterator i=std::find(mEntList.begin(),mEntList.end(),p);
+  if(i!=mEntList.end())
+    mEntList.erase(i);
+  mEntityMap.erase(p->getID());
+}
 
 std::list<AntEntity*> AntargisMap::getEntities(const AntRect&r)
 {
@@ -295,6 +304,8 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
         }
        else if(i->getName()=="antTree")
         e=new AntTree;
+       else if(i->getName()=="antDeco")
+        e=new AntDeco;
        else if(i->getName()=="antHero")
         e=new AntHero;
        else if(i->getName()=="antMan")
@@ -554,6 +565,20 @@ void AntTree::saveXML(xmlpp::Node &node) const
   node.set("typeID",toString(typeID));
 }
 void AntTree::loadXML(const xmlpp::Node &node)
+{
+  AntEntity::loadXML(node);
+  typeID=toInt(node.get("typeID"));
+}
+/************************************************************************
+* AntDeco
+************************************************************************/
+
+void AntDeco::saveXML(xmlpp::Node &node) const
+{
+  AntEntity::saveXML(node);
+  node.set("typeID",toString(typeID));
+}
+void AntDeco::loadXML(const xmlpp::Node &node)
 {
   AntEntity::loadXML(node);
   typeID=toInt(node.get("typeID"));
