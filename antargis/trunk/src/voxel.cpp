@@ -273,7 +273,7 @@ void AntargisView::draw(const AGRect &r)
     }
 }
 
-AGRect AntargisView::getRect(AVItem *item)
+AGRect AntargisView::getRect(AVItem *item) const
 {
       AGRect ar;
       Pos2D p(item->getCenter());
@@ -314,6 +314,14 @@ VoxelImage::VoxelImage(const std::string &pFilename):
   // FIXME: Check this
   setCenter(Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4));
 }
+
+void VoxelImage::setTexture(const std::string &pFilename)
+{
+  mTexture=getTextureCache()->get(pFilename+".png");
+  // FIXME: Check this
+  setCenter(Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4));
+}
+
 
 
 void VoxelImage::init()
@@ -594,8 +602,8 @@ float VoxelView::diffuseLight(Pos3D p)
   ny+=has1(p+y+y)-has1(p-y-y);
   nz+=has1(p+z+z)-has1(p-z-z);
   */
-  float f=(32/256.0);//32
-  float a=(32/256.0);//32;
+  float f=(64/256.0);//32
+  float a=(16/256.0);//32;
 
   //    nz=0;
 

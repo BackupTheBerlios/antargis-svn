@@ -14,7 +14,8 @@ canceled * reduced SplineMap - quadratic patches ? (look at SystemRequirements)
 
 ok * XML-InString loading
 ok * SplineMap-saving/loading
-* show Editing-point
+ok * show Editing-point
+* correct saving of players
 * Water
 * Editing on/off toggling
 * Editing mode: heightstep (+/-), radius (through buttons or so)

@@ -70,6 +70,7 @@ class FightJob:public Job
 
 class AntEntity
   {
+    int mID;
   protected:
     Pos3D mPos;
     Job *mJob;
@@ -92,6 +93,11 @@ class AntEntity
     
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);
+    
+    int getID() const
+    {
+      return mID;
+    }
 
     void setJob(Job *pJob);
 
@@ -164,6 +170,8 @@ class AntargisMap
       
     bool paused;
     int mW,mH;
+    
+    int maxID;
       
   public:
     AntargisMap(int w,int h);
@@ -173,13 +181,16 @@ class AntargisMap
 
     SplineMapD getPatchH(int x,int y) const;
     SplineMapD getPatchG(int x,int y) const;
+    
+    int getNewID();
 
     void insertEntity(AntEntity *e);
     
     // x,y = position
     // h = amount
     // r = radius
-    void editHeightAt(int x,int y,int h,int r);
+    void addPyramid(int x,int y,int h,int r);
+    void addFlat(int x,int y,int h,int r);
 
     std::list<AntEntity*> getEntities(const AntRect&r);
 
@@ -242,11 +253,11 @@ class AntTree:public AntEntity
           os<<"man1dl";
         VoxelImage *im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
         im->setPosition(mPos);
-        if(typeID==1)
+/*        if(typeID==1)
           im->setCenter(Pos2D(100,150)+Pos2D(0,64));
         if(typeID==2||typeID==3)
-          im->setCenter(Pos2D(100,150)+Pos2D(0,64));
-        im->setVirtualY(32);
+          im->setCenter(Pos2D(100,150)+Pos2D(0,64));*/
+        im->setVirtualY(100);
         return im;
       }
     virtual std::string xmlName() const
@@ -394,7 +405,7 @@ class AntPlayer
     {
       getMap()->addPlayer(this);
     }
-    ~AntPlayer()
+    virtual ~AntPlayer()
     {
       getMap()->removePlayer(this);
     }

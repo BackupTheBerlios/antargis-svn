@@ -85,6 +85,10 @@ class AVItem
 
   virtual void init()=0;
   void setPosition(const Pos3D &pPos);
+  Pos3D getPosition() const
+  {
+    return mPos;
+  }
   
   void setCenter(const Pos2D &pCenter);
   const Pos2D &getCenter() const;
@@ -117,7 +121,7 @@ class AntargisView:public AGWidget
  public:
   AntargisView(AGWidget *parent,const AGRect &pRect,const Pos3D &pPos);
   
-  AGRect getRect(AVItem *item);
+  AGRect getRect(AVItem *item) const;
 
   void draw(const AGRect &r);
   void insert(AVItem *v);
@@ -137,6 +141,8 @@ class VoxelImage:public AVItem
   VoxelImage(AGSurface pSurface,Pos3D pPos);
   VoxelImage(const std::string &pFilename);
   virtual void init();
+  
+  void setTexture(const std::string &pFilename);
 
   void save(const std::string &pFilename);
 

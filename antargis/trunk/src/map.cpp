@@ -21,7 +21,14 @@ AntargisMap::AntargisMap(int w,int h):
 {
   myAntargisMap=this;
   paused=false;
+  maxID=0;
 }
+
+int AntargisMap::getNewID()
+{
+  return maxID++;
+}
+
 
 float AntargisMap::getHeight(const Pos2D &p) const
   {
@@ -94,12 +101,56 @@ void AntargisMap::killHero(AntHero *h)
 
 }
 
-void AntargisMap::editHeightAt(int x,int y,int h,int r)
+void AntargisMap::addFlat(int x,int y,int h,int r)
 {
-  for(int i=-r;i<=r;i++)
-    for(int j=-r;j<=r;j++)
-      mHeight.edit(x+i,y+j,(int)(h*sqrt((float)i*i+j*j)/r));
+  if(r==0)
+    mHeight.edit(x,y,h);
+  else
+  {
+    float mmin,mmax;
+    bool aset=false;
+    for(int i=-r;i<=r;i++)
+      for(int j=-r;j<=r;j++)
+      {
+        float v=mHeight.getPoint(x+i,y+j);
+        if(!aset)
+          mmin=mmax=v;
+        else
+        {
+          if(mmin>v)
+            mmin=v;
+          if(mmax<v)
+            mmax=v;
+        }
+      }
+    float nv;
+    if(abs(mmin-mmax)<1)
+      nv=mmin+h;
+    else
+      nv=(mmin+mmax)*0.5;
+    for(int i=-r;i<=r;i++)
+      for(int j=-r;j<=r;j++)
+        mHeight.setPoint(x+i,y+j,nv);
+  }
+  
+  // tell entities, that map has changed
+  std::list<AntEntity*>::iterator i=mEntList.begin();
+  for(;i!=mEntList.end();i++)
+    (*i)->mapChanged();
 
+}
+
+void AntargisMap::addPyramid(int x,int y,int h,int r)
+{
+  if(r==0)
+    mHeight.edit(x,y,h);
+  else
+  {
+    for(int i=-r;i<=r;i++)
+      for(int j=-r;j<=r;j++)
+        mHeight.edit(x+i,y+j,(int)(h*sqrt((float)i*i+j*j)/r));
+  }
+  
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
@@ -109,15 +160,21 @@ void AntargisMap::editHeightAt(int x,int y,int h,int r)
 
 void AntargisMap::saveXML(xmlpp::Node &node) const
   {
+    // entities
     std::list<AntEntity*>::const_iterator i=mEntList.begin();
     for(;i!=mEntList.end();i++)
       {
         xmlpp::Node &child=node.newChild((*i)->xmlName());
         (*i)->saveXML(child);
       }
+      
+    // height and grass map
     xmlpp::Node &hmap=node.newChild("heightMap");
+    xmlpp::Node &gmap=node.newChild("grassMap");
     hmap.set("width",toString(mW));
     hmap.set("height",toString(mH));
+    gmap.set("width",toString(mW));
+    gmap.set("height",toString(mH));
     std::ostringstream hmaps,gmaps;
     for(int j=0;j<mH;j++)
       {
@@ -131,6 +188,16 @@ void AntargisMap::saveXML(xmlpp::Node &node) const
       }
     cdebug(hmaps.str());
     hmap.setContent(hmaps.str());
+    gmap.setContent(gmaps.str());
+    
+    // players
+    std::set<AntPlayer*>::const_iterator k=mPlayers.begin();
+    
+    for(;k!=mPlayers.end();k++)
+    {
+      xmlpp::Node &child=node.newChild("player");
+      (*k)->saveXML(child);
+    }
 
   }
 void AntargisMap::loadXML(const xmlpp::Node &node)
@@ -160,6 +227,12 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
         e=new AntHero;
        else if(i->getName()=="antMan")
         e=new AntMan;
+       else if(i->getName()=="player")
+        {
+          AntPlayer *p=new AntPlayer;
+          p->loadXML(*i);
+          mPlayers.insert(p);
+        }
        
        if(e)
        {
@@ -210,12 +283,17 @@ void AntargisMap::loadMap(const std::string &pFilename)
 *****************************************************************/
 
 AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(false)
-{}
+{
+  mID=getMap()->getNewID();
+}
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(true)
-{}
+{
+  mID=getMap()->getNewID();
+}
 
 AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false)
 {
+  mID=getMap()->getNewID();
 }
 
 void AntEntity::saveXML(xmlpp::Node &node) const
@@ -225,6 +303,7 @@ void AntEntity::saveXML(xmlpp::Node &node) const
     node.set("energy",toString(mEnergy));
     node.set("healSpeed",toString(mHealSpeed));
     node.set("onGround",toString(onGround));
+    node.set("entityID",toString(getID()));
   }
 void AntEntity::loadXML(const xmlpp::Node &node)
 {
@@ -235,6 +314,7 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   xmlpp::Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     mPos.loadXML(*i);
+  mID=toInt(node.get("entityID"));
 }
 
 Pos3D AntEntity::getPos3D() const
@@ -510,8 +590,17 @@ void AntMan::loadXML(const xmlpp::Node &node)
 ************************************************************************/
 void AntPlayer::saveXML(xmlpp::Node &node) const
 {
+   node.set("playerID",toString(id));
+   std::set<AntHero*>::const_iterator i=mHeroes.begin();
+   for(;i!=mHeroes.end();i++)
+   {
+    xmlpp::Node &child=node.newChild("hero");
+    child.set("heroID",toString((*i)->getID()));
+   }
 }
 void AntPlayer::loadXML(const xmlpp::Node &node)
 {
+  std::set<int> mHIDs;
+  // FIXME: load heroes
 }
 

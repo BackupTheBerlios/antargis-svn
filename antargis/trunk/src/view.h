@@ -36,6 +36,7 @@ class IsoView:public AntargisView
     AntargisMap *mMap;
     std::map<AVItem*,IVTile> mTiles;
     float mTime;
+    bool inited;
 
   protected:
     std::map<AVItem*,AntEntity*> mEntities;
@@ -47,12 +48,11 @@ class IsoView:public AntargisView
     IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
         AntargisView(parent,r,p),mMap(map)
     {
-      init();
       cdebug("IsoView-Rect:"<<r);
+      inited=false;
     }
     void update()
     {
-      CTRACE;
       clear();
       mEntities.clear();
       mEntitiesInv.clear();
@@ -61,10 +61,11 @@ class IsoView:public AntargisView
       init();
       
     }
-  private:
-    void init()
+    
+
+  protected:
+    virtual void init()
     {
-      CTRACE;
       Uint32 t1=SDL_GetTicks();
 
       int mw=width()/64+2;
@@ -228,8 +229,14 @@ class IsoView:public AntargisView
     }
 
   protected:
-    void draw(const AGRect &r)
+    virtual void draw(const AGRect &r)
     {
+      if(!inited)
+      {
+        init();
+        inited=true;
+      }
+
       updatePositions();
 
       doTick();
@@ -386,7 +393,6 @@ class CompleteIsoView: public IsoView
                             AntHero *h=dynamic_cast<AntHero*>(mEntities[i]);
                             if(isMyHero(h))
                               {
-                                CTRACE;
                                 h->goTo(1,getTilePos(t));
                                 //h->setJob(new MoveJob(getTilePos(t)));
                               }
@@ -409,19 +415,35 @@ class CompleteIsoView: public IsoView
 
   };
 
-class EditIsoView: public IsoView
+class EditIsoView: public CompleteIsoView
   {
+    std::list<AVItem*> mPoints;
+    VoxelImage *mOldPoint;
+    bool mShowPoints;
+    bool mEditing;
   public:
-    EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):IsoView(parent,r,p,map)
-    {}
+    EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):CompleteIsoView(parent,r,p,map)
+    {
+      mOldPoint=0;
+      mShowPoints=true;
+      mEditing=false;
+    }
+    
+    void toggleEdit()
+    {
+      mEditing=!mEditing;
+      update();
+    }
     
     // moving about
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff)
     {
+      if(!mEditing)
+        return CompleteIsoView::eventDragBy(event,pDiff);
       const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(event);
       if(e)
         {
-          if(getButtonState()==SDL_BUTTON(SDL_BUTTON_RIGHT))
+          if(getButtonState()==SDL_BUTTON(SDL_BUTTON_MIDDLE))
           {
             mPos=Pos3D(mPos.x-pDiff.x,mPos.y+pDiff.y,mPos.z);
             return true;
@@ -431,14 +453,18 @@ class EditIsoView: public IsoView
     }
     bool eventMouseClick(const AGEvent *m)
     {
+      if(!mEditing)
+        return CompleteIsoView::eventMouseClick(m);
       const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
       if(e)
         {
           if(getScreenRect().contains(e->getMousePosition()))
             {
-              if(e->getButton()==SDL_BUTTON_LEFT)
+              if(e->getButton()==SDL_BUTTON_LEFT||e->getButton()==SDL_BUTTON_RIGHT)
               {
-                editAt(e->getMousePosition());
+                if(mOldPoint)
+                  editAt(mOldPoint->getPosition(),e->getButton()==SDL_BUTTON_LEFT);
+                  
                 update();
                 return true;
               }
@@ -446,6 +472,67 @@ class EditIsoView: public IsoView
         }
       return false;
     }
+    
+    AVItem *getClosest(const AGPoint &p) const
+    {
+      std::list<AVItem*>::const_iterator i=mPoints.begin();
+      AVItem *fi=0;
+      float distance=0;
+      for(;i!=mPoints.end();i++)
+      {
+        AGRect r=getRect(*i);
+        AGPoint diff=r.getPosition()-p;
+        float md=sqrt((float)(diff.x*diff.x+diff.y*diff.y));
+        if(fi==0 || md<distance)
+        {
+          distance=md;
+          fi=*i;
+        }
+      }
+      return fi;
+    }
+    
+    void toggleShowPoints()
+    {
+      mShowPoints=!mShowPoints;
+      update();
+    }
+    
+    bool eventMouseMotion(const AGEvent *m)
+    {
+      if(!mEditing)
+        CompleteIsoView::eventMouseMotion(m);
+      const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
+      if(e)
+        {
+          if(getScreenRect().contains(e->getMousePosition()))
+            {
+              AVItem *closest=getClosest(e->getMousePosition());
+              if(closest)
+              {
+                VoxelImage *i=dynamic_cast<VoxelImage*>(closest);
+                if(mOldPoint)
+                  mOldPoint->setTexture("white_pin");
+                mOldPoint=i;
+                if(i)
+                  i->setTexture("blue_pin");
+              }
+              
+            }
+        }
+      return IsoView::eventMouseMotion(m);
+    }
+    
+    void editAt(const Pos3D &p,bool dir)
+    {
+      int x=2*p.x/TILE_WIDTH+2;
+      int z=2*p.z/TILE_WIDTH+1;
+      if(dir)
+        getMap()->addFlat(x,z,30,1);
+      else
+        getMap()->addFlat(x,z,-30,1);
+    }
+    /*
     void editAt(const AGPoint &p)
     {
        IVTile t=getTile(p);
@@ -455,6 +542,56 @@ class EditIsoView: public IsoView
        
        getMap()->editHeightAt((int)p2.x,(int)p2.y,30,1);
       
+    }*/
+    protected:
+    virtual void init()
+    {
+      mOldPoint=0;
+      mPoints.clear();
+      if(!mEditing)
+      {
+        CompleteIsoView::init();
+        return;
+      }
+      CTRACE;
+      IsoView::init();
+      
+      
+      if(!mShowPoints)
+        return;
+      // add pins
+      
+      int mw=width()/64+2;
+      int mh=height()/16+4;
+
+      
+      mw*=2;
+      mh*=2;
+      
+      for(int y=-1;y<mh;y++)
+        {
+          for(int x=-1;x<mw;x++)
+            {
+              int mx=x*(POINTS_PER_TILE);
+              int my=y*(POINTS_PER_TILE/2);
+              if(y&1)
+                mx+=(POINTS_PER_TILE/2);
+                
+              mx*=TILE_WIDTH/POINTS_PER_TILE;
+              my*=TILE_WIDTH/POINTS_PER_TILE;
+              
+              mx-=TILE_WIDTH/2;
+              my-=TILE_WIDTH/2;
+
+              Pos3D mp(mx,getMap()->getHeight(Pos2D(mx,my)),my); // start one into zeroness 
+              VoxelImage *i=new VoxelImage("white_pin");
+              i->setPosition(mp);
+              i->setVirtualY(150);
+
+              insert(i);
+              mPoints.push_back(i);
+            }
+         }
     }
   };
   

@@ -82,11 +82,21 @@ class AntargisApp:public MyApp
   // Edit
   mainView->addChild(b=new AGButton(mainView,AGRect(0,50,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/edit.png"),false);
+  b->sigClick.connect(slot(this,&AntargisApp::toggleEdit));
+  
+  mainView->addChild(b=new AGButton(mainView,AGRect(0,200,50,50),"test Widnow"));
+  b->setSurface(getScreen().loadSurface("graphics/white_pin.png"),false);
+  b->sigClick.connect(slot(this,&AntargisApp::pinClick));
+  
+  mainView->addChild(b=new AGButton(mainView,AGRect(0,250,50,50),"test Widnow"));
+  b->setSurface(getScreen().loadSurface("data/small_tree.png"),false);
+  b->sigClick.connect(slot(this,&AntargisApp::pinClick));
+  
   
   // SmainViewe
   mainView->addChild(b=new AGButton(mainView,AGRect(0,100,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/save.png"),false);
-  b->sigClick.connect(slot(this,&AntargisApp::smainVieweClick));
+  b->sigClick.connect(slot(this,&AntargisApp::saveClick));
   
   // load
   mainView->addChild(b=new AGButton(mainView,AGRect(0,150,50,50),"test Window"));
@@ -109,23 +119,36 @@ class AntargisApp:public MyApp
   
     MyApp::run();
   }
-  bool smainVieweClick(const char *pName,const AGEvent *e)
+  
+  bool toggleEdit(const char *,const AGEvent *)
+  {
+    mainView->toggleEdit();
+    getMap()->pause();
+    return true;
+  }
+  
+  bool saveClick(const char *,const AGEvent *)
   {
     getMap()->saveMap("dummy.antlvl");
     return true;
   }
-  bool loadClick(const char *pName,const AGEvent *e)
+  bool pinClick(const char *,const AGEvent *)
+  {
+    mainView->toggleShowPoints();
+    return true;
+  }
+  bool loadClick(const char *,const AGEvent *)
   {
     getMap()->loadMap("dummy.antlvl");
     mainView->update();
     return true;
   }
-  bool quitClick(const char *pName,const AGEvent *e)
+  bool quitClick(const char *,const AGEvent *)
   {
     tryQuit();
     return true;
   }
-  bool pause(const char *pName,const AGEvent *e)
+  bool pause(const char *,const AGEvent *)
   {
     CTRACE;
     paused=!paused;

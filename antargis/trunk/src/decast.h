@@ -250,12 +250,16 @@ class SplineMap
       
     T getPoint(int x,int y) const
     {
-      return values[P(x,y)];
+      if(x>=0 && y>=0 && x<w && y<h)
+        return values[P(x,y)];
+      else
+        return 0;
     }
     
     void setPoint(int x,int y,const T&t)
     {
-      values[P(x,y)]=t;
+      if(x>=0 && y>=0 && x<w && y<h)
+        values[P(x,y)]=t;
     }
       
     void edit(int x,int y,int v)
