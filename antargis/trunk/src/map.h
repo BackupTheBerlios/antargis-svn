@@ -41,11 +41,7 @@ class MoveJob:public Job
     int near;
     bool mRun;
   public:
-    MoveJob(int p,const Pos2D &pTarget,int pnear=0,bool pRun=false):Job(p),mTarget(pTarget),near(pnear),mRun(pRun)
-    {
-      speed=70; // pixels per second
-      runSpeed=100;
-    }
+    MoveJob(int p,const Pos2D &pTarget,int pnear=0,bool pRun=false);
     void move(AntEntity *e,float ptime);
     Pos2D getDirection(const AntEntity *e) const;
   private:
@@ -282,6 +278,10 @@ class AntargisMap
     {
       mPlayers.erase(p);
     }
+   
+    // align to rect / >0 and <width and so 
+    Pos2D truncPos(const Pos2D &p) const;
+
 
     AntEntity *getEntity(int id) const
       {
@@ -518,7 +518,6 @@ class AntMan: public AntEntity
         im->setVirtualY(40);
         return im;
       }
-
 
     void discard(AntHero *hero)
     {

@@ -26,6 +26,10 @@ ok * differentiate between running and going
 ok * big maps (view)
 ok * normal for minimap in decast
 ok * Minimap
+ok * Water and terrain parted
+ok * fixed strange error when generating images
+* game-object with scripting
+* entities in minimap
 * big map support in editing
 * support item placing in edit mode
 

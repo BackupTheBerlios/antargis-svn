@@ -9,11 +9,13 @@ class AntargisMap;
 class MiniMap:public AGWidget
   {
   public:
-    MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap);
+    MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect);
 
     virtual void draw(const AGRect &r);
 
     void update();
+    
+    AGSignal moveMap;
 
   private:
     AntargisMap *mMap;
@@ -21,6 +23,7 @@ class MiniMap:public AGWidget
     AGTexture mBG;
     AGSurface mSurface;
     bool mustUpdate;
+    AGRect mViewRect;
   };
 
 #endif

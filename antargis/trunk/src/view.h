@@ -53,6 +53,7 @@ class IsoView:public AntargisView
     VoxelImage *getTree();
 
     VoxelImage *getSurface(const SplineMapD &h,const SplineMapD &g);
+    VoxelImage *getWaterTile();
 
   public:
     // p is local window-coordinate

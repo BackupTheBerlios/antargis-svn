@@ -23,6 +23,13 @@ AntargisMap::AntargisMap(int w,int h):
   paused=false;
   maxID=0;
 }
+    
+Pos2D AntargisMap::truncPos(const Pos2D &p) const
+{
+  Pos2D maxPos=getMaxPos();
+  return Pos2D(std::max(0.0f,std::min(maxPos.x,p.x)),
+               std::max(0.0f,std::min(maxPos.y,p.y)));
+}
 
 int AntargisMap::getNewID()
 {
@@ -422,6 +429,12 @@ void AntEntity::mapChanged()
 /************************************************************************
 * MoveJob
 ************************************************************************/
+
+MoveJob::MoveJob(int p,const Pos2D &pTarget,int pnear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),near(pnear),mRun(pRun)
+    {
+      speed=70; // pixels per second
+      runSpeed=100;
+    }
 
 // Jobs
 void MoveJob::move(AntEntity *e,float ptime)

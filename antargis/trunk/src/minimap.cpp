@@ -5,8 +5,8 @@
 #define MINIMAP_GREEN 0xAA
 #define MINIMAP_ALPHA 0xFF
 
-MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap):
-  AGWidget(pParent,r),mMap(pMap),mSurface(r.w-16,r.h-16)
+MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect):
+  AGWidget(pParent,r),mMap(pMap),mSurface(r.w-16,r.h-16),mViewRect(pViewRect)
 {
   mustUpdate=true;
   update();
@@ -41,7 +41,7 @@ void MiniMap::update()
     }
   }
 }
-    
+
 void MiniMap::draw(const AGRect &r)
 {
   AGRect mr=r.project(getRect());
@@ -51,6 +51,16 @@ void MiniMap::draw(const AGRect &r)
   getScreen().blit(mBG,mr);
   mr.x+=8;
   mr.y+=8;
+  mr.w-=16;
+  mr.h-=16;
   
   getScreen().blit(mTexture,mr);
+/*
+  // draw viewing Rect  
+  float sx0=mViewRect.x;
+  
+  AGRect vr(;
+  vr=
+  
+  getScreen().drawRect(AGRect(*/
 }

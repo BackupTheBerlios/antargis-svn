@@ -97,7 +97,7 @@ class AntargisApp:public MyApp
   int minimapsize=216;
 
   // Minimap
-  miniMap=new MiniMap(mainView,AGRect(w-minimapsize-1,h-minimapsize-1,minimapsize,minimapsize),&map);
+  miniMap=new MiniMap(mainView,AGRect(w-minimapsize-1,h-minimapsize-1,minimapsize,minimapsize),&map,AGRect(0,0,10,10));
   mainView->addChild(miniMap);
 
   AGButton *b;

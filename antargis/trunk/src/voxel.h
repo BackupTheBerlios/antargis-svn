@@ -19,6 +19,7 @@
 #define POINTS_PER_TILE 2
 #define TILE_WIDTH 64
 #define TILE_SIZE 32
+#define WATER_HEIGHT 10
 
 #define MAP_SPLINE_ORDER 3
 
@@ -325,6 +326,7 @@ class ComplexVoxelImage;
 
 ComplexVoxelImage *makeTerrainTileComplex(const SplineMapD &m,const SplineMapD &gm,int px,int py);
 VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int py);
+VoxelImage *makeWaterTile();
 
 //#include "cvoxel.h"
 

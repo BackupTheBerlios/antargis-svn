@@ -39,7 +39,6 @@ IsoView::IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
 }
 void IsoView::update()
 {
-  CTRACE;
   clear();
   mEntities.clear();
   mEntitiesInv.clear();
@@ -51,8 +50,6 @@ void IsoView::update()
 
 void IsoView::init()
 {
-  Uint32 t1=SDL_GetTicks();
-
   // screen size
   int mw=width()/64+2;
   int mh=height()/16+4;
@@ -60,8 +57,6 @@ void IsoView::init()
   // 800x600 0<=x<13   0<=y<40
   // 1400x1024 0<=x<23   0<=y<74
 
-  cdebug(mPos);
-  
   int sx=0;
   int sy=0;
   
@@ -83,7 +78,7 @@ void IsoView::init()
             mx+=(POINTS_PER_TILE/2);
 
 //          cdebug("mx:"<<mx<<"//"<<my);
-            
+          // insert terrain tile  
           SplineMapD h=mMap->getPatchH(mx,my);
           SplineMapD g=mMap->getPatchG(mx,my);
 
@@ -93,14 +88,19 @@ void IsoView::init()
           AVItem *i=mTileCache[tile]; // get AVItem from cache
           if(i)
           {
+            i->setVirtualY(-32);
             insert(i);
             mTiles[i]=tile;
           }
+          
+          // insert water tile
+          i=getWaterTile();
+          i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
+          i->setVirtualY(-42);
+          insert(i);
+          
         }
     }
-  Uint32 t2=SDL_GetTicks();
-  std::cout<<"ALL TIME::"<<t2-t1<<std::endl;
-
 
   // insert entities
   std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
@@ -115,9 +115,6 @@ void IsoView::init()
     }
 
 
-
-  t2=SDL_GetTicks();
-  std::cout<<"ALL TIME::"<<t2-t1<<std::endl;
 }
 
 void IsoView::initTileCache()
@@ -182,6 +179,18 @@ VoxelImage *IsoView::getTree()
       i->save(name);
       return i;
     }
+}
+
+VoxelImage *IsoView::getWaterTile()
+{
+  if(!fileExists("water.png"))
+  {
+    VoxelImage *i=makeWaterTile();
+    i->save("water");
+    delete i;
+  }
+  VoxelImage *i=new VoxelImage("water");
+  return i;
 }
 
 VoxelImage *IsoView::getSurface(const SplineMapD &h,const SplineMapD &g)

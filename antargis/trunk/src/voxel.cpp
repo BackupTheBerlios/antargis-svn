@@ -218,7 +218,7 @@ AGSurface &AVItem::getSurface()
 AGPoint AVItem::getPosition(const Pos3D &pPos) const
   {
     // FIXME
-    return AGPoint((int)(mPos.x-pPos.x),(int)(VOXELHEIGHT-(mPos.y-pPos.y)-(mPos.z-pPos.z)/2));
+    return AGPoint((int)(mPos.x-pPos.x),(int)(-(mPos.y-pPos.y)-(mPos.z-pPos.z)/2));
   }
 
 AGRect AVItem::getRect(const Pos3D &pPos) const
@@ -1189,12 +1189,13 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
         float h=m.get(mx,mz);
         for(int y=std::max(0,(int)(h-3));y<h;y++)
           {
-            float a=std::min(1.0f,h-y);
-
-
-            int n=rand()%50;
-
-            v.set(Pos3D(x,y,z),Color(0xAA-n,0xAA-n,0,a));
+            if(y>WATER_HEIGHT)
+            {
+              float a=std::min(1.0f,h-y);
+              int n=rand()%50;
+             
+              v.set(Pos3D(x,y,z),Color(0xAA-n,0xAA-n,0,a));
+            }
           }
 
         // grass above
@@ -1208,8 +1209,10 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
               for(int y=0;y<gh;y++)
                 {
                   float a=1.0f-(y/gh);
+                  int mh=(int)(y+h);
                   //    cdebug(a);
-                  v.set(Pos3D(x,int(y+h),z),Color(0,0xAA,0,a));
+                  if(mh>WATER_HEIGHT)
+                    v.set(Pos3D(x,mh,z),Color(0,0xAA,0,a));
                 }
           }
 
@@ -1251,9 +1254,12 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
      
   */
   }
+  
+ 
   /** add water **/
   
   srand(0);
+  if(false) // skip water
 {  
   float a=18;
 
@@ -1307,8 +1313,58 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
   return new VoxelImage(s,Pos3D(0,0,0));
 }
 
+VoxelImage *makeWaterTile()
+{
+  int w=TILE_WIDTH;
+  FastVoxelView v(w,w*2,Pos3D(0,0,0),true);
 
-AGSurface makeWaterTile()
+ 
+  /** add water **/
+  
+  srand(0);
+{  
+  float a=18;
+
+  SplineMapD wh((int)a,(int)a,3,1,3,true);
+
+  for(int x=0;x<w;x++)
+    for(int z=0;z<w;z++)
+      {
+        float mx=x-z+w/2;
+        float mz=x+z-w/2;
+        
+        mx/=w;
+        mz/=w;
+        while(mx>1)
+          mx-=1;
+        while(mx<0)
+          mx+=1;
+        while(mz>1)
+          mz-=1;
+        while(mz<0)
+          mz+=1;
+
+        float h=wh.get(a*float(mx),a*float(mz))+6;
+
+        for(int y=0;y<h;y++)
+          {
+            float f=std::min(1.0f,h-y);
+            v.set(Pos3D(x,y,z),Color(0,0,0xAA,f));
+          }
+      }
+ } 
+  
+  
+  /** till here */
+
+  AGSurface s= v.getSurface();
+
+  return new VoxelImage(s,Pos3D(0,0,0));
+}
+
+
+
+AGSurface makeWaterTileOld()
 {
   int w=TILE_WIDTH;
   VoxelView v(w,w*2,Pos3D(0,0,0),true);
