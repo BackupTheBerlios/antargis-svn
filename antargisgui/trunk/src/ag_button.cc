@@ -54,6 +54,8 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 
 void AGButton::draw(const AGRect &r)
 {
+  CTRACE;
+  return;
   mBG[mState].draw(r.project(getRect().shrink(borderWidth)));
   //  AGSurface s(getScreen());
 
@@ -72,12 +74,15 @@ void AGButton::draw(const AGRect &r)
 
   bc1=theme->getColor(std::string("borderColor1")+style);
   bc2=theme->getColor(std::string("borderColor2")+style);
-
+{
+  
+  CTRACE;
   AGRect mr=r.project(getRect());
   if(mState==NORMAL || mState==LIGHTED)
     AGDraw::drawBorder(&getScreen(),mr,borderWidth,bc1,bc2);
   else 
     AGDraw::drawBorder(&getScreen(),mr,borderWidth,bc2,bc1);
+    }
   //  drawBackground(r);
 }
 

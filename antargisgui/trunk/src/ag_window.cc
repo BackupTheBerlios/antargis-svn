@@ -7,6 +7,8 @@
 #include "ag_button.h"
 #include "ag_caption.h"
 
+#undef connect
+
 AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle):
   AGTable(pWidget,pRect),mTitle(pTitle)
 {

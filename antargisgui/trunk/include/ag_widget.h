@@ -6,6 +6,7 @@
 
 #ifdef USE_RUBY
 #include "ruby.h"
+#undef connect
 #endif
 #include <list>
 

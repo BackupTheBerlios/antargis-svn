@@ -23,7 +23,7 @@ bool fontEngineInited=false;
 
 TTF_Font *getFont(std::string s,int i)
 {
-  //  TRACE;
+  TRACE;
   FontInfo info;
   info.pName=s;
   info.size=i;
@@ -33,29 +33,37 @@ TTF_Font *getFont(std::string s,int i)
 
   if(!fontEngineFonts[info])
     {
+    TRACE;
       TTF_Font *mFont=0;
       // init library
       if(!fontEngineInited)
 	{
+    TRACE;
 	  fontEngineInited=true;
 	  if(TTF_Init()<0)
 	    {
+    TRACE;
 	      std::cerr<<"Some error occured during initialization of libsdl-TTF"<<std::endl;
 	      return 0;
 	    }
 	  atexit(TTF_Quit);
 
 	}
-
+cdebug("opening");
       // load
       mFont=TTF_OpenFont(s.c_str(),i);
+      cdebug(mFont);
       if(!mFont)
 	{
+      TRACE;
 	  // Try another dir
 	  //  mFont=TTF_OpenFont((GRAPHICS_DIR + pName).c_str(),pSize);
 	  if(!mFont)
 	    mFont=TTF_OpenFont(("c:\\Windows\\Fonts\\"+ s).c_str(),i);
+    if(!mFont)
+              std::cerr<<s<<" Font not found!"<<std::endl;
 	}
+	cdebug(mFont);
       //      std::cerr<<SDL_GetError()<<std::endl;
 
       int renderstyle=TTF_STYLE_NORMAL;
@@ -112,8 +120,10 @@ std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
 
 bool AGFontEngine::renderText (AGGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
 {
+     cdebug(0);
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
+      TRACE;
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       
@@ -145,11 +155,13 @@ bool AGFontEngine::renderText (AGGScreen *pSurface, const AGRect &pClipRect, int
 
   AGTexture t(s);
   
+      TRACE;
   pSurface->blit(t,AGRect(BaseLineX,BaseLineY,s.width(),s.height()));
     
 
   if(fontCache.size()>100)
     {
+      TRACE;
       // clear font cache
       fontCache.clear();
     }
@@ -172,6 +184,7 @@ bool AGFontEngine::renderText (AGGScreen *pSurface, const AGRect &pClipRect, int
 
 int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
 {
+  TRACE;
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
 
   if(!f)
@@ -186,6 +199,7 @@ int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
 
 int AGFontEngine::getHeight(const AGFont &pFont,const std::string &pText)
 {
+  TRACE;
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
 
   if(!f)

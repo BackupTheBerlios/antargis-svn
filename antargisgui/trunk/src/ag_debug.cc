@@ -1,6 +1,16 @@
 #include "ag_debug.h"
 
+#include <fstream>
+#include <iostream>
+
 int D::d=0;
+
+std::ofstream debugOFS("debug.txt");
+
+std::ostream &getDebug()
+{
+  return debugOFS;
+}
 
 /*
 std::vector<std::string> split(const std::string &n,const std::string &h)

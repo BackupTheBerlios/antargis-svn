@@ -33,18 +33,27 @@ void AGWidget::drawAll(const AGRect &r)
   //  TRACE;
   if(!mVisible)
     return;
-
+cdebug(0);
+cdebug(this);
+cdebug(mChildrenDrawFirst);
+cdebug(typeid(*this).name());
   if(!mChildrenDrawFirst)
     draw(r);
+cdebug(1);
   std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
   AGRect r2=r.project(mr);
+cdebug(2);
   for(;i!=mChildren.rend();i++)
     (*i)->drawAll(r2);
+cdebug(3);
   if(mChildrenDrawFirst)
     draw(r);
 
+cdebug(4);
   if(mMenu)
     mMenu->drawAll(r2);
+cdebug(5);
+
 }
 
 AGRect AGWidget::getRect() const
@@ -433,6 +442,7 @@ bool AGWidget::getFocus() const
 
 #ifdef USE_RUBY
 #include "ruby.h"
+#undef connect
 #endif
 void AGWidget_markfunc(void *ptr)
 {

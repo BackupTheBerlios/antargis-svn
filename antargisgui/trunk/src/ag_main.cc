@@ -8,13 +8,13 @@
 #include <SDL.h>
 
 #define FULLSCREEN false
-#define SCREEN_DEPTH 32
+#define SCREEN_DEPTH 24
 
 
 int lastWidth=0;
 int lastHeight=0;
 int lastDepth=0;
-bool openGL=true;
+bool openGL=false;
 bool fullScreen=false;
 
 AGMain *mAGMain=0;
@@ -41,7 +41,7 @@ AGMain::AGMain()
       std::cerr<<"SDL could not get video-info"<<std::endl;
     }
 
-  int videoFlags=SDL_HWPALETTE;
+  int videoFlags=0;//SDL_HWPALETTE;
 
   if(openGL)
     {
@@ -54,7 +54,8 @@ AGMain::AGMain()
 
   if ( videoInfo->hw_available )
     {
-      videoFlags |= SDL_HWSURFACE;
+//      videoFlags |= SDL_HWSURFACE;
+      videoFlags |= SDL_SWSURFACE;
     }
   else
     {
@@ -63,7 +64,7 @@ AGMain::AGMain()
 
   if ( videoInfo->blit_hw )
     {
-      videoFlags |= SDL_HWACCEL;
+//      videoFlags |= SDL_HWACCEL;
     }
 
   lastWidth=w;
@@ -74,6 +75,7 @@ AGMain::AGMain()
   // set video mode
 
   SDL_Surface *ms=SDL_SetVideoMode(w,h,SCREEN_DEPTH,videoFlags);
+  std::cerr<<"ms:"<<ms<<std::endl;
   if(openGL)
     setScreen(new AGGLScreen(w,h));
   else
@@ -83,6 +85,11 @@ AGMain::AGMain()
 
   if(!mDisplay)
     {
+     std::cerr<<"video mode:"<<w<<","<<h<<","<<SCREEN_DEPTH<<std::endl;
+     std::cerr<<"Flags:"<<videoFlags<<std::endl;
+     fprintf(stderr,"%X\n",videoFlags);
+     fprintf(stderr,"sws:%X\n",SDL_SWSURFACE);
+     fprintf(stderr,"pal:%X\n",SDL_HWPALETTE);
       std::cerr<<"Video mode could not be set!"<<std::endl;
     }
 

@@ -25,7 +25,7 @@ AGText::AGText(AGWidget *pParent,const AGPoint &p,const std::string &pText,const
 
 void AGText::draw(const AGRect &r)
 {
-  //  CTRACE;
+  CTRACE;
   //  cdebug(mText);
 
   //  AGSurface screen(getScreen());

@@ -156,3 +156,20 @@ AGColor AGTexture::getPixel(int x,int y) const
   SDL_GetRGBA(c,s->format,&r,&g,&b,&a);
   return AGColor(r,g,b,a);
 }
+
+
+AGSurfaceCache::AGSurfaceCache()
+{
+}
+
+AGSurface AGSurfaceCache::getSurface(const std::string &pFilename)
+{
+}
+
+AGSurfaceCache *mSurfaceCache=0;
+AGSurfaceCache *surfaceCache()
+{
+  if(!mSurfaceCache)
+    mSurfaceCache=new AGSurfaceCache;
+  return mSurfaceCache;
+}

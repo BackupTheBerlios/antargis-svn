@@ -2,6 +2,7 @@
 #define AG_DEBUG_h
 
 #include <iostream>
+#include <fstream>
 #include <assert.h>
 #include <sstream>
 #include <string>
@@ -29,18 +30,21 @@ inline std::string toString(const bool&b)
     return "false";
 }
 
+std::ostream &getDebug();
+
 #define debug(c) mydebug(toString(__FILE__),toString(__LINE__),c)
 
 template<class T>
 inline void mydebug(std::string f,std::string l,const T&t)
 {
-  std::cout<<"File "<<f<<" Line "<<l<<" : "<<t<<std::endl;
+  getDebug()<<"File "<<f<<" Line "<<l<<" : "<<t<<std::endl;
 }
+
 
 using std::endl;
 
-#define cdebug(x) std::cout<<"("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl
-#define ccdebug(x) std::cout<<"("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl
+#define cdebug(x) getDebug()<<"("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl
+#define ccdebug(x) getDebug()<<"("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl
 //#define cdebug(x) std::cout<<"("<<__FILE__<<":"<<__LINE__<<":"<<__func__<<"):"<<x<<endl
 
 
@@ -56,20 +60,20 @@ class D
     m(c)
     {
       indent();
-      std::cout<<"start of:"<<c<<endl;
+      getDebug()<<"start of:"<<c<<endl;
       d++;
     }
   ~D()
     {
       d--;
       indent();
-      std::cout<<"end   of:"<<m<<endl;
+      getDebug()<<"end   of:"<<m<<endl;
     }
 private:
   void indent()
   {
     for(int i=0;i<d;i++)
-      std::cout<<"  ";
+      getDebug()<<"  ";
   }
 };
 
