@@ -629,8 +629,13 @@ float VoxelView::diffuseLight(Pos3D p)
   ny+=has1(p+y+y)-has1(p-y-y);
   nz+=has1(p+z+z)-has1(p-z-z);
   */
-  float f=(64/256.0);//32
-  float a=(16/256.0);//32;
+  
+  
+  // f=32, a=32 for trees
+  // f=64, a=16 for terrain
+  
+  float f=(32/256.0);//32
+  float a=(32/256.0);//32;
 
   //    nz=0;
 

@@ -289,7 +289,10 @@ class AntTree:public AntEntity
         {
           os<<"tree";//_"<<id;
           if(!fileExists("tree.png"))
+          {
             im=makeTree();
+            im->save("tree");
+          }
         }
         else if(typeID==2)
           os<<"tower2";//_"<<id;
