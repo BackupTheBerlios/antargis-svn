@@ -244,8 +244,8 @@ void AVItem::draw(AntargisView *view,const AGRect &r)
 ///////////////////////////////////////////////////////////////////////////////
 
 
-AntargisView::AntargisView(AGWidget *parent,const AGRect &pRect,const Pos3D &pPos):
-    AGWidget(parent,pRect),mPos(pPos)
+AntargisView::AntargisView(AGWidget *parent,const AGRect &pRect,const Pos3D &pPos,bool pOwnsItems):
+    AGWidget(parent,pRect),mPos(pPos),ownsItems(pOwnsItems)
 {}
 
 class CompareAVItem
@@ -299,9 +299,12 @@ void AntargisView::insert(AVItem *v)
 
 void AntargisView::clear()
 {
-  std::vector<AVItem*>::iterator i=mItems.begin();
-  for(;i!=mItems.end();i++)
-    delete *i;
+  if(ownsItems)
+  {
+    std::vector<AVItem*>::iterator i=mItems.begin();
+    for(;i!=mItems.end();i++)
+      delete *i;
+  }
   mItems.clear();
 }
 

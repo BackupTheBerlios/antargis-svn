@@ -20,6 +20,10 @@
 #define TILE_WIDTH 64
 #define TILE_SIZE 32
 
+#define MAP_SPLINE_ORDER 3
+
+//typedef SlineMap<float,3> SplineMapD;
+#define SplineMapD SplineMap<float,4> //int brings some small improvement - but makes problems with water
 
 struct Color
 {
@@ -123,8 +127,9 @@ class AntargisView:public AGWidget
  protected: 
   std::vector<AVItem*> mItems;
   Pos3D mPos;
+  bool ownsItems;
  public:
-  AntargisView(AGWidget *parent,const AGRect &pRect,const Pos3D &pPos);
+  AntargisView(AGWidget *parent,const AGRect &pRect,const Pos3D &pPos,bool pOwnsItems);
   
   AGRect getRect(AVItem *item) const;
 
@@ -317,10 +322,6 @@ class FastVoxelView:public VoxelView
 class ComplexVoxelImage;
 //AGSurface makeTerrainTile(const SplineMap<float> &m,const SplineMap<float> &gm,int px,int py);
 
-#define MAP_SPLINE_ORDER 3
-
-//typedef SlineMap<float,3> SplineMapD;
-#define SplineMapD SplineMap<float,4>
 
 ComplexVoxelImage *makeTerrainTileComplex(const SplineMapD &m,const SplineMapD &gm,int px,int py);
 VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int py);

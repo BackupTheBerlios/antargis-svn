@@ -305,6 +305,9 @@ class AntargisMap
 
     void saveXML(xmlpp::Node &node) const;
     void loadXML(const xmlpp::Node &node);
+    
+    int width() const;
+    int height() const;
 
   };
 

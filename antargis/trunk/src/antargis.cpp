@@ -9,7 +9,6 @@
 #include "ag_theme.h"
 
 #include "myapp.h"
-#include "voxel.h"
 
 #include "map.h"
 #include "view.h"
@@ -38,7 +37,7 @@ class AntargisApp:public MyApp
   EditIsoView *mainView;
   
   public:
-  AntargisApp(int W,int H):map(64,64),w(W),h(H)
+  AntargisApp(int W,int H):map(256,256),w(W),h(H)
   {
     paused=false;
   }
@@ -79,11 +78,12 @@ class AntargisApp:public MyApp
   
   map.insertEntity(hero=new AntHero(Pos2D(200,702),1,"Brutus"));
   
-  //map.insertEntity(new AntMan(Pos2D(200,600),1,hero));
-  //map.insertEntity(new AntMan(Pos2D(230,600),1,hero));
-  
   AntPlayer player(1);
   player.insertHero(hero);
+  
+  
+  
+  
   
 #ifdef EDITING
   mainView=new EditIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);

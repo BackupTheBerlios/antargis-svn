@@ -37,12 +37,13 @@ class Bitmap:public std::vector<T>
 
     const T &operator[](std::pair<int,int> p) const
       {
-        static int maxa=0;
-        if(p.first>maxa)
+        static int maxx=0,maxy=0;
+        /*if(p.first>maxx||p.second>maxy)
           {
-            maxa=p.first;
-            cdebug(maxa);
-          }
+            maxx=std::max(p.first,maxx);
+            maxy=std::max(p.second,maxy);
+            cdebug("maxa:"<<maxx<<";"<<maxy);
+          }*/
         while(p.first>=w)
           p.first-=w;
         while(p.second>=w)

@@ -29,6 +29,14 @@ int AntargisMap::getNewID()
   return maxID++;
 }
 
+int AntargisMap::width() const
+{
+  return mW;
+}
+int AntargisMap::height() const
+{
+  return mH;
+}
 
 float AntargisMap::getHeight(const Pos2D &p) const
   {
