@@ -29,6 +29,14 @@ ok * name-support
   => 2 speeds: Laufen, gehen
 * Unterscheidung Laufen & Gehen !!!
 
+* story-telling
+	- some window popping up, telling some sentences, can be clicked away, but simply clicking on it.
+	- some buttons to go back and forward (history-function)
+	- game is paused while reading
+	- to the left there is a picture of the speaking person (or an image of the book or so)
+	- (later: some browsing facility, which lets you choose scenes)
+	- sentence id: scene=>number(person)=>text
+
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da
 9) HouseEntity
@@ -50,3 +58,9 @@ ok * name-support
 * Editing mode: heightstep (+/-), radius (through buttons or so)
 * saving/loading-dialog
 * integrate winter/summer into AntargisMap
+* Water-animation:
+	- simply subdevide water/land-tiles into land and water, with land being truncated below the height of water - afterwards add water and land tiles.
+* Lighting:
+	- overlay tiles with black rectangles (alpha=0.3 or so), maybe align rectangles (or better quads, or even better 3 points per iso-border) along tiles. maybe even use blending alpha
+	  from 0.3 to 0.8 or so 
+	- this can also be used for fog of war
