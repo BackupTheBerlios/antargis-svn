@@ -1,5 +1,6 @@
 #include "map.h"
 #include "voxel.h"
+#include "fs.h"
 
 /************************************************************************
 * AntargisMap
@@ -16,7 +17,7 @@ AntargisMap *getMap()
 AntargisMap::AntargisMap(int w,int h):
     mHeight(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),1,10,20),
     mGrass(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),2,5,10), // 1 is no-var.
-    mEntities(Rect2D(0,0,w*TILE_SIZE,h*TILE_SIZE))
+    mEntities(Rect2D(0,0,w*TILE_SIZE,h*TILE_SIZE)),mW(w),mH(h)
 {
   myAntargisMap=this;
   paused=false;
@@ -95,13 +96,71 @@ void AntargisMap::editHeightAt(int x,int y,int h,int r)
 {
   for(int i=-r;i<=r;i++)
     for(int j=-r;j<=r;j++)
-      mHeight.edit(x+i,y+j,h*sqrt(i*i+j*j)/r);
+      mHeight.edit(x+i,y+j,(int)(h*sqrt((float)i*i+j*j)/r));
       
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
     (*i)->mapChanged();
 
+}
+
+void AntargisMap::saveXML(xmlpp::Node &node) const
+{
+   std::list<AntEntity*>::const_iterator i=mEntList.begin();
+   for(;i!=mEntList.end();i++)
+   {
+      xmlpp::Node &child=node.newChild((*i)->xmlName());
+      (*i)->saveXML(child);
+   }
+   xmlpp::Node &hmap=node.newChild("heightMap");
+   hmap.set("width",toString(mW));
+   hmap.set("height",toString(mH));
+   std::ostringstream hmaps,gmaps;
+   for(int j=0;j<mH;j++)
+   {
+    for(int i=0;i<mW;i++)
+    {
+      hmaps<<mHeight.getPoint(i,j)<<" ";
+      gmaps<<mGrass.getPoint(i,j)<<" ";
+    }
+      hmaps<<std::endl;
+      gmaps<<std::endl;
+    }
+    cdebug(hmaps.str());
+    hmap.setContent(hmaps.str());
+
+}
+void AntargisMap::loadXML(const xmlpp::Node &node)
+{
+  xmlpp::Node::const_iterator i=node.begin();
+  for(;i!=node.end();i++)
+  {
+    if(i->getName()=="heightMap")
+    {
+      std::cout<<i->getContent()<<std::endl;
+    }
+  }
+}
+
+void AntargisMap::saveMap(const std::string &pFilename)
+{
+  xmlpp::Document d;
+  Node *root=createRootNode(d,"antargisLevel");
+  saveXML(*root);
+  std::string c=toString(d);
+  cdebug(c);
+  saveFile(pFilename,c);
+}
+void AntargisMap::loadMap(const std::string &pFilename)
+{
+  Document d;
+  std::string c=loadFile(pFilename);
+  if(c.length())
+  {
+    d.parse_memory(c);
+    loadXML(d.root());
+  }
 }
 
 
@@ -113,6 +172,18 @@ AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy
     {}
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(true)
     {}
+    
+void AntEntity::saveXML(xmlpp::Node &node) const
+{
+  myxmlpp::Node &child=node.newChild("position");
+  mPos.saveXML(child);
+  node.set("energy",toString(mEnergy));
+  node.set("healSpeed",toString(mHealSpeed));
+  node.set("onGround",toString(onGround));
+}
+void AntEntity::loadXML(const xmlpp::Node &node)
+{
+}
 
 Pos3D AntEntity::getPos3D() const
   {

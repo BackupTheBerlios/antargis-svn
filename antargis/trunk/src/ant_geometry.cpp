@@ -1,4 +1,5 @@
 #include "ant_geometry.h"
+#include "store.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Pos3D
@@ -26,6 +27,20 @@ Pos3D Pos3D::operator*(float p) const
 {
   return Pos3D(x*p,y*p,z*p);
 }
+
+void Pos3D::saveXML(xmlpp::Node &pNode) const
+{
+  pNode.set("x",toString(x));
+  pNode.set("y",toString(y));
+  pNode.set("z",toString(z));
+}
+void Pos3D::loadXML(const xmlpp::Node &pNode)
+{
+  x=toFloat(pNode.get("x"));
+  y=toFloat(pNode.get("y"));
+  z=toFloat(pNode.get("z"));
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

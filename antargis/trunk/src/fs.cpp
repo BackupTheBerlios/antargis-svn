@@ -19,6 +19,12 @@ std::string loadFile(const std::string &pName)
   //  TRACE;
   assert(FSinited);
   
+  if(!fileExists(pName))
+  {
+    std::cerr<<"File not "<<pName<<" does not exist!"<<std::endl;
+    return "";
+  }
+  
   PHYSFS_file *f=PHYSFS_openRead(pName.c_str());
   std::string o;
 

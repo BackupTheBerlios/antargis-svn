@@ -3,12 +3,12 @@
 void drawBall(FastVoxelView &vv,Pos3D mp,float s,Color c)
 {
   int x,y,z;
-  int x0=mp.x-s;
-  int y0=mp.y-s;
-  int z0=mp.z-s;
-  int x1=mp.x+s;
-  int y1=mp.y+s;
-  int z1=mp.z+s;
+  int x0=(int)(mp.x-s);
+  int y0=(int)(mp.y-s);
+  int z0=(int)(mp.z-s);
+  int x1=(int)(mp.x+s);
+  int y1=(int)(mp.y+s);
+  int z1=(int)(mp.z+s);
 
   float x5=-s;//+(int(-s)+s);
   float y5=-s;
@@ -16,7 +16,7 @@ void drawBall(FastVoxelView &vv,Pos3D mp,float s,Color c)
 
   float xd,yd,zd;
 
-  float s2=s*s;
+//  float s2=s*s;
   for(x=x0,xd=x5;x<=x1;x++,xd++)
     for(y=y0,yd=y5;y<=y1;y++,yd++)
       for(z=z0,zd=z5;z<=z1;z++,zd++)
@@ -139,7 +139,7 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h)
 
   tlist.push_back(t);
 
-  int rw=h/4;
+  int rw=(int)(h/4);
 
   float angle=M_PI/1.5; // 30 degrees
 
@@ -167,9 +167,6 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h)
 
 
 	      r=r*rw;
-
-	      int mi=i+1;
-	      // c=Color(mi&1,(mi>>1)&1,(mi>>2)&1);
 
 	      /*	      drawBall(vv,k->p1,4,c);
 	      drawBall(vv,k->p2,3,c);
@@ -205,7 +202,7 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h)
 	    }
 
 	}
-      rw*=0.9;
+      rw=(int)(rw*0.9);
       tlist.clear();
       cdebug(nlist.size());
       tlist=nlist;

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "serialize.h"
-
+#include "xml.h"
 
 struct Pos3D
 {
@@ -39,6 +39,8 @@ struct Pos3D
   {
     return x==p.x && y==p.y && z==p.z;
   }
+  void saveXML(xmlpp::Node &pNode) const;
+  void loadXML(const xmlpp::Node &pNode);
 };
 
 

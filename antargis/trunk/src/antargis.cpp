@@ -17,8 +17,6 @@
 #include <exception>
 #include <iostream>
 
-#define EDITING
-
 void setTheme()
 {
   AGTheme *t=getTheme();
@@ -44,14 +42,14 @@ class AntargisApp:public MyApp
   }
   void run()
   {
-  /*
+  
   map.insertEntity(new AntTree(Pos2D(100,100),0));
   map.insertEntity(new AntTree(Pos2D(200,102),0));
   map.insertEntity(new AntTree(Pos2D(300,402),0));
   
   map.insertEntity(new AntTree(Pos2D(600,402),1));
   map.insertEntity(new AntTree(Pos2D(400,902),2));
-  */
+  
   AntHero *hero;
   
   map.insertEntity(hero=new AntHero(Pos2D(700,702),0));
@@ -86,14 +84,17 @@ class AntargisApp:public MyApp
   // Save
   av->addChild(b=new AGButton(av,AGRect(0,100,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/save.png"),false);
+  b->sigClick.connect(slot(this,&AntargisApp::saveClick));
   
   // load
   av->addChild(b=new AGButton(av,AGRect(0,150,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/load.png"),false);
+  b->sigClick.connect(slot(this,&AntargisApp::loadClick));
 
   // any
   av->addChild(b=new AGButton(av,AGRect(1023-50,0,50,50),""));
   b->setSurface(getScreen().loadSurface("data/door.png"),false);
+  b->sigClick.connect(slot(this,&AntargisApp::quitClick));
   
   // Pause
   av->addChild(b=new AGButton(av,AGRect(1023-100,0,50,50),""));
@@ -106,6 +107,21 @@ class AntargisApp:public MyApp
   
     MyApp::run();
   }
+  bool saveClick(const char *pName,const AGEvent *e)
+  {
+    getMap()->saveMap("dummy.antlvl");
+    return true;
+  }
+  bool loadClick(const char *pName,const AGEvent *e)
+  {
+    getMap()->loadMap("dummy.antlvl");
+    return true;
+  }
+  bool quitClick(const char *pName,const AGEvent *e)
+  {
+    tryQuit();
+    return true;
+  }
   bool pause(const char *pName,const AGEvent *e)
   {
     CTRACE;
@@ -116,6 +132,7 @@ class AntargisApp:public MyApp
       getMap()->unpause();
     return false;
   }
+  
 };
 
 int main(int argc,char *argv[])

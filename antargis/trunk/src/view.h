@@ -255,7 +255,7 @@ class IsoView:public AntargisView
           ar.y-=10;
           ar.h=6;
           getScreen().drawRect(ar,AGColor(0xFF,0,0)); // first red
-          ar.w*=k->second->getEnergy();
+          ar.w=(short)(ar.w*k->second->getEnergy());
           getScreen().drawRect(ar,AGColor(0,0xFF,0)); // overpaint with green
         }
 
@@ -451,7 +451,7 @@ class EditIsoView: public IsoView
        p2.x+=2;
        cdebug("p2:"<<p2.x<<","<<p2.y);
        
-       getMap()->editHeightAt(p2.x,p2.y,30,1);
+       getMap()->editHeightAt((int)p2.x,(int)p2.y,30,1);
       
     }
   };

@@ -41,6 +41,11 @@ R convert(Filename f)
   return convert<R>(loadFile(f));
 }
 
+inline float toFloat(const std::string &s)
+{
+  return atof(s.c_str());
+}
+
 /*template<class T>
 std::string toString(const T&t)
 {

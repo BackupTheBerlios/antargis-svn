@@ -10,8 +10,9 @@ ok => 6a) Figuren einfärben
 ok * Kämpfen - abwehren
 ok * Healing
 canceled * LOD-Map:
-
 canceled * reduced SplineMap - quadratic patches ? (look at SystemRequirements)
+
+* XML-InString loading
 * SplineMap-saving/loading
 * show Editing-point
 * Water

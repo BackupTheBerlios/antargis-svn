@@ -248,6 +248,16 @@ class SplineMap
         return md5(os.str());
       }
       
+    T getPoint(int x,int y) const
+    {
+      return values[P(x,y)];
+    }
+    
+    void setPoint(int x,int y,const T&t)
+    {
+      values[P(x,y)]=t;
+    }
+      
     void edit(int x,int y,int v)
     {
       cdebug("edit:"<<x<<","<<y<<","<<v);

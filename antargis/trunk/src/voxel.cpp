@@ -1098,7 +1098,7 @@ AGSurface ball()
           int mx=x-w/2;
           int my=y-w/2;
           int mz=z-w/2;
-          float d=sqrt(mx*mx+my*my+mz*mz);
+          float d=sqrt((float)(mx*mx+my*my+mz*mz));
           if(d<r+3)
             {
               float a=r-d;

@@ -5,6 +5,8 @@
 #include "quadtree.h"
 #include "voxel.h"
 
+#include "xml.h"
+
 #include <set>
 #include <vector>
 #include <algorithm>
@@ -81,6 +83,14 @@ class AntEntity
     AntEntity(const Pos2D &p);
     Pos3D getPos3D() const;
     Pos2D getPos2D() const;
+    
+    virtual std::string xmlName() const
+    {
+      return "antEntity";
+    }
+    
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
 
     void setJob(Job *pJob);
 
@@ -152,6 +162,7 @@ class AntargisMap
       <AntPlayer*> mPlayers;
       
     bool paused;
+    int mW,mH;
       
   public:
     AntargisMap(int w,int h);
@@ -194,6 +205,13 @@ class AntargisMap
     {
       paused=false;
     }
+    
+    void saveMap(const std::string &pFilename);
+    void loadMap(const std::string &pFilename);
+    
+    void saveXML(xmlpp::Node &node) const;
+    void loadXML(const xmlpp::Node &node);
+    
   };
 
 AntargisMap *getMap();
@@ -225,6 +243,10 @@ class AntTree:public AntEntity
         im->setVirtualY(32);
         return im;
       }
+    virtual std::string xmlName() const
+    {
+      return "antTree";
+    }
   };
 
 class AntMan;
@@ -271,6 +293,11 @@ class AntHero:public AntEntity
       else
         return mHealSpeed;
     }
+    virtual std::string xmlName() const
+    {
+      return "antHero";
+    }
+
   };
 
 class AntMan: public AntEntity
@@ -331,6 +358,11 @@ class AntMan: public AntEntity
       else
         return mHealSpeed;
     }
+    virtual std::string xmlName() const
+    {
+      return "antMan";
+    }
+
   };
 
 // Computer player
