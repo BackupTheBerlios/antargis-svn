@@ -17,6 +17,7 @@ ok * SplineMap-saving/loading
 ok * show Editing-point
 ok * Water
 ok * Editing on/off toggling
+ok * added snow/rain
 * correct saving of players
 
 7) Schafe/Futteranzeige

@@ -24,6 +24,129 @@ float getTimeDiff()
   return myTimeDiff;
 }
 
+class Rain
+{
+  std::list<AGPoint> rainSprites;
+  std::list<AGPoint> snowSprites;
+  AGTexture rainTexture,snowTexture;
+  float rainSpeed,snowSpeed;
+  Uint32 last;
+  int w,h;
+  int mAmount;
+  float mSnow;
+  
+  public:
+  Rain(int W,int H,int amount):w(W),h(H),mAmount(amount)
+  {
+      AGSurface s=getScreen().loadSurface("data/raindrop.png");
+      rainTexture=AGTexture(s);
+      s=getScreen().loadSurface("data/snow.png");
+      snowTexture=AGTexture(s);
+      
+      mSnow=0.0;
+      
+      last=SDL_GetTicks();
+      
+      rainSpeed=250;
+      snowSpeed=150;
+      
+      addRain(amount,true);
+      
+  }
+  virtual ~Rain()
+  {
+  }
+  
+  void addRain(int amount,bool r=false)
+  {
+    if(amount>30)
+      r=true;
+    for(int i=0;i<amount;i++)
+    {
+      if(rand()%100<100*mSnow)
+      {
+        // snow
+        if(r)
+          snowSprites.push_back(AGPoint(rand()%w,rand()%h));
+        else if(rand()%2)
+          snowSprites.push_back(AGPoint(rand()%w,-16));
+        else
+          snowSprites.push_back(AGPoint(-16,rand()%h));
+      }
+      else
+      {
+        // rain
+        if(r)
+          rainSprites.push_back(AGPoint(rand()%w,rand()%h));
+        else if(rand()%2)
+          rainSprites.push_back(AGPoint(rand()%w,-16));
+        else
+          rainSprites.push_back(AGPoint(-16,rand()%h));
+      }
+    }
+  }
+  
+  virtual void draw(const AGRect&r)
+  {
+    move();
+    std::list<AGPoint>::iterator i=rainSprites.begin();
+    for(;i!=rainSprites.end();i++)
+    {
+      getScreen().blit(rainTexture,AGRect(i->x,i->y,16,16));
+    }
+    
+    i=snowSprites.begin();
+    for(;i!=snowSprites.end();i++)
+    {
+      getScreen().blit(snowTexture,AGRect(i->x,i->y,16,16));
+    }
+  }
+  void move()
+  {
+    Uint32 now=SDL_GetTicks();
+    Uint32 diff=now-last;
+    
+    std::list<AGPoint>::iterator i=rainSprites.begin();
+    for(;i!=rainSprites.end();)
+    {
+      Uint32 add=rainSpeed*diff*0.001;
+      i->x+=add;
+      i->y+=add;
+    
+      if(i->x>w || i->y>h)
+      {
+        // delete and add new
+        i=rainSprites.erase(i);
+      }
+      else
+        i++;
+    }
+    
+    i=snowSprites.begin();
+    for(;i!=snowSprites.end();)
+    {
+      Uint32 add=snowSpeed*diff*0.001;
+      i->x+=add;
+      i->y+=add;
+    
+      if(i->x>w || i->y>h)
+      {
+        // delete and add new
+        i=snowSprites.erase(i);
+      }
+      else
+        i++;
+    }
+
+    size_t s=snowSprites.size()+rainSprites.size();
+    if(s<mAmount)
+      addRain(mAmount-s);
+
+        
+    last=now;
+  }
+};
+
 class IsoView:public AntargisView
   {
   public:
@@ -37,6 +160,7 @@ class IsoView:public AntargisView
     std::map<AVItem*,IVTile> mTiles;
     float mTime;
     bool inited;
+    Rain mRain;
 
   protected:
     std::map<AVItem*,AntEntity*> mEntities;
@@ -46,7 +170,7 @@ class IsoView:public AntargisView
 
   public:
     IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
-        AntargisView(parent,r,p),mMap(map)
+        AntargisView(parent,r,p),mMap(map),mRain(r.w,r.h,600)
     {
       cdebug("IsoView-Rect:"<<r);
       inited=false;
@@ -268,7 +392,8 @@ class IsoView:public AntargisView
           getScreen().drawRect(ar,AGColor(0,0xFF,0)); // overpaint with green
         }
 
-
+      // overlay rain
+      mRain.draw(r);
     }
 
     void updatePositions()
