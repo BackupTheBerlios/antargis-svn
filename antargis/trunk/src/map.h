@@ -79,6 +79,7 @@ class AntEntity
     bool onGround;
     
   public:
+    AntEntity();
     AntEntity(const Pos3D &p);
     AntEntity(const Pos2D &p);
     Pos3D getPos3D() const;
@@ -185,6 +186,8 @@ class AntargisMap
     Pos3D getPos3D(const Pos2D &p) const;
 
     void move(float pTime);
+    
+    void clear();
 
     void addPlayer(AntPlayer *p)
     {
@@ -219,26 +222,29 @@ AntargisMap *getMap();
 
 class AntTree:public AntEntity
   {
-    int id;
+    int typeID;
   public:
-    AntTree(const Pos2D &p,int ID):AntEntity(p),id(ID)
+    AntTree():typeID(0)
+    {
+    }
+    AntTree(const Pos2D &p,int ID):AntEntity(p),typeID(ID)
     {}
     VoxelImage *getSurface() const
       {
         std::ostringstream os;
-        if(id==0)
+        if(typeID==0)
           os<<"tree";//_"<<id;
-        else if(id==2)
+        else if(typeID==2)
           os<<"tower1a";//_"<<id;
-        else if(id==1)
+        else if(typeID==1)
           os<<"house1b";
-        else if(id==3)
+        else if(typeID==3)
           os<<"man1dl";
         VoxelImage *im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
         im->setPosition(mPos);
-        if(id==1)
+        if(typeID==1)
           im->setCenter(Pos2D(100,150)+Pos2D(0,64));
-        if(id==2||id==3)
+        if(typeID==2||typeID==3)
           im->setCenter(Pos2D(100,150)+Pos2D(0,64));
         im->setVirtualY(32);
         return im;
@@ -247,24 +253,29 @@ class AntTree:public AntEntity
     {
       return "antTree";
     }
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
   };
 
 class AntMan;
 
 class AntHero:public AntEntity
   {
-    int id;
+    int typeID;
 
     std::set
       <AntMan*> mMen;
 
   public:
+    AntHero():typeID(0)
+    {
+    }
     AntHero(const Pos2D &p,int ID);
     virtual ~AntHero();
     VoxelImage *getSurface() const;
     void signUp(AntMan *man);
 
-    int getID() const;
+    int getTypeID() const;
     void fightHero(AntHero *h);
     void goTo(int prio,const Pos2D &pos);
     void discard(AntMan *man);
@@ -297,15 +308,20 @@ class AntHero:public AntEntity
     {
       return "antHero";
     }
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
 
   };
 
 class AntMan: public AntEntity
   {
-    int id;
+    int typeID;
     AntHero *mHero;
   public:
-    AntMan(const Pos2D &p,int ID,AntHero *pHero):AntEntity(p),id(ID),mHero(pHero)
+    AntMan():typeID(0),mHero(0)
+    {
+    }
+    AntMan(const Pos2D &p,int pTypeID,AntHero *pHero):AntEntity(p),typeID(pTypeID),mHero(pHero)
     {
       if(pHero)
         pHero->signUp(this);
@@ -330,7 +346,7 @@ class AntMan: public AntEntity
     VoxelImage *getSurface() const
       {
         std::ostringstream os;
-        if(id==0)
+        if(typeID==0)
           os<<"man1dl";
         else
           os<<"man2dl";
@@ -362,6 +378,8 @@ class AntMan: public AntEntity
     {
       return "antMan";
     }
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
 
   };
 
@@ -370,6 +388,7 @@ class AntPlayer
   {
     std::set
       <AntHero*> mHeroes;
+    int id;
   public:
     AntPlayer()
     {
@@ -422,6 +441,8 @@ class AntPlayer
       diff=diff.normalized()*distance; // flee by 100 pixels
       h->goTo(p,h->getPos2D()+diff);
     }
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
   };
 
 #endif

@@ -44,6 +44,24 @@ class QuadTree
             }
           ts.insert(t);
         }
+        
+        void clear()
+        {
+          typename std::list<Node*>::iterator i=children.begin();
+          for(;i!=children.end();i++)
+          {
+            (*i)->clear();
+            delete *i;
+          }
+          children.clear();
+          typename std::set<T*>::iterator j=ts.begin();
+          for(;j!=ts.end();j++)
+          {
+            delete *j;
+          }
+          ts.clear();
+          
+        }
 
         void split()
         {
@@ -113,6 +131,11 @@ class QuadTree
         root->remove
         (t);
       }
+      
+    void clear()
+    {
+      root->clear();
+    }
   };
 
 #endif

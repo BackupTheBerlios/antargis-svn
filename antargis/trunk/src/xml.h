@@ -14,7 +14,10 @@ class ParserException
     std::string s;
   public:
     ParserException(std::string u):s(u)
-    {}
+    {
+      CTRACE;
+      cdebug("u:"<<u);
+    }
 
     std::string what()
     {
@@ -339,23 +342,33 @@ class Node
 
     void parseContents(ParserInfo &info)
     {
-      D deb("void parseContents(ParserInfo &info)");
       std::string la=info.getNext2();
-      while(la.length())
+      bool contentChanged=true;
+      
+      while(la.length() || contentChanged==true)
         {
           if(la[1]=='/')
             break;
           if(la[0]!='<')
-            throw ParserException("ERROR in parseContents");
-          mNodes.push_back(Node());
-          mNodes.back().parse(info);
-          la=info.getNext2();
+          {
+            mContent+=la[0];
+            info.inc(); // inc only by one
+            la=info.getNext2(); 
+            contentChanged=true;
+            //throw ParserException("ERROR in parseContents");
+          }
+          else
+          {
+            mNodes.push_back(Node());
+            mNodes.back().parse(info);
+            la=info.getNext2();
+            contentChanged=false;
+          }
         }
     }
 
     void parse(ParserInfo &info)
     {
-      D deb("void parse(ParserInfo &info)");
       parseChar(info,'<');
       mName=parseName(info);
       parseArguments(info);

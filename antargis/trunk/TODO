@@ -12,12 +12,13 @@ ok * Healing
 canceled * LOD-Map:
 canceled * reduced SplineMap - quadratic patches ? (look at SystemRequirements)
 
-* XML-InString loading
-* SplineMap-saving/loading
+ok * XML-InString loading
+ok * SplineMap-saving/loading
 * show Editing-point
 * Water
 * Editing on/off toggling
 * Editing mode: heightstep (+/-), radius (through buttons or so)
+* saving/loading-dialog
 
 7) Schafe/Futteranzeige
 8) Sterben/Abhauen wenn kein Futter da

@@ -68,12 +68,13 @@ void AntargisMap::move(float pTime)
   if(paused)
     return;
   // first move computer-players (they decide what to do)
-  
-  std::set<AntPlayer*>::iterator j=mPlayers.begin();
+
+  std::set
+    <AntPlayer*>::iterator j=mPlayers.begin();
   for(;j!=mPlayers.end();j++)
     (*j)->move(pTime);
 
-  
+
   // now move all entities
 
   std::list<AntEntity*>::iterator i=mEntList.begin();
@@ -85,11 +86,12 @@ void AntargisMap::move(float pTime)
 
 void AntargisMap::killHero(AntHero *h)
 {
-    std::set<AntPlayer*>::iterator i=mPlayers.begin();
-    
-    for(;i!=mPlayers.end();i++)
-      (*i)->removeHero(h);
-  
+  std::set
+    <AntPlayer*>::iterator i=mPlayers.begin();
+
+  for(;i!=mPlayers.end();i++)
+    (*i)->removeHero(h);
+
 }
 
 void AntargisMap::editHeightAt(int x,int y,int h,int r)
@@ -97,7 +99,7 @@ void AntargisMap::editHeightAt(int x,int y,int h,int r)
   for(int i=-r;i<=r;i++)
     for(int j=-r;j<=r;j++)
       mHeight.edit(x+i,y+j,(int)(h*sqrt((float)i*i+j*j)/r));
-      
+
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
@@ -106,41 +108,78 @@ void AntargisMap::editHeightAt(int x,int y,int h,int r)
 }
 
 void AntargisMap::saveXML(xmlpp::Node &node) const
-{
-   std::list<AntEntity*>::const_iterator i=mEntList.begin();
-   for(;i!=mEntList.end();i++)
-   {
-      xmlpp::Node &child=node.newChild((*i)->xmlName());
-      (*i)->saveXML(child);
-   }
-   xmlpp::Node &hmap=node.newChild("heightMap");
-   hmap.set("width",toString(mW));
-   hmap.set("height",toString(mH));
-   std::ostringstream hmaps,gmaps;
-   for(int j=0;j<mH;j++)
-   {
-    for(int i=0;i<mW;i++)
-    {
-      hmaps<<mHeight.getPoint(i,j)<<" ";
-      gmaps<<mGrass.getPoint(i,j)<<" ";
-    }
-      hmaps<<std::endl;
-      gmaps<<std::endl;
-    }
+  {
+    std::list<AntEntity*>::const_iterator i=mEntList.begin();
+    for(;i!=mEntList.end();i++)
+      {
+        xmlpp::Node &child=node.newChild((*i)->xmlName());
+        (*i)->saveXML(child);
+      }
+    xmlpp::Node &hmap=node.newChild("heightMap");
+    hmap.set("width",toString(mW));
+    hmap.set("height",toString(mH));
+    std::ostringstream hmaps,gmaps;
+    for(int j=0;j<mH;j++)
+      {
+        for(int i=0;i<mW;i++)
+          {
+            hmaps<<mHeight.getPoint(i,j)<<" ";
+            gmaps<<mGrass.getPoint(i,j)<<" ";
+          }
+        hmaps<<std::endl;
+        gmaps<<std::endl;
+      }
     cdebug(hmaps.str());
     hmap.setContent(hmaps.str());
 
-}
+  }
 void AntargisMap::loadXML(const xmlpp::Node &node)
 {
   xmlpp::Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
-  {
-    if(i->getName()=="heightMap")
     {
-      std::cout<<i->getContent()<<std::endl;
+      AntEntity *e=0;
+      if(i->getName()=="heightMap")
+        {
+          istringstream hmaps;
+          hmaps.str(i->getContent());
+          // parse height map
+          float h;
+          for(int j=0;j<mH;j++)
+            {
+              for(int i=0;i<mW;i++)
+                {
+                  hmaps>>h;
+                  mHeight.setPoint(i,j,h);
+                }
+            }
+        }
+       else if(i->getName()=="antTree")
+        e=new AntTree;
+       else if(i->getName()=="antHero")
+        e=new AntHero;
+       else if(i->getName()=="antMan")
+        e=new AntMan;
+       
+       if(e)
+       {
+        e->loadXML(*i);
+        insertEntity(e);
+       }
+        
     }
-  }
+  // tell entities, that map has changed
+  std::list<AntEntity*>::iterator k=mEntList.begin();
+  for(;k!=mEntList.end();k++)
+    (*k)->mapChanged();
+}
+
+void AntargisMap::clear()
+{
+  CTRACE;
+  mPlayers.clear();
+  mEntities.clear();
+  mEntList.clear();
 }
 
 void AntargisMap::saveMap(const std::string &pFilename)
@@ -154,35 +193,48 @@ void AntargisMap::saveMap(const std::string &pFilename)
 }
 void AntargisMap::loadMap(const std::string &pFilename)
 {
+  CTRACE;
   Document d;
   std::string c=loadFile(pFilename);
   if(c.length())
-  {
-    d.parse_memory(c);
-    loadXML(d.root());
-  }
+    {
+      d.parse_memory(c);
+      clear();
+      loadXML(d.root());
+    }
 }
 
 
 /*****************************************************************
 * AntEntity
 *****************************************************************/
-    
+
 AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(false)
-    {}
+{}
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(1.0),onGround(true)
-    {}
-    
-void AntEntity::saveXML(xmlpp::Node &node) const
+{}
+
+AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false)
 {
-  myxmlpp::Node &child=node.newChild("position");
-  mPos.saveXML(child);
-  node.set("energy",toString(mEnergy));
-  node.set("healSpeed",toString(mHealSpeed));
-  node.set("onGround",toString(onGround));
 }
+
+void AntEntity::saveXML(xmlpp::Node &node) const
+  {
+    myxmlpp::Node &child=node.newChild("position");
+    mPos.saveXML(child);
+    node.set("energy",toString(mEnergy));
+    node.set("healSpeed",toString(mHealSpeed));
+    node.set("onGround",toString(onGround));
+  }
 void AntEntity::loadXML(const xmlpp::Node &node)
 {
+  mEnergy=toFloat(node.get("energy"));
+  mHealSpeed=toFloat(node.get("healSpeed"));
+  onGround=toBool(node.get("onGround"));
+  assert(onGround);
+  xmlpp::Node::const_iterator i=node.begin();
+  for(;i!=node.end();i++)
+    mPos.loadXML(*i);
 }
 
 Pos3D AntEntity::getPos3D() const
@@ -202,15 +254,15 @@ void AntEntity::setPos2D(const Pos2D &p)
 void AntEntity::setJob(Job *pJob)
 {
   if(mJob)
-  {
-    if((*mJob)<=(*pJob))
-      delete mJob;
-    else
     {
-      delete pJob;
-      return;
+      if((*mJob)<=(*pJob))
+        delete mJob;
+      else
+        {
+          delete pJob;
+          return;
+        }
     }
-  }
   mJob=0;
   if(mEnergy>0.0)
     mJob=pJob;
@@ -229,11 +281,11 @@ void AntEntity::move(float pTime)
       mJobFinished=false;
     }
   else if(mEnergy>0.0)
-  {
-    mEnergy+=pTime*getHealSpeed();
-    if(mEnergy>1.0)
-      mEnergy=1.0;
-  }
+    {
+      mEnergy+=pTime*getHealSpeed();
+      if(mEnergy>1.0)
+        mEnergy=1.0;
+    }
   if(mJob)
     mJob->move(this,pTime);
 }
@@ -249,11 +301,11 @@ void AntEntity::jobFinished()
     mJobFinished=true;
 }
 
-  void AntEntity::mapChanged()
-  {
-    if(onGround)
-      mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
-  }
+void AntEntity::mapChanged()
+{
+  if(onGround)
+    mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
+}
 
 
 /************************************************************************
@@ -301,10 +353,26 @@ void FightJob::move(AntEntity *e,float ptime)
     }
 }
 
+
+/************************************************************************
+* AntTree
+************************************************************************/
+
+void AntTree::saveXML(xmlpp::Node &node) const
+{
+  AntEntity::saveXML(node);
+  node.set("typeID",toString(typeID));
+}
+void AntTree::loadXML(const xmlpp::Node &node)
+{
+  AntEntity::loadXML(node);
+  typeID=toInt(node.get("typeID"));
+}
+
 /************************************************************************
 * AntHero
 ************************************************************************/
-AntHero::AntHero(const Pos2D &p,int ID):AntEntity(p),id(ID)
+AntHero::AntHero(const Pos2D &p,int pTypeID):AntEntity(p),typeID(pTypeID)
 {}
 AntHero::~AntHero()
 {
@@ -312,13 +380,13 @@ AntHero::~AntHero()
     <AntMan*>::iterator i=mMen.begin();
   for(;i!=mMen.end();i++)
     (*i)->discard(this);
-    
+
   getMap()->killHero(this);
 }
 VoxelImage *AntHero::getSurface() const
   {
     std::ostringstream os;
-    if(id==0)
+    if(typeID==0)
       os<<"hero1dl";
     else
       os<<"hero2dl";
@@ -329,9 +397,9 @@ VoxelImage *AntHero::getSurface() const
     return im;
   }
 
-int AntHero::getID() const
+int AntHero::getTypeID() const
   {
-    return id;
+    return typeID;
   }
 
 
@@ -397,22 +465,53 @@ float AntHero::calcTroupStrength() const
       s+=(*i)->getEnergy();
     return s;
   }
-    
-    AntHero *AntHero::fights()
+
+AntHero *AntHero::fights()
+{
+  if(mJob)
     {
-      if(mJob)
-      {
-        FightJob *f=dynamic_cast<FightJob*>(mJob);
-        if(f)
+      FightJob *f=dynamic_cast<FightJob*>(mJob);
+      if(f)
         {
           return dynamic_cast<AntHero*>(f->getTarget());
         }
-      }
-      return 0;
     }
+  return 0;
+}
 
-  
-  
+void AntHero::saveXML(xmlpp::Node &node) const
+{
+  AntEntity::saveXML(node);
+  node.set("typeID",toString(typeID));
+}
+void AntHero::loadXML(const xmlpp::Node &node)
+{
+  AntEntity::loadXML(node);
+  typeID=toInt(node.get("typeID"));
+}
+
+
 /************************************************************************
 * AntMan
 ************************************************************************/
+void AntMan::saveXML(xmlpp::Node &node) const
+{
+  AntEntity::saveXML(node);
+  node.set("typeID",toString(typeID));
+}
+void AntMan::loadXML(const xmlpp::Node &node)
+{
+  AntEntity::loadXML(node);
+  typeID=toInt(node.get("typeID"));
+}
+
+/************************************************************************
+* AntPlayer
+************************************************************************/
+void AntPlayer::saveXML(xmlpp::Node &node) const
+{
+}
+void AntPlayer::loadXML(const xmlpp::Node &node)
+{
+}
+

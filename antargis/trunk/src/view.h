@@ -52,6 +52,7 @@ class IsoView:public AntargisView
     }
     void update()
     {
+      CTRACE;
       clear();
       mEntities.clear();
       mEntitiesInv.clear();
@@ -63,6 +64,7 @@ class IsoView:public AntargisView
   private:
     void init()
     {
+      CTRACE;
       Uint32 t1=SDL_GetTicks();
 
       int mw=width()/64+2;
@@ -400,7 +402,7 @@ class CompleteIsoView: public IsoView
     bool isMyHero(AntHero *h)
     {
       if(h)
-        if(h->getID()==0)
+        if(h->getTypeID()==0)
           return true;
       return false;
     }

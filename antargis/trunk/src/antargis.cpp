@@ -35,6 +35,8 @@ class AntargisApp:public MyApp
   AntargisMap map;
   int w,h;
   bool paused;
+  EditIsoView *mainView;
+  
   public:
   AntargisApp(int W,int H):map(64,64),w(W),h(H)
   {
@@ -68,46 +70,46 @@ class AntargisApp:public MyApp
   player.insertHero(hero);
   
 #ifdef EDITING
-  EditIsoView *av=new EditIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
+  mainView=new EditIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
   map.pause();
 #else
-  CompleteIsoView *av=new CompleteIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
+  mainView=new CompleteIsoView(0,AGRect(0,0,w,h),Pos3D(0,0,0),&map);
 #endif  
   AGButton *b;
-  av->addChild(b=new AGButton(av,AGRect(0,0,50,50),"test Window"));
+  mainView->addChild(b=new AGButton(mainView,AGRect(0,0,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/pointer1.png"),false);
   
   // Edit
-  av->addChild(b=new AGButton(av,AGRect(0,50,50,50),"test Window"));
+  mainView->addChild(b=new AGButton(mainView,AGRect(0,50,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/edit.png"),false);
   
-  // Save
-  av->addChild(b=new AGButton(av,AGRect(0,100,50,50),"test Window"));
+  // SmainViewe
+  mainView->addChild(b=new AGButton(mainView,AGRect(0,100,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/save.png"),false);
-  b->sigClick.connect(slot(this,&AntargisApp::saveClick));
+  b->sigClick.connect(slot(this,&AntargisApp::smainVieweClick));
   
   // load
-  av->addChild(b=new AGButton(av,AGRect(0,150,50,50),"test Window"));
+  mainView->addChild(b=new AGButton(mainView,AGRect(0,150,50,50),"test Window"));
   b->setSurface(getScreen().loadSurface("data/load.png"),false);
   b->sigClick.connect(slot(this,&AntargisApp::loadClick));
 
   // any
-  av->addChild(b=new AGButton(av,AGRect(1023-50,0,50,50),""));
+  mainView->addChild(b=new AGButton(mainView,AGRect(1023-50,0,50,50),""));
   b->setSurface(getScreen().loadSurface("data/door.png"),false);
   b->sigClick.connect(slot(this,&AntargisApp::quitClick));
   
   // Pause
-  av->addChild(b=new AGButton(av,AGRect(1023-100,0,50,50),""));
+  mainView->addChild(b=new AGButton(mainView,AGRect(1023-100,0,50,50),""));
   b->setSurface(getScreen().loadSurface("data/pause.png"),false);
   b->sigClick.connect(slot(this,&AntargisApp::pause));
 
 
-  setMainWidget(av);
+  setMainWidget(mainView);
     
   
     MyApp::run();
   }
-  bool saveClick(const char *pName,const AGEvent *e)
+  bool smainVieweClick(const char *pName,const AGEvent *e)
   {
     getMap()->saveMap("dummy.antlvl");
     return true;
@@ -115,6 +117,7 @@ class AntargisApp:public MyApp
   bool loadClick(const char *pName,const AGEvent *e)
   {
     getMap()->loadMap("dummy.antlvl");
+    mainView->update();
     return true;
   }
   bool quitClick(const char *pName,const AGEvent *e)

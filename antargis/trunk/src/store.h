@@ -41,6 +41,15 @@ R convert(Filename f)
   return convert<R>(loadFile(f));
 }
 
+inline bool toBool(const std::string &s)
+{
+  return(s=="true");
+}
+inline int toInt(const std::string &s)
+{
+  return atoi(s.c_str());
+}
+
 inline float toFloat(const std::string &s)
 {
   return atof(s.c_str());
