@@ -1,6 +1,7 @@
 #include "map.h"
 #include "voxel.h"
 #include "fs.h"
+#include<cstdlib>
 
 /************************************************************************
 * AntargisMap
@@ -162,7 +163,7 @@ void AntargisMap::addFlat(int x,int y,int h,int r)
         }
       }
     float nv;
-    if(abs(mmin-mmax)<1)
+    if(abs((int)(mmin-mmax))<1)
       nv=mmin+h;
     else
       nv=(mmin+mmax)*0.5;
@@ -218,8 +219,8 @@ void AntargisMap::saveXML(xmlpp::Node &node) const
       {
         for(int i=0;i<mW;i++)
           {
-            hmaps<<mHeight.getPoint(i,j)<<" ";
-            gmaps<<mGrass.getPoint(i,j)<<" ";
+            hmaps<<(int)(mHeight.getPoint(i,j))<<" ";
+            gmaps<<(int)(mGrass.getPoint(i,j))<<" ";
           }
         hmaps<<std::endl;
         gmaps<<std::endl;
@@ -246,7 +247,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
       AntEntity *e=0;
       if(i->getName()=="heightMap")
         {
-          istringstream hmaps;
+          std::istringstream hmaps;
           hmaps.str(i->getContent());
           // parse height map
           float h;
