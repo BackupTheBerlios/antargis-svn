@@ -1,0 +1,12 @@
+# KDevelop Custom Project File List
+build_config.py
+config.h
+config.log
+SConstruct
+simple.kdevelop
+src/antargis.cpp
+src/SConscript
+build/posix/optimize/gui/libgui.a
+src/random_map.h
+src/texture_cache.h
+src/texture_cache.cc.cpp
