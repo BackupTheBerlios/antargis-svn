@@ -21,13 +21,13 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
   if(pTitle.length())
     {
       // use 4 rows
-      addFixedRow();
-      addFixedRow();
+      addFixedRow(bw);
+      addFixedRow(bw);
       addRow(1.0);
-      addFixedRow();
-      addFixedColumn();
+      addFixedRow(bw);
+      addFixedColumn(bw);
       addColumn(1.0);
-      addFixedColumn();
+      addFixedColumn(bw);
       
       AGTable::addChild(0,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,0,bw,bw)));
       AGTable::addChild(1,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,0,bw,bw)));
@@ -60,12 +60,12 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
   else
     {
       // use 3 rows
-      addFixedRow();
+      addFixedRow(bw);
       addRow(1.0);
-      addFixedRow();
-      addFixedColumn();
+      addFixedRow(bw);
+      addFixedColumn(bw);
       addColumn(1.0);
-      addFixedColumn();
+      addFixedColumn(bw);
       
       AGTable::addChild(0,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,0,bw,bw)));
       AGTable::addChild(1,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,0,bw,bw)));
@@ -132,7 +132,7 @@ AGWidget *AGWindow::getTitleBar()
   t->addRow(1.0);
   //  t->addFixedColumn();
   t->addColumn(1.0);
-  t->addFixedColumn();
+  t->addFixedColumn(20);//close button
   
   //  t->addChild(0,0,title=new AGButton(t,AGRect(0,0,0,0),mTitle));
   t->addChild(0,0,title=new AGCaption(t,AGRect(0,0,0,0),mTitle,getTheme()->getFont("Font.windowTitle"),AGBackground("menu")));
@@ -151,4 +151,10 @@ bool AGWindow::tryClose(const char*pName,const AGEvent *m)
   TRACE;
   hide();
   return false;
+}
+
+
+AGRect AGWindow::getClientRect() const
+{
+  return const_cast<AGWindow*>(this)->getClient()->getClientRect();
 }

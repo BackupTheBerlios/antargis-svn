@@ -25,6 +25,13 @@ screen.addChild(window2)
 w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
 window1.addChild(w2)
 
+doc=Document.new("dialog.xml")
+puts doc.toString
+l=AGLayout.new(screen,doc.toString)
+screen.addChild(l)
+
+
+
 app.setMainWidget(screen)#widget)
 
 app.run

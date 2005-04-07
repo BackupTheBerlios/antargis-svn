@@ -21,6 +21,7 @@ class AGWidget:public AGMessageObject
   virtual void draw(const AGRect &r);
   virtual void drawAll(const AGRect &r);
   AGRect getRect() const;
+  virtual AGRect getClientRect() const;
   void setRect(const AGRect &pRect);
   
   AGWidget *getParent();

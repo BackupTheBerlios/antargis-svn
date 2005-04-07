@@ -40,5 +40,4 @@ Makefile \
 src/Makefile \
 include/Makefile \
 bindings/Makefile \
-bindings/lua/Makefile \
 test/Makefile ])

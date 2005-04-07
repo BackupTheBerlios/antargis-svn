@@ -10,6 +10,10 @@
 
 class AGText;
 
+/**
+  TODO: redesign, so that button takes bg-images or border/background-style and a caption of type AGWidget 
+*/
+
 class AGButton:public AGWidget
 {
  public:

@@ -16,16 +16,16 @@ class AGTable:public AGWidget
  public:
   AGTable(AGWidget *pWidget,const AGRect &pRect);
 
-  void addFixedColumn();
-  void addFixedRow();
+  void addFixedColumn(float size);
+  void addFixedRow(float size);
 
   void addColumn(float weight);
   void addRow(float weight);
 
   void addChild(int x,int y,AGWidget *pWidget);
 
-  void getWidthFromChildren();
-  void getHeightFromChildren();
+  //  void getWidthFromChildren();
+  //  void getHeightFromChildren();
 
   void arrange();
 
@@ -36,7 +36,7 @@ class AGTable:public AGWidget
   int w,h;
   float xw,yw; // weights
 
-  std::vector<float> rows,cols;
+  std::vector<std::pair<float,bool> > rows,cols;
 
   std::vector<AGWidget*> children;
 

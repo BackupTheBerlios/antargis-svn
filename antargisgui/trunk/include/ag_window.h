@@ -17,6 +17,8 @@ class AGWindow:public AGTable
 
   bool tryClose(const char*pName,const AGEvent *m);
 
+  AGRect getClientRect() const;
+
  private:
 
   AGWidget *getTitleBar();

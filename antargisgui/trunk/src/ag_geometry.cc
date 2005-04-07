@@ -47,6 +47,24 @@ AGRect::AGRect(int px,int py,int pw,int ph)
   SDL_Rect::w=max(0,pw); // do not accept false values
   SDL_Rect::h=max(0,ph);
 }
+
+AGRect::AGRect(const std::string &s)
+{
+  std::istringstream is;
+  char c;
+  is.str(s);
+  is>>c;
+  is>>x;
+  is>>c;
+  is>>y;
+  is>>c;
+  is>>w;
+  is>>c;
+  is>>h;
+  is>>c;
+}
+
+
 /*
 int AGRect::x() const
 {

@@ -25,6 +25,8 @@
 #include "ag_image.h"
 #include "ag_caption.h"
 #include "ag_background.h"
+#include "ag_layout.h"
+#include "ag_xml.h"
 
 #ifdef SWIG
 %include "ag_main.h"
@@ -51,6 +53,8 @@
 %include "ag_image.h"
 %include "ag_caption.h"
 %include "ag_background.h"
+%include "ag_layout.h"
+%include "ag_xml.h"
 #endif
 
 #endif

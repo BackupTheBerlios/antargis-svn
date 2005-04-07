@@ -7,35 +7,39 @@ AGTable::AGTable(AGWidget *pWidget,const AGRect &pRect):
 {
 }
 
-void AGTable::addFixedColumn()
+void AGTable::addFixedColumn(float size)
 {
+  cdebug(size);
   if(mInserted)
     return;
-  cols.push_back(0.0f);
+  cols.push_back(std::make_pair(size,true));
   w++;
 }
-void AGTable::addFixedRow()
+void AGTable::addFixedRow(float size)
 {
+  cdebug(size);
   if(mInserted)
     return;
-  rows.push_back(0.0f);
+  rows.push_back(std::make_pair(size,true));
   h++;
 }
 
 void AGTable::addColumn(float weight)
 {
+  cdebug(weight);
   if(mInserted || weight<=0.0f)
     return;
-  cols.push_back(weight);
+  cols.push_back(std::make_pair(weight,false));
   w++;
   xw+=weight;
 }
 
 void AGTable::addRow(float weight)
 {
+  cdebug(weight);
   if(mInserted || weight<=0.0f)
     return;
-  rows.push_back(weight);
+  rows.push_back(std::make_pair(weight,false));
   h++;
   yw+=weight;
 }
@@ -59,13 +63,14 @@ void AGTable::addChild(int px,int py,AGWidget *pWidget)
   AGWidget::addChild(pWidget);
 }
 
+/*
 void AGTable::getWidthFromChildren()
 {
 }
 void AGTable::getHeightFromChildren()
 {
 }
-
+*/
 void AGTable::arrange()
 {
   int mx,my;
@@ -86,8 +91,8 @@ void AGTable::arrange()
 	    AGWidget *wd=children[mx+my*w];
 	    if(wd)
 	      {
-		if(rows[my]==0.0) // fixed row
-		  fy+=wd->height();
+		if(rows[my].second)
+		  fy+=(int)(rows[my].first);
 	      }
 	  }
       mfy=std::max(mfy,fy);
@@ -103,9 +108,9 @@ void AGTable::arrange()
 	    AGWidget *wd=children[mx+my*w];
 	    if(wd)
 	      {
-		if(cols[mx]==0.0) // fixed col
+		if(cols[mx].second)
 		  {
-		    fx+=wd->width();
+		    fx+=(int)(cols[mx].first);
 		  }
 	      }
 	  }
@@ -119,20 +124,20 @@ void AGTable::arrange()
   for(mx=0;mx<w;mx++)
     for(my=0;my<h;my++)
       {
-	if(cols[mx]>0.0)
+	if(!cols[mx].second)
 	  {
 	    AGWidget *wd=children[mx+my*w];
 	    if(wd)
 	      {
-		wd->setWidth((int)((width()-mfx)*cols[mx]/xw));
+		wd->setWidth((int)((width()-mfx)*cols[mx].first/xw));
 	      }
 	  }
-	if(rows[my]>0.0)
+	if(!rows[my].second)
 	  {
 	    AGWidget *wd=children[mx+my*w];
 	    if(wd)
 	      {
-		wd->setHeight((int)((height()-mfy)*rows[my]/yw));
+		wd->setHeight((int)((height()-mfy)*rows[my].first/yw));
 	      }
 	  }
       }

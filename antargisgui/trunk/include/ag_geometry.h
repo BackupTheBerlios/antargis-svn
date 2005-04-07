@@ -22,6 +22,7 @@ class AGRect:public SDL_Rect
   AGRect(const AGRect &r);
   AGRect(const SDL_Rect &r);
   AGRect(int x,int y,int w,int h);
+  AGRect(const std::string &s);
 
   /*
   int x() const;

@@ -61,6 +61,11 @@ AGRect AGWidget::getRect() const
   return mr;
 }
 
+AGRect AGWidget::getClientRect() const
+{
+  return AGRect(0,0,mr.w,mr.h);
+}
+
 bool AGWidget::processEvent(const AGEvent *event)
 {
   //  TRACE;
