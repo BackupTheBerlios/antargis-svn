@@ -40,6 +40,13 @@ AGPoint AGPoint::operator-(const AGPoint &p) const
   return AGPoint(x-p.x,y-p.y);
 }
 
+AGPoint &AGPoint::operator+=(const AGPoint &p)
+{
+  x+=p.x;
+  y+=p.y;
+  return *this;
+}
+
 
 
 // AGRect
@@ -182,6 +189,13 @@ ostream &operator<<(ostream &o,const SDL_Rect &r)
   o<<"("<<r.x<<","<<r.y<<","<<r.w<<","<<r.h<<")";
   return o;
 }
+
+std::ostream &operator<<(std::ostream &o,const AGPoint &p)
+{
+  o<<"("<<p.x<<","<<p.y<<")";
+  return o;
+}
+
 
 AGRect AGRect::operator+(const AGPoint &p) const
 {

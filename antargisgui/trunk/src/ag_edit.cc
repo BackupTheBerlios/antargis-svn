@@ -217,17 +217,19 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true)
 {
+  mMutable=true;
   mShowCursor=true;
   AGFont font1("Arial.ttf",14);
   AGFont font2("Arial.ttf",13);
   font1.setColor(AGColor(0,0,0));
   font2.setColor(AGColor(0,0,0xFF));
-  mLines.push_back(AGEditLine("hallo1",font1,true));
+  mLines.push_back(AGEditLine("",font1,true));
+  /*  mLines.push_back(AGEditLine("hallo1",font1,true));
   if(mMultiLine)
     {
       mLines.push_back(AGEditLine("hallo2",font2,true));
       mLines.push_back(AGEditLine("hallo3",font2,true));
-    }
+      }*/
   mCx=mCy=0;
   mViewCy=0;
 
@@ -237,7 +239,7 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   menu->addItem("Paste");
   setMenu(menu);
 
-  mBackground=AGTexture(getTheme()->getSurface("backgroundSurface.menu"));
+  mBackground=AGTexture(getTheme()->getSurface("edit.background.image"));
 }
 
 void AGEdit::draw(const AGRect &pRect)
@@ -267,8 +269,7 @@ void AGEdit::draw(const AGRect &pRect)
   for(;i!=mLines.end();i++)
     {
       i->draw(mr.project(AGPoint(x,y)),pRect.project(getRect()));
-      if(cy+mViewCy==mCy)
-	
+      if(cy+mViewCy==mCy && mMutable) // FIXME: Change show cursor only if widget has focus
 	i->drawCursor(mCx,mr.project(AGPoint(x,y)),pRect.project(getRect()),cursorC);
       y+=i->height();
       if(y>getRect().h)
@@ -298,6 +299,8 @@ void AGEdit::drawBackground(const AGRect &pRect)
 
 bool AGEdit::eventKeyUp(const AGEvent *m2)
 {
+  if(!mMutable)
+    return false;
   const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
   if(m)
     {
@@ -321,6 +324,8 @@ bool AGEdit::eventKeyUp(const AGEvent *m2)
 }
 bool AGEdit::eventKeyDown(const AGEvent *m2)
 {
+  if(!mMutable)
+    return false;
   const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
   if(m)
     {
@@ -626,4 +631,25 @@ void AGEdit::checkWrap()
 	}
  
     }
+}
+
+
+void AGEdit::setFont(const AGFont &pFont)
+{
+  mFont=pFont;
+}
+
+void AGEdit::setText(const std::string &pText)
+{
+  size_t i;
+  for(i=0;i<pText.length();i++)
+    {
+      insert(pText[i]);
+      mCx++;
+    }
+}
+void AGEdit::setMutable(bool pMutable)
+{
+  mMutable=pMutable;
+  mShowCursor=pMutable; // FIXME: show cursor only if widget has focus
 }

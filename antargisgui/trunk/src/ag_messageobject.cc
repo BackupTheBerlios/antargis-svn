@@ -195,6 +195,7 @@ AGMessageObject::AGMessageObject():
 
 bool AGMessageObject::processEvent(const AGEvent* pEvent) 
 {
+  //  cdebug("typeid:"<<typeid(this).name());
   //  TRACE;
   //  SDL_Event e;
   bool rc=false;

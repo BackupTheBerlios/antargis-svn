@@ -33,7 +33,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
   AGTable(pWidget,pRect),mTitle(pTitle)
 {
   //  CTRACE;
-  AGSurface s=getTheme()->getSurface("window_border");
+  AGSurface s=getTheme()->getSurface("window.border.image");
   int bw=s.getRect().w/3;
 
   //  cdebug("window_border:"<<s.width()<<"/"<<s.height());
@@ -106,7 +106,9 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
 
 void AGWindow::addChild(AGWidget *w)
 {
-  mClient->addChild(w);
+  // FIXME: change this somehow?
+  AGWidget::addChild(w);
+  //  mClient->addChild(w);
 }
 
 AGWidget *AGWindow::getClient()
@@ -116,6 +118,7 @@ AGWidget *AGWindow::getClient()
 
 bool AGWindow::eventMouseButtonDown(const AGEvent *m)
 {
+  CTRACE;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(!getFocus())
     if(e)
@@ -155,9 +158,9 @@ AGWidget *AGWindow::getTitleBar()
   t->addFixedColumn(20);//close button
   
   //  t->addChild(0,0,title=new AGButton(t,AGRect(0,0,0,0),mTitle));
-  t->addChild(0,0,title=new AGCaption(t,AGRect(0,0,0,0),mTitle,getTheme()->getFont("Font.windowTitle"),AGBackground("menu")));
+  t->addChild(0,0,title=new AGCaption(t,AGRect(0,0,0,0),mTitle,getTheme()->getFont("window.title.font"),AGBackground("menu.background.normal")));
   t->addChild(1,0,closeButton=new AGButton(t,AGRect(0,0,20,20),"aa"));
-  closeButton->setSurface(getTheme()->getSurface("close_button"),false);
+  closeButton->setSurface(getTheme()->getSurface("window.buttons.close"),false);
 
 
   //  AGListener 
@@ -176,5 +179,5 @@ bool AGWindow::tryClose(const char*pName,const AGEvent *m)
 
 AGRect AGWindow::getClientRect() const
 {
-  return const_cast<AGWindow*>(this)->getClient()->getClientRect();
+  return const_cast<AGWindow*>(this)->getClient()->getClientRect()+mClient->getRect().getPosition();
 }

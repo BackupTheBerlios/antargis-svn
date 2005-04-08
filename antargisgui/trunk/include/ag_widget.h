@@ -95,6 +95,7 @@ class AGWidget:public AGMessageObject
   virtual void addChildBack(AGWidget *w);
 
   AGRect getScreenRect() const;
+  AGPoint getScreenPosition() const;
   AGPoint fromScreen(const AGPoint &p) const;
 
 
@@ -107,6 +108,9 @@ class AGWidget:public AGMessageObject
   virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
 
   bool getFocus() const;
+
+  std::string getName() const;
+  void setName(const std::string &pName);
 
  private:
 
@@ -128,6 +132,8 @@ class AGWidget:public AGMessageObject
   AGWidget *mFocus;
 
   AGPoint mOldMousePos;
+
+  std::string mName;
 
  protected:
   std::list<AGWidget*> mChildren;

@@ -58,5 +58,6 @@ class AGTheme
 
 AGTheme *getTheme();
 void setTheme(const AGTheme &aTheme);
+void loadTheme(const std::string &pXML);
 
 #endif

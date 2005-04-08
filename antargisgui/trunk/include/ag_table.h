@@ -43,6 +43,7 @@ class AGTable:public AGWidget
   void addRow(float weight);
 
   void addChild(int x,int y,AGWidget *pWidget);
+  AGRect getClientRect(int x,int y) const;
 
   //  void getWidthFromChildren();
   //  void getHeightFromChildren();

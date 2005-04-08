@@ -78,6 +78,12 @@ class AGEdit:public AGWidget
 
   void insert(char c);
   void doDelete(int p);
+
+  void setText(const std::string &pText);
+  void setFont(const AGFont &pFont);
+
+  void setMutable(bool pMutable);
+
  private:
 
   void getActLine();
@@ -103,6 +109,10 @@ class AGEdit:public AGWidget
   bool mWrapLines;
 
   AGTexture mBackground;
+
+  AGFont mFont;
+
+  bool mMutable;
 };
 
 

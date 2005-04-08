@@ -20,6 +20,8 @@
 
 #include "ag_theme.h"
 #include "ag_debug.h"
+#include "ag_xml.h"
+#include "ag_tools.h"
 
 #include <iostream>
 using namespace std;
@@ -40,6 +42,7 @@ void AGTheme::setFont(const std::string &pName,AGFont pFont)
 }
 void AGTheme::setColor(const std::string &pName,AGColor pColor)
 {
+  cdebug(pName);
   mColors[pName]=pColor;
   //  cout<<"setting:"<<pName<<":"<<pColor.toString()<<endl;
 }
@@ -53,6 +56,7 @@ AGFont AGTheme::getFont(const std::string &pName)
 }
 AGColor AGTheme::getColor(const std::string &pName)
 {
+  cdebug(pName);
   if(mColors.find(pName)==mColors.end())
     return mColors[trunk(pName)];
   return mColors[pName];
@@ -60,6 +64,7 @@ AGColor AGTheme::getColor(const std::string &pName)
 
 std::string AGTheme::trunk(std::string s)
 {
+  cdebug(s);
   size_t i=s.find(".");
   if(i!=s.npos)
     s=s.substr(0,i);
@@ -117,4 +122,50 @@ void AGTheme::setSurface(const std::string &pName,const AGSurface &pSurface)
   assert(pSurface.valid());
   mSurfaces[pName]=pSurface;
   assert(mSurfaces[pName].valid());
+}
+
+void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
+{
+  xmlpp::Node::const_iterator i=node.begin();
+  for(;i!=node.end();i++)
+    {
+      
+      std::string n=name;
+      if(n.length())
+	n+=".";
+      n+=(*i)->getName();
+      if((*i)->get("name").length())
+	{
+	  std::string sname=name+"."+(*i)->get("name");
+	  // read color /image whatever
+	  if((*i)->getName()=="color")
+	    t.setColor(sname,AGColor((*i)->get("color")));
+	  if((*i)->getName()=="image")
+	    t.setSurface(sname,getScreen().loadSurface((*i)->get("file")));
+	  if((*i)->getName()=="value")
+	    t.setInt(sname,toInt((*i)->get("value")));
+	  if((*i)->getName()=="font")
+	    {
+	      AGFont f((*i)->get("file"),toInt((*i)->get("size")));
+	      f.setColor(AGColor((*i)->get("color")));
+	      t.setFont(sname,f);
+	    }
+	}
+      else
+	loadTheme(*i,t,n);
+    }
+}
+
+void loadTheme(const std::string &pXML)
+{
+  AGTheme theme;
+
+  xmlpp::Document p;
+  p.parse_memory(pXML);
+
+  xmlpp::Node n=p.root();
+
+  loadTheme(n,theme,"");
+  
+  setTheme(theme);
 }

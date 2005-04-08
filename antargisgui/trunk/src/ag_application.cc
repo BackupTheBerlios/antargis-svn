@@ -46,7 +46,7 @@ bool AGApplication::run()
   
   while(mRunning)
     {
-                 TRACE;
+      //                 TRACE;
       now=SDL_GetTicks();
       //      TRACE;
     
@@ -76,7 +76,7 @@ bool AGApplication::run()
 	}
       eventFrame((now-last)/1000.0);
 {
-      TRACE;
+  //      TRACE;
       draw();
       }
       
@@ -131,12 +131,12 @@ bool AGApplication::eventIdle()
 void AGApplication::draw()
 {
 {
-  CTRACE;
+  //  CTRACE;
   if(mainWidget)
     mainWidget->drawAll(getScreen().getRect());
     }
     {
-    CTRACE;
+      //    CTRACE;
   getScreen().flip();
 }
   //  SDL_Flip(getScreen().surface());

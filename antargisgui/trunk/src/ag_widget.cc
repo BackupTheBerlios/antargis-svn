@@ -53,27 +53,18 @@ void AGWidget::drawAll(const AGRect &r)
   //  TRACE;
   if(!mVisible)
     return;
-cdebug(0);
-cdebug(this);
-cdebug(mChildrenDrawFirst);
-cdebug(typeid(*this).name());
+
   if(!mChildrenDrawFirst)
     draw(r);
-cdebug(1);
   std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
   AGRect r2=r.project(mr);
-cdebug(2);
   for(;i!=mChildren.rend();i++)
     (*i)->drawAll(r2);
-cdebug(3);
   if(mChildrenDrawFirst)
     draw(r);
 
-cdebug(4);
   if(mMenu)
     mMenu->drawAll(r2);
-cdebug(5);
-
 }
 
 AGRect AGWidget::getRect() const
@@ -88,6 +79,8 @@ AGRect AGWidget::getClientRect() const
 
 bool AGWidget::processEvent(const AGEvent *event)
 {
+  //  cdebug(typeid(this));
+
   //  TRACE;
   //const SDL_Event * event, bool bModal) {
   
@@ -208,6 +201,7 @@ bool AGWidget::eventMouseButtonDown(const AGEvent *m)
 
 bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 {
+  cdebug("typeid:"<<typeid(*this).name());
   bool was=mButtonDown;
   mButtonDown=false;
   
@@ -356,11 +350,21 @@ AGWidget *AGWidget::getParent()
   return mParent;
 }
 
+AGPoint AGWidget::getScreenPosition() const
+{
+  AGPoint p=mr.getPosition();
+  //  cdebug(typeid(*this).name()<<" RECT:"<<getRect());
+  if(mParent)
+    p+=mParent->getScreenPosition();
+  //  cdebug(typeid(*this).name());
+  //  cdebug(p);
+  return p;
+}
+
+
 AGRect AGWidget::getScreenRect() const
 {
-  AGRect srect(getRect());
-  if(mParent)
-    srect=mParent->getScreenRect().project(srect);
+  AGRect srect(AGRect(0,0,mr.w,mr.h)+getScreenPosition());
   return srect;
 }
 
@@ -463,6 +467,14 @@ bool AGWidget::getFocus() const
   return hasFocus;
 }
 
+std::string AGWidget::getName() const
+{
+  return mName;
+}
+void AGWidget::setName(const std::string &pName)
+{
+  mName=pName;
+}
 
 
 #ifdef USE_RUBY
@@ -491,5 +503,6 @@ void AGWidget_markfunc(void *ptr)
     }
 #endif
 }
+
 
 

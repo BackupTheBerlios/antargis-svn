@@ -31,3 +31,44 @@ float toFloat(const std::string &s)
   cdebug(s<<":"<<f);
   return f;
 }
+
+int fromHex(const std::string &s)
+{
+  int i=0;
+  for(size_t j=0;j<s.length();j++)
+    {
+      int k=0;
+      i<<=4;
+      char c=s[j];
+      if(c>='A'&&c<='F')
+	k=c-'A'+10;
+      else if(c>='a' && c<='f')
+	k=c-'a'+10;
+      else if(c>='0' && c<='9')
+	k=c-'0';
+      i+=k;
+    }
+  return i;
+}
+std::string toHex(int i)
+{
+  std::string s;
+  std::string c="0";
+  while(i!=0)
+    {
+      int k=i&0xF;
+
+      if(k>9)
+	c[0]='A'+k-10;
+      else
+	c[0]='0'+k;
+
+      s=c+s;
+      i>>=4;
+    }
+    
+  
+  while(s.length()<2)
+    s=std::string("0")+s;
+  return s;
+}

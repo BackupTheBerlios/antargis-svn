@@ -23,6 +23,7 @@
 #include "ag_tools.h"
 
 #include "ag_button.h"
+#include "ag_edit.h"
 #include "ag_window.h"
 
 AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
@@ -55,8 +56,14 @@ AGWidget *AGLayout::parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
   
   if(n=="button")
     {
+      AGButton *b;
       std::string caption=pNode.get("caption");
-      w=new AGButton(pParent,geom,caption);
+      w=(b=new AGButton(pParent,geom,caption));
+
+      std::string captionImage=pNode.get("caption-image");
+      if(captionImage.length())
+	b->setSurface(getScreen().loadSurface(captionImage));
+
     }
   else if(n=="window")
     {
@@ -78,7 +85,22 @@ AGWidget *AGLayout::parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
 AGRect AGLayout::getGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 {
+  TRACE;
   AGRect geom=pParent->getClientRect();
+  AGTable *t=dynamic_cast<AGTable*>(pParent);
+  cdebug(pNode.getName());
+  cdebug(geom);
+  if(t)
+    if(pNode.get("col")!="" && pNode.get("row")!="")
+      {
+	int col=toInt(pNode.get("col"));
+	int row=toInt(pNode.get("row"));
+	
+	geom=t->getClientRect(col,row);
+	cdebug("col:"<<col<<" row:"<<row<<":"<<geom);
+      }
+  
+
   std::string geomS=pNode.get("geometry");
   if(geomS.length())
     geom=AGRect(geomS);
@@ -169,7 +191,7 @@ AGTable *AGLayout::parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const A
   i=pNode.begin();
   for(;i!=pNode.end();i++)
     {
-      AGWidget *w=parseNode(this,*i);
+      AGWidget *w=parseNode(t,*i);
       if(w)
 	{
 	  int col=toInt((*i)->get("col"));
@@ -178,6 +200,6 @@ AGTable *AGLayout::parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const A
 	  t->addChild(col,row,w);
 	}
     }
-  t->arrange();
+  //  t->arrange();
   return t;
 }

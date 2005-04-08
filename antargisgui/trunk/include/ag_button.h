@@ -28,7 +28,7 @@
 #include <iostream>
 #include <map>
 
-class AGText;
+class AGEdit;
 
 /**
   TODO: redesign, so that button takes bg-images or border/background-style and a caption of type AGWidget 
@@ -68,7 +68,7 @@ class AGButton:public AGWidget
   int borderWidth;
   AGSurface mSurface;
   bool mHasSurface;
-  AGText *mTextW;
+  AGEdit *mTextW;
 
   bool checkButton;
   bool checked;

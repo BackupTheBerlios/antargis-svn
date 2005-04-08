@@ -52,6 +52,12 @@ std::string ParserInfo::getNext2()
     return s.substr(p,2);
   return "";
 }
+std::string ParserInfo::getNext3()
+{
+  if(s.length()>p+2)
+    return s.substr(p,3);
+  return "";
+}
 void ParserInfo::inc()
 {
   if(s.length()>p)
@@ -293,7 +299,7 @@ void Node::parseChar(ParserInfo &info,char c)
   info.inc();
 }
 
-std::string Node::parseString(ParserInfo &info)
+std::string Node::parseString(ParserInfo &info,char delimit)
 {
   bool weiter=true;
   bool escape=false;
@@ -312,16 +318,18 @@ std::string Node::parseString(ParserInfo &info)
           else
             escape=true;
         }
-      else if(c=='\"')
+      else if(c==delimit)
         {
           if(escape)
             {
-              n+="\"";
+              n+=delimit;
               escape=false;
             }
           else
             return n;
         }
+      else if(c=='n' && escape)
+	n+='\n',escape=false;
       else
         n+=c;
       info.inc();
@@ -339,9 +347,18 @@ void Node::parseArguments(ParserInfo &info)
       std::string n,v;
       n=parseName(info);
       parseChar(info,'=');
-      parseChar(info,'"');
-      v=parseString(info);
-      parseChar(info,'"');
+      if(info.next()=='"')
+	{
+	  parseChar(info,'"');
+	  v=parseString(info,'"');
+	  parseChar(info,'"');
+	}
+      else
+	{
+	  parseChar(info,'\'');
+	  v=parseString(info,'\'');
+	  parseChar(info,'\'');
+	}
       mParams[n]=unescape(v);
     }
 }
@@ -399,15 +416,41 @@ void Node::parseContents(ParserInfo &info)
 void Node::parse(ParserInfo &info)
 {
   parseChar(info,'<');
-  mName=parseName(info);
-  parseArguments(info);
-  parseChar(info,'>');
-  parseContents(info);
-  parseChar(info,'<');
-  parseChar(info,'/');
-  if(mName!=parseName(info))
-    throw ParserException("Wrong close-tag");
-  parseChar(info,'>');
+  // check for comment
+  if(info.getNext3()=="!--")
+    {
+      // FIXME: should be included somehow somewhen...
+      info.inc();
+      info.inc();
+      info.inc();
+
+      while(info.getNext3()!="-->")
+	info.inc();
+      info.inc();
+      info.inc();
+      info.inc();
+    }
+  else
+    {
+      
+      mName=parseName(info);
+      parseArguments(info);
+      if(info.next()=='/')
+	{
+	  parseChar(info,'/');
+	  parseChar(info,'>');
+	}
+      else
+	{
+	  parseChar(info,'>');
+	  parseContents(info);
+	  parseChar(info,'<');
+	  parseChar(info,'/');
+	  if(mName!=parseName(info))
+	    throw ParserException("Wrong close-tag");
+	  parseChar(info,'>');
+	}
+    }
 }
 
 /****************************************************************
@@ -461,11 +504,32 @@ void Document::parse_memory(const std::string &s)
   parseMemory(s);
 }
 
+void Document::parseHeader(ParserInfo &p)
+{
+  bool found=true;
+  while(found)
+    {
+      found=false;
+      if(p.getNext2()=="<?")
+	{
+	  while(p.getNext2()!="?>")
+	    p.inc();
+	  p.inc();
+	  p.inc();
+	  found=true;
+	}
+      else if(p.next()==' ' || p.next()=='\n')
+	p.inc(),found=true;
+    }
+}
+
 void Document::parseMemory(const std::string &s)
 {
   ParserInfo p;
   p.s=s;
   p.p=0;
+
+  parseHeader(p);
   mRoot.parse(p);
 }
 

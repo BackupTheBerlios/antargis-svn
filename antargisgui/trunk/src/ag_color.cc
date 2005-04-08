@@ -20,13 +20,33 @@
 
 #include "ag_color.h"
 #include "ag_gsurface.h"
+#include "ag_tools.h"
 
 #include <sstream>
 
+AGColor::AGColor(const std::string &s)
+{
+  std::string p=s.substr(1,s.npos);
+  if(p.length()==6)
+    {
+      r=fromHex(p.substr(0,2));
+      g=fromHex(p.substr(2,2));
+      b=fromHex(p.substr(4,2));
+      a=0xFF;
+    }
+  else if(p.length()==8)
+    {
+      r=fromHex(p.substr(0,2));
+      g=fromHex(p.substr(2,2));
+      b=fromHex(p.substr(4,2));
+      a=fromHex(p.substr(6,2));
+    }
+}
 
 AGColor::AGColor()//:  mr(0),mg(0),mb(0),ma(0)
 {
-  r=g=b=a;
+  r=g=b=0;
+  a=0xFF;
 }
 
 AGColor::AGColor(int pr,int pg,int pb,int pa)/*:
@@ -69,9 +89,11 @@ Uint32 AGColor::mapRGB(SDL_PixelFormat *f) const
 
 std::string AGColor::toString() const
 {
+  return std::string("#")+toHex(r)+toHex(g)+toHex(b)+toHex(a);
+  /*
   std::ostringstream os;
   os<<"("<<int(r)<<","<<int(g)<<","<<int(b)<<")";
-  return os.str();
+  return os.str();*/
 }
 
 AGColor &AGColor::operator=(const AGColor&c)
@@ -90,7 +112,8 @@ bool operator<(const AGColor &c1,const AGColor &c2)
 
 std::ostream &operator<<(std::ostream &o,const AGColor &c)
 {
-  o<<"("<<(int)c.r<<","<<(int)c.g<<","<<(int)c.b<<","<<(int)c.a<<")";
+  o<<c.toString();
+  //  o<<"("<<(int)c.r<<","<<(int)c.g<<","<<(int)c.b<<","<<(int)c.a<<")";
   return o;
 }
 

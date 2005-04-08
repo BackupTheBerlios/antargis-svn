@@ -29,7 +29,8 @@ std::ofstream debugOFS("debug.txt");
 
 std::ostream &getDebug()
 {
-  return debugOFS;
+  return std::cout;
+  //  return debugOFS;
 }
 
 /*

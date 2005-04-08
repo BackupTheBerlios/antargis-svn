@@ -23,13 +23,13 @@
 
 require 'libantargisruby'
 require 'sdl'
-require 'theme.rb'
+#require 'theme.rb'
 
 include Libantargisruby
 
 class TestApp <AGApplication
 	def initialize(autoexit=true)
-		initTheme
+#		initTheme
 		@count=0
 		@autoexit=autoexit
 		super()

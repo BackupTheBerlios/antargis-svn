@@ -63,8 +63,10 @@ inline void mydebug(std::string f,std::string l,const T&t)
 
 using std::endl;
 
-#define cdebug(x) getDebug()<<"("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl
-#define ccdebug(x) getDebug()<<"("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl
+#define debugout(x) getDebug()<<x
+
+#define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl)
+#define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl)
 //#define cdebug(x) std::cout<<"("<<__FILE__<<":"<<__LINE__<<":"<<__func__<<"):"<<x<<endl
 
 
@@ -80,20 +82,20 @@ class D
     m(c)
     {
       indent();
-      getDebug()<<"start of:"<<c<<endl;
+      debugout("start of:"<<c<<std::endl);
       d++;
     }
   ~D()
     {
       d--;
       indent();
-      getDebug()<<"end   of:"<<m<<endl;
+      debugout("end   of:"<<m<<std::endl);
     }
 private:
   void indent()
   {
     for(int i=0;i<d;i++)
-      getDebug()<<"  ";
+      debugout("  ");
   }
 };
 

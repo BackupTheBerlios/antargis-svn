@@ -27,7 +27,7 @@
 AGScreenWidget::AGScreenWidget():
   AGWidget(0,getScreen().getRect())
 {
-  mTexture=AGTexture(getTheme()->getSurface("backgroundSurface.screen"));
+  mTexture=AGTexture(getTheme()->getSurface("screen.background.image"));
 }
 AGScreenWidget::~AGScreenWidget()
 {

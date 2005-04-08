@@ -44,6 +44,7 @@ struct ParserInfo
 
     char next();
     std::string getNext2();
+    std::string getNext3();
     void inc();
     bool end();
   };
@@ -109,7 +110,7 @@ class Node
     void parseChar(ParserInfo &info,char c);
     
     // parse functions
-    std::string parseString(ParserInfo &info);
+    std::string parseString(ParserInfo &info,char delimit);
     void parseArguments(ParserInfo &info);
     std::string parseName(ParserInfo &info);
     void parseContents(ParserInfo &info);
@@ -136,6 +137,8 @@ class Document
     void parseMemory(const std::string &s);
     
     Document *get_document();
+  private:
+    void parseHeader(ParserInfo &p);
   };
 
 

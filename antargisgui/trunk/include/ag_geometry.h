@@ -33,6 +33,7 @@ class AGPoint
   AGPoint();
 
   AGPoint operator-(const AGPoint &p) const;
+  AGPoint &operator+=(const AGPoint &p);
 };
 
 class AGRect:public SDL_Rect
@@ -79,6 +80,7 @@ class AGRect:public SDL_Rect
 };
 
 std::ostream &operator<<(std::ostream &o,const SDL_Rect &r);
+std::ostream &operator<<(std::ostream &o,const AGPoint &p);
 
 
 #endif

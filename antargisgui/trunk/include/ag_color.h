@@ -38,6 +38,7 @@ class AGColor:public SDL_Color
   
   AGColor(const AGColor &c);
   AGColor(Uint32 c,const AGSurface &pSurface);
+  AGColor(const std::string &s);
 
   AGColor();
 

@@ -20,7 +20,7 @@
 
 #include "ag_button.h"
 #include "ag_draw.h"
-#include "ag_text.h"
+#include "ag_edit.h"
 #include "ag_theme.h"
 #include "ag_debug.h"
 #include "ag_image.h"
@@ -32,17 +32,20 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   mText(pText),mID(id),mStyle(pStyle),mState(NORMAL),mTextW(0)
 {
   lower=getTheme()->getInt("buttonLowerOnClick");
-  borderWidth=getTheme()->getInt("borderWidth.button");
+  borderWidth=getTheme()->getInt("button.border.width");
   //  addChild(new 
   AGFont font("Arial.ttf");
   font.setColor(AGColor(0,0,0));
-  mTextW=new AGText(this,r.origin().shrink(borderWidth),mText,font);
+  mTextW=new AGEdit(this,r.origin().shrink(borderWidth));//,mText,font);
+  mTextW->setText(mText);
+  mTextW->setFont(font);
+  mTextW->setMutable(false);
   addChild(mTextW);
 
-  mBG[NORMAL]=AGBackground("buttonbg.normal");
-  mBG[PRESSED]=AGBackground("buttonbg.pressed");
-  mBG[LIGHTED]=AGBackground("buttonbg.lighted");
-  mBG[CHECKED]=AGBackground("buttonbg.checked");
+  mBG[NORMAL]=AGBackground("button.background.normal");
+  mBG[PRESSED]=AGBackground("button.background.pressed");
+  mBG[LIGHTED]=AGBackground("button.background.lighted");
+  mBG[CHECKED]=AGBackground("button.background.checked");
 
   cdebug("borderWidth:"<<borderWidth);
 }
@@ -74,9 +77,9 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 
 void AGButton::draw(const AGRect &r)
 {
-  CTRACE;
-  return;
-  mBG[mState].draw(r.project(getRect().shrink(borderWidth)));
+  //  CTRACE;
+  //  return;
+  mBG[mState].draw(getScreenRect().shrink(borderWidth));//r.project(getRect().shrink(borderWidth)));
   //  AGSurface s(getScreen());
 
   AGColor bc1;
@@ -92,12 +95,17 @@ void AGButton::draw(const AGRect &r)
     style=".pressed";
 
 
-  bc1=theme->getColor(std::string("borderColor1")+style);
-  bc2=theme->getColor(std::string("borderColor2")+style);
-{
+  bc1=theme->getColor("button.border.color1");//std::string("borderColor1")+style);
+  bc2=theme->getColor("button.border.color2");//std::string("borderColor2")+style);
+  {
   
   CTRACE;
+
   AGRect mr=r.project(getRect());
+  cdebug(getRect());
+  cdebug(mr);
+  mr=getScreenRect();
+  cdebug(mr);
   if(mState==NORMAL || mState==LIGHTED)
     AGDraw::drawBorder(&getScreen(),mr,borderWidth,bc1,bc2);
   else 
@@ -161,15 +169,18 @@ bool AGButton::eventMouseLeave()
 
 bool AGButton::eventMouseButtonDown(const AGEvent *m)
 {
+  CTRACE;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(e)
     {
+      cdebug(getScreenRect());
       if(getScreenRect().contains(e->getMousePosition()))
 	{
 	  mState=PRESSED;
 	  ccdebug("Pressed");
 	  sigClick(m);
-	  return true;
+	  cdebug(getName());
+	  return true;// FIXME:TEST false; // events only get eaten if in window
 	}
     }
   return AGWidget::eventMouseButtonDown(m);
