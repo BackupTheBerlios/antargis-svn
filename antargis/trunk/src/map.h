@@ -6,7 +6,7 @@
 #include "voxel_gen.h"
 #include "tree.h"
 
-#include "xml.h"
+#include "ag_xml.h"
 #include "fs.h"
 
 #include <set>
