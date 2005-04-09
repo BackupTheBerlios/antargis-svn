@@ -22,6 +22,7 @@
 #include "ag_debug.h"
 #include "ag_xml.h"
 #include "ag_tools.h"
+#include "ag_config.h"
 
 #include <iostream>
 using namespace std;
@@ -84,11 +85,16 @@ void AGTheme::setInt(const std::string &pName,int i)
 
 
 
-AGTheme *getDefaultTheme()
+void loadDefaultTheme()
 {
-  AGTheme *t=new AGTheme;
-  debug(t);
-  return t;
+  loadThemeFile(DEFAULT_THEME_FILE0);
+  if(!mTheme)
+    loadThemeFile(DEFAULT_THEME_FILE1);
+  
+  if(!mTheme)
+    mTheme=new AGTheme;
+
+  debug(mTheme);
 }
 
 void setTheme(const AGTheme &t)
@@ -101,7 +107,7 @@ void setTheme(const AGTheme &t)
 AGTheme *getTheme()
 {
   if(mTheme==0)
-    mTheme=getDefaultTheme();
+    loadDefaultTheme();
   return mTheme;
 }
 
@@ -168,4 +174,20 @@ void loadTheme(const std::string &pXML)
   loadTheme(n,theme,"");
   
   setTheme(theme);
+}
+
+bool loadThemeFile(const std::string &pFilename)
+{
+  AGTheme theme;
+
+  xmlpp::Document p;
+  if(!p.parseFile(pFilename))
+    return false;
+
+  xmlpp::Node n=p.root();
+
+  loadTheme(n,theme,"");
+  
+  setTheme(theme);
+  return true;
 }

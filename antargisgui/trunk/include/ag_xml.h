@@ -124,7 +124,7 @@ class Document
     Document();
     Document(std::string pFile);
 
-    void parseFile(std::string file);
+    bool parseFile(std::string file);
 
     Node &root();
 

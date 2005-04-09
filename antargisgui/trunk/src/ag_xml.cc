@@ -19,6 +19,7 @@
  */
 
 #include "ag_xml.h"
+#include "ag_debug.h"
 
 /****************************************************************
  * ParserException
@@ -467,11 +468,13 @@ Document::Document(std::string pFile)
   parseFile(pFile);
 }
 
-void Document::parseFile(std::string file)
+bool Document::parseFile(std::string file)
 {
   std::string s;
   char buffer[1001];
   FILE *f=fopen(file.c_str(),"r");
+  if(!f)
+    return false;
   while(!feof(f))
     {
       size_t anzahl=fread(buffer,1,1000,f);
@@ -482,6 +485,7 @@ void Document::parseFile(std::string file)
   fclose(f);
 
   parseMemory(s);
+  return true;
 }
 
 Node &Document::root()
@@ -506,6 +510,7 @@ void Document::parse_memory(const std::string &s)
 
 void Document::parseHeader(ParserInfo &p)
 {
+  CTRACE;
   bool found=true;
   while(found)
     {

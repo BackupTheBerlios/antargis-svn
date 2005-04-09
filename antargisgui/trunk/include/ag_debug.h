@@ -52,7 +52,7 @@ inline std::string toString(const bool&b)
 
 std::ostream &getDebug();
 
-#define debug(c) mydebug(toString(__FILE__),toString(__LINE__),c)
+#define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
 template<class T>
 inline void mydebug(std::string f,std::string l,const T&t)
@@ -99,8 +99,8 @@ private:
   }
 };
 
-#define TRACE D test__LINE__(toString(__FILE__)+toString(" ")+toString(__LINE__)+toString(" ")+toString( __PRETTY_FUNCTION__))
-#define CTRACE D test__LINE__(toString(__FILE__)+toString(" ")+toString(__LINE__)+toString(" ")+toString( __PRETTY_FUNCTION__)+toString(" ")+toString(((void*)this)))
+#define TRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
+#define CTRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(((void*)this)))
 
 #define Assert(x) assert(x)
 

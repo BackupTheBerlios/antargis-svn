@@ -18646,6 +18646,30 @@ _wrap_loadTheme(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_loadThemeFile(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    bool result;
+    std::string temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp1 = std::string(StringValuePtr(argv[0]));
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (bool)loadThemeFile((std::string const &)*arg1);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGMenuEvent_allocate(VALUE self) {
@@ -22555,6 +22579,8 @@ static VALUE
 _wrap_Document_parseFile(int argc, VALUE *argv, VALUE self) {
     Document *arg1 = (Document *) 0 ;
     std::string arg2 ;
+    bool result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -22566,9 +22592,10 @@ _wrap_Document_parseFile(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->parseFile(arg2);
+    result = (bool)(arg1)->parseFile(arg2);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -24075,6 +24102,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_module_function(mLibantargisruby, "getTheme", VALUEFUNC(_wrap_getTheme), -1);
     rb_define_module_function(mLibantargisruby, "setTheme", VALUEFUNC(_wrap_setTheme), -1);
     rb_define_module_function(mLibantargisruby, "loadTheme", VALUEFUNC(_wrap_loadTheme), -1);
+    rb_define_module_function(mLibantargisruby, "loadThemeFile", VALUEFUNC(_wrap_loadThemeFile), -1);
     
     cAGMenuEvent.klass = rb_define_class_under(mLibantargisruby, "AGMenuEvent", ((swig_class *) SWIGTYPE_p_AGEvent->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGMenuEvent, (void *) &cAGMenuEvent);
