@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_layout.h
+ * ag_layoutfactory.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,23 +18,37 @@
  * License along with this program.
  */
 
-#ifndef AG_LAYOUT_H
-#define AG_LAYOUT_H
+#ifndef AG_LAYOUTFACTORY_H
+#define AG_LAYOUTFACTORY_H
 
 #include "ag_widget.h"
 #include "ag_xml.h"
 
-class AGTable;
-
-class AGLayout:public AGWidget
+class AGLayoutCreator
 {
  public:
-  AGLayout(AGWidget *pgParent,const std::string &pXMLData);
+  AGLayoutCreator(const std::string &pName);
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)=0;
 };
 
-AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode);
-void parseChildren(AGWidget *pParent,const xmlpp::Node &pNode);
-//AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geom);
-AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode);
+class AGLayoutFactory
+{
+  std::map<std::string,AGLayoutCreator*> mCreators;
 
+  AGLayoutFactory();
+ public:
+
+  void addCreator(const std::string &pName,AGLayoutCreator *creator);
+
+  AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode);
+  
+  friend AGLayoutFactory *getLayoutFactory();
+};
+
+AGLayoutFactory *getLayoutFactory();
+
+#define IMPLEMENT_COMPONENT_FACTORY(CLASS)                                  \
+AG##CLASS##LayoutCreator factory_##CLASS;
+
+#define REGISTER_COMPONENT(CLASS,NAME) AG##CLASS##LayoutCreator():AGLayoutCreator(NAME){}
 #endif

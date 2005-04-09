@@ -21,10 +21,15 @@
 #include "ag_layout.h"
 #include "ag_xml.h"
 #include "ag_tools.h"
+#include "ag_theme.h"
 
 #include "ag_button.h"
 #include "ag_edit.h"
 #include "ag_window.h"
+#include "ag_text.h"
+
+#include "ag_layoutfactory.h"
+
 
 AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
   AGWidget(pgParent,AGRect(0,0,0,0))
@@ -43,47 +48,28 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
 
 }
 
-AGWidget *AGLayout::parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
+AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 {
   std::string n=pNode.getName();
 
-  AGRect geom=getGeometry(pParent,pNode);
+  AGRect geom=getLayoutGeometry(pParent,pNode);
 
   AGWidget *w=0;
 
   std::cout<<"huhu"<<std::endl;
   cdebug("n:"<<n);
-  
-  if(n=="button")
-    {
-      AGButton *b;
-      std::string caption=pNode.get("caption");
-      w=(b=new AGButton(pParent,geom,caption));
 
-      std::string captionImage=pNode.get("caption-image");
-      if(captionImage.length())
-	b->setSurface(getScreen().loadSurface(captionImage));
+  w=getLayoutFactory()->create(pParent,geom,pNode);
 
-    }
-  else if(n=="window")
-    {
-      std::string title=pNode.get("title");
-      w=new AGWindow(pParent,geom,title);
-    }
-  else if(n=="table")
-    {
-      w=parseTable(pParent,pNode,geom);
-      pParent->addChild(w);
-      w=0;
-    }
-    
+  if(w!=0 && pNode.get("name").length())
+    w->setName(pNode.get("name"));
 
   parseChildren(w,pNode);
 
   return w;
 }
 
-AGRect AGLayout::getGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
+AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 {
   TRACE;
   AGRect geom=pParent->getClientRect();
@@ -107,7 +93,7 @@ AGRect AGLayout::getGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
   return geom;
 }
 
-void AGLayout::parseChildren(AGWidget *pParent,const xmlpp::Node &pNode)
+void parseChildren(AGWidget *pParent,const xmlpp::Node &pNode)
 {
   if(pParent)
     {
@@ -121,7 +107,41 @@ void AGLayout::parseChildren(AGWidget *pParent,const xmlpp::Node &pNode)
     }
 }
 
-AGTable *AGLayout::parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geom)
+
+// Layout-Factories
+class AGButtonLayoutCreator:public AGLayoutCreator
+{
+ public:
+  REGISTER_COMPONENT(Button,"button")
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    AGButton *b;
+    std::string caption=pNode.get("caption");
+    b=new AGButton(pParent,pRect,caption);
+    
+    std::string captionImage=pNode.get("caption-image");
+    if(captionImage.length())
+      b->setSurface(getScreen().loadSurface(captionImage),false);
+    return b;
+  }
+};
+
+
+class AGTableLayoutCreator:public AGLayoutCreator
+{
+ public:
+  REGISTER_COMPONENT(Table,"table")
+
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    AGWidget *w=parseTable(pParent,pNode,pRect);
+    pParent->addChild(w);
+    w=0;
+    return w;
+  }
+
+AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geom)
 {
   TRACE;
   AGTable *t;
@@ -203,3 +223,50 @@ AGTable *AGLayout::parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const A
   //  t->arrange();
   return t;
 }
+
+
+};
+
+class AGWindowLayoutCreator:public AGLayoutCreator
+{
+ public:
+  REGISTER_COMPONENT(Window,"window")
+  
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+      std::string title=pNode.get("title");
+      AGWidget *w=new AGWindow(pParent,pRect,title);
+      return w;
+  }
+};
+
+IMPLEMENT_COMPONENT_FACTORY(Table);
+IMPLEMENT_COMPONENT_FACTORY(Button);
+IMPLEMENT_COMPONENT_FACTORY(Window);
+
+
+// AGText creator
+class AGTextLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(Text,"text")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    std::string text=pNode.get("caption");
+    AGFont font;
+    if(pNode.get("font")!="")
+      font=getTheme()->getFont(pNode.get("font"));
+    
+    //    AGWidget *w=new AGText(pParent,pRect,text,font);
+    AGEdit *w=new AGEdit(pParent,pRect);
+    w->setText(text);
+    w->setFont(font);
+    w->setAlign(EDIT_CENTER);
+    w->setMutable(false);
+    w->setBackground(false);
+
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(Text);

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_layout.h
+ * ag_dialog.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,23 +18,16 @@
  * License along with this program.
  */
 
-#ifndef AG_LAYOUT_H
-#define AG_LAYOUT_H
+#ifndef AG_DIALOG_H
+#define AG_DIALOG_H
 
-#include "ag_widget.h"
-#include "ag_xml.h"
+#include "ag_layout.h"
 
-class AGTable;
-
-class AGLayout:public AGWidget
+class AGDialog:public AGLayout
 {
  public:
-  AGLayout(AGWidget *pgParent,const std::string &pXMLData);
-};
+  AGDialog(AGWidget *pgParent,const std::string &pXMLData);
 
-AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode);
-void parseChildren(AGWidget *pParent,const xmlpp::Node &pNode);
-//AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geom);
-AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode);
+};
 
 #endif

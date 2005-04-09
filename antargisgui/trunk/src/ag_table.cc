@@ -173,6 +173,7 @@ AGRect AGTable::getClientRect(int x,int y) const
 
 void AGTable::arrange()
 {
+  CTRACE;
   int mx,my;
 
   // first get the fixed sizes

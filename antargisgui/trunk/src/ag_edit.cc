@@ -29,10 +29,16 @@
 AGEditLine::AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd):
   mText(pText),mFont(pFont),mHardEnd(pHardEnd)
 {
+  mAlign=EDIT_LEFT;
 }
 
 AGEditLine::~AGEditLine()
 {
+}
+
+void AGEditLine::setAlign(AGAlign pAlign)
+{
+  mAlign=pAlign;
 }
 
 AGFont AGEditLine::getFont() const
@@ -45,7 +51,14 @@ void AGEditLine::draw(const AGPoint &pPoint,const AGRect &pClip)
 {
   //  AGSurface s(getScreen());
   //  AGSurface s(
-  AGFontEngine::renderText(&getScreen(),pClip,pPoint.x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
+  int x=0,y=0;
+  if(mAlign==EDIT_CENTER)
+    {
+      x=(pClip.w-mFont.getWidth(mText))/2;
+      y=-(mFont.getHeight(mText))/2;
+    }
+
+  AGFontEngine::renderText(&getScreen(),pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
 }
 
 void AGEditLine::drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c)
@@ -223,7 +236,9 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   AGFont font2("Arial.ttf",13);
   font1.setColor(AGColor(0,0,0));
   font2.setColor(AGColor(0,0,0xFF));
-  mLines.push_back(AGEditLine("",font1,true));
+  AGEditLine l("",font1,true);
+  l.setAlign(mAlign);
+  mLines.push_back(l);
   /*  mLines.push_back(AGEditLine("hallo1",font1,true));
   if(mMultiLine)
     {
@@ -240,12 +255,14 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   setMenu(menu);
 
   mBackground=AGTexture(getTheme()->getSurface("edit.background.image"));
+  mDrawBackground=true;
 }
 
 void AGEdit::draw(const AGRect &pRect)
 {
   
   int x,y,cy;
+  int completeHeight=0;
   x=y=cy=0;
   
   drawBackground(pRect);
@@ -262,6 +279,17 @@ void AGEdit::draw(const AGRect &pRect)
   
   if(mCy<mViewCy)
     mViewCy=mCy;
+
+  // get complete height - for hor. centering
+  for(i=mLines.begin();i!=mLines.end();i++)
+    {
+      completeHeight+=i->height();
+    }
+  if(mAlign==EDIT_CENTER)
+    y=getRect().h/2-completeHeight/2;
+
+  i=mLines.begin();
+
 
   for(int k=0;k<mViewCy;k++)
     i++;
@@ -294,7 +322,8 @@ void AGEdit::draw(const AGRect &pRect)
 
 void AGEdit::drawBackground(const AGRect &pRect)
 {
-  getScreen().tile(mBackground,pRect.project(getRect()));
+  if(mDrawBackground)
+    getScreen().tile(mBackground,pRect.project(getRect()));
 }
 
 bool AGEdit::eventKeyUp(const AGEvent *m2)
@@ -430,6 +459,7 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
 	{
 	  getActLine();
 	  AGEditLine l=actLine->split(mCx);
+	  l.setAlign(mAlign);
 	  mCx=0;
 	  mCy++;
 	  insertLine(l);
@@ -561,7 +591,11 @@ void AGEdit::checkWrap()
 		}
 	      i++;
 	      if(n.second) // is hard end
-		i=mLines.insert(i,AGEditLine(n.first,actLine->getFont(),n.second));
+		{
+		  AGEditLine l(n.first,actLine->getFont(),n.second);
+		  l.setAlign(mAlign);
+		  i=mLines.insert(i,l);
+		}
 	      else
 		{
 		  // fill line after
@@ -644,8 +678,21 @@ void AGEdit::setText(const std::string &pText)
   size_t i;
   for(i=0;i<pText.length();i++)
     {
-      insert(pText[i]);
-      mCx++;
+      if(pText[i]=='\n')
+	{
+	  getActLine();
+	  AGEditLine l=actLine->split(mCx);
+	  l.setAlign(mAlign);
+	  mCx=0;
+	  mCy++;
+	  insertLine(l);
+	  checkWrap();
+	}
+      else
+	{
+	  insert(pText[i]);
+	  mCx++;
+	}
     }
 }
 void AGEdit::setMutable(bool pMutable)
@@ -653,3 +700,17 @@ void AGEdit::setMutable(bool pMutable)
   mMutable=pMutable;
   mShowCursor=pMutable; // FIXME: show cursor only if widget has focus
 }
+
+void AGEdit::setAlign(AGAlign pAlign)
+{
+  mAlign=pAlign;
+  std::list<AGEditLine>::iterator i=mLines.begin();
+  for(;i!=mLines.end();i++)
+    i->setAlign(pAlign);
+}
+
+void AGEdit::setBackground(bool pDrawBackground)
+{
+  mDrawBackground=pDrawBackground;
+}
+

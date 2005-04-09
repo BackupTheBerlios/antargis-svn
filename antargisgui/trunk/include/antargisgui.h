@@ -47,6 +47,7 @@
 #include "ag_background.h"
 #include "ag_layout.h"
 #include "ag_xml.h"
+#include "ag_dialog.h"
 
 #ifdef SWIG
 %include "ag_main.h"
@@ -75,6 +76,7 @@
 %include "ag_background.h"
 %include "ag_layout.h"
 %include "ag_xml.h"
+%include "ag_dialog.h"
 #endif
 
 #endif

@@ -37,6 +37,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mMenu(0),hasFocus(false),mFocus(0)
 
 {
+  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
 }
@@ -201,7 +202,7 @@ bool AGWidget::eventMouseButtonDown(const AGEvent *m)
 
 bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 {
-  cdebug("typeid:"<<typeid(*this).name());
+  //  cdebug("typeid:"<<typeid(*this).name());
   bool was=mButtonDown;
   mButtonDown=false;
   
@@ -245,6 +246,7 @@ void AGWidget::addChildBack(AGWidget *w)
 void AGWidget::setRect(const AGRect &pRect)
 {
   mr=pRect;
+  cdebug(mr);
 }
 
 int AGWidget::minWidth() const
@@ -297,6 +299,7 @@ void AGWidget::setWidth(int w)
 }
 void AGWidget::setHeight(int h)
 {
+  cdebug(h);
   mr.h=h;
 }
 
@@ -476,6 +479,22 @@ void AGWidget::setName(const std::string &pName)
   mName=pName;
 }
 
+AGWidget *AGWidget::getChild(const std::string &pName)
+{
+  if(mName==pName)
+    return this;
+
+  AGWidget *w=0;
+  std::list<AGWidget*>::iterator i=mChildren.begin();
+
+  for(;i!=mChildren.end();i++)
+    {
+      w=(*i)->getChild(pName);
+      if(w)
+	break;
+    }
+  return w;
+}
 
 #ifdef USE_RUBY
 #include "ruby.h"

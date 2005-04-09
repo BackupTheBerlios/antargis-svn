@@ -56,7 +56,7 @@ AGFont AGTheme::getFont(const std::string &pName)
 }
 AGColor AGTheme::getColor(const std::string &pName)
 {
-  cdebug(pName);
+  //  cdebug(pName);
   if(mColors.find(pName)==mColors.end())
     return mColors[trunk(pName)];
   return mColors[pName];

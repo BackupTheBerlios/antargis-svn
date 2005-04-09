@@ -111,6 +111,7 @@ class AGWidget:public AGMessageObject
 
   std::string getName() const;
   void setName(const std::string &pName);
+  AGWidget *getChild(const std::string &pName);
 
  private:
 

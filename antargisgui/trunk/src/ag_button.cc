@@ -38,8 +38,10 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   font.setColor(AGColor(0,0,0));
   mTextW=new AGEdit(this,r.origin().shrink(borderWidth));//,mText,font);
   mTextW->setText(mText);
+  mTextW->setAlign(EDIT_CENTER);
   mTextW->setFont(font);
   mTextW->setMutable(false);
+  mTextW->setBackground(false);
   addChild(mTextW);
 
   mBG[NORMAL]=AGBackground("button.background.normal");
@@ -99,13 +101,13 @@ void AGButton::draw(const AGRect &r)
   bc2=theme->getColor("button.border.color2");//std::string("borderColor2")+style);
   {
   
-  CTRACE;
+    //  CTRACE;
 
   AGRect mr=r.project(getRect());
-  cdebug(getRect());
-  cdebug(mr);
+  //  cdebug(getRect());
+  //  cdebug(mr);
   mr=getScreenRect();
-  cdebug(mr);
+  //  cdebug(mr);
   if(mState==NORMAL || mState==LIGHTED)
     AGDraw::drawBorder(&getScreen(),mr,borderWidth,bc1,bc2);
   else 

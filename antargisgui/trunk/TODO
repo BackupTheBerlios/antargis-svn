@@ -1,3 +1,5 @@
+* Setup LayoutCreators and AGLayout, so that it can be run recursively
+
 FIXME: 
 * mGLMode should be set correctly
 * STUBS must be filled

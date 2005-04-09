@@ -25,11 +25,15 @@
 #include "ag_font.h"
 #include "ag_gsurface.h"
 
+enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
+
 class AGEditLine
 {
  public:
   AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd);
   virtual ~AGEditLine();
+
+  void setAlign(AGAlign pAlign);
 
   virtual void draw(const AGPoint &pPoint,const AGRect &pClip);
   virtual void drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c);
@@ -61,6 +65,7 @@ class AGEditLine
   std::string mText;
   AGFont mFont;
   bool mHardEnd;
+  AGAlign mAlign;
 };
 
 class AGEdit:public AGWidget
@@ -83,6 +88,10 @@ class AGEdit:public AGWidget
   void setFont(const AGFont &pFont);
 
   void setMutable(bool pMutable);
+
+  void setAlign(AGAlign pAlign);
+
+  void setBackground(bool pDrawBackground);
 
  private:
 
@@ -112,7 +121,10 @@ class AGEdit:public AGWidget
 
   AGFont mFont;
 
+  AGAlign mAlign;
+
   bool mMutable;
+  bool mDrawBackground;
 };
 
 
