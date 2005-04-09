@@ -23,4 +23,32 @@
 AGDialog::AGDialog(AGWidget *pgParent,const std::string &pXMLData):
   AGLayout(pgParent,pXMLData)
 {
+  AGWidget *w;
+  
+  w=getChild("ok");
+  if(w)
+    w->sigClick.connect(slot(this,&AGDialog::eventOk));
+  w=getChild("cancel");
+  if(w)
+    w->sigClick.connect(slot(this,&AGDialog::eventCancel));
+  w=getChild("close");
+  if(w)
+    w->sigClick.connect(slot(this,&AGDialog::eventClose));
+  
+}
+
+bool AGDialog::eventOk(const char*pName,const AGEvent *event,AGMessageObject *pCaller)
+{
+  CTRACE;
+  return false;
+}
+bool AGDialog::eventCancel(const char*pName,const AGEvent *event,AGMessageObject *pCaller)
+{
+  CTRACE;
+  return false;
+}
+bool AGDialog::eventClose(const char*pName,const AGEvent *event,AGMessageObject *pCaller)
+{
+  CTRACE;
+  return false;
 }

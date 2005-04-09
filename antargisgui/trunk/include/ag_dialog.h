@@ -28,6 +28,9 @@ class AGDialog:public AGLayout
  public:
   AGDialog(AGWidget *pgParent,const std::string &pXMLData);
 
+  virtual bool eventOk(const char*pName,const AGEvent *event,AGMessageObject *pCaller);
+  virtual bool eventCancel(const char*pName,const AGEvent *event,AGMessageObject *pCaller);
+  virtual bool eventClose(const char*pName,const AGEvent *event,AGMessageObject *pCaller);
 };
 
 #endif

@@ -800,6 +800,7 @@ public:
     SwigDirector_AGDialog(VALUE self, AGWidget *pgParent, std::string const &pXMLData);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual bool eventClose(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
@@ -820,6 +821,7 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual bool eventOk(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -828,6 +830,7 @@ public:
     virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
+    virtual bool eventCancel(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };

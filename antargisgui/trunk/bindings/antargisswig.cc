@@ -10235,6 +10235,32 @@ bool SwigDirector_AGDialog::eventGotFocus() {
 }
 
 
+bool SwigDirector_AGDialog::eventClose(char const *pName, AGEvent const *event, AGMessageObject *pCaller) {
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGDialog::eventClose(pName,event,pCaller);
+    }
+    obj0 = rb_str_new2(pName);
+    obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventClose"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 bool SwigDirector_AGDialog::eventShow() {
     bool c_result ;
     VALUE result;
@@ -10540,6 +10566,32 @@ bool SwigDirector_AGDialog::signal(char const *pName, AGEvent const *m, AGMessag
 }
 
 
+bool SwigDirector_AGDialog::eventOk(char const *pName, AGEvent const *event, AGMessageObject *pCaller) {
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGDialog::eventOk(pName,event,pCaller);
+    }
+    obj0 = rb_str_new2(pName);
+    obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventOk"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGDialog::setLeft(int x) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10641,6 +10693,32 @@ bool SwigDirector_AGDialog::eventHide() {
         return AGWidget::eventHide();
     }
     result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGDialog::eventCancel(char const *pName, AGEvent const *event, AGMessageObject *pCaller) {
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGDialog::eventCancel(pName,event,pCaller);
+    }
+    obj0 = rb_str_new2(pName);
+    obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventCancel"), 3,obj0,obj1,obj2);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
@@ -23089,6 +23167,81 @@ _wrap_new_AGDialog(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGDialog_eventOk(int argc, VALUE *argv, VALUE self) {
+    AGDialog *arg1 = (AGDialog *) 0 ;
+    char *arg2 = (char *) 0 ;
+    AGEvent *arg3 = (AGEvent *) 0 ;
+    AGMessageObject *arg4 = (AGMessageObject *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDialog, 1);
+    arg2 = StringValuePtr(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGEvent, 1);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGMessageObject, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventOk((char const *)arg2,(AGEvent const *)arg3,arg4);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGDialog_eventCancel(int argc, VALUE *argv, VALUE self) {
+    AGDialog *arg1 = (AGDialog *) 0 ;
+    char *arg2 = (char *) 0 ;
+    AGEvent *arg3 = (AGEvent *) 0 ;
+    AGMessageObject *arg4 = (AGMessageObject *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDialog, 1);
+    arg2 = StringValuePtr(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGEvent, 1);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGMessageObject, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventCancel((char const *)arg2,(AGEvent const *)arg3,arg4);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGDialog_eventClose(int argc, VALUE *argv, VALUE self) {
+    AGDialog *arg1 = (AGDialog *) 0 ;
+    char *arg2 = (char *) 0 ;
+    AGEvent *arg3 = (AGEvent *) 0 ;
+    AGMessageObject *arg4 = (AGMessageObject *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDialog, 1);
+    arg2 = StringValuePtr(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGEvent, 1);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGMessageObject, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventClose((char const *)arg2,(AGEvent const *)arg3,arg4);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 static void
 free_AGDialog(AGDialog *arg1) {
     delete arg1;
@@ -24192,6 +24345,9 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGDialog, (void *) &cAGDialog);
     rb_define_alloc_func(cAGDialog.klass, _wrap_AGDialog_allocate);
     rb_define_method(cAGDialog.klass, "initialize", VALUEFUNC(_wrap_new_AGDialog), -1);
+    rb_define_method(cAGDialog.klass, "eventOk", VALUEFUNC(_wrap_AGDialog_eventOk), -1);
+    rb_define_method(cAGDialog.klass, "eventCancel", VALUEFUNC(_wrap_AGDialog_eventCancel), -1);
+    rb_define_method(cAGDialog.klass, "eventClose", VALUEFUNC(_wrap_AGDialog_eventClose), -1);
     cAGDialog.mark = 0;
     cAGDialog.destroy = (void (*)(void *)) free_AGDialog;
 }
