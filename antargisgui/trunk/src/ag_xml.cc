@@ -344,7 +344,8 @@ void Node::parseArguments(ParserInfo &info)
   // argument always starts with " "
   while(info.next()==' ')
     {
-      parseChar(info,' ');
+      while(info.next()==' ')
+	parseChar(info,' ');
       std::string n,v;
       n=parseName(info);
       parseChar(info,'=');

@@ -60,6 +60,8 @@ class AGButton:public AGWidget
 
   virtual std::string getName() const;
 
+  void setEnabled(bool pEnable);
+
  private:
   std::string mText;
   int mID;
@@ -76,6 +78,7 @@ class AGButton:public AGWidget
   bool lower;
 
   std::map<State,AGBackground> mBG;
+  bool mEnabled;
 };
 
 #endif

@@ -17505,6 +17505,21 @@ _wrap_AGButton_getName(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGButton_setEnabled(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setEnabled(arg2);
+    
+    return Qnil;
+}
+
+
 static void
 free_AGButton(AGButton *arg1) {
     delete arg1;
@@ -24028,6 +24043,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGButton.klass, "setWidth", VALUEFUNC(_wrap_AGButton_setWidth), -1);
     rb_define_method(cAGButton.klass, "setHeight", VALUEFUNC(_wrap_AGButton_setHeight), -1);
     rb_define_method(cAGButton.klass, "getName", VALUEFUNC(_wrap_AGButton_getName), -1);
+    rb_define_method(cAGButton.klass, "setEnabled", VALUEFUNC(_wrap_AGButton_setEnabled), -1);
     cAGButton.mark = 0;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisruby, "disown_AGApplication", VALUEFUNC(_wrap_disown_AGApplication), -1);

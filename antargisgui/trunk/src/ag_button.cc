@@ -50,6 +50,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   mBG[CHECKED]=AGBackground("button.background.checked");
 
   cdebug("borderWidth:"<<borderWidth);
+  mEnabled=true;
 }
 
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
@@ -159,11 +160,15 @@ void AGButton::drawBackground(const AGRect &r)
 */
 bool AGButton::eventMouseEnter()
 {
+  if(!mEnabled)
+    return false;
   mState=LIGHTED;
   return false;
 }
 bool AGButton::eventMouseLeave()
 {
+  if(!mEnabled)
+    return false;
   mState=NORMAL;
   return false;
 }
@@ -171,6 +176,9 @@ bool AGButton::eventMouseLeave()
 
 bool AGButton::eventMouseButtonDown(const AGEvent *m)
 {
+  if(!mEnabled)
+    return false;
+
   CTRACE;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(e)
@@ -190,6 +198,8 @@ bool AGButton::eventMouseButtonDown(const AGEvent *m)
 
 bool AGButton::eventMouseButtonUp(const AGEvent *m)
 {
+  if(!mEnabled)
+    return false;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(e)
     {
@@ -227,4 +237,9 @@ AGButton AGButton::test()
 std::string AGButton::getName() const
 {
   return mText;
+}
+
+void AGButton::setEnabled(bool pEnable)
+{
+  mEnabled=pEnable;
 }
