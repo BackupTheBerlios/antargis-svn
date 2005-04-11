@@ -1,34 +1,16 @@
 <?xml version="1.0"?>
 <layout geometry="(0,0,1024,768)" name="GameLayout">
+  <!-- main game layout -->
 	<antView name="mainView"/>
-  <table geometry="(0,0,50,350)" cols="1" rows="7">
+  <table geometry="(0,0,50,350)" cols="1" rows="6">
     <button col="0" row="0" name="pointer" caption-image="data/pointer1.png"/>
     <button col="0" row="1" name="edit" caption-image="data/edit.png"/>
     <button col="0" row="2" name="save" caption-image="data/save.png"/>
     <button col="0" row="3" name="load" caption-image="data/load.png"/>
-    <button col="0" row="4" name="pins" caption-image="graphics/white_pin.png"/>
-    <button col="0" row="5" name="tree" caption-image="data/small_tree.png"/>
-    <button col="0" row="6" caption="b1"/>
   </table>
   <table geometry="(923,0,100,50)" cols="2" rows="1">
     <button col="0" row="0" name="quit" caption-image="data/door.png"/>
     <button col="1" row="0" name="pause" caption-image="data/pause.png"/>
   </table>
-  <antMiniView geometry="(808,551,216,216)"/>
-<!--  <window na
-  me="window" title="Playername">
-		<table cols="1" rows="2">
-			<colsize col="0" relative="1"/>
-			<rowsize row="0" relative="1"/>
-			<rowsize row="1" fixed="30"/>
-			<table col="0" row="0" cols="2" rows="1">
-				<colsize col="0" fixed="66"></colsize>
-				<colsize col="1" relative="1"></colsize>
-				<rowsize row="0" relative="1"></rowsize>
-				<button col="0" row="0" caption="huhu" caption-image="face1.png"/>
-				<text col="1" row="0" name="text" caption="'You awaken...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.'"/>
-			</table>
-			<button col="0" row="1" name="ok" caption="Ok"/>
-		</table>
-	</window>-->
+  <antMiniView name="miniMap" geometry="(808,551,216,216)"/>
 </layout>

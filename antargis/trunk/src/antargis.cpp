@@ -21,19 +21,6 @@
 #include <exception>
 #include <iostream>
 
-void setTheme()
-{
-  AGTheme *t=getTheme();
-  AGGScreen &s=getScreen();
-  t->setSurface("buttonbg.normal",s.loadSurface("data/rnew_button_bg0.png"));
-  t->setSurface("buttonbg.lighted",s.loadSurface("data/rnew_button_bg1.png"));
-  t->setSurface("buttonbg.pressed",s.loadSurface("data/rnew_button_bg2.png"));
-  t->setSurface("buttonbg.checked",s.loadSurface("data/rnew_button_bg3.png"));
-  t->setInt("borderWidth.button",0);
-  t->setInt("buttonLowerOnClick",1);
-}
-
-
 class AntargisApp:public MyApp
   {
     AntargisMap map;
@@ -46,6 +33,8 @@ class AntargisApp:public MyApp
     AntargisApp(int W,int H):map(128,128),w(W),h(H)
     {
       paused=false;
+      mainView=0;
+      miniMap=0;
     }
     void run()
     {
@@ -94,14 +83,12 @@ class AntargisApp:public MyApp
 
       layout->getChild("load")->sigClick.connect(slot(this,&AntargisApp::loadClick));
       layout->getChild("save")->sigClick.connect(slot(this,&AntargisApp::saveClick));
-      layout->getChild("pins")->sigClick.connect(slot(this,&AntargisApp::pinClick));
       layout->getChild("edit")->sigClick.connect(slot(this,&AntargisApp::toggleEdit));
       layout->getChild("quit")->sigClick.connect(slot(this,&AntargisApp::quitClick));
       layout->getChild("pause")->sigClick.connect(slot(this,&AntargisApp::pause));
 
-      layout->getChild("tree")->sigClick.connect(slot(this,&AntargisApp::pinClick)); // FIXME
-
       mainView=dynamic_cast<EditIsoView*>(layout->getChild("mainView"));
+      miniMap=dynamic_cast<MiniMap*>(layout->getChild("miniMap"));
 
       MyApp::run();
     }
@@ -118,21 +105,19 @@ class AntargisApp:public MyApp
       getMap()->saveMap("dummy.antlvl");
       return true;
     }
-    bool pinClick(const char *,const AGEvent *)
-    {
-      mainView->toggleShowPoints();
-      return true;
-    }
     bool loadClick(const char *,const AGEvent *)
     {
       getMap()->loadMap("dummy.antlvl");
-      mainView->completeUpdate();
-      miniMap->update();
+      if(mainView)
+        mainView->completeUpdate();
+      if(miniMap)
+        miniMap->update();
       return true;
     }
     bool mapEdited(const char *,const AGEvent *)
     {
-      miniMap->update();
+      if(miniMap)
+        miniMap->update();
       return true;
     }
     bool quitClick(const char *,const AGEvent *)
@@ -167,8 +152,6 @@ int main(int argc,char *argv[])
       int h=768;
 
       main.changeRes(w,h,32,false,true);
-
-      setTheme();
 
       AntargisApp app(w,h);
 

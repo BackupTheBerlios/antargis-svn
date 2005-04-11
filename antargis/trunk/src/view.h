@@ -91,10 +91,11 @@ class EditIsoView: public CompleteIsoView
     bool mEditing;
     int editSize;
     
-    std::list<AGWidget*> mEditWidgets;
+    //std::list<AGWidget*> mEditWidgets;
+    AGWidget *mLayout;
     
-    std::map<AGMessageObject*,int> mEditButtons;
-    AGButton *allWater,*allGrass;
+    //std::map<AGMessageObject*,int> mEditButtons;
+    //AGButton *allWater,*allGrass;
     
     std::string mAddEntity;
     
@@ -107,6 +108,7 @@ class EditIsoView: public CompleteIsoView
     bool setAll(const char *name,const AGEvent *e,AGMessageObject *pCaller);
     bool addEntity(const char *name,const AGEvent *e,AGMessageObject *pCaller);
     bool setRubber(const char *name,const AGEvent *e,AGMessageObject *pCaller);
+    bool togglePoints(const char *name,const AGEvent *e,AGMessageObject *pCaller);
 
     // moving about
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);

@@ -47,8 +47,8 @@ class Bitmap:public std::vector<T>
 
     const T &operator[](std::pair<int,int> p) const
       {
-        //        static int maxx=0,maxy=0;
-        /*if(p.first>maxx||p.second>maxy)
+        /*        static int maxx=0,maxy=0;
+        if(p.first>maxx||p.second>maxy)
           {
             maxx=std::max(p.first,maxx);
             maxy=std::max(p.second,maxy);
@@ -63,9 +63,14 @@ class Bitmap:public std::vector<T>
         while(p.second<0)
           p.second+=w;
 
-        //  cdebug(p.first<<" "<<w);
-
+        //cdebug(p.first<<" "<<w);
+        if(!(p.first>=0 && p.second>=0 && p.first<w && p.second<h))
+        {
+          cdebug(w<<":"<<h<<" p:"<<p.first<<";"<<p.second);
+        }
+        
         assert(p.first>=0 && p.second>=0 && p.first<w && p.second<h);
+        
         return std::vector<T>::operator[](p.first+p.second*w);
       }
 

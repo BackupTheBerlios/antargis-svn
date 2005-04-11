@@ -289,10 +289,15 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
       AntEntity *e=0;
       if(i->getName()=="heightMap")
         {
+          CTRACE;
+          cdebug("content:"<<i->getContent());
+          cdebug("---");
           std::istringstream hmaps;
           hmaps.str(i->getContent());
           // parse height map
           float h;
+          cdebug("mH:"<<mH);
+          cdebug("mW:"<<mW);
           for(int j=0;j<mH;j++)
             {
               for(int i=0;i<mW;i++)
@@ -300,6 +305,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
                   hmaps>>h;
                   mHeight.setPoint(i,j,h);
                 }
+              cdebug("j:"<<j);
             }
         }
        else if(i->getName()=="antTree")

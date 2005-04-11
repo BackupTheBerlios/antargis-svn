@@ -4,6 +4,8 @@
 #include <ag_button.h>
 #include "tree.h"
 
+#include <ag_layout.h>
+#include <ag_tools.h>
 #include <ag_layoutfactory.h>
 
 
@@ -524,48 +526,25 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   editSize=1;
 
   // add edit buttons at the bottom
+  AGLayout *layout;
+  addChild(mLayout=layout=new AGLayout(this,getFile("edit_layout.xml")));
+  layout->hide();
   for(int i=0;i<10 && std::string(editNames[i]).length();i++)
-    {
-      addChild(b=new AGButton(this,AGRect(50*i,height()-51,50,50),"test Window"));
-      mEditWidgets.push_back(b);
-      b->setSurface(getScreen().loadSurface(std::string("data/")+editNames[i]),false);
-      b->sigClick.connect(slot(this,&EditIsoView::selectSize));
-      mEditButtons[b]=editSizes[i];
-    }
-
-  addChild(allGrass=new AGButton(this,AGRect(50*7,height()-51,50,50),"allGrass"));
-  allGrass->setSurface(getScreen().loadSurface("data/grass2.png"),false);
-  allGrass->sigClick.connect(slot(this,&EditIsoView::setAll));
-  addChild(allWater=new AGButton(this,AGRect(50*8,height()-51,50,50),"allWater"));
-  allWater->setSurface(getScreen().loadSurface("data/water2.png"),false);
-  allWater->sigClick.connect(slot(this,&EditIsoView::setAll));
-
-  AGButton *addTree1,*rubber,*stones;
-
-  addChild(rubber=new AGButton(this,AGRect(50*9,height()-51,50,50),"rubber1"));
-  rubber->setSurface(getScreen().loadSurface("data/rubber.png"),false);
-  rubber->sigClick.connect(slot(this,&EditIsoView::setRubber));
+    layout->getChild(std::string("edit")+toString(editSizes[i]))->sigClick.connect(slot(this,&EditIsoView::selectSize));
+  layout->getChild("grass")->sigClick.connect(slot(this,&EditIsoView::setAll));
+  layout->getChild("water")->sigClick.connect(slot(this,&EditIsoView::setAll));
+  layout->getChild("rubber")->sigClick.connect(slot(this,&EditIsoView::setRubber));
+  layout->getChild("tree")->sigClick.connect(slot(this,&EditIsoView::addEntity));
+  layout->getChild("stones")->sigClick.connect(slot(this,&EditIsoView::addEntity));
+  layout->getChild("pins")->sigClick.connect(slot(this,&EditIsoView::togglePoints));
   
-  addChild(addTree1=new AGButton(this,AGRect(50*10,height()-51,50,50),"addTree1"));
-  addTree1->setSurface(getScreen().loadSurface("data/small_tree.png"),false);
-  addTree1->sigClick.connect(slot(this,&EditIsoView::addEntity));
-  
-  addChild(stones=new AGButton(this,AGRect(50*11,height()-51,50,50),"stones1"));
-  stones->setSurface(getScreen().loadSurface("data/stones1a.png"),false);
-  stones->sigClick.connect(slot(this,&EditIsoView::addEntity));
-
-  mEditWidgets.push_back(allGrass);
-  mEditWidgets.push_back(allWater);
-  mEditWidgets.push_back(addTree1);
-  mEditWidgets.push_back(rubber);
-  mEditWidgets.push_back(stones);
-
-  std::list<AGWidget*>::iterator i=mChildren.begin();
-  for(;i!=mChildren.end();i++)
-    (*i)->hide();
- 
-
 }
+bool EditIsoView::togglePoints(const char *name,const AGEvent *e,AGMessageObject *pCaller)
+{
+  toggleShowPoints();
+  return true;
+}
+
 
 bool EditIsoView::setRubber(const char *,const AGEvent *,AGMessageObject *pCaller)
 {
@@ -575,7 +554,7 @@ bool EditIsoView::setRubber(const char *,const AGEvent *,AGMessageObject *pCalle
 
 bool EditIsoView::addEntity(const char *,const AGEvent *,AGMessageObject *pCaller)
 {
-  AGButton *b=dynamic_cast<AGButton*>(pCaller);
+  AGWidget *b=dynamic_cast<AGWidget*>(pCaller);
   if(b)
   {
     std::string n=b->getName();
@@ -586,15 +565,19 @@ bool EditIsoView::addEntity(const char *,const AGEvent *,AGMessageObject *pCalle
 }
 bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
 {
-  editSize=mEditButtons[pCaller];
+  CTRACE;
+  cdebug(dynamic_cast<AGWidget*>(pCaller)->getName());
+  editSize=toInt(dynamic_cast<AGWidget*>(pCaller)->getName().substr(4,std::string::npos));//mEditButtons[pCaller];
+  cdebug(editSize);
   mAddEntity="";
   return true;
 }
 bool EditIsoView::setAll(const char *,const AGEvent *,AGMessageObject *pCaller)
 {
-  if(pCaller==allWater)
+  AGWidget *w=dynamic_cast<AGWidget*>(pCaller);
+  if(w->getName()=="water")
     getMap()->setAllWater();
-  if(pCaller==allGrass)
+  else if(w->getName()=="grass")
     getMap()->setAllLand();
   completeUpdate();
   sigMapEdited(0);
@@ -608,15 +591,17 @@ void EditIsoView::toggleEdit()
   update();
   if(mEditing)
   {
-    std::list<AGWidget*>::iterator i=mEditWidgets.begin();
+    mLayout->show();
+    /*std::list<AGWidget*>::iterator i=mEditWidgets.begin();
     for(;i!=mEditWidgets.end();i++)
-      (*i)->show();
+      (*i)->show();*/
   }
   else
   {
-    std::list<AGWidget*>::iterator i=mEditWidgets.begin();
+    mLayout->hide();
+/*    std::list<AGWidget*>::iterator i=mEditWidgets.begin();
     for(;i!=mEditWidgets.end();i++)
-      (*i)->hide();
+      (*i)->hide();*/
   }
 }
 
@@ -663,9 +648,9 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
                       getMap()->removeEntity(*i);
                   }
                 }
-                else if(mAddEntity=="addTree1")
+                else if(mAddEntity=="tree")
                   getMap()->insertEntity(new AntTree(Pos2D(p.x,p.z),rand()%11));
-                else if(mAddEntity=="stones1")
+                else if(mAddEntity=="stones")
                   getMap()->insertEntity(new AntDeco(Pos2D(p.x,p.z),rand()%2));
                   
               }
