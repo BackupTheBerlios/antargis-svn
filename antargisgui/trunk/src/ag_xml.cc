@@ -69,6 +69,13 @@ bool ParserInfo::end()
   return(p>=s.length());
 }
 
+std::string ParserInfo::getInfo()
+{
+  std::ostringstream os;
+  os<<"Error beginning at '"<<s[p]<<"':"<<s.substr(p,std::min(s.length()-p,p+20));
+  return os.str();
+}
+
 /****************************************************************
  * Node
  ****************************************************************/
@@ -449,7 +456,7 @@ void Node::parse(ParserInfo &info)
 	  parseChar(info,'<');
 	  parseChar(info,'/');
 	  if(mName!=parseName(info))
-	    throw ParserException("Wrong close-tag");
+	    throw ParserException("Wrong close-tag "+info.getInfo());
 	  parseChar(info,'>');
 	}
     }

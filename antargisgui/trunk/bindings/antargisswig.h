@@ -183,7 +183,7 @@ public:
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:
-    SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id = -1, std::string const &pStyle = "button");
+    SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id = -1);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual bool eventShow();

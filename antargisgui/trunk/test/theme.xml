@@ -26,6 +26,9 @@
 			<color name="color2" color="#404040"/>
 			<value name="width" value="1"/>
 		</border>
+		<text>
+			<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+		</text>
 	</button>
 	
 	<menu>
@@ -63,4 +66,27 @@
 			<image name="close" file="close_button.png"/>
 		</buttons>
 	</window>
+	
+	
+	<!-- styles -->
+	<yellowButton>
+		<button>
+			<background>
+				<normal>
+					<color name='gradientColor1' color='#f6c108'/>
+					<color name='gradientColor2' color='#bc9716'/>
+					<color name='gradientColor3' color='#bc9716'/>
+					<color name='gradientColor4' color='#a08320'/>
+				</normal>
+			</background>
+			<border>
+				<color name="color1" color='#f6c108'/>
+				<color name="color2" color="#a08320"/>
+				<value name="width" value="1"/>
+			</border>
+			<text>
+				<font name='font' file="Arial.ttf" size="14" color='#000000'/>
+			</text>
+		</button>
+	</yellowButton>
 </theme>

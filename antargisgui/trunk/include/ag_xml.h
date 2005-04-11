@@ -47,6 +47,8 @@ struct ParserInfo
     std::string getNext3();
     void inc();
     bool end();
+
+    std::string getInfo();
   };
 
 class Node

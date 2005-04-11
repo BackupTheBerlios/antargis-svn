@@ -61,4 +61,6 @@ void setTheme(const AGTheme &aTheme);
 void loadTheme(const std::string &pXML);
 bool loadThemeFile(const std::string &pFilename);
 
+std::string addPoint(const std::string &pTheme);
+
 #endif

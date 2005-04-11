@@ -83,7 +83,9 @@ AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 	int row=toInt(pNode.get("row"));
 	
 	geom=t->getClientRect(col,row);
+	//	assert(pParent->getRect().origin().contains(geom));
 	cdebug("col:"<<col<<" row:"<<row<<":"<<geom);
+	assert(pParent->getRect().origin().contains(geom));
       }
   
 
@@ -124,6 +126,8 @@ class AGButtonLayoutCreator:public AGLayoutCreator
       b->setSurface(getScreen().loadSurface(captionImage),false);
     if(pNode.get("enabled")=="false")
       b->setEnabled(false);
+    if(pNode.get("theme").length())
+      b->setTheme(pNode.get("theme"));
     return b;
   }
 };

@@ -191,3 +191,11 @@ bool loadThemeFile(const std::string &pFilename)
   setTheme(theme);
   return true;
 }
+
+std::string addPoint(const std::string &pTheme)
+{
+  if(pTheme.length())
+    if(pTheme[pTheme.length()-1]!='.')
+      return pTheme+".";
+  return pTheme;
+}

@@ -53,13 +53,15 @@ class AGEditLine
   void prepend(std::string s);
   std::string getText() const;
   AGFont getFont() const;
-  void setText(const std::string s);
+  void setText(const std::string &s);
 
   bool hardEnd() const;
   void setHardEnd(bool pHardEnd);
   std::pair<std::string,bool> AGEditLine::checkUnwrap(int pW,std::string s);
 
   std::pair<std::string,bool> AGEditLine::checkWrap(int pW);
+
+  void setFont(const AGFont &pFont);
 
  private:
   std::string mText;
@@ -92,6 +94,8 @@ class AGEdit:public AGWidget
   void setAlign(AGAlign pAlign);
 
   void setBackground(bool pDrawBackground);
+
+  void setTheme(const std::string &s);
 
  private:
 

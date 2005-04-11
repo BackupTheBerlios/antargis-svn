@@ -58,6 +58,7 @@ class AGRect:public SDL_Rect
   AGRect shrink(int amount) const;
 
   bool contains(const AGPoint &p) const;
+  bool contains(const AGRect &p) const;
 
   AGRect project(const AGRect &r) const;
   AGPoint project(const AGPoint &r) const;

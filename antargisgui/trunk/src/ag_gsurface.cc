@@ -184,6 +184,7 @@ AGSurfaceCache::AGSurfaceCache()
 
 AGSurface AGSurfaceCache::getSurface(const std::string &pFilename)
 {
+  throw int();
 }
 
 AGSurfaceCache *mSurfaceCache=0;

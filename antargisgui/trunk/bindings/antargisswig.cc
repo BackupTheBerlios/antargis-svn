@@ -2860,7 +2860,7 @@ void SwigDirector_AGWidget::addChild(AGWidget *w) {
 }
 
 
-SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id, std::string const &pStyle): AGButton(pParent, r, pText, id, pStyle), Swig::Director(self) {
+SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id): AGButton(pParent, r, pText, id), Swig::Director(self) {
     
 }
 
@@ -15953,7 +15953,7 @@ _wrap_AGRect_shrink(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect_contains(int argc, VALUE *argv, VALUE self) {
+_wrap_AGRect_contains__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGRect *arg1 = (AGRect *) 0 ;
     AGPoint *arg2 = 0 ;
     bool result;
@@ -15967,6 +15967,72 @@ _wrap_AGRect_contains(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect_contains__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGRect *arg1 = (AGRect *) 0 ;
+    AGRect *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AGRect const *)arg1)->contains((AGRect const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE _wrap_AGRect_contains(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGPoint, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGRect_contains__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGRect_contains__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGRect_contains'");
+    return Qnil;
 }
 
 
@@ -17010,58 +17076,6 @@ _wrap_new_AGButton__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGRect *arg3 = 0 ;
     std::string *arg4 = 0 ;
     int arg5 ;
-    std::string *arg6 = 0 ;
-    AGButton *result;
-    std::string temp4 ;
-    std::string temp6 ;
-    
-    if ((argc < 5) || (argc > 5))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
-            arg4 = &temp4;
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    arg5 = NUM2INT(argv[3]);
-    {
-        if (TYPE(argv[4]) == T_STRING) {
-            temp6 = std::string(StringValuePtr(argv[4]));
-            arg6 = &temp6;
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        char *classname = "Libantargisruby::AGButton";
-        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-            /* subclassed */
-            result = (AGButton *)new SwigDirector_AGButton(arg1,arg2,(AGRect const &)*arg3,(std::string const &)*arg4,arg5,(std::string const &)*arg6);
-            
-        } else {
-            result = (AGButton *)new AGButton(arg2,(AGRect const &)*arg3,(std::string const &)*arg4,arg5,(std::string const &)*arg6);
-            
-        }
-        DATA_PTR(self) = result;
-        result->mRUBY=self;
-        printf("register:AGButton\n");
-    }
-    return self;
-}
-
-
-static VALUE
-_wrap_new_AGButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
-    std::string *arg4 = 0 ;
-    int arg5 ;
     AGButton *result;
     std::string temp4 ;
     
@@ -17115,7 +17129,7 @@ _wrap_AGButton_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGButton__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
     AGRect *arg3 = 0 ;
@@ -17156,12 +17170,12 @@ _wrap_new_AGButton__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_AGButton(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[7];
+    VALUE argv[6];
     int ii;
     
     argc = nargs + 1;
     argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 6); ii++) {
+    for (ii = 1; (ii < argc) && (ii < 5); ii++) {
         argv[ii] = args[ii-1];
     }
     if (argc == 4) {
@@ -17182,7 +17196,7 @@ static VALUE _wrap_new_AGButton(int nargs, VALUE *args, VALUE self) {
                         _v = (TYPE(argv[3]) == T_STRING) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_AGButton__SWIG_2(nargs, args, self);
+                        return _wrap_new_AGButton__SWIG_1(nargs, args, self);
                     }
                 }
             }
@@ -17210,41 +17224,7 @@ static VALUE _wrap_new_AGButton(int nargs, VALUE *args, VALUE self) {
                             _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
                         }
                         if (_v) {
-                            return _wrap_new_AGButton__SWIG_1(nargs, args, self);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if (argc == 6) {
-        int _v;
-        _v = (argv[0] != T_NONE);
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        _v = (TYPE(argv[3]) == T_STRING) ? 1 : 0;
-                    }
-                    if (_v) {
-                        {
-                            _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            {
-                                _v = (TYPE(argv[5]) == T_STRING) ? 1 : 0;
-                            }
-                            if (_v) {
-                                return _wrap_new_AGButton__SWIG_0(nargs, args, self);
-                            }
+                            return _wrap_new_AGButton__SWIG_0(nargs, args, self);
                         }
                     }
                 }
@@ -17515,6 +17495,29 @@ _wrap_AGButton_setEnabled(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
     arg2 = RTEST(argv[0]);
     (arg1)->setEnabled(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGButton_setTheme(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->setTheme((std::string const &)*arg2);
     
     return Qnil;
 }
@@ -18685,6 +18688,32 @@ _wrap_loadThemeFile(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_addPoint(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    std::string result;
+    std::string temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp1 = std::string(StringValuePtr(argv[0]));
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = addPoint((std::string const &)*arg1);
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGMenuEvent_allocate(VALUE self) {
@@ -19399,19 +19428,21 @@ _wrap_AGEditLine_getFont(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGEditLine_setText(int argc, VALUE *argv, VALUE self) {
     AGEditLine *arg1 = (AGEditLine *) 0 ;
-    std::string arg2 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->setText(arg2);
+    (arg1)->setText((std::string const &)*arg2);
     
     return Qnil;
 }
@@ -19497,6 +19528,21 @@ _wrap_AGEditLine_checkWrap(int argc, VALUE *argv, VALUE self) {
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__pairTstd__string_bool_t, 1);
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGEditLine_setFont(int argc, VALUE *argv, VALUE self) {
+    AGEditLine *arg1 = (AGEditLine *) 0 ;
+    AGFont *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGFont, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setFont((AGFont const &)*arg2);
+    
+    return Qnil;
 }
 
 
@@ -19764,6 +19810,29 @@ _wrap_AGEdit_setBackground(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
     arg2 = RTEST(argv[0]);
     (arg1)->setBackground(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGEdit_setTheme(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->setTheme((std::string const &)*arg2);
     
     return Qnil;
 }
@@ -21568,6 +21637,24 @@ _wrap_ParserInfo_end(int argc, VALUE *argv, VALUE self) {
     result = (bool)(arg1)->end();
     
     vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_ParserInfo_getInfo(int argc, VALUE *argv, VALUE self) {
+    ParserInfo *arg1 = (ParserInfo *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_ParserInfo, 1);
+    result = (arg1)->getInfo();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
     return vresult;
 }
 
@@ -24044,6 +24131,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGButton.klass, "setHeight", VALUEFUNC(_wrap_AGButton_setHeight), -1);
     rb_define_method(cAGButton.klass, "getName", VALUEFUNC(_wrap_AGButton_getName), -1);
     rb_define_method(cAGButton.klass, "setEnabled", VALUEFUNC(_wrap_AGButton_setEnabled), -1);
+    rb_define_method(cAGButton.klass, "setTheme", VALUEFUNC(_wrap_AGButton_setTheme), -1);
     cAGButton.mark = 0;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisruby, "disown_AGApplication", VALUEFUNC(_wrap_disown_AGApplication), -1);
@@ -24119,6 +24207,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_module_function(mLibantargisruby, "setTheme", VALUEFUNC(_wrap_setTheme), -1);
     rb_define_module_function(mLibantargisruby, "loadTheme", VALUEFUNC(_wrap_loadTheme), -1);
     rb_define_module_function(mLibantargisruby, "loadThemeFile", VALUEFUNC(_wrap_loadThemeFile), -1);
+    rb_define_module_function(mLibantargisruby, "addPoint", VALUEFUNC(_wrap_addPoint), -1);
     
     cAGMenuEvent.klass = rb_define_class_under(mLibantargisruby, "AGMenuEvent", ((swig_class *) SWIGTYPE_p_AGEvent->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGMenuEvent, (void *) &cAGMenuEvent);
@@ -24181,6 +24270,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEditLine.klass, "setHardEnd", VALUEFUNC(_wrap_AGEditLine_setHardEnd), -1);
     rb_define_method(cAGEditLine.klass, "checkUnwrap", VALUEFUNC(_wrap_AGEditLine_checkUnwrap), -1);
     rb_define_method(cAGEditLine.klass, "checkWrap", VALUEFUNC(_wrap_AGEditLine_checkWrap), -1);
+    rb_define_method(cAGEditLine.klass, "setFont", VALUEFUNC(_wrap_AGEditLine_setFont), -1);
     cAGEditLine.mark = 0;
     cAGEditLine.destroy = (void (*)(void *)) free_AGEditLine;
     rb_define_module_function(mLibantargisruby, "disown_AGEdit", VALUEFUNC(_wrap_disown_AGEdit), -1);
@@ -24201,6 +24291,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEdit.klass, "setMutable", VALUEFUNC(_wrap_AGEdit_setMutable), -1);
     rb_define_method(cAGEdit.klass, "setAlign", VALUEFUNC(_wrap_AGEdit_setAlign), -1);
     rb_define_method(cAGEdit.klass, "setBackground", VALUEFUNC(_wrap_AGEdit_setBackground), -1);
+    rb_define_method(cAGEdit.klass, "setTheme", VALUEFUNC(_wrap_AGEdit_setTheme), -1);
     cAGEdit.mark = 0;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargisruby, "disown_AGCheckBox", VALUEFUNC(_wrap_disown_AGCheckBox), -1);
@@ -24328,6 +24419,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cParserInfo.klass, "getNext3", VALUEFUNC(_wrap_ParserInfo_getNext3), -1);
     rb_define_method(cParserInfo.klass, "inc", VALUEFUNC(_wrap_ParserInfo_inc), -1);
     rb_define_method(cParserInfo.klass, "end", VALUEFUNC(_wrap_ParserInfo_end), -1);
+    rb_define_method(cParserInfo.klass, "getInfo", VALUEFUNC(_wrap_ParserInfo_getInfo), -1);
     cParserInfo.mark = 0;
     cParserInfo.destroy = (void (*)(void *)) free_ParserInfo;
     

@@ -27,13 +27,15 @@
 
 using namespace std;
 
-AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id,const std::string&pStyle):
+AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id):
   AGWidget(pParent,r),
-  mText(pText),mID(id),mStyle(pStyle),mState(NORMAL),mTextW(0)
+  mText(pText),mID(id),mState(NORMAL),mTextW(0)
 {
-  lower=getTheme()->getInt("buttonLowerOnClick");
-  borderWidth=getTheme()->getInt("button.border.width");
+  cdebug(r);
+  //  lower=getTheme()->getInt("buttonLowerOnClick");
+  //  borderWidth=getTheme()->getInt("button.border.width");
   //  addChild(new 
+  setTheme("");
   AGFont font("Arial.ttf");
   font.setColor(AGColor(0,0,0));
   mTextW=new AGEdit(this,r.origin().shrink(borderWidth));//,mText,font);
@@ -44,11 +46,13 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   mTextW->setBackground(false);
   addChild(mTextW);
 
+  setTheme("");
+  /*
   mBG[NORMAL]=AGBackground("button.background.normal");
   mBG[PRESSED]=AGBackground("button.background.pressed");
   mBG[LIGHTED]=AGBackground("button.background.lighted");
   mBG[CHECKED]=AGBackground("button.background.checked");
-
+  */
   cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
 }
@@ -89,17 +93,8 @@ void AGButton::draw(const AGRect &r)
   AGColor bc2;
   AGTheme *theme=getTheme();
 
-  std::string style;
-  if(mState==NORMAL)
-    style=".normal";
-  else if(mState==LIGHTED)
-    style=".lighted";
-  else
-    style=".pressed";
-
-
-  bc1=theme->getColor("button.border.color1");//std::string("borderColor1")+style);
-  bc2=theme->getColor("button.border.color2");//std::string("borderColor2")+style);
+  bc1=theme->getColor(mTheme+"button.border.color1");
+  bc2=theme->getColor(mTheme+"button.border.color2");
   {
   
     //  CTRACE;
@@ -242,4 +237,19 @@ std::string AGButton::getName() const
 void AGButton::setEnabled(bool pEnable)
 {
   mEnabled=pEnable;
+}
+
+void AGButton::setTheme(const std::string &pTheme)
+{
+  mTheme=addPoint(pTheme);
+
+  lower=getTheme()->getInt(mTheme+"buttonLowerOnClick");
+  borderWidth=getTheme()->getInt(mTheme+"button.border.width");
+
+  mBG[NORMAL]=AGBackground(mTheme+"button.background.normal");
+  mBG[PRESSED]=AGBackground(mTheme+"button.background.pressed");
+  mBG[LIGHTED]=AGBackground(mTheme+"button.background.lighted");
+  mBG[CHECKED]=AGBackground(mTheme+"button.background.checked");
+  if(mTextW)
+    mTextW->setTheme(mTheme+"button.text");
 }

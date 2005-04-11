@@ -154,7 +154,9 @@ bool AGFontEngine::renderText (AGGScreen *pSurface, const AGRect &pClipRect, int
       if(pText.length()==0)
 	return false;
       
-      ns=TTF_RenderText_Solid(f,pText.c_str(),pFont.getColor());//.sdlColor());
+      ns=TTF_RenderText_Blended(f,pText.c_str(),pFont.getColor());//.sdlColor()); // Blended instead of Solid
+
+      assert(ns);
       
       SDL_Rect sr,dr;
       sr.x=sr.y=0;
@@ -162,8 +164,10 @@ bool AGFontEngine::renderText (AGGScreen *pSurface, const AGRect &pClipRect, int
       dr.y=BaseLineY;
       dr.w=sr.w=ns->w;
       dr.h=sr.h=ns->h;
+
+      cdebug(pText<<":"<<sr<<"/////////////"<<dr);
       
-      SDL_SetColorKey(ns,SDL_SRCCOLORKEY,sge_GetPixel(ns,0,0));
+      //      SDL_SetColorKey(ns,SDL_SRCCOLORKEY,sge_GetPixel(ns,0,0));
       
       AGTexture ms=getScreen().displayFormat(ns);
       SDL_FreeSurface(ns);

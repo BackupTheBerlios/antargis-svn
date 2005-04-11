@@ -39,9 +39,7 @@ class AGButton:public AGWidget
  public:
   enum State {NORMAL,LIGHTED,PRESSED,CHECKED};
 
-  AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id=-1,const std::string&pStyle="button");
-  //  AGButton(AGWidget *pParent,const AGRect &r,const AGSurface &pSurface);
-  //  AGButton();
+  AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id=-1);
 
   void setSurface(AGSurface pSurface,bool pChangeSize=true);
 
@@ -62,10 +60,12 @@ class AGButton:public AGWidget
 
   void setEnabled(bool pEnable);
 
+  void setTheme(const std::string &pTheme);
+
  private:
   std::string mText;
   int mID;
-  std::string mStyle;
+  std::string mTheme;
   State mState;
   int borderWidth;
   AGSurface mSurface;

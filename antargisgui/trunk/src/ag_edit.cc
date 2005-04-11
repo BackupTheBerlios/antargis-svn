@@ -41,6 +41,12 @@ void AGEditLine::setAlign(AGAlign pAlign)
   mAlign=pAlign;
 }
 
+void AGEditLine::setFont(const AGFont &pFont)
+{
+  mFont=pFont;
+}
+
+
 AGFont AGEditLine::getFont() const
 {
   return mFont;
@@ -56,7 +62,10 @@ void AGEditLine::draw(const AGPoint &pPoint,const AGRect &pClip)
     {
       x=(pClip.w-mFont.getWidth(mText))/2;
       y=-(mFont.getHeight(mText))/2;
+
+      cdebug(x<<";"<<y);
     }
+  cdebug(pPoint.x<<"//"<<pPoint.y);
 
   AGFontEngine::renderText(&getScreen(),pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
 }
@@ -214,7 +223,7 @@ std::pair<std::string,bool> AGEditLine::checkUnwrap(int pW,std::string s)
   
 }
 
-void AGEditLine::setText(const std::string s)
+void AGEditLine::setText(const std::string &s)
 {
   mText=s;
 }
@@ -230,6 +239,9 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true)
 {
+  CTRACE;
+  cdebug(pRect);
+
   mMutable=true;
   mShowCursor=true;
   AGFont font1("Arial.ttf",14);
@@ -269,6 +281,8 @@ void AGEdit::draw(const AGRect &pRect)
 
   std::list<AGEditLine>::iterator i=mLines.begin();
 
+  cdebug(pRect);
+  cdebug("getRect:"<<getRect());
   AGRect mr(pRect.project(getRect()));
 
   AGColor cursorC;
@@ -296,6 +310,8 @@ void AGEdit::draw(const AGRect &pRect)
 
   for(;i!=mLines.end();i++)
     {
+      cdebug("("<<x<<";"<<y<<")");
+      cdebug(mr);
       i->draw(mr.project(AGPoint(x,y)),pRect.project(getRect()));
       if(cy+mViewCy==mCy && mMutable) // FIXME: Change show cursor only if widget has focus
 	i->drawCursor(mCx,mr.project(AGPoint(x,y)),pRect.project(getRect()),cursorC);
@@ -671,6 +687,10 @@ void AGEdit::checkWrap()
 void AGEdit::setFont(const AGFont &pFont)
 {
   mFont=pFont;
+  std::list<AGEditLine>::iterator i=mLines.begin();
+  for(;i!=mLines.end();i++)
+    i->setFont(mFont);
+
 }
 
 void AGEdit::setText(const std::string &pText)
@@ -714,3 +734,9 @@ void AGEdit::setBackground(bool pDrawBackground)
   mDrawBackground=pDrawBackground;
 }
 
+void AGEdit::setTheme(const std::string &s)
+{
+  AGFont font=getTheme()->getFont(s+".font");
+  setFont(font);
+  
+}

@@ -148,6 +148,14 @@ bool AGRect::contains(const AGPoint &p) const
   return p.x>=x && p.y>=y && p.x<x+w && p.y<y+h;
 }
 
+bool AGRect::contains(const AGRect &p) const
+{
+  int x2=p.x+p.w-1;
+  int y2=p.y+p.h-1;
+  return p.x>=x && p.y>=y && p.x<x+w && p.y<y+h &&
+    x2>=x && y2>=y && x2<x+w && y2<y+h;
+}
+
 AGRect AGRect::project(const AGRect &r) const
 {
   return AGRect(x+r.x,y+r.y,r.w,r.h);
