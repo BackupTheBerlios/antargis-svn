@@ -33,6 +33,8 @@
 
 #include <SDL.h>
 
+#include <ag_fs.h>
+
 #include "ag_vector.h"
 
 
@@ -385,12 +387,16 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
 
 AGSurface AGGLScreen::loadSurface(const std::string &pFilename)
 {
+  std::string file=loadFile(pFilename);
+  
+
   //  CTRACE;
-  SDL_Surface *s=IMG_Load(pFilename.c_str());
+  //SDL_Surface *s=IMG_Load(pFilename.c_str());
+  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
   if(!s)
    {
-	std::cout<<"Error loading file:"<<pFilename<<std::endl;
-	return AGSurface();
+     std::cout<<"Error loading file:"<<pFilename<<std::endl;
+     return AGSurface();
    }
   int w,h;
   w=s->w;

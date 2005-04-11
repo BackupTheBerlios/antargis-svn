@@ -24,6 +24,7 @@
 #include "ag_gsurface.h"
 #include "ag_surface.h"
 #include "ag_glsurface.h"
+#include "ag_fs.h"
 #include "privates.h"
 #include <SDL.h>
 
@@ -116,7 +117,7 @@ AGMain::AGMain()
   atexit(SDL_Quit);
   //  initSDL_net();
 
-
+  initFS("");
 
 }
 AGMain::~AGMain()
@@ -187,5 +188,7 @@ void AGMain::toggleFull()
 
 AGMain *getMain()
 {
+  if(!mAGMain)
+    mAGMain=new AGMain();
   return mAGMain;
 }

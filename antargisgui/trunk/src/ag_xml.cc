@@ -19,6 +19,7 @@
  */
 
 #include "ag_xml.h"
+#include "ag_fs.h"
 #include "ag_debug.h"
 
 /****************************************************************
@@ -479,18 +480,7 @@ Document::Document(std::string pFile)
 bool Document::parseFile(std::string file)
 {
   std::string s;
-  char buffer[1001];
-  FILE *f=fopen(file.c_str(),"r");
-  if(!f)
-    return false;
-  while(!feof(f))
-    {
-      size_t anzahl=fread(buffer,1,1000,f);
-      if(anzahl==0)
-        break;
-      s+=std::string(buffer,anzahl);
-    }
-  fclose(f);
+  s=loadFile(file);
 
   parseMemory(s);
   return true;

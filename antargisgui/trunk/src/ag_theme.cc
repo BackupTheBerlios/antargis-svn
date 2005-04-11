@@ -88,9 +88,7 @@ void AGTheme::setInt(const std::string &pName,int i)
 
 void loadDefaultTheme()
 {
-  loadThemeFile(DEFAULT_THEME_FILE0);
-  if(!mTheme)
-    loadThemeFile(DEFAULT_THEME_FILE1);
+  loadThemeFile("theme.xml");
   
   if(!mTheme)
     mTheme=new AGTheme;

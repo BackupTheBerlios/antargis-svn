@@ -21,7 +21,4 @@
 #ifndef AG_CONFIG_H
 #define AG_CONFIG_H
 
-#define DEFAULT_THEME_FILE0 std::string("/usr/share/antargisgui/theme.xml")
-#define DEFAULT_THEME_FILE1 std::string("/usr/local/share/antargisgui/theme.xml")
-
 #endif

@@ -30,6 +30,7 @@
 
 #include <sstream>
 
+#include <ag_fs.h>
 
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height)
 {
@@ -396,7 +397,16 @@ SDL_Surface *AGSDLScreen::newSurface(int x,int y)
 
 AGSurface AGSDLScreen::loadSurface(const std::string &pFilename)
 {
-  SDL_Surface *s=IMG_Load(pFilename.c_str());
+  std::string file=loadFile(pFilename);
+  
+
+  //  CTRACE;
+  //SDL_Surface *s=IMG_Load(pFilename.c_str());
+  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
+  if(!s)
+    cdebug(pFilename);
+  assert(s);
+  //  SDL_Surface *s=IMG_Load(pFilename.c_str());
   return AGSurface(s,s->w,s->h);
 }
 

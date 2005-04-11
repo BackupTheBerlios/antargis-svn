@@ -23391,6 +23391,100 @@ _wrap_disown_AGDialog(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_initFS(int argc, VALUE *argv, VALUE self) {
+    char *arg1 = (char *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = StringValuePtr(argv[0]);
+    initFS((char const *)arg1);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_loadFile(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    std::string result;
+    std::string temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp1 = std::string(StringValuePtr(argv[0]));
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = loadFile((std::string const &)*arg1);
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_saveFile(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp1 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp1 = std::string(StringValuePtr(argv[0]));
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    {
+        if (TYPE(argv[1]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[1]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    saveFile((std::string const &)*arg1,(std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_fileExists(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    bool result;
+    std::string temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp1 = std::string(StringValuePtr(argv[0]));
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (bool)fileExists((std::string const &)*arg1);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -24486,5 +24580,9 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGDialog.klass, "eventClose", VALUEFUNC(_wrap_AGDialog_eventClose), -1);
     cAGDialog.mark = 0;
     cAGDialog.destroy = (void (*)(void *)) free_AGDialog;
+    rb_define_module_function(mLibantargisruby, "initFS", VALUEFUNC(_wrap_initFS), -1);
+    rb_define_module_function(mLibantargisruby, "loadFile", VALUEFUNC(_wrap_loadFile), -1);
+    rb_define_module_function(mLibantargisruby, "saveFile", VALUEFUNC(_wrap_saveFile), -1);
+    rb_define_module_function(mLibantargisruby, "fileExists", VALUEFUNC(_wrap_fileExists), -1);
 }
 

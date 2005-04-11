@@ -41,6 +41,9 @@
 			</normal>
 			<image name="image" file="bg_tile2.png"/>
 		</background>
+		<item>
+			<image name="image" file="menu_house_small.png"/>
+		</item>
 	</menu>
 	
 	<edit>

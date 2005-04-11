@@ -56,9 +56,11 @@ puts "MenuTest"
 
 main=AGMain.new
 
-loadTheme(loadFile("theme.xml"))
+doc=Document.new("theme.xml")
+puts doc
+loadTheme(doc.toString)
 
-main.changeRes(640,480,32,false,true)
+main.changeRes(1024,768,32,false,true)
 
 app=TestApp.new(false)
 
@@ -72,7 +74,9 @@ screen=AGScreenWidget.new
 #w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
 #window1.addChild(w2)
 
-l=AGLayout.new(screen,loadFile("dialog.xml"))
+doc=Document.new("credits.xml")
+puts doc.toString
+l=AGLayout.new(screen,doc.toString)
 screen.addChild(l)
 
 

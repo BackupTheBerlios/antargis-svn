@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_tools.h
+ * fs.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,15 +18,15 @@
  * License along with this program.
  */
 
-#ifndef AG_TOOLS_H
-#define AG_TOOLS_H
+#ifndef __FS_H
+#define __FS_H
 
 #include <string>
-#include <ag_fs.h>
 
-int toInt(const std::string &s);
-float toFloat(const std::string &s);
-int fromHex(const std::string &s);
-std::string toHex(int i);
+void initFS(const char *argv0);
+std::string loadFile(const std::string &pName);
+void saveFile(const std::string &pName,const std::string &pContent);
+
+bool fileExists(const std::string &pName);
 
 #endif

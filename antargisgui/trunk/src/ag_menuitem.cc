@@ -32,7 +32,7 @@ AGMenuItem::AGMenuItem(AGWidget *pParent,const std::string &pText):
   //  adaptWidthFromChildren(); // so that parent can adapt to this
 
   //  addChild(new AGText(this,AGPoint(0,0),"X",AGFont("Arial.ttf",25))); // test
-  AGSurface surface=getScreen().loadSurface("/home/david/projects/oldantargis/graphics/menu_house_small.png");
+  AGSurface surface=getTheme()->getSurface("menu.item.image");//getScreen().loadSurface("/home/david/projects/oldantargis/graphics/menu_house_small.png");
   addChild(new AGImage(this,AGPoint(0,0),surface,false));
   addChild(new AGText(this,AGPoint(0,0),pText,font));
   adaptWidthFromChildren(); // so that parent can adapt to this
