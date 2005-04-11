@@ -47,8 +47,8 @@ class AGLayoutFactory
 
 AGLayoutFactory *getLayoutFactory();
 
-#define IMPLEMENT_COMPONENT_FACTORY(CLASS)                                  \
-AG##CLASS##LayoutCreator factory_##CLASS;
+#define IMPLEMENT_COMPONENT_FACTORY(CLASS) \
+AG##CLASS##LayoutCreator factory_##CLASS
 
 #define REGISTER_COMPONENT(CLASS,NAME) AG##CLASS##LayoutCreator():AGLayoutCreator(NAME){}
 #endif

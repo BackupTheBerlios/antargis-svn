@@ -199,14 +199,18 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geo
   for(int k=0;k<w;k++)
     {
       cdebug("cols:"<<cols[k].first<<"/////"<<cols[k].second);
-      if(cols[k].second)
+      if(cols[k].first==0.0f) // not inited
+	t->addColumn(1.0f);
+      else if(cols[k].second)
 	t->addFixedColumn(cols[k].first);
       else
 	t->addColumn(cols[k].first);
     }
   for(int k=0;k<h;k++)
     {
-      if(rows[k].second)
+      if(rows[k].first==0.0f) // not inited
+	t->addRow(1.0f);
+      else if(rows[k].second)
 	t->addFixedRow(rows[k].first);
       else
 	t->addRow(rows[k].first);

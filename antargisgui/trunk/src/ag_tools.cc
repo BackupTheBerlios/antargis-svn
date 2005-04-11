@@ -72,3 +72,24 @@ std::string toHex(int i)
     s=std::string("0")+s;
   return s;
 }
+
+std::string getFile(const std::string &pFilename)
+{
+  FILE *f;
+  std::string s;
+
+  f=fopen(pFilename.c_str(),"rb");
+  if(f)
+    {
+      char buf[1002];
+      size_t l;
+      while(!feof(f))
+	{
+	  
+	  if((l=fread(buf,sizeof(char),1000,f))>0)
+	    s+=std::string(buf,l);
+	}
+    }
+
+  return s;
+}

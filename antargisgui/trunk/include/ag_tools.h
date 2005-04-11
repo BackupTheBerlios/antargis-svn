@@ -27,6 +27,7 @@ int toInt(const std::string &s);
 float toFloat(const std::string &s);
 int fromHex(const std::string &s);
 std::string toHex(int i);
+std::string getFile(const std::string &pFilename);
 
 
 #endif
