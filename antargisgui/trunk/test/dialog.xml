@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<layout geometry="(50,50,400,170)" name="TellTale">
-	<window name="window" title="Playername">
+<layout name="TellTale">
+	<window geometry="(50,50,400,170)" name="window" title="Playername">
 		<table cols="1" rows="2">
 			<colsize col="0" relative="1"/>
 			<rowsize row="0" relative="1"/>
@@ -14,5 +14,8 @@
 			</table>
 			<button col="0" row="1" name="ok" caption="Ok"/>
 		</table>
+	</window>
+	<window name="win2" geometry="(200,200,200,200)" title="Test2"> 
+		<button geometry="(30,30,50,50)" theme="yellowButton" theme="niceRound" caption="test"/>
 	</window>
 </layout>

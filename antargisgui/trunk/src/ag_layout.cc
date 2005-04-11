@@ -264,14 +264,16 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
   {
     std::string text=pNode.get("caption");
-    AGFont font;
-    if(pNode.get("font")!="")
-      font=getTheme()->getFont(pNode.get("font"));
     
     //    AGWidget *w=new AGText(pParent,pRect,text,font);
     AGEdit *w=new AGEdit(pParent,pRect);
     w->setText(text);
-    w->setFont(font);
+    if(pNode.get("font")!="")
+    {
+      AGFont font;
+      font=getTheme()->getFont(pNode.get("font"));
+      w->setFont(font);
+    }
     w->setAlign(EDIT_CENTER);
     w->setMutable(false);
     w->setBackground(false);

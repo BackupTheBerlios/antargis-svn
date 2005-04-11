@@ -12,3 +12,6 @@ EXTRA_DIST = *.rb *.ttf *.png
 
 mythemes_DATA = theme.xml
 mythemesdir = $(datadir)/antargisgui
+
+mypics = *.png
+mypicsdir = $(datadir)/antargisgui/pics

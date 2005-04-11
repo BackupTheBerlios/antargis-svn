@@ -87,6 +87,9 @@ void AGButton::draw(const AGRect &r)
   //  CTRACE;
   //  return;
   mBG[mState].draw(getScreenRect().shrink(borderWidth));//r.project(getRect().shrink(borderWidth)));
+
+  if(borderWidth==0)
+    return;
   //  AGSurface s(getScreen());
 
   AGColor bc1;
@@ -242,6 +245,7 @@ void AGButton::setEnabled(bool pEnable)
 void AGButton::setTheme(const std::string &pTheme)
 {
   mTheme=addPoint(pTheme);
+  cdebug(mTheme);
 
   lower=getTheme()->getInt(mTheme+"buttonLowerOnClick");
   borderWidth=getTheme()->getInt(mTheme+"button.border.width");

@@ -26,9 +26,10 @@
 AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
 {
   AGTheme *theme=getTheme();
-  if(theme->hasSurface(pThemeName))
+  if(theme->hasSurface(pThemeName+".image"))
     {
-      mSurface=AGTexture(theme->getSurface(pThemeName));
+      CTRACE;
+      mSurface=AGTexture(theme->getSurface(pThemeName+".image"));
       mSurfaceFlag=true;
     }
   else
@@ -37,24 +38,13 @@ AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
       mColors[1]=theme->getColor(pThemeName+"."+std::string("gradientColor2"));
       mColors[2]=theme->getColor(pThemeName+"."+std::string("gradientColor3"));
       mColors[3]=theme->getColor(pThemeName+"."+std::string("gradientColor4"));
-      /*
-      cdebug(mColors[0]);
-      cdebug(theme->getColor(pThemeName+"."+std::string("gradientColor1")));
-      cdebug(pThemeName+"."+std::string("gradientColor1"));*/
-      //      throw int();
-      /*
-      mColors[1]=theme->getColor(std::string("gradientColor2.")+pThemeName);
-      mColors[2]=theme->getColor(std::string("gradientColor3.")+pThemeName);
-      mColors[3]=theme->getColor(std::string("gradientColor4.")+pThemeName);*/
     }
 }
 
 void AGBackground::draw(const AGRect &pScreenRect) const
 {
-  //  AGSurface s(getScreen());
-   if(mSurfaceFlag)
+  if(mSurfaceFlag)
     getScreen().tile(mSurface,pScreenRect);
   else
     AGDraw::drawGradient(&getScreen(),pScreenRect,mColors[0],mColors[1],mColors[2],mColors[3]);
-   //   cdebug(mColors[0]);
 }

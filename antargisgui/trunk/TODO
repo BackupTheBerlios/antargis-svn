@@ -1,3 +1,6 @@
+* use PhysFS instead of direct file loading
+
+
 FIXME: 
 * mGLMode should be set correctly
 * STUBS must be filled

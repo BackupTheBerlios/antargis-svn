@@ -47,6 +47,7 @@
 		<background>
 			<image name="image" file="bg_tile2.png"/>
 		</background>
+		<font name="font" file="Arial.ttf" size="14" color="#000000"/>
 	</edit>
 
 	<screen>
@@ -60,7 +61,7 @@
 			<image name="image" file="win_border.png"/>
 		</border>
 		<title>
-			<font name="font" file="Arial.ttf" size="14" color='#000000'/>
+			<font name="font" file="Arial.ttf" size="16" color='#000000'/>
 		</title>
 		<buttons>
 			<image name="close" file="close_button.png"/>
@@ -89,4 +90,26 @@
 			</text>
 		</button>
 	</yellowButton>
+	
+	<niceRound>
+		<button>
+			<background>
+				<normal>
+					<image name="image" file="button.png"/>
+				</normal>
+				<lighted>
+					<image name="image" file="button-hover.png"/>
+				</lighted>
+				<pressed>
+					<image name="image" file="button-clicked.png"/>
+				</pressed>
+				<checked>
+					<image name="image" file="button-checked.png"/>
+				</checked>
+			</background>
+			<text>
+				<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+			</text>
+		</button>
+	</niceRound>
 </theme>

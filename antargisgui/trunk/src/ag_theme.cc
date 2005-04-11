@@ -51,6 +51,7 @@ void AGTheme::setColor(const std::string &pName,AGColor pColor)
 
 AGFont AGTheme::getFont(const std::string &pName)
 {
+  cdebug(pName);
   if(mFonts.find(pName)==mFonts.end())
     return mFonts[trunk(pName)];
   return mFonts[pName];
@@ -113,6 +114,7 @@ AGTheme *getTheme()
 
 bool AGTheme::hasSurface(const std::string &pName) const
 {
+  cdebug(pName);
   return(mSurfaces.find(pName)!=mSurfaces.end());
 }
 

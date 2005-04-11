@@ -63,9 +63,9 @@ void AGEditLine::draw(const AGPoint &pPoint,const AGRect &pClip)
       x=(pClip.w-mFont.getWidth(mText))/2;
       y=-(mFont.getHeight(mText))/2;
 
-      cdebug(x<<";"<<y);
+      //      cdebug(x<<";"<<y);
     }
-  cdebug(pPoint.x<<"//"<<pPoint.y);
+  //  cdebug(pPoint.x<<"//"<<pPoint.y);
 
   AGFontEngine::renderText(&getScreen(),pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
 }
@@ -268,6 +268,7 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
 
   mBackground=AGTexture(getTheme()->getSurface("edit.background.image"));
   mDrawBackground=true;
+  setTheme("edit");
 }
 
 void AGEdit::draw(const AGRect &pRect)
@@ -281,8 +282,8 @@ void AGEdit::draw(const AGRect &pRect)
 
   std::list<AGEditLine>::iterator i=mLines.begin();
 
-  cdebug(pRect);
-  cdebug("getRect:"<<getRect());
+  //  cdebug(pRect);
+  //  cdebug("getRect:"<<getRect());
   AGRect mr(pRect.project(getRect()));
 
   AGColor cursorC;
@@ -310,8 +311,8 @@ void AGEdit::draw(const AGRect &pRect)
 
   for(;i!=mLines.end();i++)
     {
-      cdebug("("<<x<<";"<<y<<")");
-      cdebug(mr);
+      //      cdebug("("<<x<<";"<<y<<")");
+      //      cdebug(mr);
       i->draw(mr.project(AGPoint(x,y)),pRect.project(getRect()));
       if(cy+mViewCy==mCy && mMutable) // FIXME: Change show cursor only if widget has focus
 	i->drawCursor(mCx,mr.project(AGPoint(x,y)),pRect.project(getRect()),cursorC);
@@ -736,6 +737,10 @@ void AGEdit::setBackground(bool pDrawBackground)
 
 void AGEdit::setTheme(const std::string &s)
 {
+  std::string ms=s;
+  if(ms=="")
+    ms="edit";
+
   AGFont font=getTheme()->getFont(s+".font");
   setFont(font);
   
