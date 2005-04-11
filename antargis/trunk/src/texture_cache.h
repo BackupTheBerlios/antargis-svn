@@ -23,7 +23,7 @@
 
 #include "ag_gsurface.h"
 #include "ag_debug.h"
-#include "fs.h"
+#include <ag_fs.h>
 
 #include <string>
 #include <map>

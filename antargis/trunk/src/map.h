@@ -27,7 +27,7 @@
 #include "tree.h"
 
 #include "ag_xml.h"
-#include "fs.h"
+#include <ag_fs.h>
 
 #include <set>
 #include <vector>

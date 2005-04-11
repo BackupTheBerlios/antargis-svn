@@ -21,7 +21,7 @@
 #include "voxel.h"
 //#include "terrain.h"
 #include "SDL.h"
-#include "fs.h"
+#include <ag_fs.h>
 #include <cstdlib>
 #include "decast.h"
 #include "ag_color.h"

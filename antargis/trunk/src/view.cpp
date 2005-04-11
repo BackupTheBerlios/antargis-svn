@@ -547,7 +547,7 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
 
   // add edit buttons at the bottom
   AGLayout *layout;
-  addChild(mLayout=layout=new AGLayout(this,getFile("edit_layout.xml")));
+  addChild(mLayout=layout=new AGLayout(this,loadFile("edit_layout.xml")));
   layout->hide();
   for(int i=0;i<10 && std::string(editNames[i]).length();i++)
     layout->getChild(std::string("edit")+toString(editSizes[i]))->sigClick.connect(slot(this,&EditIsoView::selectSize));

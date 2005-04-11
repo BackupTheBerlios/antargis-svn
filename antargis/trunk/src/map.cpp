@@ -20,8 +20,8 @@
 
 #include "map.h"
 #include "voxel.h"
-#include "fs.h"
-#include<cstdlib>
+#include <ag_fs.h>
+#include <cstdlib>
 
 /************************************************************************
 * AntargisMap

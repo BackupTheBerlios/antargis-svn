@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include "fs.h"
+#include <ag_fs.h>
 
 #include "ag_application.h"
 #include "ag_messageobject.h"
@@ -99,7 +99,7 @@ class AntargisApp:public MyApp
       int minimapsize=216;
 
       AGLayout *layout;
-      setMainWidget(layout=new AGLayout(0,getFile("game_layout.xml")));
+      setMainWidget(layout=new AGLayout(0,loadFile("game_layout.xml")));
 
       layout->getChild("load")->sigClick.connect(slot(this,&AntargisApp::loadClick));
       layout->getChild("save")->sigClick.connect(slot(this,&AntargisApp::saveClick));
