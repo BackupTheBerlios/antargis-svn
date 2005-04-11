@@ -2,6 +2,8 @@
 #include "minimap.h"
 #include "map.h"
 
+#include <ag_layoutfactory.h>
+
 #define MINIMAP_GREEN 0xAA
 #define MINIMAP_ALPHA 0xFF
 
@@ -95,3 +97,20 @@ void MiniMap::draw(const AGRect &r)
   
   getScreen().drawRect(AGRect(*/
 }
+
+
+
+// AntView
+class AGAntMiniViewLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(AntMiniView,"antMiniView")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    MiniMap *w=new MiniMap(pParent,pRect,getMap(),AGRect(0,0,10,10));
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(AntMiniView);
+

@@ -4,6 +4,8 @@
 #include <ag_button.h>
 #include "tree.h"
 
+#include <ag_layoutfactory.h>
+
 
 /***********************************************************
  * globals
@@ -796,3 +798,20 @@ void EditIsoView::init()
         }
     }
 }
+
+
+
+// AntView
+class AGAntViewLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(AntView,"antView")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    EditIsoView *w=new EditIsoView(pParent,pRect,Pos3D(0,0,0),getMap());
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(AntView);
+
