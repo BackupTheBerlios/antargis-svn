@@ -1,5 +1,10 @@
 <?
 
+function center($c)
+{
+	return "<center>$c</center>";
+}
+
 function indent($data)
 {
 	return $data;
@@ -33,7 +38,7 @@ function body($a,$c="")
 
 function head()
 {
-	return element("head","<link rel=stylesheet type='text/css' href='config/style.css'>");
+	return element("head","<link rel=stylesheet type='text/css' href='config/style.css'><title>Battles of Antargis</title>");
 }
 
 function image($a,$c="")

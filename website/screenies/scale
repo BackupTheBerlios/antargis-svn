@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm *thumb*
+
+for a in *.png ; {
+	convert $a `echo "$a"|sed -e "s/\.png/.jpg/"` ;
+}
+for a in *.jpg ; {
+	convert -scale 128x96 $a `echo "$a"|sed -e "s/\.jpg/_thumb.jpg/"` ;
+}
