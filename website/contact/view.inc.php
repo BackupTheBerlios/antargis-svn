@@ -2,14 +2,16 @@
 
 function view()
 {
-	$b="";
+	$b=h1("Contact");
 	
 	$list=anchor("http://lists.berlios.de/mailman/listinfo/antargis-dev","http://lists.berlios.de/mailman/listinfo/antargis-dev");
 	
 	$b.=h3("Please contact us per mailing-list:");
 	$b.=p("antargis-dev@lists.berlios.de");
 	$b.=p("Subscribe to list here : $list");
-	
+
+	$b.=p("&nbsp;");
+	$b.=p("The Battles of Antargis team is:");
 	$b.=h3("Design/Development:");
 	$b.=p("David Kamphausen david dot kamphausen at web dot de");
 	$b.=p("Oststraﬂe 31a, 42277 Wuppertal");

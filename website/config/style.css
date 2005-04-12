@@ -31,8 +31,8 @@ a:hover
 .menu
 {
 	position:relative;
-	padding-left:30%;
-	padding-right:30%;
+	/*padding-left:30%;
+	padding-right:30%;*/
 	border-right-width:0px;
 	border-left-width:0px;
 	border-right-style:none;
@@ -43,7 +43,7 @@ a:hover
 	background-color:#333333;
 	color:#FFFFFF;
 	font-family:Helvetica;
-	text-align:justify;
+	text-align:center;
 }
 
 /* menues */
