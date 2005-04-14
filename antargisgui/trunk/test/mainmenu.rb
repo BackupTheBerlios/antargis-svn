@@ -33,6 +33,7 @@ class MenuApp <AGApplication
 	def initialize(autoexit=true)
 		@count=0
 		@autoexit=autoexit
+		@handlers={}
 		super()
 		
 		# init screen
@@ -45,8 +46,8 @@ class MenuApp <AGApplication
 		
 		# setup eventhandling
 		c=$screen.getChild("quit")
-		c.sigClick.connect(self)
-		#addHandler(c,:sigClick,:test2) # FIXME: this doesn't work yet
+		#c.sigClick.connect(self)
+		addHandler(c,:sigClick,:test2) # FIXME: this doesn't work yet
 		setMainWidget($screen)
 		#ObjectSpace.garbage_collect
 	end
@@ -65,17 +66,30 @@ class MenuApp <AGApplication
 		end
 	end
 	
-	# this should work
-	def addHandler(object,event,func)
-		puts event
-		object.event.connect(self)
+	
+	def test2(eventName,callerName,event,caller)
+		puts "pCaller:"+callerName
+		tryQuit
 	end
 	
+	
+	# add Event Handler - this function should go into AGRubyApp
+	def addHandler(object,event,func)
+		puts event
+		object.method(event).call.connect(self)
+		@handlers[object.getName+":"+event.to_s]=func
+	end
+	# event dispatcher
 	def signal(name,event,caller)
 		callerName=toAGWidget(caller).getName
-		puts "signal:"+name
-		puts "pCaller:"+toAGWidget(caller).getName
-		if callerName="quit" then tryQuit end
+		#puts "signal:"+name
+		#puts "pCaller:"+toAGWidget(caller).getName
+		#if callerName="quit" then tryQuit end
+		evName=callerName+":"+name
+		if @handlers.has_key?(evName) then
+			self.method(@handlers[evName]).call(name,callerName,event,caller)
+			return true
+		end
 		
 		return super(name,event,caller)
 	end
