@@ -15345,6 +15345,19 @@ _wrap_AGWidget_addChildBack(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_clear(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    (arg1)->clear();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGWidget_getScreenRect(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     AGRect result;
@@ -24169,6 +24182,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "hide", VALUEFUNC(_wrap_AGWidget_hide), -1);
     rb_define_method(cAGWidget.klass, "addChild", VALUEFUNC(_wrap_AGWidget_addChild), -1);
     rb_define_method(cAGWidget.klass, "addChildBack", VALUEFUNC(_wrap_AGWidget_addChildBack), -1);
+    rb_define_method(cAGWidget.klass, "clear", VALUEFUNC(_wrap_AGWidget_clear), -1);
     rb_define_method(cAGWidget.klass, "getScreenRect", VALUEFUNC(_wrap_AGWidget_getScreenRect), -1);
     rb_define_method(cAGWidget.klass, "getScreenPosition", VALUEFUNC(_wrap_AGWidget_getScreenPosition), -1);
     rb_define_method(cAGWidget.klass, "fromScreen", VALUEFUNC(_wrap_AGWidget_fromScreen), -1);

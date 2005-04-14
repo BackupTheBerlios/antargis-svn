@@ -94,6 +94,8 @@ class AGWidget:public AGMessageObject
   virtual void addChild(AGWidget *w);
   virtual void addChildBack(AGWidget *w);
 
+  void clear();
+
   AGRect getScreenRect() const;
   AGPoint getScreenPosition() const;
   AGPoint fromScreen(const AGPoint &p) const;
@@ -117,7 +119,7 @@ class AGWidget:public AGMessageObject
 
   void checkFocus();
 
-
+  std::list<AGWidget*> mToClear;
 
   AGRect mr;
   AGWidget *mParent;

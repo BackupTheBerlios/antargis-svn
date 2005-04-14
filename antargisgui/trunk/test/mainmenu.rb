@@ -25,90 +25,66 @@ require 'libantargisruby'
 require 'sdl'
 #require 'testapp.rb'
 #require 'theme.rb'
+require 'antApp.rb'
 
 include Libantargisruby
 
+#
+# TODO: change to menu selection, so items get shown and hidden
+#
 
-class MenuApp <AGApplication
+class AntMenuApp <AntApp
 	def initialize(autoexit=true)
-		@count=0
-		@autoexit=autoexit
-		@handlers={}
 		super()
 		
 		# init screen
 		$screen=AGScreenWidget.new
 		$screen.setName("SCREEN")
-		
-		# load layout
-		l=AGLayout.new($screen,loadFile("mainmenu.xml"))
-		$screen.addChild(l)
-		
-		# setup eventhandling
-		c=$screen.getChild("quit")
-		#c.sigClick.connect(self)
-		addHandler(c,:sigClick,:test2) # FIXME: this doesn't work yet
 		setMainWidget($screen)
-		#ObjectSpace.garbage_collect
-	end
-	def eventQuit(event)
-		puts "Quitting"
-		super(event)
-	end
-	def eventIdle
-		#puts "idle count:"+@count.to_s
-		@count+=1
-		if @count>=20 then
-			if @autoexit then
-				puts "correct quit after 20 idles"
-				tryQuit
-			end
-		end
+		
+		setupMain
 	end
 	
+	def clearScreen
+		puts "CLEARSCREEN"
+		$screen.clear
+		clearHandlers
+		puts "CLEARSCREEN."
+	end
 	
-	def test2(eventName,callerName,event,caller)
+	def setupMain()
+		puts "SETUPMAIN"
+		$screen.clear
+		$screen.addChild(AGLayout.new($screen,loadFile("mainmenu.xml")))
+		addHandler($screen.getChild("quit"),:sigClick,:sigQuit)
+		addHandler($screen.getChild("credits"),:sigClick,:setupCredits)
+		puts "SETUPMAIN."
+	end
+	
+	def setupCredits(eventName,callerName,event,caller)
+		puts "SETUPCREDITS"
+		$screen.clear
+		$screen.addChild(AGLayout.new($screen,loadFile("credits.xml")))
+		addHandler($screen.getChild("exit"),:sigClick,:sigExit)
+	end
+	
+	def sigExit(eventName,callerName,event,caller)
+		setupMain
+	end
+	
+	def sigQuit(eventName,callerName,event,caller)
 		puts "pCaller:"+callerName
 		tryQuit
 	end
 	
-	
-	# add Event Handler - this function should go into AGRubyApp
-	def addHandler(object,event,func)
-		puts event
-		object.method(event).call.connect(self)
-		@handlers[object.getName+":"+event.to_s]=func
-	end
-	# event dispatcher
-	def signal(name,event,caller)
-		callerName=toAGWidget(caller).getName
-		#puts "signal:"+name
-		#puts "pCaller:"+toAGWidget(caller).getName
-		#if callerName="quit" then tryQuit end
-		evName=callerName+":"+name
-		if @handlers.has_key?(evName) then
-			self.method(@handlers[evName]).call(name,callerName,event,caller)
-			return true
-		end
-		
-		return super(name,event,caller)
-	end
-	def eventQuit2(name,event)
-	end
 end
 
 
-#puts "MenuTest"
-
 main=AGMain.new
-
-#doc=Document.new("theme.xml")
-#puts doc
-#loadTheme(loadFile("thedoc.toString)
 
 main.changeRes(1024,768,32,false,true)
 
-app=MenuApp.new(false)
+app=AntMenuApp.new(false)
 
 app.run
 

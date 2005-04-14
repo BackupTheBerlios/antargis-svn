@@ -23,6 +23,7 @@
 #include "ag_menu.h"
 #include <map>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -56,12 +57,33 @@ void AGWidget::draw(const AGRect &r)
 
 void AGWidget::drawAll(const AGRect &r)
 {
+  if(mToClear.size())
+    {
+      cdebug("mClear:"<<mToClear.size());
+      CTRACE;
+      cdebug(mChildren.size());
+      std::list<AGWidget*>::iterator i=mToClear.begin();
+      for(;i!=mToClear.end();i++)
+	{
+	  if(!(*i)->mRubyObject) // don't delete ruby-objects - they get deleted by garbage collection
+	    delete *i;
+	}
+      mToClear.clear();
+    }
+
+
+
   //  TRACE;
   if(!mVisible)
     return;
 
   if(!mChildrenDrawFirst)
     draw(r);
+
+
+
+
+
   std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
   AGRect r2=r.project(mr);
   for(;i!=mChildren.rend();i++)
@@ -251,6 +273,14 @@ void AGWidget::addChild(AGWidget *w)
 
 #endif
 }
+
+void AGWidget::clear()
+{
+  // delay it till be draw everything - so this doesn't kill widgets while processing events
+  std::copy(mChildren.begin(),mChildren.end(),std::back_inserter(mToClear));
+  mChildren.clear();
+}
+
 void AGWidget::addChildBack(AGWidget *w)
 {
   mChildren.push_back(w); // set on top

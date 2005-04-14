@@ -26,9 +26,9 @@
 					<text col="0" row="4" caption="David Kamphausen\n<david.kamphausen@web.de>"/>
 					<text col="0" row="5" caption="Some images from Christoph Brill\n<egore@gmx.de> (taken from Lincity-ng)"/>
 					<text col="0" row="7" caption="Website"/>
-					<text col="0" row="8" caption="David Kamphausen"/>
+					<text col="0" row="8" caption="David Kamphausen\nMartin Kamphausen"/>
 				</table>
-				<button row="2" col="0" caption="Exit"/>
+				<button row="2" col="0" name="exit" caption="Exit"/>
 			</table>
 			<button col="0" row="0"  enabled="false" caption-image="MainMenuBg3.png"/>
 			<button col="2" row="0" enabled="false"/>
