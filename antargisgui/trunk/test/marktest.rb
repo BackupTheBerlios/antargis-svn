@@ -58,8 +58,9 @@ w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
 window1.addChild(w2)
 
 a={}
-for i in 0..10000
-	a[i]=i*i
+a[0]="aa"
+for i in 1..20
+	a[i]=a[i-1]+a[i-1]
 end
 
 GC.start

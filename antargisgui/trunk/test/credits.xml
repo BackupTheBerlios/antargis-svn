@@ -20,10 +20,10 @@
 				<rowsize row="2" relative="1"/>
 				<button row="0" col="0" caption="Credits"/>
 				<table  row="1" col="0" rows="10" cols="1">
-					<text col="0" row="0" caption="Design & Programming"/>
+					<text col="0" row="0" theme="bold" caption="Design & Programming"/>
 					<text col="0" row="1" caption="David Kamphausen"/>
 					<text col="0" row="3" caption="Arts"/>
-					<text col="0" row="4" caption="David Kamphausen"/>
+					<text col="0" row="4" caption="David Kamphausen\n<david.kamphausen@web.de>"/>
 					<text col="0" row="5" caption="Some images from Christoph Brill\n<egore@gmx.de> (taken from Lincity-ng)"/>
 					<text col="0" row="7" caption="Website"/>
 					<text col="0" row="8" caption="David Kamphausen"/>

@@ -62,6 +62,7 @@ class AGSDLScreen:public AGGScreen
  public:
 #ifdef USE_RUBY
   VALUE mRUBY;
+  bool mRubyObject;
 #endif
 };
 

@@ -37,12 +37,17 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mMenu(0),hasFocus(false),mFocus(0)
 
 {
-  cdebug(r);
+  mRubyObject=false;
+  //  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
 }
 AGWidget::~AGWidget()
 {
+  CTRACE;
+  cdebug(typeid(*this).name());
+  cdebug(getName());
+  //  throw int();
 }
 
 void AGWidget::draw(const AGRect &r)
@@ -237,6 +242,14 @@ void AGWidget::addChild(AGWidget *w)
     {
       gainFocus(w);
     }
+#ifdef USE_RUBY
+  if(w->mRubyObject)
+    {
+      VALUE rubyAnimal = w->mRUBY;
+      rb_gc_mark(rubyAnimal);
+    }
+
+#endif
 }
 void AGWidget::addChildBack(AGWidget *w)
 {
@@ -299,7 +312,7 @@ void AGWidget::setWidth(int w)
 }
 void AGWidget::setHeight(int h)
 {
-  cdebug(h);
+  //  cdebug(h);
   mr.h=h;
 }
 
@@ -502,6 +515,7 @@ AGWidget *AGWidget::getChild(const std::string &pName)
 #endif
 void AGWidget_markfunc(void *ptr)
 {
+  cdebug("TRACE");
 #ifdef USE_RUBY
   AGWidget *cppAnimal;
   VALUE   rubyAnimal;
@@ -517,11 +531,19 @@ void AGWidget_markfunc(void *ptr)
     {
       cdebug("children:"<<*i);
       cppAnimal = *i;//zoo->getAnimal(i);
-      rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
-      rb_gc_mark(rubyAnimal);
+      if(cppAnimal->mRubyObject)
+	{
+	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
+	  rb_gc_mark(rubyAnimal);
+	}
+      AGWidget_markfunc(*i);
     }
 #endif
 }
 
 
 
+AGWidget *toAGWidget(AGMessageObject *o)
+{
+  return dynamic_cast<AGWidget*>(o);
+}

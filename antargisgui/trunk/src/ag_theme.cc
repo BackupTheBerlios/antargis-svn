@@ -66,7 +66,7 @@ AGColor AGTheme::getColor(const std::string &pName)
 
 std::string AGTheme::trunk(std::string s)
 {
-  cdebug(s);
+  //  cdebug(s);
   size_t i=s.find(".");
   if(i!=s.npos)
     s=s.substr(0,i);
@@ -112,7 +112,7 @@ AGTheme *getTheme()
 
 bool AGTheme::hasSurface(const std::string &pName) const
 {
-  cdebug(pName);
+  //  cdebug(pName);
   return(mSurfaces.find(pName)!=mSurfaces.end());
 }
 

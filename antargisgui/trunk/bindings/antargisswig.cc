@@ -2166,6 +2166,9 @@ SwigDirector_AGCPPListener::SwigDirector_AGCPPListener(VALUE self) : Swig::Direc
 
 
 
+SwigDirector_AGCPPListener::~SwigDirector_AGCPPListener() {
+}
+
 bool SwigDirector_AGCPPListener::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) const {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
@@ -12815,6 +12818,7 @@ _wrap_new_AGSDLScreen(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGSDLScreen\n");
     }
     return self;
@@ -13520,6 +13524,10 @@ _wrap_disown_AGListener(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_AGCPPListener(AGCPPListener *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_AGCPPListener_signal(int argc, VALUE *argv, VALUE self) {
     AGCPPListener *arg1 = (AGCPPListener *) 0 ;
@@ -13584,10 +13592,6 @@ _wrap_new_AGCPPListener(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_AGCPPListener(AGCPPListener *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_AGCPPListener(int argc, VALUE *argv, VALUE self) {
     AGCPPListener *arg1 = (AGCPPListener *) 0 ;
@@ -13606,6 +13610,18 @@ _wrap_disown_AGCPPListener(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_AGSignal__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGSignal *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (AGSignal *)new AGSignal();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGSignal__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGMessageObject *arg1 = (AGMessageObject *) 0 ;
     AGSignal *result;
     
@@ -13636,7 +13652,7 @@ _wrap_AGSignal_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGSignal__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGSignal__SWIG_2(int argc, VALUE *argv, VALUE self) {
     AGMessageObject *arg1 = (AGMessageObject *) 0 ;
     std::string *arg2 = 0 ;
     AGSignal *result;
@@ -13668,6 +13684,9 @@ static VALUE _wrap_new_AGSignal(int nargs, VALUE *args, VALUE self) {
     for (ii = 0; (ii < argc) && (ii < 2); ii++) {
         argv[ii] = args[ii];
     }
+    if (argc == 0) {
+        return _wrap_new_AGSignal__SWIG_0(nargs, args, self);
+    }
     if (argc == 1) {
         int _v;
         {
@@ -13675,7 +13694,7 @@ static VALUE _wrap_new_AGSignal(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGMessageObject, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_AGSignal__SWIG_0(nargs, args, self);
+            return _wrap_new_AGSignal__SWIG_1(nargs, args, self);
         }
     }
     if (argc == 2) {
@@ -13689,7 +13708,7 @@ static VALUE _wrap_new_AGSignal(int nargs, VALUE *args, VALUE self) {
                 _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_AGSignal__SWIG_1(nargs, args, self);
+                return _wrap_new_AGSignal__SWIG_2(nargs, args, self);
             }
         }
     }
@@ -14587,6 +14606,7 @@ _wrap_new_AGWidget(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGWidget\n");
     }
     return self;
@@ -15539,6 +15559,22 @@ _wrap_disown_AGWidget(int argc, VALUE *argv, VALUE self) {
     }
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_toAGWidget(int argc, VALUE *argv, VALUE self) {
+    AGMessageObject *arg1 = (AGMessageObject *) 0 ;
+    AGWidget *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGMessageObject, 1);
+    result = (AGWidget *)toAGWidget(arg1);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
+    return vresult;
 }
 
 
@@ -17105,6 +17141,7 @@ _wrap_new_AGButton__SWIG_0(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGButton\n");
     }
     return self;
@@ -17162,6 +17199,7 @@ _wrap_new_AGButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGButton\n");
     }
     return self;
@@ -17794,6 +17832,7 @@ _wrap_new_AGText(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGText\n");
     }
     return self;
@@ -19063,6 +19102,7 @@ _wrap_new_AGScreenWidget(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGScreenWidget\n");
     }
     return self;
@@ -19603,6 +19643,7 @@ _wrap_new_AGEdit(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGEdit\n");
     }
     return self;
@@ -20391,6 +20432,7 @@ _wrap_new_AGTable(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGTable\n");
     }
     return self;
@@ -20603,6 +20645,7 @@ _wrap_new_AGWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGWindow\n");
     }
     return self;
@@ -20650,6 +20693,7 @@ _wrap_new_AGWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGWindow\n");
     }
     return self;
@@ -20896,6 +20940,7 @@ _wrap_new_AGImage__SWIG_0(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGImage\n");
     }
     return self;
@@ -20951,6 +20996,7 @@ _wrap_new_AGImage__SWIG_1(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGImage\n");
     }
     return self;
@@ -21151,6 +21197,7 @@ _wrap_new_AGCaption(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGCaption\n");
     }
     return self;
@@ -21358,6 +21405,7 @@ _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
         }
         DATA_PTR(self) = result;
         result->mRUBY=self;
+        result->mRubyObject=true;
         printf("register:AGLayout\n");
     }
     return self;
@@ -23282,16 +23330,21 @@ _wrap_new_AGDialog(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    char *classname = "Libantargisruby::AGDialog";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (AGDialog *)new SwigDirector_AGDialog(arg1,arg2,(std::string const &)*arg3);
-        
-    } else {
-        result = (AGDialog *)new AGDialog(arg2,(std::string const &)*arg3);
-        
+    {
+        char *classname = "Libantargisruby::AGDialog";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (AGDialog *)new SwigDirector_AGDialog(arg1,arg2,(std::string const &)*arg3);
+            
+        } else {
+            result = (AGDialog *)new AGDialog(arg2,(std::string const &)*arg3);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:AGDialog\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -24127,6 +24180,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "getChild", VALUEFUNC(_wrap_AGWidget_getChild), -1);
     cAGWidget.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGWidget.destroy = (void (*)(void *)) free_AGWidget;
+    rb_define_module_function(mLibantargisruby, "toAGWidget", VALUEFUNC(_wrap_toAGWidget), -1);
     rb_define_singleton_method(mLibantargisruby, "agNoParent", VALUEFUNC(agNoParent_get), 0);
     rb_define_singleton_method(mLibantargisruby, "agNoParent=", VALUEFUNC(agNoParent_set), 1);
     

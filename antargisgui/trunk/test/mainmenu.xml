@@ -28,7 +28,7 @@
 				<button row="2" col="0" caption="Load game"/>
 				<button row="3" col="0" caption="Options"/>
 				<button row="4" col="0" caption="Credits"/>
-				<button row="5" col="0" caption="Exit"/>
+				<button row="5" col="0" name="quit" caption="Exit"/>
 			
 			</table>
 			<button col="0" row="0"  enabled="false" caption-image="MainMenuBg3.png"/>

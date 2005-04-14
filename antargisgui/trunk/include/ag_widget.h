@@ -144,8 +144,11 @@ class AGWidget:public AGMessageObject
  public:
 #ifdef USE_RUBY
   VALUE mRUBY;
+  bool mRubyObject;
 #endif
 };
+
+AGWidget *toAGWidget(AGMessageObject *o);
 
 
 void AGWidget_markfunc(void *ptr);

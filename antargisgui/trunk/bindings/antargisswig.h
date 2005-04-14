@@ -117,6 +117,7 @@ class SwigDirector_AGCPPListener : public AGCPPListener, public Swig::Director {
 
 public:
     SwigDirector_AGCPPListener(VALUE self);
+    virtual ~SwigDirector_AGCPPListener();
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) const;
 };
 

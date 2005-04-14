@@ -28,6 +28,7 @@
 #include "ag_geometry.h"
 
 class AGListener;
+class AGSignal;
 
 class AGEvent
 {
@@ -77,6 +78,7 @@ class AGListener
 class AGCPPListener
 {
  public:
+  virtual ~AGCPPListener();
   virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
 };
 
@@ -126,21 +128,12 @@ class AGSlot2:public AGCPPListener
     }
 };
 
-template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *))
-{
-  return new AGSlot<T>(base,f);
-}
-
-template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *,AGMessageObject *))
-{
-  return new AGSlot2<T>(base,f);
-}
 
 class AGSignal
 {
  public:
+  AGSignal();
+  //  AGSignal(const AGSignal &s);
   AGSignal(AGMessageObject *pCaller);
   AGSignal(AGMessageObject *pCaller,const std::string &pName);
   void connect(AGListener &pListener);
@@ -205,5 +198,18 @@ class AGMessageObject:public AGListener
 
 
 AGEvent *newEvent(AGListener *pCaller,const SDL_Event*s);
+
+template<class T>
+AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *))
+{
+  return new AGSlot<T>(base,f);
+}
+
+template<class T>
+AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *,AGMessageObject *))
+{
+  return new AGSlot2<T>(base,f);
+}
+
 
 #endif

@@ -29,11 +29,26 @@ require 'sdl'
 include Libantargisruby
 
 
-class TestApp <AGApplication
+class MenuApp <AGApplication
 	def initialize(autoexit=true)
 		@count=0
 		@autoexit=autoexit
 		super()
+		
+		# init screen
+		$screen=AGScreenWidget.new
+		$screen.setName("SCREEN")
+		
+		# load layout
+		l=AGLayout.new($screen,loadFile("mainmenu.xml"))
+		$screen.addChild(l)
+		
+		# setup eventhandling
+		c=$screen.getChild("quit")
+		c.sigClick.connect(self)
+		#addHandler(c,:sigClick,:test2) # FIXME: this doesn't work yet
+		setMainWidget($screen)
+		#ObjectSpace.garbage_collect
 	end
 	def eventQuit(event)
 		puts "Quitting"
@@ -49,40 +64,37 @@ class TestApp <AGApplication
 			end
 		end
 	end
+	
+	# this should work
+	def addHandler(object,event,func)
+		puts event
+		object.event.connect(self)
+	end
+	
+	def signal(name,event,caller)
+		callerName=toAGWidget(caller).getName
+		puts "signal:"+name
+		puts "pCaller:"+toAGWidget(caller).getName
+		if callerName="quit" then tryQuit end
+		
+		return super(name,event,caller)
+	end
+	def eventQuit2(name,event)
+	end
 end
 
 
-puts "MenuTest"
+#puts "MenuTest"
 
 main=AGMain.new
 
-doc=Document.new("theme.xml")
-puts doc
-loadTheme(doc.toString)
+#doc=Document.new("theme.xml")
+#puts doc
+#loadTheme(loadFile("thedoc.toString)
 
 main.changeRes(1024,768,32,false,true)
 
-app=TestApp.new(false)
-
-screen=AGScreenWidget.new
-#window1=AGWindow.new(screen,AGRect.new(100,100,200,100),"test Window")
-#window2=AGWindow.new(screen,AGRect.new(150,150,200,100))
-
-#screen.addChild(window1)
-#screen.addChild(window2)
-
-#w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
-#window1.addChild(w2)
-
-doc=Document.new("mainmenu.xml")
-puts doc.toString
-l=AGLayout.new(screen,doc.toString)
-screen.addChild(l)
-
-
-
-app.setMainWidget(screen)#widget)
+app=MenuApp.new(false)
 
 app.run
 
-#

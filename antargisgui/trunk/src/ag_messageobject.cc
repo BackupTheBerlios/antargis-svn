@@ -114,8 +114,21 @@ bool AGListener::signal(const char*pName,const AGEvent *m,AGMessageObject *pCall
   return false;
 }
 
+AGCPPListener::~AGCPPListener()
+{
+}
+
+
 
 // AGSignal
+
+AGSignal::AGSignal():mCaller(0)
+{
+}
+
+//AGSignal::AGSignal(const AGSignal &s):mListeners(s.mListeners
+
+
 
 AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
 {

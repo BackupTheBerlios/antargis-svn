@@ -77,6 +77,7 @@ rlist.each {|x,y|
 	puts "%exception "+x+"::"+x+" {"
 	puts "	$action"
 	puts "	result->mRUBY=self;"
+	puts "  result->mRubyObject=true;"
   puts "	printf(\"register:"+x+"\\n\");"
   puts "}"
 	end

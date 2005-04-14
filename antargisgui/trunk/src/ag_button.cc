@@ -177,17 +177,17 @@ bool AGButton::eventMouseButtonDown(const AGEvent *m)
   if(!mEnabled)
     return false;
 
-  CTRACE;
+  // CTRACE;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(e)
     {
-      cdebug(getScreenRect());
+      //      cdebug(getScreenRect());
       if(getScreenRect().contains(e->getMousePosition()))
 	{
 	  mState=PRESSED;
-	  ccdebug("Pressed");
+	  //  ccdebug("Pressed");
 	  sigClick(m);
-	  cdebug(getName());
+	  //	  cdebug(getName());
 	  return true;// FIXME:TEST false; // events only get eaten if in window
 	}
     }
