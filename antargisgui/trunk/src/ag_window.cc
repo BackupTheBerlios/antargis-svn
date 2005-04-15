@@ -120,7 +120,7 @@ bool AGWindow::eventMouseButtonDown(const AGEvent *m)
 {
   CTRACE;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(!getFocus())
+  if(!hasFocus())
     if(e)
       if(getScreenRect().contains(e->getMousePosition()))
 	if(getParent())

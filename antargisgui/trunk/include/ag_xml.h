@@ -103,7 +103,7 @@ class Node
     std::string unescape(const std::string &s) const;
 
     // dumping functions
-    void getStart(std::ostringstream &s) const;
+    void getStart(std::ostringstream &s,bool complete=false) const;
     void getEnd(std::ostringstream &s) const;
       
     void indent(std::ostringstream &s,int depth) const;

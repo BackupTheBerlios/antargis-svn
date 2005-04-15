@@ -46,7 +46,32 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
 
   parseChildren(this,p.root());
 
+
+      cdebug(mTabIndices.size());
+  if(mTabIndices.size())
+    {
+      CTRACE;
+      cdebug(mTabIndices.size());
+      mTabIndices.begin()->second->gainFocus();
+    }
 }
+
+void AGLayout::addTabIndex(int i,AGWidget *pWidget)
+{
+  mTabIndices[i]=pWidget;
+}
+
+
+AGLayout *getLayout(AGWidget *pWidget)
+{
+  AGLayout *l=dynamic_cast<AGLayout*>(pWidget);
+  if(l)
+    return l;
+  else if(pWidget->getParent())
+    return getLayout(pWidget->getParent());
+  return 0;
+}
+
 
 AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 {
@@ -63,6 +88,17 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   if(w!=0 && pNode.get("name").length())
     w->setName(pNode.get("name"));
+
+  if(w!=0 && pNode.get("tabindex").length())
+    {
+      AGLayout *l=getLayout(pParent);
+      if(l)
+	{
+	  l->addTabIndex(toInt(pNode.get("tabindex")),w);
+	}
+      else
+	cdebug("ERRRRRRRRRRRRRRRRRRRRRRROR");
+    }
 
   parseChildren(w,pNode);
 
@@ -282,3 +318,37 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(Text);
+
+
+// AGText creator
+class AGEditLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(Edit,"edit")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    CTRACE;
+    std::string text=pNode.get("text");
+    bool multi=pNode.get("multi")=="true";
+    
+    //    AGWidget *w=new AGText(pParent,pRect,text,font);
+    AGEdit *w=new AGEdit(pParent,pRect);
+    w->setText(text);
+    if(pNode.get("font")!="")
+    {
+      AGFont font;
+      font=getTheme()->getFont(pNode.get("font"));
+      w->setFont(font);
+    }
+    //    w->setAlign(EDIT_CENTER);
+    w->setMutable(true);//false);
+    w->setBackground(true);//false);
+    w->setMulti(multi);
+    if(!multi)
+      w->setVAlign(EDIT_VCENTER);
+
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(Edit);

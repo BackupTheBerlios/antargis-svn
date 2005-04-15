@@ -22,54 +22,60 @@
 #!/usr/bin/ruby
 
 require 'libantargisruby'
-require 'sdl'
-#require 'testapp.rb'
-#require 'theme.rb'
 require 'antApp.rb'
 
 include Libantargisruby
 
-#
-# TODO: change to menu selection, so items get shown and hidden
-#
-
 class AntMenuApp <AntApp
-	def initialize(autoexit=true)
+	def initialize()
 		super()
 		
 		# init screen
 		$screen=AGScreenWidget.new
 		$screen.setName("SCREEN")
 		setMainWidget($screen)
-		
+	
+		# init menues
+		@menues=[]	
 		setupMain
+		setupCredits
+		# hie all menues
+		hideAll
+		# and show mainmenu
+		@mainMenu.show
 	end
 	
-	def clearScreen
-		puts "CLEARSCREEN"
-		$screen.clear
-		clearHandlers
-		puts "CLEARSCREEN."
+	def hideAll
+		@menues.each {|x|x.hide}
 	end
 	
 	def setupMain()
 		puts "SETUPMAIN"
-		$screen.clear
-		$screen.addChild(AGLayout.new($screen,loadFile("mainmenu.xml")))
+		@mainMenu=AGLayout.new($screen,loadFile("mainmenu.xml"))
+		@menues.push(@mainMenu)
+		$screen.addChild(@mainMenu)
+		@mainMenu.hide
 		addHandler($screen.getChild("quit"),:sigClick,:sigQuit)
-		addHandler($screen.getChild("credits"),:sigClick,:setupCredits)
+		addHandler($screen.getChild("credits"),:sigClick,:sigCredits)
 		puts "SETUPMAIN."
 	end
 	
-	def setupCredits(eventName,callerName,event,caller)
+	def setupCredits
 		puts "SETUPCREDITS"
-		$screen.clear
-		$screen.addChild(AGLayout.new($screen,loadFile("credits.xml")))
+		@creditsMenu=AGLayout.new($screen,loadFile("credits.xml"))
+		@menues.push(@creditsMenu)
+		$screen.addChild(@creditsMenu)
 		addHandler($screen.getChild("exit"),:sigClick,:sigExit)
 	end
 	
+	def sigCredits(eventName,callerName,event,caller)
+		hideAll
+		@creditsMenu.show
+	end
+	
 	def sigExit(eventName,callerName,event,caller)
-		setupMain
+		hideAll
+		@mainMenu.show
 	end
 	
 	def sigQuit(eventName,callerName,event,caller)
@@ -84,7 +90,7 @@ main=AGMain.new
 
 main.changeRes(1024,768,32,false,true)
 
-app=AntMenuApp.new(false)
+app=AntMenuApp.new()
 
 app.run
 

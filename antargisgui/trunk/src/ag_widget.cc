@@ -25,6 +25,9 @@
 #include <iostream>
 #include <algorithm>
 
+#define FOCUS_BY_SORT
+
+
 using namespace std;
 
 AGWidget *agNoParent=0;
@@ -35,7 +38,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
   sigMouseLeave(this,"sigMouseLeave"),
   sigClick(this,"sigClick"),
   mr(r),mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
-  mFixedWidth(false),mFixedHeight(false),mVisible(true),mMenu(0),hasFocus(false),mFocus(0)
+  mFixedWidth(false),mFixedHeight(false),mVisible(true),mMenu(0),mHasFocus(false),mFocus(0)
 
 {
   mRubyObject=false;
@@ -107,6 +110,8 @@ AGRect AGWidget::getClientRect() const
 
 bool AGWidget::processEvent(const AGEvent *event)
 {
+  if(!mVisible)
+    return false;
   //  cdebug(typeid(this));
 
   //  TRACE;
@@ -244,6 +249,9 @@ bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 	      //	      cdebug("click");
 	      eventMouseClick(m) || sigClick(m);
 	      //  return true; // consume
+
+	      if(canFocus())
+		gainFocus();
 	    }
 	}
     }
@@ -260,7 +268,7 @@ bool AGWidget::eventMouseClick(const AGEvent *m)
 void AGWidget::addChild(AGWidget *w)
 {
   mChildren.push_front(w); // set on top
-  if(hasFocus && w->canFocus())
+  if(mHasFocus && w->canFocus())
     {
       gainFocus(w);
     }
@@ -436,7 +444,7 @@ bool AGWidget::canFocus() const
 bool AGWidget::eventGotFocus()
 {
   //  CTRACE;
-  hasFocus=true;
+  mHasFocus=true;
   return false;
 }
 
@@ -445,7 +453,7 @@ bool AGWidget::eventLostFocus()
   //  CTRACE;
   if(mFocus)
     mFocus->eventLostFocus();
-  hasFocus=false;
+  mHasFocus=false;
   mFocus=0;
   
   return false;
@@ -458,32 +466,67 @@ void AGWidget::setMenu(AGMenu *pMenu)
 
 void AGWidget::gainFocus(AGWidget *pWidget)
 {
-  //  CTRACE;
-  Assert(std::find(mChildren.begin(),mChildren.end(),pWidget)!=mChildren.end());
-
-  if(!hasFocus)
+#ifdef FOCUS_BY_SORT
+  if(pWidget)
     {
-      if(mParent)
-	mParent->gainFocus(this);
-      else
+      cdebug(mChildren.size());
+      std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+      if(i!=mChildren.end())
 	{
-	  hasFocus=true;
-	  eventGotFocus();
+	  mChildren.erase(i);
+	  mChildren.push_front(pWidget);
+	}
+      cdebug(mChildren.size());
+    }
+  if(mParent)
+    mParent->gainFocus(this);
+#else
+  if(pWidget==0 && mParent)
+    mParent->gainFocus(this);
+  else if(mParent)
+    mParent->gainFocus(pWidget);
+  else
+    gainFocusDown(pWidget);
+#endif
+}
+
+void AGWidget::gainFocusDown(AGWidget *pWidget)
+{
+  //  CTRACE;
+  std::list<AGWidget*>::iterator i;
+  i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+  if(i!=mChildren.end())
+    {
+      // found
+      if(!mHasFocus)
+	{
+	  if(mParent)
+	    mParent->gainFocus(this);
+	  else
+	    {
+	      mHasFocus=true;
+	      eventGotFocus();
+	    }
+	}
+      
+      if(mFocus!=pWidget)
+	{
+	  if(mFocus)
+	    mFocus->eventLostFocus();
+	  mFocus=pWidget;
+	  mFocus->eventGotFocus();
 	}
     }
-
-  if(mFocus!=pWidget)
+  else
     {
-      if(mFocus)
-	mFocus->eventLostFocus();
-      mFocus=pWidget;
-      mFocus->eventGotFocus();
+      for(i=mChildren.begin();i!=mChildren.end();i++)
+	(*i)->gainFocusDown(pWidget);
     }
 }
 
 void AGWidget::checkFocus()
 {
-  if(mChildren.size()>0 && mFocus && hasFocus)
+  if(mChildren.size()>0 && mFocus && mHasFocus)
     {
       if(mFocus!=*mChildren.begin())
 	{
@@ -499,6 +542,41 @@ void AGWidget::checkFocus()
     }
 }
 
+bool AGWidget::hasFocus(const AGWidget *pWidget)
+{
+#ifdef FOCUS_BY_SORT
+  if(pWidget==0)
+    {
+      if(mParent)
+	return mParent->hasFocus(this);
+      else
+	return true;
+    }
+  if(mChildren.size()==0)
+    return true; // some error
+  if(*mChildren.begin()==pWidget)
+    {
+      if(mParent)
+	return mParent->hasFocus(this); // ok - so go on and check if "this" has focus
+      return true; // ok
+    }
+  return false;
+#else
+  if(pWidget==0)
+    {
+      if(mParent)
+	return mParent->hasFocus(this);
+      else
+	return true;
+    }
+  else if(mFocus!=pWidget)
+    return false;
+  else if(mParent)
+    return mParent->hasFocus(this);
+  return true;
+#endif
+}
+
 
 bool AGWidget::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
 {
@@ -510,7 +588,7 @@ bool AGWidget::getFocus() const
 {
   //  CTRACE;
   //  cdebug(hasFocus);
-  return hasFocus;
+  return mHasFocus;
 }
 
 std::string AGWidget::getName() const

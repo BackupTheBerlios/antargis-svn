@@ -30,6 +30,10 @@ class AGLayout:public AGWidget
 {
  public:
   AGLayout(AGWidget *pgParent,const std::string &pXMLData);
+
+  void addTabIndex(int i,AGWidget *pWidget);
+ private:
+  std::map<int,AGWidget*> mTabIndices;
 };
 
 AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode);

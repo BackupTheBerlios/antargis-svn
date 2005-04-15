@@ -227,7 +227,7 @@ std::string Node::unescape(const std::string &s) const
     return n;
   }
 
-void Node::getStart(std::ostringstream &s) const
+void Node::getStart(std::ostringstream &s,bool complete) const
   {
     s<<"<"<<mName;
     if(mParams.size()>0)
@@ -236,6 +236,8 @@ void Node::getStart(std::ostringstream &s) const
         for(;i!=mParams.end();i++)
           s<<" "<<i->first<<"=\""<<escape(i->second)<<"\"";
       }
+    if(complete)
+      s<<"/";
     s<<">";
   }
 void Node::getEnd(std::ostringstream &s) const
@@ -263,12 +265,18 @@ void Node::getContent(std::ostringstream &s,int depth) const
           {
             // width indenting
             indent(s,depth);
-            i->getStart(s);
-            s<<endl;
-            i->getContent(s,depth+2);
-            indent(s,depth);
-            i->getEnd(s);
-            s<<endl;
+	    if(i->mNodes.size()==0 && i->mContent.length()==0)
+	      i->getStart(s,true);
+	    else
+	      {
+		i->getStart(s);
+		s<<endl;
+		i->getContent(s,depth+2);
+		indent(s,depth);
+		i->getEnd(s);
+	      }
+	    s<<endl;
+	      
           }
         else
           {

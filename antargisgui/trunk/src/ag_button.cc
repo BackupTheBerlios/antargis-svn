@@ -41,6 +41,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   mTextW=new AGEdit(this,r.origin().shrink(borderWidth));//,mText,font);
   mTextW->setText(mText);
   mTextW->setAlign(EDIT_CENTER);
+  mTextW->setVAlign(EDIT_VCENTER);
   mTextW->setFont(font);
   mTextW->setMutable(false);
   mTextW->setBackground(false);

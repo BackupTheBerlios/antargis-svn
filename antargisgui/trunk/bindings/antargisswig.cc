@@ -6172,7 +6172,7 @@ bool SwigDirector_AGEdit::canFocus() const {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGWidget::canFocus();
+        return AGEdit::canFocus();
     }
     result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
@@ -15420,7 +15420,7 @@ _wrap_AGWidget_fromScreen(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGWidget_gainFocus(int argc, VALUE *argv, VALUE self) {
+_wrap_AGWidget_gainFocus__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
     
@@ -15430,6 +15430,61 @@ _wrap_AGWidget_gainFocus(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
     (arg1)->gainFocus(arg2);
     
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_gainFocus__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    (arg1)->gainFocus();
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AGWidget_gainFocus(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_AGWidget_gainFocus__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGWidget_gainFocus__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGWidget_gainFocus'");
     return Qnil;
 }
 
@@ -15470,6 +15525,82 @@ _wrap_AGWidget_getFocus(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGWidget_hasFocus__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    result = (bool)(arg1)->hasFocus((AGWidget const *)arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGWidget_hasFocus__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    result = (bool)(arg1)->hasFocus();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE _wrap_AGWidget_hasFocus(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_AGWidget_hasFocus__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGWidget_hasFocus__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGWidget_hasFocus'");
+    return Qnil;
 }
 
 
@@ -19237,6 +19368,21 @@ _wrap_AGEditLine_setAlign(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGEditLine_setVAlign(int argc, VALUE *argv, VALUE self) {
+    AGEditLine *arg1 = (AGEditLine *) 0 ;
+    AGVAlign arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
+    arg2 = (AGVAlign) NUM2INT(argv[0]);
+    (arg1)->setVAlign((AGVAlign )arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGEditLine_draw(int argc, VALUE *argv, VALUE self) {
     AGEditLine *arg1 = (AGEditLine *) 0 ;
     AGPoint *arg2 = 0 ;
@@ -19855,6 +20001,21 @@ _wrap_AGEdit_setAlign(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGEdit_setVAlign(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    AGVAlign arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
+    arg2 = (AGVAlign) NUM2INT(argv[0]);
+    (arg1)->setVAlign((AGVAlign )arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGEdit_setBackground(int argc, VALUE *argv, VALUE self) {
     AGEdit *arg1 = (AGEdit *) 0 ;
     bool arg2 ;
@@ -19889,6 +20050,25 @@ _wrap_AGEdit_setTheme(int argc, VALUE *argv, VALUE self) {
     (arg1)->setTheme((std::string const &)*arg2);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_AGEdit_canFocus(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)((AGEdit const *)arg1)->canFocus();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -21425,6 +21605,23 @@ _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGLayout_addTabIndex(int argc, VALUE *argv, VALUE self) {
+    AGLayout *arg1 = (AGLayout *) 0 ;
+    int arg2 ;
+    AGWidget *arg3 = (AGWidget *) 0 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLayout, 1);
+    arg2 = NUM2INT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGWidget, 1);
+    (arg1)->addTabIndex(arg2,arg3);
+    
+    return Qnil;
+}
+
+
 static void
 free_AGLayout(AGLayout *arg1) {
     delete arg1;
@@ -22365,7 +22562,24 @@ _wrap_Node_unescape(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_Node_getStart(int argc, VALUE *argv, VALUE self) {
+_wrap_Node_getStart__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    Node *arg1 = (Node *) 0 ;
+    std::ostringstream *arg2 = 0 ;
+    bool arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__ostringstream, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = RTEST(argv[1]);
+    ((Node const *)arg1)->getStart(*arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Node_getStart__SWIG_1(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
     std::ostringstream *arg2 = 0 ;
     
@@ -22375,6 +22589,59 @@ _wrap_Node_getStart(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__ostringstream, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     ((Node const *)arg1)->getStart(*arg2);
     
+    return Qnil;
+}
+
+
+static VALUE _wrap_Node_getStart(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_std__ostringstream, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_Node_getStart__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_std__ostringstream, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_Node_getStart__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'Node_getStart'");
     return Qnil;
 }
 
@@ -24189,6 +24456,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "gainFocus", VALUEFUNC(_wrap_AGWidget_gainFocus), -1);
     rb_define_method(cAGWidget.klass, "eventDragBy", VALUEFUNC(_wrap_AGWidget_eventDragBy), -1);
     rb_define_method(cAGWidget.klass, "getFocus", VALUEFUNC(_wrap_AGWidget_getFocus), -1);
+    rb_define_method(cAGWidget.klass, "hasFocus", VALUEFUNC(_wrap_AGWidget_hasFocus), -1);
     rb_define_method(cAGWidget.klass, "getName", VALUEFUNC(_wrap_AGWidget_getName), -1);
     rb_define_method(cAGWidget.klass, "setName", VALUEFUNC(_wrap_AGWidget_setName), -1);
     rb_define_method(cAGWidget.klass, "getChild", VALUEFUNC(_wrap_AGWidget_getChild), -1);
@@ -24407,6 +24675,9 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_const(mLibantargisruby,"EDIT_RIGHT", INT2NUM(EDIT_RIGHT));
     rb_define_const(mLibantargisruby,"EDIT_JUSTIFY", INT2NUM(EDIT_JUSTIFY));
     rb_define_const(mLibantargisruby,"EDIT_CENTER", INT2NUM(EDIT_CENTER));
+    rb_define_const(mLibantargisruby,"EDIT_TOP", INT2NUM(EDIT_TOP));
+    rb_define_const(mLibantargisruby,"EDIT_BOTTOM", INT2NUM(EDIT_BOTTOM));
+    rb_define_const(mLibantargisruby,"EDIT_VCENTER", INT2NUM(EDIT_VCENTER));
     rb_define_module_function(mLibantargisruby, "disown_AGEditLine", VALUEFUNC(_wrap_disown_AGEditLine), -1);
     
     cAGEditLine.klass = rb_define_class_under(mLibantargisruby, "AGEditLine", rb_cObject);
@@ -24414,6 +24685,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_alloc_func(cAGEditLine.klass, _wrap_AGEditLine_allocate);
     rb_define_method(cAGEditLine.klass, "initialize", VALUEFUNC(_wrap_new_AGEditLine), -1);
     rb_define_method(cAGEditLine.klass, "setAlign", VALUEFUNC(_wrap_AGEditLine_setAlign), -1);
+    rb_define_method(cAGEditLine.klass, "setVAlign", VALUEFUNC(_wrap_AGEditLine_setVAlign), -1);
     rb_define_method(cAGEditLine.klass, "draw", VALUEFUNC(_wrap_AGEditLine_draw), -1);
     rb_define_method(cAGEditLine.klass, "drawCursor", VALUEFUNC(_wrap_AGEditLine_drawCursor), -1);
     rb_define_method(cAGEditLine.klass, "lines", VALUEFUNC(_wrap_AGEditLine_lines), -1);
@@ -24452,8 +24724,10 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEdit.klass, "setFont", VALUEFUNC(_wrap_AGEdit_setFont), -1);
     rb_define_method(cAGEdit.klass, "setMutable", VALUEFUNC(_wrap_AGEdit_setMutable), -1);
     rb_define_method(cAGEdit.klass, "setAlign", VALUEFUNC(_wrap_AGEdit_setAlign), -1);
+    rb_define_method(cAGEdit.klass, "setVAlign", VALUEFUNC(_wrap_AGEdit_setVAlign), -1);
     rb_define_method(cAGEdit.klass, "setBackground", VALUEFUNC(_wrap_AGEdit_setBackground), -1);
     rb_define_method(cAGEdit.klass, "setTheme", VALUEFUNC(_wrap_AGEdit_setTheme), -1);
+    rb_define_method(cAGEdit.klass, "canFocus", VALUEFUNC(_wrap_AGEdit_canFocus), -1);
     cAGEdit.mark = 0;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargisruby, "disown_AGCheckBox", VALUEFUNC(_wrap_disown_AGCheckBox), -1);
@@ -24554,6 +24828,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGLayout, (void *) &cAGLayout);
     rb_define_alloc_func(cAGLayout.klass, _wrap_AGLayout_allocate);
     rb_define_method(cAGLayout.klass, "initialize", VALUEFUNC(_wrap_new_AGLayout), -1);
+    rb_define_method(cAGLayout.klass, "addTabIndex", VALUEFUNC(_wrap_AGLayout_addTabIndex), -1);
     cAGLayout.mark = 0;
     cAGLayout.destroy = (void (*)(void *)) free_AGLayout;
     rb_define_module_function(mLibantargisruby, "parseNode", VALUEFUNC(_wrap_parseNode), -1);

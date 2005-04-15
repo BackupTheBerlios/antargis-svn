@@ -26,6 +26,7 @@
 #include "ag_gsurface.h"
 
 enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
+enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
 
 class AGEditLine
 {
@@ -34,6 +35,7 @@ class AGEditLine
   virtual ~AGEditLine();
 
   void setAlign(AGAlign pAlign);
+  void setVAlign(AGVAlign pVAlign);
 
   virtual void draw(const AGPoint &pPoint,const AGRect &pClip);
   virtual void drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c);
@@ -68,6 +70,7 @@ class AGEditLine
   AGFont mFont;
   bool mHardEnd;
   AGAlign mAlign;
+  AGVAlign mVAlign;
 };
 
 class AGEdit:public AGWidget
@@ -92,10 +95,13 @@ class AGEdit:public AGWidget
   void setMutable(bool pMutable);
 
   void setAlign(AGAlign pAlign);
+  void setVAlign(AGVAlign pVAlign);
 
   void setBackground(bool pDrawBackground);
 
   void setTheme(const std::string &s);
+
+  bool canFocus() const;
 
  private:
 
@@ -126,6 +132,7 @@ class AGEdit:public AGWidget
   AGFont mFont;
 
   AGAlign mAlign;
+  AGVAlign mVAlign;
 
   bool mMutable;
   bool mDrawBackground;

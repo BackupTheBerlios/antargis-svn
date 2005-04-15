@@ -104,18 +104,22 @@ class AGWidget:public AGMessageObject
   // focus
 
   /** should only be called by a child */
-  void gainFocus(AGWidget *pWidget);
+  void gainFocus(AGWidget *pWidget=0);
 
 
   virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
 
   bool getFocus() const;
+  bool hasFocus(const AGWidget *pWidget=0);
+
 
   std::string getName() const;
   void setName(const std::string &pName);
   AGWidget *getChild(const std::string &pName);
 
  private:
+
+  void gainFocusDown(AGWidget *pWidget);
 
   void checkFocus();
 
@@ -131,7 +135,7 @@ class AGWidget:public AGMessageObject
   bool mVisible;
   AGMenu *mMenu;
 
-  bool hasFocus;
+  bool mHasFocus;
   AGWidget *mFocus;
 
   AGPoint mOldMousePos;

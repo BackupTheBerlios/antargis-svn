@@ -30,6 +30,7 @@ AGEditLine::AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd):
   mText(pText),mFont(pFont),mHardEnd(pHardEnd)
 {
   mAlign=EDIT_LEFT;
+  mVAlign=EDIT_TOP;
 }
 
 AGEditLine::~AGEditLine()
@@ -39,6 +40,11 @@ AGEditLine::~AGEditLine()
 void AGEditLine::setAlign(AGAlign pAlign)
 {
   mAlign=pAlign;
+}
+
+void AGEditLine::setVAlign(AGVAlign pVAlign)
+{
+  mVAlign=pVAlign;
 }
 
 void AGEditLine::setFont(const AGFont &pFont)
@@ -59,12 +65,12 @@ void AGEditLine::draw(const AGPoint &pPoint,const AGRect &pClip)
   //  AGSurface s(
   int x=0,y=0;
   if(mAlign==EDIT_CENTER)
-    {
-      x=(pClip.w-mFont.getWidth(mText))/2;
-      y=-(mFont.getHeight(mText))/2;
+    x=(pClip.w-mFont.getWidth(mText))/2;
+  if(mVAlign==EDIT_VCENTER)
+    y=-(mFont.getHeight(mText))/2;
 
       //      cdebug(x<<";"<<y);
-    }
+  
   //  cdebug(pPoint.x<<"//"<<pPoint.y);
 
   AGFontEngine::renderText(&getScreen(),pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
@@ -75,8 +81,11 @@ void AGEditLine::drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,con
   int x1=AGFontEngine::getWidth(mFont,mText.substr(0,cx));
   int x2=AGFontEngine::getWidth(mFont,mText.substr(0,cx+1));
 
+  int w=x2-x1;
+  if(w==0)
+    w=8;
   //  SDL_SetClipRect(getScreen().surface(),const_cast<AGRect*>(&pClip));
-  getScreen().drawRect(AGRect(pPoint.x+x1,pPoint.y,x2,height()),c);
+  getScreen().drawRect(AGRect(pPoint.x+x1,pPoint.y,w,height()),c);
   //  sge_FilledRectAlpha(getScreen().surface(),pPoint.x+x1,pPoint.y,pPoint.x+x2,pPoint.y+height(),c.mapRGB(getScreen().surface()->format),c.a);
   //  SDL_SetClipRect(getScreen().surface(),0);
 }
@@ -250,6 +259,7 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   font2.setColor(AGColor(0,0,0xFF));
   AGEditLine l("",font1,true);
   l.setAlign(mAlign);
+  l.setVAlign(mVAlign);
   mLines.push_back(l);
   /*  mLines.push_back(AGEditLine("hallo1",font1,true));
   if(mMultiLine)
@@ -300,7 +310,7 @@ void AGEdit::draw(const AGRect &pRect)
     {
       completeHeight+=i->height();
     }
-  if(mAlign==EDIT_CENTER)
+  if(mVAlign==EDIT_VCENTER)
     y=getRect().h/2-completeHeight/2;
 
   i=mLines.begin();
@@ -314,7 +324,7 @@ void AGEdit::draw(const AGRect &pRect)
       //      cdebug("("<<x<<";"<<y<<")");
       //      cdebug(mr);
       i->draw(mr.project(AGPoint(x,y)),pRect.project(getRect()));
-      if(cy+mViewCy==mCy && mMutable) // FIXME: Change show cursor only if widget has focus
+      if(cy+mViewCy==mCy && mMutable && hasFocus()) // FIXME: Change show cursor only if widget has focus
 	i->drawCursor(mCx,mr.project(AGPoint(x,y)),pRect.project(getRect()),cursorC);
       y+=i->height();
       if(y>getRect().h)
@@ -378,6 +388,7 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
       SDLKey k=m->getKey();
       char ins=0;
       bool doInsert=false;
+      bool used=false;
       if(k==SDLK_RIGHT)
 	{
 	  getActLine();
@@ -466,40 +477,58 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
 	      mergeLine(mCy);
 	    }
 	  checkWrap();
+	  used=true;
 	}
       else if(k==SDLK_DELETE)
 	{
 	  doDelete(mCx);
 	  checkWrap();
+	  used=true;
 	}
       else if(k==SDLK_RETURN && mMultiLine)
 	{
 	  getActLine();
 	  AGEditLine l=actLine->split(mCx);
 	  l.setAlign(mAlign);
+	  l.setVAlign(mVAlign);
 	  mCx=0;
 	  mCy++;
 	  insertLine(l);
 	  checkWrap();
+	  used=true;
 	}
       else if(k==SDLK_END)
 	{
 	  getActLine();
 	  mCx=actLine->length();
+	  used=true;
 	}
       else if(k==SDLK_HOME)
 	{
 	  mCx=0;
+	  used=true;
 	}
 
       else if(k==SDLK_LSHIFT)
-	mLShift=true;
+	{
+	  used=true;
+	  mLShift=true;
+	}
       else if(k==SDLK_RSHIFT)
-	mRShift=true;
+	{
+	  used=true;
+	  mRShift=true;
+	}
       else if(k==SDLK_LCTRL)
-	mLCtrl=true;
+	{
+	  used=true;
+	  mLCtrl=true;
+	}
       else if(k==SDLK_RCTRL)
-	mRCtrl=true;
+	{
+	  used=true;
+	  mRCtrl=true;
+	}
       else if(k==SDLK_LALT)
 	{
 	  cdebug("lalt");
@@ -524,6 +553,8 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
 	  checkWrap();
 	  return true;
 	}
+      if(used)
+	return true;
     }
   return false;
 }
@@ -611,6 +642,7 @@ void AGEdit::checkWrap()
 		{
 		  AGEditLine l(n.first,actLine->getFont(),n.second);
 		  l.setAlign(mAlign);
+		  l.setVAlign(mVAlign);
 		  i=mLines.insert(i,l);
 		}
 	      else
@@ -704,6 +736,7 @@ void AGEdit::setText(const std::string &pText)
 	  getActLine();
 	  AGEditLine l=actLine->split(mCx);
 	  l.setAlign(mAlign);
+	  l.setVAlign(mVAlign);
 	  mCx=0;
 	  mCy++;
 	  insertLine(l);
@@ -730,6 +763,14 @@ void AGEdit::setAlign(AGAlign pAlign)
     i->setAlign(pAlign);
 }
 
+void AGEdit::setVAlign(AGVAlign pVAlign)
+{
+  mVAlign=pVAlign;
+  std::list<AGEditLine>::iterator i=mLines.begin();
+  for(;i!=mLines.end();i++)
+    i->setVAlign(pVAlign);
+}
+
 void AGEdit::setBackground(bool pDrawBackground)
 {
   mDrawBackground=pDrawBackground;
@@ -744,4 +785,9 @@ void AGEdit::setTheme(const std::string &s)
   AGFont font=getTheme()->getFont(s+".font");
   setFont(font);
   
+}
+
+bool AGEdit::canFocus() const
+{
+  return true;
 }
