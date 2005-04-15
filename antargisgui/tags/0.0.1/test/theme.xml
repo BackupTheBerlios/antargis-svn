@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<theme>
+	<button>
+		<background>
+			<normal>
+				<color name='gradientColor1' color='#E7E7E7'/>
+				<color name='gradientColor2' color='#C9C9C9'/>
+				<color name='gradientColor3' color='#CCCCCC'/>
+				<color name='gradientColor4' color='#AEAEAE'/>
+			</normal>
+			<lighted>
+				<color name='gradientColor1' color='#F5E1FF'/>
+				<color name='gradientColor2' color='#DCC8FF'/>
+				<color name='gradientColor3' color='#DCC8FF'/>
+				<color name='gradientColor4' color='#C3AFFF'/>
+			</lighted>
+			<pressed>
+				<color name='gradientColor1' color='#CFAFFF'/>
+				<color name='gradientColor2' color='#DCC8FF'/>
+				<color name='gradientColor3' color='#DCC8FF'/>
+				<color name='gradientColor4' color='#F5E1FF'/>
+			</pressed>
+		</background>
+		<border>
+			<color name="color1" color='#E0E0E0'/>
+			<color name="color2" color="#404040"/>
+			<value name="width" value="1"/>
+		</border>
+		<text>
+			<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+		</text>
+	</button>
+	
+	<menu>
+		<background>
+			<normal>
+				<color name='gradientColor1' color='#E7E7E7FF'/>
+				<color name='gradientColor2' color='#E7E7E7FF'/>
+				<color name='gradientColor3' color='#E7E7E77F'/>
+				<color name='gradientColor4' color='#E7E7E77F'/>
+			</normal>
+			<image name="image" file="bg_tile2.png"/>
+		</background>
+		<item>
+			<image name="image" file="menu_house_small.png"/>
+		</item>
+	</menu>
+	
+	<edit>
+		<background>
+			<image name="image" file="bg_tile2.png"/>
+		</background>
+		<font name="font" file="Arial.ttf" size="14" color="#000000"/>
+	</edit>
+
+	<screen>
+		<background>
+			<image name="image" file="bigbg_tile.png"/>
+		</background>
+	</screen>
+	
+	<window>
+		<border>
+			<image name="image" file="win_border.png"/>
+		</border>
+		<title>
+			<font name="font" file="Arial.ttf" size="16" color='#000000'/>
+		</title>
+		<buttons>
+			<image name="close" file="close_button.png"/>
+		</buttons>
+	</window>
+	
+	
+	<!-- styles -->
+	<yellowButton>
+		<button>
+			<background>
+				<normal>
+					<color name='gradientColor1' color='#f6c108'/>
+					<color name='gradientColor2' color='#bc9716'/>
+					<color name='gradientColor3' color='#bc9716'/>
+					<color name='gradientColor4' color='#a08320'/>
+				</normal>
+			</background>
+			<border>
+				<color name="color1" color='#f6c108'/>
+				<color name="color2" color="#a08320"/>
+				<value name="width" value="1"/>
+			</border>
+			<text>
+				<font name='font' file="Arial.ttf" size="14" color='#000000'/>
+			</text>
+		</button>
+	</yellowButton>
+	
+	<niceRound>
+		<button>
+			<background>
+				<normal>
+					<image name="image" file="button.png"/>
+				</normal>
+				<lighted>
+					<image name="image" file="button-hover.png"/>
+				</lighted>
+				<pressed>
+					<image name="image" file="button-clicked.png"/>
+				</pressed>
+				<checked>
+					<image name="image" file="button-checked.png"/>
+				</checked>
+			</background>
+			<text>
+				<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+			</text>
+		</button>
+	</niceRound>
+</theme>
