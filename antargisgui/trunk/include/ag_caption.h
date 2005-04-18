@@ -29,7 +29,7 @@ class AGCaption:public AGText
  public:
   AGCaption(AGWidget *pParent,const AGRect &pRect,const std::string &pText,const AGFont &pFont,const AGBackground &pBG);
 
-  void draw(const AGRect &pRect);
+  void draw(AGPainter &p);
 
   void setBackground(AGBackground pBG);
  private:

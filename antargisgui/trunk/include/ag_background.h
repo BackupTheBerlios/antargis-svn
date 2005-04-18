@@ -26,12 +26,14 @@
 #include "ag_surface.h"
 #include "ag_color.h"
 
+class AGPainter;
+
 class AGBackground
 {
  public:
   AGBackground(std::string pThemeName="");
 
-  void draw(const AGRect &pScreenRect) const;
+  void draw(AGPainter &p);
 
  private:
   AGTexture mSurface;

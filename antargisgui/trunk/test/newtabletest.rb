@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
-# layout.rb
+# wintestgl.rb
 # by David Kamphausen (david.kamphausen@web.de)
 #
 # The "Antargis" project, including all files needed to compile it,
@@ -23,60 +23,39 @@
 
 require 'libantargisruby'
 require 'sdl'
-#require 'testapp.rb'
-#require 'theme.rb'
+require 'testapp.rb'
+require 'theme.rb'
 
 include Libantargisruby
 
+puts "MenuTest"
 
-class TestApp <AGApplication
-	def initialize(autoexit=true)
-		@count=0
-		@autoexit=autoexit
-		super()
-	end
-	def eventQuit(event)
-		puts "Quitting"
-		super(event)
-	end
-	def eventIdle
-		#puts "idle count:"+@count.to_s
-		@count+=1
-		if @count>=20 then
-			if @autoexit then
-				puts "correct quit after 20 idles"
-				tryQuit
-			end
-		end
-	end
+
+def loadAGSurface(s)
+	screen=getScreen
+	return screen.loadSurface(s)
 end
 
 
-puts "MenuTest"
-
 main=AGMain.new
 
-main.changeRes(1024,768,32,false,true)
+main.changeRes(640,480,32,false,true)
 
 app=TestApp.new(false)
 
-screen=AGScreenWidget.new
-#window1=AGWindow.new(screen,AGRect.new(100,100,200,100),"test Window")
-#window2=AGWindow.new(screen,AGRect.new(150,150,200,100))
+t=AGTable.new(nil,AGRect.new(50,50,200,200))
+t.addRow(1)
+t.addRow(1)
+t.addColumn(1)
+t.addColumn(1)
 
-#screen.addChild(window1)
-#screen.addChild(window2)
+t.addChild(0,0,AGButton.new(t,AGRect.new(0,0,20,20),"hupe"))
+t.addChild(1,0,AGButton.new(t,AGRect.new(0,0,20,20),"hupe"))
+t.addChild(0,1,AGButton.new(t,AGRect.new(0,0,20,20),"hupe"))
+#t.addChild(1,1,AGButton.new(t,AGRect.new(0,0,20,20),"hupe"))
+s1=loadAGSurface("box_cross.png")
+t.addChild(1,1,AGImage.new(t,AGPoint.new(0,0),s1,false))
 
-#w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
-#window1.addChild(w2)
-
-l=AGLayout.new(screen,loadFile("credits.xml"))
-screen.addChild(l)
-
-
-
-app.setMainWidget(screen)#widget)
-
+t.arrange
+app.setMainWidget(t)
 app.run
-
-#

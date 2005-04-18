@@ -30,6 +30,8 @@
 #endif
 #include <list>
 
+#include "ag_painter.h"
+
 class AGMenu;
 
 class AGWidget:public AGMessageObject
@@ -38,8 +40,8 @@ class AGWidget:public AGMessageObject
   AGWidget(AGWidget *pParent,const AGRect &r);
   virtual ~AGWidget();
   
-  virtual void draw(const AGRect &r);
-  virtual void drawAll(const AGRect &r);
+  virtual void draw(AGPainter &p);
+  virtual void drawAll(AGPainter &p);
   AGRect getRect() const;
   virtual AGRect getClientRect() const;
   void setRect(const AGRect &pRect);

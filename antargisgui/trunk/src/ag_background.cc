@@ -22,6 +22,7 @@
 #include "ag_draw.h"
 #include "ag_theme.h"
 #include "ag_debug.h"
+#include "ag_painter.h"
 
 AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
 {
@@ -41,10 +42,10 @@ AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
     }
 }
 
-void AGBackground::draw(const AGRect &pScreenRect) const
+void AGBackground::draw(AGPainter &p)
 {
   if(mSurfaceFlag)
-    getScreen().tile(mSurface,pScreenRect);
+    p.tile(mSurface);
   else
-    AGDraw::drawGradient(&getScreen(),pScreenRect,mColors[0],mColors[1],mColors[2],mColors[3]);
+    p.drawGradient(p.getRect(),mColors[0],mColors[1],mColors[2],mColors[3]);
 }

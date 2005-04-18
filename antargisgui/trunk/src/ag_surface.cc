@@ -424,6 +424,9 @@ AGTexture AGSDLScreen::displayFormat(SDL_Surface *s)
 void AGGScreen::blit(const AGTexture &pSource,const AGRect &pDest)
 {
 }
+void AGGScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+}
 void AGGScreen::tile(const AGTexture &pSource)
 {
 }

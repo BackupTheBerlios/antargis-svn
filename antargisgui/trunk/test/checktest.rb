@@ -31,6 +31,8 @@ puts "MenuTest"
 
 main=AGMain.new
 
+
+main.changeRes(800,600,32,true,true)
 app=TestApp.new(false)
 
 screen=AGScreenWidget.new
@@ -43,7 +45,7 @@ widget3=AGRadio.new(screen,AGRect.new(200,140,100,100),group,"box3")
 screen.addChild(widget3)
 app.setMainWidget(screen)#widget)
 
-main.changeRes(800,600,32,false,true)
+#main.changeRes(800,600,32,false,true)
 
 app.run
 

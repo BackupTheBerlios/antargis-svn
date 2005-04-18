@@ -33,7 +33,7 @@ AGScreenWidget::~AGScreenWidget()
 {
 }
 
-void AGScreenWidget::draw(const AGRect &r)
+void AGScreenWidget::draw(AGPainter &p)
 {
-  getScreen().tile(mTexture);
+  p.tile(mTexture);
 }

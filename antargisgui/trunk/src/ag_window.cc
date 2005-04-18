@@ -35,16 +35,18 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
   //  CTRACE;
   AGSurface s=getTheme()->getSurface("window.border.image");
   int bw=s.getRect().w/3;
+  int titBarHeight=20;
 
   //  cdebug("window_border:"<<s.width()<<"/"<<s.height());
 
   if(pTitle.length())
     {
       // use 4 rows
-      addFixedRow(bw);
-      addFixedRow(bw);
-      addRow(1.0);
-      addFixedRow(bw);
+      addFixedRow(bw); // upper border
+      addFixedRow(titBarHeight); // titletext and button
+      //      addFixedRow(bw); // lower border below titletext
+      addRow(1.0); 
+      addFixedRow(bw); // lower lower below window
       addFixedColumn(bw);
       addColumn(1.0);
       addFixedColumn(bw);

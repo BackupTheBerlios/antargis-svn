@@ -87,6 +87,8 @@ class AGTexture
 
   void testSave() const;
 
+  AGRect getRect() const;
+
   virtual AGColor getPixel(int x,int y) const;
 
  private:
@@ -102,53 +104,12 @@ class AGTexture
 // this is virtually a pure virtual class ;-)
 // because swig directors have problems with this otherwise
 
-class AGPainter
-{
- public:
-  virtual void putPixel(int x,int y,const AGColor &c);
-  virtual AGColor getPixel(int x,int y);
-};
-
-class AGSurfacePainter:public AGPainter
-{
- public:
-  AGSurfacePainter(AGSurface &pSurface);
-
-  virtual void putPixel(int x,int y,const AGColor &c);
-  virtual AGColor getPixel(int x,int y);
-
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest);
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
-  virtual void tile(const AGSurface &pSource);
-  virtual void tile(const AGSurface &pSource,const AGRect &pDest);
-  virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
-
- private:
-  AGSurface &mSurface;
-};
-
-
-class AGTexturePainter:public AGPainter
-{
- public:
-  AGTexturePainter(AGTexture &pSurface);
-
-  virtual void putPixel(int x,int y,const AGColor &c);
-  virtual AGColor getPixel(int x,int y);
-
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-
- private:
-  AGTexture &mSurface;
-};
 
 class AGGScreen
 {
  public:
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void tile(const AGTexture &pSource);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);

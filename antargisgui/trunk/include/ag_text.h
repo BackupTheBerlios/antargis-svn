@@ -33,7 +33,7 @@ class AGText:public AGWidget
 #endif
 
   void setDeriveRect();
-  virtual void draw(const AGRect &r);
+  virtual void draw(AGPainter &p);
 
   void setText(const std::string &pText);
   std::string getText() const;

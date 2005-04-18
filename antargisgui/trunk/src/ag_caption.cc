@@ -26,11 +26,11 @@ AGCaption::AGCaption(AGWidget *pParent,const AGRect &pRect,const std::string &pT
 {
 }
 
-void AGCaption::draw(const AGRect &pRect)
+void AGCaption::draw(AGPainter &p)
 {
   // draw bg
-  mBG.draw(pRect.project(getRect()));
-  AGText::draw(pRect);
+  mBG.draw(p);
+  AGText::draw(p);
 }
 
 void AGCaption::setBackground(AGBackground pBG)

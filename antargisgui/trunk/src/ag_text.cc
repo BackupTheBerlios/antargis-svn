@@ -44,7 +44,7 @@ AGText::AGText(AGWidget *pParent,const AGPoint &p,const std::string &pText,const
   mFixedSize=false;
 }
 
-void AGText::draw(const AGRect &r)
+void AGText::draw(AGPainter &p)
 {
   //  CTRACE;
   //  cdebug(mText);
@@ -53,18 +53,19 @@ void AGText::draw(const AGRect &r)
   //  cout<<"width:"<<endl;
   // center
 
-  AGRect r2=r.project(getRect());
+  //  AGRect r2=r.project(getRect());
   //  cout<<"r2:"<<r2.toString()<<endl;
   //  cout<<"gr2:"<<getRect().toString()<<endl;
   //  cdebug("gr:"<<getRect().toString()<<endl);
   //  cdebug("r2:"<<r2<<endl);
 
-  int x=(r2.w-mFont.getWidth(mText))/2+r2.x;
-  int y=(r2.h-mFont.getHeight(mText))/2+r2.y;
+  int x=(width()-mFont.getWidth(mText))/2;
+  int y=(height()-mFont.getHeight(mText))/2;
   //cout<<"x:"<<x<<" y:"<<y<<" text:"<<mText<<endl;
   //  cdebug(x<<"/"<<y);
+  p.renderText(mText,AGPoint(x,y),mFont);
 
-  AGFontEngine::renderText(&getScreen(),r2,x,y,mText,mFont);
+  //  AGFontEngine::renderText(&getScreen(),r2,x,y,mText,mFont);
 
   /*
   AGSurface ms(width(),height());

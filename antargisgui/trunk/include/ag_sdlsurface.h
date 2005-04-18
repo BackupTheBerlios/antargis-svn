@@ -37,6 +37,7 @@ class AGSurface
   void toScreen(int x,int y);
 
   void blit(const AGTexture &pSource,const AGRect &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   void tile(const AGTexture &pSource);
   void tile(const AGTexture &pSource,const AGRect &pDest);
   void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);

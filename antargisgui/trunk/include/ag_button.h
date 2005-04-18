@@ -43,7 +43,7 @@ class AGButton:public AGWidget
 
   void setSurface(AGSurface pSurface,bool pChangeSize=true);
 
-  virtual void draw(const AGRect &r);
+  virtual void draw(AGPainter &p);
 
   //  virtual void drawBackground(const AGRect &r);
 

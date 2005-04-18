@@ -37,8 +37,8 @@ class AGEditLine
   void setAlign(AGAlign pAlign);
   void setVAlign(AGVAlign pVAlign);
 
-  virtual void draw(const AGPoint &pPoint,const AGRect &pClip);
-  virtual void drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c);
+  virtual void draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip);
+  virtual void drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c);
   
   int lines() const;
 
@@ -78,8 +78,8 @@ class AGEdit:public AGWidget
  public:
   AGEdit(AGWidget *pParent,const AGRect &pRect);
 
-  virtual void draw(const AGRect &pRect);
-  virtual void drawBackground(const AGRect &pRect);
+  virtual void draw(AGPainter &p);
+  virtual void drawBackground(AGPainter &p);
 
   virtual bool eventKeyDown(const AGEvent *m);
   virtual bool eventKeyUp(const AGEvent *m);

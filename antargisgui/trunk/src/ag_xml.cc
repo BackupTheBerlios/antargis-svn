@@ -465,7 +465,7 @@ void Node::parse(ParserInfo &info)
 	  parseChar(info,'<');
 	  parseChar(info,'/');
 	  if(mName!=parseName(info))
-	    throw ParserException("Wrong close-tag "+info.getInfo());
+	    throw ParserException("Wrong close-tag "+info.getInfo()+" name:"+mName);
 	  parseChar(info,'>');
 	}
     }

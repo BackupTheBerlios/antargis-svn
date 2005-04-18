@@ -28,7 +28,7 @@
 
 bool mGLMode=true;
 
-void AGPainter::putPixel(int x,int y,const AGColor &c)
+/*void AGPainter::putPixel(int x,int y,const AGColor &c)
 {
   STUB;
 }
@@ -36,11 +36,11 @@ void AGPainter::putPixel(int x,int y,const AGColor &c)
 AGColor AGPainter::getPixel(int x,int y)
 {
   return AGColor();
-}
+}*/
 
 // AGSurfacePainter
 
-AGSurfacePainter::AGSurfacePainter(AGSurface &pSurface):mSurface(pSurface)
+/*AGSurfacePainter::AGSurfacePainter(AGSurface &pSurface):mSurface(pSurface)
 {
   //  STUB;
 }
@@ -129,7 +129,7 @@ void AGTexturePainter::tile(const AGTexture &pSource,const AGRect &pDest,const A
 {
   STUB;
 }
-
+*/
 
 AGTexture::AGTexture()
 {
@@ -164,6 +164,12 @@ int AGTexture::height() const
 {
   return h;
 }
+
+AGRect AGTexture::getRect() const
+{
+  return AGRect(0,0,w,h);
+}
+
 AGTexture::AGTexture(SDL_Surface *ps,int W,int H):s(ps),w(W),h(H)
 {
   //  CTRACE;

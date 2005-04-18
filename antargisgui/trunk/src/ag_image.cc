@@ -45,40 +45,29 @@ AGImage::~AGImage()
 {
 }
 
-void AGImage::draw(const AGRect &r)
+void AGImage::draw(AGPainter &p)
 {
-  //cdebug(mTexture.surface()<<endl);
-  //mTexture.toScreen(100,100);
-  //  AGSurface screen(getScreen());
-
   // do always center for now
   bool center=true;
 
+
   if(mTile)
-    getScreen().tile(mTexture,r.project(getRect()),mSrcRect);
+    p.tile(mTexture,getRect().origin(),mSrcRect);
   else if(center)
     {
       
-      AGRect mr=getRect();
+      AGRect mr=getRect().origin();
 
       mr.x+=(width()-mTexture.width())/2;
       mr.y+=(height()-mTexture.height())/2;
 
-      mr=r.project(mr);
-      getScreen().blit(mTexture,mr);
+      p.blit(mTexture,mr);
     }
   else
-    getScreen().blit(mTexture,r.project(getRect()));
+    p.blit(mTexture,getRect().origin());
 }
 
 void AGImage::setSurface(AGSurface pSurface)
 {
   mTexture=AGTexture(pSurface);
 }
-
-/*
-void AGImage::setSourceRect(const AGRect &pRect)
-{
-  mSrcRect=pRect;
-}
-*/

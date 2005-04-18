@@ -41,6 +41,8 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
   std::string geomS=p.root().get("geometry");
   if(geomS.length())
     geom=AGRect(geomS);
+  else if(pgParent)
+    geom=pgParent->getRect().origin();
 
   setRect(geom);
 

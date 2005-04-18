@@ -30,7 +30,7 @@ class AGScreenWidget:public AGWidget
   AGScreenWidget();
   virtual ~AGScreenWidget();
 
-  virtual void draw(const AGRect &r);
+  virtual void draw(AGPainter &p);
  private:
   AGTexture mTexture;
 };

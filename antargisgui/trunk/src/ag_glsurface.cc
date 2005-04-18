@@ -514,6 +514,7 @@ bool AGGLScreen::inScreen(const AGRect &r) const
 
 void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
 {
+  //  CTRACE;
   if(!inScreen(pRect))
     return;
 
@@ -571,8 +572,64 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
   glBindTexture( GL_TEXTURE_2D,0);
 }
 
+
+
+void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect &pSrc)
+{
+  if(!inScreen(pRect))
+    return;
+
+  int w2=std::min((int)pRect.w,pSource.width());
+  int h2=std::min((int)pRect.h,pSource.height());
+
+  float x0=pRect.x;
+  float y0=h-1-pRect.y;
+  float x1=pRect.x+w2;
+  float y1=h-1-(pRect.y+h2);
+
+  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
+  
+  TextureID id=getID(surface);
+
+  glBindTexture( GL_TEXTURE_2D,id);
+  assert( glGetError() == GL_NO_ERROR );
+
+  AGRect sRect=getRect(surface);
+
+  float tx0=float(pSrc.x)/surface->w;
+  float ty0=float(pSrc.y)/surface->w;
+  float tx1=float(pSrc.x+pSrc.w)/surface->w;
+  float ty1=float(pSrc.y+pSrc.h)/surface->w;
+
+  ty0=1.0f-ty0;
+  ty1=1.0f-ty1;
+
+  glColor4f(1,1,1,1);
+  glBegin(GL_TRIANGLES);
+
+  glTexCoord2f(tx0,ty0);
+  glVertex2f(x0,y0);
+  glTexCoord2f(tx1,ty0);
+  glVertex2f(x1,y0);
+  glTexCoord2f(tx0,ty1);
+  glVertex2f(x0,y1);
+
+  glTexCoord2f(tx1,ty0);
+  glVertex2f(x1,y0);
+  glTexCoord2f(tx1,ty1);
+  glVertex2f(x1,y1);
+  glTexCoord2f(tx0,ty1);
+  glVertex2f(x0,y1);
+
+  glEnd();
+  glBindTexture( GL_TEXTURE_2D,0);
+}
+
+
+
 void AGGLScreen::tile(const AGTexture &pSource)
 {
+  CTRACE;
   TextureID id=getID(const_cast<AGTexture&>(pSource).s);//urface());
 
   float x0=0;
@@ -614,6 +671,7 @@ void AGGLScreen::tile(const AGTexture &pSource)
 }
 void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
 {
+  //  CTRACE;
   if(!inScreen(pDest))
     return;
   tile(pSource,pDest,AGRect(0,0,pSource.width(),pSource.height()));
@@ -659,6 +717,7 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
 }
 void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
 {
+  //  CTRACE;
   if(!inScreen(pDest))
     return;
   //  CTRACE;

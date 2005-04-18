@@ -54,17 +54,23 @@ AGWidget::~AGWidget()
   //  throw int();
 }
 
-void AGWidget::draw(const AGRect &r)
+void AGWidget::draw(AGPainter &p)
 {
 }
 
-void AGWidget::drawAll(const AGRect &r)
+void AGWidget::drawAll(AGPainter &p)
 {
+  //  CTRACE;
+  //  cdebug(getRect());
+  AGPainter p2(p);
+  p2.transform(getRect());
+  //  cdebug(p2.getRect());
+
   if(mToClear.size())
     {
-      cdebug("mClear:"<<mToClear.size());
-      CTRACE;
-      cdebug(mChildren.size());
+      //      cdebug("mClear:"<<mToClear.size());
+      //      CTRACE;
+      //      cdebug(mChildren.size());
       std::list<AGWidget*>::iterator i=mToClear.begin();
       for(;i!=mToClear.end();i++)
 	{
@@ -81,21 +87,24 @@ void AGWidget::drawAll(const AGRect &r)
     return;
 
   if(!mChildrenDrawFirst)
-    draw(r);
+    {
+      //      cdebug(p2.getRect());
+      draw(p2);
+    }
 
 
 
 
 
   std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
-  AGRect r2=r.project(mr);
+  //  AGRect r2=r.project(mr);
   for(;i!=mChildren.rend();i++)
-    (*i)->drawAll(r2);
+    (*i)->drawAll(p2);
   if(mChildrenDrawFirst)
-    draw(r);
+    draw(p2);
 
   if(mMenu)
-    mMenu->drawAll(r2);
+    mMenu->drawAll(p2);
 }
 
 AGRect AGWidget::getRect() const
@@ -469,14 +478,14 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 #ifdef FOCUS_BY_SORT
   if(pWidget)
     {
-      cdebug(mChildren.size());
+      //      cdebug(mChildren.size());
       std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
       if(i!=mChildren.end())
 	{
 	  mChildren.erase(i);
 	  mChildren.push_front(pWidget);
 	}
-      cdebug(mChildren.size());
+      //      cdebug(mChildren.size());
     }
   if(mParent)
     mParent->gainFocus(this);

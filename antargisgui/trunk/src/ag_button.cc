@@ -83,11 +83,13 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 {
 }*/
 
-void AGButton::draw(const AGRect &r)
+void AGButton::draw(AGPainter &p)
 {
   //  CTRACE;
   //  return;
-  mBG[mState].draw(getScreenRect().shrink(borderWidth));//r.project(getRect().shrink(borderWidth)));
+  AGPainter p2(p);
+  p2.transform(AGRect(0,0,width(),height()).shrink(borderWidth));
+  mBG[mState].draw(p2);
 
   if(borderWidth==0)
     return;
@@ -103,60 +105,20 @@ void AGButton::draw(const AGRect &r)
   
     //  CTRACE;
 
-  AGRect mr=r.project(getRect());
-  //  cdebug(getRect());
-  //  cdebug(mr);
-  mr=getScreenRect();
-  //  cdebug(mr);
-  if(mState==NORMAL || mState==LIGHTED)
-    AGDraw::drawBorder(&getScreen(),mr,borderWidth,bc1,bc2);
-  else 
-    AGDraw::drawBorder(&getScreen(),mr,borderWidth,bc2,bc1);
-    }
-  //  drawBackground(r);
+    //FIXME: use painter !!!!!!
+    AGRect mr;//=r.project(getRect());
+    //  cdebug(getRect());
+    //  cdebug(mr);
+    mr=getRect().origin();
+    //  cdebug(mr);
+    if(mState==NORMAL || mState==LIGHTED)
+      p.drawBorder(mr,borderWidth,bc1,bc2);
+    else 
+      p.drawBorder(mr,borderWidth,bc2,bc1);
+  }
 }
 
-/*
-void AGButton::drawBackground(const AGRect &r)
-{
-  //  cdebug("r:"<<r<<" mr:"<<getRect());
-  AGColor c1,c2,c3,c4;
-  // theme background-image - evtl.
 
-  AGTheme *theme=getTheme();
-
-  std::string style;
-  if(mState==NORMAL)
-    style=".normal";
-  else if(mState==LIGHTED)
-    style=".lighted";
-  else
-    style=".pressed";
-
-      // border color
-  AGColor bc1;
-  AGColor bc2;
-
-  c1=theme->getColor(std::string("gradientColor1")+style);
-  c2=theme->getColor(std::string("gradientColor2")+style);
-  c3=theme->getColor(std::string("gradientColor3")+style);
-  c4=theme->getColor(std::string("gradientColor4")+style);
-
-
-  bc1=theme->getColor(std::string("borderColor1")+style);
-  bc2=theme->getColor(std::string("borderColor2")+style);
-
-  AGSurface s(getScreen());
-  
-  AGRect mr=r.project(getRect());
-
-  AGDraw::drawGradient(s,mr.shrink(borderWidth),c1,c2,c3,c4);
-  if(mState==NORMAL || mState==LIGHTED)
-    AGDraw::drawBorder(s,mr,borderWidth,bc1,bc2);
-  else 
-    AGDraw::drawBorder(s,mr,borderWidth,bc2,bc1);
-}
-*/
 bool AGButton::eventMouseEnter()
 {
   if(!mEnabled)

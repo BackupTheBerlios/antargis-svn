@@ -130,16 +130,12 @@ bool AGApplication::eventIdle()
 
 void AGApplication::draw()
 {
-{
-  //  CTRACE;
   if(mainWidget)
-    mainWidget->drawAll(getScreen().getRect());
-    }
     {
-      //    CTRACE;
+      AGPainter p;
+      mainWidget->drawAll(p);
+    }
   getScreen().flip();
-}
-  //  SDL_Flip(getScreen().surface());
 }
 
 void AGApplication::tryQuit()

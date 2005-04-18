@@ -35,44 +35,12 @@ public:
 };
 
 
-class SwigDirector_AGPainter : public AGPainter, public Swig::Director {
-
-public:
-    SwigDirector_AGPainter(VALUE self);
-    virtual void putPixel(int x, int y, AGColor const &c);
-};
-
-
-class SwigDirector_AGSurfacePainter : public AGSurfacePainter, public Swig::Director {
-
-public:
-    SwigDirector_AGSurfacePainter(VALUE self, AGSurface &pSurface);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest);
-    virtual void tile(AGSurface const &pSource);
-    virtual void tile(AGSurface const &pSource, AGRect const &pDest);
-    virtual void putPixel(int x, int y, AGColor const &c);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void tile(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
-};
-
-
-class SwigDirector_AGTexturePainter : public AGTexturePainter, public Swig::Director {
-
-public:
-    SwigDirector_AGTexturePainter(VALUE self, AGTexture &pSurface);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest);
-    virtual void tile(AGTexture const &pSource, AGRect const &pDest);
-    virtual void putPixel(int x, int y, AGColor const &c);
-    virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void tile(AGTexture const &pSource);
-};
-
-
 class SwigDirector_AGGScreen : public AGGScreen, public Swig::Director {
 
 public:
     SwigDirector_AGGScreen(VALUE self);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
     virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
@@ -90,6 +58,7 @@ class SwigDirector_AGSDLScreen : public AGSDLScreen, public Swig::Director {
 
 public:
     SwigDirector_AGSDLScreen(VALUE self, SDL_Surface *s);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
@@ -167,13 +136,13 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
@@ -207,12 +176,12 @@ public:
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventHide();
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual void setWidth(int w);
     virtual void setHeight(int w);
@@ -268,15 +237,15 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void draw(AGRect const &r);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -308,13 +277,13 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
@@ -348,13 +317,13 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
@@ -396,15 +365,15 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void draw(AGRect const &r);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *pWidget);
 };
@@ -435,15 +404,15 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void draw(AGRect const &r);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -454,8 +423,8 @@ class SwigDirector_AGEditLine : public AGEditLine, public Swig::Director {
 public:
     SwigDirector_AGEditLine(VALUE self, std::string const &pText, AGFont pFont, bool pHardEnd);
     virtual ~SwigDirector_AGEditLine();
-    virtual void draw(AGPoint const &pPoint, AGRect const &pClip);
-    virtual void drawCursor(int cx, AGPoint const &pPoint, AGRect const &pClip, AGColor const &c);
+    virtual void drawCursor(AGPainter &p, int cx, AGPoint const &pPoint, AGRect const &pClip, AGColor const &c);
+    virtual void draw(AGPainter &p, AGPoint const &pPoint, AGRect const &pClip);
 };
 
 
@@ -484,16 +453,16 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventKeyUp(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
+    virtual void drawBackground(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void draw(AGRect const &pRect);
-    virtual void drawBackground(AGRect const &pRect);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -525,13 +494,13 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
@@ -586,13 +555,13 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
@@ -625,11 +594,11 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void setWidth(int w);
@@ -664,11 +633,11 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void setWidth(int w);
@@ -703,15 +672,15 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void draw(AGRect const &r);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -742,15 +711,15 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void draw(AGRect const &pRect);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -781,13 +750,13 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
@@ -821,14 +790,14 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual bool eventOk(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
-    virtual void drawAll(AGRect const &r);
-    virtual void draw(AGRect const &r);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual bool eventCancel(char const *pName, AGEvent const *event, AGMessageObject *pCaller);

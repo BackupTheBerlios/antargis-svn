@@ -37,14 +37,19 @@ main.changeRes(640,480,32,false,true)
 app=TestApp.new(false)
 
 screen=AGScreenWidget.new
-window1=AGWindow.new(screen,AGRect.new(100,100,200,100),"test Window")
-window2=AGWindow.new(screen,AGRect.new(150,150,200,100))
+#window1=AGWindow.new(screen,AGRect.new(100,100,200,100),"test Window")
+window2=AGWindow.new(screen,AGRect.new(150,150,200,100),"test")
+#b=AGButton.new(screen,AGRect.new(0,0,200,100),"muh")
+#screen.addChild(b)
+#b2=AGButton.new(window2,AGRect.new(0,0,10,10),"h")
+#window2.addChild(b2)
+window2.addChild(AGEdit.new(window2,AGRect.new(5,20,100,100)))
 
-screen.addChild(window1)
+#screen.addChild(window1)
 screen.addChild(window2)
 
-w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
-window1.addChild(w2)
+#w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
+#window1.addChild(w2)
 
 app.setMainWidget(screen)#widget)
 

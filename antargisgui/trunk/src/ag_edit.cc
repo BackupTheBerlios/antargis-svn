@@ -59,24 +59,28 @@ AGFont AGEditLine::getFont() const
 }
 
 
-void AGEditLine::draw(const AGPoint &pPoint,const AGRect &pClip)
+void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
 {
   //  AGSurface s(getScreen());
   //  AGSurface s(
-  int x=0,y=0;
+  int x=0;//,y=0;
   if(mAlign==EDIT_CENTER)
     x=(pClip.w-mFont.getWidth(mText))/2;
-  if(mVAlign==EDIT_VCENTER)
+  /*  if(mVAlign==EDIT_VCENTER)
     y=-(mFont.getHeight(mText))/2;
 
-      //      cdebug(x<<";"<<y);
+  cdebug(x<<";"<<y);
   
-  //  cdebug(pPoint.x<<"//"<<pPoint.y);
+  cdebug(pPoint.x<<"//"<<pPoint.y);
 
-  AGFontEngine::renderText(&getScreen(),pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
+  //  p.renderText(pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
+  cdebug("mText:"<<mText);
+  cdebug("position:"<<pPoint.x+x<<";"<<pPoint.y+y);
+  */
+  p.renderText(mText+(mHardEnd?"":"/"),AGPoint(pPoint.x+x,pPoint.y),mFont);
 }
 
-void AGEditLine::drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c)
+void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c)
 {
   int x1=AGFontEngine::getWidth(mFont,mText.substr(0,cx));
   int x2=AGFontEngine::getWidth(mFont,mText.substr(0,cx+1));
@@ -85,7 +89,7 @@ void AGEditLine::drawCursor(int cx,const AGPoint &pPoint,const AGRect &pClip,con
   if(w==0)
     w=8;
   //  SDL_SetClipRect(getScreen().surface(),const_cast<AGRect*>(&pClip));
-  getScreen().drawRect(AGRect(pPoint.x+x1,pPoint.y,w,height()),c);
+  p.drawRect(AGRect(pPoint.x+x1,pPoint.y,w,height()),c);
   //  sge_FilledRectAlpha(getScreen().surface(),pPoint.x+x1,pPoint.y,pPoint.x+x2,pPoint.y+height(),c.mapRGB(getScreen().surface()->format),c.a);
   //  SDL_SetClipRect(getScreen().surface(),0);
 }
@@ -281,20 +285,20 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   setTheme("edit");
 }
 
-void AGEdit::draw(const AGRect &pRect)
+void AGEdit::draw(AGPainter &p)
 {
   
   int x,y,cy;
   int completeHeight=0;
   x=y=cy=0;
   
-  drawBackground(pRect);
+  drawBackground(p);//pRect);
 
   std::list<AGEditLine>::iterator i=mLines.begin();
 
   //  cdebug(pRect);
   //  cdebug("getRect:"<<getRect());
-  AGRect mr(pRect.project(getRect()));
+  AGRect mr(getRect());//pRect.project(getRect()));
 
   AGColor cursorC;
   if(mShowCursor)
@@ -310,28 +314,42 @@ void AGEdit::draw(const AGRect &pRect)
     {
       completeHeight+=i->height();
     }
+
+  //  cdebug("completeHeight:"<<completeHeight);
+  //  cdebug("height:"<<getRect().h);
   if(mVAlign==EDIT_VCENTER)
     y=getRect().h/2-completeHeight/2;
+  //  cdebug("y:"<<y);
 
   i=mLines.begin();
 
 
+  //  cdebug("mRect:"<<getRect());
+  //  cdebug("mViewCy:"<<mViewCy);
   for(int k=0;k<mViewCy;k++)
     i++;
 
+  //  cdebug("mLines:"<<mLines.size());
   for(;i!=mLines.end();i++)
     {
+      //      cdebug((*i).getText());
       //      cdebug("("<<x<<";"<<y<<")");
       //      cdebug(mr);
-      i->draw(mr.project(AGPoint(x,y)),pRect.project(getRect()));
+      i->draw(p,AGPoint(x,y),getRect().origin());//pRect.project(getRect()));
       if(cy+mViewCy==mCy && mMutable && hasFocus()) // FIXME: Change show cursor only if widget has focus
-	i->drawCursor(mCx,mr.project(AGPoint(x,y)),pRect.project(getRect()),cursorC);
+	i->drawCursor(p,mCx,AGPoint(x,y),getRect(),cursorC);
       y+=i->height();
       if(y>getRect().h)
-	break;
+	{
+	  //	  cdebug("break - too far y:"<<y<<" h:"<<getRect().h);
+	  break;
+	}
       cy++;
       if(!mMultiLine)
-	break;
+	{
+	  //	  cdebug("break - no multiline");
+	  break;
+	}
     }
 
   // do it next time
@@ -347,10 +365,10 @@ void AGEdit::draw(const AGRect &pRect)
     }
 }
 
-void AGEdit::drawBackground(const AGRect &pRect)
+void AGEdit::drawBackground(AGPainter &p)
 {
   if(mDrawBackground)
-    getScreen().tile(mBackground,pRect.project(getRect()));
+    p.tile(mBackground,getRect());
 }
 
 bool AGEdit::eventKeyUp(const AGEvent *m2)
@@ -748,6 +766,7 @@ void AGEdit::setText(const std::string &pText)
 	  mCx++;
 	}
     }
+  mCy=mCx=0;
 }
 void AGEdit::setMutable(bool pMutable)
 {

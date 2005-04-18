@@ -30,7 +30,7 @@ class AGImage:public AGWidget
   AGImage(AGWidget *pParent,const AGPoint &p,AGSurface pSurface,bool pTile,const AGRect &pRect=AGRect(0,0,0,0));
   virtual ~AGImage();
 
-  virtual void draw(const AGRect &r);
+  virtual void draw(AGPainter &p);//const AGRect &r);
 
   void setSurface(AGSurface pSurface);
 
