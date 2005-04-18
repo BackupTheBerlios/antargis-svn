@@ -44,9 +44,9 @@ AGMenuItem::~AGMenuItem()
 {
 }
 
-void AGMenuItem::draw(const AGRect &pr)
+void AGMenuItem::draw(AGPainter &p)//const AGRect &pr)
 {
-  AGRect r=pr.project(getRect());
+  //  AGRect r=pr.project(getRect());
 
   AGColor c1,c2,c3,c4;
 
@@ -63,7 +63,7 @@ void AGMenuItem::draw(const AGRect &pr)
       c4=theme->getColor(std::string("gradientColor4")+style);
       
       //      AGSurface s(getScreen());
-      AGDraw::drawGradientAlpha(&getScreen(),r,c1,c2,c3,c4);
+      p.drawGradient(p.getRect(),c1,c2,c3,c4);
     }
 
 

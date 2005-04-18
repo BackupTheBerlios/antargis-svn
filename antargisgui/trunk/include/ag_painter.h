@@ -22,28 +22,37 @@
 #define __AG_PAINTER_H
 
 #include <ag_color.h>
-#include <ag_gsurface.h>
+#include <ag_surface.h>
 #include <ag_geometry.h>
 #include <ag_font.h>
+#include <ag_painttarget.h>
 
 #include <list>
 
-// to Screen
 class AGPainter
 {
  public:
   AGPainter();
   AGPainter(const AGPainter &p);
+  AGPainter(AGPaintTarget &pTarget);
+  
   virtual ~AGPainter();
 
   virtual void putPixel(const AGPoint &p,const AGColor &c);
-  //  virtual AGColor getPixel(int x,int y);
+  virtual AGColor getPixel(int x,int y);
 
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void tile(const AGTexture &pSource);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+
+
+  virtual void blit(const AGSurface &pSource,const AGRect &pDest);
+  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
+  virtual void tile(const AGSurface &pSource);
+  virtual void tile(const AGSurface &pSource,const AGRect &pDest);
+  virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
   
   void transform(const AGRect &r);
 
@@ -67,32 +76,15 @@ class AGPainter
   std::list<AGRect> mClips;
   
   AGRect mRect;
+
+  AGPaintTarget &mTarget;
 };
 
 /*
-class AGTexturePainter:public AGPainter
-{
- public:
-  AGTexturePainter(AGTexture &pSurface);
-
-  virtual void putPixel(int x,int y,const AGColor &c);
-  virtual AGColor getPixel(int x,int y);
-
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-
- private:
-  AGTexture &mSurface;
-};
-*/
-
-
 class AGSurfacePainter
 {
  public:
-  AGSurfacePainter(AGSurface &pSurface);
+  AGSurfacePainter(AGPaintTarget<AGSurface> &pSurface);
   virtual ~AGSurfacePainter();
 
   virtual void putPixel(const AGPoint &p,const AGColor &c);
@@ -126,7 +118,9 @@ class AGSurfacePainter
   std::list<AGRect> mClips;
   
   AGRect mRect;
-};
 
+  AGPaintTarget<AGSurface> &mTarget;
+};
+*/
 
 #endif

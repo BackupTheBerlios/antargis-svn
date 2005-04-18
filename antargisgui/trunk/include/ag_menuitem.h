@@ -32,7 +32,7 @@ class AGMenuItem:public AGHTiler
   AGMenuItem(AGWidget *pParent,const std::string &pText);
   virtual ~AGMenuItem();
 
-  void draw(const AGRect &r);
+  void draw(AGPainter &p);
 
   virtual bool eventMouseEnter();
   virtual bool eventMouseLeave();

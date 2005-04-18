@@ -18,12 +18,13 @@
  * License along with this program.
  */
 
-#ifndef __GUI_GSURFACE_H
-#define __GUI_GSURFACE_H
+#ifndef __GUI_SURFACE_H
+#define __GUI_SURFACE_H
 
 #include <string>
 #include <SDL.h>
 #include "ag_geometry.h"
+#include "ag_painttarget.h"
 
 class AGColor;
 
@@ -56,6 +57,12 @@ class AGSurface:public AGPaintTarget
   }
 
   AGSurface &operator=(const AGSurface &p);
+
+
+  void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawGradientAlpha2(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
 
  protected:
 

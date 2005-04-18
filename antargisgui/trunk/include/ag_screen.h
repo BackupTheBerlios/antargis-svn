@@ -22,7 +22,7 @@
 #define AG_SCREEN_H
 
 #include "ag_widget.h"
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 
 class AGScreenWidget:public AGWidget
 {

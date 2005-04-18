@@ -35,22 +35,13 @@ public:
 };
 
 
-class SwigDirector_AGGScreen : public AGGScreen, public Swig::Director {
+class SwigDirector_AGScreen : public AGScreen, public Swig::Director {
 
 public:
-    SwigDirector_AGGScreen(VALUE self);
-    virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual AGSurface loadSurface(std::string const &pFilename);
-    virtual void tile(AGTexture const &pSource);
-    virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
-    virtual void tile(AGTexture const &pSource, AGRect const &pDest);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest);
-    virtual SDL_Surface *newSurface(int x, int y);
-    virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
-    virtual void putPixel(int x, int y, AGColor const &c);
-    virtual void drawRect(AGRect const &pRect, AGColor const &c);
+    SwigDirector_AGScreen(VALUE self);
     virtual void flip();
+    virtual AGSurface loadSurface(std::string const &pFilename);
+    virtual SDL_Surface *newSurface(int x, int y);
 };
 
 
@@ -58,17 +49,16 @@ class SwigDirector_AGSDLScreen : public AGSDLScreen, public Swig::Director {
 
 public:
     SwigDirector_AGSDLScreen(VALUE self, SDL_Surface *s);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
     virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
-    virtual void flip();
-    virtual void drawRect(AGRect const &pRect, AGColor const &c);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
     virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void drawRect(AGRect const &pRect, AGColor const &c);
+    virtual void flip();
     virtual SDL_Surface *newSurface(int x, int y);
 };
 

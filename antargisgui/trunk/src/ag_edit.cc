@@ -808,5 +808,5 @@ void AGEdit::setTheme(const std::string &s)
 
 bool AGEdit::canFocus() const
 {
-  return true;
+  return mMutable;
 }

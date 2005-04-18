@@ -24,13 +24,18 @@
 #include "ag_fontengine.h"
 
 
-AGPainter::AGPainter():mRect(getScreen().getRect())
+AGPainter::AGPainter():mRect(getScreen().getRect()),mTarget(getScreen())
 {
 }
 
-AGPainter::AGPainter(const AGPainter &p):mClips(p.mClips),mRect(p.mRect)
+AGPainter::AGPainter(const AGPainter &p):mClips(p.mClips),mRect(p.mRect),mTarget(p.mTarget)
 {
 }
+
+AGPainter::AGPainter(AGPaintTarget &pTarget):mRect(pTarget.getRect()),mTarget(pTarget)
+{
+}
+
 
 AGPainter::~AGPainter()
 {
@@ -109,13 +114,11 @@ void AGPainter::putPixel(const AGPoint &p,const AGColor &c)
   if(!inRect(p))
     return;
   AGPoint p2=move(p);
-  getScreen().putPixel(p.x,p.y,c);
+  mTarget.putPixel(p.x,p.y,c);
 }
 
 void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest)
 {
-  //  CTRACE;
-
   AGRect s=pSource.getRect();
   // ASSUME: we don't want to scale
   //  blit(pSource,pDest,pSource.getRect());
@@ -134,13 +137,13 @@ void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &
   */
   if(rs.first.w>0)
     {
-      getScreen().blit(pSource,rs.second,rs.first);
+      mTarget.blit(pSource,rs.second,rs.first);
     }
 }
 void AGPainter::tile(const AGTexture &pSource)
 {
   //  CTRACE;
-  tile(pSource,getScreen().getRect());
+  tile(pSource,mTarget.getRect());
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest)
 {
@@ -151,7 +154,7 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest)
   std::pair<AGRect,AGRect> rs=clip(r,r);
   //  cdebug(r);
   //  cdebug(rs.first);
-  getScreen().tile(pSource,rs.second);
+  mTarget.tile(pSource,rs.second);
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
 {
@@ -161,8 +164,69 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &
   AGRect r=move(pDest);
   std::pair<AGRect,AGRect> rs=clip(pSrc,r);
   
-  getScreen().tile(pSource,rs.second,pSrc);
+  mTarget.tile(pSource,rs.second,pSrc);
 }
+
+
+// AGSurface-painting
+void AGPainter::blit(const AGSurface &pSource,const AGRect &pDest)
+{
+  AGRect s=pSource.getRect();
+  // ASSUME: we don't want to scale
+  //  blit(pSource,pDest,pSource.getRect());
+  blit(pSource,AGRect(pDest.x,pDest.y,s.w,s.h),s);
+}
+void AGPainter::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  //  CTRACE;
+  AGRect dest=move(pDest);
+  std::pair<AGRect,AGRect> rs=clip(pSrc,dest);
+
+  /*  cdebug(mRect);
+  cdebug(pSrc<<"//D:"<<pDest);
+  cdebug(dest);
+  cdebug(rs.first<<"///"<<rs.second);
+  */
+  if(rs.first.w>0)
+    {
+      mTarget.blit(pSource,rs.second,rs.first);
+    }
+}
+void AGPainter::tile(const AGSurface &pSource)
+{
+  //  CTRACE;
+  tile(pSource,mTarget.getRect());
+}
+void AGPainter::tile(const AGSurface &pSource,const AGRect &pDest)
+{
+  //  CTRACE;
+  //  cdebug(mRect<<"       "<<pDest);
+  //  tile(pSource,pDest,pSource.getRect());
+  AGRect r=move(pDest);
+  std::pair<AGRect,AGRect> rs=clip(r,r);
+  //  cdebug(r);
+  //  cdebug(rs.first);
+  mTarget.tile(pSource,rs.second);
+}
+void AGPainter::tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  //  CTRACE;
+  //  cdebug("FIXME - IMPLEMENT ME");
+
+  AGRect r=move(pDest);
+  std::pair<AGRect,AGRect> rs=clip(pSrc,r);
+  
+  mTarget.tile(pSource,rs.second,pSrc);
+}
+
+
+
+
+
+
+
+
+
   
 void AGPainter::transform(const AGRect &r)
 {
@@ -193,14 +257,14 @@ void AGPainter::drawGradient(const AGRect &r,const AGColor &c0,const AGColor &c1
   //  cdebug(p.first);
   
   //FIXME: gradient should be clipped too / so colors must be changed
-  AGDraw::drawGradient(&getScreen(),p.second,c0,c1,c2,c3);
+  mTarget.drawGradient(p.second,c0,c1,c2,c3);
 }
 void AGPainter::renderText(const std::string &pText,const AGPoint &p,const AGFont &f)
 {
   // FIXME: clip text
   //  cdebug(mRect);
   //  cdebug(p);
-  AGFontEngine::renderText (&getScreen(),mRect,mRect.x+p.x,mRect.y+p.y,pText,f);
+  mTarget.renderText(mRect,mRect.x+p.x,mRect.y+p.y,pText,f);
 
 }
 void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, const AGColor& c2)
@@ -211,7 +275,7 @@ void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, con
   std::pair<AGRect,AGRect> p=clip(r2,r2);
   //  cdebug(p.first);
   
-  AGDraw::drawBorder(&getScreen(),p.second,width,c1,c2);
+  mTarget.drawBorder(p.second,width,c1,c2);
 }
 
 void AGPainter::drawRect(const AGRect &pRect,const AGColor &c)
@@ -221,5 +285,10 @@ void AGPainter::drawRect(const AGRect &pRect,const AGColor &c)
   
   std::pair<AGRect,AGRect> p=clip(r2,r2);
   //  cdebug(p.first);
-  getScreen().drawRect(p.second,c);
+  mTarget.drawRect(p.second,c);
+}
+
+AGColor AGPainter::getPixel(int x,int y)
+{
+  return mTarget.getPixel(x+mRect.x,y+mRect.y);
 }

@@ -23,6 +23,7 @@
 #include "ag_surface.h"
 #include "ag_color.h"
 #include "ag_debug.h"
+#include "ag_draw.h"
 #include "privates.h"
 #include "sge.h"
 
@@ -257,228 +258,111 @@ int AGSurface::height() const
   return s->h;
 }
 
+void AGSurface::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  CHECK_ZERO(s);
+  AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
+}
+/*
+  void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawGradientAlpha2(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
+*/
+
+void AGSurface::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  CHECK_ZERO(s);
+  AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
+}
+void AGSurface::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
+{
+  CHECK_ZERO(s);
+  AGDrawBorder(s,rect,W,c1,c2);
+}
+/*
+void AGSurface::putPixel(int x,int y,const AGColor &c)
+{
+  CHECK_ZERO(s);
+  }*/
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////
 // AGScreen
 ////////////////////////////////////////////////////////////////////////
-
-AGSDLScreen::AGSDLScreen(SDL_Surface *S):s(S)
-{
-}
-
-
-
-
-
-void AGSDLScreen::flip()
-{
-  SDL_Flip(s);
-}
-
-AGRect AGSDLScreen::getRect() const
-{
-  return AGRect(0,0,s->w,s->h);
-}
-
-void AGSDLScreen::drawRect(const AGRect &pRect,const AGColor &c)
-{
-  sge_FilledRectAlpha(s,pRect.x,pRect.y,pRect.x+pRect.w-1,pRect.y+pRect.h-1,c.mapRGB(s->format),c.a);
-}
-
-void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest)
-{
-  //cdebug(pDest.toString()<<endl);
-  SDL_Rect sr;
-  sr.x=0;
-  sr.y=0;
-  sr.w=pDest.w;
-  sr.h=pDest.h;
-  //  SDL_BlitSurface(s,const_cast<AGRect*>(&pDest),pSource.s,&sr);
-  SDL_BlitSurface(pSource.s,&sr,s,const_cast<AGRect*>(&pDest));
-}
-
-void AGSDLScreen::tile(const AGTexture &pSource)
-{
-  tile(pSource,getRect());
-  /*
-  int x,y;
-  if(pSource.s->w==0 || pSource.s->h==0)
-    return;
-  for(y=0;y<s->h;y+=pSource.s->h)
-    for(x=0;x<s->w;x+=pSource.s->w)
-      {
-	SDL_Rect sr,dr;
-	sr.x=sr.y=0;
-	sr.w=dr.w=std::min(pSource.s->w,s->w-x);
-	sr.w=dr.w=std::min(pSource.s->h,s->h-y);
-	dr.x=x;
-	dr.y=y;
-	SDL_BlitSurface(pSource.s,&sr,s,&dr);
-      }
-  */
-}
-
-void AGSDLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
-{
-
-  //  sge_FilledRect(s,pDest.x,pDest.y,pDest.x+pDest.w-1,pDest.y+pDest.h-1,0);
-  //  return;
-  int x,y;
-  if(pSource.s->w==0 || pSource.s->h==0)
-    return;
-  for(y=pDest.y;y<pDest.y+pDest.h;y+=pSource.s->h)
-    for(x=pDest.x;x<pDest.x+pDest.w;x+=pSource.s->w)
-      {
-	SDL_Rect sr,dr;
-	sr.x=sr.y=0;
-	sr.w=dr.w=std::min(pSource.s->w,pDest.w-(x-pDest.x));
-	sr.h=dr.h=std::min(pSource.s->h,pDest.h-(y-pDest.y));
-	dr.x=x;
-	dr.y=y;
-	SDL_BlitSurface(pSource.s,&sr,s,&dr);
-      }
-    
-}
-
-
-void AGSDLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
-{
-  int x,y;
-  if(pSource.s->w==0 || pSource.s->h==0 || pSrc.w==0 || pSrc.h==0)
-    return;
-
-  if(pSrc.w>pSource.s->w || pSrc.h>pSource.s->h || pSrc.x+pSrc.w-1>pSource.s->w || pSrc.y+pSrc.h-1>pSource.s->h)
-    {
-      cdebug("wrong source-rect");
-    }
-
-  for(y=pDest.y;y<pDest.y+pDest.h;y+=pSrc.h)
-    for(x=pDest.x;x<pDest.x+pDest.w;x+=pSrc.w)
-      {
-	SDL_Rect sr,dr;
-	sr.x=pSrc.x;
-	sr.y=pSrc.y;
-	sr.w=dr.w=std::min(int(pSrc.w),pDest.w-(x-pDest.x));
-	sr.h=dr.h=std::min(int(pSrc.h),pDest.h-(y-pDest.y));
-	dr.x=x;
-	dr.y=y;
-	//	cdebug(sr<<":"<<dr);
-	SDL_BlitSurface(pSource.s,&sr,s,&dr);
-      }
-  
-}
-
-AGGScreen *mAGGScreen=0;
-
-AGGScreen &getScreen()
-{
-  return *mAGGScreen;
-}
-
-void setScreen(AGGScreen *s)
-{
-  mAGGScreen=s;
-}
-
-
-void AGSDLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
-{
-}
-void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
-{
-}
-
-SDL_Surface *AGSDLScreen::newSurface(int x,int y)
-{
-  return AGCreate32BitSurface(x,y);
-  //  return sge_CreateAlphaSurface(SDL_SWSURFACE,x,y);
-}
-
-
-AGSurface AGSDLScreen::loadSurface(const std::string &pFilename)
-{
-  std::string file=loadFile(pFilename);
-  
-
-  //  CTRACE;
-  //SDL_Surface *s=IMG_Load(pFilename.c_str());
-  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
-  if(!s)
-    cdebug(pFilename);
-  assert(s);
-  //  SDL_Surface *s=IMG_Load(pFilename.c_str());
-  return AGSurface(s,s->w,s->h);
-}
-
-AGTexture AGSDLScreen::displayFormat(SDL_Surface *s)
-{
-  return AGTexture(SDL_DisplayFormatAlpha(s),s->w,s->h);
-}
 
 
 
 /////////////////////////////////////////////////////////////////////////
 // AGGSurface
 /////////////////////////////////////////////////////////////////////////
+/*
+void AGScreen::blit(const AGTexture &pSource,const AGRect &pDest)
+{
+}
+void AGScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+}
+void AGScreen::tile(const AGTexture &pSource)
+{
+}
+void AGScreen::tile(const AGTexture &pSource,const AGRect &pDest)
+{
+}
+void AGScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+}
+*/
+void AGScreen::flip()
+{
+}
+/*
+void AGScreen::drawRect(const AGRect &pRect,const AGColor &c)
+{
+}
 
-void AGGScreen::blit(const AGTexture &pSource,const AGRect &pDest)
-{
-}
-void AGGScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
-{
-}
-void AGGScreen::tile(const AGTexture &pSource)
-{
-}
-void AGGScreen::tile(const AGTexture &pSource,const AGRect &pDest)
-{
-}
-void AGGScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
-{
-}
-
-void AGGScreen::flip()
-{
-}
-
-void AGGScreen::drawRect(const AGRect &pRect,const AGColor &c)
-{
-}
-
-AGRect AGGScreen::getRect() const
+AGRect AGScreen::getRect() const
 {
   return AGRect(0,0,0,0);
 }
 
-void AGGScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
 }
-void AGGScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
-{
-}
-
-
-void AGGScreen::putPixel(int x,int y,const AGColor &c)
+void AGScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
 {
 }
 
-SDL_Surface *AGGScreen::newSurface(int x,int y)
+
+void AGScreen::putPixel(int x,int y,const AGColor &c)
+{
+}
+*/
+SDL_Surface *AGScreen::newSurface(int x,int y)
 {
   return 0;
 }
 
-AGTexture AGGScreen::displayFormat(SDL_Surface *s)
+AGTexture AGScreen::displayFormat(SDL_Surface *s)
 {
   return AGTexture();
 }
   
-AGSurface AGGScreen::loadSurface(const std::string &pFilename)
+AGSurface AGScreen::loadSurface(const std::string &pFilename)
 {
   return AGSurface();
 }
 
-AGTexture AGGScreen::makeTexture(AGSurface &s)
+AGTexture AGScreen::makeTexture(AGSurface &s)
 {
   STUB;
   return AGTexture();
 }
+
+
+
+
+
+

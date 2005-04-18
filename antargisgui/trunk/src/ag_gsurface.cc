@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 #include "ag_color.h"
 #include "ag_debug.h"
 

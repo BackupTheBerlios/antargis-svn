@@ -21,6 +21,7 @@
 #include "ag_glsurface.h"
 #include "ag_color.h"
 #include "ag_debug.h"
+#include "ag_fontengine.h"
 #include <GL/gl.h>
 #include <GL/glext.h>
 #include <GL/glu.h>
@@ -959,4 +960,15 @@ AGTexture AGGLScreen::displayFormat(SDL_Surface *s)
   //  CTRACE;
   //  cdebug(s->w<<"//"<<s->h);
   return AGTexture(toGLTexture(s),s->w,s->h);
+}
+
+
+void AGGLScreen::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  drawGradientAlpha(rect,ul,ur,dl,dr);
+}
+void AGGLScreen::renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn)
+{
+  if(!AGFontEngine::renderText(this,pClipRect,BaseLineX,BaseLineY,pText,ParamIn))
+    cdebug("SOME ERROR");
 }

@@ -19,7 +19,7 @@
  */
 
 #include "ag_color.h"
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 #include "ag_tools.h"
 
 #include <sstream>

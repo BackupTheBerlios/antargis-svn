@@ -126,12 +126,12 @@ AGRect AGTable::getClientRect(int x,int y) const
 
 
   if(cols[x].second)
-    mrect.w=cols[x].first;
+    mrect.w=(int)(cols[x].first);
   else
     mrect.w=(int)((width()-mfx)*cols[x].first/xw);
   
   if(rows[y].second)
-    mrect.h=rows[y].first;
+    mrect.h=(int)(rows[y].first);
   else
     mrect.h=(int)((height()-mfy)*rows[y].first/yw);
   
@@ -146,7 +146,7 @@ AGRect AGTable::getClientRect(int x,int y) const
       else
 	{
 	  if(cols[mx].second)
-	    ax+=cols[mx].first;
+	    ax+=(int)(cols[mx].first);
 	  else
 	    ax+=(int)((width()-mfx)*cols[mx].first/xw);
 	}
@@ -163,7 +163,7 @@ AGRect AGTable::getClientRect(int x,int y) const
       else
 	{
 	  if(rows[my].second)
-	    ay+=rows[my].first;
+	    ay+=(int)(rows[my].first);
 	  else
 	    ay+=(int)((height()-mfy)*rows[my].first/yw);
 	}

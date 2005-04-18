@@ -26,14 +26,14 @@
 #include <list>
 #include <SDL.h>
 #include "ag_geometry.h"
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 #include <GL/gl.h>
 
 class AGColor;
 
 typedef GLuint TextureID;
 
-class AGGLScreen:public AGGScreen
+class AGGLScreen:public AGScreen
 {
  public:
   AGGLScreen(int W,int H);
@@ -50,6 +50,9 @@ class AGGLScreen:public AGGScreen
 
   virtual AGRect getRect() const;
 
+  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+
   virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
   virtual void putPixel(int x,int y,const AGColor &c);
@@ -60,12 +63,11 @@ class AGGLScreen:public AGGScreen
 
   virtual AGTexture displayFormat(SDL_Surface *s);
 
-  // do paint
   void flip();
   bool inScreen(const AGRect &r) const;
- private:
 
-  //  void paintTerrain();
+
+ private:
 
   TextureID getID(SDL_Surface *s);
   AGRect getRect(SDL_Surface *s);

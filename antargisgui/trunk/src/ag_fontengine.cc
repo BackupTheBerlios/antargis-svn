@@ -139,7 +139,7 @@ bool AGFontEngine::renderText (AGSurface &pSurface, const AGRect &pClipRect, int
 
 std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
 
-bool AGFontEngine::renderText (AGGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
+bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
 {
   //     cdebug(0);
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())

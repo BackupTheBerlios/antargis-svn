@@ -22,7 +22,7 @@
 #define AG_MENU_H
 
 #include "ag_vtiler.h"
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 
 class AGMenuEvent:public AGEvent
 {

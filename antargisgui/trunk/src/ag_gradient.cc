@@ -26,7 +26,7 @@
 #include "ag_draw.h"
 #include "sge.h"
 
-void AGDraw::drawGradient(AGSurface &psurface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+void AGDrawGradient(SDL_Surface *surface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {
     AGRect rect=prect;
     Sint32 v00,v01,v02;
@@ -35,7 +35,7 @@ void AGDraw::drawGradient(AGSurface &psurface, const AGRect& prect, const AGColo
     Sint32 w = rect.w;
     Sint32 h = rect.h;
 
-    SDL_Surface*surface=psurface.s;//surface();
+    //    SDL_Surface*surface=psurface.s;//surface();
     
     if (!surface)
       return;
@@ -194,117 +194,7 @@ void AGDraw::drawGradient(AGSurface &psurface, const AGRect& prect, const AGColo
     }		
   }
 
-/*
-void drawPixel(SDL_Surface *s,int x,int y,Uint32 mColor)
-{
-}
-
-void AGDraw::drawGradientAlpha(AGSurface &psurface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
-{
-  SDL_Surface*surface=psurface.surface();
-  if(SDL_MUSTLOCK(surface))
-    SDL_LockSurface(surface);
-
-  SDL_PixelFormat* format = surface->format;
-  Uint8 Rloss = 8+format->Rloss;
-  Uint8 Gloss = 8+format->Gloss;
-  Uint8 Bloss = 8+format->Bloss;
-  Uint8 Rshift = format->Rshift;
-  Uint8 Gshift = format->Gshift;
-  Uint8 Bshift = format->Bshift;
-    //Uint8 Amask = format->Amask;
-    
-  Uint8 bpp = format->BytesPerPixel;
-  Uint32 pitch = surface->pitch;
-  Uint8* bits = ((Uint8 *) surface->pixels) + (rect.y + oy)* pitch + (rect.x + ox)* bpp;
-  Uint32 y_pitch = pitch*drawrect.h - bpp;
-  register Uint32 pixel = 0;
-
-  Sint32 r1, g1, b1;
-  Sint32 r2, g2, b2;
-  Sint32 yr, yg, yb;
-  Sint32 r,g,b;
-  
-  for (register Sint32 x = 0; x < drawrect.w; x++) {
-    
-    yr = (r2 - r1) / h;
-    yg = (g2 - g1) / h;
-    yb = (b2 - b1) / h;
-      
-    r = r1;
-    g = g1;
-    b = b1;
-    r += yr * oy;
-    g += yg * oy;
-    b += yb * oy;
-    
-    for (register Sint32 y = 0; y < drawrect.h; y++) {
-	
-	//////// Set the pixel 
-	switch (bpp) {
-	case 1:
-	  pixel = SDL_MapRGB ( surface->format, r>>8, g>>8, b>>8 );
-	  *((Uint8 *) (bits)) = (Uint8) pixel;
-	  break;
-	  
-	case 2:
-	  pixel =  (r>>Rloss) << Rshift
-	    | (g>>Gloss) << Gshift
-	    | (b>>Bloss) << Bshift;
-	  
-	  *((Uint16 *) (bits)) = (Uint16) pixel;
-	  break;
-	  
-	case 3: {
-	  pixel =  (r>>Rloss) << Rshift
-	    | (g>>Gloss) << Gshift
-	    | (b>>Bloss) << Bshift;
-	  
-	  Uint8 ri = (pixel >> surface->format->Rshift) & 0xFF;
-	  Uint8 gi = (pixel >> surface->format->Gshift) & 0xFF;
-	  Uint8 bi = (pixel >> surface->format->Bshift) & 0xFF;
-	  *((bits) + surface->format->Rshift / 8) = ri;
-	  *((bits) + surface->format->Gshift / 8) = gi;
-	  *((bits) + surface->format->Bshift / 8) = bi;
-	}
-	  break;
-	  
-	case 4:
-	  pixel =  (r>>Rloss) << Rshift
-	    | (g>>Gloss) << Gshift
-	    | (b>>Bloss) << Bshift;
-	  
-	  *((Uint32 *) (bits)) = (Uint32) pixel;
-	  break;
-	}
-	
-	r += yr;
-	g += yg;
-	b += yb;
-	
-	// next pixel
-	bits += pitch;
-      }
-      
-      r1 += v00;
-      g1 += v01;
-      b1 += v02;
-      r2 += v10;
-      g2 += v11;
-      b2 += v12;
-      
-      bits -= y_pitch;
-    }
-    
-
-
-  if(SDL_MUSTLOCK(surface)) 
-    SDL_UnlockSurface(surface);
-  		
-}
-*/
-
-void AGDraw::drawGradientAlpha(AGSurface &psurface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {
     AGRect rect=prect;
     Sint32 v00,v01,v02,v03;
@@ -313,7 +203,7 @@ void AGDraw::drawGradientAlpha(AGSurface &psurface, const AGRect& prect, const A
     Sint32 w = rect.w;
     Sint32 h = rect.h;
 
-    SDL_Surface*surface=psurface.s;//surface();
+    //    SDL_Surface*surface=psurface.s;//surface();
     
     if (!surface)
       return;
@@ -532,36 +422,37 @@ void AGDraw::drawGradientAlpha(AGSurface &psurface, const AGRect& prect, const A
   }
 
 
-void AGDraw::drawBorder(AGSurface &surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2)
+void AGDrawBorder(SDL_Surface *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2)
 {
   AGRect r=rect;
 
-  Uint32 uc1=surface.color(c1);
-  Uint32 uc2=surface.color(c2);
+  Uint32 uc1=c1.mapRGB(surface->format);//surface.color(c1);
+  Uint32 uc2=c2.mapRGB(surface->format);//surface.color(c2);
 
   for(int i=0;i<width;i++)
     {
-      sge_HLine(surface.s,r.x,r.x+r.w-1,r.y,uc1);
-      sge_HLine(surface.s,r.x,r.x+r.w-1,r.y+r.h-1,uc2);
-      sge_VLine(surface.s,r.x,r.y,r.y+r.h-1,uc1);
-      sge_VLine(surface.s,r.x+r.w-1,r.y,r.y+r.h-1,uc2);
+      sge_HLine(surface,r.x,r.x+r.w-1,r.y,uc1);
+      sge_HLine(surface,r.x,r.x+r.w-1,r.y+r.h-1,uc2);
+      sge_VLine(surface,r.x,r.y,r.y+r.h-1,uc1);
+      sge_VLine(surface,r.x+r.w-1,r.y,r.y+r.h-1,uc2);
       r=r.shrink(1);
     }
 }
-
-void AGDraw::drawGradient(AGGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+/*
+void AGDraw::drawGradient(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   surface->drawGradientAlpha(rect,ul,ur,dl,dr);
 }
-void AGDraw::drawGradientAlpha(AGGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGDraw::drawGradientAlpha(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   surface->drawGradientAlpha(rect,ul,ur,dl,dr);
 }
-void AGDraw::drawGradientAlpha2(AGGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGDraw::drawGradientAlpha2(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   surface->drawGradientAlpha(rect,ul,ur,dl,dr);
 }
-void AGDraw::drawBorder(AGGScreen *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2)
+void AGDraw::drawBorder(AGScreen *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2)
 {
   surface->drawBorder(rect,width,c1,c2);
 }
+*/

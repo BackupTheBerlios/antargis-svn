@@ -25,19 +25,25 @@
 #include "ag_color.h"
 #include "ag_surface.h"
 
+void AGDrawGradient(SDL_Surface *surface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+void AGDrawBorder(SDL_Surface *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
+
+/*
 class AGDraw
 {
 public:
+
   static void AGDraw::drawGradient(AGSurface &surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   static void AGDraw::drawGradientAlpha(AGSurface &surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   static void AGDraw::drawGradientAlpha2(AGSurface &surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   static void AGDraw::drawBorder(AGSurface &surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
 
-  static void AGDraw::drawGradient(AGGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  static void AGDraw::drawGradientAlpha(AGGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  static void AGDraw::drawGradientAlpha2(AGGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  static void AGDraw::drawBorder(AGGScreen *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
+  static void AGDraw::drawGradient(AGPaintScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  static void AGDraw::drawGradientAlpha(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  static void AGDraw::drawGradientAlpha2(AGPaintTarget &surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  static void AGDraw::drawBorder(AGPaintTarget &surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
 };
-
+*/
 
 #endif

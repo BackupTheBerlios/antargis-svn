@@ -445,7 +445,10 @@ bool AGWidget::canFocus() const
 
   for(;i!=mChildren.end();i++)
     if((*i)->canFocus())
-      return true;
+      {
+
+	return true;
+      }
 
   return false;
 }
@@ -487,8 +490,11 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 	}
       //      cdebug(mChildren.size());
     }
-  if(mParent)
-    mParent->gainFocus(this);
+  else if(mParent)
+    {
+      if(canFocus())
+	mParent->gainFocus(this);
+    }
 #else
   if(pWidget==0 && mParent)
     mParent->gainFocus(this);

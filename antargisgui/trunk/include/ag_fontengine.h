@@ -35,7 +35,7 @@ class AGFontEngine
 
 
   //  static bool renderText (AGSurface &pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
-  static bool renderText (AGGScreen *pScreen, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+  static bool renderText (AGScreen *pScreen, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
 
   static int getWidth(const AGFont &pFont,const std::string &pText);
   static int getHeight(const AGFont &pFont,const std::string &pText);

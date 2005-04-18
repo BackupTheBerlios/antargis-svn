@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_surface.h
+ * ag_sdlsurface.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,16 +18,16 @@
  * License along with this program.
  */
 
-#ifndef __GUI_SURFACE_H
-#define __GUI_SURFACE_H
+#ifndef __GUI_SDLSURFACE_H
+#define __GUI_SDLSURFACE_H
 
 #ifdef USE_RUBY
 #include "ruby.h"
 #undef connect
 #endif
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 
-class AGSDLScreen:public AGGScreen
+class AGSDLScreen:public AGScreen
 {
  public:
   AGSDLScreen(SDL_Surface *s);
@@ -43,9 +43,7 @@ class AGSDLScreen:public AGGScreen
 
   virtual void drawRect(const AGRect &pRect,const AGColor &c);
 
-  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
-  {
-  }
+  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 
   virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
 

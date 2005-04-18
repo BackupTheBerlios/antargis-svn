@@ -21,8 +21,8 @@
 #include <iostream>
 
 #include "ag_main.h"
-#include "ag_gsurface.h"
 #include "ag_surface.h"
+#include "ag_sdlsurface.h"
 #include "ag_glsurface.h"
 #include "ag_fs.h"
 #include "privates.h"
