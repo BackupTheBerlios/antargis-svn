@@ -30,7 +30,7 @@ class AGColor;
 extern bool mGLMode;
 
 // Generic classes - for OpenGL and "normal" SDL
-class AGSurface
+class AGSurface:public AGPaintTarget
 {
  public:  
   explicit AGSurface(SDL_Surface *s,int w,int h);
@@ -75,6 +75,8 @@ class AGSurface
   friend class AGTexture;
 };
 
+// FIXME: make AGTexture a AGPaintTarget, too
+
 class AGTexture
 {
  public:
@@ -104,27 +106,11 @@ class AGTexture
 // this is virtually a pure virtual class ;-)
 // because swig directors have problems with this otherwise
 
-
-class AGGScreen
+class AGScreen:public AGPaintTarget
 {
  public:
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest);
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-  virtual void tile(const AGTexture &pSource);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-
   virtual void flip();
 
-  virtual void drawRect(const AGRect &pRect,const AGColor &c);
-  
-  virtual AGRect getRect() const;
-  
-  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
-  
-  virtual void putPixel(int x,int y,const AGColor &c);
-  
   virtual SDL_Surface *newSurface(int x,int y);
 
   virtual AGTexture displayFormat(SDL_Surface *s);
@@ -134,9 +120,8 @@ class AGGScreen
   virtual AGTexture makeTexture(AGSurface &s);
 };
 
-AGGScreen &getScreen();
-void setScreen(AGGScreen *s);
-
+AGScreen &getScreen();
+void setScreen(AGScreen *s);
 
 class AGSurfaceCache
 {

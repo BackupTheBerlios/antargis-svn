@@ -88,4 +88,45 @@ class AGTexturePainter:public AGPainter
 };
 */
 
+
+class AGSurfacePainter
+{
+ public:
+  AGSurfacePainter(AGSurface &pSurface);
+  virtual ~AGSurfacePainter();
+
+  virtual void putPixel(const AGPoint &p,const AGColor &c);
+  //  virtual AGColor getPixel(int x,int y);
+
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+  virtual void tile(const AGTexture &pSource);
+  virtual void tile(const AGTexture &pSource,const AGRect &pDest);
+  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+  
+  void transform(const AGRect &r);
+
+  void renderText(const std::string &pText,const AGPoint &p,const AGFont &f);
+
+  AGRect getRect() const;
+
+  void drawGradient(const AGRect &r,const AGColor &c0,const AGColor &c1,const AGColor &c2,const AGColor &c3);
+  void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
+  virtual void drawRect(const AGRect &pRect,const AGColor &c);
+
+ private:
+
+  AGPoint move(const AGPoint &p) const;
+  AGRect move(const AGRect &r) const;
+
+  bool inRect(const AGPoint &p) const;
+  std::pair<AGRect,AGRect> clip(const AGRect &from,const AGRect &to) const;
+
+
+  std::list<AGRect> mClips;
+  
+  AGRect mRect;
+};
+
+
 #endif
