@@ -39,6 +39,8 @@ class AntMenuApp <AntApp
 		@menues=[]	
 		setupMain
 		setupCredits
+		setupCampaign
+		setupOptions
 		# hie all menues
 		hideAll
 		# and show mainmenu
@@ -55,8 +57,10 @@ class AntMenuApp <AntApp
 		@menues.push(@mainMenu)
 		$screen.addChild(@mainMenu)
 		@mainMenu.hide
-		addHandler($screen.getChild("quit"),:sigClick,:sigQuit)
-		addHandler($screen.getChild("credits"),:sigClick,:sigCredits)
+		addHandler(@mainMenu.getChild("quit"),:sigClick,:sigQuit)
+		addHandler(@mainMenu.getChild("credits"),:sigClick,:sigCredits)
+		addHandler(@mainMenu.getChild("campaign"),:sigClick,:sigCampaign)
+		addHandler(@mainMenu.getChild("options"),:sigClick,:sigOptions)
 		puts "SETUPMAIN."
 	end
 	
@@ -65,23 +69,50 @@ class AntMenuApp <AntApp
 		@creditsMenu=AGLayout.new($screen,loadFile("credits.xml"))
 		@menues.push(@creditsMenu)
 		$screen.addChild(@creditsMenu)
-		addHandler($screen.getChild("exit"),:sigClick,:sigExit)
+		addHandler(@creditsMenu.getChild("exit"),:sigClick,:sigExit)
 	end
+	
+	def setupCampaign
+		puts "SETUPCAMPAIGN"
+		@campaignMenu=AGLayout.new($screen,loadFile("campaign.xml"))
+		@menues.push(@campaignMenu)
+		$screen.addChild(@campaignMenu)
+		addHandler(@campaignMenu.getChild("exit"),:sigClick,:sigExit)
+	end
+	
+	def setupOptions
+		puts "SETUPOPTIONS"
+		@optionsMenu=AGLayout.new($screen,loadFile("options.xml"))
+		@menues.push(@optionsMenu)
+		$screen.addChild(@optionsMenu)
+		addHandler(@optionsMenu.getChild("exit"),:sigClick,:sigExit)
+	end
+	
+	# Mainmenu-sigs
 	
 	def sigCredits(eventName,callerName,event,caller)
 		hideAll
 		@creditsMenu.show
 	end
-	
+	def sigCampaign(eventName,callerName,event,caller)
+		hideAll
+		@campaignMenu.show
+	end
+	def sigOptions(eventName,callerName,event,caller)
+		hideAll
+		@optionsMenu.show
+	end
+	def sigQuit(eventName,callerName,event,caller)
+		puts "pCaller:"+callerName
+		tryQuit
+	end
+
+	# all exits to mainmenu	
 	def sigExit(eventName,callerName,event,caller)
 		hideAll
 		@mainMenu.show
 	end
 	
-	def sigQuit(eventName,callerName,event,caller)
-		puts "pCaller:"+callerName
-		tryQuit
-	end
 	
 end
 

@@ -141,6 +141,8 @@ std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
 
 bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
 {
+  if(pText.length()==0)
+    return true;
   //     cdebug(0);
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
@@ -149,9 +151,6 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       
       if(!f)
-	return false;
-      
-      if(pText.length()==0)
 	return false;
       
       ns=TTF_RenderText_Blended(f,pText.c_str(),pFont.getColor());//.sdlColor()); // Blended instead of Solid
