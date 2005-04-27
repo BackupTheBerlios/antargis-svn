@@ -115,6 +115,11 @@ bool AGTheme::hasSurface(const std::string &pName) const
   //  cdebug(pName);
   return(mSurfaces.find(pName)!=mSurfaces.end());
 }
+bool AGTheme::hasColor(const std::string &pName) const
+{
+  //  cdebug(pName);
+  return(mColors.find(pName)!=mColors.end());
+}
 
 
 AGSurface AGTheme::getSurface(const std::string &pName)

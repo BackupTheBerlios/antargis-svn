@@ -1358,6 +1358,24 @@ SwigDirector_AGSurface::SwigDirector_AGSurface(VALUE self, AGSurface const &p): 
 SwigDirector_AGSurface::~SwigDirector_AGSurface() {
 }
 
+void SwigDirector_AGSurface::putPixel(int x, int y, AGColor const &c) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    AGColor * nc_tmp_c = const_cast<AGColor *>(&c) ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSurface::putPixel(x,y,c);
+        return;
+    }
+    obj0 = INT2NUM(x);
+    obj1 = INT2NUM(y);
+    obj2 = SWIG_NewPointerObj(nc_tmp_c, SWIGTYPE_p_AGColor, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("putPixel"), 3,obj0,obj1,obj2);
+}
+
+
 SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self): AGTexture(), Swig::Director(self) {
     
 }
@@ -10810,6 +10828,55 @@ _wrap_AGSurface_drawBorder(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGSurface_putPixel(int argc, VALUE *argv, VALUE self) {
+    AGSurface *arg1 = (AGSurface *) 0 ;
+    int arg2 ;
+    int arg3 ;
+    AGColor *arg4 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurface, 1);
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGColor, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->putPixel(arg2,arg3,(AGColor const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSurface_getPixel(int argc, VALUE *argv, VALUE self) {
+    AGSurface *arg1 = (AGSurface *) 0 ;
+    int arg2 ;
+    int arg3 ;
+    AGColor result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurface, 1);
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((AGSurface const *)arg1)->getPixel(arg2,arg3);
+    
+    {
+        AGColor * resultptr;
+        resultptr = new AGColor((AGColor &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_disown_AGSurface(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
     
@@ -16672,6 +16739,25 @@ _wrap_disown_AGText(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_toAGText(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = 0 ;
+    AGText *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGWidget, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGText &_result_ref = toAGText(*arg1);
+        result = (AGText *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_new_AGVTiler__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
@@ -17373,6 +17459,32 @@ _wrap_AGTheme_hasSurface(int argc, VALUE *argv, VALUE self) {
         }
     }
     result = (bool)((AGTheme const *)arg1)->hasSurface((std::string const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGTheme_hasColor(int argc, VALUE *argv, VALUE self) {
+    AGTheme *arg1 = (AGTheme *) 0 ;
+    std::string *arg2 = 0 ;
+    bool result;
+    std::string temp2 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (bool)((AGTheme const *)arg1)->hasColor((std::string const &)*arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -18568,6 +18680,19 @@ _wrap_AGEdit_setFont(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGEdit_clear(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
+    (arg1)->clear();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGEdit_setMutable(int argc, VALUE *argv, VALUE self) {
     AGEdit *arg1 = (AGEdit *) 0 ;
     bool arg2 ;
@@ -18686,6 +18811,25 @@ _wrap_disown_AGEdit(int argc, VALUE *argv, VALUE self) {
     }
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_toAGEdit(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = 0 ;
+    AGEdit *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGWidget, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGEdit &_result_ref = toAGEdit(*arg1);
+        result = (AGEdit *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
+    return vresult;
 }
 
 
@@ -19634,6 +19778,19 @@ _wrap_AGWindow_eventDragBy(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWindow_close(int argc, VALUE *argv, VALUE self) {
+    AGWindow *arg1 = (AGWindow *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWindow, 1);
+    (arg1)->close();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGWindow_tryClose(int argc, VALUE *argv, VALUE self) {
     AGWindow *arg1 = (AGWindow *) 0 ;
     char *arg2 = (char *) 0 ;
@@ -19676,6 +19833,37 @@ _wrap_AGWindow_getClientRect(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGWindow_sigClose_set(int argc, VALUE *argv, VALUE self) {
+    AGWindow *arg1 = (AGWindow *) 0 ;
+    AGSignal *arg2 = (AGSignal *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWindow, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGSignal, 1);
+    if (arg1) (arg1)->sigClose = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWindow_sigClose_get(int argc, VALUE *argv, VALUE self) {
+    AGWindow *arg1 = (AGWindow *) 0 ;
+    AGSignal *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWindow, 1);
+    result = (AGSignal *)& ((arg1)->sigClose);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSignal,0);
+    return vresult;
+}
+
+
 static void
 free_AGWindow(AGWindow *arg1) {
     delete arg1;
@@ -19693,6 +19881,25 @@ _wrap_disown_AGWindow(int argc, VALUE *argv, VALUE self) {
     }
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_toAGWindow(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = 0 ;
+    AGWindow *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGWidget, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGWindow &_result_ref = toAGWindow(*arg1);
+        result = (AGWindow *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
+    return vresult;
 }
 
 
@@ -22797,6 +23004,8 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSurface.klass, "drawGradientAlpha", VALUEFUNC(_wrap_AGSurface_drawGradientAlpha), -1);
     rb_define_method(cAGSurface.klass, "drawGradientAlpha2", VALUEFUNC(_wrap_AGSurface_drawGradientAlpha2), -1);
     rb_define_method(cAGSurface.klass, "drawBorder", VALUEFUNC(_wrap_AGSurface_drawBorder), -1);
+    rb_define_method(cAGSurface.klass, "putPixel", VALUEFUNC(_wrap_AGSurface_putPixel), -1);
+    rb_define_method(cAGSurface.klass, "getPixel", VALUEFUNC(_wrap_AGSurface_getPixel), -1);
     cAGSurface.mark = 0;
     cAGSurface.destroy = (void (*)(void *)) free_AGSurface;
     rb_define_module_function(mLibantargisruby, "disown_AGTexture", VALUEFUNC(_wrap_disown_AGTexture), -1);
@@ -23143,6 +23352,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGText.klass, "getText", VALUEFUNC(_wrap_AGText_getText), -1);
     cAGText.mark = 0;
     cAGText.destroy = (void (*)(void *)) free_AGText;
+    rb_define_module_function(mLibantargisruby, "toAGText", VALUEFUNC(_wrap_toAGText), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGVTiler", VALUEFUNC(_wrap_disown_AGVTiler), -1);
     
     cAGVTiler.klass = rb_define_class_under(mLibantargisruby, "AGVTiler", ((swig_class *) SWIGTYPE_p_AGWidget->clientdata)->klass);
@@ -23182,6 +23392,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGTheme.klass, "getSurface", VALUEFUNC(_wrap_AGTheme_getSurface), -1);
     rb_define_method(cAGTheme.klass, "setSurface", VALUEFUNC(_wrap_AGTheme_setSurface), -1);
     rb_define_method(cAGTheme.klass, "hasSurface", VALUEFUNC(_wrap_AGTheme_hasSurface), -1);
+    rb_define_method(cAGTheme.klass, "hasColor", VALUEFUNC(_wrap_AGTheme_hasColor), -1);
     cAGTheme.mark = 0;
     cAGTheme.destroy = (void (*)(void *)) free_AGTheme;
     rb_define_module_function(mLibantargisruby, "getTheme", VALUEFUNC(_wrap_getTheme), -1);
@@ -23273,6 +23484,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEdit.klass, "doDelete", VALUEFUNC(_wrap_AGEdit_doDelete), -1);
     rb_define_method(cAGEdit.klass, "setText", VALUEFUNC(_wrap_AGEdit_setText), -1);
     rb_define_method(cAGEdit.klass, "setFont", VALUEFUNC(_wrap_AGEdit_setFont), -1);
+    rb_define_method(cAGEdit.klass, "clear", VALUEFUNC(_wrap_AGEdit_clear), -1);
     rb_define_method(cAGEdit.klass, "setMutable", VALUEFUNC(_wrap_AGEdit_setMutable), -1);
     rb_define_method(cAGEdit.klass, "setAlign", VALUEFUNC(_wrap_AGEdit_setAlign), -1);
     rb_define_method(cAGEdit.klass, "setVAlign", VALUEFUNC(_wrap_AGEdit_setVAlign), -1);
@@ -23281,6 +23493,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEdit.klass, "canFocus", VALUEFUNC(_wrap_AGEdit_canFocus), -1);
     cAGEdit.mark = 0;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
+    rb_define_module_function(mLibantargisruby, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGCheckBox", VALUEFUNC(_wrap_disown_AGCheckBox), -1);
     
     cAGCheckBox.klass = rb_define_class_under(mLibantargisruby, "AGCheckBox", ((swig_class *) SWIGTYPE_p_AGHTiler->clientdata)->klass);
@@ -23341,10 +23554,14 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWindow.klass, "getClient", VALUEFUNC(_wrap_AGWindow_getClient), -1);
     rb_define_method(cAGWindow.klass, "eventMouseButtonDown", VALUEFUNC(_wrap_AGWindow_eventMouseButtonDown), -1);
     rb_define_method(cAGWindow.klass, "eventDragBy", VALUEFUNC(_wrap_AGWindow_eventDragBy), -1);
+    rb_define_method(cAGWindow.klass, "close", VALUEFUNC(_wrap_AGWindow_close), -1);
     rb_define_method(cAGWindow.klass, "tryClose", VALUEFUNC(_wrap_AGWindow_tryClose), -1);
     rb_define_method(cAGWindow.klass, "getClientRect", VALUEFUNC(_wrap_AGWindow_getClientRect), -1);
+    rb_define_method(cAGWindow.klass, "sigClose=", VALUEFUNC(_wrap_AGWindow_sigClose_set), -1);
+    rb_define_method(cAGWindow.klass, "sigClose", VALUEFUNC(_wrap_AGWindow_sigClose_get), -1);
     cAGWindow.mark = 0;
     cAGWindow.destroy = (void (*)(void *)) free_AGWindow;
+    rb_define_module_function(mLibantargisruby, "toAGWindow", VALUEFUNC(_wrap_toAGWindow), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGImage", VALUEFUNC(_wrap_disown_AGImage), -1);
     
     cAGImage.klass = rb_define_class_under(mLibantargisruby, "AGImage", ((swig_class *) SWIGTYPE_p_AGWidget->clientdata)->klass);

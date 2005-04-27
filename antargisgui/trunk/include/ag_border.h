@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_window.h
+ * ag_border.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,40 +18,24 @@
  * License along with this program.
  */
 
-#ifndef AG_WINDOW_H
-#define AG_WINDOW_H
+#ifndef __AG_BORDER_H__
+#define __AG_BORDER_H__
 
-#include "ag_table.h"
+#include <string>
+#include "ag_surface.h"
 
-class AGWindow:public AGTable
+class AGPainter;
+
+class AGBorder
 {
  public:
-  AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle="");
+  AGBorder(const std::string &pTheme="");
 
-  void addChild(AGWidget *w);
-
-  AGWidget *getClient();
-
-  virtual bool eventMouseButtonDown(const AGEvent *m);
-  bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
-
-  void close();
-
-  // slot
-  bool tryClose(const char*pName,const AGEvent *m);
-
-  AGRect getClientRect() const;
-
-  AGSignal sigClose;
+  void draw(AGPainter &p);
 
  private:
-
-  AGWidget *getTitleBar();
-
-  std::string mTitle;
-  AGWidget *mClient;
+  AGTexture mSurface;
+  bool mEnable;
 };
-
-AGWindow &toAGWindow(AGWidget &w);
 
 #endif

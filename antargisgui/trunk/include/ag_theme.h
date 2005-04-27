@@ -45,6 +45,7 @@ class AGTheme
   void setSurface(const std::string &pName,const AGSurface &pSurface);
 
   bool hasSurface(const std::string &pName) const;
+  bool hasColor(const std::string &pName) const;
 
  private:
 

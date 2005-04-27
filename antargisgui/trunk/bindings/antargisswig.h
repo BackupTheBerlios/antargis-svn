@@ -23,6 +23,7 @@ public:
     SwigDirector_AGSurface(VALUE self, int w, int h);
     SwigDirector_AGSurface(VALUE self, AGSurface const &p);
     virtual ~SwigDirector_AGSurface();
+    virtual void putPixel(int x, int y, AGColor const &c);
 };
 
 

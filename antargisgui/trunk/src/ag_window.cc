@@ -30,7 +30,8 @@
 #undef connect
 
 AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle):
-  AGTable(pWidget,pRect),mTitle(pTitle)
+  AGTable(pWidget,pRect),mTitle(pTitle),sigClose(this,"sigClose")
+
 {
   //  CTRACE;
   AGSurface s=getTheme()->getSurface("window.border.image");
@@ -77,7 +78,8 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
       AGTable::addChild(1,3,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,2*bw,bw,bw)));
       AGTable::addChild(2,3,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,2*bw,bw,bw)));
       
-      AGTable::addChild(1,2,mClient=new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,bw,bw,bw)));
+      AGTable::addChild(1,2,mClient=new AGCaption(this,AGRect(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
+      //      AGTable::addChild(1,2,mClient=new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,bw,bw,bw)));
     }
   else
     {
@@ -100,7 +102,8 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
       AGTable::addChild(1,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,2*bw,bw,bw)));
       AGTable::addChild(2,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,2*bw,bw,bw)));
       
-      AGTable::addChild(1,1,mClient=new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,bw,bw,bw)));
+      AGTable::addChild(1,1,mClient=new AGCaption(this,AGRect(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
+      //      AGTable::addChild(1,1,mClient=new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,bw,bw,bw)));
     }
 
   arrange();
@@ -160,10 +163,10 @@ AGWidget *AGWindow::getTitleBar()
   t->addFixedColumn(20);//close button
   
   //  t->addChild(0,0,title=new AGButton(t,AGRect(0,0,0,0),mTitle));
-  t->addChild(0,0,title=new AGCaption(t,AGRect(0,0,0,0),mTitle,getTheme()->getFont("window.title.font"),AGBackground("menu.background.normal")));
+  t->addChild(0,0,title=new AGCaption(t,AGRect(0,0,0,0),mTitle,getTheme()->getFont("window.title.font"),AGBackground("window.title.background")));
   t->addChild(1,0,closeButton=new AGButton(t,AGRect(0,0,20,20),"aa"));
   closeButton->setSurface(getTheme()->getSurface("window.buttons.close"),false);
-
+  title->setName("title"); // FIXME: maybe name getName()+".title"
 
   //  AGListener 
   closeButton->sigClick.connect(slot(this,&AGWindow::tryClose));
@@ -175,11 +178,21 @@ bool AGWindow::tryClose(const char*pName,const AGEvent *m)
 {
   TRACE;
   hide();
+  sigClose(m);
   return false;
 }
 
+void AGWindow::close()
+{
+  hide();
+}
 
 AGRect AGWindow::getClientRect() const
 {
   return const_cast<AGWindow*>(this)->getClient()->getClientRect()+mClient->getRect().getPosition();
+}
+
+AGWindow &toAGWindow(AGWidget &w)
+{
+  return dynamic_cast<AGWindow&>(w);
 }

@@ -155,11 +155,17 @@ AGSurface &AGSurface::operator=(const AGSurface &p)
 }
 
 
-/*
+
 void AGSurface::putPixel(int x,int y,const AGColor &c)
 {
+  //  CTRACE;
   sge_PutPixel(s,x,y,color(c));
-}*/
+}
+
+AGColor AGSurface::getPixel(int x,int y) const
+{
+  return AGColor(sge_GetPixel(s,x,y),*this);
+}
 
 
 

@@ -746,6 +746,8 @@ void AGEdit::setFont(const AGFont &pFont)
 
 void AGEdit::setText(const std::string &pText)
 {
+  clear();
+
   size_t i;
   for(i=0;i<pText.length();i++)
     {
@@ -809,4 +811,21 @@ void AGEdit::setTheme(const std::string &s)
 bool AGEdit::canFocus() const
 {
   return mMutable;
+}
+
+AGEdit &toAGEdit(AGWidget &w)
+{
+  return dynamic_cast<AGEdit&>(w);
+}
+
+void AGEdit::clear()
+{
+  mLines.clear();
+  mCx=mCy=0;
+  mViewCy=0;
+  AGFont font1("Arial.ttf",14);
+  AGEditLine l("",font1,true);
+  l.setAlign(mAlign);
+  l.setVAlign(mVAlign);
+  mLines.push_back(l);
 }

@@ -27,25 +27,29 @@
 AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
 {
   AGTheme *theme=getTheme();
+  mColor=false;
   if(theme->hasSurface(pThemeName+".image"))
     {
       CTRACE;
       mSurface=AGTexture(theme->getSurface(pThemeName+".image"));
       mSurfaceFlag=true;
     }
-  else
+  else if(theme->hasColor(pThemeName+"."+std::string("gradientColor1")))
     {
+      mColor=true;
       mColors[0]=theme->getColor(pThemeName+"."+std::string("gradientColor1"));
       mColors[1]=theme->getColor(pThemeName+"."+std::string("gradientColor2"));
       mColors[2]=theme->getColor(pThemeName+"."+std::string("gradientColor3"));
       mColors[3]=theme->getColor(pThemeName+"."+std::string("gradientColor4"));
     }
+  mBorder=theme->getInt(pThemeName+"."+std::string("border"));
 }
 
 void AGBackground::draw(AGPainter &p)
 {
   if(mSurfaceFlag)
-    p.tile(mSurface);
-  else
-    p.drawGradient(p.getRect(),mColors[0],mColors[1],mColors[2],mColors[3]);
+    p.tile(mSurface,p.getRect().shrink(mBorder));
+  else if(mColor)
+    p.drawGradient(p.getRect().shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
+ 
 }

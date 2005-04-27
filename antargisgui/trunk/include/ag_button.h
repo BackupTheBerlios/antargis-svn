@@ -24,6 +24,7 @@
 #include "ag_widget.h"
 #include "ag_surface.h"
 #include "ag_background.h"
+#include "ag_border.h"
 
 #include <iostream>
 #include <map>
@@ -78,6 +79,7 @@ class AGButton:public AGWidget
   bool lower;
 
   std::map<State,AGBackground> mBG;
+  std::map<State,AGBorder> mBorder;
   bool mEnabled;
 };
 

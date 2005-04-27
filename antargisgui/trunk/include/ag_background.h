@@ -40,6 +40,8 @@ class AGBackground
   AGColor mColors[4];
 
   bool mSurfaceFlag;
+  bool mColor;
+  int mBorder;
 };
 
 #endif

@@ -24,6 +24,7 @@
 #include "ag_theme.h"
 #include "ag_debug.h"
 #include "ag_image.h"
+#include "ag_border.h"
 
 using namespace std;
 
@@ -48,12 +49,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   addChild(mTextW);
 
   setTheme("");
-  /*
-  mBG[NORMAL]=AGBackground("button.background.normal");
-  mBG[PRESSED]=AGBackground("button.background.pressed");
-  mBG[LIGHTED]=AGBackground("button.background.lighted");
-  mBG[CHECKED]=AGBackground("button.background.checked");
-  */
+
   cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
 }
@@ -90,6 +86,7 @@ void AGButton::draw(AGPainter &p)
   AGPainter p2(p);
   p2.transform(AGRect(0,0,width(),height()).shrink(borderWidth));
   mBG[mState].draw(p2);
+  mBorder[mState].draw(p2);
 
   if(borderWidth==0)
     return;
@@ -217,6 +214,12 @@ void AGButton::setTheme(const std::string &pTheme)
   mBG[PRESSED]=AGBackground(mTheme+"button.background.pressed");
   mBG[LIGHTED]=AGBackground(mTheme+"button.background.lighted");
   mBG[CHECKED]=AGBackground(mTheme+"button.background.checked");
-  if(mTextW)
+
+  mBorder[NORMAL]=AGBorder(mTheme+"button.border.normal");
+  mBorder[PRESSED]=AGBorder(mTheme+"button.border.pressed");
+  mBorder[LIGHTED]=AGBorder(mTheme+"button.border.lighted");
+  mBorder[CHECKED]=AGBorder(mTheme+"button.border.checked");
+
+    if(mTextW)
     mTextW->setTheme(mTheme+"button.text");
 }

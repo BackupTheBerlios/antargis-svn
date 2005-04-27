@@ -92,6 +92,8 @@ class AGEdit:public AGWidget
   void setText(const std::string &pText);
   void setFont(const AGFont &pFont);
 
+  void clear();
+
   void setMutable(bool pMutable);
 
   void setAlign(AGAlign pAlign);
@@ -138,5 +140,6 @@ class AGEdit:public AGWidget
   bool mDrawBackground;
 };
 
+AGEdit &toAGEdit(AGWidget &w);
 
 #endif

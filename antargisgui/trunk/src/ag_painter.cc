@@ -112,7 +112,10 @@ std::pair<AGRect,AGRect> AGPainter::clip(const AGRect &from,const AGRect &to) co
 void AGPainter::putPixel(const AGPoint &p,const AGColor &c)
 {
   if(!inRect(p))
-    return;
+    {
+      cdebug("CANCEL PUTPIXEL");
+      return;
+    }
   AGPoint p2=move(p);
   mTarget.putPixel(p.x,p.y,c);
 }

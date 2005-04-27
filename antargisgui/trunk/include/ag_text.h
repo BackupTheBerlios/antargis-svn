@@ -44,4 +44,6 @@ class AGText:public AGWidget
   bool mFixedSize;
 };
 
+AGText &toAGText(AGWidget &w);
+
 #endif

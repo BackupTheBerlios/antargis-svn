@@ -91,3 +91,8 @@ std::string AGText::getText() const
 {
   return mText;
 }
+
+AGText &toAGText(AGWidget &w)
+{
+  return dynamic_cast<AGText&>(w);
+}

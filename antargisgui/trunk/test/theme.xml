@@ -61,14 +61,30 @@
 	
 	<window>
 		<border>
-			<image name="image" file="win_border.png"/>
+			<image name="image" file="buttontest3.png" file2="win_border.png"/>
 		</border>
 		<title>
-			<font name="font" file="Arial.ttf" size="16" color='#000000'/>
+			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
+			<background>
+				<value name="border" value="0"/>
+				<color name='gradientColor1' color='#54555b'/>
+				<color name='gradientColor2' color='#3c3d41'/>
+				<color name='gradientColor3' color='#3c3d41'/>
+				<color name='gradientColor4' color='#12141c'/>
+			</background>
 		</title>
 		<buttons>
 			<image name="close" file="close_button.png"/>
 		</buttons>
+		<background>
+			<value name="border" value="0"/>
+			<image name="image" file="oldpaper.png"/>
+			<!--
+			<color name='gradientColor1' color='#54555b'/>
+			<color name='gradientColor2' color='#3c3d41'/>
+			<color name='gradientColor3' color='#3c3d41'/>
+			<color name='gradientColor4' color='#12141c'/>-->
+		</background>
 	</window>
 	
 	
@@ -114,4 +130,53 @@
 			</text>
 		</button>
 	</niceRound>
+	
+	<antButton>
+		<button>
+			<border>
+				<normal>
+					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+				</normal>
+				<lighted>
+					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+				</lighted>
+				<pressed>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</pressed>
+				<checked>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</checked>
+			</border>
+			<background>
+				<normal>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</normal>
+				<lighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#403a6b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</lighted>
+				<pressed>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#403a6b'/>
+					<color name='gradientColor2' color='#12141c'/>
+					<color name='gradientColor3' color='#403a6b'/>
+					<color name='gradientColor4' color='#3c3d41'/>
+				</pressed>
+				<checked>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</checked>
+			</background>
+		</button>
+	</antButton>
 </theme>

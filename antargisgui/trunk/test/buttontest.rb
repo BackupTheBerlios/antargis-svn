@@ -36,9 +36,13 @@ main.changeRes(640,480,32,false,true)
 
 app=TestApp.new(false)
 
-button=AGButton.new(nil,AGRect.new(0,0,200,100),"text")
+sc=AGScreenWidget.new
+
+button=AGButton.new(sc,AGRect.new(0,0,200,100),"text")
 b2=AGButton.new(button,AGRect.new(10,10,60,40),"text2")
+b2.setTheme("antButton")
 #button.setText("huhu")
 button.addChild(b2)
-app.setMainWidget(button)
+sc.addChild(button)
+app.setMainWidget(sc)
 app.run
