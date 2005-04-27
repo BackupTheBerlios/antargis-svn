@@ -250,7 +250,7 @@ void drawTree(FastVoxelView &vv,Pos3D base,float h,float angle=M_PI/1.5,float st
               Trunk nt(sp,
                        sp*0.5+np*0.5+getRandPos(rw),
                        np,
-                       k->w2,std::max(1.0,k->w2-1.2));
+                       (int)(k->w2),(int)(std::max(1.0,k->w2-1.2)));
               nlist.push_back(nt);
 
 

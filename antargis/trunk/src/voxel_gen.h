@@ -21,7 +21,7 @@
 #ifndef __VOXEL_GEN_H__
 #define __VOXEL_GEN_H__
 
-#include <ag_gsurface.h>
+#include <ag_surface.h>
 #include <ag_widget.h>
 
 #include "decast.h"
@@ -90,7 +90,7 @@ class AVItem
   }
   
 //  virtual void draw(const Pos3D &diff,const AGRect &r);
-  virtual void draw(AntargisView *view,const AGRect &r);
+  virtual void draw(AntargisView *view,AGPainter &p);//7const AGRect &r);
 
 
  private:
@@ -118,7 +118,7 @@ class AntargisView:public AGWidget
   
   AGRect getRect(AVItem *item) const;
 
-  void draw(const AGRect &r);
+  void draw(AGPainter &p);//const AGRect &r);
   void insert(AVItem *v);
   
   void clear();
@@ -140,7 +140,7 @@ class VoxelImage:public AVItem
   void save(const std::string &pFilename);
 
   void setName(const std::string &pName);
-  virtual void draw(AntargisView *view,const AGRect &r);
+  virtual void draw(AntargisView *view,AGPainter &p);//const AGRect &r);
   
   void cutBorders();
 

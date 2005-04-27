@@ -41,6 +41,10 @@ class Bitmap:public std::vector<T>
   public:
     int w,h;
   public:
+    Bitmap()
+      {
+	w=h=0;
+      }
     Bitmap(int W,int H):std::vector<T>(W*H),
         w(W),h(H)
     {}
@@ -270,6 +274,10 @@ class SplineMap
     RandomMap rMap;
     bool realRandom;
   public:
+    SplineMap()
+      {
+	w=h=0;
+      }
     SplineMap(int W,int H,int tile,int pmin,int pmax,bool rrand=false):
         values(W,H),w(W),h(H),
 #ifdef EDITING

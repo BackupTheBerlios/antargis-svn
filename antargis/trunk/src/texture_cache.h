@@ -21,7 +21,7 @@
 #ifndef __TEXTURE_CACHE_H__
 #define __TEXTURE_CACHE_H__
 
-#include "ag_gsurface.h"
+#include "ag_surface.h"
 #include "ag_debug.h"
 #include <ag_fs.h>
 

@@ -22,6 +22,8 @@
 #include "voxel.h"
 #include <ag_fs.h>
 #include <cstdlib>
+#include "entities.h"
+
 
 /************************************************************************
 * AntargisMap
@@ -41,7 +43,7 @@ AntargisMap::AntargisMap(int w,int h):
     mEntities(Rect2D(0,0,w*TILE_SIZE,h*TILE_SIZE)),mW(w),mH(h)
 {
   myAntargisMap=this;
-  paused=false;
+  mPaused=false;
   maxID=0;
 }
 
@@ -139,7 +141,7 @@ std::list<AntEntity*> AntargisMap::getEntities(const AntRect&r)
 
 void AntargisMap::move(float pTime)
 {
-  if(paused)
+  if(mPaused)
     return;
   // first move computer-players (they decide what to do)
 

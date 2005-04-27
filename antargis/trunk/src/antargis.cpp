@@ -37,6 +37,7 @@
 
 #include "map.h"
 #include "view.h"
+#include "entities.h"
 
 #include <exception>
 #include <iostream>

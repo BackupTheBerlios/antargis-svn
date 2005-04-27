@@ -29,6 +29,7 @@ struct Pos3D
   float x,y,z;
 
   Pos3D(float px,float py,float pz);
+  Pos3D();
 
   bool operator<(const Pos3D &p) const;
   Pos3D operator+(const Pos3D &p) const;
@@ -155,6 +156,7 @@ struct Pos2D
   float x,y;
   
   Pos2D(float px,float py);
+  Pos2D();
   Pos2D(const std::string &s)
   {
     char c;

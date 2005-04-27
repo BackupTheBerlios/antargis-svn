@@ -69,7 +69,7 @@ void Rain::addRain(int amount,bool r)
     }
 }
 
-void Rain::draw(const AGRect&)
+void Rain::draw(AGPainter &p)
 {
   move();
   std::list<AGPoint>::iterator i=rainSprites.begin();

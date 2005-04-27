@@ -21,6 +21,7 @@
 #include <ag_color.h>
 #include "minimap.h"
 #include "map.h"
+#include "entities.h"
 
 #include <ag_layoutfactory.h>
 
@@ -32,7 +33,8 @@ MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRec
 {
   mustUpdate=true;
   update();
-  mBG=AGTexture(getScreen().loadSurface("data/minimap_bg.png"));
+
+  mBorder=AGBorder("antButton.button.border.normal");
 }
 
 void MiniMap::drawEntities(const AGPoint &p0)
@@ -67,7 +69,7 @@ void MiniMap::update()
 {
 //  CTRACE;
   mustUpdate=true;
-  AGSurfacePainter p(mSurface);
+  AGPainter p(mSurface);
   float mx,my;
   
   Pos2D maxPos=mMap->getMaxPos();
@@ -85,37 +87,33 @@ void MiniMap::update()
       
       
       if(mMap->getHeight(Pos2D(mx,my))<10)
-        p.putPixel(x,mSurface.height()-1-y,AGColor(0,0,(int)(0xFF*l),MINIMAP_ALPHA));
+        p.putPixel(AGPoint(x,mSurface.height()-1-y),AGColor(0,0,(int)(0xFF*l),MINIMAP_ALPHA));
       else
-        p.putPixel(x,mSurface.height()-1-y,AGColor(0,(int)(MINIMAP_GREEN*l),0,MINIMAP_ALPHA));
+        p.putPixel(AGPoint(x,mSurface.height()-1-y),AGColor(0,(int)(MINIMAP_GREEN*l),0,MINIMAP_ALPHA));
     }
   }
 }
 
-void MiniMap::draw(const AGRect &r)
+void MiniMap::draw(AGPainter &p)//const AGRect &r)
 {
 //  CTRACE;
-  AGRect mr=r.project(getRect());
+  AGRect mr=getRect();
   if(mustUpdate)
     mTexture=AGTexture(mSurface);
   mustUpdate=false;
-  getScreen().blit(mBG,mr);
+  mBorder.draw(p);
+  //  p.blit(mBG,p.getRect());//,mr);
   mr.x+=8;
   mr.y+=8;
   mr.w-=16;
   mr.h-=16;
   
-  getScreen().blit(mTexture,mr);
+  p.blit(mTexture,getRect());
+  p.blit(mTexture,mr);
+
+  cdebug(mTexture.getRect());
   
   drawEntities(mr.getPosition());
-/*
-  // draw viewing Rect  
-  float sx0=mViewRect.x;
-  
-  AGRect vr(;
-  vr=
-  
-  getScreen().drawRect(AGRect(*/
 }
 
 

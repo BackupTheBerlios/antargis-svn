@@ -39,6 +39,10 @@ class RandomMap
   int mMax;
   int mVar;
   public:
+  RandomMap()
+    {
+      mMax=mVar=1;
+    }
   RandomMap(int pMax,int pVar=1):mMax(pMax),mVar(pVar)
   {
     for(int i=0;i<mMax*mVar;i++)

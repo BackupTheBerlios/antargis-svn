@@ -24,6 +24,7 @@
 
 #include <ag_color.h>
 #include <ag_fontengine.h>
+#include <ag_painter.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -187,11 +188,11 @@ int AVItem::getZ(const Pos3D &pPos) const
     return (int)(mPos.z-pPos.z-virtualY);//-(mTexture.height()-mCenter.y);
   }
 
-void AVItem::draw(AntargisView *view,const AGRect &r)
+void AVItem::draw(AntargisView *view,AGPainter &p)//const AGRect &r)
 {
   AGRect ar=view->getRect(this);
-  ar=r.project(ar);
-  getScreen().blit(getTexture(),ar);
+  //  ar=r.project(ar);
+  p.blit(getTexture(),ar);
 }
 
 
@@ -219,16 +220,16 @@ class CompareAVItem
       }
   };
 
-void AntargisView::draw(const AGRect &r)
+void AntargisView::draw(AGPainter &p)//const AGRect &r)
 {
-  AGRect mr=r.project(AGWidget::getRect());
+  //  AGRect mr=r.project(AGWidget::getRect());
   std::vector<AVItem*>::iterator i;
 
   std::sort(mItems.begin(),mItems.end(),CompareAVItem(mPos));
 
   for(i=mItems.begin();i!=mItems.end();i++)
     {
-      (*i)->draw(this,mr);
+      (*i)->draw(this,p);
     }
 }
 
@@ -295,16 +296,16 @@ void VoxelImage::setName(const std::string &pName)
   {
     mName=pName;
   }
-void VoxelImage::draw(AntargisView *view,const AGRect &r)
+void VoxelImage::draw(AntargisView *view,AGPainter &p)//const AGRect &r)
 {
-  AVItem::draw(view,r);
+  AVItem::draw(view,p);
   if(mName.length())
   {
     AGRect ar=view->getRect(this);
-    ar=r.project(ar);
+    //    ar=r.project(ar);
   
     ar.y-=14;
-    AGFontEngine::renderText(&getScreen(),ar,ar.x,ar.y,mName,AGFont("data/Arial.ttf",13));
+    p.renderText(mName,AGPoint(ar.x,ar.y),AGFont("data/Arial.ttf",13));
   }
 }
 
@@ -316,7 +317,7 @@ void VoxelImage::init()
 // returns diff from uppper left corner
 void VoxelImage::cutBorders()
 {
-  AGSurfacePainter p(mSurface);
+  AGPainter p(mSurface);
   int minx,miny,maxx,maxy;
   bool found=false;
   
@@ -366,7 +367,7 @@ void VoxelImage::cutBorders()
     std::cerr<<"Error cutting! "<<w<<","<<h<<std::endl;
     
   AGSurface ns(w,h);
-  AGSurfacePainter p2(ns);
+  AGPainter p2(ns);
   p2.blit(mSurface,AGRect(0,0,w,h),AGRect(minx,miny,w,h));
   mSurface=ns;
   mCenter=mCenter-Pos2D(minx,miny);

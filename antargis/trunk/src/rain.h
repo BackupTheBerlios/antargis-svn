@@ -22,7 +22,8 @@
 #define __RAIN_H__
 
 #include <list>
-#include <ag_gsurface.h>
+#include <ag_surface.h>
+#include <ag_painter.h>
 
 class Rain
 {
@@ -39,7 +40,7 @@ class Rain
   Rain(int W,int H,int amount);
   virtual ~Rain();
   void addRain(int amount,bool r=false);
-  virtual void draw(const AGRect&);
+  virtual void draw(AGPainter &p);
   void move();
 };
 

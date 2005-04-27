@@ -22,7 +22,8 @@
 #define __MINIMAP_H__
 
 #include <ag_widget.h>
-#include <ag_gsurface.h>
+#include <ag_surface.h>
+#include <ag_border.h>
 
 class AntargisMap;
 
@@ -31,7 +32,7 @@ class MiniMap:public AGWidget
   public:
     MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect);
 
-    virtual void draw(const AGRect &r);
+    virtual void draw(AGPainter &p);
 
     void update();
     void drawEntities(const AGPoint &p0);
@@ -42,7 +43,8 @@ class MiniMap:public AGWidget
   private:
     AntargisMap *mMap;
     AGTexture mTexture;
-    AGTexture mBG;
+    //    AGTexture mBG;
+    AGBorder mBorder;
     AGSurface mSurface;
     bool mustUpdate;
     AGRect mViewRect;

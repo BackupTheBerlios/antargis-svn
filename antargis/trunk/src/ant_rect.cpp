@@ -20,6 +20,10 @@
 
 #include "ant_rect.h"
 
+Rect2D::Rect2D():x(0),y(0),w(0),h(0)
+{
+}
+
 Rect2D::Rect2D(int X,int Y,int W,int H):
   x(X),y(Y),w(W),h(H)
 {

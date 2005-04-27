@@ -28,6 +28,7 @@ struct Rect2D
 {
   int x,y,w,h;
 
+  Rect2D();
   Rect2D(int X,int Y,int W,int H);
   Rect2D(const AntRect &r);
 

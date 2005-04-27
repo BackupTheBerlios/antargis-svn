@@ -26,17 +26,18 @@
 #include <math.h>
 #include <ag_button.h>
 
+struct IVTile
+{
+  int x,y;
+  bool operator<(const IVTile &t) const
+  {
+    return x<t.x || (x==t.x && y<t.y);
+  }
+};
+
 class IsoView:public AntargisView
   {
   public:
-    struct IVTile
-      {
-        int x,y;
-        bool operator<(const IVTile &t) const
-        {
-          return x<t.x || (x==t.x && y<t.y);
-        }
-      };
   private:
 
     AntargisMap *mMap;
@@ -82,7 +83,7 @@ class IsoView:public AntargisView
     IVTile getTile(const AGPoint &pp);
 
   protected:
-    virtual void draw(const AGRect &r);
+    virtual void draw(AGPainter &p);//const AGRect &r);
     void updatePositions();
 
     AGColor getSelectColor();

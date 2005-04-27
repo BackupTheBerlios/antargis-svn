@@ -23,6 +23,7 @@
 #include <ag_color.h>
 #include <ag_button.h>
 #include "tree.h"
+#include "entities.h"
 
 #include <ag_layout.h>
 #include <ag_tools.h>
@@ -282,7 +283,7 @@ std::list<AntEntity *> IsoView::getEntity(const AGPoint &pp)
   return found;
 }
 
-IsoView::IVTile IsoView::getTile(const AGPoint &pp)
+IVTile IsoView::getTile(const AGPoint &pp)
 {
 
   AntEntity *found=0;
@@ -308,7 +309,7 @@ IsoView::IVTile IsoView::getTile(const AGPoint &pp)
   return IVTile();
 }
 
-void IsoView::draw(const AGRect &r)
+void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
   if(!inited)
     {
@@ -327,7 +328,7 @@ void IsoView::draw(const AGRect &r)
   doTick();
   mTime+=getTimeDiff();
 
-  AntargisView::draw(r);
+  AntargisView::draw(p);
 
   // overlay selection-rectangle and energy
 
@@ -336,25 +337,25 @@ void IsoView::draw(const AGRect &r)
   for(;i!=mSelected.end() ;i++)
     {
       AGRect ar=getRect(*i);
-      ar=r.project(ar);
-      getScreen().drawRect(ar,getSelectColor());
+      //      ar=r.project(ar);
+      p.drawRect(ar,getSelectColor());
     }
 
   std::map<AVItem*,AntEntity*>::iterator k=mEntities.end();// FIXME: don't draw anything ATM begin();
   for(;k!=mEntities.end();k++)
     {
       AGRect ar=getRect(k->first);
-      ar=r.project(ar);
+      //      ar=r.project(ar);
       // draw energy
       ar.y-=10;
       ar.h=6;
-      getScreen().drawRect(ar,AGColor(0xFF,0,0)); // first red
+      p.drawRect(ar,AGColor(0xFF,0,0)); // first red
       ar.w=(short)(ar.w*k->second->getEnergy());
-      getScreen().drawRect(ar,AGColor(0,0xFF,0)); // overpaint with green
+      p.drawRect(ar,AGColor(0,0xFF,0)); // overpaint with green
     }
 
   // overlay rain
-  mRain.draw(r);
+  mRain.draw(p);
 }
 
 void IsoView::updatePositions()
@@ -538,7 +539,7 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   mOldPoint=0;
   mShowPoints=true;
   mEditing=false;
-  AGButton *b;
+  //  AGButton *b;
 
   char *editNames[]={"edit1.png","edit2.png","edit3.png","edit4.png","edit5.png","edit10.png","edit15.png",""};
   int editSizes[]={1,2,3,4,5,10,15};
