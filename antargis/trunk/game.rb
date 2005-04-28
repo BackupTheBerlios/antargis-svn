@@ -28,7 +28,9 @@ require 'antApp.rb'
 include Libantargisruby
 include Libantargis
 
-
+#
+# Story talking window - appearance defined in storytalk.xml
+#
 class AntStoryTalk<AGLayout
 	include AGHandler
 	def initialize(parent)
@@ -44,6 +46,7 @@ class AntStoryTalk<AGLayout
 		# it's AGText # FIXME: maybe exchange all AGText usages by AGEdit
 		toAGText(getChild("title")).setText(text)
 	end
+	
 	# signals	
 	def sigClose(eventName,callerName,event,caller)
 		puts "pCaller:"+callerName
@@ -52,10 +55,47 @@ class AntStoryTalk<AGLayout
 	end
 end
 
+class AntDialog<AGLayout
+	include AGHandler
+	def initialize(parent,filename)
+		super(parent,loadFile(filename))
+		addHandler(getChild("ok"),:sigClick,:sigOk)
+		addHandler(getChild("cancel"),:sigClick,:sigCancel)
+		#setModal(true)
+	end
+	def sigOk(eventName,callerName,event,caller)
+	end
+	def sigCancel(eventName,callerName,event,caller)
+		hide
+	end
+end
+
+class AntQuitDialog<AntDialog
+	def initialize(parent)
+		super(parent,"quitquery.xml")
+		setName("QuitDialog")
+	end
+	def sigOk(eventName,callerName,event,caller)
+		$app.tryQuit
+	end
+end
+
+class AntPauseDialog<AntDialog
+	def initialize(parent)
+		super(parent,"pause.xml")
+		setName("PauseDialog")
+		getMap.pause
+	end
+	def sigOk(eventName,callerName,event,caller)
+		getMap.unpause
+		hide
+	end
+end
+
 class AntGameApp <AntApp
 	def initialize()
 		super()
-	
+		$app=self	
 		@map=AntargisMap.new(128,128)	
 		# load a level
 		getMap().loadMap("dummy.antlvl")
@@ -74,23 +114,23 @@ class AntGameApp <AntApp
 		@story.setText(text)
 		@story.setTitle(title)
 	end
-	
 
 	def eventFrame(time)
 		getMap().move(time)
+		#GC.start
 		return true
 	end
 	
 	# signals	
 	def sigQuit(eventName,callerName,event,caller)
 		puts "pCaller:"+callerName
-		tryQuit
-	end
-	# signals	
-	def sigPause(eventName,callerName,event,caller)
-		getMap.pause
-		#puts "pCaller:"+callerName
 		#tryQuit
+		@layout.addChild(AntQuitDialog.new(@layout))
+	end
+	def sigPause(eventName,callerName,event,caller)
+		if not getMap().paused then
+			@layout.addChild(AntPauseDialog.new(@layout))
+		end
 	end
 end
 

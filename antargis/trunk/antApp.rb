@@ -26,6 +26,9 @@ require 'antApp.rb'
 
 include Libantargisruby
 
+#
+# EVENT_HANDLERS
+#
 # this module adds simpler event handling to your ruby code
 # each slot should have for parameters: (eventname,callerName,eventItself,callerHimself)
 # add a slot by addHandler(object,:signalName,:slotName)
@@ -40,8 +43,12 @@ module AGHandler
 			@handlers={}
 		end
 		puts event
-		object.send(event).connect(self)
-		@handlers[object.getName+":"+event.to_s]=func
+		if object==nil then
+			puts "AGHandler.addHandler: does not exist!"
+		else
+			object.send(event).connect(self)
+			@handlers[object.getName+":"+event.to_s]=func
+		end
 	end
 	# event dispatcher
 	def signal(name,event,caller)
@@ -62,12 +69,7 @@ end
 class AntApp <AGApplication
 	include AGHandler
 	def initialize(autoexit=true)
-		@handlers={}
 		super()
-		
-		#example for Handler:
-		# c=$screen.getChild("quit")
-		# addHandler(c,:sigClick,:test2) 
 	end
 	def eventQuit(event)
 		puts "Quitting AntApp"
