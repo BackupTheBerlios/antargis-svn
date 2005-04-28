@@ -14341,6 +14341,21 @@ _wrap_AGWidget_getChild(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_setModal(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setModal(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGWidget_markfunc(int argc, VALUE *argv, VALUE self) {
     void *arg1 = (void *) 0 ;
     
@@ -23062,7 +23077,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSDLScreen.klass, "newSurface", VALUEFUNC(_wrap_AGSDLScreen_newSurface), -1);
     rb_define_method(cAGSDLScreen.klass, "loadSurface", VALUEFUNC(_wrap_AGSDLScreen_loadSurface), -1);
     rb_define_method(cAGSDLScreen.klass, "displayFormat", VALUEFUNC(_wrap_AGSDLScreen_displayFormat), -1);
-    cAGSDLScreen.mark = 0;
+    cAGSDLScreen.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGSDLScreen.destroy = (void (*)(void *)) free_AGSDLScreen;
     
     cAGEvent.klass = rb_define_class_under(mLibantargisruby, "AGEvent", rb_cObject);
@@ -23220,6 +23235,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "getName", VALUEFUNC(_wrap_AGWidget_getName), -1);
     rb_define_method(cAGWidget.klass, "setName", VALUEFUNC(_wrap_AGWidget_setName), -1);
     rb_define_method(cAGWidget.klass, "getChild", VALUEFUNC(_wrap_AGWidget_getChild), -1);
+    rb_define_method(cAGWidget.klass, "setModal", VALUEFUNC(_wrap_AGWidget_setModal), -1);
     cAGWidget.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGWidget.destroy = (void (*)(void *)) free_AGWidget;
     rb_define_module_function(mLibantargisruby, "toAGWidget", VALUEFUNC(_wrap_toAGWidget), -1);
@@ -23322,7 +23338,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGButton.klass, "getName", VALUEFUNC(_wrap_AGButton_getName), -1);
     rb_define_method(cAGButton.klass, "setEnabled", VALUEFUNC(_wrap_AGButton_setEnabled), -1);
     rb_define_method(cAGButton.klass, "setTheme", VALUEFUNC(_wrap_AGButton_setTheme), -1);
-    cAGButton.mark = 0;
+    cAGButton.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisruby, "disown_AGApplication", VALUEFUNC(_wrap_disown_AGApplication), -1);
     
@@ -23350,7 +23366,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGText.klass, "draw", VALUEFUNC(_wrap_AGText_draw), -1);
     rb_define_method(cAGText.klass, "setText", VALUEFUNC(_wrap_AGText_setText), -1);
     rb_define_method(cAGText.klass, "getText", VALUEFUNC(_wrap_AGText_getText), -1);
-    cAGText.mark = 0;
+    cAGText.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGText.destroy = (void (*)(void *)) free_AGText;
     rb_define_module_function(mLibantargisruby, "toAGText", VALUEFUNC(_wrap_toAGText), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGVTiler", VALUEFUNC(_wrap_disown_AGVTiler), -1);
@@ -23431,7 +23447,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_alloc_func(cAGScreenWidget.klass, _wrap_AGScreenWidget_allocate);
     rb_define_method(cAGScreenWidget.klass, "initialize", VALUEFUNC(_wrap_new_AGScreenWidget), -1);
     rb_define_method(cAGScreenWidget.klass, "draw", VALUEFUNC(_wrap_AGScreenWidget_draw), -1);
-    cAGScreenWidget.mark = 0;
+    cAGScreenWidget.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGScreenWidget.destroy = (void (*)(void *)) free_AGScreenWidget;
     rb_define_const(mLibantargisruby,"EDIT_LEFT", INT2NUM(EDIT_LEFT));
     rb_define_const(mLibantargisruby,"EDIT_RIGHT", INT2NUM(EDIT_RIGHT));
@@ -23491,7 +23507,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEdit.klass, "setBackground", VALUEFUNC(_wrap_AGEdit_setBackground), -1);
     rb_define_method(cAGEdit.klass, "setTheme", VALUEFUNC(_wrap_AGEdit_setTheme), -1);
     rb_define_method(cAGEdit.klass, "canFocus", VALUEFUNC(_wrap_AGEdit_canFocus), -1);
-    cAGEdit.mark = 0;
+    cAGEdit.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargisruby, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGCheckBox", VALUEFUNC(_wrap_disown_AGCheckBox), -1);
@@ -23542,7 +23558,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGTable.klass, "arrange", VALUEFUNC(_wrap_AGTable_arrange), -1);
     rb_define_method(cAGTable.klass, "setWidth", VALUEFUNC(_wrap_AGTable_setWidth), -1);
     rb_define_method(cAGTable.klass, "setHeight", VALUEFUNC(_wrap_AGTable_setHeight), -1);
-    cAGTable.mark = 0;
+    cAGTable.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGTable.destroy = (void (*)(void *)) free_AGTable;
     rb_define_module_function(mLibantargisruby, "disown_AGWindow", VALUEFUNC(_wrap_disown_AGWindow), -1);
     
@@ -23559,7 +23575,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWindow.klass, "getClientRect", VALUEFUNC(_wrap_AGWindow_getClientRect), -1);
     rb_define_method(cAGWindow.klass, "sigClose=", VALUEFUNC(_wrap_AGWindow_sigClose_set), -1);
     rb_define_method(cAGWindow.klass, "sigClose", VALUEFUNC(_wrap_AGWindow_sigClose_get), -1);
-    cAGWindow.mark = 0;
+    cAGWindow.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGWindow.destroy = (void (*)(void *)) free_AGWindow;
     rb_define_module_function(mLibantargisruby, "toAGWindow", VALUEFUNC(_wrap_toAGWindow), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGImage", VALUEFUNC(_wrap_disown_AGImage), -1);
@@ -23570,7 +23586,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGImage.klass, "initialize", VALUEFUNC(_wrap_new_AGImage), -1);
     rb_define_method(cAGImage.klass, "draw", VALUEFUNC(_wrap_AGImage_draw), -1);
     rb_define_method(cAGImage.klass, "setSurface", VALUEFUNC(_wrap_AGImage_setSurface), -1);
-    cAGImage.mark = 0;
+    cAGImage.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGImage.destroy = (void (*)(void *)) free_AGImage;
     rb_define_module_function(mLibantargisruby, "disown_AGCaption", VALUEFUNC(_wrap_disown_AGCaption), -1);
     
@@ -23580,7 +23596,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGCaption.klass, "initialize", VALUEFUNC(_wrap_new_AGCaption), -1);
     rb_define_method(cAGCaption.klass, "draw", VALUEFUNC(_wrap_AGCaption_draw), -1);
     rb_define_method(cAGCaption.klass, "setBackground", VALUEFUNC(_wrap_AGCaption_setBackground), -1);
-    cAGCaption.mark = 0;
+    cAGCaption.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGCaption.destroy = (void (*)(void *)) free_AGCaption;
     
     cAGBackground.klass = rb_define_class_under(mLibantargisruby, "AGBackground", rb_cObject);
@@ -23597,7 +23613,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_alloc_func(cAGLayout.klass, _wrap_AGLayout_allocate);
     rb_define_method(cAGLayout.klass, "initialize", VALUEFUNC(_wrap_new_AGLayout), -1);
     rb_define_method(cAGLayout.klass, "addTabIndex", VALUEFUNC(_wrap_AGLayout_addTabIndex), -1);
-    cAGLayout.mark = 0;
+    cAGLayout.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGLayout.destroy = (void (*)(void *)) free_AGLayout;
     rb_define_module_function(mLibantargisruby, "parseNode", VALUEFUNC(_wrap_parseNode), -1);
     rb_define_module_function(mLibantargisruby, "parseChildren", VALUEFUNC(_wrap_parseChildren), -1);
@@ -23689,7 +23705,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGDialog.klass, "eventOk", VALUEFUNC(_wrap_AGDialog_eventOk), -1);
     rb_define_method(cAGDialog.klass, "eventCancel", VALUEFUNC(_wrap_AGDialog_eventCancel), -1);
     rb_define_method(cAGDialog.klass, "eventClose", VALUEFUNC(_wrap_AGDialog_eventClose), -1);
-    cAGDialog.mark = 0;
+    cAGDialog.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGDialog.destroy = (void (*)(void *)) free_AGDialog;
     rb_define_module_function(mLibantargisruby, "initFS", VALUEFUNC(_wrap_initFS), -1);
     rb_define_module_function(mLibantargisruby, "loadFile", VALUEFUNC(_wrap_loadFile), -1);

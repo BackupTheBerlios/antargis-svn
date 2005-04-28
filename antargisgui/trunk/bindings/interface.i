@@ -36,7 +36,8 @@
 }*/
 
 
-%markfunc AGWidget "AGWidget_markfunc";
+/*%markfunc AGWidget "AGWidget_markfunc";
+%markfunc AGLayout "AGWidget_markfunc";*/
 %{
 #include "antargisgui.h"
 %}

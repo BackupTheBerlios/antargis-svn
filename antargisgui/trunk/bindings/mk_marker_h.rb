@@ -78,7 +78,9 @@ rlist.each {|x,y|
 	puts "	$action"
 	puts "	result->mRUBY=self;"
 	puts "  result->mRubyObject=true;"
-  puts "	printf(\"register:"+x+"\\n\");"
-  puts "}"
+	puts "	printf(\"register:"+x+"\\n\");"
+	puts "}"
+	puts "%markfunc "+x+" \"AGWidget_markfunc\""
+
 	end
 }

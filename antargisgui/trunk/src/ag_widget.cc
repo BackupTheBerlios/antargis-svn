@@ -50,6 +50,7 @@ AGWidget::~AGWidget()
 {
   CTRACE;
   cdebug(typeid(*this).name());
+  cdebug("Name:"<<getName());
   cdebug(getName());
   //  throw int();
 }
@@ -286,7 +287,8 @@ void AGWidget::addChild(AGWidget *w)
     {
       VALUE rubyAnimal = w->mRUBY;
       rb_gc_mark(rubyAnimal);
-    }
+      cdebug("mark:"<<w->getName());
+   }
 
 #endif
 }
@@ -658,6 +660,7 @@ void AGWidget_markfunc(void *ptr)
 	{
 	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
 	  rb_gc_mark(rubyAnimal);
+	  cdebug("mark:"<<cppAnimal->getName());
 	}
       AGWidget_markfunc(*i);
     }

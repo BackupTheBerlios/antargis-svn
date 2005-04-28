@@ -119,6 +119,7 @@ class AGWidget:public AGMessageObject
   void setName(const std::string &pName);
   AGWidget *getChild(const std::string &pName);
 
+  void setModal(bool pModal);
  private:
 
   void gainFocusDown(AGWidget *pWidget);
@@ -143,6 +144,7 @@ class AGWidget:public AGMessageObject
   AGPoint mOldMousePos;
 
   std::string mName;
+  bool mModal;
 
  protected:
   std::list<AGWidget*> mChildren;
