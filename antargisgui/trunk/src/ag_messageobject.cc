@@ -329,3 +329,8 @@ AGEvent *newEvent(AGListener *pCaller,const SDL_Event*s)
 {
   return new AGSDLEvent(pCaller,s);
 }
+
+AGSDLEvent &toAGSDLEvent(AGEvent &e)
+{
+  return dynamic_cast<AGSDLEvent&>(e);
+}

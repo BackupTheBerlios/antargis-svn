@@ -155,7 +155,7 @@ bool AGApplication::eventKeyDown(const AGEvent *m2)
       //      bool doInsert=false;
       if(k==SDLK_RETURN && ((mod&KMOD_LALT)||(mod&KMOD_RALT)))
 	getMain()->toggleFull();
-      else if(k==SDLK_ESCAPE)
+      else if(k==SDLK_F10)
 	tryQuit();
     }
   return false;

@@ -303,6 +303,17 @@ void AGWidget::clear()
   mChildren.clear();
 }
 
+void AGWidget::erase(AGWidget *w)
+{
+  std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),w);
+  if(i!=mChildren.end())
+    {
+      mToClear.push_back(w);
+      
+      mChildren.erase(i);
+    }
+}
+
 void AGWidget::addChildBack(AGWidget *w)
 {
   mChildren.push_back(w); // set on top
@@ -481,6 +492,25 @@ void AGWidget::setMenu(AGMenu *pMenu)
   mMenu=pMenu;
 }
 
+void AGWidget::gainCompleteFocus(AGWidget *pWidget)
+{
+#ifdef FOCUS_BY_SORT
+  if(mParent)
+    mParent->gainCompleteFocus(this);
+  if(pWidget)
+    {
+      //      cdebug(mChildren.size());
+      std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+      if(i!=mChildren.end())
+	{
+	  mChildren.erase(i);
+	  mChildren.push_front(pWidget);
+	}
+      //      cdebug(mChildren.size());
+    }
+#endif
+}
+
 void AGWidget::gainFocus(AGWidget *pWidget)
 {
 #ifdef FOCUS_BY_SORT
@@ -574,12 +604,19 @@ bool AGWidget::hasFocus(const AGWidget *pWidget)
     }
   if(mChildren.size()==0)
     return true; // some error
+  /*
+  cdebug("firstchild:"<<(*mChildren.begin())->getName());
+  cdebug("fc:"<<typeid(**mChildren.begin()).name());
+  cdebug("me:"<<getName());
+  cdebug("me:"<<typeid(*this).name());*/
   if(*mChildren.begin()==pWidget)
     {
       if(mParent)
 	return mParent->hasFocus(this); // ok - so go on and check if "this" has focus
       return true; // ok
     }
+  //  cdebug("no");
+
   return false;
 #else
   if(pWidget==0)

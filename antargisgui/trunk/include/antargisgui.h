@@ -49,6 +49,7 @@
 #include "ag_xml.h"
 #include "ag_dialog.h"
 #include "ag_fs.h"
+#include <SDL_keysym.h>
 
 #ifdef SWIG
 %include "ag_main.h"
@@ -79,6 +80,7 @@
 %include "ag_xml.h"
 %include "ag_dialog.h"
 %include "ag_fs.h"
+%include "/usr/include/SDL/SDL_keysym.h"
 #endif
 
 #endif

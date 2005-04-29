@@ -64,6 +64,30 @@ public:
 };
 
 
+class SwigDirector_AGEvent : public AGEvent, public Swig::Director {
+
+public:
+    SwigDirector_AGEvent(VALUE self, AGListener *pCaller);
+    virtual ~SwigDirector_AGEvent();
+};
+
+
+class SwigDirector_AGSDLEvent : public AGSDLEvent, public Swig::Director {
+
+public:
+    SwigDirector_AGSDLEvent(VALUE self, AGListener *pCaller, SDL_Event const *pEvent);
+    virtual ~SwigDirector_AGSDLEvent();
+};
+
+
+class SwigDirector_AGMouseEvent : public AGMouseEvent, public Swig::Director {
+
+public:
+    SwigDirector_AGMouseEvent(VALUE self, AGListener *pCaller, SDL_Event *pEvent);
+    virtual ~SwigDirector_AGMouseEvent();
+};
+
+
 class SwigDirector_AGListener : public AGListener, public Swig::Director {
 
 public:
@@ -327,6 +351,14 @@ class SwigDirector_AGTheme : public AGTheme, public Swig::Director {
 public:
     SwigDirector_AGTheme(VALUE self);
     virtual ~SwigDirector_AGTheme();
+};
+
+
+class SwigDirector_AGMenuEvent : public AGMenuEvent, public Swig::Director {
+
+public:
+    SwigDirector_AGMenuEvent(VALUE self, AGListener *pListener, std::string const &pName);
+    virtual ~SwigDirector_AGMenuEvent();
 };
 
 

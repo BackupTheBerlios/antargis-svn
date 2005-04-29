@@ -107,6 +107,7 @@ class AGWidget:public AGMessageObject
 
   /** should only be called by a child */
   void gainFocus(AGWidget *pWidget=0);
+  void gainCompleteFocus(AGWidget *pWidget=0);
 
 
   virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
@@ -120,6 +121,9 @@ class AGWidget:public AGMessageObject
   AGWidget *getChild(const std::string &pName);
 
   void setModal(bool pModal);
+
+  void erase(AGWidget *w);
+
  private:
 
   void gainFocusDown(AGWidget *pWidget);

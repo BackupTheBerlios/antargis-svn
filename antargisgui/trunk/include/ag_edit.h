@@ -24,6 +24,7 @@
 #include "ag_widget.h"
 #include "ag_font.h"
 #include "ag_surface.h"
+#include "ag_background.h"
 
 enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
 enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
@@ -127,7 +128,7 @@ class AGEdit:public AGWidget
 
   bool mWrapLines;
 
-  AGTexture mBackground;
+  AGBackground mBackground;
 
   AGFont mFont;
 
@@ -136,6 +137,8 @@ class AGEdit:public AGWidget
 
   bool mMutable;
   bool mDrawBackground;
+
+  std::string mTheme;
 };
 
 AGEdit &toAGEdit(AGWidget &w);

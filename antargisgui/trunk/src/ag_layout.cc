@@ -54,7 +54,11 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
     {
       CTRACE;
       cdebug(mTabIndices.size());
-      mTabIndices.begin()->second->gainFocus();
+      cdebug("GAINFOCUS::::::::::::");
+      AGWidget *w=mTabIndices.begin()->second;
+      cdebug(w->getName());
+      w->gainCompleteFocus(); // is ok, because till here layout isn't inserted into screen yet
+      //      assert(w->hasFocus());
     }
 }
 
@@ -100,6 +104,7 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 	}
       else
 	cdebug("ERRRRRRRRRRRRRRRRRRRRRRROR");
+
     }
 
   parseChildren(w,pNode);

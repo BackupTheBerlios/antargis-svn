@@ -279,7 +279,12 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   menu->addItem("Paste");
   setMenu(menu);
 
-  mBackground=AGTexture(getTheme()->getSurface("edit.background.image"));
+  //  mBackground=AGTexture(getTheme()->getSurface(mTheme+e("edit.background.image"));
+
+  std::string t=mTheme;
+  if(t.length())
+    t+=".";
+  mBackground=AGBackground(t+"edit.background");
   mDrawBackground=true;
   setTheme("edit");
 }
@@ -366,8 +371,13 @@ void AGEdit::draw(AGPainter &p)
 
 void AGEdit::drawBackground(AGPainter &p)
 {
+  //  CTRACE;
   if(mDrawBackground)
-    p.tile(mBackground,getRect());
+    {
+      //  CTRACE;
+      mBackground.draw(p);
+    }
+  //    p.tile(mBackground,getRect());
 }
 
 bool AGEdit::eventKeyUp(const AGEvent *m2)
@@ -804,7 +814,13 @@ void AGEdit::setTheme(const std::string &s)
 
   AGFont font=getTheme()->getFont(s+".font");
   setFont(font);
-  
+  mTheme=s;
+
+  std::string t=mTheme;
+  if(t.length())
+    t+=".";
+
+  mBackground=AGBackground(t+"background");
 }
 
 bool AGEdit::canFocus() const
@@ -828,3 +844,4 @@ void AGEdit::clear()
   l.setVAlign(mVAlign);
   mLines.push_back(l);
 }
+

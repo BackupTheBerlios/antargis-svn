@@ -34,7 +34,7 @@ class AGEvent
 {
  public:
   AGEvent(AGListener *pCaller);
-  ~AGEvent();
+  virtual ~AGEvent();
 
   AGListener *getCaller() const;
  private:
@@ -211,5 +211,6 @@ AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *,AGMessageOb
   return new AGSlot2<T>(base,f);
 }
 
+AGSDLEvent &toAGSDLEvent(AGEvent &e);
 
 #endif

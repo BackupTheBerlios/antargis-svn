@@ -854,8 +854,8 @@ type_error:
 #define  SWIGTYPE_p_AGApplication swig_types[8] 
 #define  SWIGTYPE_p_AGDialog swig_types[9] 
 #define  SWIGTYPE_p_SDL_Rect swig_types[10] 
-#define  SWIGTYPE_p_SDLMod swig_types[11] 
-#define  SWIGTYPE_p_AGButton swig_types[12] 
+#define  SWIGTYPE_p_AGButton swig_types[11] 
+#define  SWIGTYPE_p_SDLMod swig_types[12] 
 #define  SWIGTYPE_p_AGHTiler swig_types[13] 
 #define  SWIGTYPE_p_Document swig_types[14] 
 #define  SWIGTYPE_p_AGCPPListener swig_types[15] 
@@ -889,9 +889,9 @@ type_error:
 #define  SWIGTYPE_p_AGWidget swig_types[43] 
 #define  SWIGTYPE_p_ParserException swig_types[44] 
 #define  SWIGTYPE_p_AGCheckBox swig_types[45] 
-#define  SWIGTYPE_p_AGTable swig_types[46] 
-#define  SWIGTYPE_p_AGPoint swig_types[47] 
-#define  SWIGTYPE_p_AGFontEngine swig_types[48] 
+#define  SWIGTYPE_p_AGFontEngine swig_types[46] 
+#define  SWIGTYPE_p_AGTable swig_types[47] 
+#define  SWIGTYPE_p_AGPoint swig_types[48] 
 #define  SWIGTYPE_p_AGPainter swig_types[49] 
 #define  SWIGTYPE_p_AGEditLine swig_types[50] 
 #define  SWIGTYPE_p_std__ostringstream swig_types[51] 
@@ -904,8 +904,8 @@ type_error:
 #define  SWIGTYPE_p_AGColor swig_types[58] 
 #define  SWIGTYPE_p_AGTheme swig_types[59] 
 #define  SWIGTYPE_p_AGRadio swig_types[60] 
-#define  SWIGTYPE_p_unsigned_long swig_types[61] 
-#define  SWIGTYPE_p_AGFont swig_types[62] 
+#define  SWIGTYPE_p_AGFont swig_types[61] 
+#define  SWIGTYPE_p_unsigned_long swig_types[62] 
 static swig_type_info *swig_types[64];
 
 /* -------- TYPES TABLE (END) -------- */
@@ -1681,6 +1681,33 @@ SDL_Surface *SwigDirector_AGSDLScreen::newSurface(int x, int y) {
 }
 
 
+SwigDirector_AGEvent::SwigDirector_AGEvent(VALUE self, AGListener *pCaller): AGEvent(pCaller), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_AGEvent::~SwigDirector_AGEvent() {
+}
+
+SwigDirector_AGSDLEvent::SwigDirector_AGSDLEvent(VALUE self, AGListener *pCaller, SDL_Event const *pEvent): AGSDLEvent(pCaller, pEvent), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_AGSDLEvent::~SwigDirector_AGSDLEvent() {
+}
+
+SwigDirector_AGMouseEvent::SwigDirector_AGMouseEvent(VALUE self, AGListener *pCaller, SDL_Event *pEvent): AGMouseEvent(pCaller, pEvent), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_AGMouseEvent::~SwigDirector_AGMouseEvent() {
+}
+
 SwigDirector_AGListener::SwigDirector_AGListener(VALUE self): AGListener(), Swig::Director(self) {
     
 }
@@ -1690,6 +1717,7 @@ SwigDirector_AGListener::SwigDirector_AGListener(VALUE self): AGListener(), Swig
 bool SwigDirector_AGListener::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
     bool c_result ;
@@ -1699,7 +1727,12 @@ bool SwigDirector_AGListener::signal(char const *pName, AGEvent const *m, AGMess
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
     result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
     c_result = (bool) RTEST(result);
@@ -1722,6 +1755,7 @@ SwigDirector_AGCPPListener::~SwigDirector_AGCPPListener() {
 bool SwigDirector_AGCPPListener::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) const {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
     bool c_result ;
@@ -1731,7 +1765,12 @@ bool SwigDirector_AGCPPListener::signal(char const *pName, AGEvent const *m, AGM
         throw Swig::DirectorPureVirtualException();
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
     result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
     c_result = (bool) RTEST(result);
@@ -1747,6 +1786,7 @@ SwigDirector_AGMessageObject::SwigDirector_AGMessageObject(VALUE self): AGMessag
 
 bool SwigDirector_AGMessageObject::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1754,7 +1794,12 @@ bool SwigDirector_AGMessageObject::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1763,6 +1808,7 @@ bool SwigDirector_AGMessageObject::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1770,7 +1816,12 @@ bool SwigDirector_AGMessageObject::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1779,6 +1830,7 @@ bool SwigDirector_AGMessageObject::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1786,7 +1838,12 @@ bool SwigDirector_AGMessageObject::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1795,6 +1852,7 @@ bool SwigDirector_AGMessageObject::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1802,7 +1860,12 @@ bool SwigDirector_AGMessageObject::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1811,6 +1874,7 @@ bool SwigDirector_AGMessageObject::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1818,7 +1882,12 @@ bool SwigDirector_AGMessageObject::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1827,6 +1896,7 @@ bool SwigDirector_AGMessageObject::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1834,7 +1904,12 @@ bool SwigDirector_AGMessageObject::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1843,6 +1918,7 @@ bool SwigDirector_AGMessageObject::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1850,7 +1926,12 @@ bool SwigDirector_AGMessageObject::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1859,6 +1940,7 @@ bool SwigDirector_AGMessageObject::eventMouseMotion(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1866,7 +1948,12 @@ bool SwigDirector_AGMessageObject::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1875,6 +1962,7 @@ bool SwigDirector_AGMessageObject::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1882,7 +1970,12 @@ bool SwigDirector_AGMessageObject::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1891,6 +1984,7 @@ bool SwigDirector_AGMessageObject::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGMessageObject::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -1898,7 +1992,12 @@ bool SwigDirector_AGMessageObject::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -1927,6 +2026,7 @@ SwigDirector_AGMessageObject::~SwigDirector_AGMessageObject() {
 bool SwigDirector_AGMessageObject::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
     bool c_result ;
@@ -1936,7 +2036,12 @@ bool SwigDirector_AGMessageObject::signal(char const *pName, AGEvent const *m, A
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
     result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
     c_result = (bool) RTEST(result);
@@ -2033,6 +2138,7 @@ SwigDirector_AGWidget::~SwigDirector_AGWidget() {
 
 bool SwigDirector_AGWidget::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -2042,7 +2148,12 @@ bool SwigDirector_AGWidget::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -2052,6 +2163,7 @@ bool SwigDirector_AGWidget::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGWidget::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2059,7 +2171,12 @@ bool SwigDirector_AGWidget::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2068,6 +2185,7 @@ bool SwigDirector_AGWidget::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2075,7 +2193,12 @@ bool SwigDirector_AGWidget::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2084,6 +2207,7 @@ bool SwigDirector_AGWidget::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2091,7 +2215,12 @@ bool SwigDirector_AGWidget::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2100,6 +2229,7 @@ bool SwigDirector_AGWidget::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2107,7 +2237,12 @@ bool SwigDirector_AGWidget::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2132,6 +2267,7 @@ bool SwigDirector_AGWidget::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGWidget::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2139,7 +2275,12 @@ bool SwigDirector_AGWidget::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2148,6 +2289,7 @@ bool SwigDirector_AGWidget::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2155,7 +2297,12 @@ bool SwigDirector_AGWidget::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2164,6 +2311,7 @@ bool SwigDirector_AGWidget::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2171,7 +2319,12 @@ bool SwigDirector_AGWidget::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2180,6 +2333,7 @@ bool SwigDirector_AGWidget::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2187,7 +2341,12 @@ bool SwigDirector_AGWidget::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2196,6 +2355,7 @@ bool SwigDirector_AGWidget::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2203,7 +2363,12 @@ bool SwigDirector_AGWidget::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2212,6 +2377,7 @@ bool SwigDirector_AGWidget::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2219,7 +2385,12 @@ bool SwigDirector_AGWidget::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2228,6 +2399,7 @@ bool SwigDirector_AGWidget::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGWidget::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2235,7 +2407,12 @@ bool SwigDirector_AGWidget::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2284,6 +2461,7 @@ void SwigDirector_AGWidget::draw(AGPainter &p) {
 bool SwigDirector_AGWidget::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -2294,7 +2472,12 @@ bool SwigDirector_AGWidget::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -2518,6 +2701,7 @@ SwigDirector_AGButton::~SwigDirector_AGButton() {
 
 bool SwigDirector_AGButton::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -2527,7 +2711,12 @@ bool SwigDirector_AGButton::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -2537,6 +2726,7 @@ bool SwigDirector_AGButton::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGButton::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2544,7 +2734,12 @@ bool SwigDirector_AGButton::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2553,6 +2748,7 @@ bool SwigDirector_AGButton::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2560,7 +2756,12 @@ bool SwigDirector_AGButton::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2585,6 +2786,7 @@ bool SwigDirector_AGButton::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGButton::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2592,7 +2794,12 @@ bool SwigDirector_AGButton::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2601,6 +2808,7 @@ bool SwigDirector_AGButton::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2608,7 +2816,12 @@ bool SwigDirector_AGButton::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2617,6 +2830,7 @@ bool SwigDirector_AGButton::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2624,7 +2838,12 @@ bool SwigDirector_AGButton::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2633,6 +2852,7 @@ bool SwigDirector_AGButton::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2640,7 +2860,12 @@ bool SwigDirector_AGButton::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2649,6 +2874,7 @@ bool SwigDirector_AGButton::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2656,7 +2882,12 @@ bool SwigDirector_AGButton::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2665,6 +2896,7 @@ bool SwigDirector_AGButton::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2672,7 +2904,12 @@ bool SwigDirector_AGButton::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2681,6 +2918,7 @@ bool SwigDirector_AGButton::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2688,7 +2926,12 @@ bool SwigDirector_AGButton::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2697,6 +2940,7 @@ bool SwigDirector_AGButton::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2704,7 +2948,12 @@ bool SwigDirector_AGButton::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGButton::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2713,6 +2962,7 @@ bool SwigDirector_AGButton::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGButton::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2720,7 +2970,12 @@ bool SwigDirector_AGButton::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGButton::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2769,6 +3024,7 @@ void SwigDirector_AGButton::draw(AGPainter &p) {
 bool SwigDirector_AGButton::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -2779,7 +3035,12 @@ bool SwigDirector_AGButton::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -2916,6 +3177,7 @@ SwigDirector_AGApplication::SwigDirector_AGApplication(VALUE self): AGApplicatio
 
 bool SwigDirector_AGApplication::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2923,7 +3185,12 @@ bool SwigDirector_AGApplication::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2932,6 +3199,7 @@ bool SwigDirector_AGApplication::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2939,7 +3207,12 @@ bool SwigDirector_AGApplication::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2948,6 +3221,7 @@ bool SwigDirector_AGApplication::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2955,7 +3229,12 @@ bool SwigDirector_AGApplication::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2964,6 +3243,7 @@ bool SwigDirector_AGApplication::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2971,7 +3251,12 @@ bool SwigDirector_AGApplication::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2980,6 +3265,7 @@ bool SwigDirector_AGApplication::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -2987,7 +3273,12 @@ bool SwigDirector_AGApplication::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -2996,6 +3287,7 @@ bool SwigDirector_AGApplication::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3003,7 +3295,12 @@ bool SwigDirector_AGApplication::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3012,6 +3309,7 @@ bool SwigDirector_AGApplication::eventMouseMotion(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3019,7 +3317,12 @@ bool SwigDirector_AGApplication::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3028,6 +3331,7 @@ bool SwigDirector_AGApplication::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3035,7 +3339,12 @@ bool SwigDirector_AGApplication::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3060,6 +3369,7 @@ bool SwigDirector_AGApplication::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGApplication::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3067,7 +3377,12 @@ bool SwigDirector_AGApplication::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGApplication::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3076,6 +3391,7 @@ bool SwigDirector_AGApplication::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGApplication::eventKeyDown(AGEvent const *m2) {
     AGEvent * nc_tmp_m2 = const_cast<AGEvent *>(m2) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3083,7 +3399,12 @@ bool SwigDirector_AGApplication::eventKeyDown(AGEvent const *m2) {
     if (swig_get_up()) {
         return AGApplication::eventKeyDown(m2);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m2, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m2);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m2, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3124,6 +3445,7 @@ bool SwigDirector_AGApplication::eventIdle() {
 bool SwigDirector_AGApplication::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -3134,7 +3456,12 @@ bool SwigDirector_AGApplication::signal(char const *pName, AGEvent const *m, AGM
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -3236,6 +3563,7 @@ SwigDirector_AGText::~SwigDirector_AGText() {
 
 bool SwigDirector_AGText::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -3245,7 +3573,12 @@ bool SwigDirector_AGText::eventDragBy(AGEvent const *event, AGPoint const &pDiff
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -3255,6 +3588,7 @@ bool SwigDirector_AGText::eventDragBy(AGEvent const *event, AGPoint const &pDiff
 
 bool SwigDirector_AGText::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3262,7 +3596,12 @@ bool SwigDirector_AGText::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3271,6 +3610,7 @@ bool SwigDirector_AGText::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3278,7 +3618,12 @@ bool SwigDirector_AGText::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3287,6 +3632,7 @@ bool SwigDirector_AGText::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3294,7 +3640,12 @@ bool SwigDirector_AGText::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3303,6 +3654,7 @@ bool SwigDirector_AGText::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3310,7 +3662,12 @@ bool SwigDirector_AGText::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3335,6 +3692,7 @@ bool SwigDirector_AGText::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGText::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3342,7 +3700,12 @@ bool SwigDirector_AGText::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3351,6 +3714,7 @@ bool SwigDirector_AGText::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3358,7 +3722,12 @@ bool SwigDirector_AGText::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3367,6 +3736,7 @@ bool SwigDirector_AGText::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3374,7 +3744,12 @@ bool SwigDirector_AGText::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3383,6 +3758,7 @@ bool SwigDirector_AGText::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3390,7 +3766,12 @@ bool SwigDirector_AGText::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3399,6 +3780,7 @@ bool SwigDirector_AGText::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3406,7 +3788,12 @@ bool SwigDirector_AGText::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3415,6 +3802,7 @@ bool SwigDirector_AGText::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3422,7 +3810,12 @@ bool SwigDirector_AGText::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3431,6 +3824,7 @@ bool SwigDirector_AGText::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGText::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3438,7 +3832,12 @@ bool SwigDirector_AGText::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3487,6 +3886,7 @@ void SwigDirector_AGText::draw(AGPainter &p) {
 bool SwigDirector_AGText::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -3497,7 +3897,12 @@ bool SwigDirector_AGText::signal(char const *pName, AGEvent const *m, AGMessageO
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -3726,6 +4131,7 @@ SwigDirector_AGVTiler::~SwigDirector_AGVTiler() {
 
 bool SwigDirector_AGVTiler::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -3735,7 +4141,12 @@ bool SwigDirector_AGVTiler::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -3745,6 +4156,7 @@ bool SwigDirector_AGVTiler::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGVTiler::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3752,7 +4164,12 @@ bool SwigDirector_AGVTiler::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3761,6 +4178,7 @@ bool SwigDirector_AGVTiler::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3768,7 +4186,12 @@ bool SwigDirector_AGVTiler::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3777,6 +4200,7 @@ bool SwigDirector_AGVTiler::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3784,7 +4208,12 @@ bool SwigDirector_AGVTiler::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3793,6 +4222,7 @@ bool SwigDirector_AGVTiler::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3800,7 +4230,12 @@ bool SwigDirector_AGVTiler::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3825,6 +4260,7 @@ bool SwigDirector_AGVTiler::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGVTiler::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3832,7 +4268,12 @@ bool SwigDirector_AGVTiler::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3841,6 +4282,7 @@ bool SwigDirector_AGVTiler::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3848,7 +4290,12 @@ bool SwigDirector_AGVTiler::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3857,6 +4304,7 @@ bool SwigDirector_AGVTiler::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3864,7 +4312,12 @@ bool SwigDirector_AGVTiler::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3873,6 +4326,7 @@ bool SwigDirector_AGVTiler::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3880,7 +4334,12 @@ bool SwigDirector_AGVTiler::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3889,6 +4348,7 @@ bool SwigDirector_AGVTiler::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3896,7 +4356,12 @@ bool SwigDirector_AGVTiler::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3905,6 +4370,7 @@ bool SwigDirector_AGVTiler::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3912,7 +4378,12 @@ bool SwigDirector_AGVTiler::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3921,6 +4392,7 @@ bool SwigDirector_AGVTiler::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGVTiler::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -3928,7 +4400,12 @@ bool SwigDirector_AGVTiler::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -3977,6 +4454,7 @@ void SwigDirector_AGVTiler::draw(AGPainter &p) {
 bool SwigDirector_AGVTiler::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -3987,7 +4465,12 @@ bool SwigDirector_AGVTiler::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -4216,6 +4699,7 @@ SwigDirector_AGHTiler::~SwigDirector_AGHTiler() {
 
 bool SwigDirector_AGHTiler::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -4225,7 +4709,12 @@ bool SwigDirector_AGHTiler::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -4235,6 +4724,7 @@ bool SwigDirector_AGHTiler::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGHTiler::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4242,7 +4732,12 @@ bool SwigDirector_AGHTiler::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4251,6 +4746,7 @@ bool SwigDirector_AGHTiler::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4258,7 +4754,12 @@ bool SwigDirector_AGHTiler::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4267,6 +4768,7 @@ bool SwigDirector_AGHTiler::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4274,7 +4776,12 @@ bool SwigDirector_AGHTiler::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4283,6 +4790,7 @@ bool SwigDirector_AGHTiler::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4290,7 +4798,12 @@ bool SwigDirector_AGHTiler::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4315,6 +4828,7 @@ bool SwigDirector_AGHTiler::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGHTiler::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4322,7 +4836,12 @@ bool SwigDirector_AGHTiler::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4331,6 +4850,7 @@ bool SwigDirector_AGHTiler::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4338,7 +4858,12 @@ bool SwigDirector_AGHTiler::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4347,6 +4872,7 @@ bool SwigDirector_AGHTiler::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4354,7 +4880,12 @@ bool SwigDirector_AGHTiler::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4363,6 +4894,7 @@ bool SwigDirector_AGHTiler::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4370,7 +4902,12 @@ bool SwigDirector_AGHTiler::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4379,6 +4916,7 @@ bool SwigDirector_AGHTiler::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4386,7 +4924,12 @@ bool SwigDirector_AGHTiler::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4395,6 +4938,7 @@ bool SwigDirector_AGHTiler::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4402,7 +4946,12 @@ bool SwigDirector_AGHTiler::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4411,6 +4960,7 @@ bool SwigDirector_AGHTiler::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGHTiler::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4418,7 +4968,12 @@ bool SwigDirector_AGHTiler::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4467,6 +5022,7 @@ void SwigDirector_AGHTiler::draw(AGPainter &p) {
 bool SwigDirector_AGHTiler::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -4477,7 +5033,12 @@ bool SwigDirector_AGHTiler::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -4615,6 +5176,15 @@ SwigDirector_AGTheme::SwigDirector_AGTheme(VALUE self): AGTheme(), Swig::Directo
 SwigDirector_AGTheme::~SwigDirector_AGTheme() {
 }
 
+SwigDirector_AGMenuEvent::SwigDirector_AGMenuEvent(VALUE self, AGListener *pListener, std::string const &pName): AGMenuEvent(pListener, pName), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_AGMenuEvent::~SwigDirector_AGMenuEvent() {
+}
+
 SwigDirector_AGMenu::SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGPoint pWishPos, std::string const &pName): AGMenu(pParent, pWishPos, pName), Swig::Director(self) {
     
 }
@@ -4715,6 +5285,7 @@ SwigDirector_AGMenu::~SwigDirector_AGMenu() {
 
 bool SwigDirector_AGMenu::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -4724,7 +5295,12 @@ bool SwigDirector_AGMenu::eventDragBy(AGEvent const *event, AGPoint const &pDiff
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -4734,6 +5310,7 @@ bool SwigDirector_AGMenu::eventDragBy(AGEvent const *event, AGPoint const &pDiff
 
 bool SwigDirector_AGMenu::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4741,7 +5318,12 @@ bool SwigDirector_AGMenu::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4750,6 +5332,7 @@ bool SwigDirector_AGMenu::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4757,7 +5340,12 @@ bool SwigDirector_AGMenu::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4766,6 +5354,7 @@ bool SwigDirector_AGMenu::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4773,7 +5362,12 @@ bool SwigDirector_AGMenu::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4782,6 +5376,7 @@ bool SwigDirector_AGMenu::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4789,7 +5384,12 @@ bool SwigDirector_AGMenu::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4814,6 +5414,7 @@ bool SwigDirector_AGMenu::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGMenu::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4821,7 +5422,12 @@ bool SwigDirector_AGMenu::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4830,6 +5436,7 @@ bool SwigDirector_AGMenu::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4837,7 +5444,12 @@ bool SwigDirector_AGMenu::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4846,6 +5458,7 @@ bool SwigDirector_AGMenu::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4853,7 +5466,12 @@ bool SwigDirector_AGMenu::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4862,6 +5480,7 @@ bool SwigDirector_AGMenu::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4869,7 +5488,12 @@ bool SwigDirector_AGMenu::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4878,6 +5502,7 @@ bool SwigDirector_AGMenu::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4885,7 +5510,12 @@ bool SwigDirector_AGMenu::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4894,6 +5524,7 @@ bool SwigDirector_AGMenu::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4901,7 +5532,12 @@ bool SwigDirector_AGMenu::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4910,6 +5546,7 @@ bool SwigDirector_AGMenu::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGMenu::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -4917,7 +5554,12 @@ bool SwigDirector_AGMenu::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -4966,6 +5608,7 @@ void SwigDirector_AGMenu::draw(AGPainter &p) {
 bool SwigDirector_AGMenu::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -4976,7 +5619,12 @@ bool SwigDirector_AGMenu::signal(char const *pName, AGEvent const *m, AGMessageO
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -5191,6 +5839,7 @@ bool SwigDirector_AGScreenWidget::canFocus() const {
 
 bool SwigDirector_AGScreenWidget::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -5200,7 +5849,12 @@ bool SwigDirector_AGScreenWidget::eventDragBy(AGEvent const *event, AGPoint cons
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -5213,6 +5867,7 @@ SwigDirector_AGScreenWidget::~SwigDirector_AGScreenWidget() {
 
 bool SwigDirector_AGScreenWidget::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5220,7 +5875,12 @@ bool SwigDirector_AGScreenWidget::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5229,6 +5889,7 @@ bool SwigDirector_AGScreenWidget::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5236,7 +5897,12 @@ bool SwigDirector_AGScreenWidget::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5245,6 +5911,7 @@ bool SwigDirector_AGScreenWidget::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5252,7 +5919,12 @@ bool SwigDirector_AGScreenWidget::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5261,6 +5933,7 @@ bool SwigDirector_AGScreenWidget::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5268,7 +5941,12 @@ bool SwigDirector_AGScreenWidget::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5293,6 +5971,7 @@ bool SwigDirector_AGScreenWidget::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGScreenWidget::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5300,7 +5979,12 @@ bool SwigDirector_AGScreenWidget::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5309,6 +5993,7 @@ bool SwigDirector_AGScreenWidget::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5316,7 +6001,12 @@ bool SwigDirector_AGScreenWidget::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5325,6 +6015,7 @@ bool SwigDirector_AGScreenWidget::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5332,7 +6023,12 @@ bool SwigDirector_AGScreenWidget::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5341,6 +6037,7 @@ bool SwigDirector_AGScreenWidget::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5348,7 +6045,12 @@ bool SwigDirector_AGScreenWidget::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5357,6 +6059,7 @@ bool SwigDirector_AGScreenWidget::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5364,7 +6067,12 @@ bool SwigDirector_AGScreenWidget::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5373,6 +6081,7 @@ bool SwigDirector_AGScreenWidget::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5380,7 +6089,12 @@ bool SwigDirector_AGScreenWidget::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5389,6 +6103,7 @@ bool SwigDirector_AGScreenWidget::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGScreenWidget::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5396,7 +6111,12 @@ bool SwigDirector_AGScreenWidget::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5445,6 +6165,7 @@ void SwigDirector_AGScreenWidget::draw(AGPainter &p) {
 bool SwigDirector_AGScreenWidget::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -5455,7 +6176,12 @@ bool SwigDirector_AGScreenWidget::signal(char const *pName, AGEvent const *m, AG
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -5725,6 +6451,7 @@ SwigDirector_AGEdit::~SwigDirector_AGEdit() {
 
 bool SwigDirector_AGEdit::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -5734,7 +6461,12 @@ bool SwigDirector_AGEdit::eventDragBy(AGEvent const *event, AGPoint const &pDiff
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -5744,6 +6476,7 @@ bool SwigDirector_AGEdit::eventDragBy(AGEvent const *event, AGPoint const &pDiff
 
 bool SwigDirector_AGEdit::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5751,7 +6484,12 @@ bool SwigDirector_AGEdit::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5760,6 +6498,7 @@ bool SwigDirector_AGEdit::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5767,7 +6506,12 @@ bool SwigDirector_AGEdit::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5776,6 +6520,7 @@ bool SwigDirector_AGEdit::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5783,7 +6528,12 @@ bool SwigDirector_AGEdit::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5792,6 +6542,7 @@ bool SwigDirector_AGEdit::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5799,7 +6550,12 @@ bool SwigDirector_AGEdit::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5824,6 +6580,7 @@ bool SwigDirector_AGEdit::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGEdit::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5831,7 +6588,12 @@ bool SwigDirector_AGEdit::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5840,6 +6602,7 @@ bool SwigDirector_AGEdit::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5847,7 +6610,12 @@ bool SwigDirector_AGEdit::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5856,6 +6624,7 @@ bool SwigDirector_AGEdit::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5863,7 +6632,12 @@ bool SwigDirector_AGEdit::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5872,6 +6646,7 @@ bool SwigDirector_AGEdit::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5879,7 +6654,12 @@ bool SwigDirector_AGEdit::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5888,6 +6668,7 @@ bool SwigDirector_AGEdit::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5895,7 +6676,12 @@ bool SwigDirector_AGEdit::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5904,6 +6690,7 @@ bool SwigDirector_AGEdit::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5911,7 +6698,12 @@ bool SwigDirector_AGEdit::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGEdit::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5920,6 +6712,7 @@ bool SwigDirector_AGEdit::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGEdit::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -5927,7 +6720,12 @@ bool SwigDirector_AGEdit::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGEdit::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -5989,6 +6787,7 @@ void SwigDirector_AGEdit::drawBackground(AGPainter &p) {
 bool SwigDirector_AGEdit::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -5999,7 +6798,12 @@ bool SwigDirector_AGEdit::signal(char const *pName, AGEvent const *m, AGMessageO
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -6228,6 +7032,7 @@ SwigDirector_AGCheckBox::~SwigDirector_AGCheckBox() {
 
 bool SwigDirector_AGCheckBox::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -6237,7 +7042,12 @@ bool SwigDirector_AGCheckBox::eventDragBy(AGEvent const *event, AGPoint const &p
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -6247,6 +7057,7 @@ bool SwigDirector_AGCheckBox::eventDragBy(AGEvent const *event, AGPoint const &p
 
 bool SwigDirector_AGCheckBox::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6254,7 +7065,12 @@ bool SwigDirector_AGCheckBox::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6263,6 +7079,7 @@ bool SwigDirector_AGCheckBox::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6270,7 +7087,12 @@ bool SwigDirector_AGCheckBox::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6279,6 +7101,7 @@ bool SwigDirector_AGCheckBox::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6286,7 +7109,12 @@ bool SwigDirector_AGCheckBox::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6311,6 +7139,7 @@ bool SwigDirector_AGCheckBox::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGCheckBox::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6318,7 +7147,12 @@ bool SwigDirector_AGCheckBox::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6327,6 +7161,7 @@ bool SwigDirector_AGCheckBox::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6334,7 +7169,12 @@ bool SwigDirector_AGCheckBox::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6343,6 +7183,7 @@ bool SwigDirector_AGCheckBox::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6350,7 +7191,12 @@ bool SwigDirector_AGCheckBox::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6359,6 +7205,7 @@ bool SwigDirector_AGCheckBox::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6366,7 +7213,12 @@ bool SwigDirector_AGCheckBox::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6375,6 +7227,7 @@ bool SwigDirector_AGCheckBox::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6382,7 +7235,12 @@ bool SwigDirector_AGCheckBox::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6391,6 +7249,7 @@ bool SwigDirector_AGCheckBox::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6398,7 +7257,12 @@ bool SwigDirector_AGCheckBox::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6407,6 +7271,7 @@ bool SwigDirector_AGCheckBox::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6414,7 +7279,12 @@ bool SwigDirector_AGCheckBox::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6423,6 +7293,7 @@ bool SwigDirector_AGCheckBox::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGCheckBox::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6430,7 +7301,12 @@ bool SwigDirector_AGCheckBox::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGCheckBox::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6479,6 +7355,7 @@ void SwigDirector_AGCheckBox::draw(AGPainter &p) {
 bool SwigDirector_AGCheckBox::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -6489,7 +7366,12 @@ bool SwigDirector_AGCheckBox::signal(char const *pName, AGEvent const *m, AGMess
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -6626,6 +7508,7 @@ SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self): AGRadioGroup()
 
 bool SwigDirector_AGRadioGroup::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6633,7 +7516,12 @@ bool SwigDirector_AGRadioGroup::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6642,6 +7530,7 @@ bool SwigDirector_AGRadioGroup::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6649,7 +7538,12 @@ bool SwigDirector_AGRadioGroup::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6658,6 +7552,7 @@ bool SwigDirector_AGRadioGroup::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6665,7 +7560,12 @@ bool SwigDirector_AGRadioGroup::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6674,6 +7574,7 @@ bool SwigDirector_AGRadioGroup::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6681,7 +7582,12 @@ bool SwigDirector_AGRadioGroup::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6690,6 +7596,7 @@ bool SwigDirector_AGRadioGroup::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6697,7 +7604,12 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6706,6 +7618,7 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6713,7 +7626,12 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6722,6 +7640,7 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6729,7 +7648,12 @@ bool SwigDirector_AGRadioGroup::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6738,6 +7662,7 @@ bool SwigDirector_AGRadioGroup::eventMouseMotion(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6745,7 +7670,12 @@ bool SwigDirector_AGRadioGroup::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6754,6 +7684,7 @@ bool SwigDirector_AGRadioGroup::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6761,7 +7692,12 @@ bool SwigDirector_AGRadioGroup::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6770,6 +7706,7 @@ bool SwigDirector_AGRadioGroup::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGRadioGroup::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6777,7 +7714,12 @@ bool SwigDirector_AGRadioGroup::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6821,6 +7763,7 @@ SwigDirector_AGRadioGroup::~SwigDirector_AGRadioGroup() {
 bool SwigDirector_AGRadioGroup::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -6831,7 +7774,12 @@ bool SwigDirector_AGRadioGroup::signal(char const *pName, AGEvent const *m, AGMe
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -6941,6 +7889,7 @@ bool SwigDirector_AGRadio::canFocus() const {
 
 bool SwigDirector_AGRadio::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -6950,7 +7899,12 @@ bool SwigDirector_AGRadio::eventDragBy(AGEvent const *event, AGPoint const &pDif
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -6963,6 +7917,7 @@ SwigDirector_AGRadio::~SwigDirector_AGRadio() {
 
 bool SwigDirector_AGRadio::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6970,7 +7925,12 @@ bool SwigDirector_AGRadio::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6979,6 +7939,7 @@ bool SwigDirector_AGRadio::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -6986,7 +7947,12 @@ bool SwigDirector_AGRadio::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -6995,6 +7961,7 @@ bool SwigDirector_AGRadio::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7002,7 +7969,12 @@ bool SwigDirector_AGRadio::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7027,6 +7999,7 @@ bool SwigDirector_AGRadio::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGRadio::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7034,7 +8007,12 @@ bool SwigDirector_AGRadio::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7043,6 +8021,7 @@ bool SwigDirector_AGRadio::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7050,7 +8029,12 @@ bool SwigDirector_AGRadio::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7059,6 +8043,7 @@ bool SwigDirector_AGRadio::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7066,7 +8051,12 @@ bool SwigDirector_AGRadio::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7075,6 +8065,7 @@ bool SwigDirector_AGRadio::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7082,7 +8073,12 @@ bool SwigDirector_AGRadio::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7091,6 +8087,7 @@ bool SwigDirector_AGRadio::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7098,7 +8095,12 @@ bool SwigDirector_AGRadio::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7107,6 +8109,7 @@ bool SwigDirector_AGRadio::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7114,7 +8117,12 @@ bool SwigDirector_AGRadio::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7123,6 +8131,7 @@ bool SwigDirector_AGRadio::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7130,7 +8139,12 @@ bool SwigDirector_AGRadio::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7139,6 +8153,7 @@ bool SwigDirector_AGRadio::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGRadio::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7146,7 +8161,12 @@ bool SwigDirector_AGRadio::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGRadio::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7195,6 +8215,7 @@ void SwigDirector_AGRadio::draw(AGPainter &p) {
 bool SwigDirector_AGRadio::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -7205,7 +8226,12 @@ bool SwigDirector_AGRadio::signal(char const *pName, AGEvent const *m, AGMessage
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -7423,6 +8449,7 @@ SwigDirector_AGTable::~SwigDirector_AGTable() {
 
 bool SwigDirector_AGTable::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -7432,7 +8459,12 @@ bool SwigDirector_AGTable::eventDragBy(AGEvent const *event, AGPoint const &pDif
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -7442,6 +8474,7 @@ bool SwigDirector_AGTable::eventDragBy(AGEvent const *event, AGPoint const &pDif
 
 bool SwigDirector_AGTable::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7449,7 +8482,12 @@ bool SwigDirector_AGTable::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7458,6 +8496,7 @@ bool SwigDirector_AGTable::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7465,7 +8504,12 @@ bool SwigDirector_AGTable::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7474,6 +8518,7 @@ bool SwigDirector_AGTable::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7481,7 +8526,12 @@ bool SwigDirector_AGTable::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7490,6 +8540,7 @@ bool SwigDirector_AGTable::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7497,7 +8548,12 @@ bool SwigDirector_AGTable::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7522,6 +8578,7 @@ bool SwigDirector_AGTable::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGTable::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7529,7 +8586,12 @@ bool SwigDirector_AGTable::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7538,6 +8600,7 @@ bool SwigDirector_AGTable::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7545,7 +8608,12 @@ bool SwigDirector_AGTable::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7554,6 +8622,7 @@ bool SwigDirector_AGTable::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7561,7 +8630,12 @@ bool SwigDirector_AGTable::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7570,6 +8644,7 @@ bool SwigDirector_AGTable::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7577,7 +8652,12 @@ bool SwigDirector_AGTable::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7586,6 +8666,7 @@ bool SwigDirector_AGTable::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7593,7 +8674,12 @@ bool SwigDirector_AGTable::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7602,6 +8688,7 @@ bool SwigDirector_AGTable::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7609,7 +8696,12 @@ bool SwigDirector_AGTable::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7618,6 +8710,7 @@ bool SwigDirector_AGTable::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGTable::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7625,7 +8718,12 @@ bool SwigDirector_AGTable::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7674,6 +8772,7 @@ void SwigDirector_AGTable::draw(AGPainter &p) {
 bool SwigDirector_AGTable::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -7684,7 +8783,12 @@ bool SwigDirector_AGTable::signal(char const *pName, AGEvent const *m, AGMessage
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -7902,6 +9006,7 @@ SwigDirector_AGWindow::~SwigDirector_AGWindow() {
 
 bool SwigDirector_AGWindow::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -7911,7 +9016,12 @@ bool SwigDirector_AGWindow::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWindow::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -7921,6 +9031,7 @@ bool SwigDirector_AGWindow::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGWindow::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7928,7 +9039,12 @@ bool SwigDirector_AGWindow::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7937,6 +9053,7 @@ bool SwigDirector_AGWindow::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7944,7 +9061,12 @@ bool SwigDirector_AGWindow::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7953,6 +9075,7 @@ bool SwigDirector_AGWindow::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7960,7 +9083,12 @@ bool SwigDirector_AGWindow::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -7985,6 +9113,7 @@ bool SwigDirector_AGWindow::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGWindow::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -7992,7 +9121,12 @@ bool SwigDirector_AGWindow::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8001,6 +9135,7 @@ bool SwigDirector_AGWindow::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8008,7 +9143,12 @@ bool SwigDirector_AGWindow::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8017,6 +9157,7 @@ bool SwigDirector_AGWindow::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8024,7 +9165,12 @@ bool SwigDirector_AGWindow::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8033,6 +9179,7 @@ bool SwigDirector_AGWindow::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8040,7 +9187,12 @@ bool SwigDirector_AGWindow::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8049,6 +9201,7 @@ bool SwigDirector_AGWindow::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8056,7 +9209,12 @@ bool SwigDirector_AGWindow::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8065,6 +9223,7 @@ bool SwigDirector_AGWindow::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8072,7 +9231,12 @@ bool SwigDirector_AGWindow::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8081,6 +9245,7 @@ bool SwigDirector_AGWindow::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8088,7 +9253,12 @@ bool SwigDirector_AGWindow::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8097,6 +9267,7 @@ bool SwigDirector_AGWindow::eventResize(AGEvent const *m) {
 
 bool SwigDirector_AGWindow::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8104,7 +9275,12 @@ bool SwigDirector_AGWindow::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWindow::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8153,6 +9329,7 @@ void SwigDirector_AGWindow::draw(AGPainter &p) {
 bool SwigDirector_AGWindow::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -8163,7 +9340,12 @@ bool SwigDirector_AGWindow::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -8378,6 +9560,7 @@ bool SwigDirector_AGImage::canFocus() const {
 
 bool SwigDirector_AGImage::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -8387,7 +9570,12 @@ bool SwigDirector_AGImage::eventDragBy(AGEvent const *event, AGPoint const &pDif
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -8400,6 +9588,7 @@ SwigDirector_AGImage::~SwigDirector_AGImage() {
 
 bool SwigDirector_AGImage::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8407,7 +9596,12 @@ bool SwigDirector_AGImage::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8416,6 +9610,7 @@ bool SwigDirector_AGImage::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8423,7 +9618,12 @@ bool SwigDirector_AGImage::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8432,6 +9632,7 @@ bool SwigDirector_AGImage::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8439,7 +9640,12 @@ bool SwigDirector_AGImage::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8448,6 +9654,7 @@ bool SwigDirector_AGImage::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8455,7 +9662,12 @@ bool SwigDirector_AGImage::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8480,6 +9692,7 @@ bool SwigDirector_AGImage::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGImage::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8487,7 +9700,12 @@ bool SwigDirector_AGImage::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8496,6 +9714,7 @@ bool SwigDirector_AGImage::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8503,7 +9722,12 @@ bool SwigDirector_AGImage::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8512,6 +9736,7 @@ bool SwigDirector_AGImage::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8519,7 +9744,12 @@ bool SwigDirector_AGImage::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8528,6 +9758,7 @@ bool SwigDirector_AGImage::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8535,7 +9766,12 @@ bool SwigDirector_AGImage::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8544,6 +9780,7 @@ bool SwigDirector_AGImage::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8551,7 +9788,12 @@ bool SwigDirector_AGImage::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8560,6 +9802,7 @@ bool SwigDirector_AGImage::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8567,7 +9810,12 @@ bool SwigDirector_AGImage::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8576,6 +9824,7 @@ bool SwigDirector_AGImage::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGImage::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8583,7 +9832,12 @@ bool SwigDirector_AGImage::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8632,6 +9886,7 @@ void SwigDirector_AGImage::draw(AGPainter &p) {
 bool SwigDirector_AGImage::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -8642,7 +9897,12 @@ bool SwigDirector_AGImage::signal(char const *pName, AGEvent const *m, AGMessage
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -8860,6 +10120,7 @@ SwigDirector_AGCaption::~SwigDirector_AGCaption() {
 
 bool SwigDirector_AGCaption::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -8869,7 +10130,12 @@ bool SwigDirector_AGCaption::eventDragBy(AGEvent const *event, AGPoint const &pD
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -8879,6 +10145,7 @@ bool SwigDirector_AGCaption::eventDragBy(AGEvent const *event, AGPoint const &pD
 
 bool SwigDirector_AGCaption::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8886,7 +10153,12 @@ bool SwigDirector_AGCaption::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8895,6 +10167,7 @@ bool SwigDirector_AGCaption::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8902,7 +10175,12 @@ bool SwigDirector_AGCaption::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8911,6 +10189,7 @@ bool SwigDirector_AGCaption::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8918,7 +10197,12 @@ bool SwigDirector_AGCaption::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8927,6 +10211,7 @@ bool SwigDirector_AGCaption::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8934,7 +10219,12 @@ bool SwigDirector_AGCaption::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8959,6 +10249,7 @@ bool SwigDirector_AGCaption::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGCaption::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8966,7 +10257,12 @@ bool SwigDirector_AGCaption::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8975,6 +10271,7 @@ bool SwigDirector_AGCaption::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8982,7 +10279,12 @@ bool SwigDirector_AGCaption::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -8991,6 +10293,7 @@ bool SwigDirector_AGCaption::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -8998,7 +10301,12 @@ bool SwigDirector_AGCaption::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9007,6 +10315,7 @@ bool SwigDirector_AGCaption::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9014,7 +10323,12 @@ bool SwigDirector_AGCaption::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9023,6 +10337,7 @@ bool SwigDirector_AGCaption::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9030,7 +10345,12 @@ bool SwigDirector_AGCaption::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9039,6 +10359,7 @@ bool SwigDirector_AGCaption::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9046,7 +10367,12 @@ bool SwigDirector_AGCaption::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9055,6 +10381,7 @@ bool SwigDirector_AGCaption::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGCaption::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9062,7 +10389,12 @@ bool SwigDirector_AGCaption::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9111,6 +10443,7 @@ void SwigDirector_AGCaption::draw(AGPainter &p) {
 bool SwigDirector_AGCaption::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -9121,7 +10454,12 @@ bool SwigDirector_AGCaption::signal(char const *pName, AGEvent const *m, AGMessa
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -9339,6 +10677,7 @@ SwigDirector_AGLayout::~SwigDirector_AGLayout() {
 
 bool SwigDirector_AGLayout::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -9348,7 +10687,12 @@ bool SwigDirector_AGLayout::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -9358,6 +10702,7 @@ bool SwigDirector_AGLayout::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGLayout::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9365,7 +10710,12 @@ bool SwigDirector_AGLayout::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9374,6 +10724,7 @@ bool SwigDirector_AGLayout::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9381,7 +10732,12 @@ bool SwigDirector_AGLayout::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9390,6 +10746,7 @@ bool SwigDirector_AGLayout::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9397,7 +10754,12 @@ bool SwigDirector_AGLayout::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9406,6 +10768,7 @@ bool SwigDirector_AGLayout::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9413,7 +10776,12 @@ bool SwigDirector_AGLayout::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9438,6 +10806,7 @@ bool SwigDirector_AGLayout::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGLayout::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9445,7 +10814,12 @@ bool SwigDirector_AGLayout::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9454,6 +10828,7 @@ bool SwigDirector_AGLayout::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9461,7 +10836,12 @@ bool SwigDirector_AGLayout::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9470,6 +10850,7 @@ bool SwigDirector_AGLayout::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9477,7 +10858,12 @@ bool SwigDirector_AGLayout::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9486,6 +10872,7 @@ bool SwigDirector_AGLayout::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9493,7 +10880,12 @@ bool SwigDirector_AGLayout::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9502,6 +10894,7 @@ bool SwigDirector_AGLayout::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9509,7 +10902,12 @@ bool SwigDirector_AGLayout::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9518,6 +10916,7 @@ bool SwigDirector_AGLayout::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9525,7 +10924,12 @@ bool SwigDirector_AGLayout::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9534,6 +10938,7 @@ bool SwigDirector_AGLayout::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGLayout::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9541,7 +10946,12 @@ bool SwigDirector_AGLayout::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9590,6 +11000,7 @@ void SwigDirector_AGLayout::draw(AGPainter &p) {
 bool SwigDirector_AGLayout::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -9600,7 +11011,12 @@ bool SwigDirector_AGLayout::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -9764,6 +11180,7 @@ bool SwigDirector_AGDialog::eventGotFocus() {
 bool SwigDirector_AGDialog::eventClose(char const *pName, AGEvent const *event, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -9774,7 +11191,12 @@ bool SwigDirector_AGDialog::eventClose(char const *pName, AGEvent const *event, 
         return AGDialog::eventClose(pName,event,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -9844,6 +11266,7 @@ SwigDirector_AGDialog::~SwigDirector_AGDialog() {
 
 bool SwigDirector_AGDialog::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
     VALUE obj1 = Qnil ;
@@ -9853,7 +11276,12 @@ bool SwigDirector_AGDialog::eventDragBy(AGEvent const *event, AGPoint const &pDi
     if (swig_get_up()) {
         return AGWidget::eventDragBy(event,pDiff);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
@@ -9863,6 +11291,7 @@ bool SwigDirector_AGDialog::eventDragBy(AGEvent const *event, AGPoint const &pDi
 
 bool SwigDirector_AGDialog::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9870,7 +11299,12 @@ bool SwigDirector_AGDialog::eventMouseButtonUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9879,6 +11313,7 @@ bool SwigDirector_AGDialog::eventMouseButtonUp(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventMouseButtonDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9886,7 +11321,12 @@ bool SwigDirector_AGDialog::eventMouseButtonDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseButtonDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9895,6 +11335,7 @@ bool SwigDirector_AGDialog::eventMouseButtonDown(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9902,7 +11343,12 @@ bool SwigDirector_AGDialog::eventMouseClick(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseClick(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9911,6 +11357,7 @@ bool SwigDirector_AGDialog::eventMouseClick(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9918,7 +11365,12 @@ bool SwigDirector_AGDialog::eventMouseMotion(AGEvent const *m) {
     if (swig_get_up()) {
         return AGWidget::eventMouseMotion(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9943,6 +11395,7 @@ bool SwigDirector_AGDialog::acceptEvent(SDL_Event const *pEvent) {
 
 bool SwigDirector_AGDialog::eventActive(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9950,7 +11403,12 @@ bool SwigDirector_AGDialog::eventActive(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventActive(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventActive"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9959,6 +11417,7 @@ bool SwigDirector_AGDialog::eventActive(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventKeyDown(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9966,7 +11425,12 @@ bool SwigDirector_AGDialog::eventKeyDown(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9975,6 +11439,7 @@ bool SwigDirector_AGDialog::eventKeyDown(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventKeyUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9982,7 +11447,12 @@ bool SwigDirector_AGDialog::eventKeyUp(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventKeyUp(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -9991,6 +11461,7 @@ bool SwigDirector_AGDialog::eventKeyUp(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventQuit(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -9998,7 +11469,12 @@ bool SwigDirector_AGDialog::eventQuit(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuit(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -10007,6 +11483,7 @@ bool SwigDirector_AGDialog::eventQuit(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventQuitModal(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -10014,7 +11491,12 @@ bool SwigDirector_AGDialog::eventQuitModal(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventQuitModal(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -10023,6 +11505,7 @@ bool SwigDirector_AGDialog::eventQuitModal(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventSysWM(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -10030,7 +11513,12 @@ bool SwigDirector_AGDialog::eventSysWM(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventSysWM(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -10039,6 +11527,7 @@ bool SwigDirector_AGDialog::eventSysWM(AGEvent const *m) {
 
 bool SwigDirector_AGDialog::eventResize(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
@@ -10046,7 +11535,12 @@ bool SwigDirector_AGDialog::eventResize(AGEvent const *m) {
     if (swig_get_up()) {
         return AGMessageObject::eventResize(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
     result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
@@ -10095,6 +11589,7 @@ void SwigDirector_AGDialog::draw(AGPainter &p) {
 bool SwigDirector_AGDialog::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -10105,7 +11600,12 @@ bool SwigDirector_AGDialog::signal(char const *pName, AGEvent const *m, AGMessag
         return AGListener::signal(pName,m,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -10121,6 +11621,7 @@ bool SwigDirector_AGDialog::signal(char const *pName, AGEvent const *m, AGMessag
 bool SwigDirector_AGDialog::eventOk(char const *pName, AGEvent const *event, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -10131,7 +11632,12 @@ bool SwigDirector_AGDialog::eventOk(char const *pName, AGEvent const *event, AGM
         return AGDialog::eventOk(pName,event,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -10225,6 +11731,7 @@ bool SwigDirector_AGDialog::eventHide() {
 bool SwigDirector_AGDialog::eventCancel(char const *pName, AGEvent const *event, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj1 = Qnil ;
     Swig::Director * director__p_AGMessageObject = 0 ;
     VALUE obj2 = Qnil ;
@@ -10235,7 +11742,12 @@ bool SwigDirector_AGDialog::eventCancel(char const *pName, AGEvent const *event,
         return AGDialog::eventCancel(pName,event,pCaller);
     }
     obj0 = rb_str_new2(pName);
-    obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
     director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
     if (!director__p_AGMessageObject) {
         obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
@@ -11878,13 +13390,23 @@ _wrap_AGEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_AGEvent(int argc, VALUE *argv, VALUE self) {
-    AGListener *arg1 = (AGListener *) 0 ;
+    VALUE arg1 ;
+    AGListener *arg2 = (AGListener *) 0 ;
     AGEvent *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGListener, 1);
-    result = (AGEvent *)new AGEvent(arg1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGListener, 1);
+    char *classname = "Libantargisruby::AGEvent";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGEvent *)new SwigDirector_AGEvent(arg1,arg2);
+        
+    } else {
+        result = (AGEvent *)new AGEvent(arg2);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -11910,6 +13432,22 @@ _wrap_AGEvent_getCaller(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_disown_AGEvent(int argc, VALUE *argv, VALUE self) {
+    AGEvent *arg1 = (AGEvent *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGEvent, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGSDLEvent_allocate(VALUE self) {
@@ -11929,15 +13467,25 @@ _wrap_AGSDLEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_AGSDLEvent(int argc, VALUE *argv, VALUE self) {
-    AGListener *arg1 = (AGListener *) 0 ;
-    SDL_Event *arg2 = (SDL_Event *) 0 ;
+    VALUE arg1 ;
+    AGListener *arg2 = (AGListener *) 0 ;
+    SDL_Event *arg3 = (SDL_Event *) 0 ;
     AGSDLEvent *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGListener, 1);
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SDL_Event, 1);
-    result = (AGSDLEvent *)new AGSDLEvent(arg1,(SDL_Event const *)arg2);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGListener, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_SDL_Event, 1);
+    char *classname = "Libantargisruby::AGSDLEvent";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGSDLEvent *)new SwigDirector_AGSDLEvent(arg1,arg2,(SDL_Event const *)arg3);
+        
+    } else {
+        result = (AGSDLEvent *)new AGSDLEvent(arg2,(SDL_Event const *)arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -11972,13 +13520,9 @@ _wrap_AGSDLEvent_getKey(int argc, VALUE *argv, VALUE self) {
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLEvent, 1);
-    result = ((AGSDLEvent const *)arg1)->getKey();
+    result = (SDLKey)((AGSDLEvent const *)arg1)->getKey();
     
-    {
-        SDLKey * resultptr;
-        resultptr = new SDLKey((SDLKey &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_SDLKey, 1);
-    }
+    vresult = INT2NUM(result);
     return vresult;
 }
 
@@ -11992,13 +13536,9 @@ _wrap_AGSDLEvent_getMod(int argc, VALUE *argv, VALUE self) {
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLEvent, 1);
-    result = ((AGSDLEvent const *)arg1)->getMod();
+    result = (SDLMod)((AGSDLEvent const *)arg1)->getMod();
     
-    {
-        SDLMod * resultptr;
-        resultptr = new SDLMod((SDLMod &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_SDLMod, 1);
-    }
+    vresult = INT2NUM(result);
     return vresult;
 }
 
@@ -12043,6 +13583,22 @@ static void
 free_AGSDLEvent(AGSDLEvent *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_disown_AGSDLEvent(int argc, VALUE *argv, VALUE self) {
+    AGSDLEvent *arg1 = (AGSDLEvent *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGSDLEvent, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGMouseEvent_allocate(VALUE self) {
@@ -12062,15 +13618,25 @@ _wrap_AGMouseEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_AGMouseEvent(int argc, VALUE *argv, VALUE self) {
-    AGListener *arg1 = (AGListener *) 0 ;
-    SDL_Event *arg2 = (SDL_Event *) 0 ;
+    VALUE arg1 ;
+    AGListener *arg2 = (AGListener *) 0 ;
+    SDL_Event *arg3 = (SDL_Event *) 0 ;
     AGMouseEvent *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGListener, 1);
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SDL_Event, 1);
-    result = (AGMouseEvent *)new AGMouseEvent(arg1,arg2);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGListener, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_SDL_Event, 1);
+    char *classname = "Libantargisruby::AGMouseEvent";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGMouseEvent *)new SwigDirector_AGMouseEvent(arg1,arg2,arg3);
+        
+    } else {
+        result = (AGMouseEvent *)new AGMouseEvent(arg2,arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -12080,6 +13646,22 @@ static void
 free_AGMouseEvent(AGMouseEvent *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_disown_AGMouseEvent(int argc, VALUE *argv, VALUE self) {
+    AGMouseEvent *arg1 = (AGMouseEvent *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGMouseEvent, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGListener_allocate(VALUE self) {
@@ -13205,6 +14787,25 @@ _wrap_newEvent(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_toAGSDLEvent(int argc, VALUE *argv, VALUE self) {
+    AGEvent *arg1 = 0 ;
+    AGSDLEvent *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGEvent, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGSDLEvent &_result_ref = toAGSDLEvent(*arg1);
+        result = (AGSDLEvent *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSDLEvent,0);
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGWidget_allocate(VALUE self) {
@@ -14130,6 +15731,76 @@ static VALUE _wrap_AGWidget_gainFocus(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_gainCompleteFocus__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    (arg1)->gainCompleteFocus(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_gainCompleteFocus__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    (arg1)->gainCompleteFocus();
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AGWidget_gainCompleteFocus(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_AGWidget_gainCompleteFocus__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGWidget_gainCompleteFocus__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGWidget_gainCompleteFocus'");
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGWidget_eventDragBy(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     AGEvent *arg2 = (AGEvent *) 0 ;
@@ -14327,6 +15998,21 @@ _wrap_AGWidget_setModal(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
     arg2 = RTEST(argv[0]);
     (arg1)->setModal(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_erase(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    (arg1)->erase(arg2);
     
     return Qnil;
 }
@@ -17616,23 +19302,33 @@ _wrap_AGMenuEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_AGMenuEvent(int argc, VALUE *argv, VALUE self) {
-    AGListener *arg1 = (AGListener *) 0 ;
-    std::string *arg2 = 0 ;
+    VALUE arg1 ;
+    AGListener *arg2 = (AGListener *) 0 ;
+    std::string *arg3 = 0 ;
     AGMenuEvent *result;
-    std::string temp2 ;
+    std::string temp3 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGListener, 1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGListener, 1);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[1]));
-            arg2 = &temp2;
+            temp3 = std::string(StringValuePtr(argv[1]));
+            arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    result = (AGMenuEvent *)new AGMenuEvent(arg1,(std::string const &)*arg2);
+    char *classname = "Libantargisruby::AGMenuEvent";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGMenuEvent *)new SwigDirector_AGMenuEvent(arg1,arg2,(std::string const &)*arg3);
+        
+    } else {
+        result = (AGMenuEvent *)new AGMenuEvent(arg2,(std::string const &)*arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -17660,6 +19356,22 @@ static void
 free_AGMenuEvent(AGMenuEvent *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_disown_AGMenuEvent(int argc, VALUE *argv, VALUE self) {
+    AGMenuEvent *arg1 = (AGMenuEvent *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGMenuEvent, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGMenu_allocate(VALUE self) {
@@ -22813,8 +24525,8 @@ static swig_type_info _swigt__p_SDL_Event[] = {{"_p_SDL_Event", 0, "SDL_Event *"
 static swig_type_info _swigt__p_AGApplication[] = {{"_p_AGApplication", 0, "AGApplication *", 0, 0, 0, 0},{"_p_AGApplication", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGDialog[] = {{"_p_AGDialog", 0, "AGDialog *", 0, 0, 0, 0},{"_p_AGDialog", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Rect[] = {{"_p_SDL_Rect", 0, "SDL_Rect *", 0, 0, 0, 0},{"_p_SDL_Rect", 0, 0, 0, 0, 0, 0},{"_p_AGRect", _p_AGRectTo_p_SDL_Rect, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_SDLMod[] = {{"_p_SDLMod", 0, "SDLMod *", 0, 0, 0, 0},{"_p_SDLMod", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGButton[] = {{"_p_AGButton", 0, "AGButton *", 0, 0, 0, 0},{"_p_AGButton", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_SDLMod[] = {{"_p_SDLMod", 0, "enum SDLMod *|SDLMod *", 0, 0, 0, 0},{"_p_SDLMod", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGHTiler[] = {{"_p_AGHTiler", 0, "AGHTiler *", 0, 0, 0, 0},{"_p_AGHTiler", 0, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGHTiler, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGHTiler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Document[] = {{"_p_Document", 0, "Document *", 0, 0, 0, 0},{"_p_Document", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -22848,14 +24560,14 @@ static swig_type_info _swigt__p_AGEdit[] = {{"_p_AGEdit", 0, "AGEdit *", 0, 0, 0
 static swig_type_info _swigt__p_AGWidget[] = {{"_p_AGWidget", 0, "AGWidget *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGWidget", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGDialog", _p_AGDialogTo_p_AGWidget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCheckBox[] = {{"_p_AGCheckBox", 0, "AGCheckBox *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGCheckBox, 0, 0, 0, 0, 0},{"_p_AGCheckBox", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGFontEngine[] = {{"_p_AGFontEngine", 0, "AGFontEngine *", 0, 0, 0, 0},{"_p_AGFontEngine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGTable[] = {{"_p_AGTable", 0, "AGTable *", 0, 0, 0, 0},{"_p_AGTable", 0, 0, 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGTable, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGPoint[] = {{"_p_AGPoint", 0, "AGPoint *", 0, 0, 0, 0},{"_p_AGPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AGFontEngine[] = {{"_p_AGFontEngine", 0, "AGFontEngine *", 0, 0, 0, 0},{"_p_AGFontEngine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGPainter[] = {{"_p_AGPainter", 0, "AGPainter *", 0, 0, 0, 0},{"_p_AGPainter", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGEditLine[] = {{"_p_AGEditLine", 0, "AGEditLine *", 0, 0, 0, 0},{"_p_AGEditLine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__ostringstream[] = {{"_p_std__ostringstream", 0, "std::ostringstream *", 0, 0, 0, 0},{"_p_std__ostringstream", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMessageObject[] = {{"_p_AGMessageObject", 0, "AGMessageObject *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMessageObject", 0, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGDialog", _p_AGDialogTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGMessageObject, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_SDLKey[] = {{"_p_SDLKey", 0, "SDLKey *", 0, 0, 0, 0},{"_p_SDLKey", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_SDLKey[] = {{"_p_SDLKey", 0, "enum SDLKey *|SDLKey *", 0, 0, 0, 0},{"_p_SDLKey", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_PixelFormat[] = {{"_p_SDL_PixelFormat", 0, "SDL_PixelFormat *", 0, 0, 0, 0},{"_p_SDL_PixelFormat", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGVTiler[] = {{"_p_AGVTiler", 0, "AGVTiler *", 0, 0, 0, 0},{"_p_AGVTiler", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGVTiler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayout[] = {{"_p_AGLayout", 0, "AGLayout *", 0, 0, 0, 0},{"_p_AGDialog", _p_AGDialogTo_p_AGLayout, 0, 0, 0, 0, 0},{"_p_AGLayout", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -22863,8 +24575,8 @@ static swig_type_info _swigt__p_AGSDLEvent[] = {{"_p_AGSDLEvent", 0, "AGSDLEvent
 static swig_type_info _swigt__p_AGColor[] = {{"_p_AGColor", 0, "AGColor *", 0, 0, 0, 0},{"_p_AGColor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGTheme[] = {{"_p_AGTheme", 0, "AGTheme *", 0, 0, 0, 0},{"_p_AGTheme", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGRadio[] = {{"_p_AGRadio", 0, "AGRadio *", 0, 0, 0, 0},{"_p_AGRadio", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_unsigned_long[] = {{"_p_unsigned_long", 0, "unsigned long *|VALUE *", 0, 0, 0, 0},{"_p_unsigned_long", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGFont[] = {{"_p_AGFont", 0, "AGFont *", 0, 0, 0, 0},{"_p_AGFont", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_unsigned_long[] = {{"_p_unsigned_long", 0, "unsigned long *|VALUE *", 0, 0, 0, 0},{"_p_unsigned_long", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_Uint8, 
@@ -22878,8 +24590,8 @@ _swigt__p_SDL_Event,
 _swigt__p_AGApplication, 
 _swigt__p_AGDialog, 
 _swigt__p_SDL_Rect, 
-_swigt__p_SDLMod, 
 _swigt__p_AGButton, 
+_swigt__p_SDLMod, 
 _swigt__p_AGHTiler, 
 _swigt__p_Document, 
 _swigt__p_AGCPPListener, 
@@ -22913,9 +24625,9 @@ _swigt__p_AGEdit,
 _swigt__p_AGWidget, 
 _swigt__p_ParserException, 
 _swigt__p_AGCheckBox, 
+_swigt__p_AGFontEngine, 
 _swigt__p_AGTable, 
 _swigt__p_AGPoint, 
-_swigt__p_AGFontEngine, 
 _swigt__p_AGPainter, 
 _swigt__p_AGEditLine, 
 _swigt__p_std__ostringstream, 
@@ -22928,8 +24640,8 @@ _swigt__p_AGSDLEvent,
 _swigt__p_AGColor, 
 _swigt__p_AGTheme, 
 _swigt__p_AGRadio, 
-_swigt__p_unsigned_long, 
 _swigt__p_AGFont, 
+_swigt__p_unsigned_long, 
 0
 };
 
@@ -23039,6 +24751,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSDLScreen.klass, "displayFormat", VALUEFUNC(_wrap_AGSDLScreen_displayFormat), -1);
     cAGSDLScreen.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGSDLScreen.destroy = (void (*)(void *)) free_AGSDLScreen;
+    rb_define_module_function(mLibantargisruby, "disown_AGEvent", VALUEFUNC(_wrap_disown_AGEvent), -1);
     
     cAGEvent.klass = rb_define_class_under(mLibantargisruby, "AGEvent", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGEvent, (void *) &cAGEvent);
@@ -23047,6 +24760,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEvent.klass, "getCaller", VALUEFUNC(_wrap_AGEvent_getCaller), -1);
     cAGEvent.mark = 0;
     cAGEvent.destroy = (void (*)(void *)) free_AGEvent;
+    rb_define_module_function(mLibantargisruby, "disown_AGSDLEvent", VALUEFUNC(_wrap_disown_AGSDLEvent), -1);
     
     cAGSDLEvent.klass = rb_define_class_under(mLibantargisruby, "AGSDLEvent", ((swig_class *) SWIGTYPE_p_AGEvent->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGSDLEvent, (void *) &cAGSDLEvent);
@@ -23059,6 +24773,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSDLEvent.klass, "get", VALUEFUNC(_wrap_AGSDLEvent_get), -1);
     cAGSDLEvent.mark = 0;
     cAGSDLEvent.destroy = (void (*)(void *)) free_AGSDLEvent;
+    rb_define_module_function(mLibantargisruby, "disown_AGMouseEvent", VALUEFUNC(_wrap_disown_AGMouseEvent), -1);
     
     cAGMouseEvent.klass = rb_define_class_under(mLibantargisruby, "AGMouseEvent", ((swig_class *) SWIGTYPE_p_AGEvent->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGMouseEvent, (void *) &cAGMouseEvent);
@@ -23136,6 +24851,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     cAGMessageObject.mark = 0;
     cAGMessageObject.destroy = (void (*)(void *)) free_AGMessageObject;
     rb_define_module_function(mLibantargisruby, "newEvent", VALUEFUNC(_wrap_newEvent), -1);
+    rb_define_module_function(mLibantargisruby, "toAGSDLEvent", VALUEFUNC(_wrap_toAGSDLEvent), -1);
     rb_define_module_function(mLibantargisruby, "AGWidget_markfunc", VALUEFUNC(_wrap_AGWidget_markfunc), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGWidget", VALUEFUNC(_wrap_disown_AGWidget), -1);
     
@@ -23189,6 +24905,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "getScreenPosition", VALUEFUNC(_wrap_AGWidget_getScreenPosition), -1);
     rb_define_method(cAGWidget.klass, "fromScreen", VALUEFUNC(_wrap_AGWidget_fromScreen), -1);
     rb_define_method(cAGWidget.klass, "gainFocus", VALUEFUNC(_wrap_AGWidget_gainFocus), -1);
+    rb_define_method(cAGWidget.klass, "gainCompleteFocus", VALUEFUNC(_wrap_AGWidget_gainCompleteFocus), -1);
     rb_define_method(cAGWidget.klass, "eventDragBy", VALUEFUNC(_wrap_AGWidget_eventDragBy), -1);
     rb_define_method(cAGWidget.klass, "getFocus", VALUEFUNC(_wrap_AGWidget_getFocus), -1);
     rb_define_method(cAGWidget.klass, "hasFocus", VALUEFUNC(_wrap_AGWidget_hasFocus), -1);
@@ -23196,6 +24913,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "setName", VALUEFUNC(_wrap_AGWidget_setName), -1);
     rb_define_method(cAGWidget.klass, "getChild", VALUEFUNC(_wrap_AGWidget_getChild), -1);
     rb_define_method(cAGWidget.klass, "setModal", VALUEFUNC(_wrap_AGWidget_setModal), -1);
+    rb_define_method(cAGWidget.klass, "erase", VALUEFUNC(_wrap_AGWidget_erase), -1);
     cAGWidget.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGWidget.destroy = (void (*)(void *)) free_AGWidget;
     rb_define_module_function(mLibantargisruby, "toAGWidget", VALUEFUNC(_wrap_toAGWidget), -1);
@@ -23376,6 +25094,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_module_function(mLibantargisruby, "loadTheme", VALUEFUNC(_wrap_loadTheme), -1);
     rb_define_module_function(mLibantargisruby, "loadThemeFile", VALUEFUNC(_wrap_loadThemeFile), -1);
     rb_define_module_function(mLibantargisruby, "addPoint", VALUEFUNC(_wrap_addPoint), -1);
+    rb_define_module_function(mLibantargisruby, "disown_AGMenuEvent", VALUEFUNC(_wrap_disown_AGMenuEvent), -1);
     
     cAGMenuEvent.klass = rb_define_class_under(mLibantargisruby, "AGMenuEvent", ((swig_class *) SWIGTYPE_p_AGEvent->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGMenuEvent, (void *) &cAGMenuEvent);
@@ -23670,5 +25389,252 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_module_function(mLibantargisruby, "loadFile", VALUEFUNC(_wrap_loadFile), -1);
     rb_define_module_function(mLibantargisruby, "saveFile", VALUEFUNC(_wrap_saveFile), -1);
     rb_define_module_function(mLibantargisruby, "fileExists", VALUEFUNC(_wrap_fileExists), -1);
+    rb_define_const(mLibantargisruby,"SDLK_UNKNOWN", INT2NUM(SDLK_UNKNOWN));
+    rb_define_const(mLibantargisruby,"SDLK_FIRST", INT2NUM(SDLK_FIRST));
+    rb_define_const(mLibantargisruby,"SDLK_BACKSPACE", INT2NUM(SDLK_BACKSPACE));
+    rb_define_const(mLibantargisruby,"SDLK_TAB", INT2NUM(SDLK_TAB));
+    rb_define_const(mLibantargisruby,"SDLK_CLEAR", INT2NUM(SDLK_CLEAR));
+    rb_define_const(mLibantargisruby,"SDLK_RETURN", INT2NUM(SDLK_RETURN));
+    rb_define_const(mLibantargisruby,"SDLK_PAUSE", INT2NUM(SDLK_PAUSE));
+    rb_define_const(mLibantargisruby,"SDLK_ESCAPE", INT2NUM(SDLK_ESCAPE));
+    rb_define_const(mLibantargisruby,"SDLK_SPACE", INT2NUM(SDLK_SPACE));
+    rb_define_const(mLibantargisruby,"SDLK_EXCLAIM", INT2NUM(SDLK_EXCLAIM));
+    rb_define_const(mLibantargisruby,"SDLK_QUOTEDBL", INT2NUM(SDLK_QUOTEDBL));
+    rb_define_const(mLibantargisruby,"SDLK_HASH", INT2NUM(SDLK_HASH));
+    rb_define_const(mLibantargisruby,"SDLK_DOLLAR", INT2NUM(SDLK_DOLLAR));
+    rb_define_const(mLibantargisruby,"SDLK_AMPERSAND", INT2NUM(SDLK_AMPERSAND));
+    rb_define_const(mLibantargisruby,"SDLK_QUOTE", INT2NUM(SDLK_QUOTE));
+    rb_define_const(mLibantargisruby,"SDLK_LEFTPAREN", INT2NUM(SDLK_LEFTPAREN));
+    rb_define_const(mLibantargisruby,"SDLK_RIGHTPAREN", INT2NUM(SDLK_RIGHTPAREN));
+    rb_define_const(mLibantargisruby,"SDLK_ASTERISK", INT2NUM(SDLK_ASTERISK));
+    rb_define_const(mLibantargisruby,"SDLK_PLUS", INT2NUM(SDLK_PLUS));
+    rb_define_const(mLibantargisruby,"SDLK_COMMA", INT2NUM(SDLK_COMMA));
+    rb_define_const(mLibantargisruby,"SDLK_MINUS", INT2NUM(SDLK_MINUS));
+    rb_define_const(mLibantargisruby,"SDLK_PERIOD", INT2NUM(SDLK_PERIOD));
+    rb_define_const(mLibantargisruby,"SDLK_SLASH", INT2NUM(SDLK_SLASH));
+    rb_define_const(mLibantargisruby,"SDLK_0", INT2NUM(SDLK_0));
+    rb_define_const(mLibantargisruby,"SDLK_1", INT2NUM(SDLK_1));
+    rb_define_const(mLibantargisruby,"SDLK_2", INT2NUM(SDLK_2));
+    rb_define_const(mLibantargisruby,"SDLK_3", INT2NUM(SDLK_3));
+    rb_define_const(mLibantargisruby,"SDLK_4", INT2NUM(SDLK_4));
+    rb_define_const(mLibantargisruby,"SDLK_5", INT2NUM(SDLK_5));
+    rb_define_const(mLibantargisruby,"SDLK_6", INT2NUM(SDLK_6));
+    rb_define_const(mLibantargisruby,"SDLK_7", INT2NUM(SDLK_7));
+    rb_define_const(mLibantargisruby,"SDLK_8", INT2NUM(SDLK_8));
+    rb_define_const(mLibantargisruby,"SDLK_9", INT2NUM(SDLK_9));
+    rb_define_const(mLibantargisruby,"SDLK_COLON", INT2NUM(SDLK_COLON));
+    rb_define_const(mLibantargisruby,"SDLK_SEMICOLON", INT2NUM(SDLK_SEMICOLON));
+    rb_define_const(mLibantargisruby,"SDLK_LESS", INT2NUM(SDLK_LESS));
+    rb_define_const(mLibantargisruby,"SDLK_EQUALS", INT2NUM(SDLK_EQUALS));
+    rb_define_const(mLibantargisruby,"SDLK_GREATER", INT2NUM(SDLK_GREATER));
+    rb_define_const(mLibantargisruby,"SDLK_QUESTION", INT2NUM(SDLK_QUESTION));
+    rb_define_const(mLibantargisruby,"SDLK_AT", INT2NUM(SDLK_AT));
+    rb_define_const(mLibantargisruby,"SDLK_LEFTBRACKET", INT2NUM(SDLK_LEFTBRACKET));
+    rb_define_const(mLibantargisruby,"SDLK_BACKSLASH", INT2NUM(SDLK_BACKSLASH));
+    rb_define_const(mLibantargisruby,"SDLK_RIGHTBRACKET", INT2NUM(SDLK_RIGHTBRACKET));
+    rb_define_const(mLibantargisruby,"SDLK_CARET", INT2NUM(SDLK_CARET));
+    rb_define_const(mLibantargisruby,"SDLK_UNDERSCORE", INT2NUM(SDLK_UNDERSCORE));
+    rb_define_const(mLibantargisruby,"SDLK_BACKQUOTE", INT2NUM(SDLK_BACKQUOTE));
+    rb_define_const(mLibantargisruby,"SDLK_a", INT2NUM(SDLK_a));
+    rb_define_const(mLibantargisruby,"SDLK_b", INT2NUM(SDLK_b));
+    rb_define_const(mLibantargisruby,"SDLK_c", INT2NUM(SDLK_c));
+    rb_define_const(mLibantargisruby,"SDLK_d", INT2NUM(SDLK_d));
+    rb_define_const(mLibantargisruby,"SDLK_e", INT2NUM(SDLK_e));
+    rb_define_const(mLibantargisruby,"SDLK_f", INT2NUM(SDLK_f));
+    rb_define_const(mLibantargisruby,"SDLK_g", INT2NUM(SDLK_g));
+    rb_define_const(mLibantargisruby,"SDLK_h", INT2NUM(SDLK_h));
+    rb_define_const(mLibantargisruby,"SDLK_i", INT2NUM(SDLK_i));
+    rb_define_const(mLibantargisruby,"SDLK_j", INT2NUM(SDLK_j));
+    rb_define_const(mLibantargisruby,"SDLK_k", INT2NUM(SDLK_k));
+    rb_define_const(mLibantargisruby,"SDLK_l", INT2NUM(SDLK_l));
+    rb_define_const(mLibantargisruby,"SDLK_m", INT2NUM(SDLK_m));
+    rb_define_const(mLibantargisruby,"SDLK_n", INT2NUM(SDLK_n));
+    rb_define_const(mLibantargisruby,"SDLK_o", INT2NUM(SDLK_o));
+    rb_define_const(mLibantargisruby,"SDLK_p", INT2NUM(SDLK_p));
+    rb_define_const(mLibantargisruby,"SDLK_q", INT2NUM(SDLK_q));
+    rb_define_const(mLibantargisruby,"SDLK_r", INT2NUM(SDLK_r));
+    rb_define_const(mLibantargisruby,"SDLK_s", INT2NUM(SDLK_s));
+    rb_define_const(mLibantargisruby,"SDLK_t", INT2NUM(SDLK_t));
+    rb_define_const(mLibantargisruby,"SDLK_u", INT2NUM(SDLK_u));
+    rb_define_const(mLibantargisruby,"SDLK_v", INT2NUM(SDLK_v));
+    rb_define_const(mLibantargisruby,"SDLK_w", INT2NUM(SDLK_w));
+    rb_define_const(mLibantargisruby,"SDLK_x", INT2NUM(SDLK_x));
+    rb_define_const(mLibantargisruby,"SDLK_y", INT2NUM(SDLK_y));
+    rb_define_const(mLibantargisruby,"SDLK_z", INT2NUM(SDLK_z));
+    rb_define_const(mLibantargisruby,"SDLK_DELETE", INT2NUM(SDLK_DELETE));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_0", INT2NUM(SDLK_WORLD_0));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_1", INT2NUM(SDLK_WORLD_1));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_2", INT2NUM(SDLK_WORLD_2));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_3", INT2NUM(SDLK_WORLD_3));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_4", INT2NUM(SDLK_WORLD_4));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_5", INT2NUM(SDLK_WORLD_5));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_6", INT2NUM(SDLK_WORLD_6));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_7", INT2NUM(SDLK_WORLD_7));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_8", INT2NUM(SDLK_WORLD_8));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_9", INT2NUM(SDLK_WORLD_9));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_10", INT2NUM(SDLK_WORLD_10));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_11", INT2NUM(SDLK_WORLD_11));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_12", INT2NUM(SDLK_WORLD_12));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_13", INT2NUM(SDLK_WORLD_13));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_14", INT2NUM(SDLK_WORLD_14));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_15", INT2NUM(SDLK_WORLD_15));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_16", INT2NUM(SDLK_WORLD_16));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_17", INT2NUM(SDLK_WORLD_17));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_18", INT2NUM(SDLK_WORLD_18));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_19", INT2NUM(SDLK_WORLD_19));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_20", INT2NUM(SDLK_WORLD_20));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_21", INT2NUM(SDLK_WORLD_21));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_22", INT2NUM(SDLK_WORLD_22));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_23", INT2NUM(SDLK_WORLD_23));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_24", INT2NUM(SDLK_WORLD_24));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_25", INT2NUM(SDLK_WORLD_25));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_26", INT2NUM(SDLK_WORLD_26));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_27", INT2NUM(SDLK_WORLD_27));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_28", INT2NUM(SDLK_WORLD_28));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_29", INT2NUM(SDLK_WORLD_29));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_30", INT2NUM(SDLK_WORLD_30));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_31", INT2NUM(SDLK_WORLD_31));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_32", INT2NUM(SDLK_WORLD_32));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_33", INT2NUM(SDLK_WORLD_33));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_34", INT2NUM(SDLK_WORLD_34));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_35", INT2NUM(SDLK_WORLD_35));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_36", INT2NUM(SDLK_WORLD_36));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_37", INT2NUM(SDLK_WORLD_37));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_38", INT2NUM(SDLK_WORLD_38));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_39", INT2NUM(SDLK_WORLD_39));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_40", INT2NUM(SDLK_WORLD_40));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_41", INT2NUM(SDLK_WORLD_41));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_42", INT2NUM(SDLK_WORLD_42));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_43", INT2NUM(SDLK_WORLD_43));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_44", INT2NUM(SDLK_WORLD_44));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_45", INT2NUM(SDLK_WORLD_45));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_46", INT2NUM(SDLK_WORLD_46));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_47", INT2NUM(SDLK_WORLD_47));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_48", INT2NUM(SDLK_WORLD_48));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_49", INT2NUM(SDLK_WORLD_49));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_50", INT2NUM(SDLK_WORLD_50));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_51", INT2NUM(SDLK_WORLD_51));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_52", INT2NUM(SDLK_WORLD_52));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_53", INT2NUM(SDLK_WORLD_53));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_54", INT2NUM(SDLK_WORLD_54));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_55", INT2NUM(SDLK_WORLD_55));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_56", INT2NUM(SDLK_WORLD_56));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_57", INT2NUM(SDLK_WORLD_57));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_58", INT2NUM(SDLK_WORLD_58));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_59", INT2NUM(SDLK_WORLD_59));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_60", INT2NUM(SDLK_WORLD_60));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_61", INT2NUM(SDLK_WORLD_61));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_62", INT2NUM(SDLK_WORLD_62));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_63", INT2NUM(SDLK_WORLD_63));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_64", INT2NUM(SDLK_WORLD_64));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_65", INT2NUM(SDLK_WORLD_65));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_66", INT2NUM(SDLK_WORLD_66));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_67", INT2NUM(SDLK_WORLD_67));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_68", INT2NUM(SDLK_WORLD_68));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_69", INT2NUM(SDLK_WORLD_69));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_70", INT2NUM(SDLK_WORLD_70));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_71", INT2NUM(SDLK_WORLD_71));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_72", INT2NUM(SDLK_WORLD_72));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_73", INT2NUM(SDLK_WORLD_73));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_74", INT2NUM(SDLK_WORLD_74));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_75", INT2NUM(SDLK_WORLD_75));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_76", INT2NUM(SDLK_WORLD_76));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_77", INT2NUM(SDLK_WORLD_77));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_78", INT2NUM(SDLK_WORLD_78));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_79", INT2NUM(SDLK_WORLD_79));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_80", INT2NUM(SDLK_WORLD_80));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_81", INT2NUM(SDLK_WORLD_81));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_82", INT2NUM(SDLK_WORLD_82));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_83", INT2NUM(SDLK_WORLD_83));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_84", INT2NUM(SDLK_WORLD_84));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_85", INT2NUM(SDLK_WORLD_85));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_86", INT2NUM(SDLK_WORLD_86));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_87", INT2NUM(SDLK_WORLD_87));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_88", INT2NUM(SDLK_WORLD_88));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_89", INT2NUM(SDLK_WORLD_89));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_90", INT2NUM(SDLK_WORLD_90));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_91", INT2NUM(SDLK_WORLD_91));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_92", INT2NUM(SDLK_WORLD_92));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_93", INT2NUM(SDLK_WORLD_93));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_94", INT2NUM(SDLK_WORLD_94));
+    rb_define_const(mLibantargisruby,"SDLK_WORLD_95", INT2NUM(SDLK_WORLD_95));
+    rb_define_const(mLibantargisruby,"SDLK_KP0", INT2NUM(SDLK_KP0));
+    rb_define_const(mLibantargisruby,"SDLK_KP1", INT2NUM(SDLK_KP1));
+    rb_define_const(mLibantargisruby,"SDLK_KP2", INT2NUM(SDLK_KP2));
+    rb_define_const(mLibantargisruby,"SDLK_KP3", INT2NUM(SDLK_KP3));
+    rb_define_const(mLibantargisruby,"SDLK_KP4", INT2NUM(SDLK_KP4));
+    rb_define_const(mLibantargisruby,"SDLK_KP5", INT2NUM(SDLK_KP5));
+    rb_define_const(mLibantargisruby,"SDLK_KP6", INT2NUM(SDLK_KP6));
+    rb_define_const(mLibantargisruby,"SDLK_KP7", INT2NUM(SDLK_KP7));
+    rb_define_const(mLibantargisruby,"SDLK_KP8", INT2NUM(SDLK_KP8));
+    rb_define_const(mLibantargisruby,"SDLK_KP9", INT2NUM(SDLK_KP9));
+    rb_define_const(mLibantargisruby,"SDLK_KP_PERIOD", INT2NUM(SDLK_KP_PERIOD));
+    rb_define_const(mLibantargisruby,"SDLK_KP_DIVIDE", INT2NUM(SDLK_KP_DIVIDE));
+    rb_define_const(mLibantargisruby,"SDLK_KP_MULTIPLY", INT2NUM(SDLK_KP_MULTIPLY));
+    rb_define_const(mLibantargisruby,"SDLK_KP_MINUS", INT2NUM(SDLK_KP_MINUS));
+    rb_define_const(mLibantargisruby,"SDLK_KP_PLUS", INT2NUM(SDLK_KP_PLUS));
+    rb_define_const(mLibantargisruby,"SDLK_KP_ENTER", INT2NUM(SDLK_KP_ENTER));
+    rb_define_const(mLibantargisruby,"SDLK_KP_EQUALS", INT2NUM(SDLK_KP_EQUALS));
+    rb_define_const(mLibantargisruby,"SDLK_UP", INT2NUM(SDLK_UP));
+    rb_define_const(mLibantargisruby,"SDLK_DOWN", INT2NUM(SDLK_DOWN));
+    rb_define_const(mLibantargisruby,"SDLK_RIGHT", INT2NUM(SDLK_RIGHT));
+    rb_define_const(mLibantargisruby,"SDLK_LEFT", INT2NUM(SDLK_LEFT));
+    rb_define_const(mLibantargisruby,"SDLK_INSERT", INT2NUM(SDLK_INSERT));
+    rb_define_const(mLibantargisruby,"SDLK_HOME", INT2NUM(SDLK_HOME));
+    rb_define_const(mLibantargisruby,"SDLK_END", INT2NUM(SDLK_END));
+    rb_define_const(mLibantargisruby,"SDLK_PAGEUP", INT2NUM(SDLK_PAGEUP));
+    rb_define_const(mLibantargisruby,"SDLK_PAGEDOWN", INT2NUM(SDLK_PAGEDOWN));
+    rb_define_const(mLibantargisruby,"SDLK_F1", INT2NUM(SDLK_F1));
+    rb_define_const(mLibantargisruby,"SDLK_F2", INT2NUM(SDLK_F2));
+    rb_define_const(mLibantargisruby,"SDLK_F3", INT2NUM(SDLK_F3));
+    rb_define_const(mLibantargisruby,"SDLK_F4", INT2NUM(SDLK_F4));
+    rb_define_const(mLibantargisruby,"SDLK_F5", INT2NUM(SDLK_F5));
+    rb_define_const(mLibantargisruby,"SDLK_F6", INT2NUM(SDLK_F6));
+    rb_define_const(mLibantargisruby,"SDLK_F7", INT2NUM(SDLK_F7));
+    rb_define_const(mLibantargisruby,"SDLK_F8", INT2NUM(SDLK_F8));
+    rb_define_const(mLibantargisruby,"SDLK_F9", INT2NUM(SDLK_F9));
+    rb_define_const(mLibantargisruby,"SDLK_F10", INT2NUM(SDLK_F10));
+    rb_define_const(mLibantargisruby,"SDLK_F11", INT2NUM(SDLK_F11));
+    rb_define_const(mLibantargisruby,"SDLK_F12", INT2NUM(SDLK_F12));
+    rb_define_const(mLibantargisruby,"SDLK_F13", INT2NUM(SDLK_F13));
+    rb_define_const(mLibantargisruby,"SDLK_F14", INT2NUM(SDLK_F14));
+    rb_define_const(mLibantargisruby,"SDLK_F15", INT2NUM(SDLK_F15));
+    rb_define_const(mLibantargisruby,"SDLK_NUMLOCK", INT2NUM(SDLK_NUMLOCK));
+    rb_define_const(mLibantargisruby,"SDLK_CAPSLOCK", INT2NUM(SDLK_CAPSLOCK));
+    rb_define_const(mLibantargisruby,"SDLK_SCROLLOCK", INT2NUM(SDLK_SCROLLOCK));
+    rb_define_const(mLibantargisruby,"SDLK_RSHIFT", INT2NUM(SDLK_RSHIFT));
+    rb_define_const(mLibantargisruby,"SDLK_LSHIFT", INT2NUM(SDLK_LSHIFT));
+    rb_define_const(mLibantargisruby,"SDLK_RCTRL", INT2NUM(SDLK_RCTRL));
+    rb_define_const(mLibantargisruby,"SDLK_LCTRL", INT2NUM(SDLK_LCTRL));
+    rb_define_const(mLibantargisruby,"SDLK_RALT", INT2NUM(SDLK_RALT));
+    rb_define_const(mLibantargisruby,"SDLK_LALT", INT2NUM(SDLK_LALT));
+    rb_define_const(mLibantargisruby,"SDLK_RMETA", INT2NUM(SDLK_RMETA));
+    rb_define_const(mLibantargisruby,"SDLK_LMETA", INT2NUM(SDLK_LMETA));
+    rb_define_const(mLibantargisruby,"SDLK_LSUPER", INT2NUM(SDLK_LSUPER));
+    rb_define_const(mLibantargisruby,"SDLK_RSUPER", INT2NUM(SDLK_RSUPER));
+    rb_define_const(mLibantargisruby,"SDLK_MODE", INT2NUM(SDLK_MODE));
+    rb_define_const(mLibantargisruby,"SDLK_COMPOSE", INT2NUM(SDLK_COMPOSE));
+    rb_define_const(mLibantargisruby,"SDLK_HELP", INT2NUM(SDLK_HELP));
+    rb_define_const(mLibantargisruby,"SDLK_PRINT", INT2NUM(SDLK_PRINT));
+    rb_define_const(mLibantargisruby,"SDLK_SYSREQ", INT2NUM(SDLK_SYSREQ));
+    rb_define_const(mLibantargisruby,"SDLK_BREAK", INT2NUM(SDLK_BREAK));
+    rb_define_const(mLibantargisruby,"SDLK_MENU", INT2NUM(SDLK_MENU));
+    rb_define_const(mLibantargisruby,"SDLK_POWER", INT2NUM(SDLK_POWER));
+    rb_define_const(mLibantargisruby,"SDLK_EURO", INT2NUM(SDLK_EURO));
+    rb_define_const(mLibantargisruby,"SDLK_UNDO", INT2NUM(SDLK_UNDO));
+    rb_define_const(mLibantargisruby,"SDLK_LAST", INT2NUM(SDLK_LAST));
+    rb_define_const(mLibantargisruby,"KMOD_NONE", INT2NUM(KMOD_NONE));
+    rb_define_const(mLibantargisruby,"KMOD_LSHIFT", INT2NUM(KMOD_LSHIFT));
+    rb_define_const(mLibantargisruby,"KMOD_RSHIFT", INT2NUM(KMOD_RSHIFT));
+    rb_define_const(mLibantargisruby,"KMOD_LCTRL", INT2NUM(KMOD_LCTRL));
+    rb_define_const(mLibantargisruby,"KMOD_RCTRL", INT2NUM(KMOD_RCTRL));
+    rb_define_const(mLibantargisruby,"KMOD_LALT", INT2NUM(KMOD_LALT));
+    rb_define_const(mLibantargisruby,"KMOD_RALT", INT2NUM(KMOD_RALT));
+    rb_define_const(mLibantargisruby,"KMOD_LMETA", INT2NUM(KMOD_LMETA));
+    rb_define_const(mLibantargisruby,"KMOD_RMETA", INT2NUM(KMOD_RMETA));
+    rb_define_const(mLibantargisruby,"KMOD_NUM", INT2NUM(KMOD_NUM));
+    rb_define_const(mLibantargisruby,"KMOD_CAPS", INT2NUM(KMOD_CAPS));
+    rb_define_const(mLibantargisruby,"KMOD_MODE", INT2NUM(KMOD_MODE));
+    rb_define_const(mLibantargisruby,"KMOD_RESERVED", INT2NUM(KMOD_RESERVED));
 }
 
