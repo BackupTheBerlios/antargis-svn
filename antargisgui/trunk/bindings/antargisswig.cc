@@ -10784,29 +10784,6 @@ _wrap_AGSurface_drawGradientAlpha(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGSurface_drawGradientAlpha2(int argc, VALUE *argv, VALUE self) {
-    AGSurface *arg1 = (AGSurface *) 0 ;
-    AGRect *arg2 = 0 ;
-    AGColor *arg3 = 0 ;
-    AGColor *arg4 = 0 ;
-    AGColor *arg5 = 0 ;
-    AGColor *arg6 = 0 ;
-    
-    if ((argc < 5) || (argc > 5))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurface, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGColor, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGColor, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_AGColor, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_AGColor, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
-    (arg1)->drawGradientAlpha2((AGRect const &)*arg2,(AGColor const &)*arg3,(AGColor const &)*arg4,(AGColor const &)*arg5,(AGColor const &)*arg6);
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_AGSurface_drawBorder(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
     AGRect *arg2 = 0 ;
@@ -18151,22 +18128,6 @@ _wrap_AGEditLine_drawCursor(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGEditLine_lines(int argc, VALUE *argv, VALUE self) {
-    AGEditLine *arg1 = (AGEditLine *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
-    result = (int)((AGEditLine const *)arg1)->lines();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
 _wrap_AGEditLine_height(int argc, VALUE *argv, VALUE self) {
     AGEditLine *arg1 = (AGEditLine *) 0 ;
     int result;
@@ -23017,7 +22978,6 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSurface.klass, "valid", VALUEFUNC(_wrap_AGSurface_valid), -1);
     rb_define_method(cAGSurface.klass, "drawGradient", VALUEFUNC(_wrap_AGSurface_drawGradient), -1);
     rb_define_method(cAGSurface.klass, "drawGradientAlpha", VALUEFUNC(_wrap_AGSurface_drawGradientAlpha), -1);
-    rb_define_method(cAGSurface.klass, "drawGradientAlpha2", VALUEFUNC(_wrap_AGSurface_drawGradientAlpha2), -1);
     rb_define_method(cAGSurface.klass, "drawBorder", VALUEFUNC(_wrap_AGSurface_drawBorder), -1);
     rb_define_method(cAGSurface.klass, "putPixel", VALUEFUNC(_wrap_AGSurface_putPixel), -1);
     rb_define_method(cAGSurface.klass, "getPixel", VALUEFUNC(_wrap_AGSurface_getPixel), -1);
@@ -23466,7 +23426,6 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGEditLine.klass, "setVAlign", VALUEFUNC(_wrap_AGEditLine_setVAlign), -1);
     rb_define_method(cAGEditLine.klass, "draw", VALUEFUNC(_wrap_AGEditLine_draw), -1);
     rb_define_method(cAGEditLine.klass, "drawCursor", VALUEFUNC(_wrap_AGEditLine_drawCursor), -1);
-    rb_define_method(cAGEditLine.klass, "lines", VALUEFUNC(_wrap_AGEditLine_lines), -1);
     rb_define_method(cAGEditLine.klass, "height", VALUEFUNC(_wrap_AGEditLine_height), -1);
     rb_define_method(cAGEditLine.klass, "width", VALUEFUNC(_wrap_AGEditLine_width), -1);
     rb_define_method(cAGEditLine.klass, "insert", VALUEFUNC(_wrap_AGEditLine_insert), -1);
