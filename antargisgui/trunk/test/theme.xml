@@ -48,7 +48,11 @@
 	
 	<edit>
 		<background>
-			<image name="image" file="bg_tile2.png"/>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+<!--			<image name="image" file="bg_tile2.png"/>-->
 		</background>
 		<font name="font" file="Arial.ttf" size="14" color="#000000"/>
 	</edit>
