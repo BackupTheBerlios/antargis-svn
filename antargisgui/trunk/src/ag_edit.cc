@@ -58,7 +58,6 @@ AGFont AGEditLine::getFont() const
   return mFont;
 }
 
-
 void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
 {
   //  AGSurface s(getScreen());

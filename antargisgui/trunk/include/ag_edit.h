@@ -40,8 +40,6 @@ class AGEditLine
   virtual void draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip);
   virtual void drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c);
   
-  int lines() const;
-
   int height() const;
   int width() const;
 

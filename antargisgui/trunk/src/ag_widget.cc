@@ -42,6 +42,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
 
 {
   mRubyObject=false;
+  mModal=false;
   //  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
@@ -167,6 +168,8 @@ bool AGWidget::processEvent(const AGEvent *event)
   }
   */
   checkFocus();
+  if(mModal)
+    return true;
   return false;
 }
 
@@ -632,6 +635,11 @@ AGWidget *AGWidget::getChild(const std::string &pName)
 	break;
     }
   return w;
+}
+
+void AGWidget::setModal(bool pModal)
+{
+  mModal=pModal;
 }
 
 #ifdef USE_RUBY

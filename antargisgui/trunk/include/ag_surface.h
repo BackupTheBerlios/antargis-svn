@@ -61,7 +61,7 @@ class AGSurface:public AGPaintTarget
 
   void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  void drawGradientAlpha2(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+//  void drawGradientAlpha2(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
 
   virtual void putPixel(int x,int y,const AGColor &c);
