@@ -24,6 +24,7 @@
 require 'libantargisruby'
 require 'libantargis'
 require 'antApp.rb'
+require 'sdl'
 
 include Libantargisruby
 include Libantargis
@@ -31,13 +32,47 @@ include Libantargis
 #
 # Story talking window - appearance defined in storytalk.xml
 #
-class AntStoryTalk<AGLayout
+class AntDialog<AGLayout
+	include AGHandler
+	def initialize(parent,filename)
+		super(parent,loadFile(filename))
+		addHandler(getChild("ok"),:sigClick,:sigOk)
+		addHandler(getChild("cancel"),:sigClick,:sigCancel)
+		#setModal(true)
+	end
+	def sigOk(eventName,callerName,event,caller)
+		sigClose
+	end
+	def sigCancel(eventName,callerName,event,caller)
+		sigClose
+	end
+	
+	def eventKeyDown(event)
+		puts "EVENTKEYDOWN"
+		super
+		puts event
+	end
+	def eventKeyDown(event)
+		if super then return true end
+		e=toAGSDLEvent(event)
+		if e.getKey==SDLK_ESCAPE then	
+			sigClose
+			getMap.unpause
+			return true
+		end
+	end
+	def sigClose
+		hide
+	end
+end
+
+class AntStoryTalk<AntDialog
 	include AGHandler
 	def initialize(parent)
-		super(parent,loadFile("storytalk.xml"))
+		super(parent,"storytalk.xml")
 		getMap().pause()
 		addHandler(toAGWindow(getChild("window")),:sigClose,:sigClose)
-		addHandler(getChild("ok"),:sigClick,:sigClose)
+		#addHandler(getChild("ok"),:sigClick,:sigClose)
 	end
 	def setText(text)
 		toAGEdit(getChild("text")).setText(text)
@@ -48,25 +83,10 @@ class AntStoryTalk<AGLayout
 	end
 	
 	# signals	
-	def sigClose(eventName,callerName,event,caller)
+	def sigOk(eventName,callerName,event,caller)
 		puts "pCaller:"+callerName
 		getMap().unpause()
 		toAGWindow(getChild("window")).close
-	end
-end
-
-class AntDialog<AGLayout
-	include AGHandler
-	def initialize(parent,filename)
-		super(parent,loadFile(filename))
-		addHandler(getChild("ok"),:sigClick,:sigOk)
-		addHandler(getChild("cancel"),:sigClick,:sigCancel)
-		#setModal(true)
-	end
-	def sigOk(eventName,callerName,event,caller)
-	end
-	def sigCancel(eventName,callerName,event,caller)
-		hide
 	end
 end
 
@@ -77,6 +97,41 @@ class AntQuitDialog<AntDialog
 	end
 	def sigOk(eventName,callerName,event,caller)
 		$app.tryQuit
+	end
+end
+
+class AntOptionsDialog<AntDialog
+	def initialize(parent)
+		super(parent,"optionsmenu.xml")
+		setName("OptionsDialog")
+		addHandler(getChild("editmode"),:sigClick,:sigEditmode)
+		addHandler(getChild("save"),:sigClick,:sigSave)
+		addHandler(getChild("load"),:sigClick,:sigLoad)
+		getMap.pause
+	end
+	def sigEditmode(ename,cname,event,caller)
+		$app.enableEdit
+	end
+	def sigSave(ename,cname,event,caller)
+		$app.save
+		hide
+	end
+	def sigLoad(ename,cname,event,caller)
+		$app.load
+		hide
+	end
+end
+
+class AntSaveDialog<AntDialog
+	def initialize(parent)
+		super(parent,"savedialog.xml")
+	end
+	def sigOk(eventName,callerName,event,caller)
+		filename=toAGEdit(getChild("Filename")).getText
+		puts "FILENAME:"+filename
+		getMap.saveMap(filename)
+		getMap.unpause
+		hide
 	end
 end
 
@@ -104,6 +159,7 @@ class AntGameApp <AntApp
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
+		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
 		storyTalk("Welcome","Welcome to Battles of Antargis")
 	end
@@ -131,6 +187,19 @@ class AntGameApp <AntApp
 		if not getMap().paused then
 			@layout.addChild(AntPauseDialog.new(@layout))
 		end
+	end
+	def sigOptions(ename,cname,ev,c)
+		@layout.addChild(AntOptionsDialog.new(@layout))
+	end
+	
+	def enableEdit
+		toEditIsoView(@layout.getChild("mainView")).toggleEdit
+	end
+	def save
+		@layout.addChild(AntSaveDialog.new(@layout))
+	end
+	def load
+		@layout.addChild(AntSaveDialog.new(@layout))
 	end
 end
 

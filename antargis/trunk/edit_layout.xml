@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout geometry="(0,0,1024,768)" name="EditLayout">
-  <table geometry="(0,717,650,50)" cols="13" rows="1">
+  <table geometry="(0,717,650,50)" cols="14" rows="1">
     <button col="0" row="0" name="edit1" caption-image="data/edit1.png"/>
     <button col="1" row="0" name="edit2" caption-image="data/edit2.png"/>
     <button col="2" row="0" name="edit3" caption-image="data/edit3.png"/>
@@ -14,5 +14,6 @@
     <button col="10" row="0" name="tree" caption-image="data/small_tree.png"/>
     <button col="11" row="0" name="stones" caption-image="data/stones1a.png"/>
     <button col="12" row="0" name="pins" caption-image="graphics/white_pin.png"/>
+    <button col="13" row="0" name="tower" caption-image="data/tower1.png"/>
   </table>
 </layout>

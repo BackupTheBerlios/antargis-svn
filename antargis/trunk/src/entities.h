@@ -25,8 +25,10 @@
 #include "quadtree.h"
 #include "voxel_gen.h"
 #include "tree.h"
+#include "map.h"
 
 #include "ag_xml.h"
+
 #include <ag_fs.h>
 
 #include <set>
@@ -34,56 +36,6 @@
 #include <algorithm>
 
 
-class AntTree:public AntEntity
-  {
-    int typeID;
-  public:
-    AntTree():typeID(0)
-    {}
-    AntTree(const Pos2D &p,int ID):AntEntity(p),typeID(ID)
-    {}
-    VoxelImage *getSurface() const
-      {
-        std::ostringstream os;
-        VoxelImage *im=0;
-        
-        os<<"tree"<<typeID;
-        
-        if(!fileExists(TILEDIR+os.str()+".png"))
-        {
-          im=makeTree();
-          im->save(os.str());
-          delete im;
-          im=0;
-        }
-        /*
-        else if(typeID==2)
-          os<<"tower2";//_"<<id;
-        else if(typeID==1)
-          os<<"house2a";
-        else if(typeID==3)
-          os<<"barn1a";
-        else if(typeID==4)
-          os<<"blacksmith2";
-        else if(typeID==5)
-          os<<"monument";*/
-        if(!im)
-          im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
-        im->setPosition(mPos);
-        /*        if(typeID==1)
-                  im->setCenter(Pos2D(100,150)+Pos2D(0,64));
-                if(typeID==2||typeID==3)
-                  im->setCenter(Pos2D(100,150)+Pos2D(0,64));*/
-        im->setVirtualY(100);
-        return im;
-      }
-    virtual std::string xmlName() const
-      {
-        return "antTree";
-      }
-    virtual void saveXML(xmlpp::Node &node) const;
-    virtual void loadXML(const xmlpp::Node &node);
-  };
 
 class AntDeco:public AntEntity
   {

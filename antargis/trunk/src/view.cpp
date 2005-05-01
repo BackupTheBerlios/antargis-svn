@@ -24,6 +24,8 @@
 #include <ag_button.h>
 #include "tree.h"
 #include "entities.h"
+#include "ant_tree.h"
+#include "ant_house.h"
 
 #include <ag_layout.h>
 #include <ag_tools.h>
@@ -558,6 +560,7 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   layout->getChild("tree")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   layout->getChild("stones")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   layout->getChild("pins")->sigClick.connect(slot(this,&EditIsoView::togglePoints));
+  layout->getChild("tower")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   
 }
 bool EditIsoView::togglePoints(const char *name,const AGEvent *e,AGMessageObject *pCaller)
@@ -673,6 +676,8 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
                   getMap()->insertEntity(new AntTree(Pos2D(p.x,p.z),rand()%11));
                 else if(mAddEntity=="stones")
                   getMap()->insertEntity(new AntDeco(Pos2D(p.x,p.z),rand()%2));
+		else if(mAddEntity=="tower")
+		  getMap()->insertEntity(new AntHouse(Pos2D(p.x,p.z),"tower2"));
                   
               }
 
@@ -805,6 +810,10 @@ void EditIsoView::init()
     }
 }
 
+EditIsoView &toEditIsoView(AGWidget &w)
+{
+  return dynamic_cast<EditIsoView&>(w);
+}
 
 
 // AntView
@@ -820,4 +829,6 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(AntView);
+
+
 

@@ -23,6 +23,7 @@
 #include <ag_fs.h>
 #include <cstdlib>
 #include "entities.h"
+#include "ant_tree.h"
 
 
 /************************************************************************
@@ -583,20 +584,6 @@ void FightJob::move(AntEntity *e,float ptime)
 }
 
 
-/************************************************************************
-* AntTree
-************************************************************************/
-
-void AntTree::saveXML(xmlpp::Node &node) const
-{
-  AntEntity::saveXML(node);
-  node.set("typeID",toString(typeID));
-}
-void AntTree::loadXML(const xmlpp::Node &node)
-{
-  AntEntity::loadXML(node);
-  typeID=toInt(node.get("typeID"));
-}
 /************************************************************************
 * AntDeco
 ************************************************************************/

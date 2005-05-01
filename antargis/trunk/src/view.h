@@ -147,4 +147,6 @@ class EditIsoView: public CompleteIsoView
     virtual void init();
   };
 
+EditIsoView &toEditIsoView(AGWidget &w);
+
 #endif

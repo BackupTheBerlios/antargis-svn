@@ -28,6 +28,7 @@
 
 #include "ag_xml.h"
 #include <ag_fs.h>
+#include "jobs.h"
 
 #include <set>
 #include <vector>

@@ -72,12 +72,14 @@ screen=AGScreenWidget.new
 #w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
 #window1.addChild(w2)
 
-l=AGLayout.new(screen,loadFile("optionsmenu.xml"))
+l=AGLayout.new(screen,loadFile("savedialog.xml"))
 screen.addChild(l)
-
+l.gainFocus
+l.getChild("Filename").gainFocus
 
 
 app.setMainWidget(screen)#widget)
+l.getChild("Filename").gainFocus
 
 app.run
 
