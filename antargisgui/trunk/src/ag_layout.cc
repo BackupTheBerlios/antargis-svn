@@ -22,11 +22,13 @@
 #include "ag_xml.h"
 #include "ag_tools.h"
 #include "ag_theme.h"
+#include "ag_listbox.h"
 
 #include "ag_button.h"
 #include "ag_edit.h"
 #include "ag_window.h"
 #include "ag_text.h"
+#include "ag_main.h"
 
 #include "ag_layoutfactory.h"
 
@@ -43,6 +45,8 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
     geom=AGRect(geomS);
   else if(pgParent)
     geom=pgParent->getRect().origin();
+  else
+    geom=AGRect(0,0,getMain()->width(),getMain()->height());
 
   setRect(geom);
 
@@ -359,3 +363,21 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(Edit);
+
+
+
+// AGListBox creator
+class AGListBoxLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(ListBox,"listBox")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    CTRACE;
+    AGListBox *l=new AGListBox(pParent,pRect);
+
+    return l;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(ListBox);

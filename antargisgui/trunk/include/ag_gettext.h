@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_main.h
+ * ag_gettext.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,23 +18,5 @@
  * License along with this program.
  */
 
-#ifndef __AG_MAIN
-#define __AG_MAIN
-
-class AGMain
-{
- public:
-  AGMain();
-  ~AGMain();
-
-  void flip();
-  void changeRes(int w,int h,int d,bool fs,bool gl);
-  void toggleFull();
-
-  int width() const;
-  int height() const;
-};
-
-AGMain *getMain();
-
-#endif
+#ifndef AG_GETTEXT_H
+#define AG_GETTEXT_H

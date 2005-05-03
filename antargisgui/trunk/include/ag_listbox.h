@@ -21,14 +21,54 @@
 #ifndef __AG_LISTBOX_H
 #define __AG_LISTBOX_H
 
-class AGListBox:public AGScrollingWidget
-{
- public:
-  AGListBox(AGWidget *pParent,const AGRect &pRect,int pHeight);
+#include <string>
+#include <vector>
+#include "ag_widget.h"
+#include "ag_background.h"
 
- private:
-  int mHeight;
+class AGEdit;
+
+struct AGListBoxItem
+{
+  AGListBoxItem(std::string pID,std::string pValue);
+  std::string id,value;
 };
 
+
+// Single selection for a start
+class AGListBox:public AGWidget
+{
+ public:
+  AGListBox(AGWidget *pParent,const AGRect &pRect);
+
+  void insert(std::string pID,std::string pValue);
+  void select(std::string pID);
+
+  std::string getSelectedID() const;
+  std::string getSelectedValue() const;
+
+  virtual bool eventKeyDown(const AGEvent *m);
+
+  AGSignal sigSelect;
+  AGSignal sigDoubleClick;
+
+  virtual void draw(AGPainter &p);
+  virtual bool eventMouseClick(const AGEvent *m);
+
+ private:
+
+  void arrange();
+
+  int mY;
+  std::vector<AGListBoxItem> mItems;
+  int mSelected;
+  int mHeight;
+  int mItemHeight;
+  std::vector<AGEdit*> mEdits;
+  AGBackground mBackground,mHilight;
+};
+
+
+AGListBox &toAGListBox(AGWidget &w);
 
 #endif

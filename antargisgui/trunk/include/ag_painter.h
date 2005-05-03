@@ -55,6 +55,7 @@ class AGPainter
   virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
   
   void transform(const AGRect &r);
+  void setNull(const AGPoint &p);
 
   void renderText(const std::string &pText,const AGPoint &p,const AGFont &f);
 
@@ -76,6 +77,7 @@ class AGPainter
   std::list<AGRect> mClips;
   
   AGRect mRect;
+  AGPoint mNull;
 
   AGPaintTarget &mTarget;
 };

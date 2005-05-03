@@ -833,6 +833,21 @@ AGEdit &toAGEdit(AGWidget &w)
   return dynamic_cast<AGEdit&>(w);
 }
 
+std::string AGEdit::getText() const
+{
+  std::ostringstream os;
+  std::list<AGEditLine>::const_iterator i=mLines.begin();
+  for(;i!=mLines.end();)
+    {
+      bool hard=i->hardEnd();
+      os<<i->getText();
+      i++;
+      if(i!=mLines.end() && hard)
+	os<<endl;
+    }
+  return os.str();
+}
+
 void AGEdit::clear()
 {
   mLines.clear();

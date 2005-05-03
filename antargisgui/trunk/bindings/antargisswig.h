@@ -787,43 +787,40 @@ public:
 };
 
 
-class SwigDirector_AGDialog : public AGDialog, public Swig::Director {
+class SwigDirector_AGListBox : public AGListBox, public Swig::Director {
 
 public:
-    SwigDirector_AGDialog(VALUE self, AGWidget *pgParent, std::string const &pXMLData);
+    SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
-    virtual bool eventClose(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
-    virtual ~SwigDirector_AGDialog();
+    virtual ~SwigDirector_AGListBox();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventKeyUp(AGEvent const *m);
     virtual bool eventQuit(AGEvent const *m);
     virtual bool eventQuitModal(AGEvent const *m);
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
+    virtual bool eventKeyDown(AGEvent const *m);
+    virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual bool eventOk(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
     virtual void setWidth(int w);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual bool eventCancel(char const *pName, AGEvent const *event, AGMessageObject *pCaller);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };

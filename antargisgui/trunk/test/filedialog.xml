@@ -13,8 +13,8 @@
 				<edit col="1" row="0" tabindex="1" text="dir...."/>
 			</table>
 			<table col="0" row="1" cols="2" rows="1">
-				<button col="0" row="0" caption="dir-list"/>
-				<button col="1" row="0" caption="file-list"/>
+				<listBox name="dirs" col="0" row="0" caption="dir-list"/>
+				<listBox name="files" col="1" row="0" caption="file-list"/>
 			</table>
 			<!-- FIXME set some border round this -->
 			<edit col="0" row="2" tabindex="0" text="Filename"/>

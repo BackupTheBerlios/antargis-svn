@@ -31,7 +31,11 @@ f.each {|x|
 
 if x =~ /%.*/ then
 	y=x.gsub(/.* "/,"").gsub(/"/,"").gsub(/\n/,"")
-	fn="../include/"+y
+        if not y=~/\/.*/ then
+        	fn="../include/"+y
+        else
+                fn=y
+	end
 	g=File.open(fn)
 	cn=""
 	found=false

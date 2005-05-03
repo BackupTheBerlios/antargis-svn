@@ -274,7 +274,7 @@ bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 
 bool AGWidget::eventMouseClick(const AGEvent *m)
 {
-  CTRACE;
+  //  CTRACE;
   return false;
 }
 

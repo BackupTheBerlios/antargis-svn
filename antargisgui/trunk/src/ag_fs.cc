@@ -89,3 +89,20 @@ bool fileExists(const std::string &pName)
 {
   return PHYSFS_exists(pName.c_str());
 }
+
+std::vector<std::string> getDirectory(const std::string &pDir)
+{
+  char **files= PHYSFS_enumerateFiles(pDir.c_str());
+  std::vector<std::string> v;
+
+  char **p=files;
+
+  while(*p)
+    {
+      v.push_back(*p);
+      p++;
+    }
+
+  PHYSFS_freeList(files);
+  return v;
+}

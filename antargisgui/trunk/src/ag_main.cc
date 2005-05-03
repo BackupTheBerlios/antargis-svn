@@ -192,3 +192,12 @@ AGMain *getMain()
     mAGMain=new AGMain();
   return mAGMain;
 }
+
+int AGMain::width() const
+{
+  return lastWidth;
+}
+int AGMain::height() const
+{
+  return lastHeight;
+}

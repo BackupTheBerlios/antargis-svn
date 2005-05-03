@@ -104,6 +104,8 @@ class AGEdit:public AGWidget
 
   bool canFocus() const;
 
+  std::string getText() const;
+
  private:
 
   void getActLine();

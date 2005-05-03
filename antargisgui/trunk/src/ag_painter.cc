@@ -43,12 +43,12 @@ AGPainter::~AGPainter()
 
 AGPoint AGPainter::move(const AGPoint &p) const
 {
-  return AGPoint(p.x+mRect.x,p.y+mRect.y);
+  return AGPoint(p.x+mRect.x+mNull.x,p.y+mRect.y+mNull.y);
 }
 
 AGRect AGPainter::move(const AGRect &r) const
 {
-  return AGRect(r.x+mRect.x,r.y+mRect.y,r.w,r.h);
+  return AGRect(r.x+mRect.x+mNull.x,r.y+mRect.y+mNull.y,r.w,r.h);
 }
 
 bool AGPainter::inRect(const AGPoint &p) const
@@ -73,8 +73,8 @@ std::pair<AGRect,AGRect> AGPainter::clip(const AGRect &from,const AGRect &to) co
 
   int x0=mRect.x;
   int y0=mRect.y;
-  int x1=mRect.x+mRect.w-1;
-  int y1=mRect.y+mRect.h-1;
+  int x1=x0+mRect.w-1;
+  int y1=y0+mRect.h-1;
 
   /*  cdebug("("<<x0<<";"<<y0<<"),("<<x1<<","<<y1<<")");
   cdebug("("<<sx0<<";"<<sy0<<"),("<<sx1<<","<<sy1<<")");
@@ -267,7 +267,7 @@ void AGPainter::renderText(const std::string &pText,const AGPoint &p,const AGFon
   // FIXME: clip text
   //  cdebug(mRect);
   //  cdebug(p);
-  mTarget.renderText(mRect,mRect.x+p.x,mRect.y+p.y,pText,f);
+  mTarget.renderText(mRect,mRect.x+p.x+mNull.x,mRect.y+p.y+mNull.y,pText,f);
 
 }
 void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, const AGColor& c2)
@@ -293,5 +293,10 @@ void AGPainter::drawRect(const AGRect &pRect,const AGColor &c)
 
 AGColor AGPainter::getPixel(int x,int y)
 {
-  return mTarget.getPixel(x+mRect.x,y+mRect.y);
+  return mTarget.getPixel(x+mRect.x+mNull.x,y+mRect.y+mNull.y);
+}
+
+void AGPainter::setNull(const AGPoint &p)
+{
+  mNull+=p;
 }
