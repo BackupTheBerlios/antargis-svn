@@ -28,7 +28,7 @@ class AGLayoutCreator
 {
  public:
   AGLayoutCreator(const std::string &pName);
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)=0;
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode);
 };
 
 class AGLayoutFactory

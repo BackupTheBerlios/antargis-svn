@@ -50,7 +50,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
 
   setTheme("");
 
-  cdebug("borderWidth:"<<borderWidth);
+  //  cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
 }
 

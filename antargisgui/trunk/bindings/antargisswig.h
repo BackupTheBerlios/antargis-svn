@@ -787,6 +787,14 @@ public:
 };
 
 
+class SwigDirector_AGLayoutCreator : public AGLayoutCreator, public Swig::Director {
+
+public:
+    SwigDirector_AGLayoutCreator(VALUE self, std::string const &pName);
+    virtual AGWidget *create(AGWidget *pParent, AGRect const &pRect, xmlpp::Node const &pNode);
+};
+
+
 class SwigDirector_AGListBox : public AGListBox, public Swig::Director {
 
 public:

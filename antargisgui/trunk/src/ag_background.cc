@@ -26,12 +26,12 @@
 
 AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
 {
-  CTRACE;
+  //  CTRACE;
   AGTheme *theme=getTheme();
   mColor=false;
   if(theme->hasSurface(pThemeName+".image"))
     {
-      CTRACE;
+      //      CTRACE;
       cdebug(pThemeName+".image");
       mSurface=AGTexture(theme->getSurface(pThemeName+".image"));
       mSurfaceFlag=true;
@@ -45,7 +45,7 @@ AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
       mColors[3]=theme->getColor(pThemeName+"."+std::string("gradientColor4"));
     }
 
-  cdebug(pThemeName<<":"<<mSurfaceFlag);
+  //  cdebug(pThemeName<<":"<<mSurfaceFlag);
   mBorder=theme->getInt(pThemeName+"."+std::string("border"));
 }
 

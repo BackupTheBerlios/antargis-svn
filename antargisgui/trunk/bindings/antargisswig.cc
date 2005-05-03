@@ -849,66 +849,68 @@ type_error:
 #define  SWIGTYPE_p_AGMenuEvent swig_types[3] 
 #define  SWIGTYPE_p_Node swig_types[4] 
 #define  SWIGTYPE_p_AGMouseEvent swig_types[5] 
-#define  SWIGTYPE_p_AGRect swig_types[6] 
-#define  SWIGTYPE_p_SDL_Event swig_types[7] 
-#define  SWIGTYPE_p_AGApplication swig_types[8] 
-#define  SWIGTYPE_p_SDL_Rect swig_types[9] 
-#define  SWIGTYPE_p_AGButton swig_types[10] 
-#define  SWIGTYPE_p_SDLMod swig_types[11] 
-#define  SWIGTYPE_p_AGHTiler swig_types[12] 
-#define  SWIGTYPE_p_Document swig_types[13] 
-#define  SWIGTYPE_p_AGCPPListener swig_types[14] 
-#define  SWIGTYPE_p_AGListener swig_types[15] 
-#define  SWIGTYPE_p_std__listTNode_t swig_types[16] 
-#define  SWIGTYPE_p_AGScreen swig_types[17] 
-#define  SWIGTYPE_p_AGImage swig_types[18] 
-#define  SWIGTYPE_p_ParserInfo swig_types[19] 
-#define  SWIGTYPE_p_SDL_Surface swig_types[20] 
-#define  SWIGTYPE_p_AGSurface swig_types[21] 
-#define  SWIGTYPE_p_AGSurfaceCache swig_types[22] 
-#define  SWIGTYPE_p_AGScreenWidget swig_types[23] 
-#define  SWIGTYPE_p_AGMain swig_types[24] 
-#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[25] 
-#define  SWIGTYPE_p_AGBackground swig_types[26] 
-#define  SWIGTYPE_p_AGSignal swig_types[27] 
-#define  SWIGTYPE_p_iterator swig_types[28] 
-#define  SWIGTYPE_p_const_iterator swig_types[29] 
-#define  SWIGTYPE_p_std__listTNode_t__iterator swig_types[30] 
-#define  SWIGTYPE_p_std__listTNode_t__const_iterator swig_types[31] 
-#define  SWIGTYPE_p_AGCaption swig_types[32] 
-#define  SWIGTYPE_p_std__string swig_types[33] 
-#define  SWIGTYPE_p_AGEvent swig_types[34] 
-#define  SWIGTYPE_p_AGListBoxItem swig_types[35] 
-#define  SWIGTYPE_p_AGTexture swig_types[36] 
-#define  SWIGTYPE_p_Uint32 swig_types[37] 
-#define  SWIGTYPE_p_AGRadioGroup swig_types[38] 
-#define  SWIGTYPE_p_AGText swig_types[39] 
-#define  SWIGTYPE_p_AGWindow swig_types[40] 
-#define  SWIGTYPE_p_AGMenu swig_types[41] 
-#define  SWIGTYPE_p_AGEdit swig_types[42] 
-#define  SWIGTYPE_p_AGWidget swig_types[43] 
-#define  SWIGTYPE_p_ParserException swig_types[44] 
-#define  SWIGTYPE_p_AGCheckBox swig_types[45] 
-#define  SWIGTYPE_p_AGFontEngine swig_types[46] 
-#define  SWIGTYPE_p_AGTable swig_types[47] 
-#define  SWIGTYPE_p_AGPoint swig_types[48] 
-#define  SWIGTYPE_p_AGPainter swig_types[49] 
-#define  SWIGTYPE_p_AGEditLine swig_types[50] 
-#define  SWIGTYPE_p_std__ostringstream swig_types[51] 
-#define  SWIGTYPE_p_AGListBox swig_types[52] 
-#define  SWIGTYPE_p_AGMessageObject swig_types[53] 
-#define  SWIGTYPE_p_SDLKey swig_types[54] 
-#define  SWIGTYPE_p_SDL_PixelFormat swig_types[55] 
-#define  SWIGTYPE_p_AGVTiler swig_types[56] 
-#define  SWIGTYPE_p_AGLayout swig_types[57] 
-#define  SWIGTYPE_p_AGSDLEvent swig_types[58] 
-#define  SWIGTYPE_p_AGColor swig_types[59] 
-#define  SWIGTYPE_p_AGTheme swig_types[60] 
-#define  SWIGTYPE_p_AGRadio swig_types[61] 
-#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[62] 
-#define  SWIGTYPE_p_AGFont swig_types[63] 
-#define  SWIGTYPE_p_unsigned_long swig_types[64] 
-static swig_type_info *swig_types[66];
+#define  SWIGTYPE_p_AGLayoutFactory swig_types[6] 
+#define  SWIGTYPE_p_AGRect swig_types[7] 
+#define  SWIGTYPE_p_SDL_Event swig_types[8] 
+#define  SWIGTYPE_p_AGApplication swig_types[9] 
+#define  SWIGTYPE_p_SDL_Rect swig_types[10] 
+#define  SWIGTYPE_p_AGButton swig_types[11] 
+#define  SWIGTYPE_p_SDLMod swig_types[12] 
+#define  SWIGTYPE_p_AGHTiler swig_types[13] 
+#define  SWIGTYPE_p_Document swig_types[14] 
+#define  SWIGTYPE_p_AGCPPListener swig_types[15] 
+#define  SWIGTYPE_p_AGListener swig_types[16] 
+#define  SWIGTYPE_p_std__listTNode_t swig_types[17] 
+#define  SWIGTYPE_p_AGScreen swig_types[18] 
+#define  SWIGTYPE_p_AGImage swig_types[19] 
+#define  SWIGTYPE_p_ParserInfo swig_types[20] 
+#define  SWIGTYPE_p_SDL_Surface swig_types[21] 
+#define  SWIGTYPE_p_AGSurface swig_types[22] 
+#define  SWIGTYPE_p_AGSurfaceCache swig_types[23] 
+#define  SWIGTYPE_p_AGScreenWidget swig_types[24] 
+#define  SWIGTYPE_p_AGMain swig_types[25] 
+#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[26] 
+#define  SWIGTYPE_p_AGBackground swig_types[27] 
+#define  SWIGTYPE_p_AGSignal swig_types[28] 
+#define  SWIGTYPE_p_iterator swig_types[29] 
+#define  SWIGTYPE_p_const_iterator swig_types[30] 
+#define  SWIGTYPE_p_std__listTNode_t__iterator swig_types[31] 
+#define  SWIGTYPE_p_std__listTNode_t__const_iterator swig_types[32] 
+#define  SWIGTYPE_p_AGCaption swig_types[33] 
+#define  SWIGTYPE_p_std__string swig_types[34] 
+#define  SWIGTYPE_p_AGEvent swig_types[35] 
+#define  SWIGTYPE_p_AGListBoxItem swig_types[36] 
+#define  SWIGTYPE_p_AGTexture swig_types[37] 
+#define  SWIGTYPE_p_Uint32 swig_types[38] 
+#define  SWIGTYPE_p_AGRadioGroup swig_types[39] 
+#define  SWIGTYPE_p_AGText swig_types[40] 
+#define  SWIGTYPE_p_AGWindow swig_types[41] 
+#define  SWIGTYPE_p_AGMenu swig_types[42] 
+#define  SWIGTYPE_p_AGEdit swig_types[43] 
+#define  SWIGTYPE_p_AGLayoutCreator swig_types[44] 
+#define  SWIGTYPE_p_AGWidget swig_types[45] 
+#define  SWIGTYPE_p_ParserException swig_types[46] 
+#define  SWIGTYPE_p_AGCheckBox swig_types[47] 
+#define  SWIGTYPE_p_AGFontEngine swig_types[48] 
+#define  SWIGTYPE_p_AGTable swig_types[49] 
+#define  SWIGTYPE_p_AGPoint swig_types[50] 
+#define  SWIGTYPE_p_AGPainter swig_types[51] 
+#define  SWIGTYPE_p_AGEditLine swig_types[52] 
+#define  SWIGTYPE_p_std__ostringstream swig_types[53] 
+#define  SWIGTYPE_p_AGListBox swig_types[54] 
+#define  SWIGTYPE_p_AGMessageObject swig_types[55] 
+#define  SWIGTYPE_p_SDLKey swig_types[56] 
+#define  SWIGTYPE_p_SDL_PixelFormat swig_types[57] 
+#define  SWIGTYPE_p_AGVTiler swig_types[58] 
+#define  SWIGTYPE_p_AGLayout swig_types[59] 
+#define  SWIGTYPE_p_AGSDLEvent swig_types[60] 
+#define  SWIGTYPE_p_AGColor swig_types[61] 
+#define  SWIGTYPE_p_AGTheme swig_types[62] 
+#define  SWIGTYPE_p_AGRadio swig_types[63] 
+#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[64] 
+#define  SWIGTYPE_p_AGFont swig_types[65] 
+#define  SWIGTYPE_p_unsigned_long swig_types[66] 
+static swig_type_info *swig_types[68];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -1190,6 +1192,12 @@ static void free_AGBackground(AGBackground *);
 
 swig_class cAGLayout;
 static void free_AGLayout(AGLayout *);
+
+swig_class cAGLayoutCreator;
+static void free_AGLayoutCreator(AGLayoutCreator *);
+
+swig_class cAGLayoutFactory;
+static void free_AGLayoutFactory(AGLayoutFactory *);
 
 swig_class cParserException;
 static void free_ParserException(ParserException *);
@@ -11213,6 +11221,39 @@ void SwigDirector_AGLayout::addChild(AGWidget *w) {
 }
 
 
+SwigDirector_AGLayoutCreator::SwigDirector_AGLayoutCreator(VALUE self, std::string const &pName): AGLayoutCreator(pName), Swig::Director(self) {
+    
+}
+
+
+
+AGWidget *SwigDirector_AGLayoutCreator::create(AGWidget *pParent, AGRect const &pRect, xmlpp::Node const &pNode) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    AGRect * nc_tmp_pRect = const_cast<AGRect *>(&pRect) ;
+    VALUE obj1 = Qnil ;
+    xmlpp::Node * nc_tmp_pNode = const_cast<xmlpp::Node *>(&pNode) ;
+    VALUE obj2 = Qnil ;
+    AGWidget *c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGLayoutCreator::create(pParent,pRect,pNode);
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(pParent);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(pParent, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    obj1 = SWIG_NewPointerObj(nc_tmp_pRect, SWIGTYPE_p_AGRect, 0);
+    obj2 = SWIG_NewPointerObj(nc_tmp_pNode, SWIGTYPE_p_Node, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("create"), 3,obj0,obj1,obj2);
+    if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_AGWidget,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
+    return (AGWidget *) c_result;
+}
+
+
 SwigDirector_AGListBox::SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect): AGListBox(pParent, pRect), Swig::Director(self) {
     
 }
@@ -17063,7 +17104,7 @@ _wrap_AGRect_getPosition(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect_toString(int argc, VALUE *argv, VALUE self) {
+_wrap_AGRect_to_s(int argc, VALUE *argv, VALUE self) {
     AGRect *arg1 = (AGRect *) 0 ;
     std::string result;
     VALUE vresult = Qnil;
@@ -22582,6 +22623,177 @@ _wrap_getLayoutGeometry(int argc, VALUE *argv, VALUE self) {
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
+_wrap_AGLayoutCreator_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGLayoutCreator_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGLayoutCreator);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGLayoutCreator(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    std::string *arg2 = 0 ;
+    AGLayoutCreator *result;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    char *classname = "Libantargisruby::AGLayoutCreator";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGLayoutCreator *)new SwigDirector_AGLayoutCreator(arg1,(std::string const &)*arg2);
+        
+    } else {
+        result = (AGLayoutCreator *)new AGLayoutCreator((std::string const &)*arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_AGLayoutCreator_create(int argc, VALUE *argv, VALUE self) {
+    AGLayoutCreator *arg1 = (AGLayoutCreator *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    AGRect *arg3 = 0 ;
+    xmlpp::Node *arg4 = 0 ;
+    AGWidget *result;
+    Swig::Director *director = 0;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLayoutCreator, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_Node, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (AGWidget *)(arg1)->create(arg2,(AGRect const &)*arg3,(Node const &)*arg4);
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
+    }
+    return vresult;
+}
+
+
+static void
+free_AGLayoutCreator(AGLayoutCreator *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_disown_AGLayoutCreator(int argc, VALUE *argv, VALUE self) {
+    AGLayoutCreator *arg1 = (AGLayoutCreator *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGLayoutCreator, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGLayoutFactory_addCreator(int argc, VALUE *argv, VALUE self) {
+    AGLayoutFactory *arg1 = (AGLayoutFactory *) 0 ;
+    std::string *arg2 = 0 ;
+    AGLayoutCreator *arg3 = (AGLayoutCreator *) 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLayoutFactory, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGLayoutCreator, 1);
+    (arg1)->addCreator((std::string const &)*arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGLayoutFactory_create(int argc, VALUE *argv, VALUE self) {
+    AGLayoutFactory *arg1 = (AGLayoutFactory *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    AGRect *arg3 = 0 ;
+    xmlpp::Node *arg4 = 0 ;
+    AGWidget *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLayoutFactory, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_Node, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGWidget *)(arg1)->create(arg2,(AGRect const &)*arg3,(Node const &)*arg4);
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_getLayoutFactory(int argc, VALUE *argv, VALUE self) {
+    AGLayoutFactory *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (AGLayoutFactory *)getLayoutFactory();
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayoutFactory,0);
+    return vresult;
+}
+
+
+static void
+free_AGLayoutFactory(AGLayoutFactory *arg1) {
+    delete arg1;
+}
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
 _wrap_ParserException_allocate(VALUE self) {
 #else
     static VALUE
@@ -25191,6 +25403,7 @@ static swig_type_info _swigt__p_NodeList[] = {{"_p_NodeList", 0, "NodeList *", 0
 static swig_type_info _swigt__p_AGMenuEvent[] = {{"_p_AGMenuEvent", 0, "AGMenuEvent *", 0, 0, 0, 0},{"_p_AGMenuEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Node[] = {{"_p_Node", 0, "Node *", 0, 0, 0, 0},{"_p_Node", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMouseEvent[] = {{"_p_AGMouseEvent", 0, "AGMouseEvent *", 0, 0, 0, 0},{"_p_AGMouseEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGLayoutFactory[] = {{"_p_AGLayoutFactory", 0, "AGLayoutFactory *", 0, 0, 0, 0},{"_p_AGLayoutFactory", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGRect[] = {{"_p_AGRect", 0, "AGRect *", 0, 0, 0, 0},{"_p_AGRect", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Event[] = {{"_p_SDL_Event", 0, "SDL_Event *", 0, 0, 0, 0},{"_p_SDL_Event", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGApplication[] = {{"_p_AGApplication", 0, "AGApplication *", 0, 0, 0, 0},{"_p_AGApplication", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -25228,6 +25441,7 @@ static swig_type_info _swigt__p_AGText[] = {{"_p_AGText", 0, "AGText *", 0, 0, 0
 static swig_type_info _swigt__p_AGWindow[] = {{"_p_AGWindow", 0, "AGWindow *", 0, 0, 0, 0},{"_p_AGWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMenu[] = {{"_p_AGMenu", 0, "AGMenu *", 0, 0, 0, 0},{"_p_AGMenu", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGEdit[] = {{"_p_AGEdit", 0, "AGEdit *", 0, 0, 0, 0},{"_p_AGEdit", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGLayoutCreator[] = {{"_p_AGLayoutCreator", 0, "AGLayoutCreator *", 0, 0, 0, 0},{"_p_AGLayoutCreator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGWidget[] = {{"_p_AGWidget", 0, "AGWidget *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGWidget", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGWidget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCheckBox[] = {{"_p_AGCheckBox", 0, "AGCheckBox *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGCheckBox, 0, 0, 0, 0, 0},{"_p_AGCheckBox", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -25258,6 +25472,7 @@ _swigt__p_NodeList,
 _swigt__p_AGMenuEvent, 
 _swigt__p_Node, 
 _swigt__p_AGMouseEvent, 
+_swigt__p_AGLayoutFactory, 
 _swigt__p_AGRect, 
 _swigt__p_SDL_Event, 
 _swigt__p_AGApplication, 
@@ -25295,6 +25510,7 @@ _swigt__p_AGText,
 _swigt__p_AGWindow, 
 _swigt__p_AGMenu, 
 _swigt__p_AGEdit, 
+_swigt__p_AGLayoutCreator, 
 _swigt__p_AGWidget, 
 _swigt__p_ParserException, 
 _swigt__p_AGCheckBox, 
@@ -25636,7 +25852,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGRect.klass, "project", VALUEFUNC(_wrap_AGRect_project), -1);
     rb_define_method(cAGRect.klass, "origin", VALUEFUNC(_wrap_AGRect_origin), -1);
     rb_define_method(cAGRect.klass, "getPosition", VALUEFUNC(_wrap_AGRect_getPosition), -1);
-    rb_define_method(cAGRect.klass, "toString", VALUEFUNC(_wrap_AGRect_toString), -1);
+    rb_define_method(cAGRect.klass, "to_s", VALUEFUNC(_wrap_AGRect_to_s), -1);
     rb_define_method(cAGRect.klass, "==", VALUEFUNC(_wrap_AGRect___eq__), -1);
     rb_define_method(cAGRect.klass, "+", VALUEFUNC(_wrap_AGRect___add__), -1);
     cAGRect.mark = 0;
@@ -25990,6 +26206,24 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_module_function(mLibantargisruby, "parseNode", VALUEFUNC(_wrap_parseNode), -1);
     rb_define_module_function(mLibantargisruby, "parseChildren", VALUEFUNC(_wrap_parseChildren), -1);
     rb_define_module_function(mLibantargisruby, "getLayoutGeometry", VALUEFUNC(_wrap_getLayoutGeometry), -1);
+    rb_define_module_function(mLibantargisruby, "disown_AGLayoutCreator", VALUEFUNC(_wrap_disown_AGLayoutCreator), -1);
+    
+    cAGLayoutCreator.klass = rb_define_class_under(mLibantargisruby, "AGLayoutCreator", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGLayoutCreator, (void *) &cAGLayoutCreator);
+    rb_define_alloc_func(cAGLayoutCreator.klass, _wrap_AGLayoutCreator_allocate);
+    rb_define_method(cAGLayoutCreator.klass, "initialize", VALUEFUNC(_wrap_new_AGLayoutCreator), -1);
+    rb_define_method(cAGLayoutCreator.klass, "create", VALUEFUNC(_wrap_AGLayoutCreator_create), -1);
+    cAGLayoutCreator.mark = 0;
+    cAGLayoutCreator.destroy = (void (*)(void *)) free_AGLayoutCreator;
+    rb_define_module_function(mLibantargisruby, "getLayoutFactory", VALUEFUNC(_wrap_getLayoutFactory), -1);
+    
+    cAGLayoutFactory.klass = rb_define_class_under(mLibantargisruby, "AGLayoutFactory", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGLayoutFactory, (void *) &cAGLayoutFactory);
+    rb_undef_alloc_func(cAGLayoutFactory.klass);
+    rb_define_method(cAGLayoutFactory.klass, "addCreator", VALUEFUNC(_wrap_AGLayoutFactory_addCreator), -1);
+    rb_define_method(cAGLayoutFactory.klass, "create", VALUEFUNC(_wrap_AGLayoutFactory_create), -1);
+    cAGLayoutFactory.mark = 0;
+    cAGLayoutFactory.destroy = (void (*)(void *)) free_AGLayoutFactory;
     
     cParserException.klass = rb_define_class_under(mLibantargisruby, "ParserException", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_ParserException, (void *) &cParserException);

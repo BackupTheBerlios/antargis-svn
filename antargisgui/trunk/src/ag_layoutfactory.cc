@@ -26,6 +26,11 @@ AGLayoutCreator::AGLayoutCreator(const std::string &pName)
   getLayoutFactory()->addCreator(pName,this);
 }
 
+AGWidget *AGLayoutCreator::create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+{
+  return 0;
+}
+
 
 AGLayoutFactory::AGLayoutFactory()
 {

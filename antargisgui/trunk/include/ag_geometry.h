@@ -67,6 +67,9 @@ class AGRect:public SDL_Rect
   
   AGPoint getPosition() const;
 
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
   std::string toString() const;
 
   //  SDL_Rect rect() const;

@@ -96,6 +96,11 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   w=getLayoutFactory()->create(pParent,geom,pNode);
 
+  if(!w)
+    {
+      cdebug("CREATION FAILED!!"<<n);
+    }
+
   if(w!=0 && pNode.get("name").length())
     w->setName(pNode.get("name"));
 
