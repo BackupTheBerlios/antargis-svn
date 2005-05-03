@@ -34,6 +34,8 @@ class Job
   Job(int p);
   virtual ~Job();
   virtual void move(AntEntity *,float ptime);
+
+  virtual void jobFinished(AntEntity *e);
   bool operator<=(const Job &j) const;
   
   VALUE mRUBY;
@@ -46,6 +48,7 @@ class RestJob:public Job
   float mTime;
  public:
   RestJob(float pTime);
+  virtual ~RestJob();
   void move(AntEntity *e,float ptime);
 };
 
@@ -58,8 +61,11 @@ class MoveJob:public Job
     bool mRun;
   public:
     MoveJob(int p,const Pos2D &pTarget,int pnear=0,bool pRun=false);
+    virtual ~MoveJob();
     void move(AntEntity *e,float ptime);
     Pos2D getDirection(const AntEntity *e) const;
+
+    
   private:
     void moveBy(AntEntity *e,float ptime,float aspeed);
   };
@@ -79,6 +85,7 @@ class FightJob:public Job
       strength=0.2;   // decrease per second
       speed=70; // see MoveJob
     }
+      virtual ~FightJob();
     void move(AntEntity *e,float ptime);
     AntEntity *getTarget()
     {
@@ -86,15 +93,19 @@ class FightJob:public Job
     }
   };
 
-class FetchJob:public Job
+class FetchJob:public MoveJob
 {
   std::string mWhat;
  public:
-  FetchJob(std::string what);
+  FetchJob(int p,const Pos2D &pTarget,std::string what);
   virtual ~FetchJob();
   void move(AntEntity *e,float ptime);
+  virtual void jobFinished(AntEntity *e);
   
 };
 
+RestJob *newRestJob(int pTime);
+FetchJob *newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
+MoveJob *newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
 
 #endif

@@ -209,6 +209,8 @@ class AntEntity
         }
     }
 
+    virtual Job*getJob(AntEntity*);
+
     virtual void gotFight(AntEntity *)
     {}
 

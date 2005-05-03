@@ -1526,6 +1526,21 @@ AntHero *SwigDirector_AntEntity::getHero() {
 }
 
 
+Job *SwigDirector_AntEntity::getJob(AntEntity *arg0) {
+    VALUE obj0 = Qnil ;
+    Job *c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AntEntity::getJob(arg0);
+    }
+    obj0 = SWIG_NewPointerObj(arg0, SWIGTYPE_p_AntEntity, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("getJob"), 1,obj0);
+    if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_Job,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
+    return (Job *) c_result;
+}
+
+
 SwigDirector_AntEntity::~SwigDirector_AntEntity() {
 }
 
@@ -1735,6 +1750,27 @@ AntBoss *SwigDirector_AntMan::getBoss() {
     result = rb_funcall(swig_get_self(), rb_intern("getBoss"), 0, NULL);
     if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_AntBoss,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
     return (AntBoss *) c_result;
+}
+
+
+Job *SwigDirector_AntMan::getJob(AntEntity *arg0) {
+    Swig::Director * director__p_AntEntity = 0 ;
+    VALUE obj0 = Qnil ;
+    Job *c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AntEntity::getJob(arg0);
+    }
+    director__p_AntEntity = dynamic_cast<Swig::Director *>(arg0);
+    if (!director__p_AntEntity) {
+        obj0 = SWIG_NewPointerObj(arg0, SWIGTYPE_p_AntEntity, 0);
+    } else {
+        obj0 = director__p_AntEntity->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getJob"), 1,obj0);
+    if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_Job,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
+    return (Job *) c_result;
 }
 
 
@@ -1989,6 +2025,25 @@ void SwigDirector_Job::move(AntEntity *arg0, float ptime) {
 }
 
 
+void SwigDirector_Job::jobFinished(AntEntity *e) {
+    Swig::Director * director__p_AntEntity = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Job::jobFinished(e);
+        return;
+    }
+    director__p_AntEntity = dynamic_cast<Swig::Director *>(e);
+    if (!director__p_AntEntity) {
+        obj0 = SWIG_NewPointerObj(e, SWIGTYPE_p_AntEntity, 0);
+    } else {
+        obj0 = director__p_AntEntity->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 1,obj0);
+}
+
+
 SwigDirector_Job::~SwigDirector_Job() {
 }
 
@@ -1996,6 +2051,25 @@ SwigDirector_RestJob::SwigDirector_RestJob(VALUE self, float pTime): RestJob(pTi
     
 }
 
+
+
+void SwigDirector_RestJob::jobFinished(AntEntity *e) {
+    Swig::Director * director__p_AntEntity = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Job::jobFinished(e);
+        return;
+    }
+    director__p_AntEntity = dynamic_cast<Swig::Director *>(e);
+    if (!director__p_AntEntity) {
+        obj0 = SWIG_NewPointerObj(e, SWIGTYPE_p_AntEntity, 0);
+    } else {
+        obj0 = director__p_AntEntity->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 1,obj0);
+}
 
 
 void SwigDirector_RestJob::move(AntEntity *e, float ptime) {
@@ -2028,6 +2102,25 @@ SwigDirector_MoveJob::SwigDirector_MoveJob(VALUE self, int p, Pos2D const &pTarg
 
 
 
+void SwigDirector_MoveJob::jobFinished(AntEntity *e) {
+    Swig::Director * director__p_AntEntity = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Job::jobFinished(e);
+        return;
+    }
+    director__p_AntEntity = dynamic_cast<Swig::Director *>(e);
+    if (!director__p_AntEntity) {
+        obj0 = SWIG_NewPointerObj(e, SWIGTYPE_p_AntEntity, 0);
+    } else {
+        obj0 = director__p_AntEntity->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 1,obj0);
+}
+
+
 void SwigDirector_MoveJob::move(AntEntity *e, float ptime) {
     Swig::Director * director__p_AntEntity = 0 ;
     VALUE obj0 = Qnil ;
@@ -2058,6 +2151,25 @@ SwigDirector_FightJob::SwigDirector_FightJob(VALUE self, int p, AntEntity *pTarg
 
 
 
+void SwigDirector_FightJob::jobFinished(AntEntity *e) {
+    Swig::Director * director__p_AntEntity = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Job::jobFinished(e);
+        return;
+    }
+    director__p_AntEntity = dynamic_cast<Swig::Director *>(e);
+    if (!director__p_AntEntity) {
+        obj0 = SWIG_NewPointerObj(e, SWIGTYPE_p_AntEntity, 0);
+    } else {
+        obj0 = director__p_AntEntity->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 1,obj0);
+}
+
+
 void SwigDirector_FightJob::move(AntEntity *e, float ptime) {
     Swig::Director * director__p_AntEntity = 0 ;
     VALUE obj0 = Qnil ;
@@ -2082,7 +2194,7 @@ void SwigDirector_FightJob::move(AntEntity *e, float ptime) {
 SwigDirector_FightJob::~SwigDirector_FightJob() {
 }
 
-SwigDirector_FetchJob::SwigDirector_FetchJob(VALUE self, std::string what): FetchJob(what), Swig::Director(self) {
+SwigDirector_FetchJob::SwigDirector_FetchJob(VALUE self, int p, Pos2D const &pTarget, std::string what): FetchJob(p, pTarget, what), Swig::Director(self) {
     
 }
 
@@ -2106,6 +2218,25 @@ void SwigDirector_FetchJob::move(AntEntity *e, float ptime) {
     }
     obj1 = rb_float_new(ptime);
     result = rb_funcall(swig_get_self(), rb_intern("move"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_FetchJob::jobFinished(AntEntity *e) {
+    Swig::Director * director__p_AntEntity = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        FetchJob::jobFinished(e);
+        return;
+    }
+    director__p_AntEntity = dynamic_cast<Swig::Director *>(e);
+    if (!director__p_AntEntity) {
+        obj0 = SWIG_NewPointerObj(e, SWIGTYPE_p_AntEntity, 0);
+    } else {
+        obj0 = director__p_AntEntity->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 1,obj0);
 }
 
 
@@ -4917,6 +5048,27 @@ _wrap_AntEntity_decCondition(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntEntity_getJob(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    AntEntity *arg2 = (AntEntity *) 0 ;
+    Job *result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (Job *)(arg1)->getJob(arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Job,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AntEntity_gotFight(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     AntEntity *arg2 = (AntEntity *) 0 ;
@@ -7589,6 +7741,24 @@ _wrap_Job_move(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Job_jobFinished(int argc, VALUE *argv, VALUE self) {
+    Job *arg1 = (Job *) 0 ;
+    AntEntity *arg2 = (AntEntity *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Job, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->jobFinished(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_Job___le__(int argc, VALUE *argv, VALUE self) {
     Job *arg1 = (Job *) 0 ;
     Job *arg2 = 0 ;
@@ -7761,6 +7931,10 @@ _wrap_new_RestJob(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_RestJob(RestJob *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_RestJob_move(int argc, VALUE *argv, VALUE self) {
     RestJob *arg1 = (RestJob *) 0 ;
@@ -7781,10 +7955,6 @@ _wrap_RestJob_move(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_RestJob(RestJob *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_RestJob(int argc, VALUE *argv, VALUE self) {
     RestJob *arg1 = (RestJob *) 0 ;
@@ -8002,6 +8172,10 @@ static VALUE _wrap_new_MoveJob(int nargs, VALUE *args, VALUE self) {
 }
 
 
+static void
+free_MoveJob(MoveJob *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_MoveJob_move(int argc, VALUE *argv, VALUE self) {
     MoveJob *arg1 = (MoveJob *) 0 ;
@@ -8044,10 +8218,6 @@ _wrap_MoveJob_getDirection(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_MoveJob(MoveJob *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_MoveJob(int argc, VALUE *argv, VALUE self) {
     MoveJob *arg1 = (MoveJob *) 0 ;
@@ -8112,6 +8282,10 @@ _wrap_new_FightJob(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_FightJob(FightJob *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_FightJob_move(int argc, VALUE *argv, VALUE self) {
     FightJob *arg1 = (FightJob *) 0 ;
@@ -8154,10 +8328,6 @@ _wrap_FightJob_getTarget(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_FightJob(FightJob *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_FightJob(int argc, VALUE *argv, VALUE self) {
     FightJob *arg1 = (FightJob *) 0 ;
@@ -8194,15 +8364,19 @@ _wrap_FetchJob_allocate(VALUE self) {
 static VALUE
 _wrap_new_FetchJob(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
-    std::string arg2 ;
+    int arg2 ;
+    Pos2D *arg3 = 0 ;
+    std::string arg4 ;
     FetchJob *result;
     
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_Pos2D, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+        if (TYPE(argv[2]) == T_STRING) {
+            arg4 = std::string(StringValuePtr(argv[2]));
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -8211,10 +8385,10 @@ _wrap_new_FetchJob(int argc, VALUE *argv, VALUE self) {
         char *classname = "Libantargis::FetchJob";
         if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
             /* subclassed */
-            result = (FetchJob *)new SwigDirector_FetchJob(arg1,arg2);
+            result = (FetchJob *)new SwigDirector_FetchJob(arg1,arg2,(Pos2D const &)*arg3,arg4);
             
         } else {
-            result = (FetchJob *)new FetchJob(arg2);
+            result = (FetchJob *)new FetchJob(arg2,(Pos2D const &)*arg3,arg4);
             
         }
         DATA_PTR(self) = result;
@@ -8251,6 +8425,24 @@ _wrap_FetchJob_move(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_FetchJob_jobFinished(int argc, VALUE *argv, VALUE self) {
+    FetchJob *arg1 = (FetchJob *) 0 ;
+    AntEntity *arg2 = (AntEntity *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FetchJob, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->jobFinished(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_FetchJob(int argc, VALUE *argv, VALUE self) {
     FetchJob *arg1 = (FetchJob *) 0 ;
     
@@ -8262,6 +8454,138 @@ _wrap_disown_FetchJob(int argc, VALUE *argv, VALUE self) {
         if (director) director->swig_disown();
     }
     
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_newRestJob(int argc, VALUE *argv, VALUE self) {
+    int arg1 ;
+    RestJob *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = NUM2INT(argv[0]);
+    result = (RestJob *)newRestJob(arg1);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_RestJob,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_newFetchJob(int argc, VALUE *argv, VALUE self) {
+    int arg1 ;
+    Pos2D *arg2 = 0 ;
+    std::string *arg3 = 0 ;
+    FetchJob *result;
+    std::string temp3 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    arg1 = NUM2INT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_Pos2D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        if (TYPE(argv[2]) == T_STRING) {
+            temp3 = std::string(StringValuePtr(argv[2]));
+            arg3 = &temp3;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (FetchJob *)newFetchJob(arg1,*arg2,(std::string const &)*arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_FetchJob,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_newMoveJob__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    int arg1 ;
+    Pos2D *arg2 = 0 ;
+    int arg3 ;
+    MoveJob *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    arg1 = NUM2INT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_Pos2D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = NUM2INT(argv[2]);
+    result = (MoveJob *)newMoveJob(arg1,(Pos2D const &)*arg2,arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MoveJob,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_newMoveJob__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    int arg1 ;
+    Pos2D *arg2 = 0 ;
+    MoveJob *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = NUM2INT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_Pos2D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (MoveJob *)newMoveJob(arg1,(Pos2D const &)*arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MoveJob,0);
+    return vresult;
+}
+
+
+static VALUE _wrap_newMoveJob(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_Pos2D, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_newMoveJob__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_Pos2D, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_newMoveJob__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'newMoveJob'");
     return Qnil;
 }
 
@@ -10155,7 +10479,7 @@ static void *_p_MoveJobTo_p_Job(void *x) {
     return (void *)((Job *)  ((MoveJob *) x));
 }
 static void *_p_FetchJobTo_p_Job(void *x) {
-    return (void *)((Job *)  ((FetchJob *) x));
+    return (void *)((Job *) (MoveJob *) ((FetchJob *) x));
 }
 static void *_p_AntManTo_p_AntEntity(void *x) {
     return (void *)((AntEntity *)  ((AntMan *) x));
@@ -10168,6 +10492,9 @@ static void *_p_MiniMapTo_p_AGWidget(void *x) {
 }
 static void *_p_VoxelImageTo_p_AVItem(void *x) {
     return (void *)((AVItem *)  ((VoxelImage *) x));
+}
+static void *_p_FetchJobTo_p_MoveJob(void *x) {
+    return (void *)((MoveJob *)  ((FetchJob *) x));
 }
 static void *_p_EditIsoViewTo_p_CompleteIsoView(void *x) {
     return (void *)((CompleteIsoView *)  ((EditIsoView *) x));
@@ -10235,7 +10562,7 @@ static swig_type_info _swigt__p_VoxelImage[] = {{"_p_VoxelImage", 0, "VoxelImage
 static swig_type_info _swigt__p_Pos3D[] = {{"_p_Pos3D", 0, "Pos3D *", 0, 0, 0, 0},{"_p_Pos3D", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__listTAntEntity_p_t[] = {{"_p_std__listTAntEntity_p_t", 0, "std::list<AntEntity * > *", 0, 0, 0, 0},{"_p_std__listTAntEntity_p_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SplineMapD[] = {{"_p_SplineMapD", 0, "SplineMapD *", 0, 0, 0, 0},{"_p_SplineMapD", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_MoveJob[] = {{"_p_MoveJob", 0, "MoveJob *", 0, 0, 0, 0},{"_p_MoveJob", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_MoveJob[] = {{"_p_MoveJob", 0, "MoveJob *", 0, 0, 0, 0},{"_p_MoveJob", 0, 0, 0, 0, 0, 0},{"_p_FetchJob", _p_FetchJobTo_p_MoveJob, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Pos2D[] = {{"_p_Pos2D", 0, "Pos2D *", 0, 0, 0, 0},{"_p_Pos2D", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_float[] = {{"_p_float", 0, "float *", 0, 0, 0, 0},{"_p_float", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__mapTstd__string_std__string_t[] = {{"_p_std__mapTstd__string_std__string_t", 0, "std::map<std::string,std::string > *", 0, 0, 0, 0},{"_p_std__mapTstd__string_std__string_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -10510,6 +10837,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "getEnergy", VALUEFUNC(_wrap_AntEntity_getEnergy), -1);
     rb_define_method(cAntEntity.klass, "getCondition", VALUEFUNC(_wrap_AntEntity_getCondition), -1);
     rb_define_method(cAntEntity.klass, "decCondition", VALUEFUNC(_wrap_AntEntity_decCondition), -1);
+    rb_define_method(cAntEntity.klass, "getJob", VALUEFUNC(_wrap_AntEntity_getJob), -1);
     rb_define_method(cAntEntity.klass, "gotFight", VALUEFUNC(_wrap_AntEntity_gotFight), -1);
     rb_define_method(cAntEntity.klass, "getHero", VALUEFUNC(_wrap_AntEntity_getHero), -1);
     rb_define_method(cAntEntity.klass, "mRubyObject=", VALUEFUNC(_wrap_AntEntity_mRubyObject_set), -1);
@@ -10681,6 +11009,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_alloc_func(cJob.klass, _wrap_Job_allocate);
     rb_define_method(cJob.klass, "initialize", VALUEFUNC(_wrap_new_Job), -1);
     rb_define_method(cJob.klass, "move", VALUEFUNC(_wrap_Job_move), -1);
+    rb_define_method(cJob.klass, "jobFinished", VALUEFUNC(_wrap_Job_jobFinished), -1);
     rb_define_method(cJob.klass, "<=", VALUEFUNC(_wrap_Job___le__), -1);
     rb_define_method(cJob.klass, "mRUBY=", VALUEFUNC(_wrap_Job_mRUBY_set), -1);
     rb_define_method(cJob.klass, "mRUBY", VALUEFUNC(_wrap_Job_mRUBY_get), -1);
@@ -10721,13 +11050,17 @@ SWIGEXPORT(void) Init_libantargis(void) {
     cFightJob.destroy = (void (*)(void *)) free_FightJob;
     rb_define_module_function(mLibantargis, "disown_FetchJob", VALUEFUNC(_wrap_disown_FetchJob), -1);
     
-    cFetchJob.klass = rb_define_class_under(mLibantargis, "FetchJob", ((swig_class *) SWIGTYPE_p_Job->clientdata)->klass);
+    cFetchJob.klass = rb_define_class_under(mLibantargis, "FetchJob", ((swig_class *) SWIGTYPE_p_MoveJob->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_FetchJob, (void *) &cFetchJob);
     rb_define_alloc_func(cFetchJob.klass, _wrap_FetchJob_allocate);
     rb_define_method(cFetchJob.klass, "initialize", VALUEFUNC(_wrap_new_FetchJob), -1);
     rb_define_method(cFetchJob.klass, "move", VALUEFUNC(_wrap_FetchJob_move), -1);
+    rb_define_method(cFetchJob.klass, "jobFinished", VALUEFUNC(_wrap_FetchJob_jobFinished), -1);
     cFetchJob.mark = 0;
     cFetchJob.destroy = (void (*)(void *)) free_FetchJob;
+    rb_define_module_function(mLibantargis, "newRestJob", VALUEFUNC(_wrap_newRestJob), -1);
+    rb_define_module_function(mLibantargis, "newFetchJob", VALUEFUNC(_wrap_newFetchJob), -1);
+    rb_define_module_function(mLibantargis, "newMoveJob", VALUEFUNC(_wrap_newMoveJob), -1);
     
     cParserException.klass = rb_define_class_under(mLibantargis, "ParserException", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_ParserException, (void *) &cParserException);

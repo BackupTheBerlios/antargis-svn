@@ -74,11 +74,12 @@ class QuadTree
             delete *i;
           }
           children.clear();
+	  /* expect that we don't own elements
           typename std::set<T*>::iterator j=ts.begin();
           for(;j!=ts.end();j++)
           {
             delete *j;
-          }
+	    }*/
           ts.clear();
           
         }

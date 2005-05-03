@@ -82,6 +82,7 @@ public:
     virtual VoxelImage *getSurface();
     virtual void move(float pTime);
     virtual AntHero *getHero();
+    virtual Job *getJob(AntEntity *arg0);
     virtual ~SwigDirector_AntEntity();
     virtual float getHealSpeed() const;
     virtual int getVirtualY() const;
@@ -105,6 +106,7 @@ public:
     virtual AntHero *getHero();
     virtual void move(float pTime);
     virtual AntBoss *getBoss();
+    virtual Job *getJob(AntEntity *arg0);
     virtual ~SwigDirector_AntMan();
     virtual int getVirtualY() const;
     virtual std::string getSurfaceName() const;
@@ -152,6 +154,7 @@ class SwigDirector_Job : public Job, public Swig::Director {
 public:
     SwigDirector_Job(VALUE self, int p);
     virtual void move(AntEntity *arg0, float ptime);
+    virtual void jobFinished(AntEntity *e);
     virtual ~SwigDirector_Job();
 };
 
@@ -160,6 +163,7 @@ class SwigDirector_RestJob : public RestJob, public Swig::Director {
 
 public:
     SwigDirector_RestJob(VALUE self, float pTime);
+    virtual void jobFinished(AntEntity *e);
     virtual void move(AntEntity *e, float ptime);
     virtual ~SwigDirector_RestJob();
 };
@@ -169,6 +173,7 @@ class SwigDirector_MoveJob : public MoveJob, public Swig::Director {
 
 public:
     SwigDirector_MoveJob(VALUE self, int p, Pos2D const &pTarget, int pnear = 0, bool pRun = false);
+    virtual void jobFinished(AntEntity *e);
     virtual void move(AntEntity *e, float ptime);
     virtual ~SwigDirector_MoveJob();
 };
@@ -178,6 +183,7 @@ class SwigDirector_FightJob : public FightJob, public Swig::Director {
 
 public:
     SwigDirector_FightJob(VALUE self, int p, AntEntity *pTarget);
+    virtual void jobFinished(AntEntity *e);
     virtual void move(AntEntity *e, float ptime);
     virtual ~SwigDirector_FightJob();
 };
@@ -186,8 +192,9 @@ public:
 class SwigDirector_FetchJob : public FetchJob, public Swig::Director {
 
 public:
-    SwigDirector_FetchJob(VALUE self, std::string what);
+    SwigDirector_FetchJob(VALUE self, int p, Pos2D const &pTarget, std::string what);
     virtual void move(AntEntity *e, float ptime);
+    virtual void jobFinished(AntEntity *e);
     virtual ~SwigDirector_FetchJob();
 };
 

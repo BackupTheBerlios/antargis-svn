@@ -27,32 +27,40 @@ class AntRubyMap<AntargisMap
 		@ents={}
 	end
 	def loadEntity(node)
+		if node.getName=="antTree" then
+			e=AntNewTree.new
+			return e
+		end
+		
 		e=super(node)
 		if e then return e end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
 		end
+		if node.getName=="antNewHouse" then
+			e=AntNewHouse.new
+		end
 		return e
 	end
 	# marshall, so that ruby-objects get used
-	def insertEntity(e)
+	def insertEntityx(e)
 		super(e)
 		@ents[e.getID]=e
 	end
-	def removeEntity(e)
+	def removeEntityx(e)
 		super(e)
 		@ents.deleteAt(e.getID)
 	end
-	def getNext(me,t)
+	def getNextx(me,t)
 		e=super(me,t)
 		if e==nil then return e end
 		return @ents[e.getID]
 	end
-	def getEntity(id)
+	def getEntityx(id)
 		return @ents[id]
 	end
 	
-	def clear
+	def clearx
 		super
 		@ents.clear
 	end

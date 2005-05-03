@@ -90,6 +90,7 @@ void AntEntity::setPos2D(const Pos2D &p)
 
 void AntEntity::setJob(Job *pJob)
 {
+  //  rb_gc();
   if(mJob)
     {
       if((*mJob)<=(*pJob))
@@ -124,7 +125,8 @@ void AntEntity::setJob(Job *pJob)
   if(mJob)
     {
       if(mJob->mRubyObject)
-	rb_gc_mark(mJob->mRUBY);
+	rb_gc_register_address(&(mJob->mRUBY));
+      //	rb_gc_mark(mJob->mRUBY);
     }
 
 }
@@ -191,13 +193,19 @@ void AntEntity_markfunc(void *ptr)
   assert(zoo);
   cppAnimal = zoo->mJob;
   if(cppAnimal)
-    if(cppAnimal->mRubyObject)
-      {
-	assert(!cppAnimal->mDeleted);
-	rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
-	rb_gc_mark(rubyAnimal);
-	cdebug("mark:");//<<cppAnimal->getName());
-      }
+    {
+      assert(!cppAnimal->mDeleted);
+      if(cppAnimal->mRubyObject)
+	{
+	  assert(!cppAnimal->mDeleted);
+	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
+	  rb_gc_mark(rubyAnimal);
+	  cdebug("mark:");//<<cppAnimal->getName());
+	}
+    }
+  //rb_gc_mark(getMap()->mRUBY);
+  AntargisMap_markfunc(getMap());
+
 #endif
 }
 
@@ -214,6 +222,11 @@ std::string AntEntity::getType() const
 void AntEntity::setSurface(VoxelImage *i)
 {
   mSurface=i;
+}
+
+Job*AntEntity::getJob(AntEntity*)
+{
+  return 0;
 }
 
 void AntEntity::updateSurface()

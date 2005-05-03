@@ -44,17 +44,10 @@ class AntNewMan<AntEntity
 		return "man"+mDirNum.to_s
 	end
 	def move(time)
-		#puts self
-		#puts @bla
-		if isJobFinished then
-#			GC.start
-			jobWasFinished
-		end
 		if not hasJob then
 			if getVar("bossID")=="" then
 				house=getMap.getNext(self,"house")
 				setVar("bossID",house.getID.to_s)
-				#house.insertMan(self)
 				setJob(RestJob.new(rand()*10))
 			else
 				setJob(getMap.getEntity(getVar("bossID").to_i).getJob(self))
@@ -78,18 +71,6 @@ class AntNewMan<AntEntity
 	def loadXML(node)
 		super(node)
 		setVar("bossID",node.get("bossID"))
-	end
-	def setFetchTarget(target,what)
-		setVar("fetchWhat",what)
-		#@fetchTarget=target
-		#@fetchWhat=what
-	end
-	def jobWasFinished
-		fetchWhat=getVar("fetchWhat")
-		if fetchWhat!="" then
-			resource.add(fetchWhat,1)
-		end
-		setFetchTarget("","")
 	end
 end
 
@@ -122,20 +103,25 @@ end
 class AntNewTree<AntEntity
 	def initialize()
 		super(Pos2D.new(0,0))
-		@type=0
+		@typeID=0
 		setType("tree")
 	end
 	def setTreeType(t)
-		@type=t
+		@typeID=t
 	end
 	def getSurfaceName
-		return "tree"+@type.to_s
+		return "tree"+@typeID.to_s
 	end
 	def getVirtualY
 		100
 	end
-	def huhu
-		puts "HUHU"
+	def saveXML(node)
+		super(node)
+		node.set("typeID",@typeID.to_s)
+	end
+	def loadXML(node)
+		super(node)
+		@typeID=node.get("typeID").to_i
 	end
 	
 end
@@ -162,6 +148,9 @@ class AntNewHouse<AntEntity
 	end
 	def move(t)
 	end
+	def xmlName
+		return "antNewHouse"
+	end
 	def getJob(e)
 		pd=e.getPos2D-getPos2D
 		n=pd.norm2
@@ -173,18 +162,22 @@ class AntNewHouse<AntEntity
 			wood=resource.get("wood")
 			puts "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOD:"+wood.to_s
 			# 2) give job
-			if wood<5 then
+			if wood<50 then
 				tree=getMap.getNext(self,"tree")
+				if tree == nil then
+					puts "NO TREE FOUND"
+				end
 				if tree then
-					e.setFetchTarget(tree,"wood")
-					return MoveJob.new(0,tree.getPos2D,0,false)
+					puts "TREEPOS:"
+					puts tree.getPos2D.to_s
+					return newFetchJob(0,tree.getPos2D,"wood")
 				end
 			else
-				return RestJob.new(10)
+				return newRestJob(10)
 			end
 		else
 			# is anywhere - come home
-			return MoveJob.new(0,getPos2D,0,false)
+			return Libantargis.newMoveJob(0,getPos2D,0)#,false)
 		end
 	end
 end

@@ -26,7 +26,7 @@
 #include "ant_tree.h"
 #include "ant_man.h"
 #include "ant_house.h"
-
+#include <map>
 
 /************************************************************************
 * AntargisMap
@@ -145,7 +145,9 @@ void AntargisMap::insertEntity(AntEntity *e)
   if(e->mRubyObject)
     {
       VALUE rubyAnimal = e->mRUBY;
-      rb_gc_mark(rubyAnimal);
+
+      rb_gc_register_address(&rubyAnimal);
+      //      rb_gc_mark(rubyAnimal);
       cdebug("mark:");
    }
 
@@ -528,10 +530,15 @@ void MapListener::mapUpdate()
 {
 }
 
+bool markingFinished=true;
+
 void AntargisMap_markfunc(void *ptr)
 {
   cdebug("TRACE");
+  if(!markingFinished)
+    return;
 #ifdef USE_RUBY
+  markingFinished=false;
   AntEntity *cppAnimal;
   VALUE   rubyAnimal;
   AntargisMap *zoo;
@@ -553,15 +560,17 @@ void AntargisMap_markfunc(void *ptr)
 	  rb_gc_mark(rubyAnimal);
 	  cdebug("mark:");//<<cppAnimal->getName());
 	}
-      AntEntity_markfunc(*i);
+      //      AntEntity_markfunc(*i);
     }
+  markingFinished=true;
 #endif
 }
 
 AntEntity *AntargisMap::getNext(AntEntity *me,const std::string &pType)
 {
   // FIXME: optimize this - use quadtree
-  AntEntity *e=0;
+
+  std::multimap<float,AntEntity*> ents;
 
   
   std::list<AntEntity*>::iterator i=mEntList.begin();
@@ -576,21 +585,29 @@ AntEntity *AntargisMap::getNext(AntEntity *me,const std::string &pType)
 	    {
 	      Pos2D p2=(*i)->getPos2D()-p;
 	      float norm=p2.norm2();
-	      if(e)
-		{
-		  if(dist>norm)
-		    {
-		      dist=norm;
-		      e=(*i);
-		    }
-		}
-	      else
-		{
-		  dist=norm;
-		  e=(*i);
-		}
+	      ents.insert(std::make_pair(norm,*i));
 	    }
 	}
+    }
+
+
+  // take one of the nearest, but no farer away than 30% of nearest
+  AntEntity *e=0;
+  if(ents.size())
+    {
+      std::multimap<float,AntEntity*>::iterator j=ents.begin();
+      float nearest=j->first;
+      int r=rand()%std::min(ents.size(),5U);
+      while(r>0 && (j->first<=nearest*1.3 || j->first<2000*2000))
+	{
+	  j++;
+	  r--;
+	}
+      if(r>0)
+	j--;
+      assert(j!=ents.end());
+      e=j->second;
+      cdebug("DIST:"<<j->first);
     }
 
   return e;

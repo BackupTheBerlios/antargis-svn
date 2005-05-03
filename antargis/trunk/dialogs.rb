@@ -150,6 +150,7 @@ class AntLoadDialog<AntDialog
 		file=@lb.getSelectedID
 		if file!="" then
 			getMap.loadMap("savegames/"+file)
+			GC.start
 		end
 		hide
 	end

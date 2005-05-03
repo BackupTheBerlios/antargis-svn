@@ -112,11 +112,11 @@ class AntGameApp <AntApp
 		puts "TESTTTTTTTTTTTTTTTTTTTTTTTTT"
 		getMap.clear
 		#ent=AntMan.new(Pos2D.new(30,230),0,nil)
-#		(0..10).each{
+		(0..10).each{
 		ent=AntNewMan.new
 		ent.setPos2D(Pos2D.new(500,530))
 		$map.insertEntity(ent)
-	#	}
+		}
 		
 		ent=AntNewTree.new
 		ent.setPos2D(Pos2D.new(400,400))

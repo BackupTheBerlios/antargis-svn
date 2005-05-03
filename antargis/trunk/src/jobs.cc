@@ -33,8 +33,13 @@ bool Job::operator<=(const Job &j) const
 
 Job::~Job()
 {
+  CTRACE;
   mDeleted=true;
-  //  CTRACE;
+}
+
+void Job::jobFinished(AntEntity *e)
+{
+  e->jobFinished();
 }
 
 /************************************************************************
@@ -46,6 +51,9 @@ MoveJob::MoveJob(int p,const Pos2D &pTarget,int pnear,bool pRun):Job(p),mTarget(
       speed=70; // pixels per second
       runSpeed=100;
     }
+MoveJob::~MoveJob()
+{
+}
 
 // Jobs
 void MoveJob::move(AntEntity *e,float ptime)
@@ -87,7 +95,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
     {
       //   e->setPos2D(mTarget);
       //      CTRACE;
-      e->jobFinished();
+      jobFinished(e);
     }
 }
 
@@ -95,12 +103,15 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 * FightJob
 ************************************************************************/
 
+FightJob::~FightJob()
+{
+}
 
 // FightJobs
 void FightJob::move(AntEntity *e,float ptime)
 {
   if(mTarget->getEnergy()==0.0)
-    e->jobFinished();
+    jobFinished(e);
   // if target is too far away run there, otherwise fight
   Pos2D diff=e->getPos2D()-mTarget->getPos2D();
   float norm=diff.norm();
@@ -122,7 +133,7 @@ void FightJob::move(AntEntity *e,float ptime)
  *
  ***************************************************************************/
 
-FetchJob::FetchJob(std::string what):Job(0)
+FetchJob::FetchJob(int p,const Pos2D&pTarget,std::string what):MoveJob(p,pTarget,5),mWhat(what)
 {
 }
 FetchJob::~FetchJob()
@@ -130,6 +141,13 @@ FetchJob::~FetchJob()
 }
 void FetchJob::move(AntEntity *e,float ptime)
 {
+  MoveJob::move(e,ptime);
+}
+
+void FetchJob::jobFinished(AntEntity *e)
+{
+  e->resource.add(mWhat,1);
+  MoveJob::jobFinished(e);
 }
 
 
@@ -140,10 +158,27 @@ void FetchJob::move(AntEntity *e,float ptime)
 RestJob::RestJob(float pTime):Job(0),mTime(pTime)
 {
 }
+RestJob::~RestJob()
+{
+}
 void RestJob::move(AntEntity *e,float ptime)
 {
   mTime-=ptime;
   if(mTime<0)
-    e->jobFinished();
+    jobFinished(e);
   
+}
+
+
+RestJob *newRestJob(int pTime)
+{
+  return new RestJob(pTime);
+}
+FetchJob *newFetchJob(int p,Pos2D &pTarget,const std::string &what)
+{
+  return new FetchJob(p,pTarget,what);
+}
+MoveJob *newMoveJob(int p,const Pos2D &pTarget,int pnear)
+{
+  return new MoveJob(p,pTarget,pnear);
 }
