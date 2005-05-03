@@ -22,6 +22,7 @@
 #include "minimap.h"
 #include "map.h"
 #include "entities.h"
+#include "ant_man.h"
 
 #include <ag_layoutfactory.h>
 
@@ -35,6 +36,10 @@ MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRec
   update();
 
   mBorder=AGBorder("antButton.button.border.normal");
+}
+
+MiniMap::~MiniMap()
+{
 }
 
 void MiniMap::drawEntities(const AGPoint &p0)

@@ -58,8 +58,15 @@ module AGHandler
 		callerName=toAGWidget(caller).getName
 		evName=callerName+":"+name
 		if @handlers.has_key?(evName) then
-			if self.send(@handlers[evName],name,callerName,event,caller) then
-				return true
+			m=method(@handlers[evName])
+			if m.arity==4 then
+				if self.send(@handlers[evName],name,callerName,event,caller) then
+					return true
+				end
+			else
+				if self.send(@handlers[evName]) then
+					return true
+				end
 			end
 		end
 		return super(name,event,caller)

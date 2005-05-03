@@ -35,7 +35,7 @@ struct IVTile
   }
 };
 
-class IsoView:public AntargisView
+class IsoView:public AntargisView, public MapListener
   {
   public:
   private:
@@ -64,6 +64,12 @@ class IsoView:public AntargisView
     }
     void update();
     void checkView();
+
+    void mapUpdate()
+    {
+      CTRACE;
+      completeUpdate();
+    }
 
 
   protected:

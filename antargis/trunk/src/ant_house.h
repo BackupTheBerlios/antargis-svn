@@ -40,33 +40,25 @@ class AntHouse:public AntBoss
 {
   std::string mName;
  public:
-  AntHouse(std::string pName="tower2"):mName(pName)
-    {
-    }
-    AntHouse(const Pos2D &p,std::string pName="tower1"):AntBoss(p),mName(pName)
-      {
-      }
-      virtual ~AntHouse()
-	{
-	}
-    VoxelImage *getSurface() const
-      {
-        std::ostringstream os;
-        VoxelImage *im=0;
-        
-        os<<mName;
-        
-        if(!fileExists(TILEDIR+os.str()+".png"))
-          throw std::string("File not found")+os.str();
-        im=new VoxelImage(os.str());
-        im->setPosition(mPos);
-        im->setVirtualY(100);
-        return im;
-      }
-    virtual std::string xmlName() const
-      {
-        return "antHouse";
-      }
+  AntHouse(std::string pName="tower2");
+  
+  AntHouse(const Pos2D &p,std::string pName="tower1");
+  virtual ~AntHouse();
+
+  void updateSurface();
+  virtual std::string xmlName() const;
+  virtual void saveXML(xmlpp::Node &node) const;
+  virtual void loadXML(const xmlpp::Node &node);
+
+  Job *getJob(AntEntity *pEntity);
+
+ private:
+  int mWood;
+  int mSteel;
+  int mStone;
+  int mWater;
+  int mFood;
+  // int mWhool;
 };
 
 #endif

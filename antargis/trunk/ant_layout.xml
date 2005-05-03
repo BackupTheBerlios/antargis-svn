@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<layout geometry="(0,0,1024,768)" name="GameLayout">
+<layout geometry2="(0,0,1024,768)" name="GameLayout">
   <!-- main game layout -->
 	<antView name="mainView"/>
   <!--<table geometry="(0,0,50,200)" cols="1" rows="4">
@@ -8,17 +8,27 @@
     <button col="0" row="2" theme="antButton" name="save" caption-image="data/save.png"/>
     <button col="0" row="3" theme="antButton" name="load" caption-image="data/load.png"/>
   </table>-->
+	<!--
   <table geometry="(873,0,150,50)" cols="3" rows="1">
     <button col="0" row="0" theme="antButton" name="pause" caption-image="data/pause.png"/>
     <button col="1" row="0" theme="antButton" name="options" caption-image="data/options.png"/>
     <button col="2" row="0" theme="antButton" name="quit" caption-image="data/door.png"/>
-  </table>
+  </table>-->
   <!--<antMiniView name="miniMap" geometry="(808,551,216,216)"/>-->
 	<table cols="2" rows="4">
 		<colsize col="1" fixed="216"/>
 		<rowsize row="1" fixed="50"/>
 		<rowsize row="2" fixed="50"/>
 		<rowsize row="3" fixed="216"/>
+		<table col="1" row="0" geometry2="(873,0,150,50)" cols="4" rows="2">
+			<rowsize row="0" fixed="50"/>
+			<colsize col="1" fixed="50"/>
+			<colsize col="2" fixed="50"/>
+			<colsize col="3" fixed="50"/>
+			<button col="1" row="0" theme="antButton" name="pause" caption-image="data/pause.png"/>
+			<button col="2" row="0" theme="antButton" name="options" caption-image="data/options.png"/>
+			<button col="3" row="0" theme="antButton" name="quit" caption-image="data/door.png"/>
+		</table>
 		<table col="1" row="1" cols="4" rows="1">
 			<colsize col="0" fixed="50"/>
 			<colsize col="1" fixed="50"/>

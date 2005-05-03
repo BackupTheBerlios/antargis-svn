@@ -24,7 +24,6 @@
 #include "decast.h"
 #include "quadtree.h"
 #include "voxel_gen.h"
-#include "tree.h"
 
 #include "ag_xml.h"
 #include <ag_fs.h>
@@ -33,7 +32,6 @@
 #include <vector>
 #include <algorithm>
 
-#include "jobs.h"
 #include "entity.h"
 
 
@@ -49,6 +47,17 @@ class HeightMap
   };
 */
 
+class MapListener
+{
+ public:
+  MapListener();
+  virtual ~MapListener();
+
+  virtual void mapUpdate();
+};
+
+class AntPlayer;
+
 class AntargisMap
   {
     SplineMapD mHeight,mGrass;
@@ -63,8 +72,14 @@ class AntargisMap
 
     int maxID;
 
+    std::set<MapListener*> mListeners;
+
   public:
     AntargisMap(int w,int h);
+    virtual ~AntargisMap();
+
+    void insertListener(MapListener *l);
+    void removeListener(MapListener *l);
 
     float getHeight(const Pos2D &p) const;
     float getGHeight(const Pos2D &p) const;
@@ -76,7 +91,9 @@ class AntargisMap
     
     Pos3D getNormal(int x,int y) const;
 
-    void insertEntity(AntEntity *e);
+    AntEntity *getNext(AntEntity *me,const std::string &pType);
+
+    virtual void insertEntity(AntEntity *e);
 
     // x,y = position
     // h = amount
@@ -104,7 +121,9 @@ class AntargisMap
       mPlayers.erase(p);
     }
     
-    void removeEntity(AntEntity *p);
+    virtual void removeEntity(AntEntity *p);
+
+    void endChange();
    
     // align to rect / >0 and <width and so 
     Pos2D truncPos(const Pos2D &p) const;
@@ -139,11 +158,17 @@ class AntargisMap
     void saveMap(const std::string &pFilename);
     void loadMap(const std::string &pFilename);
 
+    virtual AntEntity *loadEntity(const xmlpp::Node &node);
+
     void saveXML(xmlpp::Node &node) const;
     void loadXML(const xmlpp::Node &node);
     
     int width() const;
     int height() const;
+
+    VALUE mRUBY;
+    bool mRubyObject;
+    friend void AntargisMap_markfunc(void *ptr);
 
   };
 

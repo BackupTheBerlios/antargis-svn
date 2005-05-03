@@ -190,6 +190,10 @@ struct Pos2D
     float n=1.0/sqrt(x*x+y*y);
     return Pos2D(x*n,y*n);
   }
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
+
   std::string toString() const
   {
     return ::toString((int)x)+";"+::toString((int)y);

@@ -28,6 +28,7 @@
 #include "ag_debug.h"
 #include "ag_theme.h"
 #include "ant_tree.h"
+#include "ant_man.h"
 
 #include <ag_layout.h>
 #include <ag_tools.h>

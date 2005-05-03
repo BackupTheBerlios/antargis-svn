@@ -21,18 +21,30 @@
 #ifndef ANT_ENTITY_H
 #define ANT_ENTITY_H
 
-#include "decast.h"
-#include "quadtree.h"
-#include "voxel_gen.h"
-#include "tree.h"
-
 #include "ag_xml.h"
-#include <ag_fs.h>
-#include "jobs.h"
+#include "ant_geometry.h"
+#include "ant_rect.h"
 
+#include <ruby.h>
 #include <set>
 #include <vector>
 #include <algorithm>
+
+class VoxelImage;
+class Job;
+class AntHero;
+
+class Resource
+{
+  std::map<std::string,int> r;
+ public:
+  Resource();
+  int get(const std::string &pName);
+  void add(const std::string &pName,int value);
+  void set(const std::string &pName,int value);
+
+  void takeAll(Resource &r);
+};
 
 class AntEntity
   {
@@ -48,13 +60,31 @@ class AntEntity
     float mConditionFall; // when used, how much per time -- hero is stronger here
     float mConditionHeal; // refilling
 
-    int mDirNum;
+    std::string mType;
+
+    VoxelImage*mSurface;
+
+
+    AntEntity *pBoss;
+    std::vector<AntEntity*> mClients;
+
+  public: //virtually protected
+    int mDirNum; // set public for swig
+    Resource resource;
+    std::map<std::string,std::string> mVars;
   public:
     AntEntity();
     AntEntity(const Pos3D &p);
     AntEntity(const Pos2D &p);
+    virtual ~AntEntity();
     Pos3D getPos3D() const;
     Pos2D getPos2D() const;
+
+    void setVar(std::string n,std::string v);
+    std::string getVar(std::string n);
+
+    void setType(const std::string &pType);
+    std::string getType() const;
 
     virtual std::string xmlName() const
       {
@@ -106,12 +136,18 @@ class AntEntity
           else
             mDirNum=5; // up right
       }
+      updateSurface();
     }
 
     void setPos2D(const Pos2D &p);
 
     void mapChanged();
-    virtual VoxelImage*getSurface() const=0;
+    void setSurface(VoxelImage *i);
+    virtual VoxelImage*getSurface();
+    virtual void updateSurface();
+
+    virtual std::string getSurfaceName() const;
+    virtual int getVirtualY() const;
 
     /** do anything in given time frame */
     virtual void move(float pTime);
@@ -119,6 +155,7 @@ class AntEntity
     virtual Rect2D getRect() const;
 
     void jobFinished();
+    bool isJobFinished() const;
 
     bool hasJob() const
       {
@@ -129,6 +166,10 @@ class AntEntity
       {
         return mHealSpeed;
       }
+    void setHealSpeed(float f)
+    {
+      mHealSpeed=f;
+    }
 
     void decEnergy(float amount)
     {
@@ -175,6 +216,12 @@ class AntEntity
     {
       return 0;
     }
+
+    bool mRubyObject;
+    VALUE mRUBY;
+    bool mDeleted;
+
+    friend void AntEntity_markfunc(void *ptr);
 
   };
 

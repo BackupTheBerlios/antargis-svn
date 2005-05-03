@@ -17,7 +17,7 @@ AC_CHECK_LIB(SDL_ttf,TTF_Init)
 AC_CHECK_LIB(SGE,sge_FilledRect)
 AC_CHECK_LIB(GLU,gluPerspective)
 AC_CHECK_LIB(physfs,PHYSFS_init)
-AC_CHECK_LIB(ruby1.8,rb_gc_mark)
+#AC_CHECK_LIB(ruby1.9,rb_gc_mark)
 AC_CHECK_LIB(antargisgui,antargisguilib)
 
 RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
@@ -30,7 +30,7 @@ AC_SUBST(RUBY_INSTALL_DIR)
 # Checks for header files.
 
 
-CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -O2 -DEDITING -Wall -g -DUSE_RUBY -I/usr/include/antargisgui -I$RUBY_INCLUDE_DIR"
+CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -O0 -DEDITING -Wall -g -DUSE_RUBY -I/usr/include/antargisgui -I$RUBY_INCLUDE_DIR"
 LDFLAGS="$LDFLAGS `sdl-config --libs`"
 
 # Checks for typedefs, structures, and compiler characteristics.

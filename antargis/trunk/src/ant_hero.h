@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ant_tree.h
+ * ant_hero.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,35 +18,46 @@
  * License along with this program.
  */
 
-#ifndef ANT_TREE_H
-#define ANT_TREE_H
+#ifndef ANT_HERO_H
+#define ANT_HERO_H
 
-#include "decast.h"
-#include "quadtree.h"
-#include "voxel_gen.h"
-#include "tree.h"
-
-#include "ag_xml.h"
-#include <ag_fs.h>
+#include "ant_boss.h"
 
 #include <set>
 #include <vector>
-#include <algorithm>
 
-#include "entity.h"
+class AntMan;
 
-class AntTree:public AntEntity
+class AntHero:public AntBoss
   {
     int typeID;
+
+    std::string mName;
+
   public:
-    AntTree();
-    AntTree(const Pos2D &p,int ID);
+    AntHero();
+    AntHero(const Pos2D &p,int ID,const std::string &pName);
+    virtual ~AntHero();
     void updateSurface();
 
+    int getTypeID() const;
+    void fightHero(AntHero *h);
+    void goTo(int prio,const Pos2D &pos);
+    //    void discard(AntMan *man);
+
+    float calcTroupStrength() const;
+
+    AntHero *fights(); // returns 0 if is not fighting otherwise pointer to other hero
+    void gotFight(AntEntity *e);
+
+    Pos2D getFormation(AntMan *m) const;
+
+    virtual AntHero *getHero();
+    virtual float getHealSpeed() const;
     virtual std::string xmlName() const;
 
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);
-  };
 
+  };
 #endif

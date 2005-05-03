@@ -18,7 +18,37 @@ class SwigDirector_MiniMap : public MiniMap, public Swig::Director {
 
 public:
     SwigDirector_MiniMap(VALUE self, AGWidget *pParent, AGRect const &r, AntargisMap *pMap, AGRect const &pViewRect);
+    virtual ~SwigDirector_MiniMap();
     virtual void draw(AGPainter &p);
+};
+
+
+class SwigDirector_MapListener : public MapListener, public Swig::Director {
+
+public:
+    SwigDirector_MapListener(VALUE self);
+    virtual ~SwigDirector_MapListener();
+    virtual void mapUpdate();
+};
+
+
+class SwigDirector_AntargisMap : public AntargisMap, public Swig::Director {
+
+public:
+    SwigDirector_AntargisMap(VALUE self, int w, int h);
+    virtual void insertEntity(AntEntity *e);
+    virtual void removeEntity(AntEntity *p);
+    virtual ~SwigDirector_AntargisMap();
+    virtual AntEntity *loadEntity(xmlpp::Node const &node);
+};
+
+
+class SwigDirector_IsoView : public IsoView, public Swig::Director {
+
+public:
+    SwigDirector_IsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map);
+    virtual ~SwigDirector_IsoView();
+    virtual void mapUpdate();
 };
 
 
@@ -26,6 +56,8 @@ class SwigDirector_CompleteIsoView : public CompleteIsoView, public Swig::Direct
 
 public:
     SwigDirector_CompleteIsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map);
+    virtual ~SwigDirector_CompleteIsoView();
+    virtual void mapUpdate();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
 };
 
@@ -34,7 +66,129 @@ class SwigDirector_EditIsoView : public EditIsoView, public Swig::Director {
 
 public:
     SwigDirector_EditIsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map);
+    virtual ~SwigDirector_EditIsoView();
+    virtual void mapUpdate();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
+};
+
+
+class SwigDirector_AntEntity : public AntEntity, public Swig::Director {
+
+public:
+    SwigDirector_AntEntity(VALUE self);
+    SwigDirector_AntEntity(VALUE self, Pos3D const &p);
+    SwigDirector_AntEntity(VALUE self, Pos2D const &p);
+    virtual void setDirection(Pos2D const &p);
+    virtual VoxelImage *getSurface();
+    virtual void move(float pTime);
+    virtual AntHero *getHero();
+    virtual ~SwigDirector_AntEntity();
+    virtual float getHealSpeed() const;
+    virtual int getVirtualY() const;
+    virtual std::string getSurfaceName() const;
+    virtual std::string getTexture() const;
+    virtual std::string xmlName() const;
+    virtual void updateSurface();
+    virtual void loadXML(xmlpp::Node const &node);
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void gotFight(AntEntity *arg0);
+};
+
+
+class SwigDirector_AntMan : public AntMan, public Swig::Director {
+
+public:
+    SwigDirector_AntMan(VALUE self);
+    SwigDirector_AntMan(VALUE self, Pos2D const &p, int pTypeID, AntBoss *pBoss);
+    virtual void setDirection(Pos2D const &p);
+    virtual VoxelImage *getSurface();
+    virtual AntHero *getHero();
+    virtual void move(float pTime);
+    virtual AntBoss *getBoss();
+    virtual ~SwigDirector_AntMan();
+    virtual int getVirtualY() const;
+    virtual std::string getSurfaceName() const;
+    virtual std::string getTexture() const;
+    virtual float getHealSpeed() const;
+    virtual std::string xmlName() const;
+    virtual void updateSurface();
+    virtual void gotFight(AntEntity *arg0);
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(xmlpp::Node const &node);
+};
+
+
+class SwigDirector_VoxelImageData : public VoxelImageData, public Swig::Director {
+
+public:
+    SwigDirector_VoxelImageData(VALUE self);
+    virtual ~SwigDirector_VoxelImageData();
+};
+
+
+class SwigDirector_AVItem : public AVItem, public Swig::Director {
+
+public:
+    SwigDirector_AVItem(VALUE self, Pos3D const &p);
+    virtual ~SwigDirector_AVItem();
+    virtual void draw(AntargisView *view, AGPainter &p);
+    virtual void init();
+};
+
+
+class SwigDirector_VoxelImage : public VoxelImage, public Swig::Director {
+
+public:
+    SwigDirector_VoxelImage(VALUE self, AGSurface pSurface, Pos3D pPos);
+    SwigDirector_VoxelImage(VALUE self, std::string const &pFilename);
+    virtual ~SwigDirector_VoxelImage();
+    virtual void draw(AntargisView *view, AGPainter &p);
+    virtual void init();
+};
+
+
+class SwigDirector_Job : public Job, public Swig::Director {
+
+public:
+    SwigDirector_Job(VALUE self, int p);
+    virtual void move(AntEntity *arg0, float ptime);
+    virtual ~SwigDirector_Job();
+};
+
+
+class SwigDirector_RestJob : public RestJob, public Swig::Director {
+
+public:
+    SwigDirector_RestJob(VALUE self, float pTime);
+    virtual void move(AntEntity *e, float ptime);
+    virtual ~SwigDirector_RestJob();
+};
+
+
+class SwigDirector_MoveJob : public MoveJob, public Swig::Director {
+
+public:
+    SwigDirector_MoveJob(VALUE self, int p, Pos2D const &pTarget, int pnear = 0, bool pRun = false);
+    virtual void move(AntEntity *e, float ptime);
+    virtual ~SwigDirector_MoveJob();
+};
+
+
+class SwigDirector_FightJob : public FightJob, public Swig::Director {
+
+public:
+    SwigDirector_FightJob(VALUE self, int p, AntEntity *pTarget);
+    virtual void move(AntEntity *e, float ptime);
+    virtual ~SwigDirector_FightJob();
+};
+
+
+class SwigDirector_FetchJob : public FetchJob, public Swig::Director {
+
+public:
+    SwigDirector_FetchJob(VALUE self, std::string what);
+    virtual void move(AntEntity *e, float ptime);
+    virtual ~SwigDirector_FetchJob();
 };
 
 

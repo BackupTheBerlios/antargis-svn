@@ -366,10 +366,18 @@ void IsoView::updatePositions()
 
   std::string tName;
 
+  //  bool inconsistency=false;
+
   std::list<AntEntity*>::iterator i=ents.begin();
   for(;i!=ents.end();i++)
     {
       AVItem *image=mEntitiesInv[*i];
+      /*  if(!image)
+	{
+	  inconsistency=true;
+	  break;
+	  }*/
+      assert(image);
       image->setPosition((*i)->getPos3D());
 
       VoxelImage *vi=dynamic_cast<VoxelImage*>(image);
@@ -380,6 +388,8 @@ void IsoView::updatePositions()
             vi->setTexture(tName);
         }
     }
+  //  if(inconsistency)
+    //    mapUpdate();
 }
 
 

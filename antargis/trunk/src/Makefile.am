@@ -1,13 +1,14 @@
 lib_LTLIBRARIES = libantargis.la
-bin_PROGRAMS = antargis
-antargis_SOURCES = antargis.cpp 
+#bin_PROGRAMS = antargis
+#antargis_SOURCES = antargis.cpp 
 
 libantargis_la_SOURCES = ant_geometry.cpp ant_rect.cpp decast.cpp game.cpp \
  map.cpp md5.cpp minimap.cpp mpng.cpp mystring.cpp rain.cpp store.cpp texture_cache.cpp \
  tree.cpp view.cpp voxel.cpp voxel_gen.cpp ant_geometry.h ant_rect.h cvinfo.h decast.h \
  game.h map.h md5.h minimap.h mpng.h myapp.h mystring.h pmd5.h quadtree.h \
  rain.h random_map.h serialize.h store.h texture_cache.h tree.h view.h voxel_gen.h voxel.h antargisruby.cc antargisruby.h \
- ant_tree.h ant_tree.cc ant_boss.h ant_boss.cc
+ ant_tree.h ant_tree.cc ant_boss.h ant_boss.cc ant_hero.h ant_hero.cc ant_man.h ant_man.cc \
+ ant_house.h ant_house.cc jobs.h jobs.cc entity.cc entity.h
 LDADD = -lantargis
 
 
@@ -19,7 +20,7 @@ antargisruby.cc: interface.i *.h
 
 
 SWIG = swig
-SWIGCOMPILE = $(SWIG) -v -Wall -ruby -c++ -I$(top_srcdir)/include -I$(srcdir) $(INCLUDES)
+SWIGCOMPILE = $(SWIG) -v -Wall -ruby -c++ -I$(top_srcdir)/include -I$(srcdir) $(INCLUDES) -I/usr/include/antargisgui
 
 EXTRA_DIST = \
 	interface.i

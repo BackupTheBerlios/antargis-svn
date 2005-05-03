@@ -24,7 +24,7 @@ AntTree::AntTree():typeID(0)
 {}
 AntTree::AntTree(const Pos2D &p,int ID):AntEntity(p),typeID(ID)
 {}
-VoxelImage *AntTree::getSurface() const
+void AntTree::updateSurface()
 {
   std::ostringstream os;
   VoxelImage *im=0;
@@ -47,7 +47,8 @@ VoxelImage *AntTree::getSurface() const
 	    if(typeID==2||typeID==3)
 	    im->setCenter(Pos2D(100,150)+Pos2D(0,64));*/
   im->setVirtualY(100);
-  return im;
+  setSurface(im);
+
 }
 std::string AntTree::xmlName() const
 {

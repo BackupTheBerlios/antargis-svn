@@ -24,6 +24,8 @@
 #include <cstdlib>
 #include "entities.h"
 #include "ant_tree.h"
+#include "ant_man.h"
+#include "ant_house.h"
 
 
 /************************************************************************
@@ -41,11 +43,16 @@ AntargisMap *getMap()
 AntargisMap::AntargisMap(int w,int h):
     mHeight(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),1,10,20),
     mGrass(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),2,5,10), // 1 is no-var.
-    mEntities(Rect2D(0,0,w*TILE_SIZE,h*TILE_SIZE)),mW(w),mH(h)
+    mEntities(Rect2D(0,0,w*TILE_SIZE,h*TILE_SIZE)),mW(w),mH(h),mRubyObject(false)
 {
   myAntargisMap=this;
   mPaused=false;
   maxID=0;
+}
+
+AntargisMap::~AntargisMap()
+{
+  CTRACE;
 }
 
 std::list<AntEntity*> AntargisMap::getAllEntities()
@@ -65,6 +72,17 @@ int AntargisMap::getNewID()
 {
   return maxID++;
 }
+
+void AntargisMap::insertListener(MapListener *l)
+{
+  mListeners.insert(l);
+}
+
+void AntargisMap::removeListener(MapListener *l)
+{
+  mListeners.erase(l);
+}
+
 
 int AntargisMap::width() const
 {
@@ -124,6 +142,13 @@ void AntargisMap::insertEntity(AntEntity *e)
   mEntities.insert(e);
   mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
+  if(e->mRubyObject)
+    {
+      VALUE rubyAnimal = e->mRUBY;
+      rb_gc_mark(rubyAnimal);
+      cdebug("mark:");
+   }
+
 }
     
 void AntargisMap::removeEntity(AntEntity *p)
@@ -145,6 +170,7 @@ void AntargisMap::move(float pTime)
   if(mPaused)
     return;
   // first move computer-players (they decide what to do)
+  //  rb_eval_string("GC.disable");
 
   std::set
     <AntPlayer*>::iterator j=mPlayers.begin();
@@ -157,7 +183,11 @@ void AntargisMap::move(float pTime)
   std::list<AntEntity*>::iterator i=mEntList.begin();
 
   for(;i!=mEntList.end();i++)
-    (*i)->move(pTime);
+    {
+      //      cdebug("ent:"<<*i);
+      (*i)->move(pTime);
+    }
+  //  rb_eval_string("GC.enable");
 }
 
 
@@ -304,6 +334,24 @@ void AntargisMap::saveXML(xmlpp::Node &node) const
     }
 
   }
+
+AntEntity *AntargisMap::loadEntity(const xmlpp::Node &node)
+{
+  std::string n=node.getName();
+  AntEntity *e=0;
+  if(n=="antTree")
+    e=new AntTree;
+  else if(n=="antDeco")
+    e=new AntDeco;
+  else if(n=="antHero")
+    e=new AntHero;
+  else if(n=="antMan")
+    e=new AntMan;
+  else if(n=="antHouse")
+    e=new AntHouse;
+  return e;
+}
+
 void AntargisMap::loadXML(const xmlpp::Node &node)
 {
   xmlpp::Node::const_iterator i=node.begin();
@@ -331,7 +379,10 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
               cdebug("j:"<<j);
             }
         }
-       else if(i->getName()=="antTree")
+      else if((e=loadEntity(*i)))
+	{
+	}
+      /*       else if(i->getName()=="antTree")
         e=new AntTree;
        else if(i->getName()=="antDeco")
         e=new AntDeco;
@@ -339,7 +390,9 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
         e=new AntHero;
        else if(i->getName()=="antMan")
         e=new AntMan;
-       else if(i->getName()=="player")
+       else if(i->getName()=="antHouse")
+       e=new AntHouse;*/
+      else if(i->getName()=="player")
         {
           AntPlayer *p=new AntPlayer(-1);
           p->loadXML(*i);
@@ -366,8 +419,17 @@ void AntargisMap::clear()
   mEntities.clear();
   mEntList.clear();
   mEntityMap.clear();
+  std::set<MapListener*>::iterator i=mListeners.begin();
+  for(;i!=mListeners.end();i++)
+    (*i)->mapUpdate();
 }
 
+void AntargisMap::endChange()
+{
+  std::set<MapListener*>::iterator i=mListeners.begin();
+  for(;i!=mListeners.end();i++)
+    (*i)->mapUpdate();
+}
 void AntargisMap::saveMap(const std::string &pFilename)
 {
   xmlpp::Document d;
@@ -388,6 +450,10 @@ void AntargisMap::loadMap(const std::string &pFilename)
       clear();
       loadXML(d.root());
     }
+
+  std::set<MapListener*>::iterator i=mListeners.begin();
+  for(;i!=mListeners.end();i++)
+    (*i)->mapUpdate();
 }
 
 
@@ -395,193 +461,6 @@ void AntargisMap::loadMap(const std::string &pFilename)
 * AntEntity
 *****************************************************************/
 
-AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
-{
-  mDirNum=1;
-  mID=getMap()->getNewID();
-}
-AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
-{
-  mDirNum=1;
-  mID=getMap()->getNewID();
-}
-
-AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05)
-{
-  mDirNum=1;
-  mID=getMap()->getNewID();
-}
-
-void AntEntity::saveXML(xmlpp::Node &node) const
-  {
-    myxmlpp::Node &child=node.newChild("position");
-    mPos.saveXML(child);
-    node.set("energy",toString(mEnergy));
-    node.set("healSpeed",toString(mHealSpeed));
-    node.set("onGround",toString(onGround));
-    node.set("entityID",toString(getID()));
-  }
-void AntEntity::loadXML(const xmlpp::Node &node)
-{
-  mEnergy=toFloat(node.get("energy"));
-  mHealSpeed=toFloat(node.get("healSpeed"));
-  onGround=toBool(node.get("onGround"));
-  assert(onGround);
-  xmlpp::Node::const_iterator i=node.begin();
-  for(;i!=node.end();i++)
-    mPos.loadXML(*i);
-  mID=toInt(node.get("entityID"));
-}
-
-Pos3D AntEntity::getPos3D() const
-  {
-    return mPos;
-  }
-Pos2D AntEntity::getPos2D() const
-  {
-    return Pos2D(mPos.x,mPos.z);
-  }
-
-void AntEntity::setPos2D(const Pos2D &p)
-{
-  mPos=Pos3D(p.x,getMap()->getHeight(p),p.y);
-}
-
-void AntEntity::setJob(Job *pJob)
-{
-  if(mJob)
-    {
-      if((*mJob)<=(*pJob))
-        delete mJob;
-      else
-        {
-          delete pJob;
-          return;
-        }
-    }
-  mJob=0;
-  if(mEnergy>0.0)
-    mJob=pJob;
-  else
-    delete pJob;
-}
-
-
-/** do anything in given time frame */
-void AntEntity::move(float pTime)
-{
-  if(mJobFinished || mEnergy==0.0)
-    {
-      delete mJob;
-      mJob=0;
-      mJobFinished=false;
-    }
-  else if(mEnergy>0.0)
-    {
-      mEnergy+=pTime*getHealSpeed();
-      if(mEnergy>1.0)
-        mEnergy=1.0;
-    }
-  if(mJob)
-    mJob->move(this,pTime);
-    
-  mCondition+=mConditionHeal*pTime;
-}
-
-Rect2D AntEntity::getRect() const
-  {
-    return Rect2D((int)mPos.x,(int)mPos.y,32,32);
-  }
-
-void AntEntity::jobFinished()
-{
-  if(mJob)
-    mJobFinished=true;
-}
-
-void AntEntity::mapChanged()
-{
-  if(onGround)
-    mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
-}
-
-
-/************************************************************************
-* MoveJob
-************************************************************************/
-
-MoveJob::MoveJob(int p,const Pos2D &pTarget,int pnear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),near(pnear),mRun(pRun)
-    {
-      speed=70; // pixels per second
-      runSpeed=100;
-    }
-
-// Jobs
-void MoveJob::move(AntEntity *e,float ptime)
-{
-  float aspeed;
-  
-  if(mRun && e->getCondition()>0.0)
-  {
-    // decrease condition and if condition is zero - switch of running
-    float newtime=e->decCondition(ptime);
-    moveBy(e,ptime-newtime,runSpeed);// take same runSpeed always
-    
-    ptime=newtime;
-  }
-  aspeed=0.5*speed+0.5*e->getEnergy()*speed;
-  moveBy(e,ptime,aspeed); // use rest of time
-  
-}
-
-Pos2D MoveJob::getDirection(const AntEntity *e) const
-{
-  return (mTarget-e->getPos2D()).normalized();
-}
-
-
-void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
-{
-  Pos2D diff=e->getPos2D()-mTarget;
-  float norm=diff.norm();
-  if(norm-near>ptime*aspeed)
-    {
-      diff=diff.normalized();
-      e->setDirection(diff*(-1));
-      e->setPos2D(e->getPos2D()-diff*ptime*aspeed);
-    }
-  else
-    {
-      //   e->setPos2D(mTarget);
-      e->jobFinished();
-    }
-}
-
-/************************************************************************
-* FightJob
-************************************************************************/
-
-
-// FightJobs
-void FightJob::move(AntEntity *e,float ptime)
-{
-  if(mTarget->getEnergy()==0.0)
-    e->jobFinished();
-  // if target is too far away run there, otherwise fight
-  Pos2D diff=e->getPos2D()-mTarget->getPos2D();
-  float norm=diff.norm();
-  if(norm-fightDistance>ptime*speed)
-    {
-      diff=diff.normalized();
-      e->setPos2D(e->getPos2D()-diff*ptime*speed);
-    }
-  else
-    {
-      // fight
-      mTarget->decEnergy(ptime*strength);
-      mTarget->gotFight(e);
-    }
-}
 
 
 /************************************************************************
@@ -599,149 +478,8 @@ void AntDeco::loadXML(const xmlpp::Node &node)
   typeID=toInt(node.get("typeID"));
 }
 
-/************************************************************************
-* AntHero
-************************************************************************/
-AntHero::AntHero(const Pos2D &p,int pTypeID,const std::string &pName):AntEntity(p),typeID(pTypeID),mName(pName)
-{}
-AntHero::~AntHero()
-{
-  std::set
-    <AntMan*>::iterator i=mMen.begin();
-  for(;i!=mMen.end();i++)
-    (*i)->discard(this);
-
-  getMap()->killHero(this);
-}
-VoxelImage *AntHero::getSurface() const
-  {
-    std::ostringstream os;
-    if(typeID==0)
-      os<<"hero1dl";
-    else
-      os<<"hero2dl";
-    VoxelImage *im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
-    im->setPosition(mPos);
-    //im->setCenter(Pos2D(100,150)+Pos2D(0,64));
-    im->setVirtualY(40);
-    im->setName(mName);
-    return im;
-  }
-
-int AntHero::getTypeID() const
-  {
-    return typeID;
-  }
 
 
-void AntHero::fightHero(AntHero *h)
-{
-  CTRACE;
-  // myselfs attacks other hero
-  setJob(new FightJob(0,h));
-
-  // get other's men and other hero and put them all into a vector
-  std::set
-    <AntMan*> otherMen=h->mMen;
-  std::vector<AntEntity*> otherList;
-
-  std::set
-    <AntMan*>::iterator i=otherMen.begin();
-  for(;i!=otherMen.end();i++)
-    otherList.push_back(*i);
-  otherList.push_back(h); // push other hero
-
-  std::random_shuffle(otherList.begin(),otherList.end()); // shuffle all
-
-  std::vector<AntEntity*>::iterator k=otherList.begin();
-  // assign from front to back all the entities for fighting
-  for(i=mMen.begin();i!=mMen.end();i++)
-    {
-      (*i)->setJob(new FightJob(0,*k));
-
-      k++;
-      if(k==otherList.end())
-        k=otherList.begin(); // simply restart, if end is hit
-    }
-
-
-}
-
-void AntHero::goTo(int prio,const Pos2D &pos)
-{
-  std::set
-    <AntMan*>::iterator i;
-  for(i=mMen.begin();i!=mMen.end();i++)
-    (*i)->jobFinished();
-  setJob(new MoveJob(prio,pos));
-}
-
-
-void AntHero::signUp(AntMan *man)
-{
-  mMen.insert(man);
-}
-
-
-void AntHero::discard(AntMan *man)
-{
-  mMen.erase(man);
-}
-
-float AntHero::calcTroupStrength() const
-  {
-    float s=getEnergy();
-    std::set
-      <AntMan*>::iterator i;
-    for(i=mMen.begin();i!=mMen.end();i++)
-      s+=(*i)->getEnergy();
-    return s;
-  }
-
-AntHero *AntHero::fights()
-{
-  if(mJob)
-    {
-      FightJob *f=dynamic_cast<FightJob*>(mJob);
-      if(f)
-        {
-          return dynamic_cast<AntHero*>(f->getTarget());
-        }
-    }
-  return 0;
-}
-
-void AntHero::saveXML(xmlpp::Node &node) const
-{
-  AntEntity::saveXML(node);
-  node.set("typeID",toString(typeID));
-  node.set("name",mName);
-}
-void AntHero::loadXML(const xmlpp::Node &node)
-{
-  AntEntity::loadXML(node);
-  typeID=toInt(node.get("typeID"));
-  mName=node.get("name");
-}
-
-
-/************************************************************************
-* AntMan
-************************************************************************/
-void AntMan::saveXML(xmlpp::Node &node) const
-{
-  AntEntity::saveXML(node);
-  node.set("typeID",toString(typeID));
-  if(mHero)
-    node.set("heroID",toString(mHero->getID()));
-}
-void AntMan::loadXML(const xmlpp::Node &node)
-{
-  AntEntity::loadXML(node);
-  typeID=toInt(node.get("typeID"));
-  if(node.get("heroID").length())
-    mHeroID=toInt(node.get("heroID"));
-}
 
 /************************************************************************
 * AntPlayer
@@ -753,7 +491,7 @@ void AntPlayer::saveXML(xmlpp::Node &node) const
    for(;i!=mHeroes.end();i++)
    {
     xmlpp::Node &child=node.newChild("hero");
-    child.set("heroID",toString((*i)->getID()));
+    child.set("bossID",toString((*i)->getID()));
    }
 }
 void AntPlayer::loadXML(const xmlpp::Node &node)
@@ -765,7 +503,7 @@ void AntPlayer::loadXML(const xmlpp::Node &node)
   {
     if(i->getName()=="hero")
     {
-      int id=toInt(i->get("heroID"));
+      int id=toInt(i->get("bossID"));
       AntHero *h=dynamic_cast<AntHero*>(getMap()->getEntity(id));
       if(!h)
         cdebug("Hero not found!");
@@ -773,5 +511,88 @@ void AntPlayer::loadXML(const xmlpp::Node &node)
         mHeroes.insert(h);
     }
   }
+}
+
+// MapListener
+MapListener::MapListener()
+{
+  getMap()->insertListener(this);
+}
+
+MapListener::~MapListener()
+{
+  getMap()->removeListener(this);
+}
+
+void MapListener::mapUpdate()
+{
+}
+
+void AntargisMap_markfunc(void *ptr)
+{
+  cdebug("TRACE");
+#ifdef USE_RUBY
+  AntEntity *cppAnimal;
+  VALUE   rubyAnimal;
+  AntargisMap *zoo;
+  
+  TRACE;  
+  cdebug(ptr<<endl);
+  zoo = static_cast<AntargisMap*>(ptr);
+  
+  std::list<AntEntity*>::iterator i=zoo->mEntList.begin();
+
+  for(;i!=zoo->mEntList.end();i++)
+    {
+      cdebug("children:"<<*i);
+      cppAnimal = *i;//zoo->getAnimal(i);
+      assert(!cppAnimal->mDeleted);
+      if(cppAnimal->mRubyObject)
+	{
+	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
+	  rb_gc_mark(rubyAnimal);
+	  cdebug("mark:");//<<cppAnimal->getName());
+	}
+      AntEntity_markfunc(*i);
+    }
+#endif
+}
+
+AntEntity *AntargisMap::getNext(AntEntity *me,const std::string &pType)
+{
+  // FIXME: optimize this - use quadtree
+  AntEntity *e=0;
+
+  
+  std::list<AntEntity*>::iterator i=mEntList.begin();
+  Pos2D p=me->getPos2D(); // FIXME: check for reachability, too ??
+  float dist=0;
+
+  for(;i!=mEntList.end();i++)
+    {
+      if(me!=*i)
+	{
+	  if((*i)->getType()==pType)
+	    {
+	      Pos2D p2=(*i)->getPos2D()-p;
+	      float norm=p2.norm2();
+	      if(e)
+		{
+		  if(dist>norm)
+		    {
+		      dist=norm;
+		      e=(*i);
+		    }
+		}
+	      else
+		{
+		  dist=norm;
+		  e=(*i);
+		}
+	    }
+	}
+    }
+
+  return e;
 }
 

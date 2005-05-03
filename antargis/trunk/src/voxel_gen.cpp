@@ -243,6 +243,7 @@ AGRect AntargisView::getRect(AVItem *item) const
 
 void AntargisView::insert(AVItem *v)
 {
+  assert(v);
   mItems.push_back(v);
 }
 

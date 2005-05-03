@@ -20,26 +20,34 @@
 
 #ifndef ANT_JOBS_H
 #define ANT_JOBS_H
+#include "ant_geometry.h"
+#include "ruby.h"
 
 class AntEntity;
 class AntPlayer;
 class AntHero;
 
 class Job
-  {
-    int priority;
-  public:
-    Job(int p):priority(p)
-    {}
-    virtual void move(AntEntity *,float ptime)
-    {}
+{
+  int priority;
+ public:
+  Job(int p);
+  virtual ~Job();
+  virtual void move(AntEntity *,float ptime);
+  bool operator<=(const Job &j) const;
+  
+  VALUE mRUBY;
+  bool mRubyObject;
+  bool mDeleted;
+};
 
-    bool operator<=(const Job &j) const
-      {
-        return priority<=j.priority;
-      }
-  }
-;
+class RestJob:public Job
+{
+  float mTime;
+ public:
+  RestJob(float pTime);
+  void move(AntEntity *e,float ptime);
+};
 
 class MoveJob:public Job
   {
@@ -57,7 +65,6 @@ class MoveJob:public Job
   };
 
 // FIXME: implement near and far fighting (arrows)
-
 class FightJob:public Job
   {
     AntEntity *mTarget;
@@ -78,6 +85,16 @@ class FightJob:public Job
       return mTarget;
     }
   };
+
+class FetchJob:public Job
+{
+  std::string mWhat;
+ public:
+  FetchJob(std::string what);
+  virtual ~FetchJob();
+  void move(AntEntity *e,float ptime);
+  
+};
 
 
 #endif

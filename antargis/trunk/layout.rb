@@ -72,14 +72,23 @@ screen=AGScreenWidget.new
 #w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
 #window1.addChild(w2)
 
-l=AGLayout.new(screen,loadFile("savedialog.xml"))
+l=AGLayout.new(screen,loadFile("loaddialog.xml"))
 screen.addChild(l)
 l.gainFocus
-l.getChild("Filename").gainFocus
+#l.getChild("Filename").gainFocus
+
+lb=toAGListBox(l.getChild("Files"))
+#lb.insert("huhu","huhu")
+puts "FILES::::::::::::::::::::::::::::"
+d=getDirectory(toAGEdit(l.getChild("Directory")).getText)
+puts d
+d.each { |x|
+puts "FILE:"+x
+lb.insert(x,x)}
 
 
 app.setMainWidget(screen)#widget)
-l.getChild("Filename").gainFocus
+#l.getChild("Filename").gainFocus
 
 app.run
 

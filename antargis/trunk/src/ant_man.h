@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * minimap.h
+ * ant_man.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,43 +18,39 @@
  * License along with this program.
  */
 
-#ifndef __MINIMAP_H__
-#define __MINIMAP_H__
+#ifndef ANT_MAN_H
+#define ANT_MAN_H
 
-#include <ag_widget.h>
-#include <ag_surface.h>
-#include <ag_border.h>
+#include "entity.h"
+class AntBoss;
 
-#include "map.h"
-
-class AntargisMap;
-
-class MiniMap:public AGWidget,public MapListener
+class AntMan: public AntEntity
   {
+    int typeID;
+    AntBoss *mBoss;
+    int mBossID;
+
   public:
-    MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect);
-    virtual ~MiniMap();
+    AntMan();
+    AntMan(const Pos2D &p,int pTypeID,AntBoss *pBoss);
 
-    virtual void draw(AGPainter &p);
-
-    void update();
-    void drawEntities(const AGPoint &p0);
-
-    void mapUpdate()
-    {
-      update();
-    }
+    virtual ~AntMan();
     
-    AGSignal sigMoveMap;
+    virtual std::string getTexture() const;
+    
+    virtual void move(float pTime);
 
-  private:
-    AntargisMap *mMap;
-    AGTexture mTexture;
-    //    AGTexture mBG;
-    AGBorder mBorder;
-    AGSurface mSurface;
-    bool mustUpdate;
-    AGRect mViewRect;
+    void updateSurface();
+
+    void discard(AntBoss *hero);
+
+    virtual AntBoss *getBoss();
+
+    virtual float getHealSpeed() const;
+
+    virtual std::string xmlName() const;
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(const xmlpp::Node &node);
+
   };
-
 #endif

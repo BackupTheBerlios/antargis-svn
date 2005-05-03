@@ -26,6 +26,7 @@
 #include "voxel_gen.h"
 #include "tree.h"
 #include "map.h"
+#include "ant_hero.h"
 
 #include "ag_xml.h"
 
@@ -35,8 +36,6 @@
 #include <vector>
 #include <algorithm>
 
-
-
 class AntDeco:public AntEntity
   {
     int typeID;
@@ -45,7 +44,7 @@ class AntDeco:public AntEntity
     {}
     AntDeco(const Pos2D &p,int ID):AntEntity(p),typeID(ID)
     {}
-    VoxelImage *getSurface() const
+    VoxelImage *getSurface()
       {
         std::ostringstream os;
         VoxelImage *im=0;
@@ -65,183 +64,6 @@ class AntDeco:public AntEntity
       }
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);
-  };
-
-class AntMan;
-
-class AntHero:public AntEntity
-  {
-    int typeID;
-
-    std::string mName;
-
-    std::set
-      <AntMan*> mMen;
-
-  public:
-    AntHero():typeID(0)
-  {}
-    AntHero(const Pos2D &p,int ID,const std::string &pName);
-    virtual ~AntHero();
-    VoxelImage *getSurface() const;
-    void signUp(AntMan *man);
-
-    int getTypeID() const;
-    void fightHero(AntHero *h);
-    void goTo(int prio,const Pos2D &pos);
-    void discard(AntMan *man);
-
-    float calcTroupStrength() const;
-
-    AntHero *fights(); // returns 0 if is not fighting otherwise pointer to other hero
-    void gotFight(AntEntity *e)
-    {
-      if(!fights())
-        {
-          AntHero *h=e->getHero();
-
-          if(h)
-            fightHero(h);
-        }
-    }
-
-    Pos2D getFormation(AntMan *m) const
-      {
-        size_t count=mMen.size();
-
-        // if(count>20) FIXME: do second circle
-
-        std::set
-          <AntMan*>::const_iterator j=mMen.begin();
-        size_t c=0;
-        for(;j!=mMen.end() && *j!=m;j++,c++)
-          ;
-        if(j==mMen.end())
-          return Pos2D(0,0);
-        else
-          {
-            
-            if(hasJob())
-            {
-              MoveJob *j=dynamic_cast<MoveJob*>(mJob);
-              if(j)
-              {
-                Pos2D dir=j->getDirection(this);
-                Pos2D normal=dir.normal();
-                Pos2D t=dir*(-1)*(c/6)*32+normal*((c%6)-2.5)*16;
-                return t;
-              }
-            }
-            float angle=float(c)/float(count)*M_PI*2.0;
-            return Pos2D(sin(angle)*64,cos(angle)*64);
-          }
-
-      }
-
-    virtual AntHero *getHero()
-    {
-      return this;
-    }
-    virtual float getHealSpeed() const
-      {
-        if(hasJob())
-          return mHealSpeed*0.2;
-        else
-          return mHealSpeed;
-      }
-    virtual std::string xmlName() const
-      {
-        return "antHero";
-      }
-    virtual void saveXML(xmlpp::Node &node) const;
-    virtual void loadXML(const xmlpp::Node &node);
-
-  };
-
-class AntMan: public AntEntity
-  {
-    int typeID;
-    AntHero *mHero;
-    int mHeroID;
-
-  public:
-    AntMan():typeID(0),mHero(0),mHeroID(0)
-    {}
-    AntMan(const Pos2D &p,int pTypeID,AntHero *pHero):AntEntity(p),typeID(pTypeID),mHero(pHero),mHeroID(0)
-    {
-      if(pHero)
-        pHero->signUp(this);
-    }
-    virtual ~AntMan()
-    {
-      if(mHero)
-        mHero->discard(this);
-    }
-    
-    virtual std::string getTexture() const
-    {
-      std::ostringstream os;
-      os<<"man"<<mDirNum;
-      return os.str();
-    }
-
-    
-    virtual void move(float pTime)
-    {
-      if(mHeroID && !mHero)
-        {
-          mHero=dynamic_cast<AntHero*>(getMap()->getEntity(mHeroID));
-          mHeroID=0;
-          mHero->signUp(this);
-        }
-      if(mHero && !mJob)
-        {
-          setJob(new MoveJob(0,mHero->getPos2D()+mHero->getFormation(this),0,true));//Pos2D()));
-        }
-      else
-        {
-          // search house here
-        }
-      AntEntity::move(pTime);
-    }
-    VoxelImage *getSurface() const
-      {
-        std::ostringstream os;
-        os<<"man1";
-/*        if(typeID==0)
-          os<<"man1dl";
-        else
-          os<<"man2dl";*/
-        VoxelImage *im=new VoxelImage(os.str());//imageCache()->getImage(os.str());
-        im->setPosition(mPos);
-        //im->setCenter(Pos2D(100,150)+Pos2D(0,64));
-        im->setVirtualY(40);
-        return im;
-      }
-
-    void discard(AntHero *hero)
-    {
-      assert(mHero==hero);
-      mHero=0;
-    }
-    virtual AntHero *getHero()
-    {
-      return mHero;
-    }
-    virtual float getHealSpeed() const
-      {
-        if(hasJob())
-          return mHealSpeed*0.2;
-        else
-          return mHealSpeed;
-      }
-    virtual std::string xmlName() const
-      {
-        return "antMan";
-      }
-    virtual void saveXML(xmlpp::Node &node) const;
-    virtual void loadXML(const xmlpp::Node &node);
-
   };
 
 // Computer player
