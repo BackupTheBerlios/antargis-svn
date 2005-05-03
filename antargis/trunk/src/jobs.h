@@ -103,9 +103,9 @@ class FetchJob:public MoveJob
   virtual void jobFinished(AntEntity *e);
   
 };
-
+/*
 RestJob *newRestJob(int pTime);
 FetchJob *newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
 MoveJob *newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
-
+*/
 #endif

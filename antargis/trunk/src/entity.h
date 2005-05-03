@@ -49,6 +49,7 @@ class Resource
 class AntEntity
   {
     int mID;
+    int mPlayerID;
   protected:
     Pos3D mPos;
     Job *mJob;
@@ -79,6 +80,9 @@ class AntEntity
     virtual ~AntEntity();
     Pos3D getPos3D() const;
     Pos2D getPos2D() const;
+
+    int getPlayerID() const;
+    void setPlayerID(int id);
 
     void setVar(std::string n,std::string v);
     std::string getVar(std::string n);
@@ -209,7 +213,12 @@ class AntEntity
         }
     }
 
-    virtual Job*getJob(AntEntity*);
+    void newRestJob(int pTime);
+    void newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
+    void newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
+
+
+    virtual void assignJob(AntEntity*);
 
     virtual void gotFight(AntEntity *)
     {}

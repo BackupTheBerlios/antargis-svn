@@ -21,17 +21,18 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
+#require 'libantargisruby'
 require 'libantargis'
 require 'antApp.rb'
 #require 'sdl'
 
-include Libantargisruby
+#include Libantargisruby
 include Libantargis
 
 require 'dialogs.rb'
 require 'ents.rb'
 require 'map.rb'
+require 'view.rb'
 
 class AntGameApp <AntApp
 	def initialize()
@@ -41,19 +42,23 @@ class AntGameApp <AntApp
 		@map=AntRubyMap.new(128,128)	
 		$map=@map
 		# load a level
-		getMap().loadMap("dummy.antlvl")
+		getMap().loadMap("savegames/savegame6.antlvl")
 	
+		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
+		#puts @view
 		@layout=AGLayout.new(nil,loadFile("ant_layout.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
+		puts @layout.getChild("mainView").getName
 		initDebug
 		#getMap.endChange
 		
 		#storyTalk("Welcome","Welcome to Battles of Antargis")
-		test
+		#test
+		getMap.endChange
 	end
 	
 	def initDebug
@@ -126,7 +131,9 @@ class AntGameApp <AntApp
 		ent2=AntNewHouse.new
 		ent2.setPos2D(Pos2D.new(600,600))
 		$map.insertEntity(ent2)
-	
+		puts "GC"
+		GC.start
+		
 		getMap.endChange
 	end
 	def testsave

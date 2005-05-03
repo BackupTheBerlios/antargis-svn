@@ -139,6 +139,7 @@ Pos2D AntargisMap::getMaxPos() const
   
 void AntargisMap::insertEntity(AntEntity *e)
 {
+  cdebug("INSERTING:"<<e);
   mEntities.insert(e);
   mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
@@ -146,8 +147,8 @@ void AntargisMap::insertEntity(AntEntity *e)
     {
       VALUE rubyAnimal = e->mRUBY;
 
-      rb_gc_register_address(&rubyAnimal);
-      //      rb_gc_mark(rubyAnimal);
+      //rb_gc_register_address(&rubyAnimal);
+      rb_gc_mark(rubyAnimal);
       cdebug("mark:");
    }
 
@@ -518,6 +519,7 @@ void AntPlayer::loadXML(const xmlpp::Node &node)
 // MapListener
 MapListener::MapListener()
 {
+  CTRACE;
   getMap()->insertListener(this);
 }
 

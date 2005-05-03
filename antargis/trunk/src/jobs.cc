@@ -33,7 +33,7 @@ bool Job::operator<=(const Job &j) const
 
 Job::~Job()
 {
-  CTRACE;
+  //  CTRACE;
   mDeleted=true;
 }
 

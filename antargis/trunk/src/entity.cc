@@ -29,6 +29,7 @@ AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy
   mID=getMap()->getNewID();
   mSurface=0;
   mDeleted=false;
+  mPlayerID=-1;
 }
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
 {
@@ -36,6 +37,7 @@ AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFin
   mID=getMap()->getNewID();
   mSurface=0;
   mDeleted=false;
+  mPlayerID=-1;
 }
 
 AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
@@ -44,12 +46,15 @@ AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHea
   mID=getMap()->getNewID();
   mSurface=0;
   mDeleted=false;
+  mPlayerID=-1;
 }
 
 AntEntity::~AntEntity()
 {
   CTRACE;
+  cdebug(mRubyObject);
   mDeleted=true;
+  //  throw int();
 }
 
 void AntEntity::saveXML(xmlpp::Node &node) const
@@ -224,9 +229,8 @@ void AntEntity::setSurface(VoxelImage *i)
   mSurface=i;
 }
 
-Job*AntEntity::getJob(AntEntity*)
+void AntEntity::assignJob(AntEntity*)
 {
-  return 0;
 }
 
 void AntEntity::updateSurface()
@@ -270,6 +274,14 @@ std::string AntEntity::getVar(std::string n)
   return mVars[n];
 }
 
+int AntEntity::getPlayerID() const
+{
+  return mPlayerID;
+}
+void AntEntity::setPlayerID(int id)
+{
+  mPlayerID=id;
+}
 
 
 // RESOURCE
@@ -296,4 +308,18 @@ void Resource::takeAll(Resource &pr)
   for(;i!=pr.r.end();i++)
     add(i->first,i->second);
   pr.r.clear();
+}
+
+
+void AntEntity::newRestJob(int pTime)
+{
+  setJob(new RestJob(pTime));
+}
+void AntEntity::newFetchJob(int p,Pos2D &pTarget,const std::string &what)
+{
+  setJob(new FetchJob(p,pTarget,what));
+}
+void AntEntity::newMoveJob(int p,const Pos2D &pTarget,int pnear)
+{
+  setJob(new MoveJob(p,pTarget,pnear));
 }

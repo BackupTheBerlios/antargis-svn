@@ -12,8 +12,8 @@ libantargis_la_SOURCES = ant_geometry.cpp ant_rect.cpp decast.cpp game.cpp \
 LDADD = -lantargis
 
 
-#marker.h: mk_marker_h.rb
-#	./mk_marker_h.rb >marker.h
+marker.h: mk_marker_h.rb
+	./mk_marker_h.rb >marker.h
 
 antargisruby.cc: interface.i *.h
 	$(SWIGCOMPILE) -o antargisruby.cc interface.i
@@ -31,3 +31,6 @@ clean:
 #libdir = $(top_srcdir)
 install:
 	cp .libs/libantargis.so $(RUBY_INSTALL_DIR)
+
+#LIBADD = -lantargisgui
+libantargis_la_LIBADD = -lantargisgui

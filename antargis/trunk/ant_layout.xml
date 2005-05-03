@@ -2,6 +2,7 @@
 <layout geometry2="(0,0,1024,768)" name="GameLayout">
   <!-- main game layout -->
 	<antView name="mainView"/>
+	<!--<antRubyView name="mainView"/>-->
   <!--<table geometry="(0,0,50,200)" cols="1" rows="4">
     <button col="0" row="0" theme="antButton" name="pointer" caption-image="data/pointer1.png"/>
     <button col="0" row="1" theme="antButton" name="edit" caption-image="data/edit.png"/>

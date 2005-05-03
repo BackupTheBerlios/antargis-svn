@@ -84,7 +84,7 @@ class IsoView:public AntargisView, public MapListener
 
   public:
     // p is local window-coordinate
-    std::list<AntEntity *> getEntity(const AGPoint &pp);
+    std::vector<AntEntity *> getEntity(const AGPoint &pp);
 
     IVTile getTile(const AGPoint &pp);
 
@@ -99,14 +99,27 @@ class IsoView:public AntargisView, public MapListener
 
 class CompleteIsoView: public IsoView
   {
+    /*
+    std::vector<AntEntity*> mClicked;
+    Pos2D mMapClick;
+    */
   public:
     CompleteIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map);
 
-    AntHero *getHero(std::list<AntEntity*> &es);
+    AntHero *getHero(std::vector<AntEntity*> &es);
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
     bool eventMouseClick(const AGEvent *m);
 
-    bool isMyHero(AntHero *h);
+    bool isMyHero(AntEntity *h);
+    /*
+    Pos2D mapClick() const;
+    std::vector<AntEntity*> entityClick() const;
+
+    AGSignal sigMapClick;
+    AGSignal sigEntityClick;
+*/
+    virtual void clickEntities(const std::vector<AntEntity *> &ents);
+    virtual void clickMap(const Pos2D &p);
 
   };
 

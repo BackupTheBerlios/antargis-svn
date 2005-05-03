@@ -21,11 +21,8 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'antApp.rb'
-
-include Libantargisruby
-
+require 'libantargis'
+include Libantargis
 #
 # EVENT_HANDLERS
 #

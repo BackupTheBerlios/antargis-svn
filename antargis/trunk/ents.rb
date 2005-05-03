@@ -25,14 +25,6 @@
 # WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
 # could be that it has something to do with Init_Stack ???
 
-require 'libantargisruby'
-require 'libantargis'
-require 'antApp.rb'
-#require 'sdl'
-
-include Libantargisruby
-include Libantargis
-
 
 # MAN
 class AntNewMan<AntEntity
@@ -48,9 +40,9 @@ class AntNewMan<AntEntity
 			if getVar("bossID")=="" then
 				house=getMap.getNext(self,"house")
 				setVar("bossID",house.getID.to_s)
-				setJob(RestJob.new(rand()*10))
+				newRestJob(rand()*10)
 			else
-				setJob(getMap.getEntity(getVar("bossID").to_i).getJob(self))
+				getMap.getEntity(getVar("bossID").to_i).assignJob(self)
 			end
 		end
 		super(time)
@@ -151,10 +143,10 @@ class AntNewHouse<AntEntity
 	def xmlName
 		return "antNewHouse"
 	end
-	def getJob(e)
+	def assignJob(e)
 		pd=e.getPos2D-getPos2D
 		n=pd.norm2
-		puts "HOME:"+n.to_s+"   "+pd.to_s
+		#puts "HOME:"+n.to_s+"   "+pd.to_s
 		if n<30 then
 			# is home:
 			# 1) take everything from inventory
@@ -170,14 +162,15 @@ class AntNewHouse<AntEntity
 				if tree then
 					puts "TREEPOS:"
 					puts tree.getPos2D.to_s
-					return newFetchJob(0,tree.getPos2D,"wood")
+					e.newFetchJob(0,tree.getPos2D,"wood")
+					return
 				end
 			else
-				return newRestJob(10)
+				e.newRestJob(10)
 			end
 		else
 			# is anywhere - come home
-			return Libantargis.newMoveJob(0,getPos2D,0)#,false)
+			e.newMoveJob(0,getPos2D,0)#,false)
 		end
 	end
 end

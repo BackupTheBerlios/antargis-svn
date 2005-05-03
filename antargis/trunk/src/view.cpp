@@ -31,6 +31,8 @@
 #include <ag_tools.h>
 #include <ag_layoutfactory.h>
 
+#include "jobs.h"
+
 
 /***********************************************************
  * globals
@@ -61,7 +63,7 @@ float getTimeDiff()
 
 
 IsoView::IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
-    AntargisView(parent,r,p,false),mMap(map),mRain(r.w,r.h,0),shallUpdate(false),maxPos(0,0,0)
+  AntargisView(parent,r,p,false),MapListener(),mMap(map),mRain(r.w,r.h,0),shallUpdate(false),maxPos(0,0,0)
 {
   cdebug("IsoView-Rect:"<<r);
   inited=false;
@@ -260,10 +262,10 @@ VoxelImage *IsoView::getSurface(const SplineMapD &h,const SplineMapD &g)
 }
 
 // p is local window-coordinate
-std::list<AntEntity *> IsoView::getEntity(const AGPoint &pp)
+std::vector<AntEntity *> IsoView::getEntity(const AGPoint &pp)
 {
 
-  std::list<AntEntity *> found;
+  std::vector<AntEntity *> found;
   std::vector<AVItem*>::reverse_iterator i=mItems.rbegin();
   for(;i!=mItems.rend();i++)
     {
@@ -313,6 +315,7 @@ IVTile IsoView::getTile(const AGPoint &pp)
 
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
+  CTRACE;
   if(!inited)
     {
       init();
@@ -425,9 +428,9 @@ void IsoView::checkView()
 CompleteIsoView::CompleteIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):IsoView(parent,r,p,map)
 {}
 
-AntHero *CompleteIsoView::getHero(std::list<AntEntity*> &es)
+AntHero *CompleteIsoView::getHero(std::vector<AntEntity*> &es)
 {
-  std::list<AntEntity*>::iterator i=es.begin();
+  std::vector<AntEntity*>::iterator i=es.begin();
   for(;i!=es.end();i++)
     {
       AntHero *e=dynamic_cast<AntHero*>(*i);
@@ -475,7 +478,8 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
           AGPoint p(e->getMousePosition());
           cdebug("clicked on "<<p.x<<","<<p.y);
 
-          std::list<AntEntity *> es=getEntity(p);
+          std::vector<AntEntity *> es=getEntity(p);
+	  clickEntities(es);
           if(es.size())
             {
               if(mSelected.size())
@@ -499,7 +503,7 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
                 }
               else
                 {
-                  std::list<AntEntity*>::iterator i=es.begin();
+                  std::vector<AntEntity*>::iterator i=es.begin();
                   for(;i!=es.end();i++)
                     mSelected.insert(mEntitiesInv[*i]);
                 }
@@ -510,6 +514,9 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
 
               IVTile t=getTile(p);
               cdebug(t.x<<","<<t.y);
+	      Pos2D p2=getTilePos(t);
+
+	      clickMap(p2);
 
               if(mSelected.size() && es.size()==0)
                 {
@@ -518,11 +525,11 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
                       {
                         AVItem *i=*k;
 
-                        AntHero *h=dynamic_cast<AntHero*>(mEntities[i]);
+                        AntEntity *h=mEntities[i];
                         if(isMyHero(h))
                           {
-                            h->goTo(1,getTilePos(t));
-                            //h->setJob(new MoveJob(getTilePos(t)));
+			    //                            h->goTo(1,getTilePos(t));
+                            h->setJob(new MoveJob(0,getTilePos(t),0));
                           }
                       }
                 }
@@ -533,12 +540,21 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
 
 }
 
-bool CompleteIsoView::isMyHero(AntHero *h)
+void CompleteIsoView::clickEntities(const std::vector<AntEntity *> &ents)
+{
+}
+
+void CompleteIsoView::clickMap(const Pos2D &p)
+{
+}
+
+
+bool CompleteIsoView::isMyHero(AntEntity *h)
 {
   if(h)
-    if(h->getTypeID()==0)
-      return true;
+    return(h->getType()=="hero" && h->getPlayerID()==0);
   return false;
+
 }
 
 /***********************************************************
@@ -675,10 +691,10 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
                 else if(mAddEntity=="rubber")
                 {
                   // getEntity and delete
-                  std::list<AntEntity *> es=getEntity(e->getMousePosition());
+                  std::vector<AntEntity *> es=getEntity(e->getMousePosition());
                   if(es.size())
                   {
-                    for(std::list<AntEntity*>::iterator i=es.begin();i!=es.end();i++)
+                    for(std::vector<AntEntity*>::iterator i=es.begin();i!=es.end();i++)
                       getMap()->removeEntity(*i);
                   }
                 }
