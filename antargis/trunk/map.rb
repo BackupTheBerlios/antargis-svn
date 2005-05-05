@@ -37,34 +37,50 @@ class AntRubyMap<AntargisMap
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
 		end
+		if node.getName=="antNewHero" then
+			e=AntNewHero.new
+		end
 		if node.getName=="antNewHouse" then
 			e=AntNewHouse.new
 		end
+		if node.getName=="antNewStone" then
+			e=AntNewStone.new
+		end
+		puts "LOADENTITY:"
+		puts e
+		#GC.start
+		if e then
+			rubyID=e.getID.to_s
+			e.setVar("RubyID",rubyID)
+			@ents[rubyID]=e
+			puts e.getType
+			puts "getID:"+e.getID.to_s
+		end
 		return e
 	end
-	# marshall, so that ruby-objects get used
-	def insertEntityx(e)
-		super(e)
-		@ents[e.getID]=e
-	end
-	def removeEntityx(e)
-		super(e)
-		@ents.deleteAt(e.getID)
-	end
-	def getNextx(me,t)
-		e=super(me,t)
-		if e==nil then return e end
-		return @ents[e.getID]
-	end
-	def getEntityx(id)
-		return @ents[id]
-	end
 	
-	def clearx
-		super
-		@ents.clear
+	def insertEntity(e)
+		puts "INSERTENTITY"
+		puts e.getType
+		puts "getID:"+e.getID.to_s
+		rubyID=e.getVar("RubyID")
+		if not @ents.key?(rubyID) then
+			puts "IF"
+			@ents[rubyID]=e
+		end
+		super(e)
 	end
-		
+	def removeEntity(e)
+		@ents.delete(e.getID)
+		super(e)
+	end
+	def clear
+		@ents.clear
+		super()
+	end
+	def getById(ent)
+		@ents[ent.getVar("RubyID")]
+	end
 end
 
 def getMap

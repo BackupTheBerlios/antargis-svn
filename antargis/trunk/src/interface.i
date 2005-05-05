@@ -29,8 +29,11 @@
 %}
 %include "std_string.i"
 %include "std_vector.i"
+%include "std_map.i"
+
 %template(StringVector) std::vector<std::string>;
-//%template(EntityVector) std::vector<AntEntity*>;
+%template(EntityVector) std::vector<AntEntityPtr>;
+%template(ResourceMap) std::map<std::string,int>;
 %include "antargisgui.h"
 %include "antargis.h"
 

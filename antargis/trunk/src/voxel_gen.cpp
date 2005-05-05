@@ -21,6 +21,7 @@
 #include "voxel_gen.h"
 #include "voxel.h"
 #include "texture_cache.h"
+#include "kill.h"
 
 #include <ag_color.h>
 #include <ag_fontengine.h>
@@ -33,6 +34,7 @@
 
 VoxelImageData::VoxelImageData()
 {
+  CTRACE;
   std::string pFilename="voxelimagedata.xml";
   Document d;
   if(fileExists(pFilename))
@@ -48,6 +50,7 @@ VoxelImageData::VoxelImageData()
 
 VoxelImageData::~VoxelImageData()
 {
+  CTRACE;
   std::string pFilename="voxelimagedata.xml";
   xmlpp::Document d;
   Node *root=createRootNode(d,"antargisLevel");
@@ -93,7 +96,10 @@ VoxelImageData *mVoxelImageData=0;
 VoxelImageData *getVoxelID()
 {
   if(!mVoxelImageData)
-    mVoxelImageData=new VoxelImageData;
+    {
+      mVoxelImageData=new VoxelImageData;
+      REGISTER_SINGLETON(mVoxelImageData);
+    }
   return mVoxelImageData;
 }
 
@@ -150,6 +156,8 @@ AGSurface &AVItem::getSurface()
   int x,y;
   SDL_Surface *s=mSurface.surface();
 
+  //  SDL_SaveBMP(s,"getSurface1.bmp");
+
   Uint32 trans=SDL_MapRGB(s->format,255,255,255);
   Uint32 shadow=SDL_MapRGB(s->format,191,191,191);
   Uint32 ntrans=SDL_MapRGBA(s->format,0,0,0,0);
@@ -166,6 +174,7 @@ AGSurface &AVItem::getSurface()
 
       }
 
+  //  SDL_SaveBMP(s,"getSurface2.bmp");
 
 
 
@@ -266,6 +275,8 @@ VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
     AVItem(pPos)
 {
   mSurface=pSurface;
+  //  SDL_SaveBMP(pSurface.surface(),"hupe3.bmp");
+  //  SDL_SaveBMP(mSurface.surface(),"hupe4.bmp");
   mTexture=AGTexture(mSurface);
   //  mSurface=SDL_DisplayFormatAlpha(pSurface.surface());
   setCenter(Pos2D(mSurface.width()/2,mSurface.height()-mSurface.width()/4));
@@ -379,9 +390,11 @@ void VoxelImage::cutBorders()
 
 void VoxelImage::save(const std::string &pFilename)
 {
+  CTRACE;
   cutBorders();
   getVoxelID()->setCenter(pFilename,mCenter);  
-  
+ 
+  //  SDL_SaveBMP(mSurface.surface(),"hupe2.bmp");
   std::string c=toPNG(mSurface.surface());
 
   saveFile(TILEDIR+pFilename+".png",c);
@@ -532,7 +545,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
 
   cdebug("TIME:"<<t1-t2);
   
-  //SDL_SaveBMP(s.surface(),"hupe.bmp");
+  //  SDL_SaveBMP(s.surface(),"hupe.bmp");
 
 
   //return new ComplexVoxelImage(Pos3D(0,0,0),s,v.getDepthMap(),v.getShadowMap());

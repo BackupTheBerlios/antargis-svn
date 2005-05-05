@@ -88,8 +88,9 @@ class IsoView:public AntargisView, public MapListener
 
     IVTile getTile(const AGPoint &pp);
 
-  protected:
+    //  protected:
     virtual void draw(AGPainter &p);//const AGRect &r);
+  protected:
     void updatePositions();
 
     AGColor getSelectColor();
@@ -118,7 +119,7 @@ class CompleteIsoView: public IsoView
     AGSignal sigMapClick;
     AGSignal sigEntityClick;
 */
-    virtual void clickEntities(const std::vector<AntEntity *> &ents);
+    virtual void clickEntities(const std::vector<AntEntityPtr> &ents);
     virtual void clickMap(const Pos2D &p);
 
   };
@@ -150,6 +151,8 @@ class EditIsoView: public CompleteIsoView
     bool setRubber(const char *name,const AGEvent *e,AGMessageObject *pCaller);
     bool togglePoints(const char *name,const AGEvent *e,AGMessageObject *pCaller);
 
+    virtual void editMarkClicked(const Pos2D &p,const AGSDLEvent *e);
+
     // moving about
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
     bool eventMouseClick(const AGEvent *m);
@@ -158,7 +161,7 @@ class EditIsoView: public CompleteIsoView
     void toggleShowPoints();
     bool eventMouseMotion(const AGEvent *m);
 
-    void editAt(const Pos3D &p,bool dir);
+    void editAt(const Pos2D &p,bool dir);
     
     AGSignal sigMapEdited;
     

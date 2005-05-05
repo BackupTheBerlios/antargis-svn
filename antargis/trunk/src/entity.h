@@ -43,6 +43,8 @@ class Resource
   void add(const std::string &pName,int value);
   void set(const std::string &pName,int value);
 
+  std::map<std::string,int> getAll() const;
+
   void takeAll(Resource &r);
 };
 
@@ -235,6 +237,19 @@ class AntEntity
     friend void AntEntity_markfunc(void *ptr);
 
   };
+
+class AntEntityPtr
+{
+ public:
+  AntEntityPtr(const AntEntityPtr &p);
+  AntEntityPtr(AntEntity *p);
+  AntEntityPtr();
+
+  AntEntity *get();
+
+ private:
+  AntEntity *p;
+};
 
 
 #endif

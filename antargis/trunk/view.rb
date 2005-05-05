@@ -22,7 +22,7 @@
 #!/usr/bin/ruby
 
 
-class AntRubyView <EditIsoView
+class AntRubyView <CompleteIsoView
 	def initialize(p,rect,pos,map)
 		super(p,rect,pos,map)
 		puts "ANTRUBYVIEW"
@@ -30,40 +30,98 @@ class AntRubyView <EditIsoView
 		puts rect.to_s
 		puts pos
 		puts getMap
-		@updated=false
 	end
-	def clickMap2(pos)
+	def clickMap(pos)
 		puts "CLICKMAP:"
 		puts pos.to_s
-	end
-	def draw(p)
-		if not @updated then
-			mapUpdate
-			@updated=true
+		if @hero then
+			@hero.newMoveJob(0,pos,0)
 		end
-		super(p)
-		puts "DRAW"
+	end
+	def clickEntities(list)
+		puts "CLICKENTS"
+		# first take only first
+		if list.length>0 then
+			e=list[0].get
+			inspectEntity(e)
+			if e.getType=="hero" then
+				@hero=$map.getById(e)
+				puts "HERO"
+				puts @hero
+			end
+		end
+	end
+	
+	def inspectEntity(e)
+		$inventory.inspect(e)
 	end
 end
+
+class AntRubyEditView<EditIsoView
+	def editMarkClicked(p,e)
+		
+	end
+end
+
 
 class AntRubyViewCreator<AGLayoutCreator
 	def initialize()
 		super("antRubyView")
-		puts "REGISTER ANTRUBYVIEW"
 	end
 	def create(parent,rect,node)
 		w=AntRubyView.new(parent,rect,Pos3D.new(0,0,0),$map)
-		puts "RECT:"
-		puts rect.to_s
-		puts w
-		puts w.class
-		x=w.class
-		while x!=nil do
-			puts x
-			x=x.superclass
-		end
-#		exit
 		return w
 	end
 end
 $antRubyViewCreator=AntRubyViewCreator.new
+
+
+# Inventory view
+class AntInventory<AGButton
+	def initialize(p,rect)
+		super(p,rect,"")
+		setTheme("antButton")
+		$inventory=self
+		@resTypes=["wood","stone"]
+	end
+	def setValue(name,value)
+		if name=="wood" or name=="stone" then
+			w=toAGEdit(getChild(name))
+			w.setText value.to_s
+		end
+	end
+	def setTitle(t)
+		toAGButton(getChild("invTitle")).setCaption(t)
+	end
+	def inspect(e)
+		setTitle(e.getType)
+		@inspect=e
+	end
+	def draw(p)
+		updateInspection
+		super(p)
+	end
+	def updateInspection
+		if @inspect then
+			res=@inspect.resource.getAll
+			#$inventory.setTitle(e.getType)
+			reset
+			res.each{|a,b|
+				$inventory.setValue(a,b)
+			}
+		end
+	end
+	def reset
+		@resTypes.each{|x|setValue(x,0)}
+	end
+end
+
+class AntInventoryCreator<AGLayoutCreator
+	def initialize()
+		super("antInventory")
+	end
+	def create(parent,rect,node)
+		return AntInventory.new(parent,rect)
+	end
+end
+$antInventoryCreator=AntInventoryCreator.new

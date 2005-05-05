@@ -82,6 +82,7 @@ void IsoView::update()
 
 void IsoView::init()
 {
+  CTRACE;
   // screen size
   int mw=width()/64+2;
   int mh=height()/16+4;
@@ -315,7 +316,6 @@ IVTile IsoView::getTile(const AGPoint &pp)
 
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
-  CTRACE;
   if(!inited)
     {
       init();
@@ -465,6 +465,15 @@ bool CompleteIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
   return false;
 }
 
+std::vector<AntEntityPtr> toEntVector(const std::vector<AntEntity*> &v)
+{
+  std::vector<AntEntityPtr> a;
+  std::vector<AntEntity*>::const_iterator i=v.begin();
+  for(;i!=v.end();i++)
+    a.push_back(*i);
+  return a;
+}
+
 bool CompleteIsoView::eventMouseClick(const AGEvent *m)
 {
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
@@ -479,7 +488,7 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
           cdebug("clicked on "<<p.x<<","<<p.y);
 
           std::vector<AntEntity *> es=getEntity(p);
-	  clickEntities(es);
+	  clickEntities(toEntVector(es));
           if(es.size())
             {
               if(mSelected.size())
@@ -540,7 +549,7 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
 
 }
 
-void CompleteIsoView::clickEntities(const std::vector<AntEntity *> &ents)
+void CompleteIsoView::clickEntities(const std::vector<AntEntityPtr> &ents)
 {
 }
 
@@ -672,6 +681,33 @@ bool EditIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
     }
   return false;
 }
+
+// FIXME : change, so that handling will be done in:
+// 1) editMarkClicked - this will be done in AntRubyViewEdit or so
+
+void EditIsoView::editMarkClicked(const Pos2D &p,const AGSDLEvent *e)
+{
+  if(mAddEntity=="")
+    editAt(p,e->getButton()==SDL_BUTTON_LEFT);
+  else if(mAddEntity=="rubber")
+    {
+      // getEntity and delete
+      std::vector<AntEntity *> es=getEntity(e->getMousePosition());
+      if(es.size())
+	{
+	  for(std::vector<AntEntity*>::iterator i=es.begin();i!=es.end();i++)
+	    getMap()->removeEntity(*i);
+	}
+    }
+  else if(mAddEntity=="tree")
+    getMap()->insertEntity(new AntTree(p,rand()%11));
+  else if(mAddEntity=="stones")
+    getMap()->insertEntity(new AntDeco(p,rand()%2));
+  else if(mAddEntity=="tower")
+    getMap()->insertEntity(new AntHouse(p,"tower2"));
+  update();
+}
+
 bool EditIsoView::eventMouseClick(const AGEvent *m)
 {
   if(!mEditing)
@@ -685,6 +721,10 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
             {
               if(mOldPoint)
               {
+                Pos3D p=mOldPoint->getPosition();
+		
+		editMarkClicked(Pos2D(p.x,p.z),e);
+		/*
                 Pos3D p=mOldPoint->getPosition();
                 if(mAddEntity=="")
                   editAt(p,e->getButton()==SDL_BUTTON_LEFT);
@@ -704,7 +744,7 @@ bool EditIsoView::eventMouseClick(const AGEvent *m)
                   getMap()->insertEntity(new AntDeco(Pos2D(p.x,p.z),rand()%2));
 		else if(mAddEntity=="tower")
 		  getMap()->insertEntity(new AntHouse(Pos2D(p.x,p.z),"tower2"));
-                  
+		*/
               }
 
               update();
@@ -765,14 +805,14 @@ bool EditIsoView::eventMouseMotion(const AGEvent *m)
   return IsoView::eventMouseMotion(m);
 }
 
-void EditIsoView::editAt(const Pos3D &p,bool dir)
+void EditIsoView::editAt(const Pos2D &p,bool dir)
 {
   int x=(int)(2*p.x/TILE_WIDTH+2);
-  int z=(int)(2*p.z/TILE_WIDTH+3);
+  int y=(int)(2*p.y/TILE_WIDTH+3);
   if(dir)
-    getMap()->addFlat(x,z,30,editSize);
+    getMap()->addFlat(x,y,30,editSize);
   else
-    getMap()->addFlat(x,z,-30,editSize);
+    getMap()->addFlat(x,y,-30,editSize);
 
   completeUpdate();
   sigMapEdited(0);

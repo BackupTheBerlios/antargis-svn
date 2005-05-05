@@ -86,7 +86,8 @@ class AntNewHero<AntEntity
 		super(node)
 	end
 	
-	
+	def assignJob(e)
+	end
 	# formation:
 	# 1) wait for 3/4 of people are in formation but max. 5 seconds or so
 	# 2) start all at once
@@ -115,7 +116,31 @@ class AntNewTree<AntEntity
 		super(node)
 		@typeID=node.get("typeID").to_i
 	end
-	
+end
+
+class AntNewStone<AntEntity
+	def initialize()
+		super(Pos2D.new(0,0))
+		@typeID=0
+		setType("stone")
+	end
+	def setTreeType(t)
+		@typeID=t
+	end
+	def getSurfaceName
+		return "deco"+@typeID.to_s
+	end
+	def getVirtualY
+		40
+	end
+	def saveXML(node)
+		super(node)
+		node.set("typeID",@typeID.to_s)
+	end
+	def loadXML(node)
+		super(node)
+		@typeID=node.get("typeID").to_i
+	end
 end
 
 class AntNewHouse<AntEntity
@@ -124,7 +149,6 @@ class AntNewHouse<AntEntity
 		@type=2
 		setType("house")
 		@men=[]
-		#@res=Resource.new
 	end
 	def setHouseType(t)
 		@type=t
@@ -144,33 +168,59 @@ class AntNewHouse<AntEntity
 		return "antNewHouse"
 	end
 	def assignJob(e)
-		pd=e.getPos2D-getPos2D
-		n=pd.norm2
-		#puts "HOME:"+n.to_s+"   "+pd.to_s
-		if n<30 then
+		if atHome(e) then
 			# is home:
 			# 1) take everything from inventory
 			resource.takeAll(e.resource)
-			wood=resource.get("wood")
-			puts "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOD:"+wood.to_s
 			# 2) give job
-			if wood<50 then
-				tree=getMap.getNext(self,"tree")
-				if tree == nil then
-					puts "NO TREE FOUND"
-				end
-				if tree then
-					puts "TREEPOS:"
-					puts tree.getPos2D.to_s
-					e.newFetchJob(0,tree.getPos2D,"wood")
-					return
-				end
+			need=needed()
+			if need != nil then
+				fetch( need[1],need[0],e)
 			else
 				e.newRestJob(10)
 			end
 		else
 			# is anywhere - come home
 			e.newMoveJob(0,getPos2D,0)#,false)
+		end
+	end
+	
+	# says if entity is at home
+	def atHome(entity)
+		pd=entity.getPos2D-getPos2D
+		n=pd.norm2
+		return n<30
+	end
+	
+	# what's needed most ATM?
+	# returns: [good,from] or nil
+	def needed()
+		goods={"wood"=>"tree","stone"=>"stone"}
+		min=10000
+		need=nil
+		needfrom=nil
+		goods.each{|good,from|
+			v=resource.get(good)
+			if min>v then
+				min=v
+				need=good
+				needfrom=from
+			end
+		}
+		if need==nil then
+			return nil
+		else
+			return [need,needfrom]
+		end
+	end
+	
+	# assigns ent a job for fetching good from a enttype
+	def fetch(enttype,good,ent)
+		tent=getMap.getNext(self,enttype)
+		if tent == nil then
+			puts "No '"+good+"' found!"
+		else
+			ent.newFetchJob(0,tent.getPos2D,good)
 		end
 	end
 end

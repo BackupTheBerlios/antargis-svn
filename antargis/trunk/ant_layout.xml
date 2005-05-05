@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <layout geometry2="(0,0,1024,768)" name="GameLayout">
   <!-- main game layout -->
-	<antView name="mainView"/>
-	<!--<antRubyView name="mainView"/>-->
+	<!--<antView name="mainView"/>-->
+	<antRubyView geometry2="(0,0,512,300)" name="mainView"/>
   <!--<table geometry="(0,0,50,200)" cols="1" rows="4">
     <button col="0" row="0" theme="antButton" name="pointer" caption-image="data/pointer1.png"/>
     <button col="0" row="1" theme="antButton" name="edit" caption-image="data/edit.png"/>
@@ -16,11 +16,16 @@
     <button col="2" row="0" theme="antButton" name="quit" caption-image="data/door.png"/>
   </table>-->
   <!--<antMiniView name="miniMap" geometry="(808,551,216,216)"/>-->
-	<table cols="2" rows="4">
+	<!--
+	<listBox geometry="(0,300,200,200)" name="inventory">
+	</listBox>
+	-->
+	<table cols="2" rows="5">
 		<colsize col="1" fixed="216"/>
-		<rowsize row="1" fixed="50"/>
+		<rowsize row="1" fixed="216"/>
 		<rowsize row="2" fixed="50"/>
-		<rowsize row="3" fixed="216"/>
+		<rowsize row="3" fixed="50"/>
+		<rowsize row="4" fixed="216"/>
 		<table col="1" row="0" geometry2="(873,0,150,50)" cols="4" rows="2">
 			<rowsize row="0" fixed="50"/>
 			<colsize col="1" fixed="50"/>
@@ -29,14 +34,26 @@
 			<button col="1" row="0" theme="antButton" name="pause" caption-image="data/pause.png"/>
 			<button col="2" row="0" theme="antButton" name="options" caption-image="data/options.png"/>
 			<button col="3" row="0" theme="antButton" name="quit" caption-image="data/door.png"/>
+			
+			
 		</table>
-		<table col="1" row="1" cols="4" rows="1">
+		<antInventory col="1" row="1">
+			<table col="1" row="1" cols="2" rows="8" geometry="(4,4,208,208)">
+				<button theme="antButton" name="invTitle" geometry="(0,0,208,26)"/>
+				<text col="0" row="1" caption="Wood" align="left"/>
+				<text col="0" row="2" caption="Stone" align="left"/>
+				
+				<text col="1" row="1" caption="0" align="right" name="wood"/>
+				<text col="1" row="2" caption="0" align="right" name="stone"/>
+			</table>
+		</antInventory>
+		<table col="1" row="2" cols="4" rows="1">
 			<colsize col="0" fixed="50"/>
 			<colsize col="1" fixed="50"/>
 	    <button col="0" row="0" theme="antButton" name="fight" caption-image="data/sword.png"/>
   	  <button col="1" row="0" theme="antButton" name="fight" caption-image="data/sword.png"/>
 		</table>
-    <button col="1" row="2" theme="antButton" name="fight" caption="The wolfs' lair"/>
-	  <antMiniView col="1" row="3" name="miniMap" geometry2="(808,551,216,216)"/>
+    <button col="1" row="3" theme="antButton" name="fight" caption="The wolfs' lair"/>
+	  <antMiniView col="1" row="4" name="miniMap" geometry2="(808,551,216,216)"/>
 	</table>
 </layout>

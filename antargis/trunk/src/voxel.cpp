@@ -675,6 +675,8 @@ void FastVoxelView::init()
       else
         sge_FilledRect(s,(int)p.x,(int)p.y,(int)(p.x+mZoom),(int)(p.y+mZoom),c.toColor(s));
     }
+  //  SDL_SaveBMP(s,"myfile.bmp");
+
   mSurface=AGSurface(s);
   return;
 }

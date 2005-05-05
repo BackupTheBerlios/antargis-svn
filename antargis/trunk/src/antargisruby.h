@@ -24,6 +24,7 @@ public:
     SwigDirector_AGSurface(VALUE self, AGSurface const &p);
     virtual ~SwigDirector_AGSurface();
     virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
 };
 
 
@@ -1012,7 +1013,6 @@ public:
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
-    virtual void clickEntities(std::vector<AntEntity * > const &ents);
     virtual ~SwigDirector_CompleteIsoView();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseButtonUp(AGEvent const *m);
@@ -1028,6 +1028,7 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void clickEntities(std::vector<AntEntityPtr > const &ents);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
@@ -1051,10 +1052,10 @@ public:
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual bool eventShow();
+    virtual void editMarkClicked(Pos2D const &p, AGSDLEvent const *e);
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
-    virtual void clickEntities(std::vector<AntEntity * > const &ents);
     virtual ~SwigDirector_EditIsoView();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseButtonUp(AGEvent const *m);
@@ -1070,6 +1071,7 @@ public:
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual void clickEntities(std::vector<AntEntityPtr > const &ents);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);

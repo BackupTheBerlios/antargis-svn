@@ -256,12 +256,12 @@ int AntEntity::getVirtualY() const
 
 VoxelImage*AntEntity::getSurface()
     {
-      CTRACE;
-      cdebug(mSurface);
+      //      CTRACE;
+      //      cdebug(mSurface);
       if(!mSurface)
 	updateSurface();
-      cdebug(mSurface);
-      cdebug(typeid(*this).name());
+      //      cdebug(mSurface);
+      //      cdebug(typeid(*this).name());
       return mSurface;
     }
 
@@ -310,6 +310,12 @@ void Resource::takeAll(Resource &pr)
   pr.r.clear();
 }
 
+std::map<std::string,int> Resource::getAll() const
+{
+  return r;
+}
+
+
 
 void AntEntity::newRestJob(int pTime)
 {
@@ -322,4 +328,23 @@ void AntEntity::newFetchJob(int p,Pos2D &pTarget,const std::string &what)
 void AntEntity::newMoveJob(int p,const Pos2D &pTarget,int pnear)
 {
   setJob(new MoveJob(p,pTarget,pnear));
+}
+
+
+// AntEntityPtr
+AntEntityPtr::AntEntityPtr():p(0)
+{
+}
+
+AntEntityPtr::AntEntityPtr(const AntEntityPtr &pp):p(pp.p)
+{
+}
+AntEntityPtr::AntEntityPtr(AntEntity *pp):p(pp)
+{
+}
+
+AntEntity *AntEntityPtr::get()
+{
+  assert(p);
+  return p;
 }

@@ -116,7 +116,7 @@ void MiniMap::draw(AGPainter &p)//const AGRect &r)
   p.blit(mTexture,getRect());
   p.blit(mTexture,mr);
 
-  cdebug(mTexture.getRect());
+  //  cdebug(mTexture.getRect());
   
   drawEntities(mr.getPosition());
 }

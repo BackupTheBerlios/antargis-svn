@@ -8,14 +8,14 @@ libantargis_la_SOURCES = ant_geometry.cpp ant_rect.cpp decast.cpp game.cpp \
  game.h map.h md5.h minimap.h mpng.h myapp.h mystring.h pmd5.h quadtree.h \
  rain.h random_map.h serialize.h store.h texture_cache.h tree.h view.h voxel_gen.h voxel.h antargisruby.cc antargisruby.h \
  ant_tree.h ant_tree.cc ant_boss.h ant_boss.cc ant_hero.h ant_hero.cc ant_man.h ant_man.cc \
- ant_house.h ant_house.cc jobs.h jobs.cc entity.cc entity.h
+ ant_house.h ant_house.cc jobs.h jobs.cc entity.cc entity.h kill.h kill.cc
 LDADD = -lantargis
 
 
 marker.h: mk_marker_h.rb
 	./mk_marker_h.rb >marker.h
 
-antargisruby.cc: interface.i *.h
+antargisruby.cc: interface.i *.h /usr/include/antargisgui/*.h
 	$(SWIGCOMPILE) -o antargisruby.cc interface.i
 
 

@@ -70,6 +70,7 @@ Pos2D AntargisMap::truncPos(const Pos2D &p) const
 
 int AntargisMap::getNewID()
 {
+  CTRACE;
   return maxID++;
 }
 
@@ -537,6 +538,8 @@ bool markingFinished=true;
 void AntargisMap_markfunc(void *ptr)
 {
   cdebug("TRACE");
+  if(!ptr)
+    return;
   if(!markingFinished)
     return;
 #ifdef USE_RUBY

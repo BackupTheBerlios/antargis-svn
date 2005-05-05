@@ -53,12 +53,14 @@ class AntGameApp <AntApp
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
 		puts @layout.getChild("mainView").getName
+		
+#		$inventory=toAGListBox(@layout.getChild("inventory"))
 		initDebug
 		#getMap.endChange
 		
 		#storyTalk("Welcome","Welcome to Battles of Antargis")
 		#test
-		getMap.endChange
+#		getMap.endChange
 	end
 	
 	def initDebug
