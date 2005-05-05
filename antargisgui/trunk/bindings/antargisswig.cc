@@ -1452,6 +1452,26 @@ void SwigDirector_AGSurface::putPixel(int x, int y, AGColor const &c) {
 }
 
 
+void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+    AGSurface * nc_tmp_pSource = const_cast<AGSurface *>(&pSource) ;
+    VALUE obj0 = Qnil ;
+    AGRect * nc_tmp_pDest = const_cast<AGRect *>(&pDest) ;
+    VALUE obj1 = Qnil ;
+    AGRect * nc_tmp_pSrc = const_cast<AGRect *>(&pSrc) ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSurface::blit(pSource,pDest,pSrc);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pSource, SWIGTYPE_p_AGSurface, 0);
+    obj1 = SWIG_NewPointerObj(nc_tmp_pDest, SWIGTYPE_p_AGRect, 0);
+    obj2 = SWIG_NewPointerObj(nc_tmp_pSrc, SWIGTYPE_p_AGRect, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("blit"), 3,obj0,obj1,obj2);
+}
+
+
 SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self): AGTexture(), Swig::Director(self) {
     
 }
@@ -12664,6 +12684,28 @@ _wrap_AGSurface_valid(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGSurface_blit(int argc, VALUE *argv, VALUE self) {
+    AGSurface *arg1 = (AGSurface *) 0 ;
+    AGSurface *arg2 = 0 ;
+    AGRect *arg3 = 0 ;
+    AGRect *arg4 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurface, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGSurface, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGRect, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->blit((AGSurface const &)*arg2,(AGRect const &)*arg3,(AGRect const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGSurface_drawGradient(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
     AGRect *arg2 = 0 ;
@@ -18460,6 +18502,29 @@ _wrap_AGButton_setTheme(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGButton_setCaption(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->setCaption((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
 static void
 free_AGButton(AGButton *arg1) {
     delete arg1;
@@ -18477,6 +18542,25 @@ _wrap_disown_AGButton(int argc, VALUE *argv, VALUE self) {
     }
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_toAGButton(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = 0 ;
+    AGButton *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGWidget, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGButton &_result_ref = toAGButton(*arg1);
+        result = (AGButton *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+    return vresult;
 }
 
 
@@ -25157,6 +25241,19 @@ _wrap_AGListBox_eventMouseClick(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGListBox_clearList(int argc, VALUE *argv, VALUE self) {
+    AGListBox *arg1 = (AGListBox *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListBox, 1);
+    (arg1)->clearList();
+    
+    return Qnil;
+}
+
+
 static void
 free_AGListBox(AGListBox *arg1) {
     delete arg1;
@@ -25597,6 +25694,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSurface.klass, "getRect", VALUEFUNC(_wrap_AGSurface_getRect), -1);
     rb_define_method(cAGSurface.klass, "getSubSurface", VALUEFUNC(_wrap_AGSurface_getSubSurface), -1);
     rb_define_method(cAGSurface.klass, "valid", VALUEFUNC(_wrap_AGSurface_valid), -1);
+    rb_define_method(cAGSurface.klass, "blit", VALUEFUNC(_wrap_AGSurface_blit), -1);
     rb_define_method(cAGSurface.klass, "drawGradient", VALUEFUNC(_wrap_AGSurface_drawGradient), -1);
     rb_define_method(cAGSurface.klass, "drawGradientAlpha", VALUEFUNC(_wrap_AGSurface_drawGradientAlpha), -1);
     rb_define_method(cAGSurface.klass, "drawBorder", VALUEFUNC(_wrap_AGSurface_drawBorder), -1);
@@ -25925,8 +26023,10 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGButton.klass, "getName", VALUEFUNC(_wrap_AGButton_getName), -1);
     rb_define_method(cAGButton.klass, "setEnabled", VALUEFUNC(_wrap_AGButton_setEnabled), -1);
     rb_define_method(cAGButton.klass, "setTheme", VALUEFUNC(_wrap_AGButton_setTheme), -1);
+    rb_define_method(cAGButton.klass, "setCaption", VALUEFUNC(_wrap_AGButton_setCaption), -1);
     cAGButton.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
+    rb_define_module_function(mLibantargisruby, "toAGButton", VALUEFUNC(_wrap_toAGButton), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGApplication", VALUEFUNC(_wrap_disown_AGApplication), -1);
     
     cAGApplication.klass = rb_define_class_under(mLibantargisruby, "AGApplication", ((swig_class *) SWIGTYPE_p_AGMessageObject->clientdata)->klass);
@@ -26335,6 +26435,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGListBox.klass, "sigDoubleClick", VALUEFUNC(_wrap_AGListBox_sigDoubleClick_get), -1);
     rb_define_method(cAGListBox.klass, "draw", VALUEFUNC(_wrap_AGListBox_draw), -1);
     rb_define_method(cAGListBox.klass, "eventMouseClick", VALUEFUNC(_wrap_AGListBox_eventMouseClick), -1);
+    rb_define_method(cAGListBox.klass, "clearList", VALUEFUNC(_wrap_AGListBox_clearList), -1);
     cAGListBox.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGListBox.destroy = (void (*)(void *)) free_AGListBox;
     rb_define_module_function(mLibantargisruby, "toAGListBox", VALUEFUNC(_wrap_toAGListBox), -1);

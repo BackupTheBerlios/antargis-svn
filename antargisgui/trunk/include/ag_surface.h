@@ -58,6 +58,7 @@ class AGSurface:public AGPaintTarget
 
   AGSurface &operator=(const AGSurface &p);
 
+  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc);
 
   void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);

@@ -24,6 +24,7 @@ public:
     SwigDirector_AGSurface(VALUE self, AGSurface const &p);
     virtual ~SwigDirector_AGSurface();
     virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
 };
 
 

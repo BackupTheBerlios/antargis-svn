@@ -28,50 +28,39 @@
 class AGSurface;
 class AGTexture;
 
+
+#define MSTUB { throw int();}
+
 class AGPaintTarget
 {
  public:
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest){}
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc){}
-  virtual void tile(const AGTexture &pSource){}
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest){}
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc){}
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest) MSTUB
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
+  virtual void tile(const AGTexture &pSource) MSTUB
+  virtual void tile(const AGTexture &pSource,const AGRect &pDest) MSTUB
+  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
 
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest){}
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc){}
-  virtual void tile(const AGSurface &pSource){}
-  virtual void tile(const AGSurface &pSource,const AGRect &pDest){}
-  virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc){}
+  virtual void blit(const AGSurface &pSource,const AGRect &pDest) MSTUB
+  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
+  virtual void tile(const AGSurface &pSource) MSTUB
+  virtual void tile(const AGSurface &pSource,const AGRect &pDest) MSTUB
+  virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
 
-  virtual void drawRect(const AGRect &pRect,const AGColor &c){}
+  virtual void drawRect(const AGRect &pRect,const AGColor &c) MSTUB
   
   virtual AGRect getRect() const
   {
     return AGRect(0,0,0,0);
   }
   
-  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
-  {
-  }
-  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
-  {
-  }
-  virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
-  {
-  }
-
-  virtual void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn)
-  {
-  }
+  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
+  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
+  virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2) MSTUB
+  virtual void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn) MSTUB
 
   
-  virtual void putPixel(int x,int y,const AGColor &c)
-  {
-  }
-  virtual AGColor getPixel(int x,int y) const
-  {
-    return AGColor();
-  }
+  virtual void putPixel(int x,int y,const AGColor &c) MSTUB
+  virtual AGColor getPixel(int x,int y) const MSTUB
 };
 
 

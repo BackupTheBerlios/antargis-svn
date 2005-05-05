@@ -326,7 +326,21 @@ public:
       font=getTheme()->getFont(pNode.get("font"));
       w->setFont(font);
     }
-    w->setAlign(EDIT_CENTER);
+    if(pNode.get("align")=="left")
+      w->setAlign(EDIT_LEFT);
+    if(pNode.get("align")=="right")
+      w->setAlign(EDIT_RIGHT);
+    if(pNode.get("align")=="center")
+      w->setAlign(EDIT_CENTER);
+
+    if(pNode.get("valign")=="top")
+      w->setVAlign(EDIT_TOP);
+    if(pNode.get("valign")=="bottom")
+      w->setVAlign(EDIT_BOTTOM);
+    if(pNode.get("valign")=="center")
+      w->setVAlign(EDIT_VCENTER);
+
+    //    w->setAlign(EDIT_CENTER);
     w->setMutable(false);
     w->setBackground(false);
 

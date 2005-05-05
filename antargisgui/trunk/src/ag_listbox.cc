@@ -23,6 +23,8 @@
 #include "ag_theme.h"
 #include "ag_debug.h"
 
+#include <sstream>
+
 AGListBoxItem::AGListBoxItem(std::string pID,std::string pValue)
 {
   id=pID;
@@ -52,6 +54,9 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect &pRect):AGWidget(pParent,pRe
       e->setMutable(false);
       e->setBackground(false);
       e->setFont(f);
+      std::ostringstream os;
+      os<<"ListBoxItem"<<count;
+      e->setName(os.str());
 
       mEdits.push_back(e);
       addChild(e);
@@ -197,4 +202,10 @@ bool AGListBox::eventMouseClick(const AGEvent *m)
 AGListBox &toAGListBox(AGWidget &w)
 {
   return dynamic_cast<AGListBox&>(w);
+}
+
+void AGListBox::clearList()
+{
+  mY=mSelected=0;
+  mItems.clear();
 }

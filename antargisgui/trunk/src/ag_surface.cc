@@ -292,6 +292,32 @@ void AGSurface::putPixel(int x,int y,const AGColor &c)
   }*/
 
 
+void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  //  CTRACE;
+  int x,y,sx,sy,dx,dy;
+  Uint32 c;
+  Uint8 r,g,b,a;
+  SDL_Surface *ss=const_cast<SDL_Surface*>(pSource.s);
+  SDL_Surface *ds=s;
+  //  cdebug("pSrc:"<<pSrc);
+  //  cdebug("pDest:"<<pDest);
+  for(y=0,sy=pSrc.y, dy=pDest.y;y<pSrc.h ; y++,sy++,dy++)
+    for(x=0,sx=pSrc.x, dx=pDest.x;x<pSrc.w ; x++,sx++,dx++)
+      {
+	c=sge_GetPixel(ss,sx,sy);//x+sr.x,y+sr.y);
+	//	cdebug("source:"<<sx<<","<<sy<<":"<<c);
+	SDL_GetRGBA(c,ss->format,&r,&g,&b,&a);
+	c=SDL_MapRGBA(ds->format,r,g,b,a);
+	//cdebug("dest:"<<dx<<","<<dy<<":"<<c);
+	sge_PutPixel(ds,x,y,c);
+
+      }
+  // putPixel(dx,dy,pSource.getPixel(sx,sy));
+  //  SDL_SaveBMP(s,"blittest.bmp");
+  //  SDL_SaveBMP(const_cast<SDL_Surface*>(pSource.s),"blittest2.bmp");
+  //  SDL_BlitSurface(const_cast<SDL_Surface*>(pSource.s),const_cast<AGRect*>(&pSrc),s,const_cast<AGRect*>(&pDest));
+}
 
 
 

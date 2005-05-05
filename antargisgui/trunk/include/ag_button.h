@@ -63,6 +63,8 @@ class AGButton:public AGWidget
 
   void setTheme(const std::string &pTheme);
 
+  void setCaption(const std::string &pCaption);
+
  private:
   std::string mText;
   int mID;
@@ -82,5 +84,7 @@ class AGButton:public AGWidget
   std::map<State,AGBorder> mBorder;
   bool mEnabled;
 };
+
+AGButton &toAGButton(AGWidget &pWidget);
 
 #endif

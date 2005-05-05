@@ -223,3 +223,16 @@ void AGButton::setTheme(const std::string &pTheme)
     if(mTextW)
     mTextW->setTheme(mTheme+"button.text");
 }
+
+void AGButton::setCaption(const std::string &pCaption)
+{
+  mText=pCaption;
+  if(mTextW)
+    mTextW->setText(pCaption);
+}
+
+
+AGButton &toAGButton(AGWidget &pWidget)
+{
+  return dynamic_cast<AGButton&>(pWidget);
+}
