@@ -87,7 +87,7 @@ class AntEntity
     void setPlayerID(int id);
 
     void setVar(std::string n,std::string v);
-    std::string getVar(std::string n);
+    std::string getVar(std::string n) const;
 
     void setType(const std::string &pType);
     std::string getType() const;

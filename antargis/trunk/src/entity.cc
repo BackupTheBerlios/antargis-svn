@@ -65,6 +65,7 @@ void AntEntity::saveXML(xmlpp::Node &node) const
     node.set("healSpeed",toString(mHealSpeed));
     node.set("onGround",toString(onGround));
     node.set("entityID",toString(getID()));
+    node.set("name",getVar("name"));
   }
 void AntEntity::loadXML(const xmlpp::Node &node)
 {
@@ -76,6 +77,7 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   for(;i!=node.end();i++)
     mPos.loadXML(*i);
   mID=toInt(node.get("entityID"));
+  setVar("name",node.get("name"));
 }
 
 Pos3D AntEntity::getPos3D() const
@@ -197,14 +199,14 @@ void AntEntity::mapChanged()
 
 void AntEntity_markfunc(void *ptr)
 {
-  cdebug("TRACE");
+  //  cdebug("TRACE");
 #ifdef USE_RUBY
   Job *cppAnimal;
   VALUE   rubyAnimal;
   AntEntity *zoo;
   
-  TRACE;  
-  cdebug(ptr<<endl);
+  //  TRACE;  
+  //  cdebug(ptr<<endl);
   assert(ptr);
   zoo = static_cast<AntEntity*>(ptr);
   assert(zoo);
@@ -217,7 +219,7 @@ void AntEntity_markfunc(void *ptr)
 	  assert(!cppAnimal->mDeleted);
 	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
 	  rb_gc_mark(rubyAnimal);
-	  cdebug("mark:");//<<cppAnimal->getName());
+	  //  cdebug("mark:");//<<cppAnimal->getName());
 	}
     }
   //rb_gc_mark(getMap()->mRUBY);
@@ -281,9 +283,12 @@ void AntEntity::setVar(std::string n,std::string v)
 {
   mVars[n]=v;
 }
-std::string AntEntity::getVar(std::string n)
+std::string AntEntity::getVar(std::string n) const
 {
-  return mVars[n];
+  std::map<std::string,std::string>::const_iterator i=mVars.find(n);
+  if(i==mVars.end())
+    return "";
+  return i->second;
 }
 
 int AntEntity::getPlayerID() const

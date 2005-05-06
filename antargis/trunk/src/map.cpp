@@ -537,7 +537,7 @@ bool markingFinished=true;
 
 void AntargisMap_markfunc(void *ptr)
 {
-  cdebug("TRACE");
+  //  cdebug("TRACE");
   if(!ptr)
     return;
   if(!markingFinished)
@@ -548,22 +548,22 @@ void AntargisMap_markfunc(void *ptr)
   VALUE   rubyAnimal;
   AntargisMap *zoo;
   
-  TRACE;  
-  cdebug(ptr<<endl);
+  //  TRACE;  
+  //  cdebug(ptr<<endl);
   zoo = static_cast<AntargisMap*>(ptr);
   
   std::list<AntEntity*>::iterator i=zoo->mEntList.begin();
 
   for(;i!=zoo->mEntList.end();i++)
     {
-      cdebug("children:"<<*i);
+      //      cdebug("children:"<<*i);
       cppAnimal = *i;//zoo->getAnimal(i);
       assert(!cppAnimal->mDeleted);
       if(cppAnimal->mRubyObject)
 	{
 	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
 	  rb_gc_mark(rubyAnimal);
-	  cdebug("mark:");//<<cppAnimal->getName());
+	  //	  cdebug("mark:");//<<cppAnimal->getName());
 	}
       //      AntEntity_markfunc(*i);
     }
@@ -580,7 +580,7 @@ AntEntity *AntargisMap::getNext(AntEntity *me,const std::string &pType)
   
   std::list<AntEntity*>::iterator i=mEntList.begin();
   Pos2D p=me->getPos2D(); // FIXME: check for reachability, too ??
-  float dist=0;
+  //  float dist=0;
 
   for(;i!=mEntList.end();i++)
     {
@@ -618,3 +618,15 @@ AntEntity *AntargisMap::getNext(AntEntity *me,const std::string &pType)
   return e;
 }
 
+
+AntEntity *AntargisMap::getByName(const std::string &pName)
+{
+  std::list<AntEntity*>::iterator i=mEntList.begin();
+
+  for(;i!=mEntList.end();i++)
+    {
+      if((*i)->getVar("name")==pName)
+	return *i;
+    }
+  return 0;
+}

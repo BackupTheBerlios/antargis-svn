@@ -93,6 +93,9 @@ class AntRubyMap<AntargisMap
 	def getEntity(id)
 		getRuby(super(id))
 	end
+	def getByName(name)
+		getRuby(super(name))
+	end
 end
 
 def getMap

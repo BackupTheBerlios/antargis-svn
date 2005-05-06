@@ -137,6 +137,8 @@ class AntargisMap
         return i->second;
       }
 
+    AntEntity *getByName(const std::string &pName);
+
     void killHero(AntHero *h);
 
     bool paused()

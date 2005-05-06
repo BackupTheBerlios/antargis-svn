@@ -25,15 +25,8 @@
 class AntRubyView <CompleteIsoView
 	def initialize(p,rect,pos,map)
 		super(p,rect,pos,map)
-		puts "ANTRUBYVIEW"
-		puts p
-		puts rect.to_s
-		puts pos
-		puts getMap
 	end
 	def clickMap(pos)
-		puts "CLICKMAP:"
-		puts pos.to_s
 		if @hero then
 			@hero.newHLMoveJob(0,pos,0)
 		end
@@ -45,6 +38,8 @@ class AntRubyView <CompleteIsoView
 			e=getMap.getRuby(ents.get)
 			if e.getType=="hero" then
 				@hero=e
+				inspectEntity(e)
+			elsif e.getType=="house" then
 				inspectEntity(e)
 			end
 		}

@@ -488,7 +488,16 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
           cdebug("clicked on "<<p.x<<","<<p.y);
 
           std::vector<AntEntity *> es=getEntity(p);
-	  clickEntities(toEntVector(es));
+	  if(es.size())
+	    clickEntities(toEntVector(es));
+	  else
+	    {
+              IVTile t=getTile(p);
+              cdebug(t.x<<","<<t.y);
+	      Pos2D p2=getTilePos(t);
+	      clickMap(p2);
+	    }
+	  /*
           if(es.size())
             {
               if(mSelected.size())
@@ -542,7 +551,7 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
                           }
                       }
                 }
-            }
+		}*/
         }
     }
   return false;

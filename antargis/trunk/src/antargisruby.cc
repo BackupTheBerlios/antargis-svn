@@ -30507,6 +30507,32 @@ _wrap_AntargisMap_getEntity(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntargisMap_getByName(int argc, VALUE *argv, VALUE self) {
+    AntargisMap *arg1 = (AntargisMap *) 0 ;
+    std::string *arg2 = 0 ;
+    AntEntity *result;
+    std::string temp2 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (AntEntity *)(arg1)->getByName((std::string const &)*arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AntargisMap_killHero(int argc, VALUE *argv, VALUE self) {
     AntargisMap *arg1 = (AntargisMap *) 0 ;
     AntHero *arg2 = (AntHero *) 0 ;
@@ -33336,7 +33362,7 @@ _wrap_AntEntity_getVar(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    result = (arg1)->getVar(arg2);
+    result = ((AntEntity const *)arg1)->getVar(arg2);
     
     {
         vresult = rb_str_new2((&result)->c_str());
@@ -37523,6 +37549,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntargisMap.klass, "endChange", VALUEFUNC(_wrap_AntargisMap_endChange), -1);
     rb_define_method(cAntargisMap.klass, "truncPos", VALUEFUNC(_wrap_AntargisMap_truncPos), -1);
     rb_define_method(cAntargisMap.klass, "getEntity", VALUEFUNC(_wrap_AntargisMap_getEntity), -1);
+    rb_define_method(cAntargisMap.klass, "getByName", VALUEFUNC(_wrap_AntargisMap_getByName), -1);
     rb_define_method(cAntargisMap.klass, "killHero", VALUEFUNC(_wrap_AntargisMap_killHero), -1);
     rb_define_method(cAntargisMap.klass, "paused", VALUEFUNC(_wrap_AntargisMap_paused), -1);
     rb_define_method(cAntargisMap.klass, "pause", VALUEFUNC(_wrap_AntargisMap_pause), -1);
