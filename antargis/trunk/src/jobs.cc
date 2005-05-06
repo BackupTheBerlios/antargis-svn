@@ -85,15 +85,21 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
   Pos2D diff=e->getPos2D()-mTarget;
   float norm=diff.norm();
+  //  cdebug("norm:"<<norm);
+  //  cdebug("near:"<<near);
   if(norm-near>ptime*aspeed)
     {
+      //      cdebug(diff);
       diff=diff.normalized();
+      //      cdebug(diff);
       e->setDirection(diff*(-1));
+      //      cdebug(e->getPos2D());
       e->setPos2D(e->getPos2D()-diff*ptime*aspeed);
+      //      cdebug(e->getPos2D());
     }
   else
     {
-      //   e->setPos2D(mTarget);
+      //      e->setPos2D(mTarget);
       //      CTRACE;
       jobFinished(e);
     }

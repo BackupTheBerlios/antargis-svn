@@ -35,11 +35,21 @@ class AntRubyView <CompleteIsoView
 		puts "CLICKMAP:"
 		puts pos.to_s
 		if @hero then
-			@hero.newMoveJob(0,pos,0)
+			@hero.newHLMoveJob(0,pos,0)
 		end
 	end
 	def clickEntities(list)
 		puts "CLICKENTS"
+		
+		list.each{|ents|
+			e=getMap.getRuby(ents.get)
+			if e.getType=="hero" then
+				@hero=e
+				inspectEntity(e)
+			end
+		}
+		return
+		
 		# first take only first
 		if list.length>0 then
 			e=list[0].get

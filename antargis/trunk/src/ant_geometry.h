@@ -154,7 +154,8 @@ inline Pos3D rotVector(Pos3D p,Pos3D n,float a)
 struct Pos2D
 {
   float x,y;
-  
+
+  Pos2D(const Pos2D&p);
   Pos2D(float px,float py);
   Pos2D();
   Pos2D(const std::string &s)
@@ -185,19 +186,14 @@ struct Pos2D
   Pos2D operator*(float f) const;
   Pos2D operator/(float f) const;
 
-  Pos2D normalized() const
-  {
-    float n=1.0/sqrt(x*x+y*y);
-    return Pos2D(x*n,y*n);
-  }
+  Pos2D normalized() const;
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
 
-  std::string toString() const
-  {
-    return ::toString((int)x)+";"+::toString((int)y);
-  }
+  std::string toString() const;
+
+  std::string completeString() const;
 
 };
 

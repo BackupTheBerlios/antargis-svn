@@ -15106,6 +15106,26 @@ SwigDirector_AntEntity::SwigDirector_AntEntity(VALUE self, Pos2D const &p): AntE
 
 
 
+void SwigDirector_AntEntity::newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat) {
+    std::string temp3 ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::newFetchJob(p,pTarget,pWhat);
+        return;
+    }
+    obj0 = INT2NUM(p);
+    obj1 = SWIG_NewPointerObj(&pTarget, SWIGTYPE_p_Pos2D, 0);
+    {
+        obj2 = rb_str_new2(pWhat.c_str());
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("newFetchJob"), 3,obj0,obj1,obj2);
+}
+
+
 void SwigDirector_AntEntity::setDirection(Pos2D const &p) {
     Pos2D * nc_tmp_p = const_cast<Pos2D *>(&p) ;
     VALUE obj0 = Qnil ;
@@ -15159,21 +15179,30 @@ AntHero *SwigDirector_AntEntity::getHero() {
 }
 
 
-SwigDirector_AntEntity::~SwigDirector_AntEntity() {
-}
-
-float SwigDirector_AntEntity::getHealSpeed() const {
-    float c_result ;
+void SwigDirector_AntEntity::noJob() {
     VALUE result;
     
     if (swig_get_up()) {
-        return AntEntity::getHealSpeed();
+        AntEntity::noJob();
+        return;
     }
-    result = rb_funcall(swig_get_self(), rb_intern("getHealSpeed"), 0, NULL);
-    c_result = (float) NUM2DBL(result);
-    return (float) c_result;
+    result = rb_funcall(swig_get_self(), rb_intern("noJob"), 0, NULL);
 }
 
+
+void SwigDirector_AntEntity::gotNewJob() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::gotNewJob();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("gotNewJob"), 0, NULL);
+}
+
+
+SwigDirector_AntEntity::~SwigDirector_AntEntity() {
+}
 
 int SwigDirector_AntEntity::getVirtualY() const {
     int c_result ;
@@ -15242,6 +15271,48 @@ std::string SwigDirector_AntEntity::xmlName() const {
 }
 
 
+float SwigDirector_AntEntity::getHealSpeed() const {
+    float c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AntEntity::getHealSpeed();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getHealSpeed"), 0, NULL);
+    c_result = (float) NUM2DBL(result);
+    return (float) c_result;
+}
+
+
+void SwigDirector_AntEntity::newMoveJob(int p, Pos2D const &pTarget, int pnear) {
+    VALUE obj0 = Qnil ;
+    Pos2D * nc_tmp_pTarget = const_cast<Pos2D *>(&pTarget) ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::newMoveJob(p,pTarget,pnear);
+        return;
+    }
+    obj0 = INT2NUM(p);
+    obj1 = SWIG_NewPointerObj(nc_tmp_pTarget, SWIGTYPE_p_Pos2D, 0);
+    obj2 = INT2NUM(pnear);
+    result = rb_funcall(swig_get_self(), rb_intern("newMoveJob"), 3,obj0,obj1,obj2);
+}
+
+
+void SwigDirector_AntEntity::jobFinished() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::jobFinished();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 0, NULL);
+}
+
+
 void SwigDirector_AntEntity::updateSurface() {
     VALUE result;
     
@@ -15306,6 +15377,19 @@ void SwigDirector_AntEntity::gotFight(AntEntity *arg0) {
 }
 
 
+void SwigDirector_AntEntity::newRestJob(int pTime) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::newRestJob(pTime);
+        return;
+    }
+    obj0 = INT2NUM(pTime);
+    result = rb_funcall(swig_get_self(), rb_intern("newRestJob"), 1,obj0);
+}
+
+
 SwigDirector_AntMan::SwigDirector_AntMan(VALUE self): AntMan(), Swig::Director(self) {
     
 }
@@ -15316,6 +15400,26 @@ SwigDirector_AntMan::SwigDirector_AntMan(VALUE self, Pos2D const &p, int pTypeID
     
 }
 
+
+
+void SwigDirector_AntMan::newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat) {
+    std::string temp3 ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::newFetchJob(p,pTarget,pWhat);
+        return;
+    }
+    obj0 = INT2NUM(p);
+    obj1 = SWIG_NewPointerObj(&pTarget, SWIGTYPE_p_Pos2D, 0);
+    {
+        obj2 = rb_str_new2(pWhat.c_str());
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("newFetchJob"), 3,obj0,obj1,obj2);
+}
 
 
 void SwigDirector_AntMan::setDirection(Pos2D const &p) {
@@ -15384,6 +15488,28 @@ AntBoss *SwigDirector_AntMan::getBoss() {
 }
 
 
+void SwigDirector_AntMan::noJob() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::noJob();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("noJob"), 0, NULL);
+}
+
+
+void SwigDirector_AntMan::gotNewJob() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::gotNewJob();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("gotNewJob"), 0, NULL);
+}
+
+
 SwigDirector_AntMan::~SwigDirector_AntMan() {
 }
 
@@ -15415,6 +15541,24 @@ std::string SwigDirector_AntMan::getSurfaceName() const {
         throw Swig::DirectorTypeMismatchException("string expected");
     }
     return (std::string) c_result;
+}
+
+
+void SwigDirector_AntMan::newMoveJob(int p, Pos2D const &pTarget, int pnear) {
+    VALUE obj0 = Qnil ;
+    Pos2D * nc_tmp_pTarget = const_cast<Pos2D *>(&pTarget) ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::newMoveJob(p,pTarget,pnear);
+        return;
+    }
+    obj0 = INT2NUM(p);
+    obj1 = SWIG_NewPointerObj(nc_tmp_pTarget, SWIGTYPE_p_Pos2D, 0);
+    obj2 = INT2NUM(pnear);
+    result = rb_funcall(swig_get_self(), rb_intern("newMoveJob"), 3,obj0,obj1,obj2);
 }
 
 
@@ -15464,6 +15608,17 @@ std::string SwigDirector_AntMan::xmlName() const {
         throw Swig::DirectorTypeMismatchException("string expected");
     }
     return (std::string) c_result;
+}
+
+
+void SwigDirector_AntMan::jobFinished() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::jobFinished();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("jobFinished"), 0, NULL);
 }
 
 
@@ -15540,6 +15695,19 @@ void SwigDirector_AntMan::loadXML(xmlpp::Node const &node) {
     }
     obj0 = SWIG_NewPointerObj(nc_tmp_node, SWIGTYPE_p_Node, 0);
     result = rb_funcall(swig_get_self(), rb_intern("loadXML"), 1,obj0);
+}
+
+
+void SwigDirector_AntMan::newRestJob(int pTime) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::newRestJob(pTime);
+        return;
+    }
+    obj0 = INT2NUM(pTime);
+    result = rb_funcall(swig_get_self(), rb_intern("newRestJob"), 1,obj0);
 }
 
 
@@ -33511,13 +33679,48 @@ _wrap_AntEntity_getRect(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AntEntity_jobFinished(int argc, VALUE *argv, VALUE self) {
+_wrap_AntEntity_noJob(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
+    Swig::Director *director = 0;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->noJob();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AntEntity_jobFinished(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->jobFinished();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AntEntity_gotNewJob(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->gotNewJob();
     
     return Qnil;
 }
@@ -33658,11 +33861,14 @@ static VALUE
 _wrap_AntEntity_newRestJob(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     int arg2 ;
+    Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
     arg2 = NUM2INT(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->newRestJob(arg2);
     
     return Qnil;
@@ -33676,6 +33882,7 @@ _wrap_AntEntity_newFetchJob(int argc, VALUE *argv, VALUE self) {
     Pos2D *arg3 = 0 ;
     std::string *arg4 = 0 ;
     std::string temp4 ;
+    Swig::Director *director = 0;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -33690,6 +33897,8 @@ _wrap_AntEntity_newFetchJob(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->newFetchJob(arg2,*arg3,(std::string const &)*arg4);
     
     return Qnil;
@@ -33702,6 +33911,7 @@ _wrap_AntEntity_newMoveJob__SWIG_0(int argc, VALUE *argv, VALUE self) {
     int arg2 ;
     Pos2D *arg3 = 0 ;
     int arg4 ;
+    Swig::Director *director = 0;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -33709,6 +33919,8 @@ _wrap_AntEntity_newMoveJob__SWIG_0(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2INT(argv[0]);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_Pos2D, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     arg4 = NUM2INT(argv[2]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->newMoveJob(arg2,(Pos2D const &)*arg3,arg4);
     
     return Qnil;
@@ -33720,12 +33932,15 @@ _wrap_AntEntity_newMoveJob__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     int arg2 ;
     Pos2D *arg3 = 0 ;
+    Swig::Director *director = 0;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
     arg2 = NUM2INT(argv[0]);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_Pos2D, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->newMoveJob(arg2,(Pos2D const &)*arg3);
     
     return Qnil;
@@ -35164,6 +35379,20 @@ _wrap_Pos2D_y_get(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_Pos2D__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    Pos2D *arg1 = 0 ;
+    Pos2D *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Pos2D, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (Pos2D *)new Pos2D((Pos2D const &)*arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_Pos2D__SWIG_1(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
     Pos2D *result;
@@ -35179,7 +35408,7 @@ _wrap_new_Pos2D__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_Pos2D__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_Pos2D__SWIG_2(int argc, VALUE *argv, VALUE self) {
     Pos2D *result;
     
     if ((argc < 0) || (argc > 0))
@@ -35208,7 +35437,7 @@ _wrap_Pos2D_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_Pos2D__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_Pos2D__SWIG_3(int argc, VALUE *argv, VALUE self) {
     std::string *arg1 = 0 ;
     Pos2D *result;
     std::string temp1 ;
@@ -35239,7 +35468,17 @@ static VALUE _wrap_new_Pos2D(int nargs, VALUE *args, VALUE self) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
-        return _wrap_new_Pos2D__SWIG_1(nargs, args, self);
+        return _wrap_new_Pos2D__SWIG_2(nargs, args, self);
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Pos2D, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_Pos2D__SWIG_0(nargs, args, self);
+        }
     }
     if (argc == 1) {
         int _v;
@@ -35247,7 +35486,7 @@ static VALUE _wrap_new_Pos2D(int nargs, VALUE *args, VALUE self) {
             _v = (TYPE(argv[0]) == T_STRING) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_Pos2D__SWIG_2(nargs, args, self);
+            return _wrap_new_Pos2D__SWIG_3(nargs, args, self);
         }
     }
     if (argc == 2) {
@@ -35260,7 +35499,7 @@ static VALUE _wrap_new_Pos2D(int nargs, VALUE *args, VALUE self) {
                 _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_Pos2D__SWIG_0(nargs, args, self);
+                return _wrap_new_Pos2D__SWIG_1(nargs, args, self);
             }
         }
     }
@@ -35476,6 +35715,24 @@ _wrap_Pos2D_to_s(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Pos2D, 1);
     result = ((Pos2D const *)arg1)->toString();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Pos2D_completeString(int argc, VALUE *argv, VALUE self) {
+    Pos2D *arg1 = (Pos2D *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Pos2D, 1);
+    result = ((Pos2D const *)arg1)->completeString();
     
     {
         vresult = rb_str_new2((&result)->c_str());
@@ -37477,7 +37734,9 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "getVirtualY", VALUEFUNC(_wrap_AntEntity_getVirtualY), -1);
     rb_define_method(cAntEntity.klass, "move", VALUEFUNC(_wrap_AntEntity_move), -1);
     rb_define_method(cAntEntity.klass, "getRect", VALUEFUNC(_wrap_AntEntity_getRect), -1);
+    rb_define_method(cAntEntity.klass, "noJob", VALUEFUNC(_wrap_AntEntity_noJob), -1);
     rb_define_method(cAntEntity.klass, "jobFinished", VALUEFUNC(_wrap_AntEntity_jobFinished), -1);
+    rb_define_method(cAntEntity.klass, "gotNewJob", VALUEFUNC(_wrap_AntEntity_gotNewJob), -1);
     rb_define_method(cAntEntity.klass, "isJobFinished", VALUEFUNC(_wrap_AntEntity_isJobFinished), -1);
     rb_define_method(cAntEntity.klass, "hasJob", VALUEFUNC(_wrap_AntEntity_hasJob), -1);
     rb_define_method(cAntEntity.klass, "getHealSpeed", VALUEFUNC(_wrap_AntEntity_getHealSpeed), -1);
@@ -37582,6 +37841,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cPos2D.klass, "/", VALUEFUNC(_wrap_Pos2D___div__), -1);
     rb_define_method(cPos2D.klass, "normalized", VALUEFUNC(_wrap_Pos2D_normalized), -1);
     rb_define_method(cPos2D.klass, "to_s", VALUEFUNC(_wrap_Pos2D_to_s), -1);
+    rb_define_method(cPos2D.klass, "completeString", VALUEFUNC(_wrap_Pos2D_completeString), -1);
     cPos2D.mark = 0;
     cPos2D.destroy = (void (*)(void *)) free_Pos2D;
     

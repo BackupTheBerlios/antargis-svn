@@ -64,9 +64,15 @@ class AntRubyMap<AntargisMap
 		puts e.getType
 		puts "getID:"+e.getID.to_s
 		rubyID=e.getVar("RubyID")
+		if rubyID=="" then
+			rubyID=getNewID.to_s
+			e.setVar("RubyID",rubyID)
+		end
 		if not @ents.key?(rubyID) then
 			puts "IF"
 			@ents[rubyID]=e
+		else
+			puts "ALREADY INSERTED:"+rubyID.to_s
 		end
 		super(e)
 	end
@@ -80,6 +86,12 @@ class AntRubyMap<AntargisMap
 	end
 	def getById(ent)
 		@ents[ent.getVar("RubyID")]
+	end
+	def getRuby(ent)
+		getById(ent)
+	end
+	def getEntity(id)
+		getRuby(super(id))
 	end
 end
 

@@ -1094,21 +1094,27 @@ public:
     SwigDirector_AntEntity(VALUE self);
     SwigDirector_AntEntity(VALUE self, Pos3D const &p);
     SwigDirector_AntEntity(VALUE self, Pos2D const &p);
+    virtual void newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat);
     virtual void setDirection(Pos2D const &p);
     virtual VoxelImage *getSurface();
     virtual void move(float pTime);
     virtual AntHero *getHero();
+    virtual void noJob();
+    virtual void gotNewJob();
     virtual ~SwigDirector_AntEntity();
-    virtual float getHealSpeed() const;
     virtual int getVirtualY() const;
     virtual std::string getSurfaceName() const;
     virtual std::string getTexture() const;
     virtual std::string xmlName() const;
+    virtual float getHealSpeed() const;
+    virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
+    virtual void jobFinished();
     virtual void updateSurface();
     virtual void loadXML(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void assignJob(AntEntity *arg0);
     virtual void gotFight(AntEntity *arg0);
+    virtual void newRestJob(int pTime);
 };
 
 
@@ -1117,22 +1123,28 @@ class SwigDirector_AntMan : public AntMan, public Swig::Director {
 public:
     SwigDirector_AntMan(VALUE self);
     SwigDirector_AntMan(VALUE self, Pos2D const &p, int pTypeID, AntBoss *pBoss);
+    virtual void newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat);
     virtual void setDirection(Pos2D const &p);
     virtual VoxelImage *getSurface();
     virtual AntHero *getHero();
     virtual void move(float pTime);
     virtual AntBoss *getBoss();
+    virtual void noJob();
+    virtual void gotNewJob();
     virtual ~SwigDirector_AntMan();
     virtual int getVirtualY() const;
     virtual std::string getSurfaceName() const;
+    virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
     virtual std::string getTexture() const;
     virtual float getHealSpeed() const;
     virtual std::string xmlName() const;
+    virtual void jobFinished();
     virtual void updateSurface();
     virtual void assignJob(AntEntity *arg0);
     virtual void gotFight(AntEntity *arg0);
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(xmlpp::Node const &node);
+    virtual void newRestJob(int pTime);
 };
 
 

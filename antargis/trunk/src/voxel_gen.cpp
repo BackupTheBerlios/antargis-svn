@@ -56,7 +56,7 @@ VoxelImageData::~VoxelImageData()
   Node *root=createRootNode(d,"antargisLevel");
   saveXML(*root);
   std::string c=toString(d);
-  cdebug(c);
+  //  cdebug(c);
   saveFile(pFilename,c);
 }
 

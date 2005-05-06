@@ -76,18 +76,45 @@ bool Pos3D::operator<(const Pos3D &p) const
 // Pos2D
 ///////////////////////////////////////////////////////////////////////////////
 
+
+  Pos2D::Pos2D(const Pos2D&p):x(p.x),y(p.y)
+{
+}
+
 Pos2D::Pos2D():x(0),y(0)
 {
 }
   
 Pos2D::Pos2D(float px,float py):
   x(px),y(py)
-{}
+{
+  //  cdebug(px<<"//"<<py);
+}
+std::string Pos2D::toString() const
+{
+  return ::toString((int)x)+";"+::toString((int)y);
+}
+std::string Pos2D::completeString() const
+{
+  return ::toString(x)+";"+::toString(y);
+}
+
 
 bool Pos2D::operator<(const Pos2D &p) const
 {
   return x<p.x || (x==p.x && y<p.y);
 }
+
+Pos2D Pos2D::normalized() const
+{
+  //  CTRACE;
+  float n=1.0/sqrt(x*x+y*y);
+  //  cdebug(n);
+  Pos2D pn(x*n,y*n);
+  //  cdebug(pn);
+  return pn;
+}
+
 
 float Pos2D::norm2() const
 {

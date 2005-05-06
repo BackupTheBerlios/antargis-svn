@@ -102,15 +102,16 @@ void AntEntity::setJob(Job *pJob)
 	{
 	  if(!mJob->mRubyObject) // let ruby delete it
 	    {
-	      cdebug("DELETE JOB:"<<mJob);
+	      //	      cdebug("DELETE JOB:"<<mJob);
 	      delete mJob;
 	    }
 	}
       else
         {
+	  throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
 	  if(!pJob->mRubyObject) // let ruby delete it
 	    {
-	      cdebug("DELETE JOB:"<<pJob);
+	      //	      cdebug("DELETE JOB:"<<pJob);
 	      delete pJob;
 	    }
           return;
@@ -132,8 +133,13 @@ void AntEntity::setJob(Job *pJob)
       if(mJob->mRubyObject)
 	rb_gc_register_address(&(mJob->mRUBY));
       //	rb_gc_mark(mJob->mRUBY);
+      gotNewJob();
     }
 
+}
+
+void AntEntity::gotNewJob()
+{
 }
 
 
@@ -155,6 +161,8 @@ void AntEntity::move(float pTime)
     }
   if(mJob)
     mJob->move(this,pTime);
+  else
+    noJob();
     
   mCondition+=mConditionHeal*pTime;
 }
@@ -168,6 +176,10 @@ void AntEntity::jobFinished()
 {
   if(mJob)
     mJobFinished=true;
+}
+
+void AntEntity::noJob()
+{
 }
 
 bool AntEntity::isJobFinished() const
@@ -209,7 +221,7 @@ void AntEntity_markfunc(void *ptr)
 	}
     }
   //rb_gc_mark(getMap()->mRUBY);
-  AntargisMap_markfunc(getMap());
+  //  AntargisMap_markfunc(getMap());
 
 #endif
 }

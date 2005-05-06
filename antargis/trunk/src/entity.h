@@ -160,7 +160,9 @@ class AntEntity
 
     virtual Rect2D getRect() const;
 
-    void jobFinished();
+    virtual void noJob();
+    virtual void jobFinished();
+    virtual void gotNewJob();
     bool isJobFinished() const;
 
     bool hasJob() const
@@ -215,9 +217,9 @@ class AntEntity
         }
     }
 
-    void newRestJob(int pTime);
-    void newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
-    void newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
+    virtual void newRestJob(int pTime);
+    virtual void newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
+    virtual void newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
 
 
     virtual void assignJob(AntEntity*);
