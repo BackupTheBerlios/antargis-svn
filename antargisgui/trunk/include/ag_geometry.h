@@ -56,6 +56,7 @@ class AGRect:public SDL_Rect
   bool isNull() const; // is empty
 
   AGRect shrink(int amount) const;
+  AGRect shrinkRB(int amount) const;
 
   bool contains(const AGPoint &p) const;
   bool contains(const AGRect &p) const;

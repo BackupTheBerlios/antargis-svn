@@ -38,7 +38,7 @@ class AGEdit;
 class AGButton:public AGWidget
 {
  public:
-  enum State {NORMAL,LIGHTED,PRESSED,CHECKED};
+  enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED};
 
   AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id=-1);
 
@@ -57,13 +57,18 @@ class AGButton:public AGWidget
   virtual void setWidth(int w);
   virtual void setHeight(int w);
 
-  virtual std::string getName() const;
+  virtual std::string getCaption() const;
 
   void setEnabled(bool pEnable);
 
   void setTheme(const std::string &pTheme);
 
   void setCaption(const std::string &pCaption);
+
+  void setState(const State &pState);
+
+  void setChecked(bool pChecked);
+  bool isChecked() const;
 
  private:
   std::string mText;
@@ -75,10 +80,11 @@ class AGButton:public AGWidget
   bool mHasSurface;
   AGEdit *mTextW;
 
-  bool checkButton;
-  bool checked;
+  //  bool checkButton;
+  //  bool checked;
 
   bool lower;
+  bool mChecked;
 
   std::map<State,AGBackground> mBG;
   std::map<State,AGBorder> mBorder;

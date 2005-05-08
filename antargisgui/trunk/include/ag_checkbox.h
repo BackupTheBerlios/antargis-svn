@@ -21,26 +21,27 @@
 #ifndef AG_CHECK_BOX_H
 #define AG_CHECK_BOX_H
 
-#include "ag_vtiler.h"
+//#include "ag_vtiler.h"
+#include "ag_button.h"
 
 class AGImage;
 
-class AGCheckBox:public AGHTiler
+class AGCheckBox:public AGButton
 {
  public:
-  AGCheckBox(AGWidget *pParent,AGRect pRect,const std::string &pName,const std::string &pType="checkBox");
+  AGCheckBox(AGWidget *pParent,AGRect pRect);
 
   virtual bool eventMouseClick(const AGEvent *m);
 
-  std::string getName() const;
+  //  std::string getName() const;
 
  protected:
-  AGImage *mImage;
+  //  AGImage *mImage;
  private:
-  std::string mName;
+  //  std::string mName;
  protected:
-  bool mChecked;
-  std::string mType;
+  //  bool mChecked;
+  //  std::string mType;
 };
 
 #endif

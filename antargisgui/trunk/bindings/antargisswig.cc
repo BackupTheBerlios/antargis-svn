@@ -853,8 +853,8 @@ type_error:
 #define  SWIGTYPE_p_AGRect swig_types[7] 
 #define  SWIGTYPE_p_SDL_Event swig_types[8] 
 #define  SWIGTYPE_p_AGApplication swig_types[9] 
-#define  SWIGTYPE_p_SDL_Rect swig_types[10] 
-#define  SWIGTYPE_p_AGButton swig_types[11] 
+#define  SWIGTYPE_p_AGButton swig_types[10] 
+#define  SWIGTYPE_p_SDL_Rect swig_types[11] 
 #define  SWIGTYPE_p_SDLMod swig_types[12] 
 #define  SWIGTYPE_p_AGHTiler swig_types[13] 
 #define  SWIGTYPE_p_Document swig_types[14] 
@@ -2774,14 +2774,14 @@ bool SwigDirector_AGButton::canFocus() const {
 }
 
 
-std::string SwigDirector_AGButton::getName() const {
+std::string SwigDirector_AGButton::getCaption() const {
     std::string c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGButton::getName();
+        return AGButton::getCaption();
     }
-    result = rb_funcall(swig_get_self(), rb_intern("getName"), 0, NULL);
+    result = rb_funcall(swig_get_self(), rb_intern("getCaption"), 0, NULL);
     {
         if (TYPE(result) == T_STRING)
         c_result = std::string(StringValuePtr(result));
@@ -7028,7 +7028,7 @@ void SwigDirector_AGEdit::addChild(AGWidget *w) {
 }
 
 
-SwigDirector_AGCheckBox::SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect, std::string const &pName, std::string const &pType): AGCheckBox(pParent, pRect, pName, pType), Swig::Director(self) {
+SwigDirector_AGCheckBox::SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect): AGCheckBox(pParent, pRect), Swig::Director(self) {
     
 }
 
@@ -7073,17 +7073,6 @@ bool SwigDirector_AGCheckBox::eventShow() {
 }
 
 
-void SwigDirector_AGCheckBox::rePosition() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGHTiler::rePosition();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("rePosition"), 0, NULL);
-}
-
-
 int SwigDirector_AGCheckBox::minHeight() const {
     int c_result ;
     VALUE result;
@@ -7123,6 +7112,24 @@ bool SwigDirector_AGCheckBox::canFocus() const {
 }
 
 
+std::string SwigDirector_AGCheckBox::getCaption() const {
+    std::string c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::getCaption();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getCaption"), 0, NULL);
+    {
+        if (TYPE(result) == T_STRING)
+        c_result = std::string(StringValuePtr(result));
+        else
+        throw Swig::DirectorTypeMismatchException("string expected");
+    }
+    return (std::string) c_result;
+}
+
+
 SwigDirector_AGCheckBox::~SwigDirector_AGCheckBox() {
 }
 
@@ -7146,50 +7153,6 @@ bool SwigDirector_AGCheckBox::eventDragBy(AGEvent const *event, AGPoint const &p
     }
     obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
-bool SwigDirector_AGCheckBox::eventMouseButtonUp(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseButtonUp(m);
-    }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
-bool SwigDirector_AGCheckBox::eventMouseButtonDown(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseButtonDown(m);
-    }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
@@ -7387,6 +7350,50 @@ bool SwigDirector_AGCheckBox::eventResize(AGEvent const *m) {
 }
 
 
+bool SwigDirector_AGCheckBox::eventMouseButtonDown(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::eventMouseButtonDown(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGCheckBox::eventMouseButtonUp(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::eventMouseButtonUp(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 bool SwigDirector_AGCheckBox::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -7414,7 +7421,7 @@ bool SwigDirector_AGCheckBox::eventMouseEnter() {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGWidget::eventMouseEnter();
+        return AGButton::eventMouseEnter();
     }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseEnter"), 0, NULL);
     c_result = (bool) RTEST(result);
@@ -7440,7 +7447,7 @@ void SwigDirector_AGCheckBox::draw(AGPainter &p) {
     VALUE result;
     
     if (swig_get_up()) {
-        AGWidget::draw(p);
+        AGButton::draw(p);
         return;
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
@@ -7506,45 +7513,6 @@ void SwigDirector_AGCheckBox::setTop(int y) {
 }
 
 
-void SwigDirector_AGCheckBox::setHeight(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setHeight(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
-}
-
-
-void SwigDirector_AGCheckBox::setWidth(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setWidth(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
-}
-
-
-bool SwigDirector_AGCheckBox::eventMouseLeave() {
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseLeave();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseLeave"), 0, NULL);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 bool SwigDirector_AGCheckBox::eventHide() {
     bool c_result ;
     VALUE result;
@@ -7555,6 +7523,45 @@ bool SwigDirector_AGCheckBox::eventHide() {
     result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+bool SwigDirector_AGCheckBox::eventMouseLeave() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::eventMouseLeave();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseLeave"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+void SwigDirector_AGCheckBox::setWidth(int w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::setWidth(w);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGCheckBox::setHeight(int w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::setHeight(w);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
 }
 
 
@@ -7577,18 +7584,18 @@ void SwigDirector_AGCheckBox::addChildBack(AGWidget *w) {
 }
 
 
-void SwigDirector_AGCheckBox::addChild(AGWidget *pWidget) {
+void SwigDirector_AGCheckBox::addChild(AGWidget *w) {
     Swig::Director * director__p_AGWidget = 0 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        AGVTiler::addChild(pWidget);
+        AGWidget::addChild(w);
         return;
     }
-    director__p_AGWidget = dynamic_cast<Swig::Director *>(pWidget);
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
     if (!director__p_AGWidget) {
-        obj0 = SWIG_NewPointerObj(pWidget, SWIGTYPE_p_AGWidget, 0);
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
     } else {
         obj0 = director__p_AGWidget->swig_get_self();
     }
@@ -7596,99 +7603,132 @@ void SwigDirector_AGCheckBox::addChild(AGWidget *pWidget) {
 }
 
 
-SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self): AGRadioGroup(), Swig::Director(self) {
+SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr): AGRadioGroup(pParent, pr), Swig::Director(self) {
     
 }
 
 
 
-bool SwigDirector_AGRadioGroup::eventResize(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
+bool SwigDirector_AGRadioGroup::eventLostFocus() {
     bool c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventResize(m);
+        return AGWidget::eventLostFocus();
     }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventLostFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
 
 
-bool SwigDirector_AGRadioGroup::eventSysWM(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
+bool SwigDirector_AGRadioGroup::eventGotFocus() {
     bool c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventSysWM(m);
+        return AGWidget::eventGotFocus();
     }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
 
 
-bool SwigDirector_AGRadioGroup::eventQuitModal(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
+bool SwigDirector_AGRadioGroup::eventShow() {
     bool c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventQuitModal(m);
+        return AGWidget::eventShow();
     }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventShow"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
 
 
-bool SwigDirector_AGRadioGroup::eventQuit(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
+int SwigDirector_AGRadioGroup::minHeight() const {
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::minHeight();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("minHeight"), 0, NULL);
+    c_result = (int) NUM2INT(result);
+    return (int) c_result;
+}
+
+
+int SwigDirector_AGRadioGroup::minWidth() const {
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::minWidth();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("minWidth"), 0, NULL);
+    c_result = (int) NUM2INT(result);
+    return (int) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::canFocus() const {
     bool c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventQuit(m);
+        return AGWidget::canFocus();
     }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
+    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
 
+
+void SwigDirector_AGRadioGroup::eventChange(std::string const &p) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGRadioGroup::eventChange(p);
+        return;
+    }
+    obj0=rb_str_new2(p.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("eventChange"), 1,obj0);
+}
+
+
+bool SwigDirector_AGRadioGroup::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
+    AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    AGPoint * nc_tmp_pDiff = const_cast<AGPoint *>(&pDiff) ;
+    VALUE obj1 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::eventDragBy(event,pDiff);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    obj1 = SWIG_NewPointerObj(nc_tmp_pDiff, SWIGTYPE_p_AGPoint, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+SwigDirector_AGRadioGroup::~SwigDirector_AGRadioGroup() {
+}
 
 bool SwigDirector_AGRadioGroup::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
@@ -7698,7 +7738,7 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonUp(AGEvent const *m) {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventMouseButtonUp(m);
+        return AGWidget::eventMouseButtonUp(m);
     }
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
@@ -7720,7 +7760,7 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonDown(AGEvent const *m) {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventMouseButtonDown(m);
+        return AGWidget::eventMouseButtonDown(m);
     }
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
@@ -7734,6 +7774,28 @@ bool SwigDirector_AGRadioGroup::eventMouseButtonDown(AGEvent const *m) {
 }
 
 
+bool SwigDirector_AGRadioGroup::eventMouseClick(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::eventMouseClick(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 bool SwigDirector_AGRadioGroup::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -7742,7 +7804,7 @@ bool SwigDirector_AGRadioGroup::eventMouseMotion(AGEvent const *m) {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventMouseMotion(m);
+        return AGWidget::eventMouseMotion(m);
     }
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
@@ -7756,45 +7818,17 @@ bool SwigDirector_AGRadioGroup::eventMouseMotion(AGEvent const *m) {
 }
 
 
-bool SwigDirector_AGRadioGroup::eventKeyUp(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
+bool SwigDirector_AGRadioGroup::acceptEvent(SDL_Event const *pEvent) {
+    SDL_Event * nc_tmp_pEvent = const_cast<SDL_Event *>(pEvent) ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::eventKeyUp(m);
+        return AGMessageObject::acceptEvent(pEvent);
     }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
-bool SwigDirector_AGRadioGroup::eventKeyDown(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGMessageObject::eventKeyDown(m);
-    }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
+    obj0 = SWIG_NewPointerObj(nc_tmp_pEvent, SWIGTYPE_p_SDL_Event, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("acceptEvent"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
@@ -7822,39 +7856,176 @@ bool SwigDirector_AGRadioGroup::eventActive(AGEvent const *m) {
 }
 
 
-bool SwigDirector_AGRadioGroup::acceptEvent(SDL_Event const *pEvent) {
-    SDL_Event * nc_tmp_pEvent = const_cast<SDL_Event *>(pEvent) ;
+bool SwigDirector_AGRadioGroup::eventKeyDown(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
     VALUE obj0 = Qnil ;
     bool c_result ;
     VALUE result;
     
     if (swig_get_up()) {
-        return AGMessageObject::acceptEvent(pEvent);
+        return AGMessageObject::eventKeyDown(m);
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_pEvent, SWIGTYPE_p_SDL_Event, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("acceptEvent"), 1,obj0);
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
 
 
-void SwigDirector_AGRadioGroup::eventChange(std::string const &p) {
-    std::string temp1 ;
-    std::string temp10 ;
+bool SwigDirector_AGRadioGroup::eventKeyUp(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGMessageObject::eventKeyUp(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventKeyUp"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::eventQuit(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGMessageObject::eventQuit(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventQuit"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::eventQuitModal(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGMessageObject::eventQuitModal(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventQuitModal"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::eventSysWM(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGMessageObject::eventSysWM(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventSysWM"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::eventResize(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGMessageObject::eventResize(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventResize"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::eventMouseEnter() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::eventMouseEnter();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseEnter"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+void SwigDirector_AGRadioGroup::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        AGRadioGroup::eventChange(p);
+        AGWidget::drawAll(p);
         return;
     }
-    obj0=rb_str_new2(p.c_str());
-    result = rb_funcall(swig_get_self(), rb_intern("eventChange"), 1,obj0);
+    obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAll"), 1,obj0);
 }
 
 
-SwigDirector_AGRadioGroup::~SwigDirector_AGRadioGroup() {
+void SwigDirector_AGRadioGroup::draw(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::draw(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
 }
+
 
 bool SwigDirector_AGRadioGroup::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
     VALUE obj0 = Qnil ;
@@ -7888,7 +8059,123 @@ bool SwigDirector_AGRadioGroup::signal(char const *pName, AGEvent const *m, AGMe
 }
 
 
-SwigDirector_AGRadio::SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect, AGRadioGroup *pGroup, std::string pName): AGRadio(pParent, pRect, pGroup, pName), Swig::Director(self) {
+void SwigDirector_AGRadioGroup::setLeft(int x) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::setLeft(x);
+        return;
+    }
+    obj0 = INT2NUM(x);
+    result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::setTop(int y) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::setTop(y);
+        return;
+    }
+    obj0 = INT2NUM(y);
+    result = rb_funcall(swig_get_self(), rb_intern("setTop"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::setHeight(int w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::setHeight(w);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::setWidth(int w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::setWidth(w);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+bool SwigDirector_AGRadioGroup::eventMouseLeave() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::eventMouseLeave();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseLeave"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadioGroup::eventHide() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGWidget::eventHide();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+void SwigDirector_AGRadioGroup::addChildBack(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::addChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+SwigDirector_AGRadio::SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect): AGRadio(pParent, pRect), Swig::Director(self) {
     
 }
 
@@ -7933,17 +8220,6 @@ bool SwigDirector_AGRadio::eventShow() {
 }
 
 
-void SwigDirector_AGRadio::rePosition() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGHTiler::rePosition();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("rePosition"), 0, NULL);
-}
-
-
 int SwigDirector_AGRadio::minHeight() const {
     int c_result ;
     VALUE result;
@@ -7983,6 +8259,24 @@ bool SwigDirector_AGRadio::canFocus() const {
 }
 
 
+std::string SwigDirector_AGRadio::getCaption() const {
+    std::string c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::getCaption();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getCaption"), 0, NULL);
+    {
+        if (TYPE(result) == T_STRING)
+        c_result = std::string(StringValuePtr(result));
+        else
+        throw Swig::DirectorTypeMismatchException("string expected");
+    }
+    return (std::string) c_result;
+}
+
+
 bool SwigDirector_AGRadio::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -8010,50 +8304,6 @@ bool SwigDirector_AGRadio::eventDragBy(AGEvent const *event, AGPoint const &pDif
 
 SwigDirector_AGRadio::~SwigDirector_AGRadio() {
 }
-
-bool SwigDirector_AGRadio::eventMouseButtonUp(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseButtonUp(m);
-    }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
-bool SwigDirector_AGRadio::eventMouseButtonDown(AGEvent const *m) {
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseButtonDown(m);
-    }
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj0 = director__p_AGEvent->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
 
 bool SwigDirector_AGRadio::eventMouseMotion(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
@@ -8247,6 +8497,50 @@ bool SwigDirector_AGRadio::eventResize(AGEvent const *m) {
 }
 
 
+bool SwigDirector_AGRadio::eventMouseButtonDown(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::eventMouseButtonDown(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadio::eventMouseButtonUp(AGEvent const *m) {
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::eventMouseButtonUp(m);
+    }
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj0 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj0 = director__p_AGEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 bool SwigDirector_AGRadio::eventMouseClick(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -8274,7 +8568,7 @@ bool SwigDirector_AGRadio::eventMouseEnter() {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGWidget::eventMouseEnter();
+        return AGButton::eventMouseEnter();
     }
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseEnter"), 0, NULL);
     c_result = (bool) RTEST(result);
@@ -8300,7 +8594,7 @@ void SwigDirector_AGRadio::draw(AGPainter &p) {
     VALUE result;
     
     if (swig_get_up()) {
-        AGWidget::draw(p);
+        AGButton::draw(p);
         return;
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
@@ -8366,45 +8660,6 @@ void SwigDirector_AGRadio::setTop(int y) {
 }
 
 
-void SwigDirector_AGRadio::setHeight(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setHeight(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
-}
-
-
-void SwigDirector_AGRadio::setWidth(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setWidth(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
-}
-
-
-bool SwigDirector_AGRadio::eventMouseLeave() {
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseLeave();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseLeave"), 0, NULL);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 bool SwigDirector_AGRadio::eventHide() {
     bool c_result ;
     VALUE result;
@@ -8415,6 +8670,45 @@ bool SwigDirector_AGRadio::eventHide() {
     result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+bool SwigDirector_AGRadio::eventMouseLeave() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::eventMouseLeave();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseLeave"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+void SwigDirector_AGRadio::setWidth(int w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::setWidth(w);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadio::setHeight(int w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::setHeight(w);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
 }
 
 
@@ -8437,18 +8731,18 @@ void SwigDirector_AGRadio::addChildBack(AGWidget *w) {
 }
 
 
-void SwigDirector_AGRadio::addChild(AGWidget *pWidget) {
+void SwigDirector_AGRadio::addChild(AGWidget *w) {
     Swig::Director * director__p_AGWidget = 0 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        AGVTiler::addChild(pWidget);
+        AGWidget::addChild(w);
         return;
     }
-    director__p_AGWidget = dynamic_cast<Swig::Director *>(pWidget);
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
     if (!director__p_AGWidget) {
-        obj0 = SWIG_NewPointerObj(pWidget, SWIGTYPE_p_AGWidget, 0);
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
     } else {
         obj0 = director__p_AGWidget->swig_get_self();
     }
@@ -16930,6 +17224,28 @@ _wrap_AGRect_shrink(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGRect_shrinkRB(int argc, VALUE *argv, VALUE self) {
+    AGRect *arg1 = (AGRect *) 0 ;
+    int arg2 ;
+    AGRect result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect, 1);
+    arg2 = NUM2INT(argv[0]);
+    result = ((AGRect const *)arg1)->shrinkRB(arg2);
+    
+    {
+        AGRect * resultptr;
+        resultptr = new AGRect((AGRect &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGRect_contains__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGRect *arg1 = (AGRect *) 0 ;
     AGPoint *arg2 = 0 ;
@@ -18444,7 +18760,7 @@ _wrap_AGButton_setHeight(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGButton_getName(int argc, VALUE *argv, VALUE self) {
+_wrap_AGButton_getCaption(int argc, VALUE *argv, VALUE self) {
     AGButton *arg1 = (AGButton *) 0 ;
     std::string result;
     Swig::Director *director = 0;
@@ -18455,7 +18771,7 @@ _wrap_AGButton_getName(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = ((AGButton const *)arg1)->getName();
+    result = ((AGButton const *)arg1)->getCaption();
     
     {
         vresult = rb_str_new2((&result)->c_str());
@@ -18522,6 +18838,54 @@ _wrap_AGButton_setCaption(int argc, VALUE *argv, VALUE self) {
     (arg1)->setCaption((std::string const &)*arg2);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_AGButton_setState(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    AGButton::State *arg2 = 0 ;
+    AGButton::State temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    temp2 = (AGButton::State) NUM2INT(argv[0]);
+    arg2 = &temp2;
+    (arg1)->setState((enum AGButton::State const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGButton_setChecked(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setChecked(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGButton_isChecked(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    result = (bool)((AGButton const *)arg1)->isChecked();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -21037,56 +21401,6 @@ _wrap_toAGEdit(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_new_AGCheckBox__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect arg3 ;
-    std::string *arg4 = 0 ;
-    std::string *arg5 = 0 ;
-    AGCheckBox *result;
-    std::string temp4 ;
-    std::string temp5 ;
-    
-    if ((argc < 4) || (argc > 4))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
-    {
-        AGRect * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect, 1);
-        if (ptr) arg3 = *ptr;
-    }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
-            arg4 = &temp4;
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        if (TYPE(argv[3]) == T_STRING) {
-            temp5 = std::string(StringValuePtr(argv[3]));
-            arg5 = &temp5;
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    char *classname = "Libantargisruby::AGCheckBox";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (AGCheckBox *)new SwigDirector_AGCheckBox(arg1,arg2,arg3,(std::string const &)*arg4,(std::string const &)*arg5);
-        
-    } else {
-        result = (AGCheckBox *)new AGCheckBox(arg2,arg3,(std::string const &)*arg4,(std::string const &)*arg5);
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGCheckBox_allocate(VALUE self) {
@@ -21105,16 +21419,14 @@ _wrap_AGCheckBox_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGCheckBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGCheckBox(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
     AGRect arg3 ;
-    std::string *arg4 = 0 ;
     AGCheckBox *result;
-    std::string temp4 ;
     
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
     {
@@ -21122,94 +21434,17 @@ _wrap_new_AGCheckBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect, 1);
         if (ptr) arg3 = *ptr;
     }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
-            arg4 = &temp4;
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
     char *classname = "Libantargisruby::AGCheckBox";
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
         /* subclassed */
-        result = (AGCheckBox *)new SwigDirector_AGCheckBox(arg1,arg2,arg3,(std::string const &)*arg4);
+        result = (AGCheckBox *)new SwigDirector_AGCheckBox(arg1,arg2,arg3);
         
     } else {
-        result = (AGCheckBox *)new AGCheckBox(arg2,arg3,(std::string const &)*arg4);
+        result = (AGCheckBox *)new AGCheckBox(arg2,arg3);
         
     }
     DATA_PTR(self) = result;
     return self;
-}
-
-
-static VALUE _wrap_new_AGCheckBox(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[6];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 5); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 4) {
-        int _v;
-        _v = (argv[0] != T_NONE);
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        _v = (TYPE(argv[3]) == T_STRING) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_new_AGCheckBox__SWIG_1(nargs, args, self);
-                    }
-                }
-            }
-        }
-    }
-    if (argc == 5) {
-        int _v;
-        _v = (argv[0] != T_NONE);
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        _v = (TYPE(argv[3]) == T_STRING) ? 1 : 0;
-                    }
-                    if (_v) {
-                        {
-                            _v = (TYPE(argv[4]) == T_STRING) ? 1 : 0;
-                        }
-                        if (_v) {
-                            return _wrap_new_AGCheckBox__SWIG_0(nargs, args, self);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGCheckBox'");
-    return Qnil;
 }
 
 
@@ -21230,24 +21465,6 @@ _wrap_AGCheckBox_eventMouseClick(int argc, VALUE *argv, VALUE self) {
     result = (bool)(arg1)->eventMouseClick((AGEvent const *)arg2);
     
     vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_AGCheckBox_getName(int argc, VALUE *argv, VALUE self) {
-    AGCheckBox *arg1 = (AGCheckBox *) 0 ;
-    std::string result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGCheckBox, 1);
-    result = ((AGCheckBox const *)arg1)->getName();
-    
-    {
-        vresult = rb_str_new2((&result)->c_str());
-    }
     return vresult;
 }
 
@@ -21292,18 +21509,22 @@ _wrap_AGRadioGroup_allocate(VALUE self) {
 static VALUE
 _wrap_new_AGRadioGroup(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    AGRect *arg3 = 0 ;
     AGRadioGroup *result;
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     char *classname = "Libantargisruby::AGRadioGroup";
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
         /* subclassed */
-        result = (AGRadioGroup *)new SwigDirector_AGRadioGroup(arg1);
+        result = (AGRadioGroup *)new SwigDirector_AGRadioGroup(arg1,arg2,(AGRect const &)*arg3);
         
     } else {
-        result = (AGRadioGroup *)new AGRadioGroup();
+        result = (AGRadioGroup *)new AGRadioGroup(arg2,(AGRect const &)*arg3);
         
     }
     DATA_PTR(self) = result;
@@ -21440,12 +21661,10 @@ _wrap_new_AGRadio(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
     AGRect arg3 ;
-    AGRadioGroup *arg4 = (AGRadioGroup *) 0 ;
-    std::string arg5 ;
     AGRadio *result;
     
-    if ((argc < 4) || (argc > 4))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
     {
@@ -21453,21 +21672,13 @@ _wrap_new_AGRadio(int argc, VALUE *argv, VALUE self) {
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect, 1);
         if (ptr) arg3 = *ptr;
     }
-    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGRadioGroup, 1);
-    {
-        if (TYPE(argv[3]) == T_STRING) {
-            arg5 = std::string(StringValuePtr(argv[3]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
     char *classname = "Libantargisruby::AGRadio";
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
         /* subclassed */
-        result = (AGRadio *)new SwigDirector_AGRadio(arg1,arg2,arg3,arg4,arg5);
+        result = (AGRadio *)new SwigDirector_AGRadio(arg1,arg2,arg3);
         
     } else {
-        result = (AGRadio *)new AGRadio(arg2,arg3,arg4,arg5);
+        result = (AGRadio *)new AGRadio(arg2,arg3);
         
     }
     DATA_PTR(self) = result;
@@ -25296,23 +25507,11 @@ _wrap_toAGListBox(int argc, VALUE *argv, VALUE self) {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_AGRadioTo_p_AGHTiler(void *x) {
-    return (void *)((AGHTiler *) (AGCheckBox *) ((AGRadio *) x));
-}
-static void *_p_AGCheckBoxTo_p_AGHTiler(void *x) {
-    return (void *)((AGHTiler *)  ((AGCheckBox *) x));
-}
 static void *_p_AGHTilerTo_p_AGVTiler(void *x) {
     return (void *)((AGVTiler *)  ((AGHTiler *) x));
 }
 static void *_p_AGMenuTo_p_AGVTiler(void *x) {
     return (void *)((AGVTiler *)  ((AGMenu *) x));
-}
-static void *_p_AGRadioTo_p_AGVTiler(void *x) {
-    return (void *)((AGVTiler *) (AGHTiler *)(AGCheckBox *) ((AGRadio *) x));
-}
-static void *_p_AGCheckBoxTo_p_AGVTiler(void *x) {
-    return (void *)((AGVTiler *) (AGHTiler *) ((AGCheckBox *) x));
 }
 static void *_p_AGRadioTo_p_AGCheckBox(void *x) {
     return (void *)((AGCheckBox *)  ((AGRadio *) x));
@@ -25322,6 +25521,12 @@ static void *_p_AGSDLScreenTo_p_AGScreen(void *x) {
 }
 static void *_p_AGWindowTo_p_AGTable(void *x) {
     return (void *)((AGTable *)  ((AGWindow *) x));
+}
+static void *_p_AGRadioTo_p_AGButton(void *x) {
+    return (void *)((AGButton *) (AGCheckBox *) ((AGRadio *) x));
+}
+static void *_p_AGCheckBoxTo_p_AGButton(void *x) {
+    return (void *)((AGButton *)  ((AGCheckBox *) x));
 }
 static void *_p_AGWindowTo_p_AGWidget(void *x) {
     return (void *)((AGWidget *) (AGTable *) ((AGWindow *) x));
@@ -25357,16 +25562,19 @@ static void *_p_AGImageTo_p_AGWidget(void *x) {
     return (void *)((AGWidget *)  ((AGImage *) x));
 }
 static void *_p_AGCheckBoxTo_p_AGWidget(void *x) {
-    return (void *)((AGWidget *) (AGVTiler *)(AGHTiler *) ((AGCheckBox *) x));
+    return (void *)((AGWidget *) (AGButton *) ((AGCheckBox *) x));
 }
 static void *_p_AGLayoutTo_p_AGWidget(void *x) {
     return (void *)((AGWidget *)  ((AGLayout *) x));
 }
 static void *_p_AGRadioTo_p_AGWidget(void *x) {
-    return (void *)((AGWidget *) (AGVTiler *)(AGHTiler *)(AGCheckBox *) ((AGRadio *) x));
+    return (void *)((AGWidget *) (AGButton *)(AGCheckBox *) ((AGRadio *) x));
 }
 static void *_p_AGTextTo_p_AGWidget(void *x) {
     return (void *)((AGWidget *)  ((AGText *) x));
+}
+static void *_p_AGRadioGroupTo_p_AGWidget(void *x) {
+    return (void *)((AGWidget *)  ((AGRadioGroup *) x));
 }
 static void *_p_AGWindowTo_p_AGMessageObject(void *x) {
     return (void *)((AGMessageObject *) (AGWidget *)(AGTable *) ((AGWindow *) x));
@@ -25408,19 +25616,19 @@ static void *_p_AGImageTo_p_AGMessageObject(void *x) {
     return (void *)((AGMessageObject *) (AGWidget *) ((AGImage *) x));
 }
 static void *_p_AGCheckBoxTo_p_AGMessageObject(void *x) {
-    return (void *)((AGMessageObject *) (AGWidget *)(AGVTiler *)(AGHTiler *) ((AGCheckBox *) x));
+    return (void *)((AGMessageObject *) (AGWidget *)(AGButton *) ((AGCheckBox *) x));
 }
 static void *_p_AGLayoutTo_p_AGMessageObject(void *x) {
     return (void *)((AGMessageObject *) (AGWidget *) ((AGLayout *) x));
 }
 static void *_p_AGRadioTo_p_AGMessageObject(void *x) {
-    return (void *)((AGMessageObject *) (AGWidget *)(AGVTiler *)(AGHTiler *)(AGCheckBox *) ((AGRadio *) x));
+    return (void *)((AGMessageObject *) (AGWidget *)(AGButton *)(AGCheckBox *) ((AGRadio *) x));
 }
 static void *_p_AGTextTo_p_AGMessageObject(void *x) {
     return (void *)((AGMessageObject *) (AGWidget *) ((AGText *) x));
 }
 static void *_p_AGRadioGroupTo_p_AGMessageObject(void *x) {
-    return (void *)((AGMessageObject *)  ((AGRadioGroup *) x));
+    return (void *)((AGMessageObject *) (AGWidget *) ((AGRadioGroup *) x));
 }
 static void *_p_AGRectTo_p_SDL_Rect(void *x) {
     return (void *)((SDL_Rect *)  ((AGRect *) x));
@@ -25477,7 +25685,7 @@ static void *_p_AGImageTo_p_AGListener(void *x) {
     return (void *)((AGListener *) (AGMessageObject *)(AGWidget *) ((AGImage *) x));
 }
 static void *_p_AGCheckBoxTo_p_AGListener(void *x) {
-    return (void *)((AGListener *) (AGMessageObject *)(AGWidget *)(AGVTiler *)(AGHTiler *) ((AGCheckBox *) x));
+    return (void *)((AGListener *) (AGMessageObject *)(AGWidget *)(AGButton *) ((AGCheckBox *) x));
 }
 static void *_p_AGLayoutTo_p_AGListener(void *x) {
     return (void *)((AGListener *) (AGMessageObject *)(AGWidget *) ((AGLayout *) x));
@@ -25486,13 +25694,13 @@ static void *_p_AGMessageObjectTo_p_AGListener(void *x) {
     return (void *)((AGListener *)  ((AGMessageObject *) x));
 }
 static void *_p_AGRadioTo_p_AGListener(void *x) {
-    return (void *)((AGListener *) (AGMessageObject *)(AGWidget *)(AGVTiler *)(AGHTiler *)(AGCheckBox *) ((AGRadio *) x));
+    return (void *)((AGListener *) (AGMessageObject *)(AGWidget *)(AGButton *)(AGCheckBox *) ((AGRadio *) x));
 }
 static void *_p_AGTextTo_p_AGListener(void *x) {
     return (void *)((AGListener *) (AGMessageObject *)(AGWidget *) ((AGText *) x));
 }
 static void *_p_AGRadioGroupTo_p_AGListener(void *x) {
-    return (void *)((AGListener *) (AGMessageObject *) ((AGRadioGroup *) x));
+    return (void *)((AGListener *) (AGMessageObject *)(AGWidget *) ((AGRadioGroup *) x));
 }
 static swig_type_info _swigt__p_Uint8[] = {{"_p_Uint8", 0, "Uint8 *", 0, 0, 0, 0},{"_p_Uint8", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSDLScreen[] = {{"_p_AGSDLScreen", 0, "AGSDLScreen *", 0, 0, 0, 0},{"_p_AGSDLScreen", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -25504,10 +25712,10 @@ static swig_type_info _swigt__p_AGLayoutFactory[] = {{"_p_AGLayoutFactory", 0, "
 static swig_type_info _swigt__p_AGRect[] = {{"_p_AGRect", 0, "AGRect *", 0, 0, 0, 0},{"_p_AGRect", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Event[] = {{"_p_SDL_Event", 0, "SDL_Event *", 0, 0, 0, 0},{"_p_SDL_Event", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGApplication[] = {{"_p_AGApplication", 0, "AGApplication *", 0, 0, 0, 0},{"_p_AGApplication", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGButton[] = {{"_p_AGButton", 0, "AGButton *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGButton, 0, 0, 0, 0, 0},{"_p_AGButton", 0, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGButton, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Rect[] = {{"_p_SDL_Rect", 0, "SDL_Rect *", 0, 0, 0, 0},{"_p_SDL_Rect", 0, 0, 0, 0, 0, 0},{"_p_AGRect", _p_AGRectTo_p_SDL_Rect, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AGButton[] = {{"_p_AGButton", 0, "AGButton *", 0, 0, 0, 0},{"_p_AGButton", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDLMod[] = {{"_p_SDLMod", 0, "enum SDLMod *|SDLMod *", 0, 0, 0, 0},{"_p_SDLMod", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AGHTiler[] = {{"_p_AGHTiler", 0, "AGHTiler *", 0, 0, 0, 0},{"_p_AGHTiler", 0, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGHTiler, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGHTiler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGHTiler[] = {{"_p_AGHTiler", 0, "AGHTiler *", 0, 0, 0, 0},{"_p_AGHTiler", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Document[] = {{"_p_Document", 0, "Document *", 0, 0, 0, 0},{"_p_Document", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGListener[] = {{"_p_AGListener", 0, "AGListener *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListener", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMessageObject", _p_AGMessageObjectTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGListener, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -25539,7 +25747,7 @@ static swig_type_info _swigt__p_AGWindow[] = {{"_p_AGWindow", 0, "AGWindow *", 0
 static swig_type_info _swigt__p_AGMenu[] = {{"_p_AGMenu", 0, "AGMenu *", 0, 0, 0, 0},{"_p_AGMenu", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGEdit[] = {{"_p_AGEdit", 0, "AGEdit *", 0, 0, 0, 0},{"_p_AGEdit", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayoutCreator[] = {{"_p_AGLayoutCreator", 0, "AGLayoutCreator *", 0, 0, 0, 0},{"_p_AGLayoutCreator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AGWidget[] = {{"_p_AGWidget", 0, "AGWidget *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGWidget", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGWidget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGWidget[] = {{"_p_AGWidget", 0, "AGWidget *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGWidget", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGWidget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCheckBox[] = {{"_p_AGCheckBox", 0, "AGCheckBox *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGCheckBox, 0, 0, 0, 0, 0},{"_p_AGCheckBox", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGFontEngine[] = {{"_p_AGFontEngine", 0, "AGFontEngine *", 0, 0, 0, 0},{"_p_AGFontEngine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -25552,7 +25760,7 @@ static swig_type_info _swigt__p_AGListBox[] = {{"_p_AGListBox", 0, "AGListBox *"
 static swig_type_info _swigt__p_AGMessageObject[] = {{"_p_AGMessageObject", 0, "AGMessageObject *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMessageObject", 0, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGMessageObject, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDLKey[] = {{"_p_SDLKey", 0, "enum SDLKey *|SDLKey *", 0, 0, 0, 0},{"_p_SDLKey", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_PixelFormat[] = {{"_p_SDL_PixelFormat", 0, "SDL_PixelFormat *", 0, 0, 0, 0},{"_p_SDL_PixelFormat", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AGVTiler[] = {{"_p_AGVTiler", 0, "AGVTiler *", 0, 0, 0, 0},{"_p_AGVTiler", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGVTiler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGVTiler[] = {{"_p_AGVTiler", 0, "AGVTiler *", 0, 0, 0, 0},{"_p_AGVTiler", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGVTiler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayout[] = {{"_p_AGLayout", 0, "AGLayout *", 0, 0, 0, 0},{"_p_AGLayout", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSDLEvent[] = {{"_p_AGSDLEvent", 0, "AGSDLEvent *", 0, 0, 0, 0},{"_p_AGSDLEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGColor[] = {{"_p_AGColor", 0, "AGColor *", 0, 0, 0, 0},{"_p_AGColor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -25573,8 +25781,8 @@ _swigt__p_AGLayoutFactory,
 _swigt__p_AGRect, 
 _swigt__p_SDL_Event, 
 _swigt__p_AGApplication, 
-_swigt__p_SDL_Rect, 
 _swigt__p_AGButton, 
+_swigt__p_SDL_Rect, 
 _swigt__p_SDLMod, 
 _swigt__p_AGHTiler, 
 _swigt__p_Document, 
@@ -25946,6 +26154,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGRect.klass, "intersect", VALUEFUNC(_wrap_AGRect_intersect), -1);
     rb_define_method(cAGRect.klass, "isNull", VALUEFUNC(_wrap_AGRect_isNull), -1);
     rb_define_method(cAGRect.klass, "shrink", VALUEFUNC(_wrap_AGRect_shrink), -1);
+    rb_define_method(cAGRect.klass, "shrinkRB", VALUEFUNC(_wrap_AGRect_shrinkRB), -1);
     rb_define_method(cAGRect.klass, "contains", VALUEFUNC(_wrap_AGRect_contains), -1);
     rb_define_method(cAGRect.klass, "project", VALUEFUNC(_wrap_AGRect_project), -1);
     rb_define_method(cAGRect.klass, "origin", VALUEFUNC(_wrap_AGRect_origin), -1);
@@ -26012,6 +26221,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_const(cAGButton.klass,"LIGHTED", INT2NUM(AGButton::LIGHTED));
     rb_define_const(cAGButton.klass,"PRESSED", INT2NUM(AGButton::PRESSED));
     rb_define_const(cAGButton.klass,"CHECKED", INT2NUM(AGButton::CHECKED));
+    rb_define_const(cAGButton.klass,"CHECKEDLIGHTED", INT2NUM(AGButton::CHECKEDLIGHTED));
     rb_define_method(cAGButton.klass, "setSurface", VALUEFUNC(_wrap_AGButton_setSurface), -1);
     rb_define_method(cAGButton.klass, "draw", VALUEFUNC(_wrap_AGButton_draw), -1);
     rb_define_method(cAGButton.klass, "eventMouseEnter", VALUEFUNC(_wrap_AGButton_eventMouseEnter), -1);
@@ -26020,10 +26230,13 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGButton.klass, "eventMouseButtonUp", VALUEFUNC(_wrap_AGButton_eventMouseButtonUp), -1);
     rb_define_method(cAGButton.klass, "setWidth", VALUEFUNC(_wrap_AGButton_setWidth), -1);
     rb_define_method(cAGButton.klass, "setHeight", VALUEFUNC(_wrap_AGButton_setHeight), -1);
-    rb_define_method(cAGButton.klass, "getName", VALUEFUNC(_wrap_AGButton_getName), -1);
+    rb_define_method(cAGButton.klass, "getCaption", VALUEFUNC(_wrap_AGButton_getCaption), -1);
     rb_define_method(cAGButton.klass, "setEnabled", VALUEFUNC(_wrap_AGButton_setEnabled), -1);
     rb_define_method(cAGButton.klass, "setTheme", VALUEFUNC(_wrap_AGButton_setTheme), -1);
     rb_define_method(cAGButton.klass, "setCaption", VALUEFUNC(_wrap_AGButton_setCaption), -1);
+    rb_define_method(cAGButton.klass, "setState", VALUEFUNC(_wrap_AGButton_setState), -1);
+    rb_define_method(cAGButton.klass, "setChecked", VALUEFUNC(_wrap_AGButton_setChecked), -1);
+    rb_define_method(cAGButton.klass, "isChecked", VALUEFUNC(_wrap_AGButton_isChecked), -1);
     cAGButton.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisruby, "toAGButton", VALUEFUNC(_wrap_toAGButton), -1);
@@ -26200,17 +26413,16 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_module_function(mLibantargisruby, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGCheckBox", VALUEFUNC(_wrap_disown_AGCheckBox), -1);
     
-    cAGCheckBox.klass = rb_define_class_under(mLibantargisruby, "AGCheckBox", ((swig_class *) SWIGTYPE_p_AGHTiler->clientdata)->klass);
+    cAGCheckBox.klass = rb_define_class_under(mLibantargisruby, "AGCheckBox", ((swig_class *) SWIGTYPE_p_AGButton->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGCheckBox, (void *) &cAGCheckBox);
     rb_define_alloc_func(cAGCheckBox.klass, _wrap_AGCheckBox_allocate);
     rb_define_method(cAGCheckBox.klass, "initialize", VALUEFUNC(_wrap_new_AGCheckBox), -1);
     rb_define_method(cAGCheckBox.klass, "eventMouseClick", VALUEFUNC(_wrap_AGCheckBox_eventMouseClick), -1);
-    rb_define_method(cAGCheckBox.klass, "getName", VALUEFUNC(_wrap_AGCheckBox_getName), -1);
     cAGCheckBox.mark = 0;
     cAGCheckBox.destroy = (void (*)(void *)) free_AGCheckBox;
     rb_define_module_function(mLibantargisruby, "disown_AGRadioGroup", VALUEFUNC(_wrap_disown_AGRadioGroup), -1);
     
-    cAGRadioGroup.klass = rb_define_class_under(mLibantargisruby, "AGRadioGroup", ((swig_class *) SWIGTYPE_p_AGMessageObject->clientdata)->klass);
+    cAGRadioGroup.klass = rb_define_class_under(mLibantargisruby, "AGRadioGroup", ((swig_class *) SWIGTYPE_p_AGWidget->clientdata)->klass);
     SWIG_TypeClientData(SWIGTYPE_p_AGRadioGroup, (void *) &cAGRadioGroup);
     rb_define_alloc_func(cAGRadioGroup.klass, _wrap_AGRadioGroup_allocate);
     rb_define_method(cAGRadioGroup.klass, "initialize", VALUEFUNC(_wrap_new_AGRadioGroup), -1);

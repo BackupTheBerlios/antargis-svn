@@ -44,20 +44,20 @@ void AGBorder::draw(AGPainter &p)
   // corners
   p.blit(mSurface,AGRect(0,0,w,w),AGRect(0,0,w,w));
  
-  p.blit(mSurface,AGRect(0,y2-w,w,w),AGRect(0,w2,w,w));
+  p.blit(mSurface,AGRect(0,y2-w+1,w,w),AGRect(0,w2,w,w));
  
-  p.blit(mSurface,AGRect(x2-w,0,w,w),AGRect(w2,0,w,w));
+  p.blit(mSurface,AGRect(x2-w+1,0,w,w),AGRect(w2,0,w,w));
  
-  p.blit(mSurface,AGRect(x2-w,y2-w,w,w),AGRect(w2,w2,w,w));
+  p.blit(mSurface,AGRect(x2-w+1,y2-w+1,w,w),AGRect(w2,w2,w,w));
 
   // borders
 
   // hor
   p.tile(mSurface,AGRect(w,0,d.w-w2,w),AGRect(w,0,w,w));
-  p.tile(mSurface,AGRect(w,y2-w,d.w-w2,w),AGRect(w,w2,w,w));
+  p.tile(mSurface,AGRect(w,y2-w+1,d.w-w2,w),AGRect(w,w2,w,w));
   // ver
   p.tile(mSurface,AGRect(0,w,w,d.h-w2),AGRect(0,w,w,w));
-  p.tile(mSurface,AGRect(x2-w,w,w,d.h-w2),AGRect(w2,w,w,w));
+  p.tile(mSurface,AGRect(x2-w+1,w,w,d.h-w2),AGRect(w2,w,w,w));
 
   // skrip interior
 

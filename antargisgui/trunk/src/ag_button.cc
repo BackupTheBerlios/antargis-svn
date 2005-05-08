@@ -49,6 +49,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   addChild(mTextW);
 
   setTheme("");
+  mChecked=false;
 
   //  cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
@@ -120,14 +121,20 @@ bool AGButton::eventMouseEnter()
 {
   if(!mEnabled)
     return false;
-  mState=LIGHTED;
+  if(mChecked)
+    mState=CHECKEDLIGHTED;
+  else
+    mState=LIGHTED;
   return false;
 }
 bool AGButton::eventMouseLeave()
 {
   if(!mEnabled)
     return false;
-  mState=NORMAL;
+  if(mChecked)
+    mState=CHECKED;
+  else
+    mState=NORMAL;
   return false;
 }
 
@@ -146,8 +153,10 @@ bool AGButton::eventMouseButtonDown(const AGEvent *m)
 	{
 	  mState=PRESSED;
 	  //  ccdebug("Pressed");
-	  sigClick(m);
+	  //	  sigClick(m);
 	  //	  cdebug(getName());
+	  AGWidget::eventMouseButtonDown(m); // let it get the buttondown-info
+
 	  return true;// FIXME:TEST false; // events only get eaten if in window
 	}
     }
@@ -162,9 +171,19 @@ bool AGButton::eventMouseButtonUp(const AGEvent *m)
   if(e)
     {
       if(getScreenRect().contains(e->getMousePosition()))
-	mState=LIGHTED;
+	{
+	  if(mChecked)
+	    mState=CHECKEDLIGHTED;
+	  else
+	    mState=LIGHTED;
+	}
       else
-	mState=NORMAL;
+	{
+	  if(mChecked)
+	    mState=CHECKED;
+	  else
+	    mState=NORMAL;
+	}
     }
   return AGWidget::eventMouseButtonUp(m);
 }
@@ -192,7 +211,7 @@ AGButton AGButton::test()
   return b;
 }
 */
-std::string AGButton::getName() const
+std::string AGButton::getCaption() const
 {
   return mText;
 }
@@ -214,13 +233,15 @@ void AGButton::setTheme(const std::string &pTheme)
   mBG[PRESSED]=AGBackground(mTheme+"button.background.pressed");
   mBG[LIGHTED]=AGBackground(mTheme+"button.background.lighted");
   mBG[CHECKED]=AGBackground(mTheme+"button.background.checked");
+  mBG[CHECKEDLIGHTED]=AGBackground(mTheme+"button.background.checkedlighted");
 
   mBorder[NORMAL]=AGBorder(mTheme+"button.border.normal");
   mBorder[PRESSED]=AGBorder(mTheme+"button.border.pressed");
   mBorder[LIGHTED]=AGBorder(mTheme+"button.border.lighted");
   mBorder[CHECKED]=AGBorder(mTheme+"button.border.checked");
+  mBorder[CHECKEDLIGHTED]=AGBorder(mTheme+"button.border.checkedlighted");
 
-    if(mTextW)
+  if(mTextW)
     mTextW->setTheme(mTheme+"button.text");
 }
 
@@ -231,8 +252,37 @@ void AGButton::setCaption(const std::string &pCaption)
     mTextW->setText(pCaption);
 }
 
+void AGButton::setState(const State &pState)
+{
+  mState=pState;
+}
+
+void AGButton::setChecked(bool pChecked)
+{
+  mChecked=pChecked;
+  if(mChecked)
+    {
+      if(mState==LIGHTED || mState==CHECKEDLIGHTED)
+	setState(CHECKEDLIGHTED);
+      else
+	setState(CHECKED);
+    }
+  else
+    {
+      if(mState==LIGHTED || mState==CHECKEDLIGHTED)
+	setState(LIGHTED);
+      else
+	setState(NORMAL);
+    }
+}
+bool AGButton::isChecked() const
+{
+  return mChecked;
+}
+
 
 AGButton &toAGButton(AGWidget &pWidget)
 {
   return dynamic_cast<AGButton&>(pWidget);
 }
+

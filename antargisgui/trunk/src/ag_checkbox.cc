@@ -22,28 +22,44 @@
 #include "ag_image.h"
 #include "ag_text.h"
 #include "ag_theme.h"
+#include "ag_debug.h"
 
-AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect pRect,const std::string &pName,const std::string &pType):
-  AGHTiler(pParent,pRect),mName(pName),mChecked(false),mType(pType)
+AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect pRect):
+  AGButton(pParent,pRect,"")//,mChecked(false)
 {
-  addChild(mImage=new AGImage(this,AGPoint(0,0),getTheme()->getSurface(mType+".normal"),false));
+  /*  mImage=0;
+  if(getTheme()->hasSurface(mType+".normal"))
+    addChild(mImage=new AGImage(this,AGPoint(0,0),getTheme()->getSurface(mType+".normal"),false));
   addChild(new AGText(this,AGPoint(0,0),pName,getTheme()->getFont(std::string("Font.")+mType)));
 
-  adaptHeightFromChildren();
+  adaptHeightFromChildren();*/
 }
 
 bool AGCheckBox::eventMouseClick(const AGEvent *m)
 {
+  CTRACE;
+  setChecked(!isChecked());
+  /*
   mChecked=!mChecked;
-
   if(mChecked)
-    mImage->setSurface(getTheme()->getSurface(mType+".checked"));
+    setState(CHECKED);
   else
-    mImage->setSurface(getTheme()->getSurface(mType+".normal"));
+  setState(NORMAL);*/
+    /*
+
+  if(mImage)
+    {
+      if(mChecked)
+	mImage->setSurface(getTheme()->getSurface(mType+".checked"));
+      else
+	mImage->setSurface(getTheme()->getSurface(mType+".normal"));
+	}*/
   return true; // eat
 }
 
+/*
 std::string AGCheckBox::getName() const
 {
   return mName;
 }
+*/

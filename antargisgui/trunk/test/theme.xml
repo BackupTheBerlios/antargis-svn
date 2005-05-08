@@ -150,6 +150,9 @@
 				<checked>
 					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
 				</checked>
+				<checkedlighted>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</checkedlighted>
 			</border>
 			<background>
 				<normal>
@@ -161,24 +164,31 @@
 				</normal>
 				<lighted>
 					<value name="border" value="4"/>
-					<color name='gradientColor1' color='#403a6b'/>
-					<color name='gradientColor2' color='#3c3d41'/>
-					<color name='gradientColor3' color='#3c3d41'/>
-					<color name='gradientColor4' color='#12141c'/>
+					<color name='gradientColor1' color='#515488'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#262849'/>
 				</lighted>
 				<pressed>
 					<value name="border" value="4"/>
-					<color name='gradientColor1' color='#403a6b'/>
-					<color name='gradientColor2' color='#12141c'/>
-					<color name='gradientColor3' color='#403a6b'/>
-					<color name='gradientColor4' color='#3c3d41'/>
+					<color name='gradientColor1' color='#262849'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#515488'/>
 				</pressed>
+				<checkedlighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#856c30'/>
+					<color name='gradientColor2' color='#6f5926'/>
+					<color name='gradientColor3' color='#6f5926'/>
+					<color name='gradientColor4' color='#645021'/>
+				</checkedlighted>
 				<checked>
 					<value name="border" value="4"/>
-					<color name='gradientColor1' color='#54555b'/>
-					<color name='gradientColor2' color='#3c3d41'/>
-					<color name='gradientColor3' color='#3c3d41'/>
-					<color name='gradientColor4' color='#12141c'/>
+					<color name='gradientColor1' color='#765f27'/>
+					<color name='gradientColor2' color='#614e20'/>
+					<color name='gradientColor3' color='#53431b'/>
+					<color name='gradientColor4' color='#443616'/>
 				</checked>
 			</background>
 		</button>

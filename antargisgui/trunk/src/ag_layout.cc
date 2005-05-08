@@ -101,8 +101,12 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
       cdebug("CREATION FAILED!!"<<n);
     }
 
+  cdebug("w:"<<w);
+  cdebug("nodename:"<<pNode.get("name"));
   if(w!=0 && pNode.get("name").length())
-    w->setName(pNode.get("name"));
+    {
+      w->setName(pNode.get("name"));
+    }
 
   if(w!=0 && pNode.get("tabindex").length())
     {
@@ -400,3 +404,22 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(ListBox);
+
+// AGLayout creator
+class AGLayoutLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(Layout,"layout")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    CTRACE;
+    std::string filename=pNode.get("filename");
+    AGWidget *w=new AGWidget(pParent,pRect);
+    AGLayout *l=new AGLayout(w,loadFile(filename));//pRect);
+    w->addChild(l);
+
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(Layout);

@@ -25,10 +25,11 @@
 
 class AGRadio;
 
-class AGRadioGroup:public AGMessageObject
+// derive from AGWidget, so that it can be put into the hierarchy
+class AGRadioGroup:public AGWidget
 {
  public:
-  AGRadioGroup();
+  AGRadioGroup(AGWidget *pParent,const AGRect &pr);
   virtual ~AGRadioGroup();
 
   virtual void eventChange(const std::string &p);
@@ -44,11 +45,14 @@ class AGRadioGroup:public AGMessageObject
 class AGRadio:public AGCheckBox
 {
  public:
-  AGRadio(AGWidget *pParent,AGRect pRect,AGRadioGroup *pGroup,std::string pName);
+  AGRadio(AGWidget *pParent,AGRect pRect);//,AGRadioGroup *pGroup,std::string pName);
   virtual ~AGRadio();
 
   bool eventMouseClick(const AGEvent *m);
-
+  //  bool eventMouseButtonUp(const AGEvent *m);
+  //  bool eventMouseLeave();
+  //  bool eventMouseEnter();
+  
   void deselect();
 
  private:

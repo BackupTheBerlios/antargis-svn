@@ -142,6 +142,10 @@ AGRect AGRect::shrink(int amount) const
 {
   return AGRect(x+amount,y+amount,w-2*amount,h-2*amount);
 }
+AGRect AGRect::shrinkRB(int amount) const
+{
+  return AGRect(x,y,w-amount,h-amount);
+}
 
 bool AGRect::contains(const AGPoint &p) const
 {

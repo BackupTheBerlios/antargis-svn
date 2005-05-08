@@ -123,7 +123,9 @@ bool AGWidget::processEvent(const AGEvent *event)
 {
   if(!mVisible)
     return false;
-  //  cdebug(typeid(this));
+
+  //  CTRACE;
+  //  cdebug(typeid(*this).name());
 
   //  TRACE;
   //const SDL_Event * event, bool bModal) {
@@ -139,6 +141,7 @@ bool AGWidget::processEvent(const AGEvent *event)
 
   for(;i!=mChildren.end() && !processed; i++)
     processed=(*i)->processEvent(event);
+  //  cdebug("proc:"<<processed);
   
   if(processed) {
     //    cdebug("processed by child"<<endl);
@@ -147,7 +150,7 @@ bool AGWidget::processEvent(const AGEvent *event)
 
   
   // let me see if i can process it myself
-  
+  //  cdebug("going to self-processing");
   if(AGMessageObject::processEvent(event)) {
     
 
@@ -225,11 +228,13 @@ bool AGWidget::eventMouseMotion(const AGEvent *m)
 
 bool AGWidget::eventMouseButtonDown(const AGEvent *m)
 {
+  //  CTRACE;
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(e)
     {
       if(getScreenRect().contains(e->getMousePosition()))
 	{
+	  //	  cdebug("BUTTONDOWN");
 	  mButtonDown=true;
 	  mOldMousePos=e->getMousePosition();
 	  //return true; // consume
@@ -247,8 +252,10 @@ bool AGWidget::eventMouseButtonDown(const AGEvent *m)
 
 bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 {
+  //  CTRACE;
   //  cdebug("typeid:"<<typeid(*this).name());
   bool was=mButtonDown;
+  //  cdebug("buttonDown:"<<mButtonDown);
   mButtonDown=false;
   
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
@@ -274,7 +281,9 @@ bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 
 bool AGWidget::eventMouseClick(const AGEvent *m)
 {
-  //  CTRACE;
+  CTRACE;
+  cdebug("name:"<<getName());
+  cdebug("type:"<<typeid(*this).name());
   return false;
 }
 
@@ -685,27 +694,29 @@ void AGWidget::setModal(bool pModal)
 #endif
 void AGWidget_markfunc(void *ptr)
 {
-  cdebug("TRACE");
+  //  cdebug("TRACE");
 #ifdef USE_RUBY
   AGWidget *cppAnimal;
   VALUE   rubyAnimal;
   AGWidget *zoo;
   
-  TRACE;  
-  cdebug(ptr<<endl);
+
+  assert(ptr);
+  //  TRACE;  
+  //  cdebug(ptr<<endl);
   zoo = static_cast<AGWidget*>(ptr);
   
   std::list<AGWidget*>::iterator i=zoo->mChildren.begin();
 
   for(;i!=zoo->mChildren.end();i++)
     {
-      cdebug("children:"<<*i);
+      //      cdebug("children:"<<*i);
       cppAnimal = *i;//zoo->getAnimal(i);
       if(cppAnimal->mRubyObject)
 	{
 	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
 	  rb_gc_mark(rubyAnimal);
-	  cdebug("mark:"<<cppAnimal->getName());
+	  //	  cdebug("mark:"<<cppAnimal->getName());
 	}
       AGWidget_markfunc(*i);
     }
