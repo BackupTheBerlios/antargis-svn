@@ -347,6 +347,12 @@ void AntEntity::newMoveJob(int p,const Pos2D &pTarget,int pnear)
   setJob(new MoveJob(p,pTarget,pnear));
 }
 
+void AntEntity::newFightJob(int p,AntEntity *target)
+{
+  setJob(new FightJob(p,target));
+}
+
+
 
 // AntEntityPtr
 AntEntityPtr::AntEntityPtr():p(0)

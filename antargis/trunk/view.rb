@@ -88,6 +88,7 @@ class AntInventory<AGButton
 		setTheme("antButton")
 		$inventory=self
 		@resTypes=["wood","stone"]
+		setEnabled(false)
 	end
 	def setValue(name,value)
 		if name=="wood" or name=="stone" then

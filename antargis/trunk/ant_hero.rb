@@ -89,6 +89,16 @@ class AntHeroMoveJob<AntHLJob
 	end
 end
 
+class AntHeroKillJob<AntHLJob
+	def initialize(hero,target)
+		@hero=hero
+		@target=target
+		
+		@hero.newFightJob(0,target)
+	end
+	
+end
+
 class AntNewHero<AntEntity
 	def initialize
 		super(Pos2D.new(0,0))

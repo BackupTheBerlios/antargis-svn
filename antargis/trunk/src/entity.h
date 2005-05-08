@@ -220,6 +220,7 @@ class AntEntity
     virtual void newRestJob(int pTime);
     virtual void newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
     virtual void newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
+    virtual void newFightJob(int p,AntEntity *target);
 
 
     virtual void assignJob(AntEntity*);

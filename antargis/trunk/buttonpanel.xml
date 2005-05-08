@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout name="ButtonPanel" geometry="(0,0,150,200)">
+	<radioGroup name="ButtonPanelGroup">
+		<table cols="3" rows="4">
+			<radio  col="0" row="0" theme="antButton" name="doPoint" caption-image="data/pointer3.png"/>
+			<radio  col="1" row="0" theme="antButton" name="doMove" caption-image="data/move.png"/>
+			<radio  col="2" row="0" theme="antButton" name="doFight" caption-image="data/sword.png"/>
+			<radio  col="0" row="1" theme="antButton" name="doRecruit" caption-image="data/recruit.png"/>
+			<radio  col="1" row="1" theme="antButton" name="doDismiss" caption-image="data/dismiss.png"/>
+			<radio  col="2" row="1" theme="antButton" name="doInvent" caption-image="data/invent.png"/>
+		</table>-
+	</radioGroup>
+</layout>

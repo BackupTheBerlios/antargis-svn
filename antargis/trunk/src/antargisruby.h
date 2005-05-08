@@ -176,7 +176,7 @@ public:
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
-    virtual std::string getName() const;
+    virtual std::string getCaption() const;
     virtual ~SwigDirector_AGButton();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseClick(AGEvent const *m);
@@ -495,18 +495,16 @@ public:
 class SwigDirector_AGCheckBox : public AGCheckBox, public Swig::Director {
 
 public:
-    SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect, std::string const &pName, std::string const &pType = "checkBox");
+    SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual bool eventShow();
-    virtual void rePosition();
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
+    virtual std::string getCaption() const;
     virtual ~SwigDirector_AGCheckBox();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
@@ -516,6 +514,8 @@ public:
     virtual bool eventQuitModal(AGEvent const *m);
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
+    virtual bool eventMouseButtonDown(AGEvent const *m);
+    virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
     virtual void drawAll(AGPainter &p);
@@ -523,51 +523,31 @@ public:
     virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
-    virtual void setHeight(int w);
-    virtual void setWidth(int w);
-    virtual bool eventMouseLeave();
     virtual bool eventHide();
+    virtual bool eventMouseLeave();
+    virtual void setWidth(int w);
+    virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
+    virtual void addChild(AGWidget *w);
 };
 
 
 class SwigDirector_AGRadioGroup : public AGRadioGroup, public Swig::Director {
 
 public:
-    SwigDirector_AGRadioGroup(VALUE self);
-    virtual bool eventResize(AGEvent const *m);
-    virtual bool eventSysWM(AGEvent const *m);
-    virtual bool eventQuitModal(AGEvent const *m);
-    virtual bool eventQuit(AGEvent const *m);
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool eventKeyUp(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
-    virtual bool eventActive(AGEvent const *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual void eventChange(std::string const &p);
-    virtual ~SwigDirector_AGRadioGroup();
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
-};
-
-
-class SwigDirector_AGRadio : public AGRadio, public Swig::Director {
-
-public:
-    SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect, AGRadioGroup *pGroup, std::string pName);
+    SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual bool eventShow();
-    virtual void rePosition();
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
+    virtual void eventChange(std::string const &p);
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual ~SwigDirector_AGRadio();
+    virtual ~SwigDirector_AGRadioGroup();
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
+    virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
@@ -577,7 +557,6 @@ public:
     virtual bool eventQuitModal(AGEvent const *m);
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -589,7 +568,47 @@ public:
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
+    virtual void addChild(AGWidget *w);
+};
+
+
+class SwigDirector_AGRadio : public AGRadio, public Swig::Director {
+
+public:
+    SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect);
+    virtual bool eventLostFocus();
+    virtual bool eventGotFocus();
+    virtual bool eventShow();
+    virtual int minHeight() const;
+    virtual int minWidth() const;
+    virtual bool canFocus() const;
+    virtual std::string getCaption() const;
+    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
+    virtual ~SwigDirector_AGRadio();
+    virtual bool eventMouseMotion(AGEvent const *m);
+    virtual bool acceptEvent(SDL_Event const *pEvent);
+    virtual bool eventActive(AGEvent const *m);
+    virtual bool eventKeyDown(AGEvent const *m);
+    virtual bool eventKeyUp(AGEvent const *m);
+    virtual bool eventQuit(AGEvent const *m);
+    virtual bool eventQuitModal(AGEvent const *m);
+    virtual bool eventSysWM(AGEvent const *m);
+    virtual bool eventResize(AGEvent const *m);
+    virtual bool eventMouseButtonDown(AGEvent const *m);
+    virtual bool eventMouseButtonUp(AGEvent const *m);
+    virtual bool eventMouseClick(AGEvent const *m);
+    virtual bool eventMouseEnter();
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
+    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual void setLeft(int x);
+    virtual void setTop(int y);
+    virtual bool eventHide();
+    virtual bool eventMouseLeave();
+    virtual void setWidth(int w);
+    virtual void setHeight(int w);
+    virtual void addChildBack(AGWidget *w);
+    virtual void addChild(AGWidget *w);
 };
 
 
@@ -1112,6 +1131,7 @@ public:
     virtual void updateSurface();
     virtual void loadXML(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
+    virtual void newFightJob(int p, AntEntity *target);
     virtual void assignJob(AntEntity *arg0);
     virtual void gotFight(AntEntity *arg0);
     virtual void newRestJob(int pTime);
@@ -1140,6 +1160,7 @@ public:
     virtual std::string xmlName() const;
     virtual void jobFinished();
     virtual void updateSurface();
+    virtual void newFightJob(int p, AntEntity *target);
     virtual void assignJob(AntEntity *arg0);
     virtual void gotFight(AntEntity *arg0);
     virtual void saveXML(xmlpp::Node &node) const;
