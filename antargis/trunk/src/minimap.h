@@ -38,7 +38,7 @@ class MiniMap:public AGWidget,public MapListener
     virtual void draw(AGPainter &p);
 
     void update();
-    void drawEntities(const AGPoint &p0);
+    void drawEntities(AGPainter &p);
 
     void mapUpdate()
     {

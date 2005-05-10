@@ -30889,13 +30889,13 @@ _wrap_MiniMap_update(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_MiniMap_drawEntities(int argc, VALUE *argv, VALUE self) {
     MiniMap *arg1 = (MiniMap *) 0 ;
-    AGPoint *arg2 = 0 ;
+    AGPainter *arg2 = 0 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MiniMap, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGPoint, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    (arg1)->drawEntities((AGPoint const &)*arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGPainter, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->drawEntities(*arg2);
     
     return Qnil;
 }

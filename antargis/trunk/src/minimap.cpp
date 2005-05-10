@@ -42,7 +42,7 @@ MiniMap::~MiniMap()
 {
 }
 
-void MiniMap::drawEntities(const AGPoint &p0)
+void MiniMap::drawEntities(AGPainter &p)
 {
 //  CTRACE;
   Pos2D maxPos=mMap->getMaxPos();
@@ -68,7 +68,8 @@ void MiniMap::drawEntities(const AGPoint &p0)
     x=(int)(pos.x*mSurface.width()/maxPos.x);
     y=(int)(mSurface.height()-1-pos.y*mSurface.height()/maxPos.y);
     
-    getScreen().drawRect(AGRect(p0.x+x,p0.y+y,2,2),c);
+    p.drawRect(AGRect(x+8,y+8,2,2),c);
+    //    getScreen().drawRect(AGRect(p0.x+x,p0.y+y,2,2),c);
   }
 }
 
@@ -104,7 +105,8 @@ void MiniMap::update()
 void MiniMap::draw(AGPainter &p)//const AGRect &r)
 {
 //  CTRACE;
-  AGRect mr=getRect();
+  AGRect mr=getRect().origin();
+  //  mustUpdate=true;
   if(mustUpdate)
     mTexture=AGTexture(mSurface);
   mustUpdate=false;
@@ -115,12 +117,17 @@ void MiniMap::draw(AGPainter &p)//const AGRect &r)
   mr.w-=16;
   mr.h-=16;
   
-  p.blit(mTexture,getRect());
-  p.blit(mTexture,mr);
+  p.blit(mTexture,mr);//mTexture.getRect());//,getRect());
+  //  p.blit(mTexture,mr);
 
   //  cdebug(mTexture.getRect());
+
+  //  cdebug(mTexture.getRect());
+  //  cdebug("Surface:"<<mSurface.getRect());
+  //  SDL_SaveBMP(mSurface.surface(),"test.bmp");
   
-  drawEntities(mr.getPosition());
+  
+  drawEntities(p);//mr.getPosition());
 }
 
 

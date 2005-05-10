@@ -49,24 +49,8 @@ class AntRubyView <CompleteIsoView
 				end
 			}
 			return
-			
-			# first take only first
-			#if list.length>0 then
-			#	e=list[0].get
-			#	inspectEntity(e)
-			#	if e.getType=="hero" then
-			#		@hero=$map.getById(e)
-			#		puts "HERO"
-			#		puts @hero
-			#	end
-			#end
 		elsif job=="doMove" then
-			if @hero then
-				pos=list[0].get.getPos2D
-				@hero.newHLMoveJob(0,pos,0)
-			end
-		elsif job=="doDismiss" then
-			doDismiss
+			doMove(list[0].get.getPos2D)
 		elsif job=="doRecruit" then
 			puts "RECRUITING"
 			if @hero then
@@ -88,6 +72,10 @@ class AntRubyView <CompleteIsoView
 	end
 	
 	def doMove(pos)
+		if @hero then
+			#pos=list[0].get.getPos2D
+			@hero.newHLMoveJob(0,pos,0)
+		end
 	end
 	def doDismiss()
 		if @hero
@@ -188,7 +176,6 @@ class AntButtonPanel<AGWidget
 		toAGButton(getChild("doAgg0")).setChecked(true)
 		toAGButton(getChild("doPoint")).setChecked(true)
 		@job="doPoint"
-		puts "ADD HANDLERS:"
 		@jobButtons.each {|b|
 			c=getChild(b)
 			puts c
@@ -200,10 +187,6 @@ class AntButtonPanel<AGWidget
 			puts c
 			addHandler(c,:sigClick,:sigAggSelected)
 		}
-		puts "HANDLERS:"
-		puts @handlers
-		puts "---"
-		puts self
 	end
 	def draw(p)
 		super(p)
@@ -224,28 +207,14 @@ class AntButtonPanel<AGWidget
 	end
 	def sigAggSelected(ename,cname,event,caller)
 		@agg=@aggButtons[cname]
-		puts "AGG:"+@agg.to_s
 		return true
 	end
 	
 	def getJob()
-		#@jobButtons.each{|b|
-		#	if toAGButton(getChild(b)).isChecked then
-		#		@job=b
-		#	end
-		#}
-		puts "BP::GETJOB:"
-		puts @job
 		return @job
 	end
 	
 	def getAggression()
-		#agg=1
-		#@aggButtons.each{|b,a|
-		#	if toAGButton(getChild(b)).isChecked then
-		#		agg=a
-		#	end
-		#}
 		return @agg
 	end
 end
