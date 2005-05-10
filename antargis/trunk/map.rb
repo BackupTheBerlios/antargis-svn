@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-class AntRubyMap<AntargisMap
+class AntRubyMap2<AntargisMap
 	def initialize(w,h)
 		super(w,h)
 		@ents={}
@@ -59,11 +59,106 @@ class AntRubyMap<AntargisMap
 		return e
 	end
 	
-	def insertEntity(e)
+	def getRuby(e)
+		return e
+	end
+	
+	def insertEntity2(e)
 		puts "INSERTENTITY"
 		puts e.getType
 		puts "getID:"+e.getID.to_s
 		rubyID=e.getVar("RubyID")
+		if rubyID=="" then
+			rubyID=getNewID.to_s
+			e.setVar("RubyID",rubyID)
+		end
+		if not @ents.key?(rubyID) then
+			puts "IF"
+			@ents[rubyID]=e
+		else
+			puts "ALREADY INSERTED:"+rubyID.to_s
+		end
+		super(e)
+	end
+	def removeEntity2(e)
+		@ents.delete(e.getID)
+		super(e)
+	end
+	def clear2
+		@ents.clear
+		super()
+	end
+	def getById2(ent)
+		@ents[ent.getVar("RubyID")]
+	end
+	def getRuby2(ent)
+		getById(ent)
+	end
+	def getEntity2(id)
+		getRuby(super(id))
+	end
+	def getByName2(name)
+		getRuby(super(name))
+	end
+end
+
+class AntRubyMap<AntargisMap
+	def initialize(w,h)
+		super(w,h)
+		@ents={}
+		GC.start
+	end
+	def loadEntity(node)
+		puts "LOADENT"
+		#GC.start
+		puts "LOADENT"
+		
+		puts "name:"
+		puts node.getName
+		puts "---"
+		if node.getName=="antTree" then
+			e=AntNewTree.new
+			puts "Raus"
+			return e
+		end
+		
+		e=super(node)
+		if e then return e end
+		if node.getName=="antNewMan" then
+			e=AntNewMan.new
+		end
+		if node.getName=="antNewHero" then
+			e=AntNewHero.new
+		end
+		if node.getName=="antNewHouse" then
+			e=AntNewHouse.new
+		end
+		if node.getName=="antNewStone" then
+			e=AntNewStone.new
+		end
+		puts "LOADENTITY:"
+		puts e
+		#GC.start
+		if e then
+			rubyID=e.getID.to_s
+			e.setVar("RubyID",rubyID)
+			@ents[rubyID]=e
+			puts e.getType
+			puts "getID:"+e.getID.to_s
+		end
+		return e
+	end
+	
+	def insertEntity(e)
+		GC.start
+		puts "INSERTENTITY"
+		puts e
+		puts "type:"
+		puts e.getType
+		puts "getID:"+e.getID.to_s
+		puts "rubyID..."
+		rubyID=e.getVar("RubyID")
+		puts "RUBYID"
 		if rubyID=="" then
 			rubyID=getNewID.to_s
 			e.setVar("RubyID",rubyID)
@@ -97,6 +192,7 @@ class AntRubyMap<AntargisMap
 		getRuby(super(name))
 	end
 end
+
 
 def getMap
 	$map

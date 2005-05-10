@@ -56,15 +56,15 @@ class MapListener
   virtual void mapUpdate();
 };
 
-class AntPlayer;
+//class AntPlayer;
 
 class AntargisMap
   {
     SplineMapD mHeight,mGrass;
     QuadTree<AntEntity> mEntities;
     std::list<AntEntity*> mEntList;
-    std::set
-      <AntPlayer*> mPlayers;
+    //    std::set
+    //      <AntPlayer*> mPlayers;
     std::map<int,AntEntity*> mEntityMap;
 
     bool mPaused;
@@ -112,14 +112,14 @@ class AntargisMap
 
     void clear();
 
-    void addPlayer(AntPlayer *p)
+    /*    void addPlayer(AntPlayer *p)
     {
       mPlayers.insert(p);
     }
     void removePlayer(AntPlayer *p)
     {
       mPlayers.erase(p);
-    }
+      }*/
     
     virtual void removeEntity(AntEntity *p);
 
@@ -139,7 +139,7 @@ class AntargisMap
 
     AntEntity *getByName(const std::string &pName);
 
-    void killHero(AntHero *h);
+    //    void killHero(AntHero *h);
 
     bool paused()
     {

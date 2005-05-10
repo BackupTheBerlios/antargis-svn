@@ -22,7 +22,7 @@
 #include "minimap.h"
 #include "map.h"
 #include "entities.h"
-#include "ant_man.h"
+//#include "ant_man.h"
 
 #include <ag_layoutfactory.h>
 
@@ -53,8 +53,10 @@ void MiniMap::drawEntities(const AGPoint &p0)
     AGColor c;
     int x,y;
     Pos2D pos=(*i)->getPos2D();
-    AntMan *m=dynamic_cast<AntMan*>(*i);
-    AntHero *h=dynamic_cast<AntHero*>(*i);
+    bool m=(*i)->getType()=="man";
+    bool h=(*i)->getType()=="hero";
+    //    AntMan *m=dynamic_cast<AntMan*>(*i);
+    //    AntHero *h=dynamic_cast<AntHero*>(*i);
     if(m)
       c=AGColor(0xFF,0,0);
     else if(h)

@@ -25,6 +25,9 @@
 # WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
 # could be that it has something to do with Init_Stack ???
 
+#GC.disable
+
+require 'ents.rb'
 
 class AntHLJob
 end
@@ -42,6 +45,7 @@ class AntHeroMoveJob<AntHLJob
 		@hero.getMen
 	end
 	def format
+		puts "FORMAT"
 		men=getMen
 		@dir=(@pos-@hero.getPos2D).normalized
 		men.each{|x|
@@ -52,7 +56,7 @@ class AntHeroMoveJob<AntHLJob
 	end
 	
 	def checkReady
-		GC.disable # disable GC, as gets called too often here
+		#GC.disable # disable GC, as gets called too often here
 		ready=true
 		men=getMen
 		men.each{|x|
@@ -68,7 +72,7 @@ class AntHeroMoveJob<AntHLJob
 				end
 			end
 		}
-		GC.enable
+		#GC.enable
 		return ready
 	end
 
@@ -89,17 +93,57 @@ class AntHeroMoveJob<AntHLJob
 	end
 end
 
-class AntHeroKillJob<AntHLJob
+class AntHeroFightJob<AntHeroMoveJob
 	def initialize(hero,target)
 		@hero=hero
 		@target=target
 		
 		@hero.newFightJob(0,target)
 	end
+end
+
+class AntHeroRecruitJob<AntHeroMoveJob
+	def initialize(hero,target,agg)
+		@moveReady=false
+		puts target
+		puts target
+		@target=target
+		puts self
+		puts "TARGET:"
+		puts target
+		puts @target
+		puts "HUHU"
+		@aggression=agg
+		@targetMen=target.menCount
+		puts @targetMen
+		puts agg
+		@want=@targetMen*agg/3
+		super(hero,0,target.getPos2D,40)
+	end
+	
+	def check
+		if not @moveReady then
+			if super then
+				@moveReady=true
+			end
+		end
+		if @moveReady
+			# recruit
+			if @want==0 then 
+				return true 
+			end
+			puts "TARGET:"
+			puts @target
+			man=@target.takeMan
+			man.setBoss(@hero)
+			@want=@want-1
+		end
+		return false
+	end
 	
 end
 
-class AntNewHero<AntEntity
+class AntNewHero<AntMyEntity
 	def initialize
 		super(Pos2D.new(0,0))
 		@men=[]
@@ -125,8 +169,13 @@ class AntNewHero<AntEntity
 		end
 	end
 	
+	def menCount
+		return @men.length
+	end
+	
 	def noJob
 		if @createMen>0
+			puts "CREATEMEN"
 			for i in 0..(@createMen-1) do
 				man=AntNewMan.new
 				man.setPos2D(getPos2D)
@@ -135,7 +184,12 @@ class AntNewHero<AntEntity
 			end
 			getMap.endChange
 			@createMen=0
+			puts "CREATEMEN READY"
 		end
+	end
+	
+	def getName
+		return getVar("name")
 	end
 	
 	def assignJob(e)
@@ -159,7 +213,22 @@ class AntNewHero<AntEntity
 	def newHLMoveJob(prio,pos,dist)
 		puts "NEWMOVEJOB:"+pos.to_s
 		@job=AntHeroMoveJob.new(self,prio,pos,dist)
-		
+	end
+	def newHLRecruitJob(target)
+		puts "NEWRECRUITJOB:"#+target.getName#pos.to_s
+		puts "TARGET:"
+		puts target
+		@job=AntHeroRecruitJob.new(self,target,$buttonPanel.getAggression)
+	end
+	
+	def newHLDismissJob()
+		agg=$buttonPanel.getAggression
+		c=menCount*agg/3
+		men=@men[0..c]
+		men.each{|m|
+			m.setNoBoss
+			@men.delete(m)
+		}
 		
 	end
 	
@@ -187,6 +256,7 @@ class AntNewHero<AntEntity
 			puts "ERROR in SitFormation!"
 			puts "MEN:"+@men.to_s
 			puts "man:"+man.to_s
+			exit
 		end
 	end
 	
@@ -204,6 +274,7 @@ class AntNewHero<AntEntity
 			return l+c
 		else
 			puts "ERROR in WalkFormation!"
+			exit
 		end
 	end
 	

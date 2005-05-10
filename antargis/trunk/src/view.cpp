@@ -24,8 +24,8 @@
 #include <ag_button.h>
 #include "tree.h"
 #include "entities.h"
-#include "ant_tree.h"
-#include "ant_house.h"
+//#include "ant_tree.h"
+//#include "ant_house.h"
 
 #include <ag_layout.h>
 #include <ag_tools.h>
@@ -428,6 +428,7 @@ void IsoView::checkView()
 CompleteIsoView::CompleteIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):IsoView(parent,r,p,map)
 {}
 
+/*
 AntHero *CompleteIsoView::getHero(std::vector<AntEntity*> &es)
 {
   std::vector<AntEntity*>::iterator i=es.begin();
@@ -438,7 +439,7 @@ AntHero *CompleteIsoView::getHero(std::vector<AntEntity*> &es)
         return e;
     }
   return 0;
-}
+  }*/
 
 bool CompleteIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
 {
@@ -607,20 +608,20 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   layout->getChild("tower")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   
 }
-bool EditIsoView::togglePoints(const char *name,const AGEvent *e,AGMessageObject *pCaller)
+bool EditIsoView::togglePoints(const std::string&name,const AGEvent *e,AGMessageObject *pCaller)
 {
   toggleShowPoints();
   return true;
 }
 
 
-bool EditIsoView::setRubber(const char *,const AGEvent *,AGMessageObject *pCaller)
+bool EditIsoView::setRubber(const std::string&,const AGEvent *,AGMessageObject *pCaller)
 {
   mAddEntity="rubber";
   return true;
 }
 
-bool EditIsoView::addEntity(const char *,const AGEvent *,AGMessageObject *pCaller)
+bool EditIsoView::addEntity(const std::string&,const AGEvent *,AGMessageObject *pCaller)
 {
   AGWidget *b=dynamic_cast<AGWidget*>(pCaller);
   if(b)
@@ -631,7 +632,7 @@ bool EditIsoView::addEntity(const char *,const AGEvent *,AGMessageObject *pCalle
   }
   return true;
 }
-bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCaller)
+bool EditIsoView::selectSize(const std::string&,const AGEvent *,AGMessageObject *pCaller)
 {
   CTRACE;
   cdebug(dynamic_cast<AGWidget*>(pCaller)->getName());
@@ -640,7 +641,7 @@ bool EditIsoView::selectSize(const char *,const AGEvent *,AGMessageObject *pCall
   mAddEntity="";
   return true;
 }
-bool EditIsoView::setAll(const char *,const AGEvent *,AGMessageObject *pCaller)
+bool EditIsoView::setAll(const std::string&,const AGEvent *,AGMessageObject *pCaller)
 {
   AGWidget *w=dynamic_cast<AGWidget*>(pCaller);
   if(w->getName()=="water")
@@ -708,12 +709,12 @@ void EditIsoView::editMarkClicked(const Pos2D &p,const AGSDLEvent *e)
 	    getMap()->removeEntity(*i);
 	}
     }
-  else if(mAddEntity=="tree")
+  /*  else if(mAddEntity=="tree")
     getMap()->insertEntity(new AntTree(p,rand()%11));
   else if(mAddEntity=="stones")
     getMap()->insertEntity(new AntDeco(p,rand()%2));
   else if(mAddEntity=="tower")
-    getMap()->insertEntity(new AntHouse(p,"tower2"));
+  getMap()->insertEntity(new AntHouse(p,"tower2"));*/
   update();
 }
 

@@ -82,8 +82,8 @@ OBJEXT = o
 PACKAGE = antargis
 RANLIB = ranlib
 RC = @RC@
-RUBY_INCLUDE_DIR = /usr/lib/ruby/1.8/i386-linux
-RUBY_INSTALL_DIR = /usr/local/lib/site_ruby/1.8/i386-linux
+RUBY_INCLUDE_DIR = /usr/lib/ruby/1.9/i386-linux
+RUBY_INSTALL_DIR = /usr/local/lib/site_ruby/1.9/i386-linux
 STRIP = strip
 VERSION = 0.0.1
 

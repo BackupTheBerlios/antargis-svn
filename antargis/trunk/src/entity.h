@@ -55,7 +55,7 @@ class AntEntity
   protected:
     Pos3D mPos;
     Job *mJob;
-    bool mJobFinished;
+    std::list<Job*> mJobFinished;
     float mEnergy;
     float mHealSpeed;
     bool onGround;
@@ -236,6 +236,8 @@ class AntEntity
     bool mRubyObject;
     VALUE mRUBY;
     bool mDeleted;
+
+    bool mMoving;
 
     friend void AntEntity_markfunc(void *ptr);
 

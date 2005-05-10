@@ -39,11 +39,11 @@ class AntDialog<AGLayout
 		sigClose
 	end
 	
-	def eventKeyDown(event)
-		puts "EVENTKEYDOWN"
-		super
-		puts event
-	end
+#	def eventKeyDown(event)
+#		puts "EVENTKEYDOWN"
+#		super
+#		puts event
+#	end
 	def eventKeyDown(event)
 		if super then return true end
 		e=toAGSDLEvent(event)

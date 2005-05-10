@@ -27,8 +27,8 @@ derive={}
 rlist={} # all, which have a mRUBY member
 
 
-filename="/usr/include/antargisgui/antargisgui.h"
-dir="/usr/include/antargisgui/"
+filename="/usr/local/include/antargisgui/antargisgui.h"
+dir="/usr/local/include/antargisgui/"
 f=File.open(filename)
 
 list=[]

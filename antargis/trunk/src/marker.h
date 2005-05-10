@@ -54,6 +54,13 @@
 	printf("register:AGCheckBox\n");
 }
 %markfunc AGCheckBox "AGWidget_markfunc"
+%exception AGRadioGroup::AGRadioGroup {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+	printf("register:AGRadioGroup\n");
+}
+%markfunc AGRadioGroup "AGWidget_markfunc"
 %exception AGDialog::AGDialog {
 	$action
 	result->mRUBY=self;

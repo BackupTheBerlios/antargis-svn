@@ -23,30 +23,33 @@
 #include "ag_debug.h"
 #include "jobs.h"
 
-AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
+AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mEnergy(1.0),mHealSpeed(0.3),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
 {
   mDirNum=1;
   mID=getMap()->getNewID();
   mSurface=0;
   mDeleted=false;
   mPlayerID=-1;
+  mMoving=false;
 }
-AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
+AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
 {
   mDirNum=1;
   mID=getMap()->getNewID();
   mSurface=0;
   mDeleted=false;
   mPlayerID=-1;
+  mMoving=false;
 }
 
-AntEntity::AntEntity():mPos(0,0,0),mJob(0),mJobFinished(false),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
+AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
 {
   mDirNum=1;
   mID=getMap()->getNewID();
   mSurface=0;
   mDeleted=false;
   mPlayerID=-1;
+  mMoving=false;
 }
 
 AntEntity::~AntEntity()
@@ -97,26 +100,21 @@ void AntEntity::setPos2D(const Pos2D &p)
 
 void AntEntity::setJob(Job *pJob)
 {
+  //  assert(!mMoving);
   //  rb_gc();
   if(mJob)
     {
       if((*mJob)<=(*pJob))
 	{
-	  if(!mJob->mRubyObject) // let ruby delete it
-	    {
-	      //	      cdebug("DELETE JOB:"<<mJob);
-	      delete mJob;
-	    }
+	  mJobFinished.push_back(mJob);
+	  //delete mJob;
 	}
       else
         {
 	  throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
-	  if(!pJob->mRubyObject) // let ruby delete it
-	    {
-	      //	      cdebug("DELETE JOB:"<<pJob);
-	      delete pJob;
-	    }
-          return;
+	  mJobFinished.push_back(pJob);
+	  //	      delete pJob;
+	  return;
         }
     }
   mJob=0;
@@ -124,16 +122,17 @@ void AntEntity::setJob(Job *pJob)
     mJob=pJob;
   else
     {
-      if(!pJob->mRubyObject) // let ruby delete it
+      //      if(!pJob->mRubyObject) // let ruby delete it
 	{
 	  cdebug("DELETE JOB:"<<pJob);
-	  delete pJob;
+	  mJobFinished.push_back(pJob);
+	  //	  delete pJob;
 	}
     }
   if(mJob)
     {
-      if(mJob->mRubyObject)
-	rb_gc_register_address(&(mJob->mRUBY));
+      //      if(mJob->mRubyObject)
+      //	rb_gc_register_address(&(mJob->mRUBY));
       //	rb_gc_mark(mJob->mRUBY);
       gotNewJob();
     }
@@ -148,12 +147,16 @@ void AntEntity::gotNewJob()
 /** do anything in given time frame */
 void AntEntity::move(float pTime)
 {
-  if(mJobFinished || mEnergy==0.0)
+  if(mJobFinished.size() || mEnergy==0.0)
     {
-      if(!mJob->mRubyObject)
-	delete mJob;
-      mJob=0;
-      mJobFinished=false;
+      std::list<Job*>::iterator i=mJobFinished.begin();
+      for(;i!=mJobFinished.end();i++)
+	delete *i;
+      mJobFinished.clear();
+      //      if(!mJob->mRubyObject)
+      //      delete mJob;
+      //      mJob=0;
+      //      mJobFinished=false;
     }
   else if(mEnergy>0.0)
     {
@@ -162,7 +165,11 @@ void AntEntity::move(float pTime)
         mEnergy=1.0;
     }
   if(mJob)
-    mJob->move(this,pTime);
+    {
+      mMoving=true;
+      mJob->move(this,pTime);
+      mMoving=false;
+    }
   else
     noJob();
     
@@ -176,8 +183,10 @@ Rect2D AntEntity::getRect() const
 
 void AntEntity::jobFinished()
 {
-  if(mJob)
-    mJobFinished=true;
+  mJobFinished.push_back(mJob);
+  mJob=0;
+  //  if(mJob)
+  //    mJobFinished=true;
 }
 
 void AntEntity::noJob()
@@ -186,7 +195,7 @@ void AntEntity::noJob()
 
 bool AntEntity::isJobFinished() const
 {
-  return mJobFinished;
+  return mJobFinished.size();
 }
 
 void AntEntity::mapChanged()
@@ -196,7 +205,7 @@ void AntEntity::mapChanged()
 }
 
 
-
+/*
 void AntEntity_markfunc(void *ptr)
 {
   //  cdebug("TRACE");
@@ -226,7 +235,7 @@ void AntEntity_markfunc(void *ptr)
   //  AntargisMap_markfunc(getMap());
 
 #endif
-}
+}*/
 
 void AntEntity::setType(const std::string &pType)
 {

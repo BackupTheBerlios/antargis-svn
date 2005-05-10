@@ -38,8 +38,8 @@ class Job
   virtual void jobFinished(AntEntity *e);
   bool operator<=(const Job &j) const;
   
-  VALUE mRUBY;
-  bool mRubyObject;
+  /*  VALUE mRUBY;
+      bool mRubyObject;*/
   bool mDeleted;
 };
 

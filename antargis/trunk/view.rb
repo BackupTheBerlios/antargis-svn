@@ -25,6 +25,7 @@
 class AntRubyView <CompleteIsoView
 	def initialize(p,rect,pos,map)
 		super(p,rect,pos,map)
+		$antView=self
 	end
 	def clickMap(pos)
 		if @hero then
@@ -34,26 +35,63 @@ class AntRubyView <CompleteIsoView
 	def clickEntities(list)
 		puts "CLICKENTS"
 		
-		list.each{|ents|
-			e=getMap.getRuby(ents.get)
-			if e.getType=="hero" then
-				@hero=e
-				inspectEntity(e)
-			elsif e.getType=="house" then
-				inspectEntity(e)
+		job=$buttonPanel.getJob
+		puts "JOB:"+job
+		if job=="doPoint" then
+			# select
+			list.each{|ents|
+				e=getMap.getRuby(ents.get)
+				if e.getType=="hero" then
+					@hero=e
+					inspectEntity(e)
+				elsif e.getType=="house" then
+					inspectEntity(e)
+				end
+			}
+			return
+			
+			# first take only first
+			#if list.length>0 then
+			#	e=list[0].get
+			#	inspectEntity(e)
+			#	if e.getType=="hero" then
+			#		@hero=$map.getById(e)
+			#		puts "HERO"
+			#		puts @hero
+			#	end
+			#end
+		elsif job=="doMove" then
+			if @hero then
+				pos=list[0].get.getPos2D
+				@hero.newHLMoveJob(0,pos,0)
 			end
-		}
-		return
-		
-		# first take only first
-		if list.length>0 then
-			e=list[0].get
-			inspectEntity(e)
-			if e.getType=="hero" then
-				@hero=$map.getById(e)
-				puts "HERO"
-				puts @hero
+		elsif job=="doDismiss" then
+			doDismiss
+		elsif job=="doRecruit" then
+			puts "RECRUITING"
+			if @hero then
+				# get house
+				house=nil
+				list.each{|ents|
+					e=getMap.getRuby(ents.get)
+					if e.getType=="house" then
+						house=e
+					end
+				}
+				if house then
+					puts "DOING RECRUIT"
+					puts house
+					@hero.newHLRecruitJob(house)
+				end
 			end
+		end
+	end
+	
+	def doMove(pos)
+	end
+	def doDismiss()
+		if @hero
+			@hero.newHLDismissJob
 		end
 	end
 	
@@ -87,11 +125,11 @@ class AntInventory<AGButton
 		super(p,rect,"")
 		setTheme("antButton")
 		$inventory=self
-		@resTypes=["wood","stone"]
+		@resTypes=["wood","stone","men"]
 		setEnabled(false)
 	end
 	def setValue(name,value)
-		if name=="wood" or name=="stone" then
+		if name=="wood" or name=="stone" or name=="men" then
 			w=toAGEdit(getChild(name))
 			w.setText value.to_s
 		end
@@ -110,6 +148,7 @@ class AntInventory<AGButton
 	def updateInspection
 		if @inspect then
 			res=@inspect.resource.getAll
+			res["men"]=@inspect.menCount
 			#$inventory.setTitle(e.getType)
 			reset
 			res.each{|a,b|
@@ -131,3 +170,93 @@ class AntInventoryCreator<AGLayoutCreator
 	end
 end
 $antInventoryCreator=AntInventoryCreator.new
+
+
+class AntButtonPanel<AGWidget
+	include AGHandler
+	def initialize(p,r)
+		super(p,r)
+		setName("ButtonPanel")
+		$buttonPanel=self
+		clearHandlers
+		@jobButtons=["doPoint","doMove","doFight","doRecruit","doDismiss","doInvent"]
+		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
+		@inited=false
+		@agg=1
+	end
+	def init
+		toAGButton(getChild("doAgg0")).setChecked(true)
+		toAGButton(getChild("doPoint")).setChecked(true)
+		@job="doPoint"
+		puts "ADD HANDLERS:"
+		@jobButtons.each {|b|
+			c=getChild(b)
+			puts c
+			addHandler(c,:sigClick,:sigJobSelected)
+		}
+		@aggButtons.each {|b,a|
+			puts b
+			c=getChild(b)
+			puts c
+			addHandler(c,:sigClick,:sigAggSelected)
+		}
+		puts "HANDLERS:"
+		puts @handlers
+		puts "---"
+		puts self
+	end
+	def draw(p)
+		super(p)
+		if not @inited then
+			@inited=true
+			init
+		end
+	end
+	
+	def sigJobSelected(ename,cname,event,caller)
+		@job=cname
+		puts "JOB:"+@job
+		
+		if @job=="doDismiss" then
+			$antView.doDismiss
+		end
+		return true
+	end
+	def sigAggSelected(ename,cname,event,caller)
+		@agg=@aggButtons[cname]
+		puts "AGG:"+@agg.to_s
+		return true
+	end
+	
+	def getJob()
+		#@jobButtons.each{|b|
+		#	if toAGButton(getChild(b)).isChecked then
+		#		@job=b
+		#	end
+		#}
+		puts "BP::GETJOB:"
+		puts @job
+		return @job
+	end
+	
+	def getAggression()
+		#agg=1
+		#@aggButtons.each{|b,a|
+		#	if toAGButton(getChild(b)).isChecked then
+		#		agg=a
+		#	end
+		#}
+		return @agg
+	end
+end
+
+class AntButtonPanelCreator<AGLayoutCreator
+	def initialize
+		super("antButtonPanel")
+	
+	end
+	def create(p,r,n)
+		return AntButtonPanel.new(p,r)
+	end
+end
+$antBPCreator=AntButtonPanelCreator.new

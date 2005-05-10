@@ -25,10 +25,17 @@
 # WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
 # could be that it has something to do with Init_Stack ???
 
-require 'ant_hero.rb'
 
+class AntMyEntity<AntEntity
+	def initialize(p)
+		super(p)
+		mRUBY=self
+	end
+end
+
+require 'ant_hero.rb'
 # MAN
-class AntNewMan<AntEntity
+class AntNewMan<AntMyEntity
 	def initialize()
 		super(Pos2D.new(0,0))
 		setType("man")
@@ -40,6 +47,15 @@ class AntNewMan<AntEntity
 	
 	def noJob
 		jobFinished
+	end
+	
+	def setNoBoss()
+		setVar("bossName","")
+	end
+	
+	def setBoss(hero)
+		setVar("bossName",hero.getName)
+		hero.signUp(self)
 	end
 	
 	#def gotNewJob
@@ -92,7 +108,7 @@ class AntNewMan<AntEntity
 end
 
 
-class AntNewTree<AntEntity
+class AntNewTree<AntMyEntity
 	def initialize()
 		super(Pos2D.new(0,0))
 		@typeID=0
@@ -117,7 +133,7 @@ class AntNewTree<AntEntity
 	end
 end
 
-class AntNewStone<AntEntity
+class AntNewStone<AntMyEntity
 	def initialize()
 		super(Pos2D.new(0,0))
 		@typeID=0
@@ -171,6 +187,17 @@ class AntNewHouse<AntEntity
 	def xmlName
 		return "antNewHouse"
 	end
+	
+	def menCount
+		@men.length
+	end
+	
+	def takeMan
+		m=@men[0]
+		@men.delete(m)
+		return m
+	end
+	
 	def assignJob(e)
 		if atHome(e) then
 			# is home:

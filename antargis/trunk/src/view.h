@@ -145,11 +145,11 @@ class EditIsoView: public CompleteIsoView
 
     void toggleEdit();
     
-    bool selectSize(const char *name,const AGEvent *e,AGMessageObject *pCaller);
-    bool setAll(const char *name,const AGEvent *e,AGMessageObject *pCaller);
-    bool addEntity(const char *name,const AGEvent *e,AGMessageObject *pCaller);
-    bool setRubber(const char *name,const AGEvent *e,AGMessageObject *pCaller);
-    bool togglePoints(const char *name,const AGEvent *e,AGMessageObject *pCaller);
+    bool selectSize(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
+    bool setAll(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
+    bool addEntity(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
+    bool setRubber(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
+    bool togglePoints(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
 
     virtual void editMarkClicked(const Pos2D &p,const AGSDLEvent *e);
 

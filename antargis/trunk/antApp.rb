@@ -54,7 +54,20 @@ module AGHandler
 		end
 		callerName=toAGWidget(caller).getName
 		evName=callerName+":"+name
+		
+		puts "sELF:"
+		puts self
+		puts "evName:"
+		puts evName
+		puts @handlers
+		@handlers.each{|h|
+			puts "HANDLER:"
+			puts h
+		}
+		puts "---"
+		
 		if @handlers.has_key?(evName) then
+			puts "HANDLER FOUND"
 			m=method(@handlers[evName])
 			if m.arity==4 then
 				if self.send(@handlers[evName],name,callerName,event,caller) then
@@ -65,6 +78,8 @@ module AGHandler
 					return true
 				end
 			end
+		else
+			puts "HANDLER NOT FOUND"
 		end
 		return super(name,event,caller)
 	end

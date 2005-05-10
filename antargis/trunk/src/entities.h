@@ -26,7 +26,7 @@
 #include "voxel_gen.h"
 #include "tree.h"
 #include "map.h"
-#include "ant_hero.h"
+//#include "ant_hero.h"
 
 #include "ag_xml.h"
 
@@ -65,7 +65,7 @@ class AntDeco:public AntEntity
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);
   };
-
+/*
 // Computer player
 class AntPlayer
   {
@@ -91,7 +91,7 @@ class AntPlayer
       mHeroes.erase(pHero);
     }
 
-    void move(float /*pTime*/)
+    void move(float pTime)
     {
       // so add some heuristic here
 
@@ -129,6 +129,6 @@ class AntPlayer
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);
   };
-
+*/
 
 #endif

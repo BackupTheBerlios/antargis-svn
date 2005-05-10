@@ -93,8 +93,8 @@ class SwigDirector_AGListener : public AGListener, public Swig::Director {
 
 public:
     SwigDirector_AGListener(VALUE self);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual ~SwigDirector_AGListener();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -103,7 +103,7 @@ class SwigDirector_AGCPPListener : public AGCPPListener, public Swig::Director {
 public:
     SwigDirector_AGCPPListener(VALUE self);
     virtual ~SwigDirector_AGCPPListener();
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) const;
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) const;
 };
 
 
@@ -123,7 +123,7 @@ public:
     virtual bool eventActive(AGEvent const *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual ~SwigDirector_AGMessageObject();
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -152,9 +152,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -192,9 +192,9 @@ public:
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual bool eventHide();
@@ -224,7 +224,7 @@ public:
     virtual bool eventFrame(float pTime);
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
 };
 
 
@@ -253,9 +253,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -293,9 +293,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -333,9 +333,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -389,9 +389,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -428,9 +428,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -477,10 +477,10 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventKeyUp(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
     virtual void drawBackground(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -518,9 +518,9 @@ public:
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual bool eventHide();
@@ -558,9 +558,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -598,9 +598,9 @@ public:
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual bool eventHide();
@@ -622,8 +622,8 @@ public:
     virtual int minHeight() const;
     virtual int minWidth() const;
     virtual bool canFocus() const;
-    virtual ~SwigDirector_AGTable();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
+    virtual ~SwigDirector_AGTable();
     virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
@@ -637,9 +637,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual bool eventMouseLeave();
@@ -676,9 +676,9 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseButtonDown(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual bool eventMouseLeave();
@@ -715,9 +715,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -754,9 +754,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -793,9 +793,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -840,9 +840,9 @@ public:
     virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -899,9 +899,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -957,9 +957,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -1007,9 +1007,9 @@ public:
     virtual bool eventSysWM(AGEvent const *m);
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -1047,10 +1047,10 @@ public:
     virtual bool eventResize(AGEvent const *m);
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void clickEntities(std::vector<AntEntityPtr > const &ents);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void clickMap(Pos2D const &p);
     virtual void setLeft(int x);
     virtual void setTop(int y);
@@ -1090,10 +1090,10 @@ public:
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void clickEntities(std::vector<AntEntityPtr > const &ents);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual bool signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void clickMap(Pos2D const &p);
     virtual void setLeft(int x);
     virtual void setTop(int y);
@@ -1134,37 +1134,6 @@ public:
     virtual void newFightJob(int p, AntEntity *target);
     virtual void assignJob(AntEntity *arg0);
     virtual void gotFight(AntEntity *arg0);
-    virtual void newRestJob(int pTime);
-};
-
-
-class SwigDirector_AntMan : public AntMan, public Swig::Director {
-
-public:
-    SwigDirector_AntMan(VALUE self);
-    SwigDirector_AntMan(VALUE self, Pos2D const &p, int pTypeID, AntBoss *pBoss);
-    virtual void newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat);
-    virtual void setDirection(Pos2D const &p);
-    virtual VoxelImage *getSurface();
-    virtual AntHero *getHero();
-    virtual void move(float pTime);
-    virtual AntBoss *getBoss();
-    virtual void noJob();
-    virtual void gotNewJob();
-    virtual ~SwigDirector_AntMan();
-    virtual int getVirtualY() const;
-    virtual std::string getSurfaceName() const;
-    virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
-    virtual std::string getTexture() const;
-    virtual float getHealSpeed() const;
-    virtual std::string xmlName() const;
-    virtual void jobFinished();
-    virtual void updateSurface();
-    virtual void newFightJob(int p, AntEntity *target);
-    virtual void assignJob(AntEntity *arg0);
-    virtual void gotFight(AntEntity *arg0);
-    virtual void saveXML(xmlpp::Node &node) const;
-    virtual void loadXML(xmlpp::Node const &node);
     virtual void newRestJob(int pTime);
 };
 

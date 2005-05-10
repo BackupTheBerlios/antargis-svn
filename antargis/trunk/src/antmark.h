@@ -14,21 +14,21 @@
 	//printf("setting mruby:widget\n");
     }
 
-%markfunc AntEntity "AntEntity_markfunc"
+//%markfunc AntEntity "AntEntity_markfunc"
 %exception AntEntity::AntEntity {
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
 	//printf("setting mruby:widget\n");
     }
-%markfunc AntHouse "AntEntity_markfunc"
+/*%markfunc AntHouse "AntEntity_markfunc"
 %exception AntHouse::AntHouse {
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
 	//printf("setting mruby:widget\n");
     }
-%markfunc AntMan "AntEntity_markfunc"
+//%markfunc AntMan "AntEntity_markfunc"
 %exception AntMan::AntMan {
         $action
         result->mRUBY = self;
@@ -73,6 +73,6 @@
 	result->mRubyObject=true;
 	//printf("setting mruby:widget\n");
     }
-
+*/
 
 %markfunc AntargisMap "AntargisMap_markfunc";

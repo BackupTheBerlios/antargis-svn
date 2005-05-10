@@ -25,9 +25,11 @@
 					<button theme="antButton" name="invTitle" geometry="(0,0,208,26)" enabled="false"/>
 					<text col="0" row="1" caption="Wood" align="left"/>
 					<text col="0" row="2" caption="Stone" align="left"/>
+					<text col="0" row="3" caption="Men" align="left"/>
 					
 					<text col="1" row="1" caption="0" align="right" name="wood"/>
 					<text col="1" row="2" caption="0" align="right" name="stone"/>
+					<text col="1" row="3" caption="0" align="right" name="men"/>
 				</table>
 			</antInventory>
 			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>

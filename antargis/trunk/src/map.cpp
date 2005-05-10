@@ -23,9 +23,9 @@
 #include <ag_fs.h>
 #include <cstdlib>
 #include "entities.h"
-#include "ant_tree.h"
-#include "ant_man.h"
-#include "ant_house.h"
+//#include "ant_tree.h"
+//#include "ant_man.h"
+//#include "ant_house.h"
 #include <map>
 
 /************************************************************************
@@ -149,7 +149,7 @@ void AntargisMap::insertEntity(AntEntity *e)
       VALUE rubyAnimal = e->mRUBY;
 
       //rb_gc_register_address(&rubyAnimal);
-      rb_gc_mark(rubyAnimal);
+      //      rb_gc_mark(rubyAnimal);
       cdebug("mark:");
    }
 
@@ -176,11 +176,11 @@ void AntargisMap::move(float pTime)
   // first move computer-players (they decide what to do)
   //  rb_eval_string("GC.disable");
 
-  std::set
+  /*  std::set
     <AntPlayer*>::iterator j=mPlayers.begin();
   for(;j!=mPlayers.end();j++)
     (*j)->move(pTime);
-
+  */
 
   // now move all entities
 
@@ -194,7 +194,7 @@ void AntargisMap::move(float pTime)
   //  rb_eval_string("GC.enable");
 }
 
-
+/*
 void AntargisMap::killHero(AntHero *h)
 {
   std::set
@@ -203,7 +203,7 @@ void AntargisMap::killHero(AntHero *h)
   for(;i!=mPlayers.end();i++)
     (*i)->removeHero(h);
 
-}
+    }*/
 
 void AntargisMap::setAllWater()
 {
@@ -329,13 +329,13 @@ void AntargisMap::saveXML(xmlpp::Node &node) const
     gmap.setContent(gmaps.str());
     
     // players
-    std::set<AntPlayer*>::const_iterator k=mPlayers.begin();
+    /*    std::set<AntPlayer*>::const_iterator k=mPlayers.begin();
     
     for(;k!=mPlayers.end();k++)
     {
       xmlpp::Node &child=node.newChild("player");
       (*k)->saveXML(child);
-    }
+      }*/
 
   }
 
@@ -343,6 +343,7 @@ AntEntity *AntargisMap::loadEntity(const xmlpp::Node &node)
 {
   std::string n=node.getName();
   AntEntity *e=0;
+  /*
   if(n=="antTree")
     e=new AntTree;
   else if(n=="antDeco")
@@ -352,7 +353,7 @@ AntEntity *AntargisMap::loadEntity(const xmlpp::Node &node)
   else if(n=="antMan")
     e=new AntMan;
   else if(n=="antHouse")
-    e=new AntHouse;
+  e=new AntHouse;*/
   return e;
 }
 
@@ -361,6 +362,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
   xmlpp::Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     {
+      TRACE;
       AntEntity *e=0;
       if(i->getName()=="heightMap")
         {
@@ -396,13 +398,13 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
         e=new AntMan;
        else if(i->getName()=="antHouse")
        e=new AntHouse;*/
-      else if(i->getName()=="player")
+      /*      else if(i->getName()=="player")
         {
           AntPlayer *p=new AntPlayer(-1);
           p->loadXML(*i);
           mPlayers.insert(p);
         }
-       
+      */
        if(e)
        {
         e->loadXML(*i);
@@ -419,7 +421,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
 void AntargisMap::clear()
 {
   CTRACE;
-  mPlayers.clear();
+  //  mPlayers.clear();
   mEntities.clear();
   mEntList.clear();
   mEntityMap.clear();
@@ -488,7 +490,7 @@ void AntDeco::loadXML(const xmlpp::Node &node)
 /************************************************************************
 * AntPlayer
 ************************************************************************/
-void AntPlayer::saveXML(xmlpp::Node &node) const
+/*void AntPlayer::saveXML(xmlpp::Node &node) const
 {
    node.set("playerID",toString(id));
    std::set<AntHero*>::const_iterator i=mHeroes.begin();
@@ -516,7 +518,7 @@ void AntPlayer::loadXML(const xmlpp::Node &node)
     }
   }
 }
-
+*/
 // MapListener
 MapListener::MapListener()
 {
@@ -537,7 +539,7 @@ bool markingFinished=true;
 
 void AntargisMap_markfunc(void *ptr)
 {
-  //  cdebug("TRACE");
+  cdebug("TRACE:"<<ptr);
   if(!ptr)
     return;
   if(!markingFinished)

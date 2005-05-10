@@ -21,7 +21,8 @@
 #include "jobs.h"
 #include "map.h"
 
-Job::Job(int p):priority(p),mRubyObject(false),mDeleted(false)
+Job::Job(int p):priority(p),mDeleted(false)
+
 {}
 void Job::move(AntEntity *,float ptime)
 {}
@@ -58,6 +59,7 @@ MoveJob::~MoveJob()
 // Jobs
 void MoveJob::move(AntEntity *e,float ptime)
 {
+  assert(!mDeleted);
   float aspeed;
   
   if(mRun && e->getCondition()>0.0)
@@ -72,17 +74,20 @@ void MoveJob::move(AntEntity *e,float ptime)
   assert(this);
   moveBy(e,ptime,aspeed); // use rest of time
   assert(this);
+  assert(!mDeleted);
   
 }
 
 Pos2D MoveJob::getDirection(const AntEntity *e) const
 {
+  assert(!mDeleted);
   return (mTarget-e->getPos2D()).normalized();
 }
 
 
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
+  assert(!mDeleted);
   Pos2D diff=e->getPos2D()-mTarget;
   float norm=diff.norm();
   //  cdebug("norm:"<<norm);
@@ -103,6 +108,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
       //      CTRACE;
       jobFinished(e);
     }
+  assert(!mDeleted);
 }
 
 /************************************************************************
@@ -116,6 +122,7 @@ FightJob::~FightJob()
 // FightJobs
 void FightJob::move(AntEntity *e,float ptime)
 {
+  assert(!mDeleted);
   if(mTarget->getEnergy()==0.0)
     jobFinished(e);
   // if target is too far away run there, otherwise fight
@@ -132,6 +139,7 @@ void FightJob::move(AntEntity *e,float ptime)
       mTarget->decEnergy(ptime*strength);
       mTarget->gotFight(e);
     }
+  assert(!mDeleted);
 }
 
 
@@ -147,13 +155,17 @@ FetchJob::~FetchJob()
 }
 void FetchJob::move(AntEntity *e,float ptime)
 {
+  assert(!mDeleted);
   MoveJob::move(e,ptime);
+  assert(!mDeleted);
 }
 
 void FetchJob::jobFinished(AntEntity *e)
 {
+  assert(!mDeleted);
   e->resource.add(mWhat,1);
   MoveJob::jobFinished(e);
+  assert(!mDeleted);
 }
 
 
@@ -169,9 +181,11 @@ RestJob::~RestJob()
 }
 void RestJob::move(AntEntity *e,float ptime)
 {
+  assert(!mDeleted);
   mTime-=ptime;
   if(mTime<0)
     jobFinished(e);
+  assert(!mDeleted);
   
 }
 
