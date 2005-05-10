@@ -35,6 +35,7 @@ class AGTable:public AGWidget
 {
  public:
   AGTable(AGWidget *pWidget,const AGRect &pRect);
+  virtual ~AGTable();
 
   void addFixedColumn(float size);
   void addFixedRow(float size);

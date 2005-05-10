@@ -298,7 +298,7 @@ void AGWidget::addChild(AGWidget *w)
   if(w->mRubyObject)
     {
       VALUE rubyAnimal = w->mRUBY;
-      rb_gc_mark(rubyAnimal);
+      //      rb_gc_mark(rubyAnimal);
       cdebug("mark:"<<w->getName());
    }
 

@@ -25,7 +25,7 @@ AGImage::AGImage(AGWidget *pParent,const AGPoint &p,AGSurface pSurface,bool pTil
   AGWidget(pParent,pSurface.getRect()+p),
   mTexture(pSurface),mTile(pTile)
 {
-  CTRACE;
+  //  CTRACE;
   if(pRect!=pSurface.getRect() && pRect.w!=0 && pRect.h!=0)
     {
       mSrcRect=pRect;

@@ -43,7 +43,7 @@ void AGTheme::setFont(const std::string &pName,AGFont pFont)
 }
 void AGTheme::setColor(const std::string &pName,AGColor pColor)
 {
-  cdebug(pName);
+  //  cdebug(pName);
   mColors[pName]=pColor;
   //  cout<<"setting:"<<pName<<":"<<pColor.toString()<<endl;
 }
@@ -51,7 +51,7 @@ void AGTheme::setColor(const std::string &pName,AGColor pColor)
 
 AGFont AGTheme::getFont(const std::string &pName)
 {
-  cdebug(pName);
+  //  cdebug(pName);
   if(mFonts.find(pName)==mFonts.end())
     return mFonts[trunk(pName)];
   return mFonts[pName];

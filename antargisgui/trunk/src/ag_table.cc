@@ -27,6 +27,11 @@ AGTable::AGTable(AGWidget *pWidget,const AGRect &pRect):
 {
 }
 
+AGTable::~AGTable()
+{
+  CTRACE;
+}
+
 void AGTable::addFixedColumn(float size)
 {
   cdebug(size);

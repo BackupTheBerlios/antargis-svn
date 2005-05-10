@@ -109,7 +109,8 @@ AGListener::AGListener()
 AGListener::~AGListener()
 {
 }
-bool AGListener::signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller)
+
+bool AGListener::signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller)
 {
   return false;
 }

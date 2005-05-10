@@ -21,8 +21,8 @@
 
 #!/usr/bin/ruby
 
-require 'libantargis'
-include Libantargis
+#require 'libantargis'
+#include Libantargis
 #
 # EVENT_HANDLERS
 #
@@ -54,6 +54,11 @@ module AGHandler
 		end
 		callerName=toAGWidget(caller).getName
 		evName=callerName+":"+name
+		puts self
+		puts self.methods
+		puts "varS:"
+		puts instance_variables
+		puts @handlers
 		if @handlers.has_key?(evName) then
 			m=method(@handlers[evName])
 			if m.arity==4 then

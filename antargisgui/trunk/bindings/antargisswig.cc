@@ -1810,7 +1810,12 @@ SwigDirector_AGListener::SwigDirector_AGListener(VALUE self): AGListener(), Swig
 
 
 
-bool SwigDirector_AGListener::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
+SwigDirector_AGListener::~SwigDirector_AGListener() {
+}
+
+bool SwigDirector_AGListener::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -1822,7 +1827,7 @@ bool SwigDirector_AGListener::signal(char const *pName, AGEvent const *m, AGMess
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    obj0 = rb_str_new2(pName);
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -1836,9 +1841,6 @@ bool SwigDirector_AGListener::signal(char const *pName, AGEvent const *m, AGMess
 }
 
 
-SwigDirector_AGListener::~SwigDirector_AGListener() {
-}
-
 SwigDirector_AGCPPListener::SwigDirector_AGCPPListener(VALUE self) : Swig::Director(self) {
     
 }
@@ -1848,7 +1850,9 @@ SwigDirector_AGCPPListener::SwigDirector_AGCPPListener(VALUE self) : Swig::Direc
 SwigDirector_AGCPPListener::~SwigDirector_AGCPPListener() {
 }
 
-bool SwigDirector_AGCPPListener::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) const {
+bool SwigDirector_AGCPPListener::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) const {
+    std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -1860,7 +1864,7 @@ bool SwigDirector_AGCPPListener::signal(char const *pName, AGEvent const *m, AGM
     if (swig_get_up()) {
         throw Swig::DirectorPureVirtualException();
     }
-    obj0 = rb_str_new2(pName);
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -2119,7 +2123,9 @@ bool SwigDirector_AGMessageObject::acceptEvent(SDL_Event const *pEvent) {
 SwigDirector_AGMessageObject::~SwigDirector_AGMessageObject() {
 }
 
-bool SwigDirector_AGMessageObject::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
+bool SwigDirector_AGMessageObject::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -2131,7 +2137,7 @@ bool SwigDirector_AGMessageObject::signal(char const *pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    obj0 = rb_str_new2(pName);
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -2528,6 +2534,40 @@ bool SwigDirector_AGWidget::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGWidget::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGWidget::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -2551,38 +2591,6 @@ void SwigDirector_AGWidget::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGWidget::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -3091,6 +3099,40 @@ bool SwigDirector_AGButton::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGButton::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGButton::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -3114,38 +3156,6 @@ void SwigDirector_AGButton::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGButton::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -3538,7 +3548,9 @@ bool SwigDirector_AGApplication::eventIdle() {
 }
 
 
-bool SwigDirector_AGApplication::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
+bool SwigDirector_AGApplication::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -3551,7 +3563,7 @@ bool SwigDirector_AGApplication::signal(char const *pName, AGEvent const *m, AGM
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    obj0 = rb_str_new2(pName);
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -3953,6 +3965,40 @@ bool SwigDirector_AGText::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGText::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGText::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -3976,38 +4022,6 @@ void SwigDirector_AGText::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGText::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -4521,6 +4535,40 @@ bool SwigDirector_AGVTiler::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGVTiler::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGVTiler::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -4544,38 +4592,6 @@ void SwigDirector_AGVTiler::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGVTiler::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -5089,6 +5105,40 @@ bool SwigDirector_AGHTiler::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGHTiler::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGHTiler::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -5112,38 +5162,6 @@ void SwigDirector_AGHTiler::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGHTiler::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -5675,6 +5693,40 @@ bool SwigDirector_AGMenu::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGMenu::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGMenu::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -5698,38 +5750,6 @@ void SwigDirector_AGMenu::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGMenu::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -6232,6 +6252,40 @@ bool SwigDirector_AGScreenWidget::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGScreenWidget::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGScreenWidget::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -6255,38 +6309,6 @@ void SwigDirector_AGScreenWidget::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGScreenWidget::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -6841,6 +6863,40 @@ bool SwigDirector_AGEdit::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGEdit::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGEdit::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -6877,38 +6933,6 @@ void SwigDirector_AGEdit::drawBackground(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("drawBackground"), 1,obj0);
-}
-
-
-bool SwigDirector_AGEdit::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -7429,6 +7453,40 @@ bool SwigDirector_AGCheckBox::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGCheckBox::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGCheckBox::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -7452,38 +7510,6 @@ void SwigDirector_AGCheckBox::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGCheckBox::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -8001,6 +8027,40 @@ bool SwigDirector_AGRadioGroup::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGRadioGroup::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGRadioGroup::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -8024,38 +8084,6 @@ void SwigDirector_AGRadioGroup::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGRadioGroup::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -8576,6 +8604,40 @@ bool SwigDirector_AGRadio::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGRadio::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGRadio::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -8599,38 +8661,6 @@ void SwigDirector_AGRadio::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGRadio::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -8834,9 +8864,6 @@ bool SwigDirector_AGTable::canFocus() const {
 }
 
 
-SwigDirector_AGTable::~SwigDirector_AGTable() {
-}
-
 bool SwigDirector_AGTable::eventDragBy(AGEvent const *event, AGPoint const &pDiff) {
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -8861,6 +8888,9 @@ bool SwigDirector_AGTable::eventDragBy(AGEvent const *event, AGPoint const &pDif
     return (bool) c_result;
 }
 
+
+SwigDirector_AGTable::~SwigDirector_AGTable() {
+}
 
 bool SwigDirector_AGTable::eventMouseButtonUp(AGEvent const *m) {
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
@@ -9133,6 +9163,40 @@ bool SwigDirector_AGTable::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGTable::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGTable::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -9156,38 +9220,6 @@ void SwigDirector_AGTable::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGTable::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -9690,6 +9722,40 @@ bool SwigDirector_AGWindow::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGWindow::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGWindow::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -9713,38 +9779,6 @@ void SwigDirector_AGWindow::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGWindow::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -10247,6 +10281,40 @@ bool SwigDirector_AGImage::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGImage::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGImage::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10270,38 +10338,6 @@ void SwigDirector_AGImage::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGImage::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -10804,6 +10840,40 @@ bool SwigDirector_AGCaption::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGCaption::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGCaption::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10827,38 +10897,6 @@ void SwigDirector_AGCaption::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGCaption::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -11361,6 +11399,40 @@ bool SwigDirector_AGLayout::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGLayout::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGLayout::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -11384,38 +11456,6 @@ void SwigDirector_AGLayout::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGLayout::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -11951,6 +11991,40 @@ bool SwigDirector_AGListBox::eventMouseEnter() {
 }
 
 
+bool SwigDirector_AGListBox::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
+    Swig::Director * director__p_AGEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    Swig::Director * director__p_AGMessageObject = 0 ;
+    VALUE obj2 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListener::signal(pName,m,pCaller);
+    }
+    obj0=rb_str_new2(pName.c_str());
+    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
+    if (!director__p_AGEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
+    } else {
+        obj1 = director__p_AGEvent->swig_get_self();
+    }
+    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
+    if (!director__p_AGMessageObject) {
+        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
+    } else {
+        obj2 = director__p_AGMessageObject->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 void SwigDirector_AGListBox::drawAll(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -11974,38 +12048,6 @@ void SwigDirector_AGListBox::draw(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-bool SwigDirector_AGListBox::signal(char const *pName, AGEvent const *m, AGMessageObject *pCaller) {
-    VALUE obj0 = Qnil ;
-    AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
-    Swig::Director * director__p_AGEvent = 0 ;
-    VALUE obj1 = Qnil ;
-    Swig::Director * director__p_AGMessageObject = 0 ;
-    VALUE obj2 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGListener::signal(pName,m,pCaller);
-    }
-    obj0 = rb_str_new2(pName);
-    director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
-    if (!director__p_AGEvent) {
-        obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
-    } else {
-        obj1 = director__p_AGEvent->swig_get_self();
-    }
-    director__p_AGMessageObject = dynamic_cast<Swig::Director *>(pCaller);
-    if (!director__p_AGMessageObject) {
-        obj2 = SWIG_NewPointerObj(pCaller, SWIGTYPE_p_AGMessageObject, 0);
-    } else {
-        obj2 = director__p_AGMessageObject->swig_get_self();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("signal"), 3,obj0,obj1,obj2);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
 }
 
 
@@ -14458,22 +14500,30 @@ free_AGListener(AGListener *arg1) {
 static VALUE
 _wrap_AGListener_signal(int argc, VALUE *argv, VALUE self) {
     AGListener *arg1 = (AGListener *) 0 ;
-    char *arg2 = (char *) 0 ;
+    std::string *arg2 = 0 ;
     AGEvent *arg3 = (AGEvent *) 0 ;
     AGMessageObject *arg4 = (AGMessageObject *) 0 ;
     bool result;
+    std::string temp2 ;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListener, 1);
-    arg2 = StringValuePtr(argv[0]);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGEvent, 1);
     SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGMessageObject, 1);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (bool)(arg1)->signal((char const *)arg2,(AGEvent const *)arg3,arg4);
+    result = (bool)(arg1)->signal((std::string const &)*arg2,(AGEvent const *)arg3,arg4);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -14503,22 +14553,30 @@ free_AGCPPListener(AGCPPListener *arg1) {
 static VALUE
 _wrap_AGCPPListener_signal(int argc, VALUE *argv, VALUE self) {
     AGCPPListener *arg1 = (AGCPPListener *) 0 ;
-    char *arg2 = (char *) 0 ;
+    std::string *arg2 = 0 ;
     AGEvent *arg3 = (AGEvent *) 0 ;
     AGMessageObject *arg4 = (AGMessageObject *) 0 ;
     bool result;
+    std::string temp2 ;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGCPPListener, 1);
-    arg2 = StringValuePtr(argv[0]);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGEvent, 1);
     SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGMessageObject, 1);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (bool)((AGCPPListener const *)arg1)->signal((char const *)arg2,(AGEvent const *)arg3,arg4);
+    result = (bool)((AGCPPListener const *)arg1)->signal((std::string const &)*arg2,(AGEvent const *)arg3,arg4);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -21434,16 +21492,21 @@ _wrap_new_AGCheckBox(int argc, VALUE *argv, VALUE self) {
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect, 1);
         if (ptr) arg3 = *ptr;
     }
-    char *classname = "Libantargisruby::AGCheckBox";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (AGCheckBox *)new SwigDirector_AGCheckBox(arg1,arg2,arg3);
-        
-    } else {
-        result = (AGCheckBox *)new AGCheckBox(arg2,arg3);
-        
+    {
+        char *classname = "Libantargisruby::AGCheckBox";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (AGCheckBox *)new SwigDirector_AGCheckBox(arg1,arg2,arg3);
+            
+        } else {
+            result = (AGCheckBox *)new AGCheckBox(arg2,arg3);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:AGCheckBox\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -21672,16 +21735,21 @@ _wrap_new_AGRadio(int argc, VALUE *argv, VALUE self) {
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect, 1);
         if (ptr) arg3 = *ptr;
     }
-    char *classname = "Libantargisruby::AGRadio";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (AGRadio *)new SwigDirector_AGRadio(arg1,arg2,arg3);
-        
-    } else {
-        result = (AGRadio *)new AGRadio(arg2,arg3);
-        
+    {
+        char *classname = "Libantargisruby::AGRadio";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (AGRadio *)new SwigDirector_AGRadio(arg1,arg2,arg3);
+            
+        } else {
+            result = (AGRadio *)new AGRadio(arg2,arg3);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:AGRadio\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -21788,6 +21856,10 @@ _wrap_new_AGTable(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_AGTable(AGTable *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_AGTable_addFixedColumn(int argc, VALUE *argv, VALUE self) {
     AGTable *arg1 = (AGTable *) 0 ;
@@ -21940,10 +22012,6 @@ _wrap_AGTable_setHeight(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_AGTable(AGTable *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_AGTable(int argc, VALUE *argv, VALUE self) {
     AGTable *arg1 = (AGTable *) 0 ;
@@ -22208,17 +22276,25 @@ _wrap_AGWindow_close(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWindow_tryClose(int argc, VALUE *argv, VALUE self) {
     AGWindow *arg1 = (AGWindow *) 0 ;
-    char *arg2 = (char *) 0 ;
+    std::string *arg2 = 0 ;
     AGEvent *arg3 = (AGEvent *) 0 ;
     bool result;
+    std::string temp2 ;
     VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWindow, 1);
-    arg2 = StringValuePtr(argv[0]);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGEvent, 1);
-    result = (bool)(arg1)->tryClose((char const *)arg2,(AGEvent const *)arg3);
+    result = (bool)(arg1)->tryClose((std::string const &)*arg2,(AGEvent const *)arg3);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -26418,7 +26494,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_alloc_func(cAGCheckBox.klass, _wrap_AGCheckBox_allocate);
     rb_define_method(cAGCheckBox.klass, "initialize", VALUEFUNC(_wrap_new_AGCheckBox), -1);
     rb_define_method(cAGCheckBox.klass, "eventMouseClick", VALUEFUNC(_wrap_AGCheckBox_eventMouseClick), -1);
-    cAGCheckBox.mark = 0;
+    cAGCheckBox.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGCheckBox.destroy = (void (*)(void *)) free_AGCheckBox;
     rb_define_module_function(mLibantargisruby, "disown_AGRadioGroup", VALUEFUNC(_wrap_disown_AGRadioGroup), -1);
     
@@ -26441,7 +26517,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGRadio.klass, "initialize", VALUEFUNC(_wrap_new_AGRadio), -1);
     rb_define_method(cAGRadio.klass, "eventMouseClick", VALUEFUNC(_wrap_AGRadio_eventMouseClick), -1);
     rb_define_method(cAGRadio.klass, "deselect", VALUEFUNC(_wrap_AGRadio_deselect), -1);
-    cAGRadio.mark = 0;
+    cAGRadio.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGRadio.destroy = (void (*)(void *)) free_AGRadio;
     rb_define_module_function(mLibantargisruby, "disown_AGTable", VALUEFUNC(_wrap_disown_AGTable), -1);
     

@@ -41,7 +41,8 @@ int main(int argc,char *argv[])
     TRACE;
  try
  {
-  AGMain main;
+   AGMain main;
+main.changeRes(640,480,32,true,true);
   MyApp app;
 
   AGButton b(0,AGRect(0,0,50,20),"hallo");

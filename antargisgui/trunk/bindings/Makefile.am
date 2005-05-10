@@ -2,7 +2,7 @@
 lib_LTLIBRARIES = libantargisruby.la
 libantargisruby_la_SOURCES = antargisswig.cc
 
-marker.h: mk_marker_h.rb
+marker.h: mk_marker_h.rb ../include/*.h
 	./mk_marker_h.rb >marker.h
 
 antargisswig.cc: interface.i ../include/*.h *.h marker.h

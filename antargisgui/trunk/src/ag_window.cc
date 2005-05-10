@@ -30,7 +30,7 @@
 #undef connect
 
 AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle):
-  AGTable(pWidget,pRect),mTitle(pTitle),sigClose(this,"sigClose")
+  AGTable(pWidget,pRect),sigClose(this,"sigClose"),mTitle(pTitle)
 
 {
   //  CTRACE;
@@ -177,7 +177,7 @@ AGWidget *AGWindow::getTitleBar()
   return t;
 }
 
-bool AGWindow::tryClose(const char*pName,const AGEvent *m)
+bool AGWindow::tryClose(const std::string&pName,const AGEvent *m)
 {
   TRACE;
   hide();

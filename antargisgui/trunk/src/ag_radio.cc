@@ -149,7 +149,7 @@ bool AGRadio::eventMouseClick(const AGEvent *m)
     setState(CHECKED);
   else
   setState(LIGHTED);*/
-  return true;
+  return AGWidget::eventMouseClick(m);
 }
 
 void AGRadio::deselect()

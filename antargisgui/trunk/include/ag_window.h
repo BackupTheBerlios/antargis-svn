@@ -38,7 +38,7 @@ class AGWindow:public AGTable
   void close();
 
   // slot
-  bool tryClose(const char*pName,const AGEvent *m);
+  bool tryClose(const std::string&pName,const AGEvent *m);
 
   AGRect getClientRect() const;
 

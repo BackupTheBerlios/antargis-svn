@@ -127,11 +127,11 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
 AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 {
-  TRACE;
+  //  TRACE;
   AGRect geom=pParent->getClientRect();
   AGTable *t=dynamic_cast<AGTable*>(pParent);
-  cdebug(pNode.getName());
-  cdebug(geom);
+  //  cdebug(pNode.getName());
+  //  cdebug(geom);
   if(t)
     if(pNode.get("col")!="" && pNode.get("row")!="")
       {
@@ -140,7 +140,7 @@ AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 	
 	geom=t->getClientRect(col,row);
 	//	assert(pParent->getRect().origin().contains(geom));
-	cdebug("col:"<<col<<" row:"<<row<<":"<<geom);
+	//	cdebug("col:"<<col<<" row:"<<row<<":"<<geom);
 	assert(pParent->getRect().origin().contains(geom));
       }
   

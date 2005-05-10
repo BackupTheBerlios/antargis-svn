@@ -1,10 +1,12 @@
-TESTS = *.rb mapptest
+#TESTS = *.rb mapptest
 
-check_PROGRAMS = mapptest
+#check_PROGRAMS = mapptest
+bin_PROGRAMS = mapptest
 
 mapptest_SOURCES = apptest.cc
 
-INCLUDES = -I../include -I$(RUBY_INCLUDE_DIR) $(SDL_CFLAGS)
+INCLUDES = -I/usr/local/include/antargisgui -I$(RUBY_INCLUDE_DIR) $(SDL_CFLAGS)
+#CXXFLAGS = 
 
 LDADD = -L../src -lantargisgui -lruby1.8
 

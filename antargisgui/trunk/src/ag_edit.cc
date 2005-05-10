@@ -251,8 +251,8 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true)
 {
-  CTRACE;
-  cdebug(pRect);
+  //  CTRACE;
+  //  cdebug(pRect);
 
   mMutable=true;
   mShowCursor=true;

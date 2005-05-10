@@ -70,8 +70,7 @@ class AGListener
  public:
   AGListener();
   virtual ~AGListener();
-  virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller);
-  
+  virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller);
   
 };
 
@@ -79,7 +78,7 @@ class AGCPPListener
 {
  public:
   virtual ~AGCPPListener();
-  virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
+  virtual bool signal(const std::string&pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
 };
 
 
@@ -87,7 +86,7 @@ template<class T>
 class AGSlot:public AGCPPListener
 {
  public:
-  typedef bool (T::*FKT)(const char*pName,const AGEvent *m);
+  typedef bool (T::*FKT)(const std::string&pName,const AGEvent *m);
   T *base;
   FKT f;
   
@@ -99,7 +98,7 @@ class AGSlot:public AGCPPListener
       {
       }
 
-    virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *) const
+    virtual bool signal(const std::string&pName,const AGEvent *m,AGMessageObject *) const
     {
       return (base->*f)(pName,m);
     }
@@ -109,7 +108,7 @@ template<class T>
 class AGSlot2:public AGCPPListener
 {
  public:
-  typedef bool (T::*FKT)(const char*pName,const AGEvent *m,AGMessageObject *pCaller);
+  typedef bool (T::*FKT)(const std::string&pName,const AGEvent *m,AGMessageObject *pCaller);
   T *base;
   FKT f;
 
@@ -122,7 +121,7 @@ class AGSlot2:public AGCPPListener
       {
       }
 
-    virtual bool signal(const char*pName,const AGEvent *m,AGMessageObject *pCaller) const
+    virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller) const
     {
       return (base->*f)(pName,m,pCaller);
     }
@@ -200,13 +199,13 @@ class AGMessageObject:public AGListener
 AGEvent *newEvent(AGListener *pCaller,const SDL_Event*s);
 
 template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *))
+AGCPPListener *slot(T *base,bool (T::*f)(const std::string&,const AGEvent *))
 {
   return new AGSlot<T>(base,f);
 }
 
 template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const char*,const AGEvent *,AGMessageObject *))
+AGCPPListener *slot(T *base,bool (T::*f)(const std::string&,const AGEvent *,AGMessageObject *))
 {
   return new AGSlot2<T>(base,f);
 }
