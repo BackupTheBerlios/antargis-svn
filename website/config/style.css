@@ -24,7 +24,8 @@ a
 
 a:hover
 {
-	font-weight:bold;
+	/*font-weight:bold;*/
+	color:#bd6c04;
 }
 
 /* menues */
@@ -164,8 +165,8 @@ p.screenshot
 {
 	text-align:center;
 	background-color:#AAAAAA;
-	border-color:#333333;
-	border-style:solid;
+	border-color:#bd6c04;
+	border-style:groove;
 	border-width:2px;
 	padding:10px;
 	margin-left:20px;
@@ -186,4 +187,9 @@ div.thumbs
 	margin-right:20px;
 	background-color:#AAAAAA;
 	padding:3px;
+}
+
+.menu_bold
+{
+	font-weight:bold;
 }

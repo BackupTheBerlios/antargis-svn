@@ -21,7 +21,9 @@
 	
 	function boldMenuItem($t)
 	{
-		return span($t,"menu_bold");
+		if($t!="")
+			return span($t,"menu_bold");
+		return $t;
 	}
 	
 	function showMenu($menu,$submenu=false)
