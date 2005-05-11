@@ -855,91 +855,103 @@ type_error:
 #define  SWIGTYPE_p_AGHTiler swig_types[9] 
 #define  SWIGTYPE_p_AGLayout swig_types[10] 
 #define  SWIGTYPE_p_AGMain swig_types[11] 
-#define  SWIGTYPE_p_AGVTiler swig_types[12] 
-#define  SWIGTYPE_p_AGCheckBox swig_types[13] 
-#define  SWIGTYPE_p_AGLayoutFactory swig_types[14] 
-#define  SWIGTYPE_p_AGFont swig_types[15] 
-#define  SWIGTYPE_p_AGScreen swig_types[16] 
-#define  SWIGTYPE_p_AGEditLine swig_types[17] 
-#define  SWIGTYPE_p_AGTable swig_types[18] 
-#define  SWIGTYPE_p_AntargisMap swig_types[19] 
-#define  SWIGTYPE_p_AGListBoxItem swig_types[20] 
-#define  SWIGTYPE_p_std__mapTstd__string_int_t swig_types[21] 
-#define  SWIGTYPE_p_Rect2D swig_types[22] 
-#define  SWIGTYPE_p_AGSignal swig_types[23] 
-#define  SWIGTYPE_p_AGColor swig_types[24] 
-#define  SWIGTYPE_p_IVTile swig_types[25] 
-#define  SWIGTYPE_p_AGLayoutCreator swig_types[26] 
-#define  SWIGTYPE_p_AGButton swig_types[27] 
-#define  SWIGTYPE_p_AVItem swig_types[28] 
-#define  SWIGTYPE_p_std__listTNode_t swig_types[29] 
-#define  SWIGTYPE_p_AGSurface swig_types[30] 
-#define  SWIGTYPE_p_SDL_Surface swig_types[31] 
-#define  SWIGTYPE_p_AntEntity swig_types[32] 
-#define  SWIGTYPE_p_AntRect swig_types[33] 
-#define  SWIGTYPE_p_AGImage swig_types[34] 
-#define  SWIGTYPE_p_ParserException swig_types[35] 
-#define  SWIGTYPE_p_Uint32 swig_types[36] 
-#define  SWIGTYPE_p_AGApplication swig_types[37] 
-#define  SWIGTYPE_p_Pos3D swig_types[38] 
-#define  SWIGTYPE_p_SplineMapTfloat_4_t swig_types[39] 
-#define  SWIGTYPE_p_AGSDLEvent swig_types[40] 
-#define  SWIGTYPE_p_AGWidget swig_types[41] 
-#define  SWIGTYPE_p_AGMessageObject swig_types[42] 
-#define  SWIGTYPE_p_AGFontEngine swig_types[43] 
-#define  SWIGTYPE_p_AGPoint swig_types[44] 
-#define  SWIGTYPE_p_AGWindow swig_types[45] 
-#define  SWIGTYPE_p_AGRect swig_types[46] 
-#define  SWIGTYPE_p_AGSDLScreen swig_types[47] 
-#define  SWIGTYPE_p_AntHero swig_types[48] 
-#define  SWIGTYPE_p_SplineMapD swig_types[49] 
-#define  SWIGTYPE_p_MiniMap swig_types[50] 
-#define  SWIGTYPE_p_AGPainter swig_types[51] 
-#define  SWIGTYPE_p_AGText swig_types[52] 
-#define  SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[53] 
-#define  SWIGTYPE_p_AGListBox swig_types[54] 
-#define  SWIGTYPE_p_Matrix3 swig_types[55] 
-#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[56] 
-#define  SWIGTYPE_p_SDL_PixelFormat swig_types[57] 
-#define  SWIGTYPE_p_AGTexture swig_types[58] 
-#define  SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[59] 
-#define  SWIGTYPE_p_Uint8 swig_types[60] 
-#define  SWIGTYPE_p_SDLMod swig_types[61] 
-#define  SWIGTYPE_p_AGSurfaceCache swig_types[62] 
-#define  SWIGTYPE_p_SDL_Rect swig_types[63] 
-#define  SWIGTYPE_p_SDL_Event swig_types[64] 
-#define  SWIGTYPE_p_Job swig_types[65] 
-#define  SWIGTYPE_p_AGEdit swig_types[66] 
-#define  SWIGTYPE_p_AGScreenWidget swig_types[67] 
-#define  SWIGTYPE_p_AGRadio swig_types[68] 
-#define  SWIGTYPE_p_std__ostringstream swig_types[69] 
-#define  SWIGTYPE_p_Resource swig_types[70] 
-#define  SWIGTYPE_p_NodeList swig_types[71] 
-#define  SWIGTYPE_p_unsigned_long swig_types[72] 
-#define  SWIGTYPE_p_AGCaption swig_types[73] 
-#define  SWIGTYPE_p_std__string swig_types[74] 
-#define  SWIGTYPE_p_AGRadioGroup swig_types[75] 
-#define  SWIGTYPE_p_AGEvent swig_types[76] 
-#define  SWIGTYPE_p_AntargisView swig_types[77] 
-#define  SWIGTYPE_p_IsoView swig_types[78] 
-#define  SWIGTYPE_p_CompleteIsoView swig_types[79] 
-#define  SWIGTYPE_p_EditIsoView swig_types[80] 
-#define  SWIGTYPE_p_AGMenuEvent swig_types[81] 
-#define  SWIGTYPE_p_AGMouseEvent swig_types[82] 
-#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[83] 
-#define  SWIGTYPE_p_SDLKey swig_types[84] 
-#define  SWIGTYPE_p_MapListener swig_types[85] 
-#define  SWIGTYPE_p_AGListener swig_types[86] 
-#define  SWIGTYPE_p_AGCPPListener swig_types[87] 
-#define  SWIGTYPE_p_VoxelImageData swig_types[88] 
-#define  SWIGTYPE_p_VoxelImage swig_types[89] 
-#define  SWIGTYPE_p_Node swig_types[90] 
-#define  SWIGTYPE_p_float swig_types[91] 
-#define  SWIGTYPE_p_std__listTAntEntity_p_t swig_types[92] 
-#define  SWIGTYPE_p_std__vectorTAntEntity_p_t swig_types[93] 
-#define  SWIGTYPE_p_AGTheme swig_types[94] 
-#define  SWIGTYPE_p_Pos2D swig_types[95] 
-static swig_type_info *swig_types[97];
+#define  SWIGTYPE_p_Color swig_types[12] 
+#define  SWIGTYPE_p_AGVTiler swig_types[13] 
+#define  SWIGTYPE_p_AGCheckBox swig_types[14] 
+#define  SWIGTYPE_p_VoxelView swig_types[15] 
+#define  SWIGTYPE_p_AGLayoutFactory swig_types[16] 
+#define  SWIGTYPE_p_FastVoxelView swig_types[17] 
+#define  SWIGTYPE_p_CVBitmapTDepthInfo_t swig_types[18] 
+#define  SWIGTYPE_p_AGFont swig_types[19] 
+#define  SWIGTYPE_p_AGScreen swig_types[20] 
+#define  SWIGTYPE_p_AGEditLine swig_types[21] 
+#define  SWIGTYPE_p_AGTable swig_types[22] 
+#define  SWIGTYPE_p_AntargisMap swig_types[23] 
+#define  SWIGTYPE_p_AGListBoxItem swig_types[24] 
+#define  SWIGTYPE_p_std__mapTstd__string_int_t swig_types[25] 
+#define  SWIGTYPE_p_Rect2D swig_types[26] 
+#define  SWIGTYPE_p_AGSignal swig_types[27] 
+#define  SWIGTYPE_p_AGColor swig_types[28] 
+#define  SWIGTYPE_p_IVTile swig_types[29] 
+#define  SWIGTYPE_p_AGLayoutCreator swig_types[30] 
+#define  SWIGTYPE_p_AGButton swig_types[31] 
+#define  SWIGTYPE_p_AVItem swig_types[32] 
+#define  SWIGTYPE_p_std__listTNode_t swig_types[33] 
+#define  SWIGTYPE_p_AGSurface swig_types[34] 
+#define  SWIGTYPE_p_SDL_Surface swig_types[35] 
+#define  SWIGTYPE_p_AntEntity swig_types[36] 
+#define  SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D swig_types[37] 
+#define  SWIGTYPE_p_AntRect swig_types[38] 
+#define  SWIGTYPE_p_AGImage swig_types[39] 
+#define  SWIGTYPE_p_ParserException swig_types[40] 
+#define  SWIGTYPE_p_Uint32 swig_types[41] 
+#define  SWIGTYPE_p_AGApplication swig_types[42] 
+#define  SWIGTYPE_p_Pos3D swig_types[43] 
+#define  SWIGTYPE_p_SplineMapTfloat_4_t swig_types[44] 
+#define  SWIGTYPE_p_AGSDLEvent swig_types[45] 
+#define  SWIGTYPE_p_FastView swig_types[46] 
+#define  SWIGTYPE_p_VeryFastView swig_types[47] 
+#define  SWIGTYPE_p_AGWidget swig_types[48] 
+#define  SWIGTYPE_p_AGMessageObject swig_types[49] 
+#define  SWIGTYPE_p_AGFontEngine swig_types[50] 
+#define  SWIGTYPE_p_AGPoint swig_types[51] 
+#define  SWIGTYPE_p_AGWindow swig_types[52] 
+#define  SWIGTYPE_p_AGRect swig_types[53] 
+#define  SWIGTYPE_p_AGSDLScreen swig_types[54] 
+#define  SWIGTYPE_p_AntHero swig_types[55] 
+#define  SWIGTYPE_p_SplineMapD swig_types[56] 
+#define  SWIGTYPE_p_MiniMap swig_types[57] 
+#define  SWIGTYPE_p_AGPainter swig_types[58] 
+#define  SWIGTYPE_p_AGText swig_types[59] 
+#define  SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[60] 
+#define  SWIGTYPE_p_AGListBox swig_types[61] 
+#define  SWIGTYPE_p_Matrix3 swig_types[62] 
+#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[63] 
+#define  SWIGTYPE_p_SDL_PixelFormat swig_types[64] 
+#define  SWIGTYPE_p_AGTexture swig_types[65] 
+#define  SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[66] 
+#define  SWIGTYPE_p_Uint8 swig_types[67] 
+#define  SWIGTYPE_p_SDLMod swig_types[68] 
+#define  SWIGTYPE_p_AGSurfaceCache swig_types[69] 
+#define  SWIGTYPE_p_Voxel swig_types[70] 
+#define  SWIGTYPE_p_SDL_Rect swig_types[71] 
+#define  SWIGTYPE_p_SDL_Event swig_types[72] 
+#define  SWIGTYPE_p_Job swig_types[73] 
+#define  SWIGTYPE_p_AGEdit swig_types[74] 
+#define  SWIGTYPE_p_AGScreenWidget swig_types[75] 
+#define  SWIGTYPE_p_AGRadio swig_types[76] 
+#define  SWIGTYPE_p_std__ostringstream swig_types[77] 
+#define  SWIGTYPE_p_CVBitmapTShadowInfo_t swig_types[78] 
+#define  SWIGTYPE_p_Resource swig_types[79] 
+#define  SWIGTYPE_p_NodeList swig_types[80] 
+#define  SWIGTYPE_p_unsigned_long swig_types[81] 
+#define  SWIGTYPE_p_AGCaption swig_types[82] 
+#define  SWIGTYPE_p_std__string swig_types[83] 
+#define  SWIGTYPE_p_AGRadioGroup swig_types[84] 
+#define  SWIGTYPE_p_AGEvent swig_types[85] 
+#define  SWIGTYPE_p_AntargisView swig_types[86] 
+#define  SWIGTYPE_p_IsoView swig_types[87] 
+#define  SWIGTYPE_p_CompleteIsoView swig_types[88] 
+#define  SWIGTYPE_p_EditIsoView swig_types[89] 
+#define  SWIGTYPE_p_AGMenuEvent swig_types[90] 
+#define  SWIGTYPE_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t swig_types[91] 
+#define  SWIGTYPE_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t swig_types[92] 
+#define  SWIGTYPE_p_AGMouseEvent swig_types[93] 
+#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[94] 
+#define  SWIGTYPE_p_SDLKey swig_types[95] 
+#define  SWIGTYPE_p_AGCPPListener swig_types[96] 
+#define  SWIGTYPE_p_MapListener swig_types[97] 
+#define  SWIGTYPE_p_AGListener swig_types[98] 
+#define  SWIGTYPE_p_VoxelImageData swig_types[99] 
+#define  SWIGTYPE_p_VoxelImage swig_types[100] 
+#define  SWIGTYPE_p_ComplexVoxelImage swig_types[101] 
+#define  SWIGTYPE_p_Node swig_types[102] 
+#define  SWIGTYPE_p_float swig_types[103] 
+#define  SWIGTYPE_p_std__listTAntEntity_p_t swig_types[104] 
+#define  SWIGTYPE_p_std__vectorTAntEntity_p_t swig_types[105] 
+#define  SWIGTYPE_p_AGTheme swig_types[106] 
+#define  SWIGTYPE_p_Pos2D swig_types[107] 
+static swig_type_info *swig_types[109];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -1360,6 +1372,25 @@ static void free_AntargisView(AntargisView *);
 
 swig_class cVoxelImage;
 static void free_VoxelImage(VoxelImage *);
+extern bool gDrawingTerrain;
+
+swig_class cColor;
+static void free_Color(Color *);
+
+swig_class cVoxelView;
+static void free_VoxelView(VoxelView *);
+
+swig_class cVoxel;
+static void free_Voxel(Voxel *);
+
+swig_class cFastView;
+static void free_FastView(FastView *);
+
+swig_class cVeryFastView;
+static void free_VeryFastView(VeryFastView *);
+
+swig_class cFastVoxelView;
+static void free_FastVoxelView(FastVoxelView *);
 
 swig_class cIVTile;
 static void free_IVTile(IVTile *);
@@ -13654,6 +13685,87 @@ void SwigDirector_VoxelImage::init() {
     
     if (swig_get_up()) {
         VoxelImage::init();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("init"), 0, NULL);
+}
+
+
+SwigDirector_VoxelView::SwigDirector_VoxelView(VALUE self, int pw, int ph, Pos3D pPos, bool pIso): VoxelView(pw, ph, pPos, pIso), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_VoxelView::~SwigDirector_VoxelView() {
+}
+
+void SwigDirector_VoxelView::draw(AntargisView *view, AGPainter &p) {
+    Swig::Director * director__p_AntargisView = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AVItem::draw(view,p);
+        return;
+    }
+    director__p_AntargisView = dynamic_cast<Swig::Director *>(view);
+    if (!director__p_AntargisView) {
+        obj0 = SWIG_NewPointerObj(view, SWIGTYPE_p_AntargisView, 0);
+    } else {
+        obj0 = director__p_AntargisView->swig_get_self();
+    }
+    obj1 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("draw"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_VoxelView::init() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        throw Swig::DirectorPureVirtualException();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("init"), 0, NULL);
+}
+
+
+SwigDirector_FastVoxelView::SwigDirector_FastVoxelView(VALUE self, int pw, int ph, Pos3D pPos, bool pIso, int zoom): FastVoxelView(pw, ph, pPos, pIso, zoom), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_FastVoxelView::~SwigDirector_FastVoxelView() {
+}
+
+void SwigDirector_FastVoxelView::draw(AntargisView *view, AGPainter &p) {
+    Swig::Director * director__p_AntargisView = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AVItem::draw(view,p);
+        return;
+    }
+    director__p_AntargisView = dynamic_cast<Swig::Director *>(view);
+    if (!director__p_AntargisView) {
+        obj0 = SWIG_NewPointerObj(view, SWIGTYPE_p_AntargisView, 0);
+    } else {
+        obj0 = director__p_AntargisView->swig_get_self();
+    }
+    obj1 = SWIG_NewPointerObj(&p, SWIGTYPE_p_AGPainter, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("draw"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_FastVoxelView::init() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        FastVoxelView::init();
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("init"), 0, NULL);
@@ -31894,6 +32006,1558 @@ _wrap_makeWaterTile(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+gDrawingTerrain_get(VALUE self) {
+    VALUE _val;
+    
+    _val = gDrawingTerrain ? Qtrue : Qfalse;    return _val;
+}
+
+
+static VALUE
+gDrawingTerrain_set(VALUE self, VALUE _val) {
+    gDrawingTerrain = RTEST(_val);
+    return _val;
+}
+
+
+static VALUE
+_wrap_Color_r_set(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    if (arg1) (arg1)->r = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Color_r_get(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    result = (float) ((arg1)->r);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Color_g_set(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    if (arg1) (arg1)->g = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Color_g_get(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    result = (float) ((arg1)->g);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Color_b_set(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    if (arg1) (arg1)->b = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Color_b_get(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    result = (float) ((arg1)->b);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Color_a_set(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    if (arg1) (arg1)->a = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Color_a_get(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    result = (float) ((arg1)->a);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_new_Color__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    float arg1 ;
+    float arg2 ;
+    float arg3 ;
+    float arg4 ;
+    Color *result;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    arg1 = (float) NUM2DBL(argv[0]);
+    arg2 = (float) NUM2DBL(argv[1]);
+    arg3 = (float) NUM2DBL(argv[2]);
+    arg4 = (float) NUM2DBL(argv[3]);
+    result = (Color *)new Color(arg1,arg2,arg3,arg4);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_Color__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    float arg1 ;
+    float arg2 ;
+    float arg3 ;
+    Color *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    arg1 = (float) NUM2DBL(argv[0]);
+    arg2 = (float) NUM2DBL(argv[1]);
+    arg3 = (float) NUM2DBL(argv[2]);
+    result = (Color *)new Color(arg1,arg2,arg3);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Color_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Color_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Color);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Color__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    Color *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (Color *)new Color();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE _wrap_new_Color(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_Color__SWIG_2(nargs, args, self);
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FLOAT) || (TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_new_Color__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FLOAT) || (TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        _v = ((TYPE(argv[3]) == T_FLOAT) || (TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_new_Color__SWIG_0(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_Color'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Color_toColor(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    SDL_Surface *arg2 = (SDL_Surface *) 0 ;
+    Uint32 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_SDL_Surface, 1);
+    result = ((Color const *)arg1)->toColor(arg2);
+    
+    {
+        Uint32 * resultptr;
+        resultptr = new Uint32((Uint32 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Uint32, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Color_light(int argc, VALUE *argv, VALUE self) {
+    Color *arg1 = (Color *) 0 ;
+    float arg2 ;
+    Color result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Color, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    result = (arg1)->light(arg2);
+    
+    {
+        Color * resultptr;
+        resultptr = new Color((Color &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Color, 1);
+    }
+    return vresult;
+}
+
+
+static void
+free_Color(Color *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_new_VoxelView__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    int arg2 ;
+    int arg3 ;
+    Pos3D arg4 ;
+    bool arg5 ;
+    VoxelView *result;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[2], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg4 = *ptr;
+    }
+    arg5 = RTEST(argv[3]);
+    char *classname = "Libantargis::VoxelView";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (VoxelView *)new SwigDirector_VoxelView(arg1,arg2,arg3,arg4,arg5);
+        
+    } else {
+        result = (VoxelView *)new VoxelView(arg2,arg3,arg4,arg5);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_VoxelView_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_VoxelView_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_VoxelView);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_VoxelView__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    int arg2 ;
+    int arg3 ;
+    Pos3D arg4 ;
+    VoxelView *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[2], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg4 = *ptr;
+    }
+    char *classname = "Libantargis::VoxelView";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (VoxelView *)new SwigDirector_VoxelView(arg1,arg2,arg3,arg4);
+        
+    } else {
+        result = (VoxelView *)new VoxelView(arg2,arg3,arg4);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE _wrap_new_VoxelView(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[6];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 5); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 4) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_Pos3D, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_new_VoxelView__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 5) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_Pos3D, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            _v = (argv[4] == Qtrue || argv[4] == Qfalse) ? 1 : 0;
+                        }
+                        if (_v) {
+                            return _wrap_new_VoxelView__SWIG_0(nargs, args, self);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_VoxelView'");
+    return Qnil;
+}
+
+
+static void
+free_VoxelView(VoxelView *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_VoxelView_set(int argc, VALUE *argv, VALUE self) {
+    VoxelView *arg1 = (VoxelView *) 0 ;
+    Pos3D arg2 ;
+    Color arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    {
+        Color * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_Color, 1);
+        if (ptr) arg3 = *ptr;
+    }
+    (arg1)->set(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_VoxelView_diffuseLight(int argc, VALUE *argv, VALUE self) {
+    VoxelView *arg1 = (VoxelView *) 0 ;
+    Pos3D arg2 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = (float)(arg1)->diffuseLight(arg2);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_VoxelView_getColor(int argc, VALUE *argv, VALUE self) {
+    VoxelView *arg1 = (VoxelView *) 0 ;
+    Pos3D arg2 ;
+    Color result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (arg1)->getColor(arg2);
+    
+    {
+        Color * resultptr;
+        resultptr = new Color((Color &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Color, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_VoxelView_inIso(int argc, VALUE *argv, VALUE self) {
+    VoxelView *arg1 = (VoxelView *) 0 ;
+    Pos3D arg2 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = (bool)(arg1)->inIso(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_disown_VoxelView(int argc, VALUE *argv, VALUE self) {
+    VoxelView *arg1 = (VoxelView *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Voxel_pos_set(int argc, VALUE *argv, VALUE self) {
+    Voxel *arg1 = (Voxel *) 0 ;
+    Pos3D *arg2 = (Pos3D *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Voxel, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos3D, 1);
+    if (arg1) (arg1)->pos = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Voxel_pos_get(int argc, VALUE *argv, VALUE self) {
+    Voxel *arg1 = (Voxel *) 0 ;
+    Pos3D *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Voxel, 1);
+    result = (Pos3D *)& ((arg1)->pos);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Pos3D,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Voxel_color_set(int argc, VALUE *argv, VALUE self) {
+    Voxel *arg1 = (Voxel *) 0 ;
+    Color *arg2 = (Color *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Voxel, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Color, 1);
+    if (arg1) (arg1)->color = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Voxel_color_get(int argc, VALUE *argv, VALUE self) {
+    Voxel *arg1 = (Voxel *) 0 ;
+    Color *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Voxel, 1);
+    result = (Color *)& ((arg1)->color);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Color,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Voxel_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Voxel_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Voxel);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Voxel(int argc, VALUE *argv, VALUE self) {
+    Pos3D arg1 ;
+    Color arg2 ;
+    Voxel *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg1 = *ptr;
+    }
+    {
+        Color * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_Color, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = (Voxel *)new Voxel(arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_Voxel(Voxel *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_projectView(int argc, VALUE *argv, VALUE self) {
+    Pos3D *arg1 = 0 ;
+    Pos2D result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Pos3D, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = projectView((Pos3D const &)*arg1);
+    
+    {
+        Pos2D * resultptr;
+        resultptr = new Pos2D((Pos2D &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Pos2D, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_projectShadow(int argc, VALUE *argv, VALUE self) {
+    Pos3D *arg1 = 0 ;
+    Pos2D result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Pos3D, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = projectShadow((Pos3D const &)*arg1);
+    
+    {
+        Pos2D * resultptr;
+        resultptr = new Pos2D((Pos2D &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Pos2D, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_depthView(int argc, VALUE *argv, VALUE self) {
+    Pos3D *arg1 = 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Pos3D, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (int)depthView((Pos3D const &)*arg1);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_depthShadow(int argc, VALUE *argv, VALUE self) {
+    Pos3D *arg1 = 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Pos3D, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (int)depthShadow((Pos3D const &)*arg1);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastView_mViewSpace_set(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    std::map<Pos2D,std::map<int,Voxel * > > *arg2 = (std::map<Pos2D,std::map<int,Voxel * > > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t, 1);
+    if (arg1) (arg1)->mViewSpace = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_FastView_mViewSpace_get(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    std::map<Pos2D,std::map<int,Voxel * > > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    result = (std::map<Pos2D,std::map<int,Voxel * > > *)& ((arg1)->mViewSpace);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastView_projection_set(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    Project2D arg2 = (Project2D) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D, 1);
+    if (arg1) (arg1)->projection = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_FastView_projection_get(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    Project2D result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    result = (Project2D) ((arg1)->projection);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastView_parent_set(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    VoxelView *arg2 = (VoxelView *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_VoxelView, 1);
+    if (arg1) (arg1)->parent = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_FastView_parent_get(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    VoxelView *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    result = (VoxelView *) ((arg1)->parent);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_VoxelView,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_FastView_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_FastView_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_FastView);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_FastView(int argc, VALUE *argv, VALUE self) {
+    Project2D arg1 = (Project2D) 0 ;
+    VoxelView *arg2 = (VoxelView *) 0 ;
+    FastView *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_VoxelView, 1);
+    result = (FastView *)new FastView(arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_FastView_set(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    Voxel *arg2 = (Voxel *) 0 ;
+    int arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Voxel, 1);
+    arg3 = NUM2INT(argv[1]);
+    (arg1)->set(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_FastView_get(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    Pos2D arg2 ;
+    Color result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    {
+        Pos2D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos2D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = (arg1)->get(arg2);
+    
+    {
+        Color * resultptr;
+        resultptr = new Color((Color &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Color, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastView_getShadow(int argc, VALUE *argv, VALUE self) {
+    FastView *arg1 = (FastView *) 0 ;
+    Pos3D arg2 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = (float)(arg1)->getShadow(arg2);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static void
+free_FastView(FastView *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_VeryFastView_mViewSpace_set(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    std::map<Pos2D,std::pair<int,Voxel * > > *arg2 = (std::map<Pos2D,std::pair<int,Voxel * > > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t, 1);
+    if (arg1) (arg1)->mViewSpace = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_VeryFastView_mViewSpace_get(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    std::map<Pos2D,std::pair<int,Voxel * > > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    result = (std::map<Pos2D,std::pair<int,Voxel * > > *)& ((arg1)->mViewSpace);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_VeryFastView_projection_set(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    Project2D arg2 = (Project2D) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D, 1);
+    if (arg1) (arg1)->projection = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_VeryFastView_projection_get(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    Project2D result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    result = (Project2D) ((arg1)->projection);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_VeryFastView_parent_set(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    VoxelView *arg2 = (VoxelView *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_VoxelView, 1);
+    if (arg1) (arg1)->parent = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_VeryFastView_parent_get(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    VoxelView *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    result = (VoxelView *) ((arg1)->parent);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_VoxelView,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_VeryFastView_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_VeryFastView_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_VeryFastView);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_VeryFastView(int argc, VALUE *argv, VALUE self) {
+    Project2D arg1 = (Project2D) 0 ;
+    VoxelView *arg2 = (VoxelView *) 0 ;
+    VeryFastView *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_VoxelView, 1);
+    result = (VeryFastView *)new VeryFastView(arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_VeryFastView_set(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    Voxel *arg2 = (Voxel *) 0 ;
+    int arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Voxel, 1);
+    arg3 = NUM2INT(argv[1]);
+    (arg1)->set(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_VeryFastView_get(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    Pos2D arg2 ;
+    Color result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    {
+        Pos2D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos2D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = ((VeryFastView const *)arg1)->get(arg2);
+    
+    {
+        Color * resultptr;
+        resultptr = new Color((Color &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Color, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_VeryFastView_getShadow(int argc, VALUE *argv, VALUE self) {
+    VeryFastView *arg1 = (VeryFastView *) 0 ;
+    Pos3D arg2 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VeryFastView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    result = (float)((VeryFastView const *)arg1)->getShadow(arg2);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static void
+free_VeryFastView(VeryFastView *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_new_FastVoxelView__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    int arg2 ;
+    int arg3 ;
+    Pos3D arg4 ;
+    bool arg5 ;
+    int arg6 ;
+    FastVoxelView *result;
+    
+    if ((argc < 5) || (argc > 5))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[2], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg4 = *ptr;
+    }
+    arg5 = RTEST(argv[3]);
+    arg6 = NUM2INT(argv[4]);
+    char *classname = "Libantargis::FastVoxelView";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (FastVoxelView *)new SwigDirector_FastVoxelView(arg1,arg2,arg3,arg4,arg5,arg6);
+        
+    } else {
+        result = (FastVoxelView *)new FastVoxelView(arg2,arg3,arg4,arg5,arg6);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_FastVoxelView__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    int arg2 ;
+    int arg3 ;
+    Pos3D arg4 ;
+    bool arg5 ;
+    FastVoxelView *result;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[2], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg4 = *ptr;
+    }
+    arg5 = RTEST(argv[3]);
+    char *classname = "Libantargis::FastVoxelView";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (FastVoxelView *)new SwigDirector_FastVoxelView(arg1,arg2,arg3,arg4,arg5);
+        
+    } else {
+        result = (FastVoxelView *)new FastVoxelView(arg2,arg3,arg4,arg5);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_FastVoxelView_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_FastVoxelView_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_FastVoxelView);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_FastVoxelView__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    int arg2 ;
+    int arg3 ;
+    Pos3D arg4 ;
+    FastVoxelView *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[2], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg4 = *ptr;
+    }
+    char *classname = "Libantargis::FastVoxelView";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (FastVoxelView *)new SwigDirector_FastVoxelView(arg1,arg2,arg3,arg4);
+        
+    } else {
+        result = (FastVoxelView *)new FastVoxelView(arg2,arg3,arg4);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE _wrap_new_FastVoxelView(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[7];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 6); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 4) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_Pos3D, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_new_FastVoxelView__SWIG_2(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 5) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_Pos3D, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            _v = (argv[4] == Qtrue || argv[4] == Qfalse) ? 1 : 0;
+                        }
+                        if (_v) {
+                            return _wrap_new_FastVoxelView__SWIG_1(nargs, args, self);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 6) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_Pos3D, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            _v = (argv[4] == Qtrue || argv[4] == Qfalse) ? 1 : 0;
+                        }
+                        if (_v) {
+                            {
+                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                return _wrap_new_FastVoxelView__SWIG_0(nargs, args, self);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_FastVoxelView'");
+    return Qnil;
+}
+
+
+static void
+free_FastVoxelView(FastVoxelView *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_FastVoxelView_set(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    Pos3D arg2 ;
+    Color arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    {
+        Color * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_Color, 1);
+        if (ptr) arg3 = *ptr;
+    }
+    (arg1)->set(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_FastVoxelView_getColor(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    Pos3D arg2 ;
+    Color result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    {
+        Pos3D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (arg1)->getColor(arg2);
+    
+    {
+        Color * resultptr;
+        resultptr = new Color((Color &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Color, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastVoxelView_trace(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    Pos2D arg2 ;
+    Color result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    {
+        Pos2D * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos2D, 1);
+        if (ptr) arg2 = *ptr;
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (arg1)->trace(arg2);
+    
+    {
+        Color * resultptr;
+        resultptr = new Color((Color &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Color, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastVoxelView_init(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->init();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_FastVoxelView_getShadowMap(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    CVBitmap<ShadowInfo > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    result = (arg1)->getShadowMap();
+    
+    {
+        CVBitmap<ShadowInfo > * resultptr;
+        resultptr = new CVBitmap<ShadowInfo >((CVBitmap<ShadowInfo > &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_CVBitmapTShadowInfo_t, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_FastVoxelView_getDepthMap(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    CVBitmap<DepthInfo > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    result = (arg1)->getDepthMap();
+    
+    {
+        CVBitmap<DepthInfo > * resultptr;
+        resultptr = new CVBitmap<DepthInfo >((CVBitmap<DepthInfo > &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_CVBitmapTDepthInfo_t, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_disown_FastVoxelView(int argc, VALUE *argv, VALUE self) {
+    FastVoxelView *arg1 = (FastVoxelView *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_FastVoxelView, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_makeTerrainTileComplex(int argc, VALUE *argv, VALUE self) {
+    SplineMap<float,4 > *arg1 = 0 ;
+    SplineMap<float,4 > *arg2 = 0 ;
+    int arg3 ;
+    int arg4 ;
+    ComplexVoxelImage *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_SplineMapTfloat_4_t, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SplineMapTfloat_4_t, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = NUM2INT(argv[2]);
+    arg4 = NUM2INT(argv[3]);
+    result = (ComplexVoxelImage *)makeTerrainTileComplex((SplineMap<float,4 > const &)*arg1,(SplineMap<float,4 > const &)*arg2,arg3,arg4);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_ComplexVoxelImage,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_IVTile_x_set(int argc, VALUE *argv, VALUE self) {
     IVTile *arg1 = (IVTile *) 0 ;
     int arg2 ;
@@ -35686,6 +37350,9 @@ static void *_p_AGMenuTo_p_AGVTiler(void *x) {
 static void *_p_AGRadioTo_p_AGCheckBox(void *x) {
     return (void *)((AGCheckBox *)  ((AGRadio *) x));
 }
+static void *_p_FastVoxelViewTo_p_VoxelView(void *x) {
+    return (void *)((VoxelView *)  ((FastVoxelView *) x));
+}
 static void *_p_AGSDLScreenTo_p_AGScreen(void *x) {
     return (void *)((AGScreen *)  ((AGSDLScreen *) x));
 }
@@ -35830,6 +37497,12 @@ static void *_p_AGTextTo_p_AGMessageObject(void *x) {
 static void *_p_AGRadioGroupTo_p_AGMessageObject(void *x) {
     return (void *)((AGMessageObject *) (AGWidget *) ((AGRadioGroup *) x));
 }
+static void *_p_VoxelViewTo_p_AVItem(void *x) {
+    return (void *)((AVItem *)  ((VoxelView *) x));
+}
+static void *_p_FastVoxelViewTo_p_AVItem(void *x) {
+    return (void *)((AVItem *) (VoxelView *) ((FastVoxelView *) x));
+}
 static void *_p_VoxelImageTo_p_AVItem(void *x) {
     return (void *)((AVItem *)  ((VoxelImage *) x));
 }
@@ -35962,9 +37635,13 @@ static swig_type_info _swigt__p_ParserInfo[] = {{"_p_ParserInfo", 0, "ParserInfo
 static swig_type_info _swigt__p_AGHTiler[] = {{"_p_AGHTiler", 0, "AGHTiler *", 0, 0, 0, 0},{"_p_AGHTiler", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayout[] = {{"_p_AGLayout", 0, "AGLayout *", 0, 0, 0, 0},{"_p_AGLayout", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMain[] = {{"_p_AGMain", 0, "AGMain *", 0, 0, 0, 0},{"_p_AGMain", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_Color[] = {{"_p_Color", 0, "Color *", 0, 0, 0, 0},{"_p_Color", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGVTiler[] = {{"_p_AGVTiler", 0, "AGVTiler *", 0, 0, 0, 0},{"_p_AGVTiler", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGVTiler, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGVTiler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCheckBox[] = {{"_p_AGCheckBox", 0, "AGCheckBox *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGCheckBox, 0, 0, 0, 0, 0},{"_p_AGCheckBox", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_VoxelView[] = {{"_p_VoxelView", 0, "VoxelView *", 0, 0, 0, 0},{"_p_VoxelView", 0, 0, 0, 0, 0, 0},{"_p_FastVoxelView", _p_FastVoxelViewTo_p_VoxelView, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayoutFactory[] = {{"_p_AGLayoutFactory", 0, "AGLayoutFactory *", 0, 0, 0, 0},{"_p_AGLayoutFactory", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_FastVoxelView[] = {{"_p_FastVoxelView", 0, "FastVoxelView *", 0, 0, 0, 0},{"_p_FastVoxelView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_CVBitmapTDepthInfo_t[] = {{"_p_CVBitmapTDepthInfo_t", 0, "CVBitmap<DepthInfo > *", 0, 0, 0, 0},{"_p_CVBitmapTDepthInfo_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGFont[] = {{"_p_AGFont", 0, "AGFont *", 0, 0, 0, 0},{"_p_AGFont", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGScreen[] = {{"_p_AGScreen", 0, "AGScreen *", 0, 0, 0, 0},{"_p_AGSDLScreen", _p_AGSDLScreenTo_p_AGScreen, 0, 0, 0, 0, 0},{"_p_AGScreen", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGEditLine[] = {{"_p_AGEditLine", 0, "AGEditLine *", 0, 0, 0, 0},{"_p_AGEditLine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -35978,11 +37655,12 @@ static swig_type_info _swigt__p_AGColor[] = {{"_p_AGColor", 0, "AGColor *", 0, 0
 static swig_type_info _swigt__p_IVTile[] = {{"_p_IVTile", 0, "IVTile *", 0, 0, 0, 0},{"_p_IVTile", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayoutCreator[] = {{"_p_AGLayoutCreator", 0, "AGLayoutCreator *", 0, 0, 0, 0},{"_p_AGLayoutCreator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGButton[] = {{"_p_AGButton", 0, "AGButton *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGButton, 0, 0, 0, 0, 0},{"_p_AGButton", 0, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGButton, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AVItem[] = {{"_p_AVItem", 0, "AVItem *", 0, 0, 0, 0},{"_p_AVItem", 0, 0, 0, 0, 0, 0},{"_p_VoxelImage", _p_VoxelImageTo_p_AVItem, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AVItem[] = {{"_p_AVItem", 0, "AVItem *", 0, 0, 0, 0},{"_p_VoxelView", _p_VoxelViewTo_p_AVItem, 0, 0, 0, 0, 0},{"_p_FastVoxelView", _p_FastVoxelViewTo_p_AVItem, 0, 0, 0, 0, 0},{"_p_AVItem", 0, 0, 0, 0, 0, 0},{"_p_VoxelImage", _p_VoxelImageTo_p_AVItem, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__listTNode_t[] = {{"_p_std__listTNode_t", 0, "std::list<Node > *|Node::NodeList *", 0, 0, 0, 0},{"_p_std__listTNode_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSurface[] = {{"_p_AGSurface", 0, "AGSurface *", 0, 0, 0, 0},{"_p_AGSurface", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Surface[] = {{"_p_SDL_Surface", 0, "SDL_Surface *", 0, 0, 0, 0},{"_p_SDL_Surface", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AntEntity[] = {{"_p_AntEntity", 0, "AntEntity *", 0, 0, 0, 0},{"_p_AntEntity", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_f_r_q_const__Pos3D__Pos2D[] = {{"_p_f_r_q_const__Pos3D__Pos2D", 0, "Pos2D (*)(Pos3D const &)|Project2D", 0, 0, 0, 0},{"_p_f_r_q_const__Pos3D__Pos2D", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AntRect[] = {{"_p_AntRect", 0, "AntRect *", 0, 0, 0, 0},{"_p_AntRect", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGImage[] = {{"_p_AGImage", 0, "AGImage *", 0, 0, 0, 0},{"_p_AGImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -35991,6 +37669,8 @@ static swig_type_info _swigt__p_AGApplication[] = {{"_p_AGApplication", 0, "AGAp
 static swig_type_info _swigt__p_Pos3D[] = {{"_p_Pos3D", 0, "Pos3D *", 0, 0, 0, 0},{"_p_Pos3D", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SplineMapTfloat_4_t[] = {{"_p_SplineMapTfloat_4_t", 0, "SplineMap<float,4 > *", 0, 0, 0, 0},{"_p_SplineMapTfloat_4_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSDLEvent[] = {{"_p_AGSDLEvent", 0, "AGSDLEvent *", 0, 0, 0, 0},{"_p_AGSDLEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_FastView[] = {{"_p_FastView", 0, "FastView *", 0, 0, 0, 0},{"_p_FastView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_VeryFastView[] = {{"_p_VeryFastView", 0, "VeryFastView *", 0, 0, 0, 0},{"_p_VeryFastView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGWidget[] = {{"_p_AGWidget", 0, "AGWidget *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_IsoView", _p_IsoViewTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGWidget", 0, 0, 0, 0, 0, 0},{"_p_MiniMap", _p_MiniMapTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AntargisView", _p_AntargisViewTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGWidget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMessageObject[] = {{"_p_AGMessageObject", 0, "AGMessageObject *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_IsoView", _p_IsoViewTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_MiniMap", _p_MiniMapTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AntargisView", _p_AntargisViewTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMessageObject", 0, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGMessageObject, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGFontEngine[] = {{"_p_AGFontEngine", 0, "AGFontEngine *", 0, 0, 0, 0},{"_p_AGFontEngine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -36013,6 +37693,7 @@ static swig_type_info _swigt__p_std__mapTstd__string_std__string_t[] = {{"_p_std
 static swig_type_info _swigt__p_Uint8[] = {{"_p_Uint8", 0, "Uint8 *", 0, 0, 0, 0},{"_p_Uint8", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDLMod[] = {{"_p_SDLMod", 0, "enum SDLMod *|SDLMod *", 0, 0, 0, 0},{"_p_SDLMod", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSurfaceCache[] = {{"_p_AGSurfaceCache", 0, "AGSurfaceCache *", 0, 0, 0, 0},{"_p_AGSurfaceCache", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_Voxel[] = {{"_p_Voxel", 0, "Voxel *", 0, 0, 0, 0},{"_p_Voxel", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Rect[] = {{"_p_SDL_Rect", 0, "SDL_Rect *", 0, 0, 0, 0},{"_p_SDL_Rect", 0, 0, 0, 0, 0, 0},{"_p_AGRect", _p_AGRectTo_p_SDL_Rect, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Event[] = {{"_p_SDL_Event", 0, "SDL_Event *", 0, 0, 0, 0},{"_p_SDL_Event", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Job[] = {{"_p_Job", 0, "Job *", 0, 0, 0, 0},{"_p_Job", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -36020,6 +37701,7 @@ static swig_type_info _swigt__p_AGEdit[] = {{"_p_AGEdit", 0, "AGEdit *", 0, 0, 0
 static swig_type_info _swigt__p_AGScreenWidget[] = {{"_p_AGScreenWidget", 0, "AGScreenWidget *", 0, 0, 0, 0},{"_p_AGScreenWidget", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGRadio[] = {{"_p_AGRadio", 0, "AGRadio *", 0, 0, 0, 0},{"_p_AGRadio", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__ostringstream[] = {{"_p_std__ostringstream", 0, "std::ostringstream *", 0, 0, 0, 0},{"_p_std__ostringstream", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_CVBitmapTShadowInfo_t[] = {{"_p_CVBitmapTShadowInfo_t", 0, "CVBitmap<ShadowInfo > *", 0, 0, 0, 0},{"_p_CVBitmapTShadowInfo_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Resource[] = {{"_p_Resource", 0, "Resource *", 0, 0, 0, 0},{"_p_Resource", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_NodeList[] = {{"_p_NodeList", 0, "NodeList *", 0, 0, 0, 0},{"_p_NodeList", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_unsigned_long[] = {{"_p_unsigned_long", 0, "unsigned long *|VALUE *", 0, 0, 0, 0},{"_p_unsigned_long", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -36032,14 +37714,17 @@ static swig_type_info _swigt__p_IsoView[] = {{"_p_IsoView", 0, "IsoView *", 0, 0
 static swig_type_info _swigt__p_CompleteIsoView[] = {{"_p_CompleteIsoView", 0, "CompleteIsoView *", 0, 0, 0, 0},{"_p_CompleteIsoView", 0, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_CompleteIsoView, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_EditIsoView[] = {{"_p_EditIsoView", 0, "EditIsoView *", 0, 0, 0, 0},{"_p_EditIsoView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMenuEvent[] = {{"_p_AGMenuEvent", 0, "AGMenuEvent *", 0, 0, 0, 0},{"_p_AGMenuEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__mapTPos2D_std__mapTint_Voxel_p_t_t[] = {{"_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t", 0, "std::map<Pos2D,std::map<int,Voxel * > > *", 0, 0, 0, 0},{"_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__mapTPos2D_std__pairTint_Voxel_p_t_t[] = {{"_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t", 0, "std::map<Pos2D,std::pair<int,Voxel * > > *", 0, 0, 0, 0},{"_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMouseEvent[] = {{"_p_AGMouseEvent", 0, "AGMouseEvent *", 0, 0, 0, 0},{"_p_AGMouseEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__pairTstd__string_bool_t[] = {{"_p_std__pairTstd__string_bool_t", 0, "std::pair<std::string,bool > *", 0, 0, 0, 0},{"_p_std__pairTstd__string_bool_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDLKey[] = {{"_p_SDLKey", 0, "enum SDLKey *|SDLKey *", 0, 0, 0, 0},{"_p_SDLKey", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_MapListener[] = {{"_p_MapListener", 0, "MapListener *", 0, 0, 0, 0},{"_p_MapListener", 0, 0, 0, 0, 0, 0},{"_p_MiniMap", _p_MiniMapTo_p_MapListener, 0, 0, 0, 0, 0},{"_p_IsoView", _p_IsoViewTo_p_MapListener, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_MapListener, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_MapListener, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGListener[] = {{"_p_AGListener", 0, "AGListener *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_IsoView", _p_IsoViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_MiniMap", _p_MiniMapTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListener", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AntargisView", _p_AntargisViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMessageObject", _p_AGMessageObjectTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGListener, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_VoxelImageData[] = {{"_p_VoxelImageData", 0, "VoxelImageData *", 0, 0, 0, 0},{"_p_VoxelImageData", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_VoxelImage[] = {{"_p_VoxelImage", 0, "VoxelImage *", 0, 0, 0, 0},{"_p_VoxelImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_ComplexVoxelImage[] = {{"_p_ComplexVoxelImage", 0, "ComplexVoxelImage *", 0, 0, 0, 0},{"_p_ComplexVoxelImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Node[] = {{"_p_Node", 0, "Node *|xmlpp::Node *", 0, 0, 0, 0},{"_p_Node", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_float[] = {{"_p_float", 0, "float *", 0, 0, 0, 0},{"_p_float", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__listTAntEntity_p_t[] = {{"_p_std__listTAntEntity_p_t", 0, "std::list<AntEntity * > *", 0, 0, 0, 0},{"_p_std__listTAntEntity_p_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -36060,9 +37745,13 @@ _swigt__p_ParserInfo,
 _swigt__p_AGHTiler, 
 _swigt__p_AGLayout, 
 _swigt__p_AGMain, 
+_swigt__p_Color, 
 _swigt__p_AGVTiler, 
 _swigt__p_AGCheckBox, 
+_swigt__p_VoxelView, 
 _swigt__p_AGLayoutFactory, 
+_swigt__p_FastVoxelView, 
+_swigt__p_CVBitmapTDepthInfo_t, 
 _swigt__p_AGFont, 
 _swigt__p_AGScreen, 
 _swigt__p_AGEditLine, 
@@ -36081,6 +37770,7 @@ _swigt__p_std__listTNode_t,
 _swigt__p_AGSurface, 
 _swigt__p_SDL_Surface, 
 _swigt__p_AntEntity, 
+_swigt__p_f_r_q_const__Pos3D__Pos2D, 
 _swigt__p_AntRect, 
 _swigt__p_AGImage, 
 _swigt__p_ParserException, 
@@ -36089,6 +37779,8 @@ _swigt__p_AGApplication,
 _swigt__p_Pos3D, 
 _swigt__p_SplineMapTfloat_4_t, 
 _swigt__p_AGSDLEvent, 
+_swigt__p_FastView, 
+_swigt__p_VeryFastView, 
 _swigt__p_AGWidget, 
 _swigt__p_AGMessageObject, 
 _swigt__p_AGFontEngine, 
@@ -36111,6 +37803,7 @@ _swigt__p_std__mapTstd__string_std__string_t,
 _swigt__p_Uint8, 
 _swigt__p_SDLMod, 
 _swigt__p_AGSurfaceCache, 
+_swigt__p_Voxel, 
 _swigt__p_SDL_Rect, 
 _swigt__p_SDL_Event, 
 _swigt__p_Job, 
@@ -36118,6 +37811,7 @@ _swigt__p_AGEdit,
 _swigt__p_AGScreenWidget, 
 _swigt__p_AGRadio, 
 _swigt__p_std__ostringstream, 
+_swigt__p_CVBitmapTShadowInfo_t, 
 _swigt__p_Resource, 
 _swigt__p_NodeList, 
 _swigt__p_unsigned_long, 
@@ -36130,14 +37824,17 @@ _swigt__p_IsoView,
 _swigt__p_CompleteIsoView, 
 _swigt__p_EditIsoView, 
 _swigt__p_AGMenuEvent, 
+_swigt__p_std__mapTPos2D_std__mapTint_Voxel_p_t_t, 
+_swigt__p_std__mapTPos2D_std__pairTint_Voxel_p_t_t, 
 _swigt__p_AGMouseEvent, 
 _swigt__p_std__pairTstd__string_bool_t, 
 _swigt__p_SDLKey, 
+_swigt__p_AGCPPListener, 
 _swigt__p_MapListener, 
 _swigt__p_AGListener, 
-_swigt__p_AGCPPListener, 
 _swigt__p_VoxelImageData, 
 _swigt__p_VoxelImage, 
+_swigt__p_ComplexVoxelImage, 
 _swigt__p_Node, 
 _swigt__p_float, 
 _swigt__p_std__listTAntEntity_p_t, 
@@ -37374,6 +39071,99 @@ SWIGEXPORT(void) Init_libantargis(void) {
     cVoxelImage.destroy = (void (*)(void *)) free_VoxelImage;
     rb_define_module_function(mLibantargis, "makeTerrainTile", VALUEFUNC(_wrap_makeTerrainTile), -1);
     rb_define_module_function(mLibantargis, "makeWaterTile", VALUEFUNC(_wrap_makeWaterTile), -1);
+    rb_define_singleton_method(mLibantargis, "gDrawingTerrain", VALUEFUNC(gDrawingTerrain_get), 0);
+    rb_define_singleton_method(mLibantargis, "gDrawingTerrain=", VALUEFUNC(gDrawingTerrain_set), 1);
+    
+    cColor.klass = rb_define_class_under(mLibantargis, "Color", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_Color, (void *) &cColor);
+    rb_define_alloc_func(cColor.klass, _wrap_Color_allocate);
+    rb_define_method(cColor.klass, "initialize", VALUEFUNC(_wrap_new_Color), -1);
+    rb_define_method(cColor.klass, "r=", VALUEFUNC(_wrap_Color_r_set), -1);
+    rb_define_method(cColor.klass, "r", VALUEFUNC(_wrap_Color_r_get), -1);
+    rb_define_method(cColor.klass, "g=", VALUEFUNC(_wrap_Color_g_set), -1);
+    rb_define_method(cColor.klass, "g", VALUEFUNC(_wrap_Color_g_get), -1);
+    rb_define_method(cColor.klass, "b=", VALUEFUNC(_wrap_Color_b_set), -1);
+    rb_define_method(cColor.klass, "b", VALUEFUNC(_wrap_Color_b_get), -1);
+    rb_define_method(cColor.klass, "a=", VALUEFUNC(_wrap_Color_a_set), -1);
+    rb_define_method(cColor.klass, "a", VALUEFUNC(_wrap_Color_a_get), -1);
+    rb_define_method(cColor.klass, "toColor", VALUEFUNC(_wrap_Color_toColor), -1);
+    rb_define_method(cColor.klass, "light", VALUEFUNC(_wrap_Color_light), -1);
+    cColor.mark = 0;
+    cColor.destroy = (void (*)(void *)) free_Color;
+    rb_define_module_function(mLibantargis, "disown_VoxelView", VALUEFUNC(_wrap_disown_VoxelView), -1);
+    
+    cVoxelView.klass = rb_define_class_under(mLibantargis, "VoxelView", ((swig_class *) SWIGTYPE_p_AVItem->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_VoxelView, (void *) &cVoxelView);
+    rb_define_alloc_func(cVoxelView.klass, _wrap_VoxelView_allocate);
+    rb_define_method(cVoxelView.klass, "initialize", VALUEFUNC(_wrap_new_VoxelView), -1);
+    rb_define_method(cVoxelView.klass, "set", VALUEFUNC(_wrap_VoxelView_set), -1);
+    rb_define_method(cVoxelView.klass, "diffuseLight", VALUEFUNC(_wrap_VoxelView_diffuseLight), -1);
+    rb_define_method(cVoxelView.klass, "getColor", VALUEFUNC(_wrap_VoxelView_getColor), -1);
+    rb_define_method(cVoxelView.klass, "inIso", VALUEFUNC(_wrap_VoxelView_inIso), -1);
+    cVoxelView.mark = 0;
+    cVoxelView.destroy = (void (*)(void *)) free_VoxelView;
+    
+    cVoxel.klass = rb_define_class_under(mLibantargis, "Voxel", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_Voxel, (void *) &cVoxel);
+    rb_define_alloc_func(cVoxel.klass, _wrap_Voxel_allocate);
+    rb_define_method(cVoxel.klass, "initialize", VALUEFUNC(_wrap_new_Voxel), -1);
+    rb_define_method(cVoxel.klass, "pos=", VALUEFUNC(_wrap_Voxel_pos_set), -1);
+    rb_define_method(cVoxel.klass, "pos", VALUEFUNC(_wrap_Voxel_pos_get), -1);
+    rb_define_method(cVoxel.klass, "color=", VALUEFUNC(_wrap_Voxel_color_set), -1);
+    rb_define_method(cVoxel.klass, "color", VALUEFUNC(_wrap_Voxel_color_get), -1);
+    cVoxel.mark = 0;
+    cVoxel.destroy = (void (*)(void *)) free_Voxel;
+    rb_define_module_function(mLibantargis, "projectView", VALUEFUNC(_wrap_projectView), -1);
+    rb_define_module_function(mLibantargis, "projectShadow", VALUEFUNC(_wrap_projectShadow), -1);
+    rb_define_module_function(mLibantargis, "depthView", VALUEFUNC(_wrap_depthView), -1);
+    rb_define_module_function(mLibantargis, "depthShadow", VALUEFUNC(_wrap_depthShadow), -1);
+    
+    cFastView.klass = rb_define_class_under(mLibantargis, "FastView", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_FastView, (void *) &cFastView);
+    rb_define_alloc_func(cFastView.klass, _wrap_FastView_allocate);
+    rb_define_method(cFastView.klass, "initialize", VALUEFUNC(_wrap_new_FastView), -1);
+    rb_define_method(cFastView.klass, "mViewSpace=", VALUEFUNC(_wrap_FastView_mViewSpace_set), -1);
+    rb_define_method(cFastView.klass, "mViewSpace", VALUEFUNC(_wrap_FastView_mViewSpace_get), -1);
+    rb_define_method(cFastView.klass, "projection=", VALUEFUNC(_wrap_FastView_projection_set), -1);
+    rb_define_method(cFastView.klass, "projection", VALUEFUNC(_wrap_FastView_projection_get), -1);
+    rb_define_method(cFastView.klass, "parent=", VALUEFUNC(_wrap_FastView_parent_set), -1);
+    rb_define_method(cFastView.klass, "parent", VALUEFUNC(_wrap_FastView_parent_get), -1);
+    rb_define_method(cFastView.klass, "set", VALUEFUNC(_wrap_FastView_set), -1);
+    rb_define_method(cFastView.klass, "get", VALUEFUNC(_wrap_FastView_get), -1);
+    rb_define_method(cFastView.klass, "getShadow", VALUEFUNC(_wrap_FastView_getShadow), -1);
+    cFastView.mark = 0;
+    cFastView.destroy = (void (*)(void *)) free_FastView;
+    
+    cVeryFastView.klass = rb_define_class_under(mLibantargis, "VeryFastView", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_VeryFastView, (void *) &cVeryFastView);
+    rb_define_alloc_func(cVeryFastView.klass, _wrap_VeryFastView_allocate);
+    rb_define_method(cVeryFastView.klass, "initialize", VALUEFUNC(_wrap_new_VeryFastView), -1);
+    rb_define_method(cVeryFastView.klass, "mViewSpace=", VALUEFUNC(_wrap_VeryFastView_mViewSpace_set), -1);
+    rb_define_method(cVeryFastView.klass, "mViewSpace", VALUEFUNC(_wrap_VeryFastView_mViewSpace_get), -1);
+    rb_define_method(cVeryFastView.klass, "projection=", VALUEFUNC(_wrap_VeryFastView_projection_set), -1);
+    rb_define_method(cVeryFastView.klass, "projection", VALUEFUNC(_wrap_VeryFastView_projection_get), -1);
+    rb_define_method(cVeryFastView.klass, "parent=", VALUEFUNC(_wrap_VeryFastView_parent_set), -1);
+    rb_define_method(cVeryFastView.klass, "parent", VALUEFUNC(_wrap_VeryFastView_parent_get), -1);
+    rb_define_method(cVeryFastView.klass, "set", VALUEFUNC(_wrap_VeryFastView_set), -1);
+    rb_define_method(cVeryFastView.klass, "get", VALUEFUNC(_wrap_VeryFastView_get), -1);
+    rb_define_method(cVeryFastView.klass, "getShadow", VALUEFUNC(_wrap_VeryFastView_getShadow), -1);
+    cVeryFastView.mark = 0;
+    cVeryFastView.destroy = (void (*)(void *)) free_VeryFastView;
+    rb_define_module_function(mLibantargis, "disown_FastVoxelView", VALUEFUNC(_wrap_disown_FastVoxelView), -1);
+    
+    cFastVoxelView.klass = rb_define_class_under(mLibantargis, "FastVoxelView", ((swig_class *) SWIGTYPE_p_VoxelView->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_FastVoxelView, (void *) &cFastVoxelView);
+    rb_define_alloc_func(cFastVoxelView.klass, _wrap_FastVoxelView_allocate);
+    rb_define_method(cFastVoxelView.klass, "initialize", VALUEFUNC(_wrap_new_FastVoxelView), -1);
+    rb_define_method(cFastVoxelView.klass, "set", VALUEFUNC(_wrap_FastVoxelView_set), -1);
+    rb_define_method(cFastVoxelView.klass, "getColor", VALUEFUNC(_wrap_FastVoxelView_getColor), -1);
+    rb_define_method(cFastVoxelView.klass, "trace", VALUEFUNC(_wrap_FastVoxelView_trace), -1);
+    rb_define_method(cFastVoxelView.klass, "init", VALUEFUNC(_wrap_FastVoxelView_init), -1);
+    rb_define_method(cFastVoxelView.klass, "getShadowMap", VALUEFUNC(_wrap_FastVoxelView_getShadowMap), -1);
+    rb_define_method(cFastVoxelView.klass, "getDepthMap", VALUEFUNC(_wrap_FastVoxelView_getDepthMap), -1);
+    cFastVoxelView.mark = 0;
+    cFastVoxelView.destroy = (void (*)(void *)) free_FastVoxelView;
+    rb_define_module_function(mLibantargis, "makeTerrainTileComplex", VALUEFUNC(_wrap_makeTerrainTileComplex), -1);
     
     cIVTile.klass = rb_define_class_under(mLibantargis, "IVTile", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_IVTile, (void *) &cIVTile);

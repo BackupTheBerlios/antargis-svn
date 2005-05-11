@@ -982,6 +982,26 @@ public:
 };
 
 
+class SwigDirector_VoxelView : public VoxelView, public Swig::Director {
+
+public:
+    SwigDirector_VoxelView(VALUE self, int pw, int ph, Pos3D pPos, bool pIso = true);
+    virtual ~SwigDirector_VoxelView();
+    virtual void draw(AntargisView *view, AGPainter &p);
+    virtual void init();
+};
+
+
+class SwigDirector_FastVoxelView : public FastVoxelView, public Swig::Director {
+
+public:
+    SwigDirector_FastVoxelView(VALUE self, int pw, int ph, Pos3D pPos, bool pIso = true, int zoom = 1);
+    virtual ~SwigDirector_FastVoxelView();
+    virtual void draw(AntargisView *view, AGPainter &p);
+    virtual void init();
+};
+
+
 class SwigDirector_IsoView : public IsoView, public Swig::Director {
 
 public:

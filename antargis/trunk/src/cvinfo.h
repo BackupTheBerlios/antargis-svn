@@ -42,6 +42,9 @@ class CVBitmap
 
     typedef typename std::list<std::pair<Pos2D,T> >::const_iterator buffer_iterator;
 
+    CVBitmap():w(0),h(0),add(0)
+      {
+      }
 
     CVBitmap(int W,int H,int _add):
         w(W),h(H),buffer(w*h+_add)
