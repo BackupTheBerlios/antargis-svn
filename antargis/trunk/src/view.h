@@ -65,11 +65,7 @@ class IsoView:public AntargisView, public MapListener
     void update();
     void checkView();
 
-    void mapUpdate()
-    {
-      CTRACE;
-      completeUpdate();
-    }
+    void mapUpdate();
 
 
   protected:

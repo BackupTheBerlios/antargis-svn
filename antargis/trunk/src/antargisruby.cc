@@ -35464,6 +35464,37 @@ _wrap_AntEntity_getHealSpeed(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntEntity_setSpeed(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->setSpeed(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AntEntity_getSpeed(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    result = (float)((AntEntity const *)arg1)->getSpeed();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AntEntity_setHealSpeed(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     float arg2 ;
@@ -39284,6 +39315,8 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "isJobFinished", VALUEFUNC(_wrap_AntEntity_isJobFinished), -1);
     rb_define_method(cAntEntity.klass, "hasJob", VALUEFUNC(_wrap_AntEntity_hasJob), -1);
     rb_define_method(cAntEntity.klass, "getHealSpeed", VALUEFUNC(_wrap_AntEntity_getHealSpeed), -1);
+    rb_define_method(cAntEntity.klass, "setSpeed", VALUEFUNC(_wrap_AntEntity_setSpeed), -1);
+    rb_define_method(cAntEntity.klass, "getSpeed", VALUEFUNC(_wrap_AntEntity_getSpeed), -1);
     rb_define_method(cAntEntity.klass, "setHealSpeed", VALUEFUNC(_wrap_AntEntity_setHealSpeed), -1);
     rb_define_method(cAntEntity.klass, "decEnergy", VALUEFUNC(_wrap_AntEntity_decEnergy), -1);
     rb_define_method(cAntEntity.klass, "getEnergy", VALUEFUNC(_wrap_AntEntity_getEnergy), -1);

@@ -79,6 +79,11 @@ void IsoView::update()
   init();
 }
 
+void IsoView::mapUpdate()
+{
+  CTRACE;
+  update();
+}
 
 void IsoView::init()
 {
@@ -96,9 +101,11 @@ void IsoView::init()
   sx=(int)(mPos.x/TILE_WIDTH);
   if(sx<0)
     sx=0;
-  sy=(int)(mPos.y/(TILE_WIDTH/4));
+  sy=(int)(mPos.y/(TILE_WIDTH/4))-4;
   if(sy<0)
     sy=0;
+
+  mh+=4;
 
 
   for(int y=sy;y<mh+sy;y++) // 40

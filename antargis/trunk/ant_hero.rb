@@ -68,7 +68,7 @@ class AntHeroMoveJob<AntHLJob
 				should=@hero.getWalkFormation(x,@dir)+@hero.getPos2D
 				if (is-should).norm>10 then
 					ready=false
-					x.newMoveJob(0,should,0)
+					x.newMoveJob(0,should,@dist)
 				end
 			end
 		}
@@ -97,8 +97,23 @@ class AntHeroFightJob<AntHeroMoveJob
 	def initialize(hero,target)
 		@hero=hero
 		@target=target
+		@moveReady=false
 		
-		@hero.newFightJob(0,target)
+		#@hero.newFightJob(0,target)
+		super(hero,0,target.getPos2D,50) # near til 50 pixels
+	end
+	def check
+		if not @moveReady then
+			if super then
+				@moveReady=true
+			end
+		end
+		if @moveReady
+			# fight
+			puts "FIGHT!!!!!!!!!!!!!!!!!!!!!!!!!!"
+			return true
+		end
+		return false
 	end
 end
 
@@ -219,6 +234,9 @@ class AntNewHero<AntMyEntity
 		puts "TARGET:"
 		puts target
 		@job=AntHeroRecruitJob.new(self,target,$buttonPanel.getAggression)
+	end
+	def newHLFightJob(target)
+		@job=AntHeroFightJob.new(self,target)
 	end
 	
 	def newHLDismissJob()

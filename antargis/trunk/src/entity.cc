@@ -31,6 +31,7 @@ AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mEnergy(1.0),mHealSpeed(0.3
   mDeleted=false;
   mPlayerID=-1;
   mMoving=false;
+  mMoveSpeed=70;
 }
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
 {
@@ -40,6 +41,7 @@ AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mEnergy
   mDeleted=false;
   mPlayerID=-1;
   mMoving=false;
+  mMoveSpeed=70;
 }
 
 AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
@@ -50,6 +52,7 @@ AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround
   mDeleted=false;
   mPlayerID=-1;
   mMoving=false;
+  mMoveSpeed=70;
 }
 
 AntEntity::~AntEntity()
@@ -379,4 +382,13 @@ AntEntity *AntEntityPtr::get()
 {
   assert(p);
   return p;
+}
+
+void AntEntity::setSpeed(float f)
+{
+  mMoveSpeed=f;
+}
+float AntEntity::getSpeed() const
+{
+  return mMoveSpeed;
 }

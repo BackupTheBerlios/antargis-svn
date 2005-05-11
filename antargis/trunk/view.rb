@@ -22,7 +22,7 @@
 #!/usr/bin/ruby
 
 
-class AntRubyView <CompleteIsoView
+class AntRubyView <EditIsoView
 	def initialize(p,rect,pos,map)
 		super(p,rect,pos,map)
 		$antView=self
@@ -66,6 +66,19 @@ class AntRubyView <CompleteIsoView
 					puts "DOING RECRUIT"
 					puts house
 					@hero.newHLRecruitJob(house)
+				end
+			end
+		elsif job=="doFight" then
+			if @hero then
+				target=nil
+				list.each{|ents|
+					e=getMap.getRuby(ents.get)
+					if e.getType=="hero" then
+						target=e
+					end
+				}
+				if target then
+					@hero.newHLFightJob(target)
 				end
 			end
 		end

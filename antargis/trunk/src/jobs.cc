@@ -48,10 +48,10 @@ void Job::jobFinished(AntEntity *e)
 ************************************************************************/
 
 MoveJob::MoveJob(int p,const Pos2D &pTarget,int pnear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),near(pnear),mRun(pRun)
-    {
-      speed=70; // pixels per second
-      runSpeed=100;
-    }
+{
+  // speed=70; // pixels per second
+  //  runSpeed=100;
+}
 MoveJob::~MoveJob()
 {
 }
@@ -61,6 +61,8 @@ void MoveJob::move(AntEntity *e,float ptime)
 {
   assert(!mDeleted);
   float aspeed;
+  float speed=e->getSpeed();
+  float runSpeed=speed*1.3;
   
   if(mRun && e->getCondition()>0.0)
   {

@@ -281,7 +281,7 @@ class SplineMap
     SplineMap(int W,int H,int tile,int pmin,int pmax,bool rrand=false):
         values(W,H),w(W),h(H),
 #ifdef EDITING
-        rMap(tile,1)
+      rMap(tile,4) // was tile,1
 #else
         rMap(tile,4)
 #endif

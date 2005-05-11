@@ -55,8 +55,8 @@ class RestJob:public Job
 class MoveJob:public Job
   {
     Pos2D mTarget;
-    float speed;
-    float runSpeed;
+    //    float speed;
+    //    float runSpeed;
     int near;
     bool mRun;
   public:

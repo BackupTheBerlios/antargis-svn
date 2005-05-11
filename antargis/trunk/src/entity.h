@@ -58,6 +58,7 @@ class AntEntity
     std::list<Job*> mJobFinished;
     float mEnergy;
     float mHealSpeed;
+    float mMoveSpeed;
     bool onGround;
     float mCondition;
     float mConditionFall; // when used, how much per time -- hero is stronger here
@@ -174,6 +175,9 @@ class AntEntity
       {
         return mHealSpeed;
       }
+
+    void setSpeed(float f);
+    float getSpeed() const;
     void setHealSpeed(float f)
     {
       mHealSpeed=f;
