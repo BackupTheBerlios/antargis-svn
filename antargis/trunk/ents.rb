@@ -36,14 +36,45 @@ end
 require 'ant_hero.rb'
 require 'ant_sheep.rb'
 # MAN
+
+class AntNewAngel<AntMyEntity
+	def initialize
+		super(Pos2D.new(0,0))
+		setType("angel")
+		@age=0
+	end
+	def move(time)
+		p=getPos3D
+		p.y+=time*20
+		setPos3D(p)
+		@age+=time
+		if @age>10 then # 10 seconds old
+			# discard
+			getMap.removeEntity(self)
+			getMap.endChange
+		end
+	end
+	def getSurfaceName
+		return "angel"
+	end
+end
+
 class AntNewMan<AntMyEntity
 	def initialize()
 		super(Pos2D.new(0,0))
 		setType("man")
 		@signed=false
+		@dead=false
+		@fighting=false
 	end
 	def getTexture
-		return "man"+mDirNum.to_s
+		if @fighting
+			return "man1_sword1"
+		elsif @dead
+			return "grave"
+		else
+			return "man"+mDirNum.to_s
+		end
 	end
 	
 	def noJob
@@ -63,22 +94,60 @@ class AntNewMan<AntMyEntity
 	#	puts "GOTNEWJOB:"+self.to_s
 	#end
 	
+	def sendAngel
+		e=AntNewAngel.new
+		e.setPos2D(getPos2D)
+		getMap.insertEntity(e)
+		getMap.endChange
+	end
+	
+	#def hit(sub)
+	#	
+	#end
+	def simDie
+		if @dead
+			getMap.removeEntity(self)
+			getMap.endChange
+			return 
+		end
+		@dead=true
+		sendAngel
+	end
+	
+	def setFighting(v)
+		@fighting=v
+	end
+	
+	def die
+		simDie
+		newRestJob(20)
+	end
+	
 	def jobFinished
 		super
+		if getEnergy==0 then
+			return
+			#simDie
+			#newRestJob(20)
+		end
+		
+		setFighting(false)
 		
 		if getVar("bossName")=="" then
 		
 			house=getMap.getNext(self,"house")
-			houseName=house.getVar("name")
-			if houseName=="" then
-				puts "ERROR House has no name!"
-				exit
+			if house
+				houseName=house.getVar("name")
+				if houseName=="" then
+					puts "ERROR House has no name!"
+					exit
+				end
+				setVar("bossName",houseName)
+				newRestJob(rand()*2)
+				house=getMap.getRuby(house)
+				house.signUp(self)
+				@signed=true
 			end
-			setVar("bossName",houseName)
-			newRestJob(rand()*2)
-			house=getMap.getRuby(house)
-			house.signUp(self)
-			@signed=true
 		else
 			boss=getMap.getByName(getVar("bossName"))
 			if not @signed then

@@ -32,6 +32,7 @@ class SwigDirector_AGTexture : public AGTexture, public Swig::Director {
 
 public:
     SwigDirector_AGTexture(VALUE self);
+    SwigDirector_AGTexture(VALUE self, AGTexture const &t);
     SwigDirector_AGTexture(VALUE self, AGSurface const &pSurface);
     SwigDirector_AGTexture(VALUE self, AGSurface const &pSurface, int W, int H);
 };
@@ -1149,6 +1150,7 @@ public:
     virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
     virtual void jobFinished();
     virtual void updateSurface();
+    virtual void die();
     virtual void loadXML(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void newFightJob(int p, AntEntity *target);

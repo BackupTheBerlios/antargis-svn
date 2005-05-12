@@ -78,6 +78,12 @@ class AntGameApp <AntApp
 	end
 
 	def eventFrame(time)
+		if $fc==nil then $fc=0 end
+		if $fc>10 then
+			puts "FPS:"+(1.0/time).to_s
+			$fc=0
+		end
+		$fc+=1
 		getMap().move(time)
 		#GC.start
 		return true

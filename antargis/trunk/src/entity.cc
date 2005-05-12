@@ -95,6 +95,10 @@ Pos2D AntEntity::getPos2D() const
     return Pos2D(mPos.x,mPos.z);
   }
 
+void AntEntity::setPos3D(const Pos3D &p)
+{
+  mPos=p;
+}
 void AntEntity::setPos2D(const Pos2D &p)
 {
   mPos=Pos3D(p.x,getMap()->getHeight(p),p.y);
@@ -391,4 +395,9 @@ void AntEntity::setSpeed(float f)
 float AntEntity::getSpeed() const
 {
   return mMoveSpeed;
+}
+
+void AntEntity::die()
+{
+  jobFinished();
 }

@@ -199,8 +199,8 @@ int AVItem::getZ(const Pos3D &pPos) const
 
 void AVItem::draw(AntargisView *view,AGPainter &p)//const AGRect &r)
 {
+  //  return;
   AGRect ar=view->getRect(this);
-  //  ar=r.project(ar);
   p.blit(getTexture(),ar);
 }
 

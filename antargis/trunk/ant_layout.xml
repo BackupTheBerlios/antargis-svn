@@ -33,7 +33,7 @@
 				</table>
 			</antInventory>
 			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
-			<antMiniView col="0" row="5" name="miniMap"/>
+<!--			<antMiniView col="0" row="5" name="miniMap"/>-->
 			
 		</table>
 	</table>

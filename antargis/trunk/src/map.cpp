@@ -144,7 +144,7 @@ void AntargisMap::insertEntity(AntEntity *e)
   mEntities.insert(e);
   mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
-  if(e->mRubyObject)
+  /*  if(e->mRubyObject)
     {
       VALUE rubyAnimal = e->mRUBY;
 
@@ -152,17 +152,15 @@ void AntargisMap::insertEntity(AntEntity *e)
       //      rb_gc_mark(rubyAnimal);
       cdebug("mark:");
    }
-
+  */
 }
     
 void AntargisMap::removeEntity(AntEntity *p)
 {
-  mEntities.remove(p);
-  std::list<AntEntity*>::iterator i=std::find(mEntList.begin(),mEntList.end(),p);
-  if(i!=mEntList.end())
-    mEntList.erase(i);
-  mEntityMap.erase(p->getID());
+  mToDel.push_back(p);
 }
+
+
 
 std::list<AntEntity*> AntargisMap::getEntities(const AntRect&r)
 {
@@ -181,6 +179,18 @@ void AntargisMap::move(float pTime)
   for(;j!=mPlayers.end();j++)
     (*j)->move(pTime);
   */
+
+  // first remove entities, which shall be deleted
+  std::list<AntEntity*>::iterator d=mToDel.begin();
+  for(;d!=mToDel.end();d++)
+    {
+      mEntities.remove(*d);
+      std::list<AntEntity*>::iterator i=std::find(mEntList.begin(),mEntList.end(),*d);
+      if(i!=mEntList.end())
+	mEntList.erase(i);
+      mEntityMap.erase((*d)->getID());
+    }
+  mToDel.clear();
 
   // now move all entities
 

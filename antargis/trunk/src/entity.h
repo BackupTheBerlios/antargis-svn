@@ -147,6 +147,7 @@ class AntEntity
     }
 
     void setPos2D(const Pos2D &p);
+    void setPos3D(const Pos3D &p);
 
     void mapChanged();
     void setSurface(VoxelImage *i);
@@ -189,9 +190,10 @@ class AntEntity
       if(mEnergy<0.0)
         {
           mEnergy=0.0;
-          jobFinished();
+	  die();
         }
     }
+    virtual void die();
 
     float getEnergy() const
       {

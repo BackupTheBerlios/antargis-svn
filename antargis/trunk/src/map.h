@@ -73,6 +73,7 @@ class AntargisMap
     int maxID;
 
     std::set<MapListener*> mListeners;
+    std::list<AntEntity*> mToDel;
 
   public:
     AntargisMap(int w,int h);

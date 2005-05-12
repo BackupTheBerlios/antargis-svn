@@ -91,6 +91,16 @@ class AntHeroMoveJob<AntHLJob
 		end
 		return false
 	end
+	
+	def moveEnded
+		men=getMen
+		men.each{|x|
+			if x.hasJob then
+				return false
+			end
+		}
+		return true
+	end
 end
 
 class AntHeroFightJob<AntHeroMoveJob
@@ -98,7 +108,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero=hero
 		@target=target
 		@moveReady=false
-		
+		@killstart=true
 		#@hero.newFightJob(0,target)
 		super(hero,0,target.getPos2D,50) # near til 50 pixels
 	end
@@ -108,7 +118,16 @@ class AntHeroFightJob<AntHeroMoveJob
 				@moveReady=true
 			end
 		end
-		if @moveReady
+		if @moveReady and moveEnded
+			men=@hero.getMen
+			
+			men.each{|m|
+				if not m.hasJob or @killstart then
+					m.newFightJob(0,@target)
+					m.setFighting(true)
+				end
+				@killstart=false
+			}
 			# fight
 			puts "FIGHT!!!!!!!!!!!!!!!!!!!!!!!!!!"
 			return true
