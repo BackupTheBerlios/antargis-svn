@@ -22,7 +22,7 @@
 #!/usr/bin/ruby
 
 require 'libantargisruby'
-require 'sdl'
+#require 'sdl'
 require 'testapp.rb'
 require 'theme.rb'
 

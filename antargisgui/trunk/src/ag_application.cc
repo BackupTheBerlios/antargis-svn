@@ -165,3 +165,8 @@ bool AGApplication::eventFrame(float pTime)
 {
   return false;
 }
+
+long AGApplication::getTicks() const
+{
+  return SDL_GetTicks();
+}

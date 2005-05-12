@@ -77,7 +77,7 @@ void myFlip()
 {
   //  TRACE;
   SDL_GL_SwapBuffers();
-  SDL_Delay(10);
+//  SDL_Delay(10);
 }
 
 AGGLScreen::AGGLScreen(int W,int H):
@@ -547,8 +547,15 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
 
   AGRect sRect=getRect(surface);
 
-  float tw=float(pSource.width())/surface->w;
-  float th=float(pSource.height())/surface->h;
+  //  float tw=float(pSource.width())/surface->w;
+  //  float th=float(pSource.height())/surface->h;
+
+  float tw=pSource.getTW();
+  float th=pSource.getTH();
+  //  cdebug(tw<<"//"<<tw2);
+  //  cdebug(th<<"//"<<th2);
+  //float tw=pSource.getTW();
+  //  float th=pSource.getTH();
 
   //  cdebug(tw<<";"<<th);
 
@@ -597,10 +604,20 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
 
   AGRect sRect=getRect(surface);
 
-  float tx0=float(pSrc.x)/surface->w;
-  float ty0=float(pSrc.y)/surface->w;
-  float tx1=float(pSrc.x+pSrc.w)/surface->w;
-  float ty1=float(pSrc.y+pSrc.h)/surface->w;
+  float tx0,ty0,tx1,ty1;
+  if(pSrc.x==0 && pSrc.y==0 && pSrc.w==pSource.width() && pSrc.h==pSource.height())
+    {
+      tx0=ty0=0;
+      tx1=pSource.getTW();
+      ty1=pSource.getTH();
+    }
+    else
+    {
+      tx0=float(pSrc.x)/surface->w;
+      ty0=float(pSrc.y)/surface->w;
+      tx1=float(pSrc.x+pSrc.w)/surface->w;
+      ty1=float(pSrc.y+pSrc.h)/surface->w;
+    }
 
   ty0=1.0f-ty0;
   ty1=1.0f-ty1;

@@ -131,6 +131,15 @@ void AGTexturePainter::tile(const AGTexture &pSource,const AGRect &pDest,const A
 }
 */
 
+AGTexture::AGTexture(const AGTexture &t)
+{
+  s=t.s;
+  w=t.w;
+  h=t.h;
+  mTW=t.mTW;
+  mTH=t.mTH;
+}
+
 AGTexture::AGTexture()
 {
   s=0;
@@ -140,6 +149,8 @@ AGTexture::AGTexture(const AGSurface &pSurface)
   //  CTRACE;
   assert(pSurface.valid());
   *this=getScreen().displayFormat(pSurface.s);
+  mTW=float(w)/float(s->w);
+  mTH=float(h)/float(s->h);
 }
 
 AGTexture::AGTexture(const AGSurface &pSurface,int W,int H)
@@ -148,11 +159,22 @@ AGTexture::AGTexture(const AGSurface &pSurface,int W,int H)
   *this=getScreen().displayFormat(pSurface.s);
   w=W;
   h=H;
+  mTW=float(w)/float(s->w);
+  mTH=float(h)/float(s->h);
 }
 
 void AGTexture::testSave() const
 {
   SDL_SaveBMP(s,"testSave.bmp");
+}
+
+float AGTexture::getTW() const
+{
+  return mTW;
+}
+float AGTexture::getTH() const
+{
+  return mTH;
 }
 
 
@@ -174,6 +196,8 @@ AGTexture::AGTexture(SDL_Surface *ps,int W,int H):s(ps),w(W),h(H)
 {
   //  CTRACE;
   //  cdebug(W<<"//"<<H);
+  mTW=float(w)/float(s->w);
+  mTH=float(h)/float(s->h);
 }
 AGColor AGTexture::getPixel(int x,int y) const
 {

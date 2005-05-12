@@ -137,15 +137,22 @@ bool AGFontEngine::renderText (AGSurface &pSurface, const AGRect &pClipRect, int
 }
 */
 
+
+#define FONT_CACHE
+
+#ifdef FONT_CACHE
 std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
+#endif
 
 bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
 {
   if(pText.length()==0)
     return true;
   //     cdebug(0);
+#ifdef FONT_CACHE
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
+#endif
       //      TRACE;
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
@@ -165,23 +172,28 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       dr.h=sr.h=ns->h;
 
       cdebug(pText<<":"<<sr<<"/////////////"<<dr);
-      
+      //      cdebug(fontCache.size());
       //      SDL_SetColorKey(ns,SDL_SRCCOLORKEY,sge_GetPixel(ns,0,0));
       
       AGTexture ms=getScreen().displayFormat(ns);
       SDL_FreeSurface(ns);
 	
+#ifdef FONT_CACHE
+      cdebug(fontCache.size());
       fontCache[make_pair(pFont,pText)]=ms;
       
       //      SDL_SetColorKey(s,SDL_SRCCOLORKEY,sge_GetPixel(s,0,0));
     }
   AGTexture s=fontCache[make_pair(pFont,pText)];
-
   AGTexture t(s);
+#else
+  AGTexture t(ms);
+#endif
   
   //      TRACE;
-  pSurface->blit(t,AGRect(BaseLineX,BaseLineY,s.width(),s.height()));
+  pSurface->blit(t,AGRect(BaseLineX,BaseLineY,t.width(),t.height()));
     
+#ifdef FONT_CACHE
 
   if(fontCache.size()>100)
     {
@@ -189,7 +201,7 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       // clear font cache
       fontCache.clear();
     }
-
+#endif
   // SDL_FreeSurface(s);
   /*
 

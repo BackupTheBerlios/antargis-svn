@@ -294,15 +294,6 @@ void AGWidget::addChild(AGWidget *w)
     {
       gainFocus(w);
     }
-#ifdef USE_RUBY
-  if(w->mRubyObject)
-    {
-      VALUE rubyAnimal = w->mRUBY;
-      //      rb_gc_mark(rubyAnimal);
-      cdebug("mark:"<<w->getName());
-   }
-
-#endif
 }
 
 void AGWidget::clear()

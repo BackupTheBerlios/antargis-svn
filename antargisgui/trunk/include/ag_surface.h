@@ -92,6 +92,7 @@ class AGTexture
 {
  public:
   AGTexture();
+  AGTexture(const AGTexture &t);
   explicit AGTexture(const AGSurface &pSurface);
   explicit AGTexture(const AGSurface &pSurface,int W,int H);
 
@@ -104,11 +105,15 @@ class AGTexture
 
   virtual AGColor getPixel(int x,int y) const;
 
+  float getTW() const;
+  float getTH() const;
+
  private:
 
   AGTexture(SDL_Surface *s,int W,int H);
   SDL_Surface *s;
   int w,h;
+  float mTW,mTH;
   friend class AGTexturePainter;
   friend class AGSDLScreen;
   friend class AGGLScreen;

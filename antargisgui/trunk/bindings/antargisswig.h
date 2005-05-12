@@ -32,6 +32,7 @@ class SwigDirector_AGTexture : public AGTexture, public Swig::Director {
 
 public:
     SwigDirector_AGTexture(VALUE self);
+    SwigDirector_AGTexture(VALUE self, AGTexture const &t);
     SwigDirector_AGTexture(VALUE self, AGSurface const &pSurface);
     SwigDirector_AGTexture(VALUE self, AGSurface const &pSurface, int W, int H);
 };

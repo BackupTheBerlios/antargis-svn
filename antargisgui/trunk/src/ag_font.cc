@@ -24,6 +24,8 @@
 AGFont::AGFont(const std::string &pFile,int size):
   mName(pFile),mSize(size),mColor(0xFF,0xFF,0xFF)
 {
+  mAlpha=0xFF;
+  mStyle=NORMAL;
 }
 
 AGFont::AGFont()
@@ -31,6 +33,8 @@ AGFont::AGFont()
   mName="Arial.ttf";
   mSize=14;
   mColor=AGColor(0xFF,0xFF,0xFF);
+  mAlpha=0xFF;
+  mStyle=NORMAL;
 }
 
 void AGFont::setColor(const AGColor &pColor)

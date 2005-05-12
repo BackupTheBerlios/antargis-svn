@@ -1478,6 +1478,12 @@ SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self): AGTexture(), Swig::D
 
 
 
+SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self, AGTexture const &t): AGTexture(t), Swig::Director(self) {
+    
+}
+
+
+
 SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self, AGSurface const &pSurface): AGTexture(pSurface), Swig::Director(self) {
     
 }
@@ -13198,6 +13204,30 @@ _wrap_new_AGTexture__SWIG_0(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_new_AGTexture__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
+    AGTexture *arg2 = 0 ;
+    AGTexture *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    char *classname = "Libantargisruby::AGTexture";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGTexture *)new SwigDirector_AGTexture(arg1,(AGTexture const &)*arg2);
+        
+    } else {
+        result = (AGTexture *)new AGTexture((AGTexture const &)*arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGTexture__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     AGSurface *arg2 = 0 ;
     AGTexture *result;
     
@@ -13237,7 +13267,7 @@ _wrap_AGTexture_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGTexture__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGTexture__SWIG_3(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGSurface *arg2 = 0 ;
     int arg3 ;
@@ -13287,10 +13317,23 @@ static VALUE _wrap_new_AGTexture(int nargs, VALUE *args, VALUE self) {
         if (_v) {
             {
                 void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGSurface, 0) != -1)) ? 1 : 0;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
                 return _wrap_new_AGTexture__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGSurface, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGTexture__SWIG_2(nargs, args, self);
             }
         }
     }
@@ -13311,7 +13354,7 @@ static VALUE _wrap_new_AGTexture(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_AGTexture__SWIG_2(nargs, args, self);
+                        return _wrap_new_AGTexture__SWIG_3(nargs, args, self);
                     }
                 }
             }
@@ -13411,6 +13454,38 @@ _wrap_AGTexture_getPixel(int argc, VALUE *argv, VALUE self) {
         resultptr = new AGColor((AGColor &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGTexture_getTW(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 1);
+    result = (float)((AGTexture const *)arg1)->getTW();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGTexture_getTH(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 1);
+    result = (float)((AGTexture const *)arg1)->getTH();
+    
+    vresult = rb_float_new(result);
     return vresult;
 }
 
@@ -19161,6 +19236,22 @@ _wrap_AGApplication_tryQuit(int argc, VALUE *argv, VALUE self) {
     (arg1)->tryQuit();
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_getTicks(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    long result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    result = (long)((AGApplication const *)arg1)->getTicks();
+    
+    vresult = INT2NUM(result);
+    return vresult;
 }
 
 
@@ -25997,6 +26088,8 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGTexture.klass, "testSave", VALUEFUNC(_wrap_AGTexture_testSave), -1);
     rb_define_method(cAGTexture.klass, "getRect", VALUEFUNC(_wrap_AGTexture_getRect), -1);
     rb_define_method(cAGTexture.klass, "getPixel", VALUEFUNC(_wrap_AGTexture_getPixel), -1);
+    rb_define_method(cAGTexture.klass, "getTW", VALUEFUNC(_wrap_AGTexture_getTW), -1);
+    rb_define_method(cAGTexture.klass, "getTH", VALUEFUNC(_wrap_AGTexture_getTH), -1);
     cAGTexture.mark = 0;
     cAGTexture.destroy = (void (*)(void *)) free_AGTexture;
     rb_define_module_function(mLibantargisruby, "disown_AGScreen", VALUEFUNC(_wrap_disown_AGScreen), -1);
@@ -26330,6 +26423,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGApplication.klass, "setMainWidget", VALUEFUNC(_wrap_AGApplication_setMainWidget), -1);
     rb_define_method(cAGApplication.klass, "draw", VALUEFUNC(_wrap_AGApplication_draw), -1);
     rb_define_method(cAGApplication.klass, "tryQuit", VALUEFUNC(_wrap_AGApplication_tryQuit), -1);
+    rb_define_method(cAGApplication.klass, "getTicks", VALUEFUNC(_wrap_AGApplication_getTicks), -1);
     cAGApplication.mark = 0;
     cAGApplication.destroy = (void (*)(void *)) free_AGApplication;
     rb_define_module_function(mLibantargisruby, "disown_AGText", VALUEFUNC(_wrap_disown_AGText), -1);

@@ -42,6 +42,8 @@ class AGApplication:public AGMessageObject
   void draw();
 
   void tryQuit();
+
+  long getTicks() const;
   
  private:
   void clearOldMousePosition();
