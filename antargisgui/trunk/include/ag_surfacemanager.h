@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_application.h
+ * ag_surfacemanager.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,44 +18,33 @@
  * License along with this program.
  */
 
-#ifndef AG_APPLICATION_H
-#define AG_APPLICATION_H
-
-#include "ag_messageobject.h"
-#include "ag_widget.h"
-
-class AGApplication:public AGMessageObject
+// Managed Surface
+class AGMSurface
 {
  public:
-  AGApplication();
+  AGMSurface(AGMSurface &s);
 
-  bool run();
-
-  virtual bool eventIdle();
-  virtual bool eventFrame(float pTime);
-
-  virtual bool eventQuit(const AGEvent *m);
-  virtual bool eventKeyDown(const AGEvent *m2);
-
-  void setMainWidget(AGWidget *w);
-
-  void draw();
-
-  void tryQuit();
-
-  long getTicks() const;
-  void delay(int ms);
-  
+  AGSurface 
  private:
-  void clearOldMousePosition();
-  void drawCursor();
+  AGMSurface(AGSurface &s);
 
-  void flushEventQueue();
-  bool doEvent(const SDL_Event *e);
-
-  bool mRunning;
-  bool mIdleCalls;
-  AGWidget *mainWidget;
+  AGSurface &ms;
 };
 
-#endif
+class AGSurfaceManager
+{
+  std::set<AGSurface*> mRealSurfaces;
+  std::set<AGMSurface*> mManagedSurfaces;
+ public:
+
+  AGMSurface loadSurface(const std::string &pFilename);
+  
+  void registerSurface(AGMSurface *pSurface);
+  void deregisterSurface(AGMSurface *pSurface);
+
+  void cleanUp();
+ private:
+  AGSurfaceManager()
+};
+
+AGSurfaceManager *getSurfaceManager();

@@ -20,6 +20,7 @@
 
 #include "ag_layoutfactory.h"
 #include "ag_debug.h"
+#include "ag_kill.h"
 
 AGLayoutCreator::AGLayoutCreator(const std::string &pName)
 {
@@ -33,6 +34,11 @@ AGWidget *AGLayoutCreator::create(AGWidget *pParent,const AGRect &pRect,const xm
 
 
 AGLayoutFactory::AGLayoutFactory()
+{
+  REGISTER_SINGLETON(this);
+}
+
+AGLayoutFactory::~AGLayoutFactory()
 {
 }
 

@@ -320,7 +320,7 @@ std::string Node::parseString(ParserInfo &info,char delimit)
 {
   bool weiter=true;
   bool escape=false;
-  std::string n;
+  std::ostringstream n;
 
   while(weiter)
     {
@@ -329,7 +329,7 @@ std::string Node::parseString(ParserInfo &info,char delimit)
         {
           if(escape)
             {
-              n+="\\";
+              n<<"\\";
               escape=false;
             }
           else
@@ -339,16 +339,16 @@ std::string Node::parseString(ParserInfo &info,char delimit)
         {
           if(escape)
             {
-              n+=delimit;
+              n<<delimit;
               escape=false;
             }
           else
-            return n;
+            return n.str();
         }
       else if(c=='n' && escape)
-	n+='\n',escape=false;
+	n<<'\n',escape=false;
       else
-        n+=c;
+        n<<c;
       info.inc();
     }
   // never reached
@@ -383,7 +383,7 @@ void Node::parseArguments(ParserInfo &info)
 
 std::string Node::parseName(ParserInfo &info)
 {
-  std::string n;
+  std::ostringstream os;
   char i=info.next();
   while(
     (i>='a' && i<='z') ||
@@ -396,12 +396,12 @@ std::string Node::parseName(ParserInfo &info)
     (i=='-')
   )
     {
-      n+=i;
+      os<<i;
       info.inc();
 
       i=info.next();
     }
-  return n;
+  return os.str();
 }
 
 void Node::parseContents(ParserInfo &info)

@@ -22,21 +22,24 @@
 #define __GUI_SURFACE_H
 
 #include <string>
+#include <set>
 #include <SDL.h>
+#include <GL/gl.h>
+#include <GL/glext.h>
+#include <GL/glu.h>
 #include "ag_geometry.h"
 #include "ag_painttarget.h"
 
 class AGColor;
+class AGSurface;
 
-extern bool mGLMode;
+//extern bool mGLMode;
+
 
 // Generic classes - for OpenGL and "normal" SDL
 class AGSurface:public AGPaintTarget
 {
  public:  
-  explicit AGSurface(SDL_Surface *s,int w,int h);
-  explicit AGSurface(SDL_Surface *s);
-
   AGSurface();
   AGSurface(int w,int h);
   AGSurface(const AGSurface &p);
@@ -51,10 +54,9 @@ class AGSurface:public AGPaintTarget
 
   AGSurface getSubSurface(const AGRect &r) const;
 
-  bool valid() const
-  {
-    return s;
-  }
+  AGSurface *clone() const;
+
+  bool valid() const;
 
   AGSurface &operator=(const AGSurface &p);
 
@@ -62,28 +64,29 @@ class AGSurface:public AGPaintTarget
 
   void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-//  void drawGradientAlpha2(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
 
   virtual void putPixel(int x,int y,const AGColor &c);
   virtual AGColor getPixel(int x,int y) const;
 
- protected:
+ private:
 
   // used by AGDraw
   Uint32 color(const AGColor &c) const;
 
+  //  explicit AGSurface(SDL_Surface *s,int w,int h);
+  explicit AGSurface(SDL_Surface *s);
 
   SDL_Surface *s;
-  //  int w,h; // original size - as surface always gets converted to (2^n)*(2^n) in gl mode
-  //  bool mChanged;
+
   friend class AGSDLScreen;
   friend class AGGLScreen;
-  friend class AGFontEngine;
+  friend class AGFontEngine; // needed because TTF_* function return Surfaces
   friend class AGDraw;
   friend class AGColor;
   friend class AGSurfacePainter;
   friend class AGTexture;
+  friend class AGSurfaceManager;
 };
 
 // FIXME: make AGTexture a AGPaintTarget, too
@@ -93,8 +96,9 @@ class AGTexture
  public:
   AGTexture();
   AGTexture(const AGTexture &t);
-  explicit AGTexture(const AGSurface &pSurface);
-  explicit AGTexture(const AGSurface &pSurface,int W,int H);
+  //  explicit AGTexture(const AGSurface &pSurface);
+  //  explicit AGTexture(const AGSurface &pSurface,int W,int H);
+  ~AGTexture();
 
   int width() const;
   int height() const;
@@ -103,12 +107,27 @@ class AGTexture
 
   AGRect getRect() const;
 
-  virtual AGColor getPixel(int x,int y) const;
+  AGColor getPixel(int x,int y) const;
 
   float getTW() const;
   float getTH() const;
 
+  bool hasTexture() const;
+  bool textureUsed() const;
+  void clearTexture();
+  void clearTextureUsed();
+  void setTextureID(GLuint id);
+  GLuint getTextureID();
+
+  SDL_Surface *surface();
+
  private:
+
+  void init();
+
+  GLuint mTextureID;
+  bool mHasTexture;
+  bool mTextureUsed;
 
   AGTexture(SDL_Surface *s,int W,int H);
   SDL_Surface *s;
@@ -127,26 +146,66 @@ class AGScreen:public AGPaintTarget
  public:
   virtual void flip();
 
-  virtual SDL_Surface *newSurface(int x,int y);
+ private:
+  virtual AGTexture makeTexture(const AGSurface &s);
+  virtual void deleteTexture(AGTexture &t);
 
-  virtual AGTexture displayFormat(SDL_Surface *s);
-  
-  virtual AGSurface loadSurface(const std::string &pFilename);
-
-  virtual AGTexture makeTexture(AGSurface &s);
+  friend class AGTextureManager;
 };
 
 AGScreen &getScreen();
 void setScreen(AGScreen *s);
 
-class AGSurfaceCache
+class AGSurfaceManager
 {
  public:
-  AGSurfaceCache();
+  ~AGSurfaceManager();
+  AGSurface loadSurface(const std::string &pFilename);
+  AGSurface fromSDL(SDL_Surface *s); // eats s
 
-  AGSurface getSurface(const std::string &pFilename);
+  // AGSurfaces are not owned - but SDL_Surfaces - so beware!!
+  void registerSurface(AGSurface *pSurface);
+  void deregisterSurface(AGSurface *pSurface);
+
+  void cleanup();
+ private:
+  AGSurfaceManager();
+
+  std::set<AGSurface*> mSurfaces;
+  std::set<SDL_Surface*> mRealSurfaces;
+  friend AGSurfaceManager *getSurfaceManager();
+
 };
+AGSurfaceManager *getSurfaceManager();
 
-AGSurfaceCache *surfaceCache();
+
+
+class AGTextureManager
+{
+ public:
+  ~AGTextureManager();
+
+  void registerTexture(AGTexture *pTexture);
+  void deregisterTexture(AGTexture *pTexture);
+
+  // cleanup deleted all unreferenced Surfaces
+  void cleanup();
+
+  // checkUnused deletes Textures from GL, which weren't used in last frame
+  void checkUnused();
+
+  AGTexture makeTexture(const AGSurface &s);
+
+ private:
+  AGTextureManager();
+
+  std::set<AGTexture*> mTextures;
+  std::set<GLuint> mTextureIDs;
+  std::set<SDL_Surface*> mSurfaces;
+  friend AGTextureManager *getTextureManager();
+};
+AGTextureManager *getTextureManager();
+
+void setTrap();
 
 #endif

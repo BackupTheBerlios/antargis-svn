@@ -20,6 +20,7 @@
 
 #include "ag_fontengine.h"
 #include "ag_debug.h"
+#include "ag_kill.h"
 #include "sge.h"
 
 #include <SDL_ttf.h>
@@ -99,11 +100,20 @@ TTF_Font *getFont(std::string s,int i)
 
 AGFontEngine::AGFontEngine()
 {
+  //  REGISTER_SINGLETON(this);
 }
 
 AGFontEngine::~AGFontEngine()
 {
+  CTRACE;
+  std::map<FontInfo,TTF_Font*>::iterator i=fontEngineFonts.begin();
+  for(;i!=fontEngineFonts.end();i++)
+    TTF_CloseFont(i->second);
+  TTF_Quit();
+ 
 }
+
+AGFontEngine myFontEngine;
 
 /*
 bool AGFontEngine::renderText (AGSurface &pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
@@ -174,9 +184,11 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       cdebug(pText<<":"<<sr<<"/////////////"<<dr);
       //      cdebug(fontCache.size());
       //      SDL_SetColorKey(ns,SDL_SRCCOLORKEY,sge_GetPixel(ns,0,0));
+
+      AGSurface as(ns);//,ns->w,ns->h); // we translate ownage to AGSurfaceManager
       
-      AGTexture ms=getScreen().displayFormat(ns);
-      SDL_FreeSurface(ns);
+      AGTexture ms=getTextureManager()->makeTexture(as);
+      //      SDL_FreeSurface(ns);
 	
 #ifdef FONT_CACHE
       cdebug(fontCache.size());
@@ -184,8 +196,8 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       
       //      SDL_SetColorKey(s,SDL_SRCCOLORKEY,sge_GetPixel(s,0,0));
     }
-  AGTexture s=fontCache[make_pair(pFont,pText)];
-  AGTexture t(s);
+  AGTexture &t=fontCache[make_pair(pFont,pText)];
+  //  AGTexture t(s);
 #else
   AGTexture t(ms);
 #endif

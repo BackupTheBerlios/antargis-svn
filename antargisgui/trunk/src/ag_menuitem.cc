@@ -130,7 +130,7 @@ bool AGMenuItem::eventMouseClick(const AGEvent *m)
 AGSubMenu::AGSubMenu(AGWidget *pParent,const std::string &pText):
   AGMenuItem(pParent,pText)
 {
-  AGSurface surface2=getScreen().loadSurface("right_arrow.png");
+  AGSurface surface2=getSurfaceManager()->loadSurface("right_arrow.png");
   addChildBack(new AGImage(this,AGPoint(0,0),surface2,false));
   adaptWidthFromChildren(); // so that parent can adapt to this
   rePosition();

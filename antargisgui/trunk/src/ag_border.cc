@@ -26,7 +26,7 @@ AGBorder::AGBorder(const std::string &pTheme)
 {
   if((mEnable=getTheme()->hasSurface(pTheme+".image")))
     {
-      mSurface=AGTexture(getTheme()->getSurface(pTheme+".image"));
+      mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
     }
 }
 

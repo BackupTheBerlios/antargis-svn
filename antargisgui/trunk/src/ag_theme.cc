@@ -152,7 +152,7 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	  if((*i)->getName()=="color")
 	    t.setColor(sname,AGColor((*i)->get("color")));
 	  if((*i)->getName()=="image")
-	    t.setSurface(sname,getScreen().loadSurface((*i)->get("file")));
+	    t.setSurface(sname,getSurfaceManager()->loadSurface((*i)->get("file")));
 	  if((*i)->getName()=="value")
 	    t.setInt(sname,toInt((*i)->get("value")));
 	  if((*i)->getName()=="font")

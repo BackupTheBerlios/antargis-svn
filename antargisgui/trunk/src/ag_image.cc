@@ -23,7 +23,7 @@
 
 AGImage::AGImage(AGWidget *pParent,const AGPoint &p,AGSurface pSurface,bool pTile,const AGRect &pRect):
   AGWidget(pParent,pSurface.getRect()+p),
-  mTexture(pSurface),mTile(pTile)
+  mTexture(getTextureManager()->makeTexture(pSurface)),mTile(pTile)
 {
   //  CTRACE;
   if(pRect!=pSurface.getRect() && pRect.w!=0 && pRect.h!=0)
@@ -69,5 +69,5 @@ void AGImage::draw(AGPainter &p)
 
 void AGImage::setSurface(AGSurface pSurface)
 {
-  mTexture=AGTexture(pSurface);
+  mTexture=getTextureManager()->makeTexture(pSurface);
 }

@@ -37,6 +37,7 @@ class AGLayoutFactory
 
   AGLayoutFactory();
  public:
+  ~AGLayoutFactory();
 
   void addCreator(const std::string &pName,AGLayoutCreator *creator);
 

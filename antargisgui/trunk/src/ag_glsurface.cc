@@ -118,199 +118,17 @@ AGGLScreen::~AGGLScreen()
 { 
 }
 
-void AGGLScreen::checkUnusedTextures()
-{
-  std::set<TextureID> toDel;
-  std::map<TextureID,SDL_Surface*>::iterator i=mTextures.begin();
-  for(;i!=mTextures.end();i++)
-    {
-      if(mUsedTextures[i->first]==false)
-	toDel.insert(i->first);
-    }
-
-  std::set<TextureID>::iterator j=toDel.begin();
-  for(;j!=toDel.end();j++)
-    {
-      SDL_Surface *s=mTextures[*j];
-      mTexturesInv.erase(s);
-      mTextures.erase(*j);
-      
-      // find gl-surface
-      /*      std::map<SDL_Surface*,SDL_Surface*>::iterator k= mGLSurfaces.begin();
-
-      for(;k!=mGLSurfaces.end();k++)
-	{
-	  if(k->second==s)
-	    {
-	      mGLSurfaces.erase(k);
-	      break;
-	    }
-	}
-	SDL_FreeSurface(s);*/
-      //      cdebug("Texture "<<*j<<" deleted");
-    }
-
-}
-
-
-AGSurface *s[6];
-TextureID tids[6];
-bool inited=false;
-/*
-void AGGLScreen::paintTerrain()
-{
-  if(!inited)
-    {
-      int x,y,z;
-
-      for(z=0;z<6;z++)
-	{
-	  s[z]=new AGSurface(32,32);
-	}
-
-      std::vector<int> hs(32*32);
-
-      for(x=0;x<32;x++)
-	for(y=0;y<32;y++)
-	  hs[x+y*32]=rand()%4;
-
-      for(x=0;x<32;x++)
-	for(y=0;y<32;y++)
-	  for(z=0;z<2+hs[x+y*32];z++)
-	    {
-	      AGColor c;
-
-	      if(z<1)
-		c=AGColor(0xAA+rand()%20,0x77+rand()%20,0);
-	      else
-		c=AGColor(0,0xFF-rand()%20,0);
-
-	      sge_PutPixel(s[z]->s,x,y,c.mapRGB(s[z]->surface()->format));
-	    }
-
-      std::map<std::pair<int,int>,bool> shadow;
-      // shadow
-      for(z=5;z>=0;z--)
-	for(x=0;x<32;x++)
-	for(y=0;y<32;y++)
-	  //for(z=5;z>=0;z--)
-	    {
-	      Uint8 R,G,B,A;
-	      Uint32 c=sge_GetPixel(s[z]->surface(),x,y);
-
-	      SDL_GetRGBA(c,s[z]->surface()->format,&R,&G,&B,&A);
-
-	      //  cdebug(x<<"//"<<z);
-	      
-	      if(A>0)
-		{
-		  int sx=x+z,sy=y;
-
-		  sx%=32;
-		  sy%=32;
-		  if(shadow[std::make_pair(sx,sy)])
-		    {
-		      
-		      R>>=1;
-		      G>>=1;
-		      B>>=1;
-		      sge_PutPixel(s[z]->surface(),x,y,SDL_MapRGBA(s[z]->surface()->format,R,G,B,A));
-		    }
-		  shadow[std::make_pair(sx,sy)]=true;
-		}
-	    }
-
-
-
-      for(z=0;z<6;z++)
-	{
-	  tids[z]=getID(s[z]->surface());
-	}
-      inited=true;
-    }
-
-
-  //  glViewport( 0, 0, w, h );
-  glMatrixMode( GL_PROJECTION );
-  glLoadIdentity( );
-
-  GLfloat ratio;
-
-  ratio = ( float )w / ( float )h;
-
-  gluPerspective( 45.0f, ratio, 1.0f, 100.0f );
-  //glOrtho(0,w,0,h,1,100);
-
-  glMatrixMode( GL_MODELVIEW );
-  glLoadIdentity( );
-
-
-
-  //  glScalef(3,3,1);
-  //  glScalef(0.5,0.5,0.5);
-
-  glColor4f(1,1,1,1);//1,1,1);//0,0);
-  
-  glBindTexture(GL_TEXTURE_2D,getID(s[0]->surface()));
-
-  
-  Vec3f v[4];
-  float W=4.0/w;
-
-  W*=32;
-
-
-  v[0]=Vec3f(-W,-0.4,-4); //lf
-  v[1]=Vec3f(-W,-0.4,-6); //lb
-  v[2]=Vec3f( W,-0.4,-6); //rb
-  v[3]=Vec3f( W,-0.4,-4); //rf
-
-  Vec2f tv[4];
-  tv[0]=Vec2f(0,0);
-  tv[1]=Vec2f(0,1);//1
-  tv[2]=Vec2f(1,1);//1
-  tv[3]=Vec2f(1,0);
-
-  for(int j=0;j<4;j++)
-    {
-      v[j][0]*=4;
-      v[j][1]*=4;
-      tv[j]*=4;
-
-      //      v[j][2]+=1;
-    }
-
-  for(int j=0;j<6;j++)
-    {
-      float alpha=1.0;//0.5/(j+1)+0.5;
-      //      alpha*=alpha;
-      glBindTexture(GL_TEXTURE_2D,getID(s[j]->surface()));
-      glColor4f(1,1,1,alpha);
-
-      glBegin(GL_QUADS);
-      
-      for(int i=0;i<4;i++)
-	{
-	  glTexCoord2fv(tv[i]);
-	  glVertex3fv(v[i]);
-	  v[i]+=Vec3f(0,5.0/h,0);
-	}
-      glEnd();
-    }
-    
-  
-}
-*/
-
 void AGGLScreen::flip()
 {
   //  paintTerrain();
   //  TRACE;
   myFlip();
-  checkUnusedTextures();
+  getTextureManager()->cleanup(); // FIXME: maybe delete it - or do cleanup in 2 stages
+  getTextureManager()->checkUnused();
+  //  checkUnusedTextures();
   initDraw();
 
-  mUsedTextures.clear();
+  //  mUsedTextures.clear();
 
   initGUIView(w,h);
 }
@@ -324,6 +142,7 @@ size_t next2pow(size_t i)
   return j;
 }
 
+/*
 SDL_Surface *AGGLScreen::newSurface(int x,int y)
 {
   int bytes=4;
@@ -333,7 +152,7 @@ SDL_Surface *AGGLScreen::newSurface(int x,int y)
   return  SDL_CreateRGBSurface(    SDL_SWSURFACE, nw,nw, bytes*8,0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
   
 }
-
+*/
 
 SDL_Surface *toGLTexture(SDL_Surface *image)
 {
@@ -385,7 +204,7 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
   //  SDL_FreeSurface( image );
   return openGLSurface;
 }
-
+/*
 AGSurface AGGLScreen::loadSurface(const std::string &pFilename)
 {
   std::string file=loadFile(pFilename);
@@ -409,10 +228,11 @@ AGSurface AGGLScreen::loadSurface(const std::string &pFilename)
   //  cdebug("load:"<<n);
   return AGSurface(s,w,h);
 }
-
+*/
 
 GLuint assignTexture(SDL_Surface *pSurface)
 {
+  //  TRACE;
   SDL_Surface* surface = pSurface;//toGLTexture(pSurface);
   //  assert(surface);
 
@@ -468,7 +288,7 @@ GLuint assignTexture(SDL_Surface *pSurface)
 
   
   glBindTexture( GL_TEXTURE_2D,0);
-
+  //  cdebug(id);
   return id;
 }
 
@@ -479,11 +299,34 @@ void deleteTexture(GLuint id)
 
 
 
+#ifdef NEW_TEXTURES
+GLuint AGGLScreen::getID(AGTexture *s)
+{
+  //  CTRACE;
+  //  cdebug("texture:"<<s);
+  //  cdebug(s->hasTexture());
+  if(s->hasTexture())
+    return s->getTextureID();
 
+  //  cdebug("assign..");
+  GLuint id=assignTexture(s->surface());
+  //  cdebug("ID:"<<id);
+  //  cdebug("rect:"<<s->getRect());
+  s->setTextureID(id);
+  //  mTextures.push_back(s);
+  assert(s->hasTexture());
+  // cdebug(s->hasTexture());
+
+ // SDL_SaveBMP(s->surface(),"texture.bmp");
+  return s->getTextureID();// set used
+}
+#else
 TextureID AGGLScreen::getID(SDL_Surface *s)
 {
   //  if(mGLSurfaces[s]==0)
   //    mGLSurfaces[s]=toGLTexture(s);
+  //  if(mTexturesInv.size())
+    //    return mTexturesInv.begin()->second;
 
   SDL_Surface *p=s;//mGLSurfaces[s];
   GLuint id;
@@ -500,11 +343,12 @@ TextureID AGGLScreen::getID(SDL_Surface *s)
 
   return id;
 }
-
+#endif
+/*
 AGRect AGGLScreen::getRect(SDL_Surface *s)
 {
   return mSurfaceRect[s];
-}
+  }*/
 
 bool AGGLScreen::inScreen(const AGRect &r) const
 {
@@ -535,17 +379,22 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
   //  cdebug(tw<<";"<<th);
   
   
-  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
+  //  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
   
   //cdebug(surface);
   //  SDL_SaveBMP(surface,"test.bmp");
-  
+
+#ifdef NEW_TEXTURES
+  GLuint id=getID(const_cast<AGTexture*>(&pSource));
+#else
+  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
   TextureID id=getID(surface);
+#endif
 
   glBindTexture( GL_TEXTURE_2D,id);
   assert( glGetError() == GL_NO_ERROR );
 
-  AGRect sRect=getRect(surface);
+  //  AGRect sRect=getRect(surface);
 
   //  float tw=float(pSource.width())/surface->w;
   //  float th=float(pSource.height())/surface->h;
@@ -595,14 +444,21 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
   float x1=pRect.x+w2;
   float y1=h-1-(pRect.y+h2);
 
+#ifdef NEW_TEXTURES
   SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
-  
+  GLuint id=getID(const_cast<AGTexture*>(&pSource));
+#else
+  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
   TextureID id=getID(surface);
+#endif
+  //  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
+  
+  //  TextureID id=getID(surface);
 
   glBindTexture( GL_TEXTURE_2D,id);
   assert( glGetError() == GL_NO_ERROR );
 
-  AGRect sRect=getRect(surface);
+  //  AGRect sRect=getRect(surface);
 
   float tx0,ty0,tx1,ty1;
   if(pSrc.x==0 && pSrc.y==0 && pSrc.w==pSource.width() && pSrc.h==pSource.height())
@@ -648,8 +504,11 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
 void AGGLScreen::tile(const AGTexture &pSource)
 {
   CTRACE;
+#ifdef NEW_TEXTURES
+  TextureID id=getID(const_cast<AGTexture*>(&pSource));//urface());
+#else
   TextureID id=getID(const_cast<AGTexture&>(pSource).s);//urface());
-
+#endif
   float x0=0;
   float y0=h-1;
   float x1=w-1;
@@ -694,7 +553,11 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
     return;
   tile(pSource,pDest,AGRect(0,0,pSource.width(),pSource.height()));
   return;
+#ifdef NEW_TEXTURES
+  TextureID id=getID(const_cast<AGTexture*>(&pSource));//urface());
+#else
   TextureID id=getID(const_cast<AGTexture&>(pSource).s);//urface());
+#endif
 
   float x0=pDest.x;
   float y0=h-1-(pDest.y);
@@ -741,8 +604,12 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
   //  CTRACE;
   //  cdebug(pSource.width()<<"/"<<pSource.height());
   //  cdebug(pDest<<";"<<pSrc);
-  
+
+#ifdef NEW_TEXTURES
+  TextureID id=getID(const_cast<AGTexture*>(&pSource));//urface());
+#else
   TextureID id=getID(const_cast<AGTexture&>(pSource).s);//urface());
+#endif
 
   float x0=pDest.x;
   float y0=h-1-(pDest.y);
@@ -972,11 +839,19 @@ void AGGLScreen::putPixel(int x,int y,const AGColor &pc)
   glDrawPixels(1,1,GL_RGBA,GL_UNSIGNED_INT_8_8_8_8,&c);
 }
 
-AGTexture AGGLScreen::displayFormat(SDL_Surface *s)
+AGTexture AGGLScreen::makeTexture(const AGSurface &s)
 {
   //  CTRACE;
-  //  cdebug(s->w<<"//"<<s->h);
-  return AGTexture(toGLTexture(s),s->w,s->h);
+  return AGTexture(toGLTexture(const_cast<AGSurface&>(s).surface()),s.width(),s.height());
+}
+
+void AGGLScreen::deleteTexture(AGTexture &t)
+{
+  if(t.hasTexture())
+    {
+      ::deleteTexture(t.getTextureID());
+      t.clearTexture();
+    }
 }
 
 

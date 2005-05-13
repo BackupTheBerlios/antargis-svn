@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_application.h
+ * kill.cc
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,44 +18,11 @@
  * License along with this program.
  */
 
-#ifndef AG_APPLICATION_H
-#define AG_APPLICATION_H
+#include "ag_kill.h"
 
-#include "ag_messageobject.h"
-#include "ag_widget.h"
-
-class AGApplication:public AGMessageObject
+AGInstanceKiller mInstanceKiller;
+AGInstanceKiller *getInstanceKiller()
 {
- public:
-  AGApplication();
+  return &mInstanceKiller;
+}
 
-  bool run();
-
-  virtual bool eventIdle();
-  virtual bool eventFrame(float pTime);
-
-  virtual bool eventQuit(const AGEvent *m);
-  virtual bool eventKeyDown(const AGEvent *m2);
-
-  void setMainWidget(AGWidget *w);
-
-  void draw();
-
-  void tryQuit();
-
-  long getTicks() const;
-  void delay(int ms);
-  
- private:
-  void clearOldMousePosition();
-  void drawCursor();
-
-  void flushEventQueue();
-  bool doEvent(const SDL_Event *e);
-
-  bool mRunning;
-  bool mIdleCalls;
-  AGWidget *mainWidget;
-};
-
-#endif

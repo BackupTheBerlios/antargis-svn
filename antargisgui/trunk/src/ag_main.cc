@@ -25,6 +25,7 @@
 #include "ag_sdlsurface.h"
 #include "ag_glsurface.h"
 #include "ag_fs.h"
+#include "ag_debug.h"
 #include "privates.h"
 #include <SDL.h>
 
@@ -98,9 +99,9 @@ AGMain::AGMain()
   SDL_Surface *ms=SDL_SetVideoMode(w,h,SCREEN_DEPTH,videoFlags);
   std::cerr<<"ms:"<<ms<<std::endl;
   if(openGL)
-    setScreen(new AGGLScreen(w,h));
+    setScreen(mScreen=new AGGLScreen(w,h));
   else
-    setScreen(new AGSDLScreen(ms));
+    setScreen(mScreen=new AGSDLScreen(ms));
   //  setScreen(new AGScreen(mDisplay=SDL_SetVideoMode(w,h,SCREEN_DEPTH,
   //						   videoFlags)));
 
@@ -122,6 +123,8 @@ AGMain::AGMain()
 }
 AGMain::~AGMain()
 {
+  CTRACE;
+  delete mScreen;
 }
 
 void AGMain::flip()
@@ -174,10 +177,12 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
 
   // set video mode
   SDL_Surface *ms=SDL_SetVideoMode(w,h,SCREEN_DEPTH,videoFlags);
+  if(mScreen)
+    delete mScreen;
   if(openGL)
-    setScreen(new AGGLScreen(w,h));
+    setScreen(mScreen=new AGGLScreen(w,h));
   else
-    setScreen(new AGSDLScreen(ms));
+    setScreen(mScreen=new AGSDLScreen(ms));
   
 }
 

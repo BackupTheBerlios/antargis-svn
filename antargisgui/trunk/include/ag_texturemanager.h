@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_application.h
+ * ag_texturemanager.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -17,45 +17,3 @@
  * You should have received a copy of the GNU General Public
  * License along with this program.
  */
-
-#ifndef AG_APPLICATION_H
-#define AG_APPLICATION_H
-
-#include "ag_messageobject.h"
-#include "ag_widget.h"
-
-class AGApplication:public AGMessageObject
-{
- public:
-  AGApplication();
-
-  bool run();
-
-  virtual bool eventIdle();
-  virtual bool eventFrame(float pTime);
-
-  virtual bool eventQuit(const AGEvent *m);
-  virtual bool eventKeyDown(const AGEvent *m2);
-
-  void setMainWidget(AGWidget *w);
-
-  void draw();
-
-  void tryQuit();
-
-  long getTicks() const;
-  void delay(int ms);
-  
- private:
-  void clearOldMousePosition();
-  void drawCursor();
-
-  void flushEventQueue();
-  bool doEvent(const SDL_Event *e);
-
-  bool mRunning;
-  bool mIdleCalls;
-  AGWidget *mainWidget;
-};
-
-#endif

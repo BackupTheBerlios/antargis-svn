@@ -31,7 +31,9 @@ void initFS(const char *argv0)
   PHYSFS_init(argv0);
   PHYSFS_setSaneConfig("Antargis","Antargis","ZIP",false,false);
   FSinited=true;
-  cdebug("writedir:"<<PHYSFS_getWriteDir());
+  const char *wp=PHYSFS_getWriteDir();
+  cdebug("writedir:"<<wp);
+
   cdebug("searchpath:");
 
   PHYSFS_addToSearchPath("/usr/share/antargisgui/",1);
@@ -42,7 +44,11 @@ void initFS(const char *argv0)
 
   char **p=PHYSFS_getSearchPath();
   for(;*p;p++)
-    cdebug(*p);
+    {
+      cdebug(*p);
+
+    }
+
   cdebug("--");
 }
 

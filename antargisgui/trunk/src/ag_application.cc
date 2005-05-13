@@ -170,3 +170,8 @@ long AGApplication::getTicks() const
 {
   return SDL_GetTicks();
 }
+
+void AGApplication::delay(int ms)
+{
+  SDL_Delay(ms);
+}

@@ -171,7 +171,7 @@ AGSurface AGSDLScreen::loadSurface(const std::string &pFilename)
     cdebug(pFilename);
   assert(s);
   //  SDL_Surface *s=IMG_Load(pFilename.c_str());
-  return AGSurface(s,s->w,s->h);
+  return AGSurface(s);//,s->w,s->h);
 }
 
 AGTexture AGSDLScreen::displayFormat(SDL_Surface *s)

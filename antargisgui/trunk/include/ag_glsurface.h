@@ -29,6 +29,8 @@
 #include "ag_surface.h"
 #include <GL/gl.h>
 
+#define NEW_TEXTURES
+
 class AGColor;
 
 typedef GLuint TextureID;
@@ -57,30 +59,20 @@ class AGGLScreen:public AGScreen
   virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
   virtual void putPixel(int x,int y,const AGColor &c);
 
-  virtual SDL_Surface *newSurface(int x,int y);
-
-  virtual AGSurface loadSurface(const std::string &pFilename);
-
-  virtual AGTexture displayFormat(SDL_Surface *s);
+  virtual AGTexture makeTexture(const AGSurface &s);
+  virtual void deleteTexture(AGTexture &t);
 
   void flip();
   bool inScreen(const AGRect &r) const;
 
 
  private:
+  GLuint getID(AGTexture *s);
 
-  TextureID getID(SDL_Surface *s);
   AGRect getRect(SDL_Surface *s);
   void checkUnusedTextures();
 
   int w,h;
-
-  std::map<TextureID,bool> mUsedTextures; // unused textures and count of frames, in which they weren't used
-  std::map<TextureID,SDL_Surface*> mTextures;
-  std::map<SDL_Surface*,TextureID> mTexturesInv;
-
-  std::map<SDL_Surface*,AGRect> mSurfaceRect;
-
 };
 
 #endif

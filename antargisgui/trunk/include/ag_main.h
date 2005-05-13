@@ -21,6 +21,8 @@
 #ifndef __AG_MAIN
 #define __AG_MAIN
 
+class AGScreen;
+
 class AGMain
 {
  public:
@@ -33,6 +35,8 @@ class AGMain
 
   int width() const;
   int height() const;
+ private:
+  AGScreen *mScreen;
 };
 
 AGMain *getMain();

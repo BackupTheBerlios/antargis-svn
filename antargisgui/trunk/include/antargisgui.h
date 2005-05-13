@@ -51,6 +51,7 @@
 //#include "ag_dialog.h"
 #include "ag_fs.h"
 #include "ag_listbox.h"
+#include "ag_painter.h"
 #include <SDL_keysym.h>
 
 #ifdef SWIG
@@ -85,6 +86,7 @@
 %include "ag_fs.h"
 %include "ag_listbox.h"
 %include "/usr/include/SDL/SDL_keysym.h"
+%include "ag_painter.h"
 #endif
 
 #endif

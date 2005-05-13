@@ -35,7 +35,7 @@ AGMenu::AGMenu(AGWidget *pParent,AGPoint pWishPos,const std::string &pName):
   mName(pName),
   mWishPos(pWishPos)
 {
-  mBg=AGTexture(getTheme()->getSurface("menu.background.image"));
+  mBg=getTextureManager()->makeTexture(getTheme()->getSurface("menu.background.image"));
   hide();
 }
 
