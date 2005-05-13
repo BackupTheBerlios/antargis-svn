@@ -42,9 +42,8 @@ const AGTexture &TextureCache::get
         // load
         std::string c=loadFile(pTexture);
 
-        AGSurface ms(fromPNG(c));
-        AGTexture mTexture(ms);
-        mTextures[pTexture]=mTexture;
+        AGSurface ms=getSurfaceManager()->fromSDL(fromPNG(c));
+        mTextures[pTexture]=getTextureManager()->makeTexture(ms);;
       }
     return mTextures[pTexture];
   }

@@ -61,9 +61,8 @@ class AVItem
  public:
   AVItem(const Pos3D &p);
   
-  virtual ~AVItem()
-  {
-  }
+  virtual ~AVItem();
+
 
   AGSurface &getSurface();
   AGTexture &getTexture();
@@ -103,7 +102,7 @@ class AVItem
   
  protected:
   AGSurface mSurface;
-  AGTexture mTexture;
+  AGTexture *mTexture;
 };
 
 

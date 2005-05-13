@@ -354,8 +354,8 @@ void VoxelView::init()
 
           }
       }
-  mSurface=AGSurface(s);
-  mTexture=AGTexture(mSurface);
+  mSurface=getSurfaceManager()->fromSDL(s);
+  mTexture=new AGTexture(getTextureManager()->makeTexture(mSurface));
   return;
 }
 
@@ -677,7 +677,7 @@ void FastVoxelView::init()
     }
   //  SDL_SaveBMP(s,"myfile.bmp");
 
-  mSurface=AGSurface(s);
+  mSurface=getSurfaceManager()->fromSDL(s);
   return;
 }
 

@@ -299,6 +299,7 @@ class AntNewHero<AntMyEntity
 	
 	
 	def getWalkFormation(man,dir)
+		#setTrap
 		id=@men.index(man)
 		if id
 			line=id/5

@@ -22,10 +22,10 @@
 
 Rain::Rain(int W,int H,int amount):w(W),h(H),mAmount(amount)
 {
-  AGSurface s=getScreen().loadSurface("data/raindrop.png");
-  rainTexture=AGTexture(s);
-  s=getScreen().loadSurface("data/snow.png");
-  snowTexture=AGTexture(s);
+  AGSurface s=getSurfaceManager()->loadSurface("data/raindrop.png");
+  rainTexture=getTextureManager()->makeTexture(s);
+  s=getSurfaceManager()->loadSurface("data/snow.png");
+  snowTexture=getTextureManager()->makeTexture(s);
 
   mSnow=0.0;
 

@@ -108,7 +108,7 @@ void MiniMap::draw(AGPainter &p)//const AGRect &r)
   AGRect mr=getRect().origin();
   //  mustUpdate=true;
   if(mustUpdate)
-    mTexture=AGTexture(mSurface);
+    mTexture=getTextureManager()->makeTexture(mSurface);
   mustUpdate=false;
   mBorder.draw(p);
   //  p.blit(mBG,p.getRect());//,mr);

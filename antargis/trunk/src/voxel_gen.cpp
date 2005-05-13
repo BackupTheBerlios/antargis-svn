@@ -21,7 +21,7 @@
 #include "voxel_gen.h"
 #include "voxel.h"
 #include "texture_cache.h"
-#include "kill.h"
+#include "ag_kill.h"
 
 #include <ag_color.h>
 #include <ag_fontengine.h>
@@ -112,6 +112,10 @@ VoxelImageData *getVoxelID()
 AVItem::AVItem(const Pos3D &p):inited(false),mPos(p),mCenter(0,0),virtualY(0)
 {}
 
+AVItem::~AVItem()
+{
+}
+
 void AVItem::setPosition(const Pos3D &pPos)
 {
   mPos=pPos;
@@ -119,7 +123,8 @@ void AVItem::setPosition(const Pos3D &pPos)
 
 Uint8 AVItem::getAlpha(const AGPoint &p) const
 {
-  AGColor c=mTexture.getPixel(p.x,p.y);
+  assert(mTexture);
+  AGColor c=mTexture->getPixel(p.x,p.y);
   return c.a;
 }
 
@@ -129,7 +134,7 @@ AGTexture &AVItem::getTexture()
 {
   if(!inited)
     init();
-  return mTexture;
+  return *mTexture;
 }
 
 void AVItem::setCenter(const Pos2D &pCenter)
@@ -189,7 +194,7 @@ AGPoint AVItem::getPosition(const Pos3D &pPos) const
 
 AGRect AVItem::getRect(const Pos3D &pPos) const
   {
-    return AGRect(0,0,mTexture.width(),mTexture.height())+getPosition(pPos);
+    return AGRect(0,0,mTexture->width(),mTexture->height())+getPosition(pPos);
   }
 
 int AVItem::getZ(const Pos3D &pPos) const
@@ -277,7 +282,7 @@ VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
   mSurface=pSurface;
   //  SDL_SaveBMP(pSurface.surface(),"hupe3.bmp");
   //  SDL_SaveBMP(mSurface.surface(),"hupe4.bmp");
-  mTexture=AGTexture(mSurface);
+  mTexture=new AGTexture(getTextureManager()->makeTexture(mSurface));
   //  mSurface=SDL_DisplayFormatAlpha(pSurface.surface());
   setCenter(Pos2D(mSurface.width()/2,mSurface.height()-mSurface.width()/4));
 }
@@ -285,13 +290,13 @@ VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
 VoxelImage::VoxelImage(const std::string &pFilename):
     AVItem(Pos3D(0,0,0))
 {
-  mTexture=getTextureCache()->get(TILEDIR+pFilename+".png");
+  mTexture=const_cast<AGTexture*>(&getTextureCache()->get(TILEDIR+pFilename+".png"));
   // FIXME: Check this
   
   Pos2D c=getVoxelID()->getCenter(pFilename);
   if(c==Pos2D(0,0))
   {
-    c=Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4);
+    c=Pos2D(mTexture->width()/2,mTexture->height()-mTexture->width()/4);
   }
   
   setCenter(c);//Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4)+c);
@@ -299,9 +304,9 @@ VoxelImage::VoxelImage(const std::string &pFilename):
 
 void VoxelImage::setTexture(const std::string &pFilename)
 {
-  mTexture=getTextureCache()->get(pFilename+".png");
+  mTexture=const_cast<AGTexture*>(&getTextureCache()->get(pFilename+".png"));
   // FIXME: Check this
-  setCenter(Pos2D(mTexture.width()/2,mTexture.height()-mTexture.width()/4));
+  setCenter(Pos2D(mTexture->width()/2,mTexture->height()-mTexture->width()/4));
 }
 
 void VoxelImage::setName(const std::string &pName)
