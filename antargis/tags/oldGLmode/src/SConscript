@@ -1,0 +1,7 @@
+Import('*')
+
+source = Glob("*.cpp")
+libs = env['LIBS'] # + [ "src" , "lincity" ];
+app = env.Program(target = "antargis", source = source, LIBS = libs)
+AddPostAction(app, "ln -sf $TARGET .")
+Default(app)
