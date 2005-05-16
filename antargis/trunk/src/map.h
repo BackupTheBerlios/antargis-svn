@@ -47,14 +47,14 @@ class HeightMap
   };
 */
 
-class MapListener
+/*class MapListener
 {
  public:
   MapListener();
   virtual ~MapListener();
 
   virtual void mapUpdate();
-};
+  };*/
 
 //class AntPlayer;
 
@@ -72,15 +72,17 @@ class AntargisMap
 
     int maxID;
 
-    std::set<MapListener*> mListeners;
+    bool mUpdated;
+
+    //    std::set<MapListener*> mListeners;
     std::list<AntEntity*> mToDel;
 
   public:
     AntargisMap(int w,int h);
     virtual ~AntargisMap();
 
-    void insertListener(MapListener *l);
-    void removeListener(MapListener *l);
+    //    void insertListener(MapListener *l);
+    //    void removeListener(MapListener *l);
 
     float getHeight(const Pos2D &p) const;
     float getGHeight(const Pos2D &p) const;
@@ -91,6 +93,8 @@ class AntargisMap
     int getNewID();
     
     Pos3D getNormal(int x,int y) const;
+
+    bool updated() const;
 
     AntEntity *getNext(AntEntity *me,const std::string &pType);
 
@@ -124,7 +128,7 @@ class AntargisMap
     
     virtual void removeEntity(AntEntity *p);
 
-    void endChange();
+    //    void endChange();
    
     // align to rect / >0 and <width and so 
     Pos2D truncPos(const Pos2D &p) const;

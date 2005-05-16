@@ -104,6 +104,9 @@ void MiniMap::update()
 
 void MiniMap::draw(AGPainter &p)//const AGRect &r)
 {
+  if(mMap->updated())
+    mapUpdate();
+
 //  CTRACE;
   AGRect mr=getRect().origin();
   //  mustUpdate=true;

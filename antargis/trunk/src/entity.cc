@@ -57,8 +57,8 @@ AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround
 
 AntEntity::~AntEntity()
 {
-  CTRACE;
-  cdebug(mRubyObject);
+  //  CTRACE;
+  //  cdebug(mRubyObject);
   mDeleted=true;
   //  throw int();
 }
@@ -125,13 +125,13 @@ void AntEntity::setJob(Job *pJob)
         }
     }
   mJob=0;
-  if(mEnergy>0.0)
+  if(mEnergy>=0.0) // do job anyways
     mJob=pJob;
   else
     {
       //      if(!pJob->mRubyObject) // let ruby delete it
 	{
-	  cdebug("DELETE JOB:"<<pJob);
+	  //	  cdebug("DELETE JOB:"<<pJob);
 	  mJobFinished.push_back(pJob);
 	  //	  delete pJob;
 	}

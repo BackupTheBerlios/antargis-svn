@@ -74,7 +74,7 @@ int AntargisMap::getNewID()
   return maxID++;
 }
 
-void AntargisMap::insertListener(MapListener *l)
+/*void AntargisMap::insertListener(MapListener *l)
 {
   mListeners.insert(l);
 }
@@ -82,7 +82,7 @@ void AntargisMap::insertListener(MapListener *l)
 void AntargisMap::removeListener(MapListener *l)
 {
   mListeners.erase(l);
-}
+  }*/
 
 
 int AntargisMap::width() const
@@ -140,6 +140,8 @@ Pos2D AntargisMap::getMaxPos() const
   
 void AntargisMap::insertEntity(AntEntity *e)
 {
+  mUpdated=true;
+
   cdebug("INSERTING:"<<e);
   mEntities.insert(e);
   mEntList.push_back(e);
@@ -158,6 +160,8 @@ void AntargisMap::insertEntity(AntEntity *e)
 void AntargisMap::removeEntity(AntEntity *p)
 {
   mToDel.push_back(p);
+  mUpdated=true;
+
 }
 
 
@@ -169,6 +173,7 @@ std::list<AntEntity*> AntargisMap::getEntities(const AntRect&r)
 
 void AntargisMap::move(float pTime)
 {
+  mUpdated=false;
   if(mPaused)
     return;
   // first move computer-players (they decide what to do)
@@ -435,17 +440,20 @@ void AntargisMap::clear()
   mEntities.clear();
   mEntList.clear();
   mEntityMap.clear();
-  std::set<MapListener*>::iterator i=mListeners.begin();
+  /*  std::set<MapListener*>::iterator i=mListeners.begin();
   for(;i!=mListeners.end();i++)
-    (*i)->mapUpdate();
+  (*i)->mapUpdate();*/
+  mUpdated=true;
 }
 
+/*
 void AntargisMap::endChange()
 {
   std::set<MapListener*>::iterator i=mListeners.begin();
   for(;i!=mListeners.end();i++)
     (*i)->mapUpdate();
 }
+*/
 void AntargisMap::saveMap(const std::string &pFilename)
 {
   xmlpp::Document d;
@@ -467,9 +475,10 @@ void AntargisMap::loadMap(const std::string &pFilename)
       loadXML(d.root());
     }
 
-  std::set<MapListener*>::iterator i=mListeners.begin();
+  /*  std::set<MapListener*>::iterator i=mListeners.begin();
   for(;i!=mListeners.end();i++)
-    (*i)->mapUpdate();
+  (*i)->mapUpdate();*/
+  mUpdated=true;
 }
 
 
@@ -530,7 +539,7 @@ void AntPlayer::loadXML(const xmlpp::Node &node)
 }
 */
 // MapListener
-MapListener::MapListener()
+/*MapListener::MapListener()
 {
   CTRACE;
   getMap()->insertListener(this);
@@ -544,7 +553,7 @@ MapListener::~MapListener()
 void MapListener::mapUpdate()
 {
 }
-
+*/
 bool markingFinished=true;
 
 void AntargisMap_markfunc(void *ptr)
@@ -641,4 +650,9 @@ AntEntity *AntargisMap::getByName(const std::string &pName)
 	return *i;
     }
   return 0;
+}
+
+bool AntargisMap::updated() const
+{
+  return mUpdated;
 }

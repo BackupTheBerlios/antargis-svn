@@ -63,7 +63,7 @@ float getTimeDiff()
 
 
 IsoView::IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
-  AntargisView(parent,r,p,false),MapListener(),mMap(map),mRain(r.w,r.h,0),shallUpdate(false),maxPos(0,0,0)
+  AntargisView(parent,r,p,false),mMap(map),mRain(r.w,r.h,0),shallUpdate(false),maxPos(0,0,0)
 {
   cdebug("IsoView-Rect:"<<r);
   inited=false;
@@ -163,7 +163,7 @@ void IsoView::init()
       mEntitiesInv[*i]=image;
       insert(image);
     }
-
+  inited=true;
 
 }
 
@@ -323,6 +323,8 @@ IVTile IsoView::getTile(const AGPoint &pp)
 
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
+  if(mMap->updated())
+    mapUpdate();
   if(!inited)
     {
       init();

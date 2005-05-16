@@ -33,6 +33,80 @@ class AntMyEntity<AntEntity
 	end
 end
 
+module FightHLEntity
+	def gotHLFight(target)
+		@fightStarted=false
+		@fightTarget=target
+		@fighting=true
+		checkFight
+	end
+	def doHLFight(target)
+		@fightTarget=target
+		@fighting=true
+	end
+	def endFight
+		@fightTarget=nil
+		@fighting=false
+		@fightStarted=false
+	end
+	def wonFight
+		endFight
+	end
+	def lostFight
+		@owner=@fightTarget
+		endFight
+	end
+	def checkFight()
+		if @fighting then
+			tmen=@fightTarget.undefeatedMen
+			if tmen.length>0 then
+				umen=undefeatedMen
+				if umen.length>0 then
+					umen.each{|m|
+						if @fightStarted==false or m.hasJob==false then
+							if @defeated.include?(m) then
+								puts "ERROR!"
+								exit
+							end
+							# search nearest enemy
+							dist=10000.0
+							mtarget=nil
+							tmen.each{|t|
+								d=(t.getPos2D-m.getPos2D).norm
+								if d<dist
+									dist=d
+									mtarget=t
+								end
+							}
+							if mtarget then
+								m.newFightJob(0,mtarget)
+							end
+						end
+						#if not @defeated.include?(m) then
+						#	tindex=(rand*tmen.length).to_i
+						#	if @fightStarted==false or tmen[tindex].hasJob==false then
+						#		m.newFightJob(0,tmen[tindex])
+						#	end
+						#end
+					}
+					@fightStarted=true
+				else
+					lostFight
+				end
+			else
+				wonFight
+			end
+		end
+	end
+	def undefeatedMen
+		return @men-@defeated
+	end
+	def sigDefeated(man)
+		@defeated.push(man)
+	end
+end
+
+
 require 'ant_hero.rb'
 require 'ant_sheep.rb'
 # MAN
@@ -68,10 +142,10 @@ class AntNewMan<AntMyEntity
 		@fighting=false
 	end
 	def getTexture
-		if @fighting
-			return "man1_sword1"
-		elsif @dead
+		if @dead
 			return "grave"
+		elsif @fighting
+			return "man1_sword1"
 		else
 			return "man"+mDirNum.to_s
 		end
@@ -105,12 +179,31 @@ class AntNewMan<AntMyEntity
 	#	
 	#end
 	def simDie
+		puts "SIMDIE"
+		puts self
+		if not @dead
+			@dead=true
+			updateSurface
+		end
+		sendAngel
+	end
+	def simDie2
+		puts "SIMDIE2"
+		puts self
 		if @dead
+			puts "SIMDIE"
+			puts self
+			puts hasJob
+			if @boss
+				@boss.removeMan(self)
+			end
 			getMap.removeEntity(self)
 			getMap.endChange
 			return 
+		else
+			@dead=true
+			updateSurface
 		end
-		@dead=true
 		sendAngel
 	end
 	
@@ -118,14 +211,22 @@ class AntNewMan<AntMyEntity
 		@fighting=v
 	end
 	
+	def defeated
+		if @boss then
+			@boss.sigDefeated(self)
+		end
+	end
+	
 	def die
 		simDie
+		defeated
 		newRestJob(20)
 	end
 	
 	def jobFinished
 		super
-		if getEnergy==0 then
+		if getEnergy==0 or @dead then
+			simDie2
 			return
 			#simDie
 			#newRestJob(20)
@@ -150,6 +251,7 @@ class AntNewMan<AntMyEntity
 			end
 		else
 			boss=getMap.getByName(getVar("bossName"))
+			@boss=boss
 			if not @signed then
 				puts getVar("bossName")
 				boss.signUp(self)
@@ -236,11 +338,13 @@ class AntNewStone<AntMyEntity
 end
 
 class AntNewHouse<AntEntity
+	include FightHLEntity
 	def initialize
 		super(Pos2D.new(0,0))
 		@type=2
 		setType("house")
 		@men=[]
+		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
 	end
@@ -272,6 +376,10 @@ class AntNewHouse<AntEntity
 		return "antNewHouse"
 	end
 	
+	def getMen
+		@men
+	end
+	
 	def menCount
 		@men.length
 	end
@@ -295,7 +403,7 @@ class AntNewHouse<AntEntity
 			@lastBirth=-10*rand
 		end
 	end
-	
+
 	def noJob
 		jobFinished
 	end
@@ -303,8 +411,21 @@ class AntNewHouse<AntEntity
 		checkBirth
 		newRestJob(2)
 	end
+	
+	def setOwner(owner)
+		@owner=owner
+	end
+	
 	def assignJob(e)
-		if atHome(e) then
+		if @fighting then
+			checkFight
+			# e has won a fight
+			#if atHome(e)
+			#	e.newRestJob(10)
+			#else
+			#	e.newMoveJob(0,getPos2D,0) # come home
+			#end
+		elsif atHome(e) then
 			@atHome.push(e)
 			# is home:
 			# 1) take everything from inventory
@@ -353,6 +474,7 @@ class AntNewHouse<AntEntity
 		end
 	end
 	
+
 	# assigns ent a job for fetching good from a enttype
 	def fetch(enttype,good,ent)
 		tent=getMap.getNext(self,enttype)

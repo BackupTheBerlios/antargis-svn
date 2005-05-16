@@ -35,7 +35,7 @@ struct IVTile
   }
 };
 
-class IsoView:public AntargisView, public MapListener
+class IsoView:public AntargisView//, public MapListener
   {
   public:
   private:

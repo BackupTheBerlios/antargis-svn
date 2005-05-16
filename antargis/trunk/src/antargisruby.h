@@ -863,15 +863,6 @@ public:
 };
 
 
-class SwigDirector_MapListener : public MapListener, public Swig::Director {
-
-public:
-    SwigDirector_MapListener(VALUE self);
-    virtual ~SwigDirector_MapListener();
-    virtual void mapUpdate();
-};
-
-
 class SwigDirector_AntargisMap : public AntargisMap, public Swig::Director {
 
 public:
@@ -917,7 +908,6 @@ public:
     virtual void setWidth(int w);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void mapUpdate();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -1045,7 +1035,6 @@ public:
     virtual void setWidth(int w);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void mapUpdate();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -1087,7 +1076,6 @@ public:
     virtual void setWidth(int w);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void mapUpdate();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
@@ -1130,7 +1118,6 @@ public:
     virtual void setWidth(int w);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void mapUpdate();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };

@@ -38,7 +38,6 @@ class AntHeroMoveJob<AntHLJob
 		@prio=prio
 		@pos=Pos2D.new(pos.x,pos.y)#clone
 		@dist=dist
-		
 		format
 	end
 	def getMen()
@@ -82,10 +81,10 @@ class AntHeroMoveJob<AntHLJob
 		if ready then
 			#getMap.pause
 			# let all go
-			@hero.newMoveJob(0,@pos,0)
+			@hero.newMoveJob(0,@pos,@dist)
 			men.each{|x|
 				fpos=@hero.getWalkFormation(x,@dir)+@pos
-				x.newMoveJob(0,fpos,0)
+				x.newMoveJob(0,fpos,@dist)
 			}
 			return true
 		end
@@ -110,7 +109,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		@moveReady=false
 		@killstart=true
 		#@hero.newFightJob(0,target)
-		super(hero,0,target.getPos2D,50) # near til 50 pixels
+		super(hero,0,target.getPos2D,400) # near til 50 pixels
 	end
 	def check
 		if not @moveReady then
@@ -119,11 +118,20 @@ class AntHeroFightJob<AntHeroMoveJob
 			end
 		end
 		if @moveReady and moveEnded
+			@hero.doHLFight(@target)
 			men=@hero.getMen
+			puts "HERO:"
+			puts @hero
+			if @killstart
+				@target.gotHLFight(@hero)
+			end
+			
+			tmen=@target.getMen
 			
 			men.each{|m|
 				if not m.hasJob or @killstart then
-					m.newFightJob(0,@target)
+					index=(rand*tmen.length).to_i
+					m.newFightJob(0,tmen[index])
 					m.setFighting(true)
 				end
 				@killstart=false
@@ -178,13 +186,15 @@ class AntHeroRecruitJob<AntHeroMoveJob
 end
 
 class AntNewHero<AntMyEntity
+	include FightHLEntity
+
 	def initialize
 		super(Pos2D.new(0,0))
 		@men=[]
 		#@resources={}
 		setType("hero")
 		@job=nil
-		
+		@defeated=[]
 		@createMen=0
 	end
 	def getSurfaceName
@@ -227,7 +237,9 @@ class AntNewHero<AntMyEntity
 	end
 	
 	def assignJob(e)
-		if @job == nil then
+		if @fighting then
+			checkFight
+		elsif @job == nil then
 			# rest job
 			e=getMap.getRuby(e)
 			formationPos=getSitFormation(e)
@@ -278,6 +290,13 @@ class AntNewHero<AntMyEntity
 		puts man
 		@men.push(man)
 	end
+	
+	def removeMan(man)
+		@men.delete(man)
+		if @defeated.include?(man)
+			@defeated.delete(man)
+		end
+	end
 	# formation:
 	# 1) wait for 3/4 of people are in formation but max. 5 seconds or so
 	# 2) start all at once
@@ -297,6 +316,10 @@ class AntNewHero<AntMyEntity
 		end
 	end
 	
+ 	def undefeatedMen
+		return @men-@defeated
+	end
+
 	
 	def getWalkFormation(man,dir)
 		#setTrap

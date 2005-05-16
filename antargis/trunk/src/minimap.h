@@ -29,7 +29,7 @@
 
 class AntargisMap;
 
-class MiniMap:public AGWidget,public MapListener
+class MiniMap:public AGWidget//,public MapListener
   {
   public:
     MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect);

@@ -116,6 +116,8 @@ class AntRubyMap<AntargisMap
 	def getByName(name)
 		getRuby(super(name))
 	end
+	def endChange
+	end
 end
 
 

@@ -867,8 +867,8 @@ type_error:
 #define  SWIGTYPE_p_AGEditLine swig_types[21] 
 #define  SWIGTYPE_p_AGTable swig_types[22] 
 #define  SWIGTYPE_p_AntargisMap swig_types[23] 
-#define  SWIGTYPE_p_std__mapTstd__string_int_t swig_types[24] 
-#define  SWIGTYPE_p_AGListBoxItem swig_types[25] 
+#define  SWIGTYPE_p_AGListBoxItem swig_types[24] 
+#define  SWIGTYPE_p_std__mapTstd__string_int_t swig_types[25] 
 #define  SWIGTYPE_p_Rect2D swig_types[26] 
 #define  SWIGTYPE_p_AGSignal swig_types[27] 
 #define  SWIGTYPE_p_AGColor swig_types[28] 
@@ -943,18 +943,17 @@ type_error:
 #define  SWIGTYPE_p_AGPaintTarget swig_types[97] 
 #define  SWIGTYPE_p_SDLKey swig_types[98] 
 #define  SWIGTYPE_p_AGCPPListener swig_types[99] 
-#define  SWIGTYPE_p_MapListener swig_types[100] 
-#define  SWIGTYPE_p_AGListener swig_types[101] 
-#define  SWIGTYPE_p_VoxelImageData swig_types[102] 
-#define  SWIGTYPE_p_VoxelImage swig_types[103] 
-#define  SWIGTYPE_p_ComplexVoxelImage swig_types[104] 
-#define  SWIGTYPE_p_Node swig_types[105] 
-#define  SWIGTYPE_p_float swig_types[106] 
-#define  SWIGTYPE_p_std__listTAntEntity_p_t swig_types[107] 
-#define  SWIGTYPE_p_std__vectorTAntEntity_p_t swig_types[108] 
-#define  SWIGTYPE_p_AGTheme swig_types[109] 
-#define  SWIGTYPE_p_Pos2D swig_types[110] 
-static swig_type_info *swig_types[112];
+#define  SWIGTYPE_p_AGListener swig_types[100] 
+#define  SWIGTYPE_p_VoxelImageData swig_types[101] 
+#define  SWIGTYPE_p_VoxelImage swig_types[102] 
+#define  SWIGTYPE_p_ComplexVoxelImage swig_types[103] 
+#define  SWIGTYPE_p_Node swig_types[104] 
+#define  SWIGTYPE_p_float swig_types[105] 
+#define  SWIGTYPE_p_std__listTAntEntity_p_t swig_types[106] 
+#define  SWIGTYPE_p_std__vectorTAntEntity_p_t swig_types[107] 
+#define  SWIGTYPE_p_AGTheme swig_types[108] 
+#define  SWIGTYPE_p_Pos2D swig_types[109] 
+static swig_type_info *swig_types[111];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -1359,9 +1358,6 @@ static void free_AGListBox(AGListBox *);
 
 swig_class cAGPainter;
 static void free_AGPainter(AGPainter *);
-
-swig_class cMapListener;
-static void free_MapListener(MapListener *);
 
 swig_class cAntargisMap;
 static void free_AntargisMap(AntargisMap *);
@@ -12574,26 +12570,6 @@ void SwigDirector_AGPainter::putPixel(AGPoint const &p, AGColor const &c) {
 }
 
 
-SwigDirector_MapListener::SwigDirector_MapListener(VALUE self): MapListener(), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_MapListener::~SwigDirector_MapListener() {
-}
-
-void SwigDirector_MapListener::mapUpdate() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        MapListener::mapUpdate();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("mapUpdate"), 0, NULL);
-}
-
-
 SwigDirector_AntargisMap::SwigDirector_AntargisMap(VALUE self, int w, int h): AntargisMap(w, h), Swig::Director(self) {
     
 }
@@ -13176,17 +13152,6 @@ bool SwigDirector_MiniMap::eventHide() {
     result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
-}
-
-
-void SwigDirector_MiniMap::mapUpdate() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        MiniMap::mapUpdate();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("mapUpdate"), 0, NULL);
 }
 
 
@@ -14529,17 +14494,6 @@ bool SwigDirector_IsoView::eventHide() {
 }
 
 
-void SwigDirector_IsoView::mapUpdate() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        IsoView::mapUpdate();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("mapUpdate"), 0, NULL);
-}
-
-
 void SwigDirector_IsoView::addChildBack(AGWidget *w) {
     Swig::Director * director__p_AGWidget = 0 ;
     VALUE obj0 = Qnil ;
@@ -15138,17 +15092,6 @@ bool SwigDirector_CompleteIsoView::eventHide() {
     result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
-}
-
-
-void SwigDirector_CompleteIsoView::mapUpdate() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        IsoView::mapUpdate();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("mapUpdate"), 0, NULL);
 }
 
 
@@ -15773,17 +15716,6 @@ bool SwigDirector_EditIsoView::eventHide() {
     result = rb_funcall(swig_get_self(), rb_intern("eventHide"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
-}
-
-
-void SwigDirector_EditIsoView::mapUpdate() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        IsoView::mapUpdate();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("mapUpdate"), 0, NULL);
 }
 
 
@@ -31147,81 +31079,6 @@ _wrap_disown_AGPainter(int argc, VALUE *argv, VALUE self) {
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_MapListener_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_MapListener_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_MapListener);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_MapListener(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    MapListener *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    char *classname = "Libantargis::MapListener";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (MapListener *)new SwigDirector_MapListener(arg1);
-        
-    } else {
-        result = (MapListener *)new MapListener();
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static void
-free_MapListener(MapListener *arg1) {
-    delete arg1;
-}
-static VALUE
-_wrap_MapListener_mapUpdate(int argc, VALUE *argv, VALUE self) {
-    MapListener *arg1 = (MapListener *) 0 ;
-    Swig::Director *director = 0;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MapListener, 1);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    (arg1)->mapUpdate();
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_disown_MapListener(int argc, VALUE *argv, VALUE self) {
-    MapListener *arg1 = (MapListener *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_MapListener, 1);
-    {
-        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
 _wrap_AntargisMap_allocate(VALUE self) {
 #else
     static VALUE
@@ -31273,36 +31130,6 @@ static void
 free_AntargisMap(AntargisMap *arg1) {
     delete arg1;
 }
-static VALUE
-_wrap_AntargisMap_insertListener(int argc, VALUE *argv, VALUE self) {
-    AntargisMap *arg1 = (AntargisMap *) 0 ;
-    MapListener *arg2 = (MapListener *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_MapListener, 1);
-    (arg1)->insertListener(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_AntargisMap_removeListener(int argc, VALUE *argv, VALUE self) {
-    AntargisMap *arg1 = (AntargisMap *) 0 ;
-    MapListener *arg2 = (MapListener *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_MapListener, 1);
-    (arg1)->removeListener(arg2);
-    
-    return Qnil;
-}
-
-
 static VALUE
 _wrap_AntargisMap_getHeight(int argc, VALUE *argv, VALUE self) {
     AntargisMap *arg1 = (AntargisMap *) 0 ;
@@ -31423,6 +31250,22 @@ _wrap_AntargisMap_getNormal(int argc, VALUE *argv, VALUE self) {
         resultptr = new Pos3D((Pos3D &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Pos3D, 1);
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AntargisMap_updated(int argc, VALUE *argv, VALUE self) {
+    AntargisMap *arg1 = (AntargisMap *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
+    result = (bool)((AntargisMap const *)arg1)->updated();
+    
+    vresult = result ? Qtrue : Qfalse;
     return vresult;
 }
 
@@ -31646,19 +31489,6 @@ _wrap_AntargisMap_removeEntity(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->removeEntity(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_AntargisMap_endChange(int argc, VALUE *argv, VALUE self) {
-    AntargisMap *arg1 = (AntargisMap *) 0 ;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
-    (arg1)->endChange();
     
     return Qnil;
 }
@@ -32131,13 +31961,10 @@ _wrap_MiniMap_drawEntities(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_MiniMap_mapUpdate(int argc, VALUE *argv, VALUE self) {
     MiniMap *arg1 = (MiniMap *) 0 ;
-    Swig::Director *director = 0;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MiniMap, 1);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->mapUpdate();
     
     return Qnil;
@@ -34881,13 +34708,10 @@ _wrap_IsoView_checkView(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_IsoView_mapUpdate(int argc, VALUE *argv, VALUE self) {
     IsoView *arg1 = (IsoView *) 0 ;
-    Swig::Director *director = 0;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_IsoView, 1);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->mapUpdate();
     
     return Qnil;
@@ -38791,18 +38615,6 @@ static void *_p_AGTextTo_p_AGListener(void *x) {
 static void *_p_AGRadioGroupTo_p_AGListener(void *x) {
     return (void *)((AGListener *) (AGMessageObject *)(AGWidget *) ((AGRadioGroup *) x));
 }
-static void *_p_MiniMapTo_p_MapListener(void *x) {
-    return (void *)((MapListener *)  ((MiniMap *) x));
-}
-static void *_p_IsoViewTo_p_MapListener(void *x) {
-    return (void *)((MapListener *)  ((IsoView *) x));
-}
-static void *_p_CompleteIsoViewTo_p_MapListener(void *x) {
-    return (void *)((MapListener *) (IsoView *) ((CompleteIsoView *) x));
-}
-static void *_p_EditIsoViewTo_p_MapListener(void *x) {
-    return (void *)((MapListener *) (IsoView *)(CompleteIsoView *) ((EditIsoView *) x));
-}
 static swig_type_info _swigt__p_std__listTNode_t__const_iterator[] = {{"_p_std__listTNode_t__const_iterator", 0, "std::list<Node >::const_iterator *|Node::const_iterator *", 0, 0, 0, 0},{"_p_std__listTNode_t__const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__listTNode_t__iterator[] = {{"_p_std__listTNode_t__iterator", 0, "std::list<Node >::iterator *|Node::iterator *", 0, 0, 0, 0},{"_p_std__listTNode_t__iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_const_iterator[] = {{"_p_const_iterator", 0, "const_iterator *", 0, 0, 0, 0},{"_p_const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -38827,8 +38639,8 @@ static swig_type_info _swigt__p_AGScreen[] = {{"_p_AGScreen", 0, "AGScreen *", 0
 static swig_type_info _swigt__p_AGEditLine[] = {{"_p_AGEditLine", 0, "AGEditLine *", 0, 0, 0, 0},{"_p_AGEditLine", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGTable[] = {{"_p_AGTable", 0, "AGTable *", 0, 0, 0, 0},{"_p_AGTable", 0, 0, 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGTable, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AntargisMap[] = {{"_p_AntargisMap", 0, "AntargisMap *", 0, 0, 0, 0},{"_p_AntargisMap", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_std__mapTstd__string_int_t[] = {{"_p_std__mapTstd__string_int_t", 0, "std::map<std::string,int > *", 0, 0, 0, 0},{"_p_std__mapTstd__string_int_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGListBoxItem[] = {{"_p_AGListBoxItem", 0, "AGListBoxItem *", 0, 0, 0, 0},{"_p_AGListBoxItem", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__mapTstd__string_int_t[] = {{"_p_std__mapTstd__string_int_t", 0, "std::map<std::string,int > *", 0, 0, 0, 0},{"_p_std__mapTstd__string_int_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Rect2D[] = {{"_p_Rect2D", 0, "Rect2D *", 0, 0, 0, 0},{"_p_Rect2D", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSignal[] = {{"_p_AGSignal", 0, "AGSignal *", 0, 0, 0, 0},{"_p_AGSignal", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGColor[] = {{"_p_AGColor", 0, "AGColor *", 0, 0, 0, 0},{"_p_AGColor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -38903,7 +38715,6 @@ static swig_type_info _swigt__p_std__pairTstd__string_bool_t[] = {{"_p_std__pair
 static swig_type_info _swigt__p_AGPaintTarget[] = {{"_p_AGPaintTarget", 0, "AGPaintTarget *", 0, 0, 0, 0},{"_p_AGPaintTarget", 0, 0, 0, 0, 0, 0},{"_p_AGSurface", _p_AGSurfaceTo_p_AGPaintTarget, 0, 0, 0, 0, 0},{"_p_AGSDLScreen", _p_AGSDLScreenTo_p_AGPaintTarget, 0, 0, 0, 0, 0},{"_p_AGScreen", _p_AGScreenTo_p_AGPaintTarget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDLKey[] = {{"_p_SDLKey", 0, "enum SDLKey *|SDLKey *", 0, 0, 0, 0},{"_p_SDLKey", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_MapListener[] = {{"_p_MapListener", 0, "MapListener *", 0, 0, 0, 0},{"_p_MapListener", 0, 0, 0, 0, 0, 0},{"_p_MiniMap", _p_MiniMapTo_p_MapListener, 0, 0, 0, 0, 0},{"_p_IsoView", _p_IsoViewTo_p_MapListener, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_MapListener, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_MapListener, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGListener[] = {{"_p_AGListener", 0, "AGListener *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_IsoView", _p_IsoViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_MiniMap", _p_MiniMapTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListener", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AntargisView", _p_AntargisViewTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMessageObject", _p_AGMessageObjectTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGListener, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_VoxelImageData[] = {{"_p_VoxelImageData", 0, "VoxelImageData *", 0, 0, 0, 0},{"_p_VoxelImageData", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_VoxelImage[] = {{"_p_VoxelImage", 0, "VoxelImage *", 0, 0, 0, 0},{"_p_VoxelImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -38940,8 +38751,8 @@ _swigt__p_AGScreen,
 _swigt__p_AGEditLine, 
 _swigt__p_AGTable, 
 _swigt__p_AntargisMap, 
-_swigt__p_std__mapTstd__string_int_t, 
 _swigt__p_AGListBoxItem, 
+_swigt__p_std__mapTstd__string_int_t, 
 _swigt__p_Rect2D, 
 _swigt__p_AGSignal, 
 _swigt__p_AGColor, 
@@ -39016,7 +38827,6 @@ _swigt__p_std__pairTstd__string_bool_t,
 _swigt__p_AGPaintTarget, 
 _swigt__p_SDLKey, 
 _swigt__p_AGCPPListener, 
-_swigt__p_MapListener, 
 _swigt__p_AGListener, 
 _swigt__p_VoxelImageData, 
 _swigt__p_VoxelImage, 
@@ -40161,15 +39971,6 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAGPainter.klass, "drawRect", VALUEFUNC(_wrap_AGPainter_drawRect), -1);
     cAGPainter.mark = 0;
     cAGPainter.destroy = (void (*)(void *)) free_AGPainter;
-    rb_define_module_function(mLibantargis, "disown_MapListener", VALUEFUNC(_wrap_disown_MapListener), -1);
-    
-    cMapListener.klass = rb_define_class_under(mLibantargis, "MapListener", rb_cObject);
-    SWIG_TypeClientData(SWIGTYPE_p_MapListener, (void *) &cMapListener);
-    rb_define_alloc_func(cMapListener.klass, _wrap_MapListener_allocate);
-    rb_define_method(cMapListener.klass, "initialize", VALUEFUNC(_wrap_new_MapListener), -1);
-    rb_define_method(cMapListener.klass, "mapUpdate", VALUEFUNC(_wrap_MapListener_mapUpdate), -1);
-    cMapListener.mark = 0;
-    cMapListener.destroy = (void (*)(void *)) free_MapListener;
     rb_define_module_function(mLibantargis, "AntargisMap_markfunc", VALUEFUNC(_wrap_AntargisMap_markfunc), -1);
     rb_define_module_function(mLibantargis, "disown_AntargisMap", VALUEFUNC(_wrap_disown_AntargisMap), -1);
     
@@ -40177,14 +39978,13 @@ SWIGEXPORT(void) Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AntargisMap, (void *) &cAntargisMap);
     rb_define_alloc_func(cAntargisMap.klass, _wrap_AntargisMap_allocate);
     rb_define_method(cAntargisMap.klass, "initialize", VALUEFUNC(_wrap_new_AntargisMap), -1);
-    rb_define_method(cAntargisMap.klass, "insertListener", VALUEFUNC(_wrap_AntargisMap_insertListener), -1);
-    rb_define_method(cAntargisMap.klass, "removeListener", VALUEFUNC(_wrap_AntargisMap_removeListener), -1);
     rb_define_method(cAntargisMap.klass, "getHeight", VALUEFUNC(_wrap_AntargisMap_getHeight), -1);
     rb_define_method(cAntargisMap.klass, "getGHeight", VALUEFUNC(_wrap_AntargisMap_getGHeight), -1);
     rb_define_method(cAntargisMap.klass, "getPatchH", VALUEFUNC(_wrap_AntargisMap_getPatchH), -1);
     rb_define_method(cAntargisMap.klass, "getPatchG", VALUEFUNC(_wrap_AntargisMap_getPatchG), -1);
     rb_define_method(cAntargisMap.klass, "getNewID", VALUEFUNC(_wrap_AntargisMap_getNewID), -1);
     rb_define_method(cAntargisMap.klass, "getNormal", VALUEFUNC(_wrap_AntargisMap_getNormal), -1);
+    rb_define_method(cAntargisMap.klass, "updated", VALUEFUNC(_wrap_AntargisMap_updated), -1);
     rb_define_method(cAntargisMap.klass, "getNext", VALUEFUNC(_wrap_AntargisMap_getNext), -1);
     rb_define_method(cAntargisMap.klass, "insertEntity", VALUEFUNC(_wrap_AntargisMap_insertEntity), -1);
     rb_define_method(cAntargisMap.klass, "addPyramid", VALUEFUNC(_wrap_AntargisMap_addPyramid), -1);
@@ -40197,7 +39997,6 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntargisMap.klass, "move", VALUEFUNC(_wrap_AntargisMap_move), -1);
     rb_define_method(cAntargisMap.klass, "clear", VALUEFUNC(_wrap_AntargisMap_clear), -1);
     rb_define_method(cAntargisMap.klass, "removeEntity", VALUEFUNC(_wrap_AntargisMap_removeEntity), -1);
-    rb_define_method(cAntargisMap.klass, "endChange", VALUEFUNC(_wrap_AntargisMap_endChange), -1);
     rb_define_method(cAntargisMap.klass, "truncPos", VALUEFUNC(_wrap_AntargisMap_truncPos), -1);
     rb_define_method(cAntargisMap.klass, "getEntity", VALUEFUNC(_wrap_AntargisMap_getEntity), -1);
     rb_define_method(cAntargisMap.klass, "getByName", VALUEFUNC(_wrap_AntargisMap_getByName), -1);

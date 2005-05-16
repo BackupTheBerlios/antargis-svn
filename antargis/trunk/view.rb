@@ -73,7 +73,7 @@ class AntRubyView <EditIsoView
 				target=nil
 				list.each{|ents|
 					e=getMap.getRuby(ents.get)
-					if e.getType=="hero" or e.getType=="man" then
+					if e.getType=="hero" or e.getType=="house" then
 						target=e
 					end
 				}
