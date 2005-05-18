@@ -78,7 +78,7 @@ class AGCPPListener
 {
  public:
   virtual ~AGCPPListener();
-  virtual bool signal(const std::string&pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
+  virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
 };
 
 
@@ -98,7 +98,7 @@ class AGSlot:public AGCPPListener
       {
       }
 
-    virtual bool signal(const std::string&pName,const AGEvent *m,AGMessageObject *) const
+    virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *) const
     {
       return (base->*f)(pName,m);
     }
