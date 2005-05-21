@@ -39,7 +39,7 @@ list.push('%include "./view.h"')
 list.push('%include "./minimap.h"')
 list.each {|x|
 #puts "X:"+x
-if x =~ /%.*/ then
+if x =~ /%.*/ and not (x =~ /\.i/ or x =~ /template/) then
 	y=x.gsub(/.* "/,"").gsub(/"/,"").gsub(/\n/,"")
 	#puts "Y:"+y
 	#puts "y0:"+y[0..0]

@@ -32,18 +32,13 @@ class AntDialog<AGLayout
 		addHandler(getChild("cancel"),:sigClick,:sigCancel)
 		#setModal(true)
 	end
-	def sigOk(eventName,callerName,event,caller)
+	def sigOk
 		sigClose
 	end
 	def sigCancel(eventName,callerName,event,caller)
 		sigClose
 	end
 	
-#	def eventKeyDown(event)
-#		puts "EVENTKEYDOWN"
-#		super
-#		puts event
-#	end
 	def eventKeyDown(event)
 		if super then return true end
 		e=toAGSDLEvent(event)
@@ -52,7 +47,7 @@ class AntDialog<AGLayout
 			getMap.unpause
 			return true
 		elsif e.getKey==SDLK_RETURN then
-			sigOk("","",event,self)
+			sigOk
 		end
 	end
 	def sigClose
@@ -77,7 +72,7 @@ class AntStoryTalk<AntDialog
 	end
 	
 	# signals	
-	def sigOk(eventName,callerName,event,caller)
+	def sigOk
 		puts "pCaller:"+callerName
 		getMap().unpause()
 		toAGWindow(getChild("window")).close
@@ -89,7 +84,7 @@ class AntQuitDialog<AntDialog
 		super(parent,"quitquery.xml")
 		setName("QuitDialog")
 	end
-	def sigOk(eventName,callerName,event,caller)
+	def sigOk
 		$app.tryQuit
 	end
 end
@@ -103,16 +98,20 @@ class AntOptionsDialog<AntDialog
 		addHandler(getChild("load"),:sigClick,:sigLoad)
 		getMap.pause
 	end
-	def sigEditmode(ename,cname,event,caller)
+	def sigEditmode
 		$app.enableEdit
 	end
-	def sigSave(ename,cname,event,caller)
+	def sigSave
 		$app.save
 		hide
 	end
-	def sigLoad(ename,cname,event,caller)
+	def sigLoad
 		$app.load
 		hide
+	end
+	def sigOk
+		getMap.unpause
+		super
 	end
 end
 
@@ -120,7 +119,7 @@ class AntSaveDialog<AntDialog
 	def initialize(parent)
 		super(parent,"savedialog.xml")
 	end
-	def sigOk(eventName,callerName,event,caller)
+	def sigOk
 		filename=toAGEdit(getChild("Filename")).getText
 		puts "FILENAME:"+filename
 		if not filename =~ /.*\.antlvl/ then
@@ -146,7 +145,7 @@ class AntLoadDialog<AntDialog
 			end
 		}
 	end
-	def sigOk(ename,cname,event,caller)
+	def sigOk
 		file=@lb.getSelectedID
 		if file!="" then
 			getMap.loadMap("savegames/"+file)
@@ -162,7 +161,7 @@ class AntPauseDialog<AntDialog
 		setName("PauseDialog")
 		getMap.pause
 	end
-	def sigOk(eventName,callerName,event,caller)
+	def sigOk
 		getMap.unpause
 		hide
 	end

@@ -21,169 +21,9 @@
 
 #!/usr/bin/ruby
 
-# try to implement alle entites in ruby
-# WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
-# could be that it has something to do with Init_Stack ???
-
-#GC.disable
-
 require 'ents.rb'
+require 'ant_hljobs.rb'
 
-class AntHLJob
-end
-
-class AntHeroMoveJob<AntHLJob
-	def initialize(hero,prio,pos,dist)
-		@hero=hero
-		@prio=prio
-		@pos=Pos2D.new(pos.x,pos.y)#clone
-		@dist=dist
-		format
-	end
-	def getMen()
-		@hero.getMen
-	end
-	def format
-		puts "FORMAT"
-		men=getMen
-		@dir=(@pos-@hero.getPos2D).normalized
-		men.each{|x|
-			fpos=@hero.getWalkFormation(x,@dir)+@hero.getPos2D
-			x.newMoveJob(0,fpos,5)
-		}
-		check # if men.length==0
-	end
-	
-	def checkReady
-		#GC.disable # disable GC, as gets called too often here
-		ready=true
-		men=getMen
-		men.each{|x|
-			if x.hasJob then 
-				ready=false
-			else
-				# check if is already there - don't know why this fails ATM
-				is=x.getPos2D
-				should=@hero.getWalkFormation(x,@dir)+@hero.getPos2D
-				if (is-should).norm>10 then
-					ready=false
-					x.newMoveJob(0,should,@dist)
-				end
-			end
-		}
-		#GC.enable
-		return ready
-	end
-
-	def check
-		men=getMen
-		ready=checkReady
-		if ready then
-			#getMap.pause
-			# let all go
-			@hero.newMoveJob(0,@pos,@dist)
-			men.each{|x|
-				fpos=@hero.getWalkFormation(x,@dir)+@pos
-				x.newMoveJob(0,fpos,@dist)
-			}
-			return true
-		end
-		return false
-	end
-	
-	def moveEnded
-		men=getMen
-		men.each{|x|
-			if x.hasJob then
-				return false
-			end
-		}
-		return true
-	end
-end
-
-class AntHeroFightJob<AntHeroMoveJob
-	def initialize(hero,target)
-		@hero=hero
-		@target=target
-		@moveReady=false
-		@killstart=true
-		#@hero.newFightJob(0,target)
-		super(hero,0,target.getPos2D,400) # near til 50 pixels
-	end
-	def check
-		if not @moveReady then
-			if super then
-				@moveReady=true
-			end
-		end
-		if @moveReady and moveEnded
-			@hero.doHLFight(@target)
-			men=@hero.getMen
-			puts "HERO:"
-			puts @hero
-			if @killstart
-				@target.gotHLFight(@hero)
-			end
-			
-			tmen=@target.getMen
-			
-			men.each{|m|
-				if not m.hasJob or @killstart then
-					index=(rand*tmen.length).to_i
-					m.newFightJob(0,tmen[index])
-					m.setFighting(true)
-				end
-				@killstart=false
-			}
-			# fight
-			puts "FIGHT!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			return true
-		end
-		return false
-	end
-end
-
-class AntHeroRecruitJob<AntHeroMoveJob
-	def initialize(hero,target,agg)
-		@moveReady=false
-		puts target
-		puts target
-		@target=target
-		puts self
-		puts "TARGET:"
-		puts target
-		puts @target
-		puts "HUHU"
-		@aggression=agg
-		@targetMen=target.menCount
-		puts @targetMen
-		puts agg
-		@want=@targetMen*agg/3
-		super(hero,0,target.getPos2D,40)
-	end
-	
-	def check
-		if not @moveReady then
-			if super then
-				@moveReady=true
-			end
-		end
-		if @moveReady
-			# recruit
-			if @want==0 then 
-				return true 
-			end
-			puts "TARGET:"
-			puts @target
-			man=@target.takeMan
-			man.setBoss(@hero)
-			@want=@want-1
-		end
-		return false
-	end
-	
-end
 
 class AntNewHero<AntMyEntity
 	include FightHLEntity
@@ -219,7 +59,6 @@ class AntNewHero<AntMyEntity
 	
 	def noJob
 		if @createMen>0
-			puts "CREATEMEN"
 			for i in 0..(@createMen-1) do
 				man=AntNewMan.new
 				man.setPos2D(getPos2D)
@@ -228,7 +67,9 @@ class AntNewHero<AntMyEntity
 			end
 			getMap.endChange
 			@createMen=0
-			puts "CREATEMEN READY"
+		end
+		if @player
+			@player.assignJob(self)
 		end
 	end
 	
@@ -257,13 +98,9 @@ class AntNewHero<AntMyEntity
 	end
 	
 	def newHLMoveJob(prio,pos,dist)
-		puts "NEWMOVEJOB:"+pos.to_s
 		@job=AntHeroMoveJob.new(self,prio,pos,dist)
 	end
 	def newHLRecruitJob(target)
-		puts "NEWRECRUITJOB:"#+target.getName#pos.to_s
-		puts "TARGET:"
-		puts target
 		@job=AntHeroRecruitJob.new(self,target,$buttonPanel.getAggression)
 	end
 	def newHLFightJob(target)
@@ -286,8 +123,6 @@ class AntNewHero<AntMyEntity
 	end
 	
 	def signUp(man)
-		puts "HEROSIGNUP"
-		puts man
 		@men.push(man)
 	end
 	
@@ -339,5 +174,8 @@ class AntNewHero<AntMyEntity
 		end
 	end
 	
+	def setPlayer(player)
+		@player=player
+	end
 end
 

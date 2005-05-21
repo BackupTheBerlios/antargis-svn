@@ -82,13 +82,6 @@
 	printf("register:AGWidget\n");
 }
 %markfunc AGWidget "AGWidget_markfunc"
-%exception EditIsoView::EditIsoView {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-	printf("register:EditIsoView\n");
-}
-%markfunc EditIsoView "AGWidget_markfunc"
 %exception AGLayout::AGLayout {
 	$action
 	result->mRUBY=self;
@@ -110,13 +103,6 @@
 	printf("register:AGSDLScreen\n");
 }
 %markfunc AGSDLScreen "AGWidget_markfunc"
-%exception CompleteIsoView::CompleteIsoView {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-	printf("register:CompleteIsoView\n");
-}
-%markfunc CompleteIsoView "AGWidget_markfunc"
 %exception AGHTiler::AGHTiler {
 	$action
 	result->mRUBY=self;
@@ -138,13 +124,6 @@
 	printf("register:AGListBox\n");
 }
 %markfunc AGListBox "AGWidget_markfunc"
-%exception MiniMap::MiniMap {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-	printf("register:MiniMap\n");
-}
-%markfunc MiniMap "AGWidget_markfunc"
 %exception AGMenu::AGMenu {
 	$action
 	result->mRUBY=self;
@@ -152,13 +131,6 @@
 	printf("register:AGMenu\n");
 }
 %markfunc AGMenu "AGWidget_markfunc"
-%exception IsoView::IsoView {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-	printf("register:IsoView\n");
-}
-%markfunc IsoView "AGWidget_markfunc"
 %exception AGRadio::AGRadio {
 	$action
 	result->mRUBY=self;

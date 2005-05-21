@@ -32,6 +32,9 @@ AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mEnergy(1.0),mHealSpeed(0.3
   mPlayerID=-1;
   mMoving=false;
   mMoveSpeed=70;
+  mMorale=1.0;
+  mMoraleHeal=0.1;
+  mAggression=0.5;
 }
 AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
 {
@@ -42,6 +45,9 @@ AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mEnergy
   mPlayerID=-1;
   mMoving=false;
   mMoveSpeed=70;
+  mMorale=1.0;
+  mMoraleHeal=0.1;
+  mAggression=0.5;
 }
 
 AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
@@ -53,6 +59,9 @@ AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround
   mPlayerID=-1;
   mMoving=false;
   mMoveSpeed=70;
+  mMorale=1.0;
+  mMoraleHeal=0.1;
+  mAggression=0.5;
 }
 
 AntEntity::~AntEntity()
@@ -72,6 +81,8 @@ void AntEntity::saveXML(xmlpp::Node &node) const
     node.set("onGround",toString(onGround));
     node.set("entityID",toString(getID()));
     node.set("name",getVar("name"));
+    node.set("morale",toString(mMorale));
+    node.set("aggression",toString(mAggression));
   }
 void AntEntity::loadXML(const xmlpp::Node &node)
 {
@@ -83,6 +94,8 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   for(;i!=node.end();i++)
     mPos.loadXML(*i);
   mID=toInt(node.get("entityID"));
+  mMorale=toFloat(node.get("morale"));
+  mAggression=toFloat(node.get("aggression"));
   setVar("name",node.get("name"));
 }
 
@@ -111,22 +124,37 @@ void AntEntity::setJob(Job *pJob)
   //  rb_gc();
   if(mJob)
     {
-      if((*mJob)<=(*pJob))
+      if(pJob)
 	{
-	  mJobFinished.push_back(mJob);
-	  //delete mJob;
+	  if((*mJob)<=(*pJob))
+	    {
+	      mJobFinished.push_back(mJob);
+	      //delete mJob;
+	    }
+	  else
+	    {
+	      throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
+	      mJobFinished.push_back(pJob);
+	      //	      delete pJob;
+	  return;
+	    }
 	}
       else
-        {
-	  throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
-	  mJobFinished.push_back(pJob);
-	  //	      delete pJob;
-	  return;
-        }
+	mJobFinished.push_back(mJob);
     }
   mJob=0;
   if(mEnergy>=0.0) // do job anyways
-    mJob=pJob;
+    {
+      if(!pJob)
+	mJob=pJob;
+      else
+	{
+	  if(mMorale>0.1 || !pJob->needsMorale()) // at least 10% morale
+	    mJob=pJob;
+	  else
+	    mJobFinished.push_back(pJob);
+	}
+    }
   else
     {
       //      if(!pJob->mRubyObject) // let ruby delete it
@@ -167,7 +195,15 @@ void AntEntity::move(float pTime)
     }
   else if(mEnergy>0.0)
     {
+      if(mMorale<=0.1)
+	if(mJob)
+	  if(mJob->needsMorale())
+	    setJob(0);// kill job
+
       mEnergy+=pTime*getHealSpeed();
+      mMorale+=pTime*mMoraleHeal;
+      if(mMorale>1.0)
+	mMorale=1.0;
       if(mEnergy>1.0)
         mEnergy=1.0;
     }
@@ -179,7 +215,8 @@ void AntEntity::move(float pTime)
     }
   else
     noJob();
-    
+
+     
   mCondition+=mConditionHeal*pTime;
 }
 
@@ -400,4 +437,22 @@ float AntEntity::getSpeed() const
 void AntEntity::die()
 {
   jobFinished();
+}
+
+float AntEntity::getMorale() const
+{
+  return mMorale;
+}
+
+void AntEntity::setAggression(float agg)
+{
+  mAggression=agg;
+}
+float AntEntity::getAggression() const
+{
+  return mAggression;
+}
+
+void AntEntity::defeated()
+{
 }

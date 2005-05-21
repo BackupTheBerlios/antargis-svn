@@ -57,12 +57,15 @@ class AntEntity
     Job *mJob;
     std::list<Job*> mJobFinished;
     float mEnergy;
+    float mMorale;
+    float mMoraleHeal;
     float mHealSpeed;
     float mMoveSpeed;
     bool onGround;
     float mCondition;
     float mConditionFall; // when used, how much per time -- hero is stronger here
     float mConditionHeal; // refilling
+    float mAggression;
 
     std::string mType;
 
@@ -107,6 +110,9 @@ class AntEntity
       }
 
     void setJob(Job *pJob);
+
+    void setAggression(float agg);
+    float getAggression() const;
     
     virtual std::string getTexture() const
     {
@@ -146,7 +152,7 @@ class AntEntity
       updateSurface();
     }
 
-    void setPos2D(const Pos2D &p);
+    virtual void setPos2D(const Pos2D &p);
     void setPos3D(const Pos3D &p);
 
     void mapChanged();
@@ -191,6 +197,14 @@ class AntEntity
         {
           mEnergy=0.0;
 	  die();
+        }
+    }
+    void decMorale(float amount)
+    {
+      mMorale-=amount;
+      if(mMorale<0.0)
+        {
+          mMorale=0.0;
         }
     }
     virtual void die();
@@ -238,6 +252,10 @@ class AntEntity
     {
       return 0;
     }
+
+    virtual void defeated();
+
+    float getMorale() const;
 
     bool mRubyObject;
     VALUE mRUBY;

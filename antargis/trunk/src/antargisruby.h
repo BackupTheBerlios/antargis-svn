@@ -1130,6 +1130,7 @@ public:
     SwigDirector_AntEntity(VALUE self, Pos3D const &p);
     SwigDirector_AntEntity(VALUE self, Pos2D const &p);
     virtual void newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat);
+    virtual void setPos2D(Pos2D const &p);
     virtual void setDirection(Pos2D const &p);
     virtual VoxelImage *getSurface();
     virtual void move(float pTime);
@@ -1144,6 +1145,7 @@ public:
     virtual float getHealSpeed() const;
     virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
     virtual void jobFinished();
+    virtual void defeated();
     virtual void updateSurface();
     virtual void die();
     virtual void loadXML(xmlpp::Node const &node);

@@ -43,6 +43,11 @@ void Job::jobFinished(AntEntity *e)
   e->jobFinished();
 }
 
+bool Job::needsMorale() const
+{
+  return false;
+}
+
 /************************************************************************
 * MoveJob
 ************************************************************************/
@@ -121,12 +126,21 @@ FightJob::~FightJob()
 {
 }
 
+bool FightJob::needsMorale() const
+{
+  return true;
+}
+
+
 // FightJobs
 void FightJob::move(AntEntity *e,float ptime)
 {
   assert(!mDeleted);
-  if(mTarget->getEnergy()==0.0)
-    jobFinished(e);
+  if(mTarget->getEnergy()==0.0 || mTarget->getMorale()<0.1)
+    {
+      mTarget->defeated();
+      jobFinished(e);
+    }
   // if target is too far away run there, otherwise fight
   Pos2D diff=e->getPos2D()-mTarget->getPos2D();
   float norm=diff.norm();
@@ -138,7 +152,8 @@ void FightJob::move(AntEntity *e,float ptime)
   else
     {
       // fight
-      mTarget->decEnergy(ptime*strength);
+      mTarget->decEnergy(ptime*strength*e->getAggression());
+      mTarget->decMorale(ptime*strength*0.7); // FIXME: estimate this value
       mTarget->gotFight(e);
     }
   assert(!mDeleted);

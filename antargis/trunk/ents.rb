@@ -50,10 +50,15 @@ module FightHLEntity
 		@fightStarted=false
 	end
 	def wonFight
+		puts "WON FIGHT!!!!!!!!!!!!"
 		endFight
 	end
+	def setOwner(owner)
+		@owner=owner
+	end
 	def lostFight
-		@owner=@fightTarget
+		puts "LOST FIGHT!!!!!!!!!!!!"
+		setOwner(@fightTarget)
 		endFight
 	end
 	def checkFight()
@@ -99,7 +104,9 @@ module FightHLEntity
 		end
 	end
 	def undefeatedMen
-		return @men-@defeated
+		un=@men-@defeated
+		#puts "undefeated:"+un.to_s
+		return un
 	end
 	def sigDefeated(man)
 		@defeated.push(man)
@@ -337,6 +344,19 @@ class AntNewStone<AntMyEntity
 	end
 end
 
+
+class AntFlag<AntMyEntity
+	def initialize
+		super(Pos3D.new(0,0,0))
+		setType("flag")
+		@age=0
+	end
+	def getSurfaceName
+		return "flag"
+	end
+end
+
+
 class AntNewHouse<AntEntity
 	include FightHLEntity
 	def initialize
@@ -347,6 +367,27 @@ class AntNewHouse<AntEntity
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
+	end
+	
+	def setPos2D(p)
+		super(p)
+		if @flag then
+			p=getPos3D
+			p.y+=290
+			p.z-=150
+			@flag.setPos3D(p)
+		end
+	end
+
+	def loadXML(node)
+		super(node)
+		setPos2D(getPos2D)
+	end	
+	
+	def addFlag(owner)
+		@flag=AntFlag.new
+		setPos2D(getPos2D) # reset flag position
+		$map.insertEntity(@flag)
 	end
 	
 	def signUp(man)
@@ -410,21 +451,29 @@ class AntNewHouse<AntEntity
 	def jobFinished
 		checkBirth
 		newRestJob(2)
+		if @fighting then
+			checkFight
+		end
 	end
 	
 	def setOwner(owner)
-		@owner=owner
+		super(owner)
+		addFlag(owner)
 	end
 	
 	def assignJob(e)
 		if @fighting then
-			checkFight
-			# e has won a fight
-			#if atHome(e)
-			#	e.newRestJob(10)
-			#else
-			#	e.newMoveJob(0,getPos2D,0) # come home
-			#end
+			# fight mode
+			if @defeated.member?(e)
+				# e is defeated - go home and rest there
+				if atHome(e)
+					e.newRestJob(10)
+				else
+					e.newMoveJob(0,getPos2D,0)
+				end
+			else
+				checkFight
+			end
 		elsif atHome(e) then
 			@atHome.push(e)
 			# is home:
@@ -473,7 +522,7 @@ class AntNewHouse<AntEntity
 			return [need,needfrom]
 		end
 	end
-	
+
 
 	# assigns ent a job for fetching good from a enttype
 	def fetch(enttype,good,ent)

@@ -37,6 +37,8 @@ class Job
 
   virtual void jobFinished(AntEntity *e);
   bool operator<=(const Job &j) const;
+
+  virtual bool needsMorale() const;
   
   /*  VALUE mRUBY;
       bool mRubyObject;*/
@@ -87,6 +89,7 @@ class FightJob:public Job
     }
       virtual ~FightJob();
     void move(AntEntity *e,float ptime);
+    virtual bool needsMorale() const;
     AntEntity *getTarget()
     {
       return mTarget;

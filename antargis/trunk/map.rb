@@ -21,10 +21,13 @@
 
 #!/usr/bin/ruby
 
+require 'ant_player.rb'
+
 class AntRubyMap<AntargisMap
 	def initialize(w,h)
 		super(w,h)
 		@ents={}
+		@players=[]
 		GC.start
 	end
 	def loadEntity(node)
@@ -60,6 +63,16 @@ class AntRubyMap<AntargisMap
 		end
 		if node.getName=="antNewSheep" then
 			e=AntNewSheep.new
+		end
+		if node.getName=="humanPlayer" then
+			player=AntHumanPlayer.new("")
+			player.loadXML(node)
+			@players.push(player)
+		end
+		if node.getName=="computerPlayer" then
+			player=AntComputerPlayer.new
+			player.loadXML(node)
+			@players.push(player)
 		end
 		puts "LOADENTITY:"
 		puts e
@@ -117,6 +130,25 @@ class AntRubyMap<AntargisMap
 		getRuby(super(name))
 	end
 	def endChange
+	end
+	
+	def move(time)
+		super(time)
+		@players.each{|player|
+			player.move(time)
+		}
+	end
+	
+	def saveXML(n)
+		super(n)
+		@players.each{|player|
+			c=n.newChild(player.xmlName)
+			player.saveXml(c)
+		}
+	end
+	
+	def getNext(ent,type)
+		getRuby(super(ent,type))
 	end
 end
 

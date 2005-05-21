@@ -20,8 +20,8 @@ AC_CHECK_LIB(physfs,PHYSFS_init)
 #AC_CHECK_LIB(ruby1.8-dbg,rb_gc_mark)
 AC_CHECK_LIB(antargisgui,antargisguilib)
 
-RUBY_INCLUDE_DIR=[`ruby1.9 -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
-RUBY_INSTALL_DIR=[`ruby1.9 -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
+RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
+RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
 
 AC_SUBST(RUBY_INCLUDE_DIR)
 AC_SUBST(RUBY_INSTALL_DIR)
