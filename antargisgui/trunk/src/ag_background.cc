@@ -24,6 +24,17 @@
 #include "ag_debug.h"
 #include "ag_painter.h"
 
+
+AGBackground::AGBackground(const AGColor &pColor):mSurfaceFlag(false)
+{
+  mColor=true;
+  mColors[0]=pColor;
+  mColors[1]=pColor;
+  mColors[2]=pColor;
+  mColors[3]=pColor;
+  mBorder=0;
+}
+
 AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
 {
   //  CTRACE;

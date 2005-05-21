@@ -691,7 +691,11 @@ void AGWidget_markfunc(void *ptr)
   VALUE   rubyAnimal;
   AGWidget *zoo;
   
-
+  if(!ptr)
+    {
+      cdebug("Warning: ptr==0 in AGWidget_markfunc");
+      return;
+    }
   assert(ptr);
   //  TRACE;  
   //  cdebug(ptr<<endl);

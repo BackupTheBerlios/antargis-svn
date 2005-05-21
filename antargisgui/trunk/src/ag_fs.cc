@@ -52,14 +52,31 @@ void initFS(const char *argv0)
   cdebug("--");
 }
 
+std::string directLoad(const std::string &pName)
+{
+  FILE *f=fopen(pName.c_str(),"rb");
+  if(!f)
+    return "";
+  fseek(f,0,SEEK_END);
+  long len=ftell(f);
+  fseek(f,0,SEEK_SET);
+  char *buffer=new char[len+2];
+  fread(buffer,1,len,f);
+
+  fclose(f);
+  return std::string(buffer,len);
+}
+
 std::string loadFile(const std::string &pName)
 {
   assert(FSinited);
 
   if(!fileExists(pName))
     {
-      std::cerr<<"File '"<<pName<<"' does not exist!"<<std::endl;
-      return "";
+      std::string r=directLoad(pName);
+      if(r.length()==0)
+	std::cerr<<"File '"<<pName<<"' does not exist!"<<std::endl;
+      return r;
     }
 
   PHYSFS_file *f=PHYSFS_openRead(pName.c_str());

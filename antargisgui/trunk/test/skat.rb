@@ -22,9 +22,9 @@
 #!/usr/bin/ruby
 
 require 'libantargisruby'
+include Libantargisruby
 require 'antApp.rb'
 
-include Libantargisruby
 
 $trump="Karo"
 

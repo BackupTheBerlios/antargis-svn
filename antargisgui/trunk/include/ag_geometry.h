@@ -45,12 +45,12 @@ class AGRect:public SDL_Rect
   AGRect(int x,int y,int w,int h);
   AGRect(const std::string &s);
 
-  /*
-  int x() const;
-  int y() const;
+  
+  int getX() const;
+  int getY() const;
   int width() const;
   int height() const;
-  */
+  
   AGRect intersect(const AGRect &r) const;
 
   bool isNull() const; // is empty

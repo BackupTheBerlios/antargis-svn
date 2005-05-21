@@ -32,6 +32,7 @@ class AGBackground
 {
  public:
   AGBackground(std::string pThemeName="");
+  AGBackground(const AGColor &pColor);
 
   void draw(AGPainter &p);
 

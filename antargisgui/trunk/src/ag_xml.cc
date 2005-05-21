@@ -91,7 +91,7 @@ void Node::setName(std::string pName)
   mName=pName;
 }
 
-Node::NodeList Node::get_children() const
+Node::NodeVector Node::get_children() const
   {
     return mNodes;
   }
@@ -105,10 +105,10 @@ const Node *Node::operator->() const
     return this;
   }
 
-Node::NodeList Node::get_children(std::string pName) const
+Node::NodeVector Node::get_children(std::string pName) const
   {
-    NodeList l;
-    NodeList::const_iterator i=mNodes.begin();
+    NodeVector l;
+    NodeVector::const_iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
       {
         if(i->getName()==pName)
@@ -258,7 +258,7 @@ void Node::indent(std::ostringstream &s,int depth) const
 
 void Node::getContent(std::ostringstream &s,int depth) const
   {
-    std::list<Node>::const_iterator i=mNodes.begin();
+    std::vector<Node>::const_iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
       {
         if(depth>0)
@@ -312,7 +312,11 @@ std::string Node::toString(bool indent) const
 void Node::parseChar(ParserInfo &info,char c)
 {
   if(info.next()!=c)
-    throw ParserException("Wrong char");
+    {
+      cdebug("char needed:"<<c);
+      cdebug(info.getInfo());
+      throw ParserException("Wrong char");
+    }
   info.inc();
 }
 

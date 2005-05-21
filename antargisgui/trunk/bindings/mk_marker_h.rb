@@ -29,7 +29,7 @@ rlist={} # all, which have a mRUBY member
 f=File.open("../include/antargisgui.h")
 f.each {|x|
 
-if x =~ /%.*/ then
+if x =~ /%.*/ and not (x =~/\.i/ or x =~/template/)then
 	y=x.gsub(/.* "/,"").gsub(/"/,"").gsub(/\n/,"")
         if not y=~/\/.*/ then
         	fn="../include/"+y

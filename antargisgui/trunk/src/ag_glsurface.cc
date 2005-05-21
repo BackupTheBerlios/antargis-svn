@@ -168,7 +168,7 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
                                                         0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
 
   //  cdebug((int)(image->format->BitsPerPixel));
-  if (image->format->BitsPerPixel != 32 )
+  if (false)//image->format->BitsPerPixel != 32 )
     {
       //      TRACE;
       SDL_BlitSurface( image, 0, openGLSurface, 0 );
@@ -186,12 +186,14 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
           for( int i=0; i<image->w; ++i )
             {
               Uint32 c = sge_GetPixel( image, i, j );
+	      if(c!=image->format->colorkey)
 		{
 		  SDL_GetRGBA( c, image->format, &r, &g, &b, &a );
 		  if(c==ckey)
 		    a=0;//r=255,b=0;
 		  //		  a=255;
 		  Uint32 cprime = SDL_MapRGBA( openGLSurface->format, r, g, b, a );
+		 
 		  sge_PutPixel( openGLSurface, i, j, cprime);
 		  //		  sge_PutPixelAlpha( openGLSurface, i, j, cprime,a );
 		}

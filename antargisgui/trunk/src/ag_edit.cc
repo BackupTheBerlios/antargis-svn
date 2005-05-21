@@ -801,6 +801,13 @@ void AGEdit::setVAlign(AGVAlign pVAlign)
     i->setVAlign(pVAlign);
 }
 
+void AGEdit::setBackground(const AGBackground &bg)
+{
+  mDrawBackground=true;
+  mBackground=bg;
+}
+
+
 void AGEdit::setBackground(bool pDrawBackground)
 {
   mDrawBackground=pDrawBackground;

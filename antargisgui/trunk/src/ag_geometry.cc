@@ -92,12 +92,12 @@ AGRect::AGRect(const std::string &s)
 }
 
 
-/*
-int AGRect::x() const
+
+int AGRect::getX() const
 {
   return SDL_Rect::x;
 }
-int AGRect::y() const
+int AGRect::getY() const
 {
   return SDL_Rect::y;
 }
@@ -108,7 +108,7 @@ int AGRect::width() const
 int AGRect::height() const
 {
   return SDL_Rect::h;
-  }*/
+  }
 /*
 SDL_Rect AGRect::rect() const
 {

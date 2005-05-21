@@ -99,6 +99,7 @@ class AGEdit:public AGWidget
   void setVAlign(AGVAlign pVAlign);
 
   void setBackground(bool pDrawBackground);
+  void setBackground(const AGBackground &bg);
 
   void setTheme(const std::string &s);
 

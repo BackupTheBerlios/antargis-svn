@@ -87,6 +87,8 @@
 %include "ag_listbox.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 %include "ag_painter.h"
+%include "std_vector.i"
+%template(AGNodeList) std::vector<Node>;
 #endif
 
 #endif

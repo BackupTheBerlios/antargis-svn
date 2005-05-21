@@ -52,7 +52,11 @@ void AGImage::draw(AGPainter &p)
 
 
   if(mTile)
-    p.tile(mTexture,getRect().origin(),mSrcRect);
+    {
+      if(mSrcRect.w==0 || mSrcRect.h==0)
+	mSrcRect=mTexture.getRect();
+      p.tile(mTexture,getRect().origin(),mSrcRect);
+    }
   else if(center)
     {
       

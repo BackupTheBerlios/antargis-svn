@@ -21,7 +21,7 @@
 #ifndef __MY_SIMPLE_XML
 #define __MY_SIMPLE_XML
 
-#include <list>
+#include <vector>
 #include <map>
 #include <string>
 #include <sstream>
@@ -54,29 +54,29 @@ struct ParserInfo
 class Node
   {
     std::string mName;
-    std::list<Node> mNodes;
+    std::vector<Node> mNodes;
     std::map<std::string,std::string> mParams;
     std::string mContent;
 
   public:
 
-    typedef std::list<Node> NodeList;
+    typedef std::vector<Node> NodeVector;
 
-    typedef std::list<Node>::iterator iterator;
-    typedef std::list<Node>::const_iterator const_iterator;
+    typedef std::vector<Node>::iterator iterator;
+    typedef std::vector<Node>::const_iterator const_iterator;
 
     Node();
     Node(std::string name);
 
     void setName(std::string pName);
 
-    NodeList get_children() const;
+    NodeVector get_children() const;
 
 #ifndef SWIG
     const Node &(operator*)() const;
     const Node *(operator->)() const;
 #endif
-    NodeList get_children(std::string pName) const;
+    NodeVector get_children(std::string pName) const;
     
     std::string getName() const;
     std::string get_name() const; // Compability
