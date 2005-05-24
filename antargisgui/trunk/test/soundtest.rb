@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
-# testapp.rb
+# wintestgl.rb
 # by David Kamphausen (david.kamphausen@web.de)
 #
 # The "Antargis" project, including all files needed to compile it,
@@ -23,30 +23,28 @@
 
 require 'libantargisruby'
 #require 'sdl'
-#require 'theme.rb'
+require 'testapp.rb'
+require 'theme.rb'
 
 include Libantargisruby
 
-class TestApp <AGApplication
-	def initialize(autoexit=true)
-#		initTheme
-		@count=0
-		@autoexit=autoexit
-		super()
-	end
-	def eventQuit(event)
-		puts "Quitting"
-		super(event)
-	end
-	def eventIdle
-		delay(10)
-		#puts "idle count:"+@count.to_s
-		@count+=1
-		if @count>=20 then
-			if @autoexit then
-				puts "correct quit after 20 idles"
-				tryQuit
-			end
-		end
-	end
-end
+puts "MenuTest"
+
+main=AGMain.new
+
+main.changeRes(640,480,32,false,true)
+
+app=TestApp.new(false)
+
+sc=AGScreenWidget.new
+
+button=AGButton.new(sc,AGRect.new(0,0,200,100),"text")
+b2=AGButton.new(button,AGRect.new(10,10,60,40),"text2")
+b2.setTheme("antButton")
+#button.setText("huhu")
+button.addChild(b2)
+sc.addChild(button)
+app.setMainWidget(sc)
+
+getSoundManager().playMp3("/home/david/mp3/david4c.mp3")
+app.run

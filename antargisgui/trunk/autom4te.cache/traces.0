@@ -441,15 +441,19 @@ m4trace:configure.in:19: -1- AC_CHECK_LIB([physfs], [PHYSFS_init])
 m4trace:configure.in:19: -1- AH_OUTPUT([HAVE_LIBPHYSFS], [/* Define to 1 if you have the `physfs\' library (-lphysfs). */
 #undef HAVE_LIBPHYSFS])
 m4trace:configure.in:19: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBPHYSFS])
-m4trace:configure.in:25: -1- AC_SUBST([RUBY_INCLUDE_DIR])
-m4trace:configure.in:26: -1- AC_SUBST([RUBY_INSTALL_DIR])
-m4trace:configure.in:44: -1- AC_CONFIG_FILES([ 
+m4trace:configure.in:20: -1- AC_CHECK_LIB([SDL_mixer], [Mix_OpenAudio])
+m4trace:configure.in:20: -1- AH_OUTPUT([HAVE_LIBSDL_MIXER], [/* Define to 1 if you have the `SDL_mixer\' library (-lSDL_mixer). */
+#undef HAVE_LIBSDL_MIXER])
+m4trace:configure.in:20: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBSDL_MIXER])
+m4trace:configure.in:26: -1- AC_SUBST([RUBY_INCLUDE_DIR])
+m4trace:configure.in:27: -1- AC_SUBST([RUBY_INSTALL_DIR])
+m4trace:configure.in:45: -1- AC_CONFIG_FILES([ 
 Makefile \
 src/Makefile \
 include/Makefile \
 bindings/Makefile \
 test/Makefile ])
-m4trace:configure.in:44: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
+m4trace:configure.in:45: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
 You should run autoupdate.], [])
-m4trace:configure.in:44: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
-m4trace:configure.in:44: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
+m4trace:configure.in:45: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
+m4trace:configure.in:45: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])

@@ -52,6 +52,7 @@
 #include "ag_fs.h"
 #include "ag_listbox.h"
 #include "ag_painter.h"
+#include "ag_mixer.h"
 #include <SDL_keysym.h>
 
 #ifdef SWIG
@@ -82,6 +83,7 @@
 %include "ag_layout.h"
 %include "ag_layoutfactory.h"
 %include "ag_xml.h"
+%include "ag_mixer.h"
  //%include "ag_dialog.h"
 %include "ag_fs.h"
 %include "ag_listbox.h"

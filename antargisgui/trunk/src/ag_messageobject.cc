@@ -139,9 +139,25 @@ AGSignal::AGSignal(AGMessageObject *pCaller,const std::string &pName):
   mName(pName),mCaller(pCaller)
 {
 }
+
+AGSignal::~AGSignal()
+{
+  std::set<AGListener*>::iterator i=mListeners.begin();
+  for(;i!=mListeners.end();i++)
+    {
+      AGMessageObject *o=dynamic_cast<AGMessageObject*>(*i);
+      if(o)
+	o->popSignal(this);
+    }
+}
+
+
 void AGSignal::connect(AGListener &pListener)
 {
   mListeners.insert(&pListener);
+  AGMessageObject *o=dynamic_cast<AGMessageObject*>(&pListener);
+  if(o)
+    o->pushSignal(this);
 }
 void AGSignal::disconnect(AGListener &pListener)
 {
@@ -202,6 +218,23 @@ AGMessageObject::AGMessageObject():
 {
 }
 
+AGMessageObject::~AGMessageObject()
+{
+  std::set<AGSignal*> sigs=mSignals;
+  std::set<AGSignal*>::iterator i=sigs.begin();
+  for(;i!=sigs.end();i++)
+    (*i)->disconnect(*this);
+}
+
+void AGMessageObject::pushSignal(AGSignal *pSignal)
+{
+  mSignals.insert(pSignal);
+}
+
+void AGMessageObject::popSignal(AGSignal *pSignal)
+{
+  mSignals.erase(pSignal);
+}
 
 
 // 

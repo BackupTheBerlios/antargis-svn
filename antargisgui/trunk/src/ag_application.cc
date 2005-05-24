@@ -22,6 +22,7 @@
 #include "ag_surface.h"
 #include "ag_main.h"
 #include "ag_debug.h"
+#include "ag_mixer.h"
 
 AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0)
 
@@ -46,6 +47,9 @@ bool AGApplication::run()
   
   while(mRunning)
     {
+      // check for finished music
+      getSoundManager()->checkFinished();
+
       //                 TRACE;
       now=SDL_GetTicks();
       //      TRACE;

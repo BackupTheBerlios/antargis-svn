@@ -17,6 +17,7 @@ AC_CHECK_LIB(SDL_ttf,TTF_Init)
 AC_CHECK_LIB(SGE,sge_FilledRect)
 AC_CHECK_LIB(GLU,gluPerspective)
 AC_CHECK_LIB(physfs,PHYSFS_init)
+AC_CHECK_LIB(SDL_mixer,Mix_OpenAudio)
 
 RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
 RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]

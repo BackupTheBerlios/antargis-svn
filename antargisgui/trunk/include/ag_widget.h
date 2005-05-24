@@ -32,7 +32,7 @@
 
 #include "ag_painter.h"
 
-class AGMenu;
+//class AGMenu;
 
 class AGWidget:public AGMessageObject
 {
@@ -46,6 +46,7 @@ class AGWidget:public AGMessageObject
   virtual AGRect getClientRect() const;
   void setRect(const AGRect &pRect);
   
+  void setParent(AGWidget *pParent);
   AGWidget *getParent();
 
   virtual bool eventShow();
@@ -65,7 +66,7 @@ class AGWidget:public AGMessageObject
 
   virtual bool canFocus() const;
 
-  void setMenu(AGMenu *pMenu);
+  //  void setMenu(AGMenu *pMenu);
 
   bool processEvent(const AGEvent *event);
 
@@ -124,6 +125,8 @@ class AGWidget:public AGMessageObject
 
   void erase(AGWidget *w);
 
+  void eventChildrenDeleted(AGWidget *pWidget);
+
  private:
 
   void gainFocusDown(AGWidget *pWidget);
@@ -140,7 +143,7 @@ class AGWidget:public AGMessageObject
   bool mButtonDown;
   bool mFixedWidth,mFixedHeight;
   bool mVisible;
-  AGMenu *mMenu;
+  //  AGMenu *mMenu;
 
   bool mHasFocus;
   AGWidget *mFocus;

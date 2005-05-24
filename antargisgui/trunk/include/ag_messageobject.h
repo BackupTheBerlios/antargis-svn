@@ -135,6 +135,9 @@ class AGSignal
   //  AGSignal(const AGSignal &s);
   AGSignal(AGMessageObject *pCaller);
   AGSignal(AGMessageObject *pCaller,const std::string &pName);
+
+  virtual ~AGSignal();
+
   void connect(AGListener &pListener);
   void disconnect(AGListener &pListener);
 
@@ -157,6 +160,7 @@ class AGMessageObject:public AGListener
 {
  public:
   AGMessageObject();
+  virtual ~AGMessageObject();
 
   bool processEvent(const AGEvent *pEvent);
 
@@ -189,8 +193,13 @@ class AGMessageObject:public AGListener
   AGSignal sigSysWM;
   AGSignal sigVideoResize;
 
+  void pushSignal(AGSignal *pSignal);
+  void popSignal(AGSignal *pSignal);
+
  private:
   bool mCanReceiveMessages;
+
+  std::set<AGSignal*> mSignals;
 
   static AGMessageObject *captureObject;
 };

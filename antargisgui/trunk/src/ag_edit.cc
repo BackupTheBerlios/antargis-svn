@@ -274,11 +274,11 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   mViewCy=0;
 
 
-  AGMenu *menu=new AGMenu(this,AGPoint(0,0),"ContextMenu");
+  /*  AGMenu *menu=new AGMenu(this,AGPoint(0,0),"ContextMenu");
   menu->addItem("Copy");
   menu->addItem("Paste");
   setMenu(menu);
-
+  */
   //  mBackground=AGTexture(getTheme()->getSurface(mTheme+e("edit.background.image"));
 
   std::string t=mTheme;

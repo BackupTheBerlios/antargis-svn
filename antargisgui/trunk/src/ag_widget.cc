@@ -32,17 +32,20 @@ using namespace std;
 
 AGWidget *agNoParent=0;
 
+std::set<AGWidget*> mAllWidgets; // workaround - to check if still widget exists or not
+
 
 AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
   sigClick(this,"sigClick"),
   mr(r),mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
-  mFixedWidth(false),mFixedHeight(false),mVisible(true),mMenu(0),mHasFocus(false),mFocus(0)
+  mFixedWidth(false),mFixedHeight(false),mVisible(true),mHasFocus(false),mFocus(0)
 
 {
   mRubyObject=false;
   mModal=false;
+  mAllWidgets.insert(this);
   //  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
@@ -54,7 +57,46 @@ AGWidget::~AGWidget()
   cdebug("Name:"<<getName());
   cdebug(getName());
   //  throw int();
+
+  std::list<AGWidget*>::iterator i=mChildren.begin();
+  for(;i!=mChildren.end();i++)
+    {
+      (*i)->setParent(0);
+    }
+  if(getParent())
+    {
+      if(mAllWidgets.find(getParent())==mAllWidgets.end())
+	{
+	  cdebug("WARNING:Error in ~AGWidget!!!");
+	}
+      else
+	getParent()->eventChildrenDeleted(this);
+    }
+  mAllWidgets.erase(this);
 }
+
+void AGWidget::eventChildrenDeleted(AGWidget *pWidget)
+{
+  std::list<AGWidget*>::iterator i=mChildren.begin();
+  for(;i!=mChildren.end();i++)
+    {
+      if(*i==pWidget)
+	{
+	  mChildren.erase(i);
+	  break;
+	}
+    }
+  i=mToClear.begin();
+  for(;i!=mToClear.end();i++)
+    {
+      if(*i==pWidget)
+	{
+	  mToClear.erase(i);
+	  break;
+	}
+    }
+}
+
 
 void AGWidget::draw(AGPainter &p)
 {
@@ -77,7 +119,10 @@ void AGWidget::drawAll(AGPainter &p)
       for(;i!=mToClear.end();i++)
 	{
 	  if(!(*i)->mRubyObject) // don't delete ruby-objects - they get deleted by garbage collection
-	    delete *i;
+	    {
+	      cdebug("type:"<<typeid(**i).name());
+	      delete *i;
+	    }
 	}
       mToClear.clear();
     }
@@ -105,8 +150,8 @@ void AGWidget::drawAll(AGPainter &p)
   if(mChildrenDrawFirst)
     draw(p2);
 
-  if(mMenu)
-    mMenu->drawAll(p2);
+  //  if(mMenu)
+  //    mMenu->drawAll(p2);
 }
 
 AGRect AGWidget::getRect() const
@@ -134,13 +179,16 @@ bool AGWidget::processEvent(const AGEvent *event)
   // do i have a capturehook set ? (modal)
   // i will send that event to my children
 
-  std::list<AGWidget*>::iterator i=mChildren.begin();
+  std::list<AGWidget*>::iterator i;
 
-  if(mMenu)
-    processed=mMenu->processEvent(event);
+  //  if(mMenu)
+  //    processed=mMenu->processEvent(event);
 
-  for(;i!=mChildren.end() && !processed; i++)
-    processed=(*i)->processEvent(event);
+  std::list<AGWidget*> children=mChildren; // copy children, so that changes do not affect iteration
+  for(i=children.begin();i!=children.end() && !processed; i++)
+    {
+      processed=(*i)->processEvent(event);
+    }
   //  cdebug("proc:"<<processed);
   
   if(processed) {
@@ -204,7 +252,7 @@ bool AGWidget::eventMouseMotion(const AGEvent *m)
 	  if(!mMouseIn)
 	    {
 	      mMouseIn=true;
-	      eventMouseEnter();
+	      eventMouseEnter() || sigMouseEnter(e);
 	    }
 	}
       else
@@ -212,7 +260,7 @@ bool AGWidget::eventMouseMotion(const AGEvent *m)
 	  if(mMouseIn)
 	    {
 	      mMouseIn=false;
-	      eventMouseLeave();
+	      eventMouseLeave() || sigMouseLeave(e);
 	    }
 	}
 
@@ -243,8 +291,8 @@ bool AGWidget::eventMouseButtonDown(const AGEvent *m)
 	  cdebug(int(e->getButton()));
 	  cdebug((void*)mMenu);
 	  cdebug(int(e->getButton())<<" "<<int(SDL_BUTTON_RIGHT));*/
-	  if((e->getButton()==SDL_BUTTON_RIGHT) && mMenu)
-	    mMenu->show(e->getMousePosition());//getScreenRect().getPosition());
+	  //	  if((e->getButton()==SDL_BUTTON_RIGHT) && mMenu)
+	  //	    mMenu->show(e->getMousePosition());//getScreenRect().getPosition());
 	}
     }
   return false;
@@ -424,6 +472,12 @@ void AGWidget::hide()
   mVisible=false;
 }
 
+void AGWidget::setParent(AGWidget *pParent)
+{
+  mParent=pParent;
+}
+
+
 AGWidget *AGWidget::getParent()
 {
   return mParent;
@@ -486,11 +540,11 @@ bool AGWidget::eventLostFocus()
   
   return false;
 }
-
+/*
 void AGWidget::setMenu(AGMenu *pMenu)
 {
   mMenu=pMenu;
-}
+  }*/
 
 void AGWidget::gainCompleteFocus(AGWidget *pWidget)
 {
@@ -522,6 +576,7 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 	{
 	  mChildren.erase(i);
 	  mChildren.push_front(pWidget);
+
 	}
       //      cdebug(mChildren.size());
     }
@@ -715,6 +770,22 @@ void AGWidget_markfunc(void *ptr)
 	}
       AGWidget_markfunc(*i);
     }
+
+
+  // mark mToClear also - as it can be that they are still used on stack
+  for(i=zoo->mToClear.begin();i!=zoo->mToClear.end();i++)
+    {
+      //      cdebug("children:"<<*i);
+      cppAnimal = *i;//zoo->getAnimal(i);
+      if(cppAnimal->mRubyObject)
+	{
+	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
+	  rb_gc_mark(rubyAnimal);
+	  //	  cdebug("mark:"<<cppAnimal->getName());
+	}
+      AGWidget_markfunc(*i);
+    }
+  
 #endif
 }
 
@@ -724,3 +795,4 @@ AGWidget *toAGWidget(AGMessageObject *o)
 {
   return dynamic_cast<AGWidget*>(o);
 }
+
