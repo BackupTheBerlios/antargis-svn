@@ -39,10 +39,6 @@ class Job
   bool operator<=(const Job &j) const;
 
   virtual bool needsMorale() const;
-  
-  /*  VALUE mRUBY;
-      bool mRubyObject;*/
-  bool mDeleted;
 };
 
 class RestJob:public Job
@@ -55,22 +51,20 @@ class RestJob:public Job
 };
 
 class MoveJob:public Job
-  {
-    Pos2D mTarget;
-    //    float speed;
-    //    float runSpeed;
-    int near;
-    bool mRun;
-  public:
-    MoveJob(int p,const Pos2D &pTarget,int pnear=0,bool pRun=false);
-    virtual ~MoveJob();
-    void move(AntEntity *e,float ptime);
-    Pos2D getDirection(const AntEntity *e) const;
-
-    
-  private:
-    void moveBy(AntEntity *e,float ptime,float aspeed);
-  };
+{
+  Pos2D mTarget;
+  int near;
+  bool mRun;
+ public:
+  MoveJob(int p,const Pos2D &pTarget,int pnear=0,bool pRun=false);
+  virtual ~MoveJob();
+  void move(AntEntity *e,float ptime);
+  Pos2D getDirection(const AntEntity *e) const;
+  
+  
+ private:
+  void moveBy(AntEntity *e,float ptime,float aspeed);
+};
 
 // FIXME: implement near and far fighting (arrows)
 class FightJob:public Job
@@ -81,13 +75,9 @@ class FightJob:public Job
     float speed;
 
   public:
-    FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
-    {
-      fightDistance=20; // in pixels
-      strength=0.2;   // decrease per second
-      speed=70; // see MoveJob
-    }
-      virtual ~FightJob();
+    FightJob(int p,AntEntity *pTarget);
+    
+    virtual ~FightJob();
     void move(AntEntity *e,float ptime);
     virtual bool needsMorale() const;
     AntEntity *getTarget()
@@ -106,9 +96,5 @@ class FetchJob:public MoveJob
   virtual void jobFinished(AntEntity *e);
   
 };
-/*
-RestJob *newRestJob(int pTime);
-FetchJob *newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
-MoveJob *newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
-*/
+
 #endif

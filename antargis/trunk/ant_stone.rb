@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
-# ents.rb
+# ant_stone.rb
 # by David Kamphausen (david.kamphausen@web.de)
 #
 # The "Antargis" project, including all files needed to compile it,
@@ -21,24 +21,28 @@
 
 #!/usr/bin/ruby
 
-# try to implement alle entites in ruby
-# WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
-# could be that it has something to do with Init_Stack ???
-
-
-class AntMyEntity<AntEntity
-	def initialize(p)
-		super(p)
-		$map.registerEntity(self)
-		mRUBY=self
+class AntNewStone<AntMyEntity
+	def initialize()
+		super(Pos2D.new(0,0))
+		@typeID=0
+		setType("stone")
+	end
+	def setTreeType(t)
+		@typeID=t
+	end
+	def getTexture
+		return "deco"+@typeID.to_s
+	end
+	def saveXML(node)
+		super(node)
+		node.set("typeID",@typeID.to_s)
+	end
+	def loadXML(node)
+		super(node)
+		@typeID=node.get("typeID").to_i
+	end
+	def xmlName
+		return "antNewStone"
 	end
 end
-
-
-require 'ant_hero.rb'
-require 'ant_sheep.rb'
-require 'ant_man.rb'
-require 'ant_house.rb'
-require 'ant_stone.rb'
-require 'ant_tree.rb'
 

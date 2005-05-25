@@ -77,6 +77,8 @@ class AntargisMap
     //    std::set<MapListener*> mListeners;
     std::list<AntEntity*> mToDel;
 
+    size_t mGCcalls;
+
   public:
     AntargisMap(int w,int h);
     virtual ~AntargisMap();
@@ -95,6 +97,9 @@ class AntargisMap
     Pos3D getNormal(int x,int y) const;
 
     bool updated() const;
+
+    size_t getGCcalls() const;
+    void resetGCcalls();
 
     AntEntity *getNext(AntEntity *me,const std::string &pType);
 

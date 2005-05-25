@@ -27,7 +27,7 @@ class AntPlayer
 		@heronames=[]
 		@name=name
 	end
-	def jobFinished
+	def eventJobFinished
 	end
 	def saveXML(n)
 		n.set("name",@name)
@@ -59,16 +59,13 @@ class AntPlayer
 	end
 	
 	def assignJob(hero)
-		puts "ANTPLAER::assignJob"
-		# simply attack
-		target=getMap.getNext(hero,"hero")
-		hero.newHLFightJob(target)
+		hero.newHLRestJob(20)
 	end
 end
 
 class AntHumanPlayer<AntPlayer
-	def jobFinished(who,what)
-		puts who+" is ready with is job:"+what
+	def eventJobFinished(who,what)
+		puts who.to_s+" is ready with is job:"+what.to_s
 	end
 	def xmlName
 		return "humanPlayer"
@@ -76,12 +73,31 @@ class AntHumanPlayer<AntPlayer
 end
 
 class AntComputerPlayer<AntPlayer
-	def initialize()
-		super
-	end
-	def jobFinished
-	end
+#	def eventJobFinished
+#	end
 	def xmlName
 		return "computerPlayer"
+	end
+	def eventJobFinished(who,what)
+		puts who.to_s+" is ready with is job:"+what.to_s
+	end
+	def assignJob(hero)
+		puts "ANTPLAER::assignJob"
+		# simply attack
+		target=getMap.getNext(hero,"hero")
+		
+		if target and target.getPlayer!=self
+			hero.newHLFightJob(target)
+		else
+			house=getMap.getNext(hero,"house")
+			housePos=house.getPos2D
+			heroPos=hero.getPos2D
+			diff=housePos-heroPos
+			if diff.norm>150
+				hero.newHLMoveJob(0,house.getPos2D,100)
+			else
+				hero.newHLRestJob(20)
+			end
+		end
 	end
 end

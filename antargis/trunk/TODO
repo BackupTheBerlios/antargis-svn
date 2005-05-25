@@ -1,3 +1,14 @@
+* delete std::map's from view.h and use mSurface from AntEntity
+	=> change usage of getTexture, so that it isn't called each frame
+
+
+
+
+
+
+
+
+
 ok 1) Tiles selektieren
 ok 2) Entites selektierbar machen
 ok 3) HeroEntity

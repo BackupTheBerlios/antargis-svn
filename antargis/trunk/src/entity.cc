@@ -23,52 +23,54 @@
 #include "ag_debug.h"
 #include "jobs.h"
 
-AntEntity::AntEntity(const Pos3D &p):mPos(p),mJob(0),mEnergy(1.0),mHealSpeed(0.3),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
+AntEntity::AntEntity(const Pos3D &p):mPos(p)
 {
-  mDirNum=1;
-  mID=getMap()->getNewID();
-  mSurface=0;
-  mDeleted=false;
-  mPlayerID=-1;
-  mMoving=false;
-  mMoveSpeed=70;
-  mMorale=1.0;
-  mMoraleHeal=0.1;
-  mAggression=0.5;
+  init();
 }
-AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p)),mJob(0),mEnergy(1.0),mHealSpeed(0.3),onGround(true),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
+AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p))
 {
-  mDirNum=1;
-  mID=getMap()->getNewID();
-  mSurface=0;
-  mDeleted=false;
-  mPlayerID=-1;
-  mMoving=false;
-  mMoveSpeed=70;
-  mMorale=1.0;
-  mMoraleHeal=0.1;
-  mAggression=0.5;
+  init();
 }
 
-AntEntity::AntEntity():mPos(0,0,0),mJob(0),mEnergy(1.0),mHealSpeed(0.0),onGround(false),mCondition(1.0),mConditionFall(0.4),mConditionHeal(0.05),mRubyObject(false)
+AntEntity::AntEntity():mPos(0,0,0)
 {
-  mDirNum=1;
+  init();
+}
+
+void AntEntity::init()
+{
+  CTRACE;
+  mRubyObject=false;
+
   mID=getMap()->getNewID();
-  mSurface=0;
-  mDeleted=false;
-  mPlayerID=-1;
-  mMoving=false;
-  mMoveSpeed=70;
+  cdebug("mID:"<<mID);
+  
+  onGround=true;
+
+  mJob=0;
+
+  mVirtualY=40;
+
+  mEnergy=1.0;
+  mHealSpeed=0.1;
+
   mMorale=1.0;
   mMoraleHeal=0.1;
+
+  mMoveSpeed=70;
+
   mAggression=0.5;
+
+  mSurface=0;
+
+  mDirNum=1;
 }
+
 
 AntEntity::~AntEntity()
 {
   //  CTRACE;
   //  cdebug(mRubyObject);
-  mDeleted=true;
   //  throw int();
 }
 
@@ -79,8 +81,8 @@ void AntEntity::saveXML(xmlpp::Node &node) const
     node.set("energy",toString(mEnergy));
     node.set("healSpeed",toString(mHealSpeed));
     node.set("onGround",toString(onGround));
-    node.set("entityID",toString(getID()));
-    node.set("name",getVar("name"));
+    //    node.set("entityID",toString(getID()));
+    node.set("name",getName());
     node.set("morale",toString(mMorale));
     node.set("aggression",toString(mAggression));
   }
@@ -93,10 +95,13 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   xmlpp::Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     mPos.loadXML(*i);
-  mID=toInt(node.get("entityID"));
-  mMorale=toFloat(node.get("morale"));
+  //  mID=toInt(node.get("entityID"));
+  if(node.get("morale")!="")
+    mMorale=toFloat(node.get("morale"));
+  else
+    mMorale=1.0f;
   mAggression=toFloat(node.get("aggression"));
-  setVar("name",node.get("name"));
+  setName(node.get("name"));
 }
 
 Pos3D AntEntity::getPos3D() const
@@ -120,8 +125,6 @@ void AntEntity::setPos2D(const Pos2D &p)
 
 void AntEntity::setJob(Job *pJob)
 {
-  //  assert(!mMoving);
-  //  rb_gc();
   if(mJob)
     {
       if(pJob)
@@ -169,12 +172,12 @@ void AntEntity::setJob(Job *pJob)
       //      if(mJob->mRubyObject)
       //	rb_gc_register_address(&(mJob->mRUBY));
       //	rb_gc_mark(mJob->mRUBY);
-      gotNewJob();
+      eventGotNewJob();
     }
 
 }
 
-void AntEntity::gotNewJob()
+void AntEntity::eventGotNewJob()
 {
 }
 
@@ -209,23 +212,23 @@ void AntEntity::move(float pTime)
     }
   if(mJob)
     {
-      mMoving=true;
       mJob->move(this,pTime);
-      mMoving=false;
     }
   else
-    noJob();
+    eventNoJob();
 
      
-  mCondition+=mConditionHeal*pTime;
+  //  mCondition+=mConditionHeal*pTime;
 }
+
+
 
 Rect2D AntEntity::getRect() const
   {
     return Rect2D((int)mPos.x,(int)mPos.y,32,32);
   }
 
-void AntEntity::jobFinished()
+void AntEntity::eventJobFinished()
 {
   mJobFinished.push_back(mJob);
   mJob=0;
@@ -233,53 +236,21 @@ void AntEntity::jobFinished()
   //    mJobFinished=true;
 }
 
-void AntEntity::noJob()
+void AntEntity::eventNoJob()
 {
 }
 
+/*
 bool AntEntity::isJobFinished() const
 {
   return mJobFinished.size();
-}
+  }*/
 
-void AntEntity::mapChanged()
+void AntEntity::eventMapChanged()
 {
   if(onGround)
     mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
 }
-
-
-/*
-void AntEntity_markfunc(void *ptr)
-{
-  //  cdebug("TRACE");
-#ifdef USE_RUBY
-  Job *cppAnimal;
-  VALUE   rubyAnimal;
-  AntEntity *zoo;
-  
-  //  TRACE;  
-  //  cdebug(ptr<<endl);
-  assert(ptr);
-  zoo = static_cast<AntEntity*>(ptr);
-  assert(zoo);
-  cppAnimal = zoo->mJob;
-  if(cppAnimal)
-    {
-      assert(!cppAnimal->mDeleted);
-      if(cppAnimal->mRubyObject)
-	{
-	  assert(!cppAnimal->mDeleted);
-	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
-	  rb_gc_mark(rubyAnimal);
-	  //  cdebug("mark:");//<<cppAnimal->getName());
-	}
-    }
-  //rb_gc_mark(getMap()->mRUBY);
-  //  AntargisMap_markfunc(getMap());
-
-#endif
-}*/
 
 void AntEntity::setType(const std::string &pType)
 {
@@ -296,13 +267,14 @@ void AntEntity::setSurface(VoxelImage *i)
   mSurface=i;
 }
 
+/*
 void AntEntity::assignJob(AntEntity*)
 {
-}
+}*/
 
 void AntEntity::updateSurface()
 {
-  std::string s=getSurfaceName();
+  std::string s=getTexture();
   if(s.length())
     {
       VoxelImage *im=new VoxelImage(s);
@@ -311,14 +283,15 @@ void AntEntity::updateSurface()
     }
 }
 
-std::string AntEntity::getSurfaceName() const
-{
-  return "";
-}
 
 int AntEntity::getVirtualY() const
 {
-  return 40;
+  return mVirtualY;
+}
+
+void AntEntity::setVirtualY(int y)
+{
+  mVirtualY=y;
 }
 
 VoxelImage*AntEntity::getSurface()
@@ -332,6 +305,7 @@ VoxelImage*AntEntity::getSurface()
       return mSurface;
     }
 
+/*
 void AntEntity::setVar(std::string n,std::string v)
 {
   mVars[n]=v;
@@ -342,7 +316,7 @@ std::string AntEntity::getVar(std::string n) const
   if(i==mVars.end())
     return "";
   return i->second;
-}
+  }
 
 int AntEntity::getPlayerID() const
 {
@@ -351,7 +325,60 @@ int AntEntity::getPlayerID() const
 void AntEntity::setPlayerID(int id)
 {
   mPlayerID=id;
+}*/
+
+int AntEntity::getID() const
+{
+  return mID;
 }
+
+std::string AntEntity::xmlName() const
+{
+  return "antEntity";
+}
+
+
+std::string AntEntity::getTexture() const
+    {
+      return "";
+    }
+
+void AntEntity::setDirection(const Pos2D &p)
+    {
+      Pos2D p2=p.normalized();
+      int oldDir=mDirNum;
+
+      if(p2.x<-0.38) // sin(PI/4)
+        {
+          if(p2.y<-0.38)
+            mDirNum=1; // down left
+          else if(p2.y<0.38)
+            mDirNum=8; // left
+          else
+            mDirNum=7; // up left
+        }
+      else if(p2.x<0.38)
+        {
+          if(p2.y<-0.38)
+            mDirNum=2; // down
+          else if(p2.y<0.38)
+            mDirNum=1; // undefinied
+          else
+            mDirNum=6; // up
+        }
+      else
+      {
+          if(p2.y<-0.38)
+            mDirNum=3; // down right
+          else if(p2.y<0.38)
+            mDirNum=4; // right
+          else
+            mDirNum=5; // up right
+      }
+      if(mDirNum!=oldDir)
+	updateSurface();
+    }
+
 
 
 // RESOURCE
@@ -434,14 +461,54 @@ float AntEntity::getSpeed() const
   return mMoveSpeed;
 }
 
-void AntEntity::die()
+void AntEntity::setHealSpeed(float f)
 {
-  jobFinished();
+  mHealSpeed=f;
+}
+
+void AntEntity::decEnergy(float amount)
+{
+  mEnergy-=amount;
+  if(mEnergy<0.0)
+    {
+      mEnergy=0.0;
+      eventDie();
+    }
+}
+
+bool AntEntity::hasJob() const
+      {
+        return mJob;
+      }
+
+float AntEntity::getHealSpeed() const
+      {
+        return mHealSpeed;
+      }
+
+
+void AntEntity::decMorale(float amount)
+    {
+      mMorale-=amount;
+      if(mMorale<0.0)
+        {
+          mMorale=0.0;
+        }
+    }
+
+
+void AntEntity::eventDie()
+{
+  eventJobFinished();
 }
 
 float AntEntity::getMorale() const
 {
   return mMorale;
+}
+float AntEntity::getEnergy() const
+{
+  return mEnergy;
 }
 
 void AntEntity::setAggression(float agg)
@@ -453,6 +520,20 @@ float AntEntity::getAggression() const
   return mAggression;
 }
 
-void AntEntity::defeated()
+void AntEntity::eventGotFight(AntEntity*pOther)
 {
+}
+
+void AntEntity::eventDefeated()
+{
+}
+
+
+void AntEntity::setName(const std::string &pName)
+{
+  mName=pName;
+}
+std::string AntEntity::getName() const
+{
+  return mName;
 }

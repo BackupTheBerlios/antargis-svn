@@ -51,220 +51,140 @@ class Resource
 class AntEntity
   {
     int mID;
-    int mPlayerID;
-  protected:
-    Pos3D mPos;
-    Job *mJob;
-    std::list<Job*> mJobFinished;
+    std::string mName;
+
+    Pos3D mPos;       // 3d-position
+    bool onGround;    // is this on the ground of the map?
+
+    Job *mJob;        // current job
+
+    std::list<Job*> mJobFinished;  // finished jobs, in cue, so that they get deleted next time possible
+
+    // energy and healing
     float mEnergy;
+    float mHealSpeed;
+
+    // morale and moralehealing
     float mMorale;
     float mMoraleHeal;
-    float mHealSpeed;
+
+    // moving
     float mMoveSpeed;
-    bool onGround;
-    float mCondition;
-    float mConditionFall; // when used, how much per time -- hero is stronger here
-    float mConditionHeal; // refilling
+
     float mAggression;
 
     std::string mType;
 
     VoxelImage*mSurface;
 
-
-    AntEntity *pBoss;
-    std::vector<AntEntity*> mClients;
+    int mVirtualY;
 
   public: //virtually protected
     int mDirNum; // set public for swig
     Resource resource;
-    std::map<std::string,std::string> mVars;
+
   public:
     AntEntity();
     AntEntity(const Pos3D &p);
     AntEntity(const Pos2D &p);
     virtual ~AntEntity();
+
+
+    // Positions
     Pos3D getPos3D() const;
     Pos2D getPos2D() const;
+    virtual void setPos2D(const Pos2D &p); // overwrite this only on static Entities, otherwise this gets called really (!) often
+    void setPos3D(const Pos3D &p);
 
-    int getPlayerID() const;
-    void setPlayerID(int id);
 
-    void setVar(std::string n,std::string v);
-    std::string getVar(std::string n) const;
+    // IDs, names and types
+    int getID() const;
+
+    std::string getName() const;
+    void setName(const std::string &pName);
 
     void setType(const std::string &pType);
     std::string getType() const;
 
-    virtual std::string xmlName() const
-      {
-        return "antEntity";
-      }
+
+    // saving and loading
+    virtual std::string xmlName() const;
 
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(const xmlpp::Node &node);
 
-    int getID() const
-      {
-        return mID;
-      }
+    // jobs
 
-    void setJob(Job *pJob);
+  private:
+    void setJob(Job *pJob); // only for internal use and reseting
 
-    void setAggression(float agg);
-    float getAggression() const;
-    
-    virtual std::string getTexture() const
-    {
-      return "";
-    }
-    
-    virtual void setDirection(const Pos2D &p)
-    {
-      Pos2D p2=p.normalized();
-      if(p2.x<-0.38) // sin(PI/4)
-        {
-          if(p2.y<-0.38)
-            mDirNum=1; // down left
-          else if(p2.y<0.38)
-            mDirNum=8; // left
-          else
-            mDirNum=7; // up left
-        }
-      else if(p2.x<0.38)
-        {
-          if(p2.y<-0.38)
-            mDirNum=2; // down
-          else if(p2.y<0.38)
-            mDirNum=1; // undefinied
-          else
-            mDirNum=6; // up
-        }
-      else
-      {
-          if(p2.y<-0.38)
-            mDirNum=3; // down right
-          else if(p2.y<0.38)
-            mDirNum=4; // right
-          else
-            mDirNum=5; // up right
-      }
-      updateSurface();
-    }
-
-    virtual void setPos2D(const Pos2D &p);
-    void setPos3D(const Pos3D &p);
-
-    void mapChanged();
-    void setSurface(VoxelImage *i);
-    virtual VoxelImage*getSurface();
-    virtual void updateSurface();
-
-    virtual std::string getSurfaceName() const;
-    virtual int getVirtualY() const;
-
-    /** do anything in given time frame */
-    virtual void move(float pTime);
-
-    virtual Rect2D getRect() const;
-
-    virtual void noJob();
-    virtual void jobFinished();
-    virtual void gotNewJob();
-    bool isJobFinished() const;
-
-    bool hasJob() const
-      {
-        return mJob;
-      }
-
-    virtual float getHealSpeed() const
-      {
-        return mHealSpeed;
-      }
-
-    void setSpeed(float f);
-    float getSpeed() const;
-    void setHealSpeed(float f)
-    {
-      mHealSpeed=f;
-    }
-
-    void decEnergy(float amount)
-    {
-      mEnergy-=amount;
-      if(mEnergy<0.0)
-        {
-          mEnergy=0.0;
-	  die();
-        }
-    }
-    void decMorale(float amount)
-    {
-      mMorale-=amount;
-      if(mMorale<0.0)
-        {
-          mMorale=0.0;
-        }
-    }
-    virtual void die();
-
-    float getEnergy() const
-      {
-        return mEnergy;
-      }
-
-    float getCondition() const
-      {
-        return mCondition;
-      }
-
-    // input time in which condition is used, returns remaining time, if condition is used up
-    float decCondition(float pTime)
-    {
-      // for how much time does it reach
-      float allTime=mCondition/mConditionFall;
-      if(allTime>pTime)
-        {
-          mCondition-=pTime*mConditionFall;
-          return 0;
-        }
-      else
-        {
-          pTime-=allTime;
-          mCondition=0;
-          return pTime;
-        }
-    }
-
+  public:
     virtual void newRestJob(int pTime);
     virtual void newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
     virtual void newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
     virtual void newFightJob(int p,AntEntity *target);
 
+    bool hasJob() const;
 
-    virtual void assignJob(AntEntity*);
+    virtual void eventNoJob();
+    virtual void eventJobFinished();
+    virtual void eventGotNewJob();
+    virtual void eventGotFight(AntEntity*pOther);
 
-    virtual void gotFight(AntEntity *)
-    {}
+    // set/get speeds
+    void setSpeed(float f);
+    float getSpeed() const;
 
-    virtual AntHero *getHero()
-    {
-      return 0;
-    }
+    float getHealSpeed() const;
+    void setHealSpeed(float f);
 
-    virtual void defeated();
+    // aggression - handling
 
+    void setAggression(float agg);
+    float getAggression() const;
+    
+    virtual void eventDie(); // energy too low
+    virtual void eventDefeated(); // morale too low
+
+    float getEnergy() const;
     float getMorale() const;
 
+    // appearance
+
+    // FIXME: this shouldn't be virtual, because it gets called too often!
+    virtual std::string getTexture() const;
+    void setVirtualY(int y);
+
+    // anything below shouldn't be used by ruby-functions
+//#ifndef SWIG
+    void setSurface(VoxelImage *i);
+    VoxelImage*getSurface();
+    void updateSurface();
+
+    // used only by *Jobs
+    void setDirection(const Pos2D &p);
+
+    void decEnergy(float amount);
+    void decMorale(float amount);
+
+
+    // used only by Map - so that Position gets updated, when onGround
+    void eventMapChanged();
+    virtual void move(float pTime); // move entity FIXME: del move
+
+    // used only View
+    virtual Rect2D getRect() const;
+    int getVirtualY() const;
+//#endif
+
+  public: // must be public, so that swig can set these
     bool mRubyObject;
     VALUE mRUBY;
-    bool mDeleted;
-
-    bool mMoving;
 
     friend void AntEntity_markfunc(void *ptr);
 
+  private:
+    void init();
   };
 
 class AntEntityPtr

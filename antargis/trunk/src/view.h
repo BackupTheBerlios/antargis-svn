@@ -107,7 +107,7 @@ class CompleteIsoView: public IsoView
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
     bool eventMouseClick(const AGEvent *m);
 
-    bool isMyHero(AntEntity *h);
+    //    bool isMyHero(AntEntity *h);
     /*
     Pos2D mapClick() const;
     std::vector<AntEntity*> entityClick() const;

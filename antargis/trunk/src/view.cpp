@@ -23,7 +23,7 @@
 #include <ag_color.h>
 #include <ag_button.h>
 #include "tree.h"
-#include "entities.h"
+//#include "entities.h"
 //#include "ant_tree.h"
 //#include "ant_house.h"
 
@@ -576,14 +576,14 @@ void CompleteIsoView::clickMap(const Pos2D &p)
 {
 }
 
-
+/*
 bool CompleteIsoView::isMyHero(AntEntity *h)
 {
   if(h)
     return(h->getType()=="hero" && h->getPlayerID()==0);
   return false;
 
-}
+  }*/
 
 /***********************************************************
  * EditIsoView

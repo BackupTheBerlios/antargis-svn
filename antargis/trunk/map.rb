@@ -29,23 +29,9 @@ class AntRubyMap<AntargisMap
 		@ents={}
 		@players=[]
 		GC.start
+		@lastGC=0
 	end
 	def loadEntity(node)
-		puts "LOADENT"
-		#GC.start
-		puts "LOADENT"
-		
-		puts "name:"
-		puts node.getName
-		puts "---"
-		if node.getName=="antTree" then
-			e=AntNewTree.new
-			puts "Raus"
-			return e
-		end
-		
-		e=super(node)
-		if e then return e end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
 		end
@@ -58,7 +44,7 @@ class AntRubyMap<AntargisMap
 		if node.getName=="antNewStone" then
 			e=AntNewStone.new
 		end
-		if node.getName=="antNewTree" then
+		if node.getName=="antNewTree" or node.getName=="antTree" then
 			e=AntNewTree.new
 		end
 		if node.getName=="antNewSheep" then
@@ -70,45 +56,13 @@ class AntRubyMap<AntargisMap
 			@players.push(player)
 		end
 		if node.getName=="computerPlayer" then
-			player=AntComputerPlayer.new
+			player=AntComputerPlayer.new("")
 			player.loadXML(node)
 			@players.push(player)
-		end
-		puts "LOADENTITY:"
-		puts e
-		#GC.start
-		if e then
-			rubyID=e.getID.to_s
-			e.setVar("RubyID",rubyID)
-			@ents[rubyID]=e
-			puts e.getType
-			puts "getID:"+e.getID.to_s
 		end
 		return e
 	end
 	
-	def insertEntity(e)
-		GC.start
-		puts "INSERTENTITY"
-		puts e
-		puts "type:"
-		puts e.getType
-		puts "getID:"+e.getID.to_s
-		puts "rubyID..."
-		rubyID=e.getVar("RubyID")
-		puts "RUBYID"
-		if rubyID=="" then
-			rubyID=getNewID.to_s
-			e.setVar("RubyID",rubyID)
-		end
-		if not @ents.key?(rubyID) then
-			puts "IF"
-			@ents[rubyID]=e
-		else
-			puts "ALREADY INSERTED:"+rubyID.to_s
-		end
-		super(e)
-	end
 	def removeEntity(e)
 		@ents.delete(e.getID)
 		super(e)
@@ -117,8 +71,13 @@ class AntRubyMap<AntargisMap
 		@ents.clear
 		super()
 	end
-	def getById(ent)
+	def getByIdOld(ent)
 		@ents[ent.getVar("RubyID")]
+	end
+	def getById(ent)
+		if ent
+			return @ents[ent.getID]
+		end
 	end
 	def getRuby(ent)
 		getById(ent)
@@ -127,6 +86,9 @@ class AntRubyMap<AntargisMap
 		getRuby(super(id))
 	end
 	def getByName(name)
+		if name.class!=String
+			puts name
+		end
 		getRuby(super(name))
 	end
 	def endChange
@@ -137,6 +99,19 @@ class AntRubyMap<AntargisMap
 		@players.each{|player|
 			player.move(time)
 		}
+		
+		# disable GC, when called too often
+		if getGCcalls>3 then
+			GC.disable
+			@lastGC=0
+		end
+		resetGCcalls
+		
+		# enable GC after 2 secs, when it's called too often
+		@lastGC+=time
+		if @lastGC>2000 then
+			GC.enable
+		end
 	end
 	
 	def saveXML(n)
@@ -149,6 +124,12 @@ class AntRubyMap<AntargisMap
 	
 	def getNext(ent,type)
 		getRuby(super(ent,type))
+	end
+	
+	def registerEntity(e)
+		if not @ents.member?(e.getID)
+			@ents[e.getID]=e
+		end
 	end
 end
 

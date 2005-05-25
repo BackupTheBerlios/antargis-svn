@@ -21,7 +21,7 @@
 #include "jobs.h"
 #include "map.h"
 
-Job::Job(int p):priority(p),mDeleted(false)
+Job::Job(int p):priority(p)
 
 {}
 void Job::move(AntEntity *,float ptime)
@@ -34,13 +34,11 @@ bool Job::operator<=(const Job &j) const
 
 Job::~Job()
 {
-  //  CTRACE;
-  mDeleted=true;
 }
 
 void Job::jobFinished(AntEntity *e)
 {
-  e->jobFinished();
+  e->eventJobFinished();
 }
 
 bool Job::needsMorale() const
@@ -64,11 +62,12 @@ MoveJob::~MoveJob()
 // Jobs
 void MoveJob::move(AntEntity *e,float ptime)
 {
-  assert(!mDeleted);
   float aspeed;
   float speed=e->getSpeed();
+ 
+#ifdef ENABLE_RUNNING  
   float runSpeed=speed*1.3;
-  
+ 
   if(mRun && e->getCondition()>0.0)
   {
     // decrease condition and if condition is zero - switch of running
@@ -77,24 +76,22 @@ void MoveJob::move(AntEntity *e,float ptime)
     
     ptime=newtime;
   }
+#endif
   aspeed=0.5*speed+0.5*e->getEnergy()*speed;
   assert(this);
   moveBy(e,ptime,aspeed); // use rest of time
   assert(this);
-  assert(!mDeleted);
   
 }
 
 Pos2D MoveJob::getDirection(const AntEntity *e) const
 {
-  assert(!mDeleted);
   return (mTarget-e->getPos2D()).normalized();
 }
 
 
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
-  assert(!mDeleted);
   Pos2D diff=e->getPos2D()-mTarget;
   float norm=diff.norm();
   //  cdebug("norm:"<<norm);
@@ -115,7 +112,6 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
       //      CTRACE;
       jobFinished(e);
     }
-  assert(!mDeleted);
 }
 
 /************************************************************************
@@ -133,12 +129,21 @@ bool FightJob::needsMorale() const
 
 
 // FightJobs
+
+FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
+{
+  fightDistance=20; // in pixels
+  strength=0.2;   // decrease per second
+  speed=70; // see MoveJob
+}
+
 void FightJob::move(AntEntity *e,float ptime)
 {
-  assert(!mDeleted);
   if(mTarget->getEnergy()==0.0 || mTarget->getMorale()<0.1)
     {
-      mTarget->defeated();
+      //      cdebug("target-e:"<<mTarget->getEnergy());
+      //      cdebug("target-m:"<<mTarget->getMorale());
+      mTarget->eventDefeated();
       jobFinished(e);
     }
   // if target is too far away run there, otherwise fight
@@ -154,9 +159,8 @@ void FightJob::move(AntEntity *e,float ptime)
       // fight
       mTarget->decEnergy(ptime*strength*e->getAggression());
       mTarget->decMorale(ptime*strength*0.7); // FIXME: estimate this value
-      mTarget->gotFight(e);
+      mTarget->eventGotFight(e);
     }
-  assert(!mDeleted);
 }
 
 
@@ -172,17 +176,13 @@ FetchJob::~FetchJob()
 }
 void FetchJob::move(AntEntity *e,float ptime)
 {
-  assert(!mDeleted);
   MoveJob::move(e,ptime);
-  assert(!mDeleted);
 }
 
 void FetchJob::jobFinished(AntEntity *e)
 {
-  assert(!mDeleted);
   e->resource.add(mWhat,1);
   MoveJob::jobFinished(e);
-  assert(!mDeleted);
 }
 
 
@@ -198,12 +198,9 @@ RestJob::~RestJob()
 }
 void RestJob::move(AntEntity *e,float ptime)
 {
-  assert(!mDeleted);
   mTime-=ptime;
   if(mTime<0)
     jobFinished(e);
-  assert(!mDeleted);
-  
 }
 
 

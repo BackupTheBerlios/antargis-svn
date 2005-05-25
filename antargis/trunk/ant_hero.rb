@@ -23,21 +23,14 @@
 
 require 'ents.rb'
 require 'ant_hljobs.rb'
+require 'ant_boss.rb'
 
-
-class AntNewHero<AntMyEntity
-	include FightHLEntity
-
+class AntNewHero<AntNewBoss
 	def initialize
-		super(Pos2D.new(0,0))
-		@men=[]
-		#@resources={}
+		super
 		setType("hero")
-		@job=nil
-		@defeated=[]
-		@createMen=0
 	end
-	def getSurfaceName
+	def getTexture
 		return "hero1dl"
 	end
 	def xmlName
@@ -48,39 +41,44 @@ class AntNewHero<AntMyEntity
 	end
 	def loadXML(node)
 		super(node)
-		if node.get("men")!="" then
-			@createMen=node.get("men").to_i
-		end
 	end
 	
-	def menCount
-		return @men.length
-	end
-	
-	def noJob
-		if @createMen>0
-			for i in 0..(@createMen-1) do
-				man=AntNewMan.new
-				man.setPos2D(getPos2D)
-				man.setVar("bossName",getVar("name"))
-				getMap.insertEntity(man)
+	def checkHLJobEnd(man)
+		if @job
+			puts "CHECKHLJOBENDED:"
+			puts @job
+			if @job.check(man) then 
+				if @player
+					@player.eventJobFinished(self,@job)
+				end
+				@job=nil 
 			end
-			getMap.endChange
-			@createMen=0
-		end
-		if @player
-			@player.assignJob(self)
 		end
 	end
 	
-	def getName
-		return getVar("name")
+	def noHLJob
+		puts self
+		puts getName
+		puts "noHLJob1"
+		if @player
+			puts "noHLJOB"
+			@player.assignJob(self)
+		else
+			puts "no Player Foudn!"
+			puts "wait 5 seconds"
+			# rest
+			newHLRestJob(5)
+		end
 	end
+	
+	#def getName
+	#	return getVar("name")
+	#end
 	
 	def assignJob(e)
 		if @fighting then
 			checkFight
-		elsif @job == nil then
+		elsif @job == nil or @job.class==AntHeroRestJob then
 			# rest job
 			e=getMap.getRuby(e)
 			formationPos=getSitFormation(e)
@@ -90,7 +88,7 @@ class AntNewHero<AntMyEntity
 				e.newMoveJob(0,formationPos,0)
 			end
 		else
-			if @job.check then @job=nil end
+			checkHLJobEnd(e)
 		end
 	end	
 	
@@ -115,23 +113,9 @@ class AntNewHero<AntMyEntity
 			m.setNoBoss
 			@men.delete(m)
 		}
-		
 	end
 	
-	def getMen
-		@men
-	end
 	
-	def signUp(man)
-		@men.push(man)
-	end
-	
-	def removeMan(man)
-		@men.delete(man)
-		if @defeated.include?(man)
-			@defeated.delete(man)
-		end
-	end
 	# formation:
 	# 1) wait for 3/4 of people are in formation but max. 5 seconds or so
 	# 2) start all at once
@@ -141,6 +125,9 @@ class AntNewHero<AntMyEntity
 		
 		if id then
 			angle=id.to_f/@men.length*Math::PI*2
+			#puts "SITTING:"
+			#puts id
+			#puts @men.length
 			radius=40
 			return Pos2D.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
 		else
@@ -151,20 +138,24 @@ class AntNewHero<AntMyEntity
 		end
 	end
 	
- 	def undefeatedMen
-		return @men-@defeated
-	end
-
-	
 	def getWalkFormation(man,dir)
 		#setTrap
 		id=@men.index(man)
 		if id
+		
+			lineWidth=30
+			if @men.length>30
+				lineWidth=15
+			end
+		
+			if id>=2 then
+				id+=1 # exclude hero's position
+			end
 			line=id/5
 			col=id%5
 			col=col-2
 			normal=dir.normal
-			l=dir*line*30
+			l=dir*line*lineWidth
 			c=normal*col*15
 			
 			return l+c
@@ -174,8 +165,20 @@ class AntNewHero<AntMyEntity
 		end
 	end
 	
-	def setPlayer(player)
-		@player=player
+	def eventGotHLFight(hero)
+		return
+		job=true
+		if @job
+			job=false
+			if @job.class ==AntHeroFightJob
+				if @job.target==hero then
+					job=true
+				end
+			end
+		end
+		if job
+			newHLFightJob(hero)
+		end
 	end
 end
 

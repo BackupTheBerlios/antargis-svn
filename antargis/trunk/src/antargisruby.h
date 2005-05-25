@@ -94,6 +94,16 @@ public:
 };
 
 
+class SwigDirector_AGSignal : public AGSignal, public Swig::Director {
+
+public:
+    SwigDirector_AGSignal(VALUE self);
+    SwigDirector_AGSignal(VALUE self, AGMessageObject *pCaller);
+    SwigDirector_AGSignal(VALUE self, AGMessageObject *pCaller, std::string const &pName);
+    virtual ~SwigDirector_AGSignal();
+};
+
+
 class SwigDirector_AGMessageObject : public AGMessageObject, public Swig::Director {
 
 public:
@@ -802,6 +812,45 @@ public:
 };
 
 
+class SwigDirector_AGSound : public AGSound, public Swig::Director {
+
+public:
+    SwigDirector_AGSound(VALUE self);
+    virtual bool eventLostFocus();
+    virtual bool eventGotFocus();
+    virtual bool eventShow();
+    virtual int minHeight() const;
+    virtual int minWidth() const;
+    virtual bool canFocus() const;
+    virtual ~SwigDirector_AGSound();
+    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
+    virtual bool eventMouseButtonUp(AGEvent const *m);
+    virtual bool eventMouseButtonDown(AGEvent const *m);
+    virtual bool eventMouseClick(AGEvent const *m);
+    virtual bool eventMouseMotion(AGEvent const *m);
+    virtual bool acceptEvent(SDL_Event const *pEvent);
+    virtual bool eventActive(AGEvent const *m);
+    virtual bool eventKeyDown(AGEvent const *m);
+    virtual bool eventKeyUp(AGEvent const *m);
+    virtual bool eventQuit(AGEvent const *m);
+    virtual bool eventQuitModal(AGEvent const *m);
+    virtual bool eventSysWM(AGEvent const *m);
+    virtual bool eventResize(AGEvent const *m);
+    virtual bool eventMouseEnter();
+    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual void drawAll(AGPainter &p);
+    virtual void draw(AGPainter &p);
+    virtual void setLeft(int x);
+    virtual void setTop(int y);
+    virtual void setHeight(int w);
+    virtual void setWidth(int w);
+    virtual bool eventMouseLeave();
+    virtual bool eventHide();
+    virtual void addChildBack(AGWidget *w);
+    virtual void addChild(AGWidget *w);
+};
+
+
 class SwigDirector_AGListBox : public AGListBox, public Swig::Director {
 
 public:
@@ -1131,28 +1180,20 @@ public:
     SwigDirector_AntEntity(VALUE self, Pos2D const &p);
     virtual void newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat);
     virtual void setPos2D(Pos2D const &p);
-    virtual void setDirection(Pos2D const &p);
-    virtual VoxelImage *getSurface();
     virtual void move(float pTime);
-    virtual AntHero *getHero();
-    virtual void noJob();
-    virtual void gotNewJob();
+    virtual void eventGotNewJob();
+    virtual void eventNoJob();
     virtual ~SwigDirector_AntEntity();
-    virtual int getVirtualY() const;
-    virtual std::string getSurfaceName() const;
-    virtual std::string getTexture() const;
-    virtual std::string xmlName() const;
-    virtual float getHealSpeed() const;
     virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
-    virtual void jobFinished();
-    virtual void defeated();
-    virtual void updateSurface();
-    virtual void die();
+    virtual std::string xmlName() const;
+    virtual std::string getTexture() const;
+    virtual void eventJobFinished();
+    virtual void eventDefeated();
+    virtual void eventDie();
     virtual void loadXML(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
+    virtual void eventGotFight(AntEntity *pOther);
     virtual void newFightJob(int p, AntEntity *target);
-    virtual void assignJob(AntEntity *arg0);
-    virtual void gotFight(AntEntity *arg0);
     virtual void newRestJob(int pTime);
 };
 

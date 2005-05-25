@@ -32,15 +32,10 @@ class AntNewSheep<AntMyEntity
 		setType("sheep")
 		setSpeed 40
 		@lastBirth=0
-	end
-	def getSurfaceName
-		return "sheep1"
+		setVirtualY(40)
 	end
 	def getTexture
 		return "sheep"+mDirNum.to_s
-	end
-	def getVirtualY
-		40
 	end
 	def saveXML(node)
 		super(node)
@@ -53,10 +48,10 @@ class AntNewSheep<AntMyEntity
 	def xmlName
 		return "antNewSheep"
 	end
-	def noJob
-		jobFinished
+	def eventNoJob
+		eventJobFinished
 	end
-	def jobFinished
+	def eventJobFinished
 		super
 		# BIRTHRATE is here:
 		if @lastBirth>40 then

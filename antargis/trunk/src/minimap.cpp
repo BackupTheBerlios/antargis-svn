@@ -21,7 +21,7 @@
 #include <ag_color.h>
 #include "minimap.h"
 #include "map.h"
-#include "entities.h"
+//#include "entities.h"
 //#include "ant_man.h"
 
 #include <ag_layoutfactory.h>

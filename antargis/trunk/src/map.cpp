@@ -22,7 +22,7 @@
 #include "voxel.h"
 #include <ag_fs.h>
 #include <cstdlib>
-#include "entities.h"
+//#include "entities.h"
 //#include "ant_tree.h"
 //#include "ant_man.h"
 //#include "ant_house.h"
@@ -48,6 +48,7 @@ AntargisMap::AntargisMap(int w,int h):
   myAntargisMap=this;
   mPaused=false;
   maxID=0;
+  mGCcalls=0;
 }
 
 AntargisMap::~AntargisMap()
@@ -289,7 +290,7 @@ void AntargisMap::addFlat(int x,int y,int h,int r)
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
-    (*i)->mapChanged();
+    (*i)->eventMapChanged();
 
 }
 
@@ -307,7 +308,7 @@ void AntargisMap::addPyramid(int x,int y,int h,int r)
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
-    (*i)->mapChanged();
+    (*i)->eventMapChanged();
 
 }
 
@@ -430,7 +431,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator k=mEntList.begin();
   for(;k!=mEntList.end();k++)
-    (*k)->mapChanged();
+    (*k)->eventMapChanged();
 }
 
 void AntargisMap::clear()
@@ -492,7 +493,7 @@ void AntargisMap::loadMap(const std::string &pFilename)
 * AntDeco
 ************************************************************************/
 
-void AntDeco::saveXML(xmlpp::Node &node) const
+/*void AntDeco::saveXML(xmlpp::Node &node) const
 {
   AntEntity::saveXML(node);
   node.set("typeID",toString(typeID));
@@ -501,7 +502,7 @@ void AntDeco::loadXML(const xmlpp::Node &node)
 {
   AntEntity::loadXML(node);
   typeID=toInt(node.get("typeID"));
-}
+  }*/
 
 
 
@@ -572,6 +573,8 @@ void AntargisMap_markfunc(void *ptr)
   //  TRACE;  
   //  cdebug(ptr<<endl);
   zoo = static_cast<AntargisMap*>(ptr);
+
+  zoo->mGCcalls++;
   
   std::list<AntEntity*>::iterator i=zoo->mEntList.begin();
 
@@ -579,7 +582,7 @@ void AntargisMap_markfunc(void *ptr)
     {
       //      cdebug("children:"<<*i);
       cppAnimal = *i;//zoo->getAnimal(i);
-      assert(!cppAnimal->mDeleted);
+      //      assert(!cppAnimal->mDeleted);
       if(cppAnimal->mRubyObject)
 	{
 	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
@@ -646,7 +649,7 @@ AntEntity *AntargisMap::getByName(const std::string &pName)
 
   for(;i!=mEntList.end();i++)
     {
-      if((*i)->getVar("name")==pName)
+      if((*i)->getName()==pName)
 	return *i;
     }
   return 0;
@@ -655,4 +658,13 @@ AntEntity *AntargisMap::getByName(const std::string &pName)
 bool AntargisMap::updated() const
 {
   return mUpdated;
+}
+
+size_t AntargisMap::getGCcalls() const
+{
+  return mGCcalls;
+}
+void AntargisMap::resetGCcalls()
+{
+  mGCcalls=0;
 }
