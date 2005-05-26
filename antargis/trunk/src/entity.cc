@@ -116,11 +116,15 @@ Pos2D AntEntity::getPos2D() const
 void AntEntity::setPos3D(const Pos3D &p)
 {
   mPos=p;
+  if(mSurface)
+    mSurface->setPosition(mPos);
 }
 void AntEntity::setPos2D(const Pos2D &p)
 {
   mPos=Pos3D(p.x,getMap()->getHeight(p),p.y);
   onGround=true;
+  if(mSurface)
+    mSurface->setPosition(mPos);
 }
 
 void AntEntity::setJob(Job *pJob)
@@ -277,9 +281,17 @@ void AntEntity::updateSurface()
   std::string s=getTexture();
   if(s.length())
     {
-      VoxelImage *im=new VoxelImage(s);
-      im->setVirtualY(getVirtualY());
-      setSurface(im);
+      if(mSurface)
+	{
+	  mSurface->setTexture(s);
+	}
+      else
+	{
+	  VoxelImage *im=new VoxelImage(s);
+	  im->setVirtualY(getVirtualY());
+	  im->setPosition(mPos);
+	  setSurface(im);
+	}
     }
 }
 

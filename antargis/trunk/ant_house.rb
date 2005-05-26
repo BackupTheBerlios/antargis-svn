@@ -93,7 +93,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 		@type=t
 	end
 	def getTexture
-		#puts "getTexture"
+		puts "HOUSE::getTexture"
 		return "tower"+@type.to_s
 	end
 	

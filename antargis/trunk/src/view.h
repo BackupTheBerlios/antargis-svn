@@ -48,10 +48,6 @@ class IsoView:public AntargisView//, public MapListener
     Rain mRain;
     
   protected:
-    std::map<AVItem*,AntEntity*> mEntities;
-    std::map<AntEntity*,AVItem*> mEntitiesInv;
-    std::set
-      <AVItem*> mSelected;
     bool shallUpdate;
     Pos3D maxPos;
     
@@ -87,7 +83,6 @@ class IsoView:public AntargisView//, public MapListener
     //  protected:
     virtual void draw(AGPainter &p);//const AGRect &r);
   protected:
-    void updatePositions();
 
     AGColor getSelectColor();
     Pos2D getTilePos(const IVTile &t);

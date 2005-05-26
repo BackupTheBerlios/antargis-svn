@@ -50,11 +50,8 @@ class AntHeroMoveJob<AntHLJob
 			should=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
 			if (is-should).norm>10 then
 				man.newMoveJob(0,should,0)
-				puts "resending"
-				puts @dist
 			else
 				man.newRestJob(2) # wait for 2 seconds
-				puts "WAIT!"
 				return true
 			end
 		end
@@ -76,9 +73,6 @@ class AntHeroMoveJob<AntHLJob
 		men.each{|man|
 			sendFormationMan(man)
 		}
-		puts "STARTFORMATION:"
-		puts @sentFormat.length+@readyFormat.length
-		puts men.length
 		
 		#check(nil) # if men.length==0, check wouldn't be called otherwise????
 	end
@@ -87,16 +81,11 @@ class AntHeroMoveJob<AntHLJob
 		if man
 			if not @readyFormat.member?(man)
 				if checkFormationMan(man)
-					puts "DELETE FROM SENT"
 					@sentFormat.delete(man)
 					@readyFormat.push(man)
 				end
 			end
 		end
-		puts "sent:"
-		puts @sentFormat.length
-		puts "ready:"
-		puts @readyFormat.length
 		if @sentFormat.length+@readyFormat.length!=@hero.menCount
 			puts "RESTART FORMATION!!!!!!!!!!!!!!!"
 			startFormation # redo from start
@@ -301,6 +290,9 @@ class AntHeroRestJob
 		@hero.newRestJob(time)
 	end
 	def check(man)
+		if man
+			man.newRestJob(20)
+		end
 		return (not @hero.hasJob)
 	end
 end

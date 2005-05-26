@@ -70,6 +70,9 @@ class AntHumanPlayer<AntPlayer
 	def xmlName
 		return "humanPlayer"
 	end
+	def assignJob(hero)
+		hero.newHLRestJob(20)
+	end
 end
 
 class AntComputerPlayer<AntPlayer

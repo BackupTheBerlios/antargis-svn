@@ -1,3 +1,5 @@
+* while sitting around hero, men use much cpu time ;-)
+
 * delete std::map's from view.h and use mSurface from AntEntity
 	=> change usage of getTexture, so that it isn't called each frame
 

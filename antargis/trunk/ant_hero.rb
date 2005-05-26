@@ -45,8 +45,8 @@ class AntNewHero<AntNewBoss
 	
 	def checkHLJobEnd(man)
 		if @job
-			puts "CHECKHLJOBENDED:"
-			puts @job
+#			puts "CHECKHLJOBENDED:"
+#			puts @job
 			if @job.check(man) then 
 				if @player
 					@player.eventJobFinished(self,@job)

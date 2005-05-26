@@ -23,9 +23,6 @@
 #include <ag_color.h>
 #include <ag_button.h>
 #include "tree.h"
-//#include "entities.h"
-//#include "ant_tree.h"
-//#include "ant_house.h"
 
 #include <ag_layout.h>
 #include <ag_tools.h>
@@ -33,6 +30,7 @@
 
 #include "jobs.h"
 
+#define FAST_VI
 
 /***********************************************************
  * globals
@@ -72,9 +70,6 @@ IsoView::IsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
 void IsoView::update()
 {
   clear();
-  mEntities.clear();
-  mEntitiesInv.clear();
-  mSelected.clear();
   mTiles.clear();
   init();
 }
@@ -159,8 +154,8 @@ void IsoView::init()
   for(;i!=ents.end();i++)
     {
       VoxelImage *image=(*i)->getSurface();
-      mEntities[image]=*i;
-      mEntitiesInv[*i]=image;
+      //      mEntities[image]=*i;
+      //      mEntitiesInv[*i]=image;
       insert(image);
     }
   inited=true;
@@ -272,7 +267,24 @@ VoxelImage *IsoView::getSurface(const SplineMapD &h,const SplineMapD &g)
 // p is local window-coordinate
 std::vector<AntEntity *> IsoView::getEntity(const AGPoint &pp)
 {
+#ifdef FAST_VI
+  std::vector<AntEntity *> found;
+  std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
 
+  std::list<AntEntity*>::iterator i=ents.begin();
+  for(;i!=ents.end();i++)
+    {
+      VoxelImage *vi=(*i)->getSurface();
+      AGRect ar=getRect(vi);
+      if(ar.contains(pp))
+	{
+	  AGPoint p=pp-ar.getPosition();
+	  if(vi->getAlpha(p)>0)
+	    found.push_back(*i);
+	  
+	}
+    }
+#else
   std::vector<AntEntity *> found;
   std::vector<AVItem*>::reverse_iterator i=mItems.rbegin();
   for(;i!=mItems.rend();i++)
@@ -291,7 +303,7 @@ std::vector<AntEntity *> IsoView::getEntity(const AGPoint &pp)
             }
         }
     }
-
+#endif
   return found;
 }
 
@@ -337,8 +349,6 @@ void IsoView::draw(AGPainter &p)//const AGRect &r)
       shallUpdate=false;
     }
 
-  updatePositions();
-
   doTick();
   mTime+=getTimeDiff();
 
@@ -346,7 +356,7 @@ void IsoView::draw(AGPainter &p)//const AGRect &r)
 
   // overlay selection-rectangle and energy
 
-  std::set
+  /*  std::set
     <AVItem*>::iterator i=mSelected.begin();
   for(;i!=mSelected.end() ;i++)
     {
@@ -354,7 +364,7 @@ void IsoView::draw(AGPainter &p)//const AGRect &r)
       //      ar=r.project(ar);
       p.drawRect(ar,getSelectColor());
     }
-
+  
   std::map<AVItem*,AntEntity*>::iterator k=mEntities.end();// FIXME: don't draw anything ATM begin();
   for(;k!=mEntities.end();k++)
     {
@@ -367,41 +377,9 @@ void IsoView::draw(AGPainter &p)//const AGRect &r)
       ar.w=(short)(ar.w*k->second->getEnergy());
       p.drawRect(ar,AGColor(0,0xFF,0)); // overpaint with green
     }
-
+  */
   // overlay rain
   mRain.draw(p);
-}
-
-void IsoView::updatePositions()
-{
-  std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
-
-  std::string tName;
-
-  //  bool inconsistency=false;
-
-  std::list<AntEntity*>::iterator i=ents.begin();
-  for(;i!=ents.end();i++)
-    {
-      AVItem *image=mEntitiesInv[*i];
-      /*  if(!image)
-	{
-	  inconsistency=true;
-	  break;
-	  }*/
-      assert(image);
-      image->setPosition((*i)->getPos3D());
-
-      VoxelImage *vi=dynamic_cast<VoxelImage*>(image);
-      if(vi)
-        {
-          tName=(*i)->getTexture();
-          if(tName.length())
-            vi->setTexture(tName);
-        }
-    }
-  //  if(inconsistency)
-    //    mapUpdate();
 }
 
 
@@ -490,7 +468,9 @@ bool CompleteIsoView::eventMouseClick(const AGEvent *m)
   if(e)
     {
       if(e->getButton()==SDL_BUTTON_RIGHT)
-        mSelected.clear();
+	{
+	  //	  mSelected.clear();
+	}
       else if(getScreenRect().contains(e->getMousePosition()))
         {
           //clicked
