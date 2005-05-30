@@ -1,77 +1,67 @@
-* while sitting around hero, men use much cpu time ;-)
+[Gui/View]
+=================================================
+[M] pointing device for selecting man/sheep and so
+    data should be displayed in a view on the right
+[L] prevent flickering with constant sorting
 
-* delete std::map's from view.h and use mSurface from AntEntity
-	=> change usage of getTexture, so that it isn't called each frame
+[Menu]
+=================================================
+[M] new layout and appearance
+[L] some images for the campaigns
 
+[Graphics]
+=================================================
+[L] support different grass height and different earth colors (editor)
+[L] check lighting of voxel-generation (is adding white light - should be multiplication)
 
+[Game]
+=================================================
+[L] too much cpu-time used, when men are sitting
+[L] each man should have a name and an age
+[VL] reasonable quadtree-usage
+[L] computer-player only attacks when stock is used up
+[L] story-telling:
+	- uppopping windows (with image and text) / pause game
+	- history function
+	- browsing facility (scene=>number(person)=>text)
 
+[Editor]
+=================================================
+[L] separate editor from game
+[H] adding entities
+[H] nice selection of entities
+[M] adding trees/buildings
+[M] giving buildings/men names
 
+[Packaging]
+=================================================
+[L] installer for windows
+[L] installer for linux
+[M] common package for gui, antargis and tileset
+[M] reasonable installing/generation-places of tiles
 
+[Story]
+=================================================
+- main campaign:
+	- flashback on some victory-scene:
+		- look own from some tower upon an army
+		- look back from behind some warriors holding up some weapons
+	- scene of betrayal - some dark person stands above some king (in a hall)
+	- game begins -
+	- scene with some bodies lying around 
 
-
-
-
-ok 1) Tiles selektieren
-ok 2) Entites selektierbar machen
-ok 3) HeroEntity
-ok 4) HeroEntity move 
-ok => 4a) Eigenschaften/Position nach IsoView übernehmen
-ok 4) ManEntity, der HeroEntity folgt
-ok 5) Figting
-ok 6) Computer-Spieler
-ok => 6a) Figuren einfärben
-ok * Kämpfen - abwehren
-ok * Healing
-canceled * LOD-Map:
-canceled * reduced SplineMap - quadratic patches ? (look at SystemRequirements)
-
-ok * XML-InString loading
-ok * SplineMap-saving/loading
-ok * show Editing-point
-ok * Water
-ok * Editing on/off toggling
-ok * added snow/rain
-ok * rudimentary formation-support
-ok * name-support
-ok * correct saving of players
-ok * formation - partly
-ok * differentiate between running and going
-ok * big maps (view)
-ok * normal for minimap in decast
-ok * Minimap
-ok * Water and terrain parted
-ok * fixed strange error when generating images
-ok * entities in minimap
-ok * big map support in editing
-ok * smaller image saving (discard unused parts) - saves about 2/3 of memory usage
-ok * some other trees/plants
-ok * some stones/rocks
-* support different grass heights by drawing
-* support item placing in edit mode
-* game-object with scripting
-* ant_geometry restructure
-* prevent flickering with constant sorting (somehow)
-* check lighting (is adding white light - should be multiplication)
-
-
-* Player-AI improvements:
-  1. nur Sitzen
-  2. greift auch an, sobald irgendwie Vorrat zu ende
-  3. 
-
-* story-telling
-	- some window popping up, telling some sentences, can be clicked away, but simply clicking on it.
-	- some buttons to go back and forward (history-function)
-	- game is paused while reading
-	- to the left there is a picture of the speaking person (or an image of the book or so)
-	- (later: some browsing facility, which lets you choose scenes)
-	- sentence id: scene=>number(person)=>text
-  
 * story
   * Am Anfang kurzes Intro:
     * verschleierter Rückblick auf Powermonger (Thorn & Tisch); danach Auszug; am Schluß irgendein Sieg
+  * DIFFERENT:
+	* flashback on some victory-scene:
+		- look down from some tower
+		- look back from behind some warriors holding up some weapons
+	* scene of betrayal - some dark person stands above some king
+
   * 1.Szene: mit Kutsche und ein paar Leichen; auf der Seite sind noch die Angreifer
   * 2.Szene: Höhle mit Druide
+
 
 * Formation
   Sitzen:
