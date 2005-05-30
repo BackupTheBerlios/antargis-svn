@@ -20,26 +20,53 @@
 
 #include "ag_mixer.h"
 #include "ag_kill.h"
+#include "ag_debug.h"
 
 #include <SDL_mixer.h>
 
 Mix_Music *mMusic=0;
 bool mMusicFinished=false;
+bool mMusicInited=false;
 
 void musicFinished()
 {
   mMusicFinished=true;
 }
 
+void initSoundEngine()
+{
+  if(!mMusicInited)
+    {
+      if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
+	printf("Mix_OpenAudio: %s\n", Mix_GetError());
+	exit(2);
+      }
+      mMusic=0;
+      
+      Mix_HookMusicFinished(musicFinished);
+      mMusicInited=true;
+    }
+}
+
+void closeSoundEngine()
+{
+  if(mMusicInited)
+    {
+      if(mMusic)
+	{
+	  // free music
+	  Mix_FreeMusic(mMusic);
+	  mMusic=0;
+	}
+      Mix_CloseAudio();
+    }
+}
+
 AGSound::~AGSound()
 { 
-  if(mMusic)
-    {
-      // free music
-      Mix_FreeMusic(mMusic);
-      mMusic=0;
-    }
-  Mix_CloseAudio();
+  CTRACE;
+  closeSoundEngine();
+  cdebug("ruby-object:"<<mRubyObject);
 }
 
 bool AGSound::playMp3(const std::string &pFilename)
@@ -51,7 +78,7 @@ bool AGSound::playMp3(const std::string &pFilename)
       //      Mix_FreeMusic(mMusic);
       //      mMusic=0;
     }
- 
+  initSoundEngine();
   // load the MP3 file "music.mp3" to play as music
   mMusic=Mix_LoadMUS(pFilename.c_str());
   if(!mMusic) {
@@ -95,27 +122,19 @@ void AGSound::stopMp3()
 AGSound::AGSound():AGWidget(0,AGRect(0,0,0,0)),sigMp3Finished(this,"sigMp3Finished")
 {
   REGISTER_SINGLETON(this);
-
-  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
-    printf("Mix_OpenAudio: %s\n", Mix_GetError());
-    exit(2);
-  }
-  mMusic=0;
-
-  Mix_HookMusicFinished(musicFinished);
 }
 
 void AGSound::checkFinished()
 {
-  if(mMusicFinished)
-    {
-      Mix_FreeMusic(mMusic);
-      mMusic=0;
-
-      sigMp3Finished(0);
-      mMusicFinished=false;
-
-    }
+  if(mMusicInited)
+    if(mMusicFinished)
+      {
+	Mix_FreeMusic(mMusic);
+	mMusic=0;
+	
+	sigMp3Finished(0);
+	mMusicFinished=false;
+      }
 }
 
 

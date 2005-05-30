@@ -21,6 +21,7 @@
 #include "ag_widget.h"
 #include "ag_debug.h"
 #include "ag_menu.h"
+#include "ag_kill.h"
 #include <map>
 #include <iostream>
 #include <algorithm>
@@ -32,7 +33,28 @@ using namespace std;
 
 AGWidget *agNoParent=0;
 
-std::set<AGWidget*> mAllWidgets; // workaround - to check if still widget exists or not
+class MWidgetSet:public std::set<AGWidget*>
+{
+public:
+  virtual ~MWidgetSet();
+};
+MWidgetSet *mPAllWidgets=0; // workaround - to check if still widget exists or not
+
+MWidgetSet::~MWidgetSet()
+{
+  CTRACE;
+  mPAllWidgets=0;
+}
+
+MWidgetSet *getAllWidgets()
+{
+  if(!mPAllWidgets)
+    {
+      mPAllWidgets=new MWidgetSet;
+      REGISTER_SINGLETON(mPAllWidgets);
+    }
+  return mPAllWidgets;
+}
 
 
 AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
@@ -45,7 +67,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
 {
   mRubyObject=false;
   mModal=false;
-  mAllWidgets.insert(this);
+  getAllWidgets()->insert(this);
   //  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
@@ -65,14 +87,14 @@ AGWidget::~AGWidget()
     }
   if(getParent())
     {
-      if(mAllWidgets.find(getParent())==mAllWidgets.end())
+      if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
 	{
 	  cdebug("WARNING:Error in ~AGWidget!!!");
 	}
       else
 	getParent()->eventChildrenDeleted(this);
     }
-  mAllWidgets.erase(this);
+  getAllWidgets()->erase(this);
 }
 
 void AGWidget::eventChildrenDeleted(AGWidget *pWidget)

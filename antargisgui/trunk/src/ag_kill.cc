@@ -19,6 +19,7 @@
  */
 
 #include "ag_kill.h"
+#include "ag_debug.h"
 
 AGInstanceKiller mInstanceKiller;
 AGInstanceKiller *getInstanceKiller()
@@ -26,3 +27,22 @@ AGInstanceKiller *getInstanceKiller()
   return &mInstanceKiller;
 }
 
+
+AGInstanceKiller::AGInstanceKiller()
+    {
+    }
+AGInstanceKiller::~AGInstanceKiller()
+    {
+      CTRACE;
+      std::list<AGInstanceBase*>::iterator i=bs.begin();
+      for(;i!=bs.end();i++)
+	{
+	  (*i)->kill();
+	  delete *i;
+	}
+      
+    }
+void AGInstanceKiller::reg(AGInstanceBase *b)
+  {
+    bs.push_back(b);
+  }

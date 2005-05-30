@@ -54,24 +54,9 @@ class AGInstanceKiller
 {
   std::list<AGInstanceBase*> bs;
  public:
-  AGInstanceKiller()
-    {
-    }
-  ~AGInstanceKiller()
-    {
-      std::list<AGInstanceBase*>::iterator i=bs.begin();
-      for(;i!=bs.end();i++)
-	{
-	  (*i)->kill();
-	  delete *i;
-	}
-      
-    }
-  void reg(AGInstanceBase *b)
-  {
-    bs.push_back(b);
-  }
-  
+  AGInstanceKiller();
+  ~AGInstanceKiller();
+  void reg(AGInstanceBase *b);
 };
 
 AGInstanceKiller *getInstanceKiller();
