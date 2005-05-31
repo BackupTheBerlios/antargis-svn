@@ -497,6 +497,7 @@ void AntargisMap::loadMap(const std::string &pFilename)
   for(;i!=mListeners.end();i++)
   (*i)->mapUpdate();*/
   mUpdated=true;
+  mHeightChanged=true;
 }
 
 

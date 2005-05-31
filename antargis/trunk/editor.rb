@@ -105,6 +105,7 @@ class AntGameApp <AntApp
 	end
 	
 	def eventIdle
+		delay(20)
 	end
 	
 	# signals	
