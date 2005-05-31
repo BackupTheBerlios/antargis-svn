@@ -24,7 +24,7 @@
 #include "ag_debug.h"
 #include "ag_mixer.h"
 
-AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0)
+AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mRubyObject(false)
 
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
@@ -85,6 +85,7 @@ bool AGApplication::run()
       }
       
       drawCursor();
+      eventFrameEnd((now-last)/1000.0);
       last=now;
     }
   return true;
@@ -169,6 +170,10 @@ bool AGApplication::eventFrame(float pTime)
 {
   return false;
 }
+bool AGApplication::eventFrameEnd(float pTime)
+{
+  return false;
+}
 
 long AGApplication::getTicks() const
 {
@@ -178,4 +183,32 @@ long AGApplication::getTicks() const
 void AGApplication::delay(int ms)
 {
   SDL_Delay(ms);
+}
+
+
+
+void AGApplication_markfunc(void *ptr)
+{
+  AGApplication *zoo;
+  
+  if(!ptr)
+    {
+      cdebug("Warning: ptr==0 in AGWidget_markfunc");
+      return;
+    }
+  assert(ptr);
+  TRACE;  
+  //  cdebug(ptr<<endl);
+  zoo = static_cast<AGApplication*>(ptr);
+
+  if(zoo->mainWidget)
+    {
+      if(zoo->mainWidget->mRubyObject)
+	{
+	  cdebug(zoo->mainWidget->getName());
+	  rb_gc_mark(zoo->mainWidget->mRUBY);
+	}
+      //      else
+      AGWidget_markfunc(zoo->mainWidget);
+    }
 }

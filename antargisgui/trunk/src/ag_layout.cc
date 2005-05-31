@@ -49,6 +49,7 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
     geom=AGRect(0,0,getMain()->width(),getMain()->height());
 
   setRect(geom);
+  setName(p.root().get("name"));
 
   parseChildren(this,p.root());
 

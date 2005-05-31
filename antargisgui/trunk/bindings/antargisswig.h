@@ -219,6 +219,7 @@ public:
     virtual bool eventQuit(AGEvent const *m);
     virtual bool eventKeyDown(AGEvent const *m2);
     virtual bool eventFrame(float pTime);
+    virtual bool eventFrameEnd(float pTime);
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);

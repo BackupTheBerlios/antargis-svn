@@ -32,7 +32,10 @@ class AGApplication:public AGMessageObject
   bool run();
 
   virtual bool eventIdle();
+  // called between event-handling and drawing
   virtual bool eventFrame(float pTime);
+  // called after drawing - so before event handling
+  virtual bool eventFrameEnd(float pTime);
 
   virtual bool eventQuit(const AGEvent *m);
   virtual bool eventKeyDown(const AGEvent *m2);
@@ -56,6 +59,12 @@ class AGApplication:public AGMessageObject
   bool mRunning;
   bool mIdleCalls;
   AGWidget *mainWidget;
+
+ public:
+  bool mRubyObject;
+  VALUE mRUBY;
+
+  friend void AGApplication_markfunc(void *ptr);
 };
 
 #endif

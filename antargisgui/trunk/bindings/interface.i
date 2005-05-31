@@ -18,6 +18,16 @@
 	$result=*b;
 }
 %include "marker.h"
+
+%exception AGApplication::AGApplication {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+	printf("register:AGApplication\n");
+}
+%markfunc AGApplication "AGApplication_markfunc"
+
+
 /*
 %exception AGWidget::AGWidget {
         $action

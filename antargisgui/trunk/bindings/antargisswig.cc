@@ -3505,6 +3505,21 @@ bool SwigDirector_AGApplication::eventFrame(float pTime) {
 }
 
 
+bool SwigDirector_AGApplication::eventFrameEnd(float pTime) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGApplication::eventFrameEnd(pTime);
+    }
+    obj0 = rb_float_new(pTime);
+    result = rb_funcall(swig_get_self(), rb_intern("eventFrameEnd"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 SwigDirector_AGApplication::~SwigDirector_AGApplication() {
 }
 
@@ -19972,16 +19987,21 @@ _wrap_new_AGApplication(int argc, VALUE *argv, VALUE self) {
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     arg1 = self;
-    char *classname = "Libantargisruby::AGApplication";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (AGApplication *)new SwigDirector_AGApplication(arg1);
-        
-    } else {
-        result = (AGApplication *)new AGApplication();
-        
+    {
+        char *classname = "Libantargisruby::AGApplication";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (AGApplication *)new SwigDirector_AGApplication(arg1);
+            
+        } else {
+            result = (AGApplication *)new AGApplication();
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:AGApplication\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -20036,6 +20056,27 @@ _wrap_AGApplication_eventFrame(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = (bool)(arg1)->eventFrame(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGApplication_eventFrameEnd(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    float arg2 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventFrameEnd(arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -20151,6 +20192,81 @@ _wrap_AGApplication_delay(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
     arg2 = NUM2INT(argv[0]);
     (arg1)->delay(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRubyObject_set(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    arg2 = RTEST(argv[0]);
+    if (arg1) (arg1)->mRubyObject = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRubyObject_get(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    result = (bool) ((arg1)->mRubyObject);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRUBY_set(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    VALUE arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    arg2 = argv[0];
+    if (arg1) (arg1)->mRUBY = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRUBY_get(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    result = (VALUE) ((arg1)->mRUBY);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGApplication_markfunc(int argc, VALUE *argv, VALUE self) {
+    void *arg1 = (void *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, 0, 1);
+    AGApplication_markfunc(arg1);
     
     return Qnil;
 }
@@ -28767,6 +28883,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     cAGButton.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisruby, "toAGButton", VALUEFUNC(_wrap_toAGButton), -1);
+    rb_define_module_function(mLibantargisruby, "AGApplication_markfunc", VALUEFUNC(_wrap_AGApplication_markfunc), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGApplication", VALUEFUNC(_wrap_disown_AGApplication), -1);
     
     cAGApplication.klass = rb_define_class_under(mLibantargisruby, "AGApplication", ((swig_class *) SWIGTYPE_p_AGMessageObject->clientdata)->klass);
@@ -28776,6 +28893,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGApplication.klass, "run", VALUEFUNC(_wrap_AGApplication_run), -1);
     rb_define_method(cAGApplication.klass, "eventIdle", VALUEFUNC(_wrap_AGApplication_eventIdle), -1);
     rb_define_method(cAGApplication.klass, "eventFrame", VALUEFUNC(_wrap_AGApplication_eventFrame), -1);
+    rb_define_method(cAGApplication.klass, "eventFrameEnd", VALUEFUNC(_wrap_AGApplication_eventFrameEnd), -1);
     rb_define_method(cAGApplication.klass, "eventQuit", VALUEFUNC(_wrap_AGApplication_eventQuit), -1);
     rb_define_method(cAGApplication.klass, "eventKeyDown", VALUEFUNC(_wrap_AGApplication_eventKeyDown), -1);
     rb_define_method(cAGApplication.klass, "setMainWidget", VALUEFUNC(_wrap_AGApplication_setMainWidget), -1);
@@ -28783,7 +28901,11 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGApplication.klass, "tryQuit", VALUEFUNC(_wrap_AGApplication_tryQuit), -1);
     rb_define_method(cAGApplication.klass, "getTicks", VALUEFUNC(_wrap_AGApplication_getTicks), -1);
     rb_define_method(cAGApplication.klass, "delay", VALUEFUNC(_wrap_AGApplication_delay), -1);
-    cAGApplication.mark = 0;
+    rb_define_method(cAGApplication.klass, "mRubyObject=", VALUEFUNC(_wrap_AGApplication_mRubyObject_set), -1);
+    rb_define_method(cAGApplication.klass, "mRubyObject", VALUEFUNC(_wrap_AGApplication_mRubyObject_get), -1);
+    rb_define_method(cAGApplication.klass, "mRUBY=", VALUEFUNC(_wrap_AGApplication_mRUBY_set), -1);
+    rb_define_method(cAGApplication.klass, "mRUBY", VALUEFUNC(_wrap_AGApplication_mRUBY_get), -1);
+    cAGApplication.mark = (void (*)(void *)) AGApplication_markfunc;
     cAGApplication.destroy = (void (*)(void *)) free_AGApplication;
     rb_define_module_function(mLibantargisruby, "disown_AGText", VALUEFUNC(_wrap_disown_AGText), -1);
     

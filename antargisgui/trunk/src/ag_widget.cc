@@ -78,6 +78,7 @@ AGWidget::~AGWidget()
   cdebug(typeid(*this).name());
   cdebug("Name:"<<getName());
   cdebug(getName());
+  cdebug("mRUBY:"<<mRUBY);
   //  throw int();
 
   std::list<AGWidget*>::iterator i=mChildren.begin();
@@ -762,8 +763,7 @@ void AGWidget::setModal(bool pModal)
 #endif
 void AGWidget_markfunc(void *ptr)
 {
-  //  cdebug("TRACE");
-#ifdef USE_RUBY
+
   AGWidget *cppAnimal;
   VALUE   rubyAnimal;
   AGWidget *zoo;
@@ -783,13 +783,16 @@ void AGWidget_markfunc(void *ptr)
   for(;i!=zoo->mChildren.end();i++)
     {
       //      cdebug("children:"<<*i);
+      //      cdebug("children:"<<(*i)->getName());
       cppAnimal = *i;//zoo->getAnimal(i);
       if(cppAnimal->mRubyObject)
 	{
 	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
 	  rb_gc_mark(rubyAnimal);
+	  //	  cdebug("MARK:"<<rubyAnimal);
 	  //	  cdebug("mark:"<<cppAnimal->getName());
 	}
+      //      else
       AGWidget_markfunc(*i);
     }
 
@@ -808,7 +811,6 @@ void AGWidget_markfunc(void *ptr)
       AGWidget_markfunc(*i);
     }
   
-#endif
 }
 
 

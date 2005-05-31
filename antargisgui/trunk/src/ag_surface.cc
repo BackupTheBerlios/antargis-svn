@@ -114,15 +114,14 @@ AGSurface::AGSurface(int w,int h)
 
 AGSurface::~AGSurface()
 {
-  //  SDL_FreeSurface(s);
   getSurfaceManager()->deregisterSurface(this);
 }
 
 AGSurface &AGSurface::operator=(const AGSurface &p)
 {
   CTRACE;
-  if(s)
-    SDL_FreeSurface(s);
+  //  if(s)
+  //    SDL_FreeSurface(s);
   s=0;
   if(p.valid())
     {
