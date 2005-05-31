@@ -82,9 +82,28 @@ std::string ParserInfo::getInfo()
  ****************************************************************/
 
 Node::Node()
-{}
+{
+}
 Node::Node(std::string name):mName(name)
-{}
+{
+}
+
+Node::Node(const Node &n):mName(n.mName),mParams(n.mParams),mContent(n.mContent)
+{
+  // copy nodes
+  NodeVector::const_iterator i=n.mNodes.begin();
+  for(;i!=n.mNodes.end();i++)
+    mNodes.push_back(new Node(**i));
+}
+
+Node::~Node()
+{
+  NodeVector::iterator i=mNodes.begin();
+  for(;i!=mNodes.end();i++)
+    delete *i;
+  mNodes.clear();
+}
+
 
 void Node::setName(std::string pName)
 {
@@ -111,7 +130,7 @@ Node::NodeVector Node::get_children(std::string pName) const
     NodeVector::const_iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
       {
-        if(i->getName()==pName)
+        if((*i)->getName()==pName)
           l.push_back(*i);
       }
     return l;
@@ -128,8 +147,9 @@ std::string Node::get_name() const
 
 Node &Node::newChild(std::string pName)
 {
-  mNodes.push_back(Node(pName));
-  return mNodes.back();
+  Node *node=new Node(pName);
+  mNodes.push_back(node);
+  return *mNodes.back();
 }
 
 Node *Node::add_child(std::string n)
@@ -258,22 +278,23 @@ void Node::indent(std::ostringstream &s,int depth) const
 
 void Node::getContent(std::ostringstream &s,int depth) const
   {
-    std::vector<Node>::const_iterator i=mNodes.begin();
+    NodeVector::const_iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
       {
+	Node *n=*i;
         if(depth>0)
           {
-            // width indenting
+	    // width indenting
             indent(s,depth);
-	    if(i->mNodes.size()==0 && i->mContent.length()==0)
-	      i->getStart(s,true);
+	    if(n->mNodes.size()==0 && n->mContent.length()==0)
+	      n->getStart(s,true);
 	    else
 	      {
-		i->getStart(s);
+		n->getStart(s);
 		s<<endl;
-		i->getContent(s,depth+2);
+		n->getContent(s,depth+2);
 		indent(s,depth);
-		i->getEnd(s);
+		n->getEnd(s);
 	      }
 	    s<<endl;
 	      
@@ -281,9 +302,9 @@ void Node::getContent(std::ostringstream &s,int depth) const
         else
           {
             // without indenting
-            i->getStart(s);
-            i->getContent(s,0);
-            i->getEnd(s);
+            n->getStart(s);
+            n->getContent(s,0);
+            n->getEnd(s);
           }
       }
     s<<mContent;
@@ -427,8 +448,9 @@ void Node::parseContents(ParserInfo &info)
         }
       else
         {
-          mNodes.push_back(Node());
-          mNodes.back().parse(info);
+	  Node *n=new Node;
+          mNodes.push_back(n);
+          n->parse(info);
           la=info.getNext2();
           contentChanged=false;
         }
@@ -482,11 +504,19 @@ void Node::parse(ParserInfo &info)
 
 
 Document::Document()
-{}
+{
+  mRoot=new Node;
+}
 Document::Document(std::string pFile)
 {
-  mRoot.clear();
+  mRoot=new Node;
+  mRoot->clear();
   parseFile(pFile);
+}
+
+Document::~Document()
+{
+  delete mRoot;
 }
 
 bool Document::parseFile(std::string file)
@@ -500,17 +530,17 @@ bool Document::parseFile(std::string file)
 
 Node &Document::root()
 {
-  return mRoot;
+  return *mRoot;
 }
 
 Node *Document::get_root_node()
 {
-  return &root();
+  return mRoot;
 }
 
 std::string Document::toString() const
   {
-    return mRoot.toString();
+    return mRoot->toString();
   }
 
 void Document::parse_memory(const std::string &s)
@@ -545,7 +575,7 @@ void Document::parseMemory(const std::string &s)
   p.p=0;
 
   parseHeader(p);
-  mRoot.parse(p);
+  mRoot->parse(p);
 }
 
 Document *Document::get_document()

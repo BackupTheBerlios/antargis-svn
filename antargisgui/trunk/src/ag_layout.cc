@@ -159,7 +159,7 @@ void parseChildren(AGWidget *pParent,const xmlpp::Node &pNode)
       xmlpp::Node::const_iterator i=pNode.begin();
       for(;i!=pNode.end();i++)
 	{
-	  AGWidget *w=parseNode(pParent,*i);
+	  AGWidget *w=parseNode(pParent,**i);
 	  if(w)
 	    pParent->addChild(w);
 	}
@@ -278,7 +278,7 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geo
   i=pNode.begin();
   for(;i!=pNode.end();i++)
     {
-      AGWidget *w=parseNode(t,*i);
+      AGWidget *w=parseNode(t,**i);
       if(w)
 	{
 	  int col=toInt((*i)->get("col"));

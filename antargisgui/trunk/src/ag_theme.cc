@@ -163,7 +163,7 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	    }
 	}
       else
-	loadTheme(*i,t,n);
+	loadTheme(**i,t,n);
     }
 }
 
@@ -189,7 +189,7 @@ bool loadThemeFile(const std::string &pFilename)
   if(!p.parseFile(pFilename))
     return false;
 
-  xmlpp::Node n=p.root();
+  const xmlpp::Node &n=p.root();
 
   loadTheme(n,theme,"");
   

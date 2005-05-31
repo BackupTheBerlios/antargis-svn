@@ -480,23 +480,49 @@ AGSurface AGSurfaceManager::fromSDL(SDL_Surface *s)
   return AGSurface(s);
 }
 
+size_t mRegisteredSurfaces=0;
 
 void AGSurfaceManager::registerSurface(AGSurface *pSurface)
 {
   mSurfaces.insert(pSurface);
   if(pSurface->valid())
-    mRealSurfaces.insert(pSurface->surface());
+    {
+      // new real surfaces
+      size_t old=mRealSurfaces.size();
+      mRealSurfaces.insert(pSurface->surface());
+      if(old!=mRealSurfaces.size())
+	mRegisteredSurfaces++;
+    }
+
+  if((mRegisteredSurfaces>10 && mAutoGC) || mRegisteredSurfaces>200)
+    {
+      cleanup(); // run garbage collection
+      mRegisteredSurfaces=0;
+    }
 }
 void AGSurfaceManager::deregisterSurface(AGSurface *pSurface)
 {
   mSurfaces.erase(pSurface);
 }
+
+void AGSurfaceManager::enableGC()
+{
+  mAutoGC=true;
+}
+void AGSurfaceManager::disableGC()
+{
+  mAutoGC=false;
+}
+
+
 void AGSurfaceManager::cleanup()
 {
+  CTRACE;
   std::set<SDL_Surface*> used;
   std::set<AGSurface*>::iterator i=mSurfaces.begin();
   for(;i!=mSurfaces.end();i++)
-    used.insert((*i)->surface());
+    if((*i)->valid())
+      used.insert((*i)->surface());
 
   std::set<SDL_Surface*>::iterator j;
   for(j=mRealSurfaces.begin();j!=mRealSurfaces.end();j++)

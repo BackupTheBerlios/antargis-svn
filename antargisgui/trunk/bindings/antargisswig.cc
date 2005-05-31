@@ -861,60 +861,61 @@ type_error:
 #define  SWIGTYPE_p_AGCPPListener swig_types[15] 
 #define  SWIGTYPE_p_AGListener swig_types[16] 
 #define  SWIGTYPE_p_NodeVector swig_types[17] 
-#define  SWIGTYPE_p_std__vectorTNode_t swig_types[18] 
+#define  SWIGTYPE_p_std__vectorTNode_p_t swig_types[18] 
 #define  SWIGTYPE_p_AGPaintTarget swig_types[19] 
-#define  SWIGTYPE_p_AGScreen swig_types[20] 
-#define  SWIGTYPE_p_AGImage swig_types[21] 
-#define  SWIGTYPE_p_ParserInfo swig_types[22] 
-#define  SWIGTYPE_p_SDL_Surface swig_types[23] 
-#define  SWIGTYPE_p_AGSurface swig_types[24] 
-#define  SWIGTYPE_p_AGScreenWidget swig_types[25] 
-#define  SWIGTYPE_p_AGMain swig_types[26] 
-#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[27] 
-#define  SWIGTYPE_p_AGBackground swig_types[28] 
-#define  SWIGTYPE_p_AGSignal swig_types[29] 
-#define  SWIGTYPE_p_iterator swig_types[30] 
-#define  SWIGTYPE_p_const_iterator swig_types[31] 
-#define  SWIGTYPE_p_std__vectorTNode_t__iterator swig_types[32] 
-#define  SWIGTYPE_p_std__vectorTNode_t__const_iterator swig_types[33] 
-#define  SWIGTYPE_p_AGCaption swig_types[34] 
-#define  SWIGTYPE_p_std__string swig_types[35] 
-#define  SWIGTYPE_p_AGEvent swig_types[36] 
-#define  SWIGTYPE_p_AGListBoxItem swig_types[37] 
-#define  SWIGTYPE_p_AGTexture swig_types[38] 
-#define  SWIGTYPE_p_Uint32 swig_types[39] 
-#define  SWIGTYPE_p_AGRadioGroup swig_types[40] 
-#define  SWIGTYPE_p_AGText swig_types[41] 
-#define  SWIGTYPE_p_AGWindow swig_types[42] 
-#define  SWIGTYPE_p_AGMenu swig_types[43] 
-#define  SWIGTYPE_p_AGEdit swig_types[44] 
-#define  SWIGTYPE_p_AGLayoutCreator swig_types[45] 
-#define  SWIGTYPE_p_AGWidget swig_types[46] 
-#define  SWIGTYPE_p_ParserException swig_types[47] 
-#define  SWIGTYPE_p_AGCheckBox swig_types[48] 
-#define  SWIGTYPE_p_AGTable swig_types[49] 
-#define  SWIGTYPE_p_AGPoint swig_types[50] 
-#define  SWIGTYPE_p_AGFontEngine swig_types[51] 
-#define  SWIGTYPE_p_AGPainter swig_types[52] 
-#define  SWIGTYPE_p_AGEditLine swig_types[53] 
-#define  SWIGTYPE_p_std__ostringstream swig_types[54] 
-#define  SWIGTYPE_p_AGListBox swig_types[55] 
-#define  SWIGTYPE_p_AGMessageObject swig_types[56] 
-#define  SWIGTYPE_p_SDLKey swig_types[57] 
-#define  SWIGTYPE_p_SDL_PixelFormat swig_types[58] 
-#define  SWIGTYPE_p_AGVTiler swig_types[59] 
-#define  SWIGTYPE_p_GLuint swig_types[60] 
-#define  SWIGTYPE_p_AGLayout swig_types[61] 
-#define  SWIGTYPE_p_AGSDLEvent swig_types[62] 
-#define  SWIGTYPE_p_AGColor swig_types[63] 
-#define  SWIGTYPE_p_AGTheme swig_types[64] 
-#define  SWIGTYPE_p_AGRadio swig_types[65] 
-#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[66] 
-#define  SWIGTYPE_p_AGFont swig_types[67] 
-#define  SWIGTYPE_p_unsigned_long swig_types[68] 
-#define  SWIGTYPE_p_AGTextureManager swig_types[69] 
-#define  SWIGTYPE_p_AGSurfaceManager swig_types[70] 
-static swig_type_info *swig_types[72];
+#define  SWIGTYPE_p_std__vectorTNode_t swig_types[20] 
+#define  SWIGTYPE_p_AGScreen swig_types[21] 
+#define  SWIGTYPE_p_AGImage swig_types[22] 
+#define  SWIGTYPE_p_ParserInfo swig_types[23] 
+#define  SWIGTYPE_p_SDL_Surface swig_types[24] 
+#define  SWIGTYPE_p_AGSurface swig_types[25] 
+#define  SWIGTYPE_p_AGScreenWidget swig_types[26] 
+#define  SWIGTYPE_p_AGMain swig_types[27] 
+#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[28] 
+#define  SWIGTYPE_p_AGBackground swig_types[29] 
+#define  SWIGTYPE_p_AGSignal swig_types[30] 
+#define  SWIGTYPE_p_iterator swig_types[31] 
+#define  SWIGTYPE_p_const_iterator swig_types[32] 
+#define  SWIGTYPE_p_Node__NodeVector__iterator swig_types[33] 
+#define  SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[34] 
+#define  SWIGTYPE_p_AGCaption swig_types[35] 
+#define  SWIGTYPE_p_std__string swig_types[36] 
+#define  SWIGTYPE_p_AGEvent swig_types[37] 
+#define  SWIGTYPE_p_AGListBoxItem swig_types[38] 
+#define  SWIGTYPE_p_AGTexture swig_types[39] 
+#define  SWIGTYPE_p_Uint32 swig_types[40] 
+#define  SWIGTYPE_p_AGRadioGroup swig_types[41] 
+#define  SWIGTYPE_p_AGText swig_types[42] 
+#define  SWIGTYPE_p_AGWindow swig_types[43] 
+#define  SWIGTYPE_p_AGMenu swig_types[44] 
+#define  SWIGTYPE_p_AGEdit swig_types[45] 
+#define  SWIGTYPE_p_AGLayoutCreator swig_types[46] 
+#define  SWIGTYPE_p_AGWidget swig_types[47] 
+#define  SWIGTYPE_p_ParserException swig_types[48] 
+#define  SWIGTYPE_p_AGCheckBox swig_types[49] 
+#define  SWIGTYPE_p_AGTable swig_types[50] 
+#define  SWIGTYPE_p_AGPoint swig_types[51] 
+#define  SWIGTYPE_p_AGFontEngine swig_types[52] 
+#define  SWIGTYPE_p_AGPainter swig_types[53] 
+#define  SWIGTYPE_p_AGEditLine swig_types[54] 
+#define  SWIGTYPE_p_std__ostringstream swig_types[55] 
+#define  SWIGTYPE_p_AGListBox swig_types[56] 
+#define  SWIGTYPE_p_AGMessageObject swig_types[57] 
+#define  SWIGTYPE_p_SDLKey swig_types[58] 
+#define  SWIGTYPE_p_SDL_PixelFormat swig_types[59] 
+#define  SWIGTYPE_p_AGVTiler swig_types[60] 
+#define  SWIGTYPE_p_GLuint swig_types[61] 
+#define  SWIGTYPE_p_AGLayout swig_types[62] 
+#define  SWIGTYPE_p_AGSDLEvent swig_types[63] 
+#define  SWIGTYPE_p_AGColor swig_types[64] 
+#define  SWIGTYPE_p_AGTheme swig_types[65] 
+#define  SWIGTYPE_p_AGRadio swig_types[66] 
+#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[67] 
+#define  SWIGTYPE_p_AGFont swig_types[68] 
+#define  SWIGTYPE_p_unsigned_long swig_types[69] 
+#define  SWIGTYPE_p_AGTextureManager swig_types[70] 
+#define  SWIGTYPE_p_AGSurfaceManager swig_types[71] 
+static swig_type_info *swig_types[73];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -14414,6 +14415,32 @@ _wrap_AGSurfaceManager_cleanup(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGSurfaceManager_enableGC(int argc, VALUE *argv, VALUE self) {
+    AGSurfaceManager *arg1 = (AGSurfaceManager *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurfaceManager, 1);
+    (arg1)->enableGC();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSurfaceManager_disableGC(int argc, VALUE *argv, VALUE self) {
+    AGSurfaceManager *arg1 = (AGSurfaceManager *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurfaceManager, 1);
+    (arg1)->disableGC();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_getSurfaceManager(int argc, VALUE *argv, VALUE self) {
     AGSurfaceManager *result;
     VALUE vresult = Qnil;
@@ -24622,23 +24649,6 @@ _wrap_new_Node__SWIG_0(int argc, VALUE *argv, VALUE self) {
 }
 
 
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_Node_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_Node_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Node);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
 static VALUE
 _wrap_new_Node__SWIG_1(int argc, VALUE *argv, VALUE self) {
     std::string arg1 ;
@@ -24659,6 +24669,37 @@ _wrap_new_Node__SWIG_1(int argc, VALUE *argv, VALUE self) {
 }
 
 
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Node_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Node_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Node);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Node__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    Node *arg1 = 0 ;
+    Node *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (Node *)new Node((Node const &)*arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
 static VALUE _wrap_new_Node(int nargs, VALUE *args, VALUE self) {
     int argc;
     VALUE argv[1];
@@ -24670,6 +24711,16 @@ static VALUE _wrap_new_Node(int nargs, VALUE *args, VALUE self) {
     }
     if (argc == 0) {
         return _wrap_new_Node__SWIG_0(nargs, args, self);
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_Node__SWIG_2(nargs, args, self);
+        }
     }
     if (argc == 1) {
         int _v;
@@ -24686,6 +24737,10 @@ static VALUE _wrap_new_Node(int nargs, VALUE *args, VALUE self) {
 }
 
 
+static void
+free_Node(Node *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_Node_setName(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
@@ -24710,7 +24765,7 @@ _wrap_Node_setName(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Node_get_children__SWIG_0(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
-    Node::NodeVector result;
+    SwigValueWrapper<std::vector<Node * > > result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -24721,7 +24776,7 @@ _wrap_Node_get_children__SWIG_0(int argc, VALUE *argv, VALUE self) {
     {
         Node::NodeVector * resultptr;
         resultptr = new Node::NodeVector((Node::NodeVector &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_t, 1);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_p_t, 1);
     }
     return vresult;
 }
@@ -24731,7 +24786,7 @@ static VALUE
 _wrap_Node_get_children__SWIG_1(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
     std::string arg2 ;
-    Node::NodeVector result;
+    SwigValueWrapper<std::vector<Node * > > result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -24749,7 +24804,7 @@ _wrap_Node_get_children__SWIG_1(int argc, VALUE *argv, VALUE self) {
     {
         Node::NodeVector * resultptr;
         resultptr = new Node::NodeVector((Node::NodeVector &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_t, 1);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_p_t, 1);
     }
     return vresult;
 }
@@ -24901,7 +24956,7 @@ _wrap_Node_remove_child(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Node_begin__SWIG_0(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
-    SwigValueWrapper<std::vector<Node >::iterator > result;
+    Node::iterator result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -24912,7 +24967,7 @@ _wrap_Node_begin__SWIG_0(int argc, VALUE *argv, VALUE self) {
     {
         Node::iterator * resultptr;
         resultptr = new Node::iterator((Node::iterator &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_t__iterator, 1);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Node__NodeVector__iterator, 1);
     }
     return vresult;
 }
@@ -24921,7 +24976,7 @@ _wrap_Node_begin__SWIG_0(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Node_begin__SWIG_1(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
-    SwigValueWrapper<std::vector<Node >::const_iterator > result;
+    Node::const_iterator result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -24932,7 +24987,7 @@ _wrap_Node_begin__SWIG_1(int argc, VALUE *argv, VALUE self) {
     {
         Node::const_iterator * resultptr;
         resultptr = new Node::const_iterator((Node::const_iterator &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_t__const_iterator, 1);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Node__NodeVector__const_iterator, 1);
     }
     return vresult;
 }
@@ -24977,7 +25032,7 @@ static VALUE _wrap_Node_begin(int nargs, VALUE *args, VALUE self) {
 static VALUE
 _wrap_Node_end__SWIG_0(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
-    SwigValueWrapper<std::vector<Node >::iterator > result;
+    Node::iterator result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -24988,7 +25043,7 @@ _wrap_Node_end__SWIG_0(int argc, VALUE *argv, VALUE self) {
     {
         Node::iterator * resultptr;
         resultptr = new Node::iterator((Node::iterator &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_t__iterator, 1);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Node__NodeVector__iterator, 1);
     }
     return vresult;
 }
@@ -24997,7 +25052,7 @@ _wrap_Node_end__SWIG_0(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Node_end__SWIG_1(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
-    SwigValueWrapper<std::vector<Node >::const_iterator > result;
+    Node::const_iterator result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -25008,7 +25063,7 @@ _wrap_Node_end__SWIG_1(int argc, VALUE *argv, VALUE self) {
     {
         Node::const_iterator * resultptr;
         resultptr = new Node::const_iterator((Node::const_iterator &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTNode_t__const_iterator, 1);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Node__NodeVector__const_iterator, 1);
     }
     return vresult;
 }
@@ -25585,10 +25640,6 @@ _wrap_Node_parse(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_Node(Node *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_new_Document__SWIG_0(int argc, VALUE *argv, VALUE self) {
     Document *result;
@@ -25665,6 +25716,10 @@ static VALUE _wrap_new_Document(int nargs, VALUE *args, VALUE self) {
 }
 
 
+static void
+free_Document(Document *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_Document_parseFile(int argc, VALUE *argv, VALUE self) {
     Document *arg1 = (Document *) 0 ;
@@ -25804,10 +25859,6 @@ _wrap_Document_get_document(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_Document(Document *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_setAttribute(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
@@ -28328,8 +28379,9 @@ static swig_type_info _swigt__p_Document[] = {{"_p_Document", 0, "Document *", 0
 static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGListener[] = {{"_p_AGListener", 0, "AGListener *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGListener", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGMessageObject", _p_AGMessageObjectTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGListener, 0, 0, 0, 0, 0},{"_p_AGSound", _p_AGSoundTo_p_AGListener, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_NodeVector[] = {{"_p_NodeVector", 0, "NodeVector *", 0, 0, 0, 0},{"_p_NodeVector", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_std__vectorTNode_t[] = {{"_p_std__vectorTNode_t", 0, "std::vector<Node > *", 0, 0, 0, 0},{"_p_std__vectorTNode_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__vectorTNode_p_t[] = {{"_p_std__vectorTNode_p_t", 0, "std::vector<Node * > *|Node::NodeVector *", 0, 0, 0, 0},{"_p_std__vectorTNode_p_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGPaintTarget[] = {{"_p_AGPaintTarget", 0, "AGPaintTarget *", 0, 0, 0, 0},{"_p_AGPaintTarget", 0, 0, 0, 0, 0, 0},{"_p_AGSurface", _p_AGSurfaceTo_p_AGPaintTarget, 0, 0, 0, 0, 0},{"_p_AGSDLScreen", _p_AGSDLScreenTo_p_AGPaintTarget, 0, 0, 0, 0, 0},{"_p_AGScreen", _p_AGScreenTo_p_AGPaintTarget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__vectorTNode_t[] = {{"_p_std__vectorTNode_t", 0, "std::vector<Node > *", 0, 0, 0, 0},{"_p_std__vectorTNode_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGScreen[] = {{"_p_AGScreen", 0, "AGScreen *", 0, 0, 0, 0},{"_p_AGSDLScreen", _p_AGSDLScreenTo_p_AGScreen, 0, 0, 0, 0, 0},{"_p_AGScreen", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGImage[] = {{"_p_AGImage", 0, "AGImage *", 0, 0, 0, 0},{"_p_AGImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserInfo[] = {{"_p_ParserInfo", 0, "ParserInfo *", 0, 0, 0, 0},{"_p_ParserInfo", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -28342,8 +28394,8 @@ static swig_type_info _swigt__p_AGBackground[] = {{"_p_AGBackground", 0, "AGBack
 static swig_type_info _swigt__p_AGSignal[] = {{"_p_AGSignal", 0, "AGSignal *", 0, 0, 0, 0},{"_p_AGSignal", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_iterator[] = {{"_p_iterator", 0, "iterator *", 0, 0, 0, 0},{"_p_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_const_iterator[] = {{"_p_const_iterator", 0, "const_iterator *", 0, 0, 0, 0},{"_p_const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_std__vectorTNode_t__iterator[] = {{"_p_std__vectorTNode_t__iterator", 0, "std::vector<Node >::iterator *|Node::iterator *", 0, 0, 0, 0},{"_p_std__vectorTNode_t__iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_std__vectorTNode_t__const_iterator[] = {{"_p_std__vectorTNode_t__const_iterator", 0, "std::vector<Node >::const_iterator *|Node::const_iterator *", 0, 0, 0, 0},{"_p_std__vectorTNode_t__const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_Node__NodeVector__iterator[] = {{"_p_Node__NodeVector__iterator", 0, "Node::NodeVector::iterator *|Node::iterator *", 0, 0, 0, 0},{"_p_Node__NodeVector__iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_Node__NodeVector__const_iterator[] = {{"_p_Node__NodeVector__const_iterator", 0, "Node::NodeVector::const_iterator *|Node::const_iterator *", 0, 0, 0, 0},{"_p_Node__NodeVector__const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGCaption[] = {{"_p_AGCaption", 0, "AGCaption *", 0, 0, 0, 0},{"_p_AGCaption", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__string[] = {{"_p_std__string", 0, "std::string *", 0, 0, 0, 0},{"_p_std__string", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGEvent[] = {{"_p_AGEvent", 0, "AGEvent *", 0, 0, 0, 0},{"_p_AGSDLEvent", _p_AGSDLEventTo_p_AGEvent, 0, 0, 0, 0, 0},{"_p_AGMouseEvent", _p_AGMouseEventTo_p_AGEvent, 0, 0, 0, 0, 0},{"_p_AGEvent", 0, 0, 0, 0, 0, 0},{"_p_AGMenuEvent", _p_AGMenuEventTo_p_AGEvent, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -28401,8 +28453,9 @@ _swigt__p_Document,
 _swigt__p_AGCPPListener, 
 _swigt__p_AGListener, 
 _swigt__p_NodeVector, 
-_swigt__p_std__vectorTNode_t, 
+_swigt__p_std__vectorTNode_p_t, 
 _swigt__p_AGPaintTarget, 
+_swigt__p_std__vectorTNode_t, 
 _swigt__p_AGScreen, 
 _swigt__p_AGImage, 
 _swigt__p_ParserInfo, 
@@ -28415,8 +28468,8 @@ _swigt__p_AGBackground,
 _swigt__p_AGSignal, 
 _swigt__p_iterator, 
 _swigt__p_const_iterator, 
-_swigt__p_std__vectorTNode_t__iterator, 
-_swigt__p_std__vectorTNode_t__const_iterator, 
+_swigt__p_Node__NodeVector__iterator, 
+_swigt__p_Node__NodeVector__const_iterator, 
 _swigt__p_AGCaption, 
 _swigt__p_std__string, 
 _swigt__p_AGEvent, 
@@ -28567,6 +28620,8 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGSurfaceManager.klass, "registerSurface", VALUEFUNC(_wrap_AGSurfaceManager_registerSurface), -1);
     rb_define_method(cAGSurfaceManager.klass, "deregisterSurface", VALUEFUNC(_wrap_AGSurfaceManager_deregisterSurface), -1);
     rb_define_method(cAGSurfaceManager.klass, "cleanup", VALUEFUNC(_wrap_AGSurfaceManager_cleanup), -1);
+    rb_define_method(cAGSurfaceManager.klass, "enableGC", VALUEFUNC(_wrap_AGSurfaceManager_enableGC), -1);
+    rb_define_method(cAGSurfaceManager.klass, "disableGC", VALUEFUNC(_wrap_AGSurfaceManager_disableGC), -1);
     cAGSurfaceManager.mark = 0;
     cAGSurfaceManager.destroy = (void (*)(void *)) free_AGSurfaceManager;
     rb_define_module_function(mLibantargisruby, "getTextureManager", VALUEFUNC(_wrap_getTextureManager), -1);

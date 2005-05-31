@@ -168,12 +168,17 @@ class AGSurfaceManager
   void deregisterSurface(AGSurface *pSurface);
 
   void cleanup();
+
+  void enableGC();
+  void disableGC();
  private:
   AGSurfaceManager();
 
   std::set<AGSurface*> mSurfaces;
   std::set<SDL_Surface*> mRealSurfaces;
   friend AGSurfaceManager *getSurfaceManager();
+
+  bool mAutoGC;
 
 };
 AGSurfaceManager *getSurfaceManager();

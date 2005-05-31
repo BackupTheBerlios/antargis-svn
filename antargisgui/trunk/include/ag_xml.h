@@ -26,6 +26,8 @@
 #include <string>
 #include <sstream>
 
+#include "ruby.h"
+
 //#include "mystring.h"
 #include "ag_debug.h"
 
@@ -54,19 +56,21 @@ struct ParserInfo
 class Node
   {
     std::string mName;
-    std::vector<Node> mNodes;
+    std::vector<Node*> mNodes;
     std::map<std::string,std::string> mParams;
     std::string mContent;
 
   public:
 
-    typedef std::vector<Node> NodeVector;
+    typedef std::vector<Node*> NodeVector;
 
-    typedef std::vector<Node>::iterator iterator;
-    typedef std::vector<Node>::const_iterator const_iterator;
+    typedef NodeVector::iterator iterator;
+    typedef NodeVector::const_iterator const_iterator;
 
     Node();
     Node(std::string name);
+    Node(const Node &n);
+    ~Node();
 
     void setName(std::string pName);
 
@@ -117,14 +121,16 @@ class Node
     std::string parseName(ParserInfo &info);
     void parseContents(ParserInfo &info);
     void parse(ParserInfo &info);
+
   };
 
 class Document
   {
-    Node mRoot;
+    Node *mRoot;
   public:
     Document();
     Document(std::string pFile);
+    ~Document();
 
     bool parseFile(std::string file);
 
@@ -139,6 +145,8 @@ class Document
     void parseMemory(const std::string &s);
     
     Document *get_document();
+
+
   private:
     void parseHeader(ParserInfo &p);
   };
