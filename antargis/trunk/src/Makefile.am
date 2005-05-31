@@ -14,10 +14,11 @@ LDADD = -lantargis
 #ant_house.h ant_house.cc  ant_hero.h ant_hero.cc  ant_tree.h ant_tree.cc ant_boss.h ant_boss.cc ant_man.h ant_man.cc
 
 
-marker.h: mk_marker_h.rb /usr/local/include/antargisgui/*.h
-	./mk_marker_h.rb >marker.h
+marker.i: mk_marker_h.rb /usr/local/include/antargisgui/*.h view.h map.h entity.h
+	./mk_marker_h.rb >marker.i ; \
+	if test "`cat marker.i|grep EditIsoView`" == "" ; then echo "ERROR in marker.i" ; exit 1 ; fi
 
-antargisruby.cc: interface.i *.h /usr/local/include/antargisgui/*.h
+antargisruby.cc: interface.i *.h /usr/local/include/antargisgui/*.h marker.i
 	$(SWIGCOMPILE) -o antargisruby.cc interface.i
 
 

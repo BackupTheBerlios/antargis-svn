@@ -456,7 +456,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
                   float a=1.0f-(y/gh);
                   int mh=(int)(y+h);
                   //    cdebug(a);
-                  if(mh>WATER_HEIGHT)
+                  if(mh>GRASS_HEIGHT)
                     v.set(Pos3D(x,mh,z),Color(0,0xAA,0,a));
                 }
           }

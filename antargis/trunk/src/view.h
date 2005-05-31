@@ -35,7 +35,7 @@ struct IVTile
   }
 };
 
-class IsoView:public AntargisView//, public MapListener
+class IsoView:public AntargisView
   {
   public:
   private:
@@ -134,7 +134,8 @@ class EditIsoView: public CompleteIsoView
   public:
     EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map);
 
-    void toggleEdit();
+    //    void toggleEdit();
+    void setEditing(bool value);
     
     bool selectSize(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
     bool setAll(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
@@ -143,6 +144,8 @@ class EditIsoView: public CompleteIsoView
     bool togglePoints(const std::string&name,const AGEvent *e,AGMessageObject *pCaller);
 
     virtual void editMarkClicked(const Pos2D &p,const AGSDLEvent *e);
+
+    Pos3D getMarkerPos() const;
 
     // moving about
     virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);

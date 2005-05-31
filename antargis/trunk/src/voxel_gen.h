@@ -30,6 +30,7 @@
 #define TILE_WIDTH 64
 #define TILE_SIZE 32
 #define WATER_HEIGHT 10
+#define GRASS_HEIGHT 20
 
 #define MAP_SPLINE_ORDER 3
 

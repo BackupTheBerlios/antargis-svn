@@ -335,8 +335,16 @@ IVTile IsoView::getTile(const AGPoint &pp)
 
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
-  if(mMap->updated())
-    mapUpdate();
+  if(mMap->heightChanged())
+    {
+      CTRACE;
+      completeUpdate();
+    }
+  else if(mMap->updated())
+    {
+      CTRACE;
+      mapUpdate();
+    }
   if(!inited)
     {
       init();
@@ -583,7 +591,8 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   editSize=1;
 
   // add edit buttons at the bottom
-  AGLayout *layout;
+#ifdef CPPEDITOR
+    AGLayout *layout;
   addChild(mLayout=layout=new AGLayout(this,loadFile("edit_layout.xml")));
   layout->hide();
   for(int i=0;i<10 && std::string(editNames[i]).length();i++)
@@ -595,12 +604,19 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   layout->getChild("stones")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   layout->getChild("pins")->sigClick.connect(slot(this,&EditIsoView::togglePoints));
   layout->getChild("tower")->sigClick.connect(slot(this,&EditIsoView::addEntity));
-  
+  #endif
 }
 bool EditIsoView::togglePoints(const std::string&name,const AGEvent *e,AGMessageObject *pCaller)
 {
   toggleShowPoints();
   return true;
+}
+
+void EditIsoView::setEditing(bool value)
+{
+  mEditing=value;
+  update();
+
 }
 
 
@@ -643,25 +659,22 @@ bool EditIsoView::setAll(const std::string&,const AGEvent *,AGMessageObject *pCa
 }
 
 
+/*
 void EditIsoView::toggleEdit()
 {
   mEditing=!mEditing;
   update();
+#ifdef CPPEDITOR
   if(mEditing)
   {
     mLayout->show();
-    /*std::list<AGWidget*>::iterator i=mEditWidgets.begin();
-    for(;i!=mEditWidgets.end();i++)
-      (*i)->show();*/
   }
   else
   {
     mLayout->hide();
-/*    std::list<AGWidget*>::iterator i=mEditWidgets.begin();
-    for(;i!=mEditWidgets.end();i++)
-      (*i)->hide();*/
   }
-}
+#endif
+}*/
 
 // moving about
 bool EditIsoView::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
@@ -707,10 +720,23 @@ void EditIsoView::editMarkClicked(const Pos2D &p,const AGSDLEvent *e)
   update();
 }
 
+Pos3D EditIsoView::getMarkerPos() const
+{
+  if(!mOldPoint)
+    return Pos3D(0,0,0);
+  return mOldPoint->getPosition();
+}
+
 bool EditIsoView::eventMouseClick(const AGEvent *m)
 {
+#ifdef CPPEDITOR
   if(!mEditing)
     return CompleteIsoView::eventMouseClick(m);
+#else
+  
+  if(CompleteIsoView::eventMouseClick(m))
+    return true;
+#endif
   const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(e)
     {
@@ -776,6 +802,7 @@ AVItem *EditIsoView::getClosest(const AGPoint &p) const
 void EditIsoView::toggleShowPoints()
 {
   mShowPoints=!mShowPoints;
+  mOldPoint=0;
   update();
 }
 

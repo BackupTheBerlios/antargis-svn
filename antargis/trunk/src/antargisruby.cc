@@ -3713,6 +3713,21 @@ bool SwigDirector_AGApplication::eventFrame(float pTime) {
 }
 
 
+bool SwigDirector_AGApplication::eventFrameEnd(float pTime) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGApplication::eventFrameEnd(pTime);
+    }
+    obj0 = rb_float_new(pTime);
+    result = rb_funcall(swig_get_self(), rb_intern("eventFrameEnd"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 SwigDirector_AGApplication::~SwigDirector_AGApplication() {
 }
 
@@ -24334,16 +24349,21 @@ _wrap_new_AGApplication(int argc, VALUE *argv, VALUE self) {
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     arg1 = self;
-    char *classname = "Libantargis::AGApplication";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (AGApplication *)new SwigDirector_AGApplication(arg1);
-        
-    } else {
-        result = (AGApplication *)new AGApplication();
-        
+    {
+        char *classname = "Libantargis::AGApplication";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (AGApplication *)new SwigDirector_AGApplication(arg1);
+            
+        } else {
+            result = (AGApplication *)new AGApplication();
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:AGApplication\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -24398,6 +24418,27 @@ _wrap_AGApplication_eventFrame(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = (bool)(arg1)->eventFrame(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGApplication_eventFrameEnd(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    float arg2 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventFrameEnd(arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -24513,6 +24554,81 @@ _wrap_AGApplication_delay(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
     arg2 = NUM2INT(argv[0]);
     (arg1)->delay(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRubyObject_set(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    arg2 = RTEST(argv[0]);
+    if (arg1) (arg1)->mRubyObject = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRubyObject_get(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    result = (bool) ((arg1)->mRubyObject);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRUBY_set(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    VALUE arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    arg2 = argv[0];
+    if (arg1) (arg1)->mRUBY = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_mRUBY_get(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    result = (VALUE) ((arg1)->mRUBY);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGApplication_markfunc(int argc, VALUE *argv, VALUE self) {
+    void *arg1 = (void *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, 0, 1);
+    AGApplication_markfunc(arg1);
     
     return Qnil;
 }
@@ -32564,6 +32680,22 @@ _wrap_AntargisMap_updated(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntargisMap_heightChanged(int argc, VALUE *argv, VALUE self) {
+    AntargisMap *arg1 = (AntargisMap *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
+    result = (bool)((AntargisMap const *)arg1)->heightChanged();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AntargisMap_getGCcalls(int argc, VALUE *argv, VALUE self) {
     AntargisMap *arg1 = (AntargisMap *) 0 ;
     size_t result;
@@ -32780,6 +32912,19 @@ _wrap_AntargisMap_move(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
     arg2 = (float) NUM2DBL(argv[0]);
     (arg1)->move(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AntargisMap_frameEnd(int argc, VALUE *argv, VALUE self) {
+    AntargisMap *arg1 = (AntargisMap *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntargisMap, 1);
+    (arg1)->frameEnd();
     
     return Qnil;
 }
@@ -35964,16 +36109,21 @@ _wrap_new_IsoView(int argc, VALUE *argv, VALUE self) {
         if (ptr) arg4 = *ptr;
     }
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_AntargisMap, 1);
-    char *classname = "Libantargis::IsoView";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (IsoView *)new SwigDirector_IsoView(arg1,arg2,arg3,arg4,arg5);
-        
-    } else {
-        result = (IsoView *)new IsoView(arg2,arg3,arg4,arg5);
-        
+    {
+        char *classname = "Libantargis::IsoView";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (IsoView *)new SwigDirector_IsoView(arg1,arg2,arg3,arg4,arg5);
+            
+        } else {
+            result = (IsoView *)new IsoView(arg2,arg3,arg4,arg5);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:IsoView\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -36153,16 +36303,21 @@ _wrap_new_CompleteIsoView(int argc, VALUE *argv, VALUE self) {
         if (ptr) arg4 = *ptr;
     }
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_AntargisMap, 1);
-    char *classname = "Libantargis::CompleteIsoView";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (CompleteIsoView *)new SwigDirector_CompleteIsoView(arg1,arg2,arg3,arg4,arg5);
-        
-    } else {
-        result = (CompleteIsoView *)new CompleteIsoView(arg2,arg3,arg4,arg5);
-        
+    {
+        char *classname = "Libantargis::CompleteIsoView";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (CompleteIsoView *)new SwigDirector_CompleteIsoView(arg1,arg2,arg3,arg4,arg5);
+            
+        } else {
+            result = (CompleteIsoView *)new CompleteIsoView(arg2,arg3,arg4,arg5);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:CompleteIsoView\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
@@ -36341,28 +36496,35 @@ _wrap_new_EditIsoView(int argc, VALUE *argv, VALUE self) {
         if (ptr) arg4 = *ptr;
     }
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_AntargisMap, 1);
-    char *classname = "Libantargis::EditIsoView";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (EditIsoView *)new SwigDirector_EditIsoView(arg1,arg2,arg3,arg4,arg5);
-        
-    } else {
-        result = (EditIsoView *)new EditIsoView(arg2,arg3,arg4,arg5);
-        
+    {
+        char *classname = "Libantargis::EditIsoView";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (EditIsoView *)new SwigDirector_EditIsoView(arg1,arg2,arg3,arg4,arg5);
+            
+        } else {
+            result = (EditIsoView *)new EditIsoView(arg2,arg3,arg4,arg5);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY=self;
+        result->mRubyObject=true;
+        printf("register:EditIsoView\n");
     }
-    DATA_PTR(self) = result;
     return self;
 }
 
 
 static VALUE
-_wrap_EditIsoView_toggleEdit(int argc, VALUE *argv, VALUE self) {
+_wrap_EditIsoView_setEditing(int argc, VALUE *argv, VALUE self) {
     EditIsoView *arg1 = (EditIsoView *) 0 ;
+    bool arg2 ;
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_EditIsoView, 1);
-    (arg1)->toggleEdit();
+    arg2 = RTEST(argv[0]);
+    (arg1)->setEditing(arg2);
     
     return Qnil;
 }
@@ -36535,6 +36697,26 @@ _wrap_EditIsoView_editMarkClicked(int argc, VALUE *argv, VALUE self) {
     (arg1)->editMarkClicked((Pos2D const &)*arg2,(AGSDLEvent const *)arg3);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_EditIsoView_getMarkerPos(int argc, VALUE *argv, VALUE self) {
+    EditIsoView *arg1 = (EditIsoView *) 0 ;
+    Pos3D result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_EditIsoView, 1);
+    result = ((EditIsoView const *)arg1)->getMarkerPos();
+    
+    {
+        Pos3D * resultptr;
+        resultptr = new Pos3D((Pos3D &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_Pos3D, 1);
+    }
+    return vresult;
 }
 
 
@@ -40411,6 +40593,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     cAGButton.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargis, "toAGButton", VALUEFUNC(_wrap_toAGButton), -1);
+    rb_define_module_function(mLibantargis, "AGApplication_markfunc", VALUEFUNC(_wrap_AGApplication_markfunc), -1);
     rb_define_module_function(mLibantargis, "disown_AGApplication", VALUEFUNC(_wrap_disown_AGApplication), -1);
     
     cAGApplication.klass = rb_define_class_under(mLibantargis, "AGApplication", ((swig_class *) SWIGTYPE_p_AGMessageObject->clientdata)->klass);
@@ -40420,6 +40603,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAGApplication.klass, "run", VALUEFUNC(_wrap_AGApplication_run), -1);
     rb_define_method(cAGApplication.klass, "eventIdle", VALUEFUNC(_wrap_AGApplication_eventIdle), -1);
     rb_define_method(cAGApplication.klass, "eventFrame", VALUEFUNC(_wrap_AGApplication_eventFrame), -1);
+    rb_define_method(cAGApplication.klass, "eventFrameEnd", VALUEFUNC(_wrap_AGApplication_eventFrameEnd), -1);
     rb_define_method(cAGApplication.klass, "eventQuit", VALUEFUNC(_wrap_AGApplication_eventQuit), -1);
     rb_define_method(cAGApplication.klass, "eventKeyDown", VALUEFUNC(_wrap_AGApplication_eventKeyDown), -1);
     rb_define_method(cAGApplication.klass, "setMainWidget", VALUEFUNC(_wrap_AGApplication_setMainWidget), -1);
@@ -40427,7 +40611,11 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAGApplication.klass, "tryQuit", VALUEFUNC(_wrap_AGApplication_tryQuit), -1);
     rb_define_method(cAGApplication.klass, "getTicks", VALUEFUNC(_wrap_AGApplication_getTicks), -1);
     rb_define_method(cAGApplication.klass, "delay", VALUEFUNC(_wrap_AGApplication_delay), -1);
-    cAGApplication.mark = 0;
+    rb_define_method(cAGApplication.klass, "mRubyObject=", VALUEFUNC(_wrap_AGApplication_mRubyObject_set), -1);
+    rb_define_method(cAGApplication.klass, "mRubyObject", VALUEFUNC(_wrap_AGApplication_mRubyObject_get), -1);
+    rb_define_method(cAGApplication.klass, "mRUBY=", VALUEFUNC(_wrap_AGApplication_mRUBY_set), -1);
+    rb_define_method(cAGApplication.klass, "mRUBY", VALUEFUNC(_wrap_AGApplication_mRUBY_get), -1);
+    cAGApplication.mark = (void (*)(void *)) AGApplication_markfunc;
     cAGApplication.destroy = (void (*)(void *)) free_AGApplication;
     rb_define_module_function(mLibantargis, "disown_AGText", VALUEFUNC(_wrap_disown_AGText), -1);
     
@@ -41134,6 +41322,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntargisMap.klass, "getNewID", VALUEFUNC(_wrap_AntargisMap_getNewID), -1);
     rb_define_method(cAntargisMap.klass, "getNormal", VALUEFUNC(_wrap_AntargisMap_getNormal), -1);
     rb_define_method(cAntargisMap.klass, "updated", VALUEFUNC(_wrap_AntargisMap_updated), -1);
+    rb_define_method(cAntargisMap.klass, "heightChanged", VALUEFUNC(_wrap_AntargisMap_heightChanged), -1);
     rb_define_method(cAntargisMap.klass, "getGCcalls", VALUEFUNC(_wrap_AntargisMap_getGCcalls), -1);
     rb_define_method(cAntargisMap.klass, "resetGCcalls", VALUEFUNC(_wrap_AntargisMap_resetGCcalls), -1);
     rb_define_method(cAntargisMap.klass, "getNext", VALUEFUNC(_wrap_AntargisMap_getNext), -1);
@@ -41146,6 +41335,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAntargisMap.klass, "getAllEntities", VALUEFUNC(_wrap_AntargisMap_getAllEntities), -1);
     rb_define_method(cAntargisMap.klass, "getPos3D", VALUEFUNC(_wrap_AntargisMap_getPos3D), -1);
     rb_define_method(cAntargisMap.klass, "move", VALUEFUNC(_wrap_AntargisMap_move), -1);
+    rb_define_method(cAntargisMap.klass, "frameEnd", VALUEFUNC(_wrap_AntargisMap_frameEnd), -1);
     rb_define_method(cAntargisMap.klass, "clear", VALUEFUNC(_wrap_AntargisMap_clear), -1);
     rb_define_method(cAntargisMap.klass, "removeEntity", VALUEFUNC(_wrap_AntargisMap_removeEntity), -1);
     rb_define_method(cAntargisMap.klass, "truncPos", VALUEFUNC(_wrap_AntargisMap_truncPos), -1);
@@ -41187,6 +41377,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_const(mLibantargis,"TILE_WIDTH", INT2NUM(64));
     rb_define_const(mLibantargis,"TILE_SIZE", INT2NUM(32));
     rb_define_const(mLibantargis,"WATER_HEIGHT", INT2NUM(10));
+    rb_define_const(mLibantargis,"GRASS_HEIGHT", INT2NUM(20));
     rb_define_const(mLibantargis,"MAP_SPLINE_ORDER", INT2NUM(3));
     rb_define_module_function(mLibantargis, "disown_VoxelImageData", VALUEFUNC(_wrap_disown_VoxelImageData), -1);
     
@@ -41365,7 +41556,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cIsoView.klass, "getEntity", VALUEFUNC(_wrap_IsoView_getEntity), -1);
     rb_define_method(cIsoView.klass, "getTile", VALUEFUNC(_wrap_IsoView_getTile), -1);
     rb_define_method(cIsoView.klass, "draw", VALUEFUNC(_wrap_IsoView_draw), -1);
-    cIsoView.mark = 0;
+    cIsoView.mark = (void (*)(void *)) AGWidget_markfunc;
     cIsoView.destroy = (void (*)(void *)) free_IsoView;
     rb_define_module_function(mLibantargis, "disown_CompleteIsoView", VALUEFUNC(_wrap_disown_CompleteIsoView), -1);
     
@@ -41378,7 +41569,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cCompleteIsoView.klass, "eventMouseClick", VALUEFUNC(_wrap_CompleteIsoView_eventMouseClick), -1);
     rb_define_method(cCompleteIsoView.klass, "clickEntities", VALUEFUNC(_wrap_CompleteIsoView_clickEntities), -1);
     rb_define_method(cCompleteIsoView.klass, "clickMap", VALUEFUNC(_wrap_CompleteIsoView_clickMap), -1);
-    cCompleteIsoView.mark = 0;
+    cCompleteIsoView.mark = (void (*)(void *)) AGWidget_markfunc;
     cCompleteIsoView.destroy = (void (*)(void *)) free_CompleteIsoView;
     rb_define_module_function(mLibantargis, "disown_EditIsoView", VALUEFUNC(_wrap_disown_EditIsoView), -1);
     
@@ -41386,13 +41577,14 @@ SWIGEXPORT(void) Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_EditIsoView, (void *) &cEditIsoView);
     rb_define_alloc_func(cEditIsoView.klass, _wrap_EditIsoView_allocate);
     rb_define_method(cEditIsoView.klass, "initialize", VALUEFUNC(_wrap_new_EditIsoView), -1);
-    rb_define_method(cEditIsoView.klass, "toggleEdit", VALUEFUNC(_wrap_EditIsoView_toggleEdit), -1);
+    rb_define_method(cEditIsoView.klass, "setEditing", VALUEFUNC(_wrap_EditIsoView_setEditing), -1);
     rb_define_method(cEditIsoView.klass, "selectSize", VALUEFUNC(_wrap_EditIsoView_selectSize), -1);
     rb_define_method(cEditIsoView.klass, "setAll", VALUEFUNC(_wrap_EditIsoView_setAll), -1);
     rb_define_method(cEditIsoView.klass, "addEntity", VALUEFUNC(_wrap_EditIsoView_addEntity), -1);
     rb_define_method(cEditIsoView.klass, "setRubber", VALUEFUNC(_wrap_EditIsoView_setRubber), -1);
     rb_define_method(cEditIsoView.klass, "togglePoints", VALUEFUNC(_wrap_EditIsoView_togglePoints), -1);
     rb_define_method(cEditIsoView.klass, "editMarkClicked", VALUEFUNC(_wrap_EditIsoView_editMarkClicked), -1);
+    rb_define_method(cEditIsoView.klass, "getMarkerPos", VALUEFUNC(_wrap_EditIsoView_getMarkerPos), -1);
     rb_define_method(cEditIsoView.klass, "eventDragBy", VALUEFUNC(_wrap_EditIsoView_eventDragBy), -1);
     rb_define_method(cEditIsoView.klass, "eventMouseClick", VALUEFUNC(_wrap_EditIsoView_eventMouseClick), -1);
     rb_define_method(cEditIsoView.klass, "getClosest", VALUEFUNC(_wrap_EditIsoView_getClosest), -1);
@@ -41401,7 +41593,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cEditIsoView.klass, "editAt", VALUEFUNC(_wrap_EditIsoView_editAt), -1);
     rb_define_method(cEditIsoView.klass, "sigMapEdited=", VALUEFUNC(_wrap_EditIsoView_sigMapEdited_set), -1);
     rb_define_method(cEditIsoView.klass, "sigMapEdited", VALUEFUNC(_wrap_EditIsoView_sigMapEdited_get), -1);
-    cEditIsoView.mark = 0;
+    cEditIsoView.mark = (void (*)(void *)) AGWidget_markfunc;
     cEditIsoView.destroy = (void (*)(void *)) free_EditIsoView;
     rb_define_module_function(mLibantargis, "toEditIsoView", VALUEFUNC(_wrap_toEditIsoView), -1);
     

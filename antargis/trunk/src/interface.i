@@ -16,9 +16,18 @@
 	Data_Get_Struct($input,AGSurface,b);
 	$result=*b;
 }
-%include "marker.h"
+%include "marker.i"
 
 %include "antmark.h"
+
+
+%exception AGApplication::AGApplication {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+	printf("register:AGApplication\n");
+}
+%markfunc AGApplication "AGApplication_markfunc"
 
 
 

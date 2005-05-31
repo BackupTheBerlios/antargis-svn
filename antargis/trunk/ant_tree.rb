@@ -24,7 +24,7 @@
 class AntNewTree<AntMyEntity
 	def initialize()
 		super(Pos2D.new(0,0))
-		@typeID=0
+		@typeID=(rand()*12).to_i
 		setType("tree")
 		setVirtualY(100)
 	end

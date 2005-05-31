@@ -49,6 +49,7 @@ AntargisMap::AntargisMap(int w,int h):
   mPaused=false;
   maxID=0;
   mGCcalls=0;
+  mHeightChanged=true;
 }
 
 AntargisMap::~AntargisMap()
@@ -172,9 +173,16 @@ std::list<AntEntity*> AntargisMap::getEntities(const AntRect&r)
   return mEntities.get(r);
 }
 
-void AntargisMap::move(float pTime)
+void AntargisMap::frameEnd()
 {
   mUpdated=false;
+  mHeightChanged=false;
+}
+
+void AntargisMap::move(float pTime)
+{
+  //  mUpdated=false;
+  //  mHeightChanged=false;
   if(mPaused)
     return;
   // first move computer-players (they decide what to do)
@@ -229,6 +237,8 @@ void AntargisMap::setAllWater()
     {
       mHeight.setPoint(x,y,0);
     }
+  mHeightChanged=true;
+
 }
 void AntargisMap::setAllLand()
 {
@@ -238,7 +248,7 @@ void AntargisMap::setAllLand()
     {
       mHeight.setPoint(x,y,15);
     }
-  
+  mHeightChanged=true;
 }
 
 void AntargisMap::addFlat(int x,int y,int h,int r)
@@ -291,6 +301,7 @@ void AntargisMap::addFlat(int x,int y,int h,int r)
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
     (*i)->eventMapChanged();
+  mHeightChanged=true;
 
 }
 
@@ -309,6 +320,7 @@ void AntargisMap::addPyramid(int x,int y,int h,int r)
   std::list<AntEntity*>::iterator i=mEntList.begin();
   for(;i!=mEntList.end();i++)
     (*i)->eventMapChanged();
+  mHeightChanged=true;
 
 }
 
@@ -668,3 +680,8 @@ void AntargisMap::resetGCcalls()
 {
   mGCcalls=0;
 }
+bool AntargisMap::heightChanged() const
+{
+  return mHeightChanged;
+}
+

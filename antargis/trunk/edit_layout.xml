@@ -9,7 +9,7 @@
     <button col="5" row="0" name="edit10" caption-image="data/edit10.png"/>
     <button col="6" row="0" name="edit15" caption-image="data/edit15.png"/>
     <button col="7" row="0" name="grass" caption-image="data/grass2.png"/>
-    <button col="8" row="0" name="water" caption-image="data/water2.png"/>
+    <button col="8" row="0" name="allWater" caption-image="data/water2.png"/>
     <button col="9" row="0" name="rubber" caption-image="data/rubber.png"/>
     <button col="10" row="0" name="tree" caption-image="data/small_tree.png"/>
     <button col="11" row="0" name="stones" caption-image="data/stones1a.png"/>

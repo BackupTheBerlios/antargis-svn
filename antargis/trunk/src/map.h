@@ -73,6 +73,7 @@ class AntargisMap
     int maxID;
 
     bool mUpdated;
+    bool mHeightChanged;
 
     //    std::set<MapListener*> mListeners;
     std::list<AntEntity*> mToDel;
@@ -97,6 +98,7 @@ class AntargisMap
     Pos3D getNormal(int x,int y) const;
 
     bool updated() const;
+    bool heightChanged() const;
 
     size_t getGCcalls() const;
     void resetGCcalls();
@@ -119,6 +121,7 @@ class AntargisMap
     Pos3D getPos3D(const Pos2D &p) const;
 
     void move(float pTime);
+    void frameEnd();
 
     void clear();
 

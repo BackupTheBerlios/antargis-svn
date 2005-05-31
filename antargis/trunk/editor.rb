@@ -33,6 +33,7 @@ require 'dialogs.rb'
 require 'ents.rb'
 require 'map.rb'
 require 'view.rb'
+require 'editview.rb'
 
 class AntGameApp <AntApp
 	def initialize()
@@ -46,12 +47,13 @@ class AntGameApp <AntApp
 	
 		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
 		#puts @view
-		@layout=AGLayout.new(nil,loadFile("ant_layout.xml"))
+		@layout=AGLayout.new(nil,loadFile("editor.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
-		
+		puts "LAYOUTNAME:"
+		puts @layout.getName
 		puts @layout.getChild("mainView").getName
 		$screen=@layout
 		
@@ -62,22 +64,29 @@ class AntGameApp <AntApp
 #		getMap.endChange
 	end
 	
-	def initDebug
-		@debug=AGLayout.new(@layout,loadFile("debug.xml"))
-		@layout.addChild(@debug)
-		addHandler(@debug.getChild("load"),:sigClick,:load)
-		addHandler(@debug.getChild("test1"),:sigClick,:test)
-		addHandler(@debug.getChild("save"),:sigClick,:testsave)
-	end
+	#def initDebug
+	#	@debug=AGLayout.new(@layout,loadFile("debug.xml"))
+	#	@layout.addChild(@debug)
+	#	addHandler(@debug.getChild("load"),:sigClick,:load)
+	#	addHandler(@debug.getChild("test1"),:sigClick,:test)
+	#	addHandler(@debug.getChild("save"),:sigClick,:testsave)
+	#end
 	
-	def storyTalk(title,text)
-		@story=AntStoryTalk.new(@layout)
-		@layout.addChild(@story)
-		@story.setText(text)
-		@story.setTitle(title)
-	end
+	##def storyTalk(title,text)
+	#	@story=AntStoryTalk.new(@layout)
+	#	@layout.addChild(@story)
+	#	@story.setText(text)
+	#	@story.setTitle(title)
+	#end
 
 	def eventFrame(time)
+		# prevent view from updating each frame
+		if getMap.updated or getMap.heightChanged
+			#GC.start
+			getMap.move(0)
+			#GC.start
+		end
+		return
 		if $fc==nil then 
 			$fc=0 
 			$elaps=0
@@ -94,7 +103,9 @@ class AntGameApp <AntApp
 		return true
 	end
 	def eventFrameEnd(time)
+		#puts "EVENT FRAME END"
 		getMap.frameEnd
+		#GC.start
 	end
 	
 	def eventIdle
@@ -126,33 +137,6 @@ class AntGameApp <AntApp
 	end
 	def load
 		@layout.addChild(AntLoadDialog.new(@layout))
-	end
-	
-	def test
-		puts "TESTTTTTTTTTTTTTTTTTTTTTTTTT"
-		getMap.clear
-		#ent=AntMan.new(Pos2D.new(30,230),0,nil)
-		(0..10).each{
-		ent=AntNewMan.new
-		ent.setPos2D(Pos2D.new(500,530))
-		$map.insertEntity(ent)
-		}
-		
-		ent=AntNewTree.new
-		ent.setPos2D(Pos2D.new(400,400))
-		$map.insertEntity(ent)
-		
-		puts ent
-		ent2=AntNewHouse.new
-		ent2.setPos2D(Pos2D.new(600,600))
-		$map.insertEntity(ent2)
-		puts "GC"
-		GC.start
-		
-		getMap.endChange
-	end
-	def testsave
-		getMap.saveMap("savegame2")
 	end
 	
 end
