@@ -22,7 +22,7 @@
 #!/usr/bin/ruby
 
 
-class AntRubyView <EditIsoView
+class AntRubyView <CompleteIsoView
 	def initialize(p,rect,pos,map)
 		super(p,rect,pos,map)
 		$antView=self

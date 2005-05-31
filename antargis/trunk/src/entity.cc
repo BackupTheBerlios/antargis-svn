@@ -94,7 +94,7 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   assert(onGround);
   xmlpp::Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
-    mPos.loadXML(*i);
+    mPos.loadXML(**i);
   //  mID=toInt(node.get("entityID"));
   if(node.get("morale")!="")
     mMorale=toFloat(node.get("morale"));

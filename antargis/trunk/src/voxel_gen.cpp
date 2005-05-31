@@ -447,6 +447,11 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
 
 
         int mgh=(int)gm.get(mx,mz);
+	if(2*h<3*GRASS_HEIGHT)  // h<1.5*GRASS_HEIGHT
+	  {
+	    mgh*=(h-(GRASS_HEIGHT/2));
+	    mgh/=GRASS_HEIGHT;
+	  }
         if(mgh>0)
           {
             float gh=rand()%int(mgh);
@@ -456,7 +461,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
                   float a=1.0f-(y/gh);
                   int mh=(int)(y+h);
                   //    cdebug(a);
-                  if(mh>GRASS_HEIGHT)
+		  //                  if(mh>GRASS_HEIGHT)
                     v.set(Pos3D(x,mh,z),Color(0,0xAA,0,a));
                 }
           }

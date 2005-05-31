@@ -87,6 +87,12 @@ void IsoView::init()
   int mw=width()/64+2;
   int mh=height()/16+4;
 
+
+  Uint32 t0=SDL_GetTicks();
+
+
+
+
   // 800x600 0<=x<13   0<=y<40
   // 1400x1024 0<=x<23   0<=y<74
 
@@ -102,6 +108,7 @@ void IsoView::init()
 
   mh+=4;
 
+  getSurfaceManager()->disableGC();
 
   for(int y=sy;y<mh+sy;y++) // 40
     {
@@ -111,15 +118,15 @@ void IsoView::init()
           int my=y*(POINTS_PER_TILE/2);
           if(y&1)
             mx+=(POINTS_PER_TILE/2);
-
+	  
 
           AVItem *i;
-          // insert water tile
+	  /*          // insert water tile
           i=getWaterTile();
           i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
           i->setVirtualY(-42);
           insert(i);
-
+	  
 
           // now insert terrain (that it's after water)
           //          cdebug("mx:"<<mx<<"//"<<my);
@@ -131,10 +138,12 @@ void IsoView::init()
           insert(i);
 
           SplineMapD g=mMap->getPatchG(mx,my);
-
+	  */
           IVTile tile;
           tile.x=mx;
           tile.y=my;
+	  //          AVItem *i;
+	  
           i=mTileCache[tile]; // get AVItem from cache
           if(i)
             {
@@ -142,10 +151,19 @@ void IsoView::init()
               insert(i);
               mTiles[i]=tile;
             }
-
-
+	  i=mWaterTileCache[tile];
+	  if(i)
+	    {
+	      insert(i);
+	    }
+	  
         }
     }
+
+
+  Uint32 t1=SDL_GetTicks();
+
+  cdebug("TIME0:"<<t1-t0);
 
   // insert entities
   std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
@@ -159,6 +177,12 @@ void IsoView::init()
       insert(image);
     }
   inited=true;
+  Uint32 t2=SDL_GetTicks();
+
+  cdebug("TIME:"<<t2-t1);
+  cdebug("TIME:"<<t2-t0);
+
+  getSurfaceManager()->enableGC();
 
 }
 
@@ -202,6 +226,11 @@ void IsoView::initTileCache()
           tile.x=mx;
           tile.y=my;
           mTileCache[tile]=i;
+
+          i=getWaterTile();
+          i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
+          i->setVirtualY(-42);
+          mWaterTileCache[tile]=i;
         }
     }
 
@@ -335,25 +364,17 @@ IVTile IsoView::getTile(const AGPoint &pp)
 
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
-  if(mMap->heightChanged())
+  if(mMap->heightChanged() || !inited)
     {
       CTRACE;
       completeUpdate();
-    }
-  else if(mMap->updated())
-    {
-      CTRACE;
-      mapUpdate();
-    }
-  if(!inited)
-    {
-      init();
       inited=true;
       shallUpdate=false;
     }
-  if(shallUpdate)
+  else if(mMap->updated() || shallUpdate)
     {
-      update();
+      CTRACE;
+      mapUpdate();
       shallUpdate=false;
     }
 
@@ -878,6 +899,8 @@ void EditIsoView::init()
   if(sy<0)
     sy=0;
 
+  getSurfaceManager()->disableGC();
+
   for(int y=-1+sy;y<mh+sy;y++)
     {
       for(int x=-1+sx;x<mw+sx;x++)
@@ -900,6 +923,7 @@ void EditIsoView::init()
           mPoints.push_back(i);
         }
     }
+  getSurfaceManager()->enableGC();
 }
 
 EditIsoView &toEditIsoView(AGWidget &w)

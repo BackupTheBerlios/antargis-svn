@@ -43,6 +43,7 @@ class IsoView:public AntargisView
     AntargisMap *mMap;
     std::map<AVItem*,IVTile> mTiles;
     std::map<IVTile,AVItem*> mTileCache;
+    std::map<IVTile,AVItem*> mWaterTileCache;
     float mTime;
     bool inited;
     Rain mRain;

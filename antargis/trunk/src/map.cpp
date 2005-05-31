@@ -326,17 +326,11 @@ void AntargisMap::addPyramid(int x,int y,int h,int r)
 
 void AntargisMap::saveXML(xmlpp::Node &node) const
   {
-    // entities
-    std::list<AntEntity*>::const_iterator i=mEntList.begin();
-    for(;i!=mEntList.end();i++)
-      {
-        xmlpp::Node &child=node.newChild((*i)->xmlName());
-        (*i)->saveXML(child);
-      }
-      
+    CTRACE;
+    cdebug("node:"<<&node);
     // height and grass map
-    xmlpp::Node &hmap=node.newChild("heightMap");
-    xmlpp::Node &gmap=node.newChild("grassMap");
+    xmlpp::Node &hmap=*node.add_child("heightMap");
+    xmlpp::Node &gmap=*node.add_child("grassMap");
     hmap.set("width",toString(mW));
     hmap.set("height",toString(mH));
     gmap.set("width",toString(mW));
@@ -365,6 +359,14 @@ void AntargisMap::saveXML(xmlpp::Node &node) const
       (*k)->saveXML(child);
       }*/
 
+    // entities
+    std::list<AntEntity*>::const_iterator i=mEntList.begin();
+    for(;i!=mEntList.end();i++)
+      {
+        xmlpp::Node &child=node.newChild((*i)->xmlName());
+        (*i)->saveXML(child);
+      }
+
   }
 
 AntEntity *AntargisMap::loadEntity(const xmlpp::Node &node)
@@ -392,13 +394,14 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
     {
       TRACE;
       AntEntity *e=0;
-      if(i->getName()=="heightMap")
+      Node *n=*i;
+      if(n->getName()=="heightMap")
         {
           CTRACE;
-          cdebug("content:"<<i->getContent());
+          cdebug("content:"<<n->getContent());
           cdebug("---");
           std::istringstream hmaps;
-          hmaps.str(i->getContent());
+          hmaps.str(n->getContent());
           // parse height map
           float h;
           cdebug("mH:"<<mH);
@@ -413,7 +416,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
               cdebug("j:"<<j);
             }
         }
-      else if((e=loadEntity(*i)))
+      else if((e=loadEntity(*n)))
 	{
 	}
       /*       else if(i->getName()=="antTree")
@@ -435,7 +438,7 @@ void AntargisMap::loadXML(const xmlpp::Node &node)
       */
        if(e)
        {
-        e->loadXML(*i);
+        e->loadXML(*n);
         insertEntity(e);
        }
         
@@ -471,7 +474,9 @@ void AntargisMap::saveMap(const std::string &pFilename)
 {
   xmlpp::Document d;
   Node *root=createRootNode(d,"antargisLevel");
+  cdebug("root:"<<root);
   saveXML(*root);
+    
   std::string c=toString(d);
   cdebug(c);
   saveFile(pFilename,c);

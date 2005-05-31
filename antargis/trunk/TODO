@@ -1,3 +1,8 @@
+* FIX saving - xml::Node must have rb_gc_mark 's
+ * some shit is going on in std::vector ????
+
+
+
 [Gui/View]
 =================================================
 [M] pointing device for selecting man/sheep and so

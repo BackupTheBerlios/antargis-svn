@@ -43,7 +43,7 @@ class AntGameApp <AntApp
 		@map=AntRubyMap.new(128,128)	
 		$map=@map
 		# load a level
-		getMap().loadMap("savegames/savegame6.antlvl")
+		#getMap().loadMap("savegames/savegame6.antlvl")
 	
 		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
 		#puts @view
@@ -82,9 +82,7 @@ class AntGameApp <AntApp
 	def eventFrame(time)
 		# prevent view from updating each frame
 		if getMap.updated or getMap.heightChanged
-			#GC.start
 			getMap.move(0)
-			#GC.start
 		end
 		return
 		if $fc==nil then 
@@ -99,17 +97,14 @@ class AntGameApp <AntApp
 		$fc+=1
 		$elaps+=time
 		getMap().move(time)
-		#GC.start
 		return true
 	end
 	def eventFrameEnd(time)
 		#puts "EVENT FRAME END"
 		getMap.frameEnd
-		#GC.start
 	end
 	
 	def eventIdle
-		#GC.start
 	end
 	
 	# signals	
