@@ -1,6 +1,4 @@
-* FIX saving - xml::Node must have rb_gc_mark 's
- * some shit is going on in std::vector ????
-
+* Check if new TextureManager if better than old - otherwise restore old one
 
 
 [Gui/View]

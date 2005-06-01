@@ -1023,6 +1023,7 @@ public:
 class SwigDirector_VoxelImage : public VoxelImage, public Swig::Director {
 
 public:
+    SwigDirector_VoxelImage(VALUE self, VoxelImage const &vi);
     SwigDirector_VoxelImage(VALUE self, AGSurface pSurface, Pos3D pPos);
     SwigDirector_VoxelImage(VALUE self, std::string const &pFilename);
     virtual ~SwigDirector_VoxelImage();

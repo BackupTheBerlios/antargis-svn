@@ -276,6 +276,13 @@ void AntargisView::clear()
 // VoxelImage
 ///////////////////////////////////////////////////////////////////////////////
 
+VoxelImage::VoxelImage(const VoxelImage &vi):
+  AVItem(Pos3D(0,0,0))
+{
+  mTexture=vi.mTexture;
+  setCenter(vi.getCenter());
+}
+
 VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
     AVItem(pPos)
 {

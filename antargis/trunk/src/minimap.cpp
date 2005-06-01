@@ -104,7 +104,8 @@ void MiniMap::update()
 
 void MiniMap::draw(AGPainter &p)//const AGRect &r)
 {
-  if(mMap->updated())
+  //  if(mMap->updated() || map->HeightChanged())
+  if(mMap->heightChanged())
     mapUpdate();
 
 //  CTRACE;

@@ -130,6 +130,7 @@ class VoxelImage:public AVItem
 {
   std::string mName;
  public:
+  VoxelImage(const VoxelImage &vi);
   VoxelImage(AGSurface pSurface,Pos3D pPos);
   VoxelImage(const std::string &pFilename);
   virtual void init();

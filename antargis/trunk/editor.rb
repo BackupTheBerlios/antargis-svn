@@ -52,9 +52,12 @@ class AntGameApp <AntApp
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
+		
+		addHandler(@layout.getChild("doGen"),:sigClick,:sigGenerate)
+		
 		puts "LAYOUTNAME:"
 		puts @layout.getName
-		puts @layout.getChild("mainView").getName
+		#puts @layout.getChild("mainView").getName
 		$screen=@layout
 		
 #		initDebug
@@ -62,6 +65,26 @@ class AntGameApp <AntApp
 		#storyTalk("Welcome","Welcome to Battles of Antargis")
 		#test
 #		getMap.endChange
+	end
+	
+	def sigGenerate
+		map=getMap
+		map.setAllWater
+		
+		w=map.width
+		h=map.height
+		
+		flat=[[15,9],[10,8],[5,40],[4,30],[3,70],[2,70],[1,70]]
+		flat.each{|add|
+			for i in 1..add[1]
+				rad=add[0]
+				x=rand*(w-2*rad)+rad
+				y=rand*(h-2*rad)+rad
+				map.addFlat(x,y,30,rad)
+			end
+		}
+		
+		
 	end
 	
 	#def initDebug

@@ -14446,6 +14446,12 @@ void SwigDirector_AntargisView::addChild(AGWidget *w) {
 }
 
 
+SwigDirector_VoxelImage::SwigDirector_VoxelImage(VALUE self, VoxelImage const &vi): VoxelImage(vi), Swig::Director(self) {
+    
+}
+
+
+
 SwigDirector_VoxelImage::SwigDirector_VoxelImage(VALUE self, AGSurface pSurface, Pos3D pPos): VoxelImage(pSurface, pPos), Swig::Director(self) {
     
 }
@@ -34153,6 +34159,30 @@ _wrap_disown_AntargisView(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_new_VoxelImage__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
+    VoxelImage *arg2 = 0 ;
+    VoxelImage *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_VoxelImage, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    char *classname = "Libantargis::VoxelImage";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (VoxelImage *)new SwigDirector_VoxelImage(arg1,(VoxelImage const &)*arg2);
+        
+    } else {
+        result = (VoxelImage *)new VoxelImage((VoxelImage const &)*arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_VoxelImage__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     AGSurface arg2 ;
     Pos3D arg3 ;
     VoxelImage *result;
@@ -34202,7 +34232,7 @@ _wrap_VoxelImage_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_VoxelImage__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_VoxelImage__SWIG_2(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     std::string *arg2 = 0 ;
     VoxelImage *result;
@@ -34248,10 +34278,23 @@ static VALUE _wrap_new_VoxelImage(int nargs, VALUE *args, VALUE self) {
         _v = (argv[0] != T_NONE);
         if (_v) {
             {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_VoxelImage, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_VoxelImage__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
                 _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_VoxelImage__SWIG_1(nargs, args, self);
+                return _wrap_new_VoxelImage__SWIG_2(nargs, args, self);
             }
         }
     }
@@ -34269,7 +34312,7 @@ static VALUE _wrap_new_VoxelImage(int nargs, VALUE *args, VALUE self) {
                     _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_Pos3D, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_VoxelImage__SWIG_0(nargs, args, self);
+                    return _wrap_new_VoxelImage__SWIG_1(nargs, args, self);
                 }
             }
         }
@@ -36566,6 +36609,10 @@ _wrap_new_EditIsoView(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_EditIsoView(EditIsoView *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_EditIsoView_setEditing(int argc, VALUE *argv, VALUE self) {
     EditIsoView *arg1 = (EditIsoView *) 0 ;
@@ -36921,10 +36968,6 @@ _wrap_EditIsoView_sigMapEdited_get(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_EditIsoView(EditIsoView *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_EditIsoView(int argc, VALUE *argv, VALUE self) {
     EditIsoView *arg1 = (EditIsoView *) 0 ;

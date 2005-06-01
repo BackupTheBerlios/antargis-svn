@@ -626,7 +626,15 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   layout->getChild("pins")->sigClick.connect(slot(this,&EditIsoView::togglePoints));
   layout->getChild("tower")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   #endif
+
+  mWhitePin=new VoxelImage("white_pin");
 }
+
+EditIsoView::~EditIsoView()
+{
+  delete mWhitePin;
+}
+
 bool EditIsoView::togglePoints(const std::string&name,const AGEvent *e,AGMessageObject *pCaller)
 {
   toggleShowPoints();
@@ -901,6 +909,11 @@ void EditIsoView::init()
 
   getSurfaceManager()->disableGC();
 
+
+  Uint32 t0=SDL_GetTicks();
+
+
+
   for(int y=-1+sy;y<mh+sy;y++)
     {
       for(int x=-1+sx;x<mw+sx;x++)
@@ -915,7 +928,7 @@ void EditIsoView::init()
           //my-=TILE_WIDTH/2;
 
           Pos3D mp(mx,getMap()->getHeight(Pos2D(mx,my)),my); // start one into zeroness
-          VoxelImage *i=new VoxelImage("white_pin");
+	  VoxelImage *i=new VoxelImage(*mWhitePin);////////"white_pin");
           i->setPosition(mp);
           i->setVirtualY(150);
 
@@ -923,6 +936,9 @@ void EditIsoView::init()
           mPoints.push_back(i);
         }
     }
+
+  Uint32 t1=SDL_GetTicks();
+  cdebug("TIME0:"<<t1-t0);
   getSurfaceManager()->enableGC();
 }
 

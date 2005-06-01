@@ -134,6 +134,7 @@ class EditIsoView: public CompleteIsoView
     
   public:
     EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map);
+    virtual ~EditIsoView();
 
     //    void toggleEdit();
     void setEditing(bool value);
@@ -162,6 +163,9 @@ class EditIsoView: public CompleteIsoView
     
   protected:
     virtual void init();
+
+  private:
+    VoxelImage *mWhitePin;
   };
 
 EditIsoView &toEditIsoView(AGWidget &w);
