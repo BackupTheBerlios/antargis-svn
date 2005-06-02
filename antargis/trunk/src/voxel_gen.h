@@ -24,20 +24,33 @@
 #include <ag_surface.h>
 #include <ag_widget.h>
 
+
 #include "decast.h"
 
+#ifdef HIGH_VOXEL_DETAIL
 #define POINTS_PER_TILE 2
 #define TILE_WIDTH 64
 #define TILE_SIZE 32
 #define WATER_HEIGHT 10
 #define GRASS_HEIGHT 20
 
-#define MAP_SPLINE_ORDER 3
+#define TILEDIR std::string("tiles/")
+
+#define SplineMapD SplineMap //int brings some small improvement - but makes problems with water
+
+#else
+#define POINTS_PER_TILE 2
+#define TILE_WIDTH 64
+#define TILE_SIZE 32
+#define WATER_HEIGHT 10
+#define GRASS_HEIGHT 20
 
 #define TILEDIR std::string("tiles/")
 
-#define SplineMapD SplineMap<float,4> //int brings some small improvement - but makes problems with water
+#define SplineMapD SplineMap //int brings some small improvement - but makes problems with water
 
+
+#endif
 class AntargisView;
 
 class VoxelImageData

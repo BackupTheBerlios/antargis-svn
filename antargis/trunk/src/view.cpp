@@ -205,6 +205,40 @@ void IsoView::initTileCache()
   // goes to max of map
   mw=mMap->width()/2-3;
   mh=mMap->height()-6;
+
+
+  //  mw/=4;
+  //  mh/=4;
+
+
+  std::set<std::string> tiles;
+
+  // first check how much tiles there will be
+  for(int y=0;y<mh;y++) // 40
+    for(int x=0;x<mw;x++) // 13  for 800x600
+      {
+          int mx=x*(POINTS_PER_TILE);
+          int my=y*(POINTS_PER_TILE/2);
+          if(y&1)
+            mx+=(POINTS_PER_TILE/2);
+
+          //          cdebug("mx:"<<mx<<"//"<<my);
+
+          SplineMapD h=mMap->getPatchH(mx,my);
+          SplineMapD g=mMap->getPatchG(mx,my);
+	  tiles.insert(h.toString()+g.toString());
+      }
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+  cdebug("TILES:"<<tiles.size());
+
+
   for(int y=0;y<mh;y++) // 40
     {
       for(int x=0;x<mw;x++) // 13  for 800x600
@@ -226,6 +260,31 @@ void IsoView::initTileCache()
           tile.x=mx;
           tile.y=my;
           mTileCache[tile]=i;
+	  //	  getTextureManager()->cleanup();
+        }
+    }
+
+  cdebug("WATER::::::::::::::::::::");
+
+  // generating water
+  for(int y=0;y<mh;y++) // 40
+    {
+      for(int x=0;x<mw;x++) // 13  for 800x600
+        {
+          int mx=x*(POINTS_PER_TILE);
+          int my=y*(POINTS_PER_TILE/2);
+          if(y&1)
+            mx+=(POINTS_PER_TILE/2);
+
+          //          cdebug("mx:"<<mx<<"//"<<my);
+
+          SplineMapD h=mMap->getPatchH(mx,my);
+          SplineMapD g=mMap->getPatchG(mx,my);
+
+          VoxelImage *i;
+          IVTile tile;
+          tile.x=mx;
+          tile.y=my;
 
           i=getWaterTile();
           i->setPosition(Pos3D(mx*TILE_WIDTH/POINTS_PER_TILE,0,my*TILE_WIDTH/POINTS_PER_TILE));
@@ -233,6 +292,8 @@ void IsoView::initTileCache()
           mWaterTileCache[tile]=i;
         }
     }
+
+
 
 }
 

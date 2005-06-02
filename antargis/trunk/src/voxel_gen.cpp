@@ -289,7 +289,8 @@ VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
   mSurface=pSurface;
   //  SDL_SaveBMP(pSurface.surface(),"hupe3.bmp");
   //  SDL_SaveBMP(mSurface.surface(),"hupe4.bmp");
-  mTexture=new AGTexture(getTextureManager()->makeTexture(mSurface));
+  mTexture=0; // no need to convert to texture here
+  //  mTexture=new AGTexture(getTextureManager()->makeTexture(mSurface));
   //  mSurface=SDL_DisplayFormatAlpha(pSurface.surface());
   setCenter(Pos2D(mSurface.width()/2,mSurface.height()-mSurface.width()/4));
 }
@@ -439,7 +440,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
 
         //  cdebug(mx<<" "<<mz);
         float h=m.get(mx,mz);
-        for(int y=std::max(0,(int)(h-3));y<h;y++)
+        for(int y=std::max(0,(int)(h-6));y<h;y++)
           {
             if(y>WATER_HEIGHT)
             {

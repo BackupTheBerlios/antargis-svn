@@ -853,44 +853,44 @@ type_error:
 #define  SWIGTYPE_p_AntEntityPtr swig_types[7] 
 #define  SWIGTYPE_p_ParserInfo swig_types[8] 
 #define  SWIGTYPE_p_AGHTiler swig_types[9] 
-#define  SWIGTYPE_p_AGLayout swig_types[10] 
-#define  SWIGTYPE_p_AGMain swig_types[11] 
-#define  SWIGTYPE_p_NodeVector swig_types[12] 
-#define  SWIGTYPE_p_Color swig_types[13] 
-#define  SWIGTYPE_p_AGVTiler swig_types[14] 
-#define  SWIGTYPE_p_AGCheckBox swig_types[15] 
-#define  SWIGTYPE_p_VoxelView swig_types[16] 
-#define  SWIGTYPE_p_AGLayoutFactory swig_types[17] 
-#define  SWIGTYPE_p_FastVoxelView swig_types[18] 
-#define  SWIGTYPE_p_AGSound swig_types[19] 
-#define  SWIGTYPE_p_CVBitmapTDepthInfo_t swig_types[20] 
-#define  SWIGTYPE_p_AGFont swig_types[21] 
-#define  SWIGTYPE_p_AGScreen swig_types[22] 
-#define  SWIGTYPE_p_AGEditLine swig_types[23] 
-#define  SWIGTYPE_p_AGTable swig_types[24] 
-#define  SWIGTYPE_p_AntargisMap swig_types[25] 
-#define  SWIGTYPE_p_std__mapTstd__string_int_t swig_types[26] 
-#define  SWIGTYPE_p_AGListBoxItem swig_types[27] 
-#define  SWIGTYPE_p_Rect2D swig_types[28] 
-#define  SWIGTYPE_p_AGSignal swig_types[29] 
-#define  SWIGTYPE_p_AGColor swig_types[30] 
-#define  SWIGTYPE_p_IVTile swig_types[31] 
-#define  SWIGTYPE_p_AGLayoutCreator swig_types[32] 
-#define  SWIGTYPE_p_AGButton swig_types[33] 
-#define  SWIGTYPE_p_AVItem swig_types[34] 
-#define  SWIGTYPE_p_std__vectorTNode_t swig_types[35] 
-#define  SWIGTYPE_p_AGSurface swig_types[36] 
-#define  SWIGTYPE_p_SDL_Surface swig_types[37] 
-#define  SWIGTYPE_p_AntEntity swig_types[38] 
-#define  SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D swig_types[39] 
-#define  SWIGTYPE_p_std__vectorTNode_p_t swig_types[40] 
-#define  SWIGTYPE_p_AntRect swig_types[41] 
-#define  SWIGTYPE_p_AGImage swig_types[42] 
-#define  SWIGTYPE_p_ParserException swig_types[43] 
-#define  SWIGTYPE_p_Uint32 swig_types[44] 
-#define  SWIGTYPE_p_AGApplication swig_types[45] 
-#define  SWIGTYPE_p_Pos3D swig_types[46] 
-#define  SWIGTYPE_p_SplineMapTfloat_4_t swig_types[47] 
+#define  SWIGTYPE_p_SplineMap swig_types[10] 
+#define  SWIGTYPE_p_AGLayout swig_types[11] 
+#define  SWIGTYPE_p_AGMain swig_types[12] 
+#define  SWIGTYPE_p_NodeVector swig_types[13] 
+#define  SWIGTYPE_p_Color swig_types[14] 
+#define  SWIGTYPE_p_AGVTiler swig_types[15] 
+#define  SWIGTYPE_p_AGCheckBox swig_types[16] 
+#define  SWIGTYPE_p_VoxelView swig_types[17] 
+#define  SWIGTYPE_p_AGLayoutFactory swig_types[18] 
+#define  SWIGTYPE_p_FastVoxelView swig_types[19] 
+#define  SWIGTYPE_p_AGSound swig_types[20] 
+#define  SWIGTYPE_p_CVBitmapTDepthInfo_t swig_types[21] 
+#define  SWIGTYPE_p_AGFont swig_types[22] 
+#define  SWIGTYPE_p_AGScreen swig_types[23] 
+#define  SWIGTYPE_p_AGEditLine swig_types[24] 
+#define  SWIGTYPE_p_AGTable swig_types[25] 
+#define  SWIGTYPE_p_AntargisMap swig_types[26] 
+#define  SWIGTYPE_p_std__mapTstd__string_int_t swig_types[27] 
+#define  SWIGTYPE_p_AGListBoxItem swig_types[28] 
+#define  SWIGTYPE_p_Rect2D swig_types[29] 
+#define  SWIGTYPE_p_AGSignal swig_types[30] 
+#define  SWIGTYPE_p_AGColor swig_types[31] 
+#define  SWIGTYPE_p_IVTile swig_types[32] 
+#define  SWIGTYPE_p_AGLayoutCreator swig_types[33] 
+#define  SWIGTYPE_p_AGButton swig_types[34] 
+#define  SWIGTYPE_p_AVItem swig_types[35] 
+#define  SWIGTYPE_p_std__vectorTNode_t swig_types[36] 
+#define  SWIGTYPE_p_AGSurface swig_types[37] 
+#define  SWIGTYPE_p_SDL_Surface swig_types[38] 
+#define  SWIGTYPE_p_AntEntity swig_types[39] 
+#define  SWIGTYPE_p_f_r_q_const__Pos3D__Pos2D swig_types[40] 
+#define  SWIGTYPE_p_std__vectorTNode_p_t swig_types[41] 
+#define  SWIGTYPE_p_AntRect swig_types[42] 
+#define  SWIGTYPE_p_AGImage swig_types[43] 
+#define  SWIGTYPE_p_ParserException swig_types[44] 
+#define  SWIGTYPE_p_Uint32 swig_types[45] 
+#define  SWIGTYPE_p_AGApplication swig_types[46] 
+#define  SWIGTYPE_p_Pos3D swig_types[47] 
 #define  SWIGTYPE_p_AGSDLEvent swig_types[48] 
 #define  SWIGTYPE_p_FastView swig_types[49] 
 #define  SWIGTYPE_p_VeryFastView swig_types[50] 
@@ -34463,8 +34463,8 @@ _wrap_disown_VoxelImage(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_makeTerrainTile(int argc, VALUE *argv, VALUE self) {
-    SplineMap<float,4 > *arg1 = 0 ;
-    SplineMap<float,4 > *arg2 = 0 ;
+    SplineMap *arg1 = 0 ;
+    SplineMap *arg2 = 0 ;
     int arg3 ;
     int arg4 ;
     VoxelImage *result;
@@ -34472,11 +34472,11 @@ _wrap_makeTerrainTile(int argc, VALUE *argv, VALUE self) {
     
     if ((argc < 4) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_SplineMapTfloat_4_t, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SplineMapTfloat_4_t, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_SplineMap, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SplineMap, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     arg3 = NUM2INT(argv[2]);
     arg4 = NUM2INT(argv[3]);
-    result = (VoxelImage *)makeTerrainTile((SplineMap<float,4 > const &)*arg1,(SplineMap<float,4 > const &)*arg2,arg3,arg4);
+    result = (VoxelImage *)makeTerrainTile((SplineMap const &)*arg1,(SplineMap const &)*arg2,arg3,arg4);
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_VoxelImage,0);
     return vresult;
@@ -36029,8 +36029,8 @@ _wrap_disown_FastVoxelView(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_makeTerrainTileComplex(int argc, VALUE *argv, VALUE self) {
-    SplineMap<float,4 > *arg1 = 0 ;
-    SplineMap<float,4 > *arg2 = 0 ;
+    SplineMap *arg1 = 0 ;
+    SplineMap *arg2 = 0 ;
     int arg3 ;
     int arg4 ;
     ComplexVoxelImage *result;
@@ -36038,11 +36038,11 @@ _wrap_makeTerrainTileComplex(int argc, VALUE *argv, VALUE self) {
     
     if ((argc < 4) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_SplineMapTfloat_4_t, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SplineMapTfloat_4_t, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_SplineMap, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_SplineMap, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     arg3 = NUM2INT(argv[2]);
     arg4 = NUM2INT(argv[3]);
-    result = (ComplexVoxelImage *)makeTerrainTileComplex((SplineMap<float,4 > const &)*arg1,(SplineMap<float,4 > const &)*arg2,arg3,arg4);
+    result = (ComplexVoxelImage *)makeTerrainTileComplex((SplineMap const &)*arg1,(SplineMap const &)*arg2,arg3,arg4);
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_ComplexVoxelImage,0);
     return vresult;
@@ -40014,6 +40014,7 @@ static swig_type_info _swigt__p_AGMenu[] = {{"_p_AGMenu", 0, "AGMenu *", 0, 0, 0
 static swig_type_info _swigt__p_AntEntityPtr[] = {{"_p_AntEntityPtr", 0, "AntEntityPtr *", 0, 0, 0, 0},{"_p_AntEntityPtr", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserInfo[] = {{"_p_ParserInfo", 0, "ParserInfo *", 0, 0, 0, 0},{"_p_ParserInfo", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGHTiler[] = {{"_p_AGHTiler", 0, "AGHTiler *", 0, 0, 0, 0},{"_p_AGHTiler", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_SplineMap[] = {{"_p_SplineMap", 0, "SplineMap *", 0, 0, 0, 0},{"_p_SplineMap", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayout[] = {{"_p_AGLayout", 0, "AGLayout *", 0, 0, 0, 0},{"_p_AGLayout", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMain[] = {{"_p_AGMain", 0, "AGMain *", 0, 0, 0, 0},{"_p_AGMain", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_NodeVector[] = {{"_p_NodeVector", 0, "NodeVector *", 0, 0, 0, 0},{"_p_NodeVector", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -40051,7 +40052,6 @@ static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "
 static swig_type_info _swigt__p_Uint32[] = {{"_p_Uint32", 0, "Uint32 *", 0, 0, 0, 0},{"_p_Uint32", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGApplication[] = {{"_p_AGApplication", 0, "AGApplication *", 0, 0, 0, 0},{"_p_AGApplication", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Pos3D[] = {{"_p_Pos3D", 0, "Pos3D *", 0, 0, 0, 0},{"_p_Pos3D", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_SplineMapTfloat_4_t[] = {{"_p_SplineMapTfloat_4_t", 0, "SplineMap<float,4 > *", 0, 0, 0, 0},{"_p_SplineMapTfloat_4_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSDLEvent[] = {{"_p_AGSDLEvent", 0, "AGSDLEvent *", 0, 0, 0, 0},{"_p_AGSDLEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_FastView[] = {{"_p_FastView", 0, "FastView *", 0, 0, 0, 0},{"_p_FastView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_VeryFastView[] = {{"_p_VeryFastView", 0, "VeryFastView *", 0, 0, 0, 0},{"_p_VeryFastView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -40126,6 +40126,7 @@ _swigt__p_AGMenu,
 _swigt__p_AntEntityPtr, 
 _swigt__p_ParserInfo, 
 _swigt__p_AGHTiler, 
+_swigt__p_SplineMap, 
 _swigt__p_AGLayout, 
 _swigt__p_AGMain, 
 _swigt__p_NodeVector, 
@@ -40163,7 +40164,6 @@ _swigt__p_ParserException,
 _swigt__p_Uint32, 
 _swigt__p_AGApplication, 
 _swigt__p_Pos3D, 
-_swigt__p_SplineMapTfloat_4_t, 
 _swigt__p_AGSDLEvent, 
 _swigt__p_FastView, 
 _swigt__p_VeryFastView, 
@@ -41476,7 +41476,6 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_const(mLibantargis,"TILE_SIZE", INT2NUM(32));
     rb_define_const(mLibantargis,"WATER_HEIGHT", INT2NUM(10));
     rb_define_const(mLibantargis,"GRASS_HEIGHT", INT2NUM(20));
-    rb_define_const(mLibantargis,"MAP_SPLINE_ORDER", INT2NUM(3));
     rb_define_module_function(mLibantargis, "disown_VoxelImageData", VALUEFUNC(_wrap_disown_VoxelImageData), -1);
     
     cVoxelImageData.klass = rb_define_class_under(mLibantargis, "VoxelImageData", rb_cObject);

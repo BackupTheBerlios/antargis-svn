@@ -7,7 +7,7 @@ libantargis_la_SOURCES = ant_geometry.cpp ant_rect.cpp decast.cpp game.cpp \
  tree.cpp view.cpp voxel.cpp voxel_gen.cpp ant_geometry.h ant_rect.h cvinfo.h decast.h \
  game.h map.h md5.h minimap.h mpng.h myapp.h mystring.h pmd5.h quadtree.h \
  rain.h random_map.h serialize.h store.h texture_cache.h tree.h view.h voxel_gen.h voxel.h antargisruby.cc antargisruby.h \
- jobs.h jobs.cc entity.cc entity.h
+ jobs.h jobs.cc entity.cc entity.h random_map.cc
 LDADD = -lantargis
 
 # old:

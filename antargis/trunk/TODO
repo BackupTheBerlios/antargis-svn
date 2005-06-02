@@ -1,5 +1,5 @@
 * Check if new TextureManager if better than old - otherwise restore old one
-
+* 
 
 [Gui/View]
 =================================================
@@ -16,6 +16,7 @@
 =================================================
 [L] support different grass height and different earth colors (editor)
 [L] check lighting of voxel-generation (is adding white light - should be multiplication)
+[L] convert spline to interpolating spline! => this halfes the tile-count
 
 [Game]
 =================================================
