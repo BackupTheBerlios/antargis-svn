@@ -561,28 +561,37 @@ AGTextureManager::~AGTextureManager()
     }
 }
 
-bool mTrap=false;
+/*bool mTrap=false;
 void setTrap()
 {
   mTrap=true;
-}
+  }*/
 
 void AGTextureManager::registerTexture(AGTexture *pTexture)
 {
   //  CTRACE;
   //  cdebug(pTexture);
+#ifdef SLOW_TEXTUREMANAGER
   mTextures.insert(pTexture);
-  if(mTrap)
-    throw int();
+#else
+  mTextures.push_back(pTexture);
+#endif
+  //  if(mTrap)
+  //    throw int();
 }
 void AGTextureManager::deregisterTexture(AGTexture *pTexture)
 {
   //  CTRACE;
   //  cdebug(pTexture);
+#ifdef SLOW_TEXTUREMANAGER
   mTextures.erase(pTexture);
+#else
+  mDelTextures.push_back(pTexture);
+#endif
 }
 void AGTextureManager::cleanup()
 {
+#ifdef SLOW_TEXTUREMANAGER
   std::set<SDL_Surface*> used;
   std::set<AGTexture*>::iterator i=mTextures.begin();
   for(;i!=mTextures.end();i++)
@@ -595,6 +604,54 @@ void AGTextureManager::cleanup()
 	SDL_FreeSurface(*j);
     }
   mSurfaces=used;
+#else
+
+  Uint32 t0=SDL_GetTicks();
+
+  if(mDelTextures.size())
+    {
+      // FIXME: is this faster ????
+      // clean up mTextures
+      // assuming that mTextures.size>mDelTextures.size => first insert mTextures then delete
+      std::set<AGTexture*> ts;
+      
+      std::list<AGTexture*>::iterator di;
+      
+      for(di=mTextures.begin();di!=mTextures.end();di++)
+	ts.insert(*di);
+      
+      for(di=mDelTextures.begin();di!=mDelTextures.end();di++)
+	ts.erase(*di);
+      
+      mTextures.clear();
+      mDelTextures.clear();
+  
+      std::set<AGTexture*>::iterator si;
+      for(si=ts.begin();si!=ts.end();si++)
+	mTextures.push_back(*si);
+    }
+  
+  Uint32 t1=SDL_GetTicks();
+  //  cdebug("TIME4:"<<t1-t0);
+
+  std::set<SDL_Surface*> used;
+  std::list<AGTexture*>::iterator i=mTextures.begin();
+  for(;i!=mTextures.end();i++)
+    used.insert((*i)->surface());
+
+  std::set<SDL_Surface*>::iterator j=mSurfaces.begin();
+  for(;j!=mSurfaces.end();j++)
+    {
+      if(used.find(*j)==used.end())
+	SDL_FreeSurface(*j);
+    }
+  mSurfaces=used;
+
+
+  Uint32 t2=SDL_GetTicks();
+  //  cdebug("TIME5:"<<t2-t1);
+
+#endif
 }
 
 AGTexture AGTextureManager::makeTexture(const AGSurface &s)
@@ -604,7 +661,11 @@ AGTexture AGTextureManager::makeTexture(const AGSurface &s)
 
 void AGTextureManager::checkUnused()
 {
+#ifdef SLOW_TEXTUREMANAGER
   std::set<AGTexture*>::iterator i=mTextures.begin();
+#else
+  std::list<AGTexture*>::iterator i=mTextures.begin();
+#endif
   for(;i!=mTextures.end();i++)
     {
       if((*i)->hasTexture() && !(*i)->textureUsed())

@@ -98,6 +98,17 @@ AGWidget::~AGWidget()
   getAllWidgets()->erase(this);
 }
 
+void AGWidget::removeChild(AGWidget *w)
+{
+  std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),w);
+  if(i!=mChildren.end())
+    {
+      mChildren.erase(i);
+      w->setParent(0);
+    }
+}
+
+
 void AGWidget::eventChildrenDeleted(AGWidget *pWidget)
 {
   std::list<AGWidget*>::iterator i=mChildren.begin();

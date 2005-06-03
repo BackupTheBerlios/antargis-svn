@@ -160,6 +160,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -200,6 +201,7 @@ public:
     virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -262,6 +264,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -301,6 +304,7 @@ public:
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
     virtual void addChild(AGWidget *pWidget);
 };
 
@@ -341,6 +345,7 @@ public:
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
     virtual void addChild(AGWidget *pWidget);
 };
 
@@ -397,6 +402,7 @@ public:
     virtual bool eventMouseLeave();
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
     virtual void addChild(AGWidget *pWidget);
 };
 
@@ -437,6 +443,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -487,6 +494,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -527,6 +535,7 @@ public:
     virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -567,6 +576,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -607,6 +617,7 @@ public:
     virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -646,6 +657,7 @@ public:
     virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -684,6 +696,7 @@ public:
     virtual void setWidth(int w);
     virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
     virtual void addChild(AGWidget *w);
 };
 
@@ -724,6 +737,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -763,6 +777,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -802,6 +817,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -849,6 +865,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 
@@ -888,6 +905,7 @@ public:
     virtual bool eventHide();
     virtual void addChildBack(AGWidget *w);
     virtual void addChild(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
 };
 
 

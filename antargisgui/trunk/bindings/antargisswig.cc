@@ -2672,6 +2672,19 @@ void SwigDirector_AGWidget::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGWidget::removeChild(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id): AGButton(pParent, r, pText, id), Swig::Director(self) {
     
 }
@@ -3246,6 +3259,25 @@ void SwigDirector_AGButton::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGButton::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -4130,6 +4162,25 @@ void SwigDirector_AGText::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGText::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGVTiler::SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight): AGVTiler(pParent, pRect, pAdaptMyHeight), Swig::Director(self) {
     
 }
@@ -4678,6 +4729,25 @@ void SwigDirector_AGVTiler::addChildBack(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGVTiler::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -5248,6 +5318,25 @@ void SwigDirector_AGHTiler::addChildBack(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGHTiler::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -5839,6 +5928,25 @@ void SwigDirector_AGMenu::addChildBack(AGWidget *w) {
 }
 
 
+void SwigDirector_AGMenu::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 void SwigDirector_AGMenu::addChild(AGWidget *pWidget) {
     Swig::Director * director__p_AGWidget = 0 ;
     VALUE obj0 = Qnil ;
@@ -6414,6 +6522,25 @@ void SwigDirector_AGScreenWidget::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGScreenWidget::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -7041,6 +7168,25 @@ void SwigDirector_AGEdit::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGEdit::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGCheckBox::SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect): AGCheckBox(pParent, pRect), Swig::Director(self) {
     
 }
@@ -7618,6 +7764,25 @@ void SwigDirector_AGCheckBox::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGCheckBox::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr): AGRadioGroup(pParent, pr), Swig::Director(self) {
     
 }
@@ -8189,6 +8354,25 @@ void SwigDirector_AGRadioGroup::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -8769,6 +8953,25 @@ void SwigDirector_AGRadio::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGRadio::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGTable::SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect const &pRect): AGTable(pWidget, pRect), Swig::Director(self) {
     
 }
@@ -9328,6 +9531,25 @@ void SwigDirector_AGTable::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGTable::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGWindow::SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle): AGWindow(pWidget, pRect, pTitle), Swig::Director(self) {
     
 }
@@ -9865,6 +10087,25 @@ void SwigDirector_AGWindow::addChildBack(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGWindow::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -10446,6 +10687,25 @@ void SwigDirector_AGImage::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGImage::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGCaption::SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG): AGCaption(pParent, pRect, pText, pFont, pBG), Swig::Director(self) {
     
 }
@@ -11005,6 +11265,25 @@ void SwigDirector_AGCaption::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGCaption::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGLayout::SwigDirector_AGLayout(VALUE self, AGWidget *pgParent, std::string const &pXMLData): AGLayout(pgParent, pXMLData), Swig::Director(self) {
     
 }
@@ -11561,6 +11840,25 @@ void SwigDirector_AGLayout::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGLayout::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -12156,6 +12454,25 @@ void SwigDirector_AGSound::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGSound::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGListBox::SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect): AGListBox(pParent, pRect), Swig::Director(self) {
     
 }
@@ -12712,6 +13029,25 @@ void SwigDirector_AGListBox::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGListBox::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -17312,6 +17648,24 @@ _wrap_AGWidget_addChildBack(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->addChildBack(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_removeChild(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->removeChild(arg2);
     
     return Qnil;
 }
@@ -28808,6 +29162,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGWidget.klass, "hide", VALUEFUNC(_wrap_AGWidget_hide), -1);
     rb_define_method(cAGWidget.klass, "addChild", VALUEFUNC(_wrap_AGWidget_addChild), -1);
     rb_define_method(cAGWidget.klass, "addChildBack", VALUEFUNC(_wrap_AGWidget_addChildBack), -1);
+    rb_define_method(cAGWidget.klass, "removeChild", VALUEFUNC(_wrap_AGWidget_removeChild), -1);
     rb_define_method(cAGWidget.klass, "clear", VALUEFUNC(_wrap_AGWidget_clear), -1);
     rb_define_method(cAGWidget.klass, "getScreenRect", VALUEFUNC(_wrap_AGWidget_getScreenRect), -1);
     rb_define_method(cAGWidget.klass, "getScreenPosition", VALUEFUNC(_wrap_AGWidget_getScreenPosition), -1);

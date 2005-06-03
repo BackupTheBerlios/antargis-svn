@@ -23,6 +23,7 @@
 
 #include <string>
 #include <set>
+#include <list>
 #include <SDL.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
@@ -203,8 +204,15 @@ class AGTextureManager
 
  private:
   AGTextureManager();
-
+#ifdef SLOW_TEXTUREMANAGER
   std::set<AGTexture*> mTextures;
+#else
+  std::list<AGTexture*> mTextures;
+  std::list<AGTexture*> mDelTextures;
+#endif
+
+
+
   std::set<GLuint> mTextureIDs;
   std::set<SDL_Surface*> mSurfaces;
   friend AGTextureManager *getTextureManager();

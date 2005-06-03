@@ -97,6 +97,8 @@ class AGWidget:public AGMessageObject
   virtual void addChild(AGWidget *w);
   virtual void addChildBack(AGWidget *w);
 
+  virtual void removeChild(AGWidget *w);
+
   void clear();
 
   AGRect getScreenRect() const;
