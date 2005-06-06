@@ -39,6 +39,9 @@ class Array
 	def shuffle
 		sort{0.5 <=> rand}
 	end
+	def shuffle!
+		sort!{0.5 <=> rand}
+	end
 end 
 
 
@@ -198,7 +201,7 @@ class TestApp <AntApp
 		}
 		@cards.each{|c|puts c}
 		puts "SHUFFLE"
-		@cards=@cards.shuffle
+		@cards=@cards.shuffle!
 		
 		@cards.each{|c|puts c}
 		
@@ -279,20 +282,146 @@ end
 
 ###################################################################
 
+class CompPlayer
+	def initialize(number)
+		@number=number
+		@cards=[]
+	end
+	# middle is an array of already played cards (in order of appearance)
+	def play(middle)
+		if middle.size==0
+			# play out card
+			playOutCard
+		else
+			react(middle)
+		end
+	end
+	
+	def addCard(card)
+		@cards.push(card)
+	end
+	
+	def playOutCard
+		card=@cards[0]
+		@cards.delete(card)
+		playCard(card)
+	end
+	
+	def react(middle)
+		# FIXME: add some AI here - check if plays alone and so
+		playedColor=getPlayedColor(middle)
+		playableCards=getPlayableCards(middle)
+		
+		if playableCards.size>0
+			# take biggest
+			playableCards.sort!
+			playableCards.reverse!
+			puts "PLAYABLE:"
+			puts playableCards
+			c=playableCards[0]
+		else
+			# take anything
+			c=@cards[0]
+		end
+		playCard(c)
+		@cards.delete(c)
+	end
+	
+	def getPlayedColor(middle)
+		puts "GETPLAYEDCOOR"
+		puts middle[0].value.value
+		if middle[0].value.value!="Bube"
+			return middle[0].color
+		else
+			return $game.trump
+		end
+	end
+		
+	
+	def getPlayableCards(middle)
+		if middle.size==0
+			return @cards
+		end
+		playedColor=middle[0].color
+		cs=getCardsWithColor(playedColor)
+		if playedColor==$game.trump
+			cs+=getBuben()
+		end
+		return cs
+	end
+	
+	def getCardsWithColor(color)
+		cs=[]
+		@cards.each{|c|
+			if c.color==color and c.value.value!="Bube"
+				cs.push(c)
+			end
+		}
+		return cs
+	end
+	def getBuben
+		cs=[]
+		@cards.each{|c|
+			if c.value.value=="Bube"
+				cs.push(c)
+			end
+		}
+		return cs
+	end
+	
+	def playCard(card)
+		$skatview.addCardComputer(card,@number)
+		$skatview.playCard(card)
+		$game.playCard("computer"+@number.to_s,card)
+	end
+end
 
 class Game
 	def initialize(view)
 		@view=view
+		$game=self
 		view.addHandler(self)
-		@turn="human"
+		@turn="computer1"
+		@player0=CompPlayer.new(0)
+		@player1=CompPlayer.new(1)
+		@trump=CardColor.new("Karo")
+		genCards
 		giveCards
+		@played=[]
+	end
+	
+	def genCards
+		@cards=[]
+		for color in ["Kreuz","Pik","Herz","Karo"]
+			for value in ["7","8","9","Bube","Dame","König","10","As"]
+				@cards.push(Card.new(color+" "+value))
+			end
+		end
+		@cards.shuffle!
 	end
 	
 	def giveCards
-		for i in 1..10 do
-			c=Card.new("Pik As")
-			@view.addCardHuman(c)
+		@cards.shuffle!
+		humanCards=[]
+		for i in 0..29 do
+			c=@cards[i]
+			puts c
+			if i<10
+				# first pc0
+				@player0.addCard(c)
+			elsif i<20
+				@player1.addCard(c)
+			else
+				humanCards.push(c)
+			end
 		end
+		humanCards.sort.each{|c|
+			@view.addCardHuman c
+		}
+	end
+	
+	def trump
+		@trump
 	end
 	
 	def cardClicked(card)
@@ -300,20 +429,50 @@ class Game
 	end
 	
 	def assignTurn
+		puts "assignTurn:"+@turn
 		if @turn=="human"
 			@view.beginHumanTurn
-		else
-			@view.endHumanTurn
+		elsif @turn=="computer0"
+			@player0.play(@view.middle)
+		elsif @turn=="computer1"
+			@player1.play(@view.middle)
 		end
+	end
+	
+	def playCard(player,card)
+		@played.push([player,card])
 	end
 	
 	def sigReady
 		if @view.middle.size<3
-			@turn=getNext
 			assignTurn
+			@turn=getNext
 		else
-			@view.awayCards("human")
+			checkMiddle
 		end
+	end
+	
+	def checkMiddle
+		winner=@played[0][0]
+		bestCard=@played[0][1]
+		playedColor=bestCard.color
+		@played[1..2].each{|pair|
+			p=pair[0]
+			c=pair[1]
+			puts "BETTER THAN:"
+			puts "BEST:"+bestCard.name
+			puts "NOW:"+c.name
+			if c.betterThan(bestCard,playedColor,@trump)
+				puts "BETTER!!!"
+				winner=p
+				bestCard=c
+			else
+				puts "LESSS!"
+			end
+		}
+		@played=[]
+		@view.awayCards(winner)
+		@turn=winner
 	end
 	
 	private

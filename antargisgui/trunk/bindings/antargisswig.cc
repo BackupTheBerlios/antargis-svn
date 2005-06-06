@@ -27082,7 +27082,7 @@ _wrap_new_AGListBox(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGListBox_insert(int argc, VALUE *argv, VALUE self) {
+_wrap_AGListBox_insertItem(int argc, VALUE *argv, VALUE self) {
     AGListBox *arg1 = (AGListBox *) 0 ;
     std::string arg2 ;
     std::string arg3 ;
@@ -27104,14 +27104,14 @@ _wrap_AGListBox_insert(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->insert(arg2,arg3);
+    (arg1)->insertItem(arg2,arg3);
     
     return Qnil;
 }
 
 
 static VALUE
-_wrap_AGListBox_select(int argc, VALUE *argv, VALUE self) {
+_wrap_AGListBox_selectItem(int argc, VALUE *argv, VALUE self) {
     AGListBox *arg1 = (AGListBox *) 0 ;
     std::string arg2 ;
     
@@ -27125,7 +27125,7 @@ _wrap_AGListBox_select(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->select(arg2);
+    (arg1)->selectItem(arg2);
     
     return Qnil;
 }
@@ -29711,8 +29711,8 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGListBox, (void *) &cAGListBox);
     rb_define_alloc_func(cAGListBox.klass, _wrap_AGListBox_allocate);
     rb_define_method(cAGListBox.klass, "initialize", VALUEFUNC(_wrap_new_AGListBox), -1);
-    rb_define_method(cAGListBox.klass, "insert", VALUEFUNC(_wrap_AGListBox_insert), -1);
-    rb_define_method(cAGListBox.klass, "select", VALUEFUNC(_wrap_AGListBox_select), -1);
+    rb_define_method(cAGListBox.klass, "insertItem", VALUEFUNC(_wrap_AGListBox_insertItem), -1);
+    rb_define_method(cAGListBox.klass, "selectItem", VALUEFUNC(_wrap_AGListBox_selectItem), -1);
     rb_define_method(cAGListBox.klass, "getSelectedID", VALUEFUNC(_wrap_AGListBox_getSelectedID), -1);
     rb_define_method(cAGListBox.klass, "getSelectedValue", VALUEFUNC(_wrap_AGListBox_getSelectedValue), -1);
     rb_define_method(cAGListBox.klass, "eventKeyDown", VALUEFUNC(_wrap_AGListBox_eventKeyDown), -1);

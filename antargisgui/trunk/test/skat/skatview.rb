@@ -4,12 +4,146 @@ include Libantargisruby
 $cardHeight=140
 $cardWidth=80
 
+class CardColor
+	include Comparable
+	def initialize(n)
+		@n=n
+	end
+	def color
+		@n
+	end
+	def <=>(cc)
+		a=["Kreuz","Pik","Herz","Karo"]
+		mi=a.index(color)
+		oi=a.index(cc.color)
+		puts "mi:"+mi.to_s+"="+oi.to_s
+		return mi<=>oi  # invert
+	end
+	#def ==(c)
+	#	color==c.color
+	#end
+	def to_s
+		@n
+	end
+end
+
+class CardValue
+	include Comparable
+	def initialize(n)
+		@n=n
+	end
+	def value
+		@n
+	end
+	#def ==(v)
+	#	value==v.value
+	#end
+	def <=>(cc)
+		a=["7","8","9","Bube","Dame","König","10","As"]
+		mi=a.index(value)
+		oi=a.index(cc.value)
+		puts "MI:"+mi.to_s
+		puts "OI:"+oi.to_s
+		return mi<=>oi
+	end
+end
+
 class Card
+	include Comparable
 	def initialize(pName)
 		@name=pName
+		a=@name.split(" ")
+		@color=CardColor.new(a[0])
+		@value=CardValue.new(a[1])
 	end
 	def name
 		@name
+	end
+	
+	def color
+		@color
+	end
+	
+	def value
+		@value
+	end
+	
+	def isTrump(trump)
+		if color==trump
+			return true
+		elsif value.value=="Bube"
+			return true
+		end
+	end
+	
+	def to_s
+		color.to_s+" "+value.to_s
+	end
+	
+	def <=>(card)
+		if value.value=="Bube"
+			if card.value.value=="Bube"
+				return color<=>card.color
+			else
+				return 1
+			end
+		else
+			if card.value.value=="Bube"
+				return -1
+			else
+				if card.color!=color
+					return color<=>card.color
+					puts "ERROR in Card::<=>"
+					"lkajsdjldks".muh # generate some error
+					exit
+				else
+					return value<=>card.value
+				end
+			end
+		end
+	end
+	
+	def betterThan(card,playedColor,trump)
+		if isTrump(trump)
+			if card.isTrump(trump)
+				if value.value=="Bube"
+					if card.value.value=="Bube"
+						return color>card.color
+					else
+						return true
+					end
+				else
+					if card.value.value=="Bube"
+						return false
+					else
+						return value>card.value
+					end
+				end
+			else
+				return true
+			end
+		else
+			puts "MUH"
+			if card.isTrump(trump)
+				puts "TRUMP"
+				return false
+			else
+				if card.color==playedColor
+					puts "colors:"+color.to_s+" "+card.color.to_s
+					puts playedColor
+					if color==playedColor
+						puts "VALUES..."
+						return value>card.value
+					else
+						puts "SHIt200"
+						return false
+					end
+				else
+					puts "SHIT"
+					return false  # not better than anything
+				end
+			end
+		end
 	end
 end
 
@@ -156,9 +290,9 @@ class SkatView<AGWidget
 		@todel=[]
 		
 		addTable
-		c=Card.new("Pik 7")
-		addCardC0(c)
-		playCard(c)
+		#c=Card.new("Pik 7")
+		#addCardComputer(c,0)
+		#playCard(c)
 	end
 	
 	def playCard(card)
@@ -176,9 +310,9 @@ class SkatView<AGWidget
 		if player=="human"
 			pos=Vector.new(512,600)
 		elsif player=="computer0"
-			pos=Vector.new(-100,0)
+			pos=Vector.new(0,0)
 		else
-			pos=Vector.new(1024,0)
+			pos=Vector.new(1023-$cardWidth,0)
 		end
 			
 		@middle.each{|c|
@@ -213,10 +347,17 @@ class SkatView<AGWidget
 		@human.push(cardWidget)
 	end
 	
-	def addCardC0(card)
-		card=CardView.new(card,AGPoint.new(0,0))
+	def addCardComputer(card,pnum) #pnum is computer player num
+		pos=nil
+		if pnum==0
+			pos=Vector.new(0,0)
+		else
+			pos=Vector.new(1023-$cardWidth,0)
+		end
+		card=CardView.new(card,pos)
 		addChild(card)
 		@cards.push(card)
+		puts "ADDCARDCOMP"
 	end
 	
 
@@ -252,6 +393,8 @@ class SkatView<AGWidget
 		@handler.each{|h|
 			h.cardClicked(cardW.card)
 		}
+		$game.playCard("human",cardW.card)
+		endHumanTurn
 	end
 	
 	
