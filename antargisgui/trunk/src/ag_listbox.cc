@@ -66,12 +66,12 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect &pRect):AGWidget(pParent,pRe
   mSelected=-1;
 }
 
-void AGListBox::insert(std::string pID,std::string pValue)
+void AGListBox::insertItem(std::string pID,std::string pValue)
 {
   mItems.push_back(AGListBoxItem(pID,pValue));
   arrange();
 }
-void AGListBox::select(std::string pID)
+void AGListBox::selectItem(std::string pID)
 {
   for(size_t i=0;i<mItems.size();i++)
     if(mItems[i].id==pID)

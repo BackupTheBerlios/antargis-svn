@@ -41,8 +41,8 @@ class AGListBox:public AGWidget
  public:
   AGListBox(AGWidget *pParent,const AGRect &pRect);
 
-  void insert(std::string pID,std::string pValue);
-  void select(std::string pID);
+  void insertItem(std::string pID,std::string pValue);
+  void selectItem(std::string pID);
 
   std::string getSelectedID() const;
   std::string getSelectedValue() const;
