@@ -14886,16 +14886,6 @@ _wrap_getTextureManager(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_setTrap(int argc, VALUE *argv, VALUE self) {
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    setTrap();
-    
-    return Qnil;
-}
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGSDLScreen_allocate(VALUE self) {
@@ -28990,7 +28980,6 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGTextureManager.klass, "makeTexture", VALUEFUNC(_wrap_AGTextureManager_makeTexture), -1);
     cAGTextureManager.mark = 0;
     cAGTextureManager.destroy = (void (*)(void *)) free_AGTextureManager;
-    rb_define_module_function(mLibantargisruby, "setTrap", VALUEFUNC(_wrap_setTrap), -1);
     rb_define_module_function(mLibantargisruby, "disown_AGSDLScreen", VALUEFUNC(_wrap_disown_AGSDLScreen), -1);
     
     cAGSDLScreen.klass = rb_define_class_under(mLibantargisruby, "AGSDLScreen", ((swig_class *) SWIGTYPE_p_AGScreen->clientdata)->klass);
