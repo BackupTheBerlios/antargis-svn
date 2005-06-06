@@ -219,6 +219,6 @@ class AGTextureManager
 };
 AGTextureManager *getTextureManager();
 
-void setTrap();
+//void setTrap();
 
 #endif

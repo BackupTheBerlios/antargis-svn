@@ -19,6 +19,7 @@
  */
 
 #include "ag_dialog.h"
+#include "ag_messageobject.h"
 
 AGDialog::AGDialog(AGWidget *pgParent,const std::string &pXMLData):
   AGLayout(pgParent,pXMLData)
@@ -37,17 +38,17 @@ AGDialog::AGDialog(AGWidget *pgParent,const std::string &pXMLData):
   
 }
 
-bool AGDialog::eventOk(const char*pName,const AGEvent *event,AGMessageObject *pCaller)
+bool AGDialog::eventOk(const std::string&pName,const AGEvent *event,AGMessageObject *pCaller)
 {
   CTRACE;
   return false;
 }
-bool AGDialog::eventCancel(const char*pName,const AGEvent *event,AGMessageObject *pCaller)
+bool AGDialog::eventCancel(const std::string&pName,const AGEvent *event,AGMessageObject *pCaller)
 {
   CTRACE;
   return false;
 }
-bool AGDialog::eventClose(const char*pName,const AGEvent *event,AGMessageObject *pCaller)
+bool AGDialog::eventClose(const std::string&pName,const AGEvent *event,AGMessageObject *pCaller)
 {
   CTRACE;
   return false;

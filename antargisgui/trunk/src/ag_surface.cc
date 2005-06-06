@@ -73,6 +73,12 @@ AGSurface::AGSurface(SDL_Surface *pS):s(pS)
   getSurfaceManager()->registerSurface(this);
 }
 
+AGSurface *AGSurface::clone() const
+{
+  return new AGSurface(*this);
+}
+
+
 AGSurface::AGSurface()
 {
   s=0;
