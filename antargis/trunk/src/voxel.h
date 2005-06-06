@@ -38,6 +38,7 @@
 #include "voxel_gen.h"
 
 
+#include <ext/hash_map>
 extern bool gDrawingTerrain; // changes lighting to optimize for terrain, if set
 
 struct Color
@@ -76,12 +77,12 @@ std::ostream&operator<<(std::ostream&o,const Color &c);
 template<class T>
 class VoxelSpace
 {
-  std::map<Pos3D,T> mMap;
+  __gnu_cxx::hash_map<Pos3D,T,Pos3Dhash> mMap;
  public:
 
   VoxelSpace();
-  void set(Pos3D p,T v);
-  T get(Pos3D p);
+  void set(const Pos3D &p,const T &v);
+  T get(const Pos3D &p);
 };
 
 
@@ -96,11 +97,11 @@ class VoxelView:public AVItem
   VoxelView(int pw,int ph,Pos3D pPos,bool pIso=true); // simple screen coordinates
   virtual ~VoxelView();
 
-  void set(Pos3D p,Color v);
-  float diffuseLight(Pos3D p);
-  virtual Color getColor(Pos3D p);
+  void set(const Pos3D &p,const Color &v);
+  float diffuseLight(const Pos3D &p);
+  virtual Color getColor(const Pos3D &p);
 
-  bool inIso(Pos3D p);
+  bool inIso(const Pos3D &p);
 
 
  protected:

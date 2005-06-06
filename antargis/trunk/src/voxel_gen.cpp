@@ -427,34 +427,47 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
   Uint32 t1=SDL_GetTicks();
 
   int w=TILE_WIDTH;
+  int lasty=0;
+  int newlasty=0;
   FastVoxelView v(w,w*4,Pos3D(0,0,0),true);
 
   if(true)
   {
   for(int x=0;x<w;x++)
+    {
+      lasty=0;
+      newlasty=0;
     for(int z=0;z<w;z++)
       //    for(int z=w/2-4;z<w/2;z++)
       {
+	//	lasty=0;
+	
+
         float mx=float(x*POINTS_PER_TILE)/w+px;
         float mz=float(z*POINTS_PER_TILE)/w+py;
 
         //  cdebug(mx<<" "<<mz);
+
         float h=m.get(mx,mz);
-        for(int y=std::max(0,(int)(h-6));y<h;y++)
+
+        for(int y=std::max(lasty,(int)(h-6));y<h;y++) // instead of lasty it was 0
           {
             if(y>WATER_HEIGHT)
             {
               float a=std::min(1.0f,h-y);
               int n=rand()%50;
              
-              v.set(Pos3D(x,y,z),Color(0xAA-n,0xAA-n,0,a));
+	      v.set(Pos3D(x,y,z),Color(0xAA-n,0xAA-n,0,a));
+	      newlasty=y;
             }
+	    //	    newlasty=y;
           }
 
         // grass above
 
 
         int mgh=(int)gm.get(mx,mz);
+
 	if(2*h<3*GRASS_HEIGHT)  // h<1.5*GRASS_HEIGHT
 	  {
 	    mgh*=(h-(GRASS_HEIGHT/2));
@@ -464,15 +477,18 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
           {
             float gh=rand()%int(mgh);
             if(gh>0)
-              for(int y=0;y<gh;y++)
+              for(int y=std::max(0.0f,lasty-h);y<gh;y++)
                 {
                   float a=1.0f-(y/gh);
                   int mh=(int)(y+h);
                   //    cdebug(a);
 		  //                  if(mh>GRASS_HEIGHT)
-                    v.set(Pos3D(x,mh,z),Color(0,0xAA,0,a));
+		  v.set(Pos3D(x,mh,z),Color(0,0xAA,0,a));
+		  if(a>0.7)
+		    newlasty=mh;
                 }
           }
+	lasty=newlasty-2;
 
         /*
         if(rand()%60<2)
@@ -498,6 +514,7 @@ VoxelImage *makeTerrainTile(const SplineMapD &m,const SplineMapD &gm,int px,int 
           }
         */
       }
+    }
   /*
       for(int x=0;x<8;x++)
   for(int y=0;y<8;y++)

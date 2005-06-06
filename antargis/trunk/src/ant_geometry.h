@@ -24,6 +24,8 @@
 #include <iostream>
 #include "ag_xml.h"
 
+
+
 struct Pos3D
 {
   float x,y,z;
@@ -64,6 +66,13 @@ struct Pos3D
 //  bool operator<(const Pos3D &p) const;
 };
 
+struct Pos3Dhash
+{
+  size_t operator()(const Pos3D &p) const
+  {
+    return ((int)(p.x))^(((int)p.y)<<8)^(((int)p.z)<<16);
+  }
+};
 
 struct Matrix3
 {

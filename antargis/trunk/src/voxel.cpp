@@ -148,14 +148,14 @@ VoxelSpace<T>::VoxelSpace()
 
 template<class T>
 inline void VoxelSpace<T>::set
-  (Pos3D p,T v)
+  (const Pos3D &p,const T &v)
   {
     mMap[p]=v;
   }
 
 template<class T>
 inline T VoxelSpace<T>::get
-  (Pos3D p)
+  (const Pos3D &p)
   {
     if(mMap.find(p)==mMap.end())
       return Color();
@@ -214,7 +214,7 @@ VoxelView::~VoxelView()
 {}
 
 void VoxelView::set
-  (Pos3D p,Color v)
+  (const Pos3D &p,const Color &v)
   {
     mSpace.set(p,v);
   }
@@ -359,7 +359,7 @@ void VoxelView::init()
   return;
 }
 
-bool VoxelView::inIso(Pos3D p)
+bool VoxelView::inIso(const Pos3D &p)
 {
   if(!iso)
     return true;
@@ -396,7 +396,7 @@ float VoxelView::blurDiffuseLight(Pos3D p)
 
 }
 
-float VoxelView::diffuseLight(Pos3D p)
+float VoxelView::diffuseLight(const Pos3D &p)
 {
   Pos3D x(1,0,0),y(0,1,0),z(0,0,1);
 
@@ -581,7 +581,7 @@ bool VoxelView::isIn(const Pos3D &p3) const
   }
 
 
-Color VoxelView::getColor(Pos3D p)
+Color VoxelView::getColor(const Pos3D &p)
 {
   Color c=mSpace.get(p);
   //  c.light((rand()%60)/float(0xFF));

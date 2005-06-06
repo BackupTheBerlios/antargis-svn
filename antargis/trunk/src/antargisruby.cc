@@ -935,25 +935,26 @@ type_error:
 #define  SWIGTYPE_p_IsoView swig_types[89] 
 #define  SWIGTYPE_p_CompleteIsoView swig_types[90] 
 #define  SWIGTYPE_p_EditIsoView swig_types[91] 
-#define  SWIGTYPE_p_AGMenuEvent swig_types[92] 
-#define  SWIGTYPE_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t swig_types[93] 
-#define  SWIGTYPE_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t swig_types[94] 
-#define  SWIGTYPE_p_AGMouseEvent swig_types[95] 
-#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[96] 
-#define  SWIGTYPE_p_AGPaintTarget swig_types[97] 
-#define  SWIGTYPE_p_SDLKey swig_types[98] 
-#define  SWIGTYPE_p_AGCPPListener swig_types[99] 
-#define  SWIGTYPE_p_AGListener swig_types[100] 
-#define  SWIGTYPE_p_VoxelImageData swig_types[101] 
-#define  SWIGTYPE_p_VoxelImage swig_types[102] 
-#define  SWIGTYPE_p_ComplexVoxelImage swig_types[103] 
-#define  SWIGTYPE_p_Node swig_types[104] 
-#define  SWIGTYPE_p_float swig_types[105] 
-#define  SWIGTYPE_p_std__listTAntEntity_p_t swig_types[106] 
-#define  SWIGTYPE_p_std__vectorTAntEntity_p_t swig_types[107] 
-#define  SWIGTYPE_p_AGTheme swig_types[108] 
-#define  SWIGTYPE_p_Pos2D swig_types[109] 
-static swig_type_info *swig_types[111];
+#define  SWIGTYPE_p_Pos3Dhash swig_types[92] 
+#define  SWIGTYPE_p_AGMenuEvent swig_types[93] 
+#define  SWIGTYPE_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t swig_types[94] 
+#define  SWIGTYPE_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t swig_types[95] 
+#define  SWIGTYPE_p_AGMouseEvent swig_types[96] 
+#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[97] 
+#define  SWIGTYPE_p_AGPaintTarget swig_types[98] 
+#define  SWIGTYPE_p_SDLKey swig_types[99] 
+#define  SWIGTYPE_p_AGCPPListener swig_types[100] 
+#define  SWIGTYPE_p_AGListener swig_types[101] 
+#define  SWIGTYPE_p_VoxelImageData swig_types[102] 
+#define  SWIGTYPE_p_VoxelImage swig_types[103] 
+#define  SWIGTYPE_p_ComplexVoxelImage swig_types[104] 
+#define  SWIGTYPE_p_Node swig_types[105] 
+#define  SWIGTYPE_p_float swig_types[106] 
+#define  SWIGTYPE_p_std__listTAntEntity_p_t swig_types[107] 
+#define  SWIGTYPE_p_std__vectorTAntEntity_p_t swig_types[108] 
+#define  SWIGTYPE_p_AGTheme swig_types[109] 
+#define  SWIGTYPE_p_Pos2D swig_types[110] 
+static swig_type_info *swig_types[112];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -1455,6 +1456,9 @@ static void free_AntEntityPtr(AntEntityPtr *);
 
 swig_class cPos3D;
 static void free_Pos3D(Pos3D *);
+
+swig_class cPos3Dhash;
+static void free_Pos3Dhash(Pos3Dhash *);
 
 swig_class cMatrix3;
 static void free_Matrix3(Matrix3 *);
@@ -2879,6 +2883,19 @@ void SwigDirector_AGWidget::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGWidget::removeChild(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id): AGButton(pParent, r, pText, id), Swig::Director(self) {
     
 }
@@ -3454,6 +3471,25 @@ void SwigDirector_AGButton::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGButton::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -4340,6 +4376,25 @@ void SwigDirector_AGText::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGText::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGVTiler::SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight): AGVTiler(pParent, pRect, pAdaptMyHeight), Swig::Director(self) {
     
 }
@@ -4889,6 +4944,25 @@ void SwigDirector_AGVTiler::addChildBack(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGVTiler::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -5460,6 +5534,25 @@ void SwigDirector_AGHTiler::addChildBack(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGHTiler::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -6052,6 +6145,25 @@ void SwigDirector_AGMenu::addChildBack(AGWidget *w) {
 }
 
 
+void SwigDirector_AGMenu::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 void SwigDirector_AGMenu::addChild(AGWidget *pWidget) {
     Swig::Director * director__p_AGWidget = 0 ;
     VALUE obj0 = Qnil ;
@@ -6628,6 +6740,25 @@ void SwigDirector_AGScreenWidget::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGScreenWidget::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -7256,6 +7387,25 @@ void SwigDirector_AGEdit::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGEdit::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGCheckBox::SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect): AGCheckBox(pParent, pRect), Swig::Director(self) {
     
 }
@@ -7834,6 +7984,25 @@ void SwigDirector_AGCheckBox::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGCheckBox::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr): AGRadioGroup(pParent, pr), Swig::Director(self) {
     
 }
@@ -8407,6 +8576,25 @@ void SwigDirector_AGRadioGroup::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -8988,6 +9176,25 @@ void SwigDirector_AGRadio::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGRadio::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGTable::SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect const &pRect): AGTable(pWidget, pRect), Swig::Director(self) {
     
 }
@@ -9548,6 +9755,25 @@ void SwigDirector_AGTable::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGTable::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGWindow::SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle): AGWindow(pWidget, pRect, pTitle), Swig::Director(self) {
     
 }
@@ -10086,6 +10312,25 @@ void SwigDirector_AGWindow::addChildBack(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
+}
+
+
+void SwigDirector_AGWindow::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -10668,6 +10913,25 @@ void SwigDirector_AGImage::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGImage::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGCaption::SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG): AGCaption(pParent, pRect, pText, pFont, pBG), Swig::Director(self) {
     
 }
@@ -11228,6 +11492,25 @@ void SwigDirector_AGCaption::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGCaption::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGLayout::SwigDirector_AGLayout(VALUE self, AGWidget *pgParent, std::string const &pXMLData): AGLayout(pgParent, pXMLData), Swig::Director(self) {
     
 }
@@ -11785,6 +12068,25 @@ void SwigDirector_AGLayout::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGLayout::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -12381,6 +12683,25 @@ void SwigDirector_AGSound::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_AGSound::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_AGListBox::SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect): AGListBox(pParent, pRect), Swig::Director(self) {
     
 }
@@ -12938,6 +13259,25 @@ void SwigDirector_AGListBox::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGListBox::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -13825,6 +14165,25 @@ void SwigDirector_MiniMap::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_MiniMap::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_VoxelImageData::SwigDirector_VoxelImageData(VALUE self): VoxelImageData(), Swig::Director(self) {
     
 }
@@ -14443,6 +14802,25 @@ void SwigDirector_AntargisView::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AntargisView::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -15170,6 +15548,25 @@ void SwigDirector_IsoView::addChild(AGWidget *w) {
 }
 
 
+void SwigDirector_IsoView::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
+}
+
+
 SwigDirector_CompleteIsoView::SwigDirector_CompleteIsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map): CompleteIsoView(parent, r, p, map), Swig::Director(self) {
     
 }
@@ -15768,6 +16165,25 @@ void SwigDirector_CompleteIsoView::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_CompleteIsoView::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -16392,6 +16808,25 @@ void SwigDirector_EditIsoView::addChild(AGWidget *w) {
         obj0 = director__p_AGWidget->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_EditIsoView::removeChild(AGWidget *w) {
+    Swig::Director * director__p_AGWidget = 0 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::removeChild(w);
+        return;
+    }
+    director__p_AGWidget = dynamic_cast<Swig::Director *>(w);
+    if (!director__p_AGWidget) {
+        obj0 = SWIG_NewPointerObj(w, SWIGTYPE_p_AGWidget, 0);
+    } else {
+        obj0 = director__p_AGWidget->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
 
@@ -18915,16 +19350,6 @@ _wrap_getTextureManager(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTextureManager,0);
     return vresult;
-}
-
-
-static VALUE
-_wrap_setTrap(int argc, VALUE *argv, VALUE self) {
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    setTrap();
-    
-    return Qnil;
 }
 
 
@@ -21680,6 +22105,24 @@ _wrap_AGWidget_addChildBack(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->addChildBack(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_removeChild(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->removeChild(arg2);
     
     return Qnil;
 }
@@ -31126,7 +31569,7 @@ _wrap_new_AGListBox(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGListBox_insert(int argc, VALUE *argv, VALUE self) {
+_wrap_AGListBox_insertItem(int argc, VALUE *argv, VALUE self) {
     AGListBox *arg1 = (AGListBox *) 0 ;
     std::string arg2 ;
     std::string arg3 ;
@@ -31148,14 +31591,14 @@ _wrap_AGListBox_insert(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->insert(arg2,arg3);
+    (arg1)->insertItem(arg2,arg3);
     
     return Qnil;
 }
 
 
 static VALUE
-_wrap_AGListBox_select(int argc, VALUE *argv, VALUE self) {
+_wrap_AGListBox_selectItem(int argc, VALUE *argv, VALUE self) {
     AGListBox *arg1 = (AGListBox *) 0 ;
     std::string arg2 ;
     
@@ -31169,7 +31612,7 @@ _wrap_AGListBox_select(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->select(arg2);
+    (arg1)->selectItem(arg2);
     
     return Qnil;
 }
@@ -34969,23 +35412,15 @@ free_VoxelView(VoxelView *arg1) {
 static VALUE
 _wrap_VoxelView_set(int argc, VALUE *argv, VALUE self) {
     VoxelView *arg1 = (VoxelView *) 0 ;
-    Pos3D arg2 ;
-    Color arg3 ;
+    Pos3D *arg2 = 0 ;
+    Color *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
-    {
-        Pos3D * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
-        if (ptr) arg2 = *ptr;
-    }
-    {
-        Color * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_Color, 1);
-        if (ptr) arg3 = *ptr;
-    }
-    (arg1)->set(arg2,arg3);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos3D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_Color, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->set((Pos3D const &)*arg2,(Color const &)*arg3);
     
     return Qnil;
 }
@@ -34994,19 +35429,15 @@ _wrap_VoxelView_set(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_VoxelView_diffuseLight(int argc, VALUE *argv, VALUE self) {
     VoxelView *arg1 = (VoxelView *) 0 ;
-    Pos3D arg2 ;
+    Pos3D *arg2 = 0 ;
     float result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
-    {
-        Pos3D * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
-        if (ptr) arg2 = *ptr;
-    }
-    result = (float)(arg1)->diffuseLight(arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos3D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (float)(arg1)->diffuseLight((Pos3D const &)*arg2);
     
     vresult = rb_float_new(result);
     return vresult;
@@ -35016,7 +35447,7 @@ _wrap_VoxelView_diffuseLight(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_VoxelView_getColor(int argc, VALUE *argv, VALUE self) {
     VoxelView *arg1 = (VoxelView *) 0 ;
-    Pos3D arg2 ;
+    Pos3D *arg2 = 0 ;
     Color result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
@@ -35024,14 +35455,10 @@ _wrap_VoxelView_getColor(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
-    {
-        Pos3D * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
-        if (ptr) arg2 = *ptr;
-    }
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos3D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->getColor(arg2);
+    result = (arg1)->getColor((Pos3D const &)*arg2);
     
     {
         Color * resultptr;
@@ -35045,19 +35472,15 @@ _wrap_VoxelView_getColor(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_VoxelView_inIso(int argc, VALUE *argv, VALUE self) {
     VoxelView *arg1 = (VoxelView *) 0 ;
-    Pos3D arg2 ;
+    Pos3D *arg2 = 0 ;
     bool result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelView, 1);
-    {
-        Pos3D * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Pos3D, 1);
-        if (ptr) arg2 = *ptr;
-    }
-    result = (bool)(arg1)->inIso(arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos3D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)(arg1)->inIso((Pos3D const &)*arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -38841,6 +39264,57 @@ free_Pos3D(Pos3D *arg1) {
     delete arg1;
 }
 static VALUE
+_wrap_Pos3Dhash___call__(int argc, VALUE *argv, VALUE self) {
+    Pos3Dhash *arg1 = (Pos3Dhash *) 0 ;
+    Pos3D *arg2 = 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Pos3Dhash, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos3D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = ((Pos3Dhash const *)arg1)->operator ()((Pos3D const &)*arg2);
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Pos3Dhash_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Pos3Dhash_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Pos3Dhash);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Pos3Dhash(int argc, VALUE *argv, VALUE self) {
+    Pos3Dhash *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (Pos3Dhash *)new Pos3Dhash();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_Pos3Dhash(Pos3Dhash *arg1) {
+    delete arg1;
+}
+static VALUE
 _wrap_Matrix3_a_set(int argc, VALUE *argv, VALUE self) {
     Matrix3 *arg1 = (Matrix3 *) 0 ;
     float *arg2 ;
@@ -40096,6 +40570,7 @@ static swig_type_info _swigt__p_AntargisView[] = {{"_p_AntargisView", 0, "Antarg
 static swig_type_info _swigt__p_IsoView[] = {{"_p_IsoView", 0, "IsoView *", 0, 0, 0, 0},{"_p_IsoView", 0, 0, 0, 0, 0, 0},{"_p_CompleteIsoView", _p_CompleteIsoViewTo_p_IsoView, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_IsoView, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_CompleteIsoView[] = {{"_p_CompleteIsoView", 0, "CompleteIsoView *", 0, 0, 0, 0},{"_p_CompleteIsoView", 0, 0, 0, 0, 0, 0},{"_p_EditIsoView", _p_EditIsoViewTo_p_CompleteIsoView, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_EditIsoView[] = {{"_p_EditIsoView", 0, "EditIsoView *", 0, 0, 0, 0},{"_p_EditIsoView", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_Pos3Dhash[] = {{"_p_Pos3Dhash", 0, "Pos3Dhash *", 0, 0, 0, 0},{"_p_Pos3Dhash", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMenuEvent[] = {{"_p_AGMenuEvent", 0, "AGMenuEvent *", 0, 0, 0, 0},{"_p_AGMenuEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__mapTPos2D_std__mapTint_Voxel_p_t_t[] = {{"_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t", 0, "std::map<Pos2D,std::map<int,Voxel * > > *", 0, 0, 0, 0},{"_p_std__mapTPos2D_std__mapTint_Voxel_p_t_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__mapTPos2D_std__pairTint_Voxel_p_t_t[] = {{"_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t", 0, "std::map<Pos2D,std::pair<int,Voxel * > > *", 0, 0, 0, 0},{"_p_std__mapTPos2D_std__pairTint_Voxel_p_t_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -40208,6 +40683,7 @@ _swigt__p_AntargisView,
 _swigt__p_IsoView, 
 _swigt__p_CompleteIsoView, 
 _swigt__p_EditIsoView, 
+_swigt__p_Pos3Dhash, 
 _swigt__p_AGMenuEvent, 
 _swigt__p_std__mapTPos2D_std__mapTint_Voxel_p_t_t, 
 _swigt__p_std__mapTPos2D_std__pairTint_Voxel_p_t_t, 
@@ -40389,7 +40865,6 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAGTextureManager.klass, "makeTexture", VALUEFUNC(_wrap_AGTextureManager_makeTexture), -1);
     cAGTextureManager.mark = 0;
     cAGTextureManager.destroy = (void (*)(void *)) free_AGTextureManager;
-    rb_define_module_function(mLibantargis, "setTrap", VALUEFUNC(_wrap_setTrap), -1);
     rb_define_module_function(mLibantargis, "disown_AGSDLScreen", VALUEFUNC(_wrap_disown_AGSDLScreen), -1);
     
     cAGSDLScreen.klass = rb_define_class_under(mLibantargis, "AGSDLScreen", ((swig_class *) SWIGTYPE_p_AGScreen->clientdata)->klass);
@@ -40561,6 +41036,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cAGWidget.klass, "hide", VALUEFUNC(_wrap_AGWidget_hide), -1);
     rb_define_method(cAGWidget.klass, "addChild", VALUEFUNC(_wrap_AGWidget_addChild), -1);
     rb_define_method(cAGWidget.klass, "addChildBack", VALUEFUNC(_wrap_AGWidget_addChildBack), -1);
+    rb_define_method(cAGWidget.klass, "removeChild", VALUEFUNC(_wrap_AGWidget_removeChild), -1);
     rb_define_method(cAGWidget.klass, "clear", VALUEFUNC(_wrap_AGWidget_clear), -1);
     rb_define_method(cAGWidget.klass, "getScreenRect", VALUEFUNC(_wrap_AGWidget_getScreenRect), -1);
     rb_define_method(cAGWidget.klass, "getScreenPosition", VALUEFUNC(_wrap_AGWidget_getScreenPosition), -1);
@@ -41109,8 +41585,8 @@ SWIGEXPORT(void) Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGListBox, (void *) &cAGListBox);
     rb_define_alloc_func(cAGListBox.klass, _wrap_AGListBox_allocate);
     rb_define_method(cAGListBox.klass, "initialize", VALUEFUNC(_wrap_new_AGListBox), -1);
-    rb_define_method(cAGListBox.klass, "insert", VALUEFUNC(_wrap_AGListBox_insert), -1);
-    rb_define_method(cAGListBox.klass, "select", VALUEFUNC(_wrap_AGListBox_select), -1);
+    rb_define_method(cAGListBox.klass, "insertItem", VALUEFUNC(_wrap_AGListBox_insertItem), -1);
+    rb_define_method(cAGListBox.klass, "selectItem", VALUEFUNC(_wrap_AGListBox_selectItem), -1);
     rb_define_method(cAGListBox.klass, "getSelectedID", VALUEFUNC(_wrap_AGListBox_getSelectedID), -1);
     rb_define_method(cAGListBox.klass, "getSelectedValue", VALUEFUNC(_wrap_AGListBox_getSelectedValue), -1);
     rb_define_method(cAGListBox.klass, "eventKeyDown", VALUEFUNC(_wrap_AGListBox_eventKeyDown), -1);
@@ -41795,6 +42271,14 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cPos3D.klass, "loadXML", VALUEFUNC(_wrap_Pos3D_loadXML), -1);
     cPos3D.mark = 0;
     cPos3D.destroy = (void (*)(void *)) free_Pos3D;
+    
+    cPos3Dhash.klass = rb_define_class_under(mLibantargis, "Pos3Dhash", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_Pos3Dhash, (void *) &cPos3Dhash);
+    rb_define_alloc_func(cPos3Dhash.klass, _wrap_Pos3Dhash_allocate);
+    rb_define_method(cPos3Dhash.klass, "initialize", VALUEFUNC(_wrap_new_Pos3Dhash), -1);
+    rb_define_method(cPos3Dhash.klass, "call", VALUEFUNC(_wrap_Pos3Dhash___call__), -1);
+    cPos3Dhash.mark = 0;
+    cPos3Dhash.destroy = (void (*)(void *)) free_Pos3Dhash;
     
     cMatrix3.klass = rb_define_class_under(mLibantargis, "Matrix3", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_Matrix3, (void *) &cMatrix3);

@@ -207,8 +207,8 @@ void IsoView::initTileCache()
   mh=mMap->height()-6;
 
 
-  //  mw/=4;
-  //  mh/=4;
+  //    mw/=4;
+    //  mh/=4;
 
 
   std::set<std::string> tiles;

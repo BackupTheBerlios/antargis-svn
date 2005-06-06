@@ -42,7 +42,7 @@ AntargisMap *getMap()
 
 AntargisMap::AntargisMap(int w,int h):
     mHeight(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),1,10,20),
-    mGrass(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),2,5,10), // 1 is no-var.
+    mGrass(POINTS_PER_TILE*(w+2),POINTS_PER_TILE*(w+2),2,5,8), // 1 is no-var.
     mEntities(Rect2D(0,0,w*TILE_SIZE,h*TILE_SIZE)),mW(w),mH(h),mRubyObject(false)
 {
   myAntargisMap=this;

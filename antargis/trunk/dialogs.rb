@@ -141,7 +141,7 @@ class AntLoadDialog<AntDialog
 			if x =~ /.*\.antlvl/ then
 				puts "FILE:"+x
 				value=x.gsub(".antlvl","")
-				@lb.insert(x,value)
+				@lb.insertItem(x,value)
 			end
 		}
 	end
