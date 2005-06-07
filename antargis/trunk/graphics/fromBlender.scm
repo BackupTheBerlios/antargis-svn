@@ -1,3 +1,4 @@
+; copy this to your ~/gimp-2.2/scripts
 (define (fromBlender filename output)
 	(let* ((image (car (gimp-file-load RUN-NONINTERACTIVE filename filename)))
           (drawable (car (gimp-image-get-active-layer image))))
