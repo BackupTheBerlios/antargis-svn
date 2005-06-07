@@ -170,4 +170,6 @@ class EditIsoView: public CompleteIsoView
 
 EditIsoView &toEditIsoView(AGWidget &w);
 
+int toInt(Uint8 i);
+
 #endif

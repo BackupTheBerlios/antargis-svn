@@ -246,7 +246,7 @@ void AntargisMap::setAllLand()
   for(x=0;x<mHeight.width();x++)
     for(y=0;y<mHeight.height();y++)
     {
-      mHeight.setPoint(x,y,15);
+      mHeight.setPoint(x,y,30);
     }
   mHeightChanged=true;
 }

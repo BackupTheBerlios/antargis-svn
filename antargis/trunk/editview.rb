@@ -32,6 +32,7 @@ class AntRubyEditView<EditIsoView
 		addChild(@layout)
 		
 		addHandler(@layout.getChild("allWater"),:sigClick,:sigAllWater)
+		addHandler(@layout.getChild("grass"),:sigClick,:sigAllGrass)
 		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
 		
 		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
@@ -121,11 +122,18 @@ class AntRubyEditView<EditIsoView
 	end
 	
 	def editHeight(ents)
+		puts "EDITHEIGHT:"
+		puts toInt($clickEvent.getButton)
+		if toInt($clickEvent.getButton)==3
+			dir=-1
+		else
+			dir=1
+		end
 		pos=getMarkerPos
 		x=pos.x*2/TILE_WIDTH+2
 		y=pos.z*2/TILE_WIDTH+3
-		getMap.addFlat(x,y,15,@size)
-		getMap.addFlat(x,y,30,@size-1)
+		getMap.addFlat(x,y,15*dir,@size)
+		getMap.addFlat(x,y,30*dir,@size-1)
 	end
 		
 	def addEntity(ents)
@@ -169,6 +177,9 @@ class AntRubyEditView<EditIsoView
 	def sigAllWater
 		getMap.setAllWater
 	end
+	def sigAllGrass
+		getMap.setAllLand
+	end
 	
 	def clickEntities(ents)
 		puts "CLICKENTS"
@@ -182,7 +193,9 @@ class AntRubyEditView<EditIsoView
 		puts "EDITMARKCLICKED"
 		if @modifier
 			puts "METHODS"
+			$clickEvent=e # dirty hack
 			send(@modifier,[])
+			$clickEvent=nil
 		end
 		
 		#puts @modifier.methods.sort

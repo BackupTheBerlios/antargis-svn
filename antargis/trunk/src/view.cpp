@@ -1025,3 +1025,7 @@ IMPLEMENT_COMPONENT_FACTORY(AntView);
 
 
 
+int toInt(Uint8 i)
+{
+  return i;
+}

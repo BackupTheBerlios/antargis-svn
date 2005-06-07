@@ -31,6 +31,7 @@ class AntNewHero<AntNewBoss
 		setType("hero")
 	end
 	def getTexture
+		return "hero"+mDirNum.to_s
 		return "hero1dl"
 	end
 	def xmlName

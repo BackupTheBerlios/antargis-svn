@@ -37426,6 +37426,26 @@ _wrap_toEditIsoView(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_toInt(int argc, VALUE *argv, VALUE self) {
+    Uint8 arg1 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        Uint8 * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Uint8, 1);
+        if (ptr) arg1 = *ptr;
+    }
+    result = (int)toInt(arg1);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_Resource_allocate(VALUE self) {
@@ -42169,6 +42189,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     cEditIsoView.mark = (void (*)(void *)) AGWidget_markfunc;
     cEditIsoView.destroy = (void (*)(void *)) free_EditIsoView;
     rb_define_module_function(mLibantargis, "toEditIsoView", VALUEFUNC(_wrap_toEditIsoView), -1);
+    rb_define_module_function(mLibantargis, "toInt", VALUEFUNC(_wrap_toInt), -1);
     
     cResource.klass = rb_define_class_under(mLibantargis, "Resource", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_Resource, (void *) &cResource);
