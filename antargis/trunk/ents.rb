@@ -41,4 +41,5 @@ require 'ant_man.rb'
 require 'ant_house.rb'
 require 'ant_stone.rb'
 require 'ant_tree.rb'
+require 'ant_deco.rb'
 

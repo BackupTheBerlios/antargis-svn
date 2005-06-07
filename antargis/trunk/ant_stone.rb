@@ -24,7 +24,7 @@
 class AntNewStone<AntMyEntity
 	def initialize()
 		super(Pos2D.new(0,0))
-		@typeID=0
+		@typeID=(rand()*2).to_i
 		setType("stone")
 	end
 	def setTreeType(t)

@@ -35,6 +35,12 @@ class AntRubyEditView<EditIsoView
 		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
 		
 		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
+		addHandler(@layout.getChild("deco"),:sigClick,:sigDeco)
+		addHandler(@layout.getChild("coach"),:sigClick,:sigCoach)
+		addHandler(@layout.getChild("stones"),:sigClick,:sigStones)
+		addHandler(@layout.getChild("tower"),:sigClick,:sigTower)
+		
+		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
 		
 		addHandler(@layout.getChild("pins"),:sigClick,:sigPoints)
 		
@@ -76,6 +82,10 @@ class AntRubyEditView<EditIsoView
 		@size=15
 	end
 	
+	def sigPointer
+		@modifier="edit"
+	end
+	
 	def sigPoints
 		toggleShowPoints
 	end
@@ -88,12 +98,29 @@ class AntRubyEditView<EditIsoView
 		@modifier="addEntity"
 		@type=AntNewTree
 	end
+	def sigDeco
+		@modifier="addEntity"
+		@type=AntNewDeco
+	end
+	def sigCoach
+		@modifier="addEntity"
+		@type=AntNewCoach
+	end
+	def sigStones
+		@modifier="addEntity"
+		@type=AntNewStone
+	end
+	def sigTower
+		@modifier="addEntity"
+		@type=AntNewHouse
+	end
 	
 	def editHeight(ents)
 		pos=getMarkerPos
 		x=pos.x*2/TILE_WIDTH+2
 		y=pos.z*2/TILE_WIDTH+3
-		getMap.addFlat(x,y,30,@size)
+		getMap.addFlat(x,y,15,@size)
+		getMap.addFlat(x,y,30,@size-1)
 	end
 		
 	def addEntity(ents)
@@ -102,8 +129,25 @@ class AntRubyEditView<EditIsoView
 		tree=@type.new
 		puts "tree:"
 		puts tree
-		tree.setPos2D(Pos2D.new(pos.x,pos.z))
+		addx=(rand()*32).to_i-16
+		addz=(rand()*32).to_i-16
+		tree.setPos2D(Pos2D.new(pos.x+addx,pos.z+addz))
 		getMap.insertEntity(tree)
+	end
+	
+	def edit(ents)
+		ents.each{|e|
+			e2=e.get
+			ent=getMap.getRuby(e2)
+			if ent
+				editProperties(ent)
+			end
+		}
+	end
+	
+	def editProperties(ent)
+		d=AntEditPropDialog.new($screen,ent)
+		$screen.addChild(d)
 	end
 	
 	def doRubber(ents)

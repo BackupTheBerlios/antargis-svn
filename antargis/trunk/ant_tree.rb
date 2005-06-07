@@ -32,14 +32,7 @@ class AntNewTree<AntMyEntity
 		@typeID=t
 	end
 	def getTexture
-#		return "tree"+@typeID.to_s
-		if rand()<0.5
-			return "flower1a"
-		elsif rand()<0.5
-			return "flower2a"
-		else
-			return "small_tree1a"
-		end
+		return "tree"+@typeID.to_s
 	end
 	def xmlName
 		return "antNewTree"

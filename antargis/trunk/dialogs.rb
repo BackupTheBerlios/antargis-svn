@@ -166,3 +166,10 @@ class AntPauseDialog<AntDialog
 		hide
 	end
 end
+
+class AntEditPropDialog<AntDialog
+	def initialize(parent,ent)
+		super(parent,"editpropdialog.xml")
+		@ent=ent
+	end
+end

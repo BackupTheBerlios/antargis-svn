@@ -50,6 +50,9 @@ class AntRubyMap<AntargisMap
 		if node.getName=="antNewSheep" then
 			e=AntNewSheep.new
 		end
+		if node.getName=="antNewDeco" then
+			e=AntNewDeco.new
+		end
 		if node.getName=="humanPlayer" then
 			player=AntHumanPlayer.new("")
 			player.loadXML(node)
