@@ -151,6 +151,7 @@ class AntLoadDialog<AntDialog
 			getMap.loadMap("savegames/"+file)
 			GC.start
 		end
+		getMap.unpause
 		hide
 	end
 end
@@ -171,5 +172,17 @@ class AntEditPropDialog<AntDialog
 	def initialize(parent,ent)
 		super(parent,"editpropdialog.xml")
 		@ent=ent
+		menCountW=toAGEdit(getChild("MenCount"))
+		nameW=toAGEdit(getChild("AntName"))
+		menCountW.setText(@ent.getXMLProp("men"))
+		nameW.setText(@ent.getName)
+		
+	end
+	def sigOk
+		menCountW=toAGEdit(getChild("MenCount"))
+		nameW=toAGEdit(getChild("AntName"))
+		@ent.setName(nameW.getText)
+		@ent.setXMLProp("men",menCountW.getText)
+		hide
 	end
 end

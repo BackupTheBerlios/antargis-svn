@@ -74,16 +74,18 @@ class AntNewHouse<AntNewBoss #MyEntity
 	# SIGN UP & REMOVE MAN
 	################################
 	
-	def signUp(man)
-		puts "SIGNUP"
-		puts man
-		@men.push(man)
-	end
+	#def signUp(man)
+	#	puts "SIGNUP"
+	#	puts man
+	#	if not @men.include?(man)
+	#		@men.push(man)
+	#	end
+	#end
 	
-	def removeMan(man)
-		@men.delete(man)
-		@atHome.delete(man)
-	end
+	#d#ef removeMan(man)
+	#	@men.delete(man)
+	#	@atHome.delete(man)
+	#end
 	
 	################################
 	# Viewing,etc.
@@ -102,6 +104,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 	end
 	
 	def menCount
+		#@men=@men.uniq
 		@men.length
 	end
 	
@@ -113,7 +116,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 	
 	def checkBirth
 		# only men, which are at home can add to birth rate
-		@lastBirth+=@atHome.length
+		@lastBirth+=[@atHome.length,30].min
 		puts "LASTBIRTH:"+@lastBirth.to_s
 		if @lastBirth>50 then
 			puts "A MAN IS BORN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -143,7 +146,11 @@ class AntNewHouse<AntNewBoss #MyEntity
 	end
 	
 	def eventNoJob
+		super
 		eventJobFinished
+	end
+	
+	def noHLJob
 	end
 	
 	def setOwner(owner)

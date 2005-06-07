@@ -31,6 +31,23 @@ class AntMyEntity<AntEntity
 		super(p)
 		$map.registerEntity(self)
 		mRUBY=self
+		@xmlProps={}
+	end
+	def setXMLProp(n,v)
+		@xmlProps[n]=v
+	end
+	def getXMLProp(n)
+		if @xmlProps[n]==nil
+			return ""
+		else
+			return @xmlProps[n]
+		end
+	end
+	def saveXML(node)
+		super(node)
+		@xmlProps.each{|n,v|
+			node.set(n,v)
+		}
 	end
 end
 

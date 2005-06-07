@@ -35,14 +35,14 @@ require 'map.rb'
 require 'view.rb'
 
 class AntGameApp <AntApp
-	def initialize()
+	def initialize(savegame)
 		super()
 		$app=self	
 #		@map=AntargisMap.new(128,128)	
 		@map=AntRubyMap.new(128,128)	
 		$map=@map
 		# load a level
-		getMap().loadMap("savegames/savegame6.antlvl")
+		getMap().loadMap(savegame)
 	
 		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
 		#puts @view
@@ -162,7 +162,12 @@ main=AGMain.new
 main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)
 
-app=AntGameApp.new()
+savegame="savegames/savegame6.antlvl"
+if ARGV.length>0
+	savegame=ARGV[0]
+end
+
+app=AntGameApp.new(savegame)
 
 app.run
 

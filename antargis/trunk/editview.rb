@@ -39,6 +39,7 @@ class AntRubyEditView<EditIsoView
 		addHandler(@layout.getChild("coach"),:sigClick,:sigCoach)
 		addHandler(@layout.getChild("stones"),:sigClick,:sigStones)
 		addHandler(@layout.getChild("tower"),:sigClick,:sigTower)
+		addHandler(@layout.getChild("hero"),:sigClick,:sigHero)
 		
 		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
 		
@@ -113,6 +114,10 @@ class AntRubyEditView<EditIsoView
 	def sigTower
 		@modifier="addEntity"
 		@type=AntNewHouse
+	end
+	def sigHero
+		@modifier="addEntity"
+		@type=AntNewHero
 	end
 	
 	def editHeight(ents)

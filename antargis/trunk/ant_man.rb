@@ -56,6 +56,7 @@ class AntNewMan<AntMyEntity
 		@dead=false
 		@fighting=false
 		@bossName=""
+		puts "NEWMAN"
 	end
 	def getTexture
 		if @dead

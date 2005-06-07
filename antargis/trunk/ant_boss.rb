@@ -36,11 +36,15 @@ class AntNewBoss<AntMyEntity
 	def loadXML(node)
 		super(node)
 		if node.get("men")!="" then
-			@createMen=node.get("men").to_i
+			puts "LOAD:CREATING MEN:"+node.get("men")
+			if node.get("men")!=""
+				@createMen=node.get("men").to_i
+			end
 		end
 	end
 	
 	def menCount
+		@men=@men.uniq
 		return @men.length
 	end
 	
@@ -51,14 +55,17 @@ class AntNewBoss<AntMyEntity
 		puts "NAME:"
 		puts getName
 		if @createMen>0
+			puts "Name:"
+			puts getName
+			puts "ANTBOSS:CREATING MEN:"+@createMen.to_s
 			for i in 0..(@createMen-1) do
-				puts "HERO::CREATING MEN:"
+				#puts "HERO::CREATING MEN:"
 				man=AntNewMan.new
-				puts "READY CREATING"
+				#puts "READY CREATING"
 				getMap.insertEntity(man)
 				man.setPos2D(getPos2D)
 				man.setBoss(self)
-				puts "CREATING MEN"
+				#puts "CREATING MEN"
 			end
 			getMap.endChange
 			@createMen=0
