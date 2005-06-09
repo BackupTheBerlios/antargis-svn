@@ -22,30 +22,51 @@
 #!/usr/bin/ruby
 
 class AntNewDeco<AntMyEntity
-	def initialize()
+	def initialize(decoType=nil)
 		super(Pos2D.new(0,0))
-		@typeID=(rand()*12).to_i
+		@decoType=decoType
+		if @decoType==nil
+			a=["flower1a","flower2a","twig","gravel","small_bush","hole","grass4","grass4a","grass4b","gravel_big","gravel_big2","rock1"]
+			r=(rand()*a.size).to_i
+			@decoType=a[r]
+		else
+			b={"coach"=>["coach2"],
+					"flower"=>["flower1a","flower2a"],
+					"gravel"=>["gravel","gravel_big","gravel_big2"],
+					"hole"=>["hole"],
+					"twig"=>["twig"],
+					"rock"=>["rock1"],
+					"grassLight"=>["grass4a","grass4b","grass4"],
+					"floor"=>["floor2"],
+					"grassGreen"=>["grass3"]}
+			if ["grassGreen","grassLight","gravel","twig","hole","floor"].member?(@decoType) then
+				setVirtualY(0)
+			else
+				setVirtualY(80)
+			end
+			a=b[@decoType]
+			r=(rand()*a.size).to_i
+			@decoType=a[r]
+		end
 		setType("deco")
-		setVirtualY(100)
 	end
 	def setDecoType(t)
 		@typeID=t
 	end
 	def getTexture
-		a=["flower1a","flower2a","twig","gravel","small_bush","hole"]
-		r=(rand()*a.size).to_i
-		return a[r]
+		@decoType
 	end
 	def xmlName
 		return "antNewDeco"
 	end
 	def saveXML(node)
 		super(node)
-		node.set("typeID",@typeID.to_s)
+		node.set("decoType",@decoType)
 	end
 	def loadXML(node)
 		super(node)
-		@typeID=node.get("typeID").to_i
+		@decoType=node.get("decoType")
+		#@typeID=node.get("typeID").to_i
 	end
 end
 

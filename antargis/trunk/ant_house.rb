@@ -38,14 +38,14 @@ end
 class AntNewHouse<AntNewBoss #MyEntity
 	def initialize
 		super #(Pos2D.new(0,0))
-		@type=2
+		@type=3
 		setType("house")
 		@men=[]
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
 		
-		setVirtualY(100)
+		setVirtualY(250)
 	end
 	
 	###############################

@@ -254,6 +254,9 @@ void AntEntity::eventMapChanged()
 {
   if(onGround)
     mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
+  if(mSurface)
+    mSurface->setPosition(mPos);
+
 }
 
 void AntEntity::setType(const std::string &pType)

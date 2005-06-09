@@ -111,8 +111,8 @@ class CompleteIsoView: public IsoView
     AGSignal sigMapClick;
     AGSignal sigEntityClick;
 */
-    virtual void clickEntities(const std::vector<AntEntityPtr> &ents);
-    virtual void clickMap(const Pos2D &p);
+    virtual void clickEntities(const std::vector<AntEntityPtr> &ents,const AGSDLEvent *e);
+    virtual void clickMap(const Pos2D &p,const AGSDLEvent *e);
 
   };
 

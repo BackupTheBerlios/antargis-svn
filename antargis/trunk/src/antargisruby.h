@@ -1138,10 +1138,10 @@ public:
     virtual bool eventMouseClick(AGEvent const *m);
     virtual bool eventMouseEnter();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void clickEntities(std::vector<AntEntityPtr > const &ents);
+    virtual void clickEntities(std::vector<AntEntityPtr > const &ents, AGSDLEvent const *e);
+    virtual void clickMap(Pos2D const &p, AGSDLEvent const *e);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual void clickMap(Pos2D const &p);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);
@@ -1181,10 +1181,10 @@ public:
     virtual bool eventMouseMotion(AGEvent const *m);
     virtual bool eventMouseEnter();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void clickEntities(std::vector<AntEntityPtr > const &ents);
+    virtual void clickEntities(std::vector<AntEntityPtr > const &ents, AGSDLEvent const *e);
+    virtual void clickMap(Pos2D const &p, AGSDLEvent const *e);
     virtual void drawAll(AGPainter &p);
     virtual void draw(AGPainter &p);
-    virtual void clickMap(Pos2D const &p);
     virtual void setLeft(int x);
     virtual void setTop(int y);
     virtual void setHeight(int w);

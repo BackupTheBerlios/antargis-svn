@@ -27,7 +27,7 @@ class AntRubyEditView<EditIsoView
 		super(w,r,pos,map)
 		setEditing(true)
 		setName("MYYYYEditView")
-		
+		@showPoints=true
 		@layout=AGLayout.new(self,loadFile("edit_layout.xml"))
 		addChild(@layout)
 		
@@ -36,11 +36,20 @@ class AntRubyEditView<EditIsoView
 		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
 		
 		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
-		addHandler(@layout.getChild("deco"),:sigClick,:sigDeco)
-		addHandler(@layout.getChild("coach"),:sigClick,:sigCoach)
+		
+		decos=["flower","gravel","grassLight","grassGreen","twig","hole","rock","coach","floor"]
+		decos.each{|name|
+			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
+		}
+		
+		ents=["sheep","hero","tower","druid"]
+		ents.each{|name|
+			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
+		}
+		
 		addHandler(@layout.getChild("stones"),:sigClick,:sigStones)
-		addHandler(@layout.getChild("tower"),:sigClick,:sigTower)
-		addHandler(@layout.getChild("hero"),:sigClick,:sigHero)
+		#addHandler(@layout.getChild("tower"),:sigClick,:sigTower)
+		#addHandler(@layout.getChild("hero"),:sigClick,:sigHero)
 		
 		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
 		
@@ -89,6 +98,7 @@ class AntRubyEditView<EditIsoView
 	end
 	
 	def sigPoints
+		@showPoints=(not @showPoints)
 		toggleShowPoints
 	end
 	
@@ -100,25 +110,26 @@ class AntRubyEditView<EditIsoView
 		@modifier="addEntity"
 		@type=AntNewTree
 	end
-	def sigDeco
+	def sigAddEnt(name,callerName,event,caller)
+		@modifier="addEntity"
+		case callerName
+			when "sheep"
+				@type=AntNewSheep
+			when "tower"
+				@type=AntNewHouse
+			when "hero"
+				@type=AntNewHero
+				@appearance="hero"
+			when "druid"
+				@type=AntNewHero
+				@appearance="druid"
+		end
+	end
+	def sigDeco(name,callerName,event,caller)
 		@modifier="addEntity"
 		@type=AntNewDeco
-	end
-	def sigCoach
-		@modifier="addEntity"
-		@type=AntNewCoach
-	end
-	def sigStones
-		@modifier="addEntity"
-		@type=AntNewStone
-	end
-	def sigTower
-		@modifier="addEntity"
-		@type=AntNewHouse
-	end
-	def sigHero
-		@modifier="addEntity"
-		@type=AntNewHero
+		@decoType=callerName
+		return
 	end
 	
 	def editHeight(ents)
@@ -139,11 +150,26 @@ class AntRubyEditView<EditIsoView
 	def addEntity(ents)
 		puts "ADDENTITY"
 		pos=getMarkerPos
-		tree=@type.new
+		dorand=true
+		if @type==AntNewDeco
+			tree=@type.new(@decoType)
+			if @decoType=="floor"
+				dorand=false
+			end
+		elsif @type==AntNewHero
+			tree=@type.new
+			tree.setAppearance(@appearance)
+		else
+			tree=@type.new
+		end
 		puts "tree:"
 		puts tree
-		addx=(rand()*32).to_i-16
-		addz=(rand()*32).to_i-16
+		addx=0
+		addz=0
+		if dorand then
+			addx=(rand()*32).to_i-16
+			addz=(rand()*32).to_i-16
+		end
 		tree.setPos2D(Pos2D.new(pos.x+addx,pos.z+addz))
 		getMap.insertEntity(tree)
 	end
@@ -156,6 +182,14 @@ class AntRubyEditView<EditIsoView
 				editProperties(ent)
 			end
 		}
+	end
+	
+	def getMarkerPos
+		if @markerPos
+			return @markerPos
+		else
+			return super()
+		end
 	end
 	
 	def editProperties(ent)
@@ -181,11 +215,21 @@ class AntRubyEditView<EditIsoView
 		getMap.setAllLand
 	end
 	
-	def clickEntities(ents)
-		puts "CLICKENTS"
+	def clickEntities(ents,event)
+		puts("CLICKENTS")
 		if @modifier
 			puts "METHODS"
+			$clickEvent=event
 			send(@modifier,ents)
+			$clickEvent=nil
+		end
+	end
+	
+	def clickMap(pos,event)
+		if not @showPoints
+			@markerPos=Pos3D.new(pos.x,0,pos.y)
+			editMarkClicked(pos,event)
+			@markerPos=nil
 		end
 	end
 	

@@ -15985,18 +15985,50 @@ bool SwigDirector_CompleteIsoView::signal(std::string const &pName, AGEvent cons
 }
 
 
-void SwigDirector_CompleteIsoView::clickEntities(std::vector<AntEntityPtr > const &ents) {
+void SwigDirector_CompleteIsoView::clickEntities(std::vector<AntEntityPtr > const &ents, AGSDLEvent const *e) {
     std::vector<AntEntityPtr > temp1 ;
     std::vector<AntEntityPtr > * nc_tmp_ents = const_cast<std::vector<AntEntityPtr > *>(&ents) ;
     VALUE obj0 = Qnil ;
+    AGSDLEvent * nc_tmp_e = const_cast<AGSDLEvent *>(e) ;
+    Swig::Director * director__p_AGSDLEvent = 0 ;
+    VALUE obj1 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        CompleteIsoView::clickEntities(ents);
+        CompleteIsoView::clickEntities(ents,e);
         return;
     }
     obj0 = SWIG_NewPointerObj(nc_tmp_ents, SWIGTYPE_p_std__vectorTAntEntityPtr_t, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("clickEntities"), 1,obj0);
+    director__p_AGSDLEvent = dynamic_cast<Swig::Director *>(nc_tmp_e);
+    if (!director__p_AGSDLEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_e, SWIGTYPE_p_AGSDLEvent, 0);
+    } else {
+        obj1 = director__p_AGSDLEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("clickEntities"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_CompleteIsoView::clickMap(Pos2D const &p, AGSDLEvent const *e) {
+    Pos2D * nc_tmp_p = const_cast<Pos2D *>(&p) ;
+    VALUE obj0 = Qnil ;
+    AGSDLEvent * nc_tmp_e = const_cast<AGSDLEvent *>(e) ;
+    Swig::Director * director__p_AGSDLEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        CompleteIsoView::clickMap(p,e);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_p, SWIGTYPE_p_Pos2D, 0);
+    director__p_AGSDLEvent = dynamic_cast<Swig::Director *>(nc_tmp_e);
+    if (!director__p_AGSDLEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_e, SWIGTYPE_p_AGSDLEvent, 0);
+    } else {
+        obj1 = director__p_AGSDLEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("clickMap"), 2,obj0,obj1);
 }
 
 
@@ -16035,20 +16067,6 @@ void SwigDirector_CompleteIsoView::draw(AGPainter &p) {
         obj0 = director__p_AGPainter->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-void SwigDirector_CompleteIsoView::clickMap(Pos2D const &p) {
-    Pos2D * nc_tmp_p = const_cast<Pos2D *>(&p) ;
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        CompleteIsoView::clickMap(p);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(nc_tmp_p, SWIGTYPE_p_Pos2D, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("clickMap"), 1,obj0);
 }
 
 
@@ -16628,18 +16646,50 @@ bool SwigDirector_EditIsoView::signal(std::string const &pName, AGEvent const *m
 }
 
 
-void SwigDirector_EditIsoView::clickEntities(std::vector<AntEntityPtr > const &ents) {
+void SwigDirector_EditIsoView::clickEntities(std::vector<AntEntityPtr > const &ents, AGSDLEvent const *e) {
     std::vector<AntEntityPtr > temp1 ;
     std::vector<AntEntityPtr > * nc_tmp_ents = const_cast<std::vector<AntEntityPtr > *>(&ents) ;
     VALUE obj0 = Qnil ;
+    AGSDLEvent * nc_tmp_e = const_cast<AGSDLEvent *>(e) ;
+    Swig::Director * director__p_AGSDLEvent = 0 ;
+    VALUE obj1 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        CompleteIsoView::clickEntities(ents);
+        CompleteIsoView::clickEntities(ents,e);
         return;
     }
     obj0 = SWIG_NewPointerObj(nc_tmp_ents, SWIGTYPE_p_std__vectorTAntEntityPtr_t, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("clickEntities"), 1,obj0);
+    director__p_AGSDLEvent = dynamic_cast<Swig::Director *>(nc_tmp_e);
+    if (!director__p_AGSDLEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_e, SWIGTYPE_p_AGSDLEvent, 0);
+    } else {
+        obj1 = director__p_AGSDLEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("clickEntities"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_EditIsoView::clickMap(Pos2D const &p, AGSDLEvent const *e) {
+    Pos2D * nc_tmp_p = const_cast<Pos2D *>(&p) ;
+    VALUE obj0 = Qnil ;
+    AGSDLEvent * nc_tmp_e = const_cast<AGSDLEvent *>(e) ;
+    Swig::Director * director__p_AGSDLEvent = 0 ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        CompleteIsoView::clickMap(p,e);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_p, SWIGTYPE_p_Pos2D, 0);
+    director__p_AGSDLEvent = dynamic_cast<Swig::Director *>(nc_tmp_e);
+    if (!director__p_AGSDLEvent) {
+        obj1 = SWIG_NewPointerObj(nc_tmp_e, SWIGTYPE_p_AGSDLEvent, 0);
+    } else {
+        obj1 = director__p_AGSDLEvent->swig_get_self();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("clickMap"), 2,obj0,obj1);
 }
 
 
@@ -16678,20 +16728,6 @@ void SwigDirector_EditIsoView::draw(AGPainter &p) {
         obj0 = director__p_AGPainter->swig_get_self();
     }
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 1,obj0);
-}
-
-
-void SwigDirector_EditIsoView::clickMap(Pos2D const &p) {
-    Pos2D * nc_tmp_p = const_cast<Pos2D *>(&p) ;
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        CompleteIsoView::clickMap(p);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(nc_tmp_p, SWIGTYPE_p_Pos2D, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("clickMap"), 1,obj0);
 }
 
 
@@ -36905,11 +36941,12 @@ static VALUE
 _wrap_CompleteIsoView_clickEntities(int argc, VALUE *argv, VALUE self) {
     CompleteIsoView *arg1 = (CompleteIsoView *) 0 ;
     std::vector<AntEntityPtr > *arg2 = 0 ;
+    AGSDLEvent *arg3 = (AGSDLEvent *) 0 ;
     std::vector<AntEntityPtr > temp2 ;
     Swig::Director *director = 0;
     
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_CompleteIsoView, 1);
     {
         if (rb_obj_is_kind_of(argv[0],rb_cArray)) {
@@ -36926,9 +36963,10 @@ _wrap_CompleteIsoView_clickEntities(int argc, VALUE *argv, VALUE self) {
             SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTAntEntityPtr_t, 1);
         }
     }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGSDLEvent, 1);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    (arg1)->clickEntities((std::vector<AntEntityPtr > const &)*arg2);
+    (arg1)->clickEntities((std::vector<AntEntityPtr > const &)*arg2,(AGSDLEvent const *)arg3);
     
     return Qnil;
 }
@@ -36938,15 +36976,17 @@ static VALUE
 _wrap_CompleteIsoView_clickMap(int argc, VALUE *argv, VALUE self) {
     CompleteIsoView *arg1 = (CompleteIsoView *) 0 ;
     Pos2D *arg2 = 0 ;
+    AGSDLEvent *arg3 = (AGSDLEvent *) 0 ;
     Swig::Director *director = 0;
     
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_CompleteIsoView, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Pos2D, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGSDLEvent, 1);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    (arg1)->clickMap((Pos2D const &)*arg2);
+    (arg1)->clickMap((Pos2D const &)*arg2,(AGSDLEvent const *)arg3);
     
     return Qnil;
 }

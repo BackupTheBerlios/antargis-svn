@@ -3,12 +3,12 @@
 	(let* ((image (car (gimp-file-load RUN-NONINTERACTIVE filename filename)))
           (drawable (car (gimp-image-get-active-layer image))))
 						; select background
-						(gimp-by-color-select drawable (car (list (list 182 182 182))) 40 2 1 1 1 0)
+						(gimp-by-color-select drawable (car (list (list 182 0 182))) 40 2 1 1 1 0)
 						; clear background
 						(gimp-edit-clear drawable)
 						
 						; select shadow
-						(gimp-by-color-select drawable (car (list (list 115 115 115))) 3 2 1 1 1 0)
+						(gimp-by-color-select drawable (car (list (list 115 0 115))) 3 2 1 1 1 0)
 						; clear shadow
 						(gimp-edit-clear drawable)
 						; reset colors fg=black

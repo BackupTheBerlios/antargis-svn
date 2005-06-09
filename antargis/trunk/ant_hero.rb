@@ -29,19 +29,25 @@ class AntNewHero<AntNewBoss
 	def initialize
 		super
 		setType("hero")
+		@appearance="hero"
 	end
+	def setAppearance(a)
+		@appearance=a
+	end
+	
 	def getTexture
-		return "hero"+mDirNum.to_s
-		return "hero1dl"
+		return @appearance+mDirNum.to_s
 	end
 	def xmlName
 		return "antNewHero"
 	end
 	def saveXML(node)
 		super(node)
+		node.set("appearance",@appearance)
 	end
 	def loadXML(node)
 		super(node)
+		@appearance=node.get("appearance")
 	end
 	
 	def checkHLJobEnd(man)
