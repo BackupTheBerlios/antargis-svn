@@ -33,6 +33,7 @@
 			<button col="8" row="0" name="hole" caption-image="graphics/hole.png"/>
 			<button col="9" row="0" name="rock" caption-image="graphics/rock1.png"/>
 			<button col="10" row="0" name="floor" caption-image="graphics/floor2.png"/>
+			<button col="11" row="0" name="path" caption-image="graphics/path.png"/>
 			
 		</table>
 	</table>

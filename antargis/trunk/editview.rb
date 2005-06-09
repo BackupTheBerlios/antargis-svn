@@ -37,17 +37,17 @@ class AntRubyEditView<EditIsoView
 		
 		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
 		
-		decos=["flower","gravel","grassLight","grassGreen","twig","hole","rock","coach","floor"]
+		decos=["flower","gravel","grassLight","grassGreen","twig","hole","rock","coach","floor","path"]
 		decos.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid"]
+		ents=["sheep","hero","tower","druid","stones"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
 		
-		addHandler(@layout.getChild("stones"),:sigClick,:sigStones)
+		#addHandler(@layout.getChild("stones"),:sigClick,:sigStones)
 		#addHandler(@layout.getChild("tower"),:sigClick,:sigTower)
 		#addHandler(@layout.getChild("hero"),:sigClick,:sigHero)
 		
@@ -117,6 +117,8 @@ class AntRubyEditView<EditIsoView
 				@type=AntNewSheep
 			when "tower"
 				@type=AntNewHouse
+			when "stones"
+				@type=AntNewStone
 			when "hero"
 				@type=AntNewHero
 				@appearance="hero"

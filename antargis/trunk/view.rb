@@ -27,12 +27,12 @@ class AntRubyView <CompleteIsoView
 		super(p,rect,pos,map)
 		$antView=self
 	end
-	def clickMap(pos)
+	def clickMap(pos,event)
 		if @hero then
 			@hero.newHLMoveJob(0,pos,0)
 		end
 	end
-	def clickEntities(list)
+	def clickEntities(list,event)
 		puts "CLICKENTS"
 		
 		job=$buttonPanel.getJob
