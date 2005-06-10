@@ -88,11 +88,6 @@ void IsoView::init()
   int mh=height()/16+4;
 
 
-  Uint32 t0=SDL_GetTicks();
-
-
-
-
   // 800x600 0<=x<13   0<=y<40
   // 1400x1024 0<=x<23   0<=y<74
 
@@ -165,10 +160,6 @@ void IsoView::init()
     }
 
 
-  Uint32 t1=SDL_GetTicks();
-
-  //  cdebug("TIME0:"<<t1-t0);
-
   // insert entities
   std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
 
@@ -183,10 +174,6 @@ void IsoView::init()
       insert(image);
     }
   inited=true;
-  Uint32 t2=SDL_GetTicks();
-
-  //  cdebug("TIME:"<<t2-t1);
-  //  cdebug("TIME:"<<t2-t0);
 
   getSurfaceManager()->enableGC();
 
@@ -299,7 +286,7 @@ void IsoView::initTileCache()
         }
     }
 
-
+  getVoxelID()->save();
 
 }
 
@@ -307,34 +294,37 @@ VoxelImage *IsoView::getTree()
 {
   std::string name="tree";
 
-  if(!fileExists(TILEDIR+"tree.png"))
+  if(!fileExists(name))
     {
       VoxelImage *i=makeTree();
       i->save(name);
       return i;
     }
   VoxelImage *i=new VoxelImage(name);
-      return i;
+  return i;
 }
 
 VoxelImage *IsoView::getWaterTile()
 {
-  if(!fileExists(TILEDIR+"water.png"))
+  std::string name="tiles/water.png";
+
+  if(!fileExists(name))
     {
       VoxelImage *i=makeWaterTile();
-      i->save("water");
+      i->save(name);
       delete i;
     }
-  VoxelImage *i=new VoxelImage("water");
+  VoxelImage *i=new VoxelImage(name);
   return i;
 }
 
 VoxelImage *IsoView::getSurface(const SplineMapD &h,const SplineMapD &g)
 {
-  std::string name=h.toString()+g.toString(); // FIXME: this is too slow
+  std::string name=std::string("tiles/")+h.toString()+g.toString()+std::string(".png"); // FIXME: this is too slow
   //return new VoxelImage("man1dl");
 
-  if(!fileExists(TILEDIR+name+".png"))
+  //  cdebug("TRY READING:"<<name<<"!");
+  if(!fileExists(name))
     {
       VoxelImage *i=makeTerrainTile(h,g,0,0);
 
@@ -343,21 +333,8 @@ VoxelImage *IsoView::getSurface(const SplineMapD &h,const SplineMapD &g)
     }
 
 
-  //cdebug("FileExists:"<<name<<".png");
-  //if(fileExists(name+".png"))
-  {
-    //cdebug("File Exists!!!!!!!!!!!!!!!!!!!!!!!");
-    //ComplexVoxelImage *i=new ComplexVoxelImage(name);
-    VoxelImage *i=new VoxelImage(name);
-    return i;
-  }
-  /*else
-    {
-      VoxelImage *i=makeTerrainTile(h,g,0,0);
-
-      i->save(name);
-      return i;
-    }*/
+  VoxelImage *i=new VoxelImage(name);
+  return i;
 }
 
 // p is local window-coordinate
@@ -432,7 +409,7 @@ IVTile IsoView::getTile(const AGPoint &pp)
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
 #ifndef NOLIGHTING
-  shallUpdate=true;
+  //  shallUpdate=true;
 #endif
 
   if(mMap->heightChanged() || !inited)
@@ -675,10 +652,6 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   mOldPoint=0;
   mShowPoints=true;
   mEditing=false;
-  //  AGButton *b;
-
-  char *editNames[]={"edit1.png","edit2.png","edit3.png","edit4.png","edit5.png","edit10.png","edit15.png",""};
-  int editSizes[]={1,2,3,4,5,10,15};
 
   editSize=1;
 
@@ -698,7 +671,7 @@ EditIsoView::EditIsoView(AGWidget *parent,AGRect r,Pos3D p,AntargisMap *map):
   layout->getChild("tower")->sigClick.connect(slot(this,&EditIsoView::addEntity));
   #endif
 
-  mWhitePin=new VoxelImage("white_pin");
+  mWhitePin=new VoxelImage("white_pin.png");
 }
 
 EditIsoView::~EditIsoView()
@@ -920,10 +893,10 @@ bool EditIsoView::eventMouseMotion(const AGEvent *m)
             {
               VoxelImage *i=dynamic_cast<VoxelImage*>(closest);
               if(mOldPoint)
-                mOldPoint->setTexture("white_pin");
+                mOldPoint->setTexture("white_pin.png");
               mOldPoint=i;
               if(i)
-                i->setTexture("blue_pin");
+                i->setTexture("blue_pin.png");
             }
 
         }

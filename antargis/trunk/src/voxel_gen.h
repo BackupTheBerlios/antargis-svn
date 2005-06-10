@@ -34,8 +34,6 @@
 #define WATER_HEIGHT 10
 #define GRASS_HEIGHT 20
 
-#define TILEDIR std::string("tiles/")
-
 #define SplineMapD SplineMap //int brings some small improvement - but makes problems with water
 
 #else
@@ -45,7 +43,7 @@
 #define WATER_HEIGHT 10
 #define GRASS_HEIGHT 20
 
-#define TILEDIR std::string("tiles/")
+//#define TILEDIR std::string("tiles/")
 
 #define SplineMapD SplineMap //int brings some small improvement - but makes problems with water
 
@@ -61,6 +59,7 @@ class VoxelImageData
     virtual ~VoxelImageData();
     Pos2D getCenter(const std::string &pFilename);
     void setCenter(const std::string &pFilename,const Pos2D &pPos);
+    void save();
 
     private:
 void loadXML(const xmlpp::Node &n);

@@ -34413,6 +34413,19 @@ _wrap_VoxelImageData_setCenter(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_VoxelImageData_save(int argc, VALUE *argv, VALUE self) {
+    VoxelImageData *arg1 = (VoxelImageData *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_VoxelImageData, 1);
+    (arg1)->save();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_VoxelImageData(int argc, VALUE *argv, VALUE self) {
     VoxelImageData *arg1 = (VoxelImageData *) 0 ;
     
@@ -42334,6 +42347,7 @@ SWIGEXPORT(void) Init_libantargis(void) {
     rb_define_method(cVoxelImageData.klass, "initialize", VALUEFUNC(_wrap_new_VoxelImageData), -1);
     rb_define_method(cVoxelImageData.klass, "getCenter", VALUEFUNC(_wrap_VoxelImageData_getCenter), -1);
     rb_define_method(cVoxelImageData.klass, "setCenter", VALUEFUNC(_wrap_VoxelImageData_setCenter), -1);
+    rb_define_method(cVoxelImageData.klass, "save", VALUEFUNC(_wrap_VoxelImageData_save), -1);
     cVoxelImageData.mark = 0;
     cVoxelImageData.destroy = (void (*)(void *)) free_VoxelImageData;
     rb_define_module_function(mLibantargis, "getVoxelID", VALUEFUNC(_wrap_getVoxelID), -1);

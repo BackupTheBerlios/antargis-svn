@@ -31,7 +31,7 @@ class AntNewStone<AntMyEntity
 		@typeID=t
 	end
 	def getTexture
-		return "deco"+@typeID.to_s
+		return "deco"+@typeID.to_s+".png"
 	end
 	def saveXML(node)
 		super(node)

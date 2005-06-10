@@ -96,7 +96,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 	end
 	def getTexture
 		puts "HOUSE::getTexture"
-		return "tower"+@type.to_s
+		return "tower"+@type.to_s+".png"
 	end
 	
 	def getMen

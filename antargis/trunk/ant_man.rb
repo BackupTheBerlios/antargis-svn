@@ -44,7 +44,7 @@ class AntNewAngel<AntMyEntity
 		end
 	end
 	def getTexture
-		return "angel"
+		return "angel.png"
 	end
 end
 
@@ -60,11 +60,11 @@ class AntNewMan<AntMyEntity
 	end
 	def getTexture
 		if @dead
-			return "grave"
+			return "grave.png"
 		elsif @fighting
-			return "man1_sword1"
+			return "man1_sword1.png"
 		else
-			return "man"+mDirNum.to_s
+			return "man"+mDirNum.to_s+".png"
 		end
 	end
 	

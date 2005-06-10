@@ -706,6 +706,9 @@ int AntargisMap::getDarkness(const Pos2D &pPos) const
 
   float rd=or2-r2;
 
+  if(mLightingEntities.size()==0)
+    return 0xFF;
+
   std::set<AntEntity*>::iterator i=mLightingEntities.begin();
   for(;i!=mLightingEntities.end();i++)
     {

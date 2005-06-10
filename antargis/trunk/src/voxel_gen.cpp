@@ -50,6 +50,11 @@ VoxelImageData::VoxelImageData()
 
 VoxelImageData::~VoxelImageData()
 {
+  save();
+}
+
+void VoxelImageData::save()
+{
   CTRACE;
   std::string pFilename="voxelimagedata.xml";
   xmlpp::Document d;
@@ -111,7 +116,7 @@ VoxelImageData *getVoxelID()
 
 AVItem::AVItem(const Pos3D &p):inited(false),mPos(p),mCenter(0,0),virtualY(0)
 {
-  darkness=rand()%0xFF;
+  darkness=0xFF;
 }
 
 AVItem::~AVItem()
@@ -306,7 +311,7 @@ VoxelImage::VoxelImage(AGSurface pSurface,Pos3D pPos):
 VoxelImage::VoxelImage(const std::string &pFilename):
     AVItem(Pos3D(0,0,0))
 {
-  mTexture=const_cast<AGTexture*>(&getTextureCache()->get(TILEDIR+pFilename+".png"));
+  mTexture=const_cast<AGTexture*>(&getTextureCache()->get(pFilename));
   // FIXME: Check this
   
   Pos2D c=getVoxelID()->getCenter(pFilename);
@@ -320,7 +325,7 @@ VoxelImage::VoxelImage(const std::string &pFilename):
 
 void VoxelImage::setTexture(const std::string &pFilename)
 {
-  mTexture=const_cast<AGTexture*>(&getTextureCache()->get(pFilename+".png"));
+  mTexture=const_cast<AGTexture*>(&getTextureCache()->get(pFilename));
   // FIXME: Check this
   setCenter(Pos2D(mTexture->width()/2,mTexture->height()-mTexture->width()/4));
 }
@@ -418,7 +423,8 @@ void VoxelImage::save(const std::string &pFilename)
   //  SDL_SaveBMP(mSurface.surface(),"hupe2.bmp");
   std::string c=toPNG(mSurface.surface());
 
-  saveFile(TILEDIR+pFilename+".png",c);
+  saveFile(pFilename,c);
+  cdebug("SAVING:"<<pFilename<<"!");
 }
 
 

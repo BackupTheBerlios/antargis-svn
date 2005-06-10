@@ -134,6 +134,9 @@ class AntRubyMap<AntargisMap
 			@ents[e.getID]=e
 		end
 	end
+	
+	def setLight(e)
+	end
 end
 
 

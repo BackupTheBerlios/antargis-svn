@@ -56,7 +56,7 @@ class AntNewDeco<AntMyEntity
 		@typeID=t
 	end
 	def getTexture
-		@decoType
+		@decoType+".png"
 	end
 	def xmlName
 		return "antNewDeco"

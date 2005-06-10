@@ -32,7 +32,7 @@ class AntNewTree<AntMyEntity
 		@typeID=t
 	end
 	def getTexture
-		return "tree"+@typeID.to_s
+		return "tree"+@typeID.to_s+".png"
 	end
 	def xmlName
 		return "antNewTree"

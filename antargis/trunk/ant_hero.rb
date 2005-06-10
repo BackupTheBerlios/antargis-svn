@@ -37,7 +37,7 @@ class AntNewHero<AntNewBoss
 	end
 	
 	def getTexture
-		return @appearance+mDirNum.to_s
+		return @appearance+mDirNum.to_s+".png"
 	end
 	def xmlName
 		return "antNewHero"

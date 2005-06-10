@@ -35,7 +35,7 @@ class AntNewSheep<AntMyEntity
 		setVirtualY(40)
 	end
 	def getTexture
-		return "sheep"+mDirNum.to_s
+		return "sheep"+mDirNum.to_s+".png"
 	end
 	def saveXML(node)
 		super(node)
