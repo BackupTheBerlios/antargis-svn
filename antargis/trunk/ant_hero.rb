@@ -30,6 +30,7 @@ class AntNewHero<AntNewBoss
 		super
 		setType("hero")
 		@appearance="hero"
+		getMap.setLight(self)
 	end
 	def setAppearance(a)
 		@appearance=a
@@ -48,6 +49,9 @@ class AntNewHero<AntNewBoss
 	def loadXML(node)
 		super(node)
 		@appearance=node.get("appearance")
+		if @appearance==""
+			@appearance="hero"
+		end
 	end
 	
 	def checkHLJobEnd(man)

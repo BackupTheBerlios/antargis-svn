@@ -37,7 +37,7 @@ class AntRubyEditView<EditIsoView
 		
 		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
 		
-		decos=["flower","gravel","grassLight","grassGreen","twig","hole","rock","coach","floor","path"]
+		decos=["flower","gravel","grassLight","grassGreen","twig","hole","rock","coach","floor","path","block"]
 		decos.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
@@ -150,12 +150,15 @@ class AntRubyEditView<EditIsoView
 	end
 		
 	def addEntity(ents)
+		if toInt($clickEvent.getButton)!=1
+			return
+		end
 		puts "ADDENTITY"
 		pos=getMarkerPos
 		dorand=true
 		if @type==AntNewDeco
 			tree=@type.new(@decoType)
-			if @decoType=="floor"
+			if @decoType=="floor" or @decoType=="block"
 				dorand=false
 			end
 		elsif @type==AntNewHero

@@ -2,8 +2,8 @@
 <layout geometry="(0,0,1024,768)" name="EditLayout">
 	<table cols="2" rows="2">
 		<rowsize row="1" fixed="150"/>
-		<colsize col="0" fixed="600"/>
-		<table cols="12" rows="3" col="0" row="1">
+		<colsize col="0" fixed="650"/>
+		<table cols="13" rows="3" col="0" row="1">
 			<button col="0" row="2" name="edit1" caption-image="data/edit1.png"/>
 			<button col="1" row="2" name="edit2" caption-image="data/edit2.png"/>
 			<button col="2" row="2" name="edit3" caption-image="data/edit3.png"/>
@@ -34,6 +34,7 @@
 			<button col="9" row="0" name="rock" caption-image="graphics/rock1.png"/>
 			<button col="10" row="0" name="floor" caption-image="graphics/floor2.png"/>
 			<button col="11" row="0" name="path" caption-image="graphics/path.png"/>
+			<button col="12" row="0" name="block" caption-image="graphics/block2.png"/>
 			
 		</table>
 	</table>

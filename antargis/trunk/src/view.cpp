@@ -76,13 +76,13 @@ void IsoView::update()
 
 void IsoView::mapUpdate()
 {
-  CTRACE;
+  //  CTRACE;
   update();
 }
 
 void IsoView::init()
 {
-  CTRACE;
+  //  CTRACE;
   // screen size
   int mw=width()/64+2;
   int mh=height()/16+4;
@@ -148,12 +148,16 @@ void IsoView::init()
           if(i)
             {
               i->setVirtualY(-32);
+	      Pos3D p3=i->getPosition();
+	      i->setDarkness(mMap->getDarkness(Pos2D(p3.x,p3.z)));
               insert(i);
               mTiles[i]=tile;
             }
 	  i=mWaterTileCache[tile];
 	  if(i)
 	    {
+	      Pos3D p3=i->getPosition();
+	      i->setDarkness(mMap->getDarkness(Pos2D(p3.x,p3.z)));
 	      insert(i);
 	    }
 	  
@@ -163,7 +167,7 @@ void IsoView::init()
 
   Uint32 t1=SDL_GetTicks();
 
-  cdebug("TIME0:"<<t1-t0);
+  //  cdebug("TIME0:"<<t1-t0);
 
   // insert entities
   std::list<AntEntity*> ents=mMap->getEntities(AntRect(0,0,1000,1000)); // FIXME: use reasonable rect
@@ -174,13 +178,15 @@ void IsoView::init()
       VoxelImage *image=(*i)->getSurface();
       //      mEntities[image]=*i;
       //      mEntitiesInv[*i]=image;
+      Pos3D p3=image->getPosition();
+      image->setDarkness(mMap->getDarkness(Pos2D(p3.x,p3.z)));
       insert(image);
     }
   inited=true;
   Uint32 t2=SDL_GetTicks();
 
-  cdebug("TIME:"<<t2-t1);
-  cdebug("TIME:"<<t2-t0);
+  //  cdebug("TIME:"<<t2-t1);
+  //  cdebug("TIME:"<<t2-t0);
 
   getSurfaceManager()->enableGC();
 
@@ -369,7 +375,7 @@ std::vector<AntEntity *> IsoView::getEntity(const AGPoint &pp)
       if(ar.contains(pp))
 	{
 	  AGPoint p=pp-ar.getPosition();
-	  if(vi->getAlpha(p)>0)
+	  if(vi->getAlpha(p)>0x88) // ignore shadow
 	    found.push_back(*i);
 	  
 	}
@@ -425,6 +431,10 @@ IVTile IsoView::getTile(const AGPoint &pp)
 
 void IsoView::draw(AGPainter &p)//const AGRect &r)
 {
+#ifndef NOLIGHTING
+  shallUpdate=true;
+#endif
+
   if(mMap->heightChanged() || !inited)
     {
       CTRACE;
@@ -434,7 +444,7 @@ void IsoView::draw(AGPainter &p)//const AGRect &r)
     }
   else if(mMap->updated() || shallUpdate)
     {
-      CTRACE;
+      //      CTRACE;
       mapUpdate();
       shallUpdate=false;
     }

@@ -203,6 +203,7 @@ void AntargisMap::move(float pTime)
       if(i!=mEntList.end())
 	mEntList.erase(i);
       mEntityMap.erase((*d)->getID());
+      mLightingEntities.erase(*d);
     }
   mToDel.clear();
 
@@ -691,3 +692,39 @@ bool AntargisMap::heightChanged() const
   return mHeightChanged;
 }
 
+
+int AntargisMap::getDarkness(const Pos2D &pPos) const
+{
+  // there are 2 radii, in the inner circle all is 1
+  // betwenn the 2 is a gradient
+
+  float radius=300;
+  float maxl=0.0f;
+  float r2=radius*radius;
+  float oradius=600;
+  float or2=oradius*oradius;
+
+  float rd=or2-r2;
+
+  std::set<AntEntity*>::iterator i=mLightingEntities.begin();
+  for(;i!=mLightingEntities.end();i++)
+    {
+      float dist=(pPos-(*i)->getPos2D()).norm2();
+      
+      if(dist<r2)
+	return 0xFF;
+
+      dist-=r2;
+      float l=std::max(rd-dist,0.0f);
+      
+      l*=(0xFF/rd);
+      if(l>maxl)
+	maxl=l;
+    }
+  return ((int)maxl);
+}
+
+void AntargisMap::setLight(AntEntity *e)
+{
+  mLightingEntities.insert(e);
+}

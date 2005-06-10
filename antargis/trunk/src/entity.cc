@@ -117,14 +117,21 @@ void AntEntity::setPos3D(const Pos3D &p)
 {
   mPos=p;
   if(mSurface)
-    mSurface->setPosition(mPos);
+    {
+      mSurface->setPosition(mPos);
+      mSurface->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
+    }
 }
 void AntEntity::setPos2D(const Pos2D &p)
 {
   mPos=Pos3D(p.x,getMap()->getHeight(p),p.y);
   onGround=true;
   if(mSurface)
-    mSurface->setPosition(mPos);
+    {
+      mSurface->setPosition(mPos);
+      mSurface->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
+    }
+
 }
 
 void AntEntity::setJob(Job *pJob)
@@ -255,8 +262,10 @@ void AntEntity::eventMapChanged()
   if(onGround)
     mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
   if(mSurface)
-    mSurface->setPosition(mPos);
-
+    {
+      mSurface->setPosition(mPos);
+      mSurface->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
+    }
 }
 
 void AntEntity::setType(const std::string &pType)
@@ -293,6 +302,8 @@ void AntEntity::updateSurface()
 	  VoxelImage *im=new VoxelImage(s);
 	  im->setVirtualY(getVirtualY());
 	  im->setPosition(mPos);
+	  im->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
+
 	  setSurface(im);
 	}
     }

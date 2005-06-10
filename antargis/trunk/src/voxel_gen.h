@@ -105,12 +105,13 @@ class AVItem
 //  virtual void draw(const Pos3D &diff,const AGRect &r);
   virtual void draw(AntargisView *view,AGPainter &p);//7const AGRect &r);
 
-
+  void setDarkness(int d);
  private:
   bool inited;
   Pos3D mPos;
   protected:
   Pos2D mCenter;
+  int darkness;
   
   int virtualY;
   

@@ -37,14 +37,9 @@ class MiniMap:public AGWidget//,public MapListener
 
     virtual void draw(AGPainter &p);
 
-    void update();
+    void update(AGPainter &p);
     void drawEntities(AGPainter &p);
 
-    void mapUpdate()
-    {
-      update();
-    }
-    
     AGSignal sigMoveMap;
 
   private:

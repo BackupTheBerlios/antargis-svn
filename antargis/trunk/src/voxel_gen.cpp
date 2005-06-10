@@ -110,7 +110,9 @@ VoxelImageData *getVoxelID()
 
 
 AVItem::AVItem(const Pos3D &p):inited(false),mPos(p),mCenter(0,0),virtualY(0)
-{}
+{
+  darkness=rand()%0xFF;
+}
 
 AVItem::~AVItem()
 {
@@ -206,8 +208,14 @@ void AVItem::draw(AntargisView *view,AGPainter &p)//const AGRect &r)
 {
   //  return;
   AGRect ar=view->getRect(this);
-  p.blit(getTexture(),ar);
+  p.blit(getTexture(),ar,AGColor(darkness,darkness,darkness,0xFF));
 }
+
+void AVItem::setDarkness(int d)
+{
+  darkness=d;
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

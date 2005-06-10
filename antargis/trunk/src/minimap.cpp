@@ -29,11 +29,14 @@
 #define MINIMAP_GREEN 0xAA
 #define MINIMAP_ALPHA 0xFF
 
+#define LAZY_LIGHTING
+
 MiniMap::MiniMap(AGWidget *pParent,const AGRect &r,AntargisMap *pMap,const AGRect &pViewRect):
   AGWidget(pParent,r),sigMoveMap(this,"sigMoveMap"),mMap(pMap),mSurface(r.w-16,r.h-16),mViewRect(pViewRect)
 {
   mustUpdate=true;
-  update();
+  //  AGPainter p(mSurface);
+  //  update(p);
 
   mBorder=AGBorder("antButton.button.border.normal");
 }
@@ -68,14 +71,20 @@ void MiniMap::drawEntities(AGPainter &p)
     x=(int)(pos.x*mSurface.width()/maxPos.x);
     y=(int)(mSurface.height()-1-pos.y*mSurface.height()/maxPos.y);
     
+    float light=mMap->getDarkness(pos)/float(0xFF);
+
+    c.r*=light;
+    c.g*=light;
+    c.b*=light;
+
     p.drawRect(AGRect(x+8,y+8,2,2),c);
     //    getScreen().drawRect(AGRect(p0.x+x,p0.y+y,2,2),c);
   }
 }
 
-void MiniMap::update()
+void MiniMap::update(AGPainter &dp)
 {
-//  CTRACE;
+#ifdef LAZY_LIGHTING
   mustUpdate=true;
   AGPainter p(mSurface);
   float mx,my;
@@ -92,46 +101,95 @@ void MiniMap::update()
       float l=normal*Pos3D(1,1,-1).normalized();
       l+=3;
       l*=0.25;
+
+      AGColor c;
       
-      
+      float light=mMap->getDarkness(Pos2D(mx,my))/float(0xFF);
       if(mMap->getHeight(Pos2D(mx,my))<10)
-        p.putPixel(AGPoint(x,mSurface.height()-1-y),AGColor(0,0,(int)(0xFF*l),MINIMAP_ALPHA));
+	c=AGColor(0,0,(int)(0xFF*l),MINIMAP_ALPHA);
       else
-        p.putPixel(AGPoint(x,mSurface.height()-1-y),AGColor(0,(int)(MINIMAP_GREEN*l),0,MINIMAP_ALPHA));
+        c=AGColor(0,(int)(MINIMAP_GREEN*l),0,MINIMAP_ALPHA);
+      c.r*=light;
+      c.g*=light;
+      c.b*=light;
+      
+      p.putPixel(AGPoint(x,mSurface.height()-1-y),c);
     }
   }
+#else
+  mustUpdate=true;
+  float mx,my;
+  
+  Pos2D maxPos=mMap->getMaxPos();
+  
+  for(int x=0;x<mSurface.width();x++)
+  {
+    for(int y=0;y<mSurface.height();y++)
+    {
+      mx=float(x)/mSurface.width()*maxPos.x;
+      my=float(y)/mSurface.height()*maxPos.y;
+      Pos3D normal=mMap->getNormal((int)mx,(int)my);
+      float l=normal*Pos3D(1,1,-1).normalized();
+      l+=3;
+      l*=0.25;
+      float light=mMap->getDarkness(Pos2D(mx,my))/float(0xFF);
+      //      cdebug(light);
+
+      AGColor c;
+      
+      if(mMap->getHeight(Pos2D(mx,my))<10)
+	c=AGColor(0,0,(int)(0xFF*l),MINIMAP_ALPHA);
+      else
+        c=AGColor(0,(int)(MINIMAP_GREEN*l),0,MINIMAP_ALPHA);
+      c.r*=light;
+      c.g*=light;
+      c.b*=light;
+      //      dp.putPixel(AGPoint(x,mSurface.height()-1-y),c);
+      dp.drawRect(AGRect(x,mSurface.height()-1-y,1,1),c);
+    }
+  }
+#endif
 }
 
-void MiniMap::draw(AGPainter &p)//const AGRect &r)
+void MiniMap::draw(AGPainter &p)
 {
-  //  if(mMap->updated() || map->HeightChanged())
-  if(mMap->heightChanged())
-    mapUpdate();
 
-//  CTRACE;
+#ifdef LAZY_LIGHTING
+  // FIXME: this must be done in another way!!!!!!!!!
+  // calculating the light is too slow!!!
+
+  static Uint32 last=0;
+  Uint32 now=SDL_GetTicks();
+  bool shallUpdate=false;
+  if(now-last>100000) // should be done all half second or so
+    {
+      last=now;
+      shallUpdate=true;
+    }
+
+
+  // save some time with using a texture for the terrain
+  if(mMap->heightChanged()||shallUpdate)
+    update(p);
+
   AGRect mr=getRect().origin();
-  //  mustUpdate=true;
+
   if(mustUpdate)
     mTexture=getTextureManager()->makeTexture(mSurface);
   mustUpdate=false;
   mBorder.draw(p);
-  //  p.blit(mBG,p.getRect());//,mr);
+
   mr.x+=8;
   mr.y+=8;
   mr.w-=16;
   mr.h-=16;
   
-  p.blit(mTexture,mr);//mTexture.getRect());//,getRect());
-  //  p.blit(mTexture,mr);
-
-  //  cdebug(mTexture.getRect());
-
-  //  cdebug(mTexture.getRect());
-  //  cdebug("Surface:"<<mSurface.getRect());
-  //  SDL_SaveBMP(mSurface.surface(),"test.bmp");
+  p.blit(mTexture,mr);
+#else
+  update(p);
+#endif
   
-  
-  drawEntities(p);//mr.getPosition());
+  drawEntities(p);
 }
 
 

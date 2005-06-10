@@ -63,8 +63,6 @@ class AntargisMap
     SplineMapD mHeight,mGrass;
     QuadTree<AntEntity> mEntities;
     std::list<AntEntity*> mEntList;
-    //    std::set
-    //      <AntPlayer*> mPlayers;
     std::map<int,AntEntity*> mEntityMap;
 
     bool mPaused;
@@ -75,17 +73,15 @@ class AntargisMap
     bool mUpdated;
     bool mHeightChanged;
 
-    //    std::set<MapListener*> mListeners;
     std::list<AntEntity*> mToDel;
 
     size_t mGCcalls;
 
+    std::set<AntEntity*> mLightingEntities;
+
   public:
     AntargisMap(int w,int h);
     virtual ~AntargisMap();
-
-    //    void insertListener(MapListener *l);
-    //    void removeListener(MapListener *l);
 
     float getHeight(const Pos2D &p) const;
     float getGHeight(const Pos2D &p) const;
@@ -125,22 +121,10 @@ class AntargisMap
 
     void clear();
 
-    /*    void addPlayer(AntPlayer *p)
-    {
-      mPlayers.insert(p);
-    }
-    void removePlayer(AntPlayer *p)
-    {
-      mPlayers.erase(p);
-      }*/
-    
     virtual void removeEntity(AntEntity *p);
 
-    //    void endChange();
-   
     // align to rect / >0 and <width and so 
     Pos2D truncPos(const Pos2D &p) const;
-
 
     AntEntity *getEntity(int id) const
       {
@@ -151,8 +135,6 @@ class AntargisMap
       }
 
     AntEntity *getByName(const std::string &pName);
-
-    //    void killHero(AntHero *h);
 
     bool paused()
     {
@@ -180,6 +162,10 @@ class AntargisMap
     
     int width() const;
     int height() const;
+
+    int getDarkness(const Pos2D &pPos) const;
+    void setLight(AntEntity *e);
+
 
     VALUE mRUBY;
     bool mRubyObject;

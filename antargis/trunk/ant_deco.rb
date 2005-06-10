@@ -39,6 +39,7 @@ class AntNewDeco<AntMyEntity
 					"grassLight"=>["grass4a","grass4b","grass4"],
 					"floor"=>["floor2"],
 					"path"=>["path"],
+					"block"=>["block2"],
 					"grassGreen"=>["grass3"]}
 			if ["grassGreen","grassLight","gravel","twig","hole","floor","path"].member?(@decoType) then
 				setVirtualY(0)

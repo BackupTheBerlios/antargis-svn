@@ -23,6 +23,7 @@ public:
     virtual ~SwigDirector_AGSurface();
     virtual void putPixel(int x, int y, AGColor const &c);
     virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
 };
 
 
@@ -915,10 +916,12 @@ public:
     SwigDirector_AGPainter(VALUE self);
     SwigDirector_AGPainter(VALUE self, AGPainter const &p);
     SwigDirector_AGPainter(VALUE self, AGPaintTarget &pTarget);
-    virtual void tile(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGColor const &pColor);
+    virtual void tile(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource);
     virtual ~SwigDirector_AGPainter();
     virtual void tile(AGSurface const &pSource, AGRect const &pDest);
@@ -926,8 +929,8 @@ public:
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void tile(AGSurface const &pSource);
-    virtual void drawRect(AGRect const &pRect, AGColor const &c);
     virtual void putPixel(AGPoint const &p, AGColor const &c);
+    virtual void drawRect(AGRect const &pRect, AGColor const &c);
 };
 
 
