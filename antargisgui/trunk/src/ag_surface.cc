@@ -270,7 +270,14 @@ void AGSurface::putPixel(int x,int y,const AGColor &c)
 
  // blitting must be done manually as it doesn't work in GL mode
  // FIXME: do blitting in SDL-mode with SDL_BlitSurface!
+
 void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  blit(pSource,pDest,pSrc,AGColor(0xFF,0xFF,0xFF,0xFF));
+}
+
+
+void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
 {
   //  CTRACE;
   int x,y,sx,sy,dx,dy;

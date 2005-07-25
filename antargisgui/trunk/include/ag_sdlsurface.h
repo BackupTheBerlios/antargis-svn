@@ -42,6 +42,7 @@ class AGSDLScreen:public AGScreen
   virtual AGRect getRect() const;
 
   virtual void drawRect(const AGRect &pRect,const AGColor &c);
+  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
 
   virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 

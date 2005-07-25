@@ -43,6 +43,7 @@ class AGColor:public SDL_Color
   AGColor();
 
   AGColor &operator=(const AGColor&c);
+  AGColor &operator*=(float f);
 
   Uint32 mapRGB(SDL_PixelFormat *f) const;
 

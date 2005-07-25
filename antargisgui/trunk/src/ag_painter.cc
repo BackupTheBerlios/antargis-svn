@@ -124,25 +124,40 @@ void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest)
 {
   AGRect s=pSource.getRect();
   // ASSUME: we don't want to scale
-  //  blit(pSource,pDest,pSource.getRect());
   blit(pSource,AGRect(pDest.x,pDest.y,s.w,s.h),s);
 }
+
+
 void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
 {
-  //  CTRACE;
   AGRect dest=move(pDest);
   std::pair<AGRect,AGRect> rs=clip(pSrc,dest);
 
-  /*  cdebug(mRect);
-  cdebug(pSrc<<"//D:"<<pDest);
-  cdebug(dest);
-  cdebug(rs.first<<"///"<<rs.second);
-  */
   if(rs.first.w>0)
     {
       mTarget.blit(pSource,rs.second,rs.first);
     }
 }
+
+void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGColor &pColor)
+{
+  AGRect s=pSource.getRect();
+  // ASSUME: we don't want to scale
+  blit(pSource,AGRect(pDest.x,pDest.y,s.w,s.h),s,pColor);
+}
+
+void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
+{
+  AGRect dest=move(pDest);
+  std::pair<AGRect,AGRect> rs=clip(pSrc,dest);
+
+  if(rs.first.w>0)
+    {
+      mTarget.blit(pSource,rs.second,rs.first,pColor);
+    }
+}
+
+
 void AGPainter::tile(const AGTexture &pSource)
 {
   //  CTRACE;
@@ -299,4 +314,14 @@ AGColor AGPainter::getPixel(int x,int y)
 void AGPainter::setNull(const AGPoint &p)
 {
   mNull+=p;
+}
+
+void AGPainter::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+{
+  mTarget.drawLine(p0,p1,c);
+}
+
+void AGPainter::blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest)
+{
+  mTarget.blitTri(pSource,pSrc,pDest);
 }

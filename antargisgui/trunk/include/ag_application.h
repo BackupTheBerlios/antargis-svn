@@ -67,4 +67,6 @@ class AGApplication:public AGMessageObject
   friend void AGApplication_markfunc(void *ptr);
 };
 
+void disableKeyrepeat();
+
 #endif

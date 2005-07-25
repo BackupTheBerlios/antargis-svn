@@ -24,6 +24,11 @@
 #include "ag_debug.h"
 #include "ag_mixer.h"
 
+void disableKeyrepeat()
+{
+  SDL_EnableKeyRepeat(0,0);
+}
+
 AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mRubyObject(false)
 
 {
@@ -189,6 +194,7 @@ void AGApplication::delay(int ms)
 
 void AGApplication_markfunc(void *ptr)
 {
+  //  cdebug("MARK");
   AGApplication *zoo;
   
   if(!ptr)
@@ -197,7 +203,7 @@ void AGApplication_markfunc(void *ptr)
       return;
     }
   assert(ptr);
-  TRACE;  
+  //  TRACE;  
   //  cdebug(ptr<<endl);
   zoo = static_cast<AGApplication*>(ptr);
 
@@ -205,7 +211,7 @@ void AGApplication_markfunc(void *ptr)
     {
       if(zoo->mainWidget->mRubyObject)
 	{
-	  cdebug(zoo->mainWidget->getName());
+	  //	  cdebug(zoo->mainWidget->getName());
 	  rb_gc_mark(zoo->mainWidget->mRUBY);
 	}
       //      else

@@ -45,6 +45,10 @@ class AGRect:public SDL_Rect
   AGRect(int x,int y,int w,int h);
   AGRect(const std::string &s);
 
+  void setX(int p);
+  void setY(int p);
+  void setW(int p);
+  void setH(int p);
   
   int getX() const;
   int getY() const;

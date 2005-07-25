@@ -175,7 +175,7 @@ bool AGListBox::eventMouseClick(const AGEvent *m)
       else if(b==5)
 	{
 	  // down wheel
-	  if(mY<mItems.size()-mHeight)
+	  if(mY<=mItems.size()-mHeight)
 	    mY++;
 	  arrange();
 	  return true;

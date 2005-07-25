@@ -42,13 +42,16 @@ class AGGLScreen:public AGScreen
 
   virtual ~AGGLScreen();
 
+  virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
   virtual void tile(const AGTexture &pSource);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
 
   virtual void drawRect(const AGRect &pRect,const AGColor &c);
+  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
 
   virtual AGRect getRect() const;
 

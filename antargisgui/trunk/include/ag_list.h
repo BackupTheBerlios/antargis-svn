@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_tools.h
+ * ag_list.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,24 +18,38 @@
  * License along with this program.
  */
 
-#ifndef AG_TOOLS_H
-#define AG_TOOLS_H
-
-#include <string>
-#include <list>
-#include <ag_fs.h>
-
-int toInt(const std::string &s);
-float toFloat(const std::string &s);
-int fromHex(const std::string &s);
-std::string toHex(int i);
+#ifndef AG_LIST_H
+#define AG_LIST_H
 
 template<class T>
-void append(std::list<T> &l1,const std::list<T> &l2)
+class AGListIterator
 {
-  typename std::list<T>::const_iterator i=l2.begin();
-  for(;i!=l2.end();i++)
-    l1.push_back(*i);
-}
+  
+};
+
+template<class T>
+class AGList
+{
+ public:
+  typedef AGListIterator<T> iterator;
+  typedef AGListIterator<const T> const_iterator;
+
+  AGList();
+  AGList(const AGList<T> &l);
+  
+  AGList<T> &operator+=(const AGList<T> &l);
+  AGList<T> operator+(const AGList<T> &l) const;
+
+  T max() const;
+  T min() const;
+
+  iterator begin();
+  const_iterator begin() const;
+
+  iterator end();
+  const_iterator end() const;
+
+  
+};
 
 #endif

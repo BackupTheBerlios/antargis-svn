@@ -91,6 +91,22 @@ AGRect::AGRect(const std::string &s)
   is>>c;
 }
 
+void AGRect::setX(int p)
+{
+  x=p;
+}
+void AGRect::setY(int p)
+{
+  y=p;
+}
+void AGRect::setW(int p)
+{
+  w=p;
+}
+void AGRect::setH(int p)
+{
+  h=p;
+}
 
 
 int AGRect::getX() const

@@ -184,3 +184,9 @@ void AGSDLScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const
 {
   STUB;
 }
+
+void AGSDLScreen::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+{
+  STUB;
+}
+

@@ -37,6 +37,7 @@
 #include <ag_fs.h>
 
 #include "ag_vector.h"
+#include "ag_triangle.h"
 
 
 std::set<SDL_Surface *> glTestSurfaces;
@@ -431,9 +432,12 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
   glBindTexture( GL_TEXTURE_2D,0);
 }
 
-
-
 void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect &pSrc)
+{
+  blit(pSource,pRect,pSrc,AGColor(0xFF,0xFF,0xFF,0xFF));
+}
+
+void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect &pSrc,const AGColor &pColor)
 {
   if(!inScreen(pRect))
     return;
@@ -480,7 +484,10 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
   ty0=1.0f-ty0;
   ty1=1.0f-ty1;
 
-  glColor4f(1,1,1,1);
+  glColor4f(float(pColor.r)/0xFF,
+	    float(pColor.g)/0xFF,
+	    float(pColor.b)/0xFF,
+	    float(pColor.a)/0xFF);
   glBegin(GL_TRIANGLES);
 
   glTexCoord2f(tx0,ty0);
@@ -600,12 +607,8 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
 }
 void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
 {
-  //  CTRACE;
   if(!inScreen(pDest))
     return;
-  //  CTRACE;
-  //  cdebug(pSource.width()<<"/"<<pSource.height());
-  //  cdebug(pDest<<";"<<pSrc);
 
 #ifdef NEW_TEXTURES
   TextureID id=getID(const_cast<AGTexture*>(&pSource));//urface());
@@ -615,8 +618,6 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
 
   float x0=pDest.x;
   float y0=h-1-(pDest.y);
-  //  float x1=pDest.x+pSrc.w;
-  //  float y1=h-1-(pDest.y+pSrc.h);
 
   SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
 
@@ -625,11 +626,6 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
 
   sx0=float(pSrc.x)/surface->w;
   sy0=1-float(pSrc.y)/surface->h;
-
-
-  //  float tw=float(pSource.width())/surface->w;
-  //  float th=float(pSource.height())/surface->h;
-
 
   glBindTexture( GL_TEXTURE_2D,id);
   glColor4f(1,1,1,1);
@@ -673,40 +669,6 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
 	
   glBindTexture( GL_TEXTURE_2D,0);
 
-
-
-  /*
-
-  float sx0=float(pSrc.x)/pSource.width();
-  float sy0=1-float(pSrc.y)/pSource.height();
-  float sx1=float(pSrc.x+pSrc.w-1)/pSource.width();
-  float sy1=1-float(pSrc.y+pSrc.h-1)/pSource.height();
-
-  glBindTexture( GL_TEXTURE_2D,id);
-  glColor4f(1,1,1,1);
-  assert( glGetError() == GL_NO_ERROR );
-
-  glBegin(GL_TRIANGLES);
-  glTexCoord2f(sx0,sy0);
-  glVertex2f(x0,y0);
-
-  glTexCoord2f(sx1,sy0);
-  glVertex2f(x1,y0);
-
-  glTexCoord2f(sx0,sy1);
-  glVertex2f(x0,y1);
-  
-  glTexCoord2f(sx1,sy0);
-  glVertex2f(x1,y0);
-
-  glTexCoord2f(sx1,sy1);
-  glVertex2f(x1,y1);
-
-  glTexCoord2f(sx0,sy1);
-  glVertex2f(x0,y1);
-
-  glEnd();
-  glBindTexture( GL_TEXTURE_2D,0);*/
 }
 
 void AGGLScreen::drawRect(const AGRect &pRect,const AGColor &c)
@@ -865,4 +827,34 @@ void AGGLScreen::renderText (const AGRect &pClipRect, int BaseLineX, int BaseLin
 {
   if(!AGFontEngine::renderText(this,pClipRect,BaseLineX,BaseLineY,pText,ParamIn))
     cdebug("SOME ERROR");
+}
+
+void AGGLScreen::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+{
+  glBindTexture(GL_TEXTURE_2D,0);
+  glColor(c);
+  glBegin(GL_LINES);
+  glVertex2f(p0.x,h-1-p0.y);
+  glVertex2f(p1.x,h-1-p1.y);
+  glEnd();
+}
+
+void AGGLScreen::blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest)
+{
+  GLuint id=getID(const_cast<AGTexture*>(&pSource));
+  
+  glBindTexture( GL_TEXTURE_2D,id);
+  assert( glGetError() == GL_NO_ERROR );
+
+  glColor4f(1,1,1,1);
+
+  glBegin(GL_TRIANGLES);
+  glTexCoord2fv(pSrc[0]);
+  glVertex2f(pDest[0].getX(), h-1-pDest[0].getY());
+  glTexCoord2fv(pSrc[1]);
+  glVertex2f(pDest[1].getX(), h-1-pDest[1].getY());
+  glTexCoord2fv(pSrc[2]);
+  glVertex2f(pDest[2].getX(), h-1-pDest[2].getY());
+  
+  glEnd();
 }

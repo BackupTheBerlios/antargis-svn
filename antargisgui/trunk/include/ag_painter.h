@@ -27,7 +27,10 @@
 #include <ag_font.h>
 #include <ag_painttarget.h>
 
+
 #include <list>
+
+class AGTriangle;
 
 class AGPainter
 {
@@ -41,8 +44,12 @@ class AGPainter
   virtual void putPixel(const AGPoint &p,const AGColor &c);
   virtual AGColor getPixel(int x,int y);
 
+  virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
+
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGColor &pColor);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
   virtual void tile(const AGTexture &pSource);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest);
   virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
@@ -64,6 +71,7 @@ class AGPainter
   void drawGradient(const AGRect &r,const AGColor &c0,const AGColor &c1,const AGColor &c2,const AGColor &c3);
   void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
   virtual void drawRect(const AGRect &pRect,const AGColor &c);
+  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
 
  private:
 
