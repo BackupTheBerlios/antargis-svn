@@ -166,6 +166,27 @@ public:
 };
 
 
+class SwigDirector_AGVector : public AGVector, public Swig::Director {
+
+public:
+    SwigDirector_AGVector(VALUE self, float pX, float pY, float pZ = 0.0f);
+    SwigDirector_AGVector(VALUE self, AGAngle const &a);
+    SwigDirector_AGVector(VALUE self, AGVector const &a);
+    SwigDirector_AGVector(VALUE self);
+    virtual ~SwigDirector_AGVector();
+};
+
+
+class SwigDirector_AGPointF : public AGPointF, public Swig::Director {
+
+public:
+    SwigDirector_AGPointF(VALUE self);
+    SwigDirector_AGPointF(VALUE self, float pX, float pY, float pZ = 1.0f);
+    SwigDirector_AGPointF(VALUE self, AGVector const &p);
+    virtual ~SwigDirector_AGPointF();
+};
+
+
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:

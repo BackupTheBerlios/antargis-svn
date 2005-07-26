@@ -67,6 +67,7 @@ class AGRect:public SDL_Rect
 
   AGRect project(const AGRect &r) const;
   AGPoint project(const AGPoint &r) const;
+  AGPoint getMiddle() const;
 
   AGRect origin() const;
   

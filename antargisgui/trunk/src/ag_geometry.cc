@@ -212,6 +212,12 @@ bool AGRect::operator!=(const AGRect &r) const
   return !operator==(r);
 }
 
+AGPoint AGRect::getMiddle() const
+{
+  return AGPoint(x+w/2,y+h/2);
+}
+
+
 ostream &operator<<(ostream &o,const SDL_Rect &r)
 {
   o<<"("<<r.x<<","<<r.y<<","<<r.w<<","<<r.h<<")";

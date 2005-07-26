@@ -38,4 +38,14 @@ void append(std::list<T> &l1,const std::list<T> &l2)
     l1.push_back(*i);
 }
 
+template<class T>
+void append(std::vector<T> &l1,const std::vector<T> &l2)
+{
+  typename std::vector<T>::const_iterator i=l2.begin();
+  for(;i!=l2.end();i++)
+    l1.push_back(*i);
+}
+
+#define AGsign(x) ((x)<0?-1:(x)>0?1:0)
+
 #endif

@@ -190,3 +190,7 @@ void AGSDLScreen::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
   STUB;
 }
 
+AGTexture AGSDLScreen::makeTexture(const AGSurface &s)
+{
+  return AGTexture(const_cast<AGSurface&>(s).surface(),s.width(),s.height());
+}

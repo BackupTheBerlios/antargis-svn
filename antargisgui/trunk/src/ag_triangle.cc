@@ -23,19 +23,21 @@
 #include "ag_debug.h"
 #include <assert.h>
 #include <cmath>
+#include <map>
 #include <list>
+#include <ruby.h>
 
-bool collide1d(float a1,float a2,float b1,float b2)
+bool collide1d(float a1,float a2,float b1,float b2, bool normal=true)
 {
   float amin=std::min(a1,a2);
   float amax=std::max(a1,a2);
   float bmin=std::min(b1,b2);
   float bmax=std::max(b1,b2);
 
-  if(amax==bmin || bmax==amin)
+  if(normal && (amax==bmin || bmax==amin))
     return false;
 
-  return (a1>=b1 && a1<=b2) || (a2>=b1 && a2<=b2) || (b1>=a1 && b1<=a2) || (b2>=a1 && b2<=a2);
+  return (amin>=bmin && amin<=bmax) || (amax>=bmin && amax<=bmax) || (bmin>=amin && bmin<=amax) || (bmax>=amin && bmax<=amin);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -75,6 +77,19 @@ AGVector::AGVector()
   v[2]=0.0f;
 }
 
+AGVector::~AGVector()
+{
+}
+
+
+bool AGVector::operator==(const AGVector &a) const
+{
+  return v[0]==a.v[0] && v[1]==a.v[1] && v[2]==a.v[2];
+}
+bool AGVector::operator!=(const AGVector &a) const
+{
+  return !operator==(a);
+}
 
 std::string AGVector::toString() const
 {
@@ -216,6 +231,33 @@ AGPointF::AGPointF():AGVector()
 AGPointF::AGPointF(float pX,float pY,float pZ):AGVector(pX,pY,pZ)
 {
 }
+AGPointF::AGPointF(const AGVector &a)
+{
+  assert(a.v[2]);
+  v[0]=a.v[0]/a.v[2];
+  v[1]=a.v[1]/a.v[2];
+  v[2]=1.0f;
+}
+
+
+AGPointF& AGPointF::operator=(const AGVector &a)
+{
+  if(a.v[2]==0.0f)
+    {
+      cdebug("ERROR in conversion :"<<a[0]<<","<<a[1]<<","<<a[2]);
+      rb_raise(rb_str_new2("Vec2Point error"),"");
+      v[0]=a.v[0];
+      v[1]=a.v[1];
+      v[2]=a.v[2];
+    }
+  else
+    {
+      v[0]=a.v[0]/a.v[2];
+      v[1]=a.v[1]/a.v[2];
+      v[2]=1.0f;
+    }
+  return *this;
+}
 
 ////////////////////////////////////////////////////////////////////////////
 // AGMatrix
@@ -328,22 +370,22 @@ std::string AGTriangle::toString() const
   return os.str();
 }
 
-AGVector AGTriangle::get(int index) const
+AGPointF AGTriangle::get(int index) const
 {
   return p[index];
 }
 
 
-AGVector AGTriangle::operator[](int index) const
+AGPointF AGTriangle::operator[](int index) const
 {
   return p[index];
 }
 
 bool AGTriangle::collide(const AGTriangle &t) const
 {
-  std::list<AGVector> v=getNormals();
+  std::vector<AGVector> v=getNormals();
   append(v,t.getNormals());
-  std::list<AGVector>::iterator i=v.begin();
+  std::vector<AGVector>::iterator i=v.begin();
 
   for(;i!=v.end();i++)
     {
@@ -372,9 +414,9 @@ bool AGTriangle::collide(const AGTriangle &t) const
   return true;
 }
 
-std::list<AGVector> AGTriangle::getNormals() const
+std::vector<AGVector> AGTriangle::getNormals() const
 {
-  std::list<AGVector> l;
+  std::vector<AGVector> l;
   l.push_back((p[1]-p[0]).normalized().normal());
   l.push_back((p[2]-p[1]).normalized().normal());
   l.push_back((p[0]-p[2]).normalized().normal());
@@ -389,6 +431,91 @@ std::vector<AGLine> AGTriangle::getLines() const
   v.push_back(AGLine(p[2],p[0]));
   return v;
 }
+
+bool AGTriangle::contains(const AGPointF &pp) const
+{
+  std::vector<AGVector> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
+
+  if(AGsign((pp-p[0])*l[0])==AGsign((p[2]-p[0])*l[0]))
+    if(AGsign((pp-p[1])*l[1])==AGsign((p[0]-p[1])*l[1]))
+      if(AGsign((pp-p[2])*l[2])==AGsign((p[1]-p[2])*l[2]))
+	return true;
+  return false;
+}
+
+
+AGPointF AGTriangle::touchPoint(const AGTriangle &t) const
+{
+  // assume that one point of a triangle is contained in the other and return this point
+  size_t i;
+  for(i=0;i<3;i++)
+    {
+      if(contains(t[i]))
+	return t[i];
+      else if(t.contains((*this)[i]))
+	return (*this)[i];
+    }
+  return AGPointF(0,0,0);
+}
+
+AGVector AGTriangle::touchVector(const AGTriangle &t) const
+{
+  //#ifdef OLD_TOUCH_APPROXIMATION
+  // try to get line, which has two intersections with other triangle's lines
+
+  std::vector<AGLine> l0=getLines();
+  std::vector<AGLine> l1=t.getLines();
+
+  std::vector<AGLine>::iterator i,j;
+
+  std::map<AGLine*,int> sum;
+
+  for(i=l0.begin();i!=l0.end();i++)
+    for(j=l1.begin();j!=l1.end();j++)
+      {
+	if(i->collide(*j))
+	  {
+	    sum[&(*i)]++;
+	    sum[&(*j)]++;
+	  }
+      }
+  std::map<AGLine*,int>::iterator k=sum.begin();
+  for(;k!=sum.end();k++)
+    {
+      if(k->second==2)
+	return k->first->normal();
+    }
+
+  // FIXME: not found - find other approximation
+
+  //#else
+  {
+  size_t i;
+  for(i=0;i<3;i++)
+    {
+      if(contains(t[i]))
+	return nearestLine(t[i]).normal();
+      else if(t.contains((*this)[i]))
+	return t.nearestLine((*this)[i]).normal();
+    }
+  return AGVector();
+  }
+  //#endif
+}
+
+AGLine AGTriangle::nearestLine(const AGVector &v) const
+{
+  std::vector<AGLine> l=getLines();
+  std::vector<AGLine>::iterator i;
+  std::map<float,AGLine> dist;
+  for(i=l.begin();i!=l.end();i++)
+    {
+      dist[i->distance(v)]=*i;
+      //      cdebug(i->distance(v)<<i->toString());
+    }
+  return dist.begin()->second;
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // AGRectF
@@ -432,9 +559,50 @@ AGVector AGLine::getV1() const
   return v1;
 }
 
+bool AGLine::has(const AGVector &v) const
+{
+  return v0==v || v1==v;
+}
+
+bool AGLine::collide(const AGLine &l) const
+{
+  AGVector d0,d1;
+  AGVector n0,n1;
+
+  d0=direction();
+  d1=l.direction();
+  n0=normal();
+  n1=l.normal();
+  
+  bool t0=collide1d(v0*d0,v1*d0,l.v0*d0,l.v1*d0,false);
+  bool t1=collide1d(v0*d1,v1*d1,l.v0*d1,l.v1*d1,false);
+
+  bool t2=collide1d(v0*n0,v1*n0,l.v0*n0,l.v1*n0,false);
+  bool t3=collide1d(v0*n1,v1*n1,l.v0*n1,l.v1*n1,false);
+
+  return t0 && t1 && t2 && t3;
+}
+
+AGVector AGLine::normal() const
+{
+  return (v1-v0).normalized().normal();
+}
+
+AGVector AGLine::direction() const
+{
+  return v1-v0;
+}
+
+
+
 std::string AGLine::toString() const
 {
   std::ostringstream os;
   os<<"("<<v0.toString()<<"-"<<v1.toString()<<")";
   return os.str();
+}
+
+float AGLine::distance(const AGVector &v) const
+{
+  return abs(normal()*(v-v0));
 }

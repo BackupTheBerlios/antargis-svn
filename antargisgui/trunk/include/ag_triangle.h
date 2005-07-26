@@ -44,6 +44,7 @@ class AGVector
   AGVector(const AGAngle &a);
   AGVector(const AGVector &a);
   AGVector();
+  virtual ~AGVector();
 
   void setX(float pX);
   void setY(float pY);
@@ -69,6 +70,9 @@ class AGVector
   AGVector &operator/=(float f);
   AGVector operator*(float f) const;
   AGVector operator/(float f) const;
+
+  bool operator==(const AGVector &a) const;
+  bool operator!=(const AGVector &a) const;
 
   float length() const;
   float length2() const;
@@ -97,6 +101,9 @@ class AGPointF:public AGVector
  public:
   AGPointF();
   AGPointF(float pX,float pY,float pZ=1.0f);
+  AGPointF(const AGVector &p);
+
+  AGPointF&operator=(const AGVector &v);
 };
 
 class AGMatrix
@@ -130,6 +137,15 @@ class AGLine
   AGVector getV0() const;
   AGVector getV1() const;
 
+  bool has(const AGVector &v) const;
+
+  bool collide(const AGLine &l) const;
+
+  AGVector normal() const;
+  AGVector direction() const;
+
+  float distance(const AGVector &v) const;
+
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
@@ -138,19 +154,27 @@ class AGLine
 
 class AGTriangle
 {
-  AGVector p[3];
+  AGPointF p[3];
  public:
   AGTriangle(const AGVector &v0,const AGVector &v1,const AGVector &v2);
 
-  AGVector operator[](int index) const;
+  AGPointF operator[](int index) const;
 
-  AGVector get(int index) const;
+  AGPointF get(int index) const;
 
   bool collide(const AGTriangle &t) const;
-  std::list<AGVector> getNormals() const;
+  std::vector<AGVector> getNormals() const;
 
   void apply(const AGMatrix &m);
   AGTriangle applied(const AGMatrix &m) const;
+
+  // estimate touching point (or middle of touching area)
+  AGPointF touchPoint(const AGTriangle &t) const;
+  AGVector touchVector(const AGTriangle &t) const;
+
+  bool contains(const AGPointF &p) const;
+
+  AGLine nearestLine(const AGVector &v) const;
 
   std::vector<AGLine> getLines() const;
 #ifdef SWIG
