@@ -31,6 +31,7 @@
 #include <list>
 
 class AGTriangle;
+class AGRectF;
 
 class AGPainter
 {
@@ -45,6 +46,7 @@ class AGPainter
   virtual AGColor getPixel(int x,int y);
 
   virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc);
 
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGColor &pColor);

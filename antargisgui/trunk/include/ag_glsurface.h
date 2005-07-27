@@ -43,6 +43,8 @@ class AGGLScreen:public AGScreen
   virtual ~AGGLScreen();
 
   virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc);
+
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
@@ -67,6 +69,7 @@ class AGGLScreen:public AGScreen
 
   void flip();
   bool inScreen(const AGRect &r) const;
+  bool inScreen(const AGRectF &r) const;
 
 
  private:

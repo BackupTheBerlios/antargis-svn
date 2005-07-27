@@ -13476,6 +13476,26 @@ void SwigDirector_AGPainter::tile(AGSurface const &pSource, AGRect const &pDest)
 }
 
 
+void SwigDirector_AGPainter::blit(AGTexture const &pSource, AGRectF const &pDest, AGRectF const &pSrc) {
+    AGTexture * nc_tmp_pSource = const_cast<AGTexture *>(&pSource) ;
+    VALUE obj0 = Qnil ;
+    AGRectF * nc_tmp_pDest = const_cast<AGRectF *>(&pDest) ;
+    VALUE obj1 = Qnil ;
+    AGRectF * nc_tmp_pSrc = const_cast<AGRectF *>(&pSrc) ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGPainter::blit(pSource,pDest,pSrc);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pSource, SWIGTYPE_p_AGTexture, 0);
+    obj1 = SWIG_NewPointerObj(nc_tmp_pDest, SWIGTYPE_p_AGRectF, 0);
+    obj2 = SWIG_NewPointerObj(nc_tmp_pSrc, SWIGTYPE_p_AGRectF, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("blit"), 3,obj0,obj1,obj2);
+}
+
+
 void SwigDirector_AGPainter::tile(AGSurface const &pSource) {
     AGSurface * nc_tmp_pSource = const_cast<AGSurface *>(&pSource) ;
     Swig::Director * director__p_AGSurface = 0 ;
@@ -20168,6 +20188,26 @@ _wrap_AGVector_z(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector_getAngle(int argc, VALUE *argv, VALUE self) {
+    AGVector *arg1 = (AGVector *) 0 ;
+    SwigValueWrapper<AGAngle > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector, 1);
+    result = ((AGVector const *)arg1)->getAngle();
+    
+    {
+        AGAngle * resultptr;
+        resultptr = new AGAngle((AGAngle &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGAngle, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGVector___sub__(int argc, VALUE *argv, VALUE self) {
     AGVector *arg1 = (AGVector *) 0 ;
     AGVector *arg2 = 0 ;
@@ -21430,6 +21470,22 @@ static void
 free_AGTriangle(AGTriangle *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_new_AGRectF__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGVector *arg1 = 0 ;
+    AGVector *arg2 = 0 ;
+    AGRectF *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGRectF *)new AGRectF((AGVector const &)*arg1,(AGVector const &)*arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGRectF_allocate(VALUE self) {
@@ -21448,18 +21504,77 @@ _wrap_AGRectF_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGRectF(int argc, VALUE *argv, VALUE self) {
-    AGVector *arg1 = 0 ;
-    AGVector *arg2 = 0 ;
+_wrap_new_AGRectF__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    float arg1 ;
+    float arg2 ;
+    float arg3 ;
+    float arg4 ;
     AGRectF *result;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (AGRectF *)new AGRectF((AGVector const &)*arg1,(AGVector const &)*arg2);
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    arg1 = (float) NUM2DBL(argv[0]);
+    arg2 = (float) NUM2DBL(argv[1]);
+    arg3 = (float) NUM2DBL(argv[2]);
+    arg4 = (float) NUM2DBL(argv[3]);
+    result = (AGRectF *)new AGRectF(arg1,arg2,arg3,arg4);
     DATA_PTR(self) = result;
     return self;
+}
+
+
+static VALUE _wrap_new_AGRectF(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGRectF__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FLOAT) || (TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        _v = ((TYPE(argv[3]) == T_FLOAT) || (TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_new_AGRectF__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGRectF'");
+    return Qnil;
 }
 
 
@@ -21499,6 +21614,100 @@ _wrap_AGRectF___add__(int argc, VALUE *argv, VALUE self) {
         resultptr = new AGRectF((AGRectF &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRectF, 1);
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRectF_setX(int argc, VALUE *argv, VALUE self) {
+    AGRectF *arg1 = (AGRectF *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRectF, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->setX(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGRectF_setY(int argc, VALUE *argv, VALUE self) {
+    AGRectF *arg1 = (AGRectF *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRectF, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->setY(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGRectF_x(int argc, VALUE *argv, VALUE self) {
+    AGRectF *arg1 = (AGRectF *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRectF, 1);
+    result = (float)((AGRectF const *)arg1)->x();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRectF_y(int argc, VALUE *argv, VALUE self) {
+    AGRectF *arg1 = (AGRectF *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRectF, 1);
+    result = (float)((AGRectF const *)arg1)->y();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRectF_w(int argc, VALUE *argv, VALUE self) {
+    AGRectF *arg1 = (AGRectF *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRectF, 1);
+    result = (float)((AGRectF const *)arg1)->w();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRectF_h(int argc, VALUE *argv, VALUE self) {
+    AGRectF *arg1 = (AGRectF *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRectF, 1);
+    result = (float)((AGRectF const *)arg1)->h();
+    
+    vresult = rb_float_new(result);
     return vresult;
 }
 
@@ -30133,6 +30342,28 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
+    AGRectF *arg3 = 0 ;
+    AGRectF *arg4 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGPainter, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRectF, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGRectF, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->blit((AGTexture const &)*arg2,(AGRectF const &)*arg3,(AGRectF const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGPainter_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGPainter *arg1 = (AGPainter *) 0 ;
+    AGTexture *arg2 = 0 ;
     AGRect *arg3 = 0 ;
     Swig::Director *director = 0;
     
@@ -30150,7 +30381,7 @@ _wrap_AGPainter_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGPainter_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_AGPainter_blit__SWIG_2(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
     AGRect *arg3 = 0 ;
@@ -30172,7 +30403,7 @@ _wrap_AGPainter_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGPainter_blit__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_AGPainter_blit__SWIG_3(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
     AGRect *arg3 = 0 ;
@@ -30194,7 +30425,7 @@ _wrap_AGPainter_blit__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGPainter_blit__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_AGPainter_blit__SWIG_4(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
     AGRect *arg3 = 0 ;
@@ -30278,7 +30509,7 @@ _wrap_AGPainter_tile__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGPainter_blit__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_AGPainter_blit__SWIG_5(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGSurface *arg2 = 0 ;
     AGRect *arg3 = 0 ;
@@ -30298,7 +30529,7 @@ _wrap_AGPainter_blit__SWIG_4(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGPainter_blit__SWIG_5(int argc, VALUE *argv, VALUE self) {
+_wrap_AGPainter_blit__SWIG_6(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGSurface *arg2 = 0 ;
     AGRect *arg3 = 0 ;
@@ -30346,7 +30577,7 @@ static VALUE _wrap_AGPainter_blit(int nargs, VALUE *args, VALUE self) {
                     _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_AGPainter_blit__SWIG_0(nargs, args, self);
+                    return _wrap_AGPainter_blit__SWIG_1(nargs, args, self);
                 }
             }
         }
@@ -30368,7 +30599,7 @@ static VALUE _wrap_AGPainter_blit(int nargs, VALUE *args, VALUE self) {
                     _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_AGPainter_blit__SWIG_4(nargs, args, self);
+                    return _wrap_AGPainter_blit__SWIG_5(nargs, args, self);
                 }
             }
         }
@@ -30392,7 +30623,7 @@ static VALUE _wrap_AGPainter_blit(int nargs, VALUE *args, VALUE self) {
                 if (_v) {
                     {
                         void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGColor, 0) != -1)) ? 1 : 0;
                     }
                     if (_v) {
                         return _wrap_AGPainter_blit__SWIG_2(nargs, args, self);
@@ -30420,10 +30651,38 @@ static VALUE _wrap_AGPainter_blit(int nargs, VALUE *args, VALUE self) {
                 if (_v) {
                     {
                         void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGColor, 0) != -1)) ? 1 : 0;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_AGPainter_blit__SWIG_1(nargs, args, self);
+                        return _wrap_AGPainter_blit__SWIG_3(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGPainter, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRectF, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRectF, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_AGPainter_blit__SWIG_0(nargs, args, self);
                     }
                 }
             }
@@ -30451,7 +30710,7 @@ static VALUE _wrap_AGPainter_blit(int nargs, VALUE *args, VALUE self) {
                         _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_AGPainter_blit__SWIG_5(nargs, args, self);
+                        return _wrap_AGPainter_blit__SWIG_6(nargs, args, self);
                     }
                 }
             }
@@ -30484,7 +30743,7 @@ static VALUE _wrap_AGPainter_blit(int nargs, VALUE *args, VALUE self) {
                             _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_AGColor, 0) != -1)) ? 1 : 0;
                         }
                         if (_v) {
-                            return _wrap_AGPainter_blit__SWIG_3(nargs, args, self);
+                            return _wrap_AGPainter_blit__SWIG_4(nargs, args, self);
                         }
                     }
                 }
@@ -32016,6 +32275,7 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGVector.klass, "x", VALUEFUNC(_wrap_AGVector_x), -1);
     rb_define_method(cAGVector.klass, "y", VALUEFUNC(_wrap_AGVector_y), -1);
     rb_define_method(cAGVector.klass, "z", VALUEFUNC(_wrap_AGVector_z), -1);
+    rb_define_method(cAGVector.klass, "getAngle", VALUEFUNC(_wrap_AGVector_getAngle), -1);
     rb_define_method(cAGVector.klass, "-", VALUEFUNC(_wrap_AGVector___sub__), -1);
     rb_define_method(cAGVector.klass, "+", VALUEFUNC(_wrap_AGVector___add__), -1);
     rb_define_method(cAGVector.klass, "*", VALUEFUNC(_wrap_AGVector___mul__), -1);
@@ -32089,6 +32349,12 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     rb_define_method(cAGRectF.klass, "initialize", VALUEFUNC(_wrap_new_AGRectF), -1);
     rb_define_method(cAGRectF.klass, "collide", VALUEFUNC(_wrap_AGRectF_collide), -1);
     rb_define_method(cAGRectF.klass, "+", VALUEFUNC(_wrap_AGRectF___add__), -1);
+    rb_define_method(cAGRectF.klass, "setX", VALUEFUNC(_wrap_AGRectF_setX), -1);
+    rb_define_method(cAGRectF.klass, "setY", VALUEFUNC(_wrap_AGRectF_setY), -1);
+    rb_define_method(cAGRectF.klass, "x", VALUEFUNC(_wrap_AGRectF_x), -1);
+    rb_define_method(cAGRectF.klass, "y", VALUEFUNC(_wrap_AGRectF_y), -1);
+    rb_define_method(cAGRectF.klass, "w", VALUEFUNC(_wrap_AGRectF_w), -1);
+    rb_define_method(cAGRectF.klass, "h", VALUEFUNC(_wrap_AGRectF_h), -1);
     cAGRectF.mark = 0;
     cAGRectF.destroy = (void (*)(void *)) free_AGRectF;
     

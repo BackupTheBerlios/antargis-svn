@@ -82,6 +82,33 @@ AGVector::~AGVector()
 }
 
 
+float getArcInternal(float x,float y)
+{
+  if(y==0.0)
+    {
+      if(x<0.0)
+	return -M_PI/2.0;
+      else
+	return M_PI/2.0;
+    }
+  else if(y<0.0)
+    {
+      float a=M_PI+atan(x/y);
+      if(a>M_PI)
+	a-=M_PI*2.0;
+      return a;
+    }
+  else
+    return atan(x/y);
+}
+
+
+AGAngle AGVector::getAngle() const
+{
+  return AGAngle(getArcInternal(v[0],v[1]));
+}
+
+
 bool AGVector::operator==(const AGVector &a) const
 {
   return v[0]==a.v[0] && v[1]==a.v[1] && v[2]==a.v[2];
@@ -527,6 +554,25 @@ AGRectF::AGRectF(const AGVector &pv0,const AGVector &pv1):
 {
 }
 
+AGRectF::AGRectF(float x,float y,float w,float h):
+  v0(x,y,1),v1(x+w,y+h,1)
+{
+}
+
+void AGRectF::setX(float p)
+{
+  float mw=w();
+  v0.setX(p);
+  v1.setX(p+mw);
+}
+void AGRectF::setY(float p)
+{
+  float mh=h();
+  v0.setY(p);
+  v1.setY(p+mh);
+}
+
+
 bool AGRectF::collide(const AGRectF &r) const
 {
   return collide1d(v0.getX(),v1.getX(),r.v0.getX(),r.v1.getX()) && collide1d(v0.getY(),v1.getY(),r.v0.getY(),r.v1.getY());
@@ -536,6 +582,24 @@ AGRectF AGRectF::operator+(const AGVector &v) const
 {
   return AGRectF(v0+v,v1+v);
 }
+
+float AGRectF::x() const
+{
+  return v0.getX();
+}
+float AGRectF::y() const
+{
+  return v0.getY();
+}
+float AGRectF::w() const
+{
+  return v1.getX()-v0.getX();
+}
+float AGRectF::h() const
+{
+  return v1.getY()-v0.getY();
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // AGLine
@@ -604,5 +668,5 @@ std::string AGLine::toString() const
 
 float AGLine::distance(const AGVector &v) const
 {
-  return abs(normal()*(v-v0));
+  return fabs(normal()*(v-v0));
 }

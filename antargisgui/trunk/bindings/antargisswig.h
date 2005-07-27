@@ -951,6 +951,7 @@ public:
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void tile(AGSurface const &pSource, AGRect const &pDest);
+    virtual void blit(AGTexture const &pSource, AGRectF const &pDest, AGRectF const &pSrc);
     virtual void tile(AGSurface const &pSource);
     virtual void putPixel(AGPoint const &p, AGColor const &c);
     virtual void drawRect(AGRect const &pRect, AGColor const &c);

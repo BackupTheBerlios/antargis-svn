@@ -60,6 +60,8 @@ class AGVector
   float getY() const;
   float getZ() const;
 
+  AGAngle getAngle() const;
+
   AGVector operator-(const AGVector &p) const;
   AGVector operator+(const AGVector &p) const;
   AGVector &operator+=(const AGVector &p);
@@ -188,10 +190,19 @@ class AGRectF
   AGVector v0,v1;
  public:
   AGRectF(const AGVector &pv0,const AGVector &pv1);
+  AGRectF(float x,float y,float w,float h);
 
   bool collide(const AGRectF &r) const;
 
   AGRectF operator+(const AGVector &v) const;
+
+  void setX(float p);
+  void setY(float p);
+
+  float x() const;
+  float y() const;
+  float w() const;
+  float h() const;
 };
 
 #endif

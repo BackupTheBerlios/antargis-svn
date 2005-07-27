@@ -325,3 +325,8 @@ void AGPainter::blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AG
 {
   mTarget.blitTri(pSource,pSrc,pDest);
 }
+
+void AGPainter::blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc)
+{
+  mTarget.blit(pSource,pDest,pSrc);
+}
