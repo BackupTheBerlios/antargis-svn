@@ -757,6 +757,7 @@ void AGGLScreen::drawRect(const AGRect &pRect,const AGColor &c)
   float x1=pRect.x+pRect.w;
   float y1=h-pRect.y-pRect.h;
 
+  glBindTexture(GL_TEXTURE_2D,0);
   glColor4f(c.r/255.0,c.g/255.0,c.b/255.0,c.a/255.0);
 
 

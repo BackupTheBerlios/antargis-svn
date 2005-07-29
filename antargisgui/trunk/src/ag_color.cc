@@ -152,3 +152,14 @@ AGColor &AGColor::operator*=(float f)
   b=(Uint8)((float(r)*f));
   return *this;
 }
+
+AGColor AGColor::operator*(float f) const
+{
+  return AGColor(r*f,g*f,b*f,a);
+}
+
+AGColor AGColor::operator+(const AGColor &c) const
+{
+  return AGColor(r+c.r, g+c.g, b+c.b);
+}
+

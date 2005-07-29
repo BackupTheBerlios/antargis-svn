@@ -21936,6 +21936,50 @@ static VALUE _wrap_new_AGColor(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
+_wrap_AGColor___mul__(int argc, VALUE *argv, VALUE self) {
+    AGColor *arg1 = (AGColor *) 0 ;
+    float arg2 ;
+    AGColor result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGColor, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    result = ((AGColor const *)arg1)->operator *(arg2);
+    
+    {
+        AGColor * resultptr;
+        resultptr = new AGColor((AGColor &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGColor___add__(int argc, VALUE *argv, VALUE self) {
+    AGColor *arg1 = (AGColor *) 0 ;
+    AGColor *arg2 = 0 ;
+    AGColor result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGColor, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGColor, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = ((AGColor const *)arg1)->operator +((AGColor const &)*arg2);
+    
+    {
+        AGColor * resultptr;
+        resultptr = new AGColor((AGColor &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGColor_mapRGB(int argc, VALUE *argv, VALUE self) {
     AGColor *arg1 = (AGColor *) 0 ;
     SDL_PixelFormat *arg2 = (SDL_PixelFormat *) 0 ;
@@ -32362,6 +32406,8 @@ SWIGEXPORT(void) Init_libantargisruby(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGColor, (void *) &cAGColor);
     rb_define_alloc_func(cAGColor.klass, _wrap_AGColor_allocate);
     rb_define_method(cAGColor.klass, "initialize", VALUEFUNC(_wrap_new_AGColor), -1);
+    rb_define_method(cAGColor.klass, "*", VALUEFUNC(_wrap_AGColor___mul__), -1);
+    rb_define_method(cAGColor.klass, "+", VALUEFUNC(_wrap_AGColor___add__), -1);
     rb_define_method(cAGColor.klass, "mapRGB", VALUEFUNC(_wrap_AGColor_mapRGB), -1);
     rb_define_method(cAGColor.klass, "toString", VALUEFUNC(_wrap_AGColor_toString), -1);
     rb_define_method(cAGColor.klass, "grey", VALUEFUNC(_wrap_AGColor_grey), -1);

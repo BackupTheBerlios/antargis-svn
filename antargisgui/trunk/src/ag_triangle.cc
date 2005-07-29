@@ -27,6 +27,8 @@
 #include <list>
 #include <ruby.h>
 
+#define MAXF 100000.0f
+
 bool collide1d(float a1,float a2,float b1,float b2, bool normal=true)
 {
   float amin=std::min(a1,a2);
@@ -38,6 +40,101 @@ bool collide1d(float a1,float a2,float b1,float b2, bool normal=true)
     return false;
 
   return (amin>=bmin && amin<=bmax) || (amax>=bmin && amax<=bmax) || (bmin>=amin && bmin<=amax) || (bmax>=amin && bmax<=amin);
+}
+
+struct AGSweepResult
+{
+  enum CollisionState { COL_AT, COL_ALWAYS, COL_NEVER };
+  CollisionState state;
+  float t0;
+  float t1;
+
+  AGSweepResult()
+  {
+    state=COL_ALWAYS;
+  }
+
+  void combine(const AGSweepResult &r)
+  {
+    if(state==COL_AT)
+      {
+	if(r.state==COL_NEVER)
+	  state=COL_NEVER;
+	else if(r.state!=COL_ALWAYS) // ALWAYS has no effect
+	  {
+	    t0=std::max(t0,r.t0);
+	    t1=std::min(t1,r.t1);
+	  }
+      }
+    else if(state==COL_ALWAYS)
+      {
+	if(r.state==COL_NEVER)
+	  state=COL_NEVER;
+	else if(r.state!=COL_ALWAYS) // ALWAYS has no effect
+	  {
+	    state=COL_AT;
+	    t0=r.t0;
+	    t1=r.t1;
+	  }
+	
+      }
+    // COL_NEVER cannot be changed
+  }
+
+  bool collision(float delta) const
+  {
+    return state==COL_ALWAYS || (state==COL_AT && t1>0 && t0<delta);
+  }
+
+  float begin(float delta) const
+  {
+    if(state==COL_ALWAYS || state==COL_NEVER)
+      return MAXF;
+
+    if(t0>=0.0f && t0<delta)
+      return t0;
+    else
+      return MAXF;
+  }
+
+  bool always() const
+  {
+    return state == COL_ALWAYS;
+  }
+};
+
+AGSweepResult collide1d(float pa1,float pa2,float pb1,float pb2,float v)
+{
+  float a1=std::min(pa1,pa2);
+  float a2=std::max(pa1,pa2);
+  float b1=std::min(pb1,pb2);
+  float b2=std::max(pb1,pb2);
+  AGSweepResult r;
+
+  if(v>0)
+    {
+      r.t0=(b1-a2)/v;
+      r.t1=(b2-a1)/v;
+      r.state = AGSweepResult::COL_AT;
+
+      assert(r.t0 <= r.t1);
+    }
+  else if(v<0)
+    {
+      r.t0=(b2-a1)/v;
+      r.t1=(b1-a2)/v;
+      r.state = AGSweepResult::COL_AT;
+
+      assert(r.t0 <= r.t1);
+    }
+  else
+    {
+      if (a2 < b1 || a1 > b2)
+        r.state = AGSweepResult::COL_NEVER;
+      else
+        r.state = AGSweepResult::COL_ALWAYS;
+    }
+  return r;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -384,6 +481,47 @@ void AGTriangle::apply(const AGMatrix &m)
   p[1]=m*p[1];
   p[2]=m*p[2];
 }
+
+/* FIXME: this will be some sweep-base collision detection,
+   HOWEVER there's the angular-velocity still missing :-(
+
+AGCollisionData AGTriangle::collide(const AGTriangle &t,const AGVector &v0,const AGVector &v1) const
+{
+  AGCollisionData data;
+
+  AGVector v=v1-v0;
+
+  float t0,t1;
+
+  std::vector<AGVector> v=getNormals();
+  append(v,t.getNormals());
+  std::vector<AGVector>::iterator i=v.begin();
+  for(;i!=v.end();i++)
+    {
+      float min1,min2,max1,max2;
+      size_t j;
+      for(j=0;j<3;j++)
+	{
+	  if(j==0)
+	    {
+	      min1=max1=(*i)*p[j];
+	      min2=max2=(*i)*t.p[j];
+	    }
+	  else
+	    {
+	      float v0=(*i)*p[j];
+	      float v1=(*i)*t.p[j];
+	      min1=std::min(min1,v0);
+	      max1=std::max(max1,v0);
+	      min2=std::min(min2,v1);
+	      max2=std::max(max2,v1);
+	    }
+	}
+      
+      float a1=
+    }
+}
+*/
 
 AGTriangle AGTriangle::applied(const AGMatrix &m) const
 {

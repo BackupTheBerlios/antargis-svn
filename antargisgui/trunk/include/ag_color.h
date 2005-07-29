@@ -45,6 +45,9 @@ class AGColor:public SDL_Color
   AGColor &operator=(const AGColor&c);
   AGColor &operator*=(float f);
 
+  AGColor operator*(float f) const;
+  AGColor operator+(const AGColor &c) const;
+
   Uint32 mapRGB(SDL_PixelFormat *f) const;
 
   std::string toString() const;

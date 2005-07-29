@@ -154,6 +154,10 @@ class AGLine
   std::string toString() const;
 };
 
+class AGCollisionData
+{
+};
+
 class AGTriangle
 {
   AGPointF p[3];
@@ -165,6 +169,10 @@ class AGTriangle
   AGPointF get(int index) const;
 
   bool collide(const AGTriangle &t) const;
+
+  // FIXME: sweep-based test
+  //  AGCollisionData collide(const AGTriangle &t,const AGVector &v0,const AGVector &v1) const;
+
   std::vector<AGVector> getNormals() const;
 
   void apply(const AGMatrix &m);
