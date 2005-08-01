@@ -1,8 +1,8 @@
 #!/bin/bash
 aclocal
-automake -a
+automake -a -c
 autoconf
-automake -a
+automake -a -c
 autoconf
 automake
 ./configure --prefix=/usr --enable-debug
