@@ -40,6 +40,8 @@ class AGApplication:public AGMessageObject
   virtual bool eventQuit(const AGEvent *m);
   virtual bool eventKeyDown(const AGEvent *m2);
 
+  virtual void eventChangedRes();
+
   void setMainWidget(AGWidget *w);
 
   void draw();

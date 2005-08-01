@@ -245,6 +245,7 @@ public:
     virtual bool eventKeyDown(AGEvent const *m2);
     virtual bool eventFrame(float pTime);
     virtual bool eventFrameEnd(float pTime);
+    virtual void eventChangedRes();
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
@@ -938,13 +939,14 @@ public:
     SwigDirector_AGPainter(VALUE self);
     SwigDirector_AGPainter(VALUE self, AGPainter const &p);
     SwigDirector_AGPainter(VALUE self, AGPaintTarget &pTarget);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGColor const &pColor);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource);
+    virtual void drawCircle(AGPoint const &p, float rad, AGColor const &c);
     virtual ~SwigDirector_AGPainter();
     virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
     virtual void blit(AGSurface const &pSource, AGRect const &pDest);

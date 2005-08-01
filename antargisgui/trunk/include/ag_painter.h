@@ -45,6 +45,8 @@ class AGPainter
   virtual void putPixel(const AGPoint &p,const AGColor &c);
   virtual AGColor getPixel(int x,int y);
 
+  virtual void drawCircle(const AGPoint &p,float rad,const AGColor &c);
+
   virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
   virtual void blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc);
 

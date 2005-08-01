@@ -164,11 +164,18 @@ bool AGApplication::eventKeyDown(const AGEvent *m2)
       //      char ins=0;
       //      bool doInsert=false;
       if(k==SDLK_RETURN && ((mod&KMOD_LALT)||(mod&KMOD_RALT)))
-	getMain()->toggleFull();
+	{
+	  getMain()->toggleFull();
+	  eventChangedRes();
+	}
       else if(k==SDLK_F10)
 	tryQuit();
     }
   return false;
+}
+
+void AGApplication::eventChangedRes()
+{
 }
 
 bool AGApplication::eventFrame(float pTime)

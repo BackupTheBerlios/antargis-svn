@@ -50,7 +50,7 @@ class AGSDLEvent:public AGEvent
   AGPoint getMousePosition() const;
   SDLKey getKey() const;
   SDLMod getMod() const;
-  Uint8 getButton() const;
+  int getButton() const;
 
   const SDL_Event *get() const;
 };

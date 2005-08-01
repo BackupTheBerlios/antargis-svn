@@ -73,7 +73,7 @@ SDLMod AGSDLEvent::getMod() const
   return mEvent->key.keysym.mod;
 }
 
-Uint8 AGSDLEvent::getButton() const
+int AGSDLEvent::getButton() const
 {
   switch(mEvent->type) {
   case SDL_MOUSEMOTION:

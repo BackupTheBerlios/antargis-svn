@@ -27,6 +27,8 @@
 #include <list>
 #include <vector>
 
+class AGRectF;
+
 struct AGAngle
 {
   float angle;
@@ -142,6 +144,11 @@ class AGLine
   bool has(const AGVector &v) const;
 
   bool collide(const AGLine &l) const;
+  AGVector collisionPoint(const AGLine &l) const;
+  AGVector collisionPointNI(const AGLine &l) const; // no inclusion test
+  bool includes(const AGVector &v) const;
+
+  AGRectF getBBox() const;
 
   AGVector normal() const;
   AGVector direction() const;
@@ -157,6 +164,8 @@ class AGLine
 class AGCollisionData
 {
 };
+
+class AGRectF;
 
 class AGTriangle
 {
@@ -182,7 +191,11 @@ class AGTriangle
   AGPointF touchPoint(const AGTriangle &t) const;
   AGVector touchVector(const AGTriangle &t) const;
 
+  std::vector<AGVector> collisionPoints(const AGLine &l) const;
+
   bool contains(const AGPointF &p) const;
+
+  AGRectF getBBox() const;
 
   AGLine nearestLine(const AGVector &v) const;
 
@@ -204,6 +217,8 @@ class AGRectF
 
   AGRectF operator+(const AGVector &v) const;
 
+  bool contains(const AGVector &v) const;
+
   void setX(float p);
   void setY(float p);
 
@@ -211,6 +226,11 @@ class AGRectF
   float y() const;
   float w() const;
   float h() const;
+
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
+  std::string toString() const;
 };
 
 #endif

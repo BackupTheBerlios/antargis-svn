@@ -523,6 +523,22 @@ AGCollisionData AGTriangle::collide(const AGTriangle &t,const AGVector &v0,const
 }
 */
 
+std::vector<AGVector> AGTriangle::collisionPoints(const AGLine &l) const
+{
+  std::vector<AGVector> ps;
+  std::vector<AGLine> lines=getLines();
+  std::vector<AGLine>::iterator i=lines.begin();
+  AGVector p;
+  //  cdebug(toString());
+  for(;i!=lines.end();i++)
+    {
+      p=i->collisionPoint(l);
+      if(p.getZ()!=0)
+	ps.push_back(p);
+    }
+  return ps;
+}
+
 AGTriangle AGTriangle::applied(const AGMatrix &m) const
 {
   return AGTriangle(m*p[0],m*p[1],m*p[2]);
@@ -697,6 +713,17 @@ AGRectF::AGRectF(float x,float y,float w,float h):
 {
 }
 
+bool AGRectF::contains(const AGVector &v) const
+{
+  return (v.getX()>= v0.getX() && v.getY()>=v0.getY() && v.getX()<=v1.getX() && v.getY()<=v1.getY());
+}
+
+std::string AGRectF::toString() const
+{
+  return v0.toString()+":"+v1.toString();
+}
+
+
 void AGRectF::setX(float p)
 {
   float mw=w();
@@ -764,6 +791,88 @@ AGVector AGLine::getV1() const
 bool AGLine::has(const AGVector &v) const
 {
   return v0==v || v1==v;
+}
+
+AGVector AGLine::collisionPointNI(const AGLine &l) const
+{
+  float dx, dy;
+  float ldx, ldy;
+  dx = v1.getX() - v0.getX();
+  dy = v1.getY() - v0.getY();
+  ldx = l.v1.getX() - l.v0.getX();
+  ldy = l.v1.getY() - l.v0.getY();
+
+  AGVector p;
+  
+  if(dx==0.0f)
+    {
+      if(ldx==0.0f)
+	return AGVector(0,0,0); // z=0, if invalid
+      
+      // ldy!=0 !!
+      float lm = ldy/ldx;
+      float lb = l.v0.getY() - lm * l.v0.getX();
+
+      //      cdebug(lm);
+      //      cdebug(lb);
+      
+      assert(lm!=0.0f);
+      p=AGVector(v0.getX(),lm*v0.getX()+lb,1);
+    }
+  else if(ldx==0.0f)
+    {
+      p=l.collisionPointNI(*this);
+    }
+  else
+    {
+      // ldy!=0 && dy!=0
+      float m =dy/dx;
+      float lm =ldy/ldx;
+      float b = v0.getY() - m * v0.getX();
+      float lb=l.v0.getY() - lm * l.v0.getX();
+
+      if(m == lm)
+	return AGVector(0,0,0); // parallel
+      float x=(lb-b)/(m-lm); 
+      p=AGVector(x,m*x+b,1);
+    }
+  return p;
+}
+AGVector AGLine::collisionPoint(const AGLine &l) const
+{
+  AGVector p=collisionPointNI(l);
+  if(p.getZ()==0)
+    return p;
+  // check for inclusion
+  if(includes(p) && l.includes(p))
+    {
+      /* cdebug(p.toString());
+    cdebug(toString()<<"    "<<l.toString());
+    cdebug(distance(p)<<"    "<<l.distance(p));*/
+    assert(distance(p)<0.01);
+    assert(l.distance(p)<0.01);
+    return p;
+  }
+  else
+    return AGVector(0,0,0);
+}
+
+bool AGLine::includes(const AGVector &v) const
+{
+  float f=(v-v0)*((v1-v0).normalized());
+  if(f>=0 && f<(v1-v0).length())
+  {
+    /*    cdebug(v0.toString()<<"  "<<v1.toString()<<"  "<<v.toString());
+    cdebug((v-v0).toString()<<"   "<<(v1-v0).toString()<<"   "<<(v1-v0).normalized().toString()<<"   "<<(v1-v0).length());
+    cdebug(f);*/
+    return true;
+  }
+  return false;
+}
+
+AGRectF AGLine::getBBox() const
+{
+  return AGRectF(std::min(v0.getX(),v1.getX()),std::min(v0.getY(),v1.getY()),fabs(v0.getX()-v1.getX()),fabs(v1.getY()-v0.getY()));
 }
 
 bool AGLine::collide(const AGLine &l) const

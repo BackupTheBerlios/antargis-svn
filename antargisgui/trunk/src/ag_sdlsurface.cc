@@ -150,6 +150,9 @@ void AGSDLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const 
 }
 void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
 {
+  sge_Update_OFF();
+
+  sge_PutPixel(s,x,y,c.mapRGB(s->format));
 }
 
 SDL_Surface *AGSDLScreen::newSurface(int x,int y)
@@ -185,9 +188,77 @@ void AGSDLScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const
   STUB;
 }
 
-void AGSDLScreen::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+void AGSDLScreen::drawLine(const AGPoint &pp0,const AGPoint &pp1,const AGColor &c)
 {
-  STUB;
+  AGPoint p0,p1;
+
+  p0=pp0;
+  p1=pp1;
+
+  int dx=p1.x-p0.x;
+  int dy=p1.y-p0.y;
+
+  sge_Update_OFF();
+  if(abs(dx)>abs(dy))
+    {
+      if(dx<0)
+	{
+	  p0=pp1;
+	  p1=pp0;
+	}
+
+      dx=p1.x-p0.x;
+      dy=p1.y-p0.y;
+
+      int y=p0.y;
+      float e=0;
+      float de=((float)dy)/dx;
+      for(int x=p0.x;x<=p1.x;x++)
+	{
+	  sge_PutPixel(s,x,y,c.mapRGB(s->format));
+	  e+=de;
+	  if(e>0.5)
+	    {
+	      e-=1.0;
+	      y++;
+	    }
+	  else if(e<-0.5)
+	    {
+	      e+=1.0;
+	      y--;
+	    }
+	}
+    }
+  else
+    {
+      if(dy<0)
+	{
+	  p0=pp1;
+	  p1=pp0;
+	}
+
+      dx=p1.x-p0.x;
+      dy=p1.y-p0.y;
+
+      int x=p0.x;
+      float e=0;
+      float de=((float)dx)/dy;
+      for(int y=p0.y;y<=p1.y;y++)
+	{
+	  sge_PutPixel(s,x,y,c.mapRGB(s->format));
+	  e+=de;
+	  if(e>0.5)
+	    {
+	      e-=1.0;
+	      x++;
+	    }
+	  else if(e<-0.5)
+	    {
+	      e+=1.0;
+	      x--;
+	    }
+	}
+    }
 }
 
 AGTexture AGSDLScreen::makeTexture(const AGSurface &s)

@@ -22,7 +22,7 @@
 #include "ag_debug.h"
 #include "ag_draw.h"
 #include "ag_fontengine.h"
-
+#include <math.h>
 
 AGPainter::AGPainter():mRect(getScreen().getRect()),mTarget(getScreen())
 {
@@ -329,4 +329,24 @@ void AGPainter::blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AG
 void AGPainter::blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc)
 {
   mTarget.blit(pSource,pDest,pSrc);
+}
+
+void AGPainter::drawCircle(const AGPoint &p,float rad,const AGColor &color)
+{
+  int x,y;
+  float r2=rad*rad;
+  for(x=p.x-rad-1;x<=p.x+rad+1;x++)
+    for(y=p.y-rad-1;y<=p.y+rad+1;y++)
+      {
+	float dx=x-p.x;
+	float dy=y-p.y;
+	float d2=dx*dx+dy*dy;
+	float d=sqrt(d2);
+
+	if(d2<r2)
+	  {
+	    AGPoint c(x,y);
+	    putPixel(c,color);
+	  }
+      }
 }
