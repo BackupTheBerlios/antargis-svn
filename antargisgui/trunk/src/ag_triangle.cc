@@ -475,6 +475,17 @@ AGTriangle::AGTriangle(const AGVector &v0,const AGVector &v1,const AGVector &v2)
   p[2]=v2;
 }
 
+AGRectF AGTriangle::getBBox() const
+{
+  float minx=std::min(p[0].getX(),std::min(p[1].getX(),p[2].getX()));
+  float maxx=std::max(p[0].getX(),std::max(p[1].getX(),p[2].getX()));
+  float miny=std::min(p[0].getY(),std::min(p[1].getY(),p[2].getY()));
+  float maxy=std::max(p[0].getY(),std::max(p[1].getY(),p[2].getY()));
+
+  return AGRectF(minx,miny,maxx-minx,maxy-miny);
+}
+
+
 void AGTriangle::apply(const AGMatrix &m)
 {
   p[0]=m*p[0];
