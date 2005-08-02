@@ -87,7 +87,7 @@ RUBY_INSTALL_DIR = @RUBY_INSTALL_DIR@
 STRIP = @STRIP@
 VERSION = @VERSION@
 
-SUBDIRS = include src bindings test
+SUBDIRS = src test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 

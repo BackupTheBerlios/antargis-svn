@@ -1,4 +1,4 @@
-%module(directors="1") libantargisruby
+%module(directors="1") libantargisgui
 %feature("director");
 %include "typemaps.i"
 

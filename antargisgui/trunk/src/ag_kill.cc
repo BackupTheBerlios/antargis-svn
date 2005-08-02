@@ -21,10 +21,29 @@
 #include "ag_kill.h"
 #include "ag_debug.h"
 
-AGInstanceKiller mInstanceKiller;
+AGInstanceKiller *mInstanceKiller=0;
+bool mIndirectInstance=false;
+
+void newInstanceKiller()
+{
+  assert(mInstanceKiller==0 || mIndirectInstance);
+  mInstanceKiller=new AGInstanceKiller;
+}
+void deleteInstanceKiller()
+{
+  assert(mInstanceKiller);
+  delete mInstanceKiller;
+}
+
 AGInstanceKiller *getInstanceKiller()
 {
-  return &mInstanceKiller;
+  if(!mInstanceKiller)
+    {
+      mIndirectInstance=true;
+      newInstanceKiller();
+    }
+  assert(mInstanceKiller);
+  return mInstanceKiller;
 }
 
 

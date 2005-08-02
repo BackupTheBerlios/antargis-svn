@@ -26,7 +26,6 @@ datadir = @datadir@
 sysconfdir = @sysconfdir@
 sharedstatedir = @sharedstatedir@
 localstatedir = @localstatedir@
-libdir = @libdir@
 infodir = @infodir@
 mandir = @mandir@
 includedir = @includedir@
@@ -88,19 +87,22 @@ STRIP = @STRIP@
 VERSION = @VERSION@
 
 lib_LTLIBRARIES = libantargisgui.la
-# libantargisruby.la
-#lib_LTLIBRARIES = libantargisruby.la
-#noinst_LTLIBRARIES = libantargisgui.la
 
 # WARNING:it is essential that ag_kill.cc stands before ag_widget, because there's a global set in ag_widget, which shouldn't be killed before the singletons!!!
 #         additional all references to ag_layoutcreators must be before ag_kill!!
 
-libantargisgui_la_SOURCES = ag_window.cc ag_surface.cc ag_main.cc privates.cc  ag_radio.cc ag_mixer.cc  ag_layout.cc ag_widget.cc ag_geometry.cc ag_font.cc ag_fontengine.cc ag_color.cc ag_messageobject.cc ag_button.cc ag_gradient.cc ag_application.cc ag_text.cc ag_vtiler.cc ag_theme.cc ag_menu.cc ag_menuitem.cc ag_image.cc ag_screen.cc ag_edit.cc ag_debug.cc ag_checkbox.cc ag_table.cc ag_background.cc ag_caption.cc export.c ag_glsurface.cc ag_vector.cc ag_xml.cc ag_tools.cc ag_layoutfactory.cc ag_fs.cc ag_painter.cc ag_sdlsurface.cc ag_border.cc ag_listbox.cc ag_kill.cc ag_triangle.cc
-
-INCLUDES = -I$(top_srcdir)/include	-I$(RUBY_INCLUDE_DIR)
+libantargisgui_la_SOURCES = ag_window.cc ag_surface.cc ag_main.cc privates.cc  ag_radio.cc ag_mixer.cc  ag_layout.cc ag_widget.cc ag_geometry.cc ag_font.cc ag_fontengine.cc ag_color.cc ag_messageobject.cc ag_button.cc ag_gradient.cc ag_application.cc ag_text.cc ag_vtiler.cc ag_theme.cc ag_menu.cc ag_menuitem.cc ag_image.cc ag_screen.cc ag_edit.cc ag_debug.cc ag_checkbox.cc ag_table.cc ag_background.cc ag_caption.cc export.c ag_glsurface.cc ag_vector.cc ag_xml.cc ag_tools.cc ag_layoutfactory.cc ag_fs.cc ag_painter.cc ag_sdlsurface.cc ag_border.cc ag_listbox.cc ag_kill.cc ag_triangle.cc antargisswig.cc
+libdir = $(RUBY_INSTALL_DIR)
+INCLUDES = -I$(RUBY_INCLUDE_DIR)
 
 SWIG = swig
 SWIGCOMPILE = $(SWIG) -v -Wall -ruby -c++ -I$(top_srcdir)/include -I$(srcdir) $(INCLUDES)
+
+# includes
+#INCLUDES = *.h
+EXTRA_DIST = *.h
+myincsdir = $(prefix)/include/antargisgui
+myincs_HEADERS = *.h
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 LTLIBRARIES =  $(lib_LTLIBRARIES)
@@ -121,7 +123,7 @@ ag_image.lo ag_screen.lo ag_edit.lo ag_debug.lo ag_checkbox.lo \
 ag_table.lo ag_background.lo ag_caption.lo export.lo ag_glsurface.lo \
 ag_vector.lo ag_xml.lo ag_tools.lo ag_layoutfactory.lo ag_fs.lo \
 ag_painter.lo ag_sdlsurface.lo ag_border.lo ag_listbox.lo ag_kill.lo \
-ag_triangle.lo
+ag_triangle.lo antargisswig.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -132,6 +134,8 @@ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CF
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+HEADERS =  $(myincs_HEADERS)
+
 DIST_COMMON =  Makefile.am Makefile.in
 
 
@@ -151,7 +155,7 @@ DEP_FILES =  .deps/ag_application.P .deps/ag_background.P \
 .deps/ag_surface.P .deps/ag_table.P .deps/ag_text.P .deps/ag_theme.P \
 .deps/ag_tools.P .deps/ag_triangle.P .deps/ag_vector.P \
 .deps/ag_vtiler.P .deps/ag_widget.P .deps/ag_window.P .deps/ag_xml.P \
-.deps/export.P .deps/privates.P
+.deps/antargisswig.P .deps/export.P .deps/privates.P
 SOURCES = $(libantargisgui_la_SOURCES)
 OBJECTS = $(libantargisgui_la_OBJECTS)
 
@@ -237,6 +241,21 @@ libantargisgui.la: $(libantargisgui_la_OBJECTS) $(libantargisgui_la_DEPENDENCIES
 	$(CXXCOMPILE) -c `cygpath -w $<`
 .cc.lo:
 	$(LTCXXCOMPILE) -c $<
+
+install-myincsHEADERS: $(myincs_HEADERS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(myincsdir)
+	@list='$(myincs_HEADERS)'; for p in $$list; do \
+	  if test -f "$$p"; then d= ; else d="$(srcdir)/"; fi; \
+	  echo " $(INSTALL_DATA) $$d$$p $(DESTDIR)$(myincsdir)/$$p"; \
+	  $(INSTALL_DATA) $$d$$p $(DESTDIR)$(myincsdir)/$$p; \
+	done
+
+uninstall-myincsHEADERS:
+	@$(NORMAL_UNINSTALL)
+	list='$(myincs_HEADERS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(myincsdir)/$$p; \
+	done
 
 tags: TAGS
 
@@ -349,20 +368,20 @@ installcheck: installcheck-am
 install-exec-am: install-libLTLIBRARIES
 install-exec: install-exec-am
 
-install-data-am:
+install-data-am: install-myincsHEADERS
 install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-libLTLIBRARIES
+uninstall-am: uninstall-libLTLIBRARIES uninstall-myincsHEADERS
 uninstall: uninstall-am
-all-am: Makefile $(LTLIBRARIES)
+all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
 installdirs:
-	$(mkinstalldirs)  $(DESTDIR)$(libdir)
+	$(mkinstalldirs)  $(DESTDIR)$(libdir) $(DESTDIR)$(myincsdir)
 
 
 mostlyclean-generic:
@@ -406,25 +425,22 @@ clean-libLTLIBRARIES maintainer-clean-libLTLIBRARIES \
 uninstall-libLTLIBRARIES install-libLTLIBRARIES mostlyclean-compile \
 distclean-compile clean-compile maintainer-clean-compile \
 mostlyclean-libtool distclean-libtool clean-libtool \
-maintainer-clean-libtool tags mostlyclean-tags distclean-tags \
-clean-tags maintainer-clean-tags distdir mostlyclean-depend \
-distclean-depend clean-depend maintainer-clean-depend info-am info \
-dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
-install-exec install-data-am install-data install-am install \
-uninstall-am uninstall all-redirect all-am all installdirs \
-mostlyclean-generic distclean-generic clean-generic \
-maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+maintainer-clean-libtool uninstall-myincsHEADERS install-myincsHEADERS \
+tags mostlyclean-tags distclean-tags clean-tags maintainer-clean-tags \
+distdir mostlyclean-depend distclean-depend clean-depend \
+maintainer-clean-depend info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
 
 
-#libantargisruby_la_SOURCES = ag_window.cc ag_surface.cc ag_main.cc privates.cc ag_widget.cc ag_geometry.cc ag_font.cc ag_fontengine.cc ag_color.cc ag_messageobject.cc ag_button.cc ag_gradient.cc ag_application.cc ag_text.cc ag_vtiler.cc ag_theme.cc ag_menu.cc ag_menuitem.cc ag_image.cc ag_screen.cc ag_edit.cc ag_debug.cc ag_checkbox.cc ag_radio.cc ag_table.cc ag_background.cc ag_caption.cc export.c ag_glsurface.cc ag_vector.cc ag_gsurface.cc ag_xml.cc ag_layout.cc ag_tools.cc ag_layoutfactory.cc ag_fs.cc ag_painter.cc ag_sdlsurface.cc ag_border.cc ag_listbox.cc antargisswig.cc
-
-marker.h: mk_marker_h.rb ../include/*.h
+marker.h: mk_marker_h.rb ag_*.h
 	./mk_marker_h.rb >marker.h
 
-antargisswig.cc: interface.i ../include/*.h marker.h
+antargisswig.cc: interface.i *.h marker.h
 	$(SWIGCOMPILE) -o antargisswig.cc interface.i
-
-#libdir = $(RUBY_INSTALL_DIR)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

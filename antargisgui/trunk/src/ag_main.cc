@@ -41,11 +41,18 @@ bool fullScreen=false;
 
 AGMain *mAGMain=0;
 
+// singleton-management
+void newInstanceKiller();
+void deleteInstanceKiller();
+
+
 AGMain::AGMain()
 {
-  SDL_Surface *mDisplay;
+  SDL_Surface *mDisplay=0;
 
   mAGMain=this;
+
+  newInstanceKiller();
 
   int w=800;//640;
   int h=600;//480;
@@ -125,6 +132,7 @@ AGMain::~AGMain()
 {
   CTRACE;
   delete mScreen;
+  deleteInstanceKiller();
 }
 
 void AGMain::flip()

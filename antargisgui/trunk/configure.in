@@ -40,6 +40,4 @@ LDFLAGS="$LDFLAGS `sdl-config --libs`"
 AC_OUTPUT([ 
 Makefile \
 src/Makefile \
-include/Makefile \
-bindings/Makefile \
 test/Makefile ])

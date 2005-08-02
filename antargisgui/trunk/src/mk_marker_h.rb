@@ -26,13 +26,13 @@ derive={}
 rlist={} # all, which have a mRUBY member
 
 
-f=File.open("../include/antargisgui.h")
+f=File.open("antargisgui.h")
 f.each {|x|
 
 if x =~ /%.*/ and not (x =~/\.i/ or x =~/template/)then
 	y=x.gsub(/.* "/,"").gsub(/"/,"").gsub(/\n/,"")
         if not y=~/\/.*/ then
-        	fn="../include/"+y
+        	fn=y#"../include/"+y
         else
                 fn=y
 	end
@@ -75,16 +75,17 @@ end
 #puts "hallo"
 #puts rlist
 
+file=File.open("marker.h","w")
 rlist.each {|x,y|
 	#puts x+y.to_s#x#"("+x+")"
 	if y then
-	puts "%exception "+x+"::"+x+" {"
-	puts "	$action"
-	puts "	result->mRUBY=self;"
-	puts "  result->mRubyObject=true;"
-	puts "	printf(\"register:"+x+"\\n\");"
-	puts "}"
-	puts "%markfunc "+x+" \"AGWidget_markfunc\""
+	file.puts "%exception "+x+"::"+x+" {"
+	file.puts "	$action"
+	file.puts "	result->mRUBY=self;"
+	file.puts "  result->mRubyObject=true;"
+	file.puts "	printf(\"register:"+x+"\\n\");"
+	file.puts "}"
+	file.puts "%markfunc "+x+" \"AGWidget_markfunc\""
 
 	end
 }

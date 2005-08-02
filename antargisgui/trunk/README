@@ -9,3 +9,10 @@ libSDL_image
 libsge
 libSDL_ttf
 libphysfs
+
+you have 2 possibilities to compile it
+1) use autotools:
+  ./configure && make && make install
+2) using extconf.rb /mkmf:
+  cd src && ruby extconf.rb && make && make install
+
