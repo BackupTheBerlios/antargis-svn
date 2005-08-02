@@ -8,3 +8,4 @@ libSDL
 libSDL_image
 libsge
 libSDL_ttf
+libphysfs

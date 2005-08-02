@@ -12,7 +12,7 @@ antargisswig.cc: interface.i ../include/*.h *.h marker.h
 SWIG = swig
 SWIGCOMPILE = $(SWIG) -v -Wall -ruby -c++ -I$(top_srcdir)/include -I$(srcdir) $(INCLUDES)
 
-libantargisruby_la_LIBADD = -lantargisgui
+libantargisruby_la_LIBADD = $(top_builddir)/src/libantargisgui.la
 
 INCLUDES = \
 	$(SDL_CFLAGS) \

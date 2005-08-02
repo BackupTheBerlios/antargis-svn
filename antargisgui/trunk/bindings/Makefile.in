@@ -94,7 +94,7 @@ libantargisruby_la_SOURCES = antargisswig.cc
 SWIG = swig
 SWIGCOMPILE = $(SWIG) -v -Wall -ruby -c++ -I$(top_srcdir)/include -I$(srcdir) $(INCLUDES)
 
-libantargisruby_la_LIBADD = -lantargisgui
+libantargisruby_la_LIBADD = $(top_builddir)/src/libantargisgui.la
 
 INCLUDES =  	$(SDL_CFLAGS) 	-I$(top_srcdir)/include 	-I$(RUBY_INCLUDE_DIR) 	-I../../include 
 
@@ -119,7 +119,7 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 libantargisruby_la_LDFLAGS = 
-libantargisruby_la_DEPENDENCIES = 
+libantargisruby_la_DEPENDENCIES =  $(top_builddir)/src/libantargisgui.la
 libantargisruby_la_OBJECTS =  antargisswig.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
