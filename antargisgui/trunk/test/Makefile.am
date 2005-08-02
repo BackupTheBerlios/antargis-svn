@@ -5,7 +5,7 @@ bin_PROGRAMS = mapptest
 
 mapptest_SOURCES = apptest.cc
 
-INCLUDES = -I/usr/local/include/antargisgui -I$(RUBY_INCLUDE_DIR) $(SDL_CFLAGS)
+INCLUDES = -I$(top_srcdir)/include -I$(RUBY_INCLUDE_DIR) $(SDL_CFLAGS)
 #CXXFLAGS = 
 
 LDADD = -L../src -lantargisgui -lruby1.8
