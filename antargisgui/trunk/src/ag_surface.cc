@@ -27,6 +27,7 @@
 #include "privates.h"
 #include "sge.h"
 #include "ag_kill.h"
+#include "ag_glsurface.h"
 
 #include "SDL_image.h"
 
@@ -404,6 +405,15 @@ void AGTexture::setTextureID(GLuint id)
 }
 GLuint AGTexture::getTextureID()
 {
+  if(!mHasTexture)
+    {
+      AGGLScreen *s=dynamic_cast<AGGLScreen*>(&getScreen());
+      if(s)
+	{
+	  // get one
+	  s->getID(this);
+	}
+    }
   //  CTRACE;
   assert(mHasTexture);
   mTextureUsed=true;

@@ -155,6 +155,7 @@ SDL_Surface *AGGLScreen::newSurface(int x,int y)
 }
 */
 
+#ifndef ORIGINAL
 SDL_Surface *toGLTexture(SDL_Surface *image)
 {
   assert(image);
@@ -195,7 +196,11 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
 		  //		  a=255;
 		  Uint32 cprime = SDL_MapRGBA( openGLSurface->format, r, g, b, a );
 		 
-		  sge_PutPixel( openGLSurface, i, j, cprime);
+		  //		  sge_PutPixel( openGLSurface, i, j, cprime);
+		  sge_PutPixelAlpha( openGLSurface, i, j, cprime,a);
+
+
+
 		  //		  sge_PutPixelAlpha( openGLSurface, i, j, cprime,a );
 		}
             }
@@ -294,7 +299,109 @@ GLuint assignTexture(SDL_Surface *pSurface)
   //  cdebug(id);
   return id;
 }
+#else
+SDL_Surface *toGLTexture(SDL_Surface *image)
+{
+  assert(image);
 
+  int bytes = 3;
+  if ( image->format->BitsPerPixel == 32 )
+    bytes = 4;
+  
+  SDL_Surface* openGLSurface = SDL_CreateRGBSurface(	SDL_SWSURFACE, image->w, image->h, bytes*8, 
+							0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
+  
+  if (false)// image->format->BitsPerPixel != 32 )
+    {
+      SDL_BlitSurface( image, 0, openGLSurface, 0 );
+    }
+  else
+    {
+      Uint8 r, g, b, a;
+      
+      // Grr! Screws up alpha channel. Fix the colors.
+      for( int j=0; j<image->h; ++j )
+	{
+	  for( int i=0; i<image->w; ++i )
+	    {
+	      Uint32 c = sge_GetPixel( image, i, j );
+	      SDL_GetRGBA( c, image->format, &r, &g, &b, &a );
+	      Uint32 cprime = SDL_MapRGBA( openGLSurface->format, r, g, b, a );
+	      sge_PutPixel( openGLSurface, i, j, cprime );
+	    }
+	}				 
+    }
+  
+  SDL_FreeSurface( image );
+  return openGLSurface;
+}
+
+bool assignTexture(SDL_Surface *pSurface,bool interpolate=false)
+{
+  SDL_Surface* surface = toGLTexture(pSurface);
+  assert(surface);
+  
+  int size = surface->w;
+
+  assert( surface->w == surface->h );
+  
+  // Used to invert the surface. There must be a better way.
+  SDL_Surface* texSurface = SDL_CreateRGBSurface(	SDL_SWSURFACE, 
+							size, size, 
+							surface->format->BitsPerPixel, 
+							0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
+  
+  for( int j=0; j<size; ++j )
+    memcpy(	(Uint8*) texSurface->pixels + texSurface->pitch * ( size - 1 - j),
+		(Uint8*) surface->pixels + surface->pitch * j,
+		size * texSurface->format->BytesPerPixel );
+  
+  GLuint id;
+  glGenTextures( 1, &id);
+  //  textureIDs[textureName]=id;
+  glBindTexture( GL_TEXTURE_2D, id);//textureIDs[textureName] );
+
+  //  cout<<"textureID:"<<textureIDs[textureName]<<endl;
+  
+  int format = ( texSurface->format->BytesPerPixel == 4 ) ? GL_RGBA : GL_RGB;
+
+  glTexImage2D(	GL_TEXTURE_2D,
+		0,					// no mip mapping
+		format,
+		texSurface->w,
+		texSurface->h,
+		0,					// no border
+		format,			// format
+		GL_UNSIGNED_BYTE,
+		texSurface->pixels );
+  
+  assert( glGetError() == GL_NO_ERROR );
+  
+  SDL_FreeSurface( texSurface );
+  SDL_FreeSurface( surface );
+
+
+
+  if(interpolate)
+    {
+      glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+  else
+    {
+      glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+      glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    }
+
+  assert( glGetError() == GL_NO_ERROR );
+  
+  glEnable( GL_BLEND );
+  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+  return true;
+  
+}
+#endif
 void deleteTexture(GLuint id)
 {
   glDeleteTextures(1,&id);

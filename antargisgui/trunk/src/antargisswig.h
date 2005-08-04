@@ -249,6 +249,7 @@ public:
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual void draw();
 };
 
 

@@ -3806,6 +3806,17 @@ bool SwigDirector_AGApplication::signal(std::string const &pName, AGEvent const 
 }
 
 
+void SwigDirector_AGApplication::draw() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGApplication::draw();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("draw"), 0, NULL);
+}
+
+
 SwigDirector_AGText::SwigDirector_AGText(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont): AGText(pParent, pRect, pText, pFont), Swig::Director(self) {
     
 }
@@ -23618,10 +23629,13 @@ _wrap_AGApplication_setMainWidget(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGApplication_draw(int argc, VALUE *argv, VALUE self) {
     AGApplication *arg1 = (AGApplication *) 0 ;
+    Swig::Director *director = 0;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->draw();
     
     return Qnil;

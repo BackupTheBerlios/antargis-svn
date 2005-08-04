@@ -44,7 +44,7 @@ class AGApplication:public AGMessageObject
 
   void setMainWidget(AGWidget *w);
 
-  void draw();
+  virtual void draw();
 
   void tryQuit();
 

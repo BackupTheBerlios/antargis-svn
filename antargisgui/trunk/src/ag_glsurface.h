@@ -79,6 +79,8 @@ class AGGLScreen:public AGScreen
   void checkUnusedTextures();
 
   int w,h;
+
+  friend class AGTexture;
 };
 
 #endif
