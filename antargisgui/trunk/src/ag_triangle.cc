@@ -928,3 +928,345 @@ float AGLine::distance(const AGVector &v) const
 {
   return fabs(normal()*(v-v0));
 }
+
+
+///////////////////////////////////////////////////////////////
+// AGVector4
+///////////////////////////////////////////////////////////////
+
+
+AGVector4::AGVector4(float pX,float pY,float pZ,float pW)
+{
+  v[0]=pX;
+  v[1]=pY;
+  v[2]=pZ;
+  v[3]=pW;
+}
+AGVector4::AGVector4(const AGVector4 &a)
+{
+  v[0]=a.v[0];
+  v[1]=a.v[1];
+  v[2]=a.v[2];
+  v[3]=a.v[3];
+}
+AGVector4::AGVector4()
+{
+  v[0]=v[1]=v[2]=0.0f;
+  v[3]=1.0f;
+}
+AGVector4::~AGVector4()
+{
+}
+
+void AGVector4::setX(float pX)
+{
+  v[0]=pX;
+}
+void AGVector4::setY(float pY)
+{
+  v[1]=pY;
+}
+void AGVector4::setZ(float pZ)
+{
+  v[2]=pZ;
+}
+void AGVector4::setW(float pW)
+{
+  v[3]=pW;
+}
+
+float AGVector4::getX() const
+{
+  return v[0];
+}
+float AGVector4::getY() const
+{
+  return v[1];
+}
+float AGVector4::getZ() const
+{
+  return v[2];
+}
+float AGVector4::getW() const
+{
+  return v[3];
+}
+
+AGVector4 AGVector4::operator-(const AGVector4 &p) const
+{
+  return AGVector4(v[0]-p.v[0],
+		   v[1]-p.v[1],
+		   v[2]-p.v[2],
+		   v[3]-p.v[3]);
+}
+AGVector4 AGVector4::operator+(const AGVector4 &p) const
+{
+  return AGVector4(v[0]+p.v[0],
+		   v[1]+p.v[1],
+		   v[2]+p.v[2],
+		   v[3]+p.v[3]);
+}
+AGVector4 &AGVector4::operator+=(const AGVector4 &p)
+{
+  v[0]+=p.v[0];
+  v[1]+=p.v[1];
+  v[2]+=p.v[2];
+  v[3]+=p.v[3];
+  return *this;
+}
+AGVector4 &AGVector4::operator-=(const AGVector4 &p)
+{
+  v[0]-=p.v[0];
+  v[1]-=p.v[1];
+  v[2]-=p.v[2];
+  v[3]-=p.v[3];
+  return *this;
+}
+
+float AGVector4::operator*(const AGVector4 &p) const
+{
+  return v[0]*p.v[0]+
+    v[1]*p.v[1]+
+    v[2]*p.v[2]+
+    v[3]*p.v[3];
+}
+AGVector4 &AGVector4::operator*=(float f)
+{
+  v[0]*=f;
+  v[1]*=f;
+  v[2]*=f;
+  v[3]*=f;
+  return *this;
+}
+AGVector4 &AGVector4::operator/=(float f)
+{
+  v[0]/=f;
+  v[1]/=f;
+  v[2]/=f;
+  v[3]/=f;
+  return *this;
+}
+AGVector4 AGVector4::operator*(float f) const
+{
+  return AGVector4(v[0]*f,v[1]*f,v[2]*f,v[3]*f);
+}
+AGVector4 AGVector4::operator/(float f) const
+{
+  return AGVector4(v[0]/f,v[1]/f,v[2]/f,v[3]/f);
+}
+
+bool AGVector4::operator==(const AGVector4 &a) const
+{
+  return v[0]==a.v[0] &&
+    v[1]==a.v[1] &&
+    v[2]==a.v[2] &&
+    v[3]==a.v[3];
+}
+bool AGVector4::operator!=(const AGVector4 &a) const
+{
+  return !operator==(a);
+}
+
+inline float AGVector4::length() const
+{
+  return sqrt(length2());
+}
+inline float AGVector4::length2() const
+{
+  return v[0]*v[0]+
+    v[1]*v[1]+
+    v[2]*v[2]+
+    v[3]*v[3];
+}
+
+inline float AGVector4::length3() const
+{
+  return sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
+}
+
+AGVector4 AGVector4::normalized() const
+{
+  return *this*(1.0f/length());
+}
+void AGVector4::normalize()
+{
+  operator*=(1.0f/length());
+}
+
+AGVector4 AGVector4::normalized3() const
+{
+  return *this*(1.0f/length3());
+}
+void AGVector4::normalize3()
+{
+  operator*=(1.0f/length3());
+}
+
+float &AGVector4::operator[](int index)
+{
+  assert(index>=0 && index<4);
+  return v[index];
+}
+
+float AGVector4::operator[](int index) const
+{
+  assert(index>=0 && index<4);
+  return v[index];
+}
+
+bool AGVector4::nonZero() const
+{
+  return v[0]!=0 ||
+    v[1]!=0 ||
+    v[2]!=0 ||
+    v[3]!=0;
+}
+
+std::string AGVector4::toString() const
+{
+  std::ostringstream os;
+  os<<"("<<v[0]<<","<<v[1]<<","<<v[2]<<","<<v[3]<<")";
+  return os.str();
+}
+
+(AGVector4::operator float*)()
+{
+  return v;
+}
+
+(AGVector4::operator const float*)() const
+{
+  return v;
+}
+
+
+AGVector4 AGVector4::operator%(const AGVector4 &a) const
+{
+  return AGVector4(v[1] * a.v[2] - v[2] * a.v[1],
+		   v[2] * a.v[0] - v[0] * a.v[2],
+		   v[0] * a.v[1] - v[1] * a.v[0]);
+}
+
+///////////////////////////////////////////////////////////////
+// AGMatrix4
+///////////////////////////////////////////////////////////////
+
+AGMatrix4::AGMatrix4(float v[16])
+{
+  for(size_t i=0;i<16;i++)
+    a[i]=v[i];
+}
+
+AGMatrix4::AGMatrix4()
+{
+  get(0,1)=get(0,2)=get(0,3)=
+    get(1,0)=get(1,2)=get(1,3)=
+    get(2,0)=get(2,1)=get(2,3)=
+    get(3,0)=get(3,1)=get(3,2)=0.0f;
+
+  get(0,0)=get(1,1)=get(2,2)=get(3,3)=1.0f;
+}
+
+/*AGMatrix::AGMatrix4(const AGAngle &n)
+{
+  a[0][0]=cos(n.angle);
+  a[1][0]=sin(n.angle);
+  a[0][1]=-sin(n.angle);
+  a[1][1]=cos(n.angle);
+  a[2][0]=a[2][1]=a[0][2]=a[1][2]=0.0f;
+  a[2][2]=1.0f;
+  }*/
+
+AGMatrix4::AGMatrix4(const AGVector4 &n)
+{
+  get(0,0)=get(1,1)=get(2,2)=get(3,3)=1.0f;
+  get(0,1)=get(0,2)=get(0,3)=
+    get(1,0)=get(1,2)=get(1,3)=
+    get(2,0)=get(2,1)=get(2,3)=0.0f;
+  get(3,0)=n[0];
+  get(3,1)=n[1];
+  get(3,2)=n[2];
+}
+
+
+
+void AGMatrix4::set(size_t x,size_t y,float f)
+{
+  assert(x>=0 && x<4);
+  assert(y>=0 && y<4);
+  a[x*4+y]=f;
+}
+float AGMatrix4::get(size_t x,size_t y) const
+{
+  assert(x>=0 && x<4);
+  assert(y>=0 && y<4);
+  return a[4*x+y];
+}
+
+float &AGMatrix4::get(size_t x,size_t y)
+{
+  assert(x>=0 && x<4);
+  assert(y>=0 && y<4);
+  return a[4*x+y];
+}
+
+AGMatrix4 AGMatrix4::operator*(const AGMatrix4 &m) const
+{
+  AGMatrix4 n;
+  size_t x,y;
+  for(x=0;x<4;x++)
+    for(y=0;y<4;y++)
+      n(x,y)=get(0,y)*m(x,0)+
+	get(1,y)*m(x,1)+
+	get(2,y)*m(x,2)+
+	get(3,y)*m(x,3);
+  return n;
+}
+AGMatrix4 &AGMatrix4::operator*=(const AGMatrix4 &m)
+{
+  *this=(*this)*m;
+  return *this;
+}
+
+AGVector4 AGMatrix4::operator*(const AGVector4 &v) const
+{
+  return AGVector4(get(0,0)*v[0]+get(1,0)*v[1]+get(2,0)*v[2]+get(3,0)*v[3],
+		   get(0,1)*v[0]+get(1,1)*v[1]+get(2,1)*v[2]+get(3,1)*v[3],
+		   get(0,2)*v[0]+get(1,2)*v[1]+get(2,2)*v[2]+get(3,2)*v[3],
+		   get(0,3)*v[0]+get(1,3)*v[1]+get(2,3)*v[2]+get(3,3)*v[3]);
+}
+
+std::string AGMatrix4::toString() const
+{
+  std::ostringstream os;
+  os<<"("<<get(0,0)<<","<<get(1,0)<<","<<get(2,0)<<","<<get(3,0)<<")"<<endl;
+  os<<"("<<get(0,1)<<","<<get(1,1)<<","<<get(2,1)<<","<<get(3,1)<<")"<<endl;
+  os<<"("<<get(0,2)<<","<<get(1,2)<<","<<get(2,2)<<","<<get(3,2)<<")"<<endl;
+  os<<"("<<get(0,3)<<","<<get(1,3)<<","<<get(2,3)<<","<<get(3,3)<<")"<<endl;
+  return os.str();
+}
+
+(AGMatrix4::operator float*)()
+{
+  return a;
+}
+
+(AGMatrix4::operator const float*)() const
+{
+  return a;
+}
+
+float AGMatrix4::operator()(size_t x,size_t y) const
+{
+  return get(x,y);
+}
+float &AGMatrix4::operator()(size_t x,size_t y)
+{
+  return get(x,y);
+}
+
+AGVector4 AGMatrix4::getRow(size_t i) const
+{
+  //  return AGVector4(get(i,0),get(i,1),get(i,2),get(i,3));
+  return AGVector4(get(0,i),get(1,i),get(2,i),get(3,i));
+}

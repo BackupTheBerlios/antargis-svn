@@ -187,6 +187,16 @@ public:
 };
 
 
+class SwigDirector_AGVector4 : public AGVector4, public Swig::Director {
+
+public:
+    SwigDirector_AGVector4(VALUE self, float pX, float pY, float pZ, float pW = 1.0f);
+    SwigDirector_AGVector4(VALUE self, AGVector4 const &a);
+    SwigDirector_AGVector4(VALUE self);
+    virtual ~SwigDirector_AGVector4();
+};
+
+
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:

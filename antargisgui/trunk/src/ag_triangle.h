@@ -233,4 +233,118 @@ class AGRectF
   std::string toString() const;
 };
 
+
+class AGVector4
+{
+ public:
+  float v[4];
+
+  AGVector4(float pX,float pY,float pZ,float pW=1.0f);
+  AGVector4(const AGVector4 &a);
+  AGVector4();
+  virtual ~AGVector4();
+
+  void setX(float pX);
+  void setY(float pY);
+  void setZ(float pZ);
+  void setW(float pW);
+
+  
+#ifdef SWIG
+  %rename(x) getX() const;
+  %rename(y) getY() const;
+  %rename(z) getZ() const;
+  %rename(z) getW() const;
+#endif
+  float getX() const;
+  float getY() const;
+  float getZ() const;
+  float getW() const;
+
+  AGVector4 operator-(const AGVector4 &p) const;
+  AGVector4 operator+(const AGVector4 &p) const;
+  AGVector4 &operator+=(const AGVector4 &p);
+  AGVector4 &operator-=(const AGVector4 &p);
+
+  float operator*(const AGVector4 &p) const;
+  AGVector4 &operator*=(float f);
+  AGVector4 &operator/=(float f);
+  AGVector4 operator*(float f) const;
+  AGVector4 operator/(float f) const;
+
+  bool operator==(const AGVector4 &a) const;
+  bool operator!=(const AGVector4 &a) const;
+
+  float length() const;
+  // length^2
+  float length2() const;
+
+  // length 3-dim vector
+  float length3() const;
+
+
+  AGVector4 normalized() const;
+  void normalize();
+
+  // 3-dimensional
+  AGVector4 normalized3() const;
+  void normalize3();
+
+
+  float operator[](int index) const;
+  float &operator[](int index);
+
+  bool nonZero() const;
+
+  // vector-cross-product
+  // ignores 4th coordinate
+  AGVector4 operator%(const AGVector4 &a) const;
+
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
+  std::string toString() const;
+
+#ifndef SWIG
+  (operator float*)();
+  (operator const float*)() const;
+#endif
+};
+
+class AGMatrix4
+{
+  float a[16];
+ public:
+  AGMatrix4();
+  AGMatrix4(float v[16]);
+  // FIXME: add quaternion
+  //  AGMatrix4(const AGAngle &a);
+  AGMatrix4(const AGVector4 &a);
+  void set(size_t x,size_t y,float f);
+  float get(size_t x,size_t y) const;
+  float &get(size_t x,size_t y);
+
+  AGMatrix4 operator*(const AGMatrix4 &m) const;
+  AGMatrix4 &operator*=(const AGMatrix4 &m);
+
+  AGVector4 operator*(const AGVector4 &v) const;
+
+  float operator()(size_t x,size_t y) const;
+  float &operator()(size_t x,size_t y);
+
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
+  std::string toString() const;
+
+#ifndef SWIG
+  (operator float*)();
+  (operator const float*)() const;
+#endif
+
+  AGVector4 getRow(size_t i) const;
+};
+
+
+
 #endif

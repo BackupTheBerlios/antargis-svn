@@ -261,9 +261,6 @@ class Vector
   inline Vector<T,N> operator%(const Vector<T,N> &other) const;
 
 
-
-
-
   //--- norm stuff ---
 
   /// compute norm; leave vector unchanged
@@ -285,8 +282,6 @@ class Vector
     return *this;
   }
   
-
-
   //--- max min mean ---
 
   /// return the maximal component
