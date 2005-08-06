@@ -321,12 +321,12 @@ void AGPainter::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
   mTarget.drawLine(p0,p1,c);
 }
 
-void AGPainter::blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest)
+void AGPainter::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest)
 {
   mTarget.blitTri(pSource,pSrc,pDest);
 }
 
-void AGPainter::blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc)
+void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   mTarget.blit(pSource,pDest,pSrc);
 }
@@ -341,7 +341,7 @@ void AGPainter::drawCircle(const AGPoint &p,float rad,const AGColor &color)
 	float dx=x-p.x;
 	float dy=y-p.y;
 	float d2=dx*dx+dy*dy;
-	float d=sqrt(d2);
+	//	float d=sqrt(d2);
 
 	if(d2<r2)
 	  {

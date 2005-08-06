@@ -142,6 +142,7 @@ void AGApplication::draw()
 {
   if(mainWidget)
     {
+      getScreen().begin();
       AGPainter p;
       mainWidget->drawAll(p);
     }

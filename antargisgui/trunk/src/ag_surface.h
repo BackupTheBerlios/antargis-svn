@@ -146,6 +146,7 @@ class AGTexture
 class AGScreen:public AGPaintTarget
 {
  public:
+  virtual void begin(); // call before start drawing
   virtual void flip();
 
  private:

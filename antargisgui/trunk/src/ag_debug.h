@@ -20,13 +20,15 @@
 
 #ifndef AG_DEBUG_h
 #define AG_DEBUG_h
-
+#include <stdexcept>
 #include <iostream>
 #include <fstream>
 #include <assert.h>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 #include "ag_exception.h"
 
@@ -111,5 +113,23 @@ private:
 #else
 #define CHECK_ZERO(x) if(!x) throw AGException(std::string(__STRING(x))+" is zero in "+__FILE__+" line:"+toString(__LINE__)+" functin:"+__PRETTY_FUNCTION__);
 #endif
+
+inline void myAssertGL(std::string s)
+{
+  //#ifdef DEBUG
+  GLenum error = glGetError();
+  if(error != GL_NO_ERROR) {
+    std::ostringstream msg;
+    msg <<s<< ": OpenGLError "
+        << gluErrorString(error);
+    
+    cdebug(msg.str());
+    throw std::runtime_error(msg.str());
+  }
+  //#endif
+
+}
+
+#define assertGL myAssertGL(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 
 #endif

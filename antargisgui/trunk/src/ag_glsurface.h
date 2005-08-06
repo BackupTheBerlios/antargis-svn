@@ -42,8 +42,8 @@ class AGGLScreen:public AGScreen
 
   virtual ~AGGLScreen();
 
-  virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
-  virtual void blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc);
+  virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
 
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
@@ -67,9 +67,10 @@ class AGGLScreen:public AGScreen
   virtual AGTexture makeTexture(const AGSurface &s);
   virtual void deleteTexture(AGTexture &t);
 
+  virtual void begin(); // call before start drawing
   void flip();
   bool inScreen(const AGRect &r) const;
-  bool inScreen(const AGRectF &r) const;
+  bool inScreen(const AGRect2 &r) const;
 
 
  private:

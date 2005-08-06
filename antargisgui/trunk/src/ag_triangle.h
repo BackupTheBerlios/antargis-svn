@@ -27,7 +27,24 @@
 #include <list>
 #include <vector>
 
-class AGRectF;
+/* There are following classes:
+
+   We do NOT use templates here, because of SWIG-problems.
+
+   - AGVector3 - is homogenous 2d and inhom 3d
+   - AGPoint3  - is 2d (with z=1) or 3d
+   - AGVector4 - hom. 3d
+   - AGMatrix3 - 3x3 Matrix
+   - AGMatrix4 - 4x4 Matrix
+
+   - AGLine2     - 2d Line (eats AGVector3)
+   - AGTriangle2 - 2d triangle (eats AGVector3)
+*/
+
+
+class AGRect2;
+
+
 
 struct AGAngle
 {
@@ -37,16 +54,16 @@ struct AGAngle
 };
 
 // 2-dim homogenous vector
-class AGVector
+class AGVector3
 {
  public:
   float v[3];
 
-  AGVector(float pX,float pY,float pZ=0.0f);
-  AGVector(const AGAngle &a);
-  AGVector(const AGVector &a);
-  AGVector();
-  virtual ~AGVector();
+  AGVector3(float pX,float pY,float pZ);
+  AGVector3(const AGAngle &a);
+  AGVector3(const AGVector3 &a);
+  AGVector3();
+  virtual ~AGVector3();
 
   void setX(float pX);
   void setY(float pY);
@@ -64,27 +81,27 @@ class AGVector
 
   AGAngle getAngle() const;
 
-  AGVector operator-(const AGVector &p) const;
-  AGVector operator+(const AGVector &p) const;
-  AGVector &operator+=(const AGVector &p);
-  AGVector &operator-=(const AGVector &p);
+  AGVector3 operator-(const AGVector3 &p) const;
+  AGVector3 operator+(const AGVector3 &p) const;
+  AGVector3 &operator+=(const AGVector3 &p);
+  AGVector3 &operator-=(const AGVector3 &p);
 
-  float operator*(const AGVector &p) const;
-  AGVector &operator*=(float f);
-  AGVector &operator/=(float f);
-  AGVector operator*(float f) const;
-  AGVector operator/(float f) const;
+  float operator*(const AGVector3 &p) const;
+  AGVector3 &operator*=(float f);
+  AGVector3 &operator/=(float f);
+  AGVector3 operator*(float f) const;
+  AGVector3 operator/(float f) const;
 
-  bool operator==(const AGVector &a) const;
-  bool operator!=(const AGVector &a) const;
+  bool operator==(const AGVector3 &a) const;
+  bool operator!=(const AGVector3 &a) const;
 
   float length() const;
   float length2() const;
 
-  AGVector normalized() const;
+  AGVector3 normalized() const;
   void normalize();
 
-  AGVector normal() const;
+  AGVector3 normal() const;
 
   float operator[](int index) const;
 
@@ -100,30 +117,30 @@ class AGVector
 #endif
 };
 
-class AGPointF:public AGVector
+class AGPoint3:public AGVector3
 {
  public:
-  AGPointF();
-  AGPointF(float pX,float pY,float pZ=1.0f);
-  AGPointF(const AGVector &p);
+  AGPoint3();
+  AGPoint3(float pX,float pY,float pZ=1.0f);
+  AGPoint3(const AGVector3 &p);
 
-  AGPointF&operator=(const AGVector &v);
+  AGPoint3&operator=(const AGVector3 &v);
 };
 
-class AGMatrix
+class AGMatrix3
 {
   float a[3][3];
  public:
-  AGMatrix();
-  AGMatrix(const AGAngle &a);
-  AGMatrix(const AGVector &a);
+  AGMatrix3();
+  AGMatrix3(const AGAngle &a);
+  AGMatrix3(const AGVector3 &a);
   void set(size_t x,size_t y,float f);
   float get(size_t x,size_t y) const;
 
-  AGMatrix operator*(const AGMatrix &m) const;
-  AGMatrix &operator*=(const AGMatrix &m);
+  AGMatrix3 operator*(const AGMatrix3 &m) const;
+  AGMatrix3 &operator*=(const AGMatrix3 &m);
 
-  AGVector operator*(const AGVector &v) const;
+  AGVector3 operator*(const AGVector3 &v) const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -131,29 +148,29 @@ class AGMatrix
   std::string toString() const;
 };
 
-class AGLine
+class AGLine2
 {
-  AGVector v0,v1;
+  AGVector3 v0,v1;
  public:
-  AGLine();
-  AGLine(const AGVector &pv0,const AGVector &pv1);
+  AGLine2();
+  AGLine2(const AGVector3 &pv0,const AGVector3 &pv1);
   
-  AGVector getV0() const;
-  AGVector getV1() const;
+  AGVector3 getV0() const;
+  AGVector3 getV1() const;
 
-  bool has(const AGVector &v) const;
+  bool has(const AGVector3 &v) const;
 
-  bool collide(const AGLine &l) const;
-  AGVector collisionPoint(const AGLine &l) const;
-  AGVector collisionPointNI(const AGLine &l) const; // no inclusion test
-  bool includes(const AGVector &v) const;
+  bool collide(const AGLine2 &l) const;
+  AGVector3 collisionPoint(const AGLine2 &l) const;
+  AGVector3 collisionPointNI(const AGLine2 &l) const; // no inclusion test
+  bool includes(const AGVector3 &v) const;
 
-  AGRectF getBBox() const;
+  AGRect2 getBBox() const;
 
-  AGVector normal() const;
-  AGVector direction() const;
+  AGVector3 normal() const;
+  AGVector3 direction() const;
 
-  float distance(const AGVector &v) const;
+  float distance(const AGVector3 &v) const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -165,59 +182,59 @@ class AGCollisionData
 {
 };
 
-class AGRectF;
+class AGRect2;
 
-class AGTriangle
+class AGTriangle2
 {
-  AGPointF p[3];
+  AGPoint3 p[3];
  public:
-  AGTriangle(const AGVector &v0,const AGVector &v1,const AGVector &v2);
+  AGTriangle2(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2);
 
-  AGPointF operator[](int index) const;
+  AGPoint3 operator[](int index) const;
 
-  AGPointF get(int index) const;
+  AGPoint3 get(int index) const;
 
-  bool collide(const AGTriangle &t) const;
+  bool collide(const AGTriangle2 &t) const;
 
   // FIXME: sweep-based test
   //  AGCollisionData collide(const AGTriangle &t,const AGVector &v0,const AGVector &v1) const;
 
-  std::vector<AGVector> getNormals() const;
+  std::vector<AGVector3> getNormals() const;
 
-  void apply(const AGMatrix &m);
-  AGTriangle applied(const AGMatrix &m) const;
+  void apply(const AGMatrix3 &m);
+  AGTriangle2 applied(const AGMatrix3 &m) const;
 
   // estimate touching point (or middle of touching area)
-  AGPointF touchPoint(const AGTriangle &t) const;
-  AGVector touchVector(const AGTriangle &t) const;
+  AGPoint3 touchPoint(const AGTriangle2 &t) const;
+  AGVector3 touchVector(const AGTriangle2 &t) const;
 
-  std::vector<AGVector> collisionPoints(const AGLine &l) const;
+  std::vector<AGVector3> collisionPoints(const AGLine2 &l) const;
 
-  bool contains(const AGPointF &p) const;
+  bool contains(const AGPoint3 &p) const;
 
-  AGRectF getBBox() const;
+  AGRect2 getBBox() const;
 
-  AGLine nearestLine(const AGVector &v) const;
+  AGLine2 nearestLine(const AGVector3 &v) const;
 
-  std::vector<AGLine> getLines() const;
+  std::vector<AGLine2> getLines() const;
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
   std::string toString() const;
 };
 
-class AGRectF
+class AGRect2
 {
-  AGVector v0,v1;
+  AGVector3 v0,v1;
  public:
-  AGRectF(const AGVector &pv0,const AGVector &pv1);
-  AGRectF(float x,float y,float w,float h);
+  AGRect2(const AGVector3 &pv0,const AGVector3 &pv1);
+  AGRect2(float x,float y,float w,float h);
 
-  bool collide(const AGRectF &r) const;
+  bool collide(const AGRect2 &r) const;
 
-  AGRectF operator+(const AGVector &v) const;
+  AGRect2 operator+(const AGVector3 &v) const;
 
-  bool contains(const AGVector &v) const;
+  bool contains(const AGVector3 &v) const;
 
   void setX(float p);
   void setY(float p);

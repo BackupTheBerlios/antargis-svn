@@ -54,7 +54,7 @@
 %include "std_string.i"
 %include "std_vector.i"
 %template(StringVector) std::vector<std::string>;
-%template(LineVector) std::vector<AGLine>;
+%template(Line2Vector) std::vector<AGLine2>;
 %include "antargisgui.h"
 
 

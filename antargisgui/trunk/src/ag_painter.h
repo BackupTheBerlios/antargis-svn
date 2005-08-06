@@ -30,8 +30,8 @@
 
 #include <list>
 
-class AGTriangle;
-class AGRectF;
+class AGTriangle2;
+class AGRect2;
 
 class AGPainter
 {
@@ -47,8 +47,8 @@ class AGPainter
 
   virtual void drawCircle(const AGPoint &p,float rad,const AGColor &c);
 
-  virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest);
-  virtual void blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc);
+  virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
 
   virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGColor &pColor);

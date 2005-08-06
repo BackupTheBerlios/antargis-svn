@@ -149,32 +149,32 @@ AGAngle::AGAngle(float p):angle(p)
 // AGVector
 /////////////////////////////////////////////////////////////////////////////
 
-AGVector::AGVector(float pX,float pY,float pZ)
+AGVector3::AGVector3(float pX,float pY,float pZ)
 {
   v[0]=pX;
   v[1]=pY;
   v[2]=pZ;
 }
-AGVector::AGVector(const AGVector &a)
+AGVector3::AGVector3(const AGVector3 &a)
 {
   v[0]=a.v[0];
   v[1]=a.v[1];
   v[2]=a.v[2];
 }
-AGVector::AGVector(const AGAngle &a)
+AGVector3::AGVector3(const AGAngle &a)
 {
   v[0]=sin(a.angle);
   v[1]=-cos(a.angle);
   v[2]=0.0f;
 }
 
-AGVector::AGVector()
+AGVector3::AGVector3()
 {
   v[0]=v[1]=0;
   v[2]=0.0f;
 }
 
-AGVector::~AGVector()
+AGVector3::~AGVector3()
 {
 }
 
@@ -200,92 +200,92 @@ float getArcInternal(float x,float y)
 }
 
 
-AGAngle AGVector::getAngle() const
+AGAngle AGVector3::getAngle() const
 {
   return AGAngle(getArcInternal(v[0],v[1]));
 }
 
 
-bool AGVector::operator==(const AGVector &a) const
+bool AGVector3::operator==(const AGVector3 &a) const
 {
   return v[0]==a.v[0] && v[1]==a.v[1] && v[2]==a.v[2];
 }
-bool AGVector::operator!=(const AGVector &a) const
+bool AGVector3::operator!=(const AGVector3 &a) const
 {
   return !operator==(a);
 }
 
-std::string AGVector::toString() const
+std::string AGVector3::toString() const
 {
   std::ostringstream os;
   os<<"("<<v[0]<<","<<v[1]<<","<<v[2]<<")";
   return os.str();
 }
 
-float AGVector::length2() const
+float AGVector3::length2() const
 {
   return v[0]*v[0]+v[1]*v[1]+v[2]*v[2];
 }
 
 
-bool AGVector::nonZero() const
+bool AGVector3::nonZero() const
 {
   return length2()!=0.0f;
 }
 
-AGVector AGVector::normal() const
+AGVector3 AGVector3::normal() const
 {
-  return AGVector(-v[1],v[0],v[2]);
+  return AGVector3(-v[1],v[0],v[2]);
 }
 
-void AGVector::setX(float pX)
+void AGVector3::setX(float pX)
 {
   v[0]=pX;
 }
-void AGVector::setY(float pY)
+void AGVector3::setY(float pY)
 {
   v[1]=pY;
 }
-void AGVector::setZ(float pZ)
+void AGVector3::setZ(float pZ)
 {
   v[2]=pZ;
 }
 
-float AGVector::getX() const
+float AGVector3::getX() const
 {
   return v[0];
 }
-float AGVector::getY() const
+float AGVector3::getY() const
 {
   return v[1];
 }
 
-float AGVector::getZ() const
+float AGVector3::getZ() const
 {
   return v[2];
 }
 
-(AGVector::operator float*)()
+(AGVector3::operator float*)()
 {
   return v;
 }
 
-AGVector AGVector::operator-(const AGVector &p) const
+AGVector3 AGVector3::operator-(const AGVector3 &p) const
 {
-  return AGVector(v[0]-p.v[0],v[1]-p.v[1],v[2]-p.v[2]);
+  return AGVector3(v[0]-p.v[0],v[1]-p.v[1],v[2]-p.v[2]);
 }
-AGVector AGVector::operator+(const AGVector &p) const
+AGVector3 AGVector3::operator+(const AGVector3 &p) const
 {
-  return AGVector(v[0]+p.v[0],v[1]+p.v[1],v[2]+p.v[2]);
+  return AGVector3(v[0]+p.v[0],v[1]+p.v[1],v[2]+p.v[2]);
 }
-AGVector &AGVector::operator+=(const AGVector &p)
+AGVector3 &AGVector3::operator+=(const AGVector3 &p)
 {
   v[0]+=p.v[0];
   v[1]+=p.v[1];
   v[2]+=p.v[2];
   return *this;
 }
-AGVector &AGVector::operator-=(const AGVector &p)
+AGVector3 &AGVector3::operator-=(const AGVector3 &p)
 {
   v[0]+=p.v[0];
   v[1]+=p.v[1];
@@ -293,53 +293,53 @@ AGVector &AGVector::operator-=(const AGVector &p)
   return *this;
 }
 
-float AGVector::operator*(const AGVector &p) const
+float AGVector3::operator*(const AGVector3 &p) const
 {
   return v[0]*p.v[0]+v[1]*p.v[1]+v[2]*p.v[2];
 }
-AGVector &AGVector::operator*=(float f)
+AGVector3 &AGVector3::operator*=(float f)
 {
   v[0]*=f;
   v[1]*=f;
   v[2]*=f;
   return *this;
 }
-AGVector &AGVector::operator/=(float f)
+AGVector3 &AGVector3::operator/=(float f)
 {
   v[0]/=f;
   v[1]/=f;
   v[2]/=f;
   return *this;
 }
-AGVector AGVector::operator*(float f) const
+AGVector3 AGVector3::operator*(float f) const
 {
-  return AGVector(v[0]*f,v[1]*f,v[2]*f);
+  return AGVector3(v[0]*f,v[1]*f,v[2]*f);
 }
-AGVector AGVector::operator/(float f) const
+AGVector3 AGVector3::operator/(float f) const
 {
   f=1.0/f;
-  return AGVector(v[0]*f,v[1]*f,v[2]*f);
+  return AGVector3(v[0]*f,v[1]*f,v[2]*f);
 }
 
-float AGVector::length() const
+float AGVector3::length() const
 {
   return sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
 }
 
-AGVector AGVector::normalized() const
+AGVector3 AGVector3::normalized() const
 {
   if(length2()!=0.0f)
     return *this/length();
   else
     return *this;
 }
-void AGVector::normalize()
+void AGVector3::normalize()
 {
   if(length2()!=0.0f)
     operator/=(length());
 }
 
-float AGVector::operator[](int index) const
+float AGVector3::operator[](int index) const
 {
   assert(index>=0 && index<3);
   return v[index];
@@ -349,13 +349,13 @@ float AGVector::operator[](int index) const
 /////////////////////////////////////////////////////////////////////////////
 // AGPoint
 /////////////////////////////////////////////////////////////////////////////
-AGPointF::AGPointF():AGVector()
+AGPoint3::AGPoint3():AGVector3()
 {
 }
-AGPointF::AGPointF(float pX,float pY,float pZ):AGVector(pX,pY,pZ)
+AGPoint3::AGPoint3(float pX,float pY,float pZ):AGVector3(pX,pY,pZ)
 {
 }
-AGPointF::AGPointF(const AGVector &a)
+AGPoint3::AGPoint3(const AGVector3 &a)
 {
   assert(a.v[2]);
   v[0]=a.v[0]/a.v[2];
@@ -364,7 +364,7 @@ AGPointF::AGPointF(const AGVector &a)
 }
 
 
-AGPointF& AGPointF::operator=(const AGVector &a)
+AGPoint3& AGPoint3::operator=(const AGVector3 &a)
 {
   if(a.v[2]==0.0f)
     {
@@ -387,7 +387,7 @@ AGPointF& AGPointF::operator=(const AGVector &a)
 // AGMatrix
 /////////////////////////////////////////////////////////////////////////////
 
-AGMatrix::AGMatrix()
+AGMatrix3::AGMatrix3()
 {
   a[0][1]=a[0][2]=
     a[1][0]=a[1][2]=
@@ -396,7 +396,7 @@ AGMatrix::AGMatrix()
   a[0][0]=a[1][1]=a[2][2]=1.0f;
 }
 
-AGMatrix::AGMatrix(const AGAngle &n)
+AGMatrix3::AGMatrix3(const AGAngle &n)
 {
   a[0][0]=cos(n.angle);
   a[1][0]=sin(n.angle);
@@ -406,7 +406,7 @@ AGMatrix::AGMatrix(const AGAngle &n)
   a[2][2]=1.0f;
 }
 
-AGMatrix::AGMatrix(const AGVector &n)
+AGMatrix3::AGMatrix3(const AGVector3 &n)
 {
   a[0][0]=a[1][1]=a[2][2]=1.0f;
   a[0][1]=a[0][2]=
@@ -418,22 +418,22 @@ AGMatrix::AGMatrix(const AGVector &n)
 
 
 
-void AGMatrix::set(size_t x,size_t y,float f)
+void AGMatrix3::set(size_t x,size_t y,float f)
 {
   assert(x>=0 && x<3);
   assert(y>=0 && y<3);
   a[x][y]=f;
 }
-float AGMatrix::get(size_t x,size_t y) const
+float AGMatrix3::get(size_t x,size_t y) const
 {
   assert(x>=0 && x<3);
   assert(y>=0 && y<3);
   return a[x][y];
 }
 
-AGMatrix AGMatrix::operator*(const AGMatrix &m) const
+AGMatrix3 AGMatrix3::operator*(const AGMatrix3 &m) const
 {
-  AGMatrix n;
+  AGMatrix3 n;
   size_t x,y;
   for(x=0;x<3;x++)
     for(y=0;y<3;y++)
@@ -442,20 +442,20 @@ AGMatrix AGMatrix::operator*(const AGMatrix &m) const
 	a[2][y]*m.a[x][2];
   return n;
 }
-AGMatrix &AGMatrix::operator*=(const AGMatrix &m)
+AGMatrix3 &AGMatrix3::operator*=(const AGMatrix3 &m)
 {
   *this=(*this)*m;
   return *this;
 }
 
-AGVector AGMatrix::operator*(const AGVector &v) const
+AGVector3 AGMatrix3::operator*(const AGVector3 &v) const
 {
-  return AGVector(a[0][0]*v[0]+a[1][0]*v[1]+a[2][0]*v[2],
-		  a[0][1]*v[0]+a[1][1]*v[1]+a[2][1]*v[2],
-		  a[0][2]*v[0]+a[1][2]*v[1]+a[2][2]*v[2]);
+  return AGVector3(a[0][0]*v[0]+a[1][0]*v[1]+a[2][0]*v[2],
+		   a[0][1]*v[0]+a[1][1]*v[1]+a[2][1]*v[2],
+		   a[0][2]*v[0]+a[1][2]*v[1]+a[2][2]*v[2]);
 }
 
-std::string AGMatrix::toString() const
+std::string AGMatrix3::toString() const
 {
   std::ostringstream os;
   os<<"("<<a[0][0]<<","<<a[1][0]<<","<<a[2][0]<<")"<<endl;
@@ -468,25 +468,25 @@ std::string AGMatrix::toString() const
 // AGTriangle
 /////////////////////////////////////////////////////////////////////////////
 
-AGTriangle::AGTriangle(const AGVector &v0,const AGVector &v1,const AGVector &v2)
+AGTriangle2::AGTriangle2(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2)
 {
   p[0]=v0;
   p[1]=v1;
   p[2]=v2;
 }
 
-AGRectF AGTriangle::getBBox() const
+AGRect2 AGTriangle2::getBBox() const
 {
   float minx=std::min(p[0].getX(),std::min(p[1].getX(),p[2].getX()));
   float maxx=std::max(p[0].getX(),std::max(p[1].getX(),p[2].getX()));
   float miny=std::min(p[0].getY(),std::min(p[1].getY(),p[2].getY()));
   float maxy=std::max(p[0].getY(),std::max(p[1].getY(),p[2].getY()));
 
-  return AGRectF(minx,miny,maxx-minx,maxy-miny);
+  return AGRect2(minx,miny,maxx-minx,maxy-miny);
 }
 
 
-void AGTriangle::apply(const AGMatrix &m)
+void AGTriangle2::apply(const AGMatrix3 &m)
 {
   p[0]=m*p[0];
   p[1]=m*p[1];
@@ -496,7 +496,7 @@ void AGTriangle::apply(const AGMatrix &m)
 /* FIXME: this will be some sweep-base collision detection,
    HOWEVER there's the angular-velocity still missing :-(
 
-AGCollisionData AGTriangle::collide(const AGTriangle &t,const AGVector &v0,const AGVector &v1) const
+AGCollisionData AGTriangle2::collide(const AGTriangle2 &t,const AGVector &v0,const AGVector &v1) const
 {
   AGCollisionData data;
 
@@ -534,12 +534,12 @@ AGCollisionData AGTriangle::collide(const AGTriangle &t,const AGVector &v0,const
 }
 */
 
-std::vector<AGVector> AGTriangle::collisionPoints(const AGLine &l) const
+std::vector<AGVector3> AGTriangle2::collisionPoints(const AGLine2 &l) const
 {
-  std::vector<AGVector> ps;
-  std::vector<AGLine> lines=getLines();
-  std::vector<AGLine>::iterator i=lines.begin();
-  AGVector p;
+  std::vector<AGVector3> ps;
+  std::vector<AGLine2> lines=getLines();
+  std::vector<AGLine2>::iterator i=lines.begin();
+  AGVector3 p;
   //  cdebug(toString());
   for(;i!=lines.end();i++)
     {
@@ -550,34 +550,34 @@ std::vector<AGVector> AGTriangle::collisionPoints(const AGLine &l) const
   return ps;
 }
 
-AGTriangle AGTriangle::applied(const AGMatrix &m) const
+AGTriangle2 AGTriangle2::applied(const AGMatrix3 &m) const
 {
-  return AGTriangle(m*p[0],m*p[1],m*p[2]);
+  return AGTriangle2(m*p[0],m*p[1],m*p[2]);
 }
 
-std::string AGTriangle::toString() const
+std::string AGTriangle2::toString() const
 {
   std::ostringstream os;
   os<<"["<<p[0].toString()<<" "<<p[1].toString()<<" "<<p[2].toString()<<"]";
   return os.str();
 }
 
-AGPointF AGTriangle::get(int index) const
+AGPoint3 AGTriangle2::get(int index) const
 {
   return p[index];
 }
 
 
-AGPointF AGTriangle::operator[](int index) const
+AGPoint3 AGTriangle2::operator[](int index) const
 {
   return p[index];
 }
 
-bool AGTriangle::collide(const AGTriangle &t) const
+bool AGTriangle2::collide(const AGTriangle2 &t) const
 {
-  std::vector<AGVector> v=getNormals();
+  std::vector<AGVector3> v=getNormals();
   append(v,t.getNormals());
-  std::vector<AGVector>::iterator i=v.begin();
+  std::vector<AGVector3>::iterator i=v.begin();
 
   for(;i!=v.end();i++)
     {
@@ -606,27 +606,27 @@ bool AGTriangle::collide(const AGTriangle &t) const
   return true;
 }
 
-std::vector<AGVector> AGTriangle::getNormals() const
+std::vector<AGVector3> AGTriangle2::getNormals() const
 {
-  std::vector<AGVector> l;
+  std::vector<AGVector3> l;
   l.push_back((p[1]-p[0]).normalized().normal());
   l.push_back((p[2]-p[1]).normalized().normal());
   l.push_back((p[0]-p[2]).normalized().normal());
   return l;
 }
 
-std::vector<AGLine> AGTriangle::getLines() const
+std::vector<AGLine2> AGTriangle2::getLines() const
 {
-  std::vector<AGLine> v;
-  v.push_back(AGLine(p[0],p[1]));
-  v.push_back(AGLine(p[1],p[2]));
-  v.push_back(AGLine(p[2],p[0]));
+  std::vector<AGLine2> v;
+  v.push_back(AGLine2(p[0],p[1]));
+  v.push_back(AGLine2(p[1],p[2]));
+  v.push_back(AGLine2(p[2],p[0]));
   return v;
 }
 
-bool AGTriangle::contains(const AGPointF &pp) const
+bool AGTriangle2::contains(const AGPoint3 &pp) const
 {
-  std::vector<AGVector> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
+  std::vector<AGVector3> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
 
   if(AGsign((pp-p[0])*l[0])==AGsign((p[2]-p[0])*l[0]))
     if(AGsign((pp-p[1])*l[1])==AGsign((p[0]-p[1])*l[1]))
@@ -636,7 +636,7 @@ bool AGTriangle::contains(const AGPointF &pp) const
 }
 
 
-AGPointF AGTriangle::touchPoint(const AGTriangle &t) const
+AGPoint3 AGTriangle2::touchPoint(const AGTriangle2 &t) const
 {
   // assume that one point of a triangle is contained in the other and return this point
   size_t i;
@@ -647,20 +647,20 @@ AGPointF AGTriangle::touchPoint(const AGTriangle &t) const
       else if(t.contains((*this)[i]))
 	return (*this)[i];
     }
-  return AGPointF(0,0,0);
+  return AGPoint3(0,0,0);
 }
 
-AGVector AGTriangle::touchVector(const AGTriangle &t) const
+AGVector3 AGTriangle2::touchVector(const AGTriangle2 &t) const
 {
   //#ifdef OLD_TOUCH_APPROXIMATION
   // try to get line, which has two intersections with other triangle's lines
 
-  std::vector<AGLine> l0=getLines();
-  std::vector<AGLine> l1=t.getLines();
+  std::vector<AGLine2> l0=getLines();
+  std::vector<AGLine2> l1=t.getLines();
 
-  std::vector<AGLine>::iterator i,j;
+  std::vector<AGLine2>::iterator i,j;
 
-  std::map<AGLine*,int> sum;
+  std::map<AGLine2*,int> sum;
 
   for(i=l0.begin();i!=l0.end();i++)
     for(j=l1.begin();j!=l1.end();j++)
@@ -671,7 +671,7 @@ AGVector AGTriangle::touchVector(const AGTriangle &t) const
 	    sum[&(*j)]++;
 	  }
       }
-  std::map<AGLine*,int>::iterator k=sum.begin();
+  std::map<AGLine2*,int>::iterator k=sum.begin();
   for(;k!=sum.end();k++)
     {
       if(k->second==2)
@@ -690,16 +690,16 @@ AGVector AGTriangle::touchVector(const AGTriangle &t) const
       else if(t.contains((*this)[i]))
 	return t.nearestLine((*this)[i]).normal();
     }
-  return AGVector();
+  return AGVector3();
   }
   //#endif
 }
 
-AGLine AGTriangle::nearestLine(const AGVector &v) const
+AGLine2 AGTriangle2::nearestLine(const AGVector3 &v) const
 {
-  std::vector<AGLine> l=getLines();
-  std::vector<AGLine>::iterator i;
-  std::map<float,AGLine> dist;
+  std::vector<AGLine2> l=getLines();
+  std::vector<AGLine2>::iterator i;
+  std::map<float,AGLine2> dist;
   for(i=l.begin();i!=l.end();i++)
     {
       dist[i->distance(v)]=*i;
@@ -714,34 +714,34 @@ AGLine AGTriangle::nearestLine(const AGVector &v) const
 /////////////////////////////////////////////////////////////////////////////
 
 
-AGRectF::AGRectF(const AGVector &pv0,const AGVector &pv1):
+AGRect2::AGRect2(const AGVector3 &pv0,const AGVector3 &pv1):
   v0(pv0),v1(pv1)
 {
 }
 
-AGRectF::AGRectF(float x,float y,float w,float h):
+AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y,1),v1(x+w,y+h,1)
 {
 }
 
-bool AGRectF::contains(const AGVector &v) const
+bool AGRect2::contains(const AGVector3 &v) const
 {
   return (v.getX()>= v0.getX() && v.getY()>=v0.getY() && v.getX()<=v1.getX() && v.getY()<=v1.getY());
 }
 
-std::string AGRectF::toString() const
+std::string AGRect2::toString() const
 {
   return v0.toString()+":"+v1.toString();
 }
 
 
-void AGRectF::setX(float p)
+void AGRect2::setX(float p)
 {
   float mw=w();
   v0.setX(p);
   v1.setX(p+mw);
 }
-void AGRectF::setY(float p)
+void AGRect2::setY(float p)
 {
   float mh=h();
   v0.setY(p);
@@ -749,29 +749,29 @@ void AGRectF::setY(float p)
 }
 
 
-bool AGRectF::collide(const AGRectF &r) const
+bool AGRect2::collide(const AGRect2 &r) const
 {
   return collide1d(v0.getX(),v1.getX(),r.v0.getX(),r.v1.getX()) && collide1d(v0.getY(),v1.getY(),r.v0.getY(),r.v1.getY());
 }
 
-AGRectF AGRectF::operator+(const AGVector &v) const
+AGRect2 AGRect2::operator+(const AGVector3 &v) const
 {
-  return AGRectF(v0+v,v1+v);
+  return AGRect2(v0+v,v1+v);
 }
 
-float AGRectF::x() const
+float AGRect2::x() const
 {
   return v0.getX();
 }
-float AGRectF::y() const
+float AGRect2::y() const
 {
   return v0.getY();
 }
-float AGRectF::w() const
+float AGRect2::w() const
 {
   return v1.getX()-v0.getX();
 }
-float AGRectF::h() const
+float AGRect2::h() const
 {
   return v1.getY()-v0.getY();
 }
@@ -781,30 +781,30 @@ float AGRectF::h() const
 // AGLine
 /////////////////////////////////////////////////////////////////////////////
 
-AGLine::AGLine()
+AGLine2::AGLine2()
 {
 }
 
-AGLine::AGLine(const AGVector &pv0,const AGVector &pv1):
+AGLine2::AGLine2(const AGVector3 &pv0,const AGVector3 &pv1):
   v0(pv0),v1(pv1)
 {
 }
   
-AGVector AGLine::getV0() const
+AGVector3 AGLine2::getV0() const
 {
   return v0;
 }
-AGVector AGLine::getV1() const
+AGVector3 AGLine2::getV1() const
 {
   return v1;
 }
 
-bool AGLine::has(const AGVector &v) const
+bool AGLine2::has(const AGVector3 &v) const
 {
   return v0==v || v1==v;
 }
 
-AGVector AGLine::collisionPointNI(const AGLine &l) const
+AGVector3 AGLine2::collisionPointNI(const AGLine2 &l) const
 {
   float dx, dy;
   float ldx, ldy;
@@ -813,12 +813,12 @@ AGVector AGLine::collisionPointNI(const AGLine &l) const
   ldx = l.v1.getX() - l.v0.getX();
   ldy = l.v1.getY() - l.v0.getY();
 
-  AGVector p;
+  AGVector3 p;
   
   if(dx==0.0f)
     {
       if(ldx==0.0f)
-	return AGVector(0,0,0); // z=0, if invalid
+	return AGVector3(0,0,0); // z=0, if invalid
       
       // ldy!=0 !!
       float lm = ldy/ldx;
@@ -828,7 +828,7 @@ AGVector AGLine::collisionPointNI(const AGLine &l) const
       //      cdebug(lb);
       
       assert(lm!=0.0f);
-      p=AGVector(v0.getX(),lm*v0.getX()+lb,1);
+      p=AGVector3(v0.getX(),lm*v0.getX()+lb,1);
     }
   else if(ldx==0.0f)
     {
@@ -843,15 +843,15 @@ AGVector AGLine::collisionPointNI(const AGLine &l) const
       float lb=l.v0.getY() - lm * l.v0.getX();
 
       if(m == lm)
-	return AGVector(0,0,0); // parallel
+	return AGVector3(0,0,0); // parallel
       float x=(lb-b)/(m-lm); 
-      p=AGVector(x,m*x+b,1);
+      p=AGVector3(x,m*x+b,1);
     }
   return p;
 }
-AGVector AGLine::collisionPoint(const AGLine &l) const
+AGVector3 AGLine2::collisionPoint(const AGLine2 &l) const
 {
-  AGVector p=collisionPointNI(l);
+  AGVector3 p=collisionPointNI(l);
   if(p.getZ()==0)
     return p;
   // check for inclusion
@@ -865,10 +865,10 @@ AGVector AGLine::collisionPoint(const AGLine &l) const
     return p;
   }
   else
-    return AGVector(0,0,0);
+    return AGVector3(0,0,0);
 }
 
-bool AGLine::includes(const AGVector &v) const
+bool AGLine2::includes(const AGVector3 &v) const
 {
   float f=(v-v0)*((v1-v0).normalized());
   if(f>=0 && f<(v1-v0).length())
@@ -881,15 +881,15 @@ bool AGLine::includes(const AGVector &v) const
   return false;
 }
 
-AGRectF AGLine::getBBox() const
+AGRect2 AGLine2::getBBox() const
 {
-  return AGRectF(std::min(v0.getX(),v1.getX()),std::min(v0.getY(),v1.getY()),fabs(v0.getX()-v1.getX()),fabs(v1.getY()-v0.getY()));
+  return AGRect2(std::min(v0.getX(),v1.getX()),std::min(v0.getY(),v1.getY()),fabs(v0.getX()-v1.getX()),fabs(v1.getY()-v0.getY()));
 }
 
-bool AGLine::collide(const AGLine &l) const
+bool AGLine2::collide(const AGLine2 &l) const
 {
-  AGVector d0,d1;
-  AGVector n0,n1;
+  AGVector3 d0,d1;
+  AGVector3 n0,n1;
 
   d0=direction();
   d1=l.direction();
@@ -905,26 +905,26 @@ bool AGLine::collide(const AGLine &l) const
   return t0 && t1 && t2 && t3;
 }
 
-AGVector AGLine::normal() const
+AGVector3 AGLine2::normal() const
 {
   return (v1-v0).normalized().normal();
 }
 
-AGVector AGLine::direction() const
+AGVector3 AGLine2::direction() const
 {
   return v1-v0;
 }
 
 
 
-std::string AGLine::toString() const
+std::string AGLine2::toString() const
 {
   std::ostringstream os;
   os<<"("<<v0.toString()<<"-"<<v1.toString()<<")";
   return os.str();
 }
 
-float AGLine::distance(const AGVector &v) const
+float AGLine2::distance(const AGVector3 &v) const
 {
   return fabs(normal()*(v-v0));
 }
@@ -1167,7 +1167,7 @@ AGMatrix4::AGMatrix4()
   get(0,0)=get(1,1)=get(2,2)=get(3,3)=1.0f;
 }
 
-/*AGMatrix::AGMatrix4(const AGAngle &n)
+/*AGMatrix3::AGMatrix4(const AGAngle &n)
 {
   a[0][0]=cos(n.angle);
   a[1][0]=sin(n.angle);

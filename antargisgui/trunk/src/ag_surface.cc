@@ -441,7 +441,9 @@ SDL_Surface *AGTexture::surface()
 // AGScreen
 ////////////////////////////////////////////////////////////////////////
 
-
+void AGScreen::begin()
+{
+}
 
 void AGScreen::flip()
 {
@@ -629,7 +631,7 @@ void AGTextureManager::cleanup()
   mSurfaces=used;
 #else
 
-  Uint32 t0=SDL_GetTicks();
+  //  Uint32 t0=SDL_GetTicks();
 
   if(mDelTextures.size())
     {
@@ -654,7 +656,7 @@ void AGTextureManager::cleanup()
 	mTextures.push_back(*si);
     }
   
-  Uint32 t1=SDL_GetTicks();
+  //  Uint32 t1=SDL_GetTicks();
   //  cdebug("TIME4:"<<t1-t0);
 
   std::set<SDL_Surface*> used;
@@ -671,7 +673,7 @@ void AGTextureManager::cleanup()
   mSurfaces=used;
 
 
-  Uint32 t2=SDL_GetTicks();
+  //  Uint32 t2=SDL_GetTicks();
   //  cdebug("TIME5:"<<t2-t1);
 
 #endif

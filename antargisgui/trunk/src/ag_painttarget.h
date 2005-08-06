@@ -27,8 +27,8 @@
 
 class AGSurface;
 class AGTexture;
-class AGTriangle;
-class AGRectF;
+class AGTriangle2;
+class AGRect2;
 
 
 #define MSTUB { throw int();}
@@ -36,8 +36,8 @@ class AGRectF;
 class AGPaintTarget
 {
  public:
-  virtual void blitTri(const AGTexture &pSource,const AGTriangle &pSrc,const AGTriangle &pDest) MSTUB
-  virtual void blit(const AGTexture &pSource,const AGRectF &pDest,const AGRectF &pSrc) MSTUB
+  virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest) MSTUB
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc) MSTUB
 
   virtual void blit(const AGTexture &pSource,const AGRect &pDest) MSTUB
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB

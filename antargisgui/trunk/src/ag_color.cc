@@ -155,7 +155,7 @@ AGColor &AGColor::operator*=(float f)
 
 AGColor AGColor::operator*(float f) const
 {
-  return AGColor(r*f,g*f,b*f,a);
+  return AGColor((int)(r*f),(int)(g*f),(int)(b*f),a);
 }
 
 AGColor AGColor::operator+(const AGColor &c) const
