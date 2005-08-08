@@ -25,8 +25,9 @@
 #include <set>
 #include <list>
 #include <SDL.h>
-#include <GL/gl.h>
-#include <GL/glext.h>
+#include <SDL_opengl.h>
+//#include <GL/gl.h>
+//#include <GL/glext.h>
 #include <GL/glu.h>
 #include "ag_geometry.h"
 #include "ag_painttarget.h"

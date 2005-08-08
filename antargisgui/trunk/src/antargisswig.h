@@ -168,37 +168,6 @@ public:
 };
 
 
-class SwigDirector_AGVector3 : public AGVector3, public Swig::Director {
-
-public:
-    SwigDirector_AGVector3(VALUE self, float pX, float pY, float pZ);
-    SwigDirector_AGVector3(VALUE self, AGAngle const &a);
-    SwigDirector_AGVector3(VALUE self, AGVector3 const &a);
-    SwigDirector_AGVector3(VALUE self);
-    virtual ~SwigDirector_AGVector3();
-};
-
-
-class SwigDirector_AGPoint3 : public AGPoint3, public Swig::Director {
-
-public:
-    SwigDirector_AGPoint3(VALUE self);
-    SwigDirector_AGPoint3(VALUE self, float pX, float pY, float pZ = 1.0f);
-    SwigDirector_AGPoint3(VALUE self, AGVector3 const &p);
-    virtual ~SwigDirector_AGPoint3();
-};
-
-
-class SwigDirector_AGVector4 : public AGVector4, public Swig::Director {
-
-public:
-    SwigDirector_AGVector4(VALUE self, float pX, float pY, float pZ, float pW = 1.0f);
-    SwigDirector_AGVector4(VALUE self, AGVector4 const &a);
-    SwigDirector_AGVector4(VALUE self);
-    virtual ~SwigDirector_AGVector4();
-};
-
-
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:

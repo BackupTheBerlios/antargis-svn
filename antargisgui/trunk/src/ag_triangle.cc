@@ -146,7 +146,187 @@ AGAngle::AGAngle(float p):angle(p)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// AGVector
+// AGVector2
+/////////////////////////////////////////////////////////////////////////////
+
+AGVector2::AGVector2(float pX,float pY)
+{
+  v[0]=pX;
+  v[1]=pY;
+}
+AGVector2::AGVector2(const AGVector2 &a)
+{
+  v[0]=a.v[0];
+  v[1]=a.v[1];
+}
+AGVector2::AGVector2(const AGAngle &a)
+{
+  v[0]=sin(a.angle);
+  v[1]=-cos(a.angle);
+}
+
+AGVector2::AGVector2()
+{
+  v[0]=v[1]=0;
+}
+
+
+float getArcInternal(float x,float y)
+{
+  if(y==0.0)
+    {
+      if(x<0.0)
+	return -M_PI/2.0;
+      else
+	return M_PI/2.0;
+    }
+  else if(y<0.0)
+    {
+      float a=M_PI+atan(x/y);
+      if(a>M_PI)
+	a-=M_PI*2.0;
+      return a;
+    }
+  else
+    return atan(x/y);
+}
+
+
+AGAngle AGVector2::getAngle() const
+{
+  return AGAngle(getArcInternal(v[0],v[1]));
+}
+
+
+bool AGVector2::operator==(const AGVector2 &a) const
+{
+  return v[0]==a.v[0] && v[1]==a.v[1] && v[2]==a.v[2];
+}
+bool AGVector2::operator!=(const AGVector2 &a) const
+{
+  return !operator==(a);
+}
+
+std::string AGVector2::toString() const
+{
+  std::ostringstream os;
+  os<<"("<<v[0]<<","<<v[1]<<")";
+  return os.str();
+}
+
+float AGVector2::length2() const
+{
+  return v[0]*v[0]+v[1]*v[1]+v[2]*v[2];
+}
+
+
+bool AGVector2::nonZero() const
+{
+  return length2()!=0.0f;
+}
+
+AGVector2 AGVector2::normal() const
+{
+  return AGVector2(-v[1],v[0]);
+}
+
+void AGVector2::setX(float pX)
+{
+  v[0]=pX;
+}
+void AGVector2::setY(float pY)
+{
+  v[1]=pY;
+}
+
+float AGVector2::getX() const
+{
+  return v[0];
+}
+float AGVector2::getY() const
+{
+  return v[1];
+}
+
+(AGVector2::operator float*)()
+{
+  return v;
+}
+
+AGVector2 AGVector2::operator-(const AGVector2 &p) const
+{
+  return AGVector2(v[0]-p.v[0],v[1]-p.v[1]);
+}
+AGVector2 AGVector2::operator+(const AGVector2 &p) const
+{
+  return AGVector2(v[0]+p.v[0],v[1]+p.v[1]);
+}
+AGVector2 &AGVector2::operator+=(const AGVector2 &p)
+{
+  v[0]+=p.v[0];
+  v[1]+=p.v[1];
+  return *this;
+}
+AGVector2 &AGVector2::operator-=(const AGVector2 &p)
+{
+  v[0]+=p.v[0];
+  v[1]+=p.v[1];
+  return *this;
+}
+
+float AGVector2::operator*(const AGVector2 &p) const
+{
+  return v[0]*p.v[0]+v[1]*p.v[1];
+}
+AGVector2 &AGVector2::operator*=(float f)
+{
+  v[0]*=f;
+  v[1]*=f;
+  return *this;
+}
+AGVector2 &AGVector2::operator/=(float f)
+{
+  v[0]/=f;
+  v[1]/=f;
+  return *this;
+}
+AGVector2 AGVector2::operator*(float f) const
+{
+  return AGVector2(v[0]*f,v[1]*f);
+}
+AGVector2 AGVector2::operator/(float f) const
+{
+  f=1.0/f;
+  return AGVector2(v[0]*f,v[1]*f);
+}
+
+float AGVector2::length() const
+{
+  return sqrt(v[0]*v[0]+v[1]*v[1]);
+}
+
+AGVector2 AGVector2::normalized() const
+{
+  if(length2()!=0.0f)
+    return *this/length();
+  else
+    return *this;
+}
+void AGVector2::normalize()
+{
+  if(length2()!=0.0f)
+    operator/=(length());
+}
+
+float AGVector2::operator[](int index) const
+{
+  assert(index>=0 && index<2);
+  return v[index];
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+// AGVector3
 /////////////////////////////////////////////////////////////////////////////
 
 AGVector3::AGVector3(float pX,float pY,float pZ)
@@ -174,11 +354,8 @@ AGVector3::AGVector3()
   v[2]=0.0f;
 }
 
-AGVector3::~AGVector3()
-{
-}
 
-
+/*
 float getArcInternal(float x,float y)
 {
   if(y==0.0)
@@ -198,7 +375,7 @@ float getArcInternal(float x,float y)
   else
     return atan(x/y);
 }
-
+*/
 
 AGAngle AGVector3::getAngle() const
 {
@@ -344,6 +521,8 @@ float AGVector3::operator[](int index) const
   assert(index>=0 && index<3);
   return v[index];
 }
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -954,9 +1133,6 @@ AGVector4::AGVector4()
   v[0]=v[1]=v[2]=0.0f;
   v[3]=1.0f;
 }
-AGVector4::~AGVector4()
-{
-}
 
 void AGVector4::setX(float pX)
 {
@@ -1156,6 +1332,33 @@ AGMatrix4::AGMatrix4(float v[16])
   for(size_t i=0;i<16;i++)
     a[i]=v[i];
 }
+AGMatrix4::AGMatrix4(float angle,const AGVector3&d)
+{
+  float co=cos(angle);
+  float si=sin(angle);
+  set(0,0,co + d[0]*d[0]*(1-co));
+  set(0,1,d[0]*d[1]*(1-co)-d[2]*si);
+  set(0,2,d[0]*d[2]*(1-co)+d[1]*si);
+
+  set(1,0,d[1]*d[0]*(1-co)+d[2]*si);
+  set(1,1,co+d[1]*d[1]*(1-co));
+  set(1,2,d[1]*d[2]*(1-co)-d[0]*si);
+
+  set(2,0,d[2]*d[0]*(1-co)-d[1]*si);
+  set(2,1,d[2]*d[1]*(1-co)+d[0]*si);
+  set(2,2,co + d[2]*d[2]*(1-co));
+
+  set(3,0,0);
+  set(3,1,0);
+  set(3,2,0);
+
+  set(0,3,0);
+  set(1,3,0);
+  set(2,3,0);
+
+  set(3,3,1);
+}
+
 
 AGMatrix4::AGMatrix4()
 {

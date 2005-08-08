@@ -1,3 +1,5 @@
+glEnable(GL_LINE_SMOOTH)
+
 * use PhysFS instead of direct file loading
 
 

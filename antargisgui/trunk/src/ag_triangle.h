@@ -31,6 +31,7 @@
 
    We do NOT use templates here, because of SWIG-problems.
 
+   - AGVector2 - 2d vector
    - AGVector3 - is homogenous 2d and inhom 3d
    - AGPoint3  - is 2d (with z=1) or 3d
    - AGVector4 - hom. 3d
@@ -39,6 +40,8 @@
 
    - AGLine2     - 2d Line (eats AGVector3)
    - AGTriangle2 - 2d triangle (eats AGVector3)
+
+   ATTENTION: the classes may NOT be virtual, as they're possibly used in an array, where then the size is NOT sizeof(v[x]) !!!
 */
 
 
@@ -53,6 +56,65 @@ struct AGAngle
   explicit AGAngle(float a);
 };
 
+class AGVector2
+{
+ public:
+  float v[2];
+
+  AGVector2(float pX,float pY);
+  AGVector2(const AGAngle &a);
+  AGVector2(const AGVector2 &a);
+  AGVector2();
+
+  void setX(float pX);
+  void setY(float pY);
+
+  
+#ifdef SWIG
+  %rename(x) getX() const;
+  %rename(y) getY() const;
+#endif
+  float getX() const;
+  float getY() const;
+
+  AGAngle getAngle() const;
+
+  AGVector2 operator-(const AGVector2 &p) const;
+  AGVector2 operator+(const AGVector2 &p) const;
+  AGVector2 &operator+=(const AGVector2 &p);
+  AGVector2 &operator-=(const AGVector2 &p);
+
+  float operator*(const AGVector2 &p) const;
+  AGVector2 &operator*=(float f);
+  AGVector2 &operator/=(float f);
+  AGVector2 operator*(float f) const;
+  AGVector2 operator/(float f) const;
+
+  bool operator==(const AGVector2 &a) const;
+  bool operator!=(const AGVector2 &a) const;
+
+  float length() const;
+  float length2() const;
+
+  AGVector2 normalized() const;
+  void normalize();
+
+  AGVector2 normal() const;
+
+  float operator[](int index) const;
+
+  bool nonZero() const;
+
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
+  std::string toString() const;
+
+#ifndef SWIG
+  (operator float*)();
+#endif
+};
+
 // 2-dim homogenous vector
 class AGVector3
 {
@@ -63,7 +125,6 @@ class AGVector3
   AGVector3(const AGAngle &a);
   AGVector3(const AGVector3 &a);
   AGVector3();
-  virtual ~AGVector3();
 
   void setX(float pX);
   void setY(float pY);
@@ -259,7 +320,6 @@ class AGVector4
   AGVector4(float pX,float pY,float pZ,float pW=1.0f);
   AGVector4(const AGVector4 &a);
   AGVector4();
-  virtual ~AGVector4();
 
   void setX(float pX);
   void setY(float pY);
@@ -334,6 +394,7 @@ class AGMatrix4
  public:
   AGMatrix4();
   AGMatrix4(float v[16]);
+  AGMatrix4(float angle,const AGVector3 &d);
   // FIXME: add quaternion
   //  AGMatrix4(const AGAngle &a);
   AGMatrix4(const AGVector4 &a);
