@@ -45,6 +45,8 @@ class AGSDLScreen:public AGScreen
   virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
 
   virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
 
   virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
 

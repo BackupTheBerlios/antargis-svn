@@ -68,4 +68,9 @@ bool operator<(const AGColor &c1,const AGColor &c2);
 
 std::ostream &operator<<(std::ostream &o,const AGColor &c);
 
+inline int toInt(Uint8 u)
+{
+  return u;
+}
+
 #endif

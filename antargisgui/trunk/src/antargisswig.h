@@ -43,16 +43,18 @@ public:
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
+    virtual void renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn);
+    virtual void drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
     virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
     virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void begin();
-    virtual SDL_Surface *newSurface(int x, int y);
     virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
     virtual void putPixel(int x, int y, AGColor const &c);
     virtual void drawRect(AGRect const &pRect, AGColor const &c);
     virtual void flip();
+    virtual SDL_Surface *newSurface(int x, int y);
 };
 
 

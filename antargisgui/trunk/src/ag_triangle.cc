@@ -1336,6 +1336,7 @@ AGMatrix4::AGMatrix4(float angle,const AGVector3&d)
 {
   float co=cos(angle);
   float si=sin(angle);
+  /*
   set(0,0,co + d[0]*d[0]*(1-co));
   set(0,1,d[0]*d[1]*(1-co)-d[2]*si);
   set(0,2,d[0]*d[2]*(1-co)+d[1]*si);
@@ -1347,7 +1348,19 @@ AGMatrix4::AGMatrix4(float angle,const AGVector3&d)
   set(2,0,d[2]*d[0]*(1-co)-d[1]*si);
   set(2,1,d[2]*d[1]*(1-co)+d[0]*si);
   set(2,2,co + d[2]*d[2]*(1-co));
+  */
+    set(0,0,co + d[0]*d[0]*(1-co));
+  set(1,0,d[0]*d[1]*(1-co)-d[2]*si);
+  set(2,0,d[0]*d[2]*(1-co)+d[1]*si);
 
+  set(0,1,d[1]*d[0]*(1-co)+d[2]*si);
+  set(1,1,co+d[1]*d[1]*(1-co));
+  set(2,1,d[1]*d[2]*(1-co)-d[0]*si);
+
+  set(0,2,d[2]*d[0]*(1-co)-d[1]*si);
+  set(1,2,d[2]*d[1]*(1-co)+d[0]*si);
+  set(2,2,co + d[2]*d[2]*(1-co));
+  
   set(3,0,0);
   set(3,1,0);
   set(3,2,0);

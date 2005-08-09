@@ -1766,6 +1766,57 @@ void SwigDirector_AGSDLScreen::tile(AGTexture const &pSource) {
 }
 
 
+void SwigDirector_AGSDLScreen::renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn) {
+    std::string temp4 ;
+    std::string temp40 ;
+    AGRect * nc_tmp_pClipRect = const_cast<AGRect *>(&pClipRect) ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE obj3 = Qnil ;
+    AGFont * nc_tmp_ParamIn = const_cast<AGFont *>(&ParamIn) ;
+    VALUE obj4 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSDLScreen::renderText(pClipRect,BaseLineX,BaseLineY,pText,ParamIn);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pClipRect, SWIGTYPE_p_AGRect, 0);
+    obj1 = INT2NUM(BaseLineX);
+    obj2 = INT2NUM(BaseLineY);
+    obj3=rb_str_new2(pText.c_str());
+    obj4 = SWIG_NewPointerObj(nc_tmp_ParamIn, SWIGTYPE_p_AGFont, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("renderText"), 5,obj0,obj1,obj2,obj3,obj4);
+}
+
+
+void SwigDirector_AGSDLScreen::drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
+    AGRect * nc_tmp_rect = const_cast<AGRect *>(&rect) ;
+    VALUE obj0 = Qnil ;
+    AGColor * nc_tmp_ul = const_cast<AGColor *>(&ul) ;
+    VALUE obj1 = Qnil ;
+    AGColor * nc_tmp_ur = const_cast<AGColor *>(&ur) ;
+    VALUE obj2 = Qnil ;
+    AGColor * nc_tmp_dl = const_cast<AGColor *>(&dl) ;
+    VALUE obj3 = Qnil ;
+    AGColor * nc_tmp_dr = const_cast<AGColor *>(&dr) ;
+    VALUE obj4 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSDLScreen::drawGradient(rect,ul,ur,dl,dr);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_rect, SWIGTYPE_p_AGRect, 0);
+    obj1 = SWIG_NewPointerObj(nc_tmp_ul, SWIGTYPE_p_AGColor, 0);
+    obj2 = SWIG_NewPointerObj(nc_tmp_ur, SWIGTYPE_p_AGColor, 0);
+    obj3 = SWIG_NewPointerObj(nc_tmp_dl, SWIGTYPE_p_AGColor, 0);
+    obj4 = SWIG_NewPointerObj(nc_tmp_dr, SWIGTYPE_p_AGColor, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawGradient"), 5,obj0,obj1,obj2,obj3,obj4);
+}
+
+
 void SwigDirector_AGSDLScreen::drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
     AGRect * nc_tmp_rect = const_cast<AGRect *>(&rect) ;
     VALUE obj0 = Qnil ;
@@ -1857,23 +1908,6 @@ void SwigDirector_AGSDLScreen::begin() {
 }
 
 
-SDL_Surface *SwigDirector_AGSDLScreen::newSurface(int x, int y) {
-    VALUE obj0 = Qnil ;
-    VALUE obj1 = Qnil ;
-    SDL_Surface *c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGSDLScreen::newSurface(x,y);
-    }
-    obj0 = INT2NUM(x);
-    obj1 = INT2NUM(y);
-    result = rb_funcall(swig_get_self(), rb_intern("newSurface"), 2,obj0,obj1);
-    if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_SDL_Surface,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
-    return (SDL_Surface *) c_result;
-}
-
-
 void SwigDirector_AGSDLScreen::drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2) {
     AGRect * nc_tmp_rect = const_cast<AGRect *>(&rect) ;
     VALUE obj0 = Qnil ;
@@ -1939,6 +1973,23 @@ void SwigDirector_AGSDLScreen::flip() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("flip"), 0, NULL);
+}
+
+
+SDL_Surface *SwigDirector_AGSDLScreen::newSurface(int x, int y) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    SDL_Surface *c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGSDLScreen::newSurface(x,y);
+    }
+    obj0 = INT2NUM(x);
+    obj1 = INT2NUM(y);
+    result = rb_funcall(swig_get_self(), rb_intern("newSurface"), 2,obj0,obj1);
+    if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_SDL_Surface,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
+    return (SDL_Surface *) c_result;
 }
 
 
@@ -16022,6 +16073,66 @@ _wrap_AGSDLScreen_drawGradientAlpha(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGSDLScreen_drawGradient(int argc, VALUE *argv, VALUE self) {
+    AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
+    AGRect *arg2 = 0 ;
+    AGColor *arg3 = 0 ;
+    AGColor *arg4 = 0 ;
+    AGColor *arg5 = 0 ;
+    AGColor *arg6 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 5) || (argc > 5))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLScreen, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGColor, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGColor, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_AGColor, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_AGColor, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->drawGradient((AGRect const &)*arg2,(AGColor const &)*arg3,(AGColor const &)*arg4,(AGColor const &)*arg5,(AGColor const &)*arg6);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSDLScreen_renderText(int argc, VALUE *argv, VALUE self) {
+    AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
+    AGRect *arg2 = 0 ;
+    int arg3 ;
+    int arg4 ;
+    std::string *arg5 = 0 ;
+    AGFont *arg6 = 0 ;
+    std::string temp5 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 5) || (argc > 5))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLScreen, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = NUM2INT(argv[1]);
+    arg4 = NUM2INT(argv[2]);
+    {
+        if (TYPE(argv[3]) == T_STRING) {
+            temp5 = std::string(StringValuePtr(argv[3]));
+            arg5 = &temp5;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_AGFont, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->renderText((AGRect const &)*arg2,arg3,arg4,(std::string const &)*arg5,(AGFont const &)*arg6);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGSDLScreen_drawBorder(int argc, VALUE *argv, VALUE self) {
     AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
     AGRect *arg2 = 0 ;
@@ -23894,6 +24005,26 @@ static void
 free_AGColor(AGColor *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_toInt(int argc, VALUE *argv, VALUE self) {
+    Uint8 arg1 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        Uint8 * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_Uint8, 1);
+        if (ptr) arg1 = *ptr;
+    }
+    result = (int)toInt(arg1);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
 static VALUE
 _wrap_new_AGFont__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGFont *result;
@@ -34593,6 +34724,8 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGSDLScreen.klass, "drawRect", VALUEFUNC(_wrap_AGSDLScreen_drawRect), -1);
     rb_define_method(cAGSDLScreen.klass, "drawLine", VALUEFUNC(_wrap_AGSDLScreen_drawLine), -1);
     rb_define_method(cAGSDLScreen.klass, "drawGradientAlpha", VALUEFUNC(_wrap_AGSDLScreen_drawGradientAlpha), -1);
+    rb_define_method(cAGSDLScreen.klass, "drawGradient", VALUEFUNC(_wrap_AGSDLScreen_drawGradient), -1);
+    rb_define_method(cAGSDLScreen.klass, "renderText", VALUEFUNC(_wrap_AGSDLScreen_renderText), -1);
     rb_define_method(cAGSDLScreen.klass, "drawBorder", VALUEFUNC(_wrap_AGSDLScreen_drawBorder), -1);
     rb_define_method(cAGSDLScreen.klass, "putPixel", VALUEFUNC(_wrap_AGSDLScreen_putPixel), -1);
     rb_define_method(cAGSDLScreen.klass, "newSurface", VALUEFUNC(_wrap_AGSDLScreen_newSurface), -1);
@@ -35017,6 +35150,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGColor.klass, "a", VALUEFUNC(_wrap_AGColor_a_get), -1);
     cAGColor.mark = 0;
     cAGColor.destroy = (void (*)(void *)) free_AGColor;
+    rb_define_module_function(mLibantargisgui, "toInt", VALUEFUNC(_wrap_toInt), -1);
     
     cAGFont.klass = rb_define_class_under(mLibantargisgui, "AGFont", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGFont, (void *) &cAGFont);

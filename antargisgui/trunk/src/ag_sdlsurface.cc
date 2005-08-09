@@ -21,6 +21,8 @@
 #include "ag_sdlsurface.h"
 #include "ag_debug.h"
 #include "ag_fs.h"
+#include "ag_draw.h"
+#include "ag_fontengine.h"
 
 #include "SDL_image.h"
 #include <sge.h>
@@ -152,7 +154,7 @@ void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
 {
   sge_Update_OFF();
 
-  sge_PutPixel(s,x,y,c.mapRGB(s->format));
+  sge_PutPixelAlpha(s,x,y,c.mapRGB(s->format),c.a);
 }
 
 SDL_Surface *AGSDLScreen::newSurface(int x,int y)
@@ -185,8 +187,22 @@ AGTexture AGSDLScreen::displayFormat(SDL_Surface *s)
 
 void AGSDLScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
-  STUB;
+  AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
+
 }
+void AGSDLScreen::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  AGDrawGradient(s,rect,ul,ur,dl,dr);
+
+}
+
+void AGSDLScreen::renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn)
+{
+  if(!AGFontEngine::renderText(this,pClipRect,BaseLineX,BaseLineY,pText,ParamIn))
+    cdebug("SOME ERROR");
+
+}
+
 
 void AGSDLScreen::drawLine(const AGPoint &pp0,const AGPoint &pp1,const AGColor &c)
 {
