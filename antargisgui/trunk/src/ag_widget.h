@@ -25,7 +25,7 @@
 #include "ag_messageobject.h"
 
 #ifdef USE_RUBY
-#include "ruby.h"
+#include <ruby.h>
 #undef connect
 #endif
 #include <list>

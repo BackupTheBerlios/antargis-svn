@@ -27,7 +27,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <GL/gl.h>
+#include <SDL_opengl.h>
 #include <GL/glu.h>
 
 #include "ag_exception.h"

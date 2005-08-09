@@ -121,7 +121,7 @@ class AGVector3
  public:
   float v[3];
 
-  AGVector3(float pX,float pY,float pZ);
+  AGVector3(float pX,float pY,float pZ=0.0f);
   AGVector3(const AGAngle &a);
   AGVector3(const AGVector3 &a);
   AGVector3();

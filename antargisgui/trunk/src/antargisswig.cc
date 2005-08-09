@@ -20637,6 +20637,22 @@ _wrap_new_AGVector3__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_AGVector3__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    float arg1 ;
+    float arg2 ;
+    AGVector3 *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = (float) NUM2DBL(argv[0]);
+    arg2 = (float) NUM2DBL(argv[1]);
+    result = (AGVector3 *)new AGVector3(arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGVector3__SWIG_2(int argc, VALUE *argv, VALUE self) {
     AGAngle *arg1 = 0 ;
     AGVector3 *result;
     
@@ -20650,7 +20666,7 @@ _wrap_new_AGVector3__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGVector3__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector3__SWIG_3(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = 0 ;
     AGVector3 *result;
     
@@ -20681,7 +20697,7 @@ _wrap_AGVector3_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGVector3__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector3__SWIG_4(int argc, VALUE *argv, VALUE self) {
     AGVector3 *result;
     
     if ((argc < 0) || (argc > 0))
@@ -20702,7 +20718,7 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
-        return _wrap_new_AGVector3__SWIG_3(nargs, args, self);
+        return _wrap_new_AGVector3__SWIG_4(nargs, args, self);
     }
     if (argc == 1) {
         int _v;
@@ -20711,7 +20727,7 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_AGVector3__SWIG_2(nargs, args, self);
+            return _wrap_new_AGVector3__SWIG_3(nargs, args, self);
         }
     }
     if (argc == 1) {
@@ -20721,7 +20737,21 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGAngle, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_AGVector3__SWIG_1(nargs, args, self);
+            return _wrap_new_AGVector3__SWIG_2(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FLOAT) || (TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGVector3__SWIG_1(nargs, args, self);
+            }
         }
     }
     if (argc == 3) {
