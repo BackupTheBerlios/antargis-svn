@@ -25,6 +25,7 @@
 #include <map>
 #include <iostream>
 #include <algorithm>
+#include <typeinfo>
 
 #define FOCUS_BY_SORT
 
