@@ -929,8 +929,9 @@ type_error:
 #define  SWIGTYPE_p_AGCPPListener swig_types[83] 
 #define  SWIGTYPE_p_float swig_types[84] 
 #define  SWIGTYPE_p_Node swig_types[85] 
-#define  SWIGTYPE_p_AGTheme swig_types[86] 
-static swig_type_info *swig_types[88];
+#define  SWIGTYPE_p_p_Node swig_types[86] 
+#define  SWIGTYPE_p_AGTheme swig_types[87] 
+static swig_type_info *swig_types[89];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -1343,6 +1344,39 @@ static void std_vector_Sl_Node_Sg__each(std::vector<Node > *self){
 
 swig_class cAGNodeList;
 static void free_std_vector_Sl_Node_Sg_(std::vector<Node > *);
+static Node *std_vector_Sl_Node_Sm__Sg__pop(std::vector<Node * > *self){
+                if (self->size() == 0)
+                    throw std::out_of_range("pop from empty vector");
+                Node* x = self->back();
+                self->pop_back();
+                return x;
+            }
+static Node *std_vector_Sl_Node_Sm__Sg____getitem__(std::vector<Node * > *self,int i){
+                int size = int(self->size());
+                if (i<0) i += size;
+                if (i>=0 && i<size)
+                    return (*self)[i];
+                else
+                    throw std::out_of_range("vector index out of range");
+            }
+static void std_vector_Sl_Node_Sm__Sg____setitem__(std::vector<Node * > *self,int i,Node *x){
+                int size = int(self->size());
+                if (i<0) i+= size;
+                if (i>=0 && i<size)
+                    (*self)[i] = x;
+                else
+                    throw std::out_of_range("vector index out of range");
+            }
+static void std_vector_Sl_Node_Sm__Sg__each(std::vector<Node * > *self){
+                for (unsigned int i=0; i<self->size(); i++) {
+                    Node* x = (*self)[i];
+                    rb_yield(SWIG_NewPointerObj((void *) x, 
+                                                SWIGTYPE_p_Node, 0));
+                }
+            }
+
+swig_class cAGNodePList;
+static void free_std_vector_Sl_Node_Sm__Sg_(std::vector<Node * > *);
 static AGVector3 std_vector_Sl_AGVector3_Sg__pop(std::vector<AGVector3 > *self){
                 if (self->size() == 0)
                     throw std::out_of_range("pop from empty vector");
@@ -29904,7 +29938,7 @@ _wrap_Node_setName(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Node_get_children__SWIG_0(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
-    SwigValueWrapper<std::vector<Node * > > result;
+    Node::NodeVector result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -29925,7 +29959,7 @@ static VALUE
 _wrap_Node_get_children__SWIG_1(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
     std::string arg2 ;
-    SwigValueWrapper<std::vector<Node * > > result;
+    Node::NodeVector result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -33509,6 +33543,345 @@ free_std_vector_Sl_Node_Sg_(std::vector<Node > *arg1) {
     delete arg1;
 }
 static VALUE
+_wrap_new_AGNodePList__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    unsigned int arg1 ;
+    std::vector<Node * > *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = NUM2UINT(argv[0]);
+    result = (std::vector<Node * > *)new std::vector<Node * >(arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGNodePList__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (std::vector<Node * > *)new std::vector<Node * >();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGNodePList__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    unsigned int arg1 ;
+    Node **arg2 = 0 ;
+    std::vector<Node * > *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = NUM2UINT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_p_Node, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (std::vector<Node * > *)new std::vector<Node * >(arg1,*arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGNodePList_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGNodePList_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_std__vectorTNode_p_t);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGNodePList__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = 0 ;
+    std::vector<Node * > *result;
+    std::vector<Node * > temp1 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (rb_obj_is_kind_of(argv[0],rb_cArray)) {
+            unsigned int size = RARRAY(argv[0])->len;
+            temp1 = std::vector<Node* >(size);
+            arg1 = &temp1;
+            for (unsigned int i=0; i<size; i++) {
+                VALUE o = RARRAY(argv[0])->ptr[i];
+                Node* x;
+                SWIG_ConvertPtr(o, (void **) &x, SWIGTYPE_p_Node, 1);
+                temp1[i] = x;
+            }
+        } else {
+            SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+        }
+    }
+    result = (std::vector<Node * > *)new std::vector<Node * >((std::vector<Node * > const &)*arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE _wrap_new_AGNodePList(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[2];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_AGNodePList__SWIG_1(nargs, args, self);
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_AGNodePList__SWIG_0(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            /* native sequence? */
+            if (rb_obj_is_kind_of(argv[0],rb_cArray)) {
+                unsigned int size = RARRAY(argv[0])->len;
+                if (size == 0) {
+                    /* an empty sequence can be of any type */
+                    _v = 1;
+                } else {
+                    /* check the first element only */
+                    Node* x;
+                    VALUE o = RARRAY(argv[0])->ptr[0];
+                    if ((SWIG_ConvertPtr(o,(void **) &x, 
+                    SWIGTYPE_p_Node,0)) != -1)
+                    _v = 1;
+                    else
+                    _v = 0;
+                }
+            } else {
+                /* wrapped vector? */
+                std::vector<Node* >* v;
+                if (SWIG_ConvertPtr(argv[0],(void **) &v, 
+                SWIGTYPE_p_std__vectorTNode_p_t,0) != -1)
+                _v = 1;
+                else
+                _v = 0;
+            }
+        }
+        if (_v) {
+            return _wrap_new_AGNodePList__SWIG_3(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_p_Node, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGNodePList__SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGNodePList'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGNodePList___len__(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    unsigned int result;
+    std::vector<Node * > temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    {
+        if (rb_obj_is_kind_of(self,rb_cArray)) {
+            unsigned int size = RARRAY(self)->len;
+            temp1 = std::vector<Node* >(size);
+            arg1 = &temp1;
+            for (unsigned int i=0; i<size; i++) {
+                VALUE o = RARRAY(self)->ptr[i];
+                Node* x;
+                SWIG_ConvertPtr(o, (void **) &x, SWIGTYPE_p_Node, 1);
+                temp1[i] = x;
+            }
+        } else {
+            SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+        }
+    }
+    result = (unsigned int)((std::vector<Node * > const *)arg1)->size();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGNodePList_emptyq___(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    bool result;
+    std::vector<Node * > temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    {
+        if (rb_obj_is_kind_of(self,rb_cArray)) {
+            unsigned int size = RARRAY(self)->len;
+            temp1 = std::vector<Node* >(size);
+            arg1 = &temp1;
+            for (unsigned int i=0; i<size; i++) {
+                VALUE o = RARRAY(self)->ptr[i];
+                Node* x;
+                SWIG_ConvertPtr(o, (void **) &x, SWIGTYPE_p_Node, 1);
+                temp1[i] = x;
+            }
+        } else {
+            SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+        }
+    }
+    result = (bool)((std::vector<Node * > const *)arg1)->empty();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGNodePList_clear(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+    (arg1)->clear();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGNodePList_push(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    Node *arg2 = (Node *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Node, 1);
+    (arg1)->push_back(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGNodePList_pop(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    Node *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+    {
+        try {
+            result = (Node *)std_vector_Sl_Node_Sm__Sg__pop(arg1);
+            
+        } catch (std::out_of_range& e) {
+            SWIG_exception(SWIG_IndexError,const_cast<char*>(e.what()));
+        }
+    }
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Node,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGNodePList___getitem__(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    int arg2 ;
+    Node *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+    arg2 = NUM2INT(argv[0]);
+    {
+        try {
+            result = (Node *)std_vector_Sl_Node_Sm__Sg____getitem__(arg1,arg2);
+            
+        } catch (std::out_of_range& e) {
+            SWIG_exception(SWIG_IndexError,const_cast<char*>(e.what()));
+        }
+    }
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Node,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGNodePList___setitem__(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    int arg2 ;
+    Node *arg3 = (Node *) 0 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+    arg2 = NUM2INT(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_Node, 1);
+    {
+        try {
+            std_vector_Sl_Node_Sm__Sg____setitem__(arg1,arg2,arg3);
+            
+        } catch (std::out_of_range& e) {
+            SWIG_exception(SWIG_IndexError,const_cast<char*>(e.what()));
+        }
+    }
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGNodePList_each(int argc, VALUE *argv, VALUE self) {
+    std::vector<Node * > *arg1 = (std::vector<Node * > *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTNode_p_t, 1);
+    std_vector_Sl_Node_Sm__Sg__each(arg1);
+    
+    return Qnil;
+}
+
+
+static void
+free_std_vector_Sl_Node_Sm__Sg_(std::vector<Node * > *arg1) {
+    delete arg1;
+}
+static VALUE
 _wrap_new_AGVector3List__SWIG_0(int argc, VALUE *argv, VALUE self) {
     unsigned int arg1 ;
     std::vector<AGVector3 > *result;
@@ -34452,7 +34825,7 @@ static swig_type_info _swigt__p_std__vectorTNode_t[] = {{"_p_std__vectorTNode_t"
 static swig_type_info _swigt__p_AGSurface[] = {{"_p_AGSurface", 0, "AGSurface *", 0, 0, 0, 0},{"_p_AGSurface", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDL_Surface[] = {{"_p_SDL_Surface", 0, "SDL_Surface *", 0, 0, 0, 0},{"_p_SDL_Surface", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__vectorTAGLine2_t[] = {{"_p_std__vectorTAGLine2_t", 0, "std::vector<AGLine2 > *", 0, 0, 0, 0},{"_p_std__vectorTAGLine2_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_std__vectorTNode_p_t[] = {{"_p_std__vectorTNode_p_t", 0, "std::vector<Node * > *|Node::NodeVector *", 0, 0, 0, 0},{"_p_std__vectorTNode_p_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__vectorTNode_p_t[] = {{"_p_std__vectorTNode_p_t", 0, "std::vector<Node * > *", 0, 0, 0, 0},{"_p_std__vectorTNode_p_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGImage[] = {{"_p_AGImage", 0, "AGImage *", 0, 0, 0, 0},{"_p_AGImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Uint32[] = {{"_p_Uint32", 0, "Uint32 *", 0, 0, 0, 0},{"_p_Uint32", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -34505,6 +34878,7 @@ static swig_type_info _swigt__p_AGListener[] = {{"_p_AGListener", 0, "AGListener
 static swig_type_info _swigt__p_AGCPPListener[] = {{"_p_AGCPPListener", 0, "AGCPPListener *", 0, 0, 0, 0},{"_p_AGCPPListener", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_float[] = {{"_p_float", 0, "float *", 0, 0, 0, 0},{"_p_float", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Node[] = {{"_p_Node", 0, "Node *", 0, 0, 0, 0},{"_p_Node", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_p_Node[] = {{"_p_p_Node", 0, "Node **", 0, 0, 0, 0},{"_p_p_Node", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGTheme[] = {{"_p_AGTheme", 0, "AGTheme *", 0, 0, 0, 0},{"_p_AGTheme", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
@@ -34594,6 +34968,7 @@ _swigt__p_AGListener,
 _swigt__p_AGCPPListener, 
 _swigt__p_float, 
 _swigt__p_Node, 
+_swigt__p_p_Node, 
 _swigt__p_AGTheme, 
 0
 };
@@ -35963,6 +36338,22 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGNodeList.klass, "each", VALUEFUNC(_wrap_AGNodeList_each), -1);
     cAGNodeList.mark = 0;
     cAGNodeList.destroy = (void (*)(void *)) free_std_vector_Sl_Node_Sg_;
+    
+    cAGNodePList.klass = rb_define_class_under(mLibantargisgui, "AGNodePList", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_std__vectorTNode_p_t, (void *) &cAGNodePList);
+    rb_include_module(cAGNodePList.klass, rb_eval_string("Enumerable"));
+    rb_define_alloc_func(cAGNodePList.klass, _wrap_AGNodePList_allocate);
+    rb_define_method(cAGNodePList.klass, "initialize", VALUEFUNC(_wrap_new_AGNodePList), -1);
+    rb_define_method(cAGNodePList.klass, "length", VALUEFUNC(_wrap_AGNodePList___len__), -1);
+    rb_define_method(cAGNodePList.klass, "empty?", VALUEFUNC(_wrap_AGNodePList_emptyq___), -1);
+    rb_define_method(cAGNodePList.klass, "clear", VALUEFUNC(_wrap_AGNodePList_clear), -1);
+    rb_define_method(cAGNodePList.klass, "push", VALUEFUNC(_wrap_AGNodePList_push), -1);
+    rb_define_method(cAGNodePList.klass, "pop", VALUEFUNC(_wrap_AGNodePList_pop), -1);
+    rb_define_method(cAGNodePList.klass, "[]", VALUEFUNC(_wrap_AGNodePList___getitem__), -1);
+    rb_define_method(cAGNodePList.klass, "[]=", VALUEFUNC(_wrap_AGNodePList___setitem__), -1);
+    rb_define_method(cAGNodePList.klass, "each", VALUEFUNC(_wrap_AGNodePList_each), -1);
+    cAGNodePList.mark = 0;
+    cAGNodePList.destroy = (void (*)(void *)) free_std_vector_Sl_Node_Sm__Sg_;
     
     cAGVector3List.klass = rb_define_class_under(mLibantargisgui, "AGVector3List", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_std__vectorTAGVector3_t, (void *) &cAGVector3List);

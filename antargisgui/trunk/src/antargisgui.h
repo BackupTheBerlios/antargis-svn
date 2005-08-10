@@ -93,6 +93,7 @@
 %include "ag_painter.h"
 %include "std_vector.i"
 %template(AGNodeList) std::vector<Node>;
+%template(AGNodePList) std::vector<Node*>;
 %template(AGVector3List) std::vector<AGVector3>;
 %template(AGVector4List) std::vector<AGVector4>;
 #endif

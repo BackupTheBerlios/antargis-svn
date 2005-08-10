@@ -23,7 +23,7 @@
 #include "ag_theme.h"
 #include "ag_image.h"
 #include "ag_layoutfactory.h"
-
+#include <typeinfo>
 
 
 AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect &r):
