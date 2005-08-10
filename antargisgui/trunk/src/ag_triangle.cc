@@ -1243,11 +1243,11 @@ bool AGVector4::operator!=(const AGVector4 &a) const
   return !operator==(a);
 }
 
-inline float AGVector4::length() const
+float AGVector4::length() const
 {
   return sqrt(length2());
 }
-inline float AGVector4::length2() const
+float AGVector4::length2() const
 {
   return v[0]*v[0]+
     v[1]*v[1]+
@@ -1255,7 +1255,7 @@ inline float AGVector4::length2() const
     v[3]*v[3];
 }
 
-inline float AGVector4::length3() const
+float AGVector4::length3() const
 {
   return sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
 }
