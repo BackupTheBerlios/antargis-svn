@@ -1764,6 +1764,26 @@ void SwigDirector_AGSDLScreen::tile(AGTexture const &pSource, AGRect const &pDes
 }
 
 
+void SwigDirector_AGSDLScreen::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+    AGTexture * nc_tmp_pSource = const_cast<AGTexture *>(&pSource) ;
+    VALUE obj0 = Qnil ;
+    AGRect * nc_tmp_pDest = const_cast<AGRect *>(&pDest) ;
+    VALUE obj1 = Qnil ;
+    AGRect * nc_tmp_pSrc = const_cast<AGRect *>(&pSrc) ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSDLScreen::blit(pSource,pDest,pSrc);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pSource, SWIGTYPE_p_AGTexture, 0);
+    obj1 = SWIG_NewPointerObj(nc_tmp_pDest, SWIGTYPE_p_AGRect, 0);
+    obj2 = SWIG_NewPointerObj(nc_tmp_pSrc, SWIGTYPE_p_AGRect, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("blit"), 3,obj0,obj1,obj2);
+}
+
+
 AGSurface SwigDirector_AGSDLScreen::loadSurface(std::string const &pFilename) {
     std::string temp1 ;
     std::string temp10 ;
@@ -1964,24 +1984,6 @@ void SwigDirector_AGSDLScreen::drawBorder(AGRect const &rect, int W, AGColor con
 }
 
 
-void SwigDirector_AGSDLScreen::putPixel(int x, int y, AGColor const &c) {
-    VALUE obj0 = Qnil ;
-    VALUE obj1 = Qnil ;
-    AGColor * nc_tmp_c = const_cast<AGColor *>(&c) ;
-    VALUE obj2 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGSDLScreen::putPixel(x,y,c);
-        return;
-    }
-    obj0 = INT2NUM(x);
-    obj1 = INT2NUM(y);
-    obj2 = SWIG_NewPointerObj(nc_tmp_c, SWIGTYPE_p_AGColor, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("putPixel"), 3,obj0,obj1,obj2);
-}
-
-
 void SwigDirector_AGSDLScreen::drawRect(AGRect const &pRect, AGColor const &c) {
     AGRect * nc_tmp_pRect = const_cast<AGRect *>(&pRect) ;
     VALUE obj0 = Qnil ;
@@ -2007,6 +2009,24 @@ void SwigDirector_AGSDLScreen::flip() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("flip"), 0, NULL);
+}
+
+
+void SwigDirector_AGSDLScreen::putPixel(int x, int y, AGColor const &c) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    AGColor * nc_tmp_c = const_cast<AGColor *>(&c) ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSDLScreen::putPixel(x,y,c);
+        return;
+    }
+    obj0 = INT2NUM(x);
+    obj1 = INT2NUM(y);
+    obj2 = SWIG_NewPointerObj(nc_tmp_c, SWIGTYPE_p_AGColor, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("putPixel"), 3,obj0,obj1,obj2);
 }
 
 
@@ -15838,7 +15858,7 @@ _wrap_new_AGSDLScreen(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGSDLScreen_blit(int argc, VALUE *argv, VALUE self) {
+_wrap_AGSDLScreen_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
     AGTexture *arg2 = 0 ;
     AGRect *arg3 = 0 ;
@@ -15853,6 +15873,94 @@ _wrap_AGSDLScreen_blit(int argc, VALUE *argv, VALUE self) {
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->blit((AGTexture const &)*arg2,(AGRect const &)*arg3);
     
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSDLScreen_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
+    AGTexture *arg2 = 0 ;
+    AGRect *arg3 = 0 ;
+    AGRect *arg4 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLScreen, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGRect, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->blit((AGTexture const &)*arg2,(AGRect const &)*arg3,(AGRect const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AGSDLScreen_blit(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[5];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGSDLScreen, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGSDLScreen_blit__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGSDLScreen, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_AGSDLScreen_blit__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGSDLScreen_blit'");
     return Qnil;
 }
 

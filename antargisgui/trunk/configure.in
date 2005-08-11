@@ -12,7 +12,7 @@ AC_PROG_CC
 AM_PROG_LIBTOOL
 AC_PROG_INSTALL
 # Checks for libraries.
-AC_CHECK_LIB(SDL,SDL_BlitSurface)
+AC_CHECK_LIB(SDL,SDL_Init)
 AC_CHECK_LIB(SDL_ttf,TTF_Init)
 AC_CHECK_LIB(SGE,sge_FilledRect)
 AC_CHECK_LIB(GLU,gluPerspective)

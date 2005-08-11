@@ -203,6 +203,9 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
 #endif
   
   //      TRACE;
+  /*  cdebug(BaseLineX<<"  "<<BaseLineY<<"  "<<t.width()<<"  "<<t.height());
+  cdebug(pSurface->getRect());
+  cdebug(t.getRect());*/
   pSurface->blit(t,AGRect(BaseLineX,BaseLineY,t.width(),t.height()));
     
 #ifdef FONT_CACHE

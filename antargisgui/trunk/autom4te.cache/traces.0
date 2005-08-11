@@ -421,7 +421,7 @@ m4trace:configure.in:13: -1- AC_PROG_INSTALL
 m4trace:configure.in:13: -1- AC_SUBST([INSTALL_PROGRAM])
 m4trace:configure.in:13: -1- AC_SUBST([INSTALL_SCRIPT])
 m4trace:configure.in:13: -1- AC_SUBST([INSTALL_DATA])
-m4trace:configure.in:15: -1- AC_CHECK_LIB([SDL], [SDL_BlitSurface])
+m4trace:configure.in:15: -1- AC_CHECK_LIB([SDL], [SDL_Init])
 m4trace:configure.in:15: -1- AH_OUTPUT([HAVE_LIBSDL], [/* Define to 1 if you have the `SDL\' library (-lSDL). */
 #undef HAVE_LIBSDL])
 m4trace:configure.in:15: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBSDL])

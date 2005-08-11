@@ -35,6 +35,12 @@
 
 #include <ag_fs.h>
 
+void AGFreeSurface(SDL_Surface *s)
+{
+  cdebug(s);
+  SDL_FreeSurface(s);
+}
+
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height)
 {
   /* Create a 32-bit surface with the bytes of each pixel in R,G,B,A order,
@@ -128,7 +134,7 @@ AGSurface &AGSurface::operator=(const AGSurface &p)
 {
   CTRACE;
   //  if(s)
-  //    SDL_FreeSurface(s);
+  //    AGFreeSurface(s);
   s=0;
   if(p.valid())
     {
@@ -480,7 +486,7 @@ AGSurfaceManager::~AGSurfaceManager()
   std::set<SDL_Surface*>::iterator i=mRealSurfaces.begin();
   for(;i!=mRealSurfaces.end();i++)
     {
-      SDL_FreeSurface(*i);
+      AGFreeSurface(*i);
     }
 }
 
@@ -553,7 +559,7 @@ void AGSurfaceManager::cleanup()
   for(j=mRealSurfaces.begin();j!=mRealSurfaces.end();j++)
     {
       if(used.find(*j)==used.end())
-	SDL_FreeSurface(*j);
+	AGFreeSurface(*j);
     }
   mRealSurfaces=used;
 }
@@ -582,7 +588,7 @@ AGTextureManager::~AGTextureManager()
   std::set<SDL_Surface*>::iterator i=mSurfaces.begin();
   for(;i!=mSurfaces.end();i++)
     {
-      SDL_FreeSurface(*i);
+      AGFreeSurface(*i);
     }
 }
 
@@ -626,7 +632,7 @@ void AGTextureManager::cleanup()
   for(;j!=mSurfaces.end();j++)
     {
       if(used.find(*j)==used.end())
-	SDL_FreeSurface(*j);
+	AGFreeSurface(*j);
     }
   mSurfaces=used;
 #else
@@ -668,7 +674,7 @@ void AGTextureManager::cleanup()
   for(;j!=mSurfaces.end();j++)
     {
       if(used.find(*j)==used.end())
-	SDL_FreeSurface(*j);
+	AGFreeSurface(*j);
     }
   mSurfaces=used;
 

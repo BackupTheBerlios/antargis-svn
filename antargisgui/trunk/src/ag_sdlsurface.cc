@@ -50,6 +50,12 @@ void AGSDLScreen::drawRect(const AGRect &pRect,const AGColor &c)
 {
   sge_FilledRectAlpha(s,pRect.x,pRect.y,pRect.x+pRect.w-1,pRect.y+pRect.h-1,c.mapRGB(s->format),c.a);
 }
+void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  SDL_BlitSurface(pSource.s,const_cast<AGRect*>(&pSrc),s,const_cast<AGRect*>(&pDest));
+}
+
+
 
 void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest)
 {
@@ -60,6 +66,12 @@ void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest)
   sr.w=pDest.w;
   sr.h=pDest.h;
   //  SDL_BlitSurface(s,const_cast<AGRect*>(&pDest),pSource.s,&sr);
+  /*  cdebug(pDest.toString());
+  cdebug(sr.x<<" "<<sr.y<<" "<<sr.w<<" "<<sr.h);
+  cdebug(pSource.s->w<<"  "<<pSource.s->h);
+  cdebug(pSource.s);
+  cdebug(s);
+  cdebug(s->w<<"  "<<s->h);*/
   SDL_BlitSurface(pSource.s,&sr,s,const_cast<AGRect*>(&pDest));
 }
 
@@ -279,5 +291,6 @@ void AGSDLScreen::drawLine(const AGPoint &pp0,const AGPoint &pp1,const AGColor &
 
 AGTexture AGSDLScreen::makeTexture(const AGSurface &s)
 {
-  return AGTexture(const_cast<AGSurface&>(s).surface(),s.width(),s.height());
+  SDL_Surface *ns=SDL_DisplayFormatAlpha(const_cast<AGSurface&>(s).surface());
+  return AGTexture(ns,s.width(),s.height());
 }

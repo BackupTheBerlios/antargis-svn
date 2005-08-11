@@ -41,6 +41,7 @@ class SwigDirector_AGSDLScreen : public AGSDLScreen, public Swig::Director {
 public:
     SwigDirector_AGSDLScreen(VALUE self, SDL_Surface *s);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
     virtual void renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn);
@@ -51,9 +52,9 @@ public:
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void begin();
     virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
-    virtual void putPixel(int x, int y, AGColor const &c);
     virtual void drawRect(AGRect const &pRect, AGColor const &c);
     virtual void flip();
+    virtual void putPixel(int x, int y, AGColor const &c);
     virtual SDL_Surface *newSurface(int x, int y);
 };
 
