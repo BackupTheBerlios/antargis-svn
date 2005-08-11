@@ -780,6 +780,7 @@ void AGEdit::setText(const std::string &pText)
 	}
     }
   mCy=mCx=0;
+  setFont(mFont); // reset Font
 }
 void AGEdit::setMutable(bool pMutable)
 {
