@@ -70,6 +70,8 @@ class AGButton:public AGWidget
   void setChecked(bool pChecked);
   bool isChecked() const;
 
+  bool canFocus() const;
+
  private:
   std::string mText;
   int mID;

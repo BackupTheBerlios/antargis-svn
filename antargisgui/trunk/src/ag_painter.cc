@@ -113,7 +113,7 @@ void AGPainter::putPixel(const AGPoint &p,const AGColor &c)
 {
   if(!inRect(p))
     {
-      cdebug("CANCEL PUTPIXEL");
+      cdebug("CANCEL PUTPIXEL"<<p);
       return;
     }
   AGPoint p2=move(p);
@@ -331,8 +331,9 @@ void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
   mTarget.blit(pSource,pDest,pSrc);
 }
 
-void AGPainter::drawCircle(const AGPoint &p,float rad,const AGColor &color)
+void AGPainter::drawCircle(const AGPoint &pp,float rad,const AGColor &color)
 {
+  AGPoint p(mRect.project(pp));
   int x,y;
   float r2=rad*rad;
   for(x=p.x-rad-1;x<=p.x+rad+1;x++)

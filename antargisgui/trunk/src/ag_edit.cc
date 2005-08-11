@@ -409,6 +409,8 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
 {
   if(!mMutable)
     return false;
+  if(!hasFocus())
+    return false;
   const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
   if(m)
     {

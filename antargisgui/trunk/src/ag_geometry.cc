@@ -40,10 +40,22 @@ AGPoint AGPoint::operator-(const AGPoint &p) const
   return AGPoint(x-p.x,y-p.y);
 }
 
+AGPoint AGPoint::operator+(const AGPoint &p) const
+{
+  return AGPoint(x+p.x,y+p.y);
+}
+
 AGPoint &AGPoint::operator+=(const AGPoint &p)
 {
   x+=p.x;
   y+=p.y;
+  return *this;
+}
+
+AGPoint &AGPoint::operator-=(const AGPoint &p)
+{
+  x-=p.x;
+  y-=p.y;
   return *this;
 }
 

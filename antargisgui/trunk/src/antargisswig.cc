@@ -3053,19 +3053,6 @@ int SwigDirector_AGButton::minWidth() const {
 }
 
 
-bool SwigDirector_AGButton::canFocus() const {
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::canFocus();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 std::string SwigDirector_AGButton::getCaption() const {
     std::string c_result ;
     VALUE result;
@@ -3081,6 +3068,19 @@ std::string SwigDirector_AGButton::getCaption() const {
         throw Swig::DirectorTypeMismatchException("string expected");
     }
     return (std::string) c_result;
+}
+
+
+bool SwigDirector_AGButton::canFocus() const {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::canFocus();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
 }
 
 
@@ -7577,19 +7577,6 @@ int SwigDirector_AGCheckBox::minWidth() const {
 }
 
 
-bool SwigDirector_AGCheckBox::canFocus() const {
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::canFocus();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 std::string SwigDirector_AGCheckBox::getCaption() const {
     std::string c_result ;
     VALUE result;
@@ -7605,6 +7592,19 @@ std::string SwigDirector_AGCheckBox::getCaption() const {
         throw Swig::DirectorTypeMismatchException("string expected");
     }
     return (std::string) c_result;
+}
+
+
+bool SwigDirector_AGCheckBox::canFocus() const {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::canFocus();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
 }
 
 
@@ -8766,19 +8766,6 @@ int SwigDirector_AGRadio::minWidth() const {
 }
 
 
-bool SwigDirector_AGRadio::canFocus() const {
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::canFocus();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 std::string SwigDirector_AGRadio::getCaption() const {
     std::string c_result ;
     VALUE result;
@@ -8794,6 +8781,19 @@ std::string SwigDirector_AGRadio::getCaption() const {
         throw Swig::DirectorTypeMismatchException("string expected");
     }
     return (std::string) c_result;
+}
+
+
+bool SwigDirector_AGRadio::canFocus() const {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGButton::canFocus();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("canFocus"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
 }
 
 
@@ -19338,6 +19338,28 @@ _wrap_AGPoint___sub__(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGPoint___add__(int argc, VALUE *argv, VALUE self) {
+    AGPoint *arg1 = (AGPoint *) 0 ;
+    AGPoint *arg2 = 0 ;
+    AGPoint result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGPoint, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGPoint, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = ((AGPoint const *)arg1)->operator +((AGPoint const &)*arg2);
+    
+    {
+        AGPoint * resultptr;
+        resultptr = new AGPoint((AGPoint &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGPoint, 1);
+    }
+    return vresult;
+}
+
+
 static void
 free_AGPoint(AGPoint *arg1) {
     delete arg1;
@@ -25088,6 +25110,25 @@ _wrap_AGButton_isChecked(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
     result = (bool)((AGButton const *)arg1)->isChecked();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGButton_canFocus(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)((AGButton const *)arg1)->canFocus();
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -35322,6 +35363,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGPoint.klass, "y=", VALUEFUNC(_wrap_AGPoint_y_set), -1);
     rb_define_method(cAGPoint.klass, "y", VALUEFUNC(_wrap_AGPoint_y_get), -1);
     rb_define_method(cAGPoint.klass, "-", VALUEFUNC(_wrap_AGPoint___sub__), -1);
+    rb_define_method(cAGPoint.klass, "+", VALUEFUNC(_wrap_AGPoint___add__), -1);
     cAGPoint.mark = 0;
     cAGPoint.destroy = (void (*)(void *)) free_AGPoint;
     
@@ -35615,6 +35657,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGButton.klass, "setState", VALUEFUNC(_wrap_AGButton_setState), -1);
     rb_define_method(cAGButton.klass, "setChecked", VALUEFUNC(_wrap_AGButton_setChecked), -1);
     rb_define_method(cAGButton.klass, "isChecked", VALUEFUNC(_wrap_AGButton_isChecked), -1);
+    rb_define_method(cAGButton.klass, "canFocus", VALUEFUNC(_wrap_AGButton_canFocus), -1);
     cAGButton.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisgui, "toAGButton", VALUEFUNC(_wrap_toAGButton), -1);

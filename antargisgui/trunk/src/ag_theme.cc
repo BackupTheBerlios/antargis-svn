@@ -160,6 +160,7 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	      AGFont f((*i)->get("file"),toInt((*i)->get("size")));
 	      f.setColor(AGColor((*i)->get("color")));
 	      t.setFont(sname,f);
+	      cdebug("setting font:"<<sname);
 	    }
 	}
       else

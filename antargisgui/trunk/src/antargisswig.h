@@ -179,8 +179,8 @@ public:
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
-    virtual bool canFocus() const;
     virtual std::string getCaption() const;
+    virtual bool canFocus() const;
     virtual ~SwigDirector_AGButton();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseClick(AGEvent const *m);
@@ -515,8 +515,8 @@ public:
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
-    virtual bool canFocus() const;
     virtual std::string getCaption() const;
+    virtual bool canFocus() const;
     virtual ~SwigDirector_AGCheckBox();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseMotion(AGEvent const *m);
@@ -597,8 +597,8 @@ public:
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
-    virtual bool canFocus() const;
     virtual std::string getCaption() const;
+    virtual bool canFocus() const;
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual ~SwigDirector_AGRadio();
     virtual bool eventMouseMotion(AGEvent const *m);

@@ -33,7 +33,9 @@ class AGPoint
   AGPoint();
 
   AGPoint operator-(const AGPoint &p) const;
+  AGPoint operator+(const AGPoint &p) const;
   AGPoint &operator+=(const AGPoint &p);
+  AGPoint &operator-=(const AGPoint &p);
 };
 
 class AGRect:public SDL_Rect

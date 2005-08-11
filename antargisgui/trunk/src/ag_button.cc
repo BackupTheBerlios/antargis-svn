@@ -286,3 +286,7 @@ AGButton &toAGButton(AGWidget &pWidget)
   return dynamic_cast<AGButton&>(pWidget);
 }
 
+bool AGButton::canFocus() const
+{
+  return true;
+}
