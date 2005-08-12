@@ -113,7 +113,7 @@ void AGPainter::putPixel(const AGPoint &p,const AGColor &c)
 {
   if(!inRect(p))
     {
-      cdebug("CANCEL PUTPIXEL"<<p);
+//      cdebug("CANCEL PUTPIXEL"<<p);
       return;
     }
   AGPoint p2=move(p);
