@@ -31,7 +31,9 @@ AC_SUBST(RUBY_INSTALL_DIR)
 # Checks for header files.
 
 
-CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g -DUSE_RUBY"
+
+#CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g -DUSE_RUBY"
+CXXFLAGS="-O0 `sdl-config --cflags` -Wall -g -DUSE_RUBY"
 LDFLAGS="$LDFLAGS `sdl-config --libs`"
 
 # Checks for typedefs, structures, and compiler characteristics.

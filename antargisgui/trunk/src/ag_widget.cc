@@ -40,19 +40,24 @@ public:
   virtual ~MWidgetSet();
 };
 MWidgetSet *mPAllWidgets=0; // workaround - to check if still widget exists or not
+bool mWidgetSetDeleted=false;
 
 MWidgetSet::~MWidgetSet()
 {
   CTRACE;
   mPAllWidgets=0;
+  mWidgetSetDeleted=true;
 }
 
 MWidgetSet *getAllWidgets()
 {
   if(!mPAllWidgets)
     {
-      mPAllWidgets=new MWidgetSet;
-      REGISTER_SINGLETON(mPAllWidgets);
+      if(!mWidgetSetDeleted)
+	{
+	  mPAllWidgets=new MWidgetSet;
+	  REGISTER_SINGLETON(mPAllWidgets);
+	}
     }
   return mPAllWidgets;
 }
@@ -68,7 +73,8 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
 {
   mRubyObject=false;
   mModal=false;
-  getAllWidgets()->insert(this);
+  if(getAllWidgets())
+    getAllWidgets()->insert(this);
   //  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
@@ -96,7 +102,8 @@ AGWidget::~AGWidget()
       else
 	getParent()->eventChildrenDeleted(this);
     }
-  getAllWidgets()->erase(this);
+  if(getAllWidgets())
+    getAllWidgets()->erase(this);
 }
 
 void AGWidget::removeChild(AGWidget *w)
