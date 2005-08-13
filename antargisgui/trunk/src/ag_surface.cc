@@ -344,7 +344,8 @@ AGTexture::AGTexture(SDL_Surface *ps,int W,int H):s(ps),w(W),h(H)
 
 AGTexture::~AGTexture()
 {
-  getTextureManager()->deregisterTexture(this);
+  if(getTextureManager())
+    getTextureManager()->deregisterTexture(this);
 }
 
 void AGTexture::init()
@@ -577,7 +578,8 @@ AGSurfaceManager *getSurfaceManager()
 }
 
 
-
+AGTextureManager *mTextureManager=0;
+bool mTextureManagerDeleted=false;
 /** AGTextureManager */
 AGTextureManager::AGTextureManager()
 {
@@ -590,6 +592,8 @@ AGTextureManager::~AGTextureManager()
     {
       AGFreeSurface(*i);
     }
+  mTextureManagerDeleted=true;
+  mTextureManager=0;
 }
 
 /*bool mTrap=false;
@@ -709,14 +713,16 @@ void AGTextureManager::checkUnused()
 }
 
 
-AGTextureManager *mTextureManager=0;
 AGTextureManager *getTextureManager()
 {
   if(mTextureManager==0)
     {
-      mTextureManager=new AGTextureManager();
-      
-      REGISTER_SINGLETON(mTextureManager);
+      if(!mTextureManagerDeleted)
+	{
+	  mTextureManager=new AGTextureManager();
+	  
+	  REGISTER_SINGLETON(mTextureManager);
+	}
     }
   return mTextureManager;
 }

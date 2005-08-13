@@ -101,6 +101,10 @@ void saveFile(const std::string &pName,const std::string &pContent)
 
   PHYSFS_file *f=PHYSFS_openWrite(pName.c_str());
 
+  if(!f)
+    {
+      cdebug("Error saving file:"<<pName);
+    }
   assert(f);
 
   PHYSFS_write(f,pContent.c_str(),1,pContent.length());

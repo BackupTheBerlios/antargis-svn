@@ -106,10 +106,11 @@ AGFontEngine::AGFontEngine()
 AGFontEngine::~AGFontEngine()
 {
   CTRACE;
-  std::map<FontInfo,TTF_Font*>::iterator i=fontEngineFonts.begin();
+  // not used - gets called by atexit
+/*  std::map<FontInfo,TTF_Font*>::iterator i=fontEngineFonts.begin();
   for(;i!=fontEngineFonts.end();i++)
-    TTF_CloseFont(i->second);
-  TTF_Quit();
+    TTF_CloseFont(i->second);*/
+//  TTF_Quit();
  
 }
 
