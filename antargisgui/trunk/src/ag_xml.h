@@ -21,12 +21,13 @@
 #ifndef __MY_SIMPLE_XML
 #define __MY_SIMPLE_XML
 
+#include <ag_tools.h>
 #include <vector>
 #include <map>
 #include <string>
 #include <sstream>
 
-#include "ruby.h"
+#include <ruby.h>
 
 //#include "mystring.h"
 #include "ag_debug.h"

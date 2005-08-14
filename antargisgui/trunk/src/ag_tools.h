@@ -23,6 +23,12 @@
 
 #include <string>
 #include <list>
+
+#ifdef WIN32
+#include <windows.h>
+#include <winsock.h>
+#endif
+
 #include <ag_fs.h>
 
 int toInt(const std::string &s);

@@ -21,8 +21,8 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'sdl'
+require 'libantargisruby.dll'
+#require 'sdl'
 require 'testapp.rb'
 require 'theme.rb'
 

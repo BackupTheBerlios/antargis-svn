@@ -21,8 +21,8 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-include Libantargisruby
+require 'libantargisgui'
+include Libantargisgui
 require 'antApp.rb'
 
 

@@ -25,6 +25,8 @@
 #include <cmath>
 #include <map>
 #include <list>
+#include <ag_tools.h>
+
 #include <ruby.h>
 
 #define MAXF 100000.0f
