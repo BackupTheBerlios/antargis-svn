@@ -1797,7 +1797,6 @@ AGSurface SwigDirector_AGSDLScreen::loadSurface(std::string const &pFilename) {
     obj0=rb_str_new2(pFilename.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("loadSurface"), 1,obj0);
     {
-        std::cout<<"test1"<<std::endl;
         AGSurface *b;
         Data_Get_Struct(result,AGSurface,b);
         c_result=*b;
@@ -15851,7 +15850,6 @@ _wrap_new_AGSDLScreen(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGSDLScreen\n");
     }
     return self;
 }
@@ -18022,7 +18020,6 @@ _wrap_new_AGWidget(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGWidget\n");
     }
     return self;
 }
@@ -24734,7 +24731,6 @@ _wrap_new_AGButton__SWIG_0(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGButton\n");
     }
     return self;
 }
@@ -24792,7 +24788,6 @@ _wrap_new_AGButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGButton\n");
     }
     return self;
 }
@@ -25320,7 +25315,7 @@ _wrap_new_AGApplication(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGApplication\n");
+        //	printf("register:AGApplication\n");
     }
     return self;
 }
@@ -25695,7 +25690,6 @@ _wrap_new_AGText(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGText\n");
     }
     return self;
 }
@@ -27033,7 +27027,6 @@ _wrap_new_AGScreenWidget(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGScreenWidget\n");
     }
     return self;
 }
@@ -27577,7 +27570,6 @@ _wrap_new_AGEdit(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGEdit\n");
     }
     return self;
 }
@@ -28024,7 +28016,6 @@ _wrap_new_AGCheckBox(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGCheckBox\n");
     }
     return self;
 }
@@ -28267,7 +28258,6 @@ _wrap_new_AGRadio(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGRadio\n");
     }
     return self;
 }
@@ -28369,7 +28359,6 @@ _wrap_new_AGTable(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGTable\n");
     }
     return self;
 }
@@ -28582,7 +28571,6 @@ _wrap_new_AGWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGWindow\n");
     }
     return self;
 }
@@ -28630,7 +28618,6 @@ _wrap_new_AGWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGWindow\n");
     }
     return self;
 }
@@ -28948,7 +28935,6 @@ _wrap_new_AGImage__SWIG_0(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGImage\n");
     }
     return self;
 }
@@ -29004,7 +28990,6 @@ _wrap_new_AGImage__SWIG_1(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGImage\n");
     }
     return self;
 }
@@ -29205,7 +29190,6 @@ _wrap_new_AGCaption(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGCaption\n");
     }
     return self;
 }
@@ -29437,7 +29421,6 @@ _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGLayout\n");
     }
     return self;
 }
@@ -32043,7 +32026,6 @@ _wrap_new_AGListBox(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY=self;
         result->mRubyObject=true;
-        printf("register:AGListBox\n");
     }
     return self;
 }

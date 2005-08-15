@@ -12,7 +12,6 @@
 */
 
 %typemap(directorout) AGSurface {
-	std::cout<<"test1"<<std::endl;
 	AGSurface *b;
 	Data_Get_Struct($input,AGSurface,b);
 	$result=*b;
@@ -23,7 +22,7 @@
 	$action
 	result->mRUBY=self;
   result->mRubyObject=true;
-	printf("register:AGApplication\n");
+//	printf("register:AGApplication\n");
 }
 %markfunc AGApplication "AGApplication_markfunc"
 

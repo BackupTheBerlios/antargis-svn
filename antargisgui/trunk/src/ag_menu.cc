@@ -50,7 +50,7 @@ void AGMenu::show(AGPoint pWishPos)
 
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
-    cout<<(*i)->getRect().toString()<<endl;
+    cdebug((*i)->getRect().toString());
 
   AGVTiler::show();
 }

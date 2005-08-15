@@ -853,7 +853,7 @@ std::string AGEdit::getText() const
       os<<i->getText();
       i++;
       if(i!=mLines.end() && hard)
-	os<<endl;
+	os<<std::endl;
     }
   return os.str();
 }

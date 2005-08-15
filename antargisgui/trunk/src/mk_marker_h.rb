@@ -83,7 +83,7 @@ rlist.each {|x,y|
 	file.puts "	$action"
 	file.puts "	result->mRUBY=self;"
 	file.puts "  result->mRubyObject=true;"
-	file.puts "	printf(\"register:"+x+"\\n\");"
+	#file.puts "	printf(\"register:"+x+"\\n\");"
 	file.puts "}"
 	file.puts "%markfunc "+x+" \"AGWidget_markfunc\""
 

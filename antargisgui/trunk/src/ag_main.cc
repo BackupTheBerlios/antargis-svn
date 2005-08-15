@@ -60,14 +60,14 @@ AGMain::AGMain()
   // Initialize SDL
   if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
     {
-      std::cerr<<"SDL could not be initialized!"<<std::endl;
+      cdebug("SDL could not be initialized!");
     }
   const SDL_VideoInfo *videoInfo;
 
   videoInfo = SDL_GetVideoInfo();
   if(!videoInfo)
     {
-      std::cerr<<"SDL could not get video-info"<<std::endl;
+      cdebug("SDL could not get video-info");
     }
 
   int videoFlags=0;//SDL_HWPALETTE;
@@ -75,7 +75,7 @@ AGMain::AGMain()
   if(openGL)
     {
       videoFlags|=SDL_OPENGL;
-      std::cerr<<"initing opengl"<<std::endl;
+      cdebug("initing opengl");
     }
 
   if(FULLSCREEN)
@@ -104,7 +104,7 @@ AGMain::AGMain()
   // set video mode
 
   SDL_Surface *ms=SDL_SetVideoMode(w,h,SCREEN_DEPTH,videoFlags);
-  std::cerr<<"ms:"<<ms<<std::endl;
+  //std::cerr<<"ms:"<<ms<<std::endl;
   if(openGL)
     setScreen(mScreen=new AGGLScreen(w,h));
   else
@@ -114,12 +114,13 @@ AGMain::AGMain()
 
   if(!mDisplay)
     {
+		/*
      std::cerr<<"video mode:"<<w<<","<<h<<","<<SCREEN_DEPTH<<std::endl;
      std::cerr<<"Flags:"<<videoFlags<<std::endl;
      fprintf(stderr,"%X\n",videoFlags);
      fprintf(stderr,"sws:%X\n",SDL_SWSURFACE);
      fprintf(stderr,"pal:%X\n",SDL_HWPALETTE);
-      std::cerr<<"Video mode could not be set!"<<std::endl;
+      std::cerr<<"Video mode could not be set!"<<std::endl;*/
     }
 
   atexit(SDL_Quit);
@@ -160,7 +161,7 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
   if(gl)
     {
       videoFlags|=SDL_OPENGL;
-      std::cerr<<"initing opengl"<<std::endl;
+      cdebug("initing opengl");
     }
 
   openGL=gl;

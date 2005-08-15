@@ -639,9 +639,9 @@ AGVector3 AGMatrix3::operator*(const AGVector3 &v) const
 std::string AGMatrix3::toString() const
 {
   std::ostringstream os;
-  os<<"("<<a[0][0]<<","<<a[1][0]<<","<<a[2][0]<<")"<<endl;
-  os<<"("<<a[0][1]<<","<<a[1][1]<<","<<a[2][1]<<")"<<endl;
-  os<<"("<<a[0][2]<<","<<a[1][2]<<","<<a[2][2]<<")"<<endl;
+  os<<"("<<a[0][0]<<","<<a[1][0]<<","<<a[2][0]<<")"<<std::endl;
+  os<<"("<<a[0][1]<<","<<a[1][1]<<","<<a[2][1]<<")"<<std::endl;
+  os<<"("<<a[0][2]<<","<<a[1][2]<<","<<a[2][2]<<")"<<std::endl;
   return os.str();
 }
 
@@ -1457,10 +1457,10 @@ AGVector4 AGMatrix4::operator*(const AGVector4 &v) const
 std::string AGMatrix4::toString() const
 {
   std::ostringstream os;
-  os<<"("<<get(0,0)<<","<<get(1,0)<<","<<get(2,0)<<","<<get(3,0)<<")"<<endl;
-  os<<"("<<get(0,1)<<","<<get(1,1)<<","<<get(2,1)<<","<<get(3,1)<<")"<<endl;
-  os<<"("<<get(0,2)<<","<<get(1,2)<<","<<get(2,2)<<","<<get(3,2)<<")"<<endl;
-  os<<"("<<get(0,3)<<","<<get(1,3)<<","<<get(2,3)<<","<<get(3,3)<<")"<<endl;
+  os<<"("<<get(0,0)<<","<<get(1,0)<<","<<get(2,0)<<","<<get(3,0)<<")"<<std::endl;
+  os<<"("<<get(0,1)<<","<<get(1,1)<<","<<get(2,1)<<","<<get(3,1)<<")"<<std::endl;
+  os<<"("<<get(0,2)<<","<<get(1,2)<<","<<get(2,2)<<","<<get(3,2)<<")"<<std::endl;
+  os<<"("<<get(0,3)<<","<<get(1,3)<<","<<get(2,3)<<","<<get(3,3)<<")"<<std::endl;
   return os.str();
 }
 

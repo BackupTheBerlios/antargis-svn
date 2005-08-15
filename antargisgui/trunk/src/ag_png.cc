@@ -202,8 +202,8 @@ std::string toPNG(const SDL_Surface *s)
 
   int res=IMG_SavePNG_RW(const_cast<SDL_Surface*>(s),ops);
 
-  cout<<"res:"<<res<<endl;
-  cout<<SDL_GetError()<<endl;
+//  cdebug("res:"<<res);
+ // cdebug(SDL_GetError());
   
   assert(res==0);
 

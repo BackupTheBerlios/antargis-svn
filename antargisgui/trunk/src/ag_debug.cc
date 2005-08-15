@@ -23,6 +23,7 @@
 #include <fstream>
 #include <iostream>
 
+#ifndef NDEBUG
 int D::d=0;
 
 std::ofstream debugOFS("debug.txt");
@@ -30,33 +31,9 @@ std::ofstream debugOFS("debug.txt");
 std::ostream &getDebug()
 {
   return std::cout;
-  //  return debugOFS;
 }
 
-/*
-std::vector<std::string> split(const std::string &n,const std::string &h)
-{
-  cdebug(n<<" "<<h);
-  std::vector<std::string> a;
-  size_t i=0;
-  for(;i!=h.npos && i<h.length();i++)
-    {
-      size_t j=h.find(n,i);
-      if(j!=std::string::npos)
-	a.push_back(h.substr(i,j-i));
-      else
-	{
-	  a.push_back(h.substr(i,j));
-	  break;
-	}
-      cdebug("i:"<<i<<" j:"<<j);
-      cdebug(a[a.size()-1]);
-      i=j+1;
-    }
-  
-return a;
-}*/
-
+#endif
 
 std::vector<std::string> split(const std::string &needle,const std::string &haystack)
 {

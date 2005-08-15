@@ -26,6 +26,17 @@ RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir
 AC_SUBST(RUBY_INCLUDE_DIR)
 AC_SUBST(RUBY_INSTALL_DIR)
 
+AC_ARG_ENABLE(debug,
+[  --enable-debug   compile with debug information])
+
+if test "$debug" == "yes" ; then 
+  DEBUG="-DDEBUG -O0 -g"
+else
+  DEBUG="-DNDEBUG -O2"
+fi
+
+AC_SUBST(DEBUG)
+
 
 #INCLUDES = include
 # Checks for header files.
@@ -33,7 +44,7 @@ AC_SUBST(RUBY_INSTALL_DIR)
 
 
 #CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g -DUSE_RUBY"
-CXXFLAGS="-O0 `sdl-config --cflags` -Wall -g -DUSE_RUBY"
+CXXFLAGS="`sdl-config --cflags` -Wall -DUSE_RUBY $DEBUG"
 LDFLAGS="$LDFLAGS `sdl-config --libs`"
 
 # Checks for typedefs, structures, and compiler characteristics.

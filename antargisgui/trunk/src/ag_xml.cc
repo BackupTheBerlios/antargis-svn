@@ -291,12 +291,12 @@ void Node::getContent(std::ostringstream &s,int depth) const
 	    else
 	      {
 		n->getStart(s);
-		s<<endl;
+		s<<std::endl;
 		n->getContent(s,depth+2);
 		indent(s,depth);
 		n->getEnd(s);
 	      }
-	    s<<endl;
+	    s<<std::endl;
 	      
           }
         else

@@ -92,7 +92,6 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   AGWidget *w=0;
 
-  std::cout<<"huhu"<<std::endl;
   cdebug("n:"<<n);
 
   w=getLayoutFactory()->create(pParent,geom,pNode);

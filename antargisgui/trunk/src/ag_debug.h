@@ -53,6 +53,19 @@ inline std::string toString(const bool&b)
 }
 
 std::ostream &getDebug();
+std::vector<std::string> split(const std::string &n,const std::string &h);
+
+#ifdef NDEBUG
+#define cdebug(x)
+#define ccdebug(x)
+#define debug(x)
+#define TRACE
+#define CTRACE
+#define CHECK_ZERO(x)
+#define STUB
+#define assertGL
+
+#else
 
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
@@ -69,10 +82,6 @@ using std::endl;
 
 #define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl)
 #define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl)
-//#define cdebug(x) std::cout<<"("<<__FILE__<<":"<<__LINE__<<":"<<__func__<<"):"<<x<<endl
-
-
-std::vector<std::string> split(const std::string &n,const std::string &h);
 
 class D
 {
@@ -131,5 +140,8 @@ inline void myAssertGL(std::string s)
 }
 
 #define assertGL myAssertGL(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
+
+
+#endif
 
 #endif
