@@ -95,12 +95,15 @@ AGWidget::~AGWidget()
     }
   if(getParent())
     {
-      if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
+      if(getAllWidgets())
 	{
-	  cdebug("WARNING:Error in ~AGWidget!!!");
+	  if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
+	    {
+	      cdebug("WARNING:Error in ~AGWidget!!!");
+	    }
+	  else
+	    getParent()->eventChildrenDeleted(this);
 	}
-      else
-	getParent()->eventChildrenDeleted(this);
     }
   if(getAllWidgets())
     getAllWidgets()->erase(this);

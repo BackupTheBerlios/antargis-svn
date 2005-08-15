@@ -127,7 +127,8 @@ AGSurface::AGSurface(int w,int h)
 
 AGSurface::~AGSurface()
 {
-  getSurfaceManager()->deregisterSurface(this);
+  if(getSurfaceManager())
+    getSurfaceManager()->deregisterSurface(this);
 }
 
 AGSurface &AGSurface::operator=(const AGSurface &p)
@@ -476,6 +477,8 @@ void AGScreen::deleteTexture(AGTexture &t)
 
 
 
+AGSurfaceManager *mSurfaceManager=0;
+bool mSurfaceManagerDeleted=false;
 
 /** AGSurfaceManager */
 AGSurfaceManager::AGSurfaceManager()
@@ -489,6 +492,8 @@ AGSurfaceManager::~AGSurfaceManager()
     {
       AGFreeSurface(*i);
     }
+  mSurfaceManagerDeleted=true;
+  mSurfaceManager=0;
 }
 
 AGSurface AGSurfaceManager::loadSurface(const std::string &pFilename)
@@ -565,14 +570,16 @@ void AGSurfaceManager::cleanup()
   mRealSurfaces=used;
 }
 
-AGSurfaceManager *mSurfaceManager=0;
 AGSurfaceManager *getSurfaceManager()
 {
   if(mSurfaceManager==0)
     {
-      mSurfaceManager=new AGSurfaceManager();
-      
-      REGISTER_SINGLETON(mSurfaceManager);
+      if(!mSurfaceManagerDeleted)
+	{
+	  mSurfaceManager=new AGSurfaceManager();
+	  
+	  REGISTER_SINGLETON(mSurfaceManager);
+	}
     }
   return mSurfaceManager;
 }
