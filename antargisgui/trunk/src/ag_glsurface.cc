@@ -306,7 +306,8 @@ GLuint assignTexture(SDL_Surface *pSurface)
                 GL_UNSIGNED_BYTE,
                 texSurface->pixels );
 
-  assert( glGetError() == GL_NO_ERROR );
+  assertGL;
+  //  assert( glGetError() == GL_NO_ERROR );
 
   SDL_FreeSurface( texSurface );
   //  SDL_FreeSurface( surface );
@@ -314,7 +315,8 @@ GLuint assignTexture(SDL_Surface *pSurface)
   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//NEAREST);//LINEAR);
 
-  assert( glGetError() == GL_NO_ERROR );
+  assertGL;
+  //  assert( glGetError() == GL_NO_ERROR );
 
   glEnable( GL_BLEND );
   glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );

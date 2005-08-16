@@ -170,14 +170,14 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
   if(fs)
     videoFlags|=SDL_FULLSCREEN;
 
-  if ( videoInfo->hw_available )
+  /*  if ( videoInfo->hw_available )
     {
       videoFlags |= SDL_HWSURFACE;
     }
   else
-    {
+  {*/
       videoFlags |= SDL_SWSURFACE;
-    }
+      //    }
 
   if ( videoInfo->blit_hw )
     {

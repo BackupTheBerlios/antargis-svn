@@ -19139,7 +19139,7 @@ if test "${enable_debug+set}" = set; then
 
 fi;
 
-if test "$debug" == "yes" ; then
+if test "$enable_debug" == "yes" ; then
   DEBUG="-DDEBUG -O0 -g"
 else
   DEBUG="-DNDEBUG -O2"
