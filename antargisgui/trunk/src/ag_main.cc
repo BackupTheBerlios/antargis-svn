@@ -20,6 +20,7 @@
 
 #include <iostream>
 
+#include "ag_tools.h"
 #include "ag_main.h"
 #include "ag_surface.h"
 #include "ag_sdlsurface.h"
