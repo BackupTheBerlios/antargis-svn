@@ -104,7 +104,7 @@ AGMain::AGMain()
 
   // set video mode
 
-  SDL_Surface *ms=SDL_SetVideoMode(w,h,SCREEN_DEPTH,videoFlags);
+  SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
   //std::cerr<<"ms:"<<ms<<std::endl;
   if(openGL)
     setScreen(mScreen=new AGGLScreen(w,h));
@@ -186,7 +186,7 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
 
 
   // set video mode
-  SDL_Surface *ms=SDL_SetVideoMode(w,h,SCREEN_DEPTH,videoFlags);
+  SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
   if(mScreen)
     delete mScreen;
   if(openGL)
