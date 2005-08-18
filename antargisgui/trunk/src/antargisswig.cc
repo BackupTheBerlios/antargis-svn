@@ -22639,16 +22639,20 @@ static VALUE
 _wrap_AGTriangle3_collide(int argc, VALUE *argv, VALUE self) {
     AGTriangle3 *arg1 = (AGTriangle3 *) 0 ;
     AGLine3 *arg2 = 0 ;
-    bool result;
+    AGVector4 result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTriangle3, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGLine3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (bool)((AGTriangle3 const *)arg1)->collide((AGLine3 const &)*arg2);
+    result = ((AGTriangle3 const *)arg1)->collide((AGLine3 const &)*arg2);
     
-    vresult = result ? Qtrue : Qfalse;
+    {
+        AGVector4 * resultptr;
+        resultptr = new AGVector4((AGVector4 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
+    }
     return vresult;
 }
 

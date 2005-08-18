@@ -315,13 +315,16 @@ class AGTriangle2
   std::string toString() const;
 };
 
+class AGVector4;
 class AGTriangle3
 {
   AGVector3 p[3];
  public:
   AGTriangle3(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2);
   
-  bool collide(const AGLine3 &pLine) const;
+  // (x,y,z,0) for no collision 
+  // (x,y,z,1) for collision in point (x,y,z)
+  AGVector4 collide(const AGLine3 &pLine) const;
 
   std::string toString() const;
 

@@ -909,11 +909,12 @@ AGTriangle3::AGTriangle3(const AGVector3 &v0,const AGVector3 &v1,const AGVector3
   p[2]=v2;
 }
 
-bool AGTriangle3::collide(const AGLine3 &pLine) const
+AGVector4 AGTriangle3::collide(const AGLine3 &pLine) const
 {
   AGVector3 normal=(p[1]-p[0])%(p[2]-p[0]);
+  AGVector4 mfalse(0,0,0,0);
   if(normal.length2()==0)
-    return false; // bad triangle
+    return mfalse; // bad triangle
   normal.normalize();
   float v0=(pLine.getV0()-p[0])*normal;
   float v1=(pLine.getV1()-p[0])*normal;
@@ -921,23 +922,10 @@ bool AGTriangle3::collide(const AGLine3 &pLine) const
   float v=v0/vall;
 
   if(v<0 || v>1)
-    return false; // line doesn't intersect triangle's plane
+    return mfalse; // line doesn't intersect triangle's plane
 
   AGVector3 ip=pLine.getV1()*v+pLine.getV0()*(1-v);
-  /*
-  cdebug("normal:"<<normal.toString());
-  cdebug("p0:"<<p[0].toString());
-  cdebug("p1:"<<p[1].toString());
-  cdebug("p2:"<<p[2].toString());
-  cdebug("line0:"<<pLine.getV0().toString());
-  cdebug("line1:"<<pLine.getV1().toString());
-  cdebug("v0:"<<v0);
-  cdebug("v1:"<<v1);
-  cdebug("vall:"<<vall);
-  cdebug("v:"<<v);
-  cdebug("ip:"<<ip.toString());
-  cdebug((ip-p[0])*normal);
-  */
+
   assert(fabs((ip-p[0])*normal)<0.00001);
   // check if point is on triangle (already checked that point is in plane)
   AGVector3 n0=(p[2]-p[1])%normal;
@@ -948,12 +936,7 @@ bool AGTriangle3::collide(const AGLine3 &pLine) const
   n2.normalize();
 
   if(n0==n1 || n0==n2 || n1==n2)
-    return false;
-  /*
-  cdebug("0=1:"<<(n0==n1));
-  cdebug("0=2:"<<(n0==n2));
-  cdebug("2=1:"<<(n2==n1));
-  */
+    return mfalse;
 
   assert(fabs(n0*normal)<0.0001);
   assert(fabs(n1*normal)<0.0001);
@@ -964,36 +947,14 @@ bool AGTriangle3::collide(const AGLine3 &pLine) const
   assert(fabs((p[0]-p[1])*n2)<0.0001);
 
   if(AGsign((p[0]-p[1])*n0)!=AGsign((ip-p[1])*n0))
-    return false;
+    return mfalse;
   if(AGsign((p[1]-p[2])*n1)!=AGsign((ip-p[2])*n1))
-    return false;
+    return mfalse;
   if(AGsign((p[2]-p[1])*n2)!=AGsign((ip-p[1])*n2))
-    return false;
+    return mfalse;
 
-  /*
 
-  cdebug("n0:"<<n0.toString());
-  cdebug("n1:"<<n1.toString());
-  cdebug("n2:"<<n2.toString());
-  cdebug("test1:");
-  cdebug((p[0]-p[1])*n0);
-  cdebug((ip-p[1])*n0);
-  cdebug((p[0]-p[1]).toString());
-  cdebug((ip-p[1]).toString());
-
-  cdebug("test2:");
-  cdebug((p[1]-p[2])*n1);
-  cdebug((ip-p[2])*n1);
-  cdebug((p[1]-p[2]).toString());
-  cdebug((ip-p[2]).toString());
-
-  cdebug("test3:");
-  cdebug((p[2]-p[0])*n2);
-  cdebug((ip-p[0])*n2);
-  cdebug((p[2]-p[0]).toString());
-  cdebug((ip-p[0]).toString());
-  */
-  return true;
+  return AGVector4(ip,1);
 }
 
 
