@@ -152,6 +152,7 @@ class AGVector3
   AGVector3 &operator/=(float f);
   AGVector3 operator*(float f) const;
   AGVector3 operator/(float f) const;
+  AGVector3 operator%(const AGVector3 &a) const;
 
   bool operator==(const AGVector3 &a) const;
   bool operator!=(const AGVector3 &a) const;
@@ -239,6 +240,36 @@ class AGLine2
   std::string toString() const;
 };
 
+class AGLine3
+{
+  AGVector3 v0,v1;
+ public:
+  AGLine3();
+  AGLine3(const AGVector3 &pv0,const AGVector3 &pv1);
+  
+  AGVector3 getV0() const;
+  AGVector3 getV1() const;
+
+  bool has(const AGVector3 &v) const;
+  /*
+  bool collide(const AGLine3 &l) const;
+  AGVector3 collisionPoint(const AGLine3 &l) const;
+  AGVector3 collisionPointNI(const AGLine3 &l) const; // no inclusion test
+  bool includes(const AGVector3 &v) const;
+  */
+  //  AGBox3 getBBox() const;
+
+  //  AGVector3 normal() const;
+  AGVector3 direction() const;
+
+  //  float distance(const AGVector3 &v) const;
+
+#ifdef SWIG
+  %rename(to_s) toString() const;
+#endif
+  std::string toString() const;
+};
+
 class AGCollisionData
 {
 };
@@ -284,6 +315,19 @@ class AGTriangle2
   std::string toString() const;
 };
 
+class AGTriangle3
+{
+  AGVector3 p[3];
+ public:
+  AGTriangle3(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2);
+  
+  bool collide(const AGLine3 &pLine) const;
+
+  std::string toString() const;
+
+  AGVector3 operator[](int index) const;
+};
+
 class AGRect2
 {
   AGVector3 v0,v1;
@@ -319,6 +363,7 @@ class AGVector4
 
   AGVector4(float pX,float pY,float pZ,float pW=1.0f);
   AGVector4(const AGVector4 &a);
+  AGVector4(const AGVector3 &a,float h);
   AGVector4();
 
   void setX(float pX);
@@ -348,6 +393,7 @@ class AGVector4
   AGVector4 &operator/=(float f);
   AGVector4 operator*(float f) const;
   AGVector4 operator/(float f) const;
+  AGVector4 operator-() const;
 
   bool operator==(const AGVector4 &a) const;
   bool operator!=(const AGVector4 &a) const;
@@ -376,6 +422,8 @@ class AGVector4
   // vector-cross-product
   // ignores 4th coordinate
   AGVector4 operator%(const AGVector4 &a) const;
+
+  AGVector3 dim3() const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;

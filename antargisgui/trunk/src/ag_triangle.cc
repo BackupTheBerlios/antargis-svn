@@ -387,7 +387,10 @@ AGAngle AGVector3::getAngle() const
 
 bool AGVector3::operator==(const AGVector3 &a) const
 {
-  return v[0]==a.v[0] && v[1]==a.v[1] && v[2]==a.v[2];
+  float m=std::max(v[0],std::max(v[1],v[2]));
+  
+  m*=0.0001;
+  return fabs(v[0]-a.v[0])<m && fabs(v[1]-a.v[1])<m && fabs(v[2]-a.v[2])<m;
 }
 bool AGVector3::operator!=(const AGVector3 &a) const
 {
@@ -448,6 +451,13 @@ float AGVector3::getZ() const
 {
   return v;
 }
+AGVector3 AGVector3::operator%(const AGVector3 &a) const
+{
+  return AGVector3(v[1] * a.v[2] - v[2] * a.v[1],
+		   v[2] * a.v[0] - v[0] * a.v[2],
+		   v[0] * a.v[1] - v[1] * a.v[0]);
+}
+
 
 AGVector3 AGVector3::operator-(const AGVector3 &p) const
 {
@@ -646,7 +656,7 @@ std::string AGMatrix3::toString() const
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// AGTriangle
+// AGTriangle2
 /////////////////////////////////////////////////////////////////////////////
 
 AGTriangle2::AGTriangle2(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2)
@@ -889,6 +899,118 @@ AGLine2 AGTriangle2::nearestLine(const AGVector3 &v) const
   return dist.begin()->second;
 }
 
+/////////////////////////////////////////////////////////////////////////////
+// AGTriangle3
+/////////////////////////////////////////////////////////////////////////////
+AGTriangle3::AGTriangle3(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2)
+{
+  p[0]=v0;
+  p[1]=v1;
+  p[2]=v2;
+}
+
+bool AGTriangle3::collide(const AGLine3 &pLine) const
+{
+  AGVector3 normal=(p[1]-p[0])%(p[2]-p[0]);
+  if(normal.length2()==0)
+    return false; // bad triangle
+  normal.normalize();
+  float v0=(pLine.getV0()-p[0])*normal;
+  float v1=(pLine.getV1()-p[0])*normal;
+  float vall=v0-v1;
+  float v=v0/vall;
+
+  if(v<0 || v>1)
+    return false; // line doesn't intersect triangle's plane
+
+  AGVector3 ip=pLine.getV1()*v+pLine.getV0()*(1-v);
+  /*
+  cdebug("normal:"<<normal.toString());
+  cdebug("p0:"<<p[0].toString());
+  cdebug("p1:"<<p[1].toString());
+  cdebug("p2:"<<p[2].toString());
+  cdebug("line0:"<<pLine.getV0().toString());
+  cdebug("line1:"<<pLine.getV1().toString());
+  cdebug("v0:"<<v0);
+  cdebug("v1:"<<v1);
+  cdebug("vall:"<<vall);
+  cdebug("v:"<<v);
+  cdebug("ip:"<<ip.toString());
+  cdebug((ip-p[0])*normal);
+  */
+  assert(fabs((ip-p[0])*normal)<0.00001);
+  // check if point is on triangle (already checked that point is in plane)
+  AGVector3 n0=(p[2]-p[1])%normal;
+  AGVector3 n1=(p[2]-p[0])%normal;
+  AGVector3 n2=(p[0]-p[1])%normal;
+  n0.normalize();
+  n1.normalize();
+  n2.normalize();
+
+  if(n0==n1 || n0==n2 || n1==n2)
+    return false;
+  /*
+  cdebug("0=1:"<<(n0==n1));
+  cdebug("0=2:"<<(n0==n2));
+  cdebug("2=1:"<<(n2==n1));
+  */
+
+  assert(fabs(n0*normal)<0.0001);
+  assert(fabs(n1*normal)<0.0001);
+  assert(fabs(n2*normal)<0.0001);
+
+  assert(fabs((p[2]-p[1])*n0)<0.0001);
+  assert(fabs((p[2]-p[0])*n1)<0.0001);
+  assert(fabs((p[0]-p[1])*n2)<0.0001);
+
+  if(AGsign((p[0]-p[1])*n0)!=AGsign((ip-p[1])*n0))
+    return false;
+  if(AGsign((p[1]-p[2])*n1)!=AGsign((ip-p[2])*n1))
+    return false;
+  if(AGsign((p[2]-p[1])*n2)!=AGsign((ip-p[1])*n2))
+    return false;
+
+  /*
+
+  cdebug("n0:"<<n0.toString());
+  cdebug("n1:"<<n1.toString());
+  cdebug("n2:"<<n2.toString());
+  cdebug("test1:");
+  cdebug((p[0]-p[1])*n0);
+  cdebug((ip-p[1])*n0);
+  cdebug((p[0]-p[1]).toString());
+  cdebug((ip-p[1]).toString());
+
+  cdebug("test2:");
+  cdebug((p[1]-p[2])*n1);
+  cdebug((ip-p[2])*n1);
+  cdebug((p[1]-p[2]).toString());
+  cdebug((ip-p[2]).toString());
+
+  cdebug("test3:");
+  cdebug((p[2]-p[0])*n2);
+  cdebug((ip-p[0])*n2);
+  cdebug((p[2]-p[0]).toString());
+  cdebug((ip-p[0]).toString());
+  */
+  return true;
+}
+
+
+std::string AGTriangle3::toString() const
+{
+  std::ostringstream os;
+  os<<"["<<p[0].toString()<<";"<<p[1].toString()<<";"<<p[2].toString()<<"]";
+  return os.str();
+}
+
+AGVector3 AGTriangle3::operator[](int index) const
+{
+  assert(index>=0);
+  assert(index<3);
+  return p[index];
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // AGRectF
@@ -1111,6 +1233,53 @@ float AGLine2::distance(const AGVector3 &v) const
 }
 
 
+/////////////////////////////////////////////////////////////////////////////
+// AGLine3
+/////////////////////////////////////////////////////////////////////////////
+
+AGLine3::AGLine3()
+{
+}
+
+AGLine3::AGLine3(const AGVector3 &pv0,const AGVector3 &pv1):
+  v0(pv0),v1(pv1)
+{
+}
+  
+AGVector3 AGLine3::getV0() const
+{
+  return v0;
+}
+AGVector3 AGLine3::getV1() const
+{
+  return v1;
+}
+
+bool AGLine3::has(const AGVector3 &v) const
+{
+  return v0==v || v1==v;
+}
+
+AGVector3 AGLine3::direction() const
+{
+  return v1-v0;
+}
+
+
+std::string AGLine3::toString() const
+{
+  std::ostringstream os;
+  os<<"("<<v0.toString()<<"-"<<v1.toString()<<")";
+  return os.str();
+}
+/*
+float AGLine3::distance(const AGVector3 &v) const
+{
+  return fabs(normal()*(v-v0));
+  }*/
+
+
+
 ///////////////////////////////////////////////////////////////
 // AGVector4
 ///////////////////////////////////////////////////////////////
@@ -1130,11 +1299,31 @@ AGVector4::AGVector4(const AGVector4 &a)
   v[2]=a.v[2];
   v[3]=a.v[3];
 }
+AGVector4::AGVector4(const AGVector3 &a,float h)
+{
+  v[0]=a.v[0];
+  v[1]=a.v[1];
+  v[2]=a.v[2];
+  v[3]=h;
+}
+
+AGVector3 AGVector4::dim3() const
+{
+  return AGVector3(v[0],v[1],v[2]);
+}
+
+
 AGVector4::AGVector4()
 {
   v[0]=v[1]=v[2]=0.0f;
   v[3]=1.0f;
 }
+
+AGVector4 AGVector4::operator-() const
+{
+  return AGVector4(-v[0],-v[1],-v[2],-v[3]);
+}
+
 
 void AGVector4::setX(float pX)
 {

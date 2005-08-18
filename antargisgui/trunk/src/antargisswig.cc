@@ -843,9 +843,9 @@ type_error:
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_const_iterator swig_types[0] 
+#define  SWIGTYPE_p_AGBackground swig_types[0] 
 #define  SWIGTYPE_p_iterator swig_types[1] 
-#define  SWIGTYPE_p_AGBackground swig_types[2] 
+#define  SWIGTYPE_p_const_iterator swig_types[2] 
 #define  SWIGTYPE_p_Node__NodeVector__iterator swig_types[3] 
 #define  SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[4] 
 #define  SWIGTYPE_p_Document swig_types[5] 
@@ -888,50 +888,52 @@ type_error:
 #define  SWIGTYPE_p_AGPoint swig_types[42] 
 #define  SWIGTYPE_p_AGTriangle2 swig_types[43] 
 #define  SWIGTYPE_p_AGWindow swig_types[44] 
-#define  SWIGTYPE_p_AGRect swig_types[45] 
-#define  SWIGTYPE_p_AGSDLScreen swig_types[46] 
-#define  SWIGTYPE_p_AGPoint3 swig_types[47] 
-#define  SWIGTYPE_p_AGPainter swig_types[48] 
-#define  SWIGTYPE_p_AGText swig_types[49] 
-#define  SWIGTYPE_p_AGListBox swig_types[50] 
-#define  SWIGTYPE_p_AGMatrix3 swig_types[51] 
-#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[52] 
-#define  SWIGTYPE_p_SDL_PixelFormat swig_types[53] 
-#define  SWIGTYPE_p_AGTexture swig_types[54] 
-#define  SWIGTYPE_p_AGLine2 swig_types[55] 
-#define  SWIGTYPE_p_AGMatrix4 swig_types[56] 
-#define  SWIGTYPE_p_Uint8 swig_types[57] 
-#define  SWIGTYPE_p_SDLMod swig_types[58] 
-#define  SWIGTYPE_p_AGRect2 swig_types[59] 
-#define  SWIGTYPE_p_SDL_Rect swig_types[60] 
-#define  SWIGTYPE_p_SDL_Event swig_types[61] 
-#define  SWIGTYPE_p_GLuint swig_types[62] 
-#define  SWIGTYPE_p_AGSurfaceManager swig_types[63] 
-#define  SWIGTYPE_p_AGTextureManager swig_types[64] 
-#define  SWIGTYPE_p_AGEdit swig_types[65] 
-#define  SWIGTYPE_p_AGScreenWidget swig_types[66] 
-#define  SWIGTYPE_p_AGRadio swig_types[67] 
-#define  SWIGTYPE_p_std__ostringstream swig_types[68] 
-#define  SWIGTYPE_p_AGVector2 swig_types[69] 
-#define  SWIGTYPE_p_unsigned_long swig_types[70] 
-#define  SWIGTYPE_p_AGCaption swig_types[71] 
-#define  SWIGTYPE_p_AGVector3 swig_types[72] 
-#define  SWIGTYPE_p_std__string swig_types[73] 
-#define  SWIGTYPE_p_AGVector4 swig_types[74] 
-#define  SWIGTYPE_p_AGRadioGroup swig_types[75] 
-#define  SWIGTYPE_p_AGEvent swig_types[76] 
-#define  SWIGTYPE_p_AGMenuEvent swig_types[77] 
-#define  SWIGTYPE_p_AGMouseEvent swig_types[78] 
-#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[79] 
-#define  SWIGTYPE_p_AGPaintTarget swig_types[80] 
-#define  SWIGTYPE_p_SDLKey swig_types[81] 
-#define  SWIGTYPE_p_AGListener swig_types[82] 
-#define  SWIGTYPE_p_AGCPPListener swig_types[83] 
-#define  SWIGTYPE_p_float swig_types[84] 
-#define  SWIGTYPE_p_Node swig_types[85] 
-#define  SWIGTYPE_p_p_Node swig_types[86] 
-#define  SWIGTYPE_p_AGTheme swig_types[87] 
-static swig_type_info *swig_types[89];
+#define  SWIGTYPE_p_AGTriangle3 swig_types[45] 
+#define  SWIGTYPE_p_AGRect swig_types[46] 
+#define  SWIGTYPE_p_AGSDLScreen swig_types[47] 
+#define  SWIGTYPE_p_AGPoint3 swig_types[48] 
+#define  SWIGTYPE_p_AGPainter swig_types[49] 
+#define  SWIGTYPE_p_AGText swig_types[50] 
+#define  SWIGTYPE_p_AGListBox swig_types[51] 
+#define  SWIGTYPE_p_AGMatrix3 swig_types[52] 
+#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[53] 
+#define  SWIGTYPE_p_SDL_PixelFormat swig_types[54] 
+#define  SWIGTYPE_p_AGTexture swig_types[55] 
+#define  SWIGTYPE_p_AGLine2 swig_types[56] 
+#define  SWIGTYPE_p_AGMatrix4 swig_types[57] 
+#define  SWIGTYPE_p_AGLine3 swig_types[58] 
+#define  SWIGTYPE_p_Uint8 swig_types[59] 
+#define  SWIGTYPE_p_SDLMod swig_types[60] 
+#define  SWIGTYPE_p_AGRect2 swig_types[61] 
+#define  SWIGTYPE_p_SDL_Rect swig_types[62] 
+#define  SWIGTYPE_p_SDL_Event swig_types[63] 
+#define  SWIGTYPE_p_GLuint swig_types[64] 
+#define  SWIGTYPE_p_AGSurfaceManager swig_types[65] 
+#define  SWIGTYPE_p_AGTextureManager swig_types[66] 
+#define  SWIGTYPE_p_AGEdit swig_types[67] 
+#define  SWIGTYPE_p_AGScreenWidget swig_types[68] 
+#define  SWIGTYPE_p_AGRadio swig_types[69] 
+#define  SWIGTYPE_p_std__ostringstream swig_types[70] 
+#define  SWIGTYPE_p_AGVector2 swig_types[71] 
+#define  SWIGTYPE_p_unsigned_long swig_types[72] 
+#define  SWIGTYPE_p_AGCaption swig_types[73] 
+#define  SWIGTYPE_p_AGVector3 swig_types[74] 
+#define  SWIGTYPE_p_std__string swig_types[75] 
+#define  SWIGTYPE_p_AGVector4 swig_types[76] 
+#define  SWIGTYPE_p_AGRadioGroup swig_types[77] 
+#define  SWIGTYPE_p_AGEvent swig_types[78] 
+#define  SWIGTYPE_p_AGMenuEvent swig_types[79] 
+#define  SWIGTYPE_p_AGMouseEvent swig_types[80] 
+#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[81] 
+#define  SWIGTYPE_p_AGPaintTarget swig_types[82] 
+#define  SWIGTYPE_p_SDLKey swig_types[83] 
+#define  SWIGTYPE_p_AGListener swig_types[84] 
+#define  SWIGTYPE_p_AGCPPListener swig_types[85] 
+#define  SWIGTYPE_p_float swig_types[86] 
+#define  SWIGTYPE_p_Node swig_types[87] 
+#define  SWIGTYPE_p_p_Node swig_types[88] 
+#define  SWIGTYPE_p_AGTheme swig_types[89] 
+static swig_type_info *swig_types[91];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -1198,11 +1200,17 @@ static void free_AGMatrix3(AGMatrix3 *);
 swig_class cAGLine2;
 static void free_AGLine2(AGLine2 *);
 
+swig_class cAGLine3;
+static void free_AGLine3(AGLine3 *);
+
 swig_class cAGCollisionData;
 static void free_AGCollisionData(AGCollisionData *);
 
 swig_class cAGTriangle2;
 static void free_AGTriangle2(AGTriangle2 *);
+
+swig_class cAGTriangle3;
+static void free_AGTriangle3(AGTriangle3 *);
 
 swig_class cAGRect2;
 static void free_AGRect2(AGRect2 *);
@@ -21207,6 +21215,28 @@ _wrap_AGVector3___div__(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector3___mod__(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = (AGVector3 *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = ((AGVector3 const *)arg1)->operator %((AGVector3 const &)*arg2);
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGVector3___eq__(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = (AGVector3 *) 0 ;
     AGVector3 *arg2 = 0 ;
@@ -22054,6 +22084,185 @@ static void
 free_AGLine2(AGLine2 *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_new_AGLine3__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGLine3 *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (AGLine3 *)new AGLine3();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGLine3_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGLine3_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGLine3);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGLine3__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGLine3 *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGLine3 *)new AGLine3((AGVector3 const &)*arg1,(AGVector3 const &)*arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE _wrap_new_AGLine3(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[2];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_AGLine3__SWIG_0(nargs, args, self);
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGLine3__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGLine3'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGLine3_getV0(int argc, VALUE *argv, VALUE self) {
+    AGLine3 *arg1 = (AGLine3 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLine3, 1);
+    result = ((AGLine3 const *)arg1)->getV0();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGLine3_getV1(int argc, VALUE *argv, VALUE self) {
+    AGLine3 *arg1 = (AGLine3 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLine3, 1);
+    result = ((AGLine3 const *)arg1)->getV1();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGLine3_has(int argc, VALUE *argv, VALUE self) {
+    AGLine3 *arg1 = (AGLine3 *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLine3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AGLine3 const *)arg1)->has((AGVector3 const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGLine3_direction(int argc, VALUE *argv, VALUE self) {
+    AGLine3 *arg1 = (AGLine3 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLine3, 1);
+    result = ((AGLine3 const *)arg1)->direction();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGLine3_to_s(int argc, VALUE *argv, VALUE self) {
+    AGLine3 *arg1 = (AGLine3 *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLine3, 1);
+    result = ((AGLine3 const *)arg1)->toString();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static void
+free_AGLine3(AGLine3 *arg1) {
+    delete arg1;
+}
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGCollisionData_allocate(VALUE self) {
@@ -22389,6 +22598,81 @@ _wrap_AGTriangle2_to_s(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_AGTriangle2(AGTriangle2 *arg1) {
+    delete arg1;
+}
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGTriangle3_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGTriangle3_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGTriangle3);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGTriangle3(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGVector3 *arg3 = 0 ;
+    AGTriangle3 *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg3, SWIGTYPE_p_AGVector3, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGTriangle3 *)new AGTriangle3((AGVector3 const &)*arg1,(AGVector3 const &)*arg2,(AGVector3 const &)*arg3);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_AGTriangle3_collide(int argc, VALUE *argv, VALUE self) {
+    AGTriangle3 *arg1 = (AGTriangle3 *) 0 ;
+    AGLine3 *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTriangle3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGLine3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AGTriangle3 const *)arg1)->collide((AGLine3 const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGTriangle3_toString(int argc, VALUE *argv, VALUE self) {
+    AGTriangle3 *arg1 = (AGTriangle3 *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTriangle3, 1);
+    result = ((AGTriangle3 const *)arg1)->toString();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static void
+free_AGTriangle3(AGTriangle3 *arg1) {
     delete arg1;
 }
 static VALUE
@@ -22759,6 +23043,22 @@ _wrap_new_AGVector4__SWIG_2(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_new_AGVector4__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = 0 ;
+    float arg2 ;
+    AGVector4 *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg2 = (float) NUM2DBL(argv[1]);
+    result = (AGVector4 *)new AGVector4((AGVector3 const &)*arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGVector4_allocate(VALUE self) {
@@ -22777,7 +23077,7 @@ _wrap_AGVector4_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGVector4__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector4__SWIG_4(int argc, VALUE *argv, VALUE self) {
     AGVector4 *result;
     
     if ((argc < 0) || (argc > 0))
@@ -22798,7 +23098,7 @@ static VALUE _wrap_new_AGVector4(int nargs, VALUE *args, VALUE self) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
-        return _wrap_new_AGVector4__SWIG_3(nargs, args, self);
+        return _wrap_new_AGVector4__SWIG_4(nargs, args, self);
     }
     if (argc == 1) {
         int _v;
@@ -22808,6 +23108,21 @@ static VALUE _wrap_new_AGVector4(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             return _wrap_new_AGVector4__SWIG_2(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGVector4__SWIG_3(nargs, args, self);
+            }
         }
     }
     if (argc == 3) {
@@ -23121,6 +23436,26 @@ _wrap_AGVector4___div__(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector4___neg__(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector4 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
+    result = ((AGVector4 const *)arg1)->operator -();
+    
+    {
+        AGVector4 * resultptr;
+        resultptr = new AGVector4((AGVector4 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGVector4___eq__(int argc, VALUE *argv, VALUE self) {
     AGVector4 *arg1 = (AGVector4 *) 0 ;
     AGVector4 *arg2 = 0 ;
@@ -23285,6 +23620,26 @@ _wrap_AGVector4___mod__(int argc, VALUE *argv, VALUE self) {
         AGVector4 * resultptr;
         resultptr = new AGVector4((AGVector4 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector4_dim3(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
+    result = ((AGVector4 const *)arg1)->dim3();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
     }
     return vresult;
 }
@@ -34923,9 +35278,9 @@ static void *_p_AGRadioGroupTo_p_AGListener(void *x) {
 static void *_p_AGSoundTo_p_AGListener(void *x) {
     return (void *)((AGListener *) (AGMessageObject *)(AGWidget *) ((AGSound *) x));
 }
-static swig_type_info _swigt__p_const_iterator[] = {{"_p_const_iterator", 0, "const_iterator *", 0, 0, 0, 0},{"_p_const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_iterator[] = {{"_p_iterator", 0, "iterator *", 0, 0, 0, 0},{"_p_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGBackground[] = {{"_p_AGBackground", 0, "AGBackground *", 0, 0, 0, 0},{"_p_AGBackground", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_iterator[] = {{"_p_iterator", 0, "iterator *", 0, 0, 0, 0},{"_p_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_const_iterator[] = {{"_p_const_iterator", 0, "const_iterator *", 0, 0, 0, 0},{"_p_const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Node__NodeVector__iterator[] = {{"_p_Node__NodeVector__iterator", 0, "Node::NodeVector::iterator *|Node::iterator *", 0, 0, 0, 0},{"_p_Node__NodeVector__iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Node__NodeVector__const_iterator[] = {{"_p_Node__NodeVector__const_iterator", 0, "Node::NodeVector::const_iterator *|Node::const_iterator *", 0, 0, 0, 0},{"_p_Node__NodeVector__const_iterator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Document[] = {{"_p_Document", 0, "Document *", 0, 0, 0, 0},{"_p_Document", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -34968,6 +35323,7 @@ static swig_type_info _swigt__p_AGFontEngine[] = {{"_p_AGFontEngine", 0, "AGFont
 static swig_type_info _swigt__p_AGPoint[] = {{"_p_AGPoint", 0, "AGPoint *", 0, 0, 0, 0},{"_p_AGPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGTriangle2[] = {{"_p_AGTriangle2", 0, "AGTriangle2 *", 0, 0, 0, 0},{"_p_AGTriangle2", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGWindow[] = {{"_p_AGWindow", 0, "AGWindow *", 0, 0, 0, 0},{"_p_AGWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGTriangle3[] = {{"_p_AGTriangle3", 0, "AGTriangle3 *", 0, 0, 0, 0},{"_p_AGTriangle3", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGRect[] = {{"_p_AGRect", 0, "AGRect *", 0, 0, 0, 0},{"_p_AGRect", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSDLScreen[] = {{"_p_AGSDLScreen", 0, "AGSDLScreen *", 0, 0, 0, 0},{"_p_AGSDLScreen", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGPoint3[] = {{"_p_AGPoint3", 0, "AGPoint3 *", 0, 0, 0, 0},{"_p_AGPoint3", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -34980,6 +35336,7 @@ static swig_type_info _swigt__p_SDL_PixelFormat[] = {{"_p_SDL_PixelFormat", 0, "
 static swig_type_info _swigt__p_AGTexture[] = {{"_p_AGTexture", 0, "AGTexture *", 0, 0, 0, 0},{"_p_AGTexture", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLine2[] = {{"_p_AGLine2", 0, "AGLine2 *", 0, 0, 0, 0},{"_p_AGLine2", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMatrix4[] = {{"_p_AGMatrix4", 0, "AGMatrix4 *", 0, 0, 0, 0},{"_p_AGMatrix4", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_AGLine3[] = {{"_p_AGLine3", 0, "AGLine3 *", 0, 0, 0, 0},{"_p_AGLine3", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Uint8[] = {{"_p_Uint8", 0, "Uint8 *", 0, 0, 0, 0},{"_p_Uint8", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_SDLMod[] = {{"_p_SDLMod", 0, "enum SDLMod *|SDLMod *", 0, 0, 0, 0},{"_p_SDLMod", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGRect2[] = {{"_p_AGRect2", 0, "AGRect2 *", 0, 0, 0, 0},{"_p_AGRect2", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -35013,9 +35370,9 @@ static swig_type_info _swigt__p_p_Node[] = {{"_p_p_Node", 0, "Node **", 0, 0, 0,
 static swig_type_info _swigt__p_AGTheme[] = {{"_p_AGTheme", 0, "AGTheme *", 0, 0, 0, 0},{"_p_AGTheme", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
-_swigt__p_const_iterator, 
-_swigt__p_iterator, 
 _swigt__p_AGBackground, 
+_swigt__p_iterator, 
+_swigt__p_const_iterator, 
 _swigt__p_Node__NodeVector__iterator, 
 _swigt__p_Node__NodeVector__const_iterator, 
 _swigt__p_Document, 
@@ -35058,6 +35415,7 @@ _swigt__p_AGFontEngine,
 _swigt__p_AGPoint, 
 _swigt__p_AGTriangle2, 
 _swigt__p_AGWindow, 
+_swigt__p_AGTriangle3, 
 _swigt__p_AGRect, 
 _swigt__p_AGSDLScreen, 
 _swigt__p_AGPoint3, 
@@ -35070,6 +35428,7 @@ _swigt__p_SDL_PixelFormat,
 _swigt__p_AGTexture, 
 _swigt__p_AGLine2, 
 _swigt__p_AGMatrix4, 
+_swigt__p_AGLine3, 
 _swigt__p_Uint8, 
 _swigt__p_SDLMod, 
 _swigt__p_AGRect2, 
@@ -35536,6 +35895,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector3.klass, "+", VALUEFUNC(_wrap_AGVector3___add__), -1);
     rb_define_method(cAGVector3.klass, "*", VALUEFUNC(_wrap_AGVector3___mul__), -1);
     rb_define_method(cAGVector3.klass, "/", VALUEFUNC(_wrap_AGVector3___div__), -1);
+    rb_define_method(cAGVector3.klass, "%", VALUEFUNC(_wrap_AGVector3___mod__), -1);
     rb_define_method(cAGVector3.klass, "==", VALUEFUNC(_wrap_AGVector3___eq__), -1);
     rb_define_method(cAGVector3.klass, "length", VALUEFUNC(_wrap_AGVector3_length), -1);
     rb_define_method(cAGVector3.klass, "length2", VALUEFUNC(_wrap_AGVector3_length2), -1);
@@ -35584,6 +35944,18 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     cAGLine2.mark = 0;
     cAGLine2.destroy = (void (*)(void *)) free_AGLine2;
     
+    cAGLine3.klass = rb_define_class_under(mLibantargisgui, "AGLine3", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGLine3, (void *) &cAGLine3);
+    rb_define_alloc_func(cAGLine3.klass, _wrap_AGLine3_allocate);
+    rb_define_method(cAGLine3.klass, "initialize", VALUEFUNC(_wrap_new_AGLine3), -1);
+    rb_define_method(cAGLine3.klass, "getV0", VALUEFUNC(_wrap_AGLine3_getV0), -1);
+    rb_define_method(cAGLine3.klass, "getV1", VALUEFUNC(_wrap_AGLine3_getV1), -1);
+    rb_define_method(cAGLine3.klass, "has", VALUEFUNC(_wrap_AGLine3_has), -1);
+    rb_define_method(cAGLine3.klass, "direction", VALUEFUNC(_wrap_AGLine3_direction), -1);
+    rb_define_method(cAGLine3.klass, "to_s", VALUEFUNC(_wrap_AGLine3_to_s), -1);
+    cAGLine3.mark = 0;
+    cAGLine3.destroy = (void (*)(void *)) free_AGLine3;
+    
     cAGCollisionData.klass = rb_define_class_under(mLibantargisgui, "AGCollisionData", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGCollisionData, (void *) &cAGCollisionData);
     rb_define_alloc_func(cAGCollisionData.klass, _wrap_AGCollisionData_allocate);
@@ -35610,6 +35982,15 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGTriangle2.klass, "to_s", VALUEFUNC(_wrap_AGTriangle2_to_s), -1);
     cAGTriangle2.mark = 0;
     cAGTriangle2.destroy = (void (*)(void *)) free_AGTriangle2;
+    
+    cAGTriangle3.klass = rb_define_class_under(mLibantargisgui, "AGTriangle3", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGTriangle3, (void *) &cAGTriangle3);
+    rb_define_alloc_func(cAGTriangle3.klass, _wrap_AGTriangle3_allocate);
+    rb_define_method(cAGTriangle3.klass, "initialize", VALUEFUNC(_wrap_new_AGTriangle3), -1);
+    rb_define_method(cAGTriangle3.klass, "collide", VALUEFUNC(_wrap_AGTriangle3_collide), -1);
+    rb_define_method(cAGTriangle3.klass, "toString", VALUEFUNC(_wrap_AGTriangle3_toString), -1);
+    cAGTriangle3.mark = 0;
+    cAGTriangle3.destroy = (void (*)(void *)) free_AGTriangle3;
     
     cAGRect2.klass = rb_define_class_under(mLibantargisgui, "AGRect2", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGRect2, (void *) &cAGRect2);
@@ -35645,6 +36026,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector4.klass, "+", VALUEFUNC(_wrap_AGVector4___add__), -1);
     rb_define_method(cAGVector4.klass, "*", VALUEFUNC(_wrap_AGVector4___mul__), -1);
     rb_define_method(cAGVector4.klass, "/", VALUEFUNC(_wrap_AGVector4___div__), -1);
+    rb_define_method(cAGVector4.klass, "-@", VALUEFUNC(_wrap_AGVector4___neg__), -1);
     rb_define_method(cAGVector4.klass, "==", VALUEFUNC(_wrap_AGVector4___eq__), -1);
     rb_define_method(cAGVector4.klass, "length", VALUEFUNC(_wrap_AGVector4_length), -1);
     rb_define_method(cAGVector4.klass, "length2", VALUEFUNC(_wrap_AGVector4_length2), -1);
@@ -35655,6 +36037,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector4.klass, "normalize3", VALUEFUNC(_wrap_AGVector4_normalize3), -1);
     rb_define_method(cAGVector4.klass, "nonZero", VALUEFUNC(_wrap_AGVector4_nonZero), -1);
     rb_define_method(cAGVector4.klass, "%", VALUEFUNC(_wrap_AGVector4___mod__), -1);
+    rb_define_method(cAGVector4.klass, "dim3", VALUEFUNC(_wrap_AGVector4_dim3), -1);
     rb_define_method(cAGVector4.klass, "to_s", VALUEFUNC(_wrap_AGVector4_to_s), -1);
     cAGVector4.mark = 0;
     cAGVector4.destroy = (void (*)(void *)) free_AGVector4;
