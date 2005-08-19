@@ -46,7 +46,8 @@
 
 
 class AGRect2;
-
+class AGBox3;
+class AGRect3;
 
 
 struct AGAngle
@@ -166,6 +167,7 @@ class AGVector3
   AGVector3 normal() const;
 
   float operator[](int index) const;
+  float &operator[](int index);
 
   bool nonZero() const;
 
@@ -474,6 +476,34 @@ class AGMatrix4
   AGVector4 getRow(size_t i) const;
 };
 
+// axis-aligned
+class AGRect3
+{
+  AGVector3 base,dir;
+ public:
+  AGRect3(const AGVector3 &pBase,const AGVector3 &pDir);
+
+  bool collides(const AGLine3&pLine) const;
+
+  std::string toString() const;
+};
+
+// axis-aligned
+class AGBox3
+{
+  AGVector3 base,dir;
+ public:
+  AGBox3(const AGVector3 &pBase,const AGVector3 &pDir);
+
+  void include(const AGVector3&p);
+  bool collides(const AGVector3&p) const;
+
+  bool collides(const AGLine3&p) const;
+
+  std::vector<AGRect3> getSides() const;
+
+  std::string toString() const;
+};
 
 
 #endif

@@ -533,6 +533,11 @@ float AGVector3::operator[](int index) const
   assert(index>=0 && index<3);
   return v[index];
 }
+float &AGVector3::operator[](int index)
+{
+  assert(index>=0 && index<3);
+  return v[index];
+}
 
 
 
@@ -1637,4 +1642,142 @@ AGVector4 AGMatrix4::getRow(size_t i) const
 {
   //  return AGVector4(get(i,0),get(i,1),get(i,2),get(i,3));
   return AGVector4(get(0,i),get(1,i),get(2,i),get(3,i));
+}
+
+///////////////////////////////////////////////////////////////
+// AGBox3
+///////////////////////////////////////////////////////////////
+
+AGBox3::AGBox3(const AGVector3 &pBase,const AGVector3 &pDir):
+  base(pBase),dir(pDir)
+{
+  // assert that pDir[i]>0
+  for(size_t i=0;i<3;i++)
+    if(dir[i]<0)
+      {
+	base[i]+=dir[i];
+	dir[i]=-dir[i];
+      }
+}
+
+void AGBox3::include(const AGVector3&p)
+{
+  AGVector3 b=base,b2=base+dir;
+
+  base[0]=std::min(b[0],p[0]);
+  base[1]=std::min(b[1],p[1]);
+  base[2]=std::min(b[2],p[2]);
+  AGVector3 n;
+  n[0]=std::max(b2[0],p[0]);
+  n[1]=std::max(b2[1],p[1]);
+  n[2]=std::max(b2[2],p[2]);
+  dir[0]=n[0]-base[0];
+  dir[1]=n[1]-base[1];
+  dir[2]=n[2]-base[2];
+}
+
+bool AGBox3::collides(const AGVector3&p) const
+{
+  return p[0]>=base[0] && p[1]>=base[1] && p[2]>=base[2] &&
+    p[0]<base[0]+dir[0] && p[1]<base[1]+dir[1] && p[2]<base[2]+dir[2];
+}
+bool AGBox3::collides(const AGLine3&p) const
+{
+  std::vector<AGRect3> sides=getSides();
+  for(std::vector<AGRect3>::iterator i=sides.begin();i!=sides.end();++i)
+    {
+      //      cdebug(i->toString());
+      if((*i).collides(p))
+	return true;
+    }
+  return false;
+}
+
+std::vector<AGRect3> AGBox3::getSides() const
+{
+  AGVector3 b2=base+dir;
+  std::vector<AGRect3> s;
+  s.push_back(AGRect3(base,AGVector3(dir[0],dir[1],0)));
+  s.push_back(AGRect3(base,AGVector3(dir[0],0,dir[2])));
+  s.push_back(AGRect3(base,AGVector3(0,dir[1],dir[2])));
+  s.push_back(AGRect3(b2,AGVector3(-dir[0],-dir[1],0)));
+  s.push_back(AGRect3(b2,AGVector3(-dir[0],0,-dir[2])));
+  s.push_back(AGRect3(b2,AGVector3(0,-dir[1],-dir[2])));
+  return s;
+}
+
+std::string AGBox3::toString() const
+{
+  std::ostringstream os;
+  os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
+  return os.str();
+}
+
+///////////////////////////////////////////////////////////////
+// AGRect3
+///////////////////////////////////////////////////////////////
+
+AGRect3::AGRect3(const AGVector3 &pBase,const AGVector3 &pDir):
+  base(pBase),dir(pDir)
+{
+  // assert that dir[i]>=0
+  for(size_t i=0;i<3;i++)
+    if(dir[i]<0)
+      {
+	base[i]+=dir[i];
+	dir[i]=-dir[i];
+      }
+}
+
+bool AGRect3::collides(const AGLine3&pLine) const
+{
+  AGVector3 d0,d1; // directions of rect's sides
+  if(dir[0]==0)
+    {
+      d0=AGVector3(0,dir[1],0);
+      d1=AGVector3(0,0,dir[2]);
+    }
+  else if(dir[1]==0)
+    {
+      d0=AGVector3(dir[0],0,0);
+      d1=AGVector3(0,0,dir[2]);
+    }
+  else
+    {
+      d0=AGVector3(dir[0],0,0);
+      d1=AGVector3(0,dir[1],0);
+    }
+
+  AGVector3 normal=d0%d1;
+
+  float v0=(pLine.getV0()-base)*normal;
+  float v1=(pLine.getV1()-base)*normal;
+  if(AGsign(v0)==AGsign(v1))
+    return false;
+
+  float vall=v1-v0;
+  float v=-v0/vall;
+  AGVector3 ip=pLine.getV1()*v+pLine.getV0()*(1-v);
+
+  //  cdebug("ip:"<<ip.toString());
+  //  cdebug("dist:"<<(ip-base)*normal);
+  
+  for(size_t i=0;i<3;i++)
+    {
+      if(fabs(dir[i])<0.0001)
+	continue;
+      if(ip[i]<base[i] || ip[i]>base[i]+dir[i])
+	{
+	  //	  cdebug("fail:"<<i);
+	  return false;
+	}
+    }
+  return true;
+}
+
+std::string AGRect3::toString() const
+{
+  std::ostringstream os;
+  os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
+  return os.str();
 }
