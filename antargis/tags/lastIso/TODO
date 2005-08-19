@@ -1,0 +1,120 @@
+
+[Gui/View]
+=================================================
+[M] pointing device for selecting man/sheep and so
+    data should be displayed in a view on the right
+[L] prevent flickering with constant sorting
+
+[Menu]
+=================================================
+[M] new layout and appearance
+[L] some images for the campaigns
+
+[Graphics]
+=================================================
+[L] support different grass height and different earth colors (editor)
+[L] check lighting of voxel-generation (is adding white light - should be multiplication)
+[L] convert spline to interpolating spline! => this halfes the tile-count
+
+[Game]
+=================================================
+[L] too much cpu-time used, when men are sitting
+[L] each man should have a name and an age
+[VL] reasonable quadtree-usage
+[L] computer-player only attacks when stock is used up
+[L] story-telling:
+	- uppopping windows (with image and text) / pause game
+	- history function
+	- browsing facility (scene=>number(person)=>text)
+
+[Editor]
+=================================================
+[L] separate editor from game
+[H] adding entities
+[H] nice selection of entities
+[M] adding trees/buildings
+[M] giving buildings/men names
+
+[Packaging]
+=================================================
+[L] installer for windows
+[L] installer for linux
+[M] common package for gui, antargis and tileset
+[M] reasonable installing/generation-places of tiles
+
+[Story]
+=================================================
+- main campaign:
+	- flashback on some victory-scene:
+		- look own from some tower upon an army
+		- look back from behind some warriors holding up some weapons
+	- scene of betrayal - some dark person stands above some king (in a hall)
+	- game begins -
+	- scene with some bodies lying around 
+
+* story
+  * Am Anfang kurzes Intro:
+    * verschleierter Rückblick auf Powermonger (Thorn & Tisch); danach Auszug; am Schluß irgendein Sieg
+  * DIFFERENT:
+	* flashback on some victory-scene:
+		- look down from some tower
+		- look back from behind some warriors holding up some weapons
+	* scene of betrayal - some dark person stands above some king
+
+  * 1.Szene: mit Kutsche und ein paar Leichen; auf der Seite sind noch die Angreifer
+  * 2.Szene: Höhle mit Druide
+
+
+* Formation
+  Sitzen:
+    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
+  Laufen:
+    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
+  => 2 speeds: Laufen, gehen
+  
+* tiles:
+  - aufteilen wasser/land
+  - land speichern mit minimum bildung, wenn minimale höhe höher als wasser
+  - bilder schneiden /rundum - um platz zu sparen
+  - speichern der 0-position in XML-File
+  - (Bilder zusammen in große Sammlung speichern)
+
+* Grafik:
+  - Schnee: einteilen der Bilder in Schnee/non-Schnee und dann langsam hinzufügen?
+  - Blumen
+  - Büsche
+  
+7) Schafe/Futteranzeige
+8) Sterben/Abhauen wenn kein Futter da
+9) HouseEntity
+10) HouseEntity-Player
+	a) Futter sammeln
+	b) Fortpflanzung
+11) Loyalität implementieren
+	a) zu viele Kämpfe => runter
+	b) Kampf gewonnen => hoch!!
+	c) Gut im Futter => hoch
+	d) rasten => hoch
+	e) schlechter Wetter =>runter
+	
+	f) wenn runter => abhauen zu nächstem HouseEntity (sowohl für HouseEntities as auch für Heros als Ausgangsposition)
+
+  
+* scrolling-borders  
+* Level-Unterstützung per ruby
+* Editing mode: heightstep (+/-), radius (through buttons or so)
+* saving/loading-dialog
+* integrate winter/summer into AntargisMap
+* Water-animation:
+	- simply subdevide water/land-tiles into land and water, with land being truncated below the height of water - afterwards add water and land tiles.
+* Lighting:
+	- overlay tiles with black rectangles (alpha=0.3 or so), maybe align rectangles (or better quads, or even better 3 points per iso-border) along tiles. maybe even use blending alpha
+	  from 0.3 to 0.8 or so 
+	- this can also be used for fog of war
+	- using stencil buffer
+	- overwriting with texture decreases stencil (or sets it to 0)
+	- overwriting with rectangle incs stencil (or sets it to 1), but only if stencil=0
+	- feiern!!!!!!!!!
+  - einfacher mit VertexColors, beim blitting!! wird auch nur da gemalt, wo es sein soll!
+  
+* fallende Bäume - einfach die Kontrollpunkte in Baum speichern, erst danach rendern, Kontrollpunkte drehen um Fußpunkt, dabei immer über 0-Ebene halten - so kollidiert der Baum auch mit Erde

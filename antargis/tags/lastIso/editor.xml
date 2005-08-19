@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<layout geometry2="(0,0,1024,768)" name="GameLayout">
+  <!-- main game layout -->
+	<table cols="2" rows="1" name="table1">
+		<colsize col="1" fixed="216"/>
+		<antRubyEditView col="0" row="0" name="mainView"/>
+		<table col="1" row="0" cols="1" rows="6">
+			<rowsize row="0" fixed="50"/>
+			<rowsize row="1" fixed="200"/>
+			<rowsize row="3" fixed="216"/>
+			<rowsize row="4" fixed="32"/>
+			<rowsize row="5" fixed="216"/>
+			<table col="0" row="0" cols="4" rows="2">
+				<rowsize row="0" fixed="50"/>
+				<colsize col="0" fixed="50"/>
+				<colsize col="1" fixed="50"/>
+				<colsize col="2" fixed="50"/>
+				<button col="0" row="0" theme="antButton" name="pause" caption-image="data/pause.png"/>
+				<button col="1" row="0" theme="antButton" name="options" caption-image="data/options.png"/>
+				<button col="2" row="0" theme="antButton" name="quit" caption-image="data/door.png"/>
+			</table>
+			<layout col="0" row="1" filename="editorbuttons.xml"/>
+			<antInventory col="0" row="3">
+				<table col="1" row="1" cols="2" rows="8" geometry="(4,4,208,208)">
+					<button theme="antButton" name="invTitle" geometry="(0,0,208,26)" enabled="false"/>
+					<text col="0" row="1" caption="Wood" align="left"/>
+					<text col="0" row="2" caption="Stone" align="left"/>
+					<text col="0" row="3" caption="Men" align="left"/>
+					
+					<text col="1" row="1" caption="0" align="right" name="wood"/>
+					<text col="1" row="2" caption="0" align="right" name="stone"/>
+					<text col="1" row="3" caption="0" align="right" name="men"/>
+				</table>
+			</antInventory>
+			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
+			<antMiniView col="0" row="5" name="miniMap"/>
+			
+		</table>
+	</table>
+</layout>

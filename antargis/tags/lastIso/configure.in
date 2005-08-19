@@ -1,0 +1,44 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+AC_INIT(README)
+
+VERSION=0.0.1
+
+AM_INIT_AUTOMAKE(antargis,$VERSION)
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AM_PROG_LIBTOOL
+AC_PROG_INSTALL
+# Checks for libraries.
+AC_CHECK_LIB(SDL,SDL_BlitSurface)
+AC_CHECK_LIB(SDL_ttf,TTF_Init)
+AC_CHECK_LIB(SGE,sge_FilledRect)
+AC_CHECK_LIB(GLU,gluPerspective)
+AC_CHECK_LIB(physfs,PHYSFS_init)
+#AC_CHECK_LIB(ruby1.8-dbg,rb_gc_mark)
+AC_CHECK_LIB(antargisgui,antargisguilib)
+
+RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
+RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
+
+AC_SUBST(RUBY_INCLUDE_DIR)
+AC_SUBST(RUBY_INSTALL_DIR)
+
+#INCLUDES = include
+# Checks for header files.
+
+
+CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -O2 -DEDITING -Wall -g -DUSE_RUBY -I/usr/local/include/antargisgui -I$RUBY_INCLUDE_DIR"
+LDFLAGS="$LDFLAGS `sdl-config --libs`"
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+AC_OUTPUT([ 
+Makefile \
+src/Makefile \
+data/Makefile \
+graphics/Makefile \
+ ])
