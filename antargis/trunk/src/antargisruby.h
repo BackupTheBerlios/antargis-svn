@@ -39,17 +39,18 @@ class SwigDirector_AGSDLScreen : public AGSDLScreen, public Swig::Director {
 
 public:
     SwigDirector_AGSDLScreen(VALUE self, SDL_Surface *s);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest);
-    virtual void tile(AGTexture const &pSource, AGRect const &pDest);
-    virtual void flip();
-    virtual void drawRect(AGRect const &pRect, AGColor const &c);
-    virtual void putPixel(int x, int y, AGColor const &c);
-    virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
-    virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
+    virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
+    virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
+    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
+    virtual void tile(AGTexture const &pSource, AGRect const &pDest);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual SDL_Surface *newSurface(int x, int y);
+    virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
+    virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void drawRect(AGRect const &pRect, AGColor const &c);
+    virtual void flip();
 };
 
 
@@ -165,6 +166,27 @@ public:
 };
 
 
+class SwigDirector_AGVector : public AGVector, public Swig::Director {
+
+public:
+    SwigDirector_AGVector(VALUE self, float pX, float pY, float pZ = 0.0f);
+    SwigDirector_AGVector(VALUE self, AGAngle const &a);
+    SwigDirector_AGVector(VALUE self, AGVector const &a);
+    SwigDirector_AGVector(VALUE self);
+    virtual ~SwigDirector_AGVector();
+};
+
+
+class SwigDirector_AGPointF : public AGPointF, public Swig::Director {
+
+public:
+    SwigDirector_AGPointF(VALUE self);
+    SwigDirector_AGPointF(VALUE self, float pX, float pY, float pZ = 1.0f);
+    SwigDirector_AGPointF(VALUE self, AGVector const &p);
+    virtual ~SwigDirector_AGPointF();
+};
+
+
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:
@@ -223,6 +245,7 @@ public:
     virtual bool eventKeyDown(AGEvent const *m2);
     virtual bool eventFrame(float pTime);
     virtual bool eventFrameEnd(float pTime);
+    virtual void eventChangedRes();
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
@@ -916,21 +939,25 @@ public:
     SwigDirector_AGPainter(VALUE self);
     SwigDirector_AGPainter(VALUE self, AGPainter const &p);
     SwigDirector_AGPainter(VALUE self, AGPaintTarget &pTarget);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGColor const &pColor);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual void tile(AGTexture const &pSource);
+    virtual void drawCircle(AGPoint const &p, float rad, AGColor const &c);
     virtual ~SwigDirector_AGPainter();
-    virtual void tile(AGSurface const &pSource, AGRect const &pDest);
+    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
     virtual void blit(AGSurface const &pSource, AGRect const &pDest);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
+    virtual void tile(AGSurface const &pSource, AGRect const &pDest);
+    virtual void blit(AGTexture const &pSource, AGRectF const &pDest, AGRectF const &pSrc);
     virtual void tile(AGSurface const &pSource);
     virtual void putPixel(AGPoint const &p, AGColor const &c);
     virtual void drawRect(AGRect const &pRect, AGColor const &c);
+    virtual void blitTri(AGTexture const &pSource, AGTriangle const &pSrc, AGTriangle const &pDest);
 };
 
 

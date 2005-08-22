@@ -23,7 +23,7 @@
 
 #include <iostream>
 #include "ag_xml.h"
-
+#include <cmath>
 
 
 struct Pos3D

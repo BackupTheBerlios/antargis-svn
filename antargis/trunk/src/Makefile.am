@@ -8,7 +8,8 @@ libantargis_la_SOURCES = ant_geometry.cpp ant_rect.cpp decast.cpp game.cpp \
  game.h map.h md5.h minimap.h mpng.h myapp.h mystring.h pmd5.h quadtree.h \
  rain.h random_map.h serialize.h store.h texture_cache.h tree.h view.h voxel_gen.h voxel.h antargisruby.cc antargisruby.h \
  jobs.h jobs.cc entity.cc entity.h random_map.cc
-LDADD = -lantargis
+LDADD = -lantargis -L$(RUBY_INSTALL_DIR)
+libantargis_la_LIBADD = -L$(RUBY_INSTALL_DIR)
 
 # old:
 #ant_house.h ant_house.cc  ant_hero.h ant_hero.cc  ant_tree.h ant_tree.cc ant_boss.h ant_boss.cc ant_man.h ant_man.cc

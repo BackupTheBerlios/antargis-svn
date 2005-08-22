@@ -22,6 +22,7 @@
 #define STORE_H
 
 #include "mpng.h"
+#include "ag_fs.h"
 
 struct Filename
 {
@@ -58,7 +59,7 @@ inline SDL_Surface *convert(const std::string &s)
 template<class R>
 R convert(Filename f)
 {
-  return convert<R>(loadFile(f));
+  return convert<R>(loadFile(f.name));
 }
 
 inline bool toBool(const std::string &s)
