@@ -26,6 +26,8 @@
 #include <map>
 #include <list>
 #include <ag_tools.h>
+#include <ag_xml.h>
+#include <ag_debug.h>
 
 #include <ruby.h>
 
@@ -170,6 +172,17 @@ AGVector2::AGVector2(const AGAngle &a)
 AGVector2::AGVector2()
 {
   v[0]=v[1]=0;
+}
+
+void AGVector2::saveXML(Node &node) const
+{
+  node.set("x",::toString(v[0]));
+  node.set("y",::toString(v[1]));
+}
+void AGVector2::loadXML(const Node &node)
+{
+  v[0]=toFloat(node.get("x"));
+  v[1]=toFloat(node.get("y"));
 }
 
 
@@ -355,6 +368,21 @@ AGVector3::AGVector3()
   v[0]=v[1]=0;
   v[2]=0.0f;
 }
+
+void AGVector3::saveXML(Node &node) const
+{
+  node.set("x",::toString(v[0]));
+  node.set("y",::toString(v[1]));
+  node.set("z",::toString(v[2]));
+}
+void AGVector3::loadXML(const Node &node)
+{
+  v[0]=toFloat(node.get("x"));
+  v[1]=toFloat(node.get("y"));
+  v[2]=toFloat(node.get("z"));
+}
+
+
 
 
 /*
@@ -992,6 +1020,43 @@ AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y,1),v1(x+w,y+h,1)
 {
 }
+
+std::list<AGRect2> AGRect2::split() const
+{
+  std::list<AGRect2> l;
+  float hw=v1[0]-v0[0];
+  float hh=v1[1]-v0[1];
+  l.push_back(AGRect2(v0[0]   ,v0[1]   ,hw,hh));
+  l.push_back(AGRect2(v0[0]+hw,v0[1]   ,hw,hh));
+  l.push_back(AGRect2(v0[0]   ,v0[1]+hh,hw,hh));
+  l.push_back(AGRect2(v0[0]+hw,v0[1]+hh,hw,hh));
+
+  return l;
+}
+
+
+bool AGRect2::contains(const AGRect2 &v) const
+{
+  return contains(v.getV0()) && contains(v.getV1()) && contains(v.getV01()) && contains(v.getV10());
+}
+AGVector3 AGRect2::getV0() const
+{
+  return v0;
+}
+AGVector3 AGRect2::getV1() const
+{
+  return v1;
+}
+AGVector3 AGRect2::getV01() const
+{
+  return AGVector3(v0[0],v1[1],1);
+}
+AGVector3 AGRect2::getV10() const
+{
+  return AGVector3(v1[0],v0[1],1);
+}
+
+
 
 bool AGRect2::contains(const AGVector3 &v) const
 {

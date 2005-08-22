@@ -873,70 +873,71 @@ type_error:
 #define  SWIGTYPE_p_AGColor swig_types[27] 
 #define  SWIGTYPE_p_AGBox3 swig_types[28] 
 #define  SWIGTYPE_p_AGLayoutCreator swig_types[29] 
-#define  SWIGTYPE_p_AGButton swig_types[30] 
-#define  SWIGTYPE_p_std__vectorTNode_t swig_types[31] 
-#define  SWIGTYPE_p_AGSurface swig_types[32] 
-#define  SWIGTYPE_p_SDL_Surface swig_types[33] 
-#define  SWIGTYPE_p_std__vectorTAGLine2_t swig_types[34] 
-#define  SWIGTYPE_p_std__vectorTNode_p_t swig_types[35] 
-#define  SWIGTYPE_p_AGImage swig_types[36] 
-#define  SWIGTYPE_p_ParserException swig_types[37] 
+#define  SWIGTYPE_p_std__listTAGRect2_t swig_types[30] 
+#define  SWIGTYPE_p_AGButton swig_types[31] 
+#define  SWIGTYPE_p_std__vectorTNode_t swig_types[32] 
+#define  SWIGTYPE_p_AGSurface swig_types[33] 
+#define  SWIGTYPE_p_SDL_Surface swig_types[34] 
+#define  SWIGTYPE_p_std__vectorTAGLine2_t swig_types[35] 
+#define  SWIGTYPE_p_std__vectorTNode_p_t swig_types[36] 
+#define  SWIGTYPE_p_AGImage swig_types[37] 
 #define  SWIGTYPE_p_Uint32 swig_types[38] 
 #define  SWIGTYPE_p_AGApplication swig_types[39] 
-#define  SWIGTYPE_p_AGSDLEvent swig_types[40] 
-#define  SWIGTYPE_p_AGWidget swig_types[41] 
-#define  SWIGTYPE_p_AGMessageObject swig_types[42] 
-#define  SWIGTYPE_p_AGFontEngine swig_types[43] 
-#define  SWIGTYPE_p_AGPoint swig_types[44] 
-#define  SWIGTYPE_p_AGTriangle2 swig_types[45] 
-#define  SWIGTYPE_p_AGWindow swig_types[46] 
-#define  SWIGTYPE_p_AGTriangle3 swig_types[47] 
-#define  SWIGTYPE_p_AGRect swig_types[48] 
-#define  SWIGTYPE_p_AGSDLScreen swig_types[49] 
-#define  SWIGTYPE_p_AGPoint3 swig_types[50] 
-#define  SWIGTYPE_p_AGPainter swig_types[51] 
-#define  SWIGTYPE_p_AGText swig_types[52] 
-#define  SWIGTYPE_p_AGListBox swig_types[53] 
-#define  SWIGTYPE_p_AGMatrix3 swig_types[54] 
-#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[55] 
-#define  SWIGTYPE_p_SDL_PixelFormat swig_types[56] 
-#define  SWIGTYPE_p_AGTexture swig_types[57] 
-#define  SWIGTYPE_p_AGLine2 swig_types[58] 
-#define  SWIGTYPE_p_AGMatrix4 swig_types[59] 
-#define  SWIGTYPE_p_AGLine3 swig_types[60] 
-#define  SWIGTYPE_p_Uint8 swig_types[61] 
-#define  SWIGTYPE_p_SDLMod swig_types[62] 
-#define  SWIGTYPE_p_AGRect2 swig_types[63] 
-#define  SWIGTYPE_p_AGRect3 swig_types[64] 
-#define  SWIGTYPE_p_SDL_Rect swig_types[65] 
-#define  SWIGTYPE_p_SDL_Event swig_types[66] 
-#define  SWIGTYPE_p_GLuint swig_types[67] 
-#define  SWIGTYPE_p_AGSurfaceManager swig_types[68] 
-#define  SWIGTYPE_p_AGTextureManager swig_types[69] 
-#define  SWIGTYPE_p_AGEdit swig_types[70] 
-#define  SWIGTYPE_p_AGScreenWidget swig_types[71] 
-#define  SWIGTYPE_p_AGRadio swig_types[72] 
-#define  SWIGTYPE_p_std__ostringstream swig_types[73] 
-#define  SWIGTYPE_p_AGVector2 swig_types[74] 
-#define  SWIGTYPE_p_unsigned_long swig_types[75] 
-#define  SWIGTYPE_p_AGCaption swig_types[76] 
-#define  SWIGTYPE_p_AGVector3 swig_types[77] 
-#define  SWIGTYPE_p_AGVector4 swig_types[78] 
-#define  SWIGTYPE_p_std__string swig_types[79] 
-#define  SWIGTYPE_p_AGRadioGroup swig_types[80] 
-#define  SWIGTYPE_p_AGEvent swig_types[81] 
-#define  SWIGTYPE_p_AGMenuEvent swig_types[82] 
-#define  SWIGTYPE_p_AGMouseEvent swig_types[83] 
-#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[84] 
-#define  SWIGTYPE_p_AGPaintTarget swig_types[85] 
-#define  SWIGTYPE_p_SDLKey swig_types[86] 
-#define  SWIGTYPE_p_AGListener swig_types[87] 
-#define  SWIGTYPE_p_AGCPPListener swig_types[88] 
-#define  SWIGTYPE_p_float swig_types[89] 
-#define  SWIGTYPE_p_Node swig_types[90] 
-#define  SWIGTYPE_p_p_Node swig_types[91] 
-#define  SWIGTYPE_p_AGTheme swig_types[92] 
-static swig_type_info *swig_types[94];
+#define  SWIGTYPE_p_ParserException swig_types[40] 
+#define  SWIGTYPE_p_AGSDLEvent swig_types[41] 
+#define  SWIGTYPE_p_AGWidget swig_types[42] 
+#define  SWIGTYPE_p_AGMessageObject swig_types[43] 
+#define  SWIGTYPE_p_AGFontEngine swig_types[44] 
+#define  SWIGTYPE_p_AGPoint swig_types[45] 
+#define  SWIGTYPE_p_AGTriangle2 swig_types[46] 
+#define  SWIGTYPE_p_AGWindow swig_types[47] 
+#define  SWIGTYPE_p_AGTriangle3 swig_types[48] 
+#define  SWIGTYPE_p_AGRect swig_types[49] 
+#define  SWIGTYPE_p_AGSDLScreen swig_types[50] 
+#define  SWIGTYPE_p_AGPoint3 swig_types[51] 
+#define  SWIGTYPE_p_AGPainter swig_types[52] 
+#define  SWIGTYPE_p_AGText swig_types[53] 
+#define  SWIGTYPE_p_AGListBox swig_types[54] 
+#define  SWIGTYPE_p_AGMatrix3 swig_types[55] 
+#define  SWIGTYPE_p_std__vectorTstd__string_t swig_types[56] 
+#define  SWIGTYPE_p_SDL_PixelFormat swig_types[57] 
+#define  SWIGTYPE_p_AGTexture swig_types[58] 
+#define  SWIGTYPE_p_AGLine2 swig_types[59] 
+#define  SWIGTYPE_p_AGMatrix4 swig_types[60] 
+#define  SWIGTYPE_p_AGLine3 swig_types[61] 
+#define  SWIGTYPE_p_Uint8 swig_types[62] 
+#define  SWIGTYPE_p_SDLMod swig_types[63] 
+#define  SWIGTYPE_p_AGRect2 swig_types[64] 
+#define  SWIGTYPE_p_AGRect3 swig_types[65] 
+#define  SWIGTYPE_p_SDL_Rect swig_types[66] 
+#define  SWIGTYPE_p_SDL_Event swig_types[67] 
+#define  SWIGTYPE_p_GLuint swig_types[68] 
+#define  SWIGTYPE_p_AGSurfaceManager swig_types[69] 
+#define  SWIGTYPE_p_AGTextureManager swig_types[70] 
+#define  SWIGTYPE_p_AGEdit swig_types[71] 
+#define  SWIGTYPE_p_AGScreenWidget swig_types[72] 
+#define  SWIGTYPE_p_AGRadio swig_types[73] 
+#define  SWIGTYPE_p_std__ostringstream swig_types[74] 
+#define  SWIGTYPE_p_AGVector2 swig_types[75] 
+#define  SWIGTYPE_p_unsigned_long swig_types[76] 
+#define  SWIGTYPE_p_AGCaption swig_types[77] 
+#define  SWIGTYPE_p_AGVector3 swig_types[78] 
+#define  SWIGTYPE_p_AGVector4 swig_types[79] 
+#define  SWIGTYPE_p_std__string swig_types[80] 
+#define  SWIGTYPE_p_AGRadioGroup swig_types[81] 
+#define  SWIGTYPE_p_AGEvent swig_types[82] 
+#define  SWIGTYPE_p_AGMenuEvent swig_types[83] 
+#define  SWIGTYPE_p_AGMouseEvent swig_types[84] 
+#define  SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[85] 
+#define  SWIGTYPE_p_AGPaintTarget swig_types[86] 
+#define  SWIGTYPE_p_SDLKey swig_types[87] 
+#define  SWIGTYPE_p_AGListener swig_types[88] 
+#define  SWIGTYPE_p_AGCPPListener swig_types[89] 
+#define  SWIGTYPE_p_float swig_types[90] 
+#define  SWIGTYPE_p_Node swig_types[91] 
+#define  SWIGTYPE_p_p_Node swig_types[92] 
+#define  SWIGTYPE_p_AGTheme swig_types[93] 
+static swig_type_info *swig_types[95];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -20740,6 +20741,36 @@ _wrap_AGVector2_nonZero(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector2_saveXML(int argc, VALUE *argv, VALUE self) {
+    AGVector2 *arg1 = (AGVector2 *) 0 ;
+    Node *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector2, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Node, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    ((AGVector2 const *)arg1)->saveXML(*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGVector2_loadXML(int argc, VALUE *argv, VALUE self) {
+    AGVector2 *arg1 = (AGVector2 *) 0 ;
+    Node *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector2, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Node, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->loadXML((Node const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGVector2_to_s(int argc, VALUE *argv, VALUE self) {
     AGVector2 *arg1 = (AGVector2 *) 0 ;
     std::string result;
@@ -21361,6 +21392,36 @@ _wrap_AGVector3_nonZero(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector3_saveXML(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = (AGVector3 *) 0 ;
+    Node *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Node, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    ((AGVector3 const *)arg1)->saveXML(*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGVector3_loadXML(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = (AGVector3 *) 0 ;
+    Node *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Node, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->loadXML((Node const &)*arg2);
+    
+    return Qnil;
 }
 
 
@@ -22837,7 +22898,7 @@ _wrap_AGRect2___add__(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect2_contains(int argc, VALUE *argv, VALUE self) {
+_wrap_AGRect2_contains__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGRect2 *arg1 = (AGRect2 *) 0 ;
     AGVector3 *arg2 = 0 ;
     bool result;
@@ -22850,6 +22911,172 @@ _wrap_AGRect2_contains(int argc, VALUE *argv, VALUE self) {
     result = (bool)((AGRect2 const *)arg1)->contains((AGVector3 const &)*arg2);
     
     vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect2_contains__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    AGRect2 *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect2, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AGRect2 const *)arg1)->contains((AGRect2 const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE _wrap_AGRect2_contains(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGRect2_contains__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGRect2_contains__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGRect2_contains'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGRect2_split(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    SwigValueWrapper<std::list<AGRect2 > > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 1);
+    result = ((AGRect2 const *)arg1)->split();
+    
+    {
+        std::list<AGRect2 > * resultptr;
+        resultptr = new std::list<AGRect2 >((std::list<AGRect2 > &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__listTAGRect2_t, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect2_getV0(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 1);
+    result = ((AGRect2 const *)arg1)->getV0();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect2_getV1(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 1);
+    result = ((AGRect2 const *)arg1)->getV1();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect2_getV01(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 1);
+    result = ((AGRect2 const *)arg1)->getV01();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect2_getV10(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 1);
+    result = ((AGRect2 const *)arg1)->getV10();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
     return vresult;
 }
 
@@ -26143,68 +26370,6 @@ _wrap_AGApplication_delay(int argc, VALUE *argv, VALUE self) {
     (arg1)->delay(arg2);
     
     return Qnil;
-}
-
-
-static VALUE
-_wrap_AGApplication_mRubyObject_set(int argc, VALUE *argv, VALUE self) {
-    AGApplication *arg1 = (AGApplication *) 0 ;
-    bool arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
-    arg2 = RTEST(argv[0]);
-    if (arg1) (arg1)->mRubyObject = arg2;
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_AGApplication_mRubyObject_get(int argc, VALUE *argv, VALUE self) {
-    AGApplication *arg1 = (AGApplication *) 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
-    result = (bool) ((arg1)->mRubyObject);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_AGApplication_mRUBY_set(int argc, VALUE *argv, VALUE self) {
-    AGApplication *arg1 = (AGApplication *) 0 ;
-    VALUE arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
-    arg2 = argv[0];
-    if (arg1) (arg1)->mRUBY = arg2;
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_AGApplication_mRUBY_get(int argc, VALUE *argv, VALUE self) {
-    AGApplication *arg1 = (AGApplication *) 0 ;
-    VALUE result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
-    result = (VALUE) ((arg1)->mRUBY);
-    
-    vresult = result;
-    return vresult;
 }
 
 
@@ -35568,6 +35733,7 @@ static swig_type_info _swigt__p_std__vectorTAGRect3_t[] = {{"_p_std__vectorTAGRe
 static swig_type_info _swigt__p_AGColor[] = {{"_p_AGColor", 0, "AGColor *", 0, 0, 0, 0},{"_p_AGColor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGBox3[] = {{"_p_AGBox3", 0, "AGBox3 *", 0, 0, 0, 0},{"_p_AGBox3", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGLayoutCreator[] = {{"_p_AGLayoutCreator", 0, "AGLayoutCreator *", 0, 0, 0, 0},{"_p_AGLayoutCreator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_std__listTAGRect2_t[] = {{"_p_std__listTAGRect2_t", 0, "std::list<AGRect2 > *", 0, 0, 0, 0},{"_p_std__listTAGRect2_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGButton[] = {{"_p_AGButton", 0, "AGButton *", 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGButton, 0, 0, 0, 0, 0},{"_p_AGButton", 0, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGButton, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__vectorTNode_t[] = {{"_p_std__vectorTNode_t", 0, "std::vector<Node > *", 0, 0, 0, 0},{"_p_std__vectorTNode_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSurface[] = {{"_p_AGSurface", 0, "AGSurface *", 0, 0, 0, 0},{"_p_AGSurface", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -35575,9 +35741,9 @@ static swig_type_info _swigt__p_SDL_Surface[] = {{"_p_SDL_Surface", 0, "SDL_Surf
 static swig_type_info _swigt__p_std__vectorTAGLine2_t[] = {{"_p_std__vectorTAGLine2_t", 0, "std::vector<AGLine2 > *", 0, 0, 0, 0},{"_p_std__vectorTAGLine2_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_std__vectorTNode_p_t[] = {{"_p_std__vectorTNode_p_t", 0, "std::vector<Node * > *", 0, 0, 0, 0},{"_p_std__vectorTNode_p_t", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGImage[] = {{"_p_AGImage", 0, "AGImage *", 0, 0, 0, 0},{"_p_AGImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_Uint32[] = {{"_p_Uint32", 0, "Uint32 *", 0, 0, 0, 0},{"_p_Uint32", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGApplication[] = {{"_p_AGApplication", 0, "AGApplication *", 0, 0, 0, 0},{"_p_AGApplication", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_ParserException[] = {{"_p_ParserException", 0, "ParserException *", 0, 0, 0, 0},{"_p_ParserException", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGSDLEvent[] = {{"_p_AGSDLEvent", 0, "AGSDLEvent *", 0, 0, 0, 0},{"_p_AGSDLEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGWidget[] = {{"_p_AGWidget", 0, "AGWidget *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGWidget", 0, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGWidget, 0, 0, 0, 0, 0},{"_p_AGSound", _p_AGSoundTo_p_AGWidget, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_AGMessageObject[] = {{"_p_AGMessageObject", 0, "AGMessageObject *", 0, 0, 0, 0},{"_p_AGWindow", _p_AGWindowTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGListBox", _p_AGListBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCaption", _p_AGCaptionTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMenu", _p_AGMenuTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGApplication", _p_AGApplicationTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGButton", _p_AGButtonTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGVTiler", _p_AGVTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGEdit", _p_AGEditTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGTable", _p_AGTableTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGWidget", _p_AGWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGHTiler", _p_AGHTilerTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGScreenWidget", _p_AGScreenWidgetTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGImage", _p_AGImageTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGText", _p_AGTextTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGCheckBox", _p_AGCheckBoxTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGLayout", _p_AGLayoutTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGMessageObject", 0, 0, 0, 0, 0, 0},{"_p_AGRadio", _p_AGRadioTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGRadioGroup", _p_AGRadioGroupTo_p_AGMessageObject, 0, 0, 0, 0, 0},{"_p_AGSound", _p_AGSoundTo_p_AGMessageObject, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -35663,6 +35829,7 @@ _swigt__p_std__vectorTAGRect3_t,
 _swigt__p_AGColor, 
 _swigt__p_AGBox3, 
 _swigt__p_AGLayoutCreator, 
+_swigt__p_std__listTAGRect2_t, 
 _swigt__p_AGButton, 
 _swigt__p_std__vectorTNode_t, 
 _swigt__p_AGSurface, 
@@ -35670,9 +35837,9 @@ _swigt__p_SDL_Surface,
 _swigt__p_std__vectorTAGLine2_t, 
 _swigt__p_std__vectorTNode_p_t, 
 _swigt__p_AGImage, 
-_swigt__p_ParserException, 
 _swigt__p_Uint32, 
 _swigt__p_AGApplication, 
+_swigt__p_ParserException, 
 _swigt__p_AGSDLEvent, 
 _swigt__p_AGWidget, 
 _swigt__p_AGMessageObject, 
@@ -36140,6 +36307,8 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector2.klass, "normalize", VALUEFUNC(_wrap_AGVector2_normalize), -1);
     rb_define_method(cAGVector2.klass, "normal", VALUEFUNC(_wrap_AGVector2_normal), -1);
     rb_define_method(cAGVector2.klass, "nonZero", VALUEFUNC(_wrap_AGVector2_nonZero), -1);
+    rb_define_method(cAGVector2.klass, "saveXML", VALUEFUNC(_wrap_AGVector2_saveXML), -1);
+    rb_define_method(cAGVector2.klass, "loadXML", VALUEFUNC(_wrap_AGVector2_loadXML), -1);
     rb_define_method(cAGVector2.klass, "to_s", VALUEFUNC(_wrap_AGVector2_to_s), -1);
     cAGVector2.mark = 0;
     cAGVector2.destroy = (void (*)(void *)) free_AGVector2;
@@ -36169,6 +36338,8 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector3.klass, "normalize", VALUEFUNC(_wrap_AGVector3_normalize), -1);
     rb_define_method(cAGVector3.klass, "normal", VALUEFUNC(_wrap_AGVector3_normal), -1);
     rb_define_method(cAGVector3.klass, "nonZero", VALUEFUNC(_wrap_AGVector3_nonZero), -1);
+    rb_define_method(cAGVector3.klass, "saveXML", VALUEFUNC(_wrap_AGVector3_saveXML), -1);
+    rb_define_method(cAGVector3.klass, "loadXML", VALUEFUNC(_wrap_AGVector3_loadXML), -1);
     rb_define_method(cAGVector3.klass, "to_s", VALUEFUNC(_wrap_AGVector3_to_s), -1);
     cAGVector3.mark = 0;
     cAGVector3.destroy = (void (*)(void *)) free_AGVector3;
@@ -36265,6 +36436,11 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGRect2.klass, "collide", VALUEFUNC(_wrap_AGRect2_collide), -1);
     rb_define_method(cAGRect2.klass, "+", VALUEFUNC(_wrap_AGRect2___add__), -1);
     rb_define_method(cAGRect2.klass, "contains", VALUEFUNC(_wrap_AGRect2_contains), -1);
+    rb_define_method(cAGRect2.klass, "split", VALUEFUNC(_wrap_AGRect2_split), -1);
+    rb_define_method(cAGRect2.klass, "getV0", VALUEFUNC(_wrap_AGRect2_getV0), -1);
+    rb_define_method(cAGRect2.klass, "getV1", VALUEFUNC(_wrap_AGRect2_getV1), -1);
+    rb_define_method(cAGRect2.klass, "getV01", VALUEFUNC(_wrap_AGRect2_getV01), -1);
+    rb_define_method(cAGRect2.klass, "getV10", VALUEFUNC(_wrap_AGRect2_getV10), -1);
     rb_define_method(cAGRect2.klass, "setX", VALUEFUNC(_wrap_AGRect2_setX), -1);
     rb_define_method(cAGRect2.klass, "setY", VALUEFUNC(_wrap_AGRect2_setY), -1);
     rb_define_method(cAGRect2.klass, "x", VALUEFUNC(_wrap_AGRect2_x), -1);
@@ -36439,10 +36615,6 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGApplication.klass, "tryQuit", VALUEFUNC(_wrap_AGApplication_tryQuit), -1);
     rb_define_method(cAGApplication.klass, "getTicks", VALUEFUNC(_wrap_AGApplication_getTicks), -1);
     rb_define_method(cAGApplication.klass, "delay", VALUEFUNC(_wrap_AGApplication_delay), -1);
-    rb_define_method(cAGApplication.klass, "mRubyObject=", VALUEFUNC(_wrap_AGApplication_mRubyObject_set), -1);
-    rb_define_method(cAGApplication.klass, "mRubyObject", VALUEFUNC(_wrap_AGApplication_mRubyObject_get), -1);
-    rb_define_method(cAGApplication.klass, "mRUBY=", VALUEFUNC(_wrap_AGApplication_mRUBY_set), -1);
-    rb_define_method(cAGApplication.klass, "mRUBY", VALUEFUNC(_wrap_AGApplication_mRUBY_get), -1);
     cAGApplication.mark = (void (*)(void *)) AGApplication_markfunc;
     cAGApplication.destroy = (void (*)(void *)) free_AGApplication;
     rb_define_module_function(mLibantargisgui, "disableKeyrepeat", VALUEFUNC(_wrap_disableKeyrepeat), -1);

@@ -52,6 +52,12 @@ inline std::string toString(const bool&b)
     return "false";
 }
 
+inline bool toBool(const std::string &s)
+{
+  return(s=="true");
+}
+
+
 std::ostream &getDebug();
 std::vector<std::string> split(const std::string &n,const std::string &h);
 
@@ -66,6 +72,8 @@ std::vector<std::string> split(const std::string &n,const std::string &h);
 #define assertGL
 
 #else
+
+#include <ruby.h>
 
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
@@ -110,8 +118,14 @@ private:
   }
 };
 
+#define LINEINFO(x) (::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(x)).c_str()
+
 #define TRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 #define CTRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(((void*)this)))
+
+#undef assert
+#define assert(x) {if(!(x)) {cdebug("assertiong failed:"<<__STRING(x)); rb_raise(rb_eRuntimeError,((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()),""); } }
+
 
 #define Assert(x) assert(x)
 

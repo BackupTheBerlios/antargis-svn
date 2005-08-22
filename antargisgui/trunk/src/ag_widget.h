@@ -161,7 +161,7 @@ class AGWidget:public AGMessageObject
   friend void AGWidget_markfunc(void *ptr);
 
  public:
-#ifdef USE_RUBY
+#ifndef SWIG
   VALUE mRUBY;
   bool mRubyObject;
 #endif

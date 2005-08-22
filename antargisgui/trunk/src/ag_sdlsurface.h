@@ -63,7 +63,7 @@ class AGSDLScreen:public AGScreen
  private:
   SDL_Surface *s;
  public:
-#ifdef USE_RUBY
+#ifndef SWIG
   VALUE mRUBY;
   bool mRubyObject;
 #endif

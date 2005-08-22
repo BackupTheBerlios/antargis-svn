@@ -48,7 +48,7 @@
 class AGRect2;
 class AGBox3;
 class AGRect3;
-
+class Node;
 
 struct AGAngle
 {
@@ -105,6 +105,9 @@ class AGVector2
   float operator[](int index) const;
 
   bool nonZero() const;
+
+  void saveXML(Node &node) const;
+  void loadXML(const Node &node);
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -170,6 +173,9 @@ class AGVector3
   float &operator[](int index);
 
   bool nonZero() const;
+
+  void saveXML(Node &node) const;
+  void loadXML(const Node &node);
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -345,6 +351,15 @@ class AGRect2
   AGRect2 operator+(const AGVector3 &v) const;
 
   bool contains(const AGVector3 &v) const;
+  bool contains(const AGRect2 &v) const;
+
+  std::list<AGRect2> split() const;
+
+  AGVector3 getV0() const;
+  AGVector3 getV1() const;
+  AGVector3 getV01() const;
+  AGVector3 getV10() const;
+
 
   void setX(float p);
   void setY(float p);

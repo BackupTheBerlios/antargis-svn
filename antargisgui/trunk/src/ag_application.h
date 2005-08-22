@@ -63,9 +63,10 @@ class AGApplication:public AGMessageObject
   AGWidget *mainWidget;
 
  public:
+#ifndef SWIG
   bool mRubyObject;
   VALUE mRUBY;
-
+#endif
   friend void AGApplication_markfunc(void *ptr);
 };
 

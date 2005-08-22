@@ -37,7 +37,7 @@
 
 void AGFreeSurface(SDL_Surface *s)
 {
-  cdebug(s);
+  //  cdebug(s);
   SDL_FreeSurface(s);
 }
 
