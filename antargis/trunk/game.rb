@@ -25,10 +25,7 @@ $programDir=Dir.pwd+"/ruby"
 # add programdir to path
 $:.push($programDir)
 
-
-require 'libantargis'
-require 'antApp.rb'
-include Libantargis
+require 'antargislib.rb'
 
 require 'dialogs.rb'
 require 'ents.rb'

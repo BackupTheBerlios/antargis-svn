@@ -14,6 +14,7 @@ AC_PROG_INSTALL
 
 RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
 RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
+RUBY_LIB_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['rubylibdir']"`]
 
 
 # Checks for libraries.
@@ -31,6 +32,7 @@ AC_CHECK_LIB(antargisgui,antargisguilib,[],[],-L${RUBY_INSTALL_DIR})
 
 AC_SUBST(RUBY_INCLUDE_DIR)
 AC_SUBST(RUBY_INSTALL_DIR)
+AC_SUBST(RUBY_LIB_DIR)
 
 #INCLUDES = include
 # Checks for header files.
