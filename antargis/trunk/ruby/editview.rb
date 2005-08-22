@@ -21,16 +21,25 @@
 
 #!/usr/bin/ruby
 
-class AntRubyEditView<EditIsoView
+require 'libantargis'
+include Libantargis
+
+class AntRubyEditView<GLApp
 	include AGHandler
-	def initialize(w,r,pos,map)
-		super(w,r,pos,map)
-		setEditing(true)
-		setName("MYYYYEditView")
-		@showPoints=true
-		@layout=AGLayout.new(self,loadFile("edit_layout.xml"))
-		addChild(@layout)
-		
+	def initialize(w,h,map)
+		super(w,h)
+		$map=map
+		@map=map
+		@size=3
+		@terrain=TerrainMesh.new(@map)
+		setupLight
+		@map.setScene(getScene)
+		$scene=getScene
+		getScene.addNode(@terrain)
+	
+		@layout=AGLayout.new(nil,loadFile("data/gui/layout/edit_layout.xml"))
+		setMainWidget(@layout)
+		@mainWidget=@layout
 		addHandler(@layout.getChild("allWater"),:sigClick,:sigAllWater)
 		addHandler(@layout.getChild("grass"),:sigClick,:sigAllGrass)
 		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
@@ -47,13 +56,7 @@ class AntRubyEditView<EditIsoView
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
 		
-		#addHandler(@layout.getChild("stones"),:sigClick,:sigStones)
-		#addHandler(@layout.getChild("tower"),:sigClick,:sigTower)
-		#addHandler(@layout.getChild("hero"),:sigClick,:sigHero)
-		
 		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
-		
-		addHandler(@layout.getChild("pins"),:sigClick,:sigPoints)
 		
 		addHandler(@layout.getChild("edit1"),:sigClick,:sigEdit1)
 		addHandler(@layout.getChild("edit2"),:sigClick,:sigEdit2)
@@ -62,6 +65,48 @@ class AntRubyEditView<EditIsoView
 		addHandler(@layout.getChild("edit5"),:sigClick,:sigEdit5)
 		addHandler(@layout.getChild("edit10"),:sigClick,:sigEdit10)
 		addHandler(@layout.getChild("edit15"),:sigClick,:sigEdit15)
+	end
+		
+	def eventClick(list,button)
+		puts "------------------"
+		if list.length>0
+			if @modifier
+				puts @modifier
+				send(@modifier,list,button)
+			end
+		end
+		#super(list)
+		return
+	end
+	def editHeight(list,button)
+		list.each{|c|
+			if toTerrainMesh(c.node)==@terrain
+				puts "TERRAIN:"
+				puts c.node
+				puts @terrain
+				x=c.pos.x.to_i
+				y=c.pos.y.to_i
+				middle=@map.get(x,y)
+				if button==1
+					middle+=1
+				elsif button==3 #right
+					middle-=1
+				end
+				for dx in (x-@size)..(x+@size)
+					for dy in (y-@size)..(y+@size)
+						if dx>=0 and dx<=@map.getW and dy>=0 and dy<=@map.getH
+							d=Math::sqrt((dx-x)**2+(dy-y)**2)
+							v=1-(d/(@size))
+							v=[0,v].max
+							ov=@map.get(dx,dy)
+							cv=middle*v+ov*(1-v)
+							@map.set(dx,dy,cv)
+						end
+					end
+				end
+				@map.mapChanged
+			end
+		}
 	end
 	
 	def sigEdit1
@@ -97,11 +142,6 @@ class AntRubyEditView<EditIsoView
 		@modifier="edit"
 	end
 	
-	def sigPoints
-		@showPoints=(not @showPoints)
-		toggleShowPoints
-	end
-	
 	def sigRubber
 		@modifier="doRubber"
 	end
@@ -134,27 +174,21 @@ class AntRubyEditView<EditIsoView
 		return
 	end
 	
-	def editHeight(ents)
-		puts "EDITHEIGHT:"
-		puts toInt($clickEvent.getButton)
-		if toInt($clickEvent.getButton)==3
-			dir=-1
-		else
-			dir=1
-		end
-		pos=getMarkerPos
-		x=pos.x*2/TILE_WIDTH+2
-		y=pos.z*2/TILE_WIDTH+3
-		getMap.addFlat(x,y,15*dir,@size)
-		getMap.addFlat(x,y,30*dir,@size-1)
-	end
-		
-	def addEntity(ents)
-		if toInt($clickEvent.getButton)!=1
+	def addEntity(list,button)
+		pos=nil
+		list.each{|c|
+			if toTerrainMesh(c.node)==@terrain
+				pos=c.pos
+			end
+		}
+		if not pos
 			return
 		end
+		#if toInt($clickEvent.getButton)!=1
+		#	return
+		#end
 		puts "ADDENTITY"
-		pos=getMarkerPos
+		#pos=getMarkerPos
 		dorand=true
 		if @type==AntNewDeco
 			tree=@type.new(@decoType)
@@ -167,24 +201,22 @@ class AntRubyEditView<EditIsoView
 		else
 			tree=@type.new
 		end
-		puts "tree:"
+		puts "type:"
 		puts tree
-		addx=0
-		addz=0
-		if dorand then
-			addx=(rand()*32).to_i-16
-			addz=(rand()*32).to_i-16
-		end
-		tree.setPos2D(Pos2D.new(pos.x+addx,pos.z+addz))
+		tree.setPos(AGVector2.new(pos.x,pos.y))
 		getMap.insertEntity(tree)
 	end
 	
-	def edit(ents)
-		ents.each{|e|
-			e2=e.get
-			ent=getMap.getRuby(e2)
+	def edit(meshes,button)
+		meshes.each{|res|
+			node=res.node
+			puts "NODE:"
+			puts node
+			if node.class==Mesh
+			ent=getMap.getEntity(toMesh(node))
 			if ent
 				editProperties(ent)
+			end
 			end
 		}
 	end
@@ -202,64 +234,27 @@ class AntRubyEditView<EditIsoView
 		$screen.addChild(d)
 	end
 	
-	def doRubber(ents)
+	def doRubber(list,button)
 		puts "DOING RUBBER"
-		ents.each{|e|
-			e2=e.get
-			ent=getMap.getRuby(e2)
-			if ent==nil then ent=e2 end
-			getMap.removeEntity(ent)
+		list.each{|res|
+			mesh=res.node
+			ent=getMap.getEntity(toMesh(mesh))
+			if ent
+				getMap.removeEntity(ent)
+			end
 			break
 		}
 	end
 	
 	def sigAllWater
-		getMap.setAllWater
+		getMap.setHeight(-0.5)
+		#getMap.setAllWater
 	end
 	def sigAllGrass
-		getMap.setAllLand
+		getMap.setHeight(1.0)
+		#getMap.setAllLand
 	end
 	
-	def clickEntities(ents,event)
-		puts("CLICKENTS")
-		if @modifier
-			puts "METHODS"
-			$clickEvent=event
-			send(@modifier,ents)
-			$clickEvent=nil
-		end
-	end
-	
-	def clickMap(pos,event)
-		if not @showPoints
-			@markerPos=Pos3D.new(pos.x,0,pos.y)
-			editMarkClicked(pos,event)
-			@markerPos=nil
-		end
-	end
-	
-	def editMarkClicked(p,e)
-		puts "EDITMARKCLICKED"
-		if @modifier
-			puts "METHODS"
-			$clickEvent=e # dirty hack
-			send(@modifier,[])
-			$clickEvent=nil
-		end
-		
-		#puts @modifier.methods.sort
-	end
 	
 end
-
-class AntRubyEditViewCreator<AGLayoutCreator
-	def initialize()
-		super("antRubyEditView")
-	end
-	def create(parent,rect,node)
-		w=AntRubyEditView.new(parent,rect,Pos3D.new(0,0,0),$map)
-		return w
-	end
-end
-$antRubyEditViewCreator=AntRubyEditViewCreator.new
 

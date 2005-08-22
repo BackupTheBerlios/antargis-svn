@@ -23,7 +23,7 @@
 
 require 'ant_player.rb'
 
-class AntRubyMap<AntargisMap
+class AntRubyMap<AntMap
 	def initialize(w,h)
 		super(w,h)
 		@ents={}
@@ -85,8 +85,12 @@ class AntRubyMap<AntargisMap
 	def getRuby(ent)
 		getById(ent)
 	end
-	def getEntity(id)
-		getRuby(super(id))
+	#def getEntity(id)
+	#	getRuby(super(id))
+	#end
+	def pause
+	end
+	def unpause
 	end
 	def getByName(name)
 		if name.class!=String
@@ -104,11 +108,11 @@ class AntRubyMap<AntargisMap
 		}
 		
 		# disable GC, when called too often
-		if getGCcalls>3 then
-			GC.disable
-			@lastGC=0
-		end
-		resetGCcalls
+		#if getGCcalls>3 then
+		#	GC.disable
+		#	@lastGC=0
+		#end
+		#resetGCcalls
 		
 		# enable GC after 2 secs, when it's called too often
 		@lastGC+=time

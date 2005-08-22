@@ -30,7 +30,7 @@ class AntHeroMoveJob<AntHLJob
 	def initialize(hero,prio,pos,dist,doFormat=true)
 		@hero=hero
 		@prio=prio
-		@pos=Pos2D.new(pos.x,pos.y)#clone
+		@pos=AGVector2.new(pos.x,pos.y)#clone
 		@dist=dist
 		@myMoveReady=false
 		@sentFormat=[]
@@ -46,8 +46,8 @@ class AntHeroMoveJob<AntHLJob
 	def checkFormationMan(man)
 		if (not man.hasJob) then 
 			# check if is already there - don't know why this fails ATM
-			is=man.getPos2D
-			should=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
+			is=man.getAGVector2
+			should=@hero.getWalkFormation(man,@formatDir)+@hero.getAGVector2
 			if (is-should).norm>10 then
 				man.newMoveJob(0,should,0)
 			else
@@ -102,8 +102,8 @@ class AntHeroMoveJob<AntHLJob
 				ready=false
 			else
 				# check if is already there - don't know why this fails ATM
-				is=x.getPos2D
-				should=@hero.getWalkFormation(x,@formatDir)+@hero.getPos2D
+				is=x.getAGVector2
+				should=@hero.getWalkFormation(x,@formatDir)+@hero.getAGVector2
 				if (is-should).norm>10 then
 					ready=false
 					x.newMoveJob(0,should,@dist)
@@ -199,7 +199,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		dist=10000.0
 		mtarget=nil
 		tmen.each{|t|
-			d=(t.getPos2D-man.getPos2D).norm
+			d=(t.getAGVector2-man.getAGVector2).norm
 			if d<dist
 				dist=d
 				mtarget=t

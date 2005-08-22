@@ -58,7 +58,7 @@ end
 class AntStoryTalk<AntDialog
 	include AGHandler
 	def initialize(parent)
-		super(parent,"storytalk.xml")
+		super(parent,"data/gui/layout/storytalk.xml")
 		getMap().pause()
 		addHandler(toAGWindow(getChild("window")),:sigClose,:sigOk)
 		#addHandler(getChild("ok"),:sigClick,:sigClose)
@@ -81,7 +81,7 @@ end
 
 class AntQuitDialog<AntDialog
 	def initialize(parent)
-		super(parent,"quitquery.xml")
+		super(parent,"data/gui/layout/quitquery.xml")
 		setName("QuitDialog")
 	end
 	def sigOk
@@ -91,7 +91,7 @@ end
 
 class AntOptionsDialog<AntDialog
 	def initialize(parent)
-		super(parent,"optionsmenu.xml")
+		super(parent,"data/gui/layout/optionsmenu.xml")
 		setName("OptionsDialog")
 		addHandler(getChild("editmode"),:sigClick,:sigEditmode)
 		addHandler(getChild("save"),:sigClick,:sigSave)
@@ -117,7 +117,7 @@ end
 
 class AntSaveDialog<AntDialog
 	def initialize(parent)
-		super(parent,"savedialog.xml")
+		super(parent,"data/gui/layout/savedialog.xml")
 	end
 	def sigOk
 		filename=toAGEdit(getChild("Filename")).getText
@@ -133,7 +133,7 @@ end
 
 class AntLoadDialog<AntDialog
 	def initialize(parent)
-		super(parent,"loaddialog.xml")
+		super(parent,"data/gui/layout/loaddialog.xml")
 		d=getDirectory(toAGEdit(getChild("Directory")).getText)
 		@lb=toAGListBox(getChild("Files"))
 		puts d
@@ -158,7 +158,7 @@ end
 
 class AntPauseDialog<AntDialog
 	def initialize(parent)
-		super(parent,"pause.xml")
+		super(parent,"data/gui/layout/pause.xml")
 		setName("PauseDialog")
 		getMap.pause
 	end
@@ -170,7 +170,7 @@ end
 
 class AntEditPropDialog<AntDialog
 	def initialize(parent,ent)
-		super(parent,"editpropdialog.xml")
+		super(parent,"data/gui/layout/editpropdialog.xml")
 		@ent=ent
 		menCountW=toAGEdit(getChild("MenCount"))
 		nameW=toAGEdit(getChild("AntName"))

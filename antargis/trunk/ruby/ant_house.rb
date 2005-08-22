@@ -22,6 +22,7 @@
 #!/usr/bin/ruby
 
 require 'ant_boss.rb'
+require 'ant_tools.rb'
 
 class AntFlag<AntMyEntity
 	def initialize
@@ -45,7 +46,11 @@ class AntNewHouse<AntNewBoss #MyEntity
 		@atHome=[]
 		@lastBirth=0
 		
-		setVirtualY(250)
+#		setVirtualY(250)
+		mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
+		puts mesh
+		setMesh(mesh)
+		puts getMesh
 	end
 	
 	###############################
@@ -53,7 +58,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 	###############################
 	
 	# override this for reseting the flag's position
-	def setPos2D(p)
+	def setPos(p)
 		super(p)
 		if @flag then
 			p=getPos3D
@@ -122,7 +127,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 			puts "A MAN IS BORN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 			man=AntNewMan.new
 			getMap.insertEntity(man)
-			man.setPos2D(getPos2D)
+			man.setPos(getPos2D)
 			getMap.endChange
 			@lastBirth=-10*rand
 		end
@@ -205,7 +210,7 @@ class AntNewHouse<AntNewBoss #MyEntity
 	# says if entity is at home
 	def atHome(entity)
 		pd=entity.getPos2D-getPos2D
-		n=pd.norm2
+		n=pd.length2 #norm2
 		return n<30
 	end
 	
@@ -249,8 +254,15 @@ class AntNewHouse<AntNewBoss #MyEntity
 		return "antNewHouse"
 	end
 	
+	def getPos2D
+		r=super
+		puts r
+		puts "---"
+		return r
+	end
+	
 	def loadXML(node)
 		super(node)
-		setPos2D(getPos2D)
+		setPos(getPos2D)
 	end	
 end

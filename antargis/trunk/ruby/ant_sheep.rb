@@ -28,14 +28,11 @@
 
 class AntNewSheep<AntMyEntity
 	def initialize()
-		super(Pos2D.new(0,0))
+		super(AGVector2.new(0,0))
 		setType("sheep")
 		setSpeed 40
 		@lastBirth=0
-		setVirtualY(40)
-	end
-	def getTexture
-		return "sheep"+mDirNum.to_s+".png"
+		setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))
 	end
 	def saveXML(node)
 		super(node)

@@ -1,2 +1,2 @@
 
-SUBDIRS = src data graphics
+SUBDIRS = src data

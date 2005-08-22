@@ -23,9 +23,11 @@
 
 class AntNewStone<AntMyEntity
 	def initialize()
-		super(Pos2D.new(0,0))
+		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i
 		setType("stone")
+		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",1,"graphics/gravel_big2.png",false),AGVector4.new(0,0,0,0),0))
+#		setMesh(Mesh.new(
 	end
 	def setTreeType(t)
 		@typeID=t

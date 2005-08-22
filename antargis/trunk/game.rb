@@ -21,12 +21,13 @@
 
 #!/usr/bin/ruby
 
-#require 'libantargisruby'
+$programDir=Dir.pwd+"/ruby"
+# add programdir to path
+$:.push($programDir)
+
+
 require 'libantargis'
 require 'antApp.rb'
-#require 'sdl'
-
-#include Libantargisruby
 include Libantargis
 
 require 'dialogs.rb'
@@ -34,25 +35,30 @@ require 'ents.rb'
 require 'map.rb'
 require 'view.rb'
 
-class AntGameApp <AntApp
-	def initialize(savegame)
-		super()
+class AntGameApp <AntRubyView
+	include AGHandler
+	def initialize(savegame,w,h)
+		super(w,h)
 		$app=self	
 #		@map=AntargisMap.new(128,128)	
-		@map=AntRubyMap.new(128,128)	
+		@map=AntRubyMap.new(64,64)
 		$map=@map
+		@map.setScene(getScene)
+		@terrain=TerrainMesh.new(@map)
+		getScene.addNode(@terrain)
+		
 		# load a level
 		getMap().loadMap(savegame)
 	
 		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
 		#puts @view
-		@layout=AGLayout.new(nil,loadFile("ant_layout.xml"))
+		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
-		puts @layout.getChild("mainView").getName
+		#puts @layout.getChild("mainView").getName
 		$screen=@layout
 		
 #		initDebug
@@ -91,11 +97,12 @@ class AntGameApp <AntApp
 		$elaps+=time
 		getMap().move(time)
 		#GC.start
+		getScene.advance(time)
 		return true
 	end
-	def eventFrameEnd(time)
-		getMap.frameEnd
-	end
+#	def eventFrameEnd(time)
+#		getMap.frameEnd
+#	end
 	
 	def eventIdle
 		#GC.start
@@ -162,12 +169,12 @@ main=AGMain.new
 main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)
 
-savegame="savegames/savegame6.antlvl"
+savegame="savegames/savegame0.antlvl"
 if ARGV.length>0
 	savegame=ARGV[0]
 end
 
-app=AntGameApp.new(savegame)
+app=AntGameApp.new(savegame,1024,768)
 
 app.run
 

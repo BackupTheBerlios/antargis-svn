@@ -27,7 +27,7 @@ require 'ant_hljobs.rb'
 
 class AntNewBoss<AntMyEntity
 	def initialize
-		super(Pos2D.new(0,0))
+		super(AGVector2.new(0,0))
 		@men=[]
 		@job=nil
 		@defeated=[]
@@ -63,7 +63,7 @@ class AntNewBoss<AntMyEntity
 				man=AntNewMan.new
 				#puts "READY CREATING"
 				getMap.insertEntity(man)
-				man.setPos2D(getPos2D)
+				man.setPos(getPos2D)
 				man.setBoss(self)
 				#puts "CREATING MEN"
 			end

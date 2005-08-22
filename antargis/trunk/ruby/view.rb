@@ -22,17 +22,27 @@
 #!/usr/bin/ruby
 
 
-class AntRubyView <CompleteIsoView
-	def initialize(p,rect,pos,map)
-		super(p,rect,pos,map)
+class AntRubyView <GLApp #AGWidget #CompleteIsoView
+	def initialize(w,h) #p,rect,pos,map)
+		super(w,h) #p,rect,pos,map)
 		$antView=self
 	end
-	def clickMap(pos,event)
+	def eventClick(list,button)
+		if list.length>0
+			first=list[0]
+			if first.node.class==TerrainMesh
+				clickMap(first.pos,button)
+			else
+				clickEntities(list,button)
+			end
+		end
+	end
+	def clickMap(pos,button)
 		if @hero then
 			@hero.newHLMoveJob(0,pos,0)
 		end
 	end
-	def clickEntities(list,event)
+	def clickEntities(list,button)
 		puts "CLICKENTS"
 		
 		job=$buttonPanel.getJob
@@ -40,16 +50,22 @@ class AntRubyView <CompleteIsoView
 		if job=="doPoint" then
 			# select
 			list.each{|ents|
-				e=getMap.getRuby(ents.get)
+				mesh=ents.node
+				puts mesh
+				if mesh.class==Mesh
+				e=getMap.getEntity(mesh)
+				
 				if e.getType=="hero" then
 					@hero=e
 					inspectEntity(e)
 				elsif e.getType=="house" then
 					inspectEntity(e)
 				end
+				end
 			}
 			return
 		elsif job=="doMove" then
+			# FIXME: exchange with good position estimation
 			doMove(list[0].get.getPos2D)
 		elsif job=="doRecruit" then
 			puts "RECRUITING"
@@ -57,9 +73,12 @@ class AntRubyView <CompleteIsoView
 				# get house
 				house=nil
 				list.each{|ents|
-					e=getMap.getRuby(ents.get)
+					if ents.node.class==Mesh
+						e=getMap.getEntity(ents.node)
+					#e=getMap.getRuby(ents.get)
 					if e.getType=="house" then
 						house=e
+					end
 					end
 				}
 				if house then
@@ -72,9 +91,12 @@ class AntRubyView <CompleteIsoView
 			if @hero then
 				target=nil
 				list.each{|ents|
-					e=getMap.getRuby(ents.get)
-					if e.getType=="hero" or e.getType=="house" then
-						target=e
+					if ents.node.class==Mesh
+						e=getMap.getEntity(ents.node)
+						#				e=getMap.getRuby(ents.get)
+						if e.getType=="hero" or e.getType=="house" then
+							target=e
+						end
 					end
 				}
 				if target then
@@ -101,7 +123,7 @@ class AntRubyView <CompleteIsoView
 	end
 end
 
-class AntRubyEditView<EditIsoView
+class AntRubyEditViewTest<AGWidget #EditIsoView
 	def editMarkClicked(p,e)
 		
 	end
@@ -113,7 +135,7 @@ class AntRubyViewCreator<AGLayoutCreator
 		super("antRubyView")
 	end
 	def create(parent,rect,node)
-		w=AntRubyView.new(parent,rect,Pos3D.new(0,0,0),$map)
+		w=AntRubyView.new(parent,rect,AGVector3.new(0,0,0),$map)
 		return w
 	end
 end

@@ -23,7 +23,7 @@
 
 class AntNewDeco<AntMyEntity
 	def initialize(decoType=nil)
-		super(Pos2D.new(0,0))
+		super(AGVector2.new(0,0))
 		@decoType=decoType
 		if @decoType==nil
 			a=["flower1a","flower2a","twig","gravel","small_bush","hole","grass4","grass4a","grass4b","gravel_big","gravel_big2","rock1"]
@@ -41,22 +41,15 @@ class AntNewDeco<AntMyEntity
 					"path"=>["path"],
 					"block"=>["block2"],
 					"grassGreen"=>["grass3"]}
-			if ["grassGreen","grassLight","gravel","twig","hole","floor","path"].member?(@decoType) then
-				setVirtualY(0)
-			else
-				setVirtualY(80)
-			end
 			a=b[@decoType]
 			r=(rand()*a.size).to_i
 			@decoType=a[r]
 		end
 		setType("deco")
+		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.5,"graphics/stones1a.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setDecoType(t)
 		@typeID=t
-	end
-	def getTexture
-		@decoType+".png"
 	end
 	def xmlName
 		return "antNewDeco"

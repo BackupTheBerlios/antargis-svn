@@ -82,12 +82,12 @@ OBJEXT = o
 PACKAGE = antargis
 RANLIB = ranlib
 RC = @RC@
-RUBY_INCLUDE_DIR = /usr/lib/ruby/1.8/i386-linux
-RUBY_INSTALL_DIR = /usr/local/lib/site_ruby/1.8/i386-linux
+RUBY_INCLUDE_DIR = /usr/lib/ruby/1.8/i486-linux
+RUBY_INSTALL_DIR = /usr/local/lib/site_ruby/1.8/i486-linux
 STRIP = strip
 VERSION = 0.0.1
 
-SUBDIRS = src data graphics
+SUBDIRS = src data
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 

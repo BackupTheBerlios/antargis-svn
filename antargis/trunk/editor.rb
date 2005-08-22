@@ -21,34 +21,37 @@
 
 #!/usr/bin/ruby
 
-#require 'libantargisruby'
-require 'libantargis'
-require 'antApp.rb'
-#require 'sdl'
+$programDir=Dir.pwd+"/ruby"
+# add programdir to path
+$:.push($programDir)
 
-#include Libantargisruby
+require 'libantargis'
 include Libantargis
 
+require 'antApp.rb'
 require 'dialogs.rb'
 require 'ents.rb'
 require 'map.rb'
 require 'view.rb'
 require 'editview.rb'
 
-class AntGameApp <AntApp
-	def initialize()
-		super()
+class AntGameApp < AntRubyEditView
+#AntApp
+	def initialize(sw,sh)
+		super(sw,sh,AntRubyMap.new(64,64))
 		$app=self	
 #		@map=AntargisMap.new(128,128)	
-		@map=AntRubyMap.new(128,128)	
-		$map=@map
+		#@map=AntRubyMap.new(128,128)	
+		#$map=@map
+		#return
 		# load a level
 		#getMap().loadMap("savegames/savegame6.antlvl")
 	
 		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
 		#puts @view
-		@layout=AGLayout.new(nil,loadFile("editor.xml"))
-		setMainWidget(@layout)
+		@layout=AGLayout.new(@mainWidget,loadFile("data/gui/layout/editor.xml"))
+		@mainWidget.addChild(@layout)
+		#$screen=@layout
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
@@ -65,7 +68,9 @@ class AntGameApp <AntApp
 		#storyTalk("Welcome","Welcome to Battles of Antargis")
 		#test
 #		getMap.endChange
+ 		#@mainWidget=@layout
 	end
+	
 	
 	def sigGenerate
 		map=getMap
@@ -103,10 +108,11 @@ class AntGameApp <AntApp
 	#end
 
 	def eventFrame(time)
+		super(time)
 		# prevent view from updating each frame
-		if getMap.updated or getMap.heightChanged
-			getMap.move(0)
-		end
+		#if getMap.updated or getMap.heightChanged
+		#	getMap.move(0)
+		#end
 		return
 		if $fc==nil then 
 			$fc=0 
@@ -124,7 +130,7 @@ class AntGameApp <AntApp
 	end
 	def eventFrameEnd(time)
 		#puts "EVENT FRAME END"
-		getMap.frameEnd
+		#getMap.frameEnd
 	end
 	
 	def eventIdle
@@ -165,7 +171,7 @@ main=AGMain.new
 main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)
 
-app=AntGameApp.new()
+app=AntGameApp.new(1024,768)
 
 app.run
 

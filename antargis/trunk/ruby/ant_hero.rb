@@ -31,14 +31,12 @@ class AntNewHero<AntNewBoss
 		setType("hero")
 		@appearance="hero"
 		getMap.setLight(self)
+		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
 	end
 	def setAppearance(a)
 		@appearance=a
 	end
 	
-	def getTexture
-		return @appearance+mDirNum.to_s+".png"
-	end
 	def xmlName
 		return "antNewHero"
 	end
@@ -57,7 +55,7 @@ class AntNewHero<AntNewBoss
 	def checkHLJobEnd(man)
 		if @job
 #			puts "CHECKHLJOBENDED:"
-#			puts @job
+			puts @job
 			if @job.check(man) then 
 				if @player
 					@player.eventJobFinished(self,@job)

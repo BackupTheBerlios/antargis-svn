@@ -28,7 +28,7 @@
 
 class AntNewAngel<AntMyEntity
 	def initialize
-		super(Pos2D.new(0,0))
+		super(AGVector2.new(0,0))
 		setType("angel")
 		@age=0
 	end
@@ -50,13 +50,14 @@ end
 
 class AntNewMan<AntMyEntity
 	def initialize()
-		super(Pos2D.new(0,0))
+		super(AGVector2.new(0,0))
 		setType("man")
 		@signed=false
 		@dead=false
 		@fighting=false
 		@bossName=""
 		puts "NEWMAN"
+		setMesh(Mesh.new(getMeshData("data/models/man.ant",0.7),AGVector4.new(0,0,0,0),0))
 	end
 	def getTexture
 		if @dead
@@ -144,7 +145,7 @@ class AntNewMan<AntMyEntity
 	##########################	
 	def sendAngel
 		e=AntNewAngel.new
-		e.setPos2D(getPos2D)
+		e.setAGVector2(getAGVector2)
 		getMap.insertEntity(e)
 		getMap.endChange
 	end
