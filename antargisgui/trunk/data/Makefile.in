@@ -85,6 +85,7 @@ RANLIB = @RANLIB@
 RC = @RC@
 RUBY_INCLUDE_DIR = @RUBY_INCLUDE_DIR@
 RUBY_INSTALL_DIR = @RUBY_INSTALL_DIR@
+RUBY_LIB_DIR = @RUBY_LIB_DIR@
 STRIP = @STRIP@
 VERSION = @VERSION@
 
@@ -93,9 +94,12 @@ mythemesdir = $(datadir)/antargisgui
 
 mypics_DATA = *.png
 mypicsdir = $(datadir)/antargisgui/pics
+
+rb_DATA = *.rb
+rbdir = $(RUBY_LIB_DIR)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
-DATA =  $(mypics_DATA) $(mythemes_DATA)
+DATA =  $(mypics_DATA) $(mythemes_DATA) $(rb_DATA)
 
 DIST_COMMON =  Makefile.am Makefile.in
 
@@ -151,6 +155,25 @@ uninstall-mythemesDATA:
 	list='$(mythemes_DATA)'; for p in $$list; do \
 	  rm -f $(DESTDIR)$(mythemesdir)/$$p; \
 	done
+
+install-rbDATA: $(rb_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(rbdir)
+	@list='$(rb_DATA)'; for p in $$list; do \
+	  if test -f $(srcdir)/$$p; then \
+	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(rbdir)/$$p"; \
+	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(rbdir)/$$p; \
+	  else if test -f $$p; then \
+	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(rbdir)/$$p"; \
+	    $(INSTALL_DATA) $$p $(DESTDIR)$(rbdir)/$$p; \
+	  fi; fi; \
+	done
+
+uninstall-rbDATA:
+	@$(NORMAL_UNINSTALL)
+	list='$(rb_DATA)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(rbdir)/$$p; \
+	done
 tags: TAGS
 TAGS:
 
@@ -186,20 +209,22 @@ installcheck: installcheck-am
 install-exec-am:
 install-exec: install-exec-am
 
-install-data-am: install-mypicsDATA install-mythemesDATA
+install-data-am: install-mypicsDATA install-mythemesDATA install-rbDATA
 install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-mypicsDATA uninstall-mythemesDATA
+uninstall-am: uninstall-mypicsDATA uninstall-mythemesDATA \
+		uninstall-rbDATA
 uninstall: uninstall-am
 all-am: Makefile $(DATA)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
 installdirs:
-	$(mkinstalldirs)  $(DESTDIR)$(mypicsdir) $(DESTDIR)$(mythemesdir)
+	$(mkinstalldirs)  $(DESTDIR)$(mypicsdir) $(DESTDIR)$(mythemesdir) \
+		$(DESTDIR)$(rbdir)
 
 
 mostlyclean-generic:
@@ -231,12 +256,12 @@ maintainer-clean-am:  maintainer-clean-generic distclean-am
 maintainer-clean: maintainer-clean-am
 
 .PHONY: uninstall-mypicsDATA install-mypicsDATA uninstall-mythemesDATA \
-install-mythemesDATA tags distdir info-am info dvi-am dvi check \
-check-am installcheck-am installcheck install-exec-am install-exec \
-install-data-am install-data install-am install uninstall-am uninstall \
-all-redirect all-am all installdirs mostlyclean-generic \
-distclean-generic clean-generic maintainer-clean-generic clean \
-mostlyclean distclean maintainer-clean
+install-mythemesDATA uninstall-rbDATA install-rbDATA tags distdir \
+info-am info dvi-am dvi check check-am installcheck-am installcheck \
+install-exec-am install-exec install-data-am install-data install-am \
+install uninstall-am uninstall all-redirect all-am all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

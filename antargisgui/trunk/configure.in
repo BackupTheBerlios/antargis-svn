@@ -21,10 +21,12 @@ AC_CHECK_LIB(SDL_mixer,Mix_OpenAudio)
 
 RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
 RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
+RUBY_LIB_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['rubylibdir']"`]
 
 
 AC_SUBST(RUBY_INCLUDE_DIR)
 AC_SUBST(RUBY_INSTALL_DIR)
+AC_SUBST(RUBY_LIB_DIR)
 
 AC_ARG_ENABLE(debug,
 [  --enable-debug   compile with debug information])
