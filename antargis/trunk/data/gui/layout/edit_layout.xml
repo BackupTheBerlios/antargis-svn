@@ -16,24 +16,24 @@
 			<button col="9" row="2" name="rubber" caption-image="data/gui/editor/rubber.png"/>
 			<button col="10" row="2" name="pointer" caption-image="data/gui/pointer3.png"/>
 
-			<button col="0" row="1" name="hero" caption-image="graphics/hero1dl.png"/>
-			<button col="1" row="1" name="druid" caption-image="graphics/druid1.png"/>
+			<button col="0" row="1" name="hero" caption-image="data/gui/editor/hero1.png"/>
+			<button col="1" row="1" name="druid" caption-image="data/gui/editor/druid1.png"/>
 			<button col="2" row="1" name="tower" caption-image="data/gui/editor/tower1.png"/>
-			<button col="3" row="1" name="sheep" caption-image="graphics/sheep1.png"/>
+			<button col="3" row="1" name="sheep" caption-image="data/gui/editor/sheep1.png"/>
 						
 			<button col="0" row="0" name="tree" caption-image="data/gui/editor/small_tree.png"/>
 			<button col="1" row="0" name="stones" caption-image="data/gui/editor/stones1a.png"/>
-			<button col="2" row="0" name="flower" caption-image="graphics/flower1a.png"/>
+			<button col="2" row="0" name="flower" caption-image="data/gui/editor/flower1a.png"/>
 			<button col="3" row="0" name="coach" caption-image="data/gui/editor/coach.png"/>
-			<button col="4" row="0" name="gravel" caption-image="graphics/gravel.png"/>
-			<button col="5" row="0" name="grassLight" caption-image="graphics/grass4a.png"/>
-			<button col="6" row="0" name="grassGreen" caption-image="graphics/grass3.png"/>
-			<button col="7" row="0" name="twig" caption-image="graphics/twig.png"/>
-			<button col="8" row="0" name="hole" caption-image="graphics/hole.png"/>
-			<button col="9" row="0" name="rock" caption-image="graphics/rock1.png"/>
-			<button col="10" row="0" name="floor" caption-image="graphics/floor2.png"/>
-			<button col="11" row="0" name="path" caption-image="graphics/path.png"/>
-			<button col="12" row="0" name="block" caption-image="graphics/block2.png"/>
+			<button col="4" row="0" name="gravel" caption-image="data/gui/editor/gravel.png"/>
+			<button col="5" row="0" name="grassLight" caption-image="data/gui/editor/grass4a.png"/>
+			<button col="6" row="0" name="grassGreen" caption-image="data/gui/editor/grass3.png"/>
+			<button col="7" row="0" name="twig" caption-image="data/gui/editor/twig.png"/>
+			<button col="8" row="0" name="hole" caption-image="data/gui/editor/hole.png"/>
+			<button col="9" row="0" name="rock" caption-image="data/gui/editor/rock1.png"/>
+			<button col="10" row="0" name="floor" caption-image="data/gui/editor/floor2.png"/>
+			<button col="11" row="0" name="path" caption-image="data/gui/editor/path.png"/>
+			<button col="12" row="0" name="block" caption-image="data/gui/editor/block2.png"/>
 			
 		</table>
 	</table>

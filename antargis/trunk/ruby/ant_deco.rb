@@ -46,7 +46,7 @@ class AntNewDeco<AntMyEntity
 			@decoType=a[r]
 		end
 		setType("deco")
-		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.5,"graphics/stones1a.png",false),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setDecoType(t)
 		@typeID=t
