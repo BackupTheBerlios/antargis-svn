@@ -20,11 +20,10 @@
 
 #ifndef ANT_JOBS_H
 #define ANT_JOBS_H
-#include "ant_geometry.h"
+#include <ag_triangle.h>
 #include "ruby.h"
 
 class AntEntity;
-class AntPlayer;
 class AntHero;
 
 class Job
@@ -52,14 +51,14 @@ class RestJob:public Job
 
 class MoveJob:public Job
 {
-  Pos2D mTarget;
-  int near;
+  AGVector2 mTarget;
+  float near;
   bool mRun;
  public:
-  MoveJob(int p,const Pos2D &pTarget,int pnear=0,bool pRun=false);
+  MoveJob(int p,const AGVector2 &pTarget,float pnear=0,bool pRun=false);
   virtual ~MoveJob();
   void move(AntEntity *e,float ptime);
-  Pos2D getDirection(const AntEntity *e) const;
+  AGVector2 getDirection(const AntEntity *e) const;
   
   
  private:
@@ -70,7 +69,7 @@ class MoveJob:public Job
 class FightJob:public Job
   {
     AntEntity *mTarget;
-    int fightDistance;
+    float fightDistance;
     float strength;
     float speed;
 
@@ -90,7 +89,7 @@ class FetchJob:public MoveJob
 {
   std::string mWhat;
  public:
-  FetchJob(int p,const Pos2D &pTarget,std::string what);
+  FetchJob(int p,const AGVector2 &pTarget,std::string what);
   virtual ~FetchJob();
   void move(AntEntity *e,float ptime);
   virtual void jobFinished(AntEntity *e);

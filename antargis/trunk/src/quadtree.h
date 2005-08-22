@@ -21,7 +21,7 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include "ant_rect.h"
+#include <ag_triangle.h>
 
 #include <set>
 
@@ -33,12 +33,12 @@ class QuadTree
         std::set
           <T*> ts;
         std::list<Node*> children;
-        Rect2D r;
+        AGRect2 r;
 
-        Node(Rect2D R):r(R)
+        Node(AGRect2 R):r(R)
       {}
       
-        void get(const Rect2D &r,std::list<T*> &l)
+        void get(const AGRect2 &r,std::list<T*> &l)
         {
           typename std::set<T*>::iterator i=ts.begin();
           for(;i!=ts.end();i++)
@@ -46,7 +46,7 @@ class QuadTree
             
           typename std::list<Node*>::iterator j=children.begin();
           for(;j!=children.end();j++)
-            if((*j)->r.intersects(r))
+            if((*j)->r.collide(r))
               (*j)->get(r,l);
         }
 
@@ -89,8 +89,8 @@ class QuadTree
           std::set
             <T*> ot=ts;
           ts.clear();
-          std::list<Rect2D> rs=r.split();
-          std::list<Rect2D>::iterator i=rs.begin();
+          std::list<AGRect2> rs=r.split();
+          std::list<AGRect2>::iterator i=rs.begin();
           for(;i!=rs.end();i++)
             {
               children.push_back(new Node(*i));
@@ -129,7 +129,7 @@ class QuadTree
     Node *root;
 
   public:
-    QuadTree(Rect2D r)
+    QuadTree(AGRect2 r)
     {
       root=new Node(r);
     }
@@ -139,14 +139,14 @@ class QuadTree
       root->insert(t);
     }
     
-    std::list<T*> get(const Rect2D &r)
+    std::list<T*> get(const AGRect2 &r)
     {
       std::list<T*> l;
       root->get(r,l);
       return l;
     }
     
-    void remove
+    void erase
       (T* t)
       {
         root->remove

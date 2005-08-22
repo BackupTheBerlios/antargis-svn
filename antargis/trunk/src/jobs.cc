@@ -19,7 +19,9 @@
  */
 
 #include "jobs.h"
+#include "entity.h"
 #include "map.h"
+#include <math.h>
 
 Job::Job(int p):priority(p)
 
@@ -50,7 +52,7 @@ bool Job::needsMorale() const
 * MoveJob
 ************************************************************************/
 
-MoveJob::MoveJob(int p,const Pos2D &pTarget,int pnear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),near(pnear),mRun(pRun)
+MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pnear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),near(pnear),mRun(pRun)
 {
   // speed=70; // pixels per second
   //  runSpeed=100;
@@ -84,7 +86,7 @@ void MoveJob::move(AntEntity *e,float ptime)
   
 }
 
-Pos2D MoveJob::getDirection(const AntEntity *e) const
+AGVector2 MoveJob::getDirection(const AntEntity *e) const
 {
   return (mTarget-e->getPos2D()).normalized();
 }
@@ -92,8 +94,8 @@ Pos2D MoveJob::getDirection(const AntEntity *e) const
 
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
-  Pos2D diff=e->getPos2D()-mTarget;
-  float norm=diff.norm();
+  AGVector2 diff=e->getPos2D()-mTarget;
+  float norm=diff.length();
   //  cdebug("norm:"<<norm);
   //  cdebug("near:"<<near);
   if(norm-near>ptime*aspeed)
@@ -101,14 +103,14 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
       //      cdebug(diff);
       diff=diff.normalized();
       //      cdebug(diff);
-      e->setDirection(diff*(-1));
-      //      cdebug(e->getPos2D());
-      e->setPos2D(e->getPos2D()-diff*ptime*aspeed);
-      //      cdebug(e->getPos2D());
+      e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+      //      cdebug(e->getAGVector2());
+      e->setPos(e->getPos2D()-diff*ptime*aspeed);
+      //      cdebug(e->getAGVector2());
     }
   else
     {
-      //      e->setPos2D(mTarget);
+      //      e->setAGVector2(mTarget);
       //      CTRACE;
       jobFinished(e);
     }
@@ -132,7 +134,7 @@ bool FightJob::needsMorale() const
 
 FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 {
-  fightDistance=20; // in pixels
+  fightDistance=0.20; // in pixels
   strength=0.2;   // decrease per second
   speed=70; // see MoveJob
 }
@@ -147,12 +149,12 @@ void FightJob::move(AntEntity *e,float ptime)
       jobFinished(e);
     }
   // if target is too far away run there, otherwise fight
-  Pos2D diff=e->getPos2D()-mTarget->getPos2D();
-  float norm=diff.norm();
+  AGVector2 diff=e->getPos2D()-mTarget->getPos2D();
+  float norm=diff.length();
   if(norm-fightDistance>ptime*speed)
     {
       diff=diff.normalized();
-      e->setPos2D(e->getPos2D()-diff*ptime*speed);
+      e->setPos(e->getPos2D()-diff*ptime*speed);
     }
   else
     {
@@ -168,7 +170,7 @@ void FightJob::move(AntEntity *e,float ptime)
  *
  ***************************************************************************/
 
-FetchJob::FetchJob(int p,const Pos2D&pTarget,std::string what):MoveJob(p,pTarget,5),mWhat(what)
+FetchJob::FetchJob(int p,const AGVector2&pTarget,std::string what):MoveJob(p,pTarget,0.2),mWhat(what)
 {
 }
 FetchJob::~FetchJob()
@@ -208,11 +210,11 @@ RestJob *newRestJob(int pTime)
 {
   return new RestJob(pTime);
 }
-FetchJob *newFetchJob(int p,Pos2D &pTarget,const std::string &what)
+FetchJob *newFetchJob(int p,AGVector2 &pTarget,const std::string &what)
 {
   return new FetchJob(p,pTarget,what);
 }
-MoveJob *newMoveJob(int p,const Pos2D &pTarget,int pnear)
+MoveJob *newMoveJob(int p,const AGVector2 &pTarget,int pnear)
 {
   return new MoveJob(p,pTarget,pnear);
 }

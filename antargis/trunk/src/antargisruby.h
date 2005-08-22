@@ -32,6 +32,7 @@ class SwigDirector_AGScreen : public AGScreen, public Swig::Director {
 public:
     SwigDirector_AGScreen(VALUE self);
     virtual void flip();
+    virtual void begin();
 };
 
 
@@ -40,17 +41,21 @@ class SwigDirector_AGSDLScreen : public AGSDLScreen, public Swig::Director {
 public:
     SwigDirector_AGSDLScreen(VALUE self, SDL_Surface *s);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
     virtual AGSurface loadSurface(std::string const &pFilename);
     virtual void tile(AGTexture const &pSource);
+    virtual void renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn);
+    virtual void drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
     virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
     virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
-    virtual SDL_Surface *newSurface(int x, int y);
+    virtual void begin();
     virtual void drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2);
-    virtual void putPixel(int x, int y, AGColor const &c);
     virtual void drawRect(AGRect const &pRect, AGColor const &c);
     virtual void flip();
+    virtual void putPixel(int x, int y, AGColor const &c);
+    virtual SDL_Surface *newSurface(int x, int y);
 };
 
 
@@ -166,27 +171,6 @@ public:
 };
 
 
-class SwigDirector_AGVector : public AGVector, public Swig::Director {
-
-public:
-    SwigDirector_AGVector(VALUE self, float pX, float pY, float pZ = 0.0f);
-    SwigDirector_AGVector(VALUE self, AGAngle const &a);
-    SwigDirector_AGVector(VALUE self, AGVector const &a);
-    SwigDirector_AGVector(VALUE self);
-    virtual ~SwigDirector_AGVector();
-};
-
-
-class SwigDirector_AGPointF : public AGPointF, public Swig::Director {
-
-public:
-    SwigDirector_AGPointF(VALUE self);
-    SwigDirector_AGPointF(VALUE self, float pX, float pY, float pZ = 1.0f);
-    SwigDirector_AGPointF(VALUE self, AGVector const &p);
-    virtual ~SwigDirector_AGPointF();
-};
-
-
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:
@@ -196,8 +180,8 @@ public:
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
-    virtual bool canFocus() const;
     virtual std::string getCaption() const;
+    virtual bool canFocus() const;
     virtual ~SwigDirector_AGButton();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseClick(AGEvent const *m);
@@ -249,6 +233,7 @@ public:
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
+    virtual void draw();
 };
 
 
@@ -531,8 +516,8 @@ public:
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
-    virtual bool canFocus() const;
     virtual std::string getCaption() const;
+    virtual bool canFocus() const;
     virtual ~SwigDirector_AGCheckBox();
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual bool eventMouseMotion(AGEvent const *m);
@@ -613,8 +598,8 @@ public:
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
-    virtual bool canFocus() const;
     virtual std::string getCaption() const;
+    virtual bool canFocus() const;
     virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
     virtual ~SwigDirector_AGRadio();
     virtual bool eventMouseMotion(AGEvent const *m);
@@ -953,277 +938,108 @@ public:
     virtual void tile(AGTexture const &pSource, AGRect const &pDest);
     virtual void blit(AGTexture const &pSource, AGRect const &pDest);
     virtual void tile(AGSurface const &pSource, AGRect const &pDest);
-    virtual void blit(AGTexture const &pSource, AGRectF const &pDest, AGRectF const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
     virtual void tile(AGSurface const &pSource);
     virtual void putPixel(AGPoint const &p, AGColor const &c);
     virtual void drawRect(AGRect const &pRect, AGColor const &c);
-    virtual void blitTri(AGTexture const &pSource, AGTriangle const &pSrc, AGTriangle const &pDest);
+    virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
 };
 
 
-class SwigDirector_AntargisMap : public AntargisMap, public Swig::Director {
+class SwigDirector_HeightMap : public HeightMap, public Swig::Director {
 
 public:
-    SwigDirector_AntargisMap(VALUE self, int w, int h);
+    SwigDirector_HeightMap(VALUE self, int w, int h);
+    virtual void mapChanged();
+    virtual ~SwigDirector_HeightMap();
+    virtual void saveXML(Node &node) const;
+    virtual void loadXML(Node const &node);
+};
+
+
+class SwigDirector_AntMap : public AntMap, public Swig::Director {
+
+public:
+    SwigDirector_AntMap(VALUE self, int w, int h);
     virtual void insertEntity(AntEntity *e);
     virtual void removeEntity(AntEntity *p);
-    virtual ~SwigDirector_AntargisMap();
+    virtual void entsChanged();
+    virtual void mapChanged();
+    virtual ~SwigDirector_AntMap();
     virtual AntEntity *loadEntity(xmlpp::Node const &node);
+    virtual void saveXML(xmlpp::Node &node) const;
+    virtual void loadXML(xmlpp::Node const &node);
 };
 
 
-class SwigDirector_MiniMap : public MiniMap, public Swig::Director {
+class SwigDirector_SceneNode : public SceneNode, public Swig::Director {
 
 public:
-    SwigDirector_MiniMap(VALUE self, AGWidget *pParent, AGRect const &r, AntargisMap *pMap, AGRect const &pViewRect);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual bool eventShow();
-    virtual int minHeight() const;
-    virtual int minWidth() const;
-    virtual bool canFocus() const;
-    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual ~SwigDirector_MiniMap();
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
-    virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
-    virtual bool eventKeyUp(AGEvent const *m);
-    virtual bool eventQuit(AGEvent const *m);
-    virtual bool eventQuitModal(AGEvent const *m);
-    virtual bool eventSysWM(AGEvent const *m);
+    SwigDirector_SceneNode(VALUE self);
+    virtual void advance(float time);
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual ~SwigDirector_SceneNode();
+    virtual void drawDepth();
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawShadow();
+    virtual void draw();
+};
+
+
+class SwigDirector_MeshData : public MeshData, public Swig::Director {
+
+public:
+    SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
+    virtual void advance(float time);
+    virtual void mapChanged();
+    virtual size_t getTriangles() const;
+    virtual ~SwigDirector_MeshData();
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawDepth();
+    virtual void draw();
+    virtual void drawShadow();
+};
+
+
+class SwigDirector_Mesh : public Mesh, public Swig::Director {
+
+public:
+    SwigDirector_Mesh(VALUE self, MeshData &data, AGVector4 const &pPos, float pRot);
+    virtual void advance(float time);
+    virtual void mapChanged();
+    virtual size_t getTriangles() const;
+    virtual ~SwigDirector_Mesh();
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawDepth();
+    virtual void draw();
+    virtual void drawShadow();
+};
+
+
+class SwigDirector_GLApp : public GLApp, public Swig::Director {
+
+public:
+    SwigDirector_GLApp(VALUE self, int w, int h);
     virtual bool eventResize(AGEvent const *m);
-    virtual bool eventMouseEnter();
-    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void drawAll(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual void setLeft(int x);
-    virtual void setTop(int y);
-    virtual void setHeight(int w);
-    virtual void setWidth(int w);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-};
-
-
-class SwigDirector_VoxelImageData : public VoxelImageData, public Swig::Director {
-
-public:
-    SwigDirector_VoxelImageData(VALUE self);
-    virtual ~SwigDirector_VoxelImageData();
-};
-
-
-class SwigDirector_AVItem : public AVItem, public Swig::Director {
-
-public:
-    SwigDirector_AVItem(VALUE self, Pos3D const &p);
-    virtual ~SwigDirector_AVItem();
-    virtual void draw(AntargisView *view, AGPainter &p);
-    virtual void init();
-};
-
-
-class SwigDirector_AntargisView : public AntargisView, public Swig::Director {
-
-public:
-    SwigDirector_AntargisView(VALUE self, AGWidget *parent, AGRect const &pRect, Pos3D const &pPos, bool pOwnsItems);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual bool eventShow();
-    virtual int minHeight() const;
-    virtual int minWidth() const;
-    virtual bool canFocus() const;
-    virtual ~SwigDirector_AntargisView();
-    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
-    virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
-    virtual bool eventKeyUp(AGEvent const *m);
-    virtual bool eventQuit(AGEvent const *m);
-    virtual bool eventQuitModal(AGEvent const *m);
     virtual bool eventSysWM(AGEvent const *m);
-    virtual bool eventResize(AGEvent const *m);
-    virtual bool eventMouseEnter();
-    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void drawAll(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual void setLeft(int x);
-    virtual void setTop(int y);
-    virtual void setHeight(int w);
-    virtual void setWidth(int w);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-};
-
-
-class SwigDirector_VoxelImage : public VoxelImage, public Swig::Director {
-
-public:
-    SwigDirector_VoxelImage(VALUE self, VoxelImage const &vi);
-    SwigDirector_VoxelImage(VALUE self, AGSurface pSurface, Pos3D pPos);
-    SwigDirector_VoxelImage(VALUE self, std::string const &pFilename);
-    virtual ~SwigDirector_VoxelImage();
-    virtual void draw(AntargisView *view, AGPainter &p);
-    virtual void init();
-};
-
-
-class SwigDirector_VoxelView : public VoxelView, public Swig::Director {
-
-public:
-    SwigDirector_VoxelView(VALUE self, int pw, int ph, Pos3D pPos, bool pIso = true);
-    virtual ~SwigDirector_VoxelView();
-    virtual void draw(AntargisView *view, AGPainter &p);
-    virtual void init();
-};
-
-
-class SwigDirector_FastVoxelView : public FastVoxelView, public Swig::Director {
-
-public:
-    SwigDirector_FastVoxelView(VALUE self, int pw, int ph, Pos3D pPos, bool pIso = true, int zoom = 1);
-    virtual ~SwigDirector_FastVoxelView();
-    virtual void draw(AntargisView *view, AGPainter &p);
-    virtual void init();
-};
-
-
-class SwigDirector_IsoView : public IsoView, public Swig::Director {
-
-public:
-    SwigDirector_IsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual bool eventShow();
-    virtual int minHeight() const;
-    virtual int minWidth() const;
-    virtual bool canFocus() const;
-    virtual ~SwigDirector_IsoView();
-    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
-    virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
-    virtual bool eventKeyUp(AGEvent const *m);
-    virtual bool eventQuit(AGEvent const *m);
     virtual bool eventQuitModal(AGEvent const *m);
-    virtual bool eventSysWM(AGEvent const *m);
-    virtual bool eventResize(AGEvent const *m);
-    virtual bool eventMouseEnter();
-    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void drawAll(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual void setLeft(int x);
-    virtual void setTop(int y);
-    virtual void setHeight(int w);
-    virtual void setWidth(int w);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-};
-
-
-class SwigDirector_CompleteIsoView : public CompleteIsoView, public Swig::Director {
-
-public:
-    SwigDirector_CompleteIsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual bool eventShow();
-    virtual int minHeight() const;
-    virtual int minWidth() const;
-    virtual bool canFocus() const;
-    virtual ~SwigDirector_CompleteIsoView();
-    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
     virtual bool eventKeyUp(AGEvent const *m);
-    virtual bool eventQuit(AGEvent const *m);
-    virtual bool eventQuitModal(AGEvent const *m);
-    virtual bool eventSysWM(AGEvent const *m);
-    virtual bool eventResize(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
-    virtual bool eventMouseEnter();
-    virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void clickEntities(std::vector<AntEntityPtr > const &ents, AGSDLEvent const *e);
-    virtual void clickMap(Pos2D const &p, AGSDLEvent const *e);
-    virtual void drawAll(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual void setLeft(int x);
-    virtual void setTop(int y);
-    virtual void setHeight(int w);
-    virtual void setWidth(int w);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-};
-
-
-class SwigDirector_EditIsoView : public EditIsoView, public Swig::Director {
-
-public:
-    SwigDirector_EditIsoView(VALUE self, AGWidget *parent, AGRect r, Pos3D p, AntargisMap *map);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual bool eventShow();
-    virtual void editMarkClicked(Pos2D const &p, AGSDLEvent const *e);
-    virtual int minHeight() const;
-    virtual int minWidth() const;
-    virtual bool canFocus() const;
-    virtual ~SwigDirector_EditIsoView();
-    virtual bool eventDragBy(AGEvent const *event, AGPoint const &pDiff);
-    virtual bool eventMouseButtonUp(AGEvent const *m);
-    virtual bool eventMouseButtonDown(AGEvent const *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventActive(AGEvent const *m);
-    virtual bool eventKeyDown(AGEvent const *m);
-    virtual bool eventKeyUp(AGEvent const *m);
+    virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool eventQuit(AGEvent const *m);
-    virtual bool eventQuitModal(AGEvent const *m);
-    virtual bool eventSysWM(AGEvent const *m);
-    virtual bool eventResize(AGEvent const *m);
-    virtual bool eventMouseClick(AGEvent const *m);
+    virtual bool eventMouseButtonDown(AGEvent const *m);
+    virtual bool eventMouseButtonUp(AGEvent const *m);
     virtual bool eventMouseMotion(AGEvent const *m);
-    virtual bool eventMouseEnter();
+    virtual bool eventKeyDown(AGEvent const *m);
+    virtual bool eventFrameEnd(float pTime);
+    virtual bool eventFrame(float t);
+    virtual void eventChangedRes();
+    virtual void eventClick(Scene::PickResult const &pNodes, int button);
+    virtual ~SwigDirector_GLApp();
+    virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
-    virtual void clickEntities(std::vector<AntEntityPtr > const &ents, AGSDLEvent const *e);
-    virtual void clickMap(Pos2D const &p, AGSDLEvent const *e);
-    virtual void drawAll(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual void setLeft(int x);
-    virtual void setTop(int y);
-    virtual void setHeight(int w);
-    virtual void setWidth(int w);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void addChild(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
+    virtual void draw();
 };
 
 
@@ -1231,15 +1047,14 @@ class SwigDirector_AntEntity : public AntEntity, public Swig::Director {
 
 public:
     SwigDirector_AntEntity(VALUE self);
-    SwigDirector_AntEntity(VALUE self, Pos3D const &p);
-    SwigDirector_AntEntity(VALUE self, Pos2D const &p);
-    virtual void newFetchJob(int p, Pos2D &pTarget, std::string const &pWhat);
-    virtual void setPos2D(Pos2D const &p);
+    SwigDirector_AntEntity(VALUE self, AGVector3 const &p);
+    SwigDirector_AntEntity(VALUE self, AGVector2 const &p);
     virtual void move(float pTime);
     virtual void eventGotNewJob();
     virtual void eventNoJob();
+    virtual void newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat);
     virtual ~SwigDirector_AntEntity();
-    virtual void newMoveJob(int p, Pos2D const &pTarget, int pnear = 0);
+    virtual void newMoveJob(int p, AGVector2 const &pTarget, int pnear = 0);
     virtual std::string xmlName() const;
     virtual std::string getTexture() const;
     virtual void eventJobFinished();
@@ -1249,7 +1064,38 @@ public:
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void eventGotFight(AntEntity *pOther);
     virtual void newFightJob(int p, AntEntity *target);
+    virtual void setPos(AGVector2 const &p);
     virtual void newRestJob(int pTime);
+};
+
+
+class SwigDirector_TerrainPieceVA : public TerrainPieceVA, public Swig::Director {
+
+public:
+    SwigDirector_TerrainPieceVA(VALUE self, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos);
+    virtual void advance(float time);
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual ~SwigDirector_TerrainPieceVA();
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawDepth();
+    virtual void draw();
+    virtual void drawShadow();
+};
+
+
+class SwigDirector_TerrainMesh : public TerrainMesh, public Swig::Director {
+
+public:
+    SwigDirector_TerrainMesh(VALUE self, HeightMap &map);
+    virtual void advance(float t);
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual ~SwigDirector_TerrainMesh();
+    virtual void drawDepth();
+    virtual void sort(AGVector4 const &camera);
+    virtual void draw();
+    virtual void drawShadow();
 };
 
 

@@ -16,6 +16,56 @@
 	Data_Get_Struct($input,AGSurface,b);
 	$result=*b;
 }
+
+%typemap(out) SceneNode *{
+	std::cout<<"test2"<<std::endl;
+	if($1)
+	{
+		if($1->mRubyObject)
+          		$result=$1->mRUBY;
+		else
+		{
+		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+			$1->mRubyObject=true;
+			$1->mRUBY=vresult;
+		}
+	}
+	else
+		vresult = Qnil;
+}
+%typemap(out) Mesh *{
+	std::cout<<"test2"<<std::endl;
+	if($1)
+	{
+		if($1->mRubyObject)
+          		$result=$1->mRUBY;
+		else
+		{
+		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+			$1->mRubyObject=true;
+			$1->mRUBY=vresult;
+		}
+	}
+	else
+		vresult = Qnil;
+}
+%typemap(out) AntEntity *{
+	std::cout<<"test2"<<std::endl;
+	if($1)
+	{
+		if($1->mRubyObject)
+          		$result=$1->mRUBY;
+		else
+		{
+		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+			$1->mRubyObject=true;
+			$1->mRUBY=vresult;
+		}
+	}
+	else
+		vresult = Qnil;
+}
+
 %include "marker.i"
 
 %include "antmark.h"
@@ -41,6 +91,8 @@
 %include "std_map.i"
 
 %template(StringVector) std::vector<std::string>;
+%template(SceneNodeVector) std::vector<SceneNodePtr>;
+%template(PickResult) std::vector<PickNode>;
 %template(EntityVector) std::vector<AntEntityPtr>;
 %template(ResourceMap) std::map<std::string,int>;
 %include "antargisgui.h"

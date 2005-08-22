@@ -1,179 +1,121 @@
-/*
- * Copyright (c) 2005 by David Kamphausen. All rights reserved.
- *
- * map.h
- * by David Kamphausen (david.kamphausen@web.de)
- *
- * The "Antargis" project, including all files needed to compile it,
- * is free software; you can redistribute it and/or use it and/or modify it
- * under the terms of the GNU General Public License as published
- * by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program.
- */
+#ifndef __MAP_H__
+#define __MAP_H__
 
-#ifndef ANT_MAP_H
-#define ANT_MAP_H
-
-#include "decast.h"
+#include <ag_triangle.h>
+#include <ag_xml.h>
 #include "quadtree.h"
-#include "voxel_gen.h"
 
-#include "ag_xml.h"
-#include <ag_fs.h>
+class AntEntity;
+class Scene;
+class Mesh;
 
-#include <set>
-#include <vector>
-#include <algorithm>
-
-#include "entity.h"
-
-
-/*
 class HeightMap
-  {
-    SplineMapD mHeight,mGrass;
-
-  public:
-    HeightMap(int w,int h);
-
-
-  };
-*/
-
-/*class MapListener
 {
  public:
-  MapListener();
-  virtual ~MapListener();
+  HeightMap(int w,int h);
+  virtual ~HeightMap();
 
-  virtual void mapUpdate();
-  };*/
+  void setScene(Scene *pScene);
 
-//class AntPlayer;
+  // get status
+  float getHeight(float x,float y) const;
+  AGVector3 getNormal(int x,int y) const;
+  AGVector4 HeightMap::getVertex(int x,int y);
+  float get(size_t x,size_t y) const;
+  float getGrass(size_t x,size_t y) const;
 
-class AntargisMap
+  size_t getW() const
   {
-    SplineMapD mHeight,mGrass;
-    QuadTree<AntEntity> mEntities;
-    std::list<AntEntity*> mEntList;
-    std::map<int,AntEntity*> mEntityMap;
+    return mW;
+  }
+  size_t getH() const
+  {
+    return mH;
+  }
 
-    bool mPaused;
-    int mW,mH;
+  // truncate pos at borders
+  AGVector2 truncPos(const AGVector2 &p) const;
 
-    int maxID;
-
-    bool mUpdated;
-    bool mHeightChanged;
-
-    std::list<AntEntity*> mToDel;
-
-    size_t mGCcalls;
-
-    std::set<AntEntity*> mLightingEntities;
-
-  public:
-    AntargisMap(int w,int h);
-    virtual ~AntargisMap();
-
-    float getHeight(const Pos2D &p) const;
-    float getGHeight(const Pos2D &p) const;
-
-    SplineMapD getPatchH(int x,int y) const;
-    SplineMapD getPatchG(int x,int y) const;
-
-    int getNewID();
-    
-    Pos3D getNormal(int x,int y) const;
-
-    bool updated() const;
-    bool heightChanged() const;
-
-    size_t getGCcalls() const;
-    void resetGCcalls();
-
-    AntEntity *getNext(AntEntity *me,const std::string &pType);
-
-    virtual void insertEntity(AntEntity *e);
-
-    // x,y = position
-    // h = amount
-    // r = radius
-    void addPyramid(int x,int y,int h,int r);
-    void addFlat(int x,int y,int h,int r);
-    void setAllWater();
-    void setAllLand();
-
-    std::list<AntEntity*> getEntities(const AntRect&r);
-    std::list<AntEntity*> getAllEntities();
-
-    Pos3D getPos3D(const Pos2D &p) const;
-
-    void move(float pTime);
-    void frameEnd();
-
-    void clear();
-
-    virtual void removeEntity(AntEntity *p);
-
-    // align to rect / >0 and <width and so 
-    Pos2D truncPos(const Pos2D &p) const;
-
-    AntEntity *getEntity(int id) const
-      {
-        std::map<int,AntEntity*>::const_iterator i=mEntityMap.find(id);
-        if(i==mEntityMap.end())
-          return 0;
-        return i->second;
-      }
-
-    AntEntity *getByName(const std::string &pName);
-
-    bool paused()
-    {
-      return mPaused;
-    }
-    
-    void pause()
-    {
-      mPaused=true;
-    }
-    void unpause()
-    {
-      mPaused=false;
-    }
-    
-    Pos2D getMaxPos() const;
-
-    void saveMap(const std::string &pFilename);
-    void loadMap(const std::string &pFilename);
-
-    virtual AntEntity *loadEntity(const xmlpp::Node &node);
-
-    void saveXML(xmlpp::Node &node) const;
-    void loadXML(const xmlpp::Node &node);
-    
-    int width() const;
-    int height() const;
-
-    int getDarkness(const Pos2D &pPos) const;
-    void setLight(AntEntity *e);
+  // save load
+  virtual void saveXML(Node &node) const;
+  virtual void loadXML(const Node &node);
 
 
-    VALUE mRUBY;
-    bool mRubyObject;
-    friend void AntargisMap_markfunc(void *ptr);
+  // editing
+  void setHeight(float height); // for whole plane
+  void set(size_t x,size_t y,float height);
 
-  };
 
-AntargisMap *getMap();
+  //protected:
+  virtual void mapChanged();  
+ private:
+
+  std::vector<float> mHeights;
+  std::vector<float> mGrass;
+  size_t mW,mH;
+ protected:
+  Scene *mScene;
+};
+
+//FIXME: add quadtree
+
+class AntMap:public HeightMap
+{
+ public:
+  typedef std::list<AntEntity*> EntityList;
+
+  AntMap(int w,int h);
+  ~AntMap();
+  
+  virtual void insertEntity(AntEntity *e);
+  virtual void removeEntity(AntEntity *p);
+  void clear();
+
+  int getNewID();
+  
+  EntityList getEntities(const AGRect2&r);
+  EntityList getAllEntities();
+
+  AntEntity *getEntity(const Mesh &pMesh);
+  AntEntity *getEntity(int id) const;
+  AntEntity *getByName(const std::string &pName);
+
+  AntEntity *getNext(AntEntity *me,const std::string &pType);
+
+  virtual AntEntity *loadEntity(const xmlpp::Node &node);
+
+  void saveXML(xmlpp::Node &node) const;
+  void loadXML(const xmlpp::Node &node);
+
+  void saveMap(const std::string &pFilename);
+  void loadMap(const std::string &pFilename);
+
+  void move(float pTime);
+
+  AGVector3 getPos(const AGVector2 &pPos) const;
+
+  virtual void entsChanged();  
+
+
+  virtual void mapChanged();  
+ private:
+  typedef std::map<size_t,AntEntity*> EntityMap;
+
+  EntityList mEntities;
+  EntityMap mEntityMap;
+  QuadTree<AntEntity> mEntQuad;
+
+  EntityList mToDel;
+
+  int maxID;
+
+ public:
+  VALUE mRUBY;
+  bool mRubyObject;
+  friend void AntMap_markfunc(void *ptr);
+};
+
+AntMap *getMap();
 
 
 #endif

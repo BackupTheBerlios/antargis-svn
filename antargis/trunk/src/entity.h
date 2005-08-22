@@ -21,19 +21,18 @@
 #ifndef ANT_ENTITY_H
 #define ANT_ENTITY_H
 
-#include "ag_xml.h"
-#include "ant_geometry.h"
-#include "ant_rect.h"
+#include <ag_xml.h>
+#include <ag_triangle.h>
+
 
 #include <ruby.h>
 #include <set>
 #include <vector>
-#include <algorithm>
 
-class VoxelImage;
+class Mesh;
 class Job;
-class AntHero;
 
+// FIXME: maybe remove Resource from c++??
 class Resource
 {
   std::map<std::string,int> r;
@@ -53,7 +52,7 @@ class AntEntity
     int mID;
     std::string mName;
 
-    Pos3D mPos;       // 3d-position
+    AGVector3 mPos;   // 3d-position
     bool onGround;    // is this on the ground of the map?
 
     Job *mJob;        // current job
@@ -75,27 +74,26 @@ class AntEntity
 
     std::string mType;
 
-    VoxelImage*mSurface;
+    Mesh *mMesh;
 
     int mVirtualY;
 
   public: //virtually protected
-    int mDirNum; // set public for swig
+    float mDir;  // direction in (0,360)
     Resource resource;
 
   public:
     AntEntity();
-    AntEntity(const Pos3D &p);
-    AntEntity(const Pos2D &p);
+    AntEntity(const AGVector3 &p);
+    AntEntity(const AGVector2 &p);
     virtual ~AntEntity();
 
 
     // Positions
-    Pos3D getPos3D() const;
-    Pos2D getPos2D() const;
-    virtual void setPos2D(const Pos2D &p); // overwrite this only on static Entities, otherwise this gets called really (!) often
-    void setPos3D(const Pos3D &p);
-
+    AGVector3 getPos3D() const;
+    AGVector2 getPos2D() const;
+    virtual void setPos(const AGVector2 &p); // overwrite this only on static Entities, otherwise this gets called really (!) often
+    void setPos(const AGVector3 &p);
 
     // IDs, names and types
     int getID() const;
@@ -105,7 +103,6 @@ class AntEntity
 
     void setType(const std::string &pType);
     std::string getType() const;
-
 
     // saving and loading
     virtual std::string xmlName() const;
@@ -120,11 +117,13 @@ class AntEntity
 
   public:
     virtual void newRestJob(int pTime);
-    virtual void newFetchJob(int p,Pos2D &pTarget,const std::string &pWhat);
-    virtual void newMoveJob(int p,const Pos2D &pTarget,int pnear=0);
+    virtual void newFetchJob(int p,AGVector2 &pTarget,const std::string &pWhat);
+    virtual void newMoveJob(int p,const AGVector2 &pTarget,int pnear=0);
     virtual void newFightJob(int p,AntEntity *target);
 
     bool hasJob() const;
+
+    AGRect2 getRect() const;
 
     virtual void eventNoJob();
     virtual void eventJobFinished();
@@ -153,16 +152,14 @@ class AntEntity
 
     // FIXME: this shouldn't be virtual, because it gets called too often!
     virtual std::string getTexture() const;
-    void setVirtualY(int y);
 
     // anything below shouldn't be used by ruby-functions
-//#ifndef SWIG
-    void setSurface(VoxelImage *i);
-    VoxelImage*getSurface();
-    void updateSurface();
+
+    void setMesh(Mesh *Mesh);
+    Mesh *getMesh();
 
     // used only by *Jobs
-    void setDirection(const Pos2D &p);
+    void setDirection(float pAngle);
 
     void decEnergy(float amount);
     void decMorale(float amount);
@@ -172,16 +169,12 @@ class AntEntity
     void eventMapChanged();
     virtual void move(float pTime); // move entity FIXME: del move
 
-    // used only View
-    virtual Rect2D getRect() const;
-    int getVirtualY() const;
-//#endif
 
   public: // must be public, so that swig can set these
     bool mRubyObject;
     VALUE mRUBY;
 
-    friend void AntEntity_markfunc(void *ptr);
+    //    friend void AntEntity_markfunc(void *ptr);
 
   private:
     void init();
@@ -200,5 +193,6 @@ class AntEntityPtr
   AntEntity *p;
 };
 
+void AntEntity_markfunc(void *ptr);
 
 #endif

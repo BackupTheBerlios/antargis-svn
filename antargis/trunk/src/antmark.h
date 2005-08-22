@@ -1,12 +1,5 @@
-/*%typemap(directorout) AGSurface {
-	std::cout<<"test1"<<std::endl;
-	AGSurface *b;
-	Data_Get_Struct($input,AGSurface,b);
-	$result=*b;
-	}*/
-
-%markfunc AntargisMap "AntargisMap_markfunc"
-%exception AntargisMap::AntargisMap {
+%markfunc AntsMap "AntMap_markfunc"
+%exception AntMap::AntMap {
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
@@ -21,58 +14,29 @@
 	result->mRubyObject=true;
 	//printf("setting mruby:widget\n");
     }
-/*%markfunc AntHouse "AntEntity_markfunc"
-%exception AntHouse::AntHouse {
+
+%markfunc AntMap "AntMap_markfunc";
+%markfunc AntEntity "AntEntity_markfunc";
+
+
+%exception SceneNode::SceneNode {
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
-    }
-//%markfunc AntMan "AntEntity_markfunc"
-%exception AntMan::AntMan {
-        $action
-        result->mRUBY = self;
-	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
     }
 
-%markfunc AntHero "AntEntity_markfunc"
-%exception AntHero::AntHero {
+%exception Mesh::Mesh {
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
+	printf("%X\n",self);
     }
-%exception Job::Job {
+%exception TerrainMesh::TerrainMesh {
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
     }
-%exception MoveJob::MoveJob {
-        $action
-        result->mRUBY = self;
-	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
-    }
-%exception FightJob::FightJob {
-        $action
-        result->mRUBY = self;
-	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
-    }
-%exception FetchJob::FetchJob {
-        $action
-        result->mRUBY = self;
-	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
-    }
-%exception RestJob::RestJob {
-        $action
-        result->mRUBY = self;
-	result->mRubyObject=true;
-	//printf("setting mruby:widget\n");
-    }
-*/
 
-%markfunc AntargisMap "AntargisMap_markfunc";
+%markfunc Scene "Scene_markfunc";
+%markfunc GLApp "GLApp_markfunc";
+

@@ -22,12 +22,13 @@
 #include "map.h"
 #include "ag_debug.h"
 #include "jobs.h"
+#include "mesh.h"
 
-AntEntity::AntEntity(const Pos3D &p):mPos(p)
+AntEntity::AntEntity(const AGVector3 &p):mPos(p)
 {
   init();
 }
-AntEntity::AntEntity(const Pos2D &p):mPos(getMap()->getPos3D(p))
+AntEntity::AntEntity(const AGVector2 &p):mPos(getMap()->getPos(p))
 {
   init();
 }
@@ -57,13 +58,15 @@ void AntEntity::init()
   mMorale=1.0;
   mMoraleHeal=0.1;
 
-  mMoveSpeed=70;
+  mMoveSpeed=2;
 
   mAggression=0.5;
 
-  mSurface=0;
+  //  mSurface=0;
+  mMesh=0;
+  mDir=0;
 
-  mDirNum=1;
+  //  mDirNum=1;
 }
 
 
@@ -104,34 +107,27 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   setName(node.get("name"));
 }
 
-Pos3D AntEntity::getPos3D() const
+AGVector3 AntEntity::getPos3D() const
   {
     return mPos;
   }
-Pos2D AntEntity::getPos2D() const
+AGVector2 AntEntity::getPos2D() const
   {
-    return Pos2D(mPos.x,mPos.z);
+    return AGVector2(mPos[0],mPos[1]);
   }
 
-void AntEntity::setPos3D(const Pos3D &p)
+void AntEntity::setPos(const AGVector3 &p)
 {
   mPos=p;
-  if(mSurface)
-    {
-      mSurface->setPosition(mPos);
-      mSurface->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
-    }
+  if(mMesh)
+    mMesh->setPos(p);
 }
-void AntEntity::setPos2D(const Pos2D &p)
+void AntEntity::setPos(const AGVector2 &p)
 {
-  mPos=Pos3D(p.x,getMap()->getHeight(p),p.y);
+  mPos=getMap()->getPos(p);
   onGround=true;
-  if(mSurface)
-    {
-      mSurface->setPosition(mPos);
-      mSurface->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
-    }
-
+  if(mMesh)
+    mMesh->setPos(mPos);
 }
 
 void AntEntity::setJob(Job *pJob)
@@ -234,11 +230,6 @@ void AntEntity::move(float pTime)
 
 
 
-Rect2D AntEntity::getRect() const
-  {
-    return Rect2D((int)mPos.x,(int)mPos.y,32,32);
-  }
-
 void AntEntity::eventJobFinished()
 {
   mJobFinished.push_back(mJob);
@@ -260,12 +251,9 @@ bool AntEntity::isJobFinished() const
 void AntEntity::eventMapChanged()
 {
   if(onGround)
-    mPos=getMap()->getPos3D(Pos2D(mPos.x,mPos.z));
-  if(mSurface)
-    {
-      mSurface->setPosition(mPos);
-      mSurface->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
-    }
+    mPos=getMap()->getPos(AGVector2(getPos2D()));
+  if(mMesh)
+    mMesh->setPos(mPos);
 }
 
 void AntEntity::setType(const std::string &pType)
@@ -278,80 +266,17 @@ std::string AntEntity::getType() const
   return mType;
 }
 
-void AntEntity::setSurface(VoxelImage *i)
+void AntEntity::setMesh(Mesh *m)
 {
-  mSurface=i;
-}
-
-/*
-void AntEntity::assignJob(AntEntity*)
-{
-}*/
-
-void AntEntity::updateSurface()
-{
-  std::string s=getTexture();
-  if(s.length())
-    {
-      if(mSurface)
-	{
-	  mSurface->setTexture(s);
-	}
-      else
-	{
-	  VoxelImage *im=new VoxelImage(s);
-	  im->setVirtualY(getVirtualY());
-	  im->setPosition(mPos);
-	  im->setDarkness(getMap()->getDarkness(Pos2D(mPos.x,mPos.z)));
-
-	  setSurface(im);
-	}
-    }
+  mMesh=m;
 }
 
 
-int AntEntity::getVirtualY() const
+Mesh *AntEntity::getMesh()
 {
-  return mVirtualY;
+  return mMesh;
 }
 
-void AntEntity::setVirtualY(int y)
-{
-  mVirtualY=y;
-}
-
-VoxelImage*AntEntity::getSurface()
-    {
-      //      CTRACE;
-      //      cdebug(mSurface);
-      if(!mSurface)
-	updateSurface();
-      //      cdebug(mSurface);
-      //      cdebug(typeid(*this).name());
-      return mSurface;
-    }
-
-/*
-void AntEntity::setVar(std::string n,std::string v)
-{
-  mVars[n]=v;
-}
-std::string AntEntity::getVar(std::string n) const
-{
-  std::map<std::string,std::string>::const_iterator i=mVars.find(n);
-  if(i==mVars.end())
-    return "";
-  return i->second;
-  }
-
-int AntEntity::getPlayerID() const
-{
-  return mPlayerID;
-}
-void AntEntity::setPlayerID(int id)
-{
-  mPlayerID=id;
-}*/
 
 int AntEntity::getID() const
 {
@@ -369,40 +294,11 @@ std::string AntEntity::getTexture() const
       return "";
     }
 
-void AntEntity::setDirection(const Pos2D &p)
+void AntEntity::setDirection(float dir)
     {
-      Pos2D p2=p.normalized();
-      int oldDir=mDirNum;
-
-      if(p2.x<-0.38) // sin(PI/4)
-        {
-          if(p2.y<-0.38)
-            mDirNum=1; // down left
-          else if(p2.y<0.38)
-            mDirNum=8; // left
-          else
-            mDirNum=7; // up left
-        }
-      else if(p2.x<0.38)
-        {
-          if(p2.y<-0.38)
-            mDirNum=2; // down
-          else if(p2.y<0.38)
-            mDirNum=1; // undefinied
-          else
-            mDirNum=6; // up
-        }
-      else
-      {
-          if(p2.y<-0.38)
-            mDirNum=3; // down right
-          else if(p2.y<0.38)
-            mDirNum=4; // right
-          else
-            mDirNum=5; // up right
-      }
-      if(mDirNum!=oldDir)
-	updateSurface();
+      mDir=dir;
+      if(mMesh)
+	mMesh->setRotation(dir);
     }
 
 
@@ -444,11 +340,11 @@ void AntEntity::newRestJob(int pTime)
 {
   setJob(new RestJob(pTime));
 }
-void AntEntity::newFetchJob(int p,Pos2D &pTarget,const std::string &what)
+void AntEntity::newFetchJob(int p,AGVector2 &pTarget,const std::string &what)
 {
   setJob(new FetchJob(p,pTarget,what));
 }
-void AntEntity::newMoveJob(int p,const Pos2D &pTarget,int pnear)
+void AntEntity::newMoveJob(int p,const AGVector2 &pTarget,int pnear)
 {
   setJob(new MoveJob(p,pTarget,pnear));
 }
@@ -562,4 +458,27 @@ void AntEntity::setName(const std::string &pName)
 std::string AntEntity::getName() const
 {
   return mName;
+}
+
+AGRect2 AntEntity::getRect() const
+{
+  // FIXME: exchange this with something suitable
+  return AGRect2(mPos[0]-0.1, mPos[1]-0.1, 0.2, 0.2);
+}
+
+
+
+void AntEntity_markfunc(void *ptr)
+{
+  if(!ptr)
+    return;
+  Mesh *cppAnimal;
+  AntEntity *zoo;
+
+  zoo = static_cast<AntEntity*>(ptr);
+
+  cppAnimal=zoo->getMesh();
+  if(cppAnimal)
+    if(cppAnimal->mRubyObject)
+      rb_gc_mark(cppAnimal->mRUBY);
 }

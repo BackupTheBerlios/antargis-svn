@@ -22,22 +22,27 @@
 #define __ANTARGIS_H__
 
 #include "map.h"
-#include "minimap.h"
-#include "voxel_gen.h"
-#include "voxel.h"
-#include "view.h"
+//#include "minimap.h"
+//#include "voxel_gen.h"
+#include "scenenode.h"
+#include "mesh.h"
+#include "scene.h"
+#include "antapp.h"
 #include "entity.h"
+#include "terrain.h"
 //#include "ant_man.h"
-#include "ant_geometry.h"
+//#include "ant_geometry.h"
 #ifdef SWIG
 %include "map.h"
-%include "minimap.h"
-%include "voxel_gen.h"
-%include "voxel.h"
-%include "view.h"
+ //%include "minimap.h"
+%include "scenenode.h"
+%include "mesh.h"
+%include "scene.h"
+%include "antapp.h"
 %include "entity.h"
+%include "terrain.h"
  //%include "ant_man.h"
-%include "ant_geometry.h"
+ //%include "ant_geometry.h"
 
 #endif
 
