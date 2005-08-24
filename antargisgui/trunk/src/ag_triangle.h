@@ -148,6 +148,10 @@ class AGVector3
 
   AGVector3 operator-(const AGVector3 &p) const;
   AGVector3 operator+(const AGVector3 &p) const;
+#ifdef SWIG
+%rename(add) operator+=(const AGVector3 &p);
+%rename(sub) operator-=(const AGVector3 &p);
+#endif
   AGVector3 &operator+=(const AGVector3 &p);
   AGVector3 &operator-=(const AGVector3 &p);
 
@@ -396,7 +400,7 @@ class AGVector4
   %rename(x) getX() const;
   %rename(y) getY() const;
   %rename(z) getZ() const;
-  %rename(z) getW() const;
+  %rename(w) getW() const;
 #endif
   float getX() const;
   float getY() const;
@@ -405,6 +409,10 @@ class AGVector4
 
   AGVector4 operator-(const AGVector4 &p) const;
   AGVector4 operator+(const AGVector4 &p) const;
+#ifdef SWIG
+%rename(add) operator+=(const AGVector4 &p);
+%rename(sub) operator-=(const AGVector4 &p);
+#endif
   AGVector4 &operator+=(const AGVector4 &p);
   AGVector4 &operator-=(const AGVector4 &p);
 
@@ -442,6 +450,11 @@ class AGVector4
   // vector-cross-product
   // ignores 4th coordinate
   AGVector4 operator%(const AGVector4 &a) const;
+  AGVector4 cross(const AGVector4 &a) const
+  {
+    return operator%(a);
+  }
+
 
   AGVector3 dim3() const;
 

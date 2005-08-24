@@ -21146,6 +21146,48 @@ _wrap_AGVector3___add__(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector3_add(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = (AGVector3 *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGVector3 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGVector3 &_result_ref = (arg1)->operator +=((AGVector3 const &)*arg2);
+        result = (AGVector3 *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector3,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector3_sub(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = (AGVector3 *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGVector3 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGVector3 &_result_ref = (arg1)->operator -=((AGVector3 const &)*arg2);
+        result = (AGVector3 *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector3,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGVector3___mul____SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = (AGVector3 *) 0 ;
     AGVector3 *arg2 = 0 ;
@@ -23523,6 +23565,22 @@ _wrap_AGVector4_z(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector4_w(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
+    result = (float)((AGVector4 const *)arg1)->getW();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGVector4___sub__(int argc, VALUE *argv, VALUE self) {
     AGVector4 *arg1 = (AGVector4 *) 0 ;
     AGVector4 *arg2 = 0 ;
@@ -23562,6 +23620,48 @@ _wrap_AGVector4___add__(int argc, VALUE *argv, VALUE self) {
         resultptr = new AGVector4((AGVector4 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector4_add(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector4 *arg2 = 0 ;
+    AGVector4 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGVector4 &_result_ref = (arg1)->operator +=((AGVector4 const &)*arg2);
+        result = (AGVector4 *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector4,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector4_sub(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector4 *arg2 = 0 ;
+    AGVector4 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        AGVector4 &_result_ref = (arg1)->operator -=((AGVector4 const &)*arg2);
+        result = (AGVector4 *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector4,0);
     return vresult;
 }
 
@@ -23855,6 +23955,28 @@ _wrap_AGVector4___mod__(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     result = ((AGVector4 const *)arg1)->operator %((AGVector4 const &)*arg2);
+    
+    {
+        AGVector4 * resultptr;
+        resultptr = new AGVector4((AGVector4 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector4_cross(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector4 *arg2 = 0 ;
+    AGVector4 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = ((AGVector4 const *)arg1)->cross((AGVector4 const &)*arg2);
     
     {
         AGVector4 * resultptr;
@@ -36328,6 +36450,8 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector3.klass, "getAngle", VALUEFUNC(_wrap_AGVector3_getAngle), -1);
     rb_define_method(cAGVector3.klass, "-", VALUEFUNC(_wrap_AGVector3___sub__), -1);
     rb_define_method(cAGVector3.klass, "+", VALUEFUNC(_wrap_AGVector3___add__), -1);
+    rb_define_method(cAGVector3.klass, "add", VALUEFUNC(_wrap_AGVector3_add), -1);
+    rb_define_method(cAGVector3.klass, "sub", VALUEFUNC(_wrap_AGVector3_sub), -1);
     rb_define_method(cAGVector3.klass, "*", VALUEFUNC(_wrap_AGVector3___mul__), -1);
     rb_define_method(cAGVector3.klass, "/", VALUEFUNC(_wrap_AGVector3___div__), -1);
     rb_define_method(cAGVector3.klass, "%", VALUEFUNC(_wrap_AGVector3___mod__), -1);
@@ -36464,8 +36588,11 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector4.klass, "x", VALUEFUNC(_wrap_AGVector4_x), -1);
     rb_define_method(cAGVector4.klass, "y", VALUEFUNC(_wrap_AGVector4_y), -1);
     rb_define_method(cAGVector4.klass, "z", VALUEFUNC(_wrap_AGVector4_z), -1);
+    rb_define_method(cAGVector4.klass, "w", VALUEFUNC(_wrap_AGVector4_w), -1);
     rb_define_method(cAGVector4.klass, "-", VALUEFUNC(_wrap_AGVector4___sub__), -1);
     rb_define_method(cAGVector4.klass, "+", VALUEFUNC(_wrap_AGVector4___add__), -1);
+    rb_define_method(cAGVector4.klass, "add", VALUEFUNC(_wrap_AGVector4_add), -1);
+    rb_define_method(cAGVector4.klass, "sub", VALUEFUNC(_wrap_AGVector4_sub), -1);
     rb_define_method(cAGVector4.klass, "*", VALUEFUNC(_wrap_AGVector4___mul__), -1);
     rb_define_method(cAGVector4.klass, "/", VALUEFUNC(_wrap_AGVector4___div__), -1);
     rb_define_method(cAGVector4.klass, "-@", VALUEFUNC(_wrap_AGVector4___neg__), -1);
@@ -36479,6 +36606,7 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGVector4.klass, "normalize3", VALUEFUNC(_wrap_AGVector4_normalize3), -1);
     rb_define_method(cAGVector4.klass, "nonZero", VALUEFUNC(_wrap_AGVector4_nonZero), -1);
     rb_define_method(cAGVector4.klass, "%", VALUEFUNC(_wrap_AGVector4___mod__), -1);
+    rb_define_method(cAGVector4.klass, "cross", VALUEFUNC(_wrap_AGVector4_cross), -1);
     rb_define_method(cAGVector4.klass, "dim3", VALUEFUNC(_wrap_AGVector4_dim3), -1);
     rb_define_method(cAGVector4.klass, "to_s", VALUEFUNC(_wrap_AGVector4_to_s), -1);
     cAGVector4.mark = 0;
