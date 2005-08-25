@@ -121,6 +121,7 @@ AGGLScreen::~AGGLScreen()
 
 void AGGLScreen::begin()
 {
+  glDisable(GL_LIGHTING);
   glEnable(GL_TEXTURE_2D);
   glShadeModel(GL_SMOOTH);
   // glClearColor(0.0f,0.0f,0.0f,0.0f); // clear bgcolor

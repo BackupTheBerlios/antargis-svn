@@ -216,6 +216,8 @@ class AGMatrix3
 
   AGVector3 operator*(const AGVector3 &v) const;
 
+  AGMatrix3 inverted() const;
+
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
@@ -273,6 +275,8 @@ class AGLine3
 
   //  AGVector3 normal() const;
   AGVector3 direction() const;
+
+  float distance(const AGVector3 &p) const;
 
   //  float distance(const AGVector3 &v) const;
 
@@ -486,6 +490,8 @@ class AGMatrix4
   AGMatrix4 operator*(const AGMatrix4 &m) const;
   AGMatrix4 &operator*=(const AGMatrix4 &m);
 
+  AGMatrix3 get3x3(size_t x,size_t y) const;
+
   AGVector4 operator*(const AGVector4 &v) const;
 
   float operator()(size_t x,size_t y) const;
@@ -519,11 +525,13 @@ class AGRect3
 // axis-aligned
 class AGBox3
 {
-  AGVector3 base,dir;
  public:
+  AGVector3 base,dir;
+
   AGBox3(const AGVector3 &pBase,const AGVector3 &pDir);
 
   void include(const AGVector3&p);
+  bool includes(const AGBox3 &b);
   bool collides(const AGVector3&p) const;
 
   bool collides(const AGLine3&p) const;
@@ -531,6 +539,8 @@ class AGBox3
   std::vector<AGRect3> getSides() const;
 
   std::string toString() const;
+
+  std::vector<AGBox3> split() const;
 };
 
 

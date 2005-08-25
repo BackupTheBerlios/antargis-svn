@@ -641,6 +641,77 @@ AGMatrix3::AGMatrix3(const AGVector3 &n)
 }
 
 
+void gauss(AGMatrix3 &a,AGMatrix3 &b)
+{
+  // lower-left triangle
+  for(int c=0;c<2;c++) // cols
+    {
+      for(int r=c+1;r<3;r++) // rows
+	{
+	  if(fabs(b.get(c,r))>0.0001)
+	    {
+	      float f=-b.get(c,r-1)/b.get(c,r);
+	      cdebug("f:"<<f);
+	      for(int i=0;i<3;i++)
+		{
+		  // modify row
+		  a.set(i,r,a.get(i,r-1)+a.get(i,r)*f);
+		  if(i==0)
+		    cdebug(b.get(c,r-1)<<"    "<<b.get(c,r));
+		  b.set(i,r,b.get(i,r-1)+b.get(i,r)*f);
+		}
+	    }
+	}
+    }
+  cdebug("A:\n"<<a.toString());
+  cdebug("B:\n"<<b.toString());
+
+  // upper-right triangle
+  for(int c=2;c>0;c--) // cols
+    {
+      for(int r=0;r<c;r++) // rows
+	{
+	  if(fabs(b.get(c,r))>0.0001)
+	    {
+	      float f=-b.get(c,r+1)/b.get(c,r);
+	      for(int i=0;i<3;i++)
+		{
+		  // modify row
+		  a.set(i,r,a.get(i,r+1)+a.get(i,r)*f);
+		  b.set(i,r,b.get(i,r+1)+b.get(i,r)*f);
+		}
+	    }
+	}
+    }
+  cdebug("A:\n"<<a.toString());
+  cdebug("B:\n"<<b.toString());
+
+  // norming
+
+  for(int r=0;r<3;r++)
+    {
+      float v=b.get(r,r);
+      for(int c=0;c<3;c++)
+	{
+	  a.set(c,r,a.get(c,r)/v);
+	  b.set(c,r,b.get(c,r)/v);
+	}
+    }
+  cdebug("A:\n"<<a.toString());
+  cdebug("B:\n"<<b.toString());
+
+}
+
+AGMatrix3 AGMatrix3::inverted() const
+{
+  // gauss-alg.
+  AGMatrix3 a;
+  AGMatrix3 b(*this);
+
+  gauss(a,b);
+  return a;
+}
+
 
 void AGMatrix3::set(size_t x,size_t y,float f)
 {
@@ -1276,6 +1347,17 @@ AGLine3::AGLine3(const AGVector3 &pv0,const AGVector3 &pv1):
   v0(pv0),v1(pv1)
 {
 }
+
+float AGLine3::distance(const AGVector3 &p) const
+{
+  AGVector3 dir=direction();
+  AGVector3 diff=p-v0;
+  AGVector3 normal1=dir%diff;
+  AGVector3 plane_normal=dir%normal1;
+  plane_normal.normalize();
+  return fabs(diff*plane_normal);
+}
+
   
 AGVector3 AGLine3::getV0() const
 {
@@ -1628,6 +1710,18 @@ AGMatrix4::AGMatrix4(const AGVector4 &n)
 
 
 
+AGMatrix3 AGMatrix4::get3x3(size_t x,size_t y) const
+{
+  AGMatrix3 m;
+  assert(x<2);
+  assert(y<2);
+  for(size_t i=0;i<3;i++)
+    for(size_t j=0;j<3;j++)
+      m.set(i,j,get(i+x,j+y));
+  return m;
+}
+
+
 void AGMatrix4::set(size_t x,size_t y,float f)
 {
   assert(x>=0 && x<4);
@@ -1771,11 +1865,37 @@ std::vector<AGRect3> AGBox3::getSides() const
   return s;
 }
 
+bool AGBox3::includes(const AGBox3 &b)
+{
+  AGVector3 u0=base+dir;
+  AGVector3 u1=b.base+b.dir;
+  return (b.base[0]>=base[0] && b.base[1]>=base[1] && b.base[2]>=base[2] &&
+	  u1[0]<=u0[0] && u1[1]<=u0[1] && u1[2]<=u0[2]);
+}
+
 std::string AGBox3::toString() const
 {
   std::ostringstream os;
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
   return os.str();
+}
+
+std::vector<AGBox3> AGBox3::split() const
+{
+  std::vector<AGBox3> r;
+  AGVector3 d=dir*0.5;
+  AGVector3 x(dir[0],0,0);
+  AGVector3 y(0,dir[1],0);
+  AGVector3 z(0,0,dir[2]);
+  r.push_back(AGBox3(base      ,d));
+  r.push_back(AGBox3(base+x    ,d));
+  r.push_back(AGBox3(base  +y  ,d));
+  r.push_back(AGBox3(base+x+y  ,d));
+  r.push_back(AGBox3(base    +z,d));
+  r.push_back(AGBox3(base+x  +z,d));
+  r.push_back(AGBox3(base  +y+z,d));
+  r.push_back(AGBox3(base+x+y+z,d));
+  return r;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -1846,3 +1966,5 @@ std::string AGRect3::toString() const
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
   return os.str();
 }
+
+

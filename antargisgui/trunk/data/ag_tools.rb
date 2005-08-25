@@ -66,6 +66,10 @@ module AGHandler
 					if self.send(handler,name,callerName,event,caller) then
 						value=true
 					end
+				elsif m.arity==1 then
+					if self.send(handler,callerName) then
+						value=true
+					end
 				else
 					if self.send(handler) then
 						value=true
