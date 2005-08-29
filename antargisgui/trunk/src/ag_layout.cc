@@ -23,6 +23,7 @@
 #include "ag_tools.h"
 #include "ag_theme.h"
 #include "ag_listbox.h"
+#include "ag_image.h"
 
 #include "ag_button.h"
 #include "ag_edit.h"
@@ -423,3 +424,26 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(Layout);
+
+
+// AGLayout creator
+class AGImageLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(Image,"image")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    CTRACE;
+    std::string filename=pNode.get("filename");
+
+    AGSurface s(getSurfaceManager()->loadSurface(filename));
+
+    
+
+    AGWidget *w=new AGImage(pParent,AGPoint(toInt(pNode.get("x")),toInt(pNode.get("y"))),s,false,pRect);
+
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(Image);
