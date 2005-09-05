@@ -36,6 +36,9 @@ class AGRect2;
 class AGPaintTarget
 {
  public:
+  virtual ~AGPaintTarget()
+    {
+    }
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest) MSTUB
   virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc) MSTUB
 

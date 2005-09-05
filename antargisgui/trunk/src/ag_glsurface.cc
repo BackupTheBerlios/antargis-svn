@@ -980,3 +980,12 @@ void AGGLScreen::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const 
   
   glEnd();
 }
+
+size_t AGGLScreen::getWidth() const
+{
+  return w;
+}
+size_t AGGLScreen::getHeight() const
+{
+  return h;
+}

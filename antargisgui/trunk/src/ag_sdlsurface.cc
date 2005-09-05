@@ -294,3 +294,12 @@ AGTexture AGSDLScreen::makeTexture(const AGSurface &s)
   SDL_Surface *ns=SDL_DisplayFormatAlpha(const_cast<AGSurface&>(s).surface());
   return AGTexture(ns,s.width(),s.height());
 }
+
+size_t AGSDLScreen::getWidth() const
+{
+  return s->w;
+}
+size_t AGSDLScreen::getHeight() const
+{
+  return s->h;
+}

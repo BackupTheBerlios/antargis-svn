@@ -150,6 +150,9 @@ class AGScreen:public AGPaintTarget
   virtual void begin(); // call before start drawing
   virtual void flip();
 
+  virtual size_t getWidth() const;
+  virtual size_t getHeight() const;
+
  private:
   virtual AGTexture makeTexture(const AGSurface &s);
   virtual void deleteTexture(AGTexture &t);

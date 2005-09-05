@@ -60,6 +60,9 @@ class AGSDLScreen:public AGScreen
   virtual AGTexture displayFormat(SDL_Surface *s);
 
   virtual AGTexture makeTexture(const AGSurface &s);
+
+  virtual size_t getWidth() const;
+  virtual size_t getHeight() const;
  private:
   SDL_Surface *s;
  public:

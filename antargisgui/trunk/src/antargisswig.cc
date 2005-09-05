@@ -1735,6 +1735,32 @@ SwigDirector_AGScreen::SwigDirector_AGScreen(VALUE self) : Swig::Director(self) 
 
 
 
+size_t SwigDirector_AGScreen::getWidth() const {
+    size_t c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGScreen::getWidth();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getWidth"), 0, NULL);
+    c_result = (unsigned long) NUM2INT(result);
+    return (size_t) c_result;
+}
+
+
+size_t SwigDirector_AGScreen::getHeight() const {
+    size_t c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGScreen::getHeight();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getHeight"), 0, NULL);
+    c_result = (unsigned long) NUM2INT(result);
+    return (size_t) c_result;
+}
+
+
 void SwigDirector_AGScreen::flip() {
     VALUE result;
     
@@ -1838,31 +1864,6 @@ void SwigDirector_AGSDLScreen::tile(AGTexture const &pSource) {
 }
 
 
-void SwigDirector_AGSDLScreen::renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn) {
-    std::string temp4 ;
-    std::string temp40 ;
-    AGRect * nc_tmp_pClipRect = const_cast<AGRect *>(&pClipRect) ;
-    VALUE obj0 = Qnil ;
-    VALUE obj1 = Qnil ;
-    VALUE obj2 = Qnil ;
-    VALUE obj3 = Qnil ;
-    AGFont * nc_tmp_ParamIn = const_cast<AGFont *>(&ParamIn) ;
-    VALUE obj4 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGSDLScreen::renderText(pClipRect,BaseLineX,BaseLineY,pText,ParamIn);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(nc_tmp_pClipRect, SWIGTYPE_p_AGRect, 0);
-    obj1 = INT2NUM(BaseLineX);
-    obj2 = INT2NUM(BaseLineY);
-    obj3=rb_str_new2(pText.c_str());
-    obj4 = SWIG_NewPointerObj(nc_tmp_ParamIn, SWIGTYPE_p_AGFont, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("renderText"), 5,obj0,obj1,obj2,obj3,obj4);
-}
-
-
 void SwigDirector_AGSDLScreen::drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
     AGRect * nc_tmp_rect = const_cast<AGRect *>(&rect) ;
     VALUE obj0 = Qnil ;
@@ -1915,6 +1916,31 @@ void SwigDirector_AGSDLScreen::drawGradientAlpha(AGRect const &rect, AGColor con
 }
 
 
+void SwigDirector_AGSDLScreen::renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn) {
+    std::string temp4 ;
+    std::string temp40 ;
+    AGRect * nc_tmp_pClipRect = const_cast<AGRect *>(&pClipRect) ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE obj3 = Qnil ;
+    AGFont * nc_tmp_ParamIn = const_cast<AGFont *>(&ParamIn) ;
+    VALUE obj4 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSDLScreen::renderText(pClipRect,BaseLineX,BaseLineY,pText,ParamIn);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pClipRect, SWIGTYPE_p_AGRect, 0);
+    obj1 = INT2NUM(BaseLineX);
+    obj2 = INT2NUM(BaseLineY);
+    obj3=rb_str_new2(pText.c_str());
+    obj4 = SWIG_NewPointerObj(nc_tmp_ParamIn, SWIGTYPE_p_AGFont, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("renderText"), 5,obj0,obj1,obj2,obj3,obj4);
+}
+
+
 void SwigDirector_AGSDLScreen::drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c) {
     AGPoint * nc_tmp_p0 = const_cast<AGPoint *>(&p0) ;
     VALUE obj0 = Qnil ;
@@ -1932,6 +1958,32 @@ void SwigDirector_AGSDLScreen::drawLine(AGPoint const &p0, AGPoint const &p1, AG
     obj1 = SWIG_NewPointerObj(nc_tmp_p1, SWIGTYPE_p_AGPoint, 0);
     obj2 = SWIG_NewPointerObj(nc_tmp_c, SWIGTYPE_p_AGColor, 0);
     result = rb_funcall(swig_get_self(), rb_intern("drawLine"), 3,obj0,obj1,obj2);
+}
+
+
+size_t SwigDirector_AGSDLScreen::getWidth() const {
+    size_t c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGSDLScreen::getWidth();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getWidth"), 0, NULL);
+    c_result = (unsigned long) NUM2INT(result);
+    return (size_t) c_result;
+}
+
+
+size_t SwigDirector_AGSDLScreen::getHeight() const {
+    size_t c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGSDLScreen::getHeight();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getHeight"), 0, NULL);
+    c_result = (unsigned long) NUM2INT(result);
+    return (size_t) c_result;
 }
 
 
@@ -1980,28 +2032,6 @@ void SwigDirector_AGSDLScreen::begin() {
 }
 
 
-void SwigDirector_AGSDLScreen::drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2) {
-    AGRect * nc_tmp_rect = const_cast<AGRect *>(&rect) ;
-    VALUE obj0 = Qnil ;
-    VALUE obj1 = Qnil ;
-    AGColor * nc_tmp_c1 = const_cast<AGColor *>(&c1) ;
-    VALUE obj2 = Qnil ;
-    AGColor * nc_tmp_c2 = const_cast<AGColor *>(&c2) ;
-    VALUE obj3 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGSDLScreen::drawBorder(rect,W,c1,c2);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(nc_tmp_rect, SWIGTYPE_p_AGRect, 0);
-    obj1 = INT2NUM(W);
-    obj2 = SWIG_NewPointerObj(nc_tmp_c1, SWIGTYPE_p_AGColor, 0);
-    obj3 = SWIG_NewPointerObj(nc_tmp_c2, SWIGTYPE_p_AGColor, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("drawBorder"), 4,obj0,obj1,obj2,obj3);
-}
-
-
 void SwigDirector_AGSDLScreen::drawRect(AGRect const &pRect, AGColor const &c) {
     AGRect * nc_tmp_pRect = const_cast<AGRect *>(&pRect) ;
     VALUE obj0 = Qnil ;
@@ -2027,6 +2057,28 @@ void SwigDirector_AGSDLScreen::flip() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("flip"), 0, NULL);
+}
+
+
+void SwigDirector_AGSDLScreen::drawBorder(AGRect const &rect, int W, AGColor const &c1, AGColor const &c2) {
+    AGRect * nc_tmp_rect = const_cast<AGRect *>(&rect) ;
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    AGColor * nc_tmp_c1 = const_cast<AGColor *>(&c1) ;
+    VALUE obj2 = Qnil ;
+    AGColor * nc_tmp_c2 = const_cast<AGColor *>(&c2) ;
+    VALUE obj3 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGSDLScreen::drawBorder(rect,W,c1,c2);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_rect, SWIGTYPE_p_AGRect, 0);
+    obj1 = INT2NUM(W);
+    obj2 = SWIG_NewPointerObj(nc_tmp_c1, SWIGTYPE_p_AGColor, 0);
+    obj3 = SWIG_NewPointerObj(nc_tmp_c2, SWIGTYPE_p_AGColor, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawBorder"), 4,obj0,obj1,obj2,obj3);
 }
 
 
@@ -15505,6 +15557,44 @@ _wrap_AGScreen_flip(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGScreen_getWidth(int argc, VALUE *argv, VALUE self) {
+    AGScreen *arg1 = (AGScreen *) 0 ;
+    size_t result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGScreen, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((AGScreen const *)arg1)->getWidth();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGScreen_getHeight(int argc, VALUE *argv, VALUE self) {
+    AGScreen *arg1 = (AGScreen *) 0 ;
+    size_t result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGScreen, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((AGScreen const *)arg1)->getHeight();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGScreen_allocate(VALUE self) {
@@ -16439,6 +16529,44 @@ _wrap_AGSDLScreen_makeTexture(int argc, VALUE *argv, VALUE self) {
         resultptr = new AGTexture((AGTexture &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGTexture, 1);
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGSDLScreen_getWidth(int argc, VALUE *argv, VALUE self) {
+    AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
+    size_t result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLScreen, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((AGSDLScreen const *)arg1)->getWidth();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGSDLScreen_getHeight(int argc, VALUE *argv, VALUE self) {
+    AGSDLScreen *arg1 = (AGSDLScreen *) 0 ;
+    size_t result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLScreen, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((AGSDLScreen const *)arg1)->getHeight();
+    
+    vresult = UINT2NUM(result);
     return vresult;
 }
 
@@ -36296,6 +36424,8 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGScreen.klass, "initialize", VALUEFUNC(_wrap_new_AGScreen), -1);
     rb_define_method(cAGScreen.klass, "begin", VALUEFUNC(_wrap_AGScreen_begin), -1);
     rb_define_method(cAGScreen.klass, "flip", VALUEFUNC(_wrap_AGScreen_flip), -1);
+    rb_define_method(cAGScreen.klass, "getWidth", VALUEFUNC(_wrap_AGScreen_getWidth), -1);
+    rb_define_method(cAGScreen.klass, "getHeight", VALUEFUNC(_wrap_AGScreen_getHeight), -1);
     cAGScreen.mark = 0;
     cAGScreen.destroy = (void (*)(void *)) free_AGScreen;
     rb_define_module_function(mLibantargisgui, "getScreen", VALUEFUNC(_wrap_getScreen), -1);
@@ -36347,6 +36477,8 @@ SWIGEXPORT(void) Init_libantargisgui(void) {
     rb_define_method(cAGSDLScreen.klass, "loadSurface", VALUEFUNC(_wrap_AGSDLScreen_loadSurface), -1);
     rb_define_method(cAGSDLScreen.klass, "displayFormat", VALUEFUNC(_wrap_AGSDLScreen_displayFormat), -1);
     rb_define_method(cAGSDLScreen.klass, "makeTexture", VALUEFUNC(_wrap_AGSDLScreen_makeTexture), -1);
+    rb_define_method(cAGSDLScreen.klass, "getWidth", VALUEFUNC(_wrap_AGSDLScreen_getWidth), -1);
+    rb_define_method(cAGSDLScreen.klass, "getHeight", VALUEFUNC(_wrap_AGSDLScreen_getHeight), -1);
     cAGSDLScreen.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGSDLScreen.destroy = (void (*)(void *)) free_AGSDLScreen;
     rb_define_module_function(mLibantargisgui, "disown_AGEvent", VALUEFUNC(_wrap_disown_AGEvent), -1);

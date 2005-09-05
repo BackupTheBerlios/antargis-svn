@@ -72,6 +72,8 @@ class AGGLScreen:public AGScreen
   bool inScreen(const AGRect &r) const;
   bool inScreen(const AGRect2 &r) const;
 
+  virtual size_t getWidth() const;
+  virtual size_t getHeight() const;
 
  private:
   GLuint getID(AGTexture *s);

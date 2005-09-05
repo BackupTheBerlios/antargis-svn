@@ -26,6 +26,9 @@
 class AGInstanceBase
 {
  public:
+  virtual ~AGInstanceBase()
+    {
+    }
   virtual void kill()=0;
 };
 

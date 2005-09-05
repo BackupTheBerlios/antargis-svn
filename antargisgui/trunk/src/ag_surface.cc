@@ -456,6 +456,15 @@ void AGScreen::begin()
 void AGScreen::flip()
 {
 }
+size_t AGScreen::getWidth() const
+{
+  return 0;
+}
+size_t AGScreen::getHeight() const
+{
+  return 0;
+}
+
 
 /*
 AGTexture AGScreen::displayFormat(SDL_Surface *s)
