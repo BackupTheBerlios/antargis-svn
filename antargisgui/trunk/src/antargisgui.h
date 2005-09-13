@@ -54,7 +54,9 @@
 #include "ag_listbox.h"
 #include "ag_painter.h"
 #include "ag_mixer.h"
+#include "ag_glwidget.h"
 #include <SDL_keysym.h>
+#include "ag_colorbutton.h"
 
 #ifdef SWIG
 %include "ag_main.h"
@@ -86,6 +88,8 @@
 %include "ag_layoutfactory.h"
 %include "ag_xml.h"
 %include "ag_mixer.h"
+%include "ag_glwidget.h"
+%include "ag_colorbutton.h"
  //%include "ag_dialog.h"
 %include "ag_fs.h"
 %include "ag_listbox.h"

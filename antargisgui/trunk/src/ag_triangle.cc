@@ -640,41 +640,51 @@ AGMatrix3::AGMatrix3(const AGVector3 &n)
   a[2][1]=n[1];
 }
 
+AGMatrix3 AGMatrix3::transposed() const
+{
+  AGMatrix3 a;
+  for(size_t x=0;x<3;x++)
+    for(size_t y=0;y<3;y++)
+      a.set(x,y,get(y,x));
+  return a;
+}
 
-void gauss(AGMatrix3 &a,AGMatrix3 &b)
+
+template<class AGMatrix3>
+void gauss(AGMatrix3 &a,AGMatrix3 &b,int size)
 {
   // lower-left triangle
-  for(int c=0;c<2;c++) // cols
+  for(int c=0;c<size-1;c++) // cols
     {
-      for(int r=c+1;r<3;r++) // rows
+      for(int r=c+1;r<size;r++) // rows
 	{
 	  if(fabs(b.get(c,r))>0.0001)
 	    {
 	      float f=-b.get(c,r-1)/b.get(c,r);
-	      cdebug("f:"<<f);
-	      for(int i=0;i<3;i++)
+	      //	      cdebug("f:"<<f);
+	      for(int i=0;i<size;i++)
 		{
 		  // modify row
 		  a.set(i,r,a.get(i,r-1)+a.get(i,r)*f);
-		  if(i==0)
-		    cdebug(b.get(c,r-1)<<"    "<<b.get(c,r));
+		  //		  if(i==0)
+		  //		    cdebug(b.get(c,r-1)<<"    "<<b.get(c,r));
 		  b.set(i,r,b.get(i,r-1)+b.get(i,r)*f);
 		}
 	    }
 	}
     }
-  cdebug("A:\n"<<a.toString());
-  cdebug("B:\n"<<b.toString());
+  //  cdebug("A:\n"<<a.toString());
+  //  cdebug("B:\n"<<b.toString());
 
   // upper-right triangle
-  for(int c=2;c>0;c--) // cols
+  for(int c=size-1;c>0;c--) // cols
     {
       for(int r=0;r<c;r++) // rows
 	{
 	  if(fabs(b.get(c,r))>0.0001)
 	    {
 	      float f=-b.get(c,r+1)/b.get(c,r);
-	      for(int i=0;i<3;i++)
+	      for(int i=0;i<size;i++)
 		{
 		  // modify row
 		  a.set(i,r,a.get(i,r+1)+a.get(i,r)*f);
@@ -683,22 +693,23 @@ void gauss(AGMatrix3 &a,AGMatrix3 &b)
 	    }
 	}
     }
-  cdebug("A:\n"<<a.toString());
-  cdebug("B:\n"<<b.toString());
+  //  cdebug("A:\n"<<a.toString());
+  //  cdebug("B:\n"<<b.toString());
 
   // norming
 
-  for(int r=0;r<3;r++)
+  for(int r=0;r<size;r++)
     {
       float v=b.get(r,r);
-      for(int c=0;c<3;c++)
+      if(v!=0)
+      for(int c=0;c<size;c++)
 	{
 	  a.set(c,r,a.get(c,r)/v);
 	  b.set(c,r,b.get(c,r)/v);
 	}
     }
-  cdebug("A:\n"<<a.toString());
-  cdebug("B:\n"<<b.toString());
+  //  cdebug("A:\n"<<a.toString());
+  //  cdebug("B:\n"<<b.toString());
 
 }
 
@@ -708,7 +719,7 @@ AGMatrix3 AGMatrix3::inverted() const
   AGMatrix3 a;
   AGMatrix3 b(*this);
 
-  gauss(a,b);
+  gauss(a,b,3);
   return a;
 }
 
@@ -725,6 +736,39 @@ float AGMatrix3::get(size_t x,size_t y) const
   assert(y>=0 && y<3);
   return a[x][y];
 }
+
+float &AGMatrix3::get(size_t x,size_t y)
+{
+  assert(x>=0 && x<3);
+  assert(y>=0 && y<3);
+  return a[x][y];
+}
+
+AGMatrix3::Row AGMatrix3::operator[](size_t y)
+{
+  Row r;
+  r.matrix=this;
+  r.y=y;
+  return r;
+}
+const AGMatrix3::Row AGMatrix3::operator[](size_t y) const
+{
+  Row r;
+  r.matrix=const_cast<AGMatrix3*>(this);
+  r.y=y;
+  return r;
+}
+
+AGMatrix3 AGMatrix3::operator-() const
+{
+  AGMatrix3 n;
+  for(size_t x=0;x<3;x++)
+    for(size_t y=0;y<3;y++)
+      n[x][y]=-(*this)[x][y];
+  return n;
+}
+
+
 
 AGMatrix3 AGMatrix3::operator*(const AGMatrix3 &m) const
 {
@@ -1708,6 +1752,34 @@ AGMatrix4::AGMatrix4(const AGVector4 &n)
   get(3,2)=n[2];
 }
 
+AGMatrix4 &AGMatrix4::operator+=(const AGMatrix4 &m)
+{
+  for(size_t x=0;x<4;x++)
+    for(size_t y=0;y<4;y++)
+      get(x,y)+=m.get(x,y);
+  return *this;
+}
+
+AGMatrix4 AGMatrix4::transposed() const
+{
+  AGMatrix4 a;
+  for(size_t x=0;x<4;x++)
+    for(size_t y=0;y<4;y++)
+      a.get(x,y)=get(y,x);
+  return a;
+}
+
+
+
+AGMatrix4 AGMatrix4::inverted() const
+{
+  // gauss-alg.
+  AGMatrix4 a;
+  AGMatrix4 b(*this);
+
+  gauss(a,b,4);
+  return a;
+}
 
 
 AGMatrix3 AGMatrix4::get3x3(size_t x,size_t y) const
@@ -1802,6 +1874,24 @@ AGVector4 AGMatrix4::getRow(size_t i) const
   //  return AGVector4(get(i,0),get(i,1),get(i,2),get(i,3));
   return AGVector4(get(0,i),get(1,i),get(2,i),get(3,i));
 }
+
+
+AGMatrix4::MRow AGMatrix4::operator[](size_t y)
+{
+  MRow r;
+  r.matrix=this;
+  r.y=y;
+  return r;
+}
+/*
+const AGMatrix4::Row AGMatrix4::operator[](size_t y) const
+{
+  Row r;
+  r.matrix=const_cast<AGMatrix4*>(this);
+  r.y=y;
+  return r;
+  }*/
+
 
 ///////////////////////////////////////////////////////////////
 // AGBox3

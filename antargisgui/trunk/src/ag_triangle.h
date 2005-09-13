@@ -201,22 +201,45 @@ class AGPoint3:public AGVector3
   AGPoint3&operator=(const AGVector3 &v);
 };
 
+
 class AGMatrix3
 {
   float a[3][3];
  public:
+  struct Row
+  {
+    AGMatrix3 *matrix;
+    int y;
+
+    float &operator[](size_t x)
+    {
+      return matrix->get(x,y);
+    }
+    float operator[](size_t x) const
+    {
+      return matrix->get(x,y);
+    }
+  };
+
   AGMatrix3();
   AGMatrix3(const AGAngle &a);
   AGMatrix3(const AGVector3 &a);
   void set(size_t x,size_t y,float f);
   float get(size_t x,size_t y) const;
+  float &get(size_t x,size_t y);
 
   AGMatrix3 operator*(const AGMatrix3 &m) const;
   AGMatrix3 &operator*=(const AGMatrix3 &m);
 
   AGVector3 operator*(const AGVector3 &v) const;
 
+  AGMatrix3 operator-() const;
+
   AGMatrix3 inverted() const;
+  AGMatrix3 transposed() const;
+
+  Row operator[](size_t y);
+  const Row operator[](size_t y) const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -477,6 +500,21 @@ class AGMatrix4
 {
   float a[16];
  public:
+  struct MRow
+  {
+    AGMatrix4 *matrix;
+    int y;
+
+    float &operator[](size_t x)
+    {
+      return matrix->get(x,y);
+    }
+    float operator[](size_t x) const
+    {
+      return matrix->get(x,y);
+    }
+  };
+
   AGMatrix4();
   AGMatrix4(float v[16]);
   AGMatrix4(float angle,const AGVector3 &d);
@@ -489,6 +527,7 @@ class AGMatrix4
 
   AGMatrix4 operator*(const AGMatrix4 &m) const;
   AGMatrix4 &operator*=(const AGMatrix4 &m);
+  AGMatrix4 &operator+=(const AGMatrix4 &m);
 
   AGMatrix3 get3x3(size_t x,size_t y) const;
 
@@ -496,6 +535,12 @@ class AGMatrix4
 
   float operator()(size_t x,size_t y) const;
   float &operator()(size_t x,size_t y);
+
+  AGMatrix4 inverted() const;
+  AGMatrix4 transposed() const;
+
+  MRow operator[](size_t y);
+  //  const Row operator[](size_t y) const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;

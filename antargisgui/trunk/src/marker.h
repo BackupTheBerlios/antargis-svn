@@ -58,6 +58,12 @@
   result->mRubyObject=true;
 }
 %markfunc AGWidget "AGWidget_markfunc"
+%exception AGGLWidget::AGGLWidget {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+}
+%markfunc AGGLWidget "AGWidget_markfunc"
 %exception AGLayout::AGLayout {
 	$action
 	result->mRUBY=self;
@@ -88,6 +94,12 @@
   result->mRubyObject=true;
 }
 %markfunc AGListBox "AGWidget_markfunc"
+%exception AGColorButton::AGColorButton {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+}
+%markfunc AGColorButton "AGWidget_markfunc"
 %exception AGRadio::AGRadio {
 	$action
 	result->mRUBY=self;
