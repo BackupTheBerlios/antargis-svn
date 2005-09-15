@@ -21,7 +21,7 @@ Scene::Scene(int w,int h)
 {
   windowWidth=w;
   windowHeight=h;
-  shadowMapSize=1024;
+  shadowMapSize=512;
   white=AGVector4(1,1,1,1);
   black=AGVector4(0,0,0,0);
   inited=false;
@@ -133,7 +133,14 @@ void Scene::calcCameraView()
     lp/=lp[3];
 
     // it is something like (12,-10,10)
+
+
+
+
     lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this 
+    lp*=100;
+
+
     //lp=AGVector4(-2,2,-2,1);
     gluLookAt(lp[0], lp[1], lp[2],
 	      0,0,0,
@@ -146,7 +153,9 @@ void Scene::calcCameraView()
     //    glOrtho(-10,10,-15,20,10,1000);
     cdebug(lp.toString());
     float s2=sqrt(2.0f);
-    glOrtho(-s2,s2,-s2,s2,1,20);
+    float ldist=lp.length3();
+
+    glOrtho(-s2,s2,-s2,s2,ldist-2*s2,ldist+10);//1,10);//ldist-2*s2,ldist+10*s2);
 
 
     //very old:glOrtho(-1,2,-1.5,3,700,750);
