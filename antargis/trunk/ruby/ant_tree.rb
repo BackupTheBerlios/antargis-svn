@@ -27,7 +27,7 @@ class AntNewTree<AntMyEntity
 		@typeID=(rand()*12).to_i
 		setType("tree")
 		#setVirtualY(100)
-		setMesh(Mesh.new(getMeshData("data/models/tree.ant",1),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
 	end
 	def setTreeType(t)
 		@typeID=t

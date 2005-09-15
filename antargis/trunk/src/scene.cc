@@ -6,6 +6,8 @@
 #include <ag_debug.h>
 #include <algorithm>
 
+#include <math.h>
+
 const GLenum shadowTexUnit= GL_TEXTURE2;
 const GLenum baseTexUnit= GL_TEXTURE0;
 
@@ -114,6 +116,9 @@ void Scene::calcCameraView()
 
   if(mShadow==2)
     {
+      // calculation of lightposition is somehow crappy
+
+
       // PSMs
       //  lightPosition=AGVector4( -2.0, -3, 5.1,1)*100;
 
@@ -121,8 +126,14 @@ void Scene::calcCameraView()
     glLoadIdentity();
 
     AGVector4 lp=lightPosition;
+    //    lp[
+    lp[3]=1;
     lp=cameraProjectionMatrix*cameraViewMatrix*lp;
 
+    lp/=lp[3];
+
+    // it is something like (12,-10,10)
+    lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this 
     //lp=AGVector4(-2,2,-2,1);
     gluLookAt(lp[0], lp[1], lp[2],
 	      0,0,0,
@@ -130,12 +141,16 @@ void Scene::calcCameraView()
     glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
 
     lightViewMatrix=lightViewMatrix*cameraProjectionMatrix*cameraViewMatrix;
-
     // light projection Matrix
     glLoadIdentity();
-    glOrtho(-1,2,-1.5,3,2,14);
-    //glOrtho(-1,2,-1.5,3,700,750);
-    //    glOrtho(-1,2,-1,1,2,8);
+    //    glOrtho(-10,10,-15,20,10,1000);
+    cdebug(lp.toString());
+    float s2=sqrt(2.0f);
+    glOrtho(-s2,s2,-s2,s2,1,20);
+
+
+    //very old:glOrtho(-1,2,-1.5,3,700,750);
+    //      glOrtho(-1,2,-1,1,2,8);
 
     glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
     }
@@ -346,7 +361,7 @@ void Scene::init()
 
     // camera projection matrix
     glLoadIdentity();
-    gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 1.0f, 100.0f);
+    gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 10.0f, 50.0f);
     glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
     
     // init texture

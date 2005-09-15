@@ -463,7 +463,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO SET_MAKE CXX CXXFLAGS LDFLAGS CPPFLAGS ac_ct_CXX EXEEXT OBJEXT CC CFLAGS ac_ct_CC build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB STRIP ac_ct_STRIP CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL RUBY_INCLUDE_DIR RUBY_INSTALL_DIR LIB@&t@OBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO SET_MAKE CXX CXXFLAGS LDFLAGS CPPFLAGS ac_ct_CXX EXEEXT OBJEXT CC CFLAGS ac_ct_CC build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB STRIP ac_ct_STRIP CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL RUBY_INCLUDE_DIR RUBY_INSTALL_DIR RUBY_LIB_DIR LIB@&t@OBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -18688,6 +18688,7 @@ test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
 
 RUBY_INCLUDE_DIR=`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`
 RUBY_INSTALL_DIR=`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`
+RUBY_LIB_DIR=`ruby -e "require 'rbconfig'; puts Config::CONFIG['rubylibdir']"`
 
 
 # Checks for libraries.
@@ -19206,6 +19207,7 @@ fi
 
 #RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
 #RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
+
 
 
 
@@ -19904,6 +19906,7 @@ s,@ac_ct_F77@,$ac_ct_F77,;t t
 s,@LIBTOOL@,$LIBTOOL,;t t
 s,@RUBY_INCLUDE_DIR@,$RUBY_INCLUDE_DIR,;t t
 s,@RUBY_INSTALL_DIR@,$RUBY_INSTALL_DIR,;t t
+s,@RUBY_LIB_DIR@,$RUBY_LIB_DIR,;t t
 s,@LIB@&t@OBJS@,$LIB@&t@OBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t
 CEOF
