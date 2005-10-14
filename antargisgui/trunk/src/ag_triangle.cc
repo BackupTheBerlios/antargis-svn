@@ -1048,6 +1048,43 @@ AGLine2 AGTriangle2::nearestLine(const AGVector3 &v) const
 }
 
 /////////////////////////////////////////////////////////////////////////////
+// AGCircle2
+/////////////////////////////////////////////////////////////////////////////
+
+AGCircle2::AGCircle2(const AGVector3 &v,float rad):p(v),radius(rad)
+{
+}
+
+bool AGCircle2::inCircle(const AGVector3 &v) const
+{
+  return (v-p).length2()<radius*radius;
+}
+bool AGCircle2::outCircle(const AGVector3 &v) const
+{
+  return (v-p).length2()>radius*radius;
+}
+
+bool AGCircle2::inCircle(const AGTriangle2 &t) const
+{
+  return inCircle(t.get(0)) && inCircle(t.get(1)) && inCircle(t.get(2));
+}
+bool AGCircle2::outCircle(const AGTriangle2 &t) const
+{
+  return outCircle(t.get(0)) && outCircle(t.get(1)) && outCircle(t.get(2));
+}
+
+AGVector3 AGCircle2::getPos() const
+{
+  return p;
+}
+float AGCircle2::getRadius() const
+{
+  return radius;
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////
 // AGTriangle3
 /////////////////////////////////////////////////////////////////////////////
 AGTriangle3::AGTriangle3(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2)

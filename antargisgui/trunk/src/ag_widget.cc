@@ -155,11 +155,9 @@ void AGWidget::drawAll(AGPainter &p)
   p2.transform(getRect());
   //  cdebug(p2.getRect());
 
+  // clearing widgets
   if(mToClear.size())
     {
-      //      cdebug("mClear:"<<mToClear.size());
-      //      CTRACE;
-      //      cdebug(mChildren.size());
       std::list<AGWidget*>::iterator i=mToClear.begin();
       for(;i!=mToClear.end();i++)
 	{

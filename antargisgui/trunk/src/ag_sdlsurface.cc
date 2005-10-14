@@ -48,6 +48,8 @@ AGRect AGSDLScreen::getRect() const
 
 void AGSDLScreen::drawRect(const AGRect &pRect,const AGColor &c)
 {
+  sge_Update_OFF();
+
   sge_FilledRectAlpha(s,pRect.x,pRect.y,pRect.x+pRect.w-1,pRect.y+pRect.h-1,c.mapRGB(s->format),c.a);
 }
 void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)

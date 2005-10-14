@@ -98,6 +98,7 @@ Node::Node(const Node &n):mName(n.mName),mParams(n.mParams),mContent(n.mContent)
 
 Node::~Node()
 {
+  TRACE;
   NodeVector::iterator i=mNodes.begin();
   for(;i!=mNodes.end();i++)
     delete *i;

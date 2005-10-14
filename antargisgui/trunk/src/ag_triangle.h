@@ -354,6 +354,23 @@ class AGTriangle2
   std::string toString() const;
 };
 
+class AGCircle2
+{
+  AGVector3 p;
+  float radius;
+ public:
+  AGCircle2(const AGVector3 &v,float rad);
+
+  bool inCircle(const AGTriangle2 &t) const;
+  bool outCircle(const AGTriangle2 &t) const;
+  bool inCircle(const AGVector3 &v) const;
+  bool outCircle(const AGVector3 &v) const;
+
+  AGVector3 getPos() const;
+  float getRadius() const;
+
+};
+
 class AGVector4;
 class AGTriangle3
 {

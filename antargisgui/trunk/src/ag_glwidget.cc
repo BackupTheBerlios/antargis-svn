@@ -1,4 +1,5 @@
 #include "ag_glwidget.h"
+#include "ag_debug.h"
 
 AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect &r):
   AGWidget(pParent,r)
@@ -15,10 +16,22 @@ void AGGLWidget::drawAll(AGPainter &p)
   beginGL();
   drawGL();
   endGL();
+
+  // draw children;
+  AGPainter p2(p);
+  p2.transform(getRect());
+
+  std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+  //  AGRect r2=r.project(mr);
+  for(;i!=mChildren.rend();i++)
+    (*i)->drawAll(p2);
+
 }
 
 void AGGLWidget::beginGL()
 {
+  getScreen().drawRect(getRect(),AGColor(0,0,0)); // draw bg-color
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glMatrixMode(GL_PROJECTION);
@@ -27,11 +40,11 @@ void AGGLWidget::beginGL()
 
   AGRect r=getRect();
 
-  glViewport(r.x,getScreen().getHeight()-(r.y+r.h),r.x+r.w,getScreen().getHeight()-r.y);
-  glDepthMask(false);
+  glViewport(r.x,getScreen().getHeight()-(r.y+r.h),r.w,r.h);
+  glDepthMask(true);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
-
+  
   
   
 }
