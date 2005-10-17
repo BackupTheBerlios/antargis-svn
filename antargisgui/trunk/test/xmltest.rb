@@ -27,3 +27,5 @@ dp=DomParser.new
 d=dp.parse(t) #document)
 
 puts d.toString
+
+Document.new.parseMemory(t)

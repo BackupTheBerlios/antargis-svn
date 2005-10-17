@@ -25,61 +25,6 @@
 #include "ag_debug.h"
 
 /****************************************************************
- * ParserException
- ****************************************************************/
-
-ParserException::ParserException(std::string u):s(u)
-{
-  CTRACE;
-  cdebug("u:"<<u);
-}
-
-std::string ParserException::what()
-{
-  return s;
-}
-
-/****************************************************************
- * ParserInfo
- ****************************************************************/
-
-char ParserInfo::next()
-{
-  if(s.length()>p)
-    return s[p];
-  else
-    return 0;
-}
-std::string ParserInfo::getNext2()
-{
-  if(s.length()>p+1)
-    return s.substr(p,2);
-  return "";
-}
-std::string ParserInfo::getNext3()
-{
-  if(s.length()>p+2)
-    return s.substr(p,3);
-  return "";
-}
-void ParserInfo::inc()
-{
-  if(s.length()>p)
-    p++;
-}
-bool ParserInfo::end()
-{
-  return(p>=s.length());
-}
-
-std::string ParserInfo::getInfo()
-{
-  std::ostringstream os;
-  os<<"Error beginning at '"<<s[p]<<"':"<<s.substr(p,std::min(s.length()-p,p+20));
-  return os.str();
-}
-
-/****************************************************************
  * Node
  ****************************************************************/
 
@@ -243,7 +188,7 @@ std::string Node::unescape(const std::string &s) const
                 escape=false;
               }
             else
-              throw ParserException("Error in unescaping");
+              throw std::string("Error in unescaping");
           }
         else
           {
@@ -372,188 +317,9 @@ std::string Node::toString(bool indent) const
     return os.str();
   }
 
-void Node::parseChar(ParserInfo &info,char c)
-{
-  if(info.next()!=c)
-    {
-      cdebug("char needed:"<<c);
-      cdebug(info.getInfo());
-      throw ParserException("Wrong char");
-    }
-  info.inc();
-}
-
-std::string Node::parseString(ParserInfo &info,char delimit)
-{
-  bool weiter=true;
-  bool escape=false;
-  std::ostringstream n;
-
-  while(weiter)
-    {
-      char c=info.next();
-      if(c=='\\')
-        {
-          if(escape)
-            {
-              n<<"\\";
-              escape=false;
-            }
-          else
-            escape=true;
-        }
-      else if(c==delimit)
-        {
-          if(escape)
-            {
-              n<<delimit;
-              escape=false;
-            }
-          else
-            return n.str();
-        }
-      else if(c=='n' && escape)
-	n<<'\n',escape=false;
-      else
-        n<<c;
-      info.inc();
-    }
-  // never reached
-  return "";
-}
-
-void Node::parseArguments(ParserInfo &info)
-{
-  // argument always starts with " "
-  while(info.next()==' ')
-    {
-      while(info.next()==' ')
-	parseChar(info,' ');
-      std::string n,v;
-      n=parseName(info);
-      parseChar(info,'=');
-      if(info.next()=='"')
-	{
-	  parseChar(info,'"');
-	  v=parseString(info,'"');
-	  parseChar(info,'"');
-	}
-      else
-	{
-	  parseChar(info,'\'');
-	  v=parseString(info,'\'');
-	  parseChar(info,'\'');
-	}
-      mAttrs[n]=unescape(v);
-    }
-}
-
-std::string Node::parseName(ParserInfo &info)
-{
-  std::ostringstream os;
-  char i=info.next();
-  while(
-    (i>='a' && i<='z') ||
-    (i>='A' && i<='Z') ||
-    (i>='0' && i<='9') ||
-    (i=='ä' || i=='ö' || i=='ü') ||
-    (i=='Ä' || i=='Ö' || i=='Ü') ||
-    (i=='ß') ||
-    (i=='_') ||
-    (i=='-')
-  )
-    {
-      os<<i;
-      info.inc();
-
-      i=info.next();
-    }
-  return os.str();
-}
-
-void Node::parseContents(ParserInfo &info)
-{
-  TRACE;
-  std::string la=info.getNext2();
-  bool contentChanged=true;
-
-  while(la.length() || contentChanged==true)
-    {
-      if(la[1]=='/')
-	{
-	  cdebug("break");
-	  break;
-	}
-      if(la[0]!='<')
-        {
-          mContent+=la[0];
-          info.inc(); // inc only by one
-          la=info.getNext2();
-          contentChanged=true;
-          //throw ParserException("ERROR in parseContents");
-        }
-      else
-        {
-	  Node *n=new Node;
-          mNodes.push_back(n);
-          n->parse(info);
-          la=info.getNext2();
-          contentChanged=false;
-	  cdebug("content not changed");
-        }
-    }
-}
-
-void Node::parse(ParserInfo &info)
-{
-  TRACE;
-  parseChar(info,'<');
-  cdebug("next3:"<<info.getNext3());
-  // check for comment
-  if(info.getNext3()=="!--")
-    {
-      cdebug("comment");
-      // FIXME: should be included somehow somewhen...
-      info.inc();
-      info.inc();
-      info.inc();
-
-      while(info.getNext3()!="-->")
-	info.inc();
-      info.inc();
-      info.inc();
-      info.inc();
-    }
-  else
-    {
-      
-      mName=parseName(info);
-      cdebug("name:"<<mName);
-      parseArguments(info);
-      if(info.next()=='/')
-	{
-	  parseChar(info,'/');
-	  parseChar(info,'>');
-	}
-      else
-	{
-	  parseChar(info,'>');
-	  parseContents(info);
-	  parseChar(info,'<');
-	  parseChar(info,'/');
-	  std::string pname=parseName(info);
-	  cdebug(mName<<"::"<<pname);
-	  if(mName!=pname)
-	    throw ParserException("Wrong close-tag "+info.getInfo()+" name:"+mName);
-	  parseChar(info,'>');
-	}
-    }
-}
-
-/****************************************************************
- * ParserException
- ****************************************************************/
-
+////////////////////////////////////////////////////////////////////////
+// Document
+////////////////////////////////////////////////////////////////////////
 
 
 Document::Document()
@@ -604,34 +370,11 @@ void Document::parse_memory(const std::string &s)
   parseMemory(s);
 }
 
-void Document::parseHeader(ParserInfo &p)
-{
-  CTRACE;
-  bool found=true;
-  while(found)
-    {
-      found=false;
-      if(p.getNext2()=="<?")
-	{
-	  while(p.getNext2()!="?>")
-	    p.inc();
-	  p.inc();
-	  p.inc();
-	  found=true;
-	}
-      else if(p.next()==' ' || p.next()=='\n')
-	p.inc(),found=true;
-    }
-}
 
 void Document::parseMemory(const std::string &s)
 {
-  ParserInfo p;
-  p.s=s;
-  p.p=0;
-
-  parseHeader(p);
-  mRoot->parse(p);
+  DomParser p;
+  p.parse(s,this);
 }
 
 Document *Document::get_document()
@@ -639,85 +382,6 @@ Document *Document::get_document()
   return this;
 }
 
-
-
-/****************************************************************
- * Compability functions
- ****************************************************************/
-
-
-void setAttribute(Node *n,std::string name,std::string d)
-{
-  n->set
-  (name,d);
-}
-
-std::string getAttribute(const Node &n,std::string name,std::string d)
-{
-  std::string v=n.get(name);
-  if(v=="")
-    v=d;
-  return v;
-}
-
-std::string getAttribute(const Node *n,std::string name,std::string d)
-{
-  std::string v=n->get
-                (name);
-  if(v=="")
-    v=d;
-  return v;
-}
-
-std::string getAttributeF(const Node &n,std::string name,std::string d)
-{
-  std::string v=n.get(name);
-  if(v=="")
-    throw ParserException(d);
-  return v;
-}
-
-std::string getAttributeF(const Node *n,std::string name,std::string d)
-{
-  std::string v=n->get
-                (name);
-  if(v=="")
-    throw ParserException(d);
-  return v;
-}
-
-int getAttribute(const Node &n,std::string name,int i)
-{
-  if(n.get(name)=="")
-    return i;
-  else
-    return atoi(n.get(name).c_str());
-}
-int getAttribute(const Node *n,std::string name,int i)
-{
-  if(n->get
-      (name)=="")
-    return i;
-  else
-    return atoi(n->get
-                (name).c_str());
-}
-
-Node *getRootNode(Document &doc)
-{
-  return &doc.root();
-}
-
-std::string toString(const Document &doc)
-{
-  return doc.toString();
-}
-
-Node *createRootNode(Document &doc,std::string n)
-{
-  doc.root().setName(n);
-  return &doc.root();
-}
 
 
 
@@ -1116,12 +780,18 @@ void DomParser::header(const std::string &pText)
   // do nothing
 }
 
-Document *DomParser::parse(const std::string &pData)
+
+Document *DomParser::parse(const std::string &pData,Document *d)
 {
-  doc=new Document;
+  doc=d;
   nodes.clear();
   Parser::parse(pData);
 
   nodes.clear();
   return doc;
+}
+
+Document *DomParser::parse(const std::string &pData)
+{
+  return parse(pData,new Document);
 }

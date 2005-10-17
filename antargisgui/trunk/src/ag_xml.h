@@ -29,30 +29,7 @@
 
 #include <ruby.h>
 
-//#include "mystring.h"
 #include "ag_debug.h"
-
-class ParserException
-  {
-    std::string s;
-  public:
-    ParserException(std::string u);
-    std::string what();
-  };
-
-struct ParserInfo
-  {
-    std::string s;
-    size_t p;
-
-    char next();
-    std::string getNext2();
-    std::string getNext3();
-    void inc();
-    bool end();
-
-    std::string getInfo();
-  };
 
 class Node
   {
@@ -112,15 +89,7 @@ class Node
     void indent(std::ostringstream &s,int depth) const;
     void getContent(std::ostringstream &s,int depth) const;
     std::string toString(bool indent=true) const;
-    void parseChar(ParserInfo &info,char c);
     
-    // parse functions
-    std::string parseString(ParserInfo &info,char delimit);
-    void parseArguments(ParserInfo &info);
-    std::string parseName(ParserInfo &info);
-    void parseContents(ParserInfo &info);
-    void parse(ParserInfo &info);
-
     bool isTextNode() const;
     std::string getText() const;
 
@@ -156,8 +125,6 @@ class Document
     Document *get_document();
 
 
-  private:
-    void parseHeader(ParserInfo &p);
   };
 
 class Parser
@@ -231,6 +198,8 @@ class DomParser:public Parser
   virtual void header(const std::string &pText);
 
   Document *parse(const std::string &pData);
+
+  Document *parse(const std::string &pData,Document *d);
 };
   
 namespace xmlpp
