@@ -32,16 +32,6 @@ class AGCheckBox:public AGButton
   AGCheckBox(AGWidget *pParent,AGRect pRect);
 
   virtual bool eventMouseClick(const AGEvent *m);
-
-  //  std::string getName() const;
-
- protected:
-  //  AGImage *mImage;
- private:
-  //  std::string mName;
- protected:
-  //  bool mChecked;
-  //  std::string mType;
 };
 
 #endif

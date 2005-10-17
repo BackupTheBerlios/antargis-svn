@@ -932,41 +932,45 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGVector4 swig_types[62]
 #define SWIGTYPE_p_AGWidget swig_types[63]
 #define SWIGTYPE_p_AGWindow swig_types[64]
-#define SWIGTYPE_p_Document swig_types[65]
-#define SWIGTYPE_p_GLuint swig_types[66]
-#define SWIGTYPE_p_Node swig_types[67]
-#define SWIGTYPE_p_NodeVector swig_types[68]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[69]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[70]
-#define SWIGTYPE_p_ParserException swig_types[71]
-#define SWIGTYPE_p_ParserInfo swig_types[72]
-#define SWIGTYPE_p_SDLKey swig_types[73]
-#define SWIGTYPE_p_SDLMod swig_types[74]
-#define SWIGTYPE_p_SDL_Event swig_types[75]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[76]
-#define SWIGTYPE_p_SDL_Rect swig_types[77]
-#define SWIGTYPE_p_SDL_Surface swig_types[78]
-#define SWIGTYPE_p_Uint32 swig_types[79]
-#define SWIGTYPE_p_Uint8 swig_types[80]
-#define SWIGTYPE_p_const_iterator swig_types[81]
-#define SWIGTYPE_p_float swig_types[82]
-#define SWIGTYPE_p_iterator swig_types[83]
-#define SWIGTYPE_p_p_Node swig_types[84]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[85]
-#define SWIGTYPE_p_std__ostringstream swig_types[86]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[87]
-#define SWIGTYPE_p_std__string swig_types[88]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[89]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[90]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[91]
-#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[92]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[93]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[94]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[95]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[96]
-#define SWIGTYPE_p_unsigned_long swig_types[97]
-static swig_type_info *swig_types[98];
-static swig_module_info swig_module = {swig_types, 98, 0, 0, 0, 0};
+#define SWIGTYPE_p_Attributes swig_types[65]
+#define SWIGTYPE_p_Document swig_types[66]
+#define SWIGTYPE_p_DomParser swig_types[67]
+#define SWIGTYPE_p_GLuint swig_types[68]
+#define SWIGTYPE_p_Node swig_types[69]
+#define SWIGTYPE_p_NodeVector swig_types[70]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[71]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[72]
+#define SWIGTYPE_p_Parser swig_types[73]
+#define SWIGTYPE_p_ParserException swig_types[74]
+#define SWIGTYPE_p_ParserInfo swig_types[75]
+#define SWIGTYPE_p_SDLKey swig_types[76]
+#define SWIGTYPE_p_SDLMod swig_types[77]
+#define SWIGTYPE_p_SDL_Event swig_types[78]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[79]
+#define SWIGTYPE_p_SDL_Rect swig_types[80]
+#define SWIGTYPE_p_SDL_Surface swig_types[81]
+#define SWIGTYPE_p_Uint32 swig_types[82]
+#define SWIGTYPE_p_Uint8 swig_types[83]
+#define SWIGTYPE_p_const_iterator swig_types[84]
+#define SWIGTYPE_p_float swig_types[85]
+#define SWIGTYPE_p_iterator swig_types[86]
+#define SWIGTYPE_p_p_Node swig_types[87]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[88]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[89]
+#define SWIGTYPE_p_std__ostringstream swig_types[90]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[91]
+#define SWIGTYPE_p_std__string swig_types[92]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[93]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[94]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[95]
+#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[96]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[97]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[98]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[99]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[100]
+#define SWIGTYPE_p_unsigned_long swig_types[101]
+static swig_type_info *swig_types[102];
+static swig_module_info swig_module = {swig_types, 102, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -12121,6 +12125,216 @@ AGWidget *SwigDirector_AGLayoutCreator::create(AGWidget *pParent, AGRect const &
     result = rb_funcall(swig_get_self(), rb_intern("create"), 3,obj0,obj1,obj2);
     if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_AGWidget,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
     return (AGWidget *) c_result;
+}
+
+
+SwigDirector_Parser::SwigDirector_Parser(VALUE self) : Swig::Director(self) {
+    
+}
+
+
+
+void SwigDirector_Parser::simpleTag(std::string const &pName, Node::Attributes const &pAttributes) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Parser::simpleTag(pName,pAttributes);
+        return;
+    }
+    obj0=rb_str_new2(pName.c_str());
+    obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("simpleTag"), 2,obj0,obj1);
+}
+
+
+SwigDirector_Parser::~SwigDirector_Parser() {
+}
+
+void SwigDirector_Parser::startTag(std::string const &pName, Node::Attributes const &pAttributes) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Parser::startTag(pName,pAttributes);
+        return;
+    }
+    obj0=rb_str_new2(pName.c_str());
+    obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("startTag"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_Parser::endTag(std::string const &pName) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Parser::endTag(pName);
+        return;
+    }
+    obj0=rb_str_new2(pName.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("endTag"), 1,obj0);
+}
+
+
+void SwigDirector_Parser::text(std::string const &pText) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Parser::text(pText);
+        return;
+    }
+    obj0=rb_str_new2(pText.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("text"), 1,obj0);
+}
+
+
+void SwigDirector_Parser::comment(std::string const &pText) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Parser::comment(pText);
+        return;
+    }
+    obj0=rb_str_new2(pText.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("comment"), 1,obj0);
+}
+
+
+void SwigDirector_Parser::header(std::string const &pText) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Parser::header(pText);
+        return;
+    }
+    obj0=rb_str_new2(pText.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("header"), 1,obj0);
+}
+
+
+SwigDirector_DomParser::SwigDirector_DomParser(VALUE self) : Swig::Director(self) {
+    
+}
+
+
+
+void SwigDirector_DomParser::simpleTag(std::string const &pName, Node::Attributes const &pAttributes) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        DomParser::simpleTag(pName,pAttributes);
+        return;
+    }
+    obj0=rb_str_new2(pName.c_str());
+    obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("simpleTag"), 2,obj0,obj1);
+}
+
+
+SwigDirector_DomParser::~SwigDirector_DomParser() {
+}
+
+void SwigDirector_DomParser::startTag(std::string const &pName, Node::Attributes const &pAttributes) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        DomParser::startTag(pName,pAttributes);
+        return;
+    }
+    obj0=rb_str_new2(pName.c_str());
+    obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("startTag"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_DomParser::endTag(std::string const &pName) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        DomParser::endTag(pName);
+        return;
+    }
+    obj0=rb_str_new2(pName.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("endTag"), 1,obj0);
+}
+
+
+void SwigDirector_DomParser::text(std::string const &pText) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        DomParser::text(pText);
+        return;
+    }
+    obj0=rb_str_new2(pText.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("text"), 1,obj0);
+}
+
+
+void SwigDirector_DomParser::comment(std::string const &pText) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        DomParser::comment(pText);
+        return;
+    }
+    obj0=rb_str_new2(pText.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("comment"), 1,obj0);
+}
+
+
+void SwigDirector_DomParser::header(std::string const &pText) {
+    std::string temp1 ;
+    std::string temp10 ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        DomParser::header(pText);
+        return;
+    }
+    obj0=rb_str_new2(pText.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("header"), 1,obj0);
 }
 
 
@@ -30973,6 +31187,21 @@ _wrap_AGRadio_eventMouseClick(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGRadio_setGroup(int argc, VALUE *argv, VALUE self) {
+    AGRadio *arg1 = (AGRadio *) 0 ;
+    AGRadioGroup *arg2 = (AGRadioGroup *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRadio, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRadioGroup, 1);
+    (arg1)->setGroup(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGRadio_deselect(int argc, VALUE *argv, VALUE self) {
     AGRadio *arg1 = (AGRadio *) 0 ;
     
@@ -32899,6 +33128,21 @@ _wrap_Node_get_name(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Node_setAttributes(int argc, VALUE *argv, VALUE self) {
+    Node *arg1 = (Node *) 0 ;
+    Node::Attributes *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__mapTstd__string_std__string_t, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setAttributes((std::map<std::string,std::string > const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_Node_newChild(int argc, VALUE *argv, VALUE self) {
     Node *arg1 = (Node *) 0 ;
     std::string arg2 ;
@@ -33651,6 +33895,56 @@ _wrap_Node_parse(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_Node_isTextNode(int argc, VALUE *argv, VALUE self) {
+    Node *arg1 = (Node *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
+    result = (bool)((Node const *)arg1)->isTextNode();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Node_getText(int argc, VALUE *argv, VALUE self) {
+    Node *arg1 = (Node *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
+    result = ((Node const *)arg1)->getText();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Node_hasTextNode(int argc, VALUE *argv, VALUE self) {
+    Node *arg1 = (Node *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
+    result = (bool)((Node const *)arg1)->hasTextNode();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 swig_class cDocument;
 
 static VALUE
@@ -33872,428 +34166,510 @@ _wrap_Document_get_document(int argc, VALUE *argv, VALUE self) {
 }
 
 
+swig_class cParser;
+
+static void
+free_Parser(Parser *arg1) {
+    delete arg1;
+}
 static VALUE
-_wrap_setAttribute(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = (Node *) 0 ;
-    std::string arg2 ;
-    std::string arg3 ;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1);
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[2]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    setAttribute(arg1,arg2,arg3);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_getAttribute__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = 0 ;
-    std::string arg2 ;
-    std::string arg3 ;
-    std::string result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[2]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    result = getAttribute((Node const &)*arg1,arg2,arg3);
-    
-    {
-        vresult = rb_str_new2((&result)->c_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_getAttribute__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = (Node *) 0 ;
-    std::string arg2 ;
-    std::string arg3 ;
-    std::string result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1);
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[2]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    result = getAttribute((Node const *)arg1,arg2,arg3);
-    
-    {
-        vresult = rb_str_new2((&result)->c_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_getAttributeF__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = 0 ;
-    std::string arg2 ;
-    std::string arg3 ;
-    std::string result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[2]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    result = getAttributeF((Node const &)*arg1,arg2,arg3);
-    
-    {
-        vresult = rb_str_new2((&result)->c_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_getAttributeF__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = (Node *) 0 ;
-    std::string arg2 ;
-    std::string arg3 ;
-    std::string result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1);
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    {
-        if (TYPE(argv[2]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[2]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    result = getAttributeF((Node const *)arg1,arg2,arg3);
-    
-    {
-        vresult = rb_str_new2((&result)->c_str());
-    }
-    return vresult;
-}
-
-
-static VALUE _wrap_getAttributeF(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = (TYPE(argv[2]) == T_STRING) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_getAttributeF__SWIG_0(nargs, args, self);
-                }
-            }
-        }
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = (TYPE(argv[2]) == T_STRING) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_getAttributeF__SWIG_1(nargs, args, self);
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'getAttributeF'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_getAttribute__SWIG_2(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = 0 ;
-    std::string arg2 ;
-    int arg3 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    arg3 = NUM2INT(argv[2]);
-    result = (int)getAttribute((Node const &)*arg1,arg2,arg3);
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_getAttribute__SWIG_3(int argc, VALUE *argv, VALUE self) {
-    Node *arg1 = (Node *) 0 ;
-    std::string arg2 ;
-    int arg3 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Node, 1);
-    {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
-        } else {
-            SWIG_exception(SWIG_TypeError, "not a string");
-        }
-    }
-    arg3 = NUM2INT(argv[2]);
-    result = (int)getAttribute((Node const *)arg1,arg2,arg3);
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE _wrap_getAttribute(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_getAttribute__SWIG_2(nargs, args, self);
-                }
-            }
-        }
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_getAttribute__SWIG_3(nargs, args, self);
-                }
-            }
-        }
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = (TYPE(argv[2]) == T_STRING) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_getAttribute__SWIG_0(nargs, args, self);
-                }
-            }
-        }
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_Node, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = (TYPE(argv[2]) == T_STRING) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_getAttribute__SWIG_1(nargs, args, self);
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'getAttribute'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_getRootNode(int argc, VALUE *argv, VALUE self) {
-    Document *arg1 = 0 ;
-    Node *result;
-    VALUE vresult = Qnil;
+_wrap_Parser_parse(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Document, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (Node *)getRootNode(*arg1);
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Node,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_toString(int argc, VALUE *argv, VALUE self) {
-    Document *arg1 = 0 ;
-    std::string result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Document, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = toString((Document const &)*arg1);
-    
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
-        vresult = rb_str_new2((&result)->c_str());
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
     }
+    (arg1)->parse((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Parser_getLine(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    result = ((Parser const *)arg1)->getLine();
+    
+    vresult = UINT2NUM(result);
     return vresult;
 }
 
 
 static VALUE
-_wrap_createRootNode(int argc, VALUE *argv, VALUE self) {
-    Document *arg1 = 0 ;
-    std::string arg2 ;
-    Node *result;
-    VALUE vresult = Qnil;
+_wrap_Parser_simpleTag(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    Node::Attributes *arg3 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Document, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
-        if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    result = (Node *)createRootNode(*arg1,arg2);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_std__mapTstd__string_std__string_t, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->simpleTag((std::string const &)*arg2,(std::map<std::string,std::string > const &)*arg3);
     
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Node,0);
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Parser_startTag(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    Node::Attributes *arg3 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_std__mapTstd__string_std__string_t, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->startTag((std::string const &)*arg2,(std::map<std::string,std::string > const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Parser_endTag(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->endTag((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Parser_text(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->text((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Parser_comment(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->comment((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Parser_header(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->header((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Parser_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Parser_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Parser);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Parser(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    Parser *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "Libantargisgui::Parser";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (Parser *)new SwigDirector_Parser(arg1);
+        
+    } else {
+        result = (Parser *)new Parser();
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_disown_Parser(int argc, VALUE *argv, VALUE self) {
+    Parser *arg1 = (Parser *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Parser, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+swig_class cDomParser;
+
+static VALUE
+_wrap_DomParser_simpleTag(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    Node::Attributes *arg3 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_std__mapTstd__string_std__string_t, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->simpleTag((std::string const &)*arg2,(std::map<std::string,std::string > const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_DomParser_startTag(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    Node::Attributes *arg3 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_std__mapTstd__string_std__string_t, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->startTag((std::string const &)*arg2,(std::map<std::string,std::string > const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_DomParser_endTag(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->endTag((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_DomParser_text(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->text((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_DomParser_comment(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->comment((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_DomParser_header(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->header((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_DomParser_parse(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    std::string *arg2 = 0 ;
+    Document *result;
+    std::string temp2 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (Document *)(arg1)->parse((std::string const &)*arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Document,0);
     return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_DomParser_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_DomParser_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_DomParser);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_DomParser(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    DomParser *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "Libantargisgui::DomParser";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (DomParser *)new SwigDirector_DomParser(arg1);
+        
+    } else {
+        result = (DomParser *)new DomParser();
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_DomParser(DomParser *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_disown_DomParser(int argc, VALUE *argv, VALUE self) {
+    DomParser *arg1 = (DomParser *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_DomParser, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
 }
 
 
@@ -37968,6 +38344,9 @@ static void *_p_AGMouseEventTo_p_AGEvent(void *x) {
 static void *_p_AGMenuEventTo_p_AGEvent(void *x) {
     return (void *)((AGEvent *)  ((AGMenuEvent *) x));
 }
+static void *_p_DomParserTo_p_Parser(void *x) {
+    return (void *)((Parser *)  ((DomParser *) x));
+}
 static void *_p_AGCaptionTo_p_AGText(void *x) {
     return (void *)((AGText *)  ((AGCaption *) x));
 }
@@ -38111,12 +38490,15 @@ static swig_type_info _swigt__p_AGVector3 = {"_p_AGVector3", "AGVector3 *", 0, 0
 static swig_type_info _swigt__p_AGVector4 = {"_p_AGVector4", "AGVector4 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWidget = {"_p_AGWidget", "AGWidget *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWindow = {"_p_AGWindow", "AGWindow *", 0, 0, 0};
-static swig_type_info _swigt__p_Document = {"_p_Document", "Document *", 0, 0, 0};
+static swig_type_info _swigt__p_Attributes = {"_p_Attributes", "Attributes *", 0, 0, 0};
+static swig_type_info _swigt__p_Document = {"_p_Document", "Document *|xmlpp::Document *", 0, 0, 0};
+static swig_type_info _swigt__p_DomParser = {"_p_DomParser", "DomParser *", 0, 0, 0};
 static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, 0};
 static swig_type_info _swigt__p_Node = {"_p_Node", "Node *", 0, 0, 0};
 static swig_type_info _swigt__p_NodeVector = {"_p_NodeVector", "NodeVector *", 0, 0, 0};
 static swig_type_info _swigt__p_Node__NodeVector__const_iterator = {"_p_Node__NodeVector__const_iterator", "Node::NodeVector::const_iterator *|Node::const_iterator *", 0, 0, 0};
 static swig_type_info _swigt__p_Node__NodeVector__iterator = {"_p_Node__NodeVector__iterator", "Node::NodeVector::iterator *|Node::iterator *", 0, 0, 0};
+static swig_type_info _swigt__p_Parser = {"_p_Parser", "Parser *", 0, 0, 0};
 static swig_type_info _swigt__p_ParserException = {"_p_ParserException", "ParserException *", 0, 0, 0};
 static swig_type_info _swigt__p_ParserInfo = {"_p_ParserInfo", "ParserInfo *", 0, 0, 0};
 static swig_type_info _swigt__p_SDLKey = {"_p_SDLKey", "enum SDLKey *|SDLKey *", 0, 0, 0};
@@ -38132,6 +38514,7 @@ static swig_type_info _swigt__p_float = {"_p_float", "float *", 0, 0, 0};
 static swig_type_info _swigt__p_iterator = {"_p_iterator", "iterator *", 0, 0, 0};
 static swig_type_info _swigt__p_p_Node = {"_p_p_Node", "Node **", 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAGRect2_t = {"_p_std__listTAGRect2_t", "std::list<AGRect2 > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__mapTstd__string_std__string_t = {"_p_std__mapTstd__string_std__string_t", "std::map<std::string,std::string > *|Node::Attributes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__ostringstream = {"_p_std__ostringstream", "std::ostringstream *", 0, 0, 0};
 static swig_type_info _swigt__p_std__pairTstd__string_bool_t = {"_p_std__pairTstd__string_bool_t", "std::pair<std::string,bool > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, 0};
@@ -38211,12 +38594,15 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGVector4,
   &_swigt__p_AGWidget,
   &_swigt__p_AGWindow,
+  &_swigt__p_Attributes,
   &_swigt__p_Document,
+  &_swigt__p_DomParser,
   &_swigt__p_GLuint,
   &_swigt__p_Node,
   &_swigt__p_NodeVector,
   &_swigt__p_Node__NodeVector__const_iterator,
   &_swigt__p_Node__NodeVector__iterator,
+  &_swigt__p_Parser,
   &_swigt__p_ParserException,
   &_swigt__p_ParserInfo,
   &_swigt__p_SDLKey,
@@ -38232,6 +38618,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iterator,
   &_swigt__p_p_Node,
   &_swigt__p_std__listTAGRect2_t,
+  &_swigt__p_std__mapTstd__string_std__string_t,
   &_swigt__p_std__ostringstream,
   &_swigt__p_std__pairTstd__string_bool_t,
   &_swigt__p_std__string,
@@ -38311,12 +38698,15 @@ static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGPoint3, _p_AGPoin
 static swig_cast_info _swigc__p_AGVector4[] = {  {&_swigt__p_AGVector4, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWidget[] = {  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGWidget, 0, 0},  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGWidget, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWidget, 0, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGWidget, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGWidget, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWindow[] = {  {&_swigt__p_AGWindow, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Attributes[] = {  {&_swigt__p_Attributes, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Document[] = {  {&_swigt__p_Document, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_DomParser[] = {  {&_swigt__p_DomParser, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node[] = {  {&_swigt__p_Node, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NodeVector[] = {  {&_swigt__p_NodeVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node__NodeVector__const_iterator[] = {  {&_swigt__p_Node__NodeVector__const_iterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node__NodeVector__iterator[] = {  {&_swigt__p_Node__NodeVector__iterator, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Parser[] = {  {&_swigt__p_Parser, 0, 0, 0},  {&_swigt__p_DomParser, _p_DomParserTo_p_Parser, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ParserException[] = {  {&_swigt__p_ParserException, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ParserInfo[] = {  {&_swigt__p_ParserInfo, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDLKey[] = {  {&_swigt__p_SDLKey, 0, 0, 0},{0, 0, 0, 0}};
@@ -38332,6 +38722,7 @@ static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 
 static swig_cast_info _swigc__p_iterator[] = {  {&_swigt__p_iterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_Node[] = {  {&_swigt__p_p_Node, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAGRect2_t[] = {  {&_swigt__p_std__listTAGRect2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__mapTstd__string_std__string_t[] = {  {&_swigt__p_std__mapTstd__string_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__ostringstream[] = {  {&_swigt__p_std__ostringstream, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__pairTstd__string_bool_t[] = {  {&_swigt__p_std__pairTstd__string_bool_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
@@ -38411,12 +38802,15 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGVector4,
   _swigc__p_AGWidget,
   _swigc__p_AGWindow,
+  _swigc__p_Attributes,
   _swigc__p_Document,
+  _swigc__p_DomParser,
   _swigc__p_GLuint,
   _swigc__p_Node,
   _swigc__p_NodeVector,
   _swigc__p_Node__NodeVector__const_iterator,
   _swigc__p_Node__NodeVector__iterator,
+  _swigc__p_Parser,
   _swigc__p_ParserException,
   _swigc__p_ParserInfo,
   _swigc__p_SDLKey,
@@ -38432,6 +38826,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iterator,
   _swigc__p_p_Node,
   _swigc__p_std__listTAGRect2_t,
+  _swigc__p_std__mapTstd__string_std__string_t,
   _swigc__p_std__ostringstream,
   _swigc__p_std__pairTstd__string_bool_t,
   _swigc__p_std__string,
@@ -39536,6 +39931,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_alloc_func(cAGRadio.klass, _wrap_AGRadio_allocate);
     rb_define_method(cAGRadio.klass, "initialize", VALUEFUNC(_wrap_new_AGRadio), -1);
     rb_define_method(cAGRadio.klass, "eventMouseClick", VALUEFUNC(_wrap_AGRadio_eventMouseClick), -1);
+    rb_define_method(cAGRadio.klass, "setGroup", VALUEFUNC(_wrap_AGRadio_setGroup), -1);
     rb_define_method(cAGRadio.klass, "deselect", VALUEFUNC(_wrap_AGRadio_deselect), -1);
     cAGRadio.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGRadio.destroy = (void (*)(void *)) free_AGRadio;
@@ -39666,6 +40062,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cNode.klass, "get_children", VALUEFUNC(_wrap_Node_get_children), -1);
     rb_define_method(cNode.klass, "getName", VALUEFUNC(_wrap_Node_getName), -1);
     rb_define_method(cNode.klass, "get_name", VALUEFUNC(_wrap_Node_get_name), -1);
+    rb_define_method(cNode.klass, "setAttributes", VALUEFUNC(_wrap_Node_setAttributes), -1);
     rb_define_method(cNode.klass, "newChild", VALUEFUNC(_wrap_Node_newChild), -1);
     rb_define_method(cNode.klass, "add_child", VALUEFUNC(_wrap_Node_add_child), -1);
     rb_define_method(cNode.klass, "remove_child", VALUEFUNC(_wrap_Node_remove_child), -1);
@@ -39688,6 +40085,9 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cNode.klass, "parseName", VALUEFUNC(_wrap_Node_parseName), -1);
     rb_define_method(cNode.klass, "parseContents", VALUEFUNC(_wrap_Node_parseContents), -1);
     rb_define_method(cNode.klass, "parse", VALUEFUNC(_wrap_Node_parse), -1);
+    rb_define_method(cNode.klass, "isTextNode", VALUEFUNC(_wrap_Node_isTextNode), -1);
+    rb_define_method(cNode.klass, "getText", VALUEFUNC(_wrap_Node_getText), -1);
+    rb_define_method(cNode.klass, "hasTextNode", VALUEFUNC(_wrap_Node_hasTextNode), -1);
     cNode.mark = 0;
     cNode.destroy = (void (*)(void *)) free_Node;
     
@@ -39704,12 +40104,37 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cDocument.klass, "get_document", VALUEFUNC(_wrap_Document_get_document), -1);
     cDocument.mark = 0;
     cDocument.destroy = (void (*)(void *)) free_Document;
-    rb_define_module_function(mLibantargisgui, "setAttribute", VALUEFUNC(_wrap_setAttribute), -1);
-    rb_define_module_function(mLibantargisgui, "getAttributeF", VALUEFUNC(_wrap_getAttributeF), -1);
-    rb_define_module_function(mLibantargisgui, "getAttribute", VALUEFUNC(_wrap_getAttribute), -1);
-    rb_define_module_function(mLibantargisgui, "getRootNode", VALUEFUNC(_wrap_getRootNode), -1);
-    rb_define_module_function(mLibantargisgui, "toString", VALUEFUNC(_wrap_toString), -1);
-    rb_define_module_function(mLibantargisgui, "createRootNode", VALUEFUNC(_wrap_createRootNode), -1);
+    rb_define_module_function(mLibantargisgui, "disown_Parser", VALUEFUNC(_wrap_disown_Parser), -1);
+    
+    cParser.klass = rb_define_class_under(mLibantargisgui, "Parser", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_Parser, (void *) &cParser);
+    rb_define_alloc_func(cParser.klass, _wrap_Parser_allocate);
+    rb_define_method(cParser.klass, "initialize", VALUEFUNC(_wrap_new_Parser), -1);
+    rb_define_method(cParser.klass, "parse", VALUEFUNC(_wrap_Parser_parse), -1);
+    rb_define_method(cParser.klass, "getLine", VALUEFUNC(_wrap_Parser_getLine), -1);
+    rb_define_method(cParser.klass, "simpleTag", VALUEFUNC(_wrap_Parser_simpleTag), -1);
+    rb_define_method(cParser.klass, "startTag", VALUEFUNC(_wrap_Parser_startTag), -1);
+    rb_define_method(cParser.klass, "endTag", VALUEFUNC(_wrap_Parser_endTag), -1);
+    rb_define_method(cParser.klass, "text", VALUEFUNC(_wrap_Parser_text), -1);
+    rb_define_method(cParser.klass, "comment", VALUEFUNC(_wrap_Parser_comment), -1);
+    rb_define_method(cParser.klass, "header", VALUEFUNC(_wrap_Parser_header), -1);
+    cParser.mark = 0;
+    cParser.destroy = (void (*)(void *)) free_Parser;
+    rb_define_module_function(mLibantargisgui, "disown_DomParser", VALUEFUNC(_wrap_disown_DomParser), -1);
+    
+    cDomParser.klass = rb_define_class_under(mLibantargisgui, "DomParser", ((swig_class *) SWIGTYPE_p_Parser->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_DomParser, (void *) &cDomParser);
+    rb_define_alloc_func(cDomParser.klass, _wrap_DomParser_allocate);
+    rb_define_method(cDomParser.klass, "initialize", VALUEFUNC(_wrap_new_DomParser), -1);
+    rb_define_method(cDomParser.klass, "simpleTag", VALUEFUNC(_wrap_DomParser_simpleTag), -1);
+    rb_define_method(cDomParser.klass, "startTag", VALUEFUNC(_wrap_DomParser_startTag), -1);
+    rb_define_method(cDomParser.klass, "endTag", VALUEFUNC(_wrap_DomParser_endTag), -1);
+    rb_define_method(cDomParser.klass, "text", VALUEFUNC(_wrap_DomParser_text), -1);
+    rb_define_method(cDomParser.klass, "comment", VALUEFUNC(_wrap_DomParser_comment), -1);
+    rb_define_method(cDomParser.klass, "header", VALUEFUNC(_wrap_DomParser_header), -1);
+    rb_define_method(cDomParser.klass, "parse", VALUEFUNC(_wrap_DomParser_parse), -1);
+    cDomParser.mark = 0;
+    cDomParser.destroy = (void (*)(void *)) free_DomParser;
     rb_define_module_function(mLibantargisgui, "getSoundManager", VALUEFUNC(_wrap_getSoundManager), -1);
     rb_define_module_function(mLibantargisgui, "disown_AGSound", VALUEFUNC(_wrap_disown_AGSound), -1);
     

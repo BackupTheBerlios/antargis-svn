@@ -49,6 +49,7 @@ class AGRadio:public AGCheckBox
   virtual ~AGRadio();
 
   bool eventMouseClick(const AGEvent *m);
+  void setGroup(AGRadioGroup *pGroup);
   //  bool eventMouseButtonUp(const AGEvent *m);
   //  bool eventMouseLeave();
   //  bool eventMouseEnter();

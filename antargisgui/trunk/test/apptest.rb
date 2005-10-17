@@ -21,18 +21,10 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'sdl'
+require 'antargisgui.rb'
 require 'testapp.rb'
-include Libantargisruby
 
 
-#class MyApp <AGApplication
-#	def eventQuit(event)
-#		puts "Quitting"
-#		super(event)
-#	end
-#end
 
 main=AGMain.new
 

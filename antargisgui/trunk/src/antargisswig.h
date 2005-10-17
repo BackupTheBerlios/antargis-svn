@@ -843,6 +843,34 @@ public:
 };
 
 
+class SwigDirector_Parser : public Parser, public Swig::Director {
+
+public:
+    SwigDirector_Parser(VALUE self);
+    virtual void simpleTag(std::string const &pName, Node::Attributes const &pAttributes);
+    virtual ~SwigDirector_Parser();
+    virtual void startTag(std::string const &pName, Node::Attributes const &pAttributes);
+    virtual void endTag(std::string const &pName);
+    virtual void text(std::string const &pText);
+    virtual void comment(std::string const &pText);
+    virtual void header(std::string const &pText);
+};
+
+
+class SwigDirector_DomParser : public DomParser, public Swig::Director {
+
+public:
+    SwigDirector_DomParser(VALUE self);
+    virtual void simpleTag(std::string const &pName, Node::Attributes const &pAttributes);
+    virtual ~SwigDirector_DomParser();
+    virtual void startTag(std::string const &pName, Node::Attributes const &pAttributes);
+    virtual void endTag(std::string const &pName);
+    virtual void text(std::string const &pText);
+    virtual void comment(std::string const &pText);
+    virtual void header(std::string const &pText);
+};
+
+
 class SwigDirector_AGSound : public AGSound, public Swig::Director {
 
 public:

@@ -21,8 +21,7 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-include Libantargisruby
+require 'antargisgui.rb'
 
 def loadAGSurface(s)
 	screen=getScreen

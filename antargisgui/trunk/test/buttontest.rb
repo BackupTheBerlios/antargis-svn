@@ -21,12 +21,9 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-#require 'sdl'
+require 'antargisgui.rb'
 require 'testapp.rb'
 require 'theme.rb'
-
-include Libantargisruby
 
 puts "MenuTest"
 

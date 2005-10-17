@@ -21,11 +21,7 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-#require 'sdl'
-#require 'theme.rb'
-
-include Libantargisruby
+require 'antargisgui.rb'
 
 class TestApp <AGApplication
 	def initialize(autoexit=true)

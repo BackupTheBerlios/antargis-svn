@@ -56,12 +56,8 @@ struct ParserInfo
 
 class Node
   {
-    std::string mName;
-    std::vector<Node*> mNodes;
-    std::map<std::string,std::string> mParams;
-    std::string mContent;
-
   public:
+    typedef std::map<std::string,std::string> Attributes;
 
     typedef std::vector<Node*> NodeVector;
 
@@ -85,6 +81,8 @@ class Node
     
     std::string getName() const;
     std::string get_name() const; // Compability
+
+    void setAttributes(const Attributes &pAttrs);
 
     Node &newChild(std::string pName);
 
@@ -123,6 +121,16 @@ class Node
     void parseContents(ParserInfo &info);
     void parse(ParserInfo &info);
 
+    bool isTextNode() const;
+    std::string getText() const;
+
+    bool hasTextNode() const;
+
+  private:
+    std::string mName;
+    std::vector<Node*> mNodes;
+    Attributes mAttrs;
+    std::string mContent;
   };
 
 class Document
@@ -152,35 +160,83 @@ class Document
     void parseHeader(ParserInfo &p);
   };
 
-
-// compability with libxml++ and my extensions
-
-namespace myxmlpp
+class Parser
+{
+  struct Data
   {
-  typedef ::Node Node;
-  typedef ::Document DomParser;
+    std::list<size_t> stack;
+    std::list<size_t> linestack;
+    size_t pos;
+    std::string s;
+    size_t line;
+
+    Data();
+
+    bool first(const std::string &p) const;
+    std::string getFirst(size_t i) const;
+    void eat(size_t i);
+    void push();
+    void pop();
+    void discard();
+    std::string getTil(const std::string &p) const;
+    void eatBlanks();
+  };
+
+  struct NodeStartInfo
+  {
+    bool startTag;
+    bool simple; // == <.../>
+    std::string name;
+  };
+
+  Data data;
+
+  NodeStartInfo parseNodeStart();
+  bool parseNodeEnd();
+  void parseNodeContent();
+  bool parseHeader();
+  std::string parseString();
+  Node::Attributes parseAttributes();
+  bool parseComment();
+  bool parseText();
+  void parseNode();
+  std::string parseName();
+
+  bool eod();
+
+ public:
+  virtual ~Parser();
+
+  void parse(const std::string &pData);
+  size_t getLine() const;
+
+  virtual void simpleTag(const std::string &pName,const Node::Attributes &pAttributes);
+  virtual void startTag(const std::string &pName,const Node::Attributes &pAttributes);
+  virtual void endTag(const std::string &pName);
+  virtual void text(const std::string &pText);
+  virtual void comment(const std::string &pText);
+  virtual void header(const std::string &pText);
 };
+
+class DomParser:public Parser
+{
+  Document *doc;
+  std::list<Node*> nodes;
+ public:
+  virtual void simpleTag(const std::string &pName,const Node::Attributes &pAttributes);
+  virtual void startTag(const std::string &pName,const Node::Attributes &pAttributes);
+  virtual void endTag(const std::string &pName);
+  virtual void text(const std::string &pText);
+  virtual void comment(const std::string &pText);
+  virtual void header(const std::string &pText);
+
+  Document *parse(const std::string &pData);
+};
+  
 namespace xmlpp
-  {
+{
   typedef ::Node Node;
-  typedef ::Document DomParser;
-  typedef ::Document Document;//DomParser;
+  typedef ::Document Document;
 };
-
-/****************************************************************
- * Compability functions
- ****************************************************************/
-#define checkInclude(x,y)
-
-void setAttribute(Node *n,std::string name,std::string d);
-std::string getAttribute(const Node &n,std::string name,std::string d);
-std::string getAttribute(const Node *n,std::string name,std::string d);
-std::string getAttributeF(const Node &n,std::string name,std::string d);
-std::string getAttributeF(const Node *n,std::string name,std::string d);
-int getAttribute(const Node &n,std::string name,int i);
-int getAttribute(const Node *n,std::string name,int i);
-Node *getRootNode(Document &doc);
-std::string toString(const Document &doc);
-Node *createRootNode(Document &doc,std::string n);
 
 #endif

@@ -161,6 +161,11 @@ void AGRadio::deselect()
   //  setState(NORMAL);
 }
 
+void AGRadio::setGroup(AGRadioGroup *pGroup)
+{
+  mGroup=pGroup;
+}
+
 
 // AGRadioGroup creator
 class AGRadioGroupLayoutCreator:public AGLayoutCreator

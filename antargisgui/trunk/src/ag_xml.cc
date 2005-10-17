@@ -21,6 +21,8 @@
 #include "ag_xml.h"
 #include "ag_fs.h"
 #include "ag_debug.h"
+#include "ag_regex.h"
+#include "ag_debug.h"
 
 /****************************************************************
  * ParserException
@@ -88,7 +90,7 @@ Node::Node(std::string name):mName(name)
 {
 }
 
-Node::Node(const Node &n):mName(n.mName),mParams(n.mParams),mContent(n.mContent)
+Node::Node(const Node &n):mName(n.mName),mAttrs(n.mAttrs),mContent(n.mContent)
 {
   // copy nodes
   NodeVector::const_iterator i=n.mNodes.begin();
@@ -98,11 +100,15 @@ Node::Node(const Node &n):mName(n.mName),mParams(n.mParams),mContent(n.mContent)
 
 Node::~Node()
 {
-  TRACE;
   NodeVector::iterator i=mNodes.begin();
   for(;i!=mNodes.end();i++)
     delete *i;
   mNodes.clear();
+}
+
+void Node::setAttributes(const Attributes &pAttrs)
+{
+  mAttrs=pAttrs;
 }
 
 
@@ -188,22 +194,22 @@ void Node::setContent(const std::string &s)
 
 void Node::set(const std::string &pName,const std::string &pValue)
   {
-    mParams[pName]=pValue;
+    mAttrs[pName]=pValue;
   }
 std::string Node::get(const std::string &pName) const
     {
       std::string v;
-      std::map<std::string,std::string>::const_iterator i=mParams.find(pName);
-      if(i!=mParams.end())
+      std::map<std::string,std::string>::const_iterator i=mAttrs.find(pName);
+      if(i!=mAttrs.end())
         return i->second;
-      return "";//mParams[pName];
+      return "";//mAttrs[pName];
     }
 
 void Node::clear()
 {
 
   mNodes.clear();
-  mParams.clear();
+  mAttrs.clear();
   mName="";
 }
 
@@ -251,10 +257,10 @@ std::string Node::unescape(const std::string &s) const
 void Node::getStart(std::ostringstream &s,bool complete) const
   {
     s<<"<"<<mName;
-    if(mParams.size()>0)
+    if(mAttrs.size()>0)
       {
-        std::map<std::string,std::string>::const_iterator i=mParams.begin();
-        for(;i!=mParams.end();i++)
+        std::map<std::string,std::string>::const_iterator i=mAttrs.begin();
+        for(;i!=mAttrs.end();i++)
           s<<" "<<i->first<<"=\""<<escape(i->second)<<"\"";
       }
     if(complete)
@@ -277,36 +283,67 @@ void Node::indent(std::ostringstream &s,int depth) const
       s<<" ";
   }
 
+bool Node::isTextNode() const
+{
+  return mName.length()==0 && mAttrs.size()==0;
+}
+std::string Node::getText() const
+{
+  return mContent;
+}
+
+bool Node::hasTextNode() const
+{
+  if(isTextNode())
+    return true;
+  
+  NodeVector::const_iterator i=mNodes.begin();
+  for(;i!=mNodes.end();i++)
+    {
+      Node *n=*i;
+      if(n->hasTextNode())
+	return true;
+    }
+  return false;
+}
+
+
+
 void Node::getContent(std::ostringstream &s,int depth) const
   {
     NodeVector::const_iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
       {
 	Node *n=*i;
-        if(depth>0)
-          {
-	    // width indenting
-            indent(s,depth);
-	    if(n->mNodes.size()==0 && n->mContent.length()==0)
-	      n->getStart(s,true);
+	if(n->isTextNode())
+	  s<<n->getText();
+	else
+	  {
+	    if(depth>0)
+	      {
+		// width indenting
+		indent(s,depth);
+		if(n->mNodes.size()==0 && n->mContent.length()==0)
+		  n->getStart(s,true);
+		else
+		  {
+		    n->getStart(s);
+		    s<<std::endl;
+		    n->getContent(s,depth+2);
+		    indent(s,depth);
+		    n->getEnd(s);
+		  }
+		s<<std::endl;
+		
+	      }
 	    else
 	      {
+		// without indenting
 		n->getStart(s);
-		s<<std::endl;
-		n->getContent(s,depth+2);
-		indent(s,depth);
+		n->getContent(s,0);
 		n->getEnd(s);
 	      }
-	    s<<std::endl;
-	      
-          }
-        else
-          {
-            // without indenting
-            n->getStart(s);
-            n->getContent(s,0);
-            n->getEnd(s);
-          }
+	  }
       }
     s<<mContent;
   }
@@ -314,6 +351,10 @@ void Node::getContent(std::ostringstream &s,int depth) const
 std::string Node::toString(bool indent) const
   {
     std::ostringstream os;
+    cdebug(mName.length());
+    if(mName.length()==0)
+      return mContent;
+
     if(indent)
       {
         getStart(os);
@@ -325,7 +366,7 @@ std::string Node::toString(bool indent) const
     else
       {
         getStart(os);
-        getContent(os,2);
+        getContent(os,0);
         getEnd(os);
       }
     return os.str();
@@ -403,7 +444,7 @@ void Node::parseArguments(ParserInfo &info)
 	  v=parseString(info,'\'');
 	  parseChar(info,'\'');
 	}
-      mParams[n]=unescape(v);
+      mAttrs[n]=unescape(v);
     }
 }
 
@@ -432,13 +473,17 @@ std::string Node::parseName(ParserInfo &info)
 
 void Node::parseContents(ParserInfo &info)
 {
+  TRACE;
   std::string la=info.getNext2();
   bool contentChanged=true;
 
   while(la.length() || contentChanged==true)
     {
       if(la[1]=='/')
-        break;
+	{
+	  cdebug("break");
+	  break;
+	}
       if(la[0]!='<')
         {
           mContent+=la[0];
@@ -454,16 +499,20 @@ void Node::parseContents(ParserInfo &info)
           n->parse(info);
           la=info.getNext2();
           contentChanged=false;
+	  cdebug("content not changed");
         }
     }
 }
 
 void Node::parse(ParserInfo &info)
 {
+  TRACE;
   parseChar(info,'<');
+  cdebug("next3:"<<info.getNext3());
   // check for comment
   if(info.getNext3()=="!--")
     {
+      cdebug("comment");
       // FIXME: should be included somehow somewhen...
       info.inc();
       info.inc();
@@ -479,6 +528,7 @@ void Node::parse(ParserInfo &info)
     {
       
       mName=parseName(info);
+      cdebug("name:"<<mName);
       parseArguments(info);
       if(info.next()=='/')
 	{
@@ -491,7 +541,9 @@ void Node::parse(ParserInfo &info)
 	  parseContents(info);
 	  parseChar(info,'<');
 	  parseChar(info,'/');
-	  if(mName!=parseName(info))
+	  std::string pname=parseName(info);
+	  cdebug(mName<<"::"<<pname);
+	  if(mName!=pname)
 	    throw ParserException("Wrong close-tag "+info.getInfo()+" name:"+mName);
 	  parseChar(info,'>');
 	}
@@ -541,7 +593,10 @@ Node *Document::get_root_node()
 
 std::string Document::toString() const
   {
-    return mRoot->toString();
+    if(mRoot->hasTextNode())
+      return mRoot->toString(false);
+    else
+      return mRoot->toString();
   }
 
 void Document::parse_memory(const std::string &s)
@@ -664,3 +719,409 @@ Node *createRootNode(Document &doc,std::string n)
   return &doc.root();
 }
 
+
+
+/******************************************************************
+ * Parser
+ ******************************************************************/
+
+Parser::Data::Data()
+{
+  pos=0;
+  line=1;
+}
+
+
+bool Parser::Data::first(const std::string &p) const
+{
+  if(s.length()>=p.length()+pos)
+    {
+      return (s.substr(pos,p.length())==p);
+    }
+  return false;
+}
+
+std::string Parser::Data::getFirst(size_t i) const
+{
+  std::ostringstream os;
+  for(size_t k=pos;k<i+pos;k++)
+    {
+      if(k>=s.length())
+	break;
+      os<<s.substr(k,1);
+    }
+  return os.str();
+}
+
+void Parser::Data::eat(size_t i)
+{
+  if(pos+i>s.length())
+    throw int();
+  for(size_t j=0;j<i;j++)
+    if(s[pos+j]=='\n')
+      line++;
+
+  pos+=i;
+}
+
+void Parser::Data::push()
+{
+  stack.push_back(pos);
+  linestack.push_back(line);
+}
+
+void Parser::Data::pop()
+{
+  pos=stack.back();
+  stack.pop_back();
+
+  line=linestack.back();
+  linestack.pop_back();
+}
+
+void Parser::Data::discard()
+{
+  stack.pop_back();
+  linestack.pop_back();
+}
+
+void Parser::Data::eatBlanks()
+{
+  std::string f=getFirst(1);
+
+  while(f==" " || f=="\t" || f=="\n")
+    {
+      eat(1);
+      f=getFirst(1);
+    }
+
+}
+
+std::string Parser::Data::getTil(const std::string &p) const
+{
+  size_t i=s.find(p,pos);
+  if(i!=s.npos)
+    return s.substr(pos,i-pos);
+  return "";
+}
+
+Parser::~Parser()
+{
+}
+
+size_t Parser::getLine() const
+{
+  return data.line;
+}
+
+void Parser::parse(const std::string &pData)
+{
+  data.s=pData;
+
+  parseHeader();
+  while(!eod())
+    {
+      //      cdebug(data.pos<<":"<<data.getFirst(5));
+      if(!parseComment())
+	if(!parseNodeEnd())
+	  {
+	    NodeStartInfo i=parseNodeStart();
+	    if(!i.startTag)
+	      if(!parseText())
+		{
+		  cdebug("ERROR AT line:"<<getLine()<<":"<<data.getFirst(20));
+		  break;
+		}
+	  }
+    }
+}
+
+bool Parser::parseText()
+{
+  std::ostringstream os;
+  while(data.getFirst(1)!="<" && data.getFirst(1).length())
+    {
+      os<<data.getFirst(1);
+      data.eat(1);
+    }
+  if(os.str().length())
+    {
+      text(os.str());
+      return true;
+    }
+  return false;
+}
+
+bool Parser::parseComment()
+{
+  if(data.first("<!--"))
+    {
+      data.eat(4);
+      std::string s=data.getTil("-->");
+      comment(s);
+      data.eat(s.length()+3);
+      return true;
+    }
+  return false;
+}
+
+std::string Parser::parseName()
+{
+  std::ostringstream os;
+  std::string first=data.getFirst(1);
+  while(first!=" " && first!="\t" && first!=">" && first!="/")
+    {
+      os<<first;
+      data.eat(1);
+      first=data.getFirst(1);
+    }
+  return os.str();
+}
+
+Parser::NodeStartInfo Parser::parseNodeStart()
+{
+  NodeStartInfo info;
+  info.startTag=false;
+  if(!data.first("<"))
+    return info;
+
+  info.startTag=true;
+  data.eat(1);
+  std::string name=parseName();
+  //  cdebug("name:"<<name);
+  //  data.eat(name.length());
+  
+  Node::Attributes attrs=parseAttributes();
+
+  //  cdebug("pos:"<<data.pos<<":"<<data.getFirst(5));
+  data.eatBlanks();
+  if(data.first("/"))
+    {
+      //      cdebug("simple");
+      info.simple=true;
+      data.eat(1);
+    }
+  else
+    info.simple=false;
+  assert(data.first(">"));
+  data.eat(1);
+  if(info.simple)
+    simpleTag(name,attrs);
+  else
+    startTag(name,attrs);
+  return info;
+}
+
+
+bool Parser::parseNodeEnd()
+{
+  if(!data.first("</"))
+    return false;
+  
+  data.eat(2);
+  std::string name=data.getTil(">");
+  data.eat(name.length()+1);
+  endTag(name);
+  return true;
+}
+
+bool Parser::parseHeader()
+{
+  //  cdebug("header:"<<data.first("<?"));
+  //  cdebug("header:"<<data.getFirst(2));
+  if(!data.first("<?"))
+    return false;
+  data.push();
+  data.eat(2);
+  std::string c=data.getTil("?>");
+  //  cdebug("c:"<<c);
+  if(c.length()==0)
+    {
+      data.pop();
+      return false;
+    }
+  data.eat(c.length());
+  if(data.first("?>"))
+    {
+      header(c);
+      data.discard();
+      data.eat(2);
+      return true;
+    }
+  data.pop();
+  return false;
+}
+
+std::string Parser::parseString()
+{
+  std::string start=data.getFirst(1);
+  std::string first;
+  std::ostringstream os;
+  data.eat(1);
+
+  bool escape, sescape;
+  escape=sescape=false;
+
+  do
+    {
+      first=data.getFirst(1);
+      data.eat(1);
+      if(escape)
+	{
+	  escape=false;
+	  os<<"\\"<<first;
+	}
+      else if(first=="\\")
+	{
+	  escape=true;
+	}
+      else
+	{
+	  if(first==start)
+	    break;
+	  else
+	    os<<first;
+	}
+      
+    }while(true);
+  
+  return os.str();
+}
+
+Node::Attributes Parser::parseAttributes()
+{
+  Node::Attributes attrs;
+  std::string name,value;
+  //  cdebug("first:"<<data.getFirst(1));
+
+  while(!(data.first(">") || data.first("/")))
+    {
+      data.eatBlanks();
+      name=data.getTil("=");
+      data.eat(name.length()+1);
+
+      value=parseString();
+
+      //      cdebug("attr:"<<name<<" = "<<value);
+      attrs[name]=value;
+    }
+  return attrs;
+}
+
+bool Parser::eod()
+{
+  return data.pos>=data.s.length();
+}
+
+void Parser::simpleTag(const std::string &pName,const Node::Attributes &pAttributes)
+{
+  cdebug("simple:"<<pName);
+}
+
+void Parser::startTag(const std::string &pName,const Node::Attributes &pAttributes)
+{
+  cdebug("start:"<<pName);
+}
+void Parser::endTag(const std::string &pName)
+{
+  cdebug("end:"<<pName);
+}
+void Parser::text(const std::string &pText)
+{
+  cdebug("text:"<<pText);
+
+}
+void Parser::comment(const std::string &pText)
+{
+  cdebug("comment:"<<pText);
+}
+
+
+
+void Parser::header(const std::string &pText)
+{
+  cdebug("header:"<<pText);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+// DomParser
+/////////////////////////////////////////////////////////////////////////////////////
+
+void DomParser::simpleTag(const std::string &pName,const Node::Attributes &pAttributes)
+{
+  if(nodes.size()==0)
+    {
+      Node *n=doc->get_root_node();
+
+      n->setName(pName);
+      n->setAttributes(pAttributes);
+    }
+  else
+    {
+      Node *p=nodes.back();
+      Node *n=p->add_child(pName);
+      n->setAttributes(pAttributes);
+    }
+}
+void DomParser::startTag(const std::string &pName,const Node::Attributes &pAttributes)
+{
+  if(nodes.size()==0)
+    {
+      Node *n=doc->get_root_node();
+
+      n->setName(pName);
+      n->setAttributes(pAttributes);
+      nodes.push_back(n);
+    }
+  else
+    {
+      Node *p=nodes.back();
+      Node *n=p->add_child(pName);
+      n->setAttributes(pAttributes);
+      nodes.push_back(n);
+    }
+}
+void DomParser::endTag(const std::string &pName)
+{
+  if(nodes.size()==0)
+    {
+      std::cerr<<"ERROR:close tag for '"<<pName<<"' and no start tag at all for this! line:"<<getLine()<<std::endl;
+    }
+  else
+    {
+      if(nodes.back()->getName()!=pName)
+	{
+	  std::cerr<<"ERROR: close tag for '"<<pName<<"' found, but '"<<nodes.back()->getName()<<"' expected! line:"<<getLine()<<std::endl;
+	}
+      else
+	{
+	  nodes.pop_back();
+	}
+    }
+}
+void DomParser::text(const std::string &pText)
+{
+  if(nodes.size()>0) // ignore text otherwise
+    {
+      nodes.back()->add_child("")->setContent(pText);
+    }
+}
+void DomParser::comment(const std::string &pText)
+{
+  nodes.back()->add_child("")->setContent(std::string("<!--")+pText+std::string("-->"));
+}
+void DomParser::header(const std::string &pText)
+{
+  // do nothing
+}
+
+Document *DomParser::parse(const std::string &pData)
+{
+  doc=new Document;
+  nodes.clear();
+  Parser::parse(pData);
+
+  nodes.clear();
+  return doc;
+}

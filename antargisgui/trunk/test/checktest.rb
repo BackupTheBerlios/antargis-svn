@@ -21,27 +21,26 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'sdl'
+require 'antargisgui.rb'
 require 'testapp.rb'
-
-include Libantargisruby
 
 puts "MenuTest"
 
 main=AGMain.new
 
 
-main.changeRes(800,600,32,true,true)
+main.changeRes(800,600,32,false,false)
 app=TestApp.new(false)
 
 screen=AGScreenWidget.new
-widget=AGCheckBox.new(screen,AGRect.new(100,100,100,100),"box1")
+widget=AGCheckBox.new(screen,AGRect.new(100,100,100,100))
 screen.addChild(widget)
-group=AGRadioGroup.new
-widget2=AGRadio.new(screen,AGRect.new(200,100,100,100),group,"box2")
+group=AGRadioGroup.new(screen,AGRect.new(0,0,200,200))
+widget2=AGRadio.new(screen,AGRect.new(200,100,100,100))
+widget2.setGroup(group)
 screen.addChild(widget2)
-widget3=AGRadio.new(screen,AGRect.new(200,140,100,100),group,"box3")
+widget3=AGRadio.new(screen,AGRect.new(200,140,100,100))
+widget3.setGroup(group)
 screen.addChild(widget3)
 app.setMainWidget(screen)#widget)
 
