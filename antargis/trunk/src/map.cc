@@ -53,6 +53,8 @@ void HeightMap::loadXML(const Node &node)
   mW=toInt(node.get("width"));
   mH=toInt(node.get("height"));
 
+  cdebug("mW:"<<mW);
+  cdebug("mH:"<<mH);
   mHeights=std::vector<float>(mW*mH*4);
   mGrass=std::vector<float>(mW*mH*4);
   Node::NodeVector hv=node.get_children("height");
@@ -63,9 +65,11 @@ void HeightMap::loadXML(const Node &node)
   assert(gv.size()==1);
   Node &h=**hv.begin();
   Node &g=**gv.begin();
+  
   std::istringstream ish(h.getContent());
   std::istringstream isg(g.getContent());
 
+  cdebug(g.getContent());
   float f;
   for(size_t y=0;y<mH+2;y++)
     {
@@ -399,12 +403,13 @@ void AntMap::loadMap(const std::string &pFilename)
 }
 void AntMap::saveMap(const std::string &pFilename)
 {
-  xmlpp::Document d;
-  Node *root=createRootNode(d,"antargisLevel");
+  Document d;
+  Node *root=d.get_root_node();
+  root->setName("antargisLevel");
   cdebug("root:"<<root);
   saveXML(*root);
 
-  std::string c=toString(d);
+  std::string c=d.toString();
   cdebug(c);
   saveFile(pFilename,c);
 }

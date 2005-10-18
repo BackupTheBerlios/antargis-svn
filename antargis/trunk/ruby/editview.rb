@@ -21,8 +21,8 @@
 
 #!/usr/bin/ruby
 
-require 'libantargis'
-include Libantargis
+#require 'libantargis'
+#include Libantargis
 
 class AntRubyEditView<GLApp
 	include AGHandler

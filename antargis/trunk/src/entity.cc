@@ -79,7 +79,7 @@ AntEntity::~AntEntity()
 
 void AntEntity::saveXML(xmlpp::Node &node) const
   {
-    myxmlpp::Node &child=node.newChild("position");
+    Node &child=node.newChild("position");
     mPos.saveXML(child);
     node.set("energy",toString(mEnergy));
     node.set("healSpeed",toString(mHealSpeed));
@@ -95,8 +95,9 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   mHealSpeed=toFloat(node.get("healSpeed"));
   onGround=toBool(node.get("onGround"));
   assert(onGround);
-  xmlpp::Node::const_iterator i=node.begin();
-  for(;i!=node.end();i++)
+  xmlpp::Node::NodeVector v=node.get_children("position");
+  xmlpp::Node::const_iterator i=v.begin();
+  for(;i!=v.end();i++)
     mPos.loadXML(**i);
   //  mID=toInt(node.get("entityID"));
   if(node.get("morale")!="")

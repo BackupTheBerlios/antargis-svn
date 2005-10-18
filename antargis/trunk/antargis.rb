@@ -55,22 +55,14 @@ class AntGameApp <AntRubyView
 		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
-		#puts @layout.getChild("mainView").getName
 		$screen=@layout
 		
-#		initDebug
-		
-		#storyTalk("Welcome","Welcome to Battles of Antargis")
-		#test
-#		getMap.endChange
 	end
 	
 	def initDebug
 		@debug=AGLayout.new(@layout,loadFile("debug.xml"))
 		@layout.addChild(@debug)
 		addHandler(@debug.getChild("load"),:sigClick,:load)
-		addHandler(@debug.getChild("test1"),:sigClick,:test)
-		addHandler(@debug.getChild("save"),:sigClick,:testsave)
 	end
 	
 	def storyTalk(title,text)
@@ -97,9 +89,6 @@ class AntGameApp <AntRubyView
 		getScene.advance(time)
 		return true
 	end
-#	def eventFrameEnd(time)
-#		getMap.frameEnd
-#	end
 	
 	def eventIdle
 		#GC.start
@@ -130,33 +119,6 @@ class AntGameApp <AntRubyView
 	end
 	def load
 		@layout.addChild(AntLoadDialog.new(@layout))
-	end
-	
-	def test
-		puts "TESTTTTTTTTTTTTTTTTTTTTTTTTT"
-		getMap.clear
-		#ent=AntMan.new(Pos2D.new(30,230),0,nil)
-		(0..10).each{
-		ent=AntNewMan.new
-		ent.setPos2D(Pos2D.new(500,530))
-		$map.insertEntity(ent)
-		}
-		
-		ent=AntNewTree.new
-		ent.setPos2D(Pos2D.new(400,400))
-		$map.insertEntity(ent)
-		
-		puts ent
-		ent2=AntNewHouse.new
-		ent2.setPos2D(Pos2D.new(600,600))
-		$map.insertEntity(ent2)
-		puts "GC"
-		GC.start
-		
-		getMap.endChange
-	end
-	def testsave
-		getMap.saveMap("savegame2")
 	end
 	
 end
