@@ -95,6 +95,8 @@ class Node
 
     bool hasTextNode() const;
 
+    size_t size() const;
+
   private:
     std::string mName;
     std::vector<Node*> mNodes;

@@ -217,8 +217,19 @@ void Node::getEnd(std::ostringstream &s) const
     s<<"</"<<mName<<">";
   }
 
+size_t Node::size() const
+{
+  return mNodes.size();
+}
+
 std::string Node::getContent() const
   {
+    if(mContent.length()==0)
+      {
+	if(size()==1)
+	  if((*mNodes.begin())->mContent.length()>0)
+	    return (*mNodes.begin())->mContent;
+      }
     return mContent;
   }
 

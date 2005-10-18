@@ -55,7 +55,7 @@ app=TestApp.new(false)
 
 screen=AGScreenWidget.new
 
-doc=Document.new("dialog.xml")
+doc=Document.new("../data/dialog.xml")
 puts doc.toString
 l=AGDialog.new(screen,doc.toString)
 screen.addChild(l)
