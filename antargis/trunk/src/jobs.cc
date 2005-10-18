@@ -136,7 +136,7 @@ FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 {
   fightDistance=0.20; // in pixels
   strength=0.2;   // decrease per second
-  speed=70; // see MoveJob
+  //  speed=70; // see MoveJob
 }
 
 void FightJob::move(AntEntity *e,float ptime)
@@ -151,6 +151,7 @@ void FightJob::move(AntEntity *e,float ptime)
   // if target is too far away run there, otherwise fight
   AGVector2 diff=e->getPos2D()-mTarget->getPos2D();
   float norm=diff.length();
+  float speed=e->getSpeed();
   if(norm-fightDistance>ptime*speed)
     {
       diff=diff.normalized();

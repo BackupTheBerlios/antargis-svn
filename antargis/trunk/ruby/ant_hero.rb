@@ -137,8 +137,8 @@ class AntNewHero<AntNewBoss
 			#puts "SITTING:"
 			#puts id
 			#puts @men.length
-			radius=40
-			return Pos2D.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
+			radius=1
+			return AGVector2.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
 		else
 			puts "ERROR in SitFormation!"
 			puts "MEN:"+@men.to_s
@@ -152,7 +152,7 @@ class AntNewHero<AntNewBoss
 		id=@men.index(man)
 		if id
 		
-			lineWidth=30
+			lineWidth=1
 			if @men.length>30
 				lineWidth=15
 			end
@@ -165,7 +165,7 @@ class AntNewHero<AntNewBoss
 			col=col-2
 			normal=dir.normal
 			l=dir*line*lineWidth
-			c=normal*col*15
+			c=normal*col*0.5
 			
 			return l+c
 		else

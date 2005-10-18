@@ -145,7 +145,7 @@ class AntNewMan<AntMyEntity
 	##########################	
 	def sendAngel
 		e=AntNewAngel.new
-		e.setAGVector2(getAGVector2)
+		e.setPos(getPos2D)
 		getMap.insertEntity(e)
 		getMap.endChange
 	end

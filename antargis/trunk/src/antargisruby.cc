@@ -17773,7 +17773,7 @@ _wrap_SceneNodeVector_pop(int argc, VALUE *argv, VALUE self) {
         }
     }
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -41788,7 +41788,7 @@ _wrap_AntMap_getEntity__SWIG_0(int argc, VALUE *argv, VALUE self) {
     result = (AntEntity *)(arg1)->getEntity((Mesh const &)*arg2);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -41821,7 +41821,7 @@ _wrap_AntMap_getEntity__SWIG_1(int argc, VALUE *argv, VALUE self) {
     result = (AntEntity *)((AntMap const *)arg1)->getEntity(arg2);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -41909,7 +41909,7 @@ _wrap_AntMap_getByName(int argc, VALUE *argv, VALUE self) {
     result = (AntEntity *)(arg1)->getByName((std::string const &)*arg2);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -41952,7 +41952,7 @@ _wrap_AntMap_getNext(int argc, VALUE *argv, VALUE self) {
     result = (AntEntity *)(arg1)->getNext(arg2,(std::string const &)*arg3);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -41988,7 +41988,7 @@ _wrap_AntMap_loadEntity(int argc, VALUE *argv, VALUE self) {
     result = (AntEntity *)(arg1)->loadEntity((Node const &)*arg2);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -43015,7 +43015,7 @@ _wrap_toMesh(int argc, VALUE *argv, VALUE self) {
     result = (Mesh *)toMesh(arg1);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -43094,7 +43094,7 @@ _wrap_PickNode_node_get(int argc, VALUE *argv, VALUE self) {
     result = (SceneNode *) ((arg1)->node);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
@@ -44888,7 +44888,7 @@ _wrap_AntEntity_getMesh(int argc, VALUE *argv, VALUE self) {
         vresult = resultdirector->swig_get_self();
     } else {
         {
-            std::cout<<"test2"<<std::endl;
+            //	std::cout<<"test2"<<std::endl;
             if(result)
             {
                 if(result->mRubyObject)
@@ -45176,7 +45176,7 @@ _wrap_AntEntityPtr_get(int argc, VALUE *argv, VALUE self) {
         vresult = resultdirector->swig_get_self();
     } else {
         {
-            std::cout<<"test2"<<std::endl;
+            //	std::cout<<"test2"<<std::endl;
             if(result)
             {
                 if(result->mRubyObject)

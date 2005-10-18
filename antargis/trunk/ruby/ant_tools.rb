@@ -9,3 +9,16 @@ def getMeshData(file,zoom,texture="",shadow=true)
 	end
 	return $meshes[file]
 end
+
+
+class AGVector3
+	def x=(p)
+		setX(p)
+	end
+	def y=(p)
+		setY(p)
+	end
+	def z=(p)
+		setZ(p)
+	end
+end

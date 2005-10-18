@@ -46,9 +46,9 @@ class AntHeroMoveJob<AntHLJob
 	def checkFormationMan(man)
 		if (not man.hasJob) then 
 			# check if is already there - don't know why this fails ATM
-			is=man.getAGVector2
-			should=@hero.getWalkFormation(man,@formatDir)+@hero.getAGVector2
-			if (is-should).norm>10 then
+			is=man.getPos2D
+			should=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
+			if (is-should).length>10 then
 				man.newMoveJob(0,should,0)
 			else
 				man.newRestJob(2) # wait for 2 seconds
@@ -102,9 +102,9 @@ class AntHeroMoveJob<AntHLJob
 				ready=false
 			else
 				# check if is already there - don't know why this fails ATM
-				is=x.getAGVector2
-				should=@hero.getWalkFormation(x,@formatDir)+@hero.getAGVector2
-				if (is-should).norm>10 then
+				is=x.getPos2D
+				should=@hero.getWalkFormation(x,@formatDir)+@hero.getPos2D
+				if (is-should).length>10 then
 					ready=false
 					x.newMoveJob(0,should,@dist)
 				end
@@ -199,7 +199,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		dist=10000.0
 		mtarget=nil
 		tmen.each{|t|
-			d=(t.getAGVector2-man.getAGVector2).norm
+			d=(t.getPos2D-man.getPos2D).length
 			if d<dist
 				dist=d
 				mtarget=t

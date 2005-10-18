@@ -18,7 +18,7 @@
 }
 
 %typemap(out) SceneNode *{
-	std::cout<<"test2"<<std::endl;
+//	std::cout<<"test2"<<std::endl;
 	if($1)
 	{
 		if($1->mRubyObject)
@@ -34,7 +34,7 @@
 		vresult = Qnil;
 }
 %typemap(out) Mesh *{
-	std::cout<<"test2"<<std::endl;
+//	std::cout<<"test2"<<std::endl;
 	if($1)
 	{
 		if($1->mRubyObject)
@@ -50,7 +50,7 @@
 		vresult = Qnil;
 }
 %typemap(out) AntEntity *{
-	std::cout<<"test2"<<std::endl;
+//	std::cout<<"test2"<<std::endl;
 	if($1)
 	{
 		if($1->mRubyObject)

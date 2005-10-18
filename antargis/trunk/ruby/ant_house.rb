@@ -26,7 +26,7 @@ require 'ant_tools.rb'
 
 class AntFlag<AntMyEntity
 	def initialize
-		super(Pos3D.new(0,0,0))
+		super(AGVector3.new(0,0,0))
 		setType("flag")
 		@age=0
 	end
@@ -64,13 +64,13 @@ class AntNewHouse<AntNewBoss #MyEntity
 			p=getPos3D
 			p.y+=290
 			p.z-=150
-			@flag.setPos3D(p)
+			@flag.setPos(p)
 		end
 	end
 	
 	def addFlag(owner)
 		@flag=AntFlag.new
-		setPos2D(getPos2D) # reset flag position
+		setPos(getPos2D) # reset flag position
 		$map.insertEntity(@flag)
 	end
 	
@@ -241,7 +241,8 @@ class AntNewHouse<AntNewBoss #MyEntity
 	def fetch(enttype,good,ent)
 		tent=getMap.getNext(self,enttype)
 		if tent == nil then
-			puts "No '"+good+"' found!"
+			#puts "No '"+good+"' found!"
+			ent.newRestJob(2)
 		else
 			ent.newFetchJob(0,tent.getPos2D,good)
 		end
