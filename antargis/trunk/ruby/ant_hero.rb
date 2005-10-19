@@ -25,7 +25,7 @@ require 'ents.rb'
 require 'ant_hljobs.rb'
 require 'ant_boss.rb'
 
-class AntNewHero<AntNewBoss
+class AntHero<AntBoss
 	def initialize
 		super
 		setType("hero")
@@ -38,7 +38,7 @@ class AntNewHero<AntNewBoss
 	end
 	
 	def xmlName
-		return "antNewHero"
+		return "antHero"
 	end
 	def saveXML(node)
 		super(node)

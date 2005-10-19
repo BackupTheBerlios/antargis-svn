@@ -174,8 +174,6 @@ class AntEntity
     bool mRubyObject;
     VALUE mRUBY;
 
-    //    friend void AntEntity_markfunc(void *ptr);
-
   private:
     void init();
   };

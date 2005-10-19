@@ -41,8 +41,8 @@ class AntGameApp <AntRubyView
 		@map=AntRubyMap.new(64,64)
 		$map=@map
 		@map.setScene(getScene)
-		@terrain=TerrainMesh.new(@map)
-		getScene.addNode(@terrain)
+		#@terrain=TerrainMesh.new(@map)
+		#getScene.addNode(@terrain)
 		
 		# load a level
 		getMap().loadMap(savegame)

@@ -36,92 +36,36 @@ class AntFlag<AntMyEntity
 end
 
 
-class AntNewHouse<AntNewBoss
+class AntHouse<AntBoss
 	def initialize
 		super
 		@type=3
 		setType("house")
-		@men=[]
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
 		
-		mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
-		puts mesh
-		setMesh(mesh)
-		puts getMesh
+		#mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
+		#setMesh(mesh)
 	end
-	
-	###############################
-	# FLAG support
-	###############################
-	
-	# override this for reseting the flag's position
-	def setPos(p)
-		super(p)
-		if @flag then
-			p=getPos3D
-			p.y+=290
-			p.z-=150
-			@flag.setPos(p)
-		end
-	end
-	
-	def addFlag(owner)
-		@flag=AntFlag.new
-		setPos(getPos2D) # reset flag position
-		$map.insertEntity(@flag)
-	end
-	
 	
 	################################
 	# Viewing,etc.
 	################################
 	
-	def setHouseType(t)
-		@type=t
-	end
-	def getTexture
-		puts "HOUSE::getTexture"
-		return "tower"+@type.to_s+".png"
-	end
-	
-	def getMen
-		@men
-	end
-	
-	def menCount
-		#@men=@men.uniq
-		@men.length
-	end
-	
+	# for recruiting
 	def takeMan
 		m=@men[0]
 		removeMan(m)
 		return m
 	end
 	
-	def checkBirth
-		# only men, which are at home can add to birth rate
-		@lastBirth+=[@atHome.length,30].min
-		puts "LASTBIRTH:"+@lastBirth.to_s
-		if @lastBirth>50 then
-			puts "A MAN IS BORN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-			man=AntNewMan.new
-			getMap.insertEntity(man)
-			man.setPos(getPos2D)
-			getMap.endChange
-			@lastBirth=-10*rand
-		end
-	end
-
-	
 	######################################
 	# EVENTS
 	######################################
 	
 	def eventJobFinished
-		checkBirth
+		#checkBirth
 		newRestJob(2)
 		if @fighting then
 			checkFight
@@ -233,19 +177,9 @@ class AntNewHouse<AntNewBoss
 	########################################
 	# LOADING & SAVING
 	########################################
-	def xmlName
-		return "antNewHouse"
-	end
-	
-	def getPos2D
-		r=super
-		puts r
-		puts "---"
-		return r
-	end
 	
 	def loadXML(node)
 		super(node)
-		setPos(getPos2D)
+		setPos(getPos2D) # set to ground
 	end	
 end

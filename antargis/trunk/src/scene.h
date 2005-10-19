@@ -37,6 +37,8 @@ class Scene
   void addNode(SceneNode *node);
   void removeNode(SceneNode *node);
 
+  void clear();
+
   // (mx,my,0)
   void setCamera(AGVector4 v);
   void advance(float time);

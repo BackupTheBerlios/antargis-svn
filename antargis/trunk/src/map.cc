@@ -5,6 +5,7 @@
 #include <ag_debug.h>
 #include "scene.h"
 #include "mesh.h"
+#include "terrain.h"
 
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
@@ -18,10 +19,12 @@ HeightMap::HeightMap(int w,int h):
   mHeights=genSomeHeights(w+2,h+2,5);
   mGrass=genSomeHeights(w+2,h+2,1);
 
+  mTerrainMesh=new TerrainMesh(*this);
 }
 
 HeightMap::~HeightMap()
 {
+  delete mTerrainMesh;
 }
 
 void HeightMap::setScene(Scene *pScene)
@@ -91,7 +94,10 @@ void HeightMap::loadXML(const Node &node)
 void HeightMap::mapChanged()
 {
   if(mScene)
-    mScene->mapChanged();
+    {
+      mScene->addNode(mTerrainMesh);
+      mScene->mapChanged();
+    }
 }
 
 
@@ -211,6 +217,9 @@ AntMap::AntMap(int w,int h):HeightMap(w,h),mEntQuad(AGRect2(0,0,w,h))
 {
   myAntargisMap=this;
   maxID=0;
+
+  if(getScene())
+    getScene()->addNode(mTerrainMesh);
 }
 AntMap::~AntMap()
 {
@@ -395,6 +404,7 @@ AntEntity *AntMap::getByName(const std::string &pName)
 
 void AntMap::loadMap(const std::string &pFilename)
 {
+  getScene()->clear();
   CTRACE;
   Document d;
   std::string c=loadFile(pFilename);
@@ -420,11 +430,13 @@ void AntMap::saveMap(const std::string &pFilename)
 
 void AntMap::clear()
 {
+  getScene()->clear();
   CTRACE;
   //  mPlayers.clear();
   mEntities.clear();
   mEntQuad.clear();
   mEntityMap.clear();
+  getScene()->addNode(mTerrainMesh);
 
 }
 

@@ -53,14 +53,17 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				mesh=ents.node
 				puts mesh
 				if mesh.class==Mesh
-				e=getMap.getEntity(mesh)
-				
-				if e.getType=="hero" then
-					@hero=e
-					inspectEntity(e)
-				elsif e.getType=="house" then
-					inspectEntity(e)
-				end
+					e=getMap.getEntity(mesh)
+					if not e
+						puts "WHY IS IT NOT IN MAP ????????????"
+					end
+					
+					if e.getType=="hero" then
+						@hero=e
+						inspectEntity(e)
+					elsif e.getType=="house" then
+						inspectEntity(e)
+					end
 				end
 			}
 			return

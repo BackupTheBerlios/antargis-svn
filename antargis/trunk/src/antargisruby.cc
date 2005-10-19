@@ -43342,6 +43342,19 @@ _wrap_Scene_removeNode(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Scene_clear(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 1);
+    (arg1)->clear();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_Scene_setCamera(int argc, VALUE *argv, VALUE self) {
     Scene *arg1 = (Scene *) 0 ;
     AGVector4 arg2 ;
@@ -48314,6 +48327,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "getShadow", VALUEFUNC(_wrap_Scene_getShadow), -1);
     rb_define_method(cScene.klass, "addNode", VALUEFUNC(_wrap_Scene_addNode), -1);
     rb_define_method(cScene.klass, "removeNode", VALUEFUNC(_wrap_Scene_removeNode), -1);
+    rb_define_method(cScene.klass, "clear", VALUEFUNC(_wrap_Scene_clear), -1);
     rb_define_method(cScene.klass, "setCamera", VALUEFUNC(_wrap_Scene_setCamera), -1);
     rb_define_method(cScene.klass, "advance", VALUEFUNC(_wrap_Scene_advance), -1);
     rb_define_method(cScene.klass, "lineHit", VALUEFUNC(_wrap_Scene_lineHit), -1);

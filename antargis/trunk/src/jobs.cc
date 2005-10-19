@@ -96,24 +96,15 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
   AGVector2 diff=e->getPos2D()-mTarget;
   float norm=diff.length();
-  //  cdebug("norm:"<<norm);
-  //  cdebug("near:"<<near);
+
   if(norm-near>ptime*aspeed)
     {
-      //      cdebug(diff);
       diff=diff.normalized();
-      //      cdebug(diff);
       e->setDirection(-diff.getAngle().angle*180.0/M_PI);
-      //      cdebug(e->getAGVector2());
       e->setPos(e->getPos2D()-diff*ptime*aspeed);
-      //      cdebug(e->getAGVector2());
     }
   else
-    {
-      //      e->setAGVector2(mTarget);
-      //      CTRACE;
-      jobFinished(e);
-    }
+    jobFinished(e);
 }
 
 /************************************************************************
@@ -136,15 +127,12 @@ FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 {
   fightDistance=0.20; // in pixels
   strength=0.2;   // decrease per second
-  //  speed=70; // see MoveJob
 }
 
 void FightJob::move(AntEntity *e,float ptime)
 {
   if(mTarget->getEnergy()==0.0 || mTarget->getMorale()<0.1)
     {
-      //      cdebug("target-e:"<<mTarget->getEnergy());
-      //      cdebug("target-m:"<<mTarget->getMorale());
       mTarget->eventDefeated();
       jobFinished(e);
     }
@@ -156,6 +144,7 @@ void FightJob::move(AntEntity *e,float ptime)
     {
       diff=diff.normalized();
       e->setPos(e->getPos2D()-diff*ptime*speed);
+      e->setDirection(-diff.getAngle().angle*180.0/M_PI);
     }
   else
     {

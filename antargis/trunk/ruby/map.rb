@@ -32,14 +32,22 @@ class AntRubyMap<AntMap
 		@lastGC=0
 	end
 	def loadEntity(node)
+		case node.getName
+			when "antFarm"
+				e=AntFarm.new
+			when "antWerkstatt"
+				e=AntWerkstatt.new
+			when "antHotel"
+				e=AntHotel.new
+		end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
 		end
-		if node.getName=="antNewHero" then
-			e=AntNewHero.new
+		if node.getName=="antHero" then
+			e=AntHero.new
 		end
-		if node.getName=="antNewHouse" then
-			e=AntNewHouse.new
+		if node.getName=="antTower" then
+			e=AntTower.new
 		end
 		if node.getName=="antNewStone" then
 			e=AntNewStone.new
@@ -125,7 +133,7 @@ class AntRubyMap<AntMap
 		super(n)
 		@players.each{|player|
 			c=n.newChild(player.xmlName)
-			player.saveXml(c)
+			player.saveXML(c)
 		}
 	end
 	

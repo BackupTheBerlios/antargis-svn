@@ -137,6 +137,7 @@ void AntEntity::setPos(const AGVector2 &p)
 
 void AntEntity::setJob(Job *pJob)
 {
+  //  assert(pJob);
   if(mJob)
     {
       if(pJob)
@@ -172,21 +173,11 @@ void AntEntity::setJob(Job *pJob)
     }
   else
     {
-      //      if(!pJob->mRubyObject) // let ruby delete it
-	{
-	  //	  cdebug("DELETE JOB:"<<pJob);
-	  mJobFinished.push_back(pJob);
-	  //	  delete pJob;
-	}
+      if(pJob)
+	mJobFinished.push_back(pJob);
     }
   if(mJob)
-    {
-      //      if(mJob->mRubyObject)
-      //	rb_gc_register_address(&(mJob->mRUBY));
-      //	rb_gc_mark(mJob->mRUBY);
-      eventGotNewJob();
-    }
-
+    eventGotNewJob();
 }
 
 void AntEntity::eventGotNewJob()
@@ -203,10 +194,6 @@ void AntEntity::move(float pTime)
       for(;i!=mJobFinished.end();i++)
 	delete *i;
       mJobFinished.clear();
-      //      if(!mJob->mRubyObject)
-      //      delete mJob;
-      //      mJob=0;
-      //      mJobFinished=false;
     }
   else if(mEnergy>0.0)
     {
@@ -229,8 +216,6 @@ void AntEntity::move(float pTime)
   else
     eventNoJob();
 
-     
-  //  mCondition+=mConditionHeal*pTime;
 }
 
 
@@ -239,19 +224,12 @@ void AntEntity::eventJobFinished()
 {
   mJobFinished.push_back(mJob);
   mJob=0;
-  //  if(mJob)
-  //    mJobFinished=true;
 }
 
 void AntEntity::eventNoJob()
 {
 }
 
-/*
-bool AntEntity::isJobFinished() const
-{
-  return mJobFinished.size();
-  }*/
 
 void AntEntity::eventMapChanged()
 {
@@ -294,17 +272,12 @@ std::string AntEntity::xmlName() const
 }
 
 
-/*std::string AntEntity::getTexture() const
-    {
-      return "";
-    }
-*/
 void AntEntity::setDirection(float dir)
-    {
-      mDir=dir;
-      if(mMesh)
-	mMesh->setRotation(dir);
-    }
+{
+  mDir=dir;
+  if(mMesh)
+    mMesh->setRotation(dir);
+}
 
 
 

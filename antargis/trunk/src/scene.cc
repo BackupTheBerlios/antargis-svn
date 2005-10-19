@@ -91,6 +91,13 @@ void Scene::removeNode(SceneNode *node)
     }
 }
 
+void Scene::clear()
+{
+  TRACE;
+  mNodes.clear();
+  mNodeSet.clear();
+}
+
   // (mx,my,0)
 void Scene::setCamera(AGVector4 v)
 {

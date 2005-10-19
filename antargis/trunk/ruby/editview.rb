@@ -51,7 +51,7 @@ class AntRubyEditView<GLApp
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid","stones"]
+		ents=["sheep","hero","tower","druid","stones","farm","hotel","werkstatt"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
@@ -156,14 +156,20 @@ class AntRubyEditView<GLApp
 			when "sheep"
 				@type=AntNewSheep
 			when "tower"
-				@type=AntNewHouse
+				@type=AntTower
+			when "farm"
+				@type=AntFarm
+			when "werkstatt"
+				@type=AntWerkstatt
+			when "hotel"
+				@type=AntHotel
 			when "stones"
 				@type=AntNewStone
 			when "hero"
-				@type=AntNewHero
+				@type=AntHero
 				@appearance="hero"
 			when "druid"
-				@type=AntNewHero
+				@type=AntHero
 				@appearance="druid"
 		end
 	end
@@ -195,7 +201,7 @@ class AntRubyEditView<GLApp
 			if @decoType=="floor" or @decoType=="block"
 				dorand=false
 			end
-		elsif @type==AntNewHero
+		elsif @type==AntHero
 			tree=@type.new
 			tree.setAppearance(@appearance)
 		else

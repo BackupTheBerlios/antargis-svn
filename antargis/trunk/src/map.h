@@ -8,6 +8,7 @@
 class AntEntity;
 class Scene;
 class Mesh;
+class TerrainMesh;
 
 class HeightMap
 {
@@ -56,6 +57,8 @@ class HeightMap
   size_t mW,mH;
  protected:
   Scene *mScene;
+
+  TerrainMesh *mTerrainMesh;
 };
 
 //FIXME: add quadtree

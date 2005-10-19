@@ -25,7 +25,7 @@ require 'ents.rb'
 require 'ant_hljobs.rb'
 
 
-class AntNewBoss<AntMyEntity
+class AntBoss<AntMyEntity
 	def initialize
 		super(AGVector2.new(0,0))
 		@men=[]

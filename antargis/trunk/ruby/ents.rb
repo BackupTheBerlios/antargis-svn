@@ -59,4 +59,7 @@ require 'ant_house.rb'
 require 'ant_stone.rb'
 require 'ant_tree.rb'
 require 'ant_deco.rb'
-
+require 'ant_tower.rb'
+require 'ant_hotel.rb'
+require 'ant_farm.rb'
+require 'ant_werkstatt.rb'
