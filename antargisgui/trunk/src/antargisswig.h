@@ -181,6 +181,7 @@ public:
     SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id = -1);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void setChecked(bool pChecked);
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
@@ -517,6 +518,7 @@ public:
     SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void setChecked(bool pChecked);
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;
@@ -599,6 +601,7 @@ public:
     SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void setChecked(bool pChecked);
     virtual bool eventShow();
     virtual int minHeight() const;
     virtual int minWidth() const;

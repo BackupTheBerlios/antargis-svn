@@ -67,7 +67,7 @@ class AGButton:public AGWidget
 
   void setState(const State &pState);
 
-  void setChecked(bool pChecked);
+  virtual void setChecked(bool pChecked);
   bool isChecked() const;
 
   bool canFocus() const;

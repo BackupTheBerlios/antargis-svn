@@ -48,13 +48,12 @@ class AGRadio:public AGCheckBox
   AGRadio(AGWidget *pParent,AGRect pRect);//,AGRadioGroup *pGroup,std::string pName);
   virtual ~AGRadio();
 
-  bool eventMouseClick(const AGEvent *m);
+  //  bool eventMouseClick(const AGEvent *m);
   void setGroup(AGRadioGroup *pGroup);
-  //  bool eventMouseButtonUp(const AGEvent *m);
-  //  bool eventMouseLeave();
-  //  bool eventMouseEnter();
   
   void deselect();
+
+  virtual void setChecked(bool pChecked);
 
  private:
   AGRadioGroup *mGroup;

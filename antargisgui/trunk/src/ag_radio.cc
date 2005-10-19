@@ -90,46 +90,7 @@ AGRadio::~AGRadio()
   if(mGroup)
     mGroup->erase(this);
 }
-
 /*
-bool AGRadio::eventMouseButtonUp(const AGEvent *m)
-{
-  CTRACE;
-  cdebug("name:"<<getName());
-  if(!mChecked)
-    {
-      mChecked=true;
-      //      mImage->setSurface(getTheme()->getSurface(mType+".checked"));
-      if(mGroup)
-	mGroup->eventChange(getName());
-    }
-
-  cdebug(mChecked);
-  if(mChecked)
-    setState(CHECKED);
-  else
-    setState(NORMAL);
-  return true;
-}
-
-bool AGRadio::eventMouseLeave()
-{
-  if(mChecked)
-    setState(CHECKED);
-  else
-    setState(NORMAL);
-  return false;
-}
-bool AGRadio::eventMouseEnter()
-{
-  if(mChecked)
-    setState(CHECKED);
-  else
-    setState(LIGHTED);
-  return false;
-}
-*/
-
 bool AGRadio::eventMouseClick(const AGEvent *m)
 {
   CTRACE;
@@ -145,20 +106,25 @@ bool AGRadio::eventMouseClick(const AGEvent *m)
     }
 
   cdebug(isChecked());
-  /*  if(mChecked)
-    setState(CHECKED);
-  else
-  setState(LIGHTED);*/
   return AGWidget::eventMouseClick(m);
+}*/
+
+void AGRadio::setChecked(bool pChecked)
+{
+  bool c=isChecked();
+  AGCheckBox::setChecked(pChecked);
+
+  if(pChecked && !c)
+    {
+      if(mGroup)
+	mGroup->eventChange(getName());
+    }
 }
 
 void AGRadio::deselect()
 {
   CTRACE;
-  //  mImage->setSurface(getTheme()->getSurface(mType+".normal"));
   setChecked(false);
-  //  mChecked=false;
-  //  setState(NORMAL);
 }
 
 void AGRadio::setGroup(AGRadioGroup *pGroup)

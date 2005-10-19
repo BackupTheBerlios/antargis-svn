@@ -54,7 +54,7 @@ bool AGCheckBox::eventMouseClick(const AGEvent *m)
       else
 	mImage->setSurface(getTheme()->getSurface(mType+".normal"));
 	}*/
-  return true; // eat
+  return AGButton::eventMouseClick(m);//false;//true; // eat
 }
 
 /*
