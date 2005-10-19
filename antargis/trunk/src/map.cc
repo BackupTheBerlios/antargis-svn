@@ -28,6 +28,10 @@ void HeightMap::setScene(Scene *pScene)
 {
   mScene=pScene;
 }
+Scene *HeightMap::getScene()
+{
+  return mScene;
+}
 
 void HeightMap::setHeight(float height)
 {

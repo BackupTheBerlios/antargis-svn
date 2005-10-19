@@ -16,6 +16,7 @@ class HeightMap
   virtual ~HeightMap();
 
   void setScene(Scene *pScene);
+  Scene *getScene();
 
   // get status
   float getHeight(float x,float y) const;

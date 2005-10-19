@@ -36,9 +36,9 @@ class AntFlag<AntMyEntity
 end
 
 
-class AntNewHouse<AntNewBoss #MyEntity
+class AntNewHouse<AntNewBoss
 	def initialize
-		super #(Pos2D.new(0,0))
+		super
 		@type=3
 		setType("house")
 		@men=[]
@@ -46,7 +46,6 @@ class AntNewHouse<AntNewBoss #MyEntity
 		@atHome=[]
 		@lastBirth=0
 		
-#		setVirtualY(250)
 		mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
 		puts mesh
 		setMesh(mesh)
@@ -74,23 +73,6 @@ class AntNewHouse<AntNewBoss #MyEntity
 		$map.insertEntity(@flag)
 	end
 	
-	
-	################################
-	# SIGN UP & REMOVE MAN
-	################################
-	
-	#def signUp(man)
-	#	puts "SIGNUP"
-	#	puts man
-	#	if not @men.include?(man)
-	#		@men.push(man)
-	#	end
-	#end
-	
-	#d#ef removeMan(man)
-	#	@men.delete(man)
-	#	@atHome.delete(man)
-	#end
 	
 	################################
 	# Viewing,etc.

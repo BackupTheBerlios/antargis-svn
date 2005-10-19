@@ -75,6 +75,10 @@ AntEntity::~AntEntity()
   //  CTRACE;
   //  cdebug(mRubyObject);
   //  throw int();
+
+  if(getMap())
+    if(getMap()->getScene())
+      getMap()->getScene()->removeNode(mMesh);
 }
 
 void AntEntity::saveXML(xmlpp::Node &node) const
@@ -290,11 +294,11 @@ std::string AntEntity::xmlName() const
 }
 
 
-std::string AntEntity::getTexture() const
+/*std::string AntEntity::getTexture() const
     {
       return "";
     }
-
+*/
 void AntEntity::setDirection(float dir)
     {
       mDir=dir;

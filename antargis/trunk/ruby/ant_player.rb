@@ -38,7 +38,7 @@ class AntPlayer
 	end
 	def loadXML(n)
 		@name=n.get("name")
-		children=n.get_children
+		children=n.get_children("hero")
 		children.each{|c|
 			@heronames.push(c.get("name"))
 		}
@@ -48,6 +48,8 @@ class AntPlayer
 			@heronames.each{|n|
 				ent=getMap.getByName(n)
 				if ent
+					puts ent
+					puts ent.getName
 					ent.setPlayer(self)
 					@heroes.push(ent)
 				else
@@ -56,6 +58,9 @@ class AntPlayer
 			}
 			@heronames.clear
 		end
+	end
+	def getName
+		@name
 	end
 	
 	def assignJob(hero)

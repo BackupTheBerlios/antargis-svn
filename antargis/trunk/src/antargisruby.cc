@@ -3074,6 +3074,19 @@ bool SwigDirector_AGButton::eventGotFocus() {
 }
 
 
+void SwigDirector_AGButton::setChecked(bool pChecked) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::setChecked(pChecked);
+        return;
+    }
+    obj0 = pChecked ? Qtrue : Qfalse;
+    result = rb_funcall(swig_get_self(), rb_intern("setChecked"), 1,obj0);
+}
+
+
 bool SwigDirector_AGButton::eventShow() {
     bool c_result ;
     VALUE result;
@@ -7606,6 +7619,19 @@ bool SwigDirector_AGCheckBox::eventGotFocus() {
 }
 
 
+void SwigDirector_AGCheckBox::setChecked(bool pChecked) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::setChecked(pChecked);
+        return;
+    }
+    obj0 = pChecked ? Qtrue : Qfalse;
+    result = rb_funcall(swig_get_self(), rb_intern("setChecked"), 1,obj0);
+}
+
+
 bool SwigDirector_AGCheckBox::eventShow() {
     bool c_result ;
     VALUE result;
@@ -8798,6 +8824,19 @@ bool SwigDirector_AGRadio::eventGotFocus() {
 }
 
 
+void SwigDirector_AGRadio::setChecked(bool pChecked) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGRadio::setChecked(pChecked);
+        return;
+    }
+    obj0 = pChecked ? Qtrue : Qfalse;
+    result = rb_funcall(swig_get_self(), rb_intern("setChecked"), 1,obj0);
+}
+
+
 bool SwigDirector_AGRadio::eventShow() {
     bool c_result ;
     VALUE result;
@@ -9140,7 +9179,7 @@ bool SwigDirector_AGRadio::eventMouseClick(AGEvent const *m) {
     VALUE result;
     
     if (swig_get_up()) {
-        return AGRadio::eventMouseClick(m);
+        return AGCheckBox::eventMouseClick(m);
     }
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
@@ -16800,24 +16839,6 @@ std::string SwigDirector_AntEntity::xmlName() const {
         return AntEntity::xmlName();
     }
     result = rb_funcall(swig_get_self(), rb_intern("xmlName"), 0, NULL);
-    {
-        if (TYPE(result) == T_STRING)
-        c_result = std::string(StringValuePtr(result));
-        else
-        throw Swig::DirectorTypeMismatchException("string expected");
-    }
-    return (std::string) c_result;
-}
-
-
-std::string SwigDirector_AntEntity::getTexture() const {
-    std::string c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AntEntity::getTexture();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getTexture"), 0, NULL);
     {
         if (TYPE(result) == T_STRING)
         c_result = std::string(StringValuePtr(result));
@@ -31278,11 +31299,14 @@ static VALUE
 _wrap_AGButton_setChecked(int argc, VALUE *argv, VALUE self) {
     AGButton *arg1 = (AGButton *) 0 ;
     bool arg2 ;
+    Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
     arg2 = RTEST(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->setChecked(arg2);
     
     return Qnil;
@@ -34353,27 +34377,6 @@ free_AGRadio(AGRadio *arg1) {
     delete arg1;
 }
 static VALUE
-_wrap_AGRadio_eventMouseClick(int argc, VALUE *argv, VALUE self) {
-    AGRadio *arg1 = (AGRadio *) 0 ;
-    AGEvent *arg2 = (AGEvent *) 0 ;
-    bool result;
-    Swig::Director *director = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRadio, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGEvent, 1);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (bool)(arg1)->eventMouseClick((AGEvent const *)arg2);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
 _wrap_AGRadio_setGroup(int argc, VALUE *argv, VALUE self) {
     AGRadio *arg1 = (AGRadio *) 0 ;
     AGRadioGroup *arg2 = (AGRadioGroup *) 0 ;
@@ -34396,6 +34399,24 @@ _wrap_AGRadio_deselect(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRadio, 1);
     (arg1)->deselect();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGRadio_setChecked(int argc, VALUE *argv, VALUE self) {
+    AGRadio *arg1 = (AGRadio *) 0 ;
+    bool arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRadio, 1);
+    arg2 = RTEST(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->setChecked(arg2);
     
     return Qnil;
 }
@@ -41349,6 +41370,22 @@ _wrap_HeightMap_setScene(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_HeightMap_getScene(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    Scene *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 1);
+    result = (Scene *)(arg1)->getScene();
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_HeightMap_getHeight(int argc, VALUE *argv, VALUE self) {
     HeightMap *arg1 = (HeightMap *) 0 ;
     float arg2 ;
@@ -44836,27 +44873,6 @@ _wrap_AntEntity_getMorale(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AntEntity_getTexture(int argc, VALUE *argv, VALUE self) {
-    AntEntity *arg1 = (AntEntity *) 0 ;
-    std::string result;
-    Swig::Director *director = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = ((AntEntity const *)arg1)->getTexture();
-    
-    {
-        vresult = rb_str_new2((&result)->c_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
 _wrap_AntEntity_setMesh(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     Mesh *arg2 = (Mesh *) 0 ;
@@ -47578,9 +47594,9 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGRadio, (void *) &cAGRadio);
     rb_define_alloc_func(cAGRadio.klass, _wrap_AGRadio_allocate);
     rb_define_method(cAGRadio.klass, "initialize", VALUEFUNC(_wrap_new_AGRadio), -1);
-    rb_define_method(cAGRadio.klass, "eventMouseClick", VALUEFUNC(_wrap_AGRadio_eventMouseClick), -1);
     rb_define_method(cAGRadio.klass, "setGroup", VALUEFUNC(_wrap_AGRadio_setGroup), -1);
     rb_define_method(cAGRadio.klass, "deselect", VALUEFUNC(_wrap_AGRadio_deselect), -1);
+    rb_define_method(cAGRadio.klass, "setChecked", VALUEFUNC(_wrap_AGRadio_setChecked), -1);
     cAGRadio.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGRadio.destroy = (void (*)(void *)) free_AGRadio;
     rb_define_module_function(mLibantargis, "disown_AGTable", VALUEFUNC(_wrap_disown_AGTable), -1);
@@ -48180,6 +48196,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_alloc_func(cHeightMap.klass, _wrap_HeightMap_allocate);
     rb_define_method(cHeightMap.klass, "initialize", VALUEFUNC(_wrap_new_HeightMap), -1);
     rb_define_method(cHeightMap.klass, "setScene", VALUEFUNC(_wrap_HeightMap_setScene), -1);
+    rb_define_method(cHeightMap.klass, "getScene", VALUEFUNC(_wrap_HeightMap_getScene), -1);
     rb_define_method(cHeightMap.klass, "getHeight", VALUEFUNC(_wrap_HeightMap_getHeight), -1);
     rb_define_method(cHeightMap.klass, "getNormal", VALUEFUNC(_wrap_HeightMap_getNormal), -1);
     rb_define_method(cHeightMap.klass, "getVertex", VALUEFUNC(_wrap_HeightMap_getVertex), -1);
@@ -48380,7 +48397,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "eventDefeated", VALUEFUNC(_wrap_AntEntity_eventDefeated), -1);
     rb_define_method(cAntEntity.klass, "getEnergy", VALUEFUNC(_wrap_AntEntity_getEnergy), -1);
     rb_define_method(cAntEntity.klass, "getMorale", VALUEFUNC(_wrap_AntEntity_getMorale), -1);
-    rb_define_method(cAntEntity.klass, "getTexture", VALUEFUNC(_wrap_AntEntity_getTexture), -1);
     rb_define_method(cAntEntity.klass, "setMesh", VALUEFUNC(_wrap_AntEntity_setMesh), -1);
     rb_define_method(cAntEntity.klass, "getMesh", VALUEFUNC(_wrap_AntEntity_getMesh), -1);
     rb_define_method(cAntEntity.klass, "setDirection", VALUEFUNC(_wrap_AntEntity_setDirection), -1);

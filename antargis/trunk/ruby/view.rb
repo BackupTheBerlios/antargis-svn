@@ -101,6 +101,8 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				}
 				if target then
 					@hero.newHLFightJob(target)
+					# go back to "normal" pointing
+					$buttonPanel.setPointing
 				end
 			end
 		end
@@ -152,7 +154,8 @@ class AntInventory<AGButton
 		setEnabled(false)
 	end
 	def setValue(name,value)
-		if name=="wood" or name=="stone" or name=="men" then
+		ok=@resTypes+["name","boss"]
+		if ok.member?(name) then
 			w=toAGEdit(getChild(name))
 			w.setText value.to_s
 		end
@@ -172,11 +175,18 @@ class AntInventory<AGButton
 		if @inspect then
 			res=@inspect.resource.getAll
 			res["men"]=@inspect.menCount
-			#$inventory.setTitle(e.getType)
 			reset
 			res.each{|a,b|
-				$inventory.setValue(a,b)
+				setValue(a,b)
 			}
+			setValue("name",@inspect.getName)
+			bossname=""
+			if @inspect.methods.member?("getPlayer")
+				if @inspect.getPlayer
+					bossname=@inspect.getPlayer.getName
+				end
+			end
+			setValue("boss",bossname)
 		end
 	end
 	def reset
@@ -233,7 +243,6 @@ class AntButtonPanel<AGWidget
 	
 	def sigJobSelected(ename,cname,event,caller)
 		@job=cname
-		puts "JOB:"+@job
 		
 		if @job=="doDismiss" then
 			$antView.doDismiss
@@ -251,6 +260,10 @@ class AntButtonPanel<AGWidget
 	
 	def getAggression()
 		return @agg
+	end
+	def setPointing
+		@job="doPoint"
+		toAGButton(getChild("doPoint")).setChecked(true)
 	end
 end
 

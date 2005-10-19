@@ -151,7 +151,7 @@ class AntEntity
     // appearance
 
     // FIXME: this shouldn't be virtual, because it gets called too often!
-    virtual std::string getTexture() const;
+    //    virtual std::string getTexture() const;
 
     // anything below shouldn't be used by ruby-functions
 
