@@ -30,7 +30,10 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def eventClick(list,button)
 		if list.length>0
 			first=list[0]
-			if first.node.class==TerrainMesh
+			puts first.node
+			puts first.node.class
+			puts "FIRST:",toTerrainMesh(first.node), getMap.getTerrainMesh
+			if toTerrainMesh(first.node)==getMap.getTerrainMesh
 				clickMap(first.pos,button)
 			else
 				clickEntities(list,button)
@@ -55,14 +58,20 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				if mesh.class==Mesh
 					e=getMap.getEntity(mesh)
 					if not e
-						puts "WHY IS IT NOT IN MAP ????????????"
-					end
-					
-					if e.getType=="hero" then
-						@hero=e
-						inspectEntity(e)
-					elsif e.getType=="house" then
-						inspectEntity(e)
+						puts mesh.class
+						puts toTerrainMesh(mesh)
+						if not toTerrainMesh(mesh)
+							raise "WHY IS IT NOT IN MAP ????????????"
+						end
+					else
+						if e.getType=="hero" then
+							@hero=e
+							inspectEntity(e)
+							break
+						elsif e.getType=="house" then
+							inspectEntity(e)
+							break
+						end
 					end
 				end
 			}

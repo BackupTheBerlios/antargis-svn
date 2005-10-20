@@ -47,6 +47,8 @@ class HeightMap
   void setHeight(float height); // for whole plane
   void set(size_t x,size_t y,float height);
 
+  TerrainMesh *getTerrainMesh();
+
 
   //protected:
   virtual void mapChanged();  

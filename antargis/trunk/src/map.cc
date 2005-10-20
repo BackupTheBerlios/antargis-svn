@@ -27,6 +27,12 @@ HeightMap::~HeightMap()
   delete mTerrainMesh;
 }
 
+TerrainMesh *HeightMap::getTerrainMesh()
+{
+  return mTerrainMesh;
+}
+
+
 void HeightMap::setScene(Scene *pScene)
 {
   mScene=pScene;
@@ -230,6 +236,7 @@ AGVector3 AntMap::getPos(const AGVector2 &pPos) const
 {
   return AGVector3(pPos[0],pPos[1],getHeight(pPos[0],pPos[1]));
 }
+
 
 
 AntEntity *AntMap::getEntity(int id) const

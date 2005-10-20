@@ -37,18 +37,13 @@ class AntGameApp <AntRubyView
 	def initialize(savegame,w,h)
 		super(w,h)
 		$app=self	
-#		@map=AntargisMap.new(128,128)	
 		@map=AntRubyMap.new(64,64)
 		$map=@map
 		@map.setScene(getScene)
-		#@terrain=TerrainMesh.new(@map)
-		#getScene.addNode(@terrain)
 		
 		# load a level
 		getMap().loadMap(savegame)
 	
-		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
-		#puts @view
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)

@@ -41618,6 +41618,22 @@ _wrap_HeightMap_set(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_HeightMap_getTerrainMesh(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    TerrainMesh *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 1);
+    result = (TerrainMesh *)(arg1)->getTerrainMesh();
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_HeightMap_mapChanged(int argc, VALUE *argv, VALUE self) {
     HeightMap *arg1 = (HeightMap *) 0 ;
     Swig::Director *director = 0;
@@ -48222,6 +48238,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "loadXML", VALUEFUNC(_wrap_HeightMap_loadXML), -1);
     rb_define_method(cHeightMap.klass, "setHeight", VALUEFUNC(_wrap_HeightMap_setHeight), -1);
     rb_define_method(cHeightMap.klass, "set", VALUEFUNC(_wrap_HeightMap_set), -1);
+    rb_define_method(cHeightMap.klass, "getTerrainMesh", VALUEFUNC(_wrap_HeightMap_getTerrainMesh), -1);
     rb_define_method(cHeightMap.klass, "mapChanged", VALUEFUNC(_wrap_HeightMap_mapChanged), -1);
     cHeightMap.mark = 0;
     cHeightMap.destroy = (void (*)(void *)) free_HeightMap;

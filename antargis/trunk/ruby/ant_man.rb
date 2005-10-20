@@ -58,6 +58,7 @@ class AntNewMan<AntMyEntity
 		@bossName=""
 		puts "NEWMAN"
 		setMesh(Mesh.new(getMeshData("data/models/man.ant",0.7),AGVector4.new(0,0,0,0),0))
+		@mode="wait"
 	end
 	def getTexture
 		if @dead
@@ -67,6 +68,13 @@ class AntNewMan<AntMyEntity
 		else
 			return "man"+mDirNum.to_s+".png"
 		end
+	end
+	
+	def setMode(mode)
+		@mode=mode
+	end
+	def getMode
+		@mode
 	end
 	
 	##########################
