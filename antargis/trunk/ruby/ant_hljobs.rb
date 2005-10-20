@@ -29,13 +29,18 @@ end
 class AntHeroMoveJob<AntHLJob
 	def initialize(hero,prio,pos,dist,doFormat=true)
 		@hero=getMap.getRuby(hero)
+		@hero.delJob
 		@prio=prio
 		@pos=AGVector2.new(pos.x,pos.y)
 		@dist=dist
-		@state="format"
+		if getMen.length>0
+			@state="format"
+		else
+			@state="torest"
+			@hero.newMoveJob(0,@pos,@dist)
+		end
 		@states={"format"=>getMen,"move"=>[],"torest"=>[]}
 		@formatDir=(@pos-@hero.getPos2D).normalized
-		@hero.delJob
 	end
 	def getMen()
 		@hero.getMen

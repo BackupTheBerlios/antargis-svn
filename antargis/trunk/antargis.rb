@@ -125,7 +125,7 @@ main.changeRes(1024,768,32,false,true)
 
 savegame="savegames/savegame0.antlvl"
 if ARGV.length>0
-	savegame=ARGV[0]
+	savegame="savegames/"+ARGV[0]+".antlvl"
 end
 
 app=AntGameApp.new(savegame,1024,768)

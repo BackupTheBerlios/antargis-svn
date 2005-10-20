@@ -30,7 +30,7 @@ class AntNewSheep<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		setType("sheep")
-		setSpeed 40
+		setSpeed 1
 		@lastBirth=0
 		setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))
 	end
@@ -74,13 +74,14 @@ class AntNewSheep<AntMyEntity
 		t=p
 		ok=true
 		# assure that sheep doesn't walk into water
-		while $map.getHeight(t)<15 or ok do	
-			d=Pos2D.new(rand*31-15,rand*31-15).normalized
-			d=d*50
+		while $map.getHeight(t.x,t.y)<0.1 or ok do
+			d=AGVector2.new(rand-0.5,rand-0.5).normalized*4
 			t=p+d
+			t=$map.truncPos(t)
 			puts "HUPE"
 			puts t
-			puts $map.getHeight(t)
+			
+			puts $map.getHeight(t.x,t.y)
 			ok=false
 		end 
 		return t
