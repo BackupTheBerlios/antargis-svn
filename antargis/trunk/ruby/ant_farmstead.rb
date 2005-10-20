@@ -3,10 +3,10 @@
 class AntFarmStead<AntHouse
 	def init
 		super
-		setType("hotel")
+		setType("farmstead")
 		@lastBirth=0
 		
-		mesh=Mesh.new(getMeshData("data/models/werkstatt.ant",30,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMeshData("data/models/werkstatt.ant",30),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end
 

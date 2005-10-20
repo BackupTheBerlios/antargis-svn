@@ -24,6 +24,8 @@
 #require 'libantargis'
 #include Libantargis
 
+require 'ents.rb'
+
 class AntRubyEditView<GLApp
 	include AGHandler
 	def initialize(w,h,map)
@@ -159,7 +161,7 @@ class AntRubyEditView<GLApp
 				@type=AntTower
 			when "farm"
 				@type=AntFarm
-			when "werkstatt"
+			when "workshop"
 				@type=AntWorkshop
 			when "farmstead"
 				@type=AntFarmStead
@@ -205,6 +207,7 @@ class AntRubyEditView<GLApp
 			tree=@type.new
 			tree.setAppearance(@appearance)
 		else
+			puts "TYPE:",@type
 			tree=@type.new
 		end
 		puts "type:"
