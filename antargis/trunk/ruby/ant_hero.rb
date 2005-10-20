@@ -54,64 +54,55 @@ class AntHero<AntBoss
 	
 	def checkHLJobEnd(man)
 		if @job
-#			puts "CHECKHLJOBENDED:"
-			puts @job
-			if @job.check(man) then 
+			#puts @job
+			@job.check(man)
+			if @job.finished then 
 				if @player
 					@player.eventJobFinished(self,@job)
 				end
+				puts "FINISHED"
+				puts @job.class
 				@job=nil 
 			end
 		end
 	end
 	
 	def noHLJob
-		puts self
-		puts getName
-		puts "noHLJob1"
 		if @player
-			puts "noHLJOB"
 			@player.assignJob(self)
 		else
-			puts "no Player Foudn!"
-			puts "wait 5 seconds"
-			# rest
+			# no player , so simply rest - to infinity (or at least 5 seconds)
 			newHLRestJob(5)
 		end
 	end
 	
-	#def getName
-	#	return getVar("name")
-	#end
-	
-	def assignJob(e)
+	def assignJob(man)
 		if @fighting then
 			checkFight
 		elsif @job == nil or @job.class==AntHeroRestJob then
 			# rest job
-			e=getMap.getRuby(e)
-			formationPos=getSitFormation(e)
-			if e.getPos2D==formationPos then
-				e.newRestJob(5)
+			formationPos=getSitFormation(man)
+			if man.getPos2D==formationPos then
+				man.newRestJob(5)
 			else
-				e.newMoveJob(0,formationPos,0)
+				man.newMoveJob(0,formationPos,0)
 			end
 		else
-			checkHLJobEnd(e)
+			checkHLJobEnd(man)
 		end
 	end	
 	
-	def gotNewJob()
-	end
-	
 	def newHLMoveJob(prio,pos,dist)
 		@job=AntHeroMoveJob.new(self,prio,pos,dist)
+		assignJob2All
 	end
 	def newHLRecruitJob(target)
 		@job=AntHeroRecruitJob.new(self,target,$buttonPanel.getAggression)
+		assignJob2All
 	end
 	def newHLFightJob(target)
 		@job=AntHeroFightJob.new(self,target)
+		assignJob2All
 	end
 	
 	def newHLDismissJob()
@@ -134,9 +125,6 @@ class AntHero<AntBoss
 		
 		if id then
 			angle=id.to_f/@men.length*Math::PI*2
-			#puts "SITTING:"
-			#puts id
-			#puts @men.length
 			radius=1
 			return AGVector2.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
 		else
@@ -148,13 +136,11 @@ class AntHero<AntBoss
 	end
 	
 	def getWalkFormation(man,dir)
-		#setTrap
 		id=@men.index(man)
 		if id
-		
-			lineWidth=1
+			lineWidth=0.7
 			if @men.length>30
-				lineWidth=15
+				lineWidth=1.5
 			end
 		
 			if id>=2 then
@@ -169,24 +155,10 @@ class AntHero<AntBoss
 			
 			return l+c
 		else
+			puts @men.length
+			puts man
 			puts "ERROR in WalkFormation!"
 			exit
-		end
-	end
-	
-	def eventGotHLFight(hero)
-		return
-		job=true
-		if @job
-			job=false
-			if @job.class ==AntHeroFightJob
-				if @job.target==hero then
-					job=true
-				end
-			end
-		end
-		if job
-			newHLFightJob(hero)
 		end
 	end
 end

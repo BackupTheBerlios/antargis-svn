@@ -50,37 +50,25 @@ class AntBoss<AntMyEntity
 	
 	def eventNoJob
 		checkHLJobEnd(nil)
+		checkCreateMen
 		
-		puts "EVENTNOJOB"
-		puts "NAME:"
-		puts getName
+		if @job==nil
+			noHLJob
+		end
+	end
+	
+	def checkCreateMen
 		if @createMen>0
-			puts "Name:"
-			puts getName
-			puts "ANTBOSS:CREATING MEN:"+@createMen.to_s
 			for i in 0..(@createMen-1) do
-				#puts "HERO::CREATING MEN:"
 				man=AntNewMan.new
-				#puts "READY CREATING"
 				getMap.insertEntity(man)
 				man.setPos(getPos2D)
 				man.setBoss(self)
-				#puts "CREATING MEN"
 			end
 			getMap.endChange
 			@createMen=0
 		end
-		if @job==nil
-			#puts "noHLJOB"
-			noHLJob
-		end
-		if @job
-			puts "JOB:"
-			puts @job.class
-		end
-		puts "EVNETNOJOB!"
 	end
-	
 	
 	def gotNewJob()
 	end
@@ -93,19 +81,13 @@ class AntBoss<AntMyEntity
 	end
 	
 	def getMen
-		@men
+		@men.clone
 	end
 	
 	def signUp(man)
-		puts "SIGNUP"
-		puts man
-		if @men.member?(man) then	
-			puts "ALREADY INSERTED!"
-			puts "IGONRING"
-		else
+		if not @men.member?(man) then	
 			@men.push(man)
 		end
-		
 	end
 	
 	def removeMan(man)
@@ -156,11 +138,18 @@ class AntBoss<AntMyEntity
 		
 	def setOwner(owner)
 		@owner=owner
-		puts "RESETING PLAER:"
+		puts "RESETING PLAYER:"
 		@player=owner.getPlayer
 	end
 	def getOwner
 		@owner
+	end
+	
+	def assignJob2All
+		@men.each{|man|
+			man.delJob
+			assignJob(man)
+		}
 	end
 end
 

@@ -28,128 +28,70 @@ end
 
 class AntHeroMoveJob<AntHLJob
 	def initialize(hero,prio,pos,dist,doFormat=true)
-		@hero=hero
+		@hero=getMap.getRuby(hero)
 		@prio=prio
-		@pos=AGVector2.new(pos.x,pos.y)#clone
+		@pos=AGVector2.new(pos.x,pos.y)
 		@dist=dist
-		@myMoveReady=false
-		@sentFormat=[]
-		@readyFormat=[]
-		if doFormat
-			startFormation
-		end
+		@state="format"
+		@states={"format"=>getMen,"move"=>[],"torest"=>[]}
+		@formatDir=(@pos-@hero.getPos2D).normalized
+		@hero.delJob
 	end
 	def getMen()
 		@hero.getMen
 	end
-	
-	def checkFormationMan(man)
-		if (not man.hasJob) then 
-			# check if is already there - don't know why this fails ATM
-			is=man.getPos2D
-			should=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
-			if (is-should).length>10 then
-				man.newMoveJob(0,should,0)
-			else
-				man.newRestJob(2) # wait for 2 seconds
-				return true
-			end
-		end
-		return false
-	end
-	
-	def sendFormationMan(man)
-		fpos=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
-		if not @sentFormat.member?(man)
-			@sentFormat.push(man)
-		end
-	end
-	
-	def startFormation
-		# let hero rest for some time
-		@hero.newRestJob(2)
-		men=getMen
-		@formatDir=(@pos-@hero.getPos2D).normalized
-		men.each{|man|
-			sendFormationMan(man)
-		}
-		
-		#check(nil) # if men.length==0, check wouldn't be called otherwise????
-	end
-	
-	def checkReady(man)
-		if man
-			if not @readyFormat.member?(man)
-				if checkFormationMan(man)
-					@sentFormat.delete(man)
-					@readyFormat.push(man)
-				end
-			end
-		end
-		if @sentFormat.length+@readyFormat.length!=@hero.menCount
-			puts "RESTART FORMATION!!!!!!!!!!!!!!!"
-			startFormation # redo from start
-		end
-		return @sentFormat.length==0
-	end
-	
-	def checkReadyOld
-		#GC.disable # disable GC, as gets called too often here
-		ready=true
-		men=getMen
-		men.each{|x|
-			if x.hasJob then 
-				ready=false
-			else
-				# check if is already there - don't know why this fails ATM
-				is=x.getPos2D
-				should=@hero.getWalkFormation(x,@formatDir)+@hero.getPos2D
-				if (is-should).length>10 then
-					ready=false
-					x.newMoveJob(0,should,@dist)
-				end
-			end
-		}
-		#GC.enable
-		return ready
-	end
-	
-	def check(man)
-		if @myMoveReady==false
-			if checkMove(man)
-				@myMoveReady=true
-			end
-		else
-			return moveEnded
-		end
-		return false
-	end
 
-	def checkMove(man)
-		men=getMen
-		ready=checkReady(man)
-		if ready then
-			#getMap.pause
-			# let all go
-			@hero.newMoveJob(0,@pos,@dist)
-			men.each{|x|
-				fpos=@hero.getWalkFormation(x,@formatDir)+@pos
-				x.newMoveJob(0,fpos,@dist)
-			}
-			return true
+	def check(man)
+		if not man
+			return
 		end
-		return false
+		case @state
+			when "format"
+				if man.getMode!="formating"
+					f=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
+					man.newMoveJob(0,f,@dist)
+					man.setMode("formating")
+				else
+					man.setMode("formatted")
+					@states["move"].push(man)
+					@states["format"].delete(man)
+					if @states["format"].length==0
+						# ok, all run at once
+						getMen.each{|m|
+							f=@pos+@hero.getWalkFormation(m,@formatDir)
+							m.delJob
+							m.newMoveJob(0,f,@dist)
+							m.setMode("moving")
+						}
+						@state="move"
+						@hero.newMoveJob(0,@pos,@dist)
+					else
+						man.newRestJob(1)
+					end
+				end
+			when "move"
+				man.newRestJob(1)
+				@states["move"].delete(man)
+				@states["torest"].push(man)
+				if @states["move"].length==0
+					# all to resting position
+					getMen.each{|m|
+						f=@pos+@hero.getSitFormation(m)-@hero.getPos2D
+						m.newMoveJob(0,f,@dist)
+						m.setMode("torest")
+					}
+					@state="torest"
+				end
+			when "torest"
+				man.newRestJob(1)
+				@states["torest"].delete(man)
+		end
 	end
 	
-	def moveEnded
-		men=getMen
-		men.each{|x|
-			if x.hasJob then
-				return false
-			end
-		}
-		return true
+	def finished
+		@state=="torest" && @states["torest"].length==0
 	end
+	
 end
 
 class AntHeroFightJob<AntHeroMoveJob
@@ -170,6 +112,8 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,400,(not defend)) # near til 400 pixels
 	end
+	
+	
 	def check(man)
 		if not @moveReady then
 			if super(man) then
@@ -291,8 +235,11 @@ class AntHeroRestJob
 	end
 	def check(man)
 		if man
+			man.setMode("rest")
 			man.newRestJob(20)
 		end
+	end
+	def finished
 		return (not @hero.hasJob)
 	end
 end

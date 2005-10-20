@@ -1212,6 +1212,7 @@ public:
     virtual void move(float pTime);
     virtual void eventGotNewJob();
     virtual void eventNoJob();
+    virtual void delJob();
     virtual void newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat);
     virtual ~SwigDirector_AntEntity();
     virtual void newMoveJob(int p, AGVector2 const &pTarget, int pnear = 0);
@@ -1221,8 +1222,8 @@ public:
     virtual void eventDie();
     virtual void loadXML(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
-    virtual void eventGotFight(AntEntity *pOther);
     virtual void newFightJob(int p, AntEntity *target);
+    virtual void eventGotFight(AntEntity *pOther);
     virtual void setPos(AGVector2 const &p);
     virtual void newRestJob(int pTime);
 };

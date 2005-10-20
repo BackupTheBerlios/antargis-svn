@@ -120,6 +120,7 @@ class AntEntity
     virtual void newFetchJob(int p,AGVector2 &pTarget,const std::string &pWhat);
     virtual void newMoveJob(int p,const AGVector2 &pTarget,int pnear=0);
     virtual void newFightJob(int p,AntEntity *target);
+    virtual void delJob();
 
     bool hasJob() const;
 

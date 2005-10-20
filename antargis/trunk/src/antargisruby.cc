@@ -16790,6 +16790,17 @@ void SwigDirector_AntEntity::eventNoJob() {
 }
 
 
+void SwigDirector_AntEntity::delJob() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::delJob();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("delJob"), 0, NULL);
+}
+
+
 void SwigDirector_AntEntity::newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat) {
     std::string temp3 ;
     VALUE obj0 = Qnil ;
@@ -16909,19 +16920,6 @@ void SwigDirector_AntEntity::saveXML(xmlpp::Node &node) const {
 }
 
 
-void SwigDirector_AntEntity::eventGotFight(AntEntity *pOther) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AntEntity::eventGotFight(pOther);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(pOther, SWIGTYPE_p_AntEntity, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("eventGotFight"), 1,obj0);
-}
-
-
 void SwigDirector_AntEntity::newFightJob(int p, AntEntity *target) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
@@ -16934,6 +16932,19 @@ void SwigDirector_AntEntity::newFightJob(int p, AntEntity *target) {
     obj0 = INT2NUM(p);
     obj1 = SWIG_NewPointerObj(target, SWIGTYPE_p_AntEntity, 0);
     result = rb_funcall(swig_get_self(), rb_intern("newFightJob"), 2,obj0,obj1);
+}
+
+
+void SwigDirector_AntEntity::eventGotFight(AntEntity *pOther) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::eventGotFight(pOther);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(pOther, SWIGTYPE_p_AntEntity, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventGotFight"), 1,obj0);
 }
 
 
@@ -44643,6 +44654,22 @@ _wrap_AntEntity_newFightJob(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntEntity_delJob(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->delJob();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AntEntity_hasJob(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     bool result;
@@ -48412,6 +48439,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "newFetchJob", VALUEFUNC(_wrap_AntEntity_newFetchJob), -1);
     rb_define_method(cAntEntity.klass, "newMoveJob", VALUEFUNC(_wrap_AntEntity_newMoveJob), -1);
     rb_define_method(cAntEntity.klass, "newFightJob", VALUEFUNC(_wrap_AntEntity_newFightJob), -1);
+    rb_define_method(cAntEntity.klass, "delJob", VALUEFUNC(_wrap_AntEntity_delJob), -1);
     rb_define_method(cAntEntity.klass, "hasJob", VALUEFUNC(_wrap_AntEntity_hasJob), -1);
     rb_define_method(cAntEntity.klass, "getRect", VALUEFUNC(_wrap_AntEntity_getRect), -1);
     rb_define_method(cAntEntity.klass, "eventNoJob", VALUEFUNC(_wrap_AntEntity_eventNoJob), -1);

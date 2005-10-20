@@ -135,6 +135,11 @@ void AntEntity::setPos(const AGVector2 &p)
     mMesh->setPos(mPos);
 }
 
+void AntEntity::delJob()
+{
+  setJob(0);
+}
+
 void AntEntity::setJob(Job *pJob)
 {
   //  assert(pJob);
