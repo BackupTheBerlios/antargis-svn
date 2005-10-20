@@ -17805,20 +17805,27 @@ _wrap_SceneNodeVector_pop(int argc, VALUE *argv, VALUE self) {
         }
     }
     {
-        //	std::cout<<"test2"<<std::endl;
+        std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
-            vresult=result->mRUBY;
+            {
+                vresult=result->mRUBY;
+                std::cout<<"found :"<<vresult<<std::endl;
+            }
             else
             {
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                 result->mRubyObject=true;
                 result->mRUBY=vresult;
+                std::cout<<"not found - but set:"<<vresult<<std::endl;
             }
         }
         else
-        vresult = Qnil;
+        {
+            vresult = Qnil;
+            std::cout<<"nilled"<<std::endl;
+        }
     }
     return vresult;
 }
@@ -43158,20 +43165,27 @@ _wrap_PickNode_node_get(int argc, VALUE *argv, VALUE self) {
     result = (SceneNode *) ((arg1)->node);
     
     {
-        //	std::cout<<"test2"<<std::endl;
+        std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
-            vresult=result->mRUBY;
+            {
+                vresult=result->mRUBY;
+                std::cout<<"found :"<<vresult<<std::endl;
+            }
             else
             {
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                 result->mRubyObject=true;
                 result->mRUBY=vresult;
+                std::cout<<"not found - but set:"<<vresult<<std::endl;
             }
         }
         else
-        vresult = Qnil;
+        {
+            vresult = Qnil;
+            std::cout<<"nilled"<<std::endl;
+        }
     }
     return vresult;
 }

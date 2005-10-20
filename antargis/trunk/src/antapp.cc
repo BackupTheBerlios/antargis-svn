@@ -90,6 +90,10 @@ bool GLApp::eventMouseButtonUp(const AGEvent *m)
 	  cdebug(l.toString());
 	  Scene::PickResult nodes=scene.lineHit(l);
 	  line=l;
+
+	  for(Scene::PickResult::iterator i=nodes.begin();i!=nodes.end();i++)
+	    cdebug("PICKed:"<<&(*i));
+
 	  eventClick(nodes,e->getButton());
 	}
     }

@@ -102,12 +102,19 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		elsif job=="doFight" then
 			if @hero then
 				target=nil
+				puts "LISTLEN:",list.length
 				list.each{|ents|
+					puts "ITERATION"
 					if ents.node.class==Mesh
 						e=getMap.getEntity(ents.node)
-						#				e=getMap.getRuby(ents.get)
-						if e.getType=="hero" or e.getType=="house" then
-							target=e
+						if not e
+							if not toTerrainMesh(ents.node)
+								raise "Why is this not in the map????"
+							end
+						else
+							if e.getType=="hero" or e.getType=="house" then
+								target=e
+							end
 						end
 					end
 				}

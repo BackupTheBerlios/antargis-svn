@@ -18,20 +18,27 @@
 }
 
 %typemap(out) SceneNode *{
-//	std::cout<<"test2"<<std::endl;
+	std::cout<<"test2"<<std::endl;
 	if($1)
 	{
 		if($1->mRubyObject)
+		{
           		$result=$1->mRUBY;
+			std::cout<<"found :"<<$result<<std::endl;
+		}
 		else
 		{
 		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
 			$1->mRubyObject=true;
 			$1->mRUBY=vresult;
+			std::cout<<"not found - but set:"<<vresult<<std::endl;
 		}
 	}
 	else
+	{
 		vresult = Qnil;
+		std::cout<<"nilled"<<std::endl;
+	}
 }
 %typemap(out) Mesh *{
 //	std::cout<<"test2"<<std::endl;

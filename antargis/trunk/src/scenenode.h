@@ -13,6 +13,7 @@ class SceneNode
     }
   virtual ~SceneNode()
     {
+      mRubyObject=false;
     }
   virtual void drawShadow()
   {
