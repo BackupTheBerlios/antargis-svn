@@ -247,12 +247,17 @@ class AntRubyEditView<GLApp
 		puts "DOING RUBBER"
 		list.each{|res|
 			mesh=res.node
-			ent=getMap.getEntity(toMesh(mesh))
-			if ent
-				getMap.removeEntity(ent)
+			if mesh.class==Mesh
+				ent=getMap.getEntity(mesh)
+				if ent
+					getMap.removeEntity(ent)
+				else
+					puts "NOT FOUND!"
+				end
+				break
 			end
-			break
 		}
+		getMap.move(0)
 	end
 	
 	def sigAllWater

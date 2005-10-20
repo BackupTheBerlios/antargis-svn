@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
 class AntFarmStead<AntHouse
-	def init
+	def initialize
 		super
 		setType("farmstead")
 		@lastBirth=0
 		
-		mesh=Mesh.new(getMeshData("data/models/werkstatt.ant",30),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMeshData("data/models/farmstead_dummy.ant",1.6),AGVector4.new(0,0,0),0)
 		setMesh(mesh)
 	end
 

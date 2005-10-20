@@ -318,6 +318,7 @@ void AntMap::move(float pTime)
         mEntities.erase(i);
       mEntityMap.erase((*d)->getID());
       mEntQuad.erase(*i);
+      getScene()->removeNode((*d)->getMesh());
     }
   if(mToDel.size())
     entsChanged();
