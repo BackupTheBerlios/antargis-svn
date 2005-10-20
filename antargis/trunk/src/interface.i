@@ -28,9 +28,18 @@
 		}
 		else
 		{
-		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-			$1->mRubyObject=true;
-			$1->mRUBY=vresult;
+			
+			if(dynamic_cast<Mesh*>(result))
+				vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+			else if(dynamic_cast<TerrainMesh*>(result))
+				vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);
+			else
+				vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
+
+
+//		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+			//$1->mRubyObject=true;
+			//$1->mRUBY=vresult;
 			std::cout<<"not found - but set:"<<vresult<<std::endl;
 		}
 	}
@@ -49,8 +58,8 @@
 		else
 		{
 		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-			$1->mRubyObject=true;
-			$1->mRUBY=vresult;
+//			$1->mRubyObject=true;
+//			$1->mRUBY=vresult;
 		}
 	}
 	else
@@ -64,9 +73,10 @@
           		$result=$1->mRUBY;
 		else
 		{
-		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-			$1->mRubyObject=true;
-			$1->mRUBY=vresult;
+		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+//			$1->mRubyObject=true;
+//			$1->mRUBY=vresult;
+			throw int();
 		}
 	}
 	else

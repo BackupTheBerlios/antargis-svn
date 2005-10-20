@@ -17815,9 +17815,17 @@ _wrap_SceneNodeVector_pop(int argc, VALUE *argv, VALUE self) {
             }
             else
             {
+                if(dynamic_cast<Mesh*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                else if(dynamic_cast<TerrainMesh*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);
+                else
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
+                
+                
+                //		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+                //result->mRubyObject=true;
+                //result->mRUBY=vresult;
                 std::cout<<"not found - but set:"<<vresult<<std::endl;
             }
         }
@@ -41866,9 +41874,10 @@ _wrap_AntMap_getEntity__SWIG_0(int argc, VALUE *argv, VALUE self) {
             vresult=result->mRUBY;
             else
             {
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+                //			result->mRubyObject=true;
+                //			result->mRUBY=vresult;
+                throw int();
             }
         }
         else
@@ -41899,9 +41908,10 @@ _wrap_AntMap_getEntity__SWIG_1(int argc, VALUE *argv, VALUE self) {
             vresult=result->mRUBY;
             else
             {
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+                //			result->mRubyObject=true;
+                //			result->mRUBY=vresult;
+                throw int();
             }
         }
         else
@@ -41987,9 +41997,10 @@ _wrap_AntMap_getByName(int argc, VALUE *argv, VALUE self) {
             vresult=result->mRUBY;
             else
             {
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+                //			result->mRubyObject=true;
+                //			result->mRUBY=vresult;
+                throw int();
             }
         }
         else
@@ -42030,9 +42041,10 @@ _wrap_AntMap_getNext(int argc, VALUE *argv, VALUE self) {
             vresult=result->mRUBY;
             else
             {
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+                //			result->mRubyObject=true;
+                //			result->mRUBY=vresult;
+                throw int();
             }
         }
         else
@@ -42066,9 +42078,10 @@ _wrap_AntMap_loadEntity(int argc, VALUE *argv, VALUE self) {
             vresult=result->mRUBY;
             else
             {
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+                //			result->mRubyObject=true;
+                //			result->mRUBY=vresult;
+                throw int();
             }
         }
         else
@@ -42524,6 +42537,24 @@ _wrap_SceneNode_mapChanged(int argc, VALUE *argv, VALUE self) {
     (arg1)->mapChanged();
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_SceneNode___eq__(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    SceneNode *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_SceneNode, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((SceneNode const *)arg1)->operator ==((SceneNode const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -43094,8 +43125,8 @@ _wrap_toMesh(int argc, VALUE *argv, VALUE self) {
             else
             {
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                //			result->mRubyObject=true;
+                //			result->mRUBY=vresult;
             }
         }
         else
@@ -43175,9 +43206,17 @@ _wrap_PickNode_node_get(int argc, VALUE *argv, VALUE self) {
             }
             else
             {
+                if(dynamic_cast<Mesh*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                result->mRubyObject=true;
-                result->mRUBY=vresult;
+                else if(dynamic_cast<TerrainMesh*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);
+                else
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
+                
+                
+                //		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
+                //result->mRubyObject=true;
+                //result->mRUBY=vresult;
                 std::cout<<"not found - but set:"<<vresult<<std::endl;
             }
         }
@@ -44982,8 +45021,8 @@ _wrap_AntEntity_getMesh(int argc, VALUE *argv, VALUE self) {
                 else
                 {
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                    result->mRubyObject=true;
-                    result->mRUBY=vresult;
+                    //			result->mRubyObject=true;
+                    //			result->mRUBY=vresult;
                 }
             }
             else
@@ -45269,9 +45308,10 @@ _wrap_AntEntityPtr_get(int argc, VALUE *argv, VALUE self) {
                 vresult=result->mRUBY;
                 else
                 {
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                    result->mRubyObject=true;
-                    result->mRUBY=vresult;
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
+                    //			result->mRubyObject=true;
+                    //			result->mRUBY=vresult;
+                    throw int();
                 }
             }
             else
@@ -45672,24 +45712,6 @@ _wrap_TerrainMesh_mapChanged(int argc, VALUE *argv, VALUE self) {
     (arg1)->mapChanged();
     
     return Qnil;
-}
-
-
-static VALUE
-_wrap_TerrainMesh___eq__(int argc, VALUE *argv, VALUE self) {
-    TerrainMesh *arg1 = (TerrainMesh *) 0 ;
-    TerrainMesh *arg2 = 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_TerrainMesh, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_TerrainMesh, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (bool)((TerrainMesh const *)arg1)->operator ==((TerrainMesh const &)*arg2);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
 }
 
 
@@ -48329,6 +48351,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cSceneNode.klass, "lineHit", VALUEFUNC(_wrap_SceneNode_lineHit), -1);
     rb_define_method(cSceneNode.klass, "sort", VALUEFUNC(_wrap_SceneNode_sort), -1);
     rb_define_method(cSceneNode.klass, "mapChanged", VALUEFUNC(_wrap_SceneNode_mapChanged), -1);
+    rb_define_method(cSceneNode.klass, "==", VALUEFUNC(_wrap_SceneNode___eq__), -1);
     cSceneNode.mark = 0;
     cSceneNode.destroy = (void (*)(void *)) free_SceneNode;
     rb_define_module_function(mLibantargis, "disown_MeshData", VALUEFUNC(_wrap_disown_MeshData), -1);
@@ -48520,7 +48543,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cTerrainMesh.klass, "lineHit", VALUEFUNC(_wrap_TerrainMesh_lineHit), -1);
     rb_define_method(cTerrainMesh.klass, "getTriangles", VALUEFUNC(_wrap_TerrainMesh_getTriangles), -1);
     rb_define_method(cTerrainMesh.klass, "mapChanged", VALUEFUNC(_wrap_TerrainMesh_mapChanged), -1);
-    rb_define_method(cTerrainMesh.klass, "==", VALUEFUNC(_wrap_TerrainMesh___eq__), -1);
     cTerrainMesh.mark = 0;
     cTerrainMesh.destroy = (void (*)(void *)) free_TerrainMesh;
     rb_define_module_function(mLibantargis, "toTerrainMesh", VALUEFUNC(_wrap_toTerrainMesh), -1);

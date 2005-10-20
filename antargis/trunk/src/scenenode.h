@@ -43,6 +43,11 @@ class SceneNode
   virtual void mapChanged()
   {
   }
+
+  bool operator==(const SceneNode &n) const
+  {
+    return this==&n;
+  }
   
   public: // must be public, so that swig can set these
 #ifndef SWIG

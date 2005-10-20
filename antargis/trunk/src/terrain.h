@@ -76,11 +76,7 @@ public:
 
   virtual void mapChanged();
 
-  // only ruby ==
-  bool operator==(const TerrainMesh&m) const
-  {
-    return this==&m;
-  }
+
 };
 
 TerrainMesh *toTerrainMesh(SceneNode *n);
