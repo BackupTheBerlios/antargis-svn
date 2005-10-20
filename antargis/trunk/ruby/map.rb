@@ -35,10 +35,10 @@ class AntRubyMap<AntMap
 		case node.getName
 			when "antFarm"
 				e=AntFarm.new
-			when "antWerkstatt"
-				e=AntWerkstatt.new
-			when "antHotel"
-				e=AntHotel.new
+			when "antWorkshop"
+				e=AntWorkshop.new
+			when "antFarmStead"
+				e=AntFarmStead.new
 		end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class AntHotel<AntHouse
+class AntFarmStead<AntHouse
 	def init
 		super
 		setType("hotel")
@@ -12,7 +12,7 @@ class AntHotel<AntHouse
 
 
 	def xmlName
-		"hotel"
+		"antFarmStead"
 	end
 	
 	
