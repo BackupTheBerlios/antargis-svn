@@ -28,7 +28,13 @@ class AntFarmStead<AntHouse
 		end
 	end
 
-	
+	def needed
+		if resource.get("food")<30
+			return ["food","farm"]
+		else
+			return nil
+		end
+	end
 
 end
 

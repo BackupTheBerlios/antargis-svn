@@ -111,7 +111,7 @@
 %template(SceneNodeVector) std::vector<SceneNodePtr>;
 %template(PickResult) std::vector<PickNode>;
 %template(EntityVector) std::vector<AntEntityPtr>;
-%template(ResourceMap) std::map<std::string,int>;
+%template(ResourceMap) std::map<std::string,float>;
 %include "antargisgui.h"
 %include "antargis.h"
 

@@ -185,7 +185,7 @@ class AntInventory<AGButton
 		ok=@resTypes+["name","boss"]
 		if ok.member?(name) then
 			w=toAGEdit(getChild(name))
-			w.setText value.to_s
+			w.setText value.to_i.to_s
 		end
 	end
 	def setTitle(t)
@@ -202,7 +202,7 @@ class AntInventory<AGButton
 	def updateInspection
 		if @inspect then
 			res=@inspect.resource.getAll
-			res["men"]=@inspect.menCount
+			res["men"]=@inspect.menCount.to_f
 			reset
 			res.each{|a,b|
 				setValue(a,b)

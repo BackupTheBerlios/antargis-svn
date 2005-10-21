@@ -977,7 +977,7 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_std__listTAGRect2_t swig_types[107]
 #define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[108]
 #define SWIGTYPE_p_std__listTMesh_p_t swig_types[109]
-#define SWIGTYPE_p_std__mapTstd__string_int_t swig_types[110]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[110]
 #define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[111]
 #define SWIGTYPE_p_std__ostringstream swig_types[112]
 #define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[113]
@@ -1253,32 +1253,32 @@ static void std_vector_Sl_AntEntityPtr_Sg__each(std::vector<AntEntityPtr > *self
                                                 SWIGTYPE_p_AntEntityPtr, 0));
                 }
             }
-static int std_map_Sl_std_string_Sc_int_Sg____getitem__(std::map<std::string,int > *self,std::string key){
-                std::map<std::string,int >::iterator i = self->find(key);
+static float std_map_Sl_std_string_Sc_float_Sg____getitem__(std::map<std::string,float > *self,std::string key){
+                std::map<std::string,float >::iterator i = self->find(key);
                 if (i != self->end())
                     return i->second;
                 else
                     throw std::out_of_range("key not found");
             }
-static void std_map_Sl_std_string_Sc_int_Sg____setitem__(std::map<std::string,int > *self,std::string key,int x){
+static void std_map_Sl_std_string_Sc_float_Sg____setitem__(std::map<std::string,float > *self,std::string key,float x){
                 (*self)[key] = x;
             }
-static int std_map_Sl_std_string_Sc_int_Sg____delitem__(std::map<std::string,int > *self,std::string key){
-                std::map<std::string,int >::iterator i = self->find(key);
+static float std_map_Sl_std_string_Sc_float_Sg____delitem__(std::map<std::string,float > *self,std::string key){
+                std::map<std::string,float >::iterator i = self->find(key);
                 if (i != self->end()) {
-                    int x = i->second;
+                    float x = i->second;
                     self->erase(i);
                     return x;
                 } else
                     throw std::out_of_range("key not found");
             }
-static bool std_map_Sl_std_string_Sc_int_Sg__has_key(std::map<std::string,int > *self,std::string key){
-                std::map<std::string,int >::iterator i = self->find(key);
+static bool std_map_Sl_std_string_Sc_float_Sg__has_key(std::map<std::string,float > *self,std::string key){
+                std::map<std::string,float >::iterator i = self->find(key);
                 return i != self->end();
             }
-static VALUE std_map_Sl_std_string_Sc_int_Sg__keys(std::map<std::string,int > *self){
+static VALUE std_map_Sl_std_string_Sc_float_Sg__keys(std::map<std::string,float > *self){
                 VALUE keyList = rb_ary_new2(self->size());
-                std::map<std::string,int >::iterator i;
+                std::map<std::string,float >::iterator i;
                 unsigned int j;
                 for (i=self->begin(), j=0; i!=self->end(); ++i, ++j) {
                     rb_ary_store(keyList,j,
@@ -1286,22 +1286,22 @@ static VALUE std_map_Sl_std_string_Sc_int_Sg__keys(std::map<std::string,int > *s
                 }
                 return keyList;
             }
-static VALUE std_map_Sl_std_string_Sc_int_Sg__values(std::map<std::string,int > *self){
+static VALUE std_map_Sl_std_string_Sc_float_Sg__values(std::map<std::string,float > *self){
                 VALUE valueList = rb_ary_new2(self->size());
-                std::map<std::string,int >::iterator i;
+                std::map<std::string,float >::iterator i;
                 unsigned int j;
                 for (i=self->begin(), j=0; i!=self->end(); ++i, ++j) {
                     rb_ary_store(valueList,j,
-                                 INT2NUM(i->second));
+                                 rb_float_new(i->second));
                 }
                 return valueList;
             }
-static void std_map_Sl_std_string_Sc_int_Sg__each(std::map<std::string,int > *self){
-                std::map<std::string,int >::iterator i;
+static void std_map_Sl_std_string_Sc_float_Sg__each(std::map<std::string,float > *self){
+                std::map<std::string,float >::iterator i;
                 for (i=self->begin(); i!=self->end(); ++i) {
                     VALUE entry = rb_ary_new2(2);
                     rb_ary_store(entry,0,SWIG_STR2RB(i->first));
-                    rb_ary_store(entry,1,INT2NUM(i->second));
+                    rb_ary_store(entry,1,rb_float_new(i->second));
                     rb_yield(entry);
                 }
             }
@@ -18638,11 +18638,11 @@ swig_class cResourceMap;
 
 static VALUE
 _wrap_new_ResourceMap__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *result;
+    std::map<std::string,float > *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (std::map<std::string,int > *)new std::map<std::string,int >();
+    result = (std::map<std::string,float > *)new std::map<std::string,float >();
     DATA_PTR(self) = result;
     return self;
 }
@@ -18657,7 +18657,7 @@ _wrap_ResourceMap_allocate(VALUE self) {
 #endif
         
         
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_std__mapTstd__string_int_t);
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_std__mapTstd__string_float_t);
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
         rb_obj_call_init(vresult, argc, argv);
 #endif
@@ -18667,34 +18667,34 @@ _wrap_ResourceMap_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_ResourceMap__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = 0 ;
-    std::map<std::string,int > *result;
-    std::map<std::string,int > temp1 ;
-    std::map<std::string,int > *m1 ;
+    std::map<std::string,float > *arg1 = 0 ;
+    std::map<std::string,float > *result;
+    std::map<std::string,float > temp1 ;
+    std::map<std::string,float > *m1 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (rb_obj_is_kind_of(argv[0],rb_cHash)) {
-            temp1 = std::map<std::string,int >();
+            temp1 = std::map<std::string,float >();
             arg1 = &temp1;
             VALUE keys = rb_funcall(argv[0],rb_intern("keys"),0);
             unsigned int size = RARRAY(keys)->len;
             for (unsigned int i=0; i<size; i++) {
                 VALUE key = RARRAY(keys)->ptr[i];
                 VALUE val = rb_hash_aref(argv[0],key);
-                if (!(SWIG_STRING_P(key) && FIXNUM_P(val)))
+                if (!(SWIG_STRING_P(key) && SWIG_FLOAT_P(val)))
                 rb_raise(rb_eTypeError,
                 "wrong argument type"
-                " (expected map<""std::string" ",""int" ">)");
-                temp1[SWIG_RB2STR(key)] = FIX2INT(val);
+                " (expected map<""std::string" ",""float" ">)");
+                temp1[SWIG_RB2STR(key)] = SWIG_NUM2DBL(val);
             }
         } else {
-            SWIG_ConvertPtr(argv[0],(void **) &m1, SWIGTYPE_p_std__mapTstd__string_int_t,1);
+            SWIG_ConvertPtr(argv[0],(void **) &m1, SWIGTYPE_p_std__mapTstd__string_float_t,1);
             arg1 = m1;
         }
     }
-    result = (std::map<std::string,int > *)new std::map<std::string,int >((std::map<std::string,int > const &)*arg1);
+    result = (std::map<std::string,float > *)new std::map<std::string,float >((std::map<std::string,float > const &)*arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -18726,16 +18726,16 @@ static VALUE _wrap_new_ResourceMap(int nargs, VALUE *args, VALUE self) {
                     // check the first element only
                     VALUE key = RARRAY(keys)->ptr[0];
                     VALUE val = rb_hash_aref(argv[0],key);
-                    if (SWIG_STRING_P(key) && FIXNUM_P(val))
+                    if (SWIG_STRING_P(key) && SWIG_FLOAT_P(val))
                     _v = 1;
                     else
                     _v = 0;
                 }
             } else {
                 // wrapped map?
-                std::map<std::string,int >* m;
+                std::map<std::string,float >* m;
                 if (SWIG_ConvertPtr(argv[0],(void **) &m,
-                SWIGTYPE_p_std__mapTstd__string_int_t,0) != -1)
+                SWIGTYPE_p_std__mapTstd__string_float_t,0) != -1)
                 _v = 1;
                 else
                 _v = 0;
@@ -18753,35 +18753,35 @@ static VALUE _wrap_new_ResourceMap(int nargs, VALUE *args, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap___len__(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     unsigned int result;
-    std::map<std::string,int > temp1 ;
-    std::map<std::string,int > *m1 ;
+    std::map<std::string,float > temp1 ;
+    std::map<std::string,float > *m1 ;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     {
         if (rb_obj_is_kind_of(self,rb_cHash)) {
-            temp1 = std::map<std::string,int >();
+            temp1 = std::map<std::string,float >();
             arg1 = &temp1;
             VALUE keys = rb_funcall(self,rb_intern("keys"),0);
             unsigned int size = RARRAY(keys)->len;
             for (unsigned int i=0; i<size; i++) {
                 VALUE key = RARRAY(keys)->ptr[i];
                 VALUE val = rb_hash_aref(self,key);
-                if (!(SWIG_STRING_P(key) && FIXNUM_P(val)))
+                if (!(SWIG_STRING_P(key) && SWIG_FLOAT_P(val)))
                 rb_raise(rb_eTypeError,
                 "wrong argument type"
-                " (expected map<""std::string" ",""int" ">)");
-                temp1[SWIG_RB2STR(key)] = FIX2INT(val);
+                " (expected map<""std::string" ",""float" ">)");
+                temp1[SWIG_RB2STR(key)] = SWIG_NUM2DBL(val);
             }
         } else {
-            SWIG_ConvertPtr(self,(void **) &m1, SWIGTYPE_p_std__mapTstd__string_int_t,1);
+            SWIG_ConvertPtr(self,(void **) &m1, SWIGTYPE_p_std__mapTstd__string_float_t,1);
             arg1 = m1;
         }
     }
-    result = (unsigned int)((std::map<std::string,int > const *)arg1)->size();
+    result = (unsigned int)((std::map<std::string,float > const *)arg1)->size();
     
     vresult = UINT2NUM(result);
     return vresult;
@@ -18790,35 +18790,35 @@ _wrap_ResourceMap___len__(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap_emptyq___(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     bool result;
-    std::map<std::string,int > temp1 ;
-    std::map<std::string,int > *m1 ;
+    std::map<std::string,float > temp1 ;
+    std::map<std::string,float > *m1 ;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     {
         if (rb_obj_is_kind_of(self,rb_cHash)) {
-            temp1 = std::map<std::string,int >();
+            temp1 = std::map<std::string,float >();
             arg1 = &temp1;
             VALUE keys = rb_funcall(self,rb_intern("keys"),0);
             unsigned int size = RARRAY(keys)->len;
             for (unsigned int i=0; i<size; i++) {
                 VALUE key = RARRAY(keys)->ptr[i];
                 VALUE val = rb_hash_aref(self,key);
-                if (!(SWIG_STRING_P(key) && FIXNUM_P(val)))
+                if (!(SWIG_STRING_P(key) && SWIG_FLOAT_P(val)))
                 rb_raise(rb_eTypeError,
                 "wrong argument type"
-                " (expected map<""std::string" ",""int" ">)");
-                temp1[SWIG_RB2STR(key)] = FIX2INT(val);
+                " (expected map<""std::string" ",""float" ">)");
+                temp1[SWIG_RB2STR(key)] = SWIG_NUM2DBL(val);
             }
         } else {
-            SWIG_ConvertPtr(self,(void **) &m1, SWIGTYPE_p_std__mapTstd__string_int_t,1);
+            SWIG_ConvertPtr(self,(void **) &m1, SWIGTYPE_p_std__mapTstd__string_float_t,1);
             arg1 = m1;
         }
     }
-    result = (bool)((std::map<std::string,int > const *)arg1)->empty();
+    result = (bool)((std::map<std::string,float > const *)arg1)->empty();
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -18827,11 +18827,11 @@ _wrap_ResourceMap_emptyq___(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap_clear(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     (arg1)->clear();
     
     return Qnil;
@@ -18840,14 +18840,14 @@ _wrap_ResourceMap_clear(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap___getitem__(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     std::string arg2 ;
-    int result;
+    float result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
             arg2 = std::string(StringValuePtr(argv[0]));
@@ -18857,26 +18857,26 @@ _wrap_ResourceMap___getitem__(int argc, VALUE *argv, VALUE self) {
     }
     {
         try {
-            result = (int)std_map_Sl_std_string_Sc_int_Sg____getitem__(arg1,arg2);
+            result = (float)std_map_Sl_std_string_Sc_float_Sg____getitem__(arg1,arg2);
             
         } catch (std::out_of_range& e) {
             SWIG_exception(SWIG_IndexError,const_cast<char*>(e.what()));
         }
     }
-    vresult = INT2NUM(result);
+    vresult = rb_float_new(result);
     return vresult;
 }
 
 
 static VALUE
 _wrap_ResourceMap___setitem__(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     std::string arg2 ;
-    int arg3 ;
+    float arg3 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
             arg2 = std::string(StringValuePtr(argv[0]));
@@ -18884,8 +18884,8 @@ _wrap_ResourceMap___setitem__(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    arg3 = NUM2INT(argv[1]);
-    std_map_Sl_std_string_Sc_int_Sg____setitem__(arg1,arg2,arg3);
+    arg3 = (float) NUM2DBL(argv[1]);
+    std_map_Sl_std_string_Sc_float_Sg____setitem__(arg1,arg2,arg3);
     
     return Qnil;
 }
@@ -18893,14 +18893,14 @@ _wrap_ResourceMap___setitem__(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap_delete(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     std::string arg2 ;
-    int result;
+    float result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
             arg2 = std::string(StringValuePtr(argv[0]));
@@ -18910,27 +18910,27 @@ _wrap_ResourceMap_delete(int argc, VALUE *argv, VALUE self) {
     }
     {
         try {
-            result = (int)std_map_Sl_std_string_Sc_int_Sg____delitem__(arg1,arg2);
+            result = (float)std_map_Sl_std_string_Sc_float_Sg____delitem__(arg1,arg2);
             
         } catch (std::out_of_range& e) {
             SWIG_exception(SWIG_IndexError,const_cast<char*>(e.what()));
         }
     }
-    vresult = INT2NUM(result);
+    vresult = rb_float_new(result);
     return vresult;
 }
 
 
 static VALUE
 _wrap_ResourceMap_has_keyq___(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     std::string arg2 ;
     bool result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
             arg2 = std::string(StringValuePtr(argv[0]));
@@ -18938,7 +18938,7 @@ _wrap_ResourceMap_has_keyq___(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    result = (bool)std_map_Sl_std_string_Sc_int_Sg__has_key(arg1,arg2);
+    result = (bool)std_map_Sl_std_string_Sc_float_Sg__has_key(arg1,arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -18947,14 +18947,14 @@ _wrap_ResourceMap_has_keyq___(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap_keys(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     VALUE result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
-    result = (VALUE)std_map_Sl_std_string_Sc_int_Sg__keys(arg1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
+    result = (VALUE)std_map_Sl_std_string_Sc_float_Sg__keys(arg1);
     
     vresult = result;
     return vresult;
@@ -18963,14 +18963,14 @@ _wrap_ResourceMap_keys(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap_values(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     VALUE result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
-    result = (VALUE)std_map_Sl_std_string_Sc_int_Sg__values(arg1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
+    result = (VALUE)std_map_Sl_std_string_Sc_float_Sg__values(arg1);
     
     vresult = result;
     return vresult;
@@ -18979,19 +18979,19 @@ _wrap_ResourceMap_values(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_ResourceMap_each(int argc, VALUE *argv, VALUE self) {
-    std::map<std::string,int > *arg1 = (std::map<std::string,int > *) 0 ;
+    std::map<std::string,float > *arg1 = (std::map<std::string,float > *) 0 ;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_int_t, 1);
-    std_map_Sl_std_string_Sc_int_Sg__each(arg1);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
+    std_map_Sl_std_string_Sc_float_Sg__each(arg1);
     
     return Qnil;
 }
 
 
 static void
-free_std_map_Sl_std_string_Sc_int_Sg_(std::map<std::string,int > *arg1) {
+free_std_map_Sl_std_string_Sc_float_Sg_(std::map<std::string,float > *arg1) {
     delete arg1;
 }
 swig_class cAGMain;
@@ -43956,7 +43956,7 @@ static VALUE
 _wrap_Resource_get(int argc, VALUE *argv, VALUE self) {
     Resource *arg1 = (Resource *) 0 ;
     std::string *arg2 = 0 ;
-    int result;
+    float result;
     std::string temp2 ;
     VALUE vresult = Qnil;
     
@@ -43971,9 +43971,9 @@ _wrap_Resource_get(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    result = (int)(arg1)->get((std::string const &)*arg2);
+    result = (float)(arg1)->get((std::string const &)*arg2);
     
-    vresult = INT2NUM(result);
+    vresult = rb_float_new(result);
     return vresult;
 }
 
@@ -43982,7 +43982,7 @@ static VALUE
 _wrap_Resource_add(int argc, VALUE *argv, VALUE self) {
     Resource *arg1 = (Resource *) 0 ;
     std::string *arg2 = 0 ;
-    int arg3 ;
+    float arg3 ;
     std::string temp2 ;
     
     if ((argc < 2) || (argc > 2))
@@ -43996,7 +43996,7 @@ _wrap_Resource_add(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    arg3 = NUM2INT(argv[1]);
+    arg3 = (float) NUM2DBL(argv[1]);
     (arg1)->add((std::string const &)*arg2,arg3);
     
     return Qnil;
@@ -44007,7 +44007,7 @@ static VALUE
 _wrap_Resource_sub(int argc, VALUE *argv, VALUE self) {
     Resource *arg1 = (Resource *) 0 ;
     std::string *arg2 = 0 ;
-    int arg3 ;
+    float arg3 ;
     std::string temp2 ;
     
     if ((argc < 2) || (argc > 2))
@@ -44021,7 +44021,7 @@ _wrap_Resource_sub(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    arg3 = NUM2INT(argv[1]);
+    arg3 = (float) NUM2DBL(argv[1]);
     (arg1)->sub((std::string const &)*arg2,arg3);
     
     return Qnil;
@@ -44032,7 +44032,7 @@ static VALUE
 _wrap_Resource_set(int argc, VALUE *argv, VALUE self) {
     Resource *arg1 = (Resource *) 0 ;
     std::string *arg2 = 0 ;
-    int arg3 ;
+    float arg3 ;
     std::string temp2 ;
     
     if ((argc < 2) || (argc > 2))
@@ -44046,7 +44046,7 @@ _wrap_Resource_set(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    arg3 = NUM2INT(argv[1]);
+    arg3 = (float) NUM2DBL(argv[1]);
     (arg1)->set((std::string const &)*arg2,arg3);
     
     return Qnil;
@@ -44056,7 +44056,7 @@ _wrap_Resource_set(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Resource_getAll(int argc, VALUE *argv, VALUE self) {
     Resource *arg1 = (Resource *) 0 ;
-    std::map<std::string,int > result;
+    std::map<std::string,float > result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -44066,10 +44066,10 @@ _wrap_Resource_getAll(int argc, VALUE *argv, VALUE self) {
     
     {
         vresult = rb_hash_new();
-        for (std::map<std::string,int >::iterator i=(&result)->begin(); i!=(&result)->end(); ++i) {
+        for (std::map<std::string,float >::iterator i=(&result)->begin(); i!=(&result)->end(); ++i) {
             rb_hash_aset(vresult,
             SWIG_STR2RB(i->first),
-            INT2NUM(i->second));
+            rb_float_new(i->second));
         }
     }
     return vresult;
@@ -46316,7 +46316,7 @@ static swig_type_info _swigt__p_p_TerrainMesh = {"_p_p_TerrainMesh", 0, 0, 0, 0}
 static swig_type_info _swigt__p_std__listTAGRect2_t = {"_p_std__listTAGRect2_t", "std::list<AGRect2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAntEntity_p_t = {"_p_std__listTAntEntity_p_t", "std::list<AntEntity * > *|AntMap::EntityList *", 0, 0, 0};
 static swig_type_info _swigt__p_std__listTMesh_p_t = {"_p_std__listTMesh_p_t", "std::list<Mesh * > *", 0, 0, 0};
-static swig_type_info _swigt__p_std__mapTstd__string_int_t = {"_p_std__mapTstd__string_int_t", "std::map<std::string,int > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__mapTstd__string_float_t = {"_p_std__mapTstd__string_float_t", "std::map<std::string,float > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__mapTstd__string_std__string_t = {"_p_std__mapTstd__string_std__string_t", "std::map<std::string,std::string > *|Node::Attributes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__ostringstream = {"_p_std__ostringstream", "std::ostringstream *", 0, 0, 0};
 static swig_type_info _swigt__p_std__pairTstd__string_bool_t = {"_p_std__pairTstd__string_bool_t", "std::pair<std::string,bool > *", 0, 0, 0};
@@ -46445,7 +46445,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__listTAGRect2_t,
   &_swigt__p_std__listTAntEntity_p_t,
   &_swigt__p_std__listTMesh_p_t,
-  &_swigt__p_std__mapTstd__string_int_t,
+  &_swigt__p_std__mapTstd__string_float_t,
   &_swigt__p_std__mapTstd__string_std__string_t,
   &_swigt__p_std__ostringstream,
   &_swigt__p_std__pairTstd__string_bool_t,
@@ -46574,7 +46574,7 @@ static swig_cast_info _swigc__p_p_SceneNode[] = {  {&_swigt__p_p_SceneNode, 0, 0
 static swig_cast_info _swigc__p_std__listTAGRect2_t[] = {  {&_swigt__p_std__listTAGRect2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAntEntity_p_t[] = {  {&_swigt__p_std__listTAntEntity_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTMesh_p_t[] = {  {&_swigt__p_std__listTMesh_p_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__mapTstd__string_int_t[] = {  {&_swigt__p_std__mapTstd__string_int_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__mapTstd__string_float_t[] = {  {&_swigt__p_std__mapTstd__string_float_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__mapTstd__string_std__string_t[] = {  {&_swigt__p_std__mapTstd__string_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__ostringstream[] = {  {&_swigt__p_std__ostringstream, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__pairTstd__string_bool_t[] = {  {&_swigt__p_std__pairTstd__string_bool_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -46703,7 +46703,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__listTAGRect2_t,
   _swigc__p_std__listTAntEntity_p_t,
   _swigc__p_std__listTMesh_p_t,
-  _swigc__p_std__mapTstd__string_int_t,
+  _swigc__p_std__mapTstd__string_float_t,
   _swigc__p_std__mapTstd__string_std__string_t,
   _swigc__p_std__ostringstream,
   _swigc__p_std__pairTstd__string_bool_t,
@@ -46956,7 +46956,7 @@ SWIGEXPORT void Init_libantargis(void) {
     cEntityVector.destroy = (void (*)(void *)) free_std_vector_Sl_AntEntityPtr_Sg_;
     
     cResourceMap.klass = rb_define_class_under(mLibantargis, "ResourceMap", rb_cObject);
-    SWIG_TypeClientData(SWIGTYPE_p_std__mapTstd__string_int_t, (void *) &cResourceMap);
+    SWIG_TypeClientData(SWIGTYPE_p_std__mapTstd__string_float_t, (void *) &cResourceMap);
     rb_include_module(cResourceMap.klass, rb_eval_string("Enumerable"));
     rb_define_alloc_func(cResourceMap.klass, _wrap_ResourceMap_allocate);
     rb_define_method(cResourceMap.klass, "initialize", VALUEFUNC(_wrap_new_ResourceMap), -1);
@@ -46971,7 +46971,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cResourceMap.klass, "values", VALUEFUNC(_wrap_ResourceMap_values), -1);
     rb_define_method(cResourceMap.klass, "each", VALUEFUNC(_wrap_ResourceMap_each), -1);
     cResourceMap.mark = 0;
-    cResourceMap.destroy = (void (*)(void *)) free_std_map_Sl_std_string_Sc_int_Sg_;
+    cResourceMap.destroy = (void (*)(void *)) free_std_map_Sl_std_string_Sc_float_Sg_;
     
     cAGMain.klass = rb_define_class_under(mLibantargis, "AGMain", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGMain, (void *) &cAGMain);

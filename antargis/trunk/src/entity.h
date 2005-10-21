@@ -35,15 +35,15 @@ class Job;
 // FIXME: maybe remove Resource from c++??
 class Resource
 {
-  std::map<std::string,int> r;
+  std::map<std::string,float> r;
  public:
   Resource();
-  int get(const std::string &pName);
-  void add(const std::string &pName,int value);
-  void sub(const std::string &pName,int value);
-  void set(const std::string &pName,int value);
+  float get(const std::string &pName);
+  void add(const std::string &pName,float value);
+  void sub(const std::string &pName,float value);
+  void set(const std::string &pName,float value);
 
-  std::map<std::string,int> getAll() const;
+  std::map<std::string,float> getAll() const;
 
   void takeAll(Resource &r);
 };
