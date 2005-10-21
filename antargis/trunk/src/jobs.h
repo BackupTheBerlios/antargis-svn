@@ -24,7 +24,6 @@
 #include "ruby.h"
 
 class AntEntity;
-class AntHero;
 
 class Job
 {
@@ -88,8 +87,10 @@ class FightJob:public Job
 class FetchJob:public MoveJob
 {
   std::string mWhat;
+  AntEntity *mTarget;
  public:
   FetchJob(int p,const AGVector2 &pTarget,std::string what);
+  FetchJob(int p,AntEntity *pTarget,std::string what);
   virtual ~FetchJob();
   void move(AntEntity *e,float ptime);
   virtual void jobFinished(AntEntity *e);

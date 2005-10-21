@@ -160,9 +160,14 @@ void FightJob::move(AntEntity *e,float ptime)
  *
  ***************************************************************************/
 
-FetchJob::FetchJob(int p,const AGVector2&pTarget,std::string what):MoveJob(p,pTarget,0.2),mWhat(what)
+FetchJob::FetchJob(int p,const AGVector2&pTarget,std::string what):MoveJob(p,pTarget,0.2),mWhat(what),mTarget(0)
 {
 }
+FetchJob::FetchJob(int p,AntEntity *pTarget,std::string what):MoveJob(p,pTarget->getPos2D(),0.2),mWhat(what),mTarget(pTarget)
+{
+}
+
+
 FetchJob::~FetchJob()
 {
 }
@@ -174,7 +179,14 @@ void FetchJob::move(AntEntity *e,float ptime)
 void FetchJob::jobFinished(AntEntity *e)
 {
   e->resource.add(mWhat,1);
+  e->resourceChanged();
   MoveJob::jobFinished(e);
+
+  if(mTarget)
+    {
+      mTarget->resource.sub(mWhat,1);
+      mTarget->resourceChanged();
+    }
 }
 
 

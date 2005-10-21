@@ -84,6 +84,10 @@ AntEntity::~AntEntity()
       }
 }
 
+void AntEntity::resourceChanged()
+{
+}
+
 void AntEntity::saveXML(xmlpp::Node &node) const
   {
     Node &child=node.newChild("position");
@@ -268,10 +272,18 @@ std::string AntEntity::getType() const
 
 void AntEntity::setMesh(Mesh *m)
 {
+  // clear meshes from scene
+  for(std::list<Mesh*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
+    getMap()->getScene()->removeNode(*i);
+
   mMesh.clear();
   mMeshPos.clear();
   if(m)
-    mMesh.push_back(m);
+    {
+      mMesh.push_back(m);
+      getMap()->getScene()->addNode(m);
+      updatePos(mPos);
+    }
 }
 
 void AntEntity::addMesh(Mesh *m,const AGVector3 &v)
@@ -280,6 +292,8 @@ void AntEntity::addMesh(Mesh *m,const AGVector3 &v)
     {
       mMesh.push_back(m);
       mMeshPos.insert(std::make_pair(m,v));
+      getMap()->getScene()->addNode(m);
+      updatePos(mPos);
     }
 }
 
@@ -324,6 +338,10 @@ void Resource::add(const std::string &pName,int value)
 {
   r[pName]+=value;
 }
+void Resource::sub(const std::string &pName,int value)
+{
+  r[pName]=std::max(r[pName]-value,0);
+}
 void Resource::set(const std::string &pName,int value)
 {
   r[pName]=value;
@@ -349,6 +367,10 @@ void AntEntity::newRestJob(int pTime)
   setJob(new RestJob(pTime));
 }
 void AntEntity::newFetchJob(int p,AGVector2 &pTarget,const std::string &what)
+{
+  setJob(new FetchJob(p,pTarget,what));
+}
+void AntEntity::newFetchJob(int p,AntEntity *pTarget,const std::string &what)
 {
   setJob(new FetchJob(p,pTarget,what));
 }

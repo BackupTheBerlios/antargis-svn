@@ -27,18 +27,27 @@ class AntNewTree<AntMyEntity
 		@typeID=(rand()*12).to_i
 		setType("tree")
 		#setVirtualY(100)
-		setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
-		
-		applePos=[AGVector3.new(-0.5,-0.5,1.7),
-		AGVector3.new(-0.6,-0.5,1.8),
-		AGVector3.new(0.3,-0.5,1.7),
-		AGVector3.new(-0.2,-0.7,1.5),
-		]
-		
-		applePos.each{|p|
-			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.04),AGVector4.new(0,0,0,0),0),p)
-		}
+	
+		@crownMiddle=AGVector3.new(0,-0.1,1.6)
+		@crownRadius=0.65
+		@maxApples=40
+		@applePos=[]
+		for i in 1..@maxApples
+			va=(rand-0.5)*Math::PI
+			ha=(rand+1)*Math::PI  # only on front side
+			z=@crownRadius*Math::sin(va)
+			rest=Math::sqrt(@crownRadius**2-z**2)
+			y=Math::sin(ha)*rest
+			x=Math::cos(ha)*rest
+			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
+		end
+		resource.set("food",20)
+		setupMesh
 	end
+	def resourceChanged
+		setupMesh
+	end
+	
 	def setTreeType(t)
 		@typeID=t
 	end
@@ -55,6 +64,21 @@ class AntNewTree<AntMyEntity
 	def loadXML(node)
 		super(node)
 		@typeID=node.get("typeID").to_i
+	end
+	
+	def eventNoJob
+		# grow apples
+		resource.set("food",[resource.get("food")+1,@maxApples].min)
+		newRestJob(8)
+	end
+	
+	private
+	def setupMesh
+		setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
+		for i in 1..([@maxApples,resource.get("food")].min)
+			p=@applePos[i-1]
+			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.04),AGVector4.new(0,0,0,0),0),p)
+		end
 	end
 end
 

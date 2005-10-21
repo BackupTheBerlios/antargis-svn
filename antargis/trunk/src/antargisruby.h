@@ -1210,13 +1210,15 @@ public:
     SwigDirector_AntEntity(VALUE self, AGVector3 const &p);
     SwigDirector_AntEntity(VALUE self, AGVector2 const &p);
     virtual void move(float pTime);
-    virtual void eventGotNewJob();
     virtual void eventNoJob();
     virtual void delJob();
+    virtual void eventGotNewJob();
+    virtual void newFetchJob(int p, AntEntity *pTarget, std::string const &pWhat);
     virtual void newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat);
     virtual ~SwigDirector_AntEntity();
     virtual void newMoveJob(int p, AGVector2 const &pTarget, int pnear = 0);
     virtual std::string xmlName() const;
+    virtual void resourceChanged();
     virtual void eventJobFinished();
     virtual void eventDefeated();
     virtual void eventDie();

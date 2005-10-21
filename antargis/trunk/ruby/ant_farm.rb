@@ -23,26 +23,6 @@
 #    - fetch vegetables
 #    - farming (wheat)
 
-class AntHouseXXX
-
-
-	def eventNoJob
-		needed
-		newRestJob(10)
-	end
-	
-	def needed
-		if @men.length==0
-			tryGetMan
-		end
-	end
-	
-	def tryGetMan
-		
-	end
-
-end
-
 class AntFarm<AntHouse
 	def initialize
 		super
@@ -56,6 +36,13 @@ class AntFarm<AntHouse
 		setMesh(mesh)
 	end
 
+	def needed
+		if resource.get("food")<30
+			return ["food","tree"]
+		else
+			return nil
+		end
+	end
 
 	def xmlName
 		"antFarm"

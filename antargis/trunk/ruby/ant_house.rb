@@ -67,6 +67,7 @@ class AntHouse<AntBoss
 	def eventJobFinished
 		#checkBirth
 		newRestJob(2)
+		eatFood
 		if @fighting then
 			checkFight
 		end
@@ -74,6 +75,21 @@ class AntHouse<AntBoss
 	
 	def eventGotHLFight(hero)
 		puts "IGNORING eventGotHLFight in ant_house"
+	end
+	
+	def eatFood
+		food=resource.get("food")
+		eatAmount=@men.length*0.1
+		if food>eatAmount
+			resource.set("food",food-eatAmount)
+		else
+			resource.set("food",0)
+			starve
+		end
+	end
+	
+	def starve
+		puts "FIXME: STARVING"
 	end
 	
 	def eventNoJob
@@ -144,7 +160,7 @@ class AntHouse<AntBoss
 	# returns: [good,from] or nil
 	def needed()
 		goods={"wood"=>"tree","stone"=>"stone"}
-		min=10000
+		min=50
 		need=nil
 		needfrom=nil
 		goods.each{|good,from|
@@ -165,12 +181,16 @@ class AntHouse<AntBoss
 
 	# assigns ent a job for fetching good from a enttype
 	def fetch(enttype,good,ent)
+		# FIXME: check if tent has enough of good !!
+	
+	
 		tent=getMap.getNext(self,enttype)
 		if tent == nil then
 			#puts "No '"+good+"' found!"
 			ent.newRestJob(2)
 		else
-			ent.newFetchJob(0,tent.getPos2D,good)
+			ent.newFetchJob(0,tent,good)
+			ent.setMode("fetching "+good)
 		end
 	end
 	
@@ -181,5 +201,8 @@ class AntHouse<AntBoss
 	def loadXML(node)
 		super(node)
 		setPos(getPos2D) # set to ground
+		if getName==""
+			setName(rand.to_s)
+		end
 	end	
 end

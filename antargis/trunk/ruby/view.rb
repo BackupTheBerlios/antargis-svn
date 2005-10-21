@@ -169,7 +169,7 @@ class AntInventory<AGButton
 		super(p,rect,"")
 		setTheme("antButton")
 		$inventory=self
-		@resTypes=["wood","stone","men"]
+		@resTypes=["wood","stone","men","food"]
 		setEnabled(false)
 	end
 	def setValue(name,value)

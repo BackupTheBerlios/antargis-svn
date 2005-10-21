@@ -40,6 +40,7 @@ class Resource
   Resource();
   int get(const std::string &pName);
   void add(const std::string &pName,int value);
+  void sub(const std::string &pName,int value);
   void set(const std::string &pName,int value);
 
   std::map<std::string,int> getAll() const;
@@ -119,9 +120,12 @@ class AntEntity
   public:
     virtual void newRestJob(int pTime);
     virtual void newFetchJob(int p,AGVector2 &pTarget,const std::string &pWhat);
+    virtual void newFetchJob(int p,AntEntity *pTarget,const std::string &pWhat);
     virtual void newMoveJob(int p,const AGVector2 &pTarget,int pnear=0);
     virtual void newFightJob(int p,AntEntity *target);
     virtual void delJob();
+
+    virtual void resourceChanged();
 
     bool hasJob() const;
 
