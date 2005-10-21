@@ -9,10 +9,10 @@
 					<radio  col="0" row="0" theme="antButton" name="doPoint" caption-image="data/gui/pointer3.png"/>
 					<radio  col="1" row="0" theme="antButton" name="doMove" caption-image="data/gui/move.png"/>
 					<radio  col="2" row="0" theme="antButton" name="doFight" caption-image="data/gui/sword.png"/>
-					<radio  col="3" row="0" theme="antButton" name="doRest" caption-image="data/gui/bed.png"/>
+					<radio  col="3" row="0" theme="antButton" name="doInvent" caption-image="data/gui/invent.png"/>
 					<radio  col="0" row="1" theme="antButton" name="doRecruit" caption-image="data/gui/recruit.png"/>
 					<radio  col="1" row="1" theme="antButton" name="doDismiss" caption-image="data/gui/dismiss.png"/>
-					<radio  col="2" row="1" theme="antButton" name="doInvent" caption-image="data/gui/invent.png"/>
+					<radio  col="2" row="1" theme="antButton" name="doRest" caption-image="data/gui/bed.png"/>
 				</table>
 			</radioGroup>
 			<radioGroup col="0" row="1" name="ButtonPanelGroupAgg">
