@@ -29,7 +29,7 @@
         $action
         result->mRUBY = self;
 	result->mRubyObject=true;
-	printf("%X\n",self);
+	//	printf("%X\n",self);
     }
 %exception TerrainMesh::TerrainMesh {
         $action

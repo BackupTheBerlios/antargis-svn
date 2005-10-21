@@ -55,7 +55,7 @@ class AntNewSheep<AntMyEntity
 			# make child
 			puts "A SHEEP IS BORN"
 			sheep=AntNewSheep.new
-			sheep.setPos2D(getPos2D)
+			sheep.setPos(getPos2D)
 			$map.insertEntity(sheep)
 			getMap.endChange
 			newRestJob(2)

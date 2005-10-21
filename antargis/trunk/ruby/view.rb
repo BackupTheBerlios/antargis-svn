@@ -28,6 +28,15 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		$antView=self
 	end
 	def eventClick(list,button)
+		puts "EVENTCLICK"
+		list.each{|l|
+			puts l.node.to_s+"\t"+l.node.class.to_s
+			if l.node.class==Mesh
+				puts getMap.getEntity(l.node)
+			end
+		}
+		puts "---"
+		
 		if list.length>0
 			first=list[0]
 			puts first.node
@@ -68,7 +77,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 							@hero=e
 							inspectEntity(e)
 							break
-						elsif e.getType=="house" then
+						elsif ["house","farm","farmstead","workshop"].member?(e.getType) then
 							inspectEntity(e)
 							break
 						end

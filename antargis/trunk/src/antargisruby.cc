@@ -17837,13 +17837,13 @@ _wrap_SceneNodeVector_pop(int argc, VALUE *argv, VALUE self) {
         }
     }
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
             {
                 vresult=result->mRUBY;
-                std::cout<<"found :"<<vresult<<std::endl;
+                //			std::cout<<"found :"<<vresult<<std::endl;
             }
             else
             {
@@ -17858,7 +17858,7 @@ _wrap_SceneNodeVector_pop(int argc, VALUE *argv, VALUE self) {
                 //		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                 //result->mRubyObject=true;
                 //result->mRUBY=vresult;
-                std::cout<<"not found - but set:"<<vresult<<std::endl;
+                //			std::cout<<"not found - but set:"<<vresult<<std::endl;
             }
         }
         else
@@ -42989,7 +42989,7 @@ _wrap_new_Mesh(int argc, VALUE *argv, VALUE self) {
         DATA_PTR(self) = result;
         result->mRUBY = self;
         result->mRubyObject=true;
-        printf("%X\n",self);
+        //	printf("%X\n",self);
     }
     return self;
 }
@@ -43228,13 +43228,13 @@ _wrap_PickNode_node_get(int argc, VALUE *argv, VALUE self) {
     result = (SceneNode *) ((arg1)->node);
     
     {
-        std::cout<<"test2"<<std::endl;
+        //	std::cout<<"test2"<<std::endl;
         if(result)
         {
             if(result->mRubyObject)
             {
                 vresult=result->mRUBY;
-                std::cout<<"found :"<<vresult<<std::endl;
+                //			std::cout<<"found :"<<vresult<<std::endl;
             }
             else
             {
@@ -43249,7 +43249,7 @@ _wrap_PickNode_node_get(int argc, VALUE *argv, VALUE self) {
                 //		        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                 //result->mRubyObject=true;
                 //result->mRUBY=vresult;
-                std::cout<<"not found - but set:"<<vresult<<std::endl;
+                //			std::cout<<"not found - but set:"<<vresult<<std::endl;
             }
         }
         else
