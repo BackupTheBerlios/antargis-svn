@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2115"
+   sodipodi:version="0.32"
+   inkscape:version="0.42.2"
+   sodipodi:docbase="/home/david/projects/antargis/ant/data/gui/portraits"
+   sodipodi:docname="head2.svg"
+   inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+   inkscape:export-xdpi="15.301708"
+   inkscape:export-ydpi="15.301708">
+  <defs
+     id="defs2117" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35000000"
+     inkscape:cx="430.81220"
+     inkscape:cy="505.71429"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1393"
+     inkscape:window-height="960"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
+  <metadata
+     id="metadata2120">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       id="image2238"
+       height="387.85715"
+       width="376.42856"
+       sodipodi:absref="/home/david/projects/antargis/ideas/vorlagen/p_lancer.png"
+       xlink:href="/home/david/projects/antargis/ideas/vorlagen/p_lancer.png"
+       x="141.78568"
+       y="582.71936" />
+    <path
+       style="fill:#ebd1b1;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#4c3009;stroke-width:1.5000000;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+       d="M 412.60450,337.17418 C 424.59873,343.47789 433.60798,368.23637 434.11306,376.82267 C 434.56188,384.45267 426.83227,413.44070 426.83227,413.44070 C 429.88649,413.44070 432.34529,434.87466 432.34529,442.67745 L 424.76915,475.06000 L 421.73869,508.45270 C 421.73869,516.25550 412.64767,526.15092 406.12415,527.08285 C 391.98201,529.10316 338.35829,514.96102 338.35829,514.96102 C 335.30408,514.96102 283.85288,502.61844 283.85288,494.81564 L 278.80212,453.78912 C 278.80212,451.83842 277.34351,390.97817 281.72784,378.94333 C 285.32064,369.08124 297.49023,343.04406 313.74833,337.75483 C 322.70659,334.84045 345.39736,330.14960 358.46331,329.34407 C 371.52925,328.53855 402.72306,331.98087 412.60450,337.17418 z "
+       id="rect2241"
+       sodipodi:nodetypes="ccccccccccsssc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:#6b471b;fill-opacity:0.13178290;fill-rule:evenodd;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 364.65625,386.65625 C 359.33036,386.65625 353.54536,386.42615 348.50000,387.68750 C 343.19406,389.01398 337.65841,391.09269 332.34375,393.75000 C 328.52626,395.65874 322.10500,396.89500 318.18750,400.81250 C 311.13303,407.86697 305.59228,413.93847 298.00000,419.00000 C 292.23103,422.84598 281.49410,422.36734 279.81250,429.09375 C 278.91853,432.66960 278.81251,439.14179 278.81250,444.25000 C 278.81250,454.20987 275.78125,463.93402 275.78125,473.53125 C 275.78125,479.75801 278.87359,481.90065 279.81250,485.65625 C 281.20829,491.23945 282.68994,494.56576 285.87500,498.81250 C 289.38988,503.49901 291.29135,504.19783 298.00000,505.87500 C 302.75980,507.06495 306.04561,509.90624 311.12500,509.90625 C 314.89410,509.90625 320.83896,509.79569 325.28125,510.90625 C 329.01766,511.84035 334.87173,511.80386 339.40625,512.93750 C 344.22529,514.14226 349.20667,514.79084 353.56250,516.96875 C 355.42474,517.89987 362.93962,515.25213 359.62500,511.93750 C 357.47248,509.78499 353.59608,507.10306 352.53125,502.84375 C 351.50756,498.74901 350.46083,494.56211 349.50000,490.71875 C 348.53411,486.85520 347.68764,478.78139 345.46875,476.56250 C 342.78334,473.87709 338.90636,470.46900 337.40625,467.46875 C 335.74001,464.13627 333.11963,460.30981 329.31250,458.40625 C 325.28986,456.39493 320.19028,455.31809 318.18750,451.31250 C 315.59557,446.12863 315.15624,443.86875 315.15625,437.18750 C 315.15625,431.36450 314.78413,426.83801 317.18750,422.03125 C 320.14743,416.11140 321.67947,416.73839 327.28125,413.93750 C 330.95514,412.10056 335.98064,410.90626 341.43750,410.90625 C 346.35410,410.90625 351.22826,410.85393 355.56250,411.93750 C 359.83094,413.00461 365.23810,414.51935 368.71875,418.00000 C 372.50985,421.79111 374.80130,424.07136 377.81250,430.09375 C 379.27982,433.02838 380.04807,440.14957 381.84375,444.25000 C 383.38420,449.25873 384.47995,451.70107 385.00000,453.78125 C 385.45391,455.59690 385.78537,456.44572 386.78125,458.43750 C 387.85529,460.58558 389.27351,460.21102 391.06250,462.00000 C 391.54758,462.48508 393.54035,465.21874 395.00000,465.21875 C 397.43410,465.21875 397.23605,466.14496 399.28125,466.65625 C 400.65862,467.00059 403.73378,468.17998 405.34375,467.37500 C 406.54833,466.77271 408.35457,465.45794 409.65625,464.15625 C 410.93541,462.87708 412.15180,457.31879 412.15179,455.58036 C 412.15179,453.79465 412.15180,446.64732 412.15179,444.86161 C 412.15179,443.24681 411.48776,438.69003 410.72768,436.27679 C 409.91712,433.70324 406.42857,426.11009 406.42857,423.77679 C 406.42857,421.97810 406.16470,419.48020 405.72768,417.73214 C 405.37727,416.33052 405.77824,413.02375 405.34821,411.30357 C 404.92294,409.60249 406.21320,404.32264 406.41518,403.42857 L 378.15625,400.65625 C 377.16158,398.97919 376.04032,397.26816 374.78125,394.75000 C 372.33532,389.85813 370.16489,386.65625 364.65625,386.65625 z M 388.21875,406.28125 L 400.34375,408.78125 C 401.44375,409.76956 402.15625,411.78998 402.15625,414.15625 C 402.15626,416.89926 403.69069,426.79397 404.28125,429.15625 C 404.79071,431.19406 407.76348,438.27697 408.56250,439.87500 C 409.47088,441.69178 409.57821,449.96908 410.00000,451.65625 C 410.49532,453.63753 409.64772,455.19037 409.28125,456.65625 C 408.77822,458.66838 408.18014,459.92097 407.50000,461.28125 C 407.08722,462.10683 403.15975,462.37500 402.15625,462.37500 C 400.96462,462.37500 399.66481,459.75100 398.93750,458.78125 C 398.13236,457.70773 396.91719,453.51900 396.91719,452.00000 C 396.91720,449.45167 398.45424,445.16069 397.84375,442.71875 C 397.15755,439.97397 397.50000,436.67065 397.50000,433.78125 C 397.50000,431.48536 397.67943,429.09272 397.15625,427.00000 C 396.55658,424.60129 396.37572,422.62642 395.34375,420.56250 C 394.51971,418.91442 393.44726,417.20051 392.50000,415.93750 C 391.11625,414.09249 390.05642,412.77314 388.93750,411.28125 C 388.08758,410.14802 388.21875,408.30590 388.21875,406.28125 z "
+       id="path2278"
+       sodipodi:nodetypes="csssssssssssssssssssssssssssscsssssssssssssccscccsssssssssssssssc" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 408.37211,478.86602 C 407.23880,478.86602 403.31468,478.15174 400.64804,478.15174 C 397.56654,478.15174 389.33287,479.11044 386.27131,480.64122 C 384.79141,481.38117 379.57149,484.33911 378.30213,484.65645"
+       id="path2244"
+       sodipodi:nodetypes="cssc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#724802;stroke-width:1.7500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 325.77420,449.80619 C 323.61815,450.88421 337.79008,457.63793 342.02330,462.85151 C 347.34119,469.40097 352.63376,476.10048 354.05847,484.65645"
+       id="path2246"
+       sodipodi:nodetypes="csc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 370.72598,428.08791 C 370.76175,428.23098 364.12230,432.16621 363.14984,433.13867 C 361.51694,434.77157 356.55848,436.38131 354.56354,437.17928"
+       id="path2248"
+       sodipodi:nodetypes="css"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 411.55050,431.83266 C 414.16443,434.21566 418.12334,435.24998 420.61650,435.87327"
+       id="path2250"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#471c00;stroke-width:3.2500000;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 341.43156,401.82394 C 343.47956,402.33594 355.49023,403.17454 360.29270,405.30871 C 365.80915,407.76017 376.17474,412.29808 378.12881,413.89501"
+       id="path2252"
+       sodipodi:nodetypes="csc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#471c00;stroke-width:3.8750000;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 409.55558,406.45629 C 413.35658,405.84400 415.89702,402.47193 419.21331,400.81379 C 422.13886,399.35101 423.91349,397.99725 426.78945,397.27826 C 427.27945,397.15576 427.79960,397.27826 428.30468,397.27826"
+       id="path2254"
+       sodipodi:nodetypes="cssc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 374.53200,421.39936 C 375.55237,417.98754 365.76580,416.47115 363.14984,416.47115 C 360.51085,416.47115 357.95971,416.37973 355.57370,416.97623 C 352.52224,417.73910 347.40595,417.78724 347.49247,420.00669 C 347.68561,424.96088 360.12159,424.55238 363.14984,424.55238 C 365.03412,424.55238 374.44783,424.34565 374.53200,421.39936 z "
+       id="path2256"
+       sodipodi:nodetypes="cssssc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 428.05214,422.02700 C 429.97511,417.40370 421.26835,416.47116 418.70823,416.47116 C 416.46487,416.47116 413.52919,416.97623 410.62701,416.97623 C 408.30722,416.97623 405.88060,419.29090 407.09148,421.52192 C 408.85925,424.77900 416.23064,425.34209 418.20315,425.56253 C 420.02996,425.76669 427.21068,424.05010 428.05214,422.02700 z "
+       id="path2258"
+       sodipodi:nodetypes="csssss"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       id="path2260"
+       sodipodi:cx="363.40237"
+       sodipodi:cy="420.76431"
+       sodipodi:rx="4.2931485"
+       sodipodi:ry="3.7880721"
+       d="M 366.54645,423.34373 A 4.2931485,3.7880721 0 1 1 366.56123,423.32963"
+       sodipodi:start="0.74903487"
+       sodipodi:end="7.0271497"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       id="path2262"
+       sodipodi:cx="417.69809"
+       sodipodi:cy="420.76431"
+       sodipodi:rx="4.0406103"
+       sodipodi:ry="3.7880721"
+       d="M 420.65722,423.34373 A 4.0406103,3.7880721 0 1 1 420.67113,423.32963"
+       sodipodi:start="0.74903487"
+       sodipodi:end="7.0271497"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#594b30;stroke-width:2.9476163;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:0.72480619"
+       d="M 406.21534,489.36475 C 404.11754,489.34704 399.79686,488.28192 396.39023,488.28192 C 394.86187,488.28192 392.07083,489.03953 390.54248,489.03953"
+       id="path2264"
+       sodipodi:nodetypes="csc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.39922482"
+       d="M 385.37320,494.75798 C 382.65328,494.75798 390.31063,492.38720 392.94934,491.72752 C 395.44027,491.10479 397.56798,490.17581 399.51533,489.20214"
+       id="path2266"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:#604212;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 437.90113,389.70211 C 436.96820,392.02187 435.80047,393.05169 432.34529,393.74272 C 429.68637,394.27451 427.61258,392.04047 426.28437,390.71227 C 424.74832,389.17621 422.22079,388.17540 420.22346,387.17673 C 416.91099,385.52049 415.61546,386.73397 413.65747,388.69196 C 411.87684,390.47259 410.34743,390.85206 408.60670,391.72242 C 406.53282,392.75936 404.64300,393.59723 402.04071,394.24780 C 399.26238,394.94238 396.92499,395.25795 393.95949,395.25795 C 391.31357,395.25795 387.85982,392.69381 386.38335,391.21734 C 384.20688,389.04088 382.52904,389.86150 379.81736,391.21734 C 377.78774,392.23215 374.13586,391.72242 371.73614,391.72242 C 368.28862,391.72242 365.41415,391.21734 362.13969,391.21734 C 357.76236,391.21734 353.38503,391.21734 349.00770,391.21734 C 345.04126,391.21734 341.37982,390.41957 337.39095,391.21734 C 335.13807,391.66792 331.72109,394.20704 330.31988,395.25795 C 327.61114,397.28951 326.99322,399.45552 325.26912,402.32902 C 324.08763,404.29817 320.49487,405.08297 318.70313,406.87471 C 316.10020,409.47763 311.67092,411.39708 309.10668,412.93562 C 306.94676,414.23158 306.63442,417.21570 306.07622,420.00669 C 305.57040,422.53582 305.30105,424.08242 304.56099,425.56253 C 304.39263,426.40432 304.22427,427.24612 304.05592,428.08791 C 303.72895,429.72277 306.58443,433.47957 307.08637,434.14882 C 308.67974,436.27332 308.82546,437.79909 308.09653,440.71482 C 307.23677,444.15385 309.03934,444.89853 305.57115,445.76558 C 303.28559,446.33697 300.27944,446.20462 297.99500,446.77573 C 294.81295,447.57124 292.95787,447.16476 290.41886,445.26050 C 287.79490,443.29253 286.70808,441.52907 285.87317,438.18943 C 285.13666,435.24341 284.10162,432.12096 282.84271,429.60314 C 280.99012,425.89795 282.61215,425.50489 278.80210,424.55238 C 277.41589,424.20582 282.36243,497.78028 287.01203,499.14521 C 307.73223,505.22783 330.68643,513.06564 335.81369,516.93057 C 338.36900,518.85676 282.75371,518.56708 279.78867,519.16009 C 277.84366,519.54909 262.52342,520.75493 259.94713,516.37473 C 258.74413,514.32939 250.00036,490.54677 247.05409,462.55310 C 244.46234,437.92794 246.95285,397.32242 249.00260,394.24780 C 255.21118,384.93493 257.13417,373.99440 265.16504,365.96353 C 268.42277,362.70580 274.10574,354.44000 281.29159,347.95410 C 287.58991,342.26928 295.61453,336.84918 303.04576,333.13357 C 307.12584,331.09353 310.81598,330.68594 315.16759,329.59804 C 327.57162,326.49703 343.25384,326.53346 356.58385,325.05235 C 369.13832,323.65741 382.85166,318.86613 395.47472,322.02189 C 400.02724,323.16002 403.56646,324.14952 407.59655,326.56758 C 411.28711,328.78191 415.77735,331.91946 418.20315,335.15388 C 420.73720,338.53261 424.38863,342.39103 427.29453,346.26555 C 429.26390,348.89139 431.91145,350.88248 433.86052,352.83154 C 435.22609,354.19712 436.83468,359.32247 438.40620,361.41784 C 439.92113,363.43774 439.85205,366.69614 440.42651,368.99399 C 441.10068,371.69068 440.93159,374.66056 440.93159,377.58028 C 440.93159,379.92542 439.85571,382.89392 439.41636,384.65135 C 438.72732,387.40750 439.93080,386.31932 437.90113,389.70211 z "
+       id="path2274"
+       sodipodi:nodetypes="csssssssssssssssssscsssssssssssssssssssssssssssssc"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999" />
+    <path
+       style="fill:#dfc18e;fill-opacity:0.98837209;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 286.37825,435.15898 C 286.37825,434.48554 286.37825,434.48554 286.37825,435.15898 C 286.37825,437.69697 284.29312,428.13030 280.31733,422.53207 C 277.13196,418.04681 271.65699,416.39687 267.18535,417.48131 C 262.06089,418.72407 259.50305,426.23781 260.11428,429.60314 C 260.53765,431.93413 264.99169,450.45466 265.31298,451.73984 C 265.96108,454.33224 267.30392,460.90714 268.70058,462.43310 C 271.84923,465.87325 279.43423,470.48109 285.87317,471.01939 C 286.59719,471.07992 287.26944,471.71753 287.89348,472.02955"
+       id="path2276"
+       sodipodi:nodetypes="csssssssc"
+       inkscape:export-xdpi="29.389999"
+       inkscape:export-ydpi="29.389999"
+       inkscape:export-filename="/home/david/projects/antargis/ant/data/gui/portraits/head2.png" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#5e3208;stroke-width:1.5000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 401.78571,407.00504 C 402.14286,413.43361 405.35714,423.43361 407.50000,432.00504 C 411.17701,446.71309 410.71429,438.79076 411.07143,450.93361 C 411.45175,463.86428 412.90689,461.04179 406.78571,463.79075 C 401.89951,465.98510 400.35715,462.36218 395.71428,462.00504 C 387.71214,461.38950 388.21428,459.86218 388.21428,459.86218"
+       id="path2284"
+       sodipodi:nodetypes="cssssc" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#4a2e03;stroke-width:1.5000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 289.28571,473.07647 C 291.07143,479.86218 293.88171,487.04509 297.85714,491.64790 C 306.58391,501.75188 315.35714,507.36218 315.35714,507.36218"
+       id="path2286"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#311c02;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 265.41842,434.36762 C 263.48477,430.56596 262.40423,422.18788 270.08666,421.05616 C 274.28428,420.43780 280.51493,424.48428 280.88760,431.40279 C 281.24850,438.10286 284.28571,442.36218 284.28571,442.36218"
+       id="path2288"
+       sodipodi:nodetypes="cssc" />
+    <path
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#633600;stroke-width:2.0000000;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none"
+       d="M 280.82241,435.66405 C 277.28688,441.72497 276.89187,438.71199 276.27673,442.23004 C 275.48819,446.73974 275.77165,452.33157 275.77165,452.33157"
+       id="path2290"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:#ead7b5;fill-opacity:0.98837209;fill-rule:evenodd;stroke:#ebc897;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       d="M 297.50000,499.86218 C 285.35714,487.00504 284.64285,495.84433 285.62500,507.71933 C 286.60714,519.59433 290.00000,546.64790 290.00000,546.64790 L 385.00000,546.64790 L 382.14286,525.93361 C 378.21429,525.57646 357.41071,521.20146 336.83036,515.75504 C 316.25000,510.30861 301.96429,501.64789 297.50000,499.86218 z "
+       id="path2292"
+       sodipodi:nodetypes="cscccsc" />
+  </g>
+</svg>
