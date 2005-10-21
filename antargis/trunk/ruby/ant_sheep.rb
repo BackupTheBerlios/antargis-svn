@@ -21,11 +21,6 @@
 
 #!/usr/bin/ruby
 
-# try to implement alle entites in ruby
-# WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
-# could be that it has something to do with Init_Stack ???
-
-
 class AntNewSheep<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))

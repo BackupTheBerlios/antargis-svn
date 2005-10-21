@@ -4,13 +4,15 @@
 	<table cols="2" rows="1">
 		<colsize col="1" fixed="216"/>
 <!--		<antRubyView col="0" row="0" name="mainView"/>-->
-		<table col="1" row="0" cols="1" rows="6">
-			<rowsize row="0" fixed="50"/>
+
+
+		<table col="1" row="0" cols="1" rows="7">
 			<rowsize row="1" fixed="200"/>
 			<rowsize row="3" fixed="216"/>
 			<rowsize row="4" fixed="32"/>
 			<rowsize row="5" fixed="216"/>
-			<table col="0" row="0" cols="4" rows="2">
+			<rowsize row="6" fixed="50"/>
+			<table col="0" row="6" cols="4" rows="2">
 				<rowsize row="0" fixed="50"/>
 				<colsize col="0" fixed="50"/>
 				<colsize col="1" fixed="50"/>
