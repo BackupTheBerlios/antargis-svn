@@ -28,6 +28,16 @@ class AntNewTree<AntMyEntity
 		setType("tree")
 		#setVirtualY(100)
 		setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
+		
+		applePos=[AGVector3.new(-0.5,-0.5,1.7),
+		AGVector3.new(-0.6,-0.5,1.8),
+		AGVector3.new(0.3,-0.5,1.7),
+		AGVector3.new(-0.2,-0.7,1.5),
+		]
+		
+		applePos.each{|p|
+			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.04),AGVector4.new(0,0,0,0),0),p)
+		}
 	end
 	def setTreeType(t)
 		@typeID=t

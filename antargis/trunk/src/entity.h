@@ -74,7 +74,8 @@ class AntEntity
 
     std::string mType;
 
-    Mesh *mMesh;
+    std::list<Mesh *> mMesh;
+    std::map<Mesh*,AGVector3> mMeshPos;
 
     int mVirtualY;
 
@@ -156,8 +157,9 @@ class AntEntity
 
     // anything below shouldn't be used by ruby-functions
 
-    void setMesh(Mesh *Mesh);
-    Mesh *getMesh();
+    void setMesh(Mesh *pMesh);
+    std::list<Mesh*> getMesh();
+    void addMesh(Mesh *pMesh,const AGVector3 &v);
 
     // used only by *Jobs
     void setDirection(float pAngle);
@@ -177,6 +179,10 @@ class AntEntity
 
   private:
     void init();
+    void updatePos(const AGVector3 &p);
+
+    friend void AntEntity_markfunc(void *ptr);
+
   };
 
 class AntEntityPtr

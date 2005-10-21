@@ -63,7 +63,7 @@ void AntEntity::init()
   mAggression=0.5;
 
   //  mSurface=0;
-  mMesh=0;
+  //esh=0;
   mDir=0;
 
   //  mDirNum=1;
@@ -78,7 +78,10 @@ AntEntity::~AntEntity()
 
   if(getMap())
     if(getMap()->getScene())
-      getMap()->getScene()->removeNode(mMesh);
+      {
+	for(std::list<Mesh*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
+	  getMap()->getScene()->removeNode(*i);
+      }
 }
 
 void AntEntity::saveXML(xmlpp::Node &node) const
@@ -121,18 +124,28 @@ AGVector2 AntEntity::getPos2D() const
     return AGVector2(mPos[0],mPos[1]);
   }
 
+void AntEntity::updatePos(const AGVector3 &p)
+{
+  if(mMesh.size()==1)
+    {
+      mMesh.front()->setPos(p);
+      return;
+    }
+  for(std::list<Mesh*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
+    (*i)->setPos(p+mMeshPos[*i]);
+  
+}
+
 void AntEntity::setPos(const AGVector3 &p)
 {
   mPos=p;
-  if(mMesh)
-    mMesh->setPos(p);
+  updatePos(p);
 }
 void AntEntity::setPos(const AGVector2 &p)
 {
   mPos=getMap()->getPos(p);
   onGround=true;
-  if(mMesh)
-    mMesh->setPos(mPos);
+  updatePos(mPos);
 }
 
 void AntEntity::delJob()
@@ -240,8 +253,7 @@ void AntEntity::eventMapChanged()
 {
   if(onGround)
     mPos=getMap()->getPos(AGVector2(getPos2D()));
-  if(mMesh)
-    mMesh->setPos(mPos);
+  updatePos(mPos);
 }
 
 void AntEntity::setType(const std::string &pType)
@@ -256,11 +268,23 @@ std::string AntEntity::getType() const
 
 void AntEntity::setMesh(Mesh *m)
 {
-  mMesh=m;
+  mMesh.clear();
+  mMeshPos.clear();
+  if(m)
+    mMesh.push_back(m);
+}
+
+void AntEntity::addMesh(Mesh *m,const AGVector3 &v)
+{
+  if(m)
+    {
+      mMesh.push_back(m);
+      mMeshPos.insert(std::make_pair(m,v));
+    }
 }
 
 
-Mesh *AntEntity::getMesh()
+std::list<Mesh *> AntEntity::getMesh()
 {
   return mMesh;
 }
@@ -280,8 +304,9 @@ std::string AntEntity::xmlName() const
 void AntEntity::setDirection(float dir)
 {
   mDir=dir;
-  if(mMesh)
-    mMesh->setRotation(dir);
+
+  if(mMesh.size())
+    (*mMesh.begin())->setRotation(dir);
 }
 
 
@@ -455,13 +480,18 @@ void AntEntity_markfunc(void *ptr)
 {
   if(!ptr)
     return;
-  Mesh *cppAnimal;
+  //  Mesh *cppAnimal;
   AntEntity *zoo;
 
   zoo = static_cast<AntEntity*>(ptr);
 
+  for(std::list<Mesh*>::iterator i=zoo->mMesh.begin();i!=zoo->mMesh.end();i++)
+    if(*i)
+      if((*i)->mRubyObject)
+	rb_gc_mark((*i)->mRUBY);
+  /*
   cppAnimal=zoo->getMesh();
   if(cppAnimal)
     if(cppAnimal->mRubyObject)
-      rb_gc_mark(cppAnimal->mRUBY);
+    rb_gc_mark(cppAnimal->mRUBY);*/
 }

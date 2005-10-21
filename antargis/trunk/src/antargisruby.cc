@@ -976,25 +976,26 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_p_TerrainMesh swig_types[106]
 #define SWIGTYPE_p_std__listTAGRect2_t swig_types[107]
 #define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[108]
-#define SWIGTYPE_p_std__mapTstd__string_int_t swig_types[109]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[110]
-#define SWIGTYPE_p_std__ostringstream swig_types[111]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[112]
-#define SWIGTYPE_p_std__string swig_types[113]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[114]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[115]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[116]
-#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[117]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[118]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[119]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[120]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[121]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[122]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[123]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[124]
-#define SWIGTYPE_p_unsigned_long swig_types[125]
-static swig_type_info *swig_types[126];
-static swig_module_info swig_module = {swig_types, 126, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__listTMesh_p_t swig_types[109]
+#define SWIGTYPE_p_std__mapTstd__string_int_t swig_types[110]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[111]
+#define SWIGTYPE_p_std__ostringstream swig_types[112]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[113]
+#define SWIGTYPE_p_std__string swig_types[114]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[115]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[116]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[117]
+#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[118]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[119]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[120]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[121]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[122]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[123]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[124]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[125]
+#define SWIGTYPE_p_unsigned_long swig_types[126]
+static swig_type_info *swig_types[127];
+static swig_module_info swig_module = {swig_types, 127, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -44999,37 +45000,37 @@ _wrap_AntEntity_setMesh(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AntEntity_getMesh(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
-    Mesh *result;
-    Swig::Director *resultdirector = 0;
+    SwigValueWrapper<std::list<Mesh * > > result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
-    result = (Mesh *)(arg1)->getMesh();
+    result = (arg1)->getMesh();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        {
-            //	std::cout<<"test2"<<std::endl;
-            if(result)
-            {
-                if(result->mRubyObject)
-                vresult=result->mRUBY;
-                else
-                {
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-                    //			result->mRubyObject=true;
-                    //			result->mRUBY=vresult;
-                }
-            }
-            else
-            vresult = Qnil;
-        }
+    {
+        std::list<Mesh * > * resultptr;
+        resultptr = new std::list<Mesh * >((std::list<Mesh * > &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__listTMesh_p_t, 1);
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AntEntity_addMesh(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    Mesh *arg2 = (Mesh *) 0 ;
+    AGVector3 *arg3 = 0 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Mesh, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGVector3, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->addMesh(arg2,(AGVector3 const &)*arg3);
+    
+    return Qnil;
 }
 
 
@@ -45168,6 +45169,19 @@ _wrap_AntEntity_mRUBY_get(int argc, VALUE *argv, VALUE self) {
     
     vresult = result;
     return vresult;
+}
+
+
+static VALUE
+_wrap_AntEntity_markfunc(int argc, VALUE *argv, VALUE self) {
+    void *arg1 = (void *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, 0, 1);
+    AntEntity_markfunc(arg1);
+    
+    return Qnil;
 }
 
 
@@ -45326,19 +45340,6 @@ static void
 free_AntEntityPtr(AntEntityPtr *arg1) {
     delete arg1;
 }
-static VALUE
-_wrap_AntEntity_markfunc(int argc, VALUE *argv, VALUE self) {
-    void *arg1 = (void *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, 0, 1);
-    AntEntity_markfunc(arg1);
-    
-    return Qnil;
-}
-
-
 swig_class cTerrainPieceVA;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -46144,6 +46145,7 @@ static swig_type_info _swigt__p_p_TerrainPieceVA = {"_p_p_TerrainPieceVA", 0, 0,
 static swig_type_info _swigt__p_p_TerrainMesh = {"_p_p_TerrainMesh", 0, 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAGRect2_t = {"_p_std__listTAGRect2_t", "std::list<AGRect2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAntEntity_p_t = {"_p_std__listTAntEntity_p_t", "std::list<AntEntity * > *|AntMap::EntityList *", 0, 0, 0};
+static swig_type_info _swigt__p_std__listTMesh_p_t = {"_p_std__listTMesh_p_t", "std::list<Mesh * > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__mapTstd__string_int_t = {"_p_std__mapTstd__string_int_t", "std::map<std::string,int > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__mapTstd__string_std__string_t = {"_p_std__mapTstd__string_std__string_t", "std::map<std::string,std::string > *|Node::Attributes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__ostringstream = {"_p_std__ostringstream", "std::ostringstream *", 0, 0, 0};
@@ -46272,6 +46274,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_p_TerrainMesh,
   &_swigt__p_std__listTAGRect2_t,
   &_swigt__p_std__listTAntEntity_p_t,
+  &_swigt__p_std__listTMesh_p_t,
   &_swigt__p_std__mapTstd__string_int_t,
   &_swigt__p_std__mapTstd__string_std__string_t,
   &_swigt__p_std__ostringstream,
@@ -46400,6 +46403,7 @@ static swig_cast_info _swigc__p_p_TerrainMesh[] = {{&_swigt__p_p_TerrainMesh, 0,
 static swig_cast_info _swigc__p_p_SceneNode[] = {  {&_swigt__p_p_SceneNode, 0, 0, 0},  {&_swigt__p_p_Mesh, _p_p_MeshTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_MeshData, _p_p_MeshDataTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainPieceVA, _p_p_TerrainPieceVATo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainMesh, _p_p_TerrainMeshTo_p_p_SceneNode, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAGRect2_t[] = {  {&_swigt__p_std__listTAGRect2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAntEntity_p_t[] = {  {&_swigt__p_std__listTAntEntity_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__listTMesh_p_t[] = {  {&_swigt__p_std__listTMesh_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__mapTstd__string_int_t[] = {  {&_swigt__p_std__mapTstd__string_int_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__mapTstd__string_std__string_t[] = {  {&_swigt__p_std__mapTstd__string_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__ostringstream[] = {  {&_swigt__p_std__ostringstream, 0, 0, 0},{0, 0, 0, 0}};
@@ -46528,6 +46532,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_p_TerrainMesh,
   _swigc__p_std__listTAGRect2_t,
   _swigc__p_std__listTAntEntity_p_t,
+  _swigc__p_std__listTMesh_p_t,
   _swigc__p_std__mapTstd__string_int_t,
   _swigc__p_std__mapTstd__string_std__string_t,
   _swigc__p_std__ostringstream,
@@ -48451,6 +48456,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cResource.klass, "takeAll", VALUEFUNC(_wrap_Resource_takeAll), -1);
     cResource.mark = 0;
     cResource.destroy = (void (*)(void *)) free_Resource;
+    rb_define_module_function(mLibantargis, "AntEntity_markfunc", VALUEFUNC(_wrap_AntEntity_markfunc), -1);
     rb_define_module_function(mLibantargis, "disown_AntEntity", VALUEFUNC(_wrap_disown_AntEntity), -1);
     
     cAntEntity.klass = rb_define_class_under(mLibantargis, "AntEntity", rb_cObject);
@@ -48495,6 +48501,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "getMorale", VALUEFUNC(_wrap_AntEntity_getMorale), -1);
     rb_define_method(cAntEntity.klass, "setMesh", VALUEFUNC(_wrap_AntEntity_setMesh), -1);
     rb_define_method(cAntEntity.klass, "getMesh", VALUEFUNC(_wrap_AntEntity_getMesh), -1);
+    rb_define_method(cAntEntity.klass, "addMesh", VALUEFUNC(_wrap_AntEntity_addMesh), -1);
     rb_define_method(cAntEntity.klass, "setDirection", VALUEFUNC(_wrap_AntEntity_setDirection), -1);
     rb_define_method(cAntEntity.klass, "decEnergy", VALUEFUNC(_wrap_AntEntity_decEnergy), -1);
     rb_define_method(cAntEntity.klass, "decMorale", VALUEFUNC(_wrap_AntEntity_decMorale), -1);
@@ -48514,7 +48521,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntEntityPtr.klass, "get", VALUEFUNC(_wrap_AntEntityPtr_get), -1);
     cAntEntityPtr.mark = 0;
     cAntEntityPtr.destroy = (void (*)(void *)) free_AntEntityPtr;
-    rb_define_module_function(mLibantargis, "AntEntity_markfunc", VALUEFUNC(_wrap_AntEntity_markfunc), -1);
     rb_define_module_function(mLibantargis, "disown_TerrainPieceVA", VALUEFUNC(_wrap_disown_TerrainPieceVA), -1);
     
     cTerrainPieceVA.klass = rb_define_class_under(mLibantargis, "TerrainPieceVA", ((swig_class *) SWIGTYPE_p_SceneNode->clientdata)->klass);

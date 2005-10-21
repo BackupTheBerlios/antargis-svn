@@ -318,7 +318,10 @@ void AntMap::move(float pTime)
         mEntities.erase(i);
       mEntityMap.erase((*d)->getID());
       mEntQuad.erase(*i);
-      getScene()->removeNode((*d)->getMesh());
+
+      std::list<Mesh*> meshes=(*d)->getMesh();
+      for(std::list<Mesh*>::iterator i=meshes.begin();i!=meshes.end();i++)
+	getScene()->removeNode(*i);
     }
   if(mToDel.size())
     entsChanged();
@@ -454,9 +457,10 @@ void AntMap::entsChanged()
     {
       for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
 	{
-	  Mesh *m=(*i)->getMesh();
-	  if(m)
-	    mScene->addNode(m);
+	  std::list<Mesh *> m=(*i)->getMesh();
+	  for(std::list<Mesh*>::iterator i=m.begin();i!=m.end();i++)
+	    if(*i)
+	      mScene->addNode(*i);
 	}
     }
 }
@@ -472,8 +476,12 @@ void AntMap::mapChanged()
 AntEntity *AntMap::getEntity(const Mesh &pMesh)
 {
   for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
-    if((*i)->getMesh()==&pMesh)
-      return *i;
+    {
+      std::list<Mesh*> meshes=(*i)->getMesh();
+      if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
+	//      if((*i)->getMesh()==&pMesh)
+	return *i;
+    }
   return 0;
 }
 
