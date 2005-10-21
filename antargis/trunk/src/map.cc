@@ -82,7 +82,7 @@ void HeightMap::loadXML(const Node &node)
   std::istringstream ish(h.getContent());
   std::istringstream isg(g.getContent());
 
-  cdebug(g.getContent());
+  //  cdebug(g.getContent());
   float f;
   for(size_t y=0;y<mH+2;y++)
     {
@@ -293,7 +293,7 @@ void AntMap::loadXML(const xmlpp::Node &node)
 
 void AntMap::insertEntity(AntEntity *e)
 {
-  cdebug("INSERTING:"<<e);
+  //  cdebug("INSERTING:"<<e);
   mEntities.push_back(e);
   //  mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
@@ -396,7 +396,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType)
         j--;
       assert((j!=ents.end()));
       e=j->second;
-      cdebug("DIST:"<<j->first);
+      //      cdebug("DIST:"<<j->first);
     }
 
   return e;

@@ -69,6 +69,7 @@ class AntNewTree<AntMyEntity
 	def eventNoJob
 		# grow apples
 		resource.set("food",[resource.get("food")+1,@maxApples].min)
+		resourceChanged
 		newRestJob(8)
 	end
 	
