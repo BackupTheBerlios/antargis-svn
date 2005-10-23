@@ -288,7 +288,9 @@ GLuint assignTexture(SDL_Surface *pSurface)
                 size * texSurface->format->BytesPerPixel );
 
   GLuint id;
+  assertGL;
   glGenTextures( 1, &id);
+  assertGL;
   //  cdebug("newid:"<<id);
   //  textureIDs[textureName]=id;
   glBindTexture( GL_TEXTURE_2D,id);// textureIDs[textureName] );
