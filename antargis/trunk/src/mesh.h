@@ -4,6 +4,40 @@
 #include "scene.h"
 #include "vertex_array.h"
 
+#include <map>
+
+// simple Mesh building
+
+struct MeshVertex
+{
+  AGVector4 v,c;
+  AGVector3 n;
+  AGVector2 t;
+
+  // sorting
+  bool operator<(const MeshVertex &p) const;
+};
+
+// generates index list for same vertices (with same colors/normals..)
+class MeshOptimizer
+{
+  std::map<MeshVertex,int> mMap;
+  std::vector<int> mIndices;
+
+  std::vector<MeshVertex> mVertices;
+  int saved;
+ public:
+  MeshOptimizer();
+
+  void add(const MeshVertex &v);
+  VertexArray getArray();
+};
+
+
+
+
+// Mesh organizing
+
 class MeshData:public SceneNode
 {
   VertexArray mArray;
@@ -13,6 +47,8 @@ class MeshData:public SceneNode
 
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
+  MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
+  ~MeshData();
 
   void draw();
   void drawShadow();
@@ -34,6 +70,7 @@ class Mesh:public SceneNode
   float mRotation;
   
  public:
+  Mesh();
   Mesh(MeshData &data,const AGVector4 &pPos,float pRot);
 
   void draw();

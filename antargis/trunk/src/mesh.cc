@@ -10,89 +10,87 @@
 // Mesh-optimizing
 //////////////////////////////////////////////////////////////////////
 
-struct MeshVertex
+// sorting
+bool MeshVertex::operator<(const MeshVertex &p) const
 {
-  AGVector4 v,c;
-  AGVector3 n;
-  AGVector2 t;
-
-  // sorting
-  bool operator<(const MeshVertex &p) const
-  {
-    int i;
-    for(i=0;i<3;i++)
-      if(v[i]<p.v[i])
-	return true;
-
-    for(i=0;i<4;i++)
-      if(c[i]<p.c[i])
+  int i;
+  for(i=0;i<3;i++)
+    if(v[i]<p.v[i])
       return true;
-    
-    for(i=0;i<3;i++) 
-      if(n[i]<p.n[i]) 
-	return true; 
-
-    for(i=0;i<2;i++)
-      if(t[i]<p.t[i]) 
-	return true;
-
+  
+  for(i=0;i<4;i++)
+    if(c[i]<p.c[i])
+      return true;
+  
+  for(i=0;i<3;i++) 
+    if(n[i]<p.n[i]) 
+      return true; 
+  
+  for(i=0;i<2;i++)
+    if(t[i]<p.t[i]) 
+      return true;
+  
     return false;
-  }
+}
 
-};
 
-// generates index list for same vertices (with same colors/normals..)
-class MeshOptimizer
+MeshOptimizer::MeshOptimizer()
 {
-  std::map<MeshVertex,int> mMap;
-  std::vector<int> mIndices;
-
-  std::vector<MeshVertex> mVertices;
-  int saved;
- public:
-  MeshOptimizer()
+  saved=0;
+}
+void MeshOptimizer::add(const MeshVertex &v)
+{
+  int index=mVertices.size();
+  std::map<MeshVertex,int>::iterator i=mMap.find(v);
+  if(i!=mMap.end())
     {
-      saved=0;
+      saved++;
+      index=i->second;
     }
-  void add(const MeshVertex &v)
-  {
-    int index=mVertices.size();
-    std::map<MeshVertex,int>::iterator i=mMap.find(v);
-    if(i!=mMap.end())
-      {
-	saved++;
-	index=i->second;
-      }
-    else
-      {
-	mVertices.push_back(v);
-	mMap[v]=index;
-      }
-    mIndices.push_back(index);
-    return;
-  }
-  VertexArray getArray()
-  {
-    VertexArray a;
-    for(size_t i=0;i<mIndices.size();i++)
-      {
-	MeshVertex v=mVertices[i];
-	a.addVertex(v.v,v.c,v.n,v.t);
-      }
+  else
+    {
+      mVertices.push_back(v);
+      mMap[v]=index;
+    }
+  mIndices.push_back(index);
+  return;
+}
+VertexArray MeshOptimizer::getArray()
+{
+  VertexArray a;
+  for(size_t i=0;i<mIndices.size();i++)
+    {
+      MeshVertex v=mVertices[i];
+      a.addVertex(v.v,v.c,v.n,v.t);
+    }
+  
+  
+  for(size_t i=0;i<mIndices.size();i+=3)
+    {
+      a.addTriangle(mIndices[i],mIndices[i+1],mIndices[i+2]);
+    }
+  cdebug("SAVED:"<<1.0f-float(saved)/mIndices.size());
+  return a;
+}
 
-    
-    for(size_t i=0;i<mIndices.size();i+=3)
-      {
-	a.addTriangle(mIndices[i],mIndices[i+1],mIndices[i+2]);
-      }
-    cdebug("SAVED:"<<1.0f-float(saved)/mIndices.size());
-    return a;
-  }
-};
 
 //////////////////////////////////////////////////////////////////////
 // MeshData
 //////////////////////////////////////////////////////////////////////
+
+MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow)
+{
+  mArray=va;
+  mWithTexture=false;
+  if(pTexture!="")
+    {
+      mTexture=getTextureCache()->get(pTexture);
+      mWithTexture=true;
+    }
+  mShadow=pShadow;
+  
+}
+
 
 MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow)
 {
@@ -153,6 +151,11 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   mArray=opt.getArray();
 }
 
+MeshData::~MeshData()
+{
+  TRACE;
+}
+
 void MeshData::draw()
 {
   if(!mShadow)
@@ -195,6 +198,12 @@ void MeshData::drawDepth()
 // Mesh
 //////////////////////////////////////////////////////////////////////
 
+Mesh::Mesh()
+{
+  mData=0;
+  mRotation=0;
+}
+
 Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
 {
   mData=&data;
@@ -205,24 +214,29 @@ Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
 void Mesh::draw()
 {
   begin();
-  mData->draw();
+  if(mData)
+    mData->draw();
   end();
 }
 void Mesh::drawDepth()
 {
   begin();
-  mData->drawDepth();
+  if(mData)
+    mData->drawDepth();
   end();
 }
 void Mesh::drawShadow()
 {
   begin();
-  mData->drawShadow();
+  if(mData)
+    mData->drawShadow();
   end();
 }
 
 size_t Mesh::getTriangles() const
 {
+  if(!mData)
+    return 0;
   return mData->getTriangles();
 }
 
@@ -240,6 +254,8 @@ void Mesh::end()
 
 AGVector4 Mesh::lineHit(const AGLine3 &pLine) const
 {
+  if(!mData)
+    return AGVector4(0,0,0,0);
   AGMatrix4 rot(-mRotation*M_PI/180.0,AGVector3(0,0,1));
   AGMatrix4 tr(-mPos);
   AGMatrix4 complete=rot*tr;

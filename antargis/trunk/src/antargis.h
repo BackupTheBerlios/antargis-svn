@@ -30,6 +30,7 @@
 #include "antapp.h"
 #include "entity.h"
 #include "terrain.h"
+#include "tree.h"
 //#include "ant_man.h"
 //#include "ant_geometry.h"
 #ifdef SWIG
@@ -41,6 +42,7 @@
 %include "antapp.h"
 %include "entity.h"
 %include "terrain.h"
+%include "tree.h"
  //%include "ant_man.h"
  //%include "ant_geometry.h"
 

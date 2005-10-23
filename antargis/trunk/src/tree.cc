@@ -11,8 +11,8 @@ GLTree::GLTree(AGVector4 p,float h)
   wu=0.01;
   wl=0.2;
   
-  trunkTex=getTextureCache()->get("data/fir_trunk.png");
-  firTex=getTextureCache()->get("data/fir1.png");
+  trunkTex=getTextureCache()->get("data/textures/models/fir_trunk.png");
+  firTex=getTextureCache()->get("data/textures/models/fir1.png");
   init();
 }
 GLTree::~GLTree()
@@ -21,19 +21,19 @@ GLTree::~GLTree()
 
 void GLTree::draw()
 {
-  draw(true);
+  mydraw(true);
 }
 
 void GLTree::drawDepth()
 {
-  draw(false);
+  mydraw(false);
 }
 void GLTree::drawShadow()
 {
-  draw(false);
+  mydraw(false);
 }
 
-void GLTree::draw(bool texture)
+void GLTree::mydraw(bool texture)
 {
   glPushMatrix();
   

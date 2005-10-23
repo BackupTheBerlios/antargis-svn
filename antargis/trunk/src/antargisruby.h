@@ -1151,6 +1151,7 @@ class SwigDirector_MeshData : public MeshData, public Swig::Director {
 
 public:
     SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
+    SwigDirector_MeshData(VALUE self, VertexArray const &va, std::string const &pTexture, bool pShadow = true);
     virtual void advance(float time);
     virtual void mapChanged();
     virtual size_t getTriangles() const;
@@ -1165,6 +1166,7 @@ public:
 class SwigDirector_Mesh : public Mesh, public Swig::Director {
 
 public:
+    SwigDirector_Mesh(VALUE self);
     SwigDirector_Mesh(VALUE self, MeshData &data, AGVector4 const &pPos, float pRot);
     virtual void advance(float time);
     virtual void mapChanged();
@@ -1256,6 +1258,21 @@ public:
     virtual ~SwigDirector_TerrainMesh();
     virtual void drawDepth();
     virtual void sort(AGVector4 const &camera);
+    virtual void draw();
+    virtual void drawShadow();
+};
+
+
+class SwigDirector_GLTree : public GLTree, public Swig::Director {
+
+public:
+    SwigDirector_GLTree(VALUE self, AGVector4 p, float h = 9);
+    virtual void advance(float time);
+    virtual void mapChanged();
+    virtual size_t getTriangles() const;
+    virtual ~SwigDirector_GLTree();
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawDepth();
     virtual void draw();
     virtual void drawShadow();
 };

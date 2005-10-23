@@ -21,6 +21,8 @@
 
 #!/usr/bin/ruby
 
+require 'fir_mesh.rb'
+
 class AntNewTree<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
@@ -75,7 +77,10 @@ class AntNewTree<AntMyEntity
 	
 	private
 	def setupMesh
+		makeFirMesh
 		setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
+		#setMesh(GLTree.new(AGVector4.new(0,0,0,0),3))
+		#setMesh(makeFirMesh)
 		for i in 1..([@maxApples,resource.get("food")].min)
 			p=@applePos[i-1]
 			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.04),AGVector4.new(0,0,0,0),0),p)

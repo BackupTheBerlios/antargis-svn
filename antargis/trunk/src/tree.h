@@ -5,8 +5,9 @@
 #include "ag_triangle.h"
 #include "ag_surface.h"
 #include "vertex_array.h"
+#include "mesh.h"
 
-class GLTree:public SceneNode
+class GLTree:public Mesh //SceneNode
 {
   AGTexture firTex,trunkTex;
 
@@ -18,7 +19,7 @@ class GLTree:public SceneNode
   void draw();
   void drawDepth();
   void drawShadow();
-  void draw(bool texture=false);
+  void mydraw(bool texture=false);
 
   void drawVertex(const AGVector4 &v,AGVector4 n,float t1,float t2);
 
