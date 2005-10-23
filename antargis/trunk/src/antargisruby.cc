@@ -41886,6 +41886,30 @@ _wrap_AntMap_getAllEntities(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntMap_getAllEntitiesV(int argc, VALUE *argv, VALUE self) {
+    AntMap *arg1 = (AntMap *) 0 ;
+    std::vector<AntEntityPtr > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntMap, 1);
+    result = (arg1)->getAllEntitiesV();
+    
+    {
+        vresult = rb_ary_new2((&result)->size());
+        for (unsigned int i=0; i<(&result)->size(); i++) {
+            AntEntityPtr* x = new AntEntityPtr(((std::vector<AntEntityPtr > &)result)[i]);
+            rb_ary_store(vresult,i,
+            SWIG_NewPointerObj((void *) x, 
+            SWIGTYPE_p_AntEntityPtr, 1));
+        }
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AntMap_getEntity__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AntMap *arg1 = (AntMap *) 0 ;
     Mesh *arg2 = 0 ;
@@ -48493,6 +48517,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntMap.klass, "getNewID", VALUEFUNC(_wrap_AntMap_getNewID), -1);
     rb_define_method(cAntMap.klass, "getEntities", VALUEFUNC(_wrap_AntMap_getEntities), -1);
     rb_define_method(cAntMap.klass, "getAllEntities", VALUEFUNC(_wrap_AntMap_getAllEntities), -1);
+    rb_define_method(cAntMap.klass, "getAllEntitiesV", VALUEFUNC(_wrap_AntMap_getAllEntitiesV), -1);
     rb_define_method(cAntMap.klass, "getEntity", VALUEFUNC(_wrap_AntMap_getEntity), -1);
     rb_define_method(cAntMap.klass, "getByName", VALUEFUNC(_wrap_AntMap_getByName), -1);
     rb_define_method(cAntMap.klass, "getNext", VALUEFUNC(_wrap_AntMap_getNext), -1);

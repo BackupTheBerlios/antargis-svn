@@ -79,7 +79,7 @@ class AntHouse<AntBoss
 	
 	def eatFood
 		food=resource.get("food")
-		eatAmount=@men.length*0.01
+		eatAmount=@men.length*0.04
 		if food>eatAmount
 			resource.set("food",food-eatAmount)
 		else

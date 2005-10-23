@@ -6,6 +6,7 @@
 #include "quadtree.h"
 
 class AntEntity;
+class AntEntityPtr;
 class Scene;
 class Mesh;
 class TerrainMesh;
@@ -81,6 +82,7 @@ class AntMap:public HeightMap
   
   EntityList getEntities(const AGRect2&r);
   EntityList getAllEntities();
+  std::vector<AntEntityPtr> getAllEntitiesV();
 
   AntEntity *getEntity(const Mesh &pMesh);
   AntEntity *getEntity(int id) const;

@@ -9,7 +9,40 @@ class AntWorkshop<AntHouse
 #		mesh=Mesh.new(getMeshData("data/models/farm.ant",2,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end
-
+	
+	def assignJob(e)
+		if e.getMode=="invent"
+			produceOneTool
+			e.setMode("any")
+		end
+		if not @job
+			if allThereForTool && notEnoughTools && atHome(e)
+				e.setMode("invent")
+				e.newRestJob(10)
+				startToolProduction
+				return
+			end
+		end
+		super(e)
+	end
+	
+	def startToolProduction
+		resource.sub("wood",1)
+		resource.sub("stone",1)
+	end
+	
+	def produceOneTool
+		resource.add("tool",1)
+	end
+	
+	def allThereForTool
+		resource.get("wood")>=1 && resource.get("stone")>=1
+	end
+	
+	def notEnoughTools
+		resource.get("tool")<10
+	end
+	
 	# what's needed most ATM?
 	# returns: [good,from] or nil
 	def needed()

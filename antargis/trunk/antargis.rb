@@ -52,7 +52,21 @@ class AntGameApp <AntRubyView
 		
 		$screen=@layout
 		
+		setupHeroDisplay
 	end
+	
+	def setupHeroDisplay
+		all=getMap.getAllEntitiesV
+		all.each{|ep|
+			e=ep.get
+			if e.getType=="hero"
+				puts e.getName
+			end
+		}
+		#exit
+	end
+	
+	
 	
 	def initDebug
 		@debug=AGLayout.new(@layout,loadFile("debug.xml"))

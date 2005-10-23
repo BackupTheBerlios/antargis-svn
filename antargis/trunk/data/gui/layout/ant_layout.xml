@@ -64,6 +64,8 @@
 					<text col="0" row="4" caption="Wood" align="left"/>
 					<text col="0" row="5" caption="Stone" align="left"/>
 					<text col="0" row="6" caption="Food" align="left"/>
+					<text col="0" row="7" caption="Tools" align="left"/>
+					
 					
 					<text col="1" row="1" caption="0" align="right" name="name"/>
 					<text col="1" row="2" caption="0" align="right" name="boss"/>
@@ -71,6 +73,7 @@
 					<text col="1" row="4" caption="0" align="right" name="wood"/>
 					<text col="1" row="5" caption="0" align="right" name="stone"/>
 					<text col="1" row="6" caption="0" align="right" name="food"/>
+					<text col="1" row="7" caption="0" align="right" name="tool"/>
 				</table>
 			</antInventory>
 			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>

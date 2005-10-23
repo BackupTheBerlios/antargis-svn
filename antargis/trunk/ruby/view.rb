@@ -30,7 +30,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def eventClick(list,button)
 		puts "EVENTCLICK"
 		list.each{|l|
-			puts l.node.to_s+"\t"+l.node.class.to_s
+			puts l.node.to_s+"\t"+l.node.class.to_s+"  "+l.camDist.to_s
 			if l.node.class==Mesh
 				puts getMap.getEntity(l.node)
 			end
@@ -39,9 +39,9 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		
 		if list.length>0
 			first=list[0]
-			puts first.node
-			puts first.node.class
-			puts "FIRST:",toTerrainMesh(first.node), getMap.getTerrainMesh
+			#puts first.node
+			#puts first.node.class
+			#puts "FIRST:",toTerrainMesh(first.node), getMap.getTerrainMesh
 			if toTerrainMesh(first.node)==getMap.getTerrainMesh
 				clickMap(first.pos,button)
 			else
@@ -50,6 +50,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		end
 	end
 	def clickMap(pos,button)
+		puts "CLICKMAP"
 		if @hero then
 			@hero.newHLMoveJob(0,pos,0)
 		end
@@ -178,7 +179,7 @@ class AntInventory<AGButton
 		super(p,rect,"")
 		setTheme("antButton")
 		$inventory=self
-		@resTypes=["wood","stone","men","food"]
+		@resTypes=["wood","stone","men","food","tool"]
 		setEnabled(false)
 	end
 	def setValue(name,value)

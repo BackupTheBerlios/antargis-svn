@@ -5,8 +5,8 @@
 
 [Gui/View]
 =================================================
-[M] pointing device for selecting man/sheep and so
-    data should be displayed in a view on the right
+[H] implement GL-picking for fast hovering ?
+[L] 
 
 [Menu]
 =================================================
@@ -34,11 +34,7 @@
 
 [Editor]
 =================================================
-[L] separate editor from game
-[H] adding entities
-[H] nice selection of entities
-[M] adding trees/buildings
-[M] giving buildings/men names
+[L] Trigger definition
 
 [Packaging]
 =================================================
@@ -69,20 +65,6 @@
   * 1.Szene: mit Kutsche und ein paar Leichen; auf der Seite sind noch die Angreifer
   * 2.Szene: Höhle mit Druide
 
-
-* Formation
-  Sitzen:
-    - jeder "Man" bekommt platz zugewiesen, wenn er move-job erledigt hat
-  Laufen:
-    - jeder "Man bekommt relativen platz zugewiesen, den er mit laufen erreichen will
-  => 2 speeds: Laufen, gehen
-  
-* tiles:
-  - aufteilen wasser/land
-  - land speichern mit minimum bildung, wenn minimale höhe höher als wasser
-  - bilder schneiden /rundum - um platz zu sparen
-  - speichern der 0-position in XML-File
-  - (Bilder zusammen in große Sammlung speichern)
 
 * Grafik:
   - Schnee: einteilen der Bilder in Schnee/non-Schnee und dann langsam hinzufügen?
