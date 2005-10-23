@@ -53,7 +53,7 @@ class AntRubyEditView<GLApp
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop"]
+		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
@@ -161,6 +161,8 @@ class AntRubyEditView<GLApp
 				@type=AntTower
 			when "farm"
 				@type=AntFarm
+			when "fir"
+				@type=AntFir
 			when "workshop"
 				@type=AntWorkshop
 			when "farmstead"

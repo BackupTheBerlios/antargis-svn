@@ -19,9 +19,9 @@ def getFirMeshData
 	mv3.c=AGVector4.new(1,1,1,1)
 	
 	# add trunk
-	radl=0.2
+	radl=0.1
 	radu=0.01
-	height=4
+	height=6
 	segments=8
 	for ai in 0..(segments-1)
 		a0=ai*Math::PI*2/segments
@@ -77,6 +77,53 @@ def getFirMeshData
 		opt.add(mv0)
 		opt.add(mv2)
 		opt.add(mv3)
+	end
+
+	# greenery
+	rot=AGMatrix4.new(44.0*Math::PI/180.0,AGVector3.new(0,0,1))
+	current=AGMatrix4.new
+	y=height*0.4
+	ys=0.05
+	while y<height
+		current=current*rot
+		
+		v1=AGVector4.new(0,2.4*(1-y/height),y-0.5)
+		v2=AGVector4.new(-0.9*(1-y/height),0,y)
+		v3=AGVector4.new(0.9*(1-y/height),0,y)
+		
+		v1=current*v1
+		v2=current*v2
+		v3=current*v3
+		
+		n1=v2-v1
+		n2=v3-v1
+		
+		ntmp=n2%n1
+		
+		n=ntmp.dim3
+		n.normalize
+		
+		n*=-1
+		
+		mv0.v=v1
+		mv1.v=v2
+		mv2.v=v3
+		
+		tn=AGVector2.new(0,0.5)
+		
+		mv0.t=AGVector2.new(0.5,1)*0.5+tn
+		mv1.t=AGVector2.new(0,1)*0.5+tn
+		mv2.t=AGVector2.new(1,0)*0.5+tn
+		
+		mv0.n=n
+		mv1.n=n
+		mv2.n=n
+		
+		opt.add(mv0)
+		opt.add(mv1)
+		opt.add(mv2)
+		
+		y+=ys
 	end
 	
 	

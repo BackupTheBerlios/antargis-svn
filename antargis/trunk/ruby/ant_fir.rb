@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
-# ents.rb
+# ant_tree.rb
 # by David Kamphausen (david.kamphausen@web.de)
 #
 # The "Antargis" project, including all files needed to compile it,
@@ -21,46 +21,26 @@
 
 #!/usr/bin/ruby
 
-# try to implement alle entites in ruby
-# WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
-# could be that it has something to do with Init_Stack ???
+require 'fir_mesh.rb'
 
-
-class AntMyEntity<AntEntity
-	def initialize(p)
-		super(p)
-		$map.registerEntity(self)
-		mRUBY=self
-		@xmlProps={}
+class AntFir<AntMyEntity
+	def initialize()
+		super(AGVector2.new(0,0))
+		setType("tree")
+	
+		setupMesh
 	end
-	def setXMLProp(n,v)
-		@xmlProps[n]=v
+	def resourceChanged
+		setupMesh
 	end
-	def getXMLProp(n)
-		if @xmlProps[n]==nil
-			return ""
-		else
-			return @xmlProps[n]
-		end
+	
+	def xmlName
+		return "antFir"
 	end
-	def saveXML(node)
-		super(node)
-		@xmlProps.each{|n,v|
-			node.set(n,v)
-		}
+	
+	private
+	def setupMesh
+		setMesh(makeFirMesh)
 	end
 end
 
-
-require 'ant_hero.rb'
-require 'ant_sheep.rb'
-require 'ant_man.rb'
-require 'ant_house.rb'
-require 'ant_stone.rb'
-require 'ant_tree.rb'
-require 'ant_deco.rb'
-require 'ant_tower.rb'
-require 'ant_farmstead.rb'
-require 'ant_farm.rb'
-require 'ant_workshop.rb'
-require 'ant_fir.rb'
