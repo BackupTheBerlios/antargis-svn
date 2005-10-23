@@ -30,7 +30,7 @@ Scene::Scene(int w,int h)
   cameraPosition=AGVector4(0,-20,20);
   lightPosition=AGVector4( -20, -13, 31,1);
   scenePosition=AGVector4(0,0,0,1);
-  mShadow=1;
+  mShadow=0;
   mRubyObject=false;
 }
 
@@ -283,8 +283,10 @@ void Scene::drawScene()
 }
 void Scene::drawShadow()
 {
+  assertGL;
   
   glActiveTexture(shadowTexUnit);
+  assertGL;
 
   //  glMatrixMode(GL_TEXTURE);
   //  glPushMatrix();
@@ -305,44 +307,63 @@ void Scene::drawShadow()
   
   //Set up texture coordinate generation.
   glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+  assertGL;
   glTexGenfv(GL_S, GL_EYE_PLANE, textureMatrix.getRow(0));
+  assertGL;
   glEnable(GL_TEXTURE_GEN_S);
+  assertGL;
   
   glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+  assertGL;
   glTexGenfv(GL_T, GL_EYE_PLANE, textureMatrix.getRow(1));
+  assertGL;
   glEnable(GL_TEXTURE_GEN_T);
+  assertGL;
   
   glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+  assertGL;
   glTexGenfv(GL_R, GL_EYE_PLANE, textureMatrix.getRow(2));
+  assertGL;
   glEnable(GL_TEXTURE_GEN_R);
   
+  assertGL;
   glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+  assertGL;
   glTexGenfv(GL_Q, GL_EYE_PLANE, textureMatrix.getRow(3));
+  assertGL;
   glEnable(GL_TEXTURE_GEN_Q);
+  assertGL;
   
   //Bind & enable shadow map texture
   glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
   glEnable(GL_TEXTURE_2D);
   
   //Enable shadow comparison
+  assertGL;
 
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE);
+  assertGL;
   
   //Shadow comparison should be true (ie not in shadow) if r<=texture
   //        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);//GREATER);//GL_GEQUAL);
+  assertGL;
   
   //Shadow comparison should generate an INTENSITY result
   glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
+  assertGL;
   glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_LUMINANCE);//INTENSITY);
+  assertGL;
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB, 1.0f-0.3f);//shadowAlpha);
+  assertGL;
 
   //Set alpha test to discard false comparisons
   //  glAlphaFunc(GL_GREATER,0.99f);//LEQUAL, 0.999f);
 
   
   glColor4f(0,0,0,0.3);
+  assertGL;
 
   glActiveTexture(baseTexUnit);
 
@@ -354,11 +375,14 @@ void Scene::drawShadow()
       (*i)->draw();
       mTriangles+=(*i)->getTriangles();
     }
+  assertGL;
 
   glDisable(GL_POLYGON_OFFSET_FILL);
+  assertGL;
 
   glActiveTexture(shadowTexUnit);
   glBindTexture(GL_TEXTURE_2D,0);
+  assertGL;
 
   glDisable(GL_ALPHA_TEST);
   glDisable(GL_TEXTURE_GEN_S);
@@ -368,6 +392,7 @@ void Scene::drawShadow()
   
   glActiveTexture(baseTexUnit);
 
+  assertGL;
 
 }
 

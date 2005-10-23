@@ -1,9 +1,10 @@
 #!/usr/bin/env
 
-def makeFirMesh
+def getFirMeshData
 	if $firdata
-		return Mesh.new($firdata,AGVector4.new(0,0,0,0),0)
+		return $firdata
 	end
+	
 	puts "MAKEFIRMESH"
 	opt=MeshOptimizer.new
 	mv0=MeshVertex.new
@@ -20,7 +21,7 @@ def makeFirMesh
 	# add trunk
 	radl=0.2
 	radu=0.01
-	height=2
+	height=4
 	segments=8
 	for ai in 0..(segments-1)
 		a0=ai*Math::PI*2/segments
@@ -44,13 +45,15 @@ def makeFirMesh
 		
 		n0=p0.dim3.normalized
 		n1=p1.dim3.normalized
-		n2=p0.dim3.normalized
-		n3=p1.dim3.normalized
+		n2=AGVector3.new(xl,yl).normalized
+		n3=AGVector3.new(xu,yu).normalized
 		
-		t0=AGVector2.new(0.5,0)
-		t1=AGVector2.new(1,0)
-		t3=AGVector2.new(1,0.5)
-		t2=AGVector2.new(0.5,0.5)
+		tn=AGVector2.new(0.5,0.5)
+		
+		t0=AGVector2.new(0,0)+tn
+		t1=AGVector2.new(0.5,0)+tn
+		t3=AGVector2.new(0.5,0.5)+tn
+		t2=AGVector2.new(0,0.5)+tn
 		
 		mv0.v=p0
 		mv1.v=p1
@@ -77,9 +80,13 @@ def makeFirMesh
 	end
 	
 	
+	
+	
 	$firdata=MeshData.new(opt.getArray,"data/textures/models/fir_complete.png")
 	
-	puts "TRIS:"
-	puts $firdata.getTriangles
-	return Mesh.new($firdata,AGVector4.new(0,0,0,0),0)
+	return $firdata
+end
+
+def makeFirMesh
+	return Mesh.new(getFirMeshData,AGVector4.new(0,0,0,0),0)
 end
