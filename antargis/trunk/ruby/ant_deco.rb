@@ -65,3 +65,15 @@ class AntNewDeco<AntMyEntity
 	end
 end
 
+class AntTwig<AntMyEntity
+	def initialize()
+		super(AGVector2.new(0,0))
+		@typeID=(rand()*2).to_i
+		setType("twig")
+		setMesh(Mesh.new(getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),rand*360))
+	end
+	def xmlName
+		return "antTwig"
+	end
+end
+
