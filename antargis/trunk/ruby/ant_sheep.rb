@@ -27,7 +27,8 @@ class AntNewSheep<AntMyEntity
 		setType("sheep")
 		setSpeed 1
 		@lastBirth=0
-		setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))
+		#setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))
+		setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3),AGVector4.new(0,0,0,0),90))
 	end
 	def saveXML(node)
 		super(node)
