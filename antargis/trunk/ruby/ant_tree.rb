@@ -23,6 +23,7 @@
 
 require 'fir_mesh.rb'
 require 'ant_appletree.rb'
+require 'ant_grass.rb'
 
 class AntNewTree<AntMyEntity
 	def initialize()
@@ -83,6 +84,7 @@ class AntNewTree<AntMyEntity
 		#setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
 		#setMesh(GLTree.new(AGVector4.new(0,0,0,0),3))
 		setMesh(makeAppleTreeMesh(@angle))
+		#setMesh(makeGrassMesh(rand*0.25+0.25))
 		#return
 		for i in 1..([@maxApples,resource.get("food")*3].min)
 			p=@applePos[i-1]

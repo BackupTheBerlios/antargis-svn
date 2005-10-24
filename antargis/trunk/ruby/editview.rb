@@ -48,12 +48,12 @@ class AntRubyEditView<GLApp
 		
 		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
 		
-		decos=["flower","gravel","grassLight","grassGreen","twig","hole","rock","coach","floor","path","block"]
+		decos=["flower","gravel","grassLight","twig","hole","rock","coach","floor","path","block"]
 		decos.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir"]
+		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
@@ -155,6 +155,8 @@ class AntRubyEditView<GLApp
 	def sigAddEnt(name,callerName,event,caller)
 		@modifier="addEntity"
 		case callerName
+			when "grassGreen"
+				@type=AntGrass
 			when "sheep"
 				@type=AntNewSheep
 			when "tower"
