@@ -43376,6 +43376,29 @@ _wrap_MeshData_drawDepth(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_MeshData_save(int argc, VALUE *argv, VALUE self) {
+    MeshData *arg1 = (MeshData *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            temp2 = std::string(StringValuePtr(argv[0]));
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->save((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_MeshData_getTriangles(int argc, VALUE *argv, VALUE self) {
     MeshData *arg1 = (MeshData *) 0 ;
     size_t result;
@@ -49445,6 +49468,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMeshData.klass, "draw", VALUEFUNC(_wrap_MeshData_draw), -1);
     rb_define_method(cMeshData.klass, "drawShadow", VALUEFUNC(_wrap_MeshData_drawShadow), -1);
     rb_define_method(cMeshData.klass, "drawDepth", VALUEFUNC(_wrap_MeshData_drawDepth), -1);
+    rb_define_method(cMeshData.klass, "save", VALUEFUNC(_wrap_MeshData_save), -1);
     rb_define_method(cMeshData.klass, "getTriangles", VALUEFUNC(_wrap_MeshData_getTriangles), -1);
     rb_define_method(cMeshData.klass, "lineHit", VALUEFUNC(_wrap_MeshData_lineHit), -1);
     cMeshData.mark = 0;

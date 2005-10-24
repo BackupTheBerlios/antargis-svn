@@ -58,6 +58,8 @@ class MeshData:public SceneNode
   void drawShadow();
   void drawDepth();
 
+  void save(const std::string &pFilename);
+
   virtual size_t getTriangles() const;
 
   virtual AGVector4 lineHit(const AGLine3 &pLine) const

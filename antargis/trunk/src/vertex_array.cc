@@ -178,3 +178,25 @@ void VertexArray::setBuffers(bool pBuffers)
 {
   mBuffers=false;
 }
+
+
+size_t VertexArray::getIndex(size_t i)
+{
+  return mIndices[i];
+}
+AGVector4 VertexArray::getVertex(size_t i)
+{
+  return mVertices[i];
+}
+AGVector4 VertexArray::getColor(size_t i)
+{
+  return mColors[i];
+}
+AGVector3 VertexArray::getNormal(size_t i)
+{
+  return mNormals[i];
+}
+  AGVector2 VertexArray::getTexCoord(size_t i)
+{
+  return mTexCoords[i];
+}

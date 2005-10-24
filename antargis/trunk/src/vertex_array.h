@@ -41,6 +41,13 @@ class VertexArray
   {
     return mIndices.size()/3;
   }
+  
+  size_t getIndex(size_t i);
+  AGVector4 getVertex(size_t i);
+  AGVector4 getColor(size_t i);
+  AGVector3 getNormal(size_t i);
+  AGVector2 getTexCoord(size_t i);
+
   AGVector4 lineHit(const AGLine3 &pLine) const;
 
 };

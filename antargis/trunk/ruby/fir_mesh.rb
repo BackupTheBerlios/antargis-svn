@@ -111,9 +111,9 @@ def getFirMeshData
 		
 		tn=AGVector2.new(0,0.5)
 		
-		mv0.t=AGVector2.new(0.5,1)*0.5+tn
+		mv0.t=AGVector2.new(0.5,0)*0.5+tn
 		mv1.t=AGVector2.new(0,1)*0.5+tn
-		mv2.t=AGVector2.new(1,0)*0.5+tn
+		mv2.t=AGVector2.new(1,1)*0.5+tn
 		
 		mv0.n=n
 		mv1.n=n

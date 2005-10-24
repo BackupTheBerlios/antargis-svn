@@ -79,6 +79,9 @@ class Twig
 		@cavar=0.3
 		@simple=false
 	end
+	def setR1(r1)
+		@r1=r1
+	end
 	def make(opt,segs)
 		if @simple
 			makeTrunk(opt,@p0,@p1,@r0,@r1,segs)
@@ -86,7 +89,7 @@ class Twig
 			d=(@p1-@p0).dim3
 			x=AGVector3.new(@p0.z,@p0.x,@p0.y)
 			o=(d%x).normalized
-			px=(@p0+@p1)*0.5+AGVector4.new(o,0)*d.length*0.1
+			px=(@p0+@p1)*0.5+AGVector4.new(o,0)*d.length*0.15
 			
 			r=(@r0+@r1)*0.5
 			makeTrunk(opt,@p0,px,@r0,r,segs)
@@ -149,7 +152,7 @@ class Twig
 		
 	end
 	
-	def getChildren(num)
+	def getChildren(num,root=false)
 		
 		children=[]
 		
@@ -157,7 +160,12 @@ class Twig
 		x=AGVector3.new(d.z,d.x,d.y)
 		o=d%x
 		o2=d%o
+		
+		
 		turn1=AGMatrix4.new(Math::PI/3,o)
+		if root
+			turn1=AGMatrix4.new(Math::PI/5,o)
+		end
 		
 		np1=@p1*0.9+@p0*0.1
 		
@@ -181,9 +189,18 @@ class Twig
 end
 
 def getAppleTreeMeshData
+
+	if not $appletreedata
+		# simply comment this line to generate a new tree in "bla.ant2"
+		# then copy it to whatever file you want.
+		$appletreedata=MeshData.new("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png")
+	end	
+
 	if $appletreedata
 		return $appletreedata
 	end
+	
+	
 	
 	puts "MAKEAPPLEMESH"
 	opt=MeshOptimizer.new
@@ -205,7 +222,7 @@ def getAppleTreeMeshData
 		nt=[]
 		twigs.each{|t|
 			t.make(opt,4)
-			nt+=t.getChildren(5+(rand()*2).to_i)
+			nt+=t.getChildren(5+(rand()*2).to_i+i*3)
 		}
 		old=twigs
 		twigs=nt
@@ -215,17 +232,16 @@ def getAppleTreeMeshData
 		t.makeLeaves(opt)
 	}
 		
-	
-	
-	#twig.make(opt,5)
-	
-	
-	#twig.getChildren(3).each{|child|
-	#	child.make(opt,4)
-	#}
+	# make roots
+	trunk=Twig.new(AGVector4.new(0,0,1.3),AGVector4.new(0,0,0.1),0.18,0.15)
+	trunk.getChildren(5,true).each{|c|
+		c.setR1(0.05)
+		c.make(opt,4)
+	}
 	
 	
 	$appletreedata=MeshData.new(opt.getArray,"data/textures/models/fir_complete.png")
+	$appletreedata.save("bla.ant2")
 	#$appletreedata.setAlpha(true)
 	puts "TRIS:"
 	puts $appletreedata.getTriangles

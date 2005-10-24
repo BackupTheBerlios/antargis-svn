@@ -159,6 +159,35 @@ MeshData::~MeshData()
   TRACE;
 }
 
+void MeshData::save(const std::string &pFilename)
+{
+  FILE *f=fopen(pFilename.c_str(),"wb");
+
+  size_t meshes=1;
+  size_t vertices=3;
+  size_t faces=mArray.getTriangles();
+
+  // meshes
+  fwrite(&meshes,sizeof(Uint16),1,f);
+
+  // faces
+  fwrite(&faces,sizeof(Uint16),1,f);
+  for(size_t i=0;i<faces;i++)
+    {
+      fwrite(&vertices,sizeof(Uint16),1,f);
+      for(size_t k=0;k<vertices;k++)
+	{
+	  size_t j=mArray.getIndex(i*vertices+k);
+	  fwrite(mArray.getVertex(j),sizeof(float),3,f);
+	  fwrite(mArray.getNormal(j),sizeof(float),3,f);
+	  fwrite(mArray.getColor(j),sizeof(float),3,f);
+	  fwrite(mArray.getTexCoord(j),sizeof(float),2,f);
+	}
+    }
+
+  fclose(f);
+}
+
 
 /*void MeshData::setAlpha(bool pAlpha)
 {
