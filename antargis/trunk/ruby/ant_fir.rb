@@ -23,7 +23,10 @@
 
 require 'fir_mesh.rb'
 
-class AntFir<AntMyEntity
+class AntBaseTree<AntMyEntity
+end
+
+class AntFir<AntBaseTree
 	def initialize()
 		super(AGVector2.new(0,0))
 		setType("tree")
@@ -44,3 +47,24 @@ class AntFir<AntMyEntity
 	end
 end
 
+class AntBirch<AntMyEntity
+	def initialize()
+		super(AGVector2.new(0,0))
+		setType("tree")
+	
+		setupMesh
+	end
+	def resourceChanged
+		setupMesh
+	end
+	
+	def xmlName
+		return "antBirch"
+	end
+	
+	private
+
+	def setupMesh
+		setMesh(makeBirchTreeMesh)
+	end
+end

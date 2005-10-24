@@ -188,16 +188,27 @@ class Twig
 	
 end
 
-def getAppleTreeMeshData
-
+def getAppleTreeMeshData(type="apple")
 	if not $appletreedata
+		$appletreedata={}
+	end
+
+
+	case type
+		when "apple"
+			texture="data/textures/models/fir_complete.png"
+		when "birch"
+			texture="data/textures/models/birch_complete.png"
+	end
+	if not $appletreedata[type]
 		# simply comment this line to generate a new tree in "bla.ant2"
 		# then copy it to whatever file you want.
-		$appletreedata=MeshData.new("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png")
+		$appletreedata[type]=MeshData.new("data/models/tree1.ant2",1,texture)
+		#$appletreedata=MeshData.new("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png")
 	end	
 
-	if $appletreedata
-		return $appletreedata
+	if $appletreedata[type]
+		return $appletreedata[type]
 	end
 	
 	
@@ -240,14 +251,19 @@ def getAppleTreeMeshData
 	}
 	
 	
-	$appletreedata=MeshData.new(opt.getArray,"data/textures/models/fir_complete.png")
-	$appletreedata.save("bla.ant2")
+	$appletreedata[type]=MeshData.new(opt.getArray,texture)
+	#$appletreedata=MeshData.new(opt.getArray,"data/textures/models/birch_complete.png")
+	$appletreedata[type].save("bla.ant2")
 	#$appletreedata.setAlpha(true)
 	puts "TRIS:"
-	puts $appletreedata.getTriangles
-	return $appletreedata
+	puts $appletreedata[type].getTriangles
+	return $appletreedata[type]
 end
 
 def makeAppleTreeMesh(angle=0)
 	return Mesh.new(getAppleTreeMeshData,AGVector4.new(0,0,0,0),angle)
+end
+
+def makeBirchTreeMesh(angle=0)
+	return Mesh.new(getAppleTreeMeshData("birch"),AGVector4.new(0,0,0,0),angle)
 end
