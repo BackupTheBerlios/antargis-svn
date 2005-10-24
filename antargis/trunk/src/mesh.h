@@ -44,11 +44,15 @@ class MeshData:public SceneNode
   AGTexture mTexture;
   bool mWithTexture;
   bool mShadow;
+  //  bool mAlpha;
 
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
   MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
   ~MeshData();
+
+  //  void setAlpha(bool pAlpha);
+  //  bool getAlpha() const;
 
   void draw();
   void drawShadow();

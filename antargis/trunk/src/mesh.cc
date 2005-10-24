@@ -88,6 +88,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
       mWithTexture=true;
     }
   mShadow=pShadow;
+  //  mAlpha=false;
   
 }
 
@@ -95,6 +96,8 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
 MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow)
 {
   Uint16 faces,meshes,vertices;
+
+  //  mAlpha=false;
 
   mWithTexture=false;
   if(pTexture!="")
@@ -156,10 +159,29 @@ MeshData::~MeshData()
   TRACE;
 }
 
+
+/*void MeshData::setAlpha(bool pAlpha)
+{
+  mAlpha=pAlpha;
+  if(mAlpha)
+    {
+      mArray.setBuffers(false);
+    }
+}
+bool MeshData::getAlpha() const
+{
+  return mAlpha;
+  }*/
+
 void MeshData::draw()
 {
   if(!mShadow)
     glDepthMask(false);
+
+
+  glEnable(GL_ALPHA_TEST);
+  glAlphaFunc(GL_GREATER,0.9);
+
   glEnable(GL_LIGHTING);
   glBindTexture(GL_TEXTURE_2D,0);
   glEnable(GL_COLOR_MATERIAL);
@@ -172,6 +194,8 @@ void MeshData::draw()
   glBindTexture(GL_TEXTURE_2D,0);
   if(!mShadow)
     glDepthMask(true);
+
+  glDisable(GL_ALPHA_TEST);
 }
 size_t MeshData::getTriangles() const
 {

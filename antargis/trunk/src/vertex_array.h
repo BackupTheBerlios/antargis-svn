@@ -30,6 +30,7 @@ class VertexArray
   void addTriangle(size_t p0,size_t p1,size_t p2);
 
   void setColors(bool color);
+  void setBuffers(bool pBuffers);
   
   void draw();
   void init();

@@ -127,6 +127,7 @@ void TerrainPieceVA::draw()
   glEnable(GL_COLOR_MATERIAL);
   //glColorMaterial(GL_FRONT,GL_DIFFUSE);
   glEnable(GL_BLEND);
+  
   glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
   glColor4f(1,1,1,1);
   glEnable(GL_LIGHTING);

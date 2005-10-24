@@ -6,7 +6,7 @@
 [Gui/View]
 =================================================
 [H] implement GL-picking for fast hovering ?
-[L] 
+[VH] transparent / non-transparent meshes - render order (in mesh-ordering for transparent ones)
 
 [Menu]
 =================================================

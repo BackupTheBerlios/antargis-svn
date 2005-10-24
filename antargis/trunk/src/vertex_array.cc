@@ -173,3 +173,8 @@ void VertexArray::clear()
 
   mChanged=true;
 }
+
+void VertexArray::setBuffers(bool pBuffers)
+{
+  mBuffers=false;
+}

@@ -272,12 +272,16 @@ void Scene::drawScene()
 {
   //2nd pass - Draw from camera's point of view
 
+  //  glAlphaFunc(GL_GREATER,0.9f);
+  //  glEnable(GL_ALPHA_TEST);
   // draw scene with texturing and so
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
       (*i)->draw();
       mTriangles+=(*i)->getTriangles();
     }
+  //  glDisable(GL_ALPHA_TEST);
+  //  glAlphaFunc(GL_ALWAYS,1);
 
   
 }
@@ -366,7 +370,6 @@ void Scene::drawShadow()
   assertGL;
 
   glActiveTexture(baseTexUnit);
-
 
   // draw scene with texturing and so
   //  glTranslatef(0.004,0,0);
