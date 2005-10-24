@@ -32,9 +32,9 @@ class AntNewTree<AntMyEntity
 		@angle=rand*360
 		#setVirtualY(100)
 	
-		@crownMiddle=AGVector3.new(0,-0.1,1.6)
-		@crownRadius=0.65
-		@maxApples=40
+		@crownMiddle=AGVector3.new(0,0,3)
+		@crownRadius=1.3
+		@maxApples=100
 		@applePos=[]
 		for i in 1..@maxApples
 			va=(rand-0.5)*Math::PI
@@ -45,7 +45,7 @@ class AntNewTree<AntMyEntity
 			x=Math::cos(ha)*rest
 			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
 		end
-		resource.set("food",20)
+		resource.set("food",5)
 		setupMesh
 	end
 	def resourceChanged
@@ -74,7 +74,7 @@ class AntNewTree<AntMyEntity
 		# grow apples
 		resource.set("food",[resource.get("food")+1,@maxApples].min)
 		resourceChanged
-		newRestJob(8)
+		newRestJob(20)
 	end
 	
 	private
@@ -83,10 +83,10 @@ class AntNewTree<AntMyEntity
 		#setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
 		#setMesh(GLTree.new(AGVector4.new(0,0,0,0),3))
 		setMesh(makeAppleTreeMesh(@angle))
-		return
-		for i in 1..([@maxApples,resource.get("food")].min)
+		#return
+		for i in 1..([@maxApples,resource.get("food")*3].min)
 			p=@applePos[i-1]
-			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.04),AGVector4.new(0,0,0,0),0),p)
+			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
 		end
 	end
 end
