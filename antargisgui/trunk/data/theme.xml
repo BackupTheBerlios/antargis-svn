@@ -208,4 +208,9 @@
 		</selected>
 		<font name="font" file="Arial.ttf" size="22" color="#000000"/>
 	</listbox>
+	<button>
+		<text>
+			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
+		</text>
+	</button>
 </theme>
