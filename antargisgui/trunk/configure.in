@@ -12,17 +12,36 @@ AC_PROG_CC
 AM_PROG_LIBTOOL
 AC_PROG_INSTALL
 # Checks for libraries.
-AC_CHECK_LIB(SDL,SDL_Init)
-AC_CHECK_LIB(SDL_ttf,TTF_Init)
-AC_CHECK_LIB(SGE,sge_FilledRect)
-AC_CHECK_LIB(GLU,gluPerspective)
-AC_CHECK_LIB(physfs,PHYSFS_init)
-AC_CHECK_LIB(SDL_mixer,Mix_OpenAudio)
+merror=""
+
+AC_CHECK_LIB(SDL,SDL_Init,[],[ merror="$merror\n Error:libsdl is missing. Please install your libsdl- and libsdl-dev-package."])
+AC_CHECK_LIB(SDL_ttf,TTF_Init,[],[ merror="$merror\n Error:libsdl-ttf is missing. Please install you libsdl-ttf- and libsdl-ttf-dev-package."])
+AC_CHECK_LIB(SGE,sge_FilledRect,[],[ merror="$merror\n Error:libsge is missing. Please install you libsge- and libsge-dev-package."])
+AC_CHECK_LIB(GLU,gluPerspective,[],[ merror="$merror\n Error:libglu is missing. Please install you libglu- and libglu-dev-package."])
+AC_CHECK_LIB(physfs,PHYSFS_init,[],[ merror="$merror\n Error:libphysfs is missing. Please install you libphysfs-ttf- and libphysfs-dev-package."])
+AC_CHECK_LIB(SDL_mixer,Mix_OpenAudio,[],[ merror="$merror\n Error:libsdl-mixer is missing. Please install you libsdl-mixer- and libsdl-mixer-dev-package."])
+
+AC_PATH_PROG(SWIG,swig,not-found)
+
+if test $SWIG == "not-found" ; then
+	echo "Please install swig and swig-ruby (if your distribution provides this)"
+	exit 1
+fi
+
+if test "$merror" != "" ; then
+	echo -e "$merror"
+	exit 1
+fi
 
 RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
 RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
 RUBY_LIB_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['rubylibdir']"`]
 
+
+if test "$RUBY_INCLUDE_DIR" == "" ; then
+	echo "Please install ruby and the ruby dev-package."
+	exit 1
+fi
 
 AC_SUBST(RUBY_INCLUDE_DIR)
 AC_SUBST(RUBY_INSTALL_DIR)

@@ -8,6 +8,7 @@ libSDL
 libSDL_image
 libsge
 libSDL_ttf
+libSDL_mixer
 libphysfs
 
 you have 2 possibilities to compile it
