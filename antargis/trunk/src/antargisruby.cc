@@ -948,59 +948,62 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_MeshData swig_types[78]
 #define SWIGTYPE_p_MeshOptimizer swig_types[79]
 #define SWIGTYPE_p_MeshVertex swig_types[80]
-#define SWIGTYPE_p_Node swig_types[81]
-#define SWIGTYPE_p_NodeVector swig_types[82]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[83]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[84]
-#define SWIGTYPE_p_Parser swig_types[85]
-#define SWIGTYPE_p_PickNode swig_types[86]
-#define SWIGTYPE_p_PickResult swig_types[87]
-#define SWIGTYPE_p_Resource swig_types[88]
-#define SWIGTYPE_p_SDLKey swig_types[89]
-#define SWIGTYPE_p_SDLMod swig_types[90]
-#define SWIGTYPE_p_SDL_Event swig_types[91]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[92]
-#define SWIGTYPE_p_SDL_Rect swig_types[93]
-#define SWIGTYPE_p_SDL_Surface swig_types[94]
-#define SWIGTYPE_p_Scene swig_types[95]
-#define SWIGTYPE_p_SceneNode swig_types[96]
-#define SWIGTYPE_p_TerrainMesh swig_types[97]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[98]
-#define SWIGTYPE_p_Uint32 swig_types[99]
-#define SWIGTYPE_p_Uint8 swig_types[100]
-#define SWIGTYPE_p_VertexArray swig_types[101]
-#define SWIGTYPE_p_const_iterator swig_types[102]
-#define SWIGTYPE_p_float swig_types[103]
-#define SWIGTYPE_p_iterator swig_types[104]
-#define SWIGTYPE_p_p_Node swig_types[105]
-#define SWIGTYPE_p_p_SceneNode swig_types[106]
-#define SWIGTYPE_p_p_GLTree swig_types[107]
-#define SWIGTYPE_p_p_Mesh swig_types[108]
-#define SWIGTYPE_p_p_MeshData swig_types[109]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[110]
-#define SWIGTYPE_p_p_TerrainMesh swig_types[111]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[112]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[113]
-#define SWIGTYPE_p_std__listTMesh_p_t swig_types[114]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[115]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[116]
-#define SWIGTYPE_p_std__ostringstream swig_types[117]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[118]
-#define SWIGTYPE_p_std__string swig_types[119]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[120]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[121]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[122]
-#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[123]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[124]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[125]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[126]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[127]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[128]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[129]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[130]
-#define SWIGTYPE_p_unsigned_long swig_types[131]
-static swig_type_info *swig_types[132];
-static swig_module_info swig_module = {swig_types, 132, 0, 0, 0, 0};
+#define SWIGTYPE_p_Meshes swig_types[81]
+#define SWIGTYPE_p_Node swig_types[82]
+#define SWIGTYPE_p_NodeVector swig_types[83]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[84]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[85]
+#define SWIGTYPE_p_Parser swig_types[86]
+#define SWIGTYPE_p_PickNode swig_types[87]
+#define SWIGTYPE_p_PickResult swig_types[88]
+#define SWIGTYPE_p_Resource swig_types[89]
+#define SWIGTYPE_p_SDLKey swig_types[90]
+#define SWIGTYPE_p_SDLMod swig_types[91]
+#define SWIGTYPE_p_SDL_Event swig_types[92]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[93]
+#define SWIGTYPE_p_SDL_Rect swig_types[94]
+#define SWIGTYPE_p_SDL_Surface swig_types[95]
+#define SWIGTYPE_p_Scene swig_types[96]
+#define SWIGTYPE_p_SceneNode swig_types[97]
+#define SWIGTYPE_p_Smoke swig_types[98]
+#define SWIGTYPE_p_TerrainMesh swig_types[99]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[100]
+#define SWIGTYPE_p_Uint32 swig_types[101]
+#define SWIGTYPE_p_Uint8 swig_types[102]
+#define SWIGTYPE_p_VertexArray swig_types[103]
+#define SWIGTYPE_p_const_iterator swig_types[104]
+#define SWIGTYPE_p_float swig_types[105]
+#define SWIGTYPE_p_iterator swig_types[106]
+#define SWIGTYPE_p_p_Node swig_types[107]
+#define SWIGTYPE_p_p_SceneNode swig_types[108]
+#define SWIGTYPE_p_p_Smoke swig_types[109]
+#define SWIGTYPE_p_p_GLTree swig_types[110]
+#define SWIGTYPE_p_p_Mesh swig_types[111]
+#define SWIGTYPE_p_p_MeshData swig_types[112]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[113]
+#define SWIGTYPE_p_p_TerrainMesh swig_types[114]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[115]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[116]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[117]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[118]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[119]
+#define SWIGTYPE_p_std__ostringstream swig_types[120]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[121]
+#define SWIGTYPE_p_std__string swig_types[122]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[123]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[124]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[125]
+#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[126]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[127]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[128]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[129]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[130]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[131]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[132]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[133]
+#define SWIGTYPE_p_unsigned_long swig_types[134]
+static swig_type_info *swig_types[135];
+static swig_module_info swig_module = {swig_types, 135, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -16145,6 +16148,20 @@ void SwigDirector_SceneNode::mapChanged() {
 }
 
 
+void SwigDirector_SceneNode::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
 SwigDirector_SceneNode::~SwigDirector_SceneNode() {
 }
 
@@ -16195,6 +16212,19 @@ void SwigDirector_SceneNode::draw() {
 }
 
 
+bool SwigDirector_SceneNode::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 SwigDirector_MeshData::SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture, bool pShadow): MeshData(filename, zoom, pTexture, pShadow), Swig::Director(self) {
     
 }
@@ -16228,6 +16258,20 @@ void SwigDirector_MeshData::mapChanged() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("mapChanged"), 0, NULL);
+}
+
+
+void SwigDirector_MeshData::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
 }
 
 
@@ -16294,6 +16338,19 @@ void SwigDirector_MeshData::drawShadow() {
 }
 
 
+bool SwigDirector_MeshData::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 SwigDirector_Mesh::SwigDirector_Mesh(VALUE self): Mesh(), Swig::Director(self) {
     
 }
@@ -16340,6 +16397,20 @@ size_t SwigDirector_Mesh::getTriangles() const {
     result = rb_funcall(swig_get_self(), rb_intern("getTriangles"), 0, NULL);
     c_result = (unsigned long) NUM2INT(result);
     return (size_t) c_result;
+}
+
+
+void SwigDirector_Mesh::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Mesh::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
 }
 
 
@@ -16390,6 +16461,19 @@ void SwigDirector_Mesh::drawShadow() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("drawShadow"), 0, NULL);
+}
+
+
+bool SwigDirector_Mesh::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
 }
 
 
@@ -17043,6 +17127,20 @@ void SwigDirector_TerrainPieceVA::advance(float time) {
 }
 
 
+void SwigDirector_TerrainPieceVA::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
 size_t SwigDirector_TerrainPieceVA::getTriangles() const {
     size_t c_result ;
     VALUE result;
@@ -17117,10 +17215,37 @@ void SwigDirector_TerrainPieceVA::drawShadow() {
 }
 
 
+bool SwigDirector_TerrainPieceVA::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 SwigDirector_TerrainMesh::SwigDirector_TerrainMesh(VALUE self, HeightMap &map): TerrainMesh(map), Swig::Director(self) {
     
 }
 
+
+
+void SwigDirector_TerrainMesh::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
 
 
 void SwigDirector_TerrainMesh::advance(float t) {
@@ -17210,6 +17335,19 @@ void SwigDirector_TerrainMesh::drawShadow() {
 }
 
 
+bool SwigDirector_TerrainMesh::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 SwigDirector_GLTree::SwigDirector_GLTree(VALUE self, AGVector4 p, float h): GLTree(p, h), Swig::Director(self) {
     
 }
@@ -17250,6 +17388,20 @@ size_t SwigDirector_GLTree::getTriangles() const {
     result = rb_funcall(swig_get_self(), rb_intern("getTriangles"), 0, NULL);
     c_result = (unsigned long) NUM2INT(result);
     return (size_t) c_result;
+}
+
+
+void SwigDirector_GLTree::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Mesh::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
 }
 
 
@@ -17300,6 +17452,139 @@ void SwigDirector_GLTree::drawShadow() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("drawShadow"), 0, NULL);
+}
+
+
+bool SwigDirector_GLTree::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+SwigDirector_Smoke::SwigDirector_Smoke(VALUE self, AGVector3 const &pStart, float f): Smoke(pStart, f), Swig::Director(self) {
+    
+}
+
+
+
+size_t SwigDirector_Smoke::getTriangles() const {
+    size_t c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::getTriangles();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getTriangles"), 0, NULL);
+    c_result = (unsigned long) NUM2INT(result);
+    return (size_t) c_result;
+}
+
+
+void SwigDirector_Smoke::mapChanged() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::mapChanged();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("mapChanged"), 0, NULL);
+}
+
+
+void SwigDirector_Smoke::advance(float time) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Smoke::advance(time);
+        return;
+    }
+    obj0 = rb_float_new(time);
+    result = rb_funcall(swig_get_self(), rb_intern("advance"), 1,obj0);
+}
+
+
+void SwigDirector_Smoke::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Smoke::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
+SwigDirector_Smoke::~SwigDirector_Smoke() {
+}
+
+void SwigDirector_Smoke::drawDepth() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::drawDepth();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("drawDepth"), 0, NULL);
+}
+
+
+void SwigDirector_Smoke::sort(AGVector4 const &pCamera) {
+    AGVector4 * nc_tmp_pCamera = const_cast<AGVector4 *>(&pCamera) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::sort(pCamera);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pCamera, SWIGTYPE_p_AGVector4, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("sort"), 1,obj0);
+}
+
+
+void SwigDirector_Smoke::drawShadow() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::drawShadow();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("drawShadow"), 0, NULL);
+}
+
+
+void SwigDirector_Smoke::draw() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Smoke::draw();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("draw"), 0, NULL);
+}
+
+
+bool SwigDirector_Smoke::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return Smoke::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
 }
 
 
@@ -42725,6 +43010,43 @@ _wrap_SceneNode___eq__(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_SceneNode_setPos(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->setPos((AGVector3 const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_SceneNode_transparent(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->transparent();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_disown_SceneNode(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
     
@@ -43680,11 +44002,14 @@ static VALUE
 _wrap_Mesh_setPos(int argc, VALUE *argv, VALUE self) {
     Mesh *arg1 = (Mesh *) 0 ;
     AGVector3 *arg2 = 0 ;
+    Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Mesh, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->setPos((AGVector3 const &)*arg2);
     
     return Qnil;
@@ -44149,6 +44474,28 @@ _wrap_Scene_mapChanged(int argc, VALUE *argv, VALUE self) {
     (arg1)->mapChanged();
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_Scene_getCameraDirTo(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = ((Scene const *)arg1)->getCameraDirTo((AGVector3 const &)*arg2);
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
 }
 
 
@@ -45759,7 +46106,7 @@ _wrap_AntEntity_setMesh(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AntEntity_getMesh(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
-    SwigValueWrapper<std::list<Mesh * > > result;
+    SwigValueWrapper<std::list<SceneNode * > > result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -45768,9 +46115,9 @@ _wrap_AntEntity_getMesh(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->getMesh();
     
     {
-        std::list<Mesh * > * resultptr;
-        resultptr = new std::list<Mesh * >((std::list<Mesh * > &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__listTMesh_p_t, 1);
+        AntEntity::Meshes * resultptr;
+        resultptr = new AntEntity::Meshes((AntEntity::Meshes &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__listTSceneNode_p_t, 1);
     }
     return vresult;
 }
@@ -45779,13 +46126,13 @@ _wrap_AntEntity_getMesh(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AntEntity_addMesh(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
-    Mesh *arg2 = (Mesh *) 0 ;
+    SceneNode *arg2 = (SceneNode *) 0 ;
     AGVector3 *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Mesh, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_SceneNode, 1);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGVector3, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     (arg1)->addMesh(arg2,(AGVector3 const &)*arg3);
     
@@ -46793,6 +47140,146 @@ _wrap_disown_GLTree(int argc, VALUE *argv, VALUE self) {
 }
 
 
+swig_class cSmoke;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Smoke_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Smoke_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Smoke);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Smoke(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    AGVector3 *arg2 = 0 ;
+    float arg3 ;
+    Smoke *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = (float) NUM2DBL(argv[1]);
+    {
+        char *classname = "Libantargis::Smoke";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (Smoke *)new SwigDirector_Smoke(arg1,(AGVector3 const &)*arg2,arg3);
+            
+        } else {
+            result = (Smoke *)new Smoke((AGVector3 const &)*arg2,arg3);
+            
+        }
+        DATA_PTR(self) = result;
+        result->mRUBY = self;
+        result->mRubyObject=true;
+    }
+    return self;
+}
+
+
+static VALUE
+_wrap_Smoke_advance(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    float arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->advance(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Smoke_transparent(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->transparent();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Smoke_setPos(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->setPos((AGVector3 const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Smoke_draw(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->draw();
+    
+    return Qnil;
+}
+
+
+static void
+free_Smoke(Smoke *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_disown_Smoke(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -47048,6 +47535,9 @@ static void *_p_AGRadioTo_p_AGCheckBox(void *x) {
 static void *_p_p_GLTreeTo_p_p_SceneNode(void *x) {
     return (void *)((SceneNode **) (Mesh *) ((GLTree **) x));
 }
+static void *_p_p_SmokeTo_p_p_SceneNode(void *x) {
+    return (void *)((SceneNode **)  ((Smoke **) x));
+}
 static void *_p_p_MeshDataTo_p_p_SceneNode(void *x) {
     return (void *)((SceneNode **)  ((MeshData **) x));
 }
@@ -47062,6 +47552,9 @@ static void *_p_p_TerrainMeshTo_p_p_SceneNode(void *x) {
 }
 static void *_p_GLTreeTo_p_SceneNode(void *x) {
     return (void *)((SceneNode *) (Mesh *) ((GLTree *) x));
+}
+static void *_p_SmokeTo_p_SceneNode(void *x) {
+    return (void *)((SceneNode *)  ((Smoke *) x));
 }
 static void *_p_MeshDataTo_p_SceneNode(void *x) {
     return (void *)((SceneNode *)  ((MeshData *) x));
@@ -47171,6 +47664,7 @@ static swig_type_info _swigt__p_Mesh = {"_p_Mesh", "Mesh *", 0, 0, 0};
 static swig_type_info _swigt__p_MeshData = {"_p_MeshData", "MeshData *", 0, 0, 0};
 static swig_type_info _swigt__p_MeshOptimizer = {"_p_MeshOptimizer", "MeshOptimizer *", 0, 0, 0};
 static swig_type_info _swigt__p_MeshVertex = {"_p_MeshVertex", "MeshVertex *", 0, 0, 0};
+static swig_type_info _swigt__p_Meshes = {"_p_Meshes", "Meshes *", 0, 0, 0};
 static swig_type_info _swigt__p_Node = {"_p_Node", "Node *|xmlpp::Node *", 0, 0, 0};
 static swig_type_info _swigt__p_NodeVector = {"_p_NodeVector", "NodeVector *", 0, 0, 0};
 static swig_type_info _swigt__p_Node__NodeVector__const_iterator = {"_p_Node__NodeVector__const_iterator", "Node::NodeVector::const_iterator *|Node::const_iterator *", 0, 0, 0};
@@ -47187,6 +47681,7 @@ static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, 0
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, 0};
 static swig_type_info _swigt__p_Scene = {"_p_Scene", "Scene *", 0, 0, 0};
 static swig_type_info _swigt__p_SceneNode = {"_p_SceneNode", "SceneNode *", 0, 0, 0};
+static swig_type_info _swigt__p_Smoke = {"_p_Smoke", "Smoke *", 0, 0, 0};
 static swig_type_info _swigt__p_TerrainMesh = {"_p_TerrainMesh", "TerrainMesh *", 0, 0, 0};
 static swig_type_info _swigt__p_TerrainPieceVA = {"_p_TerrainPieceVA", "TerrainPieceVA *", 0, 0, 0};
 static swig_type_info _swigt__p_Uint32 = {"_p_Uint32", "Uint32 *", 0, 0, 0};
@@ -47197,6 +47692,7 @@ static swig_type_info _swigt__p_float = {"_p_float", "float *", 0, 0, 0};
 static swig_type_info _swigt__p_iterator = {"_p_iterator", "iterator *", 0, 0, 0};
 static swig_type_info _swigt__p_p_Node = {"_p_p_Node", "Node **", 0, 0, 0};
 static swig_type_info _swigt__p_p_SceneNode = {"_p_p_SceneNode", "SceneNode **|SceneNodePtr *", 0, 0, 0};
+static swig_type_info _swigt__p_p_Smoke = {"_p_p_Smoke", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_GLTree = {"_p_p_GLTree", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_Mesh = {"_p_p_Mesh", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_MeshData = {"_p_p_MeshData", 0, 0, 0, 0};
@@ -47204,7 +47700,7 @@ static swig_type_info _swigt__p_p_TerrainPieceVA = {"_p_p_TerrainPieceVA", 0, 0,
 static swig_type_info _swigt__p_p_TerrainMesh = {"_p_p_TerrainMesh", 0, 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAGRect2_t = {"_p_std__listTAGRect2_t", "std::list<AGRect2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAntEntity_p_t = {"_p_std__listTAntEntity_p_t", "std::list<AntEntity * > *|AntMap::EntityList *", 0, 0, 0};
-static swig_type_info _swigt__p_std__listTMesh_p_t = {"_p_std__listTMesh_p_t", "std::list<Mesh * > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__listTSceneNode_p_t = {"_p_std__listTSceneNode_p_t", "std::list<SceneNode * > *|AntEntity::Meshes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__mapTstd__string_float_t = {"_p_std__mapTstd__string_float_t", "std::map<std::string,float > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__mapTstd__string_std__string_t = {"_p_std__mapTstd__string_std__string_t", "std::map<std::string,std::string > *|Node::Attributes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__ostringstream = {"_p_std__ostringstream", "std::ostringstream *", 0, 0, 0};
@@ -47305,6 +47801,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_MeshData,
   &_swigt__p_MeshOptimizer,
   &_swigt__p_MeshVertex,
+  &_swigt__p_Meshes,
   &_swigt__p_Node,
   &_swigt__p_NodeVector,
   &_swigt__p_Node__NodeVector__const_iterator,
@@ -47321,6 +47818,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SDL_Surface,
   &_swigt__p_Scene,
   &_swigt__p_SceneNode,
+  &_swigt__p_Smoke,
   &_swigt__p_TerrainMesh,
   &_swigt__p_TerrainPieceVA,
   &_swigt__p_Uint32,
@@ -47331,6 +47829,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iterator,
   &_swigt__p_p_Node,
   &_swigt__p_p_SceneNode,
+  &_swigt__p_p_Smoke,
   &_swigt__p_p_GLTree,
   &_swigt__p_p_Mesh,
   &_swigt__p_p_MeshData,
@@ -47338,7 +47837,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_p_TerrainMesh,
   &_swigt__p_std__listTAGRect2_t,
   &_swigt__p_std__listTAntEntity_p_t,
-  &_swigt__p_std__listTMesh_p_t,
+  &_swigt__p_std__listTSceneNode_p_t,
   &_swigt__p_std__mapTstd__string_float_t,
   &_swigt__p_std__mapTstd__string_std__string_t,
   &_swigt__p_std__ostringstream,
@@ -47439,6 +47938,7 @@ static swig_cast_info _swigc__p_Mesh[] = {  {&_swigt__p_Mesh, 0, 0, 0},  {&_swig
 static swig_cast_info _swigc__p_MeshData[] = {  {&_swigt__p_MeshData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MeshOptimizer[] = {  {&_swigt__p_MeshOptimizer, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MeshVertex[] = {  {&_swigt__p_MeshVertex, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Meshes[] = {  {&_swigt__p_Meshes, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node[] = {  {&_swigt__p_Node, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NodeVector[] = {  {&_swigt__p_NodeVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node__NodeVector__const_iterator[] = {  {&_swigt__p_Node__NodeVector__const_iterator, 0, 0, 0},{0, 0, 0, 0}};
@@ -47454,7 +47954,8 @@ static swig_cast_info _swigc__p_SDL_PixelFormat[] = {  {&_swigt__p_SDL_PixelForm
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},  {&_swigt__p_AGRect, _p_AGRectTo_p_SDL_Rect, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Scene[] = {  {&_swigt__p_Scene, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_SceneNode[] = {  {&_swigt__p_SceneNode, 0, 0, 0},  {&_swigt__p_GLTree, _p_GLTreeTo_p_SceneNode, 0, 0},  {&_swigt__p_Mesh, _p_MeshTo_p_SceneNode, 0, 0},  {&_swigt__p_MeshData, _p_MeshDataTo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainPieceVA, _p_TerrainPieceVATo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainMesh, _p_TerrainMeshTo_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_SceneNode[] = {  {&_swigt__p_SceneNode, 0, 0, 0},  {&_swigt__p_Smoke, _p_SmokeTo_p_SceneNode, 0, 0},  {&_swigt__p_GLTree, _p_GLTreeTo_p_SceneNode, 0, 0},  {&_swigt__p_Mesh, _p_MeshTo_p_SceneNode, 0, 0},  {&_swigt__p_MeshData, _p_MeshDataTo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainPieceVA, _p_TerrainPieceVATo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainMesh, _p_TerrainMeshTo_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Smoke[] = {  {&_swigt__p_Smoke, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TerrainMesh[] = {  {&_swigt__p_TerrainMesh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TerrainPieceVA[] = {  {&_swigt__p_TerrainPieceVA, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Uint32[] = {  {&_swigt__p_Uint32, 0, 0, 0},{0, 0, 0, 0}};
@@ -47464,15 +47965,16 @@ static swig_cast_info _swigc__p_const_iterator[] = {  {&_swigt__p_const_iterator
 static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iterator[] = {  {&_swigt__p_iterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_Node[] = {  {&_swigt__p_p_Node, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_Smoke[] = {{&_swigt__p_p_Smoke, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_GLTree[] = {{&_swigt__p_p_GLTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_Mesh[] = {{&_swigt__p_p_Mesh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_MeshData[] = {{&_swigt__p_p_MeshData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_TerrainPieceVA[] = {{&_swigt__p_p_TerrainPieceVA, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_TerrainMesh[] = {{&_swigt__p_p_TerrainMesh, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_p_SceneNode[] = {  {&_swigt__p_p_SceneNode, 0, 0, 0},  {&_swigt__p_p_GLTree, _p_p_GLTreeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_Mesh, _p_p_MeshTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_MeshData, _p_p_MeshDataTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainPieceVA, _p_p_TerrainPieceVATo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainMesh, _p_p_TerrainMeshTo_p_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_SceneNode[] = {  {&_swigt__p_p_SceneNode, 0, 0, 0},  {&_swigt__p_p_Smoke, _p_p_SmokeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_GLTree, _p_p_GLTreeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_Mesh, _p_p_MeshTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_MeshData, _p_p_MeshDataTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainPieceVA, _p_p_TerrainPieceVATo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainMesh, _p_p_TerrainMeshTo_p_p_SceneNode, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAGRect2_t[] = {  {&_swigt__p_std__listTAGRect2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAntEntity_p_t[] = {  {&_swigt__p_std__listTAntEntity_p_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__listTMesh_p_t[] = {  {&_swigt__p_std__listTMesh_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__listTSceneNode_p_t[] = {  {&_swigt__p_std__listTSceneNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__mapTstd__string_float_t[] = {  {&_swigt__p_std__mapTstd__string_float_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__mapTstd__string_std__string_t[] = {  {&_swigt__p_std__mapTstd__string_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__ostringstream[] = {  {&_swigt__p_std__ostringstream, 0, 0, 0},{0, 0, 0, 0}};
@@ -47573,6 +48075,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_MeshData,
   _swigc__p_MeshOptimizer,
   _swigc__p_MeshVertex,
+  _swigc__p_Meshes,
   _swigc__p_Node,
   _swigc__p_NodeVector,
   _swigc__p_Node__NodeVector__const_iterator,
@@ -47589,6 +48092,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SDL_Surface,
   _swigc__p_Scene,
   _swigc__p_SceneNode,
+  _swigc__p_Smoke,
   _swigc__p_TerrainMesh,
   _swigc__p_TerrainPieceVA,
   _swigc__p_Uint32,
@@ -47599,6 +48103,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iterator,
   _swigc__p_p_Node,
   _swigc__p_p_SceneNode,
+  _swigc__p_p_Smoke,
   _swigc__p_p_GLTree,
   _swigc__p_p_Mesh,
   _swigc__p_p_MeshData,
@@ -47606,7 +48111,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_p_TerrainMesh,
   _swigc__p_std__listTAGRect2_t,
   _swigc__p_std__listTAntEntity_p_t,
-  _swigc__p_std__listTMesh_p_t,
+  _swigc__p_std__listTSceneNode_p_t,
   _swigc__p_std__mapTstd__string_float_t,
   _swigc__p_std__mapTstd__string_std__string_t,
   _swigc__p_std__ostringstream,
@@ -49432,6 +49937,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cSceneNode.klass, "sort", VALUEFUNC(_wrap_SceneNode_sort), -1);
     rb_define_method(cSceneNode.klass, "mapChanged", VALUEFUNC(_wrap_SceneNode_mapChanged), -1);
     rb_define_method(cSceneNode.klass, "==", VALUEFUNC(_wrap_SceneNode___eq__), -1);
+    rb_define_method(cSceneNode.klass, "setPos", VALUEFUNC(_wrap_SceneNode_setPos), -1);
+    rb_define_method(cSceneNode.klass, "transparent", VALUEFUNC(_wrap_SceneNode_transparent), -1);
     cSceneNode.mark = 0;
     cSceneNode.destroy = (void (*)(void *)) free_SceneNode;
     
@@ -49520,6 +50027,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "lineHit", VALUEFUNC(_wrap_Scene_lineHit), -1);
     rb_define_method(cScene.klass, "getLine", VALUEFUNC(_wrap_Scene_getLine), -1);
     rb_define_method(cScene.klass, "mapChanged", VALUEFUNC(_wrap_Scene_mapChanged), -1);
+    rb_define_method(cScene.klass, "getCameraDirTo", VALUEFUNC(_wrap_Scene_getCameraDirTo), -1);
     rb_define_method(cScene.klass, "mRubyObject=", VALUEFUNC(_wrap_Scene_mRubyObject_set), -1);
     rb_define_method(cScene.klass, "mRubyObject", VALUEFUNC(_wrap_Scene_mRubyObject_get), -1);
     rb_define_method(cScene.klass, "mRUBY=", VALUEFUNC(_wrap_Scene_mRUBY_set), -1);
@@ -49668,5 +50176,17 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cGLTree.klass, "drawVertex", VALUEFUNC(_wrap_GLTree_drawVertex), -1);
     cGLTree.mark = 0;
     cGLTree.destroy = (void (*)(void *)) free_GLTree;
+    rb_define_module_function(mLibantargis, "disown_Smoke", VALUEFUNC(_wrap_disown_Smoke), -1);
+    
+    cSmoke.klass = rb_define_class_under(mLibantargis, "Smoke", ((swig_class *) SWIGTYPE_p_SceneNode->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_Smoke, (void *) &cSmoke);
+    rb_define_alloc_func(cSmoke.klass, _wrap_Smoke_allocate);
+    rb_define_method(cSmoke.klass, "initialize", VALUEFUNC(_wrap_new_Smoke), -1);
+    rb_define_method(cSmoke.klass, "advance", VALUEFUNC(_wrap_Smoke_advance), -1);
+    rb_define_method(cSmoke.klass, "transparent", VALUEFUNC(_wrap_Smoke_transparent), -1);
+    rb_define_method(cSmoke.klass, "setPos", VALUEFUNC(_wrap_Smoke_setPos), -1);
+    rb_define_method(cSmoke.klass, "draw", VALUEFUNC(_wrap_Smoke_draw), -1);
+    cSmoke.mark = 0;
+    cSmoke.destroy = (void (*)(void *)) free_Smoke;
 }
 

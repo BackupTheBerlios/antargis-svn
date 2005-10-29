@@ -30,6 +30,7 @@
 #include <vector>
 
 class Mesh;
+class SceneNode;
 class Job;
 
 // FIXME: maybe remove Resource from c++??
@@ -50,6 +51,9 @@ class Resource
 
 class AntEntity
   {
+  public:
+    typedef std::list<SceneNode*> Meshes;
+  private:
     int mID;
     std::string mName;
 
@@ -75,8 +79,8 @@ class AntEntity
 
     std::string mType;
 
-    std::list<Mesh *> mMesh;
-    std::map<Mesh*,AGVector3> mMeshPos;
+    Meshes mMesh;
+    std::map<SceneNode*,AGVector3> mMeshPos;
 
     int mVirtualY;
 
@@ -162,8 +166,8 @@ class AntEntity
     // anything below shouldn't be used by ruby-functions
 
     void setMesh(Mesh *pMesh);
-    std::list<Mesh*> getMesh();
-    void addMesh(Mesh *pMesh,const AGVector3 &v);
+    Meshes getMesh();
+    void addMesh(SceneNode *pMesh,const AGVector3 &v);
 
     // used only by *Jobs
     void setDirection(float pAngle);

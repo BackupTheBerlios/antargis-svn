@@ -52,6 +52,8 @@ class Scene
   // Antargis-Map-extension
   void mapChanged();
 
+  AGVector3 getCameraDirTo(const AGVector3 &p) const;
+
 
  private:
   void init();

@@ -79,7 +79,7 @@ AntEntity::~AntEntity()
   if(getMap())
     if(getMap()->getScene())
       {
-	for(std::list<Mesh*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
+	for(std::list<SceneNode*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
 	  getMap()->getScene()->removeNode(*i);
       }
 }
@@ -135,7 +135,7 @@ void AntEntity::updatePos(const AGVector3 &p)
       mMesh.front()->setPos(p);
       return;
     }
-  for(std::list<Mesh*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
+  for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
     (*i)->setPos(p+mMeshPos[*i]);
   
 }
@@ -273,7 +273,7 @@ std::string AntEntity::getType() const
 void AntEntity::setMesh(Mesh *m)
 {
   // clear meshes from scene
-  for(std::list<Mesh*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
+  for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
     getMap()->getScene()->removeNode(*i);
 
   mMesh.clear();
@@ -286,7 +286,7 @@ void AntEntity::setMesh(Mesh *m)
     }
 }
 
-void AntEntity::addMesh(Mesh *m,const AGVector3 &v)
+void AntEntity::addMesh(SceneNode *m,const AGVector3 &v)
 {
   if(m)
     {
@@ -298,7 +298,7 @@ void AntEntity::addMesh(Mesh *m,const AGVector3 &v)
 }
 
 
-std::list<Mesh *> AntEntity::getMesh()
+AntEntity::Meshes AntEntity::getMesh()
 {
   return mMesh;
 }
@@ -320,7 +320,11 @@ void AntEntity::setDirection(float dir)
   mDir=dir;
 
   if(mMesh.size())
-    (*mMesh.begin())->setRotation(dir);
+    {
+      Mesh *m=dynamic_cast<Mesh*>(mMesh.front());
+      if(m)
+	m->setRotation(dir);
+    }
 }
 
 
@@ -507,7 +511,7 @@ void AntEntity_markfunc(void *ptr)
 
   zoo = static_cast<AntEntity*>(ptr);
 
-  for(std::list<Mesh*>::iterator i=zoo->mMesh.begin();i!=zoo->mMesh.end();i++)
+  for(AntEntity::Meshes::iterator i=zoo->mMesh.begin();i!=zoo->mMesh.end();i++)
     if(*i)
       if((*i)->mRubyObject)
 	rb_gc_mark((*i)->mRUBY);

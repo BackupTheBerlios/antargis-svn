@@ -8,6 +8,10 @@ class AntWorkshop<AntHouse
 		mesh=Mesh.new(getMeshData("data/models/workshop.ant",1.8),AGVector4.new(0,0,0),-50)
 #		mesh=Mesh.new(getMeshData("data/models/farm.ant",2,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
+		p=AGVector3.new(-1.3,-1.2,2.2)
+		addMesh(Smoke.new(getPos3D+AGVector3.new(0,0,2),5),p)
+		addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
+
 	end
 	
 	def assignJob(e)

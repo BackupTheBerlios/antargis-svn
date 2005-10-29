@@ -45,6 +45,8 @@ class AntRubyMap<AntMap
 				e=AntBirch.new
 			when "antGrass"
 				e=AntGrass.new
+			when "antTwig"
+				e=AntTwig.new
 		end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new

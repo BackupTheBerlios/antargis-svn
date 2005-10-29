@@ -36,6 +36,11 @@
         result->mRUBY = self;
 	result->mRubyObject=true;
     }
+%exception Smoke::Smoke {
+        $action
+        result->mRUBY = self;
+	result->mRubyObject=true;
+    }
 
 %markfunc Scene "Scene_markfunc";
 %markfunc GLApp "GLApp_markfunc";

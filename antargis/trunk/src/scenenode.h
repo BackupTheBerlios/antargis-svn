@@ -48,6 +48,16 @@ class SceneNode
   {
     return this==&n;
   }
+
+  virtual void setPos(const AGVector3&pPos)
+  {
+  }
+
+  virtual bool transparent()
+  {
+    return false;
+  }
+
   
   public: // must be public, so that swig can set these
 #ifndef SWIG

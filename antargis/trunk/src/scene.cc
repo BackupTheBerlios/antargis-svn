@@ -277,12 +277,22 @@ void Scene::drawScene()
   // draw scene with texturing and so
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
-      (*i)->draw();
-      mTriangles+=(*i)->getTriangles();
+      if(!(*i)->transparent())
+	{
+	  (*i)->draw();
+	  mTriangles+=(*i)->getTriangles();
+	}
     }
   //  glDisable(GL_ALPHA_TEST);
   //  glAlphaFunc(GL_ALWAYS,1);
-
+  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    {
+      if((*i)->transparent())
+	{
+	  (*i)->draw();
+	  mTriangles+=(*i)->getTriangles();
+	}
+    }
   
 }
 void Scene::drawShadow()
@@ -371,13 +381,26 @@ void Scene::drawShadow()
 
   glActiveTexture(baseTexUnit);
 
-  // draw scene with texturing and so
+  drawScene();
+  /*  // draw scene with texturing and so
   //  glTranslatef(0.004,0,0);
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
-      (*i)->draw();
-      mTriangles+=(*i)->getTriangles();
+      if(!(*i)->transparent())
+	{
+	  (*i)->draw();
+	  mTriangles+=(*i)->getTriangles();
+	}
     }
+  // FIXME: sort!!
+  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    {
+      if((*i)->transparent())
+	{
+	  (*i)->draw();
+	  mTriangles+=(*i)->getTriangles();
+	}
+	}*/
   assertGL;
 
   glDisable(GL_POLYGON_OFFSET_FILL);
@@ -491,6 +514,11 @@ void Scene::mapChanged()
 {
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->mapChanged();
+}
+
+AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
+{
+  return (cameraPosition+scenePosition).dim3()-p;
 }
 
 
