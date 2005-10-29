@@ -146,6 +146,8 @@ class AGVector3
 
   AGAngle getAngle() const;
 
+  AGVector3 operator-() const;
+
   AGVector3 operator-(const AGVector3 &p) const;
   AGVector3 operator+(const AGVector3 &p) const;
 #ifdef SWIG

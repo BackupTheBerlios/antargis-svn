@@ -369,6 +369,12 @@ AGVector3::AGVector3()
   v[2]=0.0f;
 }
 
+AGVector3 AGVector3::operator-() const
+{
+  return AGVector3(-v[0],-v[1],-v[2]);
+}
+
+
 void AGVector3::saveXML(Node &node) const
 {
   node.set("x",::toString(v[0]));
