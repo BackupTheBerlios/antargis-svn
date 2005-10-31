@@ -1,7 +1,12 @@
+#include "glee/GLee.h"
+//#include <GL/glew.h>
 #include "scene.h"
 
+//#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+//#include <GL/glew.h>
+//#include "glee/GLee.h"
 
 #include <ag_debug.h>
 #include <algorithm>
@@ -30,8 +35,17 @@ Scene::Scene(int w,int h)
   cameraPosition=AGVector4(0,-20,20);
   lightPosition=AGVector4( -20, -13, 31,1);
   scenePosition=AGVector4(0,0,0,1);
-  mShadow=0;
+
+  cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
+  cdebug("SHADOW_AMB:"<<(int)GLEE_ARB_shadow_ambient);
+      GLeeInit();
+  if(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient)
+    mShadow=1;
+  else
+    mShadow=0;
   mRubyObject=false;
+
+
 }
 
 void Scene::draw()
@@ -63,8 +77,11 @@ void Scene::draw()
 
 void Scene::setShadow(int v)
 {
-  mShadow=v;
-  cdebug(mShadow);
+  if(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient)
+    {
+      mShadow=v;
+      cdebug(mShadow);
+    }
 }
 int Scene::getShadow() const
 {
@@ -424,6 +441,7 @@ void Scene::drawShadow()
 
 void Scene::init()
   {
+
     inited=true;
 
     // camera projection matrix

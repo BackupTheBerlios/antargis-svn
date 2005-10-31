@@ -26,6 +26,7 @@ AC_CHECK_LIB(physfs,PHYSFS_init)
 AC_CHECK_LIB(ruby1.8,rb_gc_mark)
 #AC_CHECK_LIB(ruby1.8-dbg,rb_gc_mark)
 AC_CHECK_LIB(antargisgui,antargisguilib,[],[],-L${RUBY_INSTALL_DIR})
+#AC_CHECK_LIB(GLEW,glewInit,[],[echo "Please install libglew" ; exit 1])
 
 #RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
 #RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
@@ -47,5 +48,6 @@ LDFLAGS="$LDFLAGS `sdl-config --libs` -L$RUBY_INSTALL_DIR"
 AC_OUTPUT([ 
 Makefile \
 src/Makefile \
+src/glee/Makefile \
 data/Makefile \
  ])
