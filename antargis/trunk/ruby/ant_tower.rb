@@ -5,7 +5,8 @@ class AntTower<AntHouse
 		super
 		setType("house")
 		
-		mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
+		#mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMeshData("data/models/mine.ant2",2),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end
 	

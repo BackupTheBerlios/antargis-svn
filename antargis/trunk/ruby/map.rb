@@ -32,6 +32,7 @@ class AntRubyMap<AntMap
 		@lastGC=0
 	end
 	def loadEntity(node)
+		puts node.getName
 		case node.getName
 			when "antFarm"
 				e=AntFarm.new
@@ -70,9 +71,13 @@ class AntRubyMap<AntMap
 			e=AntNewDeco.new
 		end
 		if node.getName=="humanPlayer" then
+			puts "1"
 			player=AntHumanPlayer.new("")
+			puts "2"
 			player.loadXML(node)
+			puts "3"
 			@players.push(player)
+			puts "4"
 		end
 		if node.getName=="computerPlayer" then
 			player=AntComputerPlayer.new("")

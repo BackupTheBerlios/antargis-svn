@@ -26104,6 +26104,26 @@ _wrap_AGVector3_getAngle(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGVector3___neg__(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = (AGVector3 *) 0 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector3, 1);
+    result = ((AGVector3 const *)arg1)->operator -();
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGVector3___sub__(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = (AGVector3 *) 0 ;
     AGVector3 *arg2 = 0 ;
@@ -48765,6 +48785,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGVector3.klass, "y", VALUEFUNC(_wrap_AGVector3_y), -1);
     rb_define_method(cAGVector3.klass, "z", VALUEFUNC(_wrap_AGVector3_z), -1);
     rb_define_method(cAGVector3.klass, "getAngle", VALUEFUNC(_wrap_AGVector3_getAngle), -1);
+    rb_define_method(cAGVector3.klass, "-@", VALUEFUNC(_wrap_AGVector3___neg__), -1);
     rb_define_method(cAGVector3.klass, "-", VALUEFUNC(_wrap_AGVector3___sub__), -1);
     rb_define_method(cAGVector3.klass, "+", VALUEFUNC(_wrap_AGVector3___add__), -1);
     rb_define_method(cAGVector3.klass, "add", VALUEFUNC(_wrap_AGVector3_add), -1);

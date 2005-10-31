@@ -342,6 +342,13 @@ installdirs mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
+clean:
+	find -name "*.mtl"|xargs rm -f
+	find -name "*.obj"|xargs rm -f
+	find -name "*.blend1"|xargs rm -f
+	find models -name "*.ant"|xargs rm -f
+	find models -name "*.ant2"|xargs rm -f
+
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
