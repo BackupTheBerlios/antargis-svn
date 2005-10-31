@@ -829,6 +829,7 @@ void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const
 
   AGColor ul2=AGColor(255,0,0);
 
+  glBindTexture(GL_TEXTURE_2D,0);
   glBegin(GL_TRIANGLES);
   glColor(ul);
   glVertex2f(x0,y0);
