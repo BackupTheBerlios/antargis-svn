@@ -1293,7 +1293,7 @@ public:
 class SwigDirector_Smoke : public Smoke, public Swig::Director {
 
 public:
-    SwigDirector_Smoke(VALUE self, AGVector3 const &pStart, float f);
+    SwigDirector_Smoke(VALUE self, float f);
     virtual size_t getTriangles() const;
     virtual void mapChanged();
     virtual void advance(float time);

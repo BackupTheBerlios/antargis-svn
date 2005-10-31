@@ -24,6 +24,7 @@
 require 'ents.rb'
 require 'ant_hljobs.rb'
 require 'ant_boss.rb'
+require 'ant_fire.rb'
 
 class AntHero<AntBoss
 	def initialize
@@ -31,7 +32,7 @@ class AntHero<AntBoss
 		setType("hero")
 		@appearance="hero"
 		getMap.setLight(self)
-		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
+		setMyMesh
 	end
 	def setAppearance(a)
 		@appearance=a
@@ -73,6 +74,7 @@ class AntHero<AntBoss
 		else
 			# no player , so simply rest - to infinity (or at least 5 seconds)
 			newHLRestJob(5)
+			setFire(true)
 		end
 	end
 	
@@ -161,5 +163,30 @@ class AntHero<AntBoss
 			exit
 		end
 	end
+	
+	
+	def setFire(flag)
+		if flag
+			if not @fire
+				@fire=AntFire.new(getPos3D+AGVector3.new(0.7,0,0))
+				getMap.insertEntity(@fire)
+			end
+		else
+			if @fire
+				@fire.disable
+				@fire=false
+			end
+		end
+	end
+	
+	def assignJob2All
+		super
+		setFire(false)
+	end
+	
+	def setMyMesh
+		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
+	end
+
 end
 

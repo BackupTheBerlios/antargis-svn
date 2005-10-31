@@ -8,17 +8,28 @@ float randf()
   return (rand()%10000)/10000.0;
 }
 
-Smoke::Smoke(const AGVector3 &pStart,float f)
+Smoke::Smoke(float f)
 {
   maxtime=20;
 
   mtime=0;
   freq=f;
   stime=1/freq;
-  p=pStart;
-  mTexture=getTextureCache()->get("data/textures/smoke3.png");
-
+  p=AGVector3(0,0,0);
+  mTexture=getTextureCache()->get("data/textures/point.png");
+  fire=false;
 }
+
+void Smoke::setFire(bool f)
+{
+  fire=f;
+}
+
+void Smoke::setMaxTime(float m)
+{
+  maxtime=m;
+}
+
 void Smoke::advance(float time)
 {
   // advance pieces
@@ -48,13 +59,28 @@ void Smoke::advance(float time)
   if(mtime>stime)
     {
       Piece *ps=new Piece;
-      ps->pos=p;
-      ps->lived=-timevar*randf();
-      ps->light=randf()*0.5+0.5;
-      ps->size=randf()*0.1+0.2;
-      ps->speed=AGVector3(randf()*0.01,0,0.2+randf()*0.1);
+
+      if(fire)
+	{
+	  ps->pos=p;
+	  ps->lived=-timevar*randf();
+	  ps->light=randf()*0.8+0.2;//5+0.5;
+	  ps->size=randf()*0.05+0.1;
+	  ps->speed=AGVector3(randf()*0.4-0.2,0,1+randf()*0.5);
+	  ps->color=AGVector3(1,1,0);
+	}
+      else
+	{
+	  ps->pos=p;
+	  ps->lived=-timevar*randf();
+	  ps->light=randf()*0.2+0.2;//5+0.5;
+	  ps->size=randf()*0.1+0.2;
+	  ps->speed=AGVector3(randf()*0.01,0,0.2+randf()*0.1);
+	  ps->color=AGVector3(1,1,1);
+	}
       mPieces.push_front(ps);
       mtime-=stime;
+	  
     }
 }
 
@@ -78,42 +104,43 @@ void Smoke::draw()
 
   for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
     {
-      float a;
-      if((*i)->lived<1)
-	a=(*i)->lived;
-      else
-	a=std::min(maxtime-(*i)->lived,1.0f);
+      float a=1;
+      if(!fire)
+	if((*i)->lived<1)
+	  a=(*i)->lived;
+      
+      a=std::min(maxtime-(*i)->lived,a);
+
       glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
 
       float l=(*i)->light;
       float s=(*i)->size;
-      if((*i)->lived<3)
-	s*=(*i)->lived/3;
+      if(fire)
+	{
+	  float x=maxtime/(*i)->lived;
+	  x=std::max(std::min(x,1.0f),0.0f);
+	  (*i)->color=AGVector3(1,0,0)*x+AGVector3(1,1,0)*(1-x);
+	}
+      else
+	{
+	  if((*i)->lived<3)
+	    s*=(*i)->lived/3;
+	}
 
-      glColor4f(l,l,l,a);
+      glColor4f((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side+up)*s);//AGVector3(-s,0,s));
+      glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side+up)*s);
       glTexCoord2f(1,0);
-      glVertex3fv((*i)->pos+(side+up)*s);//AGVector3(s,0,s));
+      glVertex3fv((*i)->pos+(side+up)*s);
       glTexCoord2f(1,1);
-      glVertex3fv((*i)->pos+(side-up)*s);//AGVector3(s,0,-s));
+      glVertex3fv((*i)->pos+(side-up)*s);
       glTexCoord2f(0,1);
-      glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side-up)*s);//AGVector3(-s,0,-s));
-
-      /*
-      glTexCoord2f(0,0);
-      glVertex3fv((*i)->pos+AGVector3(-s,0,s));
-      glTexCoord2f(1,0);
-      glVertex3fv((*i)->pos+AGVector3(s,0,s));
-      glTexCoord2f(1,1);
-      glVertex3fv((*i)->pos+AGVector3(s,0,-s));
-      glTexCoord2f(0,1);
-      glVertex3fv((*i)->pos+AGVector3(-s,0,-s));
-      */
+      glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side-up)*s);
       glEnd();
     }
   glDepthMask(true);
+  
 }
 
 

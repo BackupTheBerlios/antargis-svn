@@ -17468,7 +17468,7 @@ bool SwigDirector_GLTree::transparent() {
 }
 
 
-SwigDirector_Smoke::SwigDirector_Smoke(VALUE self, AGVector3 const &pStart, float f): Smoke(pStart, f), Swig::Director(self) {
+SwigDirector_Smoke::SwigDirector_Smoke(VALUE self, float f): Smoke(f), Swig::Director(self) {
     
 }
 
@@ -47182,23 +47182,21 @@ _wrap_Smoke_allocate(VALUE self) {
 static VALUE
 _wrap_new_Smoke(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
-    AGVector3 *arg2 = 0 ;
-    float arg3 ;
+    float arg2 ;
     Smoke *result;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    arg3 = (float) NUM2DBL(argv[1]);
+    arg2 = (float) NUM2DBL(argv[0]);
     {
         char *classname = "Libantargis::Smoke";
         if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
             /* subclassed */
-            result = (Smoke *)new SwigDirector_Smoke(arg1,(AGVector3 const &)*arg2,arg3);
+            result = (Smoke *)new SwigDirector_Smoke(arg1,arg2);
             
         } else {
-            result = (Smoke *)new Smoke((AGVector3 const &)*arg2,arg3);
+            result = (Smoke *)new Smoke(arg2);
             
         }
         DATA_PTR(self) = result;
@@ -47206,6 +47204,36 @@ _wrap_new_Smoke(int argc, VALUE *argv, VALUE self) {
         result->mRubyObject=true;
     }
     return self;
+}
+
+
+static VALUE
+_wrap_Smoke_setFire(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setFire(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Smoke_setMaxTime(int argc, VALUE *argv, VALUE self) {
+    Smoke *arg1 = (Smoke *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->setMaxTime(arg2);
+    
+    return Qnil;
 }
 
 
@@ -50203,6 +50231,8 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_Smoke, (void *) &cSmoke);
     rb_define_alloc_func(cSmoke.klass, _wrap_Smoke_allocate);
     rb_define_method(cSmoke.klass, "initialize", VALUEFUNC(_wrap_new_Smoke), -1);
+    rb_define_method(cSmoke.klass, "setFire", VALUEFUNC(_wrap_Smoke_setFire), -1);
+    rb_define_method(cSmoke.klass, "setMaxTime", VALUEFUNC(_wrap_Smoke_setMaxTime), -1);
     rb_define_method(cSmoke.klass, "advance", VALUEFUNC(_wrap_Smoke_advance), -1);
     rb_define_method(cSmoke.klass, "transparent", VALUEFUNC(_wrap_Smoke_transparent), -1);
     rb_define_method(cSmoke.klass, "setPos", VALUEFUNC(_wrap_Smoke_setPos), -1);

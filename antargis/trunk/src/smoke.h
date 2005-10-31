@@ -10,6 +10,7 @@ class Smoke:public SceneNode
   {
     AGVector3 pos;
     AGVector3 speed;
+    AGVector3 color;
     float lived;
     float light;
     float size;
@@ -21,12 +22,15 @@ class Smoke:public SceneNode
   float mtime;
   float stime;
   AGVector3 p;
+  bool fire;
 
   AGTexture mTexture;
 
 
  public:
-  Smoke(const AGVector3 &pStart,float f);
+  Smoke(float f);
+  void setFire(bool f);
+  void setMaxTime(float m);
   void advance(float time);
 
   virtual bool transparent()
