@@ -260,6 +260,11 @@ TerrainMesh::TerrainMesh(HeightMap &map)
 
 TerrainMesh::~TerrainMesh()
 {
+  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
+    delete *i;
+  for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
+    delete *i;
+
 }
 void TerrainMesh::advance(float t)
 {

@@ -40,7 +40,6 @@ class WaterPiece:public SceneNode
   int mH;
   AGVector4 mPos;
 
-  AntWaterShader shader;
 };
 
 #endif

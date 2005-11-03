@@ -25,6 +25,7 @@ class VertexArray
 
  public:
   VertexArray();
+  ~VertexArray();
   void addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector2 pTex);
   void addTriangle(size_t p0,size_t p1,size_t p2);
 

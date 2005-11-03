@@ -5,6 +5,7 @@
 int GLSL_ok=-1;
 bool ok()
 {
+//  return false;
   // do not check in each call, because this is slow!!!
   if(GLSL_ok<0)
     {

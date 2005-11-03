@@ -16,6 +16,19 @@ VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
   mIndexBuffer=0;
 }
 
+VertexArray::~VertexArray()
+{
+  CTRACE;
+  if(mBuffers && mVertexBuffer!=0) //mChanged==false)
+    {
+      glDeleteBuffersARB( 1, &mVertexBuffer );
+      glDeleteBuffersARB( 1, &mColorBuffer );
+      glDeleteBuffersARB( 1, &mNormalBuffer );
+      glDeleteBuffersARB( 1, &mTexBuffer );
+      glDeleteBuffersARB( 1, &mIndexBuffer );
+    }
+}
+
 
 void VertexArray::addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector2 pTex)
 {

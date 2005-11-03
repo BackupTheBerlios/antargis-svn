@@ -42878,6 +42878,21 @@ free_SceneNode(SceneNode *arg1) {
     delete arg1;
 }
 static VALUE
+_wrap_SceneNode_setScene(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    Scene *arg2 = (Scene *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Scene, 1);
+    (arg1)->setScene(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_SceneNode_drawShadow(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
     Swig::Director *director = 0;
@@ -43936,6 +43951,10 @@ static VALUE _wrap_new_Mesh(int nargs, VALUE *args, VALUE self) {
 }
 
 
+static void
+free_Mesh(Mesh *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_Mesh_draw(int argc, VALUE *argv, VALUE self) {
     Mesh *arg1 = (Mesh *) 0 ;
@@ -44061,10 +44080,6 @@ _wrap_Mesh_setRotation(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_Mesh(Mesh *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_Mesh(int argc, VALUE *argv, VALUE self) {
     Mesh *arg1 = (Mesh *) 0 ;
@@ -50019,6 +50034,7 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_SceneNode, (void *) &cSceneNode);
     rb_define_alloc_func(cSceneNode.klass, _wrap_SceneNode_allocate);
     rb_define_method(cSceneNode.klass, "initialize", VALUEFUNC(_wrap_new_SceneNode), -1);
+    rb_define_method(cSceneNode.klass, "setScene", VALUEFUNC(_wrap_SceneNode_setScene), -1);
     rb_define_method(cSceneNode.klass, "drawShadow", VALUEFUNC(_wrap_SceneNode_drawShadow), -1);
     rb_define_method(cSceneNode.klass, "drawDepth", VALUEFUNC(_wrap_SceneNode_drawDepth), -1);
     rb_define_method(cSceneNode.klass, "draw", VALUEFUNC(_wrap_SceneNode_draw), -1);

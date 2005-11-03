@@ -4,66 +4,38 @@
 #include <ag_triangle.h>
 #include <ruby.h>
 
+class Scene;
+
 class SceneNode
 {
  public:
-  SceneNode()
-    {
-      mRubyObject=false;
-    }
-  virtual ~SceneNode()
-    {
-      mRubyObject=false;
-    }
-  virtual void drawShadow()
-  {
-  }
-  virtual void drawDepth()
-  {
-  }
-  virtual void draw()
-  {
-  }
-  virtual void advance(float time)
-  {
-  }
-  virtual size_t getTriangles() const
-  {
-    return 0;
-  }
-  virtual AGVector4 lineHit(const AGLine3 &pLine) const
-  {
-    AGVector4 mfalse(0,0,0,0);
-    return mfalse;
-  }
+  SceneNode();
+  virtual ~SceneNode();
 
-  virtual void sort(const AGVector4 &pCamera)
-  {
-  }
-  virtual void mapChanged()
-  {
-  }
+  void setScene(Scene *s);
+  virtual void drawShadow();
+  virtual void drawDepth();
+  virtual void draw();
+  virtual void advance(float time);
 
-  bool operator==(const SceneNode &n) const
-  {
-    return this==&n;
-  }
+  virtual size_t getTriangles() const;
+  virtual AGVector4 lineHit(const AGLine3 &pLine) const;
+  virtual void sort(const AGVector4 &pCamera);
+  virtual void mapChanged();
 
-  virtual void setPos(const AGVector3&pPos)
-  {
-  }
+  bool operator==(const SceneNode &n) const;
 
-  virtual bool transparent()
-  {
-    return false;
-  }
+  virtual void setPos(const AGVector3&pPos);
 
+  virtual bool transparent();
   
   public: // must be public, so that swig can set these
 #ifndef SWIG
   bool mRubyObject;
   VALUE mRUBY;
 #endif
+ private:
+  Scene *scene;
 };
 
 typedef SceneNode *SceneNodePtr;

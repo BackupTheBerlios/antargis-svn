@@ -51,6 +51,18 @@ Scene::Scene(int w,int h)
 Scene::~Scene()
 {
   CTRACE;
+
+  for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    {
+      cdebug(*i);
+      (*i)->setScene(0);
+      if(!(*i)->mRubyObject)
+	{
+	  delete *i;
+	}
+    }
+
+
 }
 
 void Scene::draw()
@@ -101,6 +113,7 @@ void Scene::addNode(SceneNode *node)
     {
       mNodes.push_back(node);
       mNodeSet.insert(node);
+      node->setScene(this);
     }
 }
 void Scene::removeNode(SceneNode *node)
@@ -110,11 +123,14 @@ void Scene::removeNode(SceneNode *node)
       Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
       mNodes.erase(i);
       mNodeSet.erase(node);
+      node->setScene(0);
     }
 }
 
 void Scene::clear()
 {
+  for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    (*i)->setScene(0);
   TRACE;
   mNodes.clear();
   mNodeSet.clear();

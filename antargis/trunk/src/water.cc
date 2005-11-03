@@ -1,15 +1,22 @@
 #include "water.h"
 #include "ag_debug.h"
 
+AntWaterShader *shader=0;
+
+
 WaterPiece::WaterPiece(const AGVector4 &pos):mPos(pos)
 {
   tex=getTextureCache()->get("data/textures/terrain/water.png");
   mW=mH=16;
   mLast=SDL_GetTicks();
+  if(!shader)
+    shader=new AntWaterShader;
 }
 WaterPiece::~WaterPiece()
 {
   CTRACE;
+  delete shader;
+  shader=0;
 }
 void WaterPiece::tick()
 {
@@ -18,13 +25,13 @@ void WaterPiece::tick()
 
 void WaterPiece::draw()
 {
-  shader.enable();
+  shader->enable();
   drawPrivate(true);
-    shader.disable();
+  shader->disable();
 }
 void WaterPiece::advance(float t)
 {
-  shader.update(t);
+  shader->update(t);
   //tick();
 }
 

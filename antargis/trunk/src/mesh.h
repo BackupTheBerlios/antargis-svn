@@ -78,6 +78,7 @@ class Mesh:public SceneNode
  public:
   Mesh();
   Mesh(MeshData &data,const AGVector4 &pPos,float pRot);
+  virtual ~Mesh();
 
   void draw();
   void drawDepth();

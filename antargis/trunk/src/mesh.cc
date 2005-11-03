@@ -264,6 +264,11 @@ Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
   mRotation=pRot;
 }
 
+Mesh::~Mesh()
+{
+  TRACE;
+}
+
 void Mesh::draw()
 {
   begin();
