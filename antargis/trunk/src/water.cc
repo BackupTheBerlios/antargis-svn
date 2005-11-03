@@ -1,4 +1,5 @@
 #include "water.h"
+#include "ag_debug.h"
 
 WaterPiece::WaterPiece(const AGVector4 &pos):mPos(pos)
 {
@@ -8,6 +9,7 @@ WaterPiece::WaterPiece(const AGVector4 &pos):mPos(pos)
 }
 WaterPiece::~WaterPiece()
 {
+  CTRACE;
 }
 void WaterPiece::tick()
 {
@@ -81,7 +83,8 @@ float WaterPiece::getArcY(int x,int y)
 
 AGVector4 WaterPiece::getV(int x,int y)
 {
-  return getHeight(x,y)+calcBaseVertex(x,y);
+  return calcBaseVertex(x,y);
+  return getHeight(x,y);+calcBaseVertex(x,y);
 }
 
 AGVector4 WaterPiece::getHeight(int x,int y)
@@ -91,6 +94,7 @@ AGVector4 WaterPiece::getHeight(int x,int y)
 
 AGVector4 WaterPiece::getNormal(int x,int y)
 {
+  //  return AGVector4(0,0,1,0);
   AGVector4 v1,v2;
   v1=getV(x,y+1)-getV(x,y);
   v2=getV(x+1,y)-getV(x,y);

@@ -16478,6 +16478,15 @@ bool SwigDirector_Mesh::transparent() {
 }
 
 
+SwigDirector_Scene::SwigDirector_Scene(VALUE self, int w, int h): Scene(w, h), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_Scene::~SwigDirector_Scene() {
+}
+
 SwigDirector_GLApp::SwigDirector_GLApp(VALUE self, int w, int h): GLApp(w, h), Swig::Director(self) {
     
 }
@@ -44300,20 +44309,34 @@ _wrap_Scene_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_Scene(int argc, VALUE *argv, VALUE self) {
-    int arg1 ;
+    VALUE arg1 ;
     int arg2 ;
+    int arg3 ;
     Scene *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = NUM2INT(argv[0]);
-    arg2 = NUM2INT(argv[1]);
-    result = (Scene *)new Scene(arg1,arg2);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    char *classname = "Libantargis::Scene";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (Scene *)new SwigDirector_Scene(arg1,arg2,arg3);
+        
+    } else {
+        result = (Scene *)new Scene(arg2,arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
 
 
+static void
+free_Scene(Scene *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_Scene_draw(int argc, VALUE *argv, VALUE self) {
     Scene *arg1 = (Scene *) 0 ;
@@ -44595,10 +44618,22 @@ _wrap_Scene_mRUBY_get(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_Scene(Scene *arg1) {
-    delete arg1;
+static VALUE
+_wrap_disown_Scene(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_Scene, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
 }
+
+
 swig_class cGLApp;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -44644,6 +44679,10 @@ _wrap_new_GLApp(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_GLApp(GLApp *arg1) {
+    delete arg1;
+}
 static VALUE
 _wrap_GLApp_draw(int argc, VALUE *argv, VALUE self) {
     GLApp *arg1 = (GLApp *) 0 ;
@@ -44830,6 +44869,7 @@ static VALUE
 _wrap_GLApp_getScene(int argc, VALUE *argv, VALUE self) {
     GLApp *arg1 = (GLApp *) 0 ;
     Scene *result;
+    Swig::Director *resultdirector = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -44840,7 +44880,12 @@ _wrap_GLApp_getScene(int argc, VALUE *argv, VALUE self) {
         result = (Scene *) &_result_ref;
     }
     
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene,0);
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene,0);
+    }
     return vresult;
 }
 
@@ -44858,10 +44903,6 @@ _wrap_GLApp_markfunc(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static void
-free_GLApp(GLApp *arg1) {
-    delete arg1;
-}
 static VALUE
 _wrap_disown_GLApp(int argc, VALUE *argv, VALUE self) {
     GLApp *arg1 = (GLApp *) 0 ;
@@ -50061,6 +50102,7 @@ SWIGEXPORT void Init_libantargis(void) {
     cPickNode.mark = 0;
     cPickNode.destroy = (void (*)(void *)) free_PickNode;
     rb_define_module_function(mLibantargis, "Scene_markfunc", VALUEFUNC(_wrap_Scene_markfunc), -1);
+    rb_define_module_function(mLibantargis, "disown_Scene", VALUEFUNC(_wrap_disown_Scene), -1);
     
     cScene.klass = rb_define_class_under(mLibantargis, "Scene", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_Scene, (void *) &cScene);

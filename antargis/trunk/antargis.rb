@@ -146,3 +146,5 @@ app=AntGameApp.new(savegame,1024,768)
 
 app.run
 
+puts "huhu"
+

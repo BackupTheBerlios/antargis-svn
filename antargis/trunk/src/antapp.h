@@ -29,6 +29,7 @@ protected:
   
 public:
   GLApp(int w,int h);
+  ~GLApp();
 
   virtual void draw();
   void drawGL();

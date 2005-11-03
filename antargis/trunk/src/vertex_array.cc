@@ -8,6 +8,12 @@ VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
   bColor=true;
   mBuffers=true;
   mChanged=false;
+
+  mVertexBuffer=0;
+  mColorBuffer=0;
+  mNormalBuffer=0;
+  mTexBuffer=0;
+  mIndexBuffer=0;
 }
 
 
@@ -157,7 +163,7 @@ AGVector4 VertexArray::lineHit(const AGLine3 &pLine) const
 
 void VertexArray::clear()
 {
-  if(mBuffers && mChanged==false)
+  if(mBuffers && mVertexBuffer!=0) //mChanged==false)
     {
       glDeleteBuffersARB( 1, &mVertexBuffer );
       glDeleteBuffersARB( 1, &mColorBuffer );

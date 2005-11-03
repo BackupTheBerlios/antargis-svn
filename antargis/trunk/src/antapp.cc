@@ -1,4 +1,5 @@
 #include "antapp.h"
+#include "ag_debug.h"
 
 std::ofstream out("log.txt");
 
@@ -13,6 +14,12 @@ GLApp::GLApp(int w,int h):scene(w,h)
   frameTime=0;
   frameCount=0;
 }
+
+GLApp::~GLApp()
+{
+  CTRACE;
+}
+
 
 void GLApp::draw()
 {

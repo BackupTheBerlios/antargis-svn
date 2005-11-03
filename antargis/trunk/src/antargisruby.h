@@ -1185,6 +1185,14 @@ public:
 };
 
 
+class SwigDirector_Scene : public Scene, public Swig::Director {
+
+public:
+    SwigDirector_Scene(VALUE self, int w, int h);
+    virtual ~SwigDirector_Scene();
+};
+
+
 class SwigDirector_GLApp : public GLApp, public Swig::Director {
 
 public:

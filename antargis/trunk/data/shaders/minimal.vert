@@ -20,7 +20,7 @@ void main(void)
 {
         vec4 v = vec4(gl_Vertex);
         
-        v.z = sin(5.0*v.x + time*1.0)*0.25;
+        v.z = v.z + sin(3.0*v.x + 2.0*v.y + time*3.0)*0.05;
 
         gl_Position = gl_ModelViewProjectionMatrix * v;
 } 

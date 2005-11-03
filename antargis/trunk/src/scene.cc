@@ -48,6 +48,11 @@ Scene::Scene(int w,int h)
 
 }
 
+Scene::~Scene()
+{
+  CTRACE;
+}
+
 void Scene::draw()
 {
   if(!inited)

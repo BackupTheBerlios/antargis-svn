@@ -8,10 +8,9 @@ class AntVertexProgram
 {
  public:
   AntVertexProgram(const std::string &pFile);
+  ~AntVertexProgram();
 
  private:
-  bool ok() const;
-
   GLhandleARB vertexShader;
 
   friend class AntShaderProgram;
@@ -21,10 +20,9 @@ class AntFragProgram
 {
  public:
   AntFragProgram(const std::string &pFile);
+  ~AntFragProgram();
 
  private:
-  bool ok() const;
-
   GLhandleARB fragShader;
 
   friend class AntShaderProgram;
@@ -46,6 +44,7 @@ class AntShaderProgram
 
  public:
   AntShaderProgram(const std::string &pVertexFile,const std::string &pFragFile);
+  ~AntShaderProgram();
   void enable();
   void disable();
 };

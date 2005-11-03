@@ -28,6 +28,7 @@ class Scene
 {
  public:
   Scene(int w,int h);
+  virtual ~Scene();
 
   void draw();
 
