@@ -1,14 +1,13 @@
 #ifndef __vertex_array_h
 #define __vertex_array_h
 
+#include "scene.h"
 #include <ag_triangle.h>
 #include <vector>
 #define GL_GLEXT_PROTOTYPES
 #include <SDL_opengl.h>
 
 #include <ag_surface.h>
-
-#include "scene.h"
 
 class VertexArray
 {

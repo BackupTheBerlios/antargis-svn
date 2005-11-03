@@ -1,6 +1,7 @@
 #ifndef __antargis_gl_water_h
 #define __antargis_gl_water_h
 
+#include "glsl.h"
 #include "scene.h"
 #include "ag_texturecache.h"
 #include "ag_triangle.h"
@@ -38,6 +39,8 @@ class WaterPiece:public SceneNode
   int mW;
   int mH;
   AGVector4 mPos;
+
+  AntWaterShader shader;
 };
 
 #endif

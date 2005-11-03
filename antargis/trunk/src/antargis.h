@@ -21,12 +21,12 @@
 #ifndef __ANTARGIS_H__
 #define __ANTARGIS_H__
 
+#include "scene.h"
 #include "map.h"
 //#include "minimap.h"
 //#include "voxel_gen.h"
 #include "scenenode.h"
 #include "mesh.h"
-#include "scene.h"
 #include "antapp.h"
 #include "entity.h"
 #include "terrain.h"

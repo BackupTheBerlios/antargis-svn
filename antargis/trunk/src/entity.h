@@ -21,6 +21,7 @@
 #ifndef ANT_ENTITY_H
 #define ANT_ENTITY_H
 
+#include "scene.h"
 #include <ag_xml.h>
 #include <ag_triangle.h>
 

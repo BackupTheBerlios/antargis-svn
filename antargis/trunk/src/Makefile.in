@@ -90,7 +90,7 @@ VERSION = @VERSION@
 
 SUBDIRS = glee
 lib_LTLIBRARIES = libantargis.la
-libantargis_la_SOURCES = smoke.h smoke.cc jobs.cc jobs.h entity.h entity.cc map.h map.cc mesh.h mesh.cc terrain.h terrain.cc tree.h tree.cc scene.h scene.cc water.h water.cc vertex_array.h vertex_array.cc cg.cc cg.h pbuffer.h pbuffer.cc antapp.h antapp.cc antargisruby.cc
+libantargis_la_SOURCES = smoke.h smoke.cc jobs.cc jobs.h entity.h entity.cc map.h map.cc mesh.h mesh.cc terrain.h terrain.cc tree.h tree.cc scene.h scene.cc water.h water.cc vertex_array.h vertex_array.cc cg.cc cg.h pbuffer.h pbuffer.cc antapp.h antapp.cc antargisruby.cc glsl.h glsl.cc
 libantargis_la_LIBADD = $(top_builddir)/src/glee/libglee.la
 
 EXTRA_DIST = *.png interface.i
@@ -110,7 +110,7 @@ libantargis_la_LDFLAGS =
 libantargis_la_DEPENDENCIES =  $(top_builddir)/src/glee/libglee.la
 libantargis_la_OBJECTS =  smoke.lo jobs.lo entity.lo map.lo mesh.lo \
 terrain.lo tree.lo scene.lo water.lo vertex_array.lo cg.lo pbuffer.lo \
-antapp.lo antargisruby.lo
+antapp.lo antargisruby.lo glsl.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -129,9 +129,9 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 TAR = tar
 GZIP_ENV = --best
 DEP_FILES =  .deps/antapp.P .deps/antargisruby.P .deps/cg.P \
-.deps/entity.P .deps/jobs.P .deps/map.P .deps/mesh.P .deps/pbuffer.P \
-.deps/scene.P .deps/smoke.P .deps/terrain.P .deps/tree.P \
-.deps/vertex_array.P .deps/water.P
+.deps/entity.P .deps/glsl.P .deps/jobs.P .deps/map.P .deps/mesh.P \
+.deps/pbuffer.P .deps/scene.P .deps/smoke.P .deps/terrain.P \
+.deps/tree.P .deps/vertex_array.P .deps/water.P
 SOURCES = $(libantargis_la_SOURCES)
 OBJECTS = $(libantargis_la_OBJECTS)
 

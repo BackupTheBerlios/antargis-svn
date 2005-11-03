@@ -3,6 +3,7 @@
 
 //#include "vector.h"
 //#include "matrix.h"
+#include "glee/GLee.h"
 #include "ag_triangle.h"
 
 #include <SDL_opengl.h>

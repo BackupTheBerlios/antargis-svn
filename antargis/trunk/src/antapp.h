@@ -1,13 +1,13 @@
 #ifndef ANT_APP_H
 #define ANT_APP_H
 
+#include "scene.h"
 #include <iostream>
 #include <fstream>
 #include <ag_application.h>
 #include <ag_debug.h>
 #include <ag_main.h>
 #include <ag_triangle.h>
-#include "scene.h"
 
 #ifndef SWIG
 extern std::ofstream out;

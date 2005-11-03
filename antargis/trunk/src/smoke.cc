@@ -1,7 +1,7 @@
+#include "scene.h"
 #include "smoke.h"
 #include "ag_texturecache.h"
 #include "map.h"
-#include "scene.h"
 
 float randf()
 {

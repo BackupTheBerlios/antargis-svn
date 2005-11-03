@@ -100,6 +100,7 @@
 
 
 %{
+#include "scene.h"
 #include "antargisgui.h"
 #include "antargis.h"
 %}

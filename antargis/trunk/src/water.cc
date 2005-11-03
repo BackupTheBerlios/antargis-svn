@@ -16,11 +16,14 @@ void WaterPiece::tick()
 
 void WaterPiece::draw()
 {
+  shader.enable();
   drawPrivate(true);
+    shader.disable();
 }
 void WaterPiece::advance(float t)
 {
-  tick();
+  shader.update(t);
+  //tick();
 }
 
 void WaterPiece::drawPrivate(bool texture)

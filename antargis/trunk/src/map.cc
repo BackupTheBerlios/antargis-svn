@@ -1,9 +1,9 @@
+#include "scene.h"
 #include "map.h"
 #include "entity.h"
 #include <vector>
 #include <math.h>
 #include <ag_debug.h>
-#include "scene.h"
 #include "mesh.h"
 #include "terrain.h"
 
