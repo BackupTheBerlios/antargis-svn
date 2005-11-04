@@ -41,7 +41,7 @@ int main(int argc,char *argv[])
     TRACE;
  try
  {
-   AGMain main;
+   AGMain main(800,600,32,false,false);
 main.changeRes(640,480,32,true,true);
   MyApp app;
 

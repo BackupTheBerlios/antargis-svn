@@ -16502,11 +16502,21 @@ _wrap_AGMain_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_AGMain(int argc, VALUE *argv, VALUE self) {
+    int arg1 ;
+    int arg2 ;
+    int arg3 ;
+    bool arg4 ;
+    bool arg5 ;
     AGMain *result;
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (AGMain *)new AGMain();
+    if ((argc < 5) || (argc > 5))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
+    arg1 = NUM2INT(argv[0]);
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    arg4 = RTEST(argv[3]);
+    arg5 = RTEST(argv[4]);
+    result = (AGMain *)new AGMain(arg1,arg2,arg3,arg4,arg5);
     DATA_PTR(self) = result;
     return self;
 }
@@ -17837,6 +17847,19 @@ _wrap_AGTextureManager_makeTexture(int argc, VALUE *argv, VALUE self) {
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGTexture, 1);
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGTextureManager_clear(int argc, VALUE *argv, VALUE self) {
+    AGTextureManager *arg1 = (AGTextureManager *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTextureManager, 1);
+    (arg1)->clear();
+    
+    return Qnil;
 }
 
 
@@ -39791,6 +39814,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGTextureManager.klass, "cleanup", VALUEFUNC(_wrap_AGTextureManager_cleanup), -1);
     rb_define_method(cAGTextureManager.klass, "checkUnused", VALUEFUNC(_wrap_AGTextureManager_checkUnused), -1);
     rb_define_method(cAGTextureManager.klass, "makeTexture", VALUEFUNC(_wrap_AGTextureManager_makeTexture), -1);
+    rb_define_method(cAGTextureManager.klass, "clear", VALUEFUNC(_wrap_AGTextureManager_clear), -1);
     cAGTextureManager.mark = 0;
     cAGTextureManager.destroy = (void (*)(void *)) free_AGTextureManager;
     rb_define_module_function(mLibantargisgui, "disown_AGSDLScreen", VALUEFUNC(_wrap_disown_AGSDLScreen), -1);

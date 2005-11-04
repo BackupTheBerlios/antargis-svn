@@ -640,6 +640,14 @@ void AGTextureManager::deregisterTexture(AGTexture *pTexture)
   mDelTextures.push_back(pTexture);
 #endif
 }
+
+void AGTextureManager::clear()
+{
+  for(std::list<AGTexture*>::iterator i=mTextures.begin();i!=mTextures.end();i++)
+    (*i)->clearTextureUsed();
+  checkUnused();
+}
+
 void AGTextureManager::cleanup()
 {
 #ifdef SLOW_TEXTUREMANAGER

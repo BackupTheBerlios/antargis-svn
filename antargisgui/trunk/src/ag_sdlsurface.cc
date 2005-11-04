@@ -29,12 +29,10 @@
 
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height);
 
-
 AGSDLScreen::AGSDLScreen(SDL_Surface *S):s(S)
 {
+  sge_Update_OFF();
 }
-
-
 
 void AGSDLScreen::flip()
 {
@@ -48,8 +46,6 @@ AGRect AGSDLScreen::getRect() const
 
 void AGSDLScreen::drawRect(const AGRect &pRect,const AGColor &c)
 {
-  sge_Update_OFF();
-
   sge_FilledRectAlpha(s,pRect.x,pRect.y,pRect.x+pRect.w-1,pRect.y+pRect.h-1,c.mapRGB(s->format),c.a);
 }
 void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
@@ -61,48 +57,22 @@ void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect
 
 void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest)
 {
-  //cdebug(pDest.toString()<<endl);
   SDL_Rect sr;
   sr.x=0;
   sr.y=0;
   sr.w=pDest.w;
   sr.h=pDest.h;
-  //  SDL_BlitSurface(s,const_cast<AGRect*>(&pDest),pSource.s,&sr);
-  /*  cdebug(pDest.toString());
-  cdebug(sr.x<<" "<<sr.y<<" "<<sr.w<<" "<<sr.h);
-  cdebug(pSource.s->w<<"  "<<pSource.s->h);
-  cdebug(pSource.s);
-  cdebug(s);
-  cdebug(s->w<<"  "<<s->h);*/
+
   SDL_BlitSurface(pSource.s,&sr,s,const_cast<AGRect*>(&pDest));
 }
 
 void AGSDLScreen::tile(const AGTexture &pSource)
 {
   tile(pSource,getRect());
-  /*
-  int x,y;
-  if(pSource.s->w==0 || pSource.s->h==0)
-    return;
-  for(y=0;y<s->h;y+=pSource.s->h)
-    for(x=0;x<s->w;x+=pSource.s->w)
-      {
-	SDL_Rect sr,dr;
-	sr.x=sr.y=0;
-	sr.w=dr.w=std::min(pSource.s->w,s->w-x);
-	sr.w=dr.w=std::min(pSource.s->h,s->h-y);
-	dr.x=x;
-	dr.y=y;
-	SDL_BlitSurface(pSource.s,&sr,s,&dr);
-      }
-  */
 }
 
 void AGSDLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
 {
-
-  //  sge_FilledRect(s,pDest.x,pDest.y,pDest.x+pDest.w-1,pDest.y+pDest.h-1,0);
-  //  return;
   int x,y;
   if(pSource.s->w==0 || pSource.s->h==0)
     return;
@@ -166,15 +136,12 @@ void AGSDLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const 
 }
 void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
 {
-  sge_Update_OFF();
-
   sge_PutPixelAlpha(s,x,y,c.mapRGB(s->format),c.a);
 }
 
 SDL_Surface *AGSDLScreen::newSurface(int x,int y)
 {
   return AGCreate32BitSurface(x,y);
-  //  return sge_CreateAlphaSurface(SDL_SWSURFACE,x,y);
 }
 
 
@@ -182,14 +149,11 @@ AGSurface AGSDLScreen::loadSurface(const std::string &pFilename)
 {
   std::string file=loadFile(pFilename);
   
-
-  //  CTRACE;
-  //SDL_Surface *s=IMG_Load(pFilename.c_str());
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
   if(!s)
     cdebug(pFilename);
   assert(s);
-  //  SDL_Surface *s=IMG_Load(pFilename.c_str());
+
   return AGSurface(s);//,s->w,s->h);
 }
 
@@ -228,7 +192,6 @@ void AGSDLScreen::drawLine(const AGPoint &pp0,const AGPoint &pp1,const AGColor &
   int dx=p1.x-p0.x;
   int dy=p1.y-p0.y;
 
-  sge_Update_OFF();
   if(abs(dx)>abs(dy))
     {
       if(dx<0)

@@ -30,15 +30,11 @@
 #include "privates.h"
 #include <SDL.h>
 
-#define FULLSCREEN false
-#define SCREEN_DEPTH 24
-
-
 int lastWidth=0;
 int lastHeight=0;
 int lastDepth=0;
-bool openGL=false;
 bool fullScreen=false;
+bool lastGL=false;
 
 AGMain *mAGMain=0;
 
@@ -47,85 +43,58 @@ void newInstanceKiller();
 void deleteInstanceKiller();
 
 
-AGMain::AGMain()
+AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
 {
-  SDL_Surface *mDisplay=0;
-
+  assert(mAGMain==0);
   mAGMain=this;
 
   newInstanceKiller();
 
-  int w=800;//640;
-  int h=600;//480;
+  int w=pw;
+  int h=ph;
 
   // Initialize SDL
   if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
     {
       cdebug("SDL could not be initialized!");
+      exit(1);
     }
-  const SDL_VideoInfo *videoInfo;
 
   videoInfo = SDL_GetVideoInfo();
   if(!videoInfo)
     {
       cdebug("SDL could not get video-info");
+      exit(1);
     }
 
-  int videoFlags=0;//SDL_HWPALETTE;
+  int videoFlags=0;
 
   if(openGL)
     {
       videoFlags|=SDL_OPENGL;
       cdebug("initing opengl");
     }
-
-  if(FULLSCREEN)
-    videoFlags|=SDL_FULLSCREEN;
-
-  if ( videoInfo->hw_available )
-    {
-//      videoFlags |= SDL_HWSURFACE;
-      videoFlags |= SDL_SWSURFACE;
-    }
   else
-    {
-      videoFlags |= SDL_SWSURFACE;
-    }
+    videoFlags|=SDL_SWSURFACE;
 
-  if ( videoInfo->blit_hw )
-    {
-//      videoFlags |= SDL_HWACCEL;
-    }
+  if(fs)
+    videoFlags|=SDL_FULLSCREEN;
 
   lastWidth=w;
   lastHeight=h;
-  lastDepth=SCREEN_DEPTH;
-  fullScreen=FULLSCREEN;
+  lastDepth=pd;
+  fullScreen=fs;
+  lastGL=openGL;
 
   // set video mode
 
   SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
-  //std::cerr<<"ms:"<<ms<<std::endl;
+
   if(openGL)
     setScreen(mScreen=new AGGLScreen(w,h));
   else
     setScreen(mScreen=new AGSDLScreen(ms));
-  //  setScreen(new AGScreen(mDisplay=SDL_SetVideoMode(w,h,SCREEN_DEPTH,
-  //						   videoFlags)));
-
-  if(!mDisplay)
-    {
-		/*
-     std::cerr<<"video mode:"<<w<<","<<h<<","<<SCREEN_DEPTH<<std::endl;
-     std::cerr<<"Flags:"<<videoFlags<<std::endl;
-     fprintf(stderr,"%X\n",videoFlags);
-     fprintf(stderr,"sws:%X\n",SDL_SWSURFACE);
-     fprintf(stderr,"pal:%X\n",SDL_HWPALETTE);
-      std::cerr<<"Video mode could not be set!"<<std::endl;*/
-    }
-
-  atexit(SDL_Quit);
-  //  initSDL_net();
+  //atexit(SDL_Quit);
 
   initFS("");
 
@@ -135,76 +104,73 @@ AGMain::~AGMain()
   CTRACE;
   delete mScreen;
   deleteInstanceKiller();
+  mAGMain=0;
+  SDL_Quit();
 }
 
 void AGMain::flip()
 {
   getScreen().flip();
-  //  SDL_Flip(ScreenSurface);
 }
 
 void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
 {
-  const SDL_VideoInfo *videoInfo;
+  //  getTextureManager()->clear();
+
   lastWidth=w;
   lastHeight=h;
   lastDepth=d;
   fullScreen=fs;
 
-  videoInfo = SDL_GetVideoInfo();
   if(!videoInfo)
     {
-      std::cerr<<"SDL could not get video-info"<<std::endl;
+      throw int();
+      videoInfo = SDL_GetVideoInfo();
+      if(!videoInfo)
+	{
+	  std::cerr<<"SDL could not get video-info"<<std::endl;
+	  exit(1);
+	}
     }
-
-  int videoFlags=SDL_HWPALETTE;
+  int videoFlags=0;
 
   if(gl)
     {
       videoFlags|=SDL_OPENGL;
       cdebug("initing opengl");
     }
-
-  openGL=gl;
+  else
+    videoFlags |= SDL_SWSURFACE;
 
   if(fs)
     videoFlags|=SDL_FULLSCREEN;
 
-  /*  if ( videoInfo->hw_available )
-    {
-      videoFlags |= SDL_HWSURFACE;
-    }
-  else
-  {*/
-      videoFlags |= SDL_SWSURFACE;
-      //    }
-
-  if ( videoInfo->blit_hw )
-    {
-      videoFlags |= SDL_HWACCEL;
-    }
-
-
   // set video mode
+  SDL_Init(SDL_INIT_VIDEO);
   SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
   if(mScreen)
     delete mScreen;
-  if(openGL)
+  if(gl)
     setScreen(mScreen=new AGGLScreen(w,h));
   else
     setScreen(mScreen=new AGSDLScreen(ms));
+
+  SDL_WM_SetCaption("Antargis","Antargis");
   
 }
 
 void AGMain::toggleFull()
 {
-  changeRes(lastWidth,lastHeight,lastDepth,!fullScreen,openGL);
+  changeRes(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL);
 }
 
 AGMain *getMain()
 {
   if(!mAGMain)
-    mAGMain=new AGMain();
+    {
+      std::cerr<<"AGMain not initialized!"<<std::endl;
+      exit(1);
+    }
   return mAGMain;
 }
 

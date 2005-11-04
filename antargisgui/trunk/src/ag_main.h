@@ -22,11 +22,11 @@
 #define __AG_MAIN
 
 class AGScreen;
-
+struct SDL_VideoInfo;
 class AGMain
 {
  public:
-  AGMain();
+  AGMain(int w,int h,int d,bool fs,bool gl);
   ~AGMain();
 
   void flip();
@@ -37,6 +37,8 @@ class AGMain
   int height() const;
  private:
   AGScreen *mScreen;
+
+  const SDL_VideoInfo *videoInfo;
 };
 
 AGMain *getMain();

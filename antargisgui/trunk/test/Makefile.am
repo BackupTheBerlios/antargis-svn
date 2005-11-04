@@ -1,7 +1,9 @@
 #TESTS = *.rb mapptest
 
 #check_PROGRAMS = mapptest
-bin_PROGRAMS = mapptest
+bin_PROGRAMS = mapptest sdl_reschange
+
+sdl_reschange_SOURCES = sdl_reschange.cc
 
 mapptest_SOURCES = apptest.cc
 

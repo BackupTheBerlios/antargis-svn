@@ -208,6 +208,8 @@ class AGTextureManager
 
   AGTexture makeTexture(const AGSurface &s);
 
+  void clear();
+
  private:
   AGTextureManager();
 #ifdef SLOW_TEXTUREMANAGER
