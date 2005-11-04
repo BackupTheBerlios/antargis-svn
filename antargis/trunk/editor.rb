@@ -164,9 +164,9 @@ class AntGameApp < AntRubyEditView
 	
 end
 
-main=AGMain.new
+main=AGMain.new(1024,768,32,false,true)
 
-main.changeRes(1024,768,32,false,true)
+#main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)
 
 app=AntGameApp.new(1024,768)
