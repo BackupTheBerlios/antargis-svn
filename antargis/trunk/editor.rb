@@ -132,7 +132,7 @@ class AntGameApp < AntRubyEditView
 	end
 	
 	def eventIdle
-		delay(20)
+#		delay(20)
 	end
 	
 	# signals	

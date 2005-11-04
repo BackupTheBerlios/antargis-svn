@@ -95,9 +95,9 @@ class AntGameApp <AntRubyView
 		$fc+=1
 		$elaps+=time
 		getMap().move(time)
-		GC.start
+#		GC.start
 		getScene.advance(time)
-		delay(20)
+#		delay(20)
 		return true
 	end
 	
