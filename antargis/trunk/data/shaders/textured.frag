@@ -3,7 +3,7 @@
 
 uniform sampler2D tex;
 varying vec3 lightDir,normal;
- 
+ /*
 
 void main()
 {
@@ -13,7 +13,7 @@ void main()
 }
 
 
-/*
+*/
 void main()
 {
 	vec3 ct,cf;
@@ -28,11 +28,11 @@ void main()
 	
 	texel = texture2D(tex,gl_TexCoord[0].st);
 	ct = texel.rgb;
-	at = texel.a;
+	at = texel.a*0.7;
 	
 	gl_FragColor = vec4(ct * cf, at * af);
 }
-*/
+
 /*
 void main()
 {

@@ -21,6 +21,16 @@ bool PickNode::operator<(const PickNode &n) const
   return camDist<n.camDist;
 }
 
+int mUseShadow=-1;
+
+bool useShadow()
+{
+//  return false;
+  if(mUseShadow<0)
+    mUseShadow=(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient);
+  return mUseShadow;
+}
+
 
 Scene::Scene(int w,int h)
 {
@@ -38,11 +48,14 @@ Scene::Scene(int w,int h)
 
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
   cdebug("SHADOW_AMB:"<<(int)GLEE_ARB_shadow_ambient);
-      GLeeInit();
-  if(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient)
+  
+  GLeeInit();
+  
+  if(useShadow())
     mShadow=1;
   else
     mShadow=0;
+  
   mRubyObject=false;
 
 
@@ -54,7 +67,7 @@ Scene::~Scene()
 
   for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
-      cdebug(*i);
+      //      cdebug(*i);
       (*i)->setScene(0);
       if(!(*i)->mRubyObject)
 	{
@@ -471,17 +484,18 @@ void Scene::init()
     glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
     
     // init texture
-
-    glGenTextures(1, &shadowMapTexture);
-    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-    glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, shadowMapSize, shadowMapSize, 0,
-		    GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
+    if(useShadow())
+      {
+	glGenTextures(1, &shadowMapTexture);
+	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+	glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, shadowMapSize, shadowMapSize, 0,
+			GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+      }
   }
 
 

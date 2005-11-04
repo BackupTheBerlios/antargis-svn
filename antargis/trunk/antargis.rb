@@ -40,10 +40,11 @@ class AntGameApp <AntRubyView
 		@map=AntRubyMap.new(64,64)
 		$map=@map
 		@map.setScene(getScene)
-		
-		# load a level
-		getMap().loadMap(savegame)
-	
+
+		if savegame && savegame.length>0
+			# load a level
+			getMap().loadMap(savegame)
+		end	
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
@@ -94,8 +95,9 @@ class AntGameApp <AntRubyView
 		$fc+=1
 		$elaps+=time
 		getMap().move(time)
-		#GC.start
+		GC.start
 		getScene.advance(time)
+		delay(20)
 		return true
 	end
 	
@@ -132,7 +134,7 @@ class AntGameApp <AntRubyView
 	
 end
 
-main=AGMain.new
+main=AGMain.new(1024,768,32,false,false)
 
 main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)

@@ -18,7 +18,7 @@ VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
 
 VertexArray::~VertexArray()
 {
-  CTRACE;
+  //  CTRACE;
   if(mBuffers && mVertexBuffer!=0) //mChanged==false)
     {
       glDeleteBuffersARB( 1, &mVertexBuffer );

@@ -156,7 +156,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
 
 MeshData::~MeshData()
 {
-  TRACE;
+  //  TRACE;
 }
 
 void MeshData::save(const std::string &pFilename)
@@ -266,7 +266,7 @@ Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
 
 Mesh::~Mesh()
 {
-  TRACE;
+  //  TRACE;
 }
 
 void Mesh::draw()
