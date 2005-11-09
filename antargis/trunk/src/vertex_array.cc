@@ -133,6 +133,7 @@ void VertexArray::draw()
     }
   else
     {
+      cdebug("too much work");
       glNormalPointer(GL_FLOAT, 0, &(mNormals[0]));
       glTexCoordPointer(2, GL_FLOAT, 0, &(mTexCoords[0]));
       glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
@@ -174,7 +175,7 @@ AGVector4 VertexArray::lineHit(const AGLine3 &pLine) const
   return mfalse;
 }
 
-void VertexArray::clear()
+void VertexArray::update()
 {
   if(mBuffers && mVertexBuffer!=0) //mChanged==false)
     {
@@ -183,14 +184,26 @@ void VertexArray::clear()
       glDeleteBuffersARB( 1, &mNormalBuffer );
       glDeleteBuffersARB( 1, &mTexBuffer );
       glDeleteBuffersARB( 1, &mIndexBuffer );
+      mVertexBuffer=0;
     }
+  mChanged=true;
+}
+void VertexArray::clear()
+{
+  /*  if(mBuffers && mVertexBuffer!=0) //mChanged==false)
+    {
+      glDeleteBuffersARB( 1, &mVertexBuffer );
+      glDeleteBuffersARB( 1, &mColorBuffer );
+      glDeleteBuffersARB( 1, &mNormalBuffer );
+      glDeleteBuffersARB( 1, &mTexBuffer );
+      glDeleteBuffersARB( 1, &mIndexBuffer );
+      }*/
   mVertices.clear();
   mColors.clear();
   mNormals.clear();
   mTexCoords.clear();
   mIndices.clear();
-
-  mChanged=true;
+  update();
 }
 
 void VertexArray::setBuffers(bool pBuffers)
@@ -218,4 +231,10 @@ AGVector3 VertexArray::getNormal(size_t i)
   AGVector2 VertexArray::getTexCoord(size_t i)
 {
   return mTexCoords[i];
+}
+
+void VertexArray::setTexCoord(size_t i,const AGVector2 &t)
+{
+  mTexCoords[i]=t;
+  update();
 }

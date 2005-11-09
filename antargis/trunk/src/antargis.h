@@ -32,6 +32,7 @@
 #include "terrain.h"
 #include "tree.h"
 #include "smoke.h"
+#include "anim_mesh.h"
 //#include "ant_man.h"
 //#include "ant_geometry.h"
 #ifdef SWIG
@@ -45,6 +46,7 @@
 %include "terrain.h"
 %include "tree.h"
 %include "smoke.h"
+%include "anim_mesh.h"
  //%include "ant_man.h"
  //%include "ant_geometry.h"
 

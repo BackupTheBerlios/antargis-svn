@@ -933,77 +933,85 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGVector4 swig_types[63]
 #define SWIGTYPE_p_AGWidget swig_types[64]
 #define SWIGTYPE_p_AGWindow swig_types[65]
-#define SWIGTYPE_p_AntEntity swig_types[66]
-#define SWIGTYPE_p_AntEntityPtr swig_types[67]
-#define SWIGTYPE_p_AntMap swig_types[68]
-#define SWIGTYPE_p_Attributes swig_types[69]
-#define SWIGTYPE_p_Document swig_types[70]
-#define SWIGTYPE_p_DomParser swig_types[71]
-#define SWIGTYPE_p_EntityList swig_types[72]
-#define SWIGTYPE_p_GLApp swig_types[73]
-#define SWIGTYPE_p_GLTree swig_types[74]
-#define SWIGTYPE_p_GLuint swig_types[75]
-#define SWIGTYPE_p_HeightMap swig_types[76]
-#define SWIGTYPE_p_Mesh swig_types[77]
-#define SWIGTYPE_p_MeshData swig_types[78]
-#define SWIGTYPE_p_MeshOptimizer swig_types[79]
-#define SWIGTYPE_p_MeshVertex swig_types[80]
-#define SWIGTYPE_p_Meshes swig_types[81]
-#define SWIGTYPE_p_Node swig_types[82]
-#define SWIGTYPE_p_NodeVector swig_types[83]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[84]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[85]
-#define SWIGTYPE_p_Parser swig_types[86]
-#define SWIGTYPE_p_PickNode swig_types[87]
-#define SWIGTYPE_p_PickResult swig_types[88]
-#define SWIGTYPE_p_Resource swig_types[89]
-#define SWIGTYPE_p_SDLKey swig_types[90]
-#define SWIGTYPE_p_SDLMod swig_types[91]
-#define SWIGTYPE_p_SDL_Event swig_types[92]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[93]
-#define SWIGTYPE_p_SDL_Rect swig_types[94]
-#define SWIGTYPE_p_SDL_Surface swig_types[95]
-#define SWIGTYPE_p_Scene swig_types[96]
-#define SWIGTYPE_p_SceneNode swig_types[97]
-#define SWIGTYPE_p_Smoke swig_types[98]
-#define SWIGTYPE_p_TerrainMesh swig_types[99]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[100]
-#define SWIGTYPE_p_Uint32 swig_types[101]
-#define SWIGTYPE_p_Uint8 swig_types[102]
-#define SWIGTYPE_p_VertexArray swig_types[103]
-#define SWIGTYPE_p_const_iterator swig_types[104]
-#define SWIGTYPE_p_float swig_types[105]
-#define SWIGTYPE_p_iterator swig_types[106]
-#define SWIGTYPE_p_p_Node swig_types[107]
-#define SWIGTYPE_p_p_SceneNode swig_types[108]
-#define SWIGTYPE_p_p_Smoke swig_types[109]
-#define SWIGTYPE_p_p_GLTree swig_types[110]
-#define SWIGTYPE_p_p_Mesh swig_types[111]
-#define SWIGTYPE_p_p_MeshData swig_types[112]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[113]
-#define SWIGTYPE_p_p_TerrainMesh swig_types[114]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[115]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[116]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[117]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[118]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[119]
-#define SWIGTYPE_p_std__ostringstream swig_types[120]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[121]
-#define SWIGTYPE_p_std__string swig_types[122]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[123]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[124]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[125]
-#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[126]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[127]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[128]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[129]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[130]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[131]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[132]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[133]
-#define SWIGTYPE_p_unsigned_long swig_types[134]
-static swig_type_info *swig_types[135];
-static swig_module_info swig_module = {swig_types, 135, 0, 0, 0, 0};
+#define SWIGTYPE_p_AnimMesh swig_types[66]
+#define SWIGTYPE_p_AnimMeshData swig_types[67]
+#define SWIGTYPE_p_AntEntity swig_types[68]
+#define SWIGTYPE_p_AntEntityPtr swig_types[69]
+#define SWIGTYPE_p_AntMap swig_types[70]
+#define SWIGTYPE_p_Attributes swig_types[71]
+#define SWIGTYPE_p_Bone swig_types[72]
+#define SWIGTYPE_p_Document swig_types[73]
+#define SWIGTYPE_p_DomParser swig_types[74]
+#define SWIGTYPE_p_EntityList swig_types[75]
+#define SWIGTYPE_p_GLApp swig_types[76]
+#define SWIGTYPE_p_GLTree swig_types[77]
+#define SWIGTYPE_p_GLuint swig_types[78]
+#define SWIGTYPE_p_HeightMap swig_types[79]
+#define SWIGTYPE_p_KeyFrame swig_types[80]
+#define SWIGTYPE_p_Mesh swig_types[81]
+#define SWIGTYPE_p_MeshData swig_types[82]
+#define SWIGTYPE_p_MeshOptimizer swig_types[83]
+#define SWIGTYPE_p_MeshVertex swig_types[84]
+#define SWIGTYPE_p_Meshes swig_types[85]
+#define SWIGTYPE_p_Node swig_types[86]
+#define SWIGTYPE_p_NodeVector swig_types[87]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[88]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[89]
+#define SWIGTYPE_p_Parser swig_types[90]
+#define SWIGTYPE_p_PickNode swig_types[91]
+#define SWIGTYPE_p_PickResult swig_types[92]
+#define SWIGTYPE_p_Resource swig_types[93]
+#define SWIGTYPE_p_SDLKey swig_types[94]
+#define SWIGTYPE_p_SDLMod swig_types[95]
+#define SWIGTYPE_p_SDL_Event swig_types[96]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[97]
+#define SWIGTYPE_p_SDL_Rect swig_types[98]
+#define SWIGTYPE_p_SDL_Surface swig_types[99]
+#define SWIGTYPE_p_Scene swig_types[100]
+#define SWIGTYPE_p_SceneNode swig_types[101]
+#define SWIGTYPE_p_Skeleton swig_types[102]
+#define SWIGTYPE_p_Smoke swig_types[103]
+#define SWIGTYPE_p_TerrainMesh swig_types[104]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[105]
+#define SWIGTYPE_p_Uint32 swig_types[106]
+#define SWIGTYPE_p_Uint8 swig_types[107]
+#define SWIGTYPE_p_VertexArray swig_types[108]
+#define SWIGTYPE_p_const_iterator swig_types[109]
+#define SWIGTYPE_p_float swig_types[110]
+#define SWIGTYPE_p_iterator swig_types[111]
+#define SWIGTYPE_p_p_Node swig_types[112]
+#define SWIGTYPE_p_p_SceneNode swig_types[113]
+#define SWIGTYPE_p_p_Smoke swig_types[114]
+#define SWIGTYPE_p_p_GLTree swig_types[115]
+#define SWIGTYPE_p_p_Mesh swig_types[116]
+#define SWIGTYPE_p_p_MeshData swig_types[117]
+#define SWIGTYPE_p_p_AnimMesh swig_types[118]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[119]
+#define SWIGTYPE_p_p_TerrainMesh swig_types[120]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[121]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[122]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[123]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[124]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[125]
+#define SWIGTYPE_p_std__ostringstream swig_types[126]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[127]
+#define SWIGTYPE_p_std__string swig_types[128]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[129]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[130]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[131]
+#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[132]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[133]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[134]
+#define SWIGTYPE_p_std__vectorTBone_p_t swig_types[135]
+#define SWIGTYPE_p_std__vectorTKeyFrame_p_t swig_types[136]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[137]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[138]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[139]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[140]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[141]
+#define SWIGTYPE_p_unsigned_long swig_types[142]
+static swig_type_info *swig_types[143];
+static swig_module_info swig_module = {swig_types, 143, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1804,6 +1812,7 @@ void SwigDirector_AGSDLScreen::blit(AGTexture const &pSource, AGRect const &pDes
 
 AGSurface SwigDirector_AGSDLScreen::loadSurface(std::string const &pFilename) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGSurface c_result ;
     VALUE result;
@@ -1811,9 +1820,7 @@ AGSurface SwigDirector_AGSDLScreen::loadSurface(std::string const &pFilename) {
     if (swig_get_up()) {
         return AGSDLScreen::loadSurface(pFilename);
     }
-    {
-        obj0 = rb_str_new2(pFilename.c_str());
-    }
+    obj0=rb_str_new2(pFilename.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("loadSurface"), 1,obj0);
     {
         std::cout<<"test1"<<std::endl;
@@ -1893,6 +1900,7 @@ void SwigDirector_AGSDLScreen::drawGradientAlpha(AGRect const &rect, AGColor con
 
 void SwigDirector_AGSDLScreen::renderText(AGRect const &pClipRect, int BaseLineX, int BaseLineY, std::string const &pText, AGFont const &ParamIn) {
     std::string temp4 ;
+    std::string temp40 ;
     AGRect * nc_tmp_pClipRect = const_cast<AGRect *>(&pClipRect) ;
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
@@ -1909,9 +1917,7 @@ void SwigDirector_AGSDLScreen::renderText(AGRect const &pClipRect, int BaseLineX
     obj0 = SWIG_NewPointerObj(nc_tmp_pClipRect, SWIGTYPE_p_AGRect, 0);
     obj1 = INT2NUM(BaseLineX);
     obj2 = INT2NUM(BaseLineY);
-    {
-        obj3 = rb_str_new2(pText.c_str());
-    }
+    obj3=rb_str_new2(pText.c_str());
     obj4 = SWIG_NewPointerObj(nc_tmp_ParamIn, SWIGTYPE_p_AGFont, 0);
     result = rb_funcall(swig_get_self(), rb_intern("renderText"), 5,obj0,obj1,obj2,obj3,obj4);
 }
@@ -2131,6 +2137,7 @@ SwigDirector_AGListener::~SwigDirector_AGListener() {
 
 bool SwigDirector_AGListener::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -2142,9 +2149,7 @@ bool SwigDirector_AGListener::signal(std::string const &pName, AGEvent const *m,
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -2169,6 +2174,7 @@ SwigDirector_AGCPPListener::~SwigDirector_AGCPPListener() {
 
 bool SwigDirector_AGCPPListener::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) const {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -2180,9 +2186,7 @@ bool SwigDirector_AGCPPListener::signal(std::string const &pName, AGEvent const 
     if (swig_get_up()) {
         throw Swig::DirectorPureVirtualException();
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -2464,6 +2468,7 @@ SwigDirector_AGMessageObject::~SwigDirector_AGMessageObject() {
 
 bool SwigDirector_AGMessageObject::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -2475,9 +2480,7 @@ bool SwigDirector_AGMessageObject::signal(std::string const &pName, AGEvent cons
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -2876,6 +2879,7 @@ bool SwigDirector_AGWidget::eventMouseEnter() {
 
 bool SwigDirector_AGWidget::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -2888,9 +2892,7 @@ bool SwigDirector_AGWidget::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -3146,7 +3148,8 @@ std::string SwigDirector_AGButton::getCaption() const {
     result = rb_funcall(swig_get_self(), rb_intern("getCaption"), 0, NULL);
     {
         if (TYPE(result) == T_STRING)
-        c_result = std::string(StringValuePtr(result));
+        //            c_result = std::string(StringValuePtr(result));
+        c_result = std::string(RSTRING(result)->ptr,RSTRING(result)->len);
         else
         throw Swig::DirectorTypeMismatchException("string expected");
     }
@@ -3468,6 +3471,7 @@ bool SwigDirector_AGButton::eventMouseEnter() {
 
 bool SwigDirector_AGButton::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -3480,9 +3484,7 @@ bool SwigDirector_AGButton::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -3963,6 +3965,7 @@ bool SwigDirector_AGApplication::eventIdle() {
 
 bool SwigDirector_AGApplication::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -3975,9 +3978,7 @@ bool SwigDirector_AGApplication::signal(std::string const &pName, AGEvent const 
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -4392,6 +4393,7 @@ bool SwigDirector_AGText::eventMouseEnter() {
 
 bool SwigDirector_AGText::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -4404,9 +4406,7 @@ bool SwigDirector_AGText::signal(std::string const &pName, AGEvent const *m, AGM
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -4982,6 +4982,7 @@ bool SwigDirector_AGVTiler::eventMouseEnter() {
 
 bool SwigDirector_AGVTiler::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -4994,9 +4995,7 @@ bool SwigDirector_AGVTiler::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -5572,6 +5571,7 @@ bool SwigDirector_AGHTiler::eventMouseEnter() {
 
 bool SwigDirector_AGHTiler::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -5584,9 +5584,7 @@ bool SwigDirector_AGHTiler::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -6180,6 +6178,7 @@ bool SwigDirector_AGMenu::eventMouseEnter() {
 
 bool SwigDirector_AGMenu::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -6192,9 +6191,7 @@ bool SwigDirector_AGMenu::signal(std::string const &pName, AGEvent const *m, AGM
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -6759,6 +6756,7 @@ bool SwigDirector_AGScreenWidget::eventMouseEnter() {
 
 bool SwigDirector_AGScreenWidget::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -6771,9 +6769,7 @@ bool SwigDirector_AGScreenWidget::signal(std::string const &pName, AGEvent const
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -7390,6 +7386,7 @@ bool SwigDirector_AGEdit::eventMouseEnter() {
 
 bool SwigDirector_AGEdit::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -7402,9 +7399,7 @@ bool SwigDirector_AGEdit::signal(std::string const &pName, AGEvent const *m, AGM
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -7691,7 +7686,8 @@ std::string SwigDirector_AGCheckBox::getCaption() const {
     result = rb_funcall(swig_get_self(), rb_intern("getCaption"), 0, NULL);
     {
         if (TYPE(result) == T_STRING)
-        c_result = std::string(StringValuePtr(result));
+        //            c_result = std::string(StringValuePtr(result));
+        c_result = std::string(RSTRING(result)->ptr,RSTRING(result)->len);
         else
         throw Swig::DirectorTypeMismatchException("string expected");
     }
@@ -8013,6 +8009,7 @@ bool SwigDirector_AGCheckBox::eventMouseEnter() {
 
 bool SwigDirector_AGCheckBox::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -8025,9 +8022,7 @@ bool SwigDirector_AGCheckBox::signal(std::string const &pName, AGEvent const *m,
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -8293,6 +8288,7 @@ bool SwigDirector_AGRadioGroup::canFocus() const {
 
 void SwigDirector_AGRadioGroup::eventChange(std::string const &p) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -8300,9 +8296,7 @@ void SwigDirector_AGRadioGroup::eventChange(std::string const &p) {
         AGRadioGroup::eventChange(p);
         return;
     }
-    {
-        obj0 = rb_str_new2(p.c_str());
-    }
+    obj0=rb_str_new2(p.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("eventChange"), 1,obj0);
 }
 
@@ -8608,6 +8602,7 @@ bool SwigDirector_AGRadioGroup::eventMouseEnter() {
 
 bool SwigDirector_AGRadioGroup::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -8620,9 +8615,7 @@ bool SwigDirector_AGRadioGroup::signal(std::string const &pName, AGEvent const *
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -8896,7 +8889,8 @@ std::string SwigDirector_AGRadio::getCaption() const {
     result = rb_funcall(swig_get_self(), rb_intern("getCaption"), 0, NULL);
     {
         if (TYPE(result) == T_STRING)
-        c_result = std::string(StringValuePtr(result));
+        //            c_result = std::string(StringValuePtr(result));
+        c_result = std::string(RSTRING(result)->ptr,RSTRING(result)->len);
         else
         throw Swig::DirectorTypeMismatchException("string expected");
     }
@@ -9218,6 +9212,7 @@ bool SwigDirector_AGRadio::eventMouseEnter() {
 
 bool SwigDirector_AGRadio::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -9230,9 +9225,7 @@ bool SwigDirector_AGRadio::signal(std::string const &pName, AGEvent const *m, AG
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -9797,6 +9790,7 @@ bool SwigDirector_AGTable::eventMouseEnter() {
 
 bool SwigDirector_AGTable::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -9809,9 +9803,7 @@ bool SwigDirector_AGTable::signal(std::string const &pName, AGEvent const *m, AG
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -10376,6 +10368,7 @@ bool SwigDirector_AGWindow::eventMouseEnter() {
 
 bool SwigDirector_AGWindow::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -10388,9 +10381,7 @@ bool SwigDirector_AGWindow::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -10955,6 +10946,7 @@ bool SwigDirector_AGImage::eventMouseEnter() {
 
 bool SwigDirector_AGImage::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -10967,9 +10959,7 @@ bool SwigDirector_AGImage::signal(std::string const &pName, AGEvent const *m, AG
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -11534,6 +11524,7 @@ bool SwigDirector_AGCaption::eventMouseEnter() {
 
 bool SwigDirector_AGCaption::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -11546,9 +11537,7 @@ bool SwigDirector_AGCaption::signal(std::string const &pName, AGEvent const *m, 
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -12113,6 +12102,7 @@ bool SwigDirector_AGLayout::eventMouseEnter() {
 
 bool SwigDirector_AGLayout::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -12125,9 +12115,7 @@ bool SwigDirector_AGLayout::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -12351,6 +12339,7 @@ SwigDirector_Parser::SwigDirector_Parser(VALUE self) : Swig::Director(self) {
 
 void SwigDirector_Parser::simpleTag(std::string const &pName, Node::Attributes const &pAttributes) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
     VALUE obj1 = Qnil ;
@@ -12360,9 +12349,7 @@ void SwigDirector_Parser::simpleTag(std::string const &pName, Node::Attributes c
         Parser::simpleTag(pName,pAttributes);
         return;
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
     result = rb_funcall(swig_get_self(), rb_intern("simpleTag"), 2,obj0,obj1);
 }
@@ -12373,6 +12360,7 @@ SwigDirector_Parser::~SwigDirector_Parser() {
 
 void SwigDirector_Parser::startTag(std::string const &pName, Node::Attributes const &pAttributes) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
     VALUE obj1 = Qnil ;
@@ -12382,9 +12370,7 @@ void SwigDirector_Parser::startTag(std::string const &pName, Node::Attributes co
         Parser::startTag(pName,pAttributes);
         return;
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
     result = rb_funcall(swig_get_self(), rb_intern("startTag"), 2,obj0,obj1);
 }
@@ -12392,6 +12378,7 @@ void SwigDirector_Parser::startTag(std::string const &pName, Node::Attributes co
 
 void SwigDirector_Parser::endTag(std::string const &pName) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12399,15 +12386,14 @@ void SwigDirector_Parser::endTag(std::string const &pName) {
         Parser::endTag(pName);
         return;
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("endTag"), 1,obj0);
 }
 
 
 void SwigDirector_Parser::text(std::string const &pText) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12415,15 +12401,14 @@ void SwigDirector_Parser::text(std::string const &pText) {
         Parser::text(pText);
         return;
     }
-    {
-        obj0 = rb_str_new2(pText.c_str());
-    }
+    obj0=rb_str_new2(pText.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("text"), 1,obj0);
 }
 
 
 void SwigDirector_Parser::comment(std::string const &pText) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12431,15 +12416,14 @@ void SwigDirector_Parser::comment(std::string const &pText) {
         Parser::comment(pText);
         return;
     }
-    {
-        obj0 = rb_str_new2(pText.c_str());
-    }
+    obj0=rb_str_new2(pText.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("comment"), 1,obj0);
 }
 
 
 void SwigDirector_Parser::header(std::string const &pText) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12447,9 +12431,7 @@ void SwigDirector_Parser::header(std::string const &pText) {
         Parser::header(pText);
         return;
     }
-    {
-        obj0 = rb_str_new2(pText.c_str());
-    }
+    obj0=rb_str_new2(pText.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("header"), 1,obj0);
 }
 
@@ -12462,6 +12444,7 @@ SwigDirector_DomParser::SwigDirector_DomParser(VALUE self) : Swig::Director(self
 
 void SwigDirector_DomParser::simpleTag(std::string const &pName, Node::Attributes const &pAttributes) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
     VALUE obj1 = Qnil ;
@@ -12471,9 +12454,7 @@ void SwigDirector_DomParser::simpleTag(std::string const &pName, Node::Attribute
         DomParser::simpleTag(pName,pAttributes);
         return;
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
     result = rb_funcall(swig_get_self(), rb_intern("simpleTag"), 2,obj0,obj1);
 }
@@ -12484,6 +12465,7 @@ SwigDirector_DomParser::~SwigDirector_DomParser() {
 
 void SwigDirector_DomParser::startTag(std::string const &pName, Node::Attributes const &pAttributes) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     Node::Attributes * nc_tmp_pAttributes = const_cast<Node::Attributes *>(&pAttributes) ;
     VALUE obj1 = Qnil ;
@@ -12493,9 +12475,7 @@ void SwigDirector_DomParser::startTag(std::string const &pName, Node::Attributes
         DomParser::startTag(pName,pAttributes);
         return;
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     obj1 = SWIG_NewPointerObj(nc_tmp_pAttributes, SWIGTYPE_p_std__mapTstd__string_std__string_t, 0);
     result = rb_funcall(swig_get_self(), rb_intern("startTag"), 2,obj0,obj1);
 }
@@ -12503,6 +12483,7 @@ void SwigDirector_DomParser::startTag(std::string const &pName, Node::Attributes
 
 void SwigDirector_DomParser::endTag(std::string const &pName) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12510,15 +12491,14 @@ void SwigDirector_DomParser::endTag(std::string const &pName) {
         DomParser::endTag(pName);
         return;
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("endTag"), 1,obj0);
 }
 
 
 void SwigDirector_DomParser::text(std::string const &pText) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12526,15 +12506,14 @@ void SwigDirector_DomParser::text(std::string const &pText) {
         DomParser::text(pText);
         return;
     }
-    {
-        obj0 = rb_str_new2(pText.c_str());
-    }
+    obj0=rb_str_new2(pText.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("text"), 1,obj0);
 }
 
 
 void SwigDirector_DomParser::comment(std::string const &pText) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12542,15 +12521,14 @@ void SwigDirector_DomParser::comment(std::string const &pText) {
         DomParser::comment(pText);
         return;
     }
-    {
-        obj0 = rb_str_new2(pText.c_str());
-    }
+    obj0=rb_str_new2(pText.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("comment"), 1,obj0);
 }
 
 
 void SwigDirector_DomParser::header(std::string const &pText) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
@@ -12558,9 +12536,7 @@ void SwigDirector_DomParser::header(std::string const &pText) {
         DomParser::header(pText);
         return;
     }
-    {
-        obj0 = rb_str_new2(pText.c_str());
-    }
+    obj0=rb_str_new2(pText.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("header"), 1,obj0);
 }
 
@@ -12950,6 +12926,7 @@ bool SwigDirector_AGSound::eventMouseEnter() {
 
 bool SwigDirector_AGSound::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -12962,9 +12939,7 @@ bool SwigDirector_AGSound::signal(std::string const &pName, AGEvent const *m, AG
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -13529,6 +13504,7 @@ bool SwigDirector_AGGLWidget::eventMouseEnter() {
 
 bool SwigDirector_AGGLWidget::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -13541,9 +13517,7 @@ bool SwigDirector_AGGLWidget::signal(std::string const &pName, AGEvent const *m,
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -14119,6 +14093,7 @@ bool SwigDirector_AGColorButton::eventMouseEnter() {
 
 bool SwigDirector_AGColorButton::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -14131,9 +14106,7 @@ bool SwigDirector_AGColorButton::signal(std::string const &pName, AGEvent const 
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -14360,6 +14333,7 @@ bool SwigDirector_AGDialog::eventShow() {
 
 bool SwigDirector_AGDialog::eventClose(std::string const &pName, AGEvent const *event, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -14372,9 +14346,7 @@ bool SwigDirector_AGDialog::eventClose(std::string const &pName, AGEvent const *
     if (swig_get_up()) {
         return AGDialog::eventClose(pName,event,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
@@ -14733,6 +14705,7 @@ bool SwigDirector_AGDialog::eventMouseEnter() {
 
 bool SwigDirector_AGDialog::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -14745,9 +14718,7 @@ bool SwigDirector_AGDialog::signal(std::string const &pName, AGEvent const *m, A
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -14872,6 +14843,7 @@ bool SwigDirector_AGDialog::eventHide() {
 
 bool SwigDirector_AGDialog::eventCancel(std::string const &pName, AGEvent const *event, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -14884,9 +14856,7 @@ bool SwigDirector_AGDialog::eventCancel(std::string const &pName, AGEvent const 
     if (swig_get_up()) {
         return AGDialog::eventCancel(pName,event,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
@@ -14907,6 +14877,7 @@ bool SwigDirector_AGDialog::eventCancel(std::string const &pName, AGEvent const 
 
 bool SwigDirector_AGDialog::eventOk(std::string const &pName, AGEvent const *event, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_event = const_cast<AGEvent *>(event) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -14919,9 +14890,7 @@ bool SwigDirector_AGDialog::eventOk(std::string const &pName, AGEvent const *eve
     if (swig_get_up()) {
         return AGDialog::eventOk(pName,event,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_event);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_event, SWIGTYPE_p_AGEvent, 0);
@@ -15382,6 +15351,7 @@ bool SwigDirector_AGListBox::eventMouseEnter() {
 
 bool SwigDirector_AGListBox::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -15394,9 +15364,7 @@ bool SwigDirector_AGListBox::signal(std::string const &pName, AGEvent const *m, 
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -16805,6 +16773,7 @@ bool SwigDirector_GLApp::eventIdle() {
 
 bool SwigDirector_GLApp::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
+    std::string temp10 ;
     VALUE obj0 = Qnil ;
     AGEvent * nc_tmp_m = const_cast<AGEvent *>(m) ;
     Swig::Director * director__p_AGEvent = 0 ;
@@ -16817,9 +16786,7 @@ bool SwigDirector_GLApp::signal(std::string const &pName, AGEvent const *m, AGMe
     if (swig_get_up()) {
         return AGListener::signal(pName,m,pCaller);
     }
-    {
-        obj0 = rb_str_new2(pName.c_str());
-    }
+    obj0=rb_str_new2(pName.c_str());
     director__p_AGEvent = dynamic_cast<Swig::Director *>(nc_tmp_m);
     if (!director__p_AGEvent) {
         obj1 = SWIG_NewPointerObj(nc_tmp_m, SWIGTYPE_p_AGEvent, 0);
@@ -16915,6 +16882,7 @@ void SwigDirector_AntEntity::eventGotNewJob() {
 
 void SwigDirector_AntEntity::newFetchJob(int p, AntEntity *pTarget, std::string const &pWhat) {
     std::string temp3 ;
+    std::string temp30 ;
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -16926,15 +16894,14 @@ void SwigDirector_AntEntity::newFetchJob(int p, AntEntity *pTarget, std::string 
     }
     obj0 = INT2NUM(p);
     obj1 = SWIG_NewPointerObj(pTarget, SWIGTYPE_p_AntEntity, 0);
-    {
-        obj2 = rb_str_new2(pWhat.c_str());
-    }
+    obj2=rb_str_new2(pWhat.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("newFetchJob"), 3,obj0,obj1,obj2);
 }
 
 
 void SwigDirector_AntEntity::newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat) {
     std::string temp3 ;
+    std::string temp30 ;
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -16946,9 +16913,7 @@ void SwigDirector_AntEntity::newFetchJob(int p, AGVector2 &pTarget, std::string 
     }
     obj0 = INT2NUM(p);
     obj1 = SWIG_NewPointerObj(&pTarget, SWIGTYPE_p_AGVector2, 0);
-    {
-        obj2 = rb_str_new2(pWhat.c_str());
-    }
+    obj2=rb_str_new2(pWhat.c_str());
     result = rb_funcall(swig_get_self(), rb_intern("newFetchJob"), 3,obj0,obj1,obj2);
 }
 
@@ -16984,7 +16949,8 @@ std::string SwigDirector_AntEntity::xmlName() const {
     result = rb_funcall(swig_get_self(), rb_intern("xmlName"), 0, NULL);
     {
         if (TYPE(result) == T_STRING)
-        c_result = std::string(StringValuePtr(result));
+        //            c_result = std::string(StringValuePtr(result));
+        c_result = std::string(RSTRING(result)->ptr,RSTRING(result)->len);
         else
         throw Swig::DirectorTypeMismatchException("string expected");
     }
@@ -17598,6 +17564,126 @@ bool SwigDirector_Smoke::transparent() {
 }
 
 
+SwigDirector_AnimMesh::SwigDirector_AnimMesh(VALUE self, AnimMeshData *data): AnimMesh(data), Swig::Director(self) {
+    
+}
+
+
+
+void SwigDirector_AnimMesh::advance(float time) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::advance(time);
+        return;
+    }
+    obj0 = rb_float_new(time);
+    result = rb_funcall(swig_get_self(), rb_intern("advance"), 1,obj0);
+}
+
+
+size_t SwigDirector_AnimMesh::getTriangles() const {
+    size_t c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::getTriangles();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("getTriangles"), 0, NULL);
+    c_result = (unsigned long) NUM2INT(result);
+    return (size_t) c_result;
+}
+
+
+void SwigDirector_AnimMesh::mapChanged() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::mapChanged();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("mapChanged"), 0, NULL);
+}
+
+
+void SwigDirector_AnimMesh::setPos(AGVector3 const &pPos) {
+    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setPos(pPos);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
+SwigDirector_AnimMesh::~SwigDirector_AnimMesh() {
+}
+
+void SwigDirector_AnimMesh::drawDepth() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::drawDepth();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("drawDepth"), 0, NULL);
+}
+
+
+void SwigDirector_AnimMesh::sort(AGVector4 const &pCamera) {
+    AGVector4 * nc_tmp_pCamera = const_cast<AGVector4 *>(&pCamera) ;
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::sort(pCamera);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj(nc_tmp_pCamera, SWIGTYPE_p_AGVector4, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("sort"), 1,obj0);
+}
+
+
+void SwigDirector_AnimMesh::drawShadow() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::drawShadow();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("drawShadow"), 0, NULL);
+}
+
+
+void SwigDirector_AnimMesh::draw() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AnimMesh::draw();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("draw"), 0, NULL);
+}
+
+
+bool SwigDirector_AnimMesh::transparent() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return SceneNode::transparent();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("transparent"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
 swig_class cStringVector;
 
 static VALUE
@@ -17638,7 +17724,8 @@ _wrap_new_StringVector__SWIG_2(int argc, VALUE *argv, VALUE self) {
     arg1 = NUM2UINT(argv[0]);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[1]));
+            //            temp2 = std::string(StringValuePtr(argv[1]));
+            temp2 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -17862,7 +17949,8 @@ _wrap_StringVector_push(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__vectorTstd__string_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -17891,7 +17979,7 @@ _wrap_StringVector_pop(int argc, VALUE *argv, VALUE self) {
         }
     }
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -17917,7 +18005,7 @@ _wrap_StringVector___getitem__(int argc, VALUE *argv, VALUE self) {
         }
     }
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -17935,7 +18023,8 @@ _wrap_StringVector___setitem__(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2INT(argv[0]);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[1]));
+            //            arg3 = std::string(StringValuePtr(argv[1]));
+            arg3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -19255,7 +19344,8 @@ _wrap_ResourceMap___getitem__(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -19284,7 +19374,8 @@ _wrap_ResourceMap___setitem__(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -19308,7 +19399,8 @@ _wrap_ResourceMap_delete(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -19338,7 +19430,8 @@ _wrap_ResourceMap_has_keyq___(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_std__mapTstd__string_float_t, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -20562,7 +20655,8 @@ _wrap_AGSurfaceManager_loadSurface(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurfaceManager, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -21245,7 +21339,8 @@ _wrap_AGSDLScreen_renderText(int argc, VALUE *argv, VALUE self) {
     arg4 = NUM2INT(argv[2]);
     {
         if (TYPE(argv[3]) == T_STRING) {
-            temp5 = std::string(StringValuePtr(argv[3]));
+            //            temp5 = std::string(StringValuePtr(argv[3]));
+            temp5 = std::string(RSTRING(argv[3])->ptr,RSTRING(argv[3])->len);
             arg5 = &temp5;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -21343,7 +21438,8 @@ _wrap_AGSDLScreen_loadSurface(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSDLScreen, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -21824,7 +21920,8 @@ _wrap_AGListener_signal(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListener, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -21879,7 +21976,8 @@ _wrap_AGCPPListener_signal(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGCPPListener, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -22030,7 +22128,8 @@ _wrap_new_AGSignal__SWIG_2(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGMessageObject, 1);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -24159,7 +24258,7 @@ _wrap_AGWidget_getName(int argc, VALUE *argv, VALUE self) {
     result = ((AGWidget const *)arg1)->getName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -24176,7 +24275,8 @@ _wrap_AGWidget_setName(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -24202,7 +24302,8 @@ _wrap_AGWidget_getChild(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -24603,7 +24704,8 @@ _wrap_new_AGRect__SWIG_4(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -25140,7 +25242,7 @@ _wrap_AGRect_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGRect const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -25815,7 +25917,7 @@ _wrap_AGVector2_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGVector2 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -26534,7 +26636,7 @@ _wrap_AGVector3_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGVector3 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -27067,7 +27169,7 @@ _wrap_AGMatrix3_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGMatrix3 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -27386,7 +27488,7 @@ _wrap_AGLine2_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGLine2 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -27585,7 +27687,7 @@ _wrap_AGLine3_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGLine3 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -27922,7 +28024,7 @@ _wrap_AGTriangle2_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGTriangle2 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -28246,7 +28348,7 @@ _wrap_AGTriangle3_toString(int argc, VALUE *argv, VALUE self) {
     result = ((AGTriangle3 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -28696,7 +28798,7 @@ _wrap_AGRect2_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGRect2 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -29488,7 +29590,7 @@ _wrap_AGVector4_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGVector4 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -30011,7 +30113,7 @@ _wrap_AGMatrix4_to_s(int argc, VALUE *argv, VALUE self) {
     result = ((AGMatrix4 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -30108,7 +30210,7 @@ _wrap_AGRect3_toString(int argc, VALUE *argv, VALUE self) {
     result = ((AGRect3 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -30364,7 +30466,7 @@ _wrap_AGBox3_toString(int argc, VALUE *argv, VALUE self) {
     result = ((AGBox3 const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -30478,7 +30580,8 @@ _wrap_new_AGColor__SWIG_4(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -30693,7 +30796,7 @@ _wrap_AGColor_toString(int argc, VALUE *argv, VALUE self) {
     result = ((AGColor const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -30846,7 +30949,8 @@ _wrap_new_AGFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -30886,7 +30990,8 @@ _wrap_new_AGFont__SWIG_2(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31096,7 +31201,8 @@ _wrap_AGFont_setName(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31120,7 +31226,7 @@ _wrap_AGFont_getName(int argc, VALUE *argv, VALUE self) {
     result = ((AGFont const *)arg1)->getName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -31139,7 +31245,8 @@ _wrap_AGFont_getWidth(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31165,7 +31272,8 @@ _wrap_AGFont_getHeight(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31237,7 +31345,8 @@ _wrap_AGFontEngine_renderText(int argc, VALUE *argv, VALUE self) {
     arg4 = NUM2INT(argv[3]);
     {
         if (TYPE(argv[4]) == T_STRING) {
-            temp5 = std::string(StringValuePtr(argv[4]));
+            //            temp5 = std::string(StringValuePtr(argv[4]));
+            temp5 = std::string(RSTRING(argv[4])->ptr,RSTRING(argv[4])->len);
             arg5 = &temp5;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31264,7 +31373,8 @@ _wrap_AGFontEngine_getWidth(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGFont, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[1]));
+            //            temp2 = std::string(StringValuePtr(argv[1]));
+            temp2 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31290,7 +31400,8 @@ _wrap_AGFontEngine_getHeight(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGFont, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[1]));
+            //            temp2 = std::string(StringValuePtr(argv[1]));
+            temp2 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31322,7 +31433,8 @@ _wrap_new_AGButton__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31381,7 +31493,8 @@ _wrap_new_AGButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31717,7 +31830,7 @@ _wrap_AGButton_getCaption(int argc, VALUE *argv, VALUE self) {
     result = ((AGButton const *)arg1)->getCaption();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -31749,7 +31862,8 @@ _wrap_AGButton_setTheme(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -31772,7 +31886,8 @@ _wrap_AGButton_setCaption(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32228,7 +32343,8 @@ _wrap_new_AGText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32296,7 +32412,8 @@ _wrap_AGText_setText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGText, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32320,7 +32437,7 @@ _wrap_AGText_getText(int argc, VALUE *argv, VALUE self) {
     result = ((AGText const *)arg1)->getText();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -32862,7 +32979,8 @@ _wrap_AGTheme_getFont(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32892,7 +33010,8 @@ _wrap_AGTheme_getColor(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32921,7 +33040,8 @@ _wrap_AGTheme_setFont(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32950,7 +33070,8 @@ _wrap_AGTheme_setColor(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -32980,7 +33101,8 @@ _wrap_AGTheme_getInt(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33005,7 +33127,8 @@ _wrap_AGTheme_setInt(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33031,7 +33154,8 @@ _wrap_AGTheme_getSurface(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33060,7 +33184,8 @@ _wrap_AGTheme_setSurface(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33086,7 +33211,8 @@ _wrap_AGTheme_hasSurface(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33112,7 +33238,8 @@ _wrap_AGTheme_hasColor(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTheme, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33177,7 +33304,8 @@ _wrap_loadTheme(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33200,7 +33328,8 @@ _wrap_loadThemeFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33224,7 +33353,8 @@ _wrap_addPoint(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33233,7 +33363,7 @@ _wrap_addPoint(int argc, VALUE *argv, VALUE self) {
     result = addPoint((std::string const &)*arg1);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -33272,7 +33402,8 @@ _wrap_new_AGMenuEvent(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGListener, 1);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33304,7 +33435,7 @@ _wrap_AGMenuEvent_getName(int argc, VALUE *argv, VALUE self) {
     result = ((AGMenuEvent const *)arg1)->getName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -33369,7 +33500,8 @@ _wrap_new_AGMenu(int argc, VALUE *argv, VALUE self) {
     }
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33424,7 +33556,8 @@ _wrap_AGMenu_addItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMenu, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33450,7 +33583,8 @@ _wrap_AGMenu_addMenu(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMenu, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33497,7 +33631,8 @@ _wrap_AGMenu_eventItemSelected(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMenu, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33520,7 +33655,8 @@ _wrap_AGMenu_eventItemClicked(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMenu, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33700,7 +33836,8 @@ _wrap_new_AGEditLine(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -33920,7 +34057,8 @@ _wrap_AGEditLine_append(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -33941,7 +34079,8 @@ _wrap_AGEditLine_prepend(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -33964,7 +34103,7 @@ _wrap_AGEditLine_getText(int argc, VALUE *argv, VALUE self) {
     result = ((AGEditLine const *)arg1)->getText();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -34001,7 +34140,8 @@ _wrap_AGEditLine_setText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -34058,7 +34198,8 @@ _wrap_AGEditLine_checkUnwrap(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2INT(argv[0]);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[1]));
+            //            arg3 = std::string(StringValuePtr(argv[1]));
+            arg3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -34311,7 +34452,8 @@ _wrap_AGEdit_setText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -34484,7 +34626,8 @@ _wrap_AGEdit_setTheme(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -34527,7 +34670,7 @@ _wrap_AGEdit_getText(int argc, VALUE *argv, VALUE self) {
     result = ((AGEdit const *)arg1)->getText();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -34733,7 +34876,8 @@ _wrap_AGRadioGroup_eventChange(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRadioGroup, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -35184,7 +35328,8 @@ _wrap_new_AGWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -35427,7 +35572,8 @@ _wrap_AGWindow_tryClose(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWindow, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -35809,7 +35955,8 @@ _wrap_new_AGCaption(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -35904,7 +36051,8 @@ _wrap_new_AGBackground__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg1 = std::string(StringValuePtr(argv[0]));
+            //            arg1 = std::string(StringValuePtr(argv[0]));
+            arg1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -36047,7 +36195,8 @@ _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36195,7 +36344,8 @@ _wrap_new_AGLayoutCreator(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36284,7 +36434,8 @@ _wrap_AGLayoutFactory_addCreator(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGLayoutFactory, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36362,7 +36513,8 @@ _wrap_new_Node__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg1 = std::string(StringValuePtr(argv[0]));
+            //            arg1 = std::string(StringValuePtr(argv[0]));
+            arg1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -36455,7 +36607,8 @@ _wrap_Node_setName(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -36498,7 +36651,8 @@ _wrap_Node_get_children__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -36567,7 +36721,7 @@ _wrap_Node_getName(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->getName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -36585,7 +36739,7 @@ _wrap_Node_get_name(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->get_name();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -36618,7 +36772,8 @@ _wrap_Node_newChild(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -36645,7 +36800,8 @@ _wrap_Node_add_child(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -36835,7 +36991,8 @@ _wrap_Node_setContent(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36859,7 +37016,7 @@ _wrap_Node_getContent__SWIG_0(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->getContent();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -36878,7 +37035,8 @@ _wrap_Node_set(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36886,7 +37044,8 @@ _wrap_Node_set(int argc, VALUE *argv, VALUE self) {
     }
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36911,7 +37070,8 @@ _wrap_Node_get(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36920,7 +37080,7 @@ _wrap_Node_get(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->get((std::string const &)*arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -36952,7 +37112,8 @@ _wrap_Node_escape(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36961,7 +37122,7 @@ _wrap_Node_escape(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->escape((std::string const &)*arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -36980,7 +37141,8 @@ _wrap_Node_unescape(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Node, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -36989,7 +37151,7 @@ _wrap_Node_unescape(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->unescape((std::string const &)*arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -37190,7 +37352,7 @@ _wrap_Node_toString__SWIG_0(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->toString(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -37208,7 +37370,7 @@ _wrap_Node_toString__SWIG_1(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -37283,7 +37445,7 @@ _wrap_Node_getText(int argc, VALUE *argv, VALUE self) {
     result = ((Node const *)arg1)->getText();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -37361,7 +37523,8 @@ _wrap_new_Document__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg1 = std::string(StringValuePtr(argv[0]));
+            //            arg1 = std::string(StringValuePtr(argv[0]));
+            arg1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -37415,7 +37578,8 @@ _wrap_Document_parseFile(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Document, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -37474,7 +37638,7 @@ _wrap_Document_toString(int argc, VALUE *argv, VALUE self) {
     result = ((Document const *)arg1)->toString();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -37491,7 +37655,8 @@ _wrap_Document_parse_memory(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Document, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37514,7 +37679,8 @@ _wrap_Document_parseMemory(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Document, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37559,7 +37725,8 @@ _wrap_Parser_parse(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37600,7 +37767,8 @@ _wrap_Parser_simpleTag(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37628,7 +37796,8 @@ _wrap_Parser_startTag(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37655,7 +37824,8 @@ _wrap_Parser_endTag(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37681,7 +37851,8 @@ _wrap_Parser_text(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37707,7 +37878,8 @@ _wrap_Parser_comment(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37733,7 +37905,8 @@ _wrap_Parser_header(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Parser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37817,7 +37990,8 @@ _wrap_DomParser_simpleTag(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37845,7 +38019,8 @@ _wrap_DomParser_startTag(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37872,7 +38047,8 @@ _wrap_DomParser_endTag(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37898,7 +38074,8 @@ _wrap_DomParser_text(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37924,7 +38101,8 @@ _wrap_DomParser_comment(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37950,7 +38128,8 @@ _wrap_DomParser_header(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -37977,7 +38156,8 @@ _wrap_DomParser_parse__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38004,7 +38184,8 @@ _wrap_DomParser_parse__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_DomParser, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38187,7 +38368,8 @@ _wrap_AGSound_playMp3(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38699,7 +38881,8 @@ _wrap_new_AGDialog(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 1);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38740,7 +38923,8 @@ _wrap_AGDialog_eventOk(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDialog, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38773,7 +38957,8 @@ _wrap_AGDialog_eventCancel(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDialog, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38806,7 +38991,8 @@ _wrap_AGDialog_eventClose(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDialog, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38867,7 +39053,8 @@ _wrap_loadFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38876,7 +39063,7 @@ _wrap_loadFile(int argc, VALUE *argv, VALUE self) {
     result = loadFile((std::string const &)*arg1);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -38893,7 +39080,8 @@ _wrap_saveFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38901,7 +39089,8 @@ _wrap_saveFile(int argc, VALUE *argv, VALUE self) {
     }
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[1]));
+            //            temp2 = std::string(StringValuePtr(argv[1]));
+            temp2 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38924,7 +39113,8 @@ _wrap_fileExists(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38948,7 +39138,8 @@ _wrap_getDirectory(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp1 = std::string(StringValuePtr(argv[0]));
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg1 = &temp1;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -38994,14 +39185,16 @@ _wrap_new_AGListBoxItem(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg1 = std::string(StringValuePtr(argv[0]));
+            //            arg1 = std::string(StringValuePtr(argv[0]));
+            arg1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
     {
         if (TYPE(argv[1]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[1]));
+            //            arg2 = std::string(StringValuePtr(argv[1]));
+            arg2 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -39139,14 +39332,16 @@ _wrap_AGListBox_insertItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListBox, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
     {
         if (TYPE(argv[1]) == T_STRING) {
-            arg3 = std::string(StringValuePtr(argv[1]));
+            //            arg3 = std::string(StringValuePtr(argv[1]));
+            arg3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -39167,7 +39362,8 @@ _wrap_AGListBox_selectItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListBox, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            arg2 = std::string(StringValuePtr(argv[0]));
+            //            arg2 = std::string(StringValuePtr(argv[0]));
+            arg2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -39190,7 +39386,7 @@ _wrap_AGListBox_getSelectedID(int argc, VALUE *argv, VALUE self) {
     result = ((AGListBox const *)arg1)->getSelectedID();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -39208,7 +39404,7 @@ _wrap_AGListBox_getSelectedValue(int argc, VALUE *argv, VALUE self) {
     result = ((AGListBox const *)arg1)->getSelectedValue();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -40290,7 +40486,8 @@ _wrap_AGPainter_renderText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGPainter, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -42485,7 +42682,8 @@ _wrap_AntMap_getByName(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntMap, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -42529,7 +42727,8 @@ _wrap_AntMap_getNext(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AntEntity, 1);
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -42642,7 +42841,8 @@ _wrap_AntMap_saveMap(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntMap, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -42665,7 +42865,8 @@ _wrap_AntMap_loadMap(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntMap, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43395,7 +43596,8 @@ _wrap_new_MeshData__SWIG_0(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43404,7 +43606,8 @@ _wrap_new_MeshData__SWIG_0(int argc, VALUE *argv, VALUE self) {
     arg3 = (float) NUM2DBL(argv[1]);
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43440,7 +43643,8 @@ _wrap_new_MeshData__SWIG_1(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43449,7 +43653,8 @@ _wrap_new_MeshData__SWIG_1(int argc, VALUE *argv, VALUE self) {
     arg3 = (float) NUM2DBL(argv[1]);
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43482,7 +43687,8 @@ _wrap_new_MeshData__SWIG_2(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43518,7 +43724,8 @@ _wrap_new_MeshData__SWIG_3(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_VertexArray, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43570,7 +43777,8 @@ _wrap_new_MeshData__SWIG_4(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_VertexArray, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[1]) == T_STRING) {
-            temp3 = std::string(StringValuePtr(argv[1]));
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
             arg3 = &temp3;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43776,7 +43984,8 @@ _wrap_MeshData_save(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -43829,6 +44038,21 @@ _wrap_MeshData_lineHit(int argc, VALUE *argv, VALUE self) {
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_MeshData_texCoordFromPos(int argc, VALUE *argv, VALUE self) {
+    MeshData *arg1 = (MeshData *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->texCoordFromPos(arg2);
+    
+    return Qnil;
 }
 
 
@@ -44100,6 +44324,28 @@ _wrap_Mesh_setRotation(int argc, VALUE *argv, VALUE self) {
     (arg1)->setRotation(arg2);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_Mesh_getData(int argc, VALUE *argv, VALUE self) {
+    Mesh *arg1 = (Mesh *) 0 ;
+    MeshData *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Mesh, 1);
+    result = (MeshData *)(arg1)->getData();
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MeshData,0);
+    }
+    return vresult;
 }
 
 
@@ -44560,6 +44806,22 @@ _wrap_Scene_mapChanged(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Scene_getTriangles(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 1);
+    result = ((Scene const *)arg1)->getTriangles();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_Scene_getCameraDirTo(int argc, VALUE *argv, VALUE self) {
     Scene *arg1 = (Scene *) 0 ;
     AGVector3 *arg2 = 0 ;
@@ -45001,7 +45263,8 @@ _wrap_Resource_get(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Resource, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45026,7 +45289,8 @@ _wrap_Resource_add(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Resource, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45051,7 +45315,8 @@ _wrap_Resource_sub(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Resource, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45076,7 +45341,8 @@ _wrap_Resource_set(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Resource, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45499,7 +45765,7 @@ _wrap_AntEntity_getName(int argc, VALUE *argv, VALUE self) {
     result = ((AntEntity const *)arg1)->getName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -45516,7 +45782,8 @@ _wrap_AntEntity_setName(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45539,7 +45806,8 @@ _wrap_AntEntity_setType(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
     {
         if (TYPE(argv[0]) == T_STRING) {
-            temp2 = std::string(StringValuePtr(argv[0]));
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
             arg2 = &temp2;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45563,7 +45831,7 @@ _wrap_AntEntity_getType(int argc, VALUE *argv, VALUE self) {
     result = ((AntEntity const *)arg1)->getType();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -45584,7 +45852,7 @@ _wrap_AntEntity_xmlName(int argc, VALUE *argv, VALUE self) {
     result = ((AntEntity const *)arg1)->xmlName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
 }
@@ -45660,7 +45928,8 @@ _wrap_AntEntity_newFetchJob__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGVector2, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -45690,7 +45959,8 @@ _wrap_AntEntity_newFetchJob__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AntEntity, 1);
     {
         if (TYPE(argv[2]) == T_STRING) {
-            temp4 = std::string(StringValuePtr(argv[2]));
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
             arg4 = &temp4;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -47408,6 +47678,515 @@ _wrap_disown_Smoke(int argc, VALUE *argv, VALUE self) {
 }
 
 
+swig_class cBone;
+
+static VALUE
+_wrap_Bone_id_set(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    size_t arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    arg2 = NUM2ULONG(argv[0]);
+    if (arg1) (arg1)->id = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Bone_id_get(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    result =  ((arg1)->id);
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_pos_set(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    AGVector3 *arg2 = (AGVector3 *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1);
+    if (arg1) (arg1)->pos = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Bone_pos_get(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    AGVector3 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    result = (AGVector3 *)& ((arg1)->pos);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector3,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_rot_set(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    AGVector3 *arg2 = (AGVector3 *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1);
+    if (arg1) (arg1)->rot = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Bone_rot_get(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    AGVector3 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    result = (AGVector3 *)& ((arg1)->rot);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector3,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_parent_set(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    Bone *arg2 = (Bone *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Bone, 1);
+    if (arg1) (arg1)->parent = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Bone_parent_get(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    Bone *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    result = (Bone *) ((arg1)->parent);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Bone,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Bone_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Bone_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Bone);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Bone(int argc, VALUE *argv, VALUE self) {
+    Bone *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (Bone *)new Bone();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_Bone(Bone *arg1) {
+    delete arg1;
+}
+swig_class cKeyFrame;
+
+static VALUE
+_wrap_KeyFrame_time_set(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    if (arg1) (arg1)->time = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_KeyFrame_time_get(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    result = (float) ((arg1)->time);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_KeyFrame_pos_set(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    std::vector<AGVector3 > *arg2 = (std::vector<AGVector3 > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTAGVector3_t, 1);
+    if (arg1) (arg1)->pos = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_KeyFrame_pos_get(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    std::vector<AGVector3 > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    result = (std::vector<AGVector3 > *)& ((arg1)->pos);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTAGVector3_t,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_KeyFrame_rot_set(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    std::vector<AGVector3 > *arg2 = (std::vector<AGVector3 > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTAGVector3_t, 1);
+    if (arg1) (arg1)->rot = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_KeyFrame_rot_get(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    std::vector<AGVector3 > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    result = (std::vector<AGVector3 > *)& ((arg1)->rot);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTAGVector3_t,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_KeyFrame_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_KeyFrame_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_KeyFrame);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_KeyFrame(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (KeyFrame *)new KeyFrame();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_KeyFrame(KeyFrame *arg1) {
+    delete arg1;
+}
+swig_class cSkeleton;
+
+static VALUE
+_wrap_Skeleton_bones_set(int argc, VALUE *argv, VALUE self) {
+    Skeleton *arg1 = (Skeleton *) 0 ;
+    std::vector<Bone * > *arg2 = (std::vector<Bone * > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Skeleton, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTBone_p_t, 1);
+    if (arg1) (arg1)->bones = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Skeleton_bones_get(int argc, VALUE *argv, VALUE self) {
+    Skeleton *arg1 = (Skeleton *) 0 ;
+    std::vector<Bone * > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Skeleton, 1);
+    result = (std::vector<Bone * > *)& ((arg1)->bones);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTBone_p_t,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Skeleton_frames_set(int argc, VALUE *argv, VALUE self) {
+    Skeleton *arg1 = (Skeleton *) 0 ;
+    std::vector<KeyFrame * > *arg2 = (std::vector<KeyFrame * > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Skeleton, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTKeyFrame_p_t, 1);
+    if (arg1) (arg1)->frames = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Skeleton_frames_get(int argc, VALUE *argv, VALUE self) {
+    Skeleton *arg1 = (Skeleton *) 0 ;
+    std::vector<KeyFrame * > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Skeleton, 1);
+    result = (std::vector<KeyFrame * > *)& ((arg1)->frames);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTKeyFrame_p_t,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_Skeleton_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_Skeleton_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Skeleton);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_Skeleton(int argc, VALUE *argv, VALUE self) {
+    Skeleton *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (Skeleton *)new Skeleton();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_Skeleton(Skeleton *arg1) {
+    delete arg1;
+}
+swig_class cAnimMeshData;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AnimMeshData_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AnimMeshData_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AnimMeshData);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AnimMeshData(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    AnimMeshData *result;
+    std::string temp1 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (AnimMeshData *)new AnimMeshData((std::string const &)*arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_AnimMeshData(AnimMeshData *arg1) {
+    delete arg1;
+}
+swig_class cAnimMesh;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AnimMesh_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AnimMesh_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AnimMesh);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AnimMesh(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    AnimMeshData *arg2 = (AnimMeshData *) 0 ;
+    AnimMesh *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AnimMeshData, 1);
+    char *classname = "Libantargis::AnimMesh";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AnimMesh *)new SwigDirector_AnimMesh(arg1,arg2);
+        
+    } else {
+        result = (AnimMesh *)new AnimMesh(arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_AnimMesh(AnimMesh *arg1) {
+    delete arg1;
+}
+static VALUE
+_wrap_AnimMesh_draw(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->draw();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_disown_AnimMesh(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -47672,6 +48451,9 @@ static void *_p_p_MeshDataTo_p_p_SceneNode(void *x) {
 static void *_p_p_MeshTo_p_p_SceneNode(void *x) {
     return (void *)((SceneNode **)  ((Mesh **) x));
 }
+static void *_p_p_AnimMeshTo_p_p_SceneNode(void *x) {
+    return (void *)((SceneNode **)  ((AnimMesh **) x));
+}
 static void *_p_p_TerrainPieceVATo_p_p_SceneNode(void *x) {
     return (void *)((SceneNode **)  ((TerrainPieceVA **) x));
 }
@@ -47689,6 +48471,9 @@ static void *_p_MeshDataTo_p_SceneNode(void *x) {
 }
 static void *_p_MeshTo_p_SceneNode(void *x) {
     return (void *)((SceneNode *)  ((Mesh *) x));
+}
+static void *_p_AnimMeshTo_p_SceneNode(void *x) {
+    return (void *)((SceneNode *)  ((AnimMesh *) x));
 }
 static void *_p_TerrainPieceVATo_p_SceneNode(void *x) {
     return (void *)((SceneNode *)  ((TerrainPieceVA *) x));
@@ -47777,10 +48562,13 @@ static swig_type_info _swigt__p_AGVector3 = {"_p_AGVector3", "AGVector3 *", 0, 0
 static swig_type_info _swigt__p_AGVector4 = {"_p_AGVector4", "AGVector4 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWidget = {"_p_AGWidget", "AGWidget *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWindow = {"_p_AGWindow", "AGWindow *", 0, 0, 0};
+static swig_type_info _swigt__p_AnimMesh = {"_p_AnimMesh", "AnimMesh *", 0, 0, 0};
+static swig_type_info _swigt__p_AnimMeshData = {"_p_AnimMeshData", "AnimMeshData *", 0, 0, 0};
 static swig_type_info _swigt__p_AntEntity = {"_p_AntEntity", "AntEntity *", 0, 0, 0};
 static swig_type_info _swigt__p_AntEntityPtr = {"_p_AntEntityPtr", "AntEntityPtr *", 0, 0, 0};
 static swig_type_info _swigt__p_AntMap = {"_p_AntMap", "AntMap *", 0, 0, 0};
 static swig_type_info _swigt__p_Attributes = {"_p_Attributes", "Attributes *", 0, 0, 0};
+static swig_type_info _swigt__p_Bone = {"_p_Bone", "Bone *", 0, 0, 0};
 static swig_type_info _swigt__p_Document = {"_p_Document", "Document *|xmlpp::Document *", 0, 0, 0};
 static swig_type_info _swigt__p_DomParser = {"_p_DomParser", "DomParser *", 0, 0, 0};
 static swig_type_info _swigt__p_EntityList = {"_p_EntityList", "EntityList *", 0, 0, 0};
@@ -47788,6 +48576,7 @@ static swig_type_info _swigt__p_GLApp = {"_p_GLApp", "GLApp *", 0, 0, 0};
 static swig_type_info _swigt__p_GLTree = {"_p_GLTree", "GLTree *", 0, 0, 0};
 static swig_type_info _swigt__p_GLuint = {"_p_GLuint", "GLuint *", 0, 0, 0};
 static swig_type_info _swigt__p_HeightMap = {"_p_HeightMap", "HeightMap *", 0, 0, 0};
+static swig_type_info _swigt__p_KeyFrame = {"_p_KeyFrame", "KeyFrame *", 0, 0, 0};
 static swig_type_info _swigt__p_Mesh = {"_p_Mesh", "Mesh *", 0, 0, 0};
 static swig_type_info _swigt__p_MeshData = {"_p_MeshData", "MeshData *", 0, 0, 0};
 static swig_type_info _swigt__p_MeshOptimizer = {"_p_MeshOptimizer", "MeshOptimizer *", 0, 0, 0};
@@ -47809,6 +48598,7 @@ static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, 0
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, 0};
 static swig_type_info _swigt__p_Scene = {"_p_Scene", "Scene *", 0, 0, 0};
 static swig_type_info _swigt__p_SceneNode = {"_p_SceneNode", "SceneNode *", 0, 0, 0};
+static swig_type_info _swigt__p_Skeleton = {"_p_Skeleton", "Skeleton *", 0, 0, 0};
 static swig_type_info _swigt__p_Smoke = {"_p_Smoke", "Smoke *", 0, 0, 0};
 static swig_type_info _swigt__p_TerrainMesh = {"_p_TerrainMesh", "TerrainMesh *", 0, 0, 0};
 static swig_type_info _swigt__p_TerrainPieceVA = {"_p_TerrainPieceVA", "TerrainPieceVA *", 0, 0, 0};
@@ -47824,6 +48614,7 @@ static swig_type_info _swigt__p_p_Smoke = {"_p_p_Smoke", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_GLTree = {"_p_p_GLTree", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_Mesh = {"_p_p_Mesh", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_MeshData = {"_p_p_MeshData", 0, 0, 0, 0};
+static swig_type_info _swigt__p_p_AnimMesh = {"_p_p_AnimMesh", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_TerrainPieceVA = {"_p_p_TerrainPieceVA", 0, 0, 0, 0};
 static swig_type_info _swigt__p_p_TerrainMesh = {"_p_p_TerrainMesh", 0, 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAGRect2_t = {"_p_std__listTAGRect2_t", "std::list<AGRect2 > *", 0, 0, 0};
@@ -47840,6 +48631,8 @@ static swig_type_info _swigt__p_std__vectorTAGRect3_t = {"_p_std__vectorTAGRect3
 static swig_type_info _swigt__p_std__vectorTAGVector3_t = {"_p_std__vectorTAGVector3_t", "std::vector<AGVector3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector4_t = {"_p_std__vectorTAGVector4_t", "std::vector<AGVector4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAntEntityPtr_t = {"_p_std__vectorTAntEntityPtr_t", "std::vector<AntEntityPtr > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTBone_p_t = {"_p_std__vectorTBone_p_t", "std::vector<Bone * > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTKeyFrame_p_t = {"_p_std__vectorTKeyFrame_p_t", "std::vector<KeyFrame * > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_p_t = {"_p_std__vectorTNode_p_t", "std::vector<Node * > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_t = {"_p_std__vectorTNode_t", "std::vector<Node > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTPickNode_t = {"_p_std__vectorTPickNode_t", "std::vector<PickNode > *|Scene::PickResult *", 0, 0, 0};
@@ -47914,10 +48707,13 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGVector4,
   &_swigt__p_AGWidget,
   &_swigt__p_AGWindow,
+  &_swigt__p_AnimMesh,
+  &_swigt__p_AnimMeshData,
   &_swigt__p_AntEntity,
   &_swigt__p_AntEntityPtr,
   &_swigt__p_AntMap,
   &_swigt__p_Attributes,
+  &_swigt__p_Bone,
   &_swigt__p_Document,
   &_swigt__p_DomParser,
   &_swigt__p_EntityList,
@@ -47925,6 +48721,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GLTree,
   &_swigt__p_GLuint,
   &_swigt__p_HeightMap,
+  &_swigt__p_KeyFrame,
   &_swigt__p_Mesh,
   &_swigt__p_MeshData,
   &_swigt__p_MeshOptimizer,
@@ -47946,6 +48743,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SDL_Surface,
   &_swigt__p_Scene,
   &_swigt__p_SceneNode,
+  &_swigt__p_Skeleton,
   &_swigt__p_Smoke,
   &_swigt__p_TerrainMesh,
   &_swigt__p_TerrainPieceVA,
@@ -47961,6 +48759,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_p_GLTree,
   &_swigt__p_p_Mesh,
   &_swigt__p_p_MeshData,
+  &_swigt__p_p_AnimMesh,
   &_swigt__p_p_TerrainPieceVA,
   &_swigt__p_p_TerrainMesh,
   &_swigt__p_std__listTAGRect2_t,
@@ -47977,6 +48776,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorTAGVector3_t,
   &_swigt__p_std__vectorTAGVector4_t,
   &_swigt__p_std__vectorTAntEntityPtr_t,
+  &_swigt__p_std__vectorTBone_p_t,
+  &_swigt__p_std__vectorTKeyFrame_p_t,
   &_swigt__p_std__vectorTNode_p_t,
   &_swigt__p_std__vectorTNode_t,
   &_swigt__p_std__vectorTPickNode_t,
@@ -48051,10 +48852,13 @@ static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGPoint3, _p_AGPoin
 static swig_cast_info _swigc__p_AGVector4[] = {  {&_swigt__p_AGVector4, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWidget[] = {  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGWidget, 0, 0},  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGWidget, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWidget, 0, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGWidget, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGWidget, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGWidget, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWindow[] = {  {&_swigt__p_AGWindow, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AnimMesh[] = {  {&_swigt__p_AnimMesh, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AnimMeshData[] = {  {&_swigt__p_AnimMeshData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntEntity[] = {  {&_swigt__p_AntEntity, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntEntityPtr[] = {  {&_swigt__p_AntEntityPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntMap[] = {  {&_swigt__p_AntMap, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Attributes[] = {  {&_swigt__p_Attributes, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Bone[] = {  {&_swigt__p_Bone, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Document[] = {  {&_swigt__p_Document, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_DomParser[] = {  {&_swigt__p_DomParser, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_EntityList[] = {  {&_swigt__p_EntityList, 0, 0, 0},{0, 0, 0, 0}};
@@ -48062,6 +48866,7 @@ static swig_cast_info _swigc__p_GLApp[] = {  {&_swigt__p_GLApp, 0, 0, 0},{0, 0, 
 static swig_cast_info _swigc__p_GLTree[] = {  {&_swigt__p_GLTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GLuint[] = {  {&_swigt__p_GLuint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_HeightMap[] = {  {&_swigt__p_AntMap, _p_AntMapTo_p_HeightMap, 0, 0},  {&_swigt__p_HeightMap, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_KeyFrame[] = {  {&_swigt__p_KeyFrame, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Mesh[] = {  {&_swigt__p_Mesh, 0, 0, 0},  {&_swigt__p_GLTree, _p_GLTreeTo_p_Mesh, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MeshData[] = {  {&_swigt__p_MeshData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MeshOptimizer[] = {  {&_swigt__p_MeshOptimizer, 0, 0, 0},{0, 0, 0, 0}};
@@ -48082,7 +48887,8 @@ static swig_cast_info _swigc__p_SDL_PixelFormat[] = {  {&_swigt__p_SDL_PixelForm
 static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0},  {&_swigt__p_AGRect, _p_AGRectTo_p_SDL_Rect, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Scene[] = {  {&_swigt__p_Scene, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_SceneNode[] = {  {&_swigt__p_SceneNode, 0, 0, 0},  {&_swigt__p_Smoke, _p_SmokeTo_p_SceneNode, 0, 0},  {&_swigt__p_GLTree, _p_GLTreeTo_p_SceneNode, 0, 0},  {&_swigt__p_Mesh, _p_MeshTo_p_SceneNode, 0, 0},  {&_swigt__p_MeshData, _p_MeshDataTo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainPieceVA, _p_TerrainPieceVATo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainMesh, _p_TerrainMeshTo_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_SceneNode[] = {  {&_swigt__p_SceneNode, 0, 0, 0},  {&_swigt__p_Smoke, _p_SmokeTo_p_SceneNode, 0, 0},  {&_swigt__p_GLTree, _p_GLTreeTo_p_SceneNode, 0, 0},  {&_swigt__p_Mesh, _p_MeshTo_p_SceneNode, 0, 0},  {&_swigt__p_MeshData, _p_MeshDataTo_p_SceneNode, 0, 0},  {&_swigt__p_AnimMesh, _p_AnimMeshTo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainPieceVA, _p_TerrainPieceVATo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainMesh, _p_TerrainMeshTo_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Skeleton[] = {  {&_swigt__p_Skeleton, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Smoke[] = {  {&_swigt__p_Smoke, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TerrainMesh[] = {  {&_swigt__p_TerrainMesh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TerrainPieceVA[] = {  {&_swigt__p_TerrainPieceVA, 0, 0, 0},{0, 0, 0, 0}};
@@ -48097,9 +48903,10 @@ static swig_cast_info _swigc__p_p_Smoke[] = {{&_swigt__p_p_Smoke, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_p_GLTree[] = {{&_swigt__p_p_GLTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_Mesh[] = {{&_swigt__p_p_Mesh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_MeshData[] = {{&_swigt__p_p_MeshData, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_AnimMesh[] = {{&_swigt__p_p_AnimMesh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_TerrainPieceVA[] = {{&_swigt__p_p_TerrainPieceVA, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_TerrainMesh[] = {{&_swigt__p_p_TerrainMesh, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_p_SceneNode[] = {  {&_swigt__p_p_SceneNode, 0, 0, 0},  {&_swigt__p_p_Smoke, _p_p_SmokeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_GLTree, _p_p_GLTreeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_Mesh, _p_p_MeshTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_MeshData, _p_p_MeshDataTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainPieceVA, _p_p_TerrainPieceVATo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainMesh, _p_p_TerrainMeshTo_p_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_SceneNode[] = {  {&_swigt__p_p_SceneNode, 0, 0, 0},  {&_swigt__p_p_Smoke, _p_p_SmokeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_GLTree, _p_p_GLTreeTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_Mesh, _p_p_MeshTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_MeshData, _p_p_MeshDataTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_AnimMesh, _p_p_AnimMeshTo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainPieceVA, _p_p_TerrainPieceVATo_p_p_SceneNode, 0, 0},  {&_swigt__p_p_TerrainMesh, _p_p_TerrainMeshTo_p_p_SceneNode, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAGRect2_t[] = {  {&_swigt__p_std__listTAGRect2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTAntEntity_p_t[] = {  {&_swigt__p_std__listTAntEntity_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listTSceneNode_p_t[] = {  {&_swigt__p_std__listTSceneNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -48114,6 +48921,8 @@ static swig_cast_info _swigc__p_std__vectorTAGRect3_t[] = {  {&_swigt__p_std__ve
 static swig_cast_info _swigc__p_std__vectorTAGVector3_t[] = {  {&_swigt__p_std__vectorTAGVector3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector4_t[] = {  {&_swigt__p_std__vectorTAGVector4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAntEntityPtr_t[] = {  {&_swigt__p_std__vectorTAntEntityPtr_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTBone_p_t[] = {  {&_swigt__p_std__vectorTBone_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTKeyFrame_p_t[] = {  {&_swigt__p_std__vectorTKeyFrame_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_p_t[] = {  {&_swigt__p_std__vectorTNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_t[] = {  {&_swigt__p_std__vectorTNode_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTPickNode_t[] = {  {&_swigt__p_std__vectorTPickNode_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -48188,10 +48997,13 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGVector4,
   _swigc__p_AGWidget,
   _swigc__p_AGWindow,
+  _swigc__p_AnimMesh,
+  _swigc__p_AnimMeshData,
   _swigc__p_AntEntity,
   _swigc__p_AntEntityPtr,
   _swigc__p_AntMap,
   _swigc__p_Attributes,
+  _swigc__p_Bone,
   _swigc__p_Document,
   _swigc__p_DomParser,
   _swigc__p_EntityList,
@@ -48199,6 +49011,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GLTree,
   _swigc__p_GLuint,
   _swigc__p_HeightMap,
+  _swigc__p_KeyFrame,
   _swigc__p_Mesh,
   _swigc__p_MeshData,
   _swigc__p_MeshOptimizer,
@@ -48220,6 +49033,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SDL_Surface,
   _swigc__p_Scene,
   _swigc__p_SceneNode,
+  _swigc__p_Skeleton,
   _swigc__p_Smoke,
   _swigc__p_TerrainMesh,
   _swigc__p_TerrainPieceVA,
@@ -48235,6 +49049,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_p_GLTree,
   _swigc__p_p_Mesh,
   _swigc__p_p_MeshData,
+  _swigc__p_p_AnimMesh,
   _swigc__p_p_TerrainPieceVA,
   _swigc__p_p_TerrainMesh,
   _swigc__p_std__listTAGRect2_t,
@@ -48251,6 +49066,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorTAGVector3_t,
   _swigc__p_std__vectorTAGVector4_t,
   _swigc__p_std__vectorTAntEntityPtr_t,
+  _swigc__p_std__vectorTBone_p_t,
+  _swigc__p_std__vectorTKeyFrame_p_t,
   _swigc__p_std__vectorTNode_p_t,
   _swigc__p_std__vectorTNode_t,
   _swigc__p_std__vectorTPickNode_t,
@@ -50109,6 +50926,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMeshData.klass, "save", VALUEFUNC(_wrap_MeshData_save), -1);
     rb_define_method(cMeshData.klass, "getTriangles", VALUEFUNC(_wrap_MeshData_getTriangles), -1);
     rb_define_method(cMeshData.klass, "lineHit", VALUEFUNC(_wrap_MeshData_lineHit), -1);
+    rb_define_method(cMeshData.klass, "texCoordFromPos", VALUEFUNC(_wrap_MeshData_texCoordFromPos), -1);
     cMeshData.mark = 0;
     cMeshData.destroy = (void (*)(void *)) free_MeshData;
     rb_define_module_function(mLibantargis, "disown_Mesh", VALUEFUNC(_wrap_disown_Mesh), -1);
@@ -50124,6 +50942,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMesh.klass, "getTriangles", VALUEFUNC(_wrap_Mesh_getTriangles), -1);
     rb_define_method(cMesh.klass, "setPos", VALUEFUNC(_wrap_Mesh_setPos), -1);
     rb_define_method(cMesh.klass, "setRotation", VALUEFUNC(_wrap_Mesh_setRotation), -1);
+    rb_define_method(cMesh.klass, "getData", VALUEFUNC(_wrap_Mesh_getData), -1);
     cMesh.mark = 0;
     cMesh.destroy = (void (*)(void *)) free_Mesh;
     rb_define_module_function(mLibantargis, "toMesh", VALUEFUNC(_wrap_toMesh), -1);
@@ -50159,6 +50978,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "lineHit", VALUEFUNC(_wrap_Scene_lineHit), -1);
     rb_define_method(cScene.klass, "getLine", VALUEFUNC(_wrap_Scene_getLine), -1);
     rb_define_method(cScene.klass, "mapChanged", VALUEFUNC(_wrap_Scene_mapChanged), -1);
+    rb_define_method(cScene.klass, "getTriangles", VALUEFUNC(_wrap_Scene_getTriangles), -1);
     rb_define_method(cScene.klass, "getCameraDirTo", VALUEFUNC(_wrap_Scene_getCameraDirTo), -1);
     rb_define_method(cScene.klass, "mRubyObject=", VALUEFUNC(_wrap_Scene_mRubyObject_set), -1);
     rb_define_method(cScene.klass, "mRubyObject", VALUEFUNC(_wrap_Scene_mRubyObject_get), -1);
@@ -50322,5 +51142,60 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cSmoke.klass, "draw", VALUEFUNC(_wrap_Smoke_draw), -1);
     cSmoke.mark = 0;
     cSmoke.destroy = (void (*)(void *)) free_Smoke;
+    
+    cBone.klass = rb_define_class_under(mLibantargis, "Bone", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_Bone, (void *) &cBone);
+    rb_define_alloc_func(cBone.klass, _wrap_Bone_allocate);
+    rb_define_method(cBone.klass, "initialize", VALUEFUNC(_wrap_new_Bone), -1);
+    rb_define_method(cBone.klass, "id=", VALUEFUNC(_wrap_Bone_id_set), -1);
+    rb_define_method(cBone.klass, "id", VALUEFUNC(_wrap_Bone_id_get), -1);
+    rb_define_method(cBone.klass, "pos=", VALUEFUNC(_wrap_Bone_pos_set), -1);
+    rb_define_method(cBone.klass, "pos", VALUEFUNC(_wrap_Bone_pos_get), -1);
+    rb_define_method(cBone.klass, "rot=", VALUEFUNC(_wrap_Bone_rot_set), -1);
+    rb_define_method(cBone.klass, "rot", VALUEFUNC(_wrap_Bone_rot_get), -1);
+    rb_define_method(cBone.klass, "parent=", VALUEFUNC(_wrap_Bone_parent_set), -1);
+    rb_define_method(cBone.klass, "parent", VALUEFUNC(_wrap_Bone_parent_get), -1);
+    cBone.mark = 0;
+    cBone.destroy = (void (*)(void *)) free_Bone;
+    
+    cKeyFrame.klass = rb_define_class_under(mLibantargis, "KeyFrame", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_KeyFrame, (void *) &cKeyFrame);
+    rb_define_alloc_func(cKeyFrame.klass, _wrap_KeyFrame_allocate);
+    rb_define_method(cKeyFrame.klass, "initialize", VALUEFUNC(_wrap_new_KeyFrame), -1);
+    rb_define_method(cKeyFrame.klass, "time=", VALUEFUNC(_wrap_KeyFrame_time_set), -1);
+    rb_define_method(cKeyFrame.klass, "time", VALUEFUNC(_wrap_KeyFrame_time_get), -1);
+    rb_define_method(cKeyFrame.klass, "pos=", VALUEFUNC(_wrap_KeyFrame_pos_set), -1);
+    rb_define_method(cKeyFrame.klass, "pos", VALUEFUNC(_wrap_KeyFrame_pos_get), -1);
+    rb_define_method(cKeyFrame.klass, "rot=", VALUEFUNC(_wrap_KeyFrame_rot_set), -1);
+    rb_define_method(cKeyFrame.klass, "rot", VALUEFUNC(_wrap_KeyFrame_rot_get), -1);
+    cKeyFrame.mark = 0;
+    cKeyFrame.destroy = (void (*)(void *)) free_KeyFrame;
+    
+    cSkeleton.klass = rb_define_class_under(mLibantargis, "Skeleton", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_Skeleton, (void *) &cSkeleton);
+    rb_define_alloc_func(cSkeleton.klass, _wrap_Skeleton_allocate);
+    rb_define_method(cSkeleton.klass, "initialize", VALUEFUNC(_wrap_new_Skeleton), -1);
+    rb_define_method(cSkeleton.klass, "bones=", VALUEFUNC(_wrap_Skeleton_bones_set), -1);
+    rb_define_method(cSkeleton.klass, "bones", VALUEFUNC(_wrap_Skeleton_bones_get), -1);
+    rb_define_method(cSkeleton.klass, "frames=", VALUEFUNC(_wrap_Skeleton_frames_set), -1);
+    rb_define_method(cSkeleton.klass, "frames", VALUEFUNC(_wrap_Skeleton_frames_get), -1);
+    cSkeleton.mark = 0;
+    cSkeleton.destroy = (void (*)(void *)) free_Skeleton;
+    
+    cAnimMeshData.klass = rb_define_class_under(mLibantargis, "AnimMeshData", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AnimMeshData, (void *) &cAnimMeshData);
+    rb_define_alloc_func(cAnimMeshData.klass, _wrap_AnimMeshData_allocate);
+    rb_define_method(cAnimMeshData.klass, "initialize", VALUEFUNC(_wrap_new_AnimMeshData), -1);
+    cAnimMeshData.mark = 0;
+    cAnimMeshData.destroy = (void (*)(void *)) free_AnimMeshData;
+    rb_define_module_function(mLibantargis, "disown_AnimMesh", VALUEFUNC(_wrap_disown_AnimMesh), -1);
+    
+    cAnimMesh.klass = rb_define_class_under(mLibantargis, "AnimMesh", ((swig_class *) SWIGTYPE_p_SceneNode->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_AnimMesh, (void *) &cAnimMesh);
+    rb_define_alloc_func(cAnimMesh.klass, _wrap_AnimMesh_allocate);
+    rb_define_method(cAnimMesh.klass, "initialize", VALUEFUNC(_wrap_new_AnimMesh), -1);
+    rb_define_method(cAnimMesh.klass, "draw", VALUEFUNC(_wrap_AnimMesh_draw), -1);
+    cAnimMesh.mark = 0;
+    cAnimMesh.destroy = (void (*)(void *)) free_AnimMesh;
 }
 

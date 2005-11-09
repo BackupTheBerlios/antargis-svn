@@ -61,7 +61,8 @@ def getGrassMeshData(size)
 	opt.add(mv2)
 	opt.add(mv3)
 	
-	$grassdata[size]=MeshData.new(opt.getArray,"data/textures/models/high_grass.png",false)
+	#$grassdata[size]=MeshData.new(opt.getArray,"data/textures/models/high_grass.png",false)
+	$grassdata[size]=MeshData.new(opt.getArray,"data/textures/models/flower1.png",false)
 	
 	return $grassdata[size]
 end

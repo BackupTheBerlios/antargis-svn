@@ -204,6 +204,10 @@ def getAppleTreeMeshData(type="apple")
 		# simply comment this line to generate a new tree in "bla.ant2"
 		# then copy it to whatever file you want.
 		$appletreedata[type]=MeshData.new("data/models/tree1.ant2",1,texture)
+		
+		puts "TREE_TRIANGLES:"
+		puts $appletreedata[type].getTriangles
+		#raise 1
 		#$appletreedata=MeshData.new("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png")
 	end	
 

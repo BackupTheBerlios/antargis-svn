@@ -245,6 +245,18 @@ void MeshData::drawDepth()
     }
 }
 
+void MeshData::texCoordFromPos(float scale)
+{
+  for(size_t i=0;i<mArray.getTriangles()*3;i++)
+    {
+      size_t j=mArray.getIndex(i);
+
+      AGVector4 v=mArray.getVertex(j);
+      AGVector2 t(v[0]+v[1],v[2]);
+      mArray.setTexCoord(j,t*scale);
+    }
+}
+
 
 
 //////////////////////////////////////////////////////////////////////
@@ -337,8 +349,14 @@ void Mesh::setRotation(float r)
   mRotation=r;
 }
 
+MeshData *Mesh::getData()
+{
+  return mData;
+}
+
 
 Mesh *toMesh(SceneNode *node)
 {
   return dynamic_cast<Mesh*>(node);
 }
+

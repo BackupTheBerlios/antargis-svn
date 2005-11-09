@@ -78,6 +78,12 @@ Scene::~Scene()
 
 }
 
+size_t Scene::getTriangles() const
+{
+  return mTriangles;
+}
+
+
 void Scene::draw()
 {
   if(!inited)

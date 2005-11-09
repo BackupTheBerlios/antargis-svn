@@ -1315,4 +1315,21 @@ public:
 };
 
 
+class SwigDirector_AnimMesh : public AnimMesh, public Swig::Director {
+
+public:
+    SwigDirector_AnimMesh(VALUE self, AnimMeshData *data);
+    virtual void advance(float time);
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void setPos(AGVector3 const &pPos);
+    virtual ~SwigDirector_AnimMesh();
+    virtual void drawDepth();
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawShadow();
+    virtual void draw();
+    virtual bool transparent();
+};
+
+
 #endif

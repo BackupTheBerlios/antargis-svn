@@ -89,6 +89,7 @@ class AntGameApp <AntRubyView
 		end
 		if $fc>30 then
 			puts "FPS:"+($fc/$elaps).to_s
+			puts "Tris:"+getScene.getTriangles.to_s
 			$fc=0
 			$elaps=0
 		end
@@ -97,7 +98,7 @@ class AntGameApp <AntRubyView
 		getMap().move(time)
 #		GC.start
 		getScene.advance(time)
-#		delay(20)
+		delay(10)
 		return true
 	end
 	

@@ -66,6 +66,7 @@ class MeshData:public SceneNode
   {
     return mArray.lineHit(pLine);
   }
+  void texCoordFromPos(float scale);
 
 };
 
@@ -89,6 +90,8 @@ class Mesh:public SceneNode
   virtual size_t getTriangles() const;
   void setPos(const AGVector3&pPos);
   void setRotation(float r);
+
+  MeshData *getData();
 
  private:
   void begin();

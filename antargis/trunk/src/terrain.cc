@@ -122,6 +122,7 @@ void TerrainPieceVA::drawDepth()
 
 void TerrainPieceVA::draw()
 {
+//return;
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
   glDepthMask(true);
   glEnable(GL_COLOR_MATERIAL);

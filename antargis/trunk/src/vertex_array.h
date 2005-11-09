@@ -36,6 +36,7 @@ class VertexArray
   void init();
 
   void clear();
+  void update();
 
   size_t getTriangles() const
   {
@@ -47,6 +48,8 @@ class VertexArray
   AGVector4 getColor(size_t i);
   AGVector3 getNormal(size_t i);
   AGVector2 getTexCoord(size_t i);
+
+  void setTexCoord(size_t i,const AGVector2 &t);
 
   AGVector4 lineHit(const AGLine3 &pLine) const;
 
