@@ -179,5 +179,7 @@ void GLApp_markfunc(void *ptr)
   
   if(zoo->scene.mRubyObject)
     rb_gc_mark(zoo->scene.mRUBY);
+  else
+    Scene_markfunc(&zoo->scene);
 
 }

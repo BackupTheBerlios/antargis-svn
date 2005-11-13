@@ -81,20 +81,26 @@ class Triangle
 end
 
 class Frame
-	def initialize(t,r)
+	def initialize(t,p,r)
 		@time=t
+		@pos=p
 		@rot=r
 	end
-	attr_reader :time, :rot
+	attr_reader :time, :rot, :pos
 end
 
 class Bone
-	def initialize(p,r)
+	def initialize(p,r,par)
 		@pos=p
 		@rot=r
 		@frames=[]
+		if par
+			@parent=par
+		else
+			@parent=-1
+		end
 	end
-	def addRotFrame(f)
+	def addFrame(f)
 		@frames.push(f)
 	end
 	def getFrame(t)
@@ -105,7 +111,7 @@ class Bone
 		}
 		throw "Frame "+t.to_s+" not Found!"
 	end
-	attr_reader :pos, :rot, :frames
+	attr_reader :pos, :rot, :frames, :parent
 end
 
 # read frames
@@ -124,75 +130,77 @@ assert(line=~/Meshes.*/)
 line.sub!("Meshes: ","")
 $meshes=line.to_i
 
-puts "WARNING: only 1 mesh per file permitted!"
-assert($meshes==1)
+for mesh in 0..($meshes-1)
 
-line=getline
-$meshname,flags,$material=line.split(" ")
-$meshname.gsub!("\"","")
-
-# read vertices
-line=getline
-$numvertices=line.to_i
-$vertices=[]
-for i in 0..($numvertices-1)
 	line=getline
-	flags,x,y,z,u,v,bone=line.split(" ").collect{|x|x.to_f}
-	bone=bone.to_i
-	$vertices.push(Vertex.new(AGVector3.new(x,y,z),AGVector2.new(u,v),bone))
-end
-
-#read normals
-$numnormals=getline.to_i
-$normals=[]
-for i in 0..($numnormals-1)
+	$meshname,flags,$material=line.split(" ")
+	$meshname.gsub!("\"","")
+	
+	# read vertices
 	line=getline
-	x,y,z=line.split(" ").collect{|x|x.to_f}
-	$normals.push(AGVector3.new(x,y,z))
+	$numvertices=line.to_i
+	$vertices=[]
+	for i in 0..($numvertices-1)
+		line=getline
+		flags,x,y,z,u,v,bone=line.split(" ").collect{|x|x.to_f}
+		bone=bone.to_i
+		$vertices.push(Vertex.new(AGVector3.new(x,y,z),AGVector2.new(u,v),bone))
+	end
+	
+	#read normals
+	$numnormals=getline.to_i
+	$normals=[]
+	for i in 0..($numnormals-1)
+		line=getline
+		x,y,z=line.split(" ").collect{|x|x.to_f}
+		$normals.push(AGVector3.new(x,y,z))
+	end
+	
+	#read triangles
+	$numtris=getline.to_i
+	$tris=[]
+	for i in 0..($numtris-1)
+		line=getline
+		flag,i0,i1,i2,n0,n1,n2,g=line.split(" ").collect{|x|x.to_i}
+		$tris.push(Triangle.new(i0,i1,i2,n0,n1,n2,g))
+	end
 end
-
-#read triangles
-$numtris=getline.to_i
-$tris=[]
-for i in 0..($numtris-1)
-	line=getline
-	flag,i0,i1,i2,n0,n1,n2,g=line.split(" ").collect{|x|x.to_i}
-	$tris.push(Triangle.new(i0,i1,i2,n0,n1,n2,g))
-end
-
 # read materials =1  !!!
 line=getline
 puts line
-assert(line=="Materials: 1")
-line=getline
-assert(line=~/".*"/)
-
-# ambient
-line=getline
-r,g,b,a=line.split(" ").collect{|x|x.to_f}
-$ambient=AGVector4.new(r,g,b,a)
-
-# diffuse
-line=getline
-r,g,b,a=line.split(" ").collect{|x|x.to_f}
-$diffuse=AGVector4.new(r,g,b,a)
-
-# specular
-line=getline
-r,g,b,a=line.split(" ").collect{|x|x.to_f}
-$specular=AGVector4.new(r,g,b,a)
-
-# emissive
-line=getline
-r,g,b,a=line.split(" ").collect{|x|x.to_f}
-$emissive=AGVector4.new(r,g,b,a)
-
-$shininess=getline
-$transparency=getline
-
-$colortex=getline.gsub("\"","")
-$alphatex=getline.gsub("\"","")
-
+line.gsub!("Materials: ","")
+$mats=line.to_i
+for mat in 1..$mats
+	#assert(line=="Materials: 1")
+	line=getline
+	assert(line=~/".*"/)
+	
+	# ambient
+	line=getline
+	r,g,b,a=line.split(" ").collect{|x|x.to_f}
+	$ambient=AGVector4.new(r,g,b,a)
+	
+	# diffuse
+	line=getline
+	r,g,b,a=line.split(" ").collect{|x|x.to_f}
+	$diffuse=AGVector4.new(r,g,b,a)
+	
+	# specular
+	line=getline
+	r,g,b,a=line.split(" ").collect{|x|x.to_f}
+	$specular=AGVector4.new(r,g,b,a)
+	
+	# emissive
+	line=getline
+	r,g,b,a=line.split(" ").collect{|x|x.to_f}
+	$emissive=AGVector4.new(r,g,b,a)
+	
+	$shininess=getline
+	$transparency=getline
+	
+	$colortex=getline.gsub("\"","")
+	$alphatex=getline.gsub("\"","")
+end
 line=getline
 puts line
 assert(line=~/Bones.*/)
@@ -200,25 +208,38 @@ $numbones=line.gsub(/.* /,"").to_i
 
 puts "Bones #:"+$numbones.to_s
 $bones=[]
-for i in 1..$numbones
+$bonenames={}
+for i in 0..($numbones-1)
 	name=getline.gsub("\"","")
 	parent=getline.gsub("\"","")
+	$bonenames[name]=i
 	flags,x,y,z,rx,ry,rz=getline.split(" ").collect{|a|a.to_f}
-	bone=Bone.new(AGVector3.new(x,y,z),AGVector3.new(rx,ry,rz))
+	bone=Bone.new(AGVector3.new(x,y,z),AGVector3.new(rx,ry,rz),$bonenames[parent])
 	
 	poskeys=getline.to_i
+	pkeys={}
+	rkeys={}
 	for j in 1..poskeys
 		t,x,y,z = getline.split(" ").collect{|a|a.to_f}
-		# ignore
-		k=Frame.new(t,AGVector3.new(x,y,z))
+		pkeys[t]=AGVector3.new(x,y,z)
 	end
-	
 	rotkeys=getline.to_i
 	for j in 1..rotkeys
 		t,x,y,z = getline.split(" ").collect{|a|a.to_f}
-		k=Frame.new(t,AGVector3.new(x,y,z))
-		bone.addRotFrame(k)
+		rkeys[t]=AGVector3.new(x,y,z)
 	end
+	
+	(rkeys.keys+pkeys.keys).sort.uniq.each{|t|
+		p=pkeys[t]
+		r=rkeys[t]
+		if not p
+			p=AGVector3.new(0,0,0)
+		end
+		if not r
+			r=AGVector3.new(0,0,0)
+		end
+		bone.addFrame(Frame.new(t,p,r))
+	}
 	$bones.push(bone)
 end
 
@@ -246,7 +267,7 @@ file.print [fvertices.length].pack("i")
 
 fvertices.each{|f|
 	a=[f[0].x,f[0].y,f[0].z,f[0].tx,f[0].ty,f[0].bone,f[1].x,f[1].y,f[1].z]
-	s=a.pack("fffffiff")
+	s=a.pack("fffffifff")
 	file.print s
 }
 
@@ -263,8 +284,8 @@ $tris.each{|t|
 
 file.print [$bones.length].pack("i")
 $bones.each{|b|
-	a=[b.pos.x,b.pos.y,b.pos.z, b.rot.x,b.rot.y,b.rot.z]
-	file.print a.pack("ffffff")
+	a=[b.pos.x,b.pos.y,b.pos.z, b.rot.x,b.rot.y,b.rot.z,b.parent]
+	file.print a.pack("ffffffi")
 }
 
 keys=[]
@@ -276,13 +297,14 @@ $bones.each{|b|
 }
 puts keys.collect{|x|x.to_s}.join(" - ")
 
+file.print [$frames].pack("i")
 file.print [keys.length].pack("i")
 
 keys.each{|k|
 	file.print [k].pack("f")
 	$bones.each{|b|
 		f=b.getFrame(k)
-		file.print [f.rot.x,f.rot.y,f.rot.z].pack("fff")
+		file.print [f.pos.x,f.pos.y,f.pos.z,f.rot.x,f.rot.y,f.rot.z].pack("ffffff")
 	}
 }
 

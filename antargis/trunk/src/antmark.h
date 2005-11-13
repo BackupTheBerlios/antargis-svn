@@ -31,6 +31,18 @@
 	result->mRubyObject=true;
 	//	printf("%X\n",self);
     }
+%exception AnimMesh::AnimMesh {
+        $action
+        result->mRUBY = self;
+	result->mRubyObject=true;
+	//	printf("%X\n",self);
+    }
+%exception AnimMeshData::AnimMeshData {
+        $action
+        result->mRUBY = self;
+	result->mRubyObject=true;
+	//	printf("%X\n",self);
+    }
 %exception TerrainMesh::TerrainMesh {
         $action
         result->mRUBY = self;
@@ -44,4 +56,5 @@
 
 %markfunc Scene "Scene_markfunc";
 %markfunc GLApp "GLApp_markfunc";
+%markfunc AnimMesh "AnimMesh_markfunc";
 
