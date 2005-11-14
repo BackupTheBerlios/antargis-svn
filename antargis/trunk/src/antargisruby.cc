@@ -48231,7 +48231,7 @@ static VALUE _wrap_new_AnimMeshData(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
-_wrap_AnimMeshData_apply(int argc, VALUE *argv, VALUE self) {
+_wrap_AnimMeshData_setTransform(int argc, VALUE *argv, VALUE self) {
     AnimMeshData *arg1 = (AnimMeshData *) 0 ;
     AGMatrix4 *arg2 = 0 ;
     
@@ -48239,9 +48239,28 @@ _wrap_AnimMeshData_apply(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMeshData, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGMatrix4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    (arg1)->apply((AGMatrix4 const &)*arg2);
+    (arg1)->setTransform((AGMatrix4 const &)*arg2);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_AnimMeshData_getTransform(int argc, VALUE *argv, VALUE self) {
+    AnimMeshData *arg1 = (AnimMeshData *) 0 ;
+    AGMatrix4 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMeshData, 1);
+    {
+        AGMatrix4 const &_result_ref = ((AnimMeshData const *)arg1)->getTransform();
+        result = (AGMatrix4 *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMatrix4,0);
+    return vresult;
 }
 
 
@@ -48301,6 +48320,53 @@ static void
 free_AnimMesh(AnimMesh *arg1) {
     delete arg1;
 }
+static VALUE
+_wrap_AnimMesh_setTransform(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    AGMatrix4 *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGMatrix4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setTransform((AGMatrix4 const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AnimMesh_setPos(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    AGVector4 *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setPos((AGVector4 const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AnimMesh_setRot(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    float arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = (float) NUM2DBL(argv[1]);
+    (arg1)->setRot((AGVector3 const &)*arg2,arg3);
+    
+    return Qnil;
+}
+
+
 static VALUE
 _wrap_AnimMesh_getData(int argc, VALUE *argv, VALUE self) {
     AnimMesh *arg1 = (AnimMesh *) 0 ;
@@ -51362,7 +51428,8 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AnimMeshData, (void *) &cAnimMeshData);
     rb_define_alloc_func(cAnimMeshData.klass, _wrap_AnimMeshData_allocate);
     rb_define_method(cAnimMeshData.klass, "initialize", VALUEFUNC(_wrap_new_AnimMeshData), -1);
-    rb_define_method(cAnimMeshData.klass, "apply", VALUEFUNC(_wrap_AnimMeshData_apply), -1);
+    rb_define_method(cAnimMeshData.klass, "setTransform", VALUEFUNC(_wrap_AnimMeshData_setTransform), -1);
+    rb_define_method(cAnimMeshData.klass, "getTransform", VALUEFUNC(_wrap_AnimMeshData_getTransform), -1);
     cAnimMeshData.mark = 0;
     cAnimMeshData.destroy = (void (*)(void *)) free_AnimMeshData;
     rb_define_module_function(mLibantargis, "disown_AnimMesh", VALUEFUNC(_wrap_disown_AnimMesh), -1);
@@ -51371,6 +51438,9 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AnimMesh, (void *) &cAnimMesh);
     rb_define_alloc_func(cAnimMesh.klass, _wrap_AnimMesh_allocate);
     rb_define_method(cAnimMesh.klass, "initialize", VALUEFUNC(_wrap_new_AnimMesh), -1);
+    rb_define_method(cAnimMesh.klass, "setTransform", VALUEFUNC(_wrap_AnimMesh_setTransform), -1);
+    rb_define_method(cAnimMesh.klass, "setPos", VALUEFUNC(_wrap_AnimMesh_setPos), -1);
+    rb_define_method(cAnimMesh.klass, "setRot", VALUEFUNC(_wrap_AnimMesh_setRot), -1);
     rb_define_method(cAnimMesh.klass, "getData", VALUEFUNC(_wrap_AnimMesh_getData), -1);
     rb_define_method(cAnimMesh.klass, "draw", VALUEFUNC(_wrap_AnimMesh_draw), -1);
     rb_define_method(cAnimMesh.klass, "advance", VALUEFUNC(_wrap_AnimMesh_advance), -1);

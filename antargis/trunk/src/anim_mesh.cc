@@ -6,6 +6,8 @@
 
 #include <math.h>
 
+#define USE_ANIM
+
 class Loader
 {
   std::string s;
@@ -39,25 +41,13 @@ public:
 };
 
 void setRotation(AGMatrix4 &m,const AGVector3 &angles)
-{/*
-  std::cout<<angles[0]<<"  "<<angles[1]<<"  "<<angles[2]<<std::endl;
-  std::cout<<"cos(-1.5708)="<<cos(-1.5708)<<std::endl;
- */
-
+{
   double cr = cos( angles[0] );
   double sr = sin( angles[0] );
   double cp = cos( angles[1] );
   double sp = sin( angles[1] );
   double cy = cos( angles[2] );
   double sy = sin( angles[2] );
-  /*
-  std::cout<<"cr:"<<cr<<std::endl;
-  std::cout<<"sr:"<<sr<<std::endl;
-  std::cout<<"cp:"<<cp<<std::endl;
-  std::cout<<"sp:"<<sp<<std::endl;
-  std::cout<<"cy:"<<cy<<std::endl;
-  std::cout<<"sy:"<<sy<<std::endl;
-  */
   // FIXME: maybe the coord must be switched
 
   m.set(0,0,( float )( cp*cy ));
@@ -67,9 +57,6 @@ void setRotation(AGMatrix4 &m,const AGVector3 &angles)
   double srsp = sr*sp;
   double crsp = cr*sp;
 
-  //  std::cout<<"srsp:"<<srsp<<std::endl;
-  //  std::cout<<"crsp:"<<crsp<<std::endl;
-  
   m.set(1,0,( float )( srsp*cy-cr*sy ));
   m.set(1,1,( float )( srsp*sy+cr*cy ));
   m.set(1,2,( float )( sr*cp ));
@@ -95,33 +82,14 @@ void inverseRotate(AGVector3 &v, const AGMatrix4 &m )
   n[1]=v[0]*m.get(1,0) + v[1]*m.get(1,1) + v[2]*m.get(1,2);
   n[2]=v[0]*m.get(2,0) + v[1]*m.get(2,1) + v[2]*m.get(2,2);
   v=n;
-  /*
-  
-        float vec[3];
-
-        vec[0] = pVect[0]*m_matrix[0]+pVect[1]*m_matrix[1]+pVect[2]*m_matrix[2];
-        vec[1] = pVect[0]*m_matrix[4]+pVect[1]*m_matrix[5]+pVect[2]*m_matrix[6];
-        vec[2] = pVect[0]*m_matrix[8]+pVect[1]*m_matrix[9]+pVect[2]*m_matrix[10];
-
-        memcpy( pVect, vec, sizeof( float )*3 );*/
 }
 
 void inverseTranslate(AGVector3 &v, const AGMatrix4 &m )
 {
-  /*        pVect[0] = pVect[0]-m_matrix[12];
-        pVect[1] = pVect[1]-m_matrix[13];
-        pVect[2] = pVect[2]-m_matrix[14];*/
   v[0]-=m.get(3,0);
   v[1]-=m.get(3,1);
   v[2]-=m.get(3,2);
 }
-
-
-
-
-
-
-
 
 
 AnimMeshData::AnimMeshData(const std::string &instr,float scale,const std::string &tex)
@@ -196,59 +164,39 @@ AnimMeshData::AnimMeshData(const std::string &instr,float scale,const std::strin
 	  frame->pos.push_back(AGVector3(x,y,z)*scale);
 	  frame->rot.push_back(AGVector3(rx,ry,rz));
 
-	  /*
-	  AGMatrix4 m;
-	  setRotation(m,AGVector3(rx,ry,rz));
-	  setTranslation(m,AGVector3(x,y,z)*scale);
-
-	  frame->trans.push_back(m);*/
 	  frames.push_back(frame);
 	}
     }
 
+#ifdef USE_ANIM
   setupJoints();
+#endif
 }
 
-void AnimMeshData::apply(const AGMatrix4 &m)
+void AnimMeshData::setTransform(const AGMatrix4 &m)
 {
-  return;
-  for(std::vector<AGVector3>::iterator i=pos.begin();i!=pos.end();i++)
-    (*i)=(m*AGVector4(*i,1)).dim3();
-  for(std::vector<AGVector3>::iterator i=normal.begin();i!=normal.end();i++)
-    (*i)=(m*AGVector4(*i,0)).dim3();
+  mBase=m;
+}
+
+const AGMatrix4 &AnimMeshData::getTransform() const
+{
+  return mBase;
 }
 
 
 void AnimMeshData::setupJoints()
 {
-  //  return;
-  //  int i;
   for (std::vector<Bone*>::iterator i = bones.begin(); i!=bones.end(); i++ )
     {
       Bone& joint = **i;
-      
-      /*      cdebug("ID:"<<joint.id);
-      cdebug("rot:"<<joint.rot.toString());
-      cdebug("pos:"<<joint.pos.toString());
-      */
-      cdebug("relative:"<<joint.mRelative.toString());
-      
-      //      cdebug("REL:");
+
       setRotation(joint.mRelative, joint.rot);
-      //      cdebug(joint.mRelative.toString());
       setTranslation(joint.mRelative, joint.pos);
-      //      cdebug(joint.mRelative.toString());
 
       if(joint.parent)
 	joint.mAbsolute=joint.parent->mAbsolute*joint.mRelative;
-      //joint.mAbsolute=joint.mRelative*joint.parent->mAbsolute;
       else
 	joint.mAbsolute=joint.mRelative;
-
-      //      cdebug(joint.id);
-      //      cdebug(joint.parent);
-      //cdebug(joint.mAbsolute.toString());
-
 
     }
 
@@ -260,8 +208,6 @@ void AnimMeshData::setupJoints()
 	  AGVector3 test=pos[i];
 	  inverseTranslate(pos[i],m);
 	  inverseRotate(pos[i],m);
-
-	  cdebug(test.toString()<<"   "<<(m*AGVector4(pos[i],1)).toString());
 
 	  // normals
 	  inverseRotate(normal[i],m);
@@ -299,23 +245,37 @@ void AnimMesh::draw()
   glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
   glEnable(GL_LIGHTING);
 
+  glPushMatrix();
+  glTranslatef(mPos[0],mPos[1],mPos[2]);
+  glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
 
-  if(false)
+  #ifndef USE_ANIM
     {
       glBegin(GL_TRIANGLES);
       
       // for a start do a simple drawing 
       for(std::vector<size_t>::iterator i=mData->indices.begin();i!=mData->indices.end();i++)
 	{
-	  glNormal3fv(mData->normal[*i]);
+	  AGMatrix4 m(mData->getTransform());
+	  AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
+	  AGVector3 p((m*AGVector4(mData->pos[*i],1)).dim3());
+				      
+	  glNormal3fv(n);
 	  glTexCoord2fv(mData->uv[*i]);
-	  glVertex3fv(mData->pos[*i]);
+	  glVertex3fv(p);
+	  
+	  /*
+	    glNormal3fv(mData->normal[*i]);
+	    glTexCoord2fv(mData->uv[*i]);
+	    glVertex3fv(mData->pos[*i]);*/
 	}
       
       glEnd();
     }
-  else
+#else
     {
+
+      cdebug(mTime);
       // calculate 
       std::vector<AGMatrix4> ms;
 
@@ -325,12 +285,14 @@ void AnimMesh::draw()
       // first get two key frames
       KeyFrame *f0,*f1;
 
-      cdebug(mTime);
+      //      cdebug(mTime);
       std::vector<KeyFrame*>::iterator i=mData->frames.begin();
-      cdebug((*i)->time);
-      while((*i)->time<=mTime && i!=mData->frames.end())
+      //      cdebug((*i)->time);
+      while(i!=mData->frames.end() && (*i)->time<=mTime)
 	i++;
-      cdebug((*i)->time);
+      if(i==mData->frames.end())
+	i--;
+      //      cdebug((*i)->time);
       f1=*i;
       //      assert(i!=mData->frames.begin());
       if(i!=mData->frames.begin())
@@ -359,47 +321,25 @@ void AnimMesh::draw()
 
       for(size_t k=0;k<mData->bones.size();k++)
 	{
-	  cdebug("FFINAL:"<<k);
-	  //	  cdebug(final.toString());
 	  AGMatrix4 final(mData->bones[k]->mRelative);
 	  AGMatrix4 trans;
 	  AGVector3 rot,pos;
 
-	  cdebug("relativ:"<<final.toString());
-
 	  rot=f0->rot[k]*i2 + f1->rot[k]*interpol;
 	  pos=f0->pos[k]*i2 + f1->pos[k]*interpol;
-
-	  //	  cdebug(f0->rot[k].toString()<<"   "<<f1->rot[k].toString()<<"   "<<rot.toString());
-	  cdebug(f0->pos[k].toString()<<"   "<<f1->pos[k].toString()<<"   "<<pos.toString());
-	  cdebug("pos:"<<pos.toString());
-	  cdebug("rot:"<<rot.toString());
 
 	  setRotation(trans,rot);
 	  setTranslation(trans,pos);
 
 		   
 	  final=final*trans;
-	  //	  final=trans*final;
-	  cdebug("trans:"<<trans.toString());
-	  cdebug("final:"<<final.toString());
 
-	  //	  final*=trans;
 	  if(mData->bones[k]->parent)
-	    {
-	      //  cdebug("parent:"<<mData->bones[k]->parent->id);
-	      //	      final=mData->bones[k]->parent->mFinal*final;
-	      final=mData->bones[k]->parent->mFinal*final;
-	    }
+	    final=mData->bones[k]->parent->mFinal*final;
+	  else
+	    final*=mData->getTransform();
 
 	  mData->bones[k]->mFinal=final;
-	  cdebug("rfinal:"<<final.toString());
-	  /*
-	  cdebug("FINAL:");
-	  cdebug(final.toString());
-	  cdebug("ABS:");
-	  cdebug(mData->bones[k]->mAbsolute.toString());
-	  */
 	}
       
 
@@ -439,92 +379,13 @@ void AnimMesh::draw()
 
 
     }
+#endif
+  glPopMatrix();
 }
-/*
-void AnimMesh::padvance(KeyFrame *f0,KeyFrame *f1,float i)
-{
-  for (int i = 0; i < bones.size(); i++ )
-	{
-	  AGVector3 transVec;
-	  AGMatrix4 transform;
-	  int frame;
 
-	  Joint *pJoint = bones[i];
-		
-	  pJoint->m_currentTranslationKeyframe = frame;
-
-		if ( frame == 0 )
-			memcpy( transVec, pJoint->m_pTranslationKeyframes[0].m_parameter, sizeof ( float )*3 );
-		else if ( frame == pJoint->m_numTranslationKeyframes )
-			memcpy( transVec, pJoint->m_pTranslationKeyframes[frame-1].m_parameter, sizeof ( float )*3 );
-		else
-		{
-			assert( frame > 0 && frame < pJoint->m_numTranslationKeyframes );
-
-			const Model::Keyframe& curFrame = pJoint->m_pTranslationKeyframes[frame];
-			const Model::Keyframe& prevFrame = pJoint->m_pTranslationKeyframes[frame-1];
-
-			float timeDelta = curFrame.m_time-prevFrame.m_time;
-			float interpValue = ( float )(( time-prevFrame.m_time )/timeDelta );
-
-			transVec[0] = prevFrame.m_parameter[0]+( curFrame.m_parameter[0]-prevFrame.m_parameter[0] )*interpValue;
-			transVec[1] = prevFrame.m_parameter[1]+( curFrame.m_parameter[1]-prevFrame.m_parameter[1] )*interpValue;
-			transVec[2] = prevFrame.m_parameter[2]+( curFrame.m_parameter[2]-prevFrame.m_parameter[2] )*interpValue; 
-		}
-
-		frame = pJoint->m_currentRotationKeyframe;
-		while ( frame < pJoint->m_numRotationKeyframes && pJoint->m_pRotationKeyframes[frame].m_time < time )
-		{
-			frame++;
-		}
-		pJoint->m_currentRotationKeyframe = frame;
-
-		if ( frame == 0 )
-			transform.setRotationRadians( pJoint->m_pRotationKeyframes[0].m_parameter );
-		else if ( frame == pJoint->m_numRotationKeyframes )
-			transform.setRotationRadians( pJoint->m_pRotationKeyframes[frame-1].m_parameter );
-		else
-		{
-			assert( frame > 0 && frame < pJoint->m_numRotationKeyframes );
-
-			const Model::Keyframe& curFrame = pJoint->m_pRotationKeyframes[frame];
-			const Model::Keyframe& prevFrame = pJoint->m_pRotationKeyframes[frame-1];
-			
-			float timeDelta = curFrame.m_time-prevFrame.m_time;
-			float interpValue = ( float )(( time-prevFrame.m_time )/timeDelta );
-
-			assert( interpValue >= 0 && interpValue <= 1 );
-
-			float rotVec[3];
-
-			rotVec[0] = prevFrame.m_parameter[0]+( curFrame.m_parameter[0]-prevFrame.m_parameter[0] )*interpValue;
-			rotVec[1] = prevFrame.m_parameter[1]+( curFrame.m_parameter[1]-prevFrame.m_parameter[1] )*interpValue;
-			rotVec[2] = prevFrame.m_parameter[2]+( curFrame.m_parameter[2]-prevFrame.m_parameter[2] )*interpValue;
-
-			transform.setRotationRadians( rotVec );
-		}
-
-		transform.setTranslation( transVec );
-		Matrix relativeFinal( pJoint->m_relative );
-		relativeFinal.postMultiply( transform );
-
-		if ( pJoint->m_parent == -1 )
-			pJoint->m_final.set( relativeFinal.getMatrix());
-		else
-		{
-			pJoint->m_final.set( m_pJoints[pJoint->m_parent].m_final.getMatrix());
-			pJoint->m_final.postMultiply( relativeFinal );
-		}
-	}
-
-
-}
-*/
 void AnimMesh::advance(float time)
 {
-  //  mTime=0;
-  //  return;
-  mTime+=time;
+  mTime+=25*time;
 
   while(mTime>mData->animTime)
     mTime-=mData->animTime;
@@ -537,25 +398,30 @@ AnimMeshData *AnimMesh::getData()
 }
 
 
+void AnimMesh::setTransform(const AGMatrix4 &m)
+{
+  mTransform=m;
+  assert(mData);
+  mComplete=mData->getTransform()*mTransform;
+}
 
+void AnimMesh::setPos(const AGVector4 &p)
+{
+  mPos=p;
+  mTransform=AGMatrix4(mRot[3],mRot.dim3())*AGMatrix4(mPos);
 
+  assert(mData);
+  mComplete=mData->getTransform()*mTransform;
+}
+void AnimMesh::setRot(const AGVector3 &r,float a)
+{
+  mRot=AGVector4(r,a);
 
+  mTransform=AGMatrix4(a,r)*AGMatrix4(mPos);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  assert(mData);
+  mComplete=mData->getTransform()*mTransform;
+}
 
 
 
@@ -569,25 +435,5 @@ void AnimMesh_markfunc(void *ptr)
   if(d->mRubyObject)
     rb_gc_mark(d->mRUBY);
 }
-
-
-
-/* DOCUMENTATION:
-
-
-
-
-
-
-
-
-
-
-
-*/
-
-
-
-
 
 

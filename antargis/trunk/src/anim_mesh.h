@@ -20,10 +20,8 @@ struct Bone
 struct KeyFrame
 {
   float time;
-  std::vector<AGVector3> pos; // usually =0
+  std::vector<AGVector3> pos;
   std::vector<AGVector3> rot;
-
-  //  std::vector<AGMatrix4> trans;
 };
 
 class AnimMeshData
@@ -40,13 +38,17 @@ class AnimMeshData
   float animTime;
 
   AGTexture mTexture;
+
+  AGMatrix4 mBase;
+
  private:
   void setupJoints();
 
  public:
   AnimMeshData(const std::string &instr,float scale=1.0f,const std::string &pTexName="");
 
-  void apply(const AGMatrix4 &m);
+  void setTransform(const AGMatrix4 &m);
+  const AGMatrix4 &getTransform() const;
 
   friend class AnimMesh;
 
@@ -61,10 +63,19 @@ class AnimMesh:public SceneNode
   AnimMeshData *mData;
   size_t curKey;
   float mTime;
+  AGMatrix4 mTransform;
+  AGMatrix4 mComplete;
+  AGVector4 mRot;
+  AGVector4 mPos;
 
  public:
   AnimMesh(AnimMeshData *data);
   virtual ~AnimMesh();
+
+  void setTransform(const AGMatrix4 &m);
+
+  void setPos(const AGVector4 &p);
+  void setRot(const AGVector3 &r,float a);
 
   AnimMeshData *getData();
 
