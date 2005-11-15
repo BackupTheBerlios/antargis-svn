@@ -9,6 +9,7 @@ class App<GLApp
 		super
 		
 		data=AnimMeshData.new(File.open("yago.ant3").read,0.1,"yago.png")
+		data=AnimMeshData.new(File.open("sheep.ant3").read,0.3,"sheep.png")
 		#data=AnimMeshData.new(File.open("bert.ant3").read,0.1,"yago.png")
 		data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
 		#data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1)))
@@ -24,10 +25,11 @@ class App<GLApp
 		@rot=0.0
 	end
 	
-	def eventIdle
-		return
+	def eventFrame(s)
+		super(s)
+		#return
 		#puts "h"
-		@rot+=1
+		@rot+=2
 		@n.setRot(AGVector3.new(0,0,1),@rot)
 	end
 end

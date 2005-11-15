@@ -25,10 +25,19 @@ class AntNewSheep<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		setType("sheep")
-		setSpeed 1
+		setSpeed 0.6
 		@lastBirth=0
 		#setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))
+		
+		
 		setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3),AGVector4.new(0,0,0,0),90))
+		
+		
+		data=AnimMeshData.new(File.open("ruby/sheep.ant3").read,0.1,"ruby/sheep.png")
+		data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
+		setMesh(AnimMesh.new(data))
+
+		
 	end
 	def saveXML(node)
 		super(node)

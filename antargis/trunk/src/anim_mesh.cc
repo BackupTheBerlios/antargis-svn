@@ -275,7 +275,7 @@ void AnimMesh::draw()
 #else
     {
 
-      cdebug(mTime);
+      //      cdebug(mTime);
       // calculate 
       std::vector<AGMatrix4> ms;
 
@@ -328,7 +328,7 @@ void AnimMesh::draw()
 	  rot=f0->rot[k]*i2 + f1->rot[k]*interpol;
 	  pos=f0->pos[k]*i2 + f1->pos[k]*interpol;
 
-	  setRotation(trans,rot);
+	  ::setRotation(trans,rot);
 	  setTranslation(trans,pos);
 
 		   
@@ -336,8 +336,8 @@ void AnimMesh::draw()
 
 	  if(mData->bones[k]->parent)
 	    final=mData->bones[k]->parent->mFinal*final;
-	  else
-	    final*=mData->getTransform();
+	  //	  else
+	  //	    final*=mData->getTransform();
 
 	  mData->bones[k]->mFinal=final;
 	}
@@ -346,6 +346,7 @@ void AnimMesh::draw()
       // paint with transform
 
       glPushMatrix();
+      glMultMatrixf(mData->getTransform());
 
       //      glScalef(0.1,0.1,0.1);
       glBegin(GL_TRIANGLES);
@@ -354,9 +355,12 @@ void AnimMesh::draw()
       for(std::vector<size_t>::iterator i=mData->indices.begin();i!=mData->indices.end();i++)
 	{
 	  int b=mData->bone[*i];
+	  AGMatrix4 m;
 	  if(b>=0)
 	    {
-	      AGMatrix4 m(mData->bones[b]->mFinal);
+	      m=mData->bones[b]->mFinal;
+	    }
+	  //	  else	    m=mData->getTransform();
 	      //	      m=m.transposed();
 	      AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
 	      AGVector3 p((m*AGVector4(mData->pos[*i],1)).dim3());
@@ -364,14 +368,14 @@ void AnimMesh::draw()
 	      glNormal3fv(n);
 	      glTexCoord2fv(mData->uv[*i]);
 	      glVertex3fv(p);
-	      
+	      /*	      
 	    }
 	  else
 	    {
 	      glNormal3fv(mData->normal[*i]);
 	      glTexCoord2fv(mData->uv[*i]);
 	      glVertex3fv(mData->pos[*i]);
-	    }
+	      }*/
 	}
       
       glEnd();
@@ -405,15 +409,15 @@ void AnimMesh::setTransform(const AGMatrix4 &m)
   mComplete=mData->getTransform()*mTransform;
 }
 
-void AnimMesh::setPos(const AGVector4 &p)
+void AnimMesh::setPos(const AGVector3 &p)
 {
-  mPos=p;
+  mPos=AGVector4(p,1);
   mTransform=AGMatrix4(mRot[3],mRot.dim3())*AGMatrix4(mPos);
 
   assert(mData);
   mComplete=mData->getTransform()*mTransform;
 }
-void AnimMesh::setRot(const AGVector3 &r,float a)
+void AnimMesh::setRotation(const AGVector3 &r,float a)
 {
   mRot=AGVector4(r,a);
 
@@ -423,6 +427,10 @@ void AnimMesh::setRot(const AGVector3 &r,float a)
   mComplete=mData->getTransform()*mTransform;
 }
 
+void AnimMesh::setRotation(float r)
+{
+  setRotation(AGVector3(0,0,1),r+180);
+}
 
 
 

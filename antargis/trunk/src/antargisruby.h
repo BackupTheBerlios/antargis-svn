@@ -1140,6 +1140,7 @@ public:
     virtual size_t getTriangles() const;
     virtual void mapChanged();
     virtual void setPos(AGVector3 const &pPos);
+    virtual void setRotation(float r);
     virtual ~SwigDirector_SceneNode();
     virtual void drawDepth();
     virtual void sort(AGVector4 const &pCamera);
@@ -1157,6 +1158,7 @@ public:
     virtual void advance(float time);
     virtual void mapChanged();
     virtual void setPos(AGVector3 const &pPos);
+    virtual void setRotation(float r);
     virtual size_t getTriangles() const;
     virtual ~SwigDirector_MeshData();
     virtual void sort(AGVector4 const &pCamera);
@@ -1176,6 +1178,7 @@ public:
     virtual void mapChanged();
     virtual size_t getTriangles() const;
     virtual void setPos(AGVector3 const &pPos);
+    virtual void setRotation(float r);
     virtual ~SwigDirector_Mesh();
     virtual void sort(AGVector4 const &pCamera);
     virtual void drawDepth();
@@ -1253,6 +1256,7 @@ public:
     SwigDirector_TerrainPieceVA(VALUE self, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos);
     virtual void advance(float time);
     virtual void setPos(AGVector3 const &pPos);
+    virtual void setRotation(float r);
     virtual size_t getTriangles() const;
     virtual void mapChanged();
     virtual ~SwigDirector_TerrainPieceVA();
@@ -1269,6 +1273,7 @@ class SwigDirector_TerrainMesh : public TerrainMesh, public Swig::Director {
 public:
     SwigDirector_TerrainMesh(VALUE self, HeightMap &map);
     virtual void setPos(AGVector3 const &pPos);
+    virtual void setRotation(float r);
     virtual void advance(float t);
     virtual size_t getTriangles() const;
     virtual void mapChanged();
@@ -1289,6 +1294,7 @@ public:
     virtual void mapChanged();
     virtual size_t getTriangles() const;
     virtual void setPos(AGVector3 const &pPos);
+    virtual void setRotation(float r);
     virtual ~SwigDirector_GLTree();
     virtual void sort(AGVector4 const &pCamera);
     virtual void drawDepth();
@@ -1304,6 +1310,7 @@ public:
     SwigDirector_Smoke(VALUE self, float f);
     virtual size_t getTriangles() const;
     virtual void mapChanged();
+    virtual void setRotation(float r);
     virtual void advance(float time);
     virtual void setPos(AGVector3 const &pPos);
     virtual ~SwigDirector_Smoke();
@@ -1321,7 +1328,8 @@ public:
     SwigDirector_AnimMesh(VALUE self, AnimMeshData *data);
     virtual size_t getTriangles() const;
     virtual void mapChanged();
-    virtual void setPos(AGVector3 const &pPos);
+    virtual void setPos(AGVector3 const &p);
+    virtual void setRotation(float r);
     virtual void advance(float time);
     virtual ~SwigDirector_AnimMesh();
     virtual void drawDepth();

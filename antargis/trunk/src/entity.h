@@ -166,7 +166,7 @@ class AntEntity
 
     // anything below shouldn't be used by ruby-functions
 
-    void setMesh(Mesh *pMesh);
+    void setMesh(SceneNode *pMesh);
     Meshes getMesh();
     void addMesh(SceneNode *pMesh,const AGVector3 &v);
 

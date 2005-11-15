@@ -55,6 +55,11 @@ void SceneNode::setScene(Scene *s)
   {
   }
 
+void SceneNode::setRotation(float r)
+{
+}
+
+
   bool SceneNode::transparent()
   {
     return false;

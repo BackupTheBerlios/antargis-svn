@@ -26,6 +26,7 @@ class SceneNode
   bool operator==(const SceneNode &n) const;
 
   virtual void setPos(const AGVector3&pPos);
+  virtual void setRotation(float r);
 
   virtual bool transparent();
   

@@ -74,8 +74,9 @@ class AnimMesh:public SceneNode
 
   void setTransform(const AGMatrix4 &m);
 
-  void setPos(const AGVector4 &p);
-  void setRot(const AGVector3 &r,float a);
+  void setPos(const AGVector3 &p);
+  void setRotation(const AGVector3 &r,float a);
+  void setRotation(float r);
 
   AnimMeshData *getData();
 

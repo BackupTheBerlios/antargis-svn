@@ -49,7 +49,7 @@ class Vertex
 		@tex.x
 	end
 	def ty
-		@tex.y
+		1-@tex.y
 	end
 	def bone
 		@bone

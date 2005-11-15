@@ -270,7 +270,7 @@ std::string AntEntity::getType() const
   return mType;
 }
 
-void AntEntity::setMesh(Mesh *m)
+void AntEntity::setMesh(SceneNode *m)
 {
   // clear meshes from scene
   for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
@@ -321,7 +321,7 @@ void AntEntity::setDirection(float dir)
 
   if(mMesh.size())
     {
-      Mesh *m=dynamic_cast<Mesh*>(mMesh.front());
+      SceneNode *m=mMesh.front();
       if(m)
 	m->setRotation(dir);
     }

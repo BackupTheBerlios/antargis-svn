@@ -16128,6 +16128,19 @@ void SwigDirector_SceneNode::setPos(AGVector3 const &pPos) {
 }
 
 
+void SwigDirector_SceneNode::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
+}
+
+
 SwigDirector_SceneNode::~SwigDirector_SceneNode() {
 }
 
@@ -16238,6 +16251,19 @@ void SwigDirector_MeshData::setPos(AGVector3 const &pPos) {
     }
     obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
     result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
+void SwigDirector_MeshData::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
 }
 
 
@@ -16377,6 +16403,19 @@ void SwigDirector_Mesh::setPos(AGVector3 const &pPos) {
     }
     obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
     result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
+void SwigDirector_Mesh::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Mesh::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
 }
 
 
@@ -17114,6 +17153,19 @@ void SwigDirector_TerrainPieceVA::setPos(AGVector3 const &pPos) {
 }
 
 
+void SwigDirector_TerrainPieceVA::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
+}
+
+
 size_t SwigDirector_TerrainPieceVA::getTriangles() const {
     size_t c_result ;
     VALUE result;
@@ -17218,6 +17270,19 @@ void SwigDirector_TerrainMesh::setPos(AGVector3 const &pPos) {
     }
     obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
     result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
+void SwigDirector_TerrainMesh::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
 }
 
 
@@ -17378,6 +17443,19 @@ void SwigDirector_GLTree::setPos(AGVector3 const &pPos) {
 }
 
 
+void SwigDirector_GLTree::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Mesh::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
+}
+
+
 SwigDirector_GLTree::~SwigDirector_GLTree() {
 }
 
@@ -17468,6 +17546,19 @@ void SwigDirector_Smoke::mapChanged() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("mapChanged"), 0, NULL);
+}
+
+
+void SwigDirector_Smoke::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        SceneNode::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
 }
 
 
@@ -17591,17 +17682,30 @@ void SwigDirector_AnimMesh::mapChanged() {
 }
 
 
-void SwigDirector_AnimMesh::setPos(AGVector3 const &pPos) {
-    AGVector3 * nc_tmp_pPos = const_cast<AGVector3 *>(&pPos) ;
+void SwigDirector_AnimMesh::setPos(AGVector3 const &p) {
+    AGVector3 * nc_tmp_p = const_cast<AGVector3 *>(&p) ;
     VALUE obj0 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        SceneNode::setPos(pPos);
+        AnimMesh::setPos(p);
         return;
     }
-    obj0 = SWIG_NewPointerObj(nc_tmp_pPos, SWIGTYPE_p_AGVector3, 0);
+    obj0 = SWIG_NewPointerObj(nc_tmp_p, SWIGTYPE_p_AGVector3, 0);
     result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
+}
+
+
+void SwigDirector_AnimMesh::setRotation(float r) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AnimMesh::setRotation(r);
+        return;
+    }
+    obj0 = rb_float_new(r);
+    result = rb_funcall(swig_get_self(), rb_intern("setRotation"), 1,obj0);
 }
 
 
@@ -43294,6 +43398,24 @@ _wrap_SceneNode_setPos(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_SceneNode_setRotation(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    float arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->setRotation(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_SceneNode_transparent(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
     bool result;
@@ -44313,11 +44435,14 @@ static VALUE
 _wrap_Mesh_setRotation(int argc, VALUE *argv, VALUE self) {
     Mesh *arg1 = (Mesh *) 0 ;
     float arg2 ;
+    Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Mesh, 1);
     arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->setRotation(arg2);
     
     return Qnil;
@@ -46458,12 +46583,12 @@ _wrap_AntEntity_getMorale(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AntEntity_setMesh(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
-    Mesh *arg2 = (Mesh *) 0 ;
+    SceneNode *arg2 = (SceneNode *) 0 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Mesh, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_SceneNode, 1);
     (arg1)->setMesh(arg2);
     
     return Qnil;
@@ -48338,20 +48463,23 @@ _wrap_AnimMesh_setTransform(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AnimMesh_setPos(int argc, VALUE *argv, VALUE self) {
     AnimMesh *arg1 = (AnimMesh *) 0 ;
-    AGVector4 *arg2 = 0 ;
+    AGVector3 *arg2 = 0 ;
+    Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    (arg1)->setPos((AGVector4 const &)*arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->setPos((AGVector3 const &)*arg2);
     
     return Qnil;
 }
 
 
 static VALUE
-_wrap_AnimMesh_setRot(int argc, VALUE *argv, VALUE self) {
+_wrap_AnimMesh_setRotation__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AnimMesh *arg1 = (AnimMesh *) 0 ;
     AGVector3 *arg2 = 0 ;
     float arg3 ;
@@ -48361,8 +48489,78 @@ _wrap_AnimMesh_setRot(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     arg3 = (float) NUM2DBL(argv[1]);
-    (arg1)->setRot((AGVector3 const &)*arg2,arg3);
+    (arg1)->setRotation((AGVector3 const &)*arg2,arg3);
     
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AnimMesh_setRotation__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    float arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->setRotation(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AnimMesh_setRotation(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AnimMesh, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AnimMesh_setRotation__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AnimMesh, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AnimMesh_setRotation__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AnimMesh_setRotation'");
     return Qnil;
 }
 
@@ -51133,6 +51331,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cSceneNode.klass, "mapChanged", VALUEFUNC(_wrap_SceneNode_mapChanged), -1);
     rb_define_method(cSceneNode.klass, "==", VALUEFUNC(_wrap_SceneNode___eq__), -1);
     rb_define_method(cSceneNode.klass, "setPos", VALUEFUNC(_wrap_SceneNode_setPos), -1);
+    rb_define_method(cSceneNode.klass, "setRotation", VALUEFUNC(_wrap_SceneNode_setRotation), -1);
     rb_define_method(cSceneNode.klass, "transparent", VALUEFUNC(_wrap_SceneNode_transparent), -1);
     cSceneNode.mark = 0;
     cSceneNode.destroy = (void (*)(void *)) free_SceneNode;
@@ -51440,7 +51639,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAnimMesh.klass, "initialize", VALUEFUNC(_wrap_new_AnimMesh), -1);
     rb_define_method(cAnimMesh.klass, "setTransform", VALUEFUNC(_wrap_AnimMesh_setTransform), -1);
     rb_define_method(cAnimMesh.klass, "setPos", VALUEFUNC(_wrap_AnimMesh_setPos), -1);
-    rb_define_method(cAnimMesh.klass, "setRot", VALUEFUNC(_wrap_AnimMesh_setRot), -1);
+    rb_define_method(cAnimMesh.klass, "setRotation", VALUEFUNC(_wrap_AnimMesh_setRotation), -1);
     rb_define_method(cAnimMesh.klass, "getData", VALUEFUNC(_wrap_AnimMesh_getData), -1);
     rb_define_method(cAnimMesh.klass, "draw", VALUEFUNC(_wrap_AnimMesh_draw), -1);
     rb_define_method(cAnimMesh.klass, "advance", VALUEFUNC(_wrap_AnimMesh_advance), -1);
