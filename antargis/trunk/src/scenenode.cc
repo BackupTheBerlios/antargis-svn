@@ -65,3 +65,7 @@ void SceneNode::setRotation(float r)
     return false;
   }
 
+AGBox3 SceneNode::bbox()
+{
+  return AGBox3(AGVector3(0,0,0),AGVector3(0,0,0));
+}

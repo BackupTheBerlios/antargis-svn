@@ -309,6 +309,7 @@ void AntMap::removeEntity(AntEntity *p)
 
 void AntMap::move(float pTime)
 {
+  //  return;
   // first remove entities, which shall be deleted
   std::list<AntEntity*>::iterator d=mToDel.begin();
   for(;d!=mToDel.end();d++)

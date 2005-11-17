@@ -32,7 +32,7 @@ class AntFarm<AntHouse
 		@atHome=[]
 		@lastBirth=0
 		
-		mesh=Mesh.new(getMeshData("data/models/farm.ant",2,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMeshData("data/models/farm.ant2",2,"data/textures/models/farm.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end
 

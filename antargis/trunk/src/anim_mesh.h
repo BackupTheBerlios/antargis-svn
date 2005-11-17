@@ -7,6 +7,7 @@
 #include "scenenode.h"
 
 #include <vector>
+#include <map>
 
 struct Bone
 {
@@ -22,6 +23,24 @@ struct KeyFrame
   float time;
   std::vector<AGVector3> pos;
   std::vector<AGVector3> rot;
+};
+
+struct Animation
+{
+  float begin;
+  float end;
+  float fps;
+  float len;
+
+  Animation()
+  {
+    begin=end=fps=1;
+    len=0;
+  }
+  Animation(float b,float e,float f):begin(b),end(e),fps(f)
+  {
+    len=end-begin;
+  }
 };
 
 class AnimMeshData
@@ -41,11 +60,18 @@ class AnimMeshData
 
   AGMatrix4 mBase;
 
+  std::map<std::string,Animation> mAnimations;
+
+  AGBox3 mBBox;
+
  private:
   void setupJoints();
+  void loadAnt3(const std::string &instr,float scale,const std::string &pTexName);
 
  public:
-  AnimMeshData(const std::string &instr,float scale=1.0f,const std::string &pTexName="");
+  AnimMeshData(const std::string &xmlfile);
+
+  AGBox3 bbox() const;
 
   void setTransform(const AGMatrix4 &m);
   const AGMatrix4 &getTransform() const;
@@ -67,12 +93,19 @@ class AnimMesh:public SceneNode
   AGMatrix4 mComplete;
   AGVector4 mRot;
   AGVector4 mPos;
+  std::string mAnimName;
+  Animation *mAnimation;
+
+  std::vector<AGMatrix4> mMatrices;
 
  public:
   AnimMesh(AnimMeshData *data);
   virtual ~AnimMesh();
 
   void setTransform(const AGMatrix4 &m);
+
+  std::string getAnimation() const;
+  void setAnimation(const std::string &pName);
 
   void setPos(const AGVector3 &p);
   void setRotation(const AGVector3 &r,float a);
@@ -82,6 +115,11 @@ class AnimMesh:public SceneNode
 
   virtual void draw();
   virtual void advance(float time);
+
+  AGBox3 bbox();
+
+ private:
+  void update();
 };
 
 void AnimMesh_markfunc(void *ptr);

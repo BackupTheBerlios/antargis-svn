@@ -1,36 +1,31 @@
 #!/usr/bin/env ruby
 
 puts "a"
-require 'antargislib.rb'
+require 'ruby/antargislib.rb'
 puts "a"
 
 class App<GLApp
 	def initialize(w,h)
 		super
 		
-		data=AnimMeshData.new(File.open("yago.ant3").read,0.1,"yago.png")
-		data=AnimMeshData.new(File.open("sheep.ant3").read,0.3,"sheep.png")
-		#data=AnimMeshData.new(File.open("bert.ant3").read,0.1,"yago.png")
+		data=AnimMeshData.new("data/models/sheep.anim")
 		data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
-		#data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1)))
-		
 		
 		puts "YAY"
 		@n=AnimMesh.new(data)
 		
-		#n.setRot(AGVector3.new(0,0,1),180)
-		#n.setRot(AGVector3.new(1,0,0),90)
-		
+		@n.setAnimation("go")
 		getScene.addNode(@n)
 		@rot=0.0
 	end
 	
 	def eventFrame(s)
 		super(s)
-		#return
-		#puts "h"
 		@rot+=2
-		@n.setRot(AGVector3.new(0,0,1),@rot)
+		@n.setRotation(AGVector3.new(0,0,1),@rot)
+		if @rot>180
+			@n.setAnimation("eat")
+		end
 	end
 end
 

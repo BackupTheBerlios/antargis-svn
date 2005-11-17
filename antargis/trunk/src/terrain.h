@@ -59,6 +59,8 @@ class TerrainMesh:public SceneNode
   typedef std::list<WaterPiece*> WPieces;
   Pieces pieces;
   WPieces water;
+
+  float w,h;
 public:
   TerrainMesh(HeightMap &map);
 
@@ -75,6 +77,8 @@ public:
   virtual size_t getTriangles() const;
 
   virtual void mapChanged();
+
+  AGBox3 bbox();
 
 
 };

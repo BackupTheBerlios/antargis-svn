@@ -168,6 +168,7 @@ class AntEntity
 
     void setMesh(SceneNode *pMesh);
     Meshes getMesh();
+    SceneNode *getFirstMesh();
     void addMesh(SceneNode *pMesh,const AGVector3 &v);
 
     // used only by *Jobs

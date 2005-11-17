@@ -303,6 +303,12 @@ AntEntity::Meshes AntEntity::getMesh()
   return mMesh;
 }
 
+SceneNode *AntEntity::getFirstMesh()
+{
+  return mMesh.front();
+}
+
+
 
 int AntEntity::getID() const
 {

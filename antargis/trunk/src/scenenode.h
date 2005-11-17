@@ -29,6 +29,8 @@ class SceneNode
   virtual void setRotation(float r);
 
   virtual bool transparent();
+
+  virtual AGBox3 bbox();
   
   public: // must be public, so that swig can set these
 #ifndef SWIG

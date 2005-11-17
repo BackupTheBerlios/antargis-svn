@@ -3,6 +3,8 @@
 #include "ag_texturecache.h"
 
 #include "ag_debug.h"
+#include "ag_xml.h"
+#include "ag_fs.h"
 
 #include <math.h>
 
@@ -92,7 +94,43 @@ void inverseTranslate(AGVector3 &v, const AGMatrix4 &m )
 }
 
 
-AnimMeshData::AnimMeshData(const std::string &instr,float scale,const std::string &tex)
+AnimMeshData::AnimMeshData(const std::string &xmlfile)
+{
+  Document doc(xmlfile);
+
+  Node &root=doc.root();
+
+  loadAnt3(loadFile(root.get("model")),toFloat(root.get("scale")),root.get("texture"));
+  
+  // load animations
+  
+  Node::NodeVector anims=root.get_children("animation");
+  for(Node::NodeVector::iterator i=anims.begin();i!=anims.end();i++)
+    {
+      float begin=toFloat((*i)->get("begin"))-1;
+      float end=toFloat((*i)->get("end"))-1;
+      float fps=toFloat((*i)->get("fps"));
+      assert(fps>0);
+      assert(begin>=0);
+      assert(begin<animTime);
+      assert(begin<end);
+      assert(end<animTime);
+      mAnimations[(*i)->get("name")]=Animation(begin,end,fps);
+    }
+
+  if(anims.size()==0)
+    {
+      std::cerr<<"There are no animations in "<<xmlfile<<std::endl;
+      throw std::string("no animations found in xmlfile");
+    }
+}
+
+AGBox3 AnimMeshData::bbox() const
+{
+  return mBBox;
+}
+
+void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::string &tex)
 {
   mTexture=getTextureCache()->get(tex);
   Loader l(instr);
@@ -105,7 +143,11 @@ AnimMeshData::AnimMeshData(const std::string &instr,float scale,const std::strin
       float x,y,z,tx,ty,nx,ny,nz;
       Sint32 boneID;
       l>>x>>y>>z>>tx>>ty>>boneID>>nx>>ny>>nz;
-      pos.push_back(AGVector3(x,y,z)*scale);
+
+      AGVector3 v(x,y,z);
+      v*=scale;
+      mBBox.include(v);
+      pos.push_back(v);
       uv.push_back(AGVector2(tx,ty));
       normal.push_back(AGVector3(nx,ny,nz));
       bone.push_back(boneID);
@@ -223,12 +265,14 @@ void AnimMeshData::setupJoints()
 /////////////////////////////////////////////////////////////////////////
 
 
-
-
-AnimMesh::AnimMesh(AnimMeshData *data):mData(data)
+AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size())
 {
   curKey=0;
   mTime=0;
+  
+  assert(mData->mAnimations.size()>0);
+  mAnimName=mData->mAnimations.begin()->first;
+  mAnimation=&mData->mAnimations.begin()->second;
 }
 
 AnimMesh::~AnimMesh()
@@ -264,10 +308,6 @@ void AnimMesh::draw()
 	  glTexCoord2fv(mData->uv[*i]);
 	  glVertex3fv(p);
 	  
-	  /*
-	    glNormal3fv(mData->normal[*i]);
-	    glTexCoord2fv(mData->uv[*i]);
-	    glVertex3fv(mData->pos[*i]);*/
 	}
       
       glEnd();
@@ -275,9 +315,51 @@ void AnimMesh::draw()
 #else
     {
 
-      //      cdebug(mTime);
+      // paint with transform
+
+      glMultMatrixf(mData->getTransform());
+
+      glBegin(GL_TRIANGLES);
+      
+      // for a start do a simple drawing 
+      for(std::vector<size_t>::iterator i=mData->indices.begin();i!=mData->indices.end();i++)
+	{
+	  int b=mData->bone[*i];
+	  AGMatrix4 m;
+	  if(b>=0)
+	    {
+	      m=mMatrices[b];
+	    }
+	  AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
+	  AGVector3 p((m*AGVector4(mData->pos[*i],1)).dim3());
+	  
+	  glNormal3fv(n);
+	  glTexCoord2fv(mData->uv[*i]);
+	  glVertex3fv(p);
+	}
+      
+      glEnd();
+
+
+    }
+#endif
+  glPopMatrix();
+}
+
+void AnimMesh::advance(float time)
+{
+  mTime+=mAnimation->fps*time;
+
+  while(mTime>mAnimation->end)
+    mTime-=mAnimation->len;
+
+  update();
+}
+
+void AnimMesh::update()
+{
       // calculate 
-      std::vector<AGMatrix4> ms;
+  //      std::vector<AGMatrix4> ms;
 
       while(mTime>mData->animTime)
 	mTime-=mData->animTime;
@@ -285,16 +367,14 @@ void AnimMesh::draw()
       // first get two key frames
       KeyFrame *f0,*f1;
 
-      //      cdebug(mTime);
       std::vector<KeyFrame*>::iterator i=mData->frames.begin();
-      //      cdebug((*i)->time);
       while(i!=mData->frames.end() && (*i)->time<=mTime)
 	i++;
       if(i==mData->frames.end())
 	i--;
-      //      cdebug((*i)->time);
+
       f1=*i;
-      //      assert(i!=mData->frames.begin());
+
       if(i!=mData->frames.begin())
 	i--;
       f0=*i;
@@ -335,64 +415,14 @@ void AnimMesh::draw()
 	  final=final*trans;
 
 	  if(mData->bones[k]->parent)
-	    final=mData->bones[k]->parent->mFinal*final;
-	  //	  else
-	  //	    final*=mData->getTransform();
+	    final=mMatrices[mData->bones[k]->parent->id]*final;
 
-	  mData->bones[k]->mFinal=final;
+	  mMatrices[k]=final;
 	}
       
 
-      // paint with transform
-
-      glPushMatrix();
-      glMultMatrixf(mData->getTransform());
-
-      //      glScalef(0.1,0.1,0.1);
-      glBegin(GL_TRIANGLES);
-      
-      // for a start do a simple drawing 
-      for(std::vector<size_t>::iterator i=mData->indices.begin();i!=mData->indices.end();i++)
-	{
-	  int b=mData->bone[*i];
-	  AGMatrix4 m;
-	  if(b>=0)
-	    {
-	      m=mData->bones[b]->mFinal;
-	    }
-	  //	  else	    m=mData->getTransform();
-	      //	      m=m.transposed();
-	      AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
-	      AGVector3 p((m*AGVector4(mData->pos[*i],1)).dim3());
-				      
-	      glNormal3fv(n);
-	      glTexCoord2fv(mData->uv[*i]);
-	      glVertex3fv(p);
-	      /*	      
-	    }
-	  else
-	    {
-	      glNormal3fv(mData->normal[*i]);
-	      glTexCoord2fv(mData->uv[*i]);
-	      glVertex3fv(mData->pos[*i]);
-	      }*/
-	}
-      
-      glEnd();
-      glPopMatrix();
 
 
-    }
-#endif
-  glPopMatrix();
-}
-
-void AnimMesh::advance(float time)
-{
-  mTime+=25*time;
-
-  while(mTime>mData->animTime)
-    mTime-=mData->animTime;
 }
 
 
@@ -432,6 +462,27 @@ void AnimMesh::setRotation(float r)
   setRotation(AGVector3(0,0,1),r+180);
 }
 
+std::string AnimMesh::getAnimation() const
+{
+  return mAnimName;
+}
+
+void AnimMesh::setAnimation(const std::string &pName)
+{
+  if(mAnimName==pName)
+    return;
+  if(mData->mAnimations.find(pName)==mData->mAnimations.end())
+    throw std::string("Animation ")+pName+" is known here!";
+
+  mAnimation=&(mData->mAnimations[pName]);
+  mAnimName=pName;
+  mTime=mAnimation->begin;
+}
+
+AGBox3 AnimMesh::bbox()
+{
+  return mData->bbox()+mPos;
+}
 
 
 void AnimMesh_markfunc(void *ptr)

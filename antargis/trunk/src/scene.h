@@ -59,6 +59,8 @@ class Scene
   AGVector3 getCameraDirTo(const AGVector3 &p) const;
 
 
+  AGMatrix4 getFrustum();
+
  private:
   void init();
   void calcCameraView();

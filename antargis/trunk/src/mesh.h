@@ -46,6 +46,8 @@ class MeshData:public SceneNode
   bool mShadow;
   //  bool mAlpha;
 
+  AGBox3 mBBox;
+
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
   MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
@@ -57,6 +59,8 @@ class MeshData:public SceneNode
   void draw();
   void drawShadow();
   void drawDepth();
+
+  AGBox3 bbox() const;
 
   void save(const std::string &pFilename);
 
@@ -84,6 +88,8 @@ class Mesh:public SceneNode
   void draw();
   void drawDepth();
   void drawShadow();
+
+  AGBox3 bbox();
 
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
 

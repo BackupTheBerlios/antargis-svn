@@ -78,7 +78,7 @@ VertexArray MeshOptimizer::getArray()
 // MeshData
 //////////////////////////////////////////////////////////////////////
 
-MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow)
+MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
   mArray=va;
   mWithTexture=false;
@@ -93,7 +93,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
 }
 
 
-MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow)
+MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
   Uint16 faces,meshes,vertices;
 
@@ -131,6 +131,8 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
 		fread(mVertices[j].t,sizeof(float),2,f);
 	      mVertices[j].v*=zoom;
 	      mVertices[j].v[3]=1;
+
+	      mBBox.include(mVertices[j].v.dim3());
 	    }
 	  if(vertices==3)
 	    {
@@ -158,6 +160,12 @@ MeshData::~MeshData()
 {
   //  TRACE;
 }
+
+AGBox3 MeshData::bbox() const
+{
+  return mBBox;
+}
+
 
 void MeshData::save(const std::string &pFilename)
 {
@@ -353,6 +361,13 @@ MeshData *Mesh::getData()
 {
   return mData;
 }
+
+AGBox3 Mesh::bbox()
+{
+  // FIXME: ignore rotation for now
+  return mData->bbox()+mPos.dim3();
+}
+
 
 
 Mesh *toMesh(SceneNode *node)

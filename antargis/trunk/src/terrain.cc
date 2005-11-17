@@ -257,6 +257,8 @@ TerrainMesh::TerrainMesh(HeightMap &map)
 	pieces.push_front(new TerrainPieceVA(map,x,y,32,32,AGVector4(x,y,0,0))); // at least it's correct at the beginning
 	water.push_front(new WaterPiece(AGVector4(x,y,0,0)));
       }
+  w=map.getW();
+  h=map.getH();
 }
 
 TerrainMesh::~TerrainMesh()
@@ -274,10 +276,16 @@ void TerrainMesh::advance(float t)
 }
 void TerrainMesh::draw()
 {
+  // FIXME: sort drawing
+
   for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
-    (*i)->draw();
+    {
+      (*i)->draw();
+    }
   for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
-    (*i)->draw();
+    {
+      (*i)->draw();
+    }
 }
 
 void TerrainMesh::drawShadow()
@@ -326,6 +334,11 @@ void TerrainMesh::mapChanged()
     {
       (*i)->mapChanged();
     }
+}
+
+AGBox3 TerrainMesh::bbox()
+{
+  return AGBox3(AGVector3(0,0,-10),AGVector3(w,h,10));
 }
 
 

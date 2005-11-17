@@ -29,7 +29,9 @@
 		else
 		{
 			
-			if(dynamic_cast<Mesh*>(result))
+			if(dynamic_cast<AnimMesh*>(result))
+				vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
+			else if(dynamic_cast<Mesh*>(result))
 				vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
 			else if(dynamic_cast<TerrainMesh*>(result))
 				vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);

@@ -91,7 +91,7 @@ void Scene::draw()
  
   mTriangles=0;
   calcCameraView();
-
+  //  return;
 
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->sort(scenePosition);
@@ -257,6 +257,7 @@ void Scene::calcCameraView()
 
 void Scene::calcShadowMap()
 {
+  AGMatrix4 frustum=getFrustum();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
   glMatrixMode(GL_PROJECTION);
@@ -283,8 +284,11 @@ void Scene::calcShadowMap()
   
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
-      (*i)->drawDepth();
-      mTriangles+=(*i)->getTriangles();
+      if((*i)->bbox().collides(frustum))
+	{
+	  (*i)->drawDepth();
+	  mTriangles+=(*i)->getTriangles();
+	}
     }
   
   glDisable(GL_POLYGON_OFFSET_FILL);
@@ -325,8 +329,16 @@ void Scene::initScene()
   glBindTexture(GL_TEXTURE_2D,0);
 }
 
+AGMatrix4 Scene::getFrustum()
+{
+  return cameraProjectionMatrix*cameraViewMatrix;
+}
+
+
 void Scene::drawScene()
 {
+  AGMatrix4 frustum=getFrustum();
+  
   //2nd pass - Draw from camera's point of view
 
   //  glAlphaFunc(GL_GREATER,0.9f);
@@ -336,8 +348,11 @@ void Scene::drawScene()
     {
       if(!(*i)->transparent())
 	{
-	  (*i)->draw();
-	  mTriangles+=(*i)->getTriangles();
+	  if((*i)->bbox().collides(frustum))
+	    {
+	      (*i)->draw();
+	      mTriangles+=(*i)->getTriangles();
+	    }
 	}
     }
   //  glDisable(GL_ALPHA_TEST);
@@ -346,8 +361,11 @@ void Scene::drawScene()
     {
       if((*i)->transparent())
 	{
-	  (*i)->draw();
-	  mTriangles+=(*i)->getTriangles();
+	  if((*i)->bbox().collides(frustum))
+	    {
+	      (*i)->draw();
+	      mTriangles+=(*i)->getTriangles();
+	    }
 	}
     }
   
