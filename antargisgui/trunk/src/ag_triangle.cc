@@ -1952,8 +1952,82 @@ AGBox3::AGBox3(const AGVector3 &pBase,const AGVector3 &pDir):
       }
 }
 
+AGBox3::AGBox3():base(AGVector3(0,0,0)),dir(AGVector3(-1,0,0))
+{
+}
+
+bool AGBox3::collides(const AGMatrix4 &frustum) const
+{
+  std::vector<AGVector4> a=getVertices();
+  float minx,miny,minz;
+  float maxx,maxy,maxz;
+
+  minx=miny=minz=0;
+  maxx=maxy=maxz=0;
+  // simply check, if any of the box's vertices lie inside the frustum
+  for(std::vector<AGVector4>::iterator i=a.begin();i!=a.end();i++)
+    {
+      AGVector4 p(frustum*(*i));
+      p/=p[3];
+      if(p[0]>=-1 && p[0]<=1 &&
+	 p[1]>=-1 && p[1]<=1 &&
+	 p[2]>=-1 && p[2]<=1)
+	return true;
+
+      minx=std::min(minx,p[0]);
+      miny=std::min(miny,p[1]);
+      minz=std::min(minz,p[2]);
+
+      maxx=std::max(maxx,p[0]);
+      maxy=std::max(maxy,p[1]);
+      maxz=std::max(maxz,p[2]);
+	
+    }
+  size_t c=0;
+  if(minx<-1 && maxx>1)
+    c++;
+  if(miny<-1 && maxy>1)
+    c++;
+  if(minz<-1 && maxz>1)
+    c++;
+  
+  if(c>1)
+    return true;
+
+  return false;  
+}
+
+
+std::vector<AGVector4> AGBox3::getVertices() const
+{
+  std::vector<AGVector4> a;
+  a.push_back(AGVector4(base,1)+AGVector4(0,0,0,0));
+  a.push_back(AGVector4(base,1)+AGVector4(dir[0],0,0,0));
+  a.push_back(AGVector4(base,1)+AGVector4(0,dir[1],0,0));
+  a.push_back(AGVector4(base,1)+AGVector4(0,0,dir[2],0));
+
+  a.push_back(AGVector4(base,1)+AGVector4(dir[0],dir[1],0,0));
+  a.push_back(AGVector4(base,1)+AGVector4(dir[0],0,dir[2],0));
+  a.push_back(AGVector4(base,1)+AGVector4(0,dir[1],dir[2],0));
+  a.push_back(AGVector4(base,1)+AGVector4(dir[0],dir[1],dir[2],0));
+  return a;
+}
+
+AGBox3 AGBox3::operator+(const AGVector3 &v) const
+{
+  return AGBox3(base+v,dir);
+}
+
+
+
 void AGBox3::include(const AGVector3&p)
 {
+  if(dir[0]<0)
+    {
+      base=p;
+      dir=AGVector3(0,0,0);
+      return;
+    }
   AGVector3 b=base,b2=base+dir;
 
   base[0]=std::min(b[0],p[0]);
@@ -2099,5 +2173,6 @@ std::string AGRect3::toString() const
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
   return os.str();
 }
+
 
 

@@ -31,7 +31,8 @@ namespace std {
 
     %typemap(in) string {
         if (TYPE($input) == T_STRING) {
-            $1 = std::string(StringValuePtr($input));
+//            $1 = std::string(StringValuePtr($input));
+            $1 = std::string(RSTRING($input)->ptr,RSTRING($input)->len);
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -39,7 +40,8 @@ namespace std {
 
     %typemap(in) const string & (std::string temp) {
         if (TYPE($input) == T_STRING) {
-            temp = std::string(StringValuePtr($input));
+//            temp = std::string(StringValuePtr($input));
+            temp = std::string(RSTRING($input)->ptr,RSTRING($input)->len);
             $1 = &temp;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
@@ -47,11 +49,11 @@ namespace std {
     }
 
     %typemap(out) string {
-        $result = rb_str_new2($1.c_str());
+        $result = rb_str_new($1.c_str(),$1.length());
     }
 
     %typemap(out) const string & {
-        $result = rb_str_new2($1->c_str());
+        $result = rb_str_new($1->c_str(),$1.length());
     }
 
     %typemap(directorin) string, const string &, string & "$input=rb_str_new2($1_name.c_str());";
@@ -60,14 +62,16 @@ namespace std {
     
     %typemap(directorout) string {
         if (TYPE($input) == T_STRING)
-            $result = std::string(StringValuePtr($input));
+//            $result = std::string(StringValuePtr($input));
+            $result = std::string(RSTRING($input)->ptr,RSTRING($input)->len);
         else
             throw Swig::DirectorTypeMismatchException("string expected");
     }
     
     %typemap(directorout) const string & (std::string temp) {
         if (TYPE($input) == T_STRING) {
-            temp = std::string(StringValuePtr($input));
+//            temp = std::string(StringValuePtr($input));
+            temp = std::string(RSTRING($input)->ptr,RSTRING($input)->len);
             $result = &temp;
         } else {
             throw Swig::DirectorTypeMismatchException("string expected");

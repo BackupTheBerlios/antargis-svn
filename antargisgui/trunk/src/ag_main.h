@@ -21,6 +21,8 @@
 #ifndef __AG_MAIN
 #define __AG_MAIN
 
+#include <string>
+
 class AGScreen;
 struct SDL_VideoInfo;
 class AGMain
@@ -35,6 +37,9 @@ class AGMain
 
   int width() const;
   int height() const;
+
+  void setIcon(const std::string &pFile);
+  void setCaption(const std::string &pCaption);
  private:
   AGScreen *mScreen;
 

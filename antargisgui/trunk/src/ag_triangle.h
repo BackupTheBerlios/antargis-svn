@@ -592,6 +592,7 @@ class AGBox3
  public:
   AGVector3 base,dir;
 
+  AGBox3();
   AGBox3(const AGVector3 &pBase,const AGVector3 &pDir);
 
   void include(const AGVector3&p);
@@ -605,6 +606,12 @@ class AGBox3
   std::string toString() const;
 
   std::vector<AGBox3> split() const;
+
+  bool collides(const AGMatrix4 &frustum) const;
+
+  std::vector<AGVector4> getVertices() const;
+
+  AGBox3 operator+(const AGVector3 &v) const;
 };
 
 

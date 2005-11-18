@@ -29,6 +29,7 @@
 #include "ag_debug.h"
 #include "privates.h"
 #include <SDL.h>
+#include "SDL_image.h"
 
 int lastWidth=0;
 int lastHeight=0;
@@ -182,3 +183,17 @@ int AGMain::height() const
 {
   return lastHeight;
 }
+
+void AGMain::setIcon(const std::string &pFile)
+{
+  std::string file=loadFile(pFile);
+  
+  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
+  SDL_WM_SetIcon(s,0);
+}
+
+void AGMain::setCaption(const std::string &pCaption)
+{
+  SDL_WM_SetCaption(pCaption.c_str(),0);
+}
+
