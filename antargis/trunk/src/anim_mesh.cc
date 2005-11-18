@@ -481,7 +481,7 @@ void AnimMesh::setAnimation(const std::string &pName)
 
 AGBox3 AnimMesh::bbox()
 {
-  return mData->bbox()+mPos;
+  return mData->bbox()+mPos.dim3();
 }
 
 

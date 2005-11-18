@@ -139,7 +139,8 @@ main=AGMain.new(1024,768,32,false,false)
 
 main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)
-
+main.setCaption("Antargis")
+main.setIcon("data/gui/editor/tower1.png")
 savegame="savegames/savegame0.antlvl"
 if ARGV.length>0
 	savegame="savegames/"+ARGV[0]+".antlvl"

@@ -124,6 +124,10 @@ class AntNewMan<AntMyEntity
 			end
 		else
 			boss=getMap.getByName(@bossName)
+			if not boss
+				@bossName=""
+				return
+			end
 			@boss=boss
 			if not @signed then
 				puts @bossName

@@ -19723,6 +19723,54 @@ _wrap_AGMain_height(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGMain_setIcon(int argc, VALUE *argv, VALUE self) {
+    AGMain *arg1 = (AGMain *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMain, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->setIcon((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGMain_setCaption(int argc, VALUE *argv, VALUE self) {
+    AGMain *arg1 = (AGMain *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMain, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->setCaption((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_getMain(int argc, VALUE *argv, VALUE self) {
     AGMain *result;
     VALUE vresult = Qnil;
@@ -30388,6 +30436,18 @@ _wrap_AGBox3_dir_get(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_new_AGBox3__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGBox3 *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (AGBox3 *)new AGBox3();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGBox3_allocate(VALUE self) {
@@ -30406,7 +30466,7 @@ _wrap_AGBox3_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGBox3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGBox3__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = 0 ;
     AGVector3 *arg2 = 0 ;
     AGBox3 *result;
@@ -30418,6 +30478,40 @@ _wrap_new_AGBox3(int argc, VALUE *argv, VALUE self) {
     result = (AGBox3 *)new AGBox3((AGVector3 const &)*arg1,(AGVector3 const &)*arg2);
     DATA_PTR(self) = result;
     return self;
+}
+
+
+static VALUE _wrap_new_AGBox3(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[2];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_AGBox3__SWIG_0(nargs, args, self);
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGBox3__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGBox3'");
+    return Qnil;
 }
 
 
@@ -30654,7 +30748,7 @@ static VALUE
 _wrap_AGBox3___add__(int argc, VALUE *argv, VALUE self) {
     AGBox3 *arg1 = (AGBox3 *) 0 ;
     AGVector3 *arg2 = 0 ;
-    SwigValueWrapper<AGBox3 > result;
+    AGBox3 result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -43516,7 +43610,7 @@ _wrap_SceneNode_transparent(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_SceneNode_bbox(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
-    SwigValueWrapper<AGBox3 > result;
+    AGBox3 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -44197,7 +44291,7 @@ _wrap_MeshData_drawDepth(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_MeshData_bbox(int argc, VALUE *argv, VALUE self) {
     MeshData *arg1 = (MeshData *) 0 ;
-    SwigValueWrapper<AGBox3 > result;
+    AGBox3 result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -44494,7 +44588,7 @@ _wrap_Mesh_drawShadow(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_Mesh_bbox(int argc, VALUE *argv, VALUE self) {
     Mesh *arg1 = (Mesh *) 0 ;
-    SwigValueWrapper<AGBox3 > result;
+    AGBox3 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -47538,7 +47632,7 @@ _wrap_TerrainMesh_mapChanged(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_TerrainMesh_bbox(int argc, VALUE *argv, VALUE self) {
     TerrainMesh *arg1 = (TerrainMesh *) 0 ;
-    SwigValueWrapper<AGBox3 > result;
+    AGBox3 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -48686,6 +48780,26 @@ _wrap_new_AnimMeshData(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AnimMeshData_bbox(int argc, VALUE *argv, VALUE self) {
+    AnimMeshData *arg1 = (AnimMeshData *) 0 ;
+    AGBox3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMeshData, 1);
+    result = ((AnimMeshData const *)arg1)->bbox();
+    
+    {
+        AGBox3 * resultptr;
+        resultptr = new AGBox3((AGBox3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGBox3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AnimMeshData_setTransform(int argc, VALUE *argv, VALUE self) {
     AnimMeshData *arg1 = (AnimMeshData *) 0 ;
     AGMatrix4 *arg2 = 0 ;
@@ -48984,6 +49098,29 @@ _wrap_AnimMesh_advance(int argc, VALUE *argv, VALUE self) {
     (arg1)->advance(arg2);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_AnimMesh_bbox(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    AGBox3 result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (arg1)->bbox();
+    
+    {
+        AGBox3 * resultptr;
+        resultptr = new AGBox3((AGBox3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGBox3, 1);
+    }
+    return vresult;
 }
 
 
@@ -50157,6 +50294,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGMain.klass, "toggleFull", VALUEFUNC(_wrap_AGMain_toggleFull), -1);
     rb_define_method(cAGMain.klass, "width", VALUEFUNC(_wrap_AGMain_width), -1);
     rb_define_method(cAGMain.klass, "height", VALUEFUNC(_wrap_AGMain_height), -1);
+    rb_define_method(cAGMain.klass, "setIcon", VALUEFUNC(_wrap_AGMain_setIcon), -1);
+    rb_define_method(cAGMain.klass, "setCaption", VALUEFUNC(_wrap_AGMain_setCaption), -1);
     cAGMain.mark = 0;
     cAGMain.destroy = (void (*)(void *)) free_AGMain;
     rb_define_module_function(mLibantargis, "getMain", VALUEFUNC(_wrap_getMain), -1);
@@ -52026,6 +52165,7 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AnimMeshData, (void *) &cAnimMeshData);
     rb_define_alloc_func(cAnimMeshData.klass, _wrap_AnimMeshData_allocate);
     rb_define_method(cAnimMeshData.klass, "initialize", VALUEFUNC(_wrap_new_AnimMeshData), -1);
+    rb_define_method(cAnimMeshData.klass, "bbox", VALUEFUNC(_wrap_AnimMeshData_bbox), -1);
     rb_define_method(cAnimMeshData.klass, "setTransform", VALUEFUNC(_wrap_AnimMeshData_setTransform), -1);
     rb_define_method(cAnimMeshData.klass, "getTransform", VALUEFUNC(_wrap_AnimMeshData_getTransform), -1);
     cAnimMeshData.mark = 0;
@@ -52044,6 +52184,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAnimMesh.klass, "getData", VALUEFUNC(_wrap_AnimMesh_getData), -1);
     rb_define_method(cAnimMesh.klass, "draw", VALUEFUNC(_wrap_AnimMesh_draw), -1);
     rb_define_method(cAnimMesh.klass, "advance", VALUEFUNC(_wrap_AnimMesh_advance), -1);
+    rb_define_method(cAnimMesh.klass, "bbox", VALUEFUNC(_wrap_AnimMesh_bbox), -1);
     cAnimMesh.mark = (void (*)(void *)) AnimMesh_markfunc;
     cAnimMesh.destroy = (void (*)(void *)) free_AnimMesh;
     rb_define_module_function(mLibantargis, "AnimMesh_markfunc", VALUEFUNC(_wrap_AnimMesh_markfunc), -1);
