@@ -8,7 +8,7 @@ $DEBUGGING=false;
 
 function getTitle()
 {
-	return image("pics/antLogoTrans.png");
+	return image("pics/title.jpg");
 }
 
 ?>
