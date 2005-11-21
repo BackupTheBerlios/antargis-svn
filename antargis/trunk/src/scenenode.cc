@@ -26,6 +26,9 @@ void SceneNode::setScene(Scene *s)
   void SceneNode::draw()
   {
   }
+  void SceneNode::drawPick()
+  {
+  }
   void SceneNode::advance(float time)
   {
   }

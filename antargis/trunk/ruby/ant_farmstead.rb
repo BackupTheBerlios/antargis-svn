@@ -6,7 +6,7 @@ class AntFarmStead<AntHouse
 		setType("farmstead")
 		@lastBirth=0
 		
-		mesh=Mesh.new(getMeshData("data/models/farmstead_dummy.ant",1.6),AGVector4.new(0,0,0),0)
+		mesh=Mesh.new(getMeshData("data/models/livinghouse.ant2",1.6,"data/textures/models/livinghouse.png"),AGVector4.new(0,0,0),-20)
 		setMesh(mesh)
 	end
 

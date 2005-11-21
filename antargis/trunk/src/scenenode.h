@@ -16,6 +16,8 @@ class SceneNode
   virtual void drawShadow();
   virtual void drawDepth();
   virtual void draw();
+  virtual void drawPick();
+
   virtual void advance(float time);
 
   virtual size_t getTriangles() const;
@@ -33,6 +35,7 @@ class SceneNode
   virtual AGBox3 bbox();
   
   public: // must be public, so that swig can set these
+  
 #ifndef SWIG
   bool mRubyObject;
   VALUE mRUBY;

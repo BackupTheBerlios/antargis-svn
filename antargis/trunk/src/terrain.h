@@ -31,6 +31,7 @@ class TerrainPieceVA:public SceneNode
   void draw();
   void drawShadow();
   void drawDepth();
+  void drawPick();
 
   // returns (0,0,0,0) if no collision
   // returns (x,y,z,1) if collision takes place
@@ -70,6 +71,7 @@ public:
   void draw();
   void drawShadow();
   void drawDepth();
+  void drawPick();
 
   void sort(const AGVector4 &camera); // sort drawing, so that things get drawn from back to front
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;

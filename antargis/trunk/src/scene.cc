@@ -599,6 +599,178 @@ AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 }
 
 
+Scene::PickResult Scene::pick(float x,float y,float w,float h)
+{
+  return privatePick(x,y,w,h);
+
+  /*  PickResult result;
+  
+  for(std::list<GLuint>::iterator i=names.begin();i!=names.end();i++)
+    {
+      PickNode n;
+      n.node=pickNames[*i];
+
+      result.push_back(n);
+    }
+
+    return result;*/
+}
+
+void Scene::pickDraw()
+{
+  GLuint name=1;
+  pickNames.clear();
+  AGMatrix4 frustum=cameraPickMatrix*cameraViewMatrix; //getFrustum(); // FIXME: take better frustum !!! (for pickin)
+  
+
+  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    {
+      if((*i)->bbox().collides(frustum))
+	{
+	  glPushName(name);
+	  (*i)->drawPick();
+	  glPopName();
+	  pickNames.insert(std::make_pair(name,*i));
+	  name++;
+	}
+    }
+
+  
+}
+
+Scene::PickResult Scene::privatePick(float x,float y,float w,float h)
+{
+  size_t bufsize=4000;
+  GLuint buffer[bufsize-1];
+  
+  glSelectBuffer(bufsize,buffer);
+  glRenderMode(GL_SELECT);
+  
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  glLoadIdentity();
+  
+  assertGL;
+  gluPickMatrix(x,windowHeight-y,h,w,getViewport());
+
+  //  glGetFloatv(GL_PROJECTION, cameraPickMatrix);
+  assertGL;
+  
+  glMultMatrixf(cameraProjectionMatrix);
+  glGetFloatv(GL_PROJECTION_MATRIX, cameraPickMatrix);
+  assertGL;
+  
+  glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
+  glLoadIdentity();
+  glMultMatrixf(cameraViewMatrix);
+  glInitNames();
+  assertGL;
+
+  pickDraw();
+  assertGL;
+  
+  
+  // back to normality
+  glPopMatrix();
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+  glFlush();
+  assertGL;
+  
+  int hits=glRenderMode(GL_RENDER);
+  assertGL;
+  PickResult r=processHits(hits,buffer,x+w/2,windowHeight-(y+h/2));
+  std::sort(r.begin(),r.end());
+  return r;
+}
+
+Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
+{
+  PickResult result;
+  if(hits==0)
+    return result;
+
+   unsigned int i, j;
+   GLuint names, *ptr, minZ,*ptrNames, numberOfNames;
+
+   ptr = (GLuint *) buffer;
+   minZ = 0xffffffff;
+   for (i = 0; i < (unsigned int)hits; i++) { 
+      names = *ptr;
+      ptr++;
+      if (*ptr < minZ) {
+	numberOfNames = names;
+	minZ = *ptr;
+	//	cdebug("minz:"<<minZ);
+	ptrNames = ptr+2;
+
+	GLuint *mptr=ptrNames;
+	for(j=0;j<numberOfNames;j++,mptr++)
+	  {
+	    PickNode n;
+	    n.node=pickNames[*mptr];
+	    n.camDist=minZ/float(0xFFFFFFFF); // (0-1)
+
+	    // get world-position
+	    GLdouble x,y,z;
+
+	    GLdouble modelview[16],projection[16];
+	    for(size_t i=0;i<16;i++)
+	      {
+		modelview[i]=((float*)cameraViewMatrix)[i];
+		projection[i]=((float*)cameraPickMatrix)[i];
+	      }
+
+	    gluUnProject(x,y,n.camDist,modelview,projection,getViewport(),&x,&y,&z);
+	    n.pos=AGVector4(x,y,z,1);
+	    n.camDist=(n.pos-cameraPosition).length3();
+
+
+
+
+	    result.push_back(n);
+	  }
+
+      }
+      
+      ptr += names+2;
+   }
+   //   std::list<GLuint> namelist;
+   /*
+   ptr = ptrNames;
+   
+   for (j = 0; j < numberOfNames; j++,ptr++) 
+     {
+       cdebug(*ptr);
+       namelist.push_back(*ptr);
+       }*/
+   //   return namelist;
+   return result;
+}
+
+
+Viewport Scene::getViewport()
+{
+  Viewport p;
+  p.viewport[0]=0;
+  p.viewport[1]=0;
+  p.viewport[2]=windowWidth;
+  p.viewport[3]=windowHeight;
+  return p;
+}
+
+
+float Scene::width() const
+{
+  return windowWidth;
+}
+float Scene::height() const
+{
+  return windowHeight;
+}
+
 
 void Scene_markfunc(void *ptr)
 {

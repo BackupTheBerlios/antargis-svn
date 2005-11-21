@@ -33,6 +33,7 @@ class VertexArray
   void setBuffers(bool pBuffers);
   
   void draw();
+  void drawPick();
   void init();
 
   void clear();

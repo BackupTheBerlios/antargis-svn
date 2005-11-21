@@ -83,6 +83,7 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventFrame(time)
+		super(time)
 		if $fc==nil then 
 			$fc=0 
 			$elaps=0

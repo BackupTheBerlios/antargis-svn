@@ -27,6 +27,38 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		super(w,h) #p,rect,pos,map)
 		$antView=self
 	end
+	def eventMouseButtonUpTest(m)
+		puts "MUH"
+		e=toAGSDLEvent(m)
+		p=e.getMousePosition
+		#v=AGVector2.new(p.x/getScene.width,p.y/getScene.height)
+		l=getScene.pick(p.x,p.y,1,1)
+		l.each{|o|
+			puts o.node.to_s+"  "+o.camDist.to_s+"   "+o.pos.to_s
+		}
+		#getScene.pick(m
+		
+		
+		exit
+		super(m)
+	end
+	
+	def eventHover(list,button)
+		if list.length>0
+			n=list[0]
+			mesh=n.node
+			if mesh.class==Mesh
+				ent=getMap.getEntity(mesh)
+				if ent
+					if ["house","farm","farmstead","workshop","hero"].member?(ent.getType) then
+					#if ent.getType=="hero"
+						inspectEntity(ent)
+					end
+				end
+			end
+		end
+	end
+	
 	def eventClick(list,button)
 		puts "EVENTCLICK"
 		list.each{|l|
@@ -88,7 +120,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			return
 		elsif job=="doMove" then
 			# FIXME: exchange with good position estimation
-			doMove(list[0].get.getPos2D)
+			doMove(list[0].node.getPos2D)
 		elsif job=="doRecruit" then
 			puts "RECRUITING"
 			if @hero then

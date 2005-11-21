@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <set>
+#include <map>
 
 
 #include "scenenode.h"
@@ -21,6 +22,18 @@ struct PickNode
   float camDist;
   
   bool operator<(const PickNode &n) const;
+};
+
+
+struct Viewport
+{
+  GLint viewport[4];
+#ifndef SWIG
+  (operator GLint *)()
+  {
+    return viewport;
+  }
+#endif
 };
 
 
@@ -49,6 +62,8 @@ class Scene
   
   PickResult lineHit(const AGLine3 &pLine);
 
+  PickResult pick(float x,float y,float w,float h);
+
   AGLine3 getLine(int x,int y);
 
   // Antargis-Map-extension
@@ -61,6 +76,9 @@ class Scene
 
   AGMatrix4 getFrustum();
 
+  float width() const;
+  float height() const;
+
  private:
   void init();
   void calcCameraView();
@@ -68,6 +86,14 @@ class Scene
   void drawScene();
   void drawShadow();
   void initScene();
+
+
+  void pickDraw();
+  PickResult privatePick(float x,float y,float w,float h);
+  PickResult processHits (int hits, GLuint *buffer,float x,float y);
+
+  Viewport getViewport();
+
 
   bool inited;
 
@@ -80,6 +106,8 @@ class Scene
   
   AGMatrix4 lightViewMatrix,lightProjectionMatrix;
   AGMatrix4 cameraViewMatrix,cameraProjectionMatrix;
+
+  AGMatrix4 cameraPickMatrix;
   
   typedef std::vector<SceneNode*> Nodes;
   typedef std::set<SceneNode*> NodeSet;
@@ -93,6 +121,10 @@ class Scene
   AGVector4 white,black;
 
   size_t mTriangles;
+
+  // picking vars
+  std::map<GLuint,SceneNode*> pickNames;
+  
 
   friend void Scene_markfunc(void *ptr);
 

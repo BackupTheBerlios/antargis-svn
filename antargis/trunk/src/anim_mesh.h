@@ -114,11 +114,15 @@ class AnimMesh:public SceneNode
   AnimMeshData *getData();
 
   virtual void draw();
+  virtual void drawPick();
   virtual void advance(float time);
 
   AGBox3 bbox();
 
  private:
+
+  void drawPrivate(bool textured);
+
   void update();
 };
 

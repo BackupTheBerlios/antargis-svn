@@ -1136,17 +1136,18 @@ class SwigDirector_SceneNode : public SceneNode, public Swig::Director {
 
 public:
     SwigDirector_SceneNode(VALUE self);
+    virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
+    virtual void setRotation(float r);
     virtual void advance(float time);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_SceneNode();
     virtual size_t getTriangles() const;
     virtual void mapChanged();
-    virtual void setPos(AGVector3 const &pPos);
-    virtual void setRotation(float r);
-    virtual ~SwigDirector_SceneNode();
-    virtual void drawDepth();
-    virtual void sort(AGVector4 const &pCamera);
-    virtual void drawShadow();
     virtual void draw();
-    virtual bool transparent();
+    virtual void drawShadow();
+    virtual void drawDepth();
 };
 
 
@@ -1155,17 +1156,18 @@ class SwigDirector_MeshData : public MeshData, public Swig::Director {
 public:
     SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
     SwigDirector_MeshData(VALUE self, VertexArray const &va, std::string const &pTexture, bool pShadow = true);
-    virtual void advance(float time);
-    virtual void mapChanged();
     virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
     virtual void setRotation(float r);
-    virtual size_t getTriangles() const;
-    virtual ~SwigDirector_MeshData();
+    virtual void advance(float time);
     virtual void sort(AGVector4 const &pCamera);
-    virtual void drawDepth();
+    virtual void drawPick();
+    virtual ~SwigDirector_MeshData();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
     virtual void draw();
     virtual void drawShadow();
-    virtual bool transparent();
+    virtual void drawDepth();
 };
 
 
@@ -1174,17 +1176,18 @@ class SwigDirector_Mesh : public Mesh, public Swig::Director {
 public:
     SwigDirector_Mesh(VALUE self);
     SwigDirector_Mesh(VALUE self, MeshData &data, AGVector4 const &pPos, float pRot);
-    virtual void advance(float time);
-    virtual void mapChanged();
-    virtual size_t getTriangles() const;
     virtual void setPos(AGVector3 const &pPos);
-    virtual void setRotation(float r);
-    virtual ~SwigDirector_Mesh();
-    virtual void sort(AGVector4 const &pCamera);
-    virtual void drawDepth();
-    virtual void draw();
-    virtual void drawShadow();
     virtual bool transparent();
+    virtual void advance(float time);
+    virtual void setRotation(float r);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_Mesh();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void draw();
+    virtual void drawDepth();
+    virtual void drawShadow();
 };
 
 
@@ -1215,6 +1218,7 @@ public:
     virtual bool eventFrame(float t);
     virtual void eventChangedRes();
     virtual void eventClick(Scene::PickResult const &pNodes, int button);
+    virtual void eventHover(Scene::PickResult const &pNodes, int button);
     virtual ~SwigDirector_GLApp();
     virtual bool eventIdle();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
@@ -1254,17 +1258,18 @@ class SwigDirector_TerrainPieceVA : public TerrainPieceVA, public Swig::Director
 
 public:
     SwigDirector_TerrainPieceVA(VALUE self, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos);
-    virtual void advance(float time);
     virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
     virtual void setRotation(float r);
+    virtual void advance(float time);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_TerrainPieceVA();
     virtual size_t getTriangles() const;
     virtual void mapChanged();
-    virtual ~SwigDirector_TerrainPieceVA();
-    virtual void sort(AGVector4 const &pCamera);
-    virtual void drawDepth();
     virtual void draw();
     virtual void drawShadow();
-    virtual bool transparent();
+    virtual void drawDepth();
 };
 
 
@@ -1273,16 +1278,17 @@ class SwigDirector_TerrainMesh : public TerrainMesh, public Swig::Director {
 public:
     SwigDirector_TerrainMesh(VALUE self, HeightMap &map);
     virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
     virtual void setRotation(float r);
     virtual void advance(float t);
+    virtual void drawPick();
+    virtual void sort(AGVector4 const &camera);
+    virtual ~SwigDirector_TerrainMesh();
     virtual size_t getTriangles() const;
     virtual void mapChanged();
-    virtual ~SwigDirector_TerrainMesh();
-    virtual void drawDepth();
-    virtual void sort(AGVector4 const &camera);
     virtual void draw();
     virtual void drawShadow();
-    virtual bool transparent();
+    virtual void drawDepth();
 };
 
 
@@ -1290,17 +1296,18 @@ class SwigDirector_GLTree : public GLTree, public Swig::Director {
 
 public:
     SwigDirector_GLTree(VALUE self, AGVector4 p, float h = 9);
-    virtual void advance(float time);
-    virtual void mapChanged();
-    virtual size_t getTriangles() const;
     virtual void setPos(AGVector3 const &pPos);
-    virtual void setRotation(float r);
-    virtual ~SwigDirector_GLTree();
-    virtual void sort(AGVector4 const &pCamera);
-    virtual void drawDepth();
-    virtual void draw();
-    virtual void drawShadow();
     virtual bool transparent();
+    virtual void advance(float time);
+    virtual void setRotation(float r);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_GLTree();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void draw();
+    virtual void drawDepth();
+    virtual void drawShadow();
 };
 
 
@@ -1308,17 +1315,18 @@ class SwigDirector_Smoke : public Smoke, public Swig::Director {
 
 public:
     SwigDirector_Smoke(VALUE self, float f);
-    virtual size_t getTriangles() const;
-    virtual void mapChanged();
+    virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
     virtual void setRotation(float r);
     virtual void advance(float time);
-    virtual void setPos(AGVector3 const &pPos);
-    virtual ~SwigDirector_Smoke();
-    virtual void drawDepth();
     virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_Smoke();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
     virtual void drawShadow();
+    virtual void drawDepth();
     virtual void draw();
-    virtual bool transparent();
 };
 
 
@@ -1326,17 +1334,18 @@ class SwigDirector_AnimMesh : public AnimMesh, public Swig::Director {
 
 public:
     SwigDirector_AnimMesh(VALUE self, AnimMeshData *data);
-    virtual size_t getTriangles() const;
-    virtual void mapChanged();
     virtual void setPos(AGVector3 const &p);
+    virtual bool transparent();
     virtual void setRotation(float r);
     virtual void advance(float time);
-    virtual ~SwigDirector_AnimMesh();
-    virtual void drawDepth();
     virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_AnimMesh();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
     virtual void drawShadow();
+    virtual void drawDepth();
     virtual void draw();
-    virtual bool transparent();
 };
 
 

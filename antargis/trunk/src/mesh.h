@@ -59,6 +59,7 @@ class MeshData:public SceneNode
   void draw();
   void drawShadow();
   void drawDepth();
+  void drawPick();
 
   AGBox3 bbox() const;
 
@@ -88,6 +89,7 @@ class Mesh:public SceneNode
   void draw();
   void drawDepth();
   void drawShadow();
+  void drawPick();
 
   AGBox3 bbox();
 

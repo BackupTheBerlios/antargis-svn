@@ -282,12 +282,24 @@ AnimMesh::~AnimMesh()
 
 
 
-// at first try a simple animation without shaders
 void AnimMesh::draw()
 {
-  glColor4f(1,1,1,1);
-  glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
-  glEnable(GL_LIGHTING);
+  drawPrivate(true);
+}
+void AnimMesh::drawPick()
+{
+  drawPrivate(false);
+}
+
+// at first try a simple animation without shaders
+void AnimMesh::drawPrivate(bool textured)
+{
+  if(textured)
+    {
+      glColor4f(1,1,1,1);
+      glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
+      glEnable(GL_LIGHTING);
+    }
 
   glPushMatrix();
   glTranslatef(mPos[0],mPos[1],mPos[2]);
@@ -301,11 +313,14 @@ void AnimMesh::draw()
       for(std::vector<size_t>::iterator i=mData->indices.begin();i!=mData->indices.end();i++)
 	{
 	  AGMatrix4 m(mData->getTransform());
-	  AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
 	  AGVector3 p((m*AGVector4(mData->pos[*i],1)).dim3());
-				      
-	  glNormal3fv(n);
-	  glTexCoord2fv(mData->uv[*i]);
+	  if(textured)
+	    {
+	      AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
+	      
+	      glNormal3fv(n);
+	      glTexCoord2fv(mData->uv[*i]);
+	    }
 	  glVertex3fv(p);
 	  
 	}
@@ -330,11 +345,14 @@ void AnimMesh::draw()
 	    {
 	      m=mMatrices[b];
 	    }
-	  AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
 	  AGVector3 p((m*AGVector4(mData->pos[*i],1)).dim3());
-	  
-	  glNormal3fv(n);
-	  glTexCoord2fv(mData->uv[*i]);
+	  if(textured)
+	    {
+	      AGVector3 n((m*AGVector4(mData->normal[*i],0)).dim3());
+	      
+	      glNormal3fv(n);
+	      glTexCoord2fv(mData->uv[*i]);
+	    }
 	  glVertex3fv(p);
 	}
       

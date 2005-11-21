@@ -21,8 +21,10 @@ class GLApp:public AGApplication
   AGVector4 camera;
   float frameTime;
   size_t frameCount;
-  AGLine3 line;
+  //  AGLine3 line;
   bool mMayClick;
+
+  int hx,hy,hb;
 
 protected:
   Scene scene;
@@ -37,6 +39,7 @@ public:
   bool eventFrame(float t);
 
   virtual void eventClick(const Scene::PickResult &pNodes,int button);
+  virtual void eventHover(const Scene::PickResult &pNodes,int button);
 
   virtual bool eventMouseButtonDown(const AGEvent *m);
   virtual bool eventMouseButtonUp(const AGEvent *m);

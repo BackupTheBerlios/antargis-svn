@@ -120,6 +120,11 @@ void TerrainPieceVA::drawDepth()
   mEarthArray.setColors(true);
 }
 
+void TerrainPieceVA::drawPick()
+{
+  mEarthArray.drawPick();
+}
+
 void TerrainPieceVA::draw()
 {
 //return;
@@ -223,18 +228,6 @@ void TerrainPieceVA::draw()
 AGVector4 TerrainPieceVA::lineHit(const AGLine3 &pLine) const
 {
   return mEarthArray.lineHit(pLine);
-  /*
-  AGMatrix4 tr(-mPosition);
-  AGMatrix4 complete=tr;
-  
-  AGVector4 p0(pLine.getV0(),1);
-  AGVector4 p1(pLine.getV1(),1);
-  
-  p0=complete*p0;
-  p1=complete*p1;
-  return mEarthArray.lineHit(AGLine3(AGVector3(p0[0],p0[1],p0[2]),
-				     AGVector3(p1[0],p1[1],p1[2])))+AGVector4(mPosition.dim3(),0);
-  */
 }
 
 size_t TerrainPieceVA::getTriangles() const
@@ -287,6 +280,21 @@ void TerrainMesh::draw()
       (*i)->draw();
     }
 }
+
+void TerrainMesh::drawPick()
+{
+  // FIXME: sort drawing
+
+  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
+    {
+      (*i)->drawPick();
+    }
+  for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
+    {
+      (*i)->drawPick();
+    }
+}
+
 
 void TerrainMesh::drawShadow()
 {

@@ -5,7 +5,7 @@ class AntWorkshop<AntHouse
 		super
 		setType("workshop")
 		@lastBirth=0
-		mesh=Mesh.new(getMeshData("data/models/workshop.ant",1.8),AGVector4.new(0,0,0),-50)
+		mesh=Mesh.new(getMeshData("data/models/workshop.ant2",1.8,"data/textures/models/workshop.png"),AGVector4.new(0,0,0),-50)
 #		mesh=Mesh.new(getMeshData("data/models/farm.ant",2,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 		p=AGVector3.new(-1.3,-1.2,2.2)

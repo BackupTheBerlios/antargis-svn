@@ -29,6 +29,12 @@ void WaterPiece::draw()
   drawPrivate(true);
   shader->disable();
 }
+
+void WaterPiece::drawPick()
+{
+  drawPrivate(false);
+}
+
 void WaterPiece::advance(float t)
 {
   shader->update(t);
@@ -186,6 +192,11 @@ void WaterPiece::draw()
 
     glDisable(GL_COLOR_MATERIAL);
 
+}
+
+void WaterPiece::drawPick()
+{
+  mArray.drawPick();
 }
 
 void WaterPiece::advance(float t)

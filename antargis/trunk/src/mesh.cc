@@ -210,6 +210,11 @@ bool MeshData::getAlpha() const
   return mAlpha;
   }*/
 
+  void MeshData::drawPick()
+{
+  mArray.drawPick();
+}
+
 void MeshData::draw()
 {
   if(!mShadow)
@@ -368,6 +373,13 @@ AGBox3 Mesh::bbox()
   return mData->bbox()+mPos.dim3();
 }
 
+void Mesh::drawPick()
+{
+  begin();
+  if(mData)
+    mData->drawPick();
+  end();
+}
 
 
 Mesh *toMesh(SceneNode *node)

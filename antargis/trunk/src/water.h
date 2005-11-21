@@ -20,6 +20,7 @@ class WaterPiece:public SceneNode
   void tick();
 
   void draw();
+  void drawPick();
 
   void advance(float t);
   size_t getTriangles() const;
@@ -51,6 +52,7 @@ class WaterPiece:public SceneNode
   virtual ~WaterPiece();
 
   void draw();
+  void drawPick();
 
   void advance(float t);
   size_t getTriangles() const;

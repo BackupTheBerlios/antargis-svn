@@ -130,6 +130,7 @@ void VertexArray::draw()
 	}
       glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
       glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+
     }
   else
     {
@@ -149,6 +150,49 @@ void VertexArray::draw()
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 }
+
+void VertexArray::drawPick()
+{
+  if(true)
+    {
+      glBegin(GL_TRIANGLES);
+      for(std::vector<Uint16>::iterator i=mIndices.begin();i!=mIndices.end();i++)
+	glVertex4fv(mVertices[*i]);
+      glEnd();
+    }
+  else
+    {
+      // FIXME: some this doesn't - what the heck!
+      if(mChanged)
+	init();
+      
+      
+      glEnableClientState(GL_VERTEX_ARRAY);
+      
+      
+      // disable textures
+      glClientActiveTexture(GL_TEXTURE1);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      glClientActiveTexture(GL_TEXTURE0);
+      
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      
+      {
+	cdebug(mVertices.size());
+	cdebug(mIndices.size());
+	glBindBufferARB( GL_ARRAY_BUFFER_ARB,0);
+	glNormalPointer(GL_FLOAT,0,0);
+	glBindBufferARB( GL_ARRAY_BUFFER_ARB,0);
+	glTexCoordPointer(2,GL_FLOAT,0,0);
+	glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
+	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+		       &(mIndices[0]));
+      }
+      
+      glDisableClientState(GL_VERTEX_ARRAY);
+    }
+}
+
 
 
 AGVector4 VertexArray::lineHit(const AGLine3 &pLine) const

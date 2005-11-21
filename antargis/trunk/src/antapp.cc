@@ -13,6 +13,7 @@ GLApp::GLApp(int w,int h):scene(w,h)
   omx=-1;
   frameTime=0;
   frameCount=0;
+  hx=hy=-1;
 }
 
 GLApp::~GLApp()
@@ -35,15 +36,26 @@ void GLApp::drawGL()
   scene.draw();
   
   glColor4f(1,1,1,1);
-  glBegin(GL_LINES);
+  /*  glBegin(GL_LINES);
   glVertex3fv(line.getV0());
   glVertex3fv(line.getV1());
-  glEnd();
+  glEnd();*/
   
 }
 
 bool GLApp::eventFrame(float t)
 {
+  if(hx>=0)
+    {
+      //      TRACE;
+      // check hovering
+      Scene::PickResult nodes=scene.pick(hx,hy,1,1);
+      
+      if(nodes.size())
+	eventHover(nodes,hb);
+      hx=hy=-1;
+    }
+  /*
   frameTime+=t;
   frameCount++;
   if(frameCount==10)
@@ -53,9 +65,9 @@ bool GLApp::eventFrame(float t)
       out<<fps<<std::endl;
       frameTime=0;
       frameCount=0;
-    }
-  scene.advance(t);
-  SDL_Delay(30);
+      }*/
+  //  scene.advance(t);
+  //  SDL_Delay(30);
   return true;
 }
 
@@ -74,10 +86,10 @@ bool GLApp::eventMouseButtonDown(const AGEvent *m)
       else if(e->getButton()==1)
 	{
 	  AGPoint p=e->getMousePosition();
-	  AGLine3 l=scene.getLine(p.x,p.y);
-	  cdebug(l.toString());
-	  Scene::PickResult nodes=scene.lineHit(l);
-	  line=l;
+	  //	  AGLine3 l=scene.getLine(p.x,p.y);
+	  //	  cdebug(l.toString());
+	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);//lineHit(l);
+	  //	  line=l;
 	  //	  eventClick(nodes);
 	}
     }
@@ -93,10 +105,10 @@ bool GLApp::eventMouseButtonUp(const AGEvent *m)
       if(e)
 	{
 	  AGPoint p=e->getMousePosition();
-	  AGLine3 l=scene.getLine(p.x,p.y);
-	  cdebug(l.toString());
-	  Scene::PickResult nodes=scene.lineHit(l);
-	  line=l;
+	  //	  AGLine3 l=scene.getLine(p.x,p.y);
+	  //	  cdebug(l.toString());
+	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);//lineHit(l);
+	  //	  line=l;
 
 	  for(Scene::PickResult::iterator i=nodes.begin();i!=nodes.end();i++)
 	    cdebug("PICKed:"<<&(*i));
@@ -116,6 +128,10 @@ void GLApp::eventClick(const Scene::PickResult &pNodes,int button)
     }
 }
 
+void GLApp::eventHover(const Scene::PickResult &pNodes,int button)
+{
+}
+
 
 bool GLApp::eventMouseMotion(const AGEvent *m)
 {
@@ -132,6 +148,17 @@ bool GLApp::eventMouseMotion(const AGEvent *m)
       omx=p.x;
       omy=p.y;
     }
+  if(e)
+    {
+      //      TRACE;
+      // check hovering - delayed 
+      AGPoint p=e->getMousePosition();
+      hx=p.x;
+      hy=p.y;
+      hb=e->getButton();
+      //      cdebug("hx:"<<hx);
+    }
+
   mMayClick=false;
   return AGApplication::eventMouseMotion(m);
 }
