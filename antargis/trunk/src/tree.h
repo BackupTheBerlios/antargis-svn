@@ -7,7 +7,7 @@
 #include "vertex_array.h"
 #include "mesh.h"
 
-class GLTree:public Mesh //SceneNode
+class GLTree:public Mesh
 {
   AGTexture firTex,trunkTex;
 

@@ -34,23 +34,9 @@ class Mesh;
 class SceneNode;
 class Job;
 
-// FIXME: maybe remove Resource from c++??
-class Resource
-{
-  std::map<std::string,float> r;
- public:
-  Resource();
-  float get(const std::string &pName);
-  void add(const std::string &pName,float value);
-  void sub(const std::string &pName,float value);
-  void set(const std::string &pName,float value);
+#include "resource.h"
 
-  std::map<std::string,float> getAll() const;
-
-  void takeAll(Resource &r);
-};
-
-class AntEntity
+class AntEntity:public RubyObject
   {
   public:
     typedef std::list<SceneNode*> Meshes;
@@ -182,32 +168,13 @@ class AntEntity
     void eventMapChanged();
     virtual void move(float pTime); // move entity FIXME: del move
 
-
-  public: // must be public, so that swig can set these
-    bool mRubyObject;
-    VALUE mRUBY;
+    void mark();
 
   private:
     void init();
     void updatePos(const AGVector3 &p);
 
-    friend void AntEntity_markfunc(void *ptr);
-
   };
 
-class AntEntityPtr
-{
- public:
-  AntEntityPtr(const AntEntityPtr &p);
-  AntEntityPtr(AntEntity *p);
-  AntEntityPtr();
-
-  AntEntity *get();
-
- private:
-  AntEntity *p;
-};
-
-void AntEntity_markfunc(void *ptr);
 
 #endif

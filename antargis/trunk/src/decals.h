@@ -1,6 +1,8 @@
 #ifndef __DECALS_H__
 #define __DECALS_H__
 
+#include "map.h"
+
 struct Color4f
 {
   float c[4];
@@ -16,11 +18,12 @@ struct Color4f
   {
     c[0]=c[1]=c[2]=c[3]=1;
   }
-
+#ifndef SWIG
   (operator float*)()
   {
     return c;
   }
+#endif
 };
 struct Decal
 {
@@ -70,10 +73,10 @@ struct Decal
 class Decals:public SceneNode
 {
  public:
-  Decals(Heightmap *map);
+  Decals(HeightMap *map);
 
  private:
-  Heightmap *map;
+  HeightMap *map;
   std::vector<Decal> mDecals;
 };
 

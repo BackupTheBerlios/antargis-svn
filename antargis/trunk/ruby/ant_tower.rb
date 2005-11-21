@@ -10,6 +10,7 @@ class AntTower<AntHouse
 		data.texCoordFromPos(0.2)
 		mesh=Mesh.new(data,AGVector4.new(0,0,0),-30)
 		mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_new.png"),AGVector4.new(0,0,0),-30)
+		#mesh=Mesh.new(getMeshData("data/models/ant_coach.ant2",0.5,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0),-30)
 		#mesh=Mesh.new(getMeshData("data/models/mine.ant2",2),AGVector4.new(0,0,0),-30) # mine
 		setMesh(mesh)
 		

@@ -51,6 +51,8 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				ent=getMap.getEntity(mesh)
 				if ent
 					if ["house","farm","farmstead","workshop","hero"].member?(ent.getType) then
+						#puts ent.class
+						#exit
 					#if ent.getType=="hero"
 						inspectEntity(ent)
 					end

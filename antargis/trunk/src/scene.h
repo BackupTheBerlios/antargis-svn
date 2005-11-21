@@ -1,8 +1,6 @@
 #ifndef __SCENE_H
 #define __SCENE_H
 
-//#include "vector.h"
-//#include "matrix.h"
 #include "glee/GLee.h"
 #include "ag_triangle.h"
 
@@ -37,7 +35,7 @@ struct Viewport
 };
 
 
-class Scene
+class Scene:public RubyObject
 {
  public:
   Scene(int w,int h);
@@ -78,6 +76,8 @@ class Scene
 
   float width() const;
   float height() const;
+
+  void mark();
 
  private:
   void init();
@@ -126,11 +126,6 @@ class Scene
   std::map<GLuint,SceneNode*> pickNames;
   
 
-  friend void Scene_markfunc(void *ptr);
-
-  public: // must be public, so that swig can set these
-  bool mRubyObject;
-  VALUE mRUBY;
 };
 
 #endif

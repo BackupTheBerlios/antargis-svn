@@ -396,23 +396,6 @@ void AntEntity::newFightJob(int p,AntEntity *target)
 
 
 
-// AntEntityPtr
-AntEntityPtr::AntEntityPtr():p(0)
-{
-}
-
-AntEntityPtr::AntEntityPtr(const AntEntityPtr &pp):p(pp.p)
-{
-}
-AntEntityPtr::AntEntityPtr(AntEntity *pp):p(pp)
-{
-}
-
-AntEntity *AntEntityPtr::get()
-{
-  assert(p);
-  return p;
-}
 
 void AntEntity::setSpeed(float f)
 {
@@ -508,22 +491,8 @@ AGRect2 AntEntity::getRect() const
 
 
 
-void AntEntity_markfunc(void *ptr)
+void AntEntity::mark()
 {
-  if(!ptr)
-    return;
-  //  Mesh *cppAnimal;
-  AntEntity *zoo;
-
-  zoo = static_cast<AntEntity*>(ptr);
-
-  for(AntEntity::Meshes::iterator i=zoo->mMesh.begin();i!=zoo->mMesh.end();i++)
-    if(*i)
-      if((*i)->mRubyObject)
-	rb_gc_mark((*i)->mRUBY);
-  /*
-  cppAnimal=zoo->getMesh();
-  if(cppAnimal)
-    if(cppAnimal->mRubyObject)
-    rb_gc_mark(cppAnimal->mRUBY);*/
+  for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
+    markObject(*i);
 }

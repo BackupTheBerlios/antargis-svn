@@ -16,7 +16,7 @@
 	Data_Get_Struct($input,AGSurface,b);
 	$result=*b;
 }
-
+/*
 %typemap(out) SceneNode *{
 //	std::cout<<"test2"<<std::endl;
 	if($1)
@@ -84,10 +84,11 @@
 	else
 		vresult = Qnil;
 }
-
+*/
 %include "marker.i"
 
 %include "antmark.h"
+%include "nantmarker.hh"
 
 
 %exception AGApplication::AGApplication {

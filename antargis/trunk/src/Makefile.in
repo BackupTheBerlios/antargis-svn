@@ -90,7 +90,11 @@ VERSION = @VERSION@
 
 SUBDIRS = glee
 lib_LTLIBRARIES = libantargis.la
-libantargis_la_SOURCES = anim_mesh.h anim_mesh.cc smoke.h smoke.cc jobs.cc jobs.h entity.h entity.cc map.h map.cc mesh.h mesh.cc terrain.h terrain.cc tree.h tree.cc scene.h scene.cc water.h water.cc vertex_array.h vertex_array.cc cg.cc cg.h pbuffer.h pbuffer.cc antapp.h antapp.cc antargisruby.cc glsl.h glsl.cc scenenode.h scenenode.cc
+
+realsrc_h = anim_mesh.h smoke.h jobs.h entity.h map.h mesh.h terrain.h tree.h scene.h water.h vertex_array.h cg.h pbuffer.h antapp.h glsl.h scenenode.h rubyobj.h mesh_data.h anim_mesh_data.h resource.h entptr.h height_map.h
+realsrc_cc = anim_mesh.cc smoke.cc jobs.cc entity.cc map.cc mesh.cc terrain.cc tree.cc scene.cc water.cc vertex_array.cc cg.cc pbuffer.cc antapp.cc glsl.cc scenenode.cc rubyobj.cc entptr.cc height_map.cc
+
+libantargis_la_SOURCES = $(realsrc_h) $(realsrc_cc) antargisruby.cc antargisruby.h
 libantargis_la_LIBADD = $(top_builddir)/src/glee/libglee.la
 
 EXTRA_DIST = *.png interface.i
@@ -110,7 +114,8 @@ libantargis_la_LDFLAGS =
 libantargis_la_DEPENDENCIES =  $(top_builddir)/src/glee/libglee.la
 libantargis_la_OBJECTS =  anim_mesh.lo smoke.lo jobs.lo entity.lo map.lo \
 mesh.lo terrain.lo tree.lo scene.lo water.lo vertex_array.lo cg.lo \
-pbuffer.lo antapp.lo antargisruby.lo glsl.lo scenenode.lo
+pbuffer.lo antapp.lo glsl.lo scenenode.lo rubyobj.lo entptr.lo \
+height_map.lo antargisruby.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -129,8 +134,9 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 TAR = tar
 GZIP_ENV = --best
 DEP_FILES =  .deps/anim_mesh.P .deps/antapp.P .deps/antargisruby.P \
-.deps/cg.P .deps/entity.P .deps/glsl.P .deps/jobs.P .deps/map.P \
-.deps/mesh.P .deps/pbuffer.P .deps/scene.P .deps/scenenode.P \
+.deps/cg.P .deps/entity.P .deps/entptr.P .deps/glsl.P \
+.deps/height_map.P .deps/jobs.P .deps/map.P .deps/mesh.P \
+.deps/pbuffer.P .deps/rubyobj.P .deps/scene.P .deps/scenenode.P \
 .deps/smoke.P .deps/terrain.P .deps/tree.P .deps/vertex_array.P \
 .deps/water.P
 SOURCES = $(libantargis_la_SOURCES)
@@ -474,11 +480,17 @@ distclean-generic clean-generic maintainer-clean-generic clean \
 mostlyclean distclean maintainer-clean
 
 
-antargisruby.cc: interface.i *.h /usr/local/include/antargisgui/*.h marker.i
+nantmarker.hh: $(realsrc_h) createmarker.rb
+	./createmarker.rb $(realsrc_h)
+
+antargisruby.cc: interface.i *.h /usr/local/include/antargisgui/*.h marker.i nantmarker.hh
 	$(SWIGCOMPILE) -o antargisruby.cc interface.i
 
 install:
 	cp .libs/libantargis.so $(RUBY_INSTALL_DIR)
+
+clean:
+	rm antargisruby.cc nantmarker.hh
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

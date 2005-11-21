@@ -3,10 +3,11 @@
 
 #include <ag_triangle.h>
 #include <ruby.h>
+#include "rubyobj.h"
 
 class Scene;
 
-class SceneNode
+class SceneNode:public RubyObject
 {
  public:
   SceneNode();
@@ -34,12 +35,6 @@ class SceneNode
 
   virtual AGBox3 bbox();
   
-  public: // must be public, so that swig can set these
-  
-#ifndef SWIG
-  bool mRubyObject;
-  VALUE mRUBY;
-#endif
  private:
   Scene *scene;
 };

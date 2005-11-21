@@ -772,27 +772,12 @@ float Scene::height() const
 }
 
 
-void Scene_markfunc(void *ptr)
+void Scene::mark()
 {
-  if(!ptr)
-    return;
+  Scene::Nodes::iterator i=mNodes.begin();
 
-  SceneNode *cppAnimal;
-  VALUE   rubyAnimal;
-  Scene *zoo;
-
-
-  zoo = static_cast<Scene*>(ptr);
-
-  Scene::Nodes::iterator i=zoo->mNodes.begin();
-
-  for(;i!=zoo->mNodes.end();i++)
+  for(;i!=mNodes.end();i++)
     {
-      cppAnimal = *i;
-      if(cppAnimal->mRubyObject)
-        {
-          rubyAnimal = cppAnimal->mRUBY;
-          rb_gc_mark(rubyAnimal);
-        }
+      markObject(*i);
     }
 }

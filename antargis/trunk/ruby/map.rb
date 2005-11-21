@@ -28,7 +28,7 @@ class AntRubyMap<AntMap
 		super(w,h)
 		@ents={}
 		@players=[]
-		GC.start
+		#GC.start
 		@lastGC=0
 	end
 	def loadEntity(node)

@@ -36,18 +36,12 @@ void GLApp::drawGL()
   scene.draw();
   
   glColor4f(1,1,1,1);
-  /*  glBegin(GL_LINES);
-  glVertex3fv(line.getV0());
-  glVertex3fv(line.getV1());
-  glEnd();*/
-  
 }
 
 bool GLApp::eventFrame(float t)
 {
   if(hx>=0)
     {
-      //      TRACE;
       // check hovering
       Scene::PickResult nodes=scene.pick(hx,hy,1,1);
       
@@ -55,19 +49,6 @@ bool GLApp::eventFrame(float t)
 	eventHover(nodes,hb);
       hx=hy=-1;
     }
-  /*
-  frameTime+=t;
-  frameCount++;
-  if(frameCount==10)
-    {
-      frameTime*=0.1f;
-      float fps=1/frameTime;
-      out<<fps<<std::endl;
-      frameTime=0;
-      frameCount=0;
-      }*/
-  //  scene.advance(t);
-  //  SDL_Delay(30);
   return true;
 }
 
@@ -86,11 +67,7 @@ bool GLApp::eventMouseButtonDown(const AGEvent *m)
       else if(e->getButton()==1)
 	{
 	  AGPoint p=e->getMousePosition();
-	  //	  AGLine3 l=scene.getLine(p.x,p.y);
-	  //	  cdebug(l.toString());
-	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);//lineHit(l);
-	  //	  line=l;
-	  //	  eventClick(nodes);
+	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);
 	}
     }
   return AGApplication::eventMouseButtonDown(m);
@@ -105,13 +82,7 @@ bool GLApp::eventMouseButtonUp(const AGEvent *m)
       if(e)
 	{
 	  AGPoint p=e->getMousePosition();
-	  //	  AGLine3 l=scene.getLine(p.x,p.y);
-	  //	  cdebug(l.toString());
-	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);//lineHit(l);
-	  //	  line=l;
-
-	  for(Scene::PickResult::iterator i=nodes.begin();i!=nodes.end();i++)
-	    cdebug("PICKed:"<<&(*i));
+	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);
 
 	  eventClick(nodes,e->getButton());
 	}
@@ -121,11 +92,6 @@ bool GLApp::eventMouseButtonUp(const AGEvent *m)
 
 void GLApp::eventClick(const Scene::PickResult &pNodes,int button)
 {
-  cdebug(pNodes.size());
-  for(Scene::PickResult::const_iterator i=pNodes.begin();i!=pNodes.end();i++)
-    {
-      cdebug(i->camDist<<"  "<<i->pos.toString()<<"  "<<typeid(*i->node).name());
-    }
 }
 
 void GLApp::eventHover(const Scene::PickResult &pNodes,int button)
@@ -150,13 +116,11 @@ bool GLApp::eventMouseMotion(const AGEvent *m)
     }
   if(e)
     {
-      //      TRACE;
       // check hovering - delayed 
       AGPoint p=e->getMousePosition();
       hx=p.x;
       hy=p.y;
       hb=e->getButton();
-      //      cdebug("hx:"<<hx);
     }
 
   mMayClick=false;
@@ -207,6 +171,6 @@ void GLApp_markfunc(void *ptr)
   if(zoo->scene.mRubyObject)
     rb_gc_mark(zoo->scene.mRUBY);
   else
-    Scene_markfunc(&zoo->scene);
+    zoo->scene.mark();
 
 }

@@ -1126,6 +1126,7 @@ public:
     virtual void entsChanged();
     virtual void mapChanged();
     virtual ~SwigDirector_AntMap();
+    virtual void mark();
     virtual AntEntity *loadEntity(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(xmlpp::Node const &node);
@@ -1151,26 +1152,6 @@ public:
 };
 
 
-class SwigDirector_MeshData : public MeshData, public Swig::Director {
-
-public:
-    SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
-    SwigDirector_MeshData(VALUE self, VertexArray const &va, std::string const &pTexture, bool pShadow = true);
-    virtual void setPos(AGVector3 const &pPos);
-    virtual bool transparent();
-    virtual void setRotation(float r);
-    virtual void advance(float time);
-    virtual void sort(AGVector4 const &pCamera);
-    virtual void drawPick();
-    virtual ~SwigDirector_MeshData();
-    virtual size_t getTriangles() const;
-    virtual void mapChanged();
-    virtual void draw();
-    virtual void drawShadow();
-    virtual void drawDepth();
-};
-
-
 class SwigDirector_Mesh : public Mesh, public Swig::Director {
 
 public:
@@ -1188,6 +1169,26 @@ public:
     virtual void draw();
     virtual void drawDepth();
     virtual void drawShadow();
+};
+
+
+class SwigDirector_MeshData : public MeshData, public Swig::Director {
+
+public:
+    SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
+    SwigDirector_MeshData(VALUE self, VertexArray const &va, std::string const &pTexture, bool pShadow = true);
+    virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
+    virtual void setRotation(float r);
+    virtual void advance(float time);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_MeshData();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void draw();
+    virtual void drawShadow();
+    virtual void drawDepth();
 };
 
 
@@ -1251,6 +1252,44 @@ public:
     virtual void eventGotFight(AntEntity *pOther);
     virtual void setPos(AGVector2 const &p);
     virtual void newRestJob(int pTime);
+};
+
+
+class SwigDirector_Decals : public Decals, public Swig::Director {
+
+public:
+    SwigDirector_Decals(VALUE self, HeightMap *map);
+    virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
+    virtual void setRotation(float r);
+    virtual void advance(float time);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_Decals();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void draw();
+    virtual void drawShadow();
+    virtual void drawDepth();
+};
+
+
+class SwigDirector_WaterPiece : public WaterPiece, public Swig::Director {
+
+public:
+    SwigDirector_WaterPiece(VALUE self, AGVector4 const &pos);
+    virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
+    virtual void setRotation(float r);
+    virtual void advance(float t);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void drawPick();
+    virtual ~SwigDirector_WaterPiece();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void drawShadow();
+    virtual void drawDepth();
+    virtual void draw();
 };
 
 
@@ -1335,6 +1374,7 @@ class SwigDirector_AnimMesh : public AnimMesh, public Swig::Director {
 public:
     SwigDirector_AnimMesh(VALUE self, AnimMeshData *data);
     virtual void setPos(AGVector3 const &p);
+    virtual void mark();
     virtual bool transparent();
     virtual void setRotation(float r);
     virtual void advance(float time);

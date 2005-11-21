@@ -69,6 +69,8 @@ VertexArray MeshOptimizer::getArray()
     {
       a.addTriangle(mIndices[i],mIndices[i+1],mIndices[i+2]);
     }
+  if(mIndices.size()==0)
+    cdebug("NO TRIANGLES FOUND!");
   cdebug("SAVED:"<<1.0f-float(saved)/mIndices.size());
   return a;
 }
@@ -386,4 +388,12 @@ Mesh *toMesh(SceneNode *node)
 {
   return dynamic_cast<Mesh*>(node);
 }
+
+
+
+void Mesh::mark()
+{
+  markObject(getData());
+}
+
 

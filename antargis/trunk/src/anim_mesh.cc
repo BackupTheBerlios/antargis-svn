@@ -503,14 +503,9 @@ AGBox3 AnimMesh::bbox()
 }
 
 
-void AnimMesh_markfunc(void *ptr)
+void AnimMesh::mark()
 {
-  if(!ptr)
-    return;
-
-  AnimMeshData *d=static_cast<AnimMesh*>(ptr)->getData();
-  if(d->mRubyObject)
-    rb_gc_mark(d->mRUBY);
+  markObject(mData);
 }
 
 
