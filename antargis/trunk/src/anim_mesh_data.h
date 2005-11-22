@@ -57,6 +57,8 @@ class AnimMeshData:public RubyObject
 
   AGBox3 mBBox;
 
+  bool animate;
+
  private:
   void setupJoints();
   void loadAnt3(const std::string &instr,float scale,const std::string &pTexName);

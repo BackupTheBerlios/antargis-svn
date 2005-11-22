@@ -3,7 +3,7 @@
 require 'antargisgui.rb'
 
 if ARGV == nil or ARGV.length<2
-	puts "call: anim_import.rb mesh.txt mesh.ant3"
+	puts "call: anim_import.rb mesh.txt mesh.ant4"
 	exit
 end
 infilename=ARGV[0]
@@ -81,40 +81,32 @@ class Triangle
 end
 
 class Frame
-	def initialize(t,p,r)
+	def initialize(t,pv)
 		@time=t
-		@pos=p
-		@rot=r
+		@v=pv
 	end
-	attr_reader :time, :rot, :pos
+	attr_reader :time, :v
 end
 
 class Bone
 	def initialize(p,r,par)
 		@pos=p
 		@rot=r
-		@frames=[]
+		@rframes=[]
+		@tframes=[]
 		if par
 			@parent=par
 		else
 			@parent=-1
 		end
 	end
-	def addFrame(f)
-		@frames.push(f)
+	def addRFrame(f)
+		@rframes.push(f)
 	end
-	def getFrame(t)
-		@frames.each{|f|
-			if f.time==t
-				return f
-			end
-		}
-		e= "Frame "+t.to_s+" not Found!"
-		puts e
-		#throw e
-		return Frame.new(t,AGVector3.new(0,0,0),AGVector3.new(0,0,0))
+	def addTFrame(f)
+		@tframes.push(f)
 	end
-	attr_reader :pos, :rot, :frames, :parent
+	attr_reader :pos, :rot, :rframes, :parent, :tframes
 end
 
 # read frames
@@ -229,25 +221,14 @@ for i in 0..($numbones-1)
 	rkeys={}
 	for j in 1..poskeys
 		t,x,y,z = getline.split(" ").collect{|a|a.to_f}
-		pkeys[t]=AGVector3.new(x,y,z)
+		bone.addTFrame(Frame.new(t,AGVector3.new(x,y,z)))
 	end
 	rotkeys=getline.to_i
 	for j in 1..rotkeys
 		t,x,y,z = getline.split(" ").collect{|a|a.to_f}
-		rkeys[t]=AGVector3.new(x,y,z)
+		bone.addRFrame(Frame.new(t,AGVector3.new(x,y,z)))
 	end
 	
-	(rkeys.keys+pkeys.keys).sort.uniq.each{|t|
-		p=pkeys[t]
-		r=rkeys[t]
-		if not p
-			p=AGVector3.new(0,0,0)
-		end
-		if not r
-			r=AGVector3.new(0,0,0)
-		end
-		bone.addFrame(Frame.new(t,p,r))
-	}
 	$bones.push(bone)
 end
 
@@ -294,25 +275,19 @@ file.print [$bones.length].pack("i")
 $bones.each{|b|
 	a=[b.pos.x,b.pos.y,b.pos.z, b.rot.x,b.rot.y,b.rot.z,b.parent]
 	file.print a.pack("ffffffi")
-}
-
-keys=[]
-$bones.each{|b|
-	b.frames.each{|f|
-		keys.push(f.time)
+	
+	# rot frames
+	fs=b.rframes
+	file.print [fs.length].pack("i")
+	fs.each{|f|
+		file.print [f.time,f.v.x, f.v.y, f.v.z].pack("ffff")
 	}
-	keys.uniq!
-}
-puts keys.collect{|x|x.to_s}.join(" - ")
-
-file.print [$frames].pack("i")
-file.print [keys.length].pack("i")
-
-keys.each{|k|
-	file.print [k].pack("f")
-	$bones.each{|b|
-		f=b.getFrame(k)
-		file.print [f.pos.x,f.pos.y,f.pos.z,f.rot.x,f.rot.y,f.rot.z].pack("ffffff")
+	
+	# translation frames
+	fs=b.tframes
+	file.print [fs.length].pack("i")
+	fs.each{|f|
+		file.print [f.time,f.v.x, f.v.y, f.v.z].pack("ffff")
 	}
 }
 
@@ -326,6 +301,9 @@ file.close
 # 4)triangles v0,v1,v2 (all int32)
 # 5)number of bones  in int32
 # 6)bones x,y,z,rx,ry,rz (all float32) - positioned at x,y,z - rot-normal at rx,ry,rz
-# 7)number of keyframe in int32
-# 8)keyframes t,[(rx,ry,rz) ]^(number of bones)
+# 7)number of rot-keyframe in int32 per bone
+# 8)rot-keyframes t,[(rx,ry,rz) ]
+# 9)number of translation-keyframe in int32 per bone
+# 10)translation-keyframes t,[(rx,ry,rz) ]
+# so 7-10 is repeated for each bone
 # end

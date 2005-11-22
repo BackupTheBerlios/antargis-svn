@@ -34,6 +34,7 @@ class AntNewSheep<AntMyEntity
 		
 		
 		data=AnimMeshData.new("data/models/sheep.anim")
+		data=AnimMeshData.new("data/models/man_fight.anim")
 		data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
 		setMesh(AnimMesh.new(data))
 

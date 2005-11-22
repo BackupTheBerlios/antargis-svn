@@ -32,7 +32,7 @@ class AnimMesh:public SceneNode
   void setTransform(const AGMatrix4 &m);
 
   std::string getAnimation() const;
-  void setAnimation(const std::string &pName);
+  bool setAnimation(const std::string &pName);
 
   void setPos(const AGVector3 &p);
   void setRotation(const AGVector3 &r,float a);

@@ -100,6 +100,10 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile)
 
   Node &root=doc.root();
 
+  animate=true;
+  if(root.get("debug")=="true")
+    animate=false;
+
   loadAnt3(loadFile(root.get("model")),toFloat(root.get("scale")),root.get("texture"));
   
   // load animations
@@ -210,9 +214,8 @@ void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::stri
 	}
     }
 
-#ifdef USE_ANIM
-  setupJoints();
-#endif
+  if(animate)
+    setupJoints();
 }
 
 void AnimMeshData::setTransform(const AGMatrix4 &m)
@@ -305,7 +308,7 @@ void AnimMesh::drawPrivate(bool textured)
   glTranslatef(mPos[0],mPos[1],mPos[2]);
   glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
 
-  #ifndef USE_ANIM
+  if(!mData->animate)
     {
       glBegin(GL_TRIANGLES);
       
@@ -327,7 +330,7 @@ void AnimMesh::drawPrivate(bool textured)
       
       glEnd();
     }
-#else
+  else
     {
 
       // paint with transform
@@ -360,12 +363,14 @@ void AnimMesh::drawPrivate(bool textured)
 
 
     }
-#endif
+  
   glPopMatrix();
 }
 
 void AnimMesh::advance(float time)
 {
+  if(!mData->animate)
+    return;
   mTime+=mAnimation->fps*time;
 
   while(mTime>mAnimation->end)
@@ -485,16 +490,20 @@ std::string AnimMesh::getAnimation() const
   return mAnimName;
 }
 
-void AnimMesh::setAnimation(const std::string &pName)
+bool AnimMesh::setAnimation(const std::string &pName)
 {
   if(mAnimName==pName)
-    return;
+    return true;
   if(mData->mAnimations.find(pName)==mData->mAnimations.end())
-    throw std::string("Animation ")+pName+" is known here!";
+    {
+      cdebug(std::string("Animation ")+pName+" is known here!");
+      return false;
+    }
 
   mAnimation=&(mData->mAnimations[pName]);
   mAnimName=pName;
   mTime=mAnimation->begin;
+  return true;
 }
 
 AGBox3 AnimMesh::bbox()

@@ -49311,7 +49311,9 @@ static VALUE
 _wrap_AnimMesh_setAnimation(int argc, VALUE *argv, VALUE self) {
     AnimMesh *arg1 = (AnimMesh *) 0 ;
     std::string *arg2 = 0 ;
+    bool result;
     std::string temp2 ;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -49325,9 +49327,10 @@ _wrap_AnimMesh_setAnimation(int argc, VALUE *argv, VALUE self) {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
     }
-    (arg1)->setAnimation((std::string const &)*arg2);
+    result = (bool)(arg1)->setAnimation((std::string const &)*arg2);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
