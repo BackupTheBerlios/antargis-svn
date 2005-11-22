@@ -271,7 +271,7 @@ $tris.each{|t|
 	file.print a.pack("iii")
 }
 
-file.print [$bones.length].pack("i")
+file.print [$frames,$bones.length].pack("ii")
 $bones.each{|b|
 	a=[b.pos.x,b.pos.y,b.pos.z, b.rot.x,b.rot.y,b.rot.z,b.parent]
 	file.print a.pack("ffffffi")

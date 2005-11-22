@@ -94,6 +94,43 @@ void inverseTranslate(AGVector3 &v, const AGMatrix4 &m )
 }
 
 
+AGVector3 Bone::interpolate(const std::vector<KeyFrame> &frames,float t)
+{
+  size_t i;
+  for(i=0;i<frames.size();i++)
+    {
+      if(frames.size()>i+1)
+	{
+	  if(frames[i+1].time>t)
+	    break;
+	}
+      else
+	break;
+    }
+  size_t j=i+1;
+  if(j>=frames.size())
+    return frames[i].v;
+  
+  float t0=frames[i].time;
+  float t1=frames[j].time;
+
+  float i0=(t-t0)/(t1-t0);
+  float i1=1-i0;
+
+  return frames[i].v*i1 + frames[j].v*i0;
+}
+AGVector3 Bone::interpolateRot(float t)
+{
+  return interpolate(rFrames,t);
+}
+AGVector3 Bone::interpolateTrans(float t)
+{
+  return interpolate(tFrames,t);
+}
+
+
+
+
 AnimMeshData::AnimMeshData(const std::string &xmlfile)
 {
   Document doc(xmlfile);
@@ -104,10 +141,14 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile)
   if(root.get("debug")=="true")
     animate=false;
 
+
+  cdebug("loading from:"<<root.get("model"));
   loadAnt3(loadFile(root.get("model")),toFloat(root.get("scale")),root.get("texture"));
   
   // load animations
   
+  cdebug("animTime:"<<animTime);
+
   Node::NodeVector anims=root.get_children("animation");
   for(Node::NodeVector::iterator i=anims.begin();i!=anims.end();i++)
     {
@@ -165,8 +206,10 @@ void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::stri
       indices.push_back(index);
     }
 
-  Uint32 nbones;
-  l>>nbones;
+  Uint32 nbones,frames;
+  l>>frames>>nbones;
+
+  animTime=frames;
 
   for(Uint32 i=0;i<nbones;i++)
     {
@@ -184,34 +227,33 @@ void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::stri
 	  assert(parent<(int)i);
 	  bone->parent=bones[parent];
 	}
-      bones.push_back(bone);
-    }
 
-  // read key frames
-
-  Uint32 nframes;
-  l>>nframes;
-  animTime=nframes;
-
-  Uint32 keys;
-  l>>keys;
-
-  for(Uint32 i=0;i<keys;i++)
-    {
-      float time;
-      l>>time;
-      KeyFrame *frame=new KeyFrame;
-      frame->time=time-1;
-      for(Uint32 j=0;j<nbones;j++)
+      // read rot-frames
+      Sint32 frames;
+      l>>frames;
+      KeyFrame frame;
+      for(Sint32 r=0;r<frames;r++)
 	{
-	  float x,y,z,rx,ry,rz;
-	  l>>x>>y>>z>>rx>>ry>>rz;
-	  
-	  frame->pos.push_back(AGVector3(x,y,z)*scale);
-	  frame->rot.push_back(AGVector3(rx,ry,rz));
-
-	  frames.push_back(frame);
+	  float x,y,z,t;
+	  l>>t>>x>>y>>z;
+	  frame.time=t;
+	  frame.v=AGVector3(x,y,z);
+	  bone->rFrames.push_back(frame);
 	}
+
+      l>>frames;
+      for(Sint32 r=0;r<frames;r++)
+	{
+	  float x,y,z,t;
+	  l>>t>>x>>y>>z;
+	  frame.time=t;
+	  frame.v=AGVector3(x,y,z)*scale;
+	  bone->tFrames.push_back(frame);
+	}
+
+
+
+      bones.push_back(bone);
     }
 
   if(animate)
@@ -282,7 +324,6 @@ AnimMesh::~AnimMesh()
 {
   CTRACE;
 }
-
 
 
 void AnimMesh::draw()
@@ -381,71 +422,36 @@ void AnimMesh::advance(float time)
 
 void AnimMesh::update()
 {
-      // calculate 
-  //      std::vector<AGMatrix4> ms;
+  // calculate 
+  
+  while(mTime>mData->animTime)
+    mTime-=mData->animTime;
+  
+  for(size_t k=0;k<mData->bones.size();k++)
+    {
+      Bone *bone=mData->bones[k];
+      AGMatrix4 final(bone->mRelative);
+      AGMatrix4 trans;
+      AGVector3 rot,pos;
 
-      while(mTime>mData->animTime)
-	mTime-=mData->animTime;
+      // first get surrounding keyframes (rot & trans) for this bone 
+      // and calculate ri0,ri1 and ti0,ti1 (1-ti0 == ti1)
 
-      // first get two key frames
-      KeyFrame *f0,*f1;
+      rot=bone->interpolateRot(mTime);
+      pos=bone->interpolateTrans(mTime);
 
-      std::vector<KeyFrame*>::iterator i=mData->frames.begin();
-      while(i!=mData->frames.end() && (*i)->time<=mTime)
-	i++;
-      if(i==mData->frames.end())
-	i--;
-
-      f1=*i;
-
-      if(i!=mData->frames.begin())
-	i--;
-      f0=*i;
+      ::setRotation(trans,rot);
+      setTranslation(trans,pos);
       
-      // calc matrices for bones
-
       
-      float interpol;
-      if(f0->time>f1->time)
-	{
-	  if(mTime<f0->time)
-	    mTime+=mData->animTime;
-	  interpol=(mTime-f0->time)/(f1->time+mData->animTime);
-	}
-      else if(f0->time==f1->time)
-	interpol=0;
-      else
-	interpol=(mTime-f0->time)/(f1->time-f0->time);
+      final=final*trans;
       
-
-      assert(interpol>=0.0f);
-      assert(interpol<=1.0f);
-      float i2=1.0f-interpol;
-
-      for(size_t k=0;k<mData->bones.size();k++)
-	{
-	  AGMatrix4 final(mData->bones[k]->mRelative);
-	  AGMatrix4 trans;
-	  AGVector3 rot,pos;
-
-	  rot=f0->rot[k]*i2 + f1->rot[k]*interpol;
-	  pos=f0->pos[k]*i2 + f1->pos[k]*interpol;
-
-	  ::setRotation(trans,rot);
-	  setTranslation(trans,pos);
-
-		   
-	  final=final*trans;
-
-	  if(mData->bones[k]->parent)
-	    final=mMatrices[mData->bones[k]->parent->id]*final;
-
-	  mMatrices[k]=final;
-	}
+      if(mData->bones[k]->parent)
+	final=mMatrices[mData->bones[k]->parent->id]*final;
       
-
-
-
+      mMatrices[k]=final;
+    }
+  
 }
 
 

@@ -1010,14 +1010,15 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[140]
 #define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[141]
 #define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[142]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[143]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[144]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[145]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[146]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[147]
-#define SWIGTYPE_p_unsigned_long swig_types[148]
-static swig_type_info *swig_types[149];
-static swig_module_info swig_module = {swig_types, 149, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[143]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[144]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[145]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[146]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[147]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[148]
+#define SWIGTYPE_p_unsigned_long swig_types[149]
+static swig_type_info *swig_types[150];
+static swig_module_info swig_module = {swig_types, 150, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -49573,6 +49574,103 @@ _wrap_disown_AnimMesh(int argc, VALUE *argv, VALUE self) {
 }
 
 
+swig_class cKeyFrame;
+
+static VALUE
+_wrap_KeyFrame_time_set(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    if (arg1) (arg1)->time = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_KeyFrame_time_get(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    result = (float) ((arg1)->time);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_KeyFrame_v_set(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    AGVector3 *arg2 = (AGVector3 *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 1);
+    if (arg1) (arg1)->v = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_KeyFrame_v_get(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *arg1 = (KeyFrame *) 0 ;
+    AGVector3 *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
+    result = (AGVector3 *)& ((arg1)->v);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVector3,0);
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_KeyFrame_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_KeyFrame_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_KeyFrame);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_KeyFrame(int argc, VALUE *argv, VALUE self) {
+    KeyFrame *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (KeyFrame *)new KeyFrame();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static void
+free_KeyFrame(KeyFrame *arg1) {
+    delete arg1;
+}
 swig_class cBone;
 
 static VALUE
@@ -49792,6 +49890,136 @@ _wrap_Bone_parent_get(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_Bone_rFrames_set(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    std::vector<KeyFrame > *arg2 = (std::vector<KeyFrame > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTKeyFrame_t, 1);
+    if (arg1) (arg1)->rFrames = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Bone_rFrames_get(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    std::vector<KeyFrame > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    result = (std::vector<KeyFrame > *)& ((arg1)->rFrames);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTKeyFrame_t,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_tFrames_set(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    std::vector<KeyFrame > *arg2 = (std::vector<KeyFrame > *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTKeyFrame_t, 1);
+    if (arg1) (arg1)->tFrames = *arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Bone_tFrames_get(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    std::vector<KeyFrame > *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    result = (std::vector<KeyFrame > *)& ((arg1)->tFrames);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTKeyFrame_t,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_interpolateRot(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    float arg2 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    result = (arg1)->interpolateRot(arg2);
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_interpolateTrans(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    float arg2 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    result = (arg1)->interpolateTrans(arg2);
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Bone_interpolate(int argc, VALUE *argv, VALUE self) {
+    Bone *arg1 = (Bone *) 0 ;
+    std::vector<KeyFrame > *arg2 = 0 ;
+    float arg3 ;
+    AGVector3 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Bone, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTKeyFrame_t, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = (float) NUM2DBL(argv[1]);
+    result = (arg1)->interpolate((std::vector<KeyFrame > const &)*arg2,arg3);
+    
+    {
+        AGVector3 * resultptr;
+        resultptr = new AGVector3((AGVector3 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_Bone_allocate(VALUE self) {
@@ -49823,134 +50051,6 @@ _wrap_new_Bone(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_Bone(Bone *arg1) {
-    delete arg1;
-}
-swig_class cKeyFrame;
-
-static VALUE
-_wrap_KeyFrame_time_set(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *arg1 = (KeyFrame *) 0 ;
-    float arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
-    arg2 = (float) NUM2DBL(argv[0]);
-    if (arg1) (arg1)->time = arg2;
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_KeyFrame_time_get(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *arg1 = (KeyFrame *) 0 ;
-    float result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
-    result = (float) ((arg1)->time);
-    
-    vresult = rb_float_new(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_KeyFrame_pos_set(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *arg1 = (KeyFrame *) 0 ;
-    std::vector<AGVector3 > *arg2 = (std::vector<AGVector3 > *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTAGVector3_t, 1);
-    if (arg1) (arg1)->pos = *arg2;
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_KeyFrame_pos_get(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *arg1 = (KeyFrame *) 0 ;
-    std::vector<AGVector3 > *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
-    result = (std::vector<AGVector3 > *)& ((arg1)->pos);
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTAGVector3_t,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_KeyFrame_rot_set(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *arg1 = (KeyFrame *) 0 ;
-    std::vector<AGVector3 > *arg2 = (std::vector<AGVector3 > *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_std__vectorTAGVector3_t, 1);
-    if (arg1) (arg1)->rot = *arg2;
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_KeyFrame_rot_get(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *arg1 = (KeyFrame *) 0 ;
-    std::vector<AGVector3 > *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_KeyFrame, 1);
-    result = (std::vector<AGVector3 > *)& ((arg1)->rot);
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_std__vectorTAGVector3_t,0);
-    return vresult;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_KeyFrame_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_KeyFrame_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_KeyFrame);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_KeyFrame(int argc, VALUE *argv, VALUE self) {
-    KeyFrame *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (KeyFrame *)new KeyFrame();
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static void
-free_KeyFrame(KeyFrame *arg1) {
     delete arg1;
 }
 swig_class cAnimation;
@@ -50735,6 +50835,7 @@ static swig_type_info _swigt__p_std__vectorTAGRect3_t = {"_p_std__vectorTAGRect3
 static swig_type_info _swigt__p_std__vectorTAGVector3_t = {"_p_std__vectorTAGVector3_t", "std::vector<AGVector3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector4_t = {"_p_std__vectorTAGVector4_t", "std::vector<AGVector4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAntEntityPtr_t = {"_p_std__vectorTAntEntityPtr_t", "std::vector<AntEntityPtr > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTKeyFrame_t = {"_p_std__vectorTKeyFrame_t", "std::vector<KeyFrame > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_p_t = {"_p_std__vectorTNode_p_t", "std::vector<Node * > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_t = {"_p_std__vectorTNode_t", "std::vector<Node > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTPickNode_t = {"_p_std__vectorTPickNode_t", "std::vector<PickNode > *|Scene::PickResult *", 0, 0, 0};
@@ -50886,6 +50987,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorTAGVector3_t,
   &_swigt__p_std__vectorTAGVector4_t,
   &_swigt__p_std__vectorTAntEntityPtr_t,
+  &_swigt__p_std__vectorTKeyFrame_t,
   &_swigt__p_std__vectorTNode_p_t,
   &_swigt__p_std__vectorTNode_t,
   &_swigt__p_std__vectorTPickNode_t,
@@ -51037,6 +51139,7 @@ static swig_cast_info _swigc__p_std__vectorTAGRect3_t[] = {  {&_swigt__p_std__ve
 static swig_cast_info _swigc__p_std__vectorTAGVector3_t[] = {  {&_swigt__p_std__vectorTAGVector3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector4_t[] = {  {&_swigt__p_std__vectorTAGVector4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAntEntityPtr_t[] = {  {&_swigt__p_std__vectorTAntEntityPtr_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTKeyFrame_t[] = {  {&_swigt__p_std__vectorTKeyFrame_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_p_t[] = {  {&_swigt__p_std__vectorTNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_t[] = {  {&_swigt__p_std__vectorTNode_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTPickNode_t[] = {  {&_swigt__p_std__vectorTPickNode_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -51188,6 +51291,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorTAGVector3_t,
   _swigc__p_std__vectorTAGVector4_t,
   _swigc__p_std__vectorTAntEntityPtr_t,
+  _swigc__p_std__vectorTKeyFrame_t,
   _swigc__p_std__vectorTNode_p_t,
   _swigc__p_std__vectorTNode_t,
   _swigc__p_std__vectorTPickNode_t,
@@ -53343,6 +53447,17 @@ SWIGEXPORT void Init_libantargis(void) {
     cAnimMesh.mark = (void (*)(void *)) general_markfunc;
     cAnimMesh.destroy = (void (*)(void *)) free_AnimMesh;
     
+    cKeyFrame.klass = rb_define_class_under(mLibantargis, "KeyFrame", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_KeyFrame, (void *) &cKeyFrame);
+    rb_define_alloc_func(cKeyFrame.klass, _wrap_KeyFrame_allocate);
+    rb_define_method(cKeyFrame.klass, "initialize", VALUEFUNC(_wrap_new_KeyFrame), -1);
+    rb_define_method(cKeyFrame.klass, "time=", VALUEFUNC(_wrap_KeyFrame_time_set), -1);
+    rb_define_method(cKeyFrame.klass, "time", VALUEFUNC(_wrap_KeyFrame_time_get), -1);
+    rb_define_method(cKeyFrame.klass, "v=", VALUEFUNC(_wrap_KeyFrame_v_set), -1);
+    rb_define_method(cKeyFrame.klass, "v", VALUEFUNC(_wrap_KeyFrame_v_get), -1);
+    cKeyFrame.mark = 0;
+    cKeyFrame.destroy = (void (*)(void *)) free_KeyFrame;
+    
     cBone.klass = rb_define_class_under(mLibantargis, "Bone", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_Bone, (void *) &cBone);
     rb_define_alloc_func(cBone.klass, _wrap_Bone_allocate);
@@ -53361,21 +53476,15 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cBone.klass, "mFinal", VALUEFUNC(_wrap_Bone_mFinal_get), -1);
     rb_define_method(cBone.klass, "parent=", VALUEFUNC(_wrap_Bone_parent_set), -1);
     rb_define_method(cBone.klass, "parent", VALUEFUNC(_wrap_Bone_parent_get), -1);
+    rb_define_method(cBone.klass, "rFrames=", VALUEFUNC(_wrap_Bone_rFrames_set), -1);
+    rb_define_method(cBone.klass, "rFrames", VALUEFUNC(_wrap_Bone_rFrames_get), -1);
+    rb_define_method(cBone.klass, "tFrames=", VALUEFUNC(_wrap_Bone_tFrames_set), -1);
+    rb_define_method(cBone.klass, "tFrames", VALUEFUNC(_wrap_Bone_tFrames_get), -1);
+    rb_define_method(cBone.klass, "interpolateRot", VALUEFUNC(_wrap_Bone_interpolateRot), -1);
+    rb_define_method(cBone.klass, "interpolateTrans", VALUEFUNC(_wrap_Bone_interpolateTrans), -1);
+    rb_define_method(cBone.klass, "interpolate", VALUEFUNC(_wrap_Bone_interpolate), -1);
     cBone.mark = 0;
     cBone.destroy = (void (*)(void *)) free_Bone;
-    
-    cKeyFrame.klass = rb_define_class_under(mLibantargis, "KeyFrame", rb_cObject);
-    SWIG_TypeClientData(SWIGTYPE_p_KeyFrame, (void *) &cKeyFrame);
-    rb_define_alloc_func(cKeyFrame.klass, _wrap_KeyFrame_allocate);
-    rb_define_method(cKeyFrame.klass, "initialize", VALUEFUNC(_wrap_new_KeyFrame), -1);
-    rb_define_method(cKeyFrame.klass, "time=", VALUEFUNC(_wrap_KeyFrame_time_set), -1);
-    rb_define_method(cKeyFrame.klass, "time", VALUEFUNC(_wrap_KeyFrame_time_get), -1);
-    rb_define_method(cKeyFrame.klass, "pos=", VALUEFUNC(_wrap_KeyFrame_pos_set), -1);
-    rb_define_method(cKeyFrame.klass, "pos", VALUEFUNC(_wrap_KeyFrame_pos_get), -1);
-    rb_define_method(cKeyFrame.klass, "rot=", VALUEFUNC(_wrap_KeyFrame_rot_set), -1);
-    rb_define_method(cKeyFrame.klass, "rot", VALUEFUNC(_wrap_KeyFrame_rot_get), -1);
-    cKeyFrame.mark = 0;
-    cKeyFrame.destroy = (void (*)(void *)) free_KeyFrame;
     
     cAnimation.klass = rb_define_class_under(mLibantargis, "Animation", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_Animation, (void *) &cAnimation);

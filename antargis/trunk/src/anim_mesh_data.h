@@ -1,6 +1,11 @@
 #ifndef ANIM_MESH_DATA_H
 #define ANIM_MESH_DATA_H
 
+struct KeyFrame
+{
+  float time;
+  AGVector3 v;
+};
 
 struct Bone
 {
@@ -9,13 +14,14 @@ struct Bone
   AGMatrix4 mRelative,mAbsolute,mFinal;
 
   Bone *parent;
-};
 
-struct KeyFrame
-{
-  float time;
-  std::vector<AGVector3> pos;
-  std::vector<AGVector3> rot;
+  std::vector<KeyFrame> rFrames,tFrames;
+
+
+  AGVector3 interpolateRot(float t);
+  AGVector3 interpolateTrans(float t);
+
+  AGVector3 interpolate(const std::vector<KeyFrame> &frames,float t);
 };
 
 struct Animation
@@ -46,7 +52,6 @@ class AnimMeshData:public RubyObject
   std::vector<size_t> indices;
 
   std::vector<Bone*> bones;
-  std::vector<KeyFrame*> frames;
   float animTime;
 
   AGTexture mTexture;
