@@ -46,11 +46,13 @@ a:hover
 	color:#000000; /*FFFFFF;*/
 	font-family:Helvetica;
 	text-align:center;
+	background-image:url(../pics/wood64.jpg);
 }
 
 /* menues */
 .notice
 {
+	background-image:url(../pics/wood64.jpg);
 	position:relative;
 	border-right-width:0px;
 	border-left-width:0px;
@@ -100,7 +102,8 @@ a:hover
 
 .body
 {
-	border-color:#888888;
+	border-color:#bd6c04;
+/*	border-color:#888888;*/
 	border-style:solid;
 	border-width:2px;
 	left:2%;
@@ -140,6 +143,7 @@ h1
 	border-left-width:0px;
 	border-right-width:0px;
 	background-color:#a76a23;
+	background-image:url(../pics/wood64.jpg);
 }
 h3
 {
@@ -192,4 +196,19 @@ div.thumbs
 .menu_bold
 {
 	font-weight:bold;
+}
+
+.code
+{
+	font-family:Arial;
+	margin-left:50px;
+	border-left:solid;
+	border-left-width:2px;
+	border-left-color:#bd5c04;
+	padding-left:8px;
+	background-color:#FFEEEE;
+	display:block;
+	clear:both;
+	margin-right:50px;
+	
 }
