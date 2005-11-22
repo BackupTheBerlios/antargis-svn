@@ -9,6 +9,8 @@ function view()
 		<li>animated milkshape models (MilkShape ASCII-importer)</li>
 		<li>static models (Wavefront obj-importer)</li>
 		<li>shadowmap based shadows (PSMs work in progress)</li> 
+		<li>fustrum culling</li>
+		<li>shader support</li>
 	</ul>";
 
 	$b.=h3("Game");

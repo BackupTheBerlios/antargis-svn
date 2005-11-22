@@ -2,7 +2,11 @@
 
 function getScreenies()
 {
-	$screenies=array("screenies/screenshot1","screenies/shot050228","screenies/shot050304","screenies/050511");
+	$screenies=array("screenies/screenshot1","screenies/shot050228","screenies/shot050304","screenies/050511",
+	"screenies/shot051024b",
+	"screenies/shot051118"
+	
+	);
 	return $screenies;
 }
 
