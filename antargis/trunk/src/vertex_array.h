@@ -2,6 +2,7 @@
 #define __vertex_array_h
 
 #include "scene.h"
+#include "glsl.h"
 #include <ag_triangle.h>
 #include <vector>
 #define GL_GLEXT_PROTOTYPES
@@ -15,6 +16,7 @@ class VertexArray
   std::vector<AGVector3> mNormals;
   std::vector<AGVector2> mTexCoords;
   std::vector<Uint16>  mIndices;
+
   bool bColor;
   bool mBuffers;
   bool mChanged;
@@ -25,14 +27,15 @@ class VertexArray
 
  public:
   VertexArray();
-  ~VertexArray();
+  virtual ~VertexArray();
   void addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector2 pTex);
   void addTriangle(size_t p0,size_t p1,size_t p2);
+
 
   void setColors(bool color);
   void setBuffers(bool pBuffers);
   
-  void draw();
+  virtual void draw();
   void drawPick();
   void init();
 
@@ -54,6 +57,24 @@ class VertexArray
 
   AGVector4 lineHit(const AGLine3 &pLine) const;
 
+};
+
+class VertexArrayShader:public VertexArray
+{
+  AntShaderProgram *p;
+  std::map<std::string,std::vector<float>*> as;
+  std::map<std::string,unsigned int> aids;
+  bool aInited;
+ public:
+  VertexArrayShader(AntShaderProgram *_p);
+  void addAttribute(const std::string &pName,const std::vector<float> &a);
+
+  virtual void draw();
+
+ private:
+  void aInit();
+  void attach();
+  
 };
 
 #endif

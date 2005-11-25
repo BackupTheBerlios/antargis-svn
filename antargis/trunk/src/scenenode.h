@@ -13,7 +13,7 @@ class SceneNode:public RubyObject
   SceneNode();
   virtual ~SceneNode();
 
-  void setScene(Scene *s);
+  virtual void setScene(Scene *s);
   virtual void drawShadow();
   virtual void drawDepth();
   virtual void draw();
@@ -34,9 +34,17 @@ class SceneNode:public RubyObject
   virtual bool transparent();
 
   virtual AGBox3 bbox();
+
+  virtual void clear();
+
+  Scene *getScene();
+
+  void setVisible(bool v);
+  bool visible() const;
   
  private:
   Scene *scene;
+  bool mVisible;
 };
 
 typedef SceneNode *SceneNodePtr;

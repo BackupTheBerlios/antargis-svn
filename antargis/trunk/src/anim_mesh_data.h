@@ -1,6 +1,9 @@
 #ifndef ANIM_MESH_DATA_H
 #define ANIM_MESH_DATA_H
 
+#include "vertex_array.h"
+#include "glsl.h"
+
 struct KeyFrame
 {
   float time;
@@ -44,10 +47,13 @@ struct Animation
 
 class AnimMeshData:public RubyObject
 {
+  VertexArray mArray;
+
   std::vector<AGVector3> pos;
   std::vector<AGVector2> uv;
   std::vector<AGVector3> normal;
   std::vector<int> bone;
+  std::vector<float> bonef;
 
   std::vector<size_t> indices;
 
@@ -63,13 +69,19 @@ class AnimMeshData:public RubyObject
   AGBox3 mBBox;
 
   bool animate;
+  
+  AntShaderProgram animShader;
+
+  std::string mName;
 
  private:
   void setupJoints();
+  void setupArray();
   void loadAnt3(const std::string &instr,float scale,const std::string &pTexName);
 
  public:
   AnimMeshData(const std::string &xmlfile);
+  ~AnimMeshData();
 
   AGBox3 bbox() const;
 

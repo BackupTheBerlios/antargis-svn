@@ -1,3 +1,4 @@
+#include "renderer.h"
 #include "scene.h"
 #include "smoke.h"
 #include "ag_texturecache.h"
@@ -90,7 +91,7 @@ void Smoke::draw()
   glEnable(GL_BLEND);
   glDepthMask(false);
 
-  AGVector3 dir=getMap()->getScene()->getCameraDirTo(p);
+  AGVector3 dir=getRenderer()->getCurrentScene()->getCameraDirTo(p);
 
   //  cdebug(dir);
 
@@ -147,4 +148,10 @@ void Smoke::draw()
 void Smoke::setPos(const AGVector3&pPos)
 {
   p=pPos;  
+  mBBox=AGBox3(p+AGVector3(-0.5,-0.5,0),AGVector3(1,1,10));
+}
+
+AGBox3 Smoke::bbox()
+{
+  return mBBox;
 }

@@ -11,7 +11,7 @@ class AntEntity;
 class AntEntityPtr;
 class Scene;
 class Mesh;
-class TerrainMesh;
+class Terrain;
 
 class HeightMap:public RubyObject
 {
@@ -19,9 +19,10 @@ class HeightMap:public RubyObject
   HeightMap(int w,int h);
   virtual ~HeightMap();
 
+  /*
   void setScene(Scene *pScene);
   Scene *getScene();
-
+  */
   // get status
   float getHeight(float x,float y) const;
   AGVector3 getNormal(int x,int y) const;
@@ -45,25 +46,20 @@ class HeightMap:public RubyObject
   virtual void saveXML(Node &node) const;
   virtual void loadXML(const Node &node);
 
-
   // editing
   void setHeight(float height); // for whole plane
   void set(size_t x,size_t y,float height);
 
-  TerrainMesh *getTerrainMesh();
-
-
   //protected:
   virtual void mapChanged();  
  private:
-
   std::vector<float> mHeights;
   std::vector<float> mGrass;
   size_t mW,mH;
- protected:
-  Scene *mScene;
 
-  TerrainMesh *mTerrainMesh;
+ protected:
+
+  Terrain *mTerrain;
 };
 
 #endif

@@ -6,7 +6,7 @@
 VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
 {
   bColor=true;
-  mBuffers=true;
+  mBuffers=false;//true;
   mChanged=false;
 
   mVertexBuffer=0;
@@ -134,7 +134,7 @@ void VertexArray::draw()
     }
   else
     {
-      cdebug("too much work");
+      //      cdebug("too much work");
       glNormalPointer(GL_FLOAT, 0, &(mNormals[0]));
       glTexCoordPointer(2, GL_FLOAT, 0, &(mTexCoords[0]));
       glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
@@ -281,4 +281,56 @@ void VertexArray::setTexCoord(size_t i,const AGVector2 &t)
 {
   mTexCoords[i]=t;
   update();
+}
+
+
+
+
+VertexArrayShader::VertexArrayShader(AntShaderProgram *_p):p(_p)
+{
+  aInited=false;
+}
+void VertexArrayShader::addAttribute(const std::string &pName,const std::vector<float> &a)
+{
+  as[pName]=new std::vector<float>(a);
+  aInited=false;
+}
+
+void VertexArrayShader::draw()
+{
+  p->enable();
+  if(!aInited)
+    aInit();
+
+  attach();
+  VertexArray::draw();
+  p->disable();
+}
+
+void VertexArrayShader::attach()
+{
+  for(std::map<std::string,unsigned int>::iterator i=aids.begin();i!=aids.end();i++)
+    {
+      GLint loc=p->getAttr(i->first);
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glEnableVertexAttribArrayARB(loc); // add array
+      glBindBufferARB( GL_ARRAY_BUFFER_ARB, i->second);
+      glVertexAttribPointerARB(loc,1,GL_FLOAT,0,0,0);
+      //      glTexCoordPointer(2, GL_FLOAT, 0, 0);
+    }
+}
+
+void VertexArrayShader::aInit()
+{
+  for(std::map<std::string,std::vector<float>*>::iterator i=as.begin();i!=as.end();i++)
+    {
+      unsigned int id;
+
+      glGenBuffersARB( 1, &id);
+      glBindBufferARB( GL_ARRAY_BUFFER_ARB, id);
+      glBufferDataARB( GL_ARRAY_BUFFER_ARB, i->second->size()*sizeof(float), &((*i->second)[0]), GL_STATIC_DRAW_ARB );
+
+      aids[i->first]=id;
+    }
+  aInited=true;
 }

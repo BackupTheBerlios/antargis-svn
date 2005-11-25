@@ -66,7 +66,7 @@ class AntEntity:public RubyObject
 
     std::string mType;
 
-    Meshes mMesh;
+    Meshes mMeshes;
     std::map<SceneNode*,AGVector3> mMeshPos;
 
     int mVirtualY;
@@ -169,6 +169,11 @@ class AntEntity:public RubyObject
     virtual void move(float pTime); // move entity FIXME: del move
 
     void mark();
+
+    void clear();
+    void clearMeshes();
+
+    void setVisible(bool v);
 
   private:
     void init();

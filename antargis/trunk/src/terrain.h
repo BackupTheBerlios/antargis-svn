@@ -19,7 +19,6 @@ using namespace std;
 
 #define THREE_LAYERS
 
-
 class TerrainPieceVA:public SceneNode
 {
  public:
@@ -39,7 +38,13 @@ class TerrainPieceVA:public SceneNode
   size_t getTriangles() const;
 
   virtual void mapChanged();
+
+  virtual AGBox3 bbox();
+
  private:
+
+  AGBox3 mBBox;
+
   size_t mXs,mYs;
   size_t mW,mH;
   //  AGVector4 mPosition;
@@ -54,38 +59,25 @@ class TerrainPieceVA:public SceneNode
 
 
 
-class TerrainMesh:public SceneNode
+class Terrain
 {
   typedef std::list<TerrainPieceVA*> Pieces;
   typedef std::list<WaterPiece*> WPieces;
+  typedef std::list<SceneNode*> Nodes;
+  Nodes mNodes;
   Pieces pieces;
   WPieces water;
 
   float w,h;
 public:
-  TerrainMesh(HeightMap &map);
+  Terrain(HeightMap &map);
 
-  virtual ~TerrainMesh();
-
-  void advance(float t);
-  void draw();
-  void drawShadow();
-  void drawDepth();
-  void drawPick();
-
-  void sort(const AGVector4 &camera); // sort drawing, so that things get drawn from back to front
-  virtual AGVector4 lineHit(const AGLine3 &pLine) const;
-
-  virtual size_t getTriangles() const;
+  virtual ~Terrain();
 
   virtual void mapChanged();
-
-  AGBox3 bbox();
-
+  void addToScenes();
 
 };
-
-TerrainMesh *toTerrainMesh(SceneNode *n);
 
 
 #endif

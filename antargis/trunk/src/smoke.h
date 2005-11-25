@@ -24,6 +24,8 @@ class Smoke:public SceneNode
   AGVector3 p;
   bool fire;
 
+  AGBox3 mBBox;
+
   AGTexture mTexture;
 
 
@@ -38,6 +40,7 @@ class Smoke:public SceneNode
     return true;
   }
 
+  AGBox3 bbox();
 
   virtual void setPos(const AGVector3&pPos);
 

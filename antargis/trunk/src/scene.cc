@@ -1,42 +1,46 @@
-#include "glee/GLee.h"
-//#include <GL/glew.h>
+#include "renderer.h"
 #include "scene.h"
 
-//#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-//#include <GL/glew.h>
-//#include "glee/GLee.h"
 
 #include <ag_debug.h>
 #include <algorithm>
 
 #include <math.h>
 
-const GLenum shadowTexUnit= GL_TEXTURE2;
-const GLenum baseTexUnit= GL_TEXTURE0;
+std::set<Scene*> gScenes;
+
+std::set<Scene*> getScenes()
+{
+  return gScenes;
+}
 
 bool PickNode::operator<(const PickNode &n) const
 {
   return camDist<n.camDist;
 }
 
-int mUseShadow=-1;
-
-bool useShadow()
+class SortDistance
 {
-//  return false;
-  if(mUseShadow<0)
-    mUseShadow=(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient);
-  return mUseShadow;
-}
+  AGVector3 cam;
+public:
+  SortDistance(AGVector3 c):cam(c){}
+
+  bool operator()(const SceneNode *n1,const SceneNode *n2)
+  {
+    AGVector3 m1=const_cast<SceneNode*>(n1)->bbox().base+const_cast<SceneNode*>(n1)->bbox().dir*0.5;
+    AGVector3 m2=const_cast<SceneNode*>(n2)->bbox().base+const_cast<SceneNode*>(n2)->bbox().dir*0.5;
+
+    return (m1-cam).length2()<(m2-cam).length2();
+  }
+};
 
 
 Scene::Scene(int w,int h)
 {
   windowWidth=w;
   windowHeight=h;
-  shadowMapSize=512;
   white=AGVector4(1,1,1,1);
   black=AGVector4(0,0,0,0);
   inited=false;
@@ -44,6 +48,7 @@ Scene::Scene(int w,int h)
   
   cameraPosition=AGVector4(0,-20,20);
   lightPosition=AGVector4( -20, -13, 31,1);
+  //  lightPosition=AGVector4( 20, -13, 31,1);
   scenePosition=AGVector4(0,0,0,1);
 
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
@@ -51,31 +56,22 @@ Scene::Scene(int w,int h)
   
   GLeeInit();
   
-  if(useShadow())
+  if(getRenderer()->canShadow())
     mShadow=1;
   else
     mShadow=0;
   
   mRubyObject=false;
-
+  gScenes.insert(this);
 
 }
 
 Scene::~Scene()
 {
-  CTRACE;
-
-  for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    {
-      //      cdebug(*i);
-      (*i)->setScene(0);
-      if(!(*i)->mRubyObject)
-	{
-	  delete *i;
-	}
-    }
-
-
+  // tell nodes, that I'm no longer there :-)
+  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    (*i)->setScene(0); 
+  gScenes.erase(this);
 }
 
 size_t Scene::getTriangles() const
@@ -86,12 +82,14 @@ size_t Scene::getTriangles() const
 
 void Scene::draw()
 {
+  getRenderer()->setCurrentScene(this);
+  assertGL;
   if(!inited)
     init();
+  assertGL;
  
   mTriangles=0;
   calcCameraView();
-  //  return;
 
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->sort(scenePosition);
@@ -108,12 +106,13 @@ void Scene::draw()
       initScene();
       drawScene();
     }
-  //  cdebug("Triangles:"<<mTriangles);
+
+  getRenderer()->setCurrentScene(0);
 }
 
 void Scene::setShadow(int v)
 {
-  if(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient)
+  if(getRenderer()->canShadow())
     {
       mShadow=v;
       cdebug(mShadow);
@@ -121,7 +120,6 @@ void Scene::setShadow(int v)
 }
 int Scene::getShadow() const
 {
-  cdebug(mShadow);
   return mShadow;
 }
 
@@ -135,6 +133,7 @@ void Scene::addNode(SceneNode *node)
       node->setScene(this);
     }
 }
+
 void Scene::removeNode(SceneNode *node)
 {
   if(mNodeSet.find(node)!=mNodeSet.end())
@@ -257,52 +256,20 @@ void Scene::calcCameraView()
 
 void Scene::calcShadowMap()
 {
+  assertGL;
   AGMatrix4 frustum=getFrustum();
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  
-  glMatrixMode(GL_PROJECTION);
-  glLoadMatrixf(lightProjectionMatrix);
-  
-  glMatrixMode(GL_MODELVIEW);
-  glLoadMatrixf(lightViewMatrix);
-  
-  //Use viewport the same size as the shadow map
-  glViewport(0, 0, shadowMapSize, shadowMapSize);
-  
-  //Draw back faces into the shadow map
-  glCullFace(GL_FRONT);
-  
-  //Disable color writes, and use flat shading for speed
-  glShadeModel(GL_FLAT);
-  glColorMask(0, 0, 0, 0);
-  
-  
-  //Draw the scene
-  // Offset the drawing a little back, so that slopy surfaces don't get shadowed
-  glEnable(GL_POLYGON_OFFSET_FILL);
-  glPolygonOffset(1,1);
+
+  getRenderer()->beginShadowComputation();
   
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
-      if((*i)->bbox().collides(frustum))
+      if((*i)->bbox().collides(frustum) && (*i)->visible())
 	{
 	  (*i)->drawDepth();
 	  mTriangles+=(*i)->getTriangles();
 	}
     }
-  
-  glDisable(GL_POLYGON_OFFSET_FILL);
-  
-  //Read the depth buffer into the shadow map texture
-  glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-  glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowMapSize, shadowMapSize);
-  
-  //restore states
-  assertGL;
-  glCullFace(GL_BACK);
-  
-  glShadeModel(GL_SMOOTH);
-  glColorMask(1, 1, 1, 1);
+  getRenderer()->endShadowComputation();
 }
 
 void Scene::initScene()
@@ -344,248 +311,66 @@ void Scene::drawScene()
   //  glAlphaFunc(GL_GREATER,0.9f);
   //  glEnable(GL_ALPHA_TEST);
   // draw scene with texturing and so
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+
+  int drawn=0;
+
+  Nodes sorted=mNodes;
+
+  //  sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
+
+  for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
     {
       if(!(*i)->transparent())
 	{
-	  if((*i)->bbox().collides(frustum))
+	  if((*i)->visible() && (*i)->bbox().collides(frustum))
 	    {
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
+	      drawn++;
 	    }
 	}
     }
   //  glDisable(GL_ALPHA_TEST);
   //  glAlphaFunc(GL_ALWAYS,1);
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+  for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
     {
       if((*i)->transparent())
 	{
-	  if((*i)->bbox().collides(frustum))
+	  if((*i)->visible() && (*i)->bbox().collides(frustum))
 	    {
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
+	      drawn++;
 	    }
 	}
     }
+  //  if(mNodes.size())
+    //    cdebug("drawn:"<<(float(drawn)/mNodes.size()*100)<<"%");
   
 }
 void Scene::drawShadow()
 {
   assertGL;
-  
-  glActiveTexture(shadowTexUnit);
-  assertGL;
 
-  //  glMatrixMode(GL_TEXTURE);
-  //  glPushMatrix();
-  glMatrixMode(GL_MODELVIEW);
-  // draw a flat shadow over 
-  glDisable(GL_LIGHTING);
-  glEnable(GL_COLOR_MATERIAL);
+  getRenderer()->beginShadowDrawing();
   
-  //Calculate texture matrix for projection
-  //This matrix takes us from eye space to the light's clip space
-  //It is postmultiplied by the inverse of the current view matrix when specifying texgen
-  float bias[]={0.5f, 0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, 0.0f, 0.0f,
-		0.0f, 0.0f, 0.5f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f};        //bias from [-1, 1] to [0, 1]
-  static AGMatrix4 biasMatrix(bias);
-  AGMatrix4 textureMatrix=biasMatrix*lightProjectionMatrix*lightViewMatrix;
-  
-  //Set up texture coordinate generation.
-  glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-  assertGL;
-  glTexGenfv(GL_S, GL_EYE_PLANE, textureMatrix.getRow(0));
-  assertGL;
-  glEnable(GL_TEXTURE_GEN_S);
-  assertGL;
-  
-  glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-  assertGL;
-  glTexGenfv(GL_T, GL_EYE_PLANE, textureMatrix.getRow(1));
-  assertGL;
-  glEnable(GL_TEXTURE_GEN_T);
-  assertGL;
-  
-  glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-  assertGL;
-  glTexGenfv(GL_R, GL_EYE_PLANE, textureMatrix.getRow(2));
-  assertGL;
-  glEnable(GL_TEXTURE_GEN_R);
-  
-  assertGL;
-  glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-  assertGL;
-  glTexGenfv(GL_Q, GL_EYE_PLANE, textureMatrix.getRow(3));
-  assertGL;
-  glEnable(GL_TEXTURE_GEN_Q);
-  assertGL;
-  
-  //Bind & enable shadow map texture
-  glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-  glEnable(GL_TEXTURE_2D);
-  
-  //Enable shadow comparison
-  assertGL;
-
-
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE);
-  assertGL;
-  
-  //Shadow comparison should be true (ie not in shadow) if r<=texture
-  //        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);//GREATER);//GL_GEQUAL);
-  assertGL;
-  
-  //Shadow comparison should generate an INTENSITY result
-  glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
-  assertGL;
-  glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_LUMINANCE);//INTENSITY);
-  assertGL;
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB, 1.0f-0.3f);//shadowAlpha);
-  assertGL;
-
-  //Set alpha test to discard false comparisons
-  //  glAlphaFunc(GL_GREATER,0.99f);//LEQUAL, 0.999f);
-
-  
-  glColor4f(0,0,0,0.3);
-  assertGL;
-
-  glActiveTexture(baseTexUnit);
-
   drawScene();
-  /*  // draw scene with texturing and so
-  //  glTranslatef(0.004,0,0);
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    {
-      if(!(*i)->transparent())
-	{
-	  (*i)->draw();
-	  mTriangles+=(*i)->getTriangles();
-	}
-    }
-  // FIXME: sort!!
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    {
-      if((*i)->transparent())
-	{
-	  (*i)->draw();
-	  mTriangles+=(*i)->getTriangles();
-	}
-	}*/
-  assertGL;
 
-  glDisable(GL_POLYGON_OFFSET_FILL);
-  assertGL;
-
-  glActiveTexture(shadowTexUnit);
-  glBindTexture(GL_TEXTURE_2D,0);
-  assertGL;
-
-  glDisable(GL_ALPHA_TEST);
-  glDisable(GL_TEXTURE_GEN_S);
-  glDisable(GL_TEXTURE_GEN_T);
-  glDisable(GL_TEXTURE_GEN_R);
-  glDisable(GL_TEXTURE_GEN_Q);
-  
-  glActiveTexture(baseTexUnit);
+  getRenderer()->endShadowDrawing();
 
   assertGL;
-
 }
 
 void Scene::init()
-  {
-
-    inited=true;
-
-    // camera projection matrix
-    glLoadIdentity();
-    gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 10.0f, 50.0f);
-    glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
-    
-    // init texture
-    if(useShadow())
-      {
-	glGenTextures(1, &shadowMapTexture);
-	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-	glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, shadowMapSize, shadowMapSize, 0,
-			GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-      }
-  }
-
-
-Scene::PickResult Scene::lineHit(const AGLine3 &pLine)
 {
-  PickResult f;
-  AGVector4 r;
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    {
-      r=(*i)->lineHit(pLine);
-      if(r[3]==1)
-	{
-	  float d=(r-(cameraPosition+scenePosition)).length3();
-	  PickNode n={r,*i,d};
-	  
-	  f.push_back(n);
-	}
-    }
-
-  std::sort(f.begin(),f.end());
-    
-  return f;
+  inited=true;
+  
+  // camera projection matrix
+  glLoadIdentity();
+  gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 10.0f, 50.0f);
+  glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
 }
 
-AGLine3 Scene::getLine(int x,int y)
-{
-  float sx,sy;
-
-  sx=float(x)/windowWidth;
-  sy=1.0f-float(y)/windowHeight;
-  sx=x;
-  sy=windowHeight-y;
-  GLdouble px,py,pz;
-  GLdouble px2,py2,pz2;
-
-  double model[16],proj[16];
-  GLint view[4];
-  view[0]=view[1]=0;
-  view[2]=windowWidth;
-  view[3]=windowHeight;
-
-  glMatrixMode(GL_MODELVIEW);
-  glPushMatrix();
-
-  glLoadIdentity();
-  gluLookAt(cameraPosition[0]+scenePosition[0],cameraPosition[1]+scenePosition[1],cameraPosition[2]+scenePosition[2],
-	    scenePosition[0],scenePosition[1],scenePosition[2],
-	    0,0,1);
-  glGetDoublev(GL_MODELVIEW_MATRIX, model);
-
-  glLoadIdentity();
-  gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 1.0f, 100.0f);
-  glGetDoublev(GL_MODELVIEW_MATRIX, proj);
-
-  glPopMatrix();
-
-  gluUnProject(sx,sy,0.1,
-	       model,proj,view,
-	       &px,&py,&pz);
-
-  gluUnProject(sx,sy,0.99,
-	       model,proj,view,
-	       &px2,&py2,&pz2);
-
-  return AGLine3(AGVector3(px,py,pz),AGVector3(px2,py2,pz2));
-}
 
 void Scene::mapChanged()
 {
@@ -599,33 +384,17 @@ AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 }
 
 
-Scene::PickResult Scene::pick(float x,float y,float w,float h)
-{
-  return privatePick(x,y,w,h);
-
-  /*  PickResult result;
-  
-  for(std::list<GLuint>::iterator i=names.begin();i!=names.end();i++)
-    {
-      PickNode n;
-      n.node=pickNames[*i];
-
-      result.push_back(n);
-    }
-
-    return result;*/
-}
-
 void Scene::pickDraw()
 {
+  glDisable(GL_CULL_FACE);
   GLuint name=1;
   pickNames.clear();
-  AGMatrix4 frustum=cameraPickMatrix*cameraViewMatrix; //getFrustum(); // FIXME: take better frustum !!! (for pickin)
+  AGMatrix4 frustum=cameraPickMatrix*cameraViewMatrix;
   
 
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     {
-      if((*i)->bbox().collides(frustum))
+      if((*i)->visible() && (*i)->bbox().collides(frustum))
 	{
 	  glPushName(name);
 	  (*i)->drawPick();
@@ -635,10 +404,11 @@ void Scene::pickDraw()
 	}
     }
 
+  glEnable(GL_CULL_FACE);
   
 }
 
-Scene::PickResult Scene::privatePick(float x,float y,float w,float h)
+Scene::PickResult Scene::pick(float x,float y,float w,float h)
 {
   size_t bufsize=4000;
   GLuint buffer[bufsize-1];
@@ -653,7 +423,6 @@ Scene::PickResult Scene::privatePick(float x,float y,float w,float h)
   assertGL;
   gluPickMatrix(x,windowHeight-y,h,w,getViewport());
 
-  //  glGetFloatv(GL_PROJECTION, cameraPickMatrix);
   assertGL;
   
   glMultMatrixf(cameraProjectionMatrix);
@@ -727,9 +496,6 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
 	    n.pos=AGVector4(x,y,z,1);
 	    n.camDist=(n.pos-cameraPosition).length3();
 
-
-
-
 	    result.push_back(n);
 	  }
 
@@ -737,16 +503,7 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
       
       ptr += names+2;
    }
-   //   std::list<GLuint> namelist;
-   /*
-   ptr = ptrNames;
-   
-   for (j = 0; j < numberOfNames; j++,ptr++) 
-     {
-       cdebug(*ptr);
-       namelist.push_back(*ptr);
-       }*/
-   //   return namelist;
+
    return result;
 }
 
@@ -771,7 +528,6 @@ float Scene::height() const
   return windowHeight;
 }
 
-
 void Scene::mark()
 {
   Scene::Nodes::iterator i=mNodes.begin();
@@ -780,4 +536,52 @@ void Scene::mark()
     {
       markObject(*i);
     }
+}
+
+AGMatrix4 Scene::getInvCameraView() const
+{
+  AGMatrix4 n,m;
+
+  int x,y;
+  for(y=0;y<3;y++)
+    {
+      for(x=0;x<3;x++)
+	n.set(x,y,cameraViewMatrix.get(y,x));
+      m.set(3,y,-cameraViewMatrix.get(3,y));
+    }
+
+  n=n*m;
+
+  return n;
+}
+
+AGMatrix4 Scene::getLightComplete() const
+{
+  float bias[]={0.5f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.5f, 1.0f};        //bias from [-1, 1] to [0, 1]
+  static AGMatrix4 biasMatrix(bias);
+  return biasMatrix*lightProjectionMatrix*lightViewMatrix;
+}
+
+AGMatrix4 Scene::getLightView() const
+{
+  return lightViewMatrix;
+}
+AGMatrix4 Scene::getLightProj() const
+{
+  return lightProjectionMatrix;
+}
+
+
+void addToAllScenes(SceneNode *n)
+{
+  for(Scenes::iterator i=gScenes.begin();i!=gScenes.end();i++)
+    (*i)->addNode(n);
+}
+void removeFromAllScenes(SceneNode *n)
+{
+  for(Scenes::iterator i=gScenes.begin();i!=gScenes.end();i++)
+    (*i)->removeNode(n);
 }

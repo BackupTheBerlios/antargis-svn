@@ -2,6 +2,7 @@
 #define ANT_APP_H
 
 #include "scene.h"
+#include "renderer.h"
 #include <iostream>
 #include <fstream>
 #include <ag_application.h>
@@ -25,6 +26,7 @@ class GLApp:public AGApplication
   bool mMayClick;
 
   int hx,hy,hb;
+  Renderer renderer;
 
 protected:
   Scene scene;

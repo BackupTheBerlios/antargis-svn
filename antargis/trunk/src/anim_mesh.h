@@ -24,6 +24,7 @@ class AnimMesh:public SceneNode
   Animation *mAnimation;
 
   std::vector<AGMatrix4> mMatrices;
+  std::vector<AGMatrix4> mShaderMatrices;
 
  public:
   AnimMesh(AnimMeshData *data);
@@ -41,6 +42,7 @@ class AnimMesh:public SceneNode
   AnimMeshData *getData();
 
   virtual void draw();
+  virtual void drawDepth();
   virtual void drawPick();
   virtual void advance(float time);
 

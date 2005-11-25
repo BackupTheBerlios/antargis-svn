@@ -38,6 +38,8 @@ struct Viewport
 class Scene:public RubyObject
 {
  public:
+  typedef std::vector<PickNode> PickResult;
+
   Scene(int w,int h);
   virtual ~Scene();
 
@@ -47,8 +49,12 @@ class Scene:public RubyObject
   void setShadow(int v);
   int getShadow() const;
 
+
+  // ATTENTION: nodes are not owned by Scene afterwards - so they won't get deleted!
+  //            You have to do this yourself in the Entities or let ruby's GC do it for you 
   void addNode(SceneNode *node);
   void removeNode(SceneNode *node);
+
 
   void clear();
 
@@ -56,13 +62,7 @@ class Scene:public RubyObject
   void setCamera(AGVector4 v);
   void advance(float time);
 
-  typedef std::vector<PickNode> PickResult;
-  
-  PickResult lineHit(const AGLine3 &pLine);
-
   PickResult pick(float x,float y,float w,float h);
-
-  AGLine3 getLine(int x,int y);
 
   // Antargis-Map-extension
   void mapChanged();
@@ -71,13 +71,18 @@ class Scene:public RubyObject
 
   AGVector3 getCameraDirTo(const AGVector3 &p) const;
 
-
   AGMatrix4 getFrustum();
 
   float width() const;
   float height() const;
 
   void mark();
+
+  AGMatrix4 getLightComplete() const;
+  AGMatrix4 getLightView() const;
+  AGMatrix4 getLightProj() const;
+  
+  AGMatrix4 getInvCameraView() const;
 
  private:
   void init();
@@ -89,10 +94,10 @@ class Scene:public RubyObject
 
 
   void pickDraw();
-  PickResult privatePick(float x,float y,float w,float h);
   PickResult processHits (int hits, GLuint *buffer,float x,float y);
 
   Viewport getViewport();
+
 
 
   bool inited;
@@ -115,8 +120,6 @@ class Scene:public RubyObject
   NodeSet mNodeSet;
 
   int windowWidth,windowHeight;
-  int shadowMapSize;
-  GLuint shadowMapTexture;
 
   AGVector4 white,black;
 
@@ -124,8 +127,13 @@ class Scene:public RubyObject
 
   // picking vars
   std::map<GLuint,SceneNode*> pickNames;
-  
-
 };
+
+
+typedef std::set<Scene*> Scenes;
+Scenes getScenes();
+
+void addToAllScenes(SceneNode *n);
+void removeFromAllScenes(SceneNode *n);
 
 #endif

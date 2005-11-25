@@ -21,6 +21,7 @@
 #ifndef __ANTARGIS_H__
 #define __ANTARGIS_H__
 
+#include "renderer.h"
 #include "scene.h"
 #include "height_map.h"
 #include "map.h"
@@ -43,6 +44,7 @@
 //#include "ant_man.h"
 //#include "ant_geometry.h"
 #ifdef SWIG
+%include "renderer.h"
 %include "height_map.h"
 %include "map.h"
  //%include "minimap.h"

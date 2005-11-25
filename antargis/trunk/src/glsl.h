@@ -1,8 +1,13 @@
 #ifndef ANT_GLSL_H
 #define ANT_GLSL_H
 
-#include "glee/GLee.h"
+#include "renderer.h"
 #include "ag_tools.h"
+#include "ag_triangle.h"
+
+#include <map>
+
+class Scene;
 
 class AntVertexProgram
 {
@@ -39,23 +44,50 @@ class AntShaderProgram
 {
   AntVertexProgram vertex;
   AntFragProgram frag;
+  std::map<std::string,GLint> locations;
+  std::map<std::string,GLint> attrs;
+  float *matrixBuf;
+  bool on;
+  std::string name;
  protected:  
   GLhandleARB p;
 
  public:
   AntShaderProgram(const std::string &pVertexFile,const std::string &pFragFile);
-  ~AntShaderProgram();
-  void enable();
-  void disable();
+  virtual ~AntShaderProgram();
+  virtual void enable();
+  virtual void disable();
+
+  void update(float time);
+  virtual void doUpdate(float time);
+
+  GLint getLoc(const std::string &pName);
+  GLint getAttr(const std::string &pName);
+
+  void sendUniform(const std::string &pName,int i);
+  void sendUniform(const std::string &pName,float f);
+  void sendUniform(const std::string &pName,const AGVector3 &m);
+  void sendUniform(const std::string &pName,const AGVector4 &m);
+  void sendUniform(const std::string &pName,const AGMatrix4 &m);
+  void sendUniform(const std::string &pName,const std::vector<AGMatrix4> &m);
+
+  void sendAttribute(const std::string &pName,const std::vector<float> &vf);
+};
+
+class AntShadowShader:public AntShaderProgram
+{
+ public:
+  void doUpdate(float time);
+  virtual void enable();
+  virtual void disable();
 };
 
 class AntWaterShader:public AntShaderProgram
 {
   float t;
-  GLint loc;
  public:
   AntWaterShader();
-  void update(float time);
+  void doUpdate(float time);
 };
 
 #endif

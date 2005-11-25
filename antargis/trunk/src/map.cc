@@ -24,8 +24,7 @@ AntMap::AntMap(int w,int h):HeightMap(w,h),mEntQuad(AGRect2(0,0,w,h))
   myAntargisMap=this;
   maxID=0;
 
-  if(getScene())
-    getScene()->addNode(mTerrainMesh);
+  mTerrain->addToScenes();
 }
 AntMap::~AntMap()
 {
@@ -99,7 +98,7 @@ void AntMap::insertEntity(AntEntity *e)
   //  mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
   mEntQuad.insert(e);
-  entsChanged();
+  //  entsChanged();
 }
 
 void AntMap::removeEntity(AntEntity *p)
@@ -121,12 +120,13 @@ void AntMap::move(float pTime)
       mEntityMap.erase((*d)->getID());
       mEntQuad.erase(*i);
 
-      AntEntity::Meshes meshes=(*d)->getMesh();
+      saveDelete(*d);
+      /*      AntEntity::Meshes meshes=(*d)->getMesh();
       for(AntEntity::Meshes::iterator i=meshes.begin();i!=meshes.end();i++)
-	getScene()->removeNode(*i);
+      getScene()->removeNode(*i);*/
     }
-  if(mToDel.size())
-    entsChanged();
+  //  if(mToDel.size())
+  //    entsChanged();
 
   mToDel.clear();
 
@@ -224,7 +224,8 @@ AntEntity *AntMap::getByName(const std::string &pName)
 
 void AntMap::loadMap(const std::string &pFilename)
 {
-  getScene()->clear();
+  
+  //getScene()->clear();
   CTRACE;
   Document d;
   std::string c=loadFile(pFilename);
@@ -250,16 +251,17 @@ void AntMap::saveMap(const std::string &pFilename)
 
 void AntMap::clear()
 {
-  getScene()->clear();
+  //  getScene()->clear();
   CTRACE;
   //  mPlayers.clear();
   mEntities.clear();
   mEntQuad.clear();
   mEntityMap.clear();
-  getScene()->addNode(mTerrainMesh);
+  //  getScene()->addNode(mTerrainMesh);
+  mTerrain->addToScenes();
 
 }
-
+/*
 void AntMap::entsChanged()
 {
   if(mScene)
@@ -272,7 +274,7 @@ void AntMap::entsChanged()
 	      mScene->addNode(*i);
 	}
     }
-}
+    }*/
 
 void AntMap::mapChanged()
 {

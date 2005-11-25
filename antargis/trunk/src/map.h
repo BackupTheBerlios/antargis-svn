@@ -41,7 +41,7 @@ class AntMap:public HeightMap
 
   AGVector3 getPos(const AGVector2 &pPos) const;
 
-  virtual void entsChanged();  
+  //  virtual void entsChanged();  
 	
   virtual void mark();
 

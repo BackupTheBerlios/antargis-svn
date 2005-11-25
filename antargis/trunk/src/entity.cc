@@ -73,15 +73,12 @@ void AntEntity::init()
 AntEntity::~AntEntity()
 {
   //  CTRACE;
-  //  cdebug(mRubyObject);
-  //  throw int();
-
-  if(getMap())
-    if(getMap()->getScene())
-      {
-	for(std::list<SceneNode*>::iterator i=mMesh.begin();i!=mMesh.end();i++)
-	  getMap()->getScene()->removeNode(*i);
-      }
+  for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
+    {
+      removeFromAllScenes(*i);
+      saveDelete(*i);
+    }
+  mMeshes.clear();
 }
 
 void AntEntity::resourceChanged()
@@ -130,12 +127,12 @@ AGVector2 AntEntity::getPos2D() const
 
 void AntEntity::updatePos(const AGVector3 &p)
 {
-  if(mMesh.size()==1)
+  if(mMeshes.size()==1)
     {
-      mMesh.front()->setPos(p);
+      mMeshes.front()->setPos(p);
       return;
     }
-  for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
+  for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     (*i)->setPos(p+mMeshPos[*i]);
   
 }
@@ -273,15 +270,18 @@ std::string AntEntity::getType() const
 void AntEntity::setMesh(SceneNode *m)
 {
   // clear meshes from scene
-  for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
-    getMap()->getScene()->removeNode(*i);
+  for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
+    {
+      removeFromAllScenes(*i);
+      saveDelete(*i);
+    }
 
-  mMesh.clear();
+  mMeshes.clear();
   mMeshPos.clear();
   if(m)
     {
-      mMesh.push_back(m);
-      getMap()->getScene()->addNode(m);
+      mMeshes.push_back(m);
+      addToAllScenes(m);
       updatePos(mPos);
     }
 }
@@ -290,9 +290,9 @@ void AntEntity::addMesh(SceneNode *m,const AGVector3 &v)
 {
   if(m)
     {
-      mMesh.push_back(m);
+      mMeshes.push_back(m);
       mMeshPos.insert(std::make_pair(m,v));
-      getMap()->getScene()->addNode(m);
+      addToAllScenes(m);
       updatePos(mPos);
     }
 }
@@ -300,12 +300,12 @@ void AntEntity::addMesh(SceneNode *m,const AGVector3 &v)
 
 AntEntity::Meshes AntEntity::getMesh()
 {
-  return mMesh;
+  return mMeshes;
 }
 
 SceneNode *AntEntity::getFirstMesh()
 {
-  return mMesh.front();
+  return mMeshes.front();
 }
 
 
@@ -325,14 +325,19 @@ void AntEntity::setDirection(float dir)
 {
   mDir=dir;
 
-  if(mMesh.size())
+  if(mMeshes.size())
     {
-      SceneNode *m=mMesh.front();
+      SceneNode *m=mMeshes.front();
       if(m)
 	m->setRotation(dir);
     }
 }
 
+void AntEntity::setVisible(bool v)
+{
+  for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
+    (*i)->setVisible(v);
+}
 
 
 // RESOURCE
@@ -493,6 +498,22 @@ AGRect2 AntEntity::getRect() const
 
 void AntEntity::mark()
 {
-  for(Meshes::iterator i=mMesh.begin();i!=mMesh.end();i++)
+  for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     markObject(*i);
+}
+
+
+void AntEntity::clear()
+{
+  clearMeshes();
+}
+
+
+void AntEntity::clearMeshes()
+{
+  for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
+    {
+      saveDelete(*i);
+    }
+  mMeshes.clear();
 }

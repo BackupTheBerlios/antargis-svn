@@ -32,8 +32,10 @@ void GLApp::drawGL()
 {
   glEnable(GL_DEPTH_TEST); // enable depth test
   glDepthMask(true);
-  
+
+  assertGL;
   scene.draw();
+  assertGL;
   
   glColor4f(1,1,1,1);
 }

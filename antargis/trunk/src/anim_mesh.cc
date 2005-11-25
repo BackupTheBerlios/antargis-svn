@@ -131,7 +131,8 @@ AGVector3 Bone::interpolateTrans(float t)
 
 
 
-AnimMeshData::AnimMeshData(const std::string &xmlfile)
+AnimMeshData::AnimMeshData(const std::string &xmlfile):
+  animShader("data/shaders/anim.vert","data/shaders/anim.frag")
 {
   Document doc(xmlfile);
 
@@ -158,7 +159,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile)
       assert(fps>0);
       assert(begin>=0);
       assert(begin<animTime);
-      assert(begin<end);
+      assert(begin<=end);
       assert(end<animTime);
       mAnimations[(*i)->get("name")]=Animation(begin,end,fps);
     }
@@ -168,6 +169,13 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile)
       std::cerr<<"There are no animations in "<<xmlfile<<std::endl;
       throw std::string("no animations found in xmlfile");
     }
+  mName=xmlfile;
+}
+
+AnimMeshData::~AnimMeshData()
+{
+  CTRACE;
+  cdebug(mName);
 }
 
 AGBox3 AnimMeshData::bbox() const
@@ -208,6 +216,15 @@ void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::stri
 
   Uint32 nbones,frames;
   l>>frames>>nbones;
+
+  for(size_t k=0;k<bone.size();k++)
+    {
+      if(bone[k]==-1)
+	bonef.push_back(nbones);
+      else
+	bonef.push_back(bone[k]);
+    }
+
 
   animTime=frames;
 
@@ -258,6 +275,8 @@ void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::stri
 
   if(animate)
     setupJoints();
+
+  setupArray();
 }
 
 void AnimMeshData::setTransform(const AGMatrix4 &m)
@@ -303,6 +322,13 @@ void AnimMeshData::setupJoints()
 }
 
 
+void AnimMeshData::setupArray()
+{
+  for(size_t i=0;i<pos.size();i++)
+    mArray.addVertex(AGVector4(pos[i],1),AGVector4(1,1,1,1),normal[i],uv[i]);
+  for(size_t i=0;i<indices.size();i+=3)
+    mArray.addTriangle(indices[i],indices[i+1],indices[i+2]);
+}
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -310,7 +336,7 @@ void AnimMeshData::setupJoints()
 /////////////////////////////////////////////////////////////////////////
 
 
-AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size())
+AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size()+1),mShaderMatrices(20)
 {
   curKey=0;
   mTime=0;
@@ -325,9 +351,15 @@ AnimMesh::~AnimMesh()
   CTRACE;
 }
 
+void AnimMesh::drawDepth()
+{
+  //  return;
+  drawPrivate(false);
+}
 
 void AnimMesh::draw()
 {
+  //  return;
   drawPrivate(true);
 }
 void AnimMesh::drawPick()
@@ -345,11 +377,33 @@ void AnimMesh::drawPrivate(bool textured)
       glEnable(GL_LIGHTING);
     }
 
-  glPushMatrix();
-  glTranslatef(mPos[0],mPos[1],mPos[2]);
-  glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
+  bool fast=true;
 
-  if(!mData->animate)
+  glPushMatrix();
+
+  glTranslatef(mPos[0],mPos[1],mPos[2]);
+  //  if(!fast)
+    glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
+
+
+  if(fast)
+    {
+      glMultMatrixf(mData->getTransform());
+      if(textured)
+	{
+	  mData->animShader.enable();
+	  mData->animShader.sendAttribute("bones",mData->bonef);
+	  mData->animShader.sendUniform("matrices",mShaderMatrices);
+	  
+	  mData->mArray.draw();
+
+	  mData->animShader.disable();
+	}
+      else
+	mData->mArray.drawPick();
+    }
+
+  else if(!mData->animate)
     {
       glBegin(GL_TRIANGLES);
       
@@ -414,14 +468,20 @@ void AnimMesh::advance(float time)
     return;
   mTime+=mAnimation->fps*time;
 
-  while(mTime>mAnimation->end)
-    mTime-=mAnimation->len;
+  if(mAnimation->len>0)
+    {
+      while(mTime>mAnimation->end)
+	mTime-=mAnimation->len;
+    }
+  else
+    mTime=mAnimation->begin;
 
   update();
 }
 
 void AnimMesh::update()
 {
+  // this doesn't take much of rendering-time
   // calculate 
   
   while(mTime>mData->animTime)
@@ -451,7 +511,27 @@ void AnimMesh::update()
       
       mMatrices[k]=final;
     }
-  
+  mMatrices[mData->bones.size()]=AGMatrix4();
+
+  for(size_t k=0;k<mData->bones.size();k++)
+    mShaderMatrices[k]=mData->getTransform()*mMatrices[k];
+  mShaderMatrices[mData->bones.size()]=mData->getTransform()*mMatrices[mData->bones.size()];
+
+
+  for(size_t k=0;k<mData->bones.size();k++)
+    {
+      mShaderMatrices[k]=mMatrices[k];
+      //      cdebug(k<<std::endl<<mShaderMatrices[k].toString());
+    }
+  //  throw int();
+  mShaderMatrices[mData->bones.size()]=mMatrices[mData->bones.size()];
+
+
+
+  /*  for(size_t k=0;k<=mData->bones.size();k++)
+    mShaderMatrices[k]=AGMatrix4();
+  for(size_t k=0;k<=mData->bones.size();k++)
+  mShaderMatrices[k]=mData->getTransform();*/
 }
 
 
@@ -523,4 +603,27 @@ void AnimMesh::mark()
   markObject(mData);
 }
 
+
+/* fast rendering
+
+
+1) bone-association
+prepare buffers
+
+like vertexbuffer use
+
+p= program
+loc = glGetAttribLocationARB(p,"height"); // get saving handle
+glEnableVertexAttribArrayARB(loc); // add array
+glVertexAttribPointerARB(loc,1,GL_FLOAT,0,0,heights); // set attributes (for each vertex an attribute)
+
+
+2) give matrices
+with 
+void glUniformMatrix4fvARB(GLint location,
+                           GLsizei count,
+                           GLboolean transpose,
+                           GLfloat *value)
+count==bone-count
+*/
 

@@ -29,32 +29,29 @@ files=ARGV
 puts "FILES:"
 puts files.join(" ")
 
+# take RubyObject as base for RubyObjects :-)
+# so simply search for classes derived from this!
+
 puts ""
 files.each{|fn|
 	g=File.open(fn)
 	cn=""
-	found=false
 	g.each{|a|
 		if a =~ /^class.*/ then
-#		 	puts a
 			cn=a.gsub("class ","").gsub(/[:;].*/,"").gsub(/\n/,"")
-#			puts cn
 			clist+=[cn]
 			if a=~ /.*public.*/ then
 				pn=a.gsub(/.*public /,"").gsub(/\n/,"")
-#				puts "pn:"+pn+"."
 				derive[cn]=pn
+				rlist[cn]=false
+				rlist[pn]=false
 			end
-		end
-		if a =~ /.*mRUBY.*/ then
-			found=true
 		end
 	
 	}
-	if cn!=""
-		rlist[cn]=found
-	end
 }
+
+rlist["RubyObject"]=true
 
 rlist.each{|a,b|
 	puts "rlist:"+a+":"+b.to_s

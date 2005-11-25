@@ -8,25 +8,25 @@
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 
 HeightMap::HeightMap(int w,int h):
-  mW(w),mH(h),mScene(0)
+  mW(w),mH(h)
 {
   mHeights=genSomeHeights(w+2,h+2,5);
   mGrass=genSomeHeights(w+2,h+2,1);
 
-  mTerrainMesh=new TerrainMesh(*this);
+  mTerrain=new Terrain(*this);
 }
 
 HeightMap::~HeightMap()
 {
-  delete mTerrainMesh;
+  delete mTerrain;
 }
 
-TerrainMesh *HeightMap::getTerrainMesh()
+/*Terrain *HeightMap::getTerrainMesh()
 {
   return mTerrainMesh;
-}
+  }*/
 
-
+/*
 void HeightMap::setScene(Scene *pScene)
 {
   mScene=pScene;
@@ -34,7 +34,7 @@ void HeightMap::setScene(Scene *pScene)
 Scene *HeightMap::getScene()
 {
   return mScene;
-}
+  }*/
 
 void HeightMap::setHeight(float height)
 {
@@ -93,11 +93,14 @@ void HeightMap::loadXML(const Node &node)
 
 void HeightMap::mapChanged()
 {
+  mTerrain->addToScenes();
+  mTerrain->mapChanged();
+  /*
   if(mScene)
     {
       mScene->addNode(mTerrainMesh);
       mScene->mapChanged();
-    }
+      }*/
 }
 
 

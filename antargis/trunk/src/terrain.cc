@@ -2,7 +2,7 @@
 #include <ag_texturecache.h>
 
 const GLenum baseTexUnit= GL_TEXTURE0;
-const GLenum addTexUnit= GL_TEXTURE1;
+const GLenum addTexUnit= GL_TEXTURE2;
 
 //#define FINE
 
@@ -23,6 +23,7 @@ TerrainPieceVA::TerrainPieceVA(HeightMap &map,int xs,int ys,int w,int h,const AG
 
 void TerrainPieceVA::mapChanged()
 {
+  mBBox=AGBox3();
   CTRACE;
   mEarthArray.clear();
   mGrassArray.clear();
@@ -54,6 +55,7 @@ void TerrainPieceVA::mapChanged()
 #else
 	mEarthArray.addVertex(v,c,n,tp);
 #endif
+	mBBox.include(v.dim3());
 
 	v+=AGVector4(0,0,0.07,0);
 	mGrassArray.addVertex(v,c,n,tp);
@@ -62,6 +64,7 @@ void TerrainPieceVA::mapChanged()
 
 	mGrass2Array.addVertex(v,c,n,tp);
 #endif
+	mBBox.include(v.dim3());
       }
 
   for(x=mXs;x<mXs+mW;x++)
@@ -73,28 +76,32 @@ void TerrainPieceVA::mapChanged()
 	int p3=p2+1;
 	if(((x+y)%2)==0)
 	  {
-	    mEarthArray.addTriangle(p0,p1,p2);
-	    mEarthArray.addTriangle(p2,p1,p3);
+	    //	    mEarthArray.addTriangle(p0,p1,p2);
+	    //	    mEarthArray.addTriangle(p2,p1,p3);
+	    mEarthArray.addTriangle(p2,p1,p0);
+	    mEarthArray.addTriangle(p3,p1,p2);
 	    
-	    mGrassArray.addTriangle(p0,p1,p2);
-	    mGrassArray.addTriangle(p2,p1,p3);
+	    /*	    mGrassArray.addTriangle(p2,p1,p0);
+	    mGrassArray.addTriangle(p3,p1,p2);
 #ifdef THREE_LAYERS	    
-	    mGrass2Array.addTriangle(p0,p1,p2);
-	    mGrass2Array.addTriangle(p2,p1,p3);
+	    mGrass2Array.addTriangle(p2,p1,p0);
+	    mGrass2Array.addTriangle(p3,p1,p2);
 #endif
+	    */
 	  }
 	else
 	  {
-	    mEarthArray.addTriangle(p0,p1,p3);
-	    mEarthArray.addTriangle(p2,p0,p3);
-	    
-	    mGrassArray.addTriangle(p0,p1,p3);
-	    mGrassArray.addTriangle(p2,p0,p3);
+	    mEarthArray.addTriangle(p3,p1,p0);
+	    mEarthArray.addTriangle(p3,p0,p2);
+	    /*
+	    mGrassArray.addTriangle(p3,p1,p0);
+	    mGrassArray.addTriangle(p3,p0,p2);
 	    
 #ifdef THREE_LAYERS	    
-	    mGrass2Array.addTriangle(p0,p1,p3);
-	    mGrass2Array.addTriangle(p2,p0,p3);
+	    mGrass2Array.addTriangle(p3,p1,p0);
+	    mGrass2Array.addTriangle(p3,p0,p2);
 #endif
+	    */
 	  }
 
       }
@@ -124,6 +131,12 @@ void TerrainPieceVA::drawPick()
 {
   mEarthArray.drawPick();
 }
+
+AGBox3 TerrainPieceVA::bbox()
+{
+  return mBBox;
+}
+
 
 void TerrainPieceVA::draw()
 {
@@ -241,116 +254,49 @@ size_t TerrainPieceVA::getTriangles() const
 ////////////////////////////////////////////////////////////////////////////
 
 
-TerrainMesh::TerrainMesh(HeightMap &map)
+Terrain::Terrain(HeightMap &map)
 {
   size_t y,x;
-  for(y=0; y<map.getH();y+=32)
-    for(x=0;x<map.getW();x+=32)
+
+  int tilesize=16;
+
+  for(y=0; y<map.getH();y+=tilesize)
+    for(x=0;x<map.getW();x+=tilesize)
       {
-	pieces.push_front(new TerrainPieceVA(map,x,y,32,32,AGVector4(x,y,0,0))); // at least it's correct at the beginning
-	water.push_front(new WaterPiece(AGVector4(x,y,0,0)));
+	TerrainPieceVA *t=new TerrainPieceVA(map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	WaterPiece *w=new WaterPiece(map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	pieces.push_front(t); // at least it's correct at the beginning
+	water.push_front(w);
+	mNodes.push_back(w);
+	mNodes.push_back(t);
       }
   w=map.getW();
   h=map.getH();
 }
 
-TerrainMesh::~TerrainMesh()
+Terrain::~Terrain()
 {
-  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
-    delete *i;
-  for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
-    delete *i;
-
-}
-void TerrainMesh::advance(float t)
-{
-  for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
-    (*i)->advance(t);
-}
-void TerrainMesh::draw()
-{
-  // FIXME: sort drawing
-
-  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
-    {
-      (*i)->draw();
-    }
-  for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
-    {
-      (*i)->draw();
-    }
+  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+    saveDelete(*i);
 }
 
-void TerrainMesh::drawPick()
-{
-  // FIXME: sort drawing
-
-  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
-    {
-      (*i)->drawPick();
-    }
-  for(std::list<WaterPiece*>::iterator i=water.begin();i!=water.end();i++)
-    {
-      (*i)->drawPick();
-    }
-}
-
-
-void TerrainMesh::drawShadow()
-{
-  // already sorted in draw()
-  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
-    (*i)->drawShadow();
-}
-void TerrainMesh::drawDepth()
-{
-  // already sorted in draw()
-  for(std::list<TerrainPieceVA*>::iterator i=pieces.begin();i!=pieces.end();i++)
-    (*i)->drawDepth();
-}
-
-void TerrainMesh::sort(const AGVector4 &pCamera)
-{
-  // FIXME: sort along distance to camera position
-}
-AGVector4 TerrainMesh::lineHit(const AGLine3 &pLine) const
-{
-  AGVector4 r(0,0,0,0);
-  for(std::list<TerrainPieceVA*>::const_iterator i=pieces.begin();i!=pieces.end();i++)
-    {
-      r=(*i)->lineHit(pLine);
-      if(r[3]==1)
-	return r;
-    }
-  return r;
-}
-
-size_t TerrainMesh::getTriangles() const
-{
-  size_t t=0;
-  for(std::list<TerrainPieceVA*>::const_iterator i=pieces.begin();i!=pieces.end();i++)
-    t+=(*i)->getTriangles();
-  for(std::list<WaterPiece*>::const_iterator i=water.begin();i!=water.end();i++)
-    t+=(*i)->getTriangles();
-  return t;
-}  
-
-void TerrainMesh::mapChanged()
+void Terrain::mapChanged()
 {
   CTRACE;
   for(Pieces::iterator i=pieces.begin();i!=pieces.end();i++)
     {
       (*i)->mapChanged();
     }
+  for(WPieces::iterator i=water.begin();i!=water.end();i++)
+    {
+      (*i)->mapChanged();
+    }
 }
 
-AGBox3 TerrainMesh::bbox()
+void Terrain::addToScenes()
 {
-  return AGBox3(AGVector3(0,0,-10),AGVector3(w,h,10));
+  CTRACE;
+  for(Nodes::iterator j=mNodes.begin();j!=mNodes.end();j++)
+      addToAllScenes(*j);
 }
 
-
-TerrainMesh *toTerrainMesh(SceneNode *n)
-{
-  return dynamic_cast<TerrainMesh*>(n);
-}

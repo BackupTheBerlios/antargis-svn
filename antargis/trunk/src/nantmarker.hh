@@ -46,24 +46,24 @@
   result->mRubyObject=true;
 }
 %markfunc MeshData "general_markfunc"
-%exception TerrainMesh::TerrainMesh {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-}
-%markfunc TerrainMesh "general_markfunc"
-%exception SceneNode::SceneNode {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-}
-%markfunc SceneNode "general_markfunc"
 %exception GLTree::GLTree {
 	$action
 	result->mRUBY=self;
   result->mRubyObject=true;
 }
 %markfunc GLTree "general_markfunc"
+%exception SceneNode::SceneNode {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+}
+%markfunc SceneNode "general_markfunc"
+%exception TerrainPieceVA::TerrainPieceVA {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+}
+%markfunc TerrainPieceVA "general_markfunc"
 %exception HeightMap::HeightMap {
 	$action
 	result->mRUBY=self;
@@ -182,20 +182,6 @@ else if(dynamic_cast<GLTree*>(result))
  }
  else vresult=Qnil;
 }
-%typemap(out) TerrainMesh*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);
-   }
- }
- else vresult=Qnil;
-}
 %typemap(out) SceneNode*{
  if($1)
  {
@@ -212,10 +198,10 @@ else if(dynamic_cast<Smoke*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
 else if(dynamic_cast<MeshData*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MeshData,0);
-else if(dynamic_cast<TerrainMesh*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainMesh,0);
 else if(dynamic_cast<GLTree*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLTree,0);
+else if(dynamic_cast<TerrainPieceVA*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
 else if(dynamic_cast<Mesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
    else
@@ -234,6 +220,20 @@ else if(dynamic_cast<Mesh*>(result))
      if(false);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLTree,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(out) TerrainPieceVA*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
    }
  }
  else vresult=Qnil;
