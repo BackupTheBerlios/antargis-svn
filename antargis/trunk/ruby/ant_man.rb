@@ -57,17 +57,10 @@ class AntNewMan<AntMyEntity
 		@fighting=false
 		@bossName=""
 		puts "NEWMAN"
-		setMesh(Mesh.new(getMeshData("data/models/man.ant",0.7),AGVector4.new(0,0,0,0),0))
+		#setMesh(Mesh.new(getMeshData("data/models/man.ant",0.7),AGVector4.new(0,0,0,0),0))
+		setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
+		#getFirstMesh.setAnimation("stand")
 		@mode="wait"
-	end
-	def getTexture
-		if @dead
-			return "grave.png"
-		elsif @fighting
-			return "man1_sword1.png"
-		else
-			return "man"+mDirNum.to_s+".png"
-		end
 	end
 	
 	def setMode(mode)
@@ -99,6 +92,7 @@ class AntNewMan<AntMyEntity
 	# Job was finished
 	# 1) if no energy or dead: simDeath
 	def eventJobFinished
+		setVisible(true)
 		super
 		if getEnergy==0 or @dead then
 			simDeath
@@ -178,6 +172,39 @@ class AntNewMan<AntMyEntity
 			updateSurface
 			sendAngel
 		end
+	end
+	
+	def newRestJob(time)
+		vis=true
+		if @boss
+			if @boss.methods.member?("atHome")
+				if @boss.atHome(self)
+					vis=false
+					puts "HIDEEEEEEEEEEEEEEEEEEEE"
+				end
+			end
+		end
+		if vis
+			setStandAnim
+		end
+		setVisible(vis)
+		super(time)
+	end
+	def newMoveJob(p,target,n)
+		super
+		setGoAnim
+	end
+	
+	def setGoAnim
+		#puts "SET STAND..."
+		getFirstMesh.setAnimation("go")
+		#puts "OK"
+	end
+	
+	def setStandAnim
+		#puts "SET STAND..."
+		getFirstMesh.setAnimation("stand")
+		#puts "OK"
 	end
 	
 	def setFighting(v)

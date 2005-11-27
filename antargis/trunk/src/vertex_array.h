@@ -15,11 +15,13 @@ class VertexArray
   std::vector<AGVector4> mVertices,mColors;
   std::vector<AGVector3> mNormals;
   std::vector<AGVector2> mTexCoords;
+  std::vector<AGVector3> mTexCoords3D;
   std::vector<Uint16>  mIndices;
 
   bool bColor;
   bool mBuffers;
   bool mChanged;
+  bool mTextures3D;
 
   unsigned int mVertexBuffer,mColorBuffer,mNormalBuffer,mTexBuffer,mIndexBuffer;
 
@@ -29,6 +31,7 @@ class VertexArray
   VertexArray();
   virtual ~VertexArray();
   void addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector2 pTex);
+  void addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector3 pTex);
   void addTriangle(size_t p0,size_t p1,size_t p2);
 
 

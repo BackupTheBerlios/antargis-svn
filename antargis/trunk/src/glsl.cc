@@ -1,5 +1,6 @@
 #include "glsl.h"
 #include "ag_debug.h"
+#include "ag_main.h"
 #include "scene.h"
 
 int GLSL_ok=-1;

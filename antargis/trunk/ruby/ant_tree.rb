@@ -85,7 +85,7 @@ class AntNewTree<AntMyEntity
 		#setMesh(GLTree.new(AGVector4.new(0,0,0,0),3))
 		setMesh(makeAppleTreeMesh(@angle))
 		#setMesh(makeGrassMesh(rand*0.25+0.25))
-		#return
+		return
 		for i in 1..([@maxApples,resource.get("food")*3].min)
 			p=@applePos[i-1]
 			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)

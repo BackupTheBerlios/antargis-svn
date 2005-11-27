@@ -39,7 +39,6 @@ class AntGameApp <AntRubyView
 		$app=self	
 		@map=AntRubyMap.new(64,64)
 		$map=@map
-		@map.setScene(getScene)
 
 		if savegame && savegame.length>0
 			# load a level
@@ -136,9 +135,9 @@ class AntGameApp <AntRubyView
 	
 end
 
-main=AGMain.new(1024,768,32,false,false)
+main=AGMain.new(1024,768,32,false,true)
 
-main.changeRes(1024,768,32,false,true)
+#main.changeRes(1024,768,32,false,true)
 #main.changeRes(1400,1050,32,true,true)
 main.setCaption("Antargis")
 main.setIcon("data/gui/editor/tower1.png")

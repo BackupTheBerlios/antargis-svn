@@ -49,12 +49,16 @@ class TerrainPieceVA:public SceneNode
   size_t mW,mH;
   //  AGVector4 mPosition;
   HeightMap *mMap;
+
+  VertexArray m3dArray;
+
   VertexArray mEarthArray;
   VertexArray mGrassArray;
 #ifdef THREE_LAYERS
   VertexArray mGrass2Array;
 #endif
   AGTexture mEarth,mGrass,mGrassShadow;
+  AGTexture m3D;
 };
 
 

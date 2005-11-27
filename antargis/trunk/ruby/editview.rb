@@ -35,7 +35,7 @@ class AntRubyEditView<GLApp
 		@size=3
 		#@terrain=TerrainMesh.new(@map)
 		setupLight
-		@map.setScene(getScene)
+		#@map.setScene(getScene)
 		$scene=getScene
 		#getScene.addNode(@terrain)
 	
@@ -53,7 +53,7 @@ class AntRubyEditView<GLApp
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig"]
+		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
@@ -70,7 +70,9 @@ class AntRubyEditView<GLApp
 	end
 		
 	def eventClick(list,button)
+		puts "eventClick"
 		puts "------------------"
+		puts "list-size:"+(list.length.to_s)
 		if list.length>0
 			if @modifier
 				puts @modifier
@@ -82,7 +84,7 @@ class AntRubyEditView<GLApp
 	end
 	def editHeight(list,button)
 		list.each{|c|
-			if c.node.class==TerrainMesh #toTerrainMesh(c.node)@terrain
+			if isTerrain(c.node)
 				puts "TERRAIN:"
 				puts c.node
 				puts @terrain
@@ -171,6 +173,8 @@ class AntRubyEditView<GLApp
 				@type=AntFarmStead
 			when "stones"
 				@type=AntNewStone
+			when "man"
+				@type=AntNewMan
 			when "hero"
 				@type=AntHero
 				@appearance="hero"
@@ -188,10 +192,14 @@ class AntRubyEditView<GLApp
 		return
 	end
 	
+	def isTerrain(node)
+		[TerrainPieceVA,WaterPiece].member?(node.class)
+	end
+	
 	def addEntity(list,button)
 		pos=nil
 		list.each{|c|
-			if c.node.class == TerrainMesh
+			if isTerrain(c.node)
 				pos=c.pos
 			end
 		}

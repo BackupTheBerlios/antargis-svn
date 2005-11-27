@@ -14,6 +14,7 @@ VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
   mNormalBuffer=0;
   mTexBuffer=0;
   mIndexBuffer=0;
+  mTextures3D=false;
 }
 
 VertexArray::~VertexArray()
@@ -36,6 +37,21 @@ void VertexArray::addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNorm
   mColors.push_back(pColor);
   mNormals.push_back(pNormal);
   mTexCoords.push_back(pTex);
+  mChanged=true;
+  if(mVertices.size()==1)
+    bbox=AGBox3(pVertex.dim3(),AGVector3(0,0,0));
+  else
+    bbox.include(pVertex.dim3());
+}
+
+void VertexArray::addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector3 pTex)
+{
+  assert(mTextures3D || mVertices.size()==0);
+  mTextures3D=true;
+  mVertices.push_back(pVertex);
+  mColors.push_back(pColor);
+  mNormals.push_back(pNormal);
+  mTexCoords3D.push_back(pTex);
   mChanged=true;
   if(mVertices.size()==1)
     bbox=AGBox3(pVertex.dim3(),AGVector3(0,0,0));
@@ -72,7 +88,10 @@ void VertexArray::init()
       
       glGenBuffersARB( 1, &mTexBuffer );
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mTexBuffer );
-      glBufferDataARB( GL_ARRAY_BUFFER_ARB, mTexCoords.size()*sizeof(AGVector2), &(mTexCoords[0]), GL_STATIC_DRAW_ARB );
+      if(mTextures3D)
+	glBufferDataARB( GL_ARRAY_BUFFER_ARB, mTexCoords3D.size()*sizeof(AGVector3), &(mTexCoords3D[0]), GL_STATIC_DRAW_ARB );
+      else
+	glBufferDataARB( GL_ARRAY_BUFFER_ARB, mTexCoords.size()*sizeof(AGVector2), &(mTexCoords[0]), GL_STATIC_DRAW_ARB );
       
       glGenBuffersARB( 1, &mIndexBuffer );
       glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer );
@@ -136,7 +155,10 @@ void VertexArray::draw()
     {
       //      cdebug("too much work");
       glNormalPointer(GL_FLOAT, 0, &(mNormals[0]));
-      glTexCoordPointer(2, GL_FLOAT, 0, &(mTexCoords[0]));
+      if(mTextures3D)
+	glTexCoordPointer(3, GL_FLOAT, 0, &(mTexCoords3D[0]));
+      else
+	glTexCoordPointer(2, GL_FLOAT, 0, &(mTexCoords[0]));
       glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
       if(bColor)
 	glColorPointer(4, GL_FLOAT, 0, &(mColors[0]));
@@ -246,6 +268,7 @@ void VertexArray::clear()
   mColors.clear();
   mNormals.clear();
   mTexCoords.clear();
+  mTexCoords3D.clear();
   mIndices.clear();
   update();
 }

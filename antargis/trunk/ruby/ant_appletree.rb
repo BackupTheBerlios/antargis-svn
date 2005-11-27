@@ -1,5 +1,7 @@
 #!/usr/bin/env
 
+$genNewTree=false
+
 def makeTrunk(opt,p0,p1,r0,r1,segments)
 	mv0=MeshVertex.new
 	mv1=MeshVertex.new
@@ -57,9 +59,9 @@ def makeTrunk(opt,p0,p1,r0,r1,segments)
 		mv2.t=t2
 		mv3.t=t3
 		
-		opt.add(mv0)
-		opt.add(mv1)
 		opt.add(mv2)
+		opt.add(mv1)
+		opt.add(mv0)
 		
 		opt.add(mv1)
 		opt.add(mv2)
@@ -142,6 +144,16 @@ class Twig
 		mv0.t=AGVector2.new(0.5,0.5)
 		mv1.t=AGVector2.new(0,0.5)
 
+		# front
+		opt.add(mv2)
+		opt.add(mv1)
+		opt.add(mv0)
+		
+		opt.add(mv3)
+		opt.add(mv2)
+		opt.add(mv0)
+		
+		# back
 		opt.add(mv0)
 		opt.add(mv1)
 		opt.add(mv2)
@@ -149,7 +161,6 @@ class Twig
 		opt.add(mv0)
 		opt.add(mv2)
 		opt.add(mv3)
-		
 	end
 	
 	def getChildren(num,root=false)
@@ -200,7 +211,7 @@ def getAppleTreeMeshData(type="apple")
 		when "birch"
 			texture="data/textures/models/birch_complete.png"
 	end
-	if not $appletreedata[type]
+	if not ($appletreedata[type] or $genNewTree)
 		# simply comment this line to generate a new tree in "bla.ant2"
 		# then copy it to whatever file you want.
 		$appletreedata[type]=MeshData.new("data/models/tree1.ant2",1,texture)

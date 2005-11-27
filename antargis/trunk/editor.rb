@@ -111,6 +111,7 @@ class AntGameApp < AntRubyEditView
 		#if getMap.updated or getMap.heightChanged
 		#	getMap.move(0)
 		#end
+		getScene.advance(time)
 		return
 		if $fc==nil then 
 			$fc=0 

@@ -70,13 +70,13 @@ def getFirMeshData
 		mv2.t=t2
 		mv3.t=t3
 		
-		opt.add(mv0)
+		opt.add(mv2)
 		opt.add(mv1)
-		opt.add(mv2)
-		
 		opt.add(mv0)
-		opt.add(mv2)
+		
 		opt.add(mv3)
+		opt.add(mv2)
+		opt.add(mv0)
 	end
 
 	# greenery
@@ -122,6 +122,10 @@ def getFirMeshData
 		opt.add(mv0)
 		opt.add(mv1)
 		opt.add(mv2)
+		
+		opt.add(mv2) # backface
+		opt.add(mv1) # backface
+		opt.add(mv0) # backface
 		
 		y+=ys
 	end

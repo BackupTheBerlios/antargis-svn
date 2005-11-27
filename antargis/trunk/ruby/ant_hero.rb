@@ -84,7 +84,8 @@ class AntHero<AntBoss
 		elsif @job == nil or @job.class==AntHeroRestJob then
 			# rest job
 			formationPos=getSitFormation(man)
-			if man.getPos2D==formationPos then
+			if (man.getPos2D-formationPos).length2<0.2 then
+				#puts "REST"
 				man.newRestJob(5)
 			else
 				man.newMoveJob(0,formationPos,0)
