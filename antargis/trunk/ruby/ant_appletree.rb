@@ -1,6 +1,6 @@
 #!/usr/bin/env
 
-$genNewTree=false
+$genNewTree=true
 
 def makeTrunk(opt,p0,p1,r0,r1,segments)
 	mv0=MeshVertex.new
@@ -154,13 +154,13 @@ class Twig
 		opt.add(mv0)
 		
 		# back
-		opt.add(mv0)
-		opt.add(mv1)
-		opt.add(mv2)
+		#opt.add(mv0)
+		#opt.add(mv1)
+		#opt.add(mv2)
 		
-		opt.add(mv0)
-		opt.add(mv2)
-		opt.add(mv3)
+		#opt.add(mv0)
+		#opt.add(mv2)
+		#opt.add(mv3)
 	end
 	
 	def getChildren(num,root=false)
@@ -215,7 +215,7 @@ def getAppleTreeMeshData(type="apple")
 		# simply comment this line to generate a new tree in "bla.ant2"
 		# then copy it to whatever file you want.
 		$appletreedata[type]=MeshData.new("data/models/tree1.ant2",1,texture)
-		
+		$appletreedata[type].setTransparent(true)
 		puts "TREE_TRIANGLES:"
 		puts $appletreedata[type].getTriangles
 		#raise 1
@@ -272,6 +272,7 @@ def getAppleTreeMeshData(type="apple")
 	#$appletreedata.setAlpha(true)
 	puts "TRIS:"
 	puts $appletreedata[type].getTriangles
+	$appletreedata[type].setTransparent(true)
 	return $appletreedata[type]
 end
 

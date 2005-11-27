@@ -14,9 +14,6 @@ TerrainPieceVA::TerrainPieceVA(HeightMap &map,int xs,int ys,int w,int h,const AG
   //  mPosition(pPos+AGVector4(1.5,1.5,0,0)),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map),
-  mEarth(getTextureCache()->get("data/textures/terrain/rough_earth.png")),
-  mGrass(getTextureCache()->get("data/textures/terrain/big_grass.png")),
-  mGrassShadow(getTextureCache()->get("data/textures/terrain/big_grass_shadow.png")),
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png"))
 {
   mapChanged();
@@ -27,20 +24,15 @@ void TerrainPieceVA::mapChanged()
   mBBox=AGBox3();
   CTRACE;
   m3dArray.clear();
-  mEarthArray.clear();
-  mGrassArray.clear();
-#ifdef THREE_LAYERS
-  mGrass2Array.clear();
-#endif
+
   AGVector4 white(1,1,1,1);
   AGVector4 v;
   AGVector3 n;
   AGVector2 tp;
   AGVector3 tp3;
   float texFactor3w=1;
-  float texFactor3=0.3;
+  float texFactor3=1;
 
-  float texFactor=0.5;
   // add Vertices
   size_t x,y;
   for(x=mXs;x<=mXs+mW;x++)
@@ -53,26 +45,8 @@ void TerrainPieceVA::mapChanged()
 	n=mMap->getNormal(x,y);
 	v+=AGVector4(0,0,0,0);
 
-	tp=AGVector2(-v[0]*texFactor,-v[1]*texFactor);
-
-        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,1-mMap->getHeight(x,y)*texFactor3);
+        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,1-mMap->getGrass(x,y)*texFactor3);
         m3dArray.addVertex(v,white,n,tp3);
-
-
-#ifdef THREE_LAYERS
-	mEarthArray.addVertex(v,white,n,tp);
-#else
-	mEarthArray.addVertex(v,c,n,tp);
-#endif
-	mBBox.include(v.dim3());
-
-	v+=AGVector4(0,0,0.07,0);
-	mGrassArray.addVertex(v,c,n,tp);
-#ifdef THREE_LAYERS
-	v+=AGVector4(0,0,0.07,0);
-
-	mGrass2Array.addVertex(v,c,n,tp);
-#endif
 
 
 	mBBox.include(v.dim3());
@@ -89,36 +63,11 @@ void TerrainPieceVA::mapChanged()
 	  {
 	    m3dArray.addTriangle(p2,p1,p0);
 	    m3dArray.addTriangle(p3,p1,p2);
-	    
-	    //	    mEarthArray.addTriangle(p0,p1,p2);
-	    //	    mEarthArray.addTriangle(p2,p1,p3);
-	    mEarthArray.addTriangle(p2,p1,p0);
-	    mEarthArray.addTriangle(p3,p1,p2);
-	    
-	    mGrassArray.addTriangle(p2,p1,p0);
-	    mGrassArray.addTriangle(p3,p1,p2);
-#ifdef THREE_LAYERS	    
-	    mGrass2Array.addTriangle(p2,p1,p0);
-	    mGrass2Array.addTriangle(p3,p1,p2);
-#endif
-	    
 	  }
 	else
 	  {
 	    m3dArray.addTriangle(p3,p1,p0);
 	    m3dArray.addTriangle(p3,p0,p2);
-
-	    mEarthArray.addTriangle(p3,p1,p0);
-	    mEarthArray.addTriangle(p3,p0,p2);
-	    
-	    mGrassArray.addTriangle(p3,p1,p0);
-	    mGrassArray.addTriangle(p3,p0,p2);
-	    
-#ifdef THREE_LAYERS	    
-	    mGrass2Array.addTriangle(p3,p1,p0);
-	    mGrass2Array.addTriangle(p3,p0,p2);
-#endif
-	    
 	  }
 
       }
@@ -126,27 +75,21 @@ void TerrainPieceVA::mapChanged()
 
 void TerrainPieceVA::drawShadow()
 {
-#ifdef THREE_LAYERS	    
-  mGrassArray.setColors(false);
-  mGrassArray.draw();
-  mGrassArray.setColors(true);
-#else
-  mEarthArray.setColors(false);
-  mEarthArray.draw();
-  mEarthArray.setColors(true);
-#endif
+  m3dArray.setColors(false);
+  m3dArray.draw();
+  m3dArray.setColors(true);
 }
 void TerrainPieceVA::drawDepth()
 {
   glDepthMask(true);
-  mEarthArray.setColors(false);
-  mEarthArray.draw();
-  mEarthArray.setColors(true);
+  m3dArray.setColors(false);
+  m3dArray.draw();
+  m3dArray.setColors(true);
 }
 
 void TerrainPieceVA::drawPick()
 {
-  mEarthArray.drawPick();
+  m3dArray.drawPick();
 }
 
 AGBox3 TerrainPieceVA::bbox()
@@ -157,8 +100,7 @@ AGBox3 TerrainPieceVA::bbox()
 
 void TerrainPieceVA::draw()
 {
-//return;
-  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+  /*  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
   glDepthMask(true);
   glEnable(GL_COLOR_MATERIAL);
   //glColorMaterial(GL_FRONT,GL_DIFFUSE);
@@ -167,8 +109,13 @@ void TerrainPieceVA::draw()
   glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
   glColor4f(1,1,1,1);
   glEnable(GL_LIGHTING);
+  
+#ifndef OLD_TEX*/
 
-#ifndef OLD_TEX
+
+  glEnable(GL_LIGHTING);
+
+
   glDisable(GL_TEXTURE_2D);
   glEnable(GL_TEXTURE_3D);
   glBindTexture(GL_TEXTURE_3D,m3D.getTextureID());
@@ -184,7 +131,7 @@ glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
   glBindTexture(GL_TEXTURE_2D,0);
 
 
-
+  /*
 #else
 #ifdef THREE_LAYERS
 
@@ -271,17 +218,19 @@ glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
   glDepthMask(true);
   
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+
+  */
 }
 
 
 AGVector4 TerrainPieceVA::lineHit(const AGLine3 &pLine) const
 {
-  return mEarthArray.lineHit(pLine);
+  return m3dArray.lineHit(pLine);
 }
 
 size_t TerrainPieceVA::getTriangles() const
 {
-  return mEarthArray.getTriangles()*3;
+  return m3dArray.getTriangles();
 }
 
 

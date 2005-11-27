@@ -176,6 +176,9 @@ void WaterPiece::mapChanged()
 	
 	mArray.addVertex(p,c,n,t);
 
+	mBBox.include(p.dim3()-AGVector3(0,0,1));
+	mBBox.include(p.dim3()+AGVector3(0,0,1));
+
 	if(mMap->get(mX+x,mY+y)<0.1 && !vis)
 	  {
 	    vis=true;
@@ -194,7 +197,7 @@ void WaterPiece::mapChanged()
     setVisible(true);
     
 
-  mBBox=AGBox3(mPos.dim3()+AGVector3(0,0,-2),AGVector3(mW+1,mH+1,4));
+  //  mBBox=AGBox3(mPos.dim3()+AGVector3(0,0,-2),AGVector3(mW+1,mH+1,4));
 
 }
 

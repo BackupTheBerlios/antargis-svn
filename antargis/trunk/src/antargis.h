@@ -41,6 +41,7 @@
 #include "smoke.h"
 #include "anim_mesh.h"
 #include "anim_mesh_data.h"
+#include "ant_config.h"
 //#include "ant_man.h"
 //#include "ant_geometry.h"
 #ifdef SWIG
@@ -65,6 +66,7 @@
 %include "anim_mesh_data.h"
  //%include "ant_man.h"
  //%include "ant_geometry.h"
+%include "ant_config.h"
 
 #endif
 

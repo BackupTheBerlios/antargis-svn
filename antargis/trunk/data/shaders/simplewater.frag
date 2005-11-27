@@ -4,6 +4,9 @@
 uniform sampler2D tex;
 varying vec3 lightDir,normal;
 
+const vec3 diffuse=vec3(1.0,1.0,1.0);
+const vec3 ambient=vec3(1.0,1.0,1.0);
+
 void main()
 {
 	vec3 ct,cf;
@@ -12,8 +15,7 @@ void main()
 	
 	intensity = max(dot(lightDir,normalize(normal)),0.0);
 	
-	cf = intensity * (gl_FrontMaterial.diffuse).rgb + 
-																		gl_FrontMaterial.ambient.rgb;
+	cf = intensity * diffuse + ambient;
 	af = gl_FrontMaterial.diffuse.a;
 	
 	texel = texture2D(tex,gl_TexCoord[0].st);

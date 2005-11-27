@@ -47,7 +47,8 @@ struct Animation
 
 class AnimMeshData:public RubyObject
 {
-  VertexArray mArray;
+  AntShaderProgram animShader;
+  VertexArrayShader mArray;
 
   std::vector<AGVector3> pos;
   std::vector<AGVector2> uv;
@@ -70,7 +71,6 @@ class AnimMeshData:public RubyObject
 
   bool animate;
   
-  AntShaderProgram animShader;
 
   std::string mName;
 

@@ -91,6 +91,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
     }
   mShadow=pShadow;
   //  mAlpha=false;
+  mTransparent=false;
   
 }
 
@@ -98,6 +99,8 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
 MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
   Uint16 faces,meshes,vertices;
+
+  mTransparent=false;
 
   //  mAlpha=false;
 
@@ -163,6 +166,16 @@ MeshData::~MeshData()
   //  TRACE;
 }
 
+bool MeshData::transparent()
+{
+  return mTransparent;
+}
+
+void MeshData::setTransparent(bool p)
+{
+  mTransparent=p;
+}
+
 AGBox3 MeshData::bbox() const
 {
   return mBBox;
@@ -212,7 +225,7 @@ bool MeshData::getAlpha() const
   return mAlpha;
   }*/
 
-  void MeshData::drawPick()
+void MeshData::drawPick()
 {
   mArray.drawPick();
 }
@@ -221,6 +234,9 @@ void MeshData::draw()
 {
   if(!mShadow)
     glDepthMask(false);
+
+  if(mTransparent)
+    glDisable(GL_CULL_FACE);
 
 
   glEnable(GL_ALPHA_TEST);
@@ -240,6 +256,8 @@ void MeshData::draw()
     glDepthMask(true);
 
   glDisable(GL_ALPHA_TEST);
+  if(mTransparent)
+    glEnable(GL_CULL_FACE);
 }
 size_t MeshData::getTriangles() const
 {
@@ -248,16 +266,29 @@ size_t MeshData::getTriangles() const
 
 void MeshData::drawShadow()
 {
+  if(mTransparent)
+    glDisable(GL_CULL_FACE);
+
   drawDepth();
+
+  if(mTransparent)
+    glEnable(GL_CULL_FACE);
 }
 void MeshData::drawDepth()
 {
+  if(mTransparent)
+    {
+      glDisable(GL_CULL_FACE);
+      //      throw int();
+    }
   if(mShadow)
     {
       mArray.setColors(false);
       mArray.draw();
       mArray.setColors(true);
     }
+  if(mTransparent)
+    glEnable(GL_CULL_FACE);
 }
 
 void MeshData::texCoordFromPos(float scale)
@@ -390,10 +421,17 @@ Mesh *toMesh(SceneNode *node)
 }
 
 
+bool Mesh::transparent()
+{
+  assert(mData);
+  return mData->transparent();
+}
+
 
 void Mesh::mark()
 {
   markObject(getData());
 }
+
 
 

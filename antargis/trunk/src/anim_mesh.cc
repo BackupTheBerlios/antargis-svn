@@ -5,10 +5,15 @@
 #include "ag_debug.h"
 #include "ag_xml.h"
 #include "ag_fs.h"
+#include "ant_config.h"
 
 #include <math.h>
 
-#define USE_ANIM
+bool useAnimation()
+{
+  return true;
+  return getConfig()->get("animationType")!="none";
+}
 
 class Loader
 {
@@ -132,7 +137,7 @@ AGVector3 Bone::interpolateTrans(float t)
 
 
 AnimMeshData::AnimMeshData(const std::string &xmlfile):
-  animShader("data/shaders/anim.vert","data/shaders/anim.frag")
+  animShader("data/shaders/anim.vert","data/shaders/anim.frag"),mArray(&animShader)
 {
   Document doc(xmlfile);
 
@@ -141,7 +146,8 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
   animate=true;
   if(root.get("debug")=="true")
     animate=false;
-
+  if(!useAnimation())
+    animate=false;
 
   cdebug("loading from:"<<root.get("model"));
   loadAnt3(loadFile(root.get("model")),toFloat(root.get("scale")),root.get("texture"));
@@ -328,6 +334,9 @@ void AnimMeshData::setupArray()
     mArray.addVertex(AGVector4(pos[i],1),AGVector4(1,1,1,1),normal[i],uv[i]);
   for(size_t i=0;i<indices.size();i+=3)
     mArray.addTriangle(indices[i],indices[i+1],indices[i+2]);
+
+  // set boneIDs
+  mArray.addAttribute("bones",bonef);
 }
 
 
@@ -391,13 +400,16 @@ void AnimMesh::drawPrivate(bool textured)
       glMultMatrixf(mData->getTransform());
       if(textured)
 	{
+	  glDisable(GL_COLOR_MATERIAL);
 	  mData->animShader.enable();
-	  mData->animShader.sendAttribute("bones",mData->bonef);
+	  //mData->animShader.sendAttribute("bones",mData->bonef);
 	  mData->animShader.sendUniform("matrices",mShaderMatrices);
 	  
 	  mData->mArray.draw();
 
 	  mData->animShader.disable();
+	  glEnable(GL_COLOR_MATERIAL);
+
 	}
       else
 	mData->mArray.drawPick();

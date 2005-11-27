@@ -36,6 +36,9 @@ class Mesh:public SceneNode
 
   void mark();
 
+  virtual bool transparent();
+
+
  private:
   void begin();
   void end();

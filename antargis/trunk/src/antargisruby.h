@@ -1159,8 +1159,8 @@ public:
     SwigDirector_Mesh(VALUE self);
     SwigDirector_Mesh(VALUE self, MeshData &data, AGVector4 const &pPos, float pRot);
     virtual void setPos(AGVector3 const &pPos);
-    virtual bool transparent();
     virtual void clear();
+    virtual bool transparent();
     virtual void advance(float time);
     virtual void setRotation(float r);
     virtual void sort(AGVector4 const &pCamera);
@@ -1181,8 +1181,8 @@ public:
     SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
     SwigDirector_MeshData(VALUE self, VertexArray const &va, std::string const &pTexture, bool pShadow = true);
     virtual void setPos(AGVector3 const &pPos);
-    virtual bool transparent();
     virtual void clear();
+    virtual bool transparent();
     virtual void setRotation(float r);
     virtual void advance(float time);
     virtual void sort(AGVector4 const &pCamera);
@@ -1337,8 +1337,8 @@ class SwigDirector_GLTree : public GLTree, public Swig::Director {
 public:
     SwigDirector_GLTree(VALUE self, AGVector4 p, float h = 9);
     virtual void setPos(AGVector3 const &pPos);
-    virtual bool transparent();
     virtual void clear();
+    virtual bool transparent();
     virtual void advance(float time);
     virtual void setRotation(float r);
     virtual void sort(AGVector4 const &pCamera);

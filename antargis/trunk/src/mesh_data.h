@@ -42,6 +42,8 @@ class MeshData:public SceneNode
 
   AGBox3 mBBox;
 
+  bool mTransparent;
+
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
   MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
@@ -66,6 +68,9 @@ class MeshData:public SceneNode
     return mArray.lineHit(pLine);
   }
   void texCoordFromPos(float scale);
+
+  void setTransparent(bool p);
+  virtual bool transparent();
 
 };
 
