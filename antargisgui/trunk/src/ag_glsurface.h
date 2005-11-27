@@ -65,6 +65,7 @@ class AGGLScreen:public AGScreen
   virtual void putPixel(int x,int y,const AGColor &c);
 
   virtual AGTexture makeTexture(const AGSurface &s);
+  virtual AGTexture makeTexture3D(const AGSurface &s);
   virtual void deleteTexture(AGTexture &t);
 
   virtual void begin(); // call before start drawing

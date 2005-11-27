@@ -53,7 +53,8 @@ void initDraw()
   glLoadIdentity();
   glDepthMask(false);
   //  glTranslatef(0.375, 0.375, 0.0);
-
+  glEnable(GL_CULL_FACE);
+  glCullFace(GL_BACK);
 }
 
 void initGUIView(int w,int h)
@@ -182,7 +183,7 @@ size_t next2pow(size_t i)
   return j;
 }
 
-SDL_Surface *toGLTexture(SDL_Surface *image)
+SDL_Surface *toGLTexture(SDL_Surface *image, bool p3d=false)
 {
   assert(image);
 
@@ -190,9 +191,19 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
   //  if ( image->format->BitsPerPixel == 32 )
   //    bytes = 4;
 
-  size_t nw=next2pow(std::max(image->w,image->h));
+  size_t nw,nh;
+  if(p3d)
+    {
+      nw=next2pow(image->w);
+      nh=next2pow(image->h);
+    }
+  else
+    {
+      nh=nw=next2pow(std::max(image->w,image->h));
+    }
 
-  SDL_Surface* openGLSurface = SDL_CreateRGBSurface(    SDL_SWSURFACE, nw,nw, bytes*8,
+
+  SDL_Surface* openGLSurface = SDL_CreateRGBSurface(    SDL_SWSURFACE, nw,nh, bytes*8,
                                                         0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
 
   //  cdebug((int)(image->format->BitsPerPixel));
@@ -238,37 +249,11 @@ SDL_Surface *toGLTexture(SDL_Surface *image)
   //  SDL_FreeSurface( image );
   return openGLSurface;
 }
-/*
-AGSurface AGGLScreen::loadSurface(const std::string &pFilename)
-{
-  std::string file=loadFile(pFilename);
-  
-
-  //  CTRACE;
-  //SDL_Surface *s=IMG_Load(pFilename.c_str());
-  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
-  if(!s)
-   {
-     std::cout<<"Error loading file:"<<pFilename<<std::endl;
-     return AGSurface();
-   }
-  int w,h;
-  w=s->w;
-  h=s->h;
-  //  SDL_SaveBMP(s,"load1.bmp");
-  //  SDL_Surface *n=toGLTexture(s);
-  //  SDL_FreeSurface(s);
-  //  SDL_SaveBMP(n,"load2.bmp");
-  //  cdebug("load:"<<n);
-  return AGSurface(s,w,h);
-}
-*/
 
 GLuint assignTexture(SDL_Surface *pSurface)
 {
-  //  TRACE;
-  SDL_Surface* surface = pSurface;//toGLTexture(pSurface);
-  //  assert(surface);
+  assertGL;
+  SDL_Surface* surface = pSurface;
 
   assert(glTestSurfaces.find(pSurface)!=glTestSurfaces.end());
 
@@ -291,11 +276,7 @@ GLuint assignTexture(SDL_Surface *pSurface)
   assertGL;
   glGenTextures( 1, &id);
   assertGL;
-  //  cdebug("newid:"<<id);
-  //  textureIDs[textureName]=id;
-  glBindTexture( GL_TEXTURE_2D,id);// textureIDs[textureName] );
-
-  //  cout<<"textureID:"<<textureIDs[textureName]<<endl;
+  glBindTexture( GL_TEXTURE_2D,id);
 
   int format = ( texSurface->format->BytesPerPixel == 4 ) ? GL_RGBA : GL_RGB;
 
@@ -310,25 +291,84 @@ GLuint assignTexture(SDL_Surface *pSurface)
                 texSurface->pixels );
 
   assertGL;
-  //  assert( glGetError() == GL_NO_ERROR );
 
   SDL_FreeSurface( texSurface );
-  //  SDL_FreeSurface( surface );
 
   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//NEAREST);//LINEAR);
+  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   assertGL;
-  //  assert( glGetError() == GL_NO_ERROR );
 
   glEnable( GL_BLEND );
   glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
   
   glBindTexture( GL_TEXTURE_2D,0);
-  //  cdebug(id);
   return id;
 }
+
+
+GLuint assignTexture3D(SDL_Surface *pSurface)
+{
+  TRACE;
+  assertGL;
+  SDL_Surface* surface = pSurface;
+
+  assert(glTestSurfaces.find(pSurface)!=glTestSurfaces.end());
+
+  cdebug("w:"<< surface->w);
+  cdebug("h:"<< surface->h);
+  assert( surface->w < surface->h );
+
+  // Used to invert the surface. There must be a better way.
+  SDL_Surface* texSurface = SDL_CreateRGBSurface(       SDL_SWSURFACE,
+                                                        surface->w, surface->h,
+                                                        surface->format->BitsPerPixel,
+                                                        0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
+
+  for( int j=0; j<surface->h; ++j )
+    memcpy(     (Uint8*) texSurface->pixels + texSurface->pitch * ( surface->h - 1 - j),
+                (Uint8*) surface->pixels + surface->pitch * j,
+                surface->pitch );
+
+  GLuint id;
+  assertGL;
+  glGenTextures( 1, &id);
+  assertGL;
+  glBindTexture( GL_TEXTURE_3D,id);
+
+  int format = ( texSurface->format->BytesPerPixel == 4 ) ? GL_RGBA : GL_RGB;
+
+  glTexImage3D( GL_TEXTURE_3D,
+                0,                                      // no mip mapping
+                format,
+                texSurface->w,
+                texSurface->w,
+                texSurface->h/texSurface->w,
+                0,                                      // no border
+                format,                 // format
+                GL_UNSIGNED_BYTE,
+                texSurface->pixels );
+
+  assertGL;
+
+  SDL_FreeSurface( texSurface );
+
+  // FIXME disable this for a start
+  //  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  //  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+  assertGL;
+
+  glEnable( GL_BLEND );
+  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+  
+  glBindTexture( GL_TEXTURE_2D,0);
+  return id;
+}
+
+
 
 void deleteTexture(GLuint id)
 {
@@ -340,32 +380,22 @@ void deleteTexture(GLuint id)
 #ifdef NEW_TEXTURES
 GLuint AGGLScreen::getID(AGTexture *s)
 {
-  //  CTRACE;
-  //  cdebug("texture:"<<s);
-  //  cdebug(s->hasTexture());
   if(s->hasTexture())
     return s->getTextureID();
 
-  //  cdebug("assign..");
-  GLuint id=assignTexture(s->surface());
-  //  cdebug("ID:"<<id);
-  //  cdebug("rect:"<<s->getRect());
+  GLuint id;
+  if(s->m3d)
+    id=assignTexture3D(s->surface());
+  else
+    id=assignTexture(s->surface());
   s->setTextureID(id);
-  //  mTextures.push_back(s);
   assert(s->hasTexture());
-  // cdebug(s->hasTexture());
 
- // SDL_SaveBMP(s->surface(),"texture.bmp");
   return s->getTextureID();// set used
 }
 #else
 TextureID AGGLScreen::getID(SDL_Surface *s)
 {
-  //  if(mGLSurfaces[s]==0)
-  //    mGLSurfaces[s]=toGLTexture(s);
-  //  if(mTexturesInv.size())
-    //    return mTexturesInv.begin()->second;
-
   SDL_Surface *p=s;//mGLSurfaces[s];
   GLuint id;
 
@@ -382,11 +412,6 @@ TextureID AGGLScreen::getID(SDL_Surface *s)
   return id;
 }
 #endif
-/*
-AGRect AGGLScreen::getRect(SDL_Surface *s)
-{
-  return mSurfaceRect[s];
-  }*/
 
 bool AGGLScreen::inScreen(const AGRect &r) const
 {
@@ -416,17 +441,6 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
   float x1=pRect.x+w2;
   float y1=h-1-(pRect.y+h2);
 
-  //  cdebug(x0<<";"<<y0<<";"<<x1<<";"<<y1);
-  //  cdebug(pSource.width()<<";"<<pSource.height());
-  
-  //  cdebug(tw<<";"<<th);
-  
-  
-  //  SDL_Surface *surface=const_cast<AGTexture&>(pSource).s;
-  
-  //cdebug(surface);
-  //  SDL_SaveBMP(surface,"test.bmp");
-
 #ifdef NEW_TEXTURES
   GLuint id=getID(const_cast<AGTexture*>(&pSource));
 #else
@@ -439,36 +453,46 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect)
 
   assert( glGetError() == GL_NO_ERROR );
 
-  //  AGRect sRect=getRect(surface);
-
-  //  float tw=float(pSource.width())/surface->w;
-  //  float th=float(pSource.height())/surface->h;
-
   float tw=pSource.getTW();
   float th=pSource.getTH();
-  //  cdebug(tw<<"//"<<tw2);
-  //  cdebug(th<<"//"<<th2);
-  //float tw=pSource.getTW();
-  //  float th=pSource.getTH();
-
-  //  cdebug(tw<<";"<<th);
 
   glColor4f(1,1,1,1);
   glBegin(GL_TRIANGLES);
 
-  glTexCoord2f(0,1);
+  /*  glTexCoord2f(0,1);
   glVertex2f(x0,y0);
   glTexCoord2f(tw,1);
   glVertex2f(x1,y0);
   glTexCoord2f(0,1-th);
-  glVertex2f(x0,y1);
+  glVertex2f(x0,y1);*/
 
+  glTexCoord2f(0,1-th);
+  glVertex2f(x0,y1);
+  glTexCoord2f(tw,1);
+  glVertex2f(x1,y0);
+  glTexCoord2f(0,1);
+  glVertex2f(x0,y0);
+
+
+
+  /*
   glTexCoord2f(tw,1);
   glVertex2f(x1,y0);
   glTexCoord2f(tw,1-th);
   glVertex2f(x1,y1);
   glTexCoord2f(0,1-th);
   glVertex2f(x0,y1);
+*/
+
+
+
+  glTexCoord2f(0,1-th);
+  glVertex2f(x0,y1);
+  glTexCoord2f(tw,1-th);
+  glVertex2f(x1,y1);
+  glTexCoord2f(tw,1);
+  glVertex2f(x1,y0);
+
 
   glEnd();
   glBindTexture( GL_TEXTURE_2D,0);
@@ -527,25 +551,37 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect2 &pRect,const AGRect
   ty1=1.0f-ty1;
 
   glColor4f(1,1,1,1);
-  /*  glColor4f(float(pColor.r)/0xFF,
-	    float(pColor.g)/0xFF,
-	    float(pColor.b)/0xFF,
-	    float(pColor.a)/0xFF);*/
   glBegin(GL_TRIANGLES);
 
-  glTexCoord2f(tx0,ty0);
+  /*glTexCoord2f(tx0,ty0);
   glVertex2f(x0,y0);
   glTexCoord2f(tx1,ty0);
   glVertex2f(x1,y0);
   glTexCoord2f(tx0,ty1);
-  glVertex2f(x0,y1);
+  glVertex2f(x0,y1);*/
 
+  glTexCoord2f(tx0,ty1);
+  glVertex2f(x0,y1);
+  glTexCoord2f(tx1,ty0);
+  glVertex2f(x1,y0);
+  glTexCoord2f(tx0,ty0);
+  glVertex2f(x0,y0);
+
+
+  /*
   glTexCoord2f(tx1,ty0);
   glVertex2f(x1,y0);
   glTexCoord2f(tx1,ty1);
   glVertex2f(x1,y1);
   glTexCoord2f(tx0,ty1);
   glVertex2f(x0,y1);
+*/
+  glTexCoord2f(tx0,ty1);
+  glVertex2f(x0,y1);
+  glTexCoord2f(tx1,ty1);
+  glVertex2f(x1,y1);
+  glTexCoord2f(tx1,ty0);
+  glVertex2f(x1,y0);
 
   glEnd();
   glBindTexture( GL_TEXTURE_2D,0);
@@ -605,19 +641,38 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
 	    float(pColor.a)/0xFF);
   glBegin(GL_TRIANGLES);
 
+  /*
   glTexCoord2f(tx0,ty0);
   glVertex2f(x0,y0);
   glTexCoord2f(tx1,ty0);
   glVertex2f(x1,y0);
   glTexCoord2f(tx0,ty1);
   glVertex2f(x0,y1);
+*/
 
+  glTexCoord2f(tx0,ty1);
+  glVertex2f(x0,y1);
+  glTexCoord2f(tx1,ty0);
+  glVertex2f(x1,y0);
+  glTexCoord2f(tx0,ty0);
+  glVertex2f(x0,y0);
+
+
+  /*
   glTexCoord2f(tx1,ty0);
   glVertex2f(x1,y0);
   glTexCoord2f(tx1,ty1);
   glVertex2f(x1,y1);
   glTexCoord2f(tx0,ty1);
   glVertex2f(x0,y1);
+  */
+
+  glTexCoord2f(tx0,ty1);
+  glVertex2f(x0,y1);
+  glTexCoord2f(tx1,ty1);
+  glVertex2f(x1,y1);
+  glTexCoord2f(tx1,ty0);
+  glVertex2f(x1,y0);
 
   glEnd();
   glBindTexture( GL_TEXTURE_2D,0);
@@ -644,28 +699,32 @@ void AGGLScreen::tile(const AGTexture &pSource)
   float mw=float(w2)/pSource.width();
   float mh=float(h2)/pSource.height();
 
+  //turned
   glBindTexture( GL_TEXTURE_2D,id);
   glColor4f(1,1,1,1);
   assert( glGetError() == GL_NO_ERROR );
 
   glBegin(GL_TRIANGLES);
+  glTexCoord2f(0,0);
+  glVertex2f(x0,y1);
+
+  glTexCoord2f(mw,mh);
+  glVertex2f(x1,y0);
+
   glTexCoord2f(0,mh);
   glVertex2f(x0,y0);
 
-  glTexCoord2f(mw,mh);
-  glVertex2f(x1,y0);
 
+
+  
   glTexCoord2f(0,0);
   glVertex2f(x0,y1);
-  
-  glTexCoord2f(mw,mh);
-  glVertex2f(x1,y0);
 
   glTexCoord2f(mw,0);
   glVertex2f(x1,y1);
 
-  glTexCoord2f(0,0);
-  glVertex2f(x0,y1);
+  glTexCoord2f(mw,mh);
+  glVertex2f(x1,y0);
 
   glEnd();
   glBindTexture( GL_TEXTURE_2D,0);
@@ -697,25 +756,29 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest)
   glBindTexture( GL_TEXTURE_2D,id);
   glColor4f(1,1,1,1);
   assert( glGetError() == GL_NO_ERROR );
-
+  //turned
   glBegin(GL_TRIANGLES);
-  glTexCoord2f(0,mh);
-  glVertex2f(x0,y0);
+
+  glTexCoord2f(0,0);
+  glVertex2f(x0,y1);
 
   glTexCoord2f(mw,mh);
   glVertex2f(x1,y0);
+
+
+  glTexCoord2f(0,mh);
+  glVertex2f(x0,y0);
+
+
 
   glTexCoord2f(0,0);
   glVertex2f(x0,y1);
   
-  glTexCoord2f(mw,mh);
-  glVertex2f(x1,y0);
-
   glTexCoord2f(mw,0);
   glVertex2f(x1,y1);
 
-  glTexCoord2f(0,0);
-  glVertex2f(x0,y1);
+  glTexCoord2f(mw,mh);
+  glVertex2f(x1,y0);
 
   glEnd();
   glBindTexture( GL_TEXTURE_2D,0);
@@ -757,28 +820,28 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
 
 	tw=float(std::min((int)pSrc.w,pDest.w-px))/surface->w;
 	th=float(std::min((int)pSrc.h,pDest.h-py))/surface->h;
-
+	// turned
 	sx1=sx0+tw;
 	sy1=sy0-th;
+
+	glTexCoord2f(sx0,sy1);
+	glVertex2f(px0,py1);
+
+	glTexCoord2f(sx1,sy0);
+	glVertex2f(px1,py0);
 
 	glTexCoord2f(sx0,sy0);
 	glVertex2f(px0,py0);
 
-	glTexCoord2f(sx1,sy0);
-	glVertex2f(px1,py0);
-
+	
 	glTexCoord2f(sx0,sy1);
 	glVertex2f(px0,py1);
-
-	
-	glTexCoord2f(sx1,sy0);
-	glVertex2f(px1,py0);
 
 	glTexCoord2f(sx1,sy1);
 	glVertex2f(px1,py1);
 
-	glTexCoord2f(sx0,sy1);
-	glVertex2f(px0,py1);
+	glTexCoord2f(sx1,sy0);
+	glVertex2f(px1,py0);
       }
   glEnd();
 	
@@ -797,14 +860,15 @@ void AGGLScreen::drawRect(const AGRect &pRect,const AGColor &c)
   glBindTexture(GL_TEXTURE_2D,0);
   glColor4f(c.r/255.0,c.g/255.0,c.b/255.0,c.a/255.0);
 
-
+  // turned
   glBegin(GL_TRIANGLES);
+  glVertex2f(x1,y0);
+  glVertex2f(x0,y1);
   glVertex2f(x0,y0);
-  glVertex2f(x0,y1);
+
   glVertex2f(x1,y0);
-  glVertex2f(x0,y1);
   glVertex2f(x1,y1);
-  glVertex2f(x1,y0);
+  glVertex2f(x0,y1);
   glEnd();
 }
 
@@ -829,25 +893,30 @@ void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const
 
   AGColor ul2=AGColor(255,0,0);
 
+  // turned
   glBindTexture(GL_TEXTURE_2D,0);
   glBegin(GL_TRIANGLES);
+  glColor(dl);
+  glVertex2f(x0,y1);
+  glColor(ur);
+  glVertex2f(x1,y0);
   glColor(ul);
   glVertex2f(x0,y0);
-  glColor(ur);
-  glVertex2f(x1,y0);
+
+
   glColor(dl);
   glVertex2f(x0,y1);
-  glColor(ur);
-  glVertex2f(x1,y0);
   glColor(dr);
   glVertex2f(x1,y1);
-  glColor(dl);
-  glVertex2f(x0,y1);
+  glColor(ur);
+  glVertex2f(x1,y0);
   glEnd();
 }
 
 void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
 {
+  glDisable(GL_CULL_FACE);
+  glCullFace(GL_FRONT);
   //  TRACE;
 
   //  cdebug(rect);
@@ -864,46 +933,48 @@ void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const A
   glColor(c1);
   glBegin(GL_TRIANGLES);
   // top
+  glVertex2f(x0+W,y0-W);
+  glVertex2f(x1,y0);
   glVertex2f(x0,y0);
-  glVertex2f(x1,y0);
-  glVertex2f(x0+W,y0-W);
 
-  glVertex2f(x1,y0);
-  glVertex2f(x1-W,y0-W);
   glVertex2f(x0+W,y0-W);
+  glVertex2f(x1-W,y0-W);
+  glVertex2f(x1,y0);
 
   // left
-  glVertex2f(x0,y0);
+  glVertex2f(x0+W,y1+W);
   glVertex2f(x0+W,y0-W);
-  glVertex2f(x0+W,y1+W);
-
   glVertex2f(x0,y0);
-  glVertex2f(x0+W,y1+W);
+
   glVertex2f(x0,y1);
+  glVertex2f(x0+W,y1+W);
+  glVertex2f(x0,y0);
   glEnd();
 
   // right and //bottom
   glColor(c2);
   glBegin(GL_TRIANGLES);
   // bottom
+  glVertex2f(x0+W,y1+W);
+  glVertex2f(x1,y1);
   glVertex2f(x0,y1);
-  glVertex2f(x1,y1);
-  glVertex2f(x0+W,y1+W);
 
-  glVertex2f(x1,y1);
-  glVertex2f(x1-W,y1+W);
   glVertex2f(x0+W,y1+W);
+  glVertex2f(x1-W,y1+W);
+  glVertex2f(x1,y1);
 
   // right
-  glVertex2f(x1,y0);
+  glVertex2f(x1-W,y1+W);
   glVertex2f(x1-W,y0-W);
-  glVertex2f(x1-W,y1+W);
-
   glVertex2f(x1,y0);
-  glVertex2f(x1-W,y1+W);
+
   glVertex2f(x1,y1);
+  glVertex2f(x1-W,y1+W);
+  glVertex2f(x1,y0);
   glEnd();
 
+  glCullFace(GL_BACK);
+  glEnable(GL_CULL_FACE);
 
 
 }
@@ -924,6 +995,13 @@ AGTexture AGGLScreen::makeTexture(const AGSurface &s)
 {
   //  CTRACE;
   return AGTexture(toGLTexture(const_cast<AGSurface&>(s).surface()),s.width(),s.height());
+}
+
+
+AGTexture AGGLScreen::makeTexture3D(const AGSurface &s)
+{
+  //  CTRACE;
+  return AGTexture(toGLTexture(const_cast<AGSurface&>(s).surface(),true),s.width(),s.height(),true);
 }
 
 void AGGLScreen::deleteTexture(AGTexture &t)
@@ -968,18 +1046,20 @@ void AGGLScreen::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const 
 
   glBegin(GL_TRIANGLES);
 
+  //  glTexCoord2fv(pSrc[2]);
+  glTexCoord2f(pSrc[2].getX()*pSource.getTW(),1-pSrc[2].getY()*pSource.getTH());
+  glVertex2f(pDest[2].getX(), h-1-pDest[2].getY());
 
-  //  glTexCoord2fv(pSrc[0]);
-  glTexCoord2f(pSrc[0].getX()*pSource.getTW(),1-pSrc[0].getY()*pSource.getTH());
-  glVertex2f(pDest[0].getX(), h-1-pDest[0].getY());
 
   //  glTexCoord2fv(pSrc[1]);
   glTexCoord2f(pSrc[1].getX()*pSource.getTW(),1-pSrc[1].getY()*pSource.getTH());
   glVertex2f(pDest[1].getX(), h-1-pDest[1].getY());
 
-  //  glTexCoord2fv(pSrc[2]);
-  glTexCoord2f(pSrc[2].getX()*pSource.getTW(),1-pSrc[2].getY()*pSource.getTH());
-  glVertex2f(pDest[2].getX(), h-1-pDest[2].getY());
+
+  //  glTexCoord2fv(pSrc[0]);
+  glTexCoord2f(pSrc[0].getX()*pSource.getTW(),1-pSrc[0].getY()*pSource.getTH());
+  glVertex2f(pDest[0].getX(), h-1-pDest[0].getY());
+
   
   glEnd();
 }

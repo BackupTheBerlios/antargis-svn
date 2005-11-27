@@ -323,20 +323,23 @@ AGTexture::AGTexture(const AGTexture &t)
   mHasTexture=false;
   mTextureUsed=false;
   getTextureManager()->registerTexture(this);
+  m3d=t.m3d;
 }
 
 AGTexture::AGTexture()
 {
   s=0;
+  m3d=0;
   init();
   getTextureManager()->registerTexture(this);
 }
 
 // only used by AG*Screen to create a new texture
-AGTexture::AGTexture(SDL_Surface *ps,int W,int H):s(ps),w(W),h(H)
+AGTexture::AGTexture(SDL_Surface *ps,int W,int H,bool p3d):s(ps),w(W),h(H)
 {
   //  CTRACE;
   //  cdebug(W<<"//"<<H);
+  m3d=p3d;
   mTW=float(w)/float(s->w);
   mTH=float(h)/float(s->h);
   init();
@@ -474,6 +477,11 @@ AGTexture AGScreen::displayFormat(SDL_Surface *s)
 }
 */
 AGTexture AGScreen::makeTexture(const AGSurface &s)
+{
+  STUB;
+  return AGTexture();
+}
+AGTexture AGScreen::makeTexture3D(const AGSurface &s)
 {
   STUB;
   return AGTexture();
@@ -716,6 +724,10 @@ void AGTextureManager::cleanup()
 AGTexture AGTextureManager::makeTexture(const AGSurface &s)
 {
   return getScreen().makeTexture(s);
+}
+AGTexture AGTextureManager::makeTexture3D(const AGSurface &s)
+{
+  return getScreen().makeTexture3D(s);
 }
 
 void AGTextureManager::checkUnused()

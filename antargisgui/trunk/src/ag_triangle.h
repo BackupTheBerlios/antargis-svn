@@ -600,6 +600,7 @@ class AGBox3
   bool collides(const AGVector3&p) const;
 
   bool collides(const AGLine3&p) const;
+  bool collides(const AGBox3 &b) const;
 
   std::vector<AGRect3> getSides() const;
 

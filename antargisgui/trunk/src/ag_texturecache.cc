@@ -35,8 +35,7 @@ AGTextureCache::AGTextureCache()
   CTRACE;
   getInstanceKiller()->reg(createKiller(this));
 }
-const AGTexture &AGTextureCache::get
-  (const std::string &pTexture)
+const AGTexture &AGTextureCache::get(const std::string &pTexture)
   {
 
     std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
@@ -47,6 +46,22 @@ const AGTexture &AGTextureCache::get
 
         AGSurface ms=getSurfaceManager()->fromSDL(fromPNG(c));
         mTextures[pTexture]=getTextureManager()->makeTexture(ms);;
+      }
+    return mTextures[pTexture];
+  }
+
+
+const AGTexture &AGTextureCache::get3D(const std::string &pTexture)
+  {
+
+    std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
+    if(i==mTextures.end())
+      {
+        // load
+        std::string c=loadFile(pTexture);
+
+        AGSurface ms=getSurfaceManager()->fromSDL(fromPNG(c));
+        mTextures[pTexture]=getTextureManager()->makeTexture3D(ms);;
       }
     return mTextures[pTexture];
   }

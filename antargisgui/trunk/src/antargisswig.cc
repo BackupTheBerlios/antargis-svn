@@ -16675,6 +16675,20 @@ _wrap_getMain(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_hasQuit(int argc, VALUE *argv, VALUE self) {
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (bool)hasQuit();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 swig_class cAGSurface;
 
 static VALUE
@@ -17895,6 +17909,28 @@ _wrap_AGTextureManager_makeTexture(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTextureManager, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGSurface, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     result = (arg1)->makeTexture((AGSurface const &)*arg2);
+    
+    {
+        AGTexture * resultptr;
+        resultptr = new AGTexture((AGTexture &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGTexture, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGTextureManager_makeTexture3D(int argc, VALUE *argv, VALUE self) {
+    AGTextureManager *arg1 = (AGTextureManager *) 0 ;
+    AGSurface *arg2 = 0 ;
+    AGTexture result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTextureManager, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGSurface, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (arg1)->makeTexture3D((AGSurface const &)*arg2);
     
     {
         AGTexture * resultptr;
@@ -27478,6 +27514,24 @@ _wrap_AGBox3_collides__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGBox3_collides__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    AGBox3 *arg1 = (AGBox3 *) 0 ;
+    AGBox3 *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGBox3, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGBox3, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AGBox3 const *)arg1)->collides((AGBox3 const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGBox3_getSides(int argc, VALUE *argv, VALUE self) {
     AGBox3 *arg1 = (AGBox3 *) 0 ;
     SwigValueWrapper<std::vector<AGRect3 > > result;
@@ -27536,7 +27590,7 @@ _wrap_AGBox3_split(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGBox3_collides__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_AGBox3_collides__SWIG_3(int argc, VALUE *argv, VALUE self) {
     AGBox3 *arg1 = (AGBox3 *) 0 ;
     AGMatrix4 *arg2 = 0 ;
     bool result;
@@ -27604,10 +27658,26 @@ static VALUE _wrap_AGBox3_collides(int nargs, VALUE *args, VALUE self) {
         if (_v) {
             {
                 void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGMatrix4, 0) != -1)) ? 1 : 0;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGBox3, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
                 return _wrap_AGBox3_collides__SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGBox3, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGMatrix4, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGBox3_collides__SWIG_3(nargs, args, self);
             }
         }
     }
@@ -40016,6 +40086,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     cAGMain.mark = 0;
     cAGMain.destroy = (void (*)(void *)) free_AGMain;
     rb_define_module_function(mLibantargisgui, "getMain", VALUEFUNC(_wrap_getMain), -1);
+    rb_define_module_function(mLibantargisgui, "hasQuit", VALUEFUNC(_wrap_hasQuit), -1);
     rb_define_module_function(mLibantargisgui, "disown_AGSurface", VALUEFUNC(_wrap_disown_AGSurface), -1);
     
     cAGSurface.klass = rb_define_class_under(mLibantargisgui, "AGSurface", rb_cObject);
@@ -40096,6 +40167,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGTextureManager.klass, "cleanup", VALUEFUNC(_wrap_AGTextureManager_cleanup), -1);
     rb_define_method(cAGTextureManager.klass, "checkUnused", VALUEFUNC(_wrap_AGTextureManager_checkUnused), -1);
     rb_define_method(cAGTextureManager.klass, "makeTexture", VALUEFUNC(_wrap_AGTextureManager_makeTexture), -1);
+    rb_define_method(cAGTextureManager.klass, "makeTexture3D", VALUEFUNC(_wrap_AGTextureManager_makeTexture3D), -1);
     rb_define_method(cAGTextureManager.klass, "clear", VALUEFUNC(_wrap_AGTextureManager_clear), -1);
     cAGTextureManager.mark = 0;
     cAGTextureManager.destroy = (void (*)(void *)) free_AGTextureManager;

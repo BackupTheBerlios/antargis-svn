@@ -131,8 +131,9 @@ class AGTexture
   GLuint mTextureID;
   bool mHasTexture;
   bool mTextureUsed;
+  bool m3d;
 
-  AGTexture(SDL_Surface *s,int W,int H);
+  AGTexture(SDL_Surface *s,int W,int H, bool p3d=false);
   SDL_Surface *s;
   int w,h;
   float mTW,mTH;
@@ -155,6 +156,7 @@ class AGScreen:public AGPaintTarget
 
  private:
   virtual AGTexture makeTexture(const AGSurface &s);
+  virtual AGTexture makeTexture3D(const AGSurface &s);
   virtual void deleteTexture(AGTexture &t);
 
   friend class AGTextureManager;
@@ -207,6 +209,7 @@ class AGTextureManager
   void checkUnused();
 
   AGTexture makeTexture(const AGSurface &s);
+  AGTexture makeTexture3D(const AGSurface &s);
 
   void clear();
 

@@ -48,4 +48,6 @@ class AGMain
 
 AGMain *getMain();
 
+bool hasQuit();
+
 #endif

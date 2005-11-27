@@ -1962,8 +1962,8 @@ bool AGBox3::collides(const AGMatrix4 &frustum) const
   float minx,miny,minz;
   float maxx,maxy,maxz;
 
-  minx=miny=minz=0;
-  maxx=maxy=maxz=0;
+  minx=miny=minz=10000;
+  maxx=maxy=maxz=-10000;
   // simply check, if any of the box's vertices lie inside the frustum
   for(std::vector<AGVector4>::iterator i=a.begin();i!=a.end();i++)
     {
@@ -1983,19 +1983,28 @@ bool AGBox3::collides(const AGMatrix4 &frustum) const
       maxz=std::max(maxz,p[2]);
 	
     }
-  size_t c=0;
-  if(minx<-1 && maxx>1)
-    c++;
-  if(miny<-1 && maxy>1)
-    c++;
-  if(minz<-1 && maxz>1)
-    c++;
-  
-  if(c>1)
-    return true;
 
-  return false;  
+  return AGBox3(AGVector3(-1,-1,-1),AGVector3(2,2,2)).collides(AGBox3(AGVector3(minx,miny,minz),AGVector3(maxx-minx,maxy-miny,maxz-minz)));
 }
+
+bool AGBox3::collides(const AGBox3 &box) const
+{
+  AGVector3 a=base+dir;
+  AGVector3 b=box.base+box.dir;
+
+  /*  cdebug(base.toString()<<"   "<<a.toString());
+  cdebug(box.base.toString()<<"   "<<b.toString());
+
+  cdebug(collide1d(base[0],a[0],box.base[0],b[0]));
+  cdebug(collide1d(base[1],a[1],box.base[1],b[1]));
+  cdebug(collide1d(base[2],a[2],box.base[2],b[2]));
+  */
+
+  return collide1d(base[0],a[0],box.base[0],b[0]) &&
+    collide1d(base[1],a[1],box.base[1],b[1]) &&
+    collide1d(base[2],a[2],box.base[2],b[2]);
+}
+
 
 
 std::vector<AGVector4> AGBox3::getVertices() const

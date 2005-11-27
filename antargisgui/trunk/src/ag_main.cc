@@ -39,9 +39,16 @@ bool lastGL=false;
 
 AGMain *mAGMain=0;
 
+bool quited=false;
+
 // singleton-management
 void newInstanceKiller();
 void deleteInstanceKiller();
+
+bool hasQuit()
+{
+  return quited;
+}
 
 
 AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
@@ -98,7 +105,8 @@ AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
   //atexit(SDL_Quit);
 
   initFS("");
-
+  // FIXME: set $main in ruby to this ???
+  
 }
 AGMain::~AGMain()
 {
@@ -106,7 +114,9 @@ AGMain::~AGMain()
   delete mScreen;
   deleteInstanceKiller();
   mAGMain=0;
+  cdebug("QUIT");
   SDL_Quit();
+  quited=true;
 }
 
 void AGMain::flip()
