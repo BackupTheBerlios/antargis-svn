@@ -159,6 +159,7 @@ class AntEntity:public RubyObject
 
     // used only by *Jobs
     void setDirection(float pAngle);
+    float getDirection() const;
 
     void decEnergy(float amount);
     void decMorale(float amount);

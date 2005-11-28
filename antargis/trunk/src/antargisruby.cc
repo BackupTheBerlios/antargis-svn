@@ -48084,6 +48084,22 @@ _wrap_AntEntity_setDirection(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AntEntity_getDirection(int argc, VALUE *argv, VALUE self) {
+    AntEntity *arg1 = (AntEntity *) 0 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntEntity, 1);
+    result = (float)((AntEntity const *)arg1)->getDirection();
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AntEntity_decEnergy(int argc, VALUE *argv, VALUE self) {
     AntEntity *arg1 = (AntEntity *) 0 ;
     float arg2 ;
@@ -53958,6 +53974,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntEntity.klass, "getFirstMesh", VALUEFUNC(_wrap_AntEntity_getFirstMesh), -1);
     rb_define_method(cAntEntity.klass, "addMesh", VALUEFUNC(_wrap_AntEntity_addMesh), -1);
     rb_define_method(cAntEntity.klass, "setDirection", VALUEFUNC(_wrap_AntEntity_setDirection), -1);
+    rb_define_method(cAntEntity.klass, "getDirection", VALUEFUNC(_wrap_AntEntity_getDirection), -1);
     rb_define_method(cAntEntity.klass, "decEnergy", VALUEFUNC(_wrap_AntEntity_decEnergy), -1);
     rb_define_method(cAntEntity.klass, "decMorale", VALUEFUNC(_wrap_AntEntity_decMorale), -1);
     rb_define_method(cAntEntity.klass, "eventMapChanged", VALUEFUNC(_wrap_AntEntity_eventMapChanged), -1);

@@ -58,7 +58,8 @@ class AntNewMan<AntMyEntity
 		@bossName=""
 		puts "NEWMAN"
 		#setMesh(Mesh.new(getMeshData("data/models/man.ant",0.7),AGVector4.new(0,0,0,0),0))
-		setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
+		#setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
+		setMeshState("walk")
 		#getFirstMesh.setAnimation("stand")
 		@mode="wait"
 	end
@@ -190,6 +191,12 @@ class AntNewMan<AntMyEntity
 		setVisible(vis)
 		super(time)
 	end
+	
+	def newFetchJob(p,target,r)
+		super
+		setGoAnim
+	end
+	
 	def newMoveJob(p,target,n)
 		super
 		setGoAnim
@@ -197,13 +204,15 @@ class AntNewMan<AntMyEntity
 	
 	def setGoAnim
 		#puts "SET STAND..."
-		getFirstMesh.setAnimation("go")
+		#getFirstMesh.setAnimation("go")
+		setMeshState("walk")
 		#puts "OK"
 	end
 	
 	def setStandAnim
 		#puts "SET STAND..."
-		getFirstMesh.setAnimation("stand")
+		#getFirstMesh.setAnimation("stand")
+		setMeshState("stand")
 		#puts "OK"
 	end
 	
@@ -213,6 +222,38 @@ class AntNewMan<AntMyEntity
 
 	def xmlName
 		return "antNewMan"
+	end
+	
+	def setMeshState(name)
+		dir=getDirection
+		case name
+			when "wood"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
+			when "walk"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
+				getFirstMesh.setAnimation("walk")
+			when "fight"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_fight.anim")))
+			when "axe"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_axe.anim")))
+			when "pick"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_pick.anim")))
+			when "stand"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
+				getFirstMesh.setAnimation("stand")
+			
+		end
+		setDirection(dir)
+	end
+	
+	def digResource(res)
+		newRestJob(2)
+		case res
+			when "wood"
+				setMeshState("axe")
+			else
+				setMeshState("pick")
+		end
 	end
 	
 	def saveXML(node)
@@ -225,3 +266,4 @@ class AntNewMan<AntMyEntity
 	end
 end
 
+	

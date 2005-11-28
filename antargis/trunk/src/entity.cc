@@ -133,7 +133,10 @@ void AntEntity::updatePos(const AGVector3 &p)
       return;
     }
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-    (*i)->setPos(p+mMeshPos[*i]);
+    {
+      (*i)->setPos(p+mMeshPos[*i]);
+      (*i)->setRotation(mDir);
+    }
   
 }
 
@@ -318,6 +321,10 @@ int AntEntity::getID() const
 std::string AntEntity::xmlName() const
 {
   return "antEntity";
+}
+float AntEntity::getDirection() const
+{
+  return mDir;
 }
 
 

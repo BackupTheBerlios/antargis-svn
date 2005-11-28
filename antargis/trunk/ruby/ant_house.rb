@@ -130,6 +130,8 @@ class AntHouse<AntBoss
 	
 	def normalFetching(e)
 		if atHome(e) then
+			e.setMode("")
+			e.setMeshState("stand")
 			@atHome.push(e)
 			# is home:
 			# 1) take everything from inventory
@@ -143,6 +145,17 @@ class AntHouse<AntBoss
 			else
 				e.newRestJob(10)
 			end
+		elsif e.getMode=~/fetching/
+			res=e.getMode.gsub(/.* /,"")
+			e.digResource(res)
+			e.setMode("digging "+res)
+		elsif e.getMode=~/digging/
+			e.newMoveJob(0,getPos2D,0)#,false)
+			e.setMeshState("wood")
+			e.setMode("homing")
+		elsif e.getMode=="homing"
+			e.newRestJob(1) # always rest a little
+			e.setMode("")
 		else
 			# is anywhere - come home
 			e.newMoveJob(0,getPos2D,0)#,false)
@@ -190,6 +203,7 @@ class AntHouse<AntBoss
 			ent.newRestJob(2)
 		else
 			ent.newFetchJob(0,tent,good)
+			#ent.newMoveJob(0,tent.getPos2D)
 			ent.setMode("fetching "+good)
 		end
 	end
