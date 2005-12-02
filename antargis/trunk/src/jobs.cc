@@ -125,7 +125,7 @@ bool FightJob::needsMorale() const
 
 FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 {
-  fightDistance=0.20; // in pixels
+  fightDistance=1;//0.20; // in pixels
   strength=0.2;   // decrease per second
 }
 

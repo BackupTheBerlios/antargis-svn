@@ -33,6 +33,7 @@ struct Animation
   float end;
   float fps;
   float len;
+  bool loop;
 
   Animation()
   {
@@ -70,7 +71,6 @@ class AnimMeshData:public RubyObject
   AGBox3 mBBox;
 
   bool animate;
-  
 
   std::string mName;
 

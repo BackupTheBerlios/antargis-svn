@@ -151,7 +151,8 @@ class AntHouse<AntBoss
 			e.setMode("digging "+res)
 		elsif e.getMode=~/digging/
 			e.newMoveJob(0,getPos2D,0)#,false)
-			e.setMeshState("wood")
+			res=e.getMode.gsub(/.* /,"")
+			e.collectResource(res)
 			e.setMode("homing")
 		elsif e.getMode=="homing"
 			e.newRestJob(1) # always rest a little

@@ -60,8 +60,7 @@ void setRotation(AGMatrix4 &m,const AGVector3 &angles)
   m.set(0,0,( float )( cp*cy ));
   m.set(0,1,( float )( cp*sy ));
   m.set(0,2,( float )( -sp ));
-  
-  double srsp = sr*sp;
+    double srsp = sr*sp;
   double crsp = cr*sp;
 
   m.set(1,0,( float )( srsp*cy-cr*sy ));
@@ -150,6 +149,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
     animate=false;
 
   cdebug("loading from:"<<root.get("model"));
+
   loadAnt3(loadFile(root.get("model")),toFloat(root.get("scale")),root.get("texture"));
   
   // load animations
@@ -168,6 +168,8 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
       assert(begin<=end);
       assert(end<animTime);
       mAnimations[(*i)->get("name")]=Animation(begin,end,fps);
+
+      mAnimations[(*i)->get("name")].loop=((*i)->get("loop")!="false");
     }
 
   if(anims.size()==0)
@@ -357,7 +359,7 @@ AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size()+
 
 AnimMesh::~AnimMesh()
 {
-  CTRACE;
+  //  CTRACE;
 }
 
 void AnimMesh::drawDepth()
@@ -482,8 +484,11 @@ void AnimMesh::advance(float time)
 
   if(mAnimation->len>0)
     {
-      while(mTime>mAnimation->end)
-	mTime-=mAnimation->len;
+      if(mAnimation->loop)
+	while(mTime>mAnimation->end)
+	  mTime-=mAnimation->len;
+      else
+	mTime=std::min(mTime,mAnimation->end);
     }
   else
     mTime=mAnimation->begin;

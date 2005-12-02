@@ -50736,6 +50736,37 @@ _wrap_Animation_len_get(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Animation_loop_set(int argc, VALUE *argv, VALUE self) {
+    Animation *arg1 = (Animation *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Animation, 1);
+    arg2 = RTEST(argv[0]);
+    if (arg1) (arg1)->loop = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Animation_loop_get(int argc, VALUE *argv, VALUE self) {
+    Animation *arg1 = (Animation *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Animation, 1);
+    result = (bool) ((arg1)->loop);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_new_Animation__SWIG_0(int argc, VALUE *argv, VALUE self) {
     Animation *result;
     
@@ -54165,6 +54196,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAnimation.klass, "fps", VALUEFUNC(_wrap_Animation_fps_get), -1);
     rb_define_method(cAnimation.klass, "len=", VALUEFUNC(_wrap_Animation_len_set), -1);
     rb_define_method(cAnimation.klass, "len", VALUEFUNC(_wrap_Animation_len_get), -1);
+    rb_define_method(cAnimation.klass, "loop=", VALUEFUNC(_wrap_Animation_loop_set), -1);
+    rb_define_method(cAnimation.klass, "loop", VALUEFUNC(_wrap_Animation_loop_get), -1);
     cAnimation.mark = 0;
     cAnimation.destroy = (void (*)(void *)) free_Animation;
     

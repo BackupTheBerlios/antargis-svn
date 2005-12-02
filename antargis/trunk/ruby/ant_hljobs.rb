@@ -89,6 +89,7 @@ class AntHeroMoveJob<AntHLJob
 				end
 			when "torest"
 				man.newRestJob(1)
+				#man.sitDown
 				@states["torest"].delete(man)
 		end
 	end

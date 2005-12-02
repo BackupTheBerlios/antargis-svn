@@ -27,6 +27,7 @@
 
 
 class AntNewAngel<AntMyEntity
+
 	def initialize
 		super(AGVector2.new(0,0))
 		setType("angel")
@@ -49,6 +50,8 @@ class AntNewAngel<AntMyEntity
 end
 
 class AntNewMan<AntMyEntity
+	attr_reader :meshState
+	
 	def initialize()
 		super(AGVector2.new(0,0))
 		setType("man")
@@ -57,10 +60,7 @@ class AntNewMan<AntMyEntity
 		@fighting=false
 		@bossName=""
 		puts "NEWMAN"
-		#setMesh(Mesh.new(getMeshData("data/models/man.ant",0.7),AGVector4.new(0,0,0,0),0))
-		#setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
 		setMeshState("walk")
-		#getFirstMesh.setAnimation("stand")
 		@mode="wait"
 	end
 	
@@ -175,21 +175,29 @@ class AntNewMan<AntMyEntity
 		end
 	end
 	
-	def newRestJob(time)
-		vis=true
+	def checkHideAtHome
 		if @boss
-			if @boss.methods.member?("atHome")
+			if @boss.methods.member?("atHome") and @boss.class!=AntHero
 				if @boss.atHome(self)
-					vis=false
-					puts "HIDEEEEEEEEEEEEEEEEEEEE"
+					return true
 				end
 			end
 		end
-		if vis
+		return false
+	end
+	
+	def newRestJob(time)
+		vis=checkHideAtHome
+		#if vis
 			setStandAnim
-		end
-		setVisible(vis)
+		#end
+		#setVisible(vis)
 		super(time)
+	end
+	
+	def newFightJob(d,ptarget)
+		super
+		setMeshState("fight")
 	end
 	
 	def newFetchJob(p,target,r)
@@ -225,13 +233,16 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def setMeshState(name)
+		@meshState=name
 		dir=getDirection
 		case name
 			when "wood"
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
-			when "walk"
+			when "stone"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_stones.anim")))
+			when "walk","sitdown","sit"
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
-				getFirstMesh.setAnimation("walk")
+				getFirstMesh.setAnimation(name)
 			when "fight"
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_fight.anim")))
 			when "axe"
@@ -255,6 +266,22 @@ class AntNewMan<AntMyEntity
 				setMeshState("pick")
 		end
 	end
+
+	def collectResource(res)
+		case res	
+			when "wood"
+				setMeshState("wood")
+			when "stone"
+				setMeshState("stone")
+		end
+	end
+	
+	def sitDown
+		newRestJob(0.4)
+		setMeshState("sitdown")
+
+	end
+			
 	
 	def saveXML(node)
 		super(node)

@@ -85,8 +85,12 @@ class AntHero<AntBoss
 			# rest job
 			formationPos=getSitFormation(man)
 			if (man.getPos2D-formationPos).length2<0.2 then
-				#puts "REST"
-				man.newRestJob(5)
+				if not ["sitdown","sit"].member?(man.meshState)
+					man.sitDown
+				else
+					man.newRestJob(5)
+					man.setMeshState("sit")
+				end
 			else
 				man.newMoveJob(0,formationPos,0)
 			end
