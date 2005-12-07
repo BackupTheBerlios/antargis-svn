@@ -10,7 +10,7 @@ function makeMenu()
 				menu("features","Features","features/view.inc.php"),
 				menu("download","Download","download/view.inc.php"),
 				menu("contact","Contact/Impressum","contact/view.inc.php"),
-				menu("http://antargis.berlios.de/wiki","Wiki...","")));
+				menu("http://antargis.berlios.de/wiki","Wiki...",""),
 				menu("http://developer.berlios.de/projects/antargis","Project site...","")));
 }
 
