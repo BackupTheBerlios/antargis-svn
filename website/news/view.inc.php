@@ -9,7 +9,7 @@ function view()
 {
 	$b=h1("News");
 	
-	$b.=news("2005-11-22","Wiki !","A (development-)wiki has been added. <a href='wiki/'>go to wiki</a>");
+	$b.=news("2005-12-07","Wiki !","A (development-)wiki has been added. <a href='wiki/'>go to wiki</a>");
 	
 	$f="<ul>
 		<li>complete rewrite of rendering and switch to 3d !!</li>
