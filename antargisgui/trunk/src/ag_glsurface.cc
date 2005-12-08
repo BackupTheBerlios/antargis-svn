@@ -851,6 +851,8 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
 
 void AGGLScreen::drawRect(const AGRect &pRect,const AGColor &c)
 {
+  glDisable(GL_CULL_FACE);
+
   //  return;
   float x0=pRect.x;
   float y0=h-pRect.y;
@@ -870,6 +872,7 @@ void AGGLScreen::drawRect(const AGRect &pRect,const AGColor &c)
   glVertex2f(x1,y1);
   glVertex2f(x0,y1);
   glEnd();
+  glEnable(GL_CULL_FACE);
 }
 
 AGRect AGGLScreen::getRect() const

@@ -36,11 +36,13 @@ void initFS(const char *argv0)
 
   cdebug("searchpath:");
 
+  PHYSFS_addToSearchPath("./data/",1);
   PHYSFS_addToSearchPath("/usr/share/antargisgui/",1);
   PHYSFS_addToSearchPath("/usr/share/antargisgui/pics",1);
   PHYSFS_addToSearchPath("/usr/local/share/antargisgui/",1);
   PHYSFS_addToSearchPath("/usr/local/share/antargisgui/pics",1);
   PHYSFS_addToSearchPath("./",1);
+  PHYSFS_addToSearchPath("../",1);
 
   char **p=PHYSFS_getSearchPath();
   for(;*p;p++)

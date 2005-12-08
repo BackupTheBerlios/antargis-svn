@@ -137,6 +137,12 @@ void AGSound::checkFinished()
       }
 }
 
+void AGSound::fadeOutMusic(int ms)
+{
+  assert(ms>0);
+  Mix_FadeOutMusic(ms);
+}
+
 
 AGSound *mSoundManager=0;
 AGSound *getSoundManager()

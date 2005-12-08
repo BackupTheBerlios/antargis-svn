@@ -32,6 +32,7 @@ class AGSound:public AGWidget // use widget, though this isn't one, because it p
   bool playMp3(const std::string &pFilename);
   void stopMp3();
   void checkFinished();
+  void fadeOutMusic(int ms);
 
   AGSignal sigMp3Finished;
  private:

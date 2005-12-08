@@ -46,7 +46,7 @@ class AGApplication:public AGMessageObject
 
   virtual void draw();
 
-  void tryQuit();
+  virtual void tryQuit();
 
   long getTicks() const;
   void delay(int ms);
