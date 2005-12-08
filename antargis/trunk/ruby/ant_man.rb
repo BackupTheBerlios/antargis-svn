@@ -36,7 +36,7 @@ class AntNewAngel<AntMyEntity
 	def move(time)
 		p=getPos3D
 		p.y+=time*20
-		setPos3D(p)
+		setPos(p)
 		@age+=time
 		if @age>10 then # 10 seconds old
 			# discard
@@ -170,7 +170,8 @@ class AntNewMan<AntMyEntity
 			return 
 		else
 			@dead=true
-			updateSurface
+			setMesh(Mesh.new(getMeshData("data/models/grave.ant2",1.0),AGVector4.new(0,0,0,0),40))
+			#updateSurface
 			sendAngel
 		end
 	end

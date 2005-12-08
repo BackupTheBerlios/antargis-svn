@@ -33,6 +33,7 @@ class AntHeroMoveJob<AntHLJob
 		@prio=prio
 		@pos=AGVector2.new(pos.x,pos.y)
 		@dist=dist
+		@formatDist=0
 		if getMen.length>0
 			@state="format"
 		else
@@ -54,7 +55,7 @@ class AntHeroMoveJob<AntHLJob
 			when "format"
 				if man.getMode!="formating"
 					f=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
-					man.newMoveJob(0,f,@dist)
+					man.newMoveJob(0,f,@formatDist)
 					man.setMode("formating")
 				else
 					man.setMode("formatted")
@@ -94,47 +95,69 @@ class AntHeroMoveJob<AntHLJob
 		end
 	end
 	
-	def finished
+	def moveFinished
 		@state=="torest" && @states["torest"].length==0
 	end
 	
+	def finished
+		moveFinished
+	end
+		
 end
 
 class AntHeroFightJob<AntHeroMoveJob
+	attr_reader :finished
 	def initialize(hero,target,defend=false)
 		@hero=hero
 		@target=target
-		if defend
-			@moveReady=true
-			puts "DEFENDING:::::::::::::::::::::::::::::::::::"
-		else
-			puts "ATTACKING!!!!!!!!!!!!!"
-			@moveReady=false
-		end
 		@killStarted=false
 		@killJobsGiven=false
 		@defend=defend
-		#@hero.newFightJob(0,target)
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
-		super(hero,0,target.getPos2D,400,(not defend)) # near til 400 pixels
+		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
+		@states["fight"]=[]
+		if @defend
+			@state="fight"
+		end
+		@finished=false
 	end
 	
+	def checkState
+		if @state=="torest" #moveFinished
+			@states["fight"]+=@states["torest"]
+			@states["fight"].uniq!
+			@state="fight"
+		end
+	end
 	
 	def check(man)
-		if not @moveReady then
-			if super(man) then
-				@moveReady=true
-			end
+		checkState
+		case @state
+			when "move","format"
+				if super(man)
+					@states["fight"].push(man)
+				end
+				return false
+			when "fight"
+				if not @killStarted
+					@target.eventGotHLFight(@hero)
+					startFighting
+					@killStarted=true
+				end
+				if @states["fight"].member?(man)
+					return checkFight(man)
+				end
 		end
-		if @moveReady
-			if not @killstart
-				@target.eventGotHLFight(@hero)
-				startFighting
-			end
-			@killStarted=true
-			return checkFight(man)
+	end
+	def defeated(man)
+		@states["fight"].delete(man)
+		puts "FIGHTING:",@states["fight"]
+		puts "FIGHTING:",@states["fight"].length
+		if @states["fight"].length==0
+			@hero.lostFight(@target)
+			puts "LOST!!!!!!!!!!"
+			@finished=true
 		end
-		return false
 	end
 	
 	def startFighting
@@ -146,7 +169,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	def startFightingMan(man)
 		tmen=@target.undefeatedMen
 		# search nearest enemy
-		dist=10000.0
+		dist=10.0
 		mtarget=nil
 		tmen.each{|t|
 			d=(t.getPos2D-man.getPos2D).length
@@ -181,10 +204,12 @@ class AntHeroFightJob<AntHeroMoveJob
 		if umen.length==0 then
 			@hero.lostFight(@target)
 			puts "LOST!!!!!!!!!!"
+			@finished=true
 			return true # end this job
 		elsif tmen.length==0
 			puts "WON!!!!!!!!!!!"
 			@hero.wonFight(@target)
+			@finished=true
 			return true # end this job
 		else # not won yet, so go on
 			checkFightMan(man)
@@ -200,7 +225,6 @@ class AntHeroFightJob<AntHeroMoveJob
 		end
 		return false
 	end
-
 end
 
 class AntHeroRecruitJob<AntHeroMoveJob

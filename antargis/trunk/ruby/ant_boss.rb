@@ -51,7 +51,9 @@ class AntBoss<AntMyEntity
 	def eventNoJob
 		checkHLJobEnd(nil)
 		checkCreateMen
-		
+		if @job && @job.finished
+			@job=nil
+		end
 		if @job==nil
 			noHLJob
 		end
@@ -119,14 +121,15 @@ class AntBoss<AntMyEntity
 	def eventManDefeated(man)
 		puts "SIGDEFEATED"
 		@defeated.push man
+		if @job and @job.class==AntHeroFightJob
+			@job.defeated(man)
+		end
 	end
 	def wonFight(hero)
-		@job=nil
 		resetClientJobs
 	end
 	def lostFight(hero)
 		setOwner(hero)
-		@job=nil
 		resetClientJobs
 	end
 	def resetClientJobs

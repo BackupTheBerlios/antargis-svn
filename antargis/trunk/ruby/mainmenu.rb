@@ -21,19 +21,17 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'antApp.rb'
+require 'ruby/antargislib.rb'
 
-include Libantargisruby
-
-class AntMenuApp <AntApp
-	def initialize()
+class AntMenuApp <AGApplication #GLApp
+	include AGHandler
+	def initialize
 		super()
 		
 		# init screen
-		$screen=AGScreenWidget.new
-		$screen.setName("SCREEN")
-		setMainWidget($screen)
+		#$screen=AGScreenWidget.new
+		#$screen.setName("SCREEN")
+		#setMainWidget($screen)
 	
 		# init menues
 		@menues=[]	
@@ -42,7 +40,7 @@ class AntMenuApp <AntApp
 		setupCampaign
 		setupOptions
 		# hie all menues
-		hideAll
+		#hideAll
 		# and show mainmenu
 		@mainMenu.show
 	end
@@ -53,9 +51,10 @@ class AntMenuApp <AntApp
 	
 	def setupMain()
 		puts "SETUPMAIN"
-		@mainMenu=AGLayout.new($screen,loadFile("mainmenu.xml"))
+		@mainMenu=AGLayout.new($screen,loadFile("data/gui/layout/mainmenu.xml"))
 		@menues.push(@mainMenu)
-		$screen.addChild(@mainMenu)
+		setMainWidget(@mainMenu)
+		#$screen.addChild(@mainMenu)
 		@mainMenu.hide
 		addHandler(@mainMenu.getChild("quit"),:sigClick,:sigQuit)
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:sigCredits)
@@ -66,41 +65,35 @@ class AntMenuApp <AntApp
 	
 	def setupCredits
 		puts "SETUPCREDITS"
-		@creditsMenu=AGLayout.new($screen,loadFile("credits.xml"))
+		@creditsMenu=AGLayout.new($screen,loadFile("data/gui/layout/credits.xml"))
 		@menues.push(@creditsMenu)
-		$screen.addChild(@creditsMenu)
 		addHandler(@creditsMenu.getChild("exit"),:sigClick,:sigExit)
 	end
 	
 	def setupCampaign
 		puts "SETUPCAMPAIGN"
-		@campaignMenu=AGLayout.new($screen,loadFile("campaign.xml"))
+		@campaignMenu=AGLayout.new($screen,loadFile("data/gui/layout/campaign.xml"))
 		@menues.push(@campaignMenu)
-		$screen.addChild(@campaignMenu)
 		addHandler(@campaignMenu.getChild("exit"),:sigClick,:sigExit)
 	end
 	
 	def setupOptions
 		puts "SETUPOPTIONS"
-		@optionsMenu=AGLayout.new($screen,loadFile("options.xml"))
+		@optionsMenu=AGLayout.new($screen,loadFile("data/gui/layout/options.xml"))
 		@menues.push(@optionsMenu)
-		$screen.addChild(@optionsMenu)
 		addHandler(@optionsMenu.getChild("exit"),:sigClick,:sigExit)
 	end
 	
 	# Mainmenu-sigs
 	
 	def sigCredits(eventName,callerName,event,caller)
-		hideAll
-		@creditsMenu.show
+		setMainWidget(@creditsMenu)
 	end
 	def sigCampaign(eventName,callerName,event,caller)
-		hideAll
-		@campaignMenu.show
+		setMainWidget(@campaignMenu)
 	end
 	def sigOptions(eventName,callerName,event,caller)
-		hideAll
-		@optionsMenu.show
+		setMainWidget(@optionsMenu)
 	end
 	def sigQuit(eventName,callerName,event,caller)
 		puts "pCaller:"+callerName
@@ -109,19 +102,21 @@ class AntMenuApp <AntApp
 
 	# all exits to mainmenu	
 	def sigExit(eventName,callerName,event,caller)
-		hideAll
-		@mainMenu.show
+		setMainWidget(@mainMenu)
+	end
+	def eventIdle
+		delay(20)
 	end
 	
 	
 end
 
 
-main=AGMain.new
+if not $main
+	$main=AGMain.new(1024,768,32,false,true)
+end
 
-main.changeRes(1024,768,32,false,true)
-
-app=AntMenuApp.new()
+app=AntMenuApp.new
 
 app.run
 

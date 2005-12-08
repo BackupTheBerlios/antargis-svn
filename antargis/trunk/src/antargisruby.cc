@@ -3972,6 +3972,17 @@ bool SwigDirector_AGApplication::eventIdle() {
 }
 
 
+void SwigDirector_AGApplication::tryQuit() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGApplication::tryQuit();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("tryQuit"), 0, NULL);
+}
+
+
 bool SwigDirector_AGApplication::signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller) {
     std::string temp1 ;
     std::string temp10 ;
@@ -16938,6 +16949,17 @@ bool SwigDirector_GLApp::eventIdle() {
     result = rb_funcall(swig_get_self(), rb_intern("eventIdle"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_GLApp::tryQuit() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGApplication::tryQuit();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("tryQuit"), 0, NULL);
 }
 
 
@@ -33105,10 +33127,13 @@ _wrap_AGApplication_draw(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGApplication_tryQuit(int argc, VALUE *argv, VALUE self) {
     AGApplication *arg1 = (AGApplication *) 0 ;
+    Swig::Director *director = 0;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->tryQuit();
     
     return Qnil;
@@ -39285,6 +39310,21 @@ _wrap_AGSound_checkFinished(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 1);
     (arg1)->checkFinished();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSound_fadeOutMusic(int argc, VALUE *argv, VALUE self) {
+    AGSound *arg1 = (AGSound *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 1);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->fadeOutMusic(arg2);
     
     return Qnil;
 }
@@ -53299,6 +53339,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGSound.klass, "playMp3", VALUEFUNC(_wrap_AGSound_playMp3), -1);
     rb_define_method(cAGSound.klass, "stopMp3", VALUEFUNC(_wrap_AGSound_stopMp3), -1);
     rb_define_method(cAGSound.klass, "checkFinished", VALUEFUNC(_wrap_AGSound_checkFinished), -1);
+    rb_define_method(cAGSound.klass, "fadeOutMusic", VALUEFUNC(_wrap_AGSound_fadeOutMusic), -1);
     rb_define_method(cAGSound.klass, "sigMp3Finished=", VALUEFUNC(_wrap_AGSound_sigMp3Finished_set), -1);
     rb_define_method(cAGSound.klass, "sigMp3Finished", VALUEFUNC(_wrap_AGSound_sigMp3Finished_get), -1);
     cAGSound.mark = 0;

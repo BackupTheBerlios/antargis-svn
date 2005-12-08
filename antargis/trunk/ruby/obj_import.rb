@@ -57,7 +57,11 @@ $fs.each{|face|
 		file.print($vs[mv[0]].pack("fff"))
 		file.print($ns[mv[2]].pack("fff"))
 		file.print([1,1,1].pack("fff"))
-		file.print($ts[mv[1]].pack("ff"))
+		if $ts[mv[1]]
+			file.print($ts[mv[1]].pack("ff"))
+		else
+			file.print([0,0].pack("ff"))
+		end
 	}
 }
 

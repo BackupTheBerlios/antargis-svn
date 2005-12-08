@@ -237,6 +237,7 @@ public:
     virtual void eventChangedRes();
     virtual ~SwigDirector_AGApplication();
     virtual bool eventIdle();
+    virtual void tryQuit();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void draw();
 };
@@ -1227,6 +1228,7 @@ public:
     virtual void eventHover(Scene::PickResult const &pNodes, int button);
     virtual ~SwigDirector_GLApp();
     virtual bool eventIdle();
+    virtual void tryQuit();
     virtual bool signal(std::string const &pName, AGEvent const *m, AGMessageObject *pCaller);
     virtual void draw();
 };
