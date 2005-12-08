@@ -1,12 +1,10 @@
 #!/usr/bin/env ruby
 
-if not $antargislibinit
+if not $antargislibinited
 	
 	$programDir=Dir.pwd+"/ruby"
 	# add programdir to path
 	$:.push($programDir)
-	
-	
 	
 	if File.exists?("src/.libs/libantargis.so")
 		require 'src/.libs/libantargis'
@@ -20,5 +18,9 @@ if not $antargislibinit
 	require 'ag_tools'
 	
 	$antargislibinited=true
-	# search for data-dir
+
+	$main=AGMain.new(1024,768,32,false,true)
+	$main.setCaption("Antargis")
+	$main.setIcon("data/gui/editor/tower1.png")
+
 end

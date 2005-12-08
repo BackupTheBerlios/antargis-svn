@@ -22,17 +22,13 @@
 #!/usr/bin/ruby
 
 require 'ruby/antargislib.rb'
+require "antargis.rb"
 
-class AntMenuApp <AGApplication #GLApp
+class AntMenuApp <AGApplication
 	include AGHandler
 	def initialize
 		super()
 		
-		# init screen
-		#$screen=AGScreenWidget.new
-		#$screen.setName("SCREEN")
-		#setMainWidget($screen)
-	
 		# init menues
 		@menues=[]	
 		setupMain
@@ -43,8 +39,16 @@ class AntMenuApp <AGApplication #GLApp
 		#hideAll
 		# and show mainmenu
 		@mainMenu.show
+		@sound=true
+		addHandler(getSoundManager,:sigMp3Finished,:musicEnd)
 	end
 	
+	def musicEnd
+		if @sound
+			getSoundManager.playMp3("data/music/ant2.ogg")
+		end
+	end
+		
 	def hideAll
 		@menues.each {|x|x.hide}
 	end
@@ -60,6 +64,7 @@ class AntMenuApp <AGApplication #GLApp
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:sigCredits)
 		addHandler(@mainMenu.getChild("campaign"),:sigClick,:sigCampaign)
 		addHandler(@mainMenu.getChild("options"),:sigClick,:sigOptions)
+		
 		puts "SETUPMAIN."
 	end
 	
@@ -75,6 +80,7 @@ class AntMenuApp <AGApplication #GLApp
 		@campaignMenu=AGLayout.new($screen,loadFile("data/gui/layout/campaign.xml"))
 		@menues.push(@campaignMenu)
 		addHandler(@campaignMenu.getChild("exit"),:sigClick,:sigExit)
+		addHandler(@campaignMenu.getChild("startWolf"),:sigClick,:sigMission)
 	end
 	
 	def setupOptions
@@ -99,6 +105,16 @@ class AntMenuApp <AGApplication #GLApp
 		puts "pCaller:"+callerName
 		tryQuit
 	end
+	
+	def sigMission(eventName,callerName,event,caller)
+		puts "caller:"+callerName
+		case callerName
+			when "startWolf"
+				soundOff
+				startGame
+				soundOn
+		end
+	end
 
 	# all exits to mainmenu	
 	def sigExit(eventName,callerName,event,caller)
@@ -107,7 +123,14 @@ class AntMenuApp <AGApplication #GLApp
 	def eventIdle
 		delay(20)
 	end
-	
+	def soundOff
+		@sound=false
+		getSoundManager.fadeOutMusic(1000)
+	end
+	def soundOn
+		@sound=true
+		musicEnd
+	end	
 	
 end
 

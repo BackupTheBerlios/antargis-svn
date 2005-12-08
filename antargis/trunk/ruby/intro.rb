@@ -54,7 +54,7 @@ class IntroApp<AGApplication
 	def tryQuit
 		if @canceled
 			#getSoundManager.stopMp3
-			getSoundManager.fadeOutMusic(1000)
+			#getSoundManager.fadeOutMusic(1000)
 			super
 		else
 			@canceled=true
@@ -97,7 +97,6 @@ class IntroApp<AGApplication
 	
 end
 
-$main=AGMain.new(1024,768,32,false,true)
 app=IntroApp.new
 app.run
 require 'ruby/mainmenu.rb'

@@ -6,23 +6,24 @@
 		<rowsize row="1" fixed="30"/>
 		<rowsize row="2" relative="1"/>
 		<rowsize row="3" fixed="34"/>
-		<button col="0" row="0" caption-image="antargisLogo.png" enabled="false"/>
-		<button col="0" row="1" caption="Options" theme="yellowButton" enabled="false"/>
-		<table col="0" row="2" cols="2" rows="4">
-			<colsize col="0" relative="1"/>
-			<colsize col="1" relative="2"/>
-			<rowsize row="0" relative="1"/>
-			<rowsize row="1" relative="1"/>
-			<rowsize row="2" relative="1"/>
-			<rowsize row="3" fixed="40"/>
-			
-			<button col="0" row="0" caption="Gameoptions"/>
-			<button col="0" row="1" caption="Video"/>
-			<button col="0" row="2" caption="Audio"/>
-			
-			<button col="0" row="3" name="exit" caption="Exit"/>
+		<image col="0" row="0" filename="antargisLogo.png" enabled="false"/>
+		<table col="0" row="2" cols="5" rows="1">
+			<colsize col="0" fixed="10"/>
+			<colsize col="4" fixed="10"/>
+			<colsize col="3" relative="0.6"/>
+			<table col="3" row="0" cols="1" rows="9">
+				<rowsize row="0" fixed="20"/>
+				<rowsize row="2" fixed="20"/>
+				<rowsize row="4" fixed="20"/>
+				<rowsize row="6" fixed="20"/>
+				<button col="0" row="1" caption="Gameoptions" theme="antButton"/>
+				<button col="0" row="3" caption="Video" theme="antButton"/>
+				<button col="0" row="5" caption="Audio" theme="antButton"/>
+				
+				<button col="0" row="7" name="exit" caption="Exit" theme="antButton"/>
+			</table>
 		</table>
 		<!-- <button col="0" row="2" caption-image="MainMenuBg3.png"/>-->
-		<button col="0" row="3" theme="yellowButton" enabled="false" caption="(C) 2005 by David Kamphausen"/>
+		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>
 	</table>
 </layout>

@@ -135,20 +135,17 @@ class AntGameApp <AntRubyView
 	
 end
 
-main=AGMain.new(1024,768,32,false,true)
-
-#main.changeRes(1024,768,32,false,true)
-#main.changeRes(1400,1050,32,true,true)
-main.setCaption("Antargis")
-main.setIcon("data/gui/editor/tower1.png")
-savegame="savegames/savegame0.antlvl"
-if ARGV.length>0
-	savegame="savegames/"+ARGV[0]+".antlvl"
+def startGame(file="savegames/savegame0.antlvl")
+	app=AntGameApp.new(file,1024,768)
+	
+	app.run
 end
-
-app=AntGameApp.new(savegame,1024,768)
-
-app.run
-
+if ENV["_"]=~/antargis.rb/
+	savegame="savegames/savegame0.antlvl"
+	if ARGV.length>0
+		savegame="savegames/"+ARGV[0]+".antlvl"
+	end
+	startGame(savegame)	
+end
 puts "huhu"
 
