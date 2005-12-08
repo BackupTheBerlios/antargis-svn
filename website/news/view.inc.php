@@ -9,6 +9,7 @@ function view()
 {
 	$b=h1("News");
 	
+	$b.=news("2005-12-08","Music","I've made a first attempt to create some music: <a href='http://antargis.berlios.de/wiki/index.php/Music'>music in wiki</a>");
 	$b.=news("2005-12-07","Wiki !","A (development-)wiki has been added. <a href='wiki/'>go to wiki</a>");
 	
 	$f="<ul>
