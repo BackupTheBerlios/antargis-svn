@@ -137,8 +137,9 @@ end
 
 def startGame(file="savegames/savegame0.antlvl")
 	app=AntGameApp.new(file,1024,768)
-	
 	app.run
+	app=nil
+	GC.start
 end
 if ENV["_"]=~/antargis.rb/
 	savegame="savegames/savegame0.antlvl"

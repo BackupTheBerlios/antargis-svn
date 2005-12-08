@@ -81,6 +81,7 @@ class AntMenuApp <AGApplication
 		@menues.push(@campaignMenu)
 		addHandler(@campaignMenu.getChild("exit"),:sigClick,:sigExit)
 		addHandler(@campaignMenu.getChild("startWolf"),:sigClick,:sigMission)
+		#@campaingMenu.addChild(@campBlack=Black.new(@campaignMenu,AGRect.new(0,0,1024,768)))
 	end
 	
 	def setupOptions

@@ -7,7 +7,7 @@ class Black<AGWidget
 	def initialize(p,r)
 		super
 		@r=r
-		@alpha=0.3
+		@alpha=0.0
 	end
 	def setAlpha(a)
 		@alpha=a
@@ -44,11 +44,17 @@ class IntroApp<AGApplication
 		addHandler(getSoundManager,:sigMp3Finished,:musicEnd)
 	end
 	
+	def eventKeyDown(e)
+		super
+		cancel
+	end
+	
+	def cancel
+		@canceled=true
+		@phases=[0.2,0.2,2,10]
+	end	
 	def musicEnd
-			@canceled=true
-			@phases=[0.2,0.2,2,10]
-		#tryQuit
-		#@canceled=true
+		cancel
 	end
 	
 	def tryQuit
@@ -57,8 +63,7 @@ class IntroApp<AGApplication
 			#getSoundManager.fadeOutMusic(1000)
 			super
 		else
-			@canceled=true
-			@phases=[0.2,0.2,2,10]
+			cancel
 		end
 	end
 	
