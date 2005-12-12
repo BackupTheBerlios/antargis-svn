@@ -56,7 +56,9 @@ class AntHero<AntBoss
 	def checkHLJobEnd(man)
 		if @job
 			#puts @job
-			@job.check(man)
+			if man
+				@job.check(man)
+			end
 			if @job.finished then 
 				if @player
 					@player.eventJobFinished(self,@job)
@@ -98,6 +100,15 @@ class AntHero<AntBoss
 			checkHLJobEnd(man)
 		end
 	end	
+	def moveHome(man)	
+		pos=getSitFormation(man)
+		if (man.getPos2D-pos).length>1
+			man.newMoveJob(0,pos,0)
+		else
+			man.newRestJob(2)
+		end
+	end
+	
 	
 	def newHLMoveJob(prio,pos,dist)
 		@job=AntHeroMoveJob.new(self,prio,pos,dist)
@@ -138,7 +149,8 @@ class AntHero<AntBoss
 			puts "ERROR in SitFormation!"
 			puts "MEN:"+@men.to_s
 			puts "man:"+man.to_s
-			exit
+			puts man.class
+			raise "sitting error"
 		end
 	end
 	
@@ -182,6 +194,10 @@ class AntHero<AntBoss
 				@fire=false
 			end
 		end
+	end
+	
+	def eventAttacked(by)
+		newHLFightJob(by)
 	end
 	
 	def assignJob2All

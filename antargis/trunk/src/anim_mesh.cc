@@ -364,7 +364,7 @@ AnimMesh::~AnimMesh()
 
 void AnimMesh::drawDepth()
 {
-  //  return;
+   return;
   drawPrivate(false);
 }
 
@@ -381,14 +381,15 @@ void AnimMesh::drawPick()
 // at first try a simple animation without shaders
 void AnimMesh::drawPrivate(bool textured)
 {
+  bool fast=true;
   if(textured)
     {
       glColor4f(1,1,1,1);
       glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
       glEnable(GL_LIGHTING);
     }
-
-  bool fast=true;
+  else
+    fast=false; // FIXME: add shader for non-textured rendering
 
   glPushMatrix();
 

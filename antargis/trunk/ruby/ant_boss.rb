@@ -43,6 +43,10 @@ class AntBoss<AntMyEntity
 		end
 	end
 	
+	def getJob
+		@job
+	end
+	
 	def menCount
 		@men=@men.uniq
 		return @men.length
@@ -121,21 +125,22 @@ class AntBoss<AntMyEntity
 	def eventManDefeated(man)
 		puts "SIGDEFEATED"
 		@defeated.push man
-		if @job and @job.class==AntHeroFightJob
-			@job.defeated(man)
-		end
+		@job.defeated(man)
 	end
 	def wonFight(hero)
+		@job.won #finished=true
 		resetClientJobs
 	end
 	def lostFight(hero)
+		@job.lost #finished=true
 		setOwner(hero)
 		resetClientJobs
 	end
 	def resetClientJobs
 		@defeated=[]
 		@men.each{|man|
-			man.newRestJob(1)
+			moveHome(man)
+			#man.newRestJob(1)
 		}
 	end
 		

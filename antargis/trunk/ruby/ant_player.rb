@@ -104,7 +104,7 @@ class AntComputerPlayer<AntPlayer
 			housePos=house.getPos2D
 			heroPos=hero.getPos2D
 			diff=housePos-heroPos
-			if diff.norm>150
+			if diff.length2>150
 				hero.newHLMoveJob(0,house.getPos2D,100)
 			else
 				hero.newHLRestJob(20)

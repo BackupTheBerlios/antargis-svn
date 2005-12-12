@@ -107,6 +107,7 @@ end
 
 class AntHeroFightJob<AntHeroMoveJob
 	attr_reader :finished
+	attr_writer :finished
 	def initialize(hero,target,defend=false)
 		@hero=hero
 		@target=target
@@ -120,6 +121,8 @@ class AntHeroFightJob<AntHeroMoveJob
 			@state="fight"
 		end
 		@finished=false
+		puts "NEW:"
+		puts self
 	end
 	
 	def checkState
@@ -127,11 +130,13 @@ class AntHeroFightJob<AntHeroMoveJob
 			@states["fight"]+=@states["torest"]
 			@states["fight"].uniq!
 			@state="fight"
+			@target.eventAttacked(@hero)
 		end
 	end
 	
 	def check(man)
 		checkState
+		puts "CHECKING:"+man.to_s+"   "+self.to_s
 		case @state
 			when "move","format"
 				if super(man)
@@ -146,17 +151,36 @@ class AntHeroFightJob<AntHeroMoveJob
 				end
 				if @states["fight"].member?(man)
 					return checkFight(man)
+				elsif man
+					@hero.moveHome(man)
 				end
 		end
 	end
 	def defeated(man)
+		puts "sigdefeat"
+		puts self
 		@states["fight"].delete(man)
 		puts "FIGHTING:",@states["fight"]
 		puts "FIGHTING:",@states["fight"].length
 		if @states["fight"].length==0
-			@hero.lostFight(@target)
+			lost
+		end
+	end
+	
+	def lost
+		if not @finished
 			puts "LOST!!!!!!!!!!"
 			@finished=true
+			@hero.lostFight(@target)
+			@target.wonFight(@hero)
+		end
+	end
+	def won
+		if not @finished
+			puts "WON!!!!!!!!!!"
+			@finished=true
+			@hero.wonFight(@target)
+			@target.lostFight(@hero)
 		end
 	end
 	
@@ -202,14 +226,10 @@ class AntHeroFightJob<AntHeroMoveJob
 		#puts umen.length
 		#puts tmen.length
 		if umen.length==0 then
-			@hero.lostFight(@target)
-			puts "LOST!!!!!!!!!!"
-			@finished=true
+			lost
 			return true # end this job
 		elsif tmen.length==0
-			puts "WON!!!!!!!!!!!"
-			@hero.wonFight(@target)
-			@finished=true
+			won
 			return true # end this job
 		else # not won yet, so go on
 			checkFightMan(man)

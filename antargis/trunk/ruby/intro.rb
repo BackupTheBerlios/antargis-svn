@@ -22,7 +22,7 @@ class IntroApp<AGApplication
 	def initialize
 		super
 		
-		@pics=["data/gui/rough_lands.png","data/gui/strong_heroes.png","data/gui/logoGold.png","data/gui/your_mission.png","data/gui/unify_the_people.png"]
+		@pics=["data/gui/rough_lands.png","data/gui/strong_heroes.png","data/gui/logoGold.png","data/gui/your_mission.png","data/gui/unify_the_people.png","data/gui/castle_small.png"]
 		
 		@surfaces=@pics.collect{|x|getSurfaceManager.loadSurface(x)}
 		@s=0

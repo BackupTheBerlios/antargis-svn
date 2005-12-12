@@ -220,7 +220,11 @@ class AntInventory<AGButton
 		ok=@resTypes+["name","boss"]
 		if ok.member?(name) then
 			w=toAGEdit(getChild(name))
-			w.setText value.to_i.to_s
+			if value.class==String
+				w.setText value
+			else
+				w.setText value.to_i.to_s
+			end
 		end
 	end
 	def setTitle(t)

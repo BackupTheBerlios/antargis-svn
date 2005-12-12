@@ -39331,6 +39331,60 @@ _wrap_AGSound_fadeOutMusic(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGSound_playWave(int argc, VALUE *argv, VALUE self) {
+    AGSound *arg1 = (AGSound *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 1);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    (arg1)->playWave((std::string const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSound_volumeSound(int argc, VALUE *argv, VALUE self) {
+    AGSound *arg1 = (AGSound *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->volumeSound(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSound_volumeMusic(int argc, VALUE *argv, VALUE self) {
+    AGSound *arg1 = (AGSound *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 1);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->volumeMusic(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGSound_sigMp3Finished_set(int argc, VALUE *argv, VALUE self) {
     AGSound *arg1 = (AGSound *) 0 ;
     AGSignal *arg2 = (AGSignal *) 0 ;
@@ -53340,6 +53394,9 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGSound.klass, "stopMp3", VALUEFUNC(_wrap_AGSound_stopMp3), -1);
     rb_define_method(cAGSound.klass, "checkFinished", VALUEFUNC(_wrap_AGSound_checkFinished), -1);
     rb_define_method(cAGSound.klass, "fadeOutMusic", VALUEFUNC(_wrap_AGSound_fadeOutMusic), -1);
+    rb_define_method(cAGSound.klass, "playWave", VALUEFUNC(_wrap_AGSound_playWave), -1);
+    rb_define_method(cAGSound.klass, "volumeSound", VALUEFUNC(_wrap_AGSound_volumeSound), -1);
+    rb_define_method(cAGSound.klass, "volumeMusic", VALUEFUNC(_wrap_AGSound_volumeMusic), -1);
     rb_define_method(cAGSound.klass, "sigMp3Finished=", VALUEFUNC(_wrap_AGSound_sigMp3Finished_set), -1);
     rb_define_method(cAGSound.klass, "sigMp3Finished", VALUEFUNC(_wrap_AGSound_sigMp3Finished_get), -1);
     cAGSound.mark = 0;

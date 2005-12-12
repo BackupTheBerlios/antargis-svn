@@ -248,6 +248,7 @@ class AntNewMan<AntMyEntity
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_fight.anim")))
 			when "axe"
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_axe.anim")))
+				getSoundManager.playWave("data/sound/tree_chop.wav")
 			when "pick"
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_pick.anim")))
 			when "stand"
