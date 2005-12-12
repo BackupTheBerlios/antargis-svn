@@ -30,7 +30,6 @@ class AntBoss<AntMyEntity
 		super(AGVector2.new(0,0))
 		@men=[]
 		@job=nil
-		@defeated=[]
 		@createMen=0
 	end
 	def loadXML(node)
@@ -98,17 +97,7 @@ class AntBoss<AntMyEntity
 	
 	def removeMan(man)
 		@men.delete(man)
-		if @defeated.include?(man)
-			@defeated.delete(man)
-		end
-	end
-	
- 	def undefeatedMen
-		return @men-@defeated
-	end
-
-	def defeatedMen
-		return @defeated
+		@jobs.delete(man)
 	end
 	
 	def setPlayer(player)
@@ -124,26 +113,10 @@ class AntBoss<AntMyEntity
 	
 	def eventManDefeated(man)
 		puts "SIGDEFEATED"
-		@defeated.push man
-		@job.defeated(man)
+		if @job and @job.class==AntHeroFightJob
+			@job.defeated(man)
+		end
 	end
-	def wonFight(hero)
-		@job.won #finished=true
-		resetClientJobs
-	end
-	def lostFight(hero)
-		@job.lost #finished=true
-		setOwner(hero)
-		resetClientJobs
-	end
-	def resetClientJobs
-		@defeated=[]
-		@men.each{|man|
-			moveHome(man)
-			#man.newRestJob(1)
-		}
-	end
-		
 	def setOwner(owner)
 		@owner=owner
 		puts "RESETING PLAYER:"
@@ -158,6 +131,9 @@ class AntBoss<AntMyEntity
 			man.delJob
 			assignJob(man)
 		}
+	end
+	def killAllJobs
+		@men.each{|man|man.delJob}
 	end
 end
 

@@ -106,7 +106,7 @@ class AntHeroMoveJob<AntHLJob
 end
 
 class AntHeroFightJob<AntHeroMoveJob
-	attr_reader :finished
+	attr_reader :finished, :target
 	attr_writer :finished
 	def initialize(hero,target,defend=false)
 		@hero=hero
@@ -116,17 +116,24 @@ class AntHeroFightJob<AntHeroMoveJob
 		@defend=defend
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
+		@men=hero.getMen
 		@states["fight"]=[]
+		@states["defeated"]=[]
 		if @defend
 			@state="fight"
+			@states["fight"]=@men
 		end
 		@finished=false
 		puts "NEW:"
 		puts self
+		puts "defned:"+defend.to_s
+		puts @state
+		@hero.assignJob2All
 	end
 	
 	def checkState
 		if @state=="torest" #moveFinished
+			puts "changed state:"+self.to_s
 			@states["fight"]+=@states["torest"]
 			@states["fight"].uniq!
 			@state="fight"
@@ -136,7 +143,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def check(man)
 		checkState
-		puts "CHECKING:"+man.to_s+"   "+self.to_s
+		puts "CHECKING:"+man.to_s+"   "+self.to_s+"  "+@state
 		case @state
 			when "move","format"
 				if super(man)
@@ -171,16 +178,23 @@ class AntHeroFightJob<AntHeroMoveJob
 		if not @finished
 			puts "LOST!!!!!!!!!!"
 			@finished=true
-			@hero.lostFight(@target)
-			@target.wonFight(@hero)
+			#@hero.lostFight(@target)
+			#@target.wonFight(@hero)
+			@target.getJob.won
+			@hero.setOwner(@target)
+			@hero.killAllJobs
+			@target.killAllJobs
 		end
 	end
 	def won
 		if not @finished
 			puts "WON!!!!!!!!!!"
 			@finished=true
-			@hero.wonFight(@target)
-			@target.lostFight(@hero)
+			@target.getJob.lost
+			#@hero.wonFight(@target)
+			#@target.lostFight(@hero)
+			@hero.killAllJobs
+			@target.killAllJobs
 		end
 	end
 	
@@ -190,8 +204,15 @@ class AntHeroFightJob<AntHeroMoveJob
 		}
 	end
 	
+	def undefeatedMen
+		@men-@states["defeated"]
+	end
+	
 	def startFightingMan(man)
-		tmen=@target.undefeatedMen
+		if @target.getJob.class!=self.class
+			@target.newHLDefendJob(@hero)
+		end
+		tmen=@target.getJob.undefeatedMen
 		# search nearest enemy
 		dist=10.0
 		mtarget=nil
@@ -207,10 +228,6 @@ class AntHeroFightJob<AntHeroMoveJob
 		end
 	end
 	
-	def target
-		@target
-	end
-	
 	def checkFightMan(man)
 		if man
 			if not man.hasJob
@@ -221,8 +238,8 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def checkFight(man)
 		#puts "CHECKFIGHT"
-		tmen=@target.undefeatedMen
-		umen=@hero.undefeatedMen
+		tmen=@target.getJob.undefeatedMen
+		umen=@hero.getJob.undefeatedMen
 		#puts umen.length
 		#puts tmen.length
 		if umen.length==0 then

@@ -197,7 +197,7 @@ class AntHero<AntBoss
 	end
 	
 	def eventAttacked(by)
-		newHLFightJob(by)
+		newHLDefendJob(by)
 	end
 	
 	def assignJob2All
