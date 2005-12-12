@@ -97,7 +97,9 @@ class AntBoss<AntMyEntity
 	
 	def removeMan(man)
 		@men.delete(man)
-		@jobs.delete(man)
+		if @job
+			@job.delete(man)
+		end
 	end
 	
 	def setPlayer(player)

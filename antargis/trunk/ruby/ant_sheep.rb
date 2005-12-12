@@ -70,7 +70,7 @@ class AntNewSheep<AntMyEntity
 		else
 			newRestJob(3)
 			getFirstMesh.setAnimation("eat")
-			getSoundManager.playWave("data/sound/sheep.wav")
+			playSound("sheep")
 		end
 		@lastBirth+=1
 	end

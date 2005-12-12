@@ -141,7 +141,8 @@ def startGame(file="savegames/savegame0.antlvl")
 	app=nil
 	GC.start
 end
-if ENV["_"]=~/antargis.rb/
+puts ENV["_"]
+if ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/
 	savegame="savegames/savegame0.antlvl"
 	if ARGV.length>0
 		savegame="savegames/"+ARGV[0]+".antlvl"

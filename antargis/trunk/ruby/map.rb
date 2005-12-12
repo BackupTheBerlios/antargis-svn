@@ -30,6 +30,7 @@ class AntRubyMap<AntMap
 		@players=[]
 		#GC.start
 		@lastGC=0
+		$systemTime=0.0
 	end
 	def loadEntity(node)
 		puts node.getName
@@ -123,6 +124,7 @@ class AntRubyMap<AntMap
 	end
 	
 	def move(time)
+		$systemTime+=time
 		super(time)
 		@players.each{|player|
 			player.move(time)

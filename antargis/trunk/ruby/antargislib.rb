@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 
 if not $antargislibinited
+
+	# try suspending arts
+	if File.exists?("/usr/bin/artsshell")
+		File.popen("/usr/bin/artsshell suspend").close
+	end
 	
 	$programDir=Dir.pwd+"/ruby"
 	# add programdir to path

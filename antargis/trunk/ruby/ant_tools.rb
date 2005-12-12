@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require "ant_sound.rb"
+
 def getMeshData(file,zoom,texture="",shadow=true)
 	if not $meshes
 		$meshes={}
@@ -32,4 +34,11 @@ class AGVector3
 	def z=(p)
 		setZ(p)
 	end
+end
+
+
+def displayError(error)
+	getSoundManager.playWave("data/sound/error.wav")
+	playSound(error)
+	puts "ERROR:"+error.to_s
 end

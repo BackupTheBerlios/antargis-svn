@@ -265,24 +265,24 @@ class AntHeroFightJob<AntHeroMoveJob
 end
 
 class AntHeroRecruitJob<AntHeroMoveJob
+	attr_reader :finished
 	def initialize(hero,target,agg)
 		@moveReady=false
 		@target=target
 		@aggression=agg
 		@targetMen=target.menCount
 		@want=@targetMen*agg/3
-		super(hero,0,target.getPos2D,40)
+		@finished=false
+		super(hero,0,target.getPos2D,4)
 	end
 	
-	def check
-		if not @moveReady then
-			if super then
-				@moveReady=true
-			end
-		end
-		if @moveReady
+	def check(man)
+		if @state!="torest"
+			super(man)
+		else
 			# recruit
 			if @want==0 then 
+				@finished=true
 				return true 
 			end
 			man=@target.takeMan
