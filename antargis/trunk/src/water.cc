@@ -25,6 +25,7 @@ void WaterPiece::tick()
 
 void WaterPiece::draw()
 {
+    glColor4f(1.0f,1.0f,1.0f,1.0f);
   shader->enable();
   drawPrivate(true);
   shader->disable();

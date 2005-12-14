@@ -60,6 +60,9 @@ class AnimMeshData:public RubyObject
   std::vector<size_t> indices;
 
   std::vector<Bone*> bones;
+
+  std::map<int,std::string> frameEvents;
+
   float animTime;
 
   AGTexture mTexture;
@@ -74,6 +77,8 @@ class AnimMeshData:public RubyObject
 
   std::string mName;
 
+  bool events;
+
  private:
   void setupJoints();
   void setupArray();
@@ -84,6 +89,8 @@ class AnimMeshData:public RubyObject
   ~AnimMeshData();
 
   AGBox3 bbox() const;
+
+  void setEvents(bool e);
 
   void setTransform(const AGMatrix4 &m);
   const AGMatrix4 &getTransform() const;

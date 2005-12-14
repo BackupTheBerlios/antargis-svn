@@ -142,6 +142,7 @@ class AntRubyMap<AntMap
 		if @lastGC>2000 then
 			GC.enable
 		end
+		ambientSound(time)
 	end
 	
 	def saveXML(n)

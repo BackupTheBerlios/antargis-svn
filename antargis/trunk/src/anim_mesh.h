@@ -11,6 +11,8 @@
 
 #include "anim_mesh_data.h"
 
+class AntEntity;
+
 class AnimMesh:public SceneNode
 {
   AnimMeshData *mData;
@@ -22,6 +24,7 @@ class AnimMesh:public SceneNode
   AGVector4 mPos;
   std::string mAnimName;
   Animation *mAnimation;
+  AntEntity *entity;
 
   std::vector<AGMatrix4> mMatrices;
   std::vector<AGMatrix4> mShaderMatrices;
@@ -49,6 +52,8 @@ class AnimMesh:public SceneNode
   AGBox3 bbox();
 	
   virtual void mark();
+
+  void setEntity(AntEntity *e);
 
  private:
 

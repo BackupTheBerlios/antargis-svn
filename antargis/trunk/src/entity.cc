@@ -23,6 +23,7 @@
 #include "ag_debug.h"
 #include "jobs.h"
 #include "mesh.h"
+#include "anim_mesh.h"
 
 AntEntity::AntEntity(const AGVector3 &p):mPos(p)
 {
@@ -283,6 +284,9 @@ void AntEntity::setMesh(SceneNode *m)
   mMeshPos.clear();
   if(m)
     {
+      AnimMesh *mesh=dynamic_cast<AnimMesh*>(m);
+      if(mesh)
+	mesh->setEntity(this);
       mMeshes.push_back(m);
       addToAllScenes(m);
       updatePos(mPos);
@@ -293,6 +297,9 @@ void AntEntity::addMesh(SceneNode *m,const AGVector3 &v)
 {
   if(m)
     {
+      AnimMesh *mesh=dynamic_cast<AnimMesh*>(m);
+      if(mesh)
+	mesh->setEntity(this);
       mMeshes.push_back(m);
       mMeshPos.insert(std::make_pair(m,v));
       addToAllScenes(m);
@@ -523,4 +530,8 @@ void AntEntity::clearMeshes()
       saveDelete(*i);
     }
   mMeshes.clear();
+}
+
+void AntEntity::animationEvent(const std::string &pName)
+{
 }

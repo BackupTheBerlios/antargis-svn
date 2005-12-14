@@ -84,10 +84,12 @@ void Renderer::initShadowTexture()
   glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,
 		  GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
   
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+  
+  glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
 
   shadowInited=true;
 }
@@ -201,12 +203,13 @@ void Renderer::beginShadowDrawing()
 
   if(usePlainGL)
     {
+            
+#ifndef OLD_SHADOW
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE);
       assertGL;
-      
       //Shadow comparison should be true (ie not in shadow) if r<=texture
       //        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);//GREATER);//GL_GEQUAL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL); // not needed ???
       assertGL;
       
       //Shadow comparison should generate an INTENSITY result
@@ -216,12 +219,45 @@ void Renderer::beginShadowDrawing()
       assertGL;
       glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB, 1.0f-0.3f);//shadowAlpha);
       assertGL;
+      //      glColor4f(0,0,0,0.3);
+      assertGL;
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+      //      glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+#else
+      glEnable(GL_TEXTURE_2D);
+      glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);  //set this to a "depth texture"
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB, 0.5f);      //set the compare fail value
+
+      glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
       
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE_ARB);
+
+
+
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL); // not needed ???
+      assertGL;
+      
+      //Shadow comparison should generate an INTENSITY result
+      glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
+      assertGL;
+      glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_LUMINANCE);//INTENSITY);
+
+
+
+        // Set up the eye plane for projecting the shadow map on the scene
+
+#endif
       //Set alpha test to discard false comparisons
       //  glAlphaFunc(GL_GREATER,0.99f);//LEQUAL, 0.999f);
+      //      glAlphaFunc(GL_GEQUAL, 0.99f);
+      //      glDisable(GL_ALPHA_TEST);
+
       
-      glColor4f(0,0,0,0.3);
-      assertGL;
     }
 
   glActiveTexture(getNormalUnit());

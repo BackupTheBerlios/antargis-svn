@@ -176,6 +176,8 @@ class AntEntity:public RubyObject
 
     void setVisible(bool v);
 
+    virtual void animationEvent(const std::string &pName);
+
   private:
     void init();
     void updatePos(const AGVector3 &p);

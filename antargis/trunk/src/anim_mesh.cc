@@ -6,6 +6,7 @@
 #include "ag_xml.h"
 #include "ag_fs.h"
 #include "ant_config.h"
+#include "entity.h"
 
 #include <math.h>
 
@@ -142,6 +143,8 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
 
   Node &root=doc.root();
 
+  events=false;
+
   animate=true;
   if(root.get("debug")=="true")
     animate=false;
@@ -170,6 +173,14 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
       mAnimations[(*i)->get("name")]=Animation(begin,end,fps);
 
       mAnimations[(*i)->get("name")].loop=((*i)->get("loop")!="false");
+
+      // parse events
+      Node::NodeVector enodes=(*i)->get_children("event");
+      for(Node::NodeVector::iterator j=enodes.begin();j!=enodes.end();j++)
+	{
+	  frameEvents.insert(std::make_pair(toInt((*j)->get("frame")),(*j)->get("name")));
+	}
+      
     }
 
   if(anims.size()==0)
@@ -190,6 +201,12 @@ AGBox3 AnimMeshData::bbox() const
 {
   return mBBox;
 }
+
+void AnimMeshData::setEvents(bool e)
+{
+  events=e;
+}
+
 
 void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::string &tex)
 {
@@ -355,12 +372,21 @@ AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size()+
   assert(mData->mAnimations.size()>0);
   mAnimName=mData->mAnimations.begin()->first;
   mAnimation=&mData->mAnimations.begin()->second;
+
+  entity=0;
+
 }
 
 AnimMesh::~AnimMesh()
 {
   //  CTRACE;
 }
+
+void AnimMesh::setEntity(AntEntity *e)
+{
+  entity=e;
+}
+
 
 void AnimMesh::drawDepth()
 {
@@ -481,18 +507,52 @@ void AnimMesh::advance(float time)
 {
   if(!mData->animate)
     return;
+  float oldTime=mTime;
+
   mTime+=mAnimation->fps*time;
 
   if(mAnimation->len>0)
     {
       if(mAnimation->loop)
 	while(mTime>mAnimation->end)
-	  mTime-=mAnimation->len;
+	  {
+	    mTime-=mAnimation->len;
+	    //	    if(entity)
+	    //	      entity->animationEvent("looped");
+	  }
       else
 	mTime=std::min(mTime,mAnimation->end);
     }
   else
     mTime=mAnimation->begin;
+
+  // check events
+  if(entity && mData->frameEvents.size())
+    {
+      //      cdebug("ARG");
+      //      if(mData->frameEvents.size())
+      //	cdebug(oldTime<<"  "<<mTime);
+      if(oldTime>mTime)
+	{
+	  for(std::map<int,std::string>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
+	    if(i->first>=oldTime || i->first<mTime)
+	      entity->animationEvent(i->second);
+	}
+      else
+	{
+	  for(std::map<int,std::string>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
+	    {
+	      //	      cdebug("i:"<<i->first);
+	      if(i->first>=oldTime && i->first<mTime)
+		{
+		  //		  cdebug("EVENT:"<<i->second);
+		  entity->animationEvent(i->second);
+		}
+	    }
+	}
+
+    }
+
 
   update();
 }
