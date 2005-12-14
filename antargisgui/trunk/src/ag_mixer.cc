@@ -21,22 +21,54 @@
 #include "ag_mixer.h"
 #include "ag_kill.h"
 #include "ag_debug.h"
+#include "ag_mutex.h"
+#include "ag_fs.h"
 
 #include <SDL_mixer.h>
+#include <map>
+#include <set>
 
 Mix_Music *mMusic=0;
 bool mMusicFinished=false;
 bool mMusicInited=false;
 
+const int cSoundChannels=16;
+
+std::map<std::string,Mix_Chunk*> mSounds;
+
+std::set<int> mFreeChannels;
+AGMutex *mSoundMutex;
+
 void musicFinished()
 {
   mMusicFinished=true;
+}
+void channelDone(int channel)
+{
+  mSoundMutex->enter();
+  mFreeChannels.insert(channel);
+  mSoundMutex->leave();
+}
+int getFreeChannel()
+{
+  mSoundMutex->enter();
+  // FIXME: lock
+  int c=-1;
+  if(mFreeChannels.size())
+    {
+      c=*mFreeChannels.begin();
+      mFreeChannels.erase(c);
+    }
+  // FIXME: unlock
+  mSoundMutex->leave();
+  return c;
 }
 
 void initSoundEngine()
 {
   if(!mMusicInited)
     {
+      mSoundMutex=new AGMutex;
       if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
 	printf("Mix_OpenAudio: %s\n", Mix_GetError());
 	exit(2);
@@ -44,6 +76,16 @@ void initSoundEngine()
       mMusic=0;
       
       Mix_HookMusicFinished(musicFinished);
+
+      // enable mixing
+
+
+      Mix_AllocateChannels(cSoundChannels);
+      for(int i=0;i<cSoundChannels;i++)
+	mFreeChannels.insert(i);
+
+
+      Mix_ChannelFinished(channelDone);
       mMusicInited=true;
     }
 }
@@ -59,14 +101,15 @@ void closeSoundEngine()
 	  mMusic=0;
 	}
       Mix_CloseAudio();
+      delete mSoundMutex;
     }
 }
+
 
 AGSound::~AGSound()
 { 
   CTRACE;
   closeSoundEngine();
-  cdebug("ruby-object:"<<mRubyObject);
 }
 
 bool AGSound::playMp3(const std::string &pFilename)
@@ -122,6 +165,7 @@ void AGSound::stopMp3()
 AGSound::AGSound():AGWidget(0,AGRect(0,0,0,0)),sigMp3Finished(this,"sigMp3Finished")
 {
   REGISTER_SINGLETON(this);
+  soundVol=1.0f;
 }
 
 void AGSound::checkFinished()
@@ -142,6 +186,55 @@ void AGSound::fadeOutMusic(int ms)
   assert(ms>0);
   Mix_FadeOutMusic(ms);
 }
+
+void AGSound::volumeSound(float v)
+{
+  initSoundEngine();
+  int mv=((int)(v*MIX_MAX_VOLUME));
+  mv=std::min(std::max(0,mv),MIX_MAX_VOLUME);
+  for(int i=0;i<cSoundChannels;++i)
+    Mix_Volume(i,mv);
+  soundVol=v;
+}
+void AGSound::volumeMusic(float v)
+{
+  initSoundEngine();
+  Mix_VolumeMusic(((int)v*MIX_MAX_VOLUME));
+}
+
+
+
+void AGSound::playWave(const std::string &pFilename,float volume)
+{
+  initSoundEngine();
+  if(volume<0)
+    volume=soundVol;
+  if(mFreeChannels.size()>0)
+    {
+      loadWave(pFilename);
+      int channel=getFreeChannel();
+      if(channel>=0)
+	{
+	  Mix_Chunk *c=mSounds[pFilename];
+	  Mix_Volume(channel,(int)(std::min(1.0f,volume)*MIX_MAX_VOLUME));
+	  Mix_PlayChannel(channel,c,0);
+	}
+    }
+
+}
+void AGSound::loadWave(const std::string &pFilename)
+{
+  std::map<std::string,Mix_Chunk*>::iterator i=mSounds.find(pFilename);
+  if(i!=mSounds.end())
+    return;
+  
+  Mix_Chunk *sample;
+  std::string file=loadFile(pFilename);
+  sample=Mix_LoadWAV_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),1);
+
+  mSounds[pFilename]=sample;
+}
+
 
 
 AGSound *mSoundManager=0;
