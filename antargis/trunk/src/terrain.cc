@@ -17,6 +17,7 @@ TerrainPieceVA::TerrainPieceVA(HeightMap &map,int xs,int ys,int w,int h,const AG
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png"))
 {
   mapChanged();
+  setOrder(TERRAIN_Z);
 }
 
 void TerrainPieceVA::mapChanged()
@@ -100,6 +101,7 @@ AGBox3 TerrainPieceVA::bbox()
 
 void TerrainPieceVA::draw()
 {
+  //  cdebug(getOrder());
   /*  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
   glDepthMask(true);
   glEnable(GL_COLOR_MATERIAL);

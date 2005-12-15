@@ -56,15 +56,15 @@
 			<layout col="0" row="1" filename="data/gui/layout/buttonpanel.xml"/>
 			<antInventory col="0" row="3">
 				<table col="1" row="1" cols="2" rows="8" geometry="(4,4,208,208)">
-					<button theme="antButton" name="invTitle" geometry="(0,0,208,26)" enabled="false"/>
-					<text col="0" row="1" caption="Name" align="left"/>
-					<text col="0" row="2" caption="Boss" align="left"/>
-					<text col="0" row="3" caption="Men" align="left"/>
+					<text name="invTitle" geometry="(0,0,208,26)" enabled="false" align="center" font="invTitle.font"/>
+					<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
+					<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
+					<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
 					
-					<text col="0" row="4" caption="Wood" align="left"/>
-					<text col="0" row="5" caption="Stone" align="left"/>
-					<text col="0" row="6" caption="Food" align="left"/>
-					<text col="0" row="7" caption="Tools" align="left"/>
+					<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
+					<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
+					<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
+					<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
 					
 					
 					<text col="1" row="1" caption="0" align="right" name="name"/>

@@ -7,6 +7,14 @@
 
 class Scene;
 
+#define TERRAIN_Z 1
+#define WATER_Z 2
+#define DECAL_Z 3
+#define MESH_Z 4
+#define TREE_Z 5
+#define PARTICLE_Z 6
+
+
 class SceneNode:public RubyObject
 {
  public:
@@ -41,8 +49,13 @@ class SceneNode:public RubyObject
 
   void setVisible(bool v);
   bool visible() const;
+
+  void setOrder(int o);
+  int getOrder() const;
   
  private:
+  int order;
+
   Scene *scene;
   bool mVisible;
 };

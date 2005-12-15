@@ -26,6 +26,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def initialize(w,h) #p,rect,pos,map)
 		super(w,h) #p,rect,pos,map)
 		$antView=self
+		
 	end
 	def eventMouseButtonUpTest(m)
 		puts "MUH"
@@ -37,7 +38,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			puts o.node.to_s+"  "+o.camDist.to_s+"   "+o.pos.to_s
 		}
 		#getScene.pick(m
-		
 		
 		exit
 		super(m)
@@ -241,7 +241,7 @@ class AntInventory<AGButton
 		end
 	end
 	def setTitle(t)
-		toAGButton(getChild("invTitle")).setCaption(t)
+		toAGEdit(getChild("invTitle")).setText(t)
 	end
 	def inspect(e)
 		setTitle(e.getType)

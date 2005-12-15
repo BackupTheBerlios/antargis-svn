@@ -107,10 +107,11 @@ bool GLApp::eventMouseMotion(const AGEvent *m)
   if(e && omx>=0)
     {
       AGPoint p=e->getMousePosition();
-      mx+=p.x-omx;
-      my+=p.y-omy;
+      AGVector4 cam=scene.getCamera();
+      mx=p.x-omx;
+      my=p.y-omy;
       
-      camera=AGVector4(-mx*0.03,my*0.03,0);
+      camera=cam+AGVector4(-mx*0.03,my*0.03,0);
       scene.setCamera(camera);
       
       omx=p.x;

@@ -99,6 +99,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
 MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
   Uint16 faces,meshes,vertices;
+  overdraw=false;
 
   mTransparent=false;
 
@@ -259,10 +260,16 @@ void MeshData::draw()
   if(mTransparent)
     glDisable(GL_ALPHA_TEST);
   if(overdraw)
-    glDisable(GL_DEPTH_TEST);
+    {
+    glDisable(GL_ALPHA_TEST);
+      glDisable(GL_DEPTH_TEST);
+    }
   mArray.draw();
   if(overdraw)
-    glEnable(GL_DEPTH_TEST);
+    {
+      glEnable(GL_DEPTH_TEST);
+      glEnable(GL_ALPHA_TEST);
+    }
   if(mTransparent)
     glEnable(GL_ALPHA_TEST);
 
@@ -329,6 +336,7 @@ Mesh::Mesh()
 {
   mData=0;
   mRotation=0;
+  setOrder(MESH_Z);
 }
 
 Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
@@ -336,6 +344,7 @@ Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
   mData=&data;
   mPos=pPos;
   mRotation=pRot;
+  setOrder(MESH_Z);
 }
 
 Mesh::~Mesh()

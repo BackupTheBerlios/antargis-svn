@@ -19,6 +19,7 @@ Smoke::Smoke(float f)
   p=AGVector3(0,0,0);
   mTexture=getTextureCache()->get("data/textures/point.png");
   fire=false;
+  setOrder(PARTICLE_Z);
 }
 
 void Smoke::setFire(bool f)

@@ -21,6 +21,8 @@ if not $antargislibinited
 	include Libantargis
 	
 	require 'ag_tools'
+	require 'ant_tools'
+	require 'ant_debug.rb'
 	
 	$antargislibinited=true
 

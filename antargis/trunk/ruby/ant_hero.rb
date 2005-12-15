@@ -56,7 +56,6 @@ class AntHero<AntBoss
 	
 	def checkHLJobEnd(man)
 		if @job
-			puts @job
 			if man
 				@job.check(man)
 			end
@@ -64,8 +63,6 @@ class AntHero<AntBoss
 				if @player
 					@player.eventJobFinished(self,@job)
 				end
-				puts "FINISHED"
-				puts @job.class
 				@job=nil 
 			end
 		end
@@ -83,15 +80,15 @@ class AntHero<AntBoss
 	
 	def startFireSound
 		if not @fireSound
-			puts "STARTING FIRE"
+			dputs "STARTING FIRE"
 			@fireSound=getSoundManager.loopPlay("data/sound/fire.wav",0.4)
-			puts @fireSound
+			dputs @fireSound
 		end
 	end	
 	def stopFireSound
 		if @fireSound
-			puts "STOPPED"
-			puts @job
+			dputs "STOPPED"
+			dputs @job
 			if @job.class==AntHeroRestJob
 				#raise "bla"
 			end
@@ -171,10 +168,10 @@ class AntHero<AntBoss
 			radius=1
 			return AGVector2.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
 		else
-			puts "ERROR in SitFormation!"
-			puts "MEN:"+@men.to_s
-			puts "man:"+man.to_s
-			puts man.class
+			dputs "ERROR in SitFormation!"
+			dputs "MEN:"+@men.to_s
+			dputs "man:"+man.to_s
+			dputs man.class
 			raise "sitting error"
 		end
 	end
@@ -199,9 +196,9 @@ class AntHero<AntBoss
 			
 			return l+c
 		else
-			puts @men.length
-			puts man
-			puts "ERROR in WalkFormation!"
+			dputs @men.length
+			dputs man
+			dputs "ERROR in WalkFormation!"
 			exit
 		end
 	end
@@ -229,7 +226,7 @@ class AntHero<AntBoss
 	
 	def assignJob2All
 		super
-		puts "ASSIGNJOB"
+		dputs "ASSIGNJOB"
 		setFire(false)
 	end
 

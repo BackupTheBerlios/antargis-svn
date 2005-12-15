@@ -374,6 +374,7 @@ AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size()+
   mAnimation=&mData->mAnimations.begin()->second;
 
   entity=0;
+  setOrder(MESH_Z);
 
 }
 

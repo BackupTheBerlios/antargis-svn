@@ -59,7 +59,7 @@ class AntNewMan<AntMyEntity
 		@dead=false
 		@fighting=false
 		@bossName=""
-		puts "NEWMAN"
+		dputs "NEWMAN"
 		setMeshState("walk")
 		@mode="wait"
 	end
@@ -108,7 +108,7 @@ class AntNewMan<AntMyEntity
 			if house
 				houseName=house.getName
 				if houseName=="" then
-					puts "ERROR House has no name!"
+					dputs "ERROR House has no name!"
 					exit
 				end
 				@bossName=houseName
@@ -125,8 +125,8 @@ class AntNewMan<AntMyEntity
 			end
 			@boss=boss
 			if not @signed then
-				puts @bossName
-				puts boss
+				dputs @bossName
+				dputs boss
 				boss.signUp(self)
 				@signed=true
 			end
@@ -212,17 +212,17 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def setGoAnim
-		#puts "SET STAND..."
+		#dputs "SET STAND..."
 		#getFirstMesh.setAnimation("go")
 		setMeshState("walk")
-		#puts "OK"
+		#dputs "OK"
 	end
 	
 	def setStandAnim
-		#puts "SET STAND..."
+		#dputs "SET STAND..."
 		#getFirstMesh.setAnimation("stand")
 		setMeshState("stand")
-		#puts "OK"
+		#dputs "OK"
 	end
 	
 	def setFighting(v)
@@ -297,7 +297,6 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def animationEvent(name)
-		puts "ANIM_EVENT:"+name
 		case name
 			when "hackaxe","pick","sword","ugh"
 				playSound(name)

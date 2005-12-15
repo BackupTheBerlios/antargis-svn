@@ -40,5 +40,5 @@ end
 def displayError(error)
 	getSoundManager.playWave("data/sound/error.wav")
 	playSound(error)
-	puts "ERROR:"+error.to_s
+	dputs "ERROR:"+error.to_s
 end

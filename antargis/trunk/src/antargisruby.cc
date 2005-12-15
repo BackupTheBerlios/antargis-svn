@@ -29395,6 +29395,37 @@ _wrap_AGFont_getName(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGFont_setEmbossed(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setEmbossed(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGFont_getEmbossed(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    result = (bool)((AGFont const *)arg1)->getEmbossed();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGFont_getWidth(int argc, VALUE *argv, VALUE self) {
     AGFont *arg1 = (AGFont *) 0 ;
     std::string *arg2 = 0 ;
@@ -42197,6 +42228,37 @@ _wrap_SceneNode_visible(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_SceneNode_setOrder(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 0);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->setOrder(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_SceneNode_getOrder(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 0);
+    result = (int)((SceneNode const *)arg1)->getOrder();
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_disown_SceneNode(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
     
@@ -43878,6 +43940,26 @@ _wrap_Scene_setCamera(int argc, VALUE *argv, VALUE self) {
     (arg1)->setCamera(arg2);
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_Scene_getCamera(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    AGVector4 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 0);
+    result = ((Scene const *)arg1)->getCamera();
+    
+    {
+        AGVector4 * resultptr;
+        resultptr = new AGVector4((AGVector4 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
+    }
+    return vresult;
 }
 
 
@@ -50741,6 +50823,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGFont.klass, "getStyle", VALUEFUNC(_wrap_AGFont_getStyle), -1);
     rb_define_method(cAGFont.klass, "setName", VALUEFUNC(_wrap_AGFont_setName), -1);
     rb_define_method(cAGFont.klass, "getName", VALUEFUNC(_wrap_AGFont_getName), -1);
+    rb_define_method(cAGFont.klass, "setEmbossed", VALUEFUNC(_wrap_AGFont_setEmbossed), -1);
+    rb_define_method(cAGFont.klass, "getEmbossed", VALUEFUNC(_wrap_AGFont_getEmbossed), -1);
     rb_define_method(cAGFont.klass, "getWidth", VALUEFUNC(_wrap_AGFont_getWidth), -1);
     rb_define_method(cAGFont.klass, "getHeight", VALUEFUNC(_wrap_AGFont_getHeight), -1);
     cAGFont.mark = 0;
@@ -51661,6 +51745,12 @@ SWIGEXPORT void Init_libantargis(void) {
     cAntMap.mark = (void (*)(void *)) general_markfunc;
     cAntMap.destroy = (void (*)(void *)) free_AntMap;
     rb_define_module_function(mLibantargis, "getMap", VALUEFUNC(_wrap_getMap), -1);
+    rb_define_const(mLibantargis,"TERRAIN_Z", INT2NUM(1));
+    rb_define_const(mLibantargis,"WATER_Z", INT2NUM(2));
+    rb_define_const(mLibantargis,"DECAL_Z", INT2NUM(3));
+    rb_define_const(mLibantargis,"MESH_Z", INT2NUM(4));
+    rb_define_const(mLibantargis,"TREE_Z", INT2NUM(5));
+    rb_define_const(mLibantargis,"PARTICLE_Z", INT2NUM(6));
     rb_define_module_function(mLibantargis, "disown_SceneNode", VALUEFUNC(_wrap_disown_SceneNode), -1);
     
     cSceneNode.klass = rb_define_class_under(mLibantargis, "SceneNode", rb_cObject);
@@ -51686,6 +51776,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cSceneNode.klass, "getScene", VALUEFUNC(_wrap_SceneNode_getScene), -1);
     rb_define_method(cSceneNode.klass, "setVisible", VALUEFUNC(_wrap_SceneNode_setVisible), -1);
     rb_define_method(cSceneNode.klass, "visible", VALUEFUNC(_wrap_SceneNode_visible), -1);
+    rb_define_method(cSceneNode.klass, "setOrder", VALUEFUNC(_wrap_SceneNode_setOrder), -1);
+    rb_define_method(cSceneNode.klass, "getOrder", VALUEFUNC(_wrap_SceneNode_getOrder), -1);
     cSceneNode.mark = (void (*)(void *)) general_markfunc;
     cSceneNode.destroy = (void (*)(void *)) free_SceneNode;
     rb_define_module_function(mLibantargis, "disown_Mesh", VALUEFUNC(_wrap_disown_Mesh), -1);
@@ -51790,6 +51882,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "removeNode", VALUEFUNC(_wrap_Scene_removeNode), -1);
     rb_define_method(cScene.klass, "clear", VALUEFUNC(_wrap_Scene_clear), -1);
     rb_define_method(cScene.klass, "setCamera", VALUEFUNC(_wrap_Scene_setCamera), -1);
+    rb_define_method(cScene.klass, "getCamera", VALUEFUNC(_wrap_Scene_getCamera), -1);
     rb_define_method(cScene.klass, "advance", VALUEFUNC(_wrap_Scene_advance), -1);
     rb_define_method(cScene.klass, "pick", VALUEFUNC(_wrap_Scene_pick), -1);
     rb_define_method(cScene.klass, "mapChanged", VALUEFUNC(_wrap_Scene_mapChanged), -1);

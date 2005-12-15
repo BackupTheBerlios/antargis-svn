@@ -60,6 +60,7 @@ class Scene:public RubyObject
 
   // (mx,my,0)
   void setCamera(AGVector4 v);
+  AGVector4 getCamera() const;
   void advance(float time);
 
   PickResult pick(float x,float y,float w,float h);

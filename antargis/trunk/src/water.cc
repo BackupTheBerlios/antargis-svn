@@ -14,7 +14,7 @@ WaterPiece::WaterPiece(const AGVector4 &pos):mPos(pos)
 }
 WaterPiece::~WaterPiece()
 {
-  CTRACE;
+  //  CTRACE;
   delete shader;
   shader=0;
 }
@@ -146,6 +146,7 @@ WaterPiece::WaterPiece(HeightMap &map,int x,int y,int w,int h,const AGVector4 &p
     shader=new AntWaterShader;
 
   mapChanged();
+  setOrder(WATER_Z);
 }
 
 

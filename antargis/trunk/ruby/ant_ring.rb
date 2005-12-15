@@ -14,15 +14,11 @@ def getRingData
 	mv2=MeshVertex.new
 	mv3=MeshVertex.new
 	
-	c=AGVector4.new(1,0.3,0.3,1) #0.9)
+	c=AGVector4.new(0.6,0.7,1,1) #0.9)
 	mv0.c=c
 	mv1.c=c
 	mv2.c=c
 	mv3.c=c
-	#mv0.c=AGVector4.new(1,1,1,1)
-	#mv1.c=AGVector4.new(1,1,1,1)
-	#mv2.c=AGVector4.new(1,1,1,1)
-	#mv3.c=AGVector4.new(1,1,1,1)
 	
 	mv0.t=AGVector2.new(0,0)
 	mv1.t=AGVector2.new(1,0)
@@ -50,31 +46,16 @@ def getRingData
 	opt.add(mv2)
 	opt.add(mv3)
 	
-# 	turn=AGMatrix4.new(Math::PI/3,AGVector3.new(0,0,1))
-# 	
-# 	mv0.v=turn*mv0.v
-# 	mv1.v=turn*mv1.v
-# 	mv2.v=turn*mv2.v
-# 	mv3.v=turn*mv3.v
-# 	
-# 	opt.add(mv0)
-# 	opt.add(mv1)
-# 	opt.add(mv2)
-# 	
-# 	opt.add(mv0)
-# 	opt.add(mv2)
-# 	opt.add(mv3)
-	
-	#$grassdata[size]=MeshData.new(opt.getArray,"data/textures/models/high_grass.png",false)
 	$ringdata=MeshData.new(opt.getArray,"data/textures/ring.png",false)
-	$ringdata.setTransparent(true)
-	#$ringdata.setOverdraw(true)
+	$ringdata.setOverdraw(true)
 	
 	return $ringdata
 end
 
 def makeRingMesh
-	return Mesh.new(getRingData,AGVector4.new(0,0,0,0),0)
+	mesh=Mesh.new(getRingData,AGVector4.new(0,0,0,0),0)
+	mesh.setOrder(DECAL_Z)
+	return mesh
 end
 
 

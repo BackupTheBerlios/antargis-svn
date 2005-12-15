@@ -36,6 +36,17 @@ public:
   }
 };
 
+class SortOrder
+{
+public:
+  SortOrder(){}
+
+  bool operator()(const SceneNode *n1,const SceneNode *n2)
+  {
+    return n1->getOrder()<n2->getOrder();
+  }
+};
+
 
 Scene::Scene(int w,int h)
 {
@@ -316,7 +327,9 @@ void Scene::drawScene()
 
   Nodes sorted=mNodes;
 
-  //  sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
+#ifndef OLD_SORTING
+  //sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
+  sort(sorted.begin(),sorted.end(),SortOrder());
 
   for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
     {
@@ -330,8 +343,12 @@ void Scene::drawScene()
 	    }
 	}
     }
+  
   //  glDisable(GL_ALPHA_TEST);
   //  glAlphaFunc(GL_ALWAYS,1);
+
+  sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
+
   for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
     {
       if((*i)->transparent())
@@ -346,6 +363,25 @@ void Scene::drawScene()
     }
   //  if(mNodes.size())
     //    cdebug("drawn:"<<(float(drawn)/mNodes.size()*100)<<"%");
+  
+
+
+#else
+  sort(sorted.begin(),sorted.end(),SortOrder());
+
+  for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
+    {
+      if((*i)->visible() && (*i)->bbox().collides(frustum))
+	{
+	  (*i)->draw();
+	  mTriangles+=(*i)->getTriangles();
+	  drawn++;
+	}
+      
+    }
+
+
+#endif
   
 }
 void Scene::drawShadow()
@@ -574,6 +610,10 @@ AGMatrix4 Scene::getLightProj() const
   return lightProjectionMatrix;
 }
 
+AGVector4 Scene::getCamera() const
+{
+  return scenePosition;
+}
 
 void addToAllScenes(SceneNode *n)
 {

@@ -56,6 +56,14 @@ class AntGameApp <AntRubyView
 	end
 	
 	def setupHeroDisplay
+		#getScene(
+	#return
+		heroes=$map.getOwnHeroes
+		if heroes.length>0
+			p=heroes[0].getPos2D
+			getScene.setCamera(AGVector4.new(p.x,p.y,0))
+		end
+		return
 		all=getMap.getAllEntitiesV
 		all.each{|ep|
 			e=ep.get

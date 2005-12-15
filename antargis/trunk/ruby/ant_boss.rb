@@ -35,7 +35,7 @@ class AntBoss<AntMyEntity
 	def loadXML(node)
 		super(node)
 		if node.get("men")!="" then
-			puts "LOAD:CREATING MEN:"+node.get("men")
+			dputs "LOAD:CREATING MEN:"+node.get("men")
 			if node.get("men")!=""
 				@createMen=node.get("men").to_i
 			end
@@ -114,14 +114,14 @@ class AntBoss<AntMyEntity
 	end
 	
 	def eventManDefeated(man)
-		puts "SIGDEFEATED"
+		dputs "SIGDEFEATED"
 		if @job and @job.class==AntHeroFightJob
 			@job.defeated(man)
 		end
 	end
 	def setOwner(owner)
 		@owner=owner
-		puts "RESETING PLAYER:"
+		dputs "RESETING PLAYER:"
 		@player=owner.getPlayer
 	end
 	def getOwner

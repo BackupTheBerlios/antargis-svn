@@ -7,6 +7,7 @@ SceneNode::SceneNode()
   mRubyObject=false;
   scene=0;
   mVisible=true;
+  order=1;
 }
 
 SceneNode::~SceneNode()
@@ -93,4 +94,13 @@ void SceneNode::setVisible(bool v)
 bool SceneNode::visible() const
 {
   return mVisible;
+}
+
+void SceneNode::setOrder(int o)
+{
+  order=o;
+}
+int SceneNode::getOrder() const
+{
+  return order;
 }

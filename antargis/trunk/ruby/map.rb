@@ -33,7 +33,7 @@ class AntRubyMap<AntMap
 		$systemTime=0.0
 	end
 	def loadEntity(node)
-		puts node.getName
+		dputs node.getName
 		case node.getName
 			when "antFarm"
 				e=AntFarm.new
@@ -145,6 +145,11 @@ class AntRubyMap<AntMap
 		ambientSound(time)
 	end
 	
+	def loadXML(n)
+		super(n)
+		@players.each{|p|p.move(0)}
+	end
+	
 	def saveXML(n)
 		super(n)
 		@players.each{|player|
@@ -164,6 +169,26 @@ class AntRubyMap<AntMap
 	end
 	
 	def setLight(e)
+	end
+	
+	def getOwnHeroes()
+		ents=getAllEntitiesV
+		ret=[]
+		ents.each{|eptr|
+			ent=eptr.get
+			puts ent
+			if ent.class==AntHero
+				p=ent.getPlayer
+				puts "player:",p,p.class
+				if p
+					if p.class==AntHumanPlayer
+						ret.push(ent)
+					end
+				end
+			end
+		}
+		#exit
+		return ret
 	end
 end
 

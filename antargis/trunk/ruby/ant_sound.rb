@@ -16,7 +16,7 @@ def playSound(name,minDiff=0.5)
 		"mylord"=>"data/sound/yes_mylord.wav",
 		}
 	#puts "PLA"
-	puts $soundLastCall.keys
+	#dputs $soundLastCall.keys
 	if not $soundLastCall.keys.member?(name)
 		$soundLastCall[name]=-minDiff-1
 		#puts "RESET:"+$soundLastCall[name].to_s
@@ -25,7 +25,7 @@ def playSound(name,minDiff=0.5)
 	if not s
 		s=name
 	end
-	puts $soundLastCall[name].to_s+"   "+$systemTime.to_s
+	#dputs $soundLastCall[name].to_s+"   "+$systemTime.to_s
 	if s && $systemTime-$soundLastCall[name]>minDiff # at a second ago
 		getSoundManager.volumeSound(0.4)
 		#puts "PLAY:"+s

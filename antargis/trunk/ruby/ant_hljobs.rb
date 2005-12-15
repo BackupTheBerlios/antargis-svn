@@ -24,6 +24,11 @@
 require 'ents.rb'
 
 class AntHLJob
+	def undefeatedMen
+		@hero.getMen
+	end
+	def delete(man)
+	end
 end
 
 class AntHeroMoveJob<AntHLJob
@@ -124,16 +129,22 @@ class AntHeroFightJob<AntHeroMoveJob
 			@states["fight"]=@men
 		end
 		@finished=false
-		puts "NEW:"
-		puts self
-		puts "defned:"+defend.to_s
-		puts @state
+		dputs "NEW:"
+		dputs self
+		dputs "defned:"+defend.to_s
+		dputs @state
 		@hero.assignJob2All
+	end
+	
+	def delete(man)
+		@states.each_key{|k|
+			@states[k].delete(man)
+		}
 	end
 	
 	def checkState
 		if @state=="torest" #moveFinished
-			puts "changed state:"+self.to_s
+			dputs "changed state:"+self.to_s
 			@states["fight"]+=@states["torest"]
 			@states["fight"].uniq!
 			@state="fight"
@@ -143,7 +154,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def check(man)
 		checkState
-		puts "CHECKING:"+man.to_s+"   "+self.to_s+"  "+@state
+		dputs "CHECKING:"+man.to_s+"   "+self.to_s+"  "+@state
 		case @state
 			when "move","format"
 				if super(man)
@@ -165,11 +176,11 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	def defeated(man)
 		playSound("ugh_end")
-		puts "sigdefeat"
-		puts self
+		dputs "sigdefeat"
+		dputs self
 		@states["fight"].delete(man)
-		puts "FIGHTING:",@states["fight"]
-		puts "FIGHTING:",@states["fight"].length
+		dputs "FIGHTING:",@states["fight"]
+		dputs "FIGHTING:",@states["fight"].length
 		if @states["fight"].length==0
 			lost
 		end
@@ -177,7 +188,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def lost
 		if not @finished
-			puts "LOST!!!!!!!!!!"
+			dputs "LOST!!!!!!!!!!"
 			@finished=true
 			#@hero.lostFight(@target)
 			#@target.wonFight(@hero)
@@ -189,7 +200,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	def won
 		if not @finished
-			puts "WON!!!!!!!!!!"
+			dputs "WON!!!!!!!!!!"
 			playSound("won")
 			@finished=true
 			@target.getJob.lost
