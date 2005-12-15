@@ -35,14 +35,17 @@ class AGSound:public AGWidget // use widget, though this isn't one, because it p
   void fadeOutMusic(int ms);
 
   void playWave(const std::string &pFilename,float v=-1.0);
+  int loopPlay(const std::string &pFilename,float v=-1.0);
+  void stopChannel(int i,int ms=200);
 
   void volumeSound(float v); // 0 to 1
   void volumeMusic(float v); // 0 to 1
 
+  void loadWave(const std::string &pFilename);
+
+
   AGSignal sigMp3Finished;
  private:
-
-  void loadWave(const std::string &pFilename);
 
   friend AGSound *getSoundManager();
   float soundVol;

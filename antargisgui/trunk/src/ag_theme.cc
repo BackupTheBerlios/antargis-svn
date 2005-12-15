@@ -159,6 +159,10 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	    {
 	      AGFont f((*i)->get("file"),toInt((*i)->get("size")));
 	      f.setColor(AGColor((*i)->get("color")));
+	      f.setEmbossed((*i)->get("embossed")=="true");
+	      if((*i)->get("style")=="bold")
+		f.setStyle(AGFont::BOLD);
+
 	      t.setFont(sname,f);
 	      cdebug("setting font:"<<sname);
 	    }

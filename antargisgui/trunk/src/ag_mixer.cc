@@ -222,6 +222,34 @@ void AGSound::playWave(const std::string &pFilename,float volume)
     }
 
 }
+
+
+int AGSound::loopPlay(const std::string &pFilename,float volume)
+{
+  initSoundEngine();
+  if(volume<0)
+    volume=soundVol;
+  if(mFreeChannels.size()>0)
+    {
+      loadWave(pFilename);
+      int channel=getFreeChannel();
+      if(channel>=0)
+	{
+	  Mix_Chunk *c=mSounds[pFilename];
+	  Mix_Volume(channel,(int)(std::min(1.0f,volume)*MIX_MAX_VOLUME));
+	  Mix_PlayChannel(channel,c,-1);
+	}
+      return channel;
+    }
+  return -1;
+}
+void AGSound::stopChannel(int i,int ms)
+{
+  if(i>=0 && i<cSoundChannels)
+    Mix_FadeOutChannel(i,ms);
+  channelDone(i);
+}
+
 void AGSound::loadWave(const std::string &pFilename)
 {
   std::map<std::string,Mix_Chunk*>::iterator i=mSounds.find(pFilename);

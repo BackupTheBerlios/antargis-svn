@@ -92,6 +92,15 @@ int AGFont::getHeight(const std::string &mText) const
   return AGFontEngine::getHeight(*this,mText);
 }
 
+void AGFont::setEmbossed(bool e)
+{
+  embossed=e;
+}
+bool AGFont::getEmbossed() const
+{
+  return embossed;
+}
+
 
 bool operator<(const AGFont&f1,const AGFont &f2)
 {
@@ -99,5 +108,7 @@ bool operator<(const AGFont&f1,const AGFont &f2)
     (f1.mStyle==f2.mStyle && (f1.mName<f2.mName || 
 			      (f1.mName==f2.mName && (f1.mSize<f2.mSize ||
 						      (f1.mSize==f2.mSize && (f1.mAlpha<f2.mAlpha ||
-									      (f1.mAlpha==f2.mAlpha && f1.mColor<f2.mColor)))))));
+									      (f1.mAlpha==f2.mAlpha && 
+									       (f1.mColor<f2.mColor ||
+										(f1.mColor==f2.mColor && f1.embossed<f2.embossed)))))))));
 }

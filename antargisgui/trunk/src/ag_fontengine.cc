@@ -82,12 +82,12 @@ TTF_Font *getFont(std::string s,int i)
 	  //  mFont=TTF_OpenFont((GRAPHICS_DIR + pName).c_str(),pSize);
 	  if(!mFont)
 	    mFont=TTF_OpenFont(("c:\\Windows\\Fonts\\"+ s).c_str(),i);
-    if(!mFont)
-              std::cerr<<s<<" Font not found!"<<std::endl;
+	  if(!mFont)
+	    std::cerr<<s<<" Font not found!"<<std::endl;
 	}
-	cdebug(mFont);
+      //	cdebug(mFont);
       //      std::cerr<<SDL_GetError()<<std::endl;
-
+      
       int renderstyle=TTF_STYLE_NORMAL;
       
       if(mFont)
@@ -111,62 +111,124 @@ AGFontEngine::~AGFontEngine()
 
 AGFontEngine myFontEngine;
 
-/*
-bool AGFontEngine::renderText (AGSurface &pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
-{
-  TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
-
-  if(!f)
-    return false;
-
-  if(pText.length()==0)
-    return false;
-
-  SDL_Surface *s=TTF_RenderText_Solid(f,pText.c_str(),pFont.getColor());//.sdlColor());
-
-  SDL_Rect sr,dr;
-  sr.x=sr.y=0;
-  dr.x=BaseLineX;
-  dr.y=BaseLineY;
-  dr.w=sr.w=s->w;
-  dr.h=sr.h=s->h;
-
-  //  pSurface
-  SDL_SetClipRect(pSurface.surface(),const_cast<AGRect*>(&pClipRect));
-  //  cdebug(pClipRect.toString());
-  SDL_BlitSurface(s,&sr,pSurface.surface(),&dr);
-  SDL_SetClipRect(pSurface.surface(),0);
-  //    SDL_SetClipRect(s,const_cast<AGRect*>(&pClipRect));
-    //  sge_BlitSurface(s,&sr,pSurface.surface(),&dr);
-
-  return true;
-}
-*/
-
-
-#define FONT_CACHE
-
-#ifdef FONT_CACHE
 std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
-#endif
+
+void embossSurface(AGSurface &s,float depth=1.0f)
+{
+  float *a=new float[s.width()*s.height()];
+  float *b=new float[s.width()*s.height()];
+
+  int w=s.width();
+  for(int x=0;x<s.width();x++)
+    for(int y=0;y<s.height();y++)
+      {
+	a[y*w+x]=s.getPixel(x,y).a/float(0xFF);
+      }
+
+  float blurvalue=12;
+  // twice bluring
+  for(int t=0;t<1;t++)
+    {
+      for(int x=0;x<s.width();x++)
+	for(int y=0;y<s.height();y++)
+	  {
+	    float a0,a1,a2,a3,a4;
+	    a0=a1=a2=a3=a4=0;
+	    if(y>0)
+	      a0=a[(y-1)*w+x];
+	    if(y<s.height()-1)
+	      a1=a[(y+1)*w+x];
+	    if(x>0)
+	      a2=a[y*w+x-1];
+	    if(x<s.width()-1)
+	      a3=a[y*w+x+1];
+	    a4=a[y*w+x];
+
+	    // laplacian blur
+	    b[y*w+x]=(a0+a1+a2+a3 + blurvalue*a4)/(blurvalue+4);
+	  }
+      // copying
+      for(int x=0;x<s.width()*s.height();x++)
+	a[x]=b[x];
+    }
+  //     ( 0,-1,0)
+  // now (-1, 0,1) edge detection
+  //     ( 0, 1,0)
+
+  for(int x=0;x<s.width();x++)
+    for(int y=0;y<s.height();y++)
+      {
+	float a0,a1,a2,a3;
+	a0=a1=a2=a3=0;
+	if(y>0)
+	  a0=a[(y-1)*w+x];
+	if(y<s.height()-1)
+	  a1=a[(y+1)*w+x];
+	if(x>0)
+	  a2=a[y*w+x-1];
+	if(x<s.width()-1)
+	  a3=a[y*w+x+1];
+	
+	b[y*w+x]=(-a0+a1-a2+a3)*depth;
+      }
+  
+  // now apply values
+  
+  for(int x=0;x<s.width();x++)
+    for(int y=0;y<s.height();y++)
+      {
+	float v=b[y*w+x];
+	float va=a[y*w+x];
+
+	v/=3.0;
+	//	cdebug("v:"<<v);
+
+	AGColor c=s.getPixel(x,y);
+
+	//	if(va>0.01)
+	  {
+	    AGColor c=s.getPixel(x,y);
+	    int olda=c.a;
+	    if (v>0)
+	      {
+		c=AGColor(0xFF,0xFF,0xFF,c.a)*v + c*(1-v);
+	      }
+	    else
+	      {
+		v*=-1;
+		c=AGColor(0,0,0,c.a)*v + c*(1-v);
+	      }
+	    //	c.light((int)(v*0xFF));
+
+	    //	    c.r=c.g=c.b=va*0xFF;
+	    c.a=olda;
+	    s.putPixel(x,y,c);
+	  }
+      }
+  delete [] a;
+  delete [] b;
+
+}
 
 bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
 {
   if(pText.length()==0)
     return true;
-  //     cdebug(0);
-#ifdef FONT_CACHE
+
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
-#endif
-      //      TRACE;
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       
       if(!f)
 	return false;
+
+      if(pFont.getStyle()==AGFont::BOLD)
+	TTF_SetFontStyle(f,TTF_STYLE_BOLD);
+      else
+	TTF_SetFontStyle(f,TTF_STYLE_NORMAL);
       
-      ns=TTF_RenderText_Blended(f,pText.c_str(),pFont.getColor());//.sdlColor()); // Blended instead of Solid
+      ns=TTF_RenderText_Blended(f,pText.c_str(),pFont.getColor());
 
       assert(ns);
       
@@ -177,61 +239,29 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       dr.w=sr.w=ns->w;
       dr.h=sr.h=ns->h;
 
-      cdebug(pText<<":"<<sr<<"/////////////"<<dr);
-      //      cdebug(fontCache.size());
-      //      SDL_SetColorKey(ns,SDL_SRCCOLORKEY,sge_GetPixel(ns,0,0));
-
-      AGSurface as(ns);//,ns->w,ns->h); // we translate ownage to AGSurfaceManager
+      AGSurface as(ns);
+      if(pFont.getEmbossed())
+	embossSurface(as);
       
       AGTexture ms=getTextureManager()->makeTexture(as);
-      //      SDL_FreeSurface(ns);
 	
-#ifdef FONT_CACHE
-      cdebug(fontCache.size());
       fontCache[make_pair(pFont,pText)]=ms;
-      
-      //      SDL_SetColorKey(s,SDL_SRCCOLORKEY,sge_GetPixel(s,0,0));
     }
   AGTexture &t=fontCache[make_pair(pFont,pText)];
-  //  AGTexture t(s);
-#else
-  AGTexture t(ms);
-#endif
-  
-  //      TRACE;
-  /*  cdebug(BaseLineX<<"  "<<BaseLineY<<"  "<<t.width()<<"  "<<t.height());
-  cdebug(pSurface->getRect());
-  cdebug(t.getRect());*/
+
   pSurface->blit(t,AGRect(BaseLineX,BaseLineY,t.width(),t.height()));
     
-#ifdef FONT_CACHE
-
   if(fontCache.size()>100)
     {
-      //      TRACE;
       // clear font cache
       fontCache.clear();
     }
-#endif
-  // SDL_FreeSurface(s);
-  /*
-
-  //  pSurface
-  SDL_SetClipRect(pSurface.surface(),const_cast<AGRect*>(&pClipRect));
-  //  cdebug(pClipRect.toString());
-  SDL_BlitSurface(s,&sr,pSurface.surface(),&dr);
-  SDL_SetClipRect(pSurface.surface(),0);
-  //    SDL_SetClipRect(s,const_cast<AGRect*>(&pClipRect));
-    //  sge_BlitSurface(s,&sr,pSurface.surface(),&dr);
-    */
   return true;
 }
 
 
-
 int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
 {
-  //  TRACE;
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
 
   if(!f)
@@ -246,7 +276,6 @@ int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
 
 int AGFontEngine::getHeight(const AGFont &pFont,const std::string &pText)
 {
-  //  TRACE;
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
 
   if(!f)
@@ -256,6 +285,6 @@ int AGFontEngine::getHeight(const AGFont &pFont,const std::string &pText)
   int ret=TTF_SizeText(f,pText.c_str(),&w,&h);
   if(ret)
     return 0;
-  //  cdebug("fontsize: w:"<<w<<" h:"<<h<<endl);
+
   return h;
 }

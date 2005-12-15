@@ -27,7 +27,7 @@
 			<value name="width" value="1"/>
 		</border>
 		<text>
-			<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+			<font name="font" file="Arial.ttf" size="26" color="#000000" embossed="true"/>
 		</text>
 	</button>
 	
@@ -108,7 +108,7 @@
 				<value name="width" value="1"/>
 			</border>
 			<text>
-				<font name='font' file="Arial.ttf" size="14" color='#000000'/>
+				<font name='font' file="Arial.ttf" size="22" color='#f6c108' embossed="true"/>
 			</text>
 		</button>
 	</yellowButton>
@@ -191,6 +191,9 @@
 					<color name='gradientColor4' color='#443616'/>
 				</checked>
 			</background>
+			<text>
+				<font name='font' file="Arial.ttf" size="16" color='#f6c108' embossed="true"/>
+			</text>
 		</button>
 	</antButton>
 	<listbox>

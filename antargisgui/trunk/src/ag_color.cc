@@ -110,6 +110,14 @@ bool operator<(const AGColor &c1,const AGColor &c2)
   return c1.r<c2.r || (c1.r==c2.r && (c1.g<c2.g || (c1.g==c2.g && (c1.b<c2.b || (c1.b==c2.b && c1.a<c2.a)))));
 }
 
+bool operator==(const AGColor &c1,const AGColor &c2)
+{
+  return c1.r==c2.r &&
+    c1.g==c2.g &&
+    c1.b==c2.b &&
+    c1.a==c2.a;
+}
+
 std::ostream &operator<<(std::ostream &o,const AGColor &c)
 {
   o<<c.toString();

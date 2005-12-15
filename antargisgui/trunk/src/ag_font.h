@@ -49,6 +49,8 @@ class AGFont
   void setName(const std::string &s);
   std::string getName() const;
 
+  void setEmbossed(bool e);
+  bool getEmbossed() const;
 
   int getWidth(const std::string &mText) const;
   int getHeight(const std::string &mText) const;
@@ -58,7 +60,7 @@ class AGFont
   int mSize;
   Uint8 mAlpha;
   AGColor mColor;
-
+  bool embossed;
 
   friend bool operator<(const AGFont&f1,const AGFont &f2);
 };

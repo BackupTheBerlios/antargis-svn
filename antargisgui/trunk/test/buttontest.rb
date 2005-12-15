@@ -38,8 +38,11 @@ sc=AGScreenWidget.new
 button=AGButton.new(sc,AGRect.new(0,0,200,100),"text")
 b2=AGButton.new(button,AGRect.new(10,10,60,40),"text2")
 b2.setTheme("antButton")
+b3=AGButton.new(button,AGRect.new(100,10,60,40),"text2")
+b3.setTheme("yellowButton")
 #button.setText("huhu")
 button.addChild(b2)
+button.addChild(b3)
 sc.addChild(button)
 app.setMainWidget(sc)
 app.run
