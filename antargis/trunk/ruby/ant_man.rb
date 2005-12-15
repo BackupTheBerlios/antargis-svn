@@ -264,6 +264,8 @@ class AntNewMan<AntMyEntity
 		case res
 			when "wood"
 				setMeshState("axe")
+			when "food"
+				setMeshState("stand")
 			else
 				setMeshState("pick")
 		end

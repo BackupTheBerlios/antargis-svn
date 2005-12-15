@@ -186,6 +186,17 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 	
 	def inspectEntity(e)
+		if @inspect
+			if @inspect.class==AntHero
+				@inspect.selected=false
+			end
+		end
+		@inspect=e
+		if @inspect
+			if @inspect.class==AntHero
+				@inspect.selected=true
+			end
+		end
 		$inventory.inspect(e)
 	end
 end

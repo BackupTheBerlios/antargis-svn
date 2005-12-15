@@ -43444,6 +43444,21 @@ _wrap_MeshData_transparent(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_MeshData_setOverdraw(int argc, VALUE *argv, VALUE self) {
+    MeshData *arg1 = (MeshData *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setOverdraw(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_MeshData(int argc, VALUE *argv, VALUE self) {
     MeshData *arg1 = (MeshData *) 0 ;
     
@@ -51736,6 +51751,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMeshData.klass, "texCoordFromPos", VALUEFUNC(_wrap_MeshData_texCoordFromPos), -1);
     rb_define_method(cMeshData.klass, "setTransparent", VALUEFUNC(_wrap_MeshData_setTransparent), -1);
     rb_define_method(cMeshData.klass, "transparent", VALUEFUNC(_wrap_MeshData_transparent), -1);
+    rb_define_method(cMeshData.klass, "setOverdraw", VALUEFUNC(_wrap_MeshData_setOverdraw), -1);
     cMeshData.mark = (void (*)(void *)) general_markfunc;
     cMeshData.destroy = (void (*)(void *)) free_MeshData;
     

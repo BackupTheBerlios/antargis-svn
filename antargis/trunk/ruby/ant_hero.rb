@@ -25,6 +25,7 @@ require 'ents.rb'
 require 'ant_hljobs.rb'
 require 'ant_boss.rb'
 require 'ant_fire.rb'
+require 'ant_ring.rb'
 
 class AntHero<AntBoss
 	def initialize
@@ -73,19 +74,34 @@ class AntHero<AntBoss
 	def noHLJob
 		if @player
 			@player.assignJob(self)
-			if @fireSound
-				getSoundManager.stopChannel(@fireSound)
-				@fireSound=nil
-			end
+			#stopFireSound
 		else
 			# no player , so simply rest - to infinity (or at least 5 seconds)
 			newHLRestJob(5)
 		end
 	end
 	
+	def startFireSound
+		if not @fireSound
+			puts "STARTING FIRE"
+			@fireSound=getSoundManager.loopPlay("data/sound/fire.wav",0.4)
+			puts @fireSound
+		end
+	end	
+	def stopFireSound
+		if @fireSound
+			puts "STOPPED"
+			puts @job
+			if @job.class==AntHeroRestJob
+				#raise "bla"
+			end
+			getSoundManager.stopChannel(@fireSound)
+			@fireSound=nil
+		end
+	end
+	
 	def newHLRestJob(time)
 		setFire(true)
-		@fireSound=getSoundManager.loopPlay("data/sound/fire.wav",0.4)
 		super(time)
 	end
 	
@@ -142,7 +158,7 @@ class AntHero<AntBoss
 		}
 	end
 	
-	
+		
 	# formation:
 	# 1) wait for 3/4 of people are in formation but max. 5 seconds or so
 	# 2) start all at once
@@ -197,11 +213,13 @@ class AntHero<AntBoss
 				@fire=AntFire.new(getPos3D+AGVector3.new(0.7,0,0))
 				getMap.insertEntity(@fire)
 			end
+			startFireSound
 		else
 			if @fire
 				@fire.disable
 				@fire=false
 			end
+			stopFireSound
 		end
 	end
 	
@@ -211,11 +229,21 @@ class AntHero<AntBoss
 	
 	def assignJob2All
 		super
+		puts "ASSIGNJOB"
 		setFire(false)
 	end
-	
+
+	def selected=(s)
+		@selected=s
+		setMyMesh
+	end
+		
 	def setMyMesh
 		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
+		if @selected
+			r=makeRingMesh
+			addMesh(r,AGVector4.new(0,0,0,0))
+		end
 	end
 
 end

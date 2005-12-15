@@ -107,7 +107,7 @@ end
 
 class AntHeroFightJob<AntHeroMoveJob
 	attr_reader :finished, :target
-	attr_writer :finished
+	#attr_writer :finished
 	def initialize(hero,target,defend=false)
 		@hero=hero
 		@target=target

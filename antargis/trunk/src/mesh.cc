@@ -92,7 +92,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
   mShadow=pShadow;
   //  mAlpha=false;
   mTransparent=false;
-  
+  overdraw=false;
 }
 
 
@@ -212,6 +212,11 @@ void MeshData::save(const std::string &pFilename)
 }
 
 
+void MeshData::setOverdraw(bool o)
+{
+  overdraw=o;
+}
+
 /*void MeshData::setAlpha(bool pAlpha)
 {
   mAlpha=pAlpha;
@@ -250,7 +255,18 @@ void MeshData::draw()
   
   if(mWithTexture)
     glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
+
+  if(mTransparent)
+    glDisable(GL_ALPHA_TEST);
+  if(overdraw)
+    glDisable(GL_DEPTH_TEST);
   mArray.draw();
+  if(overdraw)
+    glEnable(GL_DEPTH_TEST);
+  if(mTransparent)
+    glEnable(GL_ALPHA_TEST);
+
+
   glBindTexture(GL_TEXTURE_2D,0);
   if(!mShadow)
     glDepthMask(true);

@@ -160,10 +160,10 @@ void FightJob::move(AntEntity *e,float ptime)
  *
  ***************************************************************************/
 
-FetchJob::FetchJob(int p,const AGVector2&pTarget,std::string what):MoveJob(p,pTarget,0.2),mWhat(what),mTarget(0)
+FetchJob::FetchJob(int p,const AGVector2&pTarget,std::string what):MoveJob(p,pTarget,0.5),mWhat(what),mTarget(0)
 {
 }
-FetchJob::FetchJob(int p,AntEntity *pTarget,std::string what):MoveJob(p,pTarget->getPos2D(),0.2),mWhat(what),mTarget(pTarget)
+FetchJob::FetchJob(int p,AntEntity *pTarget,std::string what):MoveJob(p,pTarget->getPos2D(),0.5),mWhat(what),mTarget(pTarget)
 {
 }
 

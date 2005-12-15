@@ -44,6 +44,8 @@ class MeshData:public SceneNode
 
   bool mTransparent;
 
+  bool overdraw;
+
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
   MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
@@ -71,6 +73,8 @@ class MeshData:public SceneNode
 
   void setTransparent(bool p);
   virtual bool transparent();
+
+  void setOverdraw(bool o);
 
 };
 
