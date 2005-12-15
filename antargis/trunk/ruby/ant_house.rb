@@ -77,6 +77,20 @@ class AntHouse<AntBoss
 		puts "IGNORING eventGotHLFight in ant_house"
 	end
 	
+	def eventAttacked(by)
+		newHLDefendJob(by)
+	end
+	
+	def moveHome(man)
+		pos=getPos2D
+		if (man.getPos2D-pos).length>1
+			man.newMoveJob(0,pos,0)
+		else
+			man.newRestJob(2)
+		end
+
+	end
+	
 	def eatFood
 		food=resource.get("food")
 		eatAmount=@men.length*0.04

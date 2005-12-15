@@ -154,7 +154,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def check(man)
 		checkState
-		dputs "CHECKING:"+man.to_s+"   "+self.to_s+"  "+@state
+		dputs "CHECKING:"+man.to_s+"   "+self.to_s+"  "+@state+"   myHero:"+@hero.to_s
 		case @state
 			when "move","format"
 				if super(man)

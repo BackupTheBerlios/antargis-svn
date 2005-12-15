@@ -21,6 +21,8 @@
 
 #!/usr/bin/ruby
 
+$debug=true
+
 $programDir=Dir.pwd+"/ruby"
 # add programdir to path
 $:.push($programDir)
