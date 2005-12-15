@@ -3,7 +3,18 @@
 $soundLastCall={}
 
 def playSound(name,minDiff=0.5)
-	sounds={"sheep"=>"data/sound/sheep44.wav","error"=>"data/sound/error.wav","hackaxe"=>"data/sound/tree_chop.wav","wind"=>"data/sound/wind.wav","pick"=>"data/sound/new_pick.wav","sword"=>"data/sound/sword1.wav"}
+	sounds={"sheep"=>"data/sound/sheep44.wav",
+		"error"=>"data/sound/error.wav",
+		"hackaxe"=>"data/sound/tree_chop.wav",
+		"wind"=>"data/sound/wind.wav",
+		"pick"=>"data/sound/new_pick.wav",
+		"sword"=>"data/sound/sword1.wav",
+		"fire"=>"data/sound/fire.wav",
+		"ugh"=>"data/sound/ugh.wav",
+		"ugh_end"=>"data/sound/ugh_end.wav",
+		"won"=>"data/sound/yay.wav",
+		"mylord"=>"data/sound/yes_mylord.wav",
+		}
 	#puts "PLA"
 	puts $soundLastCall.keys
 	if not $soundLastCall.keys.member?(name)
@@ -24,5 +35,9 @@ def playSound(name,minDiff=0.5)
 end
 
 def ambientSound(time)
-	#playSound("wind")
+	if not $ambientSound
+		$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",0.2)
+		#getSoundManager.playMp3(
+		#getSoundManager.playMp3("data/music/ant2.ogg")
+	end
 end

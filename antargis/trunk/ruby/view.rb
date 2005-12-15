@@ -111,6 +111,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 						if e.getType=="hero" then
 							@hero=e
 							inspectEntity(e)
+							playSound("mylord")
 							break
 						elsif ["house","farm","farmstead","workshop"].member?(e.getType) then
 							inspectEntity(e)

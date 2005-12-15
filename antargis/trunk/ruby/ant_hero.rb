@@ -55,7 +55,7 @@ class AntHero<AntBoss
 	
 	def checkHLJobEnd(man)
 		if @job
-			#puts @job
+			puts @job
 			if man
 				@job.check(man)
 			end
@@ -73,11 +73,20 @@ class AntHero<AntBoss
 	def noHLJob
 		if @player
 			@player.assignJob(self)
+			if @fireSound
+				getSoundManager.stopChannel(@fireSound)
+				@fireSound=nil
+			end
 		else
 			# no player , so simply rest - to infinity (or at least 5 seconds)
 			newHLRestJob(5)
-			setFire(true)
 		end
+	end
+	
+	def newHLRestJob(time)
+		setFire(true)
+		@fireSound=getSoundManager.loopPlay("data/sound/fire.wav",0.4)
+		super(time)
 	end
 	
 	def assignJob(man)

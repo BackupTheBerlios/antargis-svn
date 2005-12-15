@@ -164,6 +164,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		end
 	end
 	def defeated(man)
+		playSound("ugh_end")
 		puts "sigdefeat"
 		puts self
 		@states["fight"].delete(man)
@@ -189,6 +190,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	def won
 		if not @finished
 			puts "WON!!!!!!!!!!"
+			playSound("won")
 			@finished=true
 			@target.getJob.lost
 			#@hero.wonFight(@target)

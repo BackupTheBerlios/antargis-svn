@@ -297,7 +297,7 @@ class AntNewMan<AntMyEntity
 	def animationEvent(name)
 		puts "ANIM_EVENT:"+name
 		case name
-			when "hackaxe","pick","sword"
+			when "hackaxe","pick","sword","ugh"
 				playSound(name)
 		end
 	end
