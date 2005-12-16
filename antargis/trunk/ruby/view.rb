@@ -26,8 +26,8 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def initialize(w,h) #p,rect,pos,map)
 		super(w,h) #p,rect,pos,map)
 		$antView=self
-		
 	end
+	
 	def eventMouseButtonUpTest(m)
 		puts "MUH"
 		e=toAGSDLEvent(m)
@@ -357,3 +357,34 @@ class AntButtonPanelCreator<AGLayoutCreator
 	end
 end
 $antBPCreator=AntButtonPanelCreator.new
+
+
+class AntNameDisplay<AGWidget
+	def initialize(p,r,text)
+		super(p,r)
+		@cr=r.origin
+		@cr.setH(@cr.height/2)
+		@cr.setY(@cr.height)
+		@cr=@cr.shrink(4)
+		@font=getTheme.getFont("heroName.font")
+		@name=text
+		addChild(AGText.new(self,AGRect.new(0,0,width,height/2),@name,@font))
+		addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
+		b.setTheme("antButton")
+		@cr1=AGRect.new(@cr.getX,@cr.getY,@cr.width,@cr.height/2)
+		@cr2=AGRect.new(@cr.getX,@cr.getY+@cr.height/2,@cr.width,@cr.height/2)
+	end
+	def drawAfter(p)
+		#p.renderText(@name,AGPoint.new(0,0),@font)
+		p.drawRect(@cr,AGColor.new(0,0xFF,0))
+		a0=AGColor.new(0,0x7f,0)
+		a1=AGColor.new(0,0x7f,0)
+		a2=AGColor.new(0,0xff,0)
+		a3=AGColor.new(0,0xAf,0)
+		p.drawGradient(@cr1,a0,a1,a2,a3)
+		p.drawGradient(@cr2,a2,a3,a0,a1)
+	end
+	def getText
+		@name
+	end
+end

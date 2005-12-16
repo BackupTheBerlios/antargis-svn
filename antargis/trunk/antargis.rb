@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-$debug=true
+#$debug=true
 
 $programDir=Dir.pwd+"/ruby"
 # add programdir to path
@@ -57,23 +57,51 @@ class AntGameApp <AntRubyView
 		setupHeroDisplay
 	end
 	
+	def draw
+		updateNamePositions
+		super
+	end
+	def updateNamePositions
+		#return
+		heroes=$map.getHeroes
+		heroes.each{|hero|
+			@names.each{|name|
+				if hero.getName==name.getText
+					name.setRect(getHeroScreenPos(hero))
+				end
+			}
+		}
+	end
+	
+	def getHeroScreenPos(hero)
+		pos=hero.getPos3D+AGVector3.new(0,0,2)
+		sp=getScene.getPosition(AGVector4.new(pos,1))
+		return AGRect.new(sp.x-50,sp.y-30,100,30)
+	end
+	
 	def setupHeroDisplay
-		#getScene(
-	#return
 		heroes=$map.getOwnHeroes
 		if heroes.length>0
 			p=heroes[0].getPos2D
 			getScene.setCamera(AGVector4.new(p.x,p.y,0))
 		end
-		return
-		all=getMap.getAllEntitiesV
-		all.each{|ep|
-			e=ep.get
-			if e.getType=="hero"
-				puts e.getName
-			end
+		
+		#getScene.setCamera(AGVector4.new(10,10,0))
+		
+		setupNames
+	end
+	
+	def setupNames
+		heroes=$map.getHeroes
+		@names=[]
+		heroes.each{|hero|
+			name=hero.getName
+			#@names.push(AGText.new(@layout,getHeroScreenPos(hero),name,getTheme.getFont("heroName.font")))
+			@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),name))
 		}
-		#exit
+		@names.each{|n|
+			@layout.addChild(n)
+		}
 	end
 	
 	

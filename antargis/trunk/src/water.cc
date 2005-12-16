@@ -152,7 +152,6 @@ WaterPiece::WaterPiece(HeightMap &map,int x,int y,int w,int h,const AGVector4 &p
 
 WaterPiece::~WaterPiece()
 {
-  CTRACE;
   delete shader;
   shader=0;
 }

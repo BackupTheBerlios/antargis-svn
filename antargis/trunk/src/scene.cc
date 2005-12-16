@@ -59,7 +59,6 @@ Scene::Scene(int w,int h)
   
   cameraPosition=AGVector4(0,-20,20);
   lightPosition=AGVector4( -20, -13, 31,1);
-  //  lightPosition=AGVector4( 20, -13, 31,1);
   scenePosition=AGVector4(0,0,0,1);
 
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
@@ -74,7 +73,9 @@ Scene::Scene(int w,int h)
   
   mRubyObject=false;
   gScenes.insert(this);
+  init();
 
+  calcCameraView();
 }
 
 Scene::~Scene()
@@ -94,9 +95,6 @@ size_t Scene::getTriangles() const
 void Scene::draw()
 {
   getRenderer()->setCurrentScene(this);
-  assertGL;
-  if(!inited)
-    init();
   assertGL;
  
   mTriangles=0;
@@ -169,6 +167,7 @@ void Scene::clear()
 void Scene::setCamera(AGVector4 v)
 {
   scenePosition=v;
+  calcCameraView();
 }
 
 void Scene::advance(float time)
@@ -176,7 +175,6 @@ void Scene::advance(float time)
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->advance(time);
 }
-
 
 
 void Scene::calcCameraView()
@@ -190,57 +188,58 @@ void Scene::calcCameraView()
 
   if(mShadow==2)
     {
+      // PSM
       // calculation of lightposition is somehow crappy
 
 
       // PSMs
       //  lightPosition=AGVector4( -2.0, -3, 5.1,1)*100;
-
-    // light View Matrix
-    glLoadIdentity();
-
-    AGVector4 lp=lightPosition;
-    //    lp[
-    lp[3]=1;
-    lp=cameraProjectionMatrix*cameraViewMatrix*lp;
-
-    lp/=lp[3];
-
-    // it is something like (12,-10,10)
-
-
-
-
-    lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this 
-    lp*=100;
-
-
-    //lp=AGVector4(-2,2,-2,1);
-    gluLookAt(lp[0], lp[1], lp[2],
-	      0,0,0,
-	      0.0f, 1.0f, 0.0f);
-    glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
-
-    lightViewMatrix=lightViewMatrix*cameraProjectionMatrix*cameraViewMatrix;
-    // light projection Matrix
-    glLoadIdentity();
-    //    glOrtho(-10,10,-15,20,10,1000);
-    cdebug(lp.toString());
-    float s2=sqrt(2.0f);
-    float ldist=lp.length3();
-
-    glOrtho(-s2,s2,-s2,s2,ldist-2*s2,ldist+10);//1,10);//ldist-2*s2,ldist+10*s2);
-
-
-    //very old:glOrtho(-1,2,-1.5,3,700,750);
-    //      glOrtho(-1,2,-1,1,2,8);
-
-    glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
+      
+      // light View Matrix
+      glLoadIdentity();
+      
+      AGVector4 lp=lightPosition;
+      //    lp[
+      lp[3]=1;
+      lp=cameraProjectionMatrix*cameraViewMatrix*lp;
+      
+      lp/=lp[3];
+      
+      // it is something like (12,-10,10)
+      
+      
+      
+      
+      lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this 
+      lp*=100;
+      
+      
+      //lp=AGVector4(-2,2,-2,1);
+      gluLookAt(lp[0], lp[1], lp[2],
+		0,0,0,
+		0.0f, 1.0f, 0.0f);
+      glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
+      
+      lightViewMatrix=lightViewMatrix*cameraProjectionMatrix*cameraViewMatrix;
+      // light projection Matrix
+      glLoadIdentity();
+      //    glOrtho(-10,10,-15,20,10,1000);
+      cdebug(lp.toString());
+      float s2=sqrt(2.0f);
+      float ldist=lp.length3();
+      
+      glOrtho(-s2,s2,-s2,s2,ldist-2*s2,ldist+10);//1,10);//ldist-2*s2,ldist+10*s2);
+      
+      
+      //very old:glOrtho(-1,2,-1.5,3,700,750);
+      //      glOrtho(-1,2,-1,1,2,8);
+      
+      glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
     }
   else
     {
       //  lightPosition=AGVector4( -1.0, -3, 5.1,1);
-  
+      
       // calc light view,too
       // light View Matrix
       glLoadIdentity();
@@ -299,12 +298,15 @@ void Scene::initScene()
   //Use dim light to represent shadowed areas
   glLightfv(GL_LIGHT1, GL_POSITION, lightPosition);
   glLightfv(GL_LIGHT1, GL_AMBIENT, white*0.2f);
-  glLightfv(GL_LIGHT1, GL_DIFFUSE, white*0.2f);
+  glLightfv(GL_LIGHT1, GL_DIFFUSE, white);//*0.2f);
   glLightfv(GL_LIGHT1, GL_SPECULAR, black);
   glEnable(GL_LIGHT1);
   glEnable(GL_LIGHTING);
   
   glBindTexture(GL_TEXTURE_2D,0);
+
+  //  calcCameraView();
+  
 }
 
 AGMatrix4 Scene::getFrustum()
@@ -405,6 +407,7 @@ void Scene::init()
   glLoadIdentity();
   gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 10.0f, 50.0f);
   glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
+  //  calcCameraView();
 }
 
 
@@ -544,7 +547,7 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
 }
 
 
-Viewport Scene::getViewport()
+Viewport Scene::getViewport() const
 {
   Viewport p;
   p.viewport[0]=0;
@@ -614,6 +617,23 @@ AGVector4 Scene::getCamera() const
 {
   return scenePosition;
 }
+
+AGPoint Scene::getPosition(const AGVector4 &v) const
+{
+  GLdouble x,y,z;
+  
+  GLdouble modelview[16],projection[16];
+  for(size_t i=0;i<16;i++)
+    {
+      modelview[i]=((const float*)cameraViewMatrix)[i];
+      projection[i]=((const float*)cameraProjectionMatrix)[i];
+    }
+  
+
+  gluProject(v[0],v[1],v[2],modelview,projection,getViewport(),&x,&y,&z);
+  return AGPoint(x,windowHeight-y);
+}
+
 
 void addToAllScenes(SceneNode *n)
 {

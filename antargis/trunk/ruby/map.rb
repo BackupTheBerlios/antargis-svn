@@ -72,13 +72,13 @@ class AntRubyMap<AntMap
 			e=AntNewDeco.new
 		end
 		if node.getName=="humanPlayer" then
-			puts "1"
+			dputs "1"
 			player=AntHumanPlayer.new("")
-			puts "2"
+			dputs "2"
 			player.loadXML(node)
-			puts "3"
+			dputs "3"
 			@players.push(player)
-			puts "4"
+			dputs "4"
 		end
 		if node.getName=="computerPlayer" then
 			player=AntComputerPlayer.new("")
@@ -116,7 +116,7 @@ class AntRubyMap<AntMap
 	end
 	def getByName(name)
 		if name.class!=String
-			puts name
+			dputs name
 		end
 		getRuby(super(name))
 	end
@@ -171,15 +171,29 @@ class AntRubyMap<AntMap
 	def setLight(e)
 	end
 	
+	def getHeroes()
+		ents=getAllEntitiesV
+		ret=[]
+		ents.each{|eptr|
+			ent=eptr.get
+			#dputs ent
+			if ent.class==AntHero
+				ret.push(ent)
+			end
+		}
+		#exit
+		return ret
+	end
+	
 	def getOwnHeroes()
 		ents=getAllEntitiesV
 		ret=[]
 		ents.each{|eptr|
 			ent=eptr.get
-			puts ent
+			#dputs ent
 			if ent.class==AntHero
 				p=ent.getPlayer
-				puts "player:",p,p.class
+				#dputs "player:",p,p.class
 				if p
 					if p.class==AntHumanPlayer
 						ret.push(ent)

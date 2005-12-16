@@ -5,9 +5,6 @@ std::ofstream out("log.txt");
 
 GLApp::GLApp(int w,int h):scene(w,h)
 {
-  setupLight();
-  
-  
   shadow=true;
   mx=my=0;
   omx=-1;
@@ -142,19 +139,6 @@ bool GLApp::eventKeyDown(const AGEvent *m)
 	}
     }
   return AGApplication::eventKeyDown(m);
-}
-
-// day light
-void GLApp::setupLight()
-{
-  GLfloat pos[] = { -2.0, 0.0, 3.1, 0.0};
-  GLfloat col[] = {1.0, 1.0, 1.0, 1.0};
-  glEnable(GL_LIGHT0);
-  glLightfv(GL_LIGHT0,GL_POSITION, pos);
-  glLightfv(GL_LIGHT0,GL_DIFFUSE,  col);
-  glLightfv(GL_LIGHT0,GL_SPECULAR, col);
-  
-  glEnable(GL_LIGHTING);
 }
 
 Scene &GLApp::getScene()

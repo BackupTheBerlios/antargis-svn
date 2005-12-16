@@ -3,6 +3,7 @@
 
 #include "glee/GLee.h"
 #include "ag_triangle.h"
+#include "ag_geometry.h"
 
 #include <SDL_opengl.h>
 
@@ -85,6 +86,8 @@ class Scene:public RubyObject
   
   AGMatrix4 getInvCameraView() const;
 
+  AGPoint getPosition(const AGVector4 &v) const;
+
  private:
   void init();
   void calcCameraView();
@@ -93,11 +96,10 @@ class Scene:public RubyObject
   void drawShadow();
   void initScene();
 
-
   void pickDraw();
   PickResult processHits (int hits, GLuint *buffer,float x,float y);
 
-  Viewport getViewport();
+  Viewport getViewport() const;
 
 
 

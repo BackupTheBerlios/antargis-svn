@@ -48,9 +48,6 @@ public:
   virtual bool eventMouseMotion(const AGEvent *m);
   virtual bool eventKeyDown(const AGEvent *m);
 
-  // day light
-  void setupLight();
-  
   Scene &getScene();
 
   friend void GLApp_markfunc(void *ptr);
