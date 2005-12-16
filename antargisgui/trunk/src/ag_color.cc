@@ -26,20 +26,25 @@
 
 AGColor::AGColor(const std::string &s)
 {
-  std::string p=s.substr(1,s.npos);
-  if(p.length()==6)
+  r=g=b=0;
+  a=0xFF;
+  if(s.length()>0)
     {
-      r=fromHex(p.substr(0,2));
-      g=fromHex(p.substr(2,2));
-      b=fromHex(p.substr(4,2));
-      a=0xFF;
-    }
-  else if(p.length()==8)
-    {
-      r=fromHex(p.substr(0,2));
-      g=fromHex(p.substr(2,2));
-      b=fromHex(p.substr(4,2));
-      a=fromHex(p.substr(6,2));
+      std::string p=s.substr(1,s.npos);
+      if(p.length()==6)
+	{
+	  r=fromHex(p.substr(0,2));
+	  g=fromHex(p.substr(2,2));
+	  b=fromHex(p.substr(4,2));
+	  a=0xFF;
+	}
+      else if(p.length()==8)
+	{
+	  r=fromHex(p.substr(0,2));
+	  g=fromHex(p.substr(2,2));
+	  b=fromHex(p.substr(4,2));
+	  a=fromHex(p.substr(6,2));
+	}
     }
 }
 
@@ -116,6 +121,11 @@ bool operator==(const AGColor &c1,const AGColor &c2)
     c1.g==c2.g &&
     c1.b==c2.b &&
     c1.a==c2.a;
+}
+
+bool operator!=(const AGColor &c1,const AGColor &c2)
+{
+  return !operator==(c1,c2);
 }
 
 std::ostream &operator<<(std::ostream &o,const AGColor &c)

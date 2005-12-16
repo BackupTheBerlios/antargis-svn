@@ -193,6 +193,8 @@ void AGWidget::drawAll(AGPainter &p)
   if(mChildrenDrawFirst)
     draw(p2);
 
+  drawAfter(p2);
+
   //  if(mMenu)
   //    mMenu->drawAll(p2);
 }
@@ -413,7 +415,6 @@ void AGWidget::addChildBack(AGWidget *w)
 void AGWidget::setRect(const AGRect &pRect)
 {
   mr=pRect;
-  cdebug(mr);
 }
 
 int AGWidget::minWidth() const
@@ -754,6 +755,11 @@ void AGWidget::setName(const std::string &pName)
 {
   mName=pName;
 }
+
+void AGWidget::drawAfter(AGPainter &p)
+{
+}
+
 
 AGWidget *AGWidget::getChild(const std::string &pName)
 {

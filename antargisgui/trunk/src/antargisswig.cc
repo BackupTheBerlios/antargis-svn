@@ -2673,6 +2673,19 @@ void SwigDirector_AGWidget::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGWidget::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGWidget::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -2764,19 +2777,6 @@ bool SwigDirector_AGWidget::eventHide() {
 }
 
 
-void SwigDirector_AGWidget::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGWidget::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -2787,6 +2787,19 @@ void SwigDirector_AGWidget::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGWidget::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -3164,6 +3177,19 @@ void SwigDirector_AGButton::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGButton::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGButton::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -3255,19 +3281,6 @@ void SwigDirector_AGButton::setHeight(int w) {
 }
 
 
-void SwigDirector_AGButton::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGButton::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -3278,6 +3291,19 @@ void SwigDirector_AGButton::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGButton::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -3892,6 +3918,19 @@ void SwigDirector_AGText::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGText::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGText::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -3983,19 +4022,6 @@ bool SwigDirector_AGText::eventHide() {
 }
 
 
-void SwigDirector_AGText::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGText::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -4006,6 +4032,19 @@ void SwigDirector_AGText::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGText::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -4359,6 +4398,19 @@ void SwigDirector_AGVTiler::drawAll(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
     result = rb_funcall(swig_get_self(), rb_intern("drawAll"), 1,obj0);
+}
+
+
+void SwigDirector_AGVTiler::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
 }
 
 
@@ -4829,6 +4881,19 @@ void SwigDirector_AGHTiler::drawAll(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
     result = rb_funcall(swig_get_self(), rb_intern("drawAll"), 1,obj0);
+}
+
+
+void SwigDirector_AGHTiler::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
 }
 
 
@@ -5320,6 +5385,19 @@ void SwigDirector_AGMenu::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGMenu::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGMenu::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -5779,6 +5857,19 @@ void SwigDirector_AGScreenWidget::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGScreenWidget::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGScreenWidget::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -5870,19 +5961,6 @@ bool SwigDirector_AGScreenWidget::eventHide() {
 }
 
 
-void SwigDirector_AGScreenWidget::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGScreenWidget::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -5893,6 +5971,19 @@ void SwigDirector_AGScreenWidget::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGScreenWidget::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -6285,6 +6376,19 @@ void SwigDirector_AGEdit::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGEdit::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGEdit::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -6389,19 +6493,6 @@ bool SwigDirector_AGEdit::eventHide() {
 }
 
 
-void SwigDirector_AGEdit::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGEdit::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -6412,6 +6503,19 @@ void SwigDirector_AGEdit::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGEdit::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -6789,6 +6893,19 @@ void SwigDirector_AGCheckBox::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGCheckBox::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGCheckBox::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -6880,19 +6997,6 @@ void SwigDirector_AGCheckBox::setHeight(int w) {
 }
 
 
-void SwigDirector_AGCheckBox::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGCheckBox::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -6903,6 +7007,19 @@ void SwigDirector_AGCheckBox::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGCheckBox::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -7261,6 +7378,19 @@ void SwigDirector_AGRadioGroup::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGRadioGroup::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGRadioGroup::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -7352,19 +7482,6 @@ bool SwigDirector_AGRadioGroup::eventHide() {
 }
 
 
-void SwigDirector_AGRadioGroup::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGRadioGroup::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -7375,6 +7492,19 @@ void SwigDirector_AGRadioGroup::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -7752,6 +7882,19 @@ void SwigDirector_AGRadio::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGRadio::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGRadio::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -7843,19 +7986,6 @@ void SwigDirector_AGRadio::setHeight(int w) {
 }
 
 
-void SwigDirector_AGRadio::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGRadio::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -7866,6 +7996,19 @@ void SwigDirector_AGRadio::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadio::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -8211,6 +8354,19 @@ void SwigDirector_AGTable::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGTable::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGTable::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -8302,19 +8458,6 @@ void SwigDirector_AGTable::setHeight(int w) {
 }
 
 
-void SwigDirector_AGTable::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGTable::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -8325,6 +8468,19 @@ void SwigDirector_AGTable::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGTable::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -8667,6 +8823,19 @@ void SwigDirector_AGWindow::drawAll(AGPainter &p) {
     }
     obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
     result = rb_funcall(swig_get_self(), rb_intern("drawAll"), 1,obj0);
+}
+
+
+void SwigDirector_AGWindow::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
 }
 
 
@@ -9129,6 +9298,19 @@ void SwigDirector_AGImage::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGImage::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGImage::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -9220,19 +9402,6 @@ bool SwigDirector_AGImage::eventHide() {
 }
 
 
-void SwigDirector_AGImage::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGImage::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -9243,6 +9412,19 @@ void SwigDirector_AGImage::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGImage::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -9588,6 +9770,19 @@ void SwigDirector_AGCaption::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGCaption::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGCaption::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -9679,19 +9874,6 @@ bool SwigDirector_AGCaption::eventHide() {
 }
 
 
-void SwigDirector_AGCaption::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGCaption::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -9702,6 +9884,19 @@ void SwigDirector_AGCaption::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGCaption::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -10047,6 +10242,19 @@ void SwigDirector_AGLayout::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGLayout::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGLayout::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10138,19 +10346,6 @@ bool SwigDirector_AGLayout::eventHide() {
 }
 
 
-void SwigDirector_AGLayout::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGLayout::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10161,6 +10356,19 @@ void SwigDirector_AGLayout::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGLayout::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -10716,6 +10924,19 @@ void SwigDirector_AGSound::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGSound::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGSound::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10807,19 +11028,6 @@ bool SwigDirector_AGSound::eventHide() {
 }
 
 
-void SwigDirector_AGSound::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGSound::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -10830,6 +11038,19 @@ void SwigDirector_AGSound::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGSound::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -11173,6 +11394,19 @@ void SwigDirector_AGGLWidget::drawGL() {
 }
 
 
+void SwigDirector_AGGLWidget::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGGLWidget::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -11277,19 +11511,6 @@ bool SwigDirector_AGGLWidget::eventHide() {
 }
 
 
-void SwigDirector_AGGLWidget::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGGLWidget::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -11300,6 +11521,19 @@ void SwigDirector_AGGLWidget::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGGLWidget::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -11645,6 +11879,19 @@ void SwigDirector_AGColorButton::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGColorButton::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGColorButton::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -11736,19 +11983,6 @@ bool SwigDirector_AGColorButton::eventHide() {
 }
 
 
-void SwigDirector_AGColorButton::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGColorButton::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -11759,6 +11993,19 @@ void SwigDirector_AGColorButton::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGColorButton::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -12123,6 +12370,19 @@ void SwigDirector_AGDialog::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGDialog::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGDialog::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -12252,19 +12512,6 @@ bool SwigDirector_AGDialog::eventOk(std::string const &pName, AGEvent const *eve
 }
 
 
-void SwigDirector_AGDialog::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGDialog::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -12275,6 +12522,19 @@ void SwigDirector_AGDialog::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGDialog::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -12620,6 +12880,19 @@ void SwigDirector_AGListBox::drawAll(AGPainter &p) {
 }
 
 
+void SwigDirector_AGListBox::drawAfter(AGPainter &p) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::drawAfter(p);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &p, SWIGTYPE_p_AGPainter,0);
+    result = rb_funcall(swig_get_self(), rb_intern("drawAfter"), 1,obj0);
+}
+
+
 void SwigDirector_AGListBox::draw(AGPainter &p) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -12711,19 +12984,6 @@ bool SwigDirector_AGListBox::eventHide() {
 }
 
 
-void SwigDirector_AGListBox::addChildBack(AGWidget *w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::addChildBack(w);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
-    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
-}
-
-
 void SwigDirector_AGListBox::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -12734,6 +12994,19 @@ void SwigDirector_AGListBox::addChild(AGWidget *w) {
     }
     obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
     result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
+}
+
+
+void SwigDirector_AGListBox::addChildBack(AGWidget *w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::addChildBack(w);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) w, SWIGTYPE_p_AGWidget,0);
+    result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
 
@@ -17592,6 +17865,24 @@ _wrap_AGWidget_draw(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->draw(*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_drawAfter(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGPainter *arg2 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGPainter, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->drawAfter(*arg2);
     
     return Qnil;
 }
@@ -25717,6 +26008,72 @@ _wrap_AGFont_getColor(int argc, VALUE *argv, VALUE self) {
         resultptr = new AGColor((AGColor &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGFont_setBorderColor(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    AGColor *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGColor, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setBorderColor((AGColor const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGFont_getBorderColor(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    AGColor result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    result = ((AGFont const *)arg1)->getBorderColor();
+    
+    {
+        AGColor * resultptr;
+        resultptr = new AGColor((AGColor &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGFont_setBorder(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->setBorder(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGFont_getBorder(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    result = (int)((AGFont const *)arg1)->getBorder();
+    
+    vresult = INT2NUM(result);
     return vresult;
 }
 
@@ -38197,6 +38554,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_alloc_func(cAGWidget.klass, _wrap_AGWidget_allocate);
     rb_define_method(cAGWidget.klass, "initialize", VALUEFUNC(_wrap_new_AGWidget), -1);
     rb_define_method(cAGWidget.klass, "draw", VALUEFUNC(_wrap_AGWidget_draw), -1);
+    rb_define_method(cAGWidget.klass, "drawAfter", VALUEFUNC(_wrap_AGWidget_drawAfter), -1);
     rb_define_method(cAGWidget.klass, "drawAll", VALUEFUNC(_wrap_AGWidget_drawAll), -1);
     rb_define_method(cAGWidget.klass, "getRect", VALUEFUNC(_wrap_AGWidget_getRect), -1);
     rb_define_method(cAGWidget.klass, "getClientRect", VALUEFUNC(_wrap_AGWidget_getClientRect), -1);
@@ -38600,6 +38958,10 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_const(cAGFont.klass,"ITALIC", INT2NUM(AGFont::ITALIC));
     rb_define_method(cAGFont.klass, "setColor", VALUEFUNC(_wrap_AGFont_setColor), -1);
     rb_define_method(cAGFont.klass, "getColor", VALUEFUNC(_wrap_AGFont_getColor), -1);
+    rb_define_method(cAGFont.klass, "setBorderColor", VALUEFUNC(_wrap_AGFont_setBorderColor), -1);
+    rb_define_method(cAGFont.klass, "getBorderColor", VALUEFUNC(_wrap_AGFont_getBorderColor), -1);
+    rb_define_method(cAGFont.klass, "setBorder", VALUEFUNC(_wrap_AGFont_setBorder), -1);
+    rb_define_method(cAGFont.klass, "getBorder", VALUEFUNC(_wrap_AGFont_getBorder), -1);
     rb_define_method(cAGFont.klass, "setAlpha", VALUEFUNC(_wrap_AGFont_setAlpha), -1);
     rb_define_method(cAGFont.klass, "getAlpha", VALUEFUNC(_wrap_AGFont_getAlpha), -1);
     rb_define_method(cAGFont.klass, "setSize", VALUEFUNC(_wrap_AGFont_setSize), -1);

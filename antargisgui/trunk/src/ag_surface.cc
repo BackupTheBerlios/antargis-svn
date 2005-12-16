@@ -106,7 +106,16 @@ AGSurface::AGSurface(const AGSurface &p)
       assert(s);
       for(int x=0;x<p.width();x++)
 	for(int y=0;y<p.height();y++)
-	  sge_PutPixel(s,x,y,sge_GetPixel(p.s,x,y));
+	  {
+	    Uint32 c;
+	    c=sge_GetPixel(p.s,x,y);
+	    Uint8 r,g,b,a;
+	    c=sge_GetPixel(p.s,x,y);
+	    SDL_GetRGBA(c,p.s->format,&r,&g,&b,&a);
+
+	    sge_PutPixel(s,x,y,SDL_MapRGBA(s->format,r,g,b,a));
+	    //	    sge_PutPixel(s,x,y,sge_GetPixel(p.s,x,y));
+	  }
       //      SDL_BlitSurface(p.s,0,s,0);
     }
   else

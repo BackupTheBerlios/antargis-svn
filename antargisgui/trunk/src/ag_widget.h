@@ -41,6 +41,7 @@ class AGWidget:public AGMessageObject
   virtual ~AGWidget();
   
   virtual void draw(AGPainter &p);
+  virtual void drawAfter(AGPainter &p);
   virtual void drawAll(AGPainter &p);
   AGRect getRect() const;
   virtual AGRect getClientRect() const;

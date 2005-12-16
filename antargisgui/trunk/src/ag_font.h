@@ -37,6 +37,12 @@ class AGFont
   void setColor(const AGColor &pColor);
   AGColor getColor() const;
 
+  void setBorderColor(const AGColor &pColor);
+  AGColor getBorderColor() const;
+
+  void setBorder(int i);
+  int getBorder() const;
+
   void setAlpha(Uint8 pAlpha);
   Uint8 getAlpha() const;
 
@@ -60,6 +66,8 @@ class AGFont
   int mSize;
   Uint8 mAlpha;
   AGColor mColor;
+  AGColor mBorderColor;
+  int borderSize;
   bool embossed;
 
   friend bool operator<(const AGFont&f1,const AGFont &f2);

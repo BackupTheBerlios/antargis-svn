@@ -99,11 +99,11 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   if(!w)
     {
-      cdebug("CREATION FAILED!!"<<n);
+      //   cdebug("CREATION FAILED!!"<<n);
     }
 
-  cdebug("w:"<<w);
-  cdebug("nodename:"<<pNode.get("name"));
+  //  cdebug("w:"<<w);
+  //cdebug("nodename:"<<pNode.get("name"));
   if(w!=0 && pNode.get("name").length())
     {
       w->setName(pNode.get("name"));

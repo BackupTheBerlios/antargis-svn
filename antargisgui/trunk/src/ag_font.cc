@@ -26,6 +26,7 @@ AGFont::AGFont(const std::string &pFile,int size):
 {
   mAlpha=0xFF;
   mStyle=NORMAL;
+  borderSize=0;
 }
 
 AGFont::AGFont()
@@ -35,6 +36,7 @@ AGFont::AGFont()
   mColor=AGColor(0xFF,0xFF,0xFF);
   mAlpha=0xFF;
   mStyle=NORMAL;
+  borderSize=0;
 }
 
 void AGFont::setColor(const AGColor &pColor)
@@ -101,14 +103,35 @@ bool AGFont::getEmbossed() const
   return embossed;
 }
 
+void AGFont::setBorderColor(const AGColor &pColor)
+{
+  mBorderColor=pColor;
+}
+AGColor AGFont::getBorderColor() const
+{
+  return mBorderColor;
+}
+
+void AGFont::setBorder(int i)
+{
+  borderSize=i;
+}
+int AGFont::getBorder() const
+{
+  return borderSize;
+}
+
+#define COMPARE(x,y) if(x!=y) return x<y
 
 bool operator<(const AGFont&f1,const AGFont &f2)
 {
-  return f1.mStyle<f2.mStyle || 
-    (f1.mStyle==f2.mStyle && (f1.mName<f2.mName || 
-			      (f1.mName==f2.mName && (f1.mSize<f2.mSize ||
-						      (f1.mSize==f2.mSize && (f1.mAlpha<f2.mAlpha ||
-									      (f1.mAlpha==f2.mAlpha && 
-									       (f1.mColor<f2.mColor ||
-										(f1.mColor==f2.mColor && f1.embossed<f2.embossed)))))))));
+  COMPARE(f1.mStyle,f2.mStyle);
+  COMPARE(f1.mName,f2.mName);
+  COMPARE(f1.mSize,f2.mSize);
+  COMPARE(f1.mAlpha,f2.mAlpha);
+  COMPARE(f1.mColor,f2.mColor);
+  COMPARE(f1.embossed,f2.embossed);
+  COMPARE(f1.mBorderColor,f2.mBorderColor);
+  COMPARE(f1.borderSize,f2.borderSize);
+  return false;
 }

@@ -25,6 +25,7 @@
 
 #include <SDL_ttf.h>
 
+#include <math.h>
 #include <map>
 #include <iostream>
 
@@ -112,6 +113,119 @@ AGFontEngine::~AGFontEngine()
 AGFontEngine myFontEngine;
 
 std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
+
+void border(AGSurface &s,AGColor bc)
+{
+  TRACE;
+  float *a=new float[s.width()*s.height()];
+  float *b=new float[s.width()*s.height()];
+
+  int w=s.width();
+  for(int x=0;x<s.width();x++)
+    for(int y=0;y<s.height();y++)
+      {
+	a[y*w+x]=s.getPixel(x,y).a/float(0xFF);
+      }
+
+  float blurvalue=4;
+  // twice bluring
+  for(int t=0;t<8;t++)
+    {
+      for(int x=0;x<s.width();x++)
+	for(int y=0;y<s.height();y++)
+	  {
+	    float a0,a1,a2,a3,a4;
+	    a0=a1=a2=a3=a4=0;
+	    if(y>0)
+	      a0=a[(y-1)*w+x];
+	    if(y<s.height()-1)
+	      a1=a[(y+1)*w+x];
+	    if(x>0)
+	      a2=a[y*w+x-1];
+	    if(x<s.width()-1)
+	      a3=a[y*w+x+1];
+	    a4=a[y*w+x];
+
+	    // laplacian blur
+	    b[y*w+x]=(a0+a1+a2+a3 + blurvalue*a4)/(blurvalue+4);
+	  }
+      // copying
+      for(int x=0;x<s.width()*s.height();x++)
+	a[x]=b[x];
+      
+      // refeed !
+      for(int x=0;x<s.width();x++)
+	for(int y=0;y<s.height();y++)
+	  {
+	    a[y*w+x]=std::max(a[y*w+x],s.getPixel(x,y).a/float(0xFF));
+	  }
+      
+    }
+  //     ( -0.2,-1,-0.2)
+  // now (   -1, 4,  -1) edge detection
+  //     ( -0.2,-1,-0.2)
+  /*
+  float filter[]={-0.25,-1,-0.25,
+		  -1,5,-1,
+		  -0.25,-1,-0.25};
+
+  for(int x=0;x<s.width();x++)
+    for(int y=0;y<s.height();y++)
+      {
+	float v=0.0f;
+
+	int i,j;
+	for(i=-1;i<=1;i++)
+	  for(j=-1;j<=1;j++)
+	    {
+	      if(x+i>=0 && y+j>=0 && x+i<s.width() && y+j<s.height())
+		{
+		  float f=filter[(j+1)*3+i+1];
+		  v+=a[(y+j)*w+x+i]*f;
+		}
+	    }
+
+	b[y*w+x]=v;
+      }
+  */
+  for(int x=0;x<s.width();x++)
+    for(int y=0;y<s.height();y++)
+      {
+	AGColor c=s.getPixel(x,y);
+	AGColor n=bc;
+
+	n.a=a[y*w+x]*0xFF;
+	if(c.a>0x7f)
+	  {
+	    float f=c.a/float(0xFF);
+	    n=n*(1-f)+c*f;
+	    n.a=0xFF;
+	  }
+	s.putPixel(x,y,n);
+
+	/*
+	int oa=c.a;
+	float v;
+	//	float v=fabs(b[y*w+x]);
+
+		v=std::min(v,1.0f);
+	v=oa/float(0xFF)-a[y*w+x];
+	v*=3;
+	cdebug("v1:"<<v);
+	v=std::min(v,1.0f);
+	v=std::max(v,0.0f);
+	
+	cdebug(v);
+
+	c=bc*v+c*(1-v);
+
+	//	c.a=oa;
+	c.a=a[y*w+x]*0xFF;
+	s.putPixel(x,y,c);*/
+      }
+  
+
+}
 
 void embossSurface(AGSurface &s,float depth=1.0f)
 {
@@ -240,6 +354,15 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       dr.h=sr.h=ns->h;
 
       AGSurface as(ns);
+      
+      if(pFont.getBorder()>0)
+	{
+	  int move=2;
+	  AGSurface copy(as.width()+2*move,as.height()+2*move);
+	  copy.blit(as,AGRect(move,move,as.width(),as.height()),as.getRect());
+	  as=copy;
+	  border(as,pFont.getBorderColor());
+	}
       if(pFont.getEmbossed())
 	embossSurface(as);
       

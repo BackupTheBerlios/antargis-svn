@@ -108,7 +108,7 @@
 				<value name="width" value="1"/>
 			</border>
 			<text>
-				<font name='font' file="Arial.ttf" size="22" color='#f6c108' embossed="true"/>
+				<font name='font' file="Arial.ttf" size="24" color='#f6c108' embossed="true" borderWidth="1" borderColor="#770000"/>
 			</text>
 		</button>
 	</yellowButton>
