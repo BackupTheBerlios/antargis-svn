@@ -27482,6 +27482,21 @@ _wrap_AGText_getText(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGText_setFont(int argc, VALUE *argv, VALUE self) {
+    AGText *arg1 = (AGText *) 0 ;
+    AGFont *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGText, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGFont, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setFont((AGFont const &)*arg2);
+    
+    return Qnil;
+}
+
+
 static void
 free_AGText(AGText *arg1) {
     delete arg1;
@@ -39048,6 +39063,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGText.klass, "draw", VALUEFUNC(_wrap_AGText_draw), -1);
     rb_define_method(cAGText.klass, "setText", VALUEFUNC(_wrap_AGText_setText), -1);
     rb_define_method(cAGText.klass, "getText", VALUEFUNC(_wrap_AGText_getText), -1);
+    rb_define_method(cAGText.klass, "setFont", VALUEFUNC(_wrap_AGText_setFont), -1);
     cAGText.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGText.destroy = (void (*)(void *)) free_AGText;
     rb_define_module_function(mLibantargisgui, "toAGText", VALUEFUNC(_wrap_toAGText), -1);

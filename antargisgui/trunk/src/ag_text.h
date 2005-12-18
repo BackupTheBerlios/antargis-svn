@@ -38,6 +38,8 @@ class AGText:public AGWidget
   void setText(const std::string &pText);
   std::string getText() const;
 
+  void setFont(const AGFont &f);
+
  private:
   std::string mText;
   AGFont mFont;

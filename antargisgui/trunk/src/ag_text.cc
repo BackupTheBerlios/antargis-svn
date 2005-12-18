@@ -46,31 +46,9 @@ AGText::AGText(AGWidget *pParent,const AGPoint &p,const std::string &pText,const
 
 void AGText::draw(AGPainter &p)
 {
-  //  CTRACE;
-  //  cdebug(mText);
-
-  //  AGSurface screen(getScreen());
-  //  cout<<"width:"<<endl;
-  // center
-
-  //  AGRect r2=r.project(getRect());
-  //  cout<<"r2:"<<r2.toString()<<endl;
-  //  cout<<"gr2:"<<getRect().toString()<<endl;
-  //  cdebug("gr:"<<getRect().toString()<<endl);
-  //  cdebug("r2:"<<r2<<endl);
-
   int x=(width()-mFont.getWidth(mText))/2;
   int y=(height()-mFont.getHeight(mText))/2;
-  //cout<<"x:"<<x<<" y:"<<y<<" text:"<<mText<<endl;
-  //  cdebug(x<<"/"<<y);
   p.renderText(mText,AGPoint(x,y),mFont);
-
-  //  AGFontEngine::renderText(&getScreen(),r2,x,y,mText,mFont);
-
-  /*
-  AGSurface ms(width(),height());
-  AGFontEngine::renderText (ms,AGRect(0,0,r2.w,r2.h),x,y,mText,mFont);// int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
-  getScreen()->blit(ms,r2);*/
 }
 
 void AGText::setDeriveRect()
@@ -95,4 +73,9 @@ std::string AGText::getText() const
 AGText &toAGText(AGWidget &w)
 {
   return dynamic_cast<AGText&>(w);
+}
+
+void AGText::setFont(const AGFont &f)
+{
+  mFont=f;
 }
