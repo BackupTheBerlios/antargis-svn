@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 
-def getRingData
-	if $ringdata
-		return $ringdata
+def getRingData(w=1)
+	$ringdata||=[]
+	if $ringdata[w]
+		return $ringdata[w]
 	end
 
-	size=1
+	#size=1
 		
 	puts "MAKEFIRMESH"
 	opt=MeshOptimizer.new
@@ -14,7 +15,7 @@ def getRingData
 	mv2=MeshVertex.new
 	mv3=MeshVertex.new
 	
-	c=AGVector4.new(0.6,0.7,1,1) #0.9)
+	c=AGVector4.new(1,1,1,1) #0.6,0.7,1,1) #0.9)
 	mv0.c=c
 	mv1.c=c
 	mv2.c=c
@@ -25,8 +26,8 @@ def getRingData
 	mv2.t=AGVector2.new(1,1)
 	mv3.t=AGVector2.new(0,1)
 	
-	w=size
-	h=0.4
+	#w=size
+	h=0.1
 	
 	mv0.v=AGVector4.new(-w,-w,h)
 	mv1.v=AGVector4.new(w,-w,h)
@@ -46,14 +47,21 @@ def getRingData
 	opt.add(mv2)
 	opt.add(mv3)
 	
-	$ringdata=MeshData.new(opt.getArray,"data/textures/ring.png",false)
-	$ringdata.setOverdraw(true)
-	
-	return $ringdata
+	$ringdata[w]=MeshData.new(opt.getArray,"data/textures/ring.png",false)
+	$ringdata[w].setOverdraw(true)
+	$ringdata[w].setColors(false)
+	$ringdata[w].setPickable(false)
+	return $ringdata[w]
 end
 
 def makeRingMesh
 	mesh=Mesh.new(getRingData,AGVector4.new(0,0,0,0),0)
+	mesh.setOrder(DECAL_Z)
+	return mesh
+end
+
+def makeBigRingMesh
+	mesh=Mesh.new(getRingData(4),AGVector4.new(0,0,0,0),0)
 	mesh.setOrder(DECAL_Z)
 	return mesh
 end

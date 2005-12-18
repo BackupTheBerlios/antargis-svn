@@ -136,6 +136,11 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero.assignJob2All
 	end
 	
+	def getEnergy
+		#dputs @states["fight"],"//",@men
+		return @states["fight"].length.to_f/@men.length
+	end
+	
 	def delete(man)
 		@states.each_key{|k|
 			@states[k].delete(man)

@@ -31,6 +31,10 @@ class AntRubyMap<AntMap
 		#GC.start
 		@lastGC=0
 		$systemTime=0.0
+		@myPlayer=nil
+	end
+	def getPlayer
+		@myPlayer
 	end
 	def loadEntity(node)
 		dputs node.getName
@@ -79,6 +83,9 @@ class AntRubyMap<AntMap
 			dputs "3"
 			@players.push(player)
 			dputs "4"
+			if not @myPlayer
+				@myPlayer=player
+			end
 		end
 		if node.getName=="computerPlayer" then
 			player=AntComputerPlayer.new("")

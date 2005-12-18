@@ -13,6 +13,8 @@ class Mesh:public SceneNode
   MeshData *mData;
   AGVector4 mPos;
   float mRotation;
+  AGVector4 mColor;
+  bool mVisible;
   
  public:
   Mesh();
@@ -31,6 +33,8 @@ class Mesh:public SceneNode
   virtual size_t getTriangles() const;
   void setPos(const AGVector3&pPos);
   void setRotation(float r);
+  void setColor(const AGVector4 &pColor);
+  void setVisible(bool v);
 
   MeshData *getData();
 

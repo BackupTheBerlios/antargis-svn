@@ -93,6 +93,8 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
   //  mAlpha=false;
   mTransparent=false;
   overdraw=false;
+  drawColors=true;
+  mPickable=true;
 }
 
 
@@ -160,6 +162,8 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   fclose(f);
   mShadow=pShadow;
   mArray=opt.getArray();
+  drawColors=true;
+  mPickable=true;
 }
 
 MeshData::~MeshData()
@@ -233,7 +237,8 @@ bool MeshData::getAlpha() const
 
 void MeshData::drawPick()
 {
-  mArray.drawPick();
+  if(mPickable)
+    mArray.drawPick();
 }
 
 void MeshData::draw()
@@ -252,7 +257,7 @@ void MeshData::draw()
   glBindTexture(GL_TEXTURE_2D,0);
   glEnable(GL_COLOR_MATERIAL);
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-  glColor4f(1,1,1,1);
+  //  glColor4f(1,1,1,1);
   
   if(mWithTexture)
     glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
@@ -264,6 +269,7 @@ void MeshData::draw()
     glDisable(GL_ALPHA_TEST);
       glDisable(GL_DEPTH_TEST);
     }
+  mArray.setColors(drawColors);
   mArray.draw();
   if(overdraw)
     {
@@ -282,6 +288,12 @@ void MeshData::draw()
   if(mTransparent)
     glEnable(GL_CULL_FACE);
 }
+
+void MeshData::setColors(bool c)
+{
+  drawColors=c;
+}
+
 size_t MeshData::getTriangles() const
 {
   return mArray.getTriangles();
@@ -326,6 +338,10 @@ void MeshData::texCoordFromPos(float scale)
     }
 }
 
+void MeshData::setPickable(bool p)
+{
+  mPickable=p;
+}
 
 
 //////////////////////////////////////////////////////////////////////
@@ -337,6 +353,8 @@ Mesh::Mesh()
   mData=0;
   mRotation=0;
   setOrder(MESH_Z);
+  mColor=AGVector4(1,1,1,1);
+  mVisible=true;
 }
 
 Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
@@ -345,6 +363,8 @@ Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
   mPos=pPos;
   mRotation=pRot;
   setOrder(MESH_Z);
+  mColor=AGVector4(1,1,1,1);
+  mVisible=true;
 }
 
 Mesh::~Mesh()
@@ -354,13 +374,21 @@ Mesh::~Mesh()
 
 void Mesh::draw()
 {
+  if(!mVisible)
+    return;
   begin();
+  glEnable(GL_COLOR_MATERIAL);
+  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+  glColor4fv(mColor);
+    //glColor4f(1,0,0,1);
   if(mData)
     mData->draw();
   end();
 }
 void Mesh::drawDepth()
 {
+  if(!mVisible)
+    return;
   begin();
   if(mData)
     mData->drawDepth();
@@ -368,6 +396,8 @@ void Mesh::drawDepth()
 }
 void Mesh::drawShadow()
 {
+  if(!mVisible)
+    return;
   begin();
   if(mData)
     mData->drawShadow();
@@ -433,7 +463,10 @@ AGBox3 Mesh::bbox()
 
 void Mesh::drawPick()
 {
+  if(!mVisible)
+    return;
   begin();
+
   if(mData)
     mData->drawPick();
   end();
@@ -459,4 +492,12 @@ void Mesh::mark()
 }
 
 
+void Mesh::setColor(const AGVector4 &pColor)
+{
+  mColor=pColor;
+}
+void Mesh::setVisible(bool v)
+{
+  mVisible=v;
+}
 

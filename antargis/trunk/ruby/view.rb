@@ -28,41 +28,76 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		$antView=self
 	end
 	
-	def eventMouseButtonUpTest(m)
-		puts "MUH"
-		e=toAGSDLEvent(m)
-		p=e.getMousePosition
-		#v=AGVector2.new(p.x/getScene.width,p.y/getScene.height)
-		l=getScene.pick(p.x,p.y,1,1)
-		l.each{|o|
-			puts o.node.to_s+"  "+o.camDist.to_s+"   "+o.pos.to_s
+
+	def draw
+		updateNamePositions
+		super
+	end
+	def updateNamePositions
+		#return
+		heroes=$map.getHeroes
+		heroes.each{|hero|
+			@names.each{|name|
+				if hero.getName==name.getText
+					name.setRect(getHeroScreenPos(hero))
+				end
+			}
 		}
-		#getScene.pick(m
-		
-		exit
-		super(m)
 	end
 	
+	def getHeroScreenPos(hero)
+		pos=hero.getPos3D+AGVector3.new(0,0,2)
+		sp=getScene.getPosition(AGVector4.new(pos,1))
+		return AGRect.new(sp.x-50,sp.y-30,100,30)
+	end
+	
+	def setupHeroDisplay
+		heroes=$map.getOwnHeroes
+		if heroes.length>0
+			p=heroes[0].getPos2D
+			getScene.setCamera(AGVector4.new(p.x,p.y,0))
+		end
+		setupNames
+	end
+	
+	def setupNames
+		heroes=$map.getHeroes
+		@names=[]
+		heroes.each{|hero|
+			name=hero.getName
+			@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
+		}
+		@names.each{|n|
+			@layout.addChild(n)
+		}
+	end
+
+
+
+
+
+
 	def eventHover(list,button)
 		if list.length>0
 			n=list[0]
 			mesh=n.node
+			ok=false
 			if mesh.class==Mesh
 				ent=getMap.getEntity(mesh)
 				if ent
 					if ["house","farm","farmstead","workshop","hero"].member?(ent.getType) then
-						#puts ent.class
-						#exit
-					#if ent.getType=="hero"
-						inspectEntity(ent)
+						hoverEntity(ent)
+						ok=true
 					end
 				end
+			end
+			if not ok
+				hoverEntity(nil)
 			end
 		end
 	end
 	
 	def eventClick(list,button)
-		puts "EVENTCLICK"
 		list.each{|l|
 			puts l.node.to_s+"\t"+l.node.class.to_s+"  "+l.camDist.to_s
 			if l.node.class==Mesh
@@ -73,9 +108,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		
 		if list.length>0
 			first=list[0]
-			#puts first.node
-			#puts first.node.class
-			#puts "FIRST:",toTerrainMesh(first.node), getMap.getTerrainMesh
 			if [TerrainPieceVA,WaterPiece].member?(first.node.class) # == TerrainPieceVA or first.ntoTerrainMesh(first.node)==getMap.getTerrainMesh
 				clickMap(first.pos,button)
 			else
@@ -109,9 +141,13 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 						end
 					else
 						if e.getType=="hero" then
-							@hero=e
 							inspectEntity(e)
-							playSound("mylord")
+							if e.getPlayer==getMap.getPlayer
+								@hero=e
+								playSound("mylord")
+							else
+								@hero=nil
+							end
 							break
 						elsif ["house","farm","farmstead","workshop"].member?(e.getType) then
 							inspectEntity(e)
@@ -185,15 +221,29 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		end
 	end
 	
+	def hoverEntity(e)
+		if @hover
+			if @hover.class==AntHero or @hover.is_a?(AntHouse)
+				@hover.hovered=false
+			end
+		end
+		@hover=e
+		if @hover
+			if @hover.class==AntHero or @hover.is_a?(AntHouse)
+				@hover.hovered=true
+			end
+		end
+	end
+	
 	def inspectEntity(e)
 		if @inspect
-			if @inspect.class==AntHero
+			if @inspect.is_a?(AntBoss)
 				@inspect.selected=false
 			end
 		end
 		@inspect=e
 		if @inspect
-			if @inspect.class==AntHero
+			if @inspect.is_a?(AntBoss)
 				@inspect.selected=true
 			end
 		end
@@ -360,23 +410,30 @@ $antBPCreator=AntButtonPanelCreator.new
 
 
 class AntNameDisplay<AGWidget
-	def initialize(p,r,text)
+	def initialize(p,r,hero)
 		super(p,r)
+		@hero=hero
 		@cr=r.origin
 		@cr.setH(@cr.height/2)
 		@cr.setY(@cr.height)
 		@cr=@cr.shrink(4)
 		@font=getTheme.getFont("heroName.font")
-		@name=text
-		addChild(AGText.new(self,AGRect.new(0,0,width,height/2),@name,@font))
+		@name=@hero.getName
+		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height/2),@hero.getName,@font))
 		addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
 		b.setTheme("antButton")
-		@cr1=AGRect.new(@cr.getX,@cr.getY,@cr.width,@cr.height/2)
-		@cr2=AGRect.new(@cr.getX,@cr.getY+@cr.height/2,@cr.width,@cr.height/2)
+		@energy=0.7
+		updateRects
 	end
+	
+	def setEnergy(e)
+		@energy=e
+		updateRects
+	end
+	
 	def drawAfter(p)
-		#p.renderText(@name,AGPoint.new(0,0),@font)
-		p.drawRect(@cr,AGColor.new(0,0xFF,0))
+		setEnergy(@hero.getEnergy)
+		updateColor
 		a0=AGColor.new(0,0x7f,0)
 		a1=AGColor.new(0,0x7f,0)
 		a2=AGColor.new(0,0xff,0)
@@ -386,5 +443,18 @@ class AntNameDisplay<AGWidget
 	end
 	def getText
 		@name
+	end
+	private
+	def updateRects
+		@cr1=AGRect.new(@cr.getX,@cr.getY,(@cr.width*@energy).to_i,@cr.height/2)
+		@cr2=AGRect.new(@cr.getX,@cr.getY+@cr.height/2,(@cr.width*@energy).to_i,@cr.height/2)
+	end
+	def updateColor
+		if @hero.getPlayer==getMap.getPlayer
+			f=getTheme.getFont("heroName.font")
+		else
+			f=getTheme.getFont("enemyHero.font")
+		end
+		@textWidget.setFont(f)
 	end
 end

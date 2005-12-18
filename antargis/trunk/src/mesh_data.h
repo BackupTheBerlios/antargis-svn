@@ -45,6 +45,9 @@ class MeshData:public SceneNode
   bool mTransparent;
 
   bool overdraw;
+  bool drawColors;
+  bool mPickable;
+
 
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
@@ -70,12 +73,13 @@ class MeshData:public SceneNode
     return mArray.lineHit(pLine);
   }
   void texCoordFromPos(float scale);
+  void setPickable(bool p);
 
   void setTransparent(bool p);
   virtual bool transparent();
 
   void setOverdraw(bool o);
-
+  void setColors(bool c);
 };
 
 

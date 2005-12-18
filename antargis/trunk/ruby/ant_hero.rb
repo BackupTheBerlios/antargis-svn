@@ -54,6 +54,14 @@ class AntHero<AntBoss
 		end
 	end
 	
+	def getEnergy
+		if @job and @job.class==AntHeroFightJob
+			return @job.getEnergy
+		else
+			return 0
+		end
+	end
+	
 	def checkHLJobEnd(man)
 		if @job
 			if man
@@ -234,12 +242,23 @@ class AntHero<AntBoss
 		@selected=s
 		setMyMesh
 	end
+	
+	def hovered=(s)
+		@hovered=s
+		@hoverStart=$systemTime
+		setMyMesh
+	end
 		
 	def setMyMesh
 		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
-		if @selected
-			r=makeRingMesh
-			addMesh(r,AGVector4.new(0,0,0,0))
+		if @selected or @hovered
+			@ring=makeRingMesh
+			if @selected
+				@ring.setColor(AGVector4.new(1,0.7,1,0.8))
+			else
+				@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+			end
+			addMesh(@ring,AGVector4.new(0,0,0,0))
 		end
 	end
 

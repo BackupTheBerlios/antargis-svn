@@ -31005,6 +31005,21 @@ _wrap_AGText_getText(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGText_setFont(int argc, VALUE *argv, VALUE self) {
+    AGText *arg1 = (AGText *) 0 ;
+    AGFont *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGText, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGFont, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setFont((AGFont const &)*arg2);
+    
+    return Qnil;
+}
+
+
 static void
 free_AGText(AGText *arg1) {
     delete arg1;
@@ -42930,6 +42945,36 @@ _wrap_Mesh_setRotation(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Mesh_setColor(int argc, VALUE *argv, VALUE self) {
+    Mesh *arg1 = (Mesh *) 0 ;
+    AGVector4 *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Mesh, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector4, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setColor((AGVector4 const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Mesh_setVisible(int argc, VALUE *argv, VALUE self) {
+    Mesh *arg1 = (Mesh *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Mesh, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setVisible(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_Mesh_getData(int argc, VALUE *argv, VALUE self) {
     Mesh *arg1 = (Mesh *) 0 ;
     MeshData *result;
@@ -43829,6 +43874,21 @@ _wrap_MeshData_texCoordFromPos(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_MeshData_setPickable(int argc, VALUE *argv, VALUE self) {
+    MeshData *arg1 = (MeshData *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setPickable(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_MeshData_setTransparent(int argc, VALUE *argv, VALUE self) {
     MeshData *arg1 = (MeshData *) 0 ;
     bool arg2 ;
@@ -43872,6 +43932,21 @@ _wrap_MeshData_setOverdraw(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 0);
     arg2 = RTEST(argv[0]);
     (arg1)->setOverdraw(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_MeshData_setColors(int argc, VALUE *argv, VALUE self) {
+    MeshData *arg1 = (MeshData *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setColors(arg2);
     
     return Qnil;
 }
@@ -51272,6 +51347,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGText.klass, "draw", VALUEFUNC(_wrap_AGText_draw), -1);
     rb_define_method(cAGText.klass, "setText", VALUEFUNC(_wrap_AGText_setText), -1);
     rb_define_method(cAGText.klass, "getText", VALUEFUNC(_wrap_AGText_getText), -1);
+    rb_define_method(cAGText.klass, "setFont", VALUEFUNC(_wrap_AGText_setFont), -1);
     cAGText.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGText.destroy = (void (*)(void *)) free_AGText;
     rb_define_module_function(mLibantargis, "toAGText", VALUEFUNC(_wrap_toAGText), -1);
@@ -52166,6 +52242,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMesh.klass, "getTriangles", VALUEFUNC(_wrap_Mesh_getTriangles), -1);
     rb_define_method(cMesh.klass, "setPos", VALUEFUNC(_wrap_Mesh_setPos), -1);
     rb_define_method(cMesh.klass, "setRotation", VALUEFUNC(_wrap_Mesh_setRotation), -1);
+    rb_define_method(cMesh.klass, "setColor", VALUEFUNC(_wrap_Mesh_setColor), -1);
+    rb_define_method(cMesh.klass, "setVisible", VALUEFUNC(_wrap_Mesh_setVisible), -1);
     rb_define_method(cMesh.klass, "getData", VALUEFUNC(_wrap_Mesh_getData), -1);
     rb_define_method(cMesh.klass, "mark", VALUEFUNC(_wrap_Mesh_mark), -1);
     rb_define_method(cMesh.klass, "transparent", VALUEFUNC(_wrap_Mesh_transparent), -1);
@@ -52212,9 +52290,11 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMeshData.klass, "getTriangles", VALUEFUNC(_wrap_MeshData_getTriangles), -1);
     rb_define_method(cMeshData.klass, "lineHit", VALUEFUNC(_wrap_MeshData_lineHit), -1);
     rb_define_method(cMeshData.klass, "texCoordFromPos", VALUEFUNC(_wrap_MeshData_texCoordFromPos), -1);
+    rb_define_method(cMeshData.klass, "setPickable", VALUEFUNC(_wrap_MeshData_setPickable), -1);
     rb_define_method(cMeshData.klass, "setTransparent", VALUEFUNC(_wrap_MeshData_setTransparent), -1);
     rb_define_method(cMeshData.klass, "transparent", VALUEFUNC(_wrap_MeshData_transparent), -1);
     rb_define_method(cMeshData.klass, "setOverdraw", VALUEFUNC(_wrap_MeshData_setOverdraw), -1);
+    rb_define_method(cMeshData.klass, "setColors", VALUEFUNC(_wrap_MeshData_setColors), -1);
     cMeshData.mark = (void (*)(void *)) general_markfunc;
     cMeshData.destroy = (void (*)(void *)) free_MeshData;
     
