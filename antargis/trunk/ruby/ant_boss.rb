@@ -31,6 +31,7 @@ class AntBoss<AntMyEntity
 		@men=[]
 		@job=nil
 		@createMen=0
+		setupMeshBoss
 	end
 	def loadXML(node)
 		super(node)
@@ -103,6 +104,9 @@ class AntBoss<AntMyEntity
 	end
 	
 	def setPlayer(player)
+		if @player
+			@player.remove(self)
+		end
 		@player=player
 	end
 	def getPlayer
@@ -122,6 +126,9 @@ class AntBoss<AntMyEntity
 	def setOwner(owner)
 		@owner=owner
 		dputs "RESETING PLAYER:"
+		if @player
+			@player.remove(self)
+		end
 		@player=owner.getPlayer
 	end
 	def getOwner
@@ -137,5 +144,45 @@ class AntBoss<AntMyEntity
 	def killAllJobs
 		@men.each{|man|man.delJob}
 	end
+	
+	
+	# ring mesh
+	def setupMesh
+	end
+	
+	def hovered=(s)
+		@hovered=s
+		@ring.setVisible((@hovered or @selected))
+		if @hovered and not @selected
+			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+		end
+	end
+	def selected=(s)
+		@selected=s
+		@ring.setVisible((@hovered or @selected))
+		if @selected
+			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))
+			#@ring.setColor(AGVector4.new(1,0.7,1,0.8))
+		end
+	end
+
+		
+	def getRing
+		makeBigRingMesh
+	end
+	def setupMeshBoss
+		setupMesh
+		@ring=getRing
+		if @selected
+			#f6c108
+			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))
+		else
+			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+		end
+		addMesh(@ring,AGVector4.new(0,0,0,0))
+		@ring.setVisible(false)
+	end
+
+	
 end
 

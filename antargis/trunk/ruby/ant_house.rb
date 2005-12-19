@@ -48,37 +48,7 @@ class AntHouse<AntBoss
 		#mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
 		#setMesh(mesh)
 		
-		setupMeshHouse
-	end
-	def setupMesh
-	end
-	
-	def hovered=(s)
-		@hovered=s
-		@ring.setVisible((@hovered or @selected))
-		if @hovered and not @selected
-			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
-		end
-	end
-	def selected=(s)
-		@selected=s
-		@ring.setVisible((@hovered or @selected))
-		if @selected
-			@ring.setColor(AGVector4.new(1,0.7,1,0.8))
-		end
-	end
-
-		
-	def setupMeshHouse
-		setupMesh
-		@ring=makeBigRingMesh
-		if @selected
-			@ring.setColor(AGVector4.new(1,0.7,1,0.8))
-		else
-			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
-		end
-		addMesh(@ring,AGVector4.new(0,0,0,0))
-		@ring.setVisible(false)
+#		setupMeshHouse
 	end
 	
 	################################

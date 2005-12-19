@@ -69,6 +69,11 @@ class AntPlayer
 	def assignJob(hero)
 		hero.newHLRestJob(20)
 	end
+	def trigger(ent,tr)
+	end
+	def remove(hero)
+		@heroes.delete(hero)
+	end
 end
 
 class AntHumanPlayer<AntPlayer
@@ -84,8 +89,6 @@ class AntHumanPlayer<AntPlayer
 end
 
 class AntComputerPlayer<AntPlayer
-#	def eventJobFinished
-#	end
 	def xmlName
 		return "computerPlayer"
 	end
@@ -93,7 +96,26 @@ class AntComputerPlayer<AntPlayer
 		puts who.to_s+" is ready with is job:"+what.to_s
 	end
 	def assignJob(hero)
+		hero.newHLRestJob(20)
+	end
+	
+	# simple trigger
+	def trigger(ent,tr)
+		if tr.player!=@name
+			return
+		end
+		if ent.getPlayer!=self and tr.name=="attack"
+			@heroes.each{|h|
+				if h.getJob.class==AntHeroRestJob
+					puts "ASSIGNING!"
+					h.newHLFightJob(ent)
+				end
+			}
+		end
+	end
+	def attackNextHero(hero)
 		puts "ANTPLAER::assignJob"
+		
 		# simply attack
 		target=getMap.getNext(hero,"hero")
 		
@@ -109,6 +131,70 @@ class AntComputerPlayer<AntPlayer
 			else
 				hero.newHLRestJob(20)
 			end
+		end
+	end
+	def getNextHome(hero)
+		getMap.getNext(hero,"house")
+	end
+	def goHome(hero,home)
+		housePos=house.getPos2D
+		heroPos=hero.getPos2D
+		diff=housePos-heroPos
+		if diff.length2>4
+			hero.newHLMoveJob(0,house.getPos2D,2)
+		end
+	end
+	def attack(hero,target)
+		if hero and target and target.getPlayer!=self
+			hero.newHLFightJob(target)
+		end
+	end
+	
+	def attackChecked(hero,target)
+		if [AntHeroRestJob,NilClass].member?(hero.getJob.class)
+			attack(hero,target)
+		end
+	end
+	def getNextEnemy(hero)
+		getNextEnemyX(hero,"hero")
+	end
+	def getNextEnemyHouse(hero)
+		getNextEnemyX(hero,"house")
+	end
+	private
+	def getNextEnemyX(hero,name)
+		ts=getMap.getEntities(name)
+		
+		target=nil
+		dist=10000
+		ts.each{|tp|
+			t=tp.get
+			d=(t.getPos2D-hero.getPos2D).length
+			if d<dist and t.getPlayer!=self
+				dist=d
+				target=t
+			end
+		}
+		return target
+	end
+end
+
+class AntLazyPlayer<AntComputerPlayer
+end
+
+class AntConqueringPlayer<AntComputerPlayer
+	def initialize(name)
+		super
+		@mode="rest"
+	end
+	def assignJob(hero)
+		case @mode
+			when "rest"
+				hero.newHLRestJob(50)
+				@mode="fight"
+			when "fight"
+				attackChecked(hero,getNextEnemyHouse(hero))
+				@mode="rest"
 		end
 	end
 end

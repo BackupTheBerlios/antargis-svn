@@ -22,6 +22,7 @@ class AntMap:public HeightMap
   EntityList getEntities(const AGRect2&r);
   EntityList getAllEntities();
   std::vector<AntEntityPtr> getAllEntitiesV();
+  std::vector<AntEntityPtr> getEntities(const std::string &pName);
 
   AntEntity *getEntity(const Mesh &pMesh);
   AntEntity *getEntity(int id) const;

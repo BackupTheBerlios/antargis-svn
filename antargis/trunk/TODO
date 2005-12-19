@@ -5,12 +5,10 @@
 
 [Gui/View]
 =================================================
-[H] implement GL-picking for fast hovering ?
-[VH] transparent / non-transparent meshes - render order (in mesh-ordering for transparent ones)
+[L] display for hunger/food
 
 [Menu]
 =================================================
-[M] new layout and appearance
 [L] some images for the campaigns
 
 [Graphics]
@@ -18,12 +16,11 @@
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs
 [L] check if TSM (trapezoidal shadow maps) are any good
 [L] support different grass height and different earth colors (editor)
-[L] check lighting of voxel-generation (is adding white light - should be multiplication)
-[L] convert spline to interpolating spline! => this halfes the tile-count
+[L] snow,rain
+[L] bushes, plants, high grass, flowers
 
 [Game]
 =================================================
-[L] too much cpu-time used, when men are sitting
 [L] each man should have a name and an age
 [VL] reasonable quadtree-usage
 [L] computer-player only attacks when stock is used up
@@ -31,6 +28,16 @@
 	- uppopping windows (with image and text) / pause game
 	- history function
 	- browsing facility (scene=>number(person)=>text)
+[L] man/heroes should die, lose energy when starving
+[L] implement loyality
+	a) too many fights => lower
+	b) fight won => up !!
+	c) enough food => up
+	d) rest => up
+	e) bad weather => lower
+	
+	f) if loyality if too low => some men desert and go to next HouseEntity (additional heroes raise a new player!)
+[VL] very bad situation => raise heroes with a new player (rebellion)
 
 [Editor]
 =================================================
@@ -59,32 +66,14 @@
   * DIFFERENT:
 	* flashback on some victory-scene:
 		- look down from some tower
-		- look back from behind some warriors holding up some weapons
+		- look back from behind some warriors holding up a bloody dagger 
 	* scene of betrayal - some dark person stands above some king
 
-  * 1.Szene: mit Kutsche und ein paar Leichen; auf der Seite sind noch die Angreifer
-  * 2.Szene: Höhle mit Druide
+  * 1.scene of game: - broken carriage with some bodies around, at the one side there are still the attackers
+	                   - you cannot go there, because they will slay you. text will appear only once.
+  * 2.scene: 				 - some cave with a druid - maybe some little druid-house is also ok (which saves some implementation)
 
 
-* Grafik:
-  - Schnee: einteilen der Bilder in Schnee/non-Schnee und dann langsam hinzufügen?
-  - Blumen
-  - Büsche
-  
-7) Schafe/Futteranzeige
-8) Sterben/Abhauen wenn kein Futter da
-9) HouseEntity
-10) HouseEntity-Player
-	a) Futter sammeln
-	b) Fortpflanzung
-11) Loyalität implementieren
-	a) zu viele Kämpfe => runter
-	b) Kampf gewonnen => hoch!!
-	c) Gut im Futter => hoch
-	d) rasten => hoch
-	e) schlechter Wetter =>runter
-	
-	f) wenn runter => abhauen zu nächstem HouseEntity (sowohl für HouseEntities as auch für Heros als Ausgangsposition)
 
   
 * scrolling-borders  

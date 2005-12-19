@@ -41712,7 +41712,7 @@ _wrap_AntMap_getNewID(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AntMap_getEntities(int argc, VALUE *argv, VALUE self) {
+_wrap_AntMap_getEntities__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AntMap *arg1 = (AntMap *) 0 ;
     AGRect2 *arg2 = 0 ;
     SwigValueWrapper<std::list<AntEntity * > > result;
@@ -41774,6 +41774,88 @@ _wrap_AntMap_getAllEntitiesV(int argc, VALUE *argv, VALUE self) {
         }
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AntMap_getEntities__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AntMap *arg1 = (AntMap *) 0 ;
+    std::string *arg2 = 0 ;
+    std::vector<AntEntityPtr > result;
+    std::string temp2 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntMap, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (arg1)->getEntities((std::string const &)*arg2);
+    
+    {
+        vresult = rb_ary_new2((&result)->size());
+        for (unsigned int i=0; i<(&result)->size(); i++) {
+            AntEntityPtr* x = new AntEntityPtr(((std::vector<AntEntityPtr > &)result)[i]);
+            rb_ary_store(vresult,i,
+            SWIG_NewPointerObj((void *) x, 
+            SWIGTYPE_p_AntEntityPtr, 1));
+        }
+    }
+    return vresult;
+}
+
+
+static VALUE _wrap_AntMap_getEntities(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AntMap, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AntMap_getEntities__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AntMap, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AntMap_getEntities__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AntMap_getEntities'");
+    return Qnil;
 }
 
 
@@ -52174,9 +52256,9 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntMap.klass, "removeEntity", VALUEFUNC(_wrap_AntMap_removeEntity), -1);
     rb_define_method(cAntMap.klass, "clear", VALUEFUNC(_wrap_AntMap_clear), -1);
     rb_define_method(cAntMap.klass, "getNewID", VALUEFUNC(_wrap_AntMap_getNewID), -1);
-    rb_define_method(cAntMap.klass, "getEntities", VALUEFUNC(_wrap_AntMap_getEntities), -1);
     rb_define_method(cAntMap.klass, "getAllEntities", VALUEFUNC(_wrap_AntMap_getAllEntities), -1);
     rb_define_method(cAntMap.klass, "getAllEntitiesV", VALUEFUNC(_wrap_AntMap_getAllEntitiesV), -1);
+    rb_define_method(cAntMap.klass, "getEntities", VALUEFUNC(_wrap_AntMap_getEntities), -1);
     rb_define_method(cAntMap.klass, "getEntity", VALUEFUNC(_wrap_AntMap_getEntity), -1);
     rb_define_method(cAntMap.klass, "getByName", VALUEFUNC(_wrap_AntMap_getByName), -1);
     rb_define_method(cAntMap.klass, "getNext", VALUEFUNC(_wrap_AntMap_getNext), -1);

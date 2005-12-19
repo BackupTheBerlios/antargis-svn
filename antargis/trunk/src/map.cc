@@ -162,6 +162,14 @@ std::vector<AntEntityPtr> AntMap::getAllEntitiesV()
   std::copy(mEntities.begin(),mEntities.end(),std::back_inserter(v));
   return v;
 }
+std::vector<AntEntityPtr> AntMap::getEntities(const std::string &pName)
+{
+  std::vector<AntEntityPtr> v;
+  for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
+    if((*i)->getType()==pName)
+      v.push_back(*i);
+  return v;
+}
 
 
 AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType)

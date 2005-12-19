@@ -33,7 +33,7 @@ class AntHero<AntBoss
 		setType("hero")
 		@appearance="hero"
 		getMap.setLight(self)
-		setMyMesh
+#		setMyMesh
 	end
 	def setAppearance(a)
 		@appearance=a
@@ -237,30 +237,35 @@ class AntHero<AntBoss
 		dputs "ASSIGNJOB"
 		setFire(false)
 	end
-
-	def selected=(s)
-		@selected=s
-		setMyMesh
+# 
+# 	def selected=(s)
+# 		@selected=s
+# 		setMyMesh
+# 	end
+# 	
+# 	def hovered=(s)
+# 		@hovered=s
+# 		@hoverStart=$systemTime
+# 		setMyMesh
+# 	end
+# 		
+# 	def setMyMesh
+# 		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
+# 		if @selected or @hovered
+# 			@ring=makeRingMesh
+# 			if @selected
+# 				@ring.setColor(AGVector4.new(1,0.7,1,0.8))
+# 			else
+# 				@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+# 			end
+# 			addMesh(@ring,AGVector4.new(0,0,0,0))
+# 		end
+# 	end
+ 	def setupMesh
+ 		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
 	end
-	
-	def hovered=(s)
-		@hovered=s
-		@hoverStart=$systemTime
-		setMyMesh
+	def getRing
+		makeRingMesh
 	end
-		
-	def setMyMesh
-		setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.7),AGVector4.new(0,0,0,0),0))
-		if @selected or @hovered
-			@ring=makeRingMesh
-			if @selected
-				@ring.setColor(AGVector4.new(1,0.7,1,0.8))
-			else
-				@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
-			end
-			addMesh(@ring,AGVector4.new(0,0,0,0))
-		end
-	end
-
 end
 

@@ -22,6 +22,7 @@
 #!/usr/bin/ruby
 
 require 'ant_player.rb'
+require 'ant_trigger.rb'
 
 class AntRubyMap<AntMap
 	def initialize(w,h)
@@ -32,6 +33,8 @@ class AntRubyMap<AntMap
 		@lastGC=0
 		$systemTime=0.0
 		@myPlayer=nil
+		@triggers=[]
+		@heroes=[]
 	end
 	def getPlayer
 		@myPlayer
@@ -59,6 +62,7 @@ class AntRubyMap<AntMap
 		end
 		if node.getName=="antHero" then
 			e=AntHero.new
+			@heroes.push(e)
 		end
 		if node.getName=="antTower" then
 			e=AntTower.new
@@ -87,10 +91,16 @@ class AntRubyMap<AntMap
 				@myPlayer=player
 			end
 		end
-		if node.getName=="computerPlayer" then
-			player=AntComputerPlayer.new("")
+		
+		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer}
+		if playerTypes.keys.member?(node.getName) then
+			player=playerTypes[node.getName].new("")
 			player.loadXML(node)
 			@players.push(player)
+		end
+		
+		if node.getName=="trigger" then
+			@triggers.push(Trigger.new(node))
 		end
 		return e
 	end
@@ -130,25 +140,27 @@ class AntRubyMap<AntMap
 	def endChange
 	end
 	
+	def checkTriggers
+		@heroes.each{|h|
+			@triggers.each{|t|
+				t.check(h)
+			}
+		}
+	end
+	def trigger(hero,t)
+		@players.each{|p|p.trigger(hero,t)}
+	end
+	
 	def move(time)
 		$systemTime+=time
 		super(time)
+		
+		checkTriggers
+		
 		@players.each{|player|
 			player.move(time)
 		}
 		
-		# disable GC, when called too often
-		#if getGCcalls>3 then
-		#	GC.disable
-		#	@lastGC=0
-		#end
-		#resetGCcalls
-		
-		# enable GC after 2 secs, when it's called too often
-		@lastGC+=time
-		if @lastGC>2000 then
-			GC.enable
-		end
 		ambientSound(time)
 	end
 	
