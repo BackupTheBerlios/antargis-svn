@@ -57,7 +57,7 @@ class AnimMesh:public SceneNode
 
  private:
 
-  void drawPrivate(bool textured);
+  void drawPrivate(bool textured,bool mem);
 
   void update();
 };

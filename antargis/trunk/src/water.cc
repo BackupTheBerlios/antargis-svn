@@ -158,7 +158,7 @@ WaterPiece::~WaterPiece()
 
 void WaterPiece::mapChanged()
 {
-  CTRACE;
+  //  CTRACE;
   mBBox=AGBox3();
   mArray.clear();
 

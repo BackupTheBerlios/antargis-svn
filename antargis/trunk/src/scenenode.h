@@ -10,9 +10,10 @@ class Scene;
 #define TERRAIN_Z 1
 #define WATER_Z 2
 #define DECAL_Z 3
-#define MESH_Z 4
-#define TREE_Z 5
-#define PARTICLE_Z 6
+#define RING_Z 4
+#define MESH_Z 5
+#define TREE_Z 6
+#define PARTICLE_Z 7
 
 
 class SceneNode:public RubyObject

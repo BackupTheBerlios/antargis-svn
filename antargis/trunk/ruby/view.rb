@@ -72,7 +72,9 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		}
 	end
 
-
+	def playStory(story)
+		
+	end
 
 
 

@@ -5,6 +5,7 @@ class AntWorkshop<AntHouse
 		super
 		setType("workshop")
 		@lastBirth=0
+		setDirection(-50)
 	end
 	def setupMesh
 		mesh=Mesh.new(getMeshData("data/models/workshop.ant2",1.8,"data/textures/models/workshop.png"),AGVector4.new(0,0,0),-50)

@@ -40,7 +40,10 @@ void HeightMap::setHeight(float height)
 {
   for(size_t y=0;y<mH+2;y++)
     for(size_t x=0;x<mW+2;x++)
-      set(x,y,height);
+      {
+	set(x,y,height);
+	setGrass(x,y,0);
+      }
 
   mapChanged();
 }
@@ -52,6 +55,14 @@ void HeightMap::set(size_t x,size_t y,float height)
   assert(x<mW+2);
   assert(y<mH+2);
   mHeights[x+y*(mW+2)]=height;
+}
+void HeightMap::setGrass(size_t x,size_t y,float height)
+{
+  assert(x>=0);
+  assert(y>=0);
+  assert(x<mW+2);
+  assert(y<mH+2);
+  mGrass[x+y*(mW+2)]=height;
 }
 
 
@@ -192,9 +203,9 @@ AGVector3 HeightMap::getNormal(int x,int y) const
   AGVector4 v1=AGVector4(1,0,get(x+1,y)-get(x,y),0);
   AGVector4 v2=AGVector4(0,1,get(x,y+1)-get(x,y),0);
   
-  AGVector4 v3=v2%v1;
+  AGVector4 v3=v1%v2;
   v3.normalize3();
-  v3*=-1;
+  //  v3*=-1;
   return AGVector3(v3[0],v3[1],v3[2]);
 }
 

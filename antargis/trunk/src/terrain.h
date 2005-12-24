@@ -17,10 +17,12 @@
 
 using namespace std;
 
+class Terrain;
+
 class TerrainPieceVA:public SceneNode
 {
  public:
-  TerrainPieceVA(HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos);
+  TerrainPieceVA(Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos);
   virtual ~TerrainPieceVA()
     {
     }
@@ -41,6 +43,8 @@ class TerrainPieceVA:public SceneNode
 
  private:
 
+  Terrain *mTerrain;
+
   AGBox3 mBBox;
 
   size_t mXs,mYs;
@@ -48,8 +52,8 @@ class TerrainPieceVA:public SceneNode
   HeightMap *mMap;
 
   VertexArray m3dArray;
+  VertexArray mGrassArray;
 
-  AGTexture m3D;
 };
 
 
@@ -64,6 +68,11 @@ class Terrain
   WPieces water;
 
   float w,h;
+
+  AGTexture m3D;
+
+  AGTexture mGrass;
+
 public:
   Terrain(HeightMap &map);
 
@@ -72,6 +81,8 @@ public:
   virtual void mapChanged();
   void addToScenes();
 
+  AGTexture *get3dTexture();
+  AGTexture *getGrassTexture();
 };
 
 

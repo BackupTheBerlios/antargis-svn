@@ -29,6 +29,7 @@
 //#include "voxel_gen.h"
 #include "scenenode.h"
 #include "mesh.h"
+#include "mesh_optimizer.h"
 #include "mesh_data.h"
 #include "antapp.h"
 #include "resource.h"
@@ -42,6 +43,7 @@
 #include "anim_mesh.h"
 #include "anim_mesh_data.h"
 #include "ant_config.h"
+#include "new_decal.h"
 //#include "ant_man.h"
 //#include "ant_geometry.h"
 #ifdef SWIG
@@ -52,6 +54,7 @@
 %include "scenenode.h"
 %include "mesh.h"
 %include "mesh_data.h"
+%include "mesh_optimizer.h"
 %include "scene.h"
 %include "antapp.h"
 %include "resource.h"
@@ -67,6 +70,7 @@
  //%include "ant_man.h"
  //%include "ant_geometry.h"
 %include "ant_config.h"
+%include "new_decal.h"
 
 #endif
 

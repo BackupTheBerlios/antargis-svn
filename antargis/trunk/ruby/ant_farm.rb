@@ -31,7 +31,7 @@ class AntFarm<AntHouse
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
-		
+		setDirection(-30)
 	end
 	
 	def setupMesh

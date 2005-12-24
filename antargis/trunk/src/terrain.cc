@@ -1,21 +1,14 @@
 #include "terrain.h"
 #include <ag_texturecache.h>
 
-const GLenum baseTexUnit= GL_TEXTURE0;
-const GLenum addTexUnit= GL_TEXTURE2;
-
-//#define FINE
-
-
 //////////////////////////////////////////////////////////////////////////
 // TerrainPieceVA
 //////////////////////////////////////////////////////////////////////////
-TerrainPieceVA::TerrainPieceVA(HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos):
-  //  mPosition(pPos+AGVector4(1.5,1.5,0,0)),
+TerrainPieceVA::TerrainPieceVA(Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos):
   mXs(xs),mYs(ys),mW(w),mH(h),
-  mMap(&map),
-  m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png"))
+  mMap(&map)
 {
+  mTerrain=t;
   mapChanged();
   setOrder(TERRAIN_Z);
 }
@@ -23,15 +16,15 @@ TerrainPieceVA::TerrainPieceVA(HeightMap &map,int xs,int ys,int w,int h,const AG
 void TerrainPieceVA::mapChanged()
 {
   mBBox=AGBox3();
-  CTRACE;
   m3dArray.clear();
+  mGrassArray.clear();
 
   AGVector4 white(1,1,1,1);
   AGVector4 v;
   AGVector3 n;
   AGVector2 tp;
   AGVector3 tp3;
-  float texFactor3w=1;
+  float texFactor3w=0.5;
   float texFactor3=1;
 
   // add Vertices
@@ -40,14 +33,32 @@ void TerrainPieceVA::mapChanged()
     for(y=mYs;y<=mYs+mH;y++)
       {
 	float grassHeight=mMap->getGrass(x,y);
+
+	float height=mMap->get(x,y);
+	if(height<0.5)
+	  {
+	    grassHeight*=height*2;
+	  }
+
 	AGVector4 c(1,1,1,grassHeight);
 
 	v=mMap->getVertex(x,y);
 	n=mMap->getNormal(x,y);
 	v+=AGVector4(0,0,0,0);
 
-        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,1-mMap->getGrass(x,y)*texFactor3);
+        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,grassHeight*texFactor3);
         m3dArray.addVertex(v,white,n,tp3);
+
+	mBBox.include(v.dim3());
+
+	v+=AGVector4(0,0,0.05,0);
+
+	float grassHeight2=std::min((1-grassHeight)*1.9f,1.0f);
+
+	AGVector4 alpha(1,1,1,grassHeight2);
+	AGVector2 tp(-v[0]*texFactor3w,-v[1]*texFactor3w);
+	
+	mGrassArray.addVertex(v,alpha,n,tp);
 
 
 	mBBox.include(v.dim3());
@@ -64,11 +75,19 @@ void TerrainPieceVA::mapChanged()
 	  {
 	    m3dArray.addTriangle(p2,p1,p0);
 	    m3dArray.addTriangle(p3,p1,p2);
+
+	    mGrassArray.addTriangle(p2,p1,p0);
+	    mGrassArray.addTriangle(p3,p1,p2);
+
+
 	  }
 	else
 	  {
 	    m3dArray.addTriangle(p3,p1,p0);
 	    m3dArray.addTriangle(p3,p0,p2);
+
+	    mGrassArray.addTriangle(p3,p1,p0);
+	    mGrassArray.addTriangle(p3,p0,p2);
 	  }
 
       }
@@ -101,30 +120,13 @@ AGBox3 TerrainPieceVA::bbox()
 
 void TerrainPieceVA::draw()
 {
-  //  cdebug(getOrder());
-  /*  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-  glDepthMask(true);
-  glEnable(GL_COLOR_MATERIAL);
-  //glColorMaterial(GL_FRONT,GL_DIFFUSE);
-  glEnable(GL_BLEND);
-  
-  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-  glColor4f(1,1,1,1);
   glEnable(GL_LIGHTING);
-  
-#ifndef OLD_TEX*/
-
-
-  glEnable(GL_LIGHTING);
-
 
   glDisable(GL_TEXTURE_2D);
   glEnable(GL_TEXTURE_3D);
-  glBindTexture(GL_TEXTURE_3D,m3D.getTextureID());
-glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE );
-  //  glEnable(GL_TEXTURE_3D);
+  glBindTexture(GL_TEXTURE_3D,mTerrain->get3dTexture()->getTextureID());
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE );
 
   m3dArray.draw();
 
@@ -133,95 +135,25 @@ glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
   glBindTexture(GL_TEXTURE_2D,0);
 
 
-  /*
-#else
-#ifdef THREE_LAYERS
+  // draw grass
 
-  glBindTexture(GL_TEXTURE_2D,mEarth.getTextureID());
 
-#ifdef FINE
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-#endif
-  mEarthArray.draw();
-  
-  glDepthMask(false);
-  glBindTexture(GL_TEXTURE_2D,mGrass.getTextureID());
-#ifdef FINE
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-#endif
+#ifdef DRAW_NICE_GRASS
+
+  assertGL;
+
+  glBindTexture(GL_TEXTURE_2D,mTerrain->getGrassTexture()->getTextureID());
+  //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  assertGL;
   mGrassArray.draw();
 
+  assertGL;
 
-  glBindTexture(GL_TEXTURE_2D,mGrassShadow.getTextureID());
-#ifdef FINE
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-#endif
-  mGrass2Array.draw();
-
-#else
-  
-  
-
-  // MULTITEXTURING
-  glActiveTexture(addTexUnit); // 2nd stage
-  glBindTexture(GL_TEXTURE_2D,mGrass.getTextureID());
-  glEnable(GL_TEXTURE_2D);
-  
-  glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_EXT);
-  glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_EXT, GL_INTERPOLATE_EXT);
-
-  glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_EXT, GL_PREVIOUS_EXT);
-  glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_EXT, GL_SRC_COLOR);
-
-  glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB_EXT, GL_TEXTURE);
-  glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB_EXT, GL_SRC_COLOR);
-
-  //  glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE2_RGB_EXT, GL_PRIMARY_COLOR_EXT);
-  //  glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_RGB_EXT, GL_CONSTANT_ALPHA);
-  glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE2_RGB_EXT, GL_PRIMARY_COLOR_EXT);
-  glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_RGB_EXT, GL_ONE_MINUS_SRC_COLOR);
-
-
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  
-
-
-  glActiveTexture(baseTexUnit);
-  glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D,mEarth.getTextureID());
-  glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_EXT);
-  glTexEnvf (GL_TEXTURE_ENV, GL_COMBINE_RGB_EXT, GL_REPLACE);
-
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    mEarthArray.draw();
-  
-  glDepthMask(false);
-
-  // MULTITEXTURING
-  glActiveTexture(addTexUnit);
-  glBindTexture(GL_TEXTURE_2D,0); // reset Texture unit 1
-  glDisable(GL_TEXTURE_2D);
-  glActiveTexture(baseTexUnit);
-
-  glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-  glBindTexture(GL_TEXTURE_2D,mGrassShadow.getTextureID());
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  mGrassArray.draw();
 
 #endif
-#endif
-  glDepthMask(true);
-  
-  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
 
-  */
+
 }
 
 
@@ -241,22 +173,28 @@ size_t TerrainPieceVA::getTriangles() const
 ////////////////////////////////////////////////////////////////////////////
 
 
-Terrain::Terrain(HeightMap &map)
+Terrain::Terrain(HeightMap &map):
+  m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png")),
+  mGrass(getTextureCache()->get("data/textures/terrain/grass4.png"))
 {
   size_t y,x;
 
   int tilesize=16;
+  size_t tiles=0;
 
   for(y=0; y<map.getH();y+=tilesize)
     for(x=0;x<map.getW();x+=tilesize)
       {
-	TerrainPieceVA *t=new TerrainPieceVA(map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	TerrainPieceVA *t=new TerrainPieceVA(this,map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	WaterPiece *w=new WaterPiece(map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);
 	mNodes.push_back(w);
 	mNodes.push_back(t);
+	tiles++;
       }
+
+  cdebug("TILES:"<<tiles);
   w=map.getW();
   h=map.getH();
 }
@@ -287,3 +225,12 @@ void Terrain::addToScenes()
       addToAllScenes(*j);
 }
 
+AGTexture *Terrain::get3dTexture()
+{
+  return &m3D;
+}
+
+AGTexture *Terrain::getGrassTexture()
+{
+  return &mGrass;
+}

@@ -135,9 +135,9 @@ def startGame(file="savegames/savegame0.antlvl")
 end
 puts ENV["_"]
 if ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/
-	savegame="savegames/savegame0.antlvl"
+	savegame="levels/level1.antlvl"
 	if ARGV.length>0
-		savegame="savegames/"+ARGV[0]+".antlvl"
+		savegame="levels/"+ARGV[0]+".antlvl"
 	end
 	startGame(savegame)	
 end

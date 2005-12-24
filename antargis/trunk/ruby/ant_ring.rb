@@ -56,13 +56,13 @@ end
 
 def makeRingMesh
 	mesh=Mesh.new(getRingData,AGVector4.new(0,0,0,0),0)
-	mesh.setOrder(DECAL_Z)
+	mesh.setOrder(RING_Z)
 	return mesh
 end
 
 def makeBigRingMesh
 	mesh=Mesh.new(getRingData(4),AGVector4.new(0,0,0,0),0)
-	mesh.setOrder(DECAL_Z)
+	mesh.setOrder(RING_Z)
 	return mesh
 end
 

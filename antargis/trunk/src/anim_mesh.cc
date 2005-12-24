@@ -137,7 +137,10 @@ AGVector3 Bone::interpolateTrans(float t)
 
 
 AnimMeshData::AnimMeshData(const std::string &xmlfile):
-  animShader("data/shaders/anim.vert","data/shaders/anim.frag"),mArray(&animShader)
+  animShader("data/shaders/anim.vert","data/shaders/anim.frag"),
+  animShaderDepth("data/shaders/anim.vert",""),
+  mArray(&animShader),
+  mArrayDepth(&animShaderDepth)
 {
   Document doc(xmlfile);
 
@@ -356,6 +359,19 @@ void AnimMeshData::setupArray()
 
   // set boneIDs
   mArray.addAttribute("bones",bonef);
+
+
+
+
+  for(size_t i=0;i<pos.size();i++)
+    mArrayDepth.addVertex(AGVector4(pos[i],1),AGVector4(1,1,1,1),normal[i],uv[i]);
+  for(size_t i=0;i<indices.size();i+=3)
+    mArrayDepth.addTriangle(indices[i],indices[i+1],indices[i+2]);
+
+  // set boneIDs
+  mArrayDepth.addAttribute("bones",bonef);
+
+
 }
 
 
@@ -391,22 +407,22 @@ void AnimMesh::setEntity(AntEntity *e)
 
 void AnimMesh::drawDepth()
 {
-   return;
-  drawPrivate(false);
+     return;
+  drawPrivate(false,false);
 }
 
 void AnimMesh::draw()
 {
   //  return;
-  drawPrivate(true);
+  drawPrivate(true,false);
 }
 void AnimMesh::drawPick()
 {
-  drawPrivate(false);
+  drawPrivate(false,true);
 }
 
 // at first try a simple animation without shaders
-void AnimMesh::drawPrivate(bool textured)
+void AnimMesh::drawPrivate(bool textured, bool mem)
 {
   bool fast=true;
   if(textured)
@@ -415,8 +431,8 @@ void AnimMesh::drawPrivate(bool textured)
       glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
       glEnable(GL_LIGHTING);
     }
-  else
-    fast=false; // FIXME: add shader for non-textured rendering
+  //  else
+  //    fast=false; // FIXME: add shader for non-textured rendering
 
   glPushMatrix();
 
@@ -441,8 +457,17 @@ void AnimMesh::drawPrivate(bool textured)
 	  glEnable(GL_COLOR_MATERIAL);
 
 	}
-      else
+      else if(mem)
 	mData->mArray.drawPick();
+      else
+	{
+	  mData->animShaderDepth.enable();
+	  mData->animShaderDepth.sendUniform("matrices",mShaderMatrices);
+	  mData->mArrayDepth.setColors(false);
+	  mData->mArrayDepth.draw();
+
+	  mData->animShaderDepth.disable();
+	}
     }
 
   else if(!mData->animate)

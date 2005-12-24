@@ -15,7 +15,7 @@ Renderer::Renderer():
   assert(gRenderer==0);
   gRenderer=this;
   mScene=0;
-  shadowMapSize=512;
+  shadowMapSize=1024;//512;
   shadowInited=false;
 }
 
@@ -60,7 +60,7 @@ Scene *Renderer::getCurrentScene()
 GLint Renderer::getShadowUnit()
 {
   assert(canMultitexture());
-  return 1;
+  return 3;
 }
 GLint Renderer::getNormalUnit()
 {
@@ -81,9 +81,13 @@ void Renderer::initShadowTexture()
   CTRACE;
   glGenTextures(1, &shadowMapTexture);
   glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-  glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,
-		  GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-  
+  //  glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,
+  //		  GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+
+  glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, shadowMapSize, shadowMapSize, 0,
+		  GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
+
+  assertGL;
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -131,8 +135,13 @@ void Renderer::endShadowComputation()
   //Read the depth buffer into the shadow map texture
   glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
   assertGL;
-  glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowMapSize, shadowMapSize);
-  
+  //  glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowMapSize, shadowMapSize);
+  //glCopyTexSubImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, 0, shadowMapSize, shadowMapSize);
+
+  glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, shadowMapSize, shadowMapSize,0);
+  assertGL;
+
+
   //restore states
   assertGL;
   glCullFace(GL_BACK);

@@ -3,7 +3,7 @@
 	<table cols="3" rows="3"><!-- center window -->
 		<colsize col="1" fixed="400"/>
 		<rowsize row="1" fixed="170"/>
-		<window col="1" row="1" name="window" title="Playername">
+		<window col="1" row="1" name="window" title="Playername" theme="story">
 			<table cols="1" rows="2">
 				<colsize col="0" relative="1"/>
 				<rowsize row="0" relative="1"/>

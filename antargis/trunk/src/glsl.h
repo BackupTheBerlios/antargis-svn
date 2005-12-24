@@ -25,10 +25,14 @@ class AntFragProgram
 {
  public:
   AntFragProgram(const std::string &pFile);
+  AntFragProgram();
   ~AntFragProgram();
+
+  bool valid() const;
 
  private:
   GLhandleARB fragShader;
+  bool mValid;
 
   friend class AntShaderProgram;
 };

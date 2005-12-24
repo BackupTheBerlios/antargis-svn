@@ -34,7 +34,7 @@ class AntRubyEditView<GLApp
 		@map=map
 		@size=3
 		#@terrain=TerrainMesh.new(@map)
-		setupLight
+#		setupLight
 		#@map.setScene(getScene)
 		$scene=getScene
 		#getScene.addNode(@terrain)
@@ -67,6 +67,7 @@ class AntRubyEditView<GLApp
 		addHandler(@layout.getChild("edit5"),:sigClick,:sigEdit5)
 		addHandler(@layout.getChild("edit10"),:sigClick,:sigEdit10)
 		addHandler(@layout.getChild("edit15"),:sigClick,:sigEdit15)
+		addHandler(@layout.getChild("editGrass"),:sigClick,:sigEditGrass)
 	end
 		
 	def eventClick(list,button)
@@ -92,9 +93,9 @@ class AntRubyEditView<GLApp
 				y=c.pos.y.to_i
 				middle=@map.get(x,y)
 				if button==1
-					middle+=1
+					middle+=0.2
 				elsif button==3 #right
-					middle-=1
+					middle-=0.2
 				end
 				for dx in (x-@size)..(x+@size)
 					for dy in (y-@size)..(y+@size)
@@ -105,6 +106,37 @@ class AntRubyEditView<GLApp
 							ov=@map.get(dx,dy)
 							cv=middle*v+ov*(1-v)
 							@map.set(dx,dy,cv)
+						end
+					end
+				end
+				@map.mapChanged
+			end
+		}
+	end
+	
+	def editGrass(list,button)
+		list.each{|c|
+			if isTerrain(c.node)
+				puts "TERRAIN:"
+				puts c.node
+				puts @terrain
+				x=c.pos.x.to_i
+				y=c.pos.y.to_i
+				middle=@map.getGrass(x,y)
+				if button==1
+					middle+=0.1
+				elsif button==3 #right
+					middle-=0.1
+				end
+				for dx in (x-@size)..(x+@size)
+					for dy in (y-@size)..(y+@size)
+						if dx>=0 and dx<=@map.getW and dy>=0 and dy<=@map.getH
+							d=Math::sqrt((dx-x)**2+(dy-y)**2)
+							v=1-(d/(@size))
+							v=[[0,v].max,1].min
+							ov=@map.getGrass(dx,dy)
+							cv=middle*v+ov*(1-v)
+							@map.setGrass(dx,dy,cv)
 						end
 					end
 				end
@@ -140,6 +172,10 @@ class AntRubyEditView<GLApp
 	def sigEdit15
 		@modifier="editHeight"
 		@size=15
+	end
+	
+	def sigEditGrass
+		@modifier="editGrass"
 	end
 	
 	def sigPointer
@@ -187,7 +223,11 @@ class AntRubyEditView<GLApp
 	end
 	def sigDeco(name,callerName,event,caller)
 		@modifier="addEntity"
-		@type=AntNewDeco
+		if callerName=="coach"
+			@type=AntDecoMesh
+		else
+			@type=AntNewDeco
+		end
 		@decoType=callerName
 		return
 	end

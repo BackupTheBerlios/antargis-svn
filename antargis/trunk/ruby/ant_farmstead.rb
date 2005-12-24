@@ -5,7 +5,7 @@ class AntFarmStead<AntHouse
 		super
 		setType("farmstead")
 		@lastBirth=0
-		
+		setDirection(-20)
 	end
 	def setupMesh
 		mesh=Mesh.new(getMeshData("data/models/livinghouse.ant2",1.6,"data/textures/models/livinghouse.png"),AGVector4.new(0,0,0),-20)

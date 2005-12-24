@@ -35,6 +35,8 @@ class AntRubyMap<AntMap
 		@myPlayer=nil
 		@triggers=[]
 		@heroes=[]
+		@started=false
+		@story={}
 	end
 	def getPlayer
 		@myPlayer
@@ -56,6 +58,8 @@ class AntRubyMap<AntMap
 				e=AntGrass.new
 			when "antTwig"
 				e=AntTwig.new
+			when "decoMesh"
+				e=AntDecoMesh.new
 		end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
@@ -102,7 +106,27 @@ class AntRubyMap<AntMap
 		if node.getName=="trigger" then
 			@triggers.push(Trigger.new(node))
 		end
+		if node.getName=="story" then
+			loadStory(node)
+		end
 		return e
+	end
+	
+	def loadStory(node)
+		node.get_children.each{|n|
+			name=n.getName
+			a=[]
+			n.get_children.each{|n2|
+				if n2.getName=="window"
+					text=""
+					n2.get_children("text").each{|n3|
+						text+=n3.getText
+					}
+					a.push(text)
+				end
+			}
+			@story[name]=a
+		}
 	end
 	
 	def removeEntity(e)
@@ -149,6 +173,9 @@ class AntRubyMap<AntMap
 	end
 	def trigger(hero,t)
 		@players.each{|p|p.trigger(hero,t)}
+		if @story[t.name]
+			playStory(t.name)
+		end
 	end
 	
 	def move(time)
@@ -162,6 +189,10 @@ class AntRubyMap<AntMap
 		}
 		
 		ambientSound(time)
+		if not @started
+			playStory("start")
+			@started=true
+		end
 	end
 	
 	def loadXML(n)
@@ -222,6 +253,11 @@ class AntRubyMap<AntMap
 		}
 		#exit
 		return ret
+	end
+	def playStory(name)
+		if @story[name]
+			$antView.playStory(@story[name])
+		end
 	end
 end
 

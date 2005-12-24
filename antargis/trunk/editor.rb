@@ -34,19 +34,9 @@ require 'view.rb'
 require 'editview.rb'
 
 class AntGameApp < AntRubyEditView
-#AntApp
 	def initialize(sw,sh)
-		super(sw,sh,AntRubyMap.new(64,64))
+		super(sw,sh,AntRubyMap.new(256,256))
 		$app=self	
-#		@map=AntargisMap.new(128,128)	
-		#@map=AntRubyMap.new(128,128)	
-		#$map=@map
-		#return
-		# load a level
-		#getMap().loadMap("savegames/savegame6.antlvl")
-	
-		#@view=AntRubyView.new(nil,AGRect.new(0,0,getMain().width,getMain.height),Pos3D.new(0,0,0))
-		#puts @view
 		@layout=AGLayout.new(@mainWidget,loadFile("data/gui/layout/editor.xml"))
 		@mainWidget.addChild(@layout)
 		#$screen=@layout

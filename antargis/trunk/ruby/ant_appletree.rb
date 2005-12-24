@@ -1,6 +1,6 @@
 #!/usr/bin/env
 
-$genNewTree=true
+$genNewTree=false
 
 def makeTrunk(opt,p0,p1,r0,r1,segments)
 	mv0=MeshVertex.new
@@ -216,6 +216,7 @@ def getAppleTreeMeshData(type="apple")
 		# then copy it to whatever file you want.
 		$appletreedata[type]=MeshData.new("data/models/tree1.ant2",1,texture)
 		$appletreedata[type].setTransparent(true)
+		#$appletreedata[type].setOverdraw(true) #Transparent(true)
 		puts "TREE_TRIANGLES:"
 		puts $appletreedata[type].getTriangles
 		#raise 1

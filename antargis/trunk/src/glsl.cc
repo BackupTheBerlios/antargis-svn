@@ -3,6 +3,35 @@
 #include "ag_main.h"
 #include "scene.h"
 
+std::map<std::string,AntVertexProgram*> mVertexPrograms;
+std::map<std::string,AntFragProgram*> mFragPrograms;
+
+AntVertexProgram *getVertexProgram(const std::string &pFile)
+{
+  std::map<std::string,AntVertexProgram*>::iterator i=mVertexPrograms.find(pFile);
+
+  if(i==mVertexPrograms.end())
+    {
+      AntVertexProgram *p=new AntVertexProgram(pFile);
+      mVertexPrograms[pFile]=p;
+      return p;
+    }
+  return i->second;
+}
+
+AntFragProgram *getFragProgram(const std::string &pFile)
+{
+  std::map<std::string,AntFragProgram*>::iterator i=mFragPrograms.find(pFile);
+
+  if(i==mFragPrograms.end())
+    {
+      AntFragProgram *p=new AntFragProgram(pFile);
+      mFragPrograms[pFile]=p;
+      return p;
+    }
+  return i->second;
+}
+
 int GLSL_ok=-1;
 bool ok()
 {
@@ -63,8 +92,9 @@ AntVertexProgram::~AntVertexProgram()
 
 AntFragProgram::AntFragProgram(const std::string &pFile)
 {
+  mValid=false;
   //  CTRACE;
-  if(ok())
+  if(ok() && pFile.length()>0)
     {
       fragShader = glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
       std::string s=loadFile(pFile);
@@ -73,8 +103,14 @@ AntFragProgram::AntFragProgram(const std::string &pFile)
       glShaderSourceARB(fragShader, 1, x,NULL);
       glCompileShaderARB(fragShader);
       printInfoLog(fragShader);
+      mValid=true;
       
     }
+}
+
+AntFragProgram::AntFragProgram()
+{
+  mValid=false;
 }
 
 AntFragProgram::~AntFragProgram()
@@ -84,7 +120,15 @@ AntFragProgram::~AntFragProgram()
     glDeleteObjectARB(fragShader);
 }
 
+
+bool AntFragProgram::valid() const
+{
+  return mValid;
+}
+
+
 AntShaderProgram::AntShaderProgram(const std::string &pVertexFile,const std::string &pFragFile):
+  //  vertex(getVertexProgram(pVertexFile)),frag(getFragProgram(pFragFile))
   vertex(pVertexFile),frag(pFragFile)
 {
   //  CTRACE;
@@ -92,7 +136,8 @@ AntShaderProgram::AntShaderProgram(const std::string &pVertexFile,const std::str
     {
       p = glCreateProgramObjectARB();
       glAttachObjectARB(p,vertex.vertexShader);
-      glAttachObjectARB(p,frag.fragShader);
+      if(frag.valid())
+	glAttachObjectARB(p,frag.fragShader);
       
       glLinkProgramARB(p);
       printInfoLog(p);

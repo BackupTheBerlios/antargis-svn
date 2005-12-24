@@ -53,12 +53,13 @@ Scene::Scene(int w,int h)
   windowWidth=w;
   windowHeight=h;
   white=AGVector4(1,1,1,1);
-  black=AGVector4(0,0,0,0);
+  black=AGVector4(0,0,0,1);
   inited=false;
   orthoShadow=true;
   
   cameraPosition=AGVector4(0,-20,20);
   lightPosition=AGVector4( -20, -13, 31,1);
+  lightPosition=AGVector4( -50, -50, 100,1);
   scenePosition=AGVector4(0,0,0,1);
 
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
@@ -167,6 +168,7 @@ void Scene::clear()
 void Scene::setCamera(AGVector4 v)
 {
   scenePosition=v;
+  scenePosition[3]=1;
   calcCameraView();
 }
 
@@ -254,7 +256,7 @@ void Scene::calcCameraView()
       
       if(orthoShadow)
 	// 1=   2=   3=front 4=back
-	glOrtho(-13,20,-20,46, 20,120); // left,rigt, bottom,top - these are estimated values // for 1024
+	glOrtho(-15,20,-20,46, 70,200); // left,rigt, bottom,top - these are estimated values // for 1024
       //	glOrtho(-1.3,1.3,-2,5, 2,10); // left,rigt, bottom,top - these are estimated values // for 1024
       else
 	gluPerspective(45.0f, 1.0f, 2.0f, 8.0f);
@@ -291,17 +293,45 @@ void Scene::initScene()
   glLoadMatrixf(cameraProjectionMatrix);
   
   glMatrixMode(GL_MODELVIEW);
-  glLoadMatrixf(cameraViewMatrix);
+  glLoadIdentity();
+  //  glLoadMatrixf(cameraViewMatrix);
   
   glViewport(0, 0, windowWidth, windowHeight);
   
   //Use dim light to represent shadowed areas
-  glLightfv(GL_LIGHT1, GL_POSITION, lightPosition);
-  glLightfv(GL_LIGHT1, GL_AMBIENT, white*0.2f);
-  glLightfv(GL_LIGHT1, GL_DIFFUSE, white);//*0.2f);
+  //  cdebug( lightPosition.toString()<<"   "<<scenePosition.toString()<<"  "<< (lightPosition+scenePosition).toString());
+
+  AGVector4 l=lightPosition+scenePosition;
+  l[3]=1;
+
+  glLightfv(GL_LIGHT1, GL_POSITION, l);
+  glLightfv(GL_LIGHT1, GL_AMBIENT, AGVector4(0.1,0.1,0.1,1));//white*0.05f);
+  glLightfv(GL_LIGHT1, GL_DIFFUSE, AGVector4(0.3,0.3,0.3,1));//white*0.3f);//*0.2f);
   glLightfv(GL_LIGHT1, GL_SPECULAR, black);
   glEnable(GL_LIGHT1);
+
+  AGVector4 lightPosition2=AGVector4( 0, 0, -50,1);
+
+  //  glLightfv(GL_LIGHT2, GL_POSITION, lightPosition2+scenePosition);
+  glLightfv(GL_LIGHT2, GL_AMBIENT, black);
+  glLightfv(GL_LIGHT2, GL_DIFFUSE, AGVector4(0.7,0.7,0.7,1));//white*0.7f);//*0.2f);
+  glLightfv(GL_LIGHT2, GL_SPECULAR, white);
+  glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, AGVector4(0,0,-1,0));
+  glLightf(GL_LIGHT2,GL_LINEAR_ATTENUATION,0);
+  glLightf(GL_LIGHT2,GL_QUADRATIC_ATTENUATION,0);
+  glLightf(GL_LIGHT2,GL_CONSTANT_ATTENUATION,0);
+  glEnable(GL_LIGHT2);
+
+
+
   glEnable(GL_LIGHTING);
+
+  glDisable(GL_LIGHT0);
+  glDisable(GL_LIGHT3);
+  glDisable(GL_LIGHT4);
+  glDisable(GL_LIGHT5);
+
+  glLoadMatrixf(cameraViewMatrix);
   
   glBindTexture(GL_TEXTURE_2D,0);
 

@@ -77,3 +77,23 @@ class AntTwig<AntMyEntity
 	end
 end
 
+class AntDecoMesh<AntMyEntity
+	def initialize(name="coach")
+		super(AGVector2.new(0,0))
+		@name=name
+# 		case name
+# 			else
+				setMesh(Mesh.new(getMeshData("data/models/ant_coach.ant2",0.6,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
+# 		end
+	end
+	def xmlName
+		return "decoMesh"
+	end
+	def saveXML(node)
+		super
+		node.set("meshName",@name)
+	end
+	def loadXML(node)
+		super
+	end
+end

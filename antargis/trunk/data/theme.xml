@@ -301,6 +301,14 @@
 	<enemyHero>
 		<font name='font' file="Arial.ttf" size="17" color='#f66100' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</enemyHero>
-	
+	<story>
+		<button>
+			<border>
+				<normal>
+					<image name="image" file="gui/wood_border.png"/>
+				</normal>
+			</border>
+		</button>
+	</story>	
 	
 </theme>

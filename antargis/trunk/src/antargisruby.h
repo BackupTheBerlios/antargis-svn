@@ -693,7 +693,7 @@ public:
 class SwigDirector_AGWindow : public AGWindow, public Swig::Director {
 
 public:
-    SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle = "");
+    SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle = "", std::string const &pTheme = "");
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual bool eventShow();
@@ -1329,7 +1329,7 @@ public:
 class SwigDirector_TerrainPieceVA : public TerrainPieceVA, public Swig::Director {
 
 public:
-    SwigDirector_TerrainPieceVA(VALUE self, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos);
+    SwigDirector_TerrainPieceVA(VALUE self, Terrain *t, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos);
     virtual void setPos(AGVector3 const &pPos);
     virtual bool transparent();
     virtual void clear();
@@ -1417,6 +1417,27 @@ public:
     virtual void drawShadow();
     virtual void draw();
     virtual void drawDepth();
+};
+
+
+class SwigDirector_NewDecal : public NewDecal, public Swig::Director {
+
+public:
+    SwigDirector_NewDecal(VALUE self, AGVector2 pos, float size, HeightMap *pMap, std::string const &pTexture);
+    virtual void setPos(AGVector3 const &pPos);
+    virtual bool transparent();
+    virtual void clear();
+    virtual void setRotation(float r);
+    virtual void advance(float time);
+    virtual void sort(AGVector4 const &pCamera);
+    virtual void setScene(Scene *s);
+    virtual void drawPick();
+    virtual ~SwigDirector_NewDecal();
+    virtual size_t getTriangles() const;
+    virtual void mapChanged();
+    virtual void drawShadow();
+    virtual void drawDepth();
+    virtual void draw();
 };
 
 

@@ -11,10 +11,11 @@
 			<button col="4" row="2" name="edit5" caption-image="data/gui/editor/edit5.png"/>
 			<button col="5" row="2" name="edit10" caption-image="data/gui/editor/edit10.png"/>
 			<button col="6" row="2" name="edit15" caption-image="data/gui/editor/edit15.png"/>
-			<button col="7" row="2" name="grass" caption-image="data/gui/editor/grass2.png"/>
-			<button col="8" row="2" name="allWater" caption-image="data/gui/editor/water2.png"/>
-			<button col="9" row="2" name="rubber" caption-image="data/gui/editor/rubber.png"/>
-			<button col="10" row="2" name="pointer" caption-image="data/gui/pointer3.png"/>
+			<button col="7" row="2" name="editGrass" caption-image="data/gui/editor/grass_updown.png"/>
+			<button col="8" row="2" name="grass" caption-image="data/gui/editor/grass2.png"/>
+			<button col="9" row="2" name="allWater" caption-image="data/gui/editor/water2.png"/>
+			<button col="10" row="2" name="rubber" caption-image="data/gui/editor/rubber.png"/>
+			<button col="11" row="2" name="pointer" caption-image="data/gui/pointer3.png"/>
 
 			<button col="0" row="1" name="hero" caption-image="data/gui/editor/hero1.png"/>
 			<button col="1" row="1" name="druid" caption-image="data/gui/editor/druid1.png"/>

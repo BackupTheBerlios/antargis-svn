@@ -19,10 +19,6 @@ class HeightMap:public RubyObject
   HeightMap(int w,int h);
   virtual ~HeightMap();
 
-  /*
-  void setScene(Scene *pScene);
-  Scene *getScene();
-  */
   // get status
   float getHeight(float x,float y) const;
   AGVector3 getNormal(int x,int y) const;
@@ -49,6 +45,7 @@ class HeightMap:public RubyObject
   // editing
   void setHeight(float height); // for whole plane
   void set(size_t x,size_t y,float height);
+  void setGrass(size_t x,size_t y,float height);
 
   //protected:
   virtual void mapChanged();  

@@ -180,6 +180,7 @@ void VertexArray::drawPick()
 {
   if(true)
     {
+      // paint in software - because this is faster for picking
       glBegin(GL_TRIANGLES);
       for(std::vector<Uint16>::iterator i=mIndices.begin();i!=mIndices.end();i++)
 	glVertex4fv(mVertices[*i]);

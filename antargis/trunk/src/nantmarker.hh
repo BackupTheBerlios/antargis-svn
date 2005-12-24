@@ -22,6 +22,12 @@
   result->mRubyObject=true;
 }
 %markfunc AnimMesh "general_markfunc"
+%exception NewDecal::NewDecal {
+	$action
+	result->mRUBY=self;
+  result->mRubyObject=true;
+}
+%markfunc NewDecal "general_markfunc"
 %exception Mesh::Mesh {
 	$action
 	result->mRUBY=self;
@@ -138,6 +144,20 @@
  }
  else vresult=Qnil;
 }
+%typemap(out) NewDecal*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
+   }
+ }
+ else vresult=Qnil;
+}
 %typemap(out) Mesh*{
  if($1)
  {
@@ -194,6 +214,8 @@ else if(dynamic_cast<AnimMesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
 else if(dynamic_cast<WaterPiece*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
+else if(dynamic_cast<NewDecal*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
 else if(dynamic_cast<Smoke*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
 else if(dynamic_cast<MeshData*>(result))

@@ -1,35 +1,9 @@
 #ifndef MESH_DATA_H
 #define MESH_DATA_H
 
-// simple Mesh building
-
-struct MeshVertex
-{
-  AGVector4 v,c;
-  AGVector3 n;
-  AGVector2 t;
-
-  // sorting
-  bool operator<(const MeshVertex &p) const;
-};
-
-// generates index list for same vertices (with same colors/normals..)
-class MeshOptimizer
-{
-  std::map<MeshVertex,int> mMap;
-  std::vector<int> mIndices;
-
-  std::vector<MeshVertex> mVertices;
-  int saved;
- public:
-  MeshOptimizer();
-
-  void add(const MeshVertex &v);
-  VertexArray getArray();
-};
-
-
-
+#include "scenenode.h"
+#include "mesh_data.h"
+#include "vertex_array.h"
 
 // Mesh organizing
 
@@ -47,6 +21,7 @@ class MeshData:public SceneNode
   bool overdraw;
   bool drawColors;
   bool mPickable;
+  bool mLighting;
 
 
  public:
@@ -77,6 +52,7 @@ class MeshData:public SceneNode
 
   void setTransparent(bool p);
   virtual bool transparent();
+  void setLighting(bool l);
 
   void setOverdraw(bool o);
   void setColors(bool c);
