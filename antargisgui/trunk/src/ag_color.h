@@ -30,11 +30,7 @@ class AGSurface;
 class AGColor:public SDL_Color
 {
  public:
-  //#ifdef SWIG
-  AGColor(int pr,int pg,int pb,int pa=255);//Uint8 pr,Uint8 pg,Uint8 pb,Uint8 pa);
-  /*#else
-  //  AGColor(Uint8 pr=0,Uint8 pg=0,Uint8 pb=0,Uint8 pa=255);
-  #endif*/
+  AGColor(int pr,int pg,int pb,int pa=255);
   
   AGColor(const AGColor &c);
   AGColor(Uint32 c,const AGSurface &pSurface);

@@ -27,6 +27,7 @@
 #include "privates.h"
 #include "sge.h"
 #include "ag_kill.h"
+#include "ag_png.h"
 #include "ag_glsurface.h"
 
 #include "SDL_image.h"
@@ -139,6 +140,14 @@ AGSurface::~AGSurface()
   if(getSurfaceManager())
     getSurfaceManager()->deregisterSurface(this);
 }
+
+void AGSurface::save(const std::string &pName) const
+{
+  assert(s);
+  std::string png=toPNG(s);
+  saveFile(pName,png);
+}
+
 
 AGSurface &AGSurface::operator=(const AGSurface &p)
 {
@@ -311,7 +320,7 @@ void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &
 	SDL_GetRGBA(c,ss->format,&r,&g,&b,&a);
 	c=SDL_MapRGBA(ds->format,r,g,b,a);
 
-	sge_PutPixel(ds,x,y,c);
+	sge_PutPixel(ds,dx,dy,c);
 
       }
 }

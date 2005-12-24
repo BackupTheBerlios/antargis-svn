@@ -302,7 +302,9 @@ class AGWindowLayoutCreator:public AGLayoutCreator
   virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
   {
       std::string title=pNode.get("title");
-      AGWidget *w=new AGWindow(pParent,pRect,title);
+      std::string theme=pNode.get("theme");
+      
+      AGWidget *w=new AGWindow(pParent,pRect,title,theme);
       return w;
   }
 };

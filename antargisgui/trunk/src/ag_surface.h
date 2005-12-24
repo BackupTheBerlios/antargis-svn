@@ -26,8 +26,6 @@
 #include <list>
 #include <SDL.h>
 #include <SDL_opengl.h>
-//#include <GL/gl.h>
-//#include <GL/glext.h>
 #include <GL/glu.h>
 #include "ag_geometry.h"
 #include "ag_painttarget.h"
@@ -71,6 +69,8 @@ class AGSurface:public AGPaintTarget
 
   virtual void putPixel(int x,int y,const AGColor &c);
   virtual AGColor getPixel(int x,int y) const;
+
+  void save(const std::string &pName) const;
 
  private:
 

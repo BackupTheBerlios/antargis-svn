@@ -8497,7 +8497,7 @@ void SwigDirector_AGTable::removeChild(AGWidget *w) {
 }
 
 
-SwigDirector_AGWindow::SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle): AGWindow(pWidget, pRect, pTitle), Swig::Director(self) {
+SwigDirector_AGWindow::SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle, std::string const &pTheme): AGWindow(pWidget, pRect, pTitle, pTheme), Swig::Director(self) {
     
 }
 
@@ -14779,6 +14779,30 @@ _wrap_AGSurface_getPixel(int argc, VALUE *argv, VALUE self) {
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGColor, 1);
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGSurface_save(int argc, VALUE *argv, VALUE self) {
+    AGSurface *arg1 = (AGSurface *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSurface, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    ((AGSurface const *)arg1)->save((std::string const &)*arg2);
+    
+    return Qnil;
 }
 
 
@@ -30364,6 +30388,59 @@ _wrap_new_AGWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg2 = (AGWidget *) 0 ;
     AGRect *arg3 = 0 ;
     std::string *arg4 = 0 ;
+    std::string *arg5 = 0 ;
+    AGWindow *result;
+    std::string temp4 ;
+    std::string temp5 ;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 0);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        if (TYPE(argv[2]) == T_STRING) {
+            //            temp4 = std::string(StringValuePtr(argv[2]));
+            temp4 = std::string(RSTRING(argv[2])->ptr,RSTRING(argv[2])->len);
+            arg4 = &temp4;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    {
+        if (TYPE(argv[3]) == T_STRING) {
+            //            temp5 = std::string(StringValuePtr(argv[3]));
+            temp5 = std::string(RSTRING(argv[3])->ptr,RSTRING(argv[3])->len);
+            arg5 = &temp5;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    {
+        char *classname = "Libantargisgui::AGWindow";
+        if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+            /* subclassed */
+            result = (AGWindow *)new SwigDirector_AGWindow(arg1,arg2,(AGRect const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
+            
+        } else {
+            result = (AGWindow *)new AGWindow(arg2,(AGRect const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
+            
+        }
+        DATA_PTR(self) = result;
+        
+        result->mRUBY=self;
+        result->mRubyObject=true;
+    }
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    AGWidget *arg2 = (AGWidget *) 0 ;
+    AGRect *arg3 = 0 ;
+    std::string *arg4 = 0 ;
     AGWindow *result;
     std::string temp4 ;
     
@@ -30418,7 +30495,7 @@ _wrap_AGWindow_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGWindow__SWIG_2(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
     AGRect *arg3 = 0 ;
@@ -30450,12 +30527,12 @@ _wrap_new_AGWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_AGWindow(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[5];
+    VALUE argv[6];
     int ii;
     
     argc = nargs + 1;
     argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+    for (ii = 1; (ii < argc) && (ii < 5); ii++) {
         argv[ii] = args[ii-1];
     }
     if (argc == 3) {
@@ -30472,7 +30549,7 @@ static VALUE _wrap_new_AGWindow(int nargs, VALUE *args, VALUE self) {
                     _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_AGWindow__SWIG_1(nargs, args, self);
+                    return _wrap_new_AGWindow__SWIG_2(nargs, args, self);
                 }
             }
         }
@@ -30495,7 +30572,36 @@ static VALUE _wrap_new_AGWindow(int nargs, VALUE *args, VALUE self) {
                         _v = (TYPE(argv[3]) == T_STRING) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_AGWindow__SWIG_0(nargs, args, self);
+                        return _wrap_new_AGWindow__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 5) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGWidget, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        _v = (TYPE(argv[3]) == T_STRING) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            _v = (TYPE(argv[4]) == T_STRING) ? 1 : 0;
+                        }
+                        if (_v) {
+                            return _wrap_new_AGWindow__SWIG_0(nargs, args, self);
+                        }
                     }
                 }
             }
@@ -38367,6 +38473,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGSurface.klass, "drawBorder", VALUEFUNC(_wrap_AGSurface_drawBorder), -1);
     rb_define_method(cAGSurface.klass, "putPixel", VALUEFUNC(_wrap_AGSurface_putPixel), -1);
     rb_define_method(cAGSurface.klass, "getPixel", VALUEFUNC(_wrap_AGSurface_getPixel), -1);
+    rb_define_method(cAGSurface.klass, "save", VALUEFUNC(_wrap_AGSurface_save), -1);
     cAGSurface.mark = 0;
     cAGSurface.destroy = (void (*)(void *)) free_AGSurface;
     

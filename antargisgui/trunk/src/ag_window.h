@@ -26,7 +26,7 @@
 class AGWindow:public AGTable
 {
  public:
-  AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle="");
+  AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle="",const std::string &pTheme="");
 
   void addChild(AGWidget *w);
 

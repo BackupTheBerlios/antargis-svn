@@ -693,7 +693,7 @@ public:
 class SwigDirector_AGWindow : public AGWindow, public Swig::Director {
 
 public:
-    SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle = "");
+    SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle = "", std::string const &pTheme = "");
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual bool eventShow();

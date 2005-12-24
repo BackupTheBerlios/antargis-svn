@@ -29,12 +29,16 @@
 
 #undef connect
 
-AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle):
+AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle,const std::string &pTheme):
   AGTable(pWidget,pRect),sigClose(this,"sigClose"),mTitle(pTitle)
 
 {
-  //  CTRACE;
-  AGSurface s=getTheme()->getSurface("window.border.image");
+  std::string tstr="window.border.image";
+  if(pTheme!="")
+    tstr=pTheme+"."+tstr;
+
+
+  AGSurface s=getTheme()->getSurface(tstr);
   int bw=s.getRect().w/3;
   int titBarHeight=20;
 

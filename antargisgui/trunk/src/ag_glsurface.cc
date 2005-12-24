@@ -233,7 +233,10 @@ SDL_Surface *toGLTexture(SDL_Surface *image, bool p3d=false)
 		  //		  a=255;
 		  Uint32 cprime = SDL_MapRGBA( openGLSurface->format, r, g, b, a );
 		 
-		  sge_PutPixel( openGLSurface, i, j, cprime);
+		  if(p3d)
+		    sge_PutPixel( openGLSurface, i, (image->h-1)-j, cprime); // invert y
+		  else
+		    sge_PutPixel( openGLSurface, i, j, cprime); // invert y
 		  //sge_PutPixelAlpha( openGLSurface, i, j, cprime,a);
 
 
@@ -292,10 +295,20 @@ GLuint assignTexture(SDL_Surface *pSurface)
 
   assertGL;
 
-  SDL_FreeSurface( texSurface );
-
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+  assertGL;
+
+  
+    // MIPMAPPING
+  /*
+  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);//NEAREST);//GL_LINEAR);
+  gluBuild2DMipmaps(GL_TEXTURE_2D, format, texSurface->w, texSurface->h, format, GL_UNSIGNED_BYTE, texSurface->pixels); // ( NEW )
+
+
+  */
+  SDL_FreeSurface( texSurface );
 
   assertGL;
 
@@ -307,6 +320,95 @@ GLuint assignTexture(SDL_Surface *pSurface)
   return id;
 }
 
+AGVector4 getColor3D(SDL_Surface *s,int x,int y,int d)
+{
+  int w=s->w;
+
+  if(x<0)
+    x+=w;
+  if(y<0)
+    y+=w;
+  if(x>=w)
+    x-=w;
+  if(y>=w)
+    y-=w;
+
+  y+=d*w;
+  Uint8 r,g,b,a;
+  Uint32 c=sge_GetPixel(s,x,y);
+
+  SDL_GetRGBA(c,s->format,&r,&g,&b,&a);
+  return AGVector4(r/float(0xFF),g/float(0xFF),b/float(0xFF),a/float(0xFF));
+}
+
+AGVector4 interpolate(SDL_Surface *s,int x,int y,int  z)
+{
+  AGVector4 c(0,0,0,0);
+
+  for(int i=-1;i<=1;i++)
+    for(int j=-1;j<=1;j++)
+      {
+	if(i==0 && j==0)
+	  c+=getColor3D(s,x+i,y+j,z)*4;
+	else
+	  c+=getColor3D(s,x+i,y+j,z);
+      }
+  return c/12.0;
+}
+
+Uint32 mapColor(const AGVector4 &c,SDL_Surface *s)
+{
+  Uint8 r,g,b,a;
+  r=int(c[0]*0xFF);
+  g=int(c[1]*0xFF);
+  b=int(c[2]*0xFF);
+  a=int(c[3]*0xFF);
+  return SDL_MapRGBA(s->format,r,g,b,a);
+}
+
+void build3DMipmaps(SDL_Surface *texSurface,int format)
+{
+  int w=texSurface->w;
+  int d=texSurface->h/texSurface->w;
+  SDL_Surface *old=texSurface;
+  SDL_Surface *neu;
+
+  int level=1;
+  for(;w>1 && level<20;)
+    {
+      d/=2;
+      if(d==0)
+      d=1;
+      neu=SDL_CreateRGBSurface(SDL_SWSURFACE,w/2,(w/2)*d, texSurface->format->BitsPerPixel, 0xFF, 0xFF<<8, 0xFF<<16, 0xFF<<24);
+      
+      // create lower level
+      for(int z=0;z<d;z++)
+	for(int y=0;y<w/2;y++)
+	  for(int x=0;x<w/2;x++)
+	    {
+	      Uint32 c=mapColor(interpolate(old,x*2,y*2,z),neu);
+	      sge_PutPixel(neu,x,y,c);
+	      sge_PutPixel(neu,x,y,sge_GetPixel(old,x*2,y*2));
+	    }
+      w/=2;
+
+
+      cdebug("w:"<<w<<" d:"<<d);
+      glTexImage3D( GL_TEXTURE_3D,
+		    level,                                      // no mip mapping
+		    format,
+		    w,
+		    w,
+		    d,
+		    0,                                      // no border
+		    format,                 // format
+		    GL_UNSIGNED_BYTE,
+		    neu->pixels );
+
+
+      level++;
+    }
+}
 
 GLuint assignTexture3D(SDL_Surface *pSurface)
 {
@@ -320,7 +422,7 @@ GLuint assignTexture3D(SDL_Surface *pSurface)
   cdebug("h:"<< surface->h);
   assert( surface->w < surface->h );
 
-  // Used to invert the surface. There must be a better way.
+  // Used to invert the surface vertically. There must be a better way.
   SDL_Surface* texSurface = SDL_CreateRGBSurface(       SDL_SWSURFACE,
                                                         surface->w, surface->h,
                                                         surface->format->BitsPerPixel,
@@ -352,13 +454,18 @@ GLuint assignTexture3D(SDL_Surface *pSurface)
 
   assertGL;
 
-  SDL_FreeSurface( texSurface );
-
   // FIXME disable this for a start
-  //  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  //  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  //  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);//NEAREST);
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);////_MIPMAP_LINEAR);//NEAREST);
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+  //FIXME:
+  //build3DMipmaps(texSurface,format);
+
+  //gluBuild3DMipmaps(GL_TEXTURE_3D, format, texSurface->w, texSurface->w, texSurface->h/texSurface->w, format, GL_UNSIGNED_BYTE, texSurface->pixels); // ( NEW )
 
   assertGL;
+  SDL_FreeSurface( texSurface );
 
   glEnable( GL_BLEND );
   glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
