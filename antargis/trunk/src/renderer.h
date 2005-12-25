@@ -27,6 +27,8 @@ class Renderer
 
   void beginShadowDrawing();
   void endShadowDrawing();
+
+  bool badShadowMap();
   
  private:
 

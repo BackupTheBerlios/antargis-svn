@@ -56,10 +56,12 @@ Scene::Scene(int w,int h)
   black=AGVector4(0,0,0,1);
   inited=false;
   orthoShadow=true;
+  orthoShadow=false;
   
   cameraPosition=AGVector4(0,-20,20);
   lightPosition=AGVector4( -20, -13, 31,1);
   lightPosition=AGVector4( -50, -50, 100,1);
+  lightPosition=AGVector4( -25, -50, 60,1);
   scenePosition=AGVector4(0,0,0,1);
 
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
@@ -247,7 +249,7 @@ void Scene::calcCameraView()
       glLoadIdentity();
       gluLookAt(lightPosition[0]+scenePosition[0], lightPosition[1]+scenePosition[1], lightPosition[2]+scenePosition[2],
 		scenePosition[0],scenePosition[1],scenePosition[2],
-		0.0f, 1.0f, 0.0f);
+		0.0f, 0.0f, 1.0f);
       glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
       
       
@@ -259,7 +261,25 @@ void Scene::calcCameraView()
 	glOrtho(-15,20,-20,46, 70,200); // left,rigt, bottom,top - these are estimated values // for 1024
       //	glOrtho(-1.3,1.3,-2,5, 2,10); // left,rigt, bottom,top - these are estimated values // for 1024
       else
-	gluPerspective(45.0f, 1.0f, 2.0f, 8.0f);
+	{
+	  float near0=20,near1=60;
+	  float far0=20,far1=110;
+
+	  float near=sqrt(near0*near0+near1*near1);
+	  float far=sqrt(far0*far0+far1*far1);
+	  
+	  float left=-25;
+	  float right=14;
+	  float bottom=-15;
+	  float top=14;
+
+	  if(getRenderer()->badShadowMap())
+	    top=bottom+(top-bottom)*1024.0f/768.0f;
+
+	  glFrustum(left, right, bottom, top,
+		    near,far);
+
+	}
       
       glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
     }

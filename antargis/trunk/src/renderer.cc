@@ -16,6 +16,7 @@ Renderer::Renderer():
   gRenderer=this;
   mScene=0;
   shadowMapSize=1024;//512;
+  shadowMapSize=512;
   shadowInited=false;
 }
 
@@ -125,7 +126,7 @@ void Renderer::beginShadowComputation()
   //Draw the scene
   // Offset the drawing a little back, so that slopy surfaces don't get shadowed
   glEnable(GL_POLYGON_OFFSET_FILL);
-  glPolygonOffset(1,1);
+  glPolygonOffset(0,1); // was 1,1
 
 }
 void Renderer::endShadowComputation()
@@ -295,6 +296,11 @@ void Renderer::endShadowDrawing()
 
 }
 
+
+bool Renderer::badShadowMap()
+{
+  return shadowMapSize==1024;
+}
 
 
 Renderer *getRenderer()

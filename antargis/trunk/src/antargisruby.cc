@@ -41536,6 +41536,22 @@ _wrap_Renderer_endShadowDrawing(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Renderer_badShadowMap(int argc, VALUE *argv, VALUE self) {
+    Renderer *arg1 = (Renderer *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Renderer, 0);
+    result = (bool)(arg1)->badShadowMap();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_getRenderer(int argc, VALUE *argv, VALUE self) {
     Renderer *result;
     VALUE vresult = Qnil;
@@ -52782,6 +52798,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cRenderer.klass, "endShadowComputation", VALUEFUNC(_wrap_Renderer_endShadowComputation), -1);
     rb_define_method(cRenderer.klass, "beginShadowDrawing", VALUEFUNC(_wrap_Renderer_beginShadowDrawing), -1);
     rb_define_method(cRenderer.klass, "endShadowDrawing", VALUEFUNC(_wrap_Renderer_endShadowDrawing), -1);
+    rb_define_method(cRenderer.klass, "badShadowMap", VALUEFUNC(_wrap_Renderer_badShadowMap), -1);
     cRenderer.mark = 0;
     cRenderer.destroy = (void (*)(void *)) free_Renderer;
     rb_define_module_function(mLibantargis, "getRenderer", VALUEFUNC(_wrap_getRenderer), -1);
