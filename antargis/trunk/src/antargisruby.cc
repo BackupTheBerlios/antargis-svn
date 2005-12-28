@@ -15716,7 +15716,7 @@ size_t SwigDirector_AnimMesh::getTriangles() const {
     VALUE result;
     
     if (swig_get_up()) {
-        return SceneNode::getTriangles();
+        return AnimMesh::getTriangles();
     }
     result = rb_funcall(swig_get_self(), rb_intern("getTriangles"), 0, NULL);
     c_result = (unsigned long) NUM2INT(result);
@@ -22145,6 +22145,22 @@ _wrap_AGWidget_left(int argc, VALUE *argv, VALUE self) {
     result = (int)((AGWidget const *)arg1)->left();
     
     vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGWidget_visible(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    result = (bool)((AGWidget const *)arg1)->visible();
+    
+    vresult = result ? Qtrue : Qfalse;
     return vresult;
 }
 
@@ -33204,14 +33220,17 @@ static VALUE
 _wrap_AGEdit_insert(int argc, VALUE *argv, VALUE self) {
     AGEdit *arg1 = (AGEdit *) 0 ;
     char arg2 ;
+    bool result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 0);
     arg2 = NUM2CHR(argv[0]);
-    (arg1)->insert(arg2);
+    result = (bool)(arg1)->insert(arg2);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -33462,6 +33481,21 @@ _wrap_AGEdit_getText(int argc, VALUE *argv, VALUE self) {
         vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGEdit_setMaxLength(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 0);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->setMaxLength(arg2);
+    
+    return Qnil;
 }
 
 
@@ -41709,19 +41743,42 @@ _wrap_HeightMap_get(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_HeightMap_getGrass(int argc, VALUE *argv, VALUE self) {
+_wrap_HeightMap_setTerrain(int argc, VALUE *argv, VALUE self) {
     HeightMap *arg1 = (HeightMap *) 0 ;
     size_t arg2 ;
     size_t arg3 ;
-    float result;
-    VALUE vresult = Qnil;
+    TerrainType arg4 ;
+    float arg5 ;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
     arg2 = NUM2ULONG(argv[0]);
     arg3 = NUM2ULONG(argv[1]);
-    result = (float)((HeightMap const *)arg1)->getGrass(arg2,arg3);
+    arg4 = (TerrainType) NUM2INT(argv[2]);
+    arg5 = (float) NUM2DBL(argv[3]);
+    (arg1)->setTerrain(arg2,arg3,arg4,arg5);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_HeightMap_getTerrain__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    size_t arg2 ;
+    size_t arg3 ;
+    TerrainType arg4 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = NUM2ULONG(argv[0]);
+    arg3 = NUM2ULONG(argv[1]);
+    arg4 = (TerrainType) NUM2INT(argv[2]);
+    result = (float)((HeightMap const *)arg1)->getTerrain(arg2,arg3,arg4);
     
     vresult = rb_float_new(result);
     return vresult;
@@ -41884,6 +41941,166 @@ _wrap_HeightMap_mapChanged(int argc, VALUE *argv, VALUE self) {
     (arg1)->mapChanged();
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_HeightMap_setTerrainScale(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    TerrainType arg2 ;
+    float arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = (TerrainType) NUM2INT(argv[0]);
+    arg3 = (float) NUM2DBL(argv[1]);
+    (arg1)->setTerrainScale(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_HeightMap_getTerrainValue(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    float arg2 ;
+    float arg3 ;
+    TerrainType arg4 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    arg3 = (float) NUM2DBL(argv[1]);
+    arg4 = (TerrainType) NUM2INT(argv[2]);
+    result = (float)(arg1)->getTerrainValue(arg2,arg3,arg4);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_HeightMap_getTerrain__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    float arg2 ;
+    float arg3 ;
+    TerrainType result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    arg3 = (float) NUM2DBL(argv[1]);
+    result = (TerrainType)(arg1)->getTerrain(arg2,arg3);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE _wrap_HeightMap_getTerrain(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[5];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_HeightMap, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_HeightMap_getTerrain__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_HeightMap, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_HeightMap_getTerrain__SWIG_0(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'HeightMap_getTerrain'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_HeightMap_getTerrainWeight(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    float arg2 ;
+    float arg3 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    arg3 = (float) NUM2DBL(argv[1]);
+    result = (float)(arg1)->getTerrainWeight(arg2,arg3);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_HeightMap_getTerrainScale(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    float arg2 ;
+    float arg3 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    arg3 = (float) NUM2DBL(argv[1]);
+    result = (float)(arg1)->getTerrainScale(arg2,arg3);
+    
+    vresult = rb_float_new(result);
+    return vresult;
 }
 
 
@@ -48955,6 +49172,25 @@ _wrap_AnimMesh_setEntity(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AnimMesh_getTriangles(int argc, VALUE *argv, VALUE self) {
+    AnimMesh *arg1 = (AnimMesh *) 0 ;
+    size_t result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((AnimMesh const *)arg1)->getTriangles();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_disown_AnimMesh(int argc, VALUE *argv, VALUE self) {
     AnimMesh *arg1 = (AnimMesh *) 0 ;
     
@@ -51542,6 +51778,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGWidget.klass, "height", VALUEFUNC(_wrap_AGWidget_height), -1);
     rb_define_method(cAGWidget.klass, "top", VALUEFUNC(_wrap_AGWidget_top), -1);
     rb_define_method(cAGWidget.klass, "left", VALUEFUNC(_wrap_AGWidget_left), -1);
+    rb_define_method(cAGWidget.klass, "visible", VALUEFUNC(_wrap_AGWidget_visible), -1);
     rb_define_method(cAGWidget.klass, "setWidth", VALUEFUNC(_wrap_AGWidget_setWidth), -1);
     rb_define_method(cAGWidget.klass, "setHeight", VALUEFUNC(_wrap_AGWidget_setHeight), -1);
     rb_define_method(cAGWidget.klass, "setTop", VALUEFUNC(_wrap_AGWidget_setTop), -1);
@@ -52148,6 +52385,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGEdit.klass, "setTheme", VALUEFUNC(_wrap_AGEdit_setTheme), -1);
     rb_define_method(cAGEdit.klass, "canFocus", VALUEFUNC(_wrap_AGEdit_canFocus), -1);
     rb_define_method(cAGEdit.klass, "getText", VALUEFUNC(_wrap_AGEdit_getText), -1);
+    rb_define_method(cAGEdit.klass, "setMaxLength", VALUEFUNC(_wrap_AGEdit_setMaxLength), -1);
     cAGEdit.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargis, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);
@@ -52802,6 +53040,15 @@ SWIGEXPORT void Init_libantargis(void) {
     cRenderer.mark = 0;
     cRenderer.destroy = (void (*)(void *)) free_Renderer;
     rb_define_module_function(mLibantargis, "getRenderer", VALUEFUNC(_wrap_getRenderer), -1);
+    rb_define_const(mLibantargis,"WATER", INT2NUM(WATER));
+    rb_define_const(mLibantargis,"SAND", INT2NUM(SAND));
+    rb_define_const(mLibantargis,"EARTH", INT2NUM(EARTH));
+    rb_define_const(mLibantargis,"GRASS", INT2NUM(GRASS));
+    rb_define_const(mLibantargis,"GRASS2", INT2NUM(GRASS2));
+    rb_define_const(mLibantargis,"FOREST", INT2NUM(FOREST));
+    rb_define_const(mLibantargis,"ROCK", INT2NUM(ROCK));
+    rb_define_const(mLibantargis,"ROCK2", INT2NUM(ROCK2));
+    rb_define_const(mLibantargis,"LASTTERRAIN", INT2NUM(LASTTERRAIN));
     rb_define_module_function(mLibantargis, "disown_HeightMap", VALUEFUNC(_wrap_disown_HeightMap), -1);
     
     cHeightMap.klass = rb_define_class_under(mLibantargis, "HeightMap", rb_cObject);
@@ -52812,7 +53059,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "getNormal", VALUEFUNC(_wrap_HeightMap_getNormal), -1);
     rb_define_method(cHeightMap.klass, "getVertex", VALUEFUNC(_wrap_HeightMap_getVertex), -1);
     rb_define_method(cHeightMap.klass, "get", VALUEFUNC(_wrap_HeightMap_get), -1);
-    rb_define_method(cHeightMap.klass, "getGrass", VALUEFUNC(_wrap_HeightMap_getGrass), -1);
+    rb_define_method(cHeightMap.klass, "setTerrain", VALUEFUNC(_wrap_HeightMap_setTerrain), -1);
     rb_define_method(cHeightMap.klass, "getW", VALUEFUNC(_wrap_HeightMap_getW), -1);
     rb_define_method(cHeightMap.klass, "getH", VALUEFUNC(_wrap_HeightMap_getH), -1);
     rb_define_method(cHeightMap.klass, "truncPos", VALUEFUNC(_wrap_HeightMap_truncPos), -1);
@@ -52822,6 +53069,11 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "set", VALUEFUNC(_wrap_HeightMap_set), -1);
     rb_define_method(cHeightMap.klass, "setGrass", VALUEFUNC(_wrap_HeightMap_setGrass), -1);
     rb_define_method(cHeightMap.klass, "mapChanged", VALUEFUNC(_wrap_HeightMap_mapChanged), -1);
+    rb_define_method(cHeightMap.klass, "setTerrainScale", VALUEFUNC(_wrap_HeightMap_setTerrainScale), -1);
+    rb_define_method(cHeightMap.klass, "getTerrainValue", VALUEFUNC(_wrap_HeightMap_getTerrainValue), -1);
+    rb_define_method(cHeightMap.klass, "getTerrain", VALUEFUNC(_wrap_HeightMap_getTerrain), -1);
+    rb_define_method(cHeightMap.klass, "getTerrainWeight", VALUEFUNC(_wrap_HeightMap_getTerrainWeight), -1);
+    rb_define_method(cHeightMap.klass, "getTerrainScale", VALUEFUNC(_wrap_HeightMap_getTerrainScale), -1);
     cHeightMap.mark = (void (*)(void *)) general_markfunc;
     cHeightMap.destroy = (void (*)(void *)) free_HeightMap;
     rb_define_module_function(mLibantargis, "disown_AntMap", VALUEFUNC(_wrap_disown_AntMap), -1);
@@ -53237,6 +53489,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAnimMesh.klass, "bbox", VALUEFUNC(_wrap_AnimMesh_bbox), -1);
     rb_define_method(cAnimMesh.klass, "mark", VALUEFUNC(_wrap_AnimMesh_mark), -1);
     rb_define_method(cAnimMesh.klass, "setEntity", VALUEFUNC(_wrap_AnimMesh_setEntity), -1);
+    rb_define_method(cAnimMesh.klass, "getTriangles", VALUEFUNC(_wrap_AnimMesh_getTriangles), -1);
     cAnimMesh.mark = (void (*)(void *)) general_markfunc;
     cAnimMesh.destroy = (void (*)(void *)) free_AnimMesh;
     

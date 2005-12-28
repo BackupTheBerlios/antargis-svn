@@ -88,6 +88,7 @@ void Smoke::advance(float time)
 
 void Smoke::draw()
 {
+  //  return;
   glDisable(GL_ALPHA_TEST);
   glEnable(GL_BLEND);
   glDepthMask(false);

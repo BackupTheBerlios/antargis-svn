@@ -16,7 +16,7 @@ Renderer::Renderer():
   gRenderer=this;
   mScene=0;
   shadowMapSize=1024;//512;
-  shadowMapSize=512;
+  //shadowMapSize=512;
   shadowInited=false;
 }
 

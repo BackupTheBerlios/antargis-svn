@@ -1,22 +1,50 @@
 <?xml version="1.0"?>
 <layout geometry="(0,0,1024,768)" name="EditLayout">
-	<table cols="2" rows="2">
-		<rowsize row="1" fixed="150"/>
-		<colsize col="0" fixed="650"/>
-		<table cols="13" rows="3" col="0" row="1">
-			<button col="0" row="2" name="edit1" caption-image="data/gui/editor/edit1.png"/>
-			<button col="1" row="2" name="edit2" caption-image="data/gui/editor/edit2.png"/>
-			<button col="2" row="2" name="edit3" caption-image="data/gui/editor/edit3.png"/>
-			<button col="3" row="2" name="edit4" caption-image="data/gui/editor/edit4.png"/>
-			<button col="4" row="2" name="edit5" caption-image="data/gui/editor/edit5.png"/>
-			<button col="5" row="2" name="edit10" caption-image="data/gui/editor/edit10.png"/>
-			<button col="6" row="2" name="edit15" caption-image="data/gui/editor/edit15.png"/>
-			<button col="7" row="2" name="editGrass" caption-image="data/gui/editor/grass_updown.png"/>
-			<button col="8" row="2" name="grass" caption-image="data/gui/editor/grass2.png"/>
-			<button col="9" row="2" name="allWater" caption-image="data/gui/editor/water2.png"/>
-			<button col="10" row="2" name="rubber" caption-image="data/gui/editor/rubber.png"/>
-			<button col="11" row="2" name="pointer" caption-image="data/gui/pointer3.png"/>
+	<table cols="2" rows="3">
+		<rowsize row="1" fixed="50"/>
+		<rowsize row="2" fixed="150"/>
+		<colsize col="0" fixed="1000"/>
+		<radioGroup col="0" row="1" name="ChooserGroup">
+			<table cols="20" rows="1" col="0" row="1" name="chooser">
+				<radio col="0" row="0" name="terrain" caption-image="data/gui/editor/grass_updown.png"/>
+				<radio col="1" row="0" name="entities" caption-image="data/gui/editor/fir.png"/>
+			</table>
+		</radioGroup>
+		<table col="0" row="2" cols="1" rows="3" name="terrainTab">
+			<radioGroup col="0" row="0" name="SizeGroup">
+				<table cols="20" rows="1">
+					<radio col="0" row="0" name="edit1" caption-image="data/gui/editor/edit1.png"/>
+					<radio col="1" row="0" name="edit2" caption-image="data/gui/editor/edit2.png"/>
+					<radio col="2" row="0" name="edit3" caption-image="data/gui/editor/edit3.png"/>
+					<radio col="3" row="0" name="edit4" caption-image="data/gui/editor/edit4.png"/>
+					<radio col="4" row="0" name="edit5" caption-image="data/gui/editor/edit5.png"/>
+					<radio col="5" row="0" name="edit10" caption-image="data/gui/editor/edit10.png"/>
+					<radio col="6" row="0" name="edit15" caption-image="data/gui/editor/edit15.png"/>
+				</table>
+			</radioGroup>
+			<radioGroup col="0" row="0" name="HardGroup">
+				<table cols="20" rows="1">
+					<radio col="10" row="0" name="hard1" caption-image="data/gui/editor/hard1.png"/>
+					<radio col="11" row="0" name="hard2" caption-image="data/gui/editor/hard2.png"/>
+					<radio col="12" row="0" name="hard3" caption-image="data/gui/editor/hard3.png"/>
+				</table>
+			</radioGroup>
+			<radioGroup col="0" row="1" name="TerrainGroup">
+				<table cols="20" rows="1">
+					<radio col="0" row="0" name="editHeight" caption-image="data/gui/editor/grass_updown.png"/>
+					<radio col="1" row="0" name="editSand" caption-image="data/gui/editor/sand.png"/>
+					<radio col="2" row="0" name="editGround" caption-image="data/gui/editor/ground.png"/>
+					<radio col="3" row="0" name="editGrass" caption-image="data/gui/editor/grass2.png"/>
+				</table>
+			</radioGroup>
+			<table cols="20" rows="1" col="0" row="2" name="Actions">
+				<button col="0" row="0" name="allGrass" caption-image="data/gui/editor/grass2.png"/>
+				<button col="1" row="0" name="allWater" caption-image="data/gui/editor/water2.png"/>
+			</table>
 
+			
+		</table>
+		<table name="entitiesTab" rows="3" cols="20" col="0" row="2">
 			<button col="0" row="1" name="hero" caption-image="data/gui/editor/hero1.png"/>
 			<button col="1" row="1" name="druid" caption-image="data/gui/editor/druid1.png"/>
 			<button col="2" row="1" name="man" caption-image="data/gui/editor/man.png"/>
@@ -41,6 +69,8 @@
 			<button col="11" row="0" name="path" caption-image="data/gui/editor/path.png"/>
 			<button col="12" row="0" name="block" caption-image="data/gui/editor/block2.png"/>
 			
+			<button col="0" row="2" name="rubber" caption-image="data/gui/editor/rubber.png"/>
+			<button col="1" row="2" name="pointer" caption-image="data/gui/pointer3.png"/>
 		</table>
 	</table>
 </layout>

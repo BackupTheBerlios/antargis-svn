@@ -13,6 +13,12 @@ class Scene;
 class Mesh;
 class Terrain;
 
+enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LASTTERRAIN};
+
+//char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock","rock2"};
+
+#define FIRSTTERRAIN WATER
+
 class HeightMap:public RubyObject
 {
  public:
@@ -24,7 +30,11 @@ class HeightMap:public RubyObject
   AGVector3 getNormal(int x,int y) const;
   AGVector4 HeightMap::getVertex(int x,int y);
   float get(size_t x,size_t y) const;
-  float getGrass(size_t x,size_t y) const;
+  //float getGrass(size_t x,size_t y) const;
+
+  void setTerrain(size_t x,size_t y,TerrainType t,float v);
+  float getTerrain(size_t x,size_t y,TerrainType t) const;
+
 
   size_t getW() const
   {
@@ -49,9 +59,37 @@ class HeightMap:public RubyObject
 
   //protected:
   virtual void mapChanged();  
+
+
+  void setTerrainScale(TerrainType t,float s);
+  float HeightMap::getTerrainValue(float x,float y,TerrainType t);
+  TerrainType HeightMap::getTerrain(float x,float y);
+  float HeightMap::getTerrainWeight(float x,float y);
+  float HeightMap::getTerrainScale(float x,float y);
+
+
+
+
  private:
   std::vector<float> mHeights;
+
+
+  std::map<TerrainType,float> mTerrainScale;
+
+  // sum of all should be one - or at least they get normalized to 1 and then the heighest is chosen and weighted with the mean value
+  std::map<TerrainType,std::vector<float> > mTerrainTypes;
+  /*
+
+  std::vector<float> mWater;
+  std::vector<float> mSand;
+  std::vector<float> mEarth;
   std::vector<float> mGrass;
+  std::vector<float> mGrass2;
+  std::vector<float> mForest;
+  std::vector<float> mRock;
+  std::vector<float> mRock2;
+  */
+
   size_t mW,mH;
 
  protected:

@@ -1,7 +1,61 @@
 <?xml version="1.0"?>
 <theme>
 	<button>
-		<background>
+			<border>
+				<normal>
+					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+				</normal>
+				<lighted>
+					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+				</lighted>
+				<pressed>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</pressed>
+				<checked>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</checked>
+				<checkedlighted>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</checkedlighted>
+			</border>
+			<background>
+				<normal>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</normal>
+				<lighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#515488'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#262849'/>
+				</lighted>
+				<pressed>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#262849'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#515488'/>
+				</pressed>
+				<checkedlighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#856c30'/>
+					<color name='gradientColor2' color='#6f5926'/>
+					<color name='gradientColor3' color='#6f5926'/>
+					<color name='gradientColor4' color='#645021'/>
+				</checkedlighted>
+				<checked>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#765f27'/>
+					<color name='gradientColor2' color='#614e20'/>
+					<color name='gradientColor3' color='#53431b'/>
+					<color name='gradientColor4' color='#443616'/>
+				</checked>
+			</background>
+<!--		<background>
 			<normal>
 				<color name='gradientColor1' color='#E7E7E7'/>
 				<color name='gradientColor2' color='#C9C9C9'/>
@@ -25,7 +79,7 @@
 			<color name="color1" color='#E0E0E0'/>
 			<color name="color2" color="#404040"/>
 			<value name="width" value="1"/>
-		</border>
+		</border>-->
 		<text>
 			<font name="font" file="Arial.ttf" size="22" color="#000000"/>
 		</text>

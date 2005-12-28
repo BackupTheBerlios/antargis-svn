@@ -55,6 +55,8 @@ class AnimMesh:public SceneNode
 
   void setEntity(AntEntity *e);
 
+  virtual size_t getTriangles() const;
+
  private:
 
   void drawPrivate(bool textured,bool mem);

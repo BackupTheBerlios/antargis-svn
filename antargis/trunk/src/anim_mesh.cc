@@ -707,6 +707,11 @@ void AnimMesh::mark()
   markObject(mData);
 }
 
+size_t AnimMesh::getTriangles() const
+{
+  return mData->indices.size()/3;
+}
+
 
 /* fast rendering
 

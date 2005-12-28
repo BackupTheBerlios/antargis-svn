@@ -33,41 +33,65 @@ class AntRubyEditView<GLApp
 		$map=map
 		@map=map
 		@size=3
-		#@terrain=TerrainMesh.new(@map)
-#		setupLight
-		#@map.setScene(getScene)
 		$scene=getScene
-		#getScene.addNode(@terrain)
 	
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/edit_layout.xml"))
 		setMainWidget(@layout)
 		@mainWidget=@layout
 		addHandler(@layout.getChild("allWater"),:sigClick,:sigAllWater)
-		addHandler(@layout.getChild("grass"),:sigClick,:sigAllGrass)
-		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
+		addHandler(@layout.getChild("allGrass"),:sigClick,:sigAllGrass)
 		
-		addHandler(@layout.getChild("tree"),:sigClick,:sigTree)
+		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
 		
 		decos=["flower","gravel","grassLight","hole","rock","coach","floor","path","block"]
 		decos.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man"]
+		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man","tree"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
 		
 		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
 		
-		addHandler(@layout.getChild("edit1"),:sigClick,:sigEdit1)
-		addHandler(@layout.getChild("edit2"),:sigClick,:sigEdit2)
-		addHandler(@layout.getChild("edit3"),:sigClick,:sigEdit3)
-		addHandler(@layout.getChild("edit4"),:sigClick,:sigEdit4)
-		addHandler(@layout.getChild("edit5"),:sigClick,:sigEdit5)
-		addHandler(@layout.getChild("edit10"),:sigClick,:sigEdit10)
-		addHandler(@layout.getChild("edit15"),:sigClick,:sigEdit15)
-		addHandler(@layout.getChild("editGrass"),:sigClick,:sigEditGrass)
+# 		addHandler(@layout.getChild("edit1"),:sigClick,:sigEdit1)
+# 		addHandler(@layout.getChild("edit2"),:sigClick,:sigEdit2)
+# 		addHandler(@layout.getChild("edit3"),:sigClick,:sigEdit3)
+# 		addHandler(@layout.getChild("edit4"),:sigClick,:sigEdit4)
+# 		addHandler(@layout.getChild("edit5"),:sigClick,:sigEdit5)
+# 		addHandler(@layout.getChild("edit10"),:sigClick,:sigEdit10)
+# 		addHandler(@layout.getChild("edit15"),:sigClick,:sigEdit15)
+		
+		[1,2,3,5,10,15].each{|s|addHandler(@layout.getChild("edit#{s}"),:sigClick,:sigSize)}
+		["editHeight","editSand","editGround","editGrass"].each{|n|
+			addHandler(@layout.getChild(n),:sigClick,:sigSelectEdit)
+		}
+		[1,2,3].each{|h|addHandler(@layout.getChild("hard#{h}"),:sigClick,:sigHard)}
+		
+		@hard=2
+		#addHandler(@layout.getChild("editGrass"),:sigClick,:sigEditGrass)
+		
+		addHandler(@layout.getChild("terrain"),:sigClick,:sigTabSelect)
+		addHandler(@layout.getChild("entities"),:sigClick,:sigTabSelect)
+		@buttonlayout=@layout
+		sigTabSelect("terrain")
+	end
+	
+	def sigTabSelect(name)
+		["terrain","entities"].each{|e|
+			if e==name
+				w=@buttonlayout.getChild(e+"Tab")
+				if w
+					w.show
+				end
+			else
+				w=@buttonlayout.getChild(e+"Tab")
+				if w
+					w.hide
+				end
+			end
+		}
 	end
 		
 	def eventClick(list,button)
@@ -84,6 +108,9 @@ class AntRubyEditView<GLApp
 		return
 	end
 	def editHeight(list,button)
+	
+		diff={1=>0.5, 2=>1, 3=>1.5}[@hard]
+	
 		list.each{|c|
 			if isTerrain(c.node)
 				puts "TERRAIN:"
@@ -93,16 +120,16 @@ class AntRubyEditView<GLApp
 				y=c.pos.y.to_i
 				middle=@map.get(x,y)
 				if button==1
-					middle+=0.2
+					middle+=diff
 				elsif button==3 #right
-					middle-=0.2
+					middle-=diff
 				end
 				for dx in (x-@size)..(x+@size)
 					for dy in (y-@size)..(y+@size)
 						if dx>=0 and dx<=@map.getW and dy>=0 and dy<=@map.getH
 							d=Math::sqrt((dx-x)**2+(dy-y)**2)
 							v=1-(d/(@size))
-							v=[0,v].max
+							v=[1,[0,v].max].min
 							ov=@map.get(dx,dy)
 							cv=middle*v+ov*(1-v)
 							@map.set(dx,dy,cv)
@@ -144,38 +171,44 @@ class AntRubyEditView<GLApp
 			end
 		}
 	end
-	
-	def sigEdit1
-		@modifier="editHeight"
-		@size=1
-	end
-	def sigEdit2
-		@modifier="editHeight"
-		@size=2
-	end
-	def sigEdit3
-		@modifier="editHeight"
-		@size=3
-	end
-	def sigEdit4
-		@modifier="editHeight"
-		@size=4
-	end
-	def sigEdit5
-		@modifier="editHeight"
-		@size=5
-	end
-	def sigEdit10
-		@modifier="editHeight"
-		@size=10
-	end
-	def sigEdit15
-		@modifier="editHeight"
-		@size=15
+	def editTerrain(list,button)
+		tt={"editSand"=>SAND,"editGround"=>EARTH,"editGrass"=>GRASS}[@terrainType]
+		h={1=>0.3,2=>0.6,3=>1}[@hard]
+		list.each{|c|
+			if isTerrain(c.node)
+				x=c.pos.x.to_i
+				y=c.pos.y.to_i
+				for dx in (x-@size)..(x+@size)
+					for dy in (y-@size)..(y+@size)
+						if dx>=0 and dx<=@map.getW and dy>=0 and dy<=@map.getH
+							d=Math::sqrt((dx-x)**2+(dy-y)**2)
+							v=1-(d/(@size))
+							v=[[0,v].max,1].min
+							ov=@map.getTerrain(dx,dy,tt)
+							cv=[ov+v*h,1].min
+							@map.setTerrain(dx,dy,tt,cv)
+						end
+					end
+				end
+				@map.mapChanged
+			end
+		}
 	end
 	
-	def sigEditGrass
-		@modifier="editGrass"
+	def sigSelectEdit(name)
+		if name=="editHeight"
+			@modifier=name
+		else
+			@modifier="editTerrain"
+			@terrainType=name
+		end
+	end
+	
+	def sigSize(name)
+		@size=name[4..10].to_i
+	end
+	def sigHard(name)
+		@hard=name[4..10].to_i
 	end
 	
 	def sigPointer
@@ -186,10 +219,6 @@ class AntRubyEditView<GLApp
 		@modifier="doRubber"
 	end
 	
-	def sigTree
-		@modifier="addEntity"
-		@type=AntNewTree
-	end
 	def sigAddEnt(name,callerName,event,caller)
 		@modifier="addEntity"
 		case callerName
@@ -219,6 +248,8 @@ class AntRubyEditView<GLApp
 				@appearance="druid"
 			when "twig"
 				@type=AntTwig
+			when "tree"
+				@type=AntNewTree
 		end
 	end
 	def sigDeco(name,callerName,event,caller)

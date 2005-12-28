@@ -17,7 +17,6 @@ void TerrainPieceVA::mapChanged()
 {
   mBBox=AGBox3();
   m3dArray.clear();
-  mGrassArray.clear();
 
   AGVector4 white(1,1,1,1);
   AGVector4 v;
@@ -25,41 +24,21 @@ void TerrainPieceVA::mapChanged()
   AGVector2 tp;
   AGVector3 tp3;
   float texFactor3w=0.5;
-  float texFactor3=1;
 
   // add Vertices
   size_t x,y;
   for(x=mXs;x<=mXs+mW;x++)
     for(y=mYs;y<=mYs+mH;y++)
       {
-	float grassHeight=mMap->getGrass(x,y);
-
-	float height=mMap->get(x,y);
-	if(height<0.5)
-	  {
-	    grassHeight*=height*2;
-	  }
-
-	AGVector4 c(1,1,1,grassHeight);
-
 	v=mMap->getVertex(x,y);
+	//	cdebug("V:"<<v.toString());
+
 	n=mMap->getNormal(x,y);
-	v+=AGVector4(0,0,0,0);
 
-        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,grassHeight*texFactor3);
+	float texHeight=mMap->getTerrainScale(x,y);
+
+        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
         m3dArray.addVertex(v,white,n,tp3);
-
-	mBBox.include(v.dim3());
-
-	v+=AGVector4(0,0,0.05,0);
-
-	float grassHeight2=std::min((1-grassHeight)*1.9f,1.0f);
-
-	AGVector4 alpha(1,1,1,grassHeight2);
-	AGVector2 tp(-v[0]*texFactor3w,-v[1]*texFactor3w);
-	
-	mGrassArray.addVertex(v,alpha,n,tp);
-
 
 	mBBox.include(v.dim3());
       }
@@ -76,18 +55,11 @@ void TerrainPieceVA::mapChanged()
 	    m3dArray.addTriangle(p2,p1,p0);
 	    m3dArray.addTriangle(p3,p1,p2);
 
-	    mGrassArray.addTriangle(p2,p1,p0);
-	    mGrassArray.addTriangle(p3,p1,p2);
-
-
 	  }
 	else
 	  {
 	    m3dArray.addTriangle(p3,p1,p0);
 	    m3dArray.addTriangle(p3,p0,p2);
-
-	    mGrassArray.addTriangle(p3,p1,p0);
-	    mGrassArray.addTriangle(p3,p0,p2);
 	  }
 
       }
@@ -133,26 +105,6 @@ void TerrainPieceVA::draw()
   glDisable(GL_TEXTURE_3D);
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D,0);
-
-
-  // draw grass
-
-
-#ifdef DRAW_NICE_GRASS
-
-  assertGL;
-
-  glBindTexture(GL_TEXTURE_2D,mTerrain->getGrassTexture()->getTextureID());
-  //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  assertGL;
-  mGrassArray.draw();
-
-  assertGL;
-
-
-#endif
-
 
 }
 

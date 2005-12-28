@@ -52,7 +52,7 @@ class TerrainPieceVA:public SceneNode
   HeightMap *mMap;
 
   VertexArray m3dArray;
-  VertexArray mGrassArray;
+  //  VertexArray mGrassArray;
 
 };
 
