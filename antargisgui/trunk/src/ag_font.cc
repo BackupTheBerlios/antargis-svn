@@ -20,6 +20,7 @@
 
 #include "ag_font.h"
 #include "ag_fontengine.h"
+#include <sstream>
 
 AGFont::AGFont(const std::string &pFile,int size):
   mName(pFile),mSize(size),mColor(0xFF,0xFF,0xFF)
@@ -133,6 +134,17 @@ int AGFont::getBorder() const
 {
   return borderSize;
 }
+
+std::string AGFont::toString() const
+{
+  std::ostringstream os;
+
+  os<<"("<<mName<<" size:"<<(int)mSize<<")";
+
+  return os.str();
+}
+
+
 
 #define COMPARE(x,y) if(x!=y) return x<y
 

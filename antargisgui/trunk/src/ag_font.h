@@ -62,6 +62,9 @@ class AGFont
   int getHeight(const std::string &mText) const;
 
   AGFont &operator=(const AGFont &f);
+
+  std::string toString() const;
+
  private:
   Style mStyle;
   std::string mName;

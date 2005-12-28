@@ -26356,6 +26356,24 @@ _wrap_AGFont_getHeight(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGFont_toString(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    result = ((AGFont const *)arg1)->toString();
+    
+    {
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
+    }
+    return vresult;
+}
+
+
 static void
 free_AGFont(AGFont *arg1) {
     delete arg1;
@@ -39131,6 +39149,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGFont.klass, "getEmbossed", VALUEFUNC(_wrap_AGFont_getEmbossed), -1);
     rb_define_method(cAGFont.klass, "getWidth", VALUEFUNC(_wrap_AGFont_getWidth), -1);
     rb_define_method(cAGFont.klass, "getHeight", VALUEFUNC(_wrap_AGFont_getHeight), -1);
+    rb_define_method(cAGFont.klass, "toString", VALUEFUNC(_wrap_AGFont_toString), -1);
     cAGFont.mark = 0;
     cAGFont.destroy = (void (*)(void *)) free_AGFont;
     

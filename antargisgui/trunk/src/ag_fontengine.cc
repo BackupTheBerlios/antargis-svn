@@ -161,33 +161,7 @@ void border(AGSurface &s,AGColor bc)
 	  }
       
     }
-  //     ( -0.2,-1,-0.2)
-  // now (   -1, 4,  -1) edge detection
-  //     ( -0.2,-1,-0.2)
-  /*
-  float filter[]={-0.25,-1,-0.25,
-		  -1,5,-1,
-		  -0.25,-1,-0.25};
 
-  for(int x=0;x<s.width();x++)
-    for(int y=0;y<s.height();y++)
-      {
-	float v=0.0f;
-
-	int i,j;
-	for(i=-1;i<=1;i++)
-	  for(j=-1;j<=1;j++)
-	    {
-	      if(x+i>=0 && y+j>=0 && x+i<s.width() && y+j<s.height())
-		{
-		  float f=filter[(j+1)*3+i+1];
-		  v+=a[(y+j)*w+x+i]*f;
-		}
-	    }
-
-	b[y*w+x]=v;
-      }
-  */
   for(int x=0;x<s.width();x++)
     for(int y=0;y<s.height();y++)
       {
@@ -195,33 +169,19 @@ void border(AGSurface &s,AGColor bc)
 	AGColor n=bc;
 
 	n.a=a[y*w+x]*0xFF;
-	if(c.a>0x7f)
+	if(c.a>1)//0x7f)
 	  {
 	    float f=c.a/float(0xFF);
 	    n=n*(1-f)+c*f;
 	    n.a=0xFF;
+
+	    /*	    n.r=n.r*(1-f)+c.r*f;
+	    n.r=n.r*(1-f)+c.r*f;
+	    n.r=n.r*(1-f)+c.r*f;*/
+
 	  }
 	s.putPixel(x,y,n);
 
-	/*
-	int oa=c.a;
-	float v;
-	//	float v=fabs(b[y*w+x]);
-
-		v=std::min(v,1.0f);
-	v=oa/float(0xFF)-a[y*w+x];
-	v*=3;
-	cdebug("v1:"<<v);
-	v=std::min(v,1.0f);
-	v=std::max(v,0.0f);
-	
-	cdebug(v);
-
-	c=bc*v+c*(1-v);
-
-	//	c.a=oa;
-	c.a=a[y*w+x]*0xFF;
-	s.putPixel(x,y,c);*/
       }
   
 
@@ -386,13 +346,11 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
 int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
 {
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
-
   if(!f)
     return 0;
-
+   
   int w,h;
   int ret=TTF_SizeText(f,pText.c_str(),&w,&h);
-  //  cdebug((int)pFont.getSize()<<":"<<pText<<":"<<w);
   if(ret)
     return 0;
   return w;

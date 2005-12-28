@@ -76,7 +76,7 @@ void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
   cdebug("mText:"<<mText);
   cdebug("position:"<<pPoint.x+x<<";"<<pPoint.y+y);
   */
-  p.renderText(mText+(mHardEnd?"":"/"),AGPoint(pPoint.x+x,pPoint.y),mFont);
+  p.renderText(mText+(mHardEnd?"":""),AGPoint(pPoint.x+x,pPoint.y),mFont);
 }
 
 void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c)
@@ -148,9 +148,6 @@ std::string AGEditLine::getText() const
 std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
 {
   // first check, if line is too long
-  cdebug(mFont.getSize());
-  cdebug(mFont.getWidth(mText));
-  cdebug(pW<<"   "<<AGFontEngine::getWidth(mFont,mText));
 
   if(AGFontEngine::getWidth(mFont,mText)<pW)
     return std::make_pair("",false);
@@ -159,14 +156,12 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   // so search for a good split (between words), but not before half of width
   std::vector<std::string> words=::split(" ",mText);
   
-  cdebug(mText);
   std::vector<std::string>::iterator i=words.begin();
   int w=0,ow=0;
   std::string s,os;
 
   for(;i!=words.end();i++)
     {
-      cdebug(*i);
       s+=*i;
       w=AGFontEngine::getWidth(mFont,s);
       if(w>pW)
@@ -179,11 +174,11 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   if(ow>pW/4 && ow<width())
     {
       // check if width will be at least a 1/4 of whole width
-      cdebug("mText:"<<mText<<":");
-      cdebug("os:"<<os<<":");
+      //      cdebug("mText:"<<mText<<":");
+      //      cdebug("os:"<<os<<":");
       std::string n=mText.substr(os.length()+1,n.npos);
       mText=mText.substr(0,os.length()+1);
-      cdebug("mText:"<<mText<<":");
+      //      cdebug("mText:"<<mText<<":");
       bool hard=mHardEnd;
       mHardEnd=false;
       return std::make_pair(n,hard);
@@ -196,7 +191,7 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   s=os="";
   for(;k<mText.length();k++)
     {
-      cdebug(*i);
+      //      cdebug(*i);
       s+=mText.substr(k,1);
       w=AGFontEngine::getWidth(mFont,s);
       if(w>pW)
@@ -780,6 +775,7 @@ void AGEdit::checkWrap()
 void AGEdit::setFont(const AGFont &pFont)
 {
   mFont=pFont;
+  cdebug(mFont.toString());
   std::list<AGEditLine>::iterator i=mLines.begin();
   for(;i!=mLines.end();i++)
     i->setFont(mFont);
@@ -811,6 +807,7 @@ void AGEdit::setText(const std::string &pText)
 	  checkWrap();
 	}
     }
+  setFont(mFont); // reset Font
   checkWrap();
   //  mCy=0;
   //  mCx=mT
