@@ -389,9 +389,10 @@ int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
 
   if(!f)
     return 0;
-  
+
   int w,h;
   int ret=TTF_SizeText(f,pText.c_str(),&w,&h);
+  //  cdebug((int)pFont.getSize()<<":"<<pText<<":"<<w);
   if(ret)
     return 0;
   return w;

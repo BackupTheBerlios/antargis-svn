@@ -83,6 +83,8 @@ class AGWidget:public AGMessageObject
   int top() const;
   int left() const;
 
+  bool visible() const;
+
   virtual void setWidth(int w);
   virtual void setHeight(int w);
   virtual void setTop(int y);

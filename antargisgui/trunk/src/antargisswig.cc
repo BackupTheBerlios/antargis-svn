@@ -18456,6 +18456,22 @@ _wrap_AGWidget_left(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_visible(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    result = (bool)((AGWidget const *)arg1)->visible();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGWidget_setWidth(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     int arg2 ;
@@ -29484,14 +29500,17 @@ static VALUE
 _wrap_AGEdit_insert(int argc, VALUE *argv, VALUE self) {
     AGEdit *arg1 = (AGEdit *) 0 ;
     char arg2 ;
+    bool result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 0);
     arg2 = NUM2CHR(argv[0]);
-    (arg1)->insert(arg2);
+    result = (bool)(arg1)->insert(arg2);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -29742,6 +29761,21 @@ _wrap_AGEdit_getText(int argc, VALUE *argv, VALUE self) {
         vresult = rb_str_new((&result)->c_str(),(&result)->length());
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGEdit_setMaxLength(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 0);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->setMaxLength(arg2);
+    
+    return Qnil;
 }
 
 
@@ -38707,6 +38741,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGWidget.klass, "height", VALUEFUNC(_wrap_AGWidget_height), -1);
     rb_define_method(cAGWidget.klass, "top", VALUEFUNC(_wrap_AGWidget_top), -1);
     rb_define_method(cAGWidget.klass, "left", VALUEFUNC(_wrap_AGWidget_left), -1);
+    rb_define_method(cAGWidget.klass, "visible", VALUEFUNC(_wrap_AGWidget_visible), -1);
     rb_define_method(cAGWidget.klass, "setWidth", VALUEFUNC(_wrap_AGWidget_setWidth), -1);
     rb_define_method(cAGWidget.klass, "setHeight", VALUEFUNC(_wrap_AGWidget_setHeight), -1);
     rb_define_method(cAGWidget.klass, "setTop", VALUEFUNC(_wrap_AGWidget_setTop), -1);
@@ -39313,6 +39348,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGEdit.klass, "setTheme", VALUEFUNC(_wrap_AGEdit_setTheme), -1);
     rb_define_method(cAGEdit.klass, "canFocus", VALUEFUNC(_wrap_AGEdit_canFocus), -1);
     rb_define_method(cAGEdit.klass, "getText", VALUEFUNC(_wrap_AGEdit_getText), -1);
+    rb_define_method(cAGEdit.klass, "setMaxLength", VALUEFUNC(_wrap_AGEdit_setMaxLength), -1);
     cAGEdit.mark = (void (*)(void *)) AGWidget_markfunc;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargisgui, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);

@@ -60,6 +60,8 @@ class AGFont
 
   int getWidth(const std::string &mText) const;
   int getHeight(const std::string &mText) const;
+
+  AGFont &operator=(const AGFont &f);
  private:
   Style mStyle;
   std::string mName;

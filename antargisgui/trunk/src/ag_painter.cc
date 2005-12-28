@@ -336,8 +336,8 @@ void AGPainter::drawCircle(const AGPoint &pp,float rad,const AGColor &color)
   AGPoint p(mRect.project(pp));
   int x,y;
   float r2=rad*rad;
-  for(x=p.x-rad-1;x<=p.x+rad+1;x++)
-    for(y=p.y-rad-1;y<=p.y+rad+1;y++)
+  for(x=((int)(p.x-rad-1));x<=p.x+rad+1;x++)
+    for(y=((int)(p.y-rad-1));y<=p.y+rad+1;y++)
       {
 	float dx=x-p.x;
 	float dy=y-p.y;

@@ -148,6 +148,10 @@ std::string AGEditLine::getText() const
 std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
 {
   // first check, if line is too long
+  cdebug(mFont.getSize());
+  cdebug(mFont.getWidth(mText));
+  cdebug(pW<<"   "<<AGFontEngine::getWidth(mFont,mText));
+
   if(AGFontEngine::getWidth(mFont,mText)<pW)
     return std::make_pair("",false);
 
@@ -155,14 +159,14 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   // so search for a good split (between words), but not before half of width
   std::vector<std::string> words=::split(" ",mText);
   
-  //  cdebug(mText);
+  cdebug(mText);
   std::vector<std::string>::iterator i=words.begin();
   int w=0,ow=0;
   std::string s,os;
 
   for(;i!=words.end();i++)
     {
-      //      cdebug(*i);
+      cdebug(*i);
       s+=*i;
       w=AGFontEngine::getWidth(mFont,s);
       if(w>pW)
@@ -175,11 +179,11 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   if(ow>pW/4 && ow<width())
     {
       // check if width will be at least a 1/4 of whole width
-      //      cdebug("mText:"<<mText<<":");
-      //      cdebug("os:"<<os<<":");
+      cdebug("mText:"<<mText<<":");
+      cdebug("os:"<<os<<":");
       std::string n=mText.substr(os.length()+1,n.npos);
       mText=mText.substr(0,os.length()+1);
-      //      cdebug("mText:"<<mText<<":");
+      cdebug("mText:"<<mText<<":");
       bool hard=mHardEnd;
       mHardEnd=false;
       return std::make_pair(n,hard);
@@ -192,7 +196,7 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   s=os="";
   for(;k<mText.length();k++)
     {
-      //      cdebug(*i);
+      cdebug(*i);
       s+=mText.substr(k,1);
       w=AGFontEngine::getWidth(mFont,s);
       if(w>pW)
@@ -253,7 +257,7 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
 {
   //  CTRACE;
   //  cdebug(pRect);
-
+  mMaxLength=-1;
   mMutable=true;
   mShowCursor=true;
   AGFont font1("Arial.ttf",14);
@@ -261,25 +265,14 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   font1.setColor(AGColor(0,0,0));
   font2.setColor(AGColor(0,0,0xFF));
   AGEditLine l("",font1,true);
+  mAlign=EDIT_LEFT;
+  mVAlign=EDIT_TOP;
   l.setAlign(mAlign);
   l.setVAlign(mVAlign);
   mLines.push_back(l);
-  /*  mLines.push_back(AGEditLine("hallo1",font1,true));
-  if(mMultiLine)
-    {
-      mLines.push_back(AGEditLine("hallo2",font2,true));
-      mLines.push_back(AGEditLine("hallo3",font2,true));
-      }*/
+
   mCx=mCy=0;
   mViewCy=0;
-
-
-  /*  AGMenu *menu=new AGMenu(this,AGPoint(0,0),"ContextMenu");
-  menu->addItem("Copy");
-  menu->addItem("Paste");
-  setMenu(menu);
-  */
-  //  mBackground=AGTexture(getTheme()->getSurface(mTheme+e("edit.background.image"));
 
   std::string t=mTheme;
   if(t.length())
@@ -288,6 +281,12 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   mDrawBackground=true;
   setTheme("edit");
 }
+
+void AGEdit::setMaxLength(int i)
+{
+  mMaxLength=i;
+}
+
 
 void AGEdit::draw(AGPainter &p)
 {
@@ -574,11 +573,33 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
 	  ins=SDL_GetKeyName(k)[0];
 	  doInsert=true;
 	}
+      else if(k==SDLK_WORLD_68)
+	{
+	  ins=(mLShift||mRShift)?'Ä':'ä';
+	  doInsert=true;
+	}
+      else if(k==SDLK_WORLD_86)
+	{
+	  ins=(mLShift||mRShift)?'Ö':'ö';
+	  doInsert=true;
+	}
+      else if(k==SDLK_WORLD_92)
+	{
+	  ins=(mLShift||mRShift)?'Ü':'ü';
+	  doInsert=true;
+	}
+      else if(k==SDLK_WORLD_63)
+	{
+	  ins='ß';
+	  doInsert=true;
+	}
+
+      cdebug("KEY:"<<SDL_GetKeyName(k)<<"  "<<k);
 
       if(doInsert)
 	{
-	  insert(ins);
-	  mCx++;
+	  if(insert(ins))
+	    mCx++;
 	  checkWrap();
 	  return true;
 	}
@@ -588,10 +609,16 @@ bool AGEdit::eventKeyDown(const AGEvent *m2)
   return false;
 }
 
-void AGEdit::insert(char c)
+bool AGEdit::insert(char c)
 {
+  if(mMaxLength>0)
+    {
+      if((int)getText().length()==mMaxLength)
+	return false; // ignore input
+    }
   getActLine(); // FIXME:try to cache
   actLine->insert(c,mCx);
+  return true;
 }
 
 void AGEdit::getActLine()
@@ -652,14 +679,18 @@ void AGEdit::setMulti(bool pMultiLine)
 
 void AGEdit::checkWrap()
 {
+  CTRACE;
+  cdebug("TEXT:"<<getText());
   if(mWrapLines)
     {
       std::list<AGEditLine>::iterator i=mLines.begin();
       for(;i!=mLines.end();)
 	{
+	  cdebug(i->getText());
 	  std::pair<std::string,bool> n=i->checkWrap(width());
 	  if(n.first.length())
 	    {
+	      cdebug("wrap");
 	      // make new line
 	      if(i->length()<mCx)
 		{
@@ -777,9 +808,12 @@ void AGEdit::setText(const std::string &pText)
 	{
 	  insert(pText[i]);
 	  mCx++;
+	  checkWrap();
 	}
     }
-  mCy=mCx=0;
+  checkWrap();
+  //  mCy=0;
+  //  mCx=mT
   setFont(mFont); // reset Font
 }
 void AGEdit::setMutable(bool pMutable)

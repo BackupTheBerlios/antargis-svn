@@ -214,6 +214,8 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geo
   w=toInt(pNode.get("cols"));
   h=toInt(pNode.get("rows"));
 
+  t->setName(pNode.get("name"));
+
   std::vector<std::pair<float,bool> > rows(h);
   std::vector<std::pair<float,bool> > cols(w);
 

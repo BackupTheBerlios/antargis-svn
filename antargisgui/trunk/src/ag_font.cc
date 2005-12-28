@@ -39,6 +39,19 @@ AGFont::AGFont()
   borderSize=0;
 }
 
+AGFont &AGFont::operator=(const AGFont &f)
+{
+  mName=f.mName;
+  mSize=f.mSize;
+  mColor=f.mColor;
+  mBorderColor=f.mBorderColor;
+  mAlpha=f.mAlpha;
+  mStyle=f.mStyle;
+  borderSize=f.borderSize;
+  embossed=f.embossed;
+  return *this;
+}
+
 void AGFont::setColor(const AGColor &pColor)
 {
   mColor=pColor;

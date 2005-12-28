@@ -85,7 +85,7 @@ class AGEdit:public AGWidget
 
   void setMulti(bool mMultiLine);
 
-  void insert(char c);
+  bool insert(char c);
   void doDelete(int p);
 
   void setText(const std::string &pText);
@@ -107,6 +107,7 @@ class AGEdit:public AGWidget
 
   std::string getText() const;
 
+  void setMaxLength(int i);
  private:
 
   void getActLine();
@@ -142,6 +143,8 @@ class AGEdit:public AGWidget
   bool mDrawBackground;
 
   std::string mTheme;
+
+  int mMaxLength;
 };
 
 AGEdit &toAGEdit(AGWidget &w);

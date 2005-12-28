@@ -760,9 +760,15 @@ void AGWidget::drawAfter(AGPainter &p)
 {
 }
 
+bool AGWidget::visible() const
+{
+  return mVisible;
+}
+
 
 AGWidget *AGWidget::getChild(const std::string &pName)
 {
+  cdebug(mName<<"  == "<<pName<<"? "<<typeid(*this).name());
   if(mName==pName)
     return this;
 
