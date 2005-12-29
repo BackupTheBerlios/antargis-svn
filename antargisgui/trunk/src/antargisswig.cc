@@ -23222,6 +23222,23 @@ _wrap_new_AGRect2__SWIG_0(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_new_AGRect2__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGVector2 *arg1 = 0 ;
+    AGVector2 *arg2 = 0 ;
+    AGRect2 *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector2, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGRect2 *)new AGRect2((AGVector2 const &)*arg1,(AGVector2 const &)*arg2);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGRect2_allocate(VALUE self) {
@@ -23240,7 +23257,7 @@ _wrap_AGRect2_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGRect2__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGRect2__SWIG_2(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
     float arg3 ;
@@ -23285,6 +23302,22 @@ static VALUE _wrap_new_AGRect2(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector2, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector2, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGRect2__SWIG_1(nargs, args, self);
+            }
+        }
+    }
     if (argc == 4) {
         int _v;
         {
@@ -23303,7 +23336,7 @@ static VALUE _wrap_new_AGRect2(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FLOAT) || (TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_AGRect2__SWIG_1(nargs, args, self);
+                        return _wrap_new_AGRect2__SWIG_2(nargs, args, self);
                     }
                 }
             }
@@ -24441,6 +24474,26 @@ _wrap_AGVector4_dim3(int argc, VALUE *argv, VALUE self) {
         AGVector3 * resultptr;
         resultptr = new AGVector3((AGVector3 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector4_dim2(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector2 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 0);
+    result = ((AGVector4 const *)arg1)->dim2();
+    
+    {
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
 }
@@ -39131,6 +39184,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGVector4.klass, "%", VALUEFUNC(_wrap_AGVector4___mod__), -1);
     rb_define_method(cAGVector4.klass, "cross", VALUEFUNC(_wrap_AGVector4_cross), -1);
     rb_define_method(cAGVector4.klass, "dim3", VALUEFUNC(_wrap_AGVector4_dim3), -1);
+    rb_define_method(cAGVector4.klass, "dim2", VALUEFUNC(_wrap_AGVector4_dim2), -1);
     rb_define_method(cAGVector4.klass, "to_s", VALUEFUNC(_wrap_AGVector4_to_s), -1);
     cAGVector4.mark = 0;
     cAGVector4.destroy = (void (*)(void *)) free_AGVector4;

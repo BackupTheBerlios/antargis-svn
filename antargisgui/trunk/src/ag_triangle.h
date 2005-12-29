@@ -395,6 +395,7 @@ class AGRect2
   AGVector3 v0,v1;
  public:
   AGRect2(const AGVector3 &pv0,const AGVector3 &pv1);
+  AGRect2(const AGVector2 &pv0,const AGVector2 &pv1);
   AGRect2(float x,float y,float w,float h);
 
   bool collide(const AGRect2 &r) const;
@@ -506,6 +507,7 @@ class AGVector4
 
 
   AGVector3 dim3() const;
+  AGVector2 dim2() const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;

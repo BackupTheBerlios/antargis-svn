@@ -1181,6 +1181,11 @@ AGRect2::AGRect2(const AGVector3 &pv0,const AGVector3 &pv1):
 {
 }
 
+AGRect2::AGRect2(const AGVector2 &pv0,const AGVector2 &pv1):
+  v0(AGVector3(pv0,1)),v1(AGVector3(pv1,1))
+{
+}
+
 AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y,1),v1(x+w,y+h,1)
 {
@@ -1198,8 +1203,8 @@ void AGRect2::include(const AGVector2 &v)
 std::list<AGRect2> AGRect2::split() const
 {
   std::list<AGRect2> l;
-  float hw=v1[0]-v0[0];
-  float hh=v1[1]-v0[1];
+  float hw=(v1[0]-v0[0])/2;
+  float hh=(v1[1]-v0[1])/2;
   l.push_back(AGRect2(v0[0]   ,v0[1]   ,hw,hh));
   l.push_back(AGRect2(v0[0]+hw,v0[1]   ,hw,hh));
   l.push_back(AGRect2(v0[0]   ,v0[1]+hh,hw,hh));
@@ -1526,6 +1531,10 @@ AGVector4::AGVector4(const AGVector3 &a,float h)
 AGVector3 AGVector4::dim3() const
 {
   return AGVector3(v[0],v[1],v[2]);
+}
+AGVector2 AGVector4::dim2() const
+{
+  return AGVector2(v[0],v[1]);
 }
 
 
