@@ -78,16 +78,17 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
   //  cdebug(r);
   /*  if(pParent)
       pParent->addChild(this);*/
+  mRUBY=0;
 }
 AGWidget::~AGWidget()
 {
-  CTRACE;
+  /*  CTRACE;
   cdebug(typeid(*this).name());
   cdebug("Name:"<<getName());
   cdebug(getName());
   cdebug("mRUBY:"<<mRUBY);
   //  throw int();
-
+  */
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -768,7 +769,7 @@ bool AGWidget::visible() const
 
 AGWidget *AGWidget::getChild(const std::string &pName)
 {
-  cdebug(mName<<"  == "<<pName<<"? "<<typeid(*this).name());
+  //  cdebug(mName<<"  == "<<pName<<"? "<<typeid(*this).name());
   if(mName==pName)
     return this;
 

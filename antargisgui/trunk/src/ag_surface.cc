@@ -518,6 +518,7 @@ bool mSurfaceManagerDeleted=false;
 /** AGSurfaceManager */
 AGSurfaceManager::AGSurfaceManager()
 {
+  mAutoGC=true;
 }
 AGSurfaceManager::~AGSurfaceManager()
 {

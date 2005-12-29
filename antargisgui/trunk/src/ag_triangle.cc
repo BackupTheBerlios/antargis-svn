@@ -344,6 +344,13 @@ float AGVector2::operator[](int index) const
 // AGVector3
 /////////////////////////////////////////////////////////////////////////////
 
+AGVector3::AGVector3(const AGVector2 &p,float h)
+{
+  v[0]=p[0];
+  v[1]=p[1];
+  v[2]=h;
+}
+
 AGVector3::AGVector3(float pX,float pY,float pZ)
 {
   v[0]=pX;
@@ -1178,6 +1185,15 @@ AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y,1),v1(x+w,y+h,1)
 {
 }
+
+void AGRect2::include(const AGVector2 &v)
+{
+  v0[0]=std::min(v0[0],v[0]);
+  v0[1]=std::min(v0[1],v[1]);
+  v1[0]=std::max(v1[0],v[0]);
+  v1[1]=std::max(v1[1],v[1]);
+}
+
 
 std::list<AGRect2> AGRect2::split() const
 {

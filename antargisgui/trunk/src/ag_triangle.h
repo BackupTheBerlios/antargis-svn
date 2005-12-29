@@ -125,6 +125,7 @@ class AGVector3
  public:
   float v[3];
 
+  AGVector3(const AGVector2 &p,float h=1.0f);
   AGVector3(float pX,float pY,float pZ=0.0f);
   AGVector3(const AGAngle &a);
   AGVector3(const AGVector3 &a);
@@ -397,6 +398,8 @@ class AGRect2
   AGRect2(float x,float y,float w,float h);
 
   bool collide(const AGRect2 &r) const;
+
+  void include(const AGVector2 &v);
 
   AGRect2 operator+(const AGVector3 &v) const;
 

@@ -20,13 +20,13 @@ if not have_header('SDL.h')
 	exit
 end
 
-have_library('SDL', 'SDL_Init')
-have_library('SDL_ttf', 'TTF_Init')
-have_library('SGE', 'sge_FilledRect')
-have_library('GLU', 'gluPerspective')
-have_library('physfs', 'PHYSFS_init')
-have_library('SDL_mixer', 'Mix_OpenAudio')
-have_library('SDL_mixer', 'Mix_OpenAudio')
+have_library('SDL') #, 'SDL_Init')
+have_library('SDL_ttf') #, 'TTF_Init')
+have_library('SGE') #, 'sge_FilledRect')
+have_library('GLU') #, 'gluPerspective')
+have_library('physfs') #, 'PHYSFS_init')
+have_library('SDL_mixer') #, 'Mix_OpenAudio')
+#have_library('SDL_mixer', 'Mix_OpenAudio')
 
 
 # swig

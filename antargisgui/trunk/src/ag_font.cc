@@ -28,6 +28,7 @@ AGFont::AGFont(const std::string &pFile,int size):
   mAlpha=0xFF;
   mStyle=NORMAL;
   borderSize=0;
+  embossed=false;
 }
 
 AGFont::AGFont()
@@ -38,6 +39,7 @@ AGFont::AGFont()
   mAlpha=0xFF;
   mStyle=NORMAL;
   borderSize=0;
+  embossed=false;
 }
 
 AGFont &AGFont::operator=(const AGFont &f)
