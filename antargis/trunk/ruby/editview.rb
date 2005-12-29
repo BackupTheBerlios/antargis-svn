@@ -64,7 +64,7 @@ class AntRubyEditView<GLApp
 # 		addHandler(@layout.getChild("edit15"),:sigClick,:sigEdit15)
 		
 		[1,2,3,5,10,15].each{|s|addHandler(@layout.getChild("edit#{s}"),:sigClick,:sigSize)}
-		["editHeight","editSand","editGround","editGrass"].each{|n|
+		["editHeight","editWater","editSand","editGround","editGrass","editGrass2","editForest","editRock"].each{|n|
 			addHandler(@layout.getChild(n),:sigClick,:sigSelectEdit)
 		}
 		[1,2,3].each{|h|addHandler(@layout.getChild("hard#{h}"),:sigClick,:sigHard)}
@@ -172,7 +172,7 @@ class AntRubyEditView<GLApp
 		}
 	end
 	def editTerrain(list,button)
-		tt={"editSand"=>SAND,"editGround"=>EARTH,"editGrass"=>GRASS}[@terrainType]
+		tt={"editWater"=>WATER,"editSand"=>SAND,"editGround"=>EARTH,"editGrass"=>GRASS,"editGrass2"=>GRASS2,"editForest"=>FOREST,"editRock"=>ROCK}[@terrainType]
 		h={1=>0.3,2=>0.6,3=>1}[@hard]
 		list.each{|c|
 			if isTerrain(c.node)
@@ -187,6 +187,7 @@ class AntRubyEditView<GLApp
 							ov=@map.getTerrain(dx,dy,tt)
 							cv=[ov+v*h,1].min
 							@map.setTerrain(dx,dy,tt,cv)
+							printf "EDIT:%d,%d,%d,%f\n",dx,dy,tt,cv
 						end
 					end
 				end

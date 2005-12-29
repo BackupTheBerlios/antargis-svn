@@ -89,7 +89,13 @@ def getGrassMeshData(size,many=4)
 	opt.add(mv3)
 	end
 	$grassdata[size]=MeshData.new(opt.getArray,"data/textures/models/high_grass2.png",true) #false)
-	$grassdata[size].setLighting(false)
+	
+	if nil
+		$grassdata[size]=MeshData.new(opt.getArray,"data/textures/terrain/reed.png",true) #false)
+		$grassdata[size].setLighting(false)
+		#$grassdata[size].setOverdraw(true)
+		$grassdata[size].setTransparent(true)
+	end
 	#$grassdata[size]=MeshData.new(opt.getArray,"data/textures/models/flower1.png",false)
 	
 	return $grassdata[size]

@@ -132,7 +132,7 @@ void NewDecal::setPos(const AGVector3&pPos)
   init();
 }
 
-AGBox3 NewDecal::bbox()
+AGBox3 NewDecal::bbox() const
 {
   return mBBox;
 }

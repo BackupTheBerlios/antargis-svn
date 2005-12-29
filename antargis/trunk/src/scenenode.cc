@@ -60,6 +60,7 @@ bool SceneNode::operator==(const SceneNode &n) const
 
 void SceneNode::setPos(const AGVector3&pPos)
 {
+  getScene()->updatePos(this);
 }
 
 void SceneNode::setRotation(float r)
@@ -72,10 +73,17 @@ void SceneNode::setRotation(float r)
     return false;
   }
 
-AGBox3 SceneNode::bbox()
+AGBox3 SceneNode::bbox() const
 {
   return AGBox3(AGVector3(0,0,0),AGVector3(0,0,0));
 }
+
+AGRect2 SceneNode::getRect() const
+{
+  AGBox3 b=bbox();
+  return AGRect2(AGVector3(b.base[0],b.base[1],0),AGVector3(b.base[0]+b.dir[0],b.base[1]+b.dir[1],0));
+}
+
 
 Scene *SceneNode::getScene()
 {

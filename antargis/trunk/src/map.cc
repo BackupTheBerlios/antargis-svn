@@ -6,6 +6,7 @@
 #include <ag_debug.h>
 #include "mesh.h"
 #include "terrain.h"
+#include "quadtree.h"
 
 
 
@@ -19,7 +20,7 @@ AntMap *getMap()
   return myAntargisMap;
 }
 
-AntMap::AntMap(int w,int h):HeightMap(w,h),mEntQuad(AGRect2(0,0,w,h))
+AntMap::AntMap(int w,int h):HeightMap(w,h),mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h)))
 {
   myAntargisMap=this;
   maxID=0;
@@ -97,7 +98,7 @@ void AntMap::insertEntity(AntEntity *e)
   mEntities.push_back(e);
   //  mEntList.push_back(e);
   mEntityMap[e->getID()]=e;
-  mEntQuad.insert(e);
+  mEntQuad->insert(e);
   //  entsChanged();
 }
 
@@ -118,7 +119,7 @@ void AntMap::move(float pTime)
       if(i!=mEntities.end())
         mEntities.erase(i);
       mEntityMap.erase((*d)->getID());
-      mEntQuad.erase(*i);
+      mEntQuad->remove(*i);
 
       saveDelete(*d);
       /*      AntEntity::Meshes meshes=(*d)->getMesh();
@@ -150,7 +151,7 @@ AntEntity *AntMap::loadEntity(const Node &node)
 
 AntMap::EntityList AntMap::getEntities(const AGRect2&r)
 {
-  return mEntQuad.get(r);
+  return mEntQuad->get(r);
 }
 AntMap::EntityList AntMap::getAllEntities()
 {
@@ -263,7 +264,7 @@ void AntMap::clear()
   CTRACE;
   //  mPlayers.clear();
   mEntities.clear();
-  mEntQuad.clear();
+  mEntQuad->clear();
   mEntityMap.clear();
   //  getScene()->addNode(mTerrainMesh);
   mTerrain->addToScenes();

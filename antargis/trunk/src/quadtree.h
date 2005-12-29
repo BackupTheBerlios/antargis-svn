@@ -22,6 +22,7 @@
 #define QUADTREE_H
 
 #include <ag_triangle.h>
+#include <ag_debug.h>
 
 #include <set>
 
@@ -38,20 +39,23 @@ class QuadTree
         Node(AGRect2 R):r(R)
       {}
       
-        void get(const AGRect2 &r,std::list<T*> &l)
+        void get(const AGRect2 &pr,std::list<T*> &l)
         {
+	  //	  TRACE;
+	  //	  cdebug(pr.toString()<<"  "<<r.toString());
           typename std::set<T*>::iterator i=ts.begin();
           for(;i!=ts.end();i++)
             l.push_back(*i);
             
           typename std::list<Node*>::iterator j=children.begin();
           for(;j!=children.end();j++)
-            if((*j)->r.collide(r))
-              (*j)->get(r,l);
+            if((*j)->r.collide(pr))
+              (*j)->get(pr,l);
         }
 
         void insert(T* t)
         {
+	  //	  cdebug(t->getRect().toString()<<"    "<<r.toString());
           if(children.size())
             {
               typename std::list<Node*>::iterator i=children.begin();
@@ -63,6 +67,10 @@ class QuadTree
                   }
             }
           ts.insert(t);
+	  //	  cdebug(typeid(*t).name());
+	  //	  cdebug("size:"<<ts.size());
+	  if(ts.size()>2 && children.size()==0 && r.w()>3 && r.h()>3)
+	    split();
         }
         
         void clear()
@@ -91,8 +99,10 @@ class QuadTree
           ts.clear();
           std::list<AGRect2> rs=r.split();
           std::list<AGRect2>::iterator i=rs.begin();
+	  //	  cdebug(r.toString());
           for(;i!=rs.end();i++)
             {
+	      //	      cdebug(i->toString());
               children.push_back(new Node(*i));
             }
           typename std::set
@@ -146,7 +156,7 @@ class QuadTree
       return l;
     }
     
-    void erase
+    void remove
       (T* t)
       {
         root->remove

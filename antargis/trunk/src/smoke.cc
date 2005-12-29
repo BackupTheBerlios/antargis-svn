@@ -153,7 +153,7 @@ void Smoke::setPos(const AGVector3&pPos)
   mBBox=AGBox3(p+AGVector3(-0.5,-0.5,0),AGVector3(1,1,10));
 }
 
-AGBox3 Smoke::bbox()
+AGBox3 Smoke::bbox() const
 {
   return mBBox;
 }

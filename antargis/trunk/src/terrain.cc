@@ -15,6 +15,18 @@ TerrainPieceVA::TerrainPieceVA(Terrain *t,HeightMap &map,int xs,int ys,int w,int
 
 void TerrainPieceVA::mapChanged()
 {
+  // first check, if this piece was really affected
+  if(mBBox.dir[0]>=0) // is bbox valid ?
+    {
+      AGRect2 r=AGRect2(AGVector3(mBBox.base[0],mBBox.base[1],1),AGVector3(mBBox.base[0]+mBBox.dir[0],mBBox.base[1]+mBBox.dir[1],1));
+
+      if(!r.collide(mMap->getChangeRect()))
+	{
+	  return;
+	}
+    }
+
+
   mBBox=AGBox3();
   m3dArray.clear();
 
@@ -84,7 +96,7 @@ void TerrainPieceVA::drawPick()
   m3dArray.drawPick();
 }
 
-AGBox3 TerrainPieceVA::bbox()
+AGBox3 TerrainPieceVA::bbox() const
 {
   return mBBox;
 }
@@ -127,18 +139,23 @@ size_t TerrainPieceVA::getTriangles() const
 
 Terrain::Terrain(HeightMap &map):
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png")),
-  mGrass(getTextureCache()->get("data/textures/terrain/grass4.png"))
+  mGrass(getTextureCache()->get("data/textures/terrain/grass4.png")),
+  mMap(&map)
+{
+  init();
+}
+
+void Terrain::init()
 {
   size_t y,x;
-
   int tilesize=16;
   size_t tiles=0;
 
-  for(y=0; y<map.getH();y+=tilesize)
-    for(x=0;x<map.getW();x+=tilesize)
+  for(y=0; y<mMap->getH();y+=tilesize)
+    for(x=0;x<mMap->getW();x+=tilesize)
       {
-	TerrainPieceVA *t=new TerrainPieceVA(this,map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
-	WaterPiece *w=new WaterPiece(map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	TerrainPieceVA *t=new TerrainPieceVA(this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	WaterPiece *w=new WaterPiece(*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);
 	mNodes.push_back(w);
@@ -147,9 +164,28 @@ Terrain::Terrain(HeightMap &map):
       }
 
   cdebug("TILES:"<<tiles);
-  w=map.getW();
-  h=map.getH();
+  w=mMap->getW();
+  h=mMap->getH();
 }
+
+void Terrain::mapChangedComplete()
+{
+  for(Nodes::iterator j=mNodes.begin();j!=mNodes.end();j++)
+      removeFromAllScenes(*j);
+
+  for(Pieces::iterator i=pieces.begin();i!=pieces.end();i++)
+    delete *i;
+  for(WPieces::iterator i=water.begin();i!=water.end();i++)
+    delete *i;
+
+  pieces.clear();
+  water.clear();
+  mNodes.clear();
+
+
+  init();
+}
+
 
 Terrain::~Terrain()
 {

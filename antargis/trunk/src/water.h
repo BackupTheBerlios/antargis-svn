@@ -60,7 +60,7 @@ class WaterPiece:public SceneNode
   size_t getTriangles() const;
   bool transparent();
 
-  AGBox3 bbox();
+  AGBox3 bbox() const;
 
   virtual void mapChanged();
 

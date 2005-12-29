@@ -49,7 +49,7 @@ class AnimMesh:public SceneNode
   virtual void drawPick();
   virtual void advance(float time);
 
-  AGBox3 bbox();
+  AGBox3 bbox() const;
 	
   virtual void mark();
 

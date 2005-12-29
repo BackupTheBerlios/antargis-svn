@@ -39,7 +39,7 @@ class TerrainPieceVA:public SceneNode
 
   virtual void mapChanged();
 
-  virtual AGBox3 bbox();
+  virtual AGBox3 bbox() const;
 
  private:
 
@@ -72,6 +72,7 @@ class Terrain
   AGTexture m3D;
 
   AGTexture mGrass;
+  HeightMap *mMap;
 
 public:
   Terrain(HeightMap &map);
@@ -79,10 +80,14 @@ public:
   virtual ~Terrain();
 
   virtual void mapChanged();
+  virtual void mapChangedComplete();
   void addToScenes();
 
   AGTexture *get3dTexture();
   AGTexture *getGrassTexture();
+
+ private:
+  void init();
 };
 
 

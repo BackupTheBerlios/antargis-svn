@@ -1353,6 +1353,7 @@ public:
     SwigDirector_Terrain(VALUE self, HeightMap &map);
     virtual void mapChanged();
     virtual ~SwigDirector_Terrain();
+    virtual void mapChangedComplete();
 };
 
 

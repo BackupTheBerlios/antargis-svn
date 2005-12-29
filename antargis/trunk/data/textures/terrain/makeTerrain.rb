@@ -72,16 +72,29 @@ end
 
 ts=[]
 
-triple=["sand_4.png","sand_4.png","ground_4.png"]
+triple=["underwater4.png","underwater3.png","underwater3.png"]
+ts+=[-0.2,0.30,0.5,0.65].collect{|f|makeTerrain(triple,f)}
+
+triple=["underwater3.png","sand_4.png","sand_4.png"]
+ts+=[-0.2,0.30,0.5,0.65].collect{|f|makeTerrain(triple,f)}
+
+triple=["sand_4.png","underwater3.png","ground_4.png"]
 ts+=[-0.2,0.30,0.5,0.65].collect{|f|makeTerrain(triple,f)}
 
 triple=["ground_4.png","ground_5.png","big_grass.png"]
-ts+=[-0.2,0.30,0.5,0.65,1.2].collect{|f|makeTerrain(triple,f)}
+ts+=[-0.2,0.30,0.65,1.2].collect{|f|makeTerrain(triple,f)}
 
-triple=["big_grass.png","ground_5.png","big_grass_2.png"]
-ts+=[0.30,0.65,1.2].collect{|f|makeTerrain(triple,f)}
+triple=["big_grass.png","big_grass3.png","big_grass_2.png"]
+ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 
-while ts.length<16
+triple=["big_grass_2.png","big_grass3.png","forest2.png"]
+ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
+
+triple=["forest2.png","underwater3.png","rock.png"]
+ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
+
+
+while ts.length<32
 	ts.push(ts[ts.length-1])
 end
 

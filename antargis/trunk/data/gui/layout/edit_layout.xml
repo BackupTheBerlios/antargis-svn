@@ -32,9 +32,13 @@
 			<radioGroup col="0" row="1" name="TerrainGroup">
 				<table cols="20" rows="1">
 					<radio col="0" row="0" name="editHeight" caption-image="data/gui/editor/grass_updown.png"/>
-					<radio col="1" row="0" name="editSand" caption-image="data/gui/editor/sand.png"/>
-					<radio col="2" row="0" name="editGround" caption-image="data/gui/editor/ground.png"/>
-					<radio col="3" row="0" name="editGrass" caption-image="data/gui/editor/grass2.png"/>
+					<radio col="1" row="0" name="editWater" caption-image="data/gui/editor/water2.png"/>
+					<radio col="2" row="0" name="editSand" caption-image="data/gui/editor/sand.png"/>
+					<radio col="3" row="0" name="editGround" caption-image="data/gui/editor/ground.png"/>
+					<radio col="4" row="0" name="editGrass" caption-image="data/gui/editor/grass2.png"/>
+					<radio col="5" row="0" name="editGrass2" caption-image="data/gui/editor/dark_grass2.png"/>
+					<radio col="6" row="0" name="editForest" caption-image="data/gui/editor/small_tree.png"/>
+					<radio col="7" row="0" name="editRock" caption-image="data/gui/editor/floor2.png"/>
 				</table>
 			</radioGroup>
 			<table cols="20" rows="1" col="0" row="2" name="Actions">

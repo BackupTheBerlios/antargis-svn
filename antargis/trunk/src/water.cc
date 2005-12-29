@@ -243,7 +243,7 @@ bool WaterPiece::transparent()
   return true;
 }
 
-AGBox3 WaterPiece::bbox()
+AGBox3 WaterPiece::bbox() const
 {
   return mBBox;
 }

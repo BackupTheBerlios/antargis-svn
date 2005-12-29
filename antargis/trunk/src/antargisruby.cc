@@ -1116,68 +1116,69 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_Meshes swig_types[91]
 #define SWIGTYPE_p_NewDecal swig_types[92]
 #define SWIGTYPE_p_Node swig_types[93]
-#define SWIGTYPE_p_NodeVector swig_types[94]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[95]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[96]
-#define SWIGTYPE_p_Parser swig_types[97]
-#define SWIGTYPE_p_PickNode swig_types[98]
-#define SWIGTYPE_p_PickResult swig_types[99]
-#define SWIGTYPE_p_Renderer swig_types[100]
-#define SWIGTYPE_p_Resource swig_types[101]
-#define SWIGTYPE_p_SDLKey swig_types[102]
-#define SWIGTYPE_p_SDLMod swig_types[103]
-#define SWIGTYPE_p_SDL_Event swig_types[104]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[105]
-#define SWIGTYPE_p_SDL_Rect swig_types[106]
-#define SWIGTYPE_p_SDL_Surface swig_types[107]
-#define SWIGTYPE_p_Scene swig_types[108]
-#define SWIGTYPE_p_SceneNode swig_types[109]
-#define SWIGTYPE_p_Smoke swig_types[110]
-#define SWIGTYPE_p_Terrain swig_types[111]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[112]
-#define SWIGTYPE_p_Uint32 swig_types[113]
-#define SWIGTYPE_p_Uint8 swig_types[114]
-#define SWIGTYPE_p_VertexArray swig_types[115]
-#define SWIGTYPE_p_Viewport swig_types[116]
-#define SWIGTYPE_p_WaterPiece swig_types[117]
-#define SWIGTYPE_p_const_iterator swig_types[118]
-#define SWIGTYPE_p_float swig_types[119]
-#define SWIGTYPE_p_iterator swig_types[120]
-#define SWIGTYPE_p_p_AnimMesh swig_types[121]
-#define SWIGTYPE_p_p_Decals swig_types[122]
-#define SWIGTYPE_p_p_GLTree swig_types[123]
-#define SWIGTYPE_p_p_Mesh swig_types[124]
-#define SWIGTYPE_p_p_MeshData swig_types[125]
-#define SWIGTYPE_p_p_NewDecal swig_types[126]
-#define SWIGTYPE_p_p_Node swig_types[127]
-#define SWIGTYPE_p_p_SceneNode swig_types[128]
-#define SWIGTYPE_p_p_Smoke swig_types[129]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[130]
-#define SWIGTYPE_p_p_WaterPiece swig_types[131]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[132]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[133]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[134]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[135]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[136]
-#define SWIGTYPE_p_std__ostringstream swig_types[137]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[138]
-#define SWIGTYPE_p_std__setTScene_p_t swig_types[139]
-#define SWIGTYPE_p_std__string swig_types[140]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[141]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[142]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[143]
-#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[144]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[145]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[146]
-#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[147]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[148]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[149]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[150]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[151]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[152]
-#define SWIGTYPE_p_unsigned_long swig_types[153]
-static swig_type_info *swig_types[155];
-static swig_module_info swig_module = {swig_types, 154, 0, 0, 0, 0};
+#define SWIGTYPE_p_NodeList swig_types[94]
+#define SWIGTYPE_p_NodeVector swig_types[95]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[96]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[97]
+#define SWIGTYPE_p_Parser swig_types[98]
+#define SWIGTYPE_p_PickNode swig_types[99]
+#define SWIGTYPE_p_PickResult swig_types[100]
+#define SWIGTYPE_p_Renderer swig_types[101]
+#define SWIGTYPE_p_Resource swig_types[102]
+#define SWIGTYPE_p_SDLKey swig_types[103]
+#define SWIGTYPE_p_SDLMod swig_types[104]
+#define SWIGTYPE_p_SDL_Event swig_types[105]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[106]
+#define SWIGTYPE_p_SDL_Rect swig_types[107]
+#define SWIGTYPE_p_SDL_Surface swig_types[108]
+#define SWIGTYPE_p_Scene swig_types[109]
+#define SWIGTYPE_p_SceneNode swig_types[110]
+#define SWIGTYPE_p_Smoke swig_types[111]
+#define SWIGTYPE_p_Terrain swig_types[112]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[113]
+#define SWIGTYPE_p_Uint32 swig_types[114]
+#define SWIGTYPE_p_Uint8 swig_types[115]
+#define SWIGTYPE_p_VertexArray swig_types[116]
+#define SWIGTYPE_p_Viewport swig_types[117]
+#define SWIGTYPE_p_WaterPiece swig_types[118]
+#define SWIGTYPE_p_const_iterator swig_types[119]
+#define SWIGTYPE_p_float swig_types[120]
+#define SWIGTYPE_p_iterator swig_types[121]
+#define SWIGTYPE_p_p_AnimMesh swig_types[122]
+#define SWIGTYPE_p_p_Decals swig_types[123]
+#define SWIGTYPE_p_p_GLTree swig_types[124]
+#define SWIGTYPE_p_p_Mesh swig_types[125]
+#define SWIGTYPE_p_p_MeshData swig_types[126]
+#define SWIGTYPE_p_p_NewDecal swig_types[127]
+#define SWIGTYPE_p_p_Node swig_types[128]
+#define SWIGTYPE_p_p_SceneNode swig_types[129]
+#define SWIGTYPE_p_p_Smoke swig_types[130]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[131]
+#define SWIGTYPE_p_p_WaterPiece swig_types[132]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[133]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[134]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[135]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[136]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[137]
+#define SWIGTYPE_p_std__ostringstream swig_types[138]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[139]
+#define SWIGTYPE_p_std__setTScene_p_t swig_types[140]
+#define SWIGTYPE_p_std__string swig_types[141]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[142]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[143]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[144]
+#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[145]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[146]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[147]
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[148]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[149]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[150]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[151]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[152]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[153]
+#define SWIGTYPE_p_unsigned_long swig_types[154]
+static swig_type_info *swig_types[156];
+static swig_module_info swig_module = {swig_types, 155, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -15259,6 +15260,17 @@ void SwigDirector_Terrain::mapChanged() {
 SwigDirector_Terrain::~SwigDirector_Terrain() {
 }
 
+void SwigDirector_Terrain::mapChangedComplete() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        Terrain::mapChangedComplete();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("mapChangedComplete"), 0, NULL);
+}
+
+
 SwigDirector_GLTree::SwigDirector_GLTree(VALUE self, AGVector4 p, float h): GLTree(p, h), Swig::Director(self) {
     
 }
@@ -24414,6 +24426,38 @@ _wrap_AGVector3_v_get(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_AGVector3__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGVector2 *arg1 = 0 ;
+    float arg2 ;
+    AGVector3 *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector2, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg2 = (float) NUM2DBL(argv[1]);
+    result = (AGVector3 *)new AGVector3((AGVector2 const &)*arg1,arg2);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGVector3__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGVector2 *arg1 = 0 ;
+    AGVector3 *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector2, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGVector3 *)new AGVector3((AGVector2 const &)*arg1);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGVector3__SWIG_2(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
     float arg3 ;
@@ -24432,7 +24476,7 @@ _wrap_new_AGVector3__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGVector3__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector3__SWIG_3(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
     AGVector3 *result;
@@ -24449,7 +24493,7 @@ _wrap_new_AGVector3__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGVector3__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector3__SWIG_4(int argc, VALUE *argv, VALUE self) {
     AGAngle *arg1 = 0 ;
     AGVector3 *result;
     
@@ -24464,7 +24508,7 @@ _wrap_new_AGVector3__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGVector3__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector3__SWIG_5(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = 0 ;
     AGVector3 *result;
     
@@ -24496,7 +24540,7 @@ _wrap_AGVector3_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGVector3__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector3__SWIG_6(int argc, VALUE *argv, VALUE self) {
     AGVector3 *result;
     
     if ((argc < 0) || (argc > 0))
@@ -24518,17 +24562,7 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
-        return _wrap_new_AGVector3__SWIG_4(nargs, args, self);
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_AGVector3__SWIG_3(nargs, args, self);
-        }
+        return _wrap_new_AGVector3__SWIG_6(nargs, args, self);
     }
     if (argc == 1) {
         int _v;
@@ -24537,7 +24571,42 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGAngle, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_AGVector3__SWIG_2(nargs, args, self);
+            return _wrap_new_AGVector3__SWIG_4(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_AGVector3__SWIG_5(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector2, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_AGVector3__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector2, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGVector3__SWIG_0(nargs, args, self);
+            }
         }
     }
     if (argc == 2) {
@@ -24550,7 +24619,7 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
                 _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_AGVector3__SWIG_1(nargs, args, self);
+                return _wrap_new_AGVector3__SWIG_3(nargs, args, self);
             }
         }
     }
@@ -24568,7 +24637,7 @@ static VALUE _wrap_new_AGVector3(int nargs, VALUE *args, VALUE self) {
                     _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_AGVector3__SWIG_0(nargs, args, self);
+                    return _wrap_new_AGVector3__SWIG_2(nargs, args, self);
                 }
             }
         }
@@ -26855,6 +26924,23 @@ _wrap_new_AGRect2__SWIG_0(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_new_AGRect2__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGVector2 *arg1 = 0 ;
+    AGVector2 *arg2 = 0 ;
+    AGRect2 *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector2, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGRect2 *)new AGRect2((AGVector2 const &)*arg1,(AGVector2 const &)*arg2);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGRect2_allocate(VALUE self) {
@@ -26873,7 +26959,7 @@ _wrap_AGRect2_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGRect2__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGRect2__SWIG_2(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
     float arg3 ;
@@ -26918,6 +27004,22 @@ static VALUE _wrap_new_AGRect2(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector2, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGVector2, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGRect2__SWIG_1(nargs, args, self);
+            }
+        }
+    }
     if (argc == 4) {
         int _v;
         {
@@ -26936,7 +27038,7 @@ static VALUE _wrap_new_AGRect2(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FLOAT) || (TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_AGRect2__SWIG_1(nargs, args, self);
+                        return _wrap_new_AGRect2__SWIG_2(nargs, args, self);
                     }
                 }
             }
@@ -26963,6 +27065,21 @@ _wrap_AGRect2_collide(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGRect2_include(int argc, VALUE *argv, VALUE self) {
+    AGRect2 *arg1 = (AGRect2 *) 0 ;
+    AGVector2 *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect2, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->include((AGVector2 const &)*arg2);
+    
+    return Qnil;
 }
 
 
@@ -28059,6 +28176,26 @@ _wrap_AGVector4_dim3(int argc, VALUE *argv, VALUE self) {
         AGVector3 * resultptr;
         resultptr = new AGVector3((AGVector3 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGVector4_dim2(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = (AGVector4 *) 0 ;
+    AGVector2 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGVector4, 0);
+    result = ((AGVector4 const *)arg1)->dim2();
+    
+    {
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
 }
@@ -30042,6 +30179,24 @@ _wrap_AGFont_getHeight(int argc, VALUE *argv, VALUE self) {
     result = (int)((AGFont const *)arg1)->getHeight((std::string const &)*arg2);
     
     vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGFont_toString(int argc, VALUE *argv, VALUE self) {
+    AGFont *arg1 = (AGFont *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFont, 0);
+    result = ((AGFont const *)arg1)->toString();
+    
+    {
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
+    }
     return vresult;
 }
 
@@ -41786,6 +41941,26 @@ _wrap_HeightMap_getTerrain__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_HeightMap_getMean(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    float arg2 ;
+    float arg3 ;
+    float result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    arg3 = (float) NUM2DBL(argv[1]);
+    result = (float)(arg1)->getMean(arg2,arg3);
+    
+    vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_HeightMap_getW(int argc, VALUE *argv, VALUE self) {
     HeightMap *arg1 = (HeightMap *) 0 ;
     size_t result;
@@ -42100,6 +42275,41 @@ _wrap_HeightMap_getTerrainScale(int argc, VALUE *argv, VALUE self) {
     result = (float)(arg1)->getTerrainScale(arg2,arg3);
     
     vresult = rb_float_new(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_HeightMap_addChange(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    AGVector2 *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->addChange((AGVector2 const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_HeightMap_getChangeRect(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    SwigValueWrapper<AGRect2 > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    result = ((HeightMap const *)arg1)->getChangeRect();
+    
+    {
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
+    }
     return vresult;
 }
 
@@ -43123,12 +43333,35 @@ _wrap_SceneNode_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((SceneNode const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
         resultptr = new AGBox3((AGBox3 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGBox3, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_SceneNode_getRect(int argc, VALUE *argv, VALUE self) {
+    SceneNode *arg1 = (SceneNode *) 0 ;
+    SwigValueWrapper<AGRect2 > result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((SceneNode const *)arg1)->getRect();
+    
+    {
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
 }
@@ -43464,7 +43697,7 @@ _wrap_Mesh_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Mesh, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((Mesh const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
@@ -44134,11 +44367,14 @@ static VALUE
 _wrap_MeshData_bbox(int argc, VALUE *argv, VALUE self) {
     MeshData *arg1 = (MeshData *) 0 ;
     AGBox3 result;
+    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = ((MeshData const *)arg1)->bbox();
     
     {
@@ -44994,6 +45230,21 @@ _wrap_Scene_removeNode(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_Scene_updatePos(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    SceneNode *arg2 = (SceneNode *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_SceneNode, 0);
+    (arg1)->updatePos(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_Scene_clear(int argc, VALUE *argv, VALUE self) {
     Scene *arg1 = (Scene *) 0 ;
     
@@ -45305,6 +45556,26 @@ _wrap_Scene_getPosition(int argc, VALUE *argv, VALUE self) {
         AGPoint * resultptr;
         resultptr = new AGPoint((AGPoint &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGPoint, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_Scene_getCurrentNodes(int argc, VALUE *argv, VALUE self) {
+    Scene *arg1 = (Scene *) 0 ;
+    SwigValueWrapper<std::list<SceneNode * > > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 0);
+    result = (arg1)->getCurrentNodes();
+    
+    {
+        Scene::NodeList * resultptr;
+        resultptr = new Scene::NodeList((Scene::NodeList &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__listTSceneNode_p_t, 1);
     }
     return vresult;
 }
@@ -47917,7 +48188,7 @@ _wrap_WaterPiece_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_WaterPiece, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((WaterPiece const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
@@ -48161,7 +48432,7 @@ _wrap_TerrainPieceVA_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_TerrainPieceVA, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((TerrainPieceVA const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
@@ -48248,6 +48519,22 @@ _wrap_Terrain_mapChanged(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->mapChanged();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_Terrain_mapChangedComplete(int argc, VALUE *argv, VALUE self) {
+    Terrain *arg1 = (Terrain *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Terrain, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->mapChangedComplete();
     
     return Qnil;
 }
@@ -48738,7 +49025,7 @@ _wrap_Smoke_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Smoke, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((Smoke const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
@@ -49129,7 +49416,7 @@ _wrap_AnimMesh_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AnimMesh, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((AnimMesh const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
@@ -50251,7 +50538,7 @@ _wrap_NewDecal_bbox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_NewDecal, 0);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (arg1)->bbox();
+    result = ((NewDecal const *)arg1)->bbox();
     
     {
         AGBox3 * resultptr;
@@ -50727,6 +51014,7 @@ static swig_type_info _swigt__p_MeshVertex = {"_p_MeshVertex", "MeshVertex *", 0
 static swig_type_info _swigt__p_Meshes = {"_p_Meshes", "Meshes *", 0, 0, 0};
 static swig_type_info _swigt__p_NewDecal = {"_p_NewDecal", "NewDecal *", 0, 0, 0};
 static swig_type_info _swigt__p_Node = {"_p_Node", "Node *|xmlpp::Node *", 0, 0, 0};
+static swig_type_info _swigt__p_NodeList = {"_p_NodeList", "NodeList *", 0, 0, 0};
 static swig_type_info _swigt__p_NodeVector = {"_p_NodeVector", "NodeVector *", 0, 0, 0};
 static swig_type_info _swigt__p_Node__NodeVector__const_iterator = {"_p_Node__NodeVector__const_iterator", "Node::NodeVector::const_iterator *|Node::const_iterator *", 0, 0, 0};
 static swig_type_info _swigt__p_Node__NodeVector__iterator = {"_p_Node__NodeVector__iterator", "Node::NodeVector::iterator *|Node::iterator *", 0, 0, 0};
@@ -50883,6 +51171,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Meshes,
   &_swigt__p_NewDecal,
   &_swigt__p_Node,
+  &_swigt__p_NodeList,
   &_swigt__p_NodeVector,
   &_swigt__p_Node__NodeVector__const_iterator,
   &_swigt__p_Node__NodeVector__iterator,
@@ -51039,6 +51328,7 @@ static swig_cast_info _swigc__p_MeshVertex[] = {  {&_swigt__p_MeshVertex, 0, 0, 
 static swig_cast_info _swigc__p_Meshes[] = {  {&_swigt__p_Meshes, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NewDecal[] = {  {&_swigt__p_NewDecal, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node[] = {  {&_swigt__p_Node, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_NodeList[] = {  {&_swigt__p_NodeList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_NodeVector[] = {  {&_swigt__p_NodeVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node__NodeVector__const_iterator[] = {  {&_swigt__p_Node__NodeVector__const_iterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Node__NodeVector__iterator[] = {  {&_swigt__p_Node__NodeVector__iterator, 0, 0, 0},{0, 0, 0, 0}};
@@ -51195,6 +51485,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Meshes,
   _swigc__p_NewDecal,
   _swigc__p_Node,
+  _swigc__p_NodeList,
   _swigc__p_NodeVector,
   _swigc__p_Node__NodeVector__const_iterator,
   _swigc__p_Node__NodeVector__iterator,
@@ -52027,6 +52318,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_alloc_func(cAGRect2.klass, _wrap_AGRect2_allocate);
     rb_define_method(cAGRect2.klass, "initialize", VALUEFUNC(_wrap_new_AGRect2), -1);
     rb_define_method(cAGRect2.klass, "collide", VALUEFUNC(_wrap_AGRect2_collide), -1);
+    rb_define_method(cAGRect2.klass, "include", VALUEFUNC(_wrap_AGRect2_include), -1);
     rb_define_method(cAGRect2.klass, "+", VALUEFUNC(_wrap_AGRect2___add__), -1);
     rb_define_method(cAGRect2.klass, "contains", VALUEFUNC(_wrap_AGRect2_contains), -1);
     rb_define_method(cAGRect2.klass, "split", VALUEFUNC(_wrap_AGRect2_split), -1);
@@ -52077,6 +52369,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGVector4.klass, "%", VALUEFUNC(_wrap_AGVector4___mod__), -1);
     rb_define_method(cAGVector4.klass, "cross", VALUEFUNC(_wrap_AGVector4_cross), -1);
     rb_define_method(cAGVector4.klass, "dim3", VALUEFUNC(_wrap_AGVector4_dim3), -1);
+    rb_define_method(cAGVector4.klass, "dim2", VALUEFUNC(_wrap_AGVector4_dim2), -1);
     rb_define_method(cAGVector4.klass, "to_s", VALUEFUNC(_wrap_AGVector4_to_s), -1);
     cAGVector4.mark = 0;
     cAGVector4.destroy = (void (*)(void *)) free_AGVector4;
@@ -52168,6 +52461,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGFont.klass, "getEmbossed", VALUEFUNC(_wrap_AGFont_getEmbossed), -1);
     rb_define_method(cAGFont.klass, "getWidth", VALUEFUNC(_wrap_AGFont_getWidth), -1);
     rb_define_method(cAGFont.klass, "getHeight", VALUEFUNC(_wrap_AGFont_getHeight), -1);
+    rb_define_method(cAGFont.klass, "toString", VALUEFUNC(_wrap_AGFont_toString), -1);
     cAGFont.mark = 0;
     cAGFont.destroy = (void (*)(void *)) free_AGFont;
     
@@ -53060,6 +53354,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "getVertex", VALUEFUNC(_wrap_HeightMap_getVertex), -1);
     rb_define_method(cHeightMap.klass, "get", VALUEFUNC(_wrap_HeightMap_get), -1);
     rb_define_method(cHeightMap.klass, "setTerrain", VALUEFUNC(_wrap_HeightMap_setTerrain), -1);
+    rb_define_method(cHeightMap.klass, "getMean", VALUEFUNC(_wrap_HeightMap_getMean), -1);
     rb_define_method(cHeightMap.klass, "getW", VALUEFUNC(_wrap_HeightMap_getW), -1);
     rb_define_method(cHeightMap.klass, "getH", VALUEFUNC(_wrap_HeightMap_getH), -1);
     rb_define_method(cHeightMap.klass, "truncPos", VALUEFUNC(_wrap_HeightMap_truncPos), -1);
@@ -53074,6 +53369,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "getTerrain", VALUEFUNC(_wrap_HeightMap_getTerrain), -1);
     rb_define_method(cHeightMap.klass, "getTerrainWeight", VALUEFUNC(_wrap_HeightMap_getTerrainWeight), -1);
     rb_define_method(cHeightMap.klass, "getTerrainScale", VALUEFUNC(_wrap_HeightMap_getTerrainScale), -1);
+    rb_define_method(cHeightMap.klass, "addChange", VALUEFUNC(_wrap_HeightMap_addChange), -1);
+    rb_define_method(cHeightMap.klass, "getChangeRect", VALUEFUNC(_wrap_HeightMap_getChangeRect), -1);
     cHeightMap.mark = (void (*)(void *)) general_markfunc;
     cHeightMap.destroy = (void (*)(void *)) free_HeightMap;
     rb_define_module_function(mLibantargis, "disown_AntMap", VALUEFUNC(_wrap_disown_AntMap), -1);
@@ -53132,6 +53429,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cSceneNode.klass, "setRotation", VALUEFUNC(_wrap_SceneNode_setRotation), -1);
     rb_define_method(cSceneNode.klass, "transparent", VALUEFUNC(_wrap_SceneNode_transparent), -1);
     rb_define_method(cSceneNode.klass, "bbox", VALUEFUNC(_wrap_SceneNode_bbox), -1);
+    rb_define_method(cSceneNode.klass, "getRect", VALUEFUNC(_wrap_SceneNode_getRect), -1);
     rb_define_method(cSceneNode.klass, "clear", VALUEFUNC(_wrap_SceneNode_clear), -1);
     rb_define_method(cSceneNode.klass, "getScene", VALUEFUNC(_wrap_SceneNode_getScene), -1);
     rb_define_method(cSceneNode.klass, "setVisible", VALUEFUNC(_wrap_SceneNode_setVisible), -1);
@@ -53246,6 +53544,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "getShadow", VALUEFUNC(_wrap_Scene_getShadow), -1);
     rb_define_method(cScene.klass, "addNode", VALUEFUNC(_wrap_Scene_addNode), -1);
     rb_define_method(cScene.klass, "removeNode", VALUEFUNC(_wrap_Scene_removeNode), -1);
+    rb_define_method(cScene.klass, "updatePos", VALUEFUNC(_wrap_Scene_updatePos), -1);
     rb_define_method(cScene.klass, "clear", VALUEFUNC(_wrap_Scene_clear), -1);
     rb_define_method(cScene.klass, "setCamera", VALUEFUNC(_wrap_Scene_setCamera), -1);
     rb_define_method(cScene.klass, "getCamera", VALUEFUNC(_wrap_Scene_getCamera), -1);
@@ -53263,6 +53562,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "getLightProj", VALUEFUNC(_wrap_Scene_getLightProj), -1);
     rb_define_method(cScene.klass, "getInvCameraView", VALUEFUNC(_wrap_Scene_getInvCameraView), -1);
     rb_define_method(cScene.klass, "getPosition", VALUEFUNC(_wrap_Scene_getPosition), -1);
+    rb_define_method(cScene.klass, "getCurrentNodes", VALUEFUNC(_wrap_Scene_getCurrentNodes), -1);
     cScene.mark = (void (*)(void *)) general_markfunc;
     cScene.destroy = (void (*)(void *)) free_Scene;
     rb_define_module_function(mLibantargis, "getScenes", VALUEFUNC(_wrap_getScenes), -1);
@@ -53437,6 +53737,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_alloc_func(cTerrain.klass, _wrap_Terrain_allocate);
     rb_define_method(cTerrain.klass, "initialize", VALUEFUNC(_wrap_new_Terrain), -1);
     rb_define_method(cTerrain.klass, "mapChanged", VALUEFUNC(_wrap_Terrain_mapChanged), -1);
+    rb_define_method(cTerrain.klass, "mapChangedComplete", VALUEFUNC(_wrap_Terrain_mapChangedComplete), -1);
     rb_define_method(cTerrain.klass, "addToScenes", VALUEFUNC(_wrap_Terrain_addToScenes), -1);
     rb_define_method(cTerrain.klass, "get3dTexture", VALUEFUNC(_wrap_Terrain_get3dTexture), -1);
     rb_define_method(cTerrain.klass, "getGrassTexture", VALUEFUNC(_wrap_Terrain_getGrassTexture), -1);

@@ -4,7 +4,6 @@
 #include "scene.h"
 #include <ag_triangle.h>
 #include <ag_xml.h>
-#include "quadtree.h"
 #include "entptr.h"
 
 class AntEntity;
@@ -35,7 +34,7 @@ class HeightMap:public RubyObject
   void setTerrain(size_t x,size_t y,TerrainType t,float v);
   float getTerrain(size_t x,size_t y,TerrainType t) const;
 
-
+  float getMean(float x,float y);
   size_t getW() const
   {
     return mW;
@@ -68,7 +67,9 @@ class HeightMap:public RubyObject
   float HeightMap::getTerrainScale(float x,float y);
 
 
+  void addChange(const AGVector2 &v);
 
+  AGRect2 getChangeRect() const;
 
  private:
   std::vector<float> mHeights;
@@ -78,19 +79,11 @@ class HeightMap:public RubyObject
 
   // sum of all should be one - or at least they get normalized to 1 and then the heighest is chosen and weighted with the mean value
   std::map<TerrainType,std::vector<float> > mTerrainTypes;
-  /*
-
-  std::vector<float> mWater;
-  std::vector<float> mSand;
-  std::vector<float> mEarth;
-  std::vector<float> mGrass;
-  std::vector<float> mGrass2;
-  std::vector<float> mForest;
-  std::vector<float> mRock;
-  std::vector<float> mRock2;
-  */
 
   size_t mW,mH;
+
+  AGRect2 mChangeRect;
+  size_t mChanges;
 
  protected:
 

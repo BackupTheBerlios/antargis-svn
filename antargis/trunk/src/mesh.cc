@@ -109,6 +109,7 @@ AGVector4 Mesh::lineHit(const AGLine3 &pLine) const
 void Mesh::setPos(const AGVector3&pPos)
 {
   mPos=AGVector4(pPos,1);
+  SceneNode::setPos(pPos);
 }
 void Mesh::setRotation(float r)
 {
@@ -120,7 +121,7 @@ MeshData *Mesh::getData()
   return mData;
 }
 
-AGBox3 Mesh::bbox()
+AGBox3 Mesh::bbox() const
 {
   // FIXME: ignore rotation for now
   return mData->bbox()+mPos.dim3();

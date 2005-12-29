@@ -11,7 +11,6 @@
 #include <set>
 #include <map>
 
-
 #include "scenenode.h"
 
 struct PickNode
@@ -35,11 +34,14 @@ struct Viewport
 #endif
 };
 
+template<class T>
+class QuadTree;
 
 class Scene:public RubyObject
 {
  public:
   typedef std::vector<PickNode> PickResult;
+  typedef std::list<SceneNode*> NodeList;
 
   Scene(int w,int h);
   virtual ~Scene();
@@ -55,6 +57,7 @@ class Scene:public RubyObject
   //            You have to do this yourself in the Entities or let ruby's GC do it for you 
   void addNode(SceneNode *node);
   void removeNode(SceneNode *node);
+  void updatePos(SceneNode *node);
 
 
   void clear();
@@ -88,6 +91,8 @@ class Scene:public RubyObject
 
   AGPoint getPosition(const AGVector4 &v) const;
 
+  NodeList getCurrentNodes();
+
  private:
   void init();
   void calcCameraView();
@@ -119,6 +124,11 @@ class Scene:public RubyObject
   
   typedef std::vector<SceneNode*> Nodes;
   typedef std::set<SceneNode*> NodeSet;
+
+  typedef QuadTree<SceneNode> Tree;
+
+  Tree *mTree;
+
   Nodes mNodes;
   NodeSet mNodeSet;
 

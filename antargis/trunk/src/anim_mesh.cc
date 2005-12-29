@@ -659,6 +659,9 @@ void AnimMesh::setPos(const AGVector3 &p)
 
   assert(mData);
   mComplete=mData->getTransform()*mTransform;
+
+
+  SceneNode::setPos(p);
 }
 void AnimMesh::setRotation(const AGVector3 &r,float a)
 {
@@ -696,7 +699,7 @@ bool AnimMesh::setAnimation(const std::string &pName)
   return true;
 }
 
-AGBox3 AnimMesh::bbox()
+AGBox3 AnimMesh::bbox() const
 {
   return mData->bbox()+mPos.dim3();
 }

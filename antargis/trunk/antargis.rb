@@ -39,7 +39,7 @@ class AntGameApp <AntRubyView
 	def initialize(savegame,w,h)
 		super(w,h)
 		$app=self	
-		@map=AntRubyMap.new(64,64)
+		@map=AntRubyMap.new(512,512)
 		$map=@map
 
 		if savegame && savegame.length>0

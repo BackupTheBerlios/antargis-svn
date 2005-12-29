@@ -9,6 +9,8 @@
 
 #include <math.h>
 
+#include "quadtree.h"
+
 std::set<Scene*> gScenes;
 
 std::set<Scene*> getScenes()
@@ -48,7 +50,8 @@ public:
 };
 
 
-Scene::Scene(int w,int h)
+Scene::Scene(int w,int h):
+  mTree(new QuadTree<SceneNode>(AGRect2(AGVector3(),AGVector3(w,h,1))))
 {
   windowWidth=w;
   windowHeight=h;
@@ -87,6 +90,8 @@ Scene::~Scene()
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->setScene(0); 
   gScenes.erase(this);
+
+  delete mTree;
 }
 
 size_t Scene::getTriangles() const
@@ -143,8 +148,16 @@ void Scene::addNode(SceneNode *node)
       mNodes.push_back(node);
       mNodeSet.insert(node);
       node->setScene(this);
+      mTree->insert(node);
     }
 }
+
+void Scene::updatePos(SceneNode *node)
+{
+  mTree->remove(node);
+  mTree->insert(node);
+}
+
 
 void Scene::removeNode(SceneNode *node)
 {
@@ -154,6 +167,7 @@ void Scene::removeNode(SceneNode *node)
       mNodes.erase(i);
       mNodeSet.erase(node);
       node->setScene(0);
+      mTree->remove(node);
     }
 }
 
@@ -164,6 +178,7 @@ void Scene::clear()
   TRACE;
   mNodes.clear();
   mNodeSet.clear();
+  mTree->clear();
 }
 
   // (mx,my,0)
@@ -176,7 +191,11 @@ void Scene::setCamera(AGVector4 v)
 
 void Scene::advance(float time)
 {
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+  // advance only in view
+
+  NodeList l=getCurrentNodes();
+
+  for(NodeList::iterator i=l.begin();i!=l.end();i++)
     (*i)->advance(time);
 }
 
@@ -285,6 +304,11 @@ void Scene::calcCameraView()
     }
 }
 
+Scene::NodeList Scene::getCurrentNodes()
+{
+  return mTree->get(AGRect2(scenePosition.dim2()+AGVector2(-20,-20),scenePosition.dim2()+AGVector2(30,30)));
+}
+
 
 void Scene::calcShadowMap()
 {
@@ -293,7 +317,9 @@ void Scene::calcShadowMap()
 
   getRenderer()->beginShadowComputation();
   
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+  NodeList l=getCurrentNodes();
+  
+  for(NodeList::iterator i=l.begin();i!=l.end();i++)
     {
       if((*i)->bbox().collides(frustum) && (*i)->visible())
 	{
@@ -377,10 +403,19 @@ void Scene::drawScene()
 
   int drawn=0;
 
+#ifdef NOQUADTREE
   Nodes sorted=mNodes;
+#else
+
+  NodeList l=getCurrentNodes();
+  Nodes sorted;
+  std::copy(l.begin(),l.end(),std::back_inserter(sorted));
+
+  cdebug(l.size()<<"   "<<mNodes.size());
+
+#endif
 
 #ifndef OLD_SORTING
-  //sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
   sort(sorted.begin(),sorted.end(),SortOrder());
 
   for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
@@ -396,9 +431,6 @@ void Scene::drawScene()
 	}
     }
   
-  //  glDisable(GL_ALPHA_TEST);
-  //  glAlphaFunc(GL_ALWAYS,1);
-
   sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
 
   for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
@@ -413,10 +445,7 @@ void Scene::drawScene()
 	    }
 	}
     }
-  //  if(mNodes.size())
-    //    cdebug("drawn:"<<(float(drawn)/mNodes.size()*100)<<"%");
-  
-
+  cdebug("drawn:"<<drawn);
 
 #else
   sort(sorted.begin(),sorted.end(),SortOrder());
@@ -480,8 +509,9 @@ void Scene::pickDraw()
   pickNames.clear();
   AGMatrix4 frustum=cameraPickMatrix*cameraViewMatrix;
   
+  NodeList l=getCurrentNodes();
 
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+  for(NodeList::iterator i=l.begin();i!=l.end();i++)
     {
       if((*i)->visible() && (*i)->bbox().collides(frustum))
 	{

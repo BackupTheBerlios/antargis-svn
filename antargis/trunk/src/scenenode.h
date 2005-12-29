@@ -42,7 +42,8 @@ class SceneNode:public RubyObject
 
   virtual bool transparent();
 
-  virtual AGBox3 bbox();
+  virtual AGBox3 bbox() const;
+  virtual AGRect2 getRect() const;
 
   virtual void clear();
 

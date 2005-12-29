@@ -35,7 +35,7 @@ require 'editview.rb'
 
 class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
-		super(sw,sh,AntRubyMap.new(128,128))
+		super(sw,sh,AntRubyMap.new(32,32))
 		$app=self	
 		@layout=AGLayout.new(@mainWidget,loadFile("data/gui/layout/editor.xml"))
 		@mainWidget.addChild(@layout)

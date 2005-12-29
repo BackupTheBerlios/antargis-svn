@@ -21,7 +21,7 @@ class NewDecal:public SceneNode
   
   void setPos(const AGVector3&pPos);
   void draw();
-  AGBox3 bbox();
+  AGBox3 bbox() const;
 
   void init();
   virtual void mapChanged();

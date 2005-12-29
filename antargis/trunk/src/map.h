@@ -5,6 +5,9 @@
 
 //FIXME: add quadtree
 
+template<class T>
+class QuadTree;
+
 class AntMap:public HeightMap
 {
  public:
@@ -52,7 +55,7 @@ class AntMap:public HeightMap
 
   EntityList mEntities;
   EntityMap mEntityMap;
-  QuadTree<AntEntity> mEntQuad;
+  QuadTree<AntEntity> *mEntQuad;
 
   EntityList mToDel;
 

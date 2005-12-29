@@ -10,7 +10,7 @@ char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock"
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 
 HeightMap::HeightMap(int w,int h):
-  mW(w),mH(h)
+  mW(w),mH(h),mChangeRect(AGVector3(),AGVector3()),mChanges(0)
 {
   mHeights=genSomeHeights(w+2,h+2,5);
 
@@ -20,11 +20,11 @@ HeightMap::HeightMap(int w,int h):
   mTerrain=new Terrain(*this);
 
   setTerrainScale(WATER,0);
-  setTerrainScale(SAND,0);
-  setTerrainScale(EARTH,0.3);
-  setTerrainScale(GRASS,0.6);
-  setTerrainScale(GRASS2,1);
-  setTerrainScale(FOREST,1);
+  setTerrainScale(SAND,8/32.0);
+  setTerrainScale(EARTH,12/32.0);
+  setTerrainScale(GRASS,16/32.0);
+  setTerrainScale(GRASS2,20/32.0);
+  setTerrainScale(FOREST,23/32.0);
   setTerrainScale(ROCK,1);
   setTerrainScale(ROCK2,1);
 }
@@ -46,13 +46,30 @@ void HeightMap::setHeight(float height)
   mapChanged();
 }
 
+void HeightMap::addChange(const AGVector2 &v)
+{
+  mChanges++;
+  if(mChanges==1)
+    {
+      mChangeRect=AGRect2(AGVector3(v,1),AGVector3(v,1));
+    }
+  else
+    mChangeRect.include(v);
+}
+
+AGRect2 HeightMap::getChangeRect() const
+{
+  return mChangeRect;
+}
+
+
 void HeightMap::setTerrain(size_t x,size_t y,TerrainType t,float v)
 {
   size_t p=x+y*(mW+2);
 
   //  cdebug(p<<"  "<<EARTH<<" "<<mTerrainTypes[EARTH].size());
   assert(mTerrainTypes[EARTH].size()>p);
-  mTerrainTypes[EARTH][p]=v;
+  mTerrainTypes[t][p]=v;
   
   float sum=0;
   for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
@@ -70,6 +87,7 @@ void HeightMap::setTerrain(size_t x,size_t y,TerrainType t,float v)
 	else
 	  mTerrainTypes[TerrainType(i)][p]=mTerrainTypes[TerrainType(i)][p]/sum*(1-v); // so sum(mTerraintypes[x][.]) == 1
       }
+  addChange(AGVector2(x,y));
 }
 
 float HeightMap::getTerrain(size_t x,size_t y,TerrainType t) const
@@ -88,6 +106,7 @@ void HeightMap::set(size_t x,size_t y,float height)
   assert(x<mW+2);
   assert(y<mH+2);
   mHeights[x+y*(mW+2)]=height;
+  addChange(AGVector2(x,y));
 }
 
 void HeightMap::loadXML(const Node &node)
@@ -118,6 +137,7 @@ void HeightMap::loadXML(const Node &node)
 	    {
 	      is>>f;
 	      mTerrainTypes[TerrainType(i)][x+y*(mW+2)]=f;
+	      addChange(AGVector2(x,y));
 	    }
 	}
     }
@@ -147,13 +167,20 @@ void HeightMap::loadXML(const Node &node)
 	  //	  mGrass[x+y*(mW+2)]=f;
 	}
     }
-  mapChanged();
+
+  // compete change
+  mTerrain->mapChangedComplete();
+  mTerrain->addToScenes();
+  mChanges=0;
+  mChangeRect=AGRect2(AGVector3(),AGVector3());
 }
 
 void HeightMap::mapChanged()
 {
   mTerrain->addToScenes();
   mTerrain->mapChanged();
+  mChanges=0;
+  mChangeRect=AGRect2(AGVector3(),AGVector3());
 }
 
 
@@ -316,6 +343,18 @@ float HeightMap::getTerrainWeight(float x,float y)
   return mean/(LASTTERRAIN-FIRSTTERRAIN);
 }
 
+float HeightMap::getMean(float x,float y)
+{
+  float mean=0;
+  for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
+    {
+      float v=getTerrainValue(x,y,TerrainType(i));
+      mean+=v*mTerrainScale[TerrainType(i)];
+    }
+  return mean;
+
+}
+
 
 float HeightMap::getTerrainScale(float x,float y)
 {
@@ -334,6 +373,10 @@ float HeightMap::getTerrainScale(float x,float y)
   float s2=mTerrainScale[t2];
 
   mean=fabs(std::max(std::min(mean,1.0f),-1.0f));
+
+  //  cdebug(mean);
+  float w=0;
+  return getMean(x,y)*(1-w)+s1*w;
 
   return s1*(1-mean)+s2*mean;
 }

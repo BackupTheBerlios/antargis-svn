@@ -40,7 +40,7 @@ class Smoke:public SceneNode
     return true;
   }
 
-  AGBox3 bbox();
+  AGBox3 bbox() const;
 
   virtual void setPos(const AGVector3&pPos);
 

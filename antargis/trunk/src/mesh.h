@@ -26,7 +26,7 @@ class Mesh:public SceneNode
   void drawShadow();
   void drawPick();
 
-  AGBox3 bbox();
+  AGBox3 bbox() const;
 
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
 
