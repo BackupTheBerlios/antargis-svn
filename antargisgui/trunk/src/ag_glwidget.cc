@@ -1,5 +1,6 @@
 #include "ag_glwidget.h"
 #include "ag_debug.h"
+#include <GL/glu.h>
 
 AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect &r):
   AGWidget(pParent,r)
@@ -88,9 +89,10 @@ void AGGLWidget::endGL()
   glEnable(GL_COLOR_MATERIAL);
 }
 
-void AGGLWidget::setPerspective(float openAngle,float near,float far)
+void AGGLWidget::setPerspective(float openAngle,float pnear,float pfar)
 {
   glMatrixMode(GL_PROJECTION);
-  gluPerspective(openAngle,getRatio(),near,far);
+  GLdouble r=getRatio();
+  gluPerspective(openAngle,r,pnear,pfar);
   glGetFloatv(GL_PROJECTION_MATRIX, pMatrix);
 }

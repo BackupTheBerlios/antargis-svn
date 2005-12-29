@@ -23,7 +23,7 @@
 #include <fstream>
 #include <iostream>
 
-#ifndef NDEBUG
+//#ifndef NDEBUG
 int D::d=0;
 
 std::ofstream debugOFS("debug.txt");
@@ -33,7 +33,7 @@ std::ostream &getDebug()
   return std::cout;
 }
 
-#endif
+//#endif
 
 std::vector<std::string> split(const std::string &needle,const std::string &haystack)
 {

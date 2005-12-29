@@ -123,9 +123,10 @@ private:
 #define TRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 #define CTRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(((void*)this)))
 
+#ifndef __WIN32__
 #undef assert
 #define assert(x) {if(!(x)) {cdebug("assertiong failed:"<<__STRING(x)); rb_raise(rb_eRuntimeError,((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()),""); } }
-
+#endif
 
 #define Assert(x) assert(x)
 
