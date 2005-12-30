@@ -23,7 +23,7 @@ class RubyObject
 };
 
 void general_markfunc(void *ptr);
-void saveDelete(RubyObject *o);
+bool saveDelete(RubyObject *o);
 
 #ifdef __WIN32__ // fix problem with "my" connect and connect of winsock
 #undef connect

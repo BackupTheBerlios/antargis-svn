@@ -108,8 +108,9 @@ AGVector4 Mesh::lineHit(const AGLine3 &pLine) const
 
 void Mesh::setPos(const AGVector3&pPos)
 {
+  getScene()->prepareUpdate(this);
   mPos=AGVector4(pPos,1);
-  SceneNode::setPos(pPos);
+  getScene()->updatePos(this);
 }
 void Mesh::setRotation(float r)
 {

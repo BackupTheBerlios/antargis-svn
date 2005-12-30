@@ -60,7 +60,6 @@ bool SceneNode::operator==(const SceneNode &n) const
 
 void SceneNode::setPos(const AGVector3&pPos)
 {
-  getScene()->updatePos(this);
 }
 
 void SceneNode::setRotation(float r)

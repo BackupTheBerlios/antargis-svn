@@ -76,8 +76,9 @@ AntEntity::~AntEntity()
   //  CTRACE;
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     {
-      removeFromAllScenes(*i);
       saveDelete(*i);
+	//	removeFromAllScenes(*i);
+
     }
   mMeshes.clear();
 }

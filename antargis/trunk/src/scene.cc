@@ -154,8 +154,16 @@ void Scene::addNode(SceneNode *node)
 
 void Scene::updatePos(SceneNode *node)
 {
-  mTree->remove(node);
+  if(mNodeSet.find(node)==mNodeSet.end())
+    throw std::string("Dont know about this!");
   mTree->insert(node);
+}
+
+void Scene::prepareUpdate(SceneNode *node)
+{
+  if(mNodeSet.find(node)==mNodeSet.end())
+    throw std::string("Dont know about this!");
+  mTree->remove(node);
 }
 
 
@@ -163,11 +171,34 @@ void Scene::removeNode(SceneNode *node)
 {
   if(mNodeSet.find(node)!=mNodeSet.end())
     {
+      /*      {
+      std::list<SceneNode*> test=mTree->getAll();
+      cdebug("test:"<<test.size());
+      std::set<SceneNode*> s;
+      std::copy(test.begin(),test.end(),std::inserter(s,s.begin()));
+      cdebug("s:"<<s.size());
+      }*/
+
       Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
       mNodes.erase(i);
       mNodeSet.erase(node);
       node->setScene(0);
+      //      cdebug("size:"<<mTree->size());
       mTree->remove(node);
+      //      cdebug("after size:"<<mTree->size());
+      //      mTree->remove(node);
+      //      cdebug("after size:"<<mTree->size());
+
+      /*      std::list<SceneNode*> test=mTree->getAll();
+      cdebug("test:"<<test.size());
+      std::set<SceneNode*> s;
+      std::copy(test.begin(),test.end(),std::inserter(s,s.begin()));
+      cdebug("s:"<<s.size());
+      assert(std::find(test.begin(),test.end(),node)==test.end());*/
+    }
+  else
+    {
+      cdebug("DONT KNOW");
     }
 }
 
@@ -196,7 +227,9 @@ void Scene::advance(float time)
   NodeList l=getCurrentNodes();
 
   for(NodeList::iterator i=l.begin();i!=l.end();i++)
-    (*i)->advance(time);
+    {
+      (*i)->advance(time);
+    }
 }
 
 
@@ -306,7 +339,15 @@ void Scene::calcCameraView()
 
 Scene::NodeList Scene::getCurrentNodes()
 {
-  return mTree->get(AGRect2(scenePosition.dim2()+AGVector2(-20,-20),scenePosition.dim2()+AGVector2(30,30)));
+  NodeList l=mTree->get(AGRect2(scenePosition.dim2()+AGVector2(-20,-20),scenePosition.dim2()+AGVector2(30,30)));
+
+  for(NodeList::iterator i=l.begin();i!=l.end();i++)
+    {
+      if(mNodeSet.find(*i)==mNodeSet.end())
+	cdebug("ERROR:"<<*i);
+      assert(mNodeSet.find(*i)!=mNodeSet.end());
+    }
+  return l;
 }
 
 

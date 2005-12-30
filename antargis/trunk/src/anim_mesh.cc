@@ -654,14 +654,15 @@ void AnimMesh::setTransform(const AGMatrix4 &m)
 
 void AnimMesh::setPos(const AGVector3 &p)
 {
+  getScene()->prepareUpdate(this);
+
   mPos=AGVector4(p,1);
   mTransform=AGMatrix4(mRot[3],mRot.dim3())*AGMatrix4(mPos);
 
   assert(mData);
   mComplete=mData->getTransform()*mTransform;
 
-
-  SceneNode::setPos(p);
+  getScene()->updatePos(this);
 }
 void AnimMesh::setRotation(const AGVector3 &r,float a)
 {

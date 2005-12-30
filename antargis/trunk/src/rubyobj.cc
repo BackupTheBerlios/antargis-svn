@@ -57,14 +57,20 @@ void general_markfunc(void *ptr)
 // 2) check set before clearing/deleting
 // 3) clear this set when marking
 
-void saveDelete(RubyObject *o)
+bool saveDelete(RubyObject *o)
 {
   //  cdebug("SAVEDEL:"<<o);
   assert(o);
   if(gDeletedRubies.find(o)!=gDeletedRubies.end())
-    return; // already deleted
+    {
+      return false; // already deleted
+    }
   assert(!o->mDeleted);
   o->clear();
   if(!o->mRubyObject)
-    delete o;
+    {
+      delete o;
+      return true;
+    }
+  return false;
 }

@@ -57,6 +57,7 @@ class Scene:public RubyObject
   //            You have to do this yourself in the Entities or let ruby's GC do it for you 
   void addNode(SceneNode *node);
   void removeNode(SceneNode *node);
+  void prepareUpdate(SceneNode *node);
   void updatePos(SceneNode *node);
 
 

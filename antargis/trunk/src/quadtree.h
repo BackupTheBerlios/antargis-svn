@@ -38,6 +38,20 @@ class QuadTree
 
         Node(AGRect2 R):r(R)
       {}
+
+	size_t size() const
+	{
+	  size_t s=ts.size();
+	  for(typename std::list<Node*>::const_iterator i=children.begin();i!=children.end();i++)
+	    s+=(*i)->size();
+	  return s;
+	}
+	void getAll(std::list<T*> &l)
+	{
+	  std::copy(ts.begin(),ts.end(),std::back_inserter(l));
+	  for(typename std::list<Node*>::iterator i=children.begin();i!=children.end();i++)
+	    (*i)->getAll(l);
+	}
       
         void get(const AGRect2 &pr,std::list<T*> &l)
         {
@@ -148,6 +162,13 @@ class QuadTree
     {
       root->insert(t);
     }
+
+    std::list<T*> getAll()
+      {
+	std::list<T*> l;
+	root->getAll(l);
+	return l;
+      }
     
     std::list<T*> get(const AGRect2 &r)
     {
@@ -166,6 +187,10 @@ class QuadTree
     void clear()
     {
       root->clear();
+    }
+    size_t size() const
+    {
+      return root->size();
     }
   };
 
