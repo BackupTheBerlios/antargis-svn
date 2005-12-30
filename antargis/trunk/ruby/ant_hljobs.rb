@@ -121,12 +121,12 @@ class AntHeroFightJob<AntHeroMoveJob
 		@defend=defend
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
-		@men=hero.getMen
+		@men=hero.getMen.clone
 		@states["fight"]=[]
 		@states["defeated"]=[]
 		if @defend
 			@state="fight"
-			@states["fight"]=@men
+			@states["fight"]=@men.clone
 		end
 		@finished=false
 		dputs "NEW:"
@@ -138,9 +138,8 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def getEnergy
 		if @men.length==0
-			return 0
+			raise "ERROR"
 		end
-		#dputs @states["fight"],"//",@men
 		return @states["fight"].length.to_f/@men.length
 	end
 	
