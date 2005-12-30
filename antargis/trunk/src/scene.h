@@ -1,7 +1,7 @@
 #ifndef __SCENE_H
 #define __SCENE_H
 
-#include "glee/GLee.h"
+#include "GLee.h"
 #include "ag_triangle.h"
 #include "ag_geometry.h"
 

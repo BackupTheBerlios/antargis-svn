@@ -1,4 +1,3 @@
-SUBDIRS = glee
 lib_LTLIBRARIES = libantargis.la
 
 
@@ -7,7 +6,6 @@ realsrc_cc= anim_mesh.cc smoke.cc jobs.cc entity.cc map.cc mesh.cc terrain.cc tr
 
 
 libantargis_la_SOURCES = $(realsrc_h) $(realsrc_cc) antargisruby.cc antargisruby.h
-libantargis_la_LIBADD = $(top_builddir)/src/glee/libglee.la
 
 EXTRA_DIST = *.png interface.i
 

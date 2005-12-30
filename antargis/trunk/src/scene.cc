@@ -452,7 +452,7 @@ void Scene::drawScene()
   Nodes sorted;
   std::copy(l.begin(),l.end(),std::back_inserter(sorted));
 
-  cdebug(l.size()<<"   "<<mNodes.size());
+  //  cdebug(l.size()<<"   "<<mNodes.size());
 
 #endif
 
@@ -484,7 +484,7 @@ void Scene::drawScene()
 	    }
 	}
     }
-  cdebug("drawn:"<<drawn);
+  //  cdebug("drawn:"<<drawn);
 
 }
 void Scene::drawShadow()

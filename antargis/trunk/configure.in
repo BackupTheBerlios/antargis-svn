@@ -48,6 +48,5 @@ LDFLAGS="$LDFLAGS `sdl-config --libs` -L$RUBY_INSTALL_DIR"
 AC_OUTPUT([ 
 Makefile \
 src/Makefile \
-src/glee/Makefile \
 data/Makefile \
  ])

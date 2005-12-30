@@ -137,6 +137,9 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	
 	def getEnergy
+		if @men.length==0
+			return 0
+		end
 		#dputs @states["fight"],"//",@men
 		return @states["fight"].length.to_f/@men.length
 	end

@@ -1,7 +1,7 @@
 #ifndef __RENDERER_H
 #define __RENDERER_H
 
-#include "glee/GLee.h"
+#include "GLee.h"
 
 class Scene;
 
