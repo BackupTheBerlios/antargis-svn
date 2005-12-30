@@ -1,5 +1,6 @@
 #include "height_map.h"
 #include "terrain.h"
+#include "ant_serial.h"
 
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
@@ -109,65 +110,99 @@ void HeightMap::set(size_t x,size_t y,float height)
   addChange(AGVector2(x,y));
 }
 
-void HeightMap::loadXML(const Node &node)
+void HeightMap::loadBinary(const std::string &pName)
 {
-  mW=toInt(node.get("width"));
-  mH=toInt(node.get("height"));
+  BinaryFileIn is(pName);
+  float f;
 
-  cdebug("mW:"<<mW);
-  cdebug("mH:"<<mH);
+  is>>mW>>mH;
+  
   mHeights=std::vector<float>(mW*mH*4);
 
   for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
     {
       mTerrainTypes[TerrainType(i)]=std::vector<float>(mW*mH*4);
-      cdebug(mW<<"   "<<mH);
-      cdebug(mTerrainTypes[TerrainType(i)].size());
-      Node::NodeVector gv=node.get_children(TerrainNames[i]);
-      if(gv.size()==0)
-	continue;
-      Node &g=**gv.begin();
-
-      std::istringstream is(g.getContent());
       
-      float f;
       for(size_t y=0;y<mH+2;y++)
 	{
 	  for(size_t x=0;x<mW+2;x++)
 	    {
 	      is>>f;
 	      mTerrainTypes[TerrainType(i)][x+y*(mW+2)]=f;
-	      addChange(AGVector2(x,y));
 	    }
 	}
     }
 
-  //  mGrass=std::vector<float>(mW*mH*4);
-  Node::NodeVector hv=node.get_children("height");
-  //  Node::NodeVector gv=node.get_children("grass");
-  if(hv.size()==0)// || gv.size()==0)
-    return;
-  assert(hv.size()==1);
-  //  assert(gv.size()==1);
-  Node &h=**hv.begin();
-  //  Node &g=**gv.begin();
-  
-  std::istringstream ish(h.getContent());
-  //  std::istringstream isg(g.getContent());
-
-  //  cdebug(g.getContent());
-  float f;
   for(size_t y=0;y<mH+2;y++)
     {
       for(size_t x=0;x<mW+2;x++)
 	{
-	  ish>>f;
+	  is>>f;
 	  mHeights[x+y*(mW+2)]=f;
-	  //  isg>>f;
-	  //	  mGrass[x+y*(mW+2)]=f;
 	}
     }
+}
 
+void HeightMap::loadXML(const Node &node)
+{
+  std::string filename=node.get("filename");
+  if(filename.length())
+    loadBinary(filename);
+  else
+    {
+      mW=toInt(node.get("width"));
+      mH=toInt(node.get("height"));
+      
+      cdebug("mW:"<<mW);
+      cdebug("mH:"<<mH);
+      mHeights=std::vector<float>(mW*mH*4);
+      
+      for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
+	{
+	  mTerrainTypes[TerrainType(i)]=std::vector<float>(mW*mH*4);
+	  cdebug(mW<<"   "<<mH);
+	  cdebug(mTerrainTypes[TerrainType(i)].size());
+	  Node::NodeVector gv=node.get_children(TerrainNames[i]);
+	  if(gv.size()==0)
+	    continue;
+	  Node &g=**gv.begin();
+	  
+	  std::istringstream is(g.getContent());
+	  
+	  float f;
+	  for(size_t y=0;y<mH+2;y++)
+	    {
+	      for(size_t x=0;x<mW+2;x++)
+		{
+		  is>>f;
+		  mTerrainTypes[TerrainType(i)][x+y*(mW+2)]=f;
+		  addChange(AGVector2(x,y));
+		}
+	    }
+	}
+      
+      
+      Node::NodeVector hv=node.get_children("height");
+      
+      if(hv.size()==0)// || gv.size()==0)
+	return;
+      assert(hv.size()==1);
+      Node &h=**hv.begin();
+      
+      
+      std::istringstream ish(h.getContent());
+      
+      float f;
+      for(size_t y=0;y<mH+2;y++)
+	{
+	  for(size_t x=0;x<mW+2;x++)
+	    {
+	      ish>>f;
+	      mHeights[x+y*(mW+2)]=f;
+	    }
+	}
+    }
+  
   // compete change
   mTerrain->mapChangedComplete();
   mTerrain->addToScenes();

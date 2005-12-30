@@ -54,17 +54,15 @@ class HeightMap:public RubyObject
   // editing
   void setHeight(float height); // for whole plane
   void set(size_t x,size_t y,float height);
-  void setGrass(size_t x,size_t y,float height);
 
-  //protected:
   virtual void mapChanged();  
 
 
   void setTerrainScale(TerrainType t,float s);
-  float HeightMap::getTerrainValue(float x,float y,TerrainType t);
-  TerrainType HeightMap::getTerrain(float x,float y);
-  float HeightMap::getTerrainWeight(float x,float y);
-  float HeightMap::getTerrainScale(float x,float y);
+  float getTerrainValue(float x,float y,TerrainType t);
+  TerrainType getTerrain(float x,float y);
+  float getTerrainWeight(float x,float y);
+  float getTerrainScale(float x,float y);
 
 
   void addChange(const AGVector2 &v);
@@ -72,6 +70,13 @@ class HeightMap:public RubyObject
   AGRect2 getChangeRect() const;
 
  private:
+
+  void loadBinary(const std::string &pName);
+
+
+
+
+
   std::vector<float> mHeights;
 
 

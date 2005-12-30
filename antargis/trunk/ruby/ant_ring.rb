@@ -51,6 +51,7 @@ def getRingData(w=1)
 	$ringdata[w].setOverdraw(true)
 	$ringdata[w].setColors(false)
 	$ringdata[w].setPickable(false)
+	$ringdata[w].setLighting(false)
 	return $ringdata[w]
 end
 

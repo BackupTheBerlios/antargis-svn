@@ -1563,4 +1563,61 @@ public:
 };
 
 
+class SwigDirector_BinaryIn : public BinaryIn, public Swig::Director {
+
+public:
+    SwigDirector_BinaryIn(VALUE self);
+    virtual char read();
+    virtual ~SwigDirector_BinaryIn();
+    virtual bool eof();
+};
+
+
+class SwigDirector_BinaryOut : public BinaryOut, public Swig::Director {
+
+public:
+    SwigDirector_BinaryOut(VALUE self);
+    virtual ~SwigDirector_BinaryOut();
+    virtual void write(char c);
+};
+
+
+class SwigDirector_BinaryFileIn : public BinaryFileIn, public Swig::Director {
+
+public:
+    SwigDirector_BinaryFileIn(VALUE self, std::string const &pName);
+    virtual char read();
+    virtual ~SwigDirector_BinaryFileIn();
+    virtual bool eof();
+};
+
+
+class SwigDirector_BinaryFileOut : public BinaryFileOut, public Swig::Director {
+
+public:
+    SwigDirector_BinaryFileOut(VALUE self, std::string const &pName);
+    virtual ~SwigDirector_BinaryFileOut();
+    virtual void write(char c);
+};
+
+
+class SwigDirector_BinaryStringIn : public BinaryStringIn, public Swig::Director {
+
+public:
+    SwigDirector_BinaryStringIn(VALUE self, std::string const &pText);
+    virtual char read();
+    virtual ~SwigDirector_BinaryStringIn();
+    virtual bool eof();
+};
+
+
+class SwigDirector_BinaryStringOut : public BinaryStringOut, public Swig::Director {
+
+public:
+    SwigDirector_BinaryStringOut(VALUE self);
+    virtual ~SwigDirector_BinaryStringOut();
+    virtual void write(char c);
+};
+
+
 #endif

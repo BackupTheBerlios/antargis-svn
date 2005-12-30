@@ -1022,174 +1022,183 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_AGAngle swig_types[0]
-#define SWIGTYPE_p_AGApplication swig_types[1]
-#define SWIGTYPE_p_AGBackground swig_types[2]
-#define SWIGTYPE_p_AGBox3 swig_types[3]
-#define SWIGTYPE_p_AGButton swig_types[4]
-#define SWIGTYPE_p_AGCPPListener swig_types[5]
-#define SWIGTYPE_p_AGCaption swig_types[6]
-#define SWIGTYPE_p_AGCheckBox swig_types[7]
-#define SWIGTYPE_p_AGCircle2 swig_types[8]
-#define SWIGTYPE_p_AGCollisionData swig_types[9]
-#define SWIGTYPE_p_AGColor swig_types[10]
-#define SWIGTYPE_p_AGColorButton swig_types[11]
-#define SWIGTYPE_p_AGDialog swig_types[12]
-#define SWIGTYPE_p_AGEdit swig_types[13]
-#define SWIGTYPE_p_AGEditLine swig_types[14]
-#define SWIGTYPE_p_AGEvent swig_types[15]
-#define SWIGTYPE_p_AGFont swig_types[16]
-#define SWIGTYPE_p_AGFontEngine swig_types[17]
-#define SWIGTYPE_p_AGGLWidget swig_types[18]
-#define SWIGTYPE_p_AGHTiler swig_types[19]
-#define SWIGTYPE_p_AGImage swig_types[20]
-#define SWIGTYPE_p_AGLayout swig_types[21]
-#define SWIGTYPE_p_AGLayoutCreator swig_types[22]
-#define SWIGTYPE_p_AGLayoutFactory swig_types[23]
-#define SWIGTYPE_p_AGLine2 swig_types[24]
-#define SWIGTYPE_p_AGLine3 swig_types[25]
-#define SWIGTYPE_p_AGListBox swig_types[26]
-#define SWIGTYPE_p_AGListBoxItem swig_types[27]
-#define SWIGTYPE_p_AGListener swig_types[28]
-#define SWIGTYPE_p_AGMain swig_types[29]
-#define SWIGTYPE_p_AGMatrix3 swig_types[30]
-#define SWIGTYPE_p_AGMatrix4 swig_types[31]
-#define SWIGTYPE_p_AGMenu swig_types[32]
-#define SWIGTYPE_p_AGMenuEvent swig_types[33]
-#define SWIGTYPE_p_AGMessageObject swig_types[34]
-#define SWIGTYPE_p_AGMouseEvent swig_types[35]
-#define SWIGTYPE_p_AGPaintTarget swig_types[36]
-#define SWIGTYPE_p_AGPainter swig_types[37]
-#define SWIGTYPE_p_AGPoint swig_types[38]
-#define SWIGTYPE_p_AGPoint3 swig_types[39]
-#define SWIGTYPE_p_AGRadio swig_types[40]
-#define SWIGTYPE_p_AGRadioGroup swig_types[41]
-#define SWIGTYPE_p_AGRect swig_types[42]
-#define SWIGTYPE_p_AGRect2 swig_types[43]
-#define SWIGTYPE_p_AGRect3 swig_types[44]
-#define SWIGTYPE_p_AGSDLEvent swig_types[45]
-#define SWIGTYPE_p_AGSDLScreen swig_types[46]
-#define SWIGTYPE_p_AGScreen swig_types[47]
-#define SWIGTYPE_p_AGScreenWidget swig_types[48]
-#define SWIGTYPE_p_AGSignal swig_types[49]
-#define SWIGTYPE_p_AGSound swig_types[50]
-#define SWIGTYPE_p_AGSurface swig_types[51]
-#define SWIGTYPE_p_AGSurfaceManager swig_types[52]
-#define SWIGTYPE_p_AGTable swig_types[53]
-#define SWIGTYPE_p_AGText swig_types[54]
-#define SWIGTYPE_p_AGTexture swig_types[55]
-#define SWIGTYPE_p_AGTextureManager swig_types[56]
-#define SWIGTYPE_p_AGTheme swig_types[57]
-#define SWIGTYPE_p_AGTriangle2 swig_types[58]
-#define SWIGTYPE_p_AGTriangle3 swig_types[59]
-#define SWIGTYPE_p_AGVTiler swig_types[60]
-#define SWIGTYPE_p_AGVector2 swig_types[61]
-#define SWIGTYPE_p_AGVector3 swig_types[62]
-#define SWIGTYPE_p_AGVector4 swig_types[63]
-#define SWIGTYPE_p_AGWidget swig_types[64]
-#define SWIGTYPE_p_AGWindow swig_types[65]
-#define SWIGTYPE_p_AnimMesh swig_types[66]
-#define SWIGTYPE_p_AnimMeshData swig_types[67]
-#define SWIGTYPE_p_Animation swig_types[68]
-#define SWIGTYPE_p_AntConfig swig_types[69]
-#define SWIGTYPE_p_AntEntity swig_types[70]
-#define SWIGTYPE_p_AntEntityPtr swig_types[71]
-#define SWIGTYPE_p_AntFragProgram swig_types[72]
-#define SWIGTYPE_p_AntMap swig_types[73]
-#define SWIGTYPE_p_AntShaderParameter swig_types[74]
-#define SWIGTYPE_p_AntShaderProgram swig_types[75]
-#define SWIGTYPE_p_AntShadowShader swig_types[76]
-#define SWIGTYPE_p_AntVertexProgram swig_types[77]
-#define SWIGTYPE_p_AntWaterShader swig_types[78]
-#define SWIGTYPE_p_Attributes swig_types[79]
-#define SWIGTYPE_p_Bone swig_types[80]
-#define SWIGTYPE_p_Document swig_types[81]
-#define SWIGTYPE_p_DomParser swig_types[82]
-#define SWIGTYPE_p_EntityList swig_types[83]
-#define SWIGTYPE_p_FetchJob swig_types[84]
-#define SWIGTYPE_p_FightJob swig_types[85]
-#define SWIGTYPE_p_GLApp swig_types[86]
-#define SWIGTYPE_p_GLTree swig_types[87]
-#define SWIGTYPE_p_GLint swig_types[88]
-#define SWIGTYPE_p_GLuint swig_types[89]
-#define SWIGTYPE_p_HeightMap swig_types[90]
-#define SWIGTYPE_p_Job swig_types[91]
-#define SWIGTYPE_p_KeyFrame swig_types[92]
-#define SWIGTYPE_p_Mesh swig_types[93]
-#define SWIGTYPE_p_MeshData swig_types[94]
-#define SWIGTYPE_p_MeshOptimizer swig_types[95]
-#define SWIGTYPE_p_MeshVertex swig_types[96]
-#define SWIGTYPE_p_Meshes swig_types[97]
-#define SWIGTYPE_p_MoveJob swig_types[98]
-#define SWIGTYPE_p_NewDecal swig_types[99]
-#define SWIGTYPE_p_Node swig_types[100]
-#define SWIGTYPE_p_NodeList swig_types[101]
-#define SWIGTYPE_p_NodeVector swig_types[102]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[103]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[104]
-#define SWIGTYPE_p_Parser swig_types[105]
-#define SWIGTYPE_p_PickNode swig_types[106]
-#define SWIGTYPE_p_PickResult swig_types[107]
-#define SWIGTYPE_p_Renderer swig_types[108]
-#define SWIGTYPE_p_Resource swig_types[109]
-#define SWIGTYPE_p_RestJob swig_types[110]
-#define SWIGTYPE_p_RubyObject swig_types[111]
-#define SWIGTYPE_p_SDLKey swig_types[112]
-#define SWIGTYPE_p_SDLMod swig_types[113]
-#define SWIGTYPE_p_SDL_Event swig_types[114]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[115]
-#define SWIGTYPE_p_SDL_Rect swig_types[116]
-#define SWIGTYPE_p_SDL_Surface swig_types[117]
-#define SWIGTYPE_p_Scene swig_types[118]
-#define SWIGTYPE_p_SceneNode swig_types[119]
-#define SWIGTYPE_p_Smoke swig_types[120]
-#define SWIGTYPE_p_Terrain swig_types[121]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[122]
-#define SWIGTYPE_p_Uint32 swig_types[123]
-#define SWIGTYPE_p_Uint8 swig_types[124]
-#define SWIGTYPE_p_VertexArray swig_types[125]
-#define SWIGTYPE_p_VertexArrayShader swig_types[126]
-#define SWIGTYPE_p_Viewport swig_types[127]
-#define SWIGTYPE_p_WaterPiece swig_types[128]
-#define SWIGTYPE_p_const_iterator swig_types[129]
-#define SWIGTYPE_p_float swig_types[130]
-#define SWIGTYPE_p_iterator swig_types[131]
-#define SWIGTYPE_p_p_AnimMesh swig_types[132]
-#define SWIGTYPE_p_p_GLTree swig_types[133]
-#define SWIGTYPE_p_p_Mesh swig_types[134]
-#define SWIGTYPE_p_p_MeshData swig_types[135]
-#define SWIGTYPE_p_p_NewDecal swig_types[136]
-#define SWIGTYPE_p_p_Node swig_types[137]
-#define SWIGTYPE_p_p_SceneNode swig_types[138]
-#define SWIGTYPE_p_p_Smoke swig_types[139]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[140]
-#define SWIGTYPE_p_p_WaterPiece swig_types[141]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[142]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[143]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[144]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[145]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[146]
-#define SWIGTYPE_p_std__ostringstream swig_types[147]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[148]
-#define SWIGTYPE_p_std__setTScene_p_t swig_types[149]
-#define SWIGTYPE_p_std__string swig_types[150]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[151]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[152]
-#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[153]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[154]
-#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[155]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[156]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[157]
-#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[158]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[159]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[160]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[161]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[162]
-#define SWIGTYPE_p_std__vectorTfloat_t swig_types[163]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[164]
-#define SWIGTYPE_p_unsigned_long swig_types[165]
-static swig_type_info *swig_types[167];
-static swig_module_info swig_module = {swig_types, 166, 0, 0, 0, 0};
+#define SWIGTYPE_char swig_types[0]
+#define SWIGTYPE_p_AGAngle swig_types[1]
+#define SWIGTYPE_p_AGApplication swig_types[2]
+#define SWIGTYPE_p_AGBackground swig_types[3]
+#define SWIGTYPE_p_AGBox3 swig_types[4]
+#define SWIGTYPE_p_AGButton swig_types[5]
+#define SWIGTYPE_p_AGCPPListener swig_types[6]
+#define SWIGTYPE_p_AGCaption swig_types[7]
+#define SWIGTYPE_p_AGCheckBox swig_types[8]
+#define SWIGTYPE_p_AGCircle2 swig_types[9]
+#define SWIGTYPE_p_AGCollisionData swig_types[10]
+#define SWIGTYPE_p_AGColor swig_types[11]
+#define SWIGTYPE_p_AGColorButton swig_types[12]
+#define SWIGTYPE_p_AGDialog swig_types[13]
+#define SWIGTYPE_p_AGEdit swig_types[14]
+#define SWIGTYPE_p_AGEditLine swig_types[15]
+#define SWIGTYPE_p_AGEvent swig_types[16]
+#define SWIGTYPE_p_AGFont swig_types[17]
+#define SWIGTYPE_p_AGFontEngine swig_types[18]
+#define SWIGTYPE_p_AGGLWidget swig_types[19]
+#define SWIGTYPE_p_AGHTiler swig_types[20]
+#define SWIGTYPE_p_AGImage swig_types[21]
+#define SWIGTYPE_p_AGLayout swig_types[22]
+#define SWIGTYPE_p_AGLayoutCreator swig_types[23]
+#define SWIGTYPE_p_AGLayoutFactory swig_types[24]
+#define SWIGTYPE_p_AGLine2 swig_types[25]
+#define SWIGTYPE_p_AGLine3 swig_types[26]
+#define SWIGTYPE_p_AGListBox swig_types[27]
+#define SWIGTYPE_p_AGListBoxItem swig_types[28]
+#define SWIGTYPE_p_AGListener swig_types[29]
+#define SWIGTYPE_p_AGMain swig_types[30]
+#define SWIGTYPE_p_AGMatrix3 swig_types[31]
+#define SWIGTYPE_p_AGMatrix4 swig_types[32]
+#define SWIGTYPE_p_AGMenu swig_types[33]
+#define SWIGTYPE_p_AGMenuEvent swig_types[34]
+#define SWIGTYPE_p_AGMessageObject swig_types[35]
+#define SWIGTYPE_p_AGMouseEvent swig_types[36]
+#define SWIGTYPE_p_AGPaintTarget swig_types[37]
+#define SWIGTYPE_p_AGPainter swig_types[38]
+#define SWIGTYPE_p_AGPoint swig_types[39]
+#define SWIGTYPE_p_AGPoint3 swig_types[40]
+#define SWIGTYPE_p_AGRadio swig_types[41]
+#define SWIGTYPE_p_AGRadioGroup swig_types[42]
+#define SWIGTYPE_p_AGRect swig_types[43]
+#define SWIGTYPE_p_AGRect2 swig_types[44]
+#define SWIGTYPE_p_AGRect3 swig_types[45]
+#define SWIGTYPE_p_AGSDLEvent swig_types[46]
+#define SWIGTYPE_p_AGSDLScreen swig_types[47]
+#define SWIGTYPE_p_AGScreen swig_types[48]
+#define SWIGTYPE_p_AGScreenWidget swig_types[49]
+#define SWIGTYPE_p_AGSignal swig_types[50]
+#define SWIGTYPE_p_AGSound swig_types[51]
+#define SWIGTYPE_p_AGSurface swig_types[52]
+#define SWIGTYPE_p_AGSurfaceManager swig_types[53]
+#define SWIGTYPE_p_AGTable swig_types[54]
+#define SWIGTYPE_p_AGText swig_types[55]
+#define SWIGTYPE_p_AGTexture swig_types[56]
+#define SWIGTYPE_p_AGTextureManager swig_types[57]
+#define SWIGTYPE_p_AGTheme swig_types[58]
+#define SWIGTYPE_p_AGTriangle2 swig_types[59]
+#define SWIGTYPE_p_AGTriangle3 swig_types[60]
+#define SWIGTYPE_p_AGVTiler swig_types[61]
+#define SWIGTYPE_p_AGVector2 swig_types[62]
+#define SWIGTYPE_p_AGVector3 swig_types[63]
+#define SWIGTYPE_p_AGVector4 swig_types[64]
+#define SWIGTYPE_p_AGWidget swig_types[65]
+#define SWIGTYPE_p_AGWindow swig_types[66]
+#define SWIGTYPE_p_AnimMesh swig_types[67]
+#define SWIGTYPE_p_AnimMeshData swig_types[68]
+#define SWIGTYPE_p_Animation swig_types[69]
+#define SWIGTYPE_p_AntConfig swig_types[70]
+#define SWIGTYPE_p_AntEntity swig_types[71]
+#define SWIGTYPE_p_AntEntityPtr swig_types[72]
+#define SWIGTYPE_p_AntFragProgram swig_types[73]
+#define SWIGTYPE_p_AntMap swig_types[74]
+#define SWIGTYPE_p_AntShaderParameter swig_types[75]
+#define SWIGTYPE_p_AntShaderProgram swig_types[76]
+#define SWIGTYPE_p_AntShadowShader swig_types[77]
+#define SWIGTYPE_p_AntVertexProgram swig_types[78]
+#define SWIGTYPE_p_AntWaterShader swig_types[79]
+#define SWIGTYPE_p_Attributes swig_types[80]
+#define SWIGTYPE_p_BinaryFileIn swig_types[81]
+#define SWIGTYPE_p_BinaryFileOut swig_types[82]
+#define SWIGTYPE_p_BinaryIn swig_types[83]
+#define SWIGTYPE_p_BinaryOut swig_types[84]
+#define SWIGTYPE_p_BinaryStringIn swig_types[85]
+#define SWIGTYPE_p_BinaryStringOut swig_types[86]
+#define SWIGTYPE_p_Bone swig_types[87]
+#define SWIGTYPE_p_Document swig_types[88]
+#define SWIGTYPE_p_DomParser swig_types[89]
+#define SWIGTYPE_p_EntityList swig_types[90]
+#define SWIGTYPE_p_FetchJob swig_types[91]
+#define SWIGTYPE_p_FightJob swig_types[92]
+#define SWIGTYPE_p_GLApp swig_types[93]
+#define SWIGTYPE_p_GLTree swig_types[94]
+#define SWIGTYPE_p_GLint swig_types[95]
+#define SWIGTYPE_p_GLuint swig_types[96]
+#define SWIGTYPE_p_HeightMap swig_types[97]
+#define SWIGTYPE_p_Job swig_types[98]
+#define SWIGTYPE_p_KeyFrame swig_types[99]
+#define SWIGTYPE_p_Mesh swig_types[100]
+#define SWIGTYPE_p_MeshData swig_types[101]
+#define SWIGTYPE_p_MeshOptimizer swig_types[102]
+#define SWIGTYPE_p_MeshVertex swig_types[103]
+#define SWIGTYPE_p_Meshes swig_types[104]
+#define SWIGTYPE_p_MoveJob swig_types[105]
+#define SWIGTYPE_p_NewDecal swig_types[106]
+#define SWIGTYPE_p_Node swig_types[107]
+#define SWIGTYPE_p_NodeList swig_types[108]
+#define SWIGTYPE_p_NodeVector swig_types[109]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[110]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[111]
+#define SWIGTYPE_p_Parser swig_types[112]
+#define SWIGTYPE_p_PickNode swig_types[113]
+#define SWIGTYPE_p_PickResult swig_types[114]
+#define SWIGTYPE_p_Renderer swig_types[115]
+#define SWIGTYPE_p_Resource swig_types[116]
+#define SWIGTYPE_p_RestJob swig_types[117]
+#define SWIGTYPE_p_RubyObject swig_types[118]
+#define SWIGTYPE_p_SDLKey swig_types[119]
+#define SWIGTYPE_p_SDLMod swig_types[120]
+#define SWIGTYPE_p_SDL_Event swig_types[121]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[122]
+#define SWIGTYPE_p_SDL_Rect swig_types[123]
+#define SWIGTYPE_p_SDL_Surface swig_types[124]
+#define SWIGTYPE_p_Scene swig_types[125]
+#define SWIGTYPE_p_SceneNode swig_types[126]
+#define SWIGTYPE_p_SerialException swig_types[127]
+#define SWIGTYPE_p_Sint32 swig_types[128]
+#define SWIGTYPE_p_Smoke swig_types[129]
+#define SWIGTYPE_p_Terrain swig_types[130]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[131]
+#define SWIGTYPE_p_Uint32 swig_types[132]
+#define SWIGTYPE_p_Uint8 swig_types[133]
+#define SWIGTYPE_p_VertexArray swig_types[134]
+#define SWIGTYPE_p_VertexArrayShader swig_types[135]
+#define SWIGTYPE_p_Viewport swig_types[136]
+#define SWIGTYPE_p_WaterPiece swig_types[137]
+#define SWIGTYPE_p_const_iterator swig_types[138]
+#define SWIGTYPE_p_float swig_types[139]
+#define SWIGTYPE_p_iterator swig_types[140]
+#define SWIGTYPE_p_p_AnimMesh swig_types[141]
+#define SWIGTYPE_p_p_GLTree swig_types[142]
+#define SWIGTYPE_p_p_Mesh swig_types[143]
+#define SWIGTYPE_p_p_MeshData swig_types[144]
+#define SWIGTYPE_p_p_NewDecal swig_types[145]
+#define SWIGTYPE_p_p_Node swig_types[146]
+#define SWIGTYPE_p_p_SceneNode swig_types[147]
+#define SWIGTYPE_p_p_Smoke swig_types[148]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[149]
+#define SWIGTYPE_p_p_WaterPiece swig_types[150]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[151]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[152]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[153]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[154]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[155]
+#define SWIGTYPE_p_std__ostringstream swig_types[156]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[157]
+#define SWIGTYPE_p_std__setTScene_p_t swig_types[158]
+#define SWIGTYPE_p_std__string swig_types[159]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[160]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[161]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[162]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[163]
+#define SWIGTYPE_p_std__vectorTAGVector3_t swig_types[164]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[165]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[166]
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[167]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[168]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[169]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[170]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[171]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[172]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[173]
+#define SWIGTYPE_p_unsigned_long swig_types[174]
+static swig_type_info *swig_types[176];
+static swig_module_info swig_module = {swig_types, 175, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -16443,6 +16452,177 @@ void SwigDirector_NewDecal::draw() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("draw"), 0, NULL);
+}
+
+
+SwigDirector_BinaryIn::SwigDirector_BinaryIn(VALUE self): BinaryIn(), Swig::Director(self) {
+    
+}
+
+
+
+char SwigDirector_BinaryIn::read() {
+    char c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return BinaryIn::read();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("read"), 0, NULL);
+    c_result = (char) NUM2INT(result);
+    return (char) c_result;
+}
+
+
+SwigDirector_BinaryIn::~SwigDirector_BinaryIn() {
+}
+
+bool SwigDirector_BinaryIn::eof() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return BinaryIn::eof();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eof"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+SwigDirector_BinaryOut::SwigDirector_BinaryOut(VALUE self): BinaryOut(), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_BinaryOut::~SwigDirector_BinaryOut() {
+}
+
+void SwigDirector_BinaryOut::write(char c) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        BinaryOut::write(c);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &c, SWIGTYPE_char,0);
+    result = rb_funcall(swig_get_self(), rb_intern("write"), 1,obj0);
+}
+
+
+SwigDirector_BinaryFileIn::SwigDirector_BinaryFileIn(VALUE self, std::string const &pName): BinaryFileIn(pName), Swig::Director(self) {
+    
+}
+
+
+
+char SwigDirector_BinaryFileIn::read() {
+    char c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return BinaryFileIn::read();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("read"), 0, NULL);
+    c_result = (char) NUM2INT(result);
+    return (char) c_result;
+}
+
+
+SwigDirector_BinaryFileIn::~SwigDirector_BinaryFileIn() {
+}
+
+bool SwigDirector_BinaryFileIn::eof() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return BinaryFileIn::eof();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eof"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+SwigDirector_BinaryFileOut::SwigDirector_BinaryFileOut(VALUE self, std::string const &pName): BinaryFileOut(pName), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_BinaryFileOut::~SwigDirector_BinaryFileOut() {
+}
+
+void SwigDirector_BinaryFileOut::write(char c) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        BinaryFileOut::write(c);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &c, SWIGTYPE_char,0);
+    result = rb_funcall(swig_get_self(), rb_intern("write"), 1,obj0);
+}
+
+
+SwigDirector_BinaryStringIn::SwigDirector_BinaryStringIn(VALUE self, std::string const &pText): BinaryStringIn(pText), Swig::Director(self) {
+    
+}
+
+
+
+char SwigDirector_BinaryStringIn::read() {
+    char c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return BinaryStringIn::read();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("read"), 0, NULL);
+    c_result = (char) NUM2INT(result);
+    return (char) c_result;
+}
+
+
+SwigDirector_BinaryStringIn::~SwigDirector_BinaryStringIn() {
+}
+
+bool SwigDirector_BinaryStringIn::eof() {
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return BinaryStringIn::eof();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("eof"), 0, NULL);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+SwigDirector_BinaryStringOut::SwigDirector_BinaryStringOut(VALUE self): BinaryStringOut(), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_BinaryStringOut::~SwigDirector_BinaryStringOut() {
+}
+
+void SwigDirector_BinaryStringOut::write(char c) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        BinaryStringOut::write(c);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &c, SWIGTYPE_char,0);
+    result = rb_funcall(swig_get_self(), rb_intern("write"), 1,obj0);
 }
 
 
@@ -45716,25 +45896,6 @@ _wrap_HeightMap_set(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_HeightMap_setGrass(int argc, VALUE *argv, VALUE self) {
-    HeightMap *arg1 = (HeightMap *) 0 ;
-    size_t arg2 ;
-    size_t arg3 ;
-    float arg4 ;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
-    arg2 = NUM2ULONG(argv[0]);
-    arg3 = NUM2ULONG(argv[1]);
-    arg4 = (float) NUM2DBL(argv[2]);
-    (arg1)->setGrass(arg2,arg3,arg4);
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_HeightMap_mapChanged(int argc, VALUE *argv, VALUE self) {
     HeightMap *arg1 = (HeightMap *) 0 ;
     Swig::Director *director = 0;
@@ -53307,6 +53468,931 @@ free_MeshOptimizer(MeshOptimizer *arg1) {
     delete arg1;
 }
 
+swig_class cSerialException;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_SerialException_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_SerialException_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_SerialException);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_SerialException(int argc, VALUE *argv, VALUE self) {
+    SerialException *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (SerialException *)new SerialException();
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_SerialException(SerialException *arg1) {
+    delete arg1;
+}
+
+swig_class cBinaryIn;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_BinaryIn_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_BinaryIn_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_BinaryIn);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_BinaryIn(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    BinaryIn *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "Libantargis::BinaryIn";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (BinaryIn *)new SwigDirector_BinaryIn(arg1);
+        
+    } else {
+        result = (BinaryIn *)new BinaryIn();
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_BinaryIn(BinaryIn *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_BinaryIn_eof(int argc, VALUE *argv, VALUE self) {
+    BinaryIn *arg1 = (BinaryIn *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryIn, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eof();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryIn_read(int argc, VALUE *argv, VALUE self) {
+    BinaryIn *arg1 = (BinaryIn *) 0 ;
+    char result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryIn, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (char)(arg1)->read();
+    
+    vresult = rb_str_new(&result,1);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryIn___rshift____SWIG_0(int argc, VALUE *argv, VALUE self) {
+    BinaryIn *arg1 = (BinaryIn *) 0 ;
+    Sint32 *arg2 = 0 ;
+    BinaryIn *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryIn, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Sint32, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        BinaryIn &_result_ref = (arg1)->operator >>(*arg2);
+        result = (BinaryIn *) &_result_ref;
+    }
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_BinaryIn,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryIn___rshift____SWIG_1(int argc, VALUE *argv, VALUE self) {
+    BinaryIn *arg1 = (BinaryIn *) 0 ;
+    Uint32 *arg2 = 0 ;
+    BinaryIn *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryIn, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Uint32, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        BinaryIn &_result_ref = (arg1)->operator >>(*arg2);
+        result = (BinaryIn *) &_result_ref;
+    }
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_BinaryIn,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryIn___rshift____SWIG_2(int argc, VALUE *argv, VALUE self) {
+    BinaryIn *arg1 = (BinaryIn *) 0 ;
+    float *arg2 = 0 ;
+    BinaryIn *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryIn, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_float, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        BinaryIn &_result_ref = (arg1)->operator >>(*arg2);
+        result = (BinaryIn *) &_result_ref;
+    }
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_BinaryIn,0);
+    }
+    return vresult;
+}
+
+
+static VALUE _wrap_BinaryIn___rshift__(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_BinaryIn, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_Sint32, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_BinaryIn___rshift____SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_BinaryIn, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_Uint32, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_BinaryIn___rshift____SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_BinaryIn, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_float, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_BinaryIn___rshift____SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'BinaryIn___rshift__'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_disown_BinaryIn(int argc, VALUE *argv, VALUE self) {
+    BinaryIn *arg1 = (BinaryIn *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_BinaryIn, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+swig_class cBinaryOut;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_BinaryOut_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_BinaryOut_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_BinaryOut);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_BinaryOut(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    BinaryOut *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "Libantargis::BinaryOut";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (BinaryOut *)new SwigDirector_BinaryOut(arg1);
+        
+    } else {
+        result = (BinaryOut *)new BinaryOut();
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_BinaryOut(BinaryOut *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_BinaryOut_write(int argc, VALUE *argv, VALUE self) {
+    BinaryOut *arg1 = (BinaryOut *) 0 ;
+    char arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryOut, 0);
+    arg2 = NUM2CHR(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->write(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_BinaryOut___lshift____SWIG_0(int argc, VALUE *argv, VALUE self) {
+    BinaryOut *arg1 = (BinaryOut *) 0 ;
+    Sint32 *arg2 = 0 ;
+    BinaryOut *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryOut, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Sint32, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        BinaryOut &_result_ref = (arg1)->operator <<((Sint32 const &)*arg2);
+        result = (BinaryOut *) &_result_ref;
+    }
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_BinaryOut,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryOut___lshift____SWIG_1(int argc, VALUE *argv, VALUE self) {
+    BinaryOut *arg1 = (BinaryOut *) 0 ;
+    Uint32 *arg2 = 0 ;
+    BinaryOut *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryOut, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Uint32, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        BinaryOut &_result_ref = (arg1)->operator <<((Uint32 const &)*arg2);
+        result = (BinaryOut *) &_result_ref;
+    }
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_BinaryOut,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryOut___lshift____SWIG_2(int argc, VALUE *argv, VALUE self) {
+    BinaryOut *arg1 = (BinaryOut *) 0 ;
+    float *arg2 = 0 ;
+    BinaryOut *result;
+    float temp2 ;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryOut, 0);
+    temp2 = (float) NUM2DBL(argv[0]);
+    arg2 = &temp2;
+    {
+        BinaryOut &_result_ref = (arg1)->operator <<((float const &)*arg2);
+        result = (BinaryOut *) &_result_ref;
+    }
+    
+    resultdirector = dynamic_cast<Swig::Director *>(result);
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_BinaryOut,0);
+    }
+    return vresult;
+}
+
+
+static VALUE _wrap_BinaryOut___lshift__(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_BinaryOut, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_Sint32, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_BinaryOut___lshift____SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_BinaryOut, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_Uint32, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_BinaryOut___lshift____SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_BinaryOut, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_BinaryOut___lshift____SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'BinaryOut___lshift__'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_disown_BinaryOut(int argc, VALUE *argv, VALUE self) {
+    BinaryOut *arg1 = (BinaryOut *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_BinaryOut, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+swig_class cBinaryFileIn;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_BinaryFileIn_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_BinaryFileIn_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_BinaryFileIn);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_BinaryFileIn(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    std::string *arg2 = 0 ;
+    BinaryFileIn *result;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    char *classname = "Libantargis::BinaryFileIn";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (BinaryFileIn *)new SwigDirector_BinaryFileIn(arg1,(std::string const &)*arg2);
+        
+    } else {
+        result = (BinaryFileIn *)new BinaryFileIn((std::string const &)*arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_BinaryFileIn(BinaryFileIn *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_BinaryFileIn_eof(int argc, VALUE *argv, VALUE self) {
+    BinaryFileIn *arg1 = (BinaryFileIn *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryFileIn, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eof();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryFileIn_read(int argc, VALUE *argv, VALUE self) {
+    BinaryFileIn *arg1 = (BinaryFileIn *) 0 ;
+    char result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryFileIn, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (char)(arg1)->read();
+    
+    vresult = rb_str_new(&result,1);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_disown_BinaryFileIn(int argc, VALUE *argv, VALUE self) {
+    BinaryFileIn *arg1 = (BinaryFileIn *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_BinaryFileIn, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+swig_class cBinaryFileOut;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_BinaryFileOut_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_BinaryFileOut_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_BinaryFileOut);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_BinaryFileOut(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    std::string *arg2 = 0 ;
+    BinaryFileOut *result;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    char *classname = "Libantargis::BinaryFileOut";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (BinaryFileOut *)new SwigDirector_BinaryFileOut(arg1,(std::string const &)*arg2);
+        
+    } else {
+        result = (BinaryFileOut *)new BinaryFileOut((std::string const &)*arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_BinaryFileOut(BinaryFileOut *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_BinaryFileOut_write(int argc, VALUE *argv, VALUE self) {
+    BinaryFileOut *arg1 = (BinaryFileOut *) 0 ;
+    char arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryFileOut, 0);
+    arg2 = NUM2CHR(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->write(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_disown_BinaryFileOut(int argc, VALUE *argv, VALUE self) {
+    BinaryFileOut *arg1 = (BinaryFileOut *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_BinaryFileOut, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+swig_class cBinaryStringIn;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_BinaryStringIn_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_BinaryStringIn_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_BinaryStringIn);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_BinaryStringIn(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    std::string *arg2 = 0 ;
+    BinaryStringIn *result;
+    std::string temp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = self;
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    char *classname = "Libantargis::BinaryStringIn";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (BinaryStringIn *)new SwigDirector_BinaryStringIn(arg1,(std::string const &)*arg2);
+        
+    } else {
+        result = (BinaryStringIn *)new BinaryStringIn((std::string const &)*arg2);
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_BinaryStringIn_eof(int argc, VALUE *argv, VALUE self) {
+    BinaryStringIn *arg1 = (BinaryStringIn *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryStringIn, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eof();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_BinaryStringIn_read(int argc, VALUE *argv, VALUE self) {
+    BinaryStringIn *arg1 = (BinaryStringIn *) 0 ;
+    char result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryStringIn, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (char)(arg1)->read();
+    
+    vresult = rb_str_new(&result,1);
+    return vresult;
+}
+
+
+static void
+free_BinaryStringIn(BinaryStringIn *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_disown_BinaryStringIn(int argc, VALUE *argv, VALUE self) {
+    BinaryStringIn *arg1 = (BinaryStringIn *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_BinaryStringIn, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+swig_class cBinaryStringOut;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_BinaryStringOut_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_BinaryStringOut_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_BinaryStringOut);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_BinaryStringOut(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    BinaryStringOut *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "Libantargis::BinaryStringOut";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (BinaryStringOut *)new SwigDirector_BinaryStringOut(arg1);
+        
+    } else {
+        result = (BinaryStringOut *)new BinaryStringOut();
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_BinaryStringOut(BinaryStringOut *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_BinaryStringOut_write(int argc, VALUE *argv, VALUE self) {
+    BinaryStringOut *arg1 = (BinaryStringOut *) 0 ;
+    char arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryStringOut, 0);
+    arg2 = NUM2CHR(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->write(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_BinaryStringOut_getString(int argc, VALUE *argv, VALUE self) {
+    BinaryStringOut *arg1 = (BinaryStringOut *) 0 ;
+    std::string result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryStringOut, 0);
+    result = ((BinaryStringOut const *)arg1)->getString();
+    
+    {
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_disown_BinaryStringOut(int argc, VALUE *argv, VALUE self) {
+    BinaryStringOut *arg1 = (BinaryStringOut *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_BinaryStringOut, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -53318,6 +54404,12 @@ static void *_p_GLAppTo_p_AGApplication(void *x) {
 }
 static void *_p_VertexArrayShaderTo_p_VertexArray(void *x) {
     return (void *)((VertexArray *)  ((VertexArrayShader *) x));
+}
+static void *_p_BinaryStringOutTo_p_BinaryOut(void *x) {
+    return (void *)((BinaryOut *)  ((BinaryStringOut *) x));
+}
+static void *_p_BinaryFileOutTo_p_BinaryOut(void *x) {
+    return (void *)((BinaryOut *)  ((BinaryFileOut *) x));
 }
 static void *_p_AGSDLEventTo_p_AGEvent(void *x) {
     return (void *)((AGEvent *)  ((AGSDLEvent *) x));
@@ -53616,6 +54708,12 @@ static void *_p_MoveJobTo_p_Job(void *x) {
 static void *_p_FetchJobTo_p_Job(void *x) {
     return (void *)((Job *) (MoveJob *) ((FetchJob *) x));
 }
+static void *_p_BinaryFileInTo_p_BinaryIn(void *x) {
+    return (void *)((BinaryIn *)  ((BinaryFileIn *) x));
+}
+static void *_p_BinaryStringInTo_p_BinaryIn(void *x) {
+    return (void *)((BinaryIn *)  ((BinaryStringIn *) x));
+}
 static void *_p_AGSDLScreenTo_p_AGScreen(void *x) {
     return (void *)((AGScreen *)  ((AGSDLScreen *) x));
 }
@@ -53688,6 +54786,7 @@ static void *_p_AGPoint3To_p_AGVector3(void *x) {
 static void *_p_AntMapTo_p_HeightMap(void *x) {
     return (void *)((HeightMap *)  ((AntMap *) x));
 }
+static swig_type_info _swigt__char = {"_char", "char", 0, 0, 0};
 static swig_type_info _swigt__p_AGAngle = {"_p_AGAngle", "AGAngle *", 0, 0, 0};
 static swig_type_info _swigt__p_AGApplication = {"_p_AGApplication", "AGApplication *", 0, 0, 0};
 static swig_type_info _swigt__p_AGBackground = {"_p_AGBackground", "AGBackground *", 0, 0, 0};
@@ -53768,6 +54867,12 @@ static swig_type_info _swigt__p_AntShadowShader = {"_p_AntShadowShader", "AntSha
 static swig_type_info _swigt__p_AntVertexProgram = {"_p_AntVertexProgram", "AntVertexProgram *", 0, 0, 0};
 static swig_type_info _swigt__p_AntWaterShader = {"_p_AntWaterShader", "AntWaterShader *", 0, 0, 0};
 static swig_type_info _swigt__p_Attributes = {"_p_Attributes", "Attributes *", 0, 0, 0};
+static swig_type_info _swigt__p_BinaryFileIn = {"_p_BinaryFileIn", "BinaryFileIn *", 0, 0, 0};
+static swig_type_info _swigt__p_BinaryFileOut = {"_p_BinaryFileOut", "BinaryFileOut *", 0, 0, 0};
+static swig_type_info _swigt__p_BinaryIn = {"_p_BinaryIn", "BinaryIn *", 0, 0, 0};
+static swig_type_info _swigt__p_BinaryOut = {"_p_BinaryOut", "BinaryOut *", 0, 0, 0};
+static swig_type_info _swigt__p_BinaryStringIn = {"_p_BinaryStringIn", "BinaryStringIn *", 0, 0, 0};
+static swig_type_info _swigt__p_BinaryStringOut = {"_p_BinaryStringOut", "BinaryStringOut *", 0, 0, 0};
 static swig_type_info _swigt__p_Bone = {"_p_Bone", "Bone *", 0, 0, 0};
 static swig_type_info _swigt__p_Document = {"_p_Document", "Document *|xmlpp::Document *", 0, 0, 0};
 static swig_type_info _swigt__p_DomParser = {"_p_DomParser", "DomParser *", 0, 0, 0};
@@ -53808,6 +54913,8 @@ static swig_type_info _swigt__p_SDL_Rect = {"_p_SDL_Rect", "SDL_Rect *", 0, 0, 0
 static swig_type_info _swigt__p_SDL_Surface = {"_p_SDL_Surface", "SDL_Surface *", 0, 0, 0};
 static swig_type_info _swigt__p_Scene = {"_p_Scene", "Scene *", 0, 0, 0};
 static swig_type_info _swigt__p_SceneNode = {"_p_SceneNode", "SceneNode *", 0, 0, 0};
+static swig_type_info _swigt__p_SerialException = {"_p_SerialException", "SerialException *", 0, 0, 0};
+static swig_type_info _swigt__p_Sint32 = {"_p_Sint32", "Sint32 *", 0, 0, 0};
 static swig_type_info _swigt__p_Smoke = {"_p_Smoke", "Smoke *", 0, 0, 0};
 static swig_type_info _swigt__p_Terrain = {"_p_Terrain", "Terrain *", 0, 0, 0};
 static swig_type_info _swigt__p_TerrainPieceVA = {"_p_TerrainPieceVA", "TerrainPieceVA *", 0, 0, 0};
@@ -53856,6 +54963,7 @@ static swig_type_info _swigt__p_std__vectorTstd__string_t = {"_p_std__vectorTstd
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__char,
   &_swigt__p_AGAngle,
   &_swigt__p_AGApplication,
   &_swigt__p_AGBackground,
@@ -53936,6 +55044,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AntVertexProgram,
   &_swigt__p_AntWaterShader,
   &_swigt__p_Attributes,
+  &_swigt__p_BinaryFileIn,
+  &_swigt__p_BinaryFileOut,
+  &_swigt__p_BinaryIn,
+  &_swigt__p_BinaryOut,
+  &_swigt__p_BinaryStringIn,
+  &_swigt__p_BinaryStringOut,
   &_swigt__p_Bone,
   &_swigt__p_Document,
   &_swigt__p_DomParser,
@@ -53976,6 +55090,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SDL_Surface,
   &_swigt__p_Scene,
   &_swigt__p_SceneNode,
+  &_swigt__p_SerialException,
+  &_swigt__p_Sint32,
   &_swigt__p_Smoke,
   &_swigt__p_Terrain,
   &_swigt__p_TerrainPieceVA,
@@ -54024,6 +55140,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_unsigned_long,
 };
 
+static swig_cast_info _swigc__char[] = {  {&_swigt__char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGAngle[] = {  {&_swigt__p_AGAngle, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGApplication[] = {  {&_swigt__p_AGApplication, 0, 0, 0},  {&_swigt__p_GLApp, _p_GLAppTo_p_AGApplication, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGBackground[] = {  {&_swigt__p_AGBackground, 0, 0, 0},{0, 0, 0, 0}};
@@ -54104,6 +55221,12 @@ static swig_cast_info _swigc__p_AntShadowShader[] = {  {&_swigt__p_AntShadowShad
 static swig_cast_info _swigc__p_AntVertexProgram[] = {  {&_swigt__p_AntVertexProgram, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntWaterShader[] = {  {&_swigt__p_AntWaterShader, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Attributes[] = {  {&_swigt__p_Attributes, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BinaryFileIn[] = {  {&_swigt__p_BinaryFileIn, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BinaryFileOut[] = {  {&_swigt__p_BinaryFileOut, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BinaryIn[] = {  {&_swigt__p_BinaryFileIn, _p_BinaryFileInTo_p_BinaryIn, 0, 0},  {&_swigt__p_BinaryIn, 0, 0, 0},  {&_swigt__p_BinaryStringIn, _p_BinaryStringInTo_p_BinaryIn, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BinaryOut[] = {  {&_swigt__p_BinaryStringOut, _p_BinaryStringOutTo_p_BinaryOut, 0, 0},  {&_swigt__p_BinaryOut, 0, 0, 0},  {&_swigt__p_BinaryFileOut, _p_BinaryFileOutTo_p_BinaryOut, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BinaryStringIn[] = {  {&_swigt__p_BinaryStringIn, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BinaryStringOut[] = {  {&_swigt__p_BinaryStringOut, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Bone[] = {  {&_swigt__p_Bone, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Document[] = {  {&_swigt__p_Document, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_DomParser[] = {  {&_swigt__p_DomParser, 0, 0, 0},{0, 0, 0, 0}};
@@ -54144,6 +55267,8 @@ static swig_cast_info _swigc__p_SDL_Rect[] = {  {&_swigt__p_SDL_Rect, 0, 0, 0}, 
 static swig_cast_info _swigc__p_SDL_Surface[] = {  {&_swigt__p_SDL_Surface, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Scene[] = {  {&_swigt__p_Scene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SceneNode[] = {  {&_swigt__p_NewDecal, _p_NewDecalTo_p_SceneNode, 0, 0},  {&_swigt__p_SceneNode, 0, 0, 0},  {&_swigt__p_Smoke, _p_SmokeTo_p_SceneNode, 0, 0},  {&_swigt__p_GLTree, _p_GLTreeTo_p_SceneNode, 0, 0},  {&_swigt__p_Mesh, _p_MeshTo_p_SceneNode, 0, 0},  {&_swigt__p_AnimMesh, _p_AnimMeshTo_p_SceneNode, 0, 0},  {&_swigt__p_MeshData, _p_MeshDataTo_p_SceneNode, 0, 0},  {&_swigt__p_WaterPiece, _p_WaterPieceTo_p_SceneNode, 0, 0},  {&_swigt__p_TerrainPieceVA, _p_TerrainPieceVATo_p_SceneNode, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_SerialException[] = {  {&_swigt__p_SerialException, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Sint32[] = {  {&_swigt__p_Sint32, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Smoke[] = {  {&_swigt__p_Smoke, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Terrain[] = {  {&_swigt__p_Terrain, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TerrainPieceVA[] = {  {&_swigt__p_TerrainPieceVA, 0, 0, 0},{0, 0, 0, 0}};
@@ -54192,6 +55317,7 @@ static swig_cast_info _swigc__p_std__vectorTstd__string_t[] = {  {&_swigt__p_std
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__char,
   _swigc__p_AGAngle,
   _swigc__p_AGApplication,
   _swigc__p_AGBackground,
@@ -54272,6 +55398,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AntVertexProgram,
   _swigc__p_AntWaterShader,
   _swigc__p_Attributes,
+  _swigc__p_BinaryFileIn,
+  _swigc__p_BinaryFileOut,
+  _swigc__p_BinaryIn,
+  _swigc__p_BinaryOut,
+  _swigc__p_BinaryStringIn,
+  _swigc__p_BinaryStringOut,
   _swigc__p_Bone,
   _swigc__p_Document,
   _swigc__p_DomParser,
@@ -54312,6 +55444,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SDL_Surface,
   _swigc__p_Scene,
   _swigc__p_SceneNode,
+  _swigc__p_SerialException,
+  _swigc__p_Sint32,
   _swigc__p_Smoke,
   _swigc__p_Terrain,
   _swigc__p_TerrainPieceVA,
@@ -56352,7 +57486,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "loadXML", VALUEFUNC(_wrap_HeightMap_loadXML), -1);
     rb_define_method(cHeightMap.klass, "setHeight", VALUEFUNC(_wrap_HeightMap_setHeight), -1);
     rb_define_method(cHeightMap.klass, "set", VALUEFUNC(_wrap_HeightMap_set), -1);
-    rb_define_method(cHeightMap.klass, "setGrass", VALUEFUNC(_wrap_HeightMap_setGrass), -1);
     rb_define_method(cHeightMap.klass, "mapChanged", VALUEFUNC(_wrap_HeightMap_mapChanged), -1);
     rb_define_method(cHeightMap.klass, "setTerrainScale", VALUEFUNC(_wrap_HeightMap_setTerrainScale), -1);
     rb_define_method(cHeightMap.klass, "getTerrainValue", VALUEFUNC(_wrap_HeightMap_getTerrainValue), -1);
@@ -56823,5 +57956,72 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMeshOptimizer.klass, "getV", VALUEFUNC(_wrap_MeshOptimizer_getV), -1);
     cMeshOptimizer.mark = 0;
     cMeshOptimizer.destroy = (void (*)(void *)) free_MeshOptimizer;
+    
+    cSerialException.klass = rb_define_class_under(mLibantargis, "SerialException", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_SerialException, (void *) &cSerialException);
+    rb_define_alloc_func(cSerialException.klass, _wrap_SerialException_allocate);
+    rb_define_method(cSerialException.klass, "initialize", VALUEFUNC(_wrap_new_SerialException), -1);
+    cSerialException.mark = 0;
+    cSerialException.destroy = (void (*)(void *)) free_SerialException;
+    rb_define_module_function(mLibantargis, "disown_BinaryIn", VALUEFUNC(_wrap_disown_BinaryIn), -1);
+    
+    cBinaryIn.klass = rb_define_class_under(mLibantargis, "BinaryIn", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_BinaryIn, (void *) &cBinaryIn);
+    rb_define_alloc_func(cBinaryIn.klass, _wrap_BinaryIn_allocate);
+    rb_define_method(cBinaryIn.klass, "initialize", VALUEFUNC(_wrap_new_BinaryIn), -1);
+    rb_define_method(cBinaryIn.klass, "eof", VALUEFUNC(_wrap_BinaryIn_eof), -1);
+    rb_define_method(cBinaryIn.klass, "read", VALUEFUNC(_wrap_BinaryIn_read), -1);
+    rb_define_method(cBinaryIn.klass, ">>", VALUEFUNC(_wrap_BinaryIn___rshift__), -1);
+    cBinaryIn.mark = 0;
+    cBinaryIn.destroy = (void (*)(void *)) free_BinaryIn;
+    rb_define_module_function(mLibantargis, "disown_BinaryOut", VALUEFUNC(_wrap_disown_BinaryOut), -1);
+    
+    cBinaryOut.klass = rb_define_class_under(mLibantargis, "BinaryOut", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_BinaryOut, (void *) &cBinaryOut);
+    rb_define_alloc_func(cBinaryOut.klass, _wrap_BinaryOut_allocate);
+    rb_define_method(cBinaryOut.klass, "initialize", VALUEFUNC(_wrap_new_BinaryOut), -1);
+    rb_define_method(cBinaryOut.klass, "write", VALUEFUNC(_wrap_BinaryOut_write), -1);
+    rb_define_method(cBinaryOut.klass, "<<", VALUEFUNC(_wrap_BinaryOut___lshift__), -1);
+    cBinaryOut.mark = 0;
+    cBinaryOut.destroy = (void (*)(void *)) free_BinaryOut;
+    rb_define_module_function(mLibantargis, "disown_BinaryFileIn", VALUEFUNC(_wrap_disown_BinaryFileIn), -1);
+    
+    cBinaryFileIn.klass = rb_define_class_under(mLibantargis, "BinaryFileIn", ((swig_class *) SWIGTYPE_p_BinaryIn->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_BinaryFileIn, (void *) &cBinaryFileIn);
+    rb_define_alloc_func(cBinaryFileIn.klass, _wrap_BinaryFileIn_allocate);
+    rb_define_method(cBinaryFileIn.klass, "initialize", VALUEFUNC(_wrap_new_BinaryFileIn), -1);
+    rb_define_method(cBinaryFileIn.klass, "eof", VALUEFUNC(_wrap_BinaryFileIn_eof), -1);
+    rb_define_method(cBinaryFileIn.klass, "read", VALUEFUNC(_wrap_BinaryFileIn_read), -1);
+    cBinaryFileIn.mark = 0;
+    cBinaryFileIn.destroy = (void (*)(void *)) free_BinaryFileIn;
+    rb_define_module_function(mLibantargis, "disown_BinaryFileOut", VALUEFUNC(_wrap_disown_BinaryFileOut), -1);
+    
+    cBinaryFileOut.klass = rb_define_class_under(mLibantargis, "BinaryFileOut", ((swig_class *) SWIGTYPE_p_BinaryOut->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_BinaryFileOut, (void *) &cBinaryFileOut);
+    rb_define_alloc_func(cBinaryFileOut.klass, _wrap_BinaryFileOut_allocate);
+    rb_define_method(cBinaryFileOut.klass, "initialize", VALUEFUNC(_wrap_new_BinaryFileOut), -1);
+    rb_define_method(cBinaryFileOut.klass, "write", VALUEFUNC(_wrap_BinaryFileOut_write), -1);
+    cBinaryFileOut.mark = 0;
+    cBinaryFileOut.destroy = (void (*)(void *)) free_BinaryFileOut;
+    rb_define_module_function(mLibantargis, "disown_BinaryStringIn", VALUEFUNC(_wrap_disown_BinaryStringIn), -1);
+    
+    cBinaryStringIn.klass = rb_define_class_under(mLibantargis, "BinaryStringIn", ((swig_class *) SWIGTYPE_p_BinaryIn->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_BinaryStringIn, (void *) &cBinaryStringIn);
+    rb_define_alloc_func(cBinaryStringIn.klass, _wrap_BinaryStringIn_allocate);
+    rb_define_method(cBinaryStringIn.klass, "initialize", VALUEFUNC(_wrap_new_BinaryStringIn), -1);
+    rb_define_method(cBinaryStringIn.klass, "eof", VALUEFUNC(_wrap_BinaryStringIn_eof), -1);
+    rb_define_method(cBinaryStringIn.klass, "read", VALUEFUNC(_wrap_BinaryStringIn_read), -1);
+    cBinaryStringIn.mark = 0;
+    cBinaryStringIn.destroy = (void (*)(void *)) free_BinaryStringIn;
+    rb_define_module_function(mLibantargis, "disown_BinaryStringOut", VALUEFUNC(_wrap_disown_BinaryStringOut), -1);
+    
+    cBinaryStringOut.klass = rb_define_class_under(mLibantargis, "BinaryStringOut", ((swig_class *) SWIGTYPE_p_BinaryOut->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_BinaryStringOut, (void *) &cBinaryStringOut);
+    rb_define_alloc_func(cBinaryStringOut.klass, _wrap_BinaryStringOut_allocate);
+    rb_define_method(cBinaryStringOut.klass, "initialize", VALUEFUNC(_wrap_new_BinaryStringOut), -1);
+    rb_define_method(cBinaryStringOut.klass, "write", VALUEFUNC(_wrap_BinaryStringOut_write), -1);
+    rb_define_method(cBinaryStringOut.klass, "getString", VALUEFUNC(_wrap_BinaryStringOut_getString), -1);
+    cBinaryStringOut.mark = 0;
+    cBinaryStringOut.destroy = (void (*)(void *)) free_BinaryStringOut;
 }
 
