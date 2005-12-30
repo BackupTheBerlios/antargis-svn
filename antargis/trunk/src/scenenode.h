@@ -2,8 +2,7 @@
 #define _SCENE_NODE_H
 
 #include <ag_triangle.h>
-#include <ruby.h>
-#include "rubyobj.h"
+#include <rubyobj.h>
 
 class Scene;
 

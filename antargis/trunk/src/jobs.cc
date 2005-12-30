@@ -52,7 +52,7 @@ bool Job::needsMorale() const
 * MoveJob
 ************************************************************************/
 
-MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pnear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),near(pnear),mRun(pRun)
+MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),mNear(pNear),mRun(pRun)
 {
   // speed=70; // pixels per second
   //  runSpeed=100;
@@ -97,7 +97,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
   AGVector2 diff=e->getPos2D()-mTarget;
   float norm=diff.length();
 
-  if(norm-near>ptime*aspeed)
+  if(norm-mNear>ptime*aspeed)
     {
       diff=diff.normalized();
       e->setDirection(-diff.getAngle().angle*180.0/M_PI);
@@ -216,7 +216,7 @@ FetchJob *newFetchJob(int p,AGVector2 &pTarget,const std::string &what)
 {
   return new FetchJob(p,pTarget,what);
 }
-MoveJob *newMoveJob(int p,const AGVector2 &pTarget,int pnear)
+MoveJob *newMoveJob(int p,const AGVector2 &pTarget,int pNear)
 {
-  return new MoveJob(p,pTarget,pnear);
+  return new MoveJob(p,pTarget,pNear);
 }

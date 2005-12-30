@@ -81,6 +81,7 @@ class AntShaderProgram
 class AntShadowShader:public AntShaderProgram
 {
  public:
+  AntShadowShader(const std::string &pVertexFile,const std::string &pFragFile);
   void doUpdate(float time);
   virtual void enable();
   virtual void disable();

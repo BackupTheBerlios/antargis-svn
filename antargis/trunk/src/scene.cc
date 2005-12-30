@@ -284,8 +284,8 @@ void Scene::calcCameraView()
 	  float near0=20,near1=60;
 	  float far0=20,far1=110;
 
-	  float near=sqrt(near0*near0+near1*near1);
-	  float far=sqrt(far0*far0+far1*far1);
+	  float mnear=sqrt(near0*near0+near1*near1);
+	  float mfar=sqrt(far0*far0+far1*far1);
 	  
 	  float left=-25;
 	  float right=14;
@@ -296,7 +296,7 @@ void Scene::calcCameraView()
 	    top=bottom+(top-bottom)*1024.0f/768.0f;
 
 	  glFrustum(left, right, bottom, top,
-		    near,far);
+		    mnear,mfar);
 
 	}
       

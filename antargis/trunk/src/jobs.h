@@ -51,7 +51,7 @@ class RestJob:public Job
 class MoveJob:public Job
 {
   AGVector2 mTarget;
-  float near;
+  float mNear;
   bool mRun;
  public:
   MoveJob(int p,const AGVector2 &pTarget,float pnear=0,bool pRun=false);

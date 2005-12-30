@@ -283,6 +283,10 @@ void AntShaderProgram::sendAttribute(const std::string &pName,const std::vector<
 // AntShadowShader
 //
 ///////////////////////////////////////////////////////////////////////////
+AntShadowShader::AntShadowShader(const std::string &pVertexFile,const std::string &pFragFile):
+	AntShaderProgram(pVertexFile,pFragFile)
+{
+}
 
 void AntShadowShader::doUpdate(float time)
 {
