@@ -1,77 +1,55 @@
-/*
- * Copyright (c) 2005 by David Kamphausen. All rights reserved.
- *
- * antargis.h
- * by David Kamphausen (david.kamphausen@web.de)
- *
- * The "Antargis" project, including all files needed to compile it,
- * is free software; you can redistribute it and/or use it and/or modify it
- * under the terms of the GNU General Public License as published
- * by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program.
- */
-
 #ifndef __ANTARGIS_H__
 #define __ANTARGIS_H__
-
-#include "renderer.h"
-#include "scene.h"
+#include "rubyobj.h"
+#include "scenenode.h"
+#include "anim_mesh.h"
+#include "smoke.h"
+#include "jobs.h"
+#include "entity.h"
 #include "height_map.h"
 #include "map.h"
-//#include "minimap.h"
-//#include "voxel_gen.h"
-#include "scenenode.h"
 #include "mesh.h"
-#include "mesh_optimizer.h"
-#include "mesh_data.h"
-#include "antapp.h"
-#include "resource.h"
-#include "entity.h"
-#include "entptr.h"
-#include "decals.h"
-#include "water.h"
 #include "terrain.h"
 #include "tree.h"
-#include "smoke.h"
-#include "anim_mesh.h"
+#include "scene.h"
+#include "water.h"
+#include "vertex_array.h"
+#include "cg.h"
+#include "antapp.h"
+#include "glsl.h"
+#include "mesh_data.h"
 #include "anim_mesh_data.h"
+#include "resource.h"
+#include "entptr.h"
+#include "renderer.h"
 #include "ant_config.h"
 #include "new_decal.h"
-//#include "ant_man.h"
-//#include "ant_geometry.h"
+#include "mesh_optimizer.h"
 #ifdef SWIG
-%include "renderer.h"
+%include "rubyobj.h"
+%include "scenenode.h"
+%include "anim_mesh.h"
+%include "smoke.h"
+%include "jobs.h"
+%include "entity.h"
 %include "height_map.h"
 %include "map.h"
- //%include "minimap.h"
-%include "scenenode.h"
 %include "mesh.h"
-%include "mesh_data.h"
-%include "mesh_optimizer.h"
-%include "scene.h"
-%include "antapp.h"
-%include "resource.h"
-%include "entity.h"
-%include "entptr.h"
-%include "decals.h"
-%include "water.h"
 %include "terrain.h"
 %include "tree.h"
-%include "smoke.h"
-%include "anim_mesh.h"
+%include "scene.h"
+%include "water.h"
+%include "vertex_array.h"
+%include "cg.h"
+%include "antapp.h"
+%include "glsl.h"
+%include "mesh_data.h"
 %include "anim_mesh_data.h"
- //%include "ant_man.h"
- //%include "ant_geometry.h"
+%include "resource.h"
+%include "entptr.h"
+%include "renderer.h"
 %include "ant_config.h"
 %include "new_decal.h"
-
+%include "mesh_optimizer.h"
 #endif
-
 #endif

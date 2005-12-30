@@ -58,3 +58,5 @@ files.each{|f|
 }
 
 create_makefile("libantargis",builddir)
+
+# add add dependencies for swig-interface-creation

@@ -2,7 +2,7 @@ SUBDIRS = glee
 lib_LTLIBRARIES = libantargis.la
 
 
-realsrc_h= anim_mesh.h smoke.h jobs.h entity.h map.h mesh.h terrain.h tree.h scene.h water.h vertex_array.h cg.h antapp.h glsl.h scenenode.h rubyobj.h mesh_data.h anim_mesh_data.h resource.h entptr.h height_map.h renderer.h ant_config.h new_decal.h mesh_optimizer.h
+realsrc_h= rubyobj.h scenenode.h anim_mesh.h smoke.h jobs.h entity.h height_map.h map.h mesh.h terrain.h tree.h scene.h water.h vertex_array.h cg.h antapp.h glsl.h mesh_data.h anim_mesh_data.h resource.h entptr.h renderer.h ant_config.h new_decal.h mesh_optimizer.h
 realsrc_cc= anim_mesh.cc smoke.cc jobs.cc entity.cc map.cc mesh.cc terrain.cc tree.cc scene.cc water.cc vertex_array.cc cg.cc antapp.cc glsl.cc scenenode.cc rubyobj.cc entptr.cc height_map.cc renderer.cc ant_config.cc new_decal.cc mesh_optimizer.cc mesh_data.cc
 
 

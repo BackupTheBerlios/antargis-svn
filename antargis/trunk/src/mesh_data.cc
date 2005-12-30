@@ -210,7 +210,7 @@ void MeshData::draw()
     }
   if(overdraw)
     {
-    glDisable(GL_ALPHA_TEST);
+      glDisable(GL_ALPHA_TEST);
       glDisable(GL_DEPTH_TEST);
     }
   mArray.setColors(drawColors);

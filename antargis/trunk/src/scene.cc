@@ -456,7 +456,6 @@ void Scene::drawScene()
 
 #endif
 
-#ifndef OLD_SORTING
   sort(sorted.begin(),sorted.end(),SortOrder());
 
   for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
@@ -471,7 +470,6 @@ void Scene::drawScene()
 	    }
 	}
     }
-  
   sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
 
   for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
@@ -488,23 +486,6 @@ void Scene::drawScene()
     }
   cdebug("drawn:"<<drawn);
 
-#else
-  sort(sorted.begin(),sorted.end(),SortOrder());
-
-  for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
-    {
-      if((*i)->visible() && (*i)->bbox().collides(frustum))
-	{
-	  (*i)->draw();
-	  mTriangles+=(*i)->getTriangles();
-	  drawn++;
-	}
-      
-    }
-
-
-#endif
-  
 }
 void Scene::drawShadow()
 {

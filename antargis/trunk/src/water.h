@@ -10,42 +10,6 @@
 #include "map.h"
 #include <math.h>
 
-#ifdef SLOW_WATER
-class WaterPiece:public SceneNode
-{
-  AGTexture tex;
- public:
-  WaterPiece(const AGVector4 &pos);
-  virtual ~WaterPiece();
-
-  void tick();
-
-  void draw();
-  void drawPick();
-
-  void advance(float t);
-  size_t getTriangles() const;
-
-  bool transparent();
-
- private:
-  void drawPrivate(bool texture=false);
-
-  AGVector4 calcBaseVertex(int x,int y);
-  float getArcX(int x,int y);
-  float getArcY(int x,int y);
-  AGVector4 getV(int x,int y);
-  AGVector4 getHeight(int x,int y);
-  AGVector4 getNormal(int x,int y);
-  void drawVertex(AGVector4 v,AGVector4 n,float tx,float ty, bool texture);
-
- private:
-  Uint32 mFrameCount,mLast;
-  int mW;
-  int mH;
-  AGVector4 mPos;
-};
-#else
 class WaterPiece:public SceneNode
 {
   AGTexture tex;
@@ -79,4 +43,4 @@ class WaterPiece:public SceneNode
   int step;
 };
 #endif
-#endif
+

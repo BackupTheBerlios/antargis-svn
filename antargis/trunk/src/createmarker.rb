@@ -83,15 +83,13 @@ rlist.each {|x,y|
 		file.puts "%exception "+x+"::"+x+" {"
 		file.puts "	$action"
 		file.puts "	result->mRUBY=self;"
-		file.puts "  result->mRubyObject=true;"
-		#file.puts '  printf("registerant:'+x+'\n");'
+		file.puts "	result->mRubyObject=true;"
 		file.puts "}"
 		file.puts "%markfunc "+x+" \"general_markfunc\""
 	end
 }
 
-# now add typemap(out)
-
+# calculate class-derivations
 derivations={}
 rlist.each{|x,y|
 	puts "X:"+x
@@ -128,6 +126,9 @@ derivations.each{|a,cs|
 }
 puts "---"
 
+# swig typemaps
+# so that always the lowest children in a derivation hierarchy is returned
+
 derive.keys.each{|s|
 	if rlist[s]
 		file.puts "%typemap(out) #{s}*{"
@@ -155,4 +156,23 @@ derive.keys.each{|s|
 		file.puts "}"
 	end
 }
+file.close
+
+# now generate antargis.h
+file=File.open("antargis.h","w")
+
+file.puts "#ifndef __ANTARGIS_H__"
+file.puts "#define __ANTARGIS_H__"
+files.each{|f|
+	file.puts "#include \"#{f}\""
+}
+file.puts "#ifdef SWIG"
+files.each{|f|
+	file.puts "%include \"#{f}\""
+}
+file.puts "#endif"
+file.puts "#endif"
+
+
+file.close
 

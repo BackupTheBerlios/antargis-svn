@@ -1,91 +1,91 @@
 %exception AnimMeshData::AnimMeshData {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc AnimMeshData "general_markfunc"
 %exception WaterPiece::WaterPiece {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc WaterPiece "general_markfunc"
 %exception Scene::Scene {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc Scene "general_markfunc"
 %exception AnimMesh::AnimMesh {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc AnimMesh "general_markfunc"
 %exception NewDecal::NewDecal {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc NewDecal "general_markfunc"
 %exception Mesh::Mesh {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc Mesh "general_markfunc"
 %exception RubyObject::RubyObject {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc RubyObject "general_markfunc"
 %exception Smoke::Smoke {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc Smoke "general_markfunc"
 %exception MeshData::MeshData {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc MeshData "general_markfunc"
 %exception GLTree::GLTree {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc GLTree "general_markfunc"
 %exception SceneNode::SceneNode {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc SceneNode "general_markfunc"
 %exception TerrainPieceVA::TerrainPieceVA {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc TerrainPieceVA "general_markfunc"
-%exception HeightMap::HeightMap {
-	$action
-	result->mRUBY=self;
-  result->mRubyObject=true;
-}
-%markfunc HeightMap "general_markfunc"
 %exception AntMap::AntMap {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc AntMap "general_markfunc"
+%exception HeightMap::HeightMap {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc HeightMap "general_markfunc"
 %exception AntEntity::AntEntity {
 	$action
 	result->mRUBY=self;
-  result->mRubyObject=true;
+	result->mRubyObject=true;
 }
 %markfunc AntEntity "general_markfunc"
 %typemap(out) AnimMeshData*{
@@ -202,6 +202,20 @@ else if(dynamic_cast<GLTree*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(out) GLTree*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLTree,0);
+   }
+ }
+ else vresult=Qnil;
+}
 %typemap(out) SceneNode*{
  if($1)
  {
@@ -232,20 +246,6 @@ else if(dynamic_cast<Mesh*>(result))
  }
  else vresult=Qnil;
 }
-%typemap(out) GLTree*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLTree,0);
-   }
- }
- else vresult=Qnil;
-}
 %typemap(out) TerrainPieceVA*{
  if($1)
  {
@@ -256,6 +256,20 @@ else if(dynamic_cast<Mesh*>(result))
      if(false);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(out) AntMap*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
    }
  }
  else vresult=Qnil;
@@ -272,20 +286,6 @@ else if(dynamic_cast<AntMap*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(out) AntMap*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
    }
  }
  else vresult=Qnil;
