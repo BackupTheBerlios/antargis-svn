@@ -112,7 +112,7 @@
 			</text>
 		</button>
 	</yellowButton>
-	
+	<!--
 	<niceRound>
 		<button>
 			<background>
@@ -134,7 +134,7 @@
 			</text>
 		</button>
 	</niceRound>
-	
+	-->
 	<antButton>
 		<button>
 			<border>

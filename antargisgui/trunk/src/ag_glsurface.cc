@@ -17,9 +17,7 @@
  * You should have received a copy of the GNU General Public
  * License along with this program.
  */
-#ifdef __WIN32__
-#define GL_GLEXT_PROTOTYPES
-#endif
+#include "GLee.h"
 
 #include <SDL_opengl.h>
 #include "ag_glsurface.h"

@@ -1,12 +1,19 @@
 #!/usr/bin/env ruby
 require 'mkmf'
 
+
+dir_config("physfs")
+
 # check for SDL
 sdl_config = with_config('sdl-config', 'sdl-config')
-$CFLAGS += ' ' + `#{sdl_config} --cflags`.chomp
-$LOCAL_LIBS += ' ' + `#{sdl_config} --libs`.chomp
+sdl_config="c:\\msys\\local\\bin\\sdl-config"
+#$CFLAGS += ' ' + `#{sdl_config} --cflags`.chomp
+#$LOCAL_LIBS += ' ' + `#{sdl_config} --libs`.chomp
 
-$CFLAGS += " -DUSE_RUBY"
+$CFLAGS="-O0 -g"
+
+$CFLAGS += " -DUSE_RUBY -Ic:/msys/local/include/SDL -Ic:/msys/local/include"
+$LOCAL_LIBS += " -Lc:/msys/local/lib"
 $CXX="g++"
 
     cfg = Config::MAKEFILE_CONFIG
@@ -20,14 +27,22 @@ if not have_header('SDL.h')
 	exit
 end
 
-have_library('SDL') #, 'SDL_Init')
-have_library('SDL_ttf') #, 'TTF_Init')
-have_library('SGE') #, 'sge_FilledRect')
-have_library('GLU') #, 'gluPerspective')
-have_library('physfs') #, 'PHYSFS_init')
-have_library('SDL_mixer') #, 'Mix_OpenAudio')
-#have_library('SDL_mixer', 'Mix_OpenAudio')
+if not have_header('physfs.h')
+	puts "Please install libSDL"
+	exit
+end
 
+have_library('SDL')
+have_library('SDL_ttf')
+have_library('SGE')
+have_library("opengl32")
+have_library('GLU32')
+have_library('physfs')
+have_library('SDL_mixer')
+have_library('SDL_image')
+have_library('stdc++')
+have_library('z')
+have_library('png')
 
 # swig
 swig = with_config('swig', 'swig')

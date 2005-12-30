@@ -150,7 +150,7 @@ AGSignal::~AGSignal()
 	o->popSignal(this);
     }
 }
-
+#undef connect
 
 void AGSignal::connect(AGListener &pListener)
 {
