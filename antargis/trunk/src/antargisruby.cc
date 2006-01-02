@@ -14682,6 +14682,21 @@ void SwigDirector_HeightMap::mark() {
 SwigDirector_HeightMap::~SwigDirector_HeightMap() {
 }
 
+void SwigDirector_HeightMap::newMap(int w, int h) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        HeightMap::newMap(w,h);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    obj1 = INT2NUM(h);
+    result = rb_funcall(swig_get_self(), rb_intern("newMap"), 2,obj0,obj1);
+}
+
+
 void SwigDirector_HeightMap::saveXML(Node &node) const {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -14773,6 +14788,21 @@ void SwigDirector_AntMap::mark() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
+}
+
+
+void SwigDirector_AntMap::newMap(int w, int h) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntMap::newMap(w,h);
+        return;
+    }
+    obj0 = INT2NUM(w);
+    obj1 = INT2NUM(h);
+    result = rb_funcall(swig_get_self(), rb_intern("newMap"), 2,obj0,obj1);
 }
 
 
@@ -46107,6 +46137,26 @@ _wrap_HeightMap_getChangeRect(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_HeightMap_newMap(int argc, VALUE *argv, VALUE self) {
+    HeightMap *arg1 = (HeightMap *) 0 ;
+    int arg2 ;
+    int arg3 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_HeightMap, 0);
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->newMap(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_HeightMap(int argc, VALUE *argv, VALUE self) {
     HeightMap *arg1 = (HeightMap *) 0 ;
     
@@ -46242,6 +46292,26 @@ _wrap_AntMap_getNewID(int argc, VALUE *argv, VALUE self) {
     
     vresult = INT2NUM(result);
     return vresult;
+}
+
+
+static VALUE
+_wrap_AntMap_newMap(int argc, VALUE *argv, VALUE self) {
+    AntMap *arg1 = (AntMap *) 0 ;
+    int arg2 ;
+    int arg3 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntMap, 0);
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->newMap(arg2,arg3);
+    
+    return Qnil;
 }
 
 
@@ -54167,6 +54237,19 @@ _wrap_BinaryFileOut_write(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_BinaryFileOut_flush(int argc, VALUE *argv, VALUE self) {
+    BinaryFileOut *arg1 = (BinaryFileOut *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryFileOut, 0);
+    (arg1)->flush();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_BinaryFileOut(int argc, VALUE *argv, VALUE self) {
     BinaryFileOut *arg1 = (BinaryFileOut *) 0 ;
     
@@ -57494,6 +57577,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cHeightMap.klass, "getTerrainScale", VALUEFUNC(_wrap_HeightMap_getTerrainScale), -1);
     rb_define_method(cHeightMap.klass, "addChange", VALUEFUNC(_wrap_HeightMap_addChange), -1);
     rb_define_method(cHeightMap.klass, "getChangeRect", VALUEFUNC(_wrap_HeightMap_getChangeRect), -1);
+    rb_define_method(cHeightMap.klass, "newMap", VALUEFUNC(_wrap_HeightMap_newMap), -1);
     cHeightMap.mark = (void (*)(void *)) general_markfunc;
     cHeightMap.destroy = (void (*)(void *)) free_HeightMap;
     rb_define_module_function(mLibantargis, "disown_AntMap", VALUEFUNC(_wrap_disown_AntMap), -1);
@@ -57506,6 +57590,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntMap.klass, "removeEntity", VALUEFUNC(_wrap_AntMap_removeEntity), -1);
     rb_define_method(cAntMap.klass, "clear", VALUEFUNC(_wrap_AntMap_clear), -1);
     rb_define_method(cAntMap.klass, "getNewID", VALUEFUNC(_wrap_AntMap_getNewID), -1);
+    rb_define_method(cAntMap.klass, "newMap", VALUEFUNC(_wrap_AntMap_newMap), -1);
     rb_define_method(cAntMap.klass, "getAllEntities", VALUEFUNC(_wrap_AntMap_getAllEntities), -1);
     rb_define_method(cAntMap.klass, "getAllEntitiesV", VALUEFUNC(_wrap_AntMap_getAllEntitiesV), -1);
     rb_define_method(cAntMap.klass, "getEntities", VALUEFUNC(_wrap_AntMap_getEntities), -1);
@@ -58001,6 +58086,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_alloc_func(cBinaryFileOut.klass, _wrap_BinaryFileOut_allocate);
     rb_define_method(cBinaryFileOut.klass, "initialize", VALUEFUNC(_wrap_new_BinaryFileOut), -1);
     rb_define_method(cBinaryFileOut.klass, "write", VALUEFUNC(_wrap_BinaryFileOut_write), -1);
+    rb_define_method(cBinaryFileOut.klass, "flush", VALUEFUNC(_wrap_BinaryFileOut_flush), -1);
     cBinaryFileOut.mark = 0;
     cBinaryFileOut.destroy = (void (*)(void *)) free_BinaryFileOut;
     rb_define_module_function(mLibantargis, "disown_BinaryStringIn", VALUEFUNC(_wrap_disown_BinaryStringIn), -1);

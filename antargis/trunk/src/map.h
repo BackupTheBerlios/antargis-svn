@@ -21,6 +21,8 @@ class AntMap:public HeightMap
   void clear();
 
   int getNewID();
+
+  void newMap(int w,int h);
   
   EntityList getEntities(const AGRect2&r);
   EntityList getAllEntities();
@@ -45,8 +47,6 @@ class AntMap:public HeightMap
 
   AGVector3 getPos(const AGVector2 &pPos) const;
 
-  //  virtual void entsChanged();  
-	
   virtual void mark();
 
   virtual void mapChanged();  
@@ -60,6 +60,7 @@ class AntMap:public HeightMap
   EntityList mToDel;
 
   int maxID;
+
 
 };
 

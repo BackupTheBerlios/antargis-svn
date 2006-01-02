@@ -116,6 +116,8 @@ void HeightMap::loadBinary(const std::string &pName)
   float f;
 
   is>>mW>>mH;
+
+  cdebug("mw:"<<mW<<"  "<<mH);
   
   mHeights=std::vector<float>(mW*mH*4);
 
@@ -141,6 +143,34 @@ void HeightMap::loadBinary(const std::string &pName)
 	  mHeights[x+y*(mW+2)]=f;
 	}
     }
+}
+
+void HeightMap::saveBinary(const std::string &pName) const
+{
+  CTRACE;
+  BinaryFileOut os(pName);
+
+  os<<mW<<mH;
+  
+  for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
+    {
+      for(size_t y=0;y<mH+2;y++)
+	{
+	  for(size_t x=0;x<mW+2;x++)
+	    {
+	      os<<const_cast<HeightMap*>(this)->mTerrainTypes[TerrainType(i)][x+y*(mW+2)]; // trust me - I'm const
+	    }
+	}
+    }
+
+  for(size_t y=0;y<mH+2;y++)
+    {
+      for(size_t x=0;x<mW+2;x++)
+	{
+	  os<<mHeights[x+y*(mW+2)];
+	}
+    }
+  
 }
 
 void HeightMap::loadXML(const Node &node)
@@ -210,6 +240,25 @@ void HeightMap::loadXML(const Node &node)
   mChangeRect=AGRect2(AGVector3(),AGVector3());
 }
 
+void HeightMap::newMap(int w,int h)
+{
+  mW=w;
+  mH=h;
+
+  mHeights=genSomeHeights(w+2,h+2,5);
+
+  for(int t=FIRSTTERRAIN;t<LASTTERRAIN; t++)
+    mTerrainTypes[TerrainType(t)]=genSomeHeights(w+2,h+2,1);
+  
+  // compete change
+  mTerrain->mapChangedComplete();
+  mTerrain->addToScenes();
+  mChanges=0;
+  mChangeRect=AGRect2(AGVector3(),AGVector3());
+
+}
+
+
 void HeightMap::mapChanged()
 {
   mTerrain->addToScenes();
@@ -221,40 +270,45 @@ void HeightMap::mapChanged()
 
 void HeightMap::saveXML(Node &node) const
 {
-  node.set("width",toString(mW));
-  node.set("height",toString(mH));
-
-  std::ostringstream osh;//,osg;
-  osh.precision(2);
-  //  osg.precision(2);
-
-  for(size_t y=0;y<mH+2;y++)
+  if((mW<=16 && mH<=16) || mName.length()==0)
     {
-      for(size_t x=0;x<mW+2;x++)
-	{
-	  osh<<get(x,y)<<" ";
-	  //	  osg<<getGrass(x,y)<<" ";
-	}
-      osh<<std::endl;
-      //      osg<<std::endl;
-    }
-  node.newChild("height").setContent(osh.str());
-  //  node.newChild("grass").setContent(osg.str());
-
-  for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
-    {
-      std::ostringstream os;
-      os.precision(2);
+      node.set("width",toString(mW));
+      node.set("height",toString(mH));
+      
+      std::ostringstream osh;
+      osh.precision(2);
+      
       for(size_t y=0;y<mH+2;y++)
 	{
 	  for(size_t x=0;x<mW+2;x++)
 	    {
-	      os<<getTerrain(x,y,TerrainType(i))<<" ";
+	      osh<<get(x,y)<<" ";
 	    }
-	  os<<std::endl;
+	  osh<<std::endl;
 	}
-      node.newChild(TerrainNames[i]).setContent(os.str());
+      node.newChild("height").setContent(osh.str());
       
+      for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
+	{
+	  std::ostringstream os;
+	  os.precision(2);
+	  for(size_t y=0;y<mH+2;y++)
+	    {
+	      for(size_t x=0;x<mW+2;x++)
+		{
+		  os<<getTerrain(x,y,TerrainType(i))<<" ";
+		}
+	      os<<std::endl;
+	    }
+	  node.newChild(TerrainNames[i]).setContent(os.str());
+	  
+	}
+    }
+  else
+    {
+      std::string name=replace(mName,".antlvl",".hmap");
+      saveBinary(name);
+      node.set("filename",name);
     }
 }
 

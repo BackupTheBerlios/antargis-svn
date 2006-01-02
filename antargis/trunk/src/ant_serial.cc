@@ -4,11 +4,17 @@
 
 // INTEL is little endian
 
+int mLittleEndian=-1;
+
 bool littleEndian()
 {
-  Uint16 i=0x100;
-  Uint8 *p=(Uint8*)&i;
-  return p[0]!=0;
+  if(mLittleEndian<0)
+    {
+      Uint16 i=0x100;
+      Uint8 *p=(Uint8*)&i;
+      mLittleEndian=(p[0]!=0);
+    }
+  return mLittleEndian;
 }
 
 
@@ -40,7 +46,7 @@ BinaryIn &BinaryIn::operator>>(Uint32 &u)
 {
   if(eof())
     throw SerialException();
-  u=(Uint32(read())<<24)|(Uint32(read())<<16)|(Uint32(read())<<8)|Uint32(read());
+  u=((Uint32(read())&0xFF)<<24)|((Uint32(read()&0xFF))<<16)|((Uint32(read())&0xFF)<<8)|(Uint32(read())&0xFF);
 
   return *this;
 }
@@ -156,7 +162,7 @@ bool BinaryFileIn::eof()
 
 char BinaryFileIn::read()
 {
-  if(is.eof())
+  if(is.str().length()==0)
     {
       if(mEof)
 	return 0;
@@ -178,16 +184,29 @@ char BinaryFileIn::read()
 BinaryFileOut::BinaryFileOut(const std::string &pName)
 {
   f=PHYSFS_openWrite(pName.c_str());
+  size=0;
 }
 BinaryFileOut::~BinaryFileOut()
 {
+  flush();
   PHYSFS_close(f);
+}
+
+void BinaryFileOut::flush()
+{
+  std::string s=buffer.str();
+  PHYSFS_write(f,s.c_str(),1,s.length());
+  buffer.str("");
+  size=0;
 }
 
 void BinaryFileOut::write(char c)
 {
   // non buffered for a start
-  PHYSFS_write(f,&c,1,1); // len is last
+  buffer<<c;
+  size++;
+  if(size>1024)
+    flush();
 }
 
 /////////////////////////////////////////////////////////////

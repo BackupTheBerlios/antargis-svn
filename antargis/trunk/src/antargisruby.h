@@ -1299,6 +1299,7 @@ public:
     virtual void mapChanged();
     virtual void mark();
     virtual ~SwigDirector_HeightMap();
+    virtual void newMap(int w, int h);
     virtual void saveXML(Node &node) const;
     virtual void loadXML(Node const &node);
 };
@@ -1314,6 +1315,7 @@ public:
     virtual void mapChanged();
     virtual ~SwigDirector_AntMap();
     virtual void mark();
+    virtual void newMap(int w, int h);
     virtual AntEntity *loadEntity(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void loadXML(xmlpp::Node const &node);

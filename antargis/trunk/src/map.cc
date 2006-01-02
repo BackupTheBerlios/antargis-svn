@@ -247,6 +247,7 @@ void AntMap::loadMap(const std::string &pFilename)
 }
 void AntMap::saveMap(const std::string &pFilename)
 {
+  mName=pFilename;
   Document d;
   Node *root=d.get_root_node();
   root->setName("antargisLevel");
@@ -270,20 +271,6 @@ void AntMap::clear()
   mTerrain->addToScenes();
 
 }
-/*
-void AntMap::entsChanged()
-{
-  if(mScene)
-    {
-      for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
-	{
-	  AntEntity::Meshes m=(*i)->getMesh();
-	  for(AntEntity::Meshes::iterator i=m.begin();i!=m.end();i++)
-	    if(*i)
-	      mScene->addNode(*i);
-	}
-    }
-    }*/
 
 void AntMap::mapChanged()
 {
@@ -322,3 +309,8 @@ void AntMap::mark()
 }
 
 
+void AntMap::newMap(int w,int h)
+{
+  clear();
+  HeightMap::newMap(w,h);
+}

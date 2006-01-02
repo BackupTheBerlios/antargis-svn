@@ -8,6 +8,8 @@
 			<table cols="20" rows="1" col="0" row="1" name="chooser">
 				<radio col="0" row="0" name="terrain" caption-image="data/gui/editor/grass_updown.png"/>
 				<radio col="1" row="0" name="entities" caption-image="data/gui/editor/fir.png"/>
+				
+				<button col="5" row="0" name="new" caption-image="data/gui/new.png"/>
 			</table>
 		</radioGroup>
 		<table col="0" row="2" cols="1" rows="3" name="terrainTab">

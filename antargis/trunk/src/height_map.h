@@ -69,9 +69,13 @@ class HeightMap:public RubyObject
 
   AGRect2 getChangeRect() const;
 
+  virtual void newMap(int w,int h);
+
+
  private:
 
   void loadBinary(const std::string &pName);
+  void saveBinary(const std::string &pName) const;
 
 
 
@@ -93,6 +97,7 @@ class HeightMap:public RubyObject
  protected:
 
   Terrain *mTerrain;
+  std::string mName;
 };
 
 #endif

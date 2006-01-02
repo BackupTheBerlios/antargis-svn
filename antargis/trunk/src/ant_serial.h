@@ -58,8 +58,11 @@ class BinaryFileOut:public BinaryOut
   virtual ~BinaryFileOut();
 
   virtual void write(char c);
+  void flush();
  private:
   PHYSFS_file *f;
+  std::ostringstream buffer;
+  size_t size;
 };
 
 class BinaryStringIn:public BinaryIn

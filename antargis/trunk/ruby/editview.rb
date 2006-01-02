@@ -55,14 +55,6 @@ class AntRubyEditView<GLApp
 		
 		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
 		
-# 		addHandler(@layout.getChild("edit1"),:sigClick,:sigEdit1)
-# 		addHandler(@layout.getChild("edit2"),:sigClick,:sigEdit2)
-# 		addHandler(@layout.getChild("edit3"),:sigClick,:sigEdit3)
-# 		addHandler(@layout.getChild("edit4"),:sigClick,:sigEdit4)
-# 		addHandler(@layout.getChild("edit5"),:sigClick,:sigEdit5)
-# 		addHandler(@layout.getChild("edit10"),:sigClick,:sigEdit10)
-# 		addHandler(@layout.getChild("edit15"),:sigClick,:sigEdit15)
-		
 		[1,2,3,5,10,15].each{|s|addHandler(@layout.getChild("edit#{s}"),:sigClick,:sigSize)}
 		["editHeight","editWater","editSand","editGround","editGrass","editGrass2","editForest","editRock"].each{|n|
 			addHandler(@layout.getChild(n),:sigClick,:sigSelectEdit)
@@ -70,13 +62,48 @@ class AntRubyEditView<GLApp
 		[1,2,3].each{|h|addHandler(@layout.getChild("hard#{h}"),:sigClick,:sigHard)}
 		
 		@hard=2
-		#addHandler(@layout.getChild("editGrass"),:sigClick,:sigEditGrass)
 		
 		addHandler(@layout.getChild("terrain"),:sigClick,:sigTabSelect)
 		addHandler(@layout.getChild("entities"),:sigClick,:sigTabSelect)
+		
+		addHandler(@layout.getChild("new"),:sigClick,:sigNewMap)
 		@buttonlayout=@layout
 		sigTabSelect("terrain")
 	end
+	
+	def sigNewMap
+		#getMap.newMap(64,64)
+		#getMap.setHeight(-0.5)
+		if not @newDialog
+			@layout.addChild(@newDialog=AGLayout.new(@layout,loadFile("data/gui/layout/newdialog.xml")))
+			addHandler(@newDialog.getChild("ok"),:sigClick,:sigNewMapEnd)
+			addHandler(@newDialog.getChild("cancel"),:sigClick,:sigNewMapEnd)
+			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:sigNewMapEnd)
+		end
+	end
+	
+	def sigNewMapEnd(name)
+		d=@newDialog
+		@newDialog=nil
+		if d
+			@layout.removeChild(d)
+			#d.close
+			if name=="ok"
+				w=toAGEdit(d.getChild("width")).getText.to_i
+				h=toAGEdit(d.getChild("height")).getText.to_i
+				
+				if w and h
+					w=2**(Math::log(w)/Math::log(2)).to_i
+					h=2**(Math::log(h)/Math::log(2)).to_i
+					if w>=16 and h>=16
+						getMap.newMap(w,h)
+						getMap.setHeight(-0.5)
+					end
+				end
+			end
+		end
+	end
+	
 	
 	def sigTabSelect(name)
 		["terrain","entities"].each{|e|
