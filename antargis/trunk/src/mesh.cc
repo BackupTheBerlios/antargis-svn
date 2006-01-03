@@ -43,6 +43,7 @@ void Mesh::draw()
     return;
   begin();
   glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_LIGHTING);
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
   glColor4fv(mColor);
   if(mData)
