@@ -34882,6 +34882,28 @@ _wrap_getDirectory(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_addPath(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    std::string temp1 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    addPath((std::string const &)*arg1);
+    
+    return Qnil;
+}
+
+
 swig_class cAGListBoxItem;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -39763,6 +39785,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_module_function(mLibantargisgui, "saveFile", VALUEFUNC(_wrap_saveFile), -1);
     rb_define_module_function(mLibantargisgui, "fileExists", VALUEFUNC(_wrap_fileExists), -1);
     rb_define_module_function(mLibantargisgui, "getDirectory", VALUEFUNC(_wrap_getDirectory), -1);
+    rb_define_module_function(mLibantargisgui, "addPath", VALUEFUNC(_wrap_addPath), -1);
     
     cAGListBoxItem.klass = rb_define_class_under(mLibantargisgui, "AGListBoxItem", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGListBoxItem, (void *) &cAGListBoxItem);

@@ -32,4 +32,6 @@ bool fileExists(const std::string &pName);
 
 std::vector<std::string> getDirectory(const std::string &pDir);
 
+void addPath(const std::string &pName);
+
 #endif

@@ -26,6 +26,12 @@
 
 bool FSinited=false;
 
+void addPath(const std::string &pName)
+{
+  PHYSFS_addToSearchPath(pName.c_str(),1);
+}
+
+
 void initFS(const char *argv0)
 {
   PHYSFS_init(argv0);

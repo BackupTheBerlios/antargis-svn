@@ -329,12 +329,14 @@ public:
     //    AGWidget *w=new AGText(pParent,pRect,text,font);
     AGEdit *w=new AGEdit(pParent,pRect);
     w->setText(text);
-    if(pNode.get("font")!="")
-    {
-      AGFont font;
-      font=getTheme()->getFont(pNode.get("font"));
-      w->setFont(font);
-    }
+    std::string fontname=pNode.get("font");
+    if(fontname=="")
+      fontname="text.font";
+
+    AGFont font;
+    font=getTheme()->getFont(fontname);
+    w->setFont(font);
+    
     if(pNode.get("align")=="left")
       w->setAlign(EDIT_LEFT);
     if(pNode.get("align")=="right")

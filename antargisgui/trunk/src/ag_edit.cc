@@ -674,18 +674,14 @@ void AGEdit::setMulti(bool pMultiLine)
 
 void AGEdit::checkWrap()
 {
-  CTRACE;
-  cdebug("TEXT:"<<getText());
   if(mWrapLines)
     {
       std::list<AGEditLine>::iterator i=mLines.begin();
       for(;i!=mLines.end();)
 	{
-	  cdebug(i->getText());
 	  std::pair<std::string,bool> n=i->checkWrap(width());
 	  if(n.first.length())
 	    {
-	      cdebug("wrap");
 	      // make new line
 	      if(i->length()<mCx)
 		{
@@ -775,7 +771,6 @@ void AGEdit::checkWrap()
 void AGEdit::setFont(const AGFont &pFont)
 {
   mFont=pFont;
-  cdebug(mFont.toString());
   std::list<AGEditLine>::iterator i=mLines.begin();
   for(;i!=mLines.end();i++)
     i->setFont(mFont);
