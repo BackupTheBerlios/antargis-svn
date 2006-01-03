@@ -29,6 +29,13 @@ bool FSinited=false;
 void addPath(const std::string &pName)
 {
   PHYSFS_addToSearchPath(pName.c_str(),1);
+  char **p=PHYSFS_getSearchPath();
+  for(;*p;p++)
+    {
+      cdebug(*p);
+
+    }
+
 }
 
 
