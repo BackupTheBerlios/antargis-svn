@@ -45,10 +45,14 @@ class BinaryFileIn:public BinaryIn
 
   virtual bool eof();
   virtual char read();
+
+  size_t pos() const;
  private:
   PHYSFS_file *f;
   std::istringstream is;
   bool mEof;
+  size_t p;
+  size_t size;
 };
 
 class BinaryFileOut:public BinaryOut
@@ -59,10 +63,13 @@ class BinaryFileOut:public BinaryOut
 
   virtual void write(char c);
   void flush();
+
+  size_t pos() const;
  private:
   PHYSFS_file *f;
   std::ostringstream buffer;
   size_t size;
+  size_t p;
 };
 
 class BinaryStringIn:public BinaryIn

@@ -2,6 +2,40 @@
 #include "terrain.h"
 #include "ant_serial.h"
 
+
+
+
+void serialTest()
+{
+  BinaryStringOut os;
+  os<<3.4f;
+  BinaryStringIn is(os.getString());
+  float f;
+  is>>f;
+  assert(f==3.4f);
+}
+
+void serialTest2()
+{
+  size_t i=9874;
+  size_t a=i;
+  TRACE;
+  {
+    
+    BinaryFileOut os("muh");
+    os<<i;
+    os<<3.4f;
+  }
+  BinaryFileIn is("muh");
+  float f;
+  is>>i;
+  is>>f;
+  assert(i==a);
+  assert(f==3.4f);
+}
+
+
+
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
 //////////////////////////////////////////////////////////////////////////
@@ -28,6 +62,8 @@ HeightMap::HeightMap(int w,int h):
   setTerrainScale(FOREST,23/32.0);
   setTerrainScale(ROCK,1);
   setTerrainScale(ROCK2,1);
+  serialTest();
+  serialTest2();
 }
 
 HeightMap::~HeightMap()
@@ -118,8 +154,18 @@ void HeightMap::loadBinary(const std::string &pName)
   is>>mW>>mH;
 
   cdebug("mw:"<<mW<<"  "<<mH);
+  cdebug("pos:"<<is.pos());
   
   mHeights=std::vector<float>(mW*mH*4);
+  for(size_t y=0;y<mH+2;y++)
+    {
+      for(size_t x=0;x<mW+2;x++)
+	{
+	  is>>f;
+	  cdebug(f);
+	  mHeights[x+y*(mW+2)]=f;
+	}
+    }
 
   for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
     {
@@ -131,16 +177,8 @@ void HeightMap::loadBinary(const std::string &pName)
 	    {
 	      is>>f;
 	      mTerrainTypes[TerrainType(i)][x+y*(mW+2)]=f;
+	      addChange(AGVector2(x,y));
 	    }
-	}
-    }
-
-  for(size_t y=0;y<mH+2;y++)
-    {
-      for(size_t x=0;x<mW+2;x++)
-	{
-	  is>>f;
-	  mHeights[x+y*(mW+2)]=f;
 	}
     }
 }
@@ -151,6 +189,16 @@ void HeightMap::saveBinary(const std::string &pName) const
   BinaryFileOut os(pName);
 
   os<<mW<<mH;
+  cdebug("pos:"<<os.pos());
+
+  for(size_t y=0;y<mH+2;y++)
+    {
+      for(size_t x=0;x<mW+2;x++)
+	{
+	  os<<mHeights[x+y*(mW+2)];
+	}
+    }
+  
   
   for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
     {
@@ -162,15 +210,6 @@ void HeightMap::saveBinary(const std::string &pName) const
 	    }
 	}
     }
-
-  for(size_t y=0;y<mH+2;y++)
-    {
-      for(size_t x=0;x<mW+2;x++)
-	{
-	  os<<mHeights[x+y*(mW+2)];
-	}
-    }
-  
 }
 
 void HeightMap::loadXML(const Node &node)
@@ -270,11 +309,11 @@ void HeightMap::mapChanged()
 
 void HeightMap::saveXML(Node &node) const
 {
-  if((mW<=16 && mH<=16) || mName.length()==0)
+  node.set("width",toString(mW));
+  node.set("height",toString(mH));
+  
+  if(false) //(mW<=64 && mH<=64) || mName.length()==0)
     {
-      node.set("width",toString(mW));
-      node.set("height",toString(mH));
-      
       std::ostringstream osh;
       osh.precision(2);
       

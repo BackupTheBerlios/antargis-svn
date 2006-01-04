@@ -54145,6 +54145,22 @@ _wrap_BinaryFileIn_read(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_BinaryFileIn_pos(int argc, VALUE *argv, VALUE self) {
+    BinaryFileIn *arg1 = (BinaryFileIn *) 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryFileIn, 0);
+    result = ((BinaryFileIn const *)arg1)->pos();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
 _wrap_disown_BinaryFileIn(int argc, VALUE *argv, VALUE self) {
     BinaryFileIn *arg1 = (BinaryFileIn *) 0 ;
     
@@ -54246,6 +54262,22 @@ _wrap_BinaryFileOut_flush(int argc, VALUE *argv, VALUE self) {
     (arg1)->flush();
     
     return Qnil;
+}
+
+
+static VALUE
+_wrap_BinaryFileOut_pos(int argc, VALUE *argv, VALUE self) {
+    BinaryFileOut *arg1 = (BinaryFileOut *) 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_BinaryFileOut, 0);
+    result = ((BinaryFileOut const *)arg1)->pos();
+    
+    vresult = UINT2NUM(result);
+    return vresult;
 }
 
 
@@ -58077,6 +58109,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cBinaryFileIn.klass, "initialize", VALUEFUNC(_wrap_new_BinaryFileIn), -1);
     rb_define_method(cBinaryFileIn.klass, "eof", VALUEFUNC(_wrap_BinaryFileIn_eof), -1);
     rb_define_method(cBinaryFileIn.klass, "read", VALUEFUNC(_wrap_BinaryFileIn_read), -1);
+    rb_define_method(cBinaryFileIn.klass, "pos", VALUEFUNC(_wrap_BinaryFileIn_pos), -1);
     cBinaryFileIn.mark = 0;
     cBinaryFileIn.destroy = (void (*)(void *)) free_BinaryFileIn;
     rb_define_module_function(mLibantargis, "disown_BinaryFileOut", VALUEFUNC(_wrap_disown_BinaryFileOut), -1);
@@ -58087,6 +58120,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cBinaryFileOut.klass, "initialize", VALUEFUNC(_wrap_new_BinaryFileOut), -1);
     rb_define_method(cBinaryFileOut.klass, "write", VALUEFUNC(_wrap_BinaryFileOut_write), -1);
     rb_define_method(cBinaryFileOut.klass, "flush", VALUEFUNC(_wrap_BinaryFileOut_flush), -1);
+    rb_define_method(cBinaryFileOut.klass, "pos", VALUEFUNC(_wrap_BinaryFileOut_pos), -1);
     cBinaryFileOut.mark = 0;
     cBinaryFileOut.destroy = (void (*)(void *)) free_BinaryFileOut;
     rb_define_module_function(mLibantargis, "disown_BinaryStringIn", VALUEFUNC(_wrap_disown_BinaryStringIn), -1);

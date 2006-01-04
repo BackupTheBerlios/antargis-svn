@@ -83,7 +83,7 @@ class AntDecoMesh<AntMyEntity
 		@name=name
 # 		case name
 # 			else
-				setMesh(Mesh.new(getMeshData("data/models/ant_coach.ant2",0.6,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
+				setMesh(Mesh.new(getMeshData("data/models/ant_coach.ant2",0.08,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
 # 		end
 	end
 	def xmlName

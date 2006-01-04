@@ -23,7 +23,7 @@
 					<text col="0" row="1" caption="Men:"/>
 					<edit col="1" tabindex="0" theme2="antButton" row="1" name="MenCount" text="0"/>
 				</table>
-				<table col="0" row="2" cols="2" rows="3" name="npcTypeView">
+				<table col="0" row="2" cols="2" rows="3" name="NpcTypeView">
 					<rowsize row="0" fixed="5"/>
 					<rowsize row="2" fixed="5"/>
 					<colsize col="0" fixed="100"/>

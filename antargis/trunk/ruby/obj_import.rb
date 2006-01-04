@@ -20,7 +20,7 @@ end
 infile=ARGV[0]
 outfile=ARGV[1]
 
-if File.exists?(outfile)
+if File.exists?(outfile) and not (ARGV.length>2 and ARGV[2]=="-f")
 	throw "File already exists"
 end
 
