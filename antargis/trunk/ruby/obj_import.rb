@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$swap=false
+
 if File.exists?("antargislib.rb")
 	require "antargislib.rb"
 else
@@ -28,13 +30,19 @@ File.open(infile).each_line{|line|
 		# ignore - it's a comment
 	elsif line=~/^v .*/ then
 		x,y,z=line.gsub("v ","").split(" ").collect{|a|a.to_f}
+		if $swap
+			z,y=y,z
+		end
 		$vs.push([x,y,z])
 	elsif line=~/^vt .*/ then
 		x,y=line.gsub("vt ","").split(" ").collect{|a|a.to_f}
 		$ts.push([x,y])
 	elsif line=~/^vn .*/ then
 		x,y,z=line.gsub("vt ","").split(" ").collect{|a|a.to_f}
-		$ns.push([x,y,z])
+		if $swap
+			z,y=y,z
+		end
+		$ns.push([-x,y,-z])
 	elsif line=~/^f .*/ then
 		vs=line.gsub("f ","").split(" ")
 		faces=[]

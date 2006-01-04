@@ -183,7 +183,6 @@ void MeshData::draw()
   if(mTransparent)
     glDisable(GL_CULL_FACE);
 
-
   glEnable(GL_ALPHA_TEST);
   glAlphaFunc(GL_GREATER,0.9);
 

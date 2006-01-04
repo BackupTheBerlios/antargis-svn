@@ -272,7 +272,7 @@ class AntRubyEditView<GLApp
 				@type=AntHero
 				@appearance="hero"
 			when "druid"
-				@type=AntHero
+				@type=AntDruid
 				@appearance="druid"
 			when "twig"
 				@type=AntTwig

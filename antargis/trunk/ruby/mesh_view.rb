@@ -18,7 +18,7 @@ class App<GLApp
 			@n=AnimMesh.new(data)
 			@anim=true
 		else
-			data=MeshData.new("data/models/ant_coach.ant2",3,"data/textures/models/ant_coach.png")
+			data=MeshData.new("data/models/hero_lp.ant2",3,"data/textures/models/hero_lp.png")
 			@n=Mesh.new(data,AGVector4.new(0,0,0),-30)
 		end
 			
@@ -46,6 +46,6 @@ if ARGV.length<1
 	throw "no file given"
 end
 
-m=AGMain.new(800,600,32,false,true)
+#m=AGMain.new(800,600,32,false,true)
 a=App.new(800,600,ARGV[0])
 a.run
