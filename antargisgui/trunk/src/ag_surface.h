@@ -33,8 +33,9 @@
 class AGColor;
 class AGSurface;
 
-//extern bool mGLMode;
-
+void beginRender();
+void endRender();
+bool isRendering();
 
 // Generic classes - for OpenGL and "normal" SDL
 class AGSurface:public AGPaintTarget
@@ -94,13 +95,11 @@ class AGSurface:public AGPaintTarget
 
 // FIXME: make AGTexture a AGPaintTarget, too
 
-class AGTexture
+class AGTexture:public AGPaintTarget
 {
  public:
   AGTexture();
   AGTexture(const AGTexture &t);
-  //  explicit AGTexture(const AGSurface &pSurface);
-  //  explicit AGTexture(const AGSurface &pSurface,int W,int H);
   ~AGTexture();
 
   int width() const;
@@ -124,6 +123,12 @@ class AGTexture
 
   SDL_Surface *surface();
 
+  virtual void beginPaint();
+  virtual void endPaint();
+
+  virtual void putPixel(int x,int y,const AGColor &c);
+
+
  private:
 
   void init();
@@ -132,6 +137,7 @@ class AGTexture
   bool mHasTexture;
   bool mTextureUsed;
   bool m3d;
+  bool mPainting;
 
   AGTexture(SDL_Surface *s,int W,int H, bool p3d=false);
   SDL_Surface *s;

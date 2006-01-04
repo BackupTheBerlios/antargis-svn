@@ -140,6 +140,7 @@ bool AGApplication::eventIdle()
 
 void AGApplication::draw()
 {
+  beginRender();
   if(mainWidget)
     {
       getScreen().begin();
@@ -147,6 +148,7 @@ void AGApplication::draw()
       mainWidget->drawAll(p);
     }
   getScreen().flip();
+  endRender();
 }
 
 void AGApplication::tryQuit()

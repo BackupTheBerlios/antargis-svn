@@ -26,19 +26,23 @@
 
 AGPainter::AGPainter():mRect(getScreen().getRect()),mTarget(getScreen())
 {
+  mTarget.beginPaint();
 }
 
 AGPainter::AGPainter(const AGPainter &p):mClips(p.mClips),mRect(p.mRect),mTarget(p.mTarget)
 {
+  mTarget.beginPaint();
 }
 
 AGPainter::AGPainter(AGPaintTarget &pTarget):mRect(pTarget.getRect()),mTarget(pTarget)
 {
+  mTarget.beginPaint();
 }
 
 
 AGPainter::~AGPainter()
 {
+  mTarget.endPaint();
 }
 
 AGPoint AGPainter::move(const AGPoint &p) const

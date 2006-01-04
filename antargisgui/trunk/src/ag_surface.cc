@@ -36,6 +36,22 @@
 
 #include <ag_fs.h>
 
+bool gRendering=false;
+void beginRender()
+{
+  gRendering=true;
+}
+void endRender()
+{
+  gRendering=false;
+}
+
+bool isRendering()
+{
+  return gRendering;
+}
+
+
 void AGFreeSurface(SDL_Surface *s)
 {
   //  cdebug(s);
@@ -342,6 +358,7 @@ AGTexture::AGTexture(const AGTexture &t)
   mTextureUsed=false;
   getTextureManager()->registerTexture(this);
   m3d=t.m3d;
+  mPainting=false;
 }
 
 AGTexture::AGTexture()
@@ -350,6 +367,7 @@ AGTexture::AGTexture()
   m3d=0;
   init();
   getTextureManager()->registerTexture(this);
+  mPainting=false;
 }
 
 // only used by AG*Screen to create a new texture
@@ -362,6 +380,7 @@ AGTexture::AGTexture(SDL_Surface *ps,int W,int H,bool p3d):s(ps),w(W),h(H)
   mTH=float(h)/float(s->h);
   init();
   getTextureManager()->registerTexture(this);
+  mPainting=false;
 }
 
 AGTexture::~AGTexture()
@@ -451,7 +470,6 @@ GLuint AGTexture::getTextureID()
 
 bool AGTexture::textureUsed() const
 {
-  //  CTRACE;
   return mTextureUsed;
 }
 
@@ -460,6 +478,87 @@ SDL_Surface *AGTexture::surface()
   return s;
 }
 
+bool glMode()
+{
+  return (dynamic_cast<AGGLScreen*>(&getScreen()));
+}
+
+void AGTexture::beginPaint()
+{
+  
+  assert(!isRendering());
+  assert(!m3d);
+  if(glMode())
+    {
+      getTextureID();
+      // init 2d drawing
+      getScreen().begin();
+      // copy texture to buffer
+
+      /*    
+      glViewport(0,0,mTW,mTH);
+      glMatrixMode( GL_PROJECTION );
+      glLoadIdentity();
+      gluOrtho2D(0,mTW,0,mTH);
+      glMatrixMode(GL_MODELVIEW);
+      
+*/
+      glEnable(GL_TEXTURE_2D);
+
+      glBindTexture(GL_TEXTURE_2D,mTextureID);
+      
+      float w=s->w,h=s->h;
+      glDisable(GL_CULL_FACE);
+      glColor4f(1,1,1,1);
+      glBegin(GL_QUADS);
+      glTexCoord2f(0,0);
+      glVertex2f(0,0);
+
+      glTexCoord2f(1,0);
+      glVertex2f(w,0);
+
+      glTexCoord2f(1,1);
+      glVertex2f(w,h);
+
+      glTexCoord2f(0,1);
+      glVertex2f(0,h);
+      glEnd();
+      //      getScreen().blit(*this,AGRect(0,0,mTW,mTH));
+
+    }
+  mPainting=true;
+}
+void AGTexture::endPaint()
+{
+  if(glMode())
+    {
+      // copy buffer to texture
+      glBindTexture(GL_TEXTURE_2D, mTextureID);
+      assertGL;
+
+      glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, s->w,s->h,0);
+      //      glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, getScreen().getWidth(),getScreen().getHeight(),0);
+      //            SDL_GL_SwapBuffers();
+	    //            SDL_Delay(4000);
+
+    }
+  mPainting=false;
+}
+
+void AGTexture::putPixel(int x,int y,const AGColor &c)
+{
+  assert(mPainting);
+  if(glMode())
+    {
+      // use screen-functions
+      y=(s->h-1)-y;
+      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
+    }
+  else
+    {
+      sge_PutPixel(s,x,y,c.mapRGB(s->format));
+    }
+}
 
 
 

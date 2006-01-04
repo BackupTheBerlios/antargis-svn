@@ -1695,6 +1695,57 @@ void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect const &pDest,
 }
 
 
+SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self): AGTexture(), Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_AGTexture::SwigDirector_AGTexture(VALUE self, AGTexture const &t): AGTexture(t), Swig::Director(self) {
+    
+}
+
+
+
+void SwigDirector_AGTexture::putPixel(int x, int y, AGColor const &c) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTexture::putPixel(x,y,c);
+        return;
+    }
+    obj0 = INT2NUM(x);
+    obj1 = INT2NUM(y);
+    obj2 = SWIG_NewPointerObj((void *) &c, SWIGTYPE_p_AGColor,0);
+    result = rb_funcall(swig_get_self(), rb_intern("putPixel"), 3,obj0,obj1,obj2);
+}
+
+
+void SwigDirector_AGTexture::beginPaint() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTexture::beginPaint();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("beginPaint"), 0, NULL);
+}
+
+
+void SwigDirector_AGTexture::endPaint() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTexture::endPaint();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("endPaint"), 0, NULL);
+}
+
+
 SwigDirector_AGScreen::SwigDirector_AGScreen(VALUE self) : Swig::Director(self) {
     
 }
@@ -14262,6 +14313,40 @@ _wrap_hasQuit(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_beginRender(int argc, VALUE *argv, VALUE self) {
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    beginRender();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_endRender(int argc, VALUE *argv, VALUE self) {
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    endRender();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_isRendering(int argc, VALUE *argv, VALUE self) {
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (bool)isRendering();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 swig_class cAGSurface;
 
 static VALUE
@@ -14826,11 +14911,21 @@ swig_class cAGTexture;
 
 static VALUE
 _wrap_new_AGTexture__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     AGTexture *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (AGTexture *)new AGTexture();
+    arg1 = self;
+    char *classname = "Libantargisgui::AGTexture";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGTexture *)new SwigDirector_AGTexture(arg1);
+        
+    } else {
+        result = (AGTexture *)new AGTexture();
+        
+    }
     DATA_PTR(self) = result;
     
     return self;
@@ -14856,13 +14951,23 @@ _wrap_AGTexture_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_AGTexture__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    AGTexture *arg1 = 0 ;
+    VALUE arg1 ;
+    AGTexture *arg2 = 0 ;
     AGTexture *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGTexture, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (AGTexture *)new AGTexture((AGTexture const &)*arg1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    char *classname = "Libantargisgui::AGTexture";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGTexture *)new SwigDirector_AGTexture(arg1,(AGTexture const &)*arg2);
+        
+    } else {
+        result = (AGTexture *)new AGTexture((AGTexture const &)*arg2);
+        
+    }
     DATA_PTR(self) = result;
     
     return self;
@@ -14871,24 +14976,32 @@ _wrap_new_AGTexture__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_AGTexture(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[1];
+    VALUE argv[3];
     int ii;
     
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 0) {
-        return _wrap_new_AGTexture__SWIG_0(nargs, args, self);
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
     }
     if (argc == 1) {
         int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
-        }
+        _v = (argv[0] != T_NONE);
         if (_v) {
-            return _wrap_new_AGTexture__SWIG_1(nargs, args, self);
+            return _wrap_new_AGTexture__SWIG_0(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_AGTexture__SWIG_1(nargs, args, self);
+            }
         }
     }
     
@@ -15133,6 +15246,76 @@ _wrap_AGTexture_surface(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SDL_Surface,0);
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGTexture_beginPaint(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->beginPaint();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGTexture_endPaint(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->endPaint();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGTexture_putPixel(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    int arg2 ;
+    int arg3 ;
+    AGColor *arg4 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGColor, 0); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->putPixel(arg2,arg3,(AGColor const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_disown_AGTexture(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
 }
 
 
@@ -37951,6 +38134,9 @@ static void *_p_AGSurfaceTo_p_AGPaintTarget(void *x) {
 static void *_p_AGSDLScreenTo_p_AGPaintTarget(void *x) {
     return (void *)((AGPaintTarget *) (AGScreen *) ((AGSDLScreen *) x));
 }
+static void *_p_AGTextureTo_p_AGPaintTarget(void *x) {
+    return (void *)((AGPaintTarget *)  ((AGTexture *) x));
+}
 static void *_p_AGScreenTo_p_AGPaintTarget(void *x) {
     return (void *)((AGPaintTarget *)  ((AGScreen *) x));
 }
@@ -38265,7 +38451,7 @@ static swig_cast_info _swigc__p_AGMenu[] = {  {&_swigt__p_AGMenu, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_AGMenuEvent[] = {  {&_swigt__p_AGMenuEvent, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGMessageObject[] = {  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGApplication, _p_AGApplicationTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGWidget, _p_AGWidgetTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGMessageObject, 0, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGMessageObject, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGMessageObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGMouseEvent[] = {  {&_swigt__p_AGMouseEvent, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGPaintTarget[] = {  {&_swigt__p_AGPaintTarget, 0, 0, 0},  {&_swigt__p_AGSurface, _p_AGSurfaceTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGSDLScreen, _p_AGSDLScreenTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGScreen, _p_AGScreenTo_p_AGPaintTarget, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGPaintTarget[] = {  {&_swigt__p_AGPaintTarget, 0, 0, 0},  {&_swigt__p_AGSurface, _p_AGSurfaceTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGSDLScreen, _p_AGSDLScreenTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGTexture, _p_AGTextureTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGScreen, _p_AGScreenTo_p_AGPaintTarget, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGPainter[] = {  {&_swigt__p_AGPainter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGPoint[] = {  {&_swigt__p_AGPoint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGPoint3[] = {  {&_swigt__p_AGPoint3, 0, 0, 0},{0, 0, 0, 0}};
@@ -38653,6 +38839,9 @@ SWIGEXPORT void Init_libantargisgui(void) {
     cAGMain.destroy = (void (*)(void *)) free_AGMain;
     rb_define_module_function(mLibantargisgui, "getMain", VALUEFUNC(_wrap_getMain), -1);
     rb_define_module_function(mLibantargisgui, "hasQuit", VALUEFUNC(_wrap_hasQuit), -1);
+    rb_define_module_function(mLibantargisgui, "beginRender", VALUEFUNC(_wrap_beginRender), -1);
+    rb_define_module_function(mLibantargisgui, "endRender", VALUEFUNC(_wrap_endRender), -1);
+    rb_define_module_function(mLibantargisgui, "isRendering", VALUEFUNC(_wrap_isRendering), -1);
     rb_define_module_function(mLibantargisgui, "disown_AGSurface", VALUEFUNC(_wrap_disown_AGSurface), -1);
     
     cAGSurface.klass = rb_define_class_under(mLibantargisgui, "AGSurface", rb_cObject);
@@ -38675,6 +38864,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGSurface.klass, "save", VALUEFUNC(_wrap_AGSurface_save), -1);
     cAGSurface.mark = 0;
     cAGSurface.destroy = (void (*)(void *)) free_AGSurface;
+    rb_define_module_function(mLibantargisgui, "disown_AGTexture", VALUEFUNC(_wrap_disown_AGTexture), -1);
     
     cAGTexture.klass = rb_define_class_under(mLibantargisgui, "AGTexture", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGTexture, (void *) &cAGTexture);
@@ -38694,6 +38884,9 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGTexture.klass, "setTextureID", VALUEFUNC(_wrap_AGTexture_setTextureID), -1);
     rb_define_method(cAGTexture.klass, "getTextureID", VALUEFUNC(_wrap_AGTexture_getTextureID), -1);
     rb_define_method(cAGTexture.klass, "surface", VALUEFUNC(_wrap_AGTexture_surface), -1);
+    rb_define_method(cAGTexture.klass, "beginPaint", VALUEFUNC(_wrap_AGTexture_beginPaint), -1);
+    rb_define_method(cAGTexture.klass, "endPaint", VALUEFUNC(_wrap_AGTexture_endPaint), -1);
+    rb_define_method(cAGTexture.klass, "putPixel", VALUEFUNC(_wrap_AGTexture_putPixel), -1);
     cAGTexture.mark = 0;
     cAGTexture.destroy = (void (*)(void *)) free_AGTexture;
     rb_define_module_function(mLibantargisgui, "disown_AGScreen", VALUEFUNC(_wrap_disown_AGScreen), -1);

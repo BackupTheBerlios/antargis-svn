@@ -72,6 +72,13 @@ class AGPaintTarget
   
   virtual void putPixel(int x,int y,const AGColor &c) MSTUB
   virtual AGColor getPixel(int x,int y) const MSTUB
+
+  virtual void beginPaint()
+  {
+  }
+  virtual void endPaint()
+  {
+  }
 };
 
 

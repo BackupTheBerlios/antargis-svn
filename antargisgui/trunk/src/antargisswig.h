@@ -27,6 +27,17 @@ public:
 };
 
 
+class SwigDirector_AGTexture : public AGTexture, public Swig::Director {
+
+public:
+    SwigDirector_AGTexture(VALUE self);
+    SwigDirector_AGTexture(VALUE self, AGTexture const &t);
+    virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void beginPaint();
+    virtual void endPaint();
+};
+
+
 class SwigDirector_AGScreen : public AGScreen, public Swig::Director {
 
 public:
