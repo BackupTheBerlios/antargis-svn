@@ -177,6 +177,11 @@ class AntEditPropDialog<AntDialog
 		menCountW.setText(@ent.getXMLProp("men"))
 		nameW.setText(@ent.getName)
 		
+		getChild("NpcTypeView").hide if @ent.class!=AntNPC
+		if @ent.class==AntNPC
+			@npcTypeW=toAGEdit(getChild("NpcType"))
+			@npcTypeW.setText(@ent.npcType)
+		end
 	end
 	def sigOk
 		menCountW=toAGEdit(getChild("MenCount"))
@@ -184,5 +189,7 @@ class AntEditPropDialog<AntDialog
 		@ent.setName(nameW.getText)
 		@ent.setXMLProp("men",menCountW.getText)
 		hide
+		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
+		@ent.setupMesh
 	end
 end
