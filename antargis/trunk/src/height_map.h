@@ -27,7 +27,8 @@ class HeightMap:public RubyObject
   // get status
   float getHeight(float x,float y) const;
   AGVector3 getNormal(int x,int y) const;
-  AGVector4 HeightMap::getVertex(int x,int y);
+  AGVector3 getNormalF(float x,float y) const;
+  AGVector4 getVertex(int x,int y);
   float get(size_t x,size_t y) const;
   //float getGrass(size_t x,size_t y) const;
 

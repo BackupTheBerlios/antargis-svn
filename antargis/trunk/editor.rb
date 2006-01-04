@@ -35,7 +35,7 @@ require 'editview.rb'
 
 class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
-		super(sw,sh,AntRubyMap.new(32,32))
+		super(sw,sh,AntRubyMap.new(64,64))
 		$app=self	
 		@layout=AGLayout.new(@mainWidget,loadFile("data/gui/layout/editor.xml"))
 		@mainWidget.addChild(@layout)
@@ -45,6 +45,10 @@ class AntGameApp < AntRubyEditView
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
 		addHandler(@layout.getChild("doGen"),:sigClick,:sigGenerate)
+		
+		@miniMap=toMiniMap(@layout.getChild("miniMap"))
+		@miniMap.setMap(getMap)
+		@miniMap.setScene(getScene)
 		
 		puts "LAYOUTNAME:"
 		puts @layout.getName
@@ -98,6 +102,7 @@ class AntGameApp < AntRubyEditView
 	#end
 
 	def eventFrame(time)
+		#@miniMap.mapChanged
 		super(time)
 		# prevent view from updating each frame
 		#if getMap.updated or getMap.heightChanged
@@ -117,6 +122,7 @@ class AntGameApp < AntRubyEditView
 		$fc+=1
 		$elaps+=time
 		getMap().move(time)
+		
 		return true
 	end
 	def eventFrameEnd(time)

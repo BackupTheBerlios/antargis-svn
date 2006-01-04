@@ -26,6 +26,7 @@
 #include "new_decal.h"
 #include "mesh_optimizer.h"
 #include "ant_serial.h"
+#include "minimap.h"
 #ifdef SWIG
 %include "rubyobj.h"
 %include "scenenode.h"
@@ -53,5 +54,6 @@
 %include "new_decal.h"
 %include "mesh_optimizer.h"
 %include "ant_serial.h"
+%include "minimap.h"
 #endif
 #endif

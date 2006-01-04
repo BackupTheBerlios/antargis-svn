@@ -377,6 +377,8 @@ float HeightMap::get(size_t x,size_t y) const
   assert(x>=0);
   assert(y>=0);
   assert(x<mW+2);
+  if(y>=mH+2)
+    cdebug("y:"<<y);
   assert(y<mH+2);
   return mHeights[x+y*(mW+2)];
 }
@@ -403,6 +405,27 @@ float HeightMap::getHeight(float x,float y) const
   return h;
 
 }
+
+AGVector3 HeightMap::getNormalF(float x,float y) const
+{
+  AGVector4 v1,v2;
+  if(x>2)
+    v1=AGVector4(1,0,getHeight(x,y)-getHeight(x-1,y),0);
+  else
+    v1=AGVector4(1,0,getHeight(x+1,y)-getHeight(x,y),0);
+
+  if(y>2)
+    v2=AGVector4(0,1,getHeight(x,y)-getHeight(x,y-1),0);
+  else
+    v2=AGVector4(0,1,getHeight(x,y+1)-getHeight(x,y),0);
+  
+  AGVector4 v3=v1%v2;
+  v3.normalize3();
+
+  return AGVector3(v3[0],v3[1],v3[2]);
+}
+
+
 AGVector3 HeightMap::getNormal(int x,int y) const
 {
   AGVector4 v1=AGVector4(1,0,get(x+1,y)-get(x,y),0);

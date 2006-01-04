@@ -164,6 +164,7 @@ class AntRubyEditView<GLApp
 					end
 				end
 				@map.mapChanged
+				@miniMap.mapChanged
 			end
 		}
 	end
@@ -219,6 +220,7 @@ class AntRubyEditView<GLApp
 					end
 				end
 				@map.mapChanged
+				@miniMap.mapChanged
 			end
 		}
 	end
