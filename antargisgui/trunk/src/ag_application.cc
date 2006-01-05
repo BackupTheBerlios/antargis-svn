@@ -29,7 +29,7 @@ void disableKeyrepeat()
   SDL_EnableKeyRepeat(0,0);
 }
 
-AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mRubyObject(false)
+AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0)
 
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
@@ -84,9 +84,8 @@ bool AGApplication::run()
 	  doEvent(&event);
 	}
       eventFrame((now-last)/1000.0);
-{
-  //      TRACE;
-      draw();
+      {
+	draw();
       }
       
       drawCursor();
@@ -99,7 +98,6 @@ bool AGApplication::run()
 
 bool AGApplication::doEvent(const SDL_Event* event) 
 {
-  //  TRACE;
   SDL_Event e;
   
   // eat up old mouse motion events
@@ -164,8 +162,7 @@ bool AGApplication::eventKeyDown(const AGEvent *m2)
     {
       SDLKey k=m->getKey();
       SDLMod mod=m->getMod();
-      //      char ins=0;
-      //      bool doInsert=false;
+
       if(k==SDLK_RETURN && ((mod&KMOD_LALT)||(mod&KMOD_RALT)))
 	{
 	  getMain()->toggleFull();
@@ -202,29 +199,8 @@ void AGApplication::delay(int ms)
 
 
 
-void AGApplication_markfunc(void *ptr)
+void AGApplication::mark()
 {
-  //  cdebug("MARK");
-  AGApplication *zoo;
-  
-  if(!ptr)
-    {
-      cdebug("Warning: ptr==0 in AGWidget_markfunc");
-      return;
-    }
-  assert(ptr);
-  //  TRACE;  
-  //  cdebug(ptr<<endl);
-  zoo = static_cast<AGApplication*>(ptr);
-
-  if(zoo->mainWidget)
-    {
-      if(zoo->mainWidget->mRubyObject)
-	{
-	  //	  cdebug(zoo->mainWidget->getName());
-	  rb_gc_mark(zoo->mainWidget->mRUBY);
-	}
-      //      else
-      AGWidget_markfunc(zoo->mainWidget);
-    }
+  if(mainWidget)
+    markObject(mainWidget);
 }

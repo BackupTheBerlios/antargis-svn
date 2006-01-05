@@ -21,16 +21,13 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'sdl'
+require 'antargisgui.rb'
 require 'testapp.rb'
 require 'theme.rb'
 
-include Libantargisruby
-
 puts "MenuTest"
 
-main=AGMain.new
+main=AGMain.new(800,600,32,false,false)
 
 app=TestApp.new()#false)
 
@@ -59,7 +56,8 @@ window1.addChild(w2)
 
 a={}
 a[0]="aa"
-for i in 1..20
+# use much memory - be careful - this is an exponent !!!!
+for i in 1..25 
 	a[i]=a[i-1]+a[i-1]
 end
 

@@ -21,10 +21,6 @@
 #ifndef __GUI_SDLSURFACE_H
 #define __GUI_SDLSURFACE_H
 
-#ifdef USE_RUBY
-#include "ruby.h"
-#undef connect
-#endif
 #include "ag_surface.h"
 
 class AGSDLScreen:public AGScreen
@@ -66,10 +62,6 @@ class AGSDLScreen:public AGScreen
  private:
   SDL_Surface *s;
  public:
-#ifndef SWIG
-  VALUE mRUBY;
-  bool mRubyObject;
-#endif
 };
 
 #endif

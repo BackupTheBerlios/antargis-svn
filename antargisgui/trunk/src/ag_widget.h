@@ -24,15 +24,9 @@
 #include "ag_geometry.h"
 #include "ag_messageobject.h"
 
-#ifdef USE_RUBY
-#include <ruby.h>
-#undef connect
-#endif
 #include <list>
 
 #include "ag_painter.h"
-
-//class AGMenu;
 
 class AGWidget:public AGMessageObject
 {
@@ -95,6 +89,8 @@ class AGWidget:public AGMessageObject
 
   void show();
   void hide();
+
+  virtual void mark();
 
 
   virtual void addChild(AGWidget *w);
@@ -161,19 +157,9 @@ class AGWidget:public AGMessageObject
  protected:
   std::list<AGWidget*> mChildren;
 
-  friend void AGWidget_markfunc(void *ptr);
-
- public:
-#ifndef SWIG
-  VALUE mRUBY;
-  bool mRubyObject;
-#endif
 };
 
 AGWidget *toAGWidget(AGMessageObject *o);
-
-
-void AGWidget_markfunc(void *ptr);
 
 extern AGWidget *agNoParent;
 

@@ -60,22 +60,10 @@ AGFont AGEditLine::getFont() const
 
 void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
 {
-  //  AGSurface s(getScreen());
-  //  AGSurface s(
-  int x=0;//,y=0;
+  int x=0;
   if(mAlign==EDIT_CENTER)
     x=(pClip.w-mFont.getWidth(mText))/2;
-  /*  if(mVAlign==EDIT_VCENTER)
-    y=-(mFont.getHeight(mText))/2;
 
-  cdebug(x<<";"<<y);
-  
-  cdebug(pPoint.x<<"//"<<pPoint.y);
-
-  //  p.renderText(pClip,pPoint.x+x,pPoint.y,mText+(mHardEnd?"":"/"),mFont);
-  cdebug("mText:"<<mText);
-  cdebug("position:"<<pPoint.x+x<<";"<<pPoint.y+y);
-  */
   p.renderText(mText+(mHardEnd?"":""),AGPoint(pPoint.x+x,pPoint.y),mFont);
 }
 
@@ -87,10 +75,8 @@ void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRe
   int w=x2-x1;
   if(w==0)
     w=8;
-  //  SDL_SetClipRect(getScreen().surface(),const_cast<AGRect*>(&pClip));
+
   p.drawRect(AGRect(pPoint.x+x1,pPoint.y,w,height()),c);
-  //  sge_FilledRectAlpha(getScreen().surface(),pPoint.x+x1,pPoint.y,pPoint.x+x2,pPoint.y+height(),c.mapRGB(getScreen().surface()->format),c.a);
-  //  SDL_SetClipRect(getScreen().surface(),0);
 }
 
 
@@ -174,11 +160,9 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   if(ow>pW/4 && ow<width())
     {
       // check if width will be at least a 1/4 of whole width
-      //      cdebug("mText:"<<mText<<":");
-      //      cdebug("os:"<<os<<":");
       std::string n=mText.substr(os.length()+1,n.npos);
       mText=mText.substr(0,os.length()+1);
-      //      cdebug("mText:"<<mText<<":");
+
       bool hard=mHardEnd;
       mHardEnd=false;
       return std::make_pair(n,hard);
@@ -191,7 +175,6 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   s=os="";
   for(;k<mText.length();k++)
     {
-      //      cdebug(*i);
       s+=mText.substr(k,1);
       w=AGFontEngine::getWidth(mFont,s);
       if(w>pW)
@@ -207,7 +190,6 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   bool hard=mHardEnd;
   mHardEnd=false;
   return std::make_pair(n,hard);
-  //  return std::make_pair(n,false);
 }
 
 void AGEditLine::setHardEnd(bool pHardEnd)
@@ -250,8 +232,6 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true)
 {
-  //  CTRACE;
-  //  cdebug(pRect);
   mMaxLength=-1;
   mMutable=true;
   mShowCursor=true;

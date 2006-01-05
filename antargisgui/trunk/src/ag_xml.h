@@ -27,8 +27,6 @@
 #include <string>
 #include <sstream>
 
-#include <ruby.h>
-
 #include "ag_debug.h"
 
 class Node

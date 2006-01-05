@@ -75,20 +75,9 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
   mModal=false;
   if(getAllWidgets())
     getAllWidgets()->insert(this);
-  //  cdebug(r);
-  /*  if(pParent)
-      pParent->addChild(this);*/
-  mRUBY=0;
 }
 AGWidget::~AGWidget()
 {
-  /*  CTRACE;
-  cdebug(typeid(*this).name());
-  cdebug("Name:"<<getName());
-  cdebug(getName());
-  cdebug("mRUBY:"<<mRUBY);
-  //  throw int();
-  */
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -790,60 +779,14 @@ void AGWidget::setModal(bool pModal)
   mModal=pModal;
 }
 
-#ifdef USE_RUBY
-#include "ruby.h"
-#undef connect
-#endif
-void AGWidget_markfunc(void *ptr)
+void AGWidget::mark()
 {
-
-  AGWidget *cppAnimal;
-  VALUE   rubyAnimal;
-  AGWidget *zoo;
-  
-  if(!ptr)
-    {
-      cdebug("Warning: ptr==0 in AGWidget_markfunc");
-      return;
-    }
-  assert(ptr);
-  //  TRACE;  
-  //  cdebug(ptr<<endl);
-  zoo = static_cast<AGWidget*>(ptr);
-  
-  std::list<AGWidget*>::iterator i=zoo->mChildren.begin();
-
-  for(;i!=zoo->mChildren.end();i++)
-    {
-      //      cdebug("children:"<<*i);
-      //      cdebug("children:"<<(*i)->getName());
-      cppAnimal = *i;//zoo->getAnimal(i);
-      if(cppAnimal->mRubyObject)
-	{
-	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
-	  rb_gc_mark(rubyAnimal);
-	  //	  cdebug("MARK:"<<rubyAnimal);
-	  //	  cdebug("mark:"<<cppAnimal->getName());
-	}
-      //      else
-      AGWidget_markfunc(*i);
-    }
-
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+    markObject(*i);
 
   // mark mToClear also - as it can be that they are still used on stack
-  for(i=zoo->mToClear.begin();i!=zoo->mToClear.end();i++)
-    {
-      //      cdebug("children:"<<*i);
-      cppAnimal = *i;//zoo->getAnimal(i);
-      if(cppAnimal->mRubyObject)
-	{
-	  rubyAnimal = cppAnimal->mRUBY;//SWIG_RubyInstanceFor(cppAnimal);
-	  rb_gc_mark(rubyAnimal);
-	  //	  cdebug("mark:"<<cppAnimal->getName());
-	}
-      AGWidget_markfunc(*i);
-    }
-  
+  for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)
+    markObject(*i);
 }
 
 

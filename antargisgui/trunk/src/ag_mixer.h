@@ -24,7 +24,8 @@
 #include <string>
 #include <ag_widget.h>
 
-class AGSound:public AGWidget // use widget, though this isn't one, because it provides useable functions
+// use widget, though this isn't one, because it provides useable functions
+class AGSound:public AGWidget
 {
  public:
   AGSound(); // NEVER use this! - it's only provided due to swig

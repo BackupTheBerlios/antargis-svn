@@ -21,12 +21,12 @@
 
 #!/usr/bin/ruby
 
+
 require 'antargisgui.rb'
 require 'testapp.rb'
 
 
-
-main=AGMain.new
+$main=AGMain.new(800,600,32,false,false)
 
 app=TestApp.new
 

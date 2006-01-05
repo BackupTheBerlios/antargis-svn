@@ -73,11 +73,6 @@ std::vector<std::string> split(const std::string &n,const std::string &h);
 
 #else
 
-#ifdef __WIN32__
-#include <winsock2.h>
-#endif
-#include <ruby.h>
-
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
 template<class T>
@@ -100,25 +95,10 @@ class D
   static int d;
 
  public:
-  D(std::string c):
-    m(c)
-    {
-      indent();
-      debugout("start of:"<<c<<std::endl);
-      d++;
-    }
-  ~D()
-    {
-      d--;
-      indent();
-      debugout("end   of:"<<m<<std::endl);
-    }
+  D(std::string c);
+  ~D();
 private:
-  void indent()
-  {
-    for(int i=0;i<d;i++)
-      debugout("  ");
-  }
+  void indent();
 };
 
 #define LINEINFO(x) (::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(x)).c_str()
@@ -126,9 +106,11 @@ private:
 #define TRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 #define CTRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(((void*)this)))
 
+void agRaise(const std::string &s);
+
 #ifndef __WIN32__
 #undef assert
-#define assert(x) {if(!(x)) {cdebug("assertiong failed:"<<__STRING(x)); rb_raise(rb_eRuntimeError,((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()),""); } }
+#define assert(x) {if(!(x)) agRaise((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
 #endif
 
 #define Assert(x) assert(x)
@@ -141,23 +123,9 @@ private:
 #define CHECK_ZERO(x) if(!x) throw AGException(std::string(__STRING(x))+" is zero in "+__FILE__+" line:"+toString(__LINE__)+" functin:"+__PRETTY_FUNCTION__);
 #endif
 
-inline void myAssertGL(std::string s)
-{
-  //#ifdef DEBUG
-  GLenum error = glGetError();
-  if(error != GL_NO_ERROR) {
-    std::ostringstream msg;
-    msg <<s<< ": OpenGLError "
-        << gluErrorString(error);
-    
-    cdebug(msg.str());
-    throw std::runtime_error(msg.str());
-  }
-  //#endif
+void agAssertGL(std::string s);
 
-}
-
-#define assertGL myAssertGL(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
+#define assertGL agAssertGL(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 
 
 #endif

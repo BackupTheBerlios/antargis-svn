@@ -23,6 +23,11 @@
 #include <fstream>
 #include <iostream>
 
+#ifdef __WIN32__
+#icnlude <winsock2.h>
+#endif
+#include <ruby.h>
+
 //#ifndef NDEBUG
 int D::d=0;
 
@@ -61,4 +66,43 @@ std::string replace(const std::string &s,const std::string &a,const std::string 
       i=str.find(a,i+b.length());
     }
   return str;
+}
+
+void agRaise(const std::string &s)
+{
+  cdebug("assertiong failed:"<<s);
+  rb_raise(rb_eRuntimeError,s.c_str(),"");
+}
+
+void agAssertGL(std::string s)
+{
+  GLenum error = glGetError();
+  if(error != GL_NO_ERROR) {
+    std::ostringstream msg;
+    msg <<s<< ": OpenGLError "
+        << gluErrorString(error);
+    
+    cdebug(msg.str());
+    throw std::runtime_error(msg.str());
+  }
+}
+
+
+D::D(std::string c):
+  m(c)
+{
+  indent();
+  debugout("start of:"<<c<<std::endl);
+  d++;
+}
+D::~D()
+{
+  d--;
+  indent();
+  debugout("end   of:"<<m<<std::endl);
+}
+void D::indent()
+{
+  for(int i=0;i<d;i++)
+    debugout("  ");
 }

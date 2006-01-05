@@ -27,7 +27,7 @@ class AGMoveWidget:public AGWidget
 {
   AGPoint mNull;
  public:
-  AGMoveWidget(AGWidget *pParent,const AGRect &pRect)
+  AGMoveWidget(AGWidget *pParent,const AGRect &pRect);
   
 };
 

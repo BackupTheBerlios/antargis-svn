@@ -44,12 +44,11 @@ class TestApp <AGApplication
 	end
 end
 
-main=AGMain.new
+main=AGMain.new(640,480,32,false,true)
 
 doc=Document.new("theme.xml")
 loadTheme(doc.toString)
 
-main.changeRes(640,480,32,false,true)
 
 app=TestApp.new(false)
 

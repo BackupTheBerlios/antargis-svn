@@ -328,6 +328,7 @@ public:
     
     //    AGWidget *w=new AGText(pParent,pRect,text,font);
     AGEdit *w=new AGEdit(pParent,pRect);
+    text=replace(text,"\\n","\n");
     w->setText(text);
     std::string fontname=pNode.get("font");
     if(fontname=="")

@@ -26,10 +26,9 @@ require 'testapp.rb'
 
 puts "MenuTest"
 
-main=AGMain.new
+$main=AGMain.new(800,600,32,false,false)
 
 
-main.changeRes(800,600,32,false,false)
 app=TestApp.new(false)
 
 screen=AGScreenWidget.new

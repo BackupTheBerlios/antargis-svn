@@ -26,6 +26,7 @@
 #include <set>
 
 #include "ag_geometry.h"
+#include "rubyobj.h"
 
 class AGListener;
 class AGSignal;
@@ -65,7 +66,7 @@ class AGMouseEvent:public AGEvent
 class AGMessageObject;
 
 
-class AGListener
+class AGListener:public RubyObject
 {
  public:
   AGListener();
