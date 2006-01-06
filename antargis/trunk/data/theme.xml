@@ -167,28 +167,6 @@
 		</button>
 	</yellowButton>
 	
-	<niceRound>
-		<button>
-			<background>
-				<normal>
-					<image name="image" file="button.png"/>
-				</normal>
-				<lighted>
-					<image name="image" file="button-hover.png"/>
-				</lighted>
-				<pressed>
-					<image name="image" file="button-clicked.png"/>
-				</pressed>
-				<checked>
-					<image name="image" file="button-checked.png"/>
-				</checked>
-			</background>
-			<text>
-				<font name="font" file="Arial.ttf" size="22" color="#000000"/>
-			</text>
-		</button>
-	</niceRound>
-	
 	<antButton>
 		<button>
 			<border>

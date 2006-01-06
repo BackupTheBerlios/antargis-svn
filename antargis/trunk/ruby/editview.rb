@@ -36,6 +36,9 @@ class AntRubyEditView<GLApp
 		$scene=getScene
 	
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/edit_layout.xml"))
+		
+		puts self.methods.sort.join(" ")
+		puts "------------------------"
 		setMainWidget(@layout)
 		@mainWidget=@layout
 		addHandler(@layout.getChild("allWater"),:sigClick,:sigAllWater)
