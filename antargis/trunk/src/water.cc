@@ -50,7 +50,7 @@ void WaterPiece::mapChanged()
 	if(mMap->get(mX+x,mY+y)<0.1 && !vis)
 	  {
 	    vis=true;
-	    cdebug(mX+x<<" "<<mY+y<<":"<<mMap->get(x,y));
+	    //	    cdebug(mX+x<<" "<<mY+y<<":"<<mMap->get(x,y));
 	  }
       }
   for(x=0;x<mW/step;x++)

@@ -300,6 +300,7 @@ void HeightMap::newMap(int w,int h)
 
 void HeightMap::mapChanged()
 {
+  sigMapChanged(new AGEvent(this,"mapChanged"));
   mTerrain->addToScenes();
   mTerrain->mapChanged();
   mChanges=0;

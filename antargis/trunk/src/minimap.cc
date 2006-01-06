@@ -8,13 +8,20 @@ MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
 {
   mScene=0;
   mTexture=getTextureManager()->makeTexture(mSurface);
-  mapChanged();
+  //  mapChanged();
+  setMap(mMap);
+    
+}
+
+bool MiniMap::mapChangedComplete(AGEvent *e)
+{
+  return mapChanged(e);
 }
   
-void MiniMap::mapChanged()
+bool MiniMap::mapChanged(AGEvent *e)
 {
   if(!mMap)
-    return;
+    return false;
   int w,h;
   int x,y;
   bool inmem=false;
@@ -102,7 +109,7 @@ void MiniMap::mapChanged()
   delete p;
   if(inmem)
     mTexture=getTextureManager()->makeTexture(mSurface);
-
+  return false;
 }
 
 void MiniMap::draw(AGPainter &p)
@@ -146,7 +153,12 @@ void MiniMap::draw(AGPainter &p)
 void MiniMap::setMap(AntMap *pMap)
 {
   mMap=pMap;
-  mapChanged();
+  if(mMap)
+    {
+      mMap->sigMapChanged.connect(slot(this,&MiniMap::mapChanged));
+      mMap->sigMapChangedComplete.connect(slot(this,&MiniMap::mapChangedComplete));
+      mapChangedComplete(0);
+    }
 }
 void MiniMap::setScene(Scene *pScene)
 {

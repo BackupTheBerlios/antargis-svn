@@ -11,7 +11,8 @@ class MiniMap:public AGWidget
  public:
   MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap);
   
-  void mapChanged();
+  bool mapChanged(AGEvent *e);
+  bool mapChangedComplete(AGEvent *e);
   void draw(AGPainter &p);
 
   void setMap(AntMap *pMap);

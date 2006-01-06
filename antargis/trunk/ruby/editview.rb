@@ -104,7 +104,6 @@ class AntRubyEditView<GLApp
 					end
 				end
 			end
-			@miniMap.mapChanged
 			@map.mapChanged
 		end
 	end
@@ -171,7 +170,6 @@ class AntRubyEditView<GLApp
 						end
 					end
 				end
-				@miniMap.mapChanged
 				@map.mapChanged
 			end
 		}
@@ -229,7 +227,6 @@ class AntRubyEditView<GLApp
 						end
 					end
 				end
-				@miniMap.mapChanged
 				@map.mapChanged
 			end
 		}
@@ -390,13 +387,9 @@ class AntRubyEditView<GLApp
 	
 	def sigAllWater
 		getMap.setHeight(-0.5)
-		@miniMap.mapChanged
-		#getMap.setAllWater
 	end
 	def sigAllGrass
 		getMap.setHeight(1.0)
-		@miniMap.mapChanged
-		#getMap.setAllLand
 	end
 	
 	

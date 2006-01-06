@@ -135,19 +135,17 @@ class AntGameApp < AntRubyEditView
 	end
 	
 	# signals	
-	def sigQuit(eventName,callerName,event,caller)
-		puts "pCaller:"+callerName
-		#tryQuit
+	def sigQuit(e)
 		@layout.addChild(AntQuitDialog.new(@layout))
 	end
-	def sigPause(eventName,callerName,event,caller)
+	def sigPause(e)
 		if not getMap().paused then
 			@layout.addChild(AntPauseDialog.new(@layout))
 		else
 			getMap().unpause
 		end
 	end
-	def sigOptions(ename,cname,ev,c)
+	def sigOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
 	end
 	
