@@ -1,0 +1,6 @@
+#!/bin/sh
+rm vlog.*
+
+valgrind -v --leak-check=yes --tool=memcheck --sanity-level=2 antargis_test.rb
+
+echo "have a look at vlog.????"

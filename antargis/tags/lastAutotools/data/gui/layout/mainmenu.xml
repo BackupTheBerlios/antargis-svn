@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<layout name="MainMenu">
+	<table cols="1" rows="4">
+		<colsize col="0" relative="1"/>
+		<rowsize row="0" fixed="200"/>
+		<rowsize row="1" fixed="30"/>
+		<rowsize row="2" relative="1"/>
+		<rowsize row="3" fixed="34"/>
+		<!--<button col="0" row="0" caption-image="antargisLogo.png" enabled="false"/>-->
+		<image col="0" row="0" filename="antargisLogo.png" enabled="false"/>
+		<!--<button col="0" row="1" theme="yellowButton" enabled="false"/>-->
+		<table col="0" row="2" cols="3" rows="1">
+			<colsize col="0" relative="2"/>
+			<colsize col="1" relative="0.6"/>
+			<colsize col="2" fixed="5"/>
+			<rowsize row="0" relative="1"/>
+			
+			<table col="1" row="0" cols="1" rows="11">
+				<colsize col="0" relative="1"/>
+				<rowsize row="0" relative="2"/>
+				<rowsize row="2" relative="2"/>
+				<rowsize row="4" relative="2"/>
+				<rowsize row="6" relative="2"/>
+				<rowsize row="8" relative="2"/>
+				<rowsize row="10" relative="2"/>
+	
+				<button row="0" col="0" name="campaign" caption="Start campaign" theme="antButton"/>
+				<button row="2" col="0" name="single" caption="Single map" theme="antButton"/>
+				<button row="4" col="0" name="load" caption="Load game" theme="antButton"/>
+				<button row="6" col="0" name="options" caption="Options" theme="antButton"/>
+				<button row="8" col="0" name="credits" caption="Credits" theme="antButton"/>
+				<button row="10" col="0" name="quit" caption="Quit" theme="menuButton"/>
+			
+			</table>
+			<table col="0" row="0" cols="3" rows="3">
+				<colsize col="1" fixed="606"/>
+				<rowsize row="1" fixed="456"/>
+				<rowsize row="0" fixed="5"/>
+				<button col="1" row="1"  enabled="false" caption-image="data/gui/small_old_nature.png" theme="antButton"/>
+			</table>
+			<!--<button col="2" row="0" enabled="false"/>-->
+		</table>
+		<!--<button col="0" row="1" caption-image="data/gui/small_old_nature.png"/>-->
+		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>
+	</table>
+</layout>

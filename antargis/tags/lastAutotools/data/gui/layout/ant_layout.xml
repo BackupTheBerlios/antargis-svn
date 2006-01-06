@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<layout geometry2="(0,0,1024,768)" name="GameLayout">
+  <!-- main game layout -->
+	<table cols="2" rows="1">
+		<colsize col="1" fixed="216"/>
+<!--		<antRubyView col="0" row="0" name="mainView"/>-->
+
+
+		<table col="1" row="0" cols="1" rows="7">
+			<rowsize row="0" fixed="90"/>
+			<rowsize row="1" fixed="200"/>
+			<rowsize row="3" fixed="216"/>
+			<rowsize row="4" fixed="32"/>
+			<rowsize row="5" fixed="216"/>
+			<rowsize row="6" fixed="50"/>
+			
+			<!-- heroes -->
+			<radioGroup col="0" row="0" name="HeroGroup">
+				<table col="0" row="0" cols="3" rows="1">
+					<radio col="0" row="0" theme="antButton" name="hero0">
+						<table cols="1" rows="2">
+							<rowsize row="1" fixed="30"/>
+							<image col="0" row="0" filename="data/gui/portraits/wesnoth1.png"/>
+							<text col="0" row="1" font="button.text" align="center" valign="center" caption="Godrin"/>
+						</table>
+					</radio>
+					<radio col="1" row="0" theme="antButton" name="hero1">
+						<table cols="1" rows="2">
+							<rowsize row="1" fixed="30"/>
+							<image col="0" row="0" filename="data/gui/portraits/wesnoth2.png"/>
+							<text col="0" row="1" font="button.text" align="center" valign="center" caption="Bantor"/>
+						</table>
+					</radio>
+					<radio col="2" row="0" theme="antButton" name="hero2">
+						<table cols="1" rows="2">
+							<rowsize row="1" fixed="30"/>
+							<image col="0" row="0" filename="data/gui/portraits/wesnoth3.png"/>
+							<text col="0" row="1" font="button.text" align="center" valign="center" caption="Hektor"/>
+						</table>
+					</radio>
+				</table>
+			</radioGroup>
+			
+			<!-- system buttons -->
+			<table col="0" row="6" cols="4" rows="2">
+				<rowsize row="0" fixed="50"/>
+				<colsize col="0" fixed="50"/>
+				<colsize col="1" fixed="50"/>
+				<colsize col="2" fixed="50"/>
+				<button col="0" row="0" theme="antButton" name="pause" caption-image="data/gui/pause.png"/>
+				<button col="1" row="0" theme="antButton" name="options" caption-image="data/gui/options.png"/>
+				<button col="2" row="0" theme="antButton" name="quit" caption-image="data/gui/door.png"/>
+			</table>
+			
+			<!-- button panel -->
+			<layout col="0" row="1" filename="data/gui/layout/buttonpanel.xml"/>
+			<antInventory col="0" row="3">
+				<table col="1" row="1" cols="2" rows="8" geometry="(4,4,208,208)">
+					<text name="invTitle" geometry="(0,0,208,26)" enabled="false" align="center" font="invTitle.font"/>
+					<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
+					<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
+					<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
+					
+					<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
+					<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
+					<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
+					<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
+					
+					
+					<text col="1" row="1" caption="0" align="right" name="name" font="inventory.font"/>
+					<text col="1" row="2" caption="0" align="right" name="boss" font="inventory.font"/>
+					<text col="1" row="3" caption="0" align="right" name="men" font="inventory.font"/>
+					<text col="1" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
+					<text col="1" row="5" caption="0" align="right" name="stone" font="inventory.font"/>
+					<text col="1" row="6" caption="0" align="right" name="food" font="inventory.font"/>
+					<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
+				</table>
+			</antInventory>
+			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
+			<antMiniView col="0" row="5" name="miniMap"/>
+			
+		</table>
+	</table>
+</layout>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout name="ButtonPanel" geometry="(0,0,216,150)">
+	<antButtonPanel>
+		<table cols="1" rows="2">
+			<rowsize row="0" relative="2"/>
+			<rowsize row="1" relative="1"/>
+			<radioGroup col="0" row="0" name="ButtonPanelGroup">
+				<table cols="4" rows="2">
+					<radio  col="0" row="0" theme="antButton" name="doPoint" caption-image="data/gui/pointer3.png"/>
+					<radio  col="1" row="0" theme="antButton" name="doMove" caption-image="data/gui/move.png"/>
+					<radio  col="2" row="0" theme="antButton" name="doFight" caption-image="data/gui/sword.png"/>
+					<radio  col="3" row="0" theme="antButton" name="doInvent" caption-image="data/gui/invent.png"/>
+					<radio  col="0" row="1" theme="antButton" name="doRecruit" caption-image="data/gui/recruit.png"/>
+					<radio  col="1" row="1" theme="antButton" name="doDismiss" caption-image="data/gui/dismiss.png"/>
+					<radio  col="2" row="1" theme="antButton" name="doRest" caption-image="data/gui/bed.png"/>
+				</table>
+			</radioGroup>
+			<radioGroup col="0" row="1" name="ButtonPanelGroupAgg">
+				<table cols="3" rows="1">
+					<radio  col="0" row="0" theme="antButton" name="doAgg0" caption-image="data/gui/sword.png"/>
+					<radio  col="1" row="0" theme="antButton" name="doAgg1" caption-image="data/gui/sword2.png"/>
+					<radio  col="2" row="0" theme="antButton" name="doAgg2" caption-image="data/gui/sword3.png"/>
+				</table>-
+			</radioGroup>
+		</table>
+	</antButtonPanel>
+</layout>
