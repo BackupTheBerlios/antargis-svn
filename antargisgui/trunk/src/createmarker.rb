@@ -21,71 +21,54 @@
 
 #!/usr/bin/ruby
 
-clist=[]
-derive={} # x=>y :x is child of y
-rlist={} # all, which have a mRUBY member
+classList=[]
+deriveList={} # x=>y :x is child of y
+rubyClasses={} # all, which are derived from AGRubyObject
 
 
 files=ARGV
-puts "FILES:"
-puts files.join(" ")
 
 # take RubyObject as base for RubyObjects :-)
-# so simply search for classes derived from this!
+# so simply search for classes deriveListd from this!
 
-puts ""
 files.each{|fn|
 	g=File.open(fn)
 	cn=""
 	g.each{|a|
 		if a =~ /^class.*/ then
 			cn=a.gsub("class ","").gsub(/[:;].*/,"").gsub(/\n/,"")
-			clist+=[cn]
+			classList+=[cn]
 			if a=~ /.*public.*/ then
 				pn=a.gsub(/.*public /,"").gsub(/\n/,"")
-				derive[cn]=pn
-				rlist[cn]=false
-				rlist[pn]=false
+				deriveList[cn]=pn
+				rubyClasses[cn]=false
+				rubyClasses[pn]=false
 			end
 		end
 	
 	}
 }
 
-rlist["RubyObject"]=true
+rubyClasses["AGRubyObject"]=true
 
-rlist.each{|a,b|
-	puts "rlist:"+a+":"+b.to_s
-}
-
-clist.sort!.uniq!
-puts "----"
-clist.each{|a,b|
-	puts "clist:"+a+":"+b.to_s
-}
-
-puts "----"
+classList.sort!.uniq!
 
 # check for children of AGWidget
 changed=true
 while changed do
 	changed=false
-	derive.each {|x,y|
-		if rlist[y] and rlist[x]==false then
-			rlist[x]=true
+	deriveList.each {|x,y|
+		if rubyClasses[y] and rubyClasses[x]==false then
+			rubyClasses[x]=true
 			changed=true
 		end
 	}
 end
 
-rlist.each{|a,b|
-	puts "rlist:"+a+":"+b.to_s
-}
-
 file=File.open("nantmarker.hh","w")
 
 # ok, first marking is included
-rlist.each {|x,y|
+rubyClasses.each {|x,y|
 	if y then
 		file.puts "%exception "+x+"::"+x+" {"
 		file.puts "	$action"
@@ -98,12 +81,10 @@ rlist.each {|x,y|
 
 # calculate class-derivations
 derivations={}
-rlist.each{|x,y|
-	puts "X:"+x
+rubyClasses.each{|x,y|
 	derivations[x]=[]
 }
-derive.each{|x,y|
-	puts x+" is child of "+y
+deriveList.each{|x,y|
 	if not derivations[y]
 		derivations[y]=[]
 	end
@@ -119,7 +100,7 @@ while changed
 				derivations[x]+=derivations[a]
 				derivations[x].sort!
 				derivations[x].uniq!
-				puts x+":"+old.length.to_s+" "+derivations[x].length.to_s
+				#puts x+":"+old.length.to_s+" "+derivations[x].length.to_s
 				if old.length<derivations[x].length
 					changed=true
 				end
@@ -127,17 +108,12 @@ while changed
 		}
 	}
 end
-puts "---"
-derivations.each{|a,cs|
-	puts a+":"+cs.join(",")
-}
-puts "---"
 
 # swig typemaps
 # so that always the lowest children in a derivation hierarchy is returned
 
-derive.keys.each{|s|
-	if rlist[s]
+deriveList.keys.each{|s|
+	if rubyClasses[s]
 		file.puts "%typemap(out) #{s}*{"
 		file.puts " if($1)"
 		file.puts " {"
@@ -149,7 +125,7 @@ derive.keys.each{|s|
 		for i in 0..30
 			derivations.each{|a,cs|
 				if cs.length==i && derivations[s].member?(a)
-					puts s+"  "+a+" "+i.to_s
+					#puts s+"  "+a+" "+i.to_s
 					file.puts "else if(dynamic_cast<#{a}*>(result))"
 					file.puts "  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_#{a},0);"
 				end
@@ -164,12 +140,7 @@ derive.keys.each{|s|
 	end
 }
 # normal typemaps
-clist.each{|c|
-	#file.puts "%typemap(out) #{c} {"
-	#file.puts " #{c} *b;"
-	#file.puts " Data_Get_Struct($1,#{c},b);"
-	#file.puts " $result=*b;"
-	#file.puts "}"
+classList.each{|c|
 	file.puts "%typemap(directorout) #{c} {"
 	file.puts " #{c} *b;"
 	file.puts " Data_Get_Struct($input,#{c},b);"
@@ -177,14 +148,9 @@ clist.each{|c|
 	file.puts "}"
 }
 
-# file.puts "%typemap(out) Uint8 {"
-# file.puts "  INT2NUM($input
-# file.puts "}"
-#file.puts "OUTPUT_TYPEMAP(Uint8, INT2NUM, (Uint8));"
-#file.puts "INPUT_TYPEMAP(Uint8, NUM2INT);"
-	file.puts "%typemap(directorout) Uint8 {"
-	file.puts " $result=NUM2INT($input);"
-	file.puts "}"
+file.puts "%typemap(directorout) Uint8 {"
+file.puts " $result=NUM2INT($input);"
+file.puts "}"
 file.close
 
 # now generate antargis.h
@@ -207,3 +173,4 @@ file.puts "#endif"
 
 file.close
 
+puts "created nantmarker.hh"

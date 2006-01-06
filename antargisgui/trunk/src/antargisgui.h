@@ -1,6 +1,6 @@
 #ifndef __ANTARGIS_H__
 #define __ANTARGIS_H__
-#include "rubyobj.h"
+#include "ag_rubyobj.h"
 #include "ag_messageobject.h"
 #include "ag_geometry.h"
 #include "ag_font.h"
@@ -49,7 +49,7 @@
 #include "ag_xml.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
-%include "rubyobj.h"
+%include "ag_rubyobj.h"
 %include "ag_messageobject.h"
 %include "ag_geometry.h"
 %include "ag_font.h"

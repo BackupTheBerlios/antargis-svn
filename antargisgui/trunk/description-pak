@@ -1,2 +1,0 @@
-This library is aimed at being used by a script language like ruby or python, but it should be still
-usable in plain c++.

@@ -38,7 +38,6 @@
 
 #include <ag_fs.h>
 
-#include "ag_vector.h"
 #include "ag_triangle.h"
 
 

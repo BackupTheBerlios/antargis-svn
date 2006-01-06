@@ -1,4 +1,4 @@
-#include "rubyobj.h"
+#include "ag_rubyobj.h"
 #include <assert.h>
 #include <typeinfo>
 //#include "ag_debug.h"
@@ -12,24 +12,24 @@
 #include <ruby.h>
 
 
-std::set<RubyObject*> gDeletedRubies;
+std::set<AGRubyObject*> gDeletedRubies;
 
-RubyObject::RubyObject()
+AGRubyObject::AGRubyObject()
 {
   mRubyObject=false;
   mDeleted=false;
 }
-RubyObject::~RubyObject()
+AGRubyObject::~AGRubyObject()
 {
   mDeleted=true;
   gDeletedRubies.insert(this);
 }
 
-void RubyObject::mark()
+void AGRubyObject::mark()
 {
   //  cdebug(typeid(*this).name());
 }
-void RubyObject::markObject(RubyObject *o)
+void AGRubyObject::markObject(AGRubyObject *o)
 {
   assert(o);
   if(o->mRubyObject)
@@ -38,7 +38,7 @@ void RubyObject::markObject(RubyObject *o)
     o->mark();
 }
 
-void RubyObject::clear()
+void AGRubyObject::clear()
 {
 }
 
@@ -51,7 +51,7 @@ void general_markfunc(void *ptr)
       return; // ignore
     }
   assert(ptr);
-  RubyObject *o=static_cast<RubyObject*>(ptr);
+  AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
   assert(o);
   o->mark();
   gDeletedRubies.clear();
@@ -64,7 +64,7 @@ void general_markfunc(void *ptr)
 // 2) check set before clearing/deleting
 // 3) clear this set when marking
 
-bool saveDelete(RubyObject *o)
+bool saveDelete(AGRubyObject *o)
 {
   //  cdebug("SAVEDEL:"<<o);
   assert(o);
