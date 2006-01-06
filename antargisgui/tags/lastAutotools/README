@@ -1,0 +1,19 @@
+This library is aimed at being used by a script language like ruby or python, but it should be still
+usable in plain c++.
+
+needed libraries:
+ruby(-dev)
+swig(-dev)
+libSDL
+libSDL_image
+libsge
+libSDL_ttf
+libSDL_mixer
+libphysfs
+
+you have 2 possibilities to compile it
+1) use autotools:
+  ./configure && make && make install
+2) using extconf.rb /mkmf:
+  cd src && ruby extconf.rb && make && make install
+

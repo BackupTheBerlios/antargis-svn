@@ -1,0 +1,79 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+AC_INIT(README)
+
+VERSION=0.0.9
+
+AM_INIT_AUTOMAKE(antargisgui,$VERSION)
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AM_PROG_LIBTOOL
+AC_PROG_INSTALL
+# Checks for libraries.
+merror=""
+
+AC_CHECK_LIB(SDL,SDL_Init,[],[ merror="$merror\n Error:libsdl is missing. Please install your libsdl- and libsdl-dev-package."])
+AC_CHECK_LIB(SDL_ttf,TTF_Init,[],[ merror="$merror\n Error:libsdl-ttf is missing. Please install you libsdl-ttf- and libsdl-ttf-dev-package."])
+AC_CHECK_LIB(SGE,sge_FilledRect,[],[ merror="$merror\n Error:libsge is missing. Please install you libsge- and libsge-dev-package."])
+AC_CHECK_LIB(GLU,gluPerspective,[],[ merror="$merror\n Error:libglu is missing. Please install you libglu- and libglu-dev-package."])
+AC_CHECK_LIB(glu32,gluPerspective,[],[ merror="$merror\n Error:libglu is missing. Please install you libglu- and libglu-dev-package."])
+AC_CHECK_LIB(physfs,PHYSFS_init,[],[ merror="$merror\n Error:libphysfs is missing. Please install you libphysfs-ttf- and libphysfs-dev-package."])
+AC_CHECK_LIB(SDL_mixer,Mix_OpenAudio,[],[ merror="$merror\n Error:libsdl-mixer is missing. Please install you libsdl-mixer- and libsdl-mixer-dev-package."])
+
+AC_PATH_PROG(SWIG,swig,not-found)
+
+if test $SWIG == "not-found" ; then
+	echo "Please install swig and swig-ruby (if your distribution provides this)"
+#	exit 1
+fi
+
+if test "$merror" != "" ; then
+	echo -e "$merror"
+#	exit 1
+fi
+
+RUBY_INCLUDE_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['archdir']"`]
+RUBY_INSTALL_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['sitearchdir']"`]
+RUBY_LIB_DIR=[`ruby -e "require 'rbconfig'; puts Config::CONFIG['rubylibdir']"`]
+
+
+if test "$RUBY_INCLUDE_DIR" == "" ; then
+	echo "Please install ruby and the ruby dev-package."
+	exit 1
+fi
+
+AC_SUBST(RUBY_INCLUDE_DIR)
+AC_SUBST(RUBY_INSTALL_DIR)
+AC_SUBST(RUBY_LIB_DIR)
+
+AC_ARG_ENABLE(debug,
+[  --enable-debug   compile with debug information])
+
+if test "$enable_debug" == "yes" ; then 
+  DEBUG="-DDEBUG -O0 -g"
+else
+  DEBUG="-DNDEBUG -O2"
+fi
+
+AC_SUBST(DEBUG)
+
+
+#INCLUDES = include
+# Checks for header files.
+
+
+
+#CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -Wall -g -DUSE_RUBY"
+CXXFLAGS="`sdl-config --cflags` -Wall -DUSE_RUBY $DEBUG -Ic:/ming/include/GL"
+LDFLAGS="$LDFLAGS `sdl-config --libs`"
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+AC_OUTPUT([ 
+Makefile \
+src/Makefile \
+data/Makefile \
+test/Makefile ])

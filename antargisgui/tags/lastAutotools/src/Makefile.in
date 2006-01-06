@@ -1,0 +1,461 @@
+# Makefile.in generated automatically by automake 1.4-p6 from Makefile.am
+
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+AR = @AR@
+AS = @AS@
+CC = @CC@
+CXX = @CXX@
+CXXCPP = @CXXCPP@
+DEBUG = @DEBUG@
+DLLTOOL = @DLLTOOL@
+ECHO = @ECHO@
+EGREP = @EGREP@
+EXEEXT = @EXEEXT@
+F77 = @F77@
+GCJ = @GCJ@
+GCJFLAGS = @GCJFLAGS@
+HAVE_LIB = @HAVE_LIB@
+LIB = @LIB@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
+LTLIB = @LTLIB@
+MAKEINFO = @MAKEINFO@
+OBJDUMP = @OBJDUMP@
+OBJEXT = @OBJEXT@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+RC = @RC@
+RUBY_INCLUDE_DIR = @RUBY_INCLUDE_DIR@
+RUBY_INSTALL_DIR = @RUBY_INSTALL_DIR@
+RUBY_LIB_DIR = @RUBY_LIB_DIR@
+STRIP = @STRIP@
+VERSION = @VERSION@
+
+lib_LTLIBRARIES = libantargisgui.la
+
+# WARNING:it is essential that ag_kill.cc stands before ag_widget, because there's a global set in ag_widget, which shouldn't be killed before the singletons!!!
+#         additional all references to ag_layoutcreators must be before ag_kill!!
+
+export_h = rubyobj.h ag_messageobject.h  ag_geometry.h ag_font.h ag_color.h  ag_widget.h ag_colorbutton.h ag_glwidget.h ag_xml.h ag_layout.h ag_dialog.h ag_mutex.h  ag_application.h ag_background.h ag_border.h ag_button.h ag_text.h ag_caption.h ag_checkbox.h ag_combo.h ag_edit.h  ag_fontengine.h ag_fs.h ag_painttarget.h ag_surface.h ag_image.h ag_layoutfactory.h  ag_vtiler.h  ag_listbox.h ag_list.h ag_main.h ag_menu.h ag_menuitem.h ag_mixer.h ag_mutex.h ag_painter.h ag_png.h ag_radio.h ag_screen.h ag_table.h  ag_texturecache.h  ag_texturemanager.h  ag_theme.h  ag_tools.h  ag_triangle.h  ag_window.h  ag_xml.h
+
+
+realsrc_h = $(export_h) GLee.h ag_draw.h ag_config.h ag_exception.h ag_glsurface.h ag_kill.h ag_gettext.h ag_regex.h ag_sdlsurface.h 
+
+realsrc_cc = ag_colorbutton.cc ag_glwidget.cc ag_window.cc ag_surface.cc ag_main.cc privates.cc ag_radio.cc ag_mixer.cc  ag_layout.cc ag_widget.cc ag_geometry.cc ag_font.cc ag_fontengine.cc ag_color.cc ag_messageobject.cc ag_button.cc ag_gradient.cc ag_application.cc ag_text.cc ag_vtiler.cc ag_theme.cc ag_menu.cc ag_menuitem.cc ag_image.cc ag_screen.cc ag_edit.cc ag_debug.cc ag_checkbox.cc ag_table.cc ag_background.cc ag_caption.cc export.c ag_glsurface.cc ag_vector.cc ag_xml.cc ag_tools.cc ag_layoutfactory.cc ag_fs.cc ag_painter.cc ag_sdlsurface.cc ag_border.cc ag_listbox.cc ag_kill.cc ag_triangle.cc ag_png.cc ag_texturecache.cc ag_dialog.cc ag_mutex.cc GLee.c rubyobj.cc
+
+libantargisgui_la_SOURCES = $(realsrc_h) $(realsrc_cc) antargisswig.cc antargisswig.h
+libdir = $(RUBY_INSTALL_DIR)
+INCLUDES = -I$(RUBY_INCLUDE_DIR)
+
+SWIG = swig
+SWIGCOMPILE = $(SWIG) -v -Wall -ruby -c++ -I$(top_srcdir)/include -I$(srcdir) $(INCLUDES)
+
+# includes
+#INCLUDES = *.h
+EXTRA_DIST = *.h
+myincsdir = $(prefix)/include/antargisgui
+myincs_HEADERS = *.h
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_CLEAN_FILES = 
+LTLIBRARIES =  $(lib_LTLIBRARIES)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) 
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+libantargisgui_la_LDFLAGS = 
+libantargisgui_la_LIBADD = 
+libantargisgui_la_OBJECTS =  ag_colorbutton.lo ag_glwidget.lo \
+ag_window.lo ag_surface.lo ag_main.lo privates.lo ag_radio.lo \
+ag_mixer.lo ag_layout.lo ag_widget.lo ag_geometry.lo ag_font.lo \
+ag_fontengine.lo ag_color.lo ag_messageobject.lo ag_button.lo \
+ag_gradient.lo ag_application.lo ag_text.lo ag_vtiler.lo ag_theme.lo \
+ag_menu.lo ag_menuitem.lo ag_image.lo ag_screen.lo ag_edit.lo \
+ag_debug.lo ag_checkbox.lo ag_table.lo ag_background.lo ag_caption.lo \
+export.lo ag_glsurface.lo ag_vector.lo ag_xml.lo ag_tools.lo \
+ag_layoutfactory.lo ag_fs.lo ag_painter.lo ag_sdlsurface.lo \
+ag_border.lo ag_listbox.lo ag_kill.lo ag_triangle.lo ag_png.lo \
+ag_texturecache.lo ag_dialog.lo ag_mutex.lo GLee.lo rubyobj.lo \
+antargisswig.lo
+CXXFLAGS = @CXXFLAGS@
+CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+HEADERS =  $(myincs_HEADERS)
+
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP_ENV = --best
+DEP_FILES =  .deps/GLee.P .deps/ag_application.P .deps/ag_background.P \
+.deps/ag_border.P .deps/ag_button.P .deps/ag_caption.P \
+.deps/ag_checkbox.P .deps/ag_color.P .deps/ag_colorbutton.P \
+.deps/ag_debug.P .deps/ag_dialog.P .deps/ag_edit.P .deps/ag_font.P \
+.deps/ag_fontengine.P .deps/ag_fs.P .deps/ag_geometry.P \
+.deps/ag_glsurface.P .deps/ag_glwidget.P .deps/ag_gradient.P \
+.deps/ag_image.P .deps/ag_kill.P .deps/ag_layout.P \
+.deps/ag_layoutfactory.P .deps/ag_listbox.P .deps/ag_main.P \
+.deps/ag_menu.P .deps/ag_menuitem.P .deps/ag_messageobject.P \
+.deps/ag_mixer.P .deps/ag_mutex.P .deps/ag_painter.P .deps/ag_png.P \
+.deps/ag_radio.P .deps/ag_screen.P .deps/ag_sdlsurface.P \
+.deps/ag_surface.P .deps/ag_table.P .deps/ag_text.P \
+.deps/ag_texturecache.P .deps/ag_theme.P .deps/ag_tools.P \
+.deps/ag_triangle.P .deps/ag_vector.P .deps/ag_vtiler.P \
+.deps/ag_widget.P .deps/ag_window.P .deps/ag_xml.P .deps/antargisswig.P \
+.deps/export.P .deps/privates.P .deps/rubyobj.P
+SOURCES = $(libantargisgui_la_SOURCES)
+OBJECTS = $(libantargisgui_la_OBJECTS)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .S .c .cc .lo .o .obj .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu src/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-libLTLIBRARIES:
+
+clean-libLTLIBRARIES:
+	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
+
+distclean-libLTLIBRARIES:
+
+maintainer-clean-libLTLIBRARIES:
+
+install-libLTLIBRARIES: $(lib_LTLIBRARIES)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(libdir)
+	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "$(LIBTOOL)  --mode=install $(INSTALL) $$p $(DESTDIR)$(libdir)/$$p"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL) $$p $(DESTDIR)$(libdir)/$$p; \
+	  else :; fi; \
+	done
+
+uninstall-libLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	list='$(lib_LTLIBRARIES)'; for p in $$list; do \
+	  $(LIBTOOL)  --mode=uninstall rm -f $(DESTDIR)$(libdir)/$$p; \
+	done
+
+# FIXME: We should only use cygpath when building on Windows,
+# and only if it is available.
+.c.obj:
+	$(COMPILE) -c `cygpath -w $<`
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+	-rm -f *.$(OBJEXT)
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+.s.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.S.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+
+maintainer-clean-libtool:
+
+libantargisgui.la: $(libantargisgui_la_OBJECTS) $(libantargisgui_la_DEPENDENCIES)
+	$(CXXLINK) -rpath $(libdir) $(libantargisgui_la_LDFLAGS) $(libantargisgui_la_OBJECTS) $(libantargisgui_la_LIBADD) $(LIBS)
+.cc.o:
+	$(CXXCOMPILE) -c $<
+.cc.obj:
+	$(CXXCOMPILE) -c `cygpath -w $<`
+.cc.lo:
+	$(LTCXXCOMPILE) -c $<
+
+install-myincsHEADERS: $(myincs_HEADERS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(myincsdir)
+	@list='$(myincs_HEADERS)'; for p in $$list; do \
+	  if test -f "$$p"; then d= ; else d="$(srcdir)/"; fi; \
+	  echo " $(INSTALL_DATA) $$d$$p $(DESTDIR)$(myincsdir)/$$p"; \
+	  $(INSTALL_DATA) $$d$$p $(DESTDIR)$(myincsdir)/$$p; \
+	done
+
+uninstall-myincsHEADERS:
+	@$(NORMAL_UNINSTALL)
+	list='$(myincs_HEADERS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(myincsdir)/$$p; \
+	done
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags -o $$here/TAGS $(ETAGS_ARGS) $$tags  $$unique $(LISP))
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = src
+
+distdir: $(DISTFILES)
+	here=`cd $(top_builddir) && pwd`; \
+	top_distdir=`cd $(top_distdir) && pwd`; \
+	distdir=`cd $(distdir) && pwd`; \
+	cd $(top_srcdir) \
+	  && $(AUTOMAKE) --include-deps --build-dir=$$here --srcdir-name=$(top_srcdir) --output-dir=$$top_distdir --gnu src/Makefile
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+
+DEPS_MAGIC := $(shell mkdir .deps > /dev/null 2>&1 || :)
+
+-include $(DEP_FILES)
+
+mostlyclean-depend:
+
+clean-depend:
+
+distclean-depend:
+	-rm -rf .deps
+
+maintainer-clean-depend:
+
+%.o: %.c
+	@echo '$(COMPILE) -c $<'; \
+	$(COMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-cp .deps/$(*F).pp .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm .deps/$(*F).pp
+
+%.lo: %.c
+	@echo '$(LTCOMPILE) -c $<'; \
+	$(LTCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
+	  < .deps/$(*F).pp > .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm -f .deps/$(*F).pp
+
+%.o: %.cc
+	@echo '$(CXXCOMPILE) -c $<'; \
+	$(CXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-cp .deps/$(*F).pp .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm .deps/$(*F).pp
+
+%.lo: %.cc
+	@echo '$(LTCXXCOMPILE) -c $<'; \
+	$(LTCXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
+	  < .deps/$(*F).pp > .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm -f .deps/$(*F).pp
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am: install-libLTLIBRARIES
+install-exec: install-exec-am
+
+install-data-am: install-myincsHEADERS
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-libLTLIBRARIES uninstall-myincsHEADERS
+uninstall: uninstall-am
+all-am: Makefile $(LTLIBRARIES) $(HEADERS)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(libdir) $(DESTDIR)$(myincsdir)
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-libLTLIBRARIES mostlyclean-compile \
+		mostlyclean-libtool mostlyclean-tags mostlyclean-depend \
+		mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-libLTLIBRARIES clean-compile clean-libtool clean-tags \
+		clean-depend clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-libLTLIBRARIES distclean-compile \
+		distclean-libtool distclean-tags distclean-depend \
+		distclean-generic clean-am
+	-rm -f libtool
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-libLTLIBRARIES \
+		maintainer-clean-compile maintainer-clean-libtool \
+		maintainer-clean-tags maintainer-clean-depend \
+		maintainer-clean-generic distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-libLTLIBRARIES distclean-libLTLIBRARIES \
+clean-libLTLIBRARIES maintainer-clean-libLTLIBRARIES \
+uninstall-libLTLIBRARIES install-libLTLIBRARIES mostlyclean-compile \
+distclean-compile clean-compile maintainer-clean-compile \
+mostlyclean-libtool distclean-libtool clean-libtool \
+maintainer-clean-libtool uninstall-myincsHEADERS install-myincsHEADERS \
+tags mostlyclean-tags distclean-tags clean-tags maintainer-clean-tags \
+distdir mostlyclean-depend distclean-depend clean-depend \
+maintainer-clean-depend info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
+
+
+nantmarker.hh: $(export_h) createmarker.rb
+	./createmarker.rb $(export_h)
+
+antargisswig.cc: interface.i $(realsrc_h) nantmarker.hh
+	$(SWIGCOMPILE) -o antargisswig.cc interface.i
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
