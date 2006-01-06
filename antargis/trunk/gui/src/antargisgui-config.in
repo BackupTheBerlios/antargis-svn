@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'rbconfig'
+
+def go
+	if ARGV.length>0
+			case ARGV[0]
+				when "--include-files"
+					puts $interfaceHeaders.collect{|x| $prefix+"/include/antargisgui/"+x}.join(" ")
+	
+				when "--marker"
+					puts File.open("createmarker.rb").read
+					
+				when "--prefix"
+					puts $prefix
+				when "--libs"
+					puts "-lantargisgui -L"+Config::CONFIG['rubylibdir']
+				when "--cflags"
+					puts "-DUSE_RUBY"
+		end
+	end
+end
+
+
