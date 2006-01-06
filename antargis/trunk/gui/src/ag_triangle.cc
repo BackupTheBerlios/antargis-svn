@@ -1176,6 +1176,10 @@ AGVector3 AGTriangle3::operator[](int index) const
 /////////////////////////////////////////////////////////////////////////////
 
 
+AGRect2::AGRect2()
+{
+}
+
 AGRect2::AGRect2(const AGVector3 &pv0,const AGVector3 &pv1):
   v0(pv0),v1(pv1)
 {

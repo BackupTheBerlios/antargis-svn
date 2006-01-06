@@ -394,6 +394,7 @@ class AGRect2
 {
   AGVector3 v0,v1;
  public:
+  AGRect2();
   AGRect2(const AGVector3 &pv0,const AGVector3 &pv1);
   AGRect2(const AGVector2 &pv0,const AGVector2 &pv1);
   AGRect2(float x,float y,float w,float h);

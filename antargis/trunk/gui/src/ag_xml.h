@@ -42,6 +42,7 @@ class Node
     Node();
     Node(std::string name);
     Node(const Node &n);
+    Node(const Node *n);
     ~Node();
 
     void setName(std::string pName);

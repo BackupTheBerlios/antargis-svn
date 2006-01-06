@@ -45,6 +45,14 @@ Node::Node(const Node &n):mName(n.mName),mAttrs(n.mAttrs),mContent(n.mContent)
     mNodes.push_back(new Node(**i));
 }
 
+Node::Node(const Node *n):mName(n->mName),mAttrs(n->mAttrs),mContent(n->mContent)
+{
+  // copy nodes
+  NodeVector::const_iterator i=n->mNodes.begin();
+  for(;i!=n->mNodes.end();i++)
+    mNodes.push_back(new Node(**i));
+}
+
 Node::~Node()
 {
   NodeVector::iterator i=mNodes.begin();
