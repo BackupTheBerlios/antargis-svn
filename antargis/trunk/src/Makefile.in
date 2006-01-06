@@ -59,6 +59,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+ANTGUI_INC = @ANTGUI_INC@
 AR = @AR@
 AS = @AS@
 CC = @CC@
@@ -90,8 +91,8 @@ VERSION = @VERSION@
 
 lib_LTLIBRARIES = libantargis.la
 
-realsrc_h = rubyobj.h scenenode.h anim_mesh.h smoke.h jobs.h entity.h height_map.h map.h mesh.h terrain.h tree.h scene.h water.h vertex_array.h cg.h antapp.h glsl.h mesh_data.h anim_mesh_data.h resource.h entptr.h renderer.h ant_config.h new_decal.h mesh_optimizer.h ant_serial.h minimap.h
-realsrc_cc = anim_mesh.cc smoke.cc jobs.cc entity.cc map.cc mesh.cc terrain.cc tree.cc scene.cc water.cc vertex_array.cc cg.cc antapp.cc glsl.cc scenenode.cc rubyobj.cc entptr.cc height_map.cc renderer.cc ant_config.cc new_decal.cc mesh_optimizer.cc mesh_data.cc ant_serial.cc minimap.cc
+realsrc_h = scenenode.h anim_mesh.h smoke.h jobs.h entity.h height_map.h map.h mesh.h terrain.h tree.h scene.h water.h vertex_array.h cg.h antapp.h glsl.h mesh_data.h anim_mesh_data.h resource.h entptr.h renderer.h ant_config.h new_decal.h mesh_optimizer.h ant_serial.h minimap.h
+realsrc_cc = anim_mesh.cc smoke.cc jobs.cc entity.cc map.cc mesh.cc terrain.cc tree.cc scene.cc water.cc vertex_array.cc cg.cc antapp.cc glsl.cc scenenode.cc entptr.cc height_map.cc renderer.cc ant_config.cc new_decal.cc mesh_optimizer.cc mesh_data.cc ant_serial.cc minimap.cc
 
 libantargis_la_SOURCES = $(realsrc_h) $(realsrc_cc) antargisruby.cc antargisruby.h
 
@@ -112,9 +113,9 @@ libantargis_la_LDFLAGS =
 libantargis_la_LIBADD = 
 libantargis_la_OBJECTS =  anim_mesh.lo smoke.lo jobs.lo entity.lo map.lo \
 mesh.lo terrain.lo tree.lo scene.lo water.lo vertex_array.lo cg.lo \
-antapp.lo glsl.lo scenenode.lo rubyobj.lo entptr.lo height_map.lo \
-renderer.lo ant_config.lo new_decal.lo mesh_optimizer.lo mesh_data.lo \
-ant_serial.lo minimap.lo antargisruby.lo
+antapp.lo glsl.lo scenenode.lo entptr.lo height_map.lo renderer.lo \
+ant_config.lo new_decal.lo mesh_optimizer.lo mesh_data.lo ant_serial.lo \
+minimap.lo antargisruby.lo
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -136,9 +137,9 @@ DEP_FILES =  .deps/anim_mesh.P .deps/ant_config.P .deps/ant_serial.P \
 .deps/antapp.P .deps/antargisruby.P .deps/cg.P .deps/entity.P \
 .deps/entptr.P .deps/glsl.P .deps/height_map.P .deps/jobs.P .deps/map.P \
 .deps/mesh.P .deps/mesh_data.P .deps/mesh_optimizer.P .deps/minimap.P \
-.deps/new_decal.P .deps/renderer.P .deps/rubyobj.P .deps/scene.P \
-.deps/scenenode.P .deps/smoke.P .deps/terrain.P .deps/tree.P \
-.deps/vertex_array.P .deps/water.P
+.deps/new_decal.P .deps/renderer.P .deps/scene.P .deps/scenenode.P \
+.deps/smoke.P .deps/terrain.P .deps/tree.P .deps/vertex_array.P \
+.deps/water.P
 SOURCES = $(libantargis_la_SOURCES)
 OBJECTS = $(libantargis_la_OBJECTS)
 
@@ -403,8 +404,8 @@ mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
-nantmarker.hh: $(realsrc_h) createmarker.rb
-	./createmarker.rb $(realsrc_h)
+nantmarker.hh: $(realsrc_h) createmarker.rb $(ANTGUI_INC)
+	./createmarker.rb $(realsrc_h) $(ANTGUI_INC)
 
 antargisruby.cc: interface.i *.h /usr/local/include/antargisgui/*.h marker.i nantmarker.hh
 	$(SWIGCOMPILE) -o antargisruby.cc interface.i

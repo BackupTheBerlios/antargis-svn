@@ -2,7 +2,7 @@
 #define _SCENE_NODE_H
 
 #include <ag_triangle.h>
-#include <rubyobj.h>
+#include <ag_rubyobj.h>
 
 class Scene;
 
@@ -15,7 +15,7 @@ class Scene;
 #define PARTICLE_Z 7
 
 
-class SceneNode:public RubyObject
+class SceneNode:public AGRubyObject
 {
  public:
   SceneNode();

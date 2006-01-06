@@ -7,17 +7,42 @@ MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
   mSurface(r.width(),r.height())
 {
   mScene=0;
+  mTexture=getTextureManager()->makeTexture(mSurface);
   mapChanged();
 }
   
 void MiniMap::mapChanged()
 {
-  AGPainter p(mSurface);
+  if(!mMap)
+    return;
   int w,h;
   int x,y;
+  bool inmem=false;
 
   w=getRect().width();
   h=getRect().height();
+
+  AGRect2 change=mMap->getChangeRect();
+  float mw=mMap->getW();
+  float mh=mMap->getH();
+
+  int x0=change.x()/mw*w;
+  int y1=change.y()/mh*h;
+  int x1=(change.x()+change.w())/mw*w;
+  int y0=(change.y()+change.h())/mh*h;
+
+  y0=h-y0;
+  y1=h-y1;
+
+  AGPainter *p=0;
+
+  if((x1-x0)*(y1-y0)>w*h/8)
+    {
+      p=new AGPainter(mSurface);
+      inmem=true;
+    }
+  else
+    p=new AGPainter(mTexture);
 
   AGVector3 light(-1,1,1);
   light.normalize();
@@ -27,10 +52,8 @@ void MiniMap::mapChanged()
   
   if(mMap)
     {
-      float mw=mMap->getW();
-      float mh=mMap->getH();
-      for(x=0;x<w;x++)
-	for(y=0;y<h;y++)
+      for(x=x0;x<x1;x++)
+	for(y=y0;y<y1;y++)
 	  {
 	    float mx=x*mw/w;
 	    float my=(1-y/float(h))*mh;
@@ -65,7 +88,7 @@ void MiniMap::mapChanged()
 	    if(mMap->getHeight(mx,my)<0)
 	      c=c*0.25+AGColor(0,0,0xFF)*0.75;
 	    
-	    p.putPixel(AGPoint(x,y),c);
+	    p->putPixel(AGPoint(x,y),c);
 	  }
     }
   else
@@ -73,11 +96,13 @@ void MiniMap::mapChanged()
       for(x=0;x<w;x++)
 	for(y=0;y<h;y++)
 	  {
-	    p.putPixel(AGPoint(x,y),AGColor(0xFF,0,0));
+	    p->putPixel(AGPoint(x,y),AGColor(0xFF,0,0));
 	  }
     }
+  delete p;
+  if(inmem)
+    mTexture=getTextureManager()->makeTexture(mSurface);
 
-  mTexture=getTextureManager()->makeTexture(mSurface);
 }
 
 void MiniMap::draw(AGPainter &p)

@@ -262,6 +262,7 @@ class AntHero<AntBoss
 # 		end
 # 	end
  	def setupMesh
+ 		#setMesh(Mesh.new(getMeshData("data/models/hero.ant",0.6),AGVector4.new(0,0,0,0),0))
  		setMesh(Mesh.new(getMeshData("data/models/hero_lp.ant2",0.08,"data/textures/models/hero_lp.png"),AGVector4.new(0,0,0,0),0))
 	end
 	def getRing

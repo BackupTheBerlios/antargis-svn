@@ -186,7 +186,8 @@ void MeshData::draw()
   glEnable(GL_ALPHA_TEST);
   glAlphaFunc(GL_GREATER,0.9);
 
-  if(mLighting)
+
+    if(mLighting)
     glEnable(GL_LIGHTING);
   else
     glDisable(GL_LIGHTING);
@@ -194,8 +195,8 @@ void MeshData::draw()
   glBindTexture(GL_TEXTURE_2D,0);
   glEnable(GL_COLOR_MATERIAL);
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-  //  glColor4f(1,1,1,1);
   
+
   if(mWithTexture)
     glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
 

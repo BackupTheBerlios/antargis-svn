@@ -11,8 +11,8 @@ if not $antargislibinited
 	# add programdir to path
 	$:.push($programDir)
 	
-	if File.exists?("src/.libs/libantargis.so")
-		require 'src/.libs/libantargis'
+	if File.exists?("libantargis.so")
+		require 'libantargis'
 	elsif File.exists?("../src/.libs/libantargis.so")
 		require '../src/.libs/libantargis'
 	else
@@ -20,7 +20,7 @@ if not $antargislibinited
 	end
 	include Libantargis
 	
-	require 'ag_tools'
+	require 'ag_tools_my.rb'
 	require 'ant_tools'
 	require 'ant_debug.rb'
 	

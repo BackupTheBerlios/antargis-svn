@@ -59,6 +59,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+ANTGUI_INC = @ANTGUI_INC@
 AR = @AR@
 AS = @AS@
 CC = @CC@

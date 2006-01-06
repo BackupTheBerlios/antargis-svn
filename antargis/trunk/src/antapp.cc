@@ -143,21 +143,10 @@ bool GLApp::eventKeyDown(const AGEvent *m)
 
 Scene &GLApp::getScene()
 {
-      return scene;
-    }
+  return scene;
+}
 
-void GLApp_markfunc(void *ptr)
+void GLApp::mark()
 {
-  if(!ptr)
-    return;
-
-  GLApp *zoo;
-
-  zoo = static_cast<GLApp*>(ptr);
-  
-  if(zoo->scene.mRubyObject)
-    rb_gc_mark(zoo->scene.mRUBY);
-  else
-    zoo->scene.mark();
-
+  markObject(&scene);
 }

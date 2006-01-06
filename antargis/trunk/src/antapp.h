@@ -22,7 +22,7 @@ class GLApp:public AGApplication
   AGVector4 camera;
   float frameTime;
   size_t frameCount;
-  //  AGLine3 line;
+
   bool mMayClick;
 
   int hx,hy,hb;
@@ -50,7 +50,7 @@ public:
 
   Scene &getScene();
 
-  friend void GLApp_markfunc(void *ptr);
+  void mark();
 };
 
 

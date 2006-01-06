@@ -41,11 +41,12 @@ void Mesh::draw()
 {
   if(!mVisible)
     return;
-  begin();
+
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_LIGHTING);
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
   glColor4fv(mColor);
+  begin();
   if(mData)
     mData->draw();
   end();

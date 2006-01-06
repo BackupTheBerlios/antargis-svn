@@ -38,11 +38,9 @@ File.open(infile).each_line{|line|
 		x,y=line.gsub("vt ","").split(" ").collect{|a|a.to_f}
 		$ts.push([x,y])
 	elsif line=~/^vn .*/ then
-		x,y,z=line.gsub("vt ","").split(" ").collect{|a|a.to_f}
-		if $swap
-			z,y=y,z
-		end
-		$ns.push([-x,y,-z])
+		a,x,y,z=line.gsub("vt ","").split(" ").collect{|a|a.to_f}
+		printf "%f,%f,%f\n",x,y,z
+		$ns.push([x,y,z])
 	elsif line=~/^f .*/ then
 		vs=line.gsub("f ","").split(" ")
 		faces=[]

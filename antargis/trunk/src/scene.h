@@ -37,7 +37,7 @@ struct Viewport
 template<class T>
 class QuadTree;
 
-class Scene:public RubyObject
+class Scene:public AGRubyObject
 {
  public:
   typedef std::vector<PickNode> PickResult;

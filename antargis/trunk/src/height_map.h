@@ -5,6 +5,7 @@
 #include <ag_triangle.h>
 #include <ag_xml.h>
 #include "entptr.h"
+#include <ag_messageobject.h>
 
 class AntEntity;
 class AntEntityPtr;
@@ -18,7 +19,7 @@ enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LAS
 
 #define FIRSTTERRAIN WATER
 
-class HeightMap:public RubyObject
+class HeightMap:public AGMessageObject
 {
  public:
   HeightMap(int w,int h);

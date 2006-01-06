@@ -36,7 +36,7 @@ class Job;
 
 #include "resource.h"
 
-class AntEntity:public RubyObject
+class AntEntity:public AGRubyObject
   {
   public:
     typedef std::list<SceneNode*> Meshes;
