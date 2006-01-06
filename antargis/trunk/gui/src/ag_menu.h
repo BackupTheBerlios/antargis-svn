@@ -24,16 +24,6 @@
 #include "ag_vtiler.h"
 #include "ag_surface.h"
 
-class AGMenuEvent:public AGEvent
-{
- public:
-  AGMenuEvent(AGListener *pListener,const std::string &pName);
-
-  std::string getName() const;
- private:
-  std::string mName;
-};
-
 class AGMenu:public AGVTiler
 {
  public:

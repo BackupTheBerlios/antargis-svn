@@ -15,8 +15,6 @@ class Terrain;
 
 enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LASTTERRAIN};
 
-//char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock","rock2"};
-
 #define FIRSTTERRAIN WATER
 
 class HeightMap:public AGMessageObject
@@ -73,14 +71,14 @@ class HeightMap:public AGMessageObject
 
   virtual void newMap(int w,int h);
 
+  AGSignal sigMapChanged;
+  AGSignal sigMapChangedComplete;
+
 
  private:
 
   void loadBinary(const std::string &pName);
   void saveBinary(const std::string &pName) const;
-
-
-
 
 
   std::vector<float> mHeights;

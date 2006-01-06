@@ -32,7 +32,7 @@ class SceneNode:public AGRubyObject
   virtual size_t getTriangles() const;
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
   virtual void sort(const AGVector4 &pCamera);
-  virtual void mapChanged();
+  //  virtual void mapChanged();
 
   bool operator==(const SceneNode &n) const;
 

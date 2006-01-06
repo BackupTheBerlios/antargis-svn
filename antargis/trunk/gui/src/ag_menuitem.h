@@ -42,7 +42,7 @@ class AGMenuItem:public AGHTiler
 
   std::string getName() const;
 
-  virtual bool eventMouseClick(const AGEvent *m);
+  virtual bool eventMouseClick(AGEvent *m);
 
   virtual void eventSelect();
   virtual void eventUnselect();
@@ -64,7 +64,7 @@ class AGSubMenu:public AGMenuItem
   virtual void eventSelect();
   virtual void eventUnselect();
 
-  virtual bool eventMouseClick(const AGEvent *m);
+  virtual bool eventMouseClick(AGEvent *m);
 
  private:
   void addChild(AGWidget*pWidget);

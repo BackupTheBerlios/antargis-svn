@@ -49,9 +49,9 @@ AGVector4 SceneNode::lineHit(const AGLine3 &pLine) const
 void SceneNode::sort(const AGVector4 &pCamera)
 {
 }
-void SceneNode::mapChanged()
+/*void SceneNode::mapChanged()
 {
-}
+}*/
 
 bool SceneNode::operator==(const SceneNode &n) const
 {

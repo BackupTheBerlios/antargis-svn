@@ -3,8 +3,6 @@
 #include "ant_serial.h"
 
 
-
-
 void serialTest()
 {
   BinaryStringOut os;
@@ -45,6 +43,8 @@ char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock"
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 
 HeightMap::HeightMap(int w,int h):
+  sigMapChanged(this,"mapChanged"),
+  sigMapChangedComplete(this,"mapChangedComplete"),
   mW(w),mH(h),mChangeRect(AGVector3(),AGVector3()),mChanges(0)
 {
   mHeights=genSomeHeights(w+2,h+2,5);

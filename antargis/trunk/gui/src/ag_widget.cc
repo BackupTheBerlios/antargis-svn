@@ -199,7 +199,7 @@ AGRect AGWidget::getClientRect() const
   return AGRect(0,0,mr.w,mr.h);
 }
 
-bool AGWidget::processEvent(const AGEvent *event)
+bool AGWidget::processEvent(AGEvent *event)
 {
   if(!mVisible)
     return false;
@@ -231,6 +231,7 @@ bool AGWidget::processEvent(const AGEvent *event)
     return processed;
   }
 
+  event->setCaller(this);
   
   // let me see if i can process it myself
   //  cdebug("going to self-processing");
@@ -277,10 +278,9 @@ bool AGWidget::eventMouseLeave()
   return false;
 }
 
-bool AGWidget::eventMouseMotion(const AGEvent *m)
+bool AGWidget::eventMouseMotion(AGEvent *e)
 {
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+  if(e->isSDLEvent())
     {
       if(getScreenRect().contains(e->getMousePosition()))
 	{
@@ -302,18 +302,17 @@ bool AGWidget::eventMouseMotion(const AGEvent *m)
       if(mButtonDown)
 	{
 	  //	  TRACE;
-	  eventDragBy(m,e->getMousePosition()-mOldMousePos);
+	  eventDragBy(e,e->getMousePosition()-mOldMousePos);
 	  mOldMousePos=e->getMousePosition();
 	}
     }
   return false;
 }
 
-bool AGWidget::eventMouseButtonDown(const AGEvent *m)
+bool AGWidget::eventMouseButtonDown(AGEvent *e)
 {
   //  CTRACE;
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+  if(e->isSDLEvent())
     {
       if(getScreenRect().contains(e->getMousePosition()))
 	{
@@ -333,24 +332,21 @@ bool AGWidget::eventMouseButtonDown(const AGEvent *m)
   return false;
 }
 
-bool AGWidget::eventMouseButtonUp(const AGEvent *m)
+bool AGWidget::eventMouseButtonUp(AGEvent *e)
 {
-  //  CTRACE;
-  //  cdebug("typeid:"<<typeid(*this).name());
   bool was=mButtonDown;
-  //  cdebug("buttonDown:"<<mButtonDown);
+
   mButtonDown=false;
   
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+  if(e->isSDLEvent())
     {
       if(getScreenRect().contains(e->getMousePosition()))
 	{
 	  if(was)
 	    {
-  
+	      e->setName("sigClick");
 	      //	      cdebug("click");
-	      eventMouseClick(m) || sigClick(m);
+	      eventMouseClick(e) || sigClick(e);
 	      //  return true; // consume
 
 	      if(canFocus())
@@ -362,7 +358,7 @@ bool AGWidget::eventMouseButtonUp(const AGEvent *m)
 
 }
 
-bool AGWidget::eventMouseClick(const AGEvent *m)
+bool AGWidget::eventMouseClick(AGEvent *m)
 {
   CTRACE;
   cdebug("name:"<<getName());
@@ -724,7 +720,7 @@ bool AGWidget::hasFocus(const AGWidget *pWidget)
 }
 
 
-bool AGWidget::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
+bool AGWidget::eventDragBy(AGEvent *event,const AGPoint &pDiff)
 {
   //  TRACE;
   return false;

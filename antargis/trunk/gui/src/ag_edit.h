@@ -80,8 +80,8 @@ class AGEdit:public AGWidget
   virtual void draw(AGPainter &p);
   virtual void drawBackground(AGPainter &p);
 
-  virtual bool eventKeyDown(const AGEvent *m);
-  virtual bool eventKeyUp(const AGEvent *m);
+  virtual bool eventKeyDown(AGEvent *m);
+  virtual bool eventKeyUp(AGEvent *m);
 
   void setMulti(bool mMultiLine);
 

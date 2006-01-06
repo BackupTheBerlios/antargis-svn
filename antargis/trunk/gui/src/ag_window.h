@@ -32,13 +32,13 @@ class AGWindow:public AGTable
 
   AGWidget *getClient();
 
-  virtual bool eventMouseButtonDown(const AGEvent *m);
-  bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
+  virtual bool eventMouseButtonDown(AGEvent *m);
+  bool eventDragBy(AGEvent *event,const AGPoint &pDiff);
 
   void close();
 
   // slot
-  bool tryClose(const std::string&pName,const AGEvent *m);
+  bool tryClose(AGEvent *m);
 
   AGRect getClientRect() const;
 

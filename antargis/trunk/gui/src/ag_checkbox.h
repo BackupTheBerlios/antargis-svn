@@ -31,7 +31,7 @@ class AGCheckBox:public AGButton
  public:
   AGCheckBox(AGWidget *pParent,AGRect pRect);
 
-  virtual bool eventMouseClick(const AGEvent *m);
+  virtual bool eventMouseClick(AGEvent *m);
 };
 
 #endif

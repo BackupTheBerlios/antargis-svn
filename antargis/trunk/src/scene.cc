@@ -511,12 +511,12 @@ void Scene::init()
   //  calcCameraView();
 }
 
-
+/*
 void Scene::mapChanged()
 {
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->mapChanged();
-}
+    }*/
 
 AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 {
@@ -733,7 +733,7 @@ AGPoint Scene::getPosition(const AGVector4 &v) const
   
 
   gluProject(v[0],v[1],v[2],modelview,projection,getViewport(),&x,&y,&z);
-  return AGPoint(x,windowHeight-y);
+  return AGPoint((int)x,((int)windowHeight-y));
 }
 
 

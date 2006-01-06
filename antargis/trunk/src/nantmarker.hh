@@ -22,18 +22,18 @@
 	result->mRubyObject=true;
 }
 %markfunc AnimMeshData "general_markfunc"
-%exception Scene::Scene {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc Scene "general_markfunc"
 %exception AnimMesh::AnimMesh {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
 %markfunc AnimMesh "general_markfunc"
+%exception Scene::Scene {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc Scene "general_markfunc"
 %exception WaterPiece::WaterPiece {
 	$action
 	result->mRUBY=self;
@@ -1198,11 +1198,6 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGMenu,b);
  $result=*b;
 }
-%typemap(directorout) AGMenuEvent {
- AGMenuEvent *b;
- Data_Get_Struct($input,AGMenuEvent,b);
- $result=*b;
-}
 %typemap(directorout) AGMenuItem {
  AGMenuItem *b;
  Data_Get_Struct($input,AGMenuItem,b);
@@ -1273,11 +1268,6 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGRubyObject,b);
  $result=*b;
 }
-%typemap(directorout) AGSDLEvent {
- AGSDLEvent *b;
- Data_Get_Struct($input,AGSDLEvent,b);
- $result=*b;
-}
 %typemap(directorout) AGScreen {
  AGScreen *b;
  Data_Get_Struct($input,AGScreen,b);
@@ -1296,6 +1286,11 @@ else if(dynamic_cast<AntMap*>(result))
 %typemap(directorout) AGSlot {
  AGSlot *b;
  Data_Get_Struct($input,AGSlot,b);
+ $result=*b;
+}
+%typemap(directorout) AGSlot0 {
+ AGSlot0 *b;
+ Data_Get_Struct($input,AGSlot0,b);
  $result=*b;
 }
 %typemap(directorout) AGSlot2 {

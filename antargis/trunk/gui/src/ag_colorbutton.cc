@@ -66,10 +66,10 @@ AGColorButton &toAGColorButton(AGWidget &pWidget)
   return dynamic_cast<AGColorButton&>(pWidget);
 }
 
-bool AGColorButton::eventMouseClick(const AGEvent *m)
+bool AGColorButton::eventMouseClick(AGEvent *e)
 {
-  const AGSDLEvent *e=dynamic_cast<const AGSDLEvent*>(m);
-  if(e)
+  //  const AGSDLEvent *e=dynamic_cast<const AGSDLEvent*>(m);
+  if(e->isSDLEvent())
     {
       AGPoint p=e->getMousePosition()-getScreenRect().getPosition();
       int gx=p.x*gridx/getRect().w;
@@ -82,7 +82,7 @@ bool AGColorButton::eventMouseClick(const AGEvent *m)
       cdebug(mColor.toString());
     }
 
-  return AGWidget::eventMouseClick(m);
+  return AGWidget::eventMouseClick(e);
 }
 
 

@@ -51,11 +51,11 @@ bool GLApp::eventFrame(float t)
   return true;
 }
 
-bool GLApp::eventMouseButtonDown(const AGEvent *m)
+bool GLApp::eventMouseButtonDown(AGEvent *e)
 {
   mMayClick=true;
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+
+  if(e->isSDLEvent())
     {
       if(e->getButton()==3)
 	{
@@ -69,16 +69,15 @@ bool GLApp::eventMouseButtonDown(const AGEvent *m)
 	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);
 	}
     }
-  return AGApplication::eventMouseButtonDown(m);
+  return AGApplication::eventMouseButtonDown(e);
 }
-bool GLApp::eventMouseButtonUp(const AGEvent *m)
+bool GLApp::eventMouseButtonUp(AGEvent *e)
 {
   omx=-1;
   omy=-1;
   if(mMayClick)
     {
-      const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-      if(e)
+      if(e->isSDLEvent())
 	{
 	  AGPoint p=e->getMousePosition();
 	  Scene::PickResult nodes=scene.pick(p.x,p.y,1,1);
@@ -86,7 +85,7 @@ bool GLApp::eventMouseButtonUp(const AGEvent *m)
 	  eventClick(nodes,e->getButton());
 	}
     }
-  return AGApplication::eventMouseButtonUp(m);
+  return AGApplication::eventMouseButtonUp(e);
 }
 
 void GLApp::eventClick(const Scene::PickResult &pNodes,int button)
@@ -98,10 +97,9 @@ void GLApp::eventHover(const Scene::PickResult &pNodes,int button)
 }
 
 
-bool GLApp::eventMouseMotion(const AGEvent *m)
+bool GLApp::eventMouseMotion(AGEvent *e)
 {
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e && omx>=0)
+  if(e->isSDLEvent() && omx>=0)
     {
       AGPoint p=e->getMousePosition();
       AGVector4 cam=scene.getCamera();
@@ -114,7 +112,7 @@ bool GLApp::eventMouseMotion(const AGEvent *m)
       omx=p.x;
       omy=p.y;
     }
-  if(e)
+  if(e->isSDLEvent())
     {
       // check hovering - delayed 
       AGPoint p=e->getMousePosition();
@@ -124,13 +122,12 @@ bool GLApp::eventMouseMotion(const AGEvent *m)
     }
 
   mMayClick=false;
-  return AGApplication::eventMouseMotion(m);
+  return AGApplication::eventMouseMotion(e);
 }
 
-bool GLApp::eventKeyDown(const AGEvent *m)
+bool GLApp::eventKeyDown(AGEvent *e)
 {
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+  if(e->isSDLEvent())
     {
       if(e->getKey()==SDLK_s)
 	{
@@ -138,7 +135,7 @@ bool GLApp::eventKeyDown(const AGEvent *m)
 	  scene.setShadow((scene.getShadow()+1)%3);
 	}
     }
-  return AGApplication::eventKeyDown(m);
+  return AGApplication::eventKeyDown(e);
 }
 
 Scene &GLApp::getScene()

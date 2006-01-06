@@ -21,6 +21,8 @@
 
 #!/usr/bin/ruby
 
+exit
+
 if not Libantargis
 	require 'libantargisgui'
 	include Libantargisgui

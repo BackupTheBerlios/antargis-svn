@@ -88,12 +88,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGWidget "general_markfunc"
-%exception RubyObject::RubyObject {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc RubyObject "general_markfunc"
 %exception AGGLWidget::AGGLWidget {
 	$action
 	result->mRUBY=self;
@@ -154,6 +148,12 @@
 	result->mRubyObject=true;
 }
 %markfunc AGMenu "general_markfunc"
+%exception AGRubyObject::AGRubyObject {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGRubyObject "general_markfunc"
 %exception AGRadio::AGRadio {
 	$action
 	result->mRUBY=self;
@@ -862,11 +862,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGMenu,b);
  $result=*b;
 }
-%typemap(directorout) AGMenuEvent {
- AGMenuEvent *b;
- Data_Get_Struct($input,AGMenuEvent,b);
- $result=*b;
-}
 %typemap(directorout) AGMenuItem {
  AGMenuItem *b;
  Data_Get_Struct($input,AGMenuItem,b);
@@ -932,9 +927,9 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGRect3,b);
  $result=*b;
 }
-%typemap(directorout) AGSDLEvent {
- AGSDLEvent *b;
- Data_Get_Struct($input,AGSDLEvent,b);
+%typemap(directorout) AGRubyObject {
+ AGRubyObject *b;
+ Data_Get_Struct($input,AGRubyObject,b);
  $result=*b;
 }
 %typemap(directorout) AGScreen {
@@ -955,6 +950,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGSlot {
  AGSlot *b;
  Data_Get_Struct($input,AGSlot,b);
+ $result=*b;
+}
+%typemap(directorout) AGSlot0 {
+ AGSlot0 *b;
+ Data_Get_Struct($input,AGSlot0,b);
  $result=*b;
 }
 %typemap(directorout) AGSlot2 {
@@ -1075,11 +1075,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) Parser {
  Parser *b;
  Data_Get_Struct($input,Parser,b);
- $result=*b;
-}
-%typemap(directorout) RubyObject {
- RubyObject *b;
- Data_Get_Struct($input,RubyObject,b);
  $result=*b;
 }
 %typemap(directorout) Uint8 {

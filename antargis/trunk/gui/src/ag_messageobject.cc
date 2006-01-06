@@ -22,12 +22,34 @@
 #include "ag_debug.h"
 
 // AGEvent
-AGEvent::AGEvent(AGListener *pCaller):mCaller(pCaller)
+AGEvent::AGEvent(AGListener *pCaller,const std::string &pName,const SDL_Event *e):mCaller(pCaller),mName(pName),mEvent(e)
 {
 }
 AGEvent::~AGEvent()
 {
 }
+
+void AGEvent::setCaller(AGListener *pCaller)
+{
+  mCaller=pCaller;
+}
+
+std::string AGEvent::getName() const
+{
+  return mName;
+}
+
+
+void AGEvent::setName(const std::string &n)
+{
+  mName=n;
+}
+
+bool AGEvent::isSDLEvent() const
+{
+  return mEvent;
+}
+
 
 AGListener *AGEvent::getCaller() const
 {
@@ -36,16 +58,15 @@ AGListener *AGEvent::getCaller() const
 
 // AGSDLEvent
 
-AGSDLEvent::AGSDLEvent(AGListener *pCaller,const SDL_Event *pEvent):AGEvent(pCaller),mEvent(pEvent)
+const SDL_Event *AGEvent::get() const
 {
-}
-const SDL_Event *AGSDLEvent::get() const
-{
+  assert(mEvent);
   return mEvent;
 }
 
-AGPoint AGSDLEvent::getMousePosition() const
+AGPoint AGEvent::getMousePosition() const
 {
+  assert(mEvent);
   AGPoint p;
   switch(mEvent->type) {
   case SDL_MOUSEMOTION:
@@ -63,18 +84,21 @@ AGPoint AGSDLEvent::getMousePosition() const
   return p;
 }
 
-SDLKey AGSDLEvent::getKey() const
+SDLKey AGEvent::getKey() const
 {
+  assert(mEvent);
   return mEvent->key.keysym.sym;
 }
 
-SDLMod AGSDLEvent::getMod() const
+SDLMod AGEvent::getMod() const
 {
+  assert(mEvent);
   return mEvent->key.keysym.mod;
 }
 
-int AGSDLEvent::getButton() const
+int AGEvent::getButton() const
 {
+  assert(mEvent);
   switch(mEvent->type) {
   case SDL_MOUSEMOTION:
     return mEvent->motion.state;
@@ -93,12 +117,13 @@ int AGSDLEvent::getButton() const
 
 // AGMouseEvent
 
+/*
 AGMouseEvent::AGMouseEvent(AGListener *pCaller,SDL_Event *pEvent):AGEvent(pCaller)
 {
 }
 AGMouseEvent::~AGMouseEvent()
 {
-}
+}*/
 
 // AGListener
 
@@ -110,7 +135,7 @@ AGListener::~AGListener()
 {
 }
 
-bool AGListener::signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller)
+bool AGListener::signal(AGEvent *m)
 {
   return false;
 }
@@ -173,28 +198,30 @@ void AGSignal::disconnect(AGCPPListener *pListener)
   mSimpleListeners.erase(pListener);
 }
 
-bool AGSignal::signal(const AGEvent *m)
+bool AGSignal::signal(AGEvent *m)
 {
+  m->setName(mName);
   std::set<AGListener*>::iterator i=mListeners.begin();
   bool value=false;
   for(;i!=mListeners.end();i++)
     {
-      if((*i)->signal(mName.c_str(),m,mCaller))
+      if((*i)->signal(m))
 	value=true;
     }
 
   std::set<AGCPPListener*>::iterator j=mSimpleListeners.begin();
   for(;j!=mSimpleListeners.end();j++)
     {
-      if((*j)->signal(mName.c_str(),m,mCaller))
+      if((*j)->signal(m))
 	value=true;
     }
 
   return value;
 }
 
-bool AGSignal::operator()(const AGEvent *m)
+bool AGSignal::operator()(AGEvent *m)
 {
+  m->setName(mName);
   return signal(m);
 }
 
@@ -240,15 +267,16 @@ void AGMessageObject::popSignal(AGSignal *pSignal)
 // 
 // exchange with a processEvent(const AGEvent &event)
 
-bool AGMessageObject::processEvent(const AGEvent* pEvent) 
+bool AGMessageObject::processEvent(AGEvent* agEvent) 
 {
+
   //  cdebug("typeid:"<<typeid(this).name());
   //  TRACE;
   //  SDL_Event e;
   bool rc=false;
 
-  const AGSDLEvent *agEvent=reinterpret_cast<const AGSDLEvent*>(pEvent);
-  if(agEvent)
+  //  const AGSDLEvent *agEvent=reinterpret_cast<const AGSDLEvent*>(pEvent);
+  if(agEvent->isSDLEvent())
     {
       const SDL_Event *event=agEvent->get();
       switch(event->type) {
@@ -258,40 +286,40 @@ bool AGMessageObject::processEvent(const AGEvent* pEvent)
 	
       case SDL_KEYDOWN:
 	rc = eventKeyDown(agEvent) || sigKeyDown(agEvent);
-    break;
+	break;
     
-  case SDL_KEYUP:
-    rc = eventKeyUp(agEvent) || sigKeyUp(agEvent);
-    break;
-    
-  case SDL_MOUSEMOTION:
-    rc = eventMouseMotion(agEvent) || sigMouseMotion(agEvent);
-    break;
-    
-  case SDL_MOUSEBUTTONDOWN:
-    rc = eventMouseButtonDown(agEvent) || sigMouseButtonDown(agEvent);
-    break;
-    
-  case SDL_MOUSEBUTTONUP:
-    rc = eventMouseButtonUp(agEvent) || sigMouseButtonUp(agEvent);
-    break;
-    
-  case SDL_QUIT:
-    rc = eventQuit(agEvent) || sigQuit(agEvent);
-    break;
-    
-  case SDL_SYSWMEVENT:
-    rc = eventSysWM(agEvent) || sigSysWM(agEvent);
-    break;
-    
-  case SDL_VIDEORESIZE:
-    rc = eventResize(agEvent) || sigVideoResize(agEvent);
-    break;
-    
-  default:
-    rc = false;
-    break;
-  }
+      case SDL_KEYUP:
+	rc = eventKeyUp(agEvent) || sigKeyUp(agEvent);
+	break;
+	
+      case SDL_MOUSEMOTION:
+	rc = eventMouseMotion(agEvent) || sigMouseMotion(agEvent);
+	break;
+	
+      case SDL_MOUSEBUTTONDOWN:
+	rc = eventMouseButtonDown(agEvent) || sigMouseButtonDown(agEvent);
+	break;
+	
+      case SDL_MOUSEBUTTONUP:
+	rc = eventMouseButtonUp(agEvent) || sigMouseButtonUp(agEvent);
+	break;
+	
+      case SDL_QUIT:
+	rc = eventQuit(agEvent) || sigQuit(agEvent);
+	break;
+	
+      case SDL_SYSWMEVENT:
+	rc = eventSysWM(agEvent) || sigSysWM(agEvent);
+	break;
+	
+      case SDL_VIDEORESIZE:
+	rc = eventResize(agEvent) || sigVideoResize(agEvent);
+	break;
+	
+      default:
+	rc = false;
+	break;
+      }
     }
   
   return rc;
@@ -299,43 +327,43 @@ bool AGMessageObject::processEvent(const AGEvent* pEvent)
 
 
 
-bool AGMessageObject::eventActive(const AGEvent *m)
+bool AGMessageObject::eventActive(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventKeyDown(const AGEvent *m)
+bool AGMessageObject::eventKeyDown(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventKeyUp(const AGEvent *m)
+bool AGMessageObject::eventKeyUp(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventMouseMotion(const AGEvent *m)
+bool AGMessageObject::eventMouseMotion(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventMouseButtonDown(const AGEvent *m)
+bool AGMessageObject::eventMouseButtonDown(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventMouseButtonUp(const AGEvent *m)
+bool AGMessageObject::eventMouseButtonUp(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventQuit(const AGEvent *m)
+bool AGMessageObject::eventQuit(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventQuitModal(const AGEvent *m)
+bool AGMessageObject::eventQuitModal(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventSysWM(const AGEvent *m)
+bool AGMessageObject::eventSysWM(AGEvent *m)
 {
   return false;
 }
-bool AGMessageObject::eventResize(const AGEvent *m)
+bool AGMessageObject::eventResize(AGEvent *m)
 {
   return false;
 }
@@ -359,12 +387,13 @@ bool AGMessageObject::acceptEvent(const SDL_Event *pEvent)
   return true;
 }
 
-AGEvent *newEvent(AGListener *pCaller,const SDL_Event*s)
+AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s)
 {
-  return new AGSDLEvent(pCaller,s);
+  return new AGEvent(pCaller,pName,s);
 }
 
-AGSDLEvent &toAGSDLEvent(AGEvent &e)
+/*AGSDLEvent &toAGSDLEvent(AGEvent &e)
 {
   return dynamic_cast<AGSDLEvent&>(e);
 }
+*/

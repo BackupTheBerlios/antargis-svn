@@ -103,7 +103,7 @@ bool AGApplication::doEvent(const SDL_Event* event)
   // eat up old mouse motion events
   while(SDL_PeepEvents(&e, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0);
   
-  AGEvent *message=newEvent(this,event);
+  AGEvent *message=newEvent(this,"",event);
   bool processed=false;
   if(mainWidget)
     processed=mainWidget->processEvent(message);
@@ -125,7 +125,7 @@ void AGApplication::flushEventQueue()
 {
 }
  
-bool AGApplication::eventQuit(const AGEvent *m)
+bool AGApplication::eventQuit(AGEvent *m)
 {
   mRunning=false;
   return false;
@@ -155,10 +155,9 @@ void AGApplication::tryQuit()
   
 }
 
-bool AGApplication::eventKeyDown(const AGEvent *m2)
+bool AGApplication::eventKeyDown(AGEvent *m)
 {
-  const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
-  if(m)
+  if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();
       SDLMod mod=m->getMod();

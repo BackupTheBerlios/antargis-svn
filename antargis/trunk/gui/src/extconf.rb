@@ -110,3 +110,4 @@ mf.puts "go"
 mf.close
 
 
+system("touch swig.cc")

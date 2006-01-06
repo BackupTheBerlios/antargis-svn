@@ -21,8 +21,10 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisgui'
-include Libantargisgui
+if not Libantargis
+	require 'libantargisgui'
+	include Libantargisgui
+end
 #
 # EVENT_HANDLERS
 #
@@ -52,7 +54,37 @@ module AGHandler
 		end
 	end
 	# event dispatcher
-	def signal(name,event,caller)
+	
+	def signal(e)
+		@handlers||={}
+		callerName=e.getCaller.getName
+		evName=callerName+":"+e.getName
+		dputs "EVNAME",evName
+		#dputs @handlers.keys.join(";")
+		
+		if @handlers.has_key?(evName) then
+			value=false
+			@handlers[evName].each{|handler|
+				m=method(handler)
+				if m.arity==1
+					# ok
+					if self.send(handler,e)
+						value=true
+					end
+				elsif m.arity==0
+					if self.send(handler)
+						value=true
+					end
+				else
+					raise "SLOT is invalid! event:"+evName+" slotname:"+handler.to_s+" in class:"+(self.class).to_s
+				end
+			}
+			return value
+		end
+		return super(e)
+	end
+	
+	def signalOld(name,event,caller)
 		if not defined? @handlers then
 			@handlers={}
 		end

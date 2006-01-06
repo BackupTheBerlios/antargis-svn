@@ -373,16 +373,17 @@ class AntButtonPanel<AGWidget
 		end
 	end
 	
-	def sigJobSelected(ename,cname,event,caller)
-		@job=cname
+	def sigJobSelected(e)
+		
+		@job=e.getCaller.getName
 		
 		if @job=="doDismiss" then
 			$antView.doDismiss
 		end
 		return true
 	end
-	def sigAggSelected(ename,cname,event,caller)
-		@agg=@aggButtons[cname]
+	def sigAggSelected(e)
+		@agg=@aggButtons[e.getCaller.getName]
 		return true
 	end
 	

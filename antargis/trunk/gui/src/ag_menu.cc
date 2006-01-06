@@ -100,7 +100,7 @@ void AGMenu::eventItemSelected(const std::string &pString)
 }
 void AGMenu::eventItemClicked(const std::string &pString)
 {
-  sigSelected(new AGMenuEvent(this,pString));
+  sigSelected(new AGEvent(this,pString));
   
   AGMenuItem *mi=dynamic_cast<AGMenuItem*>(getParent());
   if(mi)
@@ -111,14 +111,4 @@ void AGMenu::eventItemClicked(const std::string &pString)
     }
   hide();
   cdebug("hide");
-}
-
-AGMenuEvent::AGMenuEvent(AGListener *pListener,const std::string &pName):
-  AGEvent(pListener),mName(pName)
-{
-}
-
-std::string AGMenuEvent::getName() const
-{
-  return mName;
 }

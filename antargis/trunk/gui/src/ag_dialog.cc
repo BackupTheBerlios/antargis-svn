@@ -38,17 +38,17 @@ AGDialog::AGDialog(AGWidget *pgParent,const std::string &pXMLData):
   
 }
 
-bool AGDialog::eventOk(const std::string&pName,const AGEvent *event,AGMessageObject *pCaller)
+bool AGDialog::eventOk(AGEvent *event)
 {
   CTRACE;
   return false;
 }
-bool AGDialog::eventCancel(const std::string&pName,const AGEvent *event,AGMessageObject *pCaller)
+bool AGDialog::eventCancel(AGEvent *event)
 {
   CTRACE;
   return false;
 }
-bool AGDialog::eventClose(const std::string&pName,const AGEvent *event,AGMessageObject *pCaller)
+bool AGDialog::eventClose(AGEvent *event)
 {
   CTRACE;
   return false;

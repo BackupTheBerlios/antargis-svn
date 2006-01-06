@@ -71,7 +71,7 @@ class AntRubyEditView<GLApp
 		
 		addHandler(@layout.getChild("new"),:sigClick,:sigNewMap)
 		@buttonlayout=@layout
-		sigTabSelect("terrain")
+		setTab("terrain")
 	end
 	
 	def sigNewMap
@@ -109,8 +109,7 @@ class AntRubyEditView<GLApp
 		end
 	end
 	
-	
-	def sigTabSelect(name)
+	def setTab(name)
 		["terrain","entities"].each{|e|
 			if e==name
 				w=@buttonlayout.getChild(e+"Tab")
@@ -124,6 +123,10 @@ class AntRubyEditView<GLApp
 				end
 			end
 		}
+	end
+	
+	def sigTabSelect(e)
+		setTab(e.getCaller.getName)
 	end
 		
 	def eventClick(list,button)
@@ -216,7 +219,9 @@ class AntRubyEditView<GLApp
 						if dx>=0 and dx<=@map.getW and dy>=0 and dy<=@map.getH
 							d=Math::sqrt((dx-x)**2+(dy-y)**2)
 							v=1-(d/(@size))
+							puts v,v.class
 							v=[[0,v].max,1].min
+							dputs dx,dx.class,dy,dy.class,tt,tt.class
 							ov=@map.getTerrain(dx,dy,tt)
 							cv=[ov+v*h,1].min
 							@map.setTerrain(dx,dy,tt,cv)
@@ -230,20 +235,21 @@ class AntRubyEditView<GLApp
 		}
 	end
 	
-	def sigSelectEdit(name)
+	def sigSelectEdit(e)
+		name=e.getCaller.getName
 		if name=="editHeight"
-			@modifier=name
+			@modifier=e.getCaller.getName
 		else
 			@modifier="editTerrain"
-			@terrainType=name
+			@terrainType=e.getCaller.getName
 		end
 	end
 	
-	def sigSize(name)
-		@size=name[4..10].to_i
+	def sigSize(e)
+		@size=e.getCaller.getName[4..10].to_i
 	end
-	def sigHard(name)
-		@hard=name[4..10].to_i
+	def sigHard(e)
+		@hard=e.getCaller.getName[4..10].to_i
 	end
 	
 	def sigPointer
@@ -254,7 +260,8 @@ class AntRubyEditView<GLApp
 		@modifier="doRubber"
 	end
 	
-	def sigAddEnt(name,callerName,event,caller)
+	def sigAddEnt(e)
+		callerName=e.getCaller.getName
 		@modifier="addEntity"
 		case callerName
 			when "grassGreen"
@@ -287,7 +294,8 @@ class AntRubyEditView<GLApp
 				@type=AntNewTree
 		end
 	end
-	def sigDeco(name,callerName,event,caller)
+	def sigDeco(e)
+		callerName=e.getCaller.getName
 		@modifier="addEntity"
 		if callerName=="coach"
 			@type=AntDecoMesh

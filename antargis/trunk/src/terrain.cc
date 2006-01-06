@@ -143,6 +143,9 @@ Terrain::Terrain(HeightMap &map):
   mMap(&map)
 {
   init();
+
+  map.sigMapChanged.connect(slot(this,&Terrain::slotMapChanged));
+  map.sigMapChangedComplete.connect(slot(this,&Terrain::slotMapChangedComplete));
 }
 
 void Terrain::init()
@@ -221,4 +224,15 @@ AGTexture *Terrain::get3dTexture()
 AGTexture *Terrain::getGrassTexture()
 {
   return &mGrass;
+}
+
+bool Terrain::slotMapChanged(AGEvent *e)
+{
+  mapChanged();
+  return false;
+}
+bool Terrain::slotMapChangedComplete(AGEvent *e)
+{
+  mapChangedComplete();
+  return false;
 }

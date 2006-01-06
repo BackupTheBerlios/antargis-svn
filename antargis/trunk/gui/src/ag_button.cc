@@ -139,14 +139,13 @@ bool AGButton::eventMouseLeave()
 }
 
 
-bool AGButton::eventMouseButtonDown(const AGEvent *m)
+bool AGButton::eventMouseButtonDown(AGEvent *e)
 {
   if(!mEnabled)
     return false;
 
   // CTRACE;
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+  if(e->isSDLEvent())
     {
       //      cdebug(getScreenRect());
       if(getScreenRect().contains(e->getMousePosition()))
@@ -155,20 +154,20 @@ bool AGButton::eventMouseButtonDown(const AGEvent *m)
 	  //  ccdebug("Pressed");
 	  //	  sigClick(m);
 	  //	  cdebug(getName());
-	  AGWidget::eventMouseButtonDown(m); // let it get the buttondown-info
+	  AGWidget::eventMouseButtonDown(e); // let it get the buttondown-info
 
 	  return true;// FIXME:TEST false; // events only get eaten if in window
 	}
     }
-  return AGWidget::eventMouseButtonDown(m);
+  return AGWidget::eventMouseButtonDown(e);
 }
 
-bool AGButton::eventMouseButtonUp(const AGEvent *m)
+bool AGButton::eventMouseButtonUp(AGEvent *e)
 {
   if(!mEnabled)
     return false;
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+
+  if(e->isSDLEvent())
     {
       if(getScreenRect().contains(e->getMousePosition()))
 	{
@@ -185,7 +184,7 @@ bool AGButton::eventMouseButtonUp(const AGEvent *m)
 	    mState=NORMAL;
 	}
     }
-  return AGWidget::eventMouseButtonUp(m);
+  return AGWidget::eventMouseButtonUp(e);
 }
 
 void AGButton::setWidth(int w)

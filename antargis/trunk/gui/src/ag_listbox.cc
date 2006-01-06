@@ -96,10 +96,9 @@ std::string AGListBox::getSelectedValue() const
   return "";
 }
 
-bool AGListBox::eventKeyDown(const AGEvent *m2)
+bool AGListBox::eventKeyDown(AGEvent *m)
 {
-  const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
-  if(m)
+  if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();
       if(k==SDLK_UP)
@@ -123,19 +122,19 @@ bool AGListBox::eventKeyDown(const AGEvent *m2)
 	  return true;
 	}
     }
-  return AGWidget::eventKeyDown(m2);
+  return AGWidget::eventKeyDown(m);
 }
 
 
 void AGListBox::arrange()
 {
-  int y,y2=0;
+  size_t y,y2=0;
   
   // first clear all
   for(y=0;y<mEdits.size();y++)
     mEdits[y]->setText("");
 
-  for(y=mY,y2=0;y<mY+mHeight && y<mItems.size();y++,y2++)
+  for(y=mY,y2=0;y<(size_t)(mY+mHeight) && y<mItems.size();y++,y2++)
     mEdits[y2]->setText(mItems[y].value);
 }
 
@@ -143,7 +142,7 @@ void AGListBox::draw(AGPainter &p)
 {
   mBackground.draw(p);
   AGPainter p2(p);
-  if(mSelected>=0 && mSelected<mItems.size())
+  if(mSelected>=0 && mSelected<(int)mItems.size())
     {
       int y=mSelected-mY;
       
@@ -154,11 +153,10 @@ void AGListBox::draw(AGPainter &p)
   AGWidget::draw(p);
 }
 
-bool AGListBox::eventMouseClick(const AGEvent *m)
+bool AGListBox::eventMouseClick(AGEvent *e)
 {
   CTRACE;
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
-  if(e)
+  if(e->isSDLEvent())
     {
       AGPoint p=e->getMousePosition();
 

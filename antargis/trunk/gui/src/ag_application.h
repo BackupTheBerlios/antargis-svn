@@ -37,8 +37,8 @@ class AGApplication:public AGMessageObject
   // called after drawing - so before event handling
   virtual bool eventFrameEnd(float pTime);
 
-  virtual bool eventQuit(const AGEvent *m);
-  virtual bool eventKeyDown(const AGEvent *m2);
+  virtual bool eventQuit(AGEvent *m);
+  virtual bool eventKeyDown(AGEvent *m2);
 
   virtual void eventChangedRes();
 

@@ -47,13 +47,13 @@ class AGListBox:public AGWidget
   std::string getSelectedID() const;
   std::string getSelectedValue() const;
 
-  virtual bool eventKeyDown(const AGEvent *m);
+  virtual bool eventKeyDown(AGEvent *m);
 
   AGSignal sigSelect;
   AGSignal sigDoubleClick;
 
   virtual void draw(AGPainter &p);
-  virtual bool eventMouseClick(const AGEvent *m);
+  virtual bool eventMouseClick(AGEvent *m);
 
   void clearList();
 

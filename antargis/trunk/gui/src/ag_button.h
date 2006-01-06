@@ -51,8 +51,8 @@ class AGButton:public AGWidget
   virtual bool eventMouseEnter();
   virtual bool eventMouseLeave();
 
-  virtual bool eventMouseButtonDown(const AGEvent *m);
-  virtual bool eventMouseButtonUp(const AGEvent *m);
+  virtual bool eventMouseButtonDown(AGEvent *m);
+  virtual bool eventMouseButtonUp(AGEvent *m);
 
   virtual void setWidth(int w);
   virtual void setHeight(int w);

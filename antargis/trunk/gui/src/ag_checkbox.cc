@@ -35,7 +35,7 @@ AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect pRect):
   adaptHeightFromChildren();*/
 }
 
-bool AGCheckBox::eventMouseClick(const AGEvent *m)
+bool AGCheckBox::eventMouseClick(AGEvent *m)
 {
   CTRACE;
   setChecked(!isChecked());

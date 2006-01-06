@@ -112,7 +112,7 @@ void AGMenuItem::eventUnselect()
 {
 }
 
-bool AGMenuItem::eventMouseClick(const AGEvent *m)
+bool AGMenuItem::eventMouseClick(AGEvent *m)
 {
   cdebug("bool AGMenuItem::eventMouseClick(const AGEvent *m)");
   AGMenu *me=dynamic_cast<AGMenu*>(getParent());
@@ -164,7 +164,7 @@ void AGSubMenu::eventUnselect()
   getMenu()->hide();
 }
 
-bool AGSubMenu::eventMouseClick(const AGEvent *m)
+bool AGSubMenu::eventMouseClick(AGEvent *m)
 {
   return false;
 }

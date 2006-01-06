@@ -354,12 +354,12 @@ void AGEdit::drawBackground(AGPainter &p)
   //    p.tile(mBackground,getRect());
 }
 
-bool AGEdit::eventKeyUp(const AGEvent *m2)
+bool AGEdit::eventKeyUp(AGEvent *m)
 {
   if(!mMutable)
     return false;
-  const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
-  if(m)
+  //  const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
+  if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();
       //      char ins=0;
@@ -379,14 +379,14 @@ bool AGEdit::eventKeyUp(const AGEvent *m2)
     }
   return false;
 }
-bool AGEdit::eventKeyDown(const AGEvent *m2)
+bool AGEdit::eventKeyDown(AGEvent *m)
 {
   if(!mMutable)
     return false;
   if(!hasFocus())
     return false;
-  const AGSDLEvent *m=reinterpret_cast<const AGSDLEvent*>(m2);
-  if(m)
+
+  if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();
       char ins=0;

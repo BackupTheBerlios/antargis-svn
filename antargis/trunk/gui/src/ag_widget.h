@@ -47,14 +47,14 @@ class AGWidget:public AGMessageObject
   virtual bool eventShow();
   virtual bool eventHide();
 
-  virtual bool eventMouseMotion(const AGEvent *m);
+  virtual bool eventMouseMotion(AGEvent *m);
 
   virtual bool eventMouseEnter();
   virtual bool eventMouseLeave();
-  virtual bool eventMouseClick(const AGEvent *m);
+  virtual bool eventMouseClick(AGEvent *m);
 
-  virtual bool eventMouseButtonDown(const AGEvent *m);
-  virtual bool eventMouseButtonUp(const AGEvent *m);
+  virtual bool eventMouseButtonDown(AGEvent *m);
+  virtual bool eventMouseButtonUp(AGEvent *m);
 
   virtual bool eventGotFocus();
   virtual bool eventLostFocus();
@@ -63,7 +63,7 @@ class AGWidget:public AGMessageObject
 
   //  void setMenu(AGMenu *pMenu);
 
-  bool processEvent(const AGEvent *event);
+  bool processEvent(AGEvent *event);
 
   AGSignal sigMouseEnter;
   AGSignal sigMouseLeave;
@@ -112,7 +112,7 @@ class AGWidget:public AGMessageObject
   void gainCompleteFocus(AGWidget *pWidget=0);
 
 
-  virtual bool eventDragBy(const AGEvent *event,const AGPoint &pDiff);
+  virtual bool eventDragBy(AGEvent *event,const AGPoint &pDiff);
 
   bool getFocus() const;
   bool hasFocus(const AGWidget *pWidget=0);

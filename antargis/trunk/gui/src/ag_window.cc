@@ -125,14 +125,13 @@ AGWidget *AGWindow::getClient()
   return mClient;
 }
 
-bool AGWindow::eventMouseButtonDown(const AGEvent *m)
+bool AGWindow::eventMouseButtonDown(AGEvent *e)
 {
   CTRACE;
-  const AGSDLEvent *e=reinterpret_cast<const AGSDLEvent*>(m);
   if(!hasFocus())
     {
       CTRACE;
-      if(e)
+      if(e->isSDLEvent())
 	if(getScreenRect().contains(e->getMousePosition()))
 	  if(getParent())
 	    {
@@ -141,16 +140,16 @@ bool AGWindow::eventMouseButtonDown(const AGEvent *m)
 	    }
     }
 
-  bool ret=AGTable::eventMouseButtonDown(m);
+  bool ret=AGTable::eventMouseButtonDown(e);
 
-  if(e)
+  if(e->isSDLEvent())
     if(getScreenRect().contains(e->getMousePosition()))
       return true; // eat - if it was here - always!!!
   return ret;
 
 }
 
-bool AGWindow::eventDragBy(const AGEvent *event,const AGPoint &pDiff)
+bool AGWindow::eventDragBy(AGEvent *event,const AGPoint &pDiff)
 {
   //  TRACE;
   setTop(top()+pDiff.y);
@@ -181,7 +180,7 @@ AGWidget *AGWindow::getTitleBar()
   return t;
 }
 
-bool AGWindow::tryClose(const std::string&pName,const AGEvent *m)
+bool AGWindow::tryClose(AGEvent *m)
 {
   TRACE;
   hide();

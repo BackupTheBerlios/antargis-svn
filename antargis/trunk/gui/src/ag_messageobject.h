@@ -34,19 +34,12 @@ class AGSignal;
 class AGEvent
 {
  public:
-  AGEvent(AGListener *pCaller);
+  AGEvent(AGListener *pCaller,const std::string &pName,const SDL_Event *pEvent=0);
   virtual ~AGEvent();
 
   AGListener *getCaller() const;
- private:
-  AGListener *mCaller;
-};
-
-class AGSDLEvent:public AGEvent
-{
-  const SDL_Event *mEvent;
- public:
-  AGSDLEvent(AGListener *pCaller,const SDL_Event *pEvent);
+  void setCaller(AGListener *pCaller);
+  std::string getName() const;
 
   AGPoint getMousePosition() const;
   SDLKey getKey() const;
@@ -54,15 +47,26 @@ class AGSDLEvent:public AGEvent
   int getButton() const;
 
   const SDL_Event *get() const;
+
+  bool isSDLEvent() const;
+
+  void setName(const std::string &n);
+
+ private:
+  AGListener *mCaller;
+  std::string mName;
+
+  const SDL_Event *mEvent;
 };
 
+/*
 class AGMouseEvent:public AGEvent
 {
  public:
   AGMouseEvent(AGListener *pCaller,SDL_Event *pEvent);
   ~AGMouseEvent();
 };
-
+*/
 class AGMessageObject;
 
 
@@ -71,7 +75,7 @@ class AGListener:public AGRubyObject
  public:
   AGListener();
   virtual ~AGListener();
-  virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller);
+  virtual bool signal(AGEvent *m);
   
 };
 
@@ -79,10 +83,33 @@ class AGCPPListener
 {
  public:
   virtual ~AGCPPListener();
-  virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller) const=0;
+  virtual bool signal(AGEvent *m) const=0;
 };
 
 
+template<class T>
+class AGSlot0:public AGCPPListener
+{
+ public:
+  typedef bool (T::*FKT)(AGEvent *m);
+  T *base;
+  FKT f;
+  
+  AGSlot0(T *pBase,FKT pF):
+    base(pBase),f(pF)
+    {
+    }
+    virtual ~AGSlot0()
+      {
+      }
+
+    virtual bool signal(AGEvent *m) const
+    {
+      return (base->*f)(m);
+    }
+};
+
+/*
 template<class T>
 class AGSlot:public AGCPPListener
 {
@@ -99,7 +126,7 @@ class AGSlot:public AGCPPListener
       {
       }
 
-    virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *) const
+    virtual bool signal(AGEvent *m) const
     {
       return (base->*f)(pName,m);
     }
@@ -127,7 +154,7 @@ class AGSlot2:public AGCPPListener
       return (base->*f)(pName,m,pCaller);
     }
 };
-
+*/
 
 class AGSignal
 {
@@ -145,9 +172,9 @@ class AGSignal
   void connect(AGCPPListener *pListener);
   void disconnect(AGCPPListener *pListener);
 
-  bool signal(const AGEvent *m);
+  bool signal(AGEvent *m);
 
-  bool operator()(const AGEvent *m);
+  bool operator()(AGEvent *m);
  private:
   std::set<AGListener*> mListeners;
 
@@ -163,22 +190,22 @@ class AGMessageObject:public AGListener
   AGMessageObject();
   virtual ~AGMessageObject();
 
-  bool processEvent(const AGEvent *pEvent);
+  bool processEvent(AGEvent *pEvent);
 
   virtual bool acceptEvent(const SDL_Event *pEvent);
 
 
   // event handler
-  virtual bool eventActive(const AGEvent *m);
-  virtual bool eventKeyDown(const AGEvent *m);
-  virtual bool eventKeyUp(const AGEvent *m);
-  virtual bool eventMouseMotion(const AGEvent *m);
-  virtual bool eventMouseButtonDown(const AGEvent *m);
-  virtual bool eventMouseButtonUp(const AGEvent *m);
-  virtual bool eventQuit(const AGEvent *m);
-  virtual bool eventQuitModal(const AGEvent *m);
-  virtual bool eventSysWM(const AGEvent *m);
-  virtual bool eventResize(const AGEvent *m);
+  virtual bool eventActive(AGEvent *m);
+  virtual bool eventKeyDown(AGEvent *m);
+  virtual bool eventKeyUp(AGEvent *m);
+  virtual bool eventMouseMotion(AGEvent *m);
+  virtual bool eventMouseButtonDown(AGEvent *m);
+  virtual bool eventMouseButtonUp(AGEvent *m);
+  virtual bool eventQuit(AGEvent *m);
+  virtual bool eventQuitModal(AGEvent *m);
+  virtual bool eventSysWM(AGEvent *m);
+  virtual bool eventResize(AGEvent *m);
 
   virtual Uint8 getButtonState() const;
   virtual AGPoint getMousePosition() const;
@@ -206,8 +233,8 @@ class AGMessageObject:public AGListener
 };
 
 
-AGEvent *newEvent(AGListener *pCaller,const SDL_Event*s);
-
+AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s);
+/*
 template<class T>
 AGCPPListener *slot(T *base,bool (T::*f)(const std::string&,const AGEvent *))
 {
@@ -219,7 +246,11 @@ AGCPPListener *slot(T *base,bool (T::*f)(const std::string&,const AGEvent *,AGMe
 {
   return new AGSlot2<T>(base,f);
 }
+*/
 
-AGSDLEvent &toAGSDLEvent(AGEvent &e);
-
+template<class T>
+AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))
+{
+  return new AGSlot0<T>(base,f);
+}
 #endif

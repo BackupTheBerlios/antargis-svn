@@ -71,7 +71,7 @@ class Scene:public AGRubyObject
   PickResult pick(float x,float y,float w,float h);
 
   // Antargis-Map-extension
-  void mapChanged();
+  //  void mapChanged();
 
   size_t getTriangles() const;
 

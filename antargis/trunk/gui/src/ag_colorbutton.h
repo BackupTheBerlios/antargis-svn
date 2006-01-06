@@ -36,7 +36,7 @@ class AGColorButton:public AGWidget
   void setColor(const AGColor &c);
   void setColor(int x,int y,const AGColor &c);
 
-  virtual bool eventMouseClick(const AGEvent *m);
+  virtual bool eventMouseClick(AGEvent *m);
 
  private:
   int gridx,gridy;

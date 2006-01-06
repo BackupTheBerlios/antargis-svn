@@ -20,7 +20,7 @@ if not $antargislibinited
 	end
 	include Libantargis
 	
-	require 'ag_tools_my.rb'
+	require 'gui/data/ag_tools.rb'
 	require 'ant_tools'
 	require 'ant_debug.rb'
 	

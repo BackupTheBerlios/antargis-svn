@@ -43,10 +43,10 @@ public:
   virtual void eventClick(const Scene::PickResult &pNodes,int button);
   virtual void eventHover(const Scene::PickResult &pNodes,int button);
 
-  virtual bool eventMouseButtonDown(const AGEvent *m);
-  virtual bool eventMouseButtonUp(const AGEvent *m);
-  virtual bool eventMouseMotion(const AGEvent *m);
-  virtual bool eventKeyDown(const AGEvent *m);
+  virtual bool eventMouseButtonDown(AGEvent *m);
+  virtual bool eventMouseButtonUp(AGEvent *m);
+  virtual bool eventMouseMotion(AGEvent *m);
+  virtual bool eventKeyDown(AGEvent *m);
 
   Scene &getScene();
 
