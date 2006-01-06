@@ -99,19 +99,19 @@ class AntGameApp <AntRubyView
 	end
 	
 	# signals	
-	def sigQuit(eventName,callerName,event,caller)
-		puts "pCaller:"+callerName
+	def sigQuit(e)
+		#puts "pCaller:"+callerName
 		#tryQuit
 		@layout.addChild(AntQuitDialog.new(@layout))
 	end
-	def sigPause(eventName,callerName,event,caller)
+	def sigPause(e)
 		if not getMap().paused then
 			@layout.addChild(AntPauseDialog.new(@layout))
 		else
 			getMap().unpause
 		end
 	end
-	def sigOptions(ename,cname,ev,c)
+	def sigOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
 	end
 	
@@ -134,7 +134,8 @@ def startGame(file="savegames/savegame0.antlvl")
 	GC.start
 end
 puts ENV["_"]
-if ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/
+#exit
+if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/)
 	savegame="levels/level1.antlvl"
 	if ARGV.length>0
 		savegame="levels/"+ARGV[0]+".antlvl"

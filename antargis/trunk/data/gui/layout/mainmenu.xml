@@ -7,7 +7,7 @@
 		<rowsize row="2" relative="1"/>
 		<rowsize row="3" fixed="34"/>
 		<!--<button col="0" row="0" caption-image="antargisLogo.png" enabled="false"/>-->
-		<image col="0" row="0" filename="antargisLogo.png" enabled="false"/>
+		<image col="0" row="0" filename="data/gui/antargisLogo.png" enabled="false"/>
 		<!--<button col="0" row="1" theme="yellowButton" enabled="false"/>-->
 		<table col="0" row="2" cols="3" rows="1">
 			<colsize col="0" relative="2"/>

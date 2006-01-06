@@ -176,7 +176,8 @@ void AGSound::checkFinished()
 	Mix_FreeMusic(mMusic);
 	mMusic=0;
 	
-	sigMp3Finished(0);
+	
+	sigMp3Finished(new AGEvent(this,"musicFinished"));
 	mMusicFinished=false;
       }
 }

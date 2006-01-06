@@ -22,6 +22,8 @@
 #!/usr/bin/ruby
 
 require 'ruby/antargislib.rb'
+$useMenu=true
+
 require "antargis.rb"
 
 class AntMenuApp <AGApplication
@@ -93,21 +95,21 @@ class AntMenuApp <AGApplication
 	
 	# Mainmenu-sigs
 	
-	def sigCredits(eventName,callerName,event,caller)
+	def sigCredits(e)
 		setMainWidget(@creditsMenu)
 	end
-	def sigCampaign(eventName,callerName,event,caller)
+	def sigCampaign(e)
 		setMainWidget(@campaignMenu)
 	end
-	def sigOptions(eventName,callerName,event,caller)
+	def sigOptions(e)
 		setMainWidget(@optionsMenu)
 	end
-	def sigQuit(eventName,callerName,event,caller)
-		puts "pCaller:"+callerName
+	def sigQuit(e)
 		tryQuit
 	end
 	
-	def sigMission(eventName,callerName,event,caller)
+	def sigMission(e)
+		callerName=e.getCaller.getName
 		puts "caller:"+callerName
 		case callerName
 			when "startWolf"
@@ -118,7 +120,7 @@ class AntMenuApp <AGApplication
 	end
 
 	# all exits to mainmenu	
-	def sigExit(eventName,callerName,event,caller)
+	def sigExit(e)
 		setMainWidget(@mainMenu)
 	end
 	def eventIdle

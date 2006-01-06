@@ -6,7 +6,7 @@
 		<rowsize row="1" fixed="30"/>
 		<rowsize row="2" relative="1"/>
 		<rowsize row="3" fixed="34"/>
-		<image col="0" row="0" filename="antargisLogo.png" enabled="false"/>
+		<image col="0" row="0" filename="data/gui/antargisLogo.png" enabled="false"/>
 		<text col="0" row="1" caption="Start campaign" align="center" font="credits.font"/>
 		<table col="0" row="2" cols="5" rows="1">
 			<colsize col="0" fixed="10"/>
@@ -32,8 +32,7 @@
 			
 			</table>
 			<table col="1" row="0" cols="1" rows="2">
-				<!--<button col="0" row="0"  enabled="false" caption-image="MainMenuBg3.png" theme="antButton"/>-->
-				<image col="0" row="0" filename="MainMenuBg3.png"/>
+				<!--<image col="0" row="0" filename="MainMenuBg3.png"/>-->
 				<text col="0" row="1" font="yellow.font" align="center" enabled="false" caption="Description"/>
 			</table>
 		</table>

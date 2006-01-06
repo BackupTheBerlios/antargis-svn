@@ -6,7 +6,7 @@
 		<rowsize row="1" fixed="30"/>
 		<rowsize row="2" relative="1"/>
 		<rowsize row="3" fixed="34"/>
-		<image col="0" row="0" filename="antargisLogo.png" enabled="false"/>
+		<image col="0" row="0" filename="data/gui/antargisLogo.png" enabled="false"/>
 		<table col="0" row="2" cols="5" rows="1">
 			<colsize col="0" fixed="10"/>
 			<colsize col="4" fixed="10"/>
