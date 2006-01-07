@@ -47,24 +47,21 @@ class Node
 
     void setName(std::string pName);
 
-    NodeVector get_children() const;
+    NodeVector getChildren() const;
 
 #ifndef SWIG
     const Node &(operator*)() const;
     const Node *(operator->)() const;
 #endif
-    NodeVector get_children(std::string pName) const;
+    NodeVector getChildren(std::string pName) const;
     
     std::string getName() const;
-    std::string get_name() const; // Compability
 
     void setAttributes(const Attributes &pAttrs);
 
-    Node &newChild(std::string pName);
+    Node &addChild(const std::string &pName);
 
-    Node *add_child(std::string n);
-
-    void remove_child(Node &n);
+    void removeChild(Node &n);
 
     iterator begin();
     const_iterator begin() const;
@@ -78,8 +75,8 @@ class Node
     std::string get(const std::string &pName) const;
     void clear();
 
-    std::string escape(const std::string &s) const;
-    std::string unescape(const std::string &s) const;
+    static std::string escape(const std::string &s);
+    static std::string unescape(const std::string &s);
 
     // dumping functions
     void getStart(std::ostringstream &s,bool complete=false) const;
@@ -92,7 +89,7 @@ class Node
     bool isTextNode() const;
     std::string getText() const;
 
-    bool hasTextNode() const;
+    bool hasTextNode() const; // me or direct children is text node
 
     size_t size() const;
 
@@ -115,17 +112,9 @@ class Document
 
     Node &root();
 
-    Node *get_root_node();
-
     std::string toString() const;
 
-    void parse_memory(const std::string &s);
-
     void parseMemory(const std::string &s);
-    
-    Document *get_document();
-
-
   };
 
 class Parser

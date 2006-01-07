@@ -89,7 +89,7 @@ void AntEntity::resourceChanged()
 
 void AntEntity::saveXML(xmlpp::Node &node) const
   {
-    Node &child=node.newChild("position");
+    Node &child=node.addChild("position");
     mPos.saveXML(child);
     node.set("energy",toString(mEnergy));
     node.set("healSpeed",toString(mHealSpeed));
@@ -105,7 +105,7 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   mHealSpeed=toFloat(node.get("healSpeed"));
   onGround=toBool(node.get("onGround"));
   assert(onGround);
-  xmlpp::Node::NodeVector v=node.get_children("position");
+  xmlpp::Node::NodeVector v=node.getChildren("position");
   xmlpp::Node::const_iterator i=v.begin();
   for(;i!=v.end();i++)
     mPos.loadXML(**i);

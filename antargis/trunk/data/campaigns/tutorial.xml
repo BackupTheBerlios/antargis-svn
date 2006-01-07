@@ -1,0 +1,8 @@
+<campaign image="data/gui/map1.png" name="Tutorial">
+	<cutscene>
+		<screen>
+			<image filename="data/gui/map1.png"/>
+		</screen>
+	</cutscene>
+	<level file="data/levels1/tutorial1.xml"/>
+</campaign>

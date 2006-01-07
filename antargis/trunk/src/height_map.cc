@@ -231,7 +231,7 @@ void HeightMap::loadXML(const Node &node)
 	  mTerrainTypes[TerrainType(i)]=std::vector<float>(mW*mH*4);
 	  cdebug(mW<<"   "<<mH);
 	  cdebug(mTerrainTypes[TerrainType(i)].size());
-	  Node::NodeVector gv=node.get_children(TerrainNames[i]);
+	  Node::NodeVector gv=node.getChildren(TerrainNames[i]);
 	  if(gv.size()==0)
 	    continue;
 	  Node &g=**gv.begin();
@@ -251,7 +251,7 @@ void HeightMap::loadXML(const Node &node)
 	}
       
       
-      Node::NodeVector hv=node.get_children("height");
+      Node::NodeVector hv=node.getChildren("height");
       
       if(hv.size()==0)// || gv.size()==0)
 	return;
@@ -326,7 +326,7 @@ void HeightMap::saveXML(Node &node) const
 	    }
 	  osh<<std::endl;
 	}
-      node.newChild("height").setContent(osh.str());
+      node.addChild("height").setContent(osh.str());
       
       for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
 	{
@@ -340,7 +340,7 @@ void HeightMap::saveXML(Node &node) const
 		}
 	      os<<std::endl;
 	    }
-	  node.newChild(TerrainNames[i]).setContent(os.str());
+	  node.addChild(TerrainNames[i]).setContent(os.str());
 	  
 	}
     }

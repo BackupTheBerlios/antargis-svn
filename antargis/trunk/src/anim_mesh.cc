@@ -162,7 +162,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
   
   cdebug("animTime:"<<animTime);
 
-  Node::NodeVector anims=root.get_children("animation");
+  Node::NodeVector anims=root.getChildren("animation");
   for(Node::NodeVector::iterator i=anims.begin();i!=anims.end();i++)
     {
       float begin=toFloat((*i)->get("begin"))-1;
@@ -178,7 +178,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
       mAnimations[(*i)->get("name")].loop=((*i)->get("loop")!="false");
 
       // parse events
-      Node::NodeVector enodes=(*i)->get_children("event");
+      Node::NodeVector enodes=(*i)->getChildren("event");
       for(Node::NodeVector::iterator j=enodes.begin();j!=enodes.end();j++)
 	{
 	  frameEvents.insert(std::make_pair(toInt((*j)->get("frame")),(*j)->get("name")));

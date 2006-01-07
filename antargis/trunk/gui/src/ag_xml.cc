@@ -72,7 +72,7 @@ void Node::setName(std::string pName)
   mName=pName;
 }
 
-Node::NodeVector Node::get_children() const
+Node::NodeVector Node::getChildren() const
   {
     return mNodes;
   }
@@ -86,7 +86,7 @@ const Node *Node::operator->() const
     return this;
   }
 
-Node::NodeVector Node::get_children(std::string pName) const
+Node::NodeVector Node::getChildren(std::string pName) const
   {
     NodeVector l;
     NodeVector::const_iterator i=mNodes.begin();
@@ -102,24 +102,15 @@ std::string Node::getName() const
   {
     return mName;
   }
-std::string Node::get_name() const
-  {
-    return mName;
-  }
 
-Node &Node::newChild(std::string pName)
+Node &Node::addChild(const std::string &pName)
 {
   Node *node=new Node(pName);
   mNodes.push_back(node);
   return *mNodes.back();
 }
 
-Node *Node::add_child(std::string n)
-{
-  return &newChild(n);
-}
-
-void Node::remove_child(Node &)
+void Node::removeChild(Node &)
 {
   std::cerr<<"Warning: everything is deleted - maybe only one should be! (in xml.cpp Node::remove_child(Node &n)"<<std::endl;
   clear();
@@ -168,13 +159,12 @@ void Node::clear()
   mName="";
 }
 
-std::string Node::escape(const std::string &s) const
+std::string Node::escape(const std::string &s)
   {
     return replace(replace(s,"\\","\\\\"),"\"","\\\"");
   }
-std::string Node::unescape(const std::string &s) const
+std::string Node::unescape(const std::string &s)
   {
-    return s;
     std::string n;
     size_t i;
     bool escape=false;
@@ -373,10 +363,11 @@ Node &Document::root()
   return *mRoot;
 }
 
-Node *Document::get_root_node()
+/*
+Node *Document::getRootNode()
 {
   return mRoot;
-}
+  }*/
 
 std::string Document::toString() const
   {
@@ -385,12 +376,12 @@ std::string Document::toString() const
     else
       return mRoot->toString();
   }
-
-void Document::parse_memory(const std::string &s)
+/*
+void Document::parseMemory(const std::string &s)
 {
   parseMemory(s);
 }
-
+*/
 
 void Document::parseMemory(const std::string &s)
 {
@@ -398,10 +389,10 @@ void Document::parseMemory(const std::string &s)
   p.parse(s,this);
 }
 
-Document *Document::get_document()
+/*Document *Document::get_document()
 {
   return this;
-}
+  }*/
 
 
 
@@ -737,34 +728,34 @@ void DomParser::simpleTag(const std::string &pName,const Node::Attributes &pAttr
 {
   if(nodes.size()==0)
     {
-      Node *n=doc->get_root_node();
+      Node &n=doc->root();
 
-      n->setName(pName);
-      n->setAttributes(pAttributes);
+      n.setName(pName);
+      n.setAttributes(pAttributes);
     }
   else
     {
       Node *p=nodes.back();
-      Node *n=p->add_child(pName);
-      n->setAttributes(pAttributes);
+      Node &n=p->addChild(pName);
+      n.setAttributes(pAttributes);
     }
 }
 void DomParser::startTag(const std::string &pName,const Node::Attributes &pAttributes)
 {
   if(nodes.size()==0)
     {
-      Node *n=doc->get_root_node();
+      Node &n=doc->root();
 
-      n->setName(pName);
-      n->setAttributes(pAttributes);
-      nodes.push_back(n);
+      n.setName(pName);
+      n.setAttributes(pAttributes);
+      nodes.push_back(&n);
     }
   else
     {
       Node *p=nodes.back();
-      Node *n=p->add_child(pName);
-      n->setAttributes(pAttributes);
-      nodes.push_back(n);
+      Node &n=p->addChild(pName);
+      n.setAttributes(pAttributes);
+      nodes.push_back(&n);
     }
 }
 void DomParser::endTag(const std::string &pName)
@@ -789,12 +780,12 @@ void DomParser::text(const std::string &pText)
 {
   if(nodes.size()>0) // ignore text otherwise
     {
-      nodes.back()->add_child("")->setContent(pText);
+      nodes.back()->addChild("").setContent(pText);
     }
 }
 void DomParser::comment(const std::string &pText)
 {
-  nodes.back()->add_child("")->setContent(std::string("<!--")+pText+std::string("-->"));
+  nodes.back()->addChild("").setContent(std::string("<!--")+pText+std::string("-->"));
 }
 void DomParser::header(const std::string &pText)
 {

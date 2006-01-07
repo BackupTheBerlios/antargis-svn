@@ -63,7 +63,7 @@ void AntMap::saveXML(xmlpp::Node &node) const
   std::list<AntEntity*>::const_iterator i=mEntities.begin();
   for(;i!=mEntities.end();i++)
     {
-      xmlpp::Node &child=node.newChild((*i)->xmlName());
+      xmlpp::Node &child=node.addChild((*i)->xmlName());
       (*i)->saveXML(child);
     }
   
@@ -240,7 +240,7 @@ void AntMap::loadMap(const std::string &pFilename)
   std::string c=loadFile(pFilename);
   if(c.length())
     {
-      d.parse_memory(c);
+      d.parseMemory(c);
       clear();
       loadXML(d.root());
     }
@@ -249,10 +249,10 @@ void AntMap::saveMap(const std::string &pFilename)
 {
   mName=pFilename;
   Document d;
-  Node *root=d.get_root_node();
-  root->setName("antargisLevel");
-  cdebug("root:"<<root);
-  saveXML(*root);
+  Node &root=d.root();
+  root.setName("antargisLevel");
+  //  cdebug("root:"<<root);
+  saveXML(root);
 
   std::string c=d.toString();
   cdebug(c);

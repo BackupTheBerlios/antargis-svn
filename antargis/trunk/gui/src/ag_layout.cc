@@ -38,7 +38,7 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
   AGWidget(pgParent,AGRect(0,0,0,0))
 {
   xmlpp::Document p;
-  p.parse_memory(pXMLData);
+  p.parseMemory(pXMLData);
 
   AGRect geom;
   std::string geomS=p.root().get("geometry");

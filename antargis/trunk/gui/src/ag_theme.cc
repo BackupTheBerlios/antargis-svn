@@ -180,7 +180,7 @@ void loadTheme(const std::string &pXML)
   AGTheme theme;
 
   xmlpp::Document p;
-  p.parse_memory(pXML);
+  p.parseMemory(pXML);
 
   xmlpp::Node n=p.root();
 
