@@ -33,8 +33,8 @@ AGMenuItem::AGMenuItem(AGWidget *pParent,const std::string &pText):
 
   //  addChild(new AGText(this,AGPoint(0,0),"X",AGFont("Arial.ttf",25))); // test
   AGSurface surface=getTheme()->getSurface("menu.item.image");//getScreen().loadSurface("/home/david/projects/oldantargis/graphics/menu_house_small.png");
-  addChild(new AGImage(this,AGPoint(0,0),surface,false));
-  addChild(new AGText(this,AGPoint(0,0),pText,font));
+  addChild(new AGImage(this,getRect().origin(),surface,false));
+  addChild(new AGText(this,getRect().origin(),pText,font));
   adaptWidthFromChildren(); // so that parent can adapt to this
   rePosition();
   adaptHeightFromChildren();
@@ -131,7 +131,7 @@ AGSubMenu::AGSubMenu(AGWidget *pParent,const std::string &pText):
   AGMenuItem(pParent,pText)
 {
   AGSurface surface2=getSurfaceManager()->loadSurface("right_arrow.png");
-  addChildBack(new AGImage(this,AGPoint(0,0),surface2,false));
+  addChildBack(new AGImage(this,getRect().origin(),surface2,false));
   adaptWidthFromChildren(); // so that parent can adapt to this
   rePosition();
 

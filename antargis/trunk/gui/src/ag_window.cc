@@ -56,14 +56,14 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
       addColumn(1.0);
       addFixedColumn(bw);
       
-      AGTable::addChild(0,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,0,bw,bw)));
-      AGTable::addChild(1,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,0,bw,bw)));
-      AGTable::addChild(2,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,0,bw,bw)));
+      AGTable::addChild(0,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,0,bw,bw)));
+      AGTable::addChild(1,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(bw,0,bw,bw)));
+      AGTable::addChild(2,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,0,bw,bw)));
       
       AGImage *i1,*i2;
       AGWidget *t;
 
-      AGTable::addChild(0,1,i1=new AGImage(this,AGPoint(0,0),s,true,AGRect(0,bw,bw,bw)));
+      AGTable::addChild(0,1,i1=new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,bw,bw,bw)));
       // title
       //      AGTable::addChild(1,1,new AGImage(this,s,AGRect(bw,0,bw,bw)));
       //      AGTable::addChild(1,1,new AGText(this,AGRect(0,0,40,20),pTitle,AGFont("Arial.ttf",14)));
@@ -71,16 +71,16 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
 
       //      t->setSurface(getTheme()->getSurface("close_button"));
 
-      AGTable::addChild(2,1,i2=new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,bw,bw,bw)));
+      AGTable::addChild(2,1,i2=new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,bw,bw,bw)));
       i1->setHeight(t->height());
       i2->setHeight(t->height());
 
-      AGTable::addChild(0,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,bw,bw,bw)));
-      AGTable::addChild(2,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,bw,bw,bw)));
+      AGTable::addChild(0,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,bw,bw,bw)));
+      AGTable::addChild(2,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,bw,bw,bw)));
       
-      AGTable::addChild(0,3,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,2*bw,bw,bw)));
-      AGTable::addChild(1,3,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,2*bw,bw,bw)));
-      AGTable::addChild(2,3,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,2*bw,bw,bw)));
+      AGTable::addChild(0,3,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,2*bw,bw,bw)));
+      AGTable::addChild(1,3,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(bw,2*bw,bw,bw)));
+      AGTable::addChild(2,3,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,2*bw,bw,bw)));
       
       AGTable::addChild(1,2,mClient=new AGCaption(this,AGRect(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
       //      AGTable::addChild(1,2,mClient=new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,bw,bw,bw)));
@@ -95,16 +95,16 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
       addColumn(1.0);
       addFixedColumn(bw);
       
-      AGTable::addChild(0,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,0,bw,bw)));
-      AGTable::addChild(1,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,0,bw,bw)));
-      AGTable::addChild(2,0,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,0,bw,bw)));
+      AGTable::addChild(0,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,0,bw,bw)));
+      AGTable::addChild(1,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(bw,0,bw,bw)));
+      AGTable::addChild(2,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,0,bw,bw)));
       
-      AGTable::addChild(0,1,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,bw,bw,bw)));
-      AGTable::addChild(2,1,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,bw,bw,bw)));
+      AGTable::addChild(0,1,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,bw,bw,bw)));
+      AGTable::addChild(2,1,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,bw,bw,bw)));
       
-      AGTable::addChild(0,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(0,2*bw,bw,bw)));
-      AGTable::addChild(1,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,2*bw,bw,bw)));
-      AGTable::addChild(2,2,new AGImage(this,AGPoint(0,0),s,true,AGRect(2*bw,2*bw,bw,bw)));
+      AGTable::addChild(0,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,2*bw,bw,bw)));
+      AGTable::addChild(1,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(bw,2*bw,bw,bw)));
+      AGTable::addChild(2,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,2*bw,bw,bw)));
       
       AGTable::addChild(1,1,mClient=new AGCaption(this,AGRect(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
       //      AGTable::addChild(1,1,mClient=new AGImage(this,AGPoint(0,0),s,true,AGRect(bw,bw,bw,bw)));

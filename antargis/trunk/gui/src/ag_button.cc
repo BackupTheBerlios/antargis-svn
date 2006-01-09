@@ -58,7 +58,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 {
   mSurface=pSurface;
-  AGImage *image=new AGImage(this,AGPoint(0,0),mSurface,false);
+  AGImage *image=new AGImage(this,getRect().origin(),mSurface,false);
   addChild(image);
   mTextW->hide();
   if(pChangeSize)

@@ -448,9 +448,15 @@ public:
     AGSurface s(0,0);
     if(filename.length())
       s=getSurfaceManager()->loadSurface(filename);
-    
 
-    AGWidget *w=new AGImage(pParent,AGPoint(toInt(pNode.get("x")),toInt(pNode.get("y"))),s,false,pRect);
+    AGRect r=pRect;
+    if(pNode.get("x").length())
+      r.x=toInt(pNode.get("x"));
+    if(pNode.get("y").length())
+      r.y=toInt(pNode.get("y"));
+
+
+    AGWidget *w=new AGImage(pParent,r,s,false,pRect);
 
     return w;
   }

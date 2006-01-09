@@ -331,6 +331,9 @@
 			</border>
 		</button>
 	</story>	
+	<story>
+		<font name='font' file="Arial.ttf" size="25" color='#DDDDDD' embossed="true" borderWidth="4" borderColor="#AA5555"/>
+	</story>
 	<text>	
 		<font name='font' file="Arial.ttf" size="17" color='#FFFFFF' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</text>

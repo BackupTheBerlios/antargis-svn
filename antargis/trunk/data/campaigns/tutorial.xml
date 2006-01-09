@@ -2,6 +2,10 @@
 	<cutscene>
 		<screen>
 			<image filename="data/gui/map1.png"/>
+			<text text="Here you learn to play the game step by step.Here you learn to play the game step by step.Here you learn to play the game step by step."/>
+		</screen>
+		<screen>
+			<text text="No image here."/>
 		</screen>
 	</cutscene>
 	<level file="data/levels1/tutorial1.xml"/>

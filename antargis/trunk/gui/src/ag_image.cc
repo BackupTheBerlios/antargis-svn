@@ -21,21 +21,15 @@
 #include "ag_image.h"
 #include "ag_debug.h"
 
-AGImage::AGImage(AGWidget *pParent,const AGPoint &p,AGSurface pSurface,bool pTile,const AGRect &pRect):
-  AGWidget(pParent,pSurface.getRect()+p),
+AGImage::AGImage(AGWidget *pParent,const AGRect &r,AGSurface pSurface,bool pTile,const AGRect &pRect):
+  AGWidget(pParent,r),
   mTexture(getTextureManager()->makeTexture(pSurface)),mTile(pTile)
 {
   //  CTRACE;
   if(pRect!=pSurface.getRect() && pRect.w!=0 && pRect.h!=0)
     {
       mSrcRect=pRect;
-      /*
-	mTexture=pSurface.getSubSurface(pRect);*/
-  //  if(mSrcRect.w==0 || mSrcRect.h==0)
-  //    mSrcRect=mTexture.getRect();
 
-    //  if(getRect()!=pRect)
-    //    {
       setHeight(pRect.h);
       setWidth(pRect.w);
     }

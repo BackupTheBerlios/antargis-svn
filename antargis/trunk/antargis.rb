@@ -148,6 +148,3 @@ if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/)
 end
 puts "huhu"
 
-def startCampaign(campaign)
-	
-end

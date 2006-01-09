@@ -126,3 +126,6 @@ module AGHandler
 	end
 end
 
+class AGApplication
+	include AGHandler
+end

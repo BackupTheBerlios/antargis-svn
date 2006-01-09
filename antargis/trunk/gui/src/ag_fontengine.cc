@@ -168,7 +168,7 @@ void border(AGSurface &s,AGColor bc)
 	AGColor c=s.getPixel(x,y);
 	AGColor n=bc;
 
-	n.a=a[y*w+x]*0xFF;
+	n.a=((Uint8)(a[y*w+x]*0xFF));
 	if(c.a>1)//0x7f)
 	  {
 	    float f=c.a/float(0xFF);
@@ -184,7 +184,8 @@ void border(AGSurface &s,AGColor bc)
 
       }
   
-
+  delete [] a;
+  delete [] b;
 }
 
 void embossSurface(AGSurface &s,float depth=1.0f)
@@ -341,8 +342,9 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
 
   pSurface->blit(t,AGRect(BaseLineX,BaseLineY,t.width(),t.height()));
     
-  if(fontCache.size()>100)
+  if(fontCache.size()>20)
     {
+      cdebug("CLEAR FONTCACHE");
       // clear font cache
       fontCache.clear();
     }

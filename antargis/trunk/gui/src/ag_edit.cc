@@ -58,13 +58,26 @@ AGFont AGEditLine::getFont() const
   return mFont;
 }
 
+#define SMALL_CHUNKS
+
 void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
 {
   int x=0;
   if(mAlign==EDIT_CENTER)
     x=(pClip.w-mFont.getWidth(mText))/2;
 
+#ifdef SMALL_CHUNKS
+  int mx=0;
+  std::vector<std::string> a=::split(" ",mText);
+  for(std::vector<std::string>::iterator i=a.begin();i!=a.end();i++)
+    {
+      //      cdebug(*i);
+      p.renderText(*i,AGPoint(pPoint.x+x+mx,pPoint.y),mFont);
+      mx+=AGFontEngine::getWidth(mFont,*i+" ");
+    }
+#else
   p.renderText(mText+(mHardEnd?"":""),AGPoint(pPoint.x+x,pPoint.y),mFont);
+#endif
 }
 
 void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c)
