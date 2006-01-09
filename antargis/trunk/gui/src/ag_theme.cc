@@ -51,7 +51,7 @@ void AGTheme::setColor(const std::string &pName,AGColor pColor)
 
 AGFont AGTheme::getFont(const std::string &pName)
 {
-  //  cdebug(pName);
+  cdebug(pName<<":"<<mFonts[pName].toString());
   if(mFonts.find(pName)==mFonts.end())
     return mFonts[trunk(pName)];
   return mFonts[pName];
@@ -160,6 +160,7 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	      AGFont f((*i)->get("file"),toInt((*i)->get("size")));
 	      f.setColor(AGColor((*i)->get("color")));
 	      f.setEmbossed((*i)->get("embossed")=="true");
+	      f.setInset((*i)->get("inset")=="true");
 	      if((*i)->get("style")=="bold")
 		f.setStyle(AGFont::BOLD);
 	      //	      if((*i)->get("borderColor"))

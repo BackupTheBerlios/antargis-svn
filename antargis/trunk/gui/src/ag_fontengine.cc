@@ -324,7 +324,12 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
 	  border(as,pFont.getBorderColor());
 	}
       if(pFont.getEmbossed())
-	embossSurface(as);
+	{
+	  if(pFont.getInset())
+	    embossSurface(as,-1);
+	  else
+	    embossSurface(as,1);
+	}
       
       AGTexture ms=getTextureManager()->makeTexture(as);
 	

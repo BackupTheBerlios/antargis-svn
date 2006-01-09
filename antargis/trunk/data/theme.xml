@@ -3,20 +3,23 @@
 	<button>
 			<border>
 				<normal>
-					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+					<image name="image" file="data/gui/buttontest3.png"/>
 				</normal>
 				<lighted>
-					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+					<image name="image" file="data/gui/buttontest3.png"/>
 				</lighted>
 				<pressed>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file="data/gui/buttontest3b.png"/>
 				</pressed>
 				<checked>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file="data/gui/buttontest3c.png"/>
 				</checked>
 				<checkedlighted>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file="data/gui/buttontest3c.png"/>
 				</checkedlighted>
+				<checkedpressed>
+					<image name="image" file="data/gui/buttontest3d.png"/>
+				</checkedpressed>
 			</border>
 			<background>
 				<normal>
@@ -35,9 +38,9 @@
 				</lighted>
 				<pressed>
 					<value name="border" value="4"/>
-					<color name='gradientColor1' color='#262849'/>
-					<color name='gradientColor2' color='#434674'/>
-					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor1' color='#434674'/>
+					<color name='gradientColor2' color='#333664'/>
+					<color name='gradientColor3' color='#262849'/>
 					<color name='gradientColor4' color='#515488'/>
 				</pressed>
 				<checkedlighted>
@@ -46,46 +49,28 @@
 					<color name='gradientColor2' color='#ffd272'/>
 					<color name='gradientColor3' color='#f3ac0e'/>
 					<color name='gradientColor4' color='#c18c1a'/>
-<!--					<color name='gradientColor1' color='#856c30'/>
-					<color name='gradientColor2' color='#6f5926'/>
-					<color name='gradientColor3' color='#6f5926'/>
-					<color name='gradientColor4' color='#645021'/>-->
 				</checkedlighted>
 				<checked>
 					<value name="border" value="4"/>
-					<color name='gradientColor1' color='#765f27'/>
+					<color name='gradientColor1' color='#ffaa00'/>
+					<color name='gradientColor2' color='#ee9900'/>
+					<color name='gradientColor3' color='#dd8800'/>
+					<color name='gradientColor4' color='#aa6600'/>
+<!--					<color name='gradientColor1' color='#765f27'/>
 					<color name='gradientColor2' color='#614e20'/>
 					<color name='gradientColor3' color='#53431b'/>
-					<color name='gradientColor4' color='#443616'/>
+					<color name='gradientColor4' color='#443616'/>-->
 				</checked>
+				<checkedpressed>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#ee9900'/>
+					<color name='gradientColor2' color='#dd8800'/>
+					<color name='gradientColor3' color='#aa6600'/>
+					<color name='gradientColor4' color='#ffaa00'/>
+				</checkedpressed>
 			</background>
-<!--		<background>
-			<normal>
-				<color name='gradientColor1' color='#E7E7E7'/>
-				<color name='gradientColor2' color='#C9C9C9'/>
-				<color name='gradientColor3' color='#CCCCCC'/>
-				<color name='gradientColor4' color='#AEAEAE'/>
-			</normal>
-			<lighted>
-				<color name='gradientColor1' color='#F5E1FF'/>
-				<color name='gradientColor2' color='#DCC8FF'/>
-				<color name='gradientColor3' color='#DCC8FF'/>
-				<color name='gradientColor4' color='#C3AFFF'/>
-			</lighted>
-			<pressed>
-				<color name='gradientColor1' color='#CFAFFF'/>
-				<color name='gradientColor2' color='#DCC8FF'/>
-				<color name='gradientColor3' color='#DCC8FF'/>
-				<color name='gradientColor4' color='#F5E1FF'/>
-			</pressed>
-		</background>
-		<border>
-			<color name="color1" color='#E0E0E0'/>
-			<color name="color2" color="#404040"/>
-			<value name="width" value="1"/>
-		</border>-->
 		<text>
-			<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+			<font name="font" file="Arial.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
 		</text>
 	</button>
 	
@@ -244,11 +229,11 @@
 		</selected>
 		<font name="font" file="Arial.ttf" size="22" color="#000000"/>
 	</listbox>
-	<button>
+	<!--<button>
 		<text>
 			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
 		</text>
-	</button>
+	</button>-->
 
 	<menuButton>
 		<button>
@@ -314,7 +299,7 @@
 		</button>
 	</menuButton>
 	<yellow>
-		<font name='font' file="Arial.ttf" size="17" color='#AAAAAA'/>
+		<font name='font' file="Arial.ttf" size="17" color='#AAAAAA' embossed="true"/>
 	</yellow>
 	<credits>
 		<font name='font' file="Arial.ttf" size="28" color='#CCCCCC'/>

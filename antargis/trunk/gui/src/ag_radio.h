@@ -50,6 +50,7 @@ class AGRadio:public AGCheckBox
 
   //  bool eventMouseClick(const AGEvent *m);
   void setGroup(AGRadioGroup *pGroup);
+  bool eventMouseClick(AGEvent *m);
   
   void deselect();
 

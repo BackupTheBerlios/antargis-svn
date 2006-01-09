@@ -150,7 +150,10 @@ bool AGButton::eventMouseButtonDown(AGEvent *e)
       //      cdebug(getScreenRect());
       if(getScreenRect().contains(e->getMousePosition()))
 	{
-	  mState=PRESSED;
+	  if(mChecked)
+	    mState=CHECKEDPRESSED;
+	  else
+	    mState=PRESSED;
 	  //  ccdebug("Pressed");
 	  //	  sigClick(m);
 	  //	  cdebug(getName());
@@ -233,15 +236,19 @@ void AGButton::setTheme(const std::string &pTheme)
   mBG[LIGHTED]=AGBackground(mTheme+"button.background.lighted");
   mBG[CHECKED]=AGBackground(mTheme+"button.background.checked");
   mBG[CHECKEDLIGHTED]=AGBackground(mTheme+"button.background.checkedlighted");
+  mBG[CHECKEDPRESSED]=AGBackground(mTheme+"button.background.checkedpressed");
 
   mBorder[NORMAL]=AGBorder(mTheme+"button.border.normal");
   mBorder[PRESSED]=AGBorder(mTheme+"button.border.pressed");
   mBorder[LIGHTED]=AGBorder(mTheme+"button.border.lighted");
   mBorder[CHECKED]=AGBorder(mTheme+"button.border.checked");
   mBorder[CHECKEDLIGHTED]=AGBorder(mTheme+"button.border.checkedlighted");
+  mBorder[CHECKEDPRESSED]=AGBorder(mTheme+"button.border.checkedpressed");
 
   if(mTextW)
     mTextW->setTheme(mTheme+"button.text");
+
+  cdebug("mText:"<<mText);
 }
 
 void AGButton::setCaption(const std::string &pCaption)

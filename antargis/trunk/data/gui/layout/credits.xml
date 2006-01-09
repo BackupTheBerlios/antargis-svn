@@ -25,7 +25,7 @@
 					<text col="0" row="3" font="cr_bold.font" caption="Arts"/>
 					<text col="0" row="4" font="cr_name.font" caption="David Kamphausen <david.kamphausen@web.de>"/>
 				</table>
-				<button row="2" col="0" name="exit" caption="Exit" theme="antButton"/>
+				<button row="2" col="0" name="exit" caption="Exit"/>
 			</table>
 		</table>
 	</table>

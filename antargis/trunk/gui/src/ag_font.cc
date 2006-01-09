@@ -29,6 +29,7 @@ AGFont::AGFont(const std::string &pFile,int size):
   mStyle=NORMAL;
   borderSize=0;
   embossed=false;
+  inset=false;
 }
 
 AGFont::AGFont()
@@ -40,6 +41,7 @@ AGFont::AGFont()
   mStyle=NORMAL;
   borderSize=0;
   embossed=false;
+  inset=false;
 }
 
 AGFont &AGFont::operator=(const AGFont &f)
@@ -52,6 +54,7 @@ AGFont &AGFont::operator=(const AGFont &f)
   mStyle=f.mStyle;
   borderSize=f.borderSize;
   embossed=f.embossed;
+  inset=f.inset;
   return *this;
 }
 
@@ -137,6 +140,15 @@ int AGFont::getBorder() const
   return borderSize;
 }
 
+void AGFont::setInset(bool e)
+{
+  inset=e;
+}
+bool AGFont::getInset() const
+{
+  return inset;
+}
+
 std::string AGFont::toString() const
 {
   std::ostringstream os;
@@ -158,6 +170,7 @@ bool operator<(const AGFont&f1,const AGFont &f2)
   COMPARE(f1.mAlpha,f2.mAlpha);
   COMPARE(f1.mColor,f2.mColor);
   COMPARE(f1.embossed,f2.embossed);
+  COMPARE(f1.inset,f2.inset);
   COMPARE(f1.mBorderColor,f2.mBorderColor);
   COMPARE(f1.borderSize,f2.borderSize);
   return false;

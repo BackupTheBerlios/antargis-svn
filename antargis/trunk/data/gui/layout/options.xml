@@ -16,11 +16,11 @@
 				<rowsize row="2" fixed="20"/>
 				<rowsize row="4" fixed="20"/>
 				<rowsize row="6" fixed="20"/>
-				<button col="0" row="1" caption="Gameoptions" theme="antButton"/>
-				<button col="0" row="3" caption="Video" theme="antButton"/>
-				<button col="0" row="5" caption="Audio" theme="antButton"/>
+				<button col="0" row="1" caption="Gameoptions"/>
+				<button col="0" row="3" caption="Video"/>
+				<button col="0" row="5" caption="Audio"/>
 				
-				<button col="0" row="7" name="exit" caption="Exit" theme="antButton"/>
+				<button col="0" row="7" name="exit" caption="Exit"/>
 			</table>
 		</table>
 		<!-- <button col="0" row="2" caption-image="MainMenuBg3.png"/>-->

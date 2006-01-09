@@ -8,7 +8,6 @@
 		<rowsize row="3" fixed="34"/>
 		<!--<button col="0" row="0" caption-image="antargisLogo.png" enabled="false"/>-->
 		<image col="0" row="0" filename="data/gui/antargisLogo.png" enabled="false"/>
-		<!--<button col="0" row="1" theme="yellowButton" enabled="false"/>-->
 		<table col="0" row="2" cols="3" rows="1">
 			<colsize col="0" relative="2"/>
 			<colsize col="1" relative="0.6"/>
@@ -24,19 +23,19 @@
 				<rowsize row="8" relative="2"/>
 				<rowsize row="10" relative="2"/>
 	
-				<button row="0" col="0" name="campaign" caption="Start campaign" theme="antButton"/>
-				<button row="2" col="0" name="single" caption="Single map" theme="antButton"/>
-				<button row="4" col="0" name="load" caption="Load game" theme="antButton"/>
-				<button row="6" col="0" name="options" caption="Options" theme="antButton"/>
-				<button row="8" col="0" name="credits" caption="Credits" theme="antButton"/>
-				<button row="10" col="0" name="quit" caption="Quit" theme="menuButton"/>
+				<button row="0" col="0" name="campaign" caption="Start campaign"/>
+				<button row="2" col="0" name="single" caption="Single map"/>
+				<button row="4" col="0" name="load" caption="Load game"/>
+				<button row="6" col="0" name="options" caption="Options"/>
+				<button row="8" col="0" name="credits" caption="Credits"/>
+				<button row="10" col="0" name="quit" caption="Quit"/>
 			
 			</table>
 			<table col="0" row="0" cols="3" rows="3">
 				<colsize col="1" fixed="606"/>
 				<rowsize row="1" fixed="456"/>
 				<rowsize row="0" fixed="5"/>
-				<button col="1" row="1"  enabled="false" caption-image="data/gui/small_old_nature.png" theme="antButton"/>
+				<button col="1" row="1"  enabled="false" caption-image="data/gui/small_old_nature.png"/>
 			</table>
 			<!--<button col="2" row="0" enabled="false"/>-->
 		</table>

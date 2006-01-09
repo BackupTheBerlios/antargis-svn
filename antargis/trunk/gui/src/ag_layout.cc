@@ -184,8 +184,8 @@ class AGButtonLayoutCreator:public AGLayoutCreator
       b->setSurface(getSurfaceManager()->loadSurface(captionImage),false);
     if(pNode.get("enabled")=="false")
       b->setEnabled(false);
-    if(pNode.get("theme").length())
-      b->setTheme(pNode.get("theme"));
+
+    b->setTheme(pNode.get("theme"));
     return b;
   }
 };

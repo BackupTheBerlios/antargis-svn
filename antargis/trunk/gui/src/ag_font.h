@@ -58,6 +58,9 @@ class AGFont
   void setEmbossed(bool e);
   bool getEmbossed() const;
 
+  void setInset(bool e);
+  bool getInset() const;
+
   int getWidth(const std::string &mText) const;
   int getHeight(const std::string &mText) const;
 
@@ -74,6 +77,7 @@ class AGFont
   AGColor mBorderColor;
   int borderSize;
   bool embossed;
+  bool inset;
 
   friend bool operator<(const AGFont&f1,const AGFont &f2);
 };

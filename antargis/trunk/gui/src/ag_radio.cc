@@ -112,12 +112,15 @@ bool AGRadio::eventMouseClick(const AGEvent *m)
 void AGRadio::setChecked(bool pChecked)
 {
   bool c=isChecked();
-  AGCheckBox::setChecked(pChecked);
-
-  if(pChecked && !c)
+  if(c!=pChecked)
     {
-      if(mGroup)
-	mGroup->eventChange(getName());
+      AGCheckBox::setChecked(pChecked);
+      
+      if(pChecked)
+	{
+	  if(mGroup)
+	    mGroup->eventChange(getName());
+	}
     }
 }
 
@@ -131,6 +134,18 @@ void AGRadio::setGroup(AGRadioGroup *pGroup)
 {
   mGroup=pGroup;
 }
+
+bool AGRadio::eventMouseClick(AGEvent *m)
+{
+  CTRACE;
+  if(!isChecked())
+    setChecked(true);
+
+  return AGButton::eventMouseClick(m);//false;//true; // eat
+}
+
+
+
 
 
 // AGRadioGroup creator
