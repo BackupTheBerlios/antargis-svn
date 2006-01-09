@@ -19,4 +19,7 @@ Dir["*.xml"].each{|d|
 Dir["*.png"].each{|d|
 	f.puts "	$(INSTALL_DATA) -D #{d} #{$datadir}/antargisgui/pics/#{d}"
 }
+["ag_tools.rb","antargisgui.rb"].each{|d|
+	f.puts "	$(INSTALL_PROG) -D #{d} #{$rubylibdir}/#{d}"
+}
 f.close

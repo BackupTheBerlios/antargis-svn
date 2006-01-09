@@ -21,7 +21,16 @@
 
 #!/usr/bin/ruby
 
-if not Libantargis
+def hasLibantargis
+	ObjectSpace.each_object(Module){|c|
+		if c.to_s=="Libantargis"
+			return true
+		end
+	}
+	return false
+end
+
+if hasLibantargis
 	require 'libantargisgui'
 	include Libantargisgui
 end
@@ -59,7 +68,7 @@ module AGHandler
 		@handlers||={}
 		callerName=e.getCaller.getName
 		evName=callerName+":"+e.getName
-		dputs "EVNAME",evName
+		#dputs "EVNAME",evName
 		#dputs @handlers.keys.join(";")
 		
 		if @handlers.has_key?(evName) then

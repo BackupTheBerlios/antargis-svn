@@ -71,7 +71,11 @@ void AGImage::draw(AGPainter &p)
     p.blit(mTexture,getRect().origin());
 }
 
-void AGImage::setSurface(AGSurface pSurface)
+void AGImage::setSurface(const AGSurface &pSurface)
 {
   mTexture=getTextureManager()->makeTexture(pSurface);
+}
+void AGImage::setTexture(const AGTexture &pTexture)
+{
+  mTexture=pTexture;
 }

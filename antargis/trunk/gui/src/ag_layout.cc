@@ -444,8 +444,9 @@ public:
     CTRACE;
     std::string filename=pNode.get("filename");
 
-    AGSurface s(getSurfaceManager()->loadSurface(filename));
-
+    AGSurface s(0,0);
+    if(filename.length())
+      s=getSurfaceManager()->loadSurface(filename);
     
 
     AGWidget *w=new AGImage(pParent,AGPoint(toInt(pNode.get("x")),toInt(pNode.get("y"))),s,false,pRect);

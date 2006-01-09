@@ -32,7 +32,8 @@ class AGImage:public AGWidget
 
   virtual void draw(AGPainter &p);//const AGRect &r);
 
-  void setSurface(AGSurface pSurface);
+  void setSurface(const AGSurface &pSurface);
+  void setTexture(const AGTexture &pTexture);
 
   //  void setSourceRect(const AGRect &pRect);
 
