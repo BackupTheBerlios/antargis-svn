@@ -656,8 +656,8 @@ size_t mRegisteredSurfaces=0;
 
 void AGSurfaceManager::registerSurface(AGSurface *pSurface)
 {
-  cdebug("mSurfaces:"<<mSurfaces.size());
-  cdebug("mRegSurfaces:"<<mRegisteredSurfaces);
+  //  cdebug("mSurfaces:"<<mSurfaces.size());
+  //  cdebug("mRegSurfaces:"<<mRegisteredSurfaces);
 
   mSurfaces.insert(pSurface);
   if(pSurface->valid())
@@ -692,7 +692,7 @@ void AGSurfaceManager::disableGC()
 
 void AGSurfaceManager::cleanup()
 {
-  CTRACE;
+  //  CTRACE;
   Uint32 t0=SDL_GetTicks();
 
 
@@ -754,7 +754,7 @@ void setTrap()
 
 void AGTextureManager::registerTexture(AGTexture *pTexture)
 {
-  cdebug("textures:"<<mTextures.size());
+  //  cdebug("textures:"<<mTextures.size());
 
   //  CTRACE;
   //  cdebug(pTexture);
@@ -786,7 +786,7 @@ void AGTextureManager::clear()
 
 void AGTextureManager::cleanup()
 {
-  CTRACE;
+  //  CTRACE;
 #ifdef SLOW_TEXTUREMANAGER
   std::set<SDL_Surface*> used;
   std::set<AGTexture*>::iterator i=mTextures.begin();
@@ -802,7 +802,7 @@ void AGTextureManager::cleanup()
   mSurfaces=used;
 #else
 
-  Uint32 t0=SDL_GetTicks();
+  //  Uint32 t0=SDL_GetTicks();
 
   if(mDelTextures.size())
     {
@@ -827,10 +827,10 @@ void AGTextureManager::cleanup()
 	mTextures.push_back(*si);
     }
   
-  Uint32 t1=SDL_GetTicks();
+  /*  Uint32 t1=SDL_GetTicks();
   if(t1-t0>2)
   cdebug("TIME4:"<<t1-t0);
-
+  */
   std::set<SDL_Surface*> used;
   std::list<AGTexture*>::iterator i=mTextures.begin();
   for(;i!=mTextures.end();i++)
@@ -844,11 +844,11 @@ void AGTextureManager::cleanup()
     }
   mSurfaces=used;
 
-
+  /*
   Uint32 t2=SDL_GetTicks();
   if(t2-t1>2)
   cdebug("TIME5:"<<t2-t1);
-
+  */
 #endif
 }
 

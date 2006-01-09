@@ -342,7 +342,7 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
 
   pSurface->blit(t,AGRect(BaseLineX,BaseLineY,t.width(),t.height()));
     
-  if(fontCache.size()>20)
+  if(fontCache.size()>100)
     {
       cdebug("CLEAR FONTCACHE");
       // clear font cache

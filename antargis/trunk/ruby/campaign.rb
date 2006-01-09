@@ -14,6 +14,11 @@ class CampaignLevel
 	def initialize(node)
 		
 	end
+	def play
+	end
+	def finished
+		true
+	end
 end
 
 class CutSceneDisplay<AGApplication
@@ -32,16 +37,22 @@ class CutSceneDisplay<AGApplication
 	end
 	def eventKeyDown(e)
 		super
-		tryQuit
+		if @text==@ctext
+			tryQuit
+		else
+			@ctext=@text
+			setTextForReal(@ctext)
+		end
 	end
 	
 	def setImage(image)
 		w=@layout.getChild("image")
+		w2=@layout.getChild("imageFrame")
 		if image
-			w.show
+			w2.show
 			w.setSurface(image)
 		else
-			w.hide
+			w2.hide
 		end
 	end
 	
@@ -82,6 +93,7 @@ class CutSceneDisplay<AGApplication
 end
 
 class CutScene
+	attr_reader :finished
 	def initialize(node)
 		@screens=[]
 		puts node.getName
@@ -99,6 +111,7 @@ class CutScene
 			}
 			@screens.push(screen)
 		}
+		@finished=true
 	end
 	def play
 		display=CutSceneDisplay.new(@image,@text)
@@ -138,12 +151,24 @@ class Campaign
 	def getCurrentPart
 		@part[@partID]
 	end
-	
+	def proceed
+		@partID+=1
+		return @partID>=@part.length
+	end
+	def restart
+		@partID=0
+	end
 end
 
 #getCampaigns.each{|c|puts c.name+" "+c.imageName}
 
 def startCampaign(campaign)
-	part=campaign.getCurrentPart
-	part.play
+	campaign.restart
+	begin
+		part=campaign.getCurrentPart
+		part.play
+		if campaign.proceed
+			break
+		end
+	end until not part.finished
 end

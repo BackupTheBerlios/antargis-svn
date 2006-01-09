@@ -47,7 +47,7 @@
 				<rowsize row="1" fixed="20"/>
 				<rowsize row="2" relative="2"/>
 				<image col="0" row="0" name="campaignImage"/>
-				<text col="0" row="2" name="campaignDescription" font="yellow.font" align="center" enabled="false" caption=""/>
+				<text col="0" row="2" name="campaignDescription" font="story.font" align="center" enabled="false" caption=""/>
 			</table>
 		</table>
 		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>

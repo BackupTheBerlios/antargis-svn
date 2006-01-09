@@ -337,4 +337,7 @@
 	<text>	
 		<font name='font' file="Arial.ttf" size="17" color='#FFFFFF' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</text>
+	<big_border>
+		<image name="image" file="data/gui/big_border.png"/>
+	</big_border>
 </theme>

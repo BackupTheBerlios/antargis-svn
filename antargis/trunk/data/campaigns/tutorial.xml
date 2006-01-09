@@ -9,4 +9,10 @@
 		</screen>
 	</cutscene>
 	<level file="data/levels1/tutorial1.xml"/>
+	<cutscene>
+		<screen>
+			<image filename="data/gui/map1.png"/>
+			<text text="Yay! You finished the first level!"/>
+		</screen>
+	</cutscene>
 </campaign>
