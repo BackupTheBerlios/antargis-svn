@@ -31,6 +31,8 @@ class AntNewTree<AntMyEntity
 		@typeID=(rand()*12).to_i
 		setType("tree")
 		@angle=rand*360
+		
+		setMinimapColor(AGColor.new(0,0x77,0))
 		#setVirtualY(100)
 	
 		@crownMiddle=AGVector3.new(0,0,3)

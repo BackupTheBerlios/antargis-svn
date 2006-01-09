@@ -346,11 +346,14 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
 	    {
 	      e->setName("sigClick");
 	      //	      cdebug("click");
-	      eventMouseClick(e) || sigClick(e);
-	      //  return true; // consume
+
 
 	      if(canFocus())
 		gainFocus();
+
+	      return (eventMouseClick(e) || sigClick(e));
+	      //  return true; // consume
+
 	    }
 	}
     }

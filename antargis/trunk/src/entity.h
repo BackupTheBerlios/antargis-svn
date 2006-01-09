@@ -24,6 +24,7 @@
 #include "scene.h"
 #include <ag_xml.h>
 #include <ag_triangle.h>
+#include <ag_color.h>
 
 
 #include <ruby.h>
@@ -71,6 +72,9 @@ class AntEntity:public AGRubyObject
 
     int mVirtualY;
 
+    AGColor mMinimapColor;
+    bool mShowOnMinimap;
+
   public: //virtually protected
     float mDir;  // direction in (0,360)
     Resource resource;
@@ -80,6 +84,10 @@ class AntEntity:public AGRubyObject
     AntEntity(const AGVector3 &p);
     AntEntity(const AGVector2 &p);
     virtual ~AntEntity();
+
+    void setMinimapColor(const AGColor &c);
+    AGColor getMinimapColor() const;
+    bool showOnMinimap() const;
 
 
     // Positions

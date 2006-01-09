@@ -33,9 +33,12 @@ class AGBorder
 
   void draw(AGPainter &p);
 
+  size_t getWidth() const;
+
  private:
   AGTexture mSurface;
   bool mEnable;
+  size_t mWidth;
 };
 
 #endif

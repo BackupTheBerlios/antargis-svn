@@ -42,10 +42,14 @@
 				</pressed>
 				<checkedlighted>
 					<value name="border" value="4"/>
-					<color name='gradientColor1' color='#856c30'/>
+					<color name='gradientColor1' color='#f3ac0e'/>
+					<color name='gradientColor2' color='#ffd272'/>
+					<color name='gradientColor3' color='#f3ac0e'/>
+					<color name='gradientColor4' color='#c18c1a'/>
+<!--					<color name='gradientColor1' color='#856c30'/>
 					<color name='gradientColor2' color='#6f5926'/>
 					<color name='gradientColor3' color='#6f5926'/>
-					<color name='gradientColor4' color='#645021'/>
+					<color name='gradientColor4' color='#645021'/>-->
 				</checkedlighted>
 				<checked>
 					<value name="border" value="4"/>

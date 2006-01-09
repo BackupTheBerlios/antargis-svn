@@ -18,7 +18,13 @@ class MiniMap:public AGWidget
   void setMap(AntMap *pMap);
   void setScene(Scene *pScene);
 
+  virtual bool eventMouseClick(AGEvent *m);
+
  private:
+  void mapChangedP(bool force);
+
+  void drawEntities(AGPainter &p);
+
   AntMap *mMap;
   Scene *mScene;
   AGTexture mTexture;

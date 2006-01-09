@@ -33,6 +33,7 @@ class AntHero<AntBoss
 		setType("hero")
 		@appearance="hero"
 		getMap.setLight(self)
+		setMinimapColor(AGColor.new(0xFF,0,0))
 #		setMyMesh
 	end
 	def setAppearance(a)

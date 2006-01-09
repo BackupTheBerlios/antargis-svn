@@ -24,6 +24,7 @@
 #include "ag_theme.h"
 #include "ag_listbox.h"
 #include "ag_image.h"
+#include "ag_frame.h"
 
 #include "ag_button.h"
 #include "ag_edit.h"
@@ -455,3 +456,41 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(Image);
+
+
+// AGLayout creator
+class AGFrameLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(Frame,"frame")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    CTRACE;
+    std::string border=pNode.get("border");
+    size_t width=toInt(pNode.get("width"));
+
+    AGWidget *w;
+    if(border.length())
+      w=new AGFrame(pParent,pRect,AGBorder(border));
+    else
+      w=new AGFrame(pParent,pRect,width);
+    
+    return w;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(Frame);
+
+
+// AGLayout creator
+class AGCellLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(Cell,"cell")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  {
+    return new AGWidget(pParent,pRect);
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(Cell);

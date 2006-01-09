@@ -113,13 +113,13 @@ class AntRubyMap<AntMap
 	end
 	
 	def loadStory(node)
-		node.get_children.each{|n|
+		node.getChildren.each{|n|
 			name=n.getName
 			a=[]
-			n.get_children.each{|n2|
+			n.getChildren.each{|n2|
 				if n2.getName=="window"
 					text=""
-					n2.get_children("text").each{|n3|
+					n2.getChildren("text").each{|n3|
 						text+=n3.getText
 					}
 					a.push(text)

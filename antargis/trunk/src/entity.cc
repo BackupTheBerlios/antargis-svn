@@ -47,6 +47,7 @@ void AntEntity::init()
   mID=getMap()->getNewID();
   cdebug("mID:"<<mID);
   
+  mShowOnMinimap=false;
   onGround=true;
 
   mJob=0;
@@ -535,4 +536,20 @@ void AntEntity::clearMeshes()
 
 void AntEntity::animationEvent(const std::string &pName)
 {
+}
+
+void AntEntity::setMinimapColor(const AGColor &c)
+{
+  mMinimapColor=c;
+  mShowOnMinimap=true;
+}
+
+AGColor AntEntity::getMinimapColor() const
+{
+  return mMinimapColor;
+}
+
+bool AntEntity::showOnMinimap() const
+{
+  return mShowOnMinimap;
 }

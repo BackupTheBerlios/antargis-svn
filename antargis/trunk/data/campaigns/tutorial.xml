@@ -1,4 +1,4 @@
-<campaign image="data/gui/map1.png" name="Tutorial">
+<campaign image="data/gui/map1.png" name="Tutorial" description="Here you learn how to play the game.">
 	<cutscene>
 		<screen>
 			<image filename="data/gui/map1.png"/>

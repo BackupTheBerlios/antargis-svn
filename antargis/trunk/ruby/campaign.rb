@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'ruby/antargislib.rb'
+#require 'ruby/antargislib.rb'
 
 def getCampaignFiles
 	Dir[File.join("data","campaigns","*.xml")]
@@ -22,7 +22,7 @@ class CutScene
 end
 
 class Campaign
-	attr_reader :name, :image, :imageName
+	attr_reader :name, :image, :imageName, :description, :texture
 	def initialize(filename)
 		@doc=Document.new(filename)
 		@xmlRoot=@doc.root
@@ -30,6 +30,8 @@ class Campaign
 		@name=@xmlRoot.get("name")
 		@imageName=@xmlRoot.get("image")
 		@image=getSurfaceManager.loadSurface(@imageName)
+		@texture=getTextureManager.makeTexture(@image)
+		@description=@xmlRoot.get("description")
 		
 		@part=[]
 		@xmlRoot.getChildren.each{|c|
@@ -41,6 +43,7 @@ class Campaign
 			end
 		}
 	end
+	
 end
 
-getCampaigns.each{|c|puts c.name+" "+c.imageName}
+#getCampaigns.each{|c|puts c.name+" "+c.imageName}

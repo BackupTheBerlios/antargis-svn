@@ -40,7 +40,7 @@ class AntPlayer
 		puts "a"
 		@name=n.get("name")
 		puts "b"
-		children=n.get_children("hero")
+		children=n.getChildren("hero")
 		puts "c"
 		children.each{|c|
 			@heronames.push(c.get("name"))

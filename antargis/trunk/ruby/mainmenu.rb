@@ -25,6 +25,7 @@ require 'ruby/antargislib.rb'
 $useMenu=true
 
 require "antargis.rb"
+require 'campaign.rb'
 
 class AntMenuApp <AGApplication
 	include AGHandler
@@ -82,8 +83,23 @@ class AntMenuApp <AGApplication
 		@campaignMenu=AGLayout.new($screen,loadFile("data/gui/layout/campaign.xml"))
 		@menues.push(@campaignMenu)
 		addHandler(@campaignMenu.getChild("exit"),:sigClick,:sigExit)
-		addHandler(@campaignMenu.getChild("startWolf"),:sigClick,:sigMission)
-		#@campaingMenu.addChild(@campBlack=Black.new(@campaignMenu,AGRect.new(0,0,1024,768)))
+		addHandler(@campaignMenu.getChild("start"),:sigClick,:sigStart)
+		
+		@campaigns=getCampaigns
+		
+		buttonCount=6
+		campaignButtons=(0..(buttonCount-1)).to_a.collect{|c|"campaign#{c}"}
+		i=0
+		campaignButtons.each{|b|
+			c=@campaignMenu.getChild(b)
+			addHandler(c,:sigClick,:sigMission)
+			if @campaigns.length>i
+				c.setCaption(@campaigns[i].name)
+			else
+				c.hide
+			end
+			i+=1
+		}
 	end
 	
 	def setupOptions
@@ -110,12 +126,24 @@ class AntMenuApp <AGApplication
 	
 	def sigMission(e)
 		callerName=e.getCaller.getName
-		puts "caller:"+callerName
-		case callerName
-			when "startWolf"
-				soundOff
-				startGame
-				soundOn
+		number=callerName[8..12].to_i
+		@selCampaign=@campaigns[number]
+		@campaignMenu.getChild("campaignImage").setTexture(@selCampaign.texture)
+		@campaignMenu.getChild("campaignDescription").setText(@selCampaign.description)
+# 		case callerName
+# 			when "startWolf"
+# 				soundOff
+# 				startCampaign(@selCampaign)
+# 				soundOn
+# 		end
+	end
+	
+	def sigStart
+		if @selCampaign
+			soundOff
+			#startGame(@selCampaign)
+			startCampaign(@selCampaign)
+			soundOn
 		end
 	end
 

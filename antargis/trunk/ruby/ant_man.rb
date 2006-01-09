@@ -62,6 +62,7 @@ class AntNewMan<AntMyEntity
 		dputs "NEWMAN"
 		setMeshState("walk")
 		@mode="wait"
+		setMinimapColor(AGColor.new(0x77,0x77,0x77))
 	end
 	
 	def setMode(mode)

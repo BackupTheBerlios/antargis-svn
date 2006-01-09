@@ -42,10 +42,6 @@ class AntGameApp <AntRubyView
 		@map=AntRubyMap.new(32,32) # some small dummy size - gets overriden by loadMap anyway
 		$map=@map
 
-		if savegame && savegame.length>0
-			# load a level
-			getMap().loadMap(savegame)
-		end	
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
@@ -53,7 +49,15 @@ class AntGameApp <AntRubyView
 		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
 		
 		$screen=@layout
+		@miniMap=toMiniMap(@layout.getChild("miniMap"))
+		@miniMap.setMap(getMap)
+		@miniMap.setScene(getScene)
 		
+		if savegame && savegame.length>0
+			# load a level
+			getMap().loadMap(savegame)
+		end	
+		#@miniMap.mapChangedComplete(AGEvent.new(self,"bla"))
 		setupHeroDisplay
 	end
 	
@@ -144,3 +148,6 @@ if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/)
 end
 puts "huhu"
 
+def startCampaign(campaign)
+	
+end

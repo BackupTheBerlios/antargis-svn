@@ -30,6 +30,7 @@
 #include "privates.h"
 #include <SDL.h>
 #include "SDL_image.h"
+#include <SDL_mixer.h>
 
 int lastWidth=0;
 int lastHeight=0;
@@ -108,8 +109,14 @@ AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
   // FIXME: set $main in ruby to this ???
   
 }
+
+extern std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
+extern std::map<std::string,Mix_Chunk*> mSounds;
+
 AGMain::~AGMain()
 {
+  fontCache.clear();
+  mSounds.clear();
   CTRACE;
   delete mScreen;
   deleteInstanceKiller();

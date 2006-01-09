@@ -27,7 +27,10 @@ AGBorder::AGBorder(const std::string &pTheme)
   if((mEnable=getTheme()->hasSurface(pTheme+".image")))
     {
       mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
+      mWidth=mSurface.width()/3;
     }
+  else
+    mWidth=0;
 }
 
 void AGBorder::draw(AGPainter &p)
@@ -62,4 +65,9 @@ void AGBorder::draw(AGPainter &p)
   // skrip interior
 
   
+}
+
+size_t AGBorder::getWidth() const
+{
+  return mWidth;
 }

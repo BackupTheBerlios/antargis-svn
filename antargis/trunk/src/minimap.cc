@@ -15,16 +15,24 @@ MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
 
 bool MiniMap::mapChangedComplete(AGEvent *e)
 {
-  return mapChanged(e);
+  CTRACE;
+  mapChangedP(true);
+  return false;
 }
   
 bool MiniMap::mapChanged(AGEvent *e)
 {
+  mapChangedP(false);
+  return false;
+}
+
+void MiniMap::mapChangedP(bool forceFull=false)
+{
   if(!mMap)
-    return false;
+    return;
   int w,h;
   int x,y;
-  bool inmem=false;
+  bool inmem=forceFull;
 
   w=getRect().width();
   h=getRect().height();
@@ -43,10 +51,15 @@ bool MiniMap::mapChanged(AGEvent *e)
 
   AGPainter *p=0;
 
-  if((x1-x0)*(y1-y0)>w*h/8)
+  if((x1-x0)*(y1-y0)>w*h/8 || inmem)
     {
+      TRACE;
       p=new AGPainter(mSurface);
       inmem=true;
+      x0=0;
+      y0=0;
+      x1=width()-1;
+      y1=height()-1;
     }
   else
     p=new AGPainter(mTexture);
@@ -55,7 +68,11 @@ bool MiniMap::mapChanged(AGEvent *e)
   light.normalize();
 
   TerrainType t;
-  
+
+  assert(mMap);  
+
+  //  cdebug(x0<<"  "<<x1);
+  //  cdebug(y0<<"  "<<y1);
   
   if(mMap)
     {
@@ -108,8 +125,12 @@ bool MiniMap::mapChanged(AGEvent *e)
     }
   delete p;
   if(inmem)
-    mTexture=getTextureManager()->makeTexture(mSurface);
-  return false;
+    {
+      mSurface.save("sicke.png");
+      mTexture=getTextureManager()->makeTexture(mSurface);
+      TRACE;
+    }
+  return;
 }
 
 void MiniMap::draw(AGPainter &p)
@@ -117,6 +138,7 @@ void MiniMap::draw(AGPainter &p)
   AGRect m=getRect().origin();
   p.blit(mTexture,m);
 
+  drawEntities(p);
 
   if(mScene)
     {
@@ -148,6 +170,27 @@ void MiniMap::draw(AGPainter &p)
       r=r.shrink(1);
       p.drawBorder(r,1,c2,c1);
     }
+  //  drawEntities(p);
+}
+
+void MiniMap::drawEntities(AGPainter &p)
+{
+  if(mMap)
+    {
+      AntMap::EntityList e=mMap->getAllEntities();
+      for(AntMap::EntityList::iterator i=e.begin();i!=e.end();i++)
+	{
+	  if((*i)->showOnMinimap())
+	    {
+	      AGVector2 v=(*i)->getPos2D();
+	      float x=v[0]/mMap->getW()*width();
+	      float y=(1-v[1]/mMap->getH())*height();
+	      
+	      p.drawRect(AGRect(x,y,2,2),(*i)->getMinimapColor());
+	    }
+	}
+
+    }
 }
 
 void MiniMap::setMap(AntMap *pMap)
@@ -165,6 +208,31 @@ void MiniMap::setScene(Scene *pScene)
   mScene=pScene;
 }
 
+bool MiniMap::eventMouseClick(AGEvent *m)
+{
+  AGPoint p(m->getMousePosition()-getScreenRect().getPosition());
+  if(mMap==0 || mScene==0)
+    return AGWidget::eventMouseClick(m);
+
+  float x=p.x;
+  float y=p.y;
+
+  cdebug(x<<"  "<<y);
+
+  x/=getRect().width();
+  y/=getRect().height();
+  y=1-y;
+
+  cdebug(x<<"  "<<y);
+  x*=mMap->getW();
+  y*=mMap->getH();
+
+  cdebug(x<<"  "<<y);
+
+  mScene->setCamera(AGVector4(x,y,0,0));
+
+  return true;
+}
 
 
 

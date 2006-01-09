@@ -187,6 +187,7 @@ void Terrain::mapChangedComplete()
 
 
   init();
+  addToScenes();
 }
 
 
