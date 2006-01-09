@@ -265,11 +265,13 @@ void embossSurface(AGSurface &s,float depth=1.0f)
 	    int olda=c.a;
 	    if (v>0)
 	      {
+		v=std::min(v,1.0f);
 		c=AGColor(0xFF,0xFF,0xFF,c.a)*v + c*(1-v);
 	      }
 	    else
 	      {
 		v*=-1;
+		v=std::min(v,1.0f);
 		c=AGColor(0,0,0,c.a)*v + c*(1-v);
 	      }
 	    //	c.light((int)(v*0xFF));
