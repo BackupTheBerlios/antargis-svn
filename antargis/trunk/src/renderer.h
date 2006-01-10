@@ -7,8 +7,8 @@ class Scene;
 
 class Renderer
 {
- public:
   Renderer();
+ public:
   ~Renderer();
 
   bool canMultitexture();
@@ -42,6 +42,8 @@ class Renderer
   bool shadowInited;
 
   Scene *mScene;
+
+  friend Renderer *getRenderer();
 };
 
 Renderer *getRenderer();

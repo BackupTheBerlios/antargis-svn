@@ -41,6 +41,7 @@ class AntGameApp <AntRubyView
 		$app=self	
 		@map=AntRubyMap.new(32,32) # some small dummy size - gets overriden by loadMap anyway
 		$map=@map
+		@finish="quit"
 
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
 		setMainWidget(@layout)
@@ -128,7 +129,9 @@ class AntGameApp <AntRubyView
 	def load
 		@layout.addChild(AntLoadDialog.new(@layout))
 	end
-	
+	def finished
+		@finish
+	end
 end
 
 def startGame(file="savegames/savegame0.antlvl")

@@ -12,12 +12,26 @@ end
 
 class CampaignLevel
 	def initialize(node)
-		
+		@level=node.get("file")
+		node.getChildren("failscene").each{|c|
+			@lostScene=CutScene.new(c)
+		}
 	end
 	def play
+		app=AntGameApp.new(@level,1024,768)
+		app.run
+		@finish=app.finished
+		app=nil
+		GC.start
+		
+		case @finish
+			when "lost"
+				@lostScene.play
+		end
+
 	end
 	def finished
-		true
+		@finish
 	end
 end
 
@@ -111,7 +125,7 @@ class CutScene
 			}
 			@screens.push(screen)
 		}
-		@finished=true
+		@finished="won"
 	end
 	def play
 		display=CutSceneDisplay.new(@image,@text)
@@ -135,7 +149,7 @@ class Campaign
 		@image=getSurfaceManager.loadSurface(@imageName)
 		@texture=getTextureManager.makeTexture(@image)
 		@description=@xmlRoot.get("description")
-		@partID=0
+		@partID=@xmlRoot.get("part").to_i
 		
 		@part=[]
 		@xmlRoot.getChildren.each{|c|
@@ -146,6 +160,19 @@ class Campaign
 					@part.push(CampaignLevel.new(c))
 			end
 		}
+	end
+	def save(filename)
+		doc=Document.new
+		root=doc.root
+		root.setName("campaign")
+		root.set("name",@name)
+		root.set("image",@imageName)
+		root.set("description",@description)
+		root.set("part",@partID.to_s)
+		c=root.addChild("muh")
+		puts doc.toString
+		#exit
+		saveFile(filename,doc.toString)
 	end
 	
 	def getCurrentPart
@@ -163,12 +190,19 @@ end
 #getCampaigns.each{|c|puts c.name+" "+c.imageName}
 
 def startCampaign(campaign)
-	campaign.restart
+	campaign=campaign.dup # copy
+	continueCampaign(campaign)
+end
+
+def continueCampaign(campaign)
 	begin
 		part=campaign.getCurrentPart
 		part.play
-		if campaign.proceed
-			break
+		if part.finished=="won"
+			if campaign.proceed
+				break
+			end
 		end
-	end until not part.finished
+	end while part.finished!="quit"
+	campaign.save("campaign0.antcmp")
 end

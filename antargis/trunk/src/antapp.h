@@ -26,7 +26,6 @@ class GLApp:public AGApplication
   bool mMayClick;
 
   int hx,hy,hb;
-  Renderer renderer;
 
 protected:
   Scene scene;

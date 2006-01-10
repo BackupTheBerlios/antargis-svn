@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include "scene.h"
 #include "ag_debug.h"
+#include "ag_kill.h"
 
 Renderer *gRenderer=0;
 
@@ -11,6 +12,7 @@ Renderer::Renderer():
   mCanShadow(-1),
   mCanGLSL(-1)
 {
+  CTRACE;
   GLeeInit(); // this call is essential for letting glee work
   assert(gRenderer==0);
   gRenderer=this;
@@ -22,6 +24,7 @@ Renderer::Renderer():
 
 Renderer::~Renderer()
 {
+  cdebug("gRenderer:"<<gRenderer);
   assert(gRenderer==this);
   gRenderer=0;
 }
@@ -305,6 +308,11 @@ bool Renderer::badShadowMap()
 
 Renderer *getRenderer()
 {
+  if(!gRenderer)
+    {
+      gRenderer=new Renderer;
+      REGISTER_SINGLETON(gRenderer);
+    }
   assert(gRenderer);
   return gRenderer;
 }

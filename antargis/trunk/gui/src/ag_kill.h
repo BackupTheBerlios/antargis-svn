@@ -21,7 +21,7 @@
 #ifndef __ANT_KILL_H__
 #define __ANT_KILL_H__
 
-#include <list>
+#include <set>
 
 class AGInstanceBase
 {
@@ -30,6 +30,9 @@ class AGInstanceBase
     {
     }
   virtual void kill()=0;
+
+  virtual bool operator<(const AGInstanceBase &b) const =0;
+  virtual void *ptr() const=0;
 };
 
 template<class T>
@@ -45,6 +48,16 @@ class AGInstance:public AGInstanceBase
   {
     delete instance;
   }
+
+  virtual void*ptr() const
+  {
+    return (void*)instance;
+  }
+  virtual bool operator<(const AGInstanceBase &b) const
+  {
+    return ptr()<b.ptr();
+  }
+
 };
 
 template<class T>
@@ -53,9 +66,18 @@ AGInstanceBase *createKiller(T *t)
   return new AGInstance<T>(t);
 }
 
+class ContentCompare
+{
+ public:
+  bool operator()(AGInstanceBase*a,AGInstanceBase *b)
+  {
+    return *a<*b;
+  }
+};
+
 class AGInstanceKiller
 {
-  std::list<AGInstanceBase*> bs;
+  std::set<AGInstanceBase*,ContentCompare> bs;
  public:
   AGInstanceKiller();
   ~AGInstanceKiller();

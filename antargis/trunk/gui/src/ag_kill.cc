@@ -53,7 +53,7 @@ AGInstanceKiller::AGInstanceKiller()
 AGInstanceKiller::~AGInstanceKiller()
     {
       CTRACE;
-      std::list<AGInstanceBase*>::iterator i=bs.begin();
+      std::set<AGInstanceBase*>::iterator i=bs.begin();
       for(;i!=bs.end();i++)
 	{
 	  (*i)->kill();
@@ -63,5 +63,5 @@ AGInstanceKiller::~AGInstanceKiller()
     }
 void AGInstanceKiller::reg(AGInstanceBase *b)
   {
-    bs.push_back(b);
+    bs.insert(b);
   }

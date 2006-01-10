@@ -1,4 +1,4 @@
-<campaign image="data/gui/map1.png" name="Tutorial" description="Here you learn how to play the game.">
+<campaign image="data/gui/map1.png" name="Tutorial" description="Here you learn how to play the game." part="1">
 	<cutscene>
 		<screen>
 			<image filename="data/gui/map1.png"/>
@@ -8,7 +8,14 @@
 			<text text="No image here."/>
 		</screen>
 	</cutscene>
-	<level file="data/levels1/tutorial1.xml"/>
+	<level file="data/levels1/tutorial1.xml">
+		<failscene>
+			<screen>
+				<image filename="data/gui/map1.png"/>
+				<text text="You lost! Better lucke next time!"/>
+			</screen>
+		</failscene>
+	</level>
 	<cutscene>
 		<screen>
 			<image filename="data/gui/map1.png"/>
