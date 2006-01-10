@@ -48,10 +48,16 @@ class AntRubyEditView<GLApp
 		
 		decos=["flower","gravel","grassLight","hole","rock","coach","floor","path","block"]
 		decos.each{|name|
-			addHandler(@layout.getChild(name),:sigClick,:sigDeco)
+			#addHandler(@layout.getChild(name),:sigClick,:sigDeco)
 		}
 		
-		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man","tree"]
+		decals=["gravel"]
+		decals.each{|name|
+			addHandler(@layout.getChild(name),:sigClick,:sigDecal)
+		}
+		
+		
+		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man","tree","bush","highGrass"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
 		}
@@ -85,7 +91,8 @@ class AntRubyEditView<GLApp
 		end
 	end
 	
-	def sigNewMapEnd(name)
+	def sigNewMapEnd(e)
+		name=e.getCaller.getName
 		d=@newDialog
 		@newDialog=nil
 		if d
@@ -289,7 +296,17 @@ class AntRubyEditView<GLApp
 				@type=AntTwig
 			when "tree"
 				@type=AntNewTree
+			when "bush"
+				@type=AntBush
+			when "highGrass"
+				@type=AntHighGrass
 		end
+	end
+	def sigDecal(e)
+		callerName=e.getCaller.getName
+		@modifier="addEntity"
+		@type=AntDecal
+		return false
 	end
 	def sigDeco(e)
 		callerName=e.getCaller.getName

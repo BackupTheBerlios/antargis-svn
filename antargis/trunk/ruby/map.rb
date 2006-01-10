@@ -60,6 +60,8 @@ class AntRubyMap<AntMap
 				e=AntTwig.new
 			when "decoMesh"
 				e=AntDecoMesh.new
+			when "antBush"
+				e=AntBush.new
 		end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
@@ -198,6 +200,11 @@ class AntRubyMap<AntMap
 	def loadXML(n)
 		super(n)
 		@players.each{|p|p.move(0)}
+		
+		if n.get("scriptfile").length>0 and n.get("scriptclass").length>0
+			require n.get("scriptfile")
+			@script=eval(n.get("scriptclass")).new
+		end
 	end
 	
 	def saveXML(n)

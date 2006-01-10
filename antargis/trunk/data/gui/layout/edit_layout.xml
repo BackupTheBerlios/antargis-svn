@@ -60,6 +60,8 @@
 			<button col="6" row="1" name="farmstead" caption-image="data/gui/editor/farmstead.png"/>
 			<button col="7" row="1" name="workshop" caption-image="data/gui/editor/workshop.png"/>
 			<button col="8" row="1" name="fir" caption-image="data/gui/editor/fir.png"/>
+			<button col="9" row="1" name="bush" caption-image="data/gui/bush.png"/>
+			<button col="10" row="1" name="highGrass" caption-image="data/gui/editor/high_grass.png"/>
 						
 			<button col="0" row="0" name="tree" caption-image="data/gui/editor/small_tree.png"/>
 			<button col="1" row="0" name="stones" caption-image="data/gui/editor/stones1a.png"/>

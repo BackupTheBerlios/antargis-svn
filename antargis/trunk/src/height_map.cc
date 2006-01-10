@@ -162,7 +162,7 @@ void HeightMap::loadBinary(const std::string &pName)
       for(size_t x=0;x<mW+2;x++)
 	{
 	  is>>f;
-	  cdebug(f);
+	  //	  cdebug(f);
 	  mHeights[x+y*(mW+2)]=f;
 	}
     }

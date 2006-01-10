@@ -8,7 +8,7 @@
 			<text text="No image here."/>
 		</screen>
 	</cutscene>
-	<level file="data/levels1/tutorial1.xml">
+	<level file="data/levels/tutorial0.antlvl">
 		<failscene>
 			<screen>
 				<image filename="data/gui/map1.png"/>
@@ -20,6 +20,12 @@
 		<screen>
 			<image filename="data/gui/map1.png"/>
 			<text text="Yay! You finished the first level!"/>
+		</screen>
+	</cutscene>
+	<cutscene>
+		<screen>
+			<image filename="data/gui/map1.png"/>
+			<text text="Congratulations! You finished the tutorial campaign!"/>
 		</screen>
 	</cutscene>
 </campaign>

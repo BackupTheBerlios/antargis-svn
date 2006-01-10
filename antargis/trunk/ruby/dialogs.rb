@@ -41,7 +41,7 @@ class AntDialog<AGLayout
 	
 	def eventKeyDown(event)
 		if super then return true end
-		e=toAGSDLEvent(event)
+		e=event #toAGSDLEvent(event)
 		if e.getKey==SDLK_ESCAPE then	
 			sigClose
 			getMap.unpause

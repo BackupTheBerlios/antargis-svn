@@ -11,6 +11,7 @@
 #endif
 #include <ruby.h>
 
+#include <ag_main.h>
 
 std::set<AGRubyObject*> gDeletedRubies;
 
@@ -66,6 +67,9 @@ void general_markfunc(void *ptr)
 
 bool saveDelete(AGRubyObject *o)
 {
+  if(hasQuit())
+    return false; // we are quitting - so memory is discarded anyway - hopefully ;-)
+  
   //  cdebug("SAVEDEL:"<<o);
   assert(o);
   if(gDeletedRubies.find(o)!=gDeletedRubies.end())

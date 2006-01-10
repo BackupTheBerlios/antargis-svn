@@ -51,7 +51,7 @@ void AGTheme::setColor(const std::string &pName,AGColor pColor)
 
 AGFont AGTheme::getFont(const std::string &pName)
 {
-  cdebug(pName<<":"<<mFonts[pName].toString());
+  //  cdebug(pName<<":"<<mFonts[pName].toString());
   if(mFonts.find(pName)==mFonts.end())
     return mFonts[trunk(pName)];
   return mFonts[pName];
