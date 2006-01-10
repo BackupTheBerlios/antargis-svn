@@ -17,6 +17,9 @@ class CampaignLevel
 			@lostScene=CutScene.new(c)
 		}
 	end
+	def save(n)
+		n.set("file",@level)
+	end
 	def play
 		app=AntGameApp.new(@level,1024,768)
 		app.run
@@ -116,6 +119,7 @@ class CutScene
 			screen[:text]=""
 			s.getChildren("image").each{|c|
 				imageName=c.get("filename")
+				screen[:imageName]=imageName
 				if imageName
 					screen[:image]=getSurfaceManager.loadSurface(imageName)
 				end
@@ -126,6 +130,13 @@ class CutScene
 			@screens.push(screen)
 		}
 		@finished="won"
+	end
+	def save(n)
+		@screens.each{|s|
+			c=n.addChild("screen")
+			c.addChild("text").set("text",s[:text]) if s[:text]
+			c.addChild("image").set("filename",s[:imageName]) if s[:imageName]
+		}
 	end
 	def play
 		display=CutSceneDisplay.new(@image,@text)
@@ -169,7 +180,19 @@ class Campaign
 		root.set("image",@imageName)
 		root.set("description",@description)
 		root.set("part",@partID.to_s)
-		c=root.addChild("muh")
+		@part.each{|p|
+			c=nil
+			case p.class.to_s
+				when "CutScene"
+					c=root.addChild("cutscene")
+				when "CampaignLevel"
+					c=root.addChild("level")
+				else
+					raise "Unknown class type:"+p.class.to_s
+			end
+			p.save(c)
+		}
+		
 		puts doc.toString
 		#exit
 		saveFile(filename,doc.toString)
