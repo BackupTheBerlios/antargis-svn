@@ -58,9 +58,6 @@ class AntNewTree<AntMyEntity
 	def setTreeType(t)
 		@typeID=t
 	end
-	def getTexture
-		return "tree"+@typeID.to_s+".png"
-	end
 	def xmlName
 		return "antNewTree"
 	end
@@ -82,11 +79,9 @@ class AntNewTree<AntMyEntity
 	
 	private
 	def setupMesh
-		#makeFirMesh
-		#setMesh(Mesh.new(getMeshData("data/models/bare_tree.ant2",1),AGVector4.new(0,0,0,0),0))
-		#setMesh(GLTree.new(AGVector4.new(0,0,0,0),3))
 		setMesh(makeAppleTreeMesh(@angle))
-		#setMesh(makeGrassMesh(rand*0.25+0.25))
+		
+		setMesh(Mesh.new(getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),AGVector4.new(0,0,0,0),0))
 		return
 		for i in 1..([@maxApples,resource.get("food")*3].min)
 			p=@applePos[i-1]

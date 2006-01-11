@@ -18,7 +18,7 @@ $datadir=$prefix+"/share"
 $includedir=$prefix+"/include"
 
 dir_config("physfs")
-$CFLAGS="-O0 -g"
+$CFLAGS="-O0 -g -Wall"
 
 # check for SDL
 sdl_config = with_config('sdl-config', 'sdl-config')

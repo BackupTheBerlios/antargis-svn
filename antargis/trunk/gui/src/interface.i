@@ -32,6 +32,7 @@
 %include "std_map.i"
 
 %template(StringVector) std::vector<std::string>;
+%template(NodeVector) std::vector<Node*>;
 
 %include "antargisgui.h"
 
