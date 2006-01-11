@@ -103,6 +103,7 @@ class AGVector2
   AGVector2 normal() const;
 
   float operator[](int index) const;
+  float &operator[](int index);
 
   bool nonZero() const;
 

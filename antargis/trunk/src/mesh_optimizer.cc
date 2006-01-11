@@ -1,5 +1,6 @@
 #include "mesh_optimizer.h"
 #include "ag_debug.h"
+#include "ant_serial.h"
 
 //////////////////////////////////////////////////////////////////////
 // Mesh-optimizing
@@ -121,4 +122,61 @@ VertexArray MeshOptimizer::getArray()
 AGVector4 MeshOptimizer::getV(size_t i)
 {
   return mVertices[i].v;
+}
+
+
+MeshOptimizer loadFromText(const std::string &pText, bool withTex, float zoom)
+{
+  MeshOptimizer opt;
+  MeshVertex mVertices[4];
+
+  BinaryStringIn in(pText);
+
+  Uint16 meshes,faces,vertices;
+  AGVector3 v;
+
+  in>>meshes;
+  cdebug("meshes:"<<meshes);
+  for(;meshes>0;meshes--)
+    {
+      in>>faces;
+      cdebug("faces:"<<faces);
+      for(Uint16 i=0;i<faces;i++)
+	{
+	  in>>vertices;
+	  cdebug("vs:"<<vertices);
+	  assert(vertices<=4);
+	  for(Uint16 j=0;j<vertices;j++)
+	    {
+	      in>>v;
+	      mVertices[j].v=AGVector4(v,1);
+	      //	      cdebug("v:"<<mVertices[j].v.toString());
+	      in>>mVertices[j].n;
+	      in>>v;
+	      mVertices[j].c=AGVector4(v,1);
+	      if(withTex)
+		in>>mVertices[j].t;
+	      mVertices[j].v*=zoom;
+	      mVertices[j].v[3]=1;
+	    }
+	  if(vertices==3)
+	    {
+	      opt.add(mVertices[0]);
+	      opt.add(mVertices[1]);
+	      opt.add(mVertices[2]);
+	    }
+	  else
+	    {
+	      opt.add(mVertices[0]);
+	      opt.add(mVertices[1]);
+	      opt.add(mVertices[2]);
+	      opt.add(mVertices[0]);
+	      opt.add(mVertices[2]);
+	      opt.add(mVertices[3]);
+	    }
+	}
+    }
+
+
+  return opt;
 }

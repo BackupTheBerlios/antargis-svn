@@ -55,18 +55,18 @@ File.open(infile).each_line{|line|
 }
 
 file=File.new(outfile,"wb")
-file.print([1].pack("S"))
-file.print([$fs.length].pack("S"))
+file.print([1].pack("v"))
+file.print([$fs.length].pack("v"))
 $fs.each{|face|
-	file.print([face.length].pack("S"))
+	file.print([face.length].pack("v"))
 	face.each{|mv|
-		file.print($vs[mv[0]].pack("fff"))
-		file.print($ns[mv[2]].pack("fff"))
-		file.print([1,1,1].pack("fff"))
+		file.print($vs[mv[0]].pack("eee"))
+		file.print($ns[mv[2]].pack("eee"))
+		file.print([1,1,1].pack("eee"))
 		if $ts[mv[1]]
-			file.print($ts[mv[1]].pack("ff"))
+			file.print($ts[mv[1]].pack("ee"))
 		else
-			file.print([0,0].pack("ff"))
+			file.print([0,0].pack("ee"))
 		end
 	}
 }

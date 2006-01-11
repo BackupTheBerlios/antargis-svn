@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <sstream>
 #include <physfs.h>
+#include <ag_triangle.h>
 
 class SerialException
 {
@@ -21,7 +22,11 @@ class BinaryIn
 
   BinaryIn &operator>>(Sint32 &i);
   BinaryIn &operator>>(Uint32 &i);
+  BinaryIn &operator>>(Uint16 &i);
   BinaryIn &operator>>(float &f);
+  BinaryIn &operator>>(AGVector2 &v);
+  BinaryIn &operator>>(AGVector3 &v);
+  BinaryIn &operator>>(AGVector4 &v);
 };
 
 class BinaryOut

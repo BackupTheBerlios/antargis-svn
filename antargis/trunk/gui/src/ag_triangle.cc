@@ -338,6 +338,11 @@ float AGVector2::operator[](int index) const
   assert(index>=0 && index<2);
   return v[index];
 }
+float &AGVector2::operator[](int index)
+{
+  assert(index>=0 && index<2);
+  return v[index];
+}
 
 
 /////////////////////////////////////////////////////////////////////////////

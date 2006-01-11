@@ -9,6 +9,7 @@ int mLittleEndian=-1;
 
 bool littleEndian()
 {
+  //return true;
   if(mLittleEndian<0)
     {
       Uint16 i=0x100;
@@ -48,8 +49,16 @@ BinaryIn &BinaryIn::operator>>(Uint32 &u)
 {
   if(eof())
     throw SerialException();
-  u=((Uint32(read())&0xFF)<<24)|((Uint32(read()&0xFF))<<16)|((Uint32(read())&0xFF)<<8)|(Uint32(read())&0xFF);
+  u=((Uint32(read())&0xFF))|((Uint32(read()&0xFF))<<8)|((Uint32(read())&0xFF)<<16)|((Uint32(read())&0xFF)<<24);
 
+  return *this;
+}
+
+BinaryIn &BinaryIn::operator>>(Uint16 &i)
+{
+  if(eof())
+    throw SerialException();
+  i=((Uint16(read())&0xFF))|((Uint16(read())&0xFF)<<8);
   return *this;
 }
 
@@ -63,7 +72,7 @@ BinaryIn &BinaryIn::operator>>(float &f)
       std::cerr<<"sizeof(float) should be 4 :-|"<<std::endl;
       throw SerialException();
     }
-  if(littleEndian())
+  if(!littleEndian())
     {
       // ok, load directly
       char *s=(char*)&f;
@@ -81,10 +90,25 @@ BinaryIn &BinaryIn::operator>>(float &f)
       s[1]=read();
       s[0]=read();
     }
-  
-
   return *this;
 }
+
+BinaryIn &BinaryIn::operator>>(AGVector2 &v)
+{
+  (*this)>>v[0]>>v[1];
+  return *this;
+}
+BinaryIn &BinaryIn::operator>>(AGVector3 &v)
+{
+  (*this)>>v[0]>>v[1]>>v[2];
+  return *this;
+}
+BinaryIn &BinaryIn::operator>>(AGVector4 &v)
+{
+  (*this)>>v[0]>>v[1]>>v[2]>>v[3];
+  return *this;
+}
+
 
 
 
@@ -108,10 +132,10 @@ BinaryOut &BinaryOut::operator<<(const Sint32 &i)
 }
 BinaryOut &BinaryOut::operator<<(const Uint32 &u)
 {
-  write((u>>24)&0xFF);
-  write((u>>16)&0xFF);
-  write((u>>8 )&0xFF);
   write((u>>0 )&0xFF);
+  write((u>>8 )&0xFF);
+  write((u>>16)&0xFF);
+  write((u>>24)&0xFF);
   return *this;
 }
 BinaryOut &BinaryOut::operator<<(const float &f)
@@ -121,7 +145,7 @@ BinaryOut &BinaryOut::operator<<(const float &f)
       std::cerr<<"sizeof(float) should be 4 :-|"<<std::endl;
       throw SerialException();
     }
-  if(littleEndian())
+  if(!littleEndian())
     {
       const char *s=(const char*)&f;
       write(s[0]);

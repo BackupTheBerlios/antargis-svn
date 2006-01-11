@@ -35,5 +35,6 @@ class MeshOptimizer
   AGVector4 getV(size_t i);
 };
 
+MeshOptimizer loadFromText(const std::string &pText, bool withTex, float zoom);
 
 #endif
