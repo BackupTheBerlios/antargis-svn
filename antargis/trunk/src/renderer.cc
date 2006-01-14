@@ -129,7 +129,7 @@ void Renderer::beginShadowComputation()
   //Draw the scene
   // Offset the drawing a little back, so that slopy surfaces don't get shadowed
   glEnable(GL_POLYGON_OFFSET_FILL);
-  glPolygonOffset(0,1); // was 1,1
+  glPolygonOffset(1,1); // was 1,1
 
 }
 void Renderer::endShadowComputation()

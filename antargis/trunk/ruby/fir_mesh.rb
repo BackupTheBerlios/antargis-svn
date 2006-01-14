@@ -134,7 +134,7 @@ def getFirMeshData
 	
 	
 	$firdata=MeshData.new(opt.getArray,"data/textures/models/fir_complete.png")
-	
+	$firdata.setTransparent(true)
 	return $firdata
 end
 

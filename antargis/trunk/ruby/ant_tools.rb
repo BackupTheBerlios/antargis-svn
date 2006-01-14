@@ -3,13 +3,15 @@
 require "ant_sound.rb"
 
 def getMeshData(file,zoom,texture="",shadow=true)
+	
+	id=file+":"+texture
 	if not $meshes
 		$meshes={}
 	end
-	if not $meshes[file]
-		$meshes[file]=MeshData.new(file,zoom,texture,shadow)
+	if not $meshes[id]
+		$meshes[id]=MeshData.new(file,zoom,texture,shadow)
 	end
-	return $meshes[file]
+	return $meshes[id]
 end
 
 def getAnimMeshData(file)

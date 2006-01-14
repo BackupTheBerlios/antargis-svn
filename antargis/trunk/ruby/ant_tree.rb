@@ -25,10 +25,32 @@ require 'fir_mesh.rb'
 require 'ant_appletree.rb'
 require 'ant_grass.rb'
 
+
+def getTreeTypes
+	files=[
+		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
+		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/fir5.png"),
+		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png"),
+		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree5.png"),
+		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree9.png"),
+		getMeshData("data/models/tree6.ant2",0.45,"data/textures/models/tree5.png"),
+		getMeshData("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png"),
+		getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
+		getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
+	]
+end
+
+def getTreeMeshByType(type)
+	d=getTreeTypes[type]
+	d.setTransparent(true)
+	return d
+end
+
 class AntNewTree<AntMyEntity
-	def initialize()
+	def initialize(typeID=nil)
 		super(AGVector2.new(0,0))
-		@typeID=(rand()*12).to_i
+		@typeID=typeID
+		@typeID||=(rand*getTreeTypes.length).to_i
 		setType("tree")
 		@angle=rand*360
 		
@@ -79,9 +101,18 @@ class AntNewTree<AntMyEntity
 	
 	private
 	def setupMesh
+		setMesh(Mesh.new(getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),0))
+		return
+	
 		setMesh(makeAppleTreeMesh(@angle))
 		
 		setMesh(Mesh.new(getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),AGVector4.new(0,0,0,0),0))
+		data=getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png")
+		data.setTransparent(true)
+		setMesh(Mesh.new(data,AGVector4.new(0,0,0,0),0))
+		
+		
+		
 		return
 		for i in 1..([@maxApples,resource.get("food")*3].min)
 			p=@applePos[i-1]
