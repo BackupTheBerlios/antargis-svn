@@ -124,6 +124,12 @@
 	result->mRubyObject=true;
 }
 %markfunc AGButton "general_markfunc"
+%exception AGFrame::AGFrame {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGFrame "general_markfunc"
 %exception AGSubMenu::AGSubMenu {
 	$action
 	result->mRUBY=self;
@@ -234,6 +240,8 @@ else if(dynamic_cast<AGListBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGFrame*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGFrame,0);
 else if(dynamic_cast<AGColorButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGMenu*>(result))
@@ -450,6 +458,8 @@ else if(dynamic_cast<AGListBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGFrame*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGFrame,0);
 else if(dynamic_cast<AGColorButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGMenu*>(result))
@@ -524,6 +534,8 @@ else if(dynamic_cast<AGListBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGFrame*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGFrame,0);
 else if(dynamic_cast<AGColorButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGMenu*>(result))
@@ -618,6 +630,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(out) AGFrame*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGFrame,0);
    }
  }
  else vresult=Qnil;
@@ -780,6 +806,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGFontEngine {
  AGFontEngine *b;
  Data_Get_Struct($input,AGFontEngine,b);
+ $result=*b;
+}
+%typemap(directorout) AGFrame {
+ AGFrame *b;
+ Data_Get_Struct($input,AGFrame,b);
  $result=*b;
 }
 %typemap(directorout) AGGLWidget {

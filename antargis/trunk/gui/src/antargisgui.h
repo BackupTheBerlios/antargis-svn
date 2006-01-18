@@ -47,6 +47,7 @@
 #include "ag_triangle.h"
 #include "ag_window.h"
 #include "ag_xml.h"
+#include "ag_frame.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
 %include "ag_rubyobj.h"
@@ -96,6 +97,7 @@
 %include "ag_triangle.h"
 %include "ag_window.h"
 %include "ag_xml.h"
+%include "ag_frame.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 #endif
 #endif

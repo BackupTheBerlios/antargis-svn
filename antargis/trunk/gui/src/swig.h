@@ -1416,4 +1416,51 @@ public:
 };
 
 
+class SwigDirector_AGFrame : public AGFrame, public Swig::Director {
+
+public:
+    SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, size_t width);
+    SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, AGBorder const &pBorder);
+    virtual bool eventLostFocus();
+    virtual bool eventGotFocus();
+    virtual bool eventShow();
+    virtual int minHeight() const;
+    virtual int minWidth() const;
+    virtual bool canFocus() const;
+    virtual AGPoint getMousePosition() const;
+    virtual Uint8 getButtonState() const;
+    virtual AGRect getClientRect() const;
+    virtual ~SwigDirector_AGFrame();
+    virtual bool eventMouseButtonUp(AGEvent *m);
+    virtual bool eventMouseButtonDown(AGEvent *m);
+    virtual bool eventMouseClick(AGEvent *m);
+    virtual bool eventMouseMotion(AGEvent *m);
+    virtual bool signal(AGEvent *m);
+    virtual bool acceptEvent(SDL_Event const *pEvent);
+    virtual bool eventActive(AGEvent *m);
+    virtual bool eventKeyDown(AGEvent *m);
+    virtual bool eventKeyUp(AGEvent *m);
+    virtual bool eventQuit(AGEvent *m);
+    virtual bool eventQuitModal(AGEvent *m);
+    virtual bool eventSysWM(AGEvent *m);
+    virtual bool eventResize(AGEvent *m);
+    virtual bool eventMouseEnter();
+    virtual void clear();
+    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual void drawAll(AGPainter &p);
+    virtual void drawAfter(AGPainter &p);
+    virtual void draw(AGPainter &p);
+    virtual void setLeft(int x);
+    virtual void setTop(int y);
+    virtual void setHeight(int w);
+    virtual void setWidth(int w);
+    virtual bool eventMouseLeave();
+    virtual bool eventHide();
+    virtual void addChild(AGWidget *w);
+    virtual void addChildBack(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
+    virtual void mark();
+};
+
+
 #endif
