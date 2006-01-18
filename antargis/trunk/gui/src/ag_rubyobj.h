@@ -1,6 +1,11 @@
 #ifndef RUBY_OBJ_H
 #define RUBY_OBJ_H
 
+#ifdef WIN32
+#undef connect
+#undef close
+#endif
+
 class AGRubyObject
 {
  public:
