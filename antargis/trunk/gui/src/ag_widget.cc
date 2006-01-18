@@ -363,9 +363,9 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
 
 bool AGWidget::eventMouseClick(AGEvent *m)
 {
-  CTRACE;
-  cdebug("name:"<<getName());
-  cdebug("type:"<<typeid(*this).name());
+  //  CTRACE;
+  //  cdebug("name:"<<getName());
+  //  cdebug("type:"<<typeid(*this).name());
   return false;
 }
 

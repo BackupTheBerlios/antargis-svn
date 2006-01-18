@@ -73,7 +73,7 @@ void AGTable::addChild(int px,int py,AGWidget *pWidget)
 {
   if(px>=w || py>=h || px<0 || py<0)
     {
-      cdebug("wrong input position");
+      cdebug("WARNING:wrong input position");
       return;
     }
 

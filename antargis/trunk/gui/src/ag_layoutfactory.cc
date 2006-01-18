@@ -49,10 +49,10 @@ void AGLayoutFactory::addCreator(const std::string &pName,AGLayoutCreator *creat
 
 AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
 {
-  cdebug(pNode.getName());
   if(mCreators[pNode.getName()])
     return mCreators[pNode.getName()]->create(pParent,pRect,pNode);
-  cdebug("not found");
+  if(pNode.getName()!="")
+    cdebug("no creation at:"<<pNode.getName());
   return 0;
 }
   

@@ -94,7 +94,7 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   AGWidget *w=0;
 
-  cdebug("n:"<<n);
+  //  cdebug("n:"<<n);
 
   w=getLayoutFactory()->create(pParent,geom,pNode);
 
@@ -286,7 +286,7 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geo
 	{
 	  int col=toInt((*i)->get("col"));
 	  int row=toInt((*i)->get("row"));
-	  cdebug(col<<"/"<<row);
+	  //	  cdebug(col<<"/"<<row);
 	  t->addChild(col,row,w);
 	}
     }
