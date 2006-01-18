@@ -24,7 +24,7 @@
 #include <iostream>
 
 #ifdef __WIN32__
-#icnlude <winsock2.h>
+#include <winsock2.h>
 #endif
 #include <ruby.h>
 

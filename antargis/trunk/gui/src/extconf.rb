@@ -5,7 +5,9 @@ require 'Makefile.rb'
 def windows
 	if $windows==nil
 		$windows=have_library("opengl32")
-		puts "no opengl32 found - so expecting _not_ to use windows"
+		if not $windows
+		  puts "no opengl32 found - so expecting _not_ to use windows"
+		end
 	end
 	return $windows
 end
@@ -38,13 +40,16 @@ $INCLUDES = "-I#{Config::CONFIG['archdir']} -I/usr/include/SDL"
 cfg = Config::MAKEFILE_CONFIG
 
 puts cfg["CC"]
-ccache = with_config('ccache', 'ccache')
-if ccache
-	cfg["CC"]=ccache+" g++"
-else
+if windows
 	cfg["CC"]="g++"
+else
+	ccache = with_config('ccache', 'ccache')
+	if ccache
+		cfg["CC"]=ccache+" g++"
+	else
+		cfg["CC"]="g++"
+	end
 end
-
 if not have_header('SDL.h')
 	puts "Please install libSDL"
 	exit
@@ -71,19 +76,24 @@ have_library('stdc++')
 have_library('z')
 have_library('png')
 
-# swig
-swig = with_config('swig', 'swig')
-
-# clean swig-generated files
-$cleanfiles=["swig.cc","swig.o","swig.h","nantmarker.hh"]
-
 create_makefile("libantargisgui")
 GC.start
 mf=File.open("Makefile","a")
-mf.puts "swig.cc: interface.i nantmarker.hh "+$interfaceHeaders.join(" ")
-mf.puts "	#{swig} -v -Wall -ruby -c++ #{$INCLUDES} -o swig.cc interface.i 2>&1"
-mf.puts "nantmarker.hh: "+$interfaceHeaders.join(" ")
-mf.puts "	./createmarker.rb "+$interfaceHeaders.join(" ")
+
+if not windows
+	
+	# swig
+	swig = with_config('swig', 'swig')
+	
+	# clean swig-generated files
+	$cleanfiles=["swig.cc","swig.o","swig.h","nantmarker.hh"]
+	
+	mf.puts "swig.cc: interface.i nantmarker.hh "+$interfaceHeaders.join(" ")
+	mf.puts "	#{swig} -v -Wall -ruby -c++ #{$INCLUDES} -o swig.cc interface.i 2>&1"
+	mf.puts "nantmarker.hh: "+$interfaceHeaders.join(" ")
+	mf.puts "	./createmarker.rb "+$interfaceHeaders.join(" ")
+	
+end
 
 mf.puts "install: install-so install-rb install-bin install-headers"
 

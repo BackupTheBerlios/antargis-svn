@@ -5,7 +5,7 @@ def execute(str)
 end
 
 # install library
-system("cd src && ./extconf.rb && make && make install")
+system("cd src && ruby extconf.rb && make && make install")
 
 # install data
-system("cd data && ./extconf.rb && make && make install")
+system("cd data && ruby extconf.rb && make && make install")
