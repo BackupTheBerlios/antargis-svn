@@ -38,6 +38,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
     tstr=pTheme+"."+tstr;
 
 
+  cdebug("image:"<<tstr);
   AGSurface s=getTheme()->getSurface(tstr);
   int bw=s.getRect().w/3;
   int titBarHeight=20;

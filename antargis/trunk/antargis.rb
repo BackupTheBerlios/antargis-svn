@@ -68,8 +68,6 @@ class AntGameApp <AntRubyView
 	end
 	
 	
-	
-	
 	def initDebug
 		@debug=AGLayout.new(@layout,loadFile("debug.xml"))
 		@layout.addChild(@debug)
@@ -77,10 +75,15 @@ class AntGameApp <AntRubyView
 	end
 	
 	def storyTalk(title,text)
+		puts "test1"
 		@story=AntStoryTalk.new(@layout)
+		puts "test2"
 		@layout.addChild(@story)
+		puts "test3"
 		@story.setText(text)
+		puts "test4"
 		@story.setTitle(title)
+		puts "test5"
 	end
 
 	def eventFrame(time)
@@ -148,7 +151,7 @@ def startGame(file="savegames/savegame0.antlvl")
 end
 puts ENV["_"]
 #exit
-if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/)
+if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
 	if ARGV.length>0
 		savegame="levels/"+ARGV[0]+".antlvl"

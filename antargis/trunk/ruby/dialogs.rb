@@ -58,9 +58,14 @@ end
 class AntStoryTalk<AntDialog
 	include AGHandler
 	def initialize(parent)
+		puts "story1"
 		super(parent,"data/gui/layout/storytalk.xml")
+		puts "pause"
 		getMap().pause()
-		addHandler(toAGWindow(getChild("window")),:sigClose,:sigOk)
+		puts "ok"
+		#addHandler(toAGWindow(getChild("window")),:sigClose,:sigOk)
+		addHandler(getChild("window"),:sigClose,:sigOk)
+		puts "ok2"
 		#addHandler(getChild("ok"),:sigClick,:sigClose)
 	end
 	def setText(text)
@@ -72,8 +77,8 @@ class AntStoryTalk<AntDialog
 	end
 	
 	# signals	
-	def sigOk
-		puts "pCaller:"+callerName
+	def sigOk(e)
+		puts "pCaller:"+e.getCaller.getName
 		getMap().unpause()
 		toAGWindow(getChild("window")).close
 	end

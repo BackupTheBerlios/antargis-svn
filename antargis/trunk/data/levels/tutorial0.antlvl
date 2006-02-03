@@ -1,4 +1,4 @@
-<antargisLevel filename="savegames/tutorial0.hmap" height="128" width="128">
+<antargisLevel filename="savegames/tutorial0.hmap" height="128" width="128" scriptfile="levels/tutorial0.rb" scriptclass='Tutorial0'>
   <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="44.9192" y="14.2581" z="2.25431"/>
   </antHero>

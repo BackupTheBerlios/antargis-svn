@@ -12,7 +12,7 @@
 		<failscene>
 			<screen>
 				<image filename="data/gui/map1.png"/>
-				<text text="You lost! Better lucke next time!"/>
+				<text text="You lost! Better luck next time!"/>
 			</screen>
 		</failscene>
 	</level>
