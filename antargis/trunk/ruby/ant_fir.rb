@@ -42,8 +42,14 @@ class AntFir<AntBaseTree
 	end
 	
 	private
+	def meshData
+		data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
+		data.setTransparent(true)
+		return data
+	end
 	def setupMesh
-		setMesh(makeFirMesh)
+		#setMesh(makeFirMesh)
+		setMesh(Mesh.new(meshData,AGVector4.new,0))
 	end
 end
 

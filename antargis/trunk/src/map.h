@@ -41,7 +41,7 @@ class AntMap:public HeightMap
   void loadXML(const xmlpp::Node &node);
 
   void saveMap(const std::string &pFilename);
-  void loadMap(const std::string &pFilename);
+  virtual void loadMap(const std::string &pFilename);
 
   void move(float pTime);
 

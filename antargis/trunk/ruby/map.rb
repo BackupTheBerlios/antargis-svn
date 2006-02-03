@@ -23,6 +23,7 @@
 
 require 'ant_player.rb'
 require 'ant_trigger.rb'
+require 'level.rb'
 
 class AntRubyMap<AntMap
 	def initialize(w,h)
@@ -130,6 +131,11 @@ class AntRubyMap<AntMap
 			@story[name]=a
 		}
 	end
+
+	def loadMap(filename)
+		@filename=filename
+		super
+	end
 	
 	def removeEntity(e)
 		@ents.delete(e.getID)
@@ -174,9 +180,17 @@ class AntRubyMap<AntMap
 		}
 	end
 	def trigger(hero,t)
-		@players.each{|p|p.trigger(hero,t)}
-		if @story[t.name]
-			playStory(t.name)
+		done=false
+		if @script
+			if @script.trigger(hero,t)
+				done=true
+			end
+		end
+		if not done
+			@players.each{|p|p.trigger(hero,t)}
+			if @story[t.name]
+				playStory(t.name)
+			end
 		end
 	end
 	
@@ -202,9 +216,18 @@ class AntRubyMap<AntMap
 		@players.each{|p|p.move(0)}
 		
 		if n.get("scriptfile").length>0 and n.get("scriptclass").length>0
-			require n.get("scriptfile")
-			@script=eval(n.get("scriptclass")).new
+			c=loadFile(n.get("scriptfile"))
+			levelName=getLevelName
+			c="module #{levelName}\n"+c+"\nend\n"
+			puts c
+			puts eval(c)
+			cl="#{levelName}::"+n.get("scriptclass")
+			@script=eval(cl).new
 		end
+	end
+
+	def getLevelName
+		"L_"+@filename.gsub(".rb","").gsub(".","_").gsub("/","_")
 	end
 	
 	def saveXML(n)

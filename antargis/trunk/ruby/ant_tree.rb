@@ -29,19 +29,22 @@ require 'ant_grass.rb'
 def getTreeTypes
 	files=[
 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
-		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/fir5.png"),
+		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png"),
+#		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/fir5.png"),
 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png"),
 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree5.png"),
 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree9.png"),
 		getMeshData("data/models/tree6.ant2",0.45,"data/textures/models/tree5.png"),
 		getMeshData("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png"),
 		getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
-		getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
+		getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),
+		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
 	]
 end
 
 def getTreeMeshByType(type)
 	d=getTreeTypes[type]
+	d||=getTreeTypes[0]
 	d.setTransparent(true)
 	return d
 end
