@@ -11,6 +11,7 @@ def getCampaigns
 end
 
 class CampaignLevel
+	attr_reader :result
 	def initialize(node)
 		@level=node.get("file")
 		node.getChildren("failscene").each{|c|
@@ -23,11 +24,12 @@ class CampaignLevel
 	def play
 		app=AntGameApp.new(@level,1024,768)
 		app.run
+		@result=app.result
 		@finish=app.finished
 		app=nil
 		GC.start
 		
-		case @finish
+		case @result.won
 			when "lost"
 				@lostScene.play
 		end

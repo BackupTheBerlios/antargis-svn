@@ -3,8 +3,17 @@ class Level1<Level
 		puts "Level inited"
 		#exit
 	end
-	def trigger(hero,t)
+	def eventTrigger(hero,t)
 		puts "TRIGGER"
-		return true
+		return false #ignore
 	end
+	def eventOwnerChanged(ent)
+		case ent.getName	
+			when "Godrin"
+				lostLevel
+			when "Bantor"
+				wonLevel
+		end
+	end
+
 end

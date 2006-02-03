@@ -182,7 +182,7 @@ class AntRubyMap<AntMap
 	def trigger(hero,t)
 		done=false
 		if @script
-			if @script.trigger(hero,t)
+			if @script.eventTrigger(hero,t)
 				done=true
 			end
 		end
@@ -289,6 +289,14 @@ class AntRubyMap<AntMap
 			$antView.playStory(@story[name])
 		end
 	end
+
+
+	def eventOwnerChanged(ent)
+		if @script
+			@script.eventOwnerChanged(ent)
+		end
+	end
+
 end
 
 

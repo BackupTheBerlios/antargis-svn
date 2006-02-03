@@ -33,11 +33,16 @@ require 'dialogs.rb'
 require 'ents.rb'
 require 'map.rb'
 require 'view.rb'
+require 'game_result.rb'
 
 class AntGameApp <AntRubyView
+	attr_accessor :result
+
+
 	include AGHandler
 	def initialize(savegame,w,h)
 		super(w,h)
+		@result=GameResult
 		$app=self	
 		@map=AntRubyMap.new(32,32) # some small dummy size - gets overriden by loadMap anyway
 		$map=@map
@@ -139,6 +144,7 @@ def startGame(file="savegames/savegame0.antlvl")
 	app.run
 	app=nil
 	GC.start
+	return app.result
 end
 puts ENV["_"]
 #exit

@@ -123,7 +123,10 @@ class AntBoss<AntMyEntity
 			@job.defeated(man)
 		end
 	end
+
+
 	def setOwner(owner)
+		getMap.eventOwnerChanged(self)
 		@owner=owner
 		dputs "RESETING PLAYER:"
 		if @player
