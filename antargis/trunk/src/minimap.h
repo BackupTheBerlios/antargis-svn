@@ -21,6 +21,11 @@ class MiniMap:public AGWidget
   virtual bool eventMouseClick(AGEvent *m);
 
  private:
+
+
+  AGVector2 toMapCoords(AGVector2 v) const;
+  AGVector2 fromMapCoords(AGVector2 v) const;
+
   void mapChangedP(bool force);
 
   void drawEntities(AGPainter &p);

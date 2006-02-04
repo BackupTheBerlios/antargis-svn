@@ -5,11 +5,11 @@ require 'mkmf'
 #require 'file'
 require 'ftools'
 
-begin File.mkdir(".deps")
+begin File.mkpath(".deps")
 rescue 
 end
 
-`mkdir .deps`
+#`mkdir .deps`
 
 def windows
 	if $windows==nil

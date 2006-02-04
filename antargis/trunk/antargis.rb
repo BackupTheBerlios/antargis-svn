@@ -145,9 +145,10 @@ end
 def startGame(file="savegames/savegame0.antlvl")
 	app=AntGameApp.new(file,1024,768)
 	app.run
+	result=app.result
 	app=nil
 	GC.start
-	return app.result
+	return result
 end
 puts ENV["_"]
 #exit

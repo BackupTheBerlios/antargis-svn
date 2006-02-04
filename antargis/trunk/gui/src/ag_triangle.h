@@ -425,6 +425,8 @@ class AGRect2
   float w() const;
   float h() const;
 
+  SDL_Rect sdl() const;
+
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
@@ -622,5 +624,8 @@ class AGBox3
   AGBox3 operator+(const AGVector3 &v) const;
 };
 
+std::ostream &operator<<(std::ostream &o,const AGVector2&v);
+std::ostream &operator<<(std::ostream &o,const AGVector3&v);
+std::ostream &operator<<(std::ostream &o,const AGVector4&v);
 
 #endif

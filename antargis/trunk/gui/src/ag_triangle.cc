@@ -284,8 +284,8 @@ AGVector2 &AGVector2::operator+=(const AGVector2 &p)
 }
 AGVector2 &AGVector2::operator-=(const AGVector2 &p)
 {
-  v[0]+=p.v[0];
-  v[1]+=p.v[1];
+  v[0]-=p.v[0];
+  v[1]-=p.v[1];
   return *this;
 }
 
@@ -1199,6 +1199,17 @@ AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y,1),v1(x+w,y+h,1)
 {
 }
+
+SDL_Rect AGRect2::sdl() const
+{
+  SDL_Rect r;
+  r.x=int(v0[0]);
+  r.y=int(v0[1]);
+  r.w=int(v1[0]-v0[0]);
+  r.h=int(v1[1]-v0[1]);
+  return r;
+}
+
 
 void AGRect2::include(const AGVector2 &v)
 {
@@ -2218,4 +2229,23 @@ std::string AGRect3::toString() const
 }
 
 
+
+
+std::ostream &operator<<(std::ostream &o,const AGVector2&v)
+{
+  o<<v.toString();
+  return o;
+}
+
+std::ostream &operator<<(std::ostream &o,const AGVector3&v)
+{
+  o<<v.toString();
+  return o;
+}
+
+std::ostream &operator<<(std::ostream &o,const AGVector4&v)
+{
+  o<<v.toString();
+  return o;
+}
 

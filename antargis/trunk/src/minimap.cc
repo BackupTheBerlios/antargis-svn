@@ -135,6 +135,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
 void MiniMap::draw(AGPainter &p)
 {
+  CTRACE;
   AGRect m=getRect().origin();
   p.blit(mTexture,m);
 
@@ -144,25 +145,18 @@ void MiniMap::draw(AGPainter &p)
     {
       AGVector4 cam=mScene->getCamera();
       
-      int x,y,w,h;
+      int w,h;
 
-      float mx=cam[0],my=cam[1];
-
-      x=getRect().width()*mx/mMap->getW();
-      y=getRect().height()*my/mMap->getH();
-      
-      y=getRect().height()-y;
-
+      AGVector2 v=fromMapCoords(cam.dim2());
 
       // now with approx. frustum
 
       w=25*getRect().width()/mMap->getW();
       h=25*getRect().height()/mMap->getH();
       
-      x+=w/2;
-      y+=h/2;
+      v-=AGVector2(w/2,h/2);
 
-      AGRect r(x-w,y-h,w,h);
+      AGRect r(v[0],v[1],w,h);
       AGColor c1(0xff,0xaa,0);
       AGColor c2(0xee,0x77,0);
       
@@ -170,7 +164,6 @@ void MiniMap::draw(AGPainter &p)
       r=r.shrink(1);
       p.drawBorder(r,1,c2,c1);
     }
-  //  drawEntities(p);
 }
 
 void MiniMap::drawEntities(AGPainter &p)
@@ -183,10 +176,9 @@ void MiniMap::drawEntities(AGPainter &p)
 	  if((*i)->showOnMinimap())
 	    {
 	      AGVector2 v=(*i)->getPos2D();
-	      float x=v[0]/mMap->getW()*width();
-	      float y=(1-v[1]/mMap->getH())*height();
+	      v=fromMapCoords(v);
 	      
-	      p.drawRect(AGRect(x,y,2,2),(*i)->getMinimapColor());
+	      p.drawRect(AGRect(v[0],v[1],2,2),(*i)->getMinimapColor());
 	    }
 	}
 
@@ -214,24 +206,40 @@ bool MiniMap::eventMouseClick(AGEvent *m)
   if(mMap==0 || mScene==0)
     return AGWidget::eventMouseClick(m);
 
-  float x=p.x;
-  float y=p.y;
+  AGVector2 v(p.x,p.y);
+  v=toMapCoords(v);
 
-  cdebug(x<<"  "<<y);
-
-  x/=getRect().width();
-  y/=getRect().height();
-  y=1-y;
-
-  cdebug(x<<"  "<<y);
-  x*=mMap->getW();
-  y*=mMap->getH();
-
-  cdebug(x<<"  "<<y);
-
-  mScene->setCamera(AGVector4(x,y,0,0));
+  mScene->setCamera(AGVector4(v[0],v[1],0,0));
 
   return true;
+}
+
+AGVector2 MiniMap::toMapCoords(AGVector2 v) const
+{
+  AGRect r=getRect();
+  v[0]/=r.width();
+  v[1]/=r.height();
+
+  v[1]=1-v[1];
+
+  v[0]*=mMap->getW();
+  v[1]*=mMap->getH();
+
+  return v;
+}
+AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
+{
+  AGRect r=getRect();
+
+  v[0]/=mMap->getW();
+  v[1]/=mMap->getH();
+
+  v[1]=1-v[1];
+
+  v[0]*=r.width();
+  v[1]*=r.height();
+
+  return v;
 }
 
 
