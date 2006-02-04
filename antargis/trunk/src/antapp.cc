@@ -102,12 +102,13 @@ bool GLApp::eventMouseMotion(AGEvent *e)
   if(e->isSDLEvent() && omx>=0)
     {
       AGPoint p=e->getMousePosition();
-      AGVector4 cam=scene.getCamera();
+      //      AGVector4 cam=scene.getCamera();
       mx=p.x-omx;
       my=p.y-omy;
       
-      camera=cam+AGVector4(-mx*0.03,my*0.03,0);
-      scene.setCamera(camera);
+      setCamera(getCamera()+AGVector2(-mx*0.03,my*0.03));
+      //      camera=cam+AGVector4(-mx*0.03,my*0.03,0);
+      //      scene.setCamera(camera);
       
       omx=p.x;
       omy=p.y;
@@ -123,6 +124,16 @@ bool GLApp::eventMouseMotion(AGEvent *e)
 
   mMayClick=false;
   return AGApplication::eventMouseMotion(e);
+}
+
+AGVector2 GLApp::getCamera() const
+{
+  return scene.getCamera().dim2();
+}
+
+void GLApp::setCamera(const AGVector2 &p)
+{
+  scene.setCamera(AGVector4(p[0],p[1],0));
 }
 
 bool GLApp::eventKeyDown(AGEvent *e)

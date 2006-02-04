@@ -81,9 +81,6 @@ void MiniMap::mapChangedP(bool forceFull=false)
 	  {
 	    AGVector2 mv(toMapCoords(AGVector2(x,y)));
 
-	    //	    float mx=toMapCoordx*mw/w;
-	    //	    float my=(1-y/float(h))*mh;
-
 	    AGColor c(0,0,0xFF);
 
 	    t=mMap->getTerrain(mv[0],mv[1]);

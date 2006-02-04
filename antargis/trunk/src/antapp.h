@@ -49,6 +49,10 @@ public:
 
   Scene &getScene();
 
+
+  virtual void setCamera(const AGVector2&p);
+  AGVector2 getCamera() const;
+
   void mark();
 };
 

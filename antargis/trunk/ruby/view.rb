@@ -251,6 +251,15 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		end
 		$inventory.inspect(e)
 	end
+
+	def setCamera(p)
+		super(clipCamera(p))
+	end
+
+	def clipCamera(p)
+		AGVector2.new([30,p[0],getMap.getW-30].sort[1],[20,p[1],getMap.getH-30].sort[1])
+	end
+
 end
 
 class AntRubyEditViewTest<AGWidget #EditIsoView

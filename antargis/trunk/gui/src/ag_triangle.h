@@ -102,6 +102,9 @@ class AGVector2
 
   AGVector2 normal() const;
 
+#ifdef SWIG
+  %rename(__getitem__) operator[](int index) const;
+#endif
   float operator[](int index) const;
   float &operator[](int index);
 
