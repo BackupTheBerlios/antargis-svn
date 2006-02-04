@@ -30,6 +30,7 @@ class MiniMap:public AGWidget
 
   void drawEntities(AGPainter &p);
 
+  float mMapBorder;
   AntMap *mMap;
   Scene *mScene;
   AGTexture mTexture;

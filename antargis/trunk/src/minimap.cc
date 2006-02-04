@@ -1,11 +1,14 @@
 #include "minimap.h"
 #include <ag_layoutfactory.h>
 
+#define MAP_BORDER
+
 MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
   AGWidget(p,r),
   mMap(pMap),
   mSurface(r.width(),r.height())
 {
+  mMapBorder=20;
   mScene=0;
   mTexture=getTextureManager()->makeTexture(mSurface);
   //  mapChanged();
@@ -70,23 +73,22 @@ void MiniMap::mapChangedP(bool forceFull=false)
   TerrainType t;
 
   assert(mMap);  
-
-  //  cdebug(x0<<"  "<<x1);
-  //  cdebug(y0<<"  "<<y1);
   
   if(mMap)
     {
       for(x=x0;x<x1;x++)
 	for(y=y0;y<y1;y++)
 	  {
-	    float mx=x*mw/w;
-	    float my=(1-y/float(h))*mh;
+	    AGVector2 mv(toMapCoords(AGVector2(x,y)));
+
+	    //	    float mx=toMapCoordx*mw/w;
+	    //	    float my=(1-y/float(h))*mh;
 
 	    AGColor c(0,0,0xFF);
 
-	    t=mMap->getTerrain(mx,my);
+	    t=mMap->getTerrain(mv[0],mv[1]);
 
-	    AGVector3 n=mMap->getNormalF(mx,my);
+	    AGVector3 n=mMap->getNormalF(mv[0],mv[1]);
 
 	    float l=std::min(1.0f,n*light*0.5f+0.5f);
 	    
@@ -109,7 +111,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
 	    c=c*l;
 
-	    if(mMap->getHeight(mx,my)<0)
+	    if(mMap->getHeight(mv[0],mv[1])<0)
 	      c=c*0.25+AGColor(0,0,0xFF)*0.75;
 	    
 	    p->putPixel(AGPoint(x,y),c);
@@ -135,7 +137,6 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
 void MiniMap::draw(AGPainter &p)
 {
-  CTRACE;
   AGRect m=getRect().origin();
   p.blit(mTexture,m);
 
@@ -222,17 +223,31 @@ AGVector2 MiniMap::toMapCoords(AGVector2 v) const
 
   v[1]=1-v[1];
 
+#ifdef MAP_BORDER
+  v[0]*=mMap->getW()-mMapBorder*2;
+  v[1]*=mMap->getH()-mMapBorder*2;
+  v[0]+=mMapBorder;
+  v[1]+=mMapBorder;
+#else
   v[0]*=mMap->getW();
   v[1]*=mMap->getH();
-
+#endif
   return v;
 }
 AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
 {
   AGRect r=getRect();
 
+#ifdef MAP_BORDER
+  v[0]-=mMapBorder;
+  v[1]-=mMapBorder;
+
+  v[0]/=mMap->getW()-mMapBorder*2;
+  v[1]/=mMap->getH()-mMapBorder*2;
+#else
   v[0]/=mMap->getW();
   v[1]/=mMap->getH();
+#endif
 
   v[1]=1-v[1];
 
