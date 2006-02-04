@@ -33,7 +33,7 @@ AntFragProgram *getFragProgram(const std::string &pFile)
 }
 
 int GLSL_ok=-1;
-bool ok()
+bool glslOk()
 {
 //  return false;
   // do not check in each call, because this is slow!!!
@@ -69,7 +69,7 @@ void printInfoLog(GLhandleARB obj)
 AntVertexProgram::AntVertexProgram(const std::string &pFile)
 {
   //  CTRACE;
-  if(ok())
+  if(glslOk())
     {
       vertexShader = glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
       std::string s=loadFile(pFile);
@@ -86,7 +86,7 @@ AntVertexProgram::AntVertexProgram(const std::string &pFile)
 AntVertexProgram::~AntVertexProgram()
 {
   CTRACE;
-  if(ok() && !hasQuit())
+  if(glslOk() && !hasQuit())
     glDeleteObjectARB(vertexShader);
 }
 
@@ -94,7 +94,7 @@ AntFragProgram::AntFragProgram(const std::string &pFile)
 {
   mValid=false;
   //  CTRACE;
-  if(ok() && pFile.length()>0)
+  if(glslOk() && pFile.length()>0)
     {
       fragShader = glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
       std::string s=loadFile(pFile);
@@ -116,7 +116,7 @@ AntFragProgram::AntFragProgram()
 AntFragProgram::~AntFragProgram()
 {
   CTRACE;
-  if(ok() && !hasQuit())
+  if(glslOk() && !hasQuit())
     glDeleteObjectARB(fragShader);
 }
 
@@ -132,7 +132,7 @@ AntShaderProgram::AntShaderProgram(const std::string &pVertexFile,const std::str
   vertex(pVertexFile),frag(pFragFile)
 {
   //  CTRACE;
-  if(ok())
+  if(glslOk())
     {
       p = glCreateProgramObjectARB();
       glAttachObjectARB(p,vertex.vertexShader);
@@ -154,7 +154,7 @@ AntShaderProgram::~AntShaderProgram()
   disable();
   CTRACE;
   cdebug("name:"<<name);
-  if(ok() && !hasQuit())
+  if(glslOk() && !hasQuit())
     glDeleteObjectARB(p);
   cdebug("name:"<<name);
   delete [] matrixBuf;
@@ -164,7 +164,7 @@ AntShaderProgram::~AntShaderProgram()
 
 void AntShaderProgram::enable()
 {
-  if(ok())
+  if(glslOk())
     {
       glUseProgramObjectARB(p);
       on=true;
@@ -172,7 +172,7 @@ void AntShaderProgram::enable()
 }
 void AntShaderProgram::disable()
 {
-  if(ok())
+  if(glslOk())
     {
       glUseProgramObjectARB(0);
       on=false;
@@ -181,7 +181,7 @@ void AntShaderProgram::disable()
 
 void AntShaderProgram::update(float time)
 {
-  if(ok())
+  if(glslOk())
     {
       enable();
       doUpdate(time);
@@ -290,7 +290,7 @@ AntShadowShader::AntShadowShader(const std::string &pVertexFile,const std::strin
 
 void AntShadowShader::doUpdate(float time)
 {
-  if(ok())
+  if(glslOk())
     {
       Renderer *r=getRenderer();
       sendUniform("shadowTex",r->getShadowUnit());
@@ -303,7 +303,7 @@ void AntShadowShader::doUpdate(float time)
 void AntShadowShader::enable()
 {
   AntShaderProgram::enable();
-  if(ok())
+  if(glslOk())
     {
       Scene *scene=getRenderer()->getCurrentScene();
 
@@ -330,7 +330,7 @@ void AntShadowShader::enable()
 void AntShadowShader::disable()
 {
   AntShaderProgram::disable();
-  if(ok())
+  if(glslOk())
     {
       glActiveTexture(getRenderer()->getShadowUnit()); // shadow unit
       glMatrixMode(GL_TEXTURE);
@@ -353,7 +353,7 @@ AntWaterShader::AntWaterShader():
 }
 void AntWaterShader::doUpdate(float time)
 {
-  if(ok())
+  if(glslOk())
     {
       AntShaderProgram::doUpdate(time);
       

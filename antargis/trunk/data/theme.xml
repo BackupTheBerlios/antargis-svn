@@ -82,10 +82,10 @@
 				<color name='gradientColor3' color='#E7E7E77F'/>
 				<color name='gradientColor4' color='#E7E7E77F'/>
 			</normal>
-			<image name="image" file="bg_tile2.png"/>
+			<image name="image" file="data/gui/bg_tile2.png"/>
 		</background>
 		<item>
-			<image name="image" file="menu_house_small.png"/>
+			<image name="image" file="data/gui/menu_house_small.png"/>
 		</item>
 	</menu>
 	
@@ -102,13 +102,13 @@
 
 	<screen>
 		<background>
-			<image name="image" file="bigbg_tile.png"/>
+			<image name="image" file="data/gui/bigbg_tile.png"/>
 		</background>
 	</screen>
 	
 	<window>
 		<border>
-			<image name="image" file="buttontest3.png" file2="win_border.png"/>
+			<image name="image" file="data/gui/buttontest3.png" file2="win_border.png"/>
 		</border>
 		<title>
 			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
@@ -121,11 +121,11 @@
 			</background>
 		</title>
 		<buttons>
-			<image name="close" file="close_button.png"/>
+			<image name="close" file="data/gui/close_button.png"/>
 		</buttons>
 		<background>
 			<value name="border" value="0"/>
-			<image name="image" file="oldpaper.png"/>
+			<image name="image" file="data/gui/oldpaper.png"/>
 			<!--
 			<color name='gradientColor1' color='#54555b'/>
 			<color name='gradientColor2' color='#3c3d41'/>
@@ -160,19 +160,19 @@
 		<button>
 			<border>
 				<normal>
-					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3.png"/>
 				</normal>
 				<lighted>
-					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3.png"/>
 				</lighted>
 				<pressed>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</pressed>
 				<checked>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</checked>
 				<checkedlighted>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</checkedlighted>
 			</border>
 			<background>
@@ -244,19 +244,19 @@
 			</text>
 			<border>
 				<normal>
-					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3.png"/>
 				</normal>
 				<lighted>
-					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3.png"/>
 				</lighted>
 				<pressed>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</pressed>
 				<checked>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</checked>
 				<checkedlighted>
-					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</checkedlighted>
 			</border>
 			<background>

@@ -95,4 +95,6 @@ class AntWaterShader:public AntShaderProgram
   void doUpdate(float time);
 };
 
+bool glslOk();
+
 #endif

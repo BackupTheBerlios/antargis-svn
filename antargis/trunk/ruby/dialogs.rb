@@ -35,7 +35,7 @@ class AntDialog<AGLayout
 	def sigOk
 		sigClose
 	end
-	def sigCancel(eventName,callerName,event,caller)
+	def sigCancel
 		sigClose
 	end
 	

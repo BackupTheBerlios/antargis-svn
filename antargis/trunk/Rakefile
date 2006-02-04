@@ -2,10 +2,14 @@
 
 require 'rake'
 require 'mkmf'
+#require 'file'
+require 'ftools'
 
 begin File.mkdir(".deps")
 rescue 
 end
+
+`mkdir .deps`
 
 def windows
 	if $windows==nil

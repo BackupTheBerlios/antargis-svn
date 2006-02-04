@@ -22,15 +22,13 @@
 #!/usr/bin/ruby
 
 def hasLibantargis
-	ObjectSpace.each_object(Module){|c|
-		if c.to_s=="Libantargis"
-			return true
-		end
-	}
-	return false
+	x=eval("Libantargis")
+	puts x
+	x!=nil
 end
 
-if hasLibantargis
+if not hasLibantargis
+	puts "libant NOT found"
 	require 'libantargisgui'
 	include Libantargisgui
 end

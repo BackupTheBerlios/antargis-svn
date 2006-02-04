@@ -16,6 +16,11 @@ bool useAnimation()
   return getConfig()->get("animationType")!="none";
 }
 
+bool useShaderAnimation()
+{
+  return glslOk();
+}
+
 class Loader
 {
   std::string s;
@@ -424,7 +429,7 @@ void AnimMesh::drawPick()
 // at first try a simple animation without shaders
 void AnimMesh::drawPrivate(bool textured, bool mem)
 {
-  bool fast=true;
+//  bool fast=true;
   if(textured)
     {
       glColor4f(1,1,1,1);
@@ -438,10 +443,10 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 
   glTranslatef(mPos[0],mPos[1],mPos[2]);
   //  if(!fast)
-    glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
+  glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
 
 
-  if(fast)
+  if(useShaderAnimation())
     {
       glMultMatrixf(mData->getTransform());
       if(textured)

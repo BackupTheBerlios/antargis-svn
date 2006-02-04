@@ -182,7 +182,7 @@ class AntBoss<AntMyEntity
 		else
 			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
 		end
-		addMesh(@ring,AGVector4.new(0,0,0,0))
+		addMesh(@ring,AGVector3.new(0,0,0))
 		@ring.setVisible(false)
 	end
 
