@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<layout geometry="(0,0,1024,768)" name="EditLayout">
+	<table cols="2" rows="3">
+		<rowsize row="1" fixed="50"/>
+		<rowsize row="2" fixed="150"/>
+		<colsize col="0" fixed="1000"/>
+		<radioGroup col="0" row="1" name="ChooserGroup">
+			<table cols="20" rows="1" col="0" row="1" name="chooser">
+				<radio col="0" row="0" name="terrain" caption-image="data/gui/editor/grass_updown.png"/>
+				<radio col="1" row="0" name="entities" caption-image="data/gui/editor/fir.png"/>
+				
+				<button col="5" row="0" name="new" caption-image="data/gui/new.png"/>
+			</table>
+		</radioGroup>
+		<table col="0" row="2" cols="1" rows="3" name="terrainTab">
+			<radioGroup col="0" row="0" name="SizeGroup">
+				<table cols="20" rows="1">
+					<radio col="0" row="0" name="edit1" caption-image="data/gui/editor/edit1.png"/>
+					<radio col="1" row="0" name="edit2" caption-image="data/gui/editor/edit2.png"/>
+					<radio col="2" row="0" name="edit3" caption-image="data/gui/editor/edit3.png"/>
+					<radio col="3" row="0" name="edit4" caption-image="data/gui/editor/edit4.png"/>
+					<radio col="4" row="0" name="edit5" caption-image="data/gui/editor/edit5.png"/>
+					<radio col="5" row="0" name="edit10" caption-image="data/gui/editor/edit10.png"/>
+					<radio col="6" row="0" name="edit15" caption-image="data/gui/editor/edit15.png"/>
+				</table>
+			</radioGroup>
+			<radioGroup col="0" row="0" name="HardGroup">
+				<table cols="20" rows="1">
+					<radio col="10" row="0" name="hard1" caption-image="data/gui/editor/hard1.png"/>
+					<radio col="11" row="0" name="hard2" caption-image="data/gui/editor/hard2.png"/>
+					<radio col="12" row="0" name="hard3" caption-image="data/gui/editor/hard3.png"/>
+				</table>
+			</radioGroup>
+			<radioGroup col="0" row="1" name="TerrainGroup">
+				<table cols="20" rows="1">
+					<radio col="0" row="0" name="editHeight" caption-image="data/gui/editor/grass_updown.png"/>
+					<radio col="1" row="0" name="editWater" caption-image="data/gui/editor/water2.png"/>
+					<radio col="2" row="0" name="editSand" caption-image="data/gui/editor/sand.png"/>
+					<radio col="3" row="0" name="editGround" caption-image="data/gui/editor/ground.png"/>
+					<radio col="4" row="0" name="editGrass" caption-image="data/gui/editor/grass2.png"/>
+					<radio col="5" row="0" name="editGrass2" caption-image="data/gui/editor/dark_grass2.png"/>
+					<radio col="6" row="0" name="editForest" caption-image="data/gui/editor/small_tree.png"/>
+					<radio col="7" row="0" name="editRock" caption-image="data/gui/editor/floor2.png"/>
+				</table>
+			</radioGroup>
+			<table cols="20" rows="1" col="0" row="2" name="Actions">
+				<button col="0" row="0" name="allGrass" caption-image="data/gui/editor/grass2.png"/>
+				<button col="1" row="0" name="allWater" caption-image="data/gui/editor/water2.png"/>
+			</table>
+
+			
+		</table>
+		<table name="entitiesTab" rows="3" cols="20" col="0" row="2">
+			<button col="0" row="1" name="hero" caption-image="data/gui/editor/hero1.png"/>
+			<button col="1" row="1" name="druid" caption-image="data/gui/editor/druid1.png"/>
+			<button col="2" row="1" name="man" caption-image="data/gui/editor/man.png"/>
+			<button col="3" row="1" name="tower" caption-image="data/gui/editor/tower1.png"/>
+			<button col="4" row="1" name="sheep" caption-image="data/gui/editor/sheep1.png"/>
+			<button col="5" row="1" name="farm" caption-image="data/gui/editor/farm.png"/>
+			<button col="6" row="1" name="farmstead" caption-image="data/gui/editor/farmstead.png"/>
+			<button col="7" row="1" name="workshop" caption-image="data/gui/editor/workshop.png"/>
+			<button col="8" row="1" name="fir" caption-image="data/gui/editor/fir.png"/>
+			<button col="9" row="1" name="bush" caption-image="data/gui/bush.png"/>
+			<button col="10" row="1" name="highGrass" caption-image="data/gui/editor/high_grass.png"/>
+						
+			<button col="0" row="0" name="tree" caption-image="data/gui/editor/small_tree.png"/>
+			<button col="1" row="0" name="stones" caption-image="data/gui/editor/stones1a.png"/>
+			<button col="2" row="0" name="flower" caption-image="data/gui/editor/flower1a.png"/>
+			<button col="3" row="0" name="coach" caption-image="data/gui/editor/coach.png"/>
+			<button col="4" row="0" name="gravel" caption-image="data/gui/editor/gravel.png"/>
+			<button col="5" row="0" name="grassLight" caption-image="data/gui/editor/grass4a.png"/>
+			<button col="6" row="0" name="grassGreen" caption-image="data/gui/editor/grass3.png"/>
+			<button col="7" row="0" name="twig" caption-image="data/gui/editor/twig.png"/>
+			<button col="8" row="0" name="hole" caption-image="data/gui/editor/hole.png"/>
+			<button col="9" row="0" name="rock" caption-image="data/gui/editor/rock1.png"/>
+			<button col="10" row="0" name="floor" caption-image="data/gui/editor/floor2.png"/>
+			<button col="11" row="0" name="path" caption-image="data/gui/editor/path.png"/>
+			<button col="12" row="0" name="block" caption-image="data/gui/editor/block2.png"/>
+			
+			<button col="0" row="2" name="rubber" caption-image="data/gui/editor/rubber.png"/>
+			<button col="1" row="2" name="pointer" caption-image="data/gui/pointer3.png"/>
+		</table>
+	</table>
+</layout>
