@@ -26,7 +26,7 @@
 #include <list>
 #include <SDL.h>
 #include "ag_geometry.h"
-#include "ag_surface.h"
+#include "ag_screen.h"
 #include <GL/gl.h>
 
 #define NEW_TEXTURES
@@ -43,42 +43,40 @@ class AGGLScreen:public AGScreen
   virtual ~AGGLScreen();
 
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
-  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
 
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
-  virtual void tile(const AGTexture &pSource);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
 
-  virtual void drawRect(const AGRect &pRect,const AGColor &c);
+  //  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+
+  virtual void fillRect(const AGRect &pRect,const AGColor &c);
   virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
 
   virtual AGRect getRect() const;
 
   virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+  //  void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
 
   virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
   virtual void putPixel(int x,int y,const AGColor &c);
-
+  /*
   virtual AGTexture makeTexture(const AGSurface &s);
   virtual AGTexture makeTexture3D(const AGSurface &s);
   virtual void deleteTexture(AGTexture &t);
-
+  */
   virtual void begin(); // call before start drawing
   void flip();
   bool inScreen(const AGRect &r) const;
-  bool inScreen(const AGRect2 &r) const;
+  //  bool inScreen(const AGRect2 &r) const;
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;
 
- private:
-  GLuint getID(AGTexture *s);
+  void clip(const AGRect &r);
+  void unclip();
 
+ private:
   AGRect getRect(SDL_Surface *s);
   void checkUnusedTextures();
 
@@ -86,5 +84,7 @@ class AGGLScreen:public AGScreen
 
   friend class AGTexture;
 };
+
+bool opengl();
 
 #endif

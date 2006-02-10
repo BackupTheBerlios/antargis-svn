@@ -22,9 +22,14 @@
 #!/usr/bin/ruby
 
 def hasLibantargis
-	x=eval("Libantargis")
-	puts x
-	x!=nil
+	begin
+		x=eval("Libantargis")
+	rescue
+		return false
+	end
+	return true
+	#puts x
+	#x!=nil
 end
 
 if not hasLibantargis
@@ -32,6 +37,10 @@ if not hasLibantargis
 	require 'libantargisgui'
 	include Libantargisgui
 end
+
+AGPoint=AGVector2
+AGRect=AGRect2
+
 #
 # EVENT_HANDLERS
 #

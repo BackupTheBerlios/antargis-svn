@@ -21,6 +21,7 @@
 #include "ag_fontengine.h"
 #include "ag_debug.h"
 #include "ag_kill.h"
+#include "ag_texture.h"
 #include "sge.h"
 
 #include <SDL_ttf.h>
@@ -253,7 +254,6 @@ void embossSurface(AGSurface &s,float depth=1.0f)
     for(int y=0;y<s.height();y++)
       {
 	float v=b[y*w+x];
-	float va=a[y*w+x];
 
 	v/=3.0;
 	//	cdebug("v:"<<v);
@@ -287,13 +287,14 @@ void embossSurface(AGSurface &s,float depth=1.0f)
 
 }
 
-bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
+AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
 {
   if(pText.length()==0)
-    return true;
+    return 0;
 
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
+      cdebug("render text");
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       
@@ -316,13 +317,15 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
       dr.w=sr.w=ns->w;
       dr.h=sr.h=ns->h;
 
-      AGSurface as(ns);
+      AGInternalSurface *is=new AGInternalSurface;
+      is->surface=ns;
+      AGSurface as(is);
       
       if(pFont.getBorder()>0)
 	{
 	  int move=2;
 	  AGSurface copy(as.width()+2*move,as.height()+2*move);
-	  copy.blit(as,AGRect(move,move,as.width(),as.height()),as.getRect());
+	  copy.blit(as,AGRect(move,move,as.width(),as.height()),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
 	  as=copy;
 	  border(as,pFont.getBorderColor());
 	}
@@ -334,21 +337,12 @@ bool AGFontEngine::renderText (AGScreen *pSurface, const AGRect &pClipRect, int 
 	    embossSurface(as,1);
 	}
       
-      AGTexture ms=getTextureManager()->makeTexture(as);
+      AGTexture ms(as);
 	
       fontCache[make_pair(pFont,pText)]=ms;
     }
-  AGTexture &t=fontCache[make_pair(pFont,pText)];
+  return &fontCache[make_pair(pFont,pText)];
 
-  pSurface->blit(t,AGRect(BaseLineX,BaseLineY,t.width(),t.height()));
-    
-  if(fontCache.size()>100)
-    {
-      cdebug("CLEAR FONTCACHE");
-      // clear font cache
-      fontCache.clear();
-    }
-  return true;
 }
 
 

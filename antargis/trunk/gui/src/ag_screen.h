@@ -21,18 +21,22 @@
 #ifndef AG_SCREEN_H
 #define AG_SCREEN_H
 
-#include "ag_widget.h"
-#include "ag_surface.h"
+#include <ag_painttarget.h>
 
-class AGScreenWidget:public AGWidget
+// this is virtually a pure virtual class ;-)
+// because swig directors have problems with this otherwise
+
+class AGScreen:public AGPaintTarget
 {
  public:
-  AGScreenWidget();
-  virtual ~AGScreenWidget();
+  virtual void begin(); // call before start drawing
+  virtual void flip();
 
-  virtual void draw(AGPainter &p);
- private:
-  AGTexture mTexture;
+  virtual size_t getWidth() const;
+  virtual size_t getHeight() const;
 };
+
+AGScreen &getScreen();
+void setScreen(AGScreen *s);
 
 #endif

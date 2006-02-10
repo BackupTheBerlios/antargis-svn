@@ -181,7 +181,7 @@ class AGButtonLayoutCreator:public AGLayoutCreator
     
     std::string captionImage=pNode.get("caption-image");
     if(captionImage.length())
-      b->setSurface(getSurfaceManager()->loadSurface(captionImage),false);
+      b->setSurface(AGSurface::load(captionImage),false);
     if(pNode.get("enabled")=="false")
       b->setEnabled(false);
 
@@ -447,13 +447,13 @@ public:
 
     AGSurface s(0,0);
     if(filename.length())
-      s=getSurfaceManager()->loadSurface(filename);
+      s=AGSurface::load(filename);
 
     AGRect r=pRect;
     if(pNode.get("x").length())
-      r.x=toInt(pNode.get("x"));
+      r.setX(toFloat(pNode.get("x")));
     if(pNode.get("y").length())
-      r.y=toInt(pNode.get("y"));
+      r.setY(toFloat(pNode.get("y")));
 
 
     AGWidget *w=new AGImage(pParent,r,s,false,pRect);

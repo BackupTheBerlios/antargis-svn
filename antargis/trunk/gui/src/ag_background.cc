@@ -44,7 +44,7 @@ AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
     {
       //      CTRACE;
       cdebug(pThemeName+".image");
-      mSurface=getTextureManager()->makeTexture(theme->getSurface(pThemeName+".image"));
+      mSurface=AGTexture(theme->getSurface(pThemeName+".image"));
       mSurfaceFlag=true;
     }
   else if(theme->hasColor(pThemeName+"."+std::string("gradientColor1")))

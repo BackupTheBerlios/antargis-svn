@@ -5,7 +5,7 @@
 #include "scene.h"
 #include "ag_texturecache.h"
 #include "ag_triangle.h"
-#include "ag_surface.h"
+#include "ag_texture.h"
 #include "vertex_array.h"
 #include "map.h"
 #include <math.h>

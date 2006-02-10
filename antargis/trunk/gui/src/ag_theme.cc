@@ -135,6 +135,18 @@ void AGTheme::setSurface(const std::string &pName,const AGSurface &pSurface)
   assert(mSurfaces[pName].valid());
 }
 
+std::string AGTheme::getSurfaceName(const std::string &pName)
+{
+  if(mSurfaceNames.find(pName)==mSurfaceNames.end())
+    return mSurfaceNames[trunk(pName)];
+  return mSurfaceNames[pName];
+}
+void AGTheme::setSurfaceName(const std::string &pName,const std::string &pSurface)
+{
+  mSurfaceNames[pName]=pSurface;
+}
+
+
 void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 {
   xmlpp::Node::const_iterator i=node.begin();
@@ -152,7 +164,10 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	  if((*i)->getName()=="color")
 	    t.setColor(sname,AGColor((*i)->get("color")));
 	  if((*i)->getName()=="image")
-	    t.setSurface(sname,getSurfaceManager()->loadSurface((*i)->get("file")));
+	    {
+	      t.setSurface(sname,AGSurface::load((*i)->get("file")));
+	      t.setSurfaceName(sname,(*i)->get("file"));
+	    }
 	  if((*i)->getName()=="value")
 	    t.setInt(sname,toInt((*i)->get("value")));
 	  if((*i)->getName()=="font")

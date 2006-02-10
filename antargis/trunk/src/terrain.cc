@@ -18,7 +18,7 @@ void TerrainPieceVA::mapChanged()
   // first check, if this piece was really affected
   if(mBBox.dir[0]>=0) // is bbox valid ?
     {
-      AGRect2 r=AGRect2(AGVector3(mBBox.base[0],mBBox.base[1],1),AGVector3(mBBox.base[0]+mBBox.dir[0],mBBox.base[1]+mBBox.dir[1],1));
+      AGRect2 r=AGRect2(AGVector2(mBBox.base[0],mBBox.base[1]),AGVector2(mBBox.base[0]+mBBox.dir[0],mBBox.base[1]+mBBox.dir[1]));
 
       if(!r.collide(mMap->getChangeRect()))
 	{

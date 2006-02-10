@@ -37,7 +37,7 @@ void AGVTiler::rePosition()
   // recalc sizes
   
   // always adapt to max width
-  int w=0,h=0,y=0;//getRect().y;
+  float w=0,h=0,y=0;//getRect().y;
   std::list<AGWidget*>::const_iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -61,7 +61,7 @@ void AGVTiler::rePosition()
 
 void AGVTiler::adaptWidthFromChildren()
 {
-  int w=0;
+  float w=0;
   std::list<AGWidget*>::const_iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -73,7 +73,7 @@ void AGVTiler::adaptWidthFromChildren()
 
 void AGVTiler::adaptHeightFromChildren()
 {
-  int h=0;
+  float h=0;
   std::list<AGWidget*>::const_iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -102,7 +102,7 @@ void AGHTiler::rePosition()
   // recalc sizes
   
   // always adapt to max width
-  int w=0,h=0,x=0;//getRect().x;
+  float w=0,h=0,x=0;//getRect().x;
   std::list<AGWidget*>::const_iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -126,7 +126,7 @@ void AGHTiler::rePosition()
 
 void AGHTiler::adaptHeightFromChildren()
 {
-  int h=0;
+  float h=0;
   std::list<AGWidget*>::const_iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -138,7 +138,7 @@ void AGHTiler::adaptHeightFromChildren()
 
 void AGHTiler::adaptWidthFromChildren()
 {
-  int w=0;
+  float w=0;
   std::list<AGWidget*>::const_iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {

@@ -1,7 +1,7 @@
 #include "mesh_data.h"
 #include <ag_texturecache.h>
 #include "mesh_optimizer.h"
-
+#include <ag_rendercontext.h>
 
 //////////////////////////////////////////////////////////////////////
 // MeshData
@@ -156,25 +156,12 @@ void MeshData::setOverdraw(bool o)
   overdraw=o;
 }
 
-/*void MeshData::setAlpha(bool pAlpha)
-{
-  mAlpha=pAlpha;
-  if(mAlpha)
-    {
-      mArray.setBuffers(false);
-    }
-}
-bool MeshData::getAlpha() const
-{
-  return mAlpha;
-  }*/
-
 void MeshData::drawPick()
 {
   if(mPickable)
     mArray.drawPick();
 }
-
+#ifdef OLD
 void MeshData::draw()
 {
   if(!mShadow)
@@ -187,7 +174,7 @@ void MeshData::draw()
   glAlphaFunc(GL_GREATER,0.9);
 
 
-    if(mLighting)
+  if(mLighting)
     glEnable(GL_LIGHTING);
   else
     glDisable(GL_LIGHTING);
@@ -236,6 +223,44 @@ void MeshData::draw()
   if(mTransparent)
     glEnable(GL_CULL_FACE);
 }
+#else
+void MeshData::draw(const AGVector4 &pColor)
+{
+  AGRenderContext c;
+  
+  if(!mShadow)
+    c.setDepthWrite(false);
+
+  if(mTransparent)
+    c.setCulling(false);
+
+  c.setAlpha(0.9,GL_GREATER);
+
+  c.setLighting(mLighting);
+
+  if(pColor!=AGVector4(1,1,1,1))
+    c.setColor(pColor);
+
+  if(mWithTexture)
+    c.setTexture(&mTexture);
+
+  if(mTransparent)
+    {
+      mTexture.setFilter(GL_LINEAR,GL_LINEAR);
+      c.setAlpha(0.4f,GL_GREATER);
+    }
+  if(overdraw)
+    {
+      c.setDepthWrite(false);
+      c.setAlpha(0,GL_NONE);
+    }
+  c.begin();
+  mArray.setColors(drawColors);
+  mArray.draw();
+}
+
+#endif
+
 
 void MeshData::setColors(bool c)
 {

@@ -160,7 +160,7 @@ void AGColor::light(Uint8 l)
 
 AGColor::AGColor(Uint32 c,const AGSurface &pSurface)
 {
-  SDL_GetRGBA(c,pSurface.s->format,&r,&g,&b,&a);
+  SDL_GetRGBA(c,pSurface.surface()->surface->format,&r,&g,&b,&a);
 }
 
 AGColor &AGColor::operator*=(float f)

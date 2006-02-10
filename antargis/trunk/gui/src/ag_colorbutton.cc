@@ -32,13 +32,13 @@ void AGColorButton::draw(AGPainter &p)
   
   int i=0;
   AGRect ar(getRect().origin());
-  int w=ar.w/gridx;
-  int h=ar.h/gridy;
+  float w=ar.w()/gridx;
+  float h=ar.h()/gridy;
   for(int y=0;y<gridy;y++)
     for(int x=0;x<gridx;x++)
       {
-	AGRect r(ar.w*x/gridx,ar.h*y/gridy,w,h);
-	p.drawRect(r,mColors[i++]);
+	AGRect r(ar.w()*x/gridx,ar.h()*y/gridy,w,h);
+	p.fillRect(r,mColors[i++]);
       }
 }
 
@@ -71,14 +71,15 @@ bool AGColorButton::eventMouseClick(AGEvent *e)
   //  const AGSDLEvent *e=dynamic_cast<const AGSDLEvent*>(m);
   if(e->isSDLEvent())
     {
-      AGPoint p=e->getMousePosition()-getScreenRect().getPosition();
-      int gx=p.x*gridx/getRect().w;
-      int gy=p.y*gridy/getRect().h;
-      int d=gx+gy*gridx;
-      cdebug(p.x<<"   "<<p.y);
+      AGPoint p=e->getMousePosition();
+      p-=getScreenRect().getV0();
+      float gx=p[0]*gridx/getRect().w();
+      float gy=p[1]*gridy/getRect().h();
+      float d=gx+gy*gridx;
+      cdebug(p[0]<<"   "<<p[1]);
       cdebug("gx:"<<gx<<"  gy:"<<gy);
       assert(d<gridx*gridy && d>=0);
-      mColor=mColors[d];
+      mColor=mColors[size_t(d)];
       cdebug(mColor.toString());
     }
 

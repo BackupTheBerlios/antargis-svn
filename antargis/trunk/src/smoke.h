@@ -2,7 +2,7 @@
 #define SMOKE_H
 
 #include "scenenode.h"
-#include "ag_surface.h"
+#include "ag_texture.h"
 
 class Smoke:public SceneNode
 {

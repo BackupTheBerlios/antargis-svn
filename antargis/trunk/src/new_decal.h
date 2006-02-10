@@ -4,6 +4,7 @@
 #include "scenenode.h"
 #include "height_map.h"
 #include "vertex_array.h"
+#include "ag_texture.h"
 
 class NewDecal:public SceneNode
 {

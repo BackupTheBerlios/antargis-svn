@@ -51,7 +51,7 @@ public:
 
 
 Scene::Scene(int w,int h):
-  mTree(new QuadTree<SceneNode>(AGRect2(AGVector3(),AGVector3(w,h,1))))
+  mTree(new QuadTree<SceneNode>(AGRect2(AGVector2(),AGVector2(w,h))))
 {
   windowWidth=w;
   windowHeight=h;
@@ -102,6 +102,7 @@ size_t Scene::getTriangles() const
 
 void Scene::draw()
 {
+  //  return;
   getRenderer()->setCurrentScene(this);
   assertGL;
  

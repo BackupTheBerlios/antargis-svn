@@ -120,4 +120,5 @@ mf.puts "go"
 mf.close
 
 
-system("touch swig.cc")
+system("rm swig.cc")
+system("rm nantmarker.hh")

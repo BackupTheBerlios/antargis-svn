@@ -64,7 +64,7 @@ void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
 {
   int x=0;
   if(mAlign==EDIT_CENTER)
-    x=(pClip.w-mFont.getWidth(mText))/2;
+    x=(pClip.w()-mFont.getWidth(mText))/2;
 
 #ifdef SMALL_CHUNKS
   int mx=0;
@@ -72,7 +72,7 @@ void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
   for(std::vector<std::string>::iterator i=a.begin();i!=a.end();i++)
     {
       //      cdebug(*i);
-      p.renderText(*i,AGPoint(pPoint.x+x+mx,pPoint.y),mFont);
+      p.renderText(*i,AGPoint(pPoint[0]+x+mx,pPoint[1]),mFont);
       mx+=AGFontEngine::getWidth(mFont,*i+" ");
     }
 #else
@@ -89,7 +89,7 @@ void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRe
   if(w==0)
     w=8;
 
-  p.drawRect(AGRect(pPoint.x+x1,pPoint.y,w,height()),c);
+  p.fillRect(AGRect(pPoint[0]+x1,pPoint[1],w,height()),c);
 }
 
 
@@ -309,7 +309,7 @@ void AGEdit::draw(AGPainter &p)
   //  cdebug("completeHeight:"<<completeHeight);
   //  cdebug("height:"<<getRect().h);
   if(mVAlign==EDIT_VCENTER)
-    y=getRect().h/2-completeHeight/2;
+    y=getRect().h()/2-completeHeight/2;
   //  cdebug("y:"<<y);
 
   i=mLines.begin();
@@ -330,7 +330,7 @@ void AGEdit::draw(AGPainter &p)
       if(cy+mViewCy==mCy && mMutable && hasFocus()) // FIXME: Change show cursor only if widget has focus
 	i->drawCursor(p,mCx,AGPoint(x,y),getRect(),cursorC);
       y+=i->height();
-      if(y>getRect().h)
+      if(y>getRect().h())
 	{
 	  //	  cdebug("break - too far y:"<<y<<" h:"<<getRect().h);
 	  break;

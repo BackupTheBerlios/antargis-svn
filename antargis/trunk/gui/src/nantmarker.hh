@@ -1,15 +1,15 @@
-%exception AGWindow::AGWindow {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGWindow "general_markfunc"
 %exception AGScreenWidget::AGScreenWidget {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
 %markfunc AGScreenWidget "general_markfunc"
+%exception AGWindow::AGWindow {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGWindow "general_markfunc"
 %exception AGCaption::AGCaption {
 	$action
 	result->mRUBY=self;
@@ -166,20 +166,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGRadio "general_markfunc"
-%typemap(out) AGWindow*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-   }
- }
- else vresult=Qnil;
-}
 %typemap(out) AGScreenWidget*{
  if($1)
  {
@@ -190,6 +176,20 @@
      if(false);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(out) AGWindow*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
    }
  }
  else vresult=Qnil;
@@ -218,10 +218,10 @@
      if(false);
 else if(dynamic_cast<AGCaption*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGScreenWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGScreenWidget*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
 else if(dynamic_cast<AGSound*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>(result))
@@ -438,10 +438,10 @@ else if(dynamic_cast<AGRadio*>(result))
      if(false);
 else if(dynamic_cast<AGCaption*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGScreenWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGScreenWidget*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
 else if(dynamic_cast<AGSound*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>(result))
@@ -512,10 +512,10 @@ else if(dynamic_cast<AGVTiler*>(result))
      if(false);
 else if(dynamic_cast<AGCaption*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGScreenWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGScreenWidget*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
 else if(dynamic_cast<AGSound*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>(result))
@@ -813,6 +813,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGFrame,b);
  $result=*b;
 }
+%typemap(directorout) AGGLTexture {
+ AGGLTexture *b;
+ Data_Get_Struct($input,AGGLTexture,b);
+ $result=*b;
+}
 %typemap(directorout) AGGLWidget {
  AGGLWidget *b;
  Data_Get_Struct($input,AGGLWidget,b);
@@ -826,6 +831,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGImage {
  AGImage *b;
  Data_Get_Struct($input,AGImage,b);
+ $result=*b;
+}
+%typemap(directorout) AGInternalSurface {
+ AGInternalSurface *b;
+ Data_Get_Struct($input,AGInternalSurface,b);
  $result=*b;
 }
 %typemap(directorout) AGLayout {
@@ -1008,16 +1018,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGSurface,b);
  $result=*b;
 }
-%typemap(directorout) AGSurfaceManager {
- AGSurfaceManager *b;
- Data_Get_Struct($input,AGSurfaceManager,b);
- $result=*b;
-}
-%typemap(directorout) AGSurfacePainter {
- AGSurfacePainter *b;
- Data_Get_Struct($input,AGSurfacePainter,b);
- $result=*b;
-}
 %typemap(directorout) AGTable {
  AGTable *b;
  Data_Get_Struct($input,AGTable,b);
@@ -1036,11 +1036,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGTextureCache {
  AGTextureCache *b;
  Data_Get_Struct($input,AGTextureCache,b);
- $result=*b;
-}
-%typemap(directorout) AGTextureManager {
- AGTextureManager *b;
- Data_Get_Struct($input,AGTextureManager,b);
  $result=*b;
 }
 %typemap(directorout) AGTheme {

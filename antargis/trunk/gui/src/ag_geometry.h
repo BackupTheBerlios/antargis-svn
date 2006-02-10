@@ -21,6 +21,59 @@
 #ifndef AG_GEOMETRY_H
 #define AG_GEOMETRY_H
 
+#include "ag_triangle.h"
+typedef AGRect2 AGRect;
+typedef AGVector2 AGPoint;
+
+/*
+typedef AGRect2 AGRect;
+
+class AGRect:public AGRect2
+{
+ public:
+  AGRect():AGRect2()
+    {
+    }
+    AGRect(const AGRect2&r):AGRect2(r)
+      {
+      }
+  AGRect(const AGVector2 &pv0,const AGVector2 &pv1):
+      AGRect2(pv0,pv1)
+    {}
+    AGRect(float x,float y,float w,float h):
+      AGRect2(x,y,w,h)
+      {
+      }
+      AGRect(const std::string &ps):AGRect2(ps)
+    {
+    }
+
+};
+
+typedef AGVector2 AGPoint;
+
+class AGPoint:public AGVector2
+{
+ public:
+  AGPoint(float pX,float pY):AGVector2(pX,pY)
+    {
+    }
+    AGPoint(const AGAngle &a):AGVector2(a)
+      {
+      }
+      AGPoint(const AGVector2 &a):AGVector2(a)
+	{}
+	AGPoint(const AGPoint&p):AGVector2(p)
+	  {
+	  }
+	  AGPoint():AGVector2()
+	    {
+      }
+
+};
+*/
+
+/*
 #include <SDL.h>
 #include <string>
 #include <iostream>
@@ -94,5 +147,5 @@ class AGRect:public SDL_Rect
 std::ostream &operator<<(std::ostream &o,const SDL_Rect &r);
 std::ostream &operator<<(std::ostream &o,const AGPoint &p);
 
-
+*/
 #endif

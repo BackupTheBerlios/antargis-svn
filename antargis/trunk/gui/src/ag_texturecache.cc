@@ -18,6 +18,7 @@
  * License along with this program.
  */
 
+#include "ag_texture.h"
 #include "ag_texturecache.h"
 #include "ag_png.h"
 #include "ag_kill.h"
@@ -42,10 +43,8 @@ const AGTexture &AGTextureCache::get(const std::string &pTexture)
     if(i==mTextures.end())
       {
         // load
-        std::string c=loadFile(pTexture);
-
-        AGSurface ms=getSurfaceManager()->fromSDL(fromPNG(c));
-        mTextures[pTexture]=getTextureManager()->makeTexture(ms);;
+        AGSurface ms=AGSurface::load(pTexture);
+        mTextures[pTexture]=AGTexture(ms,false);
       }
     return mTextures[pTexture];
   }
@@ -58,10 +57,8 @@ const AGTexture &AGTextureCache::get3D(const std::string &pTexture)
     if(i==mTextures.end())
       {
         // load
-        std::string c=loadFile(pTexture);
-
-        AGSurface ms=getSurfaceManager()->fromSDL(fromPNG(c));
-        mTextures[pTexture]=getTextureManager()->makeTexture3D(ms);;
+        AGSurface ms=AGSurface::load(pTexture);
+        mTextures[pTexture]=AGTexture(ms,true);
       }
     return mTextures[pTexture];
   }

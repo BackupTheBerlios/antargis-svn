@@ -3,6 +3,7 @@
 
 #include "vertex_array.h"
 #include "glsl.h"
+#include "ag_texture.h"
 
 struct KeyFrame
 {

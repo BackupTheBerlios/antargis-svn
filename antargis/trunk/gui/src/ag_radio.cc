@@ -176,7 +176,7 @@ public:
     AGRadio *b=new AGRadio(pParent,pRect);
     std::string captionImage=pNode.get("caption-image");
     if(captionImage.length())
-      b->setSurface(getSurfaceManager()->loadSurface(captionImage),false);
+      b->setSurface(AGSurface::load(captionImage),false);
     if(pNode.get("enabled")=="false")
       b->setEnabled(false);
     if(pNode.get("theme").length())

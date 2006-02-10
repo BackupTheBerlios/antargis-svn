@@ -46,9 +46,9 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect &pRect):AGWidget(pParent,pRe
 
   AGFont f=getTheme()->getFont("listbox.font");
 
-  for(;y<pRect.h;y+=mItemHeight,count++)
+  for(;y<pRect.h();y+=mItemHeight,count++)
     {
-      AGRect r(0,y,pRect.w,mItemHeight);
+      AGRect r(0,y,pRect.w(),mItemHeight);
       cdebug(r);
       AGEdit *e=new AGEdit(this,r);
       e->setMutable(false);
@@ -181,7 +181,7 @@ bool AGListBox::eventMouseClick(AGEvent *e)
       else
 	{
 
-	  int y=p.y-getScreenRect().y;
+	  int y=p[1]-getScreenRect().y();
 	  cdebug("y:"<<y);
 	  y/=mItemHeight;
 	  cdebug("y:"<<y);

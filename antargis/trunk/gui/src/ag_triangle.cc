@@ -33,6 +33,8 @@
 
 #define MAXF 100000.0f
 
+AGVector2 invalidVec2;
+
 bool collide1d(float a1,float a2,float b1,float b2, bool normal=true)
 {
   float amin=std::min(a1,a2);
@@ -380,6 +382,12 @@ AGVector3::AGVector3()
   v[0]=v[1]=0;
   v[2]=0.0f;
 }
+
+AGVector2 AGVector3::dim2() const
+{
+  return AGVector2(v[0],v[1]);
+}
+
 
 AGVector3 AGVector3::operator-() const
 {
@@ -825,7 +833,7 @@ std::string AGMatrix3::toString() const
 // AGTriangle2
 /////////////////////////////////////////////////////////////////////////////
 
-AGTriangle2::AGTriangle2(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2)
+AGTriangle2::AGTriangle2(const AGVector2 &v0,const AGVector2 &v1,const AGVector2 &v2)
 {
   p[0]=v0;
   p[1]=v1;
@@ -845,9 +853,9 @@ AGRect2 AGTriangle2::getBBox() const
 
 void AGTriangle2::apply(const AGMatrix3 &m)
 {
-  p[0]=m*p[0];
-  p[1]=m*p[1];
-  p[2]=m*p[2];
+  p[0]=(m*AGVector3(p[0],1)).dim2();
+  p[1]=(m*AGVector3(p[1],1)).dim2();
+  p[2]=(m*AGVector3(p[2],1)).dim2();
 }
 
 /* FIXME: this will be some sweep-base collision detection,
@@ -891,17 +899,17 @@ AGCollisionData AGTriangle2::collide(const AGTriangle2 &t,const AGVector &v0,con
 }
 */
 
-std::vector<AGVector3> AGTriangle2::collisionPoints(const AGLine2 &l) const
+std::vector<AGVector2> AGTriangle2::collisionPoints(const AGLine2 &l) const
 {
-  std::vector<AGVector3> ps;
+  std::vector<AGVector2> ps;
   std::vector<AGLine2> lines=getLines();
   std::vector<AGLine2>::iterator i=lines.begin();
-  AGVector3 p;
+  AGVector2 p;
   //  cdebug(toString());
   for(;i!=lines.end();i++)
     {
       p=i->collisionPoint(l);
-      if(p.getZ()!=0)
+      if(p!=invalidVec2)
 	ps.push_back(p);
     }
   return ps;
@@ -909,7 +917,9 @@ std::vector<AGVector3> AGTriangle2::collisionPoints(const AGLine2 &l) const
 
 AGTriangle2 AGTriangle2::applied(const AGMatrix3 &m) const
 {
-  return AGTriangle2(m*p[0],m*p[1],m*p[2]);
+  return AGTriangle2((m*AGVector3(p[0],1)).dim2(),
+		     (m*AGVector3(p[1],1)).dim2(),
+		     (m*AGVector3(p[2],1)).dim2());
 }
 
 std::string AGTriangle2::toString() const
@@ -919,22 +929,22 @@ std::string AGTriangle2::toString() const
   return os.str();
 }
 
-AGPoint3 AGTriangle2::get(int index) const
+AGVector2 AGTriangle2::get(int index) const
 {
   return p[index];
 }
 
 
-AGPoint3 AGTriangle2::operator[](int index) const
+AGVector2 AGTriangle2::operator[](int index) const
 {
   return p[index];
 }
 
 bool AGTriangle2::collide(const AGTriangle2 &t) const
 {
-  std::vector<AGVector3> v=getNormals();
+  std::vector<AGVector2> v=getNormals();
   append(v,t.getNormals());
-  std::vector<AGVector3>::iterator i=v.begin();
+  std::vector<AGVector2>::iterator i=v.begin();
 
   for(;i!=v.end();i++)
     {
@@ -963,9 +973,9 @@ bool AGTriangle2::collide(const AGTriangle2 &t) const
   return true;
 }
 
-std::vector<AGVector3> AGTriangle2::getNormals() const
+std::vector<AGVector2> AGTriangle2::getNormals() const
 {
-  std::vector<AGVector3> l;
+  std::vector<AGVector2> l;
   l.push_back((p[1]-p[0]).normalized().normal());
   l.push_back((p[2]-p[1]).normalized().normal());
   l.push_back((p[0]-p[2]).normalized().normal());
@@ -981,9 +991,9 @@ std::vector<AGLine2> AGTriangle2::getLines() const
   return v;
 }
 
-bool AGTriangle2::contains(const AGPoint3 &pp) const
+bool AGTriangle2::contains(const AGVector2 &pp) const
 {
-  std::vector<AGVector3> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
+  std::vector<AGVector2> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
 
   if(AGsign((pp-p[0])*l[0])==AGsign((p[2]-p[0])*l[0]))
     if(AGsign((pp-p[1])*l[1])==AGsign((p[0]-p[1])*l[1]))
@@ -993,7 +1003,7 @@ bool AGTriangle2::contains(const AGPoint3 &pp) const
 }
 
 
-AGPoint3 AGTriangle2::touchPoint(const AGTriangle2 &t) const
+AGVector2 AGTriangle2::touchPoint(const AGTriangle2 &t) const
 {
   // assume that one point of a triangle is contained in the other and return this point
   size_t i;
@@ -1004,10 +1014,10 @@ AGPoint3 AGTriangle2::touchPoint(const AGTriangle2 &t) const
       else if(t.contains((*this)[i]))
 	return (*this)[i];
     }
-  return AGPoint3(0,0,0);
+  return invalidVec2;
 }
 
-AGVector3 AGTriangle2::touchVector(const AGTriangle2 &t) const
+AGVector2 AGTriangle2::touchVector(const AGTriangle2 &t) const
 {
   //#ifdef OLD_TOUCH_APPROXIMATION
   // try to get line, which has two intersections with other triangle's lines
@@ -1047,12 +1057,12 @@ AGVector3 AGTriangle2::touchVector(const AGTriangle2 &t) const
       else if(t.contains((*this)[i]))
 	return t.nearestLine((*this)[i]).normal();
     }
-  return AGVector3();
+  return invalidVec2;
   }
   //#endif
 }
 
-AGLine2 AGTriangle2::nearestLine(const AGVector3 &v) const
+AGLine2 AGTriangle2::nearestLine(const AGVector2 &v) const
 {
   std::vector<AGLine2> l=getLines();
   std::vector<AGLine2>::iterator i;
@@ -1180,25 +1190,119 @@ AGVector3 AGTriangle3::operator[](int index) const
 // AGRectF
 /////////////////////////////////////////////////////////////////////////////
 
+AGRect2::AGRect2(const std::string &ps)
+{
+  std::istringstream is;
+  char c;
+  float x,y,w,h;
+  is.str(ps);
+  is>>c;
+  is>>x;
+  is>>c;
+  is>>y;
+  is>>c;
+  is>>w;
+  is>>c;
+  is>>h;
+  is>>c;
+  v0=AGVector2(x,y);
+  v1=AGVector2(x+w,y+h);
+}
+
 
 AGRect2::AGRect2()
 {
 }
 
-AGRect2::AGRect2(const AGVector3 &pv0,const AGVector3 &pv1):
+AGRect2::AGRect2(const AGVector2 &pv0,const AGVector2 &pv1):
   v0(pv0),v1(pv1)
 {
 }
 
-AGRect2::AGRect2(const AGVector2 &pv0,const AGVector2 &pv1):
-  v0(AGVector3(pv0,1)),v1(AGVector3(pv1,1))
+AGRect2::AGRect2(float x,float y,float w,float h):
+  v0(x,y),v1(x+w,y+h)
 {
 }
 
-AGRect2::AGRect2(float x,float y,float w,float h):
-  v0(x,y,1),v1(x+w,y+h,1)
+void AGRect2::check() const
 {
+  float mx0=std::min(x0(),x1());
+  float my0=std::min(y0(),y1());
+  float mx1=std::max(x0(),x1());
+  float my1=std::max(y0(),y1());
+
+  AGRect2 *p=const_cast<AGRect2*>(this);
+  p->v0[0]=mx0;
+  p->v0[1]=my0;
+  p->v1[0]=mx1;
+  p->v1[1]=my1;
 }
+
+
+AGRect2 AGRect2::intersect(const AGRect2 &r) const
+{
+  check();
+  r.check();
+
+  float mx0=std::max(x0(),r.x0());
+  float my0=std::max(y0(),r.y0());
+  float mx1=std::min(x1(),r.x1());
+  float my1=std::min(y1(),r.y1());
+
+  if(mx0>mx1)
+    mx0=mx1;
+  if(my0>my1)
+    my0=my1;
+
+  return AGRect2(AGVector2(mx0,my0),
+		 AGVector2(mx1,my1));
+}
+
+
+AGVector2 AGRect2::operator[](size_t i) const
+{
+  switch(i)
+    {
+    case 0:
+      return v0;
+    case 1:
+      return v1;
+    default:
+      throw std::string("invalid index in AGRect2::operator[]");
+    }
+  return v0;
+}
+AGVector2 &AGRect2::operator[](size_t i)
+{
+  switch(i)
+    {
+    case 0:
+      return v0;
+    case 1:
+      return v1;
+    default:
+      throw std::string("invalid index in AGRect2::operator[]");
+    }
+  return v0;
+}
+
+AGRect2 AGRect2::shrink(float f) const
+{
+  AGVector2 d(f,f);
+  return AGRect2(v0+d,v1-d);
+}
+
+
+bool AGRect2::operator==(const AGRect2 &r) const
+{
+  return v0==r.v0 && v1==r.v1;
+}
+bool AGRect2::operator!=(const AGRect2 &r) const
+{
+  return v0!=r.v0 || v1!=r.v1;
+}
+
+
 
 SDL_Rect AGRect2::sdl() const
 {
@@ -1208,6 +1312,39 @@ SDL_Rect AGRect2::sdl() const
   r.w=int(v1[0]-v0[0]);
   r.h=int(v1[1]-v0[1]);
   return r;
+}
+
+float AGRect2::setWidth(float w)
+{
+  v1[0]=v0[0]+w;
+  return w;
+}
+float AGRect2::setHeight(float h)
+{
+  v1[1]=v0[1]+h;
+  return h;
+}
+
+float AGRect2::x0() const
+{
+  return v0[0];
+}
+float AGRect2::y0() const
+{
+  return v0[1];
+}
+float AGRect2::x1() const
+{
+  return v1[0];
+}
+float AGRect2::y1() const
+{
+  return v1[1];
+}
+
+AGRect2 AGRect2::origin() const
+{
+  return AGRect2(0,0,w(),h());
 }
 
 
@@ -1238,26 +1375,25 @@ bool AGRect2::contains(const AGRect2 &v) const
 {
   return contains(v.getV0()) && contains(v.getV1()) && contains(v.getV01()) && contains(v.getV10());
 }
-AGVector3 AGRect2::getV0() const
+AGVector2 AGRect2::getV0() const
 {
   return v0;
 }
-AGVector3 AGRect2::getV1() const
+AGVector2 AGRect2::getV1() const
 {
   return v1;
 }
-AGVector3 AGRect2::getV01() const
+AGVector2 AGRect2::getV01() const
 {
-  return AGVector3(v0[0],v1[1],1);
+  return AGVector2(v0[0],v1[1]);
 }
-AGVector3 AGRect2::getV10() const
+AGVector2 AGRect2::getV10() const
 {
-  return AGVector3(v1[0],v0[1],1);
+  return AGVector2(v1[0],v0[1]);
 }
 
 
-
-bool AGRect2::contains(const AGVector3 &v) const
+bool AGRect2::contains(const AGVector2 &v) const
 {
   return (v.getX()>= v0.getX() && v.getY()>=v0.getY() && v.getX()<=v1.getX() && v.getY()<=v1.getY());
 }
@@ -1281,15 +1417,51 @@ void AGRect2::setY(float p)
   v1.setY(p+mh);
 }
 
+void AGRect2::setLeft(float p)
+{
+  float mw=w();
+  v0.setX(p);
+  v1.setX(p+mw);
+}
+void AGRect2::setTop(float p)
+{
+  float mh=h();
+  v0.setY(p);
+  v1.setY(p+mh);
+}
+
+void AGRect2::setRight(float p)
+{
+  v1.setX(p);
+}
+void AGRect2::setBottom(float p)
+{
+  v1.setY(p);
+}
+
+
 
 bool AGRect2::collide(const AGRect2 &r) const
 {
   return collide1d(v0.getX(),v1.getX(),r.v0.getX(),r.v1.getX()) && collide1d(v0.getY(),v1.getY(),r.v0.getY(),r.v1.getY());
 }
 
-AGRect2 AGRect2::operator+(const AGVector3 &v) const
+AGRect2 AGRect2::operator+(const AGVector2 &v) const
 {
   return AGRect2(v0+v,v1+v);
+}
+AGRect2 &AGRect2::operator+=(const AGVector2 &v)
+{
+  v0+=v;
+  v1+=v;
+  return *this;
+}
+
+AGRect2 &AGRect2::operator-=(const AGVector2 &v)
+{
+  v0-=v;
+  v1-=v;
+  return *this;
 }
 
 float AGRect2::x() const
@@ -1309,6 +1481,15 @@ float AGRect2::h() const
   return v1.getY()-v0.getY();
 }
 
+float AGRect2::width() const
+{
+  return v1.getX()-v0.getX();
+}
+float AGRect2::height() const
+{
+  return v1.getY()-v0.getY();
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // AGLine
@@ -1318,26 +1499,54 @@ AGLine2::AGLine2()
 {
 }
 
-AGLine2::AGLine2(const AGVector3 &pv0,const AGVector3 &pv1):
+AGLine2::AGLine2(const AGVector2 &pv0,const AGVector2 &pv1):
   v0(pv0),v1(pv1)
 {
 }
+
+AGVector2 &AGLine2::operator[](size_t i)
+{
+  switch(i)
+    {
+    case 0:
+      return v0;
+    case 1:
+      return v1;
+    default:
+      throw std::string("wrong index in AGLine::op[]");
+    }
+  return v0;
+}
+AGVector2 AGLine2::operator[](size_t i) const
+{
+  switch(i)
+    {
+    case 0:
+      return v0;
+    case 1:
+      return v1;
+    default:
+      throw std::string("wrong index in AGLine::op[]");
+    }
+  return v0;
+}
+
   
-AGVector3 AGLine2::getV0() const
+AGVector2 AGLine2::getV0() const
 {
   return v0;
 }
-AGVector3 AGLine2::getV1() const
+AGVector2 AGLine2::getV1() const
 {
   return v1;
 }
 
-bool AGLine2::has(const AGVector3 &v) const
+bool AGLine2::has(const AGVector2 &v) const
 {
   return v0==v || v1==v;
 }
 
-AGVector3 AGLine2::collisionPointNI(const AGLine2 &l) const
+AGVector2 AGLine2::collisionPointNI(const AGLine2 &l) const
 {
   float dx, dy;
   float ldx, ldy;
@@ -1346,12 +1555,12 @@ AGVector3 AGLine2::collisionPointNI(const AGLine2 &l) const
   ldx = l.v1.getX() - l.v0.getX();
   ldy = l.v1.getY() - l.v0.getY();
 
-  AGVector3 p;
+  AGVector2 p;
   
   if(dx==0.0f)
     {
       if(ldx==0.0f)
-	return AGVector3(0,0,0); // z=0, if invalid
+	return invalidVec2; // invalid
       
       // ldy!=0 !!
       float lm = ldy/ldx;
@@ -1361,7 +1570,7 @@ AGVector3 AGLine2::collisionPointNI(const AGLine2 &l) const
       //      cdebug(lb);
       
       assert(lm!=0.0f);
-      p=AGVector3(v0.getX(),lm*v0.getX()+lb,1);
+      p=AGVector2(v0.getX(),lm*v0.getX()+lb);
     }
   else if(ldx==0.0f)
     {
@@ -1376,32 +1585,29 @@ AGVector3 AGLine2::collisionPointNI(const AGLine2 &l) const
       float lb=l.v0.getY() - lm * l.v0.getX();
 
       if(m == lm)
-	return AGVector3(0,0,0); // parallel
+	return AGVector2(0,0); // parallel
       float x=(lb-b)/(m-lm); 
-      p=AGVector3(x,m*x+b,1);
+      p=AGVector2(x,m*x+b);
     }
   return p;
 }
-AGVector3 AGLine2::collisionPoint(const AGLine2 &l) const
+AGVector2 AGLine2::collisionPoint(const AGLine2 &l) const
 {
-  AGVector3 p=collisionPointNI(l);
-  if(p.getZ()==0)
+  AGVector2 p=collisionPointNI(l);
+  if(p==invalidVec2)
     return p;
   // check for inclusion
   if(includes(p) && l.includes(p))
     {
-      /* cdebug(p.toString());
-    cdebug(toString()<<"    "<<l.toString());
-    cdebug(distance(p)<<"    "<<l.distance(p));*/
     assert(distance(p)<0.01);
     assert(l.distance(p)<0.01);
     return p;
   }
   else
-    return AGVector3(0,0,0);
+    return invalidVec2;
 }
 
-bool AGLine2::includes(const AGVector3 &v) const
+bool AGLine2::includes(const AGVector2 &v) const
 {
   float f=(v-v0)*((v1-v0).normalized());
   if(f>=0 && f<(v1-v0).length())
@@ -1421,8 +1627,8 @@ AGRect2 AGLine2::getBBox() const
 
 bool AGLine2::collide(const AGLine2 &l) const
 {
-  AGVector3 d0,d1;
-  AGVector3 n0,n1;
+  AGVector2 d0,d1;
+  AGVector2 n0,n1;
 
   d0=direction();
   d1=l.direction();
@@ -1438,12 +1644,12 @@ bool AGLine2::collide(const AGLine2 &l) const
   return t0 && t1 && t2 && t3;
 }
 
-AGVector3 AGLine2::normal() const
+AGVector2 AGLine2::normal() const
 {
   return (v1-v0).normalized().normal();
 }
 
-AGVector3 AGLine2::direction() const
+AGVector2 AGLine2::direction() const
 {
   return v1-v0;
 }
@@ -1457,7 +1663,7 @@ std::string AGLine2::toString() const
   return os.str();
 }
 
-float AGLine2::distance(const AGVector3 &v) const
+float AGLine2::distance(const AGVector2 &v) const
 {
   return fabs(normal()*(v-v0));
 }
@@ -2249,3 +2455,8 @@ std::ostream &operator<<(std::ostream &o,const AGVector4&v)
   return o;
 }
 
+std::ostream &operator<<(std::ostream &o,const AGRect2&v)
+{
+  o<<v.toString();
+  return o;
+}

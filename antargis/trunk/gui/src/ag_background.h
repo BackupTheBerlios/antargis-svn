@@ -23,7 +23,7 @@
 
 #include <string>
 #include "ag_geometry.h"
-#include "ag_surface.h"
+#include "ag_texture.h"
 #include "ag_color.h"
 
 class AGPainter;

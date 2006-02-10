@@ -44,6 +44,10 @@ class AGTheme
   AGSurface getSurface(const std::string &pName);
   void setSurface(const std::string &pName,const AGSurface &pSurface);
 
+  std::string getSurfaceName(const std::string &pName);
+  void setSurfaceName(const std::string &pName,const std::string &pSurface);
+
+
   bool hasSurface(const std::string &pName) const;
   bool hasColor(const std::string &pName) const;
 
@@ -54,6 +58,7 @@ class AGTheme
   std::map<std::string,AGFont> mFonts;
   std::map<std::string,AGColor> mColors;
   std::map<std::string,AGSurface> mSurfaces;
+  std::map<std::string,std::string> mSurfaceNames;
   std::map<std::string,int> mInts;
 };
 

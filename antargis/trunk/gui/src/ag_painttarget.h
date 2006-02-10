@@ -27,9 +27,6 @@
 
 class AGSurface;
 class AGTexture;
-class AGTriangle2;
-class AGRect2;
-
 
 #define MSTUB { throw int();}
 
@@ -40,35 +37,18 @@ class AGPaintTarget
     {
     }
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest) MSTUB
-  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc) MSTUB
 
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest) MSTUB
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGColor &pColor) MSTUB
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor) MSTUB
-  virtual void tile(const AGTexture &pSource) MSTUB
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest) MSTUB
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
-
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest) MSTUB
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
   virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
-  virtual void tile(const AGSurface &pSource) MSTUB
-  virtual void tile(const AGSurface &pSource,const AGRect &pDest) MSTUB
-  virtual void tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
 
-  virtual void drawRect(const AGRect &pRect,const AGColor &c) MSTUB
   virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c) MSTUB
-  
+  virtual void fillRect(const AGRect &pr,const AGColor &c) MSTUB
+      
   virtual AGRect getRect() const
   {
     return AGRect(0,0,0,0);
   }
-  
-  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
-  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
-  virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2) MSTUB
-  virtual void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn) MSTUB
-
   
   virtual void putPixel(int x,int y,const AGColor &c) MSTUB
   virtual AGColor getPixel(int x,int y) const MSTUB

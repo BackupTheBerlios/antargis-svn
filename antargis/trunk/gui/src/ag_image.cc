@@ -23,15 +23,15 @@
 
 AGImage::AGImage(AGWidget *pParent,const AGRect &r,AGSurface pSurface,bool pTile,const AGRect &pRect):
   AGWidget(pParent,r),
-  mTexture(getTextureManager()->makeTexture(pSurface)),mTile(pTile)
+  mTexture(pSurface),mTile(pTile)
 {
   //  CTRACE;
-  if(pRect!=pSurface.getRect() && pRect.w!=0 && pRect.h!=0)
+  if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
       mSrcRect=pRect;
 
-      setHeight(pRect.h);
-      setWidth(pRect.w);
+      setHeight(pRect.h());
+      setWidth(pRect.w());
     }
 }
 
@@ -47,7 +47,7 @@ void AGImage::draw(AGPainter &p)
 
   if(mTile)
     {
-      if(mSrcRect.w==0 || mSrcRect.h==0)
+      if(mSrcRect.w()==0 || mSrcRect.h()==0)
 	mSrcRect=mTexture.getRect();
       p.tile(mTexture,getRect().origin(),mSrcRect);
     }
@@ -56,8 +56,7 @@ void AGImage::draw(AGPainter &p)
       
       AGRect mr=getRect().origin();
 
-      mr.x+=(width()-mTexture.width())/2;
-      mr.y+=(height()-mTexture.height())/2;
+      mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
 
       p.blit(mTexture,mr);
     }
@@ -67,7 +66,7 @@ void AGImage::draw(AGPainter &p)
 
 void AGImage::setSurface(const AGSurface &pSurface)
 {
-  mTexture=getTextureManager()->makeTexture(pSurface);
+  mTexture=AGTexture(pSurface);
 }
 void AGImage::setTexture(const AGTexture &pTexture)
 {

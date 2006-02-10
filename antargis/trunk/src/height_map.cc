@@ -45,7 +45,7 @@ std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 HeightMap::HeightMap(int w,int h):
   sigMapChanged(this,"mapChanged"),
   sigMapChangedComplete(this,"mapChangedComplete"),
-  mW(w),mH(h),mChangeRect(AGVector3(),AGVector3()),mChanges(0)
+  mW(w),mH(h),mChangeRect(AGVector2(),AGVector2()),mChanges(0)
 {
   mHeights=genSomeHeights(w+2,h+2,5);
 
@@ -88,7 +88,7 @@ void HeightMap::addChange(const AGVector2 &v)
   mChanges++;
   if(mChanges==1)
     {
-      mChangeRect=AGRect2(AGVector3(v,1),AGVector3(v,1));
+      mChangeRect=AGRect2(v,v);
     }
   else
     mChangeRect.include(v);
@@ -279,7 +279,7 @@ void HeightMap::loadXML(const Node &node)
   mTerrain->mapChangedComplete();
   mTerrain->addToScenes();
   mChanges=0;
-  mChangeRect=AGRect2(AGVector3(),AGVector3());
+  mChangeRect=AGRect2(AGVector2(),AGVector2());
 }
 
 void HeightMap::newMap(int w,int h)
@@ -296,7 +296,7 @@ void HeightMap::newMap(int w,int h)
   mTerrain->mapChangedComplete();
   mTerrain->addToScenes();
   mChanges=0;
-  mChangeRect=AGRect2(AGVector3(),AGVector3());
+  mChangeRect=AGRect2(AGVector2(),AGVector2());
 
 }
 
@@ -307,7 +307,7 @@ void HeightMap::mapChanged()
   mTerrain->addToScenes();
   mTerrain->mapChanged();
   mChanges=0;
-  mChangeRect=AGRect2(AGVector3(),AGVector3());
+  mChangeRect=AGRect2(AGVector2(),AGVector2());
 }
 
 

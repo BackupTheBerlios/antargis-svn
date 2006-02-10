@@ -22,12 +22,11 @@
 #define AG_IMAGE_H
 
 #include "ag_widget.h"
-#include "ag_surface.h"
+#include "ag_texture.h"
 
 class AGImage:public AGWidget
 {
  public:
-  //  AGImage(AGWidget *pParent,const AGPoint &p,AGSurface pSurface,bool pTile,const AGRect &pRect=AGRect(0,0,0,0));
   AGImage(AGWidget *pParent,const AGRect &r,AGSurface pSurface,bool pTile,const AGRect &pRect=AGRect(0,0,0,0));
   virtual ~AGImage();
 

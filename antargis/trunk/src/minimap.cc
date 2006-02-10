@@ -6,7 +6,7 @@
 MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
   AGWidget(p,r),
   mMap(pMap),
-  mSurface(r.width(),r.height())
+  mSurface(r.w(),r.h())
 {
   mMapBorder=20;
   mScene=0;
@@ -37,8 +37,8 @@ void MiniMap::mapChangedP(bool forceFull=false)
   int x,y;
   bool inmem=forceFull;
 
-  w=getRect().width();
-  h=getRect().height();
+  w=getRect().w();
+  h=getRect().h();
 
   AGRect2 change=mMap->getChangeRect();
   float mw=mMap->getW();
@@ -149,8 +149,8 @@ void MiniMap::draw(AGPainter &p)
 
       // now with approx. frustum
 
-      w=25*getRect().width()/mMap->getW();
-      h=25*getRect().height()/mMap->getH();
+      w=25*getRect().w()/mMap->getW();
+      h=25*getRect().h()/mMap->getH();
       
       v-=AGVector2(w/2,h/2);
 
@@ -176,7 +176,7 @@ void MiniMap::drawEntities(AGPainter &p)
 	      AGVector2 v=(*i)->getPos2D();
 	      v=fromMapCoords(v);
 	      
-	      p.drawRect(AGRect(v[0],v[1],2,2),(*i)->getMinimapColor());
+	      p.fillRect(AGRect(v[0],v[1],2,2),(*i)->getMinimapColor());
 	    }
 	}
 
@@ -200,11 +200,11 @@ void MiniMap::setScene(Scene *pScene)
 
 bool MiniMap::eventMouseClick(AGEvent *m)
 {
-  AGPoint p(m->getMousePosition()-getScreenRect().getPosition());
+  AGPoint p(m->getMousePosition()-getScreenRect()[0]);
   if(mMap==0 || mScene==0)
     return AGWidget::eventMouseClick(m);
 
-  AGVector2 v(p.x,p.y);
+  AGVector2 v(p);
   v=toMapCoords(v);
 
   mScene->setCamera(AGVector4(v[0],v[1],0,0));
@@ -215,8 +215,8 @@ bool MiniMap::eventMouseClick(AGEvent *m)
 AGVector2 MiniMap::toMapCoords(AGVector2 v) const
 {
   AGRect r=getRect();
-  v[0]/=r.width();
-  v[1]/=r.height();
+  v[0]/=r.w();
+  v[1]/=r.h();
 
   v[1]=1-v[1];
 
@@ -248,8 +248,8 @@ AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
 
   v[1]=1-v[1];
 
-  v[0]*=r.width();
-  v[1]*=r.height();
+  v[0]*=r.w();
+  v[1]*=r.h();
 
   return v;
 }

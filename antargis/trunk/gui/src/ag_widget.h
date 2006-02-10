@@ -61,28 +61,26 @@ class AGWidget:public AGMessageObject
 
   virtual bool canFocus() const;
 
-  //  void setMenu(AGMenu *pMenu);
-
   bool processEvent(AGEvent *event);
 
   AGSignal sigMouseEnter;
   AGSignal sigMouseLeave;
   AGSignal sigClick;
 
-  virtual int minWidth() const;
-  virtual int minHeight() const;
+  virtual float minWidth() const;
+  virtual float minHeight() const;
 
-  int width() const;
-  int height() const;
-  int top() const;
-  int left() const;
+  float width() const;
+  float height() const;
+  float top() const;
+  float left() const;
 
   bool visible() const;
 
-  virtual void setWidth(int w);
-  virtual void setHeight(int w);
-  virtual void setTop(int y);
-  virtual void setLeft(int x);
+  virtual void setWidth(float w);
+  virtual void setHeight(float w);
+  virtual void setTop(float y);
+  virtual void setLeft(float x);
 
   bool fixedWidth() const;
   bool fixedHeight() const;
@@ -92,18 +90,23 @@ class AGWidget:public AGMessageObject
 
   virtual void mark();
 
-
   virtual void addChild(AGWidget *w);
   virtual void addChildBack(AGWidget *w);
 
   virtual void removeChild(AGWidget *w);
 
+  // Functions for caching appearance
+  virtual bool redraw() const;
+  void prepareDraw();
+  void setCaching(bool pEnable);
+
+
+  // clear children
   void clear();
 
   AGRect getScreenRect() const;
   AGPoint getScreenPosition() const;
   AGPoint fromScreen(const AGPoint &p) const;
-
 
   // focus
 
@@ -130,6 +133,10 @@ class AGWidget:public AGMessageObject
 
  private:
 
+  void drawCache();
+
+  void delObjects();
+
   void gainFocusDown(AGWidget *pWidget);
 
   void checkFocus();
@@ -144,6 +151,8 @@ class AGWidget:public AGMessageObject
   bool mButtonDown;
   bool mFixedWidth,mFixedHeight;
   bool mVisible;
+  bool mCaching;
+  AGTexture *mCache;
   //  AGMenu *mMenu;
 
   bool mHasFocus;

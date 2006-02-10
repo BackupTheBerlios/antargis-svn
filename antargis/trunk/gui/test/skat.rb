@@ -277,11 +277,11 @@ end
 def runGame
 	puts "MenuTest"
 	
-	main=AGMain.new
+	main=AGMain.new(1024,768,32,false,true)
 	
 	loadTheme(loadFile("theme.xml"))
 	
-	main.changeRes(1024,768,32,false,true)
+	#main.changeRes
 	
 	app=TestApp.new(false)
 	

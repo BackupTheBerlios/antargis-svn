@@ -21,41 +21,37 @@
 #ifndef __GUI_SDLSURFACE_H
 #define __GUI_SDLSURFACE_H
 
-#include "ag_surface.h"
+#include "ag_screen.h"
 
 class AGSDLScreen:public AGScreen
 {
  public:
   AGSDLScreen(SDL_Surface *s);
 
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-  virtual void tile(const AGTexture &pSource);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest);
-  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
 
   virtual void flip();
 
   virtual AGRect getRect() const;
 
-  virtual void drawRect(const AGRect &pRect,const AGColor &c);
+  virtual void fillRect(const AGRect &pRect,const AGColor &c);
   virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
 
   virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  virtual void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+  //  virtual void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
 
   virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
 
   virtual void putPixel(int x,int y,const AGColor &c);
 
-  virtual SDL_Surface *newSurface(int x,int y);
+  //  virtual SDL_Surface *newSurface(int x,int y);
 
-  virtual AGSurface loadSurface(const std::string &pFilename);
+  //  virtual AGSurface loadSurface(const std::string &pFilename);
 
-  virtual AGTexture displayFormat(SDL_Surface *s);
+  //  virtual AGTexture displayFormat(SDL_Surface *s);
 
-  virtual AGTexture makeTexture(const AGSurface &s);
+  //  virtual AGTexture makeTexture(const AGSurface &s);
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;

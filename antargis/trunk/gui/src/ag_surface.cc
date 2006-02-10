@@ -21,6 +21,7 @@
 #include <iostream>
 
 #include "ag_surface.h"
+#include "ag_texture.h"
 #include "ag_color.h"
 #include "ag_debug.h"
 #include "ag_draw.h"
@@ -29,12 +30,17 @@
 #include "ag_kill.h"
 #include "ag_png.h"
 #include "ag_glsurface.h"
+#include "ag_surfacemanager.h"
 
 #include "SDL_image.h"
 
 #include <sstream>
 
 #include <ag_fs.h>
+
+///////////////////////////////////////////////////////////////////////
+// Tools
+///////////////////////////////////////////////////////////////////////
 
 bool gRendering=false;
 void beginRender()
@@ -54,15 +60,15 @@ bool isRendering()
 
 void AGFreeSurface(SDL_Surface *s)
 {
-  //  cdebug(s);
+  cdebug(s);
   SDL_FreeSurface(s);
 }
 
-SDL_Surface *AGCreate32BitSurface(size_t width,size_t height)
+AGInternalSurface *AGCreate32BitSurface(size_t width,size_t height)
 {
   /* Create a 32-bit surface with the bytes of each pixel in R,G,B,A order,
      as expected by OpenGL for textures */
-  SDL_Surface *surface;
+  AGInternalSurface *surface=new AGInternalSurface;
   Uint32 rmask, gmask, bmask, amask;
 
   /* SDL interprets each pixel as a 32-bit number, so our masks must depend
@@ -81,195 +87,167 @@ SDL_Surface *AGCreate32BitSurface(size_t width,size_t height)
   amask = 0xff000000;
 #endif
 
-  surface = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 32,
-                                 rmask, gmask, bmask, amask);
-  if(!surface)
+  surface->surface = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 32,
+					  rmask, gmask, bmask, amask);
+  if(!surface->surface)
     {
       std::cerr<<"CreateRGBSurface failed: "<<SDL_GetError()<<std::endl;
       //        throw UI::UIException();
     }
+
+  cdebug("CREATE:"<<surface->surface);
+
   return surface;
 }
 
 
-AGSurface::AGSurface(SDL_Surface *pS):s(pS)
+
+///////////////////////////////////////////////////////////////////////
+// AGInternalSurface
+///////////////////////////////////////////////////////////////////////
+
+AGInternalSurface::AGInternalSurface()
 {
-  getSurfaceManager()->registerSurface(this);
+  sdlTexture=0;
+  glTexture=0;
+  surface=0;
+  getSurfaceManager()->registerMe(this);
 }
 
-AGSurface *AGSurface::clone() const
+AGInternalSurface::~AGInternalSurface()
 {
-  return new AGSurface(*this);
+  getSurfaceManager()->deregisterMe(this);
 }
 
 
-AGSurface::AGSurface()
+
+///////////////////////////////////////////////////////////////////////
+// AGSurface
+///////////////////////////////////////////////////////////////////////
+
+AGSurface::AGSurface(AGInternalSurface *i):s(i)
 {
-  s=0;
-  getSurfaceManager()->registerSurface(this);
+  getSurfaceManager()->registerMe(this);
 }
 
+
+AGSurface::AGSurface():
+  s(0)
+{
+  getSurfaceManager()->registerMe(this);
+}
+AGSurface::AGSurface(int w,int h):
+  s(AGCreate32BitSurface(w,h))
+{
+  getSurfaceManager()->registerMe(this);
+}
+AGSurface::AGSurface(const AGSurface &p):
+  s(p.s)
+{
+  getSurfaceManager()->registerMe(this);
+}
 
 bool AGSurface::valid() const
 {
-  return s;
+  return s && s->surface;
 }
 
-AGSurface::AGSurface(const AGSurface &p)
+AGSurface AGSurface::copy() const
 {
-  if(p.valid())
+  AGInternalSurface *is=0;
+  if(valid())
     {
-      s=AGCreate32BitSurface(p.width(),p.height());//sge_CreateAlphaSurface(SDL_SWSURFACE,p.width(),p.height());
-      assert(s);
-      for(int x=0;x<p.width();x++)
-	for(int y=0;y<p.height();y++)
+      is=AGCreate32BitSurface(s->surface->w,s->surface->h);
+
+      // copy pixel for pixel - as blitting doesn't seem to work
+      for(int x=0;x<width();x++)
+	for(int y=0;y<height();y++)
 	  {
 	    Uint32 c;
-	    c=sge_GetPixel(p.s,x,y);
 	    Uint8 r,g,b,a;
-	    c=sge_GetPixel(p.s,x,y);
-	    SDL_GetRGBA(c,p.s->format,&r,&g,&b,&a);
+	    c=sge_GetPixel(s->surface,x,y);
+	    SDL_GetRGBA(c,s->surface->format,&r,&g,&b,&a);
 
-	    sge_PutPixel(s,x,y,SDL_MapRGBA(s->format,r,g,b,a));
-	    //	    sge_PutPixel(s,x,y,sge_GetPixel(p.s,x,y));
+	    sge_PutPixel(is->surface,x,y,SDL_MapRGBA(is->surface->format,r,g,b,a));
 	  }
-      //      SDL_BlitSurface(p.s,0,s,0);
     }
-  else
-    s=0;
-  
-  // FIXME: this gets called too often!!!
-  //  CTRACE;
-  getSurfaceManager()->registerSurface(this);
-}
-
-AGSurface::AGSurface(int w,int h)
-{
-  s=AGCreate32BitSurface(w,h);
-      //  s=sge_CreateAlphaSurface(SDL_SWSURFACE,w,h);
-  //  CTRACE;
-  getSurfaceManager()->registerSurface(this);
+  AGSurface ns;
+  ns.s=is;
+  return ns;
 }
 
 AGSurface::~AGSurface()
 {
   if(getSurfaceManager())
-    getSurfaceManager()->deregisterSurface(this);
+    getSurfaceManager()->deregisterMe(this);
 }
 
 void AGSurface::save(const std::string &pName) const
 {
   assert(s);
-  std::string png=toPNG(s);
+  assert(s->surface);
+  std::string png=toPNG(s->surface);
   saveFile(pName,png);
 }
 
 
 AGSurface &AGSurface::operator=(const AGSurface &p)
 {
-  CTRACE;
-  //  if(s)
-  //    AGFreeSurface(s);
-  s=0;
-  if(p.valid())
-    {
-
-      if(true)
-	{
-      //      s=sge_CreateAlphaSurface(SDL_SWSURFACE,p.width(),p.height());
-      s=AGCreate32BitSurface(p.width(),p.height());
-      getSurfaceManager()->registerSurface(this);
-      
-      Uint8 r,g,b,a;
-      Uint32 c;
-      for(int x=0;x<p.width();x++)
-	for(int y=0;y<p.height();y++)
-	  {
-	    c=sge_GetPixel(p.s,x,y);
-	    SDL_GetRGBA(c,p.s->format,&r,&g,&b,&a);
-
-	    sge_PutPixel(s,x,y,SDL_MapRGBA(s->format,r,g,b,a));
-	  }
-      //      SDL_BlitSurface(p.s,0,s,0);
-	}
-      else
-	{
-	  //s=sge_CreateAlphaSurface(SDL_SWSURFACE,p.width(),p.height());
-	  s=AGCreate32BitSurface(p.width(),p.height());
-	  getSurfaceManager()->registerSurface(this);
-	  SDL_BlitSurface(p.s,0,s,0);
-	  SDL_Flip(s);
-	}
-    }
+  s=p.s;
   return *this;
 }
 
 
-
 void AGSurface::putPixel(int x,int y,const AGColor &c)
 {
-  //  CTRACE;
-  sge_PutPixel(s,x,y,color(c));
+  sge_PutPixel(s->surface,x,y,color(c));
 }
 
 AGColor AGSurface::getPixel(int x,int y) const
 {
-  return AGColor(sge_GetPixel(s,x,y),*this);
+  return AGColor(sge_GetPixel(s->surface,x,y),*this);
 }
 
 
-
-SDL_Surface *AGSurface::surface()
-{
-  CHECK_ZERO(s);
-  return s;
-}
-
- //int k=0;
 
 AGSurface AGSurface::getSubSurface(const AGRect &sr) const
 {
   CHECK_ZERO(s);
   CTRACE;
-  //  SDL_Surface *ns=getScreen().newSurface(sr.w,sr.h);//sge_CreateAlphaSurface(SDL_SWSURFACE,sr.w,sr.h);
-  SDL_Surface *ns=AGCreate32BitSurface(sr.w,sr.h);
 
-  AGRect dr(0,0,sr.w,sr.h);
+  AGInternalSurface *ns=AGCreate32BitSurface((int)sr.w(),(int)sr.h());
+
+  AGRect dr(sr.origin());
   Uint32 c;
   Uint8 r,g,b,a;
 
-  SDL_SaveBMP(s,"sub1.bmp");
-
-  cdebug(sr);
-  
-  for(int x=0;x<sr.w;x++)
-    for(int y=0;y<sr.h;y++)
+  // copy 
+  for(int x=0;x<sr.w();x++)
+    for(int y=0;y<sr.h();y++)
       {
-	c=sge_GetPixel(s,x+sr.x,y+sr.y);
-	SDL_GetRGBA(c,s->format,&r,&g,&b,&a);
-	c=SDL_MapRGBA(ns->format,r,g,b,a);
+	c=sge_GetPixel(s->surface,(int)(x+sr.x()),(int)(y+sr.y()));
+	SDL_GetRGBA(c,s->surface->format,&r,&g,&b,&a);
+	c=SDL_MapRGBA(ns->surface->format,r,g,b,a);
 	
-	sge_PutPixel(ns,x,y,c);
-	}
-  //  SDL_BlitSurface(s,const_cast<AGRect*>(&sr),ns,&dr);
-
-  SDL_SaveBMP(ns,"sub2.bmp");
-
-  return AGSurface(ns);//,sr.w,sr.h);
+	sge_PutPixel(ns->surface,x,y,c);
+      }
+  AGSurface nas;
+  nas.s=ns;
+  return nas;
 }
 
    
 Uint32 AGSurface::color(const AGColor &c) const
 {
   CHECK_ZERO(s);
-  return c.mapRGB(s->format);
+  return c.mapRGB(s->surface->format);
 }
 
 AGRect AGSurface::getRect() const
 {
   CHECK_ZERO(s);
   if(s)
-    return AGRect(0,0,s->w,s->h);
+    return AGRect(0,0,s->surface->w,s->surface->h);
   else
     return AGRect(0,0,0,0);
 }
@@ -278,60 +256,43 @@ AGRect AGSurface::getRect() const
 int AGSurface::width() const
 {
   CHECK_ZERO(s);
-  return s->w;
+  return s->surface->w;
 }
 int AGSurface::height() const
 {
   CHECK_ZERO(s);
-  return s->h;
+  return s->surface->h;
 }
 
 void AGSurface::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
-  AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
+  AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
 }
 
 void AGSurface::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
-  AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
+  AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
 }
 void AGSurface::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
 {
   CHECK_ZERO(s);
-  AGDrawBorder(s,rect,W,c1,c2);
+  AGDrawBorder(s->surface,rect,W,c1,c2);
 }
-/*
-void AGSurface::putPixel(int x,int y,const AGColor &c)
-{
-  CHECK_ZERO(s);
-  }*/
-
-
-
- // blitting must be done manually as it doesn't work in GL mode
- // FIXME: do blitting in SDL-mode with SDL_BlitSurface!
-
-void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
-{
-  blit(pSource,pDest,pSrc,AGColor(0xFF,0xFF,0xFF,0xFF));
-}
-
 
 void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
 {
-  //  CTRACE;
   int x,y,sx,sy,dx,dy;
   Uint32 c;
   Uint8 r,g,b,a;
-  SDL_Surface *ss=const_cast<SDL_Surface*>(pSource.s);
-  SDL_Surface *ds=s;
+  SDL_Surface *ss=const_cast<SDL_Surface*>(pSource.s->surface);
+  SDL_Surface *ds=s->surface;
 
-  for(y=0,sy=pSrc.y, dy=pDest.y;y<pSrc.h ; y++,sy++,dy++)
-    for(x=0,sx=pSrc.x, dx=pDest.x;x<pSrc.w ; x++,sx++,dx++)
+  for(y=0,sy=(int)pSrc.y(), dy=(int)pDest.y();y<pSrc.h() ; y++,sy++,dy++)
+    for(x=0,sx=(int)pSrc.x(), dx=(int)pDest.x();x<pSrc.w() ; x++,sx++,dx++)
       {
-	c=sge_GetPixel(ss,sx,sy);//x+sr.x,y+sr.y);
+	c=sge_GetPixel(ss,sx,sy);
 
 	SDL_GetRGBA(c,ss->format,&r,&g,&b,&a);
 	c=SDL_MapRGBA(ds->format,r,g,b,a);
@@ -341,557 +302,22 @@ void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &
       }
 }
 
-///////////////////////////////////////////////////////////
-// AGTexture
-///////////////////////////////////////////////////////////
-
-
-AGTexture::AGTexture(const AGTexture &t)
-{
-  s=t.s;
-  w=t.w;
-  h=t.h;
-  mTW=t.mTW;
-  mTH=t.mTH;
-  mTextureID=t.mTextureID;
-  mHasTexture=false;
-  mTextureUsed=false;
-  getTextureManager()->registerTexture(this);
-  m3d=t.m3d;
-  mPainting=false;
-}
-
-AGTexture::AGTexture()
-{
-  s=0;
-  m3d=0;
-  init();
-  getTextureManager()->registerTexture(this);
-  mPainting=false;
-}
-
-// only used by AG*Screen to create a new texture
-AGTexture::AGTexture(SDL_Surface *ps,int W,int H,bool p3d):s(ps),w(W),h(H)
-{
-  //  CTRACE;
-  //  cdebug(W<<"//"<<H);
-  m3d=p3d;
-  mTW=float(w)/float(s->w);
-  mTH=float(h)/float(s->h);
-  init();
-  getTextureManager()->registerTexture(this);
-  mPainting=false;
-}
-
-AGTexture::~AGTexture()
-{
-  if(getTextureManager())
-    getTextureManager()->deregisterTexture(this);
-}
-
-void AGTexture::init()
-{
-  mTextureID=0;
-  mHasTexture=false;
-  mTextureUsed=false;
-}
-
-
-void AGTexture::testSave() const
-{
-  SDL_SaveBMP(s,"testSave.bmp");
-}
-
-float AGTexture::getTW() const
-{
-  return mTW;
-}
-float AGTexture::getTH() const
-{
-  return mTH;
-}
-
-
-int AGTexture::width() const
-{
-  return w;
-}
-int AGTexture::height() const
-{
-  return h;
-}
-
-AGRect AGTexture::getRect() const
-{
-  return AGRect(0,0,w,h);
-}
-
-AGColor AGTexture::getPixel(int x,int y) const
-{
-  Uint32 c=sge_GetPixel(s,x,y);
-  Uint8 r,g,b,a;
-  SDL_GetRGBA(c,s->format,&r,&g,&b,&a);
-  return AGColor(r,g,b,a);
-}
-
-bool AGTexture::hasTexture() const
-{
-  return mHasTexture;
-}
-void AGTexture::clearTexture()
-{
-  mHasTexture=false;
-}
-void AGTexture::clearTextureUsed()
-{
-  mTextureUsed=false;
-}
-void AGTexture::setTextureID(GLuint id)
-{
-  mHasTexture=true;
-  mTextureID=id;
-}
-GLuint AGTexture::getTextureID()
-{
-  if(!mHasTexture)
-    {
-      AGGLScreen *s=dynamic_cast<AGGLScreen*>(&getScreen());
-      if(s)
-	{
-	  // get one
-	  s->getID(this);
-	}
-    }
-  //  CTRACE;
-  assert(mHasTexture);
-  mTextureUsed=true;
-  return mTextureID;
-}
-
-bool AGTexture::textureUsed() const
-{
-  return mTextureUsed;
-}
-
-SDL_Surface *AGTexture::surface()
+AGInternalSurface *AGSurface::surface() const
 {
   return s;
 }
 
-bool glMode()
+AGSurface AGSurface::load(const std::string &pFilename)
 {
-  return (dynamic_cast<AGGLScreen*>(&getScreen()));
-}
-
-void AGTexture::beginPaint()
-{
-  
-  assert(!isRendering());
-  assert(!m3d);
-  if(glMode())
-    {
-      getTextureID();
-      // init 2d drawing
-      getScreen().begin();
-      // copy texture to buffer
-
-      /*    
-      glViewport(0,0,mTW,mTH);
-      glMatrixMode( GL_PROJECTION );
-      glLoadIdentity();
-      gluOrtho2D(0,mTW,0,mTH);
-      glMatrixMode(GL_MODELVIEW);
-      
-*/
-      glEnable(GL_TEXTURE_2D);
-
-      glBindTexture(GL_TEXTURE_2D,mTextureID);
-      
-      float w=s->w,h=s->h;
-      glDisable(GL_CULL_FACE);
-      glColor4f(1,1,1,1);
-      glBegin(GL_QUADS);
-      glTexCoord2f(0,0);
-      glVertex2f(0,0);
-
-      glTexCoord2f(1,0);
-      glVertex2f(w,0);
-
-      glTexCoord2f(1,1);
-      glVertex2f(w,h);
-
-      glTexCoord2f(0,1);
-      glVertex2f(0,h);
-      glEnd();
-      //      getScreen().blit(*this,AGRect(0,0,mTW,mTH));
-
-    }
-  mPainting=true;
-}
-void AGTexture::endPaint()
-{
-  if(glMode())
-    {
-      // copy buffer to texture
-      glBindTexture(GL_TEXTURE_2D, mTextureID);
-      assertGL;
-
-      glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, s->w,s->h,0);
-      //      glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, getScreen().getWidth(),getScreen().getHeight(),0);
-      //            SDL_GL_SwapBuffers();
-	    //            SDL_Delay(4000);
-
-    }
-  mPainting=false;
-}
-
-void AGTexture::putPixel(int x,int y,const AGColor &c)
-{
-  assert(mPainting);
-  if(glMode())
-    {
-      // use screen-functions
-      y=(s->h-1)-y;
-      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
-    }
-  else
-    {
-      sge_PutPixel(s,x,y,c.mapRGB(s->format));
-    }
-}
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////
-// AGScreen
-////////////////////////////////////////////////////////////////////////
-
-void AGScreen::begin()
-{
-}
-
-void AGScreen::flip()
-{
-}
-size_t AGScreen::getWidth() const
-{
-  return 0;
-}
-size_t AGScreen::getHeight() const
-{
-  return 0;
-}
-
-
-/*
-AGTexture AGScreen::displayFormat(SDL_Surface *s)
-{
-  STUB;
-  return AGTexture();
-}
-*/
-AGTexture AGScreen::makeTexture(const AGSurface &s)
-{
-  STUB;
-  return AGTexture();
-}
-AGTexture AGScreen::makeTexture3D(const AGSurface &s)
-{
-  STUB;
-  return AGTexture();
-}
-
-void AGScreen::deleteTexture(AGTexture &t)
-{
-  STUB;
-}
-
-
-
-AGSurfaceManager *mSurfaceManager=0;
-bool mSurfaceManagerDeleted=false;
-
-/** AGSurfaceManager */
-AGSurfaceManager::AGSurfaceManager()
-{
-  mAutoGC=true;
-}
-AGSurfaceManager::~AGSurfaceManager()
-{
-  CTRACE;
-  std::set<SDL_Surface*>::iterator i=mRealSurfaces.begin();
-  for(;i!=mRealSurfaces.end();i++)
-    {
-      AGFreeSurface(*i);
-    }
-  mSurfaceManagerDeleted=true;
-  mSurfaceManager=0;
-}
-
-AGSurface AGSurfaceManager::loadSurface(const std::string &pFilename)
-{
+  AGSurface n;
+  n.s=new AGInternalSurface;
   std::string file=loadFile(pFilename);
-  
+
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
-  if(!s)
-   {
-     std::cout<<"Error loading file:"<<pFilename<<std::endl;
-     return AGSurface();
-   }
-
-  return AGSurface(s);
-
-}
-
-AGSurface AGSurfaceManager::fromSDL(SDL_Surface *s)
-{
-  assert(s);
-  return AGSurface(s);
-}
-
-size_t mRegisteredSurfaces=0;
-
-void AGSurfaceManager::registerSurface(AGSurface *pSurface)
-{
-  //  cdebug("mSurfaces:"<<mSurfaces.size());
-  //  cdebug("mRegSurfaces:"<<mRegisteredSurfaces);
-
-  mSurfaces.insert(pSurface);
-  if(pSurface->valid())
-    {
-      // new real surfaces
-      size_t old=mRealSurfaces.size();
-      mRealSurfaces.insert(pSurface->surface());
-      if(old!=mRealSurfaces.size())
-	mRegisteredSurfaces++;
-    }
-
-  if((mRegisteredSurfaces>10 && mAutoGC) || mRegisteredSurfaces>200)
-    {
-      cleanup(); // run garbage collection
-      mRegisteredSurfaces=0;
-    }
-}
-void AGSurfaceManager::deregisterSurface(AGSurface *pSurface)
-{
-  mSurfaces.erase(pSurface);
-}
-
-void AGSurfaceManager::enableGC()
-{
-  mAutoGC=true;
-}
-void AGSurfaceManager::disableGC()
-{
-  mAutoGC=false;
+  n.s->surface=s;
+  return n;
 }
 
 
-void AGSurfaceManager::cleanup()
-{
-  //  CTRACE;
-  Uint32 t0=SDL_GetTicks();
-
-
-  std::set<SDL_Surface*> used;
-  std::set<AGSurface*>::iterator i=mSurfaces.begin();
-  for(;i!=mSurfaces.end();i++)
-    if((*i)->valid())
-      used.insert((*i)->surface());
-
-  std::set<SDL_Surface*>::iterator j;
-  for(j=mRealSurfaces.begin();j!=mRealSurfaces.end();j++)
-    {
-      if(used.find(*j)==used.end())
-	AGFreeSurface(*j);
-    }
-  mRealSurfaces=used;
-  Uint32 t1=SDL_GetTicks();
-  cdebug("TIMe:"<<t1-t0);
-}
-
-AGSurfaceManager *getSurfaceManager()
-{
-  if(mSurfaceManager==0)
-    {
-      if(!mSurfaceManagerDeleted)
-	{
-	  mSurfaceManager=new AGSurfaceManager();
-	  
-	  REGISTER_SINGLETON(mSurfaceManager);
-	}
-    }
-  return mSurfaceManager;
-}
-
-
-AGTextureManager *mTextureManager=0;
-bool mTextureManagerDeleted=false;
-/** AGTextureManager */
-AGTextureManager::AGTextureManager()
-{
-}
-AGTextureManager::~AGTextureManager()
-{
-  CTRACE;
-  std::set<SDL_Surface*>::iterator i=mSurfaces.begin();
-  for(;i!=mSurfaces.end();i++)
-    {
-      AGFreeSurface(*i);
-    }
-  mTextureManagerDeleted=true;
-  mTextureManager=0;
-}
-
-/*bool mTrap=false;
-void setTrap()
-{
-  mTrap=true;
-  }*/
-
-void AGTextureManager::registerTexture(AGTexture *pTexture)
-{
-  //  cdebug("textures:"<<mTextures.size());
-
-  //  CTRACE;
-  //  cdebug(pTexture);
-#ifdef SLOW_TEXTUREMANAGER
-  mTextures.insert(pTexture);
-#else
-  mTextures.push_back(pTexture);
-#endif
-  //  if(mTrap)
-  //    throw int();
-}
-void AGTextureManager::deregisterTexture(AGTexture *pTexture)
-{
-  //  CTRACE;
-  //  cdebug(pTexture);
-#ifdef SLOW_TEXTUREMANAGER
-  mTextures.erase(pTexture);
-#else
-  mDelTextures.push_back(pTexture);
-#endif
-}
-
-void AGTextureManager::clear()
-{
-  for(std::list<AGTexture*>::iterator i=mTextures.begin();i!=mTextures.end();i++)
-    (*i)->clearTextureUsed();
-  checkUnused();
-}
-
-void AGTextureManager::cleanup()
-{
-  //  CTRACE;
-#ifdef SLOW_TEXTUREMANAGER
-  std::set<SDL_Surface*> used;
-  std::set<AGTexture*>::iterator i=mTextures.begin();
-  for(;i!=mTextures.end();i++)
-    used.insert((*i)->surface());
-
-  std::set<SDL_Surface*>::iterator j=mSurfaces.begin();
-  for(;j!=mSurfaces.end();j++)
-    {
-      if(used.find(*j)==used.end())
-	AGFreeSurface(*j);
-    }
-  mSurfaces=used;
-#else
-
-  //  Uint32 t0=SDL_GetTicks();
-
-  if(mDelTextures.size())
-    {
-      // FIXME: is this faster ????
-      // clean up mTextures
-      // assuming that mTextures.size>mDelTextures.size => first insert mTextures then delete
-      std::set<AGTexture*> ts;
-      
-      std::list<AGTexture*>::iterator di;
-      
-      for(di=mTextures.begin();di!=mTextures.end();di++)
-	ts.insert(*di);
-      
-      for(di=mDelTextures.begin();di!=mDelTextures.end();di++)
-	ts.erase(*di);
-      
-      mTextures.clear();
-      mDelTextures.clear();
-  
-      std::set<AGTexture*>::iterator si;
-      for(si=ts.begin();si!=ts.end();si++)
-	mTextures.push_back(*si);
-    }
-  
-  /*  Uint32 t1=SDL_GetTicks();
-  if(t1-t0>2)
-  cdebug("TIME4:"<<t1-t0);
-  */
-  std::set<SDL_Surface*> used;
-  std::list<AGTexture*>::iterator i=mTextures.begin();
-  for(;i!=mTextures.end();i++)
-    used.insert((*i)->surface());
-
-  std::set<SDL_Surface*>::iterator j=mSurfaces.begin();
-  for(;j!=mSurfaces.end();j++)
-    {
-      if(used.find(*j)==used.end())
-	AGFreeSurface(*j);
-    }
-  mSurfaces=used;
-
-  /*
-  Uint32 t2=SDL_GetTicks();
-  if(t2-t1>2)
-  cdebug("TIME5:"<<t2-t1);
-  */
-#endif
-}
-
-AGTexture AGTextureManager::makeTexture(const AGSurface &s)
-{
-  return getScreen().makeTexture(s);
-}
-AGTexture AGTextureManager::makeTexture3D(const AGSurface &s)
-{
-  return getScreen().makeTexture3D(s);
-}
-
-void AGTextureManager::checkUnused()
-{
-#ifdef SLOW_TEXTUREMANAGER
-  std::set<AGTexture*>::iterator i=mTextures.begin();
-#else
-  std::list<AGTexture*>::iterator i=mTextures.begin();
-#endif
-  for(;i!=mTextures.end();i++)
-    {
-      if((*i)->hasTexture() && !(*i)->textureUsed())
-	{
-	  getScreen().deleteTexture(**i);
-	  CTRACE;
-	}
-    }
-  
-}
-
-
-AGTextureManager *getTextureManager()
-{
-  if(mTextureManager==0)
-    {
-      if(!mTextureManagerDeleted)
-	{
-	  mTextureManager=new AGTextureManager();
-	  
-	  REGISTER_SINGLETON(mTextureManager);
-	}
-    }
-  return mTextureManager;
-}
 
 

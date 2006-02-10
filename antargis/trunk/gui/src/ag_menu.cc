@@ -30,12 +30,12 @@
 using namespace std;
 
 AGMenu::AGMenu(AGWidget *pParent,AGPoint pWishPos,const std::string &pName):
-  AGVTiler(pParent,AGRect(pWishPos.x,pWishPos.y,1,1)),
+  AGVTiler(pParent,AGRect(pWishPos[0],pWishPos[1],1,1)),
   sigSelected(this,"sigSelected"),
   mName(pName),
   mWishPos(pWishPos)
 {
-  mBg=getTextureManager()->makeTexture(getTheme()->getSurface("menu.background.image"));
+  mBg=AGTexture(getTheme()->getSurface("menu.background.image"));
   hide();
 }
 
@@ -44,8 +44,8 @@ void AGMenu::show(AGPoint pWishPos)
   AGWidget::show();
   mWishPos=pWishPos;
   AGPoint p=fromScreen(mWishPos);
-  setTop(p.y);
-  setLeft(p.x);
+  setTop(p[1]);
+  setLeft(p[0]);
   rePosition();
 
   std::list<AGWidget*>::iterator i=mChildren.begin();
@@ -70,12 +70,13 @@ AGMenu &AGMenu::addMenu(const std::string &pString)
 }
 
 
-void AGMenu::draw(const AGRect &r)
+void AGMenu::draw(AGPainter &p)
 {
   //  cdebug("draw");
   //  return;
   adaptWidthFromChildren();
-  getScreen().tile(mBg,r.project(getRect()));
+  //  AGPainter p(getScreen());
+  p.tile(mBg);//,r.project(getRect()));
 
   //  cdebug(r.project(getRect()).toString());
 }

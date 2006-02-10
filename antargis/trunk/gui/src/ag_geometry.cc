@@ -22,6 +22,8 @@
 #include <map>
 #include <sstream>
 
+
+/*
 using namespace std;
 
 
@@ -137,12 +139,6 @@ int AGRect::height() const
 {
   return SDL_Rect::h;
   }
-/*
-SDL_Rect AGRect::rect() const
-{
-  return mr;
-}
-*/
 
 
 AGRect AGRect::intersect(const AGRect &r) const
@@ -247,3 +243,4 @@ AGRect AGRect::operator+(const AGPoint &p) const
 {
   return AGRect(x+p.x,y+p.y,w,h);
 }
+*/

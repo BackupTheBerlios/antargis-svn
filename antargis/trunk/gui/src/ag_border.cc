@@ -21,49 +21,53 @@
 #include "ag_border.h"
 #include "ag_painter.h"
 #include "ag_theme.h"
+#include "ag_texturecache.h"
 
 AGBorder::AGBorder(const std::string &pTheme)
 {
   if((mEnable=getTheme()->hasSurface(pTheme+".image")))
     {
-      mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
-      mWidth=mSurface.width()/3;
+      //      mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
+      mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(pTheme+".image"));
+      mWidth=mTexture->width()/3;
     }
   else
-    mWidth=0;
+    {
+      mWidth=0;
+      mTexture=0;
+    }
 }
 
 void AGBorder::draw(AGPainter &p)
 {
-  if(!mEnable)
+  if(mTexture==0 || !mEnable)
     return;
-  int w=mSurface.width()/3;
+  int w=mTexture->width()/3;
   int w2=w*2;
 
   AGRect d=p.getRect();
-  int x2=d.x+d.w-1;
-  int y2=d.y+d.h-1;
+  float x2=d.x1();
+  float y2=d.y1();
 
   // corners
-  p.blit(mSurface,AGRect(0,0,w,w),AGRect(0,0,w,w));
+  p.blit(*mTexture,AGRect(0,0,w,w),AGRect(0,0,w,w));
  
-  p.blit(mSurface,AGRect(0,y2-w+1,w,w),AGRect(0,w2,w,w));
+  p.blit(*mTexture,AGRect(0,y2-w,w,w),AGRect(0,w2,w,w));
  
-  p.blit(mSurface,AGRect(x2-w+1,0,w,w),AGRect(w2,0,w,w));
+  p.blit(*mTexture,AGRect(x2-w,0,w,w),AGRect(w2,0,w,w));
  
-  p.blit(mSurface,AGRect(x2-w+1,y2-w+1,w,w),AGRect(w2,w2,w,w));
+  p.blit(*mTexture,AGRect(x2-w,y2-w,w,w),AGRect(w2,w2,w,w));
 
   // borders
 
   // hor
-  p.tile(mSurface,AGRect(w,0,d.w-w2,w),AGRect(w,0,w,w));
-  p.tile(mSurface,AGRect(w,y2-w+1,d.w-w2,w),AGRect(w,w2,w,w));
+  p.tile(*mTexture,AGRect(w,0,d.w()-w2,w),AGRect(w,0,w,w));
+  p.tile(*mTexture,AGRect(w,y2-w,d.w()-w2,w),AGRect(w,w2,w,w));
   // ver
-  p.tile(mSurface,AGRect(0,w,w,d.h-w2),AGRect(0,w,w,w));
-  p.tile(mSurface,AGRect(x2-w+1,w,w,d.h-w2),AGRect(w2,w,w,w));
+  p.tile(*mTexture,AGRect(0,w,w,d.h()-w2),AGRect(0,w,w,w));
+  p.tile(*mTexture,AGRect(x2-w,w,w,d.h()-w2),AGRect(w2,w,w,w));
 
-  // skrip interior
-
+  // skip interior
   
 }
 

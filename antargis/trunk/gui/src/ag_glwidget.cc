@@ -1,5 +1,6 @@
 #include "ag_glwidget.h"
 #include "ag_debug.h"
+#include "ag_screen.h"
 #include <GL/glu.h>
 
 AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect &r):
@@ -20,7 +21,9 @@ void AGGLWidget::drawAll(AGPainter &p)
 
   // draw children;
   AGPainter p2(p);
-  p2.transform(getRect());
+  p2.translate(getRect()[0]);
+  p2.clip(getRect().origin());
+  //  p2.transform(getRect());
 
   std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
   //  AGRect r2=r.project(mr);
@@ -31,7 +34,7 @@ void AGGLWidget::drawAll(AGPainter &p)
 
 void AGGLWidget::beginGL()
 {
-  getScreen().drawRect(getRect(),AGColor(0,0,0)); // draw bg-color
+  getScreen().fillRect(getRect(),AGColor(0,0,0)); // draw bg-color
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -41,7 +44,7 @@ void AGGLWidget::beginGL()
 
   AGRect r=getRect();
 
-  glViewport(r.x,getScreen().getHeight()-(r.y+r.h),r.w,r.h);
+  glViewport(GLint(r.x()),GLint(getScreen().getHeight()-r.y1()),GLsizei(r.w()),GLsizei(r.h()));
   glDepthMask(true);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
@@ -53,7 +56,7 @@ void AGGLWidget::beginGL()
 float AGGLWidget::getRatio() const
 {
   AGRect r=getRect();
-  return float(r.w)/float(r.h);
+  return float(r.w())/float(r.h());
 }
 
 

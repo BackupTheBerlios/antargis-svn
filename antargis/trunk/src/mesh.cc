@@ -42,13 +42,13 @@ void Mesh::draw()
   if(!mVisible)
     return;
 
-  glEnable(GL_COLOR_MATERIAL);
+  /*  glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_LIGHTING);
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-  glColor4fv(mColor);
+  glColor4fv(mColor);*/
   begin();
   if(mData)
-    mData->draw();
+    mData->draw(mColor);
   end();
 }
 void Mesh::drawDepth()

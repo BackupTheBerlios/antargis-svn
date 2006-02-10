@@ -99,6 +99,7 @@ void AGButton::draw(AGPainter &p)
 
   bc1=theme->getColor(mTheme+"button.border.color1");
   bc2=theme->getColor(mTheme+"button.border.color2");
+  if(true)
   {
   
     //  CTRACE;

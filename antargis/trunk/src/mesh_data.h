@@ -4,6 +4,7 @@
 #include "scenenode.h"
 #include "mesh_data.h"
 #include "vertex_array.h"
+#include "ag_texture.h"
 
 // Mesh organizing
 
@@ -32,7 +33,7 @@ class MeshData:public SceneNode
   //  void setAlpha(bool pAlpha);
   //  bool getAlpha() const;
 
-  void draw();
+  void draw(const AGVector4 &pColor);
   void drawShadow();
   void drawDepth();
   void drawPick();

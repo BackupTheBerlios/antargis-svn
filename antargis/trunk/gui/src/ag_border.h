@@ -22,7 +22,7 @@
 #define __AG_BORDER_H__
 
 #include <string>
-#include "ag_surface.h"
+#include "ag_texture.h"
 
 class AGPainter;
 
@@ -36,7 +36,7 @@ class AGBorder
   size_t getWidth() const;
 
  private:
-  AGTexture mSurface;
+  const AGTexture *mTexture;
   bool mEnable;
   size_t mWidth;
 };

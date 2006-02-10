@@ -19,7 +19,7 @@
  */
 
 #include "ag_application.h"
-#include "ag_surface.h"
+#include "ag_screen.h"
 #include "ag_main.h"
 #include "ag_debug.h"
 #include "ag_mixer.h"

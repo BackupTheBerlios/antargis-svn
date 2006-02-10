@@ -80,7 +80,7 @@ AGBox3 SceneNode::bbox() const
 AGRect2 SceneNode::getRect() const
 {
   AGBox3 b=bbox();
-  return AGRect2(AGVector3(b.base[0],b.base[1],0),AGVector3(b.base[0]+b.dir[0],b.base[1]+b.dir[1],0));
+  return AGRect2(AGVector2(b.base[0],b.base[1]),AGVector2(b.base[0]+b.dir[0],b.base[1]+b.dir[1]));
 }
 
 

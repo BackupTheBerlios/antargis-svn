@@ -131,21 +131,21 @@ AGRect AGTable::getClientRect(int x,int y) const
 
 
   if(cols[x].second)
-    mrect.w=(int)(cols[x].first);
+    mrect.setWidth(cols[x].first);
   else
-    mrect.w=(int)((width()-mfx)*cols[x].first/xw);
+    mrect.setWidth((width()-mfx)*cols[x].first/xw);
   
   if(rows[y].second)
-    mrect.h=(int)(rows[y].first);
+    mrect.setHeight(rows[y].first);
   else
-    mrect.h=(int)((height()-mfy)*rows[y].first/yw);
+    mrect.setHeight((height()-mfy)*rows[y].first/yw);
   
   int ax=0;
   for(mx=0;mx<w;mx++)
     {
       if(mx==x)
 	{
-	  mrect.x=ax;
+	  mrect.setX(ax);
 	  break;
 	}
       else
@@ -162,7 +162,7 @@ AGRect AGTable::getClientRect(int x,int y) const
     {
       if(my==y)
 	{
-	  mrect.y=ay;
+	  mrect.setY(ay);
 	  break;
 	}
       else
@@ -247,10 +247,10 @@ void AGTable::arrange()
 
   // assign positions
   // first x 
-  int ax=0;
+  float ax=0;
   for(mx=0;mx<w;mx++)
     {
-      int maxx=0;
+      float maxx=0;
       for(my=0;my<h;my++)
 	{
 	  AGWidget *wd=children[mx+my*w];
@@ -265,10 +265,10 @@ void AGTable::arrange()
     }
 
   // now y
-  int ay=0;
+  float ay=0;
   for(my=0;my<h;my++)
     {
-      int maxy=0;
+      float maxy=0;
       for(mx=0;mx<w;mx++)
 	{
 	  AGWidget *wd=children[mx+my*w];

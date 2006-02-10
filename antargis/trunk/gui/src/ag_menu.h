@@ -22,7 +22,7 @@
 #define AG_MENU_H
 
 #include "ag_vtiler.h"
-#include "ag_surface.h"
+#include "ag_texture.h"
 
 class AGMenu:public AGVTiler
 {
@@ -34,7 +34,7 @@ class AGMenu:public AGVTiler
   void addItem(const std::string &pString);
   AGMenu &addMenu(const std::string &pString);
 
-  void draw(const AGRect &r);
+  void draw(AGPainter &p);
 
   void eventItemSelected(const std::string &pString);
   void eventItemClicked(const std::string &pString);

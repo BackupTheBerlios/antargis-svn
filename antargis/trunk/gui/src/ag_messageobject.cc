@@ -70,14 +70,14 @@ AGPoint AGEvent::getMousePosition() const
   AGPoint p;
   switch(mEvent->type) {
   case SDL_MOUSEMOTION:
-    p.x=mEvent->motion.x;
-    p.y=mEvent->motion.y;
+    p[0]=mEvent->motion.x;
+    p[1]=mEvent->motion.y;
     break;
     
   case SDL_MOUSEBUTTONUP:
   case SDL_MOUSEBUTTONDOWN:
-    p.x=mEvent->button.x;
-    p.y=mEvent->button.y;
+    p[0]=mEvent->button.x;
+    p[1]=mEvent->button.y;
     break;
     
   }

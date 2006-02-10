@@ -188,6 +188,8 @@ class AGVector3
   void saveXML(Node &node) const;
   void loadXML(const Node &node);
 
+  AGVector2 dim2() const;
+
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
@@ -256,27 +258,30 @@ class AGMatrix3
 
 class AGLine2
 {
-  AGVector3 v0,v1;
+  AGVector2 v0,v1;
  public:
   AGLine2();
-  AGLine2(const AGVector3 &pv0,const AGVector3 &pv1);
+  AGLine2(const AGVector2 &pv0,const AGVector2 &pv1);
   
-  AGVector3 getV0() const;
-  AGVector3 getV1() const;
+  AGVector2 getV0() const;
+  AGVector2 getV1() const;
 
-  bool has(const AGVector3 &v) const;
+  bool has(const AGVector2 &v) const;
 
   bool collide(const AGLine2 &l) const;
-  AGVector3 collisionPoint(const AGLine2 &l) const;
-  AGVector3 collisionPointNI(const AGLine2 &l) const; // no inclusion test
-  bool includes(const AGVector3 &v) const;
+  AGVector2 collisionPoint(const AGLine2 &l) const;
+  AGVector2 collisionPointNI(const AGLine2 &l) const; // no inclusion test
+  bool includes(const AGVector2 &v) const;
 
   AGRect2 getBBox() const;
 
-  AGVector3 normal() const;
-  AGVector3 direction() const;
+  AGVector2 normal() const;
+  AGVector2 direction() const;
 
-  float distance(const AGVector3 &v) const;
+  float distance(const AGVector2 &v) const;
+
+  AGVector2 &operator[](size_t i);
+  AGVector2 operator[](size_t i) const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -324,35 +329,35 @@ class AGRect2;
 
 class AGTriangle2
 {
-  AGPoint3 p[3];
+  AGVector2 p[3];
  public:
-  AGTriangle2(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2);
+  AGTriangle2(const AGVector2 &v0,const AGVector2 &v1,const AGVector2 &v2);
 
-  AGPoint3 operator[](int index) const;
+  AGVector2 operator[](int index) const;
 
-  AGPoint3 get(int index) const;
+  AGVector2 get(int index) const;
 
   bool collide(const AGTriangle2 &t) const;
 
   // FIXME: sweep-based test
   //  AGCollisionData collide(const AGTriangle &t,const AGVector &v0,const AGVector &v1) const;
 
-  std::vector<AGVector3> getNormals() const;
+  std::vector<AGVector2> getNormals() const;
 
   void apply(const AGMatrix3 &m);
   AGTriangle2 applied(const AGMatrix3 &m) const;
 
   // estimate touching point (or middle of touching area)
-  AGPoint3 touchPoint(const AGTriangle2 &t) const;
-  AGVector3 touchVector(const AGTriangle2 &t) const;
+  AGVector2 touchPoint(const AGTriangle2 &t) const;
+  AGVector2 touchVector(const AGTriangle2 &t) const;
 
-  std::vector<AGVector3> collisionPoints(const AGLine2 &l) const;
+  std::vector<AGVector2> collisionPoints(const AGLine2 &l) const;
 
-  bool contains(const AGPoint3 &p) const;
+  bool contains(const AGVector2 &p) const;
 
   AGRect2 getBBox() const;
 
-  AGLine2 nearestLine(const AGVector3 &v) const;
+  AGLine2 nearestLine(const AGVector2 &v) const;
 
   std::vector<AGLine2> getLines() const;
 #ifdef SWIG
@@ -396,39 +401,71 @@ class AGTriangle3
 
 class AGRect2
 {
-  AGVector3 v0,v1;
+  AGVector2 v0,v1;
  public:
   AGRect2();
-  AGRect2(const AGVector3 &pv0,const AGVector3 &pv1);
   AGRect2(const AGVector2 &pv0,const AGVector2 &pv1);
   AGRect2(float x,float y,float w,float h);
+  AGRect2(const std::string &ps);
 
   bool collide(const AGRect2 &r) const;
 
   void include(const AGVector2 &v);
 
-  AGRect2 operator+(const AGVector3 &v) const;
+  AGRect2 operator+(const AGVector2 &v) const;
+  AGRect2 &operator+=(const AGVector2 &v);
+  AGRect2 &operator-=(const AGVector2 &v);
 
-  bool contains(const AGVector3 &v) const;
+  bool contains(const AGVector2 &v) const;
   bool contains(const AGRect2 &v) const;
 
   std::list<AGRect2> split() const;
 
-  AGVector3 getV0() const;
-  AGVector3 getV1() const;
-  AGVector3 getV01() const;
-  AGVector3 getV10() const;
+  AGVector2 operator[](size_t i) const;
+  AGVector2 &operator[](size_t i);
 
+  AGVector2 getV0() const;
+  AGVector2 getV1() const;
+  AGVector2 getV01() const;
+  AGVector2 getV10() const;
+
+  AGRect2 shrink(float f) const;
 
   void setX(float p);
   void setY(float p);
+
+  void setLeft(float p); // attention - modifies right, too
+  void setTop(float p);  // attention - modifies bottom, too
+
+  void setRight(float p);
+  void setBottom(float p);
+
+  float setWidth(float w);
+  float setHeight(float w);
 
   float x() const;
   float y() const;
   float w() const;
   float h() const;
 
+  float width() const;
+  float height() const;
+
+  float x0() const;
+  float y0() const;
+  float x1() const;
+  float y1() const;
+
+  AGRect2 origin() const;
+
+  AGRect2 intersect(const AGRect2 &r) const;
+
   SDL_Rect sdl() const;
+
+  bool operator==(const AGRect2 &r) const;
+  bool operator!=(const AGRect2 &r) const;
+
+  void check() const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -630,5 +667,6 @@ class AGBox3
 std::ostream &operator<<(std::ostream &o,const AGVector2&v);
 std::ostream &operator<<(std::ostream &o,const AGVector3&v);
 std::ostream &operator<<(std::ostream &o,const AGVector4&v);
+std::ostream &operator<<(std::ostream &o,const AGRect2&v);
 
 #endif

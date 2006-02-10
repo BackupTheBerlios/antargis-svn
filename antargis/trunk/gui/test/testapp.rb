@@ -28,14 +28,25 @@ class TestApp <AGApplication
 #		initTheme
 		@count=0
 		@autoexit=autoexit
+		@frames=0
+		@mtime=0
 		super()
 	end
 	def eventQuit(event)
 		puts "Quitting"
 		super(event)
 	end
+	def eventFrame(t)
+		@frames+=1
+		@mtime+=t
+		if @frames==10
+			puts 10/@mtime
+			@frames=0
+			@mtime=0
+		end
+	end
 	def eventIdle
-		delay(10)
+		#delay(10)
 		#puts "idle count:"+@count.to_s
 		@count+=1
 		if @count>=20 then

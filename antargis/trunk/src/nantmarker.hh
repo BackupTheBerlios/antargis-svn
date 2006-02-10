@@ -22,18 +22,18 @@
 	result->mRubyObject=true;
 }
 %markfunc AnimMeshData "general_markfunc"
-%exception AnimMesh::AnimMesh {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AnimMesh "general_markfunc"
 %exception Scene::Scene {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
 %markfunc Scene "general_markfunc"
+%exception AnimMesh::AnimMesh {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AnimMesh "general_markfunc"
 %exception WaterPiece::WaterPiece {
 	$action
 	result->mRUBY=self;
@@ -1316,11 +1316,6 @@ else if(dynamic_cast<AntMap*>(result))
 %typemap(directorout) AGSurfaceManager {
  AGSurfaceManager *b;
  Data_Get_Struct($input,AGSurfaceManager,b);
- $result=*b;
-}
-%typemap(directorout) AGSurfacePainter {
- AGSurfacePainter *b;
- Data_Get_Struct($input,AGSurfacePainter,b);
  $result=*b;
 }
 %typemap(directorout) AGTable {

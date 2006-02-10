@@ -19,21 +19,24 @@
  */
 
 #include "ag_screen.h"
-#include "ag_surface.h"
-#include "ag_theme.h"
-#include "ag_debug.h"
 
+////////////////////////////////////////////////////////////////////////
+// AGScreen
+////////////////////////////////////////////////////////////////////////
 
-AGScreenWidget::AGScreenWidget():
-  AGWidget(0,getScreen().getRect())
-{
-  mTexture=getTextureManager()->makeTexture(getTheme()->getSurface("screen.background.image"));
-}
-AGScreenWidget::~AGScreenWidget()
+void AGScreen::begin()
 {
 }
 
-void AGScreenWidget::draw(AGPainter &p)
+void AGScreen::flip()
 {
-  p.tile(mTexture);
 }
+size_t AGScreen::getWidth() const
+{
+  return 0;
+}
+size_t AGScreen::getHeight() const
+{
+  return 0;
+}
+

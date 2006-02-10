@@ -426,8 +426,8 @@ class AntNameDisplay<AGWidget
 		super(p,r)
 		@hero=hero
 		@cr=r.origin
-		@cr.setH(@cr.height/2)
-		@cr.setY(@cr.height)
+		@cr.setHeight(@cr.height/2)
+		@cr.setTop(@cr.height)
 		@cr=@cr.shrink(4)
 		@font=getTheme.getFont("heroName.font")
 		@name=@hero.getName
@@ -458,8 +458,8 @@ class AntNameDisplay<AGWidget
 	end
 	private
 	def updateRects
-		@cr1=AGRect.new(@cr.getX,@cr.getY,(@cr.width*@energy).to_i,@cr.height/2)
-		@cr2=AGRect.new(@cr.getX,@cr.getY+@cr.height/2,(@cr.width*@energy).to_i,@cr.height/2)
+		@cr1=AGRect.new(@cr.x,@cr.y,(@cr.width*@energy).to_i,@cr.height/2)
+		@cr2=AGRect.new(@cr.x,@cr.y+@cr.height/2,(@cr.width*@energy).to_i,@cr.height/2)
 	end
 	def updateColor
 		if @hero.getPlayer==getMap.getPlayer

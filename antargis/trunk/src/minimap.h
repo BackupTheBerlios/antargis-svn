@@ -3,6 +3,7 @@
 
 #include "map.h"
 #include <ag_widget.h>
+#include <ag_texture.h>
 
 class Scene;
 

@@ -40,7 +40,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
 
   cdebug("image:"<<tstr);
   AGSurface s=getTheme()->getSurface(tstr);
-  int bw=s.getRect().w/3;
+  float bw=s.getRect().w()/3;
   int titBarHeight=20;
 
   //  cdebug("window_border:"<<s.width()<<"/"<<s.height());
@@ -153,8 +153,8 @@ bool AGWindow::eventMouseButtonDown(AGEvent *e)
 bool AGWindow::eventDragBy(AGEvent *event,const AGPoint &pDiff)
 {
   //  TRACE;
-  setTop(top()+pDiff.y);
-  setLeft(left()+pDiff.x);
+  setTop(top()+pDiff[1]);
+  setLeft(left()+pDiff[0]);
   return true;
 }
 
@@ -196,7 +196,7 @@ void AGWindow::close()
 
 AGRect AGWindow::getClientRect() const
 {
-  return const_cast<AGWindow*>(this)->getClient()->getClientRect()+mClient->getRect().getPosition();
+  return const_cast<AGWindow*>(this)->getClient()->getClientRect()+mClient->getRect().getV0();
 }
 
 AGWindow &toAGWindow(AGWidget &w)
