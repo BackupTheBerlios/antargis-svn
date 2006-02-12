@@ -63,9 +63,13 @@ class AGTexture:public AGPaintTarget
   virtual void endPaint();
 
   virtual void putPixel(int x,int y,const AGColor &c);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
+
 
   void setWrapping(bool pWrap);
   void setFilter(GLuint mag,GLuint min);
+  void setClamp(GLuint s,GLuint t,GLuint r);
 
   AGGLTexture *glTexture();
   AGInternalSurface *sdlTexture();

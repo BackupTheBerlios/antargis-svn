@@ -50,6 +50,7 @@
 #include "ag_xml.h"
 #include "ag_frame.h"
 #include "ag_screenwidget.h"
+#include "ag_glsl.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
 %include "ag_rubyobj.h"
@@ -102,6 +103,7 @@
 %include "ag_xml.h"
 %include "ag_frame.h"
 %include "ag_screenwidget.h"
+%include "ag_glsl.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 #endif
 #endif

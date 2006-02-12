@@ -1,5 +1,6 @@
 #include "terrain.h"
 #include <ag_texturecache.h>
+#include <ag_rendercontext.h>
 
 //////////////////////////////////////////////////////////////////////////
 // TerrainPieceVA
@@ -104,20 +105,30 @@ AGBox3 TerrainPieceVA::bbox() const
 
 void TerrainPieceVA::draw()
 {
-  glEnable(GL_LIGHTING);
+  //  return;
+  AGRenderContext c;
+  c.setLighting(true);
+  c.setTexture(mTerrain->get3dTexture()->glTexture());
+  mTerrain->get3dTexture()->setFilter(GL_LINEAR,GL_LINEAR);
+  //  mTerrain->get3dTexture()->setClamp(GL_REPEAT,GL_REPEAT,GL_CLAMP_TO_EDGE);
+
+  c.begin();
+  /*  glEnable(GL_LIGHTING);
 
   glDisable(GL_TEXTURE_2D);
   glEnable(GL_TEXTURE_3D);
-  glBindTexture(GL_TEXTURE_3D,mTerrain->get3dTexture()->getTextureID());
+  mTerrain->get3dTexture()->bindTexture();
+
+  //  glBindTexture(GL_TEXTURE_3D,mTerrain->get3dTexture()->getTextureID());
   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE );
-
+  */
   m3dArray.draw();
-
+  /*
   glDisable(GL_TEXTURE_3D);
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D,0);
-
+  */
 }
 
 

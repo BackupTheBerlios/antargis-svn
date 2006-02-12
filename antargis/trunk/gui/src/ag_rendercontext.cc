@@ -23,14 +23,15 @@
 #include "ag_texture.h"
 #include "ag_surfacemanager.h"
 
-AGRenderContext gStandardContext;
-AGRenderContext *gCurrentContext=&gStandardContext;
+AGRenderContext gCurrentContext;
 
 AGRenderContext::AGRenderContext():
   mColor(0),
   mTexture(0),
+  mProgram(0),
   mLighting(false),
   mDepthWrite(true),
+  mDepthTest(true),
   mAlphaThres(-1),
   mAlpha(GL_NONE),
   mCulling(true)
@@ -41,67 +42,178 @@ AGRenderContext::AGRenderContext():
 AGRenderContext::AGRenderContext(const AGRenderContext &c):
   mColor(c.mColor?new AGVector4(*c.mColor):0),
   mTexture(c.mTexture),
+  mProgram(c.mProgram),
   mLighting(c.mLighting),
-  mDepthWrite(c.mDepthWrite)
+  mDepthWrite(c.mDepthWrite),
+  mDepthTest(c.mDepthTest),
+  mAlphaThres(c.mAlphaThres),
+  mAlpha(c.mAlpha),
+  mCulling(c.mCulling)
 {
   getSurfaceManager()->registerMe(this);
-  //  if(mTexture)
-  //    mTexture->incRef();
 }
 
 AGRenderContext::~AGRenderContext()
 {
-  if(gCurrentContext==this)
-    {
-      //CTRACE;
-      // disable
-      //      end();
-      throw std::runtime_error("Current rendercontext deleted!");
-    }
-
-  /*
-  if(mTexture)
-    {
-      //      mTexture->decRef();
-      deleteChecked(mTexture);
-    }
-  */
   delete mColor;
   getSurfaceManager()->deregisterMe(this);
 }
 
 AGRenderContext *AGRenderContext::getCurrent()
 {
-  return gCurrentContext;
+  return &gCurrentContext;
 }
 
 
 void AGRenderContext::begin()
 {
+#ifdef FASTCONTEXT
+  if(mColor)
+    {
+      glEnable(GL_COLOR_MATERIAL);
+      glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+      glColor4fv(*mColor);
+    }
+  else
+    {
+      glColor4f(1,1,1,1);
+      glDisable(GL_COLOR_MATERIAL);
+      //      glColor4f(1,1,1,1);
+    }
+
+  glDepthMask(mDepthWrite);
+
+  
+  if(mCulling)
+    {
+      glEnable(GL_CULL_FACE);
+      glCullFace(GL_BACK);
+    }
+  else
+    glDisable(GL_CULL_FACE);
+
+
+  if(mTexture)
+    {
+      if(mTexture->is3d())
+	{
+	  glDisable(GL_TEXTURE_2D);
+	  glEnable(GL_TEXTURE_3D);
+	  glBindTexture(GL_TEXTURE_3D,mTexture->id());
+	}
+      else
+	{
+	  glDisable(GL_TEXTURE_3D);
+	  glEnable(GL_TEXTURE_2D);
+	  glBindTexture(GL_TEXTURE_2D,mTexture->id());
+	}
+    }
+  else
+    {
+      glDisable(GL_TEXTURE_2D);
+      glDisable(GL_TEXTURE_3D);
+    }
+
+  if(mDepthTest)
+    glEnable(GL_DEPTH_TEST);
+  else
+    glDisable(GL_DEPTH_TEST);
+  
+  if(mLighting)
+    glEnable(GL_LIGHTING);
+  else
+    glDisable(GL_LIGHTING);
+  
+  
+  if(mAlpha!=GL_NONE)
+    {
+      glEnable(GL_ALPHA_TEST);
+      glAlphaFunc(mAlpha,mAlphaThres);
+    }
+  else
+    glDisable(GL_ALPHA_TEST);
+  
+  
+  
+  
+#else
+  
+  ///////////////////////////////
+  // COLOR
+    
   // color setting
-  if(mColor!=gCurrentContext->mColor)
+
+  //  mColor=0;
+  if(mColor!=gCurrentContext.mColor)
     {
       if(mColor)
 	{
 	  glEnable(GL_COLOR_MATERIAL);
-	  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+	  //	  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+	  glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
 	}
       else
-	glDisable(GL_COLOR_MATERIAL);
+	{
+	  glColor4f(1,1,1,1);
+	  glDisable(GL_COLOR_MATERIAL);
+	}
     }
   if(mColor)
-    {
-      glColor4fv(*mColor);
-      //      CTRACE;
-    }
+    glColor4fv(*mColor);
+  else
+    glDisable(GL_COLOR_MATERIAL);
 
   bool t=false;
 
+  ///////////////////////////////
+  // DEPTHWRITE
 
-  #warning "add missing features! (depthwrite,alpha,culling)"
+    if(mDepthWrite!=gCurrentContext.mDepthWrite)
+      glDepthMask(mDepthWrite);
 
 
-  if(mTexture==gCurrentContext->mTexture)
+  ///////////////////////////////
+  // DEPTHTEST
+    if(mDepthTest!=gCurrentContext.mDepthTest)
+      {
+	if(mDepthTest)
+	  glEnable(GL_DEPTH_TEST);
+	else
+	  glDisable(GL_DEPTH_TEST);
+      }
+
+
+
+  ///////////////////////////////
+  // CULLING
+
+  if(mCulling!=gCurrentContext.mCulling)
+    {
+      if(mCulling)
+	{
+	  glEnable(GL_CULL_FACE);
+	  glCullFace(GL_BACK);
+	}
+      else
+	glDisable(GL_CULL_FACE);
+    }
+  ///////////////////////////////
+  // ALPHA
+
+  if(mAlpha!=gCurrentContext.mAlpha)
+    {
+      if(mAlpha!=GL_NONE)
+	glEnable(GL_ALPHA_TEST);
+      else
+	glDisable(GL_ALPHA_TEST);
+    }
+  if(mAlpha!=GL_NONE && mAlphaThres!=gCurrentContext.mAlphaThres)
+    glAlphaFunc(mAlpha,mAlphaThres);
+
+  ///////////////////////////////
+  // TEXTURE
+
+  if(mTexture==gCurrentContext.mTexture)
     {
       // early out
     }
@@ -109,24 +221,24 @@ void AGRenderContext::begin()
     {
       AGGLTexture *my=mTexture;
       AGGLTexture *last=0;
-      if(gCurrentContext->mTexture)
-	last=gCurrentContext->mTexture;
-      /*
+      if(gCurrentContext.mTexture)
+	last=gCurrentContext.mTexture;
 
-      cdebug("tex:"<<mTexture<<"   "<<gCurrentContext->mTexture);
-      if(mTexture && gCurrentContext->mTexture)
-	cdebug("tex:"<<mTexture->getTextureID()<<"   "<<gCurrentContext->mTexture->getTextureID());
-
-      */
       // texture setting
       if(!mTexture)
 	{
 	  if(last)
 	    {
 	      if(last->is3d())
-		glDisable(GL_TEXTURE_3D);
+		{
+		  glBindTexture(GL_TEXTURE_3D,0);
+		  glDisable(GL_TEXTURE_3D);
+		}
 	      else
-		glDisable(GL_TEXTURE_2D);
+		{
+		  glBindTexture(GL_TEXTURE_2D,0);
+		  glDisable(GL_TEXTURE_2D);
+		}
 	      t=true;
 	    }
 	}
@@ -169,16 +281,17 @@ void AGRenderContext::begin()
 		  if(last->id()!=my->id())
 		    {
 		      glBindTexture(GL_TEXTURE_2D,my->id());
-		      //		      cdebug(mTexture->id());
 		    }
 		}
 	    }
 	}
     }  
 
+  ///////////////////////////////
+  // LIGHTING
 
   // lighting
-  if(mLighting!=gCurrentContext->mLighting)
+  if(mLighting!=gCurrentContext.mLighting)
     {
       if(mLighting)
 	glEnable(GL_LIGHTING);
@@ -186,16 +299,15 @@ void AGRenderContext::begin()
 	glDisable(GL_LIGHTING);
     }
 
-  if(gCurrentContext!=&gStandardContext)
-    {
-      AGRenderContext *d=gCurrentContext;
-      gCurrentContext=0;
-      delete d;
-    }
-  gCurrentContext=new AGRenderContext(*this);
+  gCurrentContext=*this;
+
+#endif
 }
+
+
 void AGRenderContext::end()
 {
+  /*
   if(mColor)
     {
       glDisable(GL_COLOR_MATERIAL);
@@ -209,6 +321,7 @@ void AGRenderContext::end()
     }
 
   gCurrentContext=&gStandardContext;
+  */
 }
 
 void AGRenderContext::setColor(const AGVector4 &pColor)
@@ -245,6 +358,10 @@ void AGRenderContext::setDepthWrite(bool w)
 {
   mDepthWrite=w;
 }
+void AGRenderContext::setDepthTest(bool w)
+{
+  mDepthTest=w;
+}
 void AGRenderContext::setCulling(bool c)
 {
   mCulling=c;
@@ -258,4 +375,9 @@ void AGRenderContext::setAlpha(float v,GLuint g)
 AGGLTexture *AGRenderContext::getTexture()
 {
   return mTexture;
+}
+
+  AGVector4 *AGRenderContext::getColor()
+{
+  return mColor;
 }

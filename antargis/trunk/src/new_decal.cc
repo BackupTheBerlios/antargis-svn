@@ -1,6 +1,7 @@
 
 #include "new_decal.h"
 #include <ag_texturecache.h>
+#include <ag_rendercontext.h>
 
 
 NewDecal::NewDecal(AGVector2 pos,float size, HeightMap *pMap,const std::string &pTexture):
@@ -113,11 +114,15 @@ void NewDecal::draw()
   glPushMatrix();
   //  glTranslatef(mPos3[0],mPos3[1],mPos3[2]);
 
+  AGRenderContext c;
+  c.setTexture(mTexture.glTexture());
+  /*
+
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_ALPHA_TEST);
 
   glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
-
+  */
   //  glEnable(GL_POLYGON_OFFSET_FILL);
   //  glPolygonOffset(1,1);
   mArray.draw();

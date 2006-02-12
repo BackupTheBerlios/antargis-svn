@@ -10,7 +10,7 @@ MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
 {
   mMapBorder=20;
   mScene=0;
-  mTexture=getTextureManager()->makeTexture(mSurface);
+  mTexture=AGTexture(mSurface);////////getTextureManager()->makeTexture(mSurface);
   //  mapChanged();
   setMap(mMap);
     
@@ -126,7 +126,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
   if(inmem)
     {
       mSurface.save("sicke.png");
-      mTexture=getTextureManager()->makeTexture(mSurface);
+      mTexture=AGTexture(mSurface);//getTextureManager()->makeTexture(mSurface);
       TRACE;
     }
   return;

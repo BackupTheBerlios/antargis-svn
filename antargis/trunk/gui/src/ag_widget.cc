@@ -73,6 +73,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
 
 {
   mCache=0;
+  mCacheTouched=false;
   mRubyObject=false;
   mModal=false;
   if(getAllWidgets())
@@ -168,18 +169,25 @@ void AGWidget::drawAll(AGPainter &p)
   if(!mVisible)
     return;
 
-  if(!mChildrenDrawFirst)
-    draw(p2);
+  if(mCache)
+    {
+      p.blit(*mCache,getRect(),getRect().origin());
+    }
+  else
+    {
+      if(!mChildrenDrawFirst)
+	draw(p2);
 
-  std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+      std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+      
+      for(;i!=mChildren.rend();i++)
+	(*i)->drawAll(p2);
+      
+      if(mChildrenDrawFirst)
+	draw(p2);
 
-  for(;i!=mChildren.rend();i++)
-    (*i)->drawAll(p2);
-
-  if(mChildrenDrawFirst)
-    draw(p2);
-
-  drawAfter(p2);
+      drawAfter(p2);
+    }
 }
 
 AGRect AGWidget::getRect() const
@@ -722,16 +730,63 @@ AGWidget *toAGWidget(AGMessageObject *o)
 
 bool AGWidget::redraw() const
 {
+  return mCacheTouched;
+}
+
+bool AGWidget::checkRedraw() const
+{
+  if(redraw())
+    return true;
+  for(std::list<AGWidget*>::const_iterator i=mChildren.begin();i!=mChildren.end();++i)
+    if((*i)->checkRedraw())
+      return true;
   return false;
 }
+
+
 void AGWidget::prepareDraw()
 {
-  AGPainter p(*mCache);
-  draw(p);
+  if(mCache)
+    {
+      if(checkRedraw())
+	{
+	  TRACE;
+	  cdebug(mCacheTouched);
+	  AGPainter p(*mCache);
+
+	  for(int x=0;x<width();x++)
+	    for(int y=0;y<height();y++)
+	      p.putPixel(AGPoint(x,y),AGColor(0xFF,0xFF,0xFF,0xFF));
+	  /*
+	  if(!mChildrenDrawFirst)
+	    draw(p);
+	  
+	  std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+	  
+	  for(;i!=mChildren.rend();i++)
+	    (*i)->drawAll(p);
+	  
+	  if(mChildrenDrawFirst)
+	    draw(p);
+	  
+	  drawAfter(p);
+	  mCacheTouched=false;
+	  cdebug(mCacheTouched);*/
+	}
+    }
+  else
+    {
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+	(*i)->prepareDraw();
+    }
 }
 void AGWidget::setCaching(bool pEnable)
 {
+  CTRACE;
   mCaching=pEnable;
   delete mCache;
   mCache=new AGTexture(width(),height());
+  mCacheTouched=true;
+
+
 }

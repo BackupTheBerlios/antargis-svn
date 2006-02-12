@@ -2,6 +2,7 @@
 #include "scene.h"
 #include "smoke.h"
 #include "ag_texturecache.h"
+#include "ag_rendercontext.h"
 #include "map.h"
 
 float randf()
@@ -88,11 +89,12 @@ void Smoke::advance(float time)
 
 void Smoke::draw()
 {
+  /*
   //  return;
   glDisable(GL_ALPHA_TEST);
   glEnable(GL_BLEND);
   glDepthMask(false);
-
+  */
   AGVector3 dir=getRenderer()->getCurrentScene()->getCameraDirTo(p);
 
   //  cdebug(dir);
@@ -104,6 +106,12 @@ void Smoke::draw()
   side.normalize();
   up.normalize();
 
+  AGRenderContext c;
+  c.setAlpha(0,GL_NONE);
+  c.setDepthWrite(false);
+  c.setTexture(mTexture.glTexture());
+  c.setColor(AGVector4(1,1,1,1));
+  c.begin();
 
   for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
     {
@@ -114,10 +122,11 @@ void Smoke::draw()
       
       a=std::min(maxtime-(*i)->lived,a);
 
-      glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
+      //      glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
 
       float l=(*i)->light;
       float s=(*i)->size;
+      AGVector4 color((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
       if(fire)
 	{
 	  float x=maxtime/(*i)->lived;
@@ -130,19 +139,26 @@ void Smoke::draw()
 	    s*=(*i)->lived/3;
 	}
 
-      glColor4f((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
+      //      glColor4f((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
       glBegin(GL_QUADS);
+      //      glColor4fv(color);
       glTexCoord2f(0,0);
       glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side+up)*s);
+
+      //      glColor4fv(color);
       glTexCoord2f(1,0);
       glVertex3fv((*i)->pos+(side+up)*s);
+
+      //      glColor4fv(color);
       glTexCoord2f(1,1);
       glVertex3fv((*i)->pos+(side-up)*s);
+
+      //      glColor4fv(color);
       glTexCoord2f(0,1);
       glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side-up)*s);
       glEnd();
     }
-  glDepthMask(true);
+  //  glDepthMask(true);
   
 }
 

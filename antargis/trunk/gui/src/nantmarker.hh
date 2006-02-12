@@ -808,6 +808,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGFontEngine,b);
  $result=*b;
 }
+%typemap(directorout) AGFragProgram {
+ AGFragProgram *b;
+ Data_Get_Struct($input,AGFragProgram,b);
+ $result=*b;
+}
 %typemap(directorout) AGFrame {
  AGFrame *b;
  Data_Get_Struct($input,AGFrame,b);
@@ -983,6 +988,16 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGScreenWidget,b);
  $result=*b;
 }
+%typemap(directorout) AGShaderParameter {
+ AGShaderParameter *b;
+ Data_Get_Struct($input,AGShaderParameter,b);
+ $result=*b;
+}
+%typemap(directorout) AGShaderProgram {
+ AGShaderProgram *b;
+ Data_Get_Struct($input,AGShaderProgram,b);
+ $result=*b;
+}
 %typemap(directorout) AGSignal {
  AGSignal *b;
  Data_Get_Struct($input,AGSignal,b);
@@ -1073,6 +1088,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGVector4,b);
  $result=*b;
 }
+%typemap(directorout) AGVertexProgram {
+ AGVertexProgram *b;
+ Data_Get_Struct($input,AGVertexProgram,b);
+ $result=*b;
+}
 %typemap(directorout) AGWidget {
  AGWidget *b;
  Data_Get_Struct($input,AGWidget,b);
@@ -1101,6 +1121,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) Parser {
  Parser *b;
  Data_Get_Struct($input,Parser,b);
+ $result=*b;
+}
+%typemap(directorout) Scene {
+ Scene *b;
+ Data_Get_Struct($input,Scene,b);
  $result=*b;
 }
 %typemap(directorout) Uint8 {

@@ -161,8 +161,8 @@ void Renderer::beginShadowDrawing()
 
   glMatrixMode(GL_MODELVIEW);
   // draw a flat shadow over 
-  glDisable(GL_LIGHTING);
-  glEnable(GL_COLOR_MATERIAL);
+  //  glDisable(GL_LIGHTING);
+  //  glEnable(GL_COLOR_MATERIAL);
   
 
   if(usePlainGL)

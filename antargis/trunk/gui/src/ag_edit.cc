@@ -64,7 +64,7 @@ void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
 {
   int x=0;
   if(mAlign==EDIT_CENTER)
-    x=(pClip.w()-mFont.getWidth(mText))/2;
+    x=(int)((pClip.w()-mFont.getWidth(mText))/2);
 
 #ifdef SMALL_CHUNKS
   int mx=0;

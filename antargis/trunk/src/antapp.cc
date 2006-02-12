@@ -34,7 +34,7 @@ void GLApp::drawGL()
   scene.draw();
   assertGL;
   
-  glColor4f(1,1,1,1);
+  //  glColor4f(1,1,1,1);
 }
 
 bool GLApp::eventFrame(float t)

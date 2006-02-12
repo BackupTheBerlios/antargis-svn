@@ -125,7 +125,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 	def clickEntities(list,button)
 		puts "CLICKENTS"
-		
+		puts $buttonPanel
 		job=$buttonPanel.getJob
 		puts "JOB:"+job
 		if job=="doPoint" then

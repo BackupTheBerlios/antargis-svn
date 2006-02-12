@@ -1414,4 +1414,15 @@ public:
 };
 
 
+class SwigDirector_AGShaderProgram : public AGShaderProgram, public Swig::Director {
+
+public:
+    SwigDirector_AGShaderProgram(VALUE self, std::string const &pVertexFile, std::string const &pFragFile);
+    virtual void doUpdate(float time);
+    virtual ~SwigDirector_AGShaderProgram();
+    virtual void enable();
+    virtual void disable();
+};
+
+
 #endif

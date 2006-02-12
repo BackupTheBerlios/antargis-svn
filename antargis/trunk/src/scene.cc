@@ -5,6 +5,7 @@
 #include <GL/glu.h>
 
 #include <ag_debug.h>
+#include <ag_rendercontext.h>
 #include <algorithm>
 
 #include <math.h>
@@ -102,6 +103,8 @@ size_t Scene::getTriangles() const
 
 void Scene::draw()
 {
+  AGRenderContext c;
+  c.begin(); // reset gl-state
   //  return;
   getRenderer()->setCurrentScene(this);
   assertGL;
@@ -374,7 +377,7 @@ void Scene::calcShadowMap()
 
 void Scene::initScene()
 {
-  glDisable(GL_COLOR_MATERIAL);
+  //  glDisable(GL_COLOR_MATERIAL);
   glClear(GL_DEPTH_BUFFER_BIT);
   
   glMatrixMode(GL_PROJECTION);
@@ -421,7 +424,7 @@ void Scene::initScene()
 
   glLoadMatrixf(cameraViewMatrix);
   
-  glBindTexture(GL_TEXTURE_2D,0);
+  //  glBindTexture(GL_TEXTURE_2D,0);
 
   //  calcCameraView();
   

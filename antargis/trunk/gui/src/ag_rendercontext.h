@@ -25,6 +25,8 @@
 #include "ag_geometry.h"
 #include "ag_gltexture.h"
 
+class AGShaderProgram;
+
 class AGRenderContext
 {
  public:
@@ -40,21 +42,24 @@ class AGRenderContext
   void setTexture(AGGLTexture *pTexture);
   void setLighting(bool pLight);
   void setDepthWrite(bool w);
+  void setDepthTest(bool t);
   void setCulling(bool c);
   void setAlpha(float v,GLuint g);
 
   static AGRenderContext *getCurrent();
 
   AGGLTexture *getTexture();
+  AGVector4 *getColor();
 
  private:
   AGVector4 *mColor;
   AGGLTexture *mTexture;
-#warning "FIXME: glsl-program"
+  AGShaderProgram *mProgram;
 
   bool mLighting;
 
   bool mDepthWrite;
+  bool mDepthTest;
   float mAlphaThres;
   GLint mAlpha;
   bool mCulling;

@@ -1,6 +1,7 @@
 #include "anim_mesh.h"
 #include "scene.h"
 #include "ag_texturecache.h"
+#include "ag_rendercontext.h"
 
 #include "ag_debug.h"
 #include "ag_xml.h"
@@ -234,7 +235,7 @@ void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::stri
       v*=scale;
       mBBox.include(v);
       pos.push_back(v);
-      uv.push_back(AGVector2(tx,ty));
+      uv.push_back(AGVector2(tx,1-ty));
       normal.push_back(AGVector3(nx,ny,nz));
       bone.push_back(boneID);
     }
@@ -429,16 +430,20 @@ void AnimMesh::drawPick()
 // at first try a simple animation without shaders
 void AnimMesh::drawPrivate(bool textured, bool mem)
 {
+  AGRenderContext c;
 //  bool fast=true;
   if(textured)
     {
+      c.setTexture(mData->mTexture.glTexture());
+      /*
       glColor4f(1,1,1,1);
       glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
-      glEnable(GL_LIGHTING);
+      glEnable(GL_LIGHTING);*/
     }
   //  else
   //    fast=false; // FIXME: add shader for non-textured rendering
-
+  c.setLighting(true);
+  c.begin();
   glPushMatrix();
 
   glTranslatef(mPos[0],mPos[1],mPos[2]);
@@ -451,7 +456,7 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
       glMultMatrixf(mData->getTransform());
       if(textured)
 	{
-	  glDisable(GL_COLOR_MATERIAL);
+	  //	  glDisable(GL_COLOR_MATERIAL);
 	  mData->animShader.enable();
 	  //mData->animShader.sendAttribute("bones",mData->bonef);
 	  mData->animShader.sendUniform("matrices",mShaderMatrices);
@@ -459,7 +464,7 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 	  mData->mArray.draw();
 
 	  mData->animShader.disable();
-	  glEnable(GL_COLOR_MATERIAL);
+	  //	  glEnable(GL_COLOR_MATERIAL);
 
 	}
       else if(mem)

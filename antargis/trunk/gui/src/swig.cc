@@ -1041,93 +1041,99 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGEvent swig_types[16]
 #define SWIGTYPE_p_AGFont swig_types[17]
 #define SWIGTYPE_p_AGFontEngine swig_types[18]
-#define SWIGTYPE_p_AGFrame swig_types[19]
-#define SWIGTYPE_p_AGGLTexture swig_types[20]
-#define SWIGTYPE_p_AGGLWidget swig_types[21]
-#define SWIGTYPE_p_AGHTiler swig_types[22]
-#define SWIGTYPE_p_AGImage swig_types[23]
-#define SWIGTYPE_p_AGInternalSurface swig_types[24]
-#define SWIGTYPE_p_AGLayout swig_types[25]
-#define SWIGTYPE_p_AGLayoutCreator swig_types[26]
-#define SWIGTYPE_p_AGLayoutFactory swig_types[27]
-#define SWIGTYPE_p_AGLine2 swig_types[28]
-#define SWIGTYPE_p_AGLine3 swig_types[29]
-#define SWIGTYPE_p_AGListBox swig_types[30]
-#define SWIGTYPE_p_AGListBoxItem swig_types[31]
-#define SWIGTYPE_p_AGListener swig_types[32]
-#define SWIGTYPE_p_AGMain swig_types[33]
-#define SWIGTYPE_p_AGMatrix3 swig_types[34]
-#define SWIGTYPE_p_AGMatrix4 swig_types[35]
-#define SWIGTYPE_p_AGMenu swig_types[36]
-#define SWIGTYPE_p_AGMenuItem swig_types[37]
-#define SWIGTYPE_p_AGMessageObject swig_types[38]
-#define SWIGTYPE_p_AGMutex swig_types[39]
-#define SWIGTYPE_p_AGPaintTarget swig_types[40]
-#define SWIGTYPE_p_AGPainter swig_types[41]
-#define SWIGTYPE_p_AGPoint3 swig_types[42]
-#define SWIGTYPE_p_AGProjection swig_types[43]
-#define SWIGTYPE_p_AGRadio swig_types[44]
-#define SWIGTYPE_p_AGRadioGroup swig_types[45]
-#define SWIGTYPE_p_AGRect2 swig_types[46]
-#define SWIGTYPE_p_AGRect3 swig_types[47]
-#define SWIGTYPE_p_AGRubyObject swig_types[48]
-#define SWIGTYPE_p_AGScreen swig_types[49]
-#define SWIGTYPE_p_AGScreenWidget swig_types[50]
-#define SWIGTYPE_p_AGSignal swig_types[51]
-#define SWIGTYPE_p_AGSound swig_types[52]
-#define SWIGTYPE_p_AGSubMenu swig_types[53]
-#define SWIGTYPE_p_AGSurface swig_types[54]
-#define SWIGTYPE_p_AGTable swig_types[55]
-#define SWIGTYPE_p_AGText swig_types[56]
-#define SWIGTYPE_p_AGTexture swig_types[57]
-#define SWIGTYPE_p_AGTextureCache swig_types[58]
-#define SWIGTYPE_p_AGTheme swig_types[59]
-#define SWIGTYPE_p_AGTriangle2 swig_types[60]
-#define SWIGTYPE_p_AGTriangle3 swig_types[61]
-#define SWIGTYPE_p_AGVTiler swig_types[62]
-#define SWIGTYPE_p_AGVector2 swig_types[63]
-#define SWIGTYPE_p_AGVector3 swig_types[64]
-#define SWIGTYPE_p_AGVector4 swig_types[65]
-#define SWIGTYPE_p_AGWidget swig_types[66]
-#define SWIGTYPE_p_AGWindow swig_types[67]
-#define SWIGTYPE_p_Attributes swig_types[68]
-#define SWIGTYPE_p_Document swig_types[69]
-#define SWIGTYPE_p_DomParser swig_types[70]
-#define SWIGTYPE_p_GLint swig_types[71]
-#define SWIGTYPE_p_GLuint swig_types[72]
-#define SWIGTYPE_p_Node swig_types[73]
-#define SWIGTYPE_p_NodeVector swig_types[74]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[75]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[76]
-#define SWIGTYPE_p_Parser swig_types[77]
-#define SWIGTYPE_p_SDLKey swig_types[78]
-#define SWIGTYPE_p_SDLMod swig_types[79]
-#define SWIGTYPE_p_SDL_Event swig_types[80]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[81]
-#define SWIGTYPE_p_SDL_Rect swig_types[82]
-#define SWIGTYPE_p_SDL_Surface swig_types[83]
-#define SWIGTYPE_p_Uint32 swig_types[84]
-#define SWIGTYPE_p_Uint8 swig_types[85]
-#define SWIGTYPE_p_const_iterator swig_types[86]
-#define SWIGTYPE_p_float swig_types[87]
-#define SWIGTYPE_p_iterator swig_types[88]
-#define SWIGTYPE_p_p_Node swig_types[89]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[90]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[91]
-#define SWIGTYPE_p_std__ostringstream swig_types[92]
-#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[93]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[94]
-#define SWIGTYPE_p_std__string swig_types[95]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[96]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[97]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[98]
-#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[99]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[100]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[101]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[102]
-#define SWIGTYPE_p_unsigned_long swig_types[103]
-static swig_type_info *swig_types[105];
-static swig_module_info swig_module = {swig_types, 104, 0, 0, 0, 0};
+#define SWIGTYPE_p_AGFragProgram swig_types[19]
+#define SWIGTYPE_p_AGFrame swig_types[20]
+#define SWIGTYPE_p_AGGLTexture swig_types[21]
+#define SWIGTYPE_p_AGGLWidget swig_types[22]
+#define SWIGTYPE_p_AGHTiler swig_types[23]
+#define SWIGTYPE_p_AGImage swig_types[24]
+#define SWIGTYPE_p_AGInternalSurface swig_types[25]
+#define SWIGTYPE_p_AGLayout swig_types[26]
+#define SWIGTYPE_p_AGLayoutCreator swig_types[27]
+#define SWIGTYPE_p_AGLayoutFactory swig_types[28]
+#define SWIGTYPE_p_AGLine2 swig_types[29]
+#define SWIGTYPE_p_AGLine3 swig_types[30]
+#define SWIGTYPE_p_AGListBox swig_types[31]
+#define SWIGTYPE_p_AGListBoxItem swig_types[32]
+#define SWIGTYPE_p_AGListener swig_types[33]
+#define SWIGTYPE_p_AGMain swig_types[34]
+#define SWIGTYPE_p_AGMatrix3 swig_types[35]
+#define SWIGTYPE_p_AGMatrix4 swig_types[36]
+#define SWIGTYPE_p_AGMenu swig_types[37]
+#define SWIGTYPE_p_AGMenuItem swig_types[38]
+#define SWIGTYPE_p_AGMessageObject swig_types[39]
+#define SWIGTYPE_p_AGMutex swig_types[40]
+#define SWIGTYPE_p_AGPaintTarget swig_types[41]
+#define SWIGTYPE_p_AGPainter swig_types[42]
+#define SWIGTYPE_p_AGPoint3 swig_types[43]
+#define SWIGTYPE_p_AGProjection swig_types[44]
+#define SWIGTYPE_p_AGRadio swig_types[45]
+#define SWIGTYPE_p_AGRadioGroup swig_types[46]
+#define SWIGTYPE_p_AGRect2 swig_types[47]
+#define SWIGTYPE_p_AGRect3 swig_types[48]
+#define SWIGTYPE_p_AGRubyObject swig_types[49]
+#define SWIGTYPE_p_AGScreen swig_types[50]
+#define SWIGTYPE_p_AGScreenWidget swig_types[51]
+#define SWIGTYPE_p_AGShaderParameter swig_types[52]
+#define SWIGTYPE_p_AGShaderProgram swig_types[53]
+#define SWIGTYPE_p_AGSignal swig_types[54]
+#define SWIGTYPE_p_AGSound swig_types[55]
+#define SWIGTYPE_p_AGSubMenu swig_types[56]
+#define SWIGTYPE_p_AGSurface swig_types[57]
+#define SWIGTYPE_p_AGTable swig_types[58]
+#define SWIGTYPE_p_AGText swig_types[59]
+#define SWIGTYPE_p_AGTexture swig_types[60]
+#define SWIGTYPE_p_AGTextureCache swig_types[61]
+#define SWIGTYPE_p_AGTheme swig_types[62]
+#define SWIGTYPE_p_AGTriangle2 swig_types[63]
+#define SWIGTYPE_p_AGTriangle3 swig_types[64]
+#define SWIGTYPE_p_AGVTiler swig_types[65]
+#define SWIGTYPE_p_AGVector2 swig_types[66]
+#define SWIGTYPE_p_AGVector3 swig_types[67]
+#define SWIGTYPE_p_AGVector4 swig_types[68]
+#define SWIGTYPE_p_AGVertexProgram swig_types[69]
+#define SWIGTYPE_p_AGWidget swig_types[70]
+#define SWIGTYPE_p_AGWindow swig_types[71]
+#define SWIGTYPE_p_Attributes swig_types[72]
+#define SWIGTYPE_p_Document swig_types[73]
+#define SWIGTYPE_p_DomParser swig_types[74]
+#define SWIGTYPE_p_GLint swig_types[75]
+#define SWIGTYPE_p_GLuint swig_types[76]
+#define SWIGTYPE_p_Node swig_types[77]
+#define SWIGTYPE_p_NodeVector swig_types[78]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[79]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[80]
+#define SWIGTYPE_p_Parser swig_types[81]
+#define SWIGTYPE_p_SDLKey swig_types[82]
+#define SWIGTYPE_p_SDLMod swig_types[83]
+#define SWIGTYPE_p_SDL_Event swig_types[84]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[85]
+#define SWIGTYPE_p_SDL_Rect swig_types[86]
+#define SWIGTYPE_p_SDL_Surface swig_types[87]
+#define SWIGTYPE_p_Uint32 swig_types[88]
+#define SWIGTYPE_p_Uint8 swig_types[89]
+#define SWIGTYPE_p_const_iterator swig_types[90]
+#define SWIGTYPE_p_float swig_types[91]
+#define SWIGTYPE_p_iterator swig_types[92]
+#define SWIGTYPE_p_p_Node swig_types[93]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[94]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[95]
+#define SWIGTYPE_p_std__ostringstream swig_types[96]
+#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[97]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[98]
+#define SWIGTYPE_p_std__string swig_types[99]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[100]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[101]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[102]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[103]
+#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[104]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[105]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[106]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[107]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[108]
+#define SWIGTYPE_p_unsigned_long swig_types[109]
+static swig_type_info *swig_types[111];
+static swig_module_info swig_module = {swig_types, 110, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -16942,6 +16948,50 @@ void SwigDirector_AGScreenWidget::mark() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
+}
+
+
+SwigDirector_AGShaderProgram::SwigDirector_AGShaderProgram(VALUE self, std::string const &pVertexFile, std::string const &pFragFile): AGShaderProgram(pVertexFile, pFragFile), Swig::Director(self) {
+    
+}
+
+
+
+void SwigDirector_AGShaderProgram::doUpdate(float time) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGShaderProgram::doUpdate(time);
+        return;
+    }
+    obj0 = rb_float_new(time);
+    result = rb_funcall(swig_get_self(), rb_intern("doUpdate"), 1,obj0);
+}
+
+
+SwigDirector_AGShaderProgram::~SwigDirector_AGShaderProgram() {
+}
+
+void SwigDirector_AGShaderProgram::enable() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGShaderProgram::enable();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("enable"), 0, NULL);
+}
+
+
+void SwigDirector_AGShaderProgram::disable() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGShaderProgram::disable();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("disable"), 0, NULL);
 }
 
 
@@ -41665,6 +41715,743 @@ _wrap_disown_AGScreenWidget(int argc, VALUE *argv, VALUE self) {
 }
 
 
+swig_class cAGVertexProgram;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGVertexProgram_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGVertexProgram_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGVertexProgram);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGVertexProgram(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    AGVertexProgram *result;
+    std::string temp1 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (AGVertexProgram *)new AGVertexProgram((std::string const &)*arg1);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_AGVertexProgram(AGVertexProgram *arg1) {
+    delete arg1;
+}
+
+swig_class cAGFragProgram;
+
+static VALUE
+_wrap_new_AGFragProgram__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    AGFragProgram *result;
+    std::string temp1 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (AGFragProgram *)new AGFragProgram((std::string const &)*arg1);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGFragProgram_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGFragProgram_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGFragProgram);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGFragProgram__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGFragProgram *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (AGFragProgram *)new AGFragProgram();
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE _wrap_new_AGFragProgram(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[1];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 1); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_AGFragProgram__SWIG_1(nargs, args, self);
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_AGFragProgram__SWIG_0(nargs, args, self);
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGFragProgram'");
+    return Qnil;
+}
+
+
+static void
+free_AGFragProgram(AGFragProgram *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_AGFragProgram_valid(int argc, VALUE *argv, VALUE self) {
+    AGFragProgram *arg1 = (AGFragProgram *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGFragProgram, 0);
+    result = (bool)((AGFragProgram const *)arg1)->valid();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+swig_class cAGShaderParameter;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGShaderParameter_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGShaderParameter_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGShaderParameter);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGShaderParameter(int argc, VALUE *argv, VALUE self) {
+    AGShaderParameter *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (AGShaderParameter *)new AGShaderParameter();
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_AGShaderParameter(AGShaderParameter *arg1) {
+    delete arg1;
+}
+
+swig_class cAGShaderProgram;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGShaderProgram_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGShaderProgram_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGShaderProgram);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGShaderProgram(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    std::string *arg2 = 0 ;
+    std::string *arg3 = 0 ;
+    AGShaderProgram *result;
+    std::string temp2 ;
+    std::string temp3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = self;
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    {
+        if (TYPE(argv[1]) == T_STRING) {
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
+            arg3 = &temp3;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    char *classname = "Libantargisgui::AGShaderProgram";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGShaderProgram *)new SwigDirector_AGShaderProgram(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
+        
+    } else {
+        result = (AGShaderProgram *)new AGShaderProgram((std::string const &)*arg2,(std::string const &)*arg3);
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static void
+free_AGShaderProgram(AGShaderProgram *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_AGShaderProgram_enable(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->enable();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_disable(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->disable();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_update(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    float arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    (arg1)->update(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_doUpdate(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    float arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    arg2 = (float) NUM2DBL(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->doUpdate(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_getLoc(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    GLint result;
+    std::string temp2 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (arg1)->getLoc((std::string const &)*arg2);
+    
+    {
+        GLint * resultptr;
+        resultptr = new GLint((GLint &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_GLint, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_getAttr(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    GLint result;
+    std::string temp2 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    result = (arg1)->getAttr((std::string const &)*arg2);
+    
+    {
+        GLint * resultptr;
+        resultptr = new GLint((GLint &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_GLint, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendUniform__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    int arg3 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    arg3 = NUM2INT(argv[1]);
+    (arg1)->sendUniform((std::string const &)*arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendUniform__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    float arg3 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    arg3 = (float) NUM2DBL(argv[1]);
+    (arg1)->sendUniform((std::string const &)*arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendUniform__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    AGVector3 *arg3 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGVector3, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->sendUniform((std::string const &)*arg2,(AGVector3 const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendUniform__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    AGVector4 *arg3 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGVector4, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->sendUniform((std::string const &)*arg2,(AGVector4 const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendUniform__SWIG_4(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    AGMatrix4 *arg3 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGMatrix4, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->sendUniform((std::string const &)*arg2,(AGMatrix4 const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendUniform__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    std::vector<AGMatrix4 > *arg3 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_std__vectorTAGMatrix4_t, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->sendUniform((std::string const &)*arg2,(std::vector<AGMatrix4 > const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AGShaderProgram_sendUniform(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGShaderProgram, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGShaderProgram_sendUniform__SWIG_2(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGShaderProgram, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGVector4, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGShaderProgram_sendUniform__SWIG_3(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGShaderProgram, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGMatrix4, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGShaderProgram_sendUniform__SWIG_4(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGShaderProgram, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_std__vectorTAGMatrix4_t, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGShaderProgram_sendUniform__SWIG_5(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGShaderProgram, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGShaderProgram_sendUniform__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGShaderProgram, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_AGShaderProgram_sendUniform__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGShaderProgram_sendUniform'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGShaderProgram_sendAttribute(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    std::string *arg2 = 0 ;
+    std::vector<float > *arg3 = 0 ;
+    std::string temp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_std__vectorTfloat_t, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->sendAttribute((std::string const &)*arg2,(std::vector<float > const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_disown_AGShaderProgram(int argc, VALUE *argv, VALUE self) {
+    AGShaderProgram *arg1 = (AGShaderProgram *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGShaderProgram, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_glslOk(int argc, VALUE *argv, VALUE self) {
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (bool)glslOk();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -42044,6 +42831,7 @@ static swig_type_info _swigt__p_AGEditLine = {"_p_AGEditLine", "AGEditLine *", 0
 static swig_type_info _swigt__p_AGEvent = {"_p_AGEvent", "AGEvent *", 0, 0, 0};
 static swig_type_info _swigt__p_AGFont = {"_p_AGFont", "AGFont *", 0, 0, 0};
 static swig_type_info _swigt__p_AGFontEngine = {"_p_AGFontEngine", "AGFontEngine *", 0, 0, 0};
+static swig_type_info _swigt__p_AGFragProgram = {"_p_AGFragProgram", "AGFragProgram *", 0, 0, 0};
 static swig_type_info _swigt__p_AGFrame = {"_p_AGFrame", "AGFrame *", 0, 0, 0};
 static swig_type_info _swigt__p_AGGLTexture = {"_p_AGGLTexture", "AGGLTexture *", 0, 0, 0};
 static swig_type_info _swigt__p_AGGLWidget = {"_p_AGGLWidget", "AGGLWidget *", 0, 0, 0};
@@ -42076,6 +42864,8 @@ static swig_type_info _swigt__p_AGRect3 = {"_p_AGRect3", "AGRect3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRubyObject = {"_p_AGRubyObject", "AGRubyObject *", 0, 0, 0};
 static swig_type_info _swigt__p_AGScreen = {"_p_AGScreen", "AGScreen *", 0, 0, 0};
 static swig_type_info _swigt__p_AGScreenWidget = {"_p_AGScreenWidget", "AGScreenWidget *", 0, 0, 0};
+static swig_type_info _swigt__p_AGShaderParameter = {"_p_AGShaderParameter", "AGShaderParameter *", 0, 0, 0};
+static swig_type_info _swigt__p_AGShaderProgram = {"_p_AGShaderProgram", "AGShaderProgram *", 0, 0, 0};
 static swig_type_info _swigt__p_AGSignal = {"_p_AGSignal", "AGSignal *", 0, 0, 0};
 static swig_type_info _swigt__p_AGSound = {"_p_AGSound", "AGSound *", 0, 0, 0};
 static swig_type_info _swigt__p_AGSubMenu = {"_p_AGSubMenu", "AGSubMenu *", 0, 0, 0};
@@ -42091,6 +42881,7 @@ static swig_type_info _swigt__p_AGVTiler = {"_p_AGVTiler", "AGVTiler *", 0, 0, 0
 static swig_type_info _swigt__p_AGVector2 = {"_p_AGVector2", "AGVector2 *|AGPoint *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector3 = {"_p_AGVector3", "AGVector3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector4 = {"_p_AGVector4", "AGVector4 *", 0, 0, 0};
+static swig_type_info _swigt__p_AGVertexProgram = {"_p_AGVertexProgram", "AGVertexProgram *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWidget = {"_p_AGWidget", "AGWidget *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWindow = {"_p_AGWindow", "AGWindow *", 0, 0, 0};
 static swig_type_info _swigt__p_Attributes = {"_p_Attributes", "Attributes *", 0, 0, 0};
@@ -42123,10 +42914,12 @@ static swig_type_info _swigt__p_std__pairTstd__string_bool_t = {"_p_std__pairTst
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGBox3_t = {"_p_std__vectorTAGBox3_t", "std::vector<AGBox3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGLine2_t = {"_p_std__vectorTAGLine2_t", "std::vector<AGLine2 > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTAGMatrix4_t = {"_p_std__vectorTAGMatrix4_t", "std::vector<AGMatrix4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGRect3_t = {"_p_std__vectorTAGRect3_t", "std::vector<AGRect3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector2_t = {"_p_std__vectorTAGVector2_t", "std::vector<AGVector2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector4_t = {"_p_std__vectorTAGVector4_t", "std::vector<AGVector4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_p_t = {"_p_std__vectorTNode_p_t", "std::vector<Node * > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTfloat_t = {"_p_std__vectorTfloat_t", "std::vector<float > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTstd__string_t = {"_p_std__vectorTstd__string_t", "std::vector<std::string > *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 
@@ -42150,6 +42943,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGEvent,
   &_swigt__p_AGFont,
   &_swigt__p_AGFontEngine,
+  &_swigt__p_AGFragProgram,
   &_swigt__p_AGFrame,
   &_swigt__p_AGGLTexture,
   &_swigt__p_AGGLWidget,
@@ -42182,6 +42976,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGRubyObject,
   &_swigt__p_AGScreen,
   &_swigt__p_AGScreenWidget,
+  &_swigt__p_AGShaderParameter,
+  &_swigt__p_AGShaderProgram,
   &_swigt__p_AGSignal,
   &_swigt__p_AGSound,
   &_swigt__p_AGSubMenu,
@@ -42197,6 +42993,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGVector2,
   &_swigt__p_AGVector3,
   &_swigt__p_AGVector4,
+  &_swigt__p_AGVertexProgram,
   &_swigt__p_AGWidget,
   &_swigt__p_AGWindow,
   &_swigt__p_Attributes,
@@ -42229,10 +43026,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__string,
   &_swigt__p_std__vectorTAGBox3_t,
   &_swigt__p_std__vectorTAGLine2_t,
+  &_swigt__p_std__vectorTAGMatrix4_t,
   &_swigt__p_std__vectorTAGRect3_t,
   &_swigt__p_std__vectorTAGVector2_t,
   &_swigt__p_std__vectorTAGVector4_t,
   &_swigt__p_std__vectorTNode_p_t,
+  &_swigt__p_std__vectorTfloat_t,
   &_swigt__p_std__vectorTstd__string_t,
   &_swigt__p_unsigned_long,
 };
@@ -42256,6 +43055,7 @@ static swig_cast_info _swigc__p_AGEditLine[] = {  {&_swigt__p_AGEditLine, 0, 0, 
 static swig_cast_info _swigc__p_AGEvent[] = {  {&_swigt__p_AGEvent, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGFont[] = {  {&_swigt__p_AGFont, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGFontEngine[] = {  {&_swigt__p_AGFontEngine, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGFragProgram[] = {  {&_swigt__p_AGFragProgram, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGFrame[] = {  {&_swigt__p_AGFrame, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGGLTexture[] = {  {&_swigt__p_AGGLTexture, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGGLWidget[] = {  {&_swigt__p_AGGLWidget, 0, 0, 0},{0, 0, 0, 0}};
@@ -42288,6 +43088,8 @@ static swig_cast_info _swigc__p_AGRect3[] = {  {&_swigt__p_AGRect3, 0, 0, 0},{0,
 static swig_cast_info _swigc__p_AGRubyObject[] = {  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGApplication, _p_AGApplicationTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGWidget, _p_AGWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGListener, _p_AGListenerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGFrame, _p_AGFrameTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRubyObject, 0, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMessageObject, _p_AGMessageObjectTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGRubyObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGScreen[] = {  {&_swigt__p_AGScreen, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGScreenWidget[] = {  {&_swigt__p_AGScreenWidget, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGShaderParameter[] = {  {&_swigt__p_AGShaderParameter, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGShaderProgram[] = {  {&_swigt__p_AGShaderProgram, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGSignal[] = {  {&_swigt__p_AGSignal, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGSound[] = {  {&_swigt__p_AGSound, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGSubMenu[] = {  {&_swigt__p_AGSubMenu, 0, 0, 0},{0, 0, 0, 0}};
@@ -42303,6 +43105,7 @@ static swig_cast_info _swigc__p_AGVTiler[] = {  {&_swigt__p_AGVTiler, 0, 0, 0}, 
 static swig_cast_info _swigc__p_AGVector2[] = {  {&_swigt__p_AGVector2, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGPoint3, _p_AGPoint3To_p_AGVector3, 0, 0},  {&_swigt__p_AGVector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVector4[] = {  {&_swigt__p_AGVector4, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGVertexProgram[] = {  {&_swigt__p_AGVertexProgram, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWidget[] = {  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGWidget, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGWidget, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWidget, 0, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGWidget, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGWidget, 0, 0},  {&_swigt__p_AGFrame, _p_AGFrameTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGWidget, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGWidget, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWindow[] = {  {&_swigt__p_AGWindow, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Attributes[] = {  {&_swigt__p_Attributes, 0, 0, 0},{0, 0, 0, 0}};
@@ -42335,10 +43138,12 @@ static swig_cast_info _swigc__p_std__pairTstd__string_bool_t[] = {  {&_swigt__p_
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGBox3_t[] = {  {&_swigt__p_std__vectorTAGBox3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGLine2_t[] = {  {&_swigt__p_std__vectorTAGLine2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTAGMatrix4_t[] = {  {&_swigt__p_std__vectorTAGMatrix4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGRect3_t[] = {  {&_swigt__p_std__vectorTAGRect3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector2_t[] = {  {&_swigt__p_std__vectorTAGVector2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector4_t[] = {  {&_swigt__p_std__vectorTAGVector4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_p_t[] = {  {&_swigt__p_std__vectorTNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTfloat_t[] = {  {&_swigt__p_std__vectorTfloat_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTstd__string_t[] = {  {&_swigt__p_std__vectorTstd__string_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 
@@ -42362,6 +43167,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGEvent,
   _swigc__p_AGFont,
   _swigc__p_AGFontEngine,
+  _swigc__p_AGFragProgram,
   _swigc__p_AGFrame,
   _swigc__p_AGGLTexture,
   _swigc__p_AGGLWidget,
@@ -42394,6 +43200,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGRubyObject,
   _swigc__p_AGScreen,
   _swigc__p_AGScreenWidget,
+  _swigc__p_AGShaderParameter,
+  _swigc__p_AGShaderProgram,
   _swigc__p_AGSignal,
   _swigc__p_AGSound,
   _swigc__p_AGSubMenu,
@@ -42409,6 +43217,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGVector2,
   _swigc__p_AGVector3,
   _swigc__p_AGVector4,
+  _swigc__p_AGVertexProgram,
   _swigc__p_AGWidget,
   _swigc__p_AGWindow,
   _swigc__p_Attributes,
@@ -42441,10 +43250,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__string,
   _swigc__p_std__vectorTAGBox3_t,
   _swigc__p_std__vectorTAGLine2_t,
+  _swigc__p_std__vectorTAGMatrix4_t,
   _swigc__p_std__vectorTAGRect3_t,
   _swigc__p_std__vectorTAGVector2_t,
   _swigc__p_std__vectorTAGVector4_t,
   _swigc__p_std__vectorTNode_p_t,
+  _swigc__p_std__vectorTfloat_t,
   _swigc__p_std__vectorTstd__string_t,
   _swigc__p_unsigned_long,
 };
@@ -43927,6 +44738,45 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGScreenWidget.klass, "draw", VALUEFUNC(_wrap_AGScreenWidget_draw), -1);
     cAGScreenWidget.mark = (void (*)(void *)) general_markfunc;
     cAGScreenWidget.destroy = (void (*)(void *)) free_AGScreenWidget;
+    
+    cAGVertexProgram.klass = rb_define_class_under(mLibantargisgui, "AGVertexProgram", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGVertexProgram, (void *) &cAGVertexProgram);
+    rb_define_alloc_func(cAGVertexProgram.klass, _wrap_AGVertexProgram_allocate);
+    rb_define_method(cAGVertexProgram.klass, "initialize", VALUEFUNC(_wrap_new_AGVertexProgram), -1);
+    cAGVertexProgram.mark = 0;
+    cAGVertexProgram.destroy = (void (*)(void *)) free_AGVertexProgram;
+    
+    cAGFragProgram.klass = rb_define_class_under(mLibantargisgui, "AGFragProgram", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGFragProgram, (void *) &cAGFragProgram);
+    rb_define_alloc_func(cAGFragProgram.klass, _wrap_AGFragProgram_allocate);
+    rb_define_method(cAGFragProgram.klass, "initialize", VALUEFUNC(_wrap_new_AGFragProgram), -1);
+    rb_define_method(cAGFragProgram.klass, "valid", VALUEFUNC(_wrap_AGFragProgram_valid), -1);
+    cAGFragProgram.mark = 0;
+    cAGFragProgram.destroy = (void (*)(void *)) free_AGFragProgram;
+    
+    cAGShaderParameter.klass = rb_define_class_under(mLibantargisgui, "AGShaderParameter", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGShaderParameter, (void *) &cAGShaderParameter);
+    rb_define_alloc_func(cAGShaderParameter.klass, _wrap_AGShaderParameter_allocate);
+    rb_define_method(cAGShaderParameter.klass, "initialize", VALUEFUNC(_wrap_new_AGShaderParameter), -1);
+    cAGShaderParameter.mark = 0;
+    cAGShaderParameter.destroy = (void (*)(void *)) free_AGShaderParameter;
+    rb_define_module_function(mLibantargisgui, "disown_AGShaderProgram", VALUEFUNC(_wrap_disown_AGShaderProgram), -1);
+    
+    cAGShaderProgram.klass = rb_define_class_under(mLibantargisgui, "AGShaderProgram", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGShaderProgram, (void *) &cAGShaderProgram);
+    rb_define_alloc_func(cAGShaderProgram.klass, _wrap_AGShaderProgram_allocate);
+    rb_define_method(cAGShaderProgram.klass, "initialize", VALUEFUNC(_wrap_new_AGShaderProgram), -1);
+    rb_define_method(cAGShaderProgram.klass, "enable", VALUEFUNC(_wrap_AGShaderProgram_enable), -1);
+    rb_define_method(cAGShaderProgram.klass, "disable", VALUEFUNC(_wrap_AGShaderProgram_disable), -1);
+    rb_define_method(cAGShaderProgram.klass, "update", VALUEFUNC(_wrap_AGShaderProgram_update), -1);
+    rb_define_method(cAGShaderProgram.klass, "doUpdate", VALUEFUNC(_wrap_AGShaderProgram_doUpdate), -1);
+    rb_define_method(cAGShaderProgram.klass, "getLoc", VALUEFUNC(_wrap_AGShaderProgram_getLoc), -1);
+    rb_define_method(cAGShaderProgram.klass, "getAttr", VALUEFUNC(_wrap_AGShaderProgram_getAttr), -1);
+    rb_define_method(cAGShaderProgram.klass, "sendUniform", VALUEFUNC(_wrap_AGShaderProgram_sendUniform), -1);
+    rb_define_method(cAGShaderProgram.klass, "sendAttribute", VALUEFUNC(_wrap_AGShaderProgram_sendAttribute), -1);
+    cAGShaderProgram.mark = 0;
+    cAGShaderProgram.destroy = (void (*)(void *)) free_AGShaderProgram;
+    rb_define_module_function(mLibantargisgui, "glslOk", VALUEFUNC(_wrap_glslOk), -1);
     rb_define_const(mLibantargisgui,"SDLK_UNKNOWN", INT2NUM(SDLK_UNKNOWN));
     rb_define_const(mLibantargisgui,"SDLK_FIRST", INT2NUM(SDLK_FIRST));
     rb_define_const(mLibantargisgui,"SDLK_BACKSPACE", INT2NUM(SDLK_BACKSPACE));

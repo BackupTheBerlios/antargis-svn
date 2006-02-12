@@ -136,6 +136,12 @@ bool AGApplication::eventIdle()
   return false;
 }
 
+
+void AGApplication::prepareDraw()
+{
+  if(mainWidget)
+    mainWidget->prepareDraw();
+}  
 void AGApplication::draw()
 {
   beginRender();

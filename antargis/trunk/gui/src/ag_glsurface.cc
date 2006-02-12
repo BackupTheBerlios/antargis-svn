@@ -160,7 +160,7 @@ void AGGLScreen::begin()
   glDepthMask(false);
   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//NEAREST);//LINEAR);
-  glEnable(GL_COLOR_MATERIAL);
+  //  glEnable(GL_COLOR_MATERIAL);
 }
 
 void AGGLScreen::flip()
@@ -181,189 +181,6 @@ size_t next2pow(size_t i)
   return j;
 }
 
-//////////////////////////////////////////////////////////////
-// ensures right color-order and flips image vertically
-//////////////////////////////////////////////////////////////
-SDL_Surface *toGLTexture(SDL_Surface *image, bool p3d=false)
-{
-  assert(image);
-
-  int bytes = 4;
-
-  size_t nw,nh;
-
-  if(p3d)
-    {
-      nw=next2pow(image->w);
-      nh=next2pow(image->h);
-    }
-  else
-    {
-      nh=nw=next2pow(std::max(image->w,image->h));
-    }
-
-
-  SDL_Surface* openGLSurface = SDL_CreateRGBSurface(    SDL_SWSURFACE, nw,nh, bytes*8,
-                                                        0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
-
-  Uint8 r, g, b, a;
-  Uint32 ckey=image->format->colorkey;
-  
-  // Grr! Screws up alpha channel. Fix the colors.
-  for( int j=0; j<image->h; ++j )
-    {
-      for( int i=0; i<image->w; ++i )
-	{
-	  Uint32 c = sge_GetPixel( image, i, j );
-	  if(c!=image->format->colorkey)
-	    {
-	      SDL_GetRGBA( c, image->format, &r, &g, &b, &a );
-	      if(c==ckey)
-		a=0;//r=255,b=0;
-	      //		  a=255;
-	      Uint32 cprime = SDL_MapRGBA( openGLSurface->format, r, g, b, a );
-	      
-	      if(p3d)
-		sge_PutPixel( openGLSurface, i, (image->h-1)-j, cprime); // invert y
-	      else
-		sge_PutPixel( openGLSurface, i, j, cprime); // invert y
-	    }
-	}
-    }
-  
-
-  glTestSurfaces.insert(openGLSurface);
- 
-  return openGLSurface;
-}
-
-GLuint assignTexture(SDL_Surface *pSurface,int w,int h)
-{
-  assertGL;
-  SDL_Surface* surface = pSurface;
-
-  assert(glTestSurfaces.find(pSurface)!=glTestSurfaces.end());
-
-  int size = surface->w;
-
-  assert( surface->w == surface->h );
-
-  // Used to invert the surface. There must be a better way.
-  SDL_Surface* texSurface = SDL_CreateRGBSurface(       SDL_SWSURFACE,
-                                                        size, size,
-                                                        surface->format->BitsPerPixel,
-                                                        0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
-
-  for( int j=0; j<size; ++j )
-    memcpy(     (Uint8*) texSurface->pixels + texSurface->pitch * ( size - 1 - j),
-                (Uint8*) surface->pixels + surface->pitch * j,
-                size * texSurface->format->BytesPerPixel );
-
-  GLuint id;
-  assertGL;
-  glGenTextures( 1, &id);
-  assertGL;
-  glBindTexture( GL_TEXTURE_2D,id);
-
-  int format = ( texSurface->format->BytesPerPixel == 4 ) ? GL_RGBA : GL_RGB;
-
-
-  glTexImage2D( GL_TEXTURE_2D,
-                0,                                      // no mip mapping
-                format,
-                texSurface->w,
-                texSurface->h,
-                0,                                      // no border
-                format,                 // format
-                GL_UNSIGNED_BYTE,
-                texSurface->pixels );
-
-#ifndef OLD
-
-  glTexSubImage2D( GL_TEXTURE_2D,
-		   0,w,h,texSurface->w-w,texSurface->h-h,format,GL_UNSIGNED_BYTE,
-		   texSurface->pixels );
-
-#endif
-  assertGL;
-
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-  assertGL;
-
-  SDL_FreeSurface( texSurface );
-
-  assertGL;
-
-  glEnable( GL_BLEND );
-  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-
-  
-  glBindTexture( GL_TEXTURE_2D,0);
-  return id;
-}
-
-GLuint assignTexture3D(SDL_Surface *pSurface)
-{
-  assertGL;
-  SDL_Surface* surface = pSurface;
-
-  assert(glTestSurfaces.find(pSurface)!=glTestSurfaces.end());
-
-  assert( surface->w < surface->h );
-
-  // Used to invert the surface vertically. There must be a better way.
-  SDL_Surface* texSurface = SDL_CreateRGBSurface(       SDL_SWSURFACE,
-                                                        surface->w, surface->h,
-                                                        surface->format->BitsPerPixel,
-                                                        0xff, 0xff<<8, 0xff<<16, 0xff<<24 );
-
-  for( int j=0; j<surface->h; ++j )
-    memcpy(     (Uint8*) texSurface->pixels + texSurface->pitch * ( surface->h - 1 - j),
-                (Uint8*) surface->pixels + surface->pitch * j,
-                surface->pitch );
-
-  GLuint id;
-  assertGL;
-  glGenTextures( 1, &id);
-  assertGL;
-  glBindTexture( GL_TEXTURE_3D,id);
-
-  int format = ( texSurface->format->BytesPerPixel == 4 ) ? GL_RGBA : GL_RGB;
-
-  glTexImage3D( GL_TEXTURE_3D,
-                0,                                      // no mip mapping
-                format,
-                texSurface->w,
-                texSurface->w,
-                texSurface->h/texSurface->w,
-                0,                                      // no border
-                format,                 // format
-                GL_UNSIGNED_BYTE,
-                texSurface->pixels );
-
-  assertGL;
-
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-  assertGL;
-  SDL_FreeSurface( texSurface );
-
-  glEnable( GL_BLEND );
-  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-  
-  glBindTexture( GL_TEXTURE_2D,0);
-  return id;
-}
-
-
-
-void deleteTexture(GLuint id)
-{
-  glDeleteTextures(1,&id);
-}
 
 bool AGGLScreen::inScreen(const AGRect &r) const
 {
@@ -484,6 +301,7 @@ void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const
 
   // turned
   AGRenderContext context;
+  context.setColor(AGVector4(1,1,1,1));
 
 #warning "maybe here an error occures - because GL_COLOR_MATERIAL is not activated!"
   context.begin();
@@ -508,8 +326,6 @@ void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const
 
 void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
 {
-  glDisable(GL_CULL_FACE);
-  glCullFace(GL_FRONT);
 
   float x0=rect.x();
   float y0=h-1-rect.y();
@@ -518,10 +334,11 @@ void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const A
 
   AGRenderContext context;
   context.setColor(c1);
+  context.setCulling(false);
   context.begin();
 
   // left and //top
-  glColor(c1);
+  //  glColor(c1);
   glBegin(GL_TRIANGLES);
   // top
   glVertex2f(x0+W,y0-W);
@@ -566,8 +383,8 @@ void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const A
   glVertex2f(x1,y0);
   glEnd();
 
-  glCullFace(GL_BACK);
-  glEnable(GL_CULL_FACE);
+  //  glCullFace(GL_BACK);
+  //  glEnable(GL_CULL_FACE);
 
 
 }
@@ -583,29 +400,6 @@ void AGGLScreen::putPixel(int x,int y,const AGColor &pc)
   glRasterPos2i((int)X,(int)Y);
   glDrawPixels(1,1,GL_RGBA,GL_UNSIGNED_INT_8_8_8_8,&c);
 }
-
-/*
-AGTexture AGGLScreen::makeTexture(const AGSurface &s)
-{
-  return AGTexture(const_cast<AGSurface&>(s).surface(),s.width(),s.height());
-  return AGTexture(toGLTexture(const_cast<AGSurface&>(s).surface()),s.width(),s.height());
-}
-
-
-AGTexture AGGLScreen::makeTexture3D(const AGSurface &s)
-{
-  return AGTexture(toGLTexture(const_cast<AGSurface&>(s).surface(),true),s.width(),s.height(),true);
-}
-
-void AGGLScreen::deleteTexture(AGTexture &t)
-{
-  CTRACE;
-  if(t.hasTexture())
-    {
-      t.clearTexture();
-    }
-}
-*/
 
 void AGGLScreen::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
@@ -662,7 +456,10 @@ void AGGLScreen::clip(const AGRect &r)
 
   //  cdebug(m.x0()<<"  "<<h-1-m.y0()<<"  "<<m.width()<<"  "<<m.height());
 
-  glScissor(m.x0(),h-1-m.y1(),m.width(),m.height());
+  glScissor((GLint)(m.x0()),
+	    (GLint)(h-1-m.y1()),
+	    (GLint)(m.width()),
+	    (GLint)(m.height()));
   //  glScissor(0,100,w,h-100);
   assertGL;
   glEnable(GL_SCISSOR_TEST);

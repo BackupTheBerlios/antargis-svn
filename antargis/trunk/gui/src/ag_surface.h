@@ -25,11 +25,11 @@
 #include <set>
 #include <list>
 #include <SDL.h>
+#include <GLee.h>
 #include <SDL_opengl.h>
 #include <GL/glu.h>
 #include "ag_geometry.h"
 #include "ag_painttarget.h"
-#include "ag_refcount.h"
 #include "ag_gltexture.h"
 
 class AGColor;

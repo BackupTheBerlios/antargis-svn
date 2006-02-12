@@ -42,6 +42,7 @@ void Mesh::draw()
   if(!mVisible)
     return;
 
+  
   /*  glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_LIGHTING);
   glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);

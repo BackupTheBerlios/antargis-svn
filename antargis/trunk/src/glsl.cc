@@ -2,9 +2,9 @@
 #include "ag_debug.h"
 #include "ag_main.h"
 #include "scene.h"
-
-std::map<std::string,AntVertexProgram*> mVertexPrograms;
-std::map<std::string,AntFragProgram*> mFragPrograms;
+/*
+std::map<std::string,AntVertexProgram*> mVertexPrograms2;
+std::map<std::string,AntFragProgram*> mFragPrograms2;
 
 AntVertexProgram *getVertexProgram(const std::string &pFile)
 {
@@ -31,39 +31,12 @@ AntFragProgram *getFragProgram(const std::string &pFile)
     }
   return i->second;
 }
+*/
 
-int GLSL_ok=-1;
-bool glslOk()
-{
-//  return false;
-  // do not check in each call, because this is slow!!!
-  if(GLSL_ok<0)
-    {
-      GLeeInit();
-      GLSL_ok=(GLEE_ARB_vertex_shader && GLEE_ARB_fragment_shader && GLEE_ARB_shading_language_100);
-    }
-  
-  return GLSL_ok;
-}
+bool glslOk();
 
-void printInfoLog(GLhandleARB obj)
-{
-    int infologLength = 0;
-    int charsWritten  = 0;
-    char *infoLog;
+void printInfoLog(GLhandleARB obj);
 
-        glGetObjectParameterivARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB,
-                                         &infologLength);
-
-    if (infologLength > 0)
-    {
-      printf("GLSL ERROR:\n");
-        infoLog = (char *)malloc(infologLength);
-        glGetInfoLogARB(obj, infologLength, &charsWritten, infoLog);
-                printf("%s\n",infoLog);
-        free(infoLog);
-    }
-}
 
 
 AntVertexProgram::AntVertexProgram(const std::string &pFile)

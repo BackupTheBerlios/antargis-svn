@@ -66,6 +66,8 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
 	      fread(mVertices[j].c,sizeof(float),3,f);
 	      if(withTex)
 		fread(mVertices[j].t,sizeof(float),2,f);
+	      mVertices[j].t[1]=1-mVertices[j].t[1];
+
 	      mVertices[j].v*=zoom;
 	      mVertices[j].v[3]=1;
 
@@ -242,7 +244,7 @@ void MeshData::draw(const AGVector4 &pColor)
     c.setColor(pColor);
 
   if(mWithTexture)
-    c.setTexture(&mTexture);
+    c.setTexture(mTexture.glTexture());
 
   if(mTransparent)
     {
@@ -252,6 +254,7 @@ void MeshData::draw(const AGVector4 &pColor)
   if(overdraw)
     {
       c.setDepthWrite(false);
+      c.setDepthTest(false);
       c.setAlpha(0,GL_NONE);
     }
   c.begin();
@@ -284,27 +287,34 @@ void MeshData::drawShadow()
 }
 void MeshData::drawDepth()
 {
+  AGRenderContext c;
   if(mTransparent)
     {
+      c.setCulling(false);
+      c.setAlpha(0.9f,GL_GREATER);
+      c.setTexture(mTexture.glTexture());
+      /*
       glDisable(GL_CULL_FACE);
       //      throw int();
 
       glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
       glEnable(GL_ALPHA_TEST);
       glAlphaFunc(GL_GREATER,0.9f);
-
+      */
+      //      cdebug("muh");
     }
+  c.begin();
   if(mShadow)
     {
       mArray.setColors(false);
       mArray.draw();
       mArray.setColors(true);
     }
-  if(mTransparent)
+  /*  if(mTransparent)
     {
       glEnable(GL_CULL_FACE);
       glBindTexture(GL_TEXTURE_2D,0);
-    }
+      }*/
 }
 
 void MeshData::texCoordFromPos(float scale)

@@ -99,6 +99,7 @@ class AGWidget:public AGMessageObject
   virtual bool redraw() const;
   void prepareDraw();
   void setCaching(bool pEnable);
+  bool checkRedraw() const;
 
 
   // clear children
@@ -153,6 +154,7 @@ class AGWidget:public AGMessageObject
   bool mVisible;
   bool mCaching;
   AGTexture *mCache;
+  bool mCacheTouched;
   //  AGMenu *mMenu;
 
   bool mHasFocus;

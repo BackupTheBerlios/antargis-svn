@@ -23,6 +23,7 @@
 #include "ag_rendercontext.h"
 #include "sge.h"
 #include "ag_surfacemanager.h"
+#include <stdexcept>
 
 size_t nextpow2(size_t i)
 {
@@ -192,15 +193,21 @@ void AGTexture::beginPaint()
   assert(!m3d);
   if(opengl())
     {
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
       // init 2d drawing
       getScreen().begin();
       // copy texture to buffer
-
-      bindTexture();
+      AGRenderContext c;
+      c.setColor(AGVector4(1,1,1,1));
+      c.setTexture(glTexture());
+      c.setCulling(false);
+      c.begin();
+      //      bindTexture();
       
       float w=mTexture->width(),h=mTexture->height();
-      glDisable(GL_CULL_FACE);
-      glColor4f(1,1,1,1);
+      //      glDisable(GL_CULL_FACE);
+      //      glColor4f(1,1,1,1);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
       glVertex2f(0,0);
@@ -248,11 +255,33 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
     }
 }
 
+void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+{
+  if(opengl())
+    {
+      assert(mTexture);
+      getScreen().blit(pSource,pDest,pSrc);
+    }
+  else
+    throw std::runtime_error("implement blitting for sdl-texture");
+}
+void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
+{
+  if(opengl())
+    {
+      assert(mTexture);
+      getScreen().blit(pSource,pDest,pSrc,pColor);
+    }
+  else
+    throw std::runtime_error("implement blitting for sdl-texture");
+}
+
+
 void AGTexture::setWrapping(bool pWrap)
 {
   bindTexture();
   if(m3d && pWrap)
-    glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE );
+    setClamp(GL_REPEAT,GL_REPEAT,GL_CLAMP_TO_EDGE );
 }
 void AGTexture::setFilter(GLuint mag,GLuint min)
 {
@@ -298,7 +327,16 @@ float AGTexture::getTextureHeight() const
   return float(mTexture->height());
 }
 
- bool AGTexture::is3d() const
- {
-   return m3d;
- }
+bool AGTexture::is3d() const
+{
+  return m3d;
+}
+
+void AGTexture::setClamp(GLuint s,GLuint t,GLuint r)
+{
+  return;
+  bindTexture();
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, s);
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, t);
+  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, r);
+}
