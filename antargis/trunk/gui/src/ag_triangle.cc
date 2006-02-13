@@ -1190,6 +1190,13 @@ AGVector3 AGTriangle3::operator[](int index) const
 // AGRectF
 /////////////////////////////////////////////////////////////////////////////
 
+AGRect2::AGRect2(const SDL_Rect &r)
+{
+  v0=AGVector2(r.x,r.y);
+  v1=AGVector2(r.x+r.w,r.y+r.h);
+}
+
+
 AGRect2::AGRect2(const std::string &ps)
 {
   std::istringstream is;

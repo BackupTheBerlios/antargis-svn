@@ -100,6 +100,8 @@ class AGWidget:public AGMessageObject
   void prepareDraw();
   void setCaching(bool pEnable);
   bool checkRedraw() const;
+  void setDrawn();
+  void queryRedraw();
 
 
   // clear children

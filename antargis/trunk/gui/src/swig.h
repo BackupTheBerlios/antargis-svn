@@ -661,18 +661,20 @@ public:
     SwigDirector_AGTexture(VALUE self, AGSurface const &pSurface, bool p3d = false);
     SwigDirector_AGTexture(VALUE self, AGTexture const &t);
     SwigDirector_AGTexture(VALUE self, int W, int H);
-    virtual AGRect getRect() const;
-    virtual ~SwigDirector_AGTexture();
-    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
-    virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
-    virtual AGColor getPixel(int x, int y) const;
-    virtual void putPixel(int x, int y, AGColor const &c);
-    virtual void fillRect(AGRect const &pRect, AGColor const &c);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
-    virtual void beginPaint();
     virtual void endPaint();
+    virtual void beginPaint();
+    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
+    virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
+    virtual ~SwigDirector_AGTexture();
+    virtual AGColor getPixel(int x, int y) const;
+    virtual AGRect getRect() const;
+    virtual void drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void fillRect(AGRect const &pRect, AGColor const &c);
+    virtual void putPixel(int x, int y, AGColor const &c);
+    virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
 };
 
 

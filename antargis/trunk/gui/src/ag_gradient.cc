@@ -61,9 +61,9 @@ void AGDrawGradient(SDL_Surface *surface, const AGRect& prect, const AGColor& ul
     }
     
     //    AGRect clip;
-    //    SDL_Rect clipr=clip.sdl();
-    //    SDL_GetClipRect(surface, &clipr);
-    AGRect drawrect = rect;//.intersect(clip);
+    SDL_Rect clipr;//=clip.sdl();
+    SDL_GetClipRect(surface, &clipr);
+    AGRect drawrect = rect.intersect(AGRect(clipr));
 
     //    cdebug(drawrect);
 
@@ -232,9 +232,9 @@ void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect& prect, const AGColo
       return;
     }
     
-    //    AGRect clip;
-    //    SDL_GetClipRect(surface, &clip);
-    AGRect drawrect = rect;//.intersect(clip);
+    SDL_Rect clip;
+    SDL_GetClipRect(surface, &clip);
+    AGRect drawrect = rect.intersect(AGRect(clip));
 
     if(drawrect.width()==0 || drawrect.height()==0) {
       //    if(drawrect.isNull()) {

@@ -35,7 +35,7 @@
 			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
 			<cell col="0" row="5">
 				<frame col="0" row="5" border="button.border.normal">
-					<miniMap name="miniMap"/>
+					<miniMap name="miniMap" cache="true"/>
 				</frame>
 			</cell>
 			

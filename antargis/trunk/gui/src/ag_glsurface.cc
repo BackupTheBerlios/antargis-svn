@@ -207,6 +207,7 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
   float y1=h-1-(pRect.y()+h2);
 
   AGRenderContext context;
+  context.setCulling(false);
   context.setTexture(const_cast<AGTexture&>(pSource).glTexture());
   if(pColor.a>0)
     context.setColor(pColor);
@@ -258,8 +259,6 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
 
 void AGGLScreen::fillRect(const AGRect &pRect,const AGColor &c)
 {
-  glDisable(GL_CULL_FACE);
-
   float x0=pRect.x();
   float y0=h-pRect.y();
   float x1=pRect.x()+pRect.w();
@@ -267,6 +266,7 @@ void AGGLScreen::fillRect(const AGRect &pRect,const AGColor &c)
 
   AGRenderContext context;
   context.setColor(c);
+  context.setCulling(false);
   context.begin();
 
   // turned
@@ -302,6 +302,7 @@ void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const
   // turned
   AGRenderContext context;
   context.setColor(AGVector4(1,1,1,1));
+  context.setCulling(false);
 
 #warning "maybe here an error occures - because GL_COLOR_MATERIAL is not activated!"
   context.begin();

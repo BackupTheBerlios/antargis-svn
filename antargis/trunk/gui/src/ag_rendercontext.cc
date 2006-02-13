@@ -53,6 +53,23 @@ AGRenderContext::AGRenderContext(const AGRenderContext &c):
   getSurfaceManager()->registerMe(this);
 }
 
+AGRenderContext &AGRenderContext::operator=(const AGRenderContext &c)
+{
+  mColor=c.mColor?new AGVector4(*c.mColor):0;
+  mTexture=c.mTexture;
+  mProgram=c.mProgram;
+  mLighting=c.mLighting;
+  mDepthWrite=c.mDepthWrite;
+  mDepthTest=c.mDepthTest;
+  mAlphaThres=c.mAlphaThres;
+  mAlpha=c.mAlpha;
+  mCulling=c.mCulling;
+  
+  
+  return *this;
+}
+
+
 AGRenderContext::~AGRenderContext()
 {
   delete mColor;

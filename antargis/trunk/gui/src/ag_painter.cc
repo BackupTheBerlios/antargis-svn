@@ -345,6 +345,8 @@ void AGPainter::drawGradient(const AGRect &pr,const AGColor &pc0,const AGColor &
     {
       if(glScreen)
 	glScreen->drawGradient(r,c0,c1,c2,c3);
+      else if(opengl() && dynamic_cast<AGTexture*>(mTarget))
+	dynamic_cast<AGTexture*>(mTarget)->drawGradient(r,c0,c1,c2,c3);
       else
 	{
 	  AGSDLScreen *sdlScreen=dynamic_cast<AGSDLScreen*>(mTarget);

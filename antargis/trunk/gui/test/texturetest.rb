@@ -31,24 +31,34 @@ class MyWidget<AGWidget
 	def initialize(p,r)
 		super
 		surface=AGSurface.new(128,128)
+		
 		for x in 0..64
 			for y in 0..64
 				surface.putPixel(x,y,AGColor.new(0xFF,0,0))
 				surface.putPixel(x+64,y+64,AGColor.new(0,0xFF,0))
 			end
 		end
-		@tex=getTextureManager.makeTexture(surface)
+		test=AGTexture.new(surface)
+		@tex=AGTexture.new(64,64) #getTextureManager.makeTexture(surface)
+		#@tex=AGTexture.new(surface)
 		#return
 		@tex.beginPaint
-		for x in 0..32
+		@tex.blit(test,AGRect.new(0,0,128,128),AGRect.new(0,0,128,128))
+
+		for x in 33..63
 			for y in 0..32
-				@tex.putPixel(x,y,AGColor.new(0,0,0xFF))
+				@tex.putPixel(x,y,AGColor.new(0,0,0xFF,0xFF))
+			end
+		end
+		for x in 0..16
+			for y in 0..16
+				@tex.putPixel(x,y,AGColor.new(0xFF,0xFF,0xFF,0xFF))
 			end
 		end
 		@tex.endPaint
 	end
 	def draw(p)
-		p.fillRect(AGRect.new(0,0,130,130),AGColor.new(0,0,0))
+		p.fillRect(AGRect.new(0,0,64,64),AGColor.new(0,0,0))
 		p.blit(@tex,@tex.getRect.origin)
 	end
 end

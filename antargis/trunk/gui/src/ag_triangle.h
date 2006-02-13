@@ -407,6 +407,7 @@ class AGRect2
   AGRect2(const AGVector2 &pv0,const AGVector2 &pv1);
   AGRect2(float x,float y,float w,float h);
   AGRect2(const std::string &ps);
+  AGRect2(const SDL_Rect &r);
 
   bool collide(const AGRect2 &r) const;
 

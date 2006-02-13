@@ -27,7 +27,7 @@
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false)
 {
   getSurfaceManager()->registerMe(this);
-  CTRACE;
+  //  CTRACE;
   glGenTextures( 1, &mID);
   glBindTexture( GL_TEXTURE_2D,mID);
 

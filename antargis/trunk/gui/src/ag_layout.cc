@@ -122,6 +122,14 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
     }
 
+  if(pNode.get("cache")=="true")
+    {
+      cdebug("CACHE");
+      cdebug(w);
+    }
+  if(w!=0 && pNode.get("cache")=="true")
+    w->setCaching(true);
+
   parseChildren(w,pNode);
 
   return w;
@@ -291,6 +299,10 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geo
 	}
     }
   //  t->arrange();
+
+  if(pNode.get("cache")=="true")
+    t->setCaching(true);
+
   return t;
 }
 

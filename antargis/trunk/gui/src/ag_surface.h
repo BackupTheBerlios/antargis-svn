@@ -72,6 +72,8 @@ class AGSurface:public AGPaintTarget
 
   bool valid() const;
 
+  AGSurface scale(int w,int h) const;
+
   AGSurface &operator=(const AGSurface &p);
 
   virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);

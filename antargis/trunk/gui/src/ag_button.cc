@@ -32,10 +32,6 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
 {
-  cdebug(r);
-  //  lower=getTheme()->getInt("buttonLowerOnClick");
-  //  borderWidth=getTheme()->getInt("button.border.width");
-  //  addChild(new 
   setTheme("");
   AGFont font("Arial.ttf");
   font.setColor(AGColor(0,0,0));
@@ -78,18 +74,13 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 }
 
 
-/*AGButton::AGButton():AGWidget(0,AGRect(0,0,0,0))
-{
-}*/
-
 void AGButton::draw(AGPainter &p)
 {
-  //  CTRACE;
-  //  return;
-  AGPainter p2(p);
-  p2.transform(AGRect(0,0,width(),height()).shrink(borderWidth));
-  mBG[mState].draw(p2);
-  mBorder[mState].draw(p2);
+  p.pushMatrix();
+  p.transform(AGRect(0,0,width(),height()).shrink(borderWidth));
+  mBG[mState].draw(p);
+  mBorder[mState].draw(p);
+  p.popMatrix();
 
   if(borderWidth==0)
     return;
@@ -117,11 +108,13 @@ void AGButton::draw(AGPainter &p)
     else 
       p.drawBorder(mr,borderWidth,bc2,bc1);
   }
+
 }
 
 
 bool AGButton::eventMouseEnter()
 {
+  queryRedraw();
   if(!mEnabled)
     return false;
   if(mChecked)
@@ -132,6 +125,7 @@ bool AGButton::eventMouseEnter()
 }
 bool AGButton::eventMouseLeave()
 {
+  queryRedraw();
   if(!mEnabled)
     return false;
   if(mChecked)
@@ -144,6 +138,7 @@ bool AGButton::eventMouseLeave()
 
 bool AGButton::eventMouseButtonDown(AGEvent *e)
 {
+  queryRedraw();
   if(!mEnabled)
     return false;
 
@@ -170,6 +165,7 @@ bool AGButton::eventMouseButtonDown(AGEvent *e)
 
 bool AGButton::eventMouseButtonUp(AGEvent *e)
 {
+  queryRedraw();
   if(!mEnabled)
     return false;
 
@@ -228,8 +224,8 @@ void AGButton::setEnabled(bool pEnable)
 
 void AGButton::setTheme(const std::string &pTheme)
 {
+  queryRedraw();
   mTheme=addPoint(pTheme);
-  cdebug(mTheme);
 
   lower=getTheme()->getInt(mTheme+"buttonLowerOnClick");
   borderWidth=getTheme()->getInt(mTheme+"button.border.width");
@@ -251,11 +247,11 @@ void AGButton::setTheme(const std::string &pTheme)
   if(mTextW)
     mTextW->setTheme(mTheme+"button.text");
 
-  cdebug("mText:"<<mText);
 }
 
 void AGButton::setCaption(const std::string &pCaption)
 {
+  queryRedraw();
   mText=pCaption;
   if(mTextW)
     mTextW->setText(pCaption);
@@ -263,11 +259,13 @@ void AGButton::setCaption(const std::string &pCaption)
 
 void AGButton::setState(const State &pState)
 {
+  queryRedraw();
   mState=pState;
 }
 
 void AGButton::setChecked(bool pChecked)
 {
+  queryRedraw();
   mChecked=pChecked;
   if(mChecked)
     {

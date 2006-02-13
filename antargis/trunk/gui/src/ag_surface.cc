@@ -320,4 +320,16 @@ AGSurface AGSurface::load(const std::string &pFilename)
 
 
 
+AGSurface AGSurface::scale(int w,int h) const
+{
+  AGSurface n(w,h);
+
+  for(int x=0;x<w;x++)
+    for(int y=0;y<h;y++)
+      {
+	n.putPixel(x,y,getPixel(x,y));
+      }
+
+  return n;
+}
 

@@ -51,6 +51,8 @@ class AGRenderContext
   AGGLTexture *getTexture();
   AGVector4 *getColor();
 
+  AGRenderContext &operator=(const AGRenderContext &c);
+
  private:
   AGVector4 *mColor;
   AGGLTexture *mTexture;

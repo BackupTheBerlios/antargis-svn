@@ -182,7 +182,7 @@ void AGSurfaceManager::cleanup()
   mGLTextures.clear();
   std::copy(gls.begin(),gls.end(),std::inserter(mGLTextures,mGLTextures.begin()));
 
-
+#warning "optimize this - it really takes some time!!!"
 }
 
 

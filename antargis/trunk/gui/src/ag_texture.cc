@@ -205,28 +205,39 @@ void AGTexture::beginPaint()
       c.setCulling(false);
       c.begin();
       //      bindTexture();
+
+      if(false)
+	{
+	  float w=mTexture->width(),h=mTexture->height();
+	  //      glDisable(GL_CULL_FACE);
+	  //      glColor4f(1,1,1,1);
+	  glBegin(GL_QUADS);
+	  glTexCoord2f(0,0);
+	  glVertex2f(0,0);
+	  
+	  glTexCoord2f(1,0);
+	  glVertex2f(w,0);
+	  
+	  glTexCoord2f(1,1);
+	  glVertex2f(w,h);
+	  
+	  glTexCoord2f(0,1);
+	  glVertex2f(0,h);
+	  glEnd();
+	}
+      AGRenderContext nc;
+      nc.begin();
       
-      float w=mTexture->width(),h=mTexture->height();
-      //      glDisable(GL_CULL_FACE);
-      //      glColor4f(1,1,1,1);
-      glBegin(GL_QUADS);
-      glTexCoord2f(0,0);
-      glVertex2f(0,0);
-
-      glTexCoord2f(1,0);
-      glVertex2f(w,0);
-
-      glTexCoord2f(1,1);
-      glVertex2f(w,h);
-
-      glTexCoord2f(0,1);
-      glVertex2f(0,h);
-      glEnd();
       
       glMatrixMode(GL_MODELVIEW);
+      glPushMatrix();
       glScalef(1,-1,1);
-      glTranslatef(0,h,0);
-
+      //      cdebug(getScreen().getHeight());
+      glTranslatef(0,-(int)getScreen().getHeight(),0);
+	    //glTranslatef(0,-480,0);
+      //      glScalef(0.5,0.5,0.5);
+      //      glScalef(1,0.5,1);
+      
     }
   mPainting=true;
 }
@@ -234,14 +245,16 @@ void AGTexture::endPaint()
 {
   if(opengl())
     {
+      glMatrixMode(GL_MODELVIEW);
+      glPopMatrix();
       bindTexture();
       
       // copy buffer to texture
 
       glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, mTexture->width(),mTexture->height(),0);
 
-      getScreen().flip();
-      SDL_Delay(1000);
+      //      getScreen().flip();
+      //      SDL_Delay(1000);
 
 
     }
@@ -253,10 +266,25 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
   assert(mPainting);
   if(opengl())
     {
+      AGRenderContext rc;
+      rc.begin();
       assert(mTexture);
+      //      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
+      getScreen().putPixel(x,y,c);
       // use screen-functions
-      y=(mTexture->height()-1)-y;
-      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
+      //      y=(mTexture->height()-1)-y;
+      //      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
+      AGColor pc=c;
+      if(false)
+      {
+	int X=x;
+	int Y=y;
+	Uint32 c;
+	c=(pc.r<<24)|(pc.g<<16)|(pc.b<<8)|pc.a;
+
+	glRasterPos2i((int)X,(int)Y);
+	glDrawPixels(1,1,GL_RGBA,GL_UNSIGNED_INT_8_8_8_8,&c);
+      }
     }
   else
     {
@@ -297,6 +325,38 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &
     }
   else
     throw std::runtime_error("implement blitting for sdl-texture");
+}
+void AGTexture::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+{
+  if(opengl())
+    {
+      assert(mTexture);
+      getScreen().drawLine(p0,p1,c);
+    }
+  else
+    throw std::runtime_error("implement drawLine for sdl-texture");
+}
+
+void AGTexture::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  if(opengl())
+    {
+      assert(mTexture);
+      dynamic_cast<AGGLScreen*>(&getScreen())->drawGradient(rect,ul,ur,dl,dr);
+    }
+  else
+    throw std::runtime_error("implement drawLine for sdl-texture");
+}
+
+void AGTexture::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  if(opengl())
+    {
+      assert(mTexture);
+      dynamic_cast<AGGLScreen*>(&getScreen())->drawGradientAlpha(rect,ul,ur,dl,dr);
+    }
+  else
+    throw std::runtime_error("implement drawLine for sdl-texture");
 }
 
 

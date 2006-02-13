@@ -66,6 +66,9 @@ class AGTexture:public AGPaintTarget
   virtual void fillRect(const AGRect &pRect,const AGColor &c);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
+  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
+  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 
 
   void setWrapping(bool pWrap);

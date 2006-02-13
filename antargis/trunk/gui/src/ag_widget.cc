@@ -161,8 +161,6 @@ void AGWidget::delObjects()
 
 void AGWidget::drawAll(AGPainter &p)
 {
-  AGPainter p2(p);
-  p2.transform(getRect());
 
   delObjects();
 
@@ -175,18 +173,24 @@ void AGWidget::drawAll(AGPainter &p)
     }
   else
     {
+      p.pushMatrix();
+      //  AGPainter p2(p);
+      p.transform(getRect());
+
       if(!mChildrenDrawFirst)
-	draw(p2);
+	draw(p);
 
       std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
       
       for(;i!=mChildren.rend();i++)
-	(*i)->drawAll(p2);
+	(*i)->drawAll(p);
       
       if(mChildrenDrawFirst)
-	draw(p2);
+	draw(p);
 
-      drawAfter(p2);
+      drawAfter(p);
+    
+      p.popMatrix();
     }
 }
 
@@ -750,20 +754,8 @@ void AGWidget::prepareDraw()
     {
       if(checkRedraw())
 	{
-	  TRACE;
-	  cdebug(mCacheTouched);
-	  if(true)
-	    {
-	      AGPainter p(*mCache);
-	      
-	      p.fillRect(AGRect(0,0,800,800),AGColor(0,0xFF,0,0xFF));
-	      /*
-	      
-	      for(int x=0;x<width();x++)
-		for(int y=0;y<height();y++)
-		p.putPixel(AGPoint(x,y),AGColor(0xFF,0xFF,0xFF,0xFF));*/
-	    }
-	  /*
+	  AGPainter p(*mCache);
+
 	  if(!mChildrenDrawFirst)
 	    draw(p);
 	  
@@ -771,13 +763,13 @@ void AGWidget::prepareDraw()
 	  
 	  for(;i!=mChildren.rend();i++)
 	    (*i)->drawAll(p);
-	  
+
 	  if(mChildrenDrawFirst)
 	    draw(p);
-	  
-	    drawAfter(p);*/
-	  mCacheTouched=false;
 
+	  drawAfter(p);
+	  mCacheTouched=false;
+	  setDrawn();
 	}
     }
   else
@@ -791,18 +783,22 @@ void AGWidget::setCaching(bool pEnable)
   CTRACE;
   mCaching=pEnable;
   delete mCache;
-  AGSurface s(width(),height());
-  {
-    AGPainter p(s);
-    for(int x=0;x<width();x++)
-      for(int y=0;y<height();y++)
-	p.putPixel(AGPoint(x,y),AGColor(0xFF,0,0,0xFF));
-  }
 
-  s.save("muh.png");
   mCache=new AGTexture(width(),height());
-  //  mCache=new AGTexture(s);//width(),height());
+
   mCacheTouched=true;
 
 
+}
+
+void AGWidget::setDrawn()
+{
+  mCacheTouched=false;
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+    (*i)->setDrawn();
+}
+
+void AGWidget::queryRedraw()
+{
+  mCacheTouched=true;
 }
