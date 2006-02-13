@@ -88,13 +88,14 @@ void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
 
 void AGSDLScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
+  CTRACE;
   AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
 
 }
 void AGSDLScreen::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
+  CTRACE;
   AGDrawGradient(s,rect,ul,ur,dl,dr);
-
 }
 
 /*

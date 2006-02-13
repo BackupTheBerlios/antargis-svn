@@ -24,6 +24,7 @@
 #include "ag_draw.h"
 #include "ag_fontengine.h"
 #include "ag_glsurface.h"
+#include "ag_sdlsurface.h"
 #include <math.h>
 
 //#define SPEED_TEST
@@ -327,7 +328,7 @@ AGColor calcColor(AGPoint p,const AGColor &pc0,const AGColor &pc1,const AGColor 
 void AGPainter::drawGradient(const AGRect &pr,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
 {
   AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
-
+  
   AGRect src(0,0,1,1);
 
   AGRect d=mCurrent.project(pr);
@@ -346,12 +347,21 @@ void AGPainter::drawGradient(const AGRect &pr,const AGColor &pc0,const AGColor &
 	glScreen->drawGradient(r,c0,c1,c2,c3);
       else
 	{
-	  float cx,cy,y,x;
-	  float dx=1.0/r.w();
-	  float dy=1.0/r.h();
-	  for(cy=0,y=r.y0();y<r.y1();y+=1,cy+=dy)
-	    for(cx=0,x=r.x0();x<r.x1();x+=1,cx+=dx)
-	      putPixel(AGPoint(x,y),(c0*(1-cx)+c1*cx)*(1-cy)+(c2*(1-cx)+c3*cx)*cy);
+	  AGSDLScreen *sdlScreen=dynamic_cast<AGSDLScreen*>(mTarget);
+	    
+	  if(sdlScreen)
+	    {
+	      sdlScreen->drawGradient(r,c0,c1,c2,c3);
+	    }
+	  else
+	    {
+	      float cx,cy,y,x;
+	      float dx=1.0/r.w();
+	      float dy=1.0/r.h();
+	      for(cy=0,y=r.y0();y<r.y1();y+=1,cy+=dy)
+		for(cx=0,x=r.x0();x<r.x1();x+=1,cx+=dx)
+		  putPixel(AGPoint(x,y),(c0*(1-cx)+c1*cx)*(1-cy)+(c2*(1-cx)+c3*cx)*cy);
+	    }
 	}
     }
 }
