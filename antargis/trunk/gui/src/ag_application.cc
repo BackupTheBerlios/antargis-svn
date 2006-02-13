@@ -85,6 +85,7 @@ bool AGApplication::run()
 	}
       eventFrame((now-last)/1000.0);
       {
+	prepareDraw();
 	draw();
       }
       

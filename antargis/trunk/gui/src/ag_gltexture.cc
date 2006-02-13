@@ -92,11 +92,12 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
   c.begin();
   assertGL;
   
+  /*
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   assertGL;
   glPixelStorei(GL_UNPACK_ROW_LENGTH,
                 surface->pitch / surface->format->BytesPerPixel);
-
+  */
 
   if(m3d)
     {

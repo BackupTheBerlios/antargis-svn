@@ -377,6 +377,7 @@ public:
     virtual Uint8 getButtonState() const;
     virtual AGPoint getMousePosition() const;
     virtual void draw();
+    virtual void prepareDraw();
 };
 
 
@@ -664,12 +665,12 @@ public:
     virtual ~SwigDirector_AGTexture();
     virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
     virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
-    virtual void fillRect(AGRect const &pr, AGColor const &c);
     virtual AGColor getPixel(int x, int y) const;
     virtual void putPixel(int x, int y, AGColor const &c);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void fillRect(AGRect const &pRect, AGColor const &c);
     virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
     virtual void beginPaint();
     virtual void endPaint();
 };

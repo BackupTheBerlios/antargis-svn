@@ -5173,6 +5173,17 @@ void SwigDirector_AGApplication::draw() {
 }
 
 
+void SwigDirector_AGApplication::prepareDraw() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGApplication::prepareDraw();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("prepareDraw"), 0, NULL);
+}
+
+
 SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id): AGButton(pParent, r, pText, id), Swig::Director(self) {
     
 }
@@ -8375,21 +8386,6 @@ void SwigDirector_AGTexture::blitTri(AGTexture const &pSource, AGTriangle2 const
 }
 
 
-void SwigDirector_AGTexture::fillRect(AGRect const &pr, AGColor const &c) {
-    VALUE obj0 = Qnil ;
-    VALUE obj1 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGPaintTarget::fillRect(pr,c);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) &pr, SWIGTYPE_p_AGRect2,0);
-    obj1 = SWIG_NewPointerObj((void *) &c, SWIGTYPE_p_AGColor,0);
-    result = rb_funcall(swig_get_self(), rb_intern("fillRect"), 2,obj0,obj1);
-}
-
-
 AGColor SwigDirector_AGTexture::getPixel(int x, int y) const {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
@@ -8428,39 +8424,18 @@ void SwigDirector_AGTexture::putPixel(int x, int y, AGColor const &c) {
 }
 
 
-void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+void SwigDirector_AGTexture::fillRect(AGRect const &pRect, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
-    VALUE obj2 = Qnil ;
-    VALUE obj3 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        AGPaintTarget::blit(pSource,pDest,pSrc,pColor);
+        AGTexture::fillRect(pRect,c);
         return;
     }
-    obj0 = SWIG_NewPointerObj((void *) &pSource, SWIGTYPE_p_AGTexture,0);
-    obj1 = SWIG_NewPointerObj((void *) &pDest, SWIGTYPE_p_AGRect2,0);
-    obj2 = SWIG_NewPointerObj((void *) &pSrc, SWIGTYPE_p_AGRect2,0);
-    obj3 = SWIG_NewPointerObj((void *) &pColor, SWIGTYPE_p_AGColor,0);
-    result = rb_funcall(swig_get_self(), rb_intern("blit"), 4,obj0,obj1,obj2,obj3);
-}
-
-
-void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
-    VALUE obj0 = Qnil ;
-    VALUE obj1 = Qnil ;
-    VALUE obj2 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGPaintTarget::blit(pSource,pDest,pSrc);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj((void *) &pSource, SWIGTYPE_p_AGTexture,0);
-    obj1 = SWIG_NewPointerObj((void *) &pDest, SWIGTYPE_p_AGRect2,0);
-    obj2 = SWIG_NewPointerObj((void *) &pSrc, SWIGTYPE_p_AGRect2,0);
-    result = rb_funcall(swig_get_self(), rb_intern("blit"), 3,obj0,obj1,obj2);
+    obj0 = SWIG_NewPointerObj((void *) &pRect, SWIGTYPE_p_AGRect2,0);
+    obj1 = SWIG_NewPointerObj((void *) &c, SWIGTYPE_p_AGColor,0);
+    result = rb_funcall(swig_get_self(), rb_intern("fillRect"), 2,obj0,obj1);
 }
 
 
@@ -8478,6 +8453,42 @@ void SwigDirector_AGTexture::blit(AGSurface const &pSource, AGRect const &pDest,
     obj1 = SWIG_NewPointerObj((void *) &pDest, SWIGTYPE_p_AGRect2,0);
     obj2 = SWIG_NewPointerObj((void *) &pSrc, SWIGTYPE_p_AGRect2,0);
     result = rb_funcall(swig_get_self(), rb_intern("blit"), 3,obj0,obj1,obj2);
+}
+
+
+void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTexture::blit(pSource,pDest,pSrc);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &pSource, SWIGTYPE_p_AGTexture,0);
+    obj1 = SWIG_NewPointerObj((void *) &pDest, SWIGTYPE_p_AGRect2,0);
+    obj2 = SWIG_NewPointerObj((void *) &pSrc, SWIGTYPE_p_AGRect2,0);
+    result = rb_funcall(swig_get_self(), rb_intern("blit"), 3,obj0,obj1,obj2);
+}
+
+
+void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE obj2 = Qnil ;
+    VALUE obj3 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTexture::blit(pSource,pDest,pSrc,pColor);
+        return;
+    }
+    obj0 = SWIG_NewPointerObj((void *) &pSource, SWIGTYPE_p_AGTexture,0);
+    obj1 = SWIG_NewPointerObj((void *) &pDest, SWIGTYPE_p_AGRect2,0);
+    obj2 = SWIG_NewPointerObj((void *) &pSrc, SWIGTYPE_p_AGRect2,0);
+    obj3 = SWIG_NewPointerObj((void *) &pColor, SWIGTYPE_p_AGColor,0);
+    result = rb_funcall(swig_get_self(), rb_intern("blit"), 4,obj0,obj1,obj2,obj3);
 }
 
 
@@ -27287,6 +27298,22 @@ _wrap_AGWidget_setCaching(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_checkRedraw(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    result = (bool)((AGWidget const *)arg1)->checkRedraw();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGWidget_clear(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     Swig::Director *director = 0;
@@ -30676,6 +30703,22 @@ _wrap_AGApplication_draw(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->draw();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_prepareDraw(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->prepareDraw();
     
     return Qnil;
 }
@@ -34183,6 +34226,150 @@ _wrap_AGTexture_putPixel(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGTexture_fillRect(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    AGRect *arg2 = 0 ;
+    AGColor *arg3 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGColor, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->fillRect((AGRect2 const &)*arg2,(AGColor const &)*arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGTexture_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    AGTexture *arg2 = 0 ;
+    AGRect *arg3 = 0 ;
+    AGRect *arg4 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect2, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGRect2, 0); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->blit((AGTexture const &)*arg2,(AGRect2 const &)*arg3,(AGRect2 const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGTexture_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    AGTexture *arg2 = 0 ;
+    AGRect *arg3 = 0 ;
+    AGRect *arg4 = 0 ;
+    AGColor *arg5 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGRect2, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_AGRect2, 0); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_AGColor, 0); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->blit((AGTexture const &)*arg2,(AGRect2 const &)*arg3,(AGRect2 const &)*arg4,(AGColor const &)*arg5);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AGTexture_blit(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[6];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 5); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_AGTexture_blit__SWIG_0(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 5) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGTexture, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_AGRect2, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_AGColor, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            return _wrap_AGTexture_blit__SWIG_1(nargs, args, self);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGTexture_blit'");
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGTexture_setWrapping(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
     bool arg2 ;
@@ -34217,6 +34404,37 @@ _wrap_AGTexture_setFilter(int argc, VALUE *argv, VALUE self) {
         if (ptr) arg3 = *ptr;
     }
     (arg1)->setFilter(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGTexture_setClamp(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    GLuint arg2 ;
+    GLuint arg3 ;
+    GLuint arg4 ;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    {
+        GLuint * ptr;
+        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_GLuint, 0);
+        if (ptr) arg2 = *ptr;
+    }
+    {
+        GLuint * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_GLuint, 0);
+        if (ptr) arg3 = *ptr;
+    }
+    {
+        GLuint * ptr;
+        SWIG_ConvertPtr(argv[2], (void **) &ptr, SWIGTYPE_p_GLuint, 0);
+        if (ptr) arg4 = *ptr;
+    }
+    (arg1)->setClamp(arg2,arg3,arg4);
     
     return Qnil;
 }
@@ -43962,6 +44180,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGWidget.klass, "redraw", VALUEFUNC(_wrap_AGWidget_redraw), -1);
     rb_define_method(cAGWidget.klass, "prepareDraw", VALUEFUNC(_wrap_AGWidget_prepareDraw), -1);
     rb_define_method(cAGWidget.klass, "setCaching", VALUEFUNC(_wrap_AGWidget_setCaching), -1);
+    rb_define_method(cAGWidget.klass, "checkRedraw", VALUEFUNC(_wrap_AGWidget_checkRedraw), -1);
     rb_define_method(cAGWidget.klass, "clear", VALUEFUNC(_wrap_AGWidget_clear), -1);
     rb_define_method(cAGWidget.klass, "getScreenRect", VALUEFUNC(_wrap_AGWidget_getScreenRect), -1);
     rb_define_method(cAGWidget.klass, "getScreenPosition", VALUEFUNC(_wrap_AGWidget_getScreenPosition), -1);
@@ -44126,6 +44345,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGApplication.klass, "eventChangedRes", VALUEFUNC(_wrap_AGApplication_eventChangedRes), -1);
     rb_define_method(cAGApplication.klass, "setMainWidget", VALUEFUNC(_wrap_AGApplication_setMainWidget), -1);
     rb_define_method(cAGApplication.klass, "draw", VALUEFUNC(_wrap_AGApplication_draw), -1);
+    rb_define_method(cAGApplication.klass, "prepareDraw", VALUEFUNC(_wrap_AGApplication_prepareDraw), -1);
     rb_define_method(cAGApplication.klass, "tryQuit", VALUEFUNC(_wrap_AGApplication_tryQuit), -1);
     rb_define_method(cAGApplication.klass, "getTicks", VALUEFUNC(_wrap_AGApplication_getTicks), -1);
     rb_define_method(cAGApplication.klass, "delay", VALUEFUNC(_wrap_AGApplication_delay), -1);
@@ -44333,8 +44553,11 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGTexture.klass, "beginPaint", VALUEFUNC(_wrap_AGTexture_beginPaint), -1);
     rb_define_method(cAGTexture.klass, "endPaint", VALUEFUNC(_wrap_AGTexture_endPaint), -1);
     rb_define_method(cAGTexture.klass, "putPixel", VALUEFUNC(_wrap_AGTexture_putPixel), -1);
+    rb_define_method(cAGTexture.klass, "fillRect", VALUEFUNC(_wrap_AGTexture_fillRect), -1);
+    rb_define_method(cAGTexture.klass, "blit", VALUEFUNC(_wrap_AGTexture_blit), -1);
     rb_define_method(cAGTexture.klass, "setWrapping", VALUEFUNC(_wrap_AGTexture_setWrapping), -1);
     rb_define_method(cAGTexture.klass, "setFilter", VALUEFUNC(_wrap_AGTexture_setFilter), -1);
+    rb_define_method(cAGTexture.klass, "setClamp", VALUEFUNC(_wrap_AGTexture_setClamp), -1);
     rb_define_method(cAGTexture.klass, "glTexture", VALUEFUNC(_wrap_AGTexture_glTexture), -1);
     rb_define_method(cAGTexture.klass, "sdlTexture", VALUEFUNC(_wrap_AGTexture_sdlTexture), -1);
     rb_define_method(cAGTexture.klass, "is3d", VALUEFUNC(_wrap_AGTexture_is3d), -1);

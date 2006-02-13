@@ -54,7 +54,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   //  cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
 
-  setCaching(true);
+  //  setCaching(true);
 }
 
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)

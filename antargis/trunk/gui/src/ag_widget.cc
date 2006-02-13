@@ -752,11 +752,17 @@ void AGWidget::prepareDraw()
 	{
 	  TRACE;
 	  cdebug(mCacheTouched);
-	  AGPainter p(*mCache);
-
-	  for(int x=0;x<width();x++)
-	    for(int y=0;y<height();y++)
-	      p.putPixel(AGPoint(x,y),AGColor(0xFF,0xFF,0xFF,0xFF));
+	  if(true)
+	    {
+	      AGPainter p(*mCache);
+	      
+	      p.fillRect(AGRect(0,0,800,800),AGColor(0,0xFF,0,0xFF));
+	      /*
+	      
+	      for(int x=0;x<width();x++)
+		for(int y=0;y<height();y++)
+		p.putPixel(AGPoint(x,y),AGColor(0xFF,0xFF,0xFF,0xFF));*/
+	    }
 	  /*
 	  if(!mChildrenDrawFirst)
 	    draw(p);
@@ -769,9 +775,9 @@ void AGWidget::prepareDraw()
 	  if(mChildrenDrawFirst)
 	    draw(p);
 	  
-	  drawAfter(p);
+	    drawAfter(p);*/
 	  mCacheTouched=false;
-	  cdebug(mCacheTouched);*/
+
 	}
     }
   else
@@ -785,7 +791,17 @@ void AGWidget::setCaching(bool pEnable)
   CTRACE;
   mCaching=pEnable;
   delete mCache;
+  AGSurface s(width(),height());
+  {
+    AGPainter p(s);
+    for(int x=0;x<width();x++)
+      for(int y=0;y<height();y++)
+	p.putPixel(AGPoint(x,y),AGColor(0xFF,0,0,0xFF));
+  }
+
+  s.save("muh.png");
   mCache=new AGTexture(width(),height());
+  //  mCache=new AGTexture(s);//width(),height());
   mCacheTouched=true;
 
 

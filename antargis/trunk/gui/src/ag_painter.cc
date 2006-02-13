@@ -277,7 +277,7 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &
 	float w=std::min(pSrc.w(),pDest.x1()-x);
 	float h=std::min(pSrc.h(),pDest.y1()-y);
 	blit(pSource,AGRect(x,y,w,h),AGRect(pSrc.x0(),pSrc.y0(),w,h));
-	return;
+	//	return;
       }
 }
 

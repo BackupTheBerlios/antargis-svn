@@ -20,6 +20,7 @@
 
 #include "ag_texture.h"
 #include "ag_glsurface.h"
+#include "ag_debug.h"
 #include "ag_rendercontext.h"
 #include "sge.h"
 #include "ag_surfacemanager.h"
@@ -221,6 +222,10 @@ void AGTexture::beginPaint()
       glTexCoord2f(0,1);
       glVertex2f(0,h);
       glEnd();
+      
+      glMatrixMode(GL_MODELVIEW);
+      glScalef(1,-1,1);
+      glTranslatef(0,h,0);
 
     }
   mPainting=true;
@@ -234,6 +239,10 @@ void AGTexture::endPaint()
       // copy buffer to texture
 
       glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, mTexture->width(),mTexture->height(),0);
+
+      getScreen().flip();
+      SDL_Delay(1000);
+
 
     }
   mPainting=false;
@@ -253,6 +262,20 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
     {
       sge_PutPixel(s->surface,x,y,c.mapRGB(s->surface->format));
     }
+}
+
+
+void AGTexture::fillRect(const AGRect &pRect,const AGColor &c)
+{
+  if(opengl())
+    {
+      assert(mTexture);
+      cdebug(pRect);
+      getScreen().fillRect(pRect,c);
+    }
+  else
+    throw std::runtime_error("implement fillRect for sdl-texture");
+  
 }
 
 void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)

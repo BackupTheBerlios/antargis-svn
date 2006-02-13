@@ -63,6 +63,7 @@ class AGTexture:public AGPaintTarget
   virtual void endPaint();
 
   virtual void putPixel(int x,int y,const AGColor &c);
+  virtual void fillRect(const AGRect &pRect,const AGColor &c);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
   virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
 
