@@ -36,11 +36,12 @@ class AGBackground
 
   void draw(AGPainter &p);
 
+  void useTextures();
  private:
-  AGTexture mSurface;
+  AGTexture mTexture;
   AGColor mColors[4];
 
-  bool mSurfaceFlag;
+  bool mTextureFlag;
   bool mColor;
   int mBorder;
 };

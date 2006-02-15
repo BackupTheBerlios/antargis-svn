@@ -59,6 +59,8 @@ class AGTexture:public AGPaintTarget
   void clearTexture();
   void clearTextureUsed();
 
+  void useTexture();
+ 
   virtual void beginPaint();
   virtual void endPaint();
 

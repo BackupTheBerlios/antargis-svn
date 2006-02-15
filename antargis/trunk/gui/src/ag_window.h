@@ -46,7 +46,7 @@ class AGWindow:public AGTable
 
  private:
 
-  AGWidget *getTitleBar();
+  AGWidget *getTitleBar(int w,int h);
 
   std::string mTitle;
   AGWidget *mClient;

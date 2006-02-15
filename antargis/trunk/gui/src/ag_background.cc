@@ -25,7 +25,7 @@
 #include "ag_painter.h"
 
 
-AGBackground::AGBackground(const AGColor &pColor):mSurfaceFlag(false)
+AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
 {
   mColor=true;
   mColors[0]=pColor;
@@ -35,7 +35,7 @@ AGBackground::AGBackground(const AGColor &pColor):mSurfaceFlag(false)
   mBorder=0;
 }
 
-AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
+AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
 {
   //  CTRACE;
   AGTheme *theme=getTheme();
@@ -44,8 +44,8 @@ AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
     {
       //      CTRACE;
       cdebug(pThemeName+".image");
-      mSurface=AGTexture(theme->getSurface(pThemeName+".image"));
-      mSurfaceFlag=true;
+      mTexture=AGTexture(theme->getSurface(pThemeName+".image"));
+      mTextureFlag=true;
     }
   else if(theme->hasColor(pThemeName+"."+std::string("gradientColor1")))
     {
@@ -62,9 +62,14 @@ AGBackground::AGBackground(std::string pThemeName):mSurfaceFlag(false)
 
 void AGBackground::draw(AGPainter &p)
 {
-  if(mSurfaceFlag)
-    p.tile(mSurface,p.getRect().shrink(mBorder));
+  if(mTextureFlag)
+    p.tile(mTexture,p.getRect().shrink(mBorder));
   else if(mColor)
     p.drawGradient(p.getRect().shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
  
+}
+
+void AGBackground::useTextures()
+{
+  mTexture.useTexture();
 }

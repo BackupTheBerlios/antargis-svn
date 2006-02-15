@@ -75,3 +75,9 @@ size_t AGBorder::getWidth() const
 {
   return mWidth;
 }
+
+void AGBorder::useTextures()
+{
+  if(mTexture)
+    const_cast<AGTexture*>(mTexture)->useTexture();
+}

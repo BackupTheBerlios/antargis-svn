@@ -1888,6 +1888,17 @@ bool SwigDirector_AGWidget::eventGotFocus() {
 }
 
 
+void SwigDirector_AGWidget::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGWidget::eventShow() {
     bool c_result ;
     VALUE result;
@@ -2440,6 +2451,17 @@ bool SwigDirector_AGColorButton::eventGotFocus() {
 }
 
 
+void SwigDirector_AGColorButton::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGColorButton::eventShow() {
     bool c_result ;
     VALUE result;
@@ -2989,6 +3011,17 @@ bool SwigDirector_AGGLWidget::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGGLWidget::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -3737,6 +3770,17 @@ bool SwigDirector_AGLayout::eventGotFocus() {
 }
 
 
+void SwigDirector_AGLayout::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGLayout::eventShow() {
     bool c_result ;
     VALUE result;
@@ -4286,6 +4330,17 @@ bool SwigDirector_AGDialog::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGDialog::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -5216,6 +5271,17 @@ bool SwigDirector_AGButton::eventGotFocus() {
 }
 
 
+void SwigDirector_AGButton::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 void SwigDirector_AGButton::setChecked(bool pChecked) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -5826,6 +5892,17 @@ bool SwigDirector_AGText::eventGotFocus() {
 }
 
 
+void SwigDirector_AGText::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGText::eventShow() {
     bool c_result ;
     VALUE result;
@@ -6378,6 +6455,17 @@ bool SwigDirector_AGCaption::eventGotFocus() {
 }
 
 
+void SwigDirector_AGCaption::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGCaption::eventShow() {
     bool c_result ;
     VALUE result;
@@ -6927,6 +7015,17 @@ bool SwigDirector_AGCheckBox::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGCheckBox::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -7584,6 +7683,17 @@ bool SwigDirector_AGEdit::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGEdit::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -8807,6 +8917,17 @@ bool SwigDirector_AGImage::eventGotFocus() {
 }
 
 
+void SwigDirector_AGImage::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGImage::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGImage::eventShow() {
     bool c_result ;
     VALUE result;
@@ -9387,6 +9508,17 @@ bool SwigDirector_AGVTiler::eventGotFocus() {
 }
 
 
+void SwigDirector_AGVTiler::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGVTiler::eventShow() {
     bool c_result ;
     VALUE result;
@@ -9947,6 +10079,17 @@ bool SwigDirector_AGHTiler::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGHTiler::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -10513,6 +10656,17 @@ bool SwigDirector_AGListBox::eventGotFocus() {
 }
 
 
+void SwigDirector_AGListBox::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGListBox::eventShow() {
     bool c_result ;
     VALUE result;
@@ -11062,6 +11216,17 @@ bool SwigDirector_AGMenu::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGMenu::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -11625,6 +11790,17 @@ bool SwigDirector_AGMenuItem::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGMenuItem::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -12213,6 +12389,17 @@ bool SwigDirector_AGSubMenu::eventGotFocus() {
 }
 
 
+void SwigDirector_AGSubMenu::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGSubMenu::eventShow() {
     bool c_result ;
     VALUE result;
@@ -12798,6 +12985,17 @@ bool SwigDirector_AGSound::eventGotFocus() {
 }
 
 
+void SwigDirector_AGSound::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGSound::eventShow() {
     bool c_result ;
     VALUE result;
@@ -13347,6 +13545,17 @@ bool SwigDirector_AGRadioGroup::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGRadioGroup::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -13912,6 +14121,17 @@ bool SwigDirector_AGRadio::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGRadio::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGButton::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -14761,6 +14981,17 @@ bool SwigDirector_AGTable::eventGotFocus() {
 }
 
 
+void SwigDirector_AGTable::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGTable::eventShow() {
     bool c_result ;
     VALUE result;
@@ -14800,32 +15031,6 @@ void SwigDirector_AGTable::setTop(float y) {
 }
 
 
-void SwigDirector_AGTable::setHeight(float w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setHeight(w);
-        return;
-    }
-    obj0 = rb_float_new(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
-}
-
-
-void SwigDirector_AGTable::setWidth(float w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setWidth(w);
-        return;
-    }
-    obj0 = rb_float_new(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
-}
-
-
 bool SwigDirector_AGTable::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
@@ -14840,6 +15045,32 @@ bool SwigDirector_AGTable::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGTable::setWidth(float w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTable::setWidth(w);
+        return;
+    }
+    obj0 = rb_float_new(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGTable::setHeight(float w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTable::setHeight(w);
+        return;
+    }
+    obj0 = rb_float_new(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
 }
 
 
@@ -15231,32 +15462,6 @@ bool SwigDirector_AGTable::eventHide() {
 }
 
 
-void SwigDirector_AGTable::setWidth(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGTable::setWidth(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
-}
-
-
-void SwigDirector_AGTable::setHeight(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGTable::setHeight(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
-}
-
-
 void SwigDirector_AGTable::addChild(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -15348,6 +15553,17 @@ bool SwigDirector_AGWindow::eventGotFocus() {
 }
 
 
+void SwigDirector_AGWindow::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
+}
+
+
 bool SwigDirector_AGWindow::eventShow() {
     bool c_result ;
     VALUE result;
@@ -15387,29 +15603,29 @@ void SwigDirector_AGWindow::setTop(float y) {
 }
 
 
-void SwigDirector_AGWindow::setHeight(float w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGWidget::setHeight(w);
-        return;
-    }
-    obj0 = rb_float_new(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
-}
-
-
 void SwigDirector_AGWindow::setWidth(float w) {
     VALUE obj0 = Qnil ;
     VALUE result;
     
     if (swig_get_up()) {
-        AGWidget::setWidth(w);
+        AGTable::setWidth(w);
         return;
     }
     obj0 = rb_float_new(w);
     result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGWindow::setHeight(float w) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGTable::setHeight(w);
+        return;
+    }
+    obj0 = rb_float_new(w);
+    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
 }
 
 
@@ -15818,32 +16034,6 @@ bool SwigDirector_AGWindow::eventHide() {
 }
 
 
-void SwigDirector_AGWindow::setWidth(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGTable::setWidth(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
-}
-
-
-void SwigDirector_AGWindow::setHeight(int w) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGTable::setHeight(w);
-        return;
-    }
-    obj0 = INT2NUM(w);
-    result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
-}
-
-
 void SwigDirector_AGWindow::addChildBack(AGWidget *w) {
     VALUE obj0 = Qnil ;
     VALUE result;
@@ -15929,6 +16119,17 @@ bool SwigDirector_AGFrame::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGFrame::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -16481,6 +16682,17 @@ bool SwigDirector_AGScreenWidget::eventGotFocus() {
     result = rb_funcall(swig_get_self(), rb_intern("eventGotFocus"), 0, NULL);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGScreenWidget::useTextures() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::useTextures();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("useTextures"), 0, NULL);
 }
 
 
@@ -27407,6 +27619,35 @@ _wrap_AGWidget_queryRedraw(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_useTextures(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->useTextures();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGWidget_useTexturesRecursive(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    (arg1)->useTexturesRecursive();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGWidget_clear(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     Swig::Director *director = 0;
@@ -31032,6 +31273,19 @@ _wrap_AGBackground_draw(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGBackground_useTextures(int argc, VALUE *argv, VALUE self) {
+    AGBackground *arg1 = (AGBackground *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGBackground, 0);
+    (arg1)->useTextures();
+    
+    return Qnil;
+}
+
+
 static void
 free_AGBackground(AGBackground *arg1) {
     delete arg1;
@@ -31148,6 +31402,19 @@ _wrap_AGBorder_getWidth(int argc, VALUE *argv, VALUE self) {
     
     vresult = UINT2NUM(result);
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGBorder_useTextures(int argc, VALUE *argv, VALUE self) {
+    AGBorder *arg1 = (AGBorder *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGBorder, 0);
+    (arg1)->useTextures();
+    
+    return Qnil;
 }
 
 
@@ -31708,6 +31975,22 @@ _wrap_AGButton_canFocus(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
+}
+
+
+static VALUE
+_wrap_AGButton_useTextures(int argc, VALUE *argv, VALUE self) {
+    AGButton *arg1 = (AGButton *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGButton, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->useTextures();
+    
+    return Qnil;
 }
 
 
@@ -34265,6 +34548,19 @@ _wrap_AGTexture_clearTextureUsed(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGTexture_useTexture(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    (arg1)->useTexture();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGTexture_beginPaint(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
     Swig::Director *director = 0;
@@ -35962,6 +36258,22 @@ _wrap_AGImage_setTexture(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGImage, 0);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     (arg1)->setTexture((AGTexture const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGImage_useTextures(int argc, VALUE *argv, VALUE self) {
+    AGImage *arg1 = (AGImage *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGImage, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->useTextures();
     
     return Qnil;
 }
@@ -40543,13 +40855,13 @@ _wrap_AGTable_arrange(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGTable_setWidth(int argc, VALUE *argv, VALUE self) {
     AGTable *arg1 = (AGTable *) 0 ;
-    int arg2 ;
+    float arg2 ;
     Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTable, 0);
-    arg2 = NUM2INT(argv[0]);
+    arg2 = (float) NUM2DBL(argv[0]);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->setWidth(arg2);
@@ -40561,13 +40873,13 @@ _wrap_AGTable_setWidth(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGTable_setHeight(int argc, VALUE *argv, VALUE self) {
     AGTable *arg1 = (AGTable *) 0 ;
-    int arg2 ;
+    float arg2 ;
     Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTable, 0);
-    arg2 = NUM2INT(argv[0]);
+    arg2 = (float) NUM2DBL(argv[0]);
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->setHeight(arg2);
@@ -44374,6 +44686,8 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGWidget.klass, "checkRedraw", VALUEFUNC(_wrap_AGWidget_checkRedraw), -1);
     rb_define_method(cAGWidget.klass, "setDrawn", VALUEFUNC(_wrap_AGWidget_setDrawn), -1);
     rb_define_method(cAGWidget.klass, "queryRedraw", VALUEFUNC(_wrap_AGWidget_queryRedraw), -1);
+    rb_define_method(cAGWidget.klass, "useTextures", VALUEFUNC(_wrap_AGWidget_useTextures), -1);
+    rb_define_method(cAGWidget.klass, "useTexturesRecursive", VALUEFUNC(_wrap_AGWidget_useTexturesRecursive), -1);
     rb_define_method(cAGWidget.klass, "clear", VALUEFUNC(_wrap_AGWidget_clear), -1);
     rb_define_method(cAGWidget.klass, "getScreenRect", VALUEFUNC(_wrap_AGWidget_getScreenRect), -1);
     rb_define_method(cAGWidget.klass, "getScreenPosition", VALUEFUNC(_wrap_AGWidget_getScreenPosition), -1);
@@ -44552,6 +44866,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_alloc_func(cAGBackground.klass, _wrap_AGBackground_allocate);
     rb_define_method(cAGBackground.klass, "initialize", VALUEFUNC(_wrap_new_AGBackground), -1);
     rb_define_method(cAGBackground.klass, "draw", VALUEFUNC(_wrap_AGBackground_draw), -1);
+    rb_define_method(cAGBackground.klass, "useTextures", VALUEFUNC(_wrap_AGBackground_useTextures), -1);
     cAGBackground.mark = 0;
     cAGBackground.destroy = (void (*)(void *)) free_AGBackground;
     
@@ -44561,6 +44876,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGBorder.klass, "initialize", VALUEFUNC(_wrap_new_AGBorder), -1);
     rb_define_method(cAGBorder.klass, "draw", VALUEFUNC(_wrap_AGBorder_draw), -1);
     rb_define_method(cAGBorder.klass, "getWidth", VALUEFUNC(_wrap_AGBorder_getWidth), -1);
+    rb_define_method(cAGBorder.klass, "useTextures", VALUEFUNC(_wrap_AGBorder_useTextures), -1);
     cAGBorder.mark = 0;
     cAGBorder.destroy = (void (*)(void *)) free_AGBorder;
     rb_define_module_function(mLibantargisgui, "disown_AGButton", VALUEFUNC(_wrap_disown_AGButton), -1);
@@ -44591,6 +44907,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGButton.klass, "setChecked", VALUEFUNC(_wrap_AGButton_setChecked), -1);
     rb_define_method(cAGButton.klass, "isChecked", VALUEFUNC(_wrap_AGButton_isChecked), -1);
     rb_define_method(cAGButton.klass, "canFocus", VALUEFUNC(_wrap_AGButton_canFocus), -1);
+    rb_define_method(cAGButton.klass, "useTextures", VALUEFUNC(_wrap_AGButton_useTextures), -1);
     cAGButton.mark = (void (*)(void *)) general_markfunc;
     cAGButton.destroy = (void (*)(void *)) free_AGButton;
     rb_define_module_function(mLibantargisgui, "toAGButton", VALUEFUNC(_wrap_toAGButton), -1);
@@ -44743,6 +45060,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGTexture.klass, "textureUsed", VALUEFUNC(_wrap_AGTexture_textureUsed), -1);
     rb_define_method(cAGTexture.klass, "clearTexture", VALUEFUNC(_wrap_AGTexture_clearTexture), -1);
     rb_define_method(cAGTexture.klass, "clearTextureUsed", VALUEFUNC(_wrap_AGTexture_clearTextureUsed), -1);
+    rb_define_method(cAGTexture.klass, "useTexture", VALUEFUNC(_wrap_AGTexture_useTexture), -1);
     rb_define_method(cAGTexture.klass, "beginPaint", VALUEFUNC(_wrap_AGTexture_beginPaint), -1);
     rb_define_method(cAGTexture.klass, "endPaint", VALUEFUNC(_wrap_AGTexture_endPaint), -1);
     rb_define_method(cAGTexture.klass, "putPixel", VALUEFUNC(_wrap_AGTexture_putPixel), -1);
@@ -44822,6 +45140,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGImage.klass, "draw", VALUEFUNC(_wrap_AGImage_draw), -1);
     rb_define_method(cAGImage.klass, "setSurface", VALUEFUNC(_wrap_AGImage_setSurface), -1);
     rb_define_method(cAGImage.klass, "setTexture", VALUEFUNC(_wrap_AGImage_setTexture), -1);
+    rb_define_method(cAGImage.klass, "useTextures", VALUEFUNC(_wrap_AGImage_useTextures), -1);
     cAGImage.mark = (void (*)(void *)) general_markfunc;
     cAGImage.destroy = (void (*)(void *)) free_AGImage;
     rb_define_module_function(mLibantargisgui, "disown_AGLayoutCreator", VALUEFUNC(_wrap_disown_AGLayoutCreator), -1);

@@ -52,6 +52,8 @@ class AGSurfaceManager
 
   void cleanup();
 
+  size_t getUsedTexMem() const;
+
  private:
   AGSurfaceManager();
 

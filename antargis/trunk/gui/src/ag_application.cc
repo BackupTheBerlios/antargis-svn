@@ -141,7 +141,10 @@ bool AGApplication::eventIdle()
 void AGApplication::prepareDraw()
 {
   if(mainWidget)
-    mainWidget->prepareDraw();
+    {
+      mainWidget->prepareDraw();
+      mainWidget->useTexturesRecursive();
+    }
 }  
 void AGApplication::draw()
 {

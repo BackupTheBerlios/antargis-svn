@@ -48,7 +48,7 @@ void AGText::draw(AGPainter &p)
 {
   float x=(width()-mFont.getWidth(mText))/2;
   float y=(height()-mFont.getHeight(mText))/2;
-  p.renderText(mText,AGPoint(x,y),mFont);
+  p.renderText(mText,AGPoint((int)x,(int)y),mFont);
 }
 
 void AGText::setDeriveRect()

@@ -371,7 +371,7 @@ void AGPainter::renderText(const std::string &pText,const AGPoint &p,const AGFon
 {
   AGTexture *t=AGFontEngine::renderText(0,0,pText,f);
   if(t)
-    blit(*t,AGRect(p[0],p[1],t->width(),t->height()));
+    blit(*t,AGRect(p[0],p[1],t->getSurfaceWidth(),t->getSurfaceHeight()));
 
 }
 void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, const AGColor& c2)
@@ -408,7 +408,6 @@ void AGPainter::fillRect(const AGRect &pDest,const AGColor &c)
   AGRect2 d,pSrc;
   d=mCurrent.project(pDest);
   std::pair<AGRect,AGRect> p=mCurrent.clipRect(d,pSrc);
-
   if(p.first.w()>0 && p.first.h()>0)
     mTarget->fillRect(p.first,c);
 }

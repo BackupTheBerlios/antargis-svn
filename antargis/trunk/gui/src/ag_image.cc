@@ -72,3 +72,8 @@ void AGImage::setTexture(const AGTexture &pTexture)
 {
   mTexture=pTexture;
 }
+
+void AGImage::useTextures()
+{
+  mTexture.useTexture();
+}

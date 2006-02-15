@@ -72,6 +72,8 @@ class AGButton:public AGWidget
 
   bool canFocus() const;
 
+  virtual void useTextures();
+
  private:
   std::string mText;
   int mID;

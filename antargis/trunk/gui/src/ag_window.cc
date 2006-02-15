@@ -33,6 +33,8 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
   AGTable(pWidget,pRect),sigClose(this,"sigClose"),mTitle(pTitle)
 
 {
+  CTRACE;
+
   std::string tstr="window.border.image";
   if(pTheme!="")
     tstr=pTheme+"."+tstr;
@@ -44,7 +46,8 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
   int titBarHeight=20;
 
   //  cdebug("window_border:"<<s.width()<<"/"<<s.height());
-
+  AGTable *t=0;
+ 
   if(pTitle.length())
     {
       // use 4 rows
@@ -62,19 +65,18 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
       AGTable::addChild(2,0,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,0,bw,bw)));
       
       AGImage *i1,*i2;
-      AGWidget *t;
 
-      AGTable::addChild(0,1,i1=new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,bw,bw,bw)));
+      AGTable::addChild(0,1,i1=new AGImage(this,AGRect(0,0,bw,titBarHeight),s,true,AGRect(0,bw,bw,bw)));
       // title
       //      AGTable::addChild(1,1,new AGImage(this,s,AGRect(bw,0,bw,bw)));
       //      AGTable::addChild(1,1,new AGText(this,AGRect(0,0,40,20),pTitle,AGFont("Arial.ttf",14)));
-      AGTable::addChild(1,1,t=getTitleBar());//new AGButton(this,AGRect(0,0,10,20),pTitle));
+      t=dynamic_cast<AGTable*>(getTitleBar(width()-2*bw,titBarHeight));//new AGButton(this,AGRect(0,0,10,20),pTitle));
 
       //      t->setSurface(getTheme()->getSurface("close_button"));
 
-      AGTable::addChild(2,1,i2=new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,bw,bw,bw)));
-      i1->setHeight(t->height());
-      i2->setHeight(t->height());
+      AGTable::addChild(2,1,i2=new AGImage(this,AGRect(0,0,titBarHeight,bw),s,true,AGRect(2*bw,bw,bw,bw)));
+            i1->setHeight(t->height());
+            i2->setHeight(t->height());
 
       AGTable::addChild(0,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(0,bw,bw,bw)));
       AGTable::addChild(2,2,new AGImage(this,AGRect(0,0,bw,bw),s,true,AGRect(2*bw,bw,bw,bw)));
@@ -112,6 +114,8 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTit
     }
 
   arrange();
+  //  if(t)
+  //    t->arrange();
 }
 
 void AGWindow::addChild(AGWidget *w)
@@ -158,26 +162,30 @@ bool AGWindow::eventDragBy(AGEvent *event,const AGPoint &pDiff)
   return true;
 }
 
-AGWidget *AGWindow::getTitleBar()
+AGWidget *AGWindow::getTitleBar(int w,int h)
 {
+  cdebug("W:"<<w);
   AGTable *t=new AGTable(this,AGRect(0,0,0,20));//60,20));
+  AGSurface closeSurface=getTheme()->getSurface("window.buttons.close");
   AGButton *closeButton;
   AGWidget *title;
 
+  AGTable::addChild(1,1,t);
+
   t->addRow(1.0);
-  //  t->addFixedColumn();
+
   t->addColumn(1.0);
-  t->addFixedColumn(20);//close button
+  t->addFixedColumn(h);//close button
   
   //  t->addChild(0,0,title=new AGButton(t,AGRect(0,0,0,0),mTitle));
   t->addChild(0,0,title=new AGCaption(t,AGRect(0,0,0,0),mTitle,getTheme()->getFont("window.title.font"),AGBackground("window.title.background")));
   t->addChild(1,0,closeButton=new AGButton(t,AGRect(0,0,20,20),"aa"));
-  closeButton->setSurface(getTheme()->getSurface("window.buttons.close"),false);
+  closeButton->setSurface(closeSurface,false);
   title->setName("title"); // FIXME: maybe name getName()+".title"
 
   //  AGListener 
   closeButton->sigClick.connect(slot(this,&AGWindow::tryClose));
-  // t->arrange();
+  //  t->arrange();
   return t;
 }
 

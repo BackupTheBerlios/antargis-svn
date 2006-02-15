@@ -51,8 +51,8 @@ class AGTable:public AGWidget
 
   void arrange();
 
-  virtual void setWidth(int w);
-  virtual void setHeight(int w);
+  virtual void setWidth(float w);
+  virtual void setHeight(float w);
 
  private:
   int w,h;

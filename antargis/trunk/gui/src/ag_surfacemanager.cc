@@ -116,6 +116,11 @@ AGSurfaceManager *getSurfaceManager()
 
 void AGSurfaceManager::cleanup()
 {
+  size_t oldTexMem=getUsedTexMem();
+  if(oldTexMem<16000000)
+    return;
+  cdebug("oldTexMem:"<<oldTexMem);
+  
   /*
   cdebug("gltex:"<<mGLTextures.size());
   cdebug("tex:"<<mTextures.size());
@@ -164,6 +169,8 @@ void AGSurfaceManager::cleanup()
   std::list<AGGLTexture*> gls;
   std::copy(mGLTextures.begin(),mGLTextures.end(),std::back_inserter(gls));
 
+  size_t texMem=0;
+
   for(std::list<AGGLTexture*>::iterator i=gls.begin();i!=gls.end();)
     {
       if(usedGL.find(*i)==usedGL.end())
@@ -176,8 +183,12 @@ void AGSurfaceManager::cleanup()
 	  cdebug("yay");
 	}
       else
-	i++;
+	{
+	  texMem+=(*i)->width()*(*i)->height()*(*i)->depth()*4;
+	  i++;
+	}
     }
+  cdebug("texMem:"<<texMem);
   
   mGLTextures.clear();
   std::copy(gls.begin(),gls.end(),std::inserter(mGLTextures,mGLTextures.begin()));
@@ -186,3 +197,11 @@ void AGSurfaceManager::cleanup()
 }
 
 
+
+size_t AGSurfaceManager::getUsedTexMem() const
+{
+  size_t texMem=0;
+  for(std::set<AGGLTexture*>::const_iterator i=mGLTextures.begin();i!=mGLTextures.end();i++)
+    texMem+=(*i)->width()*(*i)->height()*(*i)->depth()*4;
+  return texMem;
+}

@@ -35,6 +35,8 @@ class AGBorder
 
   size_t getWidth() const;
 
+  void useTextures();
+
  private:
   const AGTexture *mTexture;
   bool mEnable;

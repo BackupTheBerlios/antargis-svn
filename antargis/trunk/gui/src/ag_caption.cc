@@ -19,6 +19,8 @@
  */
 
 #include "ag_caption.h"
+#include "ag_debug.h"
+#include "ag_screen.h"
 
 AGCaption::AGCaption(AGWidget *pParent,const AGRect &pRect,const std::string &pText,const AGFont &pFont,const AGBackground &pBG):
   AGText(pParent,pRect,pText,pFont),

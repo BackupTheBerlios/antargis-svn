@@ -89,6 +89,7 @@ public:
     SwigDirector_AGWidget(VALUE self, AGWidget *pParent, AGRect const &r);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -136,6 +137,7 @@ public:
     SwigDirector_AGColorButton(VALUE self, AGWidget *pParent, AGRect const &r, int x, int y);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -183,6 +185,7 @@ public:
     SwigDirector_AGGLWidget(VALUE self, AGWidget *pParent, AGRect const &r);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -259,6 +262,7 @@ public:
     SwigDirector_AGLayout(VALUE self, AGWidget *pgParent, std::string const &pXMLData);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -306,6 +310,7 @@ public:
     SwigDirector_AGDialog(VALUE self, AGWidget *pgParent, std::string const &pXMLData);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -387,6 +392,7 @@ public:
     SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id = -1);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual void setChecked(bool pChecked);
     virtual bool eventShow();
     virtual void setLeft(float x);
@@ -438,6 +444,7 @@ public:
     SwigDirector_AGText(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -485,6 +492,7 @@ public:
     SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -532,6 +540,7 @@ public:
     SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual void setChecked(bool pChecked);
     virtual bool eventShow();
     virtual void setLeft(float x);
@@ -593,6 +602,7 @@ public:
     SwigDirector_AGEdit(VALUE self, AGWidget *pParent, AGRect const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -706,6 +716,7 @@ public:
     SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect const &r, AGSurface pSurface, bool pTile, AGRect const &pRect = AGRect(0,0,0,0));
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -762,6 +773,7 @@ public:
     SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight = true);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -810,6 +822,7 @@ public:
     SwigDirector_AGHTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight = true);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -858,6 +871,7 @@ public:
     SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -905,6 +919,7 @@ public:
     SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGPoint pWishPos, std::string const &pName);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -953,6 +968,7 @@ public:
     SwigDirector_AGMenuItem(VALUE self, AGWidget *pParent, std::string const &pText);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -1003,6 +1019,7 @@ public:
     SwigDirector_AGSubMenu(VALUE self, AGWidget *pParent, std::string const &ptext);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -1053,6 +1070,7 @@ public:
     SwigDirector_AGSound(VALUE self);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -1100,6 +1118,7 @@ public:
     SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -1148,6 +1167,7 @@ public:
     SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual void setChecked(bool pChecked);
     virtual bool eventShow();
     virtual void setLeft(float x);
@@ -1222,12 +1242,13 @@ public:
     SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
     virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual void setWidth(float w);
+    virtual void setHeight(float w);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1256,8 +1277,6 @@ public:
     virtual void draw(AGPainter &p);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void setWidth(int w);
-    virtual void setHeight(int w);
     virtual void addChild(AGWidget *w);
     virtual void addChildBack(AGWidget *w);
     virtual void removeChild(AGWidget *w);
@@ -1279,11 +1298,12 @@ public:
     SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle = "", std::string const &pTheme = "");
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
-    virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void setHeight(float w);
     virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
@@ -1313,8 +1333,6 @@ public:
     virtual void draw(AGPainter &p);
     virtual bool eventMouseLeave();
     virtual bool eventHide();
-    virtual void setWidth(int w);
-    virtual void setHeight(int w);
     virtual void addChildBack(AGWidget *w);
     virtual void removeChild(AGWidget *w);
     virtual void addChild(AGWidget *w);
@@ -1329,6 +1347,7 @@ public:
     SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, AGBorder const &pBorder);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
@@ -1376,6 +1395,7 @@ public:
     SwigDirector_AGScreenWidget(VALUE self);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
+    virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);

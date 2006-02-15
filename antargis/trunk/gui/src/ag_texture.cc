@@ -423,3 +423,8 @@ void AGTexture::setClamp(GLuint s,GLuint t,GLuint r)
   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, t);
   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, r);
 }
+
+void AGTexture::useTexture()
+{
+  mTextureUsed=true;
+}

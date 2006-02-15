@@ -21,32 +21,27 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
-require 'sdl'
+require 'antargisgui.rb'
 require 'testapp.rb'
-require 'theme.rb'
 
-include Libantargisruby
 
 puts "MenuTest"
 
-main=AGMain.new
-
-main.changeRes(640,480,32,false,false)
+main=AGMain.new(640,480,32,false,true) #false,false)
 
 app=TestApp.new(false)
 
 screen=AGScreenWidget.new
 window1=AGWindow.new(screen,AGRect.new(100,100,200,100),"test Window")
-window2=AGWindow.new(screen,AGRect.new(150,150,200,100))
+#window2=AGWindow.new(screen,AGRect.new(150,150,200,100))
 
 screen.addChild(window1)
-screen.addChild(window2)
+#screen.addChild(window2)
 
-w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
-window1.addChild(w2)
+#w2=AGButton.new(window1.getClient(),AGRect.new(20,20,40,30),"hallo")
+#window1.addChild(w2)
 
-app.setMainWidget(screen)#widget)
+app.setMainWidget(window1) #screen)#widget)
 
 app.run
 

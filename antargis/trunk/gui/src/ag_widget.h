@@ -103,6 +103,11 @@ class AGWidget:public AGMessageObject
   void setDrawn();
   void queryRedraw();
 
+  // when caching, "normal" textures are not used, so they get discarded
+  // to prevent this, use this function to "use" them in each frame
+  virtual void useTextures(); // when caching
+  void useTexturesRecursive(); // when caching
+
 
   // clear children
   void clear();

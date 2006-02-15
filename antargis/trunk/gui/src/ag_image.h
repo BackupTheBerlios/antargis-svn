@@ -35,6 +35,7 @@ class AGImage:public AGWidget
   void setSurface(const AGSurface &pSurface);
   void setTexture(const AGTexture &pTexture);
 
+  void useTextures();
   //  void setSourceRect(const AGRect &pRect);
 
  private:

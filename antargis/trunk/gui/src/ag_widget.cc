@@ -174,7 +174,7 @@ void AGWidget::drawAll(AGPainter &p)
   else
     {
       p.pushMatrix();
-      //  AGPainter p2(p);
+
       p.transform(getRect());
 
       if(!mChildrenDrawFirst)
@@ -801,4 +801,15 @@ void AGWidget::setDrawn()
 void AGWidget::queryRedraw()
 {
   mCacheTouched=true;
+}
+
+void AGWidget::useTextures()
+{
+}
+
+void AGWidget::useTexturesRecursive()
+{
+  useTextures();
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+    (*i)->useTexturesRecursive();
 }

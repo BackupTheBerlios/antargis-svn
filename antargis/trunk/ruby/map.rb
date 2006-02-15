@@ -160,8 +160,13 @@ class AntRubyMap<AntMap
 	#	getRuby(super(id))
 	#end
 	def pause
+		@paused=true
 	end
 	def unpause
+		@paused=false
+	end
+	def paused
+		@paused
 	end
 	def getByName(name)
 		if name.class!=String
@@ -195,6 +200,9 @@ class AntRubyMap<AntMap
 	end
 	
 	def move(time)
+		if @paused
+			return
+		end
 		$systemTime+=time
 		super(time)
 		

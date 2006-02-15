@@ -50,7 +50,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   //  cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
 
-  //  setCaching(true);
+  setCaching(true);
 }
 
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
@@ -296,4 +296,13 @@ AGButton &toAGButton(AGWidget &pWidget)
 bool AGButton::canFocus() const
 {
   return true;
+}
+
+void AGButton::useTextures()
+{
+  for(std::map<State,AGBackground>::iterator i=mBG.begin();i!=mBG.end();++i)
+    i->second.useTextures();
+  for(std::map<State,AGBorder>::iterator i=mBorder.begin();i!=mBorder.end();++i)
+    i->second.useTextures();
+  
 }

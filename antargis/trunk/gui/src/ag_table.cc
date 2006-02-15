@@ -25,6 +25,7 @@ AGTable::AGTable(AGWidget *pWidget,const AGRect &pRect):
   AGWidget(pWidget,pRect),
   w(0),h(0),xw(0),yw(0),mInserted(false)
 {
+  CTRACE;
 }
 
 AGTable::~AGTable()
@@ -71,6 +72,7 @@ void AGTable::addRow(float weight)
 
 void AGTable::addChild(int px,int py,AGWidget *pWidget)
 {
+  cdebug("add:"<<pWidget);
   if(px>=w || py>=h || px<0 || py<0)
     {
       cdebug("WARNING:wrong input position");
@@ -285,13 +287,13 @@ void AGTable::arrange()
 }
 
 
-void AGTable::setWidth(int w)
+void AGTable::setWidth(float w)
 {
   cdebug(w);
   AGWidget::setWidth(w);
   arrange();
 }
-void AGTable::setHeight(int w)
+void AGTable::setHeight(float w)
 {
   AGWidget::setHeight(w);
   arrange();
