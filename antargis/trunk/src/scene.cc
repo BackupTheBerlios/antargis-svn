@@ -175,34 +175,16 @@ void Scene::removeNode(SceneNode *node)
 {
   if(mNodeSet.find(node)!=mNodeSet.end())
     {
-      /*      {
-      std::list<SceneNode*> test=mTree->getAll();
-      cdebug("test:"<<test.size());
-      std::set<SceneNode*> s;
-      std::copy(test.begin(),test.end(),std::inserter(s,s.begin()));
-      cdebug("s:"<<s.size());
-      }*/
 
       Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
       mNodes.erase(i);
       mNodeSet.erase(node);
       node->setScene(0);
-      //      cdebug("size:"<<mTree->size());
       mTree->remove(node);
-      //      cdebug("after size:"<<mTree->size());
-      //      mTree->remove(node);
-      //      cdebug("after size:"<<mTree->size());
-
-      /*      std::list<SceneNode*> test=mTree->getAll();
-      cdebug("test:"<<test.size());
-      std::set<SceneNode*> s;
-      std::copy(test.begin(),test.end(),std::inserter(s,s.begin()));
-      cdebug("s:"<<s.size());
-      assert(std::find(test.begin(),test.end(),node)==test.end());*/
     }
   else
     {
-      cdebug("DONT KNOW");
+      #warning "this case should be thought of!"
     }
 }
 
@@ -423,11 +405,6 @@ void Scene::initScene()
   glDisable(GL_LIGHT5);
 
   glLoadMatrixf(cameraViewMatrix);
-  
-  //  glBindTexture(GL_TEXTURE_2D,0);
-
-  //  calcCameraView();
-  
 }
 
 AGMatrix4 Scene::getFrustum()
@@ -514,13 +491,6 @@ void Scene::init()
   glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
   //  calcCameraView();
 }
-
-/*
-void Scene::mapChanged()
-{
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    (*i)->mapChanged();
-    }*/
 
 AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 {
@@ -617,7 +587,7 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
       if (*ptr < minZ) {
 	numberOfNames = names;
 	minZ = *ptr;
-	//	cdebug("minz:"<<minZ);
+
 	ptrNames = ptr+2;
 
 	GLuint *mptr=ptrNames;

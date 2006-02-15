@@ -35096,6 +35096,37 @@ _wrap_AGInternalSurface_surface_get(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGInternalSurface_version_set(int argc, VALUE *argv, VALUE self) {
+    AGInternalSurface *arg1 = (AGInternalSurface *) 0 ;
+    size_t arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGInternalSurface, 0);
+    arg2 = NUM2ULONG(argv[0]);
+    if (arg1) (arg1)->version = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGInternalSurface_version_get(int argc, VALUE *argv, VALUE self) {
+    AGInternalSurface *arg1 = (AGInternalSurface *) 0 ;
+    size_t result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGInternalSurface, 0);
+    result =  ((arg1)->version);
+    
+    vresult = UINT2NUM(result);
+    return vresult;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_AGInternalSurface_allocate(VALUE self) {
@@ -45091,6 +45122,8 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGInternalSurface.klass, "glTexture", VALUEFUNC(_wrap_AGInternalSurface_glTexture_get), -1);
     rb_define_method(cAGInternalSurface.klass, "surface=", VALUEFUNC(_wrap_AGInternalSurface_surface_set), -1);
     rb_define_method(cAGInternalSurface.klass, "surface", VALUEFUNC(_wrap_AGInternalSurface_surface_get), -1);
+    rb_define_method(cAGInternalSurface.klass, "version=", VALUEFUNC(_wrap_AGInternalSurface_version_set), -1);
+    rb_define_method(cAGInternalSurface.klass, "version", VALUEFUNC(_wrap_AGInternalSurface_version_get), -1);
     cAGInternalSurface.mark = 0;
     cAGInternalSurface.destroy = (void (*)(void *)) free_AGInternalSurface;
     rb_define_module_function(mLibantargisgui, "disown_AGSurface", VALUEFUNC(_wrap_disown_AGSurface), -1);

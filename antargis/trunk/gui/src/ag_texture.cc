@@ -53,11 +53,13 @@ AGTexture::AGTexture(const AGTexture &t)
 
   w=t.w;
   h=t.h;
+  version=t.version;
   getSurfaceManager()->registerMe(this);
 }
 
 AGTexture::AGTexture()
 {
+  version=0;
   w=h=0;
   s=0;
   m3d=false;
@@ -71,6 +73,7 @@ AGTexture::AGTexture()
 AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
 {
   m3d=0;
+  version=0;
   mTexture=0;
   mSDLTexture=0;
   mTextureUsed=false;
@@ -82,6 +85,7 @@ AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
 
 AGTexture::AGTexture(const AGSurface &pSurface, bool p3d)
 {
+  version=0;
   w=pSurface.width();
   h=pSurface.height();
   m3d=p3d;
@@ -158,7 +162,7 @@ AGGLTexture *AGTexture::glTexture()
   if(mTexture==0)
     {
       if(s)
-	if(s->glTexture)
+	if(s->glTexture && version==s->version)
 	  mTexture=s->glTexture;
       if(!mTexture)
 	{
@@ -170,6 +174,7 @@ AGGLTexture *AGTexture::glTexture()
 	    {
 	      mTexture->setSurface(s);
 	      s->glTexture=mTexture;
+	      version=s->version;
 	    }
 	}
     }
@@ -204,12 +209,11 @@ void AGTexture::beginPaint()
       c.setTexture(glTexture());
       c.setCulling(false);
       c.begin();
-      //      bindTexture();
 
       if(false)
 	{
 	  float w=mTexture->width(),h=mTexture->height();
-	  //      glDisable(GL_CULL_FACE);
+	  glDisable(GL_CULL_FACE);
 	  //      glColor4f(1,1,1,1);
 	  glBegin(GL_QUADS);
 	  glTexCoord2f(0,0);
@@ -234,6 +238,9 @@ void AGTexture::beginPaint()
       glScalef(1,-1,1);
       //      cdebug(getScreen().getHeight());
       glTranslatef(0,-(int)getScreen().getHeight(),0);
+
+      mPainting=true;
+      blit(*this,getRect().origin(),getRect().origin());
 	    //glTranslatef(0,-480,0);
       //      glScalef(0.5,0.5,0.5);
       //      glScalef(1,0.5,1);
@@ -255,6 +262,7 @@ void AGTexture::endPaint()
 
       //      getScreen().flip();
       //      SDL_Delay(1000);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
     }
@@ -268,23 +276,30 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
     {
       AGRenderContext rc;
       rc.begin();
+      float f=0xFF;
+      rc.setColor(AGVector4(c.r/f,c.g/f,c.b/f,c.a/f));
       assert(mTexture);
-      //      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
-      getScreen().putPixel(x,y,c);
-      // use screen-functions
-      //      y=(mTexture->height()-1)-y;
-      //      getScreen().putPixel(x,(getScreen().getHeight()-1)-y,c);
+      rc.begin();
+      /*
+      getScreen().putPixel(x,y-1,c);
+
       AGColor pc=c;
       if(false)
       {
+	
 	int X=x;
-	int Y=y;
+	int Y=h-y;
 	Uint32 c;
 	c=(pc.r<<24)|(pc.g<<16)|(pc.b<<8)|pc.a;
 
 	glRasterPos2i((int)X,(int)Y);
 	glDrawPixels(1,1,GL_RGBA,GL_UNSIGNED_INT_8_8_8_8,&c);
       }
+      */
+      glBegin(GL_POINTS);
+      glVertex2f(x,getScreen().getHeight()-y);
+      glEnd();
+	      
     }
   else
     {

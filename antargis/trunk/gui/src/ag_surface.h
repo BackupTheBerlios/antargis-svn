@@ -45,6 +45,7 @@ struct AGInternalSurface
   AGInternalSurface  *sdlTexture;
   AGGLTexture *glTexture;
   SDL_Surface *surface;
+  size_t version;
 
   AGInternalSurface();
   ~AGInternalSurface();
@@ -101,6 +102,7 @@ class AGSurface:public AGPaintTarget
   AGInternalSurface *s;
 
   friend class AGFontEngine;
+  size_t mVersion;
 
 };
 

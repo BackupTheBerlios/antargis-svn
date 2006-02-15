@@ -84,7 +84,7 @@ AGRenderContext *AGRenderContext::getCurrent()
 
 void AGRenderContext::begin()
 {
-#ifdef FASTCONTEXT
+#ifndef FASTCONTEXT
   if(mColor)
     {
       glEnable(GL_COLOR_MATERIAL);

@@ -29,9 +29,17 @@ puts "MenuTest"
 
 main=AGMain.new(640,480,32,false,true)
 
-#main.changeRes(640,480,32,false,true)
-
 app=TestApp.new(false)
+
+class TestWidget<AGWidget
+	def initialize(p,r)
+		super
+	end
+	def draw(p)
+		p.fillRect(AGRect.new(0,0,300,300),AGColor.new(0xFF,0,0))
+		super
+	end
+end
 
 
 if false
@@ -41,10 +49,15 @@ if false
 	button.setTheme("antButton")
 	sc.addChild(button)
 	app.setMainWidget(sc)
-else
-	
+elsif false
 	button=AGButton.new(nil,AGRect.new(10,20,200,100),"")
 	button.setTheme("antButton")
 	app.setMainWidget(button)
+else
+	t=TestWidget.new(nil,AGRect.new(9,19,202,102))
+	button=AGButton.new(t,AGRect.new(1,1,200,100),"")
+	button.setTheme("antButton")
+	t.addChild(button)
+	app.setMainWidget(t)
 end
 app.run

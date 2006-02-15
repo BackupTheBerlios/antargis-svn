@@ -1,5 +1,6 @@
 #include "minimap.h"
 #include <ag_layoutfactory.h>
+#include <ag_screen.h>
 
 #define MAP_BORDER
 
@@ -10,11 +11,17 @@ MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
 {
   mMapBorder=20;
   mScene=0;
-  mTexture=AGTexture(mSurface);////////getTextureManager()->makeTexture(mSurface);
+  mTexture=new AGTexture(mSurface);////////getTextureManager()->makeTexture(mSurface);
   //  mapChanged();
   setMap(mMap);
     
 }
+
+MiniMap::~MiniMap()
+{
+  delete mTexture;
+}
+
 
 bool MiniMap::mapChangedComplete(AGEvent *e)
 {
@@ -65,7 +72,18 @@ void MiniMap::mapChangedP(bool forceFull=false)
       y1=height()-1;
     }
   else
-    p=new AGPainter(mTexture);
+    {
+      p=new AGPainter(*mTexture);
+      inmem=false;
+
+      //      p->fillRect(AGRect(0,0,300,300),AGColor(0xFF,0,0));
+      //      p->blit(*mTexture,mTexture->getRect());
+
+      //      getScreen().flip();
+      //      SDL_Delay(1000);
+    }
+
+  
 
   AGVector3 light(-1,1,1);
   light.normalize();
@@ -126,16 +144,21 @@ void MiniMap::mapChangedP(bool forceFull=false)
   if(inmem)
     {
       mSurface.save("sicke.png");
-      mTexture=AGTexture(mSurface);//getTextureManager()->makeTexture(mSurface);
-      TRACE;
+      cdebug(mTexture);
+      delete mTexture;
+      mTexture=new AGTexture(mSurface);
+      cdebug(mTexture);
+      CTRACE;
     }
   return;
 }
 
 void MiniMap::draw(AGPainter &p)
 {
+  CTRACE;
   AGRect m=getRect().origin();
-  p.blit(mTexture,m);
+  cdebug(mTexture<<"   "<<m);
+  p.blit(*mTexture,m);
 
   drawEntities(p);
 

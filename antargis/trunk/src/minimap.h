@@ -11,6 +11,7 @@ class MiniMap:public AGWidget
 {
  public:
   MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap);
+  virtual ~MiniMap();
   
   bool mapChanged(AGEvent *e);
   bool mapChangedComplete(AGEvent *e);
@@ -34,7 +35,7 @@ class MiniMap:public AGWidget
   float mMapBorder;
   AntMap *mMap;
   Scene *mScene;
-  AGTexture mTexture;
+  AGTexture *mTexture;
   AGSurface mSurface;
 };
 

@@ -13,7 +13,7 @@ class Black<AGWidget
 		@alpha=a
 	end
 	def draw(painter)
-		painter.drawRect(@r,AGColor.new(0,0,0,(0xFF*@alpha).to_i))
+		painter.fillRect(@r,AGColor.new(0,0,0,(0xFF*@alpha).to_i))
 	end
 end
 
@@ -24,10 +24,9 @@ class IntroApp<AGApplication
 		
 		@pics=["data/gui/rough_lands.png","data/gui/strong_heroes.png","data/gui/logoGold.png","data/gui/your_mission.png","data/gui/unify_the_people.png","data/gui/castle_small.png"]
 		
-		@surfaces=@pics.collect{|x|getSurfaceManager.loadSurface(x)}
+		@surfaces=@pics.collect{|x|AGSurface.load(x)}
 		@s=0
-		
-		@img=AGImage.new(nil,AGPoint.new(0,0),@surfaces[0],false,AGRect.new(0,0,1024,768))
+		@img=AGImage.new(nil,AGRect.new(0,0,1024,768),@surfaces[0],false) #,AGRect.new(0,0,1024,768))
 		@black=Black.new(@img,AGRect.new(0,0,1024,768))
 		@img.addChild(@black)
 		setMainWidget(@img)

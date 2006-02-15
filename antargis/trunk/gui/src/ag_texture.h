@@ -95,6 +95,8 @@ class AGTexture:public AGPaintTarget
 
   AGInternalSurface *s;
   AGInternalSurface *mSDLTexture;
+
+  size_t version;
   
 
   friend class AGTexturePainter;

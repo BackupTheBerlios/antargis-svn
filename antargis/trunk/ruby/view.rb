@@ -48,7 +48,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def getHeroScreenPos(hero)
 		pos=hero.getPos3D+AGVector3.new(0,0,2)
 		sp=getScene.getPosition(AGVector4.new(pos,1))
-		return AGRect.new(sp.x-50,sp.y-30,100,30)
+		return AGRect.new(sp.x-50,sp.y-45,100,40)
 	end
 	
 	def setupHeroDisplay
@@ -75,8 +75,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def playStory(story)
 		
 	end
-
-
 
 
 	def eventHover(list,button)
@@ -442,6 +440,10 @@ class AntNameDisplay<AGWidget
 		@energy=e
 		updateRects
 	end
+
+	def setRect(r)
+		super(AGRect.new(r.x.to_i,r.y.to_i,r.w.to_i,r.h.to_i))
+	end
 	
 	def drawAfter(p)
 		setEnergy(@hero.getEnergy)
@@ -458,8 +460,8 @@ class AntNameDisplay<AGWidget
 	end
 	private
 	def updateRects
-		@cr1=AGRect.new(@cr.x,@cr.y,(@cr.width*@energy).to_i,@cr.height/2)
-		@cr2=AGRect.new(@cr.x,@cr.y+@cr.height/2,(@cr.width*@energy).to_i,@cr.height/2)
+		@cr1=AGRect.new(@cr.x.to_i,@cr.y.to_i,(@cr.width*@energy).to_i,@cr.height/2)
+		@cr2=AGRect.new(@cr.x.to_i,(@cr.y+@cr.height/2).to_i,(@cr.width*@energy).to_i,@cr.height/2)
 	end
 	def updateColor
 		if @hero.getPlayer==getMap.getPlayer

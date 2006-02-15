@@ -123,7 +123,7 @@ class CutScene
 				imageName=c.get("filename")
 				screen[:imageName]=imageName
 				if imageName
-					screen[:image]=getSurfaceManager.loadSurface(imageName)
+					screen[:image]=AGSurface.load(imageName)
 				end
 			}
 			s.getChildren("text").each{|c|
@@ -159,8 +159,8 @@ class Campaign
 		
 		@name=@xmlRoot.get("name")
 		@imageName=@xmlRoot.get("image")
-		@image=getSurfaceManager.loadSurface(@imageName)
-		@texture=getTextureManager.makeTexture(@image)
+		@image=AGSurface.load(@imageName)
+		@texture=AGTexture.new(@image)
 		@description=@xmlRoot.get("description")
 		@partID=@xmlRoot.get("part").to_i
 		

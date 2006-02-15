@@ -116,6 +116,7 @@ AGSurfaceManager *getSurfaceManager()
 
 void AGSurfaceManager::cleanup()
 {
+  return;
   size_t oldTexMem=getUsedTexMem();
   if(oldTexMem<16000000)
     return;

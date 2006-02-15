@@ -27,7 +27,6 @@
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false)
 {
   getSurfaceManager()->registerMe(this);
-  //  CTRACE;
   glGenTextures( 1, &mID);
   glBindTexture( GL_TEXTURE_2D,mID);
 
@@ -36,18 +35,12 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  /*
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP);*/
   assertGL;
 }
 AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D),m3d(true)
 {
   getSurfaceManager()->registerMe(this);
-  {
-    //    CTRACE;
-  }
+
   glGenTextures( 1, &mID);
   glBindTexture( GL_TEXTURE_3D,mID);
 
@@ -56,10 +49,6 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D)
 
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  /*
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP);*/
   assertGL;
 }
 
@@ -72,7 +61,6 @@ AGGLTexture::~AGGLTexture()
 
 void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset)
 {
-  CTRACE;
   GLint format;
 
   SDL_Surface *surface=pSurface->surface;
@@ -110,11 +98,6 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
     {
       assertGL;
       
-      cdebug(offset);
-      cdebug(surface->w<<"  "<<surface->h);
-      cdebug(w<<"  "<<h);
-      cdebug(surface);
-      cdebug(surface->pixels);
       glTexSubImage2D(GL_TEXTURE_2D, 0, int(offset[0]), int(offset[1]),
 		      surface->w, surface->h, format, GL_UNSIGNED_BYTE,
 		      surface->pixels);

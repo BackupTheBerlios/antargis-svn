@@ -30,36 +30,40 @@ puts "MenuTest"
 class MyWidget<AGWidget
 	def initialize(p,r)
 		super
-		surface=AGSurface.new(128,128)
+		surface=AGSurface.new(64,64)
 		
-		for x in 0..64
-			for y in 0..64
+		for x in 0..31
+			for y in 0..31
 				surface.putPixel(x,y,AGColor.new(0xFF,0,0))
-				surface.putPixel(x+64,y+64,AGColor.new(0,0xFF,0))
+				surface.putPixel(x+32,y+32,AGColor.new(0,0xFF,0))
 			end
 		end
-		test=AGTexture.new(surface)
-		@tex=AGTexture.new(64,64) #getTextureManager.makeTexture(surface)
+		@tex=AGTexture.new(surface)
+		#return
+		#@tex=AGTexture.new(64,64) #getTextureManager.makeTexture(surface)
 		#@tex=AGTexture.new(surface)
 		#return
 		@tex.beginPaint
-		@tex.blit(test,AGRect.new(0,0,128,128),AGRect.new(0,0,128,128))
-
-		for x in 33..63
-			for y in 0..32
+		#@tex.blit(test,AGRect.new(0,0,128,128),AGRect.new(0,0,128,128))
+		#@tex.endPaint
+		#return
+		for x in 32..63
+			for y in 0..31
 				@tex.putPixel(x,y,AGColor.new(0,0,0xFF,0xFF))
 			end
 		end
-		for x in 0..16
-			for y in 0..16
+		for x in 0..15
+			for y in 0..15
 				@tex.putPixel(x,y,AGColor.new(0xFF,0xFF,0xFF,0xFF))
 			end
 		end
 		@tex.endPaint
 	end
 	def draw(p)
-		p.fillRect(AGRect.new(0,0,64,64),AGColor.new(0,0,0))
+		p.fillRect(AGRect.new(0,0,65,65),AGColor.new(0xFF,0,0xFF))
+		p.fillRect(AGRect.new(0,0,64,64),AGColor.new(0xFF,0xFF,0))
 		p.blit(@tex,@tex.getRect.origin)
+		p.putPixel(AGPoint.new(0,0),AGColor.new(0,0,0))
 	end
 end
 
@@ -67,8 +71,6 @@ main=AGMain.new(640,480,32,false,true)
 
 app=TestApp.new(false)
 
-sc=AGScreenWidget.new
-
-sc.addChild(MyWidget.new(sc,AGRect.new(0,0,500,500)))
-app.setMainWidget(sc)
+m=MyWidget.new(nil,AGRect.new(1,1,500,500))
+app.setMainWidget(m)
 app.run

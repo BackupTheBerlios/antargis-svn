@@ -52,15 +52,8 @@ class AntGameApp < AntRubyEditView
 		
 		puts "LAYOUTNAME:"
 		puts @layout.getName
-		#puts @layout.getChild("mainView").getName
 		$screen=@layout
 		
-#		initDebug
-		
-		#storyTalk("Welcome","Welcome to Battles of Antargis")
-		#test
-#		getMap.endChange
- 		#@mainWidget=@layout
 		sigGenerate
 	end
 	
@@ -86,52 +79,13 @@ class AntGameApp < AntRubyEditView
 		
 	end
 	
-	#def initDebug
-	#	@debug=AGLayout.new(@layout,loadFile("debug.xml"))
-	#	@layout.addChild(@debug)
-	#	addHandler(@debug.getChild("load"),:sigClick,:load)
-	#	addHandler(@debug.getChild("test1"),:sigClick,:test)
-	#	addHandler(@debug.getChild("save"),:sigClick,:testsave)
-	#end
-	
-	##def storyTalk(title,text)
-	#	@story=AntStoryTalk.new(@layout)
-	#	@layout.addChild(@story)
-	#	@story.setText(text)
-	#	@story.setTitle(title)
-	#end
-
 	def eventFrame(time)
-		#@miniMap.mapChanged
 		super(time)
-		# prevent view from updating each frame
-		#if getMap.updated or getMap.heightChanged
-		#	getMap.move(0)
-		#end
 		getScene.advance(time)
-		return
-		if $fc==nil then 
-			$fc=0 
-			$elaps=0
-		end
-		if $fc>30 then
-			puts "FPS:"+($fc/$elaps).to_s
-			$fc=0
-			$elaps=0
-		end
-		$fc+=1
-		$elaps+=time
-		getMap().move(time)
-		
-		return true
-	end
-	def eventFrameEnd(time)
-		#puts "EVENT FRAME END"
-		#getMap.frameEnd
 	end
 	
 	def eventIdle
-#		delay(20)
+		delay(20)
 	end
 	
 	# signals	
@@ -160,11 +114,6 @@ class AntGameApp < AntRubyEditView
 	end
 	
 end
-
-#main=AGMain.new(1024,768,32,false,true)
-
-#main.changeRes(1024,768,32,false,true)
-#main.changeRes(1400,1050,32,true,true)
 
 app=AntGameApp.new(1024,768)
 if ARGV[0]

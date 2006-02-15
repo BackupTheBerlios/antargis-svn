@@ -112,6 +112,7 @@ AGInternalSurface::AGInternalSurface()
   glTexture=0;
   surface=0;
   getSurfaceManager()->registerMe(this);
+  version=1;
 }
 
 AGInternalSurface::~AGInternalSurface()
@@ -201,6 +202,7 @@ AGSurface &AGSurface::operator=(const AGSurface &p)
 void AGSurface::putPixel(int x,int y,const AGColor &c)
 {
   sge_PutPixel(s->surface,x,y,color(c));
+  s->version++;
 }
 
 AGColor AGSurface::getPixel(int x,int y) const
@@ -268,17 +270,20 @@ void AGSurface::drawGradient(const AGRect& rect, const AGColor& ul, const AGColo
 {
   CHECK_ZERO(s);
   AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
+  s->version++;
 }
 
 void AGSurface::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
   AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
+  s->version++;
 }
 void AGSurface::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
 {
   CHECK_ZERO(s);
   AGDrawBorder(s->surface,rect,W,c1,c2);
+  s->version++;
 }
 
 void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
@@ -300,6 +305,7 @@ void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &
 	sge_PutPixel(ds,dx,dy,c);
 
       }
+  s->version++;
 }
 
 AGInternalSurface *AGSurface::surface() const

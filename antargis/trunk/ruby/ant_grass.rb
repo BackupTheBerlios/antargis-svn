@@ -23,15 +23,15 @@ def getGrassMeshData(size,many=4,texture=nil,bush=false)
 	mv3.c=AGVector4.new(1,1,1,1)
 	
 	if bush
-		mv0.t=AGVector2.new(0,0)
-		mv1.t=AGVector2.new(1,0)
-		mv2.t=AGVector2.new(1,0.5)
-		mv3.t=AGVector2.new(0,0.5)
+		mv0.t=AGVector2.new(0,1-0)
+		mv1.t=AGVector2.new(1,1-0)
+		mv2.t=AGVector2.new(1,1-0.5)
+		mv3.t=AGVector2.new(0,1-0.5)
 	else
-		mv0.t=AGVector2.new(0,0)
-		mv1.t=AGVector2.new(1,0)
-		mv2.t=AGVector2.new(1,1)
-		mv3.t=AGVector2.new(0,1)
+		mv0.t=AGVector2.new(0,1-0)
+		mv1.t=AGVector2.new(1,1-0)
+		mv2.t=AGVector2.new(1,1-1)
+		mv3.t=AGVector2.new(0,1-1)
 	end
 	
 	w=size
@@ -101,10 +101,10 @@ def getGrassMeshData(size,many=4,texture=nil,bush=false)
  	opt.add(mv3)
 	
 	if bush
-		mv0.t=AGVector2.new(0,0.5)
-		mv1.t=AGVector2.new(1,0.5)
-		mv2.t=AGVector2.new(1,1)
-		mv3.t=AGVector2.new(0,1)
+		mv0.t=AGVector2.new(0,1-0.5)
+		mv1.t=AGVector2.new(1,1-0.5)
+		mv2.t=AGVector2.new(1,1-1)
+		mv3.t=AGVector2.new(0,1-1)
 		mv0.n=AGVector3.new(0,0,1)
 		mv1.n=AGVector3.new(0,0,1)
 		mv2.n=AGVector3.new(0,0,1)

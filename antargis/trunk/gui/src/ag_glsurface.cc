@@ -80,9 +80,7 @@ void initGUIView(int w,int h)
 
 void myFlip()
 {
-  //  TRACE;
   SDL_GL_SwapBuffers();
-//  SDL_Delay(10);
 }
 
 AGGLScreen::AGGLScreen(int W,int H):
@@ -129,8 +127,7 @@ void AGGLScreen::begin()
   glDisable(GL_LIGHTING);
   glEnable(GL_TEXTURE_2D);
   glShadeModel(GL_SMOOTH);
-  // glClearColor(0.0f,0.0f,0.0f,0.0f); // clear bgcolor
-  //  glClearDepth(1.0f);      // clear depth buffer
+
   glEnable(GL_DEPTH_TEST); // enable depth test
   glDepthFunc(GL_LEQUAL); // set type depth test
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
@@ -144,13 +141,10 @@ void AGGLScreen::begin()
 
   ratio = ( float )w / ( float )h;
 
-  //  gluPerspective( 45.0f, ratio, 1.0f, 100.0f );
-
   gluOrtho2D(0,w,0,h);
 
   glMatrixMode( GL_MODELVIEW );
   glLoadIdentity( );
-
 
   glEnable( GL_BLEND );
   glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
@@ -158,9 +152,6 @@ void AGGLScreen::begin()
   glDisable(GL_DEPTH_TEST); // enable depth test
 
   glDepthMask(false);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//NEAREST);//LINEAR);
-  //  glEnable(GL_COLOR_MATERIAL);
 }
 
 void AGGLScreen::flip()
@@ -202,13 +193,14 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
   int h2=std::min((int)pRect.h(),pSource.height());
 
   float x0=pRect.x();
-  float y0=h-1-pRect.y();
+  float y0=h-pRect.y();
   float x1=pRect.x()+w2;
-  float y1=h-1-(pRect.y()+h2);
+  float y1=h-(pRect.y()+h2);
 
   AGRenderContext context;
   context.setCulling(false);
   context.setTexture(const_cast<AGTexture&>(pSource).glTexture());
+  context.setDepthTest(false);
   if(pColor.a>0)
     context.setColor(pColor);
   context.begin();
@@ -264,9 +256,12 @@ void AGGLScreen::fillRect(const AGRect &pRect,const AGColor &c)
   float x1=pRect.x()+pRect.w();
   float y1=h-pRect.y()-pRect.h();
 
+  //  cdebug(pRect<<"  "<<c);
   AGRenderContext context;
   context.setColor(c);
   context.setCulling(false);
+  context.setAlpha(0,GL_NONE);
+  context.setDepthTest(false);
   context.begin();
 
   // turned
@@ -295,14 +290,15 @@ void glColor(const AGColor &c)
 void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   float x0=pRect.x();
-  float y0=(h-1)-pRect.y();
+  float y0=(h)-pRect.y();
   float x1=pRect.x()+pRect.w();
-  float y1=(h-1)-(pRect.y()+pRect.h());
+  float y1=(h)-(pRect.y()+pRect.h());
 
   // turned
   AGRenderContext context;
   context.setColor(AGVector4(1,1,1,1));
   context.setCulling(false);
+  context.setDepthTest(false);
 
 #warning "maybe here an error occures - because GL_COLOR_MATERIAL is not activated!"
   context.begin();
@@ -336,6 +332,7 @@ void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const A
   AGRenderContext context;
   context.setColor(c1);
   context.setCulling(false);
+  context.setDepthTest(false);
   context.begin();
 
   // left and //top
@@ -411,6 +408,7 @@ void AGGLScreen::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
 {
   AGRenderContext context;
   context.setColor(c);
+  context.setDepthTest(false);
   context.begin();
 
   glLineWidth(2.0f);
@@ -424,6 +422,7 @@ void AGGLScreen::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const 
 {
   AGRenderContext c;
   c.setTexture(const_cast<AGTexture&>(pSource).glTexture());
+  c.setDepthTest(false);
   c.begin();
 
   glBegin(GL_TRIANGLES);
