@@ -26,6 +26,7 @@
 #include <iostream>
 
 class AGSurface;
+class AGVector4;
 
 class AGColor:public SDL_Color
 {
@@ -33,6 +34,7 @@ class AGColor:public SDL_Color
   AGColor(int pr,int pg,int pb,int pa=255);
   
   AGColor(const AGColor &c);
+  AGColor(const AGVector4 &v);
   AGColor(Uint32 c,const AGSurface &pSurface);
   AGColor(const std::string &s);
 
@@ -47,6 +49,8 @@ class AGColor:public SDL_Color
   Uint32 mapRGB(SDL_PixelFormat *f) const;
 
   std::string toString() const;
+
+  AGVector4 toVec() const;
 
   AGColor grey() const;
 

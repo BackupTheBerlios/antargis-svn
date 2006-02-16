@@ -25,6 +25,7 @@
 #include "ag_debug.h"
 #include "ag_image.h"
 #include "ag_border.h"
+#include "ag_glsurface.h"
 
 using namespace std;
 
@@ -50,7 +51,8 @@ AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int
   //  cdebug("borderWidth:"<<borderWidth);
   mEnabled=true;
 
-  setCaching(true);
+  if(opengl())
+    setCaching(true);
 }
 
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)

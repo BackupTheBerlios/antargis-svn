@@ -38,9 +38,12 @@ class AGImage:public AGWidget
   void useTextures();
   //  void setSourceRect(const AGRect &pRect);
 
+  void setCenter(bool c);
+
  private:
   AGTexture mTexture;
   bool mTile;
+  bool mCenter;
   AGRect mSrcRect;
 };
 

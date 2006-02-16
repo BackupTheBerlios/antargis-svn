@@ -26244,6 +26244,21 @@ _wrap_new_AGColor__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_AGColor__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    AGVector4 *arg1 = 0 ;
+    AGColor *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector4, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AGColor *)new AGColor((AGVector4 const &)*arg1);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_new_AGColor__SWIG_4(int argc, VALUE *argv, VALUE self) {
     Uint32 arg1 ;
     AGSurface *arg2 = 0 ;
     AGColor *result;
@@ -26264,7 +26279,7 @@ _wrap_new_AGColor__SWIG_3(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGColor__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGColor__SWIG_5(int argc, VALUE *argv, VALUE self) {
     std::string *arg1 = 0 ;
     AGColor *result;
     std::string temp1 ;
@@ -26305,7 +26320,7 @@ _wrap_AGColor_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGColor__SWIG_5(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGColor__SWIG_6(int argc, VALUE *argv, VALUE self) {
     AGColor *result;
     
     if ((argc < 0) || (argc > 0))
@@ -26327,7 +26342,17 @@ static VALUE _wrap_new_AGColor(int nargs, VALUE *args, VALUE self) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
-        return _wrap_new_AGColor__SWIG_5(nargs, args, self);
+        return _wrap_new_AGColor__SWIG_6(nargs, args, self);
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector4, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_AGColor__SWIG_3(nargs, args, self);
+        }
     }
     if (argc == 1) {
         int _v;
@@ -26345,7 +26370,7 @@ static VALUE _wrap_new_AGColor(int nargs, VALUE *args, VALUE self) {
             _v = (TYPE(argv[0]) == T_STRING) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_AGColor__SWIG_4(nargs, args, self);
+            return _wrap_new_AGColor__SWIG_5(nargs, args, self);
         }
     }
     if (argc == 2) {
@@ -26360,7 +26385,7 @@ static VALUE _wrap_new_AGColor(int nargs, VALUE *args, VALUE self) {
                 _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_AGSurface, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_AGColor__SWIG_3(nargs, args, self);
+                return _wrap_new_AGColor__SWIG_4(nargs, args, self);
             }
         }
     }
@@ -26492,6 +26517,26 @@ _wrap_AGColor_toString(int argc, VALUE *argv, VALUE self) {
     
     {
         vresult = rb_str_new((&result)->c_str(),(&result)->length());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGColor_toVec(int argc, VALUE *argv, VALUE self) {
+    AGColor *arg1 = (AGColor *) 0 ;
+    AGVector4 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGColor, 0);
+    result = ((AGColor const *)arg1)->toVec();
+    
+    {
+        AGVector4 * resultptr;
+        resultptr = new AGVector4((AGVector4 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector4, 1);
     }
     return vresult;
 }
@@ -36311,6 +36356,21 @@ _wrap_AGImage_useTextures(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGImage_setCenter(int argc, VALUE *argv, VALUE self) {
+    AGImage *arg1 = (AGImage *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGImage, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setCenter(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_AGImage(int argc, VALUE *argv, VALUE self) {
     AGImage *arg1 = (AGImage *) 0 ;
     
@@ -44653,6 +44713,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGColor.klass, "+", VALUEFUNC(_wrap_AGColor___add__), -1);
     rb_define_method(cAGColor.klass, "mapRGB", VALUEFUNC(_wrap_AGColor_mapRGB), -1);
     rb_define_method(cAGColor.klass, "toString", VALUEFUNC(_wrap_AGColor_toString), -1);
+    rb_define_method(cAGColor.klass, "toVec", VALUEFUNC(_wrap_AGColor_toVec), -1);
     rb_define_method(cAGColor.klass, "grey", VALUEFUNC(_wrap_AGColor_grey), -1);
     rb_define_method(cAGColor.klass, "brightness", VALUEFUNC(_wrap_AGColor_brightness), -1);
     rb_define_method(cAGColor.klass, "light", VALUEFUNC(_wrap_AGColor_light), -1);
@@ -45174,6 +45235,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGImage.klass, "setSurface", VALUEFUNC(_wrap_AGImage_setSurface), -1);
     rb_define_method(cAGImage.klass, "setTexture", VALUEFUNC(_wrap_AGImage_setTexture), -1);
     rb_define_method(cAGImage.klass, "useTextures", VALUEFUNC(_wrap_AGImage_useTextures), -1);
+    rb_define_method(cAGImage.klass, "setCenter", VALUEFUNC(_wrap_AGImage_setCenter), -1);
     cAGImage.mark = (void (*)(void *)) general_markfunc;
     cAGImage.destroy = (void (*)(void *)) free_AGImage;
     rb_define_module_function(mLibantargisgui, "disown_AGLayoutCreator", VALUEFUNC(_wrap_disown_AGLayoutCreator), -1);

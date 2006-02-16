@@ -25,6 +25,7 @@ AGImage::AGImage(AGWidget *pParent,const AGRect &r,AGSurface pSurface,bool pTile
   AGWidget(pParent,r),
   mTexture(pSurface),mTile(pTile)
 {
+  mCenter=true;
   //  CTRACE;
   if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
@@ -56,7 +57,8 @@ void AGImage::draw(AGPainter &p)
       
       AGRect mr=getRect().origin();
 
-      mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
+      if(mCenter)
+	mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
 
       p.blit(mTexture,mr);
     }
@@ -76,4 +78,9 @@ void AGImage::setTexture(const AGTexture &pTexture)
 void AGImage::useTextures()
 {
   mTexture.useTexture();
+}
+
+void AGImage::setCenter(bool c)
+{
+  mCenter=c;
 }

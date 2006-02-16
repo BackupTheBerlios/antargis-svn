@@ -24,6 +24,14 @@
 
 #include <sstream>
 
+AGColor::AGColor(const AGVector4 &v)
+{
+  r=(Uint8)(v[0]*0xFF);
+  g=(Uint8)(v[1]*0xFF);
+  b=(Uint8)(v[2]*0xFF);
+  a=(Uint8)(v[3]*0xFF);
+}
+
 AGColor::AGColor(const std::string &s)
 {
   r=g=b=0;
@@ -76,6 +84,13 @@ AGColor::AGColor(const AGColor &c):
   g=c.g;
   b=c.b;
 }
+
+AGVector4 AGColor::toVec() const
+{
+  float f=0xFF;
+  return AGVector4(r/f,g/f,b/f,a/f);
+}
+
 
 /*
 SDL_Color AGColor::sdlColor() const

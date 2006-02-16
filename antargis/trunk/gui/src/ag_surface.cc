@@ -328,12 +328,68 @@ AGSurface AGSurface::load(const std::string &pFilename)
 
 AGSurface AGSurface::scale(int w,int h) const
 {
+  CTRACE;
   AGSurface n(w,h);
+
+  float ow=width();
+  float oh=height();
+
+  bool fast=false;
 
   for(int x=0;x<w;x++)
     for(int y=0;y<h;y++)
       {
-	n.putPixel(x,y,getPixel(x,y));
+	if(fast)
+	  n.putPixel(x,y,getPixel(x*ow/w,y*oh/h));
+	else if(w>ow)
+	  {
+	    // interpolate
+	    float tx=x*ow/w;
+	    float ty=y*oh/h;
+	    
+	    int ix=(int)tx;
+	    int iy=(int)ty;
+
+	    float dx=tx-ix;
+	    float dy=ty-iy;
+
+	    n.putPixel(x,y,
+		       AGColor((getPixel(ix,iy  ).toVec()*(1-dx) + getPixel(ix+1,iy  ).toVec()*dx) * (1-dy)+
+			       (getPixel(ix,iy+1).toVec()*(1-dx) + getPixel(ix+1,iy+1).toVec()*dx) * dy     ));
+
+	    //	    n.putPixel(x,y,AGColor(0xFF,0,0));
+	  }
+	else
+	  {
+	    // integrate
+	    size_t ps=0;
+	    float r,g,b,a;
+	    r=g=b=a=0;
+	    float tx0=x*ow/w;
+	    float ty0=y*oh/h;
+	    float tx1=(x+1)*ow/w;
+	    float ty1=(y+1)*oh/h;
+	    for(int mx=tx0;mx<tx1;mx++)
+	      for(int my=ty0;my<ty1;my++)
+		{
+		  AGColor c=getPixel(mx,my);
+		  r+=c.r;
+		  g+=c.g;
+		  b+=c.b;
+		  a+=c.a;
+		  ps++;
+		}
+	    if(ps>0)
+	      {
+		r/=ps;
+		g/=ps;
+		b/=ps;
+		a/=ps;
+		n.putPixel(x,y,AGColor(r,g,b,a));
+	      }
+
+	    
+	  }
       }
 
   return n;

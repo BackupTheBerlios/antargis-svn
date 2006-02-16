@@ -246,6 +246,17 @@ void AGTexture::beginPaint()
       //      glScalef(1,0.5,1);
       
     }
+  else
+    {
+      // create screen-like surface
+      if(!s)
+	{
+	  AGSurface s(w,h);
+	  *this=AGTexture(s);
+	}
+      sdlTexture();
+    }
+  
   mPainting=true;
 }
 void AGTexture::endPaint()
@@ -329,7 +340,15 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &
       getScreen().blit(pSource,pDest,pSrc);
     }
   else
-    throw std::runtime_error("implement blitting for sdl-texture");
+    {
+      SDL_Rect sr,dr;
+      sr=pSrc.sdl();
+      dr=pDest.sdl();
+      if(pSource.mSDLTexture)
+	SDL_BlitSurface(pSource.mSDLTexture->surface,&sr,mSDLTexture->surface,&dr);
+      else
+	SDL_BlitSurface(pSource.s->surface,&sr,mSDLTexture->surface,&dr);
+    }
 }
 void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
 {
