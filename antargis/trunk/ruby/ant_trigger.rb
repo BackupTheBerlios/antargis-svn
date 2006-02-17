@@ -3,14 +3,19 @@
 class Trigger
 	attr_reader :name, :player
 	def initialize(node)
-		@pos=AGVector2.new
-		@pos.loadXML(node)
-		@radius=node.get("radius").to_f
-		@name=node.get("name")
-		@circle=AGCircle2.new(AGVector3.new(@pos.x,@pos.y,1),@radius)
-		@triggerTime=$systemTime
-		@player=node.get("player")
-		@text=node.get("text")
+		if node.class==Node
+			@pos=AGVector2.new
+			@pos.loadXML(node)
+			@radius=node.get("radius").to_f
+			@name=node.get("name")
+			@circle=AGCircle2.new(AGVector3.new(@pos.x,@pos.y,1),@radius)
+			@triggerTime=$systemTime
+			@player=node.get("player")
+			@text=node.get("text")
+		else
+			@name=node
+			@triggerTime=$systemTime
+		end
 	end
 	def check(hero)
 		if $systemTime-@triggerTime>1 # wait at least a second for repeating trigger

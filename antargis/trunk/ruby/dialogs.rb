@@ -29,14 +29,16 @@ class AntDialog<AGLayout
 	def initialize(parent,filename)
 		super(parent,loadFile(filename))
 		addHandler(getChild("ok"),:sigClick,:sigOk)
-		addHandler(getChild("cancel"),:sigClick,:sigCancel)
+		if getChild("cancel")
+			addHandler(getChild("cancel"),:sigClick,:sigCancel)
+		end
 		#setModal(true)
 	end
-	def sigOk
+	def sigOk(e)
 		sigClose
 	end
-	def sigCancel
-		sigClose
+	def sigCancel(e)
+		sigClose(e)
 	end
 	
 	def eventKeyDown(event)
@@ -50,23 +52,22 @@ class AntDialog<AGLayout
 			sigOk
 		end
 	end
-	def sigClose
+	def sigClose(e)
 		hide
+		sigClosed(e)
 	end
 end
 
 class AntStoryTalk<AntDialog
-	include AGHandler
 	def initialize(parent)
-		puts "story1"
 		super(parent,"data/gui/layout/storytalk.xml")
-		puts "pause"
 		getMap().pause()
-		puts "ok"
-		#addHandler(toAGWindow(getChild("window")),:sigClose,:sigOk)
 		addHandler(getChild("window"),:sigClose,:sigOk)
-		puts "ok2"
-		#addHandler(getChild("ok"),:sigClick,:sigClose)
+		addSignal("sigStoryFinished")
+	end
+	def setFlow(flow)
+		@flow=flow
+		updateText
 	end
 	def setText(text)
 		toAGEdit(getChild("text")).setText(text)
@@ -75,12 +76,26 @@ class AntStoryTalk<AntDialog
 		# it's AGText # FIXME: maybe exchange all AGText usages by AGEdit
 		toAGText(getChild("title")).setText(text)
 	end
+
+	def updateText
+		c=@flow.get
+		if c
+			setTitle(c[0])
+			setText(c[1])
+			return true
+		else
+			return false
+		end
+	end
 	
 	# signals	
 	def sigOk(e)
-		puts "pCaller:"+e.getCaller.getName
-		getMap().unpause()
-		toAGWindow(getChild("window")).close
+		if not updateText
+			sigStoryFinished(e)
+			puts "pCaller:"+e.getCaller.getName
+			getMap().unpause()
+			toAGWindow(getChild("window")).close
+		end
 	end
 end
 

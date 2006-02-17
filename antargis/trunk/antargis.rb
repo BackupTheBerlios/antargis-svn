@@ -34,6 +34,7 @@ require 'ents.rb'
 require 'map.rb'
 require 'view.rb'
 require 'game_result.rb'
+require 'storyflow.rb'
 
 class AntGameApp <AntRubyView
 	attr_accessor :result
@@ -65,6 +66,7 @@ class AntGameApp <AntRubyView
 		end	
 		#@miniMap.mapChangedComplete(AGEvent.new(self,"bla"))
 		setupHeroDisplay
+
 	end
 	
 	
@@ -74,20 +76,15 @@ class AntGameApp <AntRubyView
 		addHandler(@debug.getChild("load"),:sigClick,:load)
 	end
 	
-	def storyTalk(title,text)
-		puts "test1"
+	def storyTalk(flow)
 		@story=AntStoryTalk.new(@layout)
-		puts "test2"
 		@layout.addChild(@story)
-		puts "test3"
-		@story.setText(text)
-		puts "test4"
-		@story.setTitle(title)
-		puts "test5"
-		#addHandler(@story.getChild("
+		@story.setFlow(flow)
+		addHandler(@story,:sigStoryFinished,:storyTalkFinished)
 	end
 
 	def storyTalkFinished
+		getMap.trigger(nil,Trigger.new("storyFinished"))
 	end
 
 	def eventFrame(time)
@@ -155,7 +152,6 @@ def startGame(file="savegames/savegame0.antlvl")
 	return result
 end
 puts ENV["_"]
-#exit
 if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
 	if ARGV.length>0
@@ -166,7 +162,6 @@ if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/
 		end
 	end
 	puts savegame
-	#exit
 	startGame(savegame)	
 end
 puts "huhu"

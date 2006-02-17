@@ -15,7 +15,8 @@ class Level
 	def lostLevel
 		$app=GameResult.new("lost")
 	end
-	def tellStory(title,text)
-		$app.storyTalk(title,text)
+	def tellStory(flow)
+		$app.storyTalk(flow)
+		@story=flow
 	end
 end

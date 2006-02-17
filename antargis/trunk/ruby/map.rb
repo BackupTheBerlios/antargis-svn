@@ -273,7 +273,6 @@ class AntRubyMap<AntMap
 				ret.push(ent)
 			end
 		}
-		#exit
 		return ret
 	end
 	
@@ -293,7 +292,6 @@ class AntRubyMap<AntMap
 				end
 			end
 		}
-		#exit
 		return ret
 	end
 	def playStory(name)

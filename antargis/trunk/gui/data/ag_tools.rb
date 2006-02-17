@@ -59,7 +59,7 @@ module AGHandler
 		end
 		#puts event
 		if object==nil then
-			puts "AGHandler.addHandler: does not exist!"
+			raise "AGHandler.addHandler: object does not exist!"
 		else
 			puts "MY CLASS:",self.class
 			object.send(event).connect(self)
@@ -77,6 +77,9 @@ module AGHandler
 		evName=callerName+":"+e.getName
 		#dputs "EVNAME",evName
 		#dputs @handlers.keys.join(";")
+		puts "SIGNAL"
+		puts callerName,evName
+		puts @handlers.keys.join(",")
 		
 		if @handlers.has_key?(evName) then
 			value=false
@@ -138,7 +141,11 @@ def addSignal(name)
 	eval <<EOT
 class #{self.class}
 	def #{name}(e=nil)
+		puts "SIGNALLLLLLLLLLLLLLLLLLLLLL"
+		puts e
 		if e
+			e.setCaller(self)
+			#x=AGSignal.new(self,"#{name}")
 			return @#{name}.signal(e)
 		else
 			return @#{name}
