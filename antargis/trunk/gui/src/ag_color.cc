@@ -181,8 +181,8 @@ AGColor::AGColor(Uint32 c,const AGSurface &pSurface)
 AGColor &AGColor::operator*=(float f)
 {
   r=(Uint8)((float(r)*f));
-  g=(Uint8)((float(r)*f));
-  b=(Uint8)((float(r)*f));
+  g=(Uint8)((float(g)*f));
+  b=(Uint8)((float(b)*f));
   return *this;
 }
 

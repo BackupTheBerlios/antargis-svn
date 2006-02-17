@@ -23,7 +23,7 @@ class MiniMap:public AGWidget
   virtual bool eventMouseClick(AGEvent *m);
 
  private:
-
+  float getNoise(int x,int y);
 
   AGVector2 toMapCoords(AGVector2 v) const;
   AGVector2 fromMapCoords(AGVector2 v) const;

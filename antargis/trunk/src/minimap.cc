@@ -11,10 +11,8 @@ MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
 {
   mMapBorder=24;
   mScene=0;
-  mTexture=new AGTexture(mSurface);////////getTextureManager()->makeTexture(mSurface);
-  //  mapChanged();
+  mTexture=new AGTexture(mSurface);
   setMap(mMap);
-    
 }
 
 MiniMap::~MiniMap()
@@ -32,17 +30,24 @@ bool MiniMap::mapChangedComplete(AGEvent *e)
   
 bool MiniMap::mapChanged(AGEvent *e)
 {
+  CTRACE;
   mapChangedP(false);
   return false;
 }
 
+float MiniMap::getNoise(int x,int y)
+{
+  return 1.0-((x*87644+y*653635+x*y*153637)%100)/float(1000.0);
+}
+
 void MiniMap::mapChangedP(bool forceFull=false)
 {
+  CTRACE;
   if(!mMap)
     return;
   int w,h;
   int x,y;
-  forceFull=true;
+  //  forceFull=true;
   bool inmem=forceFull;
 
   w=getRect().w();
@@ -52,13 +57,15 @@ void MiniMap::mapChangedP(bool forceFull=false)
   float mw=mMap->getW();
   float mh=mMap->getH();
 
-  int x0=change.x()/mw*w;
-  int y1=change.y()/mh*h;
-  int x1=(change.x()+change.w())/mw*w;
-  int y0=(change.y()+change.h())/mh*h;
+  AGVector2 p0(change[0]),p1(change[1]);
 
-  y0=h-y0;
-  y1=h-y1;
+  AGVector2 sp0(fromMapCoords(p0));
+  AGVector2 sp1(fromMapCoords(p1));
+
+  int x0=std::min(sp0[0],sp1[0]);
+  int x1=std::max(sp0[0],sp1[0]);
+  int y0=std::min(sp0[1],sp1[1]);
+  int y1=std::max(sp0[1],sp1[1]);
 
   AGPainter *p=0;
 
@@ -103,6 +110,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 	    AGColor c(0,0,0xFF);
 
 	    t=mMap->getTerrain(mv[0],mv[1]);
+	    float height=mMap->getHeight(mv[0],mv[1]);
 
 	    AGVector3 n=mMap->getNormalF(mv[0],mv[1]);
 
@@ -115,11 +123,11 @@ void MiniMap::mapChangedP(bool forceFull=false)
 	    else if(t==EARTH)
 	      c=AGColor(0xAA,0x66,0);
 	    else if(t==GRASS)
-	      c=AGColor(0,0xFF,0);
+	      c=AGColor(0,0xaa,0);
 	    else if(t==GRASS2)
-	      c=AGColor(0x55,0xdd,0x55);
-	    else if(t==FOREST)
 	      c=AGColor(0x00,0xdd,0x00);
+	    else if(t==FOREST)
+	      c=AGColor(0x00,0x77,0x00);
 	    else if(t==ROCK)
 	      c=AGColor(0xAA,0xAA,0xAA);
 	    else if(t==ROCK2)
@@ -127,8 +135,14 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
 	    c=c*l;
 
-	    if(mMap->getHeight(mv[0],mv[1])<0)
+	    if(height<=0)
 	      c=c*0.25+AGColor(0,0,0xFF)*0.75;
+	    else if(height<0.2)
+	      c=c*(height*4)+AGColor(0,0,0xFF)*(1-(height*4));
+	    else if(height<0.4)
+	      c=c*0.25+AGColor(0xFF,0x77,0)*0.75; // sand
+	    c*=getNoise(x,y);
+
 	    
 	    p->putPixel(AGVector2(x,y),c);
 	  }
@@ -141,6 +155,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 	    p->putPixel(AGVector2(x,y),AGColor(0xFF,0,0));
 	  }
     }
+
   delete p;
   if(inmem)
     {
@@ -156,9 +171,9 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
 void MiniMap::draw(AGPainter &p)
 {
-  CTRACE;
+  //  CTRACE;
   AGRect2 m=getRect().origin();
-  cdebug(mTexture<<"   "<<m);
+  //  cdebug(mTexture<<"   "<<m);
   p.blit(*mTexture,m);
 
   drawEntities(p);

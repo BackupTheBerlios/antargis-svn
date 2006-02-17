@@ -280,6 +280,9 @@ void HeightMap::loadXML(const Node &node)
   mTerrain->addToScenes();
   mChanges=0;
   mChangeRect=AGRect2(AGVector2(),AGVector2());
+
+
+  sigMapChangedComplete(new AGEvent(this,"mapChangedComplete"));
 }
 
 void HeightMap::newMap(int w,int h)
@@ -303,11 +306,17 @@ void HeightMap::newMap(int w,int h)
 
 void HeightMap::mapChanged()
 {
-  sigMapChanged(new AGEvent(this,"mapChanged"));
-  mTerrain->addToScenes();
-  mTerrain->mapChanged();
-  mChanges=0;
-  mChangeRect=AGRect2(AGVector2(),AGVector2());
+  {
+    CTRACE;
+    sigMapChanged(new AGEvent(this,"mapChanged"));
+  }
+  {
+    CTRACE;
+    mTerrain->addToScenes();
+    //    mTerrain->mapChanged();
+    mChanges=0;
+    mChangeRect=AGRect2(AGVector2(),AGVector2());
+  }
 }
 
 
