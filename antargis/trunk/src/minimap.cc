@@ -117,7 +117,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 	    float l=std::min(1.0f,n*light*0.5f+0.5f);
 	    
 	    if(t==WATER)
-	      c=AGColor(0,0,0xFF);
+	      c=AGColor(0xAA,0xAA,0xFF);
 	    else if(t==SAND)
 	      c=AGColor(0xFF,0x77,0);
 	    else if(t==EARTH)

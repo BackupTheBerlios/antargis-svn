@@ -1,4 +1,4 @@
-<antargisLevel filename="levels/birth1.hmap" height="128" width="128">
+<antargisLevel filename="levels/birth1.hmap" height="128" width="128" scriptfile="levels/birth1.rb" scriptclass='Level1'>
   <antFarm aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.296176780721225" onGround="true">
     <position x="27.2146" y="21.3969" z="1"/>
   </antFarm>
@@ -374,4 +374,11 @@
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="9">
     <position x="88.8599" y="89.4735" z="0.735593"/>
   </antNewTree>
+	<humanPlayer name="Godrin">
+		<hero name="Godrin"/>
+	</humanPlayer>
+	<lazyPlayer name="Bantor">
+		<hero name="Bantor"/>
+	</lazyPlayer>
+	<trigger name="nogo" x="50.9935" y="28.4206"  radius="13"/>
 </antargisLevel>
