@@ -1035,105 +1035,106 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGCollisionData swig_types[10]
 #define SWIGTYPE_p_AGColor swig_types[11]
 #define SWIGTYPE_p_AGColorButton swig_types[12]
-#define SWIGTYPE_p_AGDialog swig_types[13]
-#define SWIGTYPE_p_AGEdit swig_types[14]
-#define SWIGTYPE_p_AGEditLine swig_types[15]
-#define SWIGTYPE_p_AGEvent swig_types[16]
-#define SWIGTYPE_p_AGFont swig_types[17]
-#define SWIGTYPE_p_AGFontEngine swig_types[18]
-#define SWIGTYPE_p_AGFragProgram swig_types[19]
-#define SWIGTYPE_p_AGFrame swig_types[20]
-#define SWIGTYPE_p_AGGLTexture swig_types[21]
-#define SWIGTYPE_p_AGGLWidget swig_types[22]
-#define SWIGTYPE_p_AGHTiler swig_types[23]
-#define SWIGTYPE_p_AGImage swig_types[24]
-#define SWIGTYPE_p_AGInternalSurface swig_types[25]
-#define SWIGTYPE_p_AGLayout swig_types[26]
-#define SWIGTYPE_p_AGLayoutCreator swig_types[27]
-#define SWIGTYPE_p_AGLayoutFactory swig_types[28]
-#define SWIGTYPE_p_AGLine2 swig_types[29]
-#define SWIGTYPE_p_AGLine3 swig_types[30]
-#define SWIGTYPE_p_AGListBox swig_types[31]
-#define SWIGTYPE_p_AGListBoxItem swig_types[32]
-#define SWIGTYPE_p_AGListener swig_types[33]
-#define SWIGTYPE_p_AGMain swig_types[34]
-#define SWIGTYPE_p_AGMatrix3 swig_types[35]
-#define SWIGTYPE_p_AGMatrix4 swig_types[36]
-#define SWIGTYPE_p_AGMenu swig_types[37]
-#define SWIGTYPE_p_AGMenuItem swig_types[38]
-#define SWIGTYPE_p_AGMessageObject swig_types[39]
-#define SWIGTYPE_p_AGMutex swig_types[40]
-#define SWIGTYPE_p_AGPaintTarget swig_types[41]
-#define SWIGTYPE_p_AGPainter swig_types[42]
-#define SWIGTYPE_p_AGPoint3 swig_types[43]
-#define SWIGTYPE_p_AGProjection swig_types[44]
-#define SWIGTYPE_p_AGRadio swig_types[45]
-#define SWIGTYPE_p_AGRadioGroup swig_types[46]
-#define SWIGTYPE_p_AGRect2 swig_types[47]
-#define SWIGTYPE_p_AGRect3 swig_types[48]
-#define SWIGTYPE_p_AGRubyObject swig_types[49]
-#define SWIGTYPE_p_AGScreen swig_types[50]
-#define SWIGTYPE_p_AGScreenWidget swig_types[51]
-#define SWIGTYPE_p_AGShaderParameter swig_types[52]
-#define SWIGTYPE_p_AGShaderProgram swig_types[53]
-#define SWIGTYPE_p_AGSignal swig_types[54]
-#define SWIGTYPE_p_AGSound swig_types[55]
-#define SWIGTYPE_p_AGSubMenu swig_types[56]
-#define SWIGTYPE_p_AGSurface swig_types[57]
-#define SWIGTYPE_p_AGTable swig_types[58]
-#define SWIGTYPE_p_AGText swig_types[59]
-#define SWIGTYPE_p_AGTexture swig_types[60]
-#define SWIGTYPE_p_AGTextureCache swig_types[61]
-#define SWIGTYPE_p_AGTheme swig_types[62]
-#define SWIGTYPE_p_AGTriangle2 swig_types[63]
-#define SWIGTYPE_p_AGTriangle3 swig_types[64]
-#define SWIGTYPE_p_AGVTiler swig_types[65]
-#define SWIGTYPE_p_AGVector2 swig_types[66]
-#define SWIGTYPE_p_AGVector3 swig_types[67]
-#define SWIGTYPE_p_AGVector4 swig_types[68]
-#define SWIGTYPE_p_AGVertexProgram swig_types[69]
-#define SWIGTYPE_p_AGWidget swig_types[70]
-#define SWIGTYPE_p_AGWindow swig_types[71]
-#define SWIGTYPE_p_Attributes swig_types[72]
-#define SWIGTYPE_p_Document swig_types[73]
-#define SWIGTYPE_p_DomParser swig_types[74]
-#define SWIGTYPE_p_GLint swig_types[75]
-#define SWIGTYPE_p_GLuint swig_types[76]
-#define SWIGTYPE_p_Node swig_types[77]
-#define SWIGTYPE_p_NodeVector swig_types[78]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[79]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[80]
-#define SWIGTYPE_p_Parser swig_types[81]
-#define SWIGTYPE_p_SDLKey swig_types[82]
-#define SWIGTYPE_p_SDLMod swig_types[83]
-#define SWIGTYPE_p_SDL_Event swig_types[84]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[85]
-#define SWIGTYPE_p_SDL_Rect swig_types[86]
-#define SWIGTYPE_p_SDL_Surface swig_types[87]
-#define SWIGTYPE_p_Uint32 swig_types[88]
-#define SWIGTYPE_p_Uint8 swig_types[89]
-#define SWIGTYPE_p_const_iterator swig_types[90]
-#define SWIGTYPE_p_float swig_types[91]
-#define SWIGTYPE_p_iterator swig_types[92]
-#define SWIGTYPE_p_p_Node swig_types[93]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[94]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[95]
-#define SWIGTYPE_p_std__ostringstream swig_types[96]
-#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[97]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[98]
-#define SWIGTYPE_p_std__string swig_types[99]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[100]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[101]
-#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[102]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[103]
-#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[104]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[105]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[106]
-#define SWIGTYPE_p_std__vectorTfloat_t swig_types[107]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[108]
-#define SWIGTYPE_p_unsigned_long swig_types[109]
-static swig_type_info *swig_types[111];
-static swig_module_info swig_module = {swig_types, 110, 0, 0, 0, 0};
+#define SWIGTYPE_p_AGDecryptor swig_types[13]
+#define SWIGTYPE_p_AGDialog swig_types[14]
+#define SWIGTYPE_p_AGEdit swig_types[15]
+#define SWIGTYPE_p_AGEditLine swig_types[16]
+#define SWIGTYPE_p_AGEvent swig_types[17]
+#define SWIGTYPE_p_AGFont swig_types[18]
+#define SWIGTYPE_p_AGFontEngine swig_types[19]
+#define SWIGTYPE_p_AGFragProgram swig_types[20]
+#define SWIGTYPE_p_AGFrame swig_types[21]
+#define SWIGTYPE_p_AGGLTexture swig_types[22]
+#define SWIGTYPE_p_AGGLWidget swig_types[23]
+#define SWIGTYPE_p_AGHTiler swig_types[24]
+#define SWIGTYPE_p_AGImage swig_types[25]
+#define SWIGTYPE_p_AGInternalSurface swig_types[26]
+#define SWIGTYPE_p_AGLayout swig_types[27]
+#define SWIGTYPE_p_AGLayoutCreator swig_types[28]
+#define SWIGTYPE_p_AGLayoutFactory swig_types[29]
+#define SWIGTYPE_p_AGLine2 swig_types[30]
+#define SWIGTYPE_p_AGLine3 swig_types[31]
+#define SWIGTYPE_p_AGListBox swig_types[32]
+#define SWIGTYPE_p_AGListBoxItem swig_types[33]
+#define SWIGTYPE_p_AGListener swig_types[34]
+#define SWIGTYPE_p_AGMain swig_types[35]
+#define SWIGTYPE_p_AGMatrix3 swig_types[36]
+#define SWIGTYPE_p_AGMatrix4 swig_types[37]
+#define SWIGTYPE_p_AGMenu swig_types[38]
+#define SWIGTYPE_p_AGMenuItem swig_types[39]
+#define SWIGTYPE_p_AGMessageObject swig_types[40]
+#define SWIGTYPE_p_AGMutex swig_types[41]
+#define SWIGTYPE_p_AGPaintTarget swig_types[42]
+#define SWIGTYPE_p_AGPainter swig_types[43]
+#define SWIGTYPE_p_AGPoint3 swig_types[44]
+#define SWIGTYPE_p_AGProjection swig_types[45]
+#define SWIGTYPE_p_AGRadio swig_types[46]
+#define SWIGTYPE_p_AGRadioGroup swig_types[47]
+#define SWIGTYPE_p_AGRect2 swig_types[48]
+#define SWIGTYPE_p_AGRect3 swig_types[49]
+#define SWIGTYPE_p_AGRubyObject swig_types[50]
+#define SWIGTYPE_p_AGScreen swig_types[51]
+#define SWIGTYPE_p_AGScreenWidget swig_types[52]
+#define SWIGTYPE_p_AGShaderParameter swig_types[53]
+#define SWIGTYPE_p_AGShaderProgram swig_types[54]
+#define SWIGTYPE_p_AGSignal swig_types[55]
+#define SWIGTYPE_p_AGSound swig_types[56]
+#define SWIGTYPE_p_AGSubMenu swig_types[57]
+#define SWIGTYPE_p_AGSurface swig_types[58]
+#define SWIGTYPE_p_AGTable swig_types[59]
+#define SWIGTYPE_p_AGText swig_types[60]
+#define SWIGTYPE_p_AGTexture swig_types[61]
+#define SWIGTYPE_p_AGTextureCache swig_types[62]
+#define SWIGTYPE_p_AGTheme swig_types[63]
+#define SWIGTYPE_p_AGTriangle2 swig_types[64]
+#define SWIGTYPE_p_AGTriangle3 swig_types[65]
+#define SWIGTYPE_p_AGVTiler swig_types[66]
+#define SWIGTYPE_p_AGVector2 swig_types[67]
+#define SWIGTYPE_p_AGVector3 swig_types[68]
+#define SWIGTYPE_p_AGVector4 swig_types[69]
+#define SWIGTYPE_p_AGVertexProgram swig_types[70]
+#define SWIGTYPE_p_AGWidget swig_types[71]
+#define SWIGTYPE_p_AGWindow swig_types[72]
+#define SWIGTYPE_p_Attributes swig_types[73]
+#define SWIGTYPE_p_Document swig_types[74]
+#define SWIGTYPE_p_DomParser swig_types[75]
+#define SWIGTYPE_p_GLint swig_types[76]
+#define SWIGTYPE_p_GLuint swig_types[77]
+#define SWIGTYPE_p_Node swig_types[78]
+#define SWIGTYPE_p_NodeVector swig_types[79]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[80]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[81]
+#define SWIGTYPE_p_Parser swig_types[82]
+#define SWIGTYPE_p_SDLKey swig_types[83]
+#define SWIGTYPE_p_SDLMod swig_types[84]
+#define SWIGTYPE_p_SDL_Event swig_types[85]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[86]
+#define SWIGTYPE_p_SDL_Rect swig_types[87]
+#define SWIGTYPE_p_SDL_Surface swig_types[88]
+#define SWIGTYPE_p_Uint32 swig_types[89]
+#define SWIGTYPE_p_Uint8 swig_types[90]
+#define SWIGTYPE_p_const_iterator swig_types[91]
+#define SWIGTYPE_p_float swig_types[92]
+#define SWIGTYPE_p_iterator swig_types[93]
+#define SWIGTYPE_p_p_Node swig_types[94]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[95]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[96]
+#define SWIGTYPE_p_std__ostringstream swig_types[97]
+#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[98]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[99]
+#define SWIGTYPE_p_std__string swig_types[100]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[101]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[102]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[103]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[104]
+#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[105]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[106]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[107]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[108]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[109]
+#define SWIGTYPE_p_unsigned_long swig_types[110]
+static swig_type_info *swig_types[112];
+static swig_module_info swig_module = {swig_types, 111, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -8663,6 +8664,38 @@ void SwigDirector_AGTexture::blitTri(AGTexture const &pSource, AGTriangle2 const
     obj1 = SWIG_NewPointerObj((void *) &pSrc, SWIGTYPE_p_AGTriangle2,0);
     obj2 = SWIG_NewPointerObj((void *) &pDest, SWIGTYPE_p_AGTriangle2,0);
     result = rb_funcall(swig_get_self(), rb_intern("blitTri"), 3,obj0,obj1,obj2);
+}
+
+
+SwigDirector_AGDecryptor::SwigDirector_AGDecryptor(VALUE self) : Swig::Director(self) {
+    
+}
+
+
+
+SwigDirector_AGDecryptor::~SwigDirector_AGDecryptor() {
+}
+
+std::string SwigDirector_AGDecryptor::decrypt(std::string const &s, std::string const &n) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    std::string c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGDecryptor::decrypt(s,n);
+    }
+    obj0=rb_str_new2(s.c_str());
+    obj1=rb_str_new2(n.c_str());
+    result = rb_funcall(swig_get_self(), rb_intern("decrypt"), 2,obj0,obj1);
+    {
+        if (TYPE(result) == T_STRING)
+        //            c_result = std::string(StringValuePtr(result));
+        c_result = std::string(RSTRING(result)->ptr,RSTRING(result)->len);
+        else
+        throw Swig::DirectorTypeMismatchException("string expected");
+    }
+    return (std::string) c_result;
 }
 
 
@@ -35207,6 +35240,112 @@ free_AGInternalSurface(AGInternalSurface *arg1) {
     delete arg1;
 }
 
+swig_class cAGDecryptor;
+
+static void
+free_AGDecryptor(AGDecryptor *arg1) {
+    delete arg1;
+}
+
+static VALUE
+_wrap_AGDecryptor_decrypt(int argc, VALUE *argv, VALUE self) {
+    AGDecryptor *arg1 = (AGDecryptor *) 0 ;
+    std::string *arg2 = 0 ;
+    std::string *arg3 = 0 ;
+    std::string result;
+    std::string temp2 ;
+    std::string temp3 ;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGDecryptor, 0);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp2 = std::string(StringValuePtr(argv[0]));
+            temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg2 = &temp2;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    {
+        if (TYPE(argv[1]) == T_STRING) {
+            //            temp3 = std::string(StringValuePtr(argv[1]));
+            temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
+            arg3 = &temp3;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (arg1)->decrypt((std::string const &)*arg2,(std::string const &)*arg3);
+    
+    {
+        vresult = rb_str_new((&result)->c_str(),(&result)->length());
+    }
+    return vresult;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AGDecryptor_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AGDecryptor_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGDecryptor);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AGDecryptor(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    AGDecryptor *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "Libantargisgui::AGDecryptor";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (AGDecryptor *)new SwigDirector_AGDecryptor(arg1);
+        
+    } else {
+        result = (AGDecryptor *)new AGDecryptor();
+        
+    }
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_disown_AGDecryptor(int argc, VALUE *argv, VALUE self) {
+    AGDecryptor *arg1 = (AGDecryptor *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGDecryptor, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 swig_class cAGSurface;
 
 static VALUE
@@ -35679,6 +35818,37 @@ _wrap_AGSurface_load(int argc, VALUE *argv, VALUE self) {
         }
     }
     result = AGSurface::load((std::string const &)*arg1);
+    
+    {
+        AGSurface * resultptr;
+        resultptr = new AGSurface((AGSurface &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGSurface, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGSurface_loadDRM(int argc, VALUE *argv, VALUE self) {
+    std::string *arg1 = 0 ;
+    AGDecryptor *arg2 = 0 ;
+    AGSurface result;
+    std::string temp1 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        if (TYPE(argv[0]) == T_STRING) {
+            //            temp1 = std::string(StringValuePtr(argv[0]));
+            temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+            arg1 = &temp1;
+        } else {
+            SWIG_exception(SWIG_TypeError, "not a string");
+        }
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGDecryptor, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = AGSurface::loadDRM((std::string const &)*arg1,*arg2);
     
     {
         AGSurface * resultptr;
@@ -43637,6 +43807,7 @@ static swig_type_info _swigt__p_AGCircle2 = {"_p_AGCircle2", "AGCircle2 *", 0, 0
 static swig_type_info _swigt__p_AGCollisionData = {"_p_AGCollisionData", "AGCollisionData *", 0, 0, 0};
 static swig_type_info _swigt__p_AGColor = {"_p_AGColor", "AGColor *", 0, 0, 0};
 static swig_type_info _swigt__p_AGColorButton = {"_p_AGColorButton", "AGColorButton *", 0, 0, 0};
+static swig_type_info _swigt__p_AGDecryptor = {"_p_AGDecryptor", "AGDecryptor *", 0, 0, 0};
 static swig_type_info _swigt__p_AGDialog = {"_p_AGDialog", "AGDialog *", 0, 0, 0};
 static swig_type_info _swigt__p_AGEdit = {"_p_AGEdit", "AGEdit *", 0, 0, 0};
 static swig_type_info _swigt__p_AGEditLine = {"_p_AGEditLine", "AGEditLine *", 0, 0, 0};
@@ -43749,6 +43920,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGCollisionData,
   &_swigt__p_AGColor,
   &_swigt__p_AGColorButton,
+  &_swigt__p_AGDecryptor,
   &_swigt__p_AGDialog,
   &_swigt__p_AGEdit,
   &_swigt__p_AGEditLine,
@@ -43861,6 +44033,7 @@ static swig_cast_info _swigc__p_AGCircle2[] = {  {&_swigt__p_AGCircle2, 0, 0, 0}
 static swig_cast_info _swigc__p_AGCollisionData[] = {  {&_swigt__p_AGCollisionData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGColor[] = {  {&_swigt__p_AGColor, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGColorButton[] = {  {&_swigt__p_AGColorButton, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGDecryptor[] = {  {&_swigt__p_AGDecryptor, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGDialog[] = {  {&_swigt__p_AGDialog, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGEdit[] = {  {&_swigt__p_AGEdit, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGEditLine[] = {  {&_swigt__p_AGEditLine, 0, 0, 0},{0, 0, 0, 0}};
@@ -43973,6 +44146,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGCollisionData,
   _swigc__p_AGColor,
   _swigc__p_AGColorButton,
+  _swigc__p_AGDecryptor,
   _swigc__p_AGDialog,
   _swigc__p_AGEdit,
   _swigc__p_AGEditLine,
@@ -45187,6 +45361,15 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGInternalSurface.klass, "version", VALUEFUNC(_wrap_AGInternalSurface_version_get), -1);
     cAGInternalSurface.mark = 0;
     cAGInternalSurface.destroy = (void (*)(void *)) free_AGInternalSurface;
+    rb_define_module_function(mLibantargisgui, "disown_AGDecryptor", VALUEFUNC(_wrap_disown_AGDecryptor), -1);
+    
+    cAGDecryptor.klass = rb_define_class_under(mLibantargisgui, "AGDecryptor", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGDecryptor, (void *) &cAGDecryptor);
+    rb_define_alloc_func(cAGDecryptor.klass, _wrap_AGDecryptor_allocate);
+    rb_define_method(cAGDecryptor.klass, "initialize", VALUEFUNC(_wrap_new_AGDecryptor), -1);
+    rb_define_method(cAGDecryptor.klass, "decrypt", VALUEFUNC(_wrap_AGDecryptor_decrypt), -1);
+    cAGDecryptor.mark = 0;
+    cAGDecryptor.destroy = (void (*)(void *)) free_AGDecryptor;
     rb_define_module_function(mLibantargisgui, "disown_AGSurface", VALUEFUNC(_wrap_disown_AGSurface), -1);
     
     cAGSurface.klass = rb_define_class_under(mLibantargisgui, "AGSurface", ((swig_class *) SWIGTYPE_p_AGPaintTarget->clientdata)->klass);
@@ -45208,6 +45391,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGSurface.klass, "getPixel", VALUEFUNC(_wrap_AGSurface_getPixel), -1);
     rb_define_method(cAGSurface.klass, "save", VALUEFUNC(_wrap_AGSurface_save), -1);
     rb_define_singleton_method(cAGSurface.klass, "load", VALUEFUNC(_wrap_AGSurface_load), -1);
+    rb_define_singleton_method(cAGSurface.klass, "loadDRM", VALUEFUNC(_wrap_AGSurface_loadDRM), -1);
     rb_define_method(cAGSurface.klass, "surface", VALUEFUNC(_wrap_AGSurface_surface), -1);
     cAGSurface.mark = 0;
     cAGSurface.destroy = (void (*)(void *)) free_AGSurface;

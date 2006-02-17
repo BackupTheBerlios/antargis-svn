@@ -38,6 +38,8 @@
 
 #include <ag_fs.h>
 
+bool gDRM=false;
+
 ///////////////////////////////////////////////////////////////////////
 // Tools
 ///////////////////////////////////////////////////////////////////////
@@ -185,6 +187,8 @@ AGSurface::~AGSurface()
 
 void AGSurface::save(const std::string &pName) const
 {
+  if(gDRM==true)
+    throw std::runtime_error("saving disabled - because of DRM!");
   assert(s);
   assert(s->surface);
   std::string png=toPNG(s->surface);
@@ -324,6 +328,20 @@ AGSurface AGSurface::load(const std::string &pFilename)
   return n;
 }
 
+AGSurface AGSurface::loadDRM(const std::string &pName,AGDecryptor &pDec)
+{
+  AGSurface n;
+  n.s=new AGInternalSurface;
+  std::string file=loadFile(pName);
+
+  file=pDec.decrypt(file,pName);
+  gDRM=true;
+
+  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
+  n.s->surface=s;
+  return n;
+  
+}
 
 
 AGSurface AGSurface::scale(int w,int h) const

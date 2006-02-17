@@ -9,7 +9,7 @@ MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
   mMap(pMap),
   mSurface(r.w(),r.h())
 {
-  mMapBorder=20;
+  mMapBorder=24;
   mScene=0;
   mTexture=new AGTexture(mSurface);////////getTextureManager()->makeTexture(mSurface);
   //  mapChanged();
@@ -42,6 +42,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
     return;
   int w,h;
   int x,y;
+  forceFull=true;
   bool inmem=forceFull;
 
   w=getRect().w();
@@ -228,6 +229,21 @@ bool MiniMap::eventMouseClick(AGEvent *m)
     return AGWidget::eventMouseClick(m);
 
   AGVector2 v(p);
+
+  float w=25*getRect().w()/mMap->getW();
+  float h=25*getRect().h()/mMap->getH();
+
+  w/=2;
+  h/=2;
+  if(v[0]<w)
+    v[0]=w;
+  if(v[1]<h)
+    v[1]=h;
+  if(v[0]>width()-w)
+    v[0]=width()-w;
+  if(v[1]>height()-h)
+    v[1]=height()-h;
+
   v=toMapCoords(v);
 
   mScene->setCamera(AGVector4(v[0],v[1],0,0));
@@ -245,9 +261,9 @@ AGVector2 MiniMap::toMapCoords(AGVector2 v) const
 
 #ifdef MAP_BORDER
   v[0]*=mMap->getW()-mMapBorder*2;
-  v[1]*=mMap->getH()-mMapBorder*2;
+  v[1]*=mMap->getH()-mMapBorder*1.5;
   v[0]+=mMapBorder;
-  v[1]+=mMapBorder;
+  v[1]+=mMapBorder*0.35;
 #else
   v[0]*=mMap->getW();
   v[1]*=mMap->getH();
@@ -260,10 +276,10 @@ AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
 
 #ifdef MAP_BORDER
   v[0]-=mMapBorder;
-  v[1]-=mMapBorder;
+  v[1]-=mMapBorder*0.35;
 
   v[0]/=mMap->getW()-mMapBorder*2;
-  v[1]/=mMap->getH()-mMapBorder*2;
+  v[1]/=mMap->getH()-mMapBorder*1.5;
 #else
   v[0]/=mMap->getW();
   v[1]/=mMap->getH();

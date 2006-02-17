@@ -1062,6 +1062,11 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGColorButton,b);
  $result=*b;
 }
+%typemap(directorout) AGDecryptor {
+ AGDecryptor *b;
+ Data_Get_Struct($input,AGDecryptor,b);
+ $result=*b;
+}
 %typemap(directorout) AGDialog {
  AGDialog *b;
  Data_Get_Struct($input,AGDialog,b);

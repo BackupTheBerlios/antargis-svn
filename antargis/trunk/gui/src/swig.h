@@ -688,6 +688,15 @@ public:
 };
 
 
+class SwigDirector_AGDecryptor : public AGDecryptor, public Swig::Director {
+
+public:
+    SwigDirector_AGDecryptor(VALUE self);
+    virtual ~SwigDirector_AGDecryptor();
+    virtual std::string decrypt(std::string const &s, std::string const &n);
+};
+
+
 class SwigDirector_AGSurface : public AGSurface, public Swig::Director {
 
 public:

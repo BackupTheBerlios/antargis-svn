@@ -49,7 +49,18 @@ struct AGInternalSurface
 
   AGInternalSurface();
   ~AGInternalSurface();
+};
 
+class AGDecryptor
+{
+ public:
+  virtual ~AGDecryptor()
+    {
+    }
+  virtual std::string decrypt(const std::string &s,const std::string &n)
+    {
+      return s;
+    }
 };
 
 // Generic classes - for OpenGL and "normal" SDL
@@ -89,6 +100,7 @@ class AGSurface:public AGPaintTarget
   void save(const std::string &pName) const;
 
   static AGSurface load(const std::string &pName);
+  static AGSurface loadDRM(const std::string &pName,AGDecryptor &pDec);
 
   AGInternalSurface *surface() const;
 
@@ -96,14 +108,12 @@ class AGSurface:public AGPaintTarget
 
   AGSurface(AGInternalSurface *i);
 
-
   Uint32 color(const AGColor &c) const;
 
   AGInternalSurface *s;
 
   friend class AGFontEngine;
   size_t mVersion;
-
 };
 
 void AGFreeSurface(SDL_Surface *s);
