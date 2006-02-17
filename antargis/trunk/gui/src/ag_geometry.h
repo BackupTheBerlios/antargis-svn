@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
- * ag_triangle.h
+ * ag_geometry.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -33,7 +33,7 @@
 
    - AGVector2 - 2d vector
    - AGVector3 - is homogenous 2d and inhom 3d
-   - AGPoint3  - is 2d (with z=1) or 3d
+   - AGVector23  - is 2d (with z=1) or 3d
    - AGVector4 - hom. 3d
    - AGMatrix3 - 3x3 Matrix
    - AGMatrix4 - 4x4 Matrix
@@ -47,7 +47,7 @@
 
 class AGRect2;
 class AGBox3;
-class AGRect3;
+class AGRect23;
 class Node;
 
 struct AGAngle
@@ -200,14 +200,14 @@ class AGVector3
 #endif
 };
 
-class AGPoint3:public AGVector3
+class AGVector23:public AGVector3
 {
  public:
-  AGPoint3();
-  AGPoint3(float pX,float pY,float pZ=1.0f);
-  AGPoint3(const AGVector3 &p);
+  AGVector23();
+  AGVector23(float pX,float pY,float pZ=1.0f);
+  AGVector23(const AGVector3 &p);
 
-  AGPoint3&operator=(const AGVector3 &v);
+  AGVector23&operator=(const AGVector3 &v);
 };
 
 
@@ -625,11 +625,11 @@ class AGMatrix4
 };
 
 // axis-aligned
-class AGRect3
+class AGRect23
 {
   AGVector3 base,dir;
  public:
-  AGRect3(const AGVector3 &pBase,const AGVector3 &pDir);
+  AGRect23(const AGVector3 &pBase,const AGVector3 &pDir);
 
   bool collides(const AGLine3&pLine) const;
 
@@ -652,7 +652,7 @@ class AGBox3
   bool collides(const AGLine3&p) const;
   bool collides(const AGBox3 &b) const;
 
-  std::vector<AGRect3> getSides() const;
+  std::vector<AGRect23> getSides() const;
 
   std::string toString() const;
 

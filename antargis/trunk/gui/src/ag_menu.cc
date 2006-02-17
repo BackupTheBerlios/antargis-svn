@@ -29,8 +29,8 @@
 
 using namespace std;
 
-AGMenu::AGMenu(AGWidget *pParent,AGPoint pWishPos,const std::string &pName):
-  AGVTiler(pParent,AGRect(pWishPos[0],pWishPos[1],1,1)),
+AGMenu::AGMenu(AGWidget *pParent,AGVector2 pWishPos,const std::string &pName):
+  AGVTiler(pParent,AGRect2(pWishPos[0],pWishPos[1],1,1)),
   sigSelected(this,"sigSelected"),
   mName(pName),
   mWishPos(pWishPos)
@@ -39,11 +39,11 @@ AGMenu::AGMenu(AGWidget *pParent,AGPoint pWishPos,const std::string &pName):
   hide();
 }
 
-void AGMenu::show(AGPoint pWishPos)
+void AGMenu::show(AGVector2 pWishPos)
 {
   AGWidget::show();
   mWishPos=pWishPos;
-  AGPoint p=fromScreen(mWishPos);
+  AGVector2 p=fromScreen(mWishPos);
   setTop(p[1]);
   setLeft(p[0]);
   rePosition();
@@ -58,7 +58,7 @@ void AGMenu::show(AGPoint pWishPos)
 void AGMenu::addItem(const std::string &pString)
 {
   //  AGFont font("Arial.ttf");
-  //  AGText *b=new AGText(this,AGPoint(0,0),pString,font);
+  //  AGText *b=new AGText(this,AGVector2(0,0),pString,font);
   addChild(new AGMenuItem(this,pString));//b);
 }
 

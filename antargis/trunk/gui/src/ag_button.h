@@ -40,13 +40,13 @@ class AGButton:public AGWidget
  public:
   enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED,CHECKEDPRESSED};
 
-  AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id=-1);
+  AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id=-1);
 
   void setSurface(AGSurface pSurface,bool pChangeSize=true);
 
   virtual void draw(AGPainter &p);
 
-  //  virtual void drawBackground(const AGRect &r);
+  //  virtual void drawBackground(const AGRect2 &r);
 
   virtual bool eventMouseEnter();
   virtual bool eventMouseLeave();

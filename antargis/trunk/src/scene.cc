@@ -694,7 +694,7 @@ AGVector4 Scene::getCamera() const
   return scenePosition;
 }
 
-AGPoint Scene::getPosition(const AGVector4 &v) const
+AGVector2 Scene::getPosition(const AGVector4 &v) const
 {
   GLdouble x,y,z;
   
@@ -707,7 +707,7 @@ AGPoint Scene::getPosition(const AGVector4 &v) const
   
 
   gluProject(v[0],v[1],v[2],modelview,projection,getViewport(),&x,&y,&z);
-  return AGPoint((int)x,((int)windowHeight-y));
+  return AGVector2((int)x,((int)windowHeight-y));
 }
 
 

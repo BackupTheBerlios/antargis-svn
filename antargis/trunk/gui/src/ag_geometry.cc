@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
-#include "ag_triangle.h"
-#include "ag_tools.h"
-#include "ag_debug.h"
+#include <ag_geometry.h>
+#include <ag_tools.h>
+#include <ag_debug.h>
 #include <assert.h>
 #include <cmath>
 #include <map>
@@ -597,15 +597,15 @@ float &AGVector3::operator[](int index)
 
 
 /////////////////////////////////////////////////////////////////////////////
-// AGPoint
+// AGVector2
 /////////////////////////////////////////////////////////////////////////////
-AGPoint3::AGPoint3():AGVector3()
+AGVector23::AGVector23():AGVector3()
 {
 }
-AGPoint3::AGPoint3(float pX,float pY,float pZ):AGVector3(pX,pY,pZ)
+AGVector23::AGVector23(float pX,float pY,float pZ):AGVector3(pX,pY,pZ)
 {
 }
-AGPoint3::AGPoint3(const AGVector3 &a)
+AGVector23::AGVector23(const AGVector3 &a)
 {
   assert(a.v[2]);
   v[0]=a.v[0]/a.v[2];
@@ -614,7 +614,7 @@ AGPoint3::AGPoint3(const AGVector3 &a)
 }
 
 
-AGPoint3& AGPoint3::operator=(const AGVector3 &a)
+AGVector23& AGVector23::operator=(const AGVector3 &a)
 {
   if(a.v[2]==0.0f)
     {
@@ -1187,7 +1187,7 @@ AGVector3 AGTriangle3::operator[](int index) const
 
 
 /////////////////////////////////////////////////////////////////////////////
-// AGRectF
+// AGRect2F
 /////////////////////////////////////////////////////////////////////////////
 
 AGRect2::AGRect2(const SDL_Rect &r)
@@ -2316,8 +2316,8 @@ bool AGBox3::collides(const AGVector3&p) const
 }
 bool AGBox3::collides(const AGLine3&p) const
 {
-  std::vector<AGRect3> sides=getSides();
-  for(std::vector<AGRect3>::iterator i=sides.begin();i!=sides.end();++i)
+  std::vector<AGRect23> sides=getSides();
+  for(std::vector<AGRect23>::iterator i=sides.begin();i!=sides.end();++i)
     {
       //      cdebug(i->toString());
       if((*i).collides(p))
@@ -2326,16 +2326,16 @@ bool AGBox3::collides(const AGLine3&p) const
   return false;
 }
 
-std::vector<AGRect3> AGBox3::getSides() const
+std::vector<AGRect23> AGBox3::getSides() const
 {
   AGVector3 b2=base+dir;
-  std::vector<AGRect3> s;
-  s.push_back(AGRect3(base,AGVector3(dir[0],dir[1],0)));
-  s.push_back(AGRect3(base,AGVector3(dir[0],0,dir[2])));
-  s.push_back(AGRect3(base,AGVector3(0,dir[1],dir[2])));
-  s.push_back(AGRect3(b2,AGVector3(-dir[0],-dir[1],0)));
-  s.push_back(AGRect3(b2,AGVector3(-dir[0],0,-dir[2])));
-  s.push_back(AGRect3(b2,AGVector3(0,-dir[1],-dir[2])));
+  std::vector<AGRect23> s;
+  s.push_back(AGRect23(base,AGVector3(dir[0],dir[1],0)));
+  s.push_back(AGRect23(base,AGVector3(dir[0],0,dir[2])));
+  s.push_back(AGRect23(base,AGVector3(0,dir[1],dir[2])));
+  s.push_back(AGRect23(b2,AGVector3(-dir[0],-dir[1],0)));
+  s.push_back(AGRect23(b2,AGVector3(-dir[0],0,-dir[2])));
+  s.push_back(AGRect23(b2,AGVector3(0,-dir[1],-dir[2])));
   return s;
 }
 
@@ -2373,10 +2373,10 @@ std::vector<AGBox3> AGBox3::split() const
 }
 
 ///////////////////////////////////////////////////////////////
-// AGRect3
+// AGRect23
 ///////////////////////////////////////////////////////////////
 
-AGRect3::AGRect3(const AGVector3 &pBase,const AGVector3 &pDir):
+AGRect23::AGRect23(const AGVector3 &pBase,const AGVector3 &pDir):
   base(pBase),dir(pDir)
 {
   // assert that dir[i]>=0
@@ -2388,7 +2388,7 @@ AGRect3::AGRect3(const AGVector3 &pBase,const AGVector3 &pDir):
       }
 }
 
-bool AGRect3::collides(const AGLine3&pLine) const
+bool AGRect23::collides(const AGLine3&pLine) const
 {
   AGVector3 d0,d1; // directions of rect's sides
   if(dir[0]==0)
@@ -2434,7 +2434,7 @@ bool AGRect3::collides(const AGLine3&pLine) const
   return true;
 }
 
-std::string AGRect3::toString() const
+std::string AGRect23::toString() const
 {
   std::ostringstream os;
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";

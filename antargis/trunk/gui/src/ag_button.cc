@@ -29,7 +29,7 @@
 
 using namespace std;
 
-AGButton::AGButton(AGWidget *pParent,const AGRect &r,const std::string&pText,int id):
+AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id):
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
 {
@@ -79,7 +79,7 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 void AGButton::draw(AGPainter &p)
 {
   p.pushMatrix();
-  p.transform(AGRect(0,0,width(),height()).shrink(borderWidth));
+  p.transform(AGRect2(0,0,width(),height()).shrink(borderWidth));
   mBG[mState].draw(p);
   mBorder[mState].draw(p);
   p.popMatrix();
@@ -100,7 +100,7 @@ void AGButton::draw(AGPainter &p)
     //  CTRACE;
 
     //FIXME: use painter !!!!!!
-    AGRect mr;//=r.project(getRect());
+    AGRect2 mr;//=r.project(getRect());
     //  cdebug(getRect());
     //  cdebug(mr);
     mr=getRect().origin();
@@ -210,7 +210,7 @@ void AGButton::setHeight(int h)
 AGButton AGButton::test()
 {
   cdebug("test"<<endl);
-  AGButton b(0,AGRect(0,0,0,0),"test");
+  AGButton b(0,AGRect2(0,0,0,0),"test");
   return b;
 }
 */

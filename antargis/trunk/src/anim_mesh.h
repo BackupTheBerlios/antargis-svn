@@ -3,7 +3,7 @@
 
 #include "scene.h"
 #include "ag_surface.h"
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include "scenenode.h"
 
 #include <vector>

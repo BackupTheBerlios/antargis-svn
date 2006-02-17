@@ -30,15 +30,15 @@
 
 using namespace std;
 
-AGText::AGText(AGWidget *pParent,const AGRect &r,const std::string &pText,const AGFont &pFont):
+AGText::AGText(AGWidget *pParent,const AGRect2 &r,const std::string &pText,const AGFont &pFont):
   AGWidget(pParent,r),
   mText(pText),mFont(pFont)
 {
   mFixedSize=true;
 }
 
-AGText::AGText(AGWidget *pParent,const AGPoint &p,const std::string &pText,const AGFont &pFont):
-  AGWidget(pParent,AGRect(p[0],p[1],pFont.getWidth(pText),pFont.getHeight(pText))),
+AGText::AGText(AGWidget *pParent,const AGVector2 &p,const std::string &pText,const AGFont &pFont):
+  AGWidget(pParent,AGRect2(p[0],p[1],pFont.getWidth(pText),pFont.getHeight(pText))),
   mText(pText),mFont(pFont)
 {
   mFixedSize=false;
@@ -48,12 +48,12 @@ void AGText::draw(AGPainter &p)
 {
   float x=(width()-mFont.getWidth(mText))/2;
   float y=(height()-mFont.getHeight(mText))/2;
-  p.renderText(mText,AGPoint((int)x,(int)y),mFont);
+  p.renderText(mText,AGVector2((int)x,(int)y),mFont);
 }
 
 void AGText::setDeriveRect()
 {
-  setRect(AGRect(getRect().x(),getRect().y(),mFont.getWidth(mText),mFont.getHeight(mText)));
+  setRect(AGRect2(getRect().x(),getRect().y(),mFont.getWidth(mText),mFont.getHeight(mText)));
 }
 
 void AGText::setText(const std::string &pText)

@@ -79,14 +79,14 @@ public:
     virtual void clear();
     virtual ~SwigDirector_AGMessageObject();
     virtual Uint8 getButtonState() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGVector2 getMousePosition() const;
 };
 
 
 class SwigDirector_AGWidget : public AGWidget, public Swig::Director {
 
 public:
-    SwigDirector_AGWidget(VALUE self, AGWidget *pParent, AGRect const &r);
+    SwigDirector_AGWidget(VALUE self, AGWidget *pParent, AGRect2 const &r);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -95,12 +95,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGWidget();
@@ -134,7 +134,7 @@ public:
 class SwigDirector_AGColorButton : public AGColorButton, public Swig::Director {
 
 public:
-    SwigDirector_AGColorButton(VALUE self, AGWidget *pParent, AGRect const &r, int x, int y);
+    SwigDirector_AGColorButton(VALUE self, AGWidget *pParent, AGRect2 const &r, int x, int y);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -143,12 +143,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGColorButton();
@@ -182,7 +182,7 @@ public:
 class SwigDirector_AGGLWidget : public AGGLWidget, public Swig::Director {
 
 public:
-    SwigDirector_AGGLWidget(VALUE self, AGWidget *pParent, AGRect const &r);
+    SwigDirector_AGGLWidget(VALUE self, AGWidget *pParent, AGRect2 const &r);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -191,12 +191,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGGLWidget();
@@ -268,12 +268,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGLayout();
@@ -316,12 +316,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGDialog();
@@ -380,7 +380,7 @@ public:
     virtual bool eventIdle();
     virtual void tryQuit();
     virtual Uint8 getButtonState() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGVector2 getMousePosition() const;
     virtual void draw();
     virtual void prepareDraw();
 };
@@ -389,7 +389,7 @@ public:
 class SwigDirector_AGButton : public AGButton, public Swig::Director {
 
 public:
-    SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id = -1);
+    SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect2 const &r, std::string const &pText, int id = -1);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -399,11 +399,11 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual std::string getCaption() const;
@@ -441,7 +441,7 @@ public:
 class SwigDirector_AGText : public AGText, public Swig::Director {
 
 public:
-    SwigDirector_AGText(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont);
+    SwigDirector_AGText(VALUE self, AGWidget *pParent, AGRect2 const &pRect, std::string const &pText, AGFont const &pFont);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -450,12 +450,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGText();
@@ -489,7 +489,7 @@ public:
 class SwigDirector_AGCaption : public AGCaption, public Swig::Director {
 
 public:
-    SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG);
+    SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect2 const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -498,12 +498,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGCaption();
@@ -537,7 +537,7 @@ public:
 class SwigDirector_AGCheckBox : public AGCheckBox, public Swig::Director {
 
 public:
-    SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect);
+    SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect2 pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -547,11 +547,11 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual std::string getCaption() const;
@@ -591,15 +591,15 @@ class SwigDirector_AGEditLine : public AGEditLine, public Swig::Director {
 public:
     SwigDirector_AGEditLine(VALUE self, std::string const &pText, AGFont pFont, bool pHardEnd);
     virtual ~SwigDirector_AGEditLine();
-    virtual void draw(AGPainter &p, AGPoint const &pPoint, AGRect const &pClip);
-    virtual void drawCursor(AGPainter &p, int cx, AGPoint const &pPoint, AGRect const &pClip, AGColor const &c);
+    virtual void draw(AGPainter &p, AGVector2 const &pPoint, AGRect2 const &pClip);
+    virtual void drawCursor(AGPainter &p, int cx, AGVector2 const &pPoint, AGRect2 const &pClip, AGColor const &c);
 };
 
 
 class SwigDirector_AGEdit : public AGEdit, public Swig::Director {
 
 public:
-    SwigDirector_AGEdit(VALUE self, AGWidget *pParent, AGRect const &pRect);
+    SwigDirector_AGEdit(VALUE self, AGWidget *pParent, AGRect2 const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -608,11 +608,11 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual bool canFocus() const;
@@ -649,16 +649,16 @@ class SwigDirector_AGPaintTarget : public AGPaintTarget, public Swig::Director {
 
 public:
     SwigDirector_AGPaintTarget(VALUE self);
-    virtual AGRect getRect() const;
+    virtual AGRect2 getRect() const;
     virtual ~SwigDirector_AGPaintTarget();
-    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
+    virtual void drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c);
     virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
-    virtual void fillRect(AGRect const &pr, AGColor const &c);
+    virtual void fillRect(AGRect2 const &pr, AGColor const &c);
     virtual void putPixel(int x, int y, AGColor const &c);
     virtual AGColor getPixel(int x, int y) const;
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
     virtual void beginPaint();
     virtual void endPaint();
 };
@@ -673,16 +673,16 @@ public:
     SwigDirector_AGTexture(VALUE self, int W, int H);
     virtual void endPaint();
     virtual void beginPaint();
-    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
-    virtual void drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
+    virtual void drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c);
+    virtual void drawGradientAlpha(AGRect2 const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
     virtual ~SwigDirector_AGTexture();
     virtual AGColor getPixel(int x, int y) const;
-    virtual AGRect getRect() const;
-    virtual void drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void fillRect(AGRect const &pRect, AGColor const &c);
+    virtual AGRect2 getRect() const;
+    virtual void drawGradient(AGRect2 const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void fillRect(AGRect2 const &pRect, AGColor const &c);
     virtual void putPixel(int x, int y, AGColor const &c);
     virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
 };
@@ -703,17 +703,17 @@ public:
     SwigDirector_AGSurface(VALUE self);
     SwigDirector_AGSurface(VALUE self, int w, int h);
     SwigDirector_AGSurface(VALUE self, AGSurface const &p);
-    virtual AGRect getRect() const;
-    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
+    virtual AGRect2 getRect() const;
+    virtual void drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c);
     virtual ~SwigDirector_AGSurface();
     virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
-    virtual void fillRect(AGRect const &pr, AGColor const &c);
+    virtual void fillRect(AGRect2 const &pr, AGColor const &c);
     virtual void putPixel(int x, int y, AGColor const &c);
     virtual AGColor getPixel(int x, int y) const;
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor);
     virtual void beginPaint();
     virtual void endPaint();
 };
@@ -722,7 +722,7 @@ public:
 class SwigDirector_AGImage : public AGImage, public Swig::Director {
 
 public:
-    SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect const &r, AGSurface pSurface, bool pTile, AGRect const &pRect = AGRect(0,0,0,0));
+    SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect2 const &r, AGSurface pSurface, bool pTile, AGRect2 const &pRect = AGRect2(0,0,0,0));
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -731,12 +731,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGImage();
@@ -772,14 +772,14 @@ class SwigDirector_AGLayoutCreator : public AGLayoutCreator, public Swig::Direct
 public:
     SwigDirector_AGLayoutCreator(VALUE self, std::string const &pName);
     virtual ~SwigDirector_AGLayoutCreator();
-    virtual AGWidget *create(AGWidget *pParent, AGRect const &pRect, xmlpp::Node const &pNode);
+    virtual AGWidget *create(AGWidget *pParent, AGRect2 const &pRect, xmlpp::Node const &pNode);
 };
 
 
 class SwigDirector_AGVTiler : public AGVTiler, public Swig::Director {
 
 public:
-    SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight = true);
+    SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect2 const &pRect, bool pAdaptMyHeight = true);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -788,13 +788,13 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void rePosition();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGVTiler();
@@ -828,7 +828,7 @@ public:
 class SwigDirector_AGHTiler : public AGHTiler, public Swig::Director {
 
 public:
-    SwigDirector_AGHTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight = true);
+    SwigDirector_AGHTiler(VALUE self, AGWidget *pParent, AGRect2 const &pRect, bool pAdaptMyHeight = true);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -837,13 +837,13 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void rePosition();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGHTiler();
@@ -877,7 +877,7 @@ public:
 class SwigDirector_AGListBox : public AGListBox, public Swig::Director {
 
 public:
-    SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect);
+    SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect2 const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -886,12 +886,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGListBox();
@@ -925,7 +925,7 @@ public:
 class SwigDirector_AGMenu : public AGMenu, public Swig::Director {
 
 public:
-    SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGPoint pWishPos, std::string const &pName);
+    SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGVector2 pWishPos, std::string const &pName);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -934,13 +934,13 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void rePosition();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGMenu();
@@ -983,13 +983,13 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void rePosition();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGMenuItem();
@@ -1034,13 +1034,13 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void rePosition();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGSubMenu();
@@ -1085,12 +1085,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGSound();
@@ -1124,7 +1124,7 @@ public:
 class SwigDirector_AGRadioGroup : public AGRadioGroup, public Swig::Director {
 
 public:
-    SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr);
+    SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect2 const &pr);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -1133,12 +1133,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual void eventChange(std::string const &p);
@@ -1173,7 +1173,7 @@ public:
 class SwigDirector_AGRadio : public AGRadio, public Swig::Director {
 
 public:
-    SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect);
+    SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect2 pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -1183,11 +1183,11 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual std::string getCaption() const;
@@ -1228,19 +1228,19 @@ public:
     SwigDirector_AGScreen(VALUE self);
     virtual void endPaint();
     virtual void beginPaint();
-    virtual void drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c);
+    virtual void drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c);
     virtual ~SwigDirector_AGScreen();
     virtual AGColor getPixel(int x, int y) const;
-    virtual AGRect getRect() const;
+    virtual AGRect2 getRect() const;
     virtual size_t getWidth() const;
     virtual size_t getHeight() const;
     virtual void begin();
-    virtual void blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc);
-    virtual void blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor);
+    virtual void blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc);
+    virtual void blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor);
     virtual void flip();
     virtual void putPixel(int x, int y, AGColor const &c);
-    virtual void fillRect(AGRect const &pr, AGColor const &c);
+    virtual void fillRect(AGRect2 const &pr, AGColor const &c);
     virtual void blitTri(AGTexture const &pSource, AGTriangle2 const &pSrc, AGTriangle2 const &pDest);
 };
 
@@ -1248,21 +1248,21 @@ public:
 class SwigDirector_AGTable : public AGTable, public Swig::Director {
 
 public:
-    SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect const &pRect);
+    SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect2 const &pRect);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGTable();
@@ -1304,7 +1304,7 @@ public:
 class SwigDirector_AGWindow : public AGWindow, public Swig::Director {
 
 public:
-    SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle = "", std::string const &pTheme = "");
+    SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect2 const &pRect, std::string const &pTitle = "", std::string const &pTheme = "");
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -1313,14 +1313,14 @@ public:
     virtual void setTop(float y);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
-    virtual AGRect getClientRect() const;
+    virtual AGRect2 getClientRect() const;
     virtual ~SwigDirector_AGWindow();
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseClick(AGEvent *m);
@@ -1352,8 +1352,8 @@ public:
 class SwigDirector_AGFrame : public AGFrame, public Swig::Director {
 
 public:
-    SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, size_t width);
-    SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, AGBorder const &pBorder);
+    SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect2 const &pRect, size_t width);
+    SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect2 const &pRect, AGBorder const &pBorder);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -1362,14 +1362,14 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
-    virtual AGRect getClientRect() const;
+    virtual AGRect2 getClientRect() const;
     virtual ~SwigDirector_AGFrame();
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseButtonDown(AGEvent *m);
@@ -1410,12 +1410,12 @@ public:
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
-    virtual bool eventDragBy(AGEvent *event, AGPoint const &pDiff);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
-    virtual AGRect getClientRect() const;
-    virtual AGPoint getMousePosition() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGScreenWidget();

@@ -44,21 +44,21 @@ class AGGLScreen:public AGScreen
 
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
 
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor);
 
-  //  virtual void tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
+  //  virtual void tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
 
-  virtual void fillRect(const AGRect &pRect,const AGColor &c);
-  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
+  virtual void fillRect(const AGRect2 &pRect,const AGColor &c);
+  virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
 
-  virtual AGRect getRect() const;
+  virtual AGRect2 getRect() const;
 
-  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  //  void renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+  virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  //  void renderText (const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
 
-  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  virtual void drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2);
+  virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2);
   virtual void putPixel(int x,int y,const AGColor &c);
   /*
   virtual AGTexture makeTexture(const AGSurface &s);
@@ -67,17 +67,17 @@ class AGGLScreen:public AGScreen
   */
   virtual void begin(); // call before start drawing
   void flip();
-  bool inScreen(const AGRect &r) const;
-  //  bool inScreen(const AGRect2 &r) const;
+  bool inScreen(const AGRect2 &r) const;
+  //  bool inScreen(const AGRect22 &r) const;
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;
 
-  void clip(const AGRect &r);
+  void clip(const AGRect2 &r);
   void unclip();
 
  private:
-  AGRect getRect(SDL_Surface *s);
+  AGRect2 getRect(SDL_Surface *s);
   void checkUnusedTextures();
 
   int w,h;

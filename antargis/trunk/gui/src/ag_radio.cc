@@ -26,7 +26,7 @@
 #include <typeinfo>
 
 
-AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect &r):
+AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect2 &r):
   AGWidget(p,r),
   sigChanged(this,"sigChanged")
 {
@@ -66,7 +66,7 @@ void AGRadioGroup::erase(AGRadio *r)
 
 
 
-AGRadio::AGRadio(AGWidget *pParent,AGRect pRect)://,AGRadioGroup *pGroup,std::string pName):
+AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect)://,AGRadioGroup *pGroup,std::string pName):
   AGCheckBox(pParent,pRect),mGroup(0)
 {
   // search mGroup
@@ -154,7 +154,7 @@ class AGRadioGroupLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(RadioGroup,"radioGroup")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     AGRadioGroup *l=new AGRadioGroup(pParent,pRect);
@@ -170,7 +170,7 @@ class AGRadioLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Radio,"radio")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     AGRadio *b=new AGRadio(pParent,pRect);

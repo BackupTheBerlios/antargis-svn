@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "scene.h"
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include <ag_surface.h>
 #include <math.h>
 

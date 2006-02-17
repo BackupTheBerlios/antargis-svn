@@ -1,7 +1,7 @@
 #ifndef _SCENE_NODE_H
 #define _SCENE_NODE_H
 
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 #include <ag_rubyobj.h>
 
 class Scene;

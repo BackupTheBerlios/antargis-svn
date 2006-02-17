@@ -21,7 +21,7 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 #include <ag_debug.h>
 
 #include <set>

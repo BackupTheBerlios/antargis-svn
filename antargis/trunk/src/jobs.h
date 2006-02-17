@@ -20,7 +20,7 @@
 
 #ifndef ANT_JOBS_H
 #define ANT_JOBS_H
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 #include "ruby.h"
 
 class AntEntity;

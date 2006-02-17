@@ -2,7 +2,7 @@
 #define __SCENE_H
 
 #include "GLee.h"
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include "ag_geometry.h"
 
 #include <SDL_opengl.h>
@@ -90,7 +90,7 @@ class Scene:public AGRubyObject
   
   AGMatrix4 getInvCameraView() const;
 
-  AGPoint getPosition(const AGVector4 &v) const;
+  AGVector2 getPosition(const AGVector4 &v) const;
 
   NodeList getCurrentNodes();
 

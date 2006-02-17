@@ -26,12 +26,12 @@
 #include "ag_menu.h"
 
 AGMenuItem::AGMenuItem(AGWidget *pParent,const std::string &pText):
-  AGHTiler(pParent,AGRect(0,0,0,0),false),mText(pText),mMouseOver(false),mSelected(false)
+  AGHTiler(pParent,AGRect2(0,0,0,0),false),mText(pText),mMouseOver(false),mSelected(false)
 {
   AGFont font(getTheme()->getFont("Font.menu"));
   //  adaptWidthFromChildren(); // so that parent can adapt to this
 
-  //  addChild(new AGText(this,AGPoint(0,0),"X",AGFont("Arial.ttf",25))); // test
+  //  addChild(new AGText(this,AGVector2(0,0),"X",AGFont("Arial.ttf",25))); // test
   AGSurface surface=getTheme()->getSurface("menu.item.image");//getScreen().loadSurface("/home/david/projects/oldantargis/graphics/menu_house_small.png");
   addChild(new AGImage(this,getRect().origin(),surface,false));
   addChild(new AGText(this,getRect().origin(),pText,font));
@@ -44,9 +44,9 @@ AGMenuItem::~AGMenuItem()
 {
 }
 
-void AGMenuItem::draw(AGPainter &p)//const AGRect &pr)
+void AGMenuItem::draw(AGPainter &p)//const AGRect2 &pr)
 {
-  //  AGRect r=pr.project(getRect());
+  //  AGRect2 r=pr.project(getRect());
 
   AGColor c1,c2,c3,c4;
 
@@ -135,7 +135,7 @@ AGSubMenu::AGSubMenu(AGWidget *pParent,const std::string &pText):
   adaptWidthFromChildren(); // so that parent can adapt to this
   rePosition();
 
-  addChild(mSubMenu=new AGMenu(this,AGPoint(0,0),pText));
+  addChild(mSubMenu=new AGMenu(this,AGVector2(0,0),pText));
   mSubMenu->hide();
 }
 
@@ -155,7 +155,7 @@ void AGSubMenu::addChild(AGWidget*pWidget)
 
 void AGSubMenu::eventSelect()
 {
-  AGRect r(getScreenRect());
+  AGRect2 r(getScreenRect());
 
   getMenu()->show(r.getV10());
 }

@@ -116,9 +116,9 @@ int AGTexture::height() const
   return h;
 }
 
-AGRect AGTexture::getRect() const
+AGRect2 AGTexture::getRect() const
 {
-  return AGRect(0,0,w,h);
+  return AGRect2(0,0,w,h);
 }
 
 AGColor AGTexture::getPixel(int x,int y) const
@@ -319,7 +319,7 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
 }
 
 
-void AGTexture::fillRect(const AGRect &pRect,const AGColor &c)
+void AGTexture::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
   if(opengl())
     {
@@ -332,7 +332,7 @@ void AGTexture::fillRect(const AGRect &pRect,const AGColor &c)
   
 }
 
-void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   if(opengl())
     {
@@ -350,7 +350,7 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &
 	SDL_BlitSurface(pSource.s->surface,&sr,mSDLTexture->surface,&dr);
     }
 }
-void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
+void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor)
 {
   if(opengl())
     {
@@ -360,7 +360,7 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &
   else
     throw std::runtime_error("implement blitting for sdl-texture");
 }
-void AGTexture::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+void AGTexture::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c)
 {
   if(opengl())
     {
@@ -371,7 +371,7 @@ void AGTexture::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
     throw std::runtime_error("implement drawLine for sdl-texture");
 }
 
-void AGTexture::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGTexture::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   if(opengl())
     {
@@ -382,7 +382,7 @@ void AGTexture::drawGradient(const AGRect& rect, const AGColor& ul, const AGColo
     throw std::runtime_error("implement drawLine for sdl-texture");
 }
 
-void AGTexture::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGTexture::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   if(opengl())
     {

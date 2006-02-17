@@ -41,12 +41,12 @@ void AGSDLScreen::flip()
   SDL_Flip(s);
 }
 
-AGRect AGSDLScreen::getRect() const
+AGRect2 AGSDLScreen::getRect() const
 {
-  return AGRect(0,0,s->w,s->h);
+  return AGRect2(0,0,s->w,s->h);
 }
 
-void AGSDLScreen::fillRect(const AGRect &pRect,const AGColor &c)
+void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
   sge_FilledRectAlpha(s,
 		      (int)pRect.x(),
@@ -55,7 +55,7 @@ void AGSDLScreen::fillRect(const AGRect &pRect,const AGColor &c)
 		      (int)(pRect.y()+pRect.h()-1),
 		      c.mapRGB(s->format),c.a);
 }
-void AGSDLScreen::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGSDLScreen::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   SDL_Rect sr=pSrc.sdl();
   SDL_Rect dr=pDest.sdl();
@@ -77,7 +77,7 @@ void setScreen(AGScreen *s)
 }
 
 
-void AGSDLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
+void AGSDLScreen::drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2)
 {
 }
 void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
@@ -86,18 +86,18 @@ void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
 }
 
 
-void AGSDLScreen::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGSDLScreen::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
 
 }
-void AGSDLScreen::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGSDLScreen::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   AGDrawGradient(s,rect,ul,ur,dl,dr);
 }
 
 /*
-void AGSDLScreen::renderText (const AGRect &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn)
+void AGSDLScreen::renderText (const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn)
 {
   if(!AGFontEngine::renderText(this,pClipRect,BaseLineX,BaseLineY,pText,ParamIn))
     cdebug("SOME ERROR");
@@ -105,9 +105,9 @@ void AGSDLScreen::renderText (const AGRect &pClipRect, int BaseLineX, int BaseLi
     }*/
 
 
-void AGSDLScreen::drawLine(const AGPoint &pp0,const AGPoint &pp1,const AGColor &c)
+void AGSDLScreen::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor &c)
 {
-  AGPoint p0,p1;
+  AGVector2 p0,p1;
 
   p0=pp0;
   p1=pp1;

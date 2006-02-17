@@ -64,10 +64,10 @@ const SDL_Event *AGEvent::get() const
   return mEvent;
 }
 
-AGPoint AGEvent::getMousePosition() const
+AGVector2 AGEvent::getMousePosition() const
 {
   assert(mEvent);
-  AGPoint p;
+  AGVector2 p;
   switch(mEvent->type) {
   case SDL_MOUSEMOTION:
     p[0]=mEvent->motion.x;
@@ -374,11 +374,11 @@ Uint8 AGMessageObject::getButtonState() const
   Uint8 b=SDL_GetMouseState(&x,&y);
   return b;
 }
-AGPoint AGMessageObject::getMousePosition() const
+AGVector2 AGMessageObject::getMousePosition() const
 {
   int x,y;
   SDL_GetMouseState(&x,&y);
-  return AGPoint(x,y);
+  return AGVector2(x,y);
 }
 
 

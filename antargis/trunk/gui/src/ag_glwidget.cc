@@ -3,7 +3,7 @@
 #include "ag_screen.h"
 #include <GL/glu.h>
 
-AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect &r):
+AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect2 &r):
   AGWidget(pParent,r)
 {
 }
@@ -26,7 +26,7 @@ void AGGLWidget::drawAll(AGPainter &p)
   //  p2.transform(getRect());
 
   std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
-  //  AGRect r2=r.project(mr);
+  //  AGRect2 r2=r.project(mr);
   for(;i!=mChildren.rend();i++)
     (*i)->drawAll(p2);
 
@@ -42,7 +42,7 @@ void AGGLWidget::beginGL()
   setPerspective(45.0,1,100);
   glMatrixMode(GL_MODELVIEW);
 
-  AGRect r=getRect();
+  AGRect2 r=getRect();
 
   glViewport(GLint(r.x()),GLint(getScreen().getHeight()-r.y1()),GLsizei(r.w()),GLsizei(r.h()));
   glDepthMask(true);
@@ -55,7 +55,7 @@ void AGGLWidget::beginGL()
 
 float AGGLWidget::getRatio() const
 {
-  AGRect r=getRect();
+  AGRect2 r=getRect();
   return float(r.w())/float(r.h());
 }
 

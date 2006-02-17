@@ -26,7 +26,7 @@
 class AGVTiler:public AGWidget
 {
  public:
-  AGVTiler(AGWidget *pParent,const AGRect&pRect,bool pAdaptMyHeight=true);
+  AGVTiler(AGWidget *pParent,const AGRect2&pRect,bool pAdaptMyHeight=true);
 
 
   virtual void addChild(AGWidget *pWidget);
@@ -42,7 +42,7 @@ class AGVTiler:public AGWidget
 class AGHTiler:public AGVTiler
 {
  public:
-  AGHTiler(AGWidget *pParent,const AGRect&pRect,bool pAdaptMyHeight=true);
+  AGHTiler(AGWidget *pParent,const AGRect2&pRect,bool pAdaptMyHeight=true);
   virtual void rePosition();
   void adaptHeightFromChildren();
   void adaptWidthFromChildren();

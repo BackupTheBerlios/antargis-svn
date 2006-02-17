@@ -29,7 +29,7 @@ class AGRadio;
 class AGRadioGroup:public AGWidget
 {
  public:
-  AGRadioGroup(AGWidget *pParent,const AGRect &pr);
+  AGRadioGroup(AGWidget *pParent,const AGRect2 &pr);
   virtual ~AGRadioGroup();
 
   virtual void eventChange(const std::string &p);
@@ -45,7 +45,7 @@ class AGRadioGroup:public AGWidget
 class AGRadio:public AGCheckBox
 {
  public:
-  AGRadio(AGWidget *pParent,AGRect pRect);//,AGRadioGroup *pGroup,std::string pName);
+  AGRadio(AGWidget *pParent,AGRect2 pRect);//,AGRadioGroup *pGroup,std::string pName);
   virtual ~AGRadio();
 
   //  bool eventMouseClick(const AGEvent *m);

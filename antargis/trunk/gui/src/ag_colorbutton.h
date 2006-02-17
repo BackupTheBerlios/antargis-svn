@@ -28,7 +28,7 @@
 class AGColorButton:public AGWidget
 {
  public:
-  AGColorButton(AGWidget *pParent,const AGRect &r,int x,int y);
+  AGColorButton(AGWidget *pParent,const AGRect2 &r,int x,int y);
 
   virtual void draw(AGPainter &p);
 

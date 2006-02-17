@@ -2,12 +2,12 @@
 #define AG_GLWIDGET_H
 
 #include <ag_widget.h>
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 
 class AGGLWidget:public AGWidget
 {
  public:
-  AGGLWidget(AGWidget *pParent,const AGRect &r);
+  AGGLWidget(AGWidget *pParent,const AGRect2 &r);
 
   virtual void drawGL();
   

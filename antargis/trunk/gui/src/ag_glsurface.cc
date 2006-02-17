@@ -40,7 +40,7 @@
 
 #include <ag_fs.h>
 
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include "ag_texture.h"
 
 std::set<SDL_Surface *> glTestSurfaces;
@@ -173,17 +173,17 @@ size_t next2pow(size_t i)
 }
 
 
-bool AGGLScreen::inScreen(const AGRect &r) const
+bool AGGLScreen::inScreen(const AGRect2 &r) const
 {
-  return AGRect(0,0,w,h).contains(r);
+  return AGRect2(0,0,w,h).contains(r);
 }
 
-void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect &pSrc)
+void AGGLScreen::blit(const AGTexture &pSource,const AGRect2 &pRect,const AGRect2 &pSrc)
 {
   blit(pSource,pRect,pSrc,AGColor(0xFF,0xFF,0xFF,0xFF));
 }
 
-void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect &pSrc,const AGColor &pColor)
+void AGGLScreen::blit(const AGTexture &pSource,const AGRect2 &pRect,const AGRect2 &pSrc,const AGColor &pColor)
 {
   //  CTRACE;
   if(!inScreen(pRect))
@@ -249,7 +249,7 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect &pRect,const AGRect 
 }
 
 
-void AGGLScreen::fillRect(const AGRect &pRect,const AGColor &c)
+void AGGLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
   float x0=pRect.x();
   float y0=h-pRect.y();
@@ -277,9 +277,9 @@ void AGGLScreen::fillRect(const AGRect &pRect,const AGColor &c)
   glEnable(GL_CULL_FACE);
 }
 
-AGRect AGGLScreen::getRect() const
+AGRect2 AGGLScreen::getRect() const
 {
-  return AGRect(0,0,w,h);
+  return AGRect2(0,0,w,h);
 }
 
 void glColor(const AGColor &c)
@@ -287,7 +287,7 @@ void glColor(const AGColor &c)
   glColor4f(c.r/255.0,c.g/255.0,c.b/255.0,c.a/255.0);
 }
 
-void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGGLScreen::drawGradientAlpha(const AGRect2& pRect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   float x0=pRect.x();
   float y0=(h)-pRect.y();
@@ -321,7 +321,7 @@ void AGGLScreen::drawGradientAlpha(const AGRect& pRect, const AGColor& ul, const
   glEnd();
 }
 
-void AGGLScreen::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
+void AGGLScreen::drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2)
 {
 
   float x0=rect.x();
@@ -399,12 +399,12 @@ void AGGLScreen::putPixel(int x,int y,const AGColor &pc)
   glDrawPixels(1,1,GL_RGBA,GL_UNSIGNED_INT_8_8_8_8,&c);
 }
 
-void AGGLScreen::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGGLScreen::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   drawGradientAlpha(rect,ul,ur,dl,dr);
 }
 
-void AGGLScreen::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+void AGGLScreen::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c)
 {
   AGRenderContext context;
   context.setColor(c);
@@ -447,10 +447,10 @@ size_t AGGLScreen::getHeight() const
 {
   return h;
 }
-void AGGLScreen::clip(const AGRect &r)
+void AGGLScreen::clip(const AGRect2 &r)
 {
-  AGRect x=AGRect(0,0,w,h);
-  AGRect m=x.intersect(r);
+  AGRect2 x=AGRect2(0,0,w,h);
+  AGRect2 m=x.intersect(r);
   //  cdebug(r<<"   "<<m<<"  "<<x);
 
 
@@ -472,7 +472,7 @@ void AGGLScreen::unclip()
 }
 
 /*
-void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGGLScreen::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   AGRenderContext context;
   context.setTexture(const_cast<AGTexture&>(pSource).glTexture());
@@ -540,7 +540,7 @@ void AGGLScreen::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect 
   glDisable(GL_CULL_FACE);
   cdebug(pSrc);
 
-  AGRect d(100,100,100,100);
+  AGRect2 d(100,100,100,100);
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   glPixelStorei(GL_UNPACK_ROW_LENGTH, surface->pitch/surface->format->BytesPerPixel);

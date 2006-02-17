@@ -27,9 +27,9 @@
 class AGText:public AGWidget
 {
  public:
-  AGText(AGWidget *pParent,const AGRect &pRect,const std::string &pText,const AGFont &pFont);
+  AGText(AGWidget *pParent,const AGRect2 &pRect,const std::string &pText,const AGFont &pFont);
 #ifndef SWIG
-  AGText(AGWidget *pParent,const AGPoint &pPoint,const std::string &pText,const AGFont &pFont);
+  AGText(AGWidget *pParent,const AGVector2 &pPoint,const std::string &pText,const AGFont &pFont);
 #endif
 
   void setDeriveRect();

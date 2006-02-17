@@ -27,7 +27,7 @@ AGLayoutCreator::AGLayoutCreator(const std::string &pName)
   getLayoutFactory()->addCreator(pName,this);
 }
 
-AGWidget *AGLayoutCreator::create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+AGWidget *AGLayoutCreator::create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
 {
   return 0;
 }
@@ -47,7 +47,7 @@ void AGLayoutFactory::addCreator(const std::string &pName,AGLayoutCreator *creat
   mCreators[pName]=creator;
 }
 
-AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
 {
   if(mCreators[pNode.getName()])
     return mCreators[pNode.getName()]->create(pParent,pRect,pNode);

@@ -40,7 +40,7 @@ class AGTexture:public AGPaintTarget
   int width() const;
   int height() const;
 
-  AGRect getRect() const;
+  AGRect2 getRect() const;
 
   AGColor getPixel(int x,int y) const;
 
@@ -65,12 +65,12 @@ class AGTexture:public AGPaintTarget
   virtual void endPaint();
 
   virtual void putPixel(int x,int y,const AGColor &c);
-  virtual void fillRect(const AGRect &pRect,const AGColor &c);
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc);
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
-  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c);
-  virtual void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  virtual void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void fillRect(const AGRect2 &pRect,const AGColor &c);
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor);
+  virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
+  virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 
 
   void setWrapping(bool pWrap);

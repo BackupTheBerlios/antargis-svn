@@ -27,9 +27,9 @@
 class AGMenu:public AGVTiler
 {
  public:
-  AGMenu(AGWidget *pParent,AGPoint pWishPos,const std::string &pName);
+  AGMenu(AGWidget *pParent,AGVector2 pWishPos,const std::string &pName);
 
-  void show(AGPoint pWishPos);
+  void show(AGVector2 pWishPos);
 
   void addItem(const std::string &pString);
   AGMenu &addMenu(const std::string &pString);
@@ -44,7 +44,7 @@ class AGMenu:public AGVTiler
  private:
   AGTexture mBg;
   std::string mName;
-  AGPoint mWishPos;
+  AGVector2 mWishPos;
 };
 
 #endif

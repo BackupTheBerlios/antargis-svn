@@ -45,27 +45,27 @@ void AGBorder::draw(AGPainter &p)
   int w=mTexture->width()/3;
   int w2=w*2;
 
-  AGRect d=p.getRect();
+  AGRect2 d=p.getRect();
   float x2=d.x1();
   float y2=d.y1();
 
   // corners
-  p.blit(*mTexture,AGRect(0,0,w,w),AGRect(0,0,w,w));
+  p.blit(*mTexture,AGRect2(0,0,w,w),AGRect2(0,0,w,w));
  
-  p.blit(*mTexture,AGRect(0,y2-w,w,w),AGRect(0,w2,w,w));
+  p.blit(*mTexture,AGRect2(0,y2-w,w,w),AGRect2(0,w2,w,w));
  
-  p.blit(*mTexture,AGRect(x2-w,0,w,w),AGRect(w2,0,w,w));
+  p.blit(*mTexture,AGRect2(x2-w,0,w,w),AGRect2(w2,0,w,w));
  
-  p.blit(*mTexture,AGRect(x2-w,y2-w,w,w),AGRect(w2,w2,w,w));
+  p.blit(*mTexture,AGRect2(x2-w,y2-w,w,w),AGRect2(w2,w2,w,w));
 
   // borders
 
   // hor
-  p.tile(*mTexture,AGRect(w,0,d.w()-w2,w),AGRect(w,0,w,w));
-  p.tile(*mTexture,AGRect(w,y2-w,d.w()-w2,w),AGRect(w,w2,w,w));
+  p.tile(*mTexture,AGRect2(w,0,d.w()-w2,w),AGRect2(w,0,w,w));
+  p.tile(*mTexture,AGRect2(w,y2-w,d.w()-w2,w),AGRect2(w,w2,w,w));
   // ver
-  p.tile(*mTexture,AGRect(0,w,w,d.h()-w2),AGRect(0,w,w,w));
-  p.tile(*mTexture,AGRect(x2-w,w,w,d.h()-w2),AGRect(w2,w,w,w));
+  p.tile(*mTexture,AGRect2(0,w,w,d.h()-w2),AGRect2(0,w,w,w));
+  p.tile(*mTexture,AGRect2(x2-w,w,w,d.h()-w2),AGRect2(w2,w,w,w));
 
   // skip interior
   

@@ -4,7 +4,7 @@
 #include "glsl.h"
 #include "scene.h"
 #include "ag_texturecache.h"
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include "ag_texture.h"
 #include "vertex_array.h"
 #include "map.h"

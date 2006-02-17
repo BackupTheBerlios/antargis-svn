@@ -47,24 +47,24 @@ AGProjection::AGProjection(const AGRect2 &pClip):clip(pClip)
   a.set(2,2,0);
 }
 
-AGPoint AGProjection::project(const AGPoint &p) const
+AGVector2 AGProjection::project(const AGVector2 &p) const
 {
-  AGPoint r=(a*AGVector3(p[0],p[1],1)).dim2();
+  AGVector2 r=(a*AGVector3(p[0],p[1],1)).dim2();
 
   return r;
 }
-bool AGProjection::pointOk(const AGPoint &p) const
+bool AGProjection::pointOk(const AGVector2 &p) const
 {
   return clip.contains(p);
 }
 
-AGRect AGProjection::project(const AGRect &p) const
+AGRect2 AGProjection::project(const AGRect2 &p) const
 {
   AGRect2 r((a*AGVector3(p[0],1)).dim2(),
 	    (a*AGVector3(p[1],1)).dim2());
   return r;
 }
-std::pair<AGRect,AGRect> AGProjection::clipRect(AGRect target,AGRect src) const
+std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) const
 {
   // clip left
   if(target.x0()<clip.x0())
@@ -115,7 +115,7 @@ void AGProjection::setClip(const AGRect2&p)
 
 AGRect2 AGProjection::getRect() const
 {
-  AGRect r=clip;
+  AGRect2 r=clip;
 
   r-=AGVector2(a.get(2,0),a.get(2,1));
   return r;
@@ -125,7 +125,7 @@ AGLine2 AGProjection::clipLine(AGLine2 l) const
 {
   AGLine2 d;
 
-  AGRect r=clip;
+  AGRect2 r=clip;
 
   if((l[0][0]<r.x0() && l[1][0]<r.x0()) ||
      (l[0][0]>r.x1() && l[1][0]>r.x1()) ||
@@ -194,48 +194,48 @@ AGPainter::~AGPainter()
   mTarget->endPaint();
 }
 
-void AGPainter::putPixel(const AGPoint &p,const AGColor &c)
+void AGPainter::putPixel(const AGVector2 &p,const AGColor &c)
 {
-  AGPoint n=project(p);
+  AGVector2 n=project(p);
   if(pointOk(n))
     mTarget->putPixel((int)n[0],(int)n[1],c);
 }
 
-void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest)
+void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest)
 {
-  AGRect s=pSource.getRect();
+  AGRect2 s=pSource.getRect();
   // ASSUME: we don't want to scale
-  blit(pSource,AGRect(pDest.x(),pDest.y(),s.w(),s.h()),s);
+  blit(pSource,AGRect2(pDest.x(),pDest.y(),s.w(),s.h()),s);
 }
 
-AGPoint AGPainter::project(const AGPoint &p) const
+AGVector2 AGPainter::project(const AGVector2 &p) const
 {
   return mCurrent.project(p);
 }
-bool AGPainter::pointOk(const AGPoint &p) const
+bool AGPainter::pointOk(const AGVector2 &p) const
 {
   return mCurrent.pointOk(p);
 }
 
 
-void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   AGRect2 d;
   d=mCurrent.project(pDest);
-  std::pair<AGRect,AGRect> p=mCurrent.clipRect(d,pSrc);
+  std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
 
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     mTarget->blit(pSource,p.first,p.second);
 }
 
-void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGColor &pColor)
+void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGColor &pColor)
 {
-  AGRect s=pSource.getRect();
+  AGRect2 s=pSource.getRect();
   // ASSUME: we don't want to scale
-  blit(pSource,AGRect(pDest.x(),pDest.y(),s.w(),s.h()),s,pColor);
+  blit(pSource,AGRect2(pDest.x(),pDest.y(),s.w(),s.h()),s,pColor);
 }
 
-void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
+void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor)
 {
 #ifdef SPEED_TEST
   mTarget->blit(pSource,pDest,pSrc,pColor);
@@ -244,7 +244,7 @@ void AGPainter::blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &
 
   AGRect2 d;
   d=mCurrent.project(pDest);
-  std::pair<AGRect,AGRect> p=mCurrent.clipRect(d,pSrc);
+  std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
 
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     mTarget->blit(pSource,p.first,p.second,pColor);
@@ -255,17 +255,17 @@ void AGPainter::tile(const AGTexture &pSource)
 {
   tile(pSource,mTarget->getRect());
 }
-void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest)
+void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest)
 {
   tile(pSource,pDest,pSource.getRect());
 }
-void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   //  return;
   /*  AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
   if(glScreen && false)
     {
-      AGRect d=mCurrent.project(pDest);
+      AGRect2 d=mCurrent.project(pDest);
       //      glScreen->clip(mCurrent.clip);
       glScreen->tile(pSource,d,pSrc);
       glScreen->unclip();
@@ -277,24 +277,24 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect &pDest,const AGRect &
       {
 	float w=std::min(pSrc.w(),pDest.x1()-x);
 	float h=std::min(pSrc.h(),pDest.y1()-y);
-	blit(pSource,AGRect(x,y,w,h),AGRect(pSrc.x0(),pSrc.y0(),w,h));
+	blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
 	//	return;
       }
 }
 
 
 // AGSurface-painting
-void AGPainter::blit(const AGSurface &pSource,const AGRect &pDest)
+void AGPainter::blit(const AGSurface &pSource,const AGRect2 &pDest)
 {
-  AGRect s=pSource.getRect();
+  AGRect2 s=pSource.getRect();
   // ASSUME: we don't want to scale
-  blit(pSource,AGRect(pDest.x(),pDest.y(),s.w(),s.h()),s);
+  blit(pSource,AGRect2(pDest.x(),pDest.y(),s.w(),s.h()),s);
 }
-void AGPainter::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGPainter::blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   AGRect2 d;
   d=mCurrent.project(pDest);
-  std::pair<AGRect,AGRect> p=mCurrent.clipRect(d,pSrc);
+  std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
 
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     mTarget->blit(pSource,p.first,p.second);
@@ -303,12 +303,12 @@ void AGPainter::tile(const AGSurface &pSource)
 {
   tile(pSource,mTarget->getRect());
 }
-void AGPainter::tile(const AGSurface &pSource,const AGRect &pDest)
+void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest)
 {
   tile(pSource,pDest,pSource.getRect());
 
 }
-void AGPainter::tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc)
+void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   float x,y;
   for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
@@ -316,30 +316,30 @@ void AGPainter::tile(const AGSurface &pSource,const AGRect &pDest,const AGRect &
       {
 	float w=std::min(pSrc.w(),pDest.x1()-x);
 	float h=std::min(pSrc.h(),pDest.y1()-y);
-	blit(pSource,AGRect(x,y,w,h),AGRect(pSrc.x0(),pSrc.y0(),w,h));
+	blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
       }
 }
 
-AGColor calcColor(AGPoint p,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
+AGColor calcColor(AGVector2 p,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
 {
   return (pc0*(1-p[0]) + pc1*p[0])*(1-p[1]) + (pc2*(1-p[0]) + pc3*p[0])*p[1];
 }
   
-void AGPainter::drawGradient(const AGRect &pr,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
+void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
 {
   AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
   
-  AGRect src(0,0,1,1);
+  AGRect2 src(0,0,1,1);
 
-  AGRect d=mCurrent.project(pr);
-  std::pair<AGRect,AGRect> p=mCurrent.clipRect(d,src);
+  AGRect2 d=mCurrent.project(pr);
+  std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,src);
 
   AGColor c0=calcColor(p.second.getV0(),pc0,pc1,pc2,pc3);
   AGColor c1=calcColor(p.second.getV10(),pc0,pc1,pc2,pc3);
   AGColor c2=calcColor(p.second.getV01(),pc0,pc1,pc2,pc3);
   AGColor c3=calcColor(p.second.getV1(),pc0,pc1,pc2,pc3);
 
-  AGRect r=p.first;
+  AGRect2 r=p.first;
 
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     {
@@ -362,19 +362,19 @@ void AGPainter::drawGradient(const AGRect &pr,const AGColor &pc0,const AGColor &
 	      float dy=1.0/r.h();
 	      for(cy=0,y=r.y0();y<r.y1();y+=1,cy+=dy)
 		for(cx=0,x=r.x0();x<r.x1();x+=1,cx+=dx)
-		  putPixel(AGPoint(x,y),(c0*(1-cx)+c1*cx)*(1-cy)+(c2*(1-cx)+c3*cx)*cy);
+		  putPixel(AGVector2(x,y),(c0*(1-cx)+c1*cx)*(1-cy)+(c2*(1-cx)+c3*cx)*cy);
 	    }
 	}
     }
 }
-void AGPainter::renderText(const std::string &pText,const AGPoint &p,const AGFont &f)
+void AGPainter::renderText(const std::string &pText,const AGVector2 &p,const AGFont &f)
 {
   AGTexture *t=AGFontEngine::renderText(0,0,pText,f);
   if(t)
-    blit(*t,AGRect(p[0],p[1],t->getSurfaceWidth(),t->getSurfaceHeight()));
+    blit(*t,AGRect2(p[0],p[1],t->getSurfaceWidth(),t->getSurfaceHeight()));
 
 }
-void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, const AGColor& c2)
+void AGPainter::drawBorder(const AGRect2& pRect,int width, const AGColor& c1, const AGColor& c2)
 {
   AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
   if(glScreen)
@@ -382,7 +382,7 @@ void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, con
       #warning "add clipping in gl"
       glScreen->clip(mCurrent.clip);
       glScreen->drawBorder(mCurrent.project(pRect),width,c1,c2);
-      //      glScreen->fillRect(AGRect(0,0,1024,768),c1);
+      //      glScreen->fillRect(AGRect2(0,0,1024,768),c1);
       glScreen->unclip();
       return;
     }
@@ -390,7 +390,7 @@ void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, con
   // 1) maybe improve gl-renderer by using triangles
   // 2) otherwise use line-drawing (which is clipped and transformed itself
   // 3) transform is done for each line - maybe is slow
-  AGRect d=pRect;
+  AGRect2 d=pRect;
 
   for(int t=0;t<width;t++)
     {
@@ -403,24 +403,24 @@ void AGPainter::drawBorder(const AGRect& pRect,int width, const AGColor& c1, con
     }
 }
 
-void AGPainter::fillRect(const AGRect &pDest,const AGColor &c)
+void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
 {
   AGRect2 d,pSrc;
   d=mCurrent.project(pDest);
-  std::pair<AGRect,AGRect> p=mCurrent.clipRect(d,pSrc);
+  std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
   if(p.first.w()>0 && p.first.h()>0)
     mTarget->fillRect(p.first,c);
 }
 
 AGColor AGPainter::getPixel(int x,int y)
 {
-  AGPoint p=mCurrent.project(AGPoint(x,y));
+  AGVector2 p=mCurrent.project(AGVector2(x,y));
   if(!mCurrent.pointOk(p))
     throw std::string("pixel out of clipping!");
   return mTarget->getPixel((int)p[0],(int)p[1]);
 }
 
-void AGPainter::drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c)
+void AGPainter::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c)
 {
   #warning "Add line clipping"
   AGVector2 m0=mCurrent.project(p0);
@@ -433,7 +433,7 @@ void AGPainter::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const A
   mTarget->blitTri(pSource,pSrc,pDest);
 }
 
-void AGPainter::drawCircle(const AGPoint &p,float rad,const AGColor &color)
+void AGPainter::drawCircle(const AGVector2 &p,float rad,const AGColor &color)
 {
   // clipping done in putPixel
 
@@ -448,7 +448,7 @@ void AGPainter::drawCircle(const AGPoint &p,float rad,const AGColor &color)
 
 	if(d2<r2)
 	  {
-	    AGPoint c(x,y);
+	    AGVector2 c(x,y);
 	    putPixel(c,color);
 	  }
       }
@@ -473,7 +473,7 @@ void AGPainter::scale(const AGVector2 &v)
 }
 void AGPainter::clip(const AGRect2 &r)
 {
-  AGRect p=mCurrent.project(r);
+  AGRect2 p=mCurrent.project(r);
   mCurrent.setClip(p);
 }
 
@@ -483,7 +483,7 @@ void AGPainter::transform(const AGRect2 &r)
   clip(r.origin());
 }
 
-AGRect AGPainter::getRect() const
+AGRect2 AGPainter::getRect() const
 {
   return mCurrent.getRect();
 }

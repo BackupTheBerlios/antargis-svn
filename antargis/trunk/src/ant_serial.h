@@ -5,7 +5,7 @@
 #include <SDL.h>
 #include <sstream>
 #include <physfs.h>
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 
 class SerialException
 {

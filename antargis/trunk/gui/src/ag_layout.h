@@ -38,7 +38,7 @@ class AGLayout:public AGWidget
 
 AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode);
 void parseChildren(AGWidget *pParent,const xmlpp::Node &pNode);
-//AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geom);
-AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode);
+//AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect2 &geom);
+AGRect2 getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode);
 
 #endif

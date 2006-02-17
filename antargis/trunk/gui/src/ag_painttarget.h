@@ -38,16 +38,16 @@ class AGPaintTarget
     }
   virtual void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest) MSTUB
 
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor) MSTUB
-  virtual void blit(const AGTexture &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc) MSTUB
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor) MSTUB
+  virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc) MSTUB
+  virtual void blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc) MSTUB
 
-  virtual void drawLine(const AGPoint &p0,const AGPoint &p1,const AGColor &c) MSTUB
-  virtual void fillRect(const AGRect &pr,const AGColor &c) MSTUB
+  virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c) MSTUB
+  virtual void fillRect(const AGRect2 &pr,const AGColor &c) MSTUB
       
-  virtual AGRect getRect() const
+  virtual AGRect2 getRect() const
   {
-    return AGRect(0,0,0,0);
+    return AGRect2(0,0,0,0);
   }
   
   virtual void putPixel(int x,int y,const AGColor &c) MSTUB

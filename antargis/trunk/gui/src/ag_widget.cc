@@ -63,7 +63,7 @@ MWidgetSet *getAllWidgets()
 }
 
 
-AGWidget::AGWidget(AGWidget *pParent,const AGRect &r):
+AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
   sigClick(this,"sigClick"),
@@ -194,12 +194,12 @@ void AGWidget::drawAll(AGPainter &p)
     }
 }
 
-AGRect AGWidget::getRect() const
+AGRect2 AGWidget::getRect() const
 {
   return mr;
 }
 
-AGRect AGWidget::getClientRect() const
+AGRect2 AGWidget::getClientRect() const
 {
   return mr.origin();
 }
@@ -362,7 +362,7 @@ void AGWidget::addChildBack(AGWidget *w)
   mChildren.push_back(w); // set on top
 }
 
-void AGWidget::setRect(const AGRect &pRect)
+void AGWidget::setRect(const AGRect2 &pRect)
 {
   mr=pRect;
 }
@@ -458,9 +458,9 @@ AGWidget *AGWidget::getParent()
   return mParent;
 }
 
-AGPoint AGWidget::getScreenPosition() const
+AGVector2 AGWidget::getScreenPosition() const
 {
-  AGPoint p=mr[0];
+  AGVector2 p=mr[0];
 
   if(mParent)
     p+=mParent->getScreenPosition();
@@ -469,17 +469,17 @@ AGPoint AGWidget::getScreenPosition() const
 }
 
 
-AGRect AGWidget::getScreenRect() const
+AGRect2 AGWidget::getScreenRect() const
 {
-  AGRect srect(mr.origin()+getScreenPosition());
+  AGRect2 srect(mr.origin()+getScreenPosition());
   return srect;
 }
 
-AGPoint AGWidget::fromScreen(const AGPoint &p) const
+AGVector2 AGWidget::fromScreen(const AGVector2 &p) const
 {
   if(!mParent)
     return p;
-  AGRect r(mParent->getScreenRect());
+  AGRect2 r(mParent->getScreenRect());
   return p-r[0];
 }
 
@@ -659,7 +659,7 @@ bool AGWidget::hasFocus(const AGWidget *pWidget)
 }
 
 
-bool AGWidget::eventDragBy(AGEvent *event,const AGPoint &pDiff)
+bool AGWidget::eventDragBy(AGEvent *event,const AGVector2 &pDiff)
 {
   //  TRACE;
   return false;

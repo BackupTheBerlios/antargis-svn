@@ -27,9 +27,9 @@
 #include "ag_draw.h"
 #include "sge.h"
 
-void AGDrawGradient(SDL_Surface *surface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+void AGDrawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {
-    AGRect rect=prect;
+    AGRect2 rect=prect;
     Sint32 v00,v01,v02;
     Sint32 v10,v11,v12;
     
@@ -60,10 +60,10 @@ void AGDrawGradient(SDL_Surface *surface, const AGRect& prect, const AGColor& ul
       return;
     }
     
-    //    AGRect clip;
+    //    AGRect2 clip;
     SDL_Rect clipr;//=clip.sdl();
     SDL_GetClipRect(surface, &clipr);
-    AGRect drawrect = rect.intersect(AGRect(clipr));
+    AGRect2 drawrect = rect.intersect(AGRect2(clipr));
 
     //    cdebug(drawrect);
 
@@ -199,9 +199,9 @@ void AGDrawGradient(SDL_Surface *surface, const AGRect& prect, const AGColor& ul
     }		
   }
 
-void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {
-    AGRect rect=prect;
+    AGRect2 rect=prect;
     Sint32 v00,v01,v02,v03;
     Sint32 v10,v11,v12,v13;
     
@@ -234,7 +234,7 @@ void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect& prect, const AGColo
     
     SDL_Rect clip;
     SDL_GetClipRect(surface, &clip);
-    AGRect drawrect = rect.intersect(AGRect(clip));
+    AGRect2 drawrect = rect.intersect(AGRect2(clip));
 
     if(drawrect.width()==0 || drawrect.height()==0) {
       //    if(drawrect.isNull()) {
@@ -429,9 +429,9 @@ void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect& prect, const AGColo
   }
 
 
-void AGDrawBorder(SDL_Surface *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2)
+void AGDrawBorder(SDL_Surface *surface, const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2)
 {
-  AGRect r=rect;
+  AGRect2 r=rect;
 
   Uint32 uc1=c1.mapRGB(surface->format);//surface.color(c1);
   Uint32 uc2=c2.mapRGB(surface->format);//surface.color(c2);
@@ -446,19 +446,19 @@ void AGDrawBorder(SDL_Surface *surface, const AGRect& rect,int width, const AGCo
     }
 }
 /*
-void AGDraw::drawGradient(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGDraw::drawGradient(AGScreen *surface, const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   surface->drawGradientAlpha(rect,ul,ur,dl,dr);
 }
-void AGDraw::drawGradientAlpha(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGDraw::drawGradientAlpha(AGScreen *surface, const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   surface->drawGradientAlpha(rect,ul,ur,dl,dr);
 }
-void AGDraw::drawGradientAlpha2(AGScreen *surface, const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGDraw::drawGradientAlpha2(AGScreen *surface, const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   surface->drawGradientAlpha(rect,ul,ur,dl,dr);
 }
-void AGDraw::drawBorder(AGScreen *surface, const AGRect& rect,int width, const AGColor& c1, const AGColor& c2)
+void AGDraw::drawBorder(AGScreen *surface, const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2)
 {
   surface->drawBorder(rect,width,c1,c2);
 }

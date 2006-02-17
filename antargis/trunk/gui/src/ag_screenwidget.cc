@@ -36,6 +36,6 @@ AGScreenWidget::~AGScreenWidget()
 
 void AGScreenWidget::draw(AGPainter &p)
 {
-  //  p.clip(AGRect(10,10,50,50));
+  //  p.clip(AGRect2(10,10,50,50));
   p.tile(mTexture);
 }

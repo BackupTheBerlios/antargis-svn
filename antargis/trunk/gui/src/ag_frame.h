@@ -7,11 +7,11 @@
 class AGFrame:public AGWidget
 {
  public:
-  AGFrame(AGWidget *pParent,const AGRect &pRect,size_t width); // transparent frame
-  AGFrame(AGWidget *pParent,const AGRect &pRect,const AGBorder &pBorder);
+  AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t width); // transparent frame
+  AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder);
   ~AGFrame();
 
-  AGRect getClientRect() const;
+  AGRect2 getClientRect() const;
 
   void draw(AGPainter &p);
 

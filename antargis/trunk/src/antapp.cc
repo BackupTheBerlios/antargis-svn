@@ -59,13 +59,13 @@ bool GLApp::eventMouseButtonDown(AGEvent *e)
     {
       if(e->getButton()==3)
 	{
-	  AGPoint p=e->getMousePosition();
+	  AGVector2 p=e->getMousePosition();
 	  omx=p[0];
 	  omy=p[1];
 	}
       else if(e->getButton()==1)
 	{
-	  AGPoint p=e->getMousePosition();
+	  AGVector2 p=e->getMousePosition();
 	  Scene::PickResult nodes=scene.pick(p[0],p[1],1,1);
 	}
     }
@@ -79,7 +79,7 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
     {
       if(e->isSDLEvent())
 	{
-	  AGPoint p=e->getMousePosition();
+	  AGVector2 p=e->getMousePosition();
 	  Scene::PickResult nodes=scene.pick(p[0],p[1],1,1);
 
 	  eventClick(nodes,e->getButton());
@@ -101,7 +101,7 @@ bool GLApp::eventMouseMotion(AGEvent *e)
 {
   if(e->isSDLEvent() && omx>=0)
     {
-      AGPoint p=e->getMousePosition();
+      AGVector2 p=e->getMousePosition();
       //      AGVector4 cam=scene.getCamera();
       mx=p[0]-omx;
       my=p[1]-omy;
@@ -116,7 +116,7 @@ bool GLApp::eventMouseMotion(AGEvent *e)
   if(e->isSDLEvent())
     {
       // check hovering - delayed 
-      AGPoint p=e->getMousePosition();
+      AGVector2 p=e->getMousePosition();
       hx=p[0];
       hy=p[1];
       hb=e->getButton();

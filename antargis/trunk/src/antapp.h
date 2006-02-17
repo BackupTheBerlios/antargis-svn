@@ -8,7 +8,7 @@
 #include <ag_application.h>
 #include <ag_debug.h>
 #include <ag_main.h>
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 
 #ifndef SWIG
 extern std::ofstream out;

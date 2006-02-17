@@ -21,7 +21,7 @@
 #include "ag_colorbutton.h"
 #include "ag_layoutfactory.h"
 
-AGColorButton::AGColorButton(AGWidget *pParent,const AGRect &r,int x,int y):
+AGColorButton::AGColorButton(AGWidget *pParent,const AGRect2 &r,int x,int y):
   AGWidget(pParent,r),gridx(x),gridy(y),mColors(x*y)
 {
 }
@@ -31,13 +31,13 @@ void AGColorButton::draw(AGPainter &p)
   AGWidget::draw(p);
   
   int i=0;
-  AGRect ar(getRect().origin());
+  AGRect2 ar(getRect().origin());
   float w=ar.w()/gridx;
   float h=ar.h()/gridy;
   for(int y=0;y<gridy;y++)
     for(int x=0;x<gridx;x++)
       {
-	AGRect r(ar.w()*x/gridx,ar.h()*y/gridy,w,h);
+	AGRect2 r(ar.w()*x/gridx,ar.h()*y/gridy,w,h);
 	p.fillRect(r,mColors[i++]);
       }
 }
@@ -71,7 +71,7 @@ bool AGColorButton::eventMouseClick(AGEvent *e)
   //  const AGSDLEvent *e=dynamic_cast<const AGSDLEvent*>(m);
   if(e->isSDLEvent())
     {
-      AGPoint p=e->getMousePosition();
+      AGVector2 p=e->getMousePosition();
       p-=getScreenRect().getV0();
       float gx=p[0]*gridx/getRect().w();
       float gy=p[1]*gridy/getRect().h();
@@ -92,7 +92,7 @@ class AGColorButtonLayoutCreator:public AGLayoutCreator
 {
  public:
   REGISTER_COMPONENT(ColorButton,"colorButton")
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     AGColorButton *b;
 

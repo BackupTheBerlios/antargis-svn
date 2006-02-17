@@ -325,7 +325,7 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 	{
 	  int move=2;
 	  AGSurface copy(as.width()+2*move,as.height()+2*move);
-	  copy.blit(as,AGRect(move,move,as.width(),as.height()),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
+	  copy.blit(as,AGRect2(move,move,as.width(),as.height()),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
 	  as=copy;
 	  border(as,pFont.getBorderColor());
 	}

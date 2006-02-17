@@ -78,9 +78,9 @@ class AGSurface:public AGPaintTarget
   int width() const;
   int height() const;
 
-  AGRect getRect() const;
+  AGRect2 getRect() const;
 
-  AGSurface getSubSurface(const AGRect &r) const;
+  AGSurface getSubSurface(const AGRect2 &r) const;
 
   bool valid() const;
 
@@ -88,11 +88,11 @@ class AGSurface:public AGPaintTarget
 
   AGSurface &operator=(const AGSurface &p);
 
-  virtual void blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor);
+  virtual void blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor);
 
-  void drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  void drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  void drawBorder(const AGRect& rect,int width, const AGColor& c1, const AGColor& c2);
+  void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  void drawBorder(const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2);
 
   virtual void putPixel(int x,int y,const AGColor &c);
   virtual AGColor getPixel(int x,int y) const;

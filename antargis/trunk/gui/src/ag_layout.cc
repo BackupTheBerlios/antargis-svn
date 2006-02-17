@@ -36,19 +36,19 @@
 
 
 AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
-  AGWidget(pgParent,AGRect(0,0,0,0))
+  AGWidget(pgParent,AGRect2(0,0,0,0))
 {
   xmlpp::Document p;
   p.parseMemory(pXMLData);
 
-  AGRect geom;
+  AGRect2 geom;
   std::string geomS=p.root().get("geometry");
   if(geomS.length())
-    geom=AGRect(geomS);
+    geom=AGRect2(geomS);
   else if(pgParent)
     geom=pgParent->getRect().origin();
   else
-    geom=AGRect(0,0,getMain()->width(),getMain()->height());
+    geom=AGRect2(0,0,getMain()->width(),getMain()->height());
 
   setRect(geom);
   setName(p.root().get("name"));
@@ -90,7 +90,7 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 {
   std::string n=pNode.getName();
 
-  AGRect geom=getLayoutGeometry(pParent,pNode);
+  AGRect2 geom=getLayoutGeometry(pParent,pNode);
 
   AGWidget *w=0;
 
@@ -135,10 +135,10 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
   return w;
 }
 
-AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
+AGRect2 getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 {
   //  TRACE;
-  AGRect geom=pParent->getClientRect();
+  AGRect2 geom=pParent->getClientRect();
   AGTable *t=dynamic_cast<AGTable*>(pParent);
   //  cdebug(pNode.getName());
   //  cdebug(geom);
@@ -157,7 +157,7 @@ AGRect getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 
   std::string geomS=pNode.get("geometry");
   if(geomS.length())
-    geom=AGRect(geomS);
+    geom=AGRect2(geomS);
   return geom;
 }
 
@@ -181,7 +181,7 @@ class AGButtonLayoutCreator:public AGLayoutCreator
 {
  public:
   REGISTER_COMPONENT(Button,"button")
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     AGButton *b;
     std::string caption=pNode.get("caption");
@@ -205,7 +205,7 @@ class AGTableLayoutCreator:public AGLayoutCreator
   REGISTER_COMPONENT(Table,"table")
 
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     AGWidget *w=parseTable(pParent,pNode,pRect);
     pParent->addChild(w);
@@ -213,7 +213,7 @@ class AGTableLayoutCreator:public AGLayoutCreator
     return w;
   }
 
-AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect &geom)
+AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect2 &geom)
 {
   TRACE;
   AGTable *t;
@@ -314,7 +314,7 @@ class AGWindowLayoutCreator:public AGLayoutCreator
  public:
   REGISTER_COMPONENT(Window,"window")
   
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
       std::string title=pNode.get("title");
       std::string theme=pNode.get("theme");
@@ -335,7 +335,7 @@ class AGTextLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Text,"text")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     std::string text=pNode.get("caption");
     
@@ -381,7 +381,7 @@ class AGEditLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Edit,"edit")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     std::string text=pNode.get("text");
@@ -416,7 +416,7 @@ class AGListBoxLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(ListBox,"listBox")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     AGListBox *l=new AGListBox(pParent,pRect);
@@ -432,7 +432,7 @@ class AGLayoutLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Layout,"layout")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     std::string filename=pNode.get("filename");
@@ -452,7 +452,7 @@ class AGImageLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Image,"image")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     std::string filename=pNode.get("filename");
@@ -461,7 +461,7 @@ public:
     if(filename.length())
       s=AGSurface::load(filename);
 
-    AGRect r=pRect;
+    AGRect2 r=pRect;
     if(pNode.get("x").length())
       r.setX(toFloat(pNode.get("x")));
     if(pNode.get("y").length())
@@ -482,7 +482,7 @@ class AGFrameLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Frame,"frame")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     std::string border=pNode.get("border");
@@ -506,7 +506,7 @@ class AGCellLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Cell,"cell")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     return new AGWidget(pParent,pRect);
   }

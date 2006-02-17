@@ -27,16 +27,16 @@
 class AGImage:public AGWidget
 {
  public:
-  AGImage(AGWidget *pParent,const AGRect &r,AGSurface pSurface,bool pTile,const AGRect &pRect=AGRect(0,0,0,0));
+  AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile,const AGRect2 &pRect=AGRect2(0,0,0,0));
   virtual ~AGImage();
 
-  virtual void draw(AGPainter &p);//const AGRect &r);
+  virtual void draw(AGPainter &p);//const AGRect2 &r);
 
   void setSurface(const AGSurface &pSurface);
   void setTexture(const AGTexture &pTexture);
 
   void useTextures();
-  //  void setSourceRect(const AGRect &pRect);
+  //  void setSourceRect(const AGRect2 &pRect);
 
   void setCenter(bool c);
 
@@ -44,7 +44,7 @@ class AGImage:public AGWidget
   AGTexture mTexture;
   bool mTile;
   bool mCenter;
-  AGRect mSrcRect;
+  AGRect2 mSrcRect;
 };
 
 #endif

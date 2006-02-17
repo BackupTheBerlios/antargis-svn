@@ -24,13 +24,13 @@
 #include "ag_theme.h"
 #include "ag_debug.h"
 
-AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect pRect):
+AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect2 pRect):
   AGButton(pParent,pRect,"")//,mChecked(false)
 {
   /*  mImage=0;
   if(getTheme()->hasSurface(mType+".normal"))
-    addChild(mImage=new AGImage(this,AGPoint(0,0),getTheme()->getSurface(mType+".normal"),false));
-  addChild(new AGText(this,AGPoint(0,0),pName,getTheme()->getFont(std::string("Font.")+mType)));
+    addChild(mImage=new AGImage(this,AGVector2(0,0),getTheme()->getSurface(mType+".normal"),false));
+  addChild(new AGText(this,AGVector2(0,0),pName,getTheme()->getFont(std::string("Font.")+mType)));
 
   adaptHeightFromChildren();*/
 }

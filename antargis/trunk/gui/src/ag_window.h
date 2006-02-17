@@ -26,21 +26,21 @@
 class AGWindow:public AGTable
 {
  public:
-  AGWindow(AGWidget *pWidget,const AGRect &pRect,const std::string &pTitle="",const std::string &pTheme="");
+  AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTitle="",const std::string &pTheme="");
 
   void addChild(AGWidget *w);
 
   AGWidget *getClient();
 
   virtual bool eventMouseButtonDown(AGEvent *m);
-  bool eventDragBy(AGEvent *event,const AGPoint &pDiff);
+  bool eventDragBy(AGEvent *event,const AGVector2 &pDiff);
 
   void close();
 
   // slot
   bool tryClose(AGEvent *m);
 
-  AGRect getClientRect() const;
+  AGRect2 getClientRect() const;
 
   AGSignal sigClose;
 

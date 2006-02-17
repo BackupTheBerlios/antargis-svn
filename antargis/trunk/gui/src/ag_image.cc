@@ -21,7 +21,7 @@
 #include "ag_image.h"
 #include "ag_debug.h"
 
-AGImage::AGImage(AGWidget *pParent,const AGRect &r,AGSurface pSurface,bool pTile,const AGRect &pRect):
+AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile,const AGRect2 &pRect):
   AGWidget(pParent,r),
   mTexture(pSurface),mTile(pTile)
 {
@@ -55,7 +55,7 @@ void AGImage::draw(AGPainter &p)
   else if(center)
     {
       
-      AGRect mr=getRect().origin();
+      AGRect2 mr=getRect().origin();
 
       if(mCenter)
 	mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);

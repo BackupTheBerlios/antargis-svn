@@ -29,7 +29,7 @@ class AGImage;
 class AGCheckBox:public AGButton
 {
  public:
-  AGCheckBox(AGWidget *pParent,AGRect pRect);
+  AGCheckBox(AGWidget *pParent,AGRect2 pRect);
 
   virtual bool eventMouseClick(AGEvent *m);
 };

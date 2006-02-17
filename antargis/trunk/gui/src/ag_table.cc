@@ -21,7 +21,7 @@
 #include "ag_table.h"
 #include "ag_debug.h"
 
-AGTable::AGTable(AGWidget *pWidget,const AGRect &pRect):
+AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
   AGWidget(pWidget,pRect),
   w(0),h(0),xw(0),yw(0),mInserted(false)
 {
@@ -90,9 +90,9 @@ void AGTable::addChild(int px,int py,AGWidget *pWidget)
   AGWidget::addChild(pWidget);
 }
 
-AGRect AGTable::getClientRect(int x,int y) const
+AGRect2 AGTable::getClientRect(int x,int y) const
 {
-  AGRect mrect(0,0,0,0);
+  AGRect2 mrect(0,0,0,0);
 
   int mx,my;
 

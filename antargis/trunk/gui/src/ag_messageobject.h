@@ -41,7 +41,7 @@ class AGEvent
   void setCaller(AGListener *pCaller);
   std::string getName() const;
 
-  AGPoint getMousePosition() const;
+  AGVector2 getMousePosition() const;
   SDLKey getKey() const;
   SDLMod getMod() const;
   int getButton() const;
@@ -208,7 +208,7 @@ class AGMessageObject:public AGListener
   virtual bool eventResize(AGEvent *m);
 
   virtual Uint8 getButtonState() const;
-  virtual AGPoint getMousePosition() const;
+  virtual AGVector2 getMousePosition() const;
 
 
   AGSignal sigActive;

@@ -31,15 +31,15 @@
 class AGWidget:public AGMessageObject
 {
  public:
-  AGWidget(AGWidget *pParent,const AGRect &r);
+  AGWidget(AGWidget *pParent,const AGRect2 &r);
   virtual ~AGWidget();
   
   virtual void draw(AGPainter &p);
   virtual void drawAfter(AGPainter &p);
   virtual void drawAll(AGPainter &p);
-  AGRect getRect() const;
-  virtual AGRect getClientRect() const;
-  void setRect(const AGRect &pRect);
+  AGRect2 getRect() const;
+  virtual AGRect2 getClientRect() const;
+  void setRect(const AGRect2 &pRect);
   
   void setParent(AGWidget *pParent);
   AGWidget *getParent();
@@ -112,9 +112,9 @@ class AGWidget:public AGMessageObject
   // clear children
   void clear();
 
-  AGRect getScreenRect() const;
-  AGPoint getScreenPosition() const;
-  AGPoint fromScreen(const AGPoint &p) const;
+  AGRect2 getScreenRect() const;
+  AGVector2 getScreenPosition() const;
+  AGVector2 fromScreen(const AGVector2 &p) const;
 
   // focus
 
@@ -123,7 +123,7 @@ class AGWidget:public AGMessageObject
   void gainCompleteFocus(AGWidget *pWidget=0);
 
 
-  virtual bool eventDragBy(AGEvent *event,const AGPoint &pDiff);
+  virtual bool eventDragBy(AGEvent *event,const AGVector2 &pDiff);
 
   bool getFocus() const;
   bool hasFocus(const AGWidget *pWidget=0);
@@ -151,7 +151,7 @@ class AGWidget:public AGMessageObject
 
   std::list<AGWidget*> mToClear;
 
-  AGRect mr;
+  AGRect2 mr;
   AGWidget *mParent;
   bool mChildrenEventFirst;
   bool mChildrenDrawFirst;
@@ -167,7 +167,7 @@ class AGWidget:public AGMessageObject
   bool mHasFocus;
   AGWidget *mFocus;
 
-  AGPoint mOldMousePos;
+  AGVector2 mOldMousePos;
 
   std::string mName;
   bool mModal;

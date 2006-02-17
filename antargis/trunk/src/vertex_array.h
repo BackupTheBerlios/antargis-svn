@@ -3,7 +3,7 @@
 
 #include "scene.h"
 #include "glsl.h"
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 #include <vector>
 #define GL_GLEXT_PROTOTYPES
 #include <SDL_opengl.h>

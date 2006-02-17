@@ -2,7 +2,7 @@
 #define HEIGHT_MAP_H
 
 #include "scene.h"
-#include <ag_triangle.h>
+#include <ag_geometry.h>
 #include <ag_xml.h>
 #include "entptr.h"
 #include <ag_messageobject.h>

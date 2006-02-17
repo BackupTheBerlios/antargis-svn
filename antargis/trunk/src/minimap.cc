@@ -4,7 +4,7 @@
 
 #define MAP_BORDER
 
-MiniMap::MiniMap(AGWidget *p,const AGRect &r,AntMap *pMap):
+MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
   AGWidget(p,r),
   mMap(pMap),
   mSurface(r.w(),r.h())
@@ -77,7 +77,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
       p=new AGPainter(*mTexture);
       inmem=false;
 
-      //      p->fillRect(AGRect(0,0,300,300),AGColor(0xFF,0,0));
+      //      p->fillRect(AGRect2(0,0,300,300),AGColor(0xFF,0,0));
       //      p->blit(*mTexture,mTexture->getRect());
 
       //      getScreen().flip();
@@ -130,7 +130,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 	    if(mMap->getHeight(mv[0],mv[1])<0)
 	      c=c*0.25+AGColor(0,0,0xFF)*0.75;
 	    
-	    p->putPixel(AGPoint(x,y),c);
+	    p->putPixel(AGVector2(x,y),c);
 	  }
     }
   else
@@ -138,7 +138,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
       for(x=0;x<w;x++)
 	for(y=0;y<h;y++)
 	  {
-	    p->putPixel(AGPoint(x,y),AGColor(0xFF,0,0));
+	    p->putPixel(AGVector2(x,y),AGColor(0xFF,0,0));
 	  }
     }
   delete p;
@@ -157,7 +157,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 void MiniMap::draw(AGPainter &p)
 {
   CTRACE;
-  AGRect m=getRect().origin();
+  AGRect2 m=getRect().origin();
   cdebug(mTexture<<"   "<<m);
   p.blit(*mTexture,m);
 
@@ -178,7 +178,7 @@ void MiniMap::draw(AGPainter &p)
       
       v-=AGVector2(w/2,h/2);
 
-      AGRect r(v[0],v[1],w,h);
+      AGRect2 r(v[0],v[1],w,h);
       AGColor c1(0xff,0xaa,0);
       AGColor c2(0xee,0x77,0);
       
@@ -200,7 +200,7 @@ void MiniMap::drawEntities(AGPainter &p)
 	      AGVector2 v=(*i)->getPos2D();
 	      v=fromMapCoords(v);
 	      
-	      p.fillRect(AGRect(v[0],v[1],2,2),(*i)->getMinimapColor());
+	      p.fillRect(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor());
 	    }
 	}
 
@@ -224,7 +224,7 @@ void MiniMap::setScene(Scene *pScene)
 
 bool MiniMap::eventMouseClick(AGEvent *m)
 {
-  AGPoint p(m->getMousePosition()-getScreenRect()[0]);
+  AGVector2 p(m->getMousePosition()-getScreenRect()[0]);
   if(mMap==0 || mScene==0)
     return AGWidget::eventMouseClick(m);
 
@@ -253,7 +253,7 @@ bool MiniMap::eventMouseClick(AGEvent *m)
 
 AGVector2 MiniMap::toMapCoords(AGVector2 v) const
 {
-  AGRect r=getRect();
+  AGRect2 r=getRect();
   v[0]/=r.w();
   v[1]/=r.h();
 
@@ -272,7 +272,7 @@ AGVector2 MiniMap::toMapCoords(AGVector2 v) const
 }
 AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
 {
-  AGRect r=getRect();
+  AGRect2 r=getRect();
 
 #ifdef MAP_BORDER
   v[0]-=mMapBorder;
@@ -301,7 +301,7 @@ class AGMiniMapLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(MiniMap,"miniMap")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     CTRACE;
     return new MiniMap(pParent,pRect,0);

@@ -2,7 +2,7 @@
 #define __ANTARGIS_H__
 #include "ag_rubyobj.h"
 #include "ag_messageobject.h"
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include "ag_geometry.h"
 #include "ag_font.h"
 #include "ag_color.h"
@@ -55,7 +55,7 @@
 #ifdef SWIG
 %include "ag_rubyobj.h"
 %include "ag_messageobject.h"
-%include "ag_triangle.h"
+%include "ag_geometry.h"
 %include "ag_geometry.h"
 %include "ag_font.h"
 %include "ag_color.h"

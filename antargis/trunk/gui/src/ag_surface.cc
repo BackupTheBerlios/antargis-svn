@@ -216,14 +216,14 @@ AGColor AGSurface::getPixel(int x,int y) const
 
 
 
-AGSurface AGSurface::getSubSurface(const AGRect &sr) const
+AGSurface AGSurface::getSubSurface(const AGRect2 &sr) const
 {
   CHECK_ZERO(s);
   CTRACE;
 
   AGInternalSurface *ns=AGCreate32BitSurface((int)sr.w(),(int)sr.h());
 
-  AGRect dr(sr.origin());
+  AGRect2 dr(sr.origin());
   Uint32 c;
   Uint8 r,g,b,a;
 
@@ -249,13 +249,13 @@ Uint32 AGSurface::color(const AGColor &c) const
   return c.mapRGB(s->surface->format);
 }
 
-AGRect AGSurface::getRect() const
+AGRect2 AGSurface::getRect() const
 {
   CHECK_ZERO(s);
   if(s)
-    return AGRect(0,0,s->surface->w,s->surface->h);
+    return AGRect2(0,0,s->surface->w,s->surface->h);
   else
-    return AGRect(0,0,0,0);
+    return AGRect2(0,0,0,0);
 }
 
 
@@ -270,27 +270,27 @@ int AGSurface::height() const
   return s->surface->h;
 }
 
-void AGSurface::drawGradient(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGSurface::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
   AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
   s->version++;
 }
 
-void AGSurface::drawGradientAlpha(const AGRect& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+void AGSurface::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
   AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
   s->version++;
 }
-void AGSurface::drawBorder(const AGRect& rect,int W, const AGColor& c1, const AGColor& c2)
+void AGSurface::drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2)
 {
   CHECK_ZERO(s);
   AGDrawBorder(s->surface,rect,W,c1,c2);
   s->version++;
 }
 
-void AGSurface::blit(const AGSurface &pSource,const AGRect &pDest,const AGRect &pSrc,const AGColor &pColor)
+void AGSurface::blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor)
 {
   int x,y,sx,sy,dx,dy;
   Uint32 c;

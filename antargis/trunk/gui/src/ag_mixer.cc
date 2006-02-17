@@ -162,7 +162,7 @@ void AGSound::stopMp3()
       mMusic=0;
     }      
 }
-AGSound::AGSound():AGWidget(0,AGRect(0,0,0,0)),sigMp3Finished(this,"sigMp3Finished")
+AGSound::AGSound():AGWidget(0,AGRect2(0,0,0,0)),sigMp3Finished(this,"sigMp3Finished")
 {
   REGISTER_SINGLETON(this);
   soundVol=1.0f;

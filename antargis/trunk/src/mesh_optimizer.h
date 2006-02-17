@@ -1,7 +1,7 @@
 #ifndef MESH_OPTIMIZER
 #define MESH_OPTIMIZER
 
-#include "ag_triangle.h"
+#include "ag_geometry.h"
 #include "vertex_array.h"
 
 #include <map>

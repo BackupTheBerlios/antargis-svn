@@ -21,7 +21,7 @@
 #include "ag_vtiler.h"
 #include "ag_debug.h"
 
-AGVTiler::AGVTiler(AGWidget *pParent,const AGRect&pRect,bool pAdaptMyHeight):
+AGVTiler::AGVTiler(AGWidget *pParent,const AGRect2&pRect,bool pAdaptMyHeight):
   AGWidget(pParent,pRect),mAdaptMyHeight(pAdaptMyHeight)
 
 {
@@ -91,7 +91,7 @@ void AGVTiler::adaptHeightFromChildren()
 
 
 
-AGHTiler::AGHTiler(AGWidget *pParent,const AGRect&pRect,bool pAdaptMyHeight):
+AGHTiler::AGHTiler(AGWidget *pParent,const AGRect2&pRect,bool pAdaptMyHeight):
   AGVTiler(pParent,pRect,pAdaptMyHeight)
 {
 }

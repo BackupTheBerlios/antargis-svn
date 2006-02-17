@@ -39,7 +39,7 @@ struct AGListBoxItem
 class AGListBox:public AGWidget
 {
  public:
-  AGListBox(AGWidget *pParent,const AGRect &pRect);
+  AGListBox(AGWidget *pParent,const AGRect2 &pRect);
 
   void insertItem(std::string pID,std::string pValue);
   void selectItem(std::string pID);

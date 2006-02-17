@@ -60,7 +60,7 @@ AGFont AGEditLine::getFont() const
 
 #define SMALL_CHUNKS
 
-void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
+void AGEditLine::draw(AGPainter &p,const AGVector2 &pPoint,const AGRect2 &pClip)
 {
   int x=0;
   if(mAlign==EDIT_CENTER)
@@ -72,15 +72,15 @@ void AGEditLine::draw(AGPainter &p,const AGPoint &pPoint,const AGRect &pClip)
   for(std::vector<std::string>::iterator i=a.begin();i!=a.end();i++)
     {
       //      cdebug(*i);
-      p.renderText(*i,AGPoint(pPoint[0]+x+mx,pPoint[1]),mFont);
+      p.renderText(*i,AGVector2(pPoint[0]+x+mx,pPoint[1]),mFont);
       mx+=AGFontEngine::getWidth(mFont,*i+" ");
     }
 #else
-  p.renderText(mText+(mHardEnd?"":""),AGPoint(pPoint.x+x,pPoint.y),mFont);
+  p.renderText(mText+(mHardEnd?"":""),AGVector2(pPoint.x+x,pPoint.y),mFont);
 #endif
 }
 
-void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRect &pClip,const AGColor &c)
+void AGEditLine::drawCursor(AGPainter &p,int cx,const AGVector2 &pPoint,const AGRect2 &pClip,const AGColor &c)
 {
   int x1=AGFontEngine::getWidth(mFont,mText.substr(0,cx));
   int x2=AGFontEngine::getWidth(mFont,mText.substr(0,cx+1));
@@ -89,7 +89,7 @@ void AGEditLine::drawCursor(AGPainter &p,int cx,const AGPoint &pPoint,const AGRe
   if(w==0)
     w=8;
 
-  p.fillRect(AGRect(pPoint[0]+x1,pPoint[1],w,height()),c);
+  p.fillRect(AGRect2(pPoint[0]+x1,pPoint[1],w,height()),c);
 }
 
 
@@ -240,7 +240,7 @@ void AGEditLine::setText(const std::string &s)
 
 
   
-AGEdit::AGEdit(AGWidget *pParent,const AGRect &pRect):
+AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   AGWidget(pParent,pRect),mCursorTime(0),mCursorLast(SDL_GetTicks()),
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true)
@@ -289,7 +289,7 @@ void AGEdit::draw(AGPainter &p)
 
   //  cdebug(pRect);
   //  cdebug("getRect:"<<getRect());
-  AGRect mr(getRect());//pRect.project(getRect()));
+  AGRect2 mr(getRect());//pRect.project(getRect()));
 
   AGColor cursorC;
   if(mShowCursor)
@@ -326,9 +326,9 @@ void AGEdit::draw(AGPainter &p)
       //      cdebug((*i).getText());
       //      cdebug("("<<x<<";"<<y<<")");
       //      cdebug(mr);
-      i->draw(p,AGPoint(x,y),getRect().origin());//pRect.project(getRect()));
+      i->draw(p,AGVector2(x,y),getRect().origin());//pRect.project(getRect()));
       if(cy+mViewCy==mCy && mMutable && hasFocus()) // FIXME: Change show cursor only if widget has focus
-	i->drawCursor(p,mCx,AGPoint(x,y),getRect(),cursorC);
+	i->drawCursor(p,mCx,AGVector2(x,y),getRect(),cursorC);
       y+=i->height();
       if(y>getRect().h())
 	{

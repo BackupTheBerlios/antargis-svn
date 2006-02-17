@@ -33,7 +33,7 @@ AGListBoxItem::AGListBoxItem(std::string pID,std::string pValue)
 
 
 
-AGListBox::AGListBox(AGWidget *pParent,const AGRect &pRect):AGWidget(pParent,pRect)
+AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pRect)
 {
   mBackground=AGBackground("listbox.background");
   mHilight=AGBackground("listbox.selected");
@@ -48,7 +48,7 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect &pRect):AGWidget(pParent,pRe
 
   for(;y<pRect.h();y+=mItemHeight,count++)
     {
-      AGRect r(0,y,pRect.w(),mItemHeight);
+      AGRect2 r(0,y,pRect.w(),mItemHeight);
       cdebug(r);
       AGEdit *e=new AGEdit(this,r);
       e->setMutable(false);
@@ -147,7 +147,7 @@ void AGListBox::draw(AGPainter &p)
     {
       int y=mSelected-mY;
       
-      AGRect r(0,y*mItemHeight,width(),mItemHeight);
+      AGRect2 r(0,y*mItemHeight,width(),mItemHeight);
       p.transform(r);
       mHilight.draw(p);
     }
@@ -160,7 +160,7 @@ bool AGListBox::eventMouseClick(AGEvent *e)
   CTRACE;
   if(e->isSDLEvent())
     {
-      AGPoint p=e->getMousePosition();
+      AGVector2 p=e->getMousePosition();
 
       int b=e->getButton();
       cdebug(b);
