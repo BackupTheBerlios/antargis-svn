@@ -84,6 +84,10 @@ class AntGameApp <AntRubyView
 		puts "test4"
 		@story.setTitle(title)
 		puts "test5"
+		#addHandler(@story.getChild("
+	end
+
+	def storyTalkFinished
 	end
 
 	def eventFrame(time)

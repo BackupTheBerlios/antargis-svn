@@ -943,16 +943,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGPainter,b);
  $result=*b;
 }
-%typemap(directorout) AGPoint {
- AGPoint *b;
- Data_Get_Struct($input,AGPoint,b);
- $result=*b;
-}
-%typemap(directorout) AGPoint3 {
- AGPoint3 *b;
- Data_Get_Struct($input,AGPoint3,b);
- $result=*b;
-}
 %typemap(directorout) AGRadio {
  AGRadio *b;
  Data_Get_Struct($input,AGRadio,b);
@@ -963,19 +953,14 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGRadioGroup,b);
  $result=*b;
 }
-%typemap(directorout) AGRect {
- AGRect *b;
- Data_Get_Struct($input,AGRect,b);
- $result=*b;
-}
 %typemap(directorout) AGRect2 {
  AGRect2 *b;
  Data_Get_Struct($input,AGRect2,b);
  $result=*b;
 }
-%typemap(directorout) AGRect3 {
- AGRect3 *b;
- Data_Get_Struct($input,AGRect3,b);
+%typemap(directorout) AGRect23 {
+ AGRect23 *b;
+ Data_Get_Struct($input,AGRect23,b);
  $result=*b;
 }
 %typemap(directorout) AGRubyObject {
@@ -1081,6 +1066,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGVector2 {
  AGVector2 *b;
  Data_Get_Struct($input,AGVector2,b);
+ $result=*b;
+}
+%typemap(directorout) AGVector23 {
+ AGVector23 *b;
+ Data_Get_Struct($input,AGVector23,b);
  $result=*b;
 }
 %typemap(directorout) AGVector3 {

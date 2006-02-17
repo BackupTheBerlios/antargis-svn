@@ -1066,30 +1066,30 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGMutex swig_types[41]
 #define SWIGTYPE_p_AGPaintTarget swig_types[42]
 #define SWIGTYPE_p_AGPainter swig_types[43]
-#define SWIGTYPE_p_AGPoint3 swig_types[44]
-#define SWIGTYPE_p_AGProjection swig_types[45]
-#define SWIGTYPE_p_AGRadio swig_types[46]
-#define SWIGTYPE_p_AGRadioGroup swig_types[47]
-#define SWIGTYPE_p_AGRect2 swig_types[48]
-#define SWIGTYPE_p_AGRect3 swig_types[49]
-#define SWIGTYPE_p_AGRubyObject swig_types[50]
-#define SWIGTYPE_p_AGScreen swig_types[51]
-#define SWIGTYPE_p_AGScreenWidget swig_types[52]
-#define SWIGTYPE_p_AGShaderParameter swig_types[53]
-#define SWIGTYPE_p_AGShaderProgram swig_types[54]
-#define SWIGTYPE_p_AGSignal swig_types[55]
-#define SWIGTYPE_p_AGSound swig_types[56]
-#define SWIGTYPE_p_AGSubMenu swig_types[57]
-#define SWIGTYPE_p_AGSurface swig_types[58]
-#define SWIGTYPE_p_AGTable swig_types[59]
-#define SWIGTYPE_p_AGText swig_types[60]
-#define SWIGTYPE_p_AGTexture swig_types[61]
-#define SWIGTYPE_p_AGTextureCache swig_types[62]
-#define SWIGTYPE_p_AGTheme swig_types[63]
-#define SWIGTYPE_p_AGTriangle2 swig_types[64]
-#define SWIGTYPE_p_AGTriangle3 swig_types[65]
-#define SWIGTYPE_p_AGVTiler swig_types[66]
-#define SWIGTYPE_p_AGVector2 swig_types[67]
+#define SWIGTYPE_p_AGProjection swig_types[44]
+#define SWIGTYPE_p_AGRadio swig_types[45]
+#define SWIGTYPE_p_AGRadioGroup swig_types[46]
+#define SWIGTYPE_p_AGRect2 swig_types[47]
+#define SWIGTYPE_p_AGRect23 swig_types[48]
+#define SWIGTYPE_p_AGRubyObject swig_types[49]
+#define SWIGTYPE_p_AGScreen swig_types[50]
+#define SWIGTYPE_p_AGScreenWidget swig_types[51]
+#define SWIGTYPE_p_AGShaderParameter swig_types[52]
+#define SWIGTYPE_p_AGShaderProgram swig_types[53]
+#define SWIGTYPE_p_AGSignal swig_types[54]
+#define SWIGTYPE_p_AGSound swig_types[55]
+#define SWIGTYPE_p_AGSubMenu swig_types[56]
+#define SWIGTYPE_p_AGSurface swig_types[57]
+#define SWIGTYPE_p_AGTable swig_types[58]
+#define SWIGTYPE_p_AGText swig_types[59]
+#define SWIGTYPE_p_AGTexture swig_types[60]
+#define SWIGTYPE_p_AGTextureCache swig_types[61]
+#define SWIGTYPE_p_AGTheme swig_types[62]
+#define SWIGTYPE_p_AGTriangle2 swig_types[63]
+#define SWIGTYPE_p_AGTriangle3 swig_types[64]
+#define SWIGTYPE_p_AGVTiler swig_types[65]
+#define SWIGTYPE_p_AGVector2 swig_types[66]
+#define SWIGTYPE_p_AGVector23 swig_types[67]
 #define SWIGTYPE_p_AGVector3 swig_types[68]
 #define SWIGTYPE_p_AGVector4 swig_types[69]
 #define SWIGTYPE_p_AGVertexProgram swig_types[70]
@@ -1126,7 +1126,7 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[101]
 #define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[102]
 #define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[103]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[104]
+#define SWIGTYPE_p_std__vectorTAGRect23_t swig_types[104]
 #define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[105]
 #define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[106]
 #define SWIGTYPE_p_std__vectorTNode_p_t swig_types[107]
@@ -1840,8 +1840,8 @@ Uint8 SwigDirector_AGMessageObject::getButtonState() const {
 }
 
 
-AGPoint SwigDirector_AGMessageObject::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGMessageObject::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -1849,15 +1849,15 @@ AGPoint SwigDirector_AGMessageObject::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
-SwigDirector_AGWidget::SwigDirector_AGWidget(VALUE self, AGWidget *pParent, AGRect const &r): AGWidget(pParent, r), Swig::Director(self) {
+SwigDirector_AGWidget::SwigDirector_AGWidget(VALUE self, AGWidget *pParent, AGRect2 const &r): AGWidget(pParent, r), Swig::Director(self) {
     
 }
 
@@ -1965,7 +1965,7 @@ void SwigDirector_AGWidget::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGWidget::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGWidget::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -2021,8 +2021,8 @@ bool SwigDirector_AGWidget::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGWidget::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGWidget::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -2030,16 +2030,16 @@ AGRect SwigDirector_AGWidget::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGWidget::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGWidget::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -2047,11 +2047,11 @@ AGPoint SwigDirector_AGWidget::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -2420,7 +2420,7 @@ void SwigDirector_AGWidget::mark() {
 }
 
 
-SwigDirector_AGColorButton::SwigDirector_AGColorButton(VALUE self, AGWidget *pParent, AGRect const &r, int x, int y): AGColorButton(pParent, r, x, y), Swig::Director(self) {
+SwigDirector_AGColorButton::SwigDirector_AGColorButton(VALUE self, AGWidget *pParent, AGRect2 const &r, int x, int y): AGColorButton(pParent, r, x, y), Swig::Director(self) {
     
 }
 
@@ -2528,7 +2528,7 @@ void SwigDirector_AGColorButton::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGColorButton::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGColorButton::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -2584,8 +2584,8 @@ bool SwigDirector_AGColorButton::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGColorButton::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGColorButton::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -2593,16 +2593,16 @@ AGRect SwigDirector_AGColorButton::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGColorButton::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGColorButton::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -2610,11 +2610,11 @@ AGPoint SwigDirector_AGColorButton::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -2983,7 +2983,7 @@ void SwigDirector_AGColorButton::mark() {
 }
 
 
-SwigDirector_AGGLWidget::SwigDirector_AGGLWidget(VALUE self, AGWidget *pParent, AGRect const &r): AGGLWidget(pParent, r), Swig::Director(self) {
+SwigDirector_AGGLWidget::SwigDirector_AGGLWidget(VALUE self, AGWidget *pParent, AGRect2 const &r): AGGLWidget(pParent, r), Swig::Director(self) {
     
 }
 
@@ -3091,7 +3091,7 @@ void SwigDirector_AGGLWidget::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGGLWidget::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGGLWidget::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -3147,8 +3147,8 @@ bool SwigDirector_AGGLWidget::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGGLWidget::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGGLWidget::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -3156,16 +3156,16 @@ AGRect SwigDirector_AGGLWidget::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGGLWidget::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGGLWidget::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -3173,11 +3173,11 @@ AGPoint SwigDirector_AGGLWidget::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -3847,7 +3847,7 @@ void SwigDirector_AGLayout::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGLayout::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGLayout::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -3903,8 +3903,8 @@ bool SwigDirector_AGLayout::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGLayout::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGLayout::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -3912,16 +3912,16 @@ AGRect SwigDirector_AGLayout::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGLayout::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGLayout::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -3929,11 +3929,11 @@ AGPoint SwigDirector_AGLayout::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -4410,7 +4410,7 @@ void SwigDirector_AGDialog::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGDialog::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGDialog::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -4466,8 +4466,8 @@ bool SwigDirector_AGDialog::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGDialog::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGDialog::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -4475,16 +4475,16 @@ AGRect SwigDirector_AGDialog::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGDialog::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGDialog::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -4492,11 +4492,11 @@ AGPoint SwigDirector_AGDialog::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -5201,8 +5201,8 @@ Uint8 SwigDirector_AGApplication::getButtonState() const {
 }
 
 
-AGPoint SwigDirector_AGApplication::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGApplication::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -5210,11 +5210,11 @@ AGPoint SwigDirector_AGApplication::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -5240,7 +5240,7 @@ void SwigDirector_AGApplication::prepareDraw() {
 }
 
 
-SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect const &r, std::string const &pText, int id): AGButton(pParent, r, pText, id), Swig::Director(self) {
+SwigDirector_AGButton::SwigDirector_AGButton(VALUE self, AGWidget *pParent, AGRect2 const &r, std::string const &pText, int id): AGButton(pParent, r, pText, id), Swig::Director(self) {
     
 }
 
@@ -5361,7 +5361,7 @@ void SwigDirector_AGButton::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGButton::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGButton::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -5404,8 +5404,8 @@ float SwigDirector_AGButton::minWidth() const {
 }
 
 
-AGRect SwigDirector_AGButton::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGButton::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -5413,16 +5413,16 @@ AGRect SwigDirector_AGButton::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGButton::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGButton::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -5430,11 +5430,11 @@ AGPoint SwigDirector_AGButton::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -5861,7 +5861,7 @@ void SwigDirector_AGButton::mark() {
 }
 
 
-SwigDirector_AGText::SwigDirector_AGText(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont): AGText(pParent, pRect, pText, pFont), Swig::Director(self) {
+SwigDirector_AGText::SwigDirector_AGText(VALUE self, AGWidget *pParent, AGRect2 const &pRect, std::string const &pText, AGFont const &pFont): AGText(pParent, pRect, pText, pFont), Swig::Director(self) {
     
 }
 
@@ -5969,7 +5969,7 @@ void SwigDirector_AGText::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGText::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGText::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -6025,8 +6025,8 @@ bool SwigDirector_AGText::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGText::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGText::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -6034,16 +6034,16 @@ AGRect SwigDirector_AGText::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGText::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGText::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -6051,11 +6051,11 @@ AGPoint SwigDirector_AGText::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -6424,7 +6424,7 @@ void SwigDirector_AGText::mark() {
 }
 
 
-SwigDirector_AGCaption::SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG): AGCaption(pParent, pRect, pText, pFont, pBG), Swig::Director(self) {
+SwigDirector_AGCaption::SwigDirector_AGCaption(VALUE self, AGWidget *pParent, AGRect2 const &pRect, std::string const &pText, AGFont const &pFont, AGBackground const &pBG): AGCaption(pParent, pRect, pText, pFont, pBG), Swig::Director(self) {
     
 }
 
@@ -6532,7 +6532,7 @@ void SwigDirector_AGCaption::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGCaption::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGCaption::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -6588,8 +6588,8 @@ bool SwigDirector_AGCaption::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGCaption::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGCaption::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -6597,16 +6597,16 @@ AGRect SwigDirector_AGCaption::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGCaption::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGCaption::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -6614,11 +6614,11 @@ AGPoint SwigDirector_AGCaption::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -6987,7 +6987,7 @@ void SwigDirector_AGCaption::mark() {
 }
 
 
-SwigDirector_AGCheckBox::SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect pRect): AGCheckBox(pParent, pRect), Swig::Director(self) {
+SwigDirector_AGCheckBox::SwigDirector_AGCheckBox(VALUE self, AGWidget *pParent, AGRect2 pRect): AGCheckBox(pParent, pRect), Swig::Director(self) {
     
 }
 
@@ -7108,7 +7108,7 @@ void SwigDirector_AGCheckBox::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGCheckBox::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGCheckBox::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -7151,8 +7151,8 @@ float SwigDirector_AGCheckBox::minWidth() const {
 }
 
 
-AGRect SwigDirector_AGCheckBox::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGCheckBox::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -7160,16 +7160,16 @@ AGRect SwigDirector_AGCheckBox::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGCheckBox::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGCheckBox::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -7177,11 +7177,11 @@ AGPoint SwigDirector_AGCheckBox::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -7617,7 +7617,7 @@ SwigDirector_AGEditLine::SwigDirector_AGEditLine(VALUE self, std::string const &
 SwigDirector_AGEditLine::~SwigDirector_AGEditLine() {
 }
 
-void SwigDirector_AGEditLine::draw(AGPainter &p, AGPoint const &pPoint, AGRect const &pClip) {
+void SwigDirector_AGEditLine::draw(AGPainter &p, AGVector2 const &pPoint, AGRect2 const &pClip) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -7634,7 +7634,7 @@ void SwigDirector_AGEditLine::draw(AGPainter &p, AGPoint const &pPoint, AGRect c
 }
 
 
-void SwigDirector_AGEditLine::drawCursor(AGPainter &p, int cx, AGPoint const &pPoint, AGRect const &pClip, AGColor const &c) {
+void SwigDirector_AGEditLine::drawCursor(AGPainter &p, int cx, AGVector2 const &pPoint, AGRect2 const &pClip, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -7655,7 +7655,7 @@ void SwigDirector_AGEditLine::drawCursor(AGPainter &p, int cx, AGPoint const &pP
 }
 
 
-SwigDirector_AGEdit::SwigDirector_AGEdit(VALUE self, AGWidget *pParent, AGRect const &pRect): AGEdit(pParent, pRect), Swig::Director(self) {
+SwigDirector_AGEdit::SwigDirector_AGEdit(VALUE self, AGWidget *pParent, AGRect2 const &pRect): AGEdit(pParent, pRect), Swig::Director(self) {
     
 }
 
@@ -7763,7 +7763,7 @@ void SwigDirector_AGEdit::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGEdit::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGEdit::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -7806,8 +7806,8 @@ float SwigDirector_AGEdit::minWidth() const {
 }
 
 
-AGRect SwigDirector_AGEdit::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGEdit::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -7815,16 +7815,16 @@ AGRect SwigDirector_AGEdit::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGEdit::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGEdit::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -7832,11 +7832,11 @@ AGPoint SwigDirector_AGEdit::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -8237,8 +8237,8 @@ SwigDirector_AGPaintTarget::SwigDirector_AGPaintTarget(VALUE self) : Swig::Direc
 
 
 
-AGRect SwigDirector_AGPaintTarget::getRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGPaintTarget::getRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -8246,18 +8246,18 @@ AGRect SwigDirector_AGPaintTarget::getRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
 SwigDirector_AGPaintTarget::~SwigDirector_AGPaintTarget() {
 }
 
-void SwigDirector_AGPaintTarget::drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c) {
+void SwigDirector_AGPaintTarget::drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8291,7 +8291,7 @@ void SwigDirector_AGPaintTarget::blitTri(AGTexture const &pSource, AGTriangle2 c
 }
 
 
-void SwigDirector_AGPaintTarget::fillRect(AGRect const &pr, AGColor const &c) {
+void SwigDirector_AGPaintTarget::fillRect(AGRect2 const &pr, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE result;
@@ -8344,7 +8344,7 @@ AGColor SwigDirector_AGPaintTarget::getPixel(int x, int y) const {
 }
 
 
-void SwigDirector_AGPaintTarget::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+void SwigDirector_AGPaintTarget::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8363,7 +8363,7 @@ void SwigDirector_AGPaintTarget::blit(AGTexture const &pSource, AGRect const &pD
 }
 
 
-void SwigDirector_AGPaintTarget::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGPaintTarget::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8380,7 +8380,7 @@ void SwigDirector_AGPaintTarget::blit(AGTexture const &pSource, AGRect const &pD
 }
 
 
-void SwigDirector_AGPaintTarget::blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGPaintTarget::blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8465,7 +8465,7 @@ void SwigDirector_AGTexture::beginPaint() {
 }
 
 
-void SwigDirector_AGTexture::drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c) {
+void SwigDirector_AGTexture::drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8482,7 +8482,7 @@ void SwigDirector_AGTexture::drawLine(AGPoint const &p0, AGPoint const &p1, AGCo
 }
 
 
-void SwigDirector_AGTexture::drawGradientAlpha(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
+void SwigDirector_AGTexture::drawGradientAlpha(AGRect2 const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8527,8 +8527,8 @@ AGColor SwigDirector_AGTexture::getPixel(int x, int y) const {
 }
 
 
-AGRect SwigDirector_AGTexture::getRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGTexture::getRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -8536,15 +8536,15 @@ AGRect SwigDirector_AGTexture::getRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-void SwigDirector_AGTexture::drawGradient(AGRect const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
+void SwigDirector_AGTexture::drawGradient(AGRect2 const &rect, AGColor const &ul, AGColor const &ur, AGColor const &dl, AGColor const &dr) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8565,7 +8565,7 @@ void SwigDirector_AGTexture::drawGradient(AGRect const &rect, AGColor const &ul,
 }
 
 
-void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8584,7 +8584,7 @@ void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest,
 }
 
 
-void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8601,7 +8601,7 @@ void SwigDirector_AGTexture::blit(AGTexture const &pSource, AGRect const &pDest,
 }
 
 
-void SwigDirector_AGTexture::blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGTexture::blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8618,7 +8618,7 @@ void SwigDirector_AGTexture::blit(AGSurface const &pSource, AGRect const &pDest,
 }
 
 
-void SwigDirector_AGTexture::fillRect(AGRect const &pRect, AGColor const &c) {
+void SwigDirector_AGTexture::fillRect(AGRect2 const &pRect, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE result;
@@ -8717,8 +8717,8 @@ SwigDirector_AGSurface::SwigDirector_AGSurface(VALUE self, AGSurface const &p): 
 
 
 
-AGRect SwigDirector_AGSurface::getRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGSurface::getRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -8726,15 +8726,15 @@ AGRect SwigDirector_AGSurface::getRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-void SwigDirector_AGSurface::drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c) {
+void SwigDirector_AGSurface::drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8771,7 +8771,7 @@ void SwigDirector_AGSurface::blitTri(AGTexture const &pSource, AGTriangle2 const
 }
 
 
-void SwigDirector_AGSurface::fillRect(AGRect const &pr, AGColor const &c) {
+void SwigDirector_AGSurface::fillRect(AGRect2 const &pr, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE result;
@@ -8824,7 +8824,7 @@ AGColor SwigDirector_AGSurface::getPixel(int x, int y) const {
 }
 
 
-void SwigDirector_AGSurface::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+void SwigDirector_AGSurface::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8843,7 +8843,7 @@ void SwigDirector_AGSurface::blit(AGTexture const &pSource, AGRect const &pDest,
 }
 
 
-void SwigDirector_AGSurface::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGSurface::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8860,7 +8860,7 @@ void SwigDirector_AGSurface::blit(AGTexture const &pSource, AGRect const &pDest,
 }
 
 
-void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8877,7 +8877,7 @@ void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect const &pDest,
 }
 
 
-void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+void SwigDirector_AGSurface::blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -8918,7 +8918,7 @@ void SwigDirector_AGSurface::endPaint() {
 }
 
 
-SwigDirector_AGImage::SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect const &r, AGSurface pSurface, bool pTile, AGRect const &pRect): AGImage(pParent, r, pSurface, pTile, pRect), Swig::Director(self) {
+SwigDirector_AGImage::SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect2 const &r, AGSurface pSurface, bool pTile, AGRect2 const &pRect): AGImage(pParent, r, pSurface, pTile, pRect), Swig::Director(self) {
     
 }
 
@@ -9026,7 +9026,7 @@ void SwigDirector_AGImage::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGImage::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGImage::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -9082,8 +9082,8 @@ bool SwigDirector_AGImage::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGImage::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGImage::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -9091,16 +9091,16 @@ AGRect SwigDirector_AGImage::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGImage::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGImage::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -9108,11 +9108,11 @@ AGPoint SwigDirector_AGImage::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -9490,7 +9490,7 @@ SwigDirector_AGLayoutCreator::SwigDirector_AGLayoutCreator(VALUE self, std::stri
 SwigDirector_AGLayoutCreator::~SwigDirector_AGLayoutCreator() {
 }
 
-AGWidget *SwigDirector_AGLayoutCreator::create(AGWidget *pParent, AGRect const &pRect, xmlpp::Node const &pNode) {
+AGWidget *SwigDirector_AGLayoutCreator::create(AGWidget *pParent, AGRect2 const &pRect, xmlpp::Node const &pNode) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -9509,7 +9509,7 @@ AGWidget *SwigDirector_AGLayoutCreator::create(AGWidget *pParent, AGRect const &
 }
 
 
-SwigDirector_AGVTiler::SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight): AGVTiler(pParent, pRect, pAdaptMyHeight), Swig::Director(self) {
+SwigDirector_AGVTiler::SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect2 const &pRect, bool pAdaptMyHeight): AGVTiler(pParent, pRect, pAdaptMyHeight), Swig::Director(self) {
     
 }
 
@@ -9617,7 +9617,7 @@ void SwigDirector_AGVTiler::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGVTiler::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGVTiler::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -9684,8 +9684,8 @@ bool SwigDirector_AGVTiler::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGVTiler::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGVTiler::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -9693,16 +9693,16 @@ AGRect SwigDirector_AGVTiler::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGVTiler::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGVTiler::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -9710,11 +9710,11 @@ AGPoint SwigDirector_AGVTiler::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -10083,7 +10083,7 @@ void SwigDirector_AGVTiler::mark() {
 }
 
 
-SwigDirector_AGHTiler::SwigDirector_AGHTiler(VALUE self, AGWidget *pParent, AGRect const &pRect, bool pAdaptMyHeight): AGHTiler(pParent, pRect, pAdaptMyHeight), Swig::Director(self) {
+SwigDirector_AGHTiler::SwigDirector_AGHTiler(VALUE self, AGWidget *pParent, AGRect2 const &pRect, bool pAdaptMyHeight): AGHTiler(pParent, pRect, pAdaptMyHeight), Swig::Director(self) {
     
 }
 
@@ -10191,7 +10191,7 @@ void SwigDirector_AGHTiler::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGHTiler::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGHTiler::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -10258,8 +10258,8 @@ bool SwigDirector_AGHTiler::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGHTiler::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGHTiler::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -10267,16 +10267,16 @@ AGRect SwigDirector_AGHTiler::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGHTiler::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGHTiler::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -10284,11 +10284,11 @@ AGPoint SwigDirector_AGHTiler::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -10657,7 +10657,7 @@ void SwigDirector_AGHTiler::mark() {
 }
 
 
-SwigDirector_AGListBox::SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect const &pRect): AGListBox(pParent, pRect), Swig::Director(self) {
+SwigDirector_AGListBox::SwigDirector_AGListBox(VALUE self, AGWidget *pParent, AGRect2 const &pRect): AGListBox(pParent, pRect), Swig::Director(self) {
     
 }
 
@@ -10765,7 +10765,7 @@ void SwigDirector_AGListBox::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGListBox::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGListBox::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -10821,8 +10821,8 @@ bool SwigDirector_AGListBox::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGListBox::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGListBox::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -10830,16 +10830,16 @@ AGRect SwigDirector_AGListBox::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGListBox::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGListBox::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -10847,11 +10847,11 @@ AGPoint SwigDirector_AGListBox::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -11220,7 +11220,7 @@ void SwigDirector_AGListBox::mark() {
 }
 
 
-SwigDirector_AGMenu::SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGPoint pWishPos, std::string const &pName): AGMenu(pParent, pWishPos, pName), Swig::Director(self) {
+SwigDirector_AGMenu::SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGVector2 pWishPos, std::string const &pName): AGMenu(pParent, pWishPos, pName), Swig::Director(self) {
     
 }
 
@@ -11328,7 +11328,7 @@ void SwigDirector_AGMenu::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGMenu::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGMenu::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -11395,8 +11395,8 @@ bool SwigDirector_AGMenu::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGMenu::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGMenu::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -11404,16 +11404,16 @@ AGRect SwigDirector_AGMenu::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGMenu::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGMenu::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -11421,11 +11421,11 @@ AGPoint SwigDirector_AGMenu::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -11902,7 +11902,7 @@ void SwigDirector_AGMenuItem::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGMenuItem::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGMenuItem::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -11969,8 +11969,8 @@ bool SwigDirector_AGMenuItem::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGMenuItem::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGMenuItem::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -11978,16 +11978,16 @@ AGRect SwigDirector_AGMenuItem::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGMenuItem::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGMenuItem::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -11995,11 +11995,11 @@ AGPoint SwigDirector_AGMenuItem::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -12498,7 +12498,7 @@ void SwigDirector_AGSubMenu::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGSubMenu::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGSubMenu::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -12565,8 +12565,8 @@ bool SwigDirector_AGSubMenu::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGSubMenu::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGSubMenu::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -12574,16 +12574,16 @@ AGRect SwigDirector_AGSubMenu::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGSubMenu::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGSubMenu::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -12591,11 +12591,11 @@ AGPoint SwigDirector_AGSubMenu::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -13094,7 +13094,7 @@ void SwigDirector_AGSound::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGSound::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGSound::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -13150,8 +13150,8 @@ bool SwigDirector_AGSound::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGSound::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGSound::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -13159,16 +13159,16 @@ AGRect SwigDirector_AGSound::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGSound::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGSound::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -13176,11 +13176,11 @@ AGPoint SwigDirector_AGSound::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -13549,7 +13549,7 @@ void SwigDirector_AGSound::mark() {
 }
 
 
-SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect const &pr): AGRadioGroup(pParent, pr), Swig::Director(self) {
+SwigDirector_AGRadioGroup::SwigDirector_AGRadioGroup(VALUE self, AGWidget *pParent, AGRect2 const &pr): AGRadioGroup(pParent, pr), Swig::Director(self) {
     
 }
 
@@ -13657,7 +13657,7 @@ void SwigDirector_AGRadioGroup::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGRadioGroup::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGRadioGroup::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -13713,8 +13713,8 @@ bool SwigDirector_AGRadioGroup::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGRadioGroup::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGRadioGroup::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -13722,16 +13722,16 @@ AGRect SwigDirector_AGRadioGroup::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGRadioGroup::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGRadioGroup::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -13739,11 +13739,11 @@ AGPoint SwigDirector_AGRadioGroup::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -14125,7 +14125,7 @@ void SwigDirector_AGRadioGroup::mark() {
 }
 
 
-SwigDirector_AGRadio::SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect pRect): AGRadio(pParent, pRect), Swig::Director(self) {
+SwigDirector_AGRadio::SwigDirector_AGRadio(VALUE self, AGWidget *pParent, AGRect2 pRect): AGRadio(pParent, pRect), Swig::Director(self) {
     
 }
 
@@ -14246,7 +14246,7 @@ void SwigDirector_AGRadio::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGRadio::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGRadio::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -14289,8 +14289,8 @@ float SwigDirector_AGRadio::minWidth() const {
 }
 
 
-AGRect SwigDirector_AGRadio::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGRadio::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -14298,16 +14298,16 @@ AGRect SwigDirector_AGRadio::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGRadio::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGRadio::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -14315,11 +14315,11 @@ AGPoint SwigDirector_AGRadio::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -14774,7 +14774,7 @@ void SwigDirector_AGScreen::beginPaint() {
 }
 
 
-void SwigDirector_AGScreen::drawLine(AGPoint const &p0, AGPoint const &p1, AGColor const &c) {
+void SwigDirector_AGScreen::drawLine(AGVector2 const &p0, AGVector2 const &p1, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -14815,8 +14815,8 @@ AGColor SwigDirector_AGScreen::getPixel(int x, int y) const {
 }
 
 
-AGRect SwigDirector_AGScreen::getRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGScreen::getRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -14824,11 +14824,11 @@ AGRect SwigDirector_AGScreen::getRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
@@ -14869,7 +14869,7 @@ void SwigDirector_AGScreen::begin() {
 }
 
 
-void SwigDirector_AGScreen::blit(AGSurface const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGScreen::blit(AGSurface const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -14886,7 +14886,7 @@ void SwigDirector_AGScreen::blit(AGSurface const &pSource, AGRect const &pDest, 
 }
 
 
-void SwigDirector_AGScreen::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc) {
+void SwigDirector_AGScreen::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -14903,7 +14903,7 @@ void SwigDirector_AGScreen::blit(AGTexture const &pSource, AGRect const &pDest, 
 }
 
 
-void SwigDirector_AGScreen::blit(AGTexture const &pSource, AGRect const &pDest, AGRect const &pSrc, AGColor const &pColor) {
+void SwigDirector_AGScreen::blit(AGTexture const &pSource, AGRect2 const &pDest, AGRect2 const &pSrc, AGColor const &pColor) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE obj2 = Qnil ;
@@ -14950,7 +14950,7 @@ void SwigDirector_AGScreen::putPixel(int x, int y, AGColor const &c) {
 }
 
 
-void SwigDirector_AGScreen::fillRect(AGRect const &pr, AGColor const &c) {
+void SwigDirector_AGScreen::fillRect(AGRect2 const &pr, AGColor const &c) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     VALUE result;
@@ -14982,7 +14982,7 @@ void SwigDirector_AGScreen::blitTri(AGTexture const &pSource, AGTriangle2 const 
 }
 
 
-SwigDirector_AGTable::SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect const &pRect): AGTable(pWidget, pRect), Swig::Director(self) {
+SwigDirector_AGTable::SwigDirector_AGTable(VALUE self, AGWidget *pWidget, AGRect2 const &pRect): AGTable(pWidget, pRect), Swig::Director(self) {
     
 }
 
@@ -15064,7 +15064,7 @@ void SwigDirector_AGTable::setTop(float y) {
 }
 
 
-bool SwigDirector_AGTable::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGTable::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -15146,8 +15146,8 @@ bool SwigDirector_AGTable::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGTable::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGTable::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -15155,16 +15155,16 @@ AGRect SwigDirector_AGTable::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGTable::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGTable::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -15172,11 +15172,11 @@ AGPoint SwigDirector_AGTable::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -15554,7 +15554,7 @@ SwigDirector_AGTheme::SwigDirector_AGTheme(VALUE self): AGTheme(), Swig::Directo
 SwigDirector_AGTheme::~SwigDirector_AGTheme() {
 }
 
-SwigDirector_AGWindow::SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect const &pRect, std::string const &pTitle, std::string const &pTheme): AGWindow(pWidget, pRect, pTitle, pTheme), Swig::Director(self) {
+SwigDirector_AGWindow::SwigDirector_AGWindow(VALUE self, AGWidget *pWidget, AGRect2 const &pRect, std::string const &pTitle, std::string const &pTheme): AGWindow(pWidget, pRect, pTitle, pTheme), Swig::Director(self) {
     
 }
 
@@ -15662,7 +15662,7 @@ void SwigDirector_AGWindow::setHeight(float w) {
 }
 
 
-bool SwigDirector_AGWindow::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGWindow::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -15718,8 +15718,8 @@ bool SwigDirector_AGWindow::canFocus() const {
 }
 
 
-AGPoint SwigDirector_AGWindow::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGWindow::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -15727,11 +15727,11 @@ AGPoint SwigDirector_AGWindow::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -15763,8 +15763,8 @@ bool SwigDirector_AGWindow::redraw() const {
 }
 
 
-AGRect SwigDirector_AGWindow::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGWindow::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -15772,11 +15772,11 @@ AGRect SwigDirector_AGWindow::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
@@ -16117,13 +16117,13 @@ void SwigDirector_AGWindow::mark() {
 }
 
 
-SwigDirector_AGFrame::SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, size_t width): AGFrame(pParent, pRect, width), Swig::Director(self) {
+SwigDirector_AGFrame::SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect2 const &pRect, size_t width): AGFrame(pParent, pRect, width), Swig::Director(self) {
     
 }
 
 
 
-SwigDirector_AGFrame::SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect const &pRect, AGBorder const &pBorder): AGFrame(pParent, pRect, pBorder), Swig::Director(self) {
+SwigDirector_AGFrame::SwigDirector_AGFrame(VALUE self, AGWidget *pParent, AGRect2 const &pRect, AGBorder const &pBorder): AGFrame(pParent, pRect, pBorder), Swig::Director(self) {
     
 }
 
@@ -16231,7 +16231,7 @@ void SwigDirector_AGFrame::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGFrame::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGFrame::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -16287,8 +16287,8 @@ bool SwigDirector_AGFrame::canFocus() const {
 }
 
 
-AGPoint SwigDirector_AGFrame::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGFrame::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -16296,11 +16296,11 @@ AGPoint SwigDirector_AGFrame::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -16332,8 +16332,8 @@ bool SwigDirector_AGFrame::redraw() const {
 }
 
 
-AGRect SwigDirector_AGFrame::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGFrame::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -16341,11 +16341,11 @@ AGRect SwigDirector_AGFrame::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
@@ -16794,7 +16794,7 @@ void SwigDirector_AGScreenWidget::setWidth(float w) {
 }
 
 
-bool SwigDirector_AGScreenWidget::eventDragBy(AGEvent *event, AGPoint const &pDiff) {
+bool SwigDirector_AGScreenWidget::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     VALUE obj0 = Qnil ;
     VALUE obj1 = Qnil ;
     bool c_result ;
@@ -16850,8 +16850,8 @@ bool SwigDirector_AGScreenWidget::canFocus() const {
 }
 
 
-AGRect SwigDirector_AGScreenWidget::getClientRect() const {
-    AGRect c_result ;
+AGRect2 SwigDirector_AGScreenWidget::getClientRect() const {
+    AGRect2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -16859,16 +16859,16 @@ AGRect SwigDirector_AGScreenWidget::getClientRect() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getClientRect"), 0, NULL);
     {
-        AGRect *b;
-        Data_Get_Struct(result,AGRect,b);
+        AGRect2 *b;
+        Data_Get_Struct(result,AGRect2,b);
         c_result=*b;
     }
-    return (AGRect) c_result;
+    return (AGRect2) c_result;
 }
 
 
-AGPoint SwigDirector_AGScreenWidget::getMousePosition() const {
-    AGPoint c_result ;
+AGVector2 SwigDirector_AGScreenWidget::getMousePosition() const {
+    AGVector2 c_result ;
     VALUE result;
     
     if (swig_get_up()) {
@@ -16876,11 +16876,11 @@ AGPoint SwigDirector_AGScreenWidget::getMousePosition() const {
     }
     result = rb_funcall(swig_get_self(), rb_intern("getMousePosition"), 0, NULL);
     {
-        AGPoint *b;
-        Data_Get_Struct(result,AGPoint,b);
+        AGVector2 *b;
+        Data_Get_Struct(result,AGVector2,b);
         c_result=*b;
     }
-    return (AGPoint) c_result;
+    return (AGVector2) c_result;
 }
 
 
@@ -18397,7 +18397,7 @@ _wrap_AGEvent_getName(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGEvent_getMousePosition(int argc, VALUE *argv, VALUE self) {
     AGEvent *arg1 = (AGEvent *) 0 ;
-    AGPoint result;
+    AGVector2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -18406,8 +18406,8 @@ _wrap_AGEvent_getMousePosition(int argc, VALUE *argv, VALUE self) {
     result = ((AGEvent const *)arg1)->getMousePosition();
     
     {
-        AGPoint * resultptr;
-        resultptr = new AGPoint((AGPoint &)result);
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
@@ -19402,7 +19402,7 @@ _wrap_AGMessageObject_getButtonState(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGMessageObject_getMousePosition(int argc, VALUE *argv, VALUE self) {
     AGMessageObject *arg1 = (AGMessageObject *) 0 ;
-    AGPoint result;
+    AGVector2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -19414,8 +19414,8 @@ _wrap_AGMessageObject_getMousePosition(int argc, VALUE *argv, VALUE self) {
     result = ((AGMessageObject const *)arg1)->getMousePosition();
     
     {
-        AGPoint * resultptr;
-        resultptr = new AGPoint((AGPoint &)result);
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
@@ -21238,15 +21238,15 @@ free_AGVector3(AGVector3 *arg1) {
     delete arg1;
 }
 
-swig_class cAGPoint3;
+swig_class cAGVector23;
 
 static VALUE
-_wrap_new_AGPoint3__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    AGPoint3 *result;
+_wrap_new_AGVector23__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGVector23 *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (AGPoint3 *)new AGPoint3();
+    result = (AGVector23 *)new AGVector23();
     DATA_PTR(self) = result;
     
     return self;
@@ -21254,18 +21254,18 @@ _wrap_new_AGPoint3__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGPoint3__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector23__SWIG_1(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
     float arg3 ;
-    AGPoint3 *result;
+    AGVector23 *result;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     arg1 = (float) NUM2DBL(argv[0]);
     arg2 = (float) NUM2DBL(argv[1]);
     arg3 = (float) NUM2DBL(argv[2]);
-    result = (AGPoint3 *)new AGPoint3(arg1,arg2,arg3);
+    result = (AGVector23 *)new AGVector23(arg1,arg2,arg3);
     DATA_PTR(self) = result;
     
     return self;
@@ -21273,16 +21273,16 @@ _wrap_new_AGPoint3__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_AGPoint3__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector23__SWIG_2(int argc, VALUE *argv, VALUE self) {
     float arg1 ;
     float arg2 ;
-    AGPoint3 *result;
+    AGVector23 *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = (float) NUM2DBL(argv[0]);
     arg2 = (float) NUM2DBL(argv[1]);
-    result = (AGPoint3 *)new AGPoint3(arg1,arg2);
+    result = (AGVector23 *)new AGVector23(arg1,arg2);
     DATA_PTR(self) = result;
     
     return self;
@@ -21291,14 +21291,14 @@ _wrap_new_AGPoint3__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_AGPoint3_allocate(VALUE self) {
+_wrap_AGVector23_allocate(VALUE self) {
 #else
     static VALUE
-    _wrap_AGPoint3_allocate(int argc, VALUE *argv, VALUE self) {
+    _wrap_AGVector23_allocate(int argc, VALUE *argv, VALUE self) {
 #endif
         
         
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGPoint3);
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGVector23);
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
         rb_obj_call_init(vresult, argc, argv);
 #endif
@@ -21307,21 +21307,21 @@ _wrap_AGPoint3_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGPoint3__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGVector23__SWIG_3(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = 0 ;
-    AGPoint3 *result;
+    AGVector23 *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (AGPoint3 *)new AGPoint3((AGVector3 const &)*arg1);
+    result = (AGVector23 *)new AGVector23((AGVector3 const &)*arg1);
     DATA_PTR(self) = result;
     
     return self;
 }
 
 
-static VALUE _wrap_new_AGPoint3(int nargs, VALUE *args, VALUE self) {
+static VALUE _wrap_new_AGVector23(int nargs, VALUE *args, VALUE self) {
     int argc;
     VALUE argv[3];
     int ii;
@@ -21331,7 +21331,7 @@ static VALUE _wrap_new_AGPoint3(int nargs, VALUE *args, VALUE self) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
-        return _wrap_new_AGPoint3__SWIG_0(nargs, args, self);
+        return _wrap_new_AGVector23__SWIG_0(nargs, args, self);
     }
     if (argc == 1) {
         int _v;
@@ -21340,7 +21340,7 @@ static VALUE _wrap_new_AGPoint3(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_AGPoint3__SWIG_3(nargs, args, self);
+            return _wrap_new_AGVector23__SWIG_3(nargs, args, self);
         }
     }
     if (argc == 2) {
@@ -21353,7 +21353,7 @@ static VALUE _wrap_new_AGPoint3(int nargs, VALUE *args, VALUE self) {
                 _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_AGPoint3__SWIG_2(nargs, args, self);
+                return _wrap_new_AGVector23__SWIG_2(nargs, args, self);
             }
         }
     }
@@ -21371,19 +21371,19 @@ static VALUE _wrap_new_AGPoint3(int nargs, VALUE *args, VALUE self) {
                     _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_AGPoint3__SWIG_1(nargs, args, self);
+                    return _wrap_new_AGVector23__SWIG_1(nargs, args, self);
                 }
             }
         }
     }
     
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGPoint3'");
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGVector23'");
     return Qnil;
 }
 
 
 static void
-free_AGPoint3(AGPoint3 *arg1) {
+free_AGVector23(AGVector23 *arg1) {
     delete arg1;
 }
 
@@ -25190,18 +25190,18 @@ free_AGMatrix4(AGMatrix4 *arg1) {
     delete arg1;
 }
 
-swig_class cAGRect3;
+swig_class cAGRect23;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_AGRect3_allocate(VALUE self) {
+_wrap_AGRect23_allocate(VALUE self) {
 #else
     static VALUE
-    _wrap_AGRect3_allocate(int argc, VALUE *argv, VALUE self) {
+    _wrap_AGRect23_allocate(int argc, VALUE *argv, VALUE self) {
 #endif
         
         
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGRect3);
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGRect23);
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
         rb_obj_call_init(vresult, argc, argv);
 #endif
@@ -25210,16 +25210,16 @@ _wrap_AGRect3_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGRect3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGRect23(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = 0 ;
     AGVector3 *arg2 = 0 ;
-    AGRect3 *result;
+    AGRect23 *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
     SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (AGRect3 *)new AGRect3((AGVector3 const &)*arg1,(AGVector3 const &)*arg2);
+    result = (AGRect23 *)new AGRect23((AGVector3 const &)*arg1,(AGVector3 const &)*arg2);
     DATA_PTR(self) = result;
     
     return self;
@@ -25227,17 +25227,17 @@ _wrap_new_AGRect3(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect3_collides(int argc, VALUE *argv, VALUE self) {
-    AGRect3 *arg1 = (AGRect3 *) 0 ;
+_wrap_AGRect23_collides(int argc, VALUE *argv, VALUE self) {
+    AGRect23 *arg1 = (AGRect23 *) 0 ;
     AGLine3 *arg2 = 0 ;
     bool result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect3, 0);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect23, 0);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGLine3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (bool)((AGRect3 const *)arg1)->collides((AGLine3 const &)*arg2);
+    result = (bool)((AGRect23 const *)arg1)->collides((AGLine3 const &)*arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -25245,15 +25245,15 @@ _wrap_AGRect3_collides(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect3_toString(int argc, VALUE *argv, VALUE self) {
-    AGRect3 *arg1 = (AGRect3 *) 0 ;
+_wrap_AGRect23_toString(int argc, VALUE *argv, VALUE self) {
+    AGRect23 *arg1 = (AGRect23 *) 0 ;
     std::string result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect3, 0);
-    result = ((AGRect3 const *)arg1)->toString();
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect23, 0);
+    result = ((AGRect23 const *)arg1)->toString();
     
     {
         vresult = rb_str_new((&result)->c_str(),(&result)->length());
@@ -25263,7 +25263,7 @@ _wrap_AGRect3_toString(int argc, VALUE *argv, VALUE self) {
 
 
 static void
-free_AGRect3(AGRect3 *arg1) {
+free_AGRect23(AGRect23 *arg1) {
     delete arg1;
 }
 
@@ -25502,7 +25502,7 @@ _wrap_AGBox3_collides__SWIG_2(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGBox3_getSides(int argc, VALUE *argv, VALUE self) {
     AGBox3 *arg1 = (AGBox3 *) 0 ;
-    SwigValueWrapper<std::vector<AGRect3 > > result;
+    SwigValueWrapper<std::vector<AGRect23 > > result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -25511,9 +25511,9 @@ _wrap_AGBox3_getSides(int argc, VALUE *argv, VALUE self) {
     result = ((AGBox3 const *)arg1)->getSides();
     
     {
-        std::vector<AGRect3 > * resultptr;
-        resultptr = new std::vector<AGRect3 >((std::vector<AGRect3 > &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTAGRect3_t, 1);
+        std::vector<AGRect23 > * resultptr;
+        resultptr = new std::vector<AGRect23 >((std::vector<AGRect23 > &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTAGRect23_t, 1);
     }
     return vresult;
 }
@@ -26721,7 +26721,7 @@ static VALUE
 _wrap_new_AGWidget(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGWidget *result;
     
     if ((argc < 2) || (argc > 2))
@@ -26810,7 +26810,7 @@ _wrap_AGWidget_drawAll(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWidget_getRect(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
-    AGRect result;
+    AGRect2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -26819,8 +26819,8 @@ _wrap_AGWidget_getRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGWidget const *)arg1)->getRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -26830,7 +26830,7 @@ _wrap_AGWidget_getRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWidget_getClientRect(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
-    AGRect result;
+    AGRect2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -26842,8 +26842,8 @@ _wrap_AGWidget_getClientRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGWidget const *)arg1)->getClientRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -26853,7 +26853,7 @@ _wrap_AGWidget_getClientRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWidget_setRect(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -27744,7 +27744,7 @@ _wrap_AGWidget_clear(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWidget_getScreenRect(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
-    AGRect result;
+    AGRect2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -27753,8 +27753,8 @@ _wrap_AGWidget_getScreenRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGWidget const *)arg1)->getScreenRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -27764,7 +27764,7 @@ _wrap_AGWidget_getScreenRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWidget_getScreenPosition(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
-    AGPoint result;
+    AGVector2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -27773,8 +27773,8 @@ _wrap_AGWidget_getScreenPosition(int argc, VALUE *argv, VALUE self) {
     result = ((AGWidget const *)arg1)->getScreenPosition();
     
     {
-        AGPoint * resultptr;
-        resultptr = new AGPoint((AGPoint &)result);
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
@@ -27784,8 +27784,8 @@ _wrap_AGWidget_getScreenPosition(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWidget_fromScreen(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
-    AGPoint *arg2 = 0 ;
-    AGPoint result;
+    AGVector2 *arg2 = 0 ;
+    AGVector2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -27795,8 +27795,8 @@ _wrap_AGWidget_fromScreen(int argc, VALUE *argv, VALUE self) {
     result = ((AGWidget const *)arg1)->fromScreen((AGVector2 const &)*arg2);
     
     {
-        AGPoint * resultptr;
-        resultptr = new AGPoint((AGPoint &)result);
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
@@ -27947,7 +27947,7 @@ static VALUE
 _wrap_AGWidget_eventDragBy(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     AGEvent *arg2 = (AGEvent *) 0 ;
-    AGPoint *arg3 = 0 ;
+    AGVector2 *arg3 = 0 ;
     bool result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
@@ -28366,7 +28366,7 @@ static VALUE
 _wrap_new_AGColorButton(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     int arg4 ;
     int arg5 ;
     AGColorButton *result;
@@ -28611,7 +28611,7 @@ static VALUE
 _wrap_new_AGGLWidget(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGGLWidget *result;
     
     if ((argc < 2) || (argc > 2))
@@ -30684,7 +30684,7 @@ static VALUE
 _wrap_getLayoutGeometry(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     xmlpp::Node *arg2 = 0 ;
-    AGRect result;
+    AGRect2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 2))
@@ -30694,8 +30694,8 @@ _wrap_getLayoutGeometry(int argc, VALUE *argv, VALUE self) {
     result = getLayoutGeometry(arg1,(Node const &)*arg2);
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -31507,7 +31507,7 @@ static VALUE
 _wrap_new_AGButton__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     std::string *arg4 = 0 ;
     int arg5 ;
     AGButton *result;
@@ -31568,7 +31568,7 @@ static VALUE
 _wrap_new_AGButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     std::string *arg4 = 0 ;
     AGButton *result;
     std::string temp4 ;
@@ -32135,7 +32135,7 @@ static VALUE
 _wrap_new_AGText(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     std::string *arg4 = 0 ;
     AGFont *arg5 = 0 ;
     AGText *result;
@@ -32326,7 +32326,7 @@ static VALUE
 _wrap_new_AGCaption(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     std::string *arg4 = 0 ;
     AGFont *arg5 = 0 ;
     AGBackground *arg6 = 0 ;
@@ -32449,7 +32449,7 @@ static VALUE
 _wrap_new_AGCheckBox(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect arg3 ;
+    AGRect2 arg3 ;
     AGCheckBox *result;
     
     if ((argc < 2) || (argc > 2))
@@ -32457,7 +32457,7 @@ _wrap_new_AGCheckBox(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 0);
     {
-        AGRect * ptr;
+        AGRect2 * ptr;
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect2, 0);
         if (ptr) arg3 = *ptr;
     }
@@ -32622,8 +32622,8 @@ static VALUE
 _wrap_AGEditLine_draw(int argc, VALUE *argv, VALUE self) {
     AGEditLine *arg1 = (AGEditLine *) 0 ;
     AGPainter *arg2 = 0 ;
-    AGPoint *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGVector2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     Swig::Director *director = 0;
     
     if ((argc < 3) || (argc > 3))
@@ -32645,8 +32645,8 @@ _wrap_AGEditLine_drawCursor(int argc, VALUE *argv, VALUE self) {
     AGEditLine *arg1 = (AGEditLine *) 0 ;
     AGPainter *arg2 = 0 ;
     int arg3 ;
-    AGPoint *arg4 = 0 ;
-    AGRect *arg5 = 0 ;
+    AGVector2 *arg4 = 0 ;
+    AGRect2 *arg5 = 0 ;
     AGColor *arg6 = 0 ;
     Swig::Director *director = 0;
     
@@ -33012,7 +33012,7 @@ static VALUE
 _wrap_new_AGEdit(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGEdit *result;
     
     if ((argc < 2) || (argc > 2))
@@ -33762,8 +33762,8 @@ static VALUE
 _wrap_AGPaintTarget_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGPaintTarget *arg1 = (AGPaintTarget *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     AGColor *arg5 = 0 ;
     Swig::Director *director = 0;
     
@@ -33786,8 +33786,8 @@ static VALUE
 _wrap_AGPaintTarget_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGPaintTarget *arg1 = (AGPaintTarget *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     Swig::Director *director = 0;
     
     if ((argc < 3) || (argc > 3))
@@ -33808,8 +33808,8 @@ static VALUE
 _wrap_AGPaintTarget_blit__SWIG_2(int argc, VALUE *argv, VALUE self) {
     AGPaintTarget *arg1 = (AGPaintTarget *) 0 ;
     AGSurface *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     Swig::Director *director = 0;
     
     if ((argc < 3) || (argc > 3))
@@ -33935,8 +33935,8 @@ static VALUE _wrap_AGPaintTarget_blit(int nargs, VALUE *args, VALUE self) {
 static VALUE
 _wrap_AGPaintTarget_drawLine(int argc, VALUE *argv, VALUE self) {
     AGPaintTarget *arg1 = (AGPaintTarget *) 0 ;
-    AGPoint *arg2 = 0 ;
-    AGPoint *arg3 = 0 ;
+    AGVector2 *arg2 = 0 ;
+    AGVector2 *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     Swig::Director *director = 0;
     
@@ -33957,7 +33957,7 @@ _wrap_AGPaintTarget_drawLine(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPaintTarget_fillRect(int argc, VALUE *argv, VALUE self) {
     AGPaintTarget *arg1 = (AGPaintTarget *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     Swig::Director *director = 0;
     
@@ -33977,7 +33977,7 @@ _wrap_AGPaintTarget_fillRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPaintTarget_getRect(int argc, VALUE *argv, VALUE self) {
     AGPaintTarget *arg1 = (AGPaintTarget *) 0 ;
-    AGRect result;
+    AGRect2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -33989,8 +33989,8 @@ _wrap_AGPaintTarget_getRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGPaintTarget const *)arg1)->getRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -34424,7 +34424,7 @@ _wrap_AGTexture_height(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGTexture_getRect(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
-    AGRect result;
+    AGRect2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -34436,8 +34436,8 @@ _wrap_AGTexture_getRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGTexture const *)arg1)->getRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -34695,7 +34695,7 @@ _wrap_AGTexture_putPixel(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGTexture_fillRect(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     Swig::Director *director = 0;
     
@@ -34716,8 +34716,8 @@ static VALUE
 _wrap_AGTexture_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     Swig::Director *director = 0;
     
     if ((argc < 3) || (argc > 3))
@@ -34738,8 +34738,8 @@ static VALUE
 _wrap_AGTexture_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     AGColor *arg5 = 0 ;
     Swig::Director *director = 0;
     
@@ -34839,8 +34839,8 @@ static VALUE _wrap_AGTexture_blit(int nargs, VALUE *args, VALUE self) {
 static VALUE
 _wrap_AGTexture_drawLine(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
-    AGPoint *arg2 = 0 ;
-    AGPoint *arg3 = 0 ;
+    AGVector2 *arg2 = 0 ;
+    AGVector2 *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     Swig::Director *director = 0;
     
@@ -34861,7 +34861,7 @@ _wrap_AGTexture_drawLine(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGTexture_drawGradient(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -34887,7 +34887,7 @@ _wrap_AGTexture_drawGradient(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGTexture_drawGradientAlpha(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -35553,7 +35553,7 @@ _wrap_AGSurface_height(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGSurface_getRect(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
-    AGRect result;
+    AGRect2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -35565,8 +35565,8 @@ _wrap_AGSurface_getRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGSurface const *)arg1)->getRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -35576,7 +35576,7 @@ _wrap_AGSurface_getRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGSurface_getSubSurface(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGSurface result;
     VALUE vresult = Qnil;
     
@@ -35639,8 +35639,8 @@ static VALUE
 _wrap_AGSurface_blit(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
     AGSurface *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     AGColor *arg5 = 0 ;
     Swig::Director *director = 0;
     
@@ -35662,7 +35662,7 @@ _wrap_AGSurface_blit(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGSurface_drawGradient(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -35685,7 +35685,7 @@ _wrap_AGSurface_drawGradient(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGSurface_drawGradientAlpha(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -35708,7 +35708,7 @@ _wrap_AGSurface_drawGradientAlpha(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGSurface_drawBorder(int argc, VALUE *argv, VALUE self) {
     AGSurface *arg1 = (AGSurface *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     int arg3 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -36281,10 +36281,10 @@ static VALUE
 _wrap_new_AGImage__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGSurface arg4 ;
     bool arg5 ;
-    AGRect *arg6 = 0 ;
+    AGRect2 *arg6 = 0 ;
     AGImage *result;
     
     if ((argc < 5) || (argc > 5))
@@ -36339,7 +36339,7 @@ static VALUE
 _wrap_new_AGImage__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGSurface arg4 ;
     bool arg5 ;
     AGImage *result;
@@ -36618,7 +36618,7 @@ static VALUE
 _wrap_AGLayoutCreator_create(int argc, VALUE *argv, VALUE self) {
     AGLayoutCreator *arg1 = (AGLayoutCreator *) 0 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     xmlpp::Node *arg4 = 0 ;
     AGWidget *result;
     Swig::Director *director = 0;
@@ -36757,7 +36757,7 @@ static VALUE
 _wrap_AGLayoutFactory_create(int argc, VALUE *argv, VALUE self) {
     AGLayoutFactory *arg1 = (AGLayoutFactory *) 0 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     xmlpp::Node *arg4 = 0 ;
     AGWidget *result;
     Swig::Director *resultdirector = 0;
@@ -36860,7 +36860,7 @@ static VALUE
 _wrap_new_AGVTiler__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     bool arg4 ;
     AGVTiler *result;
     
@@ -36910,7 +36910,7 @@ static VALUE
 _wrap_new_AGVTiler__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGVTiler *result;
     
     if ((argc < 2) || (argc > 2))
@@ -37083,7 +37083,7 @@ static VALUE
 _wrap_new_AGHTiler__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     bool arg4 ;
     AGHTiler *result;
     
@@ -37133,7 +37133,7 @@ static VALUE
 _wrap_new_AGHTiler__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGHTiler *result;
     
     if ((argc < 2) || (argc > 2))
@@ -37435,7 +37435,7 @@ static VALUE
 _wrap_new_AGListBox(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGListBox *result;
     
     if ((argc < 2) || (argc > 2))
@@ -37953,7 +37953,7 @@ static VALUE
 _wrap_new_AGMenu(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGPoint arg3 ;
+    AGVector2 arg3 ;
     std::string *arg4 = 0 ;
     AGMenu *result;
     std::string temp4 ;
@@ -37963,7 +37963,7 @@ _wrap_new_AGMenu(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 0);
     {
-        AGPoint * ptr;
+        AGVector2 * ptr;
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGVector2, 0);
         if (ptr) arg3 = *ptr;
     }
@@ -37998,13 +37998,13 @@ _wrap_new_AGMenu(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGMenu_show(int argc, VALUE *argv, VALUE self) {
     AGMenu *arg1 = (AGMenu *) 0 ;
-    AGPoint arg2 ;
+    AGVector2 arg2 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGMenu, 0);
     {
-        AGPoint * ptr;
+        AGVector2 * ptr;
         SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_AGVector2, 0);
         if (ptr) arg2 = *ptr;
     }
@@ -39239,8 +39239,8 @@ _wrap_new_AGProjection(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGProjection_project__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGProjection *arg1 = (AGProjection *) 0 ;
-    AGPoint *arg2 = 0 ;
-    AGPoint result;
+    AGVector2 *arg2 = 0 ;
+    AGVector2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -39250,8 +39250,8 @@ _wrap_AGProjection_project__SWIG_0(int argc, VALUE *argv, VALUE self) {
     result = ((AGProjection const *)arg1)->project((AGVector2 const &)*arg2);
     
     {
-        AGPoint * resultptr;
-        resultptr = new AGPoint((AGPoint &)result);
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
@@ -39261,7 +39261,7 @@ _wrap_AGProjection_project__SWIG_0(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGProjection_pointOk(int argc, VALUE *argv, VALUE self) {
     AGProjection *arg1 = (AGProjection *) 0 ;
-    AGPoint *arg2 = 0 ;
+    AGVector2 *arg2 = 0 ;
     bool result;
     VALUE vresult = Qnil;
     
@@ -39279,8 +39279,8 @@ _wrap_AGProjection_pointOk(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGProjection_project__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGProjection *arg1 = (AGProjection *) 0 ;
-    AGRect *arg2 = 0 ;
-    AGRect result;
+    AGRect2 *arg2 = 0 ;
+    AGRect2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -39290,8 +39290,8 @@ _wrap_AGProjection_project__SWIG_1(int argc, VALUE *argv, VALUE self) {
     result = ((AGProjection const *)arg1)->project((AGRect2 const &)*arg2);
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -39349,8 +39349,8 @@ static VALUE _wrap_AGProjection_project(int nargs, VALUE *args, VALUE self) {
 static VALUE
 _wrap_AGProjection_clipRect(int argc, VALUE *argv, VALUE self) {
     AGProjection *arg1 = (AGProjection *) 0 ;
-    AGRect arg2 ;
-    AGRect arg3 ;
+    AGRect2 arg2 ;
+    AGRect2 arg3 ;
     SwigValueWrapper<std::pair<AGRect2,AGRect2 > > result;
     VALUE vresult = Qnil;
     
@@ -39358,20 +39358,20 @@ _wrap_AGProjection_clipRect(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGProjection, 0);
     {
-        AGRect * ptr;
+        AGRect2 * ptr;
         SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_AGRect2, 0);
         if (ptr) arg2 = *ptr;
     }
     {
-        AGRect * ptr;
+        AGRect2 * ptr;
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect2, 0);
         if (ptr) arg3 = *ptr;
     }
     result = ((AGProjection const *)arg1)->clipRect(arg2,arg3);
     
     {
-        std::pair<AGRect,AGRect > * resultptr;
-        resultptr = new std::pair<AGRect,AGRect >((std::pair<AGRect,AGRect > &)result);
+        std::pair<AGRect2,AGRect2 > * resultptr;
+        resultptr = new std::pair<AGRect2,AGRect2 >((std::pair<AGRect2,AGRect2 > &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__pairTAGRect2_AGRect2_t, 1);
     }
     return vresult;
@@ -39567,7 +39567,7 @@ free_AGPainter(AGPainter *arg1) {
 static VALUE
 _wrap_AGPainter_putPixel(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGPoint *arg2 = 0 ;
+    AGVector2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
@@ -39608,7 +39608,7 @@ _wrap_AGPainter_getPixel(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_drawCircle(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGPoint *arg2 = 0 ;
+    AGVector2 *arg2 = 0 ;
     float arg3 ;
     AGColor *arg4 = 0 ;
     
@@ -39647,7 +39647,7 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_0(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -39664,7 +39664,7 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     
     if ((argc < 3) || (argc > 3))
@@ -39683,8 +39683,8 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_2(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -39702,8 +39702,8 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_3(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     AGColor *arg5 = 0 ;
     
     if ((argc < 4) || (argc > 4))
@@ -39738,7 +39738,7 @@ static VALUE
 _wrap_AGPainter_tile__SWIG_1(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -39755,8 +39755,8 @@ static VALUE
 _wrap_AGPainter_tile__SWIG_2(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGTexture *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -39774,7 +39774,7 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_4(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGSurface *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -39791,8 +39791,8 @@ static VALUE
 _wrap_AGPainter_blit__SWIG_5(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGSurface *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -40003,7 +40003,7 @@ static VALUE
 _wrap_AGPainter_tile__SWIG_4(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGSurface *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -40020,8 +40020,8 @@ static VALUE
 _wrap_AGPainter_tile__SWIG_5(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     AGSurface *arg2 = 0 ;
-    AGRect *arg3 = 0 ;
-    AGRect *arg4 = 0 ;
+    AGRect2 *arg3 = 0 ;
+    AGRect2 *arg4 = 0 ;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -40187,7 +40187,7 @@ static VALUE
 _wrap_AGPainter_renderText(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
     std::string *arg2 = 0 ;
-    AGPoint *arg3 = 0 ;
+    AGVector2 *arg3 = 0 ;
     AGFont *arg4 = 0 ;
     std::string temp2 ;
     
@@ -40214,7 +40214,7 @@ _wrap_AGPainter_renderText(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_getRect(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGRect result;
+    AGRect2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -40223,8 +40223,8 @@ _wrap_AGPainter_getRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGPainter const *)arg1)->getRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -40234,7 +40234,7 @@ _wrap_AGPainter_getRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_drawGradient(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -40257,7 +40257,7 @@ _wrap_AGPainter_drawGradient(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_drawBorder(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     int arg3 ;
     AGColor *arg4 = 0 ;
     AGColor *arg5 = 0 ;
@@ -40278,7 +40278,7 @@ _wrap_AGPainter_drawBorder(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_fillRect(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGRect *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
     AGColor *arg3 = 0 ;
     
     if ((argc < 2) || (argc > 2))
@@ -40295,8 +40295,8 @@ _wrap_AGPainter_fillRect(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_drawLine(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGPoint *arg2 = 0 ;
-    AGPoint *arg3 = 0 ;
+    AGVector2 *arg2 = 0 ;
+    AGVector2 *arg3 = 0 ;
     AGColor *arg4 = 0 ;
     
     if ((argc < 3) || (argc > 3))
@@ -40400,8 +40400,8 @@ _wrap_AGPainter_transform(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_project(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGPoint *arg2 = 0 ;
-    AGPoint result;
+    AGVector2 *arg2 = 0 ;
+    AGVector2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
@@ -40411,8 +40411,8 @@ _wrap_AGPainter_project(int argc, VALUE *argv, VALUE self) {
     result = ((AGPainter const *)arg1)->project((AGVector2 const &)*arg2);
     
     {
-        AGPoint * resultptr;
-        resultptr = new AGPoint((AGPoint &)result);
+        AGVector2 * resultptr;
+        resultptr = new AGVector2((AGVector2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGVector2, 1);
     }
     return vresult;
@@ -40422,7 +40422,7 @@ _wrap_AGPainter_project(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGPainter_pointOk(int argc, VALUE *argv, VALUE self) {
     AGPainter *arg1 = (AGPainter *) 0 ;
-    AGPoint *arg2 = 0 ;
+    AGVector2 *arg2 = 0 ;
     bool result;
     VALUE vresult = Qnil;
     
@@ -40501,7 +40501,7 @@ static VALUE
 _wrap_new_AGRadioGroup(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGRadioGroup *result;
     
     if ((argc < 2) || (argc > 2))
@@ -40660,7 +40660,7 @@ static VALUE
 _wrap_new_AGRadio(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect arg3 ;
+    AGRect2 arg3 ;
     AGRadio *result;
     
     if ((argc < 2) || (argc > 2))
@@ -40668,7 +40668,7 @@ _wrap_new_AGRadio(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGWidget, 0);
     {
-        AGRect * ptr;
+        AGRect2 * ptr;
         SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_AGRect2, 0);
         if (ptr) arg3 = *ptr;
     }
@@ -40965,7 +40965,7 @@ static VALUE
 _wrap_new_AGTable(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGTable *result;
     
     if ((argc < 2) || (argc > 2))
@@ -41081,7 +41081,7 @@ _wrap_AGTable_getClientRect(int argc, VALUE *argv, VALUE self) {
     AGTable *arg1 = (AGTable *) 0 ;
     int arg2 ;
     int arg3 ;
-    AGRect result;
+    AGRect2 result;
     VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 2))
@@ -41092,8 +41092,8 @@ _wrap_AGTable_getClientRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGTable const *)arg1)->getClientRect(arg2,arg3);
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -41905,7 +41905,7 @@ static VALUE
 _wrap_new_AGWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     std::string *arg4 = 0 ;
     std::string *arg5 = 0 ;
     AGWindow *result;
@@ -41958,7 +41958,7 @@ static VALUE
 _wrap_new_AGWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     std::string *arg4 = 0 ;
     AGWindow *result;
     std::string temp4 ;
@@ -42017,7 +42017,7 @@ static VALUE
 _wrap_new_AGWindow__SWIG_2(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGWindow *result;
     
     if ((argc < 2) || (argc > 2))
@@ -42256,7 +42256,7 @@ static VALUE
 _wrap_AGWindow_eventDragBy(int argc, VALUE *argv, VALUE self) {
     AGWindow *arg1 = (AGWindow *) 0 ;
     AGEvent *arg2 = (AGEvent *) 0 ;
-    AGPoint *arg3 = 0 ;
+    AGVector2 *arg3 = 0 ;
     bool result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
@@ -42309,7 +42309,7 @@ _wrap_AGWindow_tryClose(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGWindow_getClientRect(int argc, VALUE *argv, VALUE self) {
     AGWindow *arg1 = (AGWindow *) 0 ;
-    AGRect result;
+    AGRect2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -42321,8 +42321,8 @@ _wrap_AGWindow_getClientRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGWindow const *)arg1)->getClientRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -42406,7 +42406,7 @@ static VALUE
 _wrap_new_AGFrame__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     size_t arg4 ;
     AGFrame *result;
     
@@ -42456,7 +42456,7 @@ static VALUE
 _wrap_new_AGFrame__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     AGWidget *arg2 = (AGWidget *) 0 ;
-    AGRect *arg3 = 0 ;
+    AGRect2 *arg3 = 0 ;
     AGBorder *arg4 = 0 ;
     AGFrame *result;
     
@@ -42558,7 +42558,7 @@ free_AGFrame(AGFrame *arg1) {
 static VALUE
 _wrap_AGFrame_getClientRect(int argc, VALUE *argv, VALUE self) {
     AGFrame *arg1 = (AGFrame *) 0 ;
-    AGRect result;
+    AGRect2 result;
     Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
@@ -42570,8 +42570,8 @@ _wrap_AGFrame_getClientRect(int argc, VALUE *argv, VALUE self) {
     result = ((AGFrame const *)arg1)->getClientRect();
     
     {
-        AGRect * resultptr;
-        resultptr = new AGRect((AGRect &)result);
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
         vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
     }
     return vresult;
@@ -43698,8 +43698,8 @@ static void *_p_AGSoundTo_p_AGRubyObject(void *x) {
 static void *_p_AGSubMenuTo_p_AGMenuItem(void *x) {
     return (void *)((AGMenuItem *)  ((AGSubMenu *) x));
 }
-static void *_p_AGPoint3To_p_AGVector3(void *x) {
-    return (void *)((AGVector3 *)  ((AGPoint3 *) x));
+static void *_p_AGVector23To_p_AGVector3(void *x) {
+    return (void *)((AGVector3 *)  ((AGVector23 *) x));
 }
 static void *_p_DomParserTo_p_Parser(void *x) {
     return (void *)((Parser *)  ((DomParser *) x));
@@ -43838,12 +43838,11 @@ static swig_type_info _swigt__p_AGMessageObject = {"_p_AGMessageObject", "AGMess
 static swig_type_info _swigt__p_AGMutex = {"_p_AGMutex", "AGMutex *", 0, 0, 0};
 static swig_type_info _swigt__p_AGPaintTarget = {"_p_AGPaintTarget", "AGPaintTarget *", 0, 0, 0};
 static swig_type_info _swigt__p_AGPainter = {"_p_AGPainter", "AGPainter *", 0, 0, 0};
-static swig_type_info _swigt__p_AGPoint3 = {"_p_AGPoint3", "AGPoint3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGProjection = {"_p_AGProjection", "AGProjection *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRadio = {"_p_AGRadio", "AGRadio *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRadioGroup = {"_p_AGRadioGroup", "AGRadioGroup *", 0, 0, 0};
-static swig_type_info _swigt__p_AGRect2 = {"_p_AGRect2", "AGRect2 *|AGRect *", 0, 0, 0};
-static swig_type_info _swigt__p_AGRect3 = {"_p_AGRect3", "AGRect3 *", 0, 0, 0};
+static swig_type_info _swigt__p_AGRect2 = {"_p_AGRect2", "AGRect2 *", 0, 0, 0};
+static swig_type_info _swigt__p_AGRect23 = {"_p_AGRect23", "AGRect23 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRubyObject = {"_p_AGRubyObject", "AGRubyObject *", 0, 0, 0};
 static swig_type_info _swigt__p_AGScreen = {"_p_AGScreen", "AGScreen *", 0, 0, 0};
 static swig_type_info _swigt__p_AGScreenWidget = {"_p_AGScreenWidget", "AGScreenWidget *", 0, 0, 0};
@@ -43861,7 +43860,8 @@ static swig_type_info _swigt__p_AGTheme = {"_p_AGTheme", "AGTheme *", 0, 0, 0};
 static swig_type_info _swigt__p_AGTriangle2 = {"_p_AGTriangle2", "AGTriangle2 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGTriangle3 = {"_p_AGTriangle3", "AGTriangle3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVTiler = {"_p_AGVTiler", "AGVTiler *", 0, 0, 0};
-static swig_type_info _swigt__p_AGVector2 = {"_p_AGVector2", "AGVector2 *|AGPoint *", 0, 0, 0};
+static swig_type_info _swigt__p_AGVector2 = {"_p_AGVector2", "AGVector2 *", 0, 0, 0};
+static swig_type_info _swigt__p_AGVector23 = {"_p_AGVector23", "AGVector23 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector3 = {"_p_AGVector3", "AGVector3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector4 = {"_p_AGVector4", "AGVector4 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVertexProgram = {"_p_AGVertexProgram", "AGVertexProgram *", 0, 0, 0};
@@ -43892,13 +43892,13 @@ static swig_type_info _swigt__p_p_Node = {"_p_p_Node", "Node **", 0, 0, 0};
 static swig_type_info _swigt__p_std__listTAGRect2_t = {"_p_std__listTAGRect2_t", "std::list<AGRect2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__mapTstd__string_std__string_t = {"_p_std__mapTstd__string_std__string_t", "std::map<std::string,std::string > *|Node::Attributes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__ostringstream = {"_p_std__ostringstream", "std::ostringstream *", 0, 0, 0};
-static swig_type_info _swigt__p_std__pairTAGRect2_AGRect2_t = {"_p_std__pairTAGRect2_AGRect2_t", "std::pair<AGRect2,AGRect2 > *|std::pair<AGRect,AGRect > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__pairTAGRect2_AGRect2_t = {"_p_std__pairTAGRect2_AGRect2_t", "std::pair<AGRect2,AGRect2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__pairTstd__string_bool_t = {"_p_std__pairTstd__string_bool_t", "std::pair<std::string,bool > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGBox3_t = {"_p_std__vectorTAGBox3_t", "std::vector<AGBox3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGLine2_t = {"_p_std__vectorTAGLine2_t", "std::vector<AGLine2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGMatrix4_t = {"_p_std__vectorTAGMatrix4_t", "std::vector<AGMatrix4 > *", 0, 0, 0};
-static swig_type_info _swigt__p_std__vectorTAGRect3_t = {"_p_std__vectorTAGRect3_t", "std::vector<AGRect3 > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTAGRect23_t = {"_p_std__vectorTAGRect23_t", "std::vector<AGRect23 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector2_t = {"_p_std__vectorTAGVector2_t", "std::vector<AGVector2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector4_t = {"_p_std__vectorTAGVector4_t", "std::vector<AGVector4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_p_t = {"_p_std__vectorTNode_p_t", "std::vector<Node * > *", 0, 0, 0};
@@ -43951,12 +43951,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGMutex,
   &_swigt__p_AGPaintTarget,
   &_swigt__p_AGPainter,
-  &_swigt__p_AGPoint3,
   &_swigt__p_AGProjection,
   &_swigt__p_AGRadio,
   &_swigt__p_AGRadioGroup,
   &_swigt__p_AGRect2,
-  &_swigt__p_AGRect3,
+  &_swigt__p_AGRect23,
   &_swigt__p_AGRubyObject,
   &_swigt__p_AGScreen,
   &_swigt__p_AGScreenWidget,
@@ -43975,6 +43974,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGTriangle3,
   &_swigt__p_AGVTiler,
   &_swigt__p_AGVector2,
+  &_swigt__p_AGVector23,
   &_swigt__p_AGVector3,
   &_swigt__p_AGVector4,
   &_swigt__p_AGVertexProgram,
@@ -44011,7 +44011,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorTAGBox3_t,
   &_swigt__p_std__vectorTAGLine2_t,
   &_swigt__p_std__vectorTAGMatrix4_t,
-  &_swigt__p_std__vectorTAGRect3_t,
+  &_swigt__p_std__vectorTAGRect23_t,
   &_swigt__p_std__vectorTAGVector2_t,
   &_swigt__p_std__vectorTAGVector4_t,
   &_swigt__p_std__vectorTNode_p_t,
@@ -44064,12 +44064,11 @@ static swig_cast_info _swigc__p_AGMessageObject[] = {  {&_swigt__p_AGListBox, _p
 static swig_cast_info _swigc__p_AGMutex[] = {  {&_swigt__p_AGMutex, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGPaintTarget[] = {  {&_swigt__p_AGPaintTarget, 0, 0, 0},  {&_swigt__p_AGSurface, _p_AGSurfaceTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGTexture, _p_AGTextureTo_p_AGPaintTarget, 0, 0},  {&_swigt__p_AGScreen, _p_AGScreenTo_p_AGPaintTarget, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGPainter[] = {  {&_swigt__p_AGPainter, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGPoint3[] = {  {&_swigt__p_AGPoint3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGProjection[] = {  {&_swigt__p_AGProjection, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRadio[] = {  {&_swigt__p_AGRadio, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRadioGroup[] = {  {&_swigt__p_AGRadioGroup, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRect2[] = {  {&_swigt__p_AGRect2, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGRect3[] = {  {&_swigt__p_AGRect3, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGRect23[] = {  {&_swigt__p_AGRect23, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRubyObject[] = {  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGApplication, _p_AGApplicationTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGWidget, _p_AGWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGListener, _p_AGListenerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGFrame, _p_AGFrameTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRubyObject, 0, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMessageObject, _p_AGMessageObjectTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGRubyObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGScreen[] = {  {&_swigt__p_AGScreen, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGScreenWidget[] = {  {&_swigt__p_AGScreenWidget, 0, 0, 0},{0, 0, 0, 0}};
@@ -44088,7 +44087,8 @@ static swig_cast_info _swigc__p_AGTriangle2[] = {  {&_swigt__p_AGTriangle2, 0, 0
 static swig_cast_info _swigc__p_AGTriangle3[] = {  {&_swigt__p_AGTriangle3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVTiler[] = {  {&_swigt__p_AGVTiler, 0, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGVTiler, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGVTiler, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGVTiler, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGVTiler, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVector2[] = {  {&_swigt__p_AGVector2, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGPoint3, _p_AGPoint3To_p_AGVector3, 0, 0},  {&_swigt__p_AGVector3, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGVector23[] = {  {&_swigt__p_AGVector23, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGVector23, _p_AGVector23To_p_AGVector3, 0, 0},  {&_swigt__p_AGVector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVector4[] = {  {&_swigt__p_AGVector4, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVertexProgram[] = {  {&_swigt__p_AGVertexProgram, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWidget[] = {  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGWidget, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGWidget, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWidget, 0, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGWidget, 0, 0},  {&_swigt__p_AGScreenWidget, _p_AGScreenWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGWidget, 0, 0},  {&_swigt__p_AGFrame, _p_AGFrameTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGWidget, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGWidget, 0, 0},{0, 0, 0, 0}};
@@ -44124,7 +44124,7 @@ static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0
 static swig_cast_info _swigc__p_std__vectorTAGBox3_t[] = {  {&_swigt__p_std__vectorTAGBox3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGLine2_t[] = {  {&_swigt__p_std__vectorTAGLine2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGMatrix4_t[] = {  {&_swigt__p_std__vectorTAGMatrix4_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__vectorTAGRect3_t[] = {  {&_swigt__p_std__vectorTAGRect3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTAGRect23_t[] = {  {&_swigt__p_std__vectorTAGRect23_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector2_t[] = {  {&_swigt__p_std__vectorTAGVector2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector4_t[] = {  {&_swigt__p_std__vectorTAGVector4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_p_t[] = {  {&_swigt__p_std__vectorTNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -44177,12 +44177,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGMutex,
   _swigc__p_AGPaintTarget,
   _swigc__p_AGPainter,
-  _swigc__p_AGPoint3,
   _swigc__p_AGProjection,
   _swigc__p_AGRadio,
   _swigc__p_AGRadioGroup,
   _swigc__p_AGRect2,
-  _swigc__p_AGRect3,
+  _swigc__p_AGRect23,
   _swigc__p_AGRubyObject,
   _swigc__p_AGScreen,
   _swigc__p_AGScreenWidget,
@@ -44201,6 +44200,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGTriangle3,
   _swigc__p_AGVTiler,
   _swigc__p_AGVector2,
+  _swigc__p_AGVector23,
   _swigc__p_AGVector3,
   _swigc__p_AGVector4,
   _swigc__p_AGVertexProgram,
@@ -44237,7 +44237,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorTAGBox3_t,
   _swigc__p_std__vectorTAGLine2_t,
   _swigc__p_std__vectorTAGMatrix4_t,
-  _swigc__p_std__vectorTAGRect3_t,
+  _swigc__p_std__vectorTAGRect23_t,
   _swigc__p_std__vectorTAGVector2_t,
   _swigc__p_std__vectorTAGVector4_t,
   _swigc__p_std__vectorTNode_p_t,
@@ -44624,12 +44624,12 @@ SWIGEXPORT void Init_libantargisgui(void) {
     cAGVector3.mark = 0;
     cAGVector3.destroy = (void (*)(void *)) free_AGVector3;
     
-    cAGPoint3.klass = rb_define_class_under(mLibantargisgui, "AGPoint3", ((swig_class *) SWIGTYPE_p_AGVector3->clientdata)->klass);
-    SWIG_TypeClientData(SWIGTYPE_p_AGPoint3, (void *) &cAGPoint3);
-    rb_define_alloc_func(cAGPoint3.klass, _wrap_AGPoint3_allocate);
-    rb_define_method(cAGPoint3.klass, "initialize", VALUEFUNC(_wrap_new_AGPoint3), -1);
-    cAGPoint3.mark = 0;
-    cAGPoint3.destroy = (void (*)(void *)) free_AGPoint3;
+    cAGVector23.klass = rb_define_class_under(mLibantargisgui, "AGVector23", ((swig_class *) SWIGTYPE_p_AGVector3->clientdata)->klass);
+    SWIG_TypeClientData(SWIGTYPE_p_AGVector23, (void *) &cAGVector23);
+    rb_define_alloc_func(cAGVector23.klass, _wrap_AGVector23_allocate);
+    rb_define_method(cAGVector23.klass, "initialize", VALUEFUNC(_wrap_new_AGVector23), -1);
+    cAGVector23.mark = 0;
+    cAGVector23.destroy = (void (*)(void *)) free_AGVector23;
     
     cAGMatrix3.klass = rb_define_class_under(mLibantargisgui, "AGMatrix3", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGMatrix3, (void *) &cAGMatrix3);
@@ -44819,14 +44819,14 @@ SWIGEXPORT void Init_libantargisgui(void) {
     cAGMatrix4.mark = 0;
     cAGMatrix4.destroy = (void (*)(void *)) free_AGMatrix4;
     
-    cAGRect3.klass = rb_define_class_under(mLibantargisgui, "AGRect3", rb_cObject);
-    SWIG_TypeClientData(SWIGTYPE_p_AGRect3, (void *) &cAGRect3);
-    rb_define_alloc_func(cAGRect3.klass, _wrap_AGRect3_allocate);
-    rb_define_method(cAGRect3.klass, "initialize", VALUEFUNC(_wrap_new_AGRect3), -1);
-    rb_define_method(cAGRect3.klass, "collides", VALUEFUNC(_wrap_AGRect3_collides), -1);
-    rb_define_method(cAGRect3.klass, "toString", VALUEFUNC(_wrap_AGRect3_toString), -1);
-    cAGRect3.mark = 0;
-    cAGRect3.destroy = (void (*)(void *)) free_AGRect3;
+    cAGRect23.klass = rb_define_class_under(mLibantargisgui, "AGRect23", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGRect23, (void *) &cAGRect23);
+    rb_define_alloc_func(cAGRect23.klass, _wrap_AGRect23_allocate);
+    rb_define_method(cAGRect23.klass, "initialize", VALUEFUNC(_wrap_new_AGRect23), -1);
+    rb_define_method(cAGRect23.klass, "collides", VALUEFUNC(_wrap_AGRect23_collides), -1);
+    rb_define_method(cAGRect23.klass, "toString", VALUEFUNC(_wrap_AGRect23_toString), -1);
+    cAGRect23.mark = 0;
+    cAGRect23.destroy = (void (*)(void *)) free_AGRect23;
     
     cAGBox3.klass = rb_define_class_under(mLibantargisgui, "AGBox3", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGBox3, (void *) &cAGBox3);

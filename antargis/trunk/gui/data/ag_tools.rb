@@ -82,7 +82,7 @@ module AGHandler
 			value=false
 			@handlers[evName].each{|handler|
 				m=method(handler)
-				if m.arity==1
+				if m.arity==1 || m.arity==-1
 					# ok
 					if self.send(handler,e)
 						value=true
@@ -92,6 +92,7 @@ module AGHandler
 						value=true
 					end
 				else
+					puts "AR:",m.arity
 					raise "SLOT is invalid! event:"+evName+" slotname:"+handler.to_s+" in class:"+(self.class).to_s
 				end
 			}
@@ -133,6 +134,24 @@ module AGHandler
 	end
 end
 
+def addSignal(name)
+	eval <<EOT
+class #{self.class}
+	def #{name}(e=nil)
+		if e
+			return @#{name}.signal(e)
+		else
+			return @#{name}
+		end
+	end
+end
+EOT
+	eval("@#{name}=AGSignal.new(self,'#{name}')\n")
+end
+
 class AGApplication
+	include AGHandler
+end
+class AGWidget
 	include AGHandler
 end
