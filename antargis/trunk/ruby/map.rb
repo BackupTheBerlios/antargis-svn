@@ -71,6 +71,10 @@ class AntRubyMap<AntMap
 			e=AntHero.new
 			@heroes.push(e)
 		end
+		if node.getName=="antNPC" then
+			e=AntNPC.new
+			#@heroes.push(e)
+		end
 		if node.getName=="antTower" then
 			e=AntTower.new
 		end

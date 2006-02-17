@@ -24,6 +24,7 @@ class AntNPC<AntMyEntity
 	def loadXML(node)
 		@npcType=node.get("npcType")
 		super
+		setupMesh
 	end
 	
 	def setupMesh

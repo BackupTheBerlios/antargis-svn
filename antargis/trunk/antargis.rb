@@ -155,7 +155,7 @@ puts ENV["_"]
 if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
 	if ARGV.length>0
-		savegame="levels/"+ARGV[0]+".antlvl"
+		savegame="savegames/"+ARGV[0]+".antlvl"  # was levels/
 	end
 	startGame(savegame)	
 end
