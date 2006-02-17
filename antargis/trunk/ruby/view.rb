@@ -255,7 +255,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 
 	def clipCamera(p)
-		AGVector2.new([20,p[0],getMap.getW-20].sort[1],[20,p[1],getMap.getH-20].sort[1])
+		AGVector2.new([31,p[0],getMap.getW-31].sort[1],[14,p[1],getMap.getH-36].sort[1])
 	end
 
 end
