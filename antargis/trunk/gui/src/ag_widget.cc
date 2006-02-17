@@ -82,6 +82,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
 
 AGWidget::~AGWidget()
 {
+  CTRACE;
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {

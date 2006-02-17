@@ -691,8 +691,20 @@ void AGEdit::checkWrap()
 		}
 	      else
 		{
-		  // fill line after
-		  i->prepend(n.first);
+		  if(i==mLines.end())
+		    {
+		      AGEditLine l(n.first,actLine->getFont(),n.second);
+		      l.setAlign(mAlign);
+		      l.setVAlign(mVAlign);
+		      mLines.push_back(l);
+		      i=mLines.end();
+		      i--;
+		    }
+		  else
+		    {
+		      // fill line after
+		      i->prepend(n.first);
+		    }
 		}
 
 	    }
@@ -887,5 +899,6 @@ void AGEdit::clear()
   l.setAlign(mAlign);
   l.setVAlign(mVAlign);
   mLines.push_back(l);
+  getActLine();
 }
 

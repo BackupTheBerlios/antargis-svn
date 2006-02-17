@@ -381,4 +381,7 @@
 		<hero name="Bantor"/>
 	</lazyPlayer>
 	<trigger name="nogo" x="50.9935" y="28.4206"  radius="13"/>
+	<target name="goback" x="65" y="30"/>
+	<trigger name="druid" x="85.9007" y="50.092"  radius="3"/>
+	<target name="retreat" x="41" y="88"/>
 </antargisLevel>

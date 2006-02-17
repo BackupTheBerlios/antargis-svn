@@ -25,6 +25,22 @@ require 'ant_player.rb'
 require 'ant_trigger.rb'
 require 'level.rb'
 
+class TargetPos
+	attr_reader :pos, :name
+	def loadXML(n)
+		@pos=AGVector2.new(n.get("x").to_f,n.get("y").to_f)
+		@name=n.get("name")
+	end
+	def saveXML(n)
+		n.set("x",@pos.x.to_s)
+		n.set("y",@pos.y.to_s)
+		n.set("name",@name)
+	end
+	def xmlName
+		"target"
+	end
+end
+
 class AntRubyMap<AntMap
 	def initialize(w,h)
 		super(w,h)
@@ -38,6 +54,10 @@ class AntRubyMap<AntMap
 		@heroes=[]
 		@started=false
 		@story={}
+		@targets={}
+	end
+	def getTarget(name)
+		@targets[name]
 	end
 	def getPlayer
 		@myPlayer
@@ -101,6 +121,11 @@ class AntRubyMap<AntMap
 			if not @myPlayer
 				@myPlayer=player
 			end
+		end
+		if node.getName=="target" then
+			t=TargetPos.new
+			t.loadXML(node)
+			@targets[t.name]=t
 		end
 		
 		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer}
@@ -247,6 +272,10 @@ class AntRubyMap<AntMap
 		@players.each{|player|
 			c=n.newChild(player.xmlName)
 			player.saveXML(c)
+		}
+		@targets.each{|t|
+			c=n.newChild(t.xmlName)
+			t.saveXML(c)
 		}
 	end
 	
