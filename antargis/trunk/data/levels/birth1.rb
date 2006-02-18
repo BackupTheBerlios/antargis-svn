@@ -12,7 +12,7 @@ class Level1<Level
 			when "nogo"
 				if hero.getPlayer.class==AntHumanPlayer and not @druid
 					s=StoryFlow.new("noFurther")
-					s.push(hero.getName,"I will not go any further!")
+					s.push(hero.getName,"I will not go any further! There are strangers out there. They don't seem friendly.")
 					tellStory(s)
 					hero.newHLMoveJob(0,getMap.getTarget("goback").pos,0)
 				end

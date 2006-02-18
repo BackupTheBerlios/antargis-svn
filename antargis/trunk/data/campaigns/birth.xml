@@ -1,8 +1,18 @@
 <campaign image="data/gui/map1.png" name="A hero is born." description="The story of Antargis begins">
 	<cutscene>
 		<screen>
-			<image filename="data/gui/map1.png"/>
+			<text text="Strange visions cross your mind."/>
+		</screen>
+		<screen>
+			<!--<image filename="data/gui/map1.png"/>-->
+			<text text="Your head aches."/>
 		</screen>
 	</cutscene>
 	<level file="data/levels/birth1.antlvl"/>
+	<cutscene>
+		<screen>
+			<image filename="data/gui/map1.png"/>
+			<text text="Your enemies fled northward. Your is it to catch them."/>
+		 </screen>
+	 </cutscene>
 </campaign>
