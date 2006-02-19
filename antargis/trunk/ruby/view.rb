@@ -161,7 +161,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			# FIXME: exchange with good position estimation
 			doMove(list[0].node.getPos2D)
 		elsif job=="doRecruit" then
-			displayError("not allowed")
+			#displayError("not allowed")
 			puts "RECRUITING"
 			if @hero then
 				# get house
@@ -179,6 +179,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 					puts "DOING RECRUIT"
 					puts house
 					@hero.newHLRecruitJob(house)
+					$buttonPanel.setPointing
 				end
 			end
 		elsif job=="doFight" then

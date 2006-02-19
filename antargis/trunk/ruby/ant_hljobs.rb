@@ -53,7 +53,7 @@ class AntHeroMoveJob<AntHLJob
 	end
 
 	def check(man)
-		if not man
+		if man.class!=AntNewMan
 			return
 		end
 		case @state
@@ -297,9 +297,11 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	end
 	
 	def check(man)
+		puts @state
 		if @state!="torest"
 			super(man)
 		else
+			puts "RECRUIT....................."
 			# recruit
 			if @want==0 then 
 				@finished=true

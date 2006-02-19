@@ -53,6 +53,7 @@ class AntBoss<AntMyEntity
 	end
 	
 	def eventNoJob
+		puts "eventNoJob"
 		checkHLJobEnd(nil)
 		checkCreateMen
 		if @job && @job.finished
@@ -60,6 +61,8 @@ class AntBoss<AntMyEntity
 		end
 		if @job==nil
 			noHLJob
+		else
+			@job.check(self)
 		end
 	end
 	
