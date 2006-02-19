@@ -54,9 +54,6 @@ class AntBoss<AntMyEntity
 	
 	def eventNoJob
 		puts "eventNoJob"
-		if @job && @job.finished
-			eventHLJobFinished(@job)
-		end
 		checkHLJobEnd(nil)
 		checkCreateMen
 		if @job && @job.finished
@@ -69,10 +66,6 @@ class AntBoss<AntMyEntity
 		end
 	end
 
-	def eventHLJobFinished(j)
-		getMap.eventHLJobFinished(self,j)
-	end
-	
 	def checkCreateMen
 		if @createMen>0
 			for i in 0..(@createMen-1) do
@@ -196,6 +189,24 @@ class AntBoss<AntMyEntity
 		@ring.setVisible(false)
 	end
 
+	def eventHLJobFinished(job)
+		getMap.eventHLJobFinished(self,job)
+	end
+
+	def checkHLJobEnd(man)
+		if @job
+			if man
+				@job.check(man)
+			end
+			if @job.finished then 
+				eventHLJobFinished(@job)
+				if @player
+					@player.eventJobFinished(self,@job)
+				end
+				@job=nil 
+			end
+		end
+	end
 	
 end
 

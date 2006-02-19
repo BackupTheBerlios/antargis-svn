@@ -338,6 +338,9 @@ class AntRubyMap<AntMap
 	def eventHLJobFinished(hero,job)
 		@script.eventHLJobFinished(hero,job)
 	end
+	def eventHLDismissed(hero)
+		@script.eventDismissed(hero)
+	end
 end
 
 

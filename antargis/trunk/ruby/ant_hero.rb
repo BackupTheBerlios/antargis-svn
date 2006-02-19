@@ -63,20 +63,7 @@ class AntHero<AntBoss
 		end
 	end
 	
-	def checkHLJobEnd(man)
-		if @job
-			if man
-				@job.check(man)
-			end
-			if @job.finished then 
-				if @player
-					@player.eventJobFinished(self,@job)
-				end
-				@job=nil 
-			end
-		end
-	end
-	
+
 	def noHLJob
 		if @player
 			@player.assignJob(self)
@@ -162,6 +149,7 @@ class AntHero<AntBoss
 			m.setNoBoss
 			@men.delete(m)
 		}
+		getMap.eventHLDismissed(self)
 	end
 	
 		
@@ -170,6 +158,9 @@ class AntHero<AntBoss
 	# 2) start all at once
 	
 	def getSitFormation(man)
+		if man==self
+			return getPos2D
+		end
 		id=@men.index(man)
 		
 		if id then

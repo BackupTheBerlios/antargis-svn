@@ -9,20 +9,29 @@ class Level1<Level
 		tellStory(start)
 	end
 	def eventHLJobFinished(hero,job)
-		puts "eventHLJobFinished(hero,job)"
-		puts job.class,hero.getName
-		#exit
-		if job.class==AntHeroRecruitJob and hero.getName=="Godrin"
+		if job.class==AntHeroRecruitJob and hero.getName=="Godrin" and @recruit==nil
+			@recruit=true
 			start=StoryFlow.new("recruit")
 			start.push("Tutorial","Ok, you have recruited some men.")
 			start.push("Tutorial","If you want to recruit all men select the button with the three swords.")
 			start.push("Tutorial","This increases your aggressiveness. After that repeat the recruiting.")
 			start.push("Tutorial","When you're done with this go north and defeat your enemies.")
 			tellStory(start)
-		
 		end
 	end
+	def eventDismissed(hero)
+		start=StoryFlow.new("end")
+		start.push("Tutorial","You have passed the first tutorial level.")
+		tellStory(start)
+	end
 	def eventTrigger(hero,t)
+		case t.name
+			when "storyFinished"
+				if @story.name=="end"
+					wonLevel
+					endLevel
+				end
+		end
 		puts "TRIGGER"
 		return false #ignore
 	end
@@ -33,6 +42,11 @@ class Level1<Level
 			when "Bantor"
 				wonLevel
 		end
+	end
+	def wonLevel
+		start=StoryFlow.new("recruit")
+		start.push("Tutorial","So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.")
+		tellStory(start)
 	end
 
 end

@@ -34,27 +34,26 @@ class AntDialog<AGLayout
 		end
 		#setModal(true)
 	end
-	def sigOk(e)
+	def sigOk
 		sigClose
 	end
-	def sigCancel(e)
-		sigClose(e)
+	def sigCancel
+		sigClose
 	end
 	
-	def eventKeyDown(event)
+	def eventKeyDown(e)
 		if super then return true end
-		e=event #toAGSDLEvent(event)
 		if e.getKey==SDLK_ESCAPE then	
 			sigClose
 			getMap.unpause
 			return true
 		elsif e.getKey==SDLK_RETURN then
-			sigOk
+			sigOk(e)
 		end
 	end
-	def sigClose(e)
+	def sigClose
 		hide
-		sigClosed(e)
+		sigClosed(AGEvent.new(self,"sigClosed"))
 	end
 end
 

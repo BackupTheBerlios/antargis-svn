@@ -305,6 +305,12 @@ class AntHeroRecruitJob<AntHeroMoveJob
 					# recruit
 					if @want==0 then 
 						@state="wait_recruit"
+						# send all to sit formation
+						man.getMen.each{|m|
+							fp=man.getSitFormation(m)
+							m.newMoveJob(0,fp,0)
+							m.setMode("torest_recruit")
+						}
 						return true
 					end
 					man.newRestJob(1)
@@ -319,14 +325,23 @@ class AntHeroRecruitJob<AntHeroMoveJob
 					puts "WAIT_RECRUI"
 					puts man.getMen.length
 					man.getMen.each{|m|
-						fp=man.getSitFormation(m)
-						if (m.getPos2D-fp).length>1
-							m.newMoveJob(0,fp,0)
+						if m.getMode!="rest_recruit"
 							f=false
 						end
 					}
-					man.newRestJob(1)
-					@finished=f
+					if f
+						puts "RECRUIT FINISHED!!!!!!!!!!!"
+						@finished=true
+					else
+						man.newRestJob(1)
+					end
+				else
+					t=@hero.getSitFormation(man)
+					if (man.getPos2D-t).length>1
+						man.newMoveJob(t)
+					else
+						man.setMode("rest_recruit")
+					end
 				end
 			else
 				super(man)
