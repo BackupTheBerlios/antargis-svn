@@ -6,6 +6,8 @@ class Level
 	end
 	def eventOwnerChanged(ent)
 	end
+	def eventHLJobFinished(hero,job)
+	end
 
 	# use this to end a level
 	def wonLevel

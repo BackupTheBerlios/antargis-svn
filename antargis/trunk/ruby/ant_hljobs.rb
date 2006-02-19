@@ -298,18 +298,38 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	
 	def check(man)
 		puts @state
-		if @state!="torest"
-			super(man)
-		else
-			puts "RECRUIT....................."
-			# recruit
-			if @want==0 then 
-				@finished=true
-				return true 
-			end
-			man=@target.takeMan
-			man.setBoss(@hero)
-			@want=@want-1
+		case @state
+			when "torest" # after moving to tower
+				if man.class==AntHero
+					puts "RECRUIT....................."
+					# recruit
+					if @want==0 then 
+						@state="wait_recruit"
+						return true
+					end
+					man.newRestJob(1)
+					nman=@target.takeMan
+					nman.setBoss(@hero)
+					@want=@want-1
+				end
+			when "wait_recruit"
+				# check if all men are in range
+				if man.class==AntHero
+					f=true
+					puts "WAIT_RECRUI"
+					puts man.getMen.length
+					man.getMen.each{|m|
+						fp=man.getSitFormation(m)
+						if (m.getPos2D-fp).length>1
+							m.newMoveJob(0,fp,0)
+							f=false
+						end
+					}
+					man.newRestJob(1)
+					@finished=f
+				end
+			else
+				super(man)
 		end
 		return false
 	end

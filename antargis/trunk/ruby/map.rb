@@ -335,7 +335,9 @@ class AntRubyMap<AntMap
 			@script.eventOwnerChanged(ent)
 		end
 	end
-
+	def eventHLJobFinished(hero,job)
+		@script.eventHLJobFinished(hero,job)
+	end
 end
 
 

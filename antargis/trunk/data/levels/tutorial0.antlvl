@@ -11,7 +11,7 @@
   <antNewSheep aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="62.6914" y="56.466" z="2.77365"/>
   </antNewSheep>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Bantor">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Bantor" men="4">
     <position x="61.3992" y="85.7643" z="1.24638"/>
   </antHero>
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="8">
