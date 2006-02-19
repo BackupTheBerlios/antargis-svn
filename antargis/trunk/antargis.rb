@@ -43,7 +43,7 @@ class AntGameApp <AntRubyView
 	include AGHandler
 	def initialize(savegame,w,h)
 		super(w,h)
-		@result=GameResult
+		@result=GameResult.new
 		$app=self	
 		@map=AntRubyMap.new(32,32) # some small dummy size - gets overriden by loadMap anyway
 		$map=@map

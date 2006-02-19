@@ -85,15 +85,7 @@ void WaterPiece::draw()
   //  tex.setClamp(GL_REPEAT,GL_REPEAT,GL_REPEAT);//CLAMP_TO_EDGE);
   //  c.setColor(AGVector4(0,0,1,1));
   c.begin();
-  /*
-  glEnable(GL_COLOR_MATERIAL);
 
-  glDisable(GL_ALPHA_TEST);
-  glDisable(GL_CULL_FACE);
-  glBindTexture(GL_TEXTURE_2D,tex.getTextureID());
-
-  glColor4f(1,1,1,1);
-  */
   glDisable(GL_COLOR_MATERIAL);
   glDisable(GL_CULL_FACE);
   glDisable(GL_ALPHA_TEST);
@@ -101,8 +93,6 @@ void WaterPiece::draw()
   shader->enable();
   mArray.draw();
   shader->disable();
-
-  //  glDisable(GL_COLOR_MATERIAL);
 }
 
 void WaterPiece::drawPick()

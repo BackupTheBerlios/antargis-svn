@@ -1,13 +1,4 @@
 <campaign image="data/gui/map1.png" name="Tutorial" description="Here you learn how to play the game.">
-	<cutscene>
-		<screen>
-			<image filename="data/gui/map1.png"/>
-			<text text="Here you learn how to play the game step by step."/>
-		</screen>
-		<screen>
-			<text text="No image here."/>
-		</screen>
-	</cutscene>
 	<level file="data/levels/tutorial0.antlvl">
 		<failscene>
 			<screen>

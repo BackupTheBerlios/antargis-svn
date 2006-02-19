@@ -338,6 +338,7 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 	}
       
       AGTexture ms(as);
+      ms.setClamp(GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE);
 	
       fontCache[make_pair(pFont,pText)]=ms;
     }
