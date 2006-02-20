@@ -32,6 +32,7 @@ class AntDialog<AGLayout
 		if getChild("cancel")
 			addHandler(getChild("cancel"),:sigClick,:sigCancel)
 		end
+		addSignal("sigClosed")
 		#setModal(true)
 	end
 	def sigOk
