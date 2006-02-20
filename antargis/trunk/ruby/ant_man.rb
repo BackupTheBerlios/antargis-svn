@@ -86,11 +86,13 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def eventDie
-		setMeshState("dead")
 		simDeath
 		eventDefeated
 		newRestJob(20)
 		setMeshState("dead")
+		if @boss
+			@boss.removeMan(self)
+		end
 	end
 	
 	# Job was finished
