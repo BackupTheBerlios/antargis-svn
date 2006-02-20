@@ -20,6 +20,7 @@
 
 #include "ag_widget.h"
 #include "ag_debug.h"
+#include "ag_screen.h"
 #include "ag_menu.h"
 #include "ag_kill.h"
 #include <map>
@@ -194,6 +195,8 @@ void AGWidget::drawAll(AGPainter &p)
     
       p.popMatrix();
       setDrawn();
+      //	  getScreen().flip();
+      //	  SDL_Delay(500);
     }
 }
 
@@ -368,7 +371,7 @@ void AGWidget::addChildBack(AGWidget *w)
 
 void AGWidget::regChange()
 {
-  AGRect2 t=mr.shrink(-2);
+  AGRect2 t=mr.shrink(-20);
   if(mChangeRect.width()==0 || mChangeRect.height()==0)
     mChangeRect=t;
   else
@@ -798,6 +801,7 @@ void AGWidget::prepareDraw()
 	  drawAfter(p);
 	  mCacheTouched=false;
 	  setDrawn();
+
 	}
     }
   else

@@ -398,7 +398,7 @@ bool AGEdit::eventKeyDown(AGEvent *m)
     return false;
   if(!hasFocus())
     return false;
-
+  queryRedraw();
   if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();

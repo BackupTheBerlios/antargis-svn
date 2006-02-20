@@ -163,6 +163,7 @@ void AGApplication::draw()
 	  AGRect2 r=mainWidget->getChangeRect();
 	  //	  cdebug(r);
 	  p.clip(r);
+	  p.fillRect(AGRect2(0,0,1024,768),AGColor(0,0,0));
 	}
       mainWidget->drawAll(p);
       pLastDrawn=mainWidget;

@@ -66,20 +66,34 @@ AGRect2 AGProjection::project(const AGRect2 &p) const
 }
 std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) const
 {
-  // clip left
+  //  return std::make_pair(target,src);
+  AGRect2 i=clip.intersect(target);
+  if(i.width()<=0 || i.height()<=0)
+    return std::make_pair(AGRect2(0,0,0,0),AGRect2(0,0,0,0));
+
+
+ // clip left
   if(target.x0()<clip.x0())
     {
       float a=(clip.x0()-target.x0())/target.w();
+      float nw=target.x1()-clip.x0();
       target.setLeft(clip.x0());
+      target.setWidth(nw);
+      nw=src.w()*(1.0f-a);
       src.setLeft(src.x0()+src.w()*a);
+      src.setWidth(nw);
     }
 
   // clip top
   if(target.y0()<clip.y0())
     {
       float a=(clip.y0()-target.y0())/target.h();
+      float nh=target.y1()-clip.y0();
       target.setTop(clip.y0());
+      target.setHeight(nh);
+      nh=src.h()*(1.0f-a);
       src.setTop(src.y0()+src.h()*a);
+      src.setHeight(nh);
     }
 
   // clip right
