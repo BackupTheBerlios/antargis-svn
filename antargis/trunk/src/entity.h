@@ -75,6 +75,9 @@ class AntEntity:public AGRubyObject
     AGColor mMinimapColor;
     bool mShowOnMinimap;
 
+    float mStrength;
+    float mMoraleStrength;
+
   public: //virtually protected
     float mDir;  // direction in (0,360)
     Resource resource;
@@ -88,6 +91,11 @@ class AntEntity:public AGRubyObject
     void setMinimapColor(const AGColor &c);
     AGColor getMinimapColor() const;
     bool showOnMinimap() const;
+
+    void setStrength(float f);
+    float getStrength() const;
+    void setMoraleStrength(float f);
+    float getMoraleStrength() const;
 
 
     // Positions

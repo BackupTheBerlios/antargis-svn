@@ -68,6 +68,9 @@ void AntEntity::init()
   //esh=0;
   mDir=0;
 
+  mStrength=0.5;
+  mMoraleStrength=1;
+
   //  mDirNum=1;
 }
 
@@ -552,4 +555,21 @@ AGColor AntEntity::getMinimapColor() const
 bool AntEntity::showOnMinimap() const
 {
   return mShowOnMinimap;
+}
+
+void AntEntity::setStrength(float f)
+{
+  mStrength=f;
+}
+float AntEntity::getStrength() const
+{
+  return mStrength;
+}
+void AntEntity::setMoraleStrength(float f)
+{
+  mMoraleStrength=f;
+}
+float AntEntity::getMoraleStrength() const
+{
+  return mMoraleStrength;
 }
