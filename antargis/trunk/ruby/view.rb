@@ -50,14 +50,21 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		sp=getScene.getPosition(AGVector4.new(pos,1))
 		return AGRect.new(sp.x-50,sp.y-45,100,40)
 	end
-	
+
 	def setupHeroDisplay
+		# init
 		heroes=$map.getOwnHeroes
 		if heroes.length>0
-			p=heroes[0].getPos2D
-			getScene.setCamera(AGVector4.new(p.x,p.y,0))
+			h=heroes[0]
+			selectHero(h)
+			focusHero(h)
 		end
 		setupNames
+	end
+
+	def focusHero(hero)
+		p=hero.getPos2D
+		getScene.setCamera(AGVector4.new(p.x,p.y,0))
 	end
 	
 	def setupNames
@@ -71,11 +78,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			@layout.addChild(n)
 		}
 	end
-
-	def playStory(story)
-		
-	end
-
 
 	def eventHover(list,button)
 		if list.length>0
@@ -259,6 +261,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		AGVector2.new([31,p[0],getMap.getW-31].sort[1],[14,p[1],getMap.getH-36].sort[1])
 	end
 
+
 end
 
 class AntRubyEditViewTest<AGWidget #EditIsoView
@@ -284,7 +287,7 @@ $antRubyViewCreator=AntRubyViewCreator.new
 class AntInventory<AGButton
 	def initialize(p,rect)
 		super(p,rect,"")
-		setTheme("antButton")
+		#setTheme("antButton")
 		$inventory=self
 		@resTypes=["wood","stone","men","food","tool"]
 		setEnabled(false)
@@ -356,6 +359,8 @@ class AntButtonPanel<AGWidget
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
 		@inited=false
 		@agg=1
+
+		addSignal("sigAggressionChanged")
 	end
 	def init
 		toAGButton(getChild("doAgg0")).setChecked(true)
@@ -392,6 +397,7 @@ class AntButtonPanel<AGWidget
 	end
 	def sigAggSelected(e)
 		@agg=@aggButtons[e.getCaller.getName]
+		sigAggressionChanged(e)
 		return true
 	end
 	

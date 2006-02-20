@@ -86,9 +86,11 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def eventDie
+		setMeshState("dead")
 		simDeath
 		eventDefeated
 		newRestJob(20)
+		setMeshState("dead")
 	end
 	
 	# Job was finished
@@ -163,6 +165,7 @@ class AntNewMan<AntMyEntity
 	#   - start angel
 	def simDeath
 		if @dead
+			return
 			if @boss
 				@boss.removeMan(self)
 			end
@@ -171,7 +174,7 @@ class AntNewMan<AntMyEntity
 			return 
 		else
 			@dead=true
-			setMesh(Mesh.new(getMeshData("data/models/grave.ant2",1.0),AGVector4.new(0,0,0,0),40))
+			#setMesh(Mesh.new(getMeshData("data/models/grave.ant2",1.0),AGVector4.new(0,0,0,0),40))
 			#updateSurface
 			sendAngel
 		end
@@ -255,7 +258,9 @@ class AntNewMan<AntMyEntity
 			when "stand"
 				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
 				getFirstMesh.setAnimation("stand")
-			
+			when "dead"
+				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
+		 		setMesh(Mesh.new(getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave.png"),AGVector4.new(0,0,0,0),0))
 		end
 		setDirection(dir)
 	end

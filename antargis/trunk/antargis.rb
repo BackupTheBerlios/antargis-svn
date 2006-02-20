@@ -154,6 +154,56 @@ class AntGameApp <AntRubyView
 	def finished
 		@finish
 	end
+
+	def selectHero(h)
+	end
+
+	def setHeroImage(image,num)
+		@layout.getChild("HeroImage#{num}").setSurface(image)
+	end
+	def setHeroName(name,num)
+		@layout.getChild("HeroName#{num}").setText(name)
+	end
+	def setHero(flag,num)
+		name="hero#{num}"
+		puts "NAME:",name
+		c=@layout.getChild(name)
+		puts c
+		if flag
+			c.show
+		else
+			c.hide
+		end
+	end
+	def setupHeroDisplay
+		super
+		setHero(true,0)
+		setHero(false,1)
+		setHero(false,2)
+
+		# init
+		addHandler(@layout.getChild("antButtonPanel"),:sigAggressionChanged,:eventAggressionChanged)
+
+	end
+	def eventAggressionChanged(e)
+		h=getSelectedHero
+		if h
+			h.setAggression($buttonPanel.getAggression)
+		end
+	end
+	
+	def getSelectedHero
+		@selectedHero
+	end
+
+	def selectHero(h)
+		@selectedHero=h
+		for i in 0..2
+			if @layout.getChild("HeroName#{i}").getText==h.getName
+				@layout.getChild("hero#{i}").setChecked(true)
+			end
+		end
+	end
 end
 
 def startGame(file="savegames/savegame0.antlvl")

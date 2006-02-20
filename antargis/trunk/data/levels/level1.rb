@@ -1,7 +1,7 @@
 class Level1<Level
 	def initialize
 		puts "Level inited"
-		tellStory("title","Level started")
+		#tellStory("title","Level started")
 		#exit
 	end
 	def eventTrigger(hero,t)

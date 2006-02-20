@@ -117,18 +117,14 @@ void AntMap::move(float pTime)
     {
       EntityList::iterator i=std::find(mEntities.begin(),mEntities.end(),*d);
       if(i!=mEntities.end())
-        mEntities.erase(i);
+	
+	mEntities.erase(i);
       mEntityMap.erase((*d)->getID());
       mEntQuad->remove(*i);
+      
 
       saveDelete(*d);
-      /*      AntEntity::Meshes meshes=(*d)->getMesh();
-      for(AntEntity::Meshes::iterator i=meshes.begin();i!=meshes.end();i++)
-      getScene()->removeNode(*i);*/
     }
-  //  if(mToDel.size())
-  //    entsChanged();
-
   mToDel.clear();
 
   // now move all entities

@@ -17,25 +17,25 @@
 			<!-- heroes -->
 			<radioGroup col="0" row="0" name="HeroGroup">
 				<table col="0" row="0" cols="3" rows="1">
-					<radio col="0" row="0" theme="antButton" name="hero0">
-						<table cols="1" rows="2">
+					<radio col="0" row="0" name="hero0">
+						<table cols="1" rows="2" name="Hero0">
 							<rowsize row="1" fixed="30"/>
-							<image col="0" row="0" filename="data/gui/portraits/wesnoth1.png"/>
-							<text col="0" row="1" font="button.text" align="center" valign="center" caption="Godrin"/>
+							<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/wesnoth1.png"/>
+							<text name="HeroName0" col="0" row="1" font="button.text" align="center" valign="center" caption="Godrin"/>
 						</table>
 					</radio>
-					<radio col="1" row="0" theme="antButton" name="hero1">
+					<radio col="1" row="0" name="hero1">
 						<table cols="1" rows="2">
 							<rowsize row="1" fixed="30"/>
-							<image col="0" row="0" filename="data/gui/portraits/wesnoth2.png"/>
-							<text col="0" row="1" font="button.text" align="center" valign="center" caption="Bantor"/>
+							<image name="HeroImage1" col="0" row="0" filename="data/gui/portraits/wesnoth2.png"/>
+							<text name="HeroName1" col="0" row="1" font="button.text" align="center" valign="center" caption="Bantor"/>
 						</table>
 					</radio>
-					<radio col="2" row="0" theme="antButton" name="hero2">
+					<radio col="2" row="0" name="hero2">
 						<table cols="1" rows="2">
 							<rowsize row="1" fixed="30"/>
-							<image col="0" row="0" filename="data/gui/portraits/wesnoth3.png"/>
-							<text col="0" row="1" font="button.text" align="center" valign="center" caption="Hektor"/>
+							<image name="HeroImage2" col="0" row="0" filename="data/gui/portraits/wesnoth3.png"/>
+							<text name="HeroName2" col="0" row="1" font="button.text" align="center" valign="center" caption="Hektor"/>
 						</table>
 					</radio>
 				</table>
@@ -47,9 +47,9 @@
 				<colsize col="0" fixed="50"/>
 				<colsize col="1" fixed="50"/>
 				<colsize col="2" fixed="50"/>
-				<button col="0" row="0" theme="antButton" name="pause" caption-image="data/gui/pause.png"/>
-				<button col="1" row="0" theme="antButton" name="options" caption-image="data/gui/options.png"/>
-				<button col="2" row="0" theme="antButton" name="quit" caption-image="data/gui/door.png"/>
+				<button col="0" row="0" name="pause" caption-image="data/gui/pause.png"/>
+				<button col="1" row="0" name="options" caption-image="data/gui/options.png"/>
+				<button col="2" row="0" name="quit" caption-image="data/gui/door.png"/>
 			</table>
 			
 			<!-- button panel -->
@@ -76,7 +76,7 @@
 					<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
 				</table>
 			</antInventory>
-			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
+			<button col="0" row="4" name="fight" caption="The wolfs' lair" enabled="false"/>
 <!--			<antMiniView col="0" row="5" name="miniMap"/>-->
 
 			<cell col="0" row="5">

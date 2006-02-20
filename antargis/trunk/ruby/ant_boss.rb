@@ -207,6 +207,9 @@ class AntBoss<AntMyEntity
 			end
 		end
 	end
-	
+	def setAggression(a)
+		super
+		getMen.each{|m|m.setAggression(a)}
+	end	
 end
 

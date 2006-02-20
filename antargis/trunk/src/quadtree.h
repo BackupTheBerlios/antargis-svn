@@ -180,8 +180,9 @@ class QuadTree
     void remove
       (T* t)
       {
-        root->remove
-        (t);
+	if(t)
+	  root->remove
+	    (t);
       }
       
     void clear()

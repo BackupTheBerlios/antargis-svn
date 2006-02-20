@@ -5,6 +5,9 @@
 				<normal>
 					<image name="image" file="data/gui/buttontest3.png"/>
 				</normal>
+				<disabled>
+					<image name="image" file="data/gui/buttontest3.png"/>
+				</disabled>
 				<lighted>
 					<image name="image" file="data/gui/buttontest3.png"/>
 				</lighted>
@@ -29,6 +32,13 @@
 					<color name='gradientColor3' color='#3c3d41'/>
 					<color name='gradientColor4' color='#12141c'/>
 				</normal>
+				<disabled>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#12141c'/>
+					<color name='gradientColor2' color='#12141c'/>
+					<color name='gradientColor3' color='#12141c'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</disabled>
 				<lighted>
 					<value name="border" value="4"/>
 					<color name='gradientColor1' color='#515488'/>

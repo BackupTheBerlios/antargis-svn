@@ -222,6 +222,8 @@ std::string AGButton::getCaption() const
 void AGButton::setEnabled(bool pEnable)
 {
   mEnabled=pEnable;
+  setState(mState); // check
+  queryRedraw();
 }
 
 void AGButton::setTheme(const std::string &pTheme)
@@ -238,6 +240,7 @@ void AGButton::setTheme(const std::string &pTheme)
   mBG[CHECKED]=AGBackground(mTheme+"button.background.checked");
   mBG[CHECKEDLIGHTED]=AGBackground(mTheme+"button.background.checkedlighted");
   mBG[CHECKEDPRESSED]=AGBackground(mTheme+"button.background.checkedpressed");
+  mBG[DISABLED]=AGBackground(mTheme+"button.background.disabled");
 
   mBorder[NORMAL]=AGBorder(mTheme+"button.border.normal");
   mBorder[PRESSED]=AGBorder(mTheme+"button.border.pressed");
@@ -245,6 +248,7 @@ void AGButton::setTheme(const std::string &pTheme)
   mBorder[CHECKED]=AGBorder(mTheme+"button.border.checked");
   mBorder[CHECKEDLIGHTED]=AGBorder(mTheme+"button.border.checkedlighted");
   mBorder[CHECKEDPRESSED]=AGBorder(mTheme+"button.border.checkedpressed");
+  mBorder[DISABLED]=AGBorder(mTheme+"button.border.disabled");
 
   if(mTextW)
     mTextW->setTheme(mTheme+"button.text");
@@ -262,7 +266,10 @@ void AGButton::setCaption(const std::string &pCaption)
 void AGButton::setState(const State &pState)
 {
   queryRedraw();
-  mState=pState;
+  if(mEnabled)
+    mState=pState;
+  else
+    mState=DISABLED;
 }
 
 void AGButton::setChecked(bool pChecked)

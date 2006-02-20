@@ -38,7 +38,7 @@ class AGEdit;
 class AGButton:public AGWidget
 {
  public:
-  enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED,CHECKEDPRESSED};
+  enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED,CHECKEDPRESSED,DISABLED};
 
   AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id=-1);
 

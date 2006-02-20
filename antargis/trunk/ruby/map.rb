@@ -222,9 +222,9 @@ class AntRubyMap<AntMap
 		end
 		if not done
 			@players.each{|p|p.trigger(hero,t)}
-			if @story[t.name]
-				playStory(t.name)
-			end
+			#if @story[t.name]
+			#	playStory(t.name)
+			#end
 		end
 	end
 	
@@ -243,7 +243,7 @@ class AntRubyMap<AntMap
 		
 		ambientSound(time)
 		if not @started
-			playStory("start")
+		#	playStory("start")
 			@started=true
 		end
 	end
@@ -323,11 +323,11 @@ class AntRubyMap<AntMap
 		}
 		return ret
 	end
-	def playStory(name)
-		if @story[name]
-			$antView.playStory(@story[name])
-		end
-	end
+	#def playStory(name)
+	#	if @story[name]
+	#		$antView.playStory(@story[name])
+	#	end
+	#end
 
 
 	def eventOwnerChanged(ent)
