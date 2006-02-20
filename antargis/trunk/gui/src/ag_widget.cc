@@ -72,6 +72,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mHasFocus(false),mFocus(0)
 
 {
+  mChangeRect=AGRect2(0,0,0,0);
   mCache=0;
   mCacheTouched=false;
   mRubyObject=false;
@@ -192,6 +193,7 @@ void AGWidget::drawAll(AGPainter &p)
       drawAfter(p);
     
       p.popMatrix();
+      setDrawn();
     }
 }
 
@@ -338,6 +340,7 @@ void AGWidget::addChild(AGWidget *w)
     {
       gainFocus(w);
     }
+  queryRedraw();
 }
 
 void AGWidget::clear()
@@ -363,9 +366,23 @@ void AGWidget::addChildBack(AGWidget *w)
   mChildren.push_back(w); // set on top
 }
 
+void AGWidget::regChange()
+{
+  AGRect2 t=mr.shrink(-2);
+  if(mChangeRect.width()==0 || mChangeRect.height()==0)
+    mChangeRect=t;
+  else
+    {
+      mChangeRect.include(t[0]);
+      mChangeRect.include(t[1]);
+    }
+}
+
 void AGWidget::setRect(const AGRect2 &pRect)
 {
+  regChange();
   mr=pRect;
+  regChange();
 }
 
 float AGWidget::minWidth() const
@@ -414,20 +431,28 @@ bool AGWidget::fixedHeight() const
 
 void AGWidget::setWidth(float w)
 {
+  regChange();
   mr.setWidth(w);
+  regChange();
 }
 void AGWidget::setHeight(float h)
 {
+  regChange();
   mr.setHeight(h);
+  regChange();
 }
 
 void AGWidget::setTop(float y)
 {
+  regChange();
   mr.setTop(y);
+  regChange();
 }
 void AGWidget::setLeft(float x)
 {
+  regChange();
   mr.setLeft(x);
+  regChange();
 }
 float AGWidget::top() const
 {
@@ -442,10 +467,12 @@ float AGWidget::left() const
 void AGWidget::show()
 {
   mVisible=true;
+  queryRedraw();
 }
 void AGWidget::hide()
 {
   mVisible=false;
+  queryRedraw();
 }
 
 void AGWidget::setParent(AGWidget *pParent)
@@ -797,11 +824,13 @@ void AGWidget::setDrawn()
   mCacheTouched=false;
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
     (*i)->setDrawn();
+  mChangeRect=AGRect2(0,0,0,0);
 }
 
 void AGWidget::queryRedraw()
 {
   mCacheTouched=true;
+  regChange();
 }
 
 void AGWidget::useTextures()
@@ -813,4 +842,26 @@ void AGWidget::useTexturesRecursive()
   useTextures();
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
     (*i)->useTexturesRecursive();
+}
+
+AGRect2 AGWidget::getChangeRect()
+{
+  AGRect2 r=mChangeRect;
+  
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+    {
+      AGRect2 n=(*i)->getChangeRect();
+      if(n.width()!=0 && n.height()!=0)
+	{
+	  n=n+getRect()[0];
+	  if(r.width()!=0 && r.height()!=0)
+	    {
+	      r.include(n[0]);
+	      r.include(n[1]);
+	    }
+	  else
+	    r=n;
+	}
+    }
+  return r;
 }

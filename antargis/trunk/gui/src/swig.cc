@@ -27697,6 +27697,26 @@ _wrap_AGWidget_queryRedraw(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_getChangeRect(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    AGRect2 result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    result = (arg1)->getChangeRect();
+    
+    {
+        AGRect2 * resultptr;
+        resultptr = new AGRect2((AGRect2 &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGRect2, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGWidget_useTextures(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     Swig::Director *director = 0;
@@ -44952,6 +44972,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGWidget.klass, "checkRedraw", VALUEFUNC(_wrap_AGWidget_checkRedraw), -1);
     rb_define_method(cAGWidget.klass, "setDrawn", VALUEFUNC(_wrap_AGWidget_setDrawn), -1);
     rb_define_method(cAGWidget.klass, "queryRedraw", VALUEFUNC(_wrap_AGWidget_queryRedraw), -1);
+    rb_define_method(cAGWidget.klass, "getChangeRect", VALUEFUNC(_wrap_AGWidget_getChangeRect), -1);
     rb_define_method(cAGWidget.klass, "useTextures", VALUEFUNC(_wrap_AGWidget_useTextures), -1);
     rb_define_method(cAGWidget.klass, "useTexturesRecursive", VALUEFUNC(_wrap_AGWidget_useTexturesRecursive), -1);
     rb_define_method(cAGWidget.klass, "clear", VALUEFUNC(_wrap_AGWidget_clear), -1);

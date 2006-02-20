@@ -20,6 +20,7 @@
 
 #include "ag_application.h"
 #include "ag_screen.h"
+#include "ag_glsurface.h"
 #include "ag_main.h"
 #include "ag_debug.h"
 #include "ag_mixer.h"
@@ -146,6 +147,10 @@ void AGApplication::prepareDraw()
       mainWidget->useTexturesRecursive();
     }
 }  
+
+
+AGWidget *pLastDrawn=0;
+
 void AGApplication::draw()
 {
   beginRender();
@@ -153,7 +158,14 @@ void AGApplication::draw()
     {
       getScreen().begin();
       AGPainter p;
+      if(pLastDrawn==mainWidget && !opengl())
+	{
+	  AGRect2 r=mainWidget->getChangeRect();
+	  //	  cdebug(r);
+	  p.clip(r);
+	}
       mainWidget->drawAll(p);
+      pLastDrawn=mainWidget;
     }
   getScreen().flip();
   endRender();

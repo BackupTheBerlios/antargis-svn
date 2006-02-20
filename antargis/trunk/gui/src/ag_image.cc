@@ -69,10 +69,12 @@ void AGImage::draw(AGPainter &p)
 void AGImage::setSurface(const AGSurface &pSurface)
 {
   mTexture=AGTexture(pSurface);
+  queryRedraw();
 }
 void AGImage::setTexture(const AGTexture &pTexture)
 {
   mTexture=pTexture;
+  queryRedraw();
 }
 
 void AGImage::useTextures()

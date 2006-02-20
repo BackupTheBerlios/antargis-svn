@@ -102,6 +102,7 @@ class AGWidget:public AGMessageObject
   bool checkRedraw() const;
   void setDrawn();
   void queryRedraw();
+  AGRect2 getChangeRect();
 
   // when caching, "normal" textures are not used, so they get discarded
   // to prevent this, use this function to "use" them in each frame
@@ -141,6 +142,8 @@ class AGWidget:public AGMessageObject
 
  private:
 
+  void regChange();
+
   void drawCache();
 
   void delObjects();
@@ -171,6 +174,8 @@ class AGWidget:public AGMessageObject
 
   std::string mName;
   bool mModal;
+
+  AGRect2 mChangeRect;
 
  protected:
   std::list<AGWidget*> mChildren;

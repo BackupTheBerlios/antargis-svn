@@ -27,9 +27,9 @@ require 'theme.rb'
 
 puts "MenuTest"
 
-main=AGMain.new(640,480,32,false,true)
+#main=AGMain.new(640,480,32,false,true)
 
-#main.changeRes(640,480,32,false,true)
+main=AGMain.new(640,480,32,false,false)
 
 app=TestApp.new(false)
 
