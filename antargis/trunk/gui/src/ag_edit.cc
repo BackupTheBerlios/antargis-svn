@@ -784,6 +784,8 @@ void AGEdit::setFont(const AGFont &pFont)
 
 void AGEdit::setText(const std::string &pText)
 {
+  queryRedraw();
+
   clear();
 
   size_t i;
@@ -844,11 +846,13 @@ void AGEdit::setBackground(const AGBackground &bg)
 
 void AGEdit::setBackground(bool pDrawBackground)
 {
+  queryRedraw();
   mDrawBackground=pDrawBackground;
 }
 
 void AGEdit::setTheme(const std::string &s)
 {
+  queryRedraw();
   std::string ms=s;
   if(ms=="")
     ms="edit";
