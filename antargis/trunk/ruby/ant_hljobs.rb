@@ -287,67 +287,62 @@ end
 class AntHeroRecruitJob<AntHeroMoveJob
 	attr_reader :finished
 	def initialize(hero,target,agg)
-		@moveReady=false
 		@target=target
 		@aggression=agg
 		@targetMen=target.menCount
 		@want=@targetMen*agg/3
 		@finished=false
+		@restingMen=0
+		@wantedMen=@want
 		super(hero,0,target.getPos2D,4)
 	end
-	
+
 	def check(man)
-		puts @state
-		case @state
-			when "torest" # after moving to tower
-				if man.class==AntHero
-					puts "RECRUIT....................."
-					# recruit
+		if @state=="wait_recruit" or @state=="torest"
+			if man.class==AntHero
+				if @state=="torest"
 					if @want==0 then 
 						@state="wait_recruit"
-						# send all to sit formation
-						man.getMen.each{|m|
-							fp=man.getSitFormation(m)
-							m.newMoveJob(0,fp,0)
-							m.setMode("torest_recruit")
-						}
-						return true
-					end
-					man.newRestJob(1)
-					nman=@target.takeMan
-					nman.setBoss(@hero)
-					@want=@want-1
-				end
-			when "wait_recruit"
-				# check if all men are in range
-				if man.class==AntHero
-					f=true
-					puts "WAIT_RECRUI"
-					puts man.getMen.length
-					man.getMen.each{|m|
-						if m.getMode!="rest_recruit"
-							f=false
-						end
-					}
-					if f
-						puts "RECRUIT FINISHED!!!!!!!!!!!"
-						@finished=true
 					else
 						man.newRestJob(1)
+						nman=@target.takeMan
+						nman.setBoss(@hero)
+						nman.setMode("to_recruit")
+						@want=@want-1
+
+						# FIXME:
+						getMen.each{|m|
+							m.setMode("to_recruit")
+						}
+						@restingMen=0
+						@wantedMen=@want+getMen.length
+
 					end
 				else
-					t=@hero.getSitFormation(man)
-					if (man.getPos2D-t).length>1
-						man.newMoveJob(t)
-					else
-						man.setMode("rest_recruit")
-					end
+					super(man)
 				end
 			else
-				super(man)
+				case man.getMode
+					when "to_recruit"
+						fp=@hero.getSitFormation(man)
+						man.newMoveJob(0,fp,0)
+						man.setMode("recruit_torest")
+					when "recruit_torest"
+						man.newRestJob(1)
+						man.setMode("recruit_resting")
+						@restingMen+=1
+						if @restingMen==@wantedMen
+							@finished=true
+						end
+					when "recruit_resting"
+						man.newRestJob(1)
+				end
+			end
+		else
+			super(man)
 		end
-		return false
 	end
+	
 	
 end
 

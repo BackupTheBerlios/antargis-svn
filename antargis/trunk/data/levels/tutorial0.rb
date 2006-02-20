@@ -44,6 +44,7 @@ class Level1<Level
 		end
 	end
 	def wonLevel
+		super
 		start=StoryFlow.new("recruit")
 		start.push("Tutorial","So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.")
 		tellStory(start)

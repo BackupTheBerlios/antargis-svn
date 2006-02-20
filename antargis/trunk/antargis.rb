@@ -69,6 +69,9 @@ class AntGameApp <AntRubyView
 
 	end
 	
+	def setResult(r)
+		@result=r
+	end
 	
 	def initDebug
 		@debug=AGLayout.new(@layout,loadFile("debug.xml"))
@@ -76,7 +79,16 @@ class AntGameApp <AntRubyView
 		addHandler(@debug.getChild("load"),:sigClick,:load)
 	end
 	
+	def showPanel
+		@layout.getChild("SideBar").show
+	end
+	def hidePanel
+		@layout.getChild("SideBar").hide
+	end
+
+
 	def storyTalk(flow)
+		hidePanel
 		@story=AntStoryTalk.new(@layout)
 		@layout.addChild(@story)
 		@story.setFlow(flow)
@@ -84,6 +96,7 @@ class AntGameApp <AntRubyView
 	end
 
 	def storyTalkFinished
+		showPanel
 		getMap.trigger(nil,Trigger.new("storyFinished"))
 	end
 

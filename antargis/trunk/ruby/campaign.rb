@@ -35,6 +35,11 @@ class CampaignLevel
 		end
 
 	end
+
+	def result
+		@result
+	end
+
 	def finished
 		@finish
 	end
@@ -52,7 +57,11 @@ class CutSceneDisplay<AGApplication
 		@speed=0.1
 	end
 	def sigQuit
-		tryQuit
+		if @finished
+			tryQuit
+		else
+			eventFrame(10000) # as if much time has passed
+		end
 	end
 	def eventKeyDown(e)
 		super
@@ -96,6 +105,9 @@ class CutSceneDisplay<AGApplication
 		end
 		if old!=@ctext
 			setTextForReal(@ctext)
+			if @ctext==@text
+				@finished=true
+			end
 		end
 	end
 	
@@ -148,6 +160,9 @@ class CutScene
 			display.run
 		}
 		GC.start
+	end
+	def result
+		GameResult.new("won")
 	end
 end
 
@@ -223,11 +238,14 @@ def continueCampaign(campaign)
 	begin
 		part=campaign.getCurrentPart
 		part.play
-		if part.finished=="won"
+		if part.result.won=="won"
 			if campaign.proceed
 				break
 			end
 		end
-	end while part.finished!="quit"
+		puts "RESULT:",part.result.won
+		#exit
+
+	end while part.result.won!="canceled" #finished!="quit"
 	campaign.save("campaign0.antcmp")
 end

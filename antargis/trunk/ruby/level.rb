@@ -14,10 +14,10 @@ class Level
 	# use this to end a level
 	def wonLevel
 		puts "WON!!!!!!!!!!!!!!!!!!"
-		$app=GameResult.new("won")
+		$app.setResult(GameResult.new("won"))
 	end
 	def lostLevel
-		$app=GameResult.new("lost")
+		$app.setResult(GameResult.new("lost"))
 	end
 	def endLevel
 		$app.tryQuit
