@@ -40,11 +40,11 @@ class AntGameApp < AntRubyEditView
 		@layout=AGLayout.new(@mainWidget,loadFile("data/gui/layout/editor.xml"))
 		@mainWidget.addChild(@layout)
 		#$screen=@layout
-		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
-		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
-		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
+		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
+		addHandler(@layout.getChild("pause"),:sigClick,:eventPause)
+		addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
 		
-		addHandler(@layout.getChild("doGen"),:sigClick,:sigGenerate)
+		addHandler(@layout.getChild("doGen"),:sigClick,:eventGenerate)
 		
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@miniMap.setMap(getMap)
@@ -54,11 +54,11 @@ class AntGameApp < AntRubyEditView
 		puts @layout.getName
 		$screen=@layout
 		
-		sigGenerate
+		eventGenerate
 	end
 	
 	
-	def sigGenerate
+	def eventGenerate
 		map=getMap
 		getMap.setHeight(-0.5)
 #		map.setAllWater
@@ -89,17 +89,17 @@ class AntGameApp < AntRubyEditView
 	end
 	
 	# signals	
-	def sigQuit(e)
+	def eventQuit(e)
 		@layout.addChild(AntQuitDialog.new(@layout))
 	end
-	def sigPause(e)
+	def eventPause(e)
 		if not getMap().paused then
 			@layout.addChild(AntPauseDialog.new(@layout))
 		else
 			getMap().unpause
 		end
 	end
-	def sigOptions(e)
+	def eventOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
 	end
 	

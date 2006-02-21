@@ -41,10 +41,10 @@ class AntRubyEditView<GLApp
 		puts "------------------------"
 		setMainWidget(@layout)
 		@mainWidget=@layout
-		addHandler(@layout.getChild("allWater"),:sigClick,:sigAllWater)
-		addHandler(@layout.getChild("allGrass"),:sigClick,:sigAllGrass)
+		addHandler(@layout.getChild("allWater"),:sigClick,:eventAllWater)
+		addHandler(@layout.getChild("allGrass"),:sigClick,:eventAllGrass)
 		
-		addHandler(@layout.getChild("rubber"),:sigClick,:sigRubber)
+		addHandler(@layout.getChild("rubber"),:sigClick,:eventRubber)
 		
 		decos=["flower","gravel","grassLight","hole","rock","coach","floor","path","block"]
 		decos.each{|name|
@@ -53,45 +53,45 @@ class AntRubyEditView<GLApp
 		
 		decals=["gravel"]
 		decals.each{|name|
-			addHandler(@layout.getChild(name),:sigClick,:sigDecal)
+			addHandler(@layout.getChild(name),:sigClick,:eventDecal)
 		}
 		
 		
 		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man","tree","bush","highGrass"]
 		ents.each{|name|
-			addHandler(@layout.getChild(name),:sigClick,:sigAddEnt)
+			addHandler(@layout.getChild(name),:sigClick,:eventAddEnt)
 		}
 		
-		addHandler(@layout.getChild("pointer"),:sigClick,:sigPointer)
+		addHandler(@layout.getChild("pointer"),:sigClick,:eventPointer)
 		
-		[1,2,3,5,10,15].each{|s|addHandler(@layout.getChild("edit#{s}"),:sigClick,:sigSize)}
+		[1,2,3,5,10,15].each{|s|addHandler(@layout.getChild("edit#{s}"),:sigClick,:eventSize)}
 		["editHeight","editWater","editSand","editGround","editGrass","editGrass2","editForest","editRock"].each{|n|
-			addHandler(@layout.getChild(n),:sigClick,:sigSelectEdit)
+			addHandler(@layout.getChild(n),:sigClick,:eventSelectEdit)
 		}
-		[1,2,3].each{|h|addHandler(@layout.getChild("hard#{h}"),:sigClick,:sigHard)}
+		[1,2,3].each{|h|addHandler(@layout.getChild("hard#{h}"),:sigClick,:eventHard)}
 		
 		@hard=2
 		
-		addHandler(@layout.getChild("terrain"),:sigClick,:sigTabSelect)
-		addHandler(@layout.getChild("entities"),:sigClick,:sigTabSelect)
+		addHandler(@layout.getChild("terrain"),:sigClick,:eventTabSelect)
+		addHandler(@layout.getChild("entities"),:sigClick,:eventTabSelect)
 		
-		addHandler(@layout.getChild("new"),:sigClick,:sigNewMap)
+		addHandler(@layout.getChild("new"),:sigClick,:eventNewMap)
 		@buttonlayout=@layout
 		setTab("terrain")
 	end
 	
-	def sigNewMap
+	def eventNewMap
 		#getMap.newMap(64,64)
 		#getMap.setHeight(-0.5)
 		if not @newDialog
 			@layout.addChild(@newDialog=AGLayout.new(@layout,loadFile("data/gui/layout/newdialog.xml")))
-			addHandler(@newDialog.getChild("ok"),:sigClick,:sigNewMapEnd)
-			addHandler(@newDialog.getChild("cancel"),:sigClick,:sigNewMapEnd)
-			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:sigNewMapEnd)
+			addHandler(@newDialog.getChild("ok"),:sigClick,:eventNewMapEnd)
+			addHandler(@newDialog.getChild("cancel"),:sigClick,:eventNewMapEnd)
+			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:eventNewMapEnd)
 		end
 	end
 	
-	def sigNewMapEnd(e)
+	def eventNewMapEnd(e)
 		name=e.getCaller.getName
 		d=@newDialog
 		@newDialog=nil
@@ -131,7 +131,7 @@ class AntRubyEditView<GLApp
 		}
 	end
 	
-	def sigTabSelect(e)
+	def eventTabSelect(e)
 		setTab(e.getCaller.getName)
 	end
 		
@@ -239,7 +239,7 @@ class AntRubyEditView<GLApp
 		}
 	end
 	
-	def sigSelectEdit(e)
+	def eventSelectEdit(e)
 		name=e.getCaller.getName
 		if name=="editHeight"
 			@modifier=e.getCaller.getName
@@ -249,22 +249,22 @@ class AntRubyEditView<GLApp
 		end
 	end
 	
-	def sigSize(e)
+	def eventSize(e)
 		@size=e.getCaller.getName[4..10].to_i
 	end
-	def sigHard(e)
+	def eventHard(e)
 		@hard=e.getCaller.getName[4..10].to_i
 	end
 	
-	def sigPointer
+	def eventPointer
 		@modifier="edit"
 	end
 	
-	def sigRubber
+	def eventRubber
 		@modifier="doRubber"
 	end
 	
-	def sigAddEnt(e)
+	def eventAddEnt(e)
 		callerName=e.getCaller.getName
 		@modifier="addEntity"
 		case callerName
@@ -302,13 +302,13 @@ class AntRubyEditView<GLApp
 				@type=AntHighGrass
 		end
 	end
-	def sigDecal(e)
+	def eventDecal(e)
 		callerName=e.getCaller.getName
 		@modifier="addEntity"
 		@type=AntDecal
 		return false
 	end
-	def sigDeco(e)
+	def eventDeco(e)
 		callerName=e.getCaller.getName
 		@modifier="addEntity"
 		if callerName=="coach"
@@ -402,10 +402,10 @@ class AntRubyEditView<GLApp
 		getMap.move(0)
 	end
 	
-	def sigAllWater
+	def eventAllWater
 		getMap.setHeight(-0.5)
 	end
-	def sigAllGrass
+	def eventAllGrass
 		getMap.setHeight(1.0)
 	end
 	

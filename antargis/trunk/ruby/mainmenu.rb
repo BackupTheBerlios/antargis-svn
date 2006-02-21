@@ -160,7 +160,7 @@ class AntMenuApp <AGApplication
 	end
 	def soundOn
 		@sound=true
-		musicEnd
+		eventMusicEnd
 	end	
 	
 end

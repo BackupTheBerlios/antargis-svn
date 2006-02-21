@@ -51,9 +51,9 @@ class AntGameApp <AntRubyView
 
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
 		setMainWidget(@layout)
-		addHandler(@layout.getChild("quit"),:sigClick,:sigQuit)
-		addHandler(@layout.getChild("pause"),:sigClick,:sigPause)
-		addHandler(@layout.getChild("options"),:sigClick,:sigOptions)
+		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
+		addHandler(@layout.getChild("pause"),:sigClick,:eventPause)
+		addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
 		
 		$screen=@layout
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
@@ -126,19 +126,19 @@ class AntGameApp <AntRubyView
 	end
 	
 	# signals	
-	def sigQuit(e)
+	def eventQuit(e)
 		#puts "pCaller:"+callerName
 		#tryQuit
 		@layout.addChild(AntQuitDialog.new(@layout))
 	end
-	def sigPause(e)
+	def eventPause(e)
 		if not getMap().paused then
 			@layout.addChild(AntPauseDialog.new(@layout))
 		else
 			getMap().unpause
 		end
 	end
-	def sigOptions(e)
+	def eventOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
 	end
 	

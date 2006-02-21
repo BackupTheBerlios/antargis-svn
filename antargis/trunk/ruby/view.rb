@@ -375,13 +375,13 @@ class AntButtonPanel<AGWidget
 		@jobButtons.each {|b|
 			c=getChild(b)
 			puts c
-			addHandler(c,:sigClick,:sigJobSelected)
+			addHandler(c,:sigClick,:eventJobSelected)
 		}
 		@aggButtons.each {|b,a|
 			puts b
 			c=getChild(b)
 			puts c
-			addHandler(c,:sigClick,:sigAggSelected)
+			addHandler(c,:sigClick,:eventAggSelected)
 		}
 	end
 	def draw(p)
@@ -392,7 +392,7 @@ class AntButtonPanel<AGWidget
 		end
 	end
 	
-	def sigJobSelected(e)
+	def eventJobSelected(e)
 		
 		@job=e.getCaller.getName
 		
@@ -401,7 +401,7 @@ class AntButtonPanel<AGWidget
 		end
 		return true
 	end
-	def sigAggSelected(e)
+	def eventAggSelected(e)
 		@agg=@aggButtons[e.getCaller.getName]
 		sigAggressionChanged(e)
 		return true
