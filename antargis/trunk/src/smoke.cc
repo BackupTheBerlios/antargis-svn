@@ -141,19 +141,19 @@ void Smoke::draw()
 
       //      glColor4f((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
       glBegin(GL_QUADS);
-      //      glColor4fv(color);
+      glColor4fv(color);
       glTexCoord2f(0,0);
       glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side+up)*s);
 
-      //      glColor4fv(color);
+      glColor4fv(color);
       glTexCoord2f(1,0);
       glVertex3fv((*i)->pos+(side+up)*s);
 
-      //      glColor4fv(color);
+      glColor4fv(color);
       glTexCoord2f(1,1);
       glVertex3fv((*i)->pos+(side-up)*s);
-
-      //      glColor4fv(color);
+      
+      glColor4fv(color);
       glTexCoord2f(0,1);
       glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side-up)*s);
       glEnd();
