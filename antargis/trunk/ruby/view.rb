@@ -51,15 +51,19 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		return AGRect.new(sp.x-50,sp.y-45,100,40)
 	end
 
-	def setupHeroDisplay
+	def setupHeroDisplay(first=false)
 		# init
 		heroes=$map.getOwnHeroes
 		if heroes.length>0
 			h=heroes[0]
 			selectHero(h)
-			focusHero(h)
+			if first
+				focusHero(h)
+			end
 		end
-		setupNames
+		if first
+			setupNames
+		end
 	end
 
 	def focusHero(hero)
@@ -68,15 +72,17 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 	
 	def setupNames
-		heroes=$map.getHeroes
-		@names=[]
-		heroes.each{|hero|
-			name=hero.getName
-			@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
-		}
-		@names.each{|n|
-			@layout.addChild(n)
-		}
+		if @names==nil
+			heroes=$map.getHeroes
+			@names=[]
+			heroes.each{|hero|
+				name=hero.getName
+				@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
+			}
+			@names.each{|n|
+				@layout.addChild(n)
+			}
+		end
 	end
 
 	def eventHover(list,button)

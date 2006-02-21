@@ -334,6 +334,7 @@ class AntRubyMap<AntMap
 		if @script
 			@script.eventOwnerChanged(ent)
 		end
+		$app.setupHeroDisplay
 	end
 	def eventHLJobFinished(hero,job)
 		@script.eventHLJobFinished(hero,job)

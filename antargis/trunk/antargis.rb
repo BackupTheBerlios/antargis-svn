@@ -65,7 +65,7 @@ class AntGameApp <AntRubyView
 			getMap().loadMap(savegame)
 		end	
 		#@miniMap.mapChangedComplete(AGEvent.new(self,"bla"))
-		setupHeroDisplay
+		setupHeroDisplay(true)
 
 	end
 	
@@ -175,16 +175,39 @@ class AntGameApp <AntRubyView
 			c.hide
 		end
 	end
-	def setupHeroDisplay
+	def setupHeroDisplay(first=false)
 		super
-		setHero(true,0)
-		setHero(false,1)
-		setHero(false,2)
+		hs=getMap.getPlayer.getHeroes.select{|h|h.class==AntHero}
+		puts "HEROOOOOOOOOOOOOOOOOOOOOOOES:",hs
+		for i in 0..2
+			if hs.length>i
+				setHero(true,i)
+			else
+				setHero(false,i)
+			end
+		end
 
 		# init
-		addHandler(@layout.getChild("antButtonPanel"),:sigAggressionChanged,:eventAggressionChanged)
-
+		if first
+			addHandler(@layout.getChild("antButtonPanel"),:sigAggressionChanged,:eventAggressionChanged)
+			for i in 0..2
+				addHandler(@layout.getChild("hero#{i}"),:sigClick,:eventHeroButton)
+			end
+		end
 	end
+
+	def eventHeroButton(e)
+		c=e.getCaller.getName
+		num=c[4..4]
+		name=@layout.getChild("HeroName#{num}").getText
+		ent=getMap.getByName(name)
+		if ent==@inspect
+			focusHero(ent)
+		end
+		inspectEntity(ent)
+		
+	end
+
 	def eventAggressionChanged(e)
 		h=getSelectedHero
 		if h
@@ -193,11 +216,13 @@ class AntGameApp <AntRubyView
 	end
 	
 	def getSelectedHero
-		@selectedHero
+		@hero
 	end
 
 	def selectHero(h)
-		@selectedHero=h
+		@hero=h
+		inspectEntity(h)
+
 		for i in 0..2
 			if @layout.getChild("HeroName#{i}").getText==h.getName
 				@layout.getChild("hero#{i}").setChecked(true)

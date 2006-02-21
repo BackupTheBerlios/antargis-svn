@@ -74,6 +74,12 @@ class AntPlayer
 	def remove(hero)
 		@heroes.delete(hero)
 	end
+	def add(hero)
+		@heroes.push(hero)
+	end
+	def getHeroes
+		@heroes.clone
+	end
 end
 
 class AntHumanPlayer<AntPlayer

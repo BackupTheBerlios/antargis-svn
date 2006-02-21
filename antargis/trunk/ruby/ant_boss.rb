@@ -129,13 +129,14 @@ class AntBoss<AntMyEntity
 
 
 	def setOwner(owner)
-		getMap.eventOwnerChanged(self)
 		@owner=owner
 		dputs "RESETING PLAYER:"
 		if @player
 			@player.remove(self)
 		end
 		@player=owner.getPlayer
+		@player.add(self)
+		getMap.eventOwnerChanged(self)
 	end
 	def getOwner
 		@owner
