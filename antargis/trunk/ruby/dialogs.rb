@@ -28,31 +28,31 @@ class AntDialog<AGLayout
 	include AGHandler
 	def initialize(parent,filename)
 		super(parent,loadFile(filename))
-		addHandler(getChild("ok"),:sigClick,:sigOk)
+		addHandler(getChild("ok"),:sigClick,:eventOk)
 		if getChild("cancel")
-			addHandler(getChild("cancel"),:sigClick,:sigCancel)
+			addHandler(getChild("cancel"),:sigClick,:eventCancel)
 		end
 		addSignal("sigClosed")
 		#setModal(true)
 	end
-	def sigOk
-		sigClose
+	def eventOk
+		eventClose
 	end
-	def sigCancel
-		sigClose
+	def eventCancel
+		eventClose
 	end
 	
 	def eventKeyDown(e)
 		if super then return true end
 		if e.getKey==SDLK_ESCAPE then	
-			sigClose
+			eventClose
 			getMap.unpause
 			return true
 		elsif e.getKey==SDLK_RETURN then
-			sigOk(e)
+			eventOk(e)
 		end
 	end
-	def sigClose
+	def eventClose
 		hide
 		sigClosed(AGEvent.new(self,"sigClosed"))
 	end
@@ -62,7 +62,7 @@ class AntStoryTalk<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/storytalk.xml")
 		getMap().pause()
-		addHandler(getChild("window"),:sigClose,:sigOk)
+		addHandler(getChild("window"),:sigClose,:eventOk)
 		addSignal("sigStoryFinished")
 	end
 	def setFlow(flow)
@@ -89,7 +89,7 @@ class AntStoryTalk<AntDialog
 	end
 	
 	# signals	
-	def sigOk(e)
+	def eventOk(e)
 		if not updateText
 			sigStoryFinished(e)
 			puts "pCaller:"+e.getCaller.getName
@@ -104,7 +104,7 @@ class AntQuitDialog<AntDialog
 		super(parent,"data/gui/layout/quitquery.xml")
 		setName("QuitDialog")
 	end
-	def sigOk
+	def eventOk
 		$app.tryQuit
 	end
 end
@@ -113,23 +113,23 @@ class AntOptionsDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/optionsmenu.xml")
 		setName("OptionsDialog")
-		addHandler(getChild("editmode"),:sigClick,:sigEditmode)
-		addHandler(getChild("save"),:sigClick,:sigSave)
-		addHandler(getChild("load"),:sigClick,:sigLoad)
+		addHandler(getChild("editmode"),:sigClick,:eventEditmode)
+		addHandler(getChild("save"),:sigClick,:eventSave)
+		addHandler(getChild("load"),:sigClick,:eventLoad)
 		getMap.pause
 	end
-	def sigEditmode
+	def eventEditmode
 		$app.enableEdit
 	end
-	def sigSave
+	def eventSave
 		$app.save
 		hide
 	end
-	def sigLoad
+	def eventLoad
 		$app.load
 		hide
 	end
-	def sigOk
+	def eventOk
 		getMap.unpause
 		super
 	end
@@ -139,7 +139,7 @@ class AntSaveDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/savedialog.xml")
 	end
-	def sigOk
+	def eventOk
 		filename=toAGEdit(getChild("Filename")).getText
 		puts "FILENAME:"+filename
 		if not filename =~ /.*\.antlvl/ then
@@ -165,7 +165,7 @@ class AntLoadDialog<AntDialog
 			end
 		}
 	end
-	def sigOk
+	def eventOk
 		file=@lb.getSelectedID
 		if file!="" then
 			getMap.loadMap("savegames/"+file)
@@ -182,7 +182,7 @@ class AntPauseDialog<AntDialog
 		setName("PauseDialog")
 		getMap.pause
 	end
-	def sigOk
+	def eventOk
 		getMap.unpause
 		hide
 	end
@@ -203,7 +203,7 @@ class AntEditPropDialog<AntDialog
 			@npcTypeW.setText(@ent.npcType)
 		end
 	end
-	def sigOk
+	def eventOk
 		menCountW=toAGEdit(getChild("MenCount"))
 		nameW=toAGEdit(getChild("AntName"))
 		@ent.setName(nameW.getText)
