@@ -51,12 +51,12 @@ class CutSceneDisplay<AGApplication
 		super()
 		@layout=AGLayout.new(nil,loadFile("data/gui/layout/cutscene.xml"))
 		setMainWidget(@layout)
-		addHandler(@layout.getChild("continue"),:sigClick,:sigQuit)
+		addHandler(@layout.getChild("continue"),:sigClick,:eventQuit)
 		@text=@ctext=""
 		@time=0
 		@speed=0.1
 	end
-	def sigQuit
+	def eventQuit
 		if @finished
 			tryQuit
 		else

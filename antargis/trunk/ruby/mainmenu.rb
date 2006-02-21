@@ -43,10 +43,10 @@ class AntMenuApp <AGApplication
 		# and show mainmenu
 		@mainMenu.show
 		@sound=true
-		addHandler(getSoundManager,:sigMp3Finished,:musicEnd)
+		addHandler(getSoundManager,:sigMp3Finished,:eventMusicEnd)
 	end
 	
-	def musicEnd
+	def eventMusicEnd
 		if @sound
 			getSoundManager.playMp3("data/music/ant2.ogg")
 		end
@@ -63,10 +63,10 @@ class AntMenuApp <AGApplication
 		setMainWidget(@mainMenu)
 		#$screen.addChild(@mainMenu)
 		@mainMenu.hide
-		addHandler(@mainMenu.getChild("quit"),:sigClick,:sigQuit)
-		addHandler(@mainMenu.getChild("credits"),:sigClick,:sigCredits)
-		addHandler(@mainMenu.getChild("campaign"),:sigClick,:sigCampaign)
-		addHandler(@mainMenu.getChild("options"),:sigClick,:sigOptions)
+		addHandler(@mainMenu.getChild("quit"),:sigClick,:eventQuit)
+		addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)
+		addHandler(@mainMenu.getChild("campaign"),:sigClick,:eventCampaign)
+		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
 		
 		puts "SETUPMAIN."
 	end
@@ -75,15 +75,15 @@ class AntMenuApp <AGApplication
 		puts "SETUPCREDITS"
 		@creditsMenu=AGLayout.new($screen,loadFile("data/gui/layout/credits.xml"))
 		@menues.push(@creditsMenu)
-		addHandler(@creditsMenu.getChild("exit"),:sigClick,:sigExit)
+		addHandler(@creditsMenu.getChild("exit"),:sigClick,:eventExit)
 	end
 	
 	def setupCampaign
 		puts "SETUPCAMPAIGN"
 		@campaignMenu=AGLayout.new($screen,loadFile("data/gui/layout/campaign.xml"))
 		@menues.push(@campaignMenu)
-		addHandler(@campaignMenu.getChild("exit"),:sigClick,:sigExit)
-		addHandler(@campaignMenu.getChild("start"),:sigClick,:sigStart)
+		addHandler(@campaignMenu.getChild("exit"),:sigClick,:eventExit)
+		addHandler(@campaignMenu.getChild("start"),:sigClick,:eventStart)
 		
 		@campaigns=getCampaigns
 		
@@ -92,7 +92,7 @@ class AntMenuApp <AGApplication
 		i=0
 		campaignButtons.each{|b|
 			c=@campaignMenu.getChild(b)
-			addHandler(c,:sigClick,:sigMission)
+			addHandler(c,:sigClick,:eventMission)
 			if @campaigns.length>i
 				c.setCaption(@campaigns[i].name)
 			else
@@ -106,25 +106,25 @@ class AntMenuApp <AGApplication
 		puts "SETUPOPTIONS"
 		@optionsMenu=AGLayout.new($screen,loadFile("data/gui/layout/options.xml"))
 		@menues.push(@optionsMenu)
-		addHandler(@optionsMenu.getChild("exit"),:sigClick,:sigExit)
+		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)
 	end
 	
 	# Mainmenu-sigs
 	
-	def sigCredits(e)
+	def eventCredits(e)
 		setMainWidget(@creditsMenu)
 	end
-	def sigCampaign(e)
+	def eventCampaign(e)
 		setMainWidget(@campaignMenu)
 	end
-	def sigOptions(e)
+	def eventOptions(e)
 		setMainWidget(@optionsMenu)
 	end
-	def sigQuit(e)
+	def eventQuit(e)
 		tryQuit
 	end
 	
-	def sigMission(e)
+	def eventMission(e)
 		callerName=e.getCaller.getName
 		number=callerName[8..12].to_i
 		@selCampaign=@campaigns[number]
@@ -138,7 +138,7 @@ class AntMenuApp <AGApplication
 # 		end
 	end
 	
-	def sigStart
+	def eventStart
 		if @selCampaign
 			soundOff
 			#startGame(@selCampaign)
@@ -148,7 +148,7 @@ class AntMenuApp <AGApplication
 	end
 
 	# all exits to mainmenu	
-	def sigExit(e)
+	def eventExit(e)
 		setMainWidget(@mainMenu)
 	end
 	def eventIdle
