@@ -27,7 +27,7 @@ class AntFarm<AntHouse
 	def initialize
 		super
 		@type=3
-		setType("farm")
+		setProvide("farm",true)
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0

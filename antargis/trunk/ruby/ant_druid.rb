@@ -5,7 +5,7 @@ class AntNPC<AntMyEntity
 	attr_accessor :npcType
 	def initialize()
 		super(AGVector2.new(0,0))
-		setType("NPC")
+		setProvide("NPC",true)
 		@npcType="smith" #druid"
 		setupMesh
 	end

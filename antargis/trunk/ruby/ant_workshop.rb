@@ -3,7 +3,7 @@
 class AntWorkshop<AntHouse
 	def initialize
 		super
-		setType("workshop")
+		setProvide("workshop",true)
 		@lastBirth=0
 		setDirection(-50)
 	end

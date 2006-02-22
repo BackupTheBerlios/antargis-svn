@@ -3,7 +3,7 @@
 class AntFarmStead<AntHouse
 	def initialize
 		super
-		setType("farmstead")
+		setProvide("farmstead",true)
 		@lastBirth=0
 		setDirection(-20)
 	end

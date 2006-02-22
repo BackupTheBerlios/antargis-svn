@@ -52,6 +52,8 @@ class AntEntity:public AGRubyObject
 
     std::list<Job*> mJobFinished;  // finished jobs, in cue, so that they get deleted next time possible
 
+    std::set<std::string> mProvides;
+
     // energy and healing
     float mEnergy;
     float mHealSpeed;
@@ -110,8 +112,11 @@ class AntEntity:public AGRubyObject
     std::string getName() const;
     void setName(const std::string &pName);
 
-    void setType(const std::string &pType);
-    std::string getType() const;
+    void setProvide(const std::string &pName,bool flag);
+    bool provides(const std::string &pName) const;
+
+    //    void setType(const std::string &pType);
+    //    std::string getType() const;
 
     // saving and loading
     virtual std::string xmlName() const;

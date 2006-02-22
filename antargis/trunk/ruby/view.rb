@@ -93,7 +93,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			if mesh.class==Mesh
 				ent=getMap.getEntity(mesh)
 				if ent
-					if ["house","farm","farmstead","workshop","hero"].member?(ent.getType) then
+					if ent.is_a?(AntBoss) then
 						hoverEntity(ent)
 						ok=true
 					end
@@ -148,7 +148,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 							raise "WHY IS IT NOT IN MAP ????????????"
 						end
 					else
-						if e.getType=="hero" then
+						if e.class==AntHero then
 							inspectEntity(e)
 							if e.getPlayer==getMap.getPlayer
 								@hero=e
@@ -157,7 +157,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 								@hero=nil
 							end
 							break
-						elsif ["house","farm","farmstead","workshop"].member?(e.getType) then
+						elsif e.is_a?(AntBoss) then
 							inspectEntity(e)
 							break
 						end
@@ -313,7 +313,7 @@ class AntInventory<AGButton
 		toAGEdit(getChild("invTitle")).setText(t)
 	end
 	def inspect(e)
-		setTitle(e.getType)
+		setTitle(e.class.to_s) #getType)
 		@inspect=e
 	end
 	def draw(p)

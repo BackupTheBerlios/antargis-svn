@@ -29,7 +29,8 @@ end
 class AntFir<AntBaseTree
 	def initialize()
 		super(AGVector2.new(0,0))
-		setType("tree")
+		setProvide("tree",true)
+		setProvide("fir",true)
 	
 		setupMesh
 	end

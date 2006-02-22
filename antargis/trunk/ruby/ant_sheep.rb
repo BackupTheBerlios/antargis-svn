@@ -24,7 +24,7 @@
 class AntNewSheep<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
-		setType("sheep")
+		setProvide("sheep",true)
 		setSpeed 0.4
 		@lastBirth=0
 		#setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))

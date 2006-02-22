@@ -45,7 +45,7 @@ class AntNewDeco<AntMyEntity
 			r=(rand()*a.size).to_i
 			@decoType=a[r]
 		end
-		setType("deco")
+		setProvide("deco",true)
 		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setDecoType(t)

@@ -31,6 +31,7 @@ class AntBoss<AntMyEntity
 		@men=[]
 		@job=nil
 		@createMen=0
+		setProvide("boss",true)
 		setupMeshBoss
 	end
 	def loadXML(node)

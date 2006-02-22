@@ -177,7 +177,7 @@ end
 class AntGrass<AntMyEntity
 	def initialize(high=false)
 		super(AGVector2.new(0,0))
-		setType("grass")
+		setProvide("grass",true)
 		if high
 			@size=rand*0.25+0.5
 		else
@@ -212,7 +212,7 @@ end
 class AntBush<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
-		setType("bush")
+		setProvide("bush",true)
 		@size=rand*0.25+0.25
 		setupMesh
 	end

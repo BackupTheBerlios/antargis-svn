@@ -3,7 +3,7 @@
 class AntTower<AntHouse
 	def initialize
 		super
-		setType("house")
+		setProvide("tower",true)
 		
 		#data=getMeshData("data/models/ruin.ant2",5,"data/textures/models/ruin.png")
 		#data=getMeshData("data/models/old_monument.ant2",0.6,"data/textures/models/ruin.png")

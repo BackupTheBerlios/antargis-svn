@@ -54,7 +54,7 @@ class AntNewTree<AntMyEntity
 		super(AGVector2.new(0,0))
 		@typeID=typeID
 		@typeID||=(rand*getTreeTypes.length).to_i
-		setType("tree")
+		setProvide("tree",true)
 		@angle=rand*360
 		
 		setMinimapColor(AGColor.new(0,0x77,0))

@@ -30,7 +30,7 @@ class AntNewAngel<AntMyEntity
 
 	def initialize
 		super(AGVector2.new(0,0))
-		setType("angel")
+		setProvide("angel",true)
 		@age=0
 	end
 	def move(time)
@@ -54,7 +54,7 @@ class AntNewMan<AntMyEntity
 	
 	def initialize()
 		super(AGVector2.new(0,0))
-		setType("man")
+		setProvide("man",true)
 		@signed=false
 		@dead=false
 		@fighting=false

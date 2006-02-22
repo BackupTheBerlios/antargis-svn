@@ -27,7 +27,7 @@ require 'ant_tools.rb'
 class AntFlag<AntMyEntity
 	def initialize
 		super(AGVector3.new(0,0,0))
-		setType("flag")
+		setProvide("flag",true)
 		@age=0
 	end
 	def getTexture
@@ -40,7 +40,7 @@ class AntHouse<AntBoss
 	def initialize
 		super
 		@type=3
-		setType("house")
+		setProvide("house",true)
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0

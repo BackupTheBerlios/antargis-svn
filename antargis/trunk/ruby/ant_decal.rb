@@ -25,7 +25,7 @@ class AntDecal<AntMyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i
-		setType("decal")
+		setProvide("decal",true)
 		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.8,"data/textures/gravel4.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setTreeType(t)

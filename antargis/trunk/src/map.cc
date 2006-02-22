@@ -163,7 +163,7 @@ std::vector<AntEntityPtr> AntMap::getEntities(const std::string &pName)
 {
   std::vector<AntEntityPtr> v;
   for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
-    if((*i)->getType()==pName)
+    if((*i)->provides(pName))
       v.push_back(*i);
   return v;
 }
@@ -184,7 +184,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType)
     {
       if(me!=*i)
         {
-          if((*i)->getType()==pType)
+          if((*i)->provides(pType))
             {
               AGVector2 p2=(*i)->getPos2D()-p;
               float norm=p2.length2();

@@ -266,7 +266,7 @@ void AntEntity::eventMapChanged()
   updatePos(mPos);
 }
 
-void AntEntity::setType(const std::string &pType)
+/*void AntEntity::setType(const std::string &pType)
 {
   mType=pType;
 }
@@ -274,7 +274,7 @@ void AntEntity::setType(const std::string &pType)
 std::string AntEntity::getType() const
 {
   return mType;
-}
+  }*/
 
 void AntEntity::setMesh(SceneNode *m)
 {
@@ -572,4 +572,17 @@ void AntEntity::setMoraleStrength(float f)
 float AntEntity::getMoraleStrength() const
 {
   return mMoraleStrength;
+}
+
+void AntEntity::setProvide(const std::string &pName,bool flag)
+{
+  if(flag)
+    mProvides.insert(pName);
+  else
+    mProvides.erase(pName);
+}
+
+bool AntEntity::provides(const std::string &pName) const
+{
+  return(mProvides.find(pName)!=mProvides.end());
 }

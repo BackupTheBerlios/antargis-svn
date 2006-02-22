@@ -30,7 +30,7 @@ require 'ant_ring.rb'
 class AntHero<AntBoss
 	def initialize
 		super
-		setType("hero")
+		setProvide("hero",true)
 		@appearance="hero"
 		getMap.setLight(self)
 		setMinimapColor(AGColor.new(0xFF,0,0))
