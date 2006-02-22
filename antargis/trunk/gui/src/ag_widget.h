@@ -28,6 +28,8 @@
 
 #include "ag_painter.h"
 
+class AGTooltip;
+
 class AGWidget:public AGMessageObject
 {
  public:
@@ -74,6 +76,8 @@ class AGWidget:public AGMessageObject
   float height() const;
   float top() const;
   float left() const;
+  float bottom() const;
+  float right() const;
 
   bool visible() const;
 
@@ -140,6 +144,8 @@ class AGWidget:public AGMessageObject
 
   void eventChildrenDeleted(AGWidget *pWidget);
 
+  void setTooltip(const std::string &pTooltip);
+
  private:
 
   void regChange();
@@ -176,6 +182,9 @@ class AGWidget:public AGMessageObject
   bool mModal;
 
   AGRect2 mChangeRect;
+
+  std::string mTooltip;
+  AGTooltip *mTooltipWidget;
 
  protected:
   std::list<AGWidget*> mChildren;

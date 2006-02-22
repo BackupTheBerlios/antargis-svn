@@ -350,4 +350,9 @@
 	<big_border>
 		<image name="image" file="data/gui/big_border.png"/>
 	</big_border>
+	<tooltip>	
+		<font name='font' file="Arial.ttf" size="17" color='#ffd272' embossed="true" borderWidth="1" borderColor="#330000"/>
+		<color name='bordercolor' color='#ffd272'/>
+		<color name='bgcolor' color='#111111'/>
+	</tooltip>
 </theme>

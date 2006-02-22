@@ -374,6 +374,7 @@ class AntButtonPanel<AGWidget
 		@job="doPoint"
 		@jobButtons.each {|b|
 			c=getChild(b)
+			puts b
 			puts c
 			addHandler(c,:sigClick,:eventJobSelected)
 		}

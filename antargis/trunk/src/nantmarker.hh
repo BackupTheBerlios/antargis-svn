@@ -1302,6 +1302,11 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGTheme,b);
  $result=*b;
 }
+%typemap(directorout) AGTooltip {
+ AGTooltip *b;
+ Data_Get_Struct($input,AGTooltip,b);
+ $result=*b;
+}
 %typemap(directorout) AGTriangle2 {
  AGTriangle2 *b;
  Data_Get_Struct($input,AGTriangle2,b);

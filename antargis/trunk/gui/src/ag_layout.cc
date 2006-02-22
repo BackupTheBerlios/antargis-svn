@@ -110,6 +110,9 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
       w->setName(pNode.get("name"));
     }
 
+  if(w!=0 && pNode.get("tooltip").length())
+    w->setTooltip(pNode.get("tooltip"));
+
   if(w!=0 && pNode.get("tabindex").length())
     {
       AGLayout *l=getLayout(pParent);

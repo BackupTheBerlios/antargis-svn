@@ -27,6 +27,8 @@
 #include <iostream>
 #include <algorithm>
 #include <typeinfo>
+#include <ag_tooltip.h>
+#include "ag_application.h"
 
 #define FOCUS_BY_SORT
 
@@ -76,6 +78,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mChangeRect=AGRect2(0,0,0,0);
   mCache=0;
   mCacheTouched=false;
+  mTooltipWidget=0;
   mRubyObject=false;
   mModal=false;
   if(getAllWidgets())
@@ -251,10 +254,21 @@ bool AGWidget::eventHide()
 
 bool AGWidget::eventMouseEnter()
 {
+  if(mTooltip.length())
+    {
+      mTooltipWidget=new AGTooltip(getScreenRect(),mTooltip);
+      getApplication()->setTooltip(mTooltipWidget);
+    }
+
   return false;
 }
 bool AGWidget::eventMouseLeave()
 {
+  if(mTooltipWidget)
+    {
+      getApplication()->resetTooltip(mTooltipWidget);
+      mTooltipWidget=0;
+    }
   return false;
 }
 
@@ -457,6 +471,16 @@ void AGWidget::setLeft(float x)
   mr.setLeft(x);
   regChange();
 }
+float AGWidget::bottom() const
+{
+  return mr[1][1];
+}
+float AGWidget::right() const
+{
+  return mr[1][0];
+}
+
+
 float AGWidget::top() const
 {
   return mr.y();
@@ -868,4 +892,9 @@ AGRect2 AGWidget::getChangeRect()
 	}
     }
   return r;
+}
+
+void AGWidget::setTooltip(const std::string &pTooltip)
+{
+  mTooltip=pTooltip;
 }

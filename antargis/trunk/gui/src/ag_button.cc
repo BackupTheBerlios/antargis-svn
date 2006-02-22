@@ -116,6 +116,7 @@ void AGButton::draw(AGPainter &p)
 
 bool AGButton::eventMouseEnter()
 {
+  AGWidget::eventMouseEnter();
   queryRedraw();
   if(!mEnabled)
     return false;
@@ -127,6 +128,7 @@ bool AGButton::eventMouseEnter()
 }
 bool AGButton::eventMouseLeave()
 {
+  AGWidget::eventMouseLeave();
   queryRedraw();
   if(!mEnabled)
     return false;

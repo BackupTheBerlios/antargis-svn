@@ -21,8 +21,9 @@
 #ifndef AG_APPLICATION_H
 #define AG_APPLICATION_H
 
-#include "ag_messageobject.h"
-#include "ag_widget.h"
+#include <ag_messageobject.h>
+#include <ag_widget.h>
+#include <ag_tooltip.h>
 
 class AGApplication:public AGMessageObject
 {
@@ -51,6 +52,9 @@ class AGApplication:public AGMessageObject
 
   long getTicks() const;
   void delay(int ms);
+
+  void setTooltip(AGTooltip *pTooltip); // transfers ownage !
+  void resetTooltip(AGTooltip *pTooltip); // try to reset this one
   
  private:
   void clearOldMousePosition();
@@ -62,10 +66,13 @@ class AGApplication:public AGMessageObject
   bool mRunning;
   bool mIdleCalls;
   AGWidget *mainWidget;
+  AGTooltip *mTooltip;
 
  public:
   void mark();
 };
+
+AGApplication *getApplication(); // returns current active application
 
 void disableKeyrepeat();
 

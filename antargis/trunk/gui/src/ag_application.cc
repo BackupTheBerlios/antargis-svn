@@ -30,7 +30,15 @@ void disableKeyrepeat()
   SDL_EnableKeyRepeat(0,0);
 }
 
-AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0)
+AGApplication *gApplication=0;
+
+AGApplication *getApplication()
+{
+  return gApplication;
+}
+
+
+AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTooltip(0)
 
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
@@ -47,12 +55,16 @@ bool AGApplication::run()
   Uint32 last,now;
   SDL_Event event;
   mRunning=true;
+
+  gApplication=this;
   
   flushEventQueue();
   last=now=SDL_GetTicks();
   
   while(mRunning)
     {
+      gApplication=this;
+
       // check for finished music
       getSoundManager()->checkFinished();
 
@@ -94,6 +106,8 @@ bool AGApplication::run()
       eventFrameEnd((now-last)/1000.0);
       last=now;
     }
+  gApplication=0;
+
   return true;
 }
 
@@ -166,6 +180,13 @@ void AGApplication::draw()
 	  p.fillRect(AGRect2(0,0,1024,768),AGColor(0,0,0));
 	}
       mainWidget->drawAll(p);
+
+      if(mTooltip)
+	{
+	  AGPainter p;
+	  mTooltip->drawAll(p);
+	}
+
       pLastDrawn=mainWidget;
     }
   getScreen().flip();
@@ -225,4 +246,21 @@ void AGApplication::mark()
 {
   if(mainWidget)
     markObject(mainWidget);
+  if(mTooltip)
+    markObject(mTooltip);
+}
+
+void AGApplication::setTooltip(AGTooltip *pTooltip)
+{
+  delete mTooltip;
+  mTooltip=pTooltip;
+    
+}
+void AGApplication::resetTooltip(AGTooltip *pTooltip)
+{
+  if(pTooltip==mTooltip)
+    {
+      delete mTooltip;
+      mTooltip=0;
+    }
 }
