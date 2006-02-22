@@ -165,16 +165,19 @@ p
 	
 }
 
-p.screenshot
+p.screenshot, div.screenshot
 {
+	width:1050px;
+	margin:0 auto;
 	text-align:center;
 	background-color:#AAAAAA;
 	border-color:#bd6c04;
 	border-style:groove;
 	border-width:2px;
 	padding:10px;
-	margin-left:20px;
-	margin-right:20px;
+	font-size:120%;
+	/*margin-left:20px;
+	margin-right:20px;*/
 }
 image.screenshot
 {

@@ -4,10 +4,19 @@ function getScreenies()
 {
 	$screenies=array("screenies/screenshot1","screenies/shot050228","screenies/shot050304","screenies/050511",
 	"screenies/shot051024b",
-	"screenies/shot051118"
-	
+	"screenies/shot051118",
+	"screenies/shot060222",
+	"screenies/shot060222b",
+	"screenies/shot060222c",
+	"screenies/shot060222d",
 	);
 	return $screenies;
+}
+
+function getDesc($s)
+{
+	$x=array("screenies/shot060222"=>"Campaign selection screen");
+	return $x[$s];
 }
 
 function smallPics()
@@ -41,8 +50,9 @@ function view()
 	if($sid!="")
 	{
 		$screenies=getScreenies();
+		$comment="First tutorial island";
 		if($sid>=0 && $sid<sizeof($screenies))
-			$b.=p(image($screenies[$sid].".jpg"),"screenshot");
+			$b.=div("<div>$comment</div>".image($screenies[$sid].".jpg"),"screenshot");
 	}
 	return menuSystem($b);
 }
