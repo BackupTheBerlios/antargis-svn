@@ -5,7 +5,7 @@ require 'antargisgui.rb'
 main=AGMain.new(800,600,32,false,false)
 
 def load(n)
-	getSurfaceManager.loadSurface(n)
+	AGSurface.load(n)
 end
 
 def makeTerrain(triple,thresF=0.5,diffF=0.1)
@@ -90,10 +90,21 @@ ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 triple=["big_grass_2.png","big_grass3.png","forest2.png"]
 ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 
-triple=["forest2.png","underwater3.png","rock.png"]
+triple=["forest2.png","underwater3.png","rock2.png"]
 ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 
+#triple=["rock.png","rock2.png","rock2.png"]
+#ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
+#ts+=[0.2,0.4,0.6].collect{|f|makeTerrain(triple,f)}
 
+triple=["rock2.png","rock7.png","rock7.png"]
+ts+=[0.5,1.2].collect{|f|makeTerrain(triple,f)}
+
+triple=["rock7.png","rock6.png","rock6.png"]
+ts+=[0.5,1.2].collect{|f|makeTerrain(triple,f)}
+
+puts "GENERATED:"
+puts ts.length
 while ts.length<32
 	ts.push(ts[ts.length-1])
 end
@@ -108,11 +119,11 @@ i=0
 all=AGSurface.new(128,128*ts.length)
 i=0
 ts.each{|t|
-	all.blit(t,AGRect.new(0,128*i,128,128),AGRect.new(0,0,128,128))
+	all.blit(t,AGRect.new(0,128*i,128,128),AGRect.new(0,0,128,128),AGColor.new(0xFF,0xFF,0xFF,0xFF))
 	i+=1
 }
-$s.addChild(AGImage.new($s,AGPoint.new(0,0),all,false))
 all.save("new3d.png")
+$s.addChild(AGImage.new($s,AGRect.new(0,0,800,600),all,false))
 # ts.each{|t|
 # 	$s.addChild(AGImage.new($s,AGPoint.new(x,y),t,false))
 # 	t.save("terrain_tile#{i}.png")

@@ -1,0 +1,155 @@
+<antargisLevel filename="savegames/birth2.hmap" height="128" width="128">
+  <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">
+    <position x="24.5551" y="12.4395" z="5.18504"/>
+  </antNewStone>
+  <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">
+    <position x="26.1929" y="21.022" z="3.04006"/>
+  </antNewStone>
+  <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
+    <position x="27.203" y="22.696" z="3.91714"/>
+  </antNewStone>
+  <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">
+    <position x="28.9196" y="12.1192" z="2.94365"/>
+  </antNewStone>
+  <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
+    <position x="29.1899" y="15.9821" z="2.8924"/>
+  </antNewStone>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
+    <position x="30.3618" y="9.11927" z="1.95313"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="6">
+    <position x="30.6391" y="18.7155" z="1.64429"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="4">
+    <position x="32.4196" y="27.0146" z="2.33321"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="2">
+    <position x="60.2025" y="67.1037" z="1"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="6">
+    <position x="60.9389" y="74.8508" z="1"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">
+    <position x="71.0024" y="84.6931" z="1"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="5">
+    <position x="71.9514" y="71.0008" z="1"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="8">
+    <position x="81.9843" y="69.6234" z="1"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="4">
+    <position x="76.9614" y="60.0308" z="1"/>
+  </antNewTree>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="65.4033" y="62.5786" z="1.13866"/>
+  </antHighGrass>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="68.1606" y="64.1831" z="1"/>
+  </antHighGrass>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="63.2026" y="77.373" z="1"/>
+  </antHighGrass>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="60.8892" y="64.1831" z="1"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="63.3568" y="70.5385" z="1"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="56.6017" y="77.1669" z="1"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="64.8492" y="84.4773" z="1"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="79.9277" y="88.1314" z="1"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="81.4081" y="73.7308" z="1"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="75.1397" y="66.8034" z="1"/>
+  </antBush>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="75.1702" y="63.2106" z="1"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="74.0632" y="64.4817" z="1"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="66.463" y="62.7259" z="1.12476"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="65.3346" y="61.6434" z="1.27542"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="59.8536" y="66.5076" z="1"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="64.7073" y="65.2895" z="1"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="67.1282" y="66.8888" z="1"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="63.8733" y="62.8957" z="1.08477"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="69.1627" y="85.0591" z="1"/>
+  </antGrass>
+  <antDecal aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
+    <position x="75.8412" y="60.1072" z="1"/>
+  </antDecal>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="29.9356" y="48.268" z="6.13879"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="30.0633" y="45.6632" z="6.43197"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="42.4878" y="60.3607" z="3.17935"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="42.4259" y="58.2927" z="3.30297"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="37.2026" y="57.0152" z="3.70682"/>
+  </antGrass>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="9">
+    <position x="44.9697" y="52.4299" z="1"/>
+  </antNewTree>
+  <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
+    <position x="46.9652" y="32.398" z="1"/>
+  </antNewTree>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="38.6316" y="14.1354" z="1.09585"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="40.5429" y="16.9078" z="1.33918"/>
+  </antBush>
+  <antBush aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="42.1247" y="23.9191" z="1.00441"/>
+  </antBush>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="39.3687" y="11.31" z="1.42351"/>
+  </antHighGrass>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="39.2714" y="16.3079" z="1.00421"/>
+  </antHighGrass>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="41.1553" y="20.5658" z="1.22252"/>
+  </antHighGrass>
+  <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="41.6435" y="17.9951" z="1.63183"/>
+  </antHighGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="39.5196" y="10.3335" z="1.36932"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="38.4248" y="12.252" z="1.13685"/>
+  </antGrass>
+  <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+    <position x="38.6067" y="11.27" z="1.18357"/>
+  </antGrass>
+</antargisLevel>
