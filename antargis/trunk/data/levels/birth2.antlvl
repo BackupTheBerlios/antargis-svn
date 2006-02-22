@@ -1,4 +1,4 @@
-<antargisLevel filename="levels/birth2.hmap" height="128" width="128">
+<antargisLevel filename="levels/birth2.hmap" height="128" width="128" scriptfile="levels/birth2.rb" scriptclass='Level1'>
   <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">
     <position x="24.5551" y="12.4395" z="5.18504"/>
   </antNewStone>
@@ -128,13 +128,14 @@
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="38.6067" y="11.27" z="1.18358"/>
   </antGrass>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Godrin" onGround="true">
-    <position x="34.1018" y="9.51682" z="1"/>
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Godrin" men="10" onGround="true">
+    <position x="62.7639" y="80.8467" z="1"/>
+<!--    <position x="34.1018" y="9.51682" z="1"/>-->
   </antHero>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" men="7" onGround="true">
     <position x="69.2673" y="64.5525" z="1"/>
   </antHero>
-  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" men="6">
     <position x="81.6495" y="38.8832" z="3.99954"/>
   </antFarmStead>
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
@@ -158,7 +159,7 @@
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="5">
     <position x="71.1991" y="41.8181" z="3.51669"/>
   </antNewTree>
-  <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
+  <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" men="15">
     <position x="54.7639" y="80.8467" z="1"/>
   </antTower>
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
@@ -179,4 +180,10 @@
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="69.9855" y="97.0097" z="1"/>
   </antGrass>
+	<humanPlayer name="Godrin">
+		<hero name="Godrin"/>
+	</humanPlayer>
+	<lazyPlayer name="Bantor">
+		<hero name="Bantor"/>
+	</lazyPlayer>
 </antargisLevel>

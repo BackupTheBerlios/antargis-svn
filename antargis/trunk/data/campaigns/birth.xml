@@ -8,11 +8,11 @@
 			<text text="Your head aches."/>
 		</screen>
 	</cutscene>
-	<level file="data/levels/birth1.antlvl"/>
+	<!--<level file="data/levels/birth1.antlvl"/>-->
 	<cutscene>
 		<screen>
-			<image filename="data/gui/map1.png"/>
-			<text text="Your enemies fled northward. Your is it to catch them."/>
+			<image filename="data/gui/campaign/mountain_landscape_imp.png"/>
+			<text text="Your enemies fled northward. Your mission is it to find and defeat them."/>
 		 </screen>
 	 </cutscene>
 	 <level file="data/levels/birth2.antlvl"/>

@@ -131,10 +131,11 @@ FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 
 void FightJob::move(AntEntity *e,float ptime)
 {
-  if(mTarget->getEnergy()==0.0 || mTarget->getMorale()<0.1)
+  if(mTarget->getEnergy()<=0.0 || mTarget->getMorale()<0.1 || e->getEnergy()<=0)
     {
       mTarget->eventDefeated();
       jobFinished(e);
+      return; // early out
     }
   // if target is too far away run there, otherwise fight
   AGVector2 diff=e->getPos2D()-mTarget->getPos2D();

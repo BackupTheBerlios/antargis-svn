@@ -67,8 +67,8 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 
 	def focusHero(hero)
-		p=hero.getPos2D
-		getScene.setCamera(AGVector4.new(p.x,p.y,0))
+		setCamera(hero.getPos2D)
+		#getScene.setCamera(clipCamera(AGVector4.new(p.x,p.y,0)))
 	end
 	
 	def setupNames
@@ -177,10 +177,9 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				list.each{|ents|
 					if ents.node.class==Mesh
 						e=getMap.getEntity(ents.node)
-					#e=getMap.getRuby(ents.get)
-					if e.getType=="house" then
-						house=e
-					end
+						if e.is_a?(AntHouse) then
+							house=e
+						end
 					end
 				}
 				if house then
@@ -203,7 +202,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 								raise "Why is this not in the map????"
 							end
 						else
-							if e.getType=="hero" or e.getType=="house" then
+							if e.is_a?(AntBoss) then
 								target=e
 							end
 						end
@@ -228,6 +227,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		if @hero
 			@hero.newHLDismissJob
 		end
+		$buttonPanel.setPointing
 	end
 	
 	def hoverEntity(e)

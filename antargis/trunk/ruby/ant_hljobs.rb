@@ -234,17 +234,24 @@ class AntHeroFightJob<AntHeroMoveJob
 		end
 		tmen=@target.getJob.undefeatedMen
 		# search nearest enemy
-		dist=10.0
+		dist=1000.0
 		mtarget=nil
 		tmen.each{|t|
-			d=(t.getPos2D-man.getPos2D).length
-			if d<dist
-				dist=d
-				mtarget=t
+			if t.getEnergy>0 and t.dead!=true
+				d=(t.getPos2D-man.getPos2D).length
+				if d<dist
+					dist=d
+					mtarget=t
+				end
 			end
 		}
 		if mtarget then
+			if mtarget.getEnergy<=0
+				raise "ERROR in startFightingMan"
+			end
 			man.newFightJob(0,mtarget)
+		else
+			man.newRestJob(30)
 		end
 	end
 	

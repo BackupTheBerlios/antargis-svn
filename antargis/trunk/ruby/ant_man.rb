@@ -50,7 +50,7 @@ class AntNewAngel<AntMyEntity
 end
 
 class AntNewMan<AntMyEntity
-	attr_reader :meshState
+	attr_reader :meshState, :dead
 	
 	def initialize()
 		super(AGVector2.new(0,0))

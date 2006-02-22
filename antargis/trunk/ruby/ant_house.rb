@@ -236,4 +236,6 @@ class AntHouse<AntBoss
 			setName(rand.to_s)
 		end
 	end	
+	def addFlag(owner)
+	end
 end

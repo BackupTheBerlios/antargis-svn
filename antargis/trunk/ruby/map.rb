@@ -323,12 +323,6 @@ class AntRubyMap<AntMap
 		}
 		return ret
 	end
-	#def playStory(name)
-	#	if @story[name]
-	#		$antView.playStory(@story[name])
-	#	end
-	#end
-
 
 	def eventOwnerChanged(ent)
 		if @script
