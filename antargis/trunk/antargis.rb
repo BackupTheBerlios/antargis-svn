@@ -169,7 +169,8 @@ class AntGameApp <AntRubyView
 		puts "NAME:",name
 		c=@layout.getChild(name)
 		puts c
-		c.st
+		c.setEnabled(flag)
+		return
 		if flag
 			c.show
 		else
@@ -187,6 +188,8 @@ class AntGameApp <AntRubyView
 				setHeroImage(hs[i].getImage,i)
 			else
 				setHero(false,i)
+				setHeroImage(getTextureCache.get("data/gui/portraits/none.png"),i)
+				setHeroName("",i)
 			end
 		end
 

@@ -21,21 +21,21 @@
 						<table cols="1" rows="2" name="Hero0">
 							<rowsize row="1" fixed="30"/>
 							<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/none.png"/>
-							<text name="HeroName0" col="0" row="1" font="button.text" align="center" valign="center" caption="Hero0"/>
+							<text name="HeroName0" col="0" row="1" font="button.text" align="center" valign="center" caption=""/>
 						</table>
 					</radio>
 					<radio col="1" row="0" name="hero1">
 						<table cols="1" rows="2">
 							<rowsize row="1" fixed="30"/>
 							<image name="HeroImage1" col="0" row="0" filename="data/gui/portraits/none.png"/>
-							<text name="HeroName1" col="0" row="1" font="button.text" align="center" valign="center" caption="Hero1"/>
+							<text name="HeroName1" col="0" row="1" font="button.text" align="center" valign="center" caption=""/>
 						</table>
 					</radio>
 					<radio col="2" row="0" name="hero2">
 						<table cols="1" rows="2">
 							<rowsize row="1" fixed="30"/>
 							<image name="HeroImage2" col="0" row="0" filename="data/gui/portraits/none.png"/>
-							<text name="HeroName2" col="0" row="1" font="button.text" align="center" valign="center" caption="Hero2"/>
+							<text name="HeroName2" col="0" row="1" font="button.text" align="center" valign="center" caption=""/>
 						</table>
 					</radio>
 				</table>
