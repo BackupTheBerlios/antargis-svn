@@ -174,20 +174,11 @@ class AntRubyMap<AntMap
 		@ents.clear
 		super()
 	end
-	def getByIdOld(ent)
-		@ents[ent.getVar("RubyID")]
-	end
-	def getById(ent)
-		if ent
-			return @ents[ent.getID]
-		end
-	end
-	def getRuby(ent)
-		getById(ent)
-	end
-	#def getEntity(id)
-	#	getRuby(super(id))
-	#end
+ 	def getById(ent)
+ 		if ent
+ 			return @ents[ent.getID]
+ 		end
+ 	end
 	def pause
 		@paused=true
 	end
@@ -201,7 +192,7 @@ class AntRubyMap<AntMap
 		if name.class!=String
 			dputs name
 		end
-		getRuby(super(name))
+		super(name)
 	end
 	def endChange
 	end
@@ -280,7 +271,7 @@ class AntRubyMap<AntMap
 	end
 	
 	def getNext(ent,type)
-		getRuby(super(ent,type))
+		super(ent,type)
 	end
 	
 	def registerEntity(e)

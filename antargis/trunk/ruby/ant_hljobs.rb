@@ -33,7 +33,7 @@ end
 
 class AntHeroMoveJob<AntHLJob
 	def initialize(hero,prio,pos,dist,doFormat=true)
-		@hero=getMap.getRuby(hero)
+		@hero=hero #getMap.getRuby(hero)
 		@hero.delJob
 		@prio=prio
 		@pos=AGVector2.new(pos.x,pos.y)

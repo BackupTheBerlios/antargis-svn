@@ -118,7 +118,7 @@ class AntNewMan<AntMyEntity
 				end
 				@bossName=houseName
 				newRestJob(rand()*2)
-				house=getMap.getRuby(house)
+				#house=getMap.getRuby(house)
 				house.signUp(self)
 				@signed=true
 			end
