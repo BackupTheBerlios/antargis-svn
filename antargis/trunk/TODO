@@ -9,6 +9,8 @@
 [Gui/View]
 =================================================
 [L] display for hunger/food
+[L] scrolling on borders when in fullscreen
+[H] load/save campaign
 
 [Menu]
 =================================================
@@ -18,17 +20,18 @@
 =================================================
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs
 [L] check if TSM (trapezoidal shadow maps) are any good
-[L] support different grass height and different earth colors (editor)
 [L] snow,rain
 [L] bushes, plants, high grass, flowers
+[VL] seasons - snow,spring...
+[L] Fog of war - overlay darkness/fog
+[L] animated trees / falling trees
 
 [Game]
 =================================================
 [L] each man should have a name and an age
-[VL] reasonable quadtree-usage
+[L] fix quadtree-errors
 [L] computer-player only attacks when stock is used up
 [L] story-telling:
-	- uppopping windows (with image and text) / pause game
 	- history function
 	- browsing facility (scene=>number(person)=>text)
 [L] man/heroes should die, lose energy when starving
@@ -55,45 +58,12 @@
 
 [Story]
 =================================================
-- main campaign:
+[VL] Intro cutscene:
 	- flashback on some victory-scene:
 		- look own from some tower upon an army
 		- look back from behind some warriors holding up some weapons
 	- scene of betrayal - some dark person stands above some king (in a hall)
-	- game begins -
-	- scene with some bodies lying around 
-
-* story
-  * Am Anfang kurzes Intro:
-    * verschleierter Rückblick auf Powermonger (Thorn & Tisch); danach Auszug; am Schluß irgendein Sieg
-  * DIFFERENT:
-	* flashback on some victory-scene:
-		- look down from some tower
-		- look back from behind some warriors holding up a bloody dagger 
-	* scene of betrayal - some dark person stands above some king
-
-  * 1.scene of game: - broken carriage with some bodies around, at the one side there are still the attackers
-	                   - you cannot go there, because they will slay you. text will appear only once.
-  * 2.scene: 				 - some cave with a druid - maybe some little druid-house is also ok (which saves some implementation)
-
-
-
-  
-* scrolling-borders  
-* Level-Unterstützung per ruby
-* Editing mode: heightstep (+/-), radius (through buttons or so)
-* saving/loading-dialog
-* integrate winter/summer into AntargisMap
-* Water-animation:
-	- simply subdevide water/land-tiles into land and water, with land being truncated below the height of water - afterwards add water and land tiles.
-* Lighting:
-	- overlay tiles with black rectangles (alpha=0.3 or so), maybe align rectangles (or better quads, or even better 3 points per iso-border) along tiles. maybe even use blending alpha
-	  from 0.3 to 0.8 or so 
-	- this can also be used for fog of war
-	- using stencil buffer
-	- overwriting with texture decreases stencil (or sets it to 0)
-	- overwriting with rectangle incs stencil (or sets it to 1), but only if stencil=0
-	- feiern!!!!!!!!!
-  - einfacher mit VertexColors, beim blitting!! wird auch nur da gemalt, wo es sein soll!
-  
-* fallende Bäume - einfach die Kontrollpunkte in Baum speichern, erst danach rendern, Kontrollpunkte drehen um Fußpunkt, dabei immer über 0-Ebene halten - so kollidiert der Baum auch mit Erde
+	- game begins
+[M] A Hero is born.
+	- scene with some bodies lying around - a broken carriage
+	- a cave for the druid

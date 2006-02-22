@@ -53,6 +53,7 @@ class AntHero<AntBoss
 		if @appearance==""
 			@appearance="hero"
 		end
+		@portrait=node.get("portrait")
 	end
 	
 	def getEnergy
@@ -236,6 +237,17 @@ class AntHero<AntBoss
 	end
 	def getRing
 		makeRingMesh
+	end
+
+	def getImage
+		@portrait||=""
+		if @portrait.length!=0
+			puts "port!=0"
+			return getTextureCache.get(@portrait)
+		else
+			puts "port==0"
+			return getTextureCache.get("data/gui/portraits/#{getName}.png")
+		end
 	end
 end
 

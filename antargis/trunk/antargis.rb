@@ -159,7 +159,7 @@ class AntGameApp <AntRubyView
 	end
 
 	def setHeroImage(image,num)
-		@layout.getChild("HeroImage#{num}").setSurface(image)
+		@layout.getChild("HeroImage#{num}").setTexture(image)
 	end
 	def setHeroName(name,num)
 		@layout.getChild("HeroName#{num}").setText(name)
@@ -169,6 +169,7 @@ class AntGameApp <AntRubyView
 		puts "NAME:",name
 		c=@layout.getChild(name)
 		puts c
+		c.st
 		if flag
 			c.show
 		else
@@ -182,6 +183,8 @@ class AntGameApp <AntRubyView
 		for i in 0..2
 			if hs.length>i
 				setHero(true,i)
+				setHeroName(hs[i].getName,i)
+				setHeroImage(hs[i].getImage,i)
 			else
 				setHero(false,i)
 			end

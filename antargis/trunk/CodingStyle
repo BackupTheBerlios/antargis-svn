@@ -1,0 +1,12 @@
+Coding styles are like this:
+1) C++
+	1.1) Simple Emacs-style indenting, with a new line for each "{" and "}"
+	1.2) No tabs used here.
+	1.3) Function go like "getPosition()".
+	1.4) Classes are named as AGMyClass for everything that goes into antargisguilib
+	1.5) Classes for Antargis are named AntMyClass
+	1.6) Don't use globals if not necessary.
+	1.7) Use getters/setters like "setPosition(xy)" and "getPosition() const"
+	1.8) As used above use "const" where possible.
+2) Ruby
+	2.1) 
