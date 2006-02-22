@@ -35,7 +35,7 @@ class AntDialog<AGLayout
 		addSignal("sigClosed")
 		#setModal(true)
 	end
-	def eventOk
+	def eventOk(e)
 		eventClose
 	end
 	def eventCancel
@@ -104,7 +104,7 @@ class AntQuitDialog<AntDialog
 		super(parent,"data/gui/layout/quitquery.xml")
 		setName("QuitDialog")
 	end
-	def eventOk
+	def eventOk(e)
 		$app.tryQuit
 	end
 end
@@ -129,7 +129,7 @@ class AntOptionsDialog<AntDialog
 		$app.load
 		hide
 	end
-	def eventOk
+	def eventOk(e)
 		getMap.unpause
 		super
 	end
@@ -139,7 +139,7 @@ class AntSaveDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/savedialog.xml")
 	end
-	def eventOk
+	def eventOk(e)
 		filename=toAGEdit(getChild("Filename")).getText
 		puts "FILENAME:"+filename
 		if not filename =~ /.*\.antlvl/ then
@@ -165,7 +165,7 @@ class AntLoadDialog<AntDialog
 			end
 		}
 	end
-	def eventOk
+	def eventOk(e)
 		file=@lb.getSelectedID
 		if file!="" then
 			getMap.loadMap("savegames/"+file)
@@ -182,7 +182,7 @@ class AntPauseDialog<AntDialog
 		setName("PauseDialog")
 		getMap.pause
 	end
-	def eventOk
+	def eventOk(e)
 		getMap.unpause
 		hide
 	end
@@ -203,7 +203,7 @@ class AntEditPropDialog<AntDialog
 			@npcTypeW.setText(@ent.npcType)
 		end
 	end
-	def eventOk
+	def eventOk(e)
 		menCountW=toAGEdit(getChild("MenCount"))
 		nameW=toAGEdit(getChild("AntName"))
 		@ent.setName(nameW.getText)
