@@ -10,7 +10,8 @@ float randf()
   return (rand()%10000)/10000.0;
 }
 
-Smoke::Smoke(float f)
+Smoke::Smoke(Scene *pScene,float f):
+  SceneNode(pScene)
 {
   maxtime=20;
 

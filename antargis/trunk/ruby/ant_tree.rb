@@ -104,15 +104,15 @@ class AntNewTree<AntMyEntity
 	
 	private
 	def setupMesh
-		setMesh(Mesh.new(getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),0))
 		return
 	
 		setMesh(makeAppleTreeMesh(@angle))
 		
-		setMesh(Mesh.new(getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),AGVector4.new(0,0,0,0),0))
 		data=getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png")
 		data.setTransparent(true)
-		setMesh(Mesh.new(data,AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMap.getScene,data,AGVector4.new(0,0,0,0),0))
 		
 		
 		

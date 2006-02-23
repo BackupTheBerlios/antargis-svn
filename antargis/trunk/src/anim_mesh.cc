@@ -386,7 +386,9 @@ void AnimMeshData::setupArray()
 /////////////////////////////////////////////////////////////////////////
 
 
-AnimMesh::AnimMesh(AnimMeshData *data):mData(data),mMatrices(data->bones.size()+1),mShaderMatrices(20)
+AnimMesh::AnimMesh(Scene *pScene,AnimMeshData *data):
+  SceneNode(pScene),
+  mData(data),mMatrices(data->bones.size()+1),mShaderMatrices(20)
 {
   curKey=0;
   mTime=0;

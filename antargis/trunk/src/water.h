@@ -14,7 +14,7 @@ class WaterPiece:public SceneNode
 {
   AGTexture tex;
  public:
-  WaterPiece(HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos);
+  WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos);
   virtual ~WaterPiece();
 
   void draw();

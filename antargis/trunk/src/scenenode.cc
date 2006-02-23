@@ -2,10 +2,11 @@
 #include "scene.h"
 #include "ag_debug.h"
 
-SceneNode::SceneNode()
+SceneNode::SceneNode(Scene *s)
 {
+  assert(s);
   mRubyObject=false;
-  scene=0;
+  scene=s;
   mVisible=true;
   order=1;
 }
@@ -16,11 +17,16 @@ SceneNode::~SceneNode()
   removeFromAllScenes(this);
 }
 
-
+void SceneNode::resetScene()
+{
+  scene=0;
+}
+/*
 void SceneNode::setScene(Scene *s)
 {
+  assert(s==0);
   scene=s;
-}
+}*/
 void SceneNode::drawShadow()
 {
 }
@@ -86,6 +92,8 @@ AGRect2 SceneNode::getRect() const
 
 Scene *SceneNode::getScene()
 {
+  if(!scene)
+    throw std::runtime_error("scene==0");
   return scene;
 }
 

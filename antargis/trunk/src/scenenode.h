@@ -18,10 +18,11 @@ class Scene;
 class SceneNode:public AGRubyObject
 {
  public:
-  SceneNode();
+  SceneNode(Scene *s);
   virtual ~SceneNode();
 
-  virtual void setScene(Scene *s);
+//  virtual void setScene(Scene *s);
+  virtual void resetScene();
   virtual void drawShadow();
   virtual void drawDepth();
   virtual void draw();

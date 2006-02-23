@@ -44,6 +44,12 @@ AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTo
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
 }
 
+AGApplication::~AGApplication()
+{
+  CTRACE;
+}
+
+
 void AGApplication::setMainWidget(AGWidget *w)
 {
   mainWidget=w;
@@ -244,6 +250,7 @@ void AGApplication::delay(int ms)
 
 void AGApplication::mark()
 {
+  //  CTRACE;
   if(mainWidget)
     markObject(mainWidget);
   if(mTooltip)

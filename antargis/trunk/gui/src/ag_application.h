@@ -29,6 +29,7 @@ class AGApplication:public AGMessageObject
 {
  public:
   AGApplication();
+  virtual ~AGApplication();
 
   bool run();
 

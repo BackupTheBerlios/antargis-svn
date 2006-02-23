@@ -42,17 +42,18 @@ char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock"
 
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 
-HeightMap::HeightMap(int w,int h):
+HeightMap::HeightMap(Scene *pScene,int w,int h):
   sigMapChanged(this,"mapChanged"),
   sigMapChangedComplete(this,"mapChangedComplete"),
-  mW(w),mH(h),mChangeRect(AGVector2(),AGVector2()),mChanges(0)
+  mW(w),mH(h),mChangeRect(AGVector2(),AGVector2()),mChanges(0),
+  mScene(pScene)
 {
   mHeights=genSomeHeights(w+2,h+2,5);
 
   for(int t=FIRSTTERRAIN;t<LASTTERRAIN; t++)
     mTerrainTypes[TerrainType(t)]=genSomeHeights(w+2,h+2,1);
 
-  mTerrain=new Terrain(*this);
+  mTerrain=new Terrain(mScene,*this);
 
   setTerrainScale(WATER,0);
   setTerrainScale(SAND,8/32.0);
@@ -543,4 +544,9 @@ float HeightMap::getTerrainScale(float x,float y)
   return getMean(x,y)*(1-w)+s1*w;
 
   return s1*(1-mean)+s2*mean;
+}
+
+Scene *HeightMap::getScene()
+{
+  return mScene;
 }

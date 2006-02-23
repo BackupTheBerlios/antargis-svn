@@ -22,11 +22,21 @@ class CampaignLevel
 		n.set("file",@level)
 	end
 	def play
-		app=AntGameApp.new(@level,1024,768)
-		app.run
-		@result=app.result
-		@finish=app.finished
-		app=nil
+		begin
+			app=AntGameApp.new(@level,1024,768)
+			app.run
+			@result=app.result
+			@finish=app.finished
+			app=nil
+		end
+		$app=nil
+		$map=nil
+		$antView=nil
+		$buttonPanel=nil
+		$inventory=nil
+
+		$screen=nil
+		puts "CampaignLevel::GC start"
 		GC.start
 		
 		case @result.won
@@ -60,17 +70,21 @@ class CutSceneDisplay<AGApplication
 		if @finished
 			tryQuit
 		else
-			eventFrame(10000) # as if much time has passed
+			@ctext=@text
+			setTextForReal(@ctext)
+			@finished=true
+			#eventFrame(10000) # as if much time has passed
 		end
 	end
 	def eventKeyDown(e)
 		super
-		if @text==@ctext
-			tryQuit
-		else
-			@ctext=@text
-			setTextForReal(@ctext)
-		end
+		eventQuit
+# 		if @text==@ctext
+# 			tryQuit
+# 		else
+# 			@ctext=@text
+# 			setTextForReal(@ctext)
+# 		end
 	end
 	
 	def setImage(image)

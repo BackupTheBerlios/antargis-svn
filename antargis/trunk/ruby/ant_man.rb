@@ -244,25 +244,25 @@ class AntNewMan<AntMyEntity
 		dir=getDirection
 		case name
 			when "wood"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_wood.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_wood.anim")))
 			when "stone"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_stones.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_stones.anim")))
 			when "walk","sitdown","sit"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
 				getFirstMesh.setAnimation(name)
 			when "fight"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_fight.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
 			when "axe"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_axe.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_axe.anim")))
 				#getSoundManager.playWave("data/sound/tree_chop.wav")
 			when "pick"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_pick.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_pick.anim")))
 			when "stand"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
 				getFirstMesh.setAnimation("stand")
 			when "dead"
-				setMesh(AnimMesh.new(getAnimMeshData("data/models/man_walk.anim")))
-		 		setMesh(Mesh.new(getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave.png"),AGVector4.new(0,0,0,0),0))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
+		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave.png"),AGVector4.new(0,0,0,0),0))
 		end
 		setDirection(dir)
 	end

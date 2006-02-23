@@ -172,6 +172,12 @@
 	result->mRubyObject=true;
 }
 %markfunc AGImage "general_markfunc"
+%exception AGMain::AGMain {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGMain "general_markfunc"
 %exception SceneNode::SceneNode {
 	$action
 	result->mRUBY=self;
@@ -482,6 +488,20 @@ else if(dynamic_cast<AGSubMenu*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(out) AGMain*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMain,0);
    }
  }
  else vresult=Qnil;
@@ -832,8 +852,6 @@ else if(dynamic_cast<WaterPiece*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
 else if(dynamic_cast<TerrainPieceVA*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
-else if(dynamic_cast<MeshData*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MeshData,0);
 else if(dynamic_cast<Smoke*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
 else if(dynamic_cast<Mesh*>(result))

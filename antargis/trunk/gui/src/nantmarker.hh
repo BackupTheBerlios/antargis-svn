@@ -46,6 +46,12 @@
 	result->mRubyObject=true;
 }
 %markfunc AGMenuItem "general_markfunc"
+%exception AGMain::AGMain {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGMain "general_markfunc"
 %exception AGVTiler::AGVTiler {
 	$action
 	result->mRUBY=self;
@@ -330,6 +336,20 @@ else if(dynamic_cast<AGSubMenu*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(out) AGMain*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMain,0);
    }
  }
  else vresult=Qnil;
@@ -1046,6 +1066,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGTheme {
  AGTheme *b;
  Data_Get_Struct($input,AGTheme,b);
+ $result=*b;
+}
+%typemap(directorout) AGTooltip {
+ AGTooltip *b;
+ Data_Get_Struct($input,AGTooltip,b);
  $result=*b;
 }
 %typemap(directorout) AGTriangle2 {

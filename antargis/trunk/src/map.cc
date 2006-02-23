@@ -17,10 +17,13 @@
 AntMap *myAntargisMap=0;
 AntMap *getMap()
 {
+  assert(myAntargisMap);
   return myAntargisMap;
 }
 
-AntMap::AntMap(int w,int h):HeightMap(w,h),mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h)))
+AntMap::AntMap(Scene *pScene,int w,int h):
+  HeightMap(pScene,w,h),
+  mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h)))
 {
   myAntargisMap=this;
   maxID=0;
@@ -30,7 +33,8 @@ AntMap::AntMap(int w,int h):HeightMap(w,h),mEntQuad(new QuadTree<AntEntity>(AGRe
 AntMap::~AntMap()
 {
   CTRACE;
-  myAntargisMap=0;
+  if(myAntargisMap==this)
+    myAntargisMap=0;
 }
 
 AGVector3 AntMap::getPos(const AGVector2 &pPos) const

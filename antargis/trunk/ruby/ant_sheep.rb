@@ -34,7 +34,7 @@ class AntNewSheep<AntMyEntity
 		
 		
 		data=getAnimMeshData("data/models/sheep.anim")
-		setMesh(AnimMesh.new(data))
+		setMesh(AnimMesh.new(getMap.getScene,data))
 
 		
 	end

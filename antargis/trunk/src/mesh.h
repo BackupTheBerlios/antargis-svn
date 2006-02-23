@@ -17,8 +17,8 @@ class Mesh:public SceneNode
   bool mVisible;
   
  public:
-  Mesh();
-  Mesh(MeshData &data,const AGVector4 &pPos,float pRot);
+  Mesh(Scene *pScene);
+  Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot);
   virtual ~Mesh();
 
   void draw();

@@ -8,7 +8,7 @@ class AntFarmStead<AntHouse
 		setDirection(-20)
 	end
 	def setupMesh
-		mesh=Mesh.new(getMeshData("data/models/livinghouse.ant2",1.6,"data/textures/models/livinghouse.png"),AGVector4.new(0,0,0),-20)
+		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/livinghouse.ant2",1.6,"data/textures/models/livinghouse.png"),AGVector4.new(0,0,0),-20)
 		setMesh(mesh)
 	end
 

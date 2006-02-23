@@ -13,7 +13,7 @@ class AntMap:public HeightMap
  public:
   typedef std::list<AntEntity*> EntityList;
 
-  AntMap(int w,int h);
+  AntMap(Scene *pScene,int w,int h);
   ~AntMap();
   
   virtual void insertEntity(AntEntity *e);

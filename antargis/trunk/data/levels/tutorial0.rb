@@ -20,9 +20,11 @@ class Level1<Level
 		end
 	end
 	def eventDismissed(hero)
-		start=StoryFlow.new("end")
-		start.push("Tutorial","You have passed the first tutorial level.")
-		tellStory(start)
+		if @recruit and @won
+			start=StoryFlow.new("end")
+			start.push("Tutorial","You have passed the first tutorial level.")
+			tellStory(start)
+		end
 	end
 	def eventTrigger(hero,t)
 		case t.name
@@ -45,6 +47,7 @@ class Level1<Level
 	end
 	def wonLevel
 		super
+		@won=true
 		start=StoryFlow.new("recruit")
 		start.push("Tutorial","So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.")
 		tellStory(start)

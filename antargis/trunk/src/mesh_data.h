@@ -8,7 +8,7 @@
 
 // Mesh organizing
 
-class MeshData:public SceneNode
+class MeshData:public AGRubyObject
 {
   VertexArray mArray;
   AGTexture mTexture;

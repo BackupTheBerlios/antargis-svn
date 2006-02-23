@@ -215,3 +215,8 @@ void AGMain::setCaption(const std::string &pCaption)
   SDL_WM_SetCaption(pCaption.c_str(),0);
 }
 
+
+void AGMain::mark()
+{
+  CTRACE;
+}

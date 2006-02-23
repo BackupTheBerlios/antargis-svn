@@ -56,13 +56,13 @@ def getRingData(w=1)
 end
 
 def makeRingMesh
-	mesh=Mesh.new(getRingData,AGVector4.new(0,0,0,0),0)
+	mesh=Mesh.new(getMap.getScene,getRingData,AGVector4.new(0,0,0,0),0)
 	mesh.setOrder(RING_Z)
 	return mesh
 end
 
 def makeBigRingMesh
-	mesh=Mesh.new(getRingData(4),AGVector4.new(0,0,0,0),0)
+	mesh=Mesh.new(getMap.getScene,getRingData(4),AGVector4.new(0,0,0,0),0)
 	mesh.setOrder(RING_Z)
 	return mesh
 end

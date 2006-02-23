@@ -20,7 +20,7 @@ enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LAS
 class HeightMap:public AGMessageObject
 {
  public:
-  HeightMap(int w,int h);
+  HeightMap(Scene *pScene,int w,int h);
   virtual ~HeightMap();
 
   // get status
@@ -74,6 +74,8 @@ class HeightMap:public AGMessageObject
   AGSignal sigMapChanged;
   AGSignal sigMapChangedComplete;
 
+  Scene *getScene();
+
 
  private:
 
@@ -93,6 +95,8 @@ class HeightMap:public AGMessageObject
 
   AGRect2 mChangeRect;
   size_t mChanges;
+
+  Scene *mScene;
 
  protected:
 

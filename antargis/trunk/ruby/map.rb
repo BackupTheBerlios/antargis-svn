@@ -42,8 +42,8 @@ class TargetPos
 end
 
 class AntRubyMap<AntMap
-	def initialize(w,h)
-		super(w,h)
+	def initialize(pScene,w,h)
+		super(pScene,w,h)
 		@ents={}
 		@players=[]
 		#GC.start

@@ -266,16 +266,6 @@ void AntEntity::eventMapChanged()
   updatePos(mPos);
 }
 
-/*void AntEntity::setType(const std::string &pType)
-{
-  mType=pType;
-}
-
-std::string AntEntity::getType() const
-{
-  return mType;
-  }*/
-
 void AntEntity::setMesh(SceneNode *m)
 {
   // clear meshes from scene

@@ -30,7 +30,7 @@ class Smoke:public SceneNode
 
 
  public:
-  Smoke(float f);
+  Smoke(Scene *pScene,float f);
   void setFire(bool f);
   void setMaxTime(float m);
   void advance(float time);

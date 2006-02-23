@@ -4,7 +4,8 @@
 #include <ag_rendercontext.h>
 
 
-NewDecal::NewDecal(AGVector2 pos,float size, HeightMap *pMap,const std::string &pTexture):
+NewDecal::NewDecal(Scene *pScene,AGVector2 pos,float size, HeightMap *pMap,const std::string &pTexture):
+  SceneNode(pScene),
   mPos(pos),mSize(size),mMap(pMap),mTexture(getTextureCache()->get(pTexture))
 {
   setOrder(DECAL_Z);

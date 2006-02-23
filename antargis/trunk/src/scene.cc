@@ -89,7 +89,7 @@ Scene::~Scene()
 {
   // tell nodes, that I'm no longer there :-)
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    (*i)->setScene(0); 
+    (*i)->resetScene(); 
   gScenes.erase(this);
 
   delete mTree;
@@ -151,7 +151,8 @@ void Scene::addNode(SceneNode *node)
     {
       mNodes.push_back(node);
       mNodeSet.insert(node);
-      node->setScene(this);
+//      cdebug(node->getScene()<<"    "<<this);
+      assert(node->getScene()==this);
       mTree->insert(node);
     }
 }
@@ -179,7 +180,8 @@ void Scene::removeNode(SceneNode *node)
       Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
       mNodes.erase(i);
       mNodeSet.erase(node);
-      node->setScene(0);
+      assert(node->getScene()==this);
+      node->resetScene();
       mTree->remove(node);
     }
   else
@@ -191,7 +193,10 @@ void Scene::removeNode(SceneNode *node)
 void Scene::clear()
 {
   for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    (*i)->setScene(0);
+    {
+      assert((*i)->getScene()==this);
+      (*i)->resetScene();
+    }
   TRACE;
   mNodes.clear();
   mNodeSet.clear();

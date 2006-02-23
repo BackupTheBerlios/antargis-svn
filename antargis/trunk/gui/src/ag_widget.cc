@@ -771,6 +771,7 @@ void AGWidget::setModal(bool pModal)
 
 void AGWidget::mark()
 {
+  //  CTRACE;
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
     markObject(*i);
 

@@ -18,7 +18,7 @@ class NewDecal:public SceneNode
   bool inited;
 
  public:
-  NewDecal(AGVector2 pos,float size, HeightMap *pMap,const std::string &pTexture);
+  NewDecal(Scene *pScene,AGVector2 pos,float size, HeightMap *pMap,const std::string &pTexture);
   
   void setPos(const AGVector3&pPos);
   void draw();

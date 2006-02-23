@@ -30,7 +30,7 @@ class AnimMesh:public SceneNode
   std::vector<AGMatrix4> mShaderMatrices;
 
  public:
-  AnimMesh(AnimMeshData *data);
+  AnimMesh(Scene *pScene,AnimMeshData *data);
   virtual ~AnimMesh();
 
   void setTransform(const AGMatrix4 &m);

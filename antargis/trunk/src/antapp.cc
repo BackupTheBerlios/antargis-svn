@@ -151,10 +151,12 @@ bool GLApp::eventKeyDown(AGEvent *e)
 
 Scene &GLApp::getScene()
 {
+  assert(&scene);
   return scene;
 }
 
 void GLApp::mark()
 {
+  CTRACE;
   markObject(&scene);
 }

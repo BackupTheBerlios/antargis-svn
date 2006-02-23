@@ -4,7 +4,8 @@
 
 AntWaterShader *shader=0;
 
-WaterPiece::WaterPiece(HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
+WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
+  SceneNode(pScene),
   mX(x),mY(y),mW(w),mH(h),mMap(&map)
 {
   step=2;

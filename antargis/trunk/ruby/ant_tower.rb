@@ -17,7 +17,7 @@ class AntTower<AntHouse
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_new.png"),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_new.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end	
 	

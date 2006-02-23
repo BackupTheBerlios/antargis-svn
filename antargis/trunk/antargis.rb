@@ -45,7 +45,7 @@ class AntGameApp <AntRubyView
 		super(w,h)
 		@result=GameResult.new
 		$app=self	
-		@map=AntRubyMap.new(32,32) # some small dummy size - gets overriden by loadMap anyway
+		@map=AntRubyMap.new(getScene,32,32) # some small dummy size - gets overriden by loadMap anyway
 		$map=@map
 		@finish="quit"
 
@@ -102,18 +102,18 @@ class AntGameApp <AntRubyView
 
 	def eventFrame(time)
 		super(time)
-		if $fc==nil then 
-			$fc=0 
-			$elaps=0
+		if @fc==nil then 
+			@fc=0 
+			@elaps=0
 		end
-		if $fc>30 then
-			puts "FPS:"+($fc/$elaps).to_s
+		if @fc>30 then
+			puts "FPS:"+(@fc/@elaps).to_s
 			puts "Tris:"+getScene.getTriangles.to_s
-			$fc=0
-			$elaps=0
+			@fc=0
+			@elaps=0
 		end
-		$fc+=1
-		$elaps+=time
+		@fc+=1
+		@elaps+=time
 		getMap().move(time)
 #		GC.start
 		getScene.advance(time)
@@ -242,6 +242,10 @@ def startGame(file="savegames/savegame0.antlvl")
 	app.run
 	result=app.result
 	app=nil
+	$map=nil
+	$app=nil
+	$screen=nil
+	puts "GC RUN"
 	GC.start
 	return result
 end

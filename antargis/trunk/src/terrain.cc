@@ -5,7 +5,8 @@
 //////////////////////////////////////////////////////////////////////////
 // TerrainPieceVA
 //////////////////////////////////////////////////////////////////////////
-TerrainPieceVA::TerrainPieceVA(Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos):
+TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos):
+  SceneNode(pScene),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map)
 {
@@ -148,10 +149,11 @@ size_t TerrainPieceVA::getTriangles() const
 ////////////////////////////////////////////////////////////////////////////
 
 
-Terrain::Terrain(HeightMap &map):
+Terrain::Terrain(Scene *pScene,HeightMap &map):
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png")),
   mGrass(getTextureCache()->get("data/textures/terrain/grass4.png")),
-  mMap(&map)
+  mMap(&map),
+  mScene(pScene)
 {
   init();
 
@@ -168,8 +170,8 @@ void Terrain::init()
   for(y=0; y<mMap->getH();y+=tilesize)
     for(x=0;x<mMap->getW();x+=tilesize)
       {
-	TerrainPieceVA *t=new TerrainPieceVA(this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
-	WaterPiece *w=new WaterPiece(*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	TerrainPieceVA *t=new TerrainPieceVA(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	WaterPiece *w=new WaterPiece(getScene(),*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);
 	mNodes.push_back(w);
@@ -247,4 +249,9 @@ bool Terrain::slotMapChangedComplete(AGEvent *e)
 {
   mapChangedComplete();
   return false;
+}
+
+Scene *Terrain::getScene()
+{
+  return mScene;
 }

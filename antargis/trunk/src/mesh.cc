@@ -13,7 +13,8 @@
 // Mesh
 //////////////////////////////////////////////////////////////////////
 
-Mesh::Mesh()
+Mesh::Mesh(Scene *pScene):
+  SceneNode(pScene)
 {
   mData=0;
   mRotation=0;
@@ -22,7 +23,8 @@ Mesh::Mesh()
   mVisible=true;
 }
 
-Mesh::Mesh(MeshData &data,const AGVector4 &pPos,float pRot)
+Mesh::Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot):
+  SceneNode(pScene)
 {
   mData=&data;
   mPos=pPos;

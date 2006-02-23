@@ -22,7 +22,7 @@ class Terrain;
 class TerrainPieceVA:public SceneNode
 {
  public:
-  TerrainPieceVA(Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos);
+  TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos);
   virtual ~TerrainPieceVA()
     {
     }
@@ -73,9 +73,11 @@ class Terrain
 
   AGTexture mGrass;
   HeightMap *mMap;
+  
+  Scene *mScene;
 
 public:
-  Terrain(HeightMap &map);
+  Terrain(Scene *pScene,HeightMap &map);
 
   virtual ~Terrain();
 
@@ -89,6 +91,8 @@ public:
 
   AGTexture *get3dTexture();
   AGTexture *getGrassTexture();
+
+  Scene *getScene();
 
  private:
   void init();

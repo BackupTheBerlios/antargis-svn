@@ -22,10 +22,11 @@
 #define __AG_MAIN
 
 #include <string>
+#include "ag_rubyobj.h"
 
 class AGScreen;
 struct SDL_VideoInfo;
-class AGMain
+class AGMain:public AGRubyObject
 {
  public:
   AGMain(int w,int h,int d,bool fs,bool gl);
@@ -40,6 +41,9 @@ class AGMain
 
   void setIcon(const std::string &pFile);
   void setCaption(const std::string &pCaption);
+ protected:
+  virtual void mark();
+
  private:
   AGScreen *mScreen;
 
