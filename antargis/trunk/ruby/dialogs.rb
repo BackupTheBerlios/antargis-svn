@@ -99,6 +99,13 @@ class AntStoryTalk<AntDialog
 	end
 end
 
+class AntInspectWindow<AntDialog
+	def initialize(p,text)
+		super(p,"data/gui/layout/inspect.xml")
+		getChild("text").setText(text)
+	end
+end
+
 class AntQuitDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/quitquery.xml")

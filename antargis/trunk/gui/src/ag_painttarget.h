@@ -44,6 +44,8 @@ class AGPaintTarget
 
   virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c) MSTUB
   virtual void fillRect(const AGRect2 &pr,const AGColor &c) MSTUB
+
+  virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pr) MSTUB
       
   virtual AGRect2 getRect() const
   {

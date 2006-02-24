@@ -205,8 +205,11 @@ void MiniMap::draw(AGPainter &p)
 
 void MiniMap::drawEntities(AGPainter &p)
 {
+  //  return;
   if(mMap)
     {
+      std::vector<std::pair<AGRect2,AGVector4> > rects;
+      size_t es=0;
       AntMap::EntityList e=mMap->getAllEntities();
       for(AntMap::EntityList::iterator i=e.begin();i!=e.end();i++)
 	{
@@ -214,10 +217,15 @@ void MiniMap::drawEntities(AGPainter &p)
 	    {
 	      AGVector2 v=(*i)->getPos2D();
 	      v=fromMapCoords(v);
-	      
-	      p.fillRect(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor());
+	 
+	      rects.push_back(std::make_pair(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor().toVec()));
+	      //p.putPixel(v,(*i)->getMinimapColor());
+	      //	      p.fillRect(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor());
+	      es++;
 	    }
 	}
+      p.fillRects(rects); // batch processing - in gl much faster!!
+      //      cdebug("es:"<<es);
 
     }
 }

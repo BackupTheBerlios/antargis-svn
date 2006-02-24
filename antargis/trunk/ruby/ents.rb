@@ -49,6 +49,9 @@ class AntMyEntity<AntEntity
 			node.set(n,v)
 		}
 	end
+	def getDescription
+		"This an entity - no more info here."
+	end
 end
 
 

@@ -50,6 +50,7 @@ class AGGLScreen:public AGScreen
   //  virtual void tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
 
   virtual void fillRect(const AGRect2 &pRect,const AGColor &c);
+  virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
   virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
 
   virtual AGRect2 getRect() const;

@@ -291,22 +291,7 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
       rc.setColor(AGVector4(c.r/f,c.g/f,c.b/f,c.a/f));
       assert(mTexture);
       rc.begin();
-      /*
-      getScreen().putPixel(x,y-1,c);
 
-      AGColor pc=c;
-      if(false)
-      {
-	
-	int X=x;
-	int Y=h-y;
-	Uint32 c;
-	c=(pc.r<<24)|(pc.g<<16)|(pc.b<<8)|pc.a;
-
-	glRasterPos2i((int)X,(int)Y);
-	glDrawPixels(1,1,GL_RGBA,GL_UNSIGNED_INT_8_8_8_8,&c);
-      }
-      */
       glBegin(GL_POINTS);
       glVertex2f(x,getScreen().getHeight()-y);
       glEnd();

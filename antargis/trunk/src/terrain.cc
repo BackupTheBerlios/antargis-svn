@@ -87,6 +87,7 @@ void TerrainPieceVA::drawShadow()
 }
 void TerrainPieceVA::drawDepth()
 {
+  return;
   glDepthMask(true);
   m3dArray.setColors(false);
   m3dArray.draw();

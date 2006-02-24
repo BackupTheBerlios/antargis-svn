@@ -68,6 +68,17 @@ class AntGameApp <AntRubyView
 		setupHeroDisplay(true)
 
 	end
+
+	def eventKeyDown(e)
+		if e.getKey==SDLK_F9
+			if @layout.visible
+				@layout.hide
+			else
+				@layout.show
+			end
+		end
+		return super(e)
+	end
 	
 	def setResult(r)
 		@result=r
@@ -234,6 +245,10 @@ class AntGameApp <AntRubyView
 				@layout.getChild("hero#{i}").setChecked(true)
 			end
 		end
+	end
+	def viewInformation(ent)
+		win=AntInspectWindow.new(@layout,ent.getDescription)
+		@layout.addChild(win)
 	end
 end
 

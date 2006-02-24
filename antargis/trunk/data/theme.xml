@@ -324,7 +324,7 @@
 		<font name='font' file="Arial.ttf" size="14" style="bold" color='#f6c108' borderWidth="1" borderColor="#330000" embossed="true"/>
 	</inventory>
 	<invTitle>
-		<font name='font' file="Arial.ttf" size="20" style="bold" color='#f6c108' embossed="true"/>
+		<font name='font' file="Arial.ttf" size="20" style="bold" color='#f6c108' borderWidth="1" borderColor="#330000" embossed="true"/>
 	</invTitle>
 	<heroName>
 		<font name='font' file="Arial.ttf" size="17" color='#f6c108' embossed="true" borderWidth="1" borderColor="#330000"/>

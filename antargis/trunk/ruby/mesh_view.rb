@@ -13,19 +13,19 @@ class App<GLApp
 		if file==nil
 			require 'gen_tree.rb'
 			data=genTree
-			@n=Mesh.new(data,AGVector4.new(0,0,0),-30)
+			@n=Mesh.new(getScene,data,AGVector4.new(0,0,0),-30)
 		elsif file=~/.*anim/
 			data=AnimMeshData.new("data/models/sheep.anim")
 			data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
 		
 			puts "YAY"
-			@n=AnimMesh.new(data)
+			@n=AnimMesh.new(getScene,data)
 			@anim=true
 		else
 			zoom||=0.1
 			zoom=zoom.to_f
 			data=MeshData.new(file,zoom,tex)
-			@n=Mesh.new(data,AGVector4.new(0,0,0),-30)
+			@n=Mesh.new(getScene,data,AGVector4.new(0,0,0),-30)
 		end
 			
 		if @anim

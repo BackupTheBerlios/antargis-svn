@@ -827,6 +827,8 @@ void AGWidget::prepareDraw()
 	  mCacheTouched=false;
 	  setDrawn();
 
+	  if(mParent)
+	    mParent->queryRedraw();
 	}
     }
   else

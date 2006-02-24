@@ -64,6 +64,12 @@ AGRect2 AGProjection::project(const AGRect2 &p) const
 	    (a*AGVector3(p[1],1)).dim2());
   return r;
 }
+AGRect2 AGProjection::clipRect(AGRect2 target) const
+{
+  return clip.intersect(target);
+}
+
+
 std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) const
 {
   //  return std::make_pair(target,src);
@@ -212,7 +218,9 @@ void AGPainter::putPixel(const AGVector2 &p,const AGColor &c)
 {
   AGVector2 n=project(p);
   if(pointOk(n))
-    mTarget->putPixel((int)n[0],(int)n[1],c);
+    {
+      mTarget->putPixel((int)n[0],(int)n[1],c);
+    }
 }
 
 void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest)
@@ -423,8 +431,37 @@ void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
   d=mCurrent.project(pDest);
   std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
   if(p.first.w()>0 && p.first.h()>0)
-    mTarget->fillRect(p.first,c);
+    {
+      mTarget->fillRect(p.first,c);
+    }
 }
+
+void AGPainter::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects)
+{
+  std::vector<std::pair<AGRect2,AGVector4> > rs;
+
+  for(std::vector<std::pair<AGRect2,AGVector4> >::const_iterator i=pRects.begin();i!=pRects.end();++i)
+    {
+      AGRect2 d=mCurrent.project(i->first);
+      d=mCurrent.clipRect(d);
+      if(d.w()>0 && d.h()>0)
+	rs.push_back(std::make_pair(d,i->second));
+    }
+
+  if(rs.size())
+    mTarget->fillRects(rs);
+}
+
+
+void AGPainter::drawPoint(const AGVector2 &p,const AGColor &c,float size)
+{
+  AGVector2 d=mCurrent.project(p);
+  if(mCurrent.pointOk(p))
+    {
+      mTarget->putPixel(d[0],d[1],c);
+    }
+}
+
 
 AGColor AGPainter::getPixel(int x,int y)
 {

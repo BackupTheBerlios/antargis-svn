@@ -44,7 +44,11 @@ struct AGProjection
   bool pointOk(const AGVector2 &p) const;
 
   AGRect2 project(const AGRect2 &p) const;
+
   std::pair<AGRect2,AGRect2> clipRect(AGRect2 target,AGRect2 src) const;
+  AGRect2 clipRect(AGRect2 target) const;
+
+
   AGLine2 clipLine(AGLine2 l) const;
 
   void translate(const AGVector2 &v);
@@ -91,6 +95,9 @@ class AGPainter
   void drawBorder(const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2);
   void fillRect(const AGRect2 &pRect,const AGColor &c);
   void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
+  void drawPoint(const AGVector2 &p,const AGColor &c,float size);
+
+  void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
 
   void pushMatrix();
   void popMatrix();

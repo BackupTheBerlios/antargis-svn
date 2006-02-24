@@ -128,6 +128,8 @@ void Scene::draw()
       drawScene();
     }
 
+  //  cdebug("tris:"<<mTriangles);
+
   getRenderer()->setCurrentScene(0);
 }
 

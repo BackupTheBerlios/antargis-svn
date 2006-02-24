@@ -158,8 +158,10 @@ class AntHouse<AntBoss
 			if need != nil and @atHome.length>@men.length/3 then
 				fetch( need[1],need[0],e)
 				@atHome.delete(e)
+				e.setVisible(true)
 			else
 				e.newRestJob(10)
+				e.setVisible(false)
 			end
 		elsif e.getMode=~/fetching/
 			res=e.getMode.gsub(/.* /,"")

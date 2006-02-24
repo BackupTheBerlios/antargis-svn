@@ -84,6 +84,7 @@ AGRenderContext *AGRenderContext::getCurrent()
 
 void AGRenderContext::begin()
 {
+//return;
 #ifndef FASTCONTEXT
   if(mColor)
     {

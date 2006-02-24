@@ -54,35 +54,39 @@
 			
 			<!-- button panel -->
 			<layout col="0" row="1" filename="data/gui/layout/buttonpanel.xml"/>
-			<antInventory col="0" row="3">
-				<table col="1" row="1" cols="2" rows="8" geometry="(4,4,208,208)">
-					<text name="invTitle" geometry="(0,0,208,26)" enabled="false" align="center" font="invTitle.font"/>
-					<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
-					<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
-					<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
-					
-					<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
-					<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
-					<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
-					<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
-					
-					
-					<text col="1" row="1" caption="0" align="right" name="name" font="inventory.font"/>
-					<text col="1" row="2" caption="0" align="right" name="boss" font="inventory.font"/>
-					<text col="1" row="3" caption="0" align="right" name="men" font="inventory.font"/>
-					<text col="1" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
-					<text col="1" row="5" caption="0" align="right" name="stone" font="inventory.font"/>
-					<text col="1" row="6" caption="0" align="right" name="food" font="inventory.font"/>
-					<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
-				</table>
-			</antInventory>
+			<!--<frame col="0" row="3" border="button.border.normal">-->
+				<antInventory col="0" row="3">
+					<table cols="2" rows="9" geometryx="(4,4,208,208)">
+						<text name="invTitle" geometry="(0,0,208,26)" enabled="false" align="center" font="invTitle.font"/>
+						<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
+						<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
+						<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
+						
+						<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
+						<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
+						<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
+						<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
+						
+						
+						<text col="1" row="1" caption="0" align="right" name="name" font="inventory.font"/>
+						<text col="1" row="2" caption="0" align="right" name="boss" font="inventory.font"/>
+						<text col="1" row="3" caption="0" align="right" name="men" font="inventory.font"/>
+						<text col="1" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
+						<text col="1" row="5" caption="0" align="right" name="stone" font="inventory.font"/>
+						<text col="1" row="6" caption="0" align="right" name="food" font="inventory.font"/>
+						<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
+						<button col="1" row="8" caption="..." name="inspect"/>
+					</table>
+				</antInventory>
+			<!--</frame>-->
 			<button col="0" row="4" name="fight" caption="The wolfs' lair" enabled="false"/>
 <!--			<antMiniView col="0" row="5" name="miniMap"/>-->
 
 			<cell col="0" row="5">
-				<frame col="0" row="5" border="button.border.normal">
+				<frame col="0" row="5" border="button.border.normal" visible="true">
 					<miniMap name="miniMap"/>
 				</frame>
+				<!--<miniMap name="miniMap"/>-->
 			</cell>
 			
 		</table>

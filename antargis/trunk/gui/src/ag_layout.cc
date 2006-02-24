@@ -106,9 +106,11 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
   //  cdebug("w:"<<w);
   //cdebug("nodename:"<<pNode.get("name"));
   if(w!=0 && pNode.get("name").length())
-    {
       w->setName(pNode.get("name"));
-    }
+
+  if(w!=0 && pNode.get("visible")=="false")
+    w->hide();
+
 
   if(w!=0 && pNode.get("tooltip").length())
     w->setTooltip(pNode.get("tooltip"));

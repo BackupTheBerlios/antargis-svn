@@ -251,6 +251,7 @@ void AGGLScreen::blit(const AGTexture &pSource,const AGRect2 &pRect,const AGRect
 
 void AGGLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
+  //  return;
   float x0=pRect.x();
   float y0=h-pRect.y();
   float x1=pRect.x()+pRect.w();
@@ -265,17 +266,48 @@ void AGGLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
   context.begin();
 
   // turned
-  glBegin(GL_TRIANGLES);
-  glVertex2f(x1,y0);
-  glVertex2f(x0,y1);
-  glVertex2f(x0,y0);
-
-  glVertex2f(x1,y0);
-  glVertex2f(x1,y1);
-  glVertex2f(x0,y1);
+  glBegin(GL_QUADS);
+  //  for(int x=0;x<55;x++)
+    {
+      glVertex2f(x1,y0);
+      glVertex2f(x1,y1);
+      glVertex2f(x0,y1);
+      glVertex2f(x0,y0);
+    }
   glEnd();
-  glEnable(GL_CULL_FACE);
 }
+
+void AGGLScreen::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects)
+{
+  AGRenderContext context;
+  context.setColor(AGColor(0,0,0));
+  context.setCulling(false);
+  context.setAlpha(0,GL_NONE);
+  context.setDepthTest(false);
+  context.begin();
+  
+  float x0,y0,x1,y1;
+  // turned
+  glBegin(GL_QUADS);
+  for(std::vector<std::pair<AGRect2,AGVector4> >::const_iterator i=pRects.begin();i!=pRects.end();++i)
+    {
+      x0=i->first.x();
+      y0=h-i->first.y();
+      x1=i->first.x()+i->first.w();
+      y1=h-i->first.y()-i->first.h();
+
+      glColor4fv(i->second);
+      glVertex2f(x1,y0);
+      glColor4fv(i->second);
+      glVertex2f(x1,y1);
+      glColor4fv(i->second);
+      glVertex2f(x0,y1);
+      glColor4fv(i->second);
+      glVertex2f(x0,y0);
+    }
+  glEnd();
+}
+
 
 AGRect2 AGGLScreen::getRect() const
 {

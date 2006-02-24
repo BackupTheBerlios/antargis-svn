@@ -14,10 +14,14 @@ class AGFrame:public AGWidget
   AGRect2 getClientRect() const;
 
   void draw(AGPainter &p);
+  void prepareDraw();
 
  private:
   size_t mWidth;
   AGBorder *mBorder;
+  AGTexture mTexture;
+  bool mTextureInited;
+  bool mUseTexture;
 };
 
 #endif

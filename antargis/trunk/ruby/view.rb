@@ -290,14 +290,22 @@ $antRubyViewCreator=AntRubyViewCreator.new
 
 
 # Inventory view
-class AntInventory<AGButton
+class AntInventory<AGWidget
 	def initialize(p,rect)
-		super(p,rect,"")
+		super(p,rect)
 		#setTheme("antButton")
 		$inventory=self
 		@resTypes=["wood","stone","men","food","tool"]
-		setEnabled(false)
+		@border=AGBorder.new("button.border.disabled")
+		@bg=AGBackground.new("button.background.disabled")
+		#setEnabled(false)
+		setCaching(true)
 	end
+
+	def eventInspect
+		$app.viewInformation(@inspect)
+	end
+
 	def setValue(name,value)
 		ok=@resTypes+["name","boss"]
 		if ok.member?(name) then
@@ -317,8 +325,13 @@ class AntInventory<AGButton
 		@inspect=e
 	end
 	def draw(p)
+		@bg.draw(p)
 		updateInspection
 		super(p)
+		@bg.draw(p)
+		@border.draw(p)
+		#p.fillRect(AGRect2.new(-10,-10,300,300),AGColor.new(0xFF,0,0))
+		addHandler(getChild("inspect"),:sigClick,:eventInspect)
 	end
 	def updateInspection
 		if @inspect then
