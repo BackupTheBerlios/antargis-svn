@@ -247,7 +247,7 @@ class AntGameApp <AntRubyView
 		end
 	end
 	def viewInformation(ent)
-		win=AntInspectWindow.new(@layout,ent.getDescription)
+		win=AntInspectWindow.new(@layout,ent) #.getDescription)
 		@layout.addChild(win)
 	end
 end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class AntFire<AntEntity
+class AntFire<AntMyEntity
 	def initialize(p)
 		super
 		mp=AGVector3.new(0,0,0)

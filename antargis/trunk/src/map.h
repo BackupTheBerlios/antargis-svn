@@ -8,6 +8,8 @@
 template<class T>
 class QuadTree;
 
+class AnimMesh;
+
 class AntMap:public HeightMap
 {
  public:
@@ -30,6 +32,7 @@ class AntMap:public HeightMap
   std::vector<AntEntityPtr> getEntities(const std::string &pName);
 
   AntEntity *getEntity(const Mesh &pMesh);
+  AntEntity *getEntity(const AnimMesh &pMesh);
   AntEntity *getEntity(int id) const;
   AntEntity *getByName(const std::string &pName);
 

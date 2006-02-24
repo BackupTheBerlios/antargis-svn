@@ -52,6 +52,12 @@ class AntMyEntity<AntEntity
 	def getDescription
 		"This an entity - no more info here."
 	end
+	def <=>(e)
+		to_s<=>e.to_s
+	end
+	def menCount
+		0
+	end
 end
 
 

@@ -139,7 +139,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			list.each{|ents|
 				mesh=ents.node
 				puts mesh
-				if mesh.class==Mesh
+				if mesh.class==Mesh or mesh.class==AnimMesh
 					e=getMap.getEntity(mesh)
 					if not e
 						puts mesh.class
@@ -157,7 +157,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 								@hero=nil
 							end
 							break
-						elsif e.is_a?(AntBoss) then
+						elsif e.is_a?(AntEntity) then  # was AntBoss
 							inspectEntity(e)
 							break
 						end
@@ -300,6 +300,7 @@ class AntInventory<AGWidget
 		@bg=AGBackground.new("button.background.disabled")
 		#setEnabled(false)
 		setCaching(true)
+		@invinited=false
 	end
 
 	def eventInspect
@@ -331,7 +332,11 @@ class AntInventory<AGWidget
 		@bg.draw(p)
 		@border.draw(p)
 		#p.fillRect(AGRect2.new(-10,-10,300,300),AGColor.new(0xFF,0,0))
-		addHandler(getChild("inspect"),:sigClick,:eventInspect)
+		if not @invinited
+			addHandler(getChild("inspect"),:sigClick,:eventInspect)
+			@invinited=true
+		end
+
 	end
 	def updateInspection
 		if @inspect then

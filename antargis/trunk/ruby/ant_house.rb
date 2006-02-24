@@ -42,7 +42,7 @@ class AntHouse<AntBoss
 		@type=3
 		setProvide("house",true)
 		@defeated=[]
-		@atHome=[]
+		@atHome=Set.new
 		@lastBirth=0
 		
 		#mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
@@ -146,6 +146,7 @@ class AntHouse<AntBoss
 	
 	def normalFetching(e)
 		if atHome(e) then
+			puts "COME HOME"
 			e.setMode("")
 			e.setMeshState("stand")
 			@atHome.push(e)
@@ -156,18 +157,19 @@ class AntHouse<AntBoss
 			need=needed()
 			# keep at least a third of all men at home
 			if need != nil and @atHome.length>@men.length/3 then
+				puts "GO FETCH"
 				fetch( need[1],need[0],e)
-				@atHome.delete(e)
-				e.setVisible(true)
 			else
 				e.newRestJob(10)
 				e.setVisible(false)
 			end
 		elsif e.getMode=~/fetching/
+			puts "DIGGGGGGGGGGGGGGGGG"
 			res=e.getMode.gsub(/.* /,"")
 			e.digResource(res)
 			e.setMode("digging "+res)
 		elsif e.getMode=~/digging/
+			puts "COLLLLLLLLLLLLLLLECT"
 			e.newMoveJob(0,getPos2D,0)#,false)
 			res=e.getMode.gsub(/.* /,"")
 			e.collectResource(res)
@@ -224,6 +226,8 @@ class AntHouse<AntBoss
 			ent.newFetchJob(0,tent,good)
 			#ent.newMoveJob(0,tent.getPos2D)
 			ent.setMode("fetching "+good)
+			@atHome.delete(ent)
+			ent.setVisible(true)
 		end
 	end
 	
@@ -239,5 +243,11 @@ class AntHouse<AntBoss
 		end
 	end	
 	def addFlag(owner)
+	end
+	def getDescription
+		"This is a keep. It was build #{age} years ago. Currently #{getMen.length} men live here. #{@atHome.length} of them are at home."
+	end
+	def age
+		30
 	end
 end

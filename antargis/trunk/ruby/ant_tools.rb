@@ -44,3 +44,11 @@ def displayError(error)
 	playSound(error)
 	dputs "ERROR:"+error.to_s
 end
+
+class Set<Array
+	def push(x)
+		super
+		sort!
+		uniq!
+	end
+end

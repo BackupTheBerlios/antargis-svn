@@ -100,9 +100,22 @@ class AntStoryTalk<AntDialog
 end
 
 class AntInspectWindow<AntDialog
-	def initialize(p,text)
+	def initialize(p,ent)
+		@ent=ent
 		super(p,"data/gui/layout/inspect.xml")
-		getChild("text").setText(text)
+	end
+	def draw(p)
+		update
+		super
+	end
+private
+	def update
+		text=@ent.getDescription
+		if @oldtext!=text
+			getChild("text").setText(text)
+			@oldtext=text
+			getChild("window").getChild("title").setText(@ent.getName)
+		end
 	end
 end
 

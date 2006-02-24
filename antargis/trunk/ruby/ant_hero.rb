@@ -249,5 +249,11 @@ class AntHero<AntBoss
 			return getTextureCache.get("data/gui/portraits/#{getName}.png")
 		end
 	end
+	def getDescription
+		"This is #{getName}. He is #{age} years old. #{getMen.length} men support him."
+	end
+	def age
+		21
+	end
 end
 

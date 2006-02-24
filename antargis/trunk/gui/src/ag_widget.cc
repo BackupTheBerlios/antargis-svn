@@ -810,6 +810,10 @@ void AGWidget::prepareDraw()
     {
       if(checkRedraw())
 	{
+	  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+	    (*i)->prepareDraw();
+
+
 	  AGPainter p(*mCache);
 
 	  if(!mChildrenDrawFirst)
