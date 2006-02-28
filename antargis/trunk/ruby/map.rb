@@ -244,6 +244,8 @@ class AntRubyMap<AntMap
 		@players.each{|p|p.move(0)}
 		
 		if n.get("scriptfile").length>0 and n.get("scriptclass").length>0
+			@scriptFile=n.get("scriptfile")
+			@scriptClass=n.get("scriptclass")
 			c=loadFile(n.get("scriptfile"))
 			levelName=getLevelName
 			c="module #{levelName}\n"+c+"\nend\n"
@@ -261,13 +263,16 @@ class AntRubyMap<AntMap
 	def saveXML(n)
 		super(n)
 		@players.each{|player|
-			c=n.newChild(player.xmlName)
+			c=n.addChild(player.xmlName)
 			player.saveXML(c)
 		}
 		@targets.each{|t|
-			c=n.newChild(t.xmlName)
+			c=n.addChild(t.xmlName)
 			t.saveXML(c)
 		}
+		n.set("scriptclass",@scriptClass)
+		n.set("scriptfile",@scriptFile)
+
 	end
 	
 	def getNext(ent,type)

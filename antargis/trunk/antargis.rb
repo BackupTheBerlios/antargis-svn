@@ -157,7 +157,11 @@ class AntGameApp <AntRubyView
 		toEditIsoView(@layout.getChild("mainView")).toggleEdit
 	end
 	def save
-		@layout.addChild(AntSaveDialog.new(@layout))
+		if $campaign
+			@layout.addChild(AntSaveCampaignDialog.new(@layout))
+		else
+			@layout.addChild(AntSaveDialog.new(@layout))
+		end
 	end
 	def load
 		@layout.addChild(AntLoadDialog.new(@layout))
@@ -165,7 +169,9 @@ class AntGameApp <AntRubyView
 	def finished
 		@finish
 	end
-
+	def videoOptions
+		@layout.addChild(AntVideoOptionsDialog.new(@layout))
+	end
 	def selectHero(h)
 	end
 

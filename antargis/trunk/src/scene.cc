@@ -533,7 +533,7 @@ void Scene::pickDraw()
 Scene::PickResult Scene::pick(float x,float y,float w,float h)
 {
   size_t bufsize=4000;
-  GLuint buffer[bufsize-1];
+  GLuint buffer[bufsize+1];
   
   glSelectBuffer(bufsize,buffer);
   glRenderMode(GL_SELECT);
@@ -577,7 +577,7 @@ Scene::PickResult Scene::pick(float x,float y,float w,float h)
   return r;
 }
 
-Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
+Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py)
 {
   PickResult result;
   if(hits==0)
@@ -614,7 +614,7 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float x,float y)
 		projection[i]=((float*)cameraPickMatrix)[i];
 	      }
 
-	    gluUnProject(x,y,n.camDist,modelview,projection,getViewport(),&x,&y,&z);
+	    gluUnProject(px,py,n.camDist,modelview,projection,getViewport(),&x,&y,&z);
 	    n.pos=AGVector4(x,y,z,1);
 	    n.camDist=(n.pos-cameraPosition).length3();
 

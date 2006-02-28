@@ -32,7 +32,7 @@ class AntPlayer
 	def saveXML(n)
 		n.set("name",@name)
 		@heroes.each{|hero|
-			c=n.newChild("hero")
+			c=n.addChild("hero")
 			c.set("name",hero.getName)
 		}
 	end

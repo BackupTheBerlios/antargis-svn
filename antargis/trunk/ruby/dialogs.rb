@@ -133,13 +133,14 @@ class AntOptionsDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/optionsmenu.xml")
 		setName("OptionsDialog")
-		addHandler(getChild("editmode"),:sigClick,:eventEditmode)
 		addHandler(getChild("save"),:sigClick,:eventSave)
 		addHandler(getChild("load"),:sigClick,:eventLoad)
+		addHandler(getChild("video"),:sigClick,:eventVideo)
 		getMap.pause
 	end
-	def eventEditmode
-		$app.enableEdit
+	def eventVideo
+		$app.videoOptions
+		hide
 	end
 	def eventSave
 		$app.save
@@ -171,6 +172,27 @@ class AntSaveDialog<AntDialog
 	end
 end
 
+class AntSaveCampaignDialog<AntDialog
+	def initialize(parent)
+		super(parent,"data/gui/layout/savedialog.xml")
+		if $campaign==nil
+			raise "saving while not in campaign!"
+		end
+		getChild("window").getChild("title").setText("Save campaign")
+	end
+	def eventOk(e)
+		filename=toAGEdit(getChild("Filename")).getText
+		puts "FILENAME:"+filename
+		if not filename =~ /.*\.antcmp/ then
+			filename=filename+".antcmp"
+		end
+		$campaign.save("savegames/"+filename)
+		#getMap.saveMap("savegames/"+filename)
+		getMap.unpause
+		hide
+	end
+end
+
 class AntLoadDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/loaddialog.xml")
@@ -193,6 +215,34 @@ class AntLoadDialog<AntDialog
 		end
 		getMap.unpause
 		hide
+	end
+end
+
+class AntVideoOptionsDialog<AntDialog
+	def initialize(parent)
+		super(parent,"data/gui/layout/dialog_video_options.xml")
+		addHandler(getChild("fullscreen"),:sigClick,:eventFullscreen)
+		addHandler(getChild("shadow"),:sigClick,:eventShadow)
+		addHandler(getChild("1024"),:sigClick,:event1024)
+		addHandler(getChild("1280"),:sigClick,:event1280)
+		addHandler(getChild("1400"),:sigClick,:event1400)
+		getMap.pause
+	end
+	def eventOk(e)
+		getMap.unpause
+		hide
+	end
+	def eventFullscreen
+	  getMain.toggleFull
+	end
+	def eventShadow
+		s=$app.getScene
+		case s.getShadow
+			when 0
+				s.setShadow(1)
+			else
+				s.setShadow(0)
+		end
 	end
 end
 

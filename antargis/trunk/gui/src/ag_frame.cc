@@ -26,7 +26,7 @@ AGRect2 AGFrame::getClientRect() const
 
 void AGFrame::prepareDraw()
 {
-  if(mUseTexture)
+  if(mUseTexture && mBorder)
     {
       if(!mTextureInited)
 	{

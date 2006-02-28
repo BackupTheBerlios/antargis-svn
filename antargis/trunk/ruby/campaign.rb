@@ -20,14 +20,20 @@ class CampaignLevel
 	end
 	def save(n)
 		n.set("file",@level)
+		if @app
+			raise 'Problem - $campaign not net' if $campaign==nil
+			sname=$campaign.savename.gsub("antcmp","antlvl")
+			n.set("current",sname)
+			getMap.saveMap(sname)
+		end
 	end
 	def play
 		begin
-			app=AntGameApp.new(@level,1024,768)
-			app.run
-			@result=app.result
-			@finish=app.finished
-			app=nil
+			@app=AntGameApp.new(@level,1024,768)
+			@app.run
+			@result=@app.result
+			@finish=@app.finished
+			@app=nil
 		end
 		$app=nil
 		$map=nil
@@ -203,7 +209,11 @@ class Campaign
 			end
 		}
 	end
+	def savename
+		@savename
+	end
 	def save(filename)
+		@savename=filename
 		doc=Document.new
 		root=doc.root
 		root.setName("campaign")
@@ -250,6 +260,7 @@ end
 
 def continueCampaign(campaign)
 	begin
+		$campaign=campaign
 		part=campaign.getCurrentPart
 		part.play
 		if part.result.won=="won"
@@ -262,4 +273,5 @@ def continueCampaign(campaign)
 
 	end while part.result.won!="canceled" #finished!="quit"
 	campaign.save("campaign0.antcmp")
+	$campaign=nil
 end

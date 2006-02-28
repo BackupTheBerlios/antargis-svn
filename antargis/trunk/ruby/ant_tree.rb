@@ -27,6 +27,8 @@ require 'ant_grass.rb'
 
 
 def getTreeTypes
+
+
 	files=[
 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png"),
@@ -39,6 +41,16 @@ def getTreeTypes
 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
 		getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),
 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
+	]
+	#return files
+# 	files+=[
+# 		getMeshData("data/models/high_tree2.ant2",0.45,"data/textures/models/newtree.png")
+# 	]
+	files+=[
+		getMeshData("data/models/high_tree3.ant2",0.45,"data/textures/models/high_tree3.png")
+	]
+	files+=[
+		getMeshData("data/models/high_tree3.ant2",0.45,"data/textures/models/high_tree4.png")
 	]
 end
 

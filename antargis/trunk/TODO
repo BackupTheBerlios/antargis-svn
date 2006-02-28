@@ -1,23 +1,61 @@
-* Add coding conventions for ruby/c++ and ensure them!
+[General]
+------------------------------------------------------
+[VH] Add coding conventions for ruby/c++ and ensure them!
 
 
-[All]
-==========================
-[VH] CHECK FOR OLD TODOs
+ARTS
+==================================================
 
+[Arts - Graphics - 3D]
+------------------------------------------------------
+[L] improve meshes for trees, bushes, men
+[M] animate hero, druid and smith
+[L] animate wolf
+[L] add meshes for fish, pigeon
+
+[Arts - Graphics - 2D]
+------------------------------------------------------
+[L] paint new portraits
+[L] paint campaign-images
+
+
+[Story]
+------------------------------------------------------
+[VL] Intro cutscene:
+	- flashback on some victory-scene:
+		- look own from some tower upon an army
+		- look back from behind some warriors holding up some weapons
+	- scene of betrayal - some dark person stands above some king (in a hall)
+	- game begins
+
+[Music]
+------------------------------------------------------
+[M] menu music
+[M] won and lost jingle
+
+[Leveldesign]
+------------------------------------------------------
+[M] A Hero is born.
+	- scene with some bodies lying around - a broken carriage
+	- a cave for the druid
+
+
+[[Development]]
+==========================================================
 
 [Gui/View]
-=================================================
+------------------------------------------------------
 [L] display for hunger/food
 [L] scrolling on borders when in fullscreen
 [H] load/save campaign
 
+
 [Menu]
-=================================================
+------------------------------------------------------
 [L] some images for the campaigns
 
 [Graphics]
-=================================================
+------------------------------------------------------
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs
 [L] check if TSM (trapezoidal shadow maps) are any good
 [L] snow,rain
@@ -27,7 +65,7 @@
 [L] animated trees / falling trees
 
 [Game]
-=================================================
+------------------------------------------------------
 [L] each man should have a name and an age
 [L] fix quadtree-errors
 [L] computer-player only attacks when stock is used up
@@ -46,24 +84,13 @@
 [VL] very bad situation => raise heroes with a new player (rebellion)
 
 [Editor]
-=================================================
+------------------------------------------------------
 [L] Trigger definition
 
 [Packaging]
-=================================================
+------------------------------------------------------
 [L] installer for windows
 [L] installer for linux
 [M] common package for gui, antargis and tileset
 [M] reasonable installing/generation-places of tiles
 
-[Story]
-=================================================
-[VL] Intro cutscene:
-	- flashback on some victory-scene:
-		- look own from some tower upon an army
-		- look back from behind some warriors holding up some weapons
-	- scene of betrayal - some dark person stands above some king (in a hall)
-	- game begins
-[M] A Hero is born.
-	- scene with some bodies lying around - a broken carriage
-	- a cave for the druid

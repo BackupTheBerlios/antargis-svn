@@ -9,4 +9,4 @@ Coding styles are like this:
 	1.7) Use getters/setters like "setPosition(xy)" and "getPosition() const"
 	1.8) As used above use "const" where possible.
 2) Ruby
-	2.1) 
+	2.1) Indent with tab. I use tab-width=2 in Kate.
