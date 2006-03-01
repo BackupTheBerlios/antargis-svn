@@ -21,6 +21,19 @@
 
 #!/usr/bin/ruby
 
+class RectWidget<AGWidget
+	def initialize(p,r,c)
+		super(p,r)
+		@color=c
+	end
+	def draw(p)
+		p.fillRect(getRect.origin,@color)
+	end
+	def eventMouseButtonDown(e)
+		return true
+	end
+end
+
 #
 # Story talking window - appearance defined in storytalk.xml
 #
@@ -34,6 +47,7 @@ class AntDialog<AGLayout
 		end
 		addSignal("sigClosed")
 		#setModal(true)
+		addChildBack(RectWidget.new(self,getRect.origin,AGColor.new(0,0,0,0x77)))
 	end
 	def eventOk(e)
 		eventClose
@@ -123,6 +137,11 @@ class AntQuitDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/quitquery.xml")
 		setName("QuitDialog")
+		getMap.pause
+	end
+	def eventClose
+		super
+		getMap.unpause
 	end
 	def eventOk(e)
 		$app.tryQuit
@@ -131,7 +150,7 @@ end
 
 class AntOptionsDialog<AntDialog
 	def initialize(parent)
-		super(parent,"data/gui/layout/optionsmenu.xml")
+		super(parent,"data/gui/layout/dialog_options.xml")
 		setName("OptionsDialog")
 		addHandler(getChild("save"),:sigClick,:eventSave)
 		addHandler(getChild("load"),:sigClick,:eventLoad)
@@ -243,6 +262,18 @@ class AntVideoOptionsDialog<AntDialog
 			else
 				s.setShadow(0)
 		end
+	end
+	def event1024
+		setRes(1024,768)
+	end
+	def event1280
+		setRes(1280,1024)
+	end
+	def event1400
+		setRes(1400,1050)
+	end
+	def setRes(w,h)
+		getMain.changeRes(w,h,32,getMain.fullscreen,true)
 	end
 end
 

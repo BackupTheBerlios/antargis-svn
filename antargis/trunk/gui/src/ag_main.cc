@@ -28,6 +28,7 @@
 #include "ag_glsurface.h"
 #include "ag_fs.h"
 #include "ag_debug.h"
+#include "ag_surfacemanager.h"
 #include "privates.h"
 #include <SDL.h>
 #include "SDL_image.h"
@@ -134,7 +135,8 @@ void AGMain::flip()
 
 void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
 {
-  //  getTextureManager()->clear();
+  fontCache.clear();
+  getSurfaceManager()->clear();
 
   lastWidth=w;
   lastHeight=h;
@@ -213,6 +215,11 @@ void AGMain::setIcon(const std::string &pFile)
 void AGMain::setCaption(const std::string &pCaption)
 {
   SDL_WM_SetCaption(pCaption.c_str(),0);
+}
+
+bool AGMain::fullscreen() const
+{
+  return fullScreen;
 }
 
 

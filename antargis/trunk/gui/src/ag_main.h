@@ -41,6 +41,8 @@ class AGMain:public AGRubyObject
 
   void setIcon(const std::string &pFile);
   void setCaption(const std::string &pCaption);
+
+  bool fullscreen() const;
  protected:
   virtual void mark();
 

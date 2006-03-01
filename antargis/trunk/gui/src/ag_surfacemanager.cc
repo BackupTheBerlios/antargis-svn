@@ -53,6 +53,12 @@ AGSurfaceManager::~AGSurfaceManager()
   mSurfaceManager=0;
 }
 
+void AGSurfaceManager::clear()
+{
+  cleanup();
+  cleanup();
+}
+
 
 void AGSurfaceManager::registerMe(AGSurface *pSurface)
 {

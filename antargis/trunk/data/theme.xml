@@ -184,6 +184,9 @@
 				<checkedlighted>
 					<image name="image" file2="win_border.png" file="data/gui/buttontest3b.png"/>
 				</checkedlighted>
+				<disabled>
+					<image name="image" file="data/gui/buttontest3.png"/>
+				</disabled>
 			</border>
 			<background>
 				<normal>
@@ -200,6 +203,13 @@
 					<color name='gradientColor3' color='#434674'/>
 					<color name='gradientColor4' color='#262849'/>
 				</lighted>
+				<disabled>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#12141c'/>
+					<color name='gradientColor2' color='#12141c'/>
+					<color name='gradientColor3' color='#12141c'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</disabled>
 				<pressed>
 					<value name="border" value="4"/>
 					<color name='gradientColor1' color='#262849'/>

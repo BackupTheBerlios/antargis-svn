@@ -808,7 +808,7 @@ void AGWidget::prepareDraw()
 {
   if(mCache)
     {
-      if(checkRedraw())
+      if(checkRedraw() || !mCache->hasTexture())
 	{
 	  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
 	    (*i)->prepareDraw();
