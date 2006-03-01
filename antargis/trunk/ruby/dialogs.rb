@@ -287,7 +287,9 @@ class AntPauseDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/pause.xml")
 		setName("PauseDialog")
-		getMap.pause
+		if getMap
+			getMap.pause
+		end
 	end
 	def eventOk(e)
 		getMap.unpause
@@ -318,5 +320,69 @@ class AntEditPropDialog<AntDialog
 		hide
 		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
 		@ent.setupMesh
+	end
+end
+
+class AGBar<AGWidget
+	def initialize(p,r,c,bc)
+		super(p,r)
+		@color=c
+		@bcolor=bc
+		@value=0.5
+
+		@c0=c*0.7
+		@c1=c*0.7
+		@c2=c*1.2
+		@c3=c
+
+		@b0=bc*0.7
+		@b1=bc*0.7
+		@b2=bc*1.2
+		@b3=bc
+	end
+	def setValue(v)
+		@value=[0,v,1].sort[1]
+	end
+	def draw(p)
+		p.drawGradient(getRect.origin,@b0,@b1,@b2,@b3)
+		#p.fillRect(AGRect.new(0,0,width*@value,height),@color)
+		p.drawGradient(AGRect.new(0,0,width*@value,height),@c0,@c1,@c2,@c3)
+
+	end
+end
+
+
+class AGBarCreator<AGLayoutCreator
+	def initialize
+		super("bar")
+	end
+	def create(p,r,n)
+		c=AGColor.new(n.get("color"))
+		bc=AGColor.new(n.get("bgcolor"))
+		w=AGBar.new(p,r,c,bc)
+		return w
+	end
+end
+$agBarCreator=AGBarCreator.new
+
+
+class LoadScreen<AGLayout
+	def initialize(p)
+		super(p,loadFile("data/gui/layout/loadscreen.xml"))
+	end
+end
+
+class LoadApp<AGApplication
+	def initialize
+		super
+		@s=LoadScreen.new(nil)
+		setMainWidget(@s)
+	end
+	def setValue(p)
+		@s.getChild("bar").setValue(p)
+	end
+	def tick
+		prepareDraw
+		draw
 	end
 end

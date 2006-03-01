@@ -28,8 +28,11 @@ class CampaignLevel
 		end
 	end
 	def play
+		loadscreen=LoadApp.new
+		loadscreen.setValue(0)
+		loadscreen.tick
 		begin
-			@app=AntGameApp.new(@level,getMain.width,getMain.height)
+			@app=AntGameApp.new(@level,getMain.width,getMain.height,loadscreen)
 			@app.run
 			@result=@app.result
 			@finish=@app.finished

@@ -41,11 +41,19 @@ class AntGameApp <AntRubyView
 
 
 	include AGHandler
-	def initialize(savegame,w,h)
+	def initialize(savegame,w,h,loadscreen=nil)
 		super(w,h)
 		@result=GameResult.new
 		$app=self	
+		if loadscreen
+			loadscreen.setValue(0.1)
+			loadscreen.tick
+		end
 		@map=AntRubyMap.new(getScene,32,32) # some small dummy size - gets overriden by loadMap anyway
+		if loadscreen
+			loadscreen.setValue(0.4)
+			loadscreen.tick
+		end
 		$map=@map
 		@finish="quit"
 
@@ -54,16 +62,33 @@ class AntGameApp <AntRubyView
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:eventPause)
 		addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
+		if loadscreen
+			loadscreen.setValue(0.5)
+			loadscreen.tick
+		end
 		
 		$screen=@layout
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@miniMap.setMap(getMap)
+		if loadscreen
+			loadscreen.setValue(0.7)
+			loadscreen.tick
+		end
 		@miniMap.setScene(getScene)
+		if loadscreen
+			loadscreen.setValue(0.8)
+			loadscreen.tick
+		end
 		
 		if savegame && savegame.length>0
 			# load a level
 			getMap().loadMap(savegame)
 		end	
+		if loadscreen
+			loadscreen.setValue(0.95)
+			loadscreen.tick
+		end
+
 		#@miniMap.mapChangedComplete(AGEvent.new(self,"bla"))
 		setupHeroDisplay(true)
 
