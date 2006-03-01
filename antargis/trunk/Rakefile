@@ -14,12 +14,14 @@ end
 #`mkdir .deps`
 
 def windows
-	$mwindows||=(have_library("opengl32"))
-	puts "WINDOWS:"+$mwindows.to_s
-	if not $mwindows
-		
-		puts "no opengl32 found - so expecting _not_ to use windows"
+	if $mwindows==nil
+		$mwindows||=(have_library("opengl32"))
+		if not $mwindows
+			
+			puts "no opengl32 found - so expecting _not_ to use windows"
+		end
 	end
+	#puts "WINDOWS:"+$mwindows.to_s
 	return $mwindows
 end
 

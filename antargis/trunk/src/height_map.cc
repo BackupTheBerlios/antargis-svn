@@ -2,7 +2,7 @@
 #include "terrain.h"
 #include "ant_serial.h"
 
-
+/*
 void serialTest()
 {
   BinaryStringOut os;
@@ -30,7 +30,7 @@ void serialTest2()
   is>>f;
   assert(i==a);
   assert(f==3.4f);
-}
+}*/
 
 
 
@@ -63,8 +63,8 @@ HeightMap::HeightMap(Scene *pScene,int w,int h):
   setTerrainScale(FOREST,23/32.0);
   setTerrainScale(ROCK,1);
   setTerrainScale(ROCK2,1);
-  serialTest();
-  serialTest2();
+  //  serialTest();
+  //  serialTest2();
 }
 
 HeightMap::~HeightMap()

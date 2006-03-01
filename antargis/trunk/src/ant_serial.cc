@@ -1,6 +1,5 @@
 #include "ant_serial.h"
 #include <iostream>
-#include <physfs.h>
 #include <ag_debug.h>
 
 // INTEL is little endian
@@ -172,7 +171,10 @@ BinaryOut &BinaryOut::operator<<(const float &f)
 BinaryFileIn::BinaryFileIn(const std::string &pName)
 {
   mEof=false;
-  f=PHYSFS_openRead(pName.c_str());
+
+  std::string n=findFile(pName);
+
+  f=fopen(n.c_str(),"rb");
   p=0;
   is.unsetf(std::ios_base::skipws);
   size=0;
@@ -180,7 +182,7 @@ BinaryFileIn::BinaryFileIn(const std::string &pName)
 
 BinaryFileIn::~BinaryFileIn()
 {
-  PHYSFS_close(f);
+  fclose(f);
 }
 
 size_t BinaryFileIn::pos() const
@@ -204,8 +206,8 @@ char BinaryFileIn::read()
 	  return 0;
 	}
       char buf[1001];
-      PHYSFS_uint32 c=0;
-      c=PHYSFS_read(f,buf,1,1000);
+      size_t c=0;
+      c=fread(buf,1,1000,f);
       is.str(std::string(buf,c));
       size+=c;
       if(c==0)
@@ -223,14 +225,15 @@ char BinaryFileIn::read()
 /////////////////////////////////////////////////////////////
 BinaryFileOut::BinaryFileOut(const std::string &pName)
 {
-  f=PHYSFS_openWrite(pName.c_str());
+  f=fopen(checkFileName(getWriteDir()+"/"+pName).c_str(),"wb");
+  //  f=fopen(PHYSFS_openWrite(pName.c_str());
   size=0;
   p=0;
 }
 BinaryFileOut::~BinaryFileOut()
 {
   flush();
-  PHYSFS_close(f);
+  fclose(f);
 }
 
 size_t BinaryFileOut::pos() const
@@ -241,7 +244,8 @@ size_t BinaryFileOut::pos() const
 void BinaryFileOut::flush()
 {
   std::string s=buffer.str();
-  PHYSFS_write(f,s.c_str(),1,s.length());
+  //  PHYSFS_write(f,s.c_str(),1,s.length());
+  fwrite(s.c_str(),1,s.length(),f);
   buffer.str("");
   size=0;
 }

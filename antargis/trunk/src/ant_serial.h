@@ -4,7 +4,6 @@
 #include <ag_fs.h>
 #include <SDL.h>
 #include <sstream>
-#include <physfs.h>
 #include <ag_geometry.h>
 
 class SerialException
@@ -53,7 +52,7 @@ class BinaryFileIn:public BinaryIn
 
   size_t pos() const;
  private:
-  PHYSFS_file *f;
+  FILE *f;
   std::istringstream is;
   bool mEof;
   size_t p;
@@ -71,7 +70,7 @@ class BinaryFileOut:public BinaryOut
 
   size_t pos() const;
  private:
-  PHYSFS_file *f;
+  FILE *f;
   std::ostringstream buffer;
   size_t size;
   size_t p;

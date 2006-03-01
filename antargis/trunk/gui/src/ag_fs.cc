@@ -19,15 +19,20 @@
  */
 
 #include <string>
-#include <physfs.h>
+#include <list>
 #include <assert.h>
 #include <ag_fs.h>
+#include <dirent.h>
 #include "ag_debug.h"
 
 bool FSinited=false;
 
+std::list<std::string> mFsPaths;
+
 void addPath(const std::string &pName)
 {
+  mFsPaths.push_back(pName);
+#ifdef USE_PHYSFS
   TRACE;
   PHYSFS_addToSearchPath(pName.c_str(),1);
   char **p=PHYSFS_getSearchPath();
@@ -36,12 +41,13 @@ void addPath(const std::string &pName)
       cdebug(*p);
 
     }
-
+#endif
 }
 
 
 void initFS(const char *argv0)
 {
+#ifdef USE_PHYSFS
   TRACE;
   PHYSFS_init(argv0);
   PHYSFS_setSaneConfig("Antargis","Antargis","ZIP",false,false);
@@ -67,12 +73,32 @@ void initFS(const char *argv0)
     }
 
   cdebug("--");
+
+#endif
+  addPath("data");
+  addPath(getWriteDir());
+}
+
+
+std::string checkFileName(std::string s)
+{
+#ifdef WIN32
+  return replace(s,"/","\\");
+#else
+
+  #warning "check if directories exist"
+
+
+  return s;
+#endif
 }
 
 std::string directLoad(const std::string &pName)
 {
   TRACE;
-  FILE *f=fopen(pName.c_str(),"rb");
+
+
+  FILE *f=fopen(checkFileName(pName).c_str(),"rb");
   if(!f)
     return "";
   fseek(f,0,SEEK_END);
@@ -85,8 +111,44 @@ std::string directLoad(const std::string &pName)
   return std::string(buffer,len);
 }
 
+std::string findFile(const std::string &pName)
+{
+  if(fileExists(pName))
+    return pName;
+  for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
+    {
+      std::string n=*i+"/"+pName;
+      n=checkFileName(n);
+      if(fileExists(n))
+	return n;
+    }
+  cdebug(pName);
+  throw std::runtime_error("File not found!");
+  return "";
+}
+
+std::string loadFromPath(const std::string &pName)
+{
+  std::string r;
+  r=directLoad(pName);
+  if(r.length())
+    return r;
+
+  for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
+    {
+      r=directLoad(*i+"/"+pName);
+      if(r.length())
+	return r;
+    }
+  cdebug("LOAD FAILED:"<<pName);
+
+  return r;
+}
+
 std::string loadFile(const std::string &pName)
 {
+  return loadFromPath(pName);
+#ifdef USE_PHYSFS
   TRACE;
   assert(FSinited);
 
@@ -118,9 +180,21 @@ std::string loadFile(const std::string &pName)
 
   PHYSFS_close(f);
   return o;
+#endif
 }
+
+std::string getWriteDir()
+{
+#ifdef WIN32
+  return "";
+#else
+  return std::string(getenv("HOME"))+"/.Antargis";
+#endif
+}
+
 void saveFile(const std::string &pName,const std::string &pContent)
 {
+#ifdef USE_PHYSFS
   TRACE;
   assert(FSinited);
 
@@ -135,16 +209,32 @@ void saveFile(const std::string &pName,const std::string &pContent)
   PHYSFS_write(f,pContent.c_str(),1,pContent.length());
 
   PHYSFS_close(f);
+#else
+  FILE *f=fopen(checkFileName(getWriteDir()+"/"+pName).c_str(),"wb");
+  fwrite(pContent.c_str(),pContent.length(),1,f);
+  fclose(f);
+
+#endif
 }
 
 bool fileExists(const std::string &pName)
 {
+  FILE *f=fopen(pName.c_str(),"r");
+  if(f)
+    {
+      fclose(f);
+      return true;
+    }
+  return false;
+#ifdef USE_PHYSFS
   TRACE;
   return PHYSFS_exists(pName.c_str());
+#endif
 }
 
 std::vector<std::string> getDirectory(const std::string &pDir)
 {
+#ifdef USE_PHYSFS
   TRACE;
   char **files= PHYSFS_enumerateFiles(pDir.c_str());
   std::vector<std::string> v;
@@ -159,4 +249,49 @@ std::vector<std::string> getDirectory(const std::string &pDir)
 
   PHYSFS_freeList(files);
   return v;
+#else
+
+  std::vector<std::string> v;
+
+#ifdef WIN32
+  WIN32_FIND_DATA ent;
+
+  std::string dir=pDir+"\\*";
+
+  dir=replace(dir,"\\\\","\\"); // remove doubles
+
+  char path[dir.length()+20];
+  strcpy(path,dir.c_str());
+
+  HANDLE d=FindFirstFile(path,&ent);
+
+  if(d)
+    {
+      do
+	{
+	  v.push_back(ent.cFileName);
+	}
+      while(FindNextFile(d,&ent)!=0);
+      
+      FindClose(d);
+    }
+
+#else
+  struct dirent *ent;
+  DIR *dir;
+  std::string dirname=pDir+"/*";
+  dir=opendir(dirname.c_str());
+  if(dir)
+    {
+      while((ent=readdir(dir)))
+	{
+	  v.push_back(ent->d_name);
+	}
+    }
+
+
+#endif
+
+  return v;
+#endif
 }
