@@ -294,7 +294,8 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
-      cdebug("render text");
+      //      cdebug("render text");
+      cdebug(pText);
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       

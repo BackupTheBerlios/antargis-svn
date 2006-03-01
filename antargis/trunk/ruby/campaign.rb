@@ -29,7 +29,7 @@ class CampaignLevel
 	end
 	def play
 		begin
-			@app=AntGameApp.new(@level,1024,768)
+			@app=AntGameApp.new(@level,getMain.width,getMain.height)
 			@app.run
 			@result=@app.result
 			@finish=@app.finished

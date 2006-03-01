@@ -55,8 +55,9 @@ AGSurfaceManager::~AGSurfaceManager()
 
 void AGSurfaceManager::clear()
 {
-  cleanup();
-  cleanup();
+  cleanup(true);
+  cleanup(true);
+  cleanup(true);
 }
 
 
@@ -120,11 +121,11 @@ AGSurfaceManager *getSurfaceManager()
 }
 
 
-void AGSurfaceManager::cleanup()
+void AGSurfaceManager::cleanup(bool force)
 {
-  return;
+  //return;
   size_t oldTexMem=getUsedTexMem();
-  if(oldTexMem<16000000)
+  if(oldTexMem<16000000 && !force)
     return;
   cdebug("oldTexMem:"<<oldTexMem);
   

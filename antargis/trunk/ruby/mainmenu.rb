@@ -107,8 +107,31 @@ class AntMenuApp <AGApplication
 		@optionsMenu=AGLayout.new($screen,loadFile("data/gui/layout/options.xml"))
 		@menues.push(@optionsMenu)
 		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)
+		
+		addHandler(@optionsMenu.getChild("fullscreen"),:sigClick,:eventFullscreen)
+		addHandler(@optionsMenu.getChild("1024"),:sigClick,:eventResChange)
+		addHandler(@optionsMenu.getChild("1280"),:sigClick,:eventResChange)
+		addHandler(@optionsMenu.getChild("1400"),:sigClick,:eventResChange)
 	end
-	
+	def eventFullscreen
+		getMain.changeRes(getMain.width,getMain.height,32,(not getMain.fullscreen),true)
+	end
+
+	def eventResChange(e)
+		case e.getCaller.getName
+			when "1024"
+				setRes(1024,768)
+			when "1280"
+				setRes(1280,1024)
+			when "1400"
+				setRes(1400,1050)
+		end
+	end
+	def setRes(w,h)
+		getMain.changeRes(w,h,32,true,true) #getMain.fullscreen,true)
+		puts getSurfaceManager.getUsedTexMem
+		#raise 1
+	end
 	# Mainmenu-sigs
 	
 	def eventCredits(e)
@@ -130,12 +153,6 @@ class AntMenuApp <AGApplication
 		@selCampaign=@campaigns[number]
 		@campaignMenu.getChild("campaignImage").setTexture(@selCampaign.texture)
 		@campaignMenu.getChild("campaignDescription").setText(@selCampaign.description)
-# 		case callerName
-# 			when "startWolf"
-# 				soundOff
-# 				startCampaign(@selCampaign)
-# 				soundOn
-# 		end
 	end
 	
 	def eventStart

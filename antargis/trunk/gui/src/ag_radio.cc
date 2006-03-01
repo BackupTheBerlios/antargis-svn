@@ -174,6 +174,10 @@ public:
   {
     CTRACE;
     AGRadio *b=new AGRadio(pParent,pRect);
+    std::string caption=pNode.get("caption");
+    if(caption.length())
+      b->setCaption(caption);
+
     std::string captionImage=pNode.get("caption-image");
     if(captionImage.length())
       b->setSurface(AGSurface::load(captionImage),false);
@@ -181,7 +185,8 @@ public:
       b->setEnabled(false);
     if(pNode.get("theme").length())
       b->setTheme(pNode.get("theme"));
-
+    if(pNode.get("checked")=="true")
+      b->setChecked(true);
     return b;
   }
 };

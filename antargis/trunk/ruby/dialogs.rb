@@ -30,7 +30,11 @@ class RectWidget<AGWidget
 		p.fillRect(getRect.origin,@color)
 	end
 	def eventMouseButtonDown(e)
-		return true
+		if visible
+			return true
+		else
+			return super(e)
+		end
 	end
 end
 
@@ -39,7 +43,7 @@ end
 #
 class AntDialog<AGLayout
 	include AGHandler
-	def initialize(parent,filename)
+	def initialize(parent,filename,fade=true)
 		super(parent,loadFile(filename))
 		addHandler(getChild("ok"),:sigClick,:eventOk)
 		if getChild("cancel")
@@ -47,7 +51,9 @@ class AntDialog<AGLayout
 		end
 		addSignal("sigClosed")
 		#setModal(true)
-		addChildBack(RectWidget.new(self,getRect.origin,AGColor.new(0,0,0,0x77)))
+		if fade
+			addChildBack(RectWidget.new(self,getRect.origin,AGColor.new(0,0,0,0x77)))
+		end
 	end
 	def eventOk(e)
 		eventClose
@@ -74,7 +80,7 @@ end
 
 class AntStoryTalk<AntDialog
 	def initialize(parent)
-		super(parent,"data/gui/layout/storytalk.xml")
+		super(parent,"data/gui/layout/storytalk.xml",false)
 		getMap().pause()
 		addHandler(getChild("window"),:sigClose,:eventOk)
 		addSignal("sigStoryFinished")

@@ -11,19 +11,31 @@
 			<colsize col="0" fixed="10"/>
 			<colsize col="4" fixed="10"/>
 			<colsize col="3" relative="0.6"/>
-			<table col="3" row="0" cols="1" rows="9">
-				<rowsize row="0" fixed="20"/>
-				<rowsize row="2" fixed="20"/>
-				<rowsize row="4" fixed="20"/>
-				<rowsize row="6" fixed="20"/>
-				<button col="0" row="1" caption="Gameoptions"/>
-				<button col="0" row="3" caption="Video"/>
-				<button col="0" row="5" caption="Audio"/>
-				
-				<button col="0" row="7" name="exit" caption="Exit"/>
-			</table>
+			
+			<cell col="1" row="0">
+				<!--<text caption="No options here for the time being"/>-->
+				<table cols="2" rows="6" name="VideoMenu">
+					<button col="0" row="0" caption="Toggle fullscreen" name="fullscreen"/>
+					<button col="0" row="1" caption="1024 x 768" name="1024"/>
+					<button col="0" row="2" caption="1280 x 1024" name="1280"/>
+					<button col="0" row="3" caption="1400 x 1050" name="1400"/>
+				</table>
+			</cell>
+			
+			<radioGroup col="3" row="0" name="TypeGroup">
+				<table cols="1" rows="9">
+					<rowsize row="0" fixed="20"/>
+					<rowsize row="2" fixed="20"/>
+					<rowsize row="4" fixed="20"/>
+					<rowsize row="6" fixed="20"/>
+					<radio col="0" row="1" caption="Gameoptions" enabled="false"/>
+					<radio col="0" row="3" caption="Video" checked="true"/>
+					<radio col="0" row="5" caption="Audio" enabled="false"/>
+					
+					<button col="0" row="7" name="exit" caption="Exit"/>
+				</table>
+			</radioGroup>
 		</table>
-		<!-- <button col="0" row="2" caption-image="MainMenuBg3.png"/>-->
 		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>
 	</table>
 </layout>

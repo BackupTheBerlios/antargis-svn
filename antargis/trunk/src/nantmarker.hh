@@ -1135,6 +1135,11 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGImage,b);
  $result=*b;
 }
+%typemap(directorout) AGInternalSurface {
+ AGInternalSurface *b;
+ Data_Get_Struct($input,AGInternalSurface,b);
+ $result=*b;
+}
 %typemap(directorout) AGLayout {
  AGLayout *b;
  Data_Get_Struct($input,AGLayout,b);
@@ -1250,6 +1255,11 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGRect23,b);
  $result=*b;
 }
+%typemap(directorout) AGRenderContext {
+ AGRenderContext *b;
+ Data_Get_Struct($input,AGRenderContext,b);
+ $result=*b;
+}
 %typemap(directorout) AGRubyObject {
  AGRubyObject *b;
  Data_Get_Struct($input,AGRubyObject,b);
@@ -1293,6 +1303,11 @@ else if(dynamic_cast<AntMap*>(result))
 %typemap(directorout) AGSurface {
  AGSurface *b;
  Data_Get_Struct($input,AGSurface,b);
+ $result=*b;
+}
+%typemap(directorout) AGSurfaceManager {
+ AGSurfaceManager *b;
+ Data_Get_Struct($input,AGSurfaceManager,b);
  $result=*b;
 }
 %typemap(directorout) AGTable {

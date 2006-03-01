@@ -259,7 +259,7 @@ class AntGameApp <AntRubyView
 end
 
 def startGame(file="savegames/savegame0.antlvl")
-	app=AntGameApp.new(file,1024,768)
+	app=AntGameApp.new(file,getMain.width,getMain.height)
 	app.run
 	result=app.result
 	app=nil
