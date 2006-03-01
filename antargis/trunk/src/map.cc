@@ -77,6 +77,7 @@ void AntMap::saveXML(xmlpp::Node &node) const
 
 void AntMap::loadXML(const xmlpp::Node &node)
 {
+  CTRACE;
   HeightMap::loadXML(node);
 
   xmlpp::Node::const_iterator i=node.begin();

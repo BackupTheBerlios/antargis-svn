@@ -28,6 +28,7 @@ bool FSinited=false;
 
 void addPath(const std::string &pName)
 {
+  TRACE;
   PHYSFS_addToSearchPath(pName.c_str(),1);
   char **p=PHYSFS_getSearchPath();
   for(;*p;p++)
@@ -41,6 +42,7 @@ void addPath(const std::string &pName)
 
 void initFS(const char *argv0)
 {
+  TRACE;
   PHYSFS_init(argv0);
   PHYSFS_setSaneConfig("Antargis","Antargis","ZIP",false,false);
   FSinited=true;
@@ -69,6 +71,7 @@ void initFS(const char *argv0)
 
 std::string directLoad(const std::string &pName)
 {
+  TRACE;
   FILE *f=fopen(pName.c_str(),"rb");
   if(!f)
     return "";
@@ -84,16 +87,22 @@ std::string directLoad(const std::string &pName)
 
 std::string loadFile(const std::string &pName)
 {
+  TRACE;
   assert(FSinited);
+
+  std::string r=directLoad(pName);
+  if(r.length()!=0)
+	return r;
 
   if(!fileExists(pName))
     {
       std::string r=directLoad(pName);
       if(r.length()==0)
-	std::cerr<<"File '"<<pName<<"' does not exist!"<<std::endl;
+	    std::cerr<<"File '"<<pName<<"' does not exist!"<<std::endl;
       return r;
     }
 
+  std::cerr<<"File probably doesn't exist:"<<pName<<std::endl;
   PHYSFS_file *f=PHYSFS_openRead(pName.c_str());
   std::string o;
 
@@ -112,6 +121,7 @@ std::string loadFile(const std::string &pName)
 }
 void saveFile(const std::string &pName,const std::string &pContent)
 {
+  TRACE;
   assert(FSinited);
 
   PHYSFS_file *f=PHYSFS_openWrite(pName.c_str());
@@ -129,11 +139,13 @@ void saveFile(const std::string &pName,const std::string &pContent)
 
 bool fileExists(const std::string &pName)
 {
+  TRACE;
   return PHYSFS_exists(pName.c_str());
 }
 
 std::vector<std::string> getDirectory(const std::string &pDir)
 {
+  TRACE;
   char **files= PHYSFS_enumerateFiles(pDir.c_str());
   std::vector<std::string> v;
 

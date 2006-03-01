@@ -27,7 +27,6 @@
 #include <ag_color.h>
 
 
-#include <ruby.h>
 #include <set>
 #include <vector>
 

@@ -346,7 +346,7 @@
 		<button>
 			<border>
 				<normal>
-					<image name="image" file="gui/wood_border.png"/>
+					<image name="image" file="data/gui/wood_border.png"/>
 				</normal>
 			</border>
 		</button>

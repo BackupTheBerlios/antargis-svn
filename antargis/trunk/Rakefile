@@ -14,18 +14,26 @@ end
 #`mkdir .deps`
 
 def windows
-	if $windows==nil
-		$windows=have_library("opengl32")
+	$mwindows||=(have_library("opengl32"))
+	puts "WINDOWS:"+$mwindows.to_s
+	if not $mwindows
+		
 		puts "no opengl32 found - so expecting _not_ to use windows"
 	end
-	return $windows
+	return $mwindows
 end
+
+windows # check once
 
 if File.exists?("config.rb")
 	puts "Config cached! - remove 'config.rb' or 'rake clean' to clear cache"
 	puts
 	require "config.rb"
 else
+	if windows
+		$LDFLAGS+=" -LC:/msys/local/lib"
+	end
+	#find_library('SDL',nil,'/usr/local/lib:/usr/lib:/usr/lib/SDL')
 	have_library('SDL')
 	have_library('SDL_ttf')
 	have_library('SGE')
@@ -41,10 +49,17 @@ else
 	have_library('stdc++')
 	have_library('z')
 	have_library('png')
+	#have_library('ruby1.8')
+	if windows
+		have_library('msvcrt-ruby18')
+	end
 	
 	$swig = with_config('swig', 'swig')
 	$INSTALL = with_config('install', 'install')
 	$ccache = with_config("ccache","ccache")
+	if windows
+		$ccache=""
+	end
 	
 	if not $libs
 		puts "ERROR: Not compatible with current mkmf!"
@@ -72,11 +87,24 @@ PWD=Dir.pwd
 task :default => ["libantargis.so",:test]
 
 $GUISRC="gui/src"
-$CXX=$ccache+" g++"
-$CC=$ccache+" gcc"
-$CFLAGS=`sdl-config --cflags`.chomp+" -Isrc -I"+$GUISRC+" -DUSE_RUBY -g -O0 -I"+Config::CONFIG['archdir']+" -fPIC -Wall"
+if $ccache!=""
+	$ccache+=" "
+end
+$CXX=$ccache+"g++"
+$CC=$ccache+"gcc"
+puts windows
+if not windows
+	$CFLAGS=`sdl-config --cflags`.chomp
+	$LDFLAGS=`sdl-config --libs`.chomp+" "+$libs
+	$CFLAGS+=" -fPIC"
+else
+	$CFLAGS="-Ic:/msys/local/include/SDL -Ic:/msys/local/include -Dmain=SDL_main"
+	$LDFLAGS="-s -Wl,--enable-auto-import,--export-all "
+	$LDFLAGS+=" -Lc:/msys/local/lib -lmingw32 -lSDLmain -lSDL -mwindows "+$libs
+	
+end
+$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -g -O0 -I"+Config::CONFIG['archdir']+" -Wall"
 $LDSHARED="#{$CXX} -shared"
-$LDFLAGS=`sdl-config --libs`.chomp+" "+$libs
 $INSTALL_PROG=$INSTALL+" -m 755 -D "
 $INSTALL_DATA=$INSTALL+" -m 644 -D "
 
@@ -86,20 +114,14 @@ SRCS=(Dir[$GUISRC+"/*.cc"]+Dir[$GUISRC+"/*.c"]+(Dir["src/*.cc"]-["src/swig.cc"])
 OBJS=[]
 O2S={}
 SRCS.each{|s|
-	o=s.gsub(".cc",".o") #.gsub(".c",".o")
+	o=s.gsub(".cc",".o").gsub(".c",".o")
 	OBJS<<o
 	O2S[o]=s
 }
 
 file "libantargis.so" => OBJS do |t|
-	puts t
-	sh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{OBJS.join(" ")}"
+	sh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{OBJS.join(" ")} "+$libs
 end
-
-begin File.mkdir(".deps")
-rescue 
-end
-
 
 # manage dependencies
 SRCS.each{|s|
@@ -109,13 +131,16 @@ SRCS.each{|s|
 	else
 		deps=[s]
 	end
+	if windows
+		deps=deps.select{|x|(not x=~/glgl/)}
+	end
 	if s=~/.cc/
 		o=s.gsub(".cc",".o")
 		file [o] => deps do |f|
                         sh "#{$CXX} #{$CFLAGS} -Wp,-MD,#{dep} -c #{PWD}/#{s} -o #{o} "
 		end
 	else
-		o=s.gsub(".cc",".o")
+		o=s.gsub(".c",".o")
 		file [o] => deps do |f|
 			sh "#{$CC} #{$CFLAGS} -Wp,-MD,#{dep} -c #{PWD}/#{s} -o #{o} "
 		end
@@ -127,14 +152,16 @@ myInterfaces=interfaceHeaders.collect{|x|"src/"+x}+["src/interface.i"]
 puts myInterfaces
 #exit
 
-file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
-	sh "cd src; swig -v -Wall -ruby -c++ -I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
+if not windows
+	file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
+		sh "cd src; swig -v -Wall -ruby -c++ -I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
+	end
+	
+	file ["src/nantmarker.hh"] => myInterfaces do |t|
+		sh "cd src; ../#{$GUISRC}/createmarker.rb "+interfaceHeaders.join(" ")
+	end
 end
-
-file ["src/nantmarker.hh"] => myInterfaces do |t|
-	sh "cd src; ../#{$GUISRC}/createmarker.rb "+interfaceHeaders.join(" ")
-end
-
+puts "muh"
 task :test => "libantargis.so" do |t|
 	require 'libantargis.so'
 end
@@ -149,7 +176,7 @@ task :clean do
 	sh "rm -f src/swig.*"
 	sh "rm -f src/nantmarker.hh"
 	sh "rm -f config.rb"
-	sh "rm -rf .deps"
+	sh "rm -r -f .deps"
 end
 
 task :install do
@@ -198,3 +225,4 @@ task :dist do
 	sh "rm -rf #{distdir}"
 	
 end
+puts "end"

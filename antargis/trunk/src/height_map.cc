@@ -149,6 +149,8 @@ void HeightMap::set(size_t x,size_t y,float height)
 
 void HeightMap::loadBinary(const std::string &pName)
 {
+  CTRACE;
+  cdebug("file:"<<pName);
   BinaryFileIn is(pName);
   float f;
 
@@ -218,6 +220,7 @@ void HeightMap::saveBinary(const std::string &pName) const
 
 void HeightMap::loadXML(const Node &node)
 {
+  CTRACE;
   std::string filename=node.get("filename");
   if(filename.length())
     loadBinary(filename);

@@ -447,3 +447,8 @@ void AGTexture::useTexture()
 {
   mTextureUsed=true;
 }
+
+AGTexture AGTexture::copy() const
+{
+	throw std::runtime_error("not implemented!");
+}
