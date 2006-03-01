@@ -5,6 +5,8 @@ require 'mkmf'
 #require 'file'
 require 'ftools'
 
+version="0.1"
+
 begin File.mkpath(".deps")
 rescue 
 end
@@ -152,11 +154,47 @@ end
 
 task :install do
 	begin
-		sh $INSTALL_PROG+" libantargis.so "+File.join(Config::CONFIG['sitearchdir'],"libantargis.so")
+		puts "PROBLEM: This is not supported ATM"
+		#sh $INSTALL_PROG+" libantargis.so "+File.join(Config::CONFIG['sitearchdir'],"libantargis.so")
 	rescue
 		puts "-----------------------------------------"
 		puts "PROBLEM: maybe you have to get root ?"
 		puts "-----------------------------------------"
 		raise
 	end
+end
+
+def mkdir(d)
+	begin
+		Dir.mkdir(d) #sh "test -e #{d} || mkdir #{d}"
+	rescue
+	end
+end
+def cpdir(dir,distdir)
+	mkdir(distdir+"/"+dir)
+	Dir[dir+"/*"].each{|f|
+		if f=~/~/ or f=~/\.o/ or f=~/\.so/ or f=~/\.xcf/
+		elsif File.ftype(f)=="file"
+			File.cp(f,"#{distdir}/#{f}")
+		end
+	}
+end
+
+task :dist do
+	distdir="antargis-#{version}"
+	sh "test -e #{distdir} || mkdir #{distdir}"
+	dirs=`find -type d`.split("\n").collect{|x|x.sub("./","")}
+	dirs=dirs.select{|x|(not x=~/\.svn/)}.select{|x|(not x=~/\./)}
+	dirs=dirs.select{|x|x!="screenies" && (not x=~/^models/)}
+
+	dirs.each{|dir|
+		cpdir(dir,distdir)
+	}
+	# cp base dir
+	cpdir(".",distdir)
+
+	# tar.gz
+	sh "tar cfz #{distdir}.tar.gz #{distdir}"
+	sh "rm -rf #{distdir}"
+	
 end
