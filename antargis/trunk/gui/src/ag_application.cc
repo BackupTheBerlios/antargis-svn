@@ -184,6 +184,8 @@ void AGApplication::draw()
 	  //	  cdebug(r);
 	  p.clip(r);
 	  //	  p.fillRect(AGRect2(0,0,getMain()->width(),getMain()->height()),AGColor(0,0,0));
+	  //	  getScreen().flip();
+	  //	  delay(500);
 	}
       mainWidget->drawAll(p);
 

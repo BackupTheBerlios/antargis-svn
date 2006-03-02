@@ -248,6 +248,7 @@ void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
   d=mCurrent.project(pDest);
   std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
 
+  //  cdebug(p.first<<"   "<<p.second);
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     mTarget->blit(pSource,p.first,p.second);
 }
@@ -285,16 +286,6 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest)
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
-  //  return;
-  /*  AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
-  if(glScreen && false)
-    {
-      AGRect2 d=mCurrent.project(pDest);
-      //      glScreen->clip(mCurrent.clip);
-      glScreen->tile(pSource,d,pSrc);
-      glScreen->unclip();
-      return;
-      }*/
   float x,y;
   for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
     for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
@@ -302,7 +293,6 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
 	float w=std::min(pSrc.w(),pDest.x1()-x);
 	float h=std::min(pSrc.h(),pDest.y1()-y);
 	blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
-	//	return;
       }
 }
 
@@ -431,10 +421,11 @@ void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
 {
   AGRect2 d,pSrc;
   d=mCurrent.project(pDest);
-  std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
-  if(p.first.w()>0 && p.first.h()>0)
+  AGRect2 p=mCurrent.clipRect(d);
+  if(p.w()>0 && p.h()>0)
     {
-      mTarget->fillRect(p.first,c);
+      //      cdebug(p);
+      mTarget->fillRect(p,c);
     }
 }
 

@@ -48,6 +48,10 @@ AGRect2 AGSDLScreen::getRect() const
 
 void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
+  for(int x=pRect.x0();x<pRect.x1();x++)
+    for(int y=pRect.y0();y<pRect.y1();y++)
+      putPixel(x,y,c);
+  return;
   sge_FilledRectAlpha(s,
 		      (int)pRect.x(),
 		      (int)pRect.y(),
@@ -59,7 +63,17 @@ void AGSDLScreen::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRec
 {
   SDL_Rect sr=pSrc.sdl();
   SDL_Rect dr=pDest.sdl();
-  SDL_BlitSurface(const_cast<AGTexture&>(pSource).sdlTexture()->surface,&sr,s,&dr);
+
+  //  cdebug(pDest<<"  "<<pSrc);
+
+  SDL_Surface *source=const_cast<AGTexture&>(pSource).sdlTexture()->surface;
+
+  //  cdebug(source->w<<"  "<<source->h);
+
+  //  cdebug(sr.x<<" "<<sr.y<<" "<<sr.w<<" "<<sr.h);
+  //  cdebug(dr.x<<" "<<dr.y<<" "<<dr.w<<" "<<dr.h);
+
+  SDL_BlitSurface(source,&sr,s,&dr);
 }
 
 
@@ -95,15 +109,6 @@ void AGSDLScreen::drawGradient(const AGRect2& rect, const AGColor& ul, const AGC
 {
   AGDrawGradient(s,rect,ul,ur,dl,dr);
 }
-
-/*
-void AGSDLScreen::renderText (const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn)
-{
-  if(!AGFontEngine::renderText(this,pClipRect,BaseLineX,BaseLineY,pText,ParamIn))
-    cdebug("SOME ERROR");
-
-    }*/
-
 
 void AGSDLScreen::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor &c)
 {
@@ -176,12 +181,6 @@ void AGSDLScreen::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGCol
 	}
     }
 }
-/*
-AGTexture AGSDLScreen::makeTexture(const AGSurface &s)
-{
-  SDL_Surface *ns=SDL_DisplayFormatAlpha(const_cast<AGSurface&>(s).surface());
-  return AGTexture(ns,s.width(),s.height());
-  }*/
 
 size_t AGSDLScreen::getWidth() const
 {

@@ -1322,8 +1322,9 @@ SDL_Rect AGRect2::sdl() const
   SDL_Rect r;
   r.x=int(v0[0]);
   r.y=int(v0[1]);
-  r.w=int(v1[0]-v0[0]);
-  r.h=int(v1[1]-v0[1]);
+  r.w=int(v1[0]-v0[0]+0.1); // prevent shitty rounding error !
+  r.h=int(v1[1]-v0[1]+0.1);
+
   return r;
 }
 
