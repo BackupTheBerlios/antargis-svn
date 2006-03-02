@@ -108,6 +108,13 @@ class AGEdit:public AGWidget
   std::string getText() const;
 
   void setMaxLength(int i);
+
+  virtual bool eventGotFocus();
+  virtual bool eventLostFocus();
+
+  virtual void prepareDraw();
+
+
  private:
 
   void getActLine();

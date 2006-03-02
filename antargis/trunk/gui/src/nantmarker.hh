@@ -983,6 +983,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGRect23,b);
  $result=*b;
 }
+%typemap(directorout) AGRenderContext {
+ AGRenderContext *b;
+ Data_Get_Struct($input,AGRenderContext,b);
+ $result=*b;
+}
 %typemap(directorout) AGRubyObject {
  AGRubyObject *b;
  Data_Get_Struct($input,AGRubyObject,b);
@@ -1041,6 +1046,11 @@ else if(dynamic_cast<AGCheckBox*>(result))
 %typemap(directorout) AGSurface {
  AGSurface *b;
  Data_Get_Struct($input,AGSurface,b);
+ $result=*b;
+}
+%typemap(directorout) AGSurfaceManager {
+ AGSurfaceManager *b;
+ Data_Get_Struct($input,AGSurfaceManager,b);
  $result=*b;
 }
 %typemap(directorout) AGTable {

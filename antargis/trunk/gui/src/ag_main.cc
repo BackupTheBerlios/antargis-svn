@@ -225,5 +225,4 @@ bool AGMain::fullscreen() const
 
 void AGMain::mark()
 {
-  CTRACE;
 }

@@ -24,6 +24,7 @@
 #include "ag_debug.h"
 #include "ag_menu.h"
 #include "sge.h"
+#include "ag_glsurface.h"
 
 
 AGEditLine::AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd):
@@ -89,7 +90,18 @@ void AGEditLine::drawCursor(AGPainter &p,int cx,const AGVector2 &pPoint,const AG
   if(w==0)
     w=8;
 
+#ifdef SIMPLE_BOX_CURSOR
   p.fillRect(AGRect2(pPoint[0]+x1,pPoint[1],w,height()),c);
+#else
+  float x=pPoint[0]+x1;
+  float y=pPoint[1];
+  float h=height();
+
+
+  p.fillRect(AGRect2(x,y,w+1,3),c);
+  p.fillRect(AGRect2(x+w/2-1,y+3,3,h-6),c);
+  p.fillRect(AGRect2(x,y+h-3,w+1,3),c);
+#endif
 }
 
 
@@ -291,10 +303,8 @@ void AGEdit::draw(AGPainter &p)
   //  cdebug("getRect:"<<getRect());
   AGRect2 mr(getRect());//pRect.project(getRect()));
 
-  AGColor cursorC;
-  if(mShowCursor)
-    cursorC=AGColor(0,0,0,0x7F);
-  else
+  AGColor cursorC=AGColor(0,0,0,0x7f);
+  if(mShowCursor) // && opengl())
     cursorC=AGColor(0x7f,0x7f,0x7f,0x7f);
   
   if(mCy<mViewCy)
@@ -347,13 +357,6 @@ void AGEdit::draw(AGPainter &p)
   if(cy+mViewCy-1<mCy)
     mViewCy=mCy-cy+1;
 
-  mCursorTime+=SDL_GetTicks()-mCursorLast;
-  mCursorLast=SDL_GetTicks();
-  if(mCursorTime>300)
-    {
-      mCursorTime=0;
-      mShowCursor=!mShowCursor;
-    }
 }
 
 void AGEdit::drawBackground(AGPainter &p)
@@ -906,3 +909,29 @@ void AGEdit::clear()
   getActLine();
 }
 
+
+bool AGEdit::eventGotFocus()
+{
+  queryRedraw();
+  return AGWidget::eventGotFocus();
+}
+bool AGEdit::eventLostFocus()
+{
+  queryRedraw();
+  return AGWidget::eventLostFocus();
+}
+
+void AGEdit::prepareDraw()
+{
+  mCursorTime+=SDL_GetTicks()-mCursorLast;
+  mCursorLast=SDL_GetTicks();
+  if(mCursorTime>300 && mMutable && hasFocus())
+    {
+      mCursorTime=0;
+      mShowCursor=!mShowCursor;
+      queryRedraw();
+    }
+
+
+  AGWidget::prepareDraw();
+}

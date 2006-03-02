@@ -69,10 +69,45 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
     }
 }
 
+bool AGLayout::eventKeyDown(AGEvent *m)
+{
+  if(m->getKey()==SDLK_TAB)
+    {
+      CTRACE;
+      // search element, which has focus
+      std::map<int,AGWidget*>::iterator i=mTabIndices.begin();
+
+      for(;i!=mTabIndices.end();i++)
+	if(i->second->hasFocus())
+	  break;
+
+      if(i!=mTabIndices.end())
+	i++;
+      if(i==mTabIndices.end())
+	i=mTabIndices.begin();
+      if(i!=mTabIndices.end())
+	i->second->gainFocus();
+
+      return true;
+    }
+  else
+    return AGWidget::eventKeyDown(m);
+}
+
+
 void AGLayout::addTabIndex(int i,AGWidget *pWidget)
 {
   mTabIndices[i]=pWidget;
 }
+
+int AGLayout::getNextTabIndex() const
+{
+  if(mTabIndices.size()>0)
+    return mTabIndices.rbegin()->first+1;
+  else
+    return 1;
+}
+
 
 
 AGLayout *getLayout(AGWidget *pWidget)

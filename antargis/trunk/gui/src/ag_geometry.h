@@ -431,6 +431,7 @@ class AGRect2
   AGVector2 getV10() const;
 
   AGRect2 shrink(float f) const;
+  AGRect2 grow(float f) const;
 
   void setX(float p);
   void setY(float p);

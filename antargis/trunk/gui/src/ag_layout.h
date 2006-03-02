@@ -32,6 +32,10 @@ class AGLayout:public AGWidget
   AGLayout(AGWidget *pgParent,const std::string &pXMLData);
 
   void addTabIndex(int i,AGWidget *pWidget);
+
+  virtual bool eventKeyDown(AGEvent *m);
+  int getNextTabIndex() const;
+
  private:
   std::map<int,AGWidget*> mTabIndices;
 };

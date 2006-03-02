@@ -29,6 +29,7 @@
 #include <typeinfo>
 #include <ag_tooltip.h>
 #include "ag_application.h"
+#include "ag_layout.h"
 
 #define FOCUS_BY_SORT
 
@@ -385,7 +386,7 @@ void AGWidget::addChildBack(AGWidget *w)
 
 void AGWidget::regChange()
 {
-  AGRect2 t=mr.shrink(-20);
+  AGRect2 t=getScreenRect().grow(20);
   if(mChangeRect.width()==0 || mChangeRect.height()==0)
     mChangeRect=t;
   else
@@ -604,7 +605,12 @@ void AGWidget::gainFocus(AGWidget *pWidget)
       if(i!=mChildren.end())
 	{
 	  mChildren.erase(i);
+
+	  if(mChildren.size()>0)
+	    (*mChildren.begin())->eventLostFocus();
+
 	  mChildren.push_front(pWidget);
+	  pWidget->eventGotFocus();
 
 	}
       //      cdebug(mChildren.size());
@@ -612,7 +618,9 @@ void AGWidget::gainFocus(AGWidget *pWidget)
   else if(mParent)
     {
       if(canFocus())
-	mParent->gainFocus(this);
+	{
+	  mParent->gainFocus(this);
+	}
     }
 #else
   if(pWidget==0 && mParent)
@@ -888,7 +896,6 @@ AGRect2 AGWidget::getChangeRect()
       AGRect2 n=(*i)->getChangeRect();
       if(n.width()!=0 && n.height()!=0)
 	{
-	  n=n+getRect()[0];
 	  if(r.width()!=0 && r.height()!=0)
 	    {
 	      r.include(n[0]);
@@ -904,4 +911,14 @@ AGRect2 AGWidget::getChangeRect()
 void AGWidget::setTooltip(const std::string &pTooltip)
 {
   mTooltip=pTooltip;
+}
+
+AGLayout *AGWidget::getLayout()
+{
+  AGLayout *l=dynamic_cast<AGLayout*>(this);
+  if(l)
+    return l;
+  if(mParent)
+    return mParent->getLayout();
+  return 0;
 }

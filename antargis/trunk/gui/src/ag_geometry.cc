@@ -1299,6 +1299,12 @@ AGRect2 AGRect2::shrink(float f) const
   return AGRect2(v0+d,v1-d);
 }
 
+AGRect2 AGRect2::grow(float f) const
+{
+  AGVector2 d(f,f);
+  return AGRect2(v0-d,v1+d);
+}
+
 
 bool AGRect2::operator==(const AGRect2 &r) const
 {

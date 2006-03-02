@@ -29,6 +29,7 @@
 #include "ag_painter.h"
 
 class AGTooltip;
+class AGLayout;
 
 class AGWidget:public AGMessageObject
 {
@@ -133,6 +134,8 @@ class AGWidget:public AGMessageObject
   bool getFocus() const;
   bool hasFocus(const AGWidget *pWidget=0);
 
+  AGLayout *getLayout();
+
 
   std::string getName() const;
   void setName(const std::string &pName);
@@ -171,7 +174,6 @@ class AGWidget:public AGMessageObject
   bool mCaching;
   AGTexture *mCache;
   bool mCacheTouched;
-  //  AGMenu *mMenu;
 
   bool mHasFocus;
   AGWidget *mFocus;
