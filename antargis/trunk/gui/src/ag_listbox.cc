@@ -140,7 +140,7 @@ void AGListBox::arrange()
 
 void AGListBox::draw(AGPainter &p)
 {
-  mBackground.draw(p);
+  mBackground.draw(getRect().origin(),p);
   p.pushMatrix();
 
   if(mSelected>=0 && mSelected<(int)mItems.size())
@@ -149,7 +149,7 @@ void AGListBox::draw(AGPainter &p)
       
       AGRect2 r(0,y*mItemHeight,width(),mItemHeight);
       p.transform(r);
-      mHilight.draw(p);
+      mHilight.draw(getRect().origin(),p);
     }
   p.popMatrix();
   AGWidget::draw(p);

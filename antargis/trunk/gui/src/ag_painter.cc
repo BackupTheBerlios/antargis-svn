@@ -72,10 +72,12 @@ AGRect2 AGProjection::clipRect(AGRect2 target) const
 
 std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) const
 {
-  //  return std::make_pair(target,src);
+  //return std::make_pair(target,src);
   AGRect2 i=clip.intersect(target);
   if(i.width()<=0 || i.height()<=0)
     return std::make_pair(AGRect2(0,0,0,0),AGRect2(0,0,0,0));
+
+  assert(target.x0()<clip.x1());
 
 
  // clip left

@@ -31,7 +31,7 @@ void AGFrame::prepareDraw()
       if(!mTextureInited)
 	{
 	  AGPainter p(mTexture);
-	  mBorder->draw(p);
+	  mBorder->draw(getRect().origin(),p);
 	  mTextureInited=true;
 
 	}
@@ -46,6 +46,6 @@ void AGFrame::draw(AGPainter &p)
       if(mUseTexture && mTextureInited)
 	p.blit(mTexture,mTexture.getRect());
       else
-	mBorder->draw(p);
+	mBorder->draw(getRect().origin(),p);
     }
 }

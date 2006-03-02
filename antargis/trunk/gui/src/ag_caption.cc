@@ -31,7 +31,7 @@ AGCaption::AGCaption(AGWidget *pParent,const AGRect2 &pRect,const std::string &p
 void AGCaption::draw(AGPainter &p)
 {
   // draw bg
-  mBG.draw(p);
+  mBG.draw(getRect().origin(),p);
   AGText::draw(p);
 }
 

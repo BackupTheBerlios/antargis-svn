@@ -80,8 +80,9 @@ void AGButton::draw(AGPainter &p)
 {
   p.pushMatrix();
   p.transform(AGRect2(0,0,width(),height()).shrink(borderWidth));
-  mBG[mState].draw(p);
-  mBorder[mState].draw(p);
+  AGRect2 pr=getRect().origin();
+  mBG[mState].draw(pr,p);
+  mBorder[mState].draw(pr,p);
   p.popMatrix();
 
   if(borderWidth==0)

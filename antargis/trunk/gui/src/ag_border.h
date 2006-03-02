@@ -23,15 +23,17 @@
 
 #include <string>
 #include "ag_texture.h"
+#include "ag_geometry.h"
 
 class AGPainter;
+
 
 class AGBorder
 {
  public:
   AGBorder(const std::string &pTheme="");
 
-  void draw(AGPainter &p);
+  void draw(const AGRect2 &r,AGPainter &p);
 
   size_t getWidth() const;
 

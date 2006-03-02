@@ -60,12 +60,12 @@ AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
   mBorder=theme->getInt(pThemeName+"."+std::string("border"));
 }
 
-void AGBackground::draw(AGPainter &p)
+void AGBackground::draw(const AGRect2 &r,AGPainter &p)
 {
   if(mTextureFlag)
-    p.tile(mTexture,p.getRect().shrink(mBorder));
+    p.tile(mTexture,r.shrink(mBorder));
   else if(mColor)
-    p.drawGradient(p.getRect().shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
+    p.drawGradient(r.shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
  
 }
 

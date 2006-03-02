@@ -31905,13 +31905,15 @@ static VALUE _wrap_new_AGBackground(int nargs, VALUE *args, VALUE self) {
 static VALUE
 _wrap_AGBackground_draw(int argc, VALUE *argv, VALUE self) {
     AGBackground *arg1 = (AGBackground *) 0 ;
-    AGPainter *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
+    AGPainter *arg3 = 0 ;
     
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGBackground, 0);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGPainter, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    (arg1)->draw(*arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGPainter, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->draw((AGRect2 const &)*arg2,*arg3);
     
     return Qnil;
 }
@@ -32021,13 +32023,15 @@ static VALUE _wrap_new_AGBorder(int nargs, VALUE *args, VALUE self) {
 static VALUE
 _wrap_AGBorder_draw(int argc, VALUE *argv, VALUE self) {
     AGBorder *arg1 = (AGBorder *) 0 ;
-    AGPainter *arg2 = 0 ;
+    AGRect2 *arg2 = 0 ;
+    AGPainter *arg3 = 0 ;
     
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGBorder, 0);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGPainter, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    (arg1)->draw(*arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGRect2, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_AGPainter, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->draw((AGRect2 const &)*arg2,*arg3);
     
     return Qnil;
 }

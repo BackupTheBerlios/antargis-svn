@@ -38,14 +38,14 @@ AGBorder::AGBorder(const std::string &pTheme)
     }
 }
 
-void AGBorder::draw(AGPainter &p)
+void AGBorder::draw(const AGRect2 &d,AGPainter &p)
 {
   if(mTexture==0 || !mEnable)
     return;
   int w=mTexture->width()/3;
   int w2=w*2;
 
-  AGRect2 d=p.getRect();
+  //  AGRect2 d=mRect;//p.getRect();
   float x2=d.x1();
   float y2=d.y1();
 
@@ -81,3 +81,4 @@ void AGBorder::useTextures()
   if(mTexture)
     const_cast<AGTexture*>(mTexture)->useTexture();
 }
+

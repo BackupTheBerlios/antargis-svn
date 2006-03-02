@@ -365,7 +365,7 @@ void AGEdit::drawBackground(AGPainter &p)
   if(mDrawBackground)
     {
       //  CTRACE;
-      mBackground.draw(p);
+      mBackground.draw(getRect().origin(),p);
     }
   //    p.tile(mBackground,getRect());
 }
