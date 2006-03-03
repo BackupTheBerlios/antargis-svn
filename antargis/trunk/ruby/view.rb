@@ -330,7 +330,7 @@ class AntInventory<AGWidget
 		@inspect=e
 	end
 	def draw(p)
-		@bg.draw(p)
+		@bg.draw(getRect.origin,p)
 		updateInspection
 		super(p)
 		@bg.draw(p)
