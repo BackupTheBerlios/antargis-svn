@@ -24,8 +24,6 @@ class WaterPiece:public SceneNode
   size_t getTriangles() const;
   bool transparent();
 
-  AGBox3 bbox() const;
-
   virtual void mapChanged();
 
  private:
@@ -37,8 +35,6 @@ class WaterPiece:public SceneNode
   int mY;
   int mW;
   int mH;
-  AGBox3 mBBox;
-  AGVector4 mPos;
   HeightMap *mMap;
   int step;
 };

@@ -471,6 +471,8 @@ class AGRect2
 
   void check() const;
 
+  AGRect2 alignGrid() const; // align to integer grid
+
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
@@ -666,11 +668,18 @@ class AGBox3
   std::vector<AGVector4> getVertices() const;
 
   AGBox3 operator+(const AGVector3 &v) const;
+  AGBox3 operator-(const AGVector3 &v) const;
+
+  bool valid() const;
+
+ private:
+  bool mValid;
 };
 
 std::ostream &operator<<(std::ostream &o,const AGVector2&v);
 std::ostream &operator<<(std::ostream &o,const AGVector3&v);
 std::ostream &operator<<(std::ostream &o,const AGVector4&v);
 std::ostream &operator<<(std::ostream &o,const AGRect2&v);
+std::ostream &operator<<(std::ostream &o,const AGBox3&v);
 
 #endif

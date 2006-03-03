@@ -76,11 +76,15 @@ void initFS(const char *argv0)
 
 #endif
   addPath("data");
+  addPath("data/fonts");
 #ifndef WIN32
   addPath("/usr/local/share/antargisgui/pics");
   addPath("/usr/local/share/antargisgui");
 #endif
   addPath(getWriteDir());
+#ifdef WIN32
+  addPath("c:/Windows/Fonts/");
+#endif
 }
 
 
@@ -89,9 +93,7 @@ std::string checkFileName(std::string s)
 #ifdef WIN32
   return replace(s,"/","\\");
 #else
-
   #warning "check if directories exist"
-
 
   return s;
 #endif
@@ -99,9 +101,6 @@ std::string checkFileName(std::string s)
 
 std::string directLoad(const std::string &pName)
 {
-  TRACE;
-
-
   FILE *f=fopen(checkFileName(pName).c_str(),"rb");
   if(!f)
     return "";

@@ -97,8 +97,6 @@ AGInternalSurface *AGCreate32BitSurface(size_t width,size_t height)
       //        throw UI::UIException();
     }
 
-  cdebug("CREATE:"<<surface->surface);
-
   return surface;
 }
 

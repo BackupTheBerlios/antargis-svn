@@ -28,7 +28,6 @@ int toInt(const std::string &s)
 float toFloat(const std::string &s)
 {
   float f=atof(s.c_str());
-  cdebug(s<<":"<<f);
   return f;
 }
 

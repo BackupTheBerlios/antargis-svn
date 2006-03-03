@@ -5,12 +5,12 @@
 AntWaterShader *shader=0;
 
 WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
-  SceneNode(pScene),
+  SceneNode(pScene,pos,AGBox3()),
   mX(x),mY(y),mW(w),mH(h),mMap(&map)
 {
   step=2;
   tex=getTextureCache()->get("data/textures/terrain/water.png");
-  mPos=pos;
+
   if(!shader)
     shader=new AntWaterShader;
 
@@ -28,7 +28,7 @@ WaterPiece::~WaterPiece()
 void WaterPiece::mapChanged()
 {
   //  CTRACE;
-  mBBox=AGBox3();
+  AGBox3 bb;
   mArray.clear();
 
   setVisible(false);
@@ -39,15 +39,15 @@ void WaterPiece::mapChanged()
     for(y=0;y<mH+step;y+=step)
       {
 	AGVector4 p(x,y,0);
-	p+=mPos;
+	p+=getPos();
 	AGVector4 c(1,1,1,0.7);
 	AGVector3 n(0,0,1);
 	AGVector2 t(x,y);
 	
 	mArray.addVertex(p,c,n,t);
 
-	mBBox.include(p.dim3()-AGVector3(0,0,1));
-	mBBox.include(p.dim3()+AGVector3(0,0,1));
+	bb.include(p.dim3()-AGVector3(0,0,1));
+	bb.include(p.dim3()+AGVector3(0,0,1));
 
 	if(mMap->get(mX+x,mY+y)<0.1 && !vis)
 	  {
@@ -55,6 +55,8 @@ void WaterPiece::mapChanged()
 	    //	    cdebug(mX+x<<" "<<mY+y<<":"<<mMap->get(x,y));
 	  }
       }
+  setBBox(bb-getPos().dim3());
+
   for(x=0;x<mW/step;x++)
     for(y=0;y<mH/step;y++)
       {
@@ -115,11 +117,4 @@ bool WaterPiece::transparent()
 {
   return true;
 }
-
-AGBox3 WaterPiece::bbox() const
-{
-  return mBBox;
-}
-
-
 

@@ -29,7 +29,7 @@ AntMap::AntMap(Scene *pScene,int w,int h):
   myAntargisMap=this;
   maxID=0;
 
-  mTerrain->addToScenes();
+  //  mTerrain->addToScenes();
 }
 AntMap::~AntMap()
 {
@@ -77,13 +77,11 @@ void AntMap::saveXML(xmlpp::Node &node) const
 
 void AntMap::loadXML(const xmlpp::Node &node)
 {
-  CTRACE;
   HeightMap::loadXML(node);
 
   xmlpp::Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     {
-      TRACE;
       AntEntity *e=0;
       Node *n=*i;
       if((e=loadEntity(*n)))
@@ -270,7 +268,7 @@ void AntMap::clear()
   mEntQuad->clear();
   mEntityMap.clear();
   //  getScene()->addNode(mTerrainMesh);
-  mTerrain->addToScenes();
+  //  mTerrain->addToScenes();
 
 }
 

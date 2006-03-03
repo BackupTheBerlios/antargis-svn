@@ -45,13 +45,14 @@ AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTo
 
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
-  mCursor=getTextureCache()->get("blue_cursor.png");
-  SDL_ShowCursor(0);
+  setCursor(getTextureCache()->get("blue_cursor.png"));
+  setNormalCursor();
 }
 
 AGApplication::~AGApplication()
 {
   CTRACE;
+  delete mCursor;
 }
 
 
@@ -113,7 +114,6 @@ bool AGApplication::run()
 	draw();
       }
       
-      //      drawCursor();
       eventFrameEnd((now-last)/1000.0);
       last=now;
     }
@@ -147,8 +147,11 @@ void AGApplication::clearOldMousePosition()
 void AGApplication::drawCursor()
 {
   AGPainter p;
-  mCursorOld=AGRect2(gAppCursorPos[0],gAppCursorPos[1],mCursor.width(),mCursor.height());
-  p.blit(mCursor,mCursorOld);
+  if(mCursor)
+    {
+      mCursorOld=AGRect2(gAppCursorPos[0],gAppCursorPos[1],mCursor->width(),mCursor->height());
+      p.blit(*mCursor,mCursorOld);
+    }
 
 }
 
@@ -294,12 +297,13 @@ bool AGApplication::eventMouseMotion(AGEvent *m)
 
 void AGApplication::setCursor(const AGTexture &pTexture)
 {
-  mCursor=pTexture;
+  mCursor=new AGTexture(pTexture);
   SDL_ShowCursor(0);
 }
 
 void AGApplication::setNormalCursor()
 {
   SDL_ShowCursor(1);
-  mCursor=AGTexture();
+  delete mCursor;
+  mCursor=0;
 }

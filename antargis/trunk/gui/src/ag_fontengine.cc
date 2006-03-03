@@ -22,6 +22,7 @@
 #include "ag_debug.h"
 #include "ag_kill.h"
 #include "ag_texture.h"
+#include "ag_fs.h"
 #include "sge.h"
 
 #include <SDL_ttf.h>
@@ -47,7 +48,6 @@ bool fontEngineInited=false;
 
 TTF_Font *getFont(std::string s,int i)
 {
-  //  TRACE;
   FontInfo info;
   info.pName=s;
   info.size=i;
@@ -57,12 +57,10 @@ TTF_Font *getFont(std::string s,int i)
 
   if(!fontEngineFonts[info])
     {
-      //    TRACE;
       TTF_Font *mFont=0;
       // init library
       if(!fontEngineInited)
 	{
-	  //    TRACE;
 	  fontEngineInited=true;
 	  if(TTF_Init()<0)
 	    {
@@ -73,22 +71,17 @@ TTF_Font *getFont(std::string s,int i)
 	  atexit(TTF_Quit);
 
 	}
-      //cdebug("opening");
-      // load
-      mFont=TTF_OpenFont(s.c_str(),i);
-      cdebug(mFont);
+
+      // first find file
+      std::string name=checkFileName(findFile(s));
+
+      if(!mFont)
+	mFont=TTF_OpenFont(name.c_str(),i);
       if(!mFont)
 	{
-	  //      TRACE;
-	  // Try another dir
-	  //  mFont=TTF_OpenFont((GRAPHICS_DIR + pName).c_str(),pSize);
-	  if(!mFont)
-	    mFont=TTF_OpenFont(("c:\\Windows\\Fonts\\"+ s).c_str(),i);
-	  if(!mFont)
-	    std::cerr<<s<<" Font not found!"<<std::endl;
+	  std::cerr<<" Font not found:"<<s<<std::endl;
+	  throw std::runtime_error(std::string("Font '")+s+"' not found!");
 	}
-      //	cdebug(mFont);
-      //      std::cerr<<SDL_GetError()<<std::endl;
       
       int renderstyle=TTF_STYLE_NORMAL;
       
@@ -117,7 +110,6 @@ std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
 
 void border(AGSurface &s,AGColor bc)
 {
-  TRACE;
   float *a=new float[s.width()*s.height()];
   float *b=new float[s.width()*s.height()];
 
@@ -256,7 +248,6 @@ void embossSurface(AGSurface &s,float depth=1.0f)
 	float v=b[y*w+x];
 
 	v/=3.0;
-	//	cdebug("v:"<<v);
 
 	AGColor c=s.getPixel(x,y);
 
@@ -294,8 +285,6 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 
   if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
     {
-      //      cdebug("render text");
-      cdebug(pText);
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       

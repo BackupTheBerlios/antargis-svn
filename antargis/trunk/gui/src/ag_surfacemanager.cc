@@ -178,6 +178,7 @@ void AGSurfaceManager::cleanup(bool force)
   std::copy(mGLTextures.begin(),mGLTextures.end(),std::back_inserter(gls));
 
   size_t texMem=0;
+  size_t texFreed=0;
 
   for(std::list<AGGLTexture*>::iterator i=gls.begin();i!=gls.end();)
     {
@@ -188,7 +189,7 @@ void AGSurfaceManager::cleanup(bool force)
 	    l->second->glTexture=0;
 	  delete *i;
 	  i=gls.erase(i);
-	  cdebug("yay");
+	  texFreed++;
 	}
       else
 	{
@@ -196,6 +197,7 @@ void AGSurfaceManager::cleanup(bool force)
 	  i++;
 	}
     }
+  cdebug("texFreed:"<<texFreed);
   cdebug("texMem:"<<texMem);
   
   mGLTextures.clear();

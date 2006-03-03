@@ -10,7 +10,7 @@
 		<image col="0" row="0" filename="data/gui/antargisLogo.png" enabled="false"/>
 		<table col="0" row="2" cols="3" rows="1">
 			<colsize col="0" relative="1"/>
-			<colsize col="1" relative="1"/>
+			<colsize col="1" relative="3"/>
 			<colsize col="2" relative="1"/>
 			<rowsize row="0" relative="1"/>
 			

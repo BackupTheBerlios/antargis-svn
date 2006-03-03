@@ -147,7 +147,7 @@ class Scene:public AGRubyObject
 typedef std::set<Scene*> Scenes;
 Scenes getScenes();
 
-void addToAllScenes(SceneNode *n);
-void removeFromAllScenes(SceneNode *n);
+//void addToAllScenes(SceneNode *n);
+//void removeFromAllScenes(SceneNode *n);
 
 #endif

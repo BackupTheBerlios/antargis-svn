@@ -21,7 +21,6 @@ class AnimMesh:public SceneNode
   AGMatrix4 mTransform;
   AGMatrix4 mComplete;
   AGVector4 mRot;
-  AGVector4 mPos;
   std::string mAnimName;
   Animation *mAnimation;
   AntEntity *entity;
@@ -48,8 +47,6 @@ class AnimMesh:public SceneNode
   virtual void drawDepth();
   virtual void drawPick();
   virtual void advance(float time);
-
-  AGBox3 bbox() const;
 	
   virtual void mark();
 

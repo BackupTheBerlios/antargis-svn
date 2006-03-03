@@ -20,7 +20,7 @@
 				<button col="2" row="0" theme="antButton" name="quit" caption-image="data/gui/door.png"/>
 			</table>
 			<layout col="0" row="1" filename="data/gui/layout/editorbuttons.xml"/>
-			<antInventory col="0" row="3">
+<!--			<antInventory col="0" row="3">
 				<table col="1" row="1" cols="2" rows="8" geometry="(4,4,208,208)">
 					<button theme="antButton" name="invTitle" geometry="(0,0,208,26)" enabled="false"/>
 					<text col="0" row="1" caption="Wood" align="left"/>
@@ -31,7 +31,7 @@
 					<text col="1" row="2" caption="0" align="right" name="stone"/>
 					<text col="1" row="3" caption="0" align="right" name="men"/>
 				</table>
-			</antInventory>
+			</antInventory>-->
 			<button col="0" row="4" theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
 			<cell col="0" row="5">
 				<frame col="0" row="5" border="button.border.normal">

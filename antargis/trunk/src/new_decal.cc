@@ -5,7 +5,7 @@
 
 
 NewDecal::NewDecal(Scene *pScene,AGVector2 pos,float size, HeightMap *pMap,const std::string &pTexture):
-  SceneNode(pScene),
+  SceneNode(pScene,AGVector4(),AGBox3()),
   mPos(pos),mSize(size),mMap(pMap),mTexture(getTextureCache()->get(pTexture))
 {
   setOrder(DECAL_Z);
@@ -15,16 +15,19 @@ NewDecal::NewDecal(Scene *pScene,AGVector2 pos,float size, HeightMap *pMap,const
 
 void NewDecal::init()
 {
-  mBBox=AGBox3();
+  AGBox3 bb;
+  //  bb=AGBox3();
   mArray.clear();
   // tesselate along map
   float x,y;
 
+  AGVector4 p=getPos();
+
   float s2=mSize/2;
-  float x0=-s2+mPos3[0];
-  float x1=s2+mPos3[0];
-  float y0=-s2+mPos3[1];
-  float y1=s2+mPos3[1];
+  float x0=-s2+p[0];
+  float x1=s2+p[0];
+  float y0=-s2+p[1];
+  float y1=s2+p[1];
 
 
   size_t xw,yw;
@@ -47,7 +50,7 @@ void NewDecal::init()
 	  
 	  
 	  mArray.addVertex(v,c,n,t);
-	  mBBox.include(v.dim3());
+	  bb.include(v.dim3());
 	  
 	  
 	  
@@ -106,6 +109,8 @@ void NewDecal::init()
   cdebug("XW:"<<xw);
   cdebug("YW:"<<yw);
   inited=true;
+
+  setBBox(bb);
 }
 
 void NewDecal::draw()
@@ -113,35 +118,24 @@ void NewDecal::draw()
   if(!inited)
     init();
   glPushMatrix();
-  //  glTranslatef(mPos3[0],mPos3[1],mPos3[2]);
+
 
   AGRenderContext c;
   c.setTexture(mTexture.glTexture());
-  /*
 
-  glEnable(GL_DEPTH_TEST);
-  glEnable(GL_ALPHA_TEST);
-
-  glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
-  */
-  //  glEnable(GL_POLYGON_OFFSET_FILL);
-  //  glPolygonOffset(1,1);
   mArray.draw();
-  //  glDisable(GL_POLYGON_OFFSET_FILL);
+
   glPopMatrix();
 }
 
 void NewDecal::setPos(const AGVector3&pPos)
 {
-  mPos3=pPos;
+  SceneNode::setPos(pPos);
+  //  mPos3=pPos;
   inited=false;
   init();
 }
 
-AGBox3 NewDecal::bbox() const
-{
-  return mBBox;
-}
 
 void NewDecal::mapChanged()
 {

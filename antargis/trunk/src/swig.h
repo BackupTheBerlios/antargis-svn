@@ -1387,7 +1387,7 @@ public:
 class SwigDirector_SceneNode : public SceneNode, public Swig::Director {
 
 public:
-    SwigDirector_SceneNode(VALUE self, Scene *s);
+    SwigDirector_SceneNode(VALUE self, Scene *s, AGVector4 const &pPos, AGBox3 const &pBox);
     virtual void setPos(AGVector3 const &pPos);
     virtual bool transparent();
     virtual void clear();
@@ -1421,8 +1421,8 @@ public:
     virtual void drawPick();
     virtual void resetScene();
     virtual ~SwigDirector_AnimMesh();
-    virtual AGRect2 getRect() const;
     virtual AGBox3 bbox() const;
+    virtual AGRect2 getRect() const;
     virtual size_t getTriangles() const;
     virtual AGVector4 lineHit(AGLine3 const &pLine) const;
     virtual void drawShadow();
@@ -1682,8 +1682,8 @@ public:
     virtual void drawPick();
     virtual void resetScene();
     virtual ~SwigDirector_Mesh();
-    virtual AGRect2 getRect() const;
     virtual AGBox3 bbox() const;
+    virtual AGRect2 getRect() const;
     virtual size_t getTriangles() const;
     virtual void draw();
     virtual void drawDepth();
@@ -1755,8 +1755,8 @@ public:
     virtual void resetScene();
     virtual ~SwigDirector_NewDecal();
     virtual size_t getTriangles() const;
-    virtual AGRect2 getRect() const;
     virtual AGBox3 bbox() const;
+    virtual AGRect2 getRect() const;
     virtual void mapChanged();
     virtual AGVector4 lineHit(AGLine3 const &pLine) const;
     virtual void drawShadow();
@@ -1789,8 +1789,8 @@ public:
     virtual void resetScene();
     virtual ~SwigDirector_Smoke();
     virtual size_t getTriangles() const;
-    virtual AGRect2 getRect() const;
     virtual AGBox3 bbox() const;
+    virtual AGRect2 getRect() const;
     virtual AGVector4 lineHit(AGLine3 const &pLine) const;
     virtual void drawShadow();
     virtual void drawDepth();
@@ -1811,9 +1811,9 @@ public:
     virtual void drawPick();
     virtual void resetScene();
     virtual ~SwigDirector_TerrainPieceVA();
+    virtual AGBox3 bbox() const;
     virtual AGRect2 getRect() const;
     virtual size_t getTriangles() const;
-    virtual AGBox3 bbox() const;
     virtual void mapChanged();
     virtual void draw();
     virtual void drawShadow();
@@ -1865,9 +1865,9 @@ public:
     virtual void drawPick();
     virtual void resetScene();
     virtual ~SwigDirector_WaterPiece();
+    virtual AGBox3 bbox() const;
     virtual AGRect2 getRect() const;
     virtual size_t getTriangles() const;
-    virtual AGBox3 bbox() const;
     virtual void mapChanged();
     virtual AGVector4 lineHit(AGLine3 const &pLine) const;
     virtual void drawShadow();

@@ -14,14 +14,22 @@ class Scene;
 #define TREE_Z 6
 #define PARTICLE_Z 7
 
+/**
+   A scenenode represents any part of a scene. It holds information
+   about position, drawing order, bounding box and visibility.
+   A scenenode is created for exactly one scene and it can't be
+   assigned to any other scene, which shouldn't be necessary.
 
+   Scene and SceneNode give each other information about their 
+   "destroy-state". That means the destructor notifies the other object.
+
+*/
 class SceneNode:public AGRubyObject
 {
  public:
-  SceneNode(Scene *s);
+  SceneNode(Scene *s,const AGVector4 &pPos,const AGBox3 &pBox);
   virtual ~SceneNode();
 
-//  virtual void setScene(Scene *s);
   virtual void resetScene();
   virtual void drawShadow();
   virtual void drawDepth();
@@ -33,12 +41,13 @@ class SceneNode:public AGRubyObject
   virtual size_t getTriangles() const;
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
   virtual void sort(const AGVector4 &pCamera);
-  //  virtual void mapChanged();
 
   bool operator==(const SceneNode &n) const;
 
   virtual void setPos(const AGVector3&pPos);
+  AGVector4 getPos() const;
   virtual void setRotation(float r);
+  void setBBox(const AGBox3 &pBox);
 
   virtual bool transparent();
 
@@ -56,10 +65,13 @@ class SceneNode:public AGRubyObject
   int getOrder() const;
   
  private:
-  int order;
+  int mOrder;
 
-  Scene *scene;
+  Scene *mScene;
   bool mVisible;
+
+  AGVector4 mPos;
+  AGBox3 mBBox;
 };
 
 typedef SceneNode *SceneNodePtr;

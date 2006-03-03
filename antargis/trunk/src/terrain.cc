@@ -6,30 +6,36 @@
 // TerrainPieceVA
 //////////////////////////////////////////////////////////////////////////
 TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos):
-  SceneNode(pScene),
+  SceneNode(pScene,AGVector4(),AGBox3()),//AGVector3(xs,ys,-10),AGVector3(xs+w,ys+h,30))),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map)
 {
   mTerrain=t;
   mapChanged();
   setOrder(TERRAIN_Z);
+  cdebug("const:"<<bbox());
 }
 
 void TerrainPieceVA::mapChanged()
 {
+  AGBox3 bb=bbox();
+
+  cdebug(bb);
+
   // first check, if this piece was really affected
-  if(mBBox.dir[0]>=0) // is bbox valid ?
+  if(bb.valid())
     {
-      AGRect2 r=AGRect2(AGVector2(mBBox.base[0],mBBox.base[1]),AGVector2(mBBox.base[0]+mBBox.dir[0],mBBox.base[1]+mBBox.dir[1]));
+      AGRect2 r=AGRect2(AGVector2(bb.base[0],bb.base[1]),AGVector2(bb.base[0]+bb.dir[0],bb.base[1]+bb.dir[1]));
 
       if(!r.collide(mMap->getChangeRect()))
 	{
+	  cdebug("early");
 	  return;
 	}
     }
 
 
-  mBBox=AGBox3();
+  bb=AGBox3();
   m3dArray.clear();
 
   AGVector4 white(1,1,1,1);
@@ -45,7 +51,6 @@ void TerrainPieceVA::mapChanged()
     for(y=mYs;y<=mYs+mH;y++)
       {
 	v=mMap->getVertex(x,y);
-	//	cdebug("V:"<<v.toString());
 
 	n=mMap->getNormal(x,y);
 
@@ -54,7 +59,7 @@ void TerrainPieceVA::mapChanged()
         tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
         m3dArray.addVertex(v,white,n,tp3);
 
-	mBBox.include(v.dim3());
+	bb.include(v.dim3());
       }
 
   for(x=mXs;x<mXs+mW;x++)
@@ -77,6 +82,8 @@ void TerrainPieceVA::mapChanged()
 	  }
 
       }
+  setBBox(bb);
+  cdebug(bb);
 }
 
 void TerrainPieceVA::drawShadow()
@@ -99,38 +106,17 @@ void TerrainPieceVA::drawPick()
   m3dArray.drawPick();
 }
 
-AGBox3 TerrainPieceVA::bbox() const
-{
-  return mBBox;
-}
-
 
 void TerrainPieceVA::draw()
 {
-  //  return;
   AGRenderContext c;
   c.setLighting(true);
   c.setTexture(mTerrain->get3dTexture()->glTexture());
   mTerrain->get3dTexture()->setFilter(GL_LINEAR,GL_LINEAR);
-  //  mTerrain->get3dTexture()->setClamp(GL_REPEAT,GL_REPEAT,GL_CLAMP_TO_EDGE);
 
   c.begin();
-  /*  glEnable(GL_LIGHTING);
 
-  glDisable(GL_TEXTURE_2D);
-  glEnable(GL_TEXTURE_3D);
-  mTerrain->get3dTexture()->bindTexture();
-
-  //  glBindTexture(GL_TEXTURE_3D,mTerrain->get3dTexture()->getTextureID());
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE );
-  */
   m3dArray.draw();
-  /*
-  glDisable(GL_TEXTURE_3D);
-  glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D,0);
-  */
 }
 
 
@@ -180,16 +166,12 @@ void Terrain::init()
 	tiles++;
       }
 
-  cdebug("TILES:"<<tiles);
   w=mMap->getW();
   h=mMap->getH();
 }
 
 void Terrain::mapChangedComplete()
 {
-  for(Nodes::iterator j=mNodes.begin();j!=mNodes.end();j++)
-      removeFromAllScenes(*j);
-
   for(Pieces::iterator i=pieces.begin();i!=pieces.end();i++)
     delete *i;
   for(WPieces::iterator i=water.begin();i!=water.end();i++)
@@ -201,7 +183,6 @@ void Terrain::mapChangedComplete()
 
 
   init();
-  addToScenes();
 }
 
 
@@ -213,7 +194,6 @@ Terrain::~Terrain()
 
 void Terrain::mapChanged()
 {
-  CTRACE;
   for(Pieces::iterator i=pieces.begin();i!=pieces.end();i++)
     {
       (*i)->mapChanged();
@@ -222,13 +202,6 @@ void Terrain::mapChanged()
     {
       (*i)->mapChanged();
     }
-}
-
-void Terrain::addToScenes()
-{
-  CTRACE;
-  for(Nodes::iterator j=mNodes.begin();j!=mNodes.end();j++)
-      addToAllScenes(*j);
 }
 
 AGTexture *Terrain::get3dTexture()

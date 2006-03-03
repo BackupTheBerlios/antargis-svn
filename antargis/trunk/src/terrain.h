@@ -37,7 +37,7 @@ class TerrainPieceVA:public SceneNode
   AGVector4 lineHit(const AGLine3 &pLine) const;
   size_t getTriangles() const;
 
-  virtual AGBox3 bbox() const;
+  //  virtual AGBox3 bbox() const;
 
   virtual void mapChanged();
   
@@ -45,7 +45,7 @@ class TerrainPieceVA:public SceneNode
 
   Terrain *mTerrain;
 
-  AGBox3 mBBox;
+  //  AGBox3 mBBox;
 
   size_t mXs,mYs;
   size_t mW,mH;
@@ -87,7 +87,7 @@ public:
 
   virtual bool slotMapChanged(AGEvent *e);
   virtual bool slotMapChangedComplete(AGEvent *e);
-  void addToScenes();
+  //  void addToScenes();
 
   AGTexture *get3dTexture();
   AGTexture *getGrassTexture();

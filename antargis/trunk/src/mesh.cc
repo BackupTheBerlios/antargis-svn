@@ -14,7 +14,7 @@
 //////////////////////////////////////////////////////////////////////
 
 Mesh::Mesh(Scene *pScene):
-  SceneNode(pScene)
+  SceneNode(pScene,AGVector4(),AGBox3())
 {
   mData=0;
   mRotation=0;
@@ -24,10 +24,9 @@ Mesh::Mesh(Scene *pScene):
 }
 
 Mesh::Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot):
-  SceneNode(pScene)
+  SceneNode(pScene,pPos,data.bbox())
 {
   mData=&data;
-  mPos=pPos;
   mRotation=pRot;
   setOrder(MESH_Z);
   mColor=AGVector4(1,1,1,1);
@@ -83,7 +82,8 @@ size_t Mesh::getTriangles() const
 void Mesh::begin()
 {
   glPushMatrix();
-  glTranslatef(mPos[0],mPos[1],mPos[2]);
+  AGVector4 p=getPos();
+  glTranslatef(p[0],p[1],p[2]);
   glRotatef(mRotation,0.0,0.0,1.0);
 }
 void Mesh::end()
@@ -97,7 +97,7 @@ AGVector4 Mesh::lineHit(const AGLine3 &pLine) const
   if(!mData)
     return AGVector4(0,0,0,0);
   AGMatrix4 rot(-mRotation*M_PI/180.0,AGVector3(0,0,1));
-  AGMatrix4 tr(-mPos);
+  AGMatrix4 tr(-getPos());
   AGMatrix4 complete=rot*tr;
   
   AGVector4 p0(pLine.getV0(),1);
@@ -106,16 +106,16 @@ AGVector4 Mesh::lineHit(const AGLine3 &pLine) const
   p0=complete*p0;
   p1=complete*p1;
   return mData->lineHit(AGLine3(AGVector3(p0[0],p0[1],p0[2]),
-				AGVector3(p1[0],p1[1],p1[2])))+AGVector4(mPos.dim3(),0);
+				AGVector3(p1[0],p1[1],p1[2])))+AGVector4(getPos().dim3(),0);
 }
 
-
+/*
 void Mesh::setPos(const AGVector3&pPos)
 {
   getScene()->prepareUpdate(this);
   mPos=AGVector4(pPos,1);
   getScene()->updatePos(this);
-}
+  }*/
 void Mesh::setRotation(float r)
 {
   mRotation=r;
@@ -125,12 +125,12 @@ MeshData *Mesh::getData()
 {
   return mData;
 }
-
+/*
 AGBox3 Mesh::bbox() const
 {
   // FIXME: ignore rotation for now
   return mData->bbox()+mPos.dim3();
-}
+  }*/
 
 void Mesh::drawPick()
 {

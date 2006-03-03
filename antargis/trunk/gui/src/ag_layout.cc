@@ -255,7 +255,6 @@ class AGTableLayoutCreator:public AGLayoutCreator
 
 AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect2 &geom)
 {
-  TRACE;
   AGTable *t;
   t=new AGTable(pParent,geom);
 
@@ -276,15 +275,15 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect2 &ge
 	{
 	  int id=toInt((*i)->get("col"));
 	  assert(id>=0 && id<w);
-	  cdebug("id:"<<id);
+	  //	  cdebug("id:"<<id);
 	  std::string s=(*i)->get("fixed");
-	  cdebug("fixed:"<<s);
+	  //	  cdebug("fixed:"<<s);
 	  if(s.length())
 	    cols[id]=std::make_pair(toFloat(s),true);
 	  else
 	    {
 	      s=(*i)->get("relative");
-	      cdebug("relative:"<<s);
+	      //	      cdebug("relative:"<<s);
 	      cols[id]=std::make_pair(toFloat(s),false);
 	    }
 	}
@@ -494,7 +493,6 @@ public:
 
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
-    CTRACE;
     std::string filename=pNode.get("filename");
 
     AGSurface s(0,0);

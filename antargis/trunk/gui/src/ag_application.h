@@ -74,7 +74,7 @@ class AGApplication:public AGMessageObject
   AGWidget *mainWidget;
   AGTooltip *mTooltip;
 
-  AGTexture mCursor;
+  AGTexture *mCursor;
   AGRect2 mCursorOld;
 
  public:

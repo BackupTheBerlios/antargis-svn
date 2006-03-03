@@ -13,8 +13,6 @@ class NewDecal:public SceneNode
   HeightMap *mMap;
   AGTexture mTexture;
   VertexArray mArray;
-  AGVector3 mPos3;
-  AGBox3 mBBox;
   bool inited;
 
  public:
@@ -22,7 +20,6 @@ class NewDecal:public SceneNode
   
   void setPos(const AGVector3&pPos);
   void draw();
-  AGBox3 bbox() const;
 
   void init();
   virtual void mapChanged();

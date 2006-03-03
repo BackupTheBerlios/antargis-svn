@@ -25,17 +25,14 @@ AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
   AGWidget(pWidget,pRect),
   w(0),h(0),xw(0),yw(0),mInserted(false)
 {
-  CTRACE;
 }
 
 AGTable::~AGTable()
 {
-  CTRACE;
 }
 
 void AGTable::addFixedColumn(float size)
 {
-  cdebug(size);
   if(mInserted)
     return;
   cols.push_back(std::make_pair(size,true));
@@ -43,7 +40,6 @@ void AGTable::addFixedColumn(float size)
 }
 void AGTable::addFixedRow(float size)
 {
-  cdebug(size);
   if(mInserted)
     return;
   rows.push_back(std::make_pair(size,true));
@@ -52,7 +48,6 @@ void AGTable::addFixedRow(float size)
 
 void AGTable::addColumn(float weight)
 {
-  cdebug(weight);
   if(mInserted || weight<=0.0f)
     return;
   cols.push_back(std::make_pair(weight,false));
@@ -62,7 +57,6 @@ void AGTable::addColumn(float weight)
 
 void AGTable::addRow(float weight)
 {
-  cdebug(weight);
   if(mInserted || weight<=0.0f)
     return;
   rows.push_back(std::make_pair(weight,false));
@@ -72,10 +66,11 @@ void AGTable::addRow(float weight)
 
 void AGTable::addChild(int px,int py,AGWidget *pWidget)
 {
-  cdebug("add:"<<pWidget);
   if(px>=w || py>=h || px<0 || py<0)
     {
-      cdebug("WARNING:wrong input position");
+      std::cerr<<"ERROR: wrong table-position:"<<px<<","<<py<<std::endl;
+      std::cerr<<"table size is:"<<w<<","<<h<<std::endl;
+      throw std::runtime_error("WARNING:wrong input position");
       return;
     }
 

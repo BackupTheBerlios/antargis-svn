@@ -17,15 +17,16 @@ extern std::ofstream out;
 class GLApp:public AGApplication
 {
   bool shadow;
-  int mx,my;
-  int omx,omy;
+  float mx,my;
+  float omx,omy;
   AGVector4 camera;
   float frameTime;
   size_t frameCount;
 
   bool mMayClick;
 
-  int hx,hy,hb;
+  float hx,hy;
+  int hb;
 
 protected:
   Scene scene;

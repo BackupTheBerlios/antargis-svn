@@ -2,24 +2,30 @@
 #include "scene.h"
 #include "ag_debug.h"
 
-SceneNode::SceneNode(Scene *s)
+SceneNode::SceneNode(Scene *s,const AGVector4 &pPos,const AGBox3 &b):
+  mPos(pPos),mBBox(b)
 {
   assert(s);
   mRubyObject=false;
-  scene=s;
+  mScene=s;
   mVisible=true;
-  order=1;
+  mOrder=1;
+
+  if(mScene)
+    mScene->addNode(this);
 }
 
 SceneNode::~SceneNode()
 {
   mRubyObject=false;
-  removeFromAllScenes(this);
+  if(mScene)
+    mScene->removeNode(this);
+  //  removeFromAllScenes(this);
 }
 
 void SceneNode::resetScene()
 {
-  scene=0;
+  mScene=0;
 }
 /*
 void SceneNode::setScene(Scene *s)
@@ -66,6 +72,9 @@ bool SceneNode::operator==(const SceneNode &n) const
 
 void SceneNode::setPos(const AGVector3&pPos)
 {
+  getScene()->prepareUpdate(this);
+  mPos=AGVector4(pPos,1);
+  getScene()->updatePos(this);
 }
 
 void SceneNode::setRotation(float r)
@@ -80,7 +89,8 @@ void SceneNode::setRotation(float r)
 
 AGBox3 SceneNode::bbox() const
 {
-  return AGBox3(AGVector3(0,0,0),AGVector3(0,0,0));
+  return mBBox+getPos().dim3();
+  //  return AGBox3(AGVector3(0,0,0),AGVector3(0,0,0));
 }
 
 AGRect2 SceneNode::getRect() const
@@ -92,14 +102,16 @@ AGRect2 SceneNode::getRect() const
 
 Scene *SceneNode::getScene()
 {
-  if(!scene)
+  if(!mScene)
     throw std::runtime_error("scene==0");
-  return scene;
+  return mScene;
 }
 
 void SceneNode::clear()
 {
-  removeFromAllScenes(this);
+  //  removeFromAllScenes(this);
+  if(mScene)
+    mScene->removeNode(this);
 }
 
 void SceneNode::setVisible(bool v)
@@ -113,9 +125,21 @@ bool SceneNode::visible() const
 
 void SceneNode::setOrder(int o)
 {
-  order=o;
+  mOrder=o;
 }
 int SceneNode::getOrder() const
 {
-  return order;
+  return mOrder;
+}
+
+AGVector4 SceneNode::getPos() const
+{
+  return mPos;
+}
+
+void SceneNode::setBBox(const AGBox3 &pBox)
+{
+  getScene()->prepareUpdate(this);
+  mBBox=pBox;
+  getScene()->updatePos(this);
 }

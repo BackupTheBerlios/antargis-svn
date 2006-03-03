@@ -1231,6 +1231,15 @@ AGRect2::AGRect2(float x,float y,float w,float h):
 {
 }
 
+AGRect2 AGRect2::alignGrid() const
+{
+  return AGRect2((int)x(),
+		 (int)y(),
+		 (int)w(),
+		 (int)h());
+}
+
+
 void AGRect2::check() const
 {
   float mx0=std::min(x0(),x1());
@@ -2228,11 +2237,21 @@ AGBox3::AGBox3(const AGVector3 &pBase,const AGVector3 &pDir):
 	base[i]+=dir[i];
 	dir[i]=-dir[i];
       }
+  mValid=true;
 }
 
-AGBox3::AGBox3():base(AGVector3(0,0,0)),dir(AGVector3(-1,0,0))
+
+
+AGBox3::AGBox3():base(AGVector3(0,0,0)),dir(AGVector3(0,0,0))
 {
+  mValid=false;
 }
+
+bool AGBox3::valid() const
+{
+  return mValid;
+}
+
 
 bool AGBox3::collides(const AGMatrix4 &frustum) const
 {
@@ -2300,19 +2319,30 @@ std::vector<AGVector4> AGBox3::getVertices() const
   return a;
 }
 
+AGBox3 AGBox3::operator-(const AGVector3 &v) const
+{
+  if(valid())
+    return AGBox3(base-v,dir);
+  else
+    return AGBox3();
+}
 AGBox3 AGBox3::operator+(const AGVector3 &v) const
 {
-  return AGBox3(base+v,dir);
+  if(valid())
+    return AGBox3(base+v,dir);
+  else
+    return AGBox3();
 }
 
 
 
 void AGBox3::include(const AGVector3&p)
 {
-  if(dir[0]<0)
+  if(!mValid)
     {
       base=p;
       dir=AGVector3(0,0,0);
+      mValid=true;
       return;
     }
   AGVector3 b=base,b2=base+dir;
@@ -2485,5 +2515,11 @@ std::ostream &operator<<(std::ostream &o,const AGVector4&v)
 std::ostream &operator<<(std::ostream &o,const AGRect2&v)
 {
   o<<v.toString();
+  return o;
+}
+
+std::ostream &operator<<(std::ostream &o,const AGBox3&v)
+{
+  o<<"("<<v.base<<" "<<v.dir<<"/"<<v.valid()<<")";
   return o;
 }

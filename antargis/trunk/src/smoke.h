@@ -21,10 +21,7 @@ class Smoke:public SceneNode
   float maxtime,freq;
   float mtime;
   float stime;
-  AGVector3 p;
   bool fire;
-
-  AGBox3 mBBox;
 
   AGTexture mTexture;
 
@@ -39,10 +36,6 @@ class Smoke:public SceneNode
   {
     return true;
   }
-
-  AGBox3 bbox() const;
-
-  virtual void setPos(const AGVector3&pPos);
 
   void draw();
 };

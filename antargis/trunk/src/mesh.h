@@ -11,7 +11,6 @@
 class Mesh:public SceneNode
 {
   MeshData *mData;
-  AGVector4 mPos;
   float mRotation;
   AGVector4 mColor;
   bool mVisible;
@@ -26,12 +25,11 @@ class Mesh:public SceneNode
   void drawShadow();
   void drawPick();
 
-  AGBox3 bbox() const;
+  //  AGBox3 bbox() const;
 
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
 
   virtual size_t getTriangles() const;
-  void setPos(const AGVector3&pPos);
   void setRotation(float r);
   void setColor(const AGVector4 &pColor);
   void setVisible(bool v);

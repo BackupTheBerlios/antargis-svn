@@ -11,14 +11,13 @@ float randf()
 }
 
 Smoke::Smoke(Scene *pScene,float f):
-  SceneNode(pScene)
+  SceneNode(pScene,AGVector4(),AGBox3(AGVector3(-0.5,-0.5,0),AGVector3(1,1,10)))
 {
   maxtime=20;
 
   mtime=0;
   freq=f;
   stime=1/freq;
-  p=AGVector3(0,0,0);
   mTexture=getTextureCache()->get("data/textures/point.png");
   fire=false;
   setOrder(PARTICLE_Z);
@@ -66,7 +65,7 @@ void Smoke::advance(float time)
 
       if(fire)
 	{
-	  ps->pos=p;
+	  ps->pos=getPos().dim3();
 	  ps->lived=-timevar*randf();
 	  ps->light=randf()*0.8+0.2;//5+0.5;
 	  ps->size=randf()*0.05+0.1;
@@ -75,7 +74,7 @@ void Smoke::advance(float time)
 	}
       else
 	{
-	  ps->pos=p;
+	  ps->pos=getPos().dim3();
 	  ps->lived=-timevar*randf();
 	  ps->light=randf()*0.2+0.2;//5+0.5;
 	  ps->size=randf()*0.1+0.2;
@@ -96,7 +95,7 @@ void Smoke::draw()
   glEnable(GL_BLEND);
   glDepthMask(false);
   */
-  AGVector3 dir=getRenderer()->getCurrentScene()->getCameraDirTo(p);
+  AGVector3 dir=getRenderer()->getCurrentScene()->getCameraDirTo(getPos().dim3());
 
   //  cdebug(dir);
 
@@ -164,7 +163,7 @@ void Smoke::draw()
 }
 
 
-void Smoke::setPos(const AGVector3&pPos)
+/*void Smoke::setPos(const AGVector3&pPos)
 {
   p=pPos;  
   mBBox=AGBox3(p+AGVector3(-0.5,-0.5,0),AGVector3(1,1,10));
@@ -174,3 +173,4 @@ AGBox3 Smoke::bbox() const
 {
   return mBBox;
 }
+*/
