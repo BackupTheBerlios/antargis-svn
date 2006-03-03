@@ -24,6 +24,7 @@
 #include "ag_main.h"
 #include "ag_debug.h"
 #include "ag_mixer.h"
+#include "ag_texturecache.h"
 
 void disableKeyrepeat()
 {
@@ -31,6 +32,8 @@ void disableKeyrepeat()
 }
 
 AGApplication *gApplication=0;
+
+AGVector2 gAppCursorPos;
 
 AGApplication *getApplication()
 {
@@ -42,6 +45,8 @@ AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTo
 
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
+  mCursor=getTextureCache()->get("blue_cursor.png");
+  SDL_ShowCursor(0);
 }
 
 AGApplication::~AGApplication()
@@ -108,7 +113,7 @@ bool AGApplication::run()
 	draw();
       }
       
-      drawCursor();
+      //      drawCursor();
       eventFrameEnd((now-last)/1000.0);
       last=now;
     }
@@ -141,6 +146,10 @@ void AGApplication::clearOldMousePosition()
 }
 void AGApplication::drawCursor()
 {
+  AGPainter p;
+  mCursorOld=AGRect2(gAppCursorPos[0],gAppCursorPos[1],mCursor.width(),mCursor.height());
+  p.blit(mCursor,mCursorOld);
+
 }
 
 void AGApplication::flushEventQueue()
@@ -181,6 +190,7 @@ void AGApplication::draw()
       if(pLastDrawn==mainWidget && !opengl())
 	{
 	  AGRect2 r=mainWidget->getChangeRect();
+	  r+=mCursorOld;
 	  //	  cdebug(r);
 	  p.clip(r);
 	  //	  p.fillRect(AGRect2(0,0,getMain()->width(),getMain()->height()),AGColor(0,0,0));
@@ -197,6 +207,7 @@ void AGApplication::draw()
 
       pLastDrawn=mainWidget;
     }
+  drawCursor();
   getScreen().flip();
   endRender();
 }
@@ -272,4 +283,23 @@ void AGApplication::resetTooltip(AGTooltip *pTooltip)
       delete mTooltip;
       mTooltip=0;
     }
+}
+
+bool AGApplication::eventMouseMotion(AGEvent *m)
+{
+  gAppCursorPos=m->getMousePosition();
+  return AGMessageObject::eventMouseMotion(m);
+}
+
+
+void AGApplication::setCursor(const AGTexture &pTexture)
+{
+  mCursor=pTexture;
+  SDL_ShowCursor(0);
+}
+
+void AGApplication::setNormalCursor()
+{
+  SDL_ShowCursor(1);
+  mCursor=AGTexture();
 }

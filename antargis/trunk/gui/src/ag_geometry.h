@@ -417,6 +417,8 @@ class AGRect2
   AGRect2 &operator+=(const AGVector2 &v);
   AGRect2 &operator-=(const AGVector2 &v);
 
+  AGRect2& operator+=(const AGRect2 &r);
+
   bool contains(const AGVector2 &v) const;
   bool contains(const AGRect2 &v) const;
 

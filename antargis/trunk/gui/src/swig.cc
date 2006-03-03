@@ -5050,21 +5050,6 @@ bool SwigDirector_AGApplication::eventMouseButtonDown(AGEvent *m) {
 }
 
 
-bool SwigDirector_AGApplication::eventMouseMotion(AGEvent *m) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGMessageObject::eventMouseMotion(m);
-    }
-    obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 bool SwigDirector_AGApplication::eventKeyUp(AGEvent *m) {
     VALUE obj0 = Qnil ;
     bool c_result ;
@@ -5150,6 +5135,21 @@ bool SwigDirector_AGApplication::eventKeyDown(AGEvent *m2) {
     }
     obj0 = SWIG_NewPointerObj((void *) m2, SWIGTYPE_p_AGEvent,0);
     result = rb_funcall(swig_get_self(), rb_intern("eventKeyDown"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGApplication::eventMouseMotion(AGEvent *m) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGApplication::eventMouseMotion(m);
+    }
+    obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseMotion"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
@@ -31588,6 +31588,27 @@ _wrap_AGApplication_eventKeyDown(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGApplication_eventMouseMotion(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    AGEvent *arg2 = (AGEvent *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGEvent, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventMouseMotion(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGApplication_eventChangedRes(int argc, VALUE *argv, VALUE self) {
     AGApplication *arg1 = (AGApplication *) 0 ;
     Swig::Director *director = 0;
@@ -31722,6 +31743,34 @@ _wrap_AGApplication_resetTooltip(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 0);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTooltip, 0);
     (arg1)->resetTooltip(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_setCursor(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    AGTexture *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGTexture, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    (arg1)->setCursor((AGTexture const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGApplication_setNormalCursor(int argc, VALUE *argv, VALUE self) {
+    AGApplication *arg1 = (AGApplication *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGApplication, 0);
+    (arg1)->setNormalCursor();
     
     return Qnil;
 }
@@ -46502,6 +46551,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGApplication.klass, "eventFrameEnd", VALUEFUNC(_wrap_AGApplication_eventFrameEnd), -1);
     rb_define_method(cAGApplication.klass, "eventQuit", VALUEFUNC(_wrap_AGApplication_eventQuit), -1);
     rb_define_method(cAGApplication.klass, "eventKeyDown", VALUEFUNC(_wrap_AGApplication_eventKeyDown), -1);
+    rb_define_method(cAGApplication.klass, "eventMouseMotion", VALUEFUNC(_wrap_AGApplication_eventMouseMotion), -1);
     rb_define_method(cAGApplication.klass, "eventChangedRes", VALUEFUNC(_wrap_AGApplication_eventChangedRes), -1);
     rb_define_method(cAGApplication.klass, "setMainWidget", VALUEFUNC(_wrap_AGApplication_setMainWidget), -1);
     rb_define_method(cAGApplication.klass, "draw", VALUEFUNC(_wrap_AGApplication_draw), -1);
@@ -46511,6 +46561,8 @@ SWIGEXPORT void Init_libantargisgui(void) {
     rb_define_method(cAGApplication.klass, "delay", VALUEFUNC(_wrap_AGApplication_delay), -1);
     rb_define_method(cAGApplication.klass, "setTooltip", VALUEFUNC(_wrap_AGApplication_setTooltip), -1);
     rb_define_method(cAGApplication.klass, "resetTooltip", VALUEFUNC(_wrap_AGApplication_resetTooltip), -1);
+    rb_define_method(cAGApplication.klass, "setCursor", VALUEFUNC(_wrap_AGApplication_setCursor), -1);
+    rb_define_method(cAGApplication.klass, "setNormalCursor", VALUEFUNC(_wrap_AGApplication_setNormalCursor), -1);
     rb_define_method(cAGApplication.klass, "mark", VALUEFUNC(_wrap_AGApplication_mark), -1);
     cAGApplication.mark = (void (*)(void *)) general_markfunc;
     cAGApplication.destroy = (void (*)(void *)) free_AGApplication;

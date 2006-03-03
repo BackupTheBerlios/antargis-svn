@@ -24,6 +24,7 @@
 #include <ag_messageobject.h>
 #include <ag_widget.h>
 #include <ag_tooltip.h>
+#include <ag_texture.h>
 
 class AGApplication:public AGMessageObject
 {
@@ -41,6 +42,7 @@ class AGApplication:public AGMessageObject
 
   virtual bool eventQuit(AGEvent *m);
   virtual bool eventKeyDown(AGEvent *m2);
+  virtual bool eventMouseMotion(AGEvent *m);
 
   virtual void eventChangedRes();
 
@@ -56,6 +58,9 @@ class AGApplication:public AGMessageObject
 
   void setTooltip(AGTooltip *pTooltip); // transfers ownage !
   void resetTooltip(AGTooltip *pTooltip); // try to reset this one
+
+  void setCursor(const AGTexture &pTexture);
+  void setNormalCursor();
   
  private:
   void clearOldMousePosition();
@@ -68,6 +73,9 @@ class AGApplication:public AGMessageObject
   bool mIdleCalls;
   AGWidget *mainWidget;
   AGTooltip *mTooltip;
+
+  AGTexture mCursor;
+  AGRect2 mCursorOld;
 
  public:
   void mark();

@@ -138,7 +138,8 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def getEnergy
 		if @men.length==0
-			raise "ERROR"
+			puts "ERROR - no men"
+			return 1
 		end
 		return @states["fight"].length.to_f/@men.length
 	end

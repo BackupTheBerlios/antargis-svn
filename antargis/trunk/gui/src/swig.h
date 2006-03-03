@@ -369,13 +369,13 @@ public:
     virtual bool eventQuitModal(AGEvent *m);
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseButtonDown(AGEvent *m);
-    virtual bool eventMouseMotion(AGEvent *m);
     virtual bool eventKeyUp(AGEvent *m);
     virtual bool eventActive(AGEvent *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool signal(AGEvent *m);
     virtual bool eventQuit(AGEvent *m);
     virtual bool eventKeyDown(AGEvent *m2);
+    virtual bool eventMouseMotion(AGEvent *m);
     virtual void mark();
     virtual void clear();
     virtual bool eventFrame(float pTime);

@@ -1245,6 +1245,19 @@ void AGRect2::check() const
   p->v1[1]=my1;
 }
 
+AGRect2& AGRect2::operator+=(const AGRect2 &r)
+{
+  if(width()==0 || height()==0)
+    *this=r;
+  else
+    {
+      include(r[0]);
+      include(r[1]);
+    }
+  return *this;
+}
+
+
 
 AGRect2 AGRect2::intersect(const AGRect2 &r) const
 {

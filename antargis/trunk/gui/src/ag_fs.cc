@@ -76,6 +76,10 @@ void initFS(const char *argv0)
 
 #endif
   addPath("data");
+#ifndef WIN32
+  addPath("/usr/local/share/antargisgui/pics");
+  addPath("/usr/local/share/antargisgui");
+#endif
   addPath(getWriteDir());
 }
 

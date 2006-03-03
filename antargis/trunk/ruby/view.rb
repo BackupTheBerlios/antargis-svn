@@ -167,7 +167,11 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			return
 		elsif job=="doMove" then
 			# FIXME: exchange with good position estimation
-			doMove(list[0].node.getPos2D)
+			mesh=list[0].node
+			e=getMap.getEntity(mesh)
+			if e
+				doMove(e.getPos2D)
+			end
 		elsif job=="doRecruit" then
 			#displayError("not allowed")
 			puts "RECRUITING"
