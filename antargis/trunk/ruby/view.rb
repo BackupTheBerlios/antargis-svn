@@ -333,8 +333,8 @@ class AntInventory<AGWidget
 		@bg.draw(getRect.origin,p)
 		updateInspection
 		super(p)
-		@bg.draw(p)
-		@border.draw(p)
+		@bg.draw(getRect.origin,p)
+		@border.draw(getRect.origin,p)
 		#p.fillRect(AGRect2.new(-10,-10,300,300),AGColor.new(0xFF,0,0))
 		if not @invinited
 			addHandler(getChild("inspect"),:sigClick,:eventInspect)
