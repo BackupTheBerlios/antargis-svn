@@ -13,14 +13,11 @@ TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,in
   mTerrain=t;
   mapChanged();
   setOrder(TERRAIN_Z);
-  cdebug("const:"<<bbox());
 }
 
 void TerrainPieceVA::mapChanged()
 {
   AGBox3 bb=bbox();
-
-  cdebug(bb);
 
   // first check, if this piece was really affected
   if(bb.valid())
@@ -29,7 +26,6 @@ void TerrainPieceVA::mapChanged()
 
       if(!r.collide(mMap->getChangeRect()))
 	{
-	  cdebug("early");
 	  return;
 	}
     }
@@ -83,7 +79,6 @@ void TerrainPieceVA::mapChanged()
 
       }
   setBBox(bb);
-  cdebug(bb);
 }
 
 void TerrainPieceVA::drawShadow()
