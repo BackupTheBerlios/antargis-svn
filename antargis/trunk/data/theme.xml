@@ -135,7 +135,7 @@
 		</buttons>
 		<background>
 			<value name="border" value="0"/>
-			<image name="image" file="data/gui/rock.png"/>
+			<image name="image" file="data/gui/paper2.png"/>
 			<!--
 			<color name='gradientColor1' color='#54555b'/>
 			<color name='gradientColor2' color='#3c3d41'/>
