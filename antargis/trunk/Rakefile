@@ -25,6 +25,13 @@ def windows
 	return $mwindows
 end
 
+$failed_libs=[]
+def test_library(x)
+	if not have_library(x)
+		$failed_libs.push(x)
+	end
+end
+
 windows # check once
 
 if File.exists?("config.rb")
@@ -35,25 +42,34 @@ else
 	if windows
 		$LDFLAGS+=" -LC:/msys/local/lib"
 	end
-	#find_library('SDL',nil,'/usr/local/lib:/usr/lib:/usr/lib/SDL')
-	have_library('SDL')
-	have_library('SDL_ttf')
-	have_library('SGE')
+	test_library('SDL')
+	test_library('SDL_ttf')
+	test_library('SGE')
 	if windows
-		have_library('GLU32')
+		test_library('GLU32')
 	else
-		have_library("GLU")
-		have_library("GL")
+		test_library("GLU")
+		test_library("GL")
 	end
-	have_library('physfs')
-	have_library('SDL_mixer')
-	have_library('SDL_image')
-	have_library('stdc++')
-	have_library('z')
-	have_library('png')
-	#have_library('ruby1.8')
+	test_library('SDL_mixer')
+	test_library('SDL_image')
+	test_library('stdc++')
+	test_library('z')
+	test_library('png')
 	if windows
-		have_library('msvcrt-ruby18')
+		test_library('msvcrt-ruby18')
+	end
+
+	if $failed_libs.length>0
+		puts "----------------------------------------------------------------------"
+		puts "| ERROR:"
+		puts "| Following libraries failed when compiling:"
+		puts "| " +$failed_libs.join(" ")
+		puts "| Please install the corresponding packages and the development packages."
+		puts "| On Debian this would be something like:"
+		puts "| apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf1.2-dev libsdl-mixer1.2-dev ruby1.8-dev libsdl-sge-dev"
+		puts "----------------------------------------------------------------------"
+		exit
 	end
 	
 	$swig = with_config('swig', 'swig')
