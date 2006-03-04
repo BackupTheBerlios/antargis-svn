@@ -1,4 +1,4 @@
-<campaign image="data/gui/map1.png" name="Wolf's lair" description="The story of Antargis begins">
+<campaign image="data/gui/map1.png" name="Wolf's lair" description="The story of Antargis begins" enabled="false">
 	<cutscene>
 		<screen>
 			<image filename="data/gui/map1.png"/>

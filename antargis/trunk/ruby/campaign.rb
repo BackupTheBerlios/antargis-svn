@@ -7,7 +7,7 @@ def getCampaignFiles
 end
 
 def getCampaigns
-	$campaigns||=getCampaignFiles.collect{|f|Campaign.new(f)}
+	$campaigns||=getCampaignFiles.collect{|f|Campaign.new(f)}.select{|f|f.enabled}
 end
 
 class CampaignLevel
@@ -190,11 +190,11 @@ class CutScene
 end
 
 class Campaign
-	attr_reader :name, :image, :imageName, :description, :texture
+	attr_reader :name, :image, :imageName, :description, :texture, :enabled
 	def initialize(filename)
 		@doc=Document.new(filename)
 		@xmlRoot=@doc.root
-		
+		@enabled=(@xmlRoot.get("enabled")!="false")
 		@name=@xmlRoot.get("name")
 		@imageName=@xmlRoot.get("image")
 		@image=AGSurface.load(@imageName)
