@@ -81,10 +81,7 @@ AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
   int videoFlags=0;
 
   if(openGL)
-    {
-      videoFlags|=SDL_OPENGL;
-      cdebug("initing opengl");
-    }
+    videoFlags|=SDL_OPENGL;
   else
     videoFlags|=SDL_SWSURFACE;
 

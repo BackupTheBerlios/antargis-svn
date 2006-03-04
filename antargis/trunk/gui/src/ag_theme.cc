@@ -92,8 +92,6 @@ void loadDefaultTheme()
   
   if(!mTheme)
     mTheme=new AGTheme;
-
-  debug(mTheme);
 }
 
 void setTheme(const AGTheme &t)
@@ -178,12 +176,10 @@ void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
 	      f.setInset((*i)->get("inset")=="true");
 	      if((*i)->get("style")=="bold")
 		f.setStyle(AGFont::BOLD);
-	      //	      if((*i)->get("borderColor"))
 	      f.setBorderColor(AGColor((*i)->get("borderColor")));
 	      f.setBorder(toInt((*i)->get("borderWidth")));
 
 	      t.setFont(sname,f);
-	      cdebug("setting font:"<<sname);
 	    }
 	}
       else

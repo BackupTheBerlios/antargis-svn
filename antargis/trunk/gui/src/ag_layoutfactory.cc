@@ -51,8 +51,11 @@ AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const x
 {
   if(mCreators[pNode.getName()])
     return mCreators[pNode.getName()]->create(pParent,pRect,pNode);
-  if(pNode.getName()!="")
-    cdebug("no creation at:"<<pNode.getName());
+  std::string name;
+  if(name!="" && name!="colsize" && name!="rowsize")
+    {
+      cdebug("no creation at:"<<name);
+    }
   return 0;
 }
   

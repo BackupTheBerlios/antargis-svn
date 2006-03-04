@@ -57,7 +57,6 @@ class AntMenuApp <AGApplication
 	end
 	
 	def setupMain()
-		puts "SETUPMAIN"
 		@mainMenu=AGLayout.new($screen,loadFile("data/gui/layout/mainmenu.xml"))
 		@menues.push(@mainMenu)
 		setMainWidget(@mainMenu)
@@ -67,19 +66,15 @@ class AntMenuApp <AGApplication
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)
 		addHandler(@mainMenu.getChild("campaign"),:sigClick,:eventCampaign)
 		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
-		
-		puts "SETUPMAIN."
 	end
 	
 	def setupCredits
-		puts "SETUPCREDITS"
 		@creditsMenu=AGLayout.new($screen,loadFile("data/gui/layout/credits.xml"))
 		@menues.push(@creditsMenu)
 		addHandler(@creditsMenu.getChild("exit"),:sigClick,:eventExit)
 	end
 	
 	def setupCampaign
-		puts "SETUPCAMPAIGN"
 		@campaignMenu=AGLayout.new($screen,loadFile("data/gui/layout/campaign.xml"))
 		@menues.push(@campaignMenu)
 		addHandler(@campaignMenu.getChild("exit"),:sigClick,:eventExit)
@@ -103,7 +98,6 @@ class AntMenuApp <AGApplication
 	end
 	
 	def setupOptions
-		puts "SETUPOPTIONS"
 		@optionsMenu=AGLayout.new($screen,loadFile("data/gui/layout/options.xml"))
 		@menues.push(@optionsMenu)
 		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)

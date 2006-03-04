@@ -295,7 +295,7 @@ def startGame(file="savegames/savegame0.antlvl")
 	GC.start
 	return result
 end
-puts ENV["_"]
+
 if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
 	if ARGV.length>0
@@ -305,8 +305,7 @@ if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/
 			savegame="savegames/"+ARGV[0]+".antlvl"  # was levels/
 		end
 	end
-	puts savegame
+	puts "LOADING:"+savegame
 	startGame(savegame)	
 end
-puts "huhu"
 

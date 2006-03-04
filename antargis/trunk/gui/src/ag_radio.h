@@ -45,10 +45,9 @@ class AGRadioGroup:public AGWidget
 class AGRadio:public AGCheckBox
 {
  public:
-  AGRadio(AGWidget *pParent,AGRect2 pRect);//,AGRadioGroup *pGroup,std::string pName);
+  AGRadio(AGWidget *pParent,AGRect2 pRect);
   virtual ~AGRadio();
 
-  //  bool eventMouseClick(const AGEvent *m);
   void setGroup(AGRadioGroup *pGroup);
   bool eventMouseClick(AGEvent *m);
   

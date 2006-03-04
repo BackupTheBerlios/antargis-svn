@@ -45,7 +45,6 @@ class CampaignLevel
 		$inventory=nil
 
 		$screen=nil
-		puts "CampaignLevel::GC start"
 		GC.start
 		
 		case @result.won
@@ -150,7 +149,6 @@ class CutScene
 	attr_reader :finished
 	def initialize(node)
 		@screens=[]
-		puts node.getName
 		node.getChildren("screen").each{|s|
 			screen={}
 			screen[:text]=""
@@ -237,8 +235,6 @@ class Campaign
 			p.save(c)
 		}
 		
-		puts doc.toString
-		#exit
 		saveFile(filename,doc.toString)
 	end
 	
@@ -253,8 +249,6 @@ class Campaign
 		@partID=0
 	end
 end
-
-#getCampaigns.each{|c|puts c.name+" "+c.imageName}
 
 def startCampaign(campaign)
 	campaign=campaign.dup # copy
@@ -271,10 +265,7 @@ def continueCampaign(campaign)
 				break
 			end
 		end
-		puts "RESULT:",part.result.won
-		#exit
-
-	end while part.result.won!="canceled" #finished!="quit"
-	campaign.save("campaign0.antcmp")
+	end while part.result.won!="canceled"
+	campaign.save("campaign0.antcmp") # FIXME:test save
 	$campaign=nil
 end

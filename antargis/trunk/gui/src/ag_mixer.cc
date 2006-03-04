@@ -108,7 +108,6 @@ void closeSoundEngine()
 
 AGSound::~AGSound()
 { 
-  CTRACE;
   closeSoundEngine();
 }
 
@@ -117,9 +116,6 @@ bool AGSound::playMp3(const std::string &pFilename)
   if(mMusic)
     {
       return false;
-      // free
-      //      Mix_FreeMusic(mMusic);
-      //      mMusic=0;
     }
   initSoundEngine();
   // load the MP3 file "music.mp3" to play as music

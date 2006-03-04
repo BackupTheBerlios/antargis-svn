@@ -45,9 +45,9 @@ module AGHandler
 		end
 		#puts event
 		if object==nil then
-			puts "AGHandler.addHandler: does not exist!"
+			#puts "AGHandler.addHandler: does not exist!"
 		else
-			puts "MY CLASS:",self.class
+			#puts "MY CLASS:",self.class
 			object.send(event).connect(self)
 			if @handlers[object.getName+":"+event.to_s]==nil
 				@handlers[object.getName+":"+event.to_s]=[]

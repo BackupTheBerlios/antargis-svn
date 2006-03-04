@@ -56,16 +56,10 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
   parseChildren(this,p.root());
 
 
-      cdebug(mTabIndices.size());
   if(mTabIndices.size())
     {
-      CTRACE;
-      cdebug(mTabIndices.size());
-      cdebug("GAINFOCUS::::::::::::");
       AGWidget *w=mTabIndices.begin()->second;
-      cdebug(w->getName());
       w->gainCompleteFocus(); // is ok, because till here layout isn't inserted into screen yet
-      //      assert(w->hasFocus());
     }
 }
 
@@ -73,7 +67,6 @@ bool AGLayout::eventKeyDown(AGEvent *m)
 {
   if(m->getKey()==SDLK_TAB)
     {
-      CTRACE;
       // search element, which has focus
       std::map<int,AGWidget*>::iterator i=mTabIndices.begin();
 
@@ -311,7 +304,6 @@ AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect2 &ge
 
   for(int k=0;k<w;k++)
     {
-      cdebug("cols:"<<cols[k].first<<"/////"<<cols[k].second);
       if(cols[k].first==0.0f) // not inited
 	t->addColumn(1.0f);
       else if(cols[k].second)

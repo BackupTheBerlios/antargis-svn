@@ -37,12 +37,10 @@ AGRadioGroup::~AGRadioGroup()
 
 void AGRadioGroup::eventChange(const std::string &p)
 {
-  CTRACE;
   std::set<AGRadio*>::iterator i=mChildren.begin();
 
   for(;i!=mChildren.end();i++)
     {
-      cdebug((*i)->getName());
       if((*i)->getName()!=p)
 	(*i)->deselect();
     }
@@ -63,10 +61,7 @@ void AGRadioGroup::erase(AGRadio *r)
 
 
 
-
-
-
-AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect)://,AGRadioGroup *pGroup,std::string pName):
+AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect):
   AGCheckBox(pParent,pRect),mGroup(0)
 {
   // search mGroup
@@ -77,7 +72,6 @@ AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect)://,AGRadioGroup *pGroup,std::s
       g=dynamic_cast<AGRadioGroup*>(w);
       w=w->getParent();
     }
-  cdebug("G:"<<g);
   if(g)
     mGroup=g;
 
@@ -90,24 +84,6 @@ AGRadio::~AGRadio()
   if(mGroup)
     mGroup->erase(this);
 }
-/*
-bool AGRadio::eventMouseClick(const AGEvent *m)
-{
-  CTRACE;
-  if(!isChecked())
-    {
-      setChecked(true);
-      cdebug("name:"<<getName());
-      cdebug("type:"<<typeid(*this).name());
-      //      mChecked=true;
-      //      mImage->setSurface(getTheme()->getSurface(mType+".checked"));
-      if(mGroup)
-	mGroup->eventChange(getName());
-    }
-
-  cdebug(isChecked());
-  return AGWidget::eventMouseClick(m);
-}*/
 
 void AGRadio::setChecked(bool pChecked)
 {
@@ -126,7 +102,6 @@ void AGRadio::setChecked(bool pChecked)
 
 void AGRadio::deselect()
 {
-  CTRACE;
   setChecked(false);
 }
 
@@ -137,11 +112,10 @@ void AGRadio::setGroup(AGRadioGroup *pGroup)
 
 bool AGRadio::eventMouseClick(AGEvent *m)
 {
-  CTRACE;
   if(!isChecked())
     setChecked(true);
 
-  return AGButton::eventMouseClick(m);//false;//true; // eat
+  return AGButton::eventMouseClick(m);
 }
 
 
@@ -156,7 +130,6 @@ public:
 
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
-    CTRACE;
     AGRadioGroup *l=new AGRadioGroup(pParent,pRect);
 
     return l;
@@ -172,7 +145,6 @@ public:
 
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
-    CTRACE;
     AGRadio *b=new AGRadio(pParent,pRect);
     std::string caption=pNode.get("caption");
     if(caption.length())

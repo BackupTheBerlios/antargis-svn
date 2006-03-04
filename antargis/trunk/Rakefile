@@ -110,7 +110,6 @@ if $ccache!=""
 end
 $CXX=$ccache+"g++"
 $CC=$ccache+"gcc"
-puts windows
 if not windows
 	$CFLAGS=`sdl-config --cflags`.chomp
 	$LDFLAGS=`sdl-config --libs`.chomp+" "+$libs
@@ -167,9 +166,6 @@ SRCS.each{|s|
 
 myInterfaces=interfaceHeaders.collect{|x|"src/"+x}+["src/interface.i"]
 
-puts myInterfaces
-#exit
-
 if not windows
 	file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
 		sh "cd src; swig -v -Wall -ruby -c++ -I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
@@ -179,7 +175,6 @@ if not windows
 		sh "cd src; ../#{$GUISRC}/createmarker.rb "+interfaceHeaders.join(" ")
 	end
 end
-puts "muh"
 task :test => "libantargis.so" do |t|
 	require 'libantargis.so'
 end
@@ -243,4 +238,3 @@ task :dist do
 	sh "rm -rf #{distdir}"
 	
 end
-puts "end"

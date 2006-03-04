@@ -33,7 +33,6 @@ AGTextureCache *getTextureCache()
 
 AGTextureCache::AGTextureCache()
 {
-  CTRACE;
   getInstanceKiller()->reg(createKiller(this));
 }
 const AGTexture &AGTextureCache::get(const std::string &pTexture)

@@ -851,15 +851,12 @@ void AGWidget::prepareDraw()
 }
 void AGWidget::setCaching(bool pEnable)
 {
-  CTRACE;
   mCaching=pEnable;
   delete mCache;
 
   mCache=new AGTexture(width(),height());
 
   mCacheTouched=true;
-
-
 }
 
 void AGWidget::setDrawn()
