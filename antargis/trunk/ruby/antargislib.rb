@@ -4,7 +4,7 @@ if not $antargislibinited
 
 	# try suspending arts
 	if File.exists?("/usr/bin/artsshell")
-		File.popen("/usr/bin/artsshell suspend").close
+		File.popen("/usr/bin/artsshell suspend 2>&1").close
 	end
 	
 	$programDir=Dir.pwd+"/ruby"

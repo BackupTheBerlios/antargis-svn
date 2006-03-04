@@ -194,7 +194,7 @@ bool AGButton::eventMouseButtonUp(AGEvent *e)
   return AGWidget::eventMouseButtonUp(e);
 }
 
-void AGButton::setWidth(int w)
+void AGButton::setWidth(float w)
 {
   ccdebug(w);
   AGWidget::setWidth(w);
@@ -202,21 +202,14 @@ void AGButton::setWidth(int w)
   for(;i!=mChildren.end();i++)
     (*i)->setRect(getRect().shrink(borderWidth));
 }
-void AGButton::setHeight(int h)
+void AGButton::setHeight(float h)
 {
   AGWidget::setHeight(h);
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     (*i)->setRect(getRect().shrink(borderWidth));
 }
-/*
-AGButton AGButton::test()
-{
-  cdebug("test"<<endl);
-  AGButton b(0,AGRect2(0,0,0,0),"test");
-  return b;
-}
-*/
+
 std::string AGButton::getCaption() const
 {
   return mText;

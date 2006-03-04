@@ -54,8 +54,8 @@ class AGButton:public AGWidget
   virtual bool eventMouseButtonDown(AGEvent *m);
   virtual bool eventMouseButtonUp(AGEvent *m);
 
-  virtual void setWidth(int w);
-  virtual void setHeight(int w);
+  virtual void setWidth(float w);
+  virtual void setHeight(float w);
 
   virtual std::string getCaption() const;
 

@@ -319,7 +319,7 @@ void AGEdit::draw(AGPainter &p)
   //  cdebug("completeHeight:"<<completeHeight);
   //  cdebug("height:"<<getRect().h);
   if(mVAlign==EDIT_VCENTER)
-    y=getRect().h()/2-completeHeight/2;
+    y=(int)(getRect().h()/2-completeHeight/2);
   //  cdebug("y:"<<y);
 
   i=mLines.begin();
@@ -675,7 +675,7 @@ void AGEdit::checkWrap()
       std::list<AGEditLine>::iterator i=mLines.begin();
       for(;i!=mLines.end();)
 	{
-	  std::pair<std::string,bool> n=i->checkWrap(width());
+	  std::pair<std::string,bool> n=i->checkWrap((int)width());
 	  if(n.first.length())
 	    {
 	      // make new line
@@ -726,7 +726,7 @@ void AGEdit::checkWrap()
 	  if(j!=mLines.end() && !i->hardEnd())
 	    {
 	      //	      cdebug(i->getText());
-	      std::pair<std::string,bool> nText=i->checkUnwrap(width(),j->getText());
+	      std::pair<std::string,bool> nText=i->checkUnwrap((int)width(),j->getText());
 	      if(nText.second) // changed
 		{
 		  int count=j->getText().length()-nText.first.length();

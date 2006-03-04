@@ -1,8 +1,6 @@
 #include "antapp.h"
 #include "ag_debug.h"
 
-std::ofstream out("log.txt");
-
 GLApp::GLApp(int w,int h):scene(w,h)
 {
   shadow=true;
@@ -33,8 +31,6 @@ void GLApp::drawGL()
   assertGL;
   scene.draw();
   assertGL;
-  
-  //  glColor4f(1,1,1,1);
 }
 
 bool GLApp::eventFrame(float t)

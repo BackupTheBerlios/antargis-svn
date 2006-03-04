@@ -28,17 +28,24 @@
 #endif
 #include <ruby.h>
 
-//#ifndef NDEBUG
 int D::d=0;
 
 std::ofstream debugOFS("debug.txt");
 
-std::ostream &getDebug()
+bool quietLog=false;
+
+void setQuiet()
 {
-  return std::cout;
+  quietLog=true;
 }
 
-//#endif
+std::ostream &getDebug()
+{
+  if(quietLog)
+    return debugOFS;
+  else
+    return std::cout;
+}
 
 std::vector<std::string> split(const std::string &needle,const std::string &haystack)
 {

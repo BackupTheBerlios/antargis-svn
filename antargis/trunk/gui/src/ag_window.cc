@@ -70,7 +70,7 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTi
       // title
       //      AGTable::addChild(1,1,new AGImage(this,s,AGRect2(bw,0,bw,bw)));
       //      AGTable::addChild(1,1,new AGText(this,AGRect2(0,0,40,20),pTitle,AGFont("Arial.ttf",14)));
-      t=dynamic_cast<AGTable*>(getTitleBar(width()-2*bw,titBarHeight));//new AGButton(this,AGRect2(0,0,10,20),pTitle));
+      t=dynamic_cast<AGTable*>(getTitleBar((int)(width()-2*bw),titBarHeight));//new AGButton(this,AGRect2(0,0,10,20),pTitle));
 
       //      t->setSurface(getTheme()->getSurface("close_button"));
 

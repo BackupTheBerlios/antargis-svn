@@ -32,6 +32,8 @@
 
 #include "ag_exception.h"
 
+void setQuiet();
+
 
 std::string replace(const std::string &s,const std::string &a,const std::string &b);
 
