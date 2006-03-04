@@ -10,9 +10,9 @@
 			<rowsize row="0" fixed="90"/>
 			<rowsize row="1" fixed="200"/>
 			<rowsize row="3" fixed="216"/>
-			<rowsize row="4" fixed="32"/>
-			<rowsize row="5" fixed="216"/>
-			<rowsize row="6" fixed="50"/>
+			<rowsize row="4" fixed="216"/>
+			<rowsize row="5" fixed="50"/>
+			<rowsize row="6" fixed="10"/>
 			
 			<!-- heroes -->
 			<radioGroup col="0" row="0" name="HeroGroup">
@@ -41,54 +41,49 @@
 				</table>
 			</radioGroup>
 			
-			<!-- system buttons -->
-			<table col="0" row="6" cols="4" rows="2">
-				<rowsize row="0" fixed="50"/>
-				<colsize col="0" fixed="50"/>
-				<colsize col="1" fixed="50"/>
-				<colsize col="2" fixed="50"/>
-				<button col="0" row="0" name="pause" caption-image="data/gui/pause.png" tooltip="Pause the game"/>
-				<button col="1" row="0" name="options" caption-image="data/gui/options.png" tooltip="Options..."/>
-				<button col="2" row="0" name="quit" caption-image="data/gui/door.png" tooltip="Abort this mission"/>
-			</table>
 			
 			<!-- button panel -->
 			<layout col="0" row="1" filename="data/gui/layout/buttonpanel.xml"/>
-			<!--<frame col="0" row="3" border="button.border.normal">-->
-				<antInventory col="0" row="3">
-					<table cols="2" rows="9" geometryx="(4,4,208,208)">
-						<text name="invTitle" geometry="(0,0,208,26)" enabled="false" align="center" font="invTitle.font"/>
-						<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
-						<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
-						<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
-						
-						<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
-						<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
-						<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
-						<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
-						
-						
-						<text col="1" row="1" caption="0" align="right" name="name" font="inventory.font"/>
-						<text col="1" row="2" caption="0" align="right" name="boss" font="inventory.font"/>
-						<text col="1" row="3" caption="0" align="right" name="men" font="inventory.font"/>
-						<text col="1" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
-						<text col="1" row="5" caption="0" align="right" name="stone" font="inventory.font"/>
-						<text col="1" row="6" caption="0" align="right" name="food" font="inventory.font"/>
-						<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
-						<button col="1" row="8" caption="..." name="inspect"/>
-					</table>
-				</antInventory>
-			<!--</frame>-->
-			<button col="0" row="4" name="fight" caption="The wolfs' lair" enabled="false"/>
-<!--			<antMiniView col="0" row="5" name="miniMap"/>-->
-
-			<cell col="0" row="5">
-				<frame col="0" row="5" border="button.border.normal" visible="true">
+			<antInventory col="0" row="3">
+				<table cols="2" rows="9">
+					<text name="invTitle" enabled="false" align="center" font="invTitle.font"/>
+					<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
+					<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
+					<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
+					
+					<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
+					<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
+					<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
+					<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
+					
+					
+					<text col="1" row="1" caption="0" align="right" name="name" font="inventory.font"/>
+					<text col="1" row="2" caption="0" align="right" name="boss" font="inventory.font"/>
+					<text col="1" row="3" caption="0" align="right" name="men" font="inventory.font"/>
+					<text col="1" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
+					<text col="1" row="5" caption="0" align="right" name="stone" font="inventory.font"/>
+					<text col="1" row="6" caption="0" align="right" name="food" font="inventory.font"/>
+					<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
+					<button col="1" row="8" caption="..." name="inspect"/>
+				</table>
+			</antInventory>
+			<cell col="0" row="4">
+				<frame border="button.border.normal" visible="true">
 					<miniMap name="miniMap"/>
 				</frame>
-				<!--<miniMap name="miniMap"/>-->
 			</cell>
-			
+			<!-- system buttons -->
+			<cell col="0" row="5">
+				<table cols="4" rows="2">
+					<rowsize row="0" fixed="50"/>
+					<colsize col="0" fixed="50"/>
+					<colsize col="1" fixed="50"/>
+					<colsize col="2" fixed="50"/>
+					<button col="0" row="0" name="pause" caption-image="data/gui/pause.png" tooltip="Pause the game"/>
+					<button col="1" row="0" name="options" caption-image="data/gui/options.png" tooltip="Options..."/>
+					<button col="2" row="0" name="quit" caption-image="data/gui/door.png" tooltip="Abort this mission"/>
+				</table>
+			</cell>
 		</table>
 	</table>
 </layout>

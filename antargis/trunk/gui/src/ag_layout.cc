@@ -191,6 +191,12 @@ AGRect2 getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode)
 	geom=t->getClientRect(col,row);
 	//	assert(pParent->getRect().origin().contains(geom));
 	//	cdebug("col:"<<col<<" row:"<<row<<":"<<geom);
+	if(!pParent->getRect().origin().contains(geom))
+	  {
+	    std::cerr<<"parent-geometry doesn't contain geom:"<<std::endl;
+	    std::cerr<<"parent:"<<pParent->getRect().origin()<<" geom:"<<geom<<std::endl;
+	    std::cerr<<"node-name:"<<pNode.getName()<<"  parent-name:"<<pParent->getName()<<std::endl;
+	  }
 	assert(pParent->getRect().origin().contains(geom));
       }
   
