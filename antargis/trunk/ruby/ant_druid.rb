@@ -30,9 +30,9 @@ class AntNPC<AntMyEntity
 	def setupMesh
 		case @npcType
 			when "smith"
-	 			setMesh(Mesh.new(getMeshData("data/models/smith_lp.ant2",0.08,"data/textures/models/smith_lp.png"),AGVector4.new(0,0,0,0),0))
+	 			setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/smith_lp.ant2",0.08,"data/textures/models/smith_lp.png"),AGVector4.new(0,0,0,0),0))
 			else
-	 			setMesh(Mesh.new(getMeshData("data/models/druid_lp.ant2",0.08,"data/textures/models/druid_lp.png"),AGVector4.new(0,0,0,0),0))
+	 			setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/druid_lp.ant2",0.08,"data/textures/models/druid_lp.png"),AGVector4.new(0,0,0,0),0))
 		end
 	end
 end

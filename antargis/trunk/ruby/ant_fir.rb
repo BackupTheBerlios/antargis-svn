@@ -50,7 +50,7 @@ class AntFir<AntBaseTree
 	end
 	def setupMesh
 		#setMesh(makeFirMesh)
-		setMesh(Mesh.new(meshData,AGVector4.new,0))
+		setMesh(Mesh.new(getMap.getScene,meshData,AGVector4.new,0))
 	end
 end
 

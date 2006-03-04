@@ -8,12 +8,12 @@ class AntWorkshop<AntHouse
 		setDirection(-50)
 	end
 	def setupMesh
-		mesh=Mesh.new(getMeshData("data/models/workshop.ant2",1.8,"data/textures/models/workshop.png"),AGVector4.new(0,0,0),-50)
+		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/workshop.ant2",1.8,"data/textures/models/workshop.png"),AGVector4.new(0,0,0),-50)
 #		mesh=Mesh.new(getMeshData("data/models/farm.ant",2,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 		p=AGVector3.new(-1.3,-1.2,2.2)
-		addMesh(Smoke.new(5),p)
-		addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
+		addMesh(Smoke.new(getMap.getScene,5),p)
+		addMesh(Mesh.new(getMap.getScene,getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
 	end
 	
 	def assignJob(e)
