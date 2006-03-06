@@ -201,10 +201,14 @@ class AntGameApp <AntRubyView
 	end
 
 	def setHeroImage(image,num)
+		puts "setHeroImage..."
 		@layout.getChild("HeroImage#{num}").setTexture(image)
+		puts "setHeroImage!"
 	end
 	def setHeroName(name,num)
+		puts "setHeroName..."
 		@layout.getChild("HeroName#{num}").setText(name)
+		puts "setHeroName!"
 	end
 	def setHero(flag,num)
 		name="hero#{num}"
@@ -212,12 +216,7 @@ class AntGameApp <AntRubyView
 		c=@layout.getChild(name)
 		puts c
 		c.setEnabled(flag)
-		return
-		if flag
-			c.show
-		else
-			c.hide
-		end
+		puts "setHero-ok"
 	end
 	def setupHeroDisplay(first=false)
 		super
@@ -234,7 +233,7 @@ class AntGameApp <AntRubyView
 				setHeroName("",i)
 			end
 		end
-
+		puts "first:",first
 		# init
 		if first
 			addHandler(@layout.getChild("antButtonPanel"),:sigAggressionChanged,:eventAggressionChanged)
@@ -242,6 +241,7 @@ class AntGameApp <AntRubyView
 				addHandler(@layout.getChild("hero#{i}"),:sigClick,:eventHeroButton)
 			end
 		end
+		puts "setupHeroDisplay!"
 	end
 
 	def eventHeroButton(e)

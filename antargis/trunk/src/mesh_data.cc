@@ -9,6 +9,7 @@
 
 MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
+  CTRACE;
   mArray=va;
   mWithTexture=false;
   if(pTexture!="")
@@ -29,6 +30,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
 
 MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
+  CTRACE;
   Uint16 faces,meshes,vertices;
   overdraw=false;
 
