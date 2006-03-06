@@ -152,6 +152,12 @@ AnimMeshData::~AnimMeshData()
 {
   CTRACE;
   cdebug(mName);
+
+  // delete bones
+  for(std::vector<Bone*>::iterator i=bones.begin();i!=bones.end();++i)
+    delete *i;
+
+
 }
 
 AGBox3 AnimMeshData::bbox() const

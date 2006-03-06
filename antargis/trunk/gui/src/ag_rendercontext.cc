@@ -344,10 +344,12 @@ void AGRenderContext::end()
 
 void AGRenderContext::setColor(const AGVector4 &pColor)
 {
+  delete mColor;
   mColor=new AGVector4(pColor);
 }
 void AGRenderContext::setColor(const AGColor &pColor)
 {
+  delete mColor;
   float f=1.0/255.0f;
   mColor=new AGVector4(pColor.r*f,
 		       pColor.g*f,

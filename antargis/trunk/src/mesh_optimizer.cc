@@ -89,43 +89,26 @@ VertexArray MeshOptimizer::getArray()
 {
   CTRACE;
   VertexArray a;
-  cdebug("1");
-  cdebug(mIndices.size()<<"  "<<mVertices.size());
   for(size_t i=0;i<mVertices.size();i++)
     {
-      //      assert(mIndices[i]<mVertices.size());
       MeshVertex v=mVertices[i];
       a.addVertex(v.v,v.c,v.n,v.t);
     }
-  cdebug("2");
 
   std::vector<MeshTriangle> tris;
   for(size_t i=0;i<mIndices.size();i+=3)
     {
       tris.push_back(MeshTriangle(mIndices[i],mIndices[i+1],mIndices[i+2]));
     }  
-  cdebug("3");
   sort(tris.begin(),tris.end(),TriCompare(this,AGVector3(0,-10,10)));
-  cdebug("4");
 
-  /*
-  for(size_t i=0;i<mIndices.size();i+=3)
-    {
-      a.addTriangle(mIndices[i],mIndices[i+1],mIndices[i+2]);
-    }
-  */
   for(std::vector<MeshTriangle>::iterator i=tris.begin();i!=tris.end();i++)
     a.addTriangle(i->i0,i->i1,i->i2);
-  cdebug("5");
-  
-
 
 
   if(mIndices.size()==0)
     cdebug("NO TRIANGLES FOUND!");
-  cdebug("6");
   cdebug("SAVED:"<<1.0f-float(saved)/mIndices.size());
-  cdebug("7");
   return a;
 }
 

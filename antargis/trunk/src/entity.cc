@@ -80,6 +80,7 @@ AntEntity::~AntEntity()
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     saveDelete(*i);
   mMeshes.clear();
+  delete mJob;
 }
 
 void AntEntity::resourceChanged()

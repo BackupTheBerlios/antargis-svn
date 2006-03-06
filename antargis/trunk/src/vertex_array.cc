@@ -317,6 +317,16 @@ VertexArrayShader::VertexArrayShader(AntShaderProgram *_p):p(_p)
 {
   aInited=false;
 }
+VertexArrayShader::~VertexArrayShader()
+{
+  for(std::map<std::string,std::vector<float>*>::iterator i=as.begin();i!=as.end();++i)
+    {
+      if(i->second)
+	delete i->second;
+    }
+
+}
+
 void VertexArrayShader::addAttribute(const std::string &pName,const std::vector<float> &a)
 {
   as[pName]=new std::vector<float>(a);

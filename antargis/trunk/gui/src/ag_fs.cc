@@ -111,7 +111,10 @@ std::string directLoad(const std::string &pName)
   fread(buffer,1,len,f);
 
   fclose(f);
-  return std::string(buffer,len);
+
+  std::string r(buffer,len);
+  delete [] buffer;
+  return r;
 }
 
 std::string findFile(const std::string &pName)

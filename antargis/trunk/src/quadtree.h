@@ -26,6 +26,8 @@
 
 #include <set>
 
+// QuadTree doesn't own objects - you have to delete them yourself
+
 template<class T>
 class QuadTree
   {
@@ -38,6 +40,12 @@ class QuadTree
 
         Node(AGRect2 R):r(R)
       {}
+
+	~Node()
+	{
+	  for(typename std::list<Node*>::iterator i=children.begin();i!=children.end();++i)
+	    delete *i;
+	}
 
 	size_t size() const
 	{
@@ -154,6 +162,10 @@ class QuadTree
     {
       root=new Node(r);
     }
+    ~QuadTree()
+      {
+	delete root;
+      }
 
     void insert(T* t)
     {

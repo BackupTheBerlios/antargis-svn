@@ -159,7 +159,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
   delete p;
   if(inmem)
     {
-      mSurface.save("sicke.png");
+      //      mSurface.save("sicke.png");
       cdebug(mTexture);
       delete mTexture;
       mTexture=new AGTexture(mSurface);

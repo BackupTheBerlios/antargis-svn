@@ -70,6 +70,7 @@ class VertexArrayShader:public VertexArray
   bool aInited;
  public:
   VertexArrayShader(AntShaderProgram *_p);
+  ~VertexArrayShader();
   void addAttribute(const std::string &pName,const std::vector<float> &a);
 
   virtual void draw();
