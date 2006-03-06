@@ -19,7 +19,6 @@ $bindir=$prefix+"/bin"
 $datadir=$prefix+"/share"
 $includedir=$prefix+"/include"
 
-dir_config("physfs")
 $CFLAGS="-O0 -g -Wall"
 
 # check for SDL
@@ -55,11 +54,6 @@ if not have_header('SDL.h')
 	exit
 end
 
-if not have_header('physfs.h')
-	puts "Please install libSDL"
-	exit
-end
-
 have_library('SDL')
 have_library('SDL_ttf')
 have_library('SGE')
@@ -69,7 +63,6 @@ else
 	have_library("GLU")
 	have_library("GL")
 end
-have_library('physfs')
 have_library('SDL_mixer')
 have_library('SDL_image')
 have_library('stdc++')

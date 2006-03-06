@@ -1,8 +1,19 @@
 #include "water.h"
 #include "ag_debug.h"
+#include "ag_kill.h"
 #include "ag_rendercontext.h"
 
-AntWaterShader *shader=0;
+AntWaterShader *gWaterShader=0;
+AntWaterShader *getWaterShader()
+{
+  if(!gWaterShader)
+    {
+      gWaterShader=new AntWaterShader;
+      REGISTER_SINGLETON(gWaterShader);
+    }
+  assert(gWaterShader);
+  return gWaterShader;
+}
 
 WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
   SceneNode(pScene,pos,AGBox3()),
@@ -11,8 +22,7 @@ WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,cons
   step=2;
   tex=getTextureCache()->get("data/textures/terrain/water.png");
 
-  if(!shader)
-    shader=new AntWaterShader;
+  //  mShader=new AntWaterShader;
 
   mapChanged();
   setOrder(WATER_Z);
@@ -21,8 +31,8 @@ WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,cons
 
 WaterPiece::~WaterPiece()
 {
-  delete shader;
-  shader=0;
+  //  delete mShader;
+  //  mShader=0;
 }
 
 void WaterPiece::mapChanged()
@@ -93,9 +103,9 @@ void WaterPiece::draw()
   glDisable(GL_CULL_FACE);
   glDisable(GL_ALPHA_TEST);
   glColor4f(1,1,1,1);
-  shader->enable();
+  getWaterShader()->enable();
   mArray.draw();
-  shader->disable();
+  getWaterShader()->disable();
 }
 
 void WaterPiece::drawPick()
@@ -105,7 +115,7 @@ void WaterPiece::drawPick()
 
 void WaterPiece::advance(float t)
 {
-  shader->update(t);
+  getWaterShader()->update(t);
 }
 
 size_t WaterPiece::getTriangles() const

@@ -37786,13 +37786,15 @@ _wrap_AGEditLine_insert(int argc, VALUE *argv, VALUE self) {
     AGEditLine *arg1 = (AGEditLine *) 0 ;
     char arg2 ;
     int arg3 ;
+    bool arg4 ;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEditLine, 0);
     arg2 = NUM2CHR(argv[0]);
     arg3 = NUM2INT(argv[1]);
-    (arg1)->insert(arg2,arg3);
+    arg4 = RTEST(argv[2]);
+    (arg1)->insert(arg2,arg3,arg4);
     
     return Qnil;
 }
@@ -38550,6 +38552,21 @@ _wrap_AGEdit_prepareDraw(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->prepareDraw();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGEdit_setInsert(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setInsert(arg2);
     
     return Qnil;
 }
@@ -61776,6 +61793,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGEdit.klass, "eventGotFocus", VALUEFUNC(_wrap_AGEdit_eventGotFocus), -1);
     rb_define_method(cAGEdit.klass, "eventLostFocus", VALUEFUNC(_wrap_AGEdit_eventLostFocus), -1);
     rb_define_method(cAGEdit.klass, "prepareDraw", VALUEFUNC(_wrap_AGEdit_prepareDraw), -1);
+    rb_define_method(cAGEdit.klass, "setInsert", VALUEFUNC(_wrap_AGEdit_setInsert), -1);
     cAGEdit.mark = (void (*)(void *)) general_markfunc;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargis, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);

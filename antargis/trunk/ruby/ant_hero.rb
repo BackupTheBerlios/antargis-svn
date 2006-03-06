@@ -241,13 +241,16 @@ class AntHero<AntBoss
 
 	def getImage
 		@portrait||=""
+		r=nil
 		if @portrait.length!=0
 			puts "port!=0"
-			return getTextureCache.get(@portrait)
+			r=getTextureCache.get(@portrait)
 		else
 			puts "port==0"
-			return getTextureCache.get("data/gui/portraits/#{getName}.png")
+			r=getTextureCache.get("data/gui/portraits/#{getName}.png")
 		end
+		puts "getImage-ok"
+		return r
 	end
 	def getDescription
 		"This is #{getName}. He is #{age} years old. #{getMen.length} men support him."

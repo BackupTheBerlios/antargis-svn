@@ -44,7 +44,7 @@ class AGEditLine
   int height() const;
   int width() const;
 
-  void insert(char c,int cx);
+  void insert(char c,int cx,bool pInsert);
   void doDelete(int cx);
   AGEditLine split(int cx);
 
@@ -114,6 +114,7 @@ class AGEdit:public AGWidget
 
   virtual void prepareDraw();
 
+  void setInsert(bool pInsert);
 
  private:
 
@@ -134,6 +135,8 @@ class AGEdit:public AGWidget
   bool mLShift,mRShift;
   bool mLCtrl,mRCtrl;
   bool mLAlt,mRAlt;
+
+  bool mInserting;
 
   bool mMultiLine;
 

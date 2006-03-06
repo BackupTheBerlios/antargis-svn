@@ -114,9 +114,14 @@ int AGEditLine::width() const
   return AGFontEngine::getWidth(mFont,mText);
 }
 
-void AGEditLine::insert(char c,int cx)
+void AGEditLine::insert(char c,int cx,bool pInsert)
 {
-  mText=mText.substr(0,cx)+std::string(&c,1)+mText.substr(cx,std::string::npos);
+  if(pInsert)
+    mText=mText.substr(0,cx)+std::string(&c,1)+mText.substr(cx,std::string::npos);
+  else if(cx<mText.length())
+    mText[cx]=c;
+  else
+    mText+=std::string(&c,1);
 }
 
 void AGEditLine::doDelete(int cx)
@@ -257,6 +262,7 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true)
 {
+  mInserting=true;
   mMaxLength=-1;
   mMutable=true;
   mShowCursor=true;
@@ -608,7 +614,7 @@ bool AGEdit::insert(char c)
 	return false; // ignore input
     }
   getActLine(); // FIXME:try to cache
-  actLine->insert(c,mCx);
+  actLine->insert(c,mCx,mInserting);
   return true;
 }
 
@@ -934,4 +940,9 @@ void AGEdit::prepareDraw()
 
 
   AGWidget::prepareDraw();
+}
+
+void AGEdit::setInsert(bool pInsert)
+{
+  mInserting=pInsert;
 }

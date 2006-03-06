@@ -402,10 +402,10 @@ public:
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void setWidth(float w);
+    virtual void setHeight(float w);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -435,8 +435,6 @@ public:
     virtual void draw(AGPainter &p);
     virtual bool eventHide();
     virtual bool eventMouseLeave();
-    virtual void setWidth(int w);
-    virtual void setHeight(int w);
     virtual void addChild(AGWidget *w);
     virtual void addChildBack(AGWidget *w);
     virtual void removeChild(AGWidget *w);
@@ -553,10 +551,10 @@ public:
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void setWidth(float w);
+    virtual void setHeight(float w);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -586,8 +584,6 @@ public:
     virtual void draw(AGPainter &p);
     virtual bool eventHide();
     virtual bool eventMouseLeave();
-    virtual void setWidth(int w);
-    virtual void setHeight(int w);
     virtual void addChild(AGWidget *w);
     virtual void addChildBack(AGWidget *w);
     virtual void removeChild(AGWidget *w);
@@ -1212,10 +1208,10 @@ public:
     virtual bool eventShow();
     virtual void setLeft(float x);
     virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void setWidth(float w);
+    virtual void setHeight(float w);
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -1245,8 +1241,6 @@ public:
     virtual void draw(AGPainter &p);
     virtual bool eventHide();
     virtual bool eventMouseLeave();
-    virtual void setWidth(int w);
-    virtual void setHeight(int w);
     virtual void addChild(AGWidget *w);
     virtual void addChildBack(AGWidget *w);
     virtual void removeChild(AGWidget *w);

@@ -10,6 +10,8 @@
 #include "map.h"
 #include <math.h>
 
+class AntWaterShader;
+
 class WaterPiece:public SceneNode
 {
   AGTexture tex;
@@ -37,6 +39,7 @@ class WaterPiece:public SceneNode
   int mH;
   HeightMap *mMap;
   int step;
+  AntWaterShader *mShader;
 };
 #endif
 
