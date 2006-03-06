@@ -213,7 +213,8 @@ end
 def cpdir(dir,distdir)
 	mkdir(distdir+"/"+dir)
 	Dir[dir+"/*"].each{|f|
-		if f=~/~/ or f=~/\.o/ or f=~/\.so/ or f=~/\.xcf/
+		if f=~/~/ or f=~/\.o/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/
+		elsif f=~/\.so/ and not windows
 		elsif File.ftype(f)=="file"
 			File.cp(f,"#{distdir}/#{f}")
 		end
@@ -222,10 +223,11 @@ end
 
 task :dist do
 	distdir="antargis-#{version}"
-	sh "test -e #{distdir} || mkdir #{distdir}"
+	mkdir(distdir)
+	#sh "test -e #{distdir} || mkdir #{distdir}"
 	dirs=`find -type d`.split("\n").collect{|x|x.sub("./","")}
 	dirs=dirs.select{|x|(not x=~/\.svn/)}.select{|x|(not x=~/\./)}
-	dirs=dirs.select{|x|x!="screenies" && (not x=~/^models/)}
+	dirs=dirs.select{|x|x!="Output" && x!="screenies" && (not x=~/^models/)}
 
 	dirs.each{|dir|
 		cpdir(dir,distdir)
@@ -234,7 +236,9 @@ task :dist do
 	cpdir(".",distdir)
 
 	# tar.gz
-	sh "tar cfz #{distdir}.tar.gz #{distdir}"
-	sh "rm -rf #{distdir}"
+	if not windows
+		sh "tar cfz #{distdir}.tar.gz #{distdir}"
+		sh "rm -rf #{distdir}"
+	end
 	
 end
