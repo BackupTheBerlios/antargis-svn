@@ -240,6 +240,7 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def setMeshState(name)
+		#puts "setState #{name}"
 		@meshState=name
 		dir=getDirection
 		case name

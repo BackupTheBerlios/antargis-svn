@@ -16708,40 +16708,6 @@ size_t SwigDirector_SceneNode::getTriangles() const {
 }
 
 
-AGBox3 SwigDirector_SceneNode::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_SceneNode::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
-
 AGVector4 SwigDirector_SceneNode::lineHit(AGLine3 const &pLine) const {
     VALUE obj0 = Qnil ;
     AGVector4 c_result ;
@@ -16911,40 +16877,6 @@ void SwigDirector_AnimMesh::resetScene() {
 
 SwigDirector_AnimMesh::~SwigDirector_AnimMesh() {
 }
-
-AGBox3 SwigDirector_AnimMesh::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_AnimMesh::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
 
 size_t SwigDirector_AnimMesh::getTriangles() const {
     size_t c_result ;
@@ -18831,40 +18763,6 @@ void SwigDirector_Mesh::resetScene() {
 SwigDirector_Mesh::~SwigDirector_Mesh() {
 }
 
-AGBox3 SwigDirector_Mesh::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_Mesh::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
-
 size_t SwigDirector_Mesh::getTriangles() const {
     size_t c_result ;
     VALUE result;
@@ -19624,40 +19522,6 @@ size_t SwigDirector_NewDecal::getTriangles() const {
 }
 
 
-AGBox3 SwigDirector_NewDecal::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_NewDecal::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
-
 void SwigDirector_NewDecal::mapChanged() {
     VALUE result;
     
@@ -19872,40 +19736,6 @@ size_t SwigDirector_Smoke::getTriangles() const {
 }
 
 
-AGBox3 SwigDirector_Smoke::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_Smoke::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
-
 AGVector4 SwigDirector_Smoke::lineHit(AGLine3 const &pLine) const {
     VALUE obj0 = Qnil ;
     AGVector4 c_result ;
@@ -20064,40 +19894,6 @@ void SwigDirector_TerrainPieceVA::resetScene() {
 
 SwigDirector_TerrainPieceVA::~SwigDirector_TerrainPieceVA() {
 }
-
-AGBox3 SwigDirector_TerrainPieceVA::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_TerrainPieceVA::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
 
 size_t SwigDirector_TerrainPieceVA::getTriangles() const {
     size_t c_result ;
@@ -20382,40 +20178,6 @@ void SwigDirector_WaterPiece::resetScene() {
 
 SwigDirector_WaterPiece::~SwigDirector_WaterPiece() {
 }
-
-AGBox3 SwigDirector_WaterPiece::bbox() const {
-    AGBox3 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::bbox();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("bbox"), 0, NULL);
-    {
-        AGBox3 *b;
-        Data_Get_Struct(result,AGBox3,b);
-        c_result=*b;
-    }
-    return (AGBox3) c_result;
-}
-
-
-AGRect2 SwigDirector_WaterPiece::getRect() const {
-    AGRect2 c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return SceneNode::getRect();
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("getRect"), 0, NULL);
-    {
-        AGRect2 *b;
-        Data_Get_Struct(result,AGRect2,b);
-        c_result=*b;
-    }
-    return (AGRect2) c_result;
-}
-
 
 size_t SwigDirector_WaterPiece::getTriangles() const {
     size_t c_result ;
@@ -48447,14 +48209,11 @@ static VALUE
 _wrap_SceneNode_bbox(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
     AGBox3 result;
-    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 0);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = ((SceneNode const *)arg1)->bbox();
     
     {
@@ -48470,14 +48229,11 @@ static VALUE
 _wrap_SceneNode_getRect(int argc, VALUE *argv, VALUE self) {
     SceneNode *arg1 = (SceneNode *) 0 ;
     AGRect2 result;
-    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_SceneNode, 0);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = ((SceneNode const *)arg1)->getRect();
     
     {
@@ -56038,6 +55794,21 @@ _wrap_MeshData_setOverdraw(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_MeshData_setCulling(int argc, VALUE *argv, VALUE self) {
+    MeshData *arg1 = (MeshData *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_MeshData, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setCulling(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_MeshData_setColors(int argc, VALUE *argv, VALUE self) {
     MeshData *arg1 = (MeshData *) 0 ;
     bool arg2 ;
@@ -62926,6 +62697,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cMeshData.klass, "transparent", VALUEFUNC(_wrap_MeshData_transparent), -1);
     rb_define_method(cMeshData.klass, "setLighting", VALUEFUNC(_wrap_MeshData_setLighting), -1);
     rb_define_method(cMeshData.klass, "setOverdraw", VALUEFUNC(_wrap_MeshData_setOverdraw), -1);
+    rb_define_method(cMeshData.klass, "setCulling", VALUEFUNC(_wrap_MeshData_setCulling), -1);
     rb_define_method(cMeshData.klass, "setColors", VALUEFUNC(_wrap_MeshData_setColors), -1);
     cMeshData.mark = (void (*)(void *)) general_markfunc;
     cMeshData.destroy = (void (*)(void *)) free_MeshData;

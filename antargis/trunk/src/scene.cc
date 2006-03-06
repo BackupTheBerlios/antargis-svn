@@ -153,7 +153,6 @@ void Scene::addNode(SceneNode *node)
     {
       mNodes.push_back(node);
       mNodeSet.insert(node);
-//      cdebug(node->getScene()<<"    "<<this);
       assert(node->getScene()==this);
       mTree->insert(node);
     }
@@ -178,17 +177,16 @@ void Scene::removeNode(SceneNode *node)
 {
   if(mNodeSet.find(node)!=mNodeSet.end())
     {
-
       Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
       mNodes.erase(i);
       mNodeSet.erase(node);
       assert(node->getScene()==this);
       node->resetScene();
-      mTree->remove(node);
+      assert(mTree->remove(node));
     }
   else
     {
-      #warning "this case should be thought of!"
+      throw std::runtime_error("Trying to remove unknown node");
     }
 }
 

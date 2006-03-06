@@ -1,4 +1,5 @@
 #include "ag_rubyobj.h"
+#include "ag_debug.h"
 #include <assert.h>
 #include <typeinfo>
 //#include "ag_debug.h"
@@ -13,17 +14,18 @@
 
 #include <ag_main.h>
 
-std::set<AGRubyObject*> gDeletedRubies;
+std::set<AGRubyObject*> gExistingRubies;
 
 AGRubyObject::AGRubyObject()
 {
   mRubyObject=false;
   mDeleted=false;
+  gExistingRubies.insert(this);
 }
 AGRubyObject::~AGRubyObject()
 {
   mDeleted=true;
-  gDeletedRubies.insert(this);
+  gExistingRubies.erase(this);
 }
 
 void AGRubyObject::mark()
@@ -41,6 +43,7 @@ void AGRubyObject::markObject(AGRubyObject *o)
 
 void AGRubyObject::clear()
 {
+  CTRACE;
 }
 
 void general_markfunc(void *ptr)
@@ -55,7 +58,7 @@ void general_markfunc(void *ptr)
   AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
   assert(o);
   o->mark();
-  gDeletedRubies.clear();
+  //  gDeletedRubies.clear();
 }
 
 // ruby does a gc-run and then deletes everything, which is not marked
@@ -70,10 +73,10 @@ bool saveDelete(AGRubyObject *o)
   if(hasQuit())
     return false; // we are quitting - so memory is discarded anyway - hopefully ;-)
   
-  //  cdebug("SAVEDEL:"<<o);
   assert(o);
-  if(gDeletedRubies.find(o)!=gDeletedRubies.end())
+  if(gExistingRubies.find(o)==gExistingRubies.end())
     {
+      cdebug("already deleted!");
       return false; // already deleted
     }
   assert(!o->mDeleted);

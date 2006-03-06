@@ -73,6 +73,7 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
       image->setLeft((width()-image->width())/2);
       image->setTop((height()-image->height())/2);
     }
+  queryRedraw();
 }
 
 

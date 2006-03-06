@@ -42,22 +42,21 @@ def getTreeTypes
 		getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),
 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
 	]
-	#return files
-# 	files+=[
-# 		getMeshData("data/models/high_tree2.ant2",0.45,"data/textures/models/newtree.png")
-# 	]
+	files.each{|f|f.setCulling(false)} # patch for old trees
 	files+=[
-		getMeshData("data/models/high_tree3.ant2",0.45,"data/textures/models/high_tree3.png")
+		getMeshData("data/models/tree_simple1.ant2",0.3,"data/textures/models/tree_simple1.png"),
+		getMeshData("data/models/tree_simple2.ant2",0.3,"data/textures/models/tree_simple1.png"),
+		getMeshData("data/models/tree_simple5.ant2",0.3,"data/textures/models/tree_simple5.png")
 	]
-	files+=[
-		getMeshData("data/models/high_tree3.ant2",0.45,"data/textures/models/high_tree4.png")
-	]
+
 end
 
 def getTreeMeshByType(type)
 	d=getTreeTypes[type]
 	d||=getTreeTypes[0]
+	
 	d.setTransparent(true)
+	#d.setCulling(true) #false)
 	return d
 end
 

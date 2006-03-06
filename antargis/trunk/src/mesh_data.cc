@@ -23,6 +23,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
   drawColors=true;
   mPickable=true;
   mLighting=true;
+  mCulling=true;
 }
 
 
@@ -33,6 +34,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
 
   mTransparent=false;
   mLighting=true;
+  mCulling=true;
 
   //  mAlpha=false;
 
@@ -226,6 +228,13 @@ void MeshData::draw()
     glEnable(GL_CULL_FACE);
 }
 #else
+
+void MeshData::setCulling(bool c)
+{
+  mCulling=c;
+}
+
+
 void MeshData::draw(const AGVector4 &pColor)
 {
   AGRenderContext c;
@@ -233,8 +242,8 @@ void MeshData::draw(const AGVector4 &pColor)
   if(!mShadow)
     c.setDepthWrite(false);
 
-  if(mTransparent)
-    c.setCulling(false);
+  //  if(mTransparent)
+  c.setCulling(mCulling);
 
   c.setAlpha(0.9,GL_GREATER);
 

@@ -18,9 +18,13 @@ class Level1<Level
 				end
 			when "druid"
 				if @druid	
-					s=StoryFlow.new("druid2")
-					s.push("Druid","Go your path hero.")
-					tellStory(s)
+					if not @druid2
+						@druid2=true
+						s=StoryFlow.new("druid2")
+						s.push("Druid","Go your path hero.")
+						
+						tellStory(s)
+					end
 				else
 					@druid=true
 					s=StoryFlow.new("druid1")

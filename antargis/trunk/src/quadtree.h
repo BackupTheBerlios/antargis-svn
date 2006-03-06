@@ -125,13 +125,13 @@ class QuadTree
             insert(*j);
         }
 
-        void remove
+        bool remove
           (T* t)
           {
             if(ts.find(t)!=ts.end())
               {
                 ts.erase(t);
-                return;
+                return true;
               }
             if(children.size())
               {
@@ -139,13 +139,10 @@ class QuadTree
                 for(;i!=children.end();i++)
                   {
                     if((*i)->r.contains(t->getRect()))
-                      {
-                        (*i)->remove
-                        (t);
-                        return;
-                      }
+		      return (*i)->remove(t);
                   }
               }
+	    return false;
           }
 
       };
@@ -177,12 +174,12 @@ class QuadTree
       return l;
     }
     
-    void remove
+    bool remove
       (T* t)
       {
 	if(t)
-	  root->remove
-	    (t);
+	  return root->remove(t);
+	return false;
       }
       
     void clear()

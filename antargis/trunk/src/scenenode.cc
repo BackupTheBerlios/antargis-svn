@@ -20,19 +20,13 @@ SceneNode::~SceneNode()
   mRubyObject=false;
   if(mScene)
     mScene->removeNode(this);
-  //  removeFromAllScenes(this);
 }
 
 void SceneNode::resetScene()
 {
   mScene=0;
 }
-/*
-void SceneNode::setScene(Scene *s)
-{
-  assert(s==0);
-  scene=s;
-}*/
+
 void SceneNode::drawShadow()
 {
 }
@@ -61,9 +55,6 @@ AGVector4 SceneNode::lineHit(const AGLine3 &pLine) const
 void SceneNode::sort(const AGVector4 &pCamera)
 {
 }
-/*void SceneNode::mapChanged()
-{
-}*/
 
 bool SceneNode::operator==(const SceneNode &n) const
 {
@@ -82,15 +73,14 @@ void SceneNode::setRotation(float r)
 }
 
 
-  bool SceneNode::transparent()
-  {
-    return false;
-  }
+bool SceneNode::transparent()
+{
+  return false;
+}
 
 AGBox3 SceneNode::bbox() const
 {
   return mBBox+getPos().dim3();
-  //  return AGBox3(AGVector3(0,0,0),AGVector3(0,0,0));
 }
 
 AGRect2 SceneNode::getRect() const
@@ -109,9 +99,10 @@ Scene *SceneNode::getScene()
 
 void SceneNode::clear()
 {
-  //  removeFromAllScenes(this);
+  assert(mScene);
   if(mScene)
     mScene->removeNode(this);
+  resetScene();
 }
 
 void SceneNode::setVisible(bool v)

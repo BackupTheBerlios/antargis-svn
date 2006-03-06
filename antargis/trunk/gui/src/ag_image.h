@@ -30,13 +30,12 @@ class AGImage:public AGWidget
   AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile,const AGRect2 &pRect=AGRect2(0,0,0,0));
   virtual ~AGImage();
 
-  virtual void draw(AGPainter &p);//const AGRect2 &r);
+  virtual void draw(AGPainter &p);
 
   void setSurface(const AGSurface &pSurface);
   void setTexture(const AGTexture &pTexture);
 
   void useTextures();
-  //  void setSourceRect(const AGRect2 &pRect);
 
   void setCenter(bool c);
 

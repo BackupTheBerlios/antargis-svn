@@ -97,10 +97,15 @@ class AntStoryTalk<AntDialog
 		toAGText(getChild("title")).setText(text)
 	end
 
+	def setFace(s)
+		getChild("face").setSurface(s)
+	end
+
 	def updateText
 		c=@flow.get
 		if c
 			setTitle(c[0])
+			setFace(getMap.getPortrait(c[0]))
 			setText(c[1])
 			return true
 		else

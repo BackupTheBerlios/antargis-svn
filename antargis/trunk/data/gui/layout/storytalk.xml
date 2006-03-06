@@ -14,7 +14,7 @@
 					<colsize col="1" relative="1"></colsize>
 					<colsize col="2" fixed="66"></colsize>
 					<rowsize row="0" relative="1"></rowsize>
-					<button col="0" row="0" caption="huhu" theme="antButton" caption-image="data/gui/portraits/wesnoth1.png"/>
+					<button col="0" row="0" name="face" theme="antButton" caption-image="data/gui/portraits/wesnoth1.png"/>
 					<text col="1" row="0" name="text" caption="'You awaken...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.'"/>
 				</table>
 				<button col="0" row="1" name="ok" theme="antButton" caption="Ok"/>

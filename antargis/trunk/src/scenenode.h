@@ -51,8 +51,8 @@ class SceneNode:public AGRubyObject
 
   virtual bool transparent();
 
-  virtual AGBox3 bbox() const;
-  virtual AGRect2 getRect() const;
+  AGBox3 bbox() const;
+  AGRect2 getRect() const;
 
   virtual void clear();
 

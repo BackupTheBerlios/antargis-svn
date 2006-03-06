@@ -28,8 +28,6 @@ AntMap::AntMap(Scene *pScene,int w,int h):
 {
   myAntargisMap=this;
   maxID=0;
-
-  //  mTerrain->addToScenes();
 }
 AntMap::~AntMap()
 {
@@ -267,9 +265,6 @@ void AntMap::clear()
   mEntities.clear();
   mEntQuad->clear();
   mEntityMap.clear();
-  //  getScene()->addNode(mTerrainMesh);
-  //  mTerrain->addToScenes();
-
 }
 
 void AntMap::mapChanged()

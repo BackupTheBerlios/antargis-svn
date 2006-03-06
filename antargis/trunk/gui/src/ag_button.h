@@ -42,11 +42,9 @@ class AGButton:public AGWidget
 
   AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id=-1);
 
-  void setSurface(AGSurface pSurface,bool pChangeSize=true);
+  void setSurface(AGSurface pSurface,bool pChangeSize=false);
 
   virtual void draw(AGPainter &p);
-
-  //  virtual void drawBackground(const AGRect2 &r);
 
   virtual bool eventMouseEnter();
   virtual bool eventMouseLeave();
@@ -83,9 +81,6 @@ class AGButton:public AGWidget
   AGSurface mSurface;
   bool mHasSurface;
   AGEdit *mTextW;
-
-  //  bool checkButton;
-  //  bool checked;
 
   bool lower;
   bool mChecked;

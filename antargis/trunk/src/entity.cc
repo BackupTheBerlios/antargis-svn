@@ -77,13 +77,8 @@ void AntEntity::init()
 
 AntEntity::~AntEntity()
 {
-  //  CTRACE;
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-    {
-      saveDelete(*i);
-	//	removeFromAllScenes(*i);
-
-    }
+    saveDelete(*i);
   mMeshes.clear();
 }
 
@@ -270,10 +265,7 @@ void AntEntity::setMesh(SceneNode *m)
 {
   // clear meshes from scene
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-    {
-      //      removeFromAllScenes(*i);
       saveDelete(*i);
-    }
 
   mMeshes.clear();
   mMeshPos.clear();
@@ -283,7 +275,7 @@ void AntEntity::setMesh(SceneNode *m)
       if(mesh)
 	mesh->setEntity(this);
       mMeshes.push_back(m);
-      //      addToAllScenes(m);
+
       updatePos(mPos);
     }
 }
@@ -297,7 +289,7 @@ void AntEntity::addMesh(SceneNode *m,const AGVector3 &v)
 	mesh->setEntity(this);
       mMeshes.push_back(m);
       mMeshPos.insert(std::make_pair(m,v));
-      //      addToAllScenes(m);
+
       updatePos(mPos);
     }
 }

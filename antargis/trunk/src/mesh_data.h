@@ -23,15 +23,12 @@ class MeshData:public AGRubyObject
   bool drawColors;
   bool mPickable;
   bool mLighting;
-
+  bool mCulling;
 
  public:
   MeshData(const std::string &filename,float zoom,const std::string &pTexture="",bool pShadow=true);
   MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow=true);
   ~MeshData();
-
-  //  void setAlpha(bool pAlpha);
-  //  bool getAlpha() const;
 
   void draw(const AGVector4 &pColor);
   void drawShadow();
@@ -56,6 +53,7 @@ class MeshData:public AGRubyObject
   void setLighting(bool l);
 
   void setOverdraw(bool o);
+  void setCulling(bool c);
   void setColors(bool c);
 };
 

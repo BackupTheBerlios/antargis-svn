@@ -332,6 +332,15 @@ class AntRubyMap<AntMap
 	def eventHLDismissed(hero)
 		@script.eventDismissed(hero)
 	end
+
+	def getPortrait(hero)
+		f="data/gui/portraits/#{hero}.png"
+		if fileExists(f)
+			return AGSurface.load(f)
+		else
+			return AGSurface.load("data/gui/portraits/none.png")
+		end
+	end
 end
 
 
