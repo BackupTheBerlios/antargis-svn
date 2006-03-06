@@ -37,7 +37,6 @@ AGTextureCache::AGTextureCache()
 }
 const AGTexture &AGTextureCache::get(const std::string &pTexture)
   {
-	CTRACE;
     std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
@@ -51,7 +50,6 @@ const AGTexture &AGTextureCache::get(const std::string &pTexture)
 
 const AGTexture &AGTextureCache::get3D(const std::string &pTexture)
   {
-	CTRACE;
     std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
