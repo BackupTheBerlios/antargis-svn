@@ -48,6 +48,7 @@ void MeshOptimizer::add(const MeshVertex &v)
       mVertices.push_back(v);
       mMap[v]=index;
     }
+  assert(index<mVertices.size());
   mIndices.push_back(index);
   return;
 }
@@ -90,9 +91,9 @@ VertexArray MeshOptimizer::getArray()
   VertexArray a;
   cdebug("1");
   cdebug(mIndices.size()<<"  "<<mVertices.size());
-  for(size_t i=0;i<mIndices.size();i++)
+  for(size_t i=0;i<mVertices.size();i++)
     {
-	  assert(i<mVertices.size());
+      //      assert(mIndices[i]<mVertices.size());
       MeshVertex v=mVertices[i];
       a.addVertex(v.v,v.c,v.n,v.t);
     }

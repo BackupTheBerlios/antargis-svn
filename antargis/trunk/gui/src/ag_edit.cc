@@ -611,7 +611,10 @@ bool AGEdit::insert(char c)
   if(mMaxLength>0)
     {
       if((int)getText().length()==mMaxLength)
-	return false; // ignore input
+	{
+	  if(mInserting)
+	    return false; // ignore input
+	}
     }
   getActLine(); // FIXME:try to cache
   actLine->insert(c,mCx,mInserting);
