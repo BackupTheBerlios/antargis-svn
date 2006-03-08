@@ -242,3 +242,8 @@ task :dist do
 	end
 	
 end
+
+task :doc do
+	puts "running doxygen"
+	
+end
