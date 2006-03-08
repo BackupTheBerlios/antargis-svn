@@ -85,7 +85,7 @@ class AntNewTree<AntMyEntity
 			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
 		end
 		resource.set("food",5)
-		setupMesh
+		#setupMesh
 	end
 	def resourceChanged
 		setupMesh
@@ -104,6 +104,7 @@ class AntNewTree<AntMyEntity
 	def loadXML(node)
 		super(node)
 		@typeID=node.get("typeID").to_i
+		setupMesh
 	end
 	
 	def eventNoJob
@@ -116,22 +117,6 @@ class AntNewTree<AntMyEntity
 	private
 	def setupMesh
 		setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),0))
-		return
-	
-		setMesh(makeAppleTreeMesh(@angle))
-		
-		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),AGVector4.new(0,0,0,0),0))
-		data=getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png")
-		data.setTransparent(true)
-		setMesh(Mesh.new(getMap.getScene,data,AGVector4.new(0,0,0,0),0))
-		
-		
-		
-		return
-		for i in 1..([@maxApples,resource.get("food")*3].min)
-			p=@applePos[i-1]
-			addMesh(Mesh.new(getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
-		end
 	end
 end
 

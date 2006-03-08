@@ -59,6 +59,7 @@ class AntDialog<AGLayout
 		#setModal(true)
 		if fade
 			addChildBack(RectWidget.new(self,getRect.origin,0.5))
+			setQuietVolumeWave
 		end
 	end
 	def eventOk(e)
@@ -81,6 +82,7 @@ class AntDialog<AGLayout
 	def eventClose
 		hide
 		sigClosed(AGEvent.new(self,"sigClosed"))
+		setNormalVolumeWave
 	end
 end
 
@@ -311,8 +313,9 @@ class AntPauseDialog<AntDialog
 		end
 	end
 	def eventOk(e)
+		super
 		getMap.unpause
-		hide
+		#hide
 	end
 end
 

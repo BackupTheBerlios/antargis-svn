@@ -44392,6 +44392,75 @@ static VALUE _wrap_AGSound_stopChannel(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
+_wrap_AGSound_stopAllChannels__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    AGSound *arg1 = (AGSound *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 0);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->stopAllChannels(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_AGSound_stopAllChannels__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    AGSound *arg1 = (AGSound *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGSound, 0);
+    (arg1)->stopAllChannels();
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_AGSound_stopAllChannels(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGSound, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_AGSound_stopAllChannels__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGSound, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_AGSound_stopAllChannels__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'AGSound_stopAllChannels'");
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGSound_volumeSound(int argc, VALUE *argv, VALUE self) {
     AGSound *arg1 = (AGSound *) 0 ;
     float arg2 ;
@@ -59245,6 +59314,11 @@ _wrap_new_VertexArrayShader(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static void
+free_VertexArrayShader(VertexArrayShader *arg1) {
+    delete arg1;
+}
+
 static VALUE
 _wrap_VertexArrayShader_addAttribute(int argc, VALUE *argv, VALUE self) {
     VertexArrayShader *arg1 = (VertexArrayShader *) 0 ;
@@ -59286,11 +59360,6 @@ _wrap_VertexArrayShader_draw(int argc, VALUE *argv, VALUE self) {
     return Qnil;
 }
 
-
-static void
-free_VertexArrayShader(VertexArrayShader *arg1) {
-    delete arg1;
-}
 
 static VALUE
 _wrap_disown_VertexArrayShader(int argc, VALUE *argv, VALUE self) {
@@ -62101,6 +62170,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGSound.klass, "playWave", VALUEFUNC(_wrap_AGSound_playWave), -1);
     rb_define_method(cAGSound.klass, "loopPlay", VALUEFUNC(_wrap_AGSound_loopPlay), -1);
     rb_define_method(cAGSound.klass, "stopChannel", VALUEFUNC(_wrap_AGSound_stopChannel), -1);
+    rb_define_method(cAGSound.klass, "stopAllChannels", VALUEFUNC(_wrap_AGSound_stopAllChannels), -1);
     rb_define_method(cAGSound.klass, "volumeSound", VALUEFUNC(_wrap_AGSound_volumeSound), -1);
     rb_define_method(cAGSound.klass, "volumeMusic", VALUEFUNC(_wrap_AGSound_volumeMusic), -1);
     rb_define_method(cAGSound.klass, "loadWave", VALUEFUNC(_wrap_AGSound_loadWave), -1);

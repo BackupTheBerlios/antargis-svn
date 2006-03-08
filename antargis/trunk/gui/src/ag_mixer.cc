@@ -247,6 +247,15 @@ void AGSound::stopChannel(int i,int ms)
   channelDone(i);
 }
 
+void AGSound::stopAllChannels(int ms)
+{
+  for(int i=0;i<cSoundChannels;i++)
+    if(mFreeChannels.find(i)==mFreeChannels.end())
+      stopChannel(i,ms);
+}
+
+
+
 void AGSound::loadWave(const std::string &pFilename)
 {
   std::map<std::string,Mix_Chunk*>::iterator i=mSounds.find(pFilename);

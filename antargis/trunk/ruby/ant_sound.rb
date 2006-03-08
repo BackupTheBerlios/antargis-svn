@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 $soundLastCall={}
+$soundInited=false
 
 def playSound(name,minDiff=0.5)
 	sounds={"sheep"=>"data/sound/sheep44.wav",
@@ -27,7 +28,11 @@ def playSound(name,minDiff=0.5)
 	end
 	#dputs $soundLastCall[name].to_s+"   "+$systemTime.to_s
 	if s && $systemTime-$soundLastCall[name]>minDiff # at a second ago
-		getSoundManager.volumeSound(0.4)
+		if not $soundInited
+			setNormalVolumeWave
+			$soundInited=true
+		end
+		#getSoundManager.volumeSound(0.4)
 		#puts "PLAY:"+s
 		getSoundManager.playWave(s)
 		$soundLastCall[name]=$systemTime
@@ -40,4 +45,11 @@ def ambientSound(time)
 		#getSoundManager.playMp3(
 		#getSoundManager.playMp3("data/music/ant2.ogg")
 	end
+end
+
+def setNormalVolumeWave
+	getSoundManager.volumeSound(0.4)
+end
+def setQuietVolumeWave
+	getSoundManager.volumeSound(0.1)
 end

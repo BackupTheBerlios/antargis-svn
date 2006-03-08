@@ -37,6 +37,7 @@ class CampaignLevel
 			@result=@app.result
 			@finish=@app.finished
 			@app=nil
+			getSoundManager.stopAllChannels
 		end
 		$app=nil
 		$map=nil

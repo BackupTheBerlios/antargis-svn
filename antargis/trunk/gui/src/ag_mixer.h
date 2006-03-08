@@ -38,6 +38,7 @@ class AGSound:public AGWidget
   void playWave(const std::string &pFilename,float v=-1.0);
   int loopPlay(const std::string &pFilename,float v=-1.0);
   void stopChannel(int i,int ms=200);
+  void stopAllChannels(int ms=200);
 
   void volumeSound(float v); // 0 to 1
   void volumeMusic(float v); // 0 to 1
