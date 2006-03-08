@@ -165,6 +165,12 @@ p
 	
 }
 
+p.link
+{
+	margin-left:100px;
+	font-weight:bold;
+}
+
 p.screenshot, div.screenshot
 {
 	width:1050px;
