@@ -594,45 +594,6 @@ float &AGVector3::operator[](int index)
 }
 
 
-
-
-/////////////////////////////////////////////////////////////////////////////
-// AGVector2
-/////////////////////////////////////////////////////////////////////////////
-AGVector23::AGVector23():AGVector3()
-{
-}
-AGVector23::AGVector23(float pX,float pY,float pZ):AGVector3(pX,pY,pZ)
-{
-}
-AGVector23::AGVector23(const AGVector3 &a)
-{
-  assert(a.v[2]);
-  v[0]=a.v[0]/a.v[2];
-  v[1]=a.v[1]/a.v[2];
-  v[2]=1.0f;
-}
-
-
-AGVector23& AGVector23::operator=(const AGVector3 &a)
-{
-  if(a.v[2]==0.0f)
-    {
-      cdebug("ERROR in conversion :"<<a[0]<<","<<a[1]<<","<<a[2]);
-      rb_raise(rb_str_new2("Vec2Point error"),"");
-      v[0]=a.v[0];
-      v[1]=a.v[1];
-      v[2]=a.v[2];
-    }
-  else
-    {
-      v[0]=a.v[0]/a.v[2];
-      v[1]=a.v[1]/a.v[2];
-      v[2]=1.0f;
-    }
-  return *this;
-}
-
 ////////////////////////////////////////////////////////////////////////////
 // AGMatrix
 /////////////////////////////////////////////////////////////////////////////
@@ -2366,8 +2327,8 @@ bool AGBox3::collides(const AGVector3&p) const
 }
 bool AGBox3::collides(const AGLine3&p) const
 {
-  std::vector<AGRect23> sides=getSides();
-  for(std::vector<AGRect23>::iterator i=sides.begin();i!=sides.end();++i)
+  std::vector<AGRect3> sides=getSides();
+  for(std::vector<AGRect3>::iterator i=sides.begin();i!=sides.end();++i)
     {
       //      cdebug(i->toString());
       if((*i).collides(p))
@@ -2376,16 +2337,16 @@ bool AGBox3::collides(const AGLine3&p) const
   return false;
 }
 
-std::vector<AGRect23> AGBox3::getSides() const
+std::vector<AGRect3> AGBox3::getSides() const
 {
   AGVector3 b2=base+dir;
-  std::vector<AGRect23> s;
-  s.push_back(AGRect23(base,AGVector3(dir[0],dir[1],0)));
-  s.push_back(AGRect23(base,AGVector3(dir[0],0,dir[2])));
-  s.push_back(AGRect23(base,AGVector3(0,dir[1],dir[2])));
-  s.push_back(AGRect23(b2,AGVector3(-dir[0],-dir[1],0)));
-  s.push_back(AGRect23(b2,AGVector3(-dir[0],0,-dir[2])));
-  s.push_back(AGRect23(b2,AGVector3(0,-dir[1],-dir[2])));
+  std::vector<AGRect3> s;
+  s.push_back(AGRect3(base,AGVector3(dir[0],dir[1],0)));
+  s.push_back(AGRect3(base,AGVector3(dir[0],0,dir[2])));
+  s.push_back(AGRect3(base,AGVector3(0,dir[1],dir[2])));
+  s.push_back(AGRect3(b2,AGVector3(-dir[0],-dir[1],0)));
+  s.push_back(AGRect3(b2,AGVector3(-dir[0],0,-dir[2])));
+  s.push_back(AGRect3(b2,AGVector3(0,-dir[1],-dir[2])));
   return s;
 }
 
@@ -2423,10 +2384,10 @@ std::vector<AGBox3> AGBox3::split() const
 }
 
 ///////////////////////////////////////////////////////////////
-// AGRect23
+// AGRect3
 ///////////////////////////////////////////////////////////////
 
-AGRect23::AGRect23(const AGVector3 &pBase,const AGVector3 &pDir):
+AGRect3::AGRect3(const AGVector3 &pBase,const AGVector3 &pDir):
   base(pBase),dir(pDir)
 {
   // assert that dir[i]>=0
@@ -2438,7 +2399,7 @@ AGRect23::AGRect23(const AGVector3 &pBase,const AGVector3 &pDir):
       }
 }
 
-bool AGRect23::collides(const AGLine3&pLine) const
+bool AGRect3::collides(const AGLine3&pLine) const
 {
   AGVector3 d0,d1; // directions of rect's sides
   if(dir[0]==0)
@@ -2484,7 +2445,7 @@ bool AGRect23::collides(const AGLine3&pLine) const
   return true;
 }
 
-std::string AGRect23::toString() const
+std::string AGRect3::toString() const
 {
   std::ostringstream os;
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";

@@ -13,6 +13,10 @@
 
 class AntEntity;
 
+/**
+   AnimMesh is a skeleton animated mesh.
+   It support either shader-based and cpu-based animation.
+*/
 class AnimMesh:public SceneNode
 {
   AnimMeshData *mData;
@@ -23,7 +27,7 @@ class AnimMesh:public SceneNode
   AGVector4 mRot;
   std::string mAnimName;
   Animation *mAnimation;
-  AntEntity *entity;
+  AntEntity *mEntity;
 
   std::vector<AGMatrix4> mMatrices;
   std::vector<AGMatrix4> mShaderMatrices;

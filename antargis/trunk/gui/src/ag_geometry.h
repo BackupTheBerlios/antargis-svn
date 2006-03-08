@@ -33,7 +33,6 @@
 
    - AGVector2 - 2d vector
    - AGVector3 - is homogenous 2d and inhom 3d
-   - AGVector23  - is 2d (with z=1) or 3d
    - AGVector4 - hom. 3d
    - AGMatrix3 - 3x3 Matrix
    - AGMatrix4 - 4x4 Matrix
@@ -47,7 +46,6 @@
 
 class AGRect2;
 class AGBox3;
-class AGRect23;
 class Node;
 
 struct AGAngle
@@ -198,16 +196,6 @@ class AGVector3
 #ifndef SWIG
   (operator float*)();
 #endif
-};
-
-class AGVector23:public AGVector3
-{
- public:
-  AGVector23();
-  AGVector23(float pX,float pY,float pZ=1.0f);
-  AGVector23(const AGVector3 &p);
-
-  AGVector23&operator=(const AGVector3 &v);
 };
 
 
@@ -630,11 +618,11 @@ class AGMatrix4
 };
 
 // axis-aligned
-class AGRect23
+class AGRect3
 {
   AGVector3 base,dir;
  public:
-  AGRect23(const AGVector3 &pBase,const AGVector3 &pDir);
+  AGRect3(const AGVector3 &pBase,const AGVector3 &pDir);
 
   bool collides(const AGLine3&pLine) const;
 
@@ -657,7 +645,7 @@ class AGBox3
   bool collides(const AGLine3&p) const;
   bool collides(const AGBox3 &b) const;
 
-  std::vector<AGRect23> getSides() const;
+  std::vector<AGRect3> getSides() const;
 
   std::string toString() const;
 

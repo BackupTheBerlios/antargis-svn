@@ -18,7 +18,6 @@ class SwigDirector_AGRubyObject : public AGRubyObject, public Swig::Director {
 
 public:
     SwigDirector_AGRubyObject(VALUE self);
-    virtual void clear();
     virtual ~SwigDirector_AGRubyObject();
 };
 
@@ -35,7 +34,6 @@ class SwigDirector_AGListener : public AGListener, public Swig::Director {
 
 public:
     SwigDirector_AGListener(VALUE self);
-    virtual void clear();
     virtual ~SwigDirector_AGListener();
     virtual bool signal(AGEvent *m);
 };
@@ -76,7 +74,6 @@ public:
     virtual bool eventActive(AGEvent *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool signal(AGEvent *m);
-    virtual void clear();
     virtual ~SwigDirector_AGMessageObject();
     virtual Uint8 getButtonState() const;
     virtual AGVector2 getMousePosition() const;
@@ -377,7 +374,6 @@ public:
     virtual bool eventKeyDown(AGEvent *m2);
     virtual bool eventMouseMotion(AGEvent *m);
     virtual void mark();
-    virtual void clear();
     virtual bool eventFrame(float pTime);
     virtual bool eventFrameEnd(float pTime);
     virtual void eventChangedRes();
@@ -939,7 +935,6 @@ class SwigDirector_AGMain : public AGMain, public Swig::Director {
 
 public:
     SwigDirector_AGMain(VALUE self, int w, int h, int d, bool fs, bool gl);
-    virtual void clear();
     virtual ~SwigDirector_AGMain();
 };
 
@@ -1425,7 +1420,6 @@ class SwigDirector_AnimMeshData : public AnimMeshData, public Swig::Director {
 
 public:
     SwigDirector_AnimMeshData(VALUE self, std::string const &xmlfile);
-    virtual void clear();
     virtual ~SwigDirector_AnimMeshData();
 };
 
@@ -1447,7 +1441,6 @@ public:
     virtual bool eventMouseMotion(AGEvent *m);
     virtual bool eventKeyDown(AGEvent *m);
     virtual void mark();
-    virtual void clear();
     virtual bool eventFrameEnd(float pTime);
     virtual bool eventFrame(float t);
     virtual void eventChangedRes();
@@ -1531,8 +1524,8 @@ public:
     virtual void animationEvent(std::string const &pName);
     virtual void clear();
     virtual void move(float pTime);
-    virtual void delJob();
     virtual void eventNoJob();
+    virtual void delJob();
     virtual void eventGotNewJob();
     virtual void newFetchJob(int p, AntEntity *pTarget, std::string const &pWhat);
     virtual void newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat);
@@ -1601,7 +1594,6 @@ public:
     virtual bool eventActive(AGEvent *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool signal(AGEvent *m);
-    virtual void clear();
     virtual ~SwigDirector_HeightMap();
     virtual Uint8 getButtonState() const;
     virtual AGVector2 getMousePosition() const;
@@ -1649,7 +1641,6 @@ class SwigDirector_MeshData : public MeshData, public Swig::Director {
 public:
     SwigDirector_MeshData(VALUE self, std::string const &filename, float zoom, std::string const &pTexture = "", bool pShadow = true);
     SwigDirector_MeshData(VALUE self, VertexArray const &va, std::string const &pTexture, bool pShadow = true);
-    virtual void clear();
     virtual size_t getTriangles() const;
     virtual ~SwigDirector_MeshData();
     virtual AGVector4 lineHit(AGLine3 const &pLine) const;

@@ -22,20 +22,30 @@ SceneNode::~SceneNode()
     mScene->removeNode(this);
 }
 
+/// release attaching to scene
 void SceneNode::resetScene()
 {
   mScene=0;
 }
 
+/// this function is deprecated. It was once used for drawing 
+/// shadow in a 3rd render-pass.
 void SceneNode::drawShadow()
 {
 }
+
+/// This functions is used in the 1st depth-drawing render-pass,
+/// so you should not use colors or textures, when not needed
 void SceneNode::drawDepth()
 {
 }
 void SceneNode::draw()
 {
 }
+
+/// this function is used for picking objects.
+/// Picking is done one CPU, so shader-animated models are
+/// out of place here.
 void SceneNode::drawPick()
 {
 }

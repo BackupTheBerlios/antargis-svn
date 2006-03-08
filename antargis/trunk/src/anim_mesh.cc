@@ -82,7 +82,7 @@ AnimMesh::AnimMesh(Scene *pScene,AnimMeshData *data):
   mAnimName=mData->mAnimations.begin()->first;
   mAnimation=&mData->mAnimations.begin()->second;
 
-  entity=0;
+  mEntity=0;
   setOrder(MESH_Z);
 
 }
@@ -94,7 +94,7 @@ AnimMesh::~AnimMesh()
 
 void AnimMesh::setEntity(AntEntity *e)
 {
-  entity=e;
+  mEntity=e;
 }
 
 
@@ -114,28 +114,19 @@ void AnimMesh::drawPick()
   drawPrivate(false,true);
 }
 
-// at first try a simple animation without shaders
+
 void AnimMesh::drawPrivate(bool textured, bool mem)
 {
   AGRenderContext c;
-//  bool fast=true;
   if(textured)
-    {
-      c.setTexture(mData->mTexture.glTexture());
-      /*
-      glColor4f(1,1,1,1);
-      glBindTexture(GL_TEXTURE_2D,mData->mTexture.getTextureID());
-      glEnable(GL_LIGHTING);*/
-    }
-  //  else
-  //    fast=false; // FIXME: add shader for non-textured rendering
+    c.setTexture(mData->mTexture.glTexture());
+  
   c.setLighting(true);
   c.begin();
   glPushMatrix();
 
   AGVector4 p=getPos();
-  glTranslatef(p[0],p[1],p[2]);//mPos[0],mPos[1],mPos[2]);
-  //  if(!fast)
+  glTranslatef(p[0],p[1],p[2]);
   glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
 
 
@@ -144,15 +135,13 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
       glMultMatrixf(mData->getTransform());
       if(textured)
 	{
-	  //	  glDisable(GL_COLOR_MATERIAL);
 	  mData->animShader.enable();
-	  //mData->animShader.sendAttribute("bones",mData->bonef);
+
 	  mData->animShader.sendUniform("matrices",mShaderMatrices);
 	  
 	  mData->mArray.draw();
 
 	  mData->animShader.disable();
-	  //	  glEnable(GL_COLOR_MATERIAL);
 
 	}
       else if(mem)
@@ -251,27 +240,20 @@ void AnimMesh::advance(float time)
     mTime=mAnimation->begin;
 
   // check events
-  if(entity && mData->frameEvents.size())
+  if(mEntity && mData->frameEvents.size())
     {
-      //      cdebug("ARG");
-      //      if(mData->frameEvents.size())
-      //	cdebug(oldTime<<"  "<<mTime);
       if(oldTime>mTime)
 	{
 	  for(std::map<int,std::string>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
 	    if(i->first>=oldTime || i->first<mTime)
-	      entity->animationEvent(i->second);
+	      mEntity->animationEvent(i->second);
 	}
       else
 	{
 	  for(std::map<int,std::string>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
 	    {
-	      //	      cdebug("i:"<<i->first);
 	      if(i->first>=oldTime && i->first<mTime)
-		{
-		  //		  cdebug("EVENT:"<<i->second);
-		  entity->animationEvent(i->second);
-		}
+		mEntity->animationEvent(i->second);
 	    }
 	}
 
@@ -321,19 +303,9 @@ void AnimMesh::update()
 
 
   for(size_t k=0;k<mData->bones.size();k++)
-    {
-      mShaderMatrices[k]=mMatrices[k];
-      //      cdebug(k<<std::endl<<mShaderMatrices[k].toString());
-    }
-  //  throw int();
+    mShaderMatrices[k]=mMatrices[k];
+
   mShaderMatrices[mData->bones.size()]=mMatrices[mData->bones.size()];
-
-
-
-  /*  for(size_t k=0;k<=mData->bones.size();k++)
-    mShaderMatrices[k]=AGMatrix4();
-  for(size_t k=0;k<=mData->bones.size();k++)
-  mShaderMatrices[k]=mData->getTransform();*/
 }
 
 
@@ -354,15 +326,10 @@ void AnimMesh::setPos(const AGVector3 &p)
 {
   SceneNode::setPos(p);
 
-  //  getScene()->prepareUpdate(this);
-
-  //  mPos=AGVector4(p,1);
   mTransform=AGMatrix4(mRot[3],mRot.dim3())*AGMatrix4(getPos());//p);//mPos);
 
   assert(mData);
   mComplete=mData->getTransform()*mTransform;
-
-  //  getScene()->updatePos(this);
 }
 void AnimMesh::setRotation(const AGVector3 &r,float a)
 {
@@ -400,12 +367,6 @@ bool AnimMesh::setAnimation(const std::string &pName)
   return true;
 }
 
-/*AGBox3 AnimMesh::bbox() const
-{
-  return mData->bbox()+mPos.dim3();
-  }*/
-
-
 void AnimMesh::mark()
 {
   markObject(mData);
@@ -416,27 +377,4 @@ size_t AnimMesh::getTriangles() const
   return mData->indices.size()/3;
 }
 
-
-/* fast rendering
-
-
-1) bone-association
-prepare buffers
-
-like vertexbuffer use
-
-p= program
-loc = glGetAttribLocationARB(p,"height"); // get saving handle
-glEnableVertexAttribArrayARB(loc); // add array
-glVertexAttribPointerARB(loc,1,GL_FLOAT,0,0,heights); // set attributes (for each vertex an attribute)
-
-
-2) give matrices
-with 
-void glUniformMatrix4fvARB(GLint location,
-                           GLsizei count,
-                           GLboolean transpose,
-                           GLfloat *value)
-count==bone-count
-*/
 

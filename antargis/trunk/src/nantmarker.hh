@@ -1,21 +1,33 @@
-%exception AGRadio::AGRadio {
+%exception AGWindow::AGWindow {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
-%markfunc AGRadio "general_markfunc"
-%exception GLApp::GLApp {
+%markfunc AGWindow "general_markfunc"
+%exception AGCaption::AGCaption {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
-%markfunc GLApp "general_markfunc"
-%exception AGDialog::AGDialog {
+%markfunc AGCaption "general_markfunc"
+%exception AGMessageObject::AGMessageObject {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
-%markfunc AGDialog "general_markfunc"
+%markfunc AGMessageObject "general_markfunc"
+%exception WaterPiece::WaterPiece {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc WaterPiece "general_markfunc"
+%exception Scene::Scene {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc Scene "general_markfunc"
 %exception AnimMeshData::AnimMeshData {
 	$action
 	result->mRUBY=self;
@@ -28,228 +40,216 @@
 	result->mRubyObject=true;
 }
 %markfunc AnimMesh "general_markfunc"
-%exception Scene::Scene {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc Scene "general_markfunc"
-%exception WaterPiece::WaterPiece {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc WaterPiece "general_markfunc"
-%exception AGText::AGText {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGText "general_markfunc"
-%exception AGRubyObject::AGRubyObject {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGRubyObject "general_markfunc"
-%exception AGSubMenu::AGSubMenu {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGSubMenu "general_markfunc"
-%exception AGWidget::AGWidget {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGWidget "general_markfunc"
-%exception AGApplication::AGApplication {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGApplication "general_markfunc"
 %exception AGTable::AGTable {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
 %markfunc AGTable "general_markfunc"
-%exception HeightMap::HeightMap {
+%exception AGText::AGText {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
-%markfunc HeightMap "general_markfunc"
-%exception AGLayout::AGLayout {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGLayout "general_markfunc"
-%exception TerrainPieceVA::TerrainPieceVA {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc TerrainPieceVA "general_markfunc"
-%exception AGListBox::AGListBox {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGListBox "general_markfunc"
-%exception MeshData::MeshData {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc MeshData "general_markfunc"
-%exception AGMessageObject::AGMessageObject {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGMessageObject "general_markfunc"
-%exception AGCaption::AGCaption {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGCaption "general_markfunc"
-%exception AGRadioGroup::AGRadioGroup {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGRadioGroup "general_markfunc"
-%exception AGWindow::AGWindow {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGWindow "general_markfunc"
-%exception AntEntity::AntEntity {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AntEntity "general_markfunc"
-%exception AGMenuItem::AGMenuItem {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGMenuItem "general_markfunc"
-%exception AntMap::AntMap {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AntMap "general_markfunc"
-%exception AGMenu::AGMenu {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGMenu "general_markfunc"
-%exception MiniMap::MiniMap {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc MiniMap "general_markfunc"
-%exception AGColorButton::AGColorButton {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGColorButton "general_markfunc"
-%exception AGImage::AGImage {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGImage "general_markfunc"
-%exception AGMain::AGMain {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGMain "general_markfunc"
-%exception SceneNode::SceneNode {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc SceneNode "general_markfunc"
-%exception AGGLWidget::AGGLWidget {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGGLWidget "general_markfunc"
-%exception AGEdit::AGEdit {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGEdit "general_markfunc"
-%exception AGCheckBox::AGCheckBox {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGCheckBox "general_markfunc"
-%exception Smoke::Smoke {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc Smoke "general_markfunc"
-%exception AGVTiler::AGVTiler {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGVTiler "general_markfunc"
-%exception AGHTiler::AGHTiler {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGHTiler "general_markfunc"
-%exception AGSound::AGSound {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGSound "general_markfunc"
-%exception AGButton::AGButton {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGButton "general_markfunc"
-%exception AGListener::AGListener {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGListener "general_markfunc"
-%exception Mesh::Mesh {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc Mesh "general_markfunc"
+%markfunc AGText "general_markfunc"
 %exception NewDecal::NewDecal {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
 %markfunc NewDecal "general_markfunc"
+%exception Mesh::Mesh {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc Mesh "general_markfunc"
+%exception AGSound::AGSound {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGSound "general_markfunc"
+%exception AGMenuItem::AGMenuItem {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGMenuItem "general_markfunc"
+%exception AGMain::AGMain {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGMain "general_markfunc"
+%exception AGVTiler::AGVTiler {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGVTiler "general_markfunc"
+%exception AGCheckBox::AGCheckBox {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGCheckBox "general_markfunc"
+%exception AGRadioGroup::AGRadioGroup {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGRadioGroup "general_markfunc"
+%exception AGImage::AGImage {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGImage "general_markfunc"
+%exception AGApplication::AGApplication {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGApplication "general_markfunc"
+%exception AGDialog::AGDialog {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGDialog "general_markfunc"
+%exception AGWidget::AGWidget {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGWidget "general_markfunc"
+%exception Smoke::Smoke {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc Smoke "general_markfunc"
+%exception AGGLWidget::AGGLWidget {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGGLWidget "general_markfunc"
+%exception AGListener::AGListener {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGListener "general_markfunc"
+%exception MeshData::MeshData {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc MeshData "general_markfunc"
+%exception AGEdit::AGEdit {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGEdit "general_markfunc"
+%exception AGLayout::AGLayout {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGLayout "general_markfunc"
+%exception AGHTiler::AGHTiler {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGHTiler "general_markfunc"
+%exception AGButton::AGButton {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGButton "general_markfunc"
+%exception SceneNode::SceneNode {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc SceneNode "general_markfunc"
+%exception AGSubMenu::AGSubMenu {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGSubMenu "general_markfunc"
+%exception AGListBox::AGListBox {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGListBox "general_markfunc"
+%exception TerrainPieceVA::TerrainPieceVA {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc TerrainPieceVA "general_markfunc"
+%exception AGColorButton::AGColorButton {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGColorButton "general_markfunc"
+%exception MiniMap::MiniMap {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc MiniMap "general_markfunc"
+%exception AGMenu::AGMenu {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGMenu "general_markfunc"
+%exception AGRubyObject::AGRubyObject {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGRubyObject "general_markfunc"
+%exception AntMap::AntMap {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AntMap "general_markfunc"
+%exception HeightMap::HeightMap {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc HeightMap "general_markfunc"
+%exception AntEntity::AntEntity {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AntEntity "general_markfunc"
+%exception GLApp::GLApp {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc GLApp "general_markfunc"
+%exception AGRadio::AGRadio {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGRadio "general_markfunc"
 %typemap(out) AGWindow*{
  if($1)
  {
@@ -286,56 +286,56 @@
   else
    {
      if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<GLApp*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGListBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGCaption*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AntMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<MiniMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGColorButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGSound*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGDialog*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
 else if(dynamic_cast<AGImage*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+else if(dynamic_cast<AGRadioGroup*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGGLWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGListBox*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+else if(dynamic_cast<AGSubMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGColorButton*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<MiniMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGRadio*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
+else if(dynamic_cast<GLApp*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
+else if(dynamic_cast<AntMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
 else if(dynamic_cast<AGText*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGApplication*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
 else if(dynamic_cast<AGTable*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<HeightMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-else if(dynamic_cast<AGLayout*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
 else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+else if(dynamic_cast<AGMenuItem*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+else if(dynamic_cast<AGApplication*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
+else if(dynamic_cast<AGLayout*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
+else if(dynamic_cast<HeightMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
 else if(dynamic_cast<AGButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+else if(dynamic_cast<AGHTiler*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
 else if(dynamic_cast<AGVTiler*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
 else if(dynamic_cast<AGWidget*>(result))
@@ -610,48 +610,48 @@ else if(dynamic_cast<GLApp*>(result))
   else
    {
      if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGListBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGCaption*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<MiniMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGColorButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGSound*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGDialog*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
 else if(dynamic_cast<AGImage*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+else if(dynamic_cast<AGRadioGroup*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGGLWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGListBox*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+else if(dynamic_cast<AGSubMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGColorButton*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<MiniMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGRadio*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
 else if(dynamic_cast<AGText*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
 else if(dynamic_cast<AGTable*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<AGLayout*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
 else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+else if(dynamic_cast<AGMenuItem*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+else if(dynamic_cast<AGLayout*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
 else if(dynamic_cast<AGButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+else if(dynamic_cast<AGHTiler*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
 else if(dynamic_cast<AGVTiler*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
    else
@@ -696,56 +696,56 @@ else if(dynamic_cast<AGVTiler*>(result))
   else
    {
      if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<GLApp*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGListBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGCaption*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AntMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<MiniMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGColorButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGSound*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGDialog*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
 else if(dynamic_cast<AGImage*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+else if(dynamic_cast<AGRadioGroup*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGGLWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGListBox*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+else if(dynamic_cast<AGSubMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGColorButton*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<MiniMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGRadio*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
+else if(dynamic_cast<GLApp*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
+else if(dynamic_cast<AntMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
 else if(dynamic_cast<AGText*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGApplication*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
 else if(dynamic_cast<AGTable*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<HeightMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-else if(dynamic_cast<AGLayout*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
 else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+else if(dynamic_cast<AGMenuItem*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+else if(dynamic_cast<AGApplication*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
+else if(dynamic_cast<AGLayout*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
+else if(dynamic_cast<HeightMap*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
 else if(dynamic_cast<AGButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+else if(dynamic_cast<AGHTiler*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
 else if(dynamic_cast<AGVTiler*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
 else if(dynamic_cast<AGWidget*>(result))
@@ -850,14 +850,14 @@ else if(dynamic_cast<AnimMesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
 else if(dynamic_cast<WaterPiece*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
-else if(dynamic_cast<TerrainPieceVA*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
-else if(dynamic_cast<Smoke*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
 else if(dynamic_cast<Mesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
 else if(dynamic_cast<NewDecal*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
+else if(dynamic_cast<Smoke*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
+else if(dynamic_cast<TerrainPieceVA*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
    }
@@ -1215,11 +1215,6 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGMessageObject,b);
  $result=*b;
 }
-%typemap(directorout) AGMouseEvent {
- AGMouseEvent *b;
- Data_Get_Struct($input,AGMouseEvent,b);
- $result=*b;
-}
 %typemap(directorout) AGMutex {
  AGMutex *b;
  Data_Get_Struct($input,AGMutex,b);
@@ -1250,9 +1245,9 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGRect2,b);
  $result=*b;
 }
-%typemap(directorout) AGRect23 {
- AGRect23 *b;
- Data_Get_Struct($input,AGRect23,b);
+%typemap(directorout) AGRect3 {
+ AGRect3 *b;
+ Data_Get_Struct($input,AGRect3,b);
  $result=*b;
 }
 %typemap(directorout) AGRenderContext {
@@ -1275,19 +1270,9 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AGSignal,b);
  $result=*b;
 }
-%typemap(directorout) AGSlot {
- AGSlot *b;
- Data_Get_Struct($input,AGSlot,b);
- $result=*b;
-}
 %typemap(directorout) AGSlot0 {
  AGSlot0 *b;
  Data_Get_Struct($input,AGSlot0,b);
- $result=*b;
-}
-%typemap(directorout) AGSlot2 {
- AGSlot2 *b;
- Data_Get_Struct($input,AGSlot2,b);
  $result=*b;
 }
 %typemap(directorout) AGSound {
@@ -1358,11 +1343,6 @@ else if(dynamic_cast<AntMap*>(result))
 %typemap(directorout) AGVector2 {
  AGVector2 *b;
  Data_Get_Struct($input,AGVector2,b);
- $result=*b;
-}
-%typemap(directorout) AGVector23 {
- AGVector23 *b;
- Data_Get_Struct($input,AGVector23,b);
  $result=*b;
 }
 %typemap(directorout) AGVector3 {

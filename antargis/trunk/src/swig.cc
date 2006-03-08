@@ -1069,7 +1069,7 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGRadio swig_types[44]
 #define SWIGTYPE_p_AGRadioGroup swig_types[45]
 #define SWIGTYPE_p_AGRect2 swig_types[46]
-#define SWIGTYPE_p_AGRect23 swig_types[47]
+#define SWIGTYPE_p_AGRect3 swig_types[47]
 #define SWIGTYPE_p_AGRenderContext swig_types[48]
 #define SWIGTYPE_p_AGRubyObject swig_types[49]
 #define SWIGTYPE_p_AGScreen swig_types[50]
@@ -1088,115 +1088,114 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AGTriangle3 swig_types[63]
 #define SWIGTYPE_p_AGVTiler swig_types[64]
 #define SWIGTYPE_p_AGVector2 swig_types[65]
-#define SWIGTYPE_p_AGVector23 swig_types[66]
-#define SWIGTYPE_p_AGVector3 swig_types[67]
-#define SWIGTYPE_p_AGVector4 swig_types[68]
-#define SWIGTYPE_p_AGWidget swig_types[69]
-#define SWIGTYPE_p_AGWindow swig_types[70]
-#define SWIGTYPE_p_AnimMesh swig_types[71]
-#define SWIGTYPE_p_AnimMeshData swig_types[72]
-#define SWIGTYPE_p_Animation swig_types[73]
-#define SWIGTYPE_p_AntEntity swig_types[74]
-#define SWIGTYPE_p_AntEntityPtr swig_types[75]
-#define SWIGTYPE_p_AntFragProgram swig_types[76]
-#define SWIGTYPE_p_AntMap swig_types[77]
-#define SWIGTYPE_p_AntShaderParameter swig_types[78]
-#define SWIGTYPE_p_AntShaderProgram swig_types[79]
-#define SWIGTYPE_p_AntShadowShader swig_types[80]
-#define SWIGTYPE_p_AntVertexProgram swig_types[81]
-#define SWIGTYPE_p_AntWaterShader swig_types[82]
-#define SWIGTYPE_p_Attributes swig_types[83]
-#define SWIGTYPE_p_BinaryFileIn swig_types[84]
-#define SWIGTYPE_p_BinaryFileOut swig_types[85]
-#define SWIGTYPE_p_BinaryIn swig_types[86]
-#define SWIGTYPE_p_BinaryOut swig_types[87]
-#define SWIGTYPE_p_BinaryStringIn swig_types[88]
-#define SWIGTYPE_p_BinaryStringOut swig_types[89]
-#define SWIGTYPE_p_Bone swig_types[90]
-#define SWIGTYPE_p_Document swig_types[91]
-#define SWIGTYPE_p_DomParser swig_types[92]
-#define SWIGTYPE_p_EntityList swig_types[93]
-#define SWIGTYPE_p_GLApp swig_types[94]
-#define SWIGTYPE_p_GLint swig_types[95]
-#define SWIGTYPE_p_GLuint swig_types[96]
-#define SWIGTYPE_p_HeightMap swig_types[97]
-#define SWIGTYPE_p_KeyFrame swig_types[98]
-#define SWIGTYPE_p_Mesh swig_types[99]
-#define SWIGTYPE_p_MeshData swig_types[100]
-#define SWIGTYPE_p_MeshOptimizer swig_types[101]
-#define SWIGTYPE_p_MeshVertex swig_types[102]
-#define SWIGTYPE_p_Meshes swig_types[103]
-#define SWIGTYPE_p_MiniMap swig_types[104]
-#define SWIGTYPE_p_NewDecal swig_types[105]
-#define SWIGTYPE_p_Node swig_types[106]
-#define SWIGTYPE_p_NodeList swig_types[107]
-#define SWIGTYPE_p_NodeVector swig_types[108]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[109]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[110]
-#define SWIGTYPE_p_Parser swig_types[111]
-#define SWIGTYPE_p_PickNode swig_types[112]
-#define SWIGTYPE_p_PickResult swig_types[113]
-#define SWIGTYPE_p_Renderer swig_types[114]
-#define SWIGTYPE_p_Resource swig_types[115]
-#define SWIGTYPE_p_SDLKey swig_types[116]
-#define SWIGTYPE_p_SDLMod swig_types[117]
-#define SWIGTYPE_p_SDL_Event swig_types[118]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[119]
-#define SWIGTYPE_p_SDL_Rect swig_types[120]
-#define SWIGTYPE_p_SDL_Surface swig_types[121]
-#define SWIGTYPE_p_Scene swig_types[122]
-#define SWIGTYPE_p_SceneNode swig_types[123]
-#define SWIGTYPE_p_SerialException swig_types[124]
-#define SWIGTYPE_p_Sint32 swig_types[125]
-#define SWIGTYPE_p_Smoke swig_types[126]
-#define SWIGTYPE_p_Terrain swig_types[127]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[128]
-#define SWIGTYPE_p_Uint16 swig_types[129]
-#define SWIGTYPE_p_Uint32 swig_types[130]
-#define SWIGTYPE_p_Uint8 swig_types[131]
-#define SWIGTYPE_p_VertexArray swig_types[132]
-#define SWIGTYPE_p_VertexArrayShader swig_types[133]
-#define SWIGTYPE_p_Viewport swig_types[134]
-#define SWIGTYPE_p_WaterPiece swig_types[135]
-#define SWIGTYPE_p_const_iterator swig_types[136]
-#define SWIGTYPE_p_float swig_types[137]
-#define SWIGTYPE_p_iterator swig_types[138]
-#define SWIGTYPE_p_p_AnimMesh swig_types[139]
-#define SWIGTYPE_p_p_Mesh swig_types[140]
-#define SWIGTYPE_p_p_NewDecal swig_types[141]
-#define SWIGTYPE_p_p_Node swig_types[142]
-#define SWIGTYPE_p_p_SceneNode swig_types[143]
-#define SWIGTYPE_p_p_Smoke swig_types[144]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[145]
-#define SWIGTYPE_p_p_WaterPiece swig_types[146]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[147]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[148]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[149]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[150]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[151]
-#define SWIGTYPE_p_std__ostringstream swig_types[152]
-#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[153]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[154]
-#define SWIGTYPE_p_std__setTScene_p_t swig_types[155]
-#define SWIGTYPE_p_std__string swig_types[156]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[157]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[158]
-#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[159]
-#define SWIGTYPE_p_std__vectorTAGRect23_t swig_types[160]
-#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[161]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[162]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[163]
-#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[164]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[165]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[166]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[167]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[168]
-#define SWIGTYPE_p_std__vectorTfloat_t swig_types[169]
-#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[170]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[171]
-#define SWIGTYPE_p_unsigned_long swig_types[172]
-static swig_type_info *swig_types[174];
-static swig_module_info swig_module = {swig_types, 173, 0, 0, 0, 0};
+#define SWIGTYPE_p_AGVector3 swig_types[66]
+#define SWIGTYPE_p_AGVector4 swig_types[67]
+#define SWIGTYPE_p_AGWidget swig_types[68]
+#define SWIGTYPE_p_AGWindow swig_types[69]
+#define SWIGTYPE_p_AnimMesh swig_types[70]
+#define SWIGTYPE_p_AnimMeshData swig_types[71]
+#define SWIGTYPE_p_Animation swig_types[72]
+#define SWIGTYPE_p_AntEntity swig_types[73]
+#define SWIGTYPE_p_AntEntityPtr swig_types[74]
+#define SWIGTYPE_p_AntFragProgram swig_types[75]
+#define SWIGTYPE_p_AntMap swig_types[76]
+#define SWIGTYPE_p_AntShaderParameter swig_types[77]
+#define SWIGTYPE_p_AntShaderProgram swig_types[78]
+#define SWIGTYPE_p_AntShadowShader swig_types[79]
+#define SWIGTYPE_p_AntVertexProgram swig_types[80]
+#define SWIGTYPE_p_AntWaterShader swig_types[81]
+#define SWIGTYPE_p_Attributes swig_types[82]
+#define SWIGTYPE_p_BinaryFileIn swig_types[83]
+#define SWIGTYPE_p_BinaryFileOut swig_types[84]
+#define SWIGTYPE_p_BinaryIn swig_types[85]
+#define SWIGTYPE_p_BinaryOut swig_types[86]
+#define SWIGTYPE_p_BinaryStringIn swig_types[87]
+#define SWIGTYPE_p_BinaryStringOut swig_types[88]
+#define SWIGTYPE_p_Bone swig_types[89]
+#define SWIGTYPE_p_Document swig_types[90]
+#define SWIGTYPE_p_DomParser swig_types[91]
+#define SWIGTYPE_p_EntityList swig_types[92]
+#define SWIGTYPE_p_GLApp swig_types[93]
+#define SWIGTYPE_p_GLint swig_types[94]
+#define SWIGTYPE_p_GLuint swig_types[95]
+#define SWIGTYPE_p_HeightMap swig_types[96]
+#define SWIGTYPE_p_KeyFrame swig_types[97]
+#define SWIGTYPE_p_Mesh swig_types[98]
+#define SWIGTYPE_p_MeshData swig_types[99]
+#define SWIGTYPE_p_MeshOptimizer swig_types[100]
+#define SWIGTYPE_p_MeshVertex swig_types[101]
+#define SWIGTYPE_p_Meshes swig_types[102]
+#define SWIGTYPE_p_MiniMap swig_types[103]
+#define SWIGTYPE_p_NewDecal swig_types[104]
+#define SWIGTYPE_p_Node swig_types[105]
+#define SWIGTYPE_p_NodeList swig_types[106]
+#define SWIGTYPE_p_NodeVector swig_types[107]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[108]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[109]
+#define SWIGTYPE_p_Parser swig_types[110]
+#define SWIGTYPE_p_PickNode swig_types[111]
+#define SWIGTYPE_p_PickResult swig_types[112]
+#define SWIGTYPE_p_Renderer swig_types[113]
+#define SWIGTYPE_p_Resource swig_types[114]
+#define SWIGTYPE_p_SDLKey swig_types[115]
+#define SWIGTYPE_p_SDLMod swig_types[116]
+#define SWIGTYPE_p_SDL_Event swig_types[117]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[118]
+#define SWIGTYPE_p_SDL_Rect swig_types[119]
+#define SWIGTYPE_p_SDL_Surface swig_types[120]
+#define SWIGTYPE_p_Scene swig_types[121]
+#define SWIGTYPE_p_SceneNode swig_types[122]
+#define SWIGTYPE_p_SerialException swig_types[123]
+#define SWIGTYPE_p_Sint32 swig_types[124]
+#define SWIGTYPE_p_Smoke swig_types[125]
+#define SWIGTYPE_p_Terrain swig_types[126]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[127]
+#define SWIGTYPE_p_Uint16 swig_types[128]
+#define SWIGTYPE_p_Uint32 swig_types[129]
+#define SWIGTYPE_p_Uint8 swig_types[130]
+#define SWIGTYPE_p_VertexArray swig_types[131]
+#define SWIGTYPE_p_VertexArrayShader swig_types[132]
+#define SWIGTYPE_p_Viewport swig_types[133]
+#define SWIGTYPE_p_WaterPiece swig_types[134]
+#define SWIGTYPE_p_const_iterator swig_types[135]
+#define SWIGTYPE_p_float swig_types[136]
+#define SWIGTYPE_p_iterator swig_types[137]
+#define SWIGTYPE_p_p_AnimMesh swig_types[138]
+#define SWIGTYPE_p_p_Mesh swig_types[139]
+#define SWIGTYPE_p_p_NewDecal swig_types[140]
+#define SWIGTYPE_p_p_Node swig_types[141]
+#define SWIGTYPE_p_p_SceneNode swig_types[142]
+#define SWIGTYPE_p_p_Smoke swig_types[143]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[144]
+#define SWIGTYPE_p_p_WaterPiece swig_types[145]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[146]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[147]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[148]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[149]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[150]
+#define SWIGTYPE_p_std__ostringstream swig_types[151]
+#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[152]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[153]
+#define SWIGTYPE_p_std__setTScene_p_t swig_types[154]
+#define SWIGTYPE_p_std__string swig_types[155]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[156]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[157]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[158]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[159]
+#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[160]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[161]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[162]
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[163]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[164]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[165]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[166]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[167]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[168]
+#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[169]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[170]
+#define SWIGTYPE_p_unsigned_long swig_types[171]
+static swig_type_info *swig_types[173];
+static swig_module_info swig_module = {swig_types, 172, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1757,17 +1756,6 @@ SwigDirector_AGRubyObject::SwigDirector_AGRubyObject(VALUE self): AGRubyObject()
 
 
 
-void SwigDirector_AGRubyObject::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 SwigDirector_AGRubyObject::~SwigDirector_AGRubyObject() {
 }
 
@@ -1784,17 +1772,6 @@ SwigDirector_AGListener::SwigDirector_AGListener(VALUE self): AGListener(), Swig
     
 }
 
-
-
-void SwigDirector_AGListener::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
 
 
 SwigDirector_AGListener::~SwigDirector_AGListener() {
@@ -2043,17 +2020,6 @@ bool SwigDirector_AGMessageObject::signal(AGEvent *m) {
     result = rb_funcall(swig_get_self(), rb_intern("signal"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
-}
-
-
-void SwigDirector_AGMessageObject::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -5394,17 +5360,6 @@ void SwigDirector_AGApplication::mark() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
-}
-
-
-void SwigDirector_AGApplication::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -11602,17 +11557,6 @@ SwigDirector_AGMain::SwigDirector_AGMain(VALUE self, int w, int h, int d, bool f
 
 
 
-void SwigDirector_AGMain::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 SwigDirector_AGMain::~SwigDirector_AGMain() {
 }
 
@@ -16949,17 +16893,6 @@ SwigDirector_AnimMeshData::SwigDirector_AnimMeshData(VALUE self, std::string con
 
 
 
-void SwigDirector_AnimMeshData::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 SwigDirector_AnimMeshData::~SwigDirector_AnimMeshData() {
 }
 
@@ -17157,17 +17090,6 @@ void SwigDirector_GLApp::mark() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
-}
-
-
-void SwigDirector_GLApp::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -17573,17 +17495,6 @@ void SwigDirector_AntEntity::move(float pTime) {
 }
 
 
-void SwigDirector_AntEntity::delJob() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AntEntity::delJob();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("delJob"), 0, NULL);
-}
-
-
 void SwigDirector_AntEntity::eventNoJob() {
     VALUE result;
     
@@ -17592,6 +17503,17 @@ void SwigDirector_AntEntity::eventNoJob() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("eventNoJob"), 0, NULL);
+}
+
+
+void SwigDirector_AntEntity::delJob() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AntEntity::delJob();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("delJob"), 0, NULL);
 }
 
 
@@ -18121,17 +18043,6 @@ bool SwigDirector_HeightMap::signal(AGEvent *m) {
 }
 
 
-void SwigDirector_HeightMap::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 SwigDirector_HeightMap::~SwigDirector_HeightMap() {
 }
 
@@ -18578,17 +18489,6 @@ SwigDirector_MeshData::SwigDirector_MeshData(VALUE self, VertexArray const &va, 
     
 }
 
-
-
-void SwigDirector_MeshData::clear() {
-    VALUE result;
-    
-    if (swig_get_up()) {
-        AGRubyObject::clear();
-        return;
-    }
-    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
 
 
 size_t SwigDirector_MeshData::getTriangles() const {
@@ -20918,14 +20818,14 @@ _wrap_SceneNodeVector_pop(int argc, VALUE *argv, VALUE self) {
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
                 else if(dynamic_cast<WaterPiece*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
-                else if(dynamic_cast<TerrainPieceVA*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
-                else if(dynamic_cast<Smoke*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
                 else if(dynamic_cast<Mesh*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                 else if(dynamic_cast<NewDecal*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
+                else if(dynamic_cast<Smoke*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
+                else if(dynamic_cast<TerrainPieceVA*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
                 else
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
             }
@@ -22812,22 +22712,6 @@ free_AGRubyObject(AGRubyObject *arg1) {
 }
 
 static VALUE
-_wrap_AGRubyObject_clear(int argc, VALUE *argv, VALUE self) {
-    AGRubyObject *arg1 = (AGRubyObject *) 0 ;
-    Swig::Director *director = 0;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRubyObject, 0);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    (arg1)->clear();
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_general_markfunc(int argc, VALUE *argv, VALUE self) {
     void *arg1 = (void *) 0 ;
     
@@ -22835,22 +22719,6 @@ _wrap_general_markfunc(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, 0, SWIG_POINTER_EXCEPTION|0);
     general_markfunc(arg1);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_disown_AGRubyObject(int argc, VALUE *argv, VALUE self) {
-    AGRubyObject *arg1 = (AGRubyObject *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGRubyObject, 0);
-    {
-        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
-        if (director) director->swig_disown();
-    }
     
     return Qnil;
 }
@@ -22869,6 +22737,22 @@ _wrap_saveDelete(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
+}
+
+
+static VALUE
+_wrap_disown_AGRubyObject(int argc, VALUE *argv, VALUE self) {
+    AGRubyObject *arg1 = (AGRubyObject *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGRubyObject, 0);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
 }
 
 
@@ -23047,56 +22931,56 @@ _wrap_AGEvent_getCaller(int argc, VALUE *argv, VALUE self) {
             else
             {
                 if(false);
-                else if(dynamic_cast<AGRadio*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                else if(dynamic_cast<GLApp*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-                else if(dynamic_cast<AGDialog*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                else if(dynamic_cast<AGSubMenu*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                else if(dynamic_cast<AGListBox*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                 else if(dynamic_cast<AGCaption*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                else if(dynamic_cast<AGRadioGroup*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                 else if(dynamic_cast<AGWindow*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                else if(dynamic_cast<AntMap*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-                else if(dynamic_cast<AGMenu*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                else if(dynamic_cast<MiniMap*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                else if(dynamic_cast<AGColorButton*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                else if(dynamic_cast<AGSound*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                else if(dynamic_cast<AGDialog*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                 else if(dynamic_cast<AGImage*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                else if(dynamic_cast<AGRadioGroup*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                 else if(dynamic_cast<AGGLWidget*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                 else if(dynamic_cast<AGEdit*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                else if(dynamic_cast<AGSound*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                else if(dynamic_cast<AGListBox*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                else if(dynamic_cast<AGSubMenu*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                else if(dynamic_cast<AGColorButton*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                else if(dynamic_cast<AGMenu*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                else if(dynamic_cast<MiniMap*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                else if(dynamic_cast<AGRadio*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
+                else if(dynamic_cast<GLApp*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
+                else if(dynamic_cast<AntMap*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
                 else if(dynamic_cast<AGText*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-                else if(dynamic_cast<AGApplication*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
                 else if(dynamic_cast<AGTable*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                else if(dynamic_cast<HeightMap*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-                else if(dynamic_cast<AGLayout*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                else if(dynamic_cast<AGMenuItem*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                 else if(dynamic_cast<AGCheckBox*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                else if(dynamic_cast<AGHTiler*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                else if(dynamic_cast<AGMenuItem*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                else if(dynamic_cast<AGApplication*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
+                else if(dynamic_cast<AGLayout*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
+                else if(dynamic_cast<HeightMap*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
                 else if(dynamic_cast<AGButton*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                else if(dynamic_cast<AGHTiler*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                 else if(dynamic_cast<AGVTiler*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                 else if(dynamic_cast<AGWidget*>(result))
@@ -25987,155 +25871,6 @@ _wrap_AGVector3_to_s(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_AGVector3(AGVector3 *arg1) {
-    delete arg1;
-}
-
-swig_class cAGVector23;
-
-static VALUE
-_wrap_new_AGVector23__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    AGVector23 *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (AGVector23 *)new AGVector23();
-    DATA_PTR(self) = result;
-    
-    return self;
-}
-
-
-static VALUE
-_wrap_new_AGVector23__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    float arg1 ;
-    float arg2 ;
-    float arg3 ;
-    AGVector23 *result;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = (float) NUM2DBL(argv[0]);
-    arg2 = (float) NUM2DBL(argv[1]);
-    arg3 = (float) NUM2DBL(argv[2]);
-    result = (AGVector23 *)new AGVector23(arg1,arg2,arg3);
-    DATA_PTR(self) = result;
-    
-    return self;
-}
-
-
-static VALUE
-_wrap_new_AGVector23__SWIG_2(int argc, VALUE *argv, VALUE self) {
-    float arg1 ;
-    float arg2 ;
-    AGVector23 *result;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = (float) NUM2DBL(argv[0]);
-    arg2 = (float) NUM2DBL(argv[1]);
-    result = (AGVector23 *)new AGVector23(arg1,arg2);
-    DATA_PTR(self) = result;
-    
-    return self;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_AGVector23_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_AGVector23_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGVector23);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_AGVector23__SWIG_3(int argc, VALUE *argv, VALUE self) {
-    AGVector3 *arg1 = 0 ;
-    AGVector23 *result;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (AGVector23 *)new AGVector23((AGVector3 const &)*arg1);
-    DATA_PTR(self) = result;
-    
-    return self;
-}
-
-
-static VALUE _wrap_new_AGVector23(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 0) {
-        return _wrap_new_AGVector23__SWIG_0(nargs, args, self);
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_AGVector3, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_AGVector23__SWIG_3(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FLOAT) || (TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_AGVector23__SWIG_2(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FLOAT) || (TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FLOAT) || (TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_new_AGVector23__SWIG_1(nargs, args, self);
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_AGVector23'");
-    return Qnil;
-}
-
-
-static void
-free_AGVector23(AGVector23 *arg1) {
     delete arg1;
 }
 
@@ -29984,18 +29719,18 @@ free_AGMatrix4(AGMatrix4 *arg1) {
     delete arg1;
 }
 
-swig_class cAGRect23;
+swig_class cAGRect3;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_AGRect23_allocate(VALUE self) {
+_wrap_AGRect3_allocate(VALUE self) {
 #else
     static VALUE
-    _wrap_AGRect23_allocate(int argc, VALUE *argv, VALUE self) {
+    _wrap_AGRect3_allocate(int argc, VALUE *argv, VALUE self) {
 #endif
         
         
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGRect23);
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGRect3);
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
         rb_obj_call_init(vresult, argc, argv);
 #endif
@@ -30004,16 +29739,16 @@ _wrap_AGRect23_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_AGRect23(int argc, VALUE *argv, VALUE self) {
+_wrap_new_AGRect3(int argc, VALUE *argv, VALUE self) {
     AGVector3 *arg1 = 0 ;
     AGVector3 *arg2 = 0 ;
-    AGRect23 *result;
+    AGRect3 *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
     SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (AGRect23 *)new AGRect23((AGVector3 const &)*arg1,(AGVector3 const &)*arg2);
+    result = (AGRect3 *)new AGRect3((AGVector3 const &)*arg1,(AGVector3 const &)*arg2);
     DATA_PTR(self) = result;
     
     return self;
@@ -30021,17 +29756,17 @@ _wrap_new_AGRect23(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect23_collides(int argc, VALUE *argv, VALUE self) {
-    AGRect23 *arg1 = (AGRect23 *) 0 ;
+_wrap_AGRect3_collides(int argc, VALUE *argv, VALUE self) {
+    AGRect3 *arg1 = (AGRect3 *) 0 ;
     AGLine3 *arg2 = 0 ;
     bool result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect23, 0);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect3, 0);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGLine3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (bool)((AGRect23 const *)arg1)->collides((AGLine3 const &)*arg2);
+    result = (bool)((AGRect3 const *)arg1)->collides((AGLine3 const &)*arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -30039,15 +29774,15 @@ _wrap_AGRect23_collides(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_AGRect23_toString(int argc, VALUE *argv, VALUE self) {
-    AGRect23 *arg1 = (AGRect23 *) 0 ;
+_wrap_AGRect3_toString(int argc, VALUE *argv, VALUE self) {
+    AGRect3 *arg1 = (AGRect3 *) 0 ;
     std::string result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect23, 0);
-    result = ((AGRect23 const *)arg1)->toString();
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGRect3, 0);
+    result = ((AGRect3 const *)arg1)->toString();
     
     {
         vresult = rb_str_new((&result)->c_str(),(&result)->length());
@@ -30057,7 +29792,7 @@ _wrap_AGRect23_toString(int argc, VALUE *argv, VALUE self) {
 
 
 static void
-free_AGRect23(AGRect23 *arg1) {
+free_AGRect3(AGRect3 *arg1) {
     delete arg1;
 }
 
@@ -30296,7 +30031,7 @@ _wrap_AGBox3_collides__SWIG_2(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_AGBox3_getSides(int argc, VALUE *argv, VALUE self) {
     AGBox3 *arg1 = (AGBox3 *) 0 ;
-    SwigValueWrapper<std::vector<AGRect23 > > result;
+    SwigValueWrapper<std::vector<AGRect3 > > result;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
@@ -30305,9 +30040,9 @@ _wrap_AGBox3_getSides(int argc, VALUE *argv, VALUE self) {
     result = ((AGBox3 const *)arg1)->getSides();
     
     {
-        std::vector<AGRect23 > * resultptr;
-        resultptr = new std::vector<AGRect23 >((std::vector<AGRect23 > &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTAGRect23_t, 1);
+        std::vector<AGRect3 > * resultptr;
+        resultptr = new std::vector<AGRect3 >((std::vector<AGRect3 > &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__vectorTAGRect3_t, 1);
     }
     return vresult;
 }
@@ -31736,48 +31471,48 @@ _wrap_AGWidget_getParent(int argc, VALUE *argv, VALUE self) {
                 else
                 {
                     if(false);
-                    else if(dynamic_cast<AGRadio*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                    else if(dynamic_cast<AGDialog*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                    else if(dynamic_cast<AGSubMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                    else if(dynamic_cast<AGListBox*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                     else if(dynamic_cast<AGCaption*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                    else if(dynamic_cast<AGRadioGroup*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGWindow*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                    else if(dynamic_cast<AGMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                    else if(dynamic_cast<MiniMap*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                    else if(dynamic_cast<AGColorButton*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGSound*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGDialog*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                     else if(dynamic_cast<AGImage*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                    else if(dynamic_cast<AGRadioGroup*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGGLWidget*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                     else if(dynamic_cast<AGEdit*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                    else if(dynamic_cast<AGSound*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGListBox*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                    else if(dynamic_cast<AGSubMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                    else if(dynamic_cast<AGColorButton*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                    else if(dynamic_cast<MiniMap*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                    else if(dynamic_cast<AGRadio*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                     else if(dynamic_cast<AGText*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                     else if(dynamic_cast<AGTable*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                    else if(dynamic_cast<AGLayout*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                    else if(dynamic_cast<AGMenuItem*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                     else if(dynamic_cast<AGCheckBox*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                    else if(dynamic_cast<AGHTiler*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                    else if(dynamic_cast<AGMenuItem*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                    else if(dynamic_cast<AGLayout*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                     else if(dynamic_cast<AGButton*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                    else if(dynamic_cast<AGHTiler*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                     else if(dynamic_cast<AGVTiler*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                     else
@@ -33051,48 +32786,48 @@ _wrap_AGWidget_getChild(int argc, VALUE *argv, VALUE self) {
                 else
                 {
                     if(false);
-                    else if(dynamic_cast<AGRadio*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                    else if(dynamic_cast<AGDialog*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                    else if(dynamic_cast<AGSubMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                    else if(dynamic_cast<AGListBox*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                     else if(dynamic_cast<AGCaption*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                    else if(dynamic_cast<AGRadioGroup*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGWindow*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                    else if(dynamic_cast<AGMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                    else if(dynamic_cast<MiniMap*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                    else if(dynamic_cast<AGColorButton*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGSound*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGDialog*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                     else if(dynamic_cast<AGImage*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                    else if(dynamic_cast<AGRadioGroup*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGGLWidget*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                     else if(dynamic_cast<AGEdit*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                    else if(dynamic_cast<AGSound*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGListBox*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                    else if(dynamic_cast<AGSubMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                    else if(dynamic_cast<AGColorButton*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                    else if(dynamic_cast<MiniMap*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                    else if(dynamic_cast<AGRadio*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                     else if(dynamic_cast<AGText*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                     else if(dynamic_cast<AGTable*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                    else if(dynamic_cast<AGLayout*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                    else if(dynamic_cast<AGMenuItem*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                     else if(dynamic_cast<AGCheckBox*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                    else if(dynamic_cast<AGHTiler*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                    else if(dynamic_cast<AGMenuItem*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                    else if(dynamic_cast<AGLayout*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                     else if(dynamic_cast<AGButton*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                    else if(dynamic_cast<AGHTiler*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                     else if(dynamic_cast<AGVTiler*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                     else
@@ -33210,48 +32945,48 @@ _wrap_toAGWidget(int argc, VALUE *argv, VALUE self) {
             else
             {
                 if(false);
-                else if(dynamic_cast<AGRadio*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                else if(dynamic_cast<AGDialog*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                else if(dynamic_cast<AGSubMenu*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                else if(dynamic_cast<AGListBox*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                 else if(dynamic_cast<AGCaption*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                else if(dynamic_cast<AGRadioGroup*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                 else if(dynamic_cast<AGWindow*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                else if(dynamic_cast<AGMenu*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                else if(dynamic_cast<MiniMap*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                else if(dynamic_cast<AGColorButton*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                else if(dynamic_cast<AGSound*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                else if(dynamic_cast<AGDialog*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                 else if(dynamic_cast<AGImage*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                else if(dynamic_cast<AGRadioGroup*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                 else if(dynamic_cast<AGGLWidget*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                 else if(dynamic_cast<AGEdit*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                else if(dynamic_cast<AGSound*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                else if(dynamic_cast<AGListBox*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                else if(dynamic_cast<AGSubMenu*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                else if(dynamic_cast<AGColorButton*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                else if(dynamic_cast<AGMenu*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                else if(dynamic_cast<MiniMap*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                else if(dynamic_cast<AGRadio*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                 else if(dynamic_cast<AGText*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                 else if(dynamic_cast<AGTable*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                else if(dynamic_cast<AGLayout*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                else if(dynamic_cast<AGMenuItem*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                 else if(dynamic_cast<AGCheckBox*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                else if(dynamic_cast<AGHTiler*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                else if(dynamic_cast<AGMenuItem*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                else if(dynamic_cast<AGLayout*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                 else if(dynamic_cast<AGButton*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                else if(dynamic_cast<AGHTiler*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                 else if(dynamic_cast<AGVTiler*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                 else
@@ -35582,48 +35317,48 @@ _wrap_parseNode(int argc, VALUE *argv, VALUE self) {
             else
             {
                 if(false);
-                else if(dynamic_cast<AGRadio*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                else if(dynamic_cast<AGDialog*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                else if(dynamic_cast<AGSubMenu*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                else if(dynamic_cast<AGListBox*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                 else if(dynamic_cast<AGCaption*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                else if(dynamic_cast<AGRadioGroup*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                 else if(dynamic_cast<AGWindow*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                else if(dynamic_cast<AGMenu*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                else if(dynamic_cast<MiniMap*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                else if(dynamic_cast<AGColorButton*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                else if(dynamic_cast<AGSound*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                else if(dynamic_cast<AGDialog*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                 else if(dynamic_cast<AGImage*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                else if(dynamic_cast<AGRadioGroup*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                 else if(dynamic_cast<AGGLWidget*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                 else if(dynamic_cast<AGEdit*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                else if(dynamic_cast<AGSound*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                else if(dynamic_cast<AGListBox*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                else if(dynamic_cast<AGSubMenu*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                else if(dynamic_cast<AGColorButton*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                else if(dynamic_cast<AGMenu*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                else if(dynamic_cast<MiniMap*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                else if(dynamic_cast<AGRadio*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                 else if(dynamic_cast<AGText*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                 else if(dynamic_cast<AGTable*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                else if(dynamic_cast<AGLayout*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                else if(dynamic_cast<AGMenuItem*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                 else if(dynamic_cast<AGCheckBox*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                else if(dynamic_cast<AGHTiler*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                else if(dynamic_cast<AGMenuItem*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                else if(dynamic_cast<AGLayout*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                 else if(dynamic_cast<AGButton*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                else if(dynamic_cast<AGHTiler*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                 else if(dynamic_cast<AGVTiler*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                 else
@@ -41977,48 +41712,48 @@ _wrap_AGLayoutCreator_create(int argc, VALUE *argv, VALUE self) {
                 else
                 {
                     if(false);
-                    else if(dynamic_cast<AGRadio*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                    else if(dynamic_cast<AGDialog*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                    else if(dynamic_cast<AGSubMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                    else if(dynamic_cast<AGListBox*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                     else if(dynamic_cast<AGCaption*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                    else if(dynamic_cast<AGRadioGroup*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGWindow*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                    else if(dynamic_cast<AGMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                    else if(dynamic_cast<MiniMap*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                    else if(dynamic_cast<AGColorButton*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGSound*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGDialog*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                     else if(dynamic_cast<AGImage*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                    else if(dynamic_cast<AGRadioGroup*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGGLWidget*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                     else if(dynamic_cast<AGEdit*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                    else if(dynamic_cast<AGSound*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGListBox*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                    else if(dynamic_cast<AGSubMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                    else if(dynamic_cast<AGColorButton*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                    else if(dynamic_cast<MiniMap*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                    else if(dynamic_cast<AGRadio*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                     else if(dynamic_cast<AGText*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                     else if(dynamic_cast<AGTable*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                    else if(dynamic_cast<AGLayout*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                    else if(dynamic_cast<AGMenuItem*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                     else if(dynamic_cast<AGCheckBox*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                    else if(dynamic_cast<AGHTiler*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                    else if(dynamic_cast<AGMenuItem*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                    else if(dynamic_cast<AGLayout*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                     else if(dynamic_cast<AGButton*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                    else if(dynamic_cast<AGHTiler*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                     else if(dynamic_cast<AGVTiler*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                     else
@@ -42111,48 +41846,48 @@ _wrap_AGLayoutFactory_create(int argc, VALUE *argv, VALUE self) {
                 else
                 {
                     if(false);
-                    else if(dynamic_cast<AGRadio*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                    else if(dynamic_cast<AGDialog*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                    else if(dynamic_cast<AGSubMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                    else if(dynamic_cast<AGListBox*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                     else if(dynamic_cast<AGCaption*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                    else if(dynamic_cast<AGRadioGroup*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGWindow*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                    else if(dynamic_cast<AGMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                    else if(dynamic_cast<MiniMap*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                    else if(dynamic_cast<AGColorButton*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGSound*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGDialog*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                     else if(dynamic_cast<AGImage*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                    else if(dynamic_cast<AGRadioGroup*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGGLWidget*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                     else if(dynamic_cast<AGEdit*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                    else if(dynamic_cast<AGSound*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGListBox*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                    else if(dynamic_cast<AGSubMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                    else if(dynamic_cast<AGColorButton*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                    else if(dynamic_cast<MiniMap*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                    else if(dynamic_cast<AGRadio*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                     else if(dynamic_cast<AGText*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                     else if(dynamic_cast<AGTable*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                    else if(dynamic_cast<AGLayout*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                    else if(dynamic_cast<AGMenuItem*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                     else if(dynamic_cast<AGCheckBox*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                    else if(dynamic_cast<AGHTiler*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                    else if(dynamic_cast<AGMenuItem*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                    else if(dynamic_cast<AGLayout*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                     else if(dynamic_cast<AGButton*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                    else if(dynamic_cast<AGHTiler*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                     else if(dynamic_cast<AGVTiler*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                     else
@@ -47742,48 +47477,48 @@ _wrap_AGWindow_getClient(int argc, VALUE *argv, VALUE self) {
                 else
                 {
                     if(false);
-                    else if(dynamic_cast<AGRadio*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-                    else if(dynamic_cast<AGDialog*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-                    else if(dynamic_cast<AGSubMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-                    else if(dynamic_cast<AGListBox*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
                     else if(dynamic_cast<AGCaption*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-                    else if(dynamic_cast<AGRadioGroup*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGWindow*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-                    else if(dynamic_cast<AGMenu*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-                    else if(dynamic_cast<MiniMap*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-                    else if(dynamic_cast<AGColorButton*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGSound*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGDialog*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
                     else if(dynamic_cast<AGImage*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
+                    else if(dynamic_cast<AGRadioGroup*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
                     else if(dynamic_cast<AGGLWidget*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
                     else if(dynamic_cast<AGEdit*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-                    else if(dynamic_cast<AGSound*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+                    else if(dynamic_cast<AGListBox*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
+                    else if(dynamic_cast<AGSubMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+                    else if(dynamic_cast<AGColorButton*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
+                    else if(dynamic_cast<AGMenu*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+                    else if(dynamic_cast<MiniMap*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+                    else if(dynamic_cast<AGRadio*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
                     else if(dynamic_cast<AGText*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
                     else if(dynamic_cast<AGTable*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-                    else if(dynamic_cast<AGLayout*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-                    else if(dynamic_cast<AGMenuItem*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
                     else if(dynamic_cast<AGCheckBox*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-                    else if(dynamic_cast<AGHTiler*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
+                    else if(dynamic_cast<AGMenuItem*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
+                    else if(dynamic_cast<AGLayout*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
                     else if(dynamic_cast<AGButton*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
+                    else if(dynamic_cast<AGHTiler*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
                     else if(dynamic_cast<AGVTiler*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
                     else
@@ -52452,14 +52187,14 @@ _wrap_AntEntity_getFirstMesh(int argc, VALUE *argv, VALUE self) {
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
                     else if(dynamic_cast<WaterPiece*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
-                    else if(dynamic_cast<TerrainPieceVA*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
-                    else if(dynamic_cast<Smoke*>(result))
-                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
                     else if(dynamic_cast<Mesh*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                     else if(dynamic_cast<NewDecal*>(result))
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
+                    else if(dynamic_cast<Smoke*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
+                    else if(dynamic_cast<TerrainPieceVA*>(result))
+                    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
                     else
                     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
                 }
@@ -57494,14 +57229,14 @@ _wrap_PickNode_node_get(int argc, VALUE *argv, VALUE self) {
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
                 else if(dynamic_cast<WaterPiece*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
-                else if(dynamic_cast<TerrainPieceVA*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
-                else if(dynamic_cast<Smoke*>(result))
-                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
                 else if(dynamic_cast<Mesh*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
                 else if(dynamic_cast<NewDecal*>(result))
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
+                else if(dynamic_cast<Smoke*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
+                else if(dynamic_cast<TerrainPieceVA*>(result))
+                vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
                 else
                 vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
             }
@@ -60030,9 +59765,6 @@ static void *_p_AGMenuItemTo_p_AGVTiler(void *x) {
 static void *_p_AGWindowTo_p_AGTable(void *x) {
     return (void *)((AGTable *)  ((AGWindow *) x));
 }
-static void *_p_AGVector23To_p_AGVector3(void *x) {
-    return (void *)((AGVector3 *)  ((AGVector23 *) x));
-}
 static void *_p_AntMapTo_p_HeightMap(void *x) {
     return (void *)((HeightMap *)  ((AntMap *) x));
 }
@@ -60083,7 +59815,7 @@ static swig_type_info _swigt__p_AGProjection = {"_p_AGProjection", "AGProjection
 static swig_type_info _swigt__p_AGRadio = {"_p_AGRadio", "AGRadio *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRadioGroup = {"_p_AGRadioGroup", "AGRadioGroup *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRect2 = {"_p_AGRect2", "AGRect2 *", 0, 0, 0};
-static swig_type_info _swigt__p_AGRect23 = {"_p_AGRect23", "AGRect23 *", 0, 0, 0};
+static swig_type_info _swigt__p_AGRect3 = {"_p_AGRect3", "AGRect3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRenderContext = {"_p_AGRenderContext", "AGRenderContext *", 0, 0, 0};
 static swig_type_info _swigt__p_AGRubyObject = {"_p_AGRubyObject", "AGRubyObject *", 0, 0, 0};
 static swig_type_info _swigt__p_AGScreen = {"_p_AGScreen", "AGScreen *", 0, 0, 0};
@@ -60102,7 +59834,6 @@ static swig_type_info _swigt__p_AGTriangle2 = {"_p_AGTriangle2", "AGTriangle2 *"
 static swig_type_info _swigt__p_AGTriangle3 = {"_p_AGTriangle3", "AGTriangle3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVTiler = {"_p_AGVTiler", "AGVTiler *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector2 = {"_p_AGVector2", "AGVector2 *", 0, 0, 0};
-static swig_type_info _swigt__p_AGVector23 = {"_p_AGVector23", "AGVector23 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector3 = {"_p_AGVector3", "AGVector3 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGVector4 = {"_p_AGVector4", "AGVector4 *", 0, 0, 0};
 static swig_type_info _swigt__p_AGWidget = {"_p_AGWidget", "AGWidget *", 0, 0, 0};
@@ -60196,7 +59927,7 @@ static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *"
 static swig_type_info _swigt__p_std__vectorTAGBox3_t = {"_p_std__vectorTAGBox3_t", "std::vector<AGBox3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGLine2_t = {"_p_std__vectorTAGLine2_t", "std::vector<AGLine2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGMatrix4_t = {"_p_std__vectorTAGMatrix4_t", "std::vector<AGMatrix4 > *", 0, 0, 0};
-static swig_type_info _swigt__p_std__vectorTAGRect23_t = {"_p_std__vectorTAGRect23_t", "std::vector<AGRect23 > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTAGRect3_t = {"_p_std__vectorTAGRect3_t", "std::vector<AGRect3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector2_t = {"_p_std__vectorTAGVector2_t", "std::vector<AGVector2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector4_t = {"_p_std__vectorTAGVector4_t", "std::vector<AGVector4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAntEntityPtr_t = {"_p_std__vectorTAntEntityPtr_t", "std::vector<AntEntityPtr > *", 0, 0, 0};
@@ -60258,7 +59989,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGRadio,
   &_swigt__p_AGRadioGroup,
   &_swigt__p_AGRect2,
-  &_swigt__p_AGRect23,
+  &_swigt__p_AGRect3,
   &_swigt__p_AGRenderContext,
   &_swigt__p_AGRubyObject,
   &_swigt__p_AGScreen,
@@ -60277,7 +60008,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGTriangle3,
   &_swigt__p_AGVTiler,
   &_swigt__p_AGVector2,
-  &_swigt__p_AGVector23,
   &_swigt__p_AGVector3,
   &_swigt__p_AGVector4,
   &_swigt__p_AGWidget,
@@ -60371,7 +60101,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorTAGBox3_t,
   &_swigt__p_std__vectorTAGLine2_t,
   &_swigt__p_std__vectorTAGMatrix4_t,
-  &_swigt__p_std__vectorTAGRect23_t,
+  &_swigt__p_std__vectorTAGRect3_t,
   &_swigt__p_std__vectorTAGVector2_t,
   &_swigt__p_std__vectorTAGVector4_t,
   &_swigt__p_std__vectorTAntEntityPtr_t,
@@ -60433,7 +60163,7 @@ static swig_cast_info _swigc__p_AGProjection[] = {  {&_swigt__p_AGProjection, 0,
 static swig_cast_info _swigc__p_AGRadio[] = {  {&_swigt__p_AGRadio, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRadioGroup[] = {  {&_swigt__p_AGRadioGroup, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRect2[] = {  {&_swigt__p_AGRect2, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGRect23[] = {  {&_swigt__p_AGRect23, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGRect3[] = {  {&_swigt__p_AGRect3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRenderContext[] = {  {&_swigt__p_AGRenderContext, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGRubyObject[] = {  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AntMap, _p_AntMapTo_p_AGRubyObject, 0, 0},  {&_swigt__p_GLApp, _p_GLAppTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGRubyObject, 0, 0},  {&_swigt__p_TerrainPieceVA, _p_TerrainPieceVATo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGApplication, _p_AGApplicationTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGRubyObject, 0, 0},  {&_swigt__p_MiniMap, _p_MiniMapTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGListener, _p_AGListenerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMain, _p_AGMainTo_p_AGRubyObject, 0, 0},  {&_swigt__p_SceneNode, _p_SceneNodeTo_p_AGRubyObject, 0, 0},  {&_swigt__p_Scene, _p_SceneTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AntEntity, _p_AntEntityTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGRubyObject, 0, 0},  {&_swigt__p_NewDecal, _p_NewDecalTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGRubyObject, 0, 0},  {&_swigt__p_HeightMap, _p_HeightMapTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGWidget, _p_AGWidgetTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMessageObject, _p_AGMessageObjectTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRubyObject, 0, 0, 0},  {&_swigt__p_Mesh, _p_MeshTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AnimMesh, _p_AnimMeshTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGRubyObject, 0, 0},  {&_swigt__p_MeshData, _p_MeshDataTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AnimMeshData, _p_AnimMeshDataTo_p_AGRubyObject, 0, 0},  {&_swigt__p_Smoke, _p_SmokeTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGRubyObject, 0, 0},  {&_swigt__p_WaterPiece, _p_WaterPieceTo_p_AGRubyObject, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGRubyObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGScreen[] = {  {&_swigt__p_AGScreen, 0, 0, 0},{0, 0, 0, 0}};
@@ -60452,8 +60182,7 @@ static swig_cast_info _swigc__p_AGTriangle2[] = {  {&_swigt__p_AGTriangle2, 0, 0
 static swig_cast_info _swigc__p_AGTriangle3[] = {  {&_swigt__p_AGTriangle3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVTiler[] = {  {&_swigt__p_AGVTiler, 0, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGVTiler, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGVTiler, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGVTiler, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGVTiler, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVector2[] = {  {&_swigt__p_AGVector2, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGVector23[] = {  {&_swigt__p_AGVector23, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGVector23, _p_AGVector23To_p_AGVector3, 0, 0},  {&_swigt__p_AGVector3, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGVector3[] = {  {&_swigt__p_AGVector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGVector4[] = {  {&_swigt__p_AGVector4, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWidget[] = {  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSubMenu, _p_AGSubMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenu, _p_AGMenuTo_p_AGWidget, 0, 0},  {&_swigt__p_AGMenuItem, _p_AGMenuItemTo_p_AGWidget, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGVTiler, _p_AGVTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGWidget, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGWidget, 0, 0},  {&_swigt__p_AGWidget, 0, 0, 0},  {&_swigt__p_MiniMap, _p_MiniMapTo_p_AGWidget, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGWidget, 0, 0},  {&_swigt__p_AGHTiler, _p_AGHTilerTo_p_AGWidget, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGWidget, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGWidget, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGWidget, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGWidget, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGWidget, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGWidget, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGWidget, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGWidget, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGWindow[] = {  {&_swigt__p_AGWindow, 0, 0, 0},{0, 0, 0, 0}};
@@ -60546,7 +60275,7 @@ static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0
 static swig_cast_info _swigc__p_std__vectorTAGBox3_t[] = {  {&_swigt__p_std__vectorTAGBox3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGLine2_t[] = {  {&_swigt__p_std__vectorTAGLine2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGMatrix4_t[] = {  {&_swigt__p_std__vectorTAGMatrix4_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__vectorTAGRect23_t[] = {  {&_swigt__p_std__vectorTAGRect23_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTAGRect3_t[] = {  {&_swigt__p_std__vectorTAGRect3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector2_t[] = {  {&_swigt__p_std__vectorTAGVector2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector4_t[] = {  {&_swigt__p_std__vectorTAGVector4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAntEntityPtr_t[] = {  {&_swigt__p_std__vectorTAntEntityPtr_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -60608,7 +60337,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGRadio,
   _swigc__p_AGRadioGroup,
   _swigc__p_AGRect2,
-  _swigc__p_AGRect23,
+  _swigc__p_AGRect3,
   _swigc__p_AGRenderContext,
   _swigc__p_AGRubyObject,
   _swigc__p_AGScreen,
@@ -60627,7 +60356,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGTriangle3,
   _swigc__p_AGVTiler,
   _swigc__p_AGVector2,
-  _swigc__p_AGVector23,
   _swigc__p_AGVector3,
   _swigc__p_AGVector4,
   _swigc__p_AGWidget,
@@ -60721,7 +60449,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorTAGBox3_t,
   _swigc__p_std__vectorTAGLine2_t,
   _swigc__p_std__vectorTAGMatrix4_t,
-  _swigc__p_std__vectorTAGRect23_t,
+  _swigc__p_std__vectorTAGRect3_t,
   _swigc__p_std__vectorTAGVector2_t,
   _swigc__p_std__vectorTAGVector4_t,
   _swigc__p_std__vectorTAntEntityPtr_t,
@@ -61021,16 +60749,15 @@ SWIGEXPORT void Init_libantargis(void) {
     cAGNodePList.mark = 0;
     cAGNodePList.destroy = (void (*)(void *)) free_std_vector_Sl_Node_Sm__Sg_;
     rb_define_module_function(mLibantargis, "general_markfunc", VALUEFUNC(_wrap_general_markfunc), -1);
+    rb_define_module_function(mLibantargis, "saveDelete", VALUEFUNC(_wrap_saveDelete), -1);
     rb_define_module_function(mLibantargis, "disown_AGRubyObject", VALUEFUNC(_wrap_disown_AGRubyObject), -1);
     
     cAGRubyObject.klass = rb_define_class_under(mLibantargis, "AGRubyObject", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGRubyObject, (void *) &cAGRubyObject);
     rb_define_alloc_func(cAGRubyObject.klass, _wrap_AGRubyObject_allocate);
     rb_define_method(cAGRubyObject.klass, "initialize", VALUEFUNC(_wrap_new_AGRubyObject), -1);
-    rb_define_method(cAGRubyObject.klass, "clear", VALUEFUNC(_wrap_AGRubyObject_clear), -1);
     cAGRubyObject.mark = (void (*)(void *)) general_markfunc;
     cAGRubyObject.destroy = (void (*)(void *)) free_AGRubyObject;
-    rb_define_module_function(mLibantargis, "saveDelete", VALUEFUNC(_wrap_saveDelete), -1);
     rb_define_module_function(mLibantargis, "disown_AGEvent", VALUEFUNC(_wrap_disown_AGEvent), -1);
     
     cAGEvent.klass = rb_define_class_under(mLibantargis, "AGEvent", rb_cObject);
@@ -61195,13 +60922,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGVector3.klass, "to_s", VALUEFUNC(_wrap_AGVector3_to_s), -1);
     cAGVector3.mark = 0;
     cAGVector3.destroy = (void (*)(void *)) free_AGVector3;
-    
-    cAGVector23.klass = rb_define_class_under(mLibantargis, "AGVector23", ((swig_class *) SWIGTYPE_p_AGVector3->clientdata)->klass);
-    SWIG_TypeClientData(SWIGTYPE_p_AGVector23, (void *) &cAGVector23);
-    rb_define_alloc_func(cAGVector23.klass, _wrap_AGVector23_allocate);
-    rb_define_method(cAGVector23.klass, "initialize", VALUEFUNC(_wrap_new_AGVector23), -1);
-    cAGVector23.mark = 0;
-    cAGVector23.destroy = (void (*)(void *)) free_AGVector23;
     
     cAGMatrix3.klass = rb_define_class_under(mLibantargis, "AGMatrix3", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGMatrix3, (void *) &cAGMatrix3);
@@ -61393,14 +61113,14 @@ SWIGEXPORT void Init_libantargis(void) {
     cAGMatrix4.mark = 0;
     cAGMatrix4.destroy = (void (*)(void *)) free_AGMatrix4;
     
-    cAGRect23.klass = rb_define_class_under(mLibantargis, "AGRect23", rb_cObject);
-    SWIG_TypeClientData(SWIGTYPE_p_AGRect23, (void *) &cAGRect23);
-    rb_define_alloc_func(cAGRect23.klass, _wrap_AGRect23_allocate);
-    rb_define_method(cAGRect23.klass, "initialize", VALUEFUNC(_wrap_new_AGRect23), -1);
-    rb_define_method(cAGRect23.klass, "collides", VALUEFUNC(_wrap_AGRect23_collides), -1);
-    rb_define_method(cAGRect23.klass, "toString", VALUEFUNC(_wrap_AGRect23_toString), -1);
-    cAGRect23.mark = 0;
-    cAGRect23.destroy = (void (*)(void *)) free_AGRect23;
+    cAGRect3.klass = rb_define_class_under(mLibantargis, "AGRect3", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AGRect3, (void *) &cAGRect3);
+    rb_define_alloc_func(cAGRect3.klass, _wrap_AGRect3_allocate);
+    rb_define_method(cAGRect3.klass, "initialize", VALUEFUNC(_wrap_new_AGRect3), -1);
+    rb_define_method(cAGRect3.klass, "collides", VALUEFUNC(_wrap_AGRect3_collides), -1);
+    rb_define_method(cAGRect3.klass, "toString", VALUEFUNC(_wrap_AGRect3_toString), -1);
+    cAGRect3.mark = 0;
+    cAGRect3.destroy = (void (*)(void *)) free_AGRect3;
     
     cAGBox3.klass = rb_define_class_under(mLibantargis, "AGBox3", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AGBox3, (void *) &cAGBox3);
