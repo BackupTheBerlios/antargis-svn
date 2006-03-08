@@ -8,5 +8,6 @@ Coding styles are like this:
 	1.6) Don't use globals if not necessary.
 	1.7) Use getters/setters like "setPosition(xy)" and "getPosition() const"
 	1.8) As used above use "const" where possible.
+	1.9) Use doxygen for documentation and place documentation of member-function in .cc-files, so .hh doesn't get crowded
 2) Ruby
 	2.1) Indent with tab. I use tab-width=2 in Kate.

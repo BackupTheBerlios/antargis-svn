@@ -190,6 +190,7 @@ task :clean do
 	sh "rm -f src/nantmarker.hh"
 	sh "rm -f config.rb"
 	sh "rm -r -f .deps"
+	sh "rm -f doc/api/*"
 end
 
 task :install do
@@ -245,5 +246,5 @@ end
 
 task :doc do
 	puts "running doxygen"
-	
+	`doxygen Doxyfile`
 end

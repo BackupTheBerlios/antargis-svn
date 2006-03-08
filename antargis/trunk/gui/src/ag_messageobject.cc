@@ -29,11 +29,13 @@ AGEvent::~AGEvent()
 {
 }
 
+/// sets the caller of this event - shouldn't be used outside of AGWidget
 void AGEvent::setCaller(AGListener *pCaller)
 {
   mCaller=pCaller;
 }
 
+/// return the name of the event
 std::string AGEvent::getName() const
 {
   return mName;
@@ -51,6 +53,7 @@ bool AGEvent::isSDLEvent() const
 }
 
 
+/// returns the caller of this event
 AGListener *AGEvent::getCaller() const
 {
   return mCaller;
@@ -177,6 +180,12 @@ AGSignal::~AGSignal()
 }
 #undef connect
 
+
+/**
+   This is the simple connect version. You have to override signal(.) in AGListener and
+   provide a reasonable functionality there. For simple usage use AGSignal::connect( AGCPPListener *pListener);
+
+*/
 void AGSignal::connect(AGListener &pListener)
 {
   mListeners.insert(&pListener);
@@ -188,6 +197,28 @@ void AGSignal::disconnect(AGListener &pListener)
 {
   mListeners.erase(&pListener);
 }
+
+
+/**
+   When connecting a signal to a slot you call this function.
+   For instance you have a class:
+   <pre>
+   class A
+   {
+     public:
+     AGSignal sigSomething;
+   };
+   class B
+   {
+     public:
+     bool eventSomething( AGEvent *e);
+   };
+   A a;
+   B b;
+   // you can connect them like this;
+   A.sigSomething.connect(slot(&b,&B::eventSomething));
+   </pre>
+*/
 
 void AGSignal::connect(AGCPPListener *pListener)
 {

@@ -31,6 +31,11 @@
 class AGListener;
 class AGSignal;
 
+
+/** AGEvent is the typical event which is passed when the user does anything.
+    You can however derive from it and pass it through a signal.
+    But you shouldn't delete it for yourself.
+ */
 class AGEvent
 {
  public:
@@ -38,6 +43,7 @@ class AGEvent
   virtual ~AGEvent();
 
   AGListener *getCaller() const;
+  
   void setCaller(AGListener *pCaller);
   std::string getName() const;
 
@@ -59,17 +65,13 @@ class AGEvent
   const SDL_Event *mEvent;
 };
 
-/*
-class AGMouseEvent:public AGEvent
-{
- public:
-  AGMouseEvent(AGListener *pCaller,SDL_Event *pEvent);
-  ~AGMouseEvent();
-};
+
+/**
+   AGListener is the base for receiving an event. Any object which is derived from AGListener can
+   receive an event. But you should use AGMessageObject for this, as it holds basic "listening"
+   facilities.
+   @see AGEvent
 */
-class AGMessageObject;
-
-
 class AGListener:public AGRubyObject
 {
  public:
@@ -79,6 +81,11 @@ class AGListener:public AGRubyObject
   
 };
 
+/**
+   some syntactic sugar for simple connecting of slots and signals.
+   @see AGSignal
+   @see AGMessageObject
+*/
 class AGCPPListener
 {
  public:
@@ -86,7 +93,11 @@ class AGCPPListener
   virtual bool signal(AGEvent *m) const=0;
 };
 
-
+/**
+   some syntactic sugar for simple connecting of slots and signals.
+   @see AGSignal
+   @see AGMessageObject
+*/
 template<class T>
 class AGSlot0:public AGCPPListener
 {
@@ -109,58 +120,18 @@ class AGSlot0:public AGCPPListener
     }
 };
 
-/*
-template<class T>
-class AGSlot:public AGCPPListener
-{
- public:
-  typedef bool (T::*FKT)(const std::string&pName,const AGEvent *m);
-  T *base;
-  FKT f;
-  
-  AGSlot(T *pBase,FKT pF):
-    base(pBase),f(pF)
-    {
-    }
-    virtual ~AGSlot()
-      {
-      }
+class AGMessageObject;
 
-    virtual bool signal(AGEvent *m) const
-    {
-      return (base->*f)(pName,m);
-    }
-};
-
-template<class T>
-class AGSlot2:public AGCPPListener
-{
- public:
-  typedef bool (T::*FKT)(const std::string&pName,const AGEvent *m,AGMessageObject *pCaller);
-  T *base;
-  FKT f;
-
-  
-  AGSlot2(T *pBase,FKT pF):
-    base(pBase),f(pF)
-    {
-    }
-    virtual ~AGSlot2()
-      {
-      }
-
-    virtual bool signal(const std::string &pName,const AGEvent *m,AGMessageObject *pCaller) const
-    {
-      return (base->*f)(pName,m,pCaller);
-    }
-};
+/** AGSignal is a placeholder-class for a function which calls all the Slots, which 
+    are connected to this signal.
+    For instance a button named "close" holds a sigClick signal and a dialog box has a slotClose.
+    You call sigClick(event) in the button and the connected slot is automatically called.
+    @see connect()
 */
-
 class AGSignal
 {
  public:
   AGSignal();
-  //  AGSignal(const AGSignal &s);
   AGSignal(AGMessageObject *pCaller);
   AGSignal(AGMessageObject *pCaller,const std::string &pName);
 
@@ -184,6 +155,9 @@ class AGSignal
   AGMessageObject *mCaller;
 };
 
+/**
+   AGMessageObject handles libSDL-events and provides virtual handlers.
+*/
 class AGMessageObject:public AGListener
 {
  public:
@@ -234,19 +208,9 @@ class AGMessageObject:public AGListener
 
 
 AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s);
-/*
-template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const std::string&,const AGEvent *))
-{
-  return new AGSlot<T>(base,f);
-}
 
-template<class T>
-AGCPPListener *slot(T *base,bool (T::*f)(const std::string&,const AGEvent *,AGMessageObject *))
-{
-  return new AGSlot2<T>(base,f);
-}
-*/
+/**
+ */   
 
 template<class T>
 AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))

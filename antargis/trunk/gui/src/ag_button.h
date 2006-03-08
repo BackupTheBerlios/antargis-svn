@@ -32,12 +32,14 @@
 class AGEdit;
 
 /**
-  TODO: redesign, so that button takes bg-images or border/background-style and a caption of type AGWidget 
+   AGButton represents a button, which can hold a text-caption or an image-caption, but not both.
+   Further it can have following states:
 */
 
 class AGButton:public AGWidget
 {
  public:
+  /// the different drawing states
   enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED,CHECKEDPRESSED,DISABLED};
 
   AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id=-1);
@@ -63,6 +65,7 @@ class AGButton:public AGWidget
 
   void setCaption(const std::string &pCaption);
 
+  /// sets the current state and ensures a redraw
   void setState(const State &pState);
 
   virtual void setChecked(bool pChecked);
