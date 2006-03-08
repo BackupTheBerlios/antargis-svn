@@ -6,13 +6,13 @@
 <!--		<antRubyView col="0" row="0" name="mainView"/>-->
 
 
-		<table col="1" row="0" cols="1" rows="7">
+		<table col="1" row="0" cols="1" rows="5">
 			<rowsize row="0" fixed="90"/>
-			<rowsize row="1" fixed="200"/>
+			<rowsize row="1" fixed="150"/>
+			<!--<rowsize row="2" fixed="216"/>-->
 			<rowsize row="3" fixed="216"/>
-			<rowsize row="4" fixed="216"/>
-			<rowsize row="5" fixed="50"/>
-			<rowsize row="6" fixed="10"/>
+			<rowsize row="4" fixed="50"/>
+<!--			<rowsize row="6" fixed="10"/>-->
 			
 			<!-- heroes -->
 			<radioGroup col="0" row="0" name="HeroGroup">
@@ -43,8 +43,12 @@
 			
 			
 			<!-- button panel -->
-			<layout col="0" row="1" filename="data/gui/layout/buttonpanel.xml"/>
-			<antInventory col="0" row="3">
+			<cell col="0" row="1">
+				<!--<frame border="button.border.normal" visible="true">-->
+					<layout filename="data/gui/layout/buttonpanel.xml"/>
+				<!--</frame>-->
+			</cell>
+			<antInventory col="0" row="2">
 				<table cols="2" rows="9">
 					<text name="invTitle" enabled="false" align="center" font="invTitle.font"/>
 					<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
@@ -67,13 +71,13 @@
 					<button col="1" row="8" caption="..." name="inspect"/>
 				</table>
 			</antInventory>
-			<cell col="0" row="4">
+			<cell col="0" row="3">
 				<frame border="button.border.normal" visible="true">
 					<miniMap name="miniMap"/>
 				</frame>
 			</cell>
 			<!-- system buttons -->
-			<cell col="0" row="5">
+			<cell col="0" row="4">
 				<table cols="4" rows="2">
 					<rowsize row="0" fixed="50"/>
 					<colsize col="0" fixed="50"/>

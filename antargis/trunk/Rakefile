@@ -213,7 +213,7 @@ end
 def cpdir(dir,distdir)
 	mkdir(distdir+"/"+dir)
 	Dir[dir+"/*"].each{|f|
-		if f=~/~/ or f=~/\.o/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/
+		if f=~/~/ or f=~/\.o/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/
 		elsif f=~/\.so/ and not windows
 		elsif File.ftype(f)=="file"
 			File.cp(f,"#{distdir}/#{f}")

@@ -26,6 +26,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def initialize(w,h) #p,rect,pos,map)
 		super(w,h) #p,rect,pos,map)
 		$antView=self
+		@mousepos=AGVector2.new(200,200)
 	end
 	
 
@@ -133,6 +134,9 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		puts "CLICKENTS"
 		puts $buttonPanel
 		job=$buttonPanel.getJob
+		if job==nil
+			return
+		end
 		puts "JOB:"+job
 		if job=="doPoint" then
 			# select
@@ -270,8 +274,30 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def clipCamera(p)
 		AGVector2.new([31,p[0],getMap.getW-31].sort[1],[14,p[1],getMap.getH-36].sort[1])
 	end
-
-
+	def eventMouseMotion(e)
+		super
+		@mousepos=e.getMousePosition
+	end
+	def checkMove(t)
+		if getMain.fullscreen
+			p=@mousepos
+			m=50
+			w=20
+			s=10
+			{AGRect.new(0,m,w,getMain.height-m*2)=>AGVector2.new(-1,0),
+				AGRect.new(m,0,getMain.width-m*2,w)=>AGVector2.new(0,1),
+				AGRect.new(getMain.width-w-1,m,w,getMain.height-m*2)=>AGVector2.new(1,0),
+				AGRect.new(m,getMain.height-w-1,getMain.width-m*2,w)=>AGVector2.new(0,-1)}.each{|r,n|
+				if r.contains(p)
+					setCamera(getCamera+n*t*s) # FIXME: Include time
+				end
+			}
+		end
+	end
+	def eventFrame(t)
+		super
+		checkMove(t)
+	end
 end
 
 class AntRubyEditViewTest<AGWidget #EditIsoView

@@ -22,12 +22,18 @@
 #!/usr/bin/ruby
 
 class RectWidget<AGWidget
-	def initialize(p,r,c)
+	def initialize(p,r,opac)
 		super(p,r)
-		@color=c
+		@opac=opac
+		@startTime=$app.getTicks
+		@blendTime=500.0
 	end
 	def draw(p)
-		p.fillRect(getRect.origin,@color)
+		t=$app.getTicks
+		b=(t-@startTime)/@blendTime
+		b=[1,b].min
+		c=AGVector4.new(0,0,0,b*@opac)
+		p.fillRect(getRect.origin,AGColor.new(c))
 	end
 	def eventMouseButtonDown(e)
 		if visible
@@ -52,7 +58,7 @@ class AntDialog<AGLayout
 		addSignal("sigClosed")
 		#setModal(true)
 		if fade
-			addChildBack(RectWidget.new(self,getRect.origin,AGColor.new(0,0,0,0x77)))
+			addChildBack(RectWidget.new(self,getRect.origin,0.5))
 		end
 	end
 	def eventOk(e)
@@ -180,9 +186,9 @@ class AntOptionsDialog<AntDialog
 		$app.load
 		hide
 	end
-	def eventOk(e)
-		getMap.unpause
+	def eventClose
 		super
+		getMap.unpause
 	end
 end
 
@@ -221,6 +227,10 @@ class AntSaveCampaignDialog<AntDialog
 		getMap.unpause
 		hide
 	end
+	def eventClose
+		super
+		getMap.unpause
+	end
 end
 
 class AntLoadDialog<AntDialog
@@ -245,6 +255,10 @@ class AntLoadDialog<AntDialog
 		end
 		getMap.unpause
 		hide
+	end
+	def eventClose
+		super
+		getMap.unpause
 	end
 end
 

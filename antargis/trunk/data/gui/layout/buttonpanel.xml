@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<layout name="ButtonPanel" geometry="(0,0,216,150)">
+<layout name="ButtonPanel">
 	<antButtonPanel name="antButtonPanel">
 		<table cols="1" rows="2">
 			<rowsize row="0" relative="2"/>

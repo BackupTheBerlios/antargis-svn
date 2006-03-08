@@ -49,6 +49,8 @@ ARTS
 [L] scrolling on borders when in fullscreen
 [H] load/save campaign
 [H] fix cut tooltips
+[M] modify control - left=select, right=do something
+[L] add Framebuffer objects
 
 [Menu]
 ------------------------------------------------------
@@ -66,6 +68,7 @@ ARTS
 
 [Game]
 ------------------------------------------------------
+[H] localization
 [H] silent sound when leaving game
 [H] hero should fight too!!!!!!!!!!!!
 [L] each man should have a name and an age
