@@ -44,6 +44,9 @@ ARTS
 [[Development]]
 ==========================================================
 
+[Segfaults]
+[VH] check if savedir exists!!!
+
 [Gui/View]
 ------------------------------------------------------
 [L] display for hunger/food
@@ -98,4 +101,5 @@ ARTS
 [L] installer for linux
 [M] common package for gui, antargis and tileset
 [M] reasonable installing/generation-places of tiles
-
+[H] remove swig-dependency and check
+[H] remove ccache-dep and check!!

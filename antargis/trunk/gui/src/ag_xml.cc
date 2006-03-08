@@ -26,10 +26,10 @@
 #endif
 #include "ag_debug.h"
 
-/****************************************************************
- * Node
- ****************************************************************/
-
+/**
+   Node
+   @todo finish documentation
+*/
 Node::Node()
 {
 }
@@ -45,6 +45,8 @@ Node::Node(const Node &n):mName(n.mName),mAttrs(n.mAttrs),mContent(n.mContent)
     mNodes.push_back(new Node(**i));
 }
 
+
+/// somehow needed for swig-wrapping
 Node::Node(const Node *n):mName(n->mName),mAttrs(n->mAttrs),mContent(n->mContent)
 {
   // copy nodes

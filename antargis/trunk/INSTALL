@@ -1,12 +1,23 @@
 INSTALLATION of Battles of Antargis
 ==========================================
 Quick Start:
-1) Install ruby, rake, libsdl, libsdl-sge, libsdl-image, libsdl-ttf, libsdl-mixer, opengl
-2) After this step no root-privileges are needed.
-3) Run "rake" in this directory
-4) Run "./run.rb" in this directory
+1) Install ruby, rake, libsdl, libsdl-sge, libsdl-image, libsdl-ttf, libsdl-mixer, opengl.
+	You need the developer-packages of all these libraries/programs!
+2) Don't forget to install ruby1.8-dev (or ruby1.9-dev if you use ruby 1.9)
+3) After this step no root-privileges are needed.
+4) Run "rake" in this directory
+5) Run "./run.rb" in this directory
 
 Essentials: Ruby, Rake
 This game is mostly written in Ruby (www.ruby-lang.org) and C++. It uses Rake (Ruby Make) as build system.
 
 Libraries: libSDL,libSDL_mixer libSDL_ttf, libSDL_image, opengl
+
+Links:
+Ruby          http://www.ruby-lang.org
+Rake          http://rake.rubyforge.org/
+libSDL        http://www.libsdl.org
+libSDL-image  http://www.libsdl.org/projects/SDL_image
+libSDL-ttf    http://www.libsdl.org/projects/SDL_ttf
+libSDL-mixer  http://www.libsdl.org/projects/SDL_mixer
+libSDL-sge    http://www.etek.chalmers.se/~e8cal1/sge/
