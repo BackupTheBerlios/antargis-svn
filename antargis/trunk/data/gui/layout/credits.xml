@@ -19,12 +19,24 @@
 				<rowsize row="1" relative="7"/>
 				<rowsize row="2" relative="1"/>
 				<text row="0" col="0" caption="Credits" align="center" font="credits.font"/>
-				<table  row="1" col="0" rows="10" cols="1">
+<!--				<table  row="1" col="0" rows="10" cols="1">
 					<text col="0" row="0" font="cr_bold.font" theme="bold" caption="Design & Programming"/>
 					<text col="0" row="1" font="cr_name.font" caption="David Kamphausen"/>
 					<text col="0" row="3" font="cr_bold.font" caption="Arts"/>
 					<text col="0" row="4" font="cr_name.font" caption="David Kamphausen <david.kamphausen@web.de>"/>
-				</table>
+				</table>-->
+				<cell row="1" col="0">
+					<antTicker text="
+_Design & Programming
+David Kamphausen
+_Arts
+David Kamphausen
+_Testing
+Martin Kamphausen
+Sebastian Bertho
+Maik-David Kroyer
+" cfont="cr_bold.font" nfont="cr_name.font"/>
+				</cell>
 				<button row="2" col="0" name="exit" caption="Exit"/>
 			</table>
 		</table>

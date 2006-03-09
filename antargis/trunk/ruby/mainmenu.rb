@@ -26,12 +26,13 @@ $useMenu=true
 
 require "antargis.rb"
 require 'campaign.rb'
+require 'credits.rb'
 
 class AntMenuApp <AGApplication
 	include AGHandler
 	def initialize
 		super()
-		
+		$menuapp=self
 		# init menues
 		@menues=[]	
 		setupMain

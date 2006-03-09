@@ -21,10 +21,10 @@
 #ifndef AG_MENU_H
 #define AG_MENU_H
 
-#include "ag_vtiler.h"
+#include "ag_table.h"
 #include "ag_texture.h"
 
-class AGMenu:public AGVTiler
+class AGMenu:public AGTable
 {
  public:
   AGMenu(AGWidget *pParent,AGVector2 pWishPos,const std::string &pName);
@@ -45,6 +45,8 @@ class AGMenu:public AGVTiler
   AGTexture mBg;
   std::string mName;
   AGVector2 mWishPos;
+
+  float mW,mH;
 };
 
 #endif

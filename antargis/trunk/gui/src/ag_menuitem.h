@@ -22,11 +22,11 @@
 #define AG_MENUITEM_H
 
 #include "ag_text.h"
-#include "ag_vtiler.h"
+#include "ag_table.h"
 
 class AGMenu;
 
-class AGMenuItem:public AGHTiler
+class AGMenuItem:public AGTable
 {
  public:
   AGMenuItem(AGWidget *pParent,const std::string &pText);

@@ -53,7 +53,14 @@ bool hasQuit()
   return quited;
 }
 
-
+/**
+   creates an AGMain object.
+   @param pw screen-width
+   @param ph screen height.
+   @param pd color depth in bits - typically 32
+   @param fs bool fullscreen. true for fullscreen, false for window
+   @param opengl use opengl or not
+*/
 AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
 {
   assert(mAGMain==0);

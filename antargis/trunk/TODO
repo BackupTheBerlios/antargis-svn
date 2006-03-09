@@ -56,6 +56,17 @@ ARTS
 [H] fix cut tooltips
 [M] modify control - left=select, right=do something
 [L] add Framebuffer objects
+[L] fix AGMenu*
+[H] change selection/do things:
+	- a hero is always selected (upper window):
+		a) dismiss
+		b) eat
+		c) rest
+		d) inspect
+	- select target (do things on target) :
+		a) inspect
+		b) attack
+		c) recruit people
 
 [Menu]
 ------------------------------------------------------

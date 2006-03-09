@@ -31,6 +31,8 @@ AGTable::~AGTable()
 {
 }
 
+/// add a column with fixed size of 'size'
+/// @param size gives to size of the column in pixels
 void AGTable::addFixedColumn(float size)
 {
   if(mInserted)
@@ -38,6 +40,8 @@ void AGTable::addFixedColumn(float size)
   cols.push_back(std::make_pair(size,true));
   w++;
 }
+/// add a row with fixed size of 'size'
+/// @param size gives to size of the row in pixels
 void AGTable::addFixedRow(float size)
 {
   if(mInserted)
@@ -46,6 +50,11 @@ void AGTable::addFixedRow(float size)
   h++;
 }
 
+/// add a column with relative size.
+/// @param weight
+///  All weights of columns are summed up. After giving their space
+///  to the fixed columns ( AGTable::addFixedColumn() ), each relative sized
+///  column gets its relative size according the weight. (size_left*weight/sum(weights))
 void AGTable::addColumn(float weight)
 {
   if(mInserted || weight<=0.0f)
@@ -55,6 +64,11 @@ void AGTable::addColumn(float weight)
   xw+=weight;
 }
 
+/// add a row with relative size.
+/// @param weight
+///  All weights of rows are summed up. After giving their space
+///  to the fixed rows ( AGTable::addFixedRow() ), each relative sized
+///  row gets its relative size according the weight. (size_left*weight/sum(weights))
 void AGTable::addRow(float weight)
 {
   if(mInserted || weight<=0.0f)
@@ -64,6 +78,7 @@ void AGTable::addRow(float weight)
   yw+=weight;
 }
 
+/// adds a widget to the given cell (px,py)
 void AGTable::addChild(int px,int py,AGWidget *pWidget)
 {
   if(px>=w || py>=h || px<0 || py<0)
@@ -85,6 +100,7 @@ void AGTable::addChild(int px,int py,AGWidget *pWidget)
   AGWidget::addChild(pWidget);
 }
 
+/// returns the Position and size of a given cell (x,y)
 AGRect2 AGTable::getClientRect(int x,int y) const
 {
   AGRect2 mrect(0,0,0,0);
@@ -292,4 +308,13 @@ void AGTable::setHeight(float w)
 {
   AGWidget::setHeight(w);
   arrange();
+}
+
+size_t AGTable::getRows() const
+{
+  return rows.size();
+}
+size_t AGTable::getColumns() const
+{
+  return cols.size();
 }

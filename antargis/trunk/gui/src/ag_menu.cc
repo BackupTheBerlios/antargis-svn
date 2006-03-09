@@ -30,13 +30,16 @@
 using namespace std;
 
 AGMenu::AGMenu(AGWidget *pParent,AGVector2 pWishPos,const std::string &pName):
-  AGVTiler(pParent,AGRect2(pWishPos[0],pWishPos[1],1,1)),
+  AGTable(pParent,AGRect2(pWishPos[0],pWishPos[1],1,1)),
   sigSelected(this,"sigSelected"),
   mName(pName),
   mWishPos(pWishPos)
 {
   mBg=AGTexture(getTheme()->getSurface("menu.background.image"));
   hide();
+  addColumn(1);
+  mW=0;
+  mH=0;
 }
 
 void AGMenu::show(AGVector2 pWishPos)
@@ -46,26 +49,37 @@ void AGMenu::show(AGVector2 pWishPos)
   AGVector2 p=fromScreen(mWishPos);
   setTop(p[1]);
   setLeft(p[0]);
-  rePosition();
 
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     cdebug((*i)->getRect().toString());
 
-  AGVTiler::show();
 }
 
 void AGMenu::addItem(const std::string &pString)
 {
-  //  AGFont font("Arial.ttf");
-  //  AGText *b=new AGText(this,AGVector2(0,0),pString,font);
-  addChild(new AGMenuItem(this,pString));//b);
+  AGMenuItem *i=new AGMenuItem(this,pString);
+  addFixedRow(i->height());
+  
+  addChild(0,getRows()-1,i);
+
+  mW=std::max(mW,i->width());
+  setWidth(mW);
+  setHeight(mW);
+  arrange();
 }
 
 AGMenu &AGMenu::addMenu(const std::string &pString)
 {
-  AGSubMenu *s;
-  addChild(s=new AGSubMenu(this,pString));
+  AGSubMenu *s=new AGSubMenu(this,pString);
+  addFixedRow(s->height());
+  addChild(0,getRows()-1,s);
+
+  mH+=s->height();
+  setWidth(mW);
+  setHeight(mW);
+  arrange();
+
   return *s->getMenu();
 }
 
@@ -74,7 +88,7 @@ void AGMenu::draw(AGPainter &p)
 {
   //  cdebug("draw");
   //  return;
-  adaptWidthFromChildren();
+  //  adaptWidthFromChildren();
   //  AGPainter p(getScreen());
   p.tile(mBg);//,r.project(getRect()));
 

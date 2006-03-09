@@ -28,7 +28,11 @@
 /**
    Description:
    At first you can adjust rows/columns - then you can insert some children.
-   after that rows and columns are fixed 
+   after that rows and columns are fixed.
+
+   Please call AGTable::arrange() whenever you changed extends and/or row/column-info.
+   
+   @todo children should be re-arranged whenever AGTable::arrange() is called!
 */
 
 class AGTable:public AGWidget
@@ -46,13 +50,13 @@ class AGTable:public AGWidget
   void addChild(int x,int y,AGWidget *pWidget);
   AGRect2 getClientRect(int x,int y) const;
 
-  //  void getWidthFromChildren();
-  //  void getHeightFromChildren();
-
   void arrange();
 
   virtual void setWidth(float w);
   virtual void setHeight(float w);
+
+  size_t getRows() const;
+  size_t getColumns() const;
 
  private:
   int w,h;

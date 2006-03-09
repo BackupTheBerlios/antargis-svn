@@ -199,6 +199,10 @@ std::string loadFromPath(const std::string &pName)
       if(r.length())
 	return r;
     }
+
+  for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
+    cdebug("path:"<<*i);
+
   cdebug("LOAD FAILED:"<<pName);
 
   return r;
