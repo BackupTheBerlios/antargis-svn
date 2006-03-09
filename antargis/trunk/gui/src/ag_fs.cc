@@ -23,6 +23,9 @@
 #include <assert.h>
 #include <ag_fs.h>
 #include <dirent.h>
+#include <errno.h>
+#include <sys/stat.h>
+
 #include "ag_debug.h"
 
 bool FSinited=false;
@@ -87,14 +90,64 @@ void initFS(const char *argv0)
 #endif
 }
 
+void checkDir(const std::string &s)
+{
+#ifdef WIN32
+{
+  DWORD rc = CreateDirectory(path.c_str(), NULL);
+  if(rc==0)
+    {
+      cdebug("could not create dir:"<<s);
+      throw std::runtime_error("could not create dir");
+    }
+#else
+  int rc;
+  errno = 0;
+  rc = mkdir(s.c_str(), S_IRWXU);
+  if(rc==-1)
+    {
+      switch(errno)
+	{
+	case EEXIST:
+	  return; // everything's fine - directory exists already;
+	case EACCES: 
+	  return; // probably exists - we don't have access
+	default:
+	  cdebug("could not create dir:"<<s);
+	  throw std::runtime_error("could not create dir");
+	}
+    }
+#endif
+}
+
+void checkParentDirs(const std::string &s)
+{
+#ifdef WIN32
+  std::string sep="\\";
+#else
+  std::string sep="/";
+#endif
+  std::vector<std::string> a=split(sep,s);
+
+  a.pop_back();
+
+  std::ostringstream os;
+  for(std::vector<std::string>::iterator i=a.begin();i!=a.end();++i)
+    {
+      if(i->length()==0)
+	continue;
+      if(i!=a.begin())
+	os<<sep;
+      os<<*i;
+      checkDir(os.str());
+    }
+}
 
 std::string checkFileName(std::string s)
 {
 #ifdef WIN32
   return replace(s,"/","\\");
 #else
-  #warning "check if directories exist"
-
   return s;
 #endif
 }
@@ -216,7 +269,12 @@ void saveFile(const std::string &pName,const std::string &pContent)
 
   PHYSFS_close(f);
 #else
-  FILE *f=fopen(checkFileName(getWriteDir()+"/"+pName).c_str(),"wb");
+  std::string n=checkFileName(getWriteDir()+"/"+pName);
+
+  checkParentDirs(n);
+
+
+  FILE *f=fopen(n.c_str(),"wb");
   fwrite(pContent.c_str(),pContent.length(),1,f);
   fclose(f);
 
