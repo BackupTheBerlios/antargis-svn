@@ -130,7 +130,40 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			@hero.newHLMoveJob(0,pos,0)
 		end
 	end
+
 	def clickEntities(list,button)
+		puts "clickEntities"
+		puts button
+
+		# find first entity
+		ent=nil
+		list.each{|node|
+			mesh=node.node
+			if [Mesh,AnimMesh].member?(mesh.class)
+				ent=getMap.getEntity(mesh)
+				break if ent
+			end
+		}
+		if ent
+			if ent.class==AntHero and ent.getPlayer==getMap.getPlayer
+				@hero=ent
+			else
+				@target=ent
+				inspectEntity(ent)
+			end
+		end
+
+		if button==1
+			# left button == select
+		elsif button==3
+			# right button == fight
+			if ent==@target
+				@hero.newHLFightJob(target)
+			end
+		end
+	end
+
+	def clickEntitiesOld(list,button)
 		puts "CLICKENTS"
 		puts $buttonPanel
 		job=$buttonPanel.getJob
@@ -413,6 +446,7 @@ class AntButtonPanel<AGWidget
 		@agg=1
 
 		addSignal("sigAggressionChanged")
+		addSignal("sigJobChanged")
 	end
 	def init
 		toAGButton(getChild("doAgg0")).setChecked(true)
@@ -442,10 +476,10 @@ class AntButtonPanel<AGWidget
 	def eventJobSelected(e)
 		
 		@job=e.getCaller.getName
-		
-		if @job=="doDismiss" then
-			$antView.doDismiss
-		end
+		sigJobChanged(e)
+		#if @job=="doDismiss" then
+		#	$antView.doDismiss
+		#end
 		return true
 	end
 	def eventAggSelected(e)
@@ -463,7 +497,7 @@ class AntButtonPanel<AGWidget
 	end
 	def setPointing
 		@job="doPoint"
-		toAGButton(getChild("doPoint")).setChecked(true)
+		getChild("doFight").setChecked(true)
 	end
 end
 

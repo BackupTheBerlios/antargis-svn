@@ -820,7 +820,7 @@ void AGWidget::prepareDraw()
 	{
 	  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
 	    (*i)->prepareDraw();
-
+	  mCache->clearContent();
 
 	  AGPainter p(*mCache);
 

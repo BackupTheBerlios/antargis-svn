@@ -31,10 +31,37 @@ _Design & Programming
 David Kamphausen
 _Arts
 David Kamphausen
-_Testing
-Martin Kamphausen
+Jason Lutes (portraits from Wesnoth)
+
+_Testing on Linux
 Sebastian Bertho
+_Testing on Windows
+Martin Kamphausen
 Maik-David Kroyer
+
+_Thanks for inspiration go to
+Bullfrog
+Battle for Wesnoth
+(www.wenoth.org)
+
+Daimonin
+(www.daimonin.net)
+
+_Special thanks for their support go to
+Claudia Kamphausen
+Maik-David Kroyer
+
+_Thanks go to these for opening their source
+_and thus helping understand
+Lee Thomason
+(http://www.grinninglizard.com)
+
+Glest
+(www.glest.org)
+
+ParaGUI
+(www.paragui.org)
+
 " cfont="cr_bold.font" nfont="cr_name.font"/>
 				</cell>
 				<button row="2" col="0" name="exit" caption="Exit"/>

@@ -55,6 +55,7 @@ AGTexture::AGTexture(const AGTexture &t)
   h=t.h;
   version=t.version;
   getSurfaceManager()->registerMe(this);
+  mCleared=false;
 }
 
 AGTexture::AGTexture()
@@ -68,6 +69,7 @@ AGTexture::AGTexture()
   mTextureUsed=false;
   getSurfaceManager()->registerMe(this);
   mPainting=false;
+  mCleared=false;
 }
 
 AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
@@ -79,6 +81,7 @@ AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
   mTextureUsed=false;
   mPainting=false;
   getSurfaceManager()->registerMe(this);
+  mCleared=false;
 }
 
 
@@ -98,6 +101,7 @@ AGTexture::AGTexture(const AGSurface &pSurface, bool p3d)
 
   getSurfaceManager()->registerMe(this);
   mPainting=false;
+  mCleared=false;
 }
 
 
@@ -187,12 +191,6 @@ bool AGTexture::textureUsed() const
   return mTextureUsed;
 }
 
-/*
-AGInternalSurface *AGTexture::surface()
-{
-  return s;
-  }*/
-
 void AGTexture::beginPaint()
 {
   assert(!isRendering());
@@ -204,48 +202,29 @@ void AGTexture::beginPaint()
 	
       // init 2d drawing
       getScreen().begin();
-      // copy texture to buffer
+      
+      // do this so that texture generated
       AGRenderContext c;
       c.setColor(AGVector4(1,1,1,1));
       c.setTexture(glTexture());
       c.setCulling(false);
       c.begin();
 
-      if(false)
-	{
-	  float w=mTexture->width(),h=mTexture->height();
-	  glDisable(GL_CULL_FACE);
-	  //      glColor4f(1,1,1,1);
-	  glBegin(GL_QUADS);
-	  glTexCoord2f(0,0);
-	  glVertex2f(0,0);
-	  
-	  glTexCoord2f(1,0);
-	  glVertex2f(w,0);
-	  
-	  glTexCoord2f(1,1);
-	  glVertex2f(w,h);
-	  
-	  glTexCoord2f(0,1);
-	  glVertex2f(0,h);
-	  glEnd();
-	}
+
+
       AGRenderContext nc;
       nc.begin();
-      
       
       glMatrixMode(GL_MODELVIEW);
       glPushMatrix();
       glScalef(1,-1,1);
-      //      cdebug(getScreen().getHeight());
+
       glTranslatef(0,-(int)getScreen().getHeight(),0);
 
       mPainting=true;
-      blit(*this,getRect().origin(),getRect().origin());
-	    //glTranslatef(0,-480,0);
-      //      glScalef(0.5,0.5,0.5);
-      //      glScalef(1,0.5,1);
-      
+      if(!mCleared)
+	blit(*this,getRect().origin(),getRect().origin());
+      mCleared=false;
     }
   else
     {
@@ -451,5 +430,13 @@ void AGTexture::useTexture()
 
 AGTexture AGTexture::copy() const
 {
-	throw std::runtime_error("not implemented!");
+  throw std::runtime_error("not implemented!");
+}
+
+
+/// clears texture-content when you paint on a texture in gl-mode
+/// you must call this before creating the AGPainter object
+void AGTexture::clearContent()
+{
+  mCleared=true;
 }

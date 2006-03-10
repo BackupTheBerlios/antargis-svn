@@ -38017,6 +38017,19 @@ _wrap_AGTexture_is3d(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGTexture_clearContent(int argc, VALUE *argv, VALUE self) {
+    AGTexture *arg1 = (AGTexture *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGTexture, 0);
+    (arg1)->clearContent();
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_AGTexture(int argc, VALUE *argv, VALUE self) {
     AGTexture *arg1 = (AGTexture *) 0 ;
     
@@ -58316,6 +58329,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGTexture.klass, "glTexture", VALUEFUNC(_wrap_AGTexture_glTexture), -1);
     rb_define_method(cAGTexture.klass, "sdlTexture", VALUEFUNC(_wrap_AGTexture_sdlTexture), -1);
     rb_define_method(cAGTexture.klass, "is3d", VALUEFUNC(_wrap_AGTexture_is3d), -1);
+    rb_define_method(cAGTexture.klass, "clearContent", VALUEFUNC(_wrap_AGTexture_clearContent), -1);
     cAGTexture.mark = 0;
     cAGTexture.destroy = (void (*)(void *)) free_AGTexture;
     rb_define_module_function(mLibantargis, "getSurfaceManager", VALUEFUNC(_wrap_getSurfaceManager), -1);

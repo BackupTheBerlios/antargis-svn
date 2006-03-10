@@ -67,6 +67,9 @@ ARTS
 		a) inspect
 		b) attack
 		c) recruit people
+[H] left-click is always "select" (second click is inspect)
+		right-click is attack or go to (does also select as target)
+		left-click select a hero eventually
 [H] fix texture repainting - title of target-view
 [L] add zoom with scroll wheel
 [M] inspect on double click

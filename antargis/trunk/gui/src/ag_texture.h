@@ -82,6 +82,8 @@ class AGTexture:public AGPaintTarget
 
   bool is3d() const;
 
+  void clearContent();
+
  private:
 
   void bindTexture();
@@ -89,6 +91,7 @@ class AGTexture:public AGPaintTarget
   AGGLTexture *mTexture;
   bool mTextureUsed;
   bool mPainting;
+  bool mCleared;
 
   bool m3d;
   int w,h;
