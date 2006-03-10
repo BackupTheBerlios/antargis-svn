@@ -27,16 +27,9 @@ class AntNewSheep<AntMyEntity
 		setProvide("sheep",true)
 		setSpeed 0.4
 		@lastBirth=0
-		#setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3,"data/textures/models/ant_sheep.png"),AGVector4.new(0,0,0,0),90))
-		
-		
-		#setMesh(Mesh.new(getMeshData("data/models/sheep.ant2",3),AGVector4.new(0,0,0,0),90))
-		
 		
 		data=getAnimMeshData("data/models/sheep.anim")
 		setMesh(AnimMesh.new(getMap.getScene,data))
-
-		
 	end
 	def saveXML(node)
 		super(node)
@@ -66,10 +59,10 @@ class AntNewSheep<AntMyEntity
 			@lastBirth=-rand()*10
 		elsif rand<0.5 then
 			newMoveJob(0,getTargetPos,0)
-			getFirstMesh.setAnimation("go")
+			setMeshState("go")
 		else
 			newRestJob(3)
-			getFirstMesh.setAnimation("eat")
+			setMeshState("eat")
 			playSound("sheep")
 		end
 		@lastBirth+=1
@@ -92,5 +85,8 @@ class AntNewSheep<AntMyEntity
 			ok=false
 		end 
 		return t
+	end
+	def setMeshState(s)
+		getFirstMesh.setAnimation(s)
 	end
 end

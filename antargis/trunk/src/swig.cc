@@ -16861,7 +16861,7 @@ void SwigDirector_Smoke::draw() {
 }
 
 
-SwigDirector_TerrainPieceVA::SwigDirector_TerrainPieceVA(VALUE self, Scene *pScene, Terrain *t, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos): TerrainPieceVA(pScene, t, map, x, y, w, h, pPos), Swig::Director(self) {
+SwigDirector_TerrainPieceVA::SwigDirector_TerrainPieceVA(VALUE self, Scene *pScene, Terrain *t, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos, int scale): TerrainPieceVA(pScene, t, map, x, y, w, h, pPos, scale), Swig::Director(self) {
     
 }
 
@@ -54797,10 +54797,11 @@ _wrap_new_TerrainPieceVA(int argc, VALUE *argv, VALUE self) {
     int arg7 ;
     int arg8 ;
     AGVector4 *arg9 = 0 ;
+    int arg10 ;
     TerrainPieceVA *result;
     
-    if ((argc < 8) || (argc > 8))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 8)",argc);
+    if ((argc < 9) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 9)",argc);
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_Scene, 0);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_Terrain, 0);
@@ -54810,14 +54811,15 @@ _wrap_new_TerrainPieceVA(int argc, VALUE *argv, VALUE self) {
     arg7 = NUM2INT(argv[5]);
     arg8 = NUM2INT(argv[6]);
     SWIG_ConvertPtr(argv[7], (void **) &arg9, SWIGTYPE_p_AGVector4, 0); if (arg9 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg10 = NUM2INT(argv[8]);
     {
         char *classname = "Libantargis::TerrainPieceVA";
         if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
             /* subclassed */
-            result = (TerrainPieceVA *)new SwigDirector_TerrainPieceVA(arg1,arg2,arg3,*arg4,arg5,arg6,arg7,arg8,(AGVector4 const &)*arg9);
+            result = (TerrainPieceVA *)new SwigDirector_TerrainPieceVA(arg1,arg2,arg3,*arg4,arg5,arg6,arg7,arg8,(AGVector4 const &)*arg9,arg10);
             
         } else {
-            result = (TerrainPieceVA *)new TerrainPieceVA(arg2,arg3,*arg4,arg5,arg6,arg7,arg8,(AGVector4 const &)*arg9);
+            result = (TerrainPieceVA *)new TerrainPieceVA(arg2,arg3,*arg4,arg5,arg6,arg7,arg8,(AGVector4 const &)*arg9,arg10);
             
         }
         DATA_PTR(self) = result;

@@ -8,7 +8,7 @@
 
 		<table col="1" row="0" cols="1" rows="5">
 			<rowsize row="0" fixed="90"/>
-			<rowsize row="1" fixed="150"/>
+			<rowsize row="1" fixed="160"/>
 			<!--<rowsize row="2" fixed="216"/>-->
 			<rowsize row="3" fixed="216"/>
 			<rowsize row="4" fixed="50"/>
@@ -45,32 +45,49 @@
 			<!-- button panel -->
 			<cell col="0" row="1">
 				<!--<frame border="button.border.normal" visible="true">-->
-					<layout filename="data/gui/layout/buttonpanel.xml"/>
+					<layout filename="data/gui/layout/hero_buttons.xml"/>
 				<!--</frame>-->
 			</cell>
-			<antInventory col="0" row="2">
-				<table cols="2" rows="9">
-					<text name="invTitle" enabled="false" align="center" font="invTitle.font"/>
-					<text col="0" row="1" caption="Name" align="left" font="inventory.font"/>
-					<text col="0" row="2" caption="Boss" align="left" font="inventory.font"/>
-					<text col="0" row="3" caption="Men" align="left" font="inventory.font"/>
-					
-					<text col="0" row="4" caption="Wood" align="left" font="inventory.font"/>
-					<text col="0" row="5" caption="Stone" align="left" font="inventory.font"/>
-					<text col="0" row="6" caption="Food" align="left" font="inventory.font"/>
-					<text col="0" row="7" caption="Tools" align="left" font="inventory.font"/>
-					
-					
-					<text col="1" row="1" caption="0" align="right" name="name" font="inventory.font"/>
-					<text col="1" row="2" caption="0" align="right" name="boss" font="inventory.font"/>
-					<text col="1" row="3" caption="0" align="right" name="men" font="inventory.font"/>
-					<text col="1" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
-					<text col="1" row="5" caption="0" align="right" name="stone" font="inventory.font"/>
-					<text col="1" row="6" caption="0" align="right" name="food" font="inventory.font"/>
-					<text col="1" row="7" caption="0" align="right" name="tool" font="inventory.font"/>
-					<button col="1" row="8" caption="..." name="inspect"/>
-				</table>
-			</antInventory>
+			<cell col="0" row="2">
+				<frame border="button.border.normal" visible="true" background="button.background.disabled">
+				<antInventory>
+					<table cols="1" rows="3">
+						<rowsize row="0" fixed="25"/>
+						<rowsize row="1" fixed="45"/>
+						<cell col="0" row="0">
+							<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
+						</cell>
+						<cell col="0" row="1">
+							<frame width="3">
+							<table cols="4" rows="1">
+								<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
+								<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
+								<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
+								<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
+							</table>
+						</frame>
+						</cell>
+						<cell col="0" row="2">
+							<table cols="2" rows="6">
+								<text col="0" row="0" caption="Boss" align="left" font="inventory.font"/>
+								<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
+								<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
+								<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
+								<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
+								<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>
+								
+								<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>
+								<text col="1" row="1" caption="0" align="right" name="men" font="inventory.font"/>
+								<text col="1" row="2" caption="0" align="right" name="wood" font="inventory.font"/>
+								<text col="1" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
+								<text col="1" row="4" caption="0" align="right" name="food" font="inventory.font"/>
+								<text col="1" row="5" caption="0" align="right" name="tool" font="inventory.font"/>
+							</table>
+						</cell>
+					</table>
+				</antInventory>
+			</frame>
+			</cell>
 			<cell col="0" row="3">
 				<frame border="button.border.normal" visible="true">
 					<miniMap name="miniMap"/>

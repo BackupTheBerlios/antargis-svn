@@ -6,17 +6,20 @@ AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t pWidth):AGWidget(
 {
   mTextureInited=false;
   mUseTexture=true;
+  mBg=0;
 }
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pParent,pRect),
 										 mWidth(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture(width(),height())
 {
   mTextureInited=false;
   mUseTexture=true;
+  mBg=0;
 }
 
 AGFrame::~AGFrame()
 {
   delete mBorder;
+  delete mBg;
 }
 
 AGRect2 AGFrame::getClientRect() const
@@ -41,6 +44,10 @@ void AGFrame::prepareDraw()
 
 void AGFrame::draw(AGPainter &p)
 {
+  if(mBg)
+    {
+      mBg->draw(getRect().origin(),p);
+    }
   if(mBorder)
     {
       if(mUseTexture && mTextureInited)
@@ -48,4 +55,9 @@ void AGFrame::draw(AGPainter &p)
       else
 	mBorder->draw(getRect().origin(),p);
     }
+}
+
+void AGFrame::setBackground(const AGBackground &pBg)
+{
+  mBg=new AGBackground(pBg);
 }

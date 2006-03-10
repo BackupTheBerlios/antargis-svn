@@ -67,6 +67,9 @@ ARTS
 		a) inspect
 		b) attack
 		c) recruit people
+[H] fix texture repainting - title of target-view
+[L] add zoom with scroll wheel
+[M] inspect on double click
 
 [Menu]
 ------------------------------------------------------

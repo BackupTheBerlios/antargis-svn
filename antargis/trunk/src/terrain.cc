@@ -5,11 +5,19 @@
 //////////////////////////////////////////////////////////////////////////
 // TerrainPieceVA
 //////////////////////////////////////////////////////////////////////////
-TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos):
-  SceneNode(pScene,AGVector4(),AGBox3()),//AGVector3(xs,ys,-10),AGVector3(xs+w,ys+h,30))),
+TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
+  SceneNode(pScene,AGVector4(),AGBox3()),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map)
 {
+  mScale=scale;
+  if(scale>0)
+    {
+      mXs/=scale;
+      mYs/=scale;
+      mW/=scale;
+      mH/=scale;
+    }
   mTerrain=t;
   mapChanged();
   setOrder(TERRAIN_Z);
@@ -46,11 +54,12 @@ void TerrainPieceVA::mapChanged()
   for(x=mXs;x<=mXs+mW;x++)
     for(y=mYs;y<=mYs+mH;y++)
       {
-	v=mMap->getVertex(x,y);
+	int sx=x*mScale,sy=y*mScale;
+	v=mMap->getVertex(sx,sy);
 
-	n=mMap->getNormal(x,y);
+	n=mMap->getNormal(sx,sy);
 
-	float texHeight=mMap->getTerrainScale(x,y);
+	float texHeight=mMap->getTerrainScale(sx,sy);
 
         tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
         m3dArray.addVertex(v,white,n,tp3);
@@ -152,7 +161,7 @@ void Terrain::init()
   for(y=0; y<mMap->getH();y+=tilesize)
     for(x=0;x<mMap->getW();x+=tilesize)
       {
-	TerrainPieceVA *t=new TerrainPieceVA(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	TerrainPieceVA *t=new TerrainPieceVA(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0),1);
 	WaterPiece *w=new WaterPiece(getScene(),*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);

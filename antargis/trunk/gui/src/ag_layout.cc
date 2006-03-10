@@ -524,11 +524,14 @@ public:
     std::string border=pNode.get("border");
     size_t width=toInt(pNode.get("width"));
 
-    AGWidget *w;
+    AGFrame *w;
     if(border.length())
       w=new AGFrame(pParent,pRect,AGBorder(border));
     else
       w=new AGFrame(pParent,pRect,width);
+
+    if(pNode.get("background").length())
+      w->setBackground(AGBackground(pNode.get("background")));
     
     return w;
   }

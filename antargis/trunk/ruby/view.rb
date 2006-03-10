@@ -281,7 +281,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def checkMove(t)
 		if getMain.fullscreen
 			p=@mousepos
-			m=50
+			m=0
 			w=20
 			s=10
 			{AGRect.new(0,m,w,getMain.height-m*2)=>AGVector2.new(-1,0),
@@ -323,12 +323,8 @@ $antRubyViewCreator=AntRubyViewCreator.new
 class AntInventory<AGWidget
 	def initialize(p,rect)
 		super(p,rect)
-		#setTheme("antButton")
 		$inventory=self
 		@resTypes=["wood","stone","men","food","tool"]
-		@border=AGBorder.new("button.border.disabled")
-		@bg=AGBackground.new("button.background.disabled")
-		#setEnabled(false)
 		setCaching(true)
 		@invinited=false
 	end
@@ -338,9 +334,9 @@ class AntInventory<AGWidget
 	end
 
 	def setValue(name,value)
-		ok=@resTypes+["name","boss"]
+		ok=@resTypes+["boss"]
 		if ok.member?(name) then
-			w=toAGEdit(getChild(name))
+			w=getChild(name)
 			if value.class==String
 				w.setText value
 			else
@@ -349,21 +345,22 @@ class AntInventory<AGWidget
 		end
 	end
 	def setTitle(t)
-		toAGEdit(getChild("invTitle")).setText(t)
+		c=getChild("invTitle")
+		if c.class==AGButton
+			c.setCaption(t)
+		else
+			c.setText(t)
+		end
 	end
 	def inspect(e)
 		setTitle(e.class.to_s) #getType)
 		@inspect=e
 	end
 	def draw(p)
-		@bg.draw(getRect.origin,p)
 		updateInspection
 		super(p)
-		@bg.draw(getRect.origin,p)
-		@border.draw(getRect.origin,p)
-		#p.fillRect(AGRect2.new(-10,-10,300,300),AGColor.new(0xFF,0,0))
 		if not @invinited
-			addHandler(getChild("inspect"),:sigClick,:eventInspect)
+			addHandler(getChild("doInspect"),:sigClick,:eventInspect)
 			@invinited=true
 		end
 
@@ -409,7 +406,8 @@ class AntButtonPanel<AGWidget
 		setName("ButtonPanel")
 		$buttonPanel=self
 		clearHandlers
-		@jobButtons=["doPoint","doMove","doFight","doRecruit","doDismiss","doInvent"]
+		#@jobButtons=["doPoint","doMove","doFight","doRecruit","doDismiss","doInvent"]
+		@jobButtons=["doFight","doInvent","doRest","doDismiss","doDropFood","doDropWeapon"]
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
 		@inited=false
 		@agg=1
@@ -418,7 +416,7 @@ class AntButtonPanel<AGWidget
 	end
 	def init
 		toAGButton(getChild("doAgg0")).setChecked(true)
-		toAGButton(getChild("doPoint")).setChecked(true)
+		toAGButton(getChild("doFight")).setChecked(true)
 		@job="doPoint"
 		@jobButtons.each {|b|
 			c=getChild(b)

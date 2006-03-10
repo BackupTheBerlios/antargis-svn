@@ -18,7 +18,6 @@ Renderer::Renderer():
   gRenderer=this;
   mScene=0;
   shadowMapSize=1024;//512;
-  //shadowMapSize=512;
   shadowInited=false;
 }
 
@@ -149,10 +148,10 @@ void Renderer::endShadowComputation()
   //Read the depth buffer into the shadow map texture
   glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
   assertGL;
-  //  glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowMapSize, shadowMapSize);
-  //glCopyTexSubImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, 0, shadowMapSize, shadowMapSize);
 
+  /// @todo switch to FBOs - this should bring an improvement of 17 to 19 fps
   glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, shadowMapSize, shadowMapSize,0);
+
   assertGL;
 
 

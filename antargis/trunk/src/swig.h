@@ -1548,7 +1548,7 @@ public:
 class SwigDirector_TerrainPieceVA : public TerrainPieceVA, public Swig::Director {
 
 public:
-    SwigDirector_TerrainPieceVA(VALUE self, Scene *pScene, Terrain *t, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos);
+    SwigDirector_TerrainPieceVA(VALUE self, Scene *pScene, Terrain *t, HeightMap &map, int x, int y, int w, int h, AGVector4 const &pPos, int scale);
     virtual void setPos(AGVector3 const &pPos);
     virtual bool transparent();
     virtual void clear();

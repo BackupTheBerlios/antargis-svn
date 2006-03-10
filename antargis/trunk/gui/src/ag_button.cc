@@ -144,26 +144,22 @@ bool AGButton::eventMouseLeave()
 
 bool AGButton::eventMouseButtonDown(AGEvent *e)
 {
-  queryRedraw();
-  if(!mEnabled)
-    return false;
-
-  // CTRACE;
   if(e->isSDLEvent())
     {
-      //      cdebug(getScreenRect());
       if(getScreenRect().contains(e->getMousePosition()))
 	{
-	  if(mChecked)
-	    mState=CHECKEDPRESSED;
-	  else
-	    mState=PRESSED;
-	  //  ccdebug("Pressed");
-	  //	  sigClick(m);
-	  //	  cdebug(getName());
-	  AGWidget::eventMouseButtonDown(e); // let it get the buttondown-info
+	  if(mEnabled)
+	    {
+	      queryRedraw();
+	      if(mChecked)
+		mState=CHECKEDPRESSED;
+	      else
+		mState=PRESSED;
 
-	  return true;// FIXME:TEST false; // events only get eaten if in window
+	      AGWidget::eventMouseButtonDown(e); // let it get the buttondown-info
+	    }
+	  
+	  return true;
 	}
     }
   return AGWidget::eventMouseButtonDown(e);
@@ -171,26 +167,27 @@ bool AGButton::eventMouseButtonDown(AGEvent *e)
 
 bool AGButton::eventMouseButtonUp(AGEvent *e)
 {
-  queryRedraw();
-  if(!mEnabled)
-    return false;
-
   if(e->isSDLEvent())
     {
-      if(getScreenRect().contains(e->getMousePosition()))
+      if(mEnabled)
 	{
-	  if(mChecked)
-	    mState=CHECKEDLIGHTED;
+	  queryRedraw();
+	  if(getScreenRect().contains(e->getMousePosition()))
+	    {
+	      if(mChecked)
+		mState=CHECKEDLIGHTED;
+	      else
+		mState=LIGHTED;
+	    }
 	  else
-	    mState=LIGHTED;
+	    {
+	      if(mChecked)
+		mState=CHECKED;
+	      else
+		mState=NORMAL;
+	    }
 	}
-      else
-	{
-	  if(mChecked)
-	    mState=CHECKED;
-	  else
-	    mState=NORMAL;
-	}
+     
     }
   return AGWidget::eventMouseButtonUp(e);
 }

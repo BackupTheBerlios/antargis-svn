@@ -22,7 +22,7 @@ class Terrain;
 class TerrainPieceVA:public SceneNode
 {
  public:
-  TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos);
+  TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
   virtual ~TerrainPieceVA()
     {
     }
@@ -49,6 +49,7 @@ class TerrainPieceVA:public SceneNode
 
   size_t mXs,mYs;
   size_t mW,mH;
+  int mScale;
   HeightMap *mMap;
 
   VertexArray m3dArray;
