@@ -124,152 +124,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			end
 		end
 	end
-	def clickMap(pos,button)
-		puts "CLICKMAP"
-		if @hero then
-			@hero.newHLMoveJob(0,pos,0)
-		end
-	end
-
-	def clickEntities(list,button)
-		puts "clickEntities"
-		puts button
-
-		# find first entity
-		ent=nil
-		list.each{|node|
-			mesh=node.node
-			if [Mesh,AnimMesh].member?(mesh.class)
-				ent=getMap.getEntity(mesh)
-				break if ent
-			end
-		}
-		if ent
-			if ent.class==AntHero and ent.getPlayer==getMap.getPlayer
-				@hero=ent
-			else
-				@target=ent
-				inspectEntity(ent)
-			end
-		end
-
-		if button==1
-			# left button == select
-		elsif button==3
-			# right button == fight
-			if ent==@target
-				@hero.newHLFightJob(target)
-			end
-		end
-	end
-
-	def clickEntitiesOld(list,button)
-		puts "CLICKENTS"
-		puts $buttonPanel
-		job=$buttonPanel.getJob
-		if job==nil
-			return
-		end
-		puts "JOB:"+job
-		if job=="doPoint" then
-			# select
-			list.each{|ents|
-				mesh=ents.node
-				puts mesh
-				if mesh.class==Mesh or mesh.class==AnimMesh
-					e=getMap.getEntity(mesh)
-					if not e
-						puts mesh.class
-						puts toTerrainMesh(mesh)
-						if not toTerrainMesh(mesh)
-							raise "WHY IS IT NOT IN MAP ????????????"
-						end
-					else
-						if e.class==AntHero then
-							inspectEntity(e)
-							if e.getPlayer==getMap.getPlayer
-								@hero=e
-								playSound("mylord")
-							else
-								@hero=nil
-							end
-							break
-						elsif e.is_a?(AntEntity) then  # was AntBoss
-							inspectEntity(e)
-							break
-						end
-					end
-				end
-			}
-			return
-		elsif job=="doMove" then
-			# FIXME: exchange with good position estimation
-			mesh=list[0].node
-			e=getMap.getEntity(mesh)
-			if e
-				doMove(e.getPos2D)
-			end
-		elsif job=="doRecruit" then
-			#displayError("not allowed")
-			puts "RECRUITING"
-			if @hero then
-				# get house
-				house=nil
-				list.each{|ents|
-					if ents.node.class==Mesh
-						e=getMap.getEntity(ents.node)
-						if e.is_a?(AntHouse) then
-							house=e
-						end
-					end
-				}
-				if house then
-					puts "DOING RECRUIT"
-					puts house
-					@hero.newHLRecruitJob(house)
-					$buttonPanel.setPointing
-				end
-			end
-		elsif job=="doFight" then
-			if @hero then
-				target=nil
-				puts "LISTLEN:",list.length
-				list.each{|ents|
-					puts "ITERATION"
-					if ents.node.class==Mesh
-						e=getMap.getEntity(ents.node)
-						if not e
-							if not toTerrainMesh(ents.node)
-								raise "Why is this not in the map????"
-							end
-						else
-							if e.is_a?(AntBoss) then
-								target=e
-							end
-						end
-					end
-				}
-				if target then
-					@hero.newHLFightJob(target)
-					# go back to "normal" pointing
-					$buttonPanel.setPointing
-				end
-			end
-		end
-	end
-	
-	def doMove(pos)
-		if @hero then
-			#pos=list[0].get.getPos2D
-			@hero.newHLMoveJob(0,pos,0)
-		end
-	end
-	def doDismiss()
-		if @hero
-			@hero.newHLDismissJob
-		end
-		$buttonPanel.setPointing
-	end
 	
 	def hoverEntity(e)
 		if @hover
@@ -285,21 +139,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		end
 	end
 	
-	def inspectEntity(e)
-		if @inspect
-			if @inspect.is_a?(AntBoss)
-				@inspect.selected=false
-			end
-		end
-		@inspect=e
-		if @inspect
-			if @inspect.is_a?(AntBoss)
-				@inspect.selected=true
-			end
-		end
-		$inventory.inspect(e)
-	end
-
 	def setCamera(p)
 		super(clipCamera(p))
 	end
@@ -354,12 +193,28 @@ $antRubyViewCreator=AntRubyViewCreator.new
 
 # Inventory view
 class AntInventory<AGWidget
+	attr_reader :job
 	def initialize(p,rect)
 		super(p,rect)
 		$inventory=self
 		@resTypes=["wood","stone","men","food","tool"]
 		setCaching(true)
 		@invinited=false
+
+		@buttonNames=["doRecruit","doTakeFood","doTakeWeapons"]
+
+		addSignal("sigJobChanged")
+	end
+	def initHandlers
+		puts "INITHANDLERS"
+		@buttonNames.each{|n|
+			addHandler(getChild(n),:sigClick,:eventJobChanged)
+		}
+		addHandler(getChild("doInspect"),:sigClick,:eventInspect)
+	end
+	def eventJobChanged(e)
+		@job=e.getCaller.getName
+		sigJobChanged(e)
 	end
 
 	def eventInspect
@@ -392,11 +247,6 @@ class AntInventory<AGWidget
 	def draw(p)
 		updateInspection
 		super(p)
-		if not @invinited
-			addHandler(getChild("doInspect"),:sigClick,:eventInspect)
-			@invinited=true
-		end
-
 	end
 	def updateInspection
 		if @inspect then
@@ -433,7 +283,7 @@ $antInventoryCreator=AntInventoryCreator.new
 
 
 class AntButtonPanel<AGWidget
-	include AGHandler
+	attr_reader :job
 	def initialize(p,r)
 		super(p,r)
 		setName("ButtonPanel")
@@ -448,48 +298,31 @@ class AntButtonPanel<AGWidget
 		addSignal("sigAggressionChanged")
 		addSignal("sigJobChanged")
 	end
-	def init
-		toAGButton(getChild("doAgg0")).setChecked(true)
-		toAGButton(getChild("doFight")).setChecked(true)
-		@job="doPoint"
+	def initHandlers
+		getChild("doAgg0").setChecked(true)
+		getChild("doRest").setChecked(true)
+		@job="doRest"
 		@jobButtons.each {|b|
 			c=getChild(b)
-			puts b
-			puts c
 			addHandler(c,:sigClick,:eventJobSelected)
 		}
 		@aggButtons.each {|b,a|
-			puts b
 			c=getChild(b)
-			puts c
 			addHandler(c,:sigClick,:eventAggSelected)
 		}
 	end
 	def draw(p)
 		super(p)
-		if not @inited then
-			@inited=true
-			init
-		end
 	end
 	
 	def eventJobSelected(e)
-		
 		@job=e.getCaller.getName
 		sigJobChanged(e)
-		#if @job=="doDismiss" then
-		#	$antView.doDismiss
-		#end
-		return true
 	end
 	def eventAggSelected(e)
 		@agg=@aggButtons[e.getCaller.getName]
 		sigAggressionChanged(e)
 		return true
-	end
-	
-	def getJob()
-		return @job
 	end
 	
 	def getAggression()

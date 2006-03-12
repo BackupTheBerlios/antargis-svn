@@ -94,6 +94,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -143,6 +144,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -192,6 +194,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -270,6 +273,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -319,6 +323,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -402,6 +407,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -452,6 +458,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -501,6 +508,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -551,6 +559,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -611,6 +620,7 @@ public:
     virtual void setWidth(float w);
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void prepareDraw();
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -738,6 +748,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -796,6 +807,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -879,6 +891,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -928,6 +941,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -979,6 +993,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -1053,6 +1068,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1110,6 +1126,7 @@ public:
     virtual void setWidth(float w);
     virtual void setHeight(float w);
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1457,6 +1474,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;

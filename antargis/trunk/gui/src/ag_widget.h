@@ -42,6 +42,8 @@ class AGWidget:public AGMessageObject
  public:
   AGWidget(AGWidget *pParent,const AGRect2 &r);
   virtual ~AGWidget();
+
+  virtual void initHandlers();
   
   virtual void draw(AGPainter &p);
   virtual void drawAfter(AGPainter &p);

@@ -165,6 +165,9 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   parseChildren(w,pNode);
 
+  if(w)
+    w->initHandlers();
+
   return w;
 }
 

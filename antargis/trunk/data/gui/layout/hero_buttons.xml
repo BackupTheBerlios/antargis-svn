@@ -17,9 +17,9 @@
 								<radio  col="0" row="0" name="doFight" caption-image="data/gui/sword.png" tooltip="Attack"/>
 								<radio  col="1" row="0" name="doInvent" caption-image="data/gui/invent.png" tooltip="Invent"/>
 								<radio  col="2" row="0" name="doRest" caption-image="data/gui/bed.png" tooltip="Rest"/>
-								<radio  col="0" row="1" name="doDismiss" caption-image="data/gui/dismiss.png" tooltip="Dismiss"/>
-								<radio  col="1" row="1" name="doDropFood" caption-image="data/gui/drop_apple.png" tooltip="Drop food"/>
-								<radio  col="2" row="1" name="doDropWeapon" caption-image="data/gui/drop_weapon.png" tooltip="Drop weapons"/>
+								<button  col="0" row="1" name="doDismiss" caption-image="data/gui/dismiss.png" tooltip="Dismiss"/>
+								<button  col="1" row="1" name="doDropFood" caption-image="data/gui/drop_apple.png" tooltip="Drop food"/>
+								<button  col="2" row="1" name="doDropWeapon" caption-image="data/gui/drop_weapon.png" tooltip="Drop weapons"/>
 							</table>
 						</radioGroup>
 					</cell>

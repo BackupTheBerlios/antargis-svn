@@ -2192,6 +2192,17 @@ bool SwigDirector_AGWidget::eventDragBy(AGEvent *event, AGVector2 const &pDiff) 
 }
 
 
+void SwigDirector_AGWidget::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGWidget::minHeight() const {
     float c_result ;
     VALUE result;
@@ -2766,6 +2777,17 @@ bool SwigDirector_AGColorButton::eventDragBy(AGEvent *event, AGVector2 const &pD
 }
 
 
+void SwigDirector_AGColorButton::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGColorButton::minHeight() const {
     float c_result ;
     VALUE result;
@@ -3337,6 +3359,17 @@ bool SwigDirector_AGGLWidget::eventDragBy(AGEvent *event, AGVector2 const &pDiff
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGGLWidget::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -4107,6 +4140,17 @@ bool SwigDirector_AGLayout::eventDragBy(AGEvent *event, AGVector2 const &pDiff) 
 }
 
 
+void SwigDirector_AGLayout::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGLayout::minHeight() const {
     float c_result ;
     VALUE result;
@@ -4678,6 +4722,17 @@ bool SwigDirector_AGDialog::eventDragBy(AGEvent *event, AGVector2 const &pDiff) 
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGDialog::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -5632,6 +5687,17 @@ void SwigDirector_AGButton::setHeight(float w) {
 }
 
 
+void SwigDirector_AGButton::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGButton::minHeight() const {
     float c_result ;
     VALUE result;
@@ -6225,6 +6291,17 @@ bool SwigDirector_AGText::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
 }
 
 
+void SwigDirector_AGText::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGText::minHeight() const {
     float c_result ;
     VALUE result;
@@ -6796,6 +6873,17 @@ bool SwigDirector_AGCaption::eventDragBy(AGEvent *event, AGVector2 const &pDiff)
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGCaption::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -7383,6 +7471,17 @@ void SwigDirector_AGCheckBox::setHeight(float w) {
     }
     obj0 = rb_float_new(w);
     result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
+}
+
+
+void SwigDirector_AGCheckBox::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -8023,6 +8122,17 @@ void SwigDirector_AGEdit::prepareDraw() {
         return;
     }
     result = rb_funcall(swig_get_self(), rb_intern("prepareDraw"), 0, NULL);
+}
+
+
+void SwigDirector_AGEdit::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -9339,6 +9449,17 @@ bool SwigDirector_AGImage::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
 }
 
 
+void SwigDirector_AGImage::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGImage::minHeight() const {
     float c_result ;
     VALUE result;
@@ -9938,6 +10059,17 @@ bool SwigDirector_AGListBox::eventDragBy(AGEvent *event, AGVector2 const &pDiff)
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGListBox::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -10668,6 +10800,17 @@ bool SwigDirector_AGSound::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
 }
 
 
+void SwigDirector_AGSound::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGSound::minHeight() const {
     float c_result ;
     VALUE result;
@@ -11239,6 +11382,17 @@ bool SwigDirector_AGRadioGroup::eventDragBy(AGEvent *event, AGVector2 const &pDi
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGRadioGroup::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -11839,6 +11993,17 @@ void SwigDirector_AGRadio::setHeight(float w) {
     }
     obj0 = rb_float_new(w);
     result = rb_funcall(swig_get_self(), rb_intern("setHeight"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadio::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -12684,6 +12849,17 @@ void SwigDirector_AGTable::setHeight(float w) {
 }
 
 
+void SwigDirector_AGTable::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
+}
+
+
 float SwigDirector_AGTable::minHeight() const {
     float c_result ;
     VALUE result;
@@ -13264,6 +13440,17 @@ bool SwigDirector_AGWindow::eventDragBy(AGEvent *event, AGVector2 const &pDiff) 
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_AGWindow::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -16034,6 +16221,17 @@ bool SwigDirector_MiniMap::eventDragBy(AGEvent *event, AGVector2 const &pDiff) {
     result = rb_funcall(swig_get_self(), rb_intern("eventDragBy"), 2,obj0,obj1);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
+}
+
+
+void SwigDirector_MiniMap::initHandlers() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        AGWidget::initHandlers();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("initHandlers"), 0, NULL);
 }
 
 
@@ -28488,6 +28686,22 @@ static void
 free_AGWidget(AGWidget *arg1) {
     delete arg1;
 }
+
+static VALUE
+_wrap_AGWidget_initHandlers(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->initHandlers();
+    
+    return Qnil;
+}
+
 
 static VALUE
 _wrap_AGWidget_draw(int argc, VALUE *argv, VALUE self) {
@@ -57814,6 +58028,7 @@ SWIGEXPORT void Init_libantargis(void) {
     SWIG_TypeClientData(SWIGTYPE_p_AGWidget, (void *) &cAGWidget);
     rb_define_alloc_func(cAGWidget.klass, _wrap_AGWidget_allocate);
     rb_define_method(cAGWidget.klass, "initialize", VALUEFUNC(_wrap_new_AGWidget), -1);
+    rb_define_method(cAGWidget.klass, "initHandlers", VALUEFUNC(_wrap_AGWidget_initHandlers), -1);
     rb_define_method(cAGWidget.klass, "draw", VALUEFUNC(_wrap_AGWidget_draw), -1);
     rb_define_method(cAGWidget.klass, "drawAfter", VALUEFUNC(_wrap_AGWidget_drawAfter), -1);
     rb_define_method(cAGWidget.klass, "drawAll", VALUEFUNC(_wrap_AGWidget_drawAll), -1);

@@ -50,7 +50,7 @@
 			</cell>
 			<cell col="0" row="2">
 				<frame border="button.border.normal" visible="true" background="button.background.disabled">
-				<antInventory>
+				<antInventory name="inventory">
 					<table cols="1" rows="3">
 						<rowsize row="0" fixed="25"/>
 						<rowsize row="1" fixed="45"/>

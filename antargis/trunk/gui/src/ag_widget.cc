@@ -919,3 +919,7 @@ AGLayout *AGWidget::getLayout()
     return mParent->getLayout();
   return 0;
 }
+
+void AGWidget::initHandlers()
+{
+}
