@@ -55,14 +55,25 @@
 						<rowsize row="0" fixed="25"/>
 						<rowsize row="1" fixed="45"/>
 						<cell col="0" row="0">
-							<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
+							<table cols="4" rows="1">
+								<colsize col="0" fixed="16"/>
+								<colsize col="1" fixed="16"/>
+								<colsize col="3" fixed="32"/>
+								<image col="0" row="0" filename="data/gui/crown.png" name="friend_true"/>
+								<image col="1" row="0" filename="data/gui/enemy.png" name="enemy_true"/>
+								<image col="0" row="0" filename="data/gui/crown_bw.png" name="friend_false"/>
+								<image col="1" row="0" filename="data/gui/enemy_bw.png" name="enemy_false"/>
+								<cell col="2" row="0">
+									<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
+								</cell>
+							</table>
 						</cell>
 						<cell col="0" row="1">
 							<frame width="3">
 							<table cols="4" rows="1">
 								<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
-								<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
-								<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
+								<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food - FIXME"/>
+								<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
 								<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
 							</table>
 						</frame>
@@ -85,6 +96,7 @@
 							</table>
 						</cell>
 					</table>
+					<frame background="wood.background" name="shutter"/>
 				</antInventory>
 			</frame>
 			</cell>

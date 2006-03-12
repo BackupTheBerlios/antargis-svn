@@ -53,20 +53,20 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		return AGRect.new(sp.x-50,sp.y-45,100,40)
 	end
 
-	def setupHeroDisplay(first=false)
-		# init
-		heroes=$map.getOwnHeroes
-		if heroes.length>0
-			h=heroes[0]
-			selectHero(h)
-			if first
-				focusHero(h)
-			end
-		end
-		if first
-			setupNames
-		end
-	end
+# 	def setupHeroDisplay(first=false)
+# 		# init
+# 		heroes=$map.getOwnHeroes
+# 		if heroes.length>0
+# 			h=heroes[0]
+# 			selectHero(h)
+# 			if first
+# 				focusHero(h)
+# 			end
+# 		end
+# 		if first
+# 			setupNames
+# 		end
+# 	end
 
 	def focusHero(hero)
 		setCamera(hero.getPos2D)

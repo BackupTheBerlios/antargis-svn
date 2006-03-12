@@ -503,6 +503,14 @@ void AGWidget::hide()
   queryRedraw();
 }
 
+void AGWidget::setVisible(bool v)
+{
+  if(mVisible!=v)
+    queryRedraw();
+  mVisible=v;
+}
+
+
 void AGWidget::setParent(AGWidget *pParent)
 {
   mParent=pParent;

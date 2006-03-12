@@ -58,6 +58,9 @@ class AntMyEntity<AntEntity
 	def menCount
 		0
 	end
+	def getPlayer
+		nil
+	end
 end
 
 

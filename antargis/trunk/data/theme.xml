@@ -365,4 +365,9 @@
 		<color name='bordercolor' color='#ffd272'/>
 		<color name='bgcolor' color='#111111'/>
 	</tooltip>
+	<wood>
+		<background>
+			<image name="image" file="data/gui/wood_bg.png"/>
+		</background>
+	</wood>
 </theme>

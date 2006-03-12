@@ -38,7 +38,7 @@ require 'storyflow.rb'
 
 class AntGameApp <AntRubyView
 	attr_accessor :result
-
+	attr_reader :hero
 
 	include AGHandler
 	def initialize(savegame,w,h,loadscreen=nil)
@@ -126,10 +126,10 @@ class AntGameApp <AntRubyView
 
 	def eventKeyDown(e)
 		if e.getKey==SDLK_F9
-			if @layout.visible
-				@layout.hide
+			if panelVisible
+				showPanel
 			else
-				@layout.show
+				hidePanel
 			end
 		end
 		return super(e)
@@ -144,7 +144,10 @@ class AntGameApp <AntRubyView
 		@layout.addChild(@debug)
 		addHandler(@debug.getChild("load"),:sigClick,:load)
 	end
-	
+
+	def panelVisible
+		@layout.getChild("SideBar").visible
+	end
 	def showPanel
 		@layout.getChild("SideBar").show
 	end
@@ -187,14 +190,8 @@ class AntGameApp <AntRubyView
 		return true
 	end
 	
-	def eventIdle
-		#GC.start
-	end
-	
 	# signals	
 	def eventQuit(e)
-		#puts "pCaller:"+callerName
-		#tryQuit
 		@layout.addChild(AntQuitDialog.new(@layout))
 	end
 	def eventPause(e)
@@ -249,7 +246,8 @@ class AntGameApp <AntRubyView
 		puts "setHero-ok"
 	end
 	def setupHeroDisplay(first=false)
-		super
+		#super
+		# setup Hero buttons
 		hs=getMap.getPlayer.getHeroes.select{|h|h.class==AntHero}
 		puts "HEROOOOOOOOOOOOOOOOOOOOOOOES:",hs
 		for i in 0..2
@@ -264,12 +262,22 @@ class AntGameApp <AntRubyView
 			end
 		end
 		puts "first:",first
-		# init
+		# init Handlers of Buttons
 		if first
 			addHandler(@layout.getChild("antButtonPanel"),:sigAggressionChanged,:eventAggressionChanged)
 			for i in 0..2
 				addHandler(@layout.getChild("hero#{i}"),:sigClick,:eventHeroButton)
 			end
+			setupNames
+			
+			# center hero and select
+	 		if hs.length>0
+	 			h=hs[0]
+	 			selectHero(h)
+ 				focusHero(h)
+				@layout.getChild("hero0").setChecked(true)
+ 			end
+
 		end
 		puts "setupHeroDisplay!"
 	end
@@ -341,6 +349,8 @@ class AntGameApp <AntRubyView
 		if ent
 			if ent.class==AntHero and ent.getPlayer==getMap.getPlayer
 				@hero=ent
+				@target=ent
+				inspectEntity(ent)
 			else
 				@target=ent
 				inspectEntity(ent)

@@ -29384,6 +29384,21 @@ _wrap_AGWidget_visible(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGWidget_setVisible(int argc, VALUE *argv, VALUE self) {
+    AGWidget *arg1 = (AGWidget *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGWidget, 0);
+    arg2 = RTEST(argv[0]);
+    (arg1)->setVisible(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_AGWidget_setWidth(int argc, VALUE *argv, VALUE self) {
     AGWidget *arg1 = (AGWidget *) 0 ;
     float arg2 ;
@@ -58064,6 +58079,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGWidget.klass, "bottom", VALUEFUNC(_wrap_AGWidget_bottom), -1);
     rb_define_method(cAGWidget.klass, "right", VALUEFUNC(_wrap_AGWidget_right), -1);
     rb_define_method(cAGWidget.klass, "visible", VALUEFUNC(_wrap_AGWidget_visible), -1);
+    rb_define_method(cAGWidget.klass, "setVisible", VALUEFUNC(_wrap_AGWidget_setVisible), -1);
     rb_define_method(cAGWidget.klass, "setWidth", VALUEFUNC(_wrap_AGWidget_setWidth), -1);
     rb_define_method(cAGWidget.klass, "setHeight", VALUEFUNC(_wrap_AGWidget_setHeight), -1);
     rb_define_method(cAGWidget.klass, "setTop", VALUEFUNC(_wrap_AGWidget_setTop), -1);

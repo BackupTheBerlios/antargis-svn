@@ -13,6 +13,7 @@ class AntInventory<AGWidget
 		@buttonNames=["doRecruit","doTakeFood","doTakeWeapons"]
 
 		addSignal("sigJobChanged")
+
 	end
 	def initHandlers
 		puts "INITHANDLERS"
@@ -28,6 +29,42 @@ class AntInventory<AGWidget
 
 	def eventInspect
 		$app.viewInformation(@inspect)
+	end
+
+	def inspect(e)
+		getChild("shutter").hide
+		if e.getName!=""
+			setTitle(e.getName)
+		else
+			setTitle(e.class.to_s)
+		end
+		@inspect=e
+		checkButtons
+		checkFriend
+		updateInspection
+	end
+	def prepareDraw
+		checkFriend
+		updateInspection
+		super
+	end
+private
+	def checkFriend
+		friend=(@inspect.getPlayer==getMap.getPlayer)
+		enemy=(not friend)
+		getChild("friend_true").setVisible(friend)
+		getChild("friend_false").setVisible(enemy)
+		getChild("enemy_true").setVisible(enemy)
+		getChild("enemy_false").setVisible(friend)
+	end
+	def checkButtons
+		#if @
+		puts "CHECKBUT"
+		puts @inspect.getPlayer==getMap.getPlayer
+		getChild("doRecruit").setEnabled((@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero))
+		getChild("doTakeFood").setEnabled(false) # FIXME
+		getChild("doTakeWeapons").setEnabled(false) # FIXME
+		#end
 	end
 
 	def setValue(name,value)
@@ -48,14 +85,6 @@ class AntInventory<AGWidget
 		else
 			c.setText(t)
 		end
-	end
-	def inspect(e)
-		setTitle(e.class.to_s) #getType)
-		@inspect=e
-	end
-	def draw(p)
-		updateInspection
-		super(p)
 	end
 	def updateInspection
 		if @inspect then

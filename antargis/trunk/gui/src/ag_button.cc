@@ -261,7 +261,12 @@ void AGButton::setState(const State &pState)
 {
   queryRedraw();
   if(mEnabled)
-    mState=pState;
+    {
+      if(mState==DISABLED)
+	mState=NORMAL;
+      else
+	mState=pState;
+    }
   else
     mState=DISABLED;
 }

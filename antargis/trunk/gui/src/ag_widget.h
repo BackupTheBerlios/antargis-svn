@@ -89,6 +89,7 @@ class AGWidget:public AGMessageObject
   float right() const;
 
   bool visible() const;
+  void setVisible(bool v);
 
   virtual void setWidth(float w);
   virtual void setHeight(float w);
