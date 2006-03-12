@@ -287,20 +287,6 @@ class AntGameApp <AntRubyView
 		end
 		$inventory.inspect(e)
 	end
-	def doDismiss()
-		if @hero
-			@hero.newHLDismissJob
-		end
-		$buttonPanel.setPointing
-	end
-	
-	def doMove(pos)
-		if @hero then
-			#pos=list[0].get.getPos2D
-			@hero.newHLMoveJob(0,pos,0)
-		end
-	end
-
 
 	def eventHeroButton(e)
 		c=e.getCaller.getName
@@ -366,105 +352,18 @@ class AntGameApp <AntRubyView
 		elsif button==3
 			# right button == fight
 			if ent==@target
-				@hero.newHLFightJob(@target)
+				if @target.is_a?(AntBoss)
+					if @target.getPlayer!=@hero.getPlayer
+						@hero.newHLFightJob(@target)
+						return
+					end
+				end
+				# move near target
+				@hero.newHLMoveJob(0,@target.getPos2D,2)
 			end
 		end
 	end
 
-	def clickEntitiesOld(list,button)
-		puts "CLICKENTS"
-		puts $buttonPanel
-		job=$buttonPanel.getJob
-		if job==nil
-			return
-		end
-		puts "JOB:"+job
-		if job=="doPoint" then
-			# select
-			list.each{|ents|
-				mesh=ents.node
-				puts mesh
-				if mesh.class==Mesh or mesh.class==AnimMesh
-					e=getMap.getEntity(mesh)
-					if not e
-						puts mesh.class
-						puts toTerrainMesh(mesh)
-						if not toTerrainMesh(mesh)
-							raise "WHY IS IT NOT IN MAP ????????????"
-						end
-					else
-						if e.class==AntHero then
-							inspectEntity(e)
-							if e.getPlayer==getMap.getPlayer
-								@hero=e
-								playSound("mylord")
-							else
-								@hero=nil
-							end
-							break
-						elsif e.is_a?(AntEntity) then  # was AntBoss
-							inspectEntity(e)
-							break
-						end
-					end
-				end
-			}
-			return
-		elsif job=="doMove" then
-			# FIXME: exchange with good position estimation
-			mesh=list[0].node
-			e=getMap.getEntity(mesh)
-			if e
-				doMove(e.getPos2D)
-			end
-		elsif job=="doRecruit" then
-			#displayError("not allowed")
-			puts "RECRUITING"
-			if @hero then
-				# get house
-				house=nil
-				list.each{|ents|
-					if ents.node.class==Mesh
-						e=getMap.getEntity(ents.node)
-						if e.is_a?(AntHouse) then
-							house=e
-						end
-					end
-				}
-				if house then
-					puts "DOING RECRUIT"
-					puts house
-					@hero.newHLRecruitJob(house)
-					$buttonPanel.setPointing
-				end
-			end
-		elsif job=="doFight" then
-			if @hero then
-				target=nil
-				puts "LISTLEN:",list.length
-				list.each{|ents|
-					puts "ITERATION"
-					if ents.node.class==Mesh
-						e=getMap.getEntity(ents.node)
-						if not e
-							if not toTerrainMesh(ents.node)
-								raise "Why is this not in the map????"
-							end
-						else
-							if e.is_a?(AntBoss) then
-								target=e
-							end
-						end
-					end
-				}
-				if target then
-					@hero.newHLFightJob(target)
-					# go back to "normal" pointing
-					$buttonPanel.setPointing
-				end
-			end
-		end
-	end
 	def clickMap(pos,button)
 		puts "CLICKMAP"
 		if @hero then
