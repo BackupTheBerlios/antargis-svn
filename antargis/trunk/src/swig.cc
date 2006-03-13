@@ -35689,6 +35689,21 @@ _wrap_AGEdit_setInsert(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_AGEdit_setCursor(int argc, VALUE *argv, VALUE self) {
+    AGEdit *arg1 = (AGEdit *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGEdit, 0);
+    arg2 = NUM2INT(argv[0]);
+    (arg1)->setCursor(arg2);
+    
+    return Qnil;
+}
+
+
 static void
 free_AGEdit(AGEdit *arg1) {
     delete arg1;
@@ -58431,6 +58446,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGEdit.klass, "eventLostFocus", VALUEFUNC(_wrap_AGEdit_eventLostFocus), -1);
     rb_define_method(cAGEdit.klass, "prepareDraw", VALUEFUNC(_wrap_AGEdit_prepareDraw), -1);
     rb_define_method(cAGEdit.klass, "setInsert", VALUEFUNC(_wrap_AGEdit_setInsert), -1);
+    rb_define_method(cAGEdit.klass, "setCursor", VALUEFUNC(_wrap_AGEdit_setCursor), -1);
     cAGEdit.mark = (void (*)(void *)) general_markfunc;
     cAGEdit.destroy = (void (*)(void *)) free_AGEdit;
     rb_define_module_function(mLibantargis, "toAGEdit", VALUEFUNC(_wrap_toAGEdit), -1);

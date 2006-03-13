@@ -43,7 +43,13 @@ class AntBoss<AntMyEntity
 			end
 		end
 	end
-	
+# for recruiting
+	def takeMan
+		m=@men[0]
+		removeMan(m)
+		return m
+	end
+		
 	def getJob
 		@job
 	end

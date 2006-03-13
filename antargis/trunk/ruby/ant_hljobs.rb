@@ -354,7 +354,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	
 end
 
-class AntHeroRestJob
+class AntHeroRestJob<AntHLJob
 	def initialize(hero,time)
 		@hero=hero
 		@time=time

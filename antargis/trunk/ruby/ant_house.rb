@@ -55,13 +55,6 @@ class AntHouse<AntBoss
 	# Viewing,etc.
 	################################
 	
-	# for recruiting
-	def takeMan
-		m=@men[0]
-		removeMan(m)
-		return m
-	end
-	
 	######################################
 	# EVENTS
 	######################################

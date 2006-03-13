@@ -50,55 +50,55 @@
 			</cell>
 			<cell col="0" row="2">
 				<frame border="button.border.normal" visible="true" background="button.background.disabled">
-				<antInventory name="inventory">
-					<table cols="1" rows="3">
-						<rowsize row="0" fixed="25"/>
-						<rowsize row="1" fixed="45"/>
-						<cell col="0" row="0">
-							<table cols="4" rows="1">
-								<colsize col="0" fixed="16"/>
-								<colsize col="1" fixed="16"/>
-								<colsize col="3" fixed="32"/>
-								<image col="0" row="0" filename="data/gui/crown.png" name="friend_true"/>
-								<image col="1" row="0" filename="data/gui/enemy.png" name="enemy_true"/>
-								<image col="0" row="0" filename="data/gui/crown_bw.png" name="friend_false"/>
-								<image col="1" row="0" filename="data/gui/enemy_bw.png" name="enemy_false"/>
-								<cell col="2" row="0">
-									<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
-								</cell>
-							</table>
-						</cell>
-						<cell col="0" row="1">
-							<frame width="3">
-							<table cols="4" rows="1">
-								<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
-								<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food - FIXME"/>
-								<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
-								<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
-							</table>
-						</frame>
-						</cell>
-						<cell col="0" row="2">
-							<table cols="2" rows="6">
-								<text col="0" row="0" caption="Boss" align="left" font="inventory.font"/>
-								<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
-								<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
-								<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
-								<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
-								<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>
-								
-								<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>
-								<text col="1" row="1" caption="0" align="right" name="men" font="inventory.font"/>
-								<text col="1" row="2" caption="0" align="right" name="wood" font="inventory.font"/>
-								<text col="1" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
-								<text col="1" row="4" caption="0" align="right" name="food" font="inventory.font"/>
-								<text col="1" row="5" caption="0" align="right" name="tool" font="inventory.font"/>
-							</table>
-						</cell>
-					</table>
-					<frame background="wood.background" name="shutter"/>
-				</antInventory>
-			</frame>
+					<antInventory name="inventory">
+						<table cols="1" rows="3">
+							<rowsize row="0" fixed="25"/>
+							<rowsize row="1" fixed="45"/>
+							<cell col="0" row="0">
+								<table cols="4" rows="1">
+									<colsize col="0" fixed="16"/>
+									<colsize col="1" fixed="16"/>
+									<colsize col="3" fixed="32"/>
+									<image col="0" row="0" filename="data/gui/crown.png" name="friend_true"/>
+									<image col="1" row="0" filename="data/gui/enemy.png" name="enemy_true"/>
+									<image col="0" row="0" filename="data/gui/crown_bw.png" name="friend_false"/>
+									<image col="1" row="0" filename="data/gui/enemy_bw.png" name="enemy_false"/>
+									<cell col="2" row="0">
+										<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
+									</cell>
+								</table>
+							</cell>
+							<cell col="0" row="1">
+								<frame width="3">
+								<table cols="4" rows="1">
+									<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
+									<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food - FIXME"/>
+									<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
+									<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
+								</table>
+							</frame>
+							</cell>
+							<cell col="0" row="2">
+								<table cols="2" rows="6">
+									<text col="0" row="0" caption="Boss" align="left" font="inventory.font"/>
+									<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
+									<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
+									<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
+									<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
+									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>
+									
+									<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>
+									<text col="1" row="1" caption="0" align="right" name="men" font="inventory.font"/>
+									<text col="1" row="2" caption="0" align="right" name="wood" font="inventory.font"/>
+									<text col="1" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
+									<text col="1" row="4" caption="0" align="right" name="food" font="inventory.font"/>
+									<text col="1" row="5" caption="0" align="right" name="tool" font="inventory.font"/>
+								</table>
+							</cell>
+						</table>
+						<frame background="wood.background" name="shutter"/>
+					</antInventory>
+				</frame>
 			</cell>
 			<cell col="0" row="3">
 				<frame border="button.border.normal" visible="true">

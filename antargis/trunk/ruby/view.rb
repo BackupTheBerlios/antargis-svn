@@ -53,21 +53,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		return AGRect.new(sp.x-50,sp.y-45,100,40)
 	end
 
-# 	def setupHeroDisplay(first=false)
-# 		# init
-# 		heroes=$map.getOwnHeroes
-# 		if heroes.length>0
-# 			h=heroes[0]
-# 			selectHero(h)
-# 			if first
-# 				focusHero(h)
-# 			end
-# 		end
-# 		if first
-# 			setupNames
-# 		end
-# 	end
-
 	def focusHero(hero)
 		setCamera(hero.getPos2D)
 		#getScene.setCamera(clipCamera(AGVector4.new(p.x,p.y,0)))
@@ -225,6 +210,12 @@ class AntButtonPanel<AGWidget
 	end
 	def draw(p)
 		super(p)
+	end
+
+	def setName(n)
+		if getChild("heroName")
+			getChild("heroName").setText(n)
+		end
 	end
 	
 	def eventJobSelected(e)

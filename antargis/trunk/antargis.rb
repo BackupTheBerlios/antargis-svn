@@ -89,13 +89,14 @@ class AntGameApp <AntRubyView
 			loadscreen.tick
 		end
 
-		setupHeroDisplay(true)
 
 		# inventory and buttonpanel signals
 		@inventory=@layout.getChild("inventory")
 		addHandler(@inventory,:sigJobChanged,:eventInvJob)
 		@buttonpanel=@layout.getChild("antButtonPanel")
 		addHandler(@buttonpanel,:sigJobChanged,:eventHeroJob)
+
+		setupHeroDisplay(true)
 	end
 
 	def eventHeroJob(e)
@@ -224,8 +225,6 @@ class AntGameApp <AntRubyView
 	def videoOptions
 		@layout.addChild(AntVideoOptionsDialog.new(@layout))
 	end
-	def selectHero(h)
-	end
 
 	def setHeroImage(image,num)
 		puts "setHeroImage..."
@@ -301,6 +300,7 @@ class AntGameApp <AntRubyView
 		num=c[4..4]
 		name=@layout.getChild("HeroName#{num}").getText
 		ent=getMap.getByName(name)
+		selectHero(ent)
 		if ent==@inspect
 			focusHero(ent)
 		end
@@ -322,6 +322,7 @@ class AntGameApp <AntRubyView
 	def selectHero(h)
 		@hero=h
 		inspectEntity(h)
+		@buttonpanel.setName(h.getName)
 
 		for i in 0..2
 			if @layout.getChild("HeroName#{i}").getText==h.getName
@@ -348,7 +349,7 @@ class AntGameApp <AntRubyView
 		}
 		if ent
 			if ent.class==AntHero and ent.getPlayer==getMap.getPlayer
-				@hero=ent
+				#@hero=ent
 				@target=ent
 				inspectEntity(ent)
 			else

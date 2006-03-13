@@ -1,5 +1,6 @@
 #include "ag_frame.h"
 #include "ag_screen.h"
+#include "ag_debug.h"
 
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t pWidth):AGWidget(pParent,pRect),
 								      mWidth(pWidth),mBorder(0),mTexture(width(),height())
@@ -31,7 +32,8 @@ void AGFrame::prepareDraw()
 {
   if(mUseTexture && mBorder)
     {
-      if(!mTextureInited)
+      //      if(!mTextureInited)
+      if(!mTexture.hasTexture())
 	{
 	  AGPainter p(mTexture);
 	  mBorder->draw(getRect().origin(),p);
@@ -44,6 +46,7 @@ void AGFrame::prepareDraw()
 
 void AGFrame::draw(AGPainter &p)
 {
+  //  CTRACE;
   if(mBg)
     {
       mBg->draw(getRect().origin(),p);

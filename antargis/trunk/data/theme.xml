@@ -84,6 +84,88 @@
 		</text>
 	</button>
 	
+	<flatbutton>
+		<button>
+			<border>
+				<normal>
+					<image name="image" file="data/gui/buttontest3.png"/>
+				</normal>
+<!--				<disabled>
+					<image name="image" file="data/gui/buttontest3.png"/>
+				</disabled>-->
+				<lighted>
+					<image name="image" file="data/gui/buttontest3.png"/>
+				</lighted>
+				<pressed>
+					<image name="image" file="data/gui/buttontest3b.png"/>
+				</pressed>
+				<!--<checked>
+					<image name="image" file="data/gui/buttontest3c.png"/>
+				</checked>-->
+				<checkedlighted>
+					<image name="image" file="data/gui/buttontest3c.png"/>
+				</checkedlighted>
+				<checkedpressed>
+					<image name="image" file="data/gui/buttontest3d.png"/>
+				</checkedpressed>
+			</border>
+			<background>
+				<normal>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</normal>
+				<!--<disabled>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#12141c'/>
+					<color name='gradientColor2' color='#12141c'/>
+					<color name='gradientColor3' color='#12141c'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</disabled>-->
+				<lighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#515488'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#262849'/>
+				</lighted>
+				<pressed>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#434674'/>
+					<color name='gradientColor2' color='#333664'/>
+					<color name='gradientColor3' color='#262849'/>
+					<color name='gradientColor4' color='#515488'/>
+				</pressed>
+				<checkedlighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#f3ac0e'/>
+					<color name='gradientColor2' color='#ffd272'/>
+					<color name='gradientColor3' color='#f3ac0e'/>
+					<color name='gradientColor4' color='#c18c1a'/>
+				</checkedlighted>
+				<checked>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#ffaa00'/>
+					<color name='gradientColor2' color='#ee9900'/>
+					<color name='gradientColor3' color='#dd8800'/>
+					<color name='gradientColor4' color='#aa6600'/>
+				</checked>
+				<checkedpressed>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#ee9900'/>
+					<color name='gradientColor2' color='#dd8800'/>
+					<color name='gradientColor3' color='#aa6600'/>
+					<color name='gradientColor4' color='#ffaa00'/>
+				</checkedpressed>
+			</background>
+			<text>
+				<font name="font" file="Arial.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
+			</text>
+		</button>
+	</flatbutton>
+	
 	<menu>
 		<background>
 			<normal>
@@ -136,11 +218,6 @@
 		<background>
 			<value name="border" value="0"/>
 			<image name="image" file="data/gui/paper2.png"/>
-			<!--
-			<color name='gradientColor1' color='#54555b'/>
-			<color name='gradientColor2' color='#3c3d41'/>
-			<color name='gradientColor3' color='#3c3d41'/>
-			<color name='gradientColor4' color='#12141c'/>-->
 		</background>
 	</window>
 	
