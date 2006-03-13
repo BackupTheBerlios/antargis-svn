@@ -45,8 +45,10 @@ std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 HeightMap::HeightMap(Scene *pScene,int w,int h):
   sigMapChanged(this,"mapChanged"),
   sigMapChangedComplete(this,"mapChangedComplete"),
+  mTerrainTypes(LASTTERRAIN+1),
   mW(w),mH(h),mChangeRect(AGVector2(),AGVector2()),mChanges(0),
   mScene(pScene)
+  
 {
   mHeights=genSomeHeights(w+2,h+2,5);
 

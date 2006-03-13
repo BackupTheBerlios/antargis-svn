@@ -83,12 +83,6 @@ void MiniMap::mapChangedP(bool forceFull=false)
     {
       p=new AGPainter(*mTexture);
       inmem=false;
-
-      //      p->fillRect(AGRect2(0,0,300,300),AGColor(0xFF,0,0));
-      //      p->blit(*mTexture,mTexture->getRect());
-
-      //      getScreen().flip();
-      //      SDL_Delay(1000);
     }
 
   
@@ -102,6 +96,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
   
   if(mMap)
     {
+      CTRACE;
       for(x=x0;x<x1;x++)
 	for(y=y0;y<y1;y++)
 	  {

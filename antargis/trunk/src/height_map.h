@@ -89,7 +89,8 @@ class HeightMap:public AGMessageObject
   std::map<TerrainType,float> mTerrainScale;
 
   // sum of all should be one - or at least they get normalized to 1 and then the heighest is chosen and weighted with the mean value
-  std::map<TerrainType,std::vector<float> > mTerrainTypes;
+  //std::map<TerrainType,std::vector<float> > mTerrainTypes;
+  std::vector<std::vector<float> > mTerrainTypes;
 
   size_t mW,mH;
 
