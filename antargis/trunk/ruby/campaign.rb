@@ -17,6 +17,10 @@ class CampaignLevel
 		node.getChildren("failscene").each{|c|
 			@lostScene=CutScene.new(c)
 		}
+		@current=node.get("current")
+		if @current==""
+			@current=@level
+		end
 	end
 	def save(n)
 		n.set("file",@level)
@@ -32,7 +36,7 @@ class CampaignLevel
 		loadscreen.setValue(0)
 		loadscreen.tick
 		begin
-			@app=AntGameApp.new(@level,getMain.width,getMain.height,loadscreen)
+			@app=AntGameApp.new(@current,getMain.width,getMain.height,loadscreen)
 			@app.run
 			@result=@app.result
 			@finish=@app.finished
@@ -191,11 +195,18 @@ end
 class Campaign
 	attr_reader :name, :image, :imageName, :description, :texture, :enabled
 	def initialize(filename)
+		puts "NEW CAMPAIGN FOMR FILE:",filename
+		if not fileExists(filename)
+			raise "file not found #{filename}"
+		end
+		puts "CONT"
 		@doc=Document.new(filename)
+		puts "CONT"
 		@xmlRoot=@doc.root
 		@enabled=(@xmlRoot.get("enabled")!="false")
 		@name=@xmlRoot.get("name")
 		@imageName=@xmlRoot.get("image")
+		puts "imageName:",@imageName
 		@image=AGSurface.load(@imageName)
 		@texture=AGTexture.new(@image)
 		@description=@xmlRoot.get("description")

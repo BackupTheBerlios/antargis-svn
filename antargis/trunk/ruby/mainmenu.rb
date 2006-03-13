@@ -39,6 +39,7 @@ class AntMenuApp <AGApplication
 		setupCredits
 		setupCampaign
 		setupOptions
+		setupLoadMenu
 		# hie all menues
 		#hideAll
 		# and show mainmenu
@@ -66,7 +67,29 @@ class AntMenuApp <AGApplication
 		addHandler(@mainMenu.getChild("quit"),:sigClick,:eventQuit)
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)
 		addHandler(@mainMenu.getChild("campaign"),:sigClick,:eventCampaign)
+		addHandler(@mainMenu.getChild("load"),:sigClick,:eventLoadGame)
 		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
+	end
+
+	def setupLoadMenu
+		@loadMenu=AGLayout.new($screen,loadFile("data/gui/layout/loadmenu.xml"))
+		@menues.push(@loadMenu)
+		addHandler(@loadMenu.getChild("exit"),:sigClick,:eventExit)
+		addHandler(@loadMenu.getChild("list"),:sigSelect,:eventLoadSelect)
+		addHandler(@loadMenu.getChild("doLoad"),:sigClick,:eventLoad)
+		updateLoadMenu
+	end
+
+	def updateLoadMenu
+		fs=getDirectory(getWriteDir+"/savegames").select{|f|f=~/\.antcmp/}.sort.uniq
+		puts fs.join(" ")
+		l=@loadMenu.getChild("list")
+		l.clearList
+		fs.each{|f|
+			x=f.gsub(".antcmp","")
+			l.insertItem(f,x)
+		}
+		#exit
 	end
 	
 	def setupCredits
@@ -135,6 +158,10 @@ class AntMenuApp <AGApplication
 	def eventCampaign(e)
 		setMainWidget(@campaignMenu)
 	end
+	def eventLoadGame(e)
+		updateLoadMenu
+		setMainWidget(@loadMenu)
+	end
 	def eventOptions(e)
 		setMainWidget(@optionsMenu)
 	end
@@ -174,7 +201,19 @@ class AntMenuApp <AGApplication
 		@sound=true
 		eventMusicEnd
 	end	
-	
+
+	# load menu
+	def eventLoadSelect(e)
+		puts "LOAD SELECT"
+		@loadMenu.getChild("desc").setText("muh")
+	end
+	def eventLoad(e)
+		id=@loadMenu.getChild("list").getSelectedID
+		puts "LLLLLLLLLLLLLLOAD"
+		puts id
+		c=Campaign.new(getWriteDir+"/savegames/"+id)
+		continueCampaign(c)
+	end
 end
 
 

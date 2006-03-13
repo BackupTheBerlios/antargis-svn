@@ -266,7 +266,7 @@ class AntRubyMap<AntMap
 			c=n.addChild(player.xmlName)
 			player.saveXML(c)
 		}
-		@targets.each{|t|
+		@targets.each{|name,t|
 			c=n.addChild(t.xmlName)
 			t.saveXML(c)
 		}

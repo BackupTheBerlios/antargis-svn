@@ -313,16 +313,21 @@
 	</antButton>
 	<listbox>
 		<background>
+			<image name="image" file="data/gui/paper2.png"/>
 			<color name='gradientColor1' color='#54555b'/>
 			<color name='gradientColor2' color='#3c3d41'/>
 			<color name='gradientColor3' color='#3c3d41'/>
 			<color name='gradientColor4' color='#12141c'/>
 		</background>
 		<selected>
-			<color name='gradientColor1' color='#54555b'/>
-			<color name='gradientColor2' color='#3c3d41'/>
-			<color name='gradientColor3' color='#3c3d41'/>
-			<color name='gradientColor4' color='#12141c'/>
+			<color name='gradientColor1' color='#ffaa00'/>
+			<color name='gradientColor2' color='#ee9900'/>
+			<color name='gradientColor3' color='#dd8800'/>
+			<color name='gradientColor4' color='#aa6600'/>
+<!--			<color name='gradientColor1' color='#f3ac0e'/>
+			<color name='gradientColor2' color='#ffd272'/>
+			<color name='gradientColor3' color='#f3ac0e'/>
+			<color name='gradientColor4' color='#c18c1a'/>-->
 		</selected>
 		<font name="font" file="Arial.ttf" size="22" color="#000000"/>
 	</listbox>

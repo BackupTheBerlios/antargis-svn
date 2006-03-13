@@ -25,7 +25,7 @@
 	
 				<button row="0" col="0" name="campaign" caption="Start campaign"/>
 				<button row="2" col="0" name="single" caption="Single map" enabled="false"/>
-				<button row="4" col="0" name="load" caption="Load game" enabled="false"/>
+				<button row="4" col="0" name="load" caption="Load game"/>
 				<button row="6" col="0" name="options" caption="Options"/>
 				<button row="8" col="0" name="credits" caption="Credits"/>
 				<button row="10" col="0" name="quit" caption="Quit"/>

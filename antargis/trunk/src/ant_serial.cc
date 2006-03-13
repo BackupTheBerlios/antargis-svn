@@ -220,13 +220,19 @@ char BinaryFileIn::read()
   return c;
 }
 
+void checkParentDirs(const std::string &s); // imported from ag_fs.cc
+
 /////////////////////////////////////////////////////////////
 // BinaryFileOut
 /////////////////////////////////////////////////////////////
 BinaryFileOut::BinaryFileOut(const std::string &pName)
 {
-  f=fopen(checkFileName(getWriteDir()+"/"+pName).c_str(),"wb");
+  std::string n=checkFileName(getWriteDir()+"/"+pName);
+  checkParentDirs(n);
+
+  f=fopen(n.c_str(),"wb");
   //  f=fopen(PHYSFS_openWrite(pName.c_str());
+  assert(f);
   size=0;
   p=0;
 }

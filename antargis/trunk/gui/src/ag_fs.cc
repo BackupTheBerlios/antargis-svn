@@ -347,12 +347,14 @@ std::vector<std::string> getDirectory(const std::string &pDir)
 #else
   struct dirent *ent;
   DIR *dir;
-  std::string dirname=pDir+"/*";
+  std::string dirname=pDir;//+"/*";
+  cdebug("DIR:"<<dirname);
   dir=opendir(dirname.c_str());
   if(dir)
     {
       while((ent=readdir(dir)))
 	{
+	  cdebug("found:"<<ent->d_name);
 	  v.push_back(ent->d_name);
 	}
     }
