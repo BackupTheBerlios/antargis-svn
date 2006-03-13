@@ -35,6 +35,7 @@ AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
   mBorder=0;
 }
 
+
 AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
 {
   //  CTRACE;
@@ -56,14 +57,15 @@ AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
       mColors[3]=theme->getColor(pThemeName+"."+std::string("gradientColor4"));
     }
 
-  //  cdebug(pThemeName<<":"<<mSurfaceFlag);
   mBorder=theme->getInt(pThemeName+"."+std::string("border"));
 }
 
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)
 {
   if(mTextureFlag)
-    p.tile(mTexture,r.shrink(mBorder));
+    {
+      p.tile(mTexture,r.shrink(mBorder));
+    }
   else if(mColor)
     p.drawGradient(r.shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
  

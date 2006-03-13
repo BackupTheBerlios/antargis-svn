@@ -18,7 +18,6 @@ class SwigDirector_AGRubyObject : public AGRubyObject, public Swig::Director {
 
 public:
     SwigDirector_AGRubyObject(VALUE self);
-    virtual void clear();
     virtual ~SwigDirector_AGRubyObject();
 };
 
@@ -35,7 +34,6 @@ class SwigDirector_AGListener : public AGListener, public Swig::Director {
 
 public:
     SwigDirector_AGListener(VALUE self);
-    virtual void clear();
     virtual ~SwigDirector_AGListener();
     virtual bool signal(AGEvent *m);
 };
@@ -76,7 +74,6 @@ public:
     virtual bool eventActive(AGEvent *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
     virtual bool signal(AGEvent *m);
-    virtual void clear();
     virtual ~SwigDirector_AGMessageObject();
     virtual Uint8 getButtonState() const;
     virtual AGVector2 getMousePosition() const;
@@ -97,6 +94,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -146,6 +144,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -195,6 +194,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -273,6 +273,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -322,6 +323,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -377,7 +379,6 @@ public:
     virtual bool eventKeyDown(AGEvent *m2);
     virtual bool eventMouseMotion(AGEvent *m);
     virtual void mark();
-    virtual void clear();
     virtual bool eventFrame(float pTime);
     virtual bool eventFrameEnd(float pTime);
     virtual void eventChangedRes();
@@ -406,6 +407,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -456,6 +458,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -505,6 +508,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -555,6 +559,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -615,6 +620,7 @@ public:
     virtual void setWidth(float w);
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void prepareDraw();
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -742,6 +748,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -786,106 +793,6 @@ public:
 };
 
 
-class SwigDirector_AGVTiler : public AGVTiler, public Swig::Director {
-
-public:
-    SwigDirector_AGVTiler(VALUE self, AGWidget *pParent, AGRect2 const &pRect, bool pAdaptMyHeight = true);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual void useTextures();
-    virtual bool eventShow();
-    virtual void setLeft(float x);
-    virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
-    virtual void prepareDraw();
-    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
-    virtual void rePosition();
-    virtual float minHeight() const;
-    virtual float minWidth() const;
-    virtual bool canFocus() const;
-    virtual AGRect2 getClientRect() const;
-    virtual AGVector2 getMousePosition() const;
-    virtual Uint8 getButtonState() const;
-    virtual bool redraw() const;
-    virtual ~SwigDirector_AGVTiler();
-    virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual bool eventMouseButtonDown(AGEvent *m);
-    virtual bool eventMouseClick(AGEvent *m);
-    virtual bool eventMouseMotion(AGEvent *m);
-    virtual bool signal(AGEvent *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent *m);
-    virtual bool eventKeyDown(AGEvent *m);
-    virtual bool eventKeyUp(AGEvent *m);
-    virtual bool eventQuit(AGEvent *m);
-    virtual bool eventQuitModal(AGEvent *m);
-    virtual bool eventSysWM(AGEvent *m);
-    virtual bool eventResize(AGEvent *m);
-    virtual bool eventMouseEnter();
-    virtual void clear();
-    virtual void drawAll(AGPainter &p);
-    virtual void drawAfter(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
-    virtual void mark();
-};
-
-
-class SwigDirector_AGHTiler : public AGHTiler, public Swig::Director {
-
-public:
-    SwigDirector_AGHTiler(VALUE self, AGWidget *pParent, AGRect2 const &pRect, bool pAdaptMyHeight = true);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual void useTextures();
-    virtual bool eventShow();
-    virtual void setLeft(float x);
-    virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
-    virtual void prepareDraw();
-    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
-    virtual void rePosition();
-    virtual float minHeight() const;
-    virtual float minWidth() const;
-    virtual bool canFocus() const;
-    virtual AGRect2 getClientRect() const;
-    virtual AGVector2 getMousePosition() const;
-    virtual Uint8 getButtonState() const;
-    virtual bool redraw() const;
-    virtual ~SwigDirector_AGHTiler();
-    virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual bool eventMouseButtonDown(AGEvent *m);
-    virtual bool eventMouseClick(AGEvent *m);
-    virtual bool eventMouseMotion(AGEvent *m);
-    virtual bool signal(AGEvent *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent *m);
-    virtual bool eventKeyDown(AGEvent *m);
-    virtual bool eventKeyUp(AGEvent *m);
-    virtual bool eventQuit(AGEvent *m);
-    virtual bool eventQuitModal(AGEvent *m);
-    virtual bool eventSysWM(AGEvent *m);
-    virtual bool eventResize(AGEvent *m);
-    virtual bool eventMouseEnter();
-    virtual void clear();
-    virtual void drawAll(AGPainter &p);
-    virtual void drawAfter(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
-    virtual void mark();
-};
-
-
 class SwigDirector_AGListBox : public AGListBox, public Swig::Director {
 
 public:
@@ -900,6 +807,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -939,58 +847,7 @@ class SwigDirector_AGMain : public AGMain, public Swig::Director {
 
 public:
     SwigDirector_AGMain(VALUE self, int w, int h, int d, bool fs, bool gl);
-    virtual void clear();
     virtual ~SwigDirector_AGMain();
-};
-
-
-class SwigDirector_AGMenu : public AGMenu, public Swig::Director {
-
-public:
-    SwigDirector_AGMenu(VALUE self, AGWidget *pParent, AGVector2 pWishPos, std::string const &pName);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual void useTextures();
-    virtual bool eventShow();
-    virtual void setLeft(float x);
-    virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
-    virtual void prepareDraw();
-    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
-    virtual void rePosition();
-    virtual float minHeight() const;
-    virtual float minWidth() const;
-    virtual bool canFocus() const;
-    virtual AGRect2 getClientRect() const;
-    virtual AGVector2 getMousePosition() const;
-    virtual Uint8 getButtonState() const;
-    virtual bool redraw() const;
-    virtual ~SwigDirector_AGMenu();
-    virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual bool eventMouseButtonDown(AGEvent *m);
-    virtual bool eventMouseClick(AGEvent *m);
-    virtual bool eventMouseMotion(AGEvent *m);
-    virtual bool signal(AGEvent *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent *m);
-    virtual bool eventKeyDown(AGEvent *m);
-    virtual bool eventKeyUp(AGEvent *m);
-    virtual bool eventQuit(AGEvent *m);
-    virtual bool eventQuitModal(AGEvent *m);
-    virtual bool eventSysWM(AGEvent *m);
-    virtual bool eventResize(AGEvent *m);
-    virtual bool eventMouseEnter();
-    virtual void clear();
-    virtual void drawAll(AGPainter &p);
-    virtual void drawAfter(AGPainter &p);
-    virtual void draw(AGPainter &p);
-    virtual bool eventMouseLeave();
-    virtual bool eventHide();
-    virtual void addChildBack(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
-    virtual void mark();
 };
 
 
@@ -998,51 +855,12 @@ class SwigDirector_AGMenuItem : public AGMenuItem, public Swig::Director {
 
 public:
     SwigDirector_AGMenuItem(VALUE self, AGWidget *pParent, std::string const &pText);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual void useTextures();
-    virtual bool eventShow();
-    virtual void setLeft(float x);
-    virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
-    virtual void prepareDraw();
-    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
-    virtual void rePosition();
-    virtual float minHeight() const;
-    virtual float minWidth() const;
-    virtual bool canFocus() const;
-    virtual AGRect2 getClientRect() const;
-    virtual AGVector2 getMousePosition() const;
-    virtual Uint8 getButtonState() const;
-    virtual bool redraw() const;
-    virtual ~SwigDirector_AGMenuItem();
-    virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual bool eventMouseButtonDown(AGEvent *m);
-    virtual bool eventMouseMotion(AGEvent *m);
-    virtual bool signal(AGEvent *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent *m);
-    virtual bool eventKeyDown(AGEvent *m);
-    virtual bool eventKeyUp(AGEvent *m);
-    virtual bool eventQuit(AGEvent *m);
-    virtual bool eventQuitModal(AGEvent *m);
-    virtual bool eventSysWM(AGEvent *m);
-    virtual bool eventResize(AGEvent *m);
-    virtual bool eventMouseClick(AGEvent *m);
-    virtual void clear();
     virtual bool eventMouseEnter();
-    virtual void drawAll(AGPainter &p);
-    virtual void drawAfter(AGPainter &p);
-    virtual void draw(AGPainter &p);
+    virtual ~SwigDirector_AGMenuItem();
+    virtual bool eventMouseLeave();
     virtual void eventSelect();
     virtual void eventUnselect();
-    virtual bool eventHide();
-    virtual bool eventMouseLeave();
-    virtual void addChildBack(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
-    virtual void mark();
+    virtual bool eventMouseClick(AGEvent *m);
 };
 
 
@@ -1050,51 +868,12 @@ class SwigDirector_AGSubMenu : public AGSubMenu, public Swig::Director {
 
 public:
     SwigDirector_AGSubMenu(VALUE self, AGWidget *pParent, std::string const &ptext);
-    virtual bool eventLostFocus();
-    virtual bool eventGotFocus();
-    virtual void useTextures();
-    virtual bool eventShow();
-    virtual void setLeft(float x);
-    virtual void setTop(float y);
-    virtual void setHeight(float w);
-    virtual void setWidth(float w);
-    virtual void prepareDraw();
-    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
-    virtual void rePosition();
-    virtual float minHeight() const;
-    virtual float minWidth() const;
-    virtual bool canFocus() const;
-    virtual AGRect2 getClientRect() const;
-    virtual AGVector2 getMousePosition() const;
-    virtual Uint8 getButtonState() const;
-    virtual bool redraw() const;
-    virtual ~SwigDirector_AGSubMenu();
-    virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual bool eventMouseButtonDown(AGEvent *m);
-    virtual bool eventMouseMotion(AGEvent *m);
-    virtual bool signal(AGEvent *m);
-    virtual bool acceptEvent(SDL_Event const *pEvent);
-    virtual bool eventActive(AGEvent *m);
-    virtual bool eventKeyDown(AGEvent *m);
-    virtual bool eventKeyUp(AGEvent *m);
-    virtual bool eventQuit(AGEvent *m);
-    virtual bool eventQuitModal(AGEvent *m);
-    virtual bool eventSysWM(AGEvent *m);
-    virtual bool eventResize(AGEvent *m);
-    virtual bool eventMouseClick(AGEvent *m);
-    virtual void clear();
     virtual bool eventMouseEnter();
-    virtual void drawAll(AGPainter &p);
-    virtual void drawAfter(AGPainter &p);
-    virtual void draw(AGPainter &p);
+    virtual ~SwigDirector_AGSubMenu();
+    virtual bool eventMouseLeave();
     virtual void eventSelect();
     virtual void eventUnselect();
-    virtual bool eventHide();
-    virtual bool eventMouseLeave();
-    virtual void addChildBack(AGWidget *w);
-    virtual void removeChild(AGWidget *w);
-    virtual void addChild(AGWidget *pWidget);
-    virtual void mark();
+    virtual bool eventMouseClick(AGEvent *m);
 };
 
 
@@ -1112,6 +891,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1161,6 +941,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1212,6 +993,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual AGRect2 getClientRect() const;
@@ -1286,6 +1068,7 @@ public:
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
     virtual void setHeight(float w);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1343,6 +1126,7 @@ public:
     virtual void setWidth(float w);
     virtual void setHeight(float w);
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1393,6 +1177,7 @@ public:
     virtual void setWidth(float w);
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void prepareDraw();
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;
@@ -1442,6 +1227,7 @@ public:
     virtual void setWidth(float w);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void initHandlers();
     virtual float minHeight() const;
     virtual float minWidth() const;
     virtual bool canFocus() const;

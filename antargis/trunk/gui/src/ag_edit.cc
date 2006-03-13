@@ -93,10 +93,11 @@ void AGEditLine::drawCursor(AGPainter &p,int cx,const AGVector2 &pPoint,const AG
 #ifdef SIMPLE_BOX_CURSOR
   p.fillRect(AGRect2(pPoint[0]+x1,pPoint[1],w,height()),c);
 #else
-  float x=pPoint[0]+x1;
+  float x=pPoint[0]+x1-4;
   float y=pPoint[1];
   float h=height();
 
+  w=10;
 
   p.fillRect(AGRect2(x,y,w+1,3),c);
   p.fillRect(AGRect2(x+w/2-1,y+3,3,h-6),c);
@@ -612,7 +613,7 @@ bool AGEdit::insert(char c)
     {
       if((int)getText().length()==mMaxLength)
 	{
-	  if(mInserting)
+	  if(mInserting || mCx==actLine->length())
 	    return false; // ignore input
 	}
     }
@@ -948,4 +949,22 @@ void AGEdit::prepareDraw()
 void AGEdit::setInsert(bool pInsert)
 {
   mInserting=pInsert;
+}
+
+/// set Cursor to defined position p in text
+void AGEdit::setCursor(int p)
+{
+  std::list<AGEditLine>::iterator j=mLines.begin();
+
+  mCy=0;
+  mCx=0;
+  for(;j->length()<p;)
+    {
+      mCy++;
+      p-=j->length();
+      j++;
+    }
+  mCx=p;
+  actLine=&(*j);
+  
 }

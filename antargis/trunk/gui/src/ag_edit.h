@@ -116,6 +116,8 @@ class AGEdit:public AGWidget
 
   void setInsert(bool pInsert);
 
+  void setCursor(int p);
+
  private:
 
   void getActLine();

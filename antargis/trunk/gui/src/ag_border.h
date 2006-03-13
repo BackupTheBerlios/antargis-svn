@@ -41,6 +41,7 @@ class AGBorder
 
  private:
   const AGTexture *mTexture;
+  std::string mTheme;
   bool mEnable;
   size_t mWidth;
 };

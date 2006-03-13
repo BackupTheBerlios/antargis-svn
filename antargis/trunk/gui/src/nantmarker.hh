@@ -52,12 +52,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGMain "general_markfunc"
-%exception AGVTiler::AGVTiler {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGVTiler "general_markfunc"
 %exception AGCheckBox::AGCheckBox {
 	$action
 	result->mRUBY=self;
@@ -118,12 +112,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGLayout "general_markfunc"
-%exception AGHTiler::AGHTiler {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGHTiler "general_markfunc"
 %exception AGButton::AGButton {
 	$action
 	result->mRUBY=self;
@@ -256,8 +244,6 @@ else if(dynamic_cast<AGRadio*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
 else if(dynamic_cast<AGText*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGTable*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
 else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
 else if(dynamic_cast<AGMenuItem*>(result))
@@ -266,10 +252,8 @@ else if(dynamic_cast<AGLayout*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
 else if(dynamic_cast<AGButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
-else if(dynamic_cast<AGVTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
+else if(dynamic_cast<AGTable*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
 else if(dynamic_cast<AGWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
    else
@@ -288,6 +272,12 @@ else if(dynamic_cast<AGWidget*>(result))
      if(false);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGSubMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<AGMenuItem*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
    }
@@ -350,28 +340,6 @@ else if(dynamic_cast<AGSubMenu*>(result))
      if(false);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMain,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(out) AGVTiler*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
    }
  }
  else vresult=Qnil;
@@ -488,8 +456,6 @@ else if(dynamic_cast<AGRadio*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
 else if(dynamic_cast<AGText*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGTable*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
 else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
 else if(dynamic_cast<AGMenuItem*>(result))
@@ -498,10 +464,8 @@ else if(dynamic_cast<AGLayout*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
 else if(dynamic_cast<AGButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
-else if(dynamic_cast<AGVTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
+else if(dynamic_cast<AGTable*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
    }
@@ -564,8 +528,6 @@ else if(dynamic_cast<AGRadio*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
 else if(dynamic_cast<AGText*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGTable*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
 else if(dynamic_cast<AGCheckBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
 else if(dynamic_cast<AGMenuItem*>(result))
@@ -574,10 +536,8 @@ else if(dynamic_cast<AGLayout*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
 else if(dynamic_cast<AGButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGHTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
-else if(dynamic_cast<AGVTiler*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGVTiler,0);
+else if(dynamic_cast<AGTable*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
 else if(dynamic_cast<AGWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
 else if(dynamic_cast<AGMessageObject*>(result))
@@ -614,24 +574,6 @@ else if(dynamic_cast<AGDialog*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(out) AGHTiler*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGHTiler,0);
    }
  }
  else vresult=Qnil;
@@ -853,11 +795,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGGLWidget,b);
  $result=*b;
 }
-%typemap(directorout) AGHTiler {
- AGHTiler *b;
- Data_Get_Struct($input,AGHTiler,b);
- $result=*b;
-}
 %typemap(directorout) AGImage {
  AGImage *b;
  Data_Get_Struct($input,AGImage,b);
@@ -943,11 +880,6 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGMessageObject,b);
  $result=*b;
 }
-%typemap(directorout) AGMouseEvent {
- AGMouseEvent *b;
- Data_Get_Struct($input,AGMouseEvent,b);
- $result=*b;
-}
 %typemap(directorout) AGMutex {
  AGMutex *b;
  Data_Get_Struct($input,AGMutex,b);
@@ -978,9 +910,9 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGRect2,b);
  $result=*b;
 }
-%typemap(directorout) AGRect23 {
- AGRect23 *b;
- Data_Get_Struct($input,AGRect23,b);
+%typemap(directorout) AGRect3 {
+ AGRect3 *b;
+ Data_Get_Struct($input,AGRect3,b);
  $result=*b;
 }
 %typemap(directorout) AGRenderContext {
@@ -1018,19 +950,9 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGSignal,b);
  $result=*b;
 }
-%typemap(directorout) AGSlot {
- AGSlot *b;
- Data_Get_Struct($input,AGSlot,b);
- $result=*b;
-}
 %typemap(directorout) AGSlot0 {
  AGSlot0 *b;
  Data_Get_Struct($input,AGSlot0,b);
- $result=*b;
-}
-%typemap(directorout) AGSlot2 {
- AGSlot2 *b;
- Data_Get_Struct($input,AGSlot2,b);
  $result=*b;
 }
 %typemap(directorout) AGSound {
@@ -1093,19 +1015,9 @@ else if(dynamic_cast<AGCheckBox*>(result))
  Data_Get_Struct($input,AGTriangle3,b);
  $result=*b;
 }
-%typemap(directorout) AGVTiler {
- AGVTiler *b;
- Data_Get_Struct($input,AGVTiler,b);
- $result=*b;
-}
 %typemap(directorout) AGVector2 {
  AGVector2 *b;
  Data_Get_Struct($input,AGVector2,b);
- $result=*b;
-}
-%typemap(directorout) AGVector23 {
- AGVector23 *b;
- Data_Get_Struct($input,AGVector23,b);
  $result=*b;
 }
 %typemap(directorout) AGVector3 {

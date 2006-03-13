@@ -25,6 +25,7 @@
 
 AGBorder::AGBorder(const std::string &pTheme)
 {
+  mTheme=pTheme;
   if((mEnable=getTheme()->hasSurface(pTheme+".image")))
     {
       //      mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
@@ -43,6 +44,13 @@ void AGBorder::draw(const AGRect2 &pd,AGPainter &p)
   AGRect2 d=pd.alignGrid();
   if(mTexture==0 || !mEnable)
     return;
+
+  if(!mTexture->hasTexture())
+    {
+      // FIXME: discard this and fix border-painting -problem in GL!
+      mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(mTheme+".image"));
+    }
+
   int w=mTexture->width()/3;
   int w2=w*2;
 
