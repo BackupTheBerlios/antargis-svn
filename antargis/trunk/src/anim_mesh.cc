@@ -129,8 +129,10 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
   glTranslatef(p[0],p[1],p[2]);
   glRotatef(mRot[3],mRot[0],mRot[1],mRot[2]);
 
+  bool pick=mem&&(!textured);
 
-  if(useShaderAnimation())
+
+  if(useShaderAnimation() && !pick)
     {
       glMultMatrixf(mData->getTransform());
       if(textured)
@@ -145,7 +147,9 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 
 	}
       else if(mem)
-	mData->mArray.drawPick();
+	{
+	  mData->mArray.drawPick();
+	}
       else
 	{
 	  mData->animShaderDepth.enable();

@@ -49,6 +49,13 @@ class AntNewAngel<AntMyEntity
 	end
 end
 
+def genName
+	nstart=["Ban","Gor","Bal","Da","Arg","Ol","Gar","Hek"]
+	nend=["dor","in","and","or","tor"]
+	nstart.shuffle[0]+nend.shuffle[0]
+end
+
+
 class AntNewMan<AntMyEntity
 	attr_reader :meshState, :dead
 	
@@ -63,6 +70,7 @@ class AntNewMan<AntMyEntity
 		setMeshState("walk")
 		@mode="wait"
 		setMinimapColor(AGColor.new(0x77,0x77,0x77))
+		setName(genName)
 	end
 	
 	def setMode(mode)

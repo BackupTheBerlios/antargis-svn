@@ -89,4 +89,7 @@ class AntNewSheep<AntMyEntity
 	def setMeshState(s)
 		getFirstMesh.setAnimation(s)
 	end
+	def getName
+		"Sheep"
+	end
 end

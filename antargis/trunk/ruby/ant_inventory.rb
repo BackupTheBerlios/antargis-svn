@@ -36,7 +36,11 @@ class AntInventory<AGWidget
 		if e.getName!=""
 			setTitle(e.getName)
 		else
-			setTitle(e.class.to_s)
+			n=e.class.to_s
+			if n[0..2]=="Ant"
+				n.sub!("Ant","")
+			end
+			setTitle(n)
 		end
 		@inspect=e
 		checkButtons

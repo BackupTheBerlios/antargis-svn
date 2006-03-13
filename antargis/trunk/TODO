@@ -50,6 +50,8 @@ ARTS
 
 [Gui/View]
 ------------------------------------------------------
+[M] fix frustum culling!
+[M] fix picking for men (AnimMesh)
 [L] display for hunger/food
 [L] scrolling on borders when in fullscreen
 [H] load/save campaign

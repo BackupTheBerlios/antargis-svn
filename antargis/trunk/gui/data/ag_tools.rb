@@ -162,3 +162,10 @@ end
 class AGWidget
 	include AGHandler
 end
+
+
+class Array
+	def shuffle
+		sort{0.5 <=> rand}
+	end
+end
