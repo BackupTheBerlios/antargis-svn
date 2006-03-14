@@ -50,8 +50,8 @@ class AntNewAngel<AntMyEntity
 end
 
 def genName
-	nstart=["Ban","Gor","Bal","Da","Arg","Ol","Gar","Hek"]
-	nend=["dor","in","and","or","tor"]
+	nstart=["Ban","Gor","Bal","Da","Arg","Ol","Gar","Hek","Gav"]
+	nend=["dor","in","and","or","tor","ain","yn"]
 	nstart.shuffle[0]+nend.shuffle[0]
 end
 
