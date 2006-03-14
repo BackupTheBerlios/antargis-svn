@@ -1096,104 +1096,106 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_AntEntity swig_types[71]
 #define SWIGTYPE_p_AntEntityPtr swig_types[72]
 #define SWIGTYPE_p_AntFragProgram swig_types[73]
-#define SWIGTYPE_p_AntMap swig_types[74]
-#define SWIGTYPE_p_AntShaderParameter swig_types[75]
-#define SWIGTYPE_p_AntShaderProgram swig_types[76]
-#define SWIGTYPE_p_AntShadowShader swig_types[77]
-#define SWIGTYPE_p_AntVertexProgram swig_types[78]
-#define SWIGTYPE_p_AntWaterShader swig_types[79]
-#define SWIGTYPE_p_Attributes swig_types[80]
-#define SWIGTYPE_p_BinaryFileIn swig_types[81]
-#define SWIGTYPE_p_BinaryFileOut swig_types[82]
-#define SWIGTYPE_p_BinaryIn swig_types[83]
-#define SWIGTYPE_p_BinaryOut swig_types[84]
-#define SWIGTYPE_p_BinaryStringIn swig_types[85]
-#define SWIGTYPE_p_BinaryStringOut swig_types[86]
-#define SWIGTYPE_p_Bone swig_types[87]
-#define SWIGTYPE_p_Document swig_types[88]
-#define SWIGTYPE_p_DomParser swig_types[89]
-#define SWIGTYPE_p_EntityList swig_types[90]
-#define SWIGTYPE_p_GLApp swig_types[91]
-#define SWIGTYPE_p_GLint swig_types[92]
-#define SWIGTYPE_p_GLuint swig_types[93]
-#define SWIGTYPE_p_HeightMap swig_types[94]
-#define SWIGTYPE_p_KeyFrame swig_types[95]
-#define SWIGTYPE_p_Mesh swig_types[96]
-#define SWIGTYPE_p_MeshData swig_types[97]
-#define SWIGTYPE_p_MeshOptimizer swig_types[98]
-#define SWIGTYPE_p_MeshVertex swig_types[99]
-#define SWIGTYPE_p_Meshes swig_types[100]
-#define SWIGTYPE_p_MiniMap swig_types[101]
-#define SWIGTYPE_p_NewDecal swig_types[102]
-#define SWIGTYPE_p_Node swig_types[103]
-#define SWIGTYPE_p_NodeList swig_types[104]
-#define SWIGTYPE_p_NodeVector swig_types[105]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[106]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[107]
-#define SWIGTYPE_p_Parser swig_types[108]
-#define SWIGTYPE_p_PickNode swig_types[109]
-#define SWIGTYPE_p_PickResult swig_types[110]
-#define SWIGTYPE_p_Renderer swig_types[111]
-#define SWIGTYPE_p_Resource swig_types[112]
-#define SWIGTYPE_p_SDLKey swig_types[113]
-#define SWIGTYPE_p_SDLMod swig_types[114]
-#define SWIGTYPE_p_SDL_Event swig_types[115]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[116]
-#define SWIGTYPE_p_SDL_Rect swig_types[117]
-#define SWIGTYPE_p_SDL_Surface swig_types[118]
-#define SWIGTYPE_p_Scene swig_types[119]
-#define SWIGTYPE_p_SceneNode swig_types[120]
-#define SWIGTYPE_p_SerialException swig_types[121]
-#define SWIGTYPE_p_Sint32 swig_types[122]
-#define SWIGTYPE_p_Smoke swig_types[123]
-#define SWIGTYPE_p_Terrain swig_types[124]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[125]
-#define SWIGTYPE_p_Uint16 swig_types[126]
-#define SWIGTYPE_p_Uint32 swig_types[127]
-#define SWIGTYPE_p_Uint8 swig_types[128]
-#define SWIGTYPE_p_VertexArray swig_types[129]
-#define SWIGTYPE_p_VertexArrayShader swig_types[130]
-#define SWIGTYPE_p_Viewport swig_types[131]
-#define SWIGTYPE_p_WaterPiece swig_types[132]
-#define SWIGTYPE_p_const_iterator swig_types[133]
-#define SWIGTYPE_p_float swig_types[134]
-#define SWIGTYPE_p_iterator swig_types[135]
-#define SWIGTYPE_p_p_AnimMesh swig_types[136]
-#define SWIGTYPE_p_p_Mesh swig_types[137]
-#define SWIGTYPE_p_p_NewDecal swig_types[138]
-#define SWIGTYPE_p_p_Node swig_types[139]
-#define SWIGTYPE_p_p_SceneNode swig_types[140]
-#define SWIGTYPE_p_p_Smoke swig_types[141]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[142]
-#define SWIGTYPE_p_p_WaterPiece swig_types[143]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[144]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[145]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[146]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[147]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[148]
-#define SWIGTYPE_p_std__ostringstream swig_types[149]
-#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[150]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[151]
-#define SWIGTYPE_p_std__setTScene_p_t swig_types[152]
-#define SWIGTYPE_p_std__string swig_types[153]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[154]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[155]
-#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[156]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[157]
-#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[158]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[159]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[160]
-#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[161]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[162]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[163]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[164]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[165]
-#define SWIGTYPE_p_std__vectorTfloat_t swig_types[166]
-#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[167]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[168]
-#define SWIGTYPE_p_unsigned_long swig_types[169]
-static swig_type_info *swig_types[171];
-static swig_module_info swig_module = {swig_types, 170, 0, 0, 0, 0};
+#define SWIGTYPE_p_AntFrustum swig_types[74]
+#define SWIGTYPE_p_AntMap swig_types[75]
+#define SWIGTYPE_p_AntPlane swig_types[76]
+#define SWIGTYPE_p_AntShaderParameter swig_types[77]
+#define SWIGTYPE_p_AntShaderProgram swig_types[78]
+#define SWIGTYPE_p_AntShadowShader swig_types[79]
+#define SWIGTYPE_p_AntVertexProgram swig_types[80]
+#define SWIGTYPE_p_AntWaterShader swig_types[81]
+#define SWIGTYPE_p_Attributes swig_types[82]
+#define SWIGTYPE_p_BinaryFileIn swig_types[83]
+#define SWIGTYPE_p_BinaryFileOut swig_types[84]
+#define SWIGTYPE_p_BinaryIn swig_types[85]
+#define SWIGTYPE_p_BinaryOut swig_types[86]
+#define SWIGTYPE_p_BinaryStringIn swig_types[87]
+#define SWIGTYPE_p_BinaryStringOut swig_types[88]
+#define SWIGTYPE_p_Bone swig_types[89]
+#define SWIGTYPE_p_Document swig_types[90]
+#define SWIGTYPE_p_DomParser swig_types[91]
+#define SWIGTYPE_p_EntityList swig_types[92]
+#define SWIGTYPE_p_GLApp swig_types[93]
+#define SWIGTYPE_p_GLint swig_types[94]
+#define SWIGTYPE_p_GLuint swig_types[95]
+#define SWIGTYPE_p_HeightMap swig_types[96]
+#define SWIGTYPE_p_KeyFrame swig_types[97]
+#define SWIGTYPE_p_Mesh swig_types[98]
+#define SWIGTYPE_p_MeshData swig_types[99]
+#define SWIGTYPE_p_MeshOptimizer swig_types[100]
+#define SWIGTYPE_p_MeshVertex swig_types[101]
+#define SWIGTYPE_p_Meshes swig_types[102]
+#define SWIGTYPE_p_MiniMap swig_types[103]
+#define SWIGTYPE_p_NewDecal swig_types[104]
+#define SWIGTYPE_p_Node swig_types[105]
+#define SWIGTYPE_p_NodeList swig_types[106]
+#define SWIGTYPE_p_NodeVector swig_types[107]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[108]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[109]
+#define SWIGTYPE_p_Parser swig_types[110]
+#define SWIGTYPE_p_PickNode swig_types[111]
+#define SWIGTYPE_p_PickResult swig_types[112]
+#define SWIGTYPE_p_Renderer swig_types[113]
+#define SWIGTYPE_p_Resource swig_types[114]
+#define SWIGTYPE_p_SDLKey swig_types[115]
+#define SWIGTYPE_p_SDLMod swig_types[116]
+#define SWIGTYPE_p_SDL_Event swig_types[117]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[118]
+#define SWIGTYPE_p_SDL_Rect swig_types[119]
+#define SWIGTYPE_p_SDL_Surface swig_types[120]
+#define SWIGTYPE_p_Scene swig_types[121]
+#define SWIGTYPE_p_SceneNode swig_types[122]
+#define SWIGTYPE_p_SerialException swig_types[123]
+#define SWIGTYPE_p_Sint32 swig_types[124]
+#define SWIGTYPE_p_Smoke swig_types[125]
+#define SWIGTYPE_p_Terrain swig_types[126]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[127]
+#define SWIGTYPE_p_Uint16 swig_types[128]
+#define SWIGTYPE_p_Uint32 swig_types[129]
+#define SWIGTYPE_p_Uint8 swig_types[130]
+#define SWIGTYPE_p_VertexArray swig_types[131]
+#define SWIGTYPE_p_VertexArrayShader swig_types[132]
+#define SWIGTYPE_p_Viewport swig_types[133]
+#define SWIGTYPE_p_WaterPiece swig_types[134]
+#define SWIGTYPE_p_const_iterator swig_types[135]
+#define SWIGTYPE_p_float swig_types[136]
+#define SWIGTYPE_p_iterator swig_types[137]
+#define SWIGTYPE_p_p_AnimMesh swig_types[138]
+#define SWIGTYPE_p_p_Mesh swig_types[139]
+#define SWIGTYPE_p_p_NewDecal swig_types[140]
+#define SWIGTYPE_p_p_Node swig_types[141]
+#define SWIGTYPE_p_p_SceneNode swig_types[142]
+#define SWIGTYPE_p_p_Smoke swig_types[143]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[144]
+#define SWIGTYPE_p_p_WaterPiece swig_types[145]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[146]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[147]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[148]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[149]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[150]
+#define SWIGTYPE_p_std__ostringstream swig_types[151]
+#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[152]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[153]
+#define SWIGTYPE_p_std__string swig_types[154]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[155]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[156]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[157]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[158]
+#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[159]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[160]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[161]
+#define SWIGTYPE_p_std__vectorTAntPlane_t swig_types[162]
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[163]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[164]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[165]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[166]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[167]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[168]
+#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[169]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[170]
+#define SWIGTYPE_p_unsigned_long swig_types[171]
+static swig_type_info *swig_types[173];
+static swig_module_info swig_module = {swig_types, 172, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -44646,6 +44648,122 @@ _wrap_toAGWindow(int argc, VALUE *argv, VALUE self) {
 }
 
 
+swig_class cAntPlane;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AntPlane_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AntPlane_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AntPlane);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AntPlane(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = 0 ;
+    float arg2 ;
+    AntPlane *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg2 = (float) NUM2DBL(argv[1]);
+    result = (AntPlane *)new AntPlane((AGVector3 const &)*arg1,arg2);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_AntPlane_inside(int argc, VALUE *argv, VALUE self) {
+    AntPlane *arg1 = (AntPlane *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntPlane, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AntPlane const *)arg1)->inside((AGVector3 const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static void
+free_AntPlane(AntPlane *arg1) {
+    delete arg1;
+}
+
+swig_class cAntFrustum;
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_AntFrustum_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_AntFrustum_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AntFrustum);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_AntFrustum(int argc, VALUE *argv, VALUE self) {
+    std::vector<AntPlane > *arg1 = 0 ;
+    AntFrustum *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_std__vectorTAntPlane_t, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (AntFrustum *)new AntFrustum((std::vector<AntPlane > const &)*arg1);
+    DATA_PTR(self) = result;
+    
+    return self;
+}
+
+
+static VALUE
+_wrap_AntFrustum_inside(int argc, VALUE *argv, VALUE self) {
+    AntFrustum *arg1 = (AntFrustum *) 0 ;
+    AGVector3 *arg2 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AntFrustum, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGVector3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)((AntFrustum const *)arg1)->inside((AGVector3 const &)*arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static void
+free_AntFrustum(AntFrustum *arg1) {
+    delete arg1;
+}
+
 swig_class cSceneNode;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -54852,24 +54970,6 @@ _wrap_disown_Scene(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_getScenes(int argc, VALUE *argv, VALUE self) {
-    SwigValueWrapper<std::set<Scene * > > result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = getScenes();
-    
-    {
-        Scenes * resultptr;
-        resultptr = new Scenes((Scenes &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_std__setTScene_p_t, 1);
-    }
-    return vresult;
-}
-
-
 swig_class cSmoke;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -56711,7 +56811,9 @@ static swig_type_info _swigt__p_Animation = {"_p_Animation", "Animation *", 0, 0
 static swig_type_info _swigt__p_AntEntity = {"_p_AntEntity", "AntEntity *", 0, 0, 0};
 static swig_type_info _swigt__p_AntEntityPtr = {"_p_AntEntityPtr", "AntEntityPtr *", 0, 0, 0};
 static swig_type_info _swigt__p_AntFragProgram = {"_p_AntFragProgram", "AntFragProgram *", 0, 0, 0};
+static swig_type_info _swigt__p_AntFrustum = {"_p_AntFrustum", "AntFrustum *", 0, 0, 0};
 static swig_type_info _swigt__p_AntMap = {"_p_AntMap", "AntMap *", 0, 0, 0};
+static swig_type_info _swigt__p_AntPlane = {"_p_AntPlane", "AntPlane *", 0, 0, 0};
 static swig_type_info _swigt__p_AntShaderParameter = {"_p_AntShaderParameter", "AntShaderParameter *", 0, 0, 0};
 static swig_type_info _swigt__p_AntShaderProgram = {"_p_AntShaderProgram", "AntShaderProgram *", 0, 0, 0};
 static swig_type_info _swigt__p_AntShadowShader = {"_p_AntShadowShader", "AntShadowShader *", 0, 0, 0};
@@ -56789,7 +56891,6 @@ static swig_type_info _swigt__p_std__mapTstd__string_std__string_t = {"_p_std__m
 static swig_type_info _swigt__p_std__ostringstream = {"_p_std__ostringstream", "std::ostringstream *", 0, 0, 0};
 static swig_type_info _swigt__p_std__pairTAGRect2_AGRect2_t = {"_p_std__pairTAGRect2_AGRect2_t", "std::pair<AGRect2,AGRect2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__pairTstd__string_bool_t = {"_p_std__pairTstd__string_bool_t", "std::pair<std::string,bool > *", 0, 0, 0};
-static swig_type_info _swigt__p_std__setTScene_p_t = {"_p_std__setTScene_p_t", "std::set<Scene * > *|Scenes *", 0, 0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGBox3_t = {"_p_std__vectorTAGBox3_t", "std::vector<AGBox3 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGLine2_t = {"_p_std__vectorTAGLine2_t", "std::vector<AGLine2 > *", 0, 0, 0};
@@ -56798,6 +56899,7 @@ static swig_type_info _swigt__p_std__vectorTAGRect3_t = {"_p_std__vectorTAGRect3
 static swig_type_info _swigt__p_std__vectorTAGVector2_t = {"_p_std__vectorTAGVector2_t", "std::vector<AGVector2 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAGVector4_t = {"_p_std__vectorTAGVector4_t", "std::vector<AGVector4 > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTAntEntityPtr_t = {"_p_std__vectorTAntEntityPtr_t", "std::vector<AntEntityPtr > *", 0, 0, 0};
+static swig_type_info _swigt__p_std__vectorTAntPlane_t = {"_p_std__vectorTAntPlane_t", "std::vector<AntPlane > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTKeyFrame_t = {"_p_std__vectorTKeyFrame_t", "std::vector<KeyFrame > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_p_t = {"_p_std__vectorTNode_p_t", "std::vector<Node * > *", 0, 0, 0};
 static swig_type_info _swigt__p_std__vectorTNode_t = {"_p_std__vectorTNode_t", "std::vector<Node > *", 0, 0, 0};
@@ -56883,7 +56985,9 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AntEntity,
   &_swigt__p_AntEntityPtr,
   &_swigt__p_AntFragProgram,
+  &_swigt__p_AntFrustum,
   &_swigt__p_AntMap,
+  &_swigt__p_AntPlane,
   &_swigt__p_AntShaderParameter,
   &_swigt__p_AntShaderProgram,
   &_swigt__p_AntShadowShader,
@@ -56961,7 +57065,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__ostringstream,
   &_swigt__p_std__pairTAGRect2_AGRect2_t,
   &_swigt__p_std__pairTstd__string_bool_t,
-  &_swigt__p_std__setTScene_p_t,
   &_swigt__p_std__string,
   &_swigt__p_std__vectorTAGBox3_t,
   &_swigt__p_std__vectorTAGLine2_t,
@@ -56970,6 +57073,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorTAGVector2_t,
   &_swigt__p_std__vectorTAGVector4_t,
   &_swigt__p_std__vectorTAntEntityPtr_t,
+  &_swigt__p_std__vectorTAntPlane_t,
   &_swigt__p_std__vectorTKeyFrame_t,
   &_swigt__p_std__vectorTNode_p_t,
   &_swigt__p_std__vectorTNode_t,
@@ -57055,7 +57159,9 @@ static swig_cast_info _swigc__p_Animation[] = {  {&_swigt__p_Animation, 0, 0, 0}
 static swig_cast_info _swigc__p_AntEntity[] = {  {&_swigt__p_AntEntity, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntEntityPtr[] = {  {&_swigt__p_AntEntityPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntFragProgram[] = {  {&_swigt__p_AntFragProgram, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AntFrustum[] = {  {&_swigt__p_AntFrustum, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntMap[] = {  {&_swigt__p_AntMap, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AntPlane[] = {  {&_swigt__p_AntPlane, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntShaderParameter[] = {  {&_swigt__p_AntShaderParameter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntShaderProgram[] = {  {&_swigt__p_AntShaderProgram, 0, 0, 0},  {&_swigt__p_AntWaterShader, _p_AntWaterShaderTo_p_AntShaderProgram, 0, 0},  {&_swigt__p_AntShadowShader, _p_AntShadowShaderTo_p_AntShaderProgram, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntShadowShader[] = {  {&_swigt__p_AntShadowShader, 0, 0, 0},{0, 0, 0, 0}};
@@ -57133,7 +57239,6 @@ static swig_cast_info _swigc__p_std__mapTstd__string_std__string_t[] = {  {&_swi
 static swig_cast_info _swigc__p_std__ostringstream[] = {  {&_swigt__p_std__ostringstream, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__pairTAGRect2_AGRect2_t[] = {  {&_swigt__p_std__pairTAGRect2_AGRect2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__pairTstd__string_bool_t[] = {  {&_swigt__p_std__pairTstd__string_bool_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__setTScene_p_t[] = {  {&_swigt__p_std__setTScene_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGBox3_t[] = {  {&_swigt__p_std__vectorTAGBox3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGLine2_t[] = {  {&_swigt__p_std__vectorTAGLine2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -57142,6 +57247,7 @@ static swig_cast_info _swigc__p_std__vectorTAGRect3_t[] = {  {&_swigt__p_std__ve
 static swig_cast_info _swigc__p_std__vectorTAGVector2_t[] = {  {&_swigt__p_std__vectorTAGVector2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAGVector4_t[] = {  {&_swigt__p_std__vectorTAGVector4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTAntEntityPtr_t[] = {  {&_swigt__p_std__vectorTAntEntityPtr_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorTAntPlane_t[] = {  {&_swigt__p_std__vectorTAntPlane_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTKeyFrame_t[] = {  {&_swigt__p_std__vectorTKeyFrame_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_p_t[] = {  {&_swigt__p_std__vectorTNode_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorTNode_t[] = {  {&_swigt__p_std__vectorTNode_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -57227,7 +57333,9 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AntEntity,
   _swigc__p_AntEntityPtr,
   _swigc__p_AntFragProgram,
+  _swigc__p_AntFrustum,
   _swigc__p_AntMap,
+  _swigc__p_AntPlane,
   _swigc__p_AntShaderParameter,
   _swigc__p_AntShaderProgram,
   _swigc__p_AntShadowShader,
@@ -57305,7 +57413,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__ostringstream,
   _swigc__p_std__pairTAGRect2_AGRect2_t,
   _swigc__p_std__pairTstd__string_bool_t,
-  _swigc__p_std__setTScene_p_t,
   _swigc__p_std__string,
   _swigc__p_std__vectorTAGBox3_t,
   _swigc__p_std__vectorTAGLine2_t,
@@ -57314,6 +57421,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorTAGVector2_t,
   _swigc__p_std__vectorTAGVector4_t,
   _swigc__p_std__vectorTAntEntityPtr_t,
+  _swigc__p_std__vectorTAntPlane_t,
   _swigc__p_std__vectorTKeyFrame_t,
   _swigc__p_std__vectorTNode_p_t,
   _swigc__p_std__vectorTNode_t,
@@ -58901,6 +59009,22 @@ SWIGEXPORT void Init_libantargis(void) {
     cAGWindow.mark = (void (*)(void *)) general_markfunc;
     cAGWindow.destroy = (void (*)(void *)) free_AGWindow;
     rb_define_module_function(mLibantargis, "toAGWindow", VALUEFUNC(_wrap_toAGWindow), -1);
+    
+    cAntPlane.klass = rb_define_class_under(mLibantargis, "AntPlane", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AntPlane, (void *) &cAntPlane);
+    rb_define_alloc_func(cAntPlane.klass, _wrap_AntPlane_allocate);
+    rb_define_method(cAntPlane.klass, "initialize", VALUEFUNC(_wrap_new_AntPlane), -1);
+    rb_define_method(cAntPlane.klass, "inside", VALUEFUNC(_wrap_AntPlane_inside), -1);
+    cAntPlane.mark = 0;
+    cAntPlane.destroy = (void (*)(void *)) free_AntPlane;
+    
+    cAntFrustum.klass = rb_define_class_under(mLibantargis, "AntFrustum", rb_cObject);
+    SWIG_TypeClientData(SWIGTYPE_p_AntFrustum, (void *) &cAntFrustum);
+    rb_define_alloc_func(cAntFrustum.klass, _wrap_AntFrustum_allocate);
+    rb_define_method(cAntFrustum.klass, "initialize", VALUEFUNC(_wrap_new_AntFrustum), -1);
+    rb_define_method(cAntFrustum.klass, "inside", VALUEFUNC(_wrap_AntFrustum_inside), -1);
+    cAntFrustum.mark = 0;
+    cAntFrustum.destroy = (void (*)(void *)) free_AntFrustum;
     rb_define_const(mLibantargis,"TERRAIN_Z", INT2NUM(1));
     rb_define_const(mLibantargis,"WATER_Z", INT2NUM(2));
     rb_define_const(mLibantargis,"DECAL_Z", INT2NUM(3));
@@ -59514,7 +59638,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "getCurrentNodes", VALUEFUNC(_wrap_Scene_getCurrentNodes), -1);
     cScene.mark = (void (*)(void *)) general_markfunc;
     cScene.destroy = (void (*)(void *)) free_Scene;
-    rb_define_module_function(mLibantargis, "getScenes", VALUEFUNC(_wrap_getScenes), -1);
     rb_define_module_function(mLibantargis, "disown_Smoke", VALUEFUNC(_wrap_disown_Smoke), -1);
     
     cSmoke.klass = rb_define_class_under(mLibantargis, "Smoke", ((swig_class *) SWIGTYPE_p_SceneNode->clientdata)->klass);

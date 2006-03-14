@@ -612,6 +612,7 @@ class AGMatrix4
 #ifndef SWIG
   (operator float*)();
   (operator const float*)() const;
+  (operator const double*)() const;
 #endif
 
   AGVector4 getRow(size_t i) const;

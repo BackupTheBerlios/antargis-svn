@@ -1954,7 +1954,6 @@ std::string AGVector4::toString() const
   return v;
 }
 
-
 AGVector4 AGVector4::operator%(const AGVector4 &a) const
 {
   return AGVector4(v[1] * a.v[2] - v[2] * a.v[1],
@@ -2149,6 +2148,15 @@ std::string AGMatrix4::toString() const
 (AGMatrix4::operator const float*)() const
 {
   return a;
+}
+
+
+double gMatrixDoubleBuf[16];
+(AGMatrix4::operator const double*)() const
+{
+  for(int i=0;i<16;i++)
+    gMatrixDoubleBuf[i]=a[i];
+  return gMatrixDoubleBuf;
 }
 
 float AGMatrix4::operator()(size_t x,size_t y) const

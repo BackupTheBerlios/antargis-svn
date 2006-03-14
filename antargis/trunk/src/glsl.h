@@ -1,7 +1,7 @@
 #ifndef ANT_GLSL_H
 #define ANT_GLSL_H
 
-#include "renderer.h"
+#include "ant_renderer.h"
 #include "ag_tools.h"
 #include "ag_geometry.h"
 

@@ -1322,9 +1322,19 @@ else if(dynamic_cast<AntMap*>(result))
  Data_Get_Struct($input,AntFragProgram,b);
  $result=*b;
 }
+%typemap(directorout) AntFrustum {
+ AntFrustum *b;
+ Data_Get_Struct($input,AntFrustum,b);
+ $result=*b;
+}
 %typemap(directorout) AntMap {
  AntMap *b;
  Data_Get_Struct($input,AntMap,b);
+ $result=*b;
+}
+%typemap(directorout) AntPlane {
+ AntPlane *b;
+ Data_Get_Struct($input,AntPlane,b);
  $result=*b;
 }
 %typemap(directorout) AntShaderParameter {

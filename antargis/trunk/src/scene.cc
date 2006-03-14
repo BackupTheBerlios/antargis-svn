@@ -1,4 +1,4 @@
-#include "renderer.h"
+#include "ant_renderer.h"
 #include "scene.h"
 
 #include <GL/gl.h>
@@ -11,13 +11,6 @@
 #include <math.h>
 
 #include "quadtree.h"
-
-std::set<Scene*> gScenes;
-
-std::set<Scene*> getScenes()
-{
-  return gScenes;
-}
 
 bool PickNode::operator<(const PickNode &n) const
 {
@@ -79,7 +72,6 @@ Scene::Scene(int w,int h):
     mShadow=0;
   
   mRubyObject=false;
-  gScenes.insert(this);
   init();
 
   calcCameraView();
@@ -90,7 +82,6 @@ Scene::~Scene()
   // tell nodes, that I'm no longer there :-)
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->resetScene(); 
-  gScenes.erase(this);
 
   delete mTree;
 }
@@ -716,13 +707,3 @@ AGVector2 Scene::getPosition(const AGVector4 &v) const
 }
 
 
-void addToAllScenes(SceneNode *n)
-{
-  for(Scenes::iterator i=gScenes.begin();i!=gScenes.end();i++)
-    (*i)->addNode(n);
-}
-void removeFromAllScenes(SceneNode *n)
-{
-  for(Scenes::iterator i=gScenes.begin();i!=gScenes.end();i++)
-    (*i)->removeNode(n);
-}

@@ -2,7 +2,7 @@
 #define ANT_APP_H
 
 #include "scene.h"
-#include "renderer.h"
+#include "ant_renderer.h"
 #include <iostream>
 #include <fstream>
 #include <ag_application.h>
