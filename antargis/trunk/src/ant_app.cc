@@ -1,4 +1,4 @@
-#include "antapp.h"
+#include "ant_app.h"
 #include "ag_debug.h"
 
 GLApp::GLApp(int w,int h):scene(w,h)
