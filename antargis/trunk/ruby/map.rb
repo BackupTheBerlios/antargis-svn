@@ -83,6 +83,8 @@ class AntRubyMap<AntMap
 				e=AntDecoMesh.new
 			when "antBush"
 				e=AntBush.new
+			when "antFire"
+				e=AntFire.new
 		end
 		if node.getName=="antNewMan" then
 			e=AntNewMan.new
