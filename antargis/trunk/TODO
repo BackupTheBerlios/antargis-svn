@@ -85,6 +85,7 @@ none - ATM
 
 [Game]
 ------------------------------------------------------
+[M] save entity age (AntNewEntity) and give it in inspect-dialog
 [H] localization
 [H] hero should fight too!!!!!!!!!!!!
 [L] each man should have a name and an age
