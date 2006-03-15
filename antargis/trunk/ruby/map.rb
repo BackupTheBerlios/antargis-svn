@@ -279,6 +279,10 @@ class AntRubyMap<AntMap
 			c=n.addChild(t.xmlName)
 			t.saveXML(c)
 		}
+		@triggers.each{|t|
+			c=n.addChild(t.xmlName)
+			t.saveXML(c)
+		}
 		n.set("scriptclass",@scriptClass)
 		n.set("scriptfile",@scriptFile)
 		if @script

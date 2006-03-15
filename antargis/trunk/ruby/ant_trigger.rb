@@ -17,6 +17,13 @@ class Trigger
 			@triggerTime=$systemTime
 		end
 	end
+	def saveXML(n)
+		@pos.saveXML(n)
+		n.set("radius",@radius.to_s)
+		n.set("name",@name)
+		n.set("player",@player)
+		n.set("text",@text)
+	end
 	def check(hero)
 		if $systemTime-@triggerTime>1 # wait at least a second for repeating trigger
 			p2=hero.getPos2D
@@ -27,5 +34,8 @@ class Trigger
 				@triggerTime=$systemTime
 			end
 		end
+	end
+	def xmlName
+		"trigger"
 	end
 end
