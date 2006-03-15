@@ -246,6 +246,15 @@ std::string loadFile(const std::string &pName)
 #endif
 }
 
+#ifdef WIN32
+/* GetUserProfileDirectory() is only available on >= NT4 (no 9x/ME systems!) */
+typedef BOOL (STDMETHODCALLTYPE FAR * LPFNGETUSERPROFILEDIR) (
+      HANDLE hToken,
+      LPTSTR lpProfileDir,
+      LPDWORD lpcchSize);
+#endif
+
+
 std::string gUserDir;
 std::string getUserDir()
 {
