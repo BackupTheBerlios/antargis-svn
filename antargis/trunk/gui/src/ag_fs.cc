@@ -25,6 +25,9 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 #include "ag_debug.h"
 
@@ -93,12 +96,21 @@ void initFS(const char *argv0)
 void checkDir(const std::string &s)
 {
 #ifdef WIN32
-{
-  DWORD rc = CreateDirectory(path.c_str(), NULL);
+  DWORD rc = CreateDirectory(s.c_str(), NULL);
+  DWORD le;
   if(rc==0)
     {
-      cdebug("could not create dir:"<<s);
-      throw std::runtime_error("could not create dir");
+	  le=GetLastError();
+	  if(le==ERROR_ALREADY_EXISTS)
+		{
+		   // dir exists -ok
+		}
+	  else
+	  {
+		  cdebug("could not create dir:"<<s);
+		  cdebug("rc:"<<rc);
+		  throw std::runtime_error("could not create dir");
+		}
     }
 #else
   int rc;
@@ -135,11 +147,12 @@ void checkParentDirs(const std::string &s)
   for(std::vector<std::string>::iterator i=a.begin();i!=a.end();++i)
     {
       if(i->length()==0)
-	continue;
+		continue;
       if(i!=a.begin())
-	os<<sep;
+		os<<sep;
       os<<*i;
-      checkDir(os.str());
+      if(os.str().find(sep)!=std::string::npos)
+		checkDir(os.str());
     }
 }
 
@@ -261,9 +274,9 @@ std::string getUserDir()
   if(gUserDir=="")
     {
 #ifdef WIN32
+	char *userDir=0;
 
-
-      DWORD psize = 0;
+    DWORD psize = 0;
     char dummy[1];
     BOOL rc = 0;
     HANDLE processHandle;            /* Current process handle */
@@ -271,7 +284,7 @@ std::string getUserDir()
     LPFNGETUSERPROFILEDIR GetUserProfileDirectory;
     HMODULE lib;
 
-    assert(userDir == NULL);
+    assert(userDir == 0);
 
     /*
      * GetUserProfileDirectory() is only available on NT 4.0 and later.
@@ -300,12 +313,12 @@ std::string getUserDir()
                 assert(!rc);  /* success?! */
 
                 /* Allocate memory for the profile directory */
-                userDir = (char *) allocator.Malloc(psize);
+                userDir = new char[psize+1];
                 if (userDir != NULL)
                 {
                     if (!GetUserProfileDirectory(accessToken, userDir, &psize))
                     {
-                        allocator.Free(userDir);
+                        delete [] userDir;
                         userDir = NULL;
                     } /* if */
                 } /* else */
@@ -319,13 +332,11 @@ std::string getUserDir()
 
     if (userDir == NULL)  /* couldn't get profile for some reason. */
     {
-
         /* Might just be a non-NT system; resort to the basedir. */
-        userDir = getExePath(NULL);
-        BAIL_IF_MACRO(userDir == NULL, NULL, 0); /* STILL failed?! */
+        userDir = ".";
+        std::cerr<<"sorry, this game doesn't run correctly on non-nt systems (win98/me)"<<std::endl;
     } /* if */
-
-    return(1);  /* We made it: hit the showers. */
+	gUserDir=userDir;
 
 
 
