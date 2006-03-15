@@ -25,10 +25,12 @@ class AntInventory<AGWidget
 	def eventJobChanged(e)
 		@job=e.getCaller.getName
 		sigJobChanged(e)
+		return true
 	end
 
 	def eventInspect
 		$app.viewInformation(@inspect)
+		return true
 	end
 
 	def inspect(e)

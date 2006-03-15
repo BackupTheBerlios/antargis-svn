@@ -88,6 +88,7 @@ class CutSceneDisplay<AGApplication
 			@finished=true
 			#eventFrame(10000) # as if much time has passed
 		end
+		return true
 	end
 	def eventKeyDown(e)
 		super
@@ -98,6 +99,7 @@ class CutSceneDisplay<AGApplication
 # 			@ctext=@text
 # 			setTextForReal(@ctext)
 # 		end
+		return true
 	end
 	
 	def setImage(image)
@@ -136,6 +138,7 @@ class CutSceneDisplay<AGApplication
 				@finished=true
 			end
 		end
+		return true
 	end
 	
 	private

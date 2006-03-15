@@ -89,6 +89,7 @@ class AntRubyEditView<GLApp
 			addHandler(@newDialog.getChild("cancel"),:sigClick,:eventNewMapEnd)
 			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:eventNewMapEnd)
 		end
+		return true
 	end
 	
 	def eventNewMapEnd(e)
@@ -113,6 +114,7 @@ class AntRubyEditView<GLApp
 			end
 			@map.mapChanged
 		end
+		return true
 	end
 	
 	def setTab(name)
@@ -133,6 +135,7 @@ class AntRubyEditView<GLApp
 	
 	def eventTabSelect(e)
 		setTab(e.getCaller.getName)
+		return true
 	end
 		
 	def eventClick(list,button)
@@ -146,7 +149,7 @@ class AntRubyEditView<GLApp
 			end
 		end
 		#super(list)
-		return
+		return true
 	end
 	def editHeight(list,button)
 	
@@ -247,21 +250,26 @@ class AntRubyEditView<GLApp
 			@modifier="editTerrain"
 			@terrainType=e.getCaller.getName
 		end
+		return true
 	end
 	
 	def eventSize(e)
 		@size=e.getCaller.getName[4..10].to_i
+		return true
 	end
 	def eventHard(e)
 		@hard=e.getCaller.getName[4..10].to_i
+		return true
 	end
 	
 	def eventPointer
 		@modifier="edit"
+		return true
 	end
 	
 	def eventRubber
 		@modifier="doRubber"
+		return true
 	end
 	
 	def eventAddEnt(e)
@@ -301,12 +309,13 @@ class AntRubyEditView<GLApp
 			when "highGrass"
 				@type=AntHighGrass
 		end
+		return true
 	end
 	def eventDecal(e)
 		callerName=e.getCaller.getName
 		@modifier="addEntity"
 		@type=AntDecal
-		return false
+		return true
 	end
 	def eventDeco(e)
 		callerName=e.getCaller.getName
@@ -317,7 +326,7 @@ class AntRubyEditView<GLApp
 			@type=AntNewDeco
 		end
 		@decoType=callerName
-		return
+		return true
 	end
 	
 	def isTerrain(node)
@@ -404,9 +413,11 @@ class AntRubyEditView<GLApp
 	
 	def eventAllWater
 		getMap.setHeight(-0.5)
+		return true
 	end
 	def eventAllGrass
 		getMap.setHeight(1.0)
+		return true
 	end
 	
 	

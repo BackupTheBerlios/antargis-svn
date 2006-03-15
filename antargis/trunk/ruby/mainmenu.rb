@@ -52,6 +52,7 @@ class AntMenuApp <AGApplication
 		if @sound
 			getSoundManager.playMp3("data/music/ant2.ogg")
 		end
+		return true
 	end
 		
 	def hideAll
@@ -133,6 +134,7 @@ class AntMenuApp <AGApplication
 	end
 	def eventFullscreen
 		getMain.changeRes(getMain.width,getMain.height,32,(not getMain.fullscreen),true)
+		return true
 	end
 
 	def eventResChange(e)
@@ -144,6 +146,7 @@ class AntMenuApp <AGApplication
 			when "1400"
 				setRes(1400,1050)
 		end
+		return true
 	end
 	def setRes(w,h)
 		getMain.changeRes(w,h,32,true,true) #getMain.fullscreen,true)
@@ -154,19 +157,24 @@ class AntMenuApp <AGApplication
 	
 	def eventCredits(e)
 		setMainWidget(@creditsMenu)
+		return true
 	end
 	def eventCampaign(e)
 		setMainWidget(@campaignMenu)
+		return true
 	end
 	def eventLoadGame(e)
 		updateLoadMenu
 		setMainWidget(@loadMenu)
+		return true
 	end
 	def eventOptions(e)
 		setMainWidget(@optionsMenu)
+		return true
 	end
 	def eventQuit(e)
 		tryQuit
+		return true
 	end
 	
 	def eventMission(e)
@@ -175,6 +183,7 @@ class AntMenuApp <AGApplication
 		@selCampaign=@campaigns[number]
 		@campaignMenu.getChild("campaignImage").setTexture(@selCampaign.texture)
 		@campaignMenu.getChild("campaignDescription").setText(@selCampaign.description)
+		return true
 	end
 	
 	def eventStart
@@ -184,14 +193,17 @@ class AntMenuApp <AGApplication
 			startCampaign(@selCampaign)
 			soundOn
 		end
+		return true
 	end
 
 	# all exits to mainmenu	
 	def eventExit(e)
 		setMainWidget(@mainMenu)
+		return true
 	end
 	def eventIdle
 		delay(20)
+		return true
 	end
 	def soundOff
 		@sound=false
@@ -206,6 +218,7 @@ class AntMenuApp <AGApplication
 	def eventLoadSelect(e)
 		puts "LOAD SELECT"
 		@loadMenu.getChild("desc").setText("muh")
+		return true
 	end
 	def eventLoad(e)
 		id=@loadMenu.getChild("list").getSelectedID
@@ -215,6 +228,7 @@ class AntMenuApp <AGApplication
 			c=Campaign.new(getWriteDir+"/savegames/"+id)
 			continueCampaign(c)
 		end
+		return true
 	end
 end
 

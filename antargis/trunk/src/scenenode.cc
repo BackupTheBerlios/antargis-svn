@@ -109,7 +109,6 @@ Scene *SceneNode::getScene()
 
 void SceneNode::clear()
 {
-  assert(mScene);
   if(mScene)
     mScene->removeNode(this);
   resetScene();

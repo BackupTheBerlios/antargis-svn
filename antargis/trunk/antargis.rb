@@ -106,6 +106,7 @@ class AntGameApp <AntRubyView
 			when "doDismiss"
 				@hero.newHLDismissJob
 		end
+		return true
 	end
 
 	def eventInvJob(e)
@@ -123,6 +124,7 @@ class AntGameApp <AntRubyView
 			when "doTakeWeapons"
 				puts "WARN: implement doTakeWeapons"
 		end
+		return true
 	end
 
 	def eventKeyDown(e)
@@ -194,6 +196,7 @@ class AntGameApp <AntRubyView
 	# signals	
 	def eventQuit(e)
 		@layout.addChild(AntQuitDialog.new(@layout))
+		return true
 	end
 	def eventPause(e)
 		if not getMap().paused then
@@ -201,9 +204,11 @@ class AntGameApp <AntRubyView
 		else
 			getMap().unpause
 		end
+		return true
 	end
 	def eventOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
+		return true
 	end
 	
 	def enableEdit
@@ -305,7 +310,8 @@ class AntGameApp <AntRubyView
 			focusHero(ent)
 		end
 		inspectEntity(ent)
-		
+		return true
+
 	end
 
 	def eventAggressionChanged(e)
@@ -313,6 +319,7 @@ class AntGameApp <AntRubyView
 		if h
 			h.setAggression($buttonPanel.getAggression)
 		end
+		return true
 	end
 	
 	def getSelectedHero

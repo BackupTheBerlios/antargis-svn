@@ -77,21 +77,24 @@ class AntGameApp < AntRubyEditView
 # 			end
 # 		}
 		
-		
+		return true
 	end
 	
 	def eventFrame(time)
 		super(time)
 		getScene.advance(time)
+		return true
 	end
 	
 	def eventIdle
 		delay(20)
+		return true
 	end
 	
 	# signals	
 	def eventQuit(e)
 		@layout.addChild(AntQuitDialog.new(@layout))
+		return true
 	end
 	def eventPause(e)
 		if not getMap().paused then
@@ -99,9 +102,11 @@ class AntGameApp < AntRubyEditView
 		else
 			getMap().unpause
 		end
+		return true
 	end
 	def eventOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
+		return true
 	end
 	
 	def enableEdit

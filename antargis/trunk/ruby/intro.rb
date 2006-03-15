@@ -46,6 +46,7 @@ class IntroApp<AGApplication
 	def eventKeyDown(e)
 		super
 		cancel
+		return true
 	end
 	
 	def cancel
@@ -97,6 +98,7 @@ class IntroApp<AGApplication
 		@time+=t
 		checkPhase
 		delay(10)
+		return true
 	end
 	
 end

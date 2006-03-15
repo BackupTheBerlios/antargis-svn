@@ -207,7 +207,9 @@ class AntNewMan<AntMyEntity
 			setStandAnim
 		#end
 		#setVisible(vis)
-		super(time)
+		puts "newRestJob"
+		puts time.class
+		super(time.to_i)
 	end
 	
 	def newFightJob(d,ptarget)

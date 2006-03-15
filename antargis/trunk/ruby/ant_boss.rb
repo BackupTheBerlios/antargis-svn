@@ -33,6 +33,7 @@ class AntBoss<AntMyEntity
 		@createMen=0
 		setProvide("boss",true)
 		setupMeshBoss
+		@selected=@hovered=false
 	end
 	def loadXML(node)
 		super(node)
@@ -166,6 +167,7 @@ class AntBoss<AntMyEntity
 	
 	def hovered=(s)
 		@hovered=s
+		puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @hovered and not @selected
 			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
@@ -173,6 +175,7 @@ class AntBoss<AntMyEntity
 	end
 	def selected=(s)
 		@selected=s
+		puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @selected
 			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))

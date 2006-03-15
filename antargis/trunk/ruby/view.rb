@@ -90,6 +90,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				hoverEntity(nil)
 			end
 		end
+		return true
 	end
 	
 	def eventClick(list,button)
@@ -109,6 +110,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 				clickEntities(list,button)
 			end
 		end
+		return true
 	end
 	
 	def hoverEntity(e)
@@ -135,6 +137,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def eventMouseMotion(e)
 		super
 		@mousepos=e.getMousePosition
+		return true
 	end
 	def checkMove(t)
 		if getMain.fullscreen
@@ -155,6 +158,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def eventFrame(t)
 		super
 		checkMove(t)
+		return true
 	end
 end
 
@@ -221,6 +225,7 @@ class AntButtonPanel<AGWidget
 	def eventJobSelected(e)
 		@job=e.getCaller.getName
 		sigJobChanged(e)
+		return true
 	end
 	def eventAggSelected(e)
 		@agg=@aggButtons[e.getCaller.getName]

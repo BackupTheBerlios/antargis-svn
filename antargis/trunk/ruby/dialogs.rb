@@ -64,9 +64,11 @@ class AntDialog<AGLayout
 	end
 	def eventOk(e)
 		eventClose
+		return true
 	end
 	def eventCancel
 		eventClose
+		return true
 	end
 	
 	def eventKeyDown(e)
@@ -78,11 +80,13 @@ class AntDialog<AGLayout
 		elsif e.getKey==SDLK_RETURN then
 			eventOk(e)
 		end
+		return true
 	end
 	def eventClose
 		hide
 		sigClosed(AGEvent.new(self,"sigClosed"))
 		setNormalVolumeWave
+		return true
 	end
 end
 
@@ -129,6 +133,7 @@ class AntStoryTalk<AntDialog
 			getMap().unpause()
 			toAGWindow(getChild("window")).close
 		end
+		return true
 	end
 end
 
@@ -161,9 +166,11 @@ class AntQuitDialog<AntDialog
 	def eventClose
 		super
 		getMap.unpause
+		return true
 	end
 	def eventOk(e)
 		$app.tryQuit
+		return true
 	end
 end
 
@@ -179,18 +186,22 @@ class AntOptionsDialog<AntDialog
 	def eventVideo
 		$app.videoOptions
 		hide
+		return true
 	end
 	def eventSave
 		$app.save
 		hide
+		return true
 	end
 	def eventLoad
 		$app.load
 		hide
+		return true
 	end
 	def eventClose
 		super
 		getMap.unpause
+		return true
 	end
 end
 
@@ -207,6 +218,7 @@ class AntSaveDialog<AntDialog
 		getMap.saveMap("savegames/"+filename)
 		getMap.unpause
 		hide
+		return true
 	end
 end
 
@@ -228,10 +240,12 @@ class AntSaveCampaignDialog<AntDialog
 		#getMap.saveMap("savegames/"+filename)
 		getMap.unpause
 		hide
+		return true
 	end
 	def eventClose
 		super
 		getMap.unpause
+		return true
 	end
 end
 
@@ -257,10 +271,12 @@ class AntLoadDialog<AntDialog
 		end
 		getMap.unpause
 		hide
+		return true
 	end
 	def eventClose
 		super
 		getMap.unpause
+		return true
 	end
 end
 
@@ -277,9 +293,11 @@ class AntVideoOptionsDialog<AntDialog
 	def eventOk(e)
 		getMap.unpause
 		hide
+		return true
 	end
 	def eventFullscreen
 	  getMain.toggleFull
+		return true
 	end
 	def eventShadow
 		s=$app.getScene
@@ -289,18 +307,23 @@ class AntVideoOptionsDialog<AntDialog
 			else
 				s.setShadow(0)
 		end
+		return true
 	end
 	def event1024
 		setRes(1024,768)
+		return true
 	end
 	def event1280
 		setRes(1280,1024)
+		return true
 	end
 	def event1400
 		setRes(1400,1050)
+		return true
 	end
 	def setRes(w,h)
 		getMain.changeRes(w,h,32,getMain.fullscreen,true)
+		return true
 	end
 end
 
@@ -316,6 +339,7 @@ class AntPauseDialog<AntDialog
 		super
 		getMap.unpause
 		#hide
+		return true
 	end
 end
 
@@ -342,6 +366,7 @@ class AntEditPropDialog<AntDialog
 		hide
 		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
 		@ent.setupMesh
+		return true
 	end
 end
 
