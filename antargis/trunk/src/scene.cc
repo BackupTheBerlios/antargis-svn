@@ -45,22 +45,12 @@ public:
 
 
 Scene::Scene(int w,int h):
-  mTree(new QuadTree<SceneNode>(AGRect2(AGVector2(),AGVector2(w,h))))
+  mTree(new QuadTree<SceneNode>(AGRect2(AGVector2(),AGVector2(w,h)))),
+  mCamera(w,h)
 {
-  windowWidth=w;
-  windowHeight=h;
   white=AGVector4(1,1,1,1);
   black=AGVector4(0,0,0,1);
-  inited=false;
-  orthoShadow=true;
-  orthoShadow=false;
   
-  cameraPosition=AGVector4(0,-20,20);
-  lightPosition=AGVector4( -20, -13, 31,1);
-  lightPosition=AGVector4( -50, -50, 100,1);
-  lightPosition=AGVector4( -25, -50, 60,1);
-  scenePosition=AGVector4(0,0,0,1);
-
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
   cdebug("SHADOW_AMB:"<<(int)GLEE_ARB_shadow_ambient);
   
@@ -72,9 +62,7 @@ Scene::Scene(int w,int h):
     mShadow=0;
   
   mRubyObject=false;
-  init();
 
-  calcCameraView();
 }
 
 Scene::~Scene()
@@ -96,16 +84,14 @@ void Scene::draw()
 {
   AGRenderContext c;
   c.begin(); // reset gl-state
-  //  return;
+
   getRenderer()->setCurrentScene(this);
   assertGL;
  
   mTriangles=0;
-  calcCameraView();
 
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    (*i)->sort(scenePosition);
-
+    (*i)->sort(AGVector4(mCamera.getPosition(),1));
   
   if(mShadow)
     {
@@ -118,8 +104,6 @@ void Scene::draw()
       initScene();
       drawScene();
     }
-
-  //  cdebug("tris:"<<mTriangles);
 
   getRenderer()->setCurrentScene(0);
 }
@@ -197,9 +181,7 @@ void Scene::clear()
   // (mx,my,0)
 void Scene::setCamera(AGVector4 v)
 {
-  scenePosition=v;
-  scenePosition[3]=1;
-  calcCameraView();
+  mCamera.setPosition(v.dim3());
 }
 
 void Scene::advance(float time)
@@ -214,114 +196,10 @@ void Scene::advance(float time)
     }
 }
 
-
-void Scene::calcCameraView()
-{
-  glLoadIdentity();
-  gluLookAt(cameraPosition[0]+scenePosition[0],cameraPosition[1]+scenePosition[1],cameraPosition[2]+scenePosition[2],
-	    scenePosition[0],scenePosition[1],scenePosition[2],
-	    0,0,1);
-  glGetFloatv(GL_MODELVIEW_MATRIX, cameraViewMatrix);
-  
-
-  if(mShadow==2)
-    {
-      // PSM
-      // calculation of lightposition is somehow crappy
-
-
-      // PSMs
-      //  lightPosition=AGVector4( -2.0, -3, 5.1,1)*100;
-      
-      // light View Matrix
-      glLoadIdentity();
-      
-      AGVector4 lp=lightPosition;
-      //    lp[
-      lp[3]=1;
-      lp=cameraProjectionMatrix*cameraViewMatrix*lp;
-      
-      lp/=lp[3];
-      
-      // it is something like (12,-10,10)
-      
-      
-      
-      
-      lp=AGVector4(-0.5,1.5,-0.5,1); // should be something like this 
-      lp*=100;
-      
-      
-      //lp=AGVector4(-2,2,-2,1);
-      gluLookAt(lp[0], lp[1], lp[2],
-		0,0,0,
-		0.0f, 1.0f, 0.0f);
-      glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
-      
-      lightViewMatrix=lightViewMatrix*cameraProjectionMatrix*cameraViewMatrix;
-      // light projection Matrix
-      glLoadIdentity();
-      //    glOrtho(-10,10,-15,20,10,1000);
-      cdebug(lp.toString());
-      float s2=sqrt(2.0f);
-      float ldist=lp.length3();
-      
-      glOrtho(-s2,s2,-s2,s2,ldist-2*s2,ldist+10);//1,10);//ldist-2*s2,ldist+10*s2);
-      
-      
-      //very old:glOrtho(-1,2,-1.5,3,700,750);
-      //      glOrtho(-1,2,-1,1,2,8);
-      
-      glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
-    }
-  else
-    {
-      //  lightPosition=AGVector4( -1.0, -3, 5.1,1);
-      
-      // calc light view,too
-      // light View Matrix
-      glLoadIdentity();
-      gluLookAt(lightPosition[0]+scenePosition[0], lightPosition[1]+scenePosition[1], lightPosition[2]+scenePosition[2],
-		scenePosition[0],scenePosition[1],scenePosition[2],
-		0.0f, 0.0f, 1.0f);
-      glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
-      
-      
-      // light projection Matrix
-      glLoadIdentity();
-      
-      if(orthoShadow)
-	// 1=   2=   3=front 4=back
-	glOrtho(-15,20,-20,46, 70,200); // left,rigt, bottom,top - these are estimated values // for 1024
-      //	glOrtho(-1.3,1.3,-2,5, 2,10); // left,rigt, bottom,top - these are estimated values // for 1024
-      else
-	{
-	  float near0=20,near1=60;
-	  float far0=20,far1=110;
-
-	  float mnear=sqrt(near0*near0+near1*near1);
-	  float mfar=sqrt(far0*far0+far1*far1);
-	  
-	  float left=-25;
-	  float right=14;
-	  float bottom=-15;
-	  float top=14;
-
-	  if(getRenderer()->badShadowMap())
-	    top=bottom+(top-bottom)*1024.0f/768.0f;
-
-	  glFrustum(left, right, bottom, top,
-		    mnear,mfar);
-
-	}
-      
-      glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
-    }
-}
-
 Scene::NodeList Scene::getCurrentNodes()
 {
-  NodeList l=mTree->get(AGRect2(scenePosition.dim2()+AGVector2(-20,-20),scenePosition.dim2()+AGVector2(30,30)));
+  AGVector2 p=mCamera.getPosition().dim2();
+  NodeList l=mTree->get(AGRect2(p+AGVector2(-20,-20),p+AGVector2(30,30)));
 
   for(NodeList::iterator i=l.begin();i!=l.end();i++)
     {
@@ -355,22 +233,19 @@ void Scene::calcShadowMap()
 
 void Scene::initScene()
 {
-  //  glDisable(GL_COLOR_MATERIAL);
   glClear(GL_DEPTH_BUFFER_BIT);
   
   glMatrixMode(GL_PROJECTION);
-  glLoadMatrixf(cameraProjectionMatrix);
+  glLoadMatrixf(mCamera.getProjection());
   
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  //  glLoadMatrixf(cameraViewMatrix);
   
-  glViewport(0, 0, windowWidth, windowHeight);
+  glViewport(0, 0, mCamera.getWidth(), mCamera.getHeight());
   
   //Use dim light to represent shadowed areas
-  //  cdebug( lightPosition.toString()<<"   "<<scenePosition.toString()<<"  "<< (lightPosition+scenePosition).toString());
 
-  AGVector4 l=lightPosition+scenePosition;
+  AGVector4 l=mCamera.getLightPosition();
   l[3]=1;
 
   glLightfv(GL_LIGHT1, GL_POSITION, l);
@@ -400,12 +275,14 @@ void Scene::initScene()
   glDisable(GL_LIGHT4);
   glDisable(GL_LIGHT5);
 
-  glLoadMatrixf(cameraViewMatrix);
+  //  glLoadMatrixf(cameraViewMatrix);
+  glLoadMatrixf(mCamera.getModelview());
 }
 
 AGMatrix4 Scene::getFrustum()
 {
-  return cameraProjectionMatrix*cameraViewMatrix;
+  return mCamera.getProjection()*mCamera.getModelview();
+  //return cameraProjectionMatrix*cameraViewMatrix;
 }
 
 
@@ -415,8 +292,6 @@ void Scene::drawScene()
   
   //2nd pass - Draw from camera's point of view
 
-  //  glAlphaFunc(GL_GREATER,0.9f);
-  //  glEnable(GL_ALPHA_TEST);
   // draw scene with texturing and so
 
   int drawn=0;
@@ -447,7 +322,7 @@ void Scene::drawScene()
 	    }
 	}
     }
-  sort(sorted.begin(),sorted.end(),SortDistance(cameraPosition.dim3()));
+  sort(sorted.begin(),sorted.end(),SortDistance(mCamera.getCameraPosition().dim3()));
 
   for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
     {
@@ -477,20 +352,9 @@ void Scene::drawShadow()
   assertGL;
 }
 
-void Scene::init()
-{
-  inited=true;
-  
-  // camera projection matrix
-  glLoadIdentity();
-  gluPerspective(45.0f, ((float)windowWidth)/windowHeight, 10.0f, 50.0f);
-  glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
-  //  calcCameraView();
-}
-
 AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 {
-  return (cameraPosition+scenePosition).dim3()-p;
+  return mCamera.getCameraPosition().dim3()-p;
 }
 
 
@@ -499,7 +363,8 @@ void Scene::pickDraw()
   glDisable(GL_CULL_FACE);
   GLuint name=1;
   pickNames.clear();
-  AGMatrix4 frustum=cameraPickMatrix*cameraViewMatrix;
+
+  AGMatrix4 frustum=cameraPickMatrix*mCamera.getModelview();
   
   NodeList l=getCurrentNodes();
 
@@ -532,18 +397,19 @@ Scene::PickResult Scene::pick(float x,float y,float w,float h)
   glLoadIdentity();
   
   assertGL;
-  gluPickMatrix(x,windowHeight-y,h,w,getViewport());
+  gluPickMatrix(x,mCamera.getHeight()-y,h,w,getViewport());
 
   assertGL;
   
-  glMultMatrixf(cameraProjectionMatrix);
+  glMultMatrixf(mCamera.getProjection());
   glGetFloatv(GL_PROJECTION_MATRIX, cameraPickMatrix);
   assertGL;
   
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
   glLoadIdentity();
-  glMultMatrixf(cameraViewMatrix);
+
+  glMultMatrixf(mCamera.getModelview());
   glInitNames();
   assertGL;
 
@@ -561,7 +427,7 @@ Scene::PickResult Scene::pick(float x,float y,float w,float h)
   
   int hits=glRenderMode(GL_RENDER);
   assertGL;
-  PickResult r=processHits(hits,buffer,x+w/2,windowHeight-(y+h/2));
+  PickResult r=processHits(hits,buffer,x+w/2,mCamera.getHeight()-(y+h/2));
   std::sort(r.begin(),r.end());
   return r;
 }
@@ -599,13 +465,13 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py
 	    GLdouble modelview[16],projection[16];
 	    for(size_t i=0;i<16;i++)
 	      {
-		modelview[i]=((float*)cameraViewMatrix)[i];
+		modelview[i]=((float*)mCamera.getModelview())[i];
 		projection[i]=((float*)cameraPickMatrix)[i];
 	      }
 
 	    gluUnProject(px,py,n.camDist,modelview,projection,getViewport(),&x,&y,&z);
 	    n.pos=AGVector4(x,y,z,1);
-	    n.camDist=(n.pos-cameraPosition).length3();
+	    n.camDist=(n.pos-mCamera.getCameraPosition()).length3();
 
 	    result.push_back(n);
 	  }
@@ -621,22 +487,17 @@ Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py
 
 Viewport Scene::getViewport() const
 {
-  Viewport p;
-  p.viewport[0]=0;
-  p.viewport[1]=0;
-  p.viewport[2]=windowWidth;
-  p.viewport[3]=windowHeight;
-  return p;
+  return mCamera.getViewport();
 }
 
 
 float Scene::width() const
 {
-  return windowWidth;
+  return mCamera.getWidth();
 }
 float Scene::height() const
 {
-  return windowHeight;
+  return mCamera.getHeight();
 }
 
 void Scene::mark()
@@ -649,45 +510,23 @@ void Scene::mark()
     }
 }
 
-AGMatrix4 Scene::getInvCameraView() const
-{
-  AGMatrix4 n,m;
-
-  int x,y;
-  for(y=0;y<3;y++)
-    {
-      for(x=0;x<3;x++)
-	n.set(x,y,cameraViewMatrix.get(y,x));
-      m.set(3,y,-cameraViewMatrix.get(3,y));
-    }
-
-  n=n*m;
-
-  return n;
-}
-
 AGMatrix4 Scene::getLightComplete() const
 {
-  float bias[]={0.5f, 0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, 0.0f, 0.0f,
-		0.0f, 0.0f, 0.5f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f};        //bias from [-1, 1] to [0, 1]
-  static AGMatrix4 biasMatrix(bias);
-  return biasMatrix*lightProjectionMatrix*lightViewMatrix;
+  return mCamera.getLightComplete();
 }
 
 AGMatrix4 Scene::getLightView() const
 {
-  return lightViewMatrix;
+  return mCamera.getLightView();
 }
 AGMatrix4 Scene::getLightProj() const
 {
-  return lightProjectionMatrix;
+  return mCamera.getLightProjection();
 }
 
 AGVector4 Scene::getCamera() const
 {
-  return scenePosition;
+  return AGVector4(mCamera.getPosition(),1);
 }
 
 AGVector2 Scene::getPosition(const AGVector4 &v) const
@@ -697,13 +536,12 @@ AGVector2 Scene::getPosition(const AGVector4 &v) const
   GLdouble modelview[16],projection[16];
   for(size_t i=0;i<16;i++)
     {
-      modelview[i]=((const float*)cameraViewMatrix)[i];
-      projection[i]=((const float*)cameraProjectionMatrix)[i];
+      modelview[i]=((const float*)mCamera.getModelview())[i];
+      projection[i]=((const float*)mCamera.getProjection())[i];
     }
-  
 
   gluProject(v[0],v[1],v[2],modelview,projection,getViewport(),&x,&y,&z);
-  return AGVector2((int)x,((int)windowHeight-y));
+  return AGVector2((int)x,((int)mCamera.getHeight()-y));
 }
 
 

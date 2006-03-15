@@ -37,7 +37,7 @@ struct Viewport
 #endif
 };
 
-class AntCamera:public AGRubyObject
+class AntCamera//:public AGRubyObject
 {
  public:
   AntCamera(int w,int h);
@@ -52,6 +52,19 @@ class AntCamera:public AGRubyObject
 
   AGVector3 project(const AGVector3 &p) const;
   AGVector3 unProject(const AGVector3 &p) const;
+
+  /// returns absolute camera position
+  AGVector4 getCameraPosition() const;
+  AGVector4 getCameraPositionR() const;
+  AGVector4 getLightPosition() const;
+  AGVector3 getPosition() const;
+
+  int getWidth() const;
+  int getHeight() const;
+
+  AGMatrix4 getLightComplete() const;
+  AGMatrix4 getLightView() const;
+  AGMatrix4 getLightProjection() const;
 
  private:
 

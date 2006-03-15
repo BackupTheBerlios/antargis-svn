@@ -53,9 +53,10 @@ void AntCamera::updateMatrices()
   // 2. init camera projection matrix
   
   glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
   gluPerspective(45.0f, ((float)mWidth)/mHeight, 10.0f, 50.0f);
-  glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjection);
-
+  glGetFloatv(GL_PROJECTION_MATRIX, cameraProjection);
+  glMatrixMode(GL_MODELVIEW);
   if(mPSM)
     {
       // PSM
@@ -149,6 +150,7 @@ void AntCamera::updateMatrices()
     }
 
     // viewport
+  glMatrixMode(GL_MODELVIEW);
     
 }
 
@@ -215,4 +217,52 @@ void AntCamera::setPosition(const AGVector3 &p)
 {
   scenePosition=AGVector4(p,1);
   updateMatrices();
+}
+
+AGVector4 AntCamera::getCameraPosition() const
+{
+  return AGVector4(scenePosition.dim3()+cameraPosition.dim3(),1);
+}
+AGVector4 AntCamera::getCameraPositionR() const
+{
+  return cameraPosition;
+}
+
+AGVector4 AntCamera::getLightPosition() const
+{
+  return AGVector4(scenePosition.dim3()+lightPosition.dim3(),1);
+}
+
+
+AGVector3 AntCamera::getPosition() const
+{
+  return scenePosition.dim3();
+}
+
+int AntCamera::getWidth() const
+{
+  return mWidth;
+}
+int AntCamera::getHeight() const
+{
+  return mHeight;
+}
+
+AGMatrix4 AntCamera::getLightComplete() const
+{
+  float bias[]={0.5f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.5f, 1.0f};        //bias from [-1, 1] to [0, 1]
+  static AGMatrix4 biasMatrix(bias);
+  return biasMatrix*lightProjection*lightView;
+}
+
+AGMatrix4 AntCamera::getLightView() const
+{
+  return lightView;
+}
+AGMatrix4 AntCamera::getLightProjection() const
+{
+  return lightProjection;
 }

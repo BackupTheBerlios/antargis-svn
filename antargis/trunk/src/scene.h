@@ -12,6 +12,7 @@
 #include <map>
 
 #include "scenenode.h"
+#include "ant_camera.h"
 
 struct PickNode
 {
@@ -22,7 +23,7 @@ struct PickNode
   bool operator<(const PickNode &n) const;
 };
 
-
+/*
 struct Viewport
 {
   GLint viewport[4];
@@ -32,7 +33,7 @@ struct Viewport
     return viewport;
   }
 #endif
-};
+};*/
 
 template<class T>
 class QuadTree;
@@ -88,15 +89,13 @@ class Scene:public AGRubyObject
   AGMatrix4 getLightView() const;
   AGMatrix4 getLightProj() const;
   
-  AGMatrix4 getInvCameraView() const;
+  //  AGMatrix4 getInvCameraView() const;
 
   AGVector2 getPosition(const AGVector4 &v) const;
 
   NodeList getCurrentNodes();
 
  private:
-  void init();
-  void calcCameraView();
   void calcShadowMap();
   void drawScene();
   void drawShadow();
@@ -107,19 +106,7 @@ class Scene:public AGRubyObject
 
   Viewport getViewport() const;
 
-
-
-  bool inited;
-
-  bool orthoShadow;
   int mShadow;
-
-  AGVector4 cameraPosition;
-  AGVector4 scenePosition;
-  AGVector4 lightPosition;
-  
-  AGMatrix4 lightViewMatrix,lightProjectionMatrix;
-  AGMatrix4 cameraViewMatrix,cameraProjectionMatrix;
 
   AGMatrix4 cameraPickMatrix;
   
@@ -130,10 +117,10 @@ class Scene:public AGRubyObject
 
   Tree *mTree;
 
+  AntCamera mCamera;
+
   Nodes mNodes;
   NodeSet mNodeSet;
-
-  int windowWidth,windowHeight;
 
   AGVector4 white,black;
 

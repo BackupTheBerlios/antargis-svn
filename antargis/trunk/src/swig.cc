@@ -1155,47 +1155,46 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_Uint8 swig_types[130]
 #define SWIGTYPE_p_VertexArray swig_types[131]
 #define SWIGTYPE_p_VertexArrayShader swig_types[132]
-#define SWIGTYPE_p_Viewport swig_types[133]
-#define SWIGTYPE_p_WaterPiece swig_types[134]
-#define SWIGTYPE_p_const_iterator swig_types[135]
-#define SWIGTYPE_p_float swig_types[136]
-#define SWIGTYPE_p_iterator swig_types[137]
-#define SWIGTYPE_p_p_AnimMesh swig_types[138]
-#define SWIGTYPE_p_p_Mesh swig_types[139]
-#define SWIGTYPE_p_p_NewDecal swig_types[140]
-#define SWIGTYPE_p_p_Node swig_types[141]
-#define SWIGTYPE_p_p_SceneNode swig_types[142]
-#define SWIGTYPE_p_p_Smoke swig_types[143]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[144]
-#define SWIGTYPE_p_p_WaterPiece swig_types[145]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[146]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[147]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[148]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[149]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[150]
-#define SWIGTYPE_p_std__ostringstream swig_types[151]
-#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[152]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[153]
-#define SWIGTYPE_p_std__string swig_types[154]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[155]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[156]
-#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[157]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[158]
-#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[159]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[160]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[161]
-#define SWIGTYPE_p_std__vectorTAntPlane_t swig_types[162]
-#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[163]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[164]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[165]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[166]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[167]
-#define SWIGTYPE_p_std__vectorTfloat_t swig_types[168]
-#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[169]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[170]
-#define SWIGTYPE_p_unsigned_long swig_types[171]
-static swig_type_info *swig_types[173];
-static swig_module_info swig_module = {swig_types, 172, 0, 0, 0, 0};
+#define SWIGTYPE_p_WaterPiece swig_types[133]
+#define SWIGTYPE_p_const_iterator swig_types[134]
+#define SWIGTYPE_p_float swig_types[135]
+#define SWIGTYPE_p_iterator swig_types[136]
+#define SWIGTYPE_p_p_AnimMesh swig_types[137]
+#define SWIGTYPE_p_p_Mesh swig_types[138]
+#define SWIGTYPE_p_p_NewDecal swig_types[139]
+#define SWIGTYPE_p_p_Node swig_types[140]
+#define SWIGTYPE_p_p_SceneNode swig_types[141]
+#define SWIGTYPE_p_p_Smoke swig_types[142]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[143]
+#define SWIGTYPE_p_p_WaterPiece swig_types[144]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[145]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[146]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[147]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[148]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[149]
+#define SWIGTYPE_p_std__ostringstream swig_types[150]
+#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[151]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[152]
+#define SWIGTYPE_p_std__string swig_types[153]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[154]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[155]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[156]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[157]
+#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[158]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[159]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[160]
+#define SWIGTYPE_p_std__vectorTAntPlane_t swig_types[161]
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[162]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[163]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[164]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[165]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[166]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[167]
+#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[168]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[169]
+#define SWIGTYPE_p_unsigned_long swig_types[170]
+static swig_type_info *swig_types[172];
+static swig_module_info swig_module = {swig_types, 171, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -44707,6 +44706,30 @@ free_AntPlane(AntPlane *arg1) {
     delete arg1;
 }
 
+static VALUE
+_wrap_makePlane(int argc, VALUE *argv, VALUE self) {
+    AGVector3 *arg1 = 0 ;
+    AGVector3 *arg2 = 0 ;
+    AGVector3 *arg3 = 0 ;
+    SwigValueWrapper<AntPlane > result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_AGVector3, 0); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_AGVector3, 0); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[2], (void **) &arg3, SWIGTYPE_p_AGVector3, 0); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = makePlane((AGVector3 const &)*arg1,(AGVector3 const &)*arg2,(AGVector3 const &)*arg3);
+    
+    {
+        AntPlane * resultptr;
+        resultptr = new AntPlane((AntPlane &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AntPlane, 1);
+    }
+    return vresult;
+}
+
+
 swig_class cAntFrustum;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -54394,77 +54417,6 @@ free_PickNode(PickNode *arg1) {
     delete arg1;
 }
 
-swig_class cViewport;
-
-static VALUE
-_wrap_Viewport_viewport_set(int argc, VALUE *argv, VALUE self) {
-    Viewport *arg1 = (Viewport *) 0 ;
-    GLint *arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Viewport, 0);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_GLint, 0);
-    {
-        size_t ii;
-        GLint *b = (GLint *) arg1->viewport;
-        for (ii = 0; ii < (size_t)4; ii++) b[ii] = *((GLint *) arg2 + ii);
-    }
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_Viewport_viewport_get(int argc, VALUE *argv, VALUE self) {
-    Viewport *arg1 = (Viewport *) 0 ;
-    GLint *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Viewport, 0);
-    result = (GLint *)(GLint *) ((arg1)->viewport);
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLint,0);
-    return vresult;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_Viewport_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_Viewport_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_Viewport);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_Viewport(int argc, VALUE *argv, VALUE self) {
-    Viewport *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (Viewport *)new Viewport();
-    DATA_PTR(self) = result;
-    
-    return self;
-}
-
-
-static void
-free_Viewport(Viewport *arg1) {
-    delete arg1;
-}
-
 swig_class cScene;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -54882,26 +54834,6 @@ _wrap_Scene_getLightProj(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 0);
     result = ((Scene const *)arg1)->getLightProj();
-    
-    {
-        AGMatrix4 * resultptr;
-        resultptr = new AGMatrix4((AGMatrix4 &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_AGMatrix4, 1);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_Scene_getInvCameraView(int argc, VALUE *argv, VALUE self) {
-    Scene *arg1 = (Scene *) 0 ;
-    AGMatrix4 result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_Scene, 0);
-    result = ((Scene const *)arg1)->getInvCameraView();
     
     {
         AGMatrix4 * resultptr;
@@ -56870,7 +56802,6 @@ static swig_type_info _swigt__p_Uint32 = {"_p_Uint32", "Uint32 *", 0, 0, 0};
 static swig_type_info _swigt__p_Uint8 = {"_p_Uint8", "Uint8 *", 0, 0, 0};
 static swig_type_info _swigt__p_VertexArray = {"_p_VertexArray", "VertexArray *", 0, 0, 0};
 static swig_type_info _swigt__p_VertexArrayShader = {"_p_VertexArrayShader", "VertexArrayShader *", 0, 0, 0};
-static swig_type_info _swigt__p_Viewport = {"_p_Viewport", "Viewport *", 0, 0, 0};
 static swig_type_info _swigt__p_WaterPiece = {"_p_WaterPiece", "WaterPiece *", 0, 0, 0};
 static swig_type_info _swigt__p_const_iterator = {"_p_const_iterator", "const_iterator *", 0, 0, 0};
 static swig_type_info _swigt__p_float = {"_p_float", "float *", 0, 0, 0};
@@ -57044,7 +56975,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Uint8,
   &_swigt__p_VertexArray,
   &_swigt__p_VertexArrayShader,
-  &_swigt__p_Viewport,
   &_swigt__p_WaterPiece,
   &_swigt__p_const_iterator,
   &_swigt__p_float,
@@ -57218,7 +57148,6 @@ static swig_cast_info _swigc__p_Uint32[] = {  {&_swigt__p_Uint32, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_Uint8[] = {  {&_swigt__p_Uint8, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_VertexArray[] = {  {&_swigt__p_VertexArrayShader, _p_VertexArrayShaderTo_p_VertexArray, 0, 0},  {&_swigt__p_VertexArray, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_VertexArrayShader[] = {  {&_swigt__p_VertexArrayShader, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Viewport[] = {  {&_swigt__p_Viewport, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_WaterPiece[] = {  {&_swigt__p_WaterPiece, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_iterator[] = {  {&_swigt__p_const_iterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
@@ -57392,7 +57321,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Uint8,
   _swigc__p_VertexArray,
   _swigc__p_VertexArrayShader,
-  _swigc__p_Viewport,
   _swigc__p_WaterPiece,
   _swigc__p_const_iterator,
   _swigc__p_float,
@@ -59017,6 +58945,7 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAntPlane.klass, "inside", VALUEFUNC(_wrap_AntPlane_inside), -1);
     cAntPlane.mark = 0;
     cAntPlane.destroy = (void (*)(void *)) free_AntPlane;
+    rb_define_module_function(mLibantargis, "makePlane", VALUEFUNC(_wrap_makePlane), -1);
     
     cAntFrustum.klass = rb_define_class_under(mLibantargis, "AntFrustum", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_AntFrustum, (void *) &cAntFrustum);
@@ -59597,15 +59526,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cPickNode.klass, "<", VALUEFUNC(_wrap_PickNode___lt__), -1);
     cPickNode.mark = 0;
     cPickNode.destroy = (void (*)(void *)) free_PickNode;
-    
-    cViewport.klass = rb_define_class_under(mLibantargis, "Viewport", rb_cObject);
-    SWIG_TypeClientData(SWIGTYPE_p_Viewport, (void *) &cViewport);
-    rb_define_alloc_func(cViewport.klass, _wrap_Viewport_allocate);
-    rb_define_method(cViewport.klass, "initialize", VALUEFUNC(_wrap_new_Viewport), -1);
-    rb_define_method(cViewport.klass, "viewport=", VALUEFUNC(_wrap_Viewport_viewport_set), -1);
-    rb_define_method(cViewport.klass, "viewport", VALUEFUNC(_wrap_Viewport_viewport_get), -1);
-    cViewport.mark = 0;
-    cViewport.destroy = (void (*)(void *)) free_Viewport;
     rb_define_module_function(mLibantargis, "disown_Scene", VALUEFUNC(_wrap_disown_Scene), -1);
     
     cScene.klass = rb_define_class_under(mLibantargis, "Scene", ((swig_class *) SWIGTYPE_p_AGRubyObject->clientdata)->klass);
@@ -59633,7 +59553,6 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cScene.klass, "getLightComplete", VALUEFUNC(_wrap_Scene_getLightComplete), -1);
     rb_define_method(cScene.klass, "getLightView", VALUEFUNC(_wrap_Scene_getLightView), -1);
     rb_define_method(cScene.klass, "getLightProj", VALUEFUNC(_wrap_Scene_getLightProj), -1);
-    rb_define_method(cScene.klass, "getInvCameraView", VALUEFUNC(_wrap_Scene_getInvCameraView), -1);
     rb_define_method(cScene.klass, "getPosition", VALUEFUNC(_wrap_Scene_getPosition), -1);
     rb_define_method(cScene.klass, "getCurrentNodes", VALUEFUNC(_wrap_Scene_getCurrentNodes), -1);
     cScene.mark = (void (*)(void *)) general_markfunc;
