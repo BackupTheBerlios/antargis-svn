@@ -66,6 +66,7 @@ none - ATM
 [M] inspect on double click
 [M] fix paint errors on text-elements (wrap-texture)
 [H] add campaign-loading functionality to load-dialog in-game  TRICKY
+[M] rewrite AGEdit - without AGEditLines
 
 [Menu]
 ------------------------------------------------------
@@ -86,7 +87,6 @@ none - ATM
 ------------------------------------------------------
 [H] save old fires
 [H] save triggers!!!
-[H] save scripting data too!!
 [H] localization
 [H] hero should fight too!!!!!!!!!!!!
 [L] each man should have a name and an age

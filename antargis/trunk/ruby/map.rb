@@ -236,6 +236,9 @@ class AntRubyMap<AntMap
 		if not @started
 		#	playStory("start")
 			@started=true
+			if @script
+				@script.eventLevelStarted
+			end
 		end
 	end
 	
@@ -253,6 +256,12 @@ class AntRubyMap<AntMap
 			puts eval(c)
 			cl="#{levelName}::"+n.get("scriptclass")
 			@script=eval(cl).new
+		end
+		if @script
+			sd=n.getChildren("scriptdata")
+			sd.each{|c|
+				@script.loadXML(c)
+			}
 		end
 	end
 
@@ -272,7 +281,10 @@ class AntRubyMap<AntMap
 		}
 		n.set("scriptclass",@scriptClass)
 		n.set("scriptfile",@scriptFile)
-
+		if @script
+			c=n.addChild("scriptdata")
+			@script.saveXML(c)
+		end
 	end
 	
 	def getNext(ent,type)

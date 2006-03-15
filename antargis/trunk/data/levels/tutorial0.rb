@@ -1,12 +1,16 @@
 class Level1<Level
 	def initialize
 		puts "Level inited"
-		#exit
-		start=StoryFlow.new("beginning")
-		start.push("Tutorial","At the beginning of each level your hero is centered.")
-		start.push("Tutorial","You can select him by clicking on him.")
-		start.push("Tutorial","After selecting the hero activate the recruit-button and then click on the tower.")
-		tellStory(start)
+	end
+	def eventLevelStarted
+		if not @started
+			start=StoryFlow.new("beginning")
+			start.push("Tutorial","At the beginning of each level your hero is centered.")
+			start.push("Tutorial","You can select him by clicking on him.")
+			start.push("Tutorial","After selecting the hero activate the recruit-button and then click on the tower.")
+			tellStory(start)
+			@started=true
+		end
 	end
 	def eventHLJobFinished(hero,job)
 		if job.class==AntHeroRecruitJob and hero.getName=="Godrin" and @recruit==nil

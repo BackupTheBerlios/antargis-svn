@@ -1,12 +1,31 @@
 class Level1<Level
 	def initialize
 		puts "Level inited"
-		start=StoryFlow.new("beginning")
-		start.push("Godrin","Slowly you awake.")
-		start.push("Godrin","You remember that you have been attacked, but ...")
-		start.push("Godrin","Anything else is gone. You've lost your memory.")
-		tellStory(start)
 	end
+# 	def saveXML(n)
+# 		super
+# 		n.set("druid",@druid.to_s)
+# 		n.set("druid2",@druid2.to_s)
+# 		n.set("started",@started.to_s)
+# 	end
+# 	def loadXML(n)
+# 		super
+# 		@druid=n.get("druid")=="true"
+# 		@druid2=n.get("druid2")=="true"
+# 		@started=n.get("started")=="true"
+# 	end
+
+	def eventLevelStarted
+		if not @started
+			start=StoryFlow.new("beginning")
+			start.push("Godrin","Slowly you awake.")
+			start.push("Godrin","You remember that you have been attacked, but ...")
+			start.push("Godrin","Anything else is gone. You've lost your memory.")
+			tellStory(start)
+			@started=true
+		end
+	end
+
 	def eventTrigger(hero,t)
 		case t.name
 			when "nogo"
