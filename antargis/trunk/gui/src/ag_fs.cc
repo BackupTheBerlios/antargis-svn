@@ -246,13 +246,95 @@ std::string loadFile(const std::string &pName)
 #endif
 }
 
+std::string gUserDir;
+std::string getUserDir()
+{
+  if(gUserDir=="")
+    {
+#ifdef WIN32
+
+
+      DWORD psize = 0;
+    char dummy[1];
+    BOOL rc = 0;
+    HANDLE processHandle;            /* Current process handle */
+    HANDLE accessToken = NULL;       /* Security handle to process */
+    LPFNGETUSERPROFILEDIR GetUserProfileDirectory;
+    HMODULE lib;
+
+    assert(userDir == NULL);
+
+    /*
+     * GetUserProfileDirectory() is only available on NT 4.0 and later.
+     *  This means Win95/98/ME (and CE?) users have to do without, so for
+     *  them, we'll default to the base directory when we can't get the
+     *  function pointer.
+     */
+
+    lib = LoadLibrary("userenv.dll");
+    if (lib)
+    {
+        /* !!! FIXME: Handle Unicode? */
+        GetUserProfileDirectory = (LPFNGETUSERPROFILEDIR)
+                              GetProcAddress(lib, "GetUserProfileDirectoryA");
+        if (GetUserProfileDirectory)
+        {
+            processHandle = GetCurrentProcess();
+            if (OpenProcessToken(processHandle, TOKEN_QUERY, &accessToken))
+            {
+                /*
+                 * Should fail. Will write the size of the profile path in
+                 *  psize. Also note that the second parameter can't be
+                 *  NULL or the function fails.
+                 */
+                rc = GetUserProfileDirectory(accessToken, dummy, &psize);
+                assert(!rc);  /* success?! */
+
+                /* Allocate memory for the profile directory */
+                userDir = (char *) allocator.Malloc(psize);
+                if (userDir != NULL)
+                {
+                    if (!GetUserProfileDirectory(accessToken, userDir, &psize))
+                    {
+                        allocator.Free(userDir);
+                        userDir = NULL;
+                    } /* if */
+                } /* else */
+            } /* if */
+
+            CloseHandle(accessToken);
+        } /* if */
+
+        FreeLibrary(lib);
+    } /* if */
+
+    if (userDir == NULL)  /* couldn't get profile for some reason. */
+    {
+
+        /* Might just be a non-NT system; resort to the basedir. */
+        userDir = getExePath(NULL);
+        BAIL_IF_MACRO(userDir == NULL, NULL, 0); /* STILL failed?! */
+    } /* if */
+
+    return(1);  /* We made it: hit the showers. */
+
+
+
+
+
+
+#else
+      gUserDir=getenv("HOME");
+#endif
+    }
+  return gUserDir;
+}
+
+
+
 std::string getWriteDir()
 {
-#ifdef WIN32
-  return "";
-#else
-  return std::string(getenv("HOME"))+"/.Antargis";
-#endif
+  return getUserDir()+"/.Antargis";
 }
 
 void saveFile(const std::string &pName,const std::string &pContent)
