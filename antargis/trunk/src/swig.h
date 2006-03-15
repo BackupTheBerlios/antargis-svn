@@ -816,8 +816,6 @@ public:
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
     virtual ~SwigDirector_AGListBox();
-    virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual bool eventMouseButtonDown(AGEvent *m);
     virtual bool eventMouseMotion(AGEvent *m);
     virtual bool signal(AGEvent *m);
     virtual bool acceptEvent(SDL_Event const *pEvent);
@@ -829,6 +827,8 @@ public:
     virtual bool eventResize(AGEvent *m);
     virtual bool eventKeyDown(AGEvent *m);
     virtual bool eventMouseClick(AGEvent *m);
+    virtual bool eventMouseButtonDown(AGEvent *m);
+    virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseEnter();
     virtual void clear();
     virtual void drawAll(AGPainter &p);

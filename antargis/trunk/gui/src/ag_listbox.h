@@ -54,6 +54,8 @@ class AGListBox:public AGWidget
 
   virtual void draw(AGPainter &p);
   virtual bool eventMouseClick(AGEvent *m);
+  virtual bool eventMouseButtonDown(AGEvent *m);
+  virtual bool eventMouseButtonUp(AGEvent *m);
 
   void clearList();
 

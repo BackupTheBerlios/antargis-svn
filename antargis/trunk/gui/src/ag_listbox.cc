@@ -209,3 +209,22 @@ void AGListBox::clearList()
   mY=mSelected=0;
   mItems.clear();
 }
+
+bool AGListBox::eventMouseButtonDown(AGEvent *m)
+{
+  // ensure that event is eaten
+  bool r=AGWidget::eventMouseButtonDown(m);
+  if(m->isSDLEvent())
+    if(getScreenRect().contains(m->getMousePosition()))
+      return true;
+  return r;
+}
+bool AGListBox::eventMouseButtonUp(AGEvent *m)
+{
+  // ensure that event is eaten
+  bool r=AGWidget::eventMouseButtonUp(m);
+  if(m->isSDLEvent())
+    if(getScreenRect().contains(m->getMousePosition()))
+      return true;
+  return r;
+}

@@ -50,7 +50,7 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-[VH] check if savedir exists!!! - on windows, too!
+none - ATM
 
 [Gui/View]
 ------------------------------------------------------
@@ -68,10 +68,12 @@ ARTS
 [L] add zoom with scroll wheel
 [M] inspect on double click
 [M] fix paint errors on text-elements (wrap-texture)
+[H] add campaign-loading functionality to load-dialog in-game
 
 [Menu]
 ------------------------------------------------------
 [L] some images for the campaigns
+[H] quit load screen, when loading a game, so that you won't return there
 
 [Graphics]
 ------------------------------------------------------
@@ -85,6 +87,7 @@ ARTS
 
 [Game]
 ------------------------------------------------------
+[H] save old fires
 [H] save triggers!!!
 [H] save scripting data too!!
 [H] localization

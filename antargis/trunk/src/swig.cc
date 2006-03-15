@@ -10178,36 +10178,6 @@ bool SwigDirector_AGListBox::redraw() const {
 SwigDirector_AGListBox::~SwigDirector_AGListBox() {
 }
 
-bool SwigDirector_AGListBox::eventMouseButtonUp(AGEvent *m) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseButtonUp(m);
-    }
-    obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
-bool SwigDirector_AGListBox::eventMouseButtonDown(AGEvent *m) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return AGWidget::eventMouseButtonDown(m);
-    }
-    obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
-    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return (bool) c_result;
-}
-
-
 bool SwigDirector_AGListBox::eventMouseMotion(AGEvent *m) {
     VALUE obj0 = Qnil ;
     bool c_result ;
@@ -10368,6 +10338,36 @@ bool SwigDirector_AGListBox::eventMouseClick(AGEvent *m) {
     }
     obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
     result = rb_funcall(swig_get_self(), rb_intern("eventMouseClick"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGListBox::eventMouseButtonDown(AGEvent *m) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListBox::eventMouseButtonDown(m);
+    }
+    obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonDown"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return (bool) c_result;
+}
+
+
+bool SwigDirector_AGListBox::eventMouseButtonUp(AGEvent *m) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return AGListBox::eventMouseButtonUp(m);
+    }
+    obj0 = SWIG_NewPointerObj((void *) m, SWIGTYPE_p_AGEvent,0);
+    result = rb_funcall(swig_get_self(), rb_intern("eventMouseButtonUp"), 1,obj0);
     c_result = (bool) RTEST(result);
     return (bool) c_result;
 }
@@ -39697,6 +39697,48 @@ _wrap_AGListBox_eventMouseClick(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_AGListBox_eventMouseButtonDown(int argc, VALUE *argv, VALUE self) {
+    AGListBox *arg1 = (AGListBox *) 0 ;
+    AGEvent *arg2 = (AGEvent *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListBox, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGEvent, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventMouseButtonDown(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_AGListBox_eventMouseButtonUp(int argc, VALUE *argv, VALUE self) {
+    AGListBox *arg1 = (AGListBox *) 0 ;
+    AGEvent *arg2 = (AGEvent *) 0 ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_AGListBox, 0);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_AGEvent, 0);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->eventMouseButtonUp(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_AGListBox_clearList(int argc, VALUE *argv, VALUE self) {
     AGListBox *arg1 = (AGListBox *) 0 ;
     
@@ -58686,6 +58728,8 @@ SWIGEXPORT void Init_libantargis(void) {
     rb_define_method(cAGListBox.klass, "sigDoubleClick", VALUEFUNC(_wrap_AGListBox_sigDoubleClick_get), -1);
     rb_define_method(cAGListBox.klass, "draw", VALUEFUNC(_wrap_AGListBox_draw), -1);
     rb_define_method(cAGListBox.klass, "eventMouseClick", VALUEFUNC(_wrap_AGListBox_eventMouseClick), -1);
+    rb_define_method(cAGListBox.klass, "eventMouseButtonDown", VALUEFUNC(_wrap_AGListBox_eventMouseButtonDown), -1);
+    rb_define_method(cAGListBox.klass, "eventMouseButtonUp", VALUEFUNC(_wrap_AGListBox_eventMouseButtonUp), -1);
     rb_define_method(cAGListBox.klass, "clearList", VALUEFUNC(_wrap_AGListBox_clearList), -1);
     cAGListBox.mark = (void (*)(void *)) general_markfunc;
     cAGListBox.destroy = (void (*)(void *)) free_AGListBox;
