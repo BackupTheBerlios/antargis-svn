@@ -17,7 +17,11 @@
 					<edit col="1" tabindex="0" theme2="antButton" row="1" name="Directory" text="savegames"/>
 					<button theme="antButton" col="2" row="1" name="screen" caption="..."/>
 				</table>
-				<listBox name="Files" row="1" col="0"/>
+				<cell row="1" col="0">
+					<frame border="button.border.normal">
+						<listBox name="Files"/>
+					</frame>
+				</cell>
 				<table col="0" row="2" cols="2" rows="1">
 					<button col="1" row="0" name="ok" theme="antButton" caption="Ok"/>
 					<button col="0" row="0" name="cancel" theme="antButton" caption="Cancel"/>

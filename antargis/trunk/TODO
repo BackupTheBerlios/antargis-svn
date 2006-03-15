@@ -62,13 +62,10 @@ none - ATM
 [H] fix cut tooltips
 [L] add Framebuffer objects
 [L] fix AGMenu*
-[H] left-click is always "select" (second click is inspect)
-		right-click is attack or go to (does also select as target)
-		left-click select a hero eventually
 [L] add zoom with scroll wheel
 [M] inspect on double click
 [M] fix paint errors on text-elements (wrap-texture)
-[H] add campaign-loading functionality to load-dialog in-game
+[H] add campaign-loading functionality to load-dialog in-game  TRICKY
 
 [Menu]
 ------------------------------------------------------
