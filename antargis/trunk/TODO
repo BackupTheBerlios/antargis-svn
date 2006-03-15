@@ -50,7 +50,7 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-[VH] CONTROL ALL eventHandlers! and return bools
+[M] CONTROL ALL eventHandlers! and return bools - done??
 
 
 [Gui/View]
@@ -59,7 +59,6 @@ ARTS
 [M] fix picking for men (AnimMesh)
 [L] display for hunger/food
 [L] scrolling on borders when in fullscreen
-[H] load/save campaign
 [H] fix cut tooltips
 [L] add Framebuffer objects
 [L] fix AGMenu*
