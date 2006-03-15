@@ -211,8 +211,10 @@ class AntMenuApp <AGApplication
 		id=@loadMenu.getChild("list").getSelectedID
 		puts "LLLLLLLLLLLLLLOAD"
 		puts id
-		c=Campaign.new(getWriteDir+"/savegames/"+id)
-		continueCampaign(c)
+		if id!=""
+			c=Campaign.new(getWriteDir+"/savegames/"+id)
+			continueCampaign(c)
+		end
 	end
 end
 
