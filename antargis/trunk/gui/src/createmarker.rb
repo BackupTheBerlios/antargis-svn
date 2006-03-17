@@ -137,6 +137,34 @@ deriveList.keys.each{|s|
 		file.puts " }"
 		file.puts " else vresult=Qnil;"
 		file.puts "}"
+
+
+	if true #false
+		file.puts "%typemap(directorin) #{s}*{"
+		file.puts " if($1)"
+		file.puts " {"
+		file.puts "  if($1->mRubyObject)"
+		file.puts "    $input=$1->mRUBY;"
+		file.puts "  else"
+		file.puts "   {"
+		file.puts "     if(false);"
+		for i in 0..30
+			derivations.each{|a,cs|
+				if cs.length==i && derivations[s].member?(a)
+					#puts s+"  "+a+" "+i.to_s
+					file.puts "else if(dynamic_cast<#{a}*>($1))"
+					file.puts "  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_#{a},0);"
+				end
+			}
+		end
+		file.puts "   else"
+		file.puts "     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_#{s},0);"
+		file.puts "   }"
+		file.puts " }"
+		file.puts " else $input=Qnil;"
+		file.puts "}"
+end
+
 	end
 }
 # normal typemaps

@@ -69,8 +69,6 @@ class FightJob:public Job
   {
     AntEntity *mTarget;
     float fightDistance;
-    float strength;
-    //    float speed;
 
   public:
     FightJob(int p,AntEntity *pTarget);

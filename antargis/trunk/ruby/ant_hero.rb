@@ -26,15 +26,20 @@ require 'ant_hljobs.rb'
 require 'ant_boss.rb'
 require 'ant_fire.rb'
 require 'ant_ring.rb'
+require 'ant_manbase.rb'
 
 class AntHero<AntBoss
+	include AntManBase
+
+	attr_reader :meshState, :dead
 	def initialize
 		super
+		@men.push(self)
 		setProvide("hero",true)
 		@appearance="hero"
 		getMap.setLight(self)
 		setMinimapColor(AGColor.new(0xFF,0,0))
-#		setMyMesh
+		@meshStand="stand"
 	end
 	def setAppearance(a)
 		@appearance=a
@@ -56,16 +61,8 @@ class AntHero<AntBoss
 		@portrait=node.get("portrait")
 	end
 	
-	def getEnergy
-		if @job and @job.class==AntHeroFightJob
-			return @job.getEnergy
-		else
-			return 0
-		end
-	end
-	
-
 	def noHLJob
+		puts "noHLJob"
 		if @player
 			@player.assignJob(self)
 			#stopFireSound
@@ -100,24 +97,7 @@ class AntHero<AntBoss
 	end
 	
 	def assignJob(man)
-		if @fighting then
-			checkFight
-		elsif @job == nil or @job.class==AntHeroRestJob then
-			# rest job
-			formationPos=getSitFormation(man)
-			if (man.getPos2D-formationPos).length2<0.2 then
-				if not ["sitdown","sit"].member?(man.meshState)
-					man.sitDown
-				else
-					man.newRestJob(5)
-					man.setMeshState("sit")
-				end
-			else
-				man.newMoveJob(0,formationPos,0)
-			end
-		else
-			checkHLJobEnd(man)
-		end
+		checkHLJobEnd(man)
 	end	
 	def moveHome(man)	
 		pos=getSitFormation(man)
@@ -162,10 +142,10 @@ class AntHero<AntBoss
 		if man==self
 			return getPos2D
 		end
-		id=@men.index(man)
+		id=@men.index(man)-1  # first index is hero himself
 		
 		if id then
-			angle=id.to_f/@men.length*Math::PI*2
+			angle=id.to_f/(@men.length-1)*Math::PI*2
 			radius=1
 			return AGVector2.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
 		else
@@ -178,7 +158,10 @@ class AntHero<AntBoss
 	end
 	
 	def getWalkFormation(man,dir)
-		id=@men.index(man)
+		if man==self
+			return AGVector2.new(0,0)
+		end
+		id=@men.index(man)-1  # first index is hero himself
 		if id
 			lineWidth=0.7
 			if @men.length>30
@@ -222,6 +205,7 @@ class AntHero<AntBoss
 	end
 	
 	def eventAttacked(by)
+		puts "eventAttacked #{by}"
 		newHLDefendJob(by)
 	end
 	
@@ -229,6 +213,10 @@ class AntHero<AntBoss
 		super
 		dputs "ASSIGNJOB"
 		setFire(false)
+	end
+
+	def setMeshState(state)
+		puts "FIXME: implement setMeshState(.)"
 	end
 
  	def setupMesh

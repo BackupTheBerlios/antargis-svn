@@ -44,9 +44,8 @@ class IntroApp<AGApplication
 	end
 	
 	def eventKeyDown(e)
-		super
 		cancel
-		return true
+		return super
 	end
 	
 	def cancel

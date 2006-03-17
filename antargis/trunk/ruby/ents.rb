@@ -61,6 +61,13 @@ class AntMyEntity<AntEntity
 	def getPlayer
 		nil
 	end
+	def newFightJob(p,target)
+		@fightTarget=target
+		super
+	end
+	def fightTarget
+		@fightTarget
+	end
 end
 
 

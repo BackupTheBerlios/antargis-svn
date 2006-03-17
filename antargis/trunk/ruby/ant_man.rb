@@ -25,6 +25,8 @@
 # WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
 # could be that it has something to do with Init_Stack ???
 
+require 'ant_manbase.rb'
+
 
 class AntNewAngel<AntMyEntity
 
@@ -57,6 +59,8 @@ end
 
 
 class AntNewMan<AntMyEntity
+	include AntManBase
+
 	attr_reader :meshState, :dead
 	
 	def initialize()
@@ -73,24 +77,11 @@ class AntNewMan<AntMyEntity
 		setName(genName)
 	end
 	
-	def setMode(mode)
-		@mode=mode
-	end
-	def getMode
-		@mode
-	end
-	
 	##########################
 	# EVENTS
 	##########################
 	def eventNoJob
 		eventJobFinished
-	end
-	
-	def eventDefeated
-		if @boss then
-			@boss.eventManDefeated(self)
-		end
 	end
 	
 	def eventDie
@@ -146,6 +137,12 @@ class AntNewMan<AntMyEntity
 			boss.assignJob(self)
 		end
 	end	
+
+	def eventHaveDefeated(e)
+		puts "#{getName} has defeated #{e.getName}"
+		@boss.eventHaveDefeated(e)
+	end
+
 	
 	##########################
 	# setBoss
@@ -203,13 +200,8 @@ class AntNewMan<AntMyEntity
 	
 	def newRestJob(time)
 		vis=checkHideAtHome
-		#if vis
-			setStandAnim
-		#end
-		#setVisible(vis)
-		puts "newRestJob"
-		puts time.class
-		super(time.to_i)
+		setStandAnim
+		super(time)
 	end
 	
 	def newFightJob(d,ptarget)
@@ -300,12 +292,7 @@ class AntNewMan<AntMyEntity
 		end
 	end
 	
-	def sitDown
-		newRestJob(0.4)
-		setMeshState("sitdown")
 
-	end
-			
 	
 	def saveXML(node)
 		super(node)
@@ -318,8 +305,10 @@ class AntNewMan<AntMyEntity
 	
 	def animationEvent(name)
 		case name
-			when "hackaxe","pick","sword","ugh"
+			when "hackaxe","pick","sword"
 				playSound(name)
+			when "ugh"
+				#playSound(name)
 		end
 	end
 end

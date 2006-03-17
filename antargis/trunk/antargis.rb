@@ -239,7 +239,11 @@ class AntGameApp <AntRubyView
 	def setHeroName(name,num)
 		puts "setHeroName..."
 		@layout.getChild("HeroName#{num}").setText(name)
+		@layout.getChild("HeroBar#{num}").setVisible((name!=""))
 		puts "setHeroName!"
+	end
+	def setHeroEnergy(hero,num)
+		@layout.getChild("HeroBar#{num}").setHero(hero)
 	end
 	def setHero(flag,num)
 		name="hero#{num}"
@@ -259,6 +263,7 @@ class AntGameApp <AntRubyView
 				setHero(true,i)
 				setHeroName(hs[i].getName,i)
 				setHeroImage(hs[i].getImage,i)
+				setHeroEnergy(hs[i],i)
 			else
 				setHero(false,i)
 				setHeroImage(getTextureCache.get("data/gui/portraits/none.png"),i)

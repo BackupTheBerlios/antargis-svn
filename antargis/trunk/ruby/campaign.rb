@@ -91,7 +91,6 @@ class CutSceneDisplay<AGApplication
 		return true
 	end
 	def eventKeyDown(e)
-		super
 		eventQuit
 # 		if @text==@ctext
 # 			tryQuit
@@ -99,7 +98,7 @@ class CutSceneDisplay<AGApplication
 # 			@ctext=@text
 # 			setTextForReal(@ctext)
 # 		end
-		return true
+		return super
 	end
 	
 	def setImage(image)

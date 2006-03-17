@@ -1312,6 +1312,7 @@ public:
     virtual void mark();
     virtual void animationEvent(std::string const &pName);
     virtual void clear();
+    virtual void newRestJob(float pTime);
     virtual void move(float pTime);
     virtual void eventNoJob();
     virtual void delJob();
@@ -1329,8 +1330,8 @@ public:
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void newFightJob(int p, AntEntity *target);
     virtual void eventGotFight(AntEntity *pOther);
+    virtual void eventHaveDefeated(AntEntity *e);
     virtual void setPos(AGVector2 const &p);
-    virtual void newRestJob(int pTime);
 };
 
 

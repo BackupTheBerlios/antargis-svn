@@ -85,6 +85,12 @@ ARTS
 
 [Game]
 ------------------------------------------------------
+[VVH] check recruiting
+[VVH] check dying of men/hero
+[VVH] add loyalty ???
+[VVH] hunger,etc.
+[VVH] make hero-displays 
+[VH] sure to dismiss dialog!
 [M] save entity age (AntNewEntity) and give it in inspect-dialog
 [H] localization
 [H] hero should fight too!!!!!!!!!!!!

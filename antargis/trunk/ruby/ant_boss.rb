@@ -46,7 +46,7 @@ class AntBoss<AntMyEntity
 	end
 # for recruiting
 	def takeMan
-		m=@men[0]
+		m=@men[-1]
 		removeMan(m)
 		return m
 	end
@@ -61,17 +61,9 @@ class AntBoss<AntMyEntity
 	end
 	
 	def eventNoJob
-		puts "eventNoJob"
-		checkHLJobEnd(nil)
-		checkCreateMen
-		if @job && @job.finished
-			@job=nil
-		end
-		if @job==nil
-			noHLJob
-		else
-			@job.check(self)
-		end
+		puts "eventNoJob "+self.class.to_s+" "+@job.to_s
+		checkHLJobEnd(self)
+ 		checkCreateMen
 	end
 
 	def checkCreateMen
@@ -91,6 +83,13 @@ class AntBoss<AntMyEntity
 	end
 	
 	def newHLDefendJob(target)
+		puts "DEFEND!!!"
+		if @job
+			if @job.is_a?(AntHeroFightJob)
+				puts "I'm alread fighting!"
+				return # already fighting
+			end
+		end
 		@job=AntHeroFightJob.new(self,target,true) # FIXME: change this, so that fighting is stopped as soon as other stops
 	end
 	def newHLRestJob(time)
@@ -129,9 +128,19 @@ class AntBoss<AntMyEntity
 	end
 	
 	def eventManDefeated(man)
-		dputs "SIGDEFEATED"
+		dputs "AntBoss:eventManDefeated: #{man} #{man.getName}"
 		if @job and @job.class==AntHeroFightJob
 			@job.defeated(man)
+		end
+	end
+
+	def getBossEnergy
+		if @job and @job.class==AntHeroFightJob
+			return @job.getEnergy
+		else
+			e=0
+			@men.each{|m|e+=m.getMorale}
+			return e*0.1
 		end
 	end
 
@@ -167,7 +176,7 @@ class AntBoss<AntMyEntity
 	
 	def hovered=(s)
 		@hovered=s
-		puts @hovered,@selected
+		#puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @hovered and not @selected
 			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
@@ -217,10 +226,24 @@ class AntBoss<AntMyEntity
 				@job=nil 
 			end
 		end
+		if @job==nil
+			noHLJob
+		end
 	end
 	def setAggression(a)
 		super
-		getMen.each{|m|m.setAggression(a)}
+		getMen.select{|m|(not m.is_a?(AntBoss))}.each{|m|m.setAggression(a)}
 	end	
+	def getSitFormation(man)
+		return getPos2D
+	end
+
+	def eventHaveDefeated(e)
+		puts "#{getName} has defeated #{e.getName}"
+		if @job.is_a?(AntHeroFightJob)
+			@job.haveDefeated(e)
+		end
+	end
 end
+
 

@@ -3845,7 +3845,60 @@ void SwigDirector_AGWidget::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -3858,7 +3911,60 @@ void SwigDirector_AGWidget::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -3871,7 +3977,60 @@ void SwigDirector_AGWidget::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -4550,7 +4709,60 @@ void SwigDirector_AGColorButton::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -4563,7 +4775,60 @@ void SwigDirector_AGColorButton::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -4576,7 +4841,60 @@ void SwigDirector_AGColorButton::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -5266,7 +5584,60 @@ void SwigDirector_AGGLWidget::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -5279,7 +5650,60 @@ void SwigDirector_AGGLWidget::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -5292,7 +5716,60 @@ void SwigDirector_AGGLWidget::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -6153,7 +6630,60 @@ void SwigDirector_AGLayout::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -6166,7 +6696,60 @@ void SwigDirector_AGLayout::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -6179,7 +6762,60 @@ void SwigDirector_AGLayout::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -6918,7 +7554,60 @@ void SwigDirector_AGDialog::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -6931,7 +7620,60 @@ void SwigDirector_AGDialog::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -6944,7 +7686,60 @@ void SwigDirector_AGDialog::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -8049,7 +8844,60 @@ void SwigDirector_AGButton::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -8062,7 +8910,60 @@ void SwigDirector_AGButton::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -8075,7 +8976,60 @@ void SwigDirector_AGButton::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -8754,7 +9708,60 @@ void SwigDirector_AGText::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -8767,7 +9774,60 @@ void SwigDirector_AGText::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -8780,7 +9840,60 @@ void SwigDirector_AGText::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -9459,7 +10572,60 @@ void SwigDirector_AGCaption::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -9472,7 +10638,60 @@ void SwigDirector_AGCaption::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -9485,7 +10704,60 @@ void SwigDirector_AGCaption::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -10196,7 +11468,60 @@ void SwigDirector_AGCheckBox::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -10209,7 +11534,60 @@ void SwigDirector_AGCheckBox::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -10222,7 +11600,60 @@ void SwigDirector_AGCheckBox::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -10961,7 +12392,60 @@ void SwigDirector_AGEdit::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -10974,7 +12458,60 @@ void SwigDirector_AGEdit::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -10987,7 +12524,60 @@ void SwigDirector_AGEdit::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -12392,7 +13982,60 @@ void SwigDirector_AGImage::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -12405,7 +14048,60 @@ void SwigDirector_AGImage::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -12418,7 +14114,60 @@ void SwigDirector_AGImage::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -12456,7 +14205,60 @@ AGWidget *SwigDirector_AGLayoutCreator::create(AGWidget *pParent, AGRect2 const 
   if (swig_get_up()) {
     return AGLayoutCreator::create(pParent,pRect,pNode);
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(pParent), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(pParent)
+    {
+      if(pParent->mRubyObject)
+      obj0=pParent->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(pParent))
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)pParent, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(&pRect), SWIGTYPE_p_AGRect2,  0 );
   obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(&pNode), SWIGTYPE_p_Node,  0 );
   result = rb_funcall(swig_get_self(), rb_intern("create"), 3,obj0,obj1,obj2);
@@ -13133,7 +14935,60 @@ void SwigDirector_AGListBox::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -13146,7 +15001,60 @@ void SwigDirector_AGListBox::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -13159,7 +15067,60 @@ void SwigDirector_AGListBox::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -14021,7 +15982,60 @@ void SwigDirector_AGSound::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -14034,7 +16048,60 @@ void SwigDirector_AGSound::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -14047,7 +16114,60 @@ void SwigDirector_AGSound::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -14739,7 +16859,60 @@ void SwigDirector_AGRadioGroup::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -14752,7 +16925,60 @@ void SwigDirector_AGRadioGroup::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -14765,7 +16991,60 @@ void SwigDirector_AGRadioGroup::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -15476,7 +17755,60 @@ void SwigDirector_AGRadio::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -15489,7 +17821,60 @@ void SwigDirector_AGRadio::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -15502,7 +17887,60 @@ void SwigDirector_AGRadio::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -16440,7 +18878,60 @@ void SwigDirector_AGTable::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -16453,7 +18944,60 @@ void SwigDirector_AGTable::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -16466,7 +19010,60 @@ void SwigDirector_AGTable::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -17154,7 +19751,60 @@ void SwigDirector_AGWindow::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -17167,7 +19817,60 @@ void SwigDirector_AGWindow::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -17180,7 +19883,60 @@ void SwigDirector_AGWindow::addChild(AGWidget *w) {
     AGWindow::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -18271,6 +21027,19 @@ void SwigDirector_AntEntity::clear() {
 }
 
 
+void SwigDirector_AntEntity::newRestJob(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AntEntity::newRestJob(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("newRestJob"), 1,obj0);
+}
+
+
 void SwigDirector_AntEntity::move(float pTime) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -18328,7 +21097,20 @@ void SwigDirector_AntEntity::newFetchJob(int p, AntEntity *pTarget, std::string 
     return;
   }
   obj0 = SWIG_From_int(static_cast<int >(p));
-  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(pTarget), SWIGTYPE_p_AntEntity,  0 );
+  {
+    if(pTarget)
+    {
+      if(pTarget->mRubyObject)
+      obj1=pTarget->mRUBY;
+      else
+      {
+        if(false);
+        else
+        obj1 = SWIG_NewPointerObj((void *)pTarget, SWIGTYPE_p_AntEntity,0);
+      }
+    }
+    else obj1=Qnil;
+  }
   obj2=rb_str_new2(pWhat.c_str());
   result = rb_funcall(swig_get_self(), rb_intern("newFetchJob"), 3,obj0,obj1,obj2);
 }
@@ -18470,7 +21252,20 @@ void SwigDirector_AntEntity::newFightJob(int p, AntEntity *target) {
     return;
   }
   obj0 = SWIG_From_int(static_cast<int >(p));
-  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(target), SWIGTYPE_p_AntEntity,  0 );
+  {
+    if(target)
+    {
+      if(target->mRubyObject)
+      obj1=target->mRUBY;
+      else
+      {
+        if(false);
+        else
+        obj1 = SWIG_NewPointerObj((void *)target, SWIGTYPE_p_AntEntity,0);
+      }
+    }
+    else obj1=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("newFightJob"), 2,obj0,obj1);
 }
 
@@ -18483,8 +21278,47 @@ void SwigDirector_AntEntity::eventGotFight(AntEntity *pOther) {
     AntEntity::eventGotFight(pOther);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(pOther), SWIGTYPE_p_AntEntity,  0 );
+  {
+    if(pOther)
+    {
+      if(pOther->mRubyObject)
+      obj0=pOther->mRUBY;
+      else
+      {
+        if(false);
+        else
+        obj0 = SWIG_NewPointerObj((void *)pOther, SWIGTYPE_p_AntEntity,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("eventGotFight"), 1,obj0);
+}
+
+
+void SwigDirector_AntEntity::eventHaveDefeated(AntEntity *e) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AntEntity::eventHaveDefeated(e);
+    return;
+  }
+  {
+    if(e)
+    {
+      if(e->mRubyObject)
+      obj0=e->mRUBY;
+      else
+      {
+        if(false);
+        else
+        obj0 = SWIG_NewPointerObj((void *)e, SWIGTYPE_p_AntEntity,0);
+      }
+    }
+    else obj0=Qnil;
+  }
+  result = rb_funcall(swig_get_self(), rb_intern("eventHaveDefeated"), 1,obj0);
 }
 
 
@@ -18498,19 +21332,6 @@ void SwigDirector_AntEntity::setPos(AGVector2 const &p) {
   }
   obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&p), SWIGTYPE_p_AGVector2,  0 );
   result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
-}
-
-
-void SwigDirector_AntEntity::newRestJob(int pTime) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AntEntity::newRestJob(pTime);
-    return;
-  }
-  obj0 = SWIG_From_int(static_cast<int >(pTime));
-  result = rb_funcall(swig_get_self(), rb_intern("newRestJob"), 1,obj0);
 }
 
 
@@ -19352,7 +22173,20 @@ void SwigDirector_AntMap::insertEntity(AntEntity *e) {
     AntMap::insertEntity(e);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(e), SWIGTYPE_p_AntEntity,  0 );
+  {
+    if(e)
+    {
+      if(e->mRubyObject)
+      obj0=e->mRUBY;
+      else
+      {
+        if(false);
+        else
+        obj0 = SWIG_NewPointerObj((void *)e, SWIGTYPE_p_AntEntity,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("insertEntity"), 1,obj0);
 }
 
@@ -19365,7 +22199,20 @@ void SwigDirector_AntMap::removeEntity(AntEntity *p) {
     AntMap::removeEntity(p);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(p), SWIGTYPE_p_AntEntity,  0 );
+  {
+    if(p)
+    {
+      if(p->mRubyObject)
+      obj0=p->mRUBY;
+      else
+      {
+        if(false);
+        else
+        obj0 = SWIG_NewPointerObj((void *)p, SWIGTYPE_p_AntEntity,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeEntity"), 1,obj0);
 }
 
@@ -20328,7 +23175,60 @@ void SwigDirector_MiniMap::addChild(AGWidget *w) {
     AGWidget::addChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChild"), 1,obj0);
 }
 
@@ -20341,7 +23241,60 @@ void SwigDirector_MiniMap::addChildBack(AGWidget *w) {
     AGWidget::addChildBack(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("addChildBack"), 1,obj0);
 }
 
@@ -20354,7 +23307,60 @@ void SwigDirector_MiniMap::removeChild(AGWidget *w) {
     AGWidget::removeChild(w);
     return;
   }
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(w), SWIGTYPE_p_AGWidget,  0 );
+  {
+    if(w)
+    {
+      if(w->mRubyObject)
+      obj0=w->mRUBY;
+      else
+      {
+        if(false);
+        else if(dynamic_cast<AGCaption*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCaption,0);
+        else if(dynamic_cast<AGWindow*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWindow,0);
+        else if(dynamic_cast<AGSound*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSound,0);
+        else if(dynamic_cast<AGDialog*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGDialog,0);
+        else if(dynamic_cast<AGImage*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGImage,0);
+        else if(dynamic_cast<AGRadioGroup*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadioGroup,0);
+        else if(dynamic_cast<AGGLWidget*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGGLWidget,0);
+        else if(dynamic_cast<AGEdit*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGEdit,0);
+        else if(dynamic_cast<AGListBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGListBox,0);
+        else if(dynamic_cast<AGSubMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGSubMenu,0);
+        else if(dynamic_cast<AGColorButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGColorButton,0);
+        else if(dynamic_cast<AGMenu*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenu,0);
+        else if(dynamic_cast<MiniMap*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_MiniMap,0);
+        else if(dynamic_cast<AGRadio*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGRadio,0);
+        else if(dynamic_cast<AGText*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGText,0);
+        else if(dynamic_cast<AGCheckBox*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGCheckBox,0);
+        else if(dynamic_cast<AGMenuItem*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGMenuItem,0);
+        else if(dynamic_cast<AGLayout*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGLayout,0);
+        else if(dynamic_cast<AGButton*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGButton,0);
+        else if(dynamic_cast<AGTable*>(w))
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGTable,0);
+        else
+        obj0 = SWIG_NewPointerObj((void *)w, SWIGTYPE_p_AGWidget,0);
+      }
+    }
+    else obj0=Qnil;
+  }
   result = rb_funcall(swig_get_self(), rb_intern("removeChild"), 1,obj0);
 }
 
@@ -68764,10 +71770,10 @@ fail:
 SWIGINTERN VALUE
 _wrap_AntEntity_newRestJob(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
-  int arg2 ;
+  float arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  int val2 ;
+  float val2 ;
   int ecode2 = 0 ;
   Swig::Director *director = 0;
   
@@ -68779,11 +71785,11 @@ _wrap_AntEntity_newRestJob(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "newRestJob" "', argument " "1"" of type '" "AntEntity *""'"); 
   }
   arg1 = reinterpret_cast<AntEntity * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[0], &val2);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "newRestJob" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "newRestJob" "', argument " "2"" of type '" "float""'");
   } 
-  arg2 = static_cast<int >(val2);
+  arg2 = static_cast<float >(val2);
   director = dynamic_cast<Swig::Director *>(arg1);
   if (director && (director->swig_get_self() == self)) director->swig_set_up();
   try {
@@ -69662,6 +72668,88 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AntEntity_eventHaveDefeated(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  AntEntity *arg2 = (AntEntity *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "eventHaveDefeated" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "eventHaveDefeated" "', argument " "2"" of type '" "AntEntity *""'"); 
+  }
+  arg2 = reinterpret_cast<AntEntity * >(argp2);
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->eventHaveDefeated(arg2);
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_sigDefeated(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sigDefeated" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  (arg1)->sigDefeated();
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_sigJobFinished(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sigJobFinished" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  (arg1)->sigJobFinished();
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AntEntity_getEnergy(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   float result;
@@ -69705,6 +72793,56 @@ _wrap_AntEntity_getMorale(int argc, VALUE *argv, VALUE self) {
   result = (float)((AntEntity const *)arg1)->getMorale();
   
   vresult = SWIG_From_float(static_cast<float >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_canFight(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "canFight" "', argument " "1"" of type '" "AntEntity const *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  result = (bool)((AntEntity const *)arg1)->canFight();
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_isFighting(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "isFighting" "', argument " "1"" of type '" "AntEntity const *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  result = (bool)((AntEntity const *)arg1)->isFighting();
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
   return vresult;
 fail:
   return Qnil;
@@ -69971,6 +73109,36 @@ _wrap_AntEntity_decMorale(int argc, VALUE *argv, VALUE self) {
   } 
   arg2 = static_cast<float >(val2);
   (arg1)->decMorale(arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_incMorale(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "incMorale" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "incMorale" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast<float >(val2);
+  (arg1)->incMorale(arg2);
   
   return Qnil;
 fail:
@@ -83796,8 +86964,13 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "getAggression", VALUEFUNC(_wrap_AntEntity_getAggression), -1);
   rb_define_method(cAntEntity.klass, "eventDie", VALUEFUNC(_wrap_AntEntity_eventDie), -1);
   rb_define_method(cAntEntity.klass, "eventDefeated", VALUEFUNC(_wrap_AntEntity_eventDefeated), -1);
+  rb_define_method(cAntEntity.klass, "eventHaveDefeated", VALUEFUNC(_wrap_AntEntity_eventHaveDefeated), -1);
+  rb_define_method(cAntEntity.klass, "sigDefeated", VALUEFUNC(_wrap_AntEntity_sigDefeated), -1);
+  rb_define_method(cAntEntity.klass, "sigJobFinished", VALUEFUNC(_wrap_AntEntity_sigJobFinished), -1);
   rb_define_method(cAntEntity.klass, "getEnergy", VALUEFUNC(_wrap_AntEntity_getEnergy), -1);
   rb_define_method(cAntEntity.klass, "getMorale", VALUEFUNC(_wrap_AntEntity_getMorale), -1);
+  rb_define_method(cAntEntity.klass, "canFight", VALUEFUNC(_wrap_AntEntity_canFight), -1);
+  rb_define_method(cAntEntity.klass, "isFighting", VALUEFUNC(_wrap_AntEntity_isFighting), -1);
   rb_define_method(cAntEntity.klass, "setMesh", VALUEFUNC(_wrap_AntEntity_setMesh), -1);
   rb_define_method(cAntEntity.klass, "getMesh", VALUEFUNC(_wrap_AntEntity_getMesh), -1);
   rb_define_method(cAntEntity.klass, "getFirstMesh", VALUEFUNC(_wrap_AntEntity_getFirstMesh), -1);
@@ -83806,6 +86979,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "getDirection", VALUEFUNC(_wrap_AntEntity_getDirection), -1);
   rb_define_method(cAntEntity.klass, "decEnergy", VALUEFUNC(_wrap_AntEntity_decEnergy), -1);
   rb_define_method(cAntEntity.klass, "decMorale", VALUEFUNC(_wrap_AntEntity_decMorale), -1);
+  rb_define_method(cAntEntity.klass, "incMorale", VALUEFUNC(_wrap_AntEntity_incMorale), -1);
   rb_define_method(cAntEntity.klass, "eventMapChanged", VALUEFUNC(_wrap_AntEntity_eventMapChanged), -1);
   rb_define_method(cAntEntity.klass, "move", VALUEFUNC(_wrap_AntEntity_move), -1);
   rb_define_method(cAntEntity.klass, "mark", VALUEFUNC(_wrap_AntEntity_mark), -1);

@@ -61,6 +61,15 @@ class AntEntity:public AGRubyObject
     float mMorale;
     float mMoraleHeal;
 
+    /// current food in stomach
+    float mFood;
+    /// food needed per second
+    float mHunger; 
+    /// hunger impact on energy
+    float mHungerHitEnergy;
+    /// hunger impact on morale
+    float mHungerHitMorale;
+
     // moving
     float mMoveSpeed;
 
@@ -129,7 +138,7 @@ class AntEntity:public AGRubyObject
     void setJob(Job *pJob); // only for internal use and reseting
 
   public:
-    virtual void newRestJob(int pTime);
+    virtual void newRestJob(float pTime);
     virtual void newFetchJob(int p,AGVector2 &pTarget,const std::string &pWhat);
     virtual void newFetchJob(int p,AntEntity *pTarget,const std::string &pWhat);
     virtual void newMoveJob(int p,const AGVector2 &pTarget,int pnear=0);
@@ -161,9 +170,16 @@ class AntEntity:public AGRubyObject
     
     virtual void eventDie(); // energy too low
     virtual void eventDefeated(); // morale too low
+    virtual void eventHaveDefeated(AntEntity *e);
+
+    void sigDefeated(); // morale too low
+    void sigJobFinished();
 
     float getEnergy() const;
     float getMorale() const;
+
+    bool canFight() const;
+    bool isFighting() const;
 
     // appearance
 
@@ -183,7 +199,7 @@ class AntEntity:public AGRubyObject
 
     void decEnergy(float amount);
     void decMorale(float amount);
-
+    void incMorale(float pTime);
 
     // used only by Map - so that Position gets updated, when onGround
     void eventMapChanged();

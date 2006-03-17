@@ -40,7 +40,7 @@ Job::~Job()
 
 void Job::jobFinished(AntEntity *e)
 {
-  e->eventJobFinished();
+  e->sigJobFinished();
 }
 
 bool Job::needsMorale() const
@@ -126,14 +126,14 @@ bool FightJob::needsMorale() const
 FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 {
   fightDistance=1;//0.20; // in pixels
-  strength=0.2;   // decrease per second
 }
 
 void FightJob::move(AntEntity *e,float ptime)
 {
   if(mTarget->getEnergy()<=0.0 || mTarget->getMorale()<0.1 || e->getEnergy()<=0)
     {
-      mTarget->eventDefeated();
+      mTarget->sigDefeated();
+      e->eventHaveDefeated(mTarget);
       jobFinished(e);
       return; // early out
     }
@@ -143,6 +143,7 @@ void FightJob::move(AntEntity *e,float ptime)
   float speed=e->getSpeed();
   if(norm-fightDistance>ptime*speed)
     {
+      // run
       diff=diff.normalized();
       e->setPos(e->getPos2D()-diff*ptime*speed);
       e->setDirection(-diff.getAngle().angle*180.0/M_PI);
@@ -203,6 +204,7 @@ RestJob::~RestJob()
 }
 void RestJob::move(AntEntity *e,float ptime)
 {
+  e->incMorale(ptime);
   mTime-=ptime;
   if(mTime<0)
     jobFinished(e);

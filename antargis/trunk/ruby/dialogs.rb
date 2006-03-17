@@ -80,7 +80,7 @@ class AntDialog<AGLayout
 		elsif e.getKey==SDLK_RETURN then
 			eventOk(e)
 		end
-		return true
+		return false
 	end
 	def eventClose
 		hide

@@ -22,6 +22,7 @@
 #!/usr/bin/ruby
 
 require 'ant_inventory.rb'
+require 'ant_energy.rb'
 
 class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def initialize(w,h) #p,rect,pos,map)
@@ -94,13 +95,13 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 	
 	def eventClick(list,button)
-		list.each{|l|
-			puts l.node.to_s+"\t"+l.node.class.to_s+"  "+l.camDist.to_s
-			if l.node.class==Mesh
-				puts getMap.getEntity(l.node)
-			end
-		}
-		puts "---"
+# 		list.each{|l|
+# 			puts l.node.to_s+"\t"+l.node.class.to_s+"  "+l.camDist.to_s
+# 			if l.node.class==Mesh
+# 				puts getMap.getEntity(l.node)
+# 			end
+# 		}
+# 		puts "---"
 		
 		if list.length>0
 			first=list[0]
@@ -281,7 +282,7 @@ class AntNameDisplay<AGWidget
 	end
 	
 	def drawAfter(p)
-		setEnergy(@hero.getEnergy)
+		setEnergy(@hero.getBossEnergy)
 		updateColor
 		a0=AGColor.new(0,0x7f,0)
 		a1=AGColor.new(0,0x7f,0)

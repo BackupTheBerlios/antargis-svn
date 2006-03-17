@@ -58,7 +58,7 @@ void AntEntity::init()
   mHealSpeed=0.1;
 
   mMorale=1.0;
-  mMoraleHeal=0.1;
+  mMoraleHeal=0.05;
 
   mMoveSpeed=2;
 
@@ -68,8 +68,13 @@ void AntEntity::init()
   //esh=0;
   mDir=0;
 
-  mStrength=0.5;
-  mMoraleStrength=1;
+  mStrength=0.05;
+  mMoraleStrength=0.1;
+
+  mFood=1.0;
+  mHunger=0.01;
+  mHungerHitEnergy=0.1;
+  mHungerHitMorale=0.1;
 
   //  mDirNum=1;
 }
@@ -227,9 +232,6 @@ void AntEntity::move(float pTime)
 	    setJob(0);// kill job
 
       mEnergy+=pTime*getHealSpeed();
-      mMorale+=pTime*mMoraleHeal;
-      if(mMorale>1.0)
-	mMorale=1.0;
       if(mEnergy>1.0)
         mEnergy=1.0;
     }
@@ -242,12 +244,18 @@ void AntEntity::move(float pTime)
 
 }
 
+void AntEntity::incMorale(float pTime)
+{
+  mMorale+=pTime*mMoraleHeal;
+  if(mMorale>1.0)
+    mMorale=1.0;
+}
+
+
 
 
 void AntEntity::eventJobFinished()
 {
-  mJobFinished.push_back(mJob);
-  mJob=0;
 }
 
 void AntEntity::eventNoJob()
@@ -379,7 +387,7 @@ std::map<std::string,float> Resource::getAll() const
 
 
 
-void AntEntity::newRestJob(int pTime)
+void AntEntity::newRestJob(float pTime)
 {
   setJob(new RestJob(pTime));
 }
@@ -398,7 +406,18 @@ void AntEntity::newMoveJob(int p,const AGVector2 &pTarget,int pnear)
 
 void AntEntity::newFightJob(int p,AntEntity *target)
 {
+  if(!canFight())
+    return;
+  if(mJob)
+    {
+      FightJob *f=dynamic_cast<FightJob*>(mJob);
+      if(f)
+	if(f->getTarget()==target)
+	  return;
+    }
   setJob(new FightJob(p,target));
+  //  if(!target->isFighting())
+  //    target->newFightJob(p,this);
 }
 
 
@@ -451,7 +470,7 @@ void AntEntity::decMorale(float amount)
 
 void AntEntity::eventDie()
 {
-  eventJobFinished();
+  sigJobFinished();
 }
 
 float AntEntity::getMorale() const
@@ -479,6 +498,14 @@ void AntEntity::eventGotFight(AntEntity*pOther)
 void AntEntity::eventDefeated()
 {
 }
+
+void AntEntity::sigDefeated()
+{
+  mMorale=-0.1; // really deep morale
+  // this prevents other fight-jobs from not being discarded
+  eventDefeated();
+}
+
 
 
 void AntEntity::setName(const std::string &pName)
@@ -569,3 +596,31 @@ bool AntEntity::provides(const std::string &pName) const
 {
   return(mProvides.find(pName)!=mProvides.end());
 }
+
+bool AntEntity::canFight() const
+{
+  return (getEnergy()>0.0 && getMorale()>=0.1);
+}
+
+bool AntEntity::isFighting() const
+{
+  if(mJob)
+    {
+      FightJob *f=dynamic_cast<FightJob*>(mJob);
+      return f;
+    }
+  return false;
+}
+
+void AntEntity::sigJobFinished()
+{
+  mJobFinished.push_back(mJob);
+  mJob=0;
+  eventJobFinished();
+}
+
+void AntEntity::eventHaveDefeated(AntEntity *e)
+{
+}
+
+

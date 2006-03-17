@@ -18,24 +18,30 @@
 			<radioGroup col="0" row="0" name="HeroGroup">
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
-						<table cols="1" rows="2" name="Hero0">
-							<rowsize row="1" fixed="30"/>
+						<table cols="1" rows="3" name="Hero0">
+							<rowsize row="1" fixed="9"/>
+							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/none.png"/>
-							<text name="HeroName0" col="0" row="1" font="button.text" align="center" valign="center" caption=""/>
+							<antEnergy name="HeroBar0" col="0" row="1" hborder="5"/>
+							<text name="HeroName0" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
 						</table>
 					</radio>
 					<radio col="1" row="0" name="hero1">
-						<table cols="1" rows="2">
-							<rowsize row="1" fixed="30"/>
+						<table cols="1" rows="3">
+							<rowsize row="1" fixed="9"/>
+							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage1" col="0" row="0" filename="data/gui/portraits/none.png"/>
-							<text name="HeroName1" col="0" row="1" font="button.text" align="center" valign="center" caption=""/>
+							<antEnergy name="HeroBar1" col="0" row="1" hborder="5"/>
+							<text name="HeroName1" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
 						</table>
 					</radio>
 					<radio col="2" row="0" name="hero2">
-						<table cols="1" rows="2">
-							<rowsize row="1" fixed="30"/>
+						<table cols="1" rows="3">
+							<rowsize row="1" fixed="9"/>
+							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage2" col="0" row="0" filename="data/gui/portraits/none.png"/>
-							<text name="HeroName2" col="0" row="1" font="button.text" align="center" valign="center" caption=""/>
+							<antEnergy name="HeroBar2" col="0" row="1" hborder="5"/>
+							<text name="HeroName2" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
 						</table>
 					</radio>
 				</table>
