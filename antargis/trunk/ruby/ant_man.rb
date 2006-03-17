@@ -65,6 +65,7 @@ class AntNewMan<AntMyEntity
 	
 	def initialize()
 		super(AGVector2.new(0,0))
+		puts "NEW MAN"
 		setProvide("man",true)
 		@signed=false
 		@dead=false
@@ -85,8 +86,9 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def eventDie
+		puts "eventDie"
 		simDeath
-		eventDefeated
+		#eventDefeated
 		newRestJob(20)
 		setMeshState("dead")
 		if @boss
@@ -242,6 +244,10 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def setMeshState(name)
+		if @meshState=="dead"
+			puts "ERROR in setMeshState"
+			puts name
+		end
 		#return
 		#puts "setState #{name}"
 		@meshState=name
