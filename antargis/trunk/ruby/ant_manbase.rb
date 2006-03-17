@@ -47,6 +47,7 @@ end
 
 module AntManBase
 	def sitDown
+		puts "sitDown"
 		newRestJob(0.4)
 		setMeshState("sitdown")
 	end

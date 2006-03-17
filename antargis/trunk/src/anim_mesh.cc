@@ -243,6 +243,9 @@ void AnimMesh::advance(float time)
   else
     mTime=mAnimation->begin;
 
+  //  cdebug(mAnimName<<"  "<<mTime<<"  "<<mAnimation->len);
+
+
   // check events
   if(mEntity && mData->frameEvents.size())
     {

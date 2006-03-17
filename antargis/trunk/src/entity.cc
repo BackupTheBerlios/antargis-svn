@@ -68,8 +68,8 @@ void AntEntity::init()
   //esh=0;
   mDir=0;
 
-  mStrength=0.05;
-  mMoraleStrength=0.1;
+  mStrength=0.02;
+  mMoraleStrength=0.04;
 
   mFood=1.0;
   mHunger=0.01;

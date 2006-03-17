@@ -233,7 +233,7 @@ std::string AGVector2::toString() const
 
 float AGVector2::length2() const
 {
-  return v[0]*v[0]+v[1]*v[1]+v[2]*v[2];
+  return v[0]*v[0]+v[1]*v[1];
 }
 
 

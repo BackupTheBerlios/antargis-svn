@@ -159,7 +159,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	
 	def checkState
-		#checkFlee
+		checkFlee
 		if moveFinished
 			@state="fight"
 			@target.eventAttacked(@hero)
@@ -385,7 +385,9 @@ class AntHeroRestJob<AntHLJob
 	end
 	def check(man)
 		formationPos=@hero.getSitFormation(man)
-		if (man.getPos2D-formationPos).length2<0.2 then
+		diff=(man.getPos2D-formationPos)
+		dist=diff.length2
+		if dist<0.4 then
 			if not ["sitdown","sit"].member?(man.meshState)
 				man.sitDown
 			else
@@ -393,6 +395,7 @@ class AntHeroRestJob<AntHLJob
 				man.setMeshState("sit")
 			end
 		else
+			puts "#{man.getPos2D} #{formationPos} #{dist} #{diff}"
 			man.newMoveJob(0,formationPos,0)
 		end
 	end
