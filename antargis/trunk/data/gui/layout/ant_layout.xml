@@ -19,7 +19,7 @@
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
 						<table cols="1" rows="3" name="Hero0">
-							<rowsize row="1" fixed="9"/>
+							<rowsize row="1" fixed="12"/>
 							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/none.png"/>
 							<antEnergy name="HeroBar0" col="0" row="1" hborder="5"/>

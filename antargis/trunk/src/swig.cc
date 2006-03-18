@@ -21322,6 +21322,17 @@ void SwigDirector_AntEntity::eventHaveDefeated(AntEntity *e) {
 }
 
 
+void SwigDirector_AntEntity::eventMoraleLow() {
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AntEntity::eventMoraleLow();
+    return;
+  }
+  result = rb_funcall(swig_get_self(), rb_intern("eventMoraleLow"), 0, NULL);
+}
+
+
 void SwigDirector_AntEntity::setPos(AGVector2 const &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -72706,6 +72717,36 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AntEntity_eventMoraleLow(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "eventMoraleLow" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->eventMoraleLow();
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AntEntity_sigDefeated(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   void *argp1 = 0 ;
@@ -73139,6 +73180,61 @@ _wrap_AntEntity_incMorale(int argc, VALUE *argv, VALUE self) {
   } 
   arg2 = static_cast<float >(val2);
   (arg1)->incMorale(arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_getFood(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  float result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getFood" "', argument " "1"" of type '" "AntEntity const *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  result = (float)((AntEntity const *)arg1)->getFood();
+  
+  vresult = SWIG_From_float(static_cast<float >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_incFood(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "incFood" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "incFood" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast<float >(val2);
+  (arg1)->incFood(arg2);
   
   return Qnil;
 fail:
@@ -86965,6 +87061,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "eventDie", VALUEFUNC(_wrap_AntEntity_eventDie), -1);
   rb_define_method(cAntEntity.klass, "eventDefeated", VALUEFUNC(_wrap_AntEntity_eventDefeated), -1);
   rb_define_method(cAntEntity.klass, "eventHaveDefeated", VALUEFUNC(_wrap_AntEntity_eventHaveDefeated), -1);
+  rb_define_method(cAntEntity.klass, "eventMoraleLow", VALUEFUNC(_wrap_AntEntity_eventMoraleLow), -1);
   rb_define_method(cAntEntity.klass, "sigDefeated", VALUEFUNC(_wrap_AntEntity_sigDefeated), -1);
   rb_define_method(cAntEntity.klass, "sigJobFinished", VALUEFUNC(_wrap_AntEntity_sigJobFinished), -1);
   rb_define_method(cAntEntity.klass, "getEnergy", VALUEFUNC(_wrap_AntEntity_getEnergy), -1);
@@ -86980,6 +87077,8 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "decEnergy", VALUEFUNC(_wrap_AntEntity_decEnergy), -1);
   rb_define_method(cAntEntity.klass, "decMorale", VALUEFUNC(_wrap_AntEntity_decMorale), -1);
   rb_define_method(cAntEntity.klass, "incMorale", VALUEFUNC(_wrap_AntEntity_incMorale), -1);
+  rb_define_method(cAntEntity.klass, "getFood", VALUEFUNC(_wrap_AntEntity_getFood), -1);
+  rb_define_method(cAntEntity.klass, "incFood", VALUEFUNC(_wrap_AntEntity_incFood), -1);
   rb_define_method(cAntEntity.klass, "eventMapChanged", VALUEFUNC(_wrap_AntEntity_eventMapChanged), -1);
   rb_define_method(cAntEntity.klass, "move", VALUEFUNC(_wrap_AntEntity_move), -1);
   rb_define_method(cAntEntity.klass, "mark", VALUEFUNC(_wrap_AntEntity_mark), -1);

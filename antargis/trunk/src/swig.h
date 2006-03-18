@@ -1331,6 +1331,7 @@ public:
     virtual void newFightJob(int p, AntEntity *target);
     virtual void eventGotFight(AntEntity *pOther);
     virtual void eventHaveDefeated(AntEntity *e);
+    virtual void eventMoraleLow();
     virtual void setPos(AGVector2 const &p);
 };
 

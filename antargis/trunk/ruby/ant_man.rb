@@ -118,11 +118,19 @@ class AntNewMan<AntMyEntity
 	# setBoss
 	##########################
 	def setNoBoss()
+		if @boss
+			@boss.removeMan(self)
+		end
 		@bossName=""
+		@boss=nil
 	end
 	
 	def setBoss(hero)
+		if @boss
+			@boss.removeMan(self)
+		end
 		@bossName=hero.getName
+		@boss=hero
 		hero.signUp(self)
 	end
 
@@ -257,6 +265,13 @@ class AntNewMan<AntMyEntity
 				#playSound(name)
 		end
 	end
+
+	def eventMoraleLow
+		if @boss
+			setNoBoss
+		end
+	end
+
 end
 
 	

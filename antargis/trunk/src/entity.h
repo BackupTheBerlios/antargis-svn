@@ -123,9 +123,6 @@ class AntEntity:public AGRubyObject
     void setProvide(const std::string &pName,bool flag);
     bool provides(const std::string &pName) const;
 
-    //    void setType(const std::string &pType);
-    //    std::string getType() const;
-
     // saving and loading
     virtual std::string xmlName() const;
 
@@ -171,6 +168,7 @@ class AntEntity:public AGRubyObject
     virtual void eventDie(); // energy too low
     virtual void eventDefeated(); // morale too low
     virtual void eventHaveDefeated(AntEntity *e);
+    virtual void eventMoraleLow();
 
     void sigDefeated(); // morale too low
     void sigJobFinished();
@@ -201,6 +199,9 @@ class AntEntity:public AGRubyObject
     void decMorale(float amount);
     void incMorale(float pTime);
 
+    float getFood() const;
+    void incFood(float v);
+
     // used only by Map - so that Position gets updated, when onGround
     void eventMapChanged();
     virtual void move(float pTime); // move entity FIXME: del move
@@ -218,6 +219,7 @@ class AntEntity:public AGRubyObject
     void init();
     void updatePos(const AGVector3 &p);
 
+    void starve(float pTime);
   };
 
 

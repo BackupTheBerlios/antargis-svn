@@ -6,14 +6,13 @@ class AntEnergy<AGWidget
 	def initialize(p,rect)
 		super(p,rect)
 
-		@keys=[:energy,:morale,:food]
+		@keys=[:energy,:morale,:food,:troops]
 		@values={}
 		@colors={}
-		@values[:energy]=1
-		@values[:morale]=0.7
-		@values[:food]=0.4
+		@keys.each{|k|@values[k]=0}
 
-		@colors[:energy]=AGColor.new(0xcf,0,0)
+		@colors[:troops]=AGColor.new(0xcf,0,0)
+		@colors[:energy]=AGColor.new(0,0xcf,0)
 		@colors[:morale]=AGColor.new("#83006c")
 		@colors[:food]=AGColor.new("#975500")
 		@hborder=0
@@ -72,6 +71,8 @@ private
 		if @hero
 			set(:energy,@hero.getEnergy)
 			set(:morale,@hero.getMorale)
+			set(:troops,@hero.getMen.length/60.0)
+			set(:food,@hero.getFood)
 		else
 			@values.each{|k,v|@values[k]=1}
 		end

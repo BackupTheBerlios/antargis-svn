@@ -226,6 +226,8 @@ void AntEntity::move(float pTime)
     }
   else if(mEnergy>0.0)
     {
+      starve(pTime);
+
       if(mMorale<=0.1)
 	if(mJob)
 	  if(mJob->needsMorale())
@@ -416,12 +418,7 @@ void AntEntity::newFightJob(int p,AntEntity *target)
 	  return;
     }
   setJob(new FightJob(p,target));
-  //  if(!target->isFighting())
-  //    target->newFightJob(p,this);
 }
-
-
-
 
 void AntEntity::setSpeed(float f)
 {
@@ -459,13 +456,14 @@ float AntEntity::getHealSpeed() const
 
 
 void AntEntity::decMorale(float amount)
+{
+  mMorale-=amount;
+  if(mMorale<0.0)
     {
-      mMorale-=amount;
-      if(mMorale<0.0)
-        {
-          mMorale=0.0;
-        }
+      mMorale=0.0;
+      eventMoraleLow();
     }
+}
 
 
 void AntEntity::eventDie()
@@ -624,3 +622,36 @@ void AntEntity::eventHaveDefeated(AntEntity *e)
 }
 
 
+
+float AntEntity::getFood() const
+{
+  return mFood;
+}
+
+void AntEntity::incFood(float v)
+{
+  mFood+=v;
+}
+
+void AntEntity::starve(float pTime)
+{
+  mFood-=pTime*mHunger;
+  if(mFood<0)
+    {
+      // get time for which mFood==0
+      float t=-mFood/mHunger;
+
+      // hit energy
+      decEnergy(mHungerHitEnergy*t);
+
+      // hit morale
+      decMorale(mHungerHitMorale*t);
+
+
+      mFood=0;
+    }
+}
+
+void AntEntity::eventMoraleLow()
+{
+}

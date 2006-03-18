@@ -142,6 +142,9 @@ class AntHero<AntBoss
 		if man==self
 			return getPos2D
 		end
+		if not @men.member?(man)
+			raise "not my man! : #{man} self:#{self}"
+		end
 		id=@men.index(man)-1  # first index is hero himself
 		
 		if id then
