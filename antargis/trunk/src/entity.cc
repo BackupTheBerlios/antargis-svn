@@ -74,7 +74,7 @@ void AntEntity::init()
   mFood=1.0;
   mHunger=0.01;
   mHungerHitEnergy=0.1;
-  mHungerHitMorale=0.1;
+  mHungerHitMorale=0.14;
 
   //  mDirNum=1;
 }
@@ -232,10 +232,12 @@ void AntEntity::move(float pTime)
 	if(mJob)
 	  if(mJob->needsMorale())
 	    setJob(0);// kill job
-
-      mEnergy+=pTime*getHealSpeed();
-      if(mEnergy>1.0)
-        mEnergy=1.0;
+      if(!isStarving())
+	{
+	  mEnergy+=pTime*getHealSpeed();
+	  if(mEnergy>1.0)
+	    mEnergy=1.0;
+	}
     }
   if(mJob)
     {
@@ -248,9 +250,12 @@ void AntEntity::move(float pTime)
 
 void AntEntity::incMorale(float pTime)
 {
-  mMorale+=pTime*mMoraleHeal;
-  if(mMorale>1.0)
-    mMorale=1.0;
+  if(!isStarving())
+    {
+      mMorale+=pTime*mMoraleHeal;
+      if(mMorale>1.0)
+	mMorale=1.0;
+    }
 }
 
 
@@ -636,7 +641,7 @@ void AntEntity::incFood(float v)
 void AntEntity::starve(float pTime)
 {
   mFood-=pTime*mHunger;
-  if(mFood<0)
+  if(isStarving())
     {
       // get time for which mFood==0
       float t=-mFood/mHunger;
@@ -654,4 +659,9 @@ void AntEntity::starve(float pTime)
 
 void AntEntity::eventMoraleLow()
 {
+}
+
+bool AntEntity::isStarving() const
+{
+  return mFood<=0;
 }

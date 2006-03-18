@@ -201,6 +201,7 @@ class AntEntity:public AGRubyObject
 
     float getFood() const;
     void incFood(float v);
+    bool isStarving() const;
 
     // used only by Map - so that Position gets updated, when onGround
     void eventMapChanged();

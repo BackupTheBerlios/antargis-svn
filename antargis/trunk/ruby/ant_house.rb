@@ -139,7 +139,8 @@ class AntHouse<AntBoss
 	
 	def normalFetching(e)
 		if atHome(e) then
-			puts "COME HOME"
+			checkFood(e)
+			puts "CAME HOME"
 			e.setMode("")
 			e.setMeshState("stand")
 			@atHome.push(e)
@@ -153,7 +154,7 @@ class AntHouse<AntBoss
 				puts "GO FETCH"
 				fetch( need[1],need[0],e)
 			else
-				e.newRestJob(10)
+				e.newRestJob(2)
 				e.setVisible(false)
 			end
 		elsif e.getMode=~/fetching/
@@ -186,7 +187,8 @@ class AntHouse<AntBoss
 	# what's needed most ATM?
 	# returns: [good,from] or nil
 	def needed()
-		goods={"wood"=>"tree","stone"=>"stone"}
+		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree"}
+		goods={"wood"=>"tree","food"=>"tree"}
 		min=50
 		need=nil
 		needfrom=nil
@@ -243,4 +245,18 @@ class AntHouse<AntBoss
 	def age
 		30
 	end
+
+	private
+	def checkFood(man)
+		puts "#{man} #{man.getFood}"
+		if man.getFood<0.5
+			puts "low"
+			# eat
+			if resource.get("food")>1
+				man.incFood(1)
+				resource.sub("food",1)
+			end
+		end
+	end
+
 end
