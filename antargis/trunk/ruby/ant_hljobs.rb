@@ -89,7 +89,9 @@ class AntHeroMoveJob<AntHLJob
 					startWalking
 				end
 			when "move"
+				# FIXME - check if all men are really at destination
 				@moveFinished=true
+				@state="torest"
 		end
 	end
 	
@@ -328,7 +330,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	end
 
 	def check(man)
-		if @state=="wait_recruit" or @state=="torest"
+		if moveFinished
 			if man.class==AntHero
 				if @state=="torest"
 					if @want==0 then 

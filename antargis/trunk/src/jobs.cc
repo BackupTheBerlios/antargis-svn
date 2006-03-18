@@ -106,7 +106,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
   else
     {
       e->setDirection(-diff.getAngle().angle*180.0/M_PI);
-      e->setPos(mTarget);
+      e->setPos(mTarget+diff.normalized()*mNear);
       jobFinished(e);
     }
 }
