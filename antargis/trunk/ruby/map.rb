@@ -285,8 +285,12 @@ class AntRubyMap<AntMap
 			c=n.addChild(t.xmlName)
 			t.saveXML(c)
 		}
-		n.set("scriptclass",@scriptClass)
-		n.set("scriptfile",@scriptFile)
+		if @scriptClass
+			n.set("scriptclass",@scriptClass)
+		end
+		if @scriptFile
+			n.set("scriptfile",@scriptFile)
+		end
 		if @script
 			c=n.addChild("scriptdata")
 			@script.saveXML(c)

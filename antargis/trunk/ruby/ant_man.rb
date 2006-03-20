@@ -190,6 +190,10 @@ class AntNewMan<AntMyEntity
 	def xmlName
 		return "antNewMan"
 	end
+
+	def getWeapon
+		"dagger"
+	end
 	
 	def setMeshState(name)
 		if @meshState=="dead"
@@ -208,8 +212,17 @@ class AntNewMan<AntMyEntity
 			when "walk","sitdown","sit"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
 				getFirstMesh.setAnimation(name)
+
+				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
 			when "fight"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
+				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
+				case getWeapon
+					when "dagger"
+						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
+					when "shield"
+						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+				end
 			when "axe"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_axe.anim")))
 				#getSoundManager.playWave("data/sound/tree_chop.wav")

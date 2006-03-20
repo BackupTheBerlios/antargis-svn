@@ -51,7 +51,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def getHeroScreenPos(hero)
 		pos=hero.getPos3D+AGVector3.new(0,0,2)
 		sp=getScene.getPosition(AGVector4.new(pos,1))
-		return AGRect.new(sp.x-50,sp.y-45,100,40)
+		return AGRect.new(sp.x-50,sp.y-55,100,50)
 	end
 
 	def focusHero(hero)
@@ -267,44 +267,20 @@ class AntNameDisplay<AGWidget
 		@name=@hero.getName
 		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height/2),@hero.getName,@font))
 		addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
-		b.setTheme("antButton")
-		@energy=0.7
-		updateRects
-	end
-	
-	def setEnergy(e)
-		@energy=e
-		updateRects
+		b.setEnabled(false)
+		#b.setTheme("antButton")
+		@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-91))
+		addChild(@energyWidget)
+		@energyWidget.setHero(hero)
 	end
 
+	# enforce integer position	
 	def setRect(r)
 		super(AGRect.new(r.x.to_i,r.y.to_i,r.w.to_i,r.h.to_i))
 	end
 	
-	def drawAfter(p)
-		setEnergy(@hero.getBossEnergy)
-		updateColor
-		a0=AGColor.new(0,0x7f,0)
-		a1=AGColor.new(0,0x7f,0)
-		a2=AGColor.new(0,0xff,0)
-		a3=AGColor.new(0,0xAf,0)
-		p.drawGradient(@cr1,a0,a1,a2,a3)
-		p.drawGradient(@cr2,a2,a3,a0,a1)
-	end
 	def getText
 		@name
 	end
 	private
-	def updateRects
-		@cr1=AGRect.new(@cr.x.to_i,@cr.y.to_i,(@cr.width*@energy).to_i,@cr.height/2)
-		@cr2=AGRect.new(@cr.x.to_i,(@cr.y+@cr.height/2).to_i,(@cr.width*@energy).to_i,@cr.height/2)
-	end
-	def updateColor
-		if @hero.getPlayer==getMap.getPlayer
-			f=getTheme.getFont("heroName.font")
-		else
-			f=getTheme.getFont("enemyHero.font")
-		end
-		@textWidget.setFont(f)
-	end
 end

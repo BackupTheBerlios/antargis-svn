@@ -68,7 +68,7 @@ private
 		puts "CHECKBUT"
 		puts @inspect.getPlayer==getMap.getPlayer
 		getChild("doRecruit").setEnabled((@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero))
-		getChild("doTakeFood").setEnabled(false) # FIXME
+		getChild("doTakeFood").setEnabled((@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero))
 		getChild("doTakeWeapons").setEnabled(false) # FIXME
 		#end
 	end

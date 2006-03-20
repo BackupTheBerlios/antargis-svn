@@ -379,6 +379,46 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	
 end
 
+
+class AntHeroTakeFoodJob<AntHeroMoveJob
+	attr_reader :finished
+	def initialize(hero,target,agg)
+		super(hero,0,target.getPos2D,4)
+		@target=target
+		@aggression=agg
+		@want=[target.resource.get("food"),@men.length].min
+		@oldpos=nil
+	end
+
+	def check(man)
+		if moveFinished
+			if man.class==AntHero	and @oldpos.class==NilClass
+				@oldpos=man.getPos2D
+			end
+			case man.getMode
+				when "moving"
+					man.newMoveJob(0,@target.getPos2D,0)
+					man.setMode("takingFood")
+				when "takingFood"
+					# take food and return
+					@target.resource.sub("food",1)
+					man.resource.add("food",1)
+
+					@want-=1
+					if @want<=0
+						@finished=true
+						@hero.newHLMoveJob(0,@oldpos,0)
+					end
+			end
+		else
+			super(man)
+		end
+	end
+	
+	
+end
+
+
 class AntHeroRestJob<AntHLJob
 	def initialize(hero,time)
 		@hero=hero
