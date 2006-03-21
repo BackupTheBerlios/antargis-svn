@@ -94,7 +94,7 @@ class AntHero<AntBoss
 	def newHLRestJob(time)
 		setFire(true)
 		super(time)
-		#assignJob2All
+		assignJob2All
 	end
 	
 	def assignJob(man)

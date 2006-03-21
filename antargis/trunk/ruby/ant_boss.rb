@@ -91,6 +91,7 @@ class AntBoss<AntMyEntity
 			end
 		end
 		@job=AntHeroFightJob.new(self,target,true) # FIXME: change this, so that fighting is stopped as soon as other stops
+		assignJob2All
 	end
 	def newHLRestJob(time)
 		@job=AntHeroRestJob.new(self,time)
