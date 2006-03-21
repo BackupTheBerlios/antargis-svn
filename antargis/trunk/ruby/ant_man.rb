@@ -223,7 +223,8 @@ class AntNewMan<AntMyEntity
 				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
 				#getFirstMesh.setAnimation("fight")
 			when "fight"
-				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
+				if false
 				case getWeapon
 					when "dagger"
 						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
@@ -231,6 +232,7 @@ class AntNewMan<AntMyEntity
 						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
 					when "sword"
 						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+				end
 				end
 			when "axe"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_axe.anim")))

@@ -228,6 +228,9 @@ void VertexArray::drawDepth()
 
   glEnableClientState(GL_VERTEX_ARRAY);
 
+
+  glDisable(GL_TEXTURE_2D);
+
   if(mBuffers)
     {
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mVertexBuffer);
@@ -245,6 +248,8 @@ void VertexArray::drawDepth()
       glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
 		     &(mIndices[0]));
   }
+
+  glEnable(GL_TEXTURE_2D);
 
   glDisableClientState(GL_VERTEX_ARRAY);
 }

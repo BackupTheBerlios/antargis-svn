@@ -3255,19 +3255,6 @@ bool SwigDirector_AGWidget::eventShow() {
 }
 
 
-void SwigDirector_AGWidget::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGWidget::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -3304,6 +3291,32 @@ void SwigDirector_AGWidget::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGWidget::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGWidget::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -4119,19 +4132,6 @@ bool SwigDirector_AGColorButton::eventShow() {
 }
 
 
-void SwigDirector_AGColorButton::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGColorButton::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -4168,6 +4168,32 @@ void SwigDirector_AGColorButton::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGColorButton::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGColorButton::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -4983,19 +5009,6 @@ bool SwigDirector_AGGLWidget::eventShow() {
 }
 
 
-void SwigDirector_AGGLWidget::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGGLWidget::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -5032,6 +5045,32 @@ void SwigDirector_AGGLWidget::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGGLWidget::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGGLWidget::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -6040,19 +6079,6 @@ bool SwigDirector_AGLayout::eventShow() {
 }
 
 
-void SwigDirector_AGLayout::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGLayout::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -6089,6 +6115,32 @@ void SwigDirector_AGLayout::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGLayout::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGLayout::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -6904,19 +6956,6 @@ bool SwigDirector_AGDialog::eventShow() {
 }
 
 
-void SwigDirector_AGDialog::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGDialog::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -6953,6 +6992,32 @@ void SwigDirector_AGDialog::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGDialog::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGDialog::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -8235,19 +8300,6 @@ bool SwigDirector_AGButton::eventShow() {
 }
 
 
-void SwigDirector_AGButton::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGButton::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -8258,6 +8310,32 @@ void SwigDirector_AGButton::setTop(float y) {
   }
   obj0 = SWIG_From_float(static_cast<float >(y));
   result = rb_funcall(swig_get_self(), rb_intern("setTop"), 1,obj0);
+}
+
+
+void SwigDirector_AGButton::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGButton::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -9118,19 +9196,6 @@ bool SwigDirector_AGText::eventShow() {
 }
 
 
-void SwigDirector_AGText::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGText::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -9167,6 +9232,32 @@ void SwigDirector_AGText::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGText::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGText::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -9982,19 +10073,6 @@ bool SwigDirector_AGCaption::eventShow() {
 }
 
 
-void SwigDirector_AGCaption::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGCaption::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -10031,6 +10109,32 @@ void SwigDirector_AGCaption::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGCaption::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGCaption::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -10859,19 +10963,6 @@ bool SwigDirector_AGCheckBox::eventShow() {
 }
 
 
-void SwigDirector_AGCheckBox::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGCheckBox::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -10882,6 +10973,32 @@ void SwigDirector_AGCheckBox::setTop(float y) {
   }
   obj0 = SWIG_From_float(static_cast<float >(y));
   result = rb_funcall(swig_get_self(), rb_intern("setTop"), 1,obj0);
+}
+
+
+void SwigDirector_AGCheckBox::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGCheckBox::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -11789,19 +11906,6 @@ bool SwigDirector_AGEdit::eventShow() {
 }
 
 
-void SwigDirector_AGEdit::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGEdit::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -11838,6 +11942,32 @@ void SwigDirector_AGEdit::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGEdit::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGEdit::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -13392,19 +13522,6 @@ bool SwigDirector_AGImage::eventShow() {
 }
 
 
-void SwigDirector_AGImage::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGImage::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -13441,6 +13558,32 @@ void SwigDirector_AGImage::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGImage::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGImage::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -14345,19 +14488,6 @@ bool SwigDirector_AGListBox::eventShow() {
 }
 
 
-void SwigDirector_AGListBox::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGListBox::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -14394,6 +14524,32 @@ void SwigDirector_AGListBox::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGListBox::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGListBox::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -15392,19 +15548,6 @@ bool SwigDirector_AGSound::eventShow() {
 }
 
 
-void SwigDirector_AGSound::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGSound::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -15441,6 +15584,32 @@ void SwigDirector_AGSound::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGSound::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGSound::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -16256,19 +16425,6 @@ bool SwigDirector_AGRadioGroup::eventShow() {
 }
 
 
-void SwigDirector_AGRadioGroup::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGRadioGroup::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -16305,6 +16461,32 @@ void SwigDirector_AGRadioGroup::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadioGroup::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -17146,19 +17328,6 @@ bool SwigDirector_AGRadio::eventShow() {
 }
 
 
-void SwigDirector_AGRadio::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGRadio::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -17169,6 +17338,32 @@ void SwigDirector_AGRadio::setTop(float y) {
   }
   obj0 = SWIG_From_float(static_cast<float >(y));
   result = rb_funcall(swig_get_self(), rb_intern("setTop"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadio::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGRadio::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -18288,19 +18483,6 @@ bool SwigDirector_AGTable::eventShow() {
 }
 
 
-void SwigDirector_AGTable::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGTable::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -18311,6 +18493,32 @@ void SwigDirector_AGTable::setTop(float y) {
   }
   obj0 = SWIG_From_float(static_cast<float >(y));
   result = rb_funcall(swig_get_self(), rb_intern("setTop"), 1,obj0);
+}
+
+
+void SwigDirector_AGTable::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGTable::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -19161,19 +19369,6 @@ bool SwigDirector_AGWindow::eventShow() {
 }
 
 
-void SwigDirector_AGWindow::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_AGWindow::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -19184,6 +19379,32 @@ void SwigDirector_AGWindow::setTop(float y) {
   }
   obj0 = SWIG_From_float(static_cast<float >(y));
   result = rb_funcall(swig_get_self(), rb_intern("setTop"), 1,obj0);
+}
+
+
+void SwigDirector_AGWindow::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_AGWindow::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -22596,19 +22817,6 @@ bool SwigDirector_MiniMap::eventShow() {
 }
 
 
-void SwigDirector_MiniMap::setLeft(float x) {
-  VALUE obj0 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::setLeft(x);
-    return;
-  }
-  obj0 = SWIG_From_float(static_cast<float >(x));
-  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
-}
-
-
 void SwigDirector_MiniMap::setTop(float y) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -22645,6 +22853,32 @@ void SwigDirector_MiniMap::setWidth(float w) {
   }
   obj0 = SWIG_From_float(static_cast<float >(w));
   result = rb_funcall(swig_get_self(), rb_intern("setWidth"), 1,obj0);
+}
+
+
+void SwigDirector_MiniMap::eventTick(float pTime) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::eventTick(pTime);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(pTime));
+  result = rb_funcall(swig_get_self(), rb_intern("eventTick"), 1,obj0);
+}
+
+
+void SwigDirector_MiniMap::setLeft(float x) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGWidget::setLeft(x);
+    return;
+  }
+  obj0 = SWIG_From_float(static_cast<float >(x));
+  result = rb_funcall(swig_get_self(), rb_intern("setLeft"), 1,obj0);
 }
 
 
@@ -24068,6 +24302,17 @@ SwigDirector_VertexArray::SwigDirector_VertexArray(VALUE self): VertexArray(), S
 SwigDirector_VertexArray::~SwigDirector_VertexArray() {
 }
 
+void SwigDirector_VertexArray::drawDepth() {
+  VALUE result;
+  
+  if (swig_get_up()) {
+    VertexArray::drawDepth();
+    return;
+  }
+  result = rb_funcall(swig_get_self(), rb_intern("drawDepth"), 0, NULL);
+}
+
+
 void SwigDirector_VertexArray::draw() {
   VALUE result;
   
@@ -24087,6 +24332,17 @@ SwigDirector_VertexArrayShader::SwigDirector_VertexArrayShader(VALUE self, AntSh
 
 SwigDirector_VertexArrayShader::~SwigDirector_VertexArrayShader() {
 }
+
+void SwigDirector_VertexArrayShader::drawDepth() {
+  VALUE result;
+  
+  if (swig_get_up()) {
+    VertexArray::drawDepth();
+    return;
+  }
+  result = rb_funcall(swig_get_self(), rb_intern("drawDepth"), 0, NULL);
+}
+
 
 void SwigDirector_VertexArrayShader::draw() {
   VALUE result;
@@ -41338,6 +41594,74 @@ _wrap_AGWidget_eventLostFocus(int argc, VALUE *argv, VALUE self) {
   }
   vresult = SWIG_From_bool(static_cast<bool >(result));
   return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AGWidget_eventTick(int argc, VALUE *argv, VALUE self) {
+  AGWidget *arg1 = (AGWidget *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGWidget, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "eventTick" "', argument " "1"" of type '" "AGWidget *""'"); 
+  }
+  arg1 = reinterpret_cast<AGWidget * >(argp1);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "eventTick" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast<float >(val2);
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->eventTick(arg2);
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AGWidget_sigTick(int argc, VALUE *argv, VALUE self) {
+  AGWidget *arg1 = (AGWidget *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGWidget, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sigTick" "', argument " "1"" of type '" "AGWidget *""'"); 
+  }
+  arg1 = reinterpret_cast<AGWidget * >(argp1);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "sigTick" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast<float >(val2);
+  (arg1)->sigTick(arg2);
+  
+  return Qnil;
 fail:
   return Qnil;
 }
@@ -83424,6 +83748,36 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_VertexArray_drawDepth(int argc, VALUE *argv, VALUE self) {
+  VertexArray *arg1 = (VertexArray *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_VertexArray, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "drawDepth" "', argument " "1"" of type '" "VertexArray *""'"); 
+  }
+  arg1 = reinterpret_cast<VertexArray * >(argp1);
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->drawDepth();
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_VertexArray_drawPick(int argc, VALUE *argv, VALUE self) {
   VertexArray *arg1 = (VertexArray *) 0 ;
   void *argp1 = 0 ;
@@ -86234,6 +86588,8 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAGWidget.klass, "eventMouseButtonUp", VALUEFUNC(_wrap_AGWidget_eventMouseButtonUp), -1);
   rb_define_method(cAGWidget.klass, "eventGotFocus", VALUEFUNC(_wrap_AGWidget_eventGotFocus), -1);
   rb_define_method(cAGWidget.klass, "eventLostFocus", VALUEFUNC(_wrap_AGWidget_eventLostFocus), -1);
+  rb_define_method(cAGWidget.klass, "eventTick", VALUEFUNC(_wrap_AGWidget_eventTick), -1);
+  rb_define_method(cAGWidget.klass, "sigTick", VALUEFUNC(_wrap_AGWidget_sigTick), -1);
   rb_define_method(cAGWidget.klass, "canFocus", VALUEFUNC(_wrap_AGWidget_canFocus), -1);
   rb_define_method(cAGWidget.klass, "processEvent", VALUEFUNC(_wrap_AGWidget_processEvent), -1);
   rb_define_method(cAGWidget.klass, "sigMouseEnter=", VALUEFUNC(_wrap_AGWidget_sigMouseEnter_set), -1);
@@ -87850,6 +88206,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cVertexArray.klass, "setColors", VALUEFUNC(_wrap_VertexArray_setColors), -1);
   rb_define_method(cVertexArray.klass, "setBuffers", VALUEFUNC(_wrap_VertexArray_setBuffers), -1);
   rb_define_method(cVertexArray.klass, "draw", VALUEFUNC(_wrap_VertexArray_draw), -1);
+  rb_define_method(cVertexArray.klass, "drawDepth", VALUEFUNC(_wrap_VertexArray_drawDepth), -1);
   rb_define_method(cVertexArray.klass, "drawPick", VALUEFUNC(_wrap_VertexArray_drawPick), -1);
   rb_define_method(cVertexArray.klass, "init", VALUEFUNC(_wrap_VertexArray_init), -1);
   rb_define_method(cVertexArray.klass, "clear", VALUEFUNC(_wrap_VertexArray_clear), -1);

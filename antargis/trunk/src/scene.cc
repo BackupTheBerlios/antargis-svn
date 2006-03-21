@@ -343,7 +343,7 @@ void Scene::drawScene()
 	    }
 	}
     }
-  cdebug("drawn:"<<drawn);
+  //  cdebug("drawn:"<<drawn);
 
 }
 void Scene::drawShadow()

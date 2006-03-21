@@ -83,7 +83,7 @@ class AntBoss<AntMyEntity
 	end
 	
 	def newHLDefendJob(target)
-		puts "DEFEND!!!"
+		puts "DEFEND!!! #{self.getName} from #{target.getName}"
 		if @job
 			if @job.is_a?(AntHeroFightJob)
 				puts "I'm alread fighting!"
@@ -124,6 +124,7 @@ class AntBoss<AntMyEntity
 	end
 	
 	def eventGotHLFight(hero)
+		newHLDefendJob(hero)
 		return
 	end
 	

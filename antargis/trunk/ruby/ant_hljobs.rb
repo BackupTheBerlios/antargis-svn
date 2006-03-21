@@ -53,6 +53,7 @@ class AntHeroMoveJob<AntHLJob
 		
 		@formatDir=(@pos-@hero.getPos2D).normalized
 		@moveFinished=false
+		@movingMen=0
 	end
 	def getMen()
 		@hero.getMen
@@ -64,6 +65,7 @@ class AntHeroMoveJob<AntHLJob
 			#m.delJob
 			m.newMoveJob(0,f,@dist)
 			m.setMode("moving")
+			@movingMen+=1
 		}
 		@state="move"
 	end
@@ -74,7 +76,7 @@ class AntHeroMoveJob<AntHLJob
 	end
 
 	def check(man)
-		puts "CHECK:"+man.class.to_s+" "+man.getName
+		puts "CHECK (move-job): #{man.class.to_s} #{man.getName} #{man.getMode} state:#{@state}"
 		case @state
 			when "format"
 				if man.getMode=="format"
@@ -89,9 +91,19 @@ class AntHeroMoveJob<AntHLJob
 					startWalking
 				end
 			when "move"
-				# FIXME - check if all men are really at destination
-				@moveFinished=true
-				@state="torest"
+				case man.getMode
+					when "moving"
+						@movingMen-=1
+						man.setMode("torest")
+						man.newRestJob(1)
+				end
+				puts "movingMen:#{@movingMen}"
+				if @movingMen==0
+					# FIXME - check if all men are really at destination
+					puts "move finished!"
+					@moveFinished=true
+					#@state="torest"
+				end
 		end
 	end
 	
@@ -106,7 +118,7 @@ class AntHeroMoveJob<AntHLJob
 end
 
 class AntHeroFightJob<AntHeroMoveJob
-	attr_reader :finished, :target
+	attr_reader :target
 	#attr_writer :finished
 	def initialize(hero,target,defend=false)
 
@@ -131,18 +143,16 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero.assignJob2All
 		initSitpositions
 	end
+
+	def finished
+		@finished
+	end
 	
 	def getEnergy
+		raise "deprecated"
 		e=0
-		@men.each{|m|e+=m.getMorale} #Energy}
+		@men.each{|m|e+=m.getMorale}
 		return e*0.1
-
-		# FIXME: get loyalty _and_ energy and display this!
-		if @men.length==0
-			puts "ERROR - no men "+@hero.getName
-			return 1
-		end
-		return @states["fight"].length.to_f/@men.length
 	end
 	
 	def delete(man)
@@ -154,7 +164,7 @@ class AntHeroFightJob<AntHeroMoveJob
 
 	def checkFlee
 		dist=(@target.getPos2D-@hero.getPos2D).length
-		if dist>5 and @state=="fight"
+		if dist>10 and @state=="fight"
 			puts "CHECKSTATE DIST:#{dist}"
 			@finished=true
 		end
@@ -162,13 +172,15 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def checkState
 		checkFlee
-		if moveFinished
+		if moveFinished or @defend
+			puts "FightJob::checkState:MOVE FINISHED"
 			@state="fight"
 			@target.eventAttacked(@hero)
 		end
 	end
 	
 	def check(man)
+		puts "CHECKING #{man} #{man.getName} #{self} #{@hero.getName} #{@state}"
 		checkState
 		return if @finished
 		case @state
@@ -226,7 +238,7 @@ class AntHeroFightJob<AntHeroMoveJob
 
 	
 	def startFighting
-		puts "START FIGHTING "+self.to_s+" "+@hero.getName
+		puts "START FIGHTING #{self} #{@hero.getName}"
 		initSitpositions
 
 		@hero.getMen.each{|man|
@@ -237,15 +249,9 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def undefeatedMen
 		return @men-getMenState("defeated")
-		#@men-@states["defeated"]
 	end
 	
 	def startFightingMan(man)
-		if @target.getJob.class!=self.class
-			puts "startFightingMan"
-			@target.newHLDefendJob(@hero)
-			@finished=true
-		end
 		tmen=@target.getJob.undefeatedMen
 		# search nearest enemy
 		dist=1000.0
@@ -298,12 +304,12 @@ class AntHeroFightJob<AntHeroMoveJob
 		# not won yet, so go on
 		checkFightMan(man)
 		
-		if @killJobsGiven==false and @defend==false then
-			# set target fighting,too
-			puts "checkFight"
-			@target.newHLDefendJob(@hero)
-		end
-		@killJobsGiven=true
+# 		if @killJobsGiven==false and @defend==false then
+# 			# set target fighting,too
+# 			puts "checkFight"
+# 			@target.newHLDefendJob(@hero)
+# 		end
+# 		@killJobsGiven=true
 		return false
 	end
 private

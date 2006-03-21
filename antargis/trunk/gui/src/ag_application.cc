@@ -108,13 +108,17 @@ bool AGApplication::run()
 	  SDL_WaitEvent(&event);
 	  doEvent(&event);
 	}
-      eventFrame((now-last)/1000.0);
+      float t=(now-last)/1000.0;
+      if(mainWidget)
+	mainWidget->sigTick(t);
+
+      eventFrame(t);
       {
 	prepareDraw();
 	draw();
       }
       
-      eventFrameEnd((now-last)/1000.0);
+      eventFrameEnd(t);
       last=now;
     }
   gApplication=0;

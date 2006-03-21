@@ -931,3 +931,13 @@ AGLayout *AGWidget::getLayout()
 void AGWidget::initHandlers()
 {
 }
+
+void AGWidget::eventTick(float pTime)
+{
+}
+void AGWidget::sigTick(float pTime)
+{
+  eventTick(pTime);
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+    (*i)->sigTick(pTime);
+}

@@ -88,10 +88,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -138,10 +139,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -188,10 +190,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -267,10 +270,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -317,10 +321,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -401,8 +406,9 @@ public:
     virtual void useTextures();
     virtual void setChecked(bool pChecked);
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
@@ -452,10 +458,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -502,10 +509,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -553,8 +561,9 @@ public:
     virtual void useTextures();
     virtual void setChecked(bool pChecked);
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
@@ -614,10 +623,11 @@ public:
     virtual bool eventGotFocus();
     virtual bool eventLostFocus();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void prepareDraw();
     virtual void initHandlers();
@@ -742,10 +752,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -801,10 +812,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -885,10 +897,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -935,10 +948,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -987,8 +1001,9 @@ public:
     virtual void useTextures();
     virtual void setChecked(bool pChecked);
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
@@ -1062,8 +1077,9 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void setWidth(float w);
@@ -1120,8 +1136,9 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual void setWidth(float w);
     virtual void setHeight(float w);
@@ -1470,10 +1487,11 @@ public:
     virtual bool eventGotFocus();
     virtual void useTextures();
     virtual bool eventShow();
-    virtual void setLeft(float x);
     virtual void setTop(float y);
     virtual void setHeight(float w);
     virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
     virtual void prepareDraw();
     virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
     virtual void initHandlers();
@@ -1604,6 +1622,7 @@ class SwigDirector_VertexArray : public VertexArray, public Swig::Director {
 public:
     SwigDirector_VertexArray(VALUE self);
     virtual ~SwigDirector_VertexArray();
+    virtual void drawDepth();
     virtual void draw();
 };
 
@@ -1613,6 +1632,7 @@ class SwigDirector_VertexArrayShader : public VertexArrayShader, public Swig::Di
 public:
     SwigDirector_VertexArrayShader(VALUE self, AntShaderProgram *_p);
     virtual ~SwigDirector_VertexArrayShader();
+    virtual void drawDepth();
     virtual void draw();
 };
 

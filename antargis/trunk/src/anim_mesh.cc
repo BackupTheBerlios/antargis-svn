@@ -156,8 +156,8 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 	{
 	  mData->animShaderDepth.enable();
 	  mData->animShaderDepth.sendUniform("matrices",mShaderMatrices);
-	  //	  mData->mArrayDepth.setColors(false);
-	  mData->mArrayDepth.drawDepth();
+	  mData->mArrayDepth.setColors(false);
+	  mData->mArrayDepth.draw(); // FIXME: drawDepth makes some problems here
 
 	  mData->animShaderDepth.disable();
 	}
@@ -272,6 +272,7 @@ void AnimMesh::advance(float time)
 
 void AnimMesh::update()
 {
+
   // this doesn't take much of rendering-time
   // calculate 
   

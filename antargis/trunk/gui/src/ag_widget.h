@@ -70,6 +70,9 @@ class AGWidget:public AGMessageObject
   virtual bool eventGotFocus();
   virtual bool eventLostFocus();
 
+  virtual void eventTick(float pTime);
+  void sigTick(float pTime);
+
   virtual bool canFocus() const;
 
   bool processEvent(AGEvent *event);

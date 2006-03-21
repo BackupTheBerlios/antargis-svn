@@ -16,22 +16,27 @@ class AntEnergy<AGWidget
 		@colors[:morale]=AGColor.new("#83006c")
 		@colors[:food]=AGColor.new("#975500")
 		@hborder=0
+
+		#setCaching(true)
+		@doRedraw=true
 	end
 
 	def setHero(h)
 		@hero=h
 	end
 	
-	def prepareDraw
-		super
+	def eventTick(t)
+		#puts "MUH"
 		updateValues
+		super
 	end
 	def redraw
-		#true
+		@doRedraw
 	end
 
 	def draw(p)
 		super
+		@doRedraw=false
 		r=p.getRect.origin
 		w=r.width
 		h=r.height
@@ -62,8 +67,10 @@ private
 		[0,s,1].sort[1]
 	end
 	def set(n,v)
-		if @values[n]!=v
+		o=@values[n]
+		if ((o-v).abs>0.1) or (o!=n and (o==0 or o==1))
 			queryRedraw
+			@doRedraw=true
 			@values[n]=v
 		end
 	end
