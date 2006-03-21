@@ -71987,6 +71987,61 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AntEntity_setDefense(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setDefense" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setDefense" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast<float >(val2);
+  (arg1)->setDefense(arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_getDefense(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  float result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getDefense" "', argument " "1"" of type '" "AntEntity const *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  result = (float)((AntEntity const *)arg1)->getDefense();
+  
+  vresult = SWIG_From_float(static_cast<float >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AntEntity_getPos3D(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   AGVector3 result;
@@ -87833,6 +87888,8 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "getStrength", VALUEFUNC(_wrap_AntEntity_getStrength), -1);
   rb_define_method(cAntEntity.klass, "setMoraleStrength", VALUEFUNC(_wrap_AntEntity_setMoraleStrength), -1);
   rb_define_method(cAntEntity.klass, "getMoraleStrength", VALUEFUNC(_wrap_AntEntity_getMoraleStrength), -1);
+  rb_define_method(cAntEntity.klass, "setDefense", VALUEFUNC(_wrap_AntEntity_setDefense), -1);
+  rb_define_method(cAntEntity.klass, "getDefense", VALUEFUNC(_wrap_AntEntity_getDefense), -1);
   rb_define_method(cAntEntity.klass, "getPos3D", VALUEFUNC(_wrap_AntEntity_getPos3D), -1);
   rb_define_method(cAntEntity.klass, "getPos2D", VALUEFUNC(_wrap_AntEntity_getPos2D), -1);
   rb_define_method(cAntEntity.klass, "setPos", VALUEFUNC(_wrap_AntEntity_setPos), -1);

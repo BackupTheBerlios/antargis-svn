@@ -55,8 +55,8 @@ class AntNewMan<AntMyEntity
 		setMinimapColor(AGColor.new(0x77,0x77,0x77))
 		setName(genName)
 
-		@weapon=["dagger","sword","shield"].shuffle[0]
-
+		resource.set("sword",1)
+		checkResources
 	end
 	
 	##########################
@@ -158,6 +158,7 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def newFightJob(d,ptarget)
+		checkResources
 		super
 		@moving=true
 		setMeshState("fight")
@@ -243,7 +244,7 @@ class AntNewMan<AntMyEntity
 						when "shield"
 							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
 						when "sword"
-							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
 					end
 					#end
 				end
@@ -318,7 +319,18 @@ class AntNewMan<AntMyEntity
 			setNoBoss
 		end
 	end
-
+	def checkResources
+		if resource.get("sword")==0
+			setStrength(0.01)
+		else
+			setStrength(0.02)
+		end
+		if resource.get("shield")==0
+			setDefense(1)
+		else
+			setDefense(1.5)
+		end
+	end
 end
 
 	

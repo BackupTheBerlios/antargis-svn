@@ -72,6 +72,11 @@ class AntMyEntity<AntEntity
 		# FIXME - implement in c++ (net-code)
 		rand
 	end
+
+	def setStrength(v)
+		super
+		setMoraleStrength(v*2)
+	end
 end
 
 
