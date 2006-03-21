@@ -221,6 +221,36 @@ void VertexArray::drawPick()
 
 
 
+void VertexArray::drawDepth()
+{
+  if(mChanged)
+    init();
+
+  glEnableClientState(GL_VERTEX_ARRAY);
+
+  if(mBuffers)
+    {
+      glBindBufferARB( GL_ARRAY_BUFFER_ARB, mVertexBuffer);
+      glVertexPointer(4, GL_FLOAT, 0, 0);
+
+      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
+      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+
+    }
+  else
+    {
+      //      cdebug("too much work");
+      glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
+
+      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+		     &(mIndices[0]));
+  }
+
+  glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+
+
 AGVector4 VertexArray::lineHit(const AGLine3 &pLine) const
 {
   AGVector4 mfalse(0,0,0,0);

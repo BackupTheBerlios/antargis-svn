@@ -39,6 +39,7 @@ class VertexArray
   void setBuffers(bool pBuffers);
   
   virtual void draw();
+  virtual void drawDepth();
   void drawPick();
   void init();
 

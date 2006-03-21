@@ -100,13 +100,13 @@ void AnimMesh::setEntity(AntEntity *e)
 
 void AnimMesh::drawDepth()
 {
-  //     return;
+  //  return;
   drawPrivate(false,false);
 }
 
 void AnimMesh::draw()
 {
-  //  return;
+  //return;
   drawPrivate(true,false);
 }
 void AnimMesh::drawPick()
@@ -156,8 +156,8 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 	{
 	  mData->animShaderDepth.enable();
 	  mData->animShaderDepth.sendUniform("matrices",mShaderMatrices);
-	  mData->mArrayDepth.setColors(false);
-	  mData->mArrayDepth.draw();
+	  //	  mData->mArrayDepth.setColors(false);
+	  mData->mArrayDepth.drawDepth();
 
 	  mData->animShaderDepth.disable();
 	}
