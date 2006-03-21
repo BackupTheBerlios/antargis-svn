@@ -336,7 +336,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	def check(man)
 		if moveFinished
 			if man.class==AntHero
-				if @state=="torest"
+				if (not @state=~/recruit/)
 					if @want==0 then 
 						@state="wait_recruit"
 					else
@@ -400,9 +400,6 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 				@oldpos=man.getPos2D
 			end
 			case man.getMode
-				when "moving"
-					man.newMoveJob(0,@target.getPos2D,0)
-					man.setMode("takingFood")
 				when "takingFood"
 					# take food and return
 					@target.resource.sub("food",1)
@@ -413,6 +410,9 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 						@finished=true
 						@hero.newHLMoveJob(0,@oldpos,0)
 					end
+				else
+					man.newMoveJob(0,@target.getPos2D,0)
+					man.setMode("takingFood")
 			end
 		else
 			super(man)

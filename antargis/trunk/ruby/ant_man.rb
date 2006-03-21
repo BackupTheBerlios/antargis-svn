@@ -196,7 +196,13 @@ class AntNewMan<AntMyEntity
 	end
 
 	def getWeapon
-		"dagger"
+		if resource.get("sword")==0
+			return "dagger"
+		elsif resource.get("shield")==0
+			"sword"
+		else
+			"shield"
+		end
 	end
 	
 	def setMeshState(name)

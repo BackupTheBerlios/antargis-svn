@@ -87,6 +87,9 @@ class AntEntity:public AGRubyObject
 
     float mStrength;
     float mMoraleStrength;
+    
+    float mDefense;
+
 
   public: //virtually protected
     float mDir;  // direction in (0,360)
@@ -106,6 +109,8 @@ class AntEntity:public AGRubyObject
     float getStrength() const;
     void setMoraleStrength(float f);
     float getMoraleStrength() const;
+    void setDefense(float f);
+    float getDefense() const;
 
 
     // Positions

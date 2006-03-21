@@ -264,5 +264,10 @@ class AntHero<AntBoss
 	def age
 		21
 	end
+
+	def spreadResources
+		# FIXME
+	end
+
 end
 

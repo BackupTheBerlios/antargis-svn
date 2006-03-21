@@ -76,6 +76,8 @@ void AntEntity::init()
   mHungerHitEnergy=0.1;
   mHungerHitMorale=0.14;
 
+
+  mDefense=1.0;
   //  mDirNum=1;
 }
 
@@ -586,6 +588,17 @@ float AntEntity::getMoraleStrength() const
 {
   return mMoraleStrength;
 }
+
+void AntEntity::setDefense(float f)
+{
+  assert(f>0);
+  mDefense=f;
+}
+float AntEntity::getDefense() const
+{
+  return mDefense;
+}
+
 
 void AntEntity::setProvide(const std::string &pName,bool flag)
 {

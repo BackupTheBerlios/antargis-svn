@@ -176,8 +176,8 @@ void FightJob::move(AntEntity *e,float ptime)
   else
     {
       // fight
-      mTarget->decEnergy(ptime*e->getStrength()*e->getAggression());
-      mTarget->decMorale(ptime*e->getMoraleStrength()); // FIXME: estimate this value
+      mTarget->decEnergy(ptime*e->getStrength()*e->getAggression()/mTarget->getDefense());
+      mTarget->decMorale(ptime*e->getMoraleStrength()/mTarget->getDefense()); // FIXME: estimate this value
       mTarget->eventGotFight(e);
 
       if(moving)
