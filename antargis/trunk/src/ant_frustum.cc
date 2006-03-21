@@ -19,6 +19,7 @@
  */
 
 #include "ant_frustum.h"
+#include "ag_debug.h"
 
 /////////////////////////////////////////////////////////////////////
 // AntPlane
@@ -55,6 +56,8 @@ AntFrustum::AntFrustum(const std::vector<AntPlane> &pPlanes):
   mPlanes(pPlanes)
 {
   assert(mPlanes.size()==6);
+
+  //  cdebug(*this);
 }
 
 bool AntFrustum::inside(const AGVector3 &v) const
@@ -63,4 +66,37 @@ bool AntFrustum::inside(const AGVector3 &v) const
     if(!i->inside(v))
       return false;
   return true;
+}
+
+bool AntFrustum::collides(const AGBox3 &b) const
+{
+  for(std::vector<AntPlane>::const_iterator i=mPlanes.begin();i!=mPlanes.end();++i)
+    {
+      std::vector<AGVector4> vs=b.getVertices();
+      bool outside=true;
+      for(std::vector<AGVector4>::iterator j=vs.begin();j!=vs.end();++j)
+	{
+	  if(i->inside(j->dim3()))
+	    {
+	      outside=false;
+	      break;
+	    }
+	}
+      if(outside)
+	return false;
+    }
+  return true;
+}
+
+
+std::ostream &operator<<(std::ostream &o,const AntPlane &p)
+{
+  o<<"("<<p.mDir<<","<<p.mOffset<<")";
+  return o;
+}
+std::ostream &operator<<(std::ostream &o,const AntFrustum &p)
+{
+  for(std::vector<AntPlane>::const_iterator i=p.mPlanes.begin();i!=p.mPlanes.end();++i)
+    o<<*i<<";";
+  return o;
 }

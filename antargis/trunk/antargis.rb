@@ -129,7 +129,7 @@ class AntGameApp <AntRubyView
 
 	def eventKeyDown(e)
 		if e.getKey==SDLK_F9
-			if panelVisible
+			if not panelVisible
 				showPanel
 			else
 				hidePanel
@@ -149,12 +149,15 @@ class AntGameApp <AntRubyView
 	end
 
 	def panelVisible
+		puts @layout.getChild("SideBar").visible
 		@layout.getChild("SideBar").visible
 	end
 	def showPanel
+		puts "SHOWPANEL"
 		@layout.getChild("SideBar").show
 	end
 	def hidePanel
+		puts "HIDEPANEL"
 		@layout.getChild("SideBar").hide
 	end
 
@@ -408,6 +411,15 @@ def startGame(file="savegames/savegame0.antlvl")
 	GC.start
 	return result
 end
+def frustumTest
+	puts "frustumTest"
+	p=AntPlane.new(AGVector3.new(1,1,-1).normalized,1)
+	
+	puts p.inside(AGVector3.new(2,5,6))
+	
+	#exit
+end
+frustumTest
 
 if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
@@ -421,4 +433,6 @@ if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/
 	puts "LOADING:"+savegame
 	startGame(savegame)	
 end
+
+
 

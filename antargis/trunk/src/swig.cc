@@ -65817,6 +65817,42 @@ fail:
 }
 
 
+SWIGINTERN VALUE
+_wrap_AntFrustum_collides(int argc, VALUE *argv, VALUE self) {
+  AntFrustum *arg1 = (AntFrustum *) 0 ;
+  AGBox3 *arg2 = 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntFrustum, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "collides" "', argument " "1"" of type '" "AntFrustum const *""'"); 
+  }
+  arg1 = reinterpret_cast<AntFrustum * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[0], &argp2, SWIGTYPE_p_AGBox3,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "collides" "', argument " "2"" of type '" "AGBox3 const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "collides" "', argument " "2"" of type '" "AGBox3 const &""'"); 
+  }
+  arg2 = reinterpret_cast<AGBox3 * >(argp2);
+  result = (bool)((AntFrustum const *)arg1)->collides((AGBox3 const &)*arg2);
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
 SWIGINTERN void
 free_AntFrustum(AntFrustum *arg1) {
     delete arg1;
@@ -73237,6 +73273,31 @@ _wrap_AntEntity_incFood(int argc, VALUE *argv, VALUE self) {
   (arg1)->incFood(arg2);
   
   return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_isStarving(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "isStarving" "', argument " "1"" of type '" "AntEntity const *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  result = (bool)((AntEntity const *)arg1)->isStarving();
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
+  return vresult;
 fail:
   return Qnil;
 }
@@ -86777,6 +86838,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_alloc_func(cAntFrustum.klass, _wrap_AntFrustum_allocate);
   rb_define_method(cAntFrustum.klass, "initialize", VALUEFUNC(_wrap_new_AntFrustum), -1);
   rb_define_method(cAntFrustum.klass, "inside", VALUEFUNC(_wrap_AntFrustum_inside), -1);
+  rb_define_method(cAntFrustum.klass, "collides", VALUEFUNC(_wrap_AntFrustum_collides), -1);
   cAntFrustum.mark = 0;
   cAntFrustum.destroy = (void (*)(void *)) free_AntFrustum;
   cAntFrustum.trackObjects = 0;
@@ -87079,6 +87141,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "incMorale", VALUEFUNC(_wrap_AntEntity_incMorale), -1);
   rb_define_method(cAntEntity.klass, "getFood", VALUEFUNC(_wrap_AntEntity_getFood), -1);
   rb_define_method(cAntEntity.klass, "incFood", VALUEFUNC(_wrap_AntEntity_incFood), -1);
+  rb_define_method(cAntEntity.klass, "isStarving", VALUEFUNC(_wrap_AntEntity_isStarving), -1);
   rb_define_method(cAntEntity.klass, "eventMapChanged", VALUEFUNC(_wrap_AntEntity_eventMapChanged), -1);
   rb_define_method(cAntEntity.klass, "move", VALUEFUNC(_wrap_AntEntity_move), -1);
   rb_define_method(cAntEntity.klass, "mark", VALUEFUNC(_wrap_AntEntity_mark), -1);

@@ -2150,14 +2150,14 @@ std::string AGMatrix4::toString() const
   return a;
 }
 
-
+/*
 double gMatrixDoubleBuf[16];
 (AGMatrix4::operator const double*)() const
 {
   for(int i=0;i<16;i++)
     gMatrixDoubleBuf[i]=a[i];
   return gMatrixDoubleBuf;
-}
+  }*/
 
 float AGMatrix4::operator()(size_t x,size_t y) const
 {

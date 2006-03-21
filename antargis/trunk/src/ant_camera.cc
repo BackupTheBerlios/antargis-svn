@@ -159,17 +159,29 @@ AntFrustum AntCamera::getFrustum() const
 {
   float w=mWidth;
   float h=mHeight;
-
-  AGVector3 p000(unProject(AGVector3(0,0,0)));
-  AGVector3 p100(unProject(AGVector3(w,0,0)));
-  AGVector3 p010(unProject(AGVector3(0,h,0)));
-  AGVector3 p110(unProject(AGVector3(w,h,0)));
-  AGVector3 p001(unProject(AGVector3(0,0,1)));
-  AGVector3 p101(unProject(AGVector3(w,0,1)));
-  AGVector3 p011(unProject(AGVector3(0,h,1)));
-  AGVector3 p111(unProject(AGVector3(w,h,1)));
+  float d=1;
+  float d0=0;
 
 
+  /*  cdebug("MV:"<<std::endl<<getModelview().toString());
+  cdebug("PR:"<<std::endl<<getProjection().toString());
+  cdebug("VP:"<<std::endl<<getViewport()[0]<<" "<<getViewport()[1]<<" "<<getViewport()[2]<<" "<<getViewport()[3]);
+  */
+  AGVector3 p000(unProject(AGVector3(0,0,d0)));
+  AGVector3 p100(unProject(AGVector3(w,0,d0)));
+  AGVector3 p010(unProject(AGVector3(0,h,d0)));
+  AGVector3 p110(unProject(AGVector3(w,h,d0)));
+  AGVector3 p001(unProject(AGVector3(0,0,d)));
+  AGVector3 p101(unProject(AGVector3(w,0,d)));
+  AGVector3 p011(unProject(AGVector3(0,h,d)));
+  AGVector3 p111(unProject(AGVector3(w,h,d)));
+
+  /*
+  cdebug(p000<<"  "<<p100);
+  cdebug(p010<<"  "<<p110);
+  cdebug(p001<<"  "<<p101);
+  cdebug(p011<<"  "<<p111);
+  */
   std::vector<AntPlane> ps;
 
   ps.push_back(makePlane(p000,p010,p100)); // front
@@ -202,14 +214,30 @@ AGMatrix4 AntCamera::getProjection() const
 AGVector3 AntCamera::project(const AGVector3 &p) const
 {
   GLdouble x,y,z;
-  gluProject(p[0],p[1],p[2],getModelview(),getProjection(),getViewport(),&x,&y,&z);
+
+  GLdouble mv[16],pr[16];
+  for(int i=0;i<16;i++)
+    { 
+      mv[i]=((float*)getModelview())[i];
+      pr[i]=((float*)getProjection())[i];
+    }
+
+  gluProject(p[0],p[1],p[2],mv,pr,getViewport(),&x,&y,&z);
   return AGVector3(x,y,z);
 }
 
 AGVector3 AntCamera::unProject(const AGVector3 &p) const
 {
   GLdouble x,y,z;
-  gluUnProject(p[0],p[1],p[2],getModelview(),getProjection(),getViewport(),&x,&y,&z);
+
+  GLdouble mv[16],pr[16];
+  for(int i=0;i<16;i++)
+    { 
+      mv[i]=((float*)getModelview())[i];
+      pr[i]=((float*)getProjection())[i];
+    }
+
+  gluUnProject(p[0],p[1],p[2],mv,pr,getViewport(),&x,&y,&z);
   return AGVector3(x,y,z);
 }
 

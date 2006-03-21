@@ -289,6 +289,7 @@ AGMatrix4 Scene::getFrustum()
 void Scene::drawScene()
 {
   AGMatrix4 frustum=getFrustum();
+  AntFrustum rFrustum=mCamera.getFrustum();
   
   //2nd pass - Draw from camera's point of view
 
@@ -314,7 +315,8 @@ void Scene::drawScene()
     {
       if(!(*i)->transparent())
 	{
-	  if((*i)->visible() && (*i)->bbox().collides(frustum))
+	  //	  	  if((*i)->visible() && (*i)->bbox().collides(frustum))
+	  if((*i)->visible() && rFrustum.collides((*i)->bbox()))
 	    {
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
@@ -328,7 +330,8 @@ void Scene::drawScene()
     {
       if((*i)->transparent())
 	{
-	  if((*i)->visible() && (*i)->bbox().collides(frustum))
+	  //if((*i)->visible() && (*i)->bbox().collides(frustum))
+	  if((*i)->visible() && rFrustum.collides((*i)->bbox()))
 	    {
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();

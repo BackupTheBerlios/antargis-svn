@@ -30,6 +30,7 @@ class AntPlane
 
   bool inside(const AGVector3 &v) const;
 
+  friend std::ostream &operator<<(std::ostream &o,const AntPlane &p);
  private:
   AGVector3 mDir;
   float mOffset;
@@ -44,8 +45,14 @@ class AntFrustum
   AntFrustum(const std::vector<AntPlane> &pPlanes);
 
   bool inside(const AGVector3 &v) const;
+  bool collides(const AGBox3 &v) const;
+
+  friend std::ostream &operator<<(std::ostream &o,const AntFrustum &p);
  private:
   std::vector<AntPlane> mPlanes;
 };
+
+std::ostream &operator<<(std::ostream &o,const AntPlane &p);
+std::ostream &operator<<(std::ostream &o,const AntFrustum &p);
 
 #endif
