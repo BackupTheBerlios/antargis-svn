@@ -77,10 +77,12 @@ private
 		ok=@resTypes+["boss"]
 		if ok.member?(name) then
 			w=getChild(name)
-			if value.class==String
-				w.setText value
-			else
-				w.setText value.to_i.to_s
+			mv=value
+			if value.class!=String
+				mv=value.to_i.to_s
+			end
+			if w.getText!=mv
+				w.setText mv
 			end
 		end
 	end

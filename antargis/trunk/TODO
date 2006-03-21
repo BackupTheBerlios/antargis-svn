@@ -85,6 +85,7 @@ ARTS
 
 [Game]
 ------------------------------------------------------
+[VH] fix defending
 [VH] add "eat-action", "sleep-action" "special??"
 [VVH] make hero-displays 
 [VH] sure to dismiss dialog!

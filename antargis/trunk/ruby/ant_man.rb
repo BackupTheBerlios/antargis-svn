@@ -54,6 +54,9 @@ class AntNewMan<AntMyEntity
 		@mode="wait"
 		setMinimapColor(AGColor.new(0x77,0x77,0x77))
 		setName(genName)
+
+		@weapon=["dagger","sword","shield"].shuffle[0]
+
 	end
 	
 	##########################
@@ -192,7 +195,7 @@ class AntNewMan<AntMyEntity
 	end
 
 	def getWeapon
-		"dagger"
+		@weapon
 	end
 	
 	def setMeshState(name)
@@ -207,21 +210,26 @@ class AntNewMan<AntMyEntity
 		case name
 			when "wood"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_wood.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_wood.anim")))
 			when "stone"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_stones.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_stones.anim")))
 			when "walk","sitdown","sit"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
 				getFirstMesh.setAnimation(name)
 
 				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
-				getFirstMesh.setAnimation("fight")
+				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
+				#getFirstMesh.setAnimation("fight")
 			when "fight"
 				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
 				case getWeapon
 					when "dagger"
 						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
 					when "shield"
+						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+					when "sword"
 						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
 				end
 			when "axe"
@@ -230,7 +238,7 @@ class AntNewMan<AntMyEntity
 			when "pick"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_pick.anim")))
 			when "stand"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
 				getFirstMesh.setAnimation("stand")
 			when "dead"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))

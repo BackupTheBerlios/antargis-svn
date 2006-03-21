@@ -27,7 +27,7 @@ class AntEnergy<AGWidget
 		updateValues
 	end
 	def redraw
-		true
+		#true
 	end
 
 	def draw(p)

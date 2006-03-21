@@ -272,6 +272,8 @@ class AntNameDisplay<AGWidget
 		@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-91))
 		addChild(@energyWidget)
 		@energyWidget.setHero(hero)
+
+		setCaching(true)
 	end
 
 	# enforce integer position	
