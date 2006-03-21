@@ -243,7 +243,9 @@ void AnimMesh::advance(float time)
   else
     mTime=mAnimation->begin;
 
-  //  cdebug(mAnimName<<"  "<<mTime<<"  "<<mAnimation->len);
+  mTime=std::max(mTime,mAnimation->begin);
+
+  cdebug(mAnimName<<"  "<<mTime<<"  "<<mAnimation->len<<" "<<mAnimation->begin<<" "<<mAnimation->end);
 
 
   // check events

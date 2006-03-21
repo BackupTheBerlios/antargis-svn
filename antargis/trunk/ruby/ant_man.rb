@@ -215,6 +215,7 @@ class AntNewMan<AntMyEntity
 
 				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+				getFirstMesh.setAnimation("fight")
 			when "fight"
 				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
 				case getWeapon
