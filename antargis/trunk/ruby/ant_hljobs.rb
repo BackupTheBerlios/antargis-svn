@@ -95,7 +95,9 @@ class AntHeroMoveJob<AntHLJob
 					when "moving"
 						@movingMen-=1
 						man.setMode("torest")
-						man.newRestJob(1)
+						if @movingMen>0
+							man.newRestJob(5)
+						end
 				end
 				puts "movingMen:#{@movingMen}"
 				if @movingMen==0
@@ -172,10 +174,13 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def checkState
 		checkFlee
-		if moveFinished or @defend
+		if moveFinished #or @defend
 			puts "FightJob::checkState:MOVE FINISHED"
 			@state="fight"
 			@target.eventAttacked(@hero)
+		end
+		if @defend and @target.getJob.class!=self.class
+			@finished=true # quick flee
 		end
 	end
 	
@@ -296,7 +301,6 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	
 	def checkFight(man)
-		#puts "CHECKFIGHT"
 		if not @target.getJob.is_a?(AntHeroFightJob)
 			return
 		end
@@ -304,12 +308,6 @@ class AntHeroFightJob<AntHeroMoveJob
 		# not won yet, so go on
 		checkFightMan(man)
 		
-# 		if @killJobsGiven==false and @defend==false then
-# 			# set target fighting,too
-# 			puts "checkFight"
-# 			@target.newHLDefendJob(@hero)
-# 		end
-# 		@killJobsGiven=true
 		return false
 	end
 private

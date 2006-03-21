@@ -131,6 +131,7 @@ bool FightJob::needsMorale() const
 FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
 {
   fightDistance=1;//0.20; // in pixels
+  moving=true;
 }
 
 void FightJob::move(AntEntity *e,float ptime)
@@ -156,12 +157,21 @@ void FightJob::move(AntEntity *e,float ptime)
   AGVector2 diff=e->getPos2D()-mTarget->getPos2D();
   float norm=diff.length();
   float speed=e->getSpeed();
+
+
+  e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+
   if(norm-fightDistance>ptime*speed)
     {
       // run
       diff=diff.normalized();
       e->setPos(e->getPos2D()-diff*ptime*speed);
-      e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+      //    e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+      if(!moving)
+	{
+	  e->eventStartMoving();
+	  moving=true;
+	}
     }
   else
     {
@@ -169,6 +179,13 @@ void FightJob::move(AntEntity *e,float ptime)
       mTarget->decEnergy(ptime*e->getStrength()*e->getAggression());
       mTarget->decMorale(ptime*e->getMoraleStrength()); // FIXME: estimate this value
       mTarget->eventGotFight(e);
+
+      if(moving)
+	{
+	  e->eventStartFighting();
+	  moving=false;
+	}
+
     }
 }
 

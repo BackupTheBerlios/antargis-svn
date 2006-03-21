@@ -170,6 +170,10 @@ class AntEntity:public AGRubyObject
     virtual void eventHaveDefeated(AntEntity *e);
     virtual void eventMoraleLow();
 
+    // called by FightJob
+    virtual void eventStartFighting();
+    virtual void eventStartMoving();
+
     void sigDefeated(); // morale too low
     void sigJobFinished();
 

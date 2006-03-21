@@ -665,3 +665,10 @@ bool AntEntity::isStarving() const
 {
   return mFood<=0;
 }
+
+void AntEntity::eventStartFighting()
+{
+}
+void AntEntity::eventStartMoving()
+{
+}

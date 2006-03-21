@@ -1343,6 +1343,8 @@ public:
     virtual void eventJobFinished();
     virtual void eventDefeated();
     virtual void eventDie();
+    virtual void eventStartFighting();
+    virtual void eventStartMoving();
     virtual void loadXML(xmlpp::Node const &node);
     virtual void saveXML(xmlpp::Node &node) const;
     virtual void newFightJob(int p, AntEntity *target);

@@ -269,7 +269,7 @@ class AntNameDisplay<AGWidget
 		addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
 		b.setEnabled(false)
 		#b.setTheme("antButton")
-		@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-91))
+		@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-11))
 		addChild(@energyWidget)
 		@energyWidget.setHero(hero)
 

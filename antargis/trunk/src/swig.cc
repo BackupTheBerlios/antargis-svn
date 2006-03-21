@@ -21439,6 +21439,28 @@ void SwigDirector_AntEntity::eventDie() {
 }
 
 
+void SwigDirector_AntEntity::eventStartFighting() {
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AntEntity::eventStartFighting();
+    return;
+  }
+  result = rb_funcall(swig_get_self(), rb_intern("eventStartFighting"), 0, NULL);
+}
+
+
+void SwigDirector_AntEntity::eventStartMoving() {
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AntEntity::eventStartMoving();
+    return;
+  }
+  result = rb_funcall(swig_get_self(), rb_intern("eventStartMoving"), 0, NULL);
+}
+
+
 void SwigDirector_AntEntity::loadXML(xmlpp::Node const &node) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -73382,6 +73404,66 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AntEntity_eventStartFighting(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "eventStartFighting" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->eventStartFighting();
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AntEntity_eventStartMoving(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "eventStartMoving" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->eventStartMoving();
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AntEntity_sigDefeated(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   void *argp1 = 0 ;
@@ -87784,6 +87866,8 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "eventDefeated", VALUEFUNC(_wrap_AntEntity_eventDefeated), -1);
   rb_define_method(cAntEntity.klass, "eventHaveDefeated", VALUEFUNC(_wrap_AntEntity_eventHaveDefeated), -1);
   rb_define_method(cAntEntity.klass, "eventMoraleLow", VALUEFUNC(_wrap_AntEntity_eventMoraleLow), -1);
+  rb_define_method(cAntEntity.klass, "eventStartFighting", VALUEFUNC(_wrap_AntEntity_eventStartFighting), -1);
+  rb_define_method(cAntEntity.klass, "eventStartMoving", VALUEFUNC(_wrap_AntEntity_eventStartMoving), -1);
   rb_define_method(cAntEntity.klass, "sigDefeated", VALUEFUNC(_wrap_AntEntity_sigDefeated), -1);
   rb_define_method(cAntEntity.klass, "sigJobFinished", VALUEFUNC(_wrap_AntEntity_sigJobFinished), -1);
   rb_define_method(cAntEntity.klass, "getEnergy", VALUEFUNC(_wrap_AntEntity_getEnergy), -1);

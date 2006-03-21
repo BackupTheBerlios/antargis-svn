@@ -138,10 +138,10 @@
   <!--<antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="home" onGround="true" men="1">
     <position x="9.0708" y="9.55088" z="3.22989"/>
   </antTower>-->
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true" men="0">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true" men="2">
     <position x="25.9184" y="11.5744" z="2.30454"/>
   </antHero>
-  <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Godrin" onGround="true" men="1">
+  <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Godrin" onGround="true" men="3">
     <position x="31.6598" y="7.15123" z="2.58762"/>
   </antHero>
 	

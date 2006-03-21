@@ -69,6 +69,7 @@ class FightJob:public Job
   {
     AntEntity *mTarget;
     float fightDistance;
+    bool moving;
 
   public:
     FightJob(int p,AntEntity *pTarget);

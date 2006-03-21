@@ -159,6 +159,7 @@ class AntNewMan<AntMyEntity
 	
 	def newFightJob(d,ptarget)
 		super
+		@moving=true
 		setMeshState("fight")
 	end
 	
@@ -195,7 +196,7 @@ class AntNewMan<AntMyEntity
 	end
 
 	def getWeapon
-		@weapon
+		"dagger"
 	end
 	
 	def setMeshState(name)
@@ -223,16 +224,22 @@ class AntNewMan<AntMyEntity
 				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
 				#getFirstMesh.setAnimation("fight")
 			when "fight"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
-				if false
-				case getWeapon
-					when "dagger"
-						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
-					when "shield"
-						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
-					when "sword"
-						setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
-				end
+				if @moving
+					# FIXME: fill in man_e_dagger ...
+					setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
+					getFirstMesh.setAnimation("walk")
+				else
+					#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
+					#if false
+					case getWeapon
+						when "dagger"
+							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
+						when "shield"
+							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+						when "sword"
+							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
+					end
+					#end
 				end
 			when "axe"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_axe.anim")))
@@ -268,6 +275,16 @@ class AntNewMan<AntMyEntity
 			when "stone"
 				setMeshState("stone")
 		end
+	end
+
+	def eventStartMoving
+		@moving=true
+		setMeshState(@meshState)
+		eventJobFinished # call, so that hl-job finish is checked
+	end
+	def eventStartFighting
+		@moving=false
+		setMeshState(@meshState)
 	end
 	
 
