@@ -246,9 +246,9 @@ class AntNewMan<AntMyEntity
 		end
 		setDirection(dir)
 	end
-	
+
 	def digResource(res)
-		newRestJob(2)
+		newRestJob(2+getRand)
 		case res
 			when "wood"
 				setMeshState("axe")

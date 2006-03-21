@@ -2061,6 +2061,11 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,AntPlane,b);
  $result=*b;
 }
+%typemap(directorout) AntProjection {
+ AntProjection *b;
+ Data_Get_Struct($input,AntProjection,b);
+ $result=*b;
+}
 %typemap(directorout) AntShaderParameter {
  AntShaderParameter *b;
  Data_Get_Struct($input,AntShaderParameter,b);

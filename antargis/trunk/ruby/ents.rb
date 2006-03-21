@@ -68,6 +68,10 @@ class AntMyEntity<AntEntity
 	def fightTarget
 		@fightTarget
 	end
+	def getRand
+		# FIXME - implement in c++ (net-code)
+		rand
+	end
 end
 
 

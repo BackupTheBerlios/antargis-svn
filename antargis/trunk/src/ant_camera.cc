@@ -155,44 +155,6 @@ void AntCamera::updateMatrices()
 }
 
 
-AntFrustum AntCamera::getFrustum() const
-{
-  float w=mWidth;
-  float h=mHeight;
-  float d=1;
-  float d0=0;
-
-
-  /*  cdebug("MV:"<<std::endl<<getModelview().toString());
-  cdebug("PR:"<<std::endl<<getProjection().toString());
-  cdebug("VP:"<<std::endl<<getViewport()[0]<<" "<<getViewport()[1]<<" "<<getViewport()[2]<<" "<<getViewport()[3]);
-  */
-  AGVector3 p000(unProject(AGVector3(0,0,d0)));
-  AGVector3 p100(unProject(AGVector3(w,0,d0)));
-  AGVector3 p010(unProject(AGVector3(0,h,d0)));
-  AGVector3 p110(unProject(AGVector3(w,h,d0)));
-  AGVector3 p001(unProject(AGVector3(0,0,d)));
-  AGVector3 p101(unProject(AGVector3(w,0,d)));
-  AGVector3 p011(unProject(AGVector3(0,h,d)));
-  AGVector3 p111(unProject(AGVector3(w,h,d)));
-
-  /*
-  cdebug(p000<<"  "<<p100);
-  cdebug(p010<<"  "<<p110);
-  cdebug(p001<<"  "<<p101);
-  cdebug(p011<<"  "<<p111);
-  */
-  std::vector<AntPlane> ps;
-
-  ps.push_back(makePlane(p000,p010,p100)); // front
-  ps.push_back(makePlane(p101,p111,p001)); // back
-  ps.push_back(makePlane(p010,p011,p110)); // top
-  ps.push_back(makePlane(p001,p000,p101)); // bottom
-  ps.push_back(makePlane(p001,p011,p000)); // left
-  ps.push_back(makePlane(p100,p110,p101)); // right
-
-  return AntFrustum(ps);
-}
 Viewport AntCamera::getViewport() const
 {
   Viewport p;
@@ -209,36 +171,6 @@ AGMatrix4 AntCamera::getModelview() const
 AGMatrix4 AntCamera::getProjection() const
 {
   return cameraProjection;
-}
-
-AGVector3 AntCamera::project(const AGVector3 &p) const
-{
-  GLdouble x,y,z;
-
-  GLdouble mv[16],pr[16];
-  for(int i=0;i<16;i++)
-    { 
-      mv[i]=((float*)getModelview())[i];
-      pr[i]=((float*)getProjection())[i];
-    }
-
-  gluProject(p[0],p[1],p[2],mv,pr,getViewport(),&x,&y,&z);
-  return AGVector3(x,y,z);
-}
-
-AGVector3 AntCamera::unProject(const AGVector3 &p) const
-{
-  GLdouble x,y,z;
-
-  GLdouble mv[16],pr[16];
-  for(int i=0;i<16;i++)
-    { 
-      mv[i]=((float*)getModelview())[i];
-      pr[i]=((float*)getProjection())[i];
-    }
-
-  gluUnProject(p[0],p[1],p[2],mv,pr,getViewport(),&x,&y,&z);
-  return AGVector3(x,y,z);
 }
 
 void AntCamera::setPosition(const AGVector3 &p)
@@ -290,7 +222,16 @@ AGMatrix4 AntCamera::getLightView() const
 {
   return lightView;
 }
-AGMatrix4 AntCamera::getLightProjection() const
+AGMatrix4 AntCamera::getLightProjectionMatrix() const
 {
   return lightProjection;
+}
+
+AntProjection AntCamera::getCameraProjection() const
+{
+  return AntProjection(getModelview(),getProjection(),getViewport());
+}
+AntProjection AntCamera::getLightProjection() const
+{
+  return AntProjection(getLightView(),getLightProjectionMatrix(),getViewport());
 }

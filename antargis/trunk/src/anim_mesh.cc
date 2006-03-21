@@ -119,9 +119,11 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 {
   AGRenderContext c;
   if(textured)
-    c.setTexture(mData->mTexture.glTexture());
-  
-  c.setLighting(true);
+    {
+      c.setTexture(mData->mTexture.glTexture());
+      
+      c.setLighting(true);
+    }
   c.begin();
   glPushMatrix();
 
@@ -232,11 +234,7 @@ void AnimMesh::advance(float time)
     {
       if(mAnimation->loop)
 	while(mTime>mAnimation->end)
-	  {
-	    mTime-=mAnimation->len;
-	    //	    if(entity)
-	    //	      entity->animationEvent("looped");
-	  }
+	  mTime-=mAnimation->len;
       else
 	mTime=std::min(mTime,mAnimation->end);
     }

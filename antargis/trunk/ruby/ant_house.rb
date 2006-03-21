@@ -87,6 +87,7 @@ class AntHouse<AntBoss
 	end
 	
 	def eatFood
+		return 
 		food=resource.get("food")
 		eatAmount=@men.length*0.04
 		if food>eatAmount
@@ -136,27 +137,34 @@ class AntHouse<AntBoss
 			end
 		end
 	end
+
 	
 	def normalFetching(e)
 		if atHome(e) then
 			checkFood(e)
 			puts "CAME HOME"
-			e.setMode("")
-			e.setMeshState("stand")
 			@atHome.push(e)
-			# is home:
-			# 1) take everything from inventory
-			resource.takeAll(e.resource)
-			# 2) give job
-			need=needed()
-			# keep at least a third of all men at home
-			if need != nil and @atHome.length>@men.length/3 then
-				puts "GO FETCH"
-				fetch( need[1],need[0],e)
+			puts "MODE:#{e.getMode}"
+			if e.getMode=="resting"
+				e.setMode("")
+				e.setMeshState("stand")
+				# is home:
+				# 1) take everything from inventory
+				resource.takeAll(e.resource)
+				# 2) give job
+				need=needed()
+				# keep at least a third of all men at home
+				if need != nil and @atHome.length>@men.length/3 then
+					puts "GO FETCH"
+					fetch( need[1],need[0],e)
+				else
+					e.newRestJob(2+getRand)
+					e.setVisible(false)
+				end
 			else
-				e.newRestJob(2)
-				e.setVisible(false)
-			end
+				e.setMode("resting")
+				e.newRestJob(2+getRand)
+			end	
 		elsif e.getMode=~/fetching/
 			puts "DIGGGGGGGGGGGGGGGGG"
 			res=e.getMode.gsub(/.* /,"")
@@ -188,7 +196,7 @@ class AntHouse<AntBoss
 	# returns: [good,from] or nil
 	def needed()
 		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree"}
-		goods={"wood"=>"tree","food"=>"tree"}
+		#goods={"wood"=>"tree","food"=>"tree"}
 		min=50
 		need=nil
 		needfrom=nil
@@ -250,7 +258,7 @@ class AntHouse<AntBoss
 	def checkFood(man)
 		puts "#{man} #{man.getFood}"
 		if man.getFood<0.5
-			puts "low"
+			puts "FOOOOOOOOOOOOOOOOOOOOOOOOOOOD low #{man.getFood}"
 			# eat
 			if resource.get("food")>1
 				man.incFood(1)

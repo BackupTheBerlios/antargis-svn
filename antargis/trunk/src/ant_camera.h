@@ -24,34 +24,21 @@
 #include <GLee.h>
 
 #include <ant_frustum.h>
+#include <ant_projection.h>
 #include <ag_rubyobj.h>
 
-struct Viewport
-{
-  GLint viewport[4];
-#ifndef SWIG
-  (operator GLint *)()
-  {
-    return viewport;
-  }
-#endif
-};
 
 class AntCamera//:public AGRubyObject
 {
  public:
   AntCamera(int w,int h);
 
-  AntFrustum getFrustum() const;
   Viewport getViewport() const;
   AGMatrix4 getModelview() const;
   AGMatrix4 getProjection() const;
 
   /// affects scenePosition
   void setPosition(const AGVector3 &p);
-
-  AGVector3 project(const AGVector3 &p) const;
-  AGVector3 unProject(const AGVector3 &p) const;
 
   /// returns absolute camera position
   AGVector4 getCameraPosition() const;
@@ -64,7 +51,10 @@ class AntCamera//:public AGRubyObject
 
   AGMatrix4 getLightComplete() const;
   AGMatrix4 getLightView() const;
-  AGMatrix4 getLightProjection() const;
+  AGMatrix4 getLightProjectionMatrix() const;
+
+  AntProjection getCameraProjection() const;
+  AntProjection getLightProjection() const;
 
  private:
 
