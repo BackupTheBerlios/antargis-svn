@@ -272,7 +272,6 @@ void AnimMesh::advance(float time)
 
 void AnimMesh::update()
 {
-
   // this doesn't take much of rendering-time
   // calculate 
   
