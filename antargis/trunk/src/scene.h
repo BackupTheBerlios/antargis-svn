@@ -95,6 +95,9 @@ class Scene:public AGRubyObject
 
   NodeList getCurrentNodes();
 
+
+  void setEnabled(bool p);
+
  private:
   void calcShadowMap();
   void drawScene();
@@ -128,6 +131,8 @@ class Scene:public AGRubyObject
 
   // picking vars
   std::map<GLuint,SceneNode*> pickNames;
+
+  bool mEnabled;
 };
 
 

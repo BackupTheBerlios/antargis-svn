@@ -30,9 +30,12 @@ class AntNewSheep<AntAnimal
 		setProvide("sheep",true)
 		setSpeed 0.4
 		@lastBirth=0
+		@foodAdd=0
 		
 		data=getAnimMeshData("data/models/sheep.anim")
 		setMesh(AnimMesh.new(getMap.getScene,data))
+
+		resource.set("food",1)
 	end
 	def saveXML(node)
 		super(node)
@@ -50,6 +53,17 @@ class AntNewSheep<AntAnimal
 	end
 	def eventJobFinished
 		super
+
+		if @dead
+			newRestJob(30)
+			if @alreadyDead
+				$map.removeEntity(self)
+			end
+			@alreadyDead=true
+	
+			return
+		end
+
 		# BIRTHRATE is here:
 		if @lastBirth>40 then
 			# make child
@@ -68,6 +82,16 @@ class AntNewSheep<AntAnimal
 			setMeshState("eat")
 			playSound("sheep")
 		end
+
+		@foodAdd+=1
+		#puts "FOOOOOD #{@foodAdd}"
+		if @foodAdd>3 and resource.get("food")<10
+			#puts "RESOURCE: #{resource.get("food")}"
+			resource.add("food",1)
+			#puts "RESOURCE: #{resource.get("food")}"
+			@foodAdd=0
+		end
+
 		@lastBirth+=1
 	end
 	
@@ -93,6 +117,12 @@ class AntNewSheep<AntAnimal
 		getFirstMesh.setAnimation(s)
 	end
 	def getName
+		return "Corpse" if @dead
 		"Sheep"
+	end
+	def eventDie
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
+		@dead=true
+		newRestJob(1)
 	end
 end

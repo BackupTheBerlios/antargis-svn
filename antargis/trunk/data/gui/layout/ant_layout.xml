@@ -89,7 +89,7 @@
 								<text align="middle" caption="Minion    of Godrin" font="inventory.font"/>
 							</cell>
 							<cell col="0" row="3">
-								<table cols="4" rows="5">
+								<table cols="6" rows="5">
 									<!--<text col="0" row="0" caption="" align="left" font="inventory.font"/>-->
 									<!--<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
 									<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
@@ -97,16 +97,16 @@
 									<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
 									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>-->
 									<image col="0" row="0" filename="data/gui/man.png"/>
-									<image col="0" row="1" filename="data/gui/wood.png"/>
-									<image col="0" row="2" filename="data/gui/stones.png"/>
-									<image col="0" row="3" filename="data/gui/apple2.png"/>
-									<image col="0" row="4" filename="data/gui/sword.png"/>
+									<image col="0" row="1" filename="data/gui/apple2.png"/>
+									<image col="0" row="2" filename="data/gui/shield.png"/>
+									<image col="0" row="3" filename="data/gui/sword.png"/>
+									<image col="0" row="4" filename="data/gui/tools.png"/>
 									
 									<!--<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>-->
 									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
-									<text col="1" row="1" caption="0" align="right" name="wood" font="inventory.font"/>
-									<text col="1" row="2" caption="0" align="right" name="stone" font="inventory.font"/>
-									<text col="1" row="3" caption="0" align="right" name="food" font="inventory.font"/>
+									<text col="1" row="1" caption="0" align="right" name="food" font="inventory.font"/>
+									<text col="1" row="2" caption="0" align="right" name="shield" font="inventory.font"/>
+									<text col="1" row="3" caption="0" align="right" name="sword" font="inventory.font"/>
 									<text col="1" row="4" caption="0" align="right" name="tool" font="inventory.font"/>
 									
 									<image col="2" row="0" filename="data/gui/coal.png"/>

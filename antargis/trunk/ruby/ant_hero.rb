@@ -157,8 +157,26 @@ class AntHero<AntBoss
 		id=@men.index(man)-1  # first index is hero himself
 		
 		if id then
-			angle=id.to_f/(@men.length-1)*Math::PI*2
-			radius=1
+			ring=nil
+			last=nil
+			rings=[[1.2,10],[2,16],[3,50]]
+			count=@men.length-1
+			rings.each{|r|
+				if id<r[1]
+					ring=r
+					break
+				else
+					id-=r[1]
+					count-=r[1]
+				end
+			}
+			radius=ring[0]
+			c=[ring[1],count].min
+# 			if ring==rings[-1]
+# 				c=count
+# 			end
+			angle=id.to_f/(c)*Math::PI*2
+			#radius=1.4
 			return AGVector2.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
 		else
 			dputs "ERROR in SitFormation!"
@@ -177,7 +195,7 @@ class AntHero<AntBoss
 		if id
 			lineWidth=0.7
 			if @men.length>30
-				lineWidth=1.5
+				#lineWidth=1.5
 			end
 		
 			if id>=2 then

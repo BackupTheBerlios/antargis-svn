@@ -266,13 +266,14 @@ class AntNameDisplay<AGWidget
 		@font=getTheme.getFont("heroName.font")
 		@name=@hero.getName
 		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height/2),@hero.getName,@font))
-		addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
-		b.setEnabled(false)
 		#b.setTheme("antButton")
-		@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-11))
-		addChild(@energyWidget)
-		@energyWidget.setHero(hero)
-
+		if false
+			addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
+			b.setEnabled(false)
+			@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-11))
+			addChild(@energyWidget)
+			@energyWidget.setHero(hero)
+		end
 		setCaching(true)
 	end
 

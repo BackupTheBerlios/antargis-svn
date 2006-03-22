@@ -16,6 +16,8 @@ ARTS
 
 [Arts - Graphics - 2D]
 ------------------------------------------------------
+[M] tools-images: pick,axe, hark
+[M] weapon-images: bow
 [L] paint new portraits
 [L] paint campaign-images
 
@@ -99,6 +101,7 @@ ARTS
 	- history function
 	- browsing facility (scene=>number(person)=>text)
 [L] man/heroes should die, lose energy when starving
+[L] add wolf, fish, bird
 [L] implement loyality
 	a) too many fights => lower
 	b) fight won => up !!

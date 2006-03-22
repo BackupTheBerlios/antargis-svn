@@ -85,7 +85,7 @@ AGRenderContext *AGRenderContext::getCurrent()
 void AGRenderContext::begin()
 {
 //return;
-#ifdef FASTCONTEXT
+#ifdef SLOWCONTEXT
   if(mColor)
     {
       glEnable(GL_COLOR_MATERIAL);
@@ -325,21 +325,7 @@ void AGRenderContext::begin()
 
 void AGRenderContext::end()
 {
-  /*
-  if(mColor)
-    {
-      glDisable(GL_COLOR_MATERIAL);
-    }
-  if(mTexture)
-    {
-      if(mTexture->is3d())
-	glDisable(GL_TEXTURE_3D);
-      else
-	glDisable(GL_TEXTURE_2D);
-    }
-
-  gCurrentContext=&gStandardContext;
-  */
+  // do nothing
 }
 
 void AGRenderContext::setColor(const AGVector4 &pColor)
@@ -360,13 +346,7 @@ void AGRenderContext::setColor(const AGColor &pColor)
 
 void AGRenderContext::setTexture(AGGLTexture *pTexture)
 {
-  /*  if(mTexture)
-    {
-      mTexture->decRef();
-      deleteChecked(mTexture);
-      }*/
   mTexture=pTexture;
-  //  mTexture->incRef();
 }
 
 void AGRenderContext::setLighting(bool pLight)

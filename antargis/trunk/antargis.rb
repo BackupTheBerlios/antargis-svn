@@ -128,12 +128,16 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventKeyDown(e)
-		if e.getKey==SDLK_F9
-			if not panelVisible
-				showPanel
-			else
-				hidePanel
-			end
+		case e.getKey
+			when SDLK_F9
+				if not panelVisible
+					showPanel
+				else
+					hidePanel
+				end
+			when SDLK_F8
+				@sceneEnabled=(not @sceneEnabled)
+				getScene.setEnabled(@sceneEnabled)
 		end
 		return super(e)
 	end

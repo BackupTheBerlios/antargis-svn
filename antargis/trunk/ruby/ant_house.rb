@@ -142,9 +142,7 @@ class AntHouse<AntBoss
 	def normalFetching(e)
 		if atHome(e) then
 			checkFood(e)
-			puts "CAME HOME"
 			@atHome.push(e)
-			puts "MODE:#{e.getMode}"
 			if e.getMode=="resting"
 				e.setMode("")
 				e.setMeshState("stand")
@@ -155,23 +153,20 @@ class AntHouse<AntBoss
 				need=needed()
 				# keep at least a third of all men at home
 				if need != nil and @atHome.length>@men.length/3 then
-					puts "GO FETCH"
 					fetch( need[1],need[0],e)
 				else
-					e.newRestJob(2+getRand)
+					e.newRestJob(5+getRand)
 					e.setVisible(false)
 				end
 			else
 				e.setMode("resting")
-				e.newRestJob(2+getRand)
+				e.newRestJob(5+getRand)
 			end	
 		elsif e.getMode=~/fetching/
-			puts "DIGGGGGGGGGGGGGGGGG"
 			res=e.getMode.gsub(/.* /,"")
 			e.digResource(res)
 			e.setMode("digging "+res)
 		elsif e.getMode=~/digging/
-			puts "COLLLLLLLLLLLLLLLECT"
 			e.newMoveJob(0,getPos2D,0)#,false)
 			res=e.getMode.gsub(/.* /,"")
 			e.collectResource(res)
@@ -224,7 +219,7 @@ class AntHouse<AntBoss
 		tent=getMap.getNext(self,enttype)
 		if tent == nil then
 			#puts "No '"+good+"' found!"
-			ent.newRestJob(2)
+			ent.newRestJob(10)
 		else
 			ent.newFetchJob(0,tent,good)
 			#ent.newMoveJob(0,tent.getPos2D)
@@ -256,9 +251,7 @@ class AntHouse<AntBoss
 
 	private
 	def checkFood(man)
-		puts "#{man} #{man.getFood}"
 		if man.getFood<0.5
-			puts "FOOOOOOOOOOOOOOOOOOOOOOOOOOOD low #{man.getFood}"
 			# eat
 			if resource.get("food")>1
 				man.incFood(1)

@@ -62,6 +62,7 @@ Scene::Scene(int w,int h):
     mShadow=0;
   
   mRubyObject=false;
+  mEnabled=true;
 
 }
 
@@ -82,6 +83,8 @@ size_t Scene::getTriangles() const
 
 void Scene::draw()
 {
+  if(!mEnabled)
+    return;
   AGRenderContext c;
   c.begin(); // reset gl-state
 
@@ -186,6 +189,8 @@ void Scene::setCamera(AGVector4 v)
 
 void Scene::advance(float time)
 {
+  if(!mEnabled)
+    return;
   // advance only in view
 
   NodeList l=getCurrentNodes();
@@ -552,3 +557,8 @@ AGVector2 Scene::getPosition(const AGVector4 &v) const
 }
 
 
+
+void Scene::setEnabled(bool p)
+{
+  mEnabled=p;
+}

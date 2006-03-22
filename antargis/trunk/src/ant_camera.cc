@@ -35,6 +35,8 @@ AntCamera::AntCamera(int w,int h)
   lightPosition=AGVector4( -25, -50, 60,1);
   scenePosition=AGVector4(0,0,0,1);
 
+  cameraPosition=AGVector4(0,-15,15);
+
   mPSM=false;
   updateMatrices();
 }

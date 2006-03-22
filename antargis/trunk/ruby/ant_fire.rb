@@ -12,14 +12,28 @@ class AntFire<AntMyEntity
 		smoke.setMaxTime(0.8)
 		addMesh(smoke,mp)
 		setPos(AGVector2.new(p.x,p.y))
+		@enabled=true
 	end
 	def disable
 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))
+		@enabled=false
 	end
 	def xmlName
 		"antFire"
 	end
 	def loadXML(n)
 		disable  # disable because hero makes new fire anyway
+	end
+	def eventNoJob
+		if @enabled
+			newRestJob(10)
+		else
+			if @dead
+				$map.removeEntity(self)
+			else
+				@dead=true
+				newRestJob(10)
+			end
+		end
 	end
 end

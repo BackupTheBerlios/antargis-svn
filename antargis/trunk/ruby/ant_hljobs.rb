@@ -318,7 +318,7 @@ end
 class AntHeroFightAnimalJob<AntHeroMoveJob
 	def initialize(hero,target)
 		@target=target
-		super(hero,0,target.getPos2D,10,false)
+		super(hero,0,target.getPos2D,1,false)
 		@finished=false
 	end
 	def check(man)
@@ -328,6 +328,7 @@ class AntHeroFightAnimalJob<AntHeroMoveJob
 					man.newRestJob(10)
 					@toEat-=1
 					if @toEat<=0
+						killSheep
 						playSound
 						@finished=true
 					end
@@ -347,6 +348,11 @@ class AntHeroFightAnimalJob<AntHeroMoveJob
 	end
 	def finished
 		@finished
+	end
+	def killSheep
+		@target.eventDie
+		@hero.resource.add("food",@target.resource.get("food"))
+		@target.resource.set("food",0)
 	end
 end
 
@@ -459,7 +465,12 @@ class AntHeroRestJob<AntHLJob
 		formationPos=@hero.getSitFormation(man)
 		diff=(man.getPos2D-formationPos)
 		dist=diff.length2
-		if dist<0.4 then
+		if dist<0.1 then
+			#diff=
+			man.setDirection(180-(@hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
+      #e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+
+
 			if not ["sitdown","sit"].member?(man.meshState)
 				man.sitDown
 			else

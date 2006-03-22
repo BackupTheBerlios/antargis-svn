@@ -17,6 +17,7 @@ bool useAnimation()
 
 bool useShaderAnimation()
 {
+  return false;
   return glslOk();
 }
 

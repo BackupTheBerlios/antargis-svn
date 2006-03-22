@@ -82460,6 +82460,36 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_Scene_setEnabled(int argc, VALUE *argv, VALUE self) {
+  Scene *arg1 = (Scene *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Scene, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setEnabled" "', argument " "1"" of type '" "Scene *""'"); 
+  }
+  arg1 = reinterpret_cast<Scene * >(argp1);
+  ecode2 = SWIG_AsVal_bool(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setEnabled" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast<bool >(val2);
+  (arg1)->setEnabled(arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_disown_Scene(int argc, VALUE *argv, VALUE self) {
   Scene *arg1 = (Scene *) 0 ;
   void *argp1 = 0 ;
@@ -88287,6 +88317,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cScene.klass, "getLightProj", VALUEFUNC(_wrap_Scene_getLightProj), -1);
   rb_define_method(cScene.klass, "getPosition", VALUEFUNC(_wrap_Scene_getPosition), -1);
   rb_define_method(cScene.klass, "getCurrentNodes", VALUEFUNC(_wrap_Scene_getCurrentNodes), -1);
+  rb_define_method(cScene.klass, "setEnabled", VALUEFUNC(_wrap_Scene_setEnabled), -1);
   cScene.mark = (void (*)(void *)) general_markfunc;
   cScene.destroy = (void (*)(void *)) free_Scene;
   cScene.trackObjects = 0;
