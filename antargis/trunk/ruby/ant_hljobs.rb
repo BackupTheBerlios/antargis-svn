@@ -121,9 +121,8 @@ end
 
 class AntHeroFightJob<AntHeroMoveJob
 	attr_reader :target
-	#attr_writer :finished
-	def initialize(hero,target,defend=false)
 
+	def initialize(hero,target,defend=false)
 		puts "NEW ANTHEROFIGHT JOB #{hero.getName} #{target.getName}"
 
 		@hero=hero
@@ -159,9 +158,6 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def delete(man)
 		@men.delete(man)
-		#@states.each_key{|k|
-		#	@states[k].delete(man)
-		#}
 	end
 
 	def checkFlee
@@ -215,7 +211,6 @@ class AntHeroFightJob<AntHeroMoveJob
 		end
 		man.setMode("defeated")
 		man.newMoveJob(0,@sitpos[man],0)
-		#man.newMoveJob(0,AGVector2.new(0,0),0)
 	end
 	
 	def lost
@@ -320,6 +315,41 @@ private
 	end
 end
 
+class AntHeroFightAnimalJob<AntHeroMoveJob
+	def initialize(hero,target)
+		@target=target
+		super(hero,0,target.getPos2D,10,false)
+		@finished=false
+	end
+	def check(man)
+		if moveFinished
+			case @state
+				when "eat"
+					man.newRestJob(10)
+					@toEat-=1
+					if @toEat<=0
+						playSound
+						@finished=true
+					end
+				else
+					@state="eat"
+					@men.each{|m|
+						m.newMoveJob(0,@target.getPos2D,0)
+					}
+					@toEat=@men.length
+			end
+		else
+			super
+		end
+	end
+	def playSound
+		puts "FIXME: play eat sound"
+	end
+	def finished
+		@finished
+	end
+end
+
 class AntHeroRecruitJob<AntHeroMoveJob
 	attr_reader :finished
 	def initialize(hero,target,agg)
@@ -379,8 +409,6 @@ class AntHeroRecruitJob<AntHeroMoveJob
 			super(man)
 		end
 	end
-	
-	
 end
 
 
@@ -418,8 +446,6 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 			super(man)
 		end
 	end
-	
-	
 end
 
 
@@ -449,7 +475,6 @@ class AntHeroRestJob<AntHLJob
 		return (not @hero.hasJob)
 	end
 end
-
 
 class AntHouseFetchJob
 	def initialize(house)

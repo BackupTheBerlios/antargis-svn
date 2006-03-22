@@ -21,7 +21,10 @@
 
 #!/usr/bin/ruby
 
-class AntNewSheep<AntMyEntity
+class AntAnimal<AntMyEntity
+end
+
+class AntNewSheep<AntAnimal
 	def initialize()
 		super(AGVector2.new(0,0))
 		setProvide("sheep",true)

@@ -200,6 +200,10 @@ class AntBoss<AntMyEntity
 	end
 	def setupMeshBoss
 		setupMesh
+		setupRing
+	end
+
+	def setupRing
 		@ring=getRing
 		if @selected
 			#f6c108

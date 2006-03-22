@@ -57,9 +57,10 @@
 			<cell col="0" row="2">
 				<frame border="button.border.normal" visible="true" background="button.background.disabled">
 					<antInventory name="inventory">
-						<table cols="1" rows="3">
+						<table cols="1" rows="4">
 							<rowsize row="0" fixed="25"/>
 							<rowsize row="1" fixed="45"/>
+							<rowsize row="2" fixed="25"/>
 							<cell col="0" row="0">
 								<table cols="4" rows="1">
 									<colsize col="0" fixed="16"/>
@@ -76,29 +77,50 @@
 							</cell>
 							<cell col="0" row="1">
 								<frame width="3">
-								<table cols="4" rows="1">
-									<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
-									<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
-									<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
-									<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
-								</table>
-							</frame>
+									<table cols="4" rows="1">
+										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
+										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
+										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
+										<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
+									</table>
+								</frame>
 							</cell>
 							<cell col="0" row="2">
-								<table cols="2" rows="6">
-									<text col="0" row="0" caption="Boss" align="left" font="inventory.font"/>
-									<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
+								<text align="middle" caption="Minion    of Godrin" font="inventory.font"/>
+							</cell>
+							<cell col="0" row="3">
+								<table cols="4" rows="5">
+									<!--<text col="0" row="0" caption="" align="left" font="inventory.font"/>-->
+									<!--<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
 									<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
 									<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
 									<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
-									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>
+									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>-->
+									<image col="0" row="0" filename="data/gui/man.png"/>
+									<image col="0" row="1" filename="data/gui/wood.png"/>
+									<image col="0" row="2" filename="data/gui/stones.png"/>
+									<image col="0" row="3" filename="data/gui/apple2.png"/>
+									<image col="0" row="4" filename="data/gui/sword.png"/>
 									
-									<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>
-									<text col="1" row="1" caption="0" align="right" name="men" font="inventory.font"/>
-									<text col="1" row="2" caption="0" align="right" name="wood" font="inventory.font"/>
-									<text col="1" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
-									<text col="1" row="4" caption="0" align="right" name="food" font="inventory.font"/>
-									<text col="1" row="5" caption="0" align="right" name="tool" font="inventory.font"/>
+									<!--<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>-->
+									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
+									<text col="1" row="1" caption="0" align="right" name="wood" font="inventory.font"/>
+									<text col="1" row="2" caption="0" align="right" name="stone" font="inventory.font"/>
+									<text col="1" row="3" caption="0" align="right" name="food" font="inventory.font"/>
+									<text col="1" row="4" caption="0" align="right" name="tool" font="inventory.font"/>
+									
+									<image col="2" row="0" filename="data/gui/coal.png"/>
+									<image col="2" row="1" filename="data/gui/ore.png"/>
+									<image col="2" row="2" filename="data/gui/gold.png"/>
+									<image col="2" row="3" filename="data/gui/stones.png"/>
+									<image col="2" row="4" filename="data/gui/wood.png"/>
+									
+									<text col="3" row="0" caption="0" align="right" name="coal" font="inventory.font"/>
+									<text col="3" row="1" caption="0" align="right" name="ore" font="inventory.font"/>
+									<text col="3" row="2" caption="0" align="right" name="gold" font="inventory.font"/>
+									<text col="3" row="3" caption="0" align="right" name="stones" font="inventory.font"/>
+									<text col="3" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
+									
 								</table>
 							</cell>
 						</table>

@@ -77,6 +77,7 @@ private
 		ok=@resTypes+["boss"]
 		if ok.member?(name) then
 			w=getChild(name)
+			return if not w 
 			mv=value
 			if value.class!=String
 				mv=value.to_i.to_s

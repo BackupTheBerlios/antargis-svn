@@ -126,6 +126,10 @@ class AntHero<AntBoss
 		@job=AntHeroFightJob.new(self,target)
 		assignJob2All
 	end
+	def newHLFightAnimalJob(target)
+		@job=AntHeroFightAnimalJob.new(self,target)
+		assignJob2All
+	end
 	
 	def newHLDismissJob()
 		agg=$buttonPanel.getAggression
@@ -197,6 +201,7 @@ class AntHero<AntBoss
 	
 	
 	def setFire(flag)
+		puts "setFire #{flag}"
 		if flag
 			if not @fire
 				@fire=AntFire.new(getPos3D+AGVector3.new(0.7,0,0))
@@ -204,6 +209,7 @@ class AntHero<AntBoss
 			end
 			startFireSound
 		else
+			#raise 1
 			if @fire
 				@fire.disable
 				@fire=false
@@ -220,7 +226,9 @@ class AntHero<AntBoss
 	def assignJob2All
 		super
 		dputs "ASSIGNJOB"
-		setFire(false)
+		if @job.class!=AntHeroRestJob
+			setFire(false)
+		end
 	end
 
 	def setMeshState(name)
@@ -234,6 +242,8 @@ class AntHero<AntBoss
 		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/hero_lp.ant2",0.08,"data/textures/models/hero_lp.png"),AGVector4.new(0,0,0,0),0))
 		end
 		setDirection(dir)
+		setupRing
+
 	end
 
 

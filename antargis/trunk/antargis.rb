@@ -383,6 +383,9 @@ class AntGameApp <AntRubyView
 						@hero.newHLFightJob(@target)
 						return
 					end
+				elsif @target.is_a?(AntAnimal)
+					@hero.newHLFightAnimalJob(@target)
+					return
 				end
 				# move near target
 				@hero.newHLMoveJob(0,@target.getPos2D,2)
