@@ -33,6 +33,9 @@ class AntCamera//:public AGRubyObject
  public:
   AntCamera(int w,int h);
 
+  void incCameraDistance();
+  void decCameraDistance();
+
   Viewport getViewport() const;
   AGMatrix4 getModelview() const;
   AGMatrix4 getProjection() const;

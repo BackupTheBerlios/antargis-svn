@@ -41,6 +41,24 @@ AntCamera::AntCamera(int w,int h)
   updateMatrices();
 }
 
+void AntCamera::incCameraDistance()
+{
+  float d=cameraPosition[2]+0.3;
+
+  d=std::min(d,20.0f);
+  cameraPosition=AGVector4(0,-d,d);
+  updateMatrices();
+}
+void AntCamera::decCameraDistance()
+{
+  float d=cameraPosition[2]-0.3;
+
+  d=std::max(d,12.0f);
+  cameraPosition=AGVector4(0,-d,d);
+  updateMatrices();
+}
+
+
 void AntCamera::updateMatrices()
 {
 

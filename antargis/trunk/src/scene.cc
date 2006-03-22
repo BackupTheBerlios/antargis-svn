@@ -562,3 +562,8 @@ void Scene::setEnabled(bool p)
 {
   mEnabled=p;
 }
+
+AntCamera &Scene::getCameraObject()
+{
+  return mCamera;
+}

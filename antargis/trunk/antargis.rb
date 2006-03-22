@@ -196,7 +196,7 @@ class AntGameApp <AntRubyView
 		getMap().move(time)
 #		GC.start
 		getScene.advance(time)
-		delay(10)
+		#delay(10)
 		return true
 	end
 	

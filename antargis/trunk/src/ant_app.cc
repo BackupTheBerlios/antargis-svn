@@ -53,7 +53,15 @@ bool GLApp::eventMouseButtonDown(AGEvent *e)
 
   if(e->isSDLEvent())
     {
-      if(e->getButton()==3)
+      if(e->getButton()==4)
+	{
+	  getScene().getCameraObject().incCameraDistance();
+	}
+      else if(e->getButton()==5)
+	{
+	  getScene().getCameraObject().decCameraDistance();
+	}
+      else if(e->getButton()==3)
 	{
 	  AGVector2 p=e->getMousePosition();
 	  omx=p[0];
@@ -75,10 +83,13 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
     {
       if(e->isSDLEvent())
 	{
-	  AGVector2 p=e->getMousePosition();
-	  Scene::PickResult nodes=scene.pick(p[0],p[1],1,1);
+	  if(e->getButton()<4)
+	    {
+	      AGVector2 p=e->getMousePosition();
+	      Scene::PickResult nodes=scene.pick(p[0],p[1],1,1);
 
-	  eventClick(nodes,e->getButton());
+	      eventClick(nodes,e->getButton());
+	    }
 	}
     }
   return AGApplication::eventMouseButtonUp(e);

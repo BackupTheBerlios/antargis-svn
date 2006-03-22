@@ -74,6 +74,8 @@ class Scene:public AGRubyObject
   // Antargis-Map-extension
   //  void mapChanged();
 
+  AntCamera &getCameraObject();
+
   size_t getTriangles() const;
 
   AGVector3 getCameraDirTo(const AGVector3 &p) const;
