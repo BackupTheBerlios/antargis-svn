@@ -140,6 +140,7 @@ class AntHouse<AntBoss
 
 	
 	def normalFetching(e)
+		puts "FECTHIGN"
 		if atHome(e) then
 			checkFood(e)
 			@atHome.push(e)
@@ -184,7 +185,7 @@ class AntHouse<AntBoss
 	def atHome(entity)
 		pd=entity.getPos2D-getPos2D
 		n=pd.length2 #norm2
-		return n<30
+		return n<1
 	end
 	
 	# what's needed most ATM?

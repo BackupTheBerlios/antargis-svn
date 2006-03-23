@@ -133,11 +133,14 @@ class AntHero<AntBoss
 	
 	def newHLDismissJob()
 		agg=$buttonPanel.getAggression
-		c=menCount*agg/3
-		men=@men[0..c]
+		men=@men.select{|m|not m.is_a?(AntHero)} # exclude hero
+		c=(men.length-1)*agg/3
+			
+		men=men[0..c]
 		men.each{|m|
 			m.setNoBoss
 			@men.delete(m)
+			m.delJob
 		}
 		getMap.eventHLDismissed(self)
 	end
