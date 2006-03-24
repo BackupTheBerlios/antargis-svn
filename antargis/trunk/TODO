@@ -52,23 +52,19 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-[M] CONTROL ALL eventHandlers! and return bools - done??
-
+none noticed ATM
 
 [Gui/View]
 ------------------------------------------------------
 [M] fix frustum culling!
-[M] fix picking for men (AnimMesh)
 [L] display for hunger/food
 [L] scrolling on borders when in fullscreen
 [H] fix cut tooltips
 [L] add Framebuffer objects
 [L] fix AGMenu*
-[L] add zoom with scroll wheel
-[M] inspect on double click
 [M] fix paint errors on text-elements (wrap-texture)
 [H] add campaign-loading functionality to load-dialog in-game  TRICKY
-[M] rewrite AGEdit - without AGEditLines
+[L] rewrite AGEdit - without AGEditLines
 
 [Menu]
 ------------------------------------------------------
@@ -93,7 +89,6 @@ ARTS
 [VH] sure to dismiss dialog!
 [M] save entity age (AntNewEntity) and give it in inspect-dialog
 [H] localization
-[H] hero should fight too!!!!!!!!!!!!
 [L] each man should have a name and an age
 [L] fix quadtree-errors
 [L] computer-player only attacks when stock is used up

@@ -174,6 +174,20 @@
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGScreenWidget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGWindow*{
  if($1)
  {
@@ -188,6 +202,20 @@
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGWindow*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGCaption*{
  if($1)
  {
@@ -201,6 +229,20 @@
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGCaption*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGMessageObject*{
  if($1)
@@ -262,6 +304,66 @@ else if(dynamic_cast<AGWidget*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGMessageObject*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGCaption*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
+else if(dynamic_cast<AGWindow*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGScreenWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGSound*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGDialog*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
+else if(dynamic_cast<AGApplication*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
+else if(dynamic_cast<AGImage*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
+else if(dynamic_cast<AGRadioGroup*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
+else if(dynamic_cast<AGGLWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
+else if(dynamic_cast<AGEdit*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGListBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
+else if(dynamic_cast<AGSubMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGFrame*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGFrame,0);
+else if(dynamic_cast<AGColorButton*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<AGRadio*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
+else if(dynamic_cast<AGText*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
+else if(dynamic_cast<AGCheckBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
+else if(dynamic_cast<AGMenuItem*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+else if(dynamic_cast<AGLayout*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
+else if(dynamic_cast<AGButton*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
+else if(dynamic_cast<AGTable*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
+else if(dynamic_cast<AGWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWidget,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMessageObject,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGTable*{
  if($1)
  {
@@ -284,6 +386,28 @@ else if(dynamic_cast<AGMenuItem*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGTable*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGWindow*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGSubMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<AGMenuItem*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGText*{
  if($1)
  {
@@ -300,6 +424,22 @@ else if(dynamic_cast<AGCaption*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGText*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGCaption*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGSound*{
  if($1)
  {
@@ -313,6 +453,20 @@ else if(dynamic_cast<AGCaption*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGSound*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGMenuItem*{
  if($1)
@@ -330,6 +484,22 @@ else if(dynamic_cast<AGSubMenu*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGMenuItem*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGSubMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGMain*{
  if($1)
  {
@@ -343,6 +513,20 @@ else if(dynamic_cast<AGSubMenu*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGMain*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMain,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGCheckBox*{
  if($1)
@@ -360,6 +544,22 @@ else if(dynamic_cast<AGRadio*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGCheckBox*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGRadio*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGRadioGroup*{
  if($1)
  {
@@ -373,6 +573,20 @@ else if(dynamic_cast<AGRadio*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGRadioGroup*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGImage*{
  if($1)
@@ -388,6 +602,20 @@ else if(dynamic_cast<AGRadio*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGImage*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGApplication*{
  if($1)
  {
@@ -402,6 +630,20 @@ else if(dynamic_cast<AGRadio*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGApplication*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGDialog*{
  if($1)
  {
@@ -415,6 +657,20 @@ else if(dynamic_cast<AGRadio*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGDialog*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGWidget*{
  if($1)
@@ -472,6 +728,62 @@ else if(dynamic_cast<AGTable*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGWidget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGCaption*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
+else if(dynamic_cast<AGWindow*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGScreenWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGSound*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGDialog*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
+else if(dynamic_cast<AGImage*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
+else if(dynamic_cast<AGRadioGroup*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
+else if(dynamic_cast<AGGLWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
+else if(dynamic_cast<AGEdit*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGListBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
+else if(dynamic_cast<AGSubMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGFrame*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGFrame,0);
+else if(dynamic_cast<AGColorButton*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<AGRadio*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
+else if(dynamic_cast<AGText*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
+else if(dynamic_cast<AGCheckBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
+else if(dynamic_cast<AGMenuItem*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+else if(dynamic_cast<AGLayout*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
+else if(dynamic_cast<AGButton*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
+else if(dynamic_cast<AGTable*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWidget,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGGLWidget*{
  if($1)
  {
@@ -485,6 +797,20 @@ else if(dynamic_cast<AGTable*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGGLWidget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGListener*{
  if($1)
@@ -548,6 +874,68 @@ else if(dynamic_cast<AGMessageObject*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGListener*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGCaption*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
+else if(dynamic_cast<AGWindow*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
+else if(dynamic_cast<AGScreenWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGSound*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
+else if(dynamic_cast<AGDialog*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
+else if(dynamic_cast<AGApplication*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
+else if(dynamic_cast<AGImage*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
+else if(dynamic_cast<AGRadioGroup*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
+else if(dynamic_cast<AGGLWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
+else if(dynamic_cast<AGEdit*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGListBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
+else if(dynamic_cast<AGSubMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
+else if(dynamic_cast<AGFrame*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGFrame,0);
+else if(dynamic_cast<AGColorButton*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
+else if(dynamic_cast<AGRadio*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
+else if(dynamic_cast<AGText*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
+else if(dynamic_cast<AGCheckBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
+else if(dynamic_cast<AGMenuItem*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+else if(dynamic_cast<AGLayout*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
+else if(dynamic_cast<AGButton*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
+else if(dynamic_cast<AGTable*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
+else if(dynamic_cast<AGWidget*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWidget,0);
+else if(dynamic_cast<AGMessageObject*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMessageObject,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListener,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGEdit*{
  if($1)
  {
@@ -561,6 +949,20 @@ else if(dynamic_cast<AGMessageObject*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGEdit*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGLayout*{
  if($1)
@@ -577,6 +979,22 @@ else if(dynamic_cast<AGDialog*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGLayout*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGDialog*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGButton*{
  if($1)
@@ -596,6 +1014,24 @@ else if(dynamic_cast<AGCheckBox*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGButton*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGRadio*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
+else if(dynamic_cast<AGCheckBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGFrame*{
  if($1)
  {
@@ -609,6 +1045,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGFrame*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGFrame,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGSubMenu*{
  if($1)
@@ -624,6 +1074,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGSubMenu*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGListBox*{
  if($1)
  {
@@ -637,6 +1101,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGListBox*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(out) AGColorButton*{
  if($1)
@@ -652,6 +1130,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGColorButton*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGMenu*{
  if($1)
  {
@@ -666,6 +1158,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
  }
  else vresult=Qnil;
 }
+%typemap(directorin) AGMenu*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGRadio*{
  if($1)
  {
@@ -679,6 +1185,20 @@ else if(dynamic_cast<AGCheckBox*>(result))
    }
  }
  else vresult=Qnil;
+}
+%typemap(directorin) AGRadio*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
+   }
+ }
+ else $input=Qnil;
 }
 %typemap(directorout) AGApplication {
  AGApplication *b;

@@ -331,6 +331,13 @@ class AntNewMan<AntMyEntity
 			setDefense(1.5)
 		end
 	end
+	def getDescription
+		"This is #{getName}. He is #{age} years old. He obeys #{@boss.getName}."
+	end
+	def age
+		18
+	end
+
 end
 
 	
