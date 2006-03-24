@@ -85,7 +85,7 @@ AGRenderContext *AGRenderContext::getCurrent()
 void AGRenderContext::begin()
 {
 //return;
-#ifdef SLOWCONTEXT
+#ifndef SLOWCONTEXT
   if(mColor)
     {
       glEnable(GL_COLOR_MATERIAL);
@@ -162,6 +162,7 @@ void AGRenderContext::begin()
   // color setting
 
   //  mColor=0;
+  #warning "This fails in intro somehow!"
   if(mColor!=gCurrentContext.mColor)
     {
       if(mColor)
@@ -218,7 +219,7 @@ void AGRenderContext::begin()
   ///////////////////////////////
   // ALPHA
 
-  if(mAlpha!=gCurrentContext.mAlpha)
+      //  if(mAlpha!=gCurrentContext.mAlpha)
     {
       if(mAlpha!=GL_NONE)
 	glEnable(GL_ALPHA_TEST);
