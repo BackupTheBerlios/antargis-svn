@@ -1,7 +1,6 @@
 [General]
 ------------------------------------------------------
 [VH] Add coding conventions for ruby/c++ and ensure them!
-[VH] Add "rake doc" to generate API-docs using doxygen
 
 
 ARTS
@@ -57,8 +56,6 @@ none noticed ATM
 [Gui/View]
 ------------------------------------------------------
 [M] fix frustum culling!
-[L] display for hunger/food
-[L] scrolling on borders when in fullscreen
 [H] fix cut tooltips
 [L] add Framebuffer objects
 [L] fix AGMenu*
@@ -90,12 +87,10 @@ none noticed ATM
 [M] save entity age (AntNewEntity) and give it in inspect-dialog
 [H] localization
 [L] each man should have a name and an age
-[L] fix quadtree-errors
 [L] computer-player only attacks when stock is used up
 [L] story-telling:
 	- history function
 	- browsing facility (scene=>number(person)=>text)
-[L] man/heroes should die, lose energy when starving
 [L] add wolf, fish, bird
 [L] implement loyality
 	a) too many fights => lower

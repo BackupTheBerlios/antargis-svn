@@ -1,0 +1,11 @@
+ARTS
+==================================================
+[VH] fix defending
+[VVH] make hero-displays 
+[VH] sure to dismiss dialog!
+
+[Packaging]
+------------------------------------------------------
+[L] installer for linux
+[H] remove swig-dependency and check
+[H] remove ccache-dep and check!!

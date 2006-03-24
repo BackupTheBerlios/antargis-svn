@@ -204,7 +204,7 @@ void Scene::advance(float time)
 Scene::NodeList Scene::getCurrentNodes()
 {
   AGVector2 p=mCamera.getPosition().dim2();
-  NodeList l=mTree->get(AGRect2(p+AGVector2(-20,-20),p+AGVector2(30,30)));
+  NodeList l=mTree->get(AGRect2(p+AGVector2(-30,-30),p+AGVector2(30,30)));
 
   for(NodeList::iterator i=l.begin();i!=l.end();i++)
     {
