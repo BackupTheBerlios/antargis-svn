@@ -104,7 +104,9 @@ class AntGameApp <AntRubyView
 		puts @buttonpanel.job
 		case @buttonpanel.job
 			when "doDismiss"
-				@hero.newHLDismissJob
+				@layout.addChild(AntQueryDialog.new(@layout,nil) {puts @hero;@hero.newHLDismissJob})
+				puts @hero
+				#@hero.newHLDismissJob
 		end
 		return true
 	end

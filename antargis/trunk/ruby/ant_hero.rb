@@ -132,6 +132,7 @@ class AntHero<AntBoss
 	end
 	
 	def newHLDismissJob()
+		@job=nil
 		agg=$buttonPanel.getAggression
 		men=@men.select{|m|not m.is_a?(AntHero)} # exclude hero
 		c=(men.length-1)*agg/3
@@ -193,6 +194,9 @@ class AntHero<AntBoss
 	def getWalkFormation(man,dir)
 		if man==self
 			return AGVector2.new(0,0)
+		end
+		if not @men.member?(man)
+			raise "don't know #{man}"
 		end
 		id=@men.index(man)-1  # first index is hero himself
 		if id

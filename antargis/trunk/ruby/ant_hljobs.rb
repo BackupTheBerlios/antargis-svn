@@ -162,7 +162,7 @@ class AntHeroFightJob<AntHeroMoveJob
 
 	def checkFlee
 		dist=(@target.getPos2D-@hero.getPos2D).length
-		if dist>10 and @state=="fight"
+		if dist>15 and @state=="fight"
 			puts "CHECKSTATE DIST:#{dist}"
 			@finished=true
 		end

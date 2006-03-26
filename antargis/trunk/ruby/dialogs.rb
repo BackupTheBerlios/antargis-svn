@@ -343,6 +343,35 @@ class AntPauseDialog<AntDialog
 	end
 end
 
+class AntQueryDialog<AntDialog
+	def initialize(parent,file=nil,&block)
+		if file==nil
+			file="data/gui/layout/query_dialog.xml"
+		end
+		super(parent,file)
+
+		@block=block
+
+		setName("PauseDialog")
+		if getMap
+			getMap.pause
+		end
+	end
+	def eventCancel
+		super
+		getMap.unpause
+		return true
+	end
+
+	def eventOk(e)
+		super
+		getMap.unpause
+
+		@block.call
+		return true
+	end
+end
+
 class AntEditPropDialog<AntDialog
 	def initialize(parent,ent)
 		super(parent,"data/gui/layout/editpropdialog.xml")
