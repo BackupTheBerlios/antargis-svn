@@ -7,5 +7,3 @@ ARTS
 [Packaging]
 ------------------------------------------------------
 [L] installer for linux
-[H] remove swig-dependency and check
-[H] remove ccache-dep and check!!

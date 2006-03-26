@@ -264,6 +264,7 @@ class AntNameDisplay<AGWidget
 		@cr.setTop(@cr.height)
 		@cr=@cr.shrink(4)
 		@font=getTheme.getFont("heroName.font")
+		@oldfont=@font
 		@name=@hero.getName
 		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height/2),@hero.getName,@font))
 		#b.setTheme("antButton")
@@ -284,6 +285,18 @@ class AntNameDisplay<AGWidget
 	
 	def getText
 		@name
+	end
+
+	def prepareDraw
+		if @hero.getPlayer==$map.getPlayer
+			@font=getTheme.getFont("heroName.font")
+		else
+			@font=getTheme.getFont("enemyHero.font")
+		end
+		if @font!=@oldfont
+			@textWidget.setFont(@font)
+		end
+		super
 	end
 	private
 end

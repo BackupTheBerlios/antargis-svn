@@ -11,6 +11,8 @@ begin File.mkpath(".deps")
 rescue 
 end
 
+$debug=false
+
 #`mkdir .deps`
 
 def windows
@@ -145,7 +147,12 @@ else
 	$LDFLAGS+=" -Lc:/msys/local/lib -lmingw32 -lSDLmain -lSDL -mwindows "+$libs
 	
 end
-$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -g -O0 -I"+Config::CONFIG['archdir']+" -Wall"
+
+if $debug
+	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -g -O0 -I"+Config::CONFIG['archdir']+" -Wall"
+else
+	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -O2 -I"+Config::CONFIG['archdir']+" -Wall"
+end
 $LDSHARED="#{$CXX} -shared"
 $INSTALL_PROG=$INSTALL+" -m 755 -D "
 $INSTALL_DATA=$INSTALL+" -m 644 -D "
@@ -211,8 +218,10 @@ task :clean do
 			sh "rm -f #{dir}/#{ext}"
 		}
 	}
-	sh "rm -f src/swig.*"
-	sh "rm -f src/nantmarker.hh"
+	if $swig!=""
+		sh "rm -f src/swig.*"
+		sh "rm -f src/nantmarker.hh"
+	end
 	sh "rm -f config.rb"
 	sh "rm -r -f .deps"
 	sh "rm -r -f docs/api"
