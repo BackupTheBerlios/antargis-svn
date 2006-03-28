@@ -195,6 +195,14 @@ std::string findFile(const std::string &pName)
 	return n;
     }
   cdebug(pName);
+
+
+  if(pName.length()>5)
+    {
+      if(pName.substr(pName.length()-4,3)=="png")
+	return findFile(pName.substr(0,pName.length()-3)+"jpg");
+    }
+
   throw std::runtime_error("File not found!");
   return "";
 }

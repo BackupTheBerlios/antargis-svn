@@ -1524,150 +1524,152 @@ SWIG_Ruby_SetModule(swig_module_info *pointer)
 #define SWIGTYPE_p_AGListBox swig_types[29]
 #define SWIGTYPE_p_AGListBoxItem swig_types[30]
 #define SWIGTYPE_p_AGListener swig_types[31]
-#define SWIGTYPE_p_AGMain swig_types[32]
-#define SWIGTYPE_p_AGMatrix3 swig_types[33]
-#define SWIGTYPE_p_AGMatrix4 swig_types[34]
-#define SWIGTYPE_p_AGMenu swig_types[35]
-#define SWIGTYPE_p_AGMenuItem swig_types[36]
-#define SWIGTYPE_p_AGMessageObject swig_types[37]
-#define SWIGTYPE_p_AGMutex swig_types[38]
-#define SWIGTYPE_p_AGPaintTarget swig_types[39]
-#define SWIGTYPE_p_AGPainter swig_types[40]
-#define SWIGTYPE_p_AGProjection swig_types[41]
-#define SWIGTYPE_p_AGRadio swig_types[42]
-#define SWIGTYPE_p_AGRadioGroup swig_types[43]
-#define SWIGTYPE_p_AGRect2 swig_types[44]
-#define SWIGTYPE_p_AGRect3 swig_types[45]
-#define SWIGTYPE_p_AGRenderContext swig_types[46]
-#define SWIGTYPE_p_AGRubyObject swig_types[47]
-#define SWIGTYPE_p_AGScreen swig_types[48]
-#define SWIGTYPE_p_AGSignal swig_types[49]
-#define SWIGTYPE_p_AGSound swig_types[50]
-#define SWIGTYPE_p_AGSubMenu swig_types[51]
-#define SWIGTYPE_p_AGSurface swig_types[52]
-#define SWIGTYPE_p_AGSurfaceManager swig_types[53]
-#define SWIGTYPE_p_AGTable swig_types[54]
-#define SWIGTYPE_p_AGText swig_types[55]
-#define SWIGTYPE_p_AGTexture swig_types[56]
-#define SWIGTYPE_p_AGTextureCache swig_types[57]
-#define SWIGTYPE_p_AGTheme swig_types[58]
-#define SWIGTYPE_p_AGTooltip swig_types[59]
-#define SWIGTYPE_p_AGTriangle2 swig_types[60]
-#define SWIGTYPE_p_AGTriangle3 swig_types[61]
-#define SWIGTYPE_p_AGVector2 swig_types[62]
-#define SWIGTYPE_p_AGVector3 swig_types[63]
-#define SWIGTYPE_p_AGVector4 swig_types[64]
-#define SWIGTYPE_p_AGWidget swig_types[65]
-#define SWIGTYPE_p_AGWindow swig_types[66]
-#define SWIGTYPE_p_AnimMesh swig_types[67]
-#define SWIGTYPE_p_AnimMeshData swig_types[68]
-#define SWIGTYPE_p_Animation swig_types[69]
-#define SWIGTYPE_p_AntEntity swig_types[70]
-#define SWIGTYPE_p_AntEntityPtr swig_types[71]
-#define SWIGTYPE_p_AntFragProgram swig_types[72]
-#define SWIGTYPE_p_AntFrustum swig_types[73]
-#define SWIGTYPE_p_AntMap swig_types[74]
-#define SWIGTYPE_p_AntPlane swig_types[75]
-#define SWIGTYPE_p_AntProjection swig_types[76]
-#define SWIGTYPE_p_AntShaderParameter swig_types[77]
-#define SWIGTYPE_p_AntShaderProgram swig_types[78]
-#define SWIGTYPE_p_AntShadowShader swig_types[79]
-#define SWIGTYPE_p_AntVertexProgram swig_types[80]
-#define SWIGTYPE_p_AntWaterShader swig_types[81]
-#define SWIGTYPE_p_Attributes swig_types[82]
-#define SWIGTYPE_p_BinaryFileIn swig_types[83]
-#define SWIGTYPE_p_BinaryFileOut swig_types[84]
-#define SWIGTYPE_p_BinaryIn swig_types[85]
-#define SWIGTYPE_p_BinaryOut swig_types[86]
-#define SWIGTYPE_p_BinaryStringIn swig_types[87]
-#define SWIGTYPE_p_BinaryStringOut swig_types[88]
-#define SWIGTYPE_p_Bone swig_types[89]
-#define SWIGTYPE_p_Document swig_types[90]
-#define SWIGTYPE_p_DomParser swig_types[91]
-#define SWIGTYPE_p_EntityList swig_types[92]
-#define SWIGTYPE_p_GLApp swig_types[93]
-#define SWIGTYPE_p_GLint swig_types[94]
-#define SWIGTYPE_p_GLuint swig_types[95]
-#define SWIGTYPE_p_HeightMap swig_types[96]
-#define SWIGTYPE_p_KeyFrame swig_types[97]
-#define SWIGTYPE_p_Mesh swig_types[98]
-#define SWIGTYPE_p_MeshData swig_types[99]
-#define SWIGTYPE_p_MeshOptimizer swig_types[100]
-#define SWIGTYPE_p_MeshVertex swig_types[101]
-#define SWIGTYPE_p_Meshes swig_types[102]
-#define SWIGTYPE_p_MiniMap swig_types[103]
-#define SWIGTYPE_p_NewDecal swig_types[104]
-#define SWIGTYPE_p_Node swig_types[105]
-#define SWIGTYPE_p_NodeList swig_types[106]
-#define SWIGTYPE_p_NodeVector swig_types[107]
-#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[108]
-#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[109]
-#define SWIGTYPE_p_Parser swig_types[110]
-#define SWIGTYPE_p_PickNode swig_types[111]
-#define SWIGTYPE_p_PickResult swig_types[112]
-#define SWIGTYPE_p_Renderer swig_types[113]
-#define SWIGTYPE_p_Resource swig_types[114]
-#define SWIGTYPE_p_SDLKey swig_types[115]
-#define SWIGTYPE_p_SDLMod swig_types[116]
-#define SWIGTYPE_p_SDL_Event swig_types[117]
-#define SWIGTYPE_p_SDL_PixelFormat swig_types[118]
-#define SWIGTYPE_p_SDL_Rect swig_types[119]
-#define SWIGTYPE_p_SDL_Surface swig_types[120]
-#define SWIGTYPE_p_Scene swig_types[121]
-#define SWIGTYPE_p_SceneNode swig_types[122]
-#define SWIGTYPE_p_SerialException swig_types[123]
-#define SWIGTYPE_p_Sint32 swig_types[124]
-#define SWIGTYPE_p_Smoke swig_types[125]
-#define SWIGTYPE_p_Terrain swig_types[126]
-#define SWIGTYPE_p_TerrainPieceVA swig_types[127]
-#define SWIGTYPE_p_Uint16 swig_types[128]
-#define SWIGTYPE_p_Uint32 swig_types[129]
-#define SWIGTYPE_p_Uint8 swig_types[130]
-#define SWIGTYPE_p_VertexArray swig_types[131]
-#define SWIGTYPE_p_VertexArrayShader swig_types[132]
-#define SWIGTYPE_p_Viewport swig_types[133]
-#define SWIGTYPE_p_WaterPiece swig_types[134]
-#define SWIGTYPE_p_char swig_types[135]
-#define SWIGTYPE_p_const_iterator swig_types[136]
-#define SWIGTYPE_p_float swig_types[137]
-#define SWIGTYPE_p_iterator swig_types[138]
-#define SWIGTYPE_p_p_AnimMesh swig_types[139]
-#define SWIGTYPE_p_p_Mesh swig_types[140]
-#define SWIGTYPE_p_p_NewDecal swig_types[141]
-#define SWIGTYPE_p_p_Node swig_types[142]
-#define SWIGTYPE_p_p_SceneNode swig_types[143]
-#define SWIGTYPE_p_p_Smoke swig_types[144]
-#define SWIGTYPE_p_p_TerrainPieceVA swig_types[145]
-#define SWIGTYPE_p_p_WaterPiece swig_types[146]
-#define SWIGTYPE_p_p_void swig_types[147]
-#define SWIGTYPE_p_std__listTAGRect2_t swig_types[148]
-#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[149]
-#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[150]
-#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[151]
-#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[152]
-#define SWIGTYPE_p_std__ostringstream swig_types[153]
-#define SWIGTYPE_p_std__out_of_range swig_types[154]
-#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[155]
-#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[156]
-#define SWIGTYPE_p_std__string swig_types[157]
-#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[158]
-#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[159]
-#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[160]
-#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[161]
-#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[162]
-#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[163]
-#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[164]
-#define SWIGTYPE_p_std__vectorTAntPlane_t swig_types[165]
-#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[166]
-#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[167]
-#define SWIGTYPE_p_std__vectorTNode_t swig_types[168]
-#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[169]
-#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[170]
-#define SWIGTYPE_p_std__vectorTfloat_t swig_types[171]
-#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[172]
-#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[173]
-static swig_type_info *swig_types[175];
-static swig_module_info swig_module = {swig_types, 174, 0, 0, 0, 0};
+#define SWIGTYPE_p_AGLocalizer swig_types[32]
+#define SWIGTYPE_p_AGMain swig_types[33]
+#define SWIGTYPE_p_AGMatrix3 swig_types[34]
+#define SWIGTYPE_p_AGMatrix4 swig_types[35]
+#define SWIGTYPE_p_AGMenu swig_types[36]
+#define SWIGTYPE_p_AGMenuItem swig_types[37]
+#define SWIGTYPE_p_AGMessageObject swig_types[38]
+#define SWIGTYPE_p_AGMutex swig_types[39]
+#define SWIGTYPE_p_AGPaintTarget swig_types[40]
+#define SWIGTYPE_p_AGPainter swig_types[41]
+#define SWIGTYPE_p_AGProjection swig_types[42]
+#define SWIGTYPE_p_AGRadio swig_types[43]
+#define SWIGTYPE_p_AGRadioGroup swig_types[44]
+#define SWIGTYPE_p_AGRect2 swig_types[45]
+#define SWIGTYPE_p_AGRect3 swig_types[46]
+#define SWIGTYPE_p_AGRenderContext swig_types[47]
+#define SWIGTYPE_p_AGRubyObject swig_types[48]
+#define SWIGTYPE_p_AGScreen swig_types[49]
+#define SWIGTYPE_p_AGSignal swig_types[50]
+#define SWIGTYPE_p_AGSound swig_types[51]
+#define SWIGTYPE_p_AGSubMenu swig_types[52]
+#define SWIGTYPE_p_AGSurface swig_types[53]
+#define SWIGTYPE_p_AGSurfaceManager swig_types[54]
+#define SWIGTYPE_p_AGTable swig_types[55]
+#define SWIGTYPE_p_AGText swig_types[56]
+#define SWIGTYPE_p_AGTexture swig_types[57]
+#define SWIGTYPE_p_AGTextureCache swig_types[58]
+#define SWIGTYPE_p_AGTheme swig_types[59]
+#define SWIGTYPE_p_AGTooltip swig_types[60]
+#define SWIGTYPE_p_AGTriangle2 swig_types[61]
+#define SWIGTYPE_p_AGTriangle3 swig_types[62]
+#define SWIGTYPE_p_AGVector2 swig_types[63]
+#define SWIGTYPE_p_AGVector3 swig_types[64]
+#define SWIGTYPE_p_AGVector4 swig_types[65]
+#define SWIGTYPE_p_AGWidget swig_types[66]
+#define SWIGTYPE_p_AGWindow swig_types[67]
+#define SWIGTYPE_p_AnimMesh swig_types[68]
+#define SWIGTYPE_p_AnimMeshData swig_types[69]
+#define SWIGTYPE_p_Animation swig_types[70]
+#define SWIGTYPE_p_AntCamera swig_types[71]
+#define SWIGTYPE_p_AntEntity swig_types[72]
+#define SWIGTYPE_p_AntEntityPtr swig_types[73]
+#define SWIGTYPE_p_AntFragProgram swig_types[74]
+#define SWIGTYPE_p_AntFrustum swig_types[75]
+#define SWIGTYPE_p_AntMap swig_types[76]
+#define SWIGTYPE_p_AntPlane swig_types[77]
+#define SWIGTYPE_p_AntProjection swig_types[78]
+#define SWIGTYPE_p_AntShaderParameter swig_types[79]
+#define SWIGTYPE_p_AntShaderProgram swig_types[80]
+#define SWIGTYPE_p_AntShadowShader swig_types[81]
+#define SWIGTYPE_p_AntVertexProgram swig_types[82]
+#define SWIGTYPE_p_AntWaterShader swig_types[83]
+#define SWIGTYPE_p_Attributes swig_types[84]
+#define SWIGTYPE_p_BinaryFileIn swig_types[85]
+#define SWIGTYPE_p_BinaryFileOut swig_types[86]
+#define SWIGTYPE_p_BinaryIn swig_types[87]
+#define SWIGTYPE_p_BinaryOut swig_types[88]
+#define SWIGTYPE_p_BinaryStringIn swig_types[89]
+#define SWIGTYPE_p_BinaryStringOut swig_types[90]
+#define SWIGTYPE_p_Bone swig_types[91]
+#define SWIGTYPE_p_Document swig_types[92]
+#define SWIGTYPE_p_DomParser swig_types[93]
+#define SWIGTYPE_p_EntityList swig_types[94]
+#define SWIGTYPE_p_GLApp swig_types[95]
+#define SWIGTYPE_p_GLint swig_types[96]
+#define SWIGTYPE_p_GLuint swig_types[97]
+#define SWIGTYPE_p_HeightMap swig_types[98]
+#define SWIGTYPE_p_KeyFrame swig_types[99]
+#define SWIGTYPE_p_Mesh swig_types[100]
+#define SWIGTYPE_p_MeshData swig_types[101]
+#define SWIGTYPE_p_MeshOptimizer swig_types[102]
+#define SWIGTYPE_p_MeshVertex swig_types[103]
+#define SWIGTYPE_p_Meshes swig_types[104]
+#define SWIGTYPE_p_MiniMap swig_types[105]
+#define SWIGTYPE_p_NewDecal swig_types[106]
+#define SWIGTYPE_p_Node swig_types[107]
+#define SWIGTYPE_p_NodeList swig_types[108]
+#define SWIGTYPE_p_NodeVector swig_types[109]
+#define SWIGTYPE_p_Node__NodeVector__const_iterator swig_types[110]
+#define SWIGTYPE_p_Node__NodeVector__iterator swig_types[111]
+#define SWIGTYPE_p_Parser swig_types[112]
+#define SWIGTYPE_p_PickNode swig_types[113]
+#define SWIGTYPE_p_PickResult swig_types[114]
+#define SWIGTYPE_p_Renderer swig_types[115]
+#define SWIGTYPE_p_Resource swig_types[116]
+#define SWIGTYPE_p_SDLKey swig_types[117]
+#define SWIGTYPE_p_SDLMod swig_types[118]
+#define SWIGTYPE_p_SDL_Event swig_types[119]
+#define SWIGTYPE_p_SDL_PixelFormat swig_types[120]
+#define SWIGTYPE_p_SDL_Rect swig_types[121]
+#define SWIGTYPE_p_SDL_Surface swig_types[122]
+#define SWIGTYPE_p_Scene swig_types[123]
+#define SWIGTYPE_p_SceneNode swig_types[124]
+#define SWIGTYPE_p_SerialException swig_types[125]
+#define SWIGTYPE_p_Sint32 swig_types[126]
+#define SWIGTYPE_p_Smoke swig_types[127]
+#define SWIGTYPE_p_Terrain swig_types[128]
+#define SWIGTYPE_p_TerrainPieceVA swig_types[129]
+#define SWIGTYPE_p_Uint16 swig_types[130]
+#define SWIGTYPE_p_Uint32 swig_types[131]
+#define SWIGTYPE_p_Uint8 swig_types[132]
+#define SWIGTYPE_p_VertexArray swig_types[133]
+#define SWIGTYPE_p_VertexArrayShader swig_types[134]
+#define SWIGTYPE_p_Viewport swig_types[135]
+#define SWIGTYPE_p_WaterPiece swig_types[136]
+#define SWIGTYPE_p_char swig_types[137]
+#define SWIGTYPE_p_const_iterator swig_types[138]
+#define SWIGTYPE_p_float swig_types[139]
+#define SWIGTYPE_p_iterator swig_types[140]
+#define SWIGTYPE_p_p_AnimMesh swig_types[141]
+#define SWIGTYPE_p_p_Mesh swig_types[142]
+#define SWIGTYPE_p_p_NewDecal swig_types[143]
+#define SWIGTYPE_p_p_Node swig_types[144]
+#define SWIGTYPE_p_p_SceneNode swig_types[145]
+#define SWIGTYPE_p_p_Smoke swig_types[146]
+#define SWIGTYPE_p_p_TerrainPieceVA swig_types[147]
+#define SWIGTYPE_p_p_WaterPiece swig_types[148]
+#define SWIGTYPE_p_p_void swig_types[149]
+#define SWIGTYPE_p_std__listTAGRect2_t swig_types[150]
+#define SWIGTYPE_p_std__listTAntEntity_p_t swig_types[151]
+#define SWIGTYPE_p_std__listTSceneNode_p_t swig_types[152]
+#define SWIGTYPE_p_std__mapTstd__string_float_t swig_types[153]
+#define SWIGTYPE_p_std__mapTstd__string_std__string_t swig_types[154]
+#define SWIGTYPE_p_std__ostringstream swig_types[155]
+#define SWIGTYPE_p_std__out_of_range swig_types[156]
+#define SWIGTYPE_p_std__pairTAGRect2_AGRect2_t swig_types[157]
+#define SWIGTYPE_p_std__pairTstd__string_bool_t swig_types[158]
+#define SWIGTYPE_p_std__string swig_types[159]
+#define SWIGTYPE_p_std__vectorTAGBox3_t swig_types[160]
+#define SWIGTYPE_p_std__vectorTAGLine2_t swig_types[161]
+#define SWIGTYPE_p_std__vectorTAGMatrix4_t swig_types[162]
+#define SWIGTYPE_p_std__vectorTAGRect3_t swig_types[163]
+#define SWIGTYPE_p_std__vectorTAGVector2_t swig_types[164]
+#define SWIGTYPE_p_std__vectorTAGVector4_t swig_types[165]
+#define SWIGTYPE_p_std__vectorTAntEntityPtr_t swig_types[166]
+#define SWIGTYPE_p_std__vectorTAntPlane_t swig_types[167]
+#define SWIGTYPE_p_std__vectorTKeyFrame_t swig_types[168]
+#define SWIGTYPE_p_std__vectorTNode_p_t swig_types[169]
+#define SWIGTYPE_p_std__vectorTNode_t swig_types[170]
+#define SWIGTYPE_p_std__vectorTPickNode_t swig_types[171]
+#define SWIGTYPE_p_std__vectorTSceneNodePtr_t swig_types[172]
+#define SWIGTYPE_p_std__vectorTfloat_t swig_types[173]
+#define SWIGTYPE_p_std__vectorTstd__pairTAGRect2_AGVector4_t_t swig_types[174]
+#define SWIGTYPE_p_std__vectorTstd__string_t swig_types[175]
+static swig_type_info *swig_types[177];
+static swig_module_info swig_module = {swig_types, 176, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3181,6 +3183,36 @@ AGVector2 SwigDirector_AGMessageObject::getMousePosition() const {
     c_result=*b;
   }
   return (AGVector2) c_result;
+}
+
+
+SwigDirector_AGLocalizer::SwigDirector_AGLocalizer(VALUE self): AGLocalizer(), Swig::Director(self) {
+  
+}
+
+
+
+SwigDirector_AGLocalizer::~SwigDirector_AGLocalizer() {
+}
+
+std::string SwigDirector_AGLocalizer::find(std::string const &p) {
+  VALUE obj0 = Qnil ;
+  std::string c_result ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    return AGLocalizer::find(p);
+  }
+  obj0=rb_str_new2(p.c_str());
+  result = rb_funcall(swig_get_self(), rb_intern("find"), 1,obj0);
+  {
+    if (TYPE(result) == T_STRING)
+    //            c_result = std::string(StringValuePtr(result));
+    c_result = std::string(RSTRING(result)->ptr,RSTRING(result)->len);
+    else
+    throw Swig::DirectorTypeMismatchException("string expected");
+  }
+  return (std::string) c_result;
 }
 
 
@@ -40822,6 +40854,166 @@ _wrap_toInt__SWIG_0(int argc, VALUE *argv, VALUE self) {
   result = (int)toInt(arg1);
   
   vresult = SWIG_From_int(static_cast<int >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+swig_class cAGLocalizer;
+
+SWIGINTERN void
+free_AGLocalizer(AGLocalizer *arg1) {
+    delete arg1;
+}
+
+SWIGINTERN VALUE
+_wrap_AGLocalizer_find(int argc, VALUE *argv, VALUE self) {
+  AGLocalizer *arg1 = (AGLocalizer *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::string temp2 ;
+  Swig::Director *director = 0;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGLocalizer, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "find" "', argument " "1"" of type '" "AGLocalizer *""'"); 
+  }
+  arg1 = reinterpret_cast<AGLocalizer * >(argp1);
+  {
+    if (TYPE(argv[0]) == T_STRING) {
+      //            temp2 = std::string(StringValuePtr(argv[0]));
+      temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+      arg2 = &temp2;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    result = (arg1)->find((std::string const &)*arg2);
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    vresult = rb_str_new((&result)->c_str(),(&result)->length());
+  }
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+SWIGINTERN VALUE
+_wrap_AGLocalizer_allocate(VALUE self) {
+#else
+  SWIGINTERN VALUE
+  _wrap_AGLocalizer_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+    
+    
+    VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGLocalizer);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+    rb_obj_call_init(vresult, argc, argv);
+#endif
+    return vresult;
+  }
+  
+
+SWIGINTERN VALUE
+_wrap_new_AGLocalizer(int argc, VALUE *argv, VALUE self) {
+  VALUE arg1 = (VALUE) 0 ;
+  AGLocalizer *result = 0 ;
+  const char *classname SWIGUNUSED = "Libantargis::AGLocalizer";
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  arg1 = self;
+  if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+    /* subclassed */
+    result = (AGLocalizer *)new SwigDirector_AGLocalizer(arg1);
+    
+  } else {
+    result = (AGLocalizer *)new AGLocalizer();
+    
+  }
+  DATA_PTR(self) = result;
+  
+  return self;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_disown_AGLocalizer(int argc, VALUE *argv, VALUE self) {
+  AGLocalizer *arg1 = (AGLocalizer *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_AGLocalizer, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_AGLocalizer" "', argument " "1"" of type '" "AGLocalizer *""'"); 
+  }
+  arg1 = reinterpret_cast<AGLocalizer * >(argp1);
+  {
+    Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+    if (director) director->swig_disown();
+  }
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_setLocalizer(int argc, VALUE *argv, VALUE self) {
+  AGLocalizer *arg1 = (AGLocalizer *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_AGLocalizer, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setLocalizer" "', argument " "1"" of type '" "AGLocalizer *""'"); 
+  }
+  arg1 = reinterpret_cast<AGLocalizer * >(argp1);
+  setLocalizer(arg1);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_getLocalizer(int argc, VALUE *argv, VALUE self) {
+  AGLocalizer *result = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  result = (AGLocalizer *)getLocalizer();
+  
+  vresult = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_AGLocalizer, 0 |  0 );
   return vresult;
 fail:
   return Qnil;
@@ -82158,6 +82350,34 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_Scene_getCameraObject(int argc, VALUE *argv, VALUE self) {
+  Scene *arg1 = (Scene *) 0 ;
+  AntCamera *result = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Scene, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getCameraObject" "', argument " "1"" of type '" "Scene *""'"); 
+  }
+  arg1 = reinterpret_cast<Scene * >(argp1);
+  {
+    AntCamera &_result_ref = (arg1)->getCameraObject();
+    result = (AntCamera *) &_result_ref;
+  }
+  
+  vresult = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_AntCamera, 0 |  0 );
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_Scene_getTriangles(int argc, VALUE *argv, VALUE self) {
   Scene *arg1 = (Scene *) 0 ;
   size_t result;
@@ -85241,6 +85461,7 @@ static swig_type_info _swigt__p_AGLine3 = {"_p_AGLine3", "AGLine3 *", 0, 0, (voi
 static swig_type_info _swigt__p_AGListBox = {"_p_AGListBox", "AGListBox *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AGListBoxItem = {"_p_AGListBoxItem", "AGListBoxItem *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AGListener = {"_p_AGListener", "AGListener *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_AGLocalizer = {"_p_AGLocalizer", "AGLocalizer *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AGMain = {"_p_AGMain", "AGMain *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AGMatrix3 = {"_p_AGMatrix3", "AGMatrix3 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AGMatrix4 = {"_p_AGMatrix4", "AGMatrix4 *", 0, 0, (void*)0, 0};
@@ -85279,6 +85500,7 @@ static swig_type_info _swigt__p_AGWindow = {"_p_AGWindow", "AGWindow *", 0, 0, (
 static swig_type_info _swigt__p_AnimMesh = {"_p_AnimMesh", "AnimMesh *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AnimMeshData = {"_p_AnimMeshData", "AnimMeshData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Animation = {"_p_Animation", "Animation *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_AntCamera = {"_p_AntCamera", "AntCamera *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AntEntity = {"_p_AntEntity", "AntEntity *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AntEntityPtr = {"_p_AntEntityPtr", "AntEntityPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_AntFragProgram = {"_p_AntFragProgram", "AntFragProgram *", 0, 0, (void*)0, 0};
@@ -85417,6 +85639,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AGListBox,
   &_swigt__p_AGListBoxItem,
   &_swigt__p_AGListener,
+  &_swigt__p_AGLocalizer,
   &_swigt__p_AGMain,
   &_swigt__p_AGMatrix3,
   &_swigt__p_AGMatrix4,
@@ -85455,6 +85678,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_AnimMesh,
   &_swigt__p_AnimMeshData,
   &_swigt__p_Animation,
+  &_swigt__p_AntCamera,
   &_swigt__p_AntEntity,
   &_swigt__p_AntEntityPtr,
   &_swigt__p_AntFragProgram,
@@ -85593,6 +85817,7 @@ static swig_cast_info _swigc__p_AGLine3[] = {  {&_swigt__p_AGLine3, 0, 0, 0},{0,
 static swig_cast_info _swigc__p_AGListBox[] = {  {&_swigt__p_AGListBox, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGListBoxItem[] = {  {&_swigt__p_AGListBoxItem, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGListener[] = {  {&_swigt__p_AGListBox, _p_AGListBoxTo_p_AGListener, 0, 0},  {&_swigt__p_AGWindow, _p_AGWindowTo_p_AGListener, 0, 0},  {&_swigt__p_AGCaption, _p_AGCaptionTo_p_AGListener, 0, 0},  {&_swigt__p_AntMap, _p_AntMapTo_p_AGListener, 0, 0},  {&_swigt__p_AGApplication, _p_AGApplicationTo_p_AGListener, 0, 0},  {&_swigt__p_AGButton, _p_AGButtonTo_p_AGListener, 0, 0},  {&_swigt__p_AGEdit, _p_AGEditTo_p_AGListener, 0, 0},  {&_swigt__p_AGTable, _p_AGTableTo_p_AGListener, 0, 0},  {&_swigt__p_GLApp, _p_GLAppTo_p_AGListener, 0, 0},  {&_swigt__p_AGWidget, _p_AGWidgetTo_p_AGListener, 0, 0},  {&_swigt__p_HeightMap, _p_HeightMapTo_p_AGListener, 0, 0},  {&_swigt__p_MiniMap, _p_MiniMapTo_p_AGListener, 0, 0},  {&_swigt__p_AGColorButton, _p_AGColorButtonTo_p_AGListener, 0, 0},  {&_swigt__p_AGListener, 0, 0, 0},  {&_swigt__p_AGGLWidget, _p_AGGLWidgetTo_p_AGListener, 0, 0},  {&_swigt__p_AGImage, _p_AGImageTo_p_AGListener, 0, 0},  {&_swigt__p_AGText, _p_AGTextTo_p_AGListener, 0, 0},  {&_swigt__p_AGCheckBox, _p_AGCheckBoxTo_p_AGListener, 0, 0},  {&_swigt__p_AGLayout, _p_AGLayoutTo_p_AGListener, 0, 0},  {&_swigt__p_AGRadio, _p_AGRadioTo_p_AGListener, 0, 0},  {&_swigt__p_AGDialog, _p_AGDialogTo_p_AGListener, 0, 0},  {&_swigt__p_AGMessageObject, _p_AGMessageObjectTo_p_AGListener, 0, 0},  {&_swigt__p_AGRadioGroup, _p_AGRadioGroupTo_p_AGListener, 0, 0},  {&_swigt__p_AGSound, _p_AGSoundTo_p_AGListener, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AGLocalizer[] = {  {&_swigt__p_AGLocalizer, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGMain[] = {  {&_swigt__p_AGMain, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGMatrix3[] = {  {&_swigt__p_AGMatrix3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AGMatrix4[] = {  {&_swigt__p_AGMatrix4, 0, 0, 0},{0, 0, 0, 0}};
@@ -85631,6 +85856,7 @@ static swig_cast_info _swigc__p_AGWindow[] = {  {&_swigt__p_AGWindow, 0, 0, 0},{
 static swig_cast_info _swigc__p_AnimMesh[] = {  {&_swigt__p_AnimMesh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AnimMeshData[] = {  {&_swigt__p_AnimMeshData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Animation[] = {  {&_swigt__p_Animation, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_AntCamera[] = {  {&_swigt__p_AntCamera, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntEntity[] = {  {&_swigt__p_AntEntity, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntEntityPtr[] = {  {&_swigt__p_AntEntityPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_AntFragProgram[] = {  {&_swigt__p_AntFragProgram, 0, 0, 0},{0, 0, 0, 0}};
@@ -85769,6 +85995,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AGListBox,
   _swigc__p_AGListBoxItem,
   _swigc__p_AGListener,
+  _swigc__p_AGLocalizer,
   _swigc__p_AGMain,
   _swigc__p_AGMatrix3,
   _swigc__p_AGMatrix4,
@@ -85807,6 +86034,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_AnimMesh,
   _swigc__p_AnimMeshData,
   _swigc__p_Animation,
+  _swigc__p_AntCamera,
   _swigc__p_AntEntity,
   _swigc__p_AntEntityPtr,
   _swigc__p_AntFragProgram,
@@ -86730,6 +86958,18 @@ SWIGEXPORT void Init_libantargis(void) {
   cAGColor.mark = 0;
   cAGColor.destroy = (void (*)(void *)) free_AGColor;
   cAGColor.trackObjects = 0;
+  rb_define_module_function(mLibantargis, "disown_AGLocalizer", VALUEFUNC(_wrap_disown_AGLocalizer), -1);
+  
+  cAGLocalizer.klass = rb_define_class_under(mLibantargis, "AGLocalizer", rb_cObject);
+  SWIG_TypeClientData(SWIGTYPE_p_AGLocalizer, (void *) &cAGLocalizer);
+  rb_define_alloc_func(cAGLocalizer.klass, _wrap_AGLocalizer_allocate);
+  rb_define_method(cAGLocalizer.klass, "initialize", VALUEFUNC(_wrap_new_AGLocalizer), -1);
+  rb_define_method(cAGLocalizer.klass, "find", VALUEFUNC(_wrap_AGLocalizer_find), -1);
+  cAGLocalizer.mark = 0;
+  cAGLocalizer.destroy = (void (*)(void *)) free_AGLocalizer;
+  cAGLocalizer.trackObjects = 0;
+  rb_define_module_function(mLibantargis, "setLocalizer", VALUEFUNC(_wrap_setLocalizer), -1);
+  rb_define_module_function(mLibantargis, "getLocalizer", VALUEFUNC(_wrap_getLocalizer), -1);
   rb_define_module_function(mLibantargis, "disown_AGWidget", VALUEFUNC(_wrap_disown_AGWidget), -1);
   
   cAGWidget.klass = rb_define_class_under(mLibantargis, "AGWidget", ((swig_class *) SWIGTYPE_p_AGMessageObject->clientdata)->klass);
@@ -88306,6 +88546,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cScene.klass, "getCamera", VALUEFUNC(_wrap_Scene_getCamera), -1);
   rb_define_method(cScene.klass, "advance", VALUEFUNC(_wrap_Scene_advance), -1);
   rb_define_method(cScene.klass, "pick", VALUEFUNC(_wrap_Scene_pick), -1);
+  rb_define_method(cScene.klass, "getCameraObject", VALUEFUNC(_wrap_Scene_getCameraObject), -1);
   rb_define_method(cScene.klass, "getTriangles", VALUEFUNC(_wrap_Scene_getTriangles), -1);
   rb_define_method(cScene.klass, "getCameraDirTo", VALUEFUNC(_wrap_Scene_getCameraDirTo), -1);
   rb_define_method(cScene.klass, "getFrustum", VALUEFUNC(_wrap_Scene_getFrustum), -1);

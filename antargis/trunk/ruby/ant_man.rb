@@ -26,6 +26,7 @@
 # could be that it has something to do with Init_Stack ???
 
 require 'ant_manbase.rb'
+require 'ant_config.rb'
 
 
 
@@ -57,6 +58,7 @@ class AntNewMan<AntMyEntity
 
 		resource.set("sword",1)
 		checkResources
+		self.age=(getRand*20+15)
 	end
 	
 	##########################
@@ -332,12 +334,8 @@ class AntNewMan<AntMyEntity
 		end
 	end
 	def getDescription
-		"This is #{getName}. He is #{age} years old. He obeys #{@boss.getName}."
+		_("This is {1}. He is {2} years old.",getName,age)+_("He obeys {1}.",@boss.getName)
 	end
-	def age
-		18
-	end
-
 end
 
 	

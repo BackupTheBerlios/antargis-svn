@@ -40,6 +40,7 @@ class AntHero<AntBoss
 		getMap.setLight(self)
 		setMinimapColor(AGColor.new(0xFF,0,0))
 		@meshStand="stand"
+		self.age=(getRand*20+20)
 	end
 	def setAppearance(a)
 		@appearance=a
@@ -228,11 +229,13 @@ class AntHero<AntBoss
 	def setFire(flag)
 		puts "setFire #{flag}"
 		if flag
-			if not @fire
-				@fire=AntFire.new(getPos3D+AGVector3.new(0.7,0,0))
-				getMap.insertEntity(@fire)
+			if getPos3D.z>0 # won't start fire in water!!
+				if not @fire
+					@fire=AntFire.new(getPos3D+AGVector3.new(0.7,0,0))
+					getMap.insertEntity(@fire)
+				end
+				startFireSound
 			end
-			startFireSound
 		else
 			#raise 1
 			if @fire
@@ -294,10 +297,14 @@ class AntHero<AntBoss
 		return r
 	end
 	def getDescription
-		"This is #{getName}. He is #{age} years old. #{getMen.length} men support him."
-	end
-	def age
-		21
+		nameage=_("This is {1}. He is {2} years old.",getName,age)
+		support=nil
+		if getMen.length==1
+			support=_("Nobody supports him.")
+		else
+			support=_("{1} men support him.",getMen.length-1)
+		end
+		nameage+" "+support
 	end
 
 	def spreadResources

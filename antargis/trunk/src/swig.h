@@ -80,6 +80,15 @@ public:
 };
 
 
+class SwigDirector_AGLocalizer : public AGLocalizer, public Swig::Director {
+
+public:
+    SwigDirector_AGLocalizer(VALUE self);
+    virtual ~SwigDirector_AGLocalizer();
+    virtual std::string find(std::string const &p);
+};
+
+
 class SwigDirector_AGWidget : public AGWidget, public Swig::Director {
 
 public:

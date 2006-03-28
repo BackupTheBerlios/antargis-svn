@@ -25,13 +25,16 @@
 # WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
 # could be that it has something to do with Init_Stack ???
 
+require 'ant_local.rb'
 
 class AntMyEntity<AntEntity
+	attr_accessor :birthday
 	def initialize(p)
 		super(p)
 		$map.registerEntity(self)
 		mRUBY=self
 		@xmlProps={}
+		@birthday=getMap.getTime
 	end
 	def setXMLProp(n,v)
 		@xmlProps[n]=v
@@ -43,11 +46,18 @@ class AntMyEntity<AntEntity
 			return @xmlProps[n]
 		end
 	end
+	def loadXML(node)
+		super
+		if node.get("birthday")!=""
+			@birthday=node.get("birthday").to_f
+		end
+	end
 	def saveXML(node)
 		super(node)
 		@xmlProps.each{|n,v|
 			node.set(n,v)
 		}
+		node.set("birthday",@birthday)
 	end
 	def getDescription
 		"This an entity - no more info here."
@@ -76,6 +86,12 @@ class AntMyEntity<AntEntity
 	def setStrength(v)
 		super
 		setMoraleStrength(v*2)
+	end
+	def age
+		((getMap.getTime-@birthday).to_f/$YEAR).to_i
+	end
+	def age=(years)
+		@birthday=getMap.getTime-years*$YEAR
 	end
 end
 

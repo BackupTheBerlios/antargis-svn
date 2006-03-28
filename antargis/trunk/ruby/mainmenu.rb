@@ -228,6 +228,7 @@ class AntMenuApp <AGApplication
 			c=Campaign.new(getWriteDir+"/savegames/"+id)
 			continueCampaign(c)
 		end
+		setMainWidget(@mainMenu)
 		return true
 	end
 end

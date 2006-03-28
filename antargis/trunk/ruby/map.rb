@@ -55,6 +55,7 @@ class AntRubyMap<AntMap
 		@started=false
 		@story={}
 		@targets={}
+		@curTime=0.0
 	end
 	def getTarget(name)
 		@targets[name]
@@ -220,11 +221,15 @@ class AntRubyMap<AntMap
 			#end
 		end
 	end
+	def getTime
+		@curTime
+	end
 	
 	def move(time)
 		if @paused
 			return
 		end
+		@curTime+=time
 		$systemTime+=time
 		super(time)
 		
@@ -264,6 +269,9 @@ class AntRubyMap<AntMap
 			sd.each{|c|
 				@script.loadXML(c)
 			}
+		end
+		if n.get("curTime")!=""
+			@curTime=n.get("curTime").to_f
 		end
 	end
 

@@ -19,6 +19,7 @@
  */
 
 #include "ag_layout.h"
+#include "ag_local.h"
 #include "ag_xml.h"
 #include "ag_tools.h"
 #include "ag_theme.h"
@@ -226,7 +227,7 @@ class AGButtonLayoutCreator:public AGLayoutCreator
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     AGButton *b;
-    std::string caption=pNode.get("caption");
+    std::string caption=_(pNode.get("caption"));
     b=new AGButton(pParent,pRect,caption);
     
     std::string captionImage=pNode.get("caption-image");
@@ -377,7 +378,7 @@ public:
 
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
-    std::string text=pNode.get("caption");
+    std::string text=_(pNode.get("caption"));
     
     //    AGWidget *w=new AGText(pParent,pRect,text,font);
     AGEdit *w=new AGEdit(pParent,pRect);

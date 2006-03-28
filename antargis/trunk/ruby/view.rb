@@ -266,7 +266,10 @@ class AntNameDisplay<AGWidget
 		@font=getTheme.getFont("heroName.font")
 		@oldfont=@font
 		@name=@hero.getName
+		addChild(@mb=AGButton.new(self,AGRect.new(0,0,width,height/2+4	),""))
+		@mb.setEnabled(false)
 		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height/2),@hero.getName,@font))
+		
 		#b.setTheme("antButton")
 		if false
 			addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
@@ -295,6 +298,7 @@ class AntNameDisplay<AGWidget
 		end
 		if @font!=@oldfont
 			@textWidget.setFont(@font)
+			queryRedraw
 		end
 		super
 	end
