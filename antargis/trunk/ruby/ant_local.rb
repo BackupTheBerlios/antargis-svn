@@ -29,6 +29,9 @@ class AntLocalizer<AGLocalizer
 		read
 	end
 	def process(x)
+		if x==""
+			return x
+		end
 		if @table.member?(x)
 			if @table[x]!="" and @table[x]!=nil
 				return @table[x]
@@ -45,20 +48,31 @@ class AntLocalizer<AGLocalizer
 
 private
 	def read
-		c=loadFile("data/local_#{@lang}.txt")
+		c=loadFile("data/local/local_#{@lang}.txt")
 		c.split("\n").each{|l|
 			langc,langm=l.split(";;")
-			if langc and langm
+			if langc
+				if not langm
+					langm=""
+				end
 				@table[langc]=langm
 			end
 		}
 	end
 	def write
 		o=""
+		# save incomplete at first
 		@table.each{|n,v|
-			o+=n+";;"+v+"\n"
+			if v=="" or v==nil
+				o+=n+";;"+v+"\n"
+			end
 		}
-		saveFile("data/local_#{@lang}.txt",o)
+		@table.each{|n,v|
+			if v!="" and v!=nil
+				o+=n+";;"+v+"\n"
+			end
+		}
+		saveFile("data/local/local_#{@lang}.txt",o)
 	end
 end
 

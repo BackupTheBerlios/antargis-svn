@@ -757,6 +757,7 @@ class SwigDirector_AGImage : public AGImage, public Swig::Director {
 
 public:
     SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect2 const &r, AGSurface pSurface, bool pTile, AGRect2 const &pRect = AGRect2(0,0,0,0));
+    SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect2 const &r, AGTexture pTexture, bool pTile, AGRect2 const &pRect = AGRect2(0,0,0,0));
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();

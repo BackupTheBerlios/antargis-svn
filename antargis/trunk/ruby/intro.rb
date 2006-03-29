@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'ruby/antargislib.rb'
-
+require 'ant_local.rb'
 
 class Black<AGWidget
 	def initialize(p,r)
@@ -23,8 +23,19 @@ class IntroApp<AGApplication
 		super
 		
 		@pics=["data/gui/rough_lands.png","data/gui/strong_heroes.png","data/gui/logoGold.png","data/gui/your_mission.png","data/gui/unify_the_people.png","data/gui/castle_small.png"]
-		
-		@surfaces=@pics.collect{|x|AGSurface.load(x)}
+
+		@pics=["rough lands","strong heroes","data/gui/logoGold.png","your mission","unify the people","data/gui/castle_small.png"]
+
+		font=getTheme.getFont("intro.font")
+		@surfaces=@pics.collect{|x|
+			r=nil
+			if x=~/\.png/ or x=~/\.jpg/
+				r=AGSurface.load(x)
+			else
+				r=AGFontEngine::renderText(0,0,_(x),font)
+			end
+			r
+		}
 		@s=0
 		@img=AGImage.new(nil,AGRect.new(0,0,1024,768),@surfaces[0],false) #,AGRect.new(0,0,1024,768))
 		@black=Black.new(@img,AGRect.new(0,0,1024,768))
@@ -78,7 +89,11 @@ class IntroApp<AGApplication
 					@s=0
 					@canceled=true
 				end
-				@img.setSurface(@surfaces[@s])
+				if @surfaces[@s].is_a?(AGSurface)
+					@img.setSurface(@surfaces[@s])
+				else
+					@img.setTexture(@surfaces[@s])
+				end
 			end
 		end
 		case @phase

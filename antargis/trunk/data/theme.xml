@@ -424,6 +424,9 @@
 	<enemyHero>
 		<font name='font' file="Arial.ttf" size="17" color='#f66100' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</enemyHero>
+	<intro>
+		<font name='font' file="Arial.ttf" size="35" color='#f6c108' embossed="true" borderWidth="3" borderColor="#AA0000"/>
+	</intro>
 	<story>
 		<button>
 			<border>

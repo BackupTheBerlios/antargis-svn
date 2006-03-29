@@ -11,7 +11,7 @@ begin File.mkpath(".deps")
 rescue 
 end
 
-$debug=false
+$debug=true
 
 #`mkdir .deps`
 

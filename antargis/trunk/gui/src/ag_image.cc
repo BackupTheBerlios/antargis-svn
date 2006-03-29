@@ -35,6 +35,22 @@ AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTil
       setWidth(pRect.w());
     }
 }
+AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile,const AGRect2 &pRect):
+  AGWidget(pParent,r),
+  mTexture(pTexture),mTile(pTile)
+{
+  mCenter=true;
+  //  CTRACE;
+  if(pRect!=pTexture.getRect() && pRect.w()!=0 && pRect.h()!=0)
+    {
+      mSrcRect=pRect;
+
+      setHeight(pRect.h());
+      setWidth(pRect.w());
+    }
+}
+
+
 
 AGImage::~AGImage()
 {

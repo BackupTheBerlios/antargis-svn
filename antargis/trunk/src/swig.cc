@@ -13489,6 +13489,12 @@ SwigDirector_AGImage::SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect
 
 
 
+SwigDirector_AGImage::SwigDirector_AGImage(VALUE self, AGWidget *pParent, AGRect2 const &r, AGTexture pTexture, bool pTile, AGRect2 const &pRect): AGImage(pParent, r, pTexture, pTile, pRect), Swig::Director(self) {
+  
+}
+
+
+
 bool SwigDirector_AGImage::eventLostFocus() {
   bool c_result ;
   VALUE result;
@@ -57103,23 +57109,6 @@ fail:
 }
 
 
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-SWIGINTERN VALUE
-_wrap_AGImage_allocate(VALUE self) {
-#else
-  SWIGINTERN VALUE
-  _wrap_AGImage_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-    
-    
-    VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGImage);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_obj_call_init(vresult, argc, argv);
-#endif
-    return vresult;
-  }
-  
-
 SWIGINTERN VALUE
 _wrap_new_AGImage__SWIG_1(int argc, VALUE *argv, VALUE self) {
   VALUE arg1 = (VALUE) 0 ;
@@ -57191,6 +57180,176 @@ fail:
 }
 
 
+SWIGINTERN VALUE
+_wrap_new_AGImage__SWIG_2(int argc, VALUE *argv, VALUE self) {
+  VALUE arg1 = (VALUE) 0 ;
+  AGWidget *arg2 = (AGWidget *) 0 ;
+  AGRect2 *arg3 = 0 ;
+  AGTexture arg4 ;
+  bool arg5 ;
+  AGRect2 *arg6 = 0 ;
+  AGImage *result = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  void *argp6 ;
+  int res6 = 0 ;
+  const char *classname SWIGUNUSED = "Libantargis::AGImage";
+  
+  if ((argc < 5) || (argc > 5)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc); SWIG_fail;
+  }
+  arg1 = self;
+  res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_AGWidget, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AGImage" "', argument " "2"" of type '" "AGWidget *""'"); 
+  }
+  arg2 = reinterpret_cast<AGWidget * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[1], &argp3, SWIGTYPE_p_AGRect2,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "AGImage" "', argument " "3"" of type '" "AGRect2 const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AGImage" "', argument " "3"" of type '" "AGRect2 const &""'"); 
+  }
+  arg3 = reinterpret_cast<AGRect2 * >(argp3);
+  {
+    res4 = SWIG_ConvertPtr(argv[2], &argp4, SWIGTYPE_p_AGTexture,  0 );
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "AGImage" "', argument " "4"" of type '" "AGTexture""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AGImage" "', argument " "4"" of type '" "AGTexture""'");
+    } else {
+      arg4 = *(reinterpret_cast<AGTexture * >(argp4));
+    }
+  }
+  ecode5 = SWIG_AsVal_bool(argv[3], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "AGImage" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast<bool >(val5);
+  res6 = SWIG_ConvertPtr(argv[4], &argp6, SWIGTYPE_p_AGRect2,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "AGImage" "', argument " "6"" of type '" "AGRect2 const &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AGImage" "', argument " "6"" of type '" "AGRect2 const &""'"); 
+  }
+  arg6 = reinterpret_cast<AGRect2 * >(argp6);
+  {
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+      /* subclassed */
+      result = (AGImage *)new SwigDirector_AGImage(arg1,arg2,(AGRect2 const &)*arg3,arg4,arg5,(AGRect2 const &)*arg6);
+      
+    } else {
+      result = (AGImage *)new AGImage(arg2,(AGRect2 const &)*arg3,arg4,arg5,(AGRect2 const &)*arg6);
+      
+    }
+    DATA_PTR(self) = result;
+    
+    result->mRUBY=self;
+    result->mRubyObject=true;
+  }
+  return self;
+fail:
+  return Qnil;
+}
+
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+SWIGINTERN VALUE
+_wrap_AGImage_allocate(VALUE self) {
+#else
+  SWIGINTERN VALUE
+  _wrap_AGImage_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+    
+    
+    VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_AGImage);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+    rb_obj_call_init(vresult, argc, argv);
+#endif
+    return vresult;
+  }
+  
+
+SWIGINTERN VALUE
+_wrap_new_AGImage__SWIG_3(int argc, VALUE *argv, VALUE self) {
+  VALUE arg1 = (VALUE) 0 ;
+  AGWidget *arg2 = (AGWidget *) 0 ;
+  AGRect2 *arg3 = 0 ;
+  AGTexture arg4 ;
+  bool arg5 ;
+  AGImage *result = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  const char *classname SWIGUNUSED = "Libantargis::AGImage";
+  
+  if ((argc < 4) || (argc > 4)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc); SWIG_fail;
+  }
+  arg1 = self;
+  res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_AGWidget, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AGImage" "', argument " "2"" of type '" "AGWidget *""'"); 
+  }
+  arg2 = reinterpret_cast<AGWidget * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[1], &argp3, SWIGTYPE_p_AGRect2,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "AGImage" "', argument " "3"" of type '" "AGRect2 const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AGImage" "', argument " "3"" of type '" "AGRect2 const &""'"); 
+  }
+  arg3 = reinterpret_cast<AGRect2 * >(argp3);
+  {
+    res4 = SWIG_ConvertPtr(argv[2], &argp4, SWIGTYPE_p_AGTexture,  0 );
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "AGImage" "', argument " "4"" of type '" "AGTexture""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AGImage" "', argument " "4"" of type '" "AGTexture""'");
+    } else {
+      arg4 = *(reinterpret_cast<AGTexture * >(argp4));
+    }
+  }
+  ecode5 = SWIG_AsVal_bool(argv[3], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "AGImage" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast<bool >(val5);
+  {
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+      /* subclassed */
+      result = (AGImage *)new SwigDirector_AGImage(arg1,arg2,(AGRect2 const &)*arg3,arg4,arg5);
+      
+    } else {
+      result = (AGImage *)new AGImage(arg2,(AGRect2 const &)*arg3,arg4,arg5);
+      
+    }
+    DATA_PTR(self) = result;
+    
+    result->mRUBY=self;
+    result->mRubyObject=true;
+  }
+  return self;
+fail:
+  return Qnil;
+}
+
+
 SWIGINTERN VALUE _wrap_new_AGImage(int nargs, VALUE *args, VALUE self) {
   int argc;
   VALUE argv[7];
@@ -57224,6 +57383,67 @@ SWIGINTERN VALUE _wrap_new_AGImage(int nargs, VALUE *args, VALUE self) {
             }
             if (_v) {
               return _wrap_new_AGImage__SWIG_1(nargs, args, self);
+            }
+          }
+        }
+      }
+    }
+  }
+  if (argc == 5) {
+    int _v;
+    _v = (argv[0] != 0);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_AGWidget, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_AGRect2, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_AGTexture, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            {
+              int res = SWIG_AsVal_bool(argv[4], NULL);
+              _v = SWIG_CheckState(res);
+            }
+            if (_v) {
+              return _wrap_new_AGImage__SWIG_3(nargs, args, self);
+            }
+          }
+        }
+      }
+    }
+  }
+  if (argc == 6) {
+    int _v;
+    _v = (argv[0] != 0);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_AGWidget, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_AGRect2, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_AGTexture, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            {
+              int res = SWIG_AsVal_bool(argv[4], NULL);
+              _v = SWIG_CheckState(res);
+            }
+            if (_v) {
+              void *vptr = 0;
+              int res = SWIG_ConvertPtr(argv[5], &vptr, SWIGTYPE_p_AGRect2, 0);
+              _v = SWIG_CheckState(res);
+              if (_v) {
+                return _wrap_new_AGImage__SWIG_2(nargs, args, self);
+              }
             }
           }
         }

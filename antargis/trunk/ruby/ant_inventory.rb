@@ -88,6 +88,7 @@ private
 		end
 	end
 	def setTitle(t)
+		t=_(t)
 		c=getChild("invTitle")
 		if c.class==AGButton
 			c.setCaption(t)

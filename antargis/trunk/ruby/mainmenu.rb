@@ -114,7 +114,7 @@ class AntMenuApp <AGApplication
 			c=@campaignMenu.getChild(b)
 			addHandler(c,:sigClick,:eventMission)
 			if @campaigns.length>i
-				c.setCaption(@campaigns[i].name)
+				c.setCaption(_(@campaigns[i].name))
 			else
 				c.hide
 			end
@@ -182,7 +182,7 @@ class AntMenuApp <AGApplication
 		number=callerName[8..12].to_i
 		@selCampaign=@campaigns[number]
 		@campaignMenu.getChild("campaignImage").setTexture(@selCampaign.texture)
-		@campaignMenu.getChild("campaignDescription").setText(@selCampaign.description)
+		@campaignMenu.getChild("campaignDescription").setText(_(@selCampaign.description))
 		return true
 	end
 	

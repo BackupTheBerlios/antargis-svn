@@ -102,11 +102,11 @@ class AntStoryTalk<AntDialog
 		updateText
 	end
 	def setText(text)
-		toAGEdit(getChild("text")).setText(text)
+		toAGEdit(getChild("text")).setText(_(text))
 	end
 	def setTitle(text)
 		# it's AGText # FIXME: maybe exchange all AGText usages by AGEdit
-		toAGText(getChild("title")).setText(text)
+		toAGText(getChild("title")).setText(_(text))
 	end
 
 	def setFace(s)
@@ -152,7 +152,7 @@ private
 		if @oldtext!=text
 			getChild("text").setText(text)
 			@oldtext=text
-			getChild("window").getChild("title").setText(@ent.getName)
+			getChild("window").getChild("title").setText(_(@ent.getName))
 		end
 	end
 end

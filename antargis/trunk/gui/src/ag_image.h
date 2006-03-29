@@ -28,6 +28,7 @@ class AGImage:public AGWidget
 {
  public:
   AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile,const AGRect2 &pRect=AGRect2(0,0,0,0));
+  AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile,const AGRect2 &pRect=AGRect2(0,0,0,0));
   virtual ~AGImage();
 
   virtual void draw(AGPainter &p);

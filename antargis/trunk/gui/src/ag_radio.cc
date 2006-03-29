@@ -20,6 +20,7 @@
 
 
 #include "ag_radio.h"
+#include "ag_local.h"
 #include "ag_theme.h"
 #include "ag_image.h"
 #include "ag_layoutfactory.h"
@@ -146,7 +147,7 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
     AGRadio *b=new AGRadio(pParent,pRect);
-    std::string caption=pNode.get("caption");
+    std::string caption=_(pNode.get("caption"));
     if(caption.length())
       b->setCaption(caption);
 

@@ -142,7 +142,7 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
 
   if(w!=0 && pNode.get("tooltip").length())
-    w->setTooltip(pNode.get("tooltip"));
+    w->setTooltip(_(pNode.get("tooltip")));
 
   if(w!=0 && pNode.get("tabindex").length())
     {
@@ -357,11 +357,11 @@ class AGWindowLayoutCreator:public AGLayoutCreator
   
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
   {
-      std::string title=pNode.get("title");
-      std::string theme=pNode.get("theme");
-      
-      AGWidget *w=new AGWindow(pParent,pRect,title,theme);
-      return w;
+    std::string title=_(pNode.get("title"));
+    std::string theme=pNode.get("theme");
+    
+    AGWidget *w=new AGWindow(pParent,pRect,title,theme);
+    return w;
   }
 };
 
