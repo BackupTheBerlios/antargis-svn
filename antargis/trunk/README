@@ -1,4 +1,4 @@
 For installation and building have a look at the INSTALL file.
 
-Run the game by simply starting run.rb:
-> ./run.rb
+Run the game by simply starting antargis:
+> ./antargis

@@ -79,9 +79,7 @@ none noticed ATM
 [Game]
 ------------------------------------------------------
 [VH] add "eat-action", "sleep-action" "special??"
-[H] localization
 [L] add females
-[L] each man should have a name and an age
 [L] computer-player only attacks when stock is used up
 [L] story-telling:
 	- history function
@@ -104,3 +102,4 @@ none noticed ATM
 [Packaging]
 ------------------------------------------------------
 [L] installer for linux
+[L] remove libSGE dependency

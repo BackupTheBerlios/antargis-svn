@@ -21,8 +21,13 @@
 
 #!/usr/bin/ruby
 
+$ENV=ENV
+def getLanguage
+	ENV["LANG"].sub(/_.*/,"")
+end
+
 class AntLocalizer<AGLocalizer
-	def initialize(l="de")
+	def initialize(l=getLanguage)
 		super()
 		@table={}
 		@lang=l
