@@ -44,3 +44,11 @@ AGLocalizer *getLocalizer()
   return gLocalizer;
 }
 
+
+std::string translate(const std::string &s)
+{
+  AGLocalizer *l=getLocalizer();
+  if(l)
+    return l->find(s);
+  return s;
+}

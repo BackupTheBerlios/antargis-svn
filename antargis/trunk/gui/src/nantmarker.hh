@@ -1370,6 +1370,11 @@ else if(dynamic_cast<AGCheckBox*>($1))
  Data_Get_Struct($input,AGListener,b);
  $result=*b;
 }
+%typemap(directorout) AGLocalizer {
+ AGLocalizer *b;
+ Data_Get_Struct($input,AGLocalizer,b);
+ $result=*b;
+}
 %typemap(directorout) AGMain {
  AGMain *b;
  Data_Get_Struct($input,AGMain,b);

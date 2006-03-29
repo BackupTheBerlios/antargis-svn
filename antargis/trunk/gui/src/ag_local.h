@@ -35,8 +35,10 @@ class AGLocalizer
 void setLocalizer(AGLocalizer *p);
 AGLocalizer *getLocalizer();
 
+std::string translate(const std::string &s);
+
 #ifndef SWIG
-#define _(x) getLocalizer()->find(x)
+#define _(x) translate(x)
 #endif
 
 #endif
