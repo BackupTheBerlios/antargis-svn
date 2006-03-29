@@ -41026,6 +41026,36 @@ fail:
 }
 
 
+SWIGINTERN VALUE
+_wrap_translate(int argc, VALUE *argv, VALUE self) {
+  std::string *arg1 = 0 ;
+  std::string result;
+  std::string temp1 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  {
+    if (TYPE(argv[0]) == T_STRING) {
+      //            temp1 = std::string(StringValuePtr(argv[0]));
+      temp1 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+      arg1 = &temp1;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  result = translate((std::string const &)*arg1);
+  
+  {
+    vresult = rb_str_new((&result)->c_str(),(&result)->length());
+  }
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
 swig_class cAGWidget;
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -87190,6 +87220,7 @@ SWIGEXPORT void Init_libantargis(void) {
   cAGLocalizer.trackObjects = 0;
   rb_define_module_function(mLibantargis, "setLocalizer", VALUEFUNC(_wrap_setLocalizer), -1);
   rb_define_module_function(mLibantargis, "getLocalizer", VALUEFUNC(_wrap_getLocalizer), -1);
+  rb_define_module_function(mLibantargis, "translate", VALUEFUNC(_wrap_translate), -1);
   rb_define_module_function(mLibantargis, "disown_AGWidget", VALUEFUNC(_wrap_disown_AGWidget), -1);
   
   cAGWidget.klass = rb_define_class_under(mLibantargis, "AGWidget", ((swig_class *) SWIGTYPE_p_AGMessageObject->clientdata)->klass);

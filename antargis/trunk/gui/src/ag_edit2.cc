@@ -36,8 +36,9 @@ class AGEditString:public AGEditElement
 {
 public:
   std::string s;
+  AGFont font;
   
-  AGEditString(const std::string &p):s(p)
+  AGEditString(const std::string &p,const AGFont &pFont):s(p),font(pFont)
   {
   }
 
@@ -73,6 +74,14 @@ class AGEdit2Content
   typedef std::vector<AGEditElement*> Words;
   typedef std::pair<Words::iterator,size_t> Position;
 public:
+  void clear()
+  {
+    mWords.clear();
+  }
+  void setFont(const AGFont &pFont)
+  {
+    mFont=pFont;
+  }
   void setText(const std::string &s)
   {
     mWords.clear();
@@ -82,7 +91,7 @@ public:
       {
 	p=std::min(s.find(" ",old+1),s.find("\n",old+1));
 
-	AGEditElement *ns=new AGEditString(s.substr(old,p-old));
+	AGEditElement *ns=new AGEditString(s.substr(old,p-old),mFont);
 	mWords.push_back(ns);
 	if(s[p]=='\n')
 	  mWords.push_back(new AGEditNewLine);
@@ -106,7 +115,7 @@ public:
 	AGEditString *s=dynamic_cast<AGEditString*>(*i.first);
 	if(s)
 	  {
-	    AGEditString *n=new AGEditString(s->s.substr(i.second,std::string::npos));
+	    AGEditString *n=new AGEditString(s->s.substr(i.second,std::string::npos),s->font);
 	    s->s=s->s.substr(0,i.second);
 	    Words::iterator j=i.first;
 	    j++;
@@ -141,7 +150,7 @@ public:
 	return;
       }
     // else generate new block
-    mWords.insert(i.first,new AGEditString(std::string(c,1)));
+    mWords.insert(i.first,new AGEditString(std::string(c,1),mFont));
   }
   void insertWhiteSpace(size_t at)
   {
@@ -152,7 +161,7 @@ public:
 	AGEditString *s=dynamic_cast<AGEditString*>(*i.first);
 	if(s)
 	  {
-	    mWords.insert(i.first,new AGEditString(s->s.substr(0,i.second)));
+	    mWords.insert(i.first,new AGEditString(s->s.substr(0,i.second),s->font));
 	    s->s=s->s.substr(i.second,std::string::npos);
 	  }
 	else
@@ -160,6 +169,13 @@ public:
 	    throw std::runtime_error("unknown state");
 	  }	
       }
+  }
+  void removeChar(size_t at)
+  {
+    Position i=getChecked(at);
+    AGEditString *s=dynamic_cast<AGEditString*>(*i.first);
+    assert(s);
+    s->s=s->s.substr(0,i.second)+s->s.substr(i.second+1,std::string::npos);
   }
   void insertNewLine(size_t at)
   {
@@ -200,6 +216,7 @@ private:
 
 
   Words mWords;
+  AGFont mFont;
 };
 
 
@@ -208,6 +225,8 @@ AGEdit2::AGEdit2(AGWidget *pParent,const AGRect2 &pRect):
 {
   mContent=new AGEdit2Content;
   mCursor=0;
+  mSelBegin=mSelSize=0;
+  mInserting=true;
 }
 AGEdit2::~AGEdit2()
 {
@@ -230,9 +249,131 @@ void AGEdit2::checkCursor()
   mCursor=std::min(mContent->size()-1,mCursor);
 }
 
+void AGEdit2::checkSelection()
+{
+  int size=mContent->size()-1;
+  int end=std::min((int)(mSelBegin+mSelSize),size);
+  int begin=std::min((int)mSelBegin,size);
+
+  mSelBegin=begin;
+  mSelSize=end-begin;
+}
 
 
 void AGEdit2::setSelection(size_t start,size_t len)
 {
+  mSelBegin=start;
+  mSelSize=len;
+  checkSelection();
 }
 
+void AGEdit2::insertWhiteSpace()
+{
+  if(mInserting)
+    {
+      if(mMaxLen>0)
+	if(mMaxLen==mContent->size())
+	  {
+	    cancelSound();
+	    return; 
+	  }
+      mContent->insertWhiteSpace(mCursor++);
+    }
+  else
+    {
+      if(mContent->size()==mCursor)
+	{
+	  if(mMaxLen>0)
+	    if(mMaxLen==mContent->size())
+	      {
+		cancelSound();
+		return; 
+	      }
+	  mContent->insertWhiteSpace(mCursor++);
+	}
+      else
+	{
+	  mContent->removeChar(mCursor);
+	  mContent->insertWhiteSpace(mCursor);
+	}
+    }
+
+}
+
+void AGEdit2::insertChar(Char c)
+{
+  if(mInserting)
+    {
+      if(mMaxLen>0)
+	if(mMaxLen==mContent->size())
+	  {
+	    cancelSound();
+	    return; 
+	  }
+      mContent->insertChar(c,mCursor++);
+    }
+  else
+    {
+      if(mContent->size()==mCursor)
+	{
+	  if(mMaxLen>0)
+	    if(mMaxLen==mContent->size())
+	      {
+		cancelSound();
+		return; 
+	      }
+	  
+	  mContent->insertChar(c,mCursor++);
+	}
+      else
+	{
+	  mContent->removeChar(mCursor);
+	  mContent->insertChar(c,mCursor);
+	}
+    }
+}
+void AGEdit2::cancelSound()
+{
+  // FIXME
+}
+
+void AGEdit2::prepareDraw()
+{
+  mCursorTime+=SDL_GetTicks()-mCursorLast;
+  mCursorLast=SDL_GetTicks();
+  if(mCursorTime>300 && mMutable && hasFocus())
+    {
+      mCursorTime=0;
+      mShowCursor=!mShowCursor;
+      queryRedraw();
+    }
+
+
+  AGWidget::prepareDraw();
+}
+
+
+bool AGEdit2::eventGotFocus()
+{
+  queryRedraw();
+  return AGWidget::eventGotFocus();
+}
+bool AGEdit2::eventLostFocus()
+{
+  queryRedraw();
+  return AGWidget::eventLostFocus();
+}
+
+void AGEdit2::clear()
+{
+  mContent->clear();
+  queryRedraw();
+}
+
+
+void AGEdit2::draw(AGPainter &p)
+{
+  drawBackground(p);
+
+  
+}
