@@ -52,6 +52,12 @@
 	result->mRubyObject=true;
 }
 %markfunc AGMain "general_markfunc"
+%exception AGEdit2::AGEdit2 {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGEdit2 "general_markfunc"
 %exception AGCheckBox::AGCheckBox {
 	$action
 	result->mRUBY=self;
@@ -258,6 +264,8 @@ else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AGScreenWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGEdit2*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit2,0);
 else if(dynamic_cast<AGSound*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>(result))
@@ -318,6 +326,8 @@ else if(dynamic_cast<AGWindow*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AGScreenWidget*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGEdit2*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit2,0);
 else if(dynamic_cast<AGSound*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>($1))
@@ -528,6 +538,34 @@ else if(dynamic_cast<AGSubMenu*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) AGEdit2*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit2,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGEdit2*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit2,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGCheckBox*{
  if($1)
  {
@@ -686,6 +724,8 @@ else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AGScreenWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGEdit2*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit2,0);
 else if(dynamic_cast<AGSound*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>(result))
@@ -742,6 +782,8 @@ else if(dynamic_cast<AGWindow*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AGScreenWidget*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGEdit2*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit2,0);
 else if(dynamic_cast<AGSound*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>($1))
@@ -826,6 +868,8 @@ else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AGScreenWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGEdit2*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit2,0);
 else if(dynamic_cast<AGSound*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>(result))
@@ -888,6 +932,8 @@ else if(dynamic_cast<AGWindow*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AGScreenWidget*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
+else if(dynamic_cast<AGEdit2*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit2,0);
 else if(dynamic_cast<AGSound*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
 else if(dynamic_cast<AGDialog*>($1))
@@ -1273,6 +1319,16 @@ else if(dynamic_cast<AGCheckBox*>($1))
 %typemap(directorout) AGEdit {
  AGEdit *b;
  Data_Get_Struct($input,AGEdit,b);
+ $result=*b;
+}
+%typemap(directorout) AGEdit2 {
+ AGEdit2 *b;
+ Data_Get_Struct($input,AGEdit2,b);
+ $result=*b;
+}
+%typemap(directorout) AGEdit2Content {
+ AGEdit2Content *b;
+ Data_Get_Struct($input,AGEdit2Content,b);
  $result=*b;
 }
 %typemap(directorout) AGEditLine {

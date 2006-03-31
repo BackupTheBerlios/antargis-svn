@@ -208,7 +208,8 @@ if $swig!=""
 	end
 end
 task :test => "libantargis.so" do |t|
-	require 'libantargis.so'
+	`ruby ruby/runtests.rb`
+	#require 'libantargis.so'
 end
 
 task :clean do
@@ -256,7 +257,7 @@ def cpdir(dir,distdir)
 	}
 end
 
-task :dist do
+task :dist => :test do
 	distdir="antargis-#{version}"
 	mkdir(distdir)
 	#sh "test -e #{distdir} || mkdir #{distdir}"

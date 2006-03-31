@@ -44,6 +44,8 @@ class TestApp <AGApplication
 			@frames=0
 			@mtime=0
 		end
+		delay(10)
+		return false
 	end
 	def eventIdle
 		#delay(10)
@@ -55,5 +57,7 @@ class TestApp <AGApplication
 				tryQuit
 			end
 		end
+		delay(100)
+		return false
 	end
 end

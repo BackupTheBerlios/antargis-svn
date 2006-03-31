@@ -676,6 +676,58 @@ public:
 };
 
 
+class SwigDirector_AGEdit2 : public AGEdit2, public Swig::Director {
+
+public:
+    SwigDirector_AGEdit2(VALUE self, AGWidget *pParent, AGRect2 const &pRect);
+    virtual void useTextures();
+    virtual bool eventGotFocus();
+    virtual bool eventLostFocus();
+    virtual bool eventShow();
+    virtual void setTop(float y);
+    virtual void setHeight(float w);
+    virtual void setWidth(float w);
+    virtual void eventTick(float pTime);
+    virtual void setLeft(float x);
+    virtual bool eventDragBy(AGEvent *event, AGVector2 const &pDiff);
+    virtual void prepareDraw();
+    virtual void initHandlers();
+    virtual float minHeight() const;
+    virtual float minWidth() const;
+    virtual AGRect2 getClientRect() const;
+    virtual AGVector2 getMousePosition() const;
+    virtual Uint8 getButtonState() const;
+    virtual bool redraw() const;
+    virtual bool canFocus() const;
+    virtual ~SwigDirector_AGEdit2();
+    virtual bool eventMouseButtonUp(AGEvent *m);
+    virtual bool eventMouseButtonDown(AGEvent *m);
+    virtual bool eventMouseClick(AGEvent *m);
+    virtual bool eventMouseMotion(AGEvent *m);
+    virtual bool signal(AGEvent *m);
+    virtual bool acceptEvent(SDL_Event const *pEvent);
+    virtual bool eventActive(AGEvent *m);
+    virtual bool eventQuit(AGEvent *m);
+    virtual bool eventQuitModal(AGEvent *m);
+    virtual bool eventSysWM(AGEvent *m);
+    virtual bool eventResize(AGEvent *m);
+    virtual bool eventKeyDown(AGEvent *m);
+    virtual bool eventKeyUp(AGEvent *m);
+    virtual bool eventMouseEnter();
+    virtual void clear();
+    virtual void drawAll(AGPainter &p);
+    virtual void drawAfter(AGPainter &p);
+    virtual void draw(AGPainter &p);
+    virtual void drawBackground(AGPainter &p);
+    virtual bool eventMouseLeave();
+    virtual bool eventHide();
+    virtual void addChild(AGWidget *w);
+    virtual void addChildBack(AGWidget *w);
+    virtual void removeChild(AGWidget *w);
+    virtual void mark();
+};
+
+
 class SwigDirector_AGPaintTarget : public AGPaintTarget, public Swig::Director {
 
 public:

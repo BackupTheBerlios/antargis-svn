@@ -27,8 +27,9 @@
 
 class AGEdit2Content;
 
-enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
-enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
+#include <ag_edit.h>
+//enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
+//enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
 
 class AGEdit2:public AGWidget
 {
@@ -51,7 +52,7 @@ class AGEdit2:public AGWidget
   void setAlign(AGAlign pAlign);
   void setVAlign(AGVAlign pVAlign);
 
-  void setMulti(bool mMultiLine);
+  void setMulti(bool pMultiLine);
 
 
   void setBackground(bool pDrawBackground);
@@ -84,6 +85,7 @@ class AGEdit2:public AGWidget
   void cancelSound();
   void insertChar(Char c);
   void insertWhiteSpace();
+  void insertNewLine();
 
   void checkCursor();
   void checkSelection();
@@ -91,6 +93,7 @@ class AGEdit2:public AGWidget
   AGEdit2Content *mContent;
 
   size_t mCursor;
+  size_t mViewCursor;
   size_t mSelBegin,mSelSize;
   bool mInserting;
   size_t mMaxLen;
@@ -99,7 +102,16 @@ class AGEdit2:public AGWidget
   Uint32 mCursorLast;
   bool mShowCursor;
 
+  bool mLShift,mRShift;
+  bool mLCtrl,mRCtrl;
+  bool mLAlt,mRAlt;
+
   bool mMutable;
+  bool mMultiLine;
+
+  bool mDrawBackground;
+  AGBackground mBackground;
+
 };
 
 
