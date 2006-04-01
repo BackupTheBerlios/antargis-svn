@@ -92,7 +92,7 @@ public:
   }
   int width()
   {
-    cdebug(font.getWidth(" "));
+    //    cdebug(font.getWidth(" "));
     return font.getWidth(" ");
   }
   int height()
@@ -252,9 +252,9 @@ public:
 	if(s)
 	  {
 	    cdebug(s->s);
-	    mWords.insert(i.first,new AGEditWhiteSpace(s->font));
+	    //mWords.insert(i.first,new AGEditWhiteSpace(s->font));
 	    mWords.insert(i.first,new AGEditString(s->s.substr(0,i.second),s->font));
-	    //	    mWords.insert(i.first,new AGEditWhiteSpace(s->font));
+	    mWords.insert(i.first,new AGEditWhiteSpace(s->font));
 	    s->s=s->s.substr(i.second,std::string::npos);
 	  }
 	else
@@ -383,20 +383,20 @@ public:
 
   int getCursorX(const Words &line,size_t at)
   {
-    CTRACE;
+    //    CTRACE;
     size_t i=0;
     int x=0;
     Words::const_iterator j=line.begin();
     while(at>i && j!=line.end())
       {
-	cdebug(at<<" "<<i);
+	//	cdebug(at<<" "<<i);
 	AGEditString *s=dynamic_cast<AGEditString*>(*j);
 	if(s)
 	  {
 	    //	    cdebug(s->size());
 	    if(s->size()+i>at)
 	      {
-		cdebug("til");
+		//		cdebug("til");
 		x+=s->widthTil(at-i);
 	      }
 	    else
@@ -405,14 +405,107 @@ public:
 	  }
 	else
 	  {
-	    cdebug("other");
+	    //	    cdebug("other");
 	    x+=(*j)->width();
 	  }
-	cdebug("x:"<<x);
+	//	cdebug("x:"<<x);
 	i+=(*j)->size();
 	j++;
       }
     return x;
+  }
+  std::pair<int,int> getCursorCharPos(int width,size_t cursor)
+  {
+    int cx,cy,cw;
+    int cp=0;
+    cx=cy=0;
+    cw=0;
+    for(Words::iterator i=mWords.begin();i!=mWords.end() && cp<cursor;i++)
+      {
+	cdebug(cp<<"   "<<cursor);
+	if(dynamic_cast<AGEditNewLine*>(*i))
+	  {
+	    cy++;
+	    cx=0;
+	  }
+	else
+	  {
+	    AGEditString *s=dynamic_cast<AGEditString*>(*i);
+	    if((*i)->size()<=int(cursor)-cp || s==0)
+	      {
+		cx+=(*i)->size();
+		cw+=(*i)->width();
+		if(cw>width)
+		  {
+		    cx=(*i)->size();
+		    cy++;
+		    cw=(*i)->width();
+		  }
+	      }
+	    else
+	      {
+		int diff=int(cursor)-cp;
+		cx+=diff;
+		cw+=s->widthTil(diff);
+		if(cw>width)
+		  {
+		    cx=diff;
+		    cy++;
+		    cw=s->widthTil(diff);
+		  }
+	      }
+	  }
+	cp+=(*i)->size();
+      }
+    return std::make_pair(cx,cy);
+  }
+  
+  int getCursorCharX(int width,size_t cursor)
+  {
+    return getCursorCharPos(width,cursor).first;
+  }
+  int getCursorCharY(int width,size_t cursor)
+  {
+    return getCursorCharPos(width,cursor).second;
+  }
+
+  size_t getCursorPos(int width,int x,int y)
+  {
+    Words::iterator i=mWords.begin();
+    // search line
+    int cw=0;
+    int cx=0;
+    int cursor=0;
+    for(;i!=mWords.end() && y>0;i++)
+      {
+	cursor+=(*i)->size();
+	if(dynamic_cast<AGEditNewLine*>(*i))
+	  {
+	    cw=0;
+	    cx=0;
+	    y--;
+	  }
+	else
+	  {
+	    cw+=(*i)->width();
+	    cx+=(*i)->size();
+	    if(cw>width && (*i)->width()<width)
+	      {
+		y--;
+		cw=(*i)->width();
+		cx=(*i)->size();
+	      }
+	  }
+      }
+    // search x-pos
+    for(;i!=mWords.end() && cx<x;i++)
+      {
+	if(dynamic_cast<AGEditNewLine*>(*i))
+	  break;
+	
+      }
+   return cursor;
+    
   }
 
 private:
@@ -667,12 +760,12 @@ void AGEdit2::draw(AGPainter &p)
       
       //draw cursor
       size_t cWidth=mContent->getCursorWidth(line);
-      cdebug(start<<"  "<<mCursor<<" "<<start+cWidth);
+      //      cdebug(start<<"  "<<mCursor<<" "<<start+cWidth);
       if(mCursor<start+cWidth && mCursor>=start)
 	{
 	  int cx=mContent->getCursorX(line,mCursor-start);
 	  int cHeight=mContent->getCursorHeight(mCursor);
-	  cdebug("cx:"<<cx<<"  "<<y);
+	  //	  cdebug("cx:"<<cx<<"  "<<y);
 	  AGColor c(0xFF,0,0);
 	  p.fillRect(AGRect2(cx-4,y,10,2),c);
 	  p.fillRect(AGRect2(cx,y+2,2,cHeight-4),c);
@@ -798,6 +891,9 @@ bool AGEdit2::eventKeyDown(AGEvent *m)
 	  mRAlt=true;
 	}
     }
+
+  cdebug(mContent->getCursorCharX(width(),mCursor)<<"    "<<mContent->getCursorCharY(width(),mCursor));
+
   return false;
 }
 

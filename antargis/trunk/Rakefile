@@ -129,7 +129,7 @@ interfaceHeadersGUI=[
 
 PWD=Dir.pwd
 
-task :default => ["libantargis.so",:test]
+task :default => ["libantargis.so"]
 
 $GUISRC="gui/src"
 if $ccache!=""
@@ -259,6 +259,7 @@ end
 
 task :dist => :test do
 	distdir="antargis-#{version}"
+	sh "rm -rf #{distdir}"
 	mkdir(distdir)
 	#sh "test -e #{distdir} || mkdir #{distdir}"
 	dirs=`find -type d`.split("\n").collect{|x|x.sub("./","")}
@@ -271,7 +272,8 @@ task :dist => :test do
 	# cp base dir
 	cpdir(".",distdir)
 
-	if true
+	if false
+		# FIXME: check if png is transparent first
 		puts "CONVERTING PNGs to JPGs"
 		# make jpgs
 		pngs=`find #{distdir} -name "*.png"`
@@ -284,6 +286,7 @@ task :dist => :test do
 
 	# tar.gz
 	if not windows
+		sh "rm -rf #{distdir}/config.rb"
 		sh "tar cfz #{distdir}.tar.gz #{distdir}"
 		sh "rm -rf #{distdir}"
 	end
