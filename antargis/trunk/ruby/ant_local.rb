@@ -43,7 +43,7 @@ class AntLocalizer<AGLocalizer
 		end
 		if @table.member?(x)
 			if @table[x]!="" and @table[x]!=nil
-				return @table[x]
+				return @table[x].clone
 			end
 		end
 		@table[x]=""
@@ -94,7 +94,7 @@ def translate(a)
 end
 
 def _(a,*args)
-	a=translate(a)
+	a=translate(a).dup
 	(1..args.length).each{|i|
 		a.sub!("{#{i}}",args[i-1].to_s)
 	}

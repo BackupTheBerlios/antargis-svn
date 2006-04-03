@@ -1,17 +1,31 @@
 Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;
+Stone;;
 Argyn;;
+Gold;;
 For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;
 Keep;;
 huhu;;
 Minion    of Godrin;;
 You can move him by left-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;
+Coal;;
+Ore;;
 Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.;;
+Swords;;
+Food;;
+Troops;;
 Now recruit some troops by selecting the tower by left-clicking on it and then push the recruit-button on the right.;;
+Dador;;
+Banin;;
+Minion of Godrin;;
 If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;
 When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.;;
 NewTree;;
 Fire;;
+Tools;;
+Shields;;
 Godrin;;
+Nobody supports him.;;
+Wood;;
 Quit;;Beenden
 Cancel;;Abbrechen
 Statistics;;Statistik
@@ -52,7 +66,7 @@ Drop weapons;;Waffen ablegen
 Credits;;Credits
 Medium aggression;;Aufmerksam
 1400x1050;;1400x1050
-This is {1}. He is {2} years old.;;Das ist Godrin. Er ist 33 Jahre alt.
+This is {1}. He is {2} years old.;;Das ist {1}. Er ist {2} Jahre alt.
 Save;;Speichern
 Take food;;Nahrung nehmen
 Toggle shadow;;Schatten aus-/einschalten
@@ -64,21 +78,21 @@ Audio;;Audio
 Dismiss;;Entlassen
 Ready;;Fertig
 Low aggression;;Friedlich
-strong heroes;;mächtige Helden
-Sheep;;Schaf
-Drop food;;Nahrung ablegen
 ...;;...
-Abort this mission;;Mission abbrechen
-Load game;;Spiel laden
-Do you really want to ??;;Möchtest Du das wirklich?
+Drop food;;Nahrung ablegen
+Sheep;;Schaf
+strong heroes;;mächtige Helden
 Options...;;Einstellungen...
-The story of Antargis begins;;Die Geschichte von Antargis beginnt
-1024x768;;1024x768
+Do you really want to ??;;Möchtest Du das wirklich?
+Load game;;Spiel laden
+Abort this mission;;Mission abbrechen
 Rest;;Rasten
-Exit;;Zurück
-Directory:;;Verzeichnis:
+1024x768;;1024x768
+The story of Antargis begins;;Die Geschichte von Antargis beginnt
 Tutorial - Exploring your world.;;Einführung - Entdecke Deine Welt
-Toggle fullscreen;;Vollbildmodus
-Pause the game;;Spiel pausieren
-Do you really want\nto quit the game?;;Möchtest Du wirklich\naufhören zu spielen?
+Directory:;;Verzeichnis:
+Exit;;Zurück
 no;;Nein
+Do you really want\nto quit the game?;;Möchtest Du wirklich\naufhören zu spielen?
+Pause the game;;Spiel pausieren
+Toggle fullscreen;;Vollbildmodus

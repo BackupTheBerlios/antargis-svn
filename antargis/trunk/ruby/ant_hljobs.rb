@@ -469,6 +469,10 @@ class AntHeroRestJob<AntHLJob
 				man.setMode("rest_sit")
 			when "rest_sit"
 				sit(man)
+				if man.getFood<0.5 and heroHasFood
+					man.newMoveJob(0,@hero.getPos2D,0)
+					man.setMode("rest_eat")
+				end
 			else
 				# rest_eat
 				man.newMoveJob(0,@hero.getPos2D,0)
@@ -499,11 +503,14 @@ private
 	end
 	def eat(man)
 		if man.getFood<0.5
-			if @hero.resource.get("food")>1
+			if heroHasFood
 				man.incFood(1)
 				@hero.resource.sub("food",1)
 			end
 		end
+	end
+	def heroHasFood
+		@hero.resource.get("food")>0
 	end
 end
 

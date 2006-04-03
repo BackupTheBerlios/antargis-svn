@@ -95,6 +95,9 @@ class AntMyEntity<AntEntity
 	def age=(years)
 		@birthday=getMap.getTime-years*$YEAR
 	end
+	def getMen
+		[]
+	end
 end
 
 

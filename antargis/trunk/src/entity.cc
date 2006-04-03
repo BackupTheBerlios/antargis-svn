@@ -73,7 +73,7 @@ void AntEntity::init()
 
   mFood=1.0;
   mHunger=0.006;
-  mHungerHitEnergy=0.1;
+  mHungerHitEnergy=0.02;
   mHungerHitMorale=0.14;
 
 

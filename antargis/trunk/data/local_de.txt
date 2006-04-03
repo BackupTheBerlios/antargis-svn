@@ -33,7 +33,7 @@ Load;;Laden
 Ok;;Ok
 Directory:;;Verzeichnis:
 Statistics;;Statistik
-This is {1}. He is {2} years old.;;Das ist Godrin. Er ist 33 Jahre alt.
+This is {1}. He is {2} years old.;;Das ist {1}. Er ist {2} Jahre alt.
 Game;;Spiel
 Save;;Speichern
 Cancel;;Abbrechen

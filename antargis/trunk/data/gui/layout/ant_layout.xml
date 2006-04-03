@@ -73,6 +73,7 @@
 									<cell col="2" row="0">
 										<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
 									</cell>
+									<antEnergy name="InvBar" col="3" row="0" hborder="5"/>
 								</table>
 							</cell>
 							<cell col="0" row="1">
@@ -118,7 +119,7 @@
 									<text col="3" row="0" caption="0" align="right" name="coal" font="inventory.font"/>
 									<text col="3" row="1" caption="0" align="right" name="ore" font="inventory.font"/>
 									<text col="3" row="2" caption="0" align="right" name="gold" font="inventory.font"/>
-									<text col="3" row="3" caption="0" align="right" name="stones" font="inventory.font"/>
+									<text col="3" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
 									<text col="3" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
 									
 								</table>

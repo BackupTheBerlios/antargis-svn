@@ -45,6 +45,7 @@ class AntInventory<AGWidget
 			setTitle(n)
 		end
 		@inspect=e
+		getChild("InvBar").setHero(e)
 		checkButtons
 		checkFriend
 		updateInspection
