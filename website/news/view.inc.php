@@ -8,7 +8,9 @@ function news($date,$title,$body="")
 function view()
 {
 	$b=h1("News");
-	
+
+	$b.=news("2006-04-03","Help anouncement","This weekend I filed a help wanted message at the Linux Game Tome, but this little impact yet. Maybe it's to come after a first appearance on the front page, as I have submitted it as a new game.");
+	$b.=news("2006-03-23","Forum","Come to the forum and discuss the game's idea, screenshots and whatever. I'll very soon anounce the first tech-demo, which will hopefully gain some interest and maybe gather some developers and artits to join!");
 	$b.=news("2005-12-08","Music","I've made a first attempt to create some music: <a href='http://antargis.berlios.de/wiki/index.php/Music'>music in wiki</a>");
 	$b.=news("2005-12-07","Wiki !","A (development-)wiki has been added. <a href='wiki/'>go to wiki</a>");
 	
