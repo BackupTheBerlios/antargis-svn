@@ -86,7 +86,7 @@
 								</frame>
 							</cell>
 							<cell col="0" row="2">
-								<text align="middle" caption="Minion    of Godrin" font="inventory.font"/>
+								<text name="minion" caption="Minion of Godrin" font="inventory.font"/>
 							</cell>
 							<cell col="0" row="3">
 								<table cols="6" rows="5">

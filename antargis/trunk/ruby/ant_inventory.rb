@@ -35,7 +35,7 @@ class AntInventory<AGWidget
 
 	def inspect(e)
 		getChild("shutter").hide
-		if e.getName!=""
+		if e.getName!="" and (not e.getName=~/0\./)
 			setTitle(e.getName)
 		else
 			n=e.class.to_s
@@ -64,13 +64,9 @@ private
 		getChild("enemy_false").setVisible(friend)
 	end
 	def checkButtons
-		#if @
-		puts "CHECKBUT"
-		puts @inspect.getPlayer==getMap.getPlayer
 		getChild("doRecruit").setEnabled((@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero))
 		getChild("doTakeFood").setEnabled((@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero))
 		getChild("doTakeWeapons").setEnabled(false) # FIXME
-		#end
 	end
 
 	def setValue(name,value)
@@ -112,6 +108,14 @@ private
 				end
 			end
 			setValue("boss",bossname)
+
+			if bossname
+				if bossname==@inspect.getName or bossname==""
+					getChild("minion").setText("Obeys nobody")
+				else
+					getChild("minion").setText("Obeys "+bossname.to_s)
+				end
+			end
 		end
 	end
 	def reset

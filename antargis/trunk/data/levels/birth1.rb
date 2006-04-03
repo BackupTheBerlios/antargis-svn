@@ -40,7 +40,7 @@ class Level1<Level
 					if not @druid2
 						@druid2=true
 						s=StoryFlow.new("druid2")
-						s.push("Druid","Go your path hero.")
+						s.push("Druid","Go your path hero. I have important things to do.")
 						
 						tellStory(s)
 					end
@@ -58,9 +58,35 @@ class Level1<Level
 					getMap.getByName("Bantor").newHLMoveJob(0,getMap.getTarget("retreat").pos,0)
 					getMap.getByName("Godrin").newHLRestJob(10)
 				end
+			when "smith"
+				if @smith==nil
+					s=StoryFlow.new("smith0")
+					s.push("Smith","Come here my friend!")
+					tellStory(s)
+					@smith=1
+				end
+			when "smith2"
+				if @smith==1
+					s=StoryFlow.new("smith1")
+					s.push("Smith","Welcome to our small town! What is your name, boy?")
+					s.push("Godrin","My is name is .. well, I don't remember it.")
+					s.push("Smith","Then he is surely the man, the druid mentioned.")
+					s.push("Godrin","What do you mean?")
+					s.push("Smith","Nothing. You look like a brave young man to me.")
+					s.push("Smith","If you promise to act wisely and defeat those men in the north, you can have some of my men.")
+					s.push("Godrin","Yes, these attacked my party - as much as this I remember.")
+					s.push("Smith","Well, then recruit some of my men.")
+					tellStory(s)
+					# assign houses to Player Godrin
+					["Farmstead","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
+					@smith=2
+				end
 			when "storyFinished"
-				if @story.name=="end"
-					wonLevel
+				case @story.name
+					when "end"
+						wonLevel
+					when "smith0"
+						getMap.getByName("Godrin").newHLMoveJob(0,getMap.getTarget("near_smith").pos,0)
 				end
 		end
 		return false # ignore

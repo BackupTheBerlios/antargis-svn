@@ -79,6 +79,7 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
+[H] eat when resting
 [H] play only sounds which are on screen
 [H] display houses on minimap
 [H] script smith in birth1
@@ -86,6 +87,7 @@ none noticed ATM
 [H] add swords/shields/bows
 [H] add boats
 [H] check aggression (fight)
+[M] fishing (fishes)
 [VH] add "eat-action", "sleep-action" "special??"
 [L] add females
 [L] computer-player only attacks when stock is used up

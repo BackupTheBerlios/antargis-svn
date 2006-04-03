@@ -1,11 +1,11 @@
 <antargisLevel filename="levels/birth1.hmap" height="128" width="128" scriptfile="levels/birth1.rb" scriptclass='Level1'>
-  <antFarm aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.296176780721225" onGround="true" men="4">
+  <antFarm aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Farm" onGround="true" men="4">
     <position x="27.2146" y="21.3969" z="1"/>
   </antFarm>
-  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.585622471556846" onGround="true" men="4">
+  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Farmstead" onGround="true" men="4">
     <position x="33.1878" y="26.3071" z="1"/>
   </antFarmStead>
-  <antWorkshop aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.536699107531523" onGround="true" men="4">
+  <antWorkshop aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Workshop" onGround="true" men="4">
     <position x="36.4328" y="17.9249" z="1"/>
   </antWorkshop>
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="6">
@@ -384,4 +384,7 @@
 	<target name="goback" x="65" y="30"/>
 	<trigger name="druid" x="85.9007" y="50.092"  radius="3"/>
 	<target name="retreat" x="41" y="88"/>
+	<trigger name="smith" x="31.2377" y="16.9882" radius="10"/>
+	<trigger name="smith2" x="31.2377" y="16.9882" radius="2"/>
+	<target name="near_smith" x="32.4" y="16.988"/>
 </antargisLevel>
