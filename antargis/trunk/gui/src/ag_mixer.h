@@ -23,6 +23,7 @@
 
 #include <string>
 #include <ag_widget.h>
+#include <ag_surface.h> // for decryptor
 
 // use widget, though this isn't one, because it provides useable functions
 class AGSound:public AGWidget
@@ -31,6 +32,8 @@ class AGSound:public AGWidget
   AGSound(); // NEVER use this! - it's only provided due to swig
   ~AGSound();
   bool playMp3(const std::string &pFilename);
+  bool playMp3DRM(const std::string &pFilename,AGDecryptor &pDec);
+
   void stopMp3();
   void checkFinished();
   void fadeOutMusic(int ms);

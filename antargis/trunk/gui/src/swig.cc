@@ -38582,6 +38582,28 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AGWidget_close(int argc, VALUE *argv, VALUE self) {
+  AGWidget *arg1 = (AGWidget *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGWidget, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "close" "', argument " "1"" of type '" "AGWidget *""'"); 
+  }
+  arg1 = reinterpret_cast<AGWidget * >(argp1);
+  (arg1)->close();
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AGWidget_mark(int argc, VALUE *argv, VALUE self) {
   AGWidget *arg1 = (AGWidget *) 0 ;
   void *argp1 = 0 ;
@@ -57697,6 +57719,53 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AGSound_playMp3DRM(int argc, VALUE *argv, VALUE self) {
+  AGSound *arg1 = (AGSound *) 0 ;
+  std::string *arg2 = 0 ;
+  AGDecryptor *arg3 = 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::string temp2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 2) || (argc > 2)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGSound, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "playMp3DRM" "', argument " "1"" of type '" "AGSound *""'"); 
+  }
+  arg1 = reinterpret_cast<AGSound * >(argp1);
+  {
+    if (TYPE(argv[0]) == T_STRING) {
+      //            temp2 = std::string(StringValuePtr(argv[0]));
+      temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+      arg2 = &temp2;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  res3 = SWIG_ConvertPtr(argv[1], &argp3, SWIGTYPE_p_AGDecryptor,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "playMp3DRM" "', argument " "3"" of type '" "AGDecryptor &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "playMp3DRM" "', argument " "3"" of type '" "AGDecryptor &""'"); 
+  }
+  arg3 = reinterpret_cast<AGDecryptor * >(argp3);
+  result = (bool)(arg1)->playMp3DRM((std::string const &)*arg2,*arg3);
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AGSound_stopMp3(int argc, VALUE *argv, VALUE self) {
   AGSound *arg1 = (AGSound *) 0 ;
   void *argp1 = 0 ;
@@ -66774,6 +66843,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
   rb_define_method(cAGWidget.klass, "fixedHeight", VALUEFUNC(_wrap_AGWidget_fixedHeight), -1);
   rb_define_method(cAGWidget.klass, "show", VALUEFUNC(_wrap_AGWidget_show), -1);
   rb_define_method(cAGWidget.klass, "hide", VALUEFUNC(_wrap_AGWidget_hide), -1);
+  rb_define_method(cAGWidget.klass, "close", VALUEFUNC(_wrap_AGWidget_close), -1);
   rb_define_method(cAGWidget.klass, "mark", VALUEFUNC(_wrap_AGWidget_mark), -1);
   rb_define_method(cAGWidget.klass, "addChild", VALUEFUNC(_wrap_AGWidget_addChild), -1);
   rb_define_method(cAGWidget.klass, "addChildBack", VALUEFUNC(_wrap_AGWidget_addChildBack), -1);
@@ -67477,6 +67547,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
   rb_define_alloc_func(cAGSound.klass, _wrap_AGSound_allocate);
   rb_define_method(cAGSound.klass, "initialize", VALUEFUNC(_wrap_new_AGSound), -1);
   rb_define_method(cAGSound.klass, "playMp3", VALUEFUNC(_wrap_AGSound_playMp3), -1);
+  rb_define_method(cAGSound.klass, "playMp3DRM", VALUEFUNC(_wrap_AGSound_playMp3DRM), -1);
   rb_define_method(cAGSound.klass, "stopMp3", VALUEFUNC(_wrap_AGSound_stopMp3), -1);
   rb_define_method(cAGSound.klass, "checkFinished", VALUEFUNC(_wrap_AGSound_checkFinished), -1);
   rb_define_method(cAGSound.klass, "fadeOutMusic", VALUEFUNC(_wrap_AGSound_fadeOutMusic), -1);

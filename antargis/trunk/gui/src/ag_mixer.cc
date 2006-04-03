@@ -146,8 +146,19 @@ bool AGSound::playMp3(const std::string &pFilename)
   // set hook
     
   return true;
-
 }
+
+bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
+{
+  // must decrypt and write to disc :-(((
+  std::string file=loadFile(pFilename);
+
+  file=pDec.decrypt(file,pFilename);
+  saveFile("drm.dat",file);
+  return playMp3(findFile("drm.dat"));
+}
+
+
 
 void AGSound::stopMp3()
 {
