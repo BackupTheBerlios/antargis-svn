@@ -56,6 +56,7 @@ class Level1<Level
 					s.push("Druid","They will be gone soon.")
 					tellStory(s)
 					getMap.getByName("Bantor").newHLMoveJob(0,getMap.getTarget("retreat").pos,0)
+					getMap.getByName("Godrin").newHLRestJob(10)
 				end
 			when "storyFinished"
 				if @story.name=="end"

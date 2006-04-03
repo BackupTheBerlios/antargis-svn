@@ -78,6 +78,10 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
+[H] play only sounds which are on screen
+[H] clear texture on setSurface (in AGImage)
+[H] display houses on minimap
+[H] script smith in birth1
 [H] inventing
 [H] add swords/shields/bows
 [H] add boats

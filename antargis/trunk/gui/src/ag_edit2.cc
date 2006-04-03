@@ -813,8 +813,8 @@ bool AGEdit2::eventKeyDown(AGEvent *m)
   if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();
-      char ins=0;
-      bool doInsert=false;
+      //      char ins=0;
+      //      bool doInsert=false;
       bool used=false;
 
       if(k==SDLK_RIGHT)

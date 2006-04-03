@@ -33,6 +33,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,in
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
 {
+  mImageW=0;
   setTheme("");
   AGFont font("Arial.ttf");
   font.setColor(AGColor(0,0,0));
@@ -58,20 +59,28 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,in
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 {
   mSurface=pSurface;
-  AGImage *image=new AGImage(this,getRect().origin(),mSurface,false);
-  addChild(image);
+  if(!mImageW)
+    {
+      mImageW=new AGImage(this,getRect().origin(),mSurface,false);
+      addChild(mImageW);
+    }
+  else
+    {
+      mImageW->setSurface(pSurface);
+      mImageW->show();
+    }
   mTextW->hide();
   if(pChangeSize)
     {
-      setWidth(image->width()+2+2*borderWidth);
-      setHeight(image->height()+2+2*borderWidth);
+      setWidth(mImageW->width()+2+2*borderWidth);
+      setHeight(mImageW->height()+2+2*borderWidth);
     }
 
   else
     {
       // then center
-      image->setLeft((width()-image->width())/2);
-      image->setTop((height()-image->height())/2);
+      mImageW->setLeft((width()-mImageW->width())/2);
+      mImageW->setTop((height()-mImageW->height())/2);
     }
   queryRedraw();
 }
@@ -257,6 +266,8 @@ void AGButton::setCaption(const std::string &pCaption)
   mText=pCaption;
   if(mTextW)
     mTextW->setText(pCaption);
+  if(mImageW)
+    mImageW->hide();
 }
 
 void AGButton::setState(const State &pState)

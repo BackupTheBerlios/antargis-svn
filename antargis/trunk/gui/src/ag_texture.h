@@ -35,6 +35,8 @@ class AGTexture:public AGPaintTarget
   AGTexture(int W,int H);
   ~AGTexture();
 
+  AGTexture &operator=(const AGTexture &t);
+
   AGTexture copy() const; // returns a real copy
 
   int width() const;

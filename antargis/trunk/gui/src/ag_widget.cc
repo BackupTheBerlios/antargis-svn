@@ -941,3 +941,9 @@ void AGWidget::sigTick(float pTime)
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
     (*i)->sigTick(pTime);
 }
+
+void AGWidget::close()
+{
+  if(mParent)
+    mParent->removeChild(this);
+}

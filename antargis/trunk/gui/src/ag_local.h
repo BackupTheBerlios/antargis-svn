@@ -38,6 +38,9 @@ AGLocalizer *getLocalizer();
 std::string translate(const std::string &s);
 
 #ifndef SWIG
+#ifdef _
+#undef _
+#endif
 #define _(x) translate(x)
 #endif
 

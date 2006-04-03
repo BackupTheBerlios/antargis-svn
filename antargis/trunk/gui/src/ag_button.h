@@ -30,6 +30,7 @@
 #include <map>
 
 class AGEdit;
+class AGImage;
 
 /**
    AGButton represents a button, which can hold a text-caption or an image-caption, but not both.
@@ -84,6 +85,7 @@ class AGButton:public AGWidget
   AGSurface mSurface;
   bool mHasSurface;
   AGEdit *mTextW;
+  AGImage *mImageW;
 
   bool lower;
   bool mChecked;

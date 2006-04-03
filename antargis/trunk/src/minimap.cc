@@ -54,8 +54,8 @@ void MiniMap::mapChangedP(bool forceFull=false)
   h=getRect().h();
 
   AGRect2 change=mMap->getChangeRect();
-  float mw=mMap->getW();
-  float mh=mMap->getH();
+  //  float mw=mMap->getW();
+  //  float mh=mMap->getH();
 
   AGVector2 p0(change[0]),p1(change[1]);
 

@@ -58,6 +58,25 @@ AGTexture::AGTexture(const AGTexture &t)
   mCleared=false;
 }
 
+AGTexture &AGTexture::operator=(const AGTexture &t)
+{
+  mSDLTexture=t.mSDLTexture;
+  mTexture=t.mTexture;
+
+  mTextureUsed=false;
+  mPainting=false;
+  m3d=t.m3d;
+  s=t.s;
+
+  w=t.w;
+  h=t.h;
+  version=t.version;
+  getSurfaceManager()->registerMe(this);
+  mCleared=false;
+  return *this;
+}
+
+
 AGTexture::AGTexture()
 {
   version=0;

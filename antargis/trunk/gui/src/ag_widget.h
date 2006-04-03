@@ -104,6 +104,7 @@ class AGWidget:public AGMessageObject
 
   void show();
   void hide();
+  void close();
 
   virtual void mark();
 

@@ -72,6 +72,7 @@ class AntDialog<AGLayout
 	end
 	
 	def eventKeyDown(e)
+		puts "DIALOG:KEY DOWN: #{self}"
 		if super then return true end
 		if e.getKey==SDLK_ESCAPE then	
 			eventClose
@@ -83,7 +84,7 @@ class AntDialog<AGLayout
 		return false
 	end
 	def eventClose
-		hide
+		close
 		sigClosed(AGEvent.new(self,"sigClosed"))
 		setNormalVolumeWave
 		return true
@@ -131,7 +132,8 @@ class AntStoryTalk<AntDialog
 			sigStoryFinished(e)
 			puts "pCaller:"+e.getCaller.getName
 			getMap().unpause()
-			toAGWindow(getChild("window")).close
+			close
+			#toAGWindow(getChild("window")).close
 		end
 		return true
 	end
@@ -185,17 +187,17 @@ class AntOptionsDialog<AntDialog
 	end
 	def eventVideo
 		$app.videoOptions
-		hide
+		close
 		return true
 	end
 	def eventSave
 		$app.save
-		hide
+		close
 		return true
 	end
 	def eventLoad
 		$app.load
-		hide
+		close
 		return true
 	end
 	def eventClose
@@ -217,7 +219,7 @@ class AntSaveDialog<AntDialog
 		end
 		getMap.saveMap("savegames/"+filename)
 		getMap.unpause
-		hide
+		close
 		return true
 	end
 end
@@ -239,7 +241,7 @@ class AntSaveCampaignDialog<AntDialog
 		$campaign.save("savegames/"+filename)
 		#getMap.saveMap("savegames/"+filename)
 		getMap.unpause
-		hide
+		close
 		return true
 	end
 	def eventClose
@@ -270,7 +272,7 @@ class AntLoadDialog<AntDialog
 			GC.start
 		end
 		getMap.unpause
-		hide
+		close
 		return true
 	end
 	def eventClose
@@ -292,7 +294,7 @@ class AntVideoOptionsDialog<AntDialog
 	end
 	def eventOk(e)
 		getMap.unpause
-		hide
+		close
 		return true
 	end
 	def eventFullscreen
@@ -392,7 +394,7 @@ class AntEditPropDialog<AntDialog
 		nameW=toAGEdit(getChild("AntName"))
 		@ent.setName(nameW.getText)
 		@ent.setXMLProp("men",menCountW.getText)
-		hide
+		close
 		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
 		@ent.setupMesh
 		return true
