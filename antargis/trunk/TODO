@@ -61,6 +61,7 @@ none noticed ATM
 [M] fix paint errors on text-elements (wrap-texture)
 [H] add campaign-loading functionality to load-dialog in-game  TRICKY
 [L] rewrite AGEdit - without AGEditLines
+[L] fix decals (use clamp-to-edge and original cells)
 
 [Menu]
 ------------------------------------------------------
@@ -79,12 +80,12 @@ none noticed ATM
 [Game]
 ------------------------------------------------------
 [H] play only sounds which are on screen
-[H] clear texture on setSurface (in AGImage)
 [H] display houses on minimap
 [H] script smith in birth1
 [H] inventing
 [H] add swords/shields/bows
 [H] add boats
+[H] check aggression (fight)
 [VH] add "eat-action", "sleep-action" "special??"
 [L] add females
 [L] computer-player only attacks when stock is used up
