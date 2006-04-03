@@ -96,11 +96,11 @@
 									<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
 									<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
 									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>-->
-									<image col="0" row="0" filename="data/gui/man.png"/>
-									<image col="0" row="1" filename="data/gui/apple2.png"/>
-									<image col="0" row="2" filename="data/gui/shield.png"/>
-									<image col="0" row="3" filename="data/gui/sword.png"/>
-									<image col="0" row="4" filename="data/gui/tools.png"/>
+									<image col="0" row="0" filename="data/gui/man.png" tooltip="Troops"/>
+									<image col="0" row="1" filename="data/gui/apple2.png" tooltip="Food"/>
+									<image col="0" row="2" filename="data/gui/shield.png" tooltip="Shields"/>
+									<image col="0" row="3" filename="data/gui/sword.png" tooltip="Swords"/>
+									<image col="0" row="4" filename="data/gui/tools.png" tooltip="Tools"/>
 									
 									<!--<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>-->
 									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
@@ -109,11 +109,11 @@
 									<text col="1" row="3" caption="0" align="right" name="sword" font="inventory.font"/>
 									<text col="1" row="4" caption="0" align="right" name="tool" font="inventory.font"/>
 									
-									<image col="2" row="0" filename="data/gui/coal.png"/>
-									<image col="2" row="1" filename="data/gui/ore.png"/>
-									<image col="2" row="2" filename="data/gui/gold.png"/>
-									<image col="2" row="3" filename="data/gui/stones.png"/>
-									<image col="2" row="4" filename="data/gui/wood.png"/>
+									<image col="2" row="0" filename="data/gui/coal.png" tooltip="Coal"/>
+									<image col="2" row="1" filename="data/gui/ore.png" tooltip="Ore"/>
+									<image col="2" row="2" filename="data/gui/gold.png" tooltip="Gold"/>
+									<image col="2" row="3" filename="data/gui/stones.png" tooltip="Stone"/>
+									<image col="2" row="4" filename="data/gui/wood.png" tooltip="Wood"/>
 									
 									<text col="3" row="0" caption="0" align="right" name="coal" font="inventory.font"/>
 									<text col="3" row="1" caption="0" align="right" name="ore" font="inventory.font"/>

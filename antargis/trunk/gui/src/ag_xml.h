@@ -58,6 +58,7 @@ class Node
     std::string getName() const;
 
     void setAttributes(const Attributes &pAttrs);
+    Attributes getAttributes() const;
 
     Node &addChild(const std::string &pName);
 

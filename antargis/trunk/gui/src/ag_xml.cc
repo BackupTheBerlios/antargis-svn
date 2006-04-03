@@ -68,6 +68,12 @@ void Node::setAttributes(const Attributes &pAttrs)
   mAttrs=pAttrs;
 }
 
+Node::Attributes Node::getAttributes() const
+{
+  return mAttrs;
+}
+
+
 
 void Node::setName(std::string pName)
 {

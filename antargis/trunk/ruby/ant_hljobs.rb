@@ -462,14 +462,29 @@ class AntHeroRestJob<AntHLJob
 		@hero.newRestJob(time)
 	end
 	def check(man)
+		case man.getMode
+			when "rest_eat"
+				eat(man)
+				sit(man)
+				man.setMode("rest_sit")
+			when "rest_sit"
+				sit(man)
+			else
+				# rest_eat
+				man.newMoveJob(0,@hero.getPos2D,0)
+				man.setMode("rest_eat")
+		end
+	end
+	def finished
+		return (not @hero.hasJob)
+	end
+private
+	def sit(man)
 		formationPos=@hero.getSitFormation(man)
 		diff=(man.getPos2D-formationPos)
 		dist=diff.length2
 		if dist<0.1 then
-			#diff=
 			man.setDirection(180-(@hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
-      #e->setDirection(-diff.getAngle().angle*180.0/M_PI);
-
 
 			if not ["sitdown","sit"].member?(man.meshState)
 				man.sitDown
@@ -482,8 +497,13 @@ class AntHeroRestJob<AntHLJob
 			man.newMoveJob(0,formationPos,0)
 		end
 	end
-	def finished
-		return (not @hero.hasJob)
+	def eat(man)
+		if man.getFood<0.5
+			if @hero.resource.get("food")>1
+				man.incFood(1)
+				@hero.resource.sub("food",1)
+			end
+		end
 	end
 end
 

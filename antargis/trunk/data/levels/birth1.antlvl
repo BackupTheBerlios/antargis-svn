@@ -235,6 +235,7 @@
   </antFir>
   <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" men="10" morale="1" name="Bantor" onGround="true">
     <position x="50.9935" y="28.4206" z="1"/>
+		<resource food="50" gold="10"/>
   </antHero>
   <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Keep">
     <position x="41.9545" y="90.2078" z="1"/>

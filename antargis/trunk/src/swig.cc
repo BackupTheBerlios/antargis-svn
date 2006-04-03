@@ -44999,6 +44999,31 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_Node_getAttributes(int argc, VALUE *argv, VALUE self) {
+  Node *arg1 = (Node *) 0 ;
+  Node::Attributes result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Node, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getAttributes" "', argument " "1"" of type '" "Node const *""'"); 
+  }
+  arg1 = reinterpret_cast<Node * >(argp1);
+  result = ((Node const *)arg1)->getAttributes();
+  
+  vresult = SWIG_NewPointerObj((new Node::Attributes(static_cast<const Node::Attributes& >(result))), SWIGTYPE_p_std__mapTstd__string_std__string_t, SWIG_POINTER_OWN |  0 );
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_Node_addChild(int argc, VALUE *argv, VALUE self) {
   Node *arg1 = (Node *) 0 ;
   std::string *arg2 = 0 ;
@@ -60329,6 +60354,53 @@ _wrap_AGSound_playMp3(int argc, VALUE *argv, VALUE self) {
     }
   }
   result = (bool)(arg1)->playMp3((std::string const &)*arg2);
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AGSound_playMp3DRM(int argc, VALUE *argv, VALUE self) {
+  AGSound *arg1 = (AGSound *) 0 ;
+  std::string *arg2 = 0 ;
+  AGDecryptor *arg3 = 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::string temp2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 2) || (argc > 2)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGSound, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "playMp3DRM" "', argument " "1"" of type '" "AGSound *""'"); 
+  }
+  arg1 = reinterpret_cast<AGSound * >(argp1);
+  {
+    if (TYPE(argv[0]) == T_STRING) {
+      //            temp2 = std::string(StringValuePtr(argv[0]));
+      temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+      arg2 = &temp2;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  res3 = SWIG_ConvertPtr(argv[1], &argp3, SWIGTYPE_p_AGDecryptor,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "playMp3DRM" "', argument " "3"" of type '" "AGDecryptor &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "playMp3DRM" "', argument " "3"" of type '" "AGDecryptor &""'"); 
+  }
+  arg3 = reinterpret_cast<AGDecryptor * >(argp3);
+  result = (bool)(arg1)->playMp3DRM((std::string const &)*arg2,*arg3);
   
   vresult = SWIG_From_bool(static_cast<bool >(result));
   return vresult;
@@ -81673,6 +81745,72 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_Resource_saveXML(int argc, VALUE *argv, VALUE self) {
+  Resource *arg1 = (Resource *) 0 ;
+  xmlpp::Node *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Resource, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "saveXML" "', argument " "1"" of type '" "Resource const *""'"); 
+  }
+  arg1 = reinterpret_cast<Resource * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[0], &argp2, SWIGTYPE_p_Node,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "saveXML" "', argument " "2"" of type '" "xmlpp::Node &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "saveXML" "', argument " "2"" of type '" "xmlpp::Node &""'"); 
+  }
+  arg2 = reinterpret_cast<xmlpp::Node * >(argp2);
+  ((Resource const *)arg1)->saveXML(*arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_Resource_loadXML(int argc, VALUE *argv, VALUE self) {
+  Resource *arg1 = (Resource *) 0 ;
+  xmlpp::Node *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Resource, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "loadXML" "', argument " "1"" of type '" "Resource *""'"); 
+  }
+  arg1 = reinterpret_cast<Resource * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[0], &argp2, SWIGTYPE_p_Node,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "loadXML" "', argument " "2"" of type '" "xmlpp::Node const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "loadXML" "', argument " "2"" of type '" "xmlpp::Node const &""'"); 
+  }
+  arg2 = reinterpret_cast<xmlpp::Node * >(argp2);
+  (arg1)->loadXML((Node const &)*arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_Resource_get(int argc, VALUE *argv, VALUE self) {
   Resource *arg1 = (Resource *) 0 ;
   std::string *arg2 = 0 ;
@@ -87369,6 +87507,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cNode.klass, "getChildren", VALUEFUNC(_wrap_Node_getChildren), -1);
   rb_define_method(cNode.klass, "getName", VALUEFUNC(_wrap_Node_getName), -1);
   rb_define_method(cNode.klass, "setAttributes", VALUEFUNC(_wrap_Node_setAttributes), -1);
+  rb_define_method(cNode.klass, "getAttributes", VALUEFUNC(_wrap_Node_getAttributes), -1);
   rb_define_method(cNode.klass, "addChild", VALUEFUNC(_wrap_Node_addChild), -1);
   rb_define_method(cNode.klass, "removeChild", VALUEFUNC(_wrap_Node_removeChild), -1);
   rb_define_method(cNode.klass, "begin", VALUEFUNC(_wrap_Node_begin), -1);
@@ -87955,6 +88094,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_alloc_func(cAGSound.klass, _wrap_AGSound_allocate);
   rb_define_method(cAGSound.klass, "initialize", VALUEFUNC(_wrap_new_AGSound), -1);
   rb_define_method(cAGSound.klass, "playMp3", VALUEFUNC(_wrap_AGSound_playMp3), -1);
+  rb_define_method(cAGSound.klass, "playMp3DRM", VALUEFUNC(_wrap_AGSound_playMp3DRM), -1);
   rb_define_method(cAGSound.klass, "stopMp3", VALUEFUNC(_wrap_AGSound_stopMp3), -1);
   rb_define_method(cAGSound.klass, "checkFinished", VALUEFUNC(_wrap_AGSound_checkFinished), -1);
   rb_define_method(cAGSound.klass, "fadeOutMusic", VALUEFUNC(_wrap_AGSound_fadeOutMusic), -1);
@@ -88778,6 +88918,8 @@ SWIGEXPORT void Init_libantargis(void) {
   SWIG_TypeClientData(SWIGTYPE_p_Resource, (void *) &cResource);
   rb_define_alloc_func(cResource.klass, _wrap_Resource_allocate);
   rb_define_method(cResource.klass, "initialize", VALUEFUNC(_wrap_new_Resource), -1);
+  rb_define_method(cResource.klass, "saveXML", VALUEFUNC(_wrap_Resource_saveXML), -1);
+  rb_define_method(cResource.klass, "loadXML", VALUEFUNC(_wrap_Resource_loadXML), -1);
   rb_define_method(cResource.klass, "get", VALUEFUNC(_wrap_Resource_get), -1);
   rb_define_method(cResource.klass, "add", VALUEFUNC(_wrap_Resource_add), -1);
   rb_define_method(cResource.klass, "sub", VALUEFUNC(_wrap_Resource_sub), -1);
