@@ -79,7 +79,8 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
-[H] eat when resting
+[H] test saving/loading of resources
+[H] eat when resting (intermediate)
 [H] start walking after 2 seconds, when other men are not ready
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
