@@ -381,7 +381,7 @@ void AntEntity::newFetchJob(int p,AntEntity *pTarget,const std::string &what)
 {
   setJob(new FetchJob(p,pTarget,what));
 }
-void AntEntity::newMoveJob(int p,const AGVector2 &pTarget,int pnear)
+void AntEntity::newMoveJob(int p,const AGVector2 &pTarget,float pnear)
 {
   setJob(new MoveJob(p,pTarget,pnear));
 }

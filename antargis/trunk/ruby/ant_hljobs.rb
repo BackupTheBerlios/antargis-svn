@@ -458,6 +458,97 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 	end
 end
 
+# inventing runs like this:
+# * depending on aggression some count of men is used for inventing
+# * those men run to "target" and work there
+# * when finished they leave tools/weapons/anything there and come back to hero to rest a little
+# * job finishes after some given time (20 seconds or so)
+
+class AntHeroInventJob<AntHeroMoveJob
+	attr_reader :finished
+	def initialize(hero,target,agg)
+		super(hero,0,target.getPos2D,4)
+		@target=target
+		@usedmen=0
+		@restype={}
+	end
+	def check(man)
+		if moveFinished
+			if man.is_a?(AntBoss)
+				man.newRestJob(20)
+				return
+			end
+			wantmen=(@men.length-1)*@hero.getAggression/3.0
+			puts "WANTMEN #{wantmen} #{@hero.getAggression}"
+			case man.getMode
+				when "fetch" # go to resource
+					res=getNeededResource
+					nearest=getNextWithResource(res)
+					@restype[man]=[res,nearest]
+					man.newMoveJob(0,nearest.getPos2D,0.5) # near but not actually there
+					man.setMode("harvest")
+				when "harvest" # harvest resource
+					man.newRestJob(2)
+					man.digResource(@restype[man][0])
+					man.setMode("collect")
+				when "collect" # bring back
+					# FIXME: add sub resource from nearest
+					p=@restype[man]
+					man.resource.add(p[0],1)
+					man.newMoveJob(0,@target.getPos2D,0)
+					man.collectResource(@restype[man][0])
+					man.setMode("brought")
+				when "brought"
+					man.setMode("to_invent")
+					man.newRestJob(1)
+					@target.resource.takeAll(man.resource)
+				when "to_invent"  # do some inventing
+					man.newRestJob(3) # work for 3 seconds
+					man.setMode("inventing")
+				when "inventing"
+					# was inventing
+					man.setMode("invent_torest")
+					fpos=@hero.getSitFormation(man)
+					man.newMoveJob(0,fpos,0)
+				when "invent_torest"
+					man.setMode("rest")
+					man.newRestJob(3/@hero.getAggression) # shorter pauses when aggression is higher
+					@usedmen-=1
+				else
+					if wantmen>@usedmen
+						@usedmen+=1
+						man.newMoveJob(0,@target.getPos2D,0)
+						if enoughResources
+							man.setMode("to_invent")
+						else
+							man.setMode("fetch")
+						end
+					end
+			end
+		else
+			super(man)
+		end
+	end
+private
+	def enoughResources
+		# FIXME support more resources
+		(@target.resource.get("stones")>5 and @target.resource.get("wood")>5)
+	end
+	def getNeededResource
+		# FIXME support more resources
+		if @target.resource.get("stones")<@target.resource.get("wood")
+			return "wood"
+		else
+			return "stone"
+		end
+	end
+	def getNextWithResource(res)
+		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree"}
+		enttype=goods[res]
+		getMap.getNext(@target,enttype)
+	end
+end
+
 
 class AntHeroRestJob<AntHLJob
 	def initialize(hero,time)

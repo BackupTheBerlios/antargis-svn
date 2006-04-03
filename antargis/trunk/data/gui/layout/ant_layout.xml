@@ -78,11 +78,12 @@
 							</cell>
 							<cell col="0" row="1">
 								<frame width="3">
-									<table cols="4" rows="1">
+									<table cols="5" rows="1">
 										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
 										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
 										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
-										<button  col="3" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
+										<button  col="3" row="0" name="doInvent" caption-image="data/gui/invent.png" tooltip="Invent"/>
+										<button  col="4" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
 									</table>
 								</frame>
 							</cell>

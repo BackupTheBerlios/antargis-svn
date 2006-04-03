@@ -119,6 +119,7 @@ class AntBoss<AntMyEntity
 			@player.remove(self)
 		end
 		@player=player
+		@player.add(self)
 	end
 	def getPlayer
 		@player
