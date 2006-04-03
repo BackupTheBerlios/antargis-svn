@@ -85,7 +85,7 @@ class AntNewTree<AntMyEntity
 			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
 		end
 		resource.set("food",5)
-		#setupMesh
+		setupMesh
 	end
 	def resourceChanged
 		setupMesh

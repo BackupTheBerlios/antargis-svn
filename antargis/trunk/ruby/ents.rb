@@ -57,7 +57,9 @@ class AntMyEntity<AntEntity
 		@xmlProps.each{|n,v|
 			node.set(n,v)
 		}
-		node.set("birthday",@birthday)
+		if @birthday
+			node.set("birthday",@birthday.to_s)
+		end
 	end
 	def getDescription
 		"This an entity - no more info here."
