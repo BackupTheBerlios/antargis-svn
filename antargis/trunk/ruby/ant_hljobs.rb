@@ -83,9 +83,13 @@ class AntHeroMoveJob<AntHLJob
 					f=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
 					man.newMoveJob(0,f,@formatDist)
 					man.setMode("formating")
+				elsif man.getMode=="formatted"
+					# some have already waited for 5 seconds
+					puts "I'm formatted"
+					startWalking
 				else
 					man.setMode("formatted")
-					man.newRestJob(1)
+					man.newRestJob(5)
 				end
 				if getMenState("formating").length==0
 					startWalking

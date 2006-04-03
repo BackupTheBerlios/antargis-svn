@@ -73,7 +73,7 @@
 									<cell col="2" row="0">
 										<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
 									</cell>
-									<antEnergy name="InvBar" col="3" row="0" hborder="5"/>
+									<antEnergy name="InvBar" col="3" row="0" hborder="0" vborder="5"/>
 								</table>
 							</cell>
 							<cell col="0" row="1">

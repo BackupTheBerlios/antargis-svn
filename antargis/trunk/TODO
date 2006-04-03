@@ -79,13 +79,11 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
-[H] test saving/loading of resources
-[H] eat when resting (intermediate)
-[H] start walking after 2 seconds, when other men are not ready
+[H] add resource-bag when someone dies who has more than 0 resources
+[H] fix take food (hero starting first is wrong!)
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
 [H] display houses on minimap
-[H] script smith in birth1
 [H] inventing
 [H] add swords/shields/bows
 [H] add boats

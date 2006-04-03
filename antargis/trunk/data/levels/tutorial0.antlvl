@@ -5,6 +5,7 @@
   </antTower>
   <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Godrin">
     <position x="64.4641" y="51.154" z="2.22674"/>
+		<resource food="10"/>
   </antHero>
   <antNewSheep aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="60.3109" y="56.6081" z="2.33043"/>

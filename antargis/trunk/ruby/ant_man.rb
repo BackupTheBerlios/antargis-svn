@@ -334,11 +334,7 @@ class AntNewMan<AntMyEntity
 		end
 	end
 	def getDescription
-		manName=getName
-		age=age
-		t1=_("This is {1}. He is {2} years old.",manName,age)
-		t2=_("He obeys {1}.",@boss.getName)
-		t1+t2
+		_("This is {1}. He is {2} years old.",getName,age)+_("He obeys {1}.",@boss.getName)
 	end
 end
 

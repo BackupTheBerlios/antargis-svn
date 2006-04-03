@@ -3,6 +3,7 @@
 # Inventory view
 class AntEnergy<AGWidget
 	attr_accessor :hborder
+	attr_accessor :vborder
 	def initialize(p,rect)
 		super(p,rect)
 
@@ -16,6 +17,7 @@ class AntEnergy<AGWidget
 		@colors[:morale]=AGColor.new("#83006c")
 		@colors[:food]=AGColor.new("#975500")
 		@hborder=0
+		@vborder=0
 
 		#setCaching(true)
 		@doRedraw=true
@@ -39,7 +41,9 @@ class AntEnergy<AGWidget
 		@doRedraw=false
 		r=p.getRect.origin
 		w=r.width
-		h=r.height
+		h=r.height-@vborder
+
+		v=@vborder/2
 
 		mh=h/(@values.length*3)
 		
@@ -56,7 +60,7 @@ class AntEnergy<AGWidget
 			a2=c*1.0
 			a3=c*0.8
 		
-			mr=AGRect2.new(@hborder,i*mh,(w-@hborder*2)*v,mh*2)
+			mr=AGRect2.new(@hborder,i*mh+v,(w-@hborder*2)*v,mh*2)
 
 			p.drawGradient(mr,a0,a1,a2,a3)
 			i+=3
@@ -93,6 +97,7 @@ class AntEnergyCreator<AGLayoutCreator
 	def create(parent,rect,node)
 		w=AntEnergy.new(parent,rect)
 		w.hborder=node.get("hborder").to_i
+		w.vborder=node.get("vborder").to_i
 		return w
 	end
 end
