@@ -508,6 +508,24 @@ public:
     
   }
 
+  std::string getText() const
+  {
+    std::ostringstream os;
+    for(Words::const_iterator i=mWords.begin();i!=mWords.end();++i)
+      {
+	AGEditString *s=dynamic_cast<AGEditString*>(*i);
+	if(s)
+	  os<<s->s;
+	else if(dynamic_cast<AGEditNewLine*>(*i))
+	  os<<std::endl;
+	else if(dynamic_cast<AGEditWhiteSpace*>(*i))
+	  os<<" ";
+	else
+	  cdebug("Problem: Image getting not supporteed ATM");
+      }
+    return os.str();
+  }
+
 private:
   Position get(size_t at)
   {
@@ -906,4 +924,9 @@ void AGEdit2::drawBackground(AGPainter &p)
 {
   if(mDrawBackground)
     mBackground.draw(getRect().origin(),p);
+}
+
+std::string AGEdit2::getText() const
+{
+  
 }
