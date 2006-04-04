@@ -464,6 +464,8 @@ end
 # * when finished they leave tools/weapons/anything there and come back to hero to rest a little
 # * job finishes after some given time (20 seconds or so)
 
+# FIXME: eat when resting while inventing (when aggression is low)
+
 class AntHeroInventJob<AntHeroMoveJob
 	attr_reader :finished
 	def initialize(hero,target,agg)
@@ -471,15 +473,24 @@ class AntHeroInventJob<AntHeroMoveJob
 		@target=target
 		@usedmen=0
 		@restype={}
+		@inventStarted=false
 	end
 	def check(man)
 		if moveFinished
+			puts "MOVE FINISHED"
 			if man.is_a?(AntBoss)
-				man.newRestJob(20)
+				checkEat(man)
+				if not @inventStarted
+					@men.each{|m|m.delJob}
+					@inventStarted=true
+				end
+				man.newRestJob(20) # do nothing at all
 				return
 			end
+			@inventStarted=true
 			wantmen=(@men.length-1)*@hero.getAggression/3.0
 			puts "WANTMEN #{wantmen} #{@hero.getAggression}"
+			puts man.getMode
 			case man.getMode
 				when "fetch" # go to resource
 					res=getNeededResource
@@ -507,12 +518,16 @@ class AntHeroInventJob<AntHeroMoveJob
 					man.setMode("inventing")
 				when "inventing"
 					# was inventing
+					readyInvented
 					man.setMode("invent_torest")
 					fpos=@hero.getSitFormation(man)
 					man.newMoveJob(0,fpos,0)
 				when "invent_torest"
 					man.setMode("rest")
 					man.newRestJob(3/@hero.getAggression) # shorter pauses when aggression is higher
+					if man.getAggression<3
+						checkEat(man)
+					end
 					@usedmen-=1
 				else
 					if wantmen>@usedmen
@@ -532,20 +547,57 @@ class AntHeroInventJob<AntHeroMoveJob
 private
 	def enoughResources
 		# FIXME support more resources
-		(@target.resource.get("stones")>5 and @target.resource.get("wood")>5)
+		(@target.resource.get("stone")>5 and @target.resource.get("wood")>5)
 	end
 	def getNeededResource
 		# FIXME support more resources
-		if @target.resource.get("stones")<@target.resource.get("wood")
-			return "wood"
+		if @target.resource.get("stone")>@target.resource.get("wood")
+			r="wood"
 		else
-			return "stone"
+			r="stone"
 		end
+		puts "#{@target.resource.get("stone")} #{@target.resource.get("wood")}"
+		puts "needed resource #{r}"
+		return r
 	end
 	def getNextWithResource(res)
 		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree"}
 		enttype=goods[res]
 		getMap.getNext(@target,enttype)
+	end
+	def checkEat(man)
+		if man.getFood<0.5
+			if heroHasFood
+				man.incFood(1)
+				@hero.resource.sub("food",1)
+			end
+		end
+	end
+	def heroHasFood
+		@hero.resource.get("food")>0
+	end
+	def readyInvented
+		p={
+			[["wood",2]]=>"boat",
+			[["wood",1],["steel",1]]=>"sword",
+			[["wood",1]]=>"shield"
+		}
+		p.each{|use,prod|
+			ok=true
+			use.each{|w,n|
+				puts "#{w},#{n}"
+				if @target.resource.get(w)<n
+					ok=false
+				end
+			}
+			if ok
+				# we found a useful production
+				use.each{|w,n|@target.resource.sub(w,n)}
+				@target.resource.add(prod,1)
+				return #out
+			end
+		}
+		# something went wrong
 	end
 end
 

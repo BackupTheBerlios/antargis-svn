@@ -79,6 +79,8 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
+[H] decrease morale on men when inventing and not resting
+[H] check that after Boss::removeMan man is removed from AntHLMoveJob!
 [H] add collect resources when inventing
 [H] process something when inventing
 [H] restore sound after saving (TEST)
