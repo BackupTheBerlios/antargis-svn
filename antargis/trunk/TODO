@@ -81,13 +81,8 @@ none noticed ATM
 ------------------------------------------------------
 [H] add collect resources when inventing
 [H] process something when inventing
-[H] start with correct aggression (TEST)
-[H] save new got bosses correctly (TEST)
 [H] restore sound after saving (TEST)
 [H] display current job of hero (when active) - some image
-[H] assign aggression when assigning (TEST)
-[H] add sack-taking
-[H] add resource-bag when someone dies who has more than 0 resources
 [H] fix take food (hero starting first is wrong!)
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
