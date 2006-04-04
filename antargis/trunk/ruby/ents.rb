@@ -98,9 +98,9 @@ class AntMyEntity<AntEntity
 	def getMen
 		[]
 	end
-	def eventNoJob
-		newRestJob(1000) # rest for infty
-	end
+# 	def eventNoJob
+# 		newRestJob(1000) # rest for infty
+# 	end
 end
 
 

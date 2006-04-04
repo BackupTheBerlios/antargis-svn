@@ -65,6 +65,7 @@ class AntNewMan<AntMyEntity
 	# EVENTS
 	##########################
 	def eventNoJob
+		super
 		eventJobFinished
 	end
 	

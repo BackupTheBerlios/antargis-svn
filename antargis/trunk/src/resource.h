@@ -23,6 +23,8 @@ class Resource
   std::map<std::string,float> getAll() const;
 
   void takeAll(Resource &r);
+
+  bool empty() const;
 };
 
 

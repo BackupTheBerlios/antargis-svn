@@ -75,6 +75,13 @@ module AntManBase
 			#@bossName=""
 		end
 	end
+	def eventNoJob
+		if @meshState=="dead"
+			getMap.removeEntity(self)
+		end
+		super
+	end
+
 	def eventDie
 		puts "eventDie "+self.to_s
 		simDeath
@@ -83,6 +90,11 @@ module AntManBase
 		setMeshState("dead")
 		if @boss
 			@boss.removeMan(self)
+		end
+		if not self.resource.empty
+			sack=AntSack.new(getPos2D+AGVector2.new(0.3,-0.3))
+			getMap.insertEntity(sack)
+			sack.resource.takeAll(self.resource)
 		end
 	end
 

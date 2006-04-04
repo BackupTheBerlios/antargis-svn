@@ -21288,6 +21288,23 @@ void SwigDirector_AntEntity::clear() {
 }
 
 
+void SwigDirector_AntEntity::newMoveJob(int p, AGVector2 const &pTarget, float pnear) {
+  VALUE obj0 = Qnil ;
+  VALUE obj1 = Qnil ;
+  VALUE obj2 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AntEntity::newMoveJob(p,pTarget,pnear);
+    return;
+  }
+  obj0 = SWIG_From_int(static_cast<int >(p));
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(&pTarget), SWIGTYPE_p_AGVector2,  0 );
+  obj2 = SWIG_From_float(static_cast<float >(pnear));
+  result = rb_funcall(swig_get_self(), rb_intern("newMoveJob"), 3,obj0,obj1,obj2);
+}
+
+
 void SwigDirector_AntEntity::newRestJob(float pTime) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -21396,23 +21413,6 @@ void SwigDirector_AntEntity::newFetchJob(int p, AGVector2 &pTarget, std::string 
 
 SwigDirector_AntEntity::~SwigDirector_AntEntity() {
 }
-
-void SwigDirector_AntEntity::newMoveJob(int p, AGVector2 const &pTarget, int pnear) {
-  VALUE obj0 = Qnil ;
-  VALUE obj1 = Qnil ;
-  VALUE obj2 = Qnil ;
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AntEntity::newMoveJob(p,pTarget,pnear);
-    return;
-  }
-  obj0 = SWIG_From_int(static_cast<int >(p));
-  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(&pTarget), SWIGTYPE_p_AGVector2,  0 );
-  obj2 = SWIG_From_int(static_cast<int >(pnear));
-  result = rb_funcall(swig_get_self(), rb_intern("newMoveJob"), 3,obj0,obj1,obj2);
-}
-
 
 std::string SwigDirector_AntEntity::xmlName() const {
   std::string c_result ;
@@ -73252,14 +73252,14 @@ _wrap_AntEntity_newMoveJob__SWIG_0(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   int arg2 ;
   AGVector2 *arg3 = 0 ;
-  int arg4 ;
+  float arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  int val4 ;
+  float val4 ;
   int ecode4 = 0 ;
   Swig::Director *director = 0;
   
@@ -73284,11 +73284,11 @@ _wrap_AntEntity_newMoveJob__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "newMoveJob" "', argument " "3"" of type '" "AGVector2 const &""'"); 
   }
   arg3 = reinterpret_cast<AGVector2 * >(argp3);
-  ecode4 = SWIG_AsVal_int(argv[2], &val4);
+  ecode4 = SWIG_AsVal_float(argv[2], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "newMoveJob" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "newMoveJob" "', argument " "4"" of type '" "float""'");
   } 
-  arg4 = static_cast<int >(val4);
+  arg4 = static_cast<float >(val4);
   director = dynamic_cast<Swig::Director *>(arg1);
   if (director && (director->swig_get_self() == self)) director->swig_set_up();
   try {
@@ -73400,7 +73400,7 @@ SWIGINTERN VALUE _wrap_AntEntity_newMoveJob(int nargs, VALUE *args, VALUE self) 
         _v = SWIG_CheckState(res);
         if (_v) {
           {
-            int res = SWIG_AsVal_int(argv[3], NULL);
+            int res = SWIG_AsVal_float(argv[3], NULL);
             _v = SWIG_CheckState(res);
           }
           if (_v) {
@@ -82034,6 +82034,31 @@ fail:
 }
 
 
+SWIGINTERN VALUE
+_wrap_Resource_empty(int argc, VALUE *argv, VALUE self) {
+  Resource *arg1 = (Resource *) 0 ;
+  bool result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Resource, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "empty" "', argument " "1"" of type '" "Resource const *""'"); 
+  }
+  arg1 = reinterpret_cast<Resource * >(argp1);
+  result = (bool)((Resource const *)arg1)->empty();
+  
+  vresult = SWIG_From_bool(static_cast<bool >(result));
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
 SWIGINTERN void
 free_Resource(Resource *arg1) {
     delete arg1;
@@ -88926,6 +88951,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cResource.klass, "set", VALUEFUNC(_wrap_Resource_set), -1);
   rb_define_method(cResource.klass, "getAll", VALUEFUNC(_wrap_Resource_getAll), -1);
   rb_define_method(cResource.klass, "takeAll", VALUEFUNC(_wrap_Resource_takeAll), -1);
+  rb_define_method(cResource.klass, "empty", VALUEFUNC(_wrap_Resource_empty), -1);
   cResource.mark = 0;
   cResource.destroy = (void (*)(void *)) free_Resource;
   cResource.trackObjects = 0;

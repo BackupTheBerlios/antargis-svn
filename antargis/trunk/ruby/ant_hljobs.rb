@@ -332,7 +332,7 @@ class AntHeroFightAnimalJob<AntHeroMoveJob
 					man.newRestJob(10)
 					@toEat-=1
 					if @toEat<=0
-						killSheep
+						killAnimal
 						playSound
 						@finished=true
 					end
@@ -353,10 +353,10 @@ class AntHeroFightAnimalJob<AntHeroMoveJob
 	def finished
 		@finished
 	end
-	def killSheep
+	def killAnimal
 		@target.eventDie
-		@hero.resource.add("food",@target.resource.get("food"))
-		@target.resource.set("food",0)
+		@hero.resource.takeAll(@target.resource) #add("food",@target.resource.get("food"))
+		#@target.resource.set("food",0)
 	end
 end
 

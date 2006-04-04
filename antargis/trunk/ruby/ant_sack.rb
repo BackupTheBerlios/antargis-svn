@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class AntSack<AntMyEntity
+class AntSack<AntAnimal
 	def initialize(p=AGVector2.new(0,0))
 		super
 		mp=AGVector3.new(0,0,0)
@@ -11,5 +11,8 @@ class AntSack<AntMyEntity
 	end
 	def xmlName
 		"antSack"
+	end
+	def eventDie
+		getMap.removeEntity(self)
 	end
 end

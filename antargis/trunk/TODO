@@ -86,6 +86,7 @@ none noticed ATM
 [H] restore sound after saving (TEST)
 [H] display current job of hero (when active) - some image
 [H] assign aggression when assigning (TEST)
+[H] add sack-taking
 [H] add resource-bag when someone dies who has more than 0 resources
 [H] fix take food (hero starting first is wrong!)
 [H] disable controls when telling story (after "come here my friend")

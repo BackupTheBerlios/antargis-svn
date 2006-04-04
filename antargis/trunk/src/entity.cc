@@ -105,6 +105,7 @@ void AntEntity::saveXML(xmlpp::Node &node) const
     node.set("name",getName());
     node.set("morale",toString(mMorale));
     node.set("aggression",toString(mAggression));
+    node.set("food",toString(mFood));
     Node &res=node.addChild("resource");
     resource.saveXML(res);
   }
@@ -124,6 +125,10 @@ void AntEntity::loadXML(const xmlpp::Node &node)
   else
     mMorale=1.0f;
   mAggression=toFloat(node.get("aggression"));
+
+  if(node.get("food")!="")
+    mFood=toFloat(node.get("food"));
+
   setName(node.get("name"));
 
   xmlpp::Node::NodeVector v2=node.getChildren("resource");

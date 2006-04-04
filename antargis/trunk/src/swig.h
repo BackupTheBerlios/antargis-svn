@@ -1339,6 +1339,7 @@ public:
     virtual void mark();
     virtual void animationEvent(std::string const &pName);
     virtual void clear();
+    virtual void newMoveJob(int p, AGVector2 const &pTarget, float pnear = 0.0);
     virtual void newRestJob(float pTime);
     virtual void move(float pTime);
     virtual void eventNoJob();
@@ -1347,7 +1348,6 @@ public:
     virtual void newFetchJob(int p, AntEntity *pTarget, std::string const &pWhat);
     virtual void newFetchJob(int p, AGVector2 &pTarget, std::string const &pWhat);
     virtual ~SwigDirector_AntEntity();
-    virtual void newMoveJob(int p, AGVector2 const &pTarget, int pnear = 0);
     virtual std::string xmlName() const;
     virtual void resourceChanged();
     virtual void eventJobFinished();
