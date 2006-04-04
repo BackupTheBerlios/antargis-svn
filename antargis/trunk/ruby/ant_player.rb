@@ -76,6 +76,7 @@ class AntPlayer
 	end
 	def add(hero)
 		@heroes.push(hero)
+		@heroes.uniq!
 	end
 	def getHeroes
 		@heroes.clone
