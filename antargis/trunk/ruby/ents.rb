@@ -98,6 +98,9 @@ class AntMyEntity<AntEntity
 	def getMen
 		[]
 	end
+	def eventNoJob
+		newRestJob(1000) # rest for infty
+	end
 end
 
 
@@ -116,3 +119,4 @@ require 'ant_fir.rb'
 require 'ant_grass.rb'
 require 'ant_druid.rb'
 require 'ant_decal.rb'
+require 'ant_sack.rb'

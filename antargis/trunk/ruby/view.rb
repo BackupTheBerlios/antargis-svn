@@ -234,6 +234,13 @@ class AntButtonPanel<AGWidget
 		return true
 	end
 	
+	def setAggression(l)
+		l=l.to_i
+		@aggButtons.each{|n,b|
+			getChild(n).setChecked((b==l))
+		}
+		@agg=l
+	end
 	def getAggression()
 		return @agg
 	end

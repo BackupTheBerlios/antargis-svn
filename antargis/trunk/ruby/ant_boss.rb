@@ -43,6 +43,7 @@ class AntBoss<AntMyEntity
 				@createMen=node.get("men").to_i
 			end
 		end
+		setAggression(getAggression) # update aggression of men
 	end
 # for recruiting
 	def takeMan
@@ -104,6 +105,7 @@ class AntBoss<AntMyEntity
 	def signUp(man)
 		if not @men.member?(man) then	
 			@men.push(man)
+			man.setAggression(getAggression)
 		end
 	end
 	

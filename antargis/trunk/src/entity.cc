@@ -62,7 +62,7 @@ void AntEntity::init()
 
   mMoveSpeed=2;
 
-  mAggression=0.5;
+  mAggression=1;
 
   //  mSurface=0;
   //esh=0;

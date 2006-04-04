@@ -297,7 +297,7 @@ class AntGameApp <AntRubyView
  				focusHero(h)
 				@layout.getChild("hero0").setChecked(true)
  			end
-
+			
 		end
 		puts "setupHeroDisplay!"
 	end
@@ -352,6 +352,9 @@ class AntGameApp <AntRubyView
 				@layout.getChild("hero#{i}").setChecked(true)
 			end
 		end
+
+		# set hero's aggression
+		@buttonpanel.setAggression(@hero.getAggression)
 	end
 	def viewInformation(ent)
 		win=AntInspectWindow.new(@layout,ent) #.getDescription)

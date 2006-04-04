@@ -81,12 +81,11 @@ none noticed ATM
 ------------------------------------------------------
 [H] add collect resources when inventing
 [H] process something when inventing
-[H] start with correct aggression
-[H] save new got bosses correctly
-[H] restore sound after saving
+[H] start with correct aggression (TEST)
+[H] save new got bosses correctly (TEST)
+[H] restore sound after saving (TEST)
 [H] display current job of hero (when active) - some image
-[H] assign aggression when recruiting (hero)
-[H] assign aggression when atHome     (house)
+[H] assign aggression when assigning (TEST)
 [H] add resource-bag when someone dies who has more than 0 resources
 [H] fix take food (hero starting first is wrong!)
 [H] disable controls when telling story (after "come here my friend")
@@ -99,6 +98,7 @@ none noticed ATM
 [M] fishing (fishes)
 [VH] add "eat-action", "sleep-action" "special??"
 [L] add females
+[L] add aggression-leveling of non-hero bosses
 [L] computer-player only attacks when stock is used up
 [L] story-telling:
 	- history function

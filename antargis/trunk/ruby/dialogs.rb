@@ -220,6 +220,7 @@ class AntSaveDialog<AntDialog
 		getMap.saveMap("savegames/"+filename)
 		getMap.unpause
 		close
+		setNormalVolumeWave
 		return true
 	end
 end
