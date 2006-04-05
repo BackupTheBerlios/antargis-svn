@@ -45,10 +45,6 @@ class AntHouse<AntBoss
 		@atHome=Set.new
 		@lastBirth=0
 		
-		#mesh=Mesh.new(getMeshData("data/models/tower.ant2",3,"data/textures/models/tower_tex.png"),AGVector4.new(0,0,0),-30)
-		#setMesh(mesh)
-		
-#		setupMeshHouse
 	end
 	
 	################################
@@ -238,9 +234,6 @@ class AntHouse<AntBoss
 	end
 	def getDescription
 		"This is a keep. It was build #{age} years ago. Currently #{getMen.length} men live here. #{@atHome.length} of them are at home."
-	end
-	def age
-		30
 	end
 
 	private

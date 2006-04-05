@@ -12,7 +12,7 @@ class AntWorkshop<AntHouse
 		setMesh(mesh)
 		p=AGVector3.new(-1.3,-1.2,2.2)
 		addMesh(Smoke.new(getMap.getScene,5),p)
-		addMesh(Mesh.new(getMap.getScene,getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
+		#addMesh(Mesh.new(getMap.getScene,getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
 	end
 	
 	def assignJob(e)

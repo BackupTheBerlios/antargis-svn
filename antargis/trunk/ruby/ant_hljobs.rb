@@ -511,6 +511,7 @@ class AntHeroInventJob<AntHeroMoveJob
 		@usedmen=0
 		@restype={}
 		@inventStarted=false
+		@productionRules=$productionRules # FIXME maybe exchange for different inventing types
 	end
 	def check(man)
 		if moveFinished
@@ -619,7 +620,7 @@ private
 	end
 	def readyInvented
 		# produce any
-		$productionRules.shuffle.each{|rule|
+		@productionRules.shuffle.each{|rule|
 			ok=true
 			
 			rule.from.each{|w,n|
