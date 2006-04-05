@@ -552,11 +552,13 @@ class AntHeroInventJob<AntHeroMoveJob
 						@target.resource.take(man.resource,r)
 					}
 				when "to_invent"  # do some inventing
+					@target.incSmoke
 					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
 					man.setMode("inventing")
 				when "inventing"
 					# was inventing
 					readyInvented
+					@target.decSmoke
 					man.setMode("invent_torest")
 					fpos=@hero.getSitFormation(man)
 					man.newMoveJob(0,fpos,0)

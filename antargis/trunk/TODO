@@ -1,3 +1,8 @@
+Short Information:
+Problems are marked by priority. L is for low, M for medium and H high.
+In special cases it can be Very High (=VH).
+
+
 [General]
 ------------------------------------------------------
 [VH] Add coding conventions for ruby/c++ and ensure them!
@@ -51,36 +56,44 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-none noticed ATM
+none ATM
 
 [Gui/View]
 ------------------------------------------------------
-[H] fix cut tooltips
-[L] add Framebuffer objects
-[L] fix AGMenu*
-[M] fix paint errors on text-elements (wrap-texture)
+[H] fix cut tooltips. There is a bug in AGEdit.
+[L] add Framebuffer objects for paint to texture.
+[L] fix AGMenu*. This is broken, but not used ATM.
+[M] fix paint errors on text-elements (wrap-texture). Look at AGFontEngine::*.
+		set Texture to GL_CLAMP_TO_EDGE or something like this.
 [H] add campaign-loading functionality to load-dialog in-game  TRICKY
+		This is a real problem, because the current AGApplication is called by the campaign-code.
+		So the AntApp must be finished and the surrounding campaign-code, too. After this the
+		loaded campaign must be started.
 [L] rewrite AGEdit - without AGEditLines
+		In AGEdit2 is a beginning of a rewrite. But it's a kind of crappy approach. AGEdit2 should
+		be able to 
+		1) render quickly 
+		2) handle selections with mouse or SHIFT+CURSOR
+		3) copy/paste
+		4) insert images
 [L] fix decals (use clamp-to-edge and original cells)
 
-[Menu]
-------------------------------------------------------
-[L] some images for the campaigns
 
 [Graphics]
 ------------------------------------------------------
-[L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs
+[L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
+		There is a problem, too when zoomed in, as it's the current default.
 [L] check if TSM (trapezoidal shadow maps) are any good
-[L] snow,rain
-[L] bushes, plants, high grass, flowers
-[VL] seasons - snow,spring...
+[L] snow,rain which falls down. Maybe as a simple overlay?
+[L] bushes, plants, high grass, flowers. Thats means there should be possibility to include
+		several imposters into one mesh and render them effiently.
+[VL] seasons - snow,spring... Exchange or fade terrain textures.
 [L] Fog of war - overlay darkness/fog
 [L] animated trees / falling trees
 
 [Game]
 ------------------------------------------------------
 [H] save current job :-(
-[H] use "provides" correct "food" from trees, "directFood" from "Farm" ...
 [H] decrease morale on men when inventing and not resting
 [H] display current job of hero (when active) - some image
 [H] disable controls when telling story (after "come here my friend")

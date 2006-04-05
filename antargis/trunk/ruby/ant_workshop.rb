@@ -6,12 +6,24 @@ class AntWorkshop<AntHouse
 		setProvide("workshop",true)
 		@lastBirth=0
 		setDirection(-50)
+		@smoke=0
 	end
+
+	def incSmoke
+		@smoke+=1
+		checkSmoke
+	end
+	def decSmoke
+		@smoke-=1
+		checkSmoke
+	end
+
 	def setupMesh
 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/workshop.ant2",0.18,"data/textures/models/workshop.png"),AGVector4.new(0,0,0),-50)
 		setMesh(mesh)
 		p=AGVector3.new(-1.3,-1.2,2.2)
-		addMesh(Smoke.new(getMap.getScene,5),p)
+		addMesh(@smokeMesh=Smoke.new(getMap.getScene,5),p)
+		checkSmoke
 		#addMesh(Mesh.new(getMap.getScene,getMeshData("data/models/apple.ant",0.03),AGVector4.new(0,0,0,0),0),p)
 	end
 	
@@ -62,5 +74,16 @@ class AntWorkshop<AntHouse
 
 	def xmlName
 		"antWorkshop"
+	end
+
+private
+	def checkSmoke
+		if @smokeMesh
+			if @smoke
+				@smokeMesh.setEnabled((@smoke>0))
+			else
+				@smokeMesh.setEnabled(false)
+			end
+		end
 	end
 end

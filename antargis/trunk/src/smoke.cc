@@ -21,6 +21,7 @@ Smoke::Smoke(Scene *pScene,float f):
   mTexture=getTextureCache()->get("data/textures/point.png");
   fire=false;
   setOrder(PARTICLE_Z);
+  enabled=true;
 }
 
 void Smoke::setFire(bool f)
@@ -53,6 +54,9 @@ void Smoke::advance(float time)
       else
 	break;
     }
+
+  if(!enabled)
+    return;
 
   // create new piece
   mtime+=time;
@@ -174,3 +178,8 @@ AGBox3 Smoke::bbox() const
   return mBBox;
 }
 */
+
+void Smoke::setEnabled(bool f)
+{
+  enabled=f;
+}

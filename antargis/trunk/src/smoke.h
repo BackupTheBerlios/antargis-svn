@@ -22,6 +22,7 @@ class Smoke:public SceneNode
   float mtime;
   float stime;
   bool fire;
+  bool enabled;
 
   AGTexture mTexture;
 
@@ -38,6 +39,9 @@ class Smoke:public SceneNode
   }
 
   void draw();
+
+  void setEnabled(bool f);
+
 };
 
 #endif

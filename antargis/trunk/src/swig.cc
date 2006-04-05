@@ -83469,6 +83469,36 @@ fail:
 }
 
 
+SWIGINTERN VALUE
+_wrap_Smoke_setEnabled(int argc, VALUE *argv, VALUE self) {
+  Smoke *arg1 = (Smoke *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Smoke, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setEnabled" "', argument " "1"" of type '" "Smoke *""'"); 
+  }
+  arg1 = reinterpret_cast<Smoke * >(argp1);
+  ecode2 = SWIG_AsVal_bool(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setEnabled" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast<bool >(val2);
+  (arg1)->setEnabled(arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
 SWIGINTERN void
 free_Smoke(Smoke *arg1) {
     delete arg1;
@@ -89091,6 +89121,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cSmoke.klass, "advance", VALUEFUNC(_wrap_Smoke_advance), -1);
   rb_define_method(cSmoke.klass, "transparent", VALUEFUNC(_wrap_Smoke_transparent), -1);
   rb_define_method(cSmoke.klass, "draw", VALUEFUNC(_wrap_Smoke_draw), -1);
+  rb_define_method(cSmoke.klass, "setEnabled", VALUEFUNC(_wrap_Smoke_setEnabled), -1);
   cSmoke.mark = (void (*)(void *)) general_markfunc;
   cSmoke.destroy = (void (*)(void *)) free_Smoke;
   cSmoke.trackObjects = 0;
