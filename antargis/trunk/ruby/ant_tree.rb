@@ -65,7 +65,8 @@ class AntNewTree<AntMyEntity
 		super(AGVector2.new(0,0))
 		@typeID=typeID
 		@typeID||=(rand*getTreeTypes.length).to_i
-		setProvide("tree",true)
+		setProvide("wood",true)
+		setProvide("fruit",true)
 		@angle=rand*360
 		
 		setMinimapColor(AGColor.new(0,0x77,0))
@@ -85,6 +86,7 @@ class AntNewTree<AntMyEntity
 			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
 		end
 		resource.set("food",5)
+		resource.set("wood",40)
 		setupMesh
 	end
 	def resourceChanged

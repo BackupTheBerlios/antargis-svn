@@ -51,23 +51,13 @@ class AntWorkshop<AntHouse
 	# what's needed most ATM?
 	# returns: [good,from] or nil
 	def needed()
-		goods={"wood"=>"tree","stone"=>"stone","food"=>"farm"}
-		min=10
-		need=nil
-		needfrom=nil
-		goods.each{|good,from|
-			v=resource.get(good)
-			if min>v then
-				min=v
-				need=good
-				needfrom=from
-			end
-		}
-		if need==nil then
+		goods=["wood","stone","food"]
+		minarg=goods.min {|a,b|resource.get(a)<=>resource.get(b)}
+		minval=resource.get(minarg)
+		if minval>=10
 			return nil
-		else
-			return [need,needfrom]
 		end
+		return minarg
 	end
 
 	def xmlName

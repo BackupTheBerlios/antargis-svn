@@ -598,9 +598,9 @@ private
 		return m
 	end
 	def getNextWithResource(res)
-		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree","coal"=>"mine","ore"=>"mine"}
-		enttype=goods[res]
-		getMap.getNext(@target,enttype)
+		#goods={"wood"=>"tree","stone"=>"stone","food"=>"tree","coal"=>"mine","ore"=>"mine"}
+		#enttype=goods[res]
+		getMap.getNext(@target,res) #enttype)
 	end
 	def checkEat(man)
 		puts "CHECKEAT"

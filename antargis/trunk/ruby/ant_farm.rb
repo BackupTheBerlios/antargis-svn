@@ -27,7 +27,7 @@ class AntFarm<AntHouse
 	def initialize
 		super
 		@type=3
-		setProvide("farm",true)
+		setProvide("food",true)
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
@@ -41,7 +41,7 @@ class AntFarm<AntHouse
 
 	def needed
 		if resource.get("food")<30
-			return ["food","tree"]
+			return "fruit"
 		else
 			return nil
 		end
@@ -50,6 +50,11 @@ class AntFarm<AntHouse
 	def xmlName
 		"antFarm"
 	end
-	
-	
+
+	def process
+		if resource.get("fruit")>0
+			resource.add("food",1)
+			resource.add("fruit",0)
+		end
+	end
 end

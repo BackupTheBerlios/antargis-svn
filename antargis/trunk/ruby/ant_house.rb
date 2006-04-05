@@ -66,6 +66,10 @@ class AntHouse<AntBoss
 		if @fighting then
 			checkFight
 		end
+		process
+	end
+
+	def process
 	end
 	
 	def eventGotHLFight(hero)
@@ -154,7 +158,7 @@ class AntHouse<AntBoss
 				need=needed()
 				# keep at least a third of all men at home
 				if need != nil and @atHome.length>@men.length/3 then
-					fetch( need[1],need[0],e)
+					fetch( need,e)
 				else
 					e.newRestJob(5+getRand)
 					e.setVisible(false)
@@ -191,33 +195,22 @@ class AntHouse<AntBoss
 	# what's needed most ATM?
 	# returns: [good,from] or nil
 	def needed()
-		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree"}
-		#goods={"wood"=>"tree","food"=>"tree"}
-		min=50
-		need=nil
-		needfrom=nil
-		goods.each{|good,from|
-			v=resource.get(good)
-			if min>v then
-				min=v
-				need=good
-				needfrom=from
-			end
-		}
-		if need==nil then
+		goods=["wood","stone","food"]
+		minarg=goods.min {|a,b|resource.get(a)<=>resource.get(b)}
+		minval=resource.get(minarg)
+		if minval>=50
 			return nil
-		else
-			return [need,needfrom]
 		end
+		return minarg
 	end
 
 
 	# assigns ent a job for fetching good from a enttype
-	def fetch(enttype,good,ent)
+	def fetch(good,ent)
 		# FIXME: check if tent has enough of good !!
 	
-	
-		tent=getMap.getNext(self,enttype)
+		puts self, good,good.class
+		tent=getMap.getNext(self,good)
 		if tent == nil then
 			#puts "No '"+good+"' found!"
 			ent.newRestJob(10)

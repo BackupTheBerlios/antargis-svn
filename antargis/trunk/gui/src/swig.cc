@@ -39895,6 +39895,31 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_Node_getAttributes(int argc, VALUE *argv, VALUE self) {
+  Node *arg1 = (Node *) 0 ;
+  Node::Attributes result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  VALUE vresult = Qnil;
+  
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Node, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getAttributes" "', argument " "1"" of type '" "Node const *""'"); 
+  }
+  arg1 = reinterpret_cast<Node * >(argp1);
+  result = ((Node const *)arg1)->getAttributes();
+  
+  vresult = SWIG_NewPointerObj((new Node::Attributes(static_cast<const Node::Attributes& >(result))), SWIGTYPE_p_std__mapTstd__string_std__string_t, SWIG_POINTER_OWN |  0 );
+  return vresult;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_Node_addChild(int argc, VALUE *argv, VALUE self) {
   Node *arg1 = (Node *) 0 ;
   std::string *arg2 = 0 ;
@@ -64963,6 +64988,7 @@ SWIGEXPORT void Init_libantargisgui(void) {
   rb_define_method(cNode.klass, "getChildren", VALUEFUNC(_wrap_Node_getChildren), -1);
   rb_define_method(cNode.klass, "getName", VALUEFUNC(_wrap_Node_getName), -1);
   rb_define_method(cNode.klass, "setAttributes", VALUEFUNC(_wrap_Node_setAttributes), -1);
+  rb_define_method(cNode.klass, "getAttributes", VALUEFUNC(_wrap_Node_getAttributes), -1);
   rb_define_method(cNode.klass, "addChild", VALUEFUNC(_wrap_Node_addChild), -1);
   rb_define_method(cNode.klass, "removeChild", VALUEFUNC(_wrap_Node_removeChild), -1);
   rb_define_method(cNode.klass, "begin", VALUEFUNC(_wrap_Node_begin), -1);

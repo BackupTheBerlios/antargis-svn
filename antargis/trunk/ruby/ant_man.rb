@@ -272,7 +272,7 @@ class AntNewMan<AntMyEntity
 		case res
 			when "wood"
 				setMeshState("axe")
-			when "food"
+			when "fruit"
 				setMeshState("stand")
 			else
 				setMeshState("pick")
@@ -283,7 +283,7 @@ class AntNewMan<AntMyEntity
 		case res	
 			when "wood"
 				setMeshState("wood")
-			when "stone"
+			when "stone","ore","coal" # FIXME new animation for other resources
 				setMeshState("stone")
 		end
 	end
