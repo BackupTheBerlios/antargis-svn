@@ -17,6 +17,7 @@ ARTS
 [M] animate hero, druid and smith
 [L] animate wolf
 [L] add meshes for fish, pigeon
+[L] add female meshes
 
 [Arts - Graphics - 2D]
 ------------------------------------------------------
@@ -93,21 +94,20 @@ none ATM
 
 [Game]
 ------------------------------------------------------
-[H] save current job :-(
+[H] save current job :-(  high-level and low-level
 [H] decrease morale on men when inventing and not resting
 [H] display current job of hero (when active) - some image
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
 [H] display houses on minimap
-[H] add swords/shields/bows
-[H] spread weapons among men
-[H] describe men's health when inspecting house
+[H] add swords/shields/bows and apply them when fighting
+[H] describe men's health and morale when inspecting house
 [H] tough breath when hero suffers / some info-box appearing
 [H] lose when hero dies and lose on defeat godrin
 [H] add boats
-[H] check aggression (fight)
+[H] check aggression (fight) - enemies don't die when agg==3
 [M] fishing (fishes)
-[VH] add "eat-action", "sleep-action" "special??"
+[M] add "eat-action", "sleep-action" "special??"
 [L] add females
 [L] add aggression-leveling of non-hero bosses
 [L] computer-player only attacks when stock is used up
@@ -115,13 +115,12 @@ none ATM
 	- history function
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
-[L] implement loyality
+[L] implement loyalty ??? !!! this must be discussed or delayed.
 	a) too many fights => lower
 	b) fight won => up !!
 	c) enough food => up
 	d) rest => up
 	e) bad weather => lower
-	
 	f) if loyality if too low => some men desert and go to next HouseEntity (additional heroes raise a new player!)
 [VL] very bad situation => raise heroes with a new player (rebellion)
 
@@ -134,8 +133,10 @@ none ATM
 [Editor]
 ------------------------------------------------------
 [L] Trigger definition
+[L] cleanup gui - remove unused elements
+[L] fix selecting group. When you switch the "tabs", the selected action should be changed, too
 
 [Packaging]
 ------------------------------------------------------
-[L] installer for linux
+[L] installer for linux. maybe some autopackage or .debs?
 [L] remove libSGE dependency
