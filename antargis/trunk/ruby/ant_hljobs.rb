@@ -28,6 +28,9 @@ class AntHLJob
 		@hero.getMen
 	end
 	def delete(man)
+		if @men
+			@men.delete(man)
+		end
 	end
 end
 
@@ -160,10 +163,6 @@ class AntHeroFightJob<AntHeroMoveJob
 		return e*0.1
 	end
 	
-	def delete(man)
-		@men.delete(man)
-	end
-
 	def checkFlee
 		dist=(@target.getPos2D-@hero.getPos2D).length
 		if dist>15 and @state=="fight"
@@ -430,12 +429,15 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 		@aggression=agg
 		@want=[target.resource.get("food"),@men.length].min
 		@oldpos=nil
+		@takeStarted=false
 	end
 
 	def check(man)
 		if moveFinished
 			if man.class==AntHero	and @oldpos.class==NilClass
 				@oldpos=man.getPos2D
+				@takeStarted=true
+				@men.each{|m|m.delJob}
 			end
 			case man.getMode
 				when "takingFood"
@@ -458,13 +460,29 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 	end
 end
 
+
+class ProductionRule
+	attr_reader :what, :from
+	def initialize(what,from)
+		@what=what
+		@from=from
+	end
+end
+
+$productionRules=[
+	ProductionRule.new("steel",[["ore",1],["coal",1]]),
+	ProductionRule.new("gold",[["ore",4],["coal",1]]),
+	ProductionRule.new("boat",[["wood",2]]),
+	ProductionRule.new("shield",[["wood",1]]),
+	ProductionRule.new("bow",[["wood",1]]),
+	ProductionRule.new("sword",[["wood",1],["steel",1]])
+]
+
 # inventing runs like this:
 # * depending on aggression some count of men is used for inventing
 # * those men run to "target" and work there
 # * when finished they leave tools/weapons/anything there and come back to hero to rest a little
 # * job finishes after some given time (20 seconds or so)
-
-# FIXME: eat when resting while inventing (when aggression is low)
 
 class AntHeroInventJob<AntHeroMoveJob
 	attr_reader :finished
@@ -477,7 +495,6 @@ class AntHeroInventJob<AntHeroMoveJob
 	end
 	def check(man)
 		if moveFinished
-			puts "MOVE FINISHED"
 			if man.is_a?(AntBoss)
 				checkEat(man)
 				if not @inventStarted
@@ -489,8 +506,6 @@ class AntHeroInventJob<AntHeroMoveJob
 			end
 			@inventStarted=true
 			wantmen=(@men.length-1)*@hero.getAggression/3.0
-			puts "WANTMEN #{wantmen} #{@hero.getAggression}"
-			puts man.getMode
 			case man.getMode
 				when "fetch" # go to resource
 					res=getNeededResource
@@ -514,7 +529,7 @@ class AntHeroInventJob<AntHeroMoveJob
 					man.newRestJob(1)
 					@target.resource.takeAll(man.resource)
 				when "to_invent"  # do some inventing
-					man.newRestJob(3) # work for 3 seconds
+					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
 					man.setMode("inventing")
 				when "inventing"
 					# was inventing
@@ -545,23 +560,23 @@ class AntHeroInventJob<AntHeroMoveJob
 		end
 	end
 private
+	def myResources
+		["wood","stone","coal","ore"]
+	end
 	def enoughResources
 		# FIXME support more resources
-		(@target.resource.get("stone")>5 and @target.resource.get("wood")>5)
+		m=myResources.min{|a,b|@target.resource.get(a)<=>@target.resource.get(b)}
+		value=@target.resource.get(m)
+		return value>5
+		#(@target.resource.get("stone")>5 and @target.resource.get("wood")>5)
 	end
 	def getNeededResource
-		# FIXME support more resources
-		if @target.resource.get("stone")>@target.resource.get("wood")
-			r="wood"
-		else
-			r="stone"
-		end
-		puts "#{@target.resource.get("stone")} #{@target.resource.get("wood")}"
-		puts "needed resource #{r}"
-		return r
+		m=myResources.min{|a,b|@target.resource.get(a)<=>@target.resource.get(b)}
+		puts "NEEDED: #{m}"
+		return m
 	end
 	def getNextWithResource(res)
-		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree"}
+		goods={"wood"=>"tree","stone"=>"stone","food"=>"tree","coal"=>"mine","ore"=>"mine"}
 		enttype=goods[res]
 		getMap.getNext(@target,enttype)
 	end
@@ -577,14 +592,11 @@ private
 		@hero.resource.get("food")>0
 	end
 	def readyInvented
-		p={
-			[["wood",2]]=>"boat",
-			[["wood",1],["steel",1]]=>"sword",
-			[["wood",1]]=>"shield"
-		}
-		p.each{|use,prod|
+		# produce any
+		$productionRules.shuffle.each{|rule|
 			ok=true
-			use.each{|w,n|
+			
+			rule.from.each{|w,n|
 				puts "#{w},#{n}"
 				if @target.resource.get(w)<n
 					ok=false
@@ -592,12 +604,12 @@ private
 			}
 			if ok
 				# we found a useful production
-				use.each{|w,n|@target.resource.sub(w,n)}
-				@target.resource.add(prod,1)
+				rule.from.each{|w,n|@target.resource.sub(w,n)}
+				@target.resource.add(rule.what,1)
 				return #out
 			end
 		}
-		# something went wrong
+		# something went wrong - we don't have enough resources - whatever
 	end
 end
 

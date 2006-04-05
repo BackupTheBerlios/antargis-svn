@@ -123,6 +123,15 @@
 									<text col="3" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
 									<text col="3" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
 									
+									<image col="4" row="0" filename="data/gui/rowboat.png" tooltip="Boat"/>
+									<image col="4" row="1" filename="data/gui/bow.png" tooltip="Bow"/>
+									<image col="4" row="2" filename="data/gui/steel.png" tooltip="Steel"/>
+									
+									<text col="5" row="0" caption="0" align="right" name="boat" font="inventory.font"/>
+									<text col="5" row="1" caption="0" align="right" name="bow" font="inventory.font"/>
+									<text col="5" row="2" caption="0" align="right" name="steel" font="inventory.font"/>
+									
+									
 								</table>
 							</cell>
 						</table>

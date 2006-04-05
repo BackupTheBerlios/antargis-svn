@@ -73812,6 +73812,36 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_AntEntity_setHunger(int argc, VALUE *argv, VALUE self) {
+  AntEntity *arg1 = (AntEntity *) 0 ;
+  float arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  float val2 ;
+  int ecode2 = 0 ;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AntEntity, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "setHunger" "', argument " "1"" of type '" "AntEntity *""'"); 
+  }
+  arg1 = reinterpret_cast<AntEntity * >(argp1);
+  ecode2 = SWIG_AsVal_float(argv[0], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "setHunger" "', argument " "2"" of type '" "float""'");
+  } 
+  arg2 = static_cast<float >(val2);
+  (arg1)->setHunger(arg2);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_AntEntity_setAggression(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   float arg2 ;
@@ -88626,6 +88656,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cAntEntity.klass, "getSpeed", VALUEFUNC(_wrap_AntEntity_getSpeed), -1);
   rb_define_method(cAntEntity.klass, "getHealSpeed", VALUEFUNC(_wrap_AntEntity_getHealSpeed), -1);
   rb_define_method(cAntEntity.klass, "setHealSpeed", VALUEFUNC(_wrap_AntEntity_setHealSpeed), -1);
+  rb_define_method(cAntEntity.klass, "setHunger", VALUEFUNC(_wrap_AntEntity_setHunger), -1);
   rb_define_method(cAntEntity.klass, "setAggression", VALUEFUNC(_wrap_AntEntity_setAggression), -1);
   rb_define_method(cAntEntity.klass, "getAggression", VALUEFUNC(_wrap_AntEntity_getAggression), -1);
   rb_define_method(cAntEntity.klass, "eventDie", VALUEFUNC(_wrap_AntEntity_eventDie), -1);

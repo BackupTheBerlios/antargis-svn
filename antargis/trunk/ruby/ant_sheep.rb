@@ -39,11 +39,9 @@ class AntNewSheep<AntAnimal
 	end
 	def saveXML(node)
 		super(node)
-		#node.set("typeID",@typeID.to_s)
 	end
 	def loadXML(node)
 		super(node)
-		#@typeID=node.get("typeID").to_i
 	end
 	def xmlName
 		return "antNewSheep"

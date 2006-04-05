@@ -59,6 +59,7 @@ class AntNewMan<AntMyEntity
 		resource.set("sword",1)
 		checkResources
 		self.age=(getRand*20+15)
+		setHunger(0.006)
 	end
 	
 	##########################

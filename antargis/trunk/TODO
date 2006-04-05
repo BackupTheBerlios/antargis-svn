@@ -79,17 +79,14 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
+[H] houses, sheep(?) have no hunger - rest entites too
+[H] use "provides" correct "food" from trees, "directFood" from "Farm" ...
 [H] decrease morale on men when inventing and not resting
 [H] check that after Boss::removeMan man is removed from AntHLMoveJob!
-[H] add collect resources when inventing
-[H] process something when inventing
-[H] restore sound after saving (TEST)
 [H] display current job of hero (when active) - some image
-[H] fix take food (hero starting first is wrong!)
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
 [H] display houses on minimap
-[H] inventing
 [H] add swords/shields/bows
 [H] add boats
 [H] check aggression (fight)

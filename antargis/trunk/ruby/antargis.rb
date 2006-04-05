@@ -406,7 +406,7 @@ class AntGameApp <AntRubyView
 
 	def clickMap(pos,button)
 		puts "CLICKMAP"
-		if @hero then
+		if @hero and button==3 then
 			@hero.newHLMoveJob(0,pos,0)
 		end
 	end

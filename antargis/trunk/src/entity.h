@@ -165,6 +165,8 @@ class AntEntity:public AGRubyObject
     float getHealSpeed() const;
     void setHealSpeed(float f);
 
+    void setHunger(float f);
+
     // aggression - handling
 
     void setAggression(float agg);

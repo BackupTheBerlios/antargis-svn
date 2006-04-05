@@ -41,6 +41,7 @@ class AntHero<AntBoss
 		setMinimapColor(AGColor.new(0xFF,0,0))
 		@meshStand="stand"
 		self.age=(getRand*20+20)
+		setHunger(0.006)
 	end
 	def setAppearance(a)
 		@appearance=a

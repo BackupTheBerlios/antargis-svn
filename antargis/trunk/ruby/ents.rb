@@ -35,6 +35,8 @@ class AntMyEntity<AntEntity
 		mRUBY=self
 		@xmlProps={}
 		@birthday=getMap.getTime
+
+		setHunger(0) # general entities have no hunger
 	end
 	def setXMLProp(n,v)
 		@xmlProps[n]=v
@@ -120,3 +122,4 @@ require 'ant_grass.rb'
 require 'ant_druid.rb'
 require 'ant_decal.rb'
 require 'ant_sack.rb'
+require 'ant_mine.rb'

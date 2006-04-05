@@ -128,6 +128,8 @@ void AntEntity::loadXML(const xmlpp::Node &node)
 
   if(node.get("food")!="")
     mFood=toFloat(node.get("food"));
+  if(node.get("hunger")!="")
+    mHunger=toFloat(node.get("hunger"));
 
   setName(node.get("name"));
 
@@ -663,4 +665,9 @@ void AntEntity::eventStartFighting()
 }
 void AntEntity::eventStartMoving()
 {
+}
+
+void AntEntity::setHunger(float f)
+{
+  mHunger=f;
 }

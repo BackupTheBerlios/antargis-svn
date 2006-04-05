@@ -6,7 +6,7 @@ class AntInventory<AGWidget
 	def initialize(p,rect)
 		super(p,rect)
 		$inventory=self
-		@resTypes=["wood","stone","men","food","tool","gold"]
+		@resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel"]
 		setCaching(true)
 		@invinited=false
 
