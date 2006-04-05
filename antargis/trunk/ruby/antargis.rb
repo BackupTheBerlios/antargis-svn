@@ -124,7 +124,7 @@ class AntGameApp <AntRubyView
 			when "doTakeFood"
 				@hero.newHLTakeFoodJob(@target)
 			when "doTakeWeapons"
-				puts "WARN: implement doTakeWeapons"
+				@hero.newHLTakeWeaponJob(@target)
 			when "doInvent"
 				@hero.newHLInventJob(@target)
 		end

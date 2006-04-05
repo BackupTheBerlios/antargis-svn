@@ -79,15 +79,18 @@ none noticed ATM
 
 [Game]
 ------------------------------------------------------
-[H] houses, sheep(?) have no hunger - rest entites too
+[H] save current job :-(
 [H] use "provides" correct "food" from trees, "directFood" from "Farm" ...
 [H] decrease morale on men when inventing and not resting
-[H] check that after Boss::removeMan man is removed from AntHLMoveJob!
 [H] display current job of hero (when active) - some image
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
 [H] display houses on minimap
 [H] add swords/shields/bows
+[H] spread weapons among men
+[H] describe men's health when inspecting house
+[H] tough breath when hero suffers / some info-box appearing
+[H] lose when hero dies and lose on defeat godrin
 [H] add boats
 [H] check aggression (fight)
 [M] fishing (fishes)

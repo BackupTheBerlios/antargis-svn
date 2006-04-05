@@ -234,7 +234,7 @@
   <antFir aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="92.9093" y="34.5268" z="1"/>
   </antFir>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" men="10" morale="1" name="Bantor" onGround="true">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" men="8" morale="1" name="Bantor" onGround="true">
     <position x="50.9935" y="28.4206" z="1"/>
 		<resource food="50" gold="10"/>
   </antHero>

@@ -6,7 +6,7 @@ class AntInventory<AGWidget
 	def initialize(p,rect)
 		super(p,rect)
 		$inventory=self
-		@resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel"]
+		@resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel","rod"]
 		setCaching(true)
 		@invinited=false
 
@@ -68,7 +68,7 @@ private
 		my=(@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero)
 		getChild("doRecruit").setEnabled(my)
 		getChild("doTakeFood").setEnabled(my)
-		getChild("doTakeWeapons").setEnabled(false) # FIXME
+		getChild("doTakeWeapons").setEnabled(my) # FIXME
 		getChild("doInvent").setEnabled((my and @inspect.is_a?(AntWorkshop)))
 	end
 

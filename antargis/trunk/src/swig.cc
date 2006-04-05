@@ -82065,6 +82065,50 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_Resource_take(int argc, VALUE *argv, VALUE self) {
+  Resource *arg1 = (Resource *) 0 ;
+  Resource *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  std::string temp3 ;
+  
+  if ((argc < 2) || (argc > 2)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_Resource, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "take" "', argument " "1"" of type '" "Resource *""'"); 
+  }
+  arg1 = reinterpret_cast<Resource * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[0], &argp2, SWIGTYPE_p_Resource,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "take" "', argument " "2"" of type '" "Resource &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "take" "', argument " "2"" of type '" "Resource &""'"); 
+  }
+  arg2 = reinterpret_cast<Resource * >(argp2);
+  {
+    if (TYPE(argv[1]) == T_STRING) {
+      //            temp3 = std::string(StringValuePtr(argv[1]));
+      temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
+      arg3 = &temp3;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  (arg1)->take(*arg2,(std::string const &)*arg3);
+  
+  return Qnil;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_Resource_empty(int argc, VALUE *argv, VALUE self) {
   Resource *arg1 = (Resource *) 0 ;
   bool result;
@@ -88982,6 +89026,7 @@ SWIGEXPORT void Init_libantargis(void) {
   rb_define_method(cResource.klass, "set", VALUEFUNC(_wrap_Resource_set), -1);
   rb_define_method(cResource.klass, "getAll", VALUEFUNC(_wrap_Resource_getAll), -1);
   rb_define_method(cResource.klass, "takeAll", VALUEFUNC(_wrap_Resource_takeAll), -1);
+  rb_define_method(cResource.klass, "take", VALUEFUNC(_wrap_Resource_take), -1);
   rb_define_method(cResource.klass, "empty", VALUEFUNC(_wrap_Resource_empty), -1);
   cResource.mark = 0;
   cResource.destroy = (void (*)(void *)) free_Resource;

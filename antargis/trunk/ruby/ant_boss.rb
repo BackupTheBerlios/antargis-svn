@@ -165,6 +165,8 @@ class AntBoss<AntMyEntity
 	end
 	
 	def assignJob2All
+		puts "ASSIGNJOB2All:"
+		puts @job
 		@men.each{|man|
 			man.delJob
 			assignJob(man)

@@ -52,6 +52,11 @@ module AntManBase
 		setMeshState("sitdown")
 	end
 
+# 	def delJob
+# 		setMode("")
+# 		super
+# 	end
+
 	def setMode(mode)
 		@mode=mode
 	end

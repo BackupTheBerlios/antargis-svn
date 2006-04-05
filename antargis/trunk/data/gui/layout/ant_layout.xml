@@ -81,7 +81,7 @@
 									<table cols="5" rows="1">
 										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
 										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
-										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons - FIXME"/>
+										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
 										<button  col="3" row="0" name="doInvent" caption-image="data/gui/invent.png" tooltip="Invent"/>
 										<button  col="4" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
 									</table>
@@ -126,10 +126,12 @@
 									<image col="4" row="0" filename="data/gui/rowboat.png" tooltip="Boat"/>
 									<image col="4" row="1" filename="data/gui/bow.png" tooltip="Bow"/>
 									<image col="4" row="2" filename="data/gui/steel.png" tooltip="Steel"/>
+									<image col="4" row="3" filename="data/gui/fish_rod.png" tooltip="Fishing rod"/>
 									
 									<text col="5" row="0" caption="0" align="right" name="boat" font="inventory.font"/>
 									<text col="5" row="1" caption="0" align="right" name="bow" font="inventory.font"/>
 									<text col="5" row="2" caption="0" align="right" name="steel" font="inventory.font"/>
+									<text col="5" row="3" caption="0" align="right" name="rod" font="inventory.font"/>
 									
 									
 								</table>

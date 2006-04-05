@@ -31,6 +31,13 @@ void Resource::takeAll(Resource &pr)
   pr.r.clear();
 }
 
+void Resource::take(Resource &r,const std::string &pName)
+{
+  add(pName,r.get(pName));
+  r.set(pName,0);
+}
+
+
 std::map<std::string,float> Resource::getAll() const
 {
   return r;

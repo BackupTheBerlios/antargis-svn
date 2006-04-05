@@ -48,10 +48,9 @@ class AntHeroMoveJob<AntHLJob
 			@state="torest"
 			@hero.newMoveJob(0,@pos,@dist)
 		end
-		@men=getMen.clone
+		@men=getMen
 		@men.each{|m|
 			m.setMode "format"
-			m.delJob
 		}
 		
 		@formatDir=(@pos-@hero.getPos2D).normalized
@@ -63,9 +62,9 @@ class AntHeroMoveJob<AntHLJob
 	end
 
 	def startWalking
+		puts "START WALKING"
 		@men.each{|m|
 			f=@pos+@hero.getWalkFormation(m,@formatDir)
-			#m.delJob
 			m.newMoveJob(0,f,@dist)
 			m.setMode("moving")
 			@movingMen+=1
@@ -73,13 +72,14 @@ class AntHeroMoveJob<AntHLJob
 		@state="move"
 	end
 	def getMenState(mode)
-		#puts "getmenState"
-		#@men.each{|m|puts m.getMode}
 		@men.select{|m|m.getMode==mode}
 	end
 
 	def check(man)
-		puts "CHECK (move-job): #{man.class.to_s} #{man.getName} #{man.getMode} state:#{@state}"
+# 		puts "CHECK (move-job): #{man.class.to_s} #{man.getName} #{man.getMode} state:#{@state}"
+# 		@men.each{|m|
+# 			puts "#{m} #{m.getName} #{m.getMode}"
+# 		}
 		case @state
 			when "format"
 				if man.getMode=="format"
@@ -87,12 +87,12 @@ class AntHeroMoveJob<AntHLJob
 					man.newMoveJob(0,f,@formatDist)
 					man.setMode("formating")
 				elsif man.getMode=="formatted"
-					# some have already waited for 5 seconds
+					# some have already waited for 7 seconds
 					puts "I'm formatted"
 					startWalking
 				else
 					man.setMode("formatted")
-					man.newRestJob(5)
+					man.newRestJob(7)
 				end
 				if getMenState("formating").length==0
 					startWalking
@@ -148,7 +148,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		dputs self
 		dputs "defned:"+defend.to_s
 		dputs @state
-		@hero.assignJob2All
+		#@hero.assignJob2All
 		initSitpositions
 	end
 
@@ -421,13 +421,14 @@ class AntHeroRecruitJob<AntHeroMoveJob
 end
 
 
-class AntHeroTakeFoodJob<AntHeroMoveJob
+class AntHeroTakeJob<AntHeroMoveJob
 	attr_reader :finished
-	def initialize(hero,target,agg)
+	def initialize(hero,target,agg,what="food")
 		super(hero,0,target.getPos2D,4)
+		@what=what
 		@target=target
 		@aggression=agg
-		@want=[target.resource.get("food"),@men.length].min
+		@want=@men
 		@oldpos=nil
 		@takeStarted=false
 	end
@@ -436,17 +437,34 @@ class AntHeroTakeFoodJob<AntHeroMoveJob
 		if moveFinished
 			if man.class==AntHero	and @oldpos.class==NilClass
 				@oldpos=man.getPos2D
-				@takeStarted=true
-				@men.each{|m|m.delJob}
+				if @takeStarted==false
+					@men.each{|m|m.delJob}
+					@takeStarted=true
+				end
 			end
 			case man.getMode
 				when "takingFood"
 					# take food and return
-					@target.resource.sub("food",1)
-					man.resource.add("food",1)
-
-					@want-=1
-					if @want<=0
+					case @what
+						when "food"
+							for i in 1..@hero.getAggression
+								if @target.resource.get("food")>0
+									@target.resource.sub("food",1)
+									man.resource.add("food",1)
+								end
+							end
+						when "weapon"
+							["sword","bow","boat","shield"].each{|w|
+								if @target.resource.get(w)>0 and man.resource.get(w)==0 # take only if house has it and man doesn't have it
+									@target.resource.sub(w,1)
+									man.resource.add(w,1)
+								end
+							}
+						else
+							raise "unknown type to take !"
+					end
+					@want.delete(man)
+					if @want.length==0
 						@finished=true
 						@hero.newHLMoveJob(0,@oldpos,0)
 					end
@@ -470,11 +488,12 @@ class ProductionRule
 end
 
 $productionRules=[
+	ProductionRule.new("rod",[["wood",1]]),
 	ProductionRule.new("steel",[["ore",1],["coal",1]]),
 	ProductionRule.new("gold",[["ore",4],["coal",1]]),
 	ProductionRule.new("boat",[["wood",2]]),
 	ProductionRule.new("shield",[["wood",1]]),
-	ProductionRule.new("bow",[["wood",1]]),
+	ProductionRule.new("bow",[["wood",1],["stone",1]]),
 	ProductionRule.new("sword",[["wood",1],["steel",1]])
 ]
 
@@ -527,7 +546,10 @@ class AntHeroInventJob<AntHeroMoveJob
 				when "brought"
 					man.setMode("to_invent")
 					man.newRestJob(1)
-					@target.resource.takeAll(man.resource)
+					# take all natural resources - but not food and weapons - otherwise men starve!
+					myResources.each{|r|
+						@target.resource.take(man.resource,r)
+					}
 				when "to_invent"  # do some inventing
 					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
 					man.setMode("inventing")
@@ -581,8 +603,12 @@ private
 		getMap.getNext(@target,enttype)
 	end
 	def checkEat(man)
+		puts "CHECKEAT"
 		if man.getFood<0.5
-			if heroHasFood
+			if man.resource.get("food")>0
+				man.incFood(1)
+				man.resource.sub("food",1)
+			elsif heroHasFood
 				man.incFood(1)
 				@hero.resource.sub("food",1)
 			end
@@ -619,10 +645,13 @@ class AntHeroRestJob<AntHLJob
 		@hero=hero
 		@time=time
 		@hero.newRestJob(time)
+		@spreadThings=false
+		@men=hero.getMen
 	end
 	def check(man)
 		case man.getMode
 			when "rest_eat"
+				spreadThings
 				eat(man)
 				sit(man)
 				man.setMode("rest_sit")
@@ -662,7 +691,10 @@ private
 	end
 	def eat(man)
 		if man.getFood<0.5
-			if heroHasFood
+			if man.resource.get("food")>0
+				man.incFood(1)
+				man.resource.sub("food",1)
+			elsif heroHasFood
 				man.incFood(1)
 				@hero.resource.sub("food",1)
 			end
@@ -670,6 +702,45 @@ private
 	end
 	def heroHasFood
 		@hero.resource.get("food")>0
+	end
+	def spreadThings
+		if @spreadThings==false
+			@spreadThings=true
+			all={}
+			rs=["sword","shield","bow","boat"]
+			rs.each{|r|	
+				all=0
+				@men.each{|m|
+					all+=m.resource.get(r)
+				}
+				if all>=@men.length
+					# give everyone 1 of these and put the rest on the hero
+					@men.each{|m|
+						m.resource.set(r,1)
+					}
+					@hero.resource.add(r,all-@men.length)
+				else
+					men=@men.sort {|a,b|a.resource.get(r)<=>b.resource.get(r)}
+					# put hero at first
+					men.delete(@hero)
+					men=[@hero]+men
+					men.each{|m|m.resource.set(r,0)} # reset
+					for i in 1..all # now give to those who had a weapon and to hero (at first)
+						men[i-1].resource.set(r,1)
+					end
+				end
+			}
+			# spread food equally
+			food=0
+			@men.each{|m|food+=m.resource.get("food")}
+			min=(food/@men.length).to_i
+			@men.each{|m|m.resource.set("food",min)}
+			# spread rest on first
+			food-=min*@men.length
+			for i in 1..food
+				@men[i-1].resource.add("food",1)
+			end
+		end
 	end
 end
 
