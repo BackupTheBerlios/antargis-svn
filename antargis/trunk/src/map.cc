@@ -58,7 +58,7 @@ int AntMap::getNewID()
   return maxID++;
 }
 
-void AntMap::saveXML(xmlpp::Node &node) const
+void AntMap::saveXML(Node &node) const
 {
   HeightMap::saveXML(node);
   
@@ -66,18 +66,18 @@ void AntMap::saveXML(xmlpp::Node &node) const
   std::list<AntEntity*>::const_iterator i=mEntities.begin();
   for(;i!=mEntities.end();i++)
     {
-      xmlpp::Node &child=node.addChild((*i)->xmlName());
+      Node &child=node.addChild((*i)->xmlName());
       (*i)->saveXML(child);
     }
   
 }
 
 
-void AntMap::loadXML(const xmlpp::Node &node)
+void AntMap::loadXML(const Node &node)
 {
   HeightMap::loadXML(node);
 
-  xmlpp::Node::const_iterator i=node.begin();
+  Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     {
       AntEntity *e=0;

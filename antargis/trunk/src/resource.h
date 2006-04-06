@@ -11,8 +11,8 @@ class Resource
  public:
   Resource();
 
-  void saveXML(xmlpp::Node &node) const;
-  void loadXML(const xmlpp::Node &node);
+  void saveXML(Node &node) const;
+  void loadXML(const Node &node);
 
 
   float get(const std::string &pName);

@@ -94,7 +94,7 @@ void AntEntity::resourceChanged()
 {
 }
 
-void AntEntity::saveXML(xmlpp::Node &node) const
+void AntEntity::saveXML(Node &node) const
   {
     Node &child=node.addChild("position");
     mPos.saveXML(child);
@@ -109,14 +109,14 @@ void AntEntity::saveXML(xmlpp::Node &node) const
     Node &res=node.addChild("resource");
     resource.saveXML(res);
   }
-void AntEntity::loadXML(const xmlpp::Node &node)
+void AntEntity::loadXML(const Node &node)
 {
   mEnergy=toFloat(node.get("energy"));
   mHealSpeed=toFloat(node.get("healSpeed"));
   onGround=toBool(node.get("onGround"));
   assert(onGround);
-  xmlpp::Node::NodeVector v=node.getChildren("position");
-  xmlpp::Node::const_iterator i=v.begin();
+  Node::NodeVector v=node.getChildren("position");
+  Node::const_iterator i=v.begin();
   for(;i!=v.end();i++)
     mPos.loadXML(**i);
   //  mID=toInt(node.get("entityID"));
@@ -133,7 +133,7 @@ void AntEntity::loadXML(const xmlpp::Node &node)
 
   setName(node.get("name"));
 
-  xmlpp::Node::NodeVector v2=node.getChildren("resource");
+  Node::NodeVector v2=node.getChildren("resource");
   if(v2.size()>0)
     resource.loadXML(v2[0]);
   

@@ -131,8 +131,8 @@ class AntEntity:public AGRubyObject
     // saving and loading
     virtual std::string xmlName() const;
 
-    virtual void saveXML(xmlpp::Node &node) const;
-    virtual void loadXML(const xmlpp::Node &node);
+    virtual void saveXML(Node &node) const;
+    virtual void loadXML(const Node &node);
 
     // jobs
 

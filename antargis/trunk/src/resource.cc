@@ -44,16 +44,16 @@ std::map<std::string,float> Resource::getAll() const
 }
 
 
-void Resource::saveXML(xmlpp::Node &node) const
+void Resource::saveXML(Node &node) const
 {
   for(std::map<std::string,float>::const_iterator i=r.begin();i!=r.end();++i)
     node.set(i->first,toString(i->second));
   
 }
-void Resource::loadXML(const xmlpp::Node &node)
+void Resource::loadXML(const Node &node)
 {
-  xmlpp::Node::Attributes a=node.getAttributes();
-  for(xmlpp::Node::Attributes::iterator i=a.begin();i!=a.end();++i)
+  Node::Attributes a=node.getAttributes();
+  for(Node::Attributes::iterator i=a.begin();i!=a.end();++i)
     r[i->first]=toFloat(i->second);
 }
 

@@ -319,7 +319,7 @@ class AGMiniMapLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(MiniMap,"miniMap")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     CTRACE;
     return new MiniMap(pParent,pRect,0);

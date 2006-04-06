@@ -42,9 +42,9 @@ class AGLayout:public AGWidget
   std::map<int,AGWidget*> mTabIndices;
 };
 
-AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode);
-void parseChildren(AGWidget *pParent,const xmlpp::Node &pNode);
-//AGTable *parseTable(AGWidget *pParent,const xmlpp::Node &pNode,const AGRect2 &geom);
-AGRect2 getLayoutGeometry(AGWidget *pParent,const xmlpp::Node &pNode);
+AGWidget *parseNode(AGWidget *pParent,const Node &pNode);
+void parseChildren(AGWidget *pParent,const Node &pNode);
+//AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom);
+AGRect2 getLayoutGeometry(AGWidget *pParent,const Node &pNode);
 
 #endif

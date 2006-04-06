@@ -92,7 +92,7 @@ class AGColorButtonLayoutCreator:public AGLayoutCreator
 {
  public:
   REGISTER_COMPONENT(ColorButton,"colorButton")
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGColorButton *b;
 

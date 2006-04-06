@@ -145,9 +145,9 @@ void AGTheme::setSurfaceName(const std::string &pName,const std::string &pSurfac
 }
 
 
-void loadTheme(const xmlpp::Node&node,AGTheme &t,std::string name)
+void loadTheme(const Node&node,AGTheme &t,std::string name)
 {
-  xmlpp::Node::const_iterator i=node.begin();
+  Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     {
       
@@ -191,10 +191,10 @@ void loadTheme(const std::string &pXML)
 {
   AGTheme theme;
 
-  xmlpp::Document p;
+  Document p;
   p.parseMemory(pXML);
 
-  xmlpp::Node n=p.root();
+  Node n=p.root();
 
   loadTheme(n,theme,"");
   
@@ -205,11 +205,11 @@ bool loadThemeFile(const std::string &pFilename)
 {
   AGTheme theme;
 
-  xmlpp::Document p;
+  Document p;
   if(!p.parseFile(pFilename))
     return false;
 
-  const xmlpp::Node &n=p.root();
+  const Node &n=p.root();
 
   loadTheme(n,theme,"");
   

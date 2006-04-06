@@ -38,10 +38,10 @@ class AntMap:public HeightMap
 
   AntEntity *getNext(AntEntity *me,const std::string &pType);
 
-  virtual AntEntity *loadEntity(const xmlpp::Node &node);
+  virtual AntEntity *loadEntity(const Node &node);
 
-  void saveXML(xmlpp::Node &node) const;
-  void loadXML(const xmlpp::Node &node);
+  void saveXML(Node &node) const;
+  void loadXML(const Node &node);
 
   void saveMap(const std::string &pFilename);
   virtual void loadMap(const std::string &pFilename);

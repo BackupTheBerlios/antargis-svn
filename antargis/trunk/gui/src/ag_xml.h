@@ -193,10 +193,5 @@ class DomParser:public Parser
   Document *parse(const std::string &pData,Document *d);
 };
   
-namespace xmlpp
-{
-  typedef ::Node Node;
-  typedef ::Document Document;
-};
 
 #endif

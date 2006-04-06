@@ -31,7 +31,7 @@ class AGLayoutCreator
   virtual ~AGLayoutCreator()
     {
     }
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode);
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
 
 };
 
@@ -45,7 +45,7 @@ class AGLayoutFactory
 
   void addCreator(const std::string &pName,AGLayoutCreator *creator);
 
-  AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode);
+  AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
   
   friend AGLayoutFactory *getLayoutFactory();
 };

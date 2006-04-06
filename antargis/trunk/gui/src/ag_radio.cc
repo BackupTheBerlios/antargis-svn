@@ -129,7 +129,7 @@ class AGRadioGroupLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(RadioGroup,"radioGroup")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGRadioGroup *l=new AGRadioGroup(pParent,pRect);
 
@@ -144,7 +144,7 @@ class AGRadioLayoutCreator:public AGLayoutCreator
 public:
   REGISTER_COMPONENT(Radio,"radio")
 
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const xmlpp::Node &pNode)
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGRadio *b=new AGRadio(pParent,pRect);
     std::string caption=_(pNode.get("caption"));
