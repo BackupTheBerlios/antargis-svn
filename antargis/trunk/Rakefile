@@ -5,6 +5,9 @@ require 'mkmf'
 #require 'file'
 require 'ftools'
 
+$LDFLAGS+=" -L/usr/X11R6/lib "
+$CFLAGS+=" -I/usr/X11R6/include "
+
 version="0.1"
 
 begin File.mkpath(".deps")
@@ -138,8 +141,8 @@ end
 $CXX=$ccache+"g++"
 $CC=$ccache+"gcc"
 if not windows
-	$CFLAGS=`sdl-config --cflags`.chomp
-	$LDFLAGS=`sdl-config --libs`.chomp+" "+$libs
+	$CFLAGS+=`sdl-config --cflags`.chomp
+	$LDFLAGS+=`sdl-config --libs`.chomp+" "+$libs
 	$CFLAGS+=" -fPIC"
 else
 	$CFLAGS="-Ic:/msys/local/include/SDL -Ic:/msys/local/include -Dmain=SDL_main"
