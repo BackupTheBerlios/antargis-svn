@@ -24,10 +24,10 @@
 $ENV=ENV
 def getLanguage
 	if $ENV["LANG"]
-      $ENV["LANG"].sub(/_.*/,"")
-    else
-	  return "en"
-    end
+		$ENV["LANG"].sub(/_.*/,"")
+	else
+		return "en"
+	end
 end
 
 class AntLocalizer<AGLocalizer

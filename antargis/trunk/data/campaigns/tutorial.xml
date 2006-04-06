@@ -1,5 +1,5 @@
 <campaign image="data/gui/map1.png" name="Tutorial" description="Here you learn how to play the game.">
-	<!--<level file="data/levels/tutorial0.antlvl">
+	<level file="data/levels/tutorial0.antlvl">
 		<failscene>
 			<screen>
 				<image filename="data/gui/map1.png"/>
@@ -12,7 +12,7 @@
 			<image filename="data/gui/map1.png"/>
 			<text text="Yay! You finished the first level!"/>
 		</screen>
-	</cutscene>-->
+	</cutscene>
 	<level file="data/levels/tutorial1.antlvl">
 		<failscene>
 			<screen>
