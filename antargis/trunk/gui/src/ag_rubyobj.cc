@@ -59,7 +59,7 @@ void general_markfunc(void *ptr)
   if(!ptr)
     {
       cdebug("WARNING: a ptr==0 was given in general_markfunc!");
-      throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
+      //throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
       return; // ignore
     }
   assert(ptr);
