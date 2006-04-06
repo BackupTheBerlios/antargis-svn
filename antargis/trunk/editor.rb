@@ -124,7 +124,7 @@ end
 
 app=AntGameApp.new(1024,768)
 if ARGV[0]
-	getMap.loadMap("savegames/"+ARGV[0]+".antlvl")
+	getMap.loadMap(ARGV[0]+".antlvl")
 end
 
 

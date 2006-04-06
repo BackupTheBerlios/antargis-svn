@@ -100,6 +100,12 @@ class AntMyEntity<AntEntity
 	def getMen
 		[]
 	end
+	def setMode(mode)
+		@mode=mode
+	end
+	def getMode
+		@mode
+	end
 # 	def eventNoJob
 # 		newRestJob(1000) # rest for infty
 # 	end

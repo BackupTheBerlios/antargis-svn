@@ -56,7 +56,7 @@ class AntNewMan<AntMyEntity
 		setMinimapColor(AGColor.new(0x77,0x77,0x77))
 		setName(genName)
 
-		resource.set("sword",1)
+		#resource.set("sword",1)
 		checkResources
 		self.age=(getRand*20+15)
 		setHunger(0.006)
@@ -325,7 +325,7 @@ class AntNewMan<AntMyEntity
 	end
 	def checkResources
 		if resource.get("sword")==0
-			setStrength(0.01)
+			setStrength(0.012)
 		else
 			setStrength(0.02)
 		end

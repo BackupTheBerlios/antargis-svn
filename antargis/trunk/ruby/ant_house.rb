@@ -59,9 +59,6 @@ class AntHouse<AntBoss
 		#checkBirth
 		newRestJob(2)
 		eatFood
-		if @fighting then
-			checkFight
-		end
 		process
 	end
 
@@ -117,9 +114,7 @@ class AntHouse<AntBoss
 	
 		
 	def assignJob(e)
-		if @fighting then
-			checkFight
-		elsif @job==nil then
+		if @job==nil then
 			normalFetching(e)
 		else
 			checkHLJobEnd(e)
@@ -129,7 +124,8 @@ class AntHouse<AntBoss
 	# does assign job, too
 	def checkHLJobEnd(man)
 		if @job
-			if @job.check(man) then 
+			@job.check(man) 
+			if @job.finished then 
 				if @player
 					@player.eventJobFinished(self,@job)
 				end

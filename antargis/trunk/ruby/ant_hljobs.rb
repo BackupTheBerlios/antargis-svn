@@ -173,6 +173,9 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def checkState
 		checkFlee
+		if @state=="fight" and getMenState("defeated").length==@men.length
+			lost
+		end
 		if moveFinished #or @defend
 			puts "FightJob::checkState:MOVE FINISHED"
 			@state="fight"
@@ -184,7 +187,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	
 	def check(man)
-		puts "CHECKING #{man} #{man.getName} #{self} #{@hero.getName} #{@state}"
+		puts "CHECKING #{man} #{man.getName} #{self} #{@hero.getName} #{@state} #{man.getMode}"
 		checkState
 		return if @finished
 		case @state
@@ -200,8 +203,8 @@ class AntHeroFightJob<AntHeroMoveJob
 				end
 				if man.getMode=="fight"
 					return checkFight(man)
-				else	
-					man.newRestJob(2)
+				else
+					man.newRestJob(50)
 				end
 		end
 	end
@@ -224,7 +227,9 @@ class AntHeroFightJob<AntHeroMoveJob
 			@hero.setOwner(@target)
 			@hero.killAllJobs
 			@target.killAllJobs
-			@hero.newHLMoveJob(0,@sitpos[@hero],0)
+			if @hero.is_a?(AntHero)
+				@hero.newHLMoveJob(0,@sitpos[@hero],0)
+			end
 		end
 	end
 	def won
@@ -235,7 +240,9 @@ class AntHeroFightJob<AntHeroMoveJob
 			@target.getJob.lost
 			@hero.killAllJobs
 			@target.killAllJobs
-			@hero.newHLMoveJob(0,@sitpos[@hero],0)
+			if @hero.is_a?(AntHero)
+				@hero.newHLMoveJob(0,@sitpos[@hero],0)
+			end
 		end
 	end
 

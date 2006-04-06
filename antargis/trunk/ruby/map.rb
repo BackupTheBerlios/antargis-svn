@@ -361,10 +361,14 @@ class AntRubyMap<AntMap
 		$app.setupHeroDisplay
 	end
 	def eventHLJobFinished(hero,job)
-		@script.eventHLJobFinished(hero,job)
+		if @script
+			@script.eventHLJobFinished(hero,job)
+		end
 	end
 	def eventHLDismissed(hero)
-		@script.eventDismissed(hero)
+		if @script
+			@script.eventDismissed(hero)
+		end
 	end
 
 	def getPortrait(hero)

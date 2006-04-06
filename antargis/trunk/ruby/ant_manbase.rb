@@ -57,12 +57,6 @@ module AntManBase
 # 		super
 # 	end
 
-	def setMode(mode)
-		@mode=mode
-	end
-	def getMode
-		@mode
-	end
 	def eventGotFight(other)
 		return
 		puts "EVENTGOTFIGHT"
