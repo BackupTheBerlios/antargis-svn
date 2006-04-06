@@ -106,8 +106,17 @@ void AntEntity::saveXML(Node &node) const
     node.set("morale",toString(mMorale));
     node.set("aggression",toString(mAggression));
     node.set("food",toString(mFood));
+    node.set("id",toString(mID));
     Node &res=node.addChild("resource");
     resource.saveXML(res);
+
+    if(mJob)
+      {
+	Node &j=node.addChild("job");
+	j.set("type",mJob->xmlName());
+	mJob->saveXML(j);
+      }
+
   }
 void AntEntity::loadXML(const Node &node)
 {
@@ -119,7 +128,8 @@ void AntEntity::loadXML(const Node &node)
   Node::const_iterator i=v.begin();
   for(;i!=v.end();i++)
     mPos.loadXML(**i);
-  //  mID=toInt(node.get("entityID"));
+  mID=toInt(node.get("entityID"));
+  getMap()->useID(mID);
   if(node.get("morale")!="")
     mMorale=toFloat(node.get("morale"));
   else
@@ -137,8 +147,29 @@ void AntEntity::loadXML(const Node &node)
   if(v2.size()>0)
     resource.loadXML(v2[0]);
   
+  v2=node.getChildren("job");
+  if(v2.size()>0)
+    {
+      loadJob(v2[0]);
+    }
 
 }
+
+void AntEntity::loadJob(const Node &pNode)
+{
+  std::string t=pNode.get("type");
+  if(t=="restJob")
+    mJob=new RestJob;
+  else if(t=="fightJob")
+    mJob=new FightJob;
+  else if(t=="moveJob")
+    mJob=new MoveJob;
+  else if(t=="fetchJob")
+    mJob=new FetchJob;
+  if(mJob)
+    mJob->loadXML(pNode);
+}
+
 
 AGVector3 AntEntity::getPos3D() const
   {
@@ -247,8 +278,11 @@ void AntEntity::move(float pTime)
 
       if(mMorale<=0.1)
 	if(mJob)
-	  if(mJob->needsMorale())
-	    setJob(0);// kill job
+	  {
+	    assert(mJob->valid());
+	    if(mJob->needsMorale())
+	      setJob(0);// kill job
+	  }
       if(!isStarving())
 	{
 	  mEnergy+=pTime*getHealSpeed();
@@ -258,6 +292,7 @@ void AntEntity::move(float pTime)
     }
   if(mJob)
     {
+      assert(mJob->valid());
       mJob->move(this,pTime);
     }
   else

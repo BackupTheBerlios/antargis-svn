@@ -35,6 +35,7 @@ class AntMyEntity<AntEntity
 		mRUBY=self
 		@xmlProps={}
 		@birthday=getMap.getTime
+		@mode=""
 
 		setHunger(0) # general entities have no hunger
 	end
@@ -53,6 +54,7 @@ class AntMyEntity<AntEntity
 		if node.get("birthday")!=""
 			@birthday=node.get("birthday").to_f
 		end
+		@mode=node.get("mode")
 	end
 	def saveXML(node)
 		super(node)
@@ -62,6 +64,7 @@ class AntMyEntity<AntEntity
 		if @birthday
 			node.set("birthday",@birthday.to_s)
 		end
+		node.set("mode",@mode)
 	end
 	def getDescription
 		"This an entity - no more info here."

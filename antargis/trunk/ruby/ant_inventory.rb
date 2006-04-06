@@ -46,8 +46,6 @@ class AntInventory<AGWidget
 		end
 		@inspect=e
 		getChild("InvBar").setHero(e)
-		checkButtons
-		checkFriend
 		updateInspection
 	end
 	def prepareDraw
@@ -97,6 +95,8 @@ private
 	end
 	def updateInspection
 		if @inspect then
+			checkButtons
+			checkFriend
 			res=@inspect.resource.getAll
 			res["men"]=@inspect.menCount.to_f
 			reset

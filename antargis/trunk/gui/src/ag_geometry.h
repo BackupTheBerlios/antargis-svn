@@ -60,6 +60,7 @@ class AGVector2
  public:
   float v[2];
 
+  AGVector2(const std::string &s);
   AGVector2(float pX,float pY);
   AGVector2(const AGAngle &a);
   AGVector2(const AGVector2 &a);

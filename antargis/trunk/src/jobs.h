@@ -21,31 +21,49 @@
 #ifndef ANT_JOBS_H
 #define ANT_JOBS_H
 #include <ag_geometry.h>
-#include "ruby.h"
 
 class AntEntity;
 
+/**
+   Job class won't be exported to Ruby, because their constant
+   creation and deletion fills up the GC otherwise.
+*/
 class Job
 {
   int priority;
+  bool inited;
  public:
+  Job();
   Job(int p);
   virtual ~Job();
   virtual void move(AntEntity *,float ptime);
+
+  virtual void saveXML(Node &pNode) const;
+  virtual void loadXML(const Node &pNode);
+
+  virtual std::string xmlName() const;
 
   virtual void jobFinished(AntEntity *e);
   bool operator<=(const Job &j) const;
 
   virtual bool needsMorale() const;
+
+  bool valid() const;
 };
 
 class RestJob:public Job
 {
   float mTime;
  public:
+  RestJob();
   RestJob(float pTime);
   virtual ~RestJob();
   void move(AntEntity *e,float ptime);
+
+  virtual void saveXML(Node &pNode) const;
+  virtual void loadXML(const Node &pNode);
+  virtual std::string xmlName() const;
+
 };
 
 class MoveJob:public Job
@@ -54,11 +72,15 @@ class MoveJob:public Job
   float mNear;
   bool mRun;
  public:
+  MoveJob();
   MoveJob(int p,const AGVector2 &pTarget,float pnear=0,bool pRun=false);
   virtual ~MoveJob();
   void move(AntEntity *e,float ptime);
   AGVector2 getDirection(const AntEntity *e) const;
   
+  virtual void saveXML(Node &pNode) const;
+  virtual void loadXML(const Node &pNode);
+  virtual std::string xmlName() const;
   
  private:
   void moveBy(AntEntity *e,float ptime,float aspeed);
@@ -66,34 +88,46 @@ class MoveJob:public Job
 
 // FIXME: implement near and far fighting (arrows)
 class FightJob:public Job
-  {
-    AntEntity *mTarget;
-    float fightDistance;
-    bool moving;
-
-  public:
-    FightJob(int p,AntEntity *pTarget);
-    
-    virtual ~FightJob();
-    void move(AntEntity *e,float ptime);
-    virtual bool needsMorale() const;
-    AntEntity *getTarget()
+{
+  AntEntity *mTarget;
+  float fightDistance;
+  bool moving;
+  int mTargetID;
+  
+ public:
+  FightJob();
+  FightJob(int p,AntEntity *pTarget);
+  
+  virtual ~FightJob();
+  void move(AntEntity *e,float ptime);
+  virtual bool needsMorale() const;
+  AntEntity *getTarget()
     {
       return mTarget;
     }
-  };
+  
+  virtual void saveXML(Node &pNode) const;
+  virtual void loadXML(const Node &pNode);
+  virtual std::string xmlName() const;
+  
+};
 
 class FetchJob:public MoveJob
 {
   std::string mWhat;
   AntEntity *mTarget;
+  int mTargetID;
  public:
+  FetchJob();
   FetchJob(int p,const AGVector2 &pTarget,std::string what);
   FetchJob(int p,AntEntity *pTarget,std::string what);
   virtual ~FetchJob();
   void move(AntEntity *e,float ptime);
   virtual void jobFinished(AntEntity *e);
   
+  virtual void saveXML(Node &pNode) const;
+  virtual void loadXML(const Node &pNode);
+  virtual std::string xmlName() const;
 };
 
 #endif

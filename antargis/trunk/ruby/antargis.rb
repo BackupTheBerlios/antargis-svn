@@ -57,7 +57,7 @@ class AntGameApp <AntRubyView
 		$map=@map
 		@finish="quit"
 
-		#GC.disable
+		GC.disable
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
 

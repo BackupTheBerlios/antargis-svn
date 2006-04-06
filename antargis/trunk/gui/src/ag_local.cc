@@ -19,6 +19,7 @@
  */
 
 #include "ag_local.h"
+#include "ag_debug.h"
 
 
 AGLocalizer *gLocalizer=0;
@@ -48,6 +49,7 @@ AGLocalizer *getLocalizer()
 std::string translate(const std::string &s)
 {
   AGLocalizer *l=getLocalizer();
+  cdebug(s);
   if(l)
     return l->find(s);
   return s;

@@ -32,6 +32,11 @@ class AntHLJob
 			@men.delete(man)
 		end
 	end
+	def xmlName
+		self.class.to_s
+	end
+	def saveXML
+	end
 end
 
 class AntHeroMoveJob<AntHLJob
@@ -228,6 +233,7 @@ class AntHeroFightJob<AntHeroMoveJob
 			@hero.killAllJobs
 			@target.killAllJobs
 			if @hero.is_a?(AntHero)
+				@hero.eventHLJobFinished(self)
 				@hero.newHLMoveJob(0,@sitpos[@hero],0)
 			end
 		end
@@ -241,6 +247,7 @@ class AntHeroFightJob<AntHeroMoveJob
 			@hero.killAllJobs
 			@target.killAllJobs
 			if @hero.is_a?(AntHero)
+				@hero.eventHLJobFinished(self)
 				@hero.newHLMoveJob(0,@sitpos[@hero],0)
 			end
 		end
@@ -474,6 +481,7 @@ class AntHeroTakeJob<AntHeroMoveJob
 					@want.delete(man)
 					if @want.length==0
 						@finished=true
+						@hero.eventHLJobFinished(self)
 						@hero.newHLMoveJob(0,@oldpos,0)
 					end
 				else

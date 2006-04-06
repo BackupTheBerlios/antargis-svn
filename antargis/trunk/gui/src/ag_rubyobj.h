@@ -49,6 +49,10 @@ class AGRubyObject
   virtual void clear();
   virtual void mark();
   void markObject(AGRubyObject *o);
+
+  void disableGC();
+  void enableGC();
+
 #endif
  public:
 #ifndef SWIG

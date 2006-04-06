@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2005 by David Kamphausen. All rights reserved.
+ *
+ * map.h
+ * by David Kamphausen (david.kamphausen@web.de)
+ *
+ * The "Antargis" project, including all files needed to compile it,
+ * is free software; you can redistribute it and/or use it and/or modify it
+ * under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program.
+ */
+
 #include "scene.h"
 #include "map.h"
 #include "entity.h"
@@ -57,6 +77,12 @@ int AntMap::getNewID()
   CTRACE;
   return maxID++;
 }
+
+void AntMap::useID(int id)
+{
+  maxID=std::max(maxID,id+1);
+}
+
 
 void AntMap::saveXML(Node &node) const
 {
@@ -293,7 +319,6 @@ AntEntity *AntMap::getEntity(const AnimMesh &pMesh)
     {
       AntEntity::Meshes meshes=(*i)->getMesh();
       if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
-	//      if((*i)->getMesh()==&pMesh)
 	return *i;
     }
   return 0;

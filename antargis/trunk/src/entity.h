@@ -232,6 +232,8 @@ class AntEntity:public AGRubyObject
     void updatePos(const AGVector3 &p);
 
     void starve(float pTime);
+
+    void loadJob(const Node &pNode);
   };
 
 

@@ -23,9 +23,18 @@
 #include "map.h"
 #include <math.h>
 
-Job::Job(int p):priority(p)
+Job::Job():priority(0),inited(false)
+{
+}
 
+Job::Job(int p):priority(p),inited(true)
 {}
+
+bool Job::valid() const
+{
+  return inited;
+}
+
 void Job::move(AntEntity *,float ptime)
 {}
 
@@ -48,9 +57,30 @@ bool Job::needsMorale() const
   return false;
 }
 
+void Job::saveXML(Node &pNode) const
+{
+  pNode.set("priority",toString(priority));
+}
+void Job::loadXML(const Node &pNode)
+{
+  if(pNode.get("priority").length())
+    priority=toInt(pNode.get("priority"));
+  inited=true;
+}
+
+std::string Job::xmlName() const
+{
+  return "antJob";
+}
+
+
 /************************************************************************
 * MoveJob
 ************************************************************************/
+
+MoveJob::MoveJob()
+{
+}
 
 MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),mNear(pNear),mRun(pRun)
 {
@@ -112,9 +142,43 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
     }
 }
 
+void MoveJob::saveXML(Node &pNode) const
+{
+  Job::saveXML(pNode);
+  pNode.set("pos",mTarget.toString());
+  pNode.set("near",toString(mNear));
+  pNode.set("run",mRun?"true":"false");
+}
+void MoveJob::loadXML(const Node &pNode)
+{
+  Job::loadXML(pNode);
+  if(pNode.get("pos").length())
+    mTarget=AGVector2(pNode.get("pos"));
+  if(pNode.get("near").length())
+    mNear=toFloat(pNode.get("near"));
+  if(pNode.get("run").length())
+    mRun=pNode.get("run")=="true";
+}
+std::string MoveJob::xmlName() const
+{
+  return "moveJob";
+}
+
+
+
 /************************************************************************
 * FightJob
 ************************************************************************/
+
+FightJob::FightJob():mTarget(0),mTargetID(-1)
+{
+}
+
+FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
+{
+  fightDistance=1;//0.20; // in pixels
+  moving=true;
+}
 
 FightJob::~FightJob()
 {
@@ -125,17 +189,14 @@ bool FightJob::needsMorale() const
   return true;
 }
 
-
-// FightJobs
-
-FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
-{
-  fightDistance=1;//0.20; // in pixels
-  moving=true;
-}
-
 void FightJob::move(AntEntity *e,float ptime)
 {
+  if(mTarget==0)
+    {
+      mTarget=getMap()->getEntity(mTargetID);
+      assert(mTarget);
+    }
+
   if(e->getEnergy()<0)
     throw std::runtime_error("Problem: fighting, but I'm alread dead!");
     
@@ -189,10 +250,41 @@ void FightJob::move(AntEntity *e,float ptime)
     }
 }
 
+void FightJob::saveXML(Node &pNode) const
+{
+  Job::saveXML(pNode);
+  pNode.set("target",toString(mTarget->getID()));
+  pNode.set("distance",toString(fightDistance));
+  pNode.set("moving",moving?"true":"false");
+}
+void FightJob::loadXML(const Node &pNode)
+{
+  Job::loadXML(pNode);
+  if(pNode.get("target").length())
+    {
+      mTarget=0;
+      mTargetID=toInt(pNode.get("target"));
+    }
+
+  if(pNode.get("distance").length())
+    fightDistance=toFloat(pNode.get("distance"));
+  if(pNode.get("moving").length())
+    moving=pNode.get("moving")=="true";
+}
+std::string FightJob::xmlName() const
+{
+  return "fightJob";
+}
+
 
 /***************************************************************************
  *
  ***************************************************************************/
+
+FetchJob::FetchJob():
+  mTarget(0)
+{
+}
 
 FetchJob::FetchJob(int p,const AGVector2&pTarget,std::string what):MoveJob(p,pTarget,0.5),mWhat(what),mTarget(0)
 {
@@ -223,10 +315,38 @@ void FetchJob::jobFinished(AntEntity *e)
     }
 }
 
+void FetchJob::saveXML(Node &pNode) const
+{
+  MoveJob::saveXML(pNode);
+  pNode.set("target",toString(mTarget->getID()));
+  pNode.set("what",mWhat);
+}
+void FetchJob::loadXML(const Node &pNode)
+{
+  MoveJob::loadXML(pNode);
+  if(pNode.get("target").length())
+    {
+      mTarget=0;
+      mTargetID=toInt(pNode.get("target"));
+    }
+
+  if(pNode.get("what").length())
+    mWhat=pNode.get("what");
+
+}
+std::string FetchJob::xmlName() const
+{
+  return "fetchJob";
+}
+
 
 /***************************************************************************
  *
  ***************************************************************************/
+
+RestJob::RestJob():mTime(0)
+{
+}
 
 RestJob::RestJob(float pTime):Job(0),mTime(pTime)
 {
@@ -242,7 +362,25 @@ void RestJob::move(AntEntity *e,float ptime)
     jobFinished(e);
 }
 
+void RestJob::saveXML(Node &pNode) const
+{
+  Job::saveXML(pNode);
 
+  pNode.set("time",toString(mTime));
+}
+void RestJob::loadXML(const Node &pNode)
+{
+  Job::loadXML(pNode);
+
+  if(pNode.get("time").length())
+    mTime=toFloat(pNode.get("time"));
+}
+std::string RestJob::xmlName() const
+{
+  return "restJob";
+}
+
+/*
 RestJob *newRestJob(int pTime)
 {
   return new RestJob(pTime);
@@ -255,3 +393,4 @@ MoveJob *newMoveJob(int p,const AGVector2 &pTarget,int pNear)
 {
   return new MoveJob(p,pTarget,pNear);
 }
+*/

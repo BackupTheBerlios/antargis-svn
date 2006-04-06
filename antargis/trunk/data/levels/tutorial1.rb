@@ -1,6 +1,9 @@
 class Level1<Level
 	def initialize
 		@sheep=false
+		@sack=false
+		@defeat=false
+		@takeFood=false
 	end
 	def eventLevelStarted
 		if not @started
@@ -29,49 +32,39 @@ class Level1<Level
 				start.push("Tutorial","It seems like someone has left a bag a little down here. Take it up. (Right click)")
 				tellStory(start)
 			elsif job.target.class==AntSack
+				@sack=true
 				start=StoryFlow.new("sheep")
 				start.push("Tutorial","Well done, now complete your task by conquering the farm and taking their food.")
 				tellStory(start)
 			end
 		elsif job.class==AntHeroFightJob
+			@defeat=true
 			start=StoryFlow.new("sheep")
 			start.push("Tutorial","Now take the food by selecting the farm and clicking on the 'take food' button.")
 			tellStory(start)
 		elsif job.class==AntHeroTakeJob
-			wonLevel
+			@takeFood=true
 		end
-	end
-	def eventDismissed(hero)
-		if @recruit and @won
-			start=StoryFlow.new("end")
-			start.push("Tutorial","You have passed the first tutorial level.")
-			tellStory(start)
+		if (@sheep and @defeat and @takeFood and @sack)
+			wonLevel
 		end
 	end
 	def eventTrigger(hero,t)
 		case t.name
 			when "storyFinished"
 				if @story.name=="end"
-					wonLevel
 					endLevel
 				end
 		end
 		puts "TRIGGER"
 		return false #ignore
 	end
-	def eventOwnerChanged(ent)
-		case ent.getName	
-			when "Godrin"
-				lostLevel
-			when "Bantor"
-				wonLevel
-		end
-	end
 	def wonLevel
+		return if @won 
 		super
 		@won=true
-		start=StoryFlow.new("recruit")
-		start.push("Tutorial","So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.")
+		start=StoryFlow.new("end")
+		start.push("Tutorial","You finished this level.")
 		tellStory(start)
 	end
 

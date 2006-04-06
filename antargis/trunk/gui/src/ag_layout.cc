@@ -19,7 +19,6 @@
  */
 
 #include "ag_layout.h"
-#include "ag_local.h"
 #include "ag_xml.h"
 #include "ag_tools.h"
 #include "ag_theme.h"
@@ -34,7 +33,9 @@
 #include "ag_main.h"
 
 #include "ag_layoutfactory.h"
-#include <ruby.h>
+
+// keep in mind: ag_local.h must be included after ruby.h!!!
+#include "ag_local.h"
 
 AGLayout::AGLayout(AGWidget *pgParent):
   AGWidget(pgParent,AGRect2(0,0,0,0))
@@ -44,12 +45,12 @@ AGLayout::AGLayout(AGWidget *pgParent):
 
 void AGLayout::loadXML(const std::string &pXMLData)
 {
+  CTRACE;
+
   // disable GC here
   // marking makes problems here - as the widgets are not inserted into the tree 
   // when _() is called, which itself is a ruby-dependent thingy
-  rb_gc_disable();
-
-  CTRACE;
+  disableGC();
   Document p;
   p.parseMemory(pXMLData);
 
@@ -76,7 +77,7 @@ void AGLayout::loadXML(const std::string &pXMLData)
       w->gainCompleteFocus(); // is ok, because till here layout isn't inserted into screen yet
     }
 
-  rb_gc_enable(); // here it should be safe to reenable gc
+  enableGC(); // here it should be safe to reenable gc
 }
 
 bool AGLayout::eventKeyDown(AGEvent *m)

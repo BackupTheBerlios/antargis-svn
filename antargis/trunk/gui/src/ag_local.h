@@ -41,7 +41,11 @@ std::string translate(const std::string &s);
 #ifdef _
 #undef _
 #endif
+#ifdef __
+#undef __
+#endif
 #define _(x) translate(x)
+#define __(x) translate(x)
 #endif
 
 #endif

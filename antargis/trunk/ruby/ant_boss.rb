@@ -221,6 +221,7 @@ class AntBoss<AntMyEntity
 	end
 
 	def eventHLJobFinished(job)
+		puts "eventHLJobFinished(job) #{self}"
 		getMap.eventHLJobFinished(self,job)
 	end
 
@@ -253,6 +254,14 @@ class AntBoss<AntMyEntity
 		puts "#{getName} has defeated #{e.getName}"
 		if @job.is_a?(AntHeroFightJob)
 			@job.haveDefeated(e)
+		end
+	end
+	def saveXML(node)
+		super
+		if @job
+			n=node.addChild("hljob")
+			n.set("type",@job.xmlName)
+			@job.saveXML(n)
 		end
 	end
 end

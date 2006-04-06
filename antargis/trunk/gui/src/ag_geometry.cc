@@ -155,6 +155,19 @@ AGAngle::AGAngle(float p):angle(p)
 // AGVector2
 /////////////////////////////////////////////////////////////////////////////
 
+AGVector2::AGVector2(const std::string &s)
+{
+  assert(s.length()>=5);
+  assert(s[0]=='(');
+  assert(s[s.length()-1]==')');
+  std::string p=s.substr(1,s.length()-2);
+  size_t i=p.find(",");
+  assert(i!=p.npos);
+  v[0]=toFloat(p.substr(0,i));
+  v[1]=toFloat(p.substr(i+1,p.length()-i-1));
+}
+
+
 AGVector2::AGVector2(float pX,float pY)
 {
   v[0]=pX;

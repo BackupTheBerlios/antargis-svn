@@ -52,6 +52,7 @@ class AntLocalizer<AGLocalizer
 		return x
 	end
 	def find(x)
+		puts "FIND:#{x}"
 		process(x)
 	end
 

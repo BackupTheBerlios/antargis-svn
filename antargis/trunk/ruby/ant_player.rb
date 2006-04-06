@@ -79,6 +79,7 @@ class AntPlayer
 		@heroes.uniq!
 	end
 	def getHeroes
+		@heroes.uniq!
 		@heroes.clone
 	end
 end
