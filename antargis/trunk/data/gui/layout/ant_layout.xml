@@ -15,7 +15,7 @@
 <!--			<rowsize row="6" fixed="10"/>-->
 			
 			<!-- heroes -->
-			<radioGroup col="0" row="0" name="HeroGroup">
+			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops">
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
 						<table cols="1" rows="3" name="Hero0">

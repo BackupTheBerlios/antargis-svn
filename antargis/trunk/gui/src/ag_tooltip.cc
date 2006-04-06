@@ -35,21 +35,38 @@ AGTooltip::AGTooltip(const AGRect2 &pRect,const std::string &pText):
   float sw=getScreen().getWidth();
   float sh=getScreen().getHeight();
 
-  // first estimate a rectangle which can hold the text
-  float ftw=mFont.getWidth(mText);
-  float fth=mFont.getHeight(mText);
+  mText=replace(mText,"\\n","\n");
+
   float tw,th;
-  float maxw=150;
-  if(ftw>maxw)
+
+  if(mText.find("\n")!=std::string::npos)
     {
-      tw=maxw;
-      th=(ftw+50)/maxw*(fth+4);
+      // estimate each line size
+      std::vector<std::string> a=split("\n",mText);
+      tw=th=0;
+      for(std::vector<std::string>::iterator i=a.begin();i!=a.end();++i)
+	{
+	  tw=std::max(tw,(float)mFont.getWidth(*i));
+	  th+=mFont.getHeight(*i);
+	}
     }
   else
     {
-      // 1 line only
-      tw=ftw;
-      th=fth;
+      // first estimate a rectangle which can hold the text
+      float ftw=mFont.getWidth(mText);
+      float fth=mFont.getHeight(mText);
+      float maxw=150;
+      if(ftw>maxw)
+	{
+	  tw=maxw;
+	  th=(ftw+50)/maxw*(fth+4);
+	}
+      else
+	{
+	  // 1 line only
+	  tw=ftw;
+	  th=fth;
+	}
     }
   tw+=6;
   th+=5;

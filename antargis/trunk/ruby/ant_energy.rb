@@ -14,7 +14,7 @@ class AntEnergy<AGWidget
 
 		@colors[:troops]=AGColor.new(0xcf,0,0)
 		@colors[:energy]=AGColor.new(0,0xcf,0)
-		@colors[:morale]=AGColor.new("#83006c")
+		@colors[:morale]=AGColor.new("#5555ff")
 		@colors[:food]=AGColor.new("#975500")
 		@hborder=0
 		@vborder=0

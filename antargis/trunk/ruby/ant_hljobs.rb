@@ -326,6 +326,7 @@ private
 end
 
 class AntHeroFightAnimalJob<AntHeroMoveJob
+	attr_reader :target
 	def initialize(hero,target)
 		@target=target
 		super(hero,0,target.getPos2D,1,false)
