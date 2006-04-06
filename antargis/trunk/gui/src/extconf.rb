@@ -42,9 +42,9 @@ puts cfg["CC"]
 if windows
 	cfg["CC"]="g++"
 else
-	ccache = with_config('ccache', 'ccache')
-	if ccache
-		cfg["CC"]=ccache+" g++"
+	ccache = `which ccache`.chomp 
+	if /ccache/ =~ ccache 
+		cfg["CC"]="ccache g++" 
 	else
 		cfg["CC"]="g++"
 	end
