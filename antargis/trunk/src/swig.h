@@ -127,7 +127,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -178,7 +177,6 @@ public:
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseClick(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -229,7 +227,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawGL();
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -310,7 +307,6 @@ public:
     virtual bool eventResize(AGEvent *m);
     virtual bool eventKeyDown(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -365,7 +361,6 @@ public:
     virtual bool eventCancel(AGEvent *event);
     virtual bool eventClose(AGEvent *event);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -394,7 +389,6 @@ public:
     virtual bool eventQuit(AGEvent *m);
     virtual bool eventKeyDown(AGEvent *m2);
     virtual bool eventMouseMotion(AGEvent *m);
-    virtual void mark();
     virtual bool eventFrame(float pTime);
     virtual bool eventFrameEnd(float pTime);
     virtual void eventChangedRes();
@@ -447,7 +441,6 @@ public:
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseButtonDown(AGEvent *m);
     virtual bool eventMouseButtonUp(AGEvent *m);
-    virtual void clear();
     virtual bool eventMouseEnter();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
@@ -499,7 +492,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -550,7 +542,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -602,7 +593,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent *m);
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseClick(AGEvent *m);
-    virtual void clear();
     virtual bool eventMouseEnter();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
@@ -664,7 +654,6 @@ public:
     virtual bool eventKeyDown(AGEvent *m);
     virtual bool eventKeyUp(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -794,7 +783,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -854,7 +842,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent *m);
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -939,7 +926,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -991,7 +977,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -1043,7 +1028,6 @@ public:
     virtual bool eventMouseButtonDown(AGEvent *m);
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseClick(AGEvent *m);
-    virtual void clear();
     virtual bool eventMouseEnter();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
@@ -1119,7 +1103,6 @@ public:
     virtual bool eventSysWM(AGEvent *m);
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -1178,7 +1161,6 @@ public:
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseButtonDown(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -1258,7 +1240,6 @@ public:
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseMotion(AGEvent *m);
     virtual bool eventKeyDown(AGEvent *m);
-    virtual void mark();
     virtual bool eventFrameEnd(float pTime);
     virtual bool eventFrame(float t);
     virtual void eventChangedRes();
@@ -1338,9 +1319,7 @@ public:
     SwigDirector_AntEntity(VALUE self);
     SwigDirector_AntEntity(VALUE self, AGVector3 const &p);
     SwigDirector_AntEntity(VALUE self, AGVector2 const &p);
-    virtual void mark();
     virtual void animationEvent(std::string const &pName);
-    virtual void clear();
     virtual void newMoveJob(int p, AGVector2 const &pTarget, float pnear = 0.0);
     virtual void newRestJob(float pTime);
     virtual void move(float pTime);
@@ -1444,7 +1423,6 @@ public:
     virtual bool signal(AGEvent *m);
     virtual void loadMap(std::string const &pFilename);
     virtual void mark();
-    virtual void clear();
     virtual ~SwigDirector_AntMap();
     virtual Uint8 getButtonState() const;
     virtual AGVector2 getMousePosition() const;
@@ -1476,7 +1454,6 @@ public:
     SwigDirector_Mesh(VALUE self, Scene *pScene);
     SwigDirector_Mesh(VALUE self, Scene *pScene, MeshData &data, AGVector4 const &pPos, float pRot);
     virtual void setPos(AGVector3 const &pPos);
-    virtual void mark();
     virtual void clear();
     virtual bool transparent();
     virtual void advance(float time);
@@ -1531,7 +1508,6 @@ public:
     virtual bool eventResize(AGEvent *m);
     virtual bool eventMouseClick(AGEvent *m);
     virtual bool eventMouseEnter();
-    virtual void clear();
     virtual void drawAll(AGPainter &p);
     virtual void drawAfter(AGPainter &p);
     virtual void draw(AGPainter &p);
@@ -1570,9 +1546,7 @@ class SwigDirector_Scene : public Scene, public Swig::Director {
 
 public:
     SwigDirector_Scene(VALUE self, int w, int h);
-    virtual void clear();
     virtual ~SwigDirector_Scene();
-    virtual void mark();
 };
 
 

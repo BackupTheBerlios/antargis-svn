@@ -44,9 +44,12 @@ class AGRubyObject
   virtual ~AGRubyObject();
 
  protected:
+#ifndef SWIG
+  // functions shouldn't be exported and NEVER be used in ruby!
   virtual void clear();
   virtual void mark();
   void markObject(AGRubyObject *o);
+#endif
  public:
 #ifndef SWIG
   bool mRubyObject;

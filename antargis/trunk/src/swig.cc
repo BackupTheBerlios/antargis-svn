@@ -3798,17 +3798,6 @@ bool SwigDirector_AGWidget::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGWidget::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGWidget::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -4675,17 +4664,6 @@ bool SwigDirector_AGColorButton::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGColorButton::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGColorButton::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -5549,17 +5527,6 @@ bool SwigDirector_AGGLWidget::eventMouseEnter() {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGGLWidget::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -6635,17 +6602,6 @@ bool SwigDirector_AGLayout::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGLayout::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGLayout::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -7585,17 +7541,6 @@ bool SwigDirector_AGDialog::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGDialog::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGDialog::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -8123,17 +8068,6 @@ bool SwigDirector_AGApplication::eventMouseMotion(AGEvent *m) {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGApplication::mark() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGApplication::mark();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
 }
 
 
@@ -8867,17 +8801,6 @@ bool SwigDirector_AGButton::eventMouseButtonUp(AGEvent *m) {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGButton::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -9765,17 +9688,6 @@ bool SwigDirector_AGText::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGText::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGText::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -10639,17 +10551,6 @@ bool SwigDirector_AGCaption::eventMouseEnter() {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGCaption::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -11530,17 +11431,6 @@ bool SwigDirector_AGCheckBox::eventMouseClick(AGEvent *m) {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGCheckBox::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -12472,17 +12362,6 @@ bool SwigDirector_AGEdit::eventMouseEnter() {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGEdit::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGEdit::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -14097,17 +13976,6 @@ bool SwigDirector_AGImage::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGImage::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGImage::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -15060,17 +14928,6 @@ bool SwigDirector_AGListBox::eventMouseEnter() {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGListBox::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -16123,17 +15980,6 @@ bool SwigDirector_AGSound::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGSound::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGSound::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -17010,17 +16856,6 @@ bool SwigDirector_AGRadioGroup::eventMouseEnter() {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGRadioGroup::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -17901,17 +17736,6 @@ bool SwigDirector_AGRadio::eventMouseClick(AGEvent *m) {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGRadio::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -19058,17 +18882,6 @@ bool SwigDirector_AGTable::eventMouseEnter() {
 }
 
 
-void SwigDirector_AGTable::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_AGTable::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -19941,17 +19754,6 @@ bool SwigDirector_AGWindow::eventMouseEnter() {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
-}
-
-
-void SwigDirector_AGWindow::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -20869,17 +20671,6 @@ bool SwigDirector_GLApp::eventKeyDown(AGEvent *m) {
 }
 
 
-void SwigDirector_GLApp::mark() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    GLApp::mark();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
-}
-
-
 bool SwigDirector_GLApp::eventFrameEnd(float pTime) {
   VALUE obj0 = Qnil ;
   bool c_result ;
@@ -21279,17 +21070,6 @@ SwigDirector_AntEntity::SwigDirector_AntEntity(VALUE self, AGVector2 const &p): 
 
 
 
-void SwigDirector_AntEntity::mark() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AntEntity::mark();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
-}
-
-
 void SwigDirector_AntEntity::animationEvent(std::string const &pName) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -21300,17 +21080,6 @@ void SwigDirector_AntEntity::animationEvent(std::string const &pName) {
   }
   obj0=rb_str_new2(pName.c_str());
   result = rb_funcall(swig_get_self(), rb_intern("animationEvent"), 1,obj0);
-}
-
-
-void SwigDirector_AntEntity::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AntEntity::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
 }
 
 
@@ -22390,17 +22159,6 @@ void SwigDirector_AntMap::mark() {
 }
 
 
-void SwigDirector_AntMap::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AntMap::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 SwigDirector_AntMap::~SwigDirector_AntMap() {
 }
 
@@ -22655,17 +22413,6 @@ void SwigDirector_Mesh::setPos(AGVector3 const &pPos) {
   }
   obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&pPos), SWIGTYPE_p_AGVector3,  0 );
   result = rb_funcall(swig_get_self(), rb_intern("setPos"), 1,obj0);
-}
-
-
-void SwigDirector_Mesh::mark() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    Mesh::mark();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
 }
 
 
@@ -23414,17 +23161,6 @@ bool SwigDirector_MiniMap::eventMouseEnter() {
 }
 
 
-void SwigDirector_MiniMap::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    AGWidget::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 void SwigDirector_MiniMap::drawAll(AGPainter &p) {
   VALUE obj0 = Qnil ;
   VALUE result;
@@ -23908,30 +23644,8 @@ SwigDirector_Scene::SwigDirector_Scene(VALUE self, int w, int h): Scene(w, h), S
 
 
 
-void SwigDirector_Scene::clear() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    Scene::clear();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
-}
-
-
 SwigDirector_Scene::~SwigDirector_Scene() {
 }
-
-void SwigDirector_Scene::mark() {
-  VALUE result;
-  
-  if (swig_get_up()) {
-    Scene::mark();
-    return;
-  }
-  result = rb_funcall(swig_get_self(), rb_intern("mark"), 0, NULL);
-}
-
 
 SwigDirector_Smoke::SwigDirector_Smoke(VALUE self, Scene *pScene, float f): Smoke(pScene, f), Swig::Director(self) {
   
@@ -43101,7 +42815,6 @@ _wrap_AGWidget_clear(int argc, VALUE *argv, VALUE self) {
   AGWidget *arg1 = (AGWidget *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -43111,15 +42824,8 @@ _wrap_AGWidget_clear(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "clear" "', argument " "1"" of type '" "AGWidget *""'"); 
   }
   arg1 = reinterpret_cast<AGWidget * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->clear();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->clear();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -48469,7 +48175,6 @@ _wrap_AGApplication_mark(int argc, VALUE *argv, VALUE self) {
   AGApplication *arg1 = (AGApplication *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -48479,15 +48184,8 @@ _wrap_AGApplication_mark(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mark" "', argument " "1"" of type '" "AGApplication *""'"); 
   }
   arg1 = reinterpret_cast<AGApplication * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->mark();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->mark();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -51771,7 +51469,6 @@ _wrap_AGEdit_clear(int argc, VALUE *argv, VALUE self) {
   AGEdit *arg1 = (AGEdit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -51781,15 +51478,8 @@ _wrap_AGEdit_clear(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "clear" "', argument " "1"" of type '" "AGEdit *""'"); 
   }
   arg1 = reinterpret_cast<AGEdit * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->clear();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->clear();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -70509,7 +70199,6 @@ _wrap_GLApp_mark(int argc, VALUE *argv, VALUE self) {
   GLApp *arg1 = (GLApp *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -70519,15 +70208,8 @@ _wrap_GLApp_mark(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mark" "', argument " "1"" of type '" "GLApp *""'"); 
   }
   arg1 = reinterpret_cast<GLApp * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->mark();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->mark();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -74756,7 +74438,6 @@ _wrap_AntEntity_mark(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -74766,15 +74447,8 @@ _wrap_AntEntity_mark(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mark" "', argument " "1"" of type '" "AntEntity *""'"); 
   }
   arg1 = reinterpret_cast<AntEntity * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->mark();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->mark();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -74786,7 +74460,6 @@ _wrap_AntEntity_clear(int argc, VALUE *argv, VALUE self) {
   AntEntity *arg1 = (AntEntity *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -74796,15 +74469,8 @@ _wrap_AntEntity_clear(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "clear" "', argument " "1"" of type '" "AntEntity *""'"); 
   }
   arg1 = reinterpret_cast<AntEntity * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->clear();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->clear();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -77785,7 +77451,6 @@ _wrap_AntMap_clear(int argc, VALUE *argv, VALUE self) {
   AntMap *arg1 = (AntMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -77795,15 +77460,8 @@ _wrap_AntMap_clear(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "clear" "', argument " "1"" of type '" "AntMap *""'"); 
   }
   arg1 = reinterpret_cast<AntMap * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->clear();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->clear();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -80275,7 +79933,6 @@ _wrap_Mesh_mark(int argc, VALUE *argv, VALUE self) {
   Mesh *arg1 = (Mesh *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -80285,15 +79942,8 @@ _wrap_Mesh_mark(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mark" "', argument " "1"" of type '" "Mesh *""'"); 
   }
   arg1 = reinterpret_cast<Mesh * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->mark();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->mark();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -82763,7 +82413,6 @@ _wrap_Scene_clear(int argc, VALUE *argv, VALUE self) {
   Scene *arg1 = (Scene *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -82773,15 +82422,8 @@ _wrap_Scene_clear(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "clear" "', argument " "1"" of type '" "Scene *""'"); 
   }
   arg1 = reinterpret_cast<Scene * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->clear();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->clear();
+  
   return Qnil;
 fail:
   return Qnil;
@@ -83113,7 +82755,6 @@ _wrap_Scene_mark(int argc, VALUE *argv, VALUE self) {
   Scene *arg1 = (Scene *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  Swig::Director *director = 0;
   
   if ((argc < 0) || (argc > 0)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
@@ -83123,15 +82764,8 @@ _wrap_Scene_mark(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mark" "', argument " "1"" of type '" "Scene *""'"); 
   }
   arg1 = reinterpret_cast<Scene * >(argp1);
-  director = dynamic_cast<Swig::Director *>(arg1);
-  if (director && (director->swig_get_self() == self)) director->swig_set_up();
-  try {
-    Swig::UnknownExceptionHandler dh;
-    (arg1)->mark();
-    
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
+  (arg1)->mark();
+  
   return Qnil;
 fail:
   return Qnil;
