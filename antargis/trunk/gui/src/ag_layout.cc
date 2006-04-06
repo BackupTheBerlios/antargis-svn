@@ -34,19 +34,32 @@
 #include "ag_main.h"
 
 #include "ag_layoutfactory.h"
+#include <ruby.h>
 
-
-AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
+AGLayout::AGLayout(AGWidget *pgParent):
   AGWidget(pgParent,AGRect2(0,0,0,0))
 {
+  CTRACE;
+}
+
+void AGLayout::loadXML(const std::string &pXMLData)
+{
+  // disable GC here
+  // marking makes problems here - as the widgets are not inserted into the tree 
+  // when _() is called, which itself is a ruby-dependent thingy
+  rb_gc_disable();
+
+  CTRACE;
   xmlpp::Document p;
   p.parseMemory(pXMLData);
+
+  AGWidget *pgParent=getParent();
 
   AGRect2 geom;
   std::string geomS=p.root().get("geometry");
   if(geomS.length())
     geom=AGRect2(geomS);
-  else if(pgParent)
+  else if(getParent())
     geom=pgParent->getRect().origin();
   else
     geom=AGRect2(0,0,getMain()->width(),getMain()->height());
@@ -62,6 +75,8 @@ AGLayout::AGLayout(AGWidget *pgParent,const std::string &pXMLData):
       AGWidget *w=mTabIndices.begin()->second;
       w->gainCompleteFocus(); // is ok, because till here layout isn't inserted into screen yet
     }
+
+  rb_gc_enable(); // here it should be safe to reenable gc
 }
 
 bool AGLayout::eventKeyDown(AGEvent *m)
@@ -127,19 +142,11 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 
   w=getLayoutFactory()->create(pParent,geom,pNode);
 
-  if(!w)
-    {
-      //   cdebug("CREATION FAILED!!"<<n);
-    }
-
-  //  cdebug("w:"<<w);
-  //cdebug("nodename:"<<pNode.get("name"));
   if(w!=0 && pNode.get("name").length())
       w->setName(pNode.get("name"));
 
   if(w!=0 && pNode.get("visible")=="false")
     w->hide();
-
 
   if(w!=0 && pNode.get("tooltip").length())
     w->setTooltip(_(pNode.get("tooltip")));
@@ -152,15 +159,9 @@ AGWidget *parseNode(AGWidget *pParent,const xmlpp::Node &pNode)
 	  l->addTabIndex(toInt(pNode.get("tabindex")),w);
 	}
       else
-	cdebug("ERRRRRRRRRRRRRRRRRRRRRRROR");
-
+	cdebug("ERROR in parseNode(.):tabindex given but not embedded in layout???");
     }
 
-  if(pNode.get("cache")=="true")
-    {
-      cdebug("CACHE");
-      cdebug(w);
-    }
   if(w!=0 && pNode.get("cache")=="true")
     w->setCaching(true);
 
@@ -478,7 +479,8 @@ public:
     CTRACE;
     std::string filename=pNode.get("filename");
     AGWidget *w=new AGWidget(pParent,pRect);
-    AGLayout *l=new AGLayout(w,loadFile(filename));//pRect);
+    AGLayout *l=new AGLayout(w);
+    l->loadXML(loadFile(filename));//pRect);
     w->addChild(l);
 
     return w;

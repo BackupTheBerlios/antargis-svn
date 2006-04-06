@@ -19,7 +19,7 @@ class AntEnergy<AGWidget
 		@hborder=0
 		@vborder=0
 
-		#setCaching(true)
+		setCaching(true)
 		@doRedraw=true
 	end
 
@@ -98,6 +98,7 @@ class AntEnergyCreator<AGLayoutCreator
 		w=AntEnergy.new(parent,rect)
 		w.hborder=node.get("hborder").to_i
 		w.vborder=node.get("vborder").to_i
+		puts "AntEnergyCreator:",w
 		return w
 	end
 end

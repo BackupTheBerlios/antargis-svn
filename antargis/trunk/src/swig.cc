@@ -6040,7 +6040,7 @@ void SwigDirector_DomParser::header(std::string const &pText) {
 }
 
 
-SwigDirector_AGLayout::SwigDirector_AGLayout(VALUE self, AGWidget *pgParent, std::string const &pXMLData): AGLayout(pgParent, pXMLData), Swig::Director(self) {
+SwigDirector_AGLayout::SwigDirector_AGLayout(VALUE self, AGWidget *pgParent): AGLayout(pgParent), Swig::Director(self) {
   
 }
 
@@ -6338,6 +6338,19 @@ bool SwigDirector_AGLayout::redraw() const {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
+}
+
+
+void SwigDirector_AGLayout::loadXML(std::string const &pXMLData) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGLayout::loadXML(pXMLData);
+    return;
+  }
+  obj0=rb_str_new2(pXMLData.c_str());
+  result = rb_funcall(swig_get_self(), rb_intern("loadXML"), 1,obj0);
 }
 
 
@@ -6917,7 +6930,7 @@ void SwigDirector_AGLayout::mark() {
 }
 
 
-SwigDirector_AGDialog::SwigDirector_AGDialog(VALUE self, AGWidget *pgParent, std::string const &pXMLData): AGDialog(pgParent, pXMLData), Swig::Director(self) {
+SwigDirector_AGDialog::SwigDirector_AGDialog(VALUE self, AGWidget *pgParent): AGDialog(pgParent), Swig::Director(self) {
   
 }
 
@@ -7215,6 +7228,19 @@ bool SwigDirector_AGDialog::redraw() const {
   }
   c_result = static_cast<bool >(val);
   return (bool) c_result;
+}
+
+
+void SwigDirector_AGDialog::loadXML(std::string const &pXMLData) {
+  VALUE obj0 = Qnil ;
+  VALUE result;
+  
+  if (swig_get_up()) {
+    AGDialog::loadXML(pXMLData);
+    return;
+  }
+  obj0=rb_str_new2(pXMLData.c_str());
+  result = rb_funcall(swig_get_self(), rb_intern("loadXML"), 1,obj0);
 }
 
 
@@ -47098,15 +47124,13 @@ SWIGINTERN VALUE
 _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
   VALUE arg1 = (VALUE) 0 ;
   AGWidget *arg2 = (AGWidget *) 0 ;
-  std::string *arg3 = 0 ;
   AGLayout *result = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
-  std::string temp3 ;
   const char *classname SWIGUNUSED = "Libantargis::AGLayout";
   
-  if ((argc < 2) || (argc > 2)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
   }
   arg1 = self;
   res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_AGWidget, 0 |  0 );
@@ -47115,21 +47139,12 @@ _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
   }
   arg2 = reinterpret_cast<AGWidget * >(argp2);
   {
-    if (TYPE(argv[1]) == T_STRING) {
-      //            temp3 = std::string(StringValuePtr(argv[1]));
-      temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
-      arg3 = &temp3;
-    } else {
-      SWIG_exception(SWIG_TypeError, "not a string");
-    }
-  }
-  {
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
       /* subclassed */
-      result = (AGLayout *)new SwigDirector_AGLayout(arg1,arg2,(std::string const &)*arg3);
+      result = (AGLayout *)new SwigDirector_AGLayout(arg1,arg2);
       
     } else {
-      result = (AGLayout *)new AGLayout(arg2,(std::string const &)*arg3);
+      result = (AGLayout *)new AGLayout(arg2);
       
     }
     DATA_PTR(self) = result;
@@ -47138,6 +47153,47 @@ _wrap_new_AGLayout(int argc, VALUE *argv, VALUE self) {
     result->mRubyObject=true;
   }
   return self;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AGLayout_loadXML(int argc, VALUE *argv, VALUE self) {
+  AGLayout *arg1 = (AGLayout *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::string temp2 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGLayout, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "loadXML" "', argument " "1"" of type '" "AGLayout *""'"); 
+  }
+  arg1 = reinterpret_cast<AGLayout * >(argp1);
+  {
+    if (TYPE(argv[0]) == T_STRING) {
+      //            temp2 = std::string(StringValuePtr(argv[0]));
+      temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+      arg2 = &temp2;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->loadXML((std::string const &)*arg2);
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
 fail:
   return Qnil;
 }
@@ -47458,15 +47514,13 @@ SWIGINTERN VALUE
 _wrap_new_AGDialog(int argc, VALUE *argv, VALUE self) {
   VALUE arg1 = (VALUE) 0 ;
   AGWidget *arg2 = (AGWidget *) 0 ;
-  std::string *arg3 = 0 ;
   AGDialog *result = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
-  std::string temp3 ;
   const char *classname SWIGUNUSED = "Libantargis::AGDialog";
   
-  if ((argc < 2) || (argc > 2)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
   }
   arg1 = self;
   res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_AGWidget, 0 |  0 );
@@ -47475,21 +47529,12 @@ _wrap_new_AGDialog(int argc, VALUE *argv, VALUE self) {
   }
   arg2 = reinterpret_cast<AGWidget * >(argp2);
   {
-    if (TYPE(argv[1]) == T_STRING) {
-      //            temp3 = std::string(StringValuePtr(argv[1]));
-      temp3 = std::string(RSTRING(argv[1])->ptr,RSTRING(argv[1])->len);
-      arg3 = &temp3;
-    } else {
-      SWIG_exception(SWIG_TypeError, "not a string");
-    }
-  }
-  {
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
       /* subclassed */
-      result = (AGDialog *)new SwigDirector_AGDialog(arg1,arg2,(std::string const &)*arg3);
+      result = (AGDialog *)new SwigDirector_AGDialog(arg1,arg2);
       
     } else {
-      result = (AGDialog *)new AGDialog(arg2,(std::string const &)*arg3);
+      result = (AGDialog *)new AGDialog(arg2);
       
     }
     DATA_PTR(self) = result;
@@ -47498,6 +47543,47 @@ _wrap_new_AGDialog(int argc, VALUE *argv, VALUE self) {
     result->mRubyObject=true;
   }
   return self;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
+_wrap_AGDialog_loadXML(int argc, VALUE *argv, VALUE self) {
+  AGDialog *arg1 = (AGDialog *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::string temp2 ;
+  Swig::Director *director = 0;
+  
+  if ((argc < 1) || (argc > 1)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_AGDialog, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "loadXML" "', argument " "1"" of type '" "AGDialog *""'"); 
+  }
+  arg1 = reinterpret_cast<AGDialog * >(argp1);
+  {
+    if (TYPE(argv[0]) == T_STRING) {
+      //            temp2 = std::string(StringValuePtr(argv[0]));
+      temp2 = std::string(RSTRING(argv[0])->ptr,RSTRING(argv[0])->len);
+      arg2 = &temp2;
+    } else {
+      SWIG_exception(SWIG_TypeError, "not a string");
+    }
+  }
+  director = dynamic_cast<Swig::Director *>(arg1);
+  if (director && (director->swig_get_self() == self)) director->swig_set_up();
+  try {
+    Swig::UnknownExceptionHandler dh;
+    (arg1)->loadXML((std::string const &)*arg2);
+    
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  return Qnil;
 fail:
   return Qnil;
 }
@@ -87710,6 +87796,7 @@ SWIGEXPORT void Init_libantargis(void) {
   SWIG_TypeClientData(SWIGTYPE_p_AGLayout, (void *) &cAGLayout);
   rb_define_alloc_func(cAGLayout.klass, _wrap_AGLayout_allocate);
   rb_define_method(cAGLayout.klass, "initialize", VALUEFUNC(_wrap_new_AGLayout), -1);
+  rb_define_method(cAGLayout.klass, "loadXML", VALUEFUNC(_wrap_AGLayout_loadXML), -1);
   rb_define_method(cAGLayout.klass, "addTabIndex", VALUEFUNC(_wrap_AGLayout_addTabIndex), -1);
   rb_define_method(cAGLayout.klass, "eventKeyDown", VALUEFUNC(_wrap_AGLayout_eventKeyDown), -1);
   rb_define_method(cAGLayout.klass, "getNextTabIndex", VALUEFUNC(_wrap_AGLayout_getNextTabIndex), -1);
@@ -87725,6 +87812,7 @@ SWIGEXPORT void Init_libantargis(void) {
   SWIG_TypeClientData(SWIGTYPE_p_AGDialog, (void *) &cAGDialog);
   rb_define_alloc_func(cAGDialog.klass, _wrap_AGDialog_allocate);
   rb_define_method(cAGDialog.klass, "initialize", VALUEFUNC(_wrap_new_AGDialog), -1);
+  rb_define_method(cAGDialog.klass, "loadXML", VALUEFUNC(_wrap_AGDialog_loadXML), -1);
   rb_define_method(cAGDialog.klass, "eventOk", VALUEFUNC(_wrap_AGDialog_eventOk), -1);
   rb_define_method(cAGDialog.klass, "eventCancel", VALUEFUNC(_wrap_AGDialog_eventCancel), -1);
   rb_define_method(cAGDialog.klass, "eventClose", VALUEFUNC(_wrap_AGDialog_eventClose), -1);

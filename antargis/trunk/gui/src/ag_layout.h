@@ -29,7 +29,9 @@ class AGTable;
 class AGLayout:public AGWidget
 {
  public:
-  AGLayout(AGWidget *pgParent,const std::string &pXMLData);
+  AGLayout(AGWidget *pgParent);
+  
+  virtual void loadXML(const std::string &pXMLData);
 
   void addTabIndex(int i,AGWidget *pWidget);
 

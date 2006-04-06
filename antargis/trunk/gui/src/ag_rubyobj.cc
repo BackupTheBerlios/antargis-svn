@@ -25,6 +25,7 @@ AGRubyObject::~AGRubyObject()
 {
   mDeleted=true;
   gExistingRubies.erase(this);
+  //  cdebug("DEL:"<<mRUBY);
 }
 
 
@@ -38,7 +39,10 @@ void AGRubyObject::markObject(AGRubyObject *o)
 {
   assert(o);
   if(o->mRubyObject)
-    rb_gc_mark(o->mRUBY);
+    {
+      //cdebug(typeid(*o).name()<<"   "<<o);
+      rb_gc_mark(o->mRUBY);
+    }
   else
     o->mark();
 }
@@ -55,6 +59,7 @@ void general_markfunc(void *ptr)
   if(!ptr)
     {
       cdebug("WARNING: a ptr==0 was given in general_markfunc!");
+      throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
       return; // ignore
     }
   assert(ptr);

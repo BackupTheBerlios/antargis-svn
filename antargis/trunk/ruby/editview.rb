@@ -35,7 +35,8 @@ class AntRubyEditView<GLApp
 		@size=3
 		$scene=getScene
 	
-		@layout=AGLayout.new(nil,loadFile("data/gui/layout/edit_layout.xml"))
+		@layout=AGLayout.new(nil)
+		@layout.loadXML(loadFile("data/gui/layout/edit_layout.xml"))
 		
 		puts self.methods.sort.join(" ")
 		puts "------------------------"
@@ -84,7 +85,8 @@ class AntRubyEditView<GLApp
 		#getMap.newMap(64,64)
 		#getMap.setHeight(-0.5)
 		if not @newDialog
-			@layout.addChild(@newDialog=AGLayout.new(@layout,loadFile("data/gui/layout/newdialog.xml")))
+			@layout.addChild(@newDialog=AGLayout.new(@layout))
+			@newDialog.loadXML(loadFile("data/gui/layout/newdialog.xml"))
 			addHandler(@newDialog.getChild("ok"),:sigClick,:eventNewMapEnd)
 			addHandler(@newDialog.getChild("cancel"),:sigClick,:eventNewMapEnd)
 			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:eventNewMapEnd)

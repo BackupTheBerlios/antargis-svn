@@ -57,7 +57,7 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-none ATM
+[H] segfaults when starting tutorial through menu
 
 [Gui/View]
 ------------------------------------------------------

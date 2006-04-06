@@ -57,7 +57,19 @@ class AntGameApp <AntRubyView
 		$map=@map
 		@finish="quit"
 
-		@layout=AGLayout.new(nil,loadFile("data/gui/layout/ant_layout.xml"))
+		#GC.disable
+		@layout=AGLayout.new(nil)
+		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
+
+		c=@layout.getChild("inventory")
+		puts "inventory:"
+		puts c
+
+		c=@layout.getChild("HeroBar0")
+		puts "HeroBar:",@layout
+		puts c
+
+
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:eventPause)
@@ -151,7 +163,8 @@ class AntGameApp <AntRubyView
 	end
 	
 	def initDebug
-		@debug=AGLayout.new(@layout,loadFile("debug.xml"))
+		@debug=AGLayout.new(@layout)
+		@debug.loadXML(loadFile("debug.xml"))
 		@layout.addChild(@debug)
 		addHandler(@debug.getChild("load"),:sigClick,:load)
 	end
@@ -250,7 +263,11 @@ class AntGameApp <AntRubyView
 	def setHeroName(name,num)
 		puts "setHeroName..."
 		@layout.getChild("HeroName#{num}").setText(name)
-		@layout.getChild("HeroBar#{num}").setVisible((name!=""))
+		puts num
+		c=@layout.getChild("HeroBar#{num}")
+		puts @layout
+		puts c
+		c.setVisible((name!=""))
 		puts "setHeroName!"
 	end
 	def setHeroEnergy(hero,num)

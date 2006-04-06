@@ -156,7 +156,10 @@ void HeightMap::loadBinary(const std::string &pName)
   BinaryFileIn is(pName);
   float f;
 
-  is>>mW>>mH;
+  Uint32 tw,th; // temporary sizes for AMD64
+  is>>tw>>th;
+  mW=tw;
+  mH=th;
 
   cdebug("mw:"<<mW<<"  "<<mH);
   cdebug("pos:"<<is.pos());
@@ -196,7 +199,7 @@ void HeightMap::saveBinary(const std::string &pName) const
   CTRACE;
   BinaryFileOut os(pName);
 
-  os<<mW<<mH;
+  os<<(Uint32)mW<<(Uint32)mH;
   cdebug("pos:"<<os.pos());
 
   for(size_t y=0;y<mH+2;y++)

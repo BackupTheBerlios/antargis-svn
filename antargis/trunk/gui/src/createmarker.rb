@@ -73,6 +73,7 @@ rubyClasses.each {|x,y|
 		file.puts "%exception "+x+"::"+x+" {"
 		file.puts "	$action"
 		file.puts "	result->mRUBY=self;"
+		#file.puts " std::cout<<self<<std::endl;"
 		file.puts "	result->mRubyObject=true;"
 		file.puts "}"
 		file.puts "%markfunc "+x+" \"general_markfunc\""

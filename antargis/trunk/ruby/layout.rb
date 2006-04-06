@@ -72,7 +72,8 @@ screen=AGScreenWidget.new
 #w2=AGButton.new(window1.getClient(),AGRect.new(10,10,40,30),"hallo")
 #window1.addChild(w2)
 
-l=AGLayout.new(screen,loadFile("buttonpanel.xml"))
+l=AGLayout.new(screen)
+l.loadXML(loadFile("buttonpanel.xml"))
 screen.addChild(l)
 l.gainFocus
 #l.getChild("Filename").gainFocus

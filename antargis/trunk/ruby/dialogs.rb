@@ -50,7 +50,8 @@ end
 class AntDialog<AGLayout
 	include AGHandler
 	def initialize(parent,filename,fade=true)
-		super(parent,loadFile(filename))
+		super(parent)
+		loadXML(loadFile(filename)) # it's here to call loadXML in constructor as "self" is already a ruby-object
 		addHandler(getChild("ok"),:sigClick,:eventOk)
 		if getChild("cancel")
 			addHandler(getChild("cancel"),:sigClick,:eventCancel)
@@ -447,7 +448,8 @@ $agBarCreator=AGBarCreator.new
 
 class LoadScreen<AGLayout
 	def initialize(p)
-		super(p,loadFile("data/gui/layout/loadscreen.xml"))
+		super(p)
+		loadXML(loadFile("data/gui/layout/loadscreen.xml")) # ok - see at AntDialog
 	end
 end
 

@@ -38,7 +38,8 @@ class AntGameApp < AntRubyEditView
 		super(sw,sh,nil) #AntRubyMap.new(64,64))
 		$app=self	
 		$map=@map=AntRubyMap.new(getScene,64,64)
-		@layout=AGLayout.new(@mainWidget,loadFile("data/gui/layout/editor.xml"))
+		@layout=AGLayout.new(@mainWidget)
+		@layout.loadXML(loadFile("data/gui/layout/editor.xml"))
 		@mainWidget.addChild(@layout)
 		#$screen=@layout
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)

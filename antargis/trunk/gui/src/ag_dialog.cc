@@ -21,9 +21,13 @@
 #include "ag_dialog.h"
 #include "ag_messageobject.h"
 
-AGDialog::AGDialog(AGWidget *pgParent,const std::string &pXMLData):
-  AGLayout(pgParent,pXMLData)
+AGDialog::AGDialog(AGWidget *pgParent):
+  AGLayout(pgParent)
 {
+}
+void AGDialog::loadXML(const std::string &pXMLData)
+{
+  AGLayout::loadXML(pXMLData);
   AGWidget *w;
   
   w=getChild("ok");

@@ -72,7 +72,8 @@ class CutSceneDisplay<AGApplication
 	#include AGHandler
 	def initialize(image,text)
 		super()
-		@layout=AGLayout.new(nil,loadFile("data/gui/layout/cutscene.xml"))
+		@layout=AGLayout.new(nil)
+		@layout.loadXML(loadFile("data/gui/layout/cutscene.xml"))
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("continue"),:sigClick,:eventQuit)
 		@text=@ctext=""

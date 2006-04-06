@@ -732,14 +732,11 @@ bool AGWidget::hasFocus(const AGWidget *pWidget)
 
 bool AGWidget::eventDragBy(AGEvent *event,const AGVector2 &pDiff)
 {
-  //  TRACE;
   return false;
 }
 
 bool AGWidget::getFocus() const
 {
-  //  CTRACE;
-  //  cdebug(hasFocus);
   return mHasFocus;
 }
 
@@ -764,7 +761,6 @@ bool AGWidget::visible() const
 
 AGWidget *AGWidget::getChild(const std::string &pName)
 {
-  //  cdebug(mName<<"  == "<<pName<<"? "<<typeid(*this).name());
   if(mName==pName)
     return this;
 
@@ -787,9 +783,10 @@ void AGWidget::setModal(bool pModal)
 
 void AGWidget::mark()
 {
-  //  CTRACE;
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
-    markObject(*i);
+    {
+      markObject(*i);
+    }
 
   // mark mToClear also - as it can be that they are still used on stack
   for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)

@@ -202,7 +202,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType)
     {
       std::multimap<float,AntEntity*>::iterator j=ents.begin();
       float nearest=j->first;
-      int r=rand()%std::min(ents.size(),5U);
+      int r=rand()%std::min((Uint32)ents.size(),5U);
       while(r>0 && (j->first<=nearest*1.3 || j->first<2000*2000))
         {
           j++;

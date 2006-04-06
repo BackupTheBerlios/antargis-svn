@@ -274,7 +274,7 @@ public:
 class SwigDirector_AGLayout : public AGLayout, public Swig::Director {
 
 public:
-    SwigDirector_AGLayout(VALUE self, AGWidget *pgParent, std::string const &pXMLData);
+    SwigDirector_AGLayout(VALUE self, AGWidget *pgParent);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -294,6 +294,7 @@ public:
     virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
+    virtual void loadXML(std::string const &pXMLData);
     virtual ~SwigDirector_AGLayout();
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseButtonDown(AGEvent *m);
@@ -325,7 +326,7 @@ public:
 class SwigDirector_AGDialog : public AGDialog, public Swig::Director {
 
 public:
-    SwigDirector_AGDialog(VALUE self, AGWidget *pgParent, std::string const &pXMLData);
+    SwigDirector_AGDialog(VALUE self, AGWidget *pgParent);
     virtual bool eventLostFocus();
     virtual bool eventGotFocus();
     virtual void useTextures();
@@ -345,6 +346,7 @@ public:
     virtual AGVector2 getMousePosition() const;
     virtual Uint8 getButtonState() const;
     virtual bool redraw() const;
+    virtual void loadXML(std::string const &pXMLData);
     virtual ~SwigDirector_AGDialog();
     virtual bool eventMouseButtonUp(AGEvent *m);
     virtual bool eventMouseButtonDown(AGEvent *m);
