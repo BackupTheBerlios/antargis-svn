@@ -135,6 +135,7 @@ void AntEntity::loadXML(const Node &node)
   else
     mMorale=1.0f;
   mAggression=toFloat(node.get("aggression"));
+  mAggression=std::min(3,std::max(1,int(mAggression))); //1,2,3 nothing else
 
   if(node.get("food")!="")
     mFood=toFloat(node.get("food"));

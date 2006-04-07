@@ -65,11 +65,11 @@
   </antHero>
   <antNewSheep aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="51.134" y="60.0258" z="2.67218"/>
-    <resource food="1"/>
+    <resource food="5"/>
   </antNewSheep>
   <antNewSheep aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="52.8702" y="46.7409" z="2.29813"/>
-    <resource food="1"/>
+    <resource food="5"/>
   </antNewSheep>
   <antSack aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="58.8702" y="44.7409" z="2.29813"/>
