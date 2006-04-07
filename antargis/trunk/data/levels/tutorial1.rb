@@ -10,7 +10,7 @@ class Level1<Level
 			start=StoryFlow.new("beginning")
 
 			start.push("Tutorial - Food","On this island you will learn that your troops need food and how to get it.")
-			start.push("Tutorial - Food","Your troops get always hungry. The current hunger of your hero can be seen in the brown bar at his portrait.")
+			start.push("Tutorial - Food","Your troops are constantly getting hungry. The current hunger of your hero can be seen in the brown bar at his portrait.")
 			
 			start.push("Tutorial - Food","You can view your troops state by selecting one and then inspecting the bars on the right.")
 			start.push("Tutorial - Food","The more you do the faster they get hungry.")

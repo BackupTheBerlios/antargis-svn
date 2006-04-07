@@ -35,7 +35,11 @@ class AntHLJob
 	def xmlName
 		self.class.to_s
 	end
-	def saveXML
+	def saveXML(n)
+		#FIXME
+	end
+	def loadXML(n)
+		#FIXME
 	end
 end
 

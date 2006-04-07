@@ -1,6 +1,10 @@
-ARTS
-==================================================
+TODO for 0.1.1:
+* Job-display
+* 3rd tutorial island that describes inventing
 
-[Packaging]
-------------------------------------------------------
-[L] installer for linux
+
+DONE:
+* inventing is done
+* one more tutorial-island
+* some bugs concerning AMD64 and FreeBSD were solved
+* a segfault was fixed
