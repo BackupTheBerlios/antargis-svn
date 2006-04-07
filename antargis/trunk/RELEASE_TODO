@@ -1,10 +1,12 @@
 TODO for 0.1.1:
-* 3rd tutorial island that describes inventing
+* some more work on birth1 and birth2 levels!!!
 
 
 DONE:
+* many more inventory items
 * inventing is done
-* one more tutorial-island
+* sword and shield is used when fighting
+* two more tutorial-islands
 * some bugs concerning AMD64 and FreeBSD were solved
 * a segfault was fixed
 * new job-display

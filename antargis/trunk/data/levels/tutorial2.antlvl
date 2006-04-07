@@ -55,6 +55,10 @@
     <position x="75.3675" y="25.6145" z="2.19586"/>
     <resource/>
   </antHero>
+  <antBoat aggression="1" appearance="hero" birthday="-2286.55173594538" energy="1" food="1" healSpeed="0.1" id="0" mode="" morale="1" onGround="false">
+    <position x="90.3675" y="25.6145" z="2.19586"/>
+    <resource/>
+  </antBoat>
   <antSack aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="73.8702" y="25.7409" z="2.29813"/>
     <resource food="50"/>

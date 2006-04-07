@@ -46,6 +46,7 @@ class AntEntity:public AGRubyObject
 
     AGVector3 mPos;   // 3d-position
     bool onGround;    // is this on the ground of the map?
+    bool onWater;
 
     Job *mJob;        // current job
 

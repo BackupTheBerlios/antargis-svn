@@ -49,6 +49,7 @@ void AntEntity::init()
   
   mShowOnMinimap=false;
   onGround=true;
+  onWater=false;
 
   mJob=0;
 
@@ -101,6 +102,7 @@ void AntEntity::saveXML(Node &node) const
     node.set("energy",toString(mEnergy));
     node.set("healSpeed",toString(mHealSpeed));
     node.set("onGround",toString(onGround));
+    node.set("onWater",toString(onWater));
     //    node.set("entityID",toString(getID()));
     node.set("name",getName());
     node.set("morale",toString(mMorale));
@@ -123,7 +125,8 @@ void AntEntity::loadXML(const Node &node)
   mEnergy=toFloat(node.get("energy"));
   mHealSpeed=toFloat(node.get("healSpeed"));
   onGround=toBool(node.get("onGround"));
-  assert(onGround);
+  onWater=toBool(node.get("onWater"));
+  //  assert(onGround);
   Node::NodeVector v=node.getChildren("position");
   Node::const_iterator i=v.begin();
   for(;i!=v.end();i++)
@@ -204,7 +207,7 @@ void AntEntity::setPos(const AGVector3 &p)
 void AntEntity::setPos(const AGVector2 &p)
 {
   mPos=getMap()->getPos(p);
-  onGround=true;
+  //  onGround=true;
   updatePos(mPos);
 }
 
@@ -327,6 +330,8 @@ void AntEntity::eventMapChanged()
 {
   if(onGround)
     mPos=getMap()->getPos(AGVector2(getPos2D()));
+  else if(onWater)
+    mPos=AGVector3(getPos2D()[0],getPos2D()[1],0);
   updatePos(mPos);
 }
 

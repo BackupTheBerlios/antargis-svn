@@ -96,14 +96,12 @@ no segfaults known
 ------------------------------------------------------
 [H] save current job :-(  high-level and low-level
 [H] decrease morale on men when inventing and not resting
-[H] display current job of hero (when active) - some image
 [H] disable controls when telling story (after "come here my friend")
 [H] play only sounds which are on screen
 [H] display houses on minimap
 [H] add swords/shields/bows and apply them when fighting
 [H] describe men's health and morale when inspecting house
 [H] tough breath when hero suffers / some info-box appearing
-[H] lose when hero dies and lose on defeat godrin
 [H] add boats
 [H] check aggression (fight) - enemies don't die when agg==3
 [M] fishing (fishes)

@@ -8,7 +8,7 @@ require 'ftools'
 $LDFLAGS+=" -L/usr/X11R6/lib "
 $CFLAGS+=" -I/usr/X11R6/include "
 
-version="0.1"
+version="0.1.1"
 
 begin File.mkpath(".deps")
 rescue 
