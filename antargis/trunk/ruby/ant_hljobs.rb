@@ -66,6 +66,9 @@ class AntHeroMoveJob<AntHLJob
 		@moveFinished=false
 		@movingMen=0
 	end
+	def image
+		"data/gui/move.png"
+	end
 	def getMen()
 		@hero.getMen
 	end
@@ -326,6 +329,10 @@ class AntHeroFightJob<AntHeroMoveJob
 		
 		return false
 	end
+	def image
+		"data/gui/sword.png"
+	end
+
 private
 	def initSitpositions
 		# gather sitting positions
@@ -342,6 +349,9 @@ class AntHeroFightAnimalJob<AntHeroMoveJob
 		@target=target
 		super(hero,0,target.getPos2D,1,false)
 		@finished=false
+	end
+	def image
+		"data/gui/sword.png"
 	end
 	def check(man)
 		if moveFinished
@@ -389,6 +399,10 @@ class AntHeroRecruitJob<AntHeroMoveJob
 		@restingMen=0
 		@wantedMen=@want
 		super(hero,0,target.getPos2D,4)
+	end
+
+	def image
+		"data/gui/recruit.png"
 	end
 
 	def check(man)
@@ -450,6 +464,14 @@ class AntHeroTakeJob<AntHeroMoveJob
 		@want=@men
 		@oldpos=nil
 		@takeStarted=false
+	end
+
+	def image
+		if @what=="food"
+			"data/gui/take_apple.png"
+		else
+			"data/gui/take_weapon.png"
+		end
 	end
 
 	def check(man)
@@ -532,6 +554,9 @@ class AntHeroInventJob<AntHeroMoveJob
 		@restype={}
 		@inventStarted=false
 		@productionRules=$productionRules # FIXME maybe exchange for different inventing types
+	end
+	def image
+		"data/gui/invent.png"
 	end
 	def check(man)
 		if moveFinished
@@ -670,6 +695,9 @@ class AntHeroRestJob<AntHLJob
 		@hero.newRestJob(time)
 		@spreadThings=false
 		@men=hero.getMen
+	end
+	def image
+		"data/gui/bed.png"
 	end
 	def check(man)
 		case man.getMode

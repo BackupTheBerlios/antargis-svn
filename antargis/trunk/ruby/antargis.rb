@@ -363,6 +363,7 @@ class AntGameApp <AntRubyView
 		@hero=h
 		inspectEntity(h)
 		@buttonpanel.setName(h.getName)
+		@buttonpanel.setHero(h)
 
 		for i in 0..2
 			if @layout.getChild("HeroName#{i}").getText==h.getName

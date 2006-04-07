@@ -192,17 +192,23 @@ class AntButtonPanel<AGWidget
 		$buttonPanel=self
 		clearHandlers
 		#@jobButtons=["doPoint","doMove","doFight","doRecruit","doDismiss","doInvent"]
-		@jobButtons=["doFight","doInvent","doRest","doDismiss","doDropFood","doDropWeapon"]
+		#@jobButtons=["doFight","doInvent","doRest","doDismiss","doDropFood","doDropWeapon"]
+		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon"]
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
 		@inited=false
 		@agg=1
 
 		addSignal("sigAggressionChanged")
 		addSignal("sigJobChanged")
+
+		@hero=nil
+	end
+	def setHero(h)
+		@hero=h
 	end
 	def initHandlers
 		getChild("doAgg0").setChecked(true)
-		getChild("doRest").setChecked(true)
+		#getChild("doRest").setChecked(true)
 		@job="doRest"
 		@jobButtons.each {|b|
 			c=getChild(b)
@@ -213,10 +219,10 @@ class AntButtonPanel<AGWidget
 			addHandler(c,:sigClick,:eventAggSelected)
 		}
 	end
-	def draw(p)
-		super(p)
+	def prepareDraw
+		updateJobView
+		super
 	end
-
 	def setName(n)
 		if getChild("heroName")
 			getChild("heroName").setText(n)
@@ -247,6 +253,14 @@ class AntButtonPanel<AGWidget
 	def setPointing
 		@job="doPoint"
 		getChild("doFight").setChecked(true)
+	end
+private
+	def updateJobView
+		i=@hero.getJob.image
+		if @job!=i
+			@job=i
+			getChild("jobView").setTexture(getTextureCache.get(i))
+		end
 	end
 end
 

@@ -118,7 +118,7 @@ class AntNewTree<AntMyEntity
 	
 	private
 	def setupMesh
-		setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),@angle))
 	end
 end
 

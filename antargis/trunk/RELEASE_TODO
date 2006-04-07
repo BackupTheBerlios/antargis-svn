@@ -1,5 +1,4 @@
 TODO for 0.1.1:
-* Job-display
 * 3rd tutorial island that describes inventing
 
 
@@ -8,3 +7,4 @@ DONE:
 * one more tutorial-island
 * some bugs concerning AMD64 and FreeBSD were solved
 * a segfault was fixed
+* new job-display

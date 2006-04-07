@@ -21,6 +21,14 @@
 			</screen>
 		</failscene>
 	</level>
+	<level file="data/levels/tutorial2.antlvl">
+		<failscene>
+			<screen>
+				<image filename="data/gui/map1.png"/>
+				<text text="You lost! Better luck next time!"/>
+			</screen>
+		</failscene>
+	</level>
 	<cutscene>
 		<screen>
 			<image filename="data/gui/map1.png"/>

@@ -157,7 +157,9 @@ class AntBoss<AntMyEntity
 			@player.remove(self)
 		end
 		@player=owner.getPlayer
-		@player.add(self)
+		if @player
+			@player.add(self)
+		end
 		getMap.eventOwnerChanged(self)
 	end
 	def getOwner
