@@ -33,9 +33,11 @@ function view()
 	$b.=p("As this game is still in heavy development there are no packages or tarballs yet. But you can try the current state in svn.");
 	$b.=p("For SVN-instruction please have a look at $svn");
 	
-	$b.=p("You have to check out 'antargis' and 'antargisgui':");
-	$b.=p("svn checkout svn://svn.berlios.de/antargis/antargisgui/trunk antargisgui","code");
 	$b.=p("svn checkout svn://svn.berlios.de/antargis/antargis/trunk antargis","code");
+
+	$b.=p("If you want to check antargisgui BoA's gui library, then check out this way:");
+	$b.=p("svn checkout svn://svn.berlios.de/antargis/antargis/trunk/gui antargisgui","code");
+
 
 	$b.=h3("I appreciate any helpful feedback, but please note, that this game is far from being stable or even playable.");
 

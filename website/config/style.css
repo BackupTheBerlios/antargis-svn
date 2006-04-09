@@ -98,6 +98,8 @@ a:hover
 /* menues */
 .notice
 {
+	float:top;
+	clear:both;
 	background-image:url(../pics/wood64.jpg);
 	position:relative;
 	border-right-width:0px;
@@ -158,9 +160,9 @@ a:hover
 /*	padding:1%;*/
 	position:relative;
 	background-color:#DDDDDD;
-		max-width:50em;
+	max-width:50em;
 	margin:10px auto;
-
+	clear:both;
 }
 .screenshotBody
 {
@@ -265,4 +267,45 @@ div.thumbs
 	padding:2px;
 	margin-left:10px;
 	margin-right:5px;
+}
+
+.news
+{
+	width:32em;
+	float:right;
+	clear:right;
+	margin-top:20px;
+	margin-left:20px;
+}
+
+.infos
+{
+	margin-top:40px;
+}
+
+hr
+{
+	border-top:1px solid gray;
+	border-bottom:0px solid blue;
+	margin-right:5px;
+	margin-top:2px;
+}
+.news
+{
+	display:inline;
+	font-size:110%;
+	margin-left:10px;
+	margin-top:3px;
+	margin-bottom:3px;
+}
+.newsdate
+{
+	display:inline;
+	font-size:70%;
+	margin-left:10px;
+}
+
+ul
+{
+	list-style-image:url(../pics/minimap_hero.gif);
 }
