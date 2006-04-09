@@ -7,9 +7,9 @@ function view()
 	$version="0.1";
 
 	$b.=p("Get the current release here:");
-	$l=anchor("http://developer.berlios.de/project/showfiles.php?group_id=3474","Download at berlios.de"); //http://developer.berlios.de/project/showfiles.php?group_id=3474");
+	$l=anchor("http://developer.berlios.de/project/showfiles.php?group_id=3474","Download a release at berlios.de");
         $b.=p($l,"link");
-	$b.=p("Further instructions can be found below or in the README and INSTALL file within the package.");
+	$b.=p("Further instructions can be found below or in the <a href='http://svn.berlios.de/svnroot/repos/antargis/antargis/trunk/README'>README</a> and <a href='http://svn.berlios.de/svnroot/repos/antargis/antargis/trunk/INSTALL'>INSTALL</a> file within the package.");
 
 /*
 	$b.=p("This page contains a simple instruction on how to run 'Battles of Antargis'");
