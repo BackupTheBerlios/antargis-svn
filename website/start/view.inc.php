@@ -30,6 +30,7 @@ function view()
 	$desc.=p("The game is currently in heavy development and taking up pace. The current features include:
 <ul>
 	<li>A short tutorial giving you an introduction to the gameplay</li>
+	<li>Beginning of a real campaign</li>
 </ul>");
 
 
