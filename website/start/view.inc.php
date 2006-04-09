@@ -42,6 +42,12 @@ function view()
 	
 	$body.=topNews();
 
+	$body.="<div class='infos'>
+<h3>Help wanted</h3>
+<p>If you are an artist or a developer and have some free time, then <a href='http://antargis.berlios.de/phpBB2/viewtopic.php?t=3'>join us</a> makeing up a great game!</p>
+</div>\n";
+
+
 	$body.="<div class='infos'>";
 	$body.=h3("Licensing/Copying");
 	
