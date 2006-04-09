@@ -11,13 +11,10 @@ function view()
 	$b.=p("Subscribe to list here : $list");
 
 	$b.=p("&nbsp;");
-	$b.=p("The Battles of Antargis team is:");
-	$b.=h3("Design/Development:");
+	$b.=p("Information on who the Battles of Antargis team is can be found here: <a href='http://antargis.berlios.de/wiki/index.php/People'>People</a>.");
+	$b.="<br><br>\n";
 	$b.=p("David Kamphausen david dot kamphausen at web dot de");
 	$b.=p("Oststraﬂe 31a, 42277 Wuppertal");
-	$b.=h3("Webdesign:");
-	$b.=p("Martin Kamphausen");
-	$b.=p("David Kamphausen");
 	
 	return menuSystem($b);
 }

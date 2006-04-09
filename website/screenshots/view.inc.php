@@ -54,6 +54,6 @@ function view()
 		if($sid>=0 && $sid<sizeof($screenies))
 			$b.=div("<div>$comment</div>".image($screenies[$sid].".jpg"),"screenshot");
 	}
-	return menuSystem($b);
+	return menuSystem($b,"screenshotBody");
 }
 ?>

@@ -1,12 +1,12 @@
 body
 {
-	font-family:Helvetica;
+	font-family:Times New Roman;
 	color:#000000;
 	background-color:#000000;
 	margin:0px;
 }
 
-a,img
+img
 {
 	border-style:none;
 	color:inherit;
@@ -19,13 +19,49 @@ a,img
 
 a
 {
-	text-decoration:none;
+	/*text-decoration:none;*/
+	border-style:none;
+	color:#3333AA;
+	font-style:italic;
+	margin:0px;
+	padding:0px;
+}
+h1
+{
+	font-size:140%;
+	margin:2px;
+	margin-right:2px;
+	width:99,8%;
+	padding:2px;
+	color:#000000;
+	border-style:solid;
+	border-top-width:1px;
+	border-bottom-width:1px;
+	border-color:#773300; /*bd6c04;*/
+	border-left-width:1px;
+	border-right-width:1px;
+	background-color:#a76a23;
+	background-image:url(../pics/wood64.jpg);
+}
+h3
+{
+	font-size:110%;
+	margin-left:10px;
+	margin-top:3px;
+	margin-bottom:3px;
+}
+p
+{
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:3px;
+	margin-bottom:3px;
 }
 
 a:hover
 {
 	/*font-weight:bold;*/
-	color:#FFFFFF; /*bd6c04;*/
+	color:#0000AA; /*bd6c04;*/
 }
 
 /* menues */
@@ -44,9 +80,19 @@ a:hover
 	background-color:#a76a23; /*333333;*/
 	border-color:#eca345; /*3b2306;*/
 	color:#000000; /*FFFFFF;*/
-	font-family:Helvetica;
+	/*font-family:Helvetica;*/
 	text-align:center;
 	background-image:url(../pics/wood64.jpg);
+}
+
+.menu a
+{
+	text-decoration:none;
+	color:inherit;
+}
+.menu a:hover
+{
+	color:#660000;
 }
 
 /* menues */
@@ -112,7 +158,23 @@ a:hover
 /*	padding:1%;*/
 	position:relative;
 	background-color:#DDDDDD;
-	
+		max-width:50em;
+	margin:10px auto;
+
+}
+.screenshotBody
+{
+	border-color:#bd6c04;
+/*	border-color:#888888;*/
+	border-style:solid;
+	border-width:2px;
+	left:2%;
+	width:96%;
+	margin-top:2%;
+/*	padding:1%;*/
+	position:relative;
+	background-color:#DDDDDD;
+
 }
 
 table.body
@@ -128,36 +190,6 @@ table.body
 	color:#FFFFFF;
 }
 
-h1
-{
-	font-size:140%;
-	margin:2px;
-	margin-right:2px;
-	width:99,8%;
-	padding:2px;
-	color:#000000;
-	border-style:solid;
-	border-top-width:1px;
-	border-bottom-width:1px;
-	border-color:#bd6c04;
-	border-left-width:0px;
-	border-right-width:0px;
-	background-color:#a76a23;
-	background-image:url(../pics/wood64.jpg);
-}
-h3
-{
-	font-size:110%;
-	margin-left:10px;
-	margin-top:3px;
-	margin-bottom:3px;
-}
-p
-{
-	margin-left:20px;
-	margin-top:3px;
-	margin-bottom:3px;
-}
 .host
 {
 	color:#FFFFFF;
@@ -220,4 +252,17 @@ div.thumbs
 	clear:both;
 	margin-right:50px;
 	
+}
+
+.screenshotPreview
+{
+	width:130px;
+	text-align:center;
+	float:right;
+	border-width:1px;
+	border-style:solid;
+	border-color:#888888;
+	padding:2px;
+	margin-left:10px;
+	margin-right:5px;
 }

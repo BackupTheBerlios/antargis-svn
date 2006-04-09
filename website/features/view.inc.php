@@ -9,7 +9,7 @@ function view()
 		<li>animated milkshape models (MilkShape ASCII-importer)</li>
 		<li>static models (Wavefront obj-importer)</li>
 		<li>shadowmap based shadows (PSMs work in progress)</li> 
-		<li>fustrum culling</li>
+		<li>frustum culling</li>
 		<li>shader support</li>
 	</ul>";
 
@@ -41,11 +41,11 @@ function view()
 		<li>networking with chat</li>
 	</ul>";
 	
-	$b.=h3("Editor");
+	/*$b.=h3("Editor");
 	$b.="<ul>
 		<li>define triggers</li>
 		<li>place splats/decals on map</li>
-	</ul>";
+	</ul>";*/
 	return menuSystem($b);
 }
 

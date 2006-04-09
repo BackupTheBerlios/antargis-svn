@@ -76,7 +76,7 @@
 			return $c;//table(tr($c),"full_width");
 	}
 	
-	function menuSystem($body)
+	function menuSystem($body,$bodyclass="body")
 	{
 		global $menu;
 		
@@ -89,7 +89,7 @@
 		
 		$notice="(C) 2005 by the Battles of Antargis team";
 		
-		return div($title,"title").div($menu,"menu").div($body,"body").div($notice,"notice").div($host,"host");
+		return div($title,"title").div($menu,"menu").div($body,$bodyclass).div($notice,"notice").div($host,"host");
 	}
 
 ?>
