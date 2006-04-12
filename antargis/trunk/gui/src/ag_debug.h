@@ -109,6 +109,7 @@ private:
 #define CTRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(((void*)this)))
 
 void agRaise(const std::string &s);
+void setRubyRaising(bool flag);
 
 #ifndef __WIN32__
 #undef assert

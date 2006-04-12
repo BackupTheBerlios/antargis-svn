@@ -75,11 +75,21 @@ std::string replace(const std::string &s,const std::string &a,const std::string 
   return str;
 }
 
+static bool gRubyRaising=true;
 void agRaise(const std::string &s)
 {
   cdebug("assertiong failed:"<<s);
-  rb_raise(rb_eRuntimeError,s.c_str(),"");
+  if(gRubyRaising)
+    rb_raise(rb_eRuntimeError,s.c_str(),"");
+  else
+    throw std::runtime_error(s);
 }
+
+void setRubyRaising(bool flag)
+{
+  gRubyRaising=flag;
+}
+
 
 void agAssertGL(std::string s)
 {

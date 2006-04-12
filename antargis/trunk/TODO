@@ -87,6 +87,8 @@ no segfaults known
 
 [Graphics]
 ------------------------------------------------------
+[H] add memory checks for texture memory
+[H] add possibility to downscale textures ??
 [L] make shadows work on other platforms too?
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
 		There is a problem, too when zoomed in, as it's the current default.

@@ -1,6 +1,11 @@
 TODO for 0.1.1:
 * some more work on birth1 and birth2 levels!!!
 
+TESTS:
+* test tutorial
+* test loading/saving
+* test birth-campaign
+BUILD ON windows
 
 DONE:
 * many more inventory items
