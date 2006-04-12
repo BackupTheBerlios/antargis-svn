@@ -256,7 +256,11 @@ class AntButtonPanel<AGWidget
 	end
 private
 	def updateJobView
-		i=@hero.getJob.image
+		if @hero.getJob
+			i=@hero.getJob.image
+		else
+			i="data/gui/bed.png"
+		end
 		if @job!=i
 			@job=i
 			getChild("jobView").setTexture(getTextureCache.get(i))

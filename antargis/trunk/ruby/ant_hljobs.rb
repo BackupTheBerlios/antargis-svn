@@ -590,12 +590,16 @@ class AntHeroInventJob<AntHeroMoveJob
 					man.collectResource(@restype[man][0])
 					man.setMode("brought")
 				when "brought"
-					man.setMode("to_invent")
+					man.setMode("after_brought")
 					man.newRestJob(1)
 					# take all natural resources - but not food and weapons - otherwise men starve!
 					myResources.each{|r|
 						@target.resource.take(man.resource,r)
 					}
+				when "after_brought"
+					fpos=@hero.getSitFormation(man)
+					man.newMoveJob(0,fpos,0)
+					man.setMode("invent_torest")
 				when "to_invent"  # do some inventing
 					@target.incSmoke
 					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
