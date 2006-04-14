@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<layout name="GameLayout">
+  <!-- main game layout -->
+	<table cols="2" rows="1" name="SideBar">
+		<colsize col="1" fixed="216"/>
+<!--		<antRubyView col="0" row="0" name="mainView"/>-->
+
+
+		<table col="1" row="0" cols="1" rows="5">
+			<rowsize row="0" fixed="90"/>
+			<rowsize row="1" fixed="160"/>
+			<!--<rowsize row="2" fixed="216"/>-->
+			<rowsize row="3" fixed="216"/>
+			<rowsize row="4" fixed="50"/>
+<!--			<rowsize row="6" fixed="10"/>-->
+			
+			<!-- heroes -->
+			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops">
+				<table col="0" row="0" cols="3" rows="1">
+					<radio col="0" row="0" name="hero0">
+						<table cols="1" rows="3" name="Hero0">
+							<rowsize row="1" fixed="12"/>
+							<rowsize row="2" fixed="25"/>
+							<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/none.png"/>
+							<antEnergy name="HeroBar0" col="0" row="1" hborder="5"/>
+							<text name="HeroName0" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+						</table>
+					</radio>
+					<radio col="1" row="0" name="hero1">
+						<table cols="1" rows="3">
+							<rowsize row="1" fixed="9"/>
+							<rowsize row="2" fixed="25"/>
+							<image name="HeroImage1" col="0" row="0" filename="data/gui/portraits/none.png"/>
+							<antEnergy name="HeroBar1" col="0" row="1" hborder="5"/>
+							<text name="HeroName1" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+						</table>
+					</radio>
+					<radio col="2" row="0" name="hero2">
+						<table cols="1" rows="3">
+							<rowsize row="1" fixed="9"/>
+							<rowsize row="2" fixed="25"/>
+							<image name="HeroImage2" col="0" row="0" filename="data/gui/portraits/none.png"/>
+							<antEnergy name="HeroBar2" col="0" row="1" hborder="5"/>
+							<text name="HeroName2" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+						</table>
+					</radio>
+				</table>
+			</radioGroup>
+			
+			
+			<!-- button panel -->
+			<cell col="0" row="1">
+				<!--<frame border="button.border.normal" visible="true">-->
+					<layout filename="data/gui/layout/hero_buttons.xml"/>
+				<!--</frame>-->
+			</cell>
+			<cell col="0" row="2">
+				<frame border="button.border.normal" visible="true" background="button.background.disabled">
+					<antInventory name="inventory">
+						<table cols="1" rows="4">
+							<rowsize row="0" fixed="25"/>
+							<rowsize row="1" fixed="45"/>
+							<rowsize row="2" fixed="25"/>
+							<cell col="0" row="0">
+								<table cols="4" rows="1">
+									<colsize col="0" fixed="16"/>
+									<colsize col="1" fixed="16"/>
+									<colsize col="3" fixed="32"/>
+									<image col="0" row="0" filename="data/gui/crown.png" name="friend_true"/>
+									<image col="1" row="0" filename="data/gui/enemy.png" name="enemy_true"/>
+									<image col="0" row="0" filename="data/gui/crown_bw.png" name="friend_false"/>
+									<image col="1" row="0" filename="data/gui/enemy_bw.png" name="enemy_false"/>
+									<cell col="2" row="0">
+										<text caption="" name="invTitle" enabled="false" align="center" font="invTitle.font"/>
+									</cell>
+									<antEnergy name="InvBar" col="3" row="0" hborder="0" vborder="5"/>
+								</table>
+							</cell>
+							<cell col="0" row="1">
+								<frame width="3">
+									<table cols="5" rows="1">
+										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
+										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
+										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
+										<button  col="3" row="0" name="doInvent" caption-image="data/gui/invent.png" tooltip="Invent"/>
+										<button  col="4" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
+									</table>
+								</frame>
+							</cell>
+							<cell col="0" row="2">
+								<text name="minion" caption="Minion of Godrin" font="inventory.font"/>
+							</cell>
+							<cell col="0" row="3">
+								<table cols="6" rows="5">
+									<!--<text col="0" row="0" caption="" align="left" font="inventory.font"/>-->
+									<!--<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
+									<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
+									<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
+									<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
+									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>-->
+									<image col="0" row="0" filename="data/gui/man.png" tooltip="Troops"/>
+									<image col="0" row="1" filename="data/gui/apple2.png" tooltip="Food"/>
+									<image col="0" row="2" filename="data/gui/shield.png" tooltip="Shields"/>
+									<image col="0" row="3" filename="data/gui/sword.png" tooltip="Swords"/>
+									<image col="0" row="4" filename="data/gui/tools.png" tooltip="Tools"/>
+									
+									<!--<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>-->
+									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
+									<text col="1" row="1" caption="0" align="right" name="food" font="inventory.font"/>
+									<text col="1" row="2" caption="0" align="right" name="shield" font="inventory.font"/>
+									<text col="1" row="3" caption="0" align="right" name="sword" font="inventory.font"/>
+									<text col="1" row="4" caption="0" align="right" name="tool" font="inventory.font"/>
+									
+									<image col="2" row="0" filename="data/gui/coal.png" tooltip="Coal"/>
+									<image col="2" row="1" filename="data/gui/ore.png" tooltip="Ore"/>
+									<image col="2" row="2" filename="data/gui/gold.png" tooltip="Gold"/>
+									<image col="2" row="3" filename="data/gui/stones.png" tooltip="Stone"/>
+									<image col="2" row="4" filename="data/gui/wood.png" tooltip="Wood"/>
+									
+									<text col="3" row="0" caption="0" align="right" name="coal" font="inventory.font"/>
+									<text col="3" row="1" caption="0" align="right" name="ore" font="inventory.font"/>
+									<text col="3" row="2" caption="0" align="right" name="gold" font="inventory.font"/>
+									<text col="3" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
+									<text col="3" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
+									
+									<image col="4" row="0" filename="data/gui/rowboat.png" tooltip="Boat"/>
+									<image col="4" row="1" filename="data/gui/bow.png" tooltip="Bow"/>
+									<image col="4" row="2" filename="data/gui/steel.png" tooltip="Steel"/>
+									<image col="4" row="3" filename="data/gui/fish_rod.png" tooltip="Fishing rod"/>
+									
+									<text col="5" row="0" caption="0" align="right" name="boat" font="inventory.font"/>
+									<text col="5" row="1" caption="0" align="right" name="bow" font="inventory.font"/>
+									<text col="5" row="2" caption="0" align="right" name="steel" font="inventory.font"/>
+									<text col="5" row="3" caption="0" align="right" name="rod" font="inventory.font"/>
+									
+									
+								</table>
+							</cell>
+						</table>
+						<frame background="wood.background" name="shutter"/>
+					</antInventory>
+				</frame>
+			</cell>
+			<cell col="0" row="3">
+				<frame border="button.border.normal" visible="true">
+					<miniMap name="miniMap"/>
+				</frame>
+			</cell>
+			<!-- system buttons -->
+			<cell col="0" row="4">
+				<table cols="4" rows="1">
+					<button col="0" row="0" name="pause" caption-image="data/gui/pause.png" tooltip="Pause the game"/>
+					<button col="1" row="0" name="stats" caption-image="data/gui/stats.png" tooltip="Statistics" enabled="false"/>
+					<button col="2" row="0" name="options" caption-image="data/gui/options.png" tooltip="Options..."/>
+					<button col="3" row="0" name="quit" caption-image="data/gui/door.png" tooltip="Abort this mission"/>
+				</table>
+			</cell>
+		</table>
+	</table>
+</layout>

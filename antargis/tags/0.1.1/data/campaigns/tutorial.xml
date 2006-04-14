@@ -1,0 +1,38 @@
+<campaign image="data/gui/map1.png" name="Tutorial" description="Here you learn how to play the game.">
+	<level file="data/levels/tutorial0.antlvl">
+		<failscene>
+			<screen>
+				<image filename="data/gui/map1.png"/>
+				<text text="You lost! Better luck next time!"/>
+			</screen>
+		</failscene>
+	</level>
+	<cutscene>
+		<screen>
+			<image filename="data/gui/map1.png"/>
+			<text text="Yay! You finished the first level!"/>
+		</screen>
+	</cutscene>
+	<level file="data/levels/tutorial1.antlvl">
+		<failscene>
+			<screen>
+				<image filename="data/gui/map1.png"/>
+				<text text="You lost! Better luck next time!"/>
+			</screen>
+		</failscene>
+	</level>
+	<level file="data/levels/tutorial2.antlvl">
+		<failscene>
+			<screen>
+				<image filename="data/gui/map1.png"/>
+				<text text="You lost! Better luck next time!"/>
+			</screen>
+		</failscene>
+	</level>
+	<cutscene>
+		<screen>
+			<image filename="data/gui/map1.png"/>
+			<text text="Congratulations! You finished the tutorial campaign!"/>
+		</screen>
+	</cutscene>
+</campaign>

@@ -1,0 +1,149 @@
+Short Information:
+Problems are marked by priority. L is for low, M for medium and H high.
+In special cases it can be Very High (=VH).
+
+
+[General]
+------------------------------------------------------
+[VH] Add coding conventions for ruby/c++ and ensure them!
+
+
+
+WEBSITE & PR
+==================================================
+
+
+ARTS
+==================================================
+
+[Arts - Graphics - 3D]
+------------------------------------------------------
+[L] improve meshes for trees, bushes, men
+[M] animate hero, druid and smith
+[L] animate wolf
+[L] add meshes for fish, pigeon
+[L] add female meshes
+
+[Arts - Graphics - 2D]
+------------------------------------------------------
+[M] tools-images: pick,axe, hark
+[M] weapon-images: bow
+[L] paint new portraits
+[L] paint campaign-images
+
+
+[Story]
+------------------------------------------------------
+[VL] Intro cutscene:
+	- flashback on some victory-scene:
+		- look own from some tower upon an army
+		- look back from behind some warriors holding up some weapons
+	- scene of betrayal - some dark person stands above some king (in a hall)
+	- game begins
+[L] druids:
+	- use woods and lakes as holy places
+	- druids must learn about 20 years
+	
+
+[Music]
+------------------------------------------------------
+[M] menu music
+[M] won and lost jingle
+
+[Leveldesign]
+------------------------------------------------------
+[M] A Hero is born.
+	- scene with some bodies lying around - a broken carriage
+	- a cave for the druid
+
+
+[[Development]]
+==========================================================
+
+[Segfaults]
+------------------------------------------------------
+no segfaults known
+
+[Gui/View]
+------------------------------------------------------
+[H] fix cut tooltips. There is a bug in AGEdit.
+[L] add Framebuffer objects for paint to texture.
+[L] fix AGMenu*. This is broken, but not used ATM.
+[M] fix paint errors on text-elements (wrap-texture). Look at AGFontEngine::*.
+		set Texture to GL_CLAMP_TO_EDGE or something like this.
+[H] add campaign-loading functionality to load-dialog in-game  TRICKY
+		This is a real problem, because the current AGApplication is called by the campaign-code.
+		So the AntApp must be finished and the surrounding campaign-code, too. After this the
+		loaded campaign must be started.
+[L] rewrite AGEdit - without AGEditLines
+		In AGEdit2 is a beginning of a rewrite. But it's a kind of crappy approach. AGEdit2 should
+		be able to 
+		1) render quickly 
+		2) handle selections with mouse or SHIFT+CURSOR
+		3) copy/paste
+		4) insert images
+[L] fix decals (use clamp-to-edge and original cells)
+
+
+[Graphics]
+------------------------------------------------------
+[H] add memory checks for texture memory
+[H] add possibility to downscale textures ??
+[L] make shadows work on other platforms too?
+[L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
+		There is a problem, too when zoomed in, as it's the current default.
+[L] check if TSM (trapezoidal shadow maps) are any good
+[L] snow,rain which falls down. Maybe as a simple overlay?
+[L] bushes, plants, high grass, flowers. Thats means there should be possibility to include
+		several imposters into one mesh and render them effiently.
+[VL] seasons - snow,spring... Exchange or fade terrain textures.
+[L] Fog of war - overlay darkness/fog
+[L] animated trees / falling trees
+
+[Game]
+------------------------------------------------------
+[H] save current job :-(  high-level and low-level
+[H] decrease morale on men when inventing and not resting
+[H] disable controls when telling story (after "come here my friend")
+[H] play only sounds which are on screen
+[H] display houses on minimap
+[H] add swords/shields/bows and apply them when fighting
+[H] describe men's health and morale when inspecting house
+[H] tough breath when hero suffers / some info-box appearing
+[H] add boats
+[H] check aggression (fight) - enemies don't die when agg==3
+[M] fishing (fishes)
+[M] add "eat-action", "sleep-action" "special??"
+[L] add females
+[L] add aggression-leveling of non-hero bosses
+[L] computer-player only attacks when stock is used up
+[L] story-telling:
+	- history function
+	- browsing facility (scene=>number(person)=>text)
+[L] add wolf, fish, bird
+[L] implement loyalty ??? !!! this must be discussed or delayed.
+	a) too many fights => lower
+	b) fight won => up !!
+	c) enough food => up
+	d) rest => up
+	e) bad weather => lower
+	f) if loyality if too low => some men desert and go to next HouseEntity (additional heroes raise a new player!)
+[VL] very bad situation => raise heroes with a new player (rebellion)
+
+[Scripting]
+------------------------------------------------------
+[H] finish first level of birth-campaign
+[H] add food-descriptions to tutorial1-level
+[H] add some single maps
+
+[Editor]
+------------------------------------------------------
+[L] Trigger definition
+[L] cleanup gui - remove unused elements
+[L] fix selecting group. When you switch the "tabs", the selected action should be changed, too
+
+[Packaging / Building]
+------------------------------------------------------
+[L] installer for linux. maybe some autopackage or .debs?
+[L] remove libSGE dependency
+[M] swig.* is not built automatically when headers are changed
