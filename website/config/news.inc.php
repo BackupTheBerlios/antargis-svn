@@ -3,7 +3,7 @@ function news($date,$title,$body="")
 {
 	//return h3($date." - ".$title).p($body);
 
-	return "<div class='news'>$title</div><div class='newsdate'>$date</div>".p($body);
+	return "<div class='newstitle'>$title</div><div class='newsdate'>$date</div>".p($body);
 
 }
 

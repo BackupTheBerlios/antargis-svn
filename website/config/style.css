@@ -268,7 +268,7 @@ div.thumbs
 	margin-left:10px;
 	margin-right:5px;
 }
-
+/*
 .news
 {
 	width:32em;
@@ -276,7 +276,7 @@ div.thumbs
 	clear:right;
 	margin-top:20px;
 	margin-left:20px;
-}
+}*/
 
 .infos
 {
@@ -290,10 +290,16 @@ hr
 	margin-right:5px;
 	margin-top:2px;
 }
+.newstitle
+{
+	font-size:120%;
+}
 .news
 {
-	display:inline;
-	font-size:110%;
+	width:32em;
+	float:right;
+	/*display:inline;*/
+	font-size:100%;
 	margin-left:10px;
 	margin-top:3px;
 	margin-bottom:3px;
