@@ -11,6 +11,9 @@ function getNews($toponly=false)
 {
 	$b="";
 
+	$b.=news("2006-04-14","Version 0.1.1 out","Today the version 0.1.1 is released, which contains mostly bugfixes. The most outstanding new feature is inventing. You are now able to build swords and shields.");
+
+
 	$b.=news("2006-04-09","Website update &amp; current state","The website was updated. Apart from this several new things were added in SVN:
 <ul>
 	<li>many more inventory items</li>
