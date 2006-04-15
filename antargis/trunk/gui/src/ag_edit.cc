@@ -797,6 +797,9 @@ void AGEdit::setFont(const AGFont &pFont)
 
 void AGEdit::setText(const std::string &pText)
 {
+  if(getText()==pText)
+    return;
+
   queryRedraw();
 
   clear();

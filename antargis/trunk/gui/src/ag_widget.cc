@@ -819,6 +819,9 @@ bool AGWidget::checkRedraw() const
 
 void AGWidget::prepareDraw()
 {
+  if(!mVisible)
+    return;
+
   if(mCache)
     {
       if(checkRedraw() || !mCache->hasTexture())

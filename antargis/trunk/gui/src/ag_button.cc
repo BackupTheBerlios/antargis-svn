@@ -226,9 +226,12 @@ std::string AGButton::getCaption() const
 
 void AGButton::setEnabled(bool pEnable)
 {
-  mEnabled=pEnable;
-  setState(mState); // check
-  queryRedraw();
+  if(mEnabled!=pEnable)
+    {
+      mEnabled=pEnable;
+      setState(mState); // check
+      queryRedraw();
+    }
 }
 
 void AGButton::setTheme(const std::string &pTheme)

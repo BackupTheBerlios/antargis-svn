@@ -32,9 +32,9 @@ class AntEnergy<AGWidget
 		updateValues
 		super
 	end
-	def redraw
-		@doRedraw
-	end
+	#def redraw
+	#	@doRedraw
+	#end
 
 	def draw(p)
 		super
@@ -72,9 +72,9 @@ private
 	end
 	def set(n,v)
 		o=@values[n]
-		if ((o-v).abs>0.1) or (o!=n and (o==0 or o==1))
+		if ((o-v).abs>0.1) #or (o!=n and (o==0 or o==1))
 			queryRedraw
-			@doRedraw=true
+			#@doRedraw=true
 			@values[n]=v
 		end
 	end

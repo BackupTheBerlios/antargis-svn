@@ -30,6 +30,15 @@ def windows
 	return $mwindows
 end
 
+def getDestDir
+	ARGV.each{|l|
+		if l=~/DESTDIR=/
+			return l.sub("DESTDIR=","")
+		end
+	}
+	return "/usr"
+end
+
 $failed_libs=[]
 def test_library(x)
 	if not have_library(x)
@@ -97,6 +106,7 @@ else
 		puts "| Please install the corresponding packages and the development packages."
 		puts "| On Debian this would be something like:"
 		puts "| apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf1.2-dev libsdl-mixer1.2-dev ruby1.8-dev libsdl-sge-dev"
+		puts "| Note: libz is the famous zlib :-)"
 		puts "----------------------------------------------------------------------"
 		exit
 	end
@@ -231,10 +241,64 @@ task :clean do
 	sh "rm -r -f docs/api"
 end
 
-task :install do
+def mkdir(d)
+	begin
+		#puts "mkdir:#{d}"
+		Dir.mkdir(d) #sh "test -e #{d} || mkdir #{d}"
+	rescue
+	end
+end
+def cpdir(dir,distdir)
+	mkdir(distdir+"/"+dir)
+	Dir[dir+"/*"].each{|f|
+		if (f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/.ogg/
+		elsif f=~/\.so/ and not windows
+		elsif File.ftype(f)=="file"
+			File.cp(f,"#{distdir}/#{f}")
+		end
+	}
+end
+
+task :install => "libantargis.so" do
 	begin
 		puts "PROBLEM: This is not supported ATM"
 		#sh $INSTALL_PROG+" libantargis.so "+File.join(Config::CONFIG['sitearchdir'],"libantargis.so")
+		destdir=getDestDir
+		bindir=destdir+"/bin"
+		sharedir=destdir+"/share/antargis"
+		#copy everything to sharedir
+
+		mkdir(bindir)
+		mkdir(destdir+"/share")
+		mkdir(sharedir)
+		
+		dirs=`find -type d`.split("\n").collect{|x|x.sub("./","")}
+		dirs=dirs.select{|x|(not x=~/\.svn/)}.select{|x|(not x=~/\./)}
+		dirs=dirs.select{|x|x!="Output" && x!="screenies" && (not x=~/^models/)}
+	
+		dirs.each{|dir|
+			cpdir(dir,sharedir)
+		}
+		# cp base dir
+		cpdir(".",sharedir)
+
+		File.cp("libantargis.so",sharedir+"/libantargis.so")
+		f=File.open(bindir+"/antargis","w")
+		f.puts('#!/bin/sh
+		if test "`echo "$0"|sed -e "s/\/.*//"`" == "" ; then
+			d=`dirname $0`
+		else
+			d=`dirname $(pwd)/$0`
+		fi
+		p=$(dirname $d)
+		s=$(echo "$p/share/antargis")
+		c=$(pwd)
+		cd $s
+		/usr/bin/env ruby run.rb
+		cd $c
+')
+		f.close
+
 	rescue
 		puts "-----------------------------------------"
 		puts "PROBLEM: maybe you have to get root ?"
@@ -243,22 +307,6 @@ task :install do
 	end
 end
 
-def mkdir(d)
-	begin
-		Dir.mkdir(d) #sh "test -e #{d} || mkdir #{d}"
-	rescue
-	end
-end
-def cpdir(dir,distdir)
-	mkdir(distdir+"/"+dir)
-	Dir[dir+"/*"].each{|f|
-		if f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/
-		elsif f=~/\.so/ and not windows
-		elsif File.ftype(f)=="file"
-			File.cp(f,"#{distdir}/#{f}")
-		end
-	}
-end
 
 task :dist => :test do
 	distdir="antargis-#{version}"

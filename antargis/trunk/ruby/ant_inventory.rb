@@ -49,6 +49,7 @@ class AntInventory<AGWidget
 		updateInspection
 	end
 	def prepareDraw
+		#return
 		checkFriend
 		updateInspection
 		super
