@@ -31,12 +31,14 @@ def windows
 end
 
 def getDestDir
+	d="/usr"
 	ARGV.each{|l|
 		if l=~/DESTDIR=/
-			return l.sub("DESTDIR=","")
+			d=l.sub("DESTDIR=","")
 		end
 	}
-	return "/usr"
+	puts "DestDir:"+d
+	return d
 end
 
 $failed_libs=[]
@@ -254,7 +256,7 @@ def cpdir(dir,distdir)
 	Dir[dir+"/*"].each{|f|
 		if (f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/.ogg/
 		elsif f=~/\.so/ and not windows
-		elsif f=~/Antargis.*package/
+		elsif f=~/Antargis.*package/ or f=~/autopackage/
 		elsif File.ftype(f)=="file"
 			File.cp(f,"#{distdir}/#{f}")
 		end
@@ -311,6 +313,7 @@ task :install => "libantargis.so" do
 		cd $c
 ')
 		f.close
+		`chmod 755 #{bindir}/antargis`
 
 	rescue
 		puts "-----------------------------------------"
