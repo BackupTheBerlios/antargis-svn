@@ -50,6 +50,9 @@ require @opengl.org/opengl 1.4
 require @gnu.org/libstdc++ 3
 require @zlib.org/zlib 1.0
 require @ruby-lang.org/ruby 1.8
+#require @xiph.org/libogg
+#require @xiph.org/libvorbis
+
 
 [Install]
 # Put your installation script here
