@@ -1,0 +1,64 @@
+# -*-shell-script-*-
+
+[Meta]
+RootName: @antargis.berlios.de/Antargis:$SOFTWAREVERSION
+DisplayName: Battles of Antargis
+ShortName: Antargis
+Maintainer: David Kamphausen <david.kamphausen@web.de>
+Packager: David Kamphausen <david.kamphausen@web.de>
+Summary: An open-source medieval realtime-strategy game.
+URL: http://antargis.berlios.de/
+License: GNU General Public License, Version 2
+SoftwareVersion: 0.1.1
+AutopackageTarget: 1.0
+
+# Only uncomment InterfaceVersion if your package exposes interfaces to other software,
+# for instance if it includes DSOs or python/perl modules. See the developer guide for more info,
+# or ask on autopackage-dev if you don't understand interface versioning in autopackage.
+#
+# InterfaceVersion: 0.0
+
+[Description]
+Put long & detailed description here.
+
+[BuildPrepare]
+#APKG_BUILD_SKIP_MAKE=1
+#APKG_BUILD_ROOT=0
+#prepareBuild --enable-binreloc
+APBUILD_STATIC="stdc++"
+old_build_root="$build_root"  #prepareBuild changes build_root :-/
+APKG_BUILD_SKIP_MAKE=1
+APKG_BUILD_ROOT=0
+prepareBuild --enable-binreloc
+rake
+rake install DESTDIR="$old_build_root/usr/local"
+
+[BuildUnprepare]
+unprepareBuild
+
+[Imports]
+echo '*' | import
+
+[Prepare]
+# Dependency checking
+require @libsdl.org/sdl 1.2
+require @libsdl.org/sdl_image 1.2
+require @libsdl.org/sdl_mixer 1.2
+require @libsdl.org/sge 1.2
+require @libsdl.org/sdl_ttf 2.0
+require @opengl.org/opengl 1.4
+require @gnu.org/libstdc++ 3
+require @zlib.org/zlib 1.0
+require @ruby-lang.org/ruby 1.8
+#require @xiph.org/libogg
+#require @xiph.org/libvorbis
+
+
+[Install]
+# Put your installation script here
+installExe bin/*
+installData share/*
+
+[Uninstall]
+# Usually just the following line is enough to uninstall everything
+uninstallFromLog
