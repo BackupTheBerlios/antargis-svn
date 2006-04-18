@@ -22,7 +22,7 @@
 #include "ag_glsurface.h"
 #include "ag_debug.h"
 #include "ag_rendercontext.h"
-#include "sge.h"
+#include "ag_sgeexport.h"
 #include "ag_surfacemanager.h"
 #include <stdexcept>
 

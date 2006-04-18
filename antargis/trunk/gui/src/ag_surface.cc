@@ -26,7 +26,7 @@
 #include "ag_debug.h"
 #include "ag_draw.h"
 #include "privates.h"
-#include "sge.h"
+#include "ag_sgeexport.h"
 #include "ag_kill.h"
 #include "ag_png.h"
 #include "ag_glsurface.h"

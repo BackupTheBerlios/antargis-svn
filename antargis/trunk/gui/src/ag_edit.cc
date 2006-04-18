@@ -23,7 +23,7 @@
 #include "ag_theme.h"
 #include "ag_debug.h"
 #include "ag_menu.h"
-#include "sge.h"
+#include "ag_sgeexport.h"
 #include "ag_glsurface.h"
 
 

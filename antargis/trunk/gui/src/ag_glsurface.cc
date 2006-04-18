@@ -32,7 +32,7 @@
 #include <set>
 #include <map>
 #include <vector>
-#include <sge.h>
+#include "ag_sgeexport.h"
 #include "SDL_image.h"
 
 #include "ag_rendercontext.h"

@@ -25,7 +25,7 @@
 #include <SDL.h>
 
 #include "ag_draw.h"
-#include "sge.h"
+#include "ag_sgeexport.h"
 
 void AGDrawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {

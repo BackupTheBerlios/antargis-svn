@@ -31,12 +31,14 @@ def windows
 end
 
 def getDestDir
+	d="/usr"
 	ARGV.each{|l|
 		if l=~/DESTDIR=/
-			return l.sub("DESTDIR=","")
+			d=l.sub("DESTDIR=","")
 		end
 	}
-	return "/usr"
+	puts "DestDir:"+d
+	return d
 end
 
 $failed_libs=[]
@@ -82,7 +84,7 @@ else
 	end
 	test_library('SDL')
 	test_library('SDL_ttf')
-	test_library('SGE')
+	#test_library('SGE')
 	if windows
 		test_library('GLU32')
 	else
@@ -246,6 +248,7 @@ def mkdir(d)
 		#puts "mkdir:#{d}"
 		Dir.mkdir(d) #sh "test -e #{d} || mkdir #{d}"
 	rescue
+		#puts "failed"
 	end
 end
 def cpdir(dir,distdir)
@@ -253,6 +256,7 @@ def cpdir(dir,distdir)
 	Dir[dir+"/*"].each{|f|
 		if (f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/.ogg/
 		elsif f=~/\.so/ and not windows
+		elsif f=~/Antargis.*package/ or f=~/autopackage/
 		elsif File.ftype(f)=="file"
 			File.cp(f,"#{distdir}/#{f}")
 		end
@@ -261,12 +265,23 @@ end
 
 task :install => "libantargis.so" do
 	begin
-		puts "PROBLEM: This is not supported ATM"
+		#puts "PROBLEM: This is not supported ATM"
 		#sh $INSTALL_PROG+" libantargis.so "+File.join(Config::CONFIG['sitearchdir'],"libantargis.so")
 		destdir=getDestDir
 		bindir=destdir+"/bin"
 		sharedir=destdir+"/share/antargis"
 		#copy everything to sharedir
+
+		md=""
+		destdir.split("/").each{|d|
+			md+="/"+d
+			begin
+				#puts "try #{md}"
+				Dir.mkdir(md)
+			rescue
+				#puts "muh"
+			end
+		}
 
 		mkdir(bindir)
 		mkdir(destdir+"/share")
@@ -298,6 +313,7 @@ task :install => "libantargis.so" do
 		cd $c
 ')
 		f.close
+		`chmod 755 #{bindir}/antargis`
 
 	rescue
 		puts "-----------------------------------------"

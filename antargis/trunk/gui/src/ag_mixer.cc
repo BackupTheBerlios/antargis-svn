@@ -32,6 +32,8 @@ Mix_Music *mMusic=0;
 bool mMusicFinished=false;
 bool mMusicInited=false;
 
+bool mNoSound=false;
+
 const int cSoundChannels=16;
 
 std::map<std::string,Mix_Chunk*> mSounds;
@@ -71,7 +73,8 @@ void initSoundEngine()
       mSoundMutex=new AGMutex;
       if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
 	printf("Mix_OpenAudio: %s\n", Mix_GetError());
-	exit(2);
+	mNoSound=true;
+	return;
       }
       mMusic=0;
       
@@ -92,6 +95,8 @@ void initSoundEngine()
 
 void closeSoundEngine()
 {
+  if(mNoSound)
+    return;
   if(mMusicInited)
     {
       if(mMusic)
@@ -113,6 +118,8 @@ AGSound::~AGSound()
 
 bool AGSound::playMp3(const std::string &pFilename)
 {
+  if(mNoSound)
+    return false;
   if(mMusic)
     {
       return false;
@@ -150,6 +157,8 @@ bool AGSound::playMp3(const std::string &pFilename)
 
 bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
 {
+  if(mNoSound)
+    return false;
   // must decrypt and write to disc :-(((
   std::string file=loadFile(pFilename);
 
@@ -162,6 +171,8 @@ bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
 
 void AGSound::stopMp3()
 {
+  if(mNoSound)
+    return;
   if(mMusic)
     {
       Mix_HaltMusic();
@@ -177,6 +188,8 @@ AGSound::AGSound():AGWidget(0,AGRect2(0,0,0,0)),sigMp3Finished(this,"sigMp3Finis
 
 void AGSound::checkFinished()
 {
+  if(mNoSound)
+    return;
   if(mMusicInited)
     if(mMusicFinished)
       {
@@ -191,12 +204,16 @@ void AGSound::checkFinished()
 
 void AGSound::fadeOutMusic(int ms)
 {
+  if(mNoSound)
+    return;
   assert(ms>0);
   Mix_FadeOutMusic(ms);
 }
 
 void AGSound::volumeSound(float v)
 {
+  if(mNoSound)
+    return;
   initSoundEngine();
   int mv=((int)(v*MIX_MAX_VOLUME));
   mv=std::min(std::max(0,mv),MIX_MAX_VOLUME);
@@ -206,6 +223,8 @@ void AGSound::volumeSound(float v)
 }
 void AGSound::volumeMusic(float v)
 {
+  if(mNoSound)
+    return;
   initSoundEngine();
   Mix_VolumeMusic(((int)v*MIX_MAX_VOLUME));
 }
@@ -214,6 +233,8 @@ void AGSound::volumeMusic(float v)
 
 void AGSound::playWave(const std::string &pFilename,float volume)
 {
+  if(mNoSound)
+    return;
   initSoundEngine();
   if(volume<0)
     volume=soundVol;
@@ -234,6 +255,8 @@ void AGSound::playWave(const std::string &pFilename,float volume)
 
 int AGSound::loopPlay(const std::string &pFilename,float volume)
 {
+  if(mNoSound)
+    return false;
   initSoundEngine();
   if(volume<0)
     volume=soundVol;
@@ -253,6 +276,8 @@ int AGSound::loopPlay(const std::string &pFilename,float volume)
 }
 void AGSound::stopChannel(int i,int ms)
 {
+  if(mNoSound)
+    return;
   if(i>=0 && i<cSoundChannels)
     Mix_FadeOutChannel(i,ms);
   channelDone(i);
@@ -260,6 +285,8 @@ void AGSound::stopChannel(int i,int ms)
 
 void AGSound::stopAllChannels(int ms)
 {
+  if(mNoSound)
+    return;
   for(int i=0;i<cSoundChannels;i++)
     if(mFreeChannels.find(i)==mFreeChannels.end())
       stopChannel(i,ms);
@@ -269,6 +296,8 @@ void AGSound::stopAllChannels(int ms)
 
 void AGSound::loadWave(const std::string &pFilename)
 {
+  if(mNoSound)
+    return;
   std::map<std::string,Mix_Chunk*>::iterator i=mSounds.find(pFilename);
   if(i!=mSounds.end())
     return;

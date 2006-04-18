@@ -26,7 +26,7 @@
 #include "ag_fontengine.h"
 
 #include "SDL_image.h"
-#include <sge.h>
+#include "ag_sgeexport.h"
 #include <math.h>
 
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height);

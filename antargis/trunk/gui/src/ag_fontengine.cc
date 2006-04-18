@@ -23,7 +23,7 @@
 #include "ag_kill.h"
 #include "ag_texture.h"
 #include "ag_fs.h"
-#include "sge.h"
+#include "ag_sgeexport.h"
 
 #include <SDL_ttf.h>
 

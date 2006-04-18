@@ -19,3 +19,5 @@ Copyright (C) 2005 Isaac Clerencia
 
 For more authors of images please have a look at their website.
 
+The gui/src/sge* files were taken from libSGE. Have a look at these files or at http://www.etek.chalmers.se/~e8cal1/sge/ for AUTHOR's information.
+LibSGE is published under LGPL, which corresponds to AntargisGUILib.
