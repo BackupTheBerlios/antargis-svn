@@ -36,6 +36,7 @@ void Smoke::setMaxTime(float m)
 
 void Smoke::advance(float time)
 {
+  //  return;
   // advance pieces
   for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
     {
@@ -93,6 +94,7 @@ void Smoke::advance(float time)
 
 void Smoke::draw()
 {
+  //  return;
   /*
   //  return;
   glDisable(GL_ALPHA_TEST);

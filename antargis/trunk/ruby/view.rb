@@ -65,6 +65,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 			@names=[]
 			heroes.each{|hero|
 				name=hero.getName
+				#FIXME: readd this
 				@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
 			}
 			@names.each{|n|
@@ -303,6 +304,7 @@ class AntNameDisplay<AGWidget
 			addChild(@energyWidget)
 			@energyWidget.setHero(hero)
 		end
+		@fonts={true=>getTheme.getFont("heroName.font"),false=>getTheme.getFont("enemyHero.font")}
 		setCaching(true)
 	end
 
@@ -316,12 +318,10 @@ class AntNameDisplay<AGWidget
 	end
 
 	def prepareDraw
-		if @hero.getPlayer==$map.getPlayer
-			@font=getTheme.getFont("heroName.font")
-		else
-			@font=getTheme.getFont("enemyHero.font")
-		end
+		@font=@fonts[@hero.getPlayer==$map.getPlayer]
 		if @font!=@oldfont
+			puts "font changed"
+			@oldfont=@font
 			@textWidget.setFont(@font)
 			queryRedraw
 		end
