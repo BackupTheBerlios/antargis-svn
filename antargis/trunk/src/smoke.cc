@@ -3,7 +3,24 @@
 #include "smoke.h"
 #include "ag_texturecache.h"
 #include "ag_rendercontext.h"
+#include "ag_main.h"
 #include "map.h"
+#include "ant_config.h"
+
+bool gSmoke;
+long lastSmokeTest;
+
+// small caching fct, so that lookup is not that long???
+bool smokeEnabled()
+{
+  long ts=getMain()->getTicks();
+  if(getMain()->getTicks()-lastSmokeTest>1000)
+    {
+      gSmoke=getConfig()->get("particleEffects")!="false";
+      lastSmokeTest=ts;
+    }
+  return gSmoke;
+}
 
 float randf()
 {
@@ -36,6 +53,8 @@ void Smoke::setMaxTime(float m)
 
 void Smoke::advance(float time)
 {
+  if(!smokeEnabled())
+    return;
   //  return;
   // advance pieces
   for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
@@ -94,6 +113,8 @@ void Smoke::advance(float time)
 
 void Smoke::draw()
 {
+  if(!smokeEnabled())
+    return;
   //  return;
   /*
   //  return;

@@ -289,6 +289,8 @@ class AntVideoOptionsDialog<AntDialog
 		super(parent,"data/gui/layout/dialog_video_options.xml")
 		addHandler(getChild("fullscreen"),:sigClick,:eventFullscreen)
 		addHandler(getChild("shadow"),:sigClick,:eventShadow)
+		addHandler(getChild("animation"),:sigClick,:eventAnimation)
+		addHandler(getChild("particle"),:sigClick,:eventParticle)
 		addHandler(getChild("1024"),:sigClick,:event1024)
 		addHandler(getChild("1280"),:sigClick,:event1280)
 		addHandler(getChild("1400"),:sigClick,:event1400)
@@ -302,6 +304,12 @@ class AntVideoOptionsDialog<AntDialog
 	def eventFullscreen
 	  getMain.toggleFull
 		return true
+	end
+	def eventParticle
+		toggleConfig("particleEffects")
+	end
+	def eventAnimation
+		toggleConfig("animationType")
 	end
 	def eventShadow
 		s=$app.getScene
@@ -328,6 +336,14 @@ class AntVideoOptionsDialog<AntDialog
 	def setRes(w,h)
 		getMain.changeRes(w,h,32,getMain.fullscreen,true)
 		return true
+	end
+private
+	def toggleConfig(n)
+		if getConfig.get(n)=="false"
+			getConfig.set(n,"true")
+		else
+			getConfig.set(n,"false")
+		end
 	end
 end
 

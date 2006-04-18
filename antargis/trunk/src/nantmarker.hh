@@ -2036,6 +2036,11 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,AnimMeshData,b);
  $result=*b;
 }
+%typemap(directorout) AntConfig {
+ AntConfig *b;
+ Data_Get_Struct($input,AntConfig,b);
+ $result=*b;
+}
 %typemap(directorout) AntEntity {
  AntEntity *b;
  Data_Get_Struct($input,AntEntity,b);

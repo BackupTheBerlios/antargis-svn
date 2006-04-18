@@ -43,6 +43,7 @@ class AGMain:public AGRubyObject
   void setCaption(const std::string &pCaption);
 
   bool fullscreen() const;
+  long getTicks() const;
  protected:
   virtual void mark();
 

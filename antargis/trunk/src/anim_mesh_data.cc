@@ -11,13 +11,11 @@ void inverseTranslate(AGVector3 &v, const AGMatrix4 &m );
 
 bool useAnimation()
 {
-  return true;
-  return getConfig()->get("animationType")!="none";
+  return getConfig()->get("animationType")!="false";
 }
 
 bool useShaderAnimation()
 {
-  //return false;
   return glslOk();
 }
 

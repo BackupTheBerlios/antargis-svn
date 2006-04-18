@@ -71,6 +71,7 @@
 #include "terrain.h"
 #include "vertex_array.h"
 #include "water.h"
+#include "ant_config.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
 %include "../gui/src/ag_rubyobj.h"
@@ -144,6 +145,7 @@
 %include "terrain.h"
 %include "vertex_array.h"
 %include "water.h"
+%include "ant_config.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 #endif
 #endif

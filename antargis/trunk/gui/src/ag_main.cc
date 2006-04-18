@@ -228,6 +228,11 @@ bool AGMain::fullscreen() const
   return fullScreen;
 }
 
+long AGMain::getTicks() const
+{
+  return SDL_GetTicks();
+}
+
 
 void AGMain::mark()
 {
