@@ -225,10 +225,17 @@ void Scene::calcShadowMap()
   
   NodeList l=getCurrentNodes();
 
+  Nodes sorted;
+  std::copy(l.begin(),l.end(),std::back_inserter(sorted));
+
+  sort(sorted.begin(),sorted.end(),SortOrder());
+  //  sort(sorted.begin(),sorted.end(),SortDistance(mCamera.getCameraPosition().dim3()));
+
+
   //  AntFrustum lFrustum=mCamera.getLightProjection().getFrustum();
   AntFrustum lFrustum=mCamera.getCameraProjection().getFrustum();
   
-  for(NodeList::iterator i=l.begin();i!=l.end();i++)
+  for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
     {
       //      if((*i)->bbox().collides(frustum) && (*i)->visible())
       if(lFrustum.collides((*i)->bbox()) && (*i)->visible())
