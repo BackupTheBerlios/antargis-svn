@@ -23,6 +23,10 @@
 #include "ag_texture.h"
 #include "ag_surfacemanager.h"
 
+#define SLOWCONTEXT
+//#define TEXTURE_TEST
+
+
 AGRenderContext gCurrentContext;
 
 AGRenderContext::AGRenderContext():
@@ -85,7 +89,7 @@ AGRenderContext *AGRenderContext::getCurrent()
 void AGRenderContext::begin()
 {
 //return;
-#ifndef SLOWCONTEXT
+#ifdef SLOWCONTEXT
   if(mColor)
     {
       glEnable(GL_COLOR_MATERIAL);
@@ -282,6 +286,7 @@ void AGRenderContext::begin()
 	    {
 	      if(my->is3d())
 		{
+#ifndef TEXTURE_TEST
 		  if(!last->is3d())
 		    {
 		      glDisable(GL_TEXTURE_2D);
@@ -289,9 +294,20 @@ void AGRenderContext::begin()
 		    }
 		  if(last->id()!=my->id())
 		    glBindTexture(GL_TEXTURE_3D,my->id());
+#else
+		  if(!last->is3d())
+		    {
+		      glDisable(GL_TEXTURE_2D);
+		      glEnable(GL_TEXTURE_3D);
+
+		      if(last->id()!=my->id())
+			glBindTexture(GL_TEXTURE_3D,my->id());
+		    }
+#endif
 		}
 	      else
 		{
+#ifndef TEXTURE_TEST
 		  if(last->is3d())
 		    {
 		      glDisable(GL_TEXTURE_3D);
@@ -301,6 +317,16 @@ void AGRenderContext::begin()
 		    {
 		      glBindTexture(GL_TEXTURE_2D,my->id());
 		    }
+#else
+		  if(last->is3d())
+		    {
+		      glDisable(GL_TEXTURE_3D);
+		      glEnable(GL_TEXTURE_2D);
+		      
+		      if(last->id()!=my->id())
+			glBindTexture(GL_TEXTURE_2D,my->id());
+		    }
+#endif
 		}
 	    }
 	}
