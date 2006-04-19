@@ -228,6 +228,8 @@ class AntEntity:public AGRubyObject
 
     virtual void animationEvent(const std::string &pName);
 
+    void heal(float pTime);
+
   private:
     void init();
     void updatePos(const AGVector3 &p);

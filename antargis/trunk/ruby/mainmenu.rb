@@ -40,6 +40,7 @@ class AntMenuApp <AGApplication
 		setupCampaign
 		setupOptions
 		setupLoadMenu
+		setupSingle
 		# hie all menues
 		#hideAll
 		# and show mainmenu
@@ -69,6 +70,7 @@ class AntMenuApp <AGApplication
 		addHandler(@mainMenu.getChild("quit"),:sigClick,:eventQuit)
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)
 		addHandler(@mainMenu.getChild("campaign"),:sigClick,:eventCampaign)
+		addHandler(@mainMenu.getChild("single"),:sigClick,:eventSingle)
 		addHandler(@mainMenu.getChild("load"),:sigClick,:eventLoadGame)
 		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
 	end
@@ -100,6 +102,14 @@ class AntMenuApp <AGApplication
 		@creditsMenu.loadXML(loadFile("data/gui/layout/credits.xml"))
 		@menues.push(@creditsMenu)
 		addHandler(@creditsMenu.getChild("exit"),:sigClick,:eventExit)
+	end
+
+	def setupSingle
+		@singleMenu=AGLayout.new($screen)
+		@singleMenu.loadXML(loadFile("data/gui/layout/single.xml"))
+		@menues.push(@singleMenu)
+		addHandler(@singleMenu.getChild("exit"),:sigClick,:eventExit)
+		addHandler(@singleMenu.getChild("start"),:sigClick,:eventStart)
 	end
 	
 	def setupCampaign
@@ -164,6 +174,11 @@ class AntMenuApp <AGApplication
 		setMainWidget(@creditsMenu)
 		return true
 	end
+	def eventSingle(e)
+		setMainWidget(@singleMenu)
+		return true
+	end
+
 	def eventCampaign(e)
 		setMainWidget(@campaignMenu)
 		return true

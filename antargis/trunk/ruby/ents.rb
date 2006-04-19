@@ -112,6 +112,18 @@ class AntMyEntity<AntEntity
 # 	def eventNoJob
 # 		newRestJob(1000) # rest for infty
 # 	end
+
+	def playSound(name,minDiff=0.5)
+		innerVolSize=9 # size of circle around camera-middle with max volume
+		outerVolSize=25 # size circle around camera describing volume descend
+		d=(($app.getScene.getCamera.dim2-getPos2D).length-innerVolSize)
+		vol=1
+		if d>0
+			vol=[(outerVolSize-d)/outerVolSize,0].max
+		end
+		puts "d:#{d} vol:#{vol}"
+		playSoundGlobal(name,vol,minDiff)
+	end
 end
 
 

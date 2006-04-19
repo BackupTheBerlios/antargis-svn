@@ -3,8 +3,11 @@
   <!-- main game layout -->
 	<table cols="2" rows="1" name="SideBar">
 		<colsize col="1" fixed="216"/>
-<!--		<antRubyView col="0" row="0" name="mainView"/>-->
 
+		<cell col="0" row="0">
+			<table cols="1" rows="1" name="GameBox">
+			</table>
+		</cell>
 
 		<table col="1" row="0" cols="1" rows="5">
 			<rowsize row="0" fixed="90"/>
@@ -156,5 +159,9 @@
 				</table>
 			</cell>
 		</table>
+	</table>
+	<table cols="1" rows="2">
+		<rowsize row="1" fixed="30"/>
+		<text name="statusBar" col="0" row="1" caption="FPS:0" cache="true"/>
 	</table>
 </layout>

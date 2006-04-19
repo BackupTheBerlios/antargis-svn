@@ -72,7 +72,8 @@ private
 	end
 	def set(n,v)
 		o=@values[n]
-		if ((o-v).abs>0.1) #or (o!=n and (o==0 or o==1))
+		if ((o-v).abs>0.1) or (o!=v and (v==0 or v==1))
+			puts "redraw #{o} #{n}"
 			queryRedraw
 			#@doRedraw=true
 			@values[n]=v

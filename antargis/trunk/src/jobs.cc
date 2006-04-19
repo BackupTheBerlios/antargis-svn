@@ -356,7 +356,8 @@ RestJob::~RestJob()
 }
 void RestJob::move(AntEntity *e,float ptime)
 {
-  e->incMorale(ptime);
+  e->incMorale(std::min(ptime,mTime));
+  e->heal(std::min(ptime,mTime));
   mTime-=ptime;
   if(mTime<0)
     jobFinished(e);

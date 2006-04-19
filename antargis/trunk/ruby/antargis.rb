@@ -61,6 +61,8 @@ class AntGameApp <AntRubyView
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
 
+		@statusBar=@layout.getChild("statusBar")
+
 		c=@layout.getChild("inventory")
 		puts "inventory:"
 		puts c
@@ -109,6 +111,9 @@ class AntGameApp <AntRubyView
 		addHandler(@buttonpanel,:sigJobChanged,:eventHeroJob)
 
 		setupHeroDisplay(true)
+
+		@infobox=nil
+
 	end
 
 	def eventHeroJob(e)
@@ -202,11 +207,14 @@ class AntGameApp <AntRubyView
 			@fc=0 
 			@elaps=0
 		end
-		if @fc>30 then
-			puts "FPS:"+(@fc/@elaps).to_s
+		if @fc>14 then
+			fps=sprintf("%3.0f",@fc/@elaps)
+			puts "FPS:"+fps
+			@statusBar.setText("FPS:#{fps}")
 			puts "Tris:"+getScene.getTriangles.to_s
 			@fc=0
 			@elaps=0
+			GC.start # call GC often, so that it doesn't run soo long when called otherwise
 		end
 		@fc+=1
 		@elaps+=time
@@ -214,6 +222,7 @@ class AntGameApp <AntRubyView
 #		GC.start
 		getScene.advance(time)
 		#delay(10)
+		checkHeroEnergy
 		return true
 	end
 	
@@ -317,7 +326,29 @@ class AntGameApp <AntRubyView
 			
 		end
 		puts "setupHeroDisplay!"
+
+		checkHeroEnergy
+
 	end
+
+	def checkHeroEnergy
+		name=nil
+		getMap.getPlayer.getHeroes.select{|h|
+			if h.class==AntHero
+				#puts h.getEnergy
+				if h.getEnergy<0.3
+					name=h.getName
+				end
+			end
+		}
+		if @infobox==nil and name!=nil
+			@layout.addChild(@infobox=AntInfoBox.new(@layout,_("Your hero {1} suffers.",name)))
+		elsif @infobox!=nil and name==nil
+			@infobox.close
+			@infobox=nil
+		end
+	end
+
 	def inspectEntity(e)
 		if @inspect
 			if @inspect.is_a?(AntBoss)

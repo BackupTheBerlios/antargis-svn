@@ -329,3 +329,11 @@ class AntNameDisplay<AGWidget
 	end
 	private
 end
+
+class AntInfoBox<AGLayout
+	def initialize(p,n)
+		super(p)
+		loadXML(loadFile("data/gui/layout/infobox.xml"))
+		getChild("infotext").setText(n)
+	end
+end

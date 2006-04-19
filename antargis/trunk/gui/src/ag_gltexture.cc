@@ -24,6 +24,9 @@
 #include "ag_rendercontext.h"
 #include "ag_debug.h"
 
+static size_t gUsedTexMemory=0;
+
+
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false)
 {
   getSurfaceManager()->registerMe(this);
@@ -32,6 +35,10 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
 
   glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0, GL_RGBA,
                GL_UNSIGNED_BYTE, 0);
+
+  gUsedTexMemory+=w*h*4;
+
+  //  cdebug("used memory:"<<gUsedTexMemory);
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -47,6 +54,9 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D)
   glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
                GL_UNSIGNED_BYTE, 0);
 
+  gUsedTexMemory+=w*h*d*4;
+  //  cdebug("used memory:"<<gUsedTexMemory);
+
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   assertGL;
@@ -55,6 +65,12 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D)
 AGGLTexture::~AGGLTexture()
 {
   glDeleteTextures(1,&mID);
+
+  if(m3d)
+    gUsedTexMemory-=w*h*d*4;
+  else
+    gUsedTexMemory-=w*h*4;
+
   assertGL;
   getSurfaceManager()->deregisterMe(this);
 }

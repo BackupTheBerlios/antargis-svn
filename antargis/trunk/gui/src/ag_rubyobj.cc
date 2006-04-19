@@ -43,8 +43,8 @@ void AGRubyObject::markObject(AGRubyObject *o)
       //cdebug(typeid(*o).name()<<"   "<<o);
       rb_gc_mark(o->mRUBY);
     }
-  else
-    o->mark();
+  //  else
+  o->mark(); // call this directly
 }
 
 void AGRubyObject::clear()

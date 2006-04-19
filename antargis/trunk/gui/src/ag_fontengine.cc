@@ -247,7 +247,8 @@ void embossSurface(AGSurface &s,float depth=1.0f)
       {
 	float v=b[y*w+x];
 
-	v/=3.0;
+	v/=3;//2.0;
+	v+=0.2;
 
 	AGColor c=s.getPixel(x,y);
 
@@ -296,6 +297,12 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
       else
 	TTF_SetFontStyle(f,TTF_STYLE_NORMAL);
       
+      /*      if(pFont.getEmbossed())
+	{
+	  ns=TTF_RenderText_Shaded(f,pText.c_str(),pFont.getColor());
+	  
+	}
+	else*/
       ns=TTF_RenderText_Blended(f,pText.c_str(),pFont.getColor());
 
       assert(ns);

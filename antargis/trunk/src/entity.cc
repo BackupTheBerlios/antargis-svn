@@ -56,7 +56,7 @@ void AntEntity::init()
   mVirtualY=40;
 
   mEnergy=1.0;
-  mHealSpeed=0.1;
+  mHealSpeed=0.07;
 
   mMorale=1.0;
   mMoraleHeal=0.05;
@@ -289,7 +289,7 @@ void AntEntity::move(float pTime)
 	  }
       if(!isStarving())
 	{
-	  mEnergy+=pTime*getHealSpeed();
+	  mEnergy+=pTime*getHealSpeed()*0.2; // very slow healing when doin something
 	  if(mEnergy>1.0)
 	    mEnergy=1.0;
 	}
@@ -302,6 +302,16 @@ void AntEntity::move(float pTime)
   else
     eventNoJob();
 
+}
+
+void AntEntity::heal(float pTime)
+{
+  if(!isStarving())
+    {
+      mEnergy+=pTime*getHealSpeed()*0.8; // only rest til 1.0
+      if(mEnergy>1.0)
+	mEnergy=1.0;
+    }
 }
 
 void AntEntity::incMorale(float pTime)

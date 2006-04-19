@@ -31,9 +31,9 @@ class AntBoss<AntMyEntity
 		@men=[]
 		@job=nil
 		@createMen=0
+		@selected=@hovered=false
 		setProvide("boss",true)
 		setupMeshBoss
-		@selected=@hovered=false
 	end
 	def loadXML(node)
 		super(node)
@@ -185,6 +185,8 @@ class AntBoss<AntMyEntity
 	
 	def hovered=(s)
 		@hovered=s
+		updateRingColor
+		return
 		#puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @hovered and not @selected
@@ -193,6 +195,8 @@ class AntBoss<AntMyEntity
 	end
 	def selected=(s)
 		@selected=s
+		updateRingColor
+		return
 		puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @selected
@@ -219,7 +223,8 @@ class AntBoss<AntMyEntity
 			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
 		end
 		addMesh(@ring,AGVector3.new(0,0,0))
-		@ring.setVisible(false)
+		#@ring.setVisible(false)
+		updateRingColor
 	end
 
 	def eventHLJobFinished(job)
@@ -264,6 +269,16 @@ class AntBoss<AntMyEntity
 			n=node.addChild("hljob")
 			n.set("type",@job.xmlName)
 			@job.saveXML(n)
+		end
+	end
+
+private
+	def updateRingColor
+		@ring.setVisible((@hovered or @selected))
+		if @hovered and not @selected
+			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+		elsif @selected
+			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))
 		end
 	end
 end

@@ -238,6 +238,8 @@ void AGSound::playWave(const std::string &pFilename,float volume)
   initSoundEngine();
   if(volume<0)
     volume=soundVol;
+  else
+    volume*=soundVol;
   if(mFreeChannels.size()>0)
     {
       loadWave(pFilename);

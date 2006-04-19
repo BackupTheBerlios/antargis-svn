@@ -41,6 +41,9 @@ class AntHLJob
 	def loadXML(n)
 		#FIXME
 	end
+	def playSound(s)
+		@hero.playSound(s)
+	end
 end
 
 class AntHeroMoveJob<AntHLJob

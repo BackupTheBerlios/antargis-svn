@@ -3,7 +3,7 @@
 $soundLastCall={}
 $soundInited=false
 
-def playSound(name,minDiff=0.5)
+def playSoundGlobal(name,volume,minDiff=0.5)
 	sounds={"sheep"=>"data/sound/sheep44.wav",
 		"error"=>"data/sound/error.wav",
 		"hackaxe"=>"data/sound/tree_chop.wav",
@@ -32,9 +32,7 @@ def playSound(name,minDiff=0.5)
 			setNormalVolumeWave
 			$soundInited=true
 		end
-		#getSoundManager.volumeSound(0.4)
-		#puts "PLAY:"+s
-		getSoundManager.playWave(s)
+		getSoundManager.playWave(s,volume)
 		$soundLastCall[name]=$systemTime
 	end
 end

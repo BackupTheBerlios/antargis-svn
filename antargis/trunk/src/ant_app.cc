@@ -164,6 +164,6 @@ Scene &GLApp::getScene()
 
 void GLApp::mark()
 {
-  CTRACE;
+  //  CTRACE;
   markObject(&scene);
 }
