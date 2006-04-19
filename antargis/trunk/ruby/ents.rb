@@ -121,6 +121,14 @@ class AntMyEntity<AntEntity
 		end
 		playSoundGlobal(name,vol,minDiff)
 	end
+
+	def isOnOpenWater
+		getMap.getPos(getPos2D).z<-0.1
+	end
+	def isOnWater
+		getMap.getPos(getPos2D).z<0
+	end
+
 end
 
 

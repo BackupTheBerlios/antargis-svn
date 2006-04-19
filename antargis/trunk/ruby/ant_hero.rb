@@ -162,6 +162,7 @@ class AntHero<AntBoss
 	# 2) start all at once
 	
 	def getSitFormation(man)
+
 		if man==self
 			return getPos2D
 		end
@@ -210,7 +211,11 @@ class AntHero<AntBoss
 		end
 		id=@men.index(man)-1  # first index is hero himself
 		if id
-			lineWidth=0.7
+			if isOnOpenWater
+				lineWidth=1.3 # bigger distance on water
+			else
+				lineWidth=0.7
+			end
 			if @men.length>30
 				#lineWidth=1.5
 			end
@@ -252,6 +257,13 @@ class AntHero<AntBoss
 				@fire=false
 			end
 			stopFireSound
+		end
+	end
+
+	def eventHitWaterMark(fromAbove)
+		if fromAbove
+			puts "HITWATER"
+			newHLRestJob(10)
 		end
 	end
 	

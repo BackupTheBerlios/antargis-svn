@@ -735,8 +735,10 @@ private
 		dist=diff.length2
 		if dist<0.1 then
 			man.setDirection(180-(@hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
-
-			if not ["sitdown","sit"].member?(man.meshState)
+			if man.getPos3D.z<0 # under water
+				man.newRestJob(5)
+				man.setMeshState("stand")
+			elsif not ["sitdown","sit"].member?(man.meshState)
 				man.sitDown
 			else
 				man.newRestJob(5)

@@ -206,7 +206,12 @@ void AntEntity::setPos(const AGVector3 &p)
 }
 void AntEntity::setPos(const AGVector2 &p)
 {
-  mPos=getMap()->getPos(p);
+  if(onGround)
+    mPos=getMap()->getPos(p);
+  else if(onWater)
+    mPos=AGVector3(p,0);
+  else
+    mPos=AGVector3(p,mPos[2]);
   //  onGround=true;
   updatePos(mPos);
 }
@@ -721,4 +726,23 @@ void AntEntity::eventStartMoving()
 void AntEntity::setHunger(float f)
 {
   mHunger=f;
+}
+
+void AntEntity::eventHitWaterMark(bool fromAbove)
+{
+}
+
+void AntEntity::setOnWater(bool p)
+{
+  if(p)
+    {
+      onWater=true;
+      onGround=false;
+    }
+  else
+    {
+      onWater=false;
+      onGround=true;
+    }
+  
 }

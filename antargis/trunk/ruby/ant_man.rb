@@ -210,12 +210,20 @@ class AntNewMan<AntMyEntity
 			puts name
 		end
 
-		if getPos3D.z<0 and name=~/sit/
-			name="stand"
+
+		z=getMap.getPos(getPos2D).z
+		if isOnWater
+			setOnWater(true)
+			# under water
+			if name=~/sit/
+				name="stand"
+			end
+			if isOnOpenWater
+				name="row"
+			end
+		else
+			setOnWater(false)
 		end
-			
-		#return
-		#puts "setState #{name}"
 		@meshState=name
 		dir=getDirection
 		case name
@@ -229,10 +237,6 @@ class AntNewMan<AntMyEntity
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
 				getFirstMesh.setAnimation(name)
-
-				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
-				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
-				#getFirstMesh.setAnimation("fight")
 			when "fight"
 				if @moving
 					# FIXME: fill in man_e_dagger ...
@@ -262,8 +266,20 @@ class AntNewMan<AntMyEntity
 			when "dead"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
 		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave.png"),AGVector4.new(0,0,0,0),0))
+			when "row"
+				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
+				getFirstMesh.setAnimation("sit")
+				mesh=Mesh.new(getMap.getScene,getBoatMeshData,AGVector4.new(0,0,0),0)
+				addMesh(mesh,AGVector3.new(0,0,0))
 		end
 		setDirection(dir)
+	end
+
+	def eventHitWaterMark(fromAbove)
+		#setOnWater(fromAbove)
+		if fromAbove
+			setMeshState("row")
+		end
 	end
 
 	def digResource(res)

@@ -182,6 +182,8 @@ class AntEntity:public AGRubyObject
     virtual void eventStartFighting();
     virtual void eventStartMoving();
 
+    virtual void eventHitWaterMark(bool fromAbove);
+
     void sigDefeated(); // morale too low
     void sigJobFinished();
 
@@ -215,6 +217,8 @@ class AntEntity:public AGRubyObject
     void incFood(float v);
     bool isStarving() const;
 
+    void setOnWater(bool p);
+
     // used only by Map - so that Position gets updated, when onGround
     void eventMapChanged();
     virtual void move(float pTime); // move entity FIXME: del move
@@ -229,6 +233,7 @@ class AntEntity:public AGRubyObject
     virtual void animationEvent(const std::string &pName);
 
     void heal(float pTime);
+
 
   private:
     void init();
