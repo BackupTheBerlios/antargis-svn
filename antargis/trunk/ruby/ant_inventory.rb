@@ -100,7 +100,6 @@ private
 			checkFriend
 			res=@inspect.resource.getAll
 			res["men"]=@inspect.menCount.to_f
-			reset
 			res.each{|a,b|
 				setValue(a,b)
 			}
@@ -121,9 +120,6 @@ private
 				end
 			end
 		end
-	end
-	def reset
-		@resTypes.each{|x|setValue(x,0)}
 	end
 end
 

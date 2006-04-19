@@ -83,12 +83,14 @@ class AntGameApp <AntRubyView
 		
 		$screen=@layout
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
-		@miniMap.setMap(getMap)
+		if @miniMap
+			@miniMap.setMap(getMap)
+			@miniMap.setScene(getScene)
+		end
 		if loadscreen
 			loadscreen.setValue(0.7)
 			loadscreen.tick
 		end
-		@miniMap.setScene(getScene)
 		if loadscreen
 			loadscreen.setValue(0.8)
 			loadscreen.tick

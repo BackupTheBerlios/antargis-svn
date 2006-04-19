@@ -269,6 +269,10 @@ AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom)
 
   t->setName(pNode.get("name"));
 
+  if(pNode.get("visible")=="false")
+    t->hide();
+
+
   std::vector<std::pair<float,bool> > rows(h);
   std::vector<std::pair<float,bool> > cols(w);
 

@@ -12,12 +12,8 @@
 		<table col="1" row="0" cols="1" rows="5">
 			<rowsize row="0" fixed="90"/>
 			<rowsize row="1" fixed="160"/>
-			<!--<rowsize row="2" fixed="216"/>-->
 			<rowsize row="3" fixed="216"/>
 			<rowsize row="4" fixed="50"/>
-<!--			<rowsize row="6" fixed="10"/>-->
-			
-			<!-- heroes -->
 			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops">
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
@@ -58,7 +54,7 @@
 				<!--</frame>-->
 			</cell>
 			<cell col="0" row="2">
-				<frame border="button.border.normal" visible="true" background="button.background.disabled">
+				<frame border="button.border.normal" visible="true" background="button.background.disabled"  pvisible="false">
 					<antInventory name="inventory">
 						<table cols="1" rows="4">
 							<rowsize row="0" fixed="25"/>
@@ -95,19 +91,12 @@
 							</cell>
 							<cell col="0" row="3">
 								<table cols="6" rows="5">
-									<!--<text col="0" row="0" caption="" align="left" font="inventory.font"/>-->
-									<!--<text col="0" row="1" caption="Men" align="left" font="inventory.font"/>
-									<text col="0" row="2" caption="Wood" align="left" font="inventory.font"/>
-									<text col="0" row="3" caption="Stone" align="left" font="inventory.font"/>
-									<text col="0" row="4" caption="Food" align="left" font="inventory.font"/>
-									<text col="0" row="5" caption="Tools" align="left" font="inventory.font"/>-->
 									<image col="0" row="0" filename="data/gui/man.png" tooltip="Troops"/>
 									<image col="0" row="1" filename="data/gui/apple2.png" tooltip="Food"/>
 									<image col="0" row="2" filename="data/gui/shield.png" tooltip="Shields"/>
 									<image col="0" row="3" filename="data/gui/sword.png" tooltip="Swords"/>
 									<image col="0" row="4" filename="data/gui/tools.png" tooltip="Tools"/>
 									
-									<!--<text col="1" row="0" caption="0" align="right" name="boss" font="inventory.font"/>-->
 									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
 									<text col="1" row="1" caption="0" align="right" name="food" font="inventory.font"/>
 									<text col="1" row="2" caption="0" align="right" name="shield" font="inventory.font"/>
