@@ -126,6 +126,10 @@ class AntGameApp <AntRubyView
 				@layout.addChild(AntQueryDialog.new(@layout,nil) {puts @hero;@hero.newHLDismissJob})
 				puts @hero
 				#@hero.newHLDismissJob
+			when "doRest"
+				if @hero
+					@hero.newHLRestJob(10)
+				end
 		end
 		return true
 	end

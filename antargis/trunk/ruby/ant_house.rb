@@ -136,7 +136,6 @@ class AntHouse<AntBoss
 
 	
 	def normalFetching(e)
-		puts "FECTHIGN"
 		if atHome(e) then
 			checkFood(e)
 			@atHome.push(e)

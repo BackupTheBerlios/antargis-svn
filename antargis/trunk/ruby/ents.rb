@@ -27,6 +27,9 @@
 
 require 'ant_local.rb'
 
+INNER_VOL_SIZE=9 # size of circle around camera-middle with max volume
+OUTER_VOL_SIZE=25 # size circle around camera describing volume descend
+
 class AntMyEntity<AntEntity
 	attr_accessor :birthday
 	def initialize(p)
@@ -109,19 +112,13 @@ class AntMyEntity<AntEntity
 	def getMode
 		@mode
 	end
-# 	def eventNoJob
-# 		newRestJob(1000) # rest for infty
-# 	end
 
 	def playSound(name,minDiff=0.5)
-		innerVolSize=9 # size of circle around camera-middle with max volume
-		outerVolSize=25 # size circle around camera describing volume descend
-		d=(($app.getScene.getCamera.dim2-getPos2D).length-innerVolSize)
+		d=(($app.getScene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
 		vol=1
 		if d>0
-			vol=[(outerVolSize-d)/outerVolSize,0].max
+			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
 		end
-		puts "d:#{d} vol:#{vol}"
 		playSoundGlobal(name,vol,minDiff)
 	end
 end
