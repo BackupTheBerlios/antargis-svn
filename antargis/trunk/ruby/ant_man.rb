@@ -179,17 +179,11 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def setGoAnim
-		#dputs "SET STAND..."
-		#getFirstMesh.setAnimation("go")
 		setMeshState("walk")
-		#dputs "OK"
 	end
 	
 	def setStandAnim
-		#dputs "SET STAND..."
-		#getFirstMesh.setAnimation("stand")
 		setMeshState("stand")
-		#dputs "OK"
 	end
 	
 	def setFighting(v)
@@ -215,6 +209,11 @@ class AntNewMan<AntMyEntity
 			puts "ERROR in setMeshState"
 			puts name
 		end
+
+		if getPos3D.z<0 and name=~/sit/
+			name="stand"
+		end
+			
 		#return
 		#puts "setState #{name}"
 		@meshState=name

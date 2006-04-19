@@ -100,13 +100,13 @@ no segfaults known
 [VL] seasons - snow,spring... Exchange or fade terrain textures.
 [L] Fog of war - overlay darkness/fog
 [L] animated trees / falling trees
+[L] add drawGradients-batcher to AGPainter
 
 [Game]
 ------------------------------------------------------
 [H] save current job :-(  high-level and low-level
 [H] decrease morale on men when inventing and not resting
 [H] disable controls when telling story (after "come here my friend")
-[H] display houses on minimap
 [H] add swords/shields/bows and apply them when fighting
 [H] describe men's health and morale when inspecting house
 [H] tough breath when hero suffers / some info-box appearing

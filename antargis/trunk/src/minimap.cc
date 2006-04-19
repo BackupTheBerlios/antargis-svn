@@ -214,14 +214,13 @@ void MiniMap::drawEntities(AGPainter &p)
 	      v=fromMapCoords(v);
 	 
 	      rects.push_back(std::make_pair(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor().toVec()));
-	      //p.putPixel(v,(*i)->getMinimapColor());
-	      //	      p.fillRect(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor());
+	      rects.push_back(std::make_pair(AGRect2(v[0],v[1],1,1),((*i)->getMinimapColor()*1.5).toVec()));
+	      rects.push_back(std::make_pair(AGRect2(v[0]+1,v[1],1,1),((*i)->getMinimapColor()*1.2).toVec()));
+	      rects.push_back(std::make_pair(AGRect2(v[0],v[1]+1,1,1),((*i)->getMinimapColor()*1.2).toVec()));
 	      es++;
 	    }
 	}
       p.fillRects(rects); // batch processing - in gl much faster!!
-      //      cdebug("es:"<<es);
-
     }
 }
 
