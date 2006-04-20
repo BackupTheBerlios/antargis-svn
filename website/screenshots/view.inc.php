@@ -2,15 +2,20 @@
 
 function getScreenies()
 {
-	$screenies=array("screenies/screenshot1","screenies/shot050228","screenies/shot050304","screenies/050511",
+	$screenies=array(
+	array("screenies/screenshot_veryold2d","A very old screenshot. This is one of the very first attempts."),
+	"screenies/screenshot1",
+	"screenies/shot050228",
+	array("screenies/shot050304","Trees are generated and rendered with a voxel/ray-casting technique."),
+	array("screenies/050511","Old 2.5d-engine. Graphics were generated using voxels and ray-casting. I wasted a lot of time on this."),
 	"screenies/shot051024b",
-	"screenies/shot051118",
-	"screenies/shot060222",
-	"screenies/shot060222b",
-	"screenies/shot060222c",
-	"screenies/shot060222d",
+	array("screenies/shot051118","Some very old high-poly trees with apples."),
+	array("screenies/shot060222","The campaign selection screen."),
+	array("screenies/shot060222b","Some story is told..."),
+	array("screenies/shot060222c","The first tutorial island."),
+	array("screenies/shot060222d","In the north of the first tutorial Island.")
 	);
-	return $screenies;
+	return array_reverse($screenies);
 }
 
 function getDesc($s)
@@ -30,7 +35,15 @@ function smallPics()
 	
 	foreach($screenies as $a)
 	{
-		$r.=anchor($page."&screenshotid=$id",image($a."_thumb.jpg","screenshot"));
+		if(is_array($a))
+		{
+			$b=$a[0];
+			$c=$a[1];
+		}
+		else
+			$b=$a;
+		$r.=anchor($page."&screenshotid=$id",image($b."_thumb.jpg","screenshot"));
+
 		$id++;
 	}
 		
@@ -52,7 +65,18 @@ function view()
 		$screenies=getScreenies();
 		$comment="First tutorial island";
 		if($sid>=0 && $sid<sizeof($screenies))
-			$b.=div("<div>$comment</div>".image($screenies[$sid].".jpg"),"screenshot");
+		{
+			$a=$screenies[$sid];
+			$comment=$a[1];
+			if(is_array($a))
+				$c=$a[0];
+			else
+			{
+				$c=$a;
+				$comment="No comment here.";
+			}
+			$b.=div("<div>$comment</div>".image($c.".jpg"),"screenshot");
+		}
 	}
 	return menuSystem($b,"screenshotBody");
 }
