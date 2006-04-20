@@ -203,22 +203,23 @@ class AntNewMan<AntMyEntity
 			"shield"
 		end
 	end
-	
+
 	def setMeshState(name)
 		if @meshState=="dead"
 			puts "ERROR in setMeshState"
 			puts name
 		end
-
+		@origMeshState=name
 
 		z=getMap.getPos(getPos2D).z
 		if isOnWater
-			setOnWater(true)
 			# under water
 			if name=~/sit/
 				name="stand"
 			end
 			if isOnOpenWater
+				puts "onOpenWater"
+				setOnWater(true)
 				name="row"
 			end
 		else
@@ -279,6 +280,15 @@ class AntNewMan<AntMyEntity
 		#setOnWater(fromAbove)
 		if fromAbove
 			setMeshState("row")
+		else
+			puts "event"
+			puts getPos3D
+			setOnWater(false)
+			setPos(getMap.getPos(getPos2D))
+			puts "eventHitWaterMark #{@origMeshState}"
+			puts getPos3D
+			setMeshState(@origMeshState)
+			puts getPos3D
 		end
 	end
 
@@ -322,6 +332,9 @@ class AntNewMan<AntMyEntity
 	def loadXML(node)
 		super(node)
 		@bossName=node.get("bossName")
+		if getMap.getPos(getPos2D).z>0
+			setOnWater(false)
+		end
 	end
 	
 	def animationEvent(name)

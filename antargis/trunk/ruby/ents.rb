@@ -123,7 +123,7 @@ class AntMyEntity<AntEntity
 	end
 
 	def isOnOpenWater
-		getMap.getPos(getPos2D).z<-0.1
+		getMap.getPos(getPos2D).z<-0.2
 	end
 	def isOnWater
 		getMap.getPos(getPos2D).z<0

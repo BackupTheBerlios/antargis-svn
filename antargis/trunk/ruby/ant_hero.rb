@@ -263,7 +263,7 @@ class AntHero<AntBoss
 	def eventHitWaterMark(fromAbove)
 		if fromAbove
 			puts "HITWATER"
-			newHLRestJob(10)
+			#newHLRestJob(10)
 		end
 	end
 	

@@ -127,7 +127,7 @@ AGVector2 MoveJob::getDirection(const AntEntity *e) const
 
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
-  float d0=e->getPos3D()[2];
+  float d0=getMap()->getPos(e->getPos2D())[2];
   AGVector2 diff=e->getPos2D()-mTarget;
   float norm=diff.length();
 
@@ -145,7 +145,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
       jobFinished(e);
     }
 
-  float d1=e->getPos3D()[2];
+  float d1=getMap()->getPos(e->getPos2D())[2];
   if(d0<WATER_MARK && d1>WATER_MARK)
     e->eventHitWaterMark(false);
   else if(d0>WATER_MARK && d1<WATER_MARK)
