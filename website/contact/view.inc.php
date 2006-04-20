@@ -7,7 +7,7 @@ function view()
 	$list=anchor("http://lists.berlios.de/mailman/listinfo/antargis-dev","http://lists.berlios.de/mailman/listinfo/antargis-dev");
 	
 	$b.=h3("Please contact us per mailing-list:");
-	$b.=p("antargis-dev@lists.berlios.de");
+	$b.=p("<a href='mailto:antargis-dev@lists.berlios.de'>antargis-dev@lists.berlios.de</a>");
 	$b.=p("Subscribe to list here : $list");
 
 	$b.=p("&nbsp;");

@@ -11,6 +11,8 @@ function getNews($toponly=false)
 {
 	$b="";
 
+	$b.=news("2006-04-20","Forum and Wiki down","I'm sorry to tell you, that since yesterday the forums and the wiki are down. It's a problem with a database server at our provider Berlios. We have submitted an error message and hope that the problem will be solved soon.<br>In the meanwhile you can contact us on our mailing-list. Have a look the <a href='index.php?page=contact'>contact page</a>.");
+
 	$b.=news("2006-04-14","Version 0.1.1 out","Today the version 0.1.1 is released, which contains mostly bugfixes. The most outstanding new feature is inventing. Now you are able to build swords and shields.<br><a href='http://developer.berlios.de/project/showfiles.php?group_id=3474'>Download here</a>");
 
 
