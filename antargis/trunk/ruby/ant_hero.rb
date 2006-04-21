@@ -47,9 +47,6 @@ class AntHero<AntBoss
 		@appearance=a
 	end
 	
-	def xmlName
-		return "antHero"
-	end
 	def saveXML(node)
 		super(node)
 		node.set("appearance",@appearance)

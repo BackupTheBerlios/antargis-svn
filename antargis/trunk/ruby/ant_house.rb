@@ -24,7 +24,7 @@
 require 'ant_boss.rb'
 require 'ant_tools.rb'
 
-class AntFlag<AntMyEntity
+class AntFlag<AntRubyEntity
 	def initialize
 		super(AGVector3.new(0,0,0))
 		setProvide("flag",true)

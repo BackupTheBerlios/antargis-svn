@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-class AntArrow<AntMyEntity
+class AntArrow<AntRubyEntity
 	def initialize
 		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i

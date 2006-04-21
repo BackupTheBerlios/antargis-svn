@@ -6,8 +6,6 @@ In special cases it can be Very High (=VH).
 [General]
 ------------------------------------------------------
 [VH] Add coding conventions for ruby/c++ and ensure them!
-[VH] enfore correct naming for AntMyEntity=>AntRubyEntity; every *New* should be replaced something normal
-[VH] remove long entity-type-list in AntRubyMap and replace it by something using registered classes, that are derived from AntRubyEntity
 
 
 WEBSITE & PR

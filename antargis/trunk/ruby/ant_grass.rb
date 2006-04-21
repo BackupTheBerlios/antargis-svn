@@ -174,7 +174,7 @@ end
 
 
 
-class AntGrass<AntMyEntity
+class AntGrass<AntRubyEntity
 	def initialize(high=false)
 		super(AGVector2.new(0,0))
 		setProvide("grass",true)
@@ -189,9 +189,6 @@ class AntGrass<AntMyEntity
 		setupMesh
 	end
 	
-	def xmlName
-		return "antGrass"
-	end
 	
 	private
 	def setupMesh
@@ -203,13 +200,10 @@ class AntHighGrass<AntGrass
 	def initialize
 		super(true)
 	end
-	def xmlName 
-		"antHighGrass"
-	end
 end
 
 
-class AntBush<AntMyEntity
+class AntBush<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		setProvide("bush",true)
@@ -218,10 +212,6 @@ class AntBush<AntMyEntity
 	end
 	def resourceChanged
 		setupMesh
-	end
-	
-	def xmlName
-		return "antBush"
 	end
 	
 	private

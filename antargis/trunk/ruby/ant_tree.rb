@@ -60,7 +60,7 @@ def getTreeMeshByType(type)
 	return d
 end
 
-class AntNewTree<AntMyEntity
+class AntTree<AntRubyEntity
 	def initialize(typeID=nil)
 		super(AGVector2.new(0,0))
 		@typeID=typeID
@@ -95,9 +95,6 @@ class AntNewTree<AntMyEntity
 	
 	def setTreeType(t)
 		@typeID=t
-	end
-	def xmlName
-		return "antNewTree"
 	end
 	def saveXML(node)
 		super(node)

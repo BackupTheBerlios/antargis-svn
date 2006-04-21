@@ -21,12 +21,12 @@
 
 #!/usr/bin/ruby
 
-class AntDecal<AntMyEntity
+class AntDecal<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i
 		setProvide("decal",true)
-		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.8,"data/textures/gravel4.png",false),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.8,"data/textures/gravel4.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setTreeType(t)
 		@typeID=t
@@ -38,9 +38,6 @@ class AntDecal<AntMyEntity
 	def loadXML(node)
 		super(node)
 		@typeID=node.get("typeID").to_i
-	end
-	def xmlName
-		return "antDecal"
 	end
 end
 

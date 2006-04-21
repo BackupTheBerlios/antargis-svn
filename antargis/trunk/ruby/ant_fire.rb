@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class AntFire<AntMyEntity
+class AntFire<AntRubyEntity
 	def initialize(p=AGVector2.new(0,0))
 		super
 		mp=AGVector3.new(0,0,0)
@@ -17,9 +17,6 @@ class AntFire<AntMyEntity
 	def disable
 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))
 		@enabled=false
-	end
-	def xmlName
-		"antFire"
 	end
 	def loadXML(n)
 		disable  # disable because hero makes new fire anyway

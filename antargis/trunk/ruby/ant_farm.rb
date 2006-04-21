@@ -47,10 +47,6 @@ class AntFarm<AntHouse
 		end
 	end
 
-	def xmlName
-		"antFarm"
-	end
-
 	def process
 		if resource.get("fruit")>0
 			resource.add("food",1)

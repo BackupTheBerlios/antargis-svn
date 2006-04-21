@@ -37,7 +37,7 @@ def genName
 end
 
 
-class AntNewMan<AntMyEntity
+class AntMan<AntRubyEntity
 	include AntManBase
 
 	attr_reader :meshState, :dead
@@ -193,10 +193,6 @@ class AntNewMan<AntMyEntity
 	
 	def setFighting(v)
 		@fighting=v
-	end
-
-	def xmlName
-		return "antNewMan"
 	end
 
 	def getWeapon

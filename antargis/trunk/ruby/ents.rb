@@ -30,7 +30,7 @@ require 'ant_local.rb'
 INNER_VOL_SIZE=9 # size of circle around camera-middle with max volume
 OUTER_VOL_SIZE=25 # size circle around camera describing volume descend
 
-class AntMyEntity<AntEntity
+class AntRubyEntity<AntEntity
 	attr_accessor :birthday
 	def initialize(p)
 		super(p)
@@ -131,7 +131,11 @@ class AntMyEntity<AntEntity
 	def isOnWater
 		getMap.getPos(getPos2D).z<0
 	end
-
+	def xmlName
+		xml=self.class.to_s
+		xml=xml[0..0].downcase+xml[1..1000]
+		return xml
+	end
 end
 
 

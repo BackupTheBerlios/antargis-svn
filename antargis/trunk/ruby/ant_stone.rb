@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-class AntNewStone<AntMyEntity
+class AntStone<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i
@@ -46,9 +46,6 @@ class AntNewStone<AntMyEntity
 	def loadXML(node)
 		super(node)
 		@typeID=node.get("typeID").to_i
-	end
-	def xmlName
-		return "antNewStone"
 	end
 end
 

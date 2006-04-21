@@ -12,10 +12,6 @@ class AntFarmStead<AntHouse
 		setMesh(mesh)
 	end
 
-	def xmlName
-		"antFarmStead"
-	end
-	
 	
 	def checkBirth
 		# only men, which are at home can add to birth rate

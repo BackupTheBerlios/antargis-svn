@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 
-class AntNPC<AntMyEntity
+class AntNPC<AntRubyEntity
 	attr_accessor :npcType
 	def initialize()
 		super(AGVector2.new(0,0))
@@ -11,10 +11,6 @@ class AntNPC<AntMyEntity
 	end
 	def resourceChanged
 		setupMesh
-	end
-	
-	def xmlName
-		return "antNPC"
 	end
 	
 	def saveXML(node)

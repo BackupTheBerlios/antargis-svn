@@ -9,9 +9,6 @@ class AntSack<AntAnimal
 		#setPos(AGVector2.new(p.x,p.y))
 		@enabled=true
 	end
-	def xmlName
-		"antSack"
-	end
 	def eventDie
 		getMap.removeEntity(self)
 	end

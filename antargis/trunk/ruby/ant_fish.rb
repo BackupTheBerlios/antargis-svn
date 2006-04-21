@@ -50,9 +50,6 @@ class AntFish<AntAnimal
 	def loadXML(node)
 		super(node)
 	end
-	def xmlName
-		return "antNewFish"
-	end
 	def eventNoJob
 		eventJobFinished
 	end

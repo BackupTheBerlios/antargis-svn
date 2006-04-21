@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-class AntNewAngel<AntMyEntity
+class AntAngel<AntRubyEntity
 
 	def initialize
 		super(AGVector2.new(0,0))

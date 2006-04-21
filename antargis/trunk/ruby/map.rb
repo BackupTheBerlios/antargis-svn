@@ -25,6 +25,12 @@ require 'ant_player.rb'
 require 'ant_trigger.rb'
 require 'level.rb'
 
+def getDescendantsOfClass(p)
+	c=[]
+	ObjectSpace.each_object(Class){|a|c.push(a) if a.ancestors.member?(p)}
+	return c
+end
+
 class TargetPos
 	attr_reader :pos, :name
 	def loadXML(n)
@@ -56,6 +62,16 @@ class AntRubyMap<AntMap
 		@story={}
 		@targets={}
 		@curTime=0.0
+
+		# gather all entity types and map them to their xmlNames
+		@entTypes=getDescendantsOfClass(AntRubyEntity)
+		@entTypeMap={}
+		@entTypes.each{|t|
+			xml=t.to_s
+			xml=xml[0..0].downcase+xml[1..1000]
+			@entTypeMap[xml]=t
+		}
+
 	end
 	def getTarget(name)
 		@targets[name]
@@ -65,61 +81,73 @@ class AntRubyMap<AntMap
 	end
 	def loadEntity(node)
 		dputs node.getName
-		case node.getName
-			when "antFarm"
-				e=AntFarm.new
-			when "antWorkshop"
-				e=AntWorkshop.new
-			when "antFarmStead"
-				e=AntFarmStead.new
-			when "antFir"
-				e=AntFir.new
-			when "antBirch"
-				e=AntBirch.new
-			when "antGrass"
-				e=AntGrass.new
-			when "antTwig"
-				e=AntTwig.new
-			when "decoMesh"
-				e=AntDecoMesh.new
-			when "antBush"
-				e=AntBush.new
-			when "antFire"
-				e=AntFire.new
-			when "antMine"
-				e=AntMine.new
-			when "antSack"
-				e=AntSack.new
-			when "antBoat"
-				e=AntBoat.new
-			when "antFish"
-				e=AntFish.new
-		end
-		if node.getName=="antNewMan" then
-			e=AntNewMan.new
-		end
-		if node.getName=="antHero" then
-			e=AntHero.new
-			@heroes.push(e)
-		end
-		if node.getName=="antNPC" then
-			e=AntNPC.new
-			#@heroes.push(e)
-		end
-		if node.getName=="antTower" then
-			e=AntTower.new
-		end
-		if node.getName=="antNewStone" then
-			e=AntNewStone.new
-		end
-		if node.getName=="antNewTree" or node.getName=="antTree" then
-			e=AntNewTree.new
-		end
-		if node.getName=="antNewSheep" then
-			e=AntNewSheep.new
-		end
-		if node.getName=="antNewDeco" then
-			e=AntNewDeco.new
+
+		nodeName=node.getName
+		nodeName.gsub!("New","")
+
+		if @entTypeMap.keys.member?(nodeName)
+			e=@entTypeMap[nodeName].new
+		else
+			# FIXME: discard this block
+			case node.getName
+				when "antFarm"
+					e=AntFarm.new
+				when "antWorkshop"
+					e=AntWorkshop.new
+				when "antFarmStead"
+					e=AntFarmStead.new
+				when "antFir"
+					e=AntFir.new
+				when "antBirch"
+					e=AntBirch.new
+				when "antGrass"
+					e=AntGrass.new
+				when "antTwig"
+					e=AntTwig.new
+				when "decoMesh"
+					e=AntDecoMesh.new
+				when "antBush"
+					e=AntBush.new
+				when "antFire"
+					e=AntFire.new
+				when "antMine"
+					e=AntMine.new
+				when "antSack"
+					e=AntSack.new
+				when "antBoat"
+					e=AntBoat.new
+				when "antFish"
+					e=AntFish.new
+			end
+			if node.getName=="antNewMan" then
+				e=AntNewMan.new
+			end
+			if node.getName=="antHero" then
+				e=AntHero.new
+				@heroes.push(e)
+			end
+			if node.getName=="antNPC" then
+				e=AntNPC.new
+				#@heroes.push(e)
+			end
+			if node.getName=="antTower" then
+				e=AntTower.new
+			end
+			if node.getName=="antNewStone" then
+				e=AntNewStone.new
+			end
+			if node.getName=="antNewTree" or node.getName=="antTree" then
+				e=AntNewTree.new
+			end
+			if node.getName=="antNewSheep" then
+				e=AntNewSheep.new
+			end
+			if node.getName=="antNewDeco" then
+				e=AntNewDeco.new
+			end
+			if e
+				raise "INVALID TYPE #{node.getName} #{e}"
+			end
 		end
 		if node.getName=="humanPlayer" then
 			dputs "1"

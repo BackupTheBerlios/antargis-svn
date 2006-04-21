@@ -23,7 +23,7 @@
 
 require 'fir_mesh.rb'
 
-class AntBaseTree<AntMyEntity
+class AntBaseTree<AntRubyEntity
 end
 
 class AntFir<AntBaseTree
@@ -38,10 +38,6 @@ class AntFir<AntBaseTree
 		setupMesh
 	end
 	
-	def xmlName
-		return "antFir"
-	end
-	
 	private
 	def meshData
 		data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
@@ -54,7 +50,7 @@ class AntFir<AntBaseTree
 	end
 end
 
-class AntBirch<AntMyEntity
+class AntBirch<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		setType("tree")
@@ -63,10 +59,6 @@ class AntBirch<AntMyEntity
 	end
 	def resourceChanged
 		setupMesh
-	end
-	
-	def xmlName
-		return "antBirch"
 	end
 	
 	private

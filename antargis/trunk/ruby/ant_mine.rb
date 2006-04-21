@@ -22,7 +22,7 @@
 #!/usr/bin/ruby
 
 
-class AntMine<AntMyEntity
+class AntMine<AntRubyEntity
 	def initialize(typeID=nil)
 		super(AGVector2.new(0,0))
 		setProvide("coal",true)
@@ -37,10 +37,6 @@ class AntMine<AntMyEntity
 	end
 	def resourceChanged
 		setupMesh
-	end
-	
-	def xmlName
-		return "antMine"
 	end
 	
 	private

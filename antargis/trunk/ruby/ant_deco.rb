@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-class AntNewDeco<AntMyEntity
+class AntDeco<AntRubyEntity
 	def initialize(decoType=nil)
 		super(AGVector2.new(0,0))
 		@decoType=decoType
@@ -51,9 +51,6 @@ class AntNewDeco<AntMyEntity
 	def setDecoType(t)
 		@typeID=t
 	end
-	def xmlName
-		return "antNewDeco"
-	end
 	def saveXML(node)
 		super(node)
 		node.set("decoType",@decoType)
@@ -65,19 +62,16 @@ class AntNewDeco<AntMyEntity
 	end
 end
 
-class AntTwig<AntMyEntity
+class AntTwig<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i
 		setType("twig")
 		setMesh(Mesh.new(getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),rand*360))
 	end
-	def xmlName
-		return "antTwig"
-	end
 end
 
-class AntDecoMesh<AntMyEntity
+class AntDecoMesh<AntRubyEntity
 	def initialize(name="coach")
 		super(AGVector2.new(0,0))
 		@name=name
@@ -85,9 +79,6 @@ class AntDecoMesh<AntMyEntity
 # 			else
 				setMesh(Mesh.new(getMeshData("data/models/ant_coach.ant2",0.08,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
 # 		end
-	end
-	def xmlName
-		return "decoMesh"
 	end
 	def saveXML(node)
 		super

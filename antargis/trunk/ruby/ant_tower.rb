@@ -12,10 +12,6 @@ class AntTower<AntHouse
 	end	
 	
 	
-	def xmlName
-		"antTower"
-	end
-
 	###############################
 	# FLAG support
 	###############################

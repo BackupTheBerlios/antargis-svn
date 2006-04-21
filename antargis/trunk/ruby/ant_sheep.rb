@@ -21,10 +21,13 @@
 
 #!/usr/bin/ruby
 
-class AntAnimal<AntMyEntity
+class AntAnimal<AntRubyEntity
+	def AntAnimal.xmlName
+		""
+	end
 end
 
-class AntNewSheep<AntAnimal
+class AntSheep<AntAnimal
 	def initialize()
 		super(AGVector2.new(0,0))
 		setProvide("sheep",true)
@@ -36,15 +39,6 @@ class AntNewSheep<AntAnimal
 		setMesh(AnimMesh.new(getMap.getScene,data))
 
 		resource.set("food",1)
-	end
-	def saveXML(node)
-		super(node)
-	end
-	def loadXML(node)
-		super(node)
-	end
-	def xmlName
-		return "antNewSheep"
 	end
 	def eventNoJob
 		eventJobFinished

@@ -72,10 +72,6 @@ class AntWorkshop<AntHouse
 		return minarg
 	end
 
-	def xmlName
-		"antWorkshop"
-	end
-
 private
 	def checkSmoke
 		if @smokeMesh

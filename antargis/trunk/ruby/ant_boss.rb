@@ -25,7 +25,7 @@ require 'ents.rb'
 require 'ant_hljobs.rb'
 
 
-class AntBoss<AntMyEntity
+class AntBoss<AntRubyEntity
 	def initialize
 		super(AGVector2.new(0,0))
 		@men=[]
@@ -70,7 +70,7 @@ class AntBoss<AntMyEntity
 	def checkCreateMen
 		if @createMen>0
 			for i in 0..(@createMen-1) do
-				man=AntNewMan.new
+				man=AntMan.new
 				getMap.insertEntity(man)
 				man.setPos(getPos2D)
 				man.setBoss(self)
