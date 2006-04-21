@@ -24,7 +24,7 @@ class Level1<Level
 			return
 		end
 		if job.class==AntHeroFightAnimalJob
-			if job.target.class==AntNewSheep and (not @sheep)
+			if job.target.class==AntSheep and (not @sheep)
 				@sheep=true
 				start=StoryFlow.new("sheep")
 				start.push("Tutorial","Now your troops have shared the food among them as you can see in their inventories.")
