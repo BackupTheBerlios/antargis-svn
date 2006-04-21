@@ -174,6 +174,11 @@ class AntNewMan<AntMyEntity
 	end
 	
 	def newMoveJob(p,target,n)
+		if isOnWater and isOnOpenWater(target) and (not haveBoat)
+			newRestJob(2)
+			return
+		end
+
 		super
 		setGoAnim
 	end
@@ -214,10 +219,11 @@ class AntNewMan<AntMyEntity
 		z=getMap.getPos(getPos2D).z
 		if isOnWater
 			# under water
-			if name=~/sit/
+			if name=~/sit/ and not isOnOpenWater
 				name="stand"
+				setOnWater(false)
 			end
-			if isOnOpenWater
+			if isOnOpenWater and haveBoat
 				puts "onOpenWater"
 				setOnWater(true)
 				name="row"
@@ -279,16 +285,18 @@ class AntNewMan<AntMyEntity
 	def eventHitWaterMark(fromAbove)
 		#setOnWater(fromAbove)
 		if fromAbove
-			setMeshState("row")
+			if haveBoat
+				setMeshState("row")
+			else
+				# stop job
+				delJob
+				p=getMap.getNextPlaceAbove(getPos2D,-0.2)
+				newMoveJob(0,p,0)
+			end
 		else
-			puts "event"
-			puts getPos3D
 			setOnWater(false)
 			setPos(getMap.getPos(getPos2D))
-			puts "eventHitWaterMark #{@origMeshState}"
-			puts getPos3D
 			setMeshState(@origMeshState)
-			puts getPos3D
 		end
 	end
 
@@ -365,6 +373,10 @@ class AntNewMan<AntMyEntity
 	end
 	def getDescription
 		_("This is {1}. He is {2} years old.",getName,age)+_("He obeys {1}.",@boss.getName)
+	end
+private
+	def haveBoat
+		resource.get("boat")>=1
 	end
 end
 

@@ -6,12 +6,13 @@ In special cases it can be Very High (=VH).
 [General]
 ------------------------------------------------------
 [VH] Add coding conventions for ruby/c++ and ensure them!
-
+[VH] enfore correct naming for AntMyEntity=>AntRubyEntity; every *New* should be replaced something normal
+[VH] remove long entity-type-list in AntRubyMap and replace it by something using registered classes, that are derived from AntRubyEntity
 
 
 WEBSITE & PR
 ==================================================
-[VH] CHECK WIKI FAQ and web-page update!!
+[VH] add WIKI User-FAQ
 
 
 ARTS
@@ -104,13 +105,15 @@ no segfaults known
 
 [Game]
 ------------------------------------------------------
+[H] add arrows in man-class
+[H] add boat to manbase
+[H] add fighting on boat
 [H] save current job :-(  high-level and low-level
 [H] decrease morale on men when inventing and not resting
 [H] disable controls when telling story (after "come here my friend")
 [H] add swords/shields/bows and apply them when fighting
 [H] describe men's health and morale when inspecting house
 [H] tough breath when hero suffers / some info-box appearing
-[H] add boats
 [H] check aggression (fight) - enemies don't die when agg==3
 [M] fishing (fishes)
 [M] add "eat-action", "sleep-action" "special??"

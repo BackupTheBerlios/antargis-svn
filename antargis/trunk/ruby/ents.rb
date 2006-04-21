@@ -122,8 +122,11 @@ class AntMyEntity<AntEntity
 		playSoundGlobal(name,vol,minDiff)
 	end
 
-	def isOnOpenWater
-		getMap.getPos(getPos2D).z<-0.2
+	def isOnOpenWater(p=nil)
+		if (not p)
+			p=getPos2D
+		end
+		getMap.getPos(p).z<-0.2
 	end
 	def isOnWater
 		getMap.getPos(getPos2D).z<0
@@ -150,3 +153,5 @@ require 'ant_decal.rb'
 require 'ant_sack.rb'
 require 'ant_mine.rb'
 require 'ant_boat.rb'
+require 'ant_fish.rb'
+require 'ant_arrow.rb'

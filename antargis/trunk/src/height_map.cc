@@ -398,6 +398,8 @@ float HeightMap::get(size_t x,size_t y) const
 {
   assert(x>=0);
   assert(y>=0);
+  if(x>=mW+2)
+    cdebug("x:"<<x<<"  mW:"<<mW);
   assert(x<mW+2);
   if(y>=mH+2)
     cdebug("y:"<<y);
@@ -557,4 +559,41 @@ float HeightMap::getTerrainScale(float x,float y)
 Scene *HeightMap::getScene()
 {
   return mScene;
+}
+
+AGVector2 HeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
+{
+  int x=(int)p[0];
+  int y=(int)p[1];
+  int d;
+  float maxh=height;
+  AGVector2 found(x,y);
+
+  for(d=0;d<5;d++)
+    {
+      for(int i=-d;i<=d;i++)
+	{
+	  std::vector<AGVector2> p;
+	  p.push_back(AGVector2(i,y-d));
+	  p.push_back(AGVector2(i,y+d));
+	  p.push_back(AGVector2(x-d,i));
+	  p.push_back(AGVector2(x+d,i));
+	  for(std::vector<AGVector2>::iterator k=p.begin();k!=p.end();++k)
+	    {
+	      if((*k)[0]<0 || (*k)[0]>mW || (*k)[1]<0 || (*k)[1]>mH)
+		continue;
+	      cdebug((*k)[0]<<"  "<<(*k)[1]<<" "<<x<<" "<<y<<" "<<i<<" "<<d);
+	      float h=getHeight((*k)[0],(*k)[1]);
+	      if(h>maxh)
+		{
+		  maxh=h;
+		  found=*k;
+		}
+	    }
+	}
+
+      if(maxh>height)
+	break;
+    }
+  return found;
 }

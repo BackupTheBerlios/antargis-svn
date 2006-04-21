@@ -24,6 +24,9 @@ class HeightMap:public AGMessageObject
   virtual ~HeightMap();
 
   // get status
+
+  AGVector2 getNextPlaceAbove(const AGVector2 &p,float height) const;
+
   float getHeight(float x,float y) const;
   AGVector3 getNormal(int x,int y) const;
   AGVector3 getNormalF(float x,float y) const;

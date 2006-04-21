@@ -148,6 +148,8 @@ class AntEntity:public AGRubyObject
     virtual void newFightJob(int p,AntEntity *target);
     virtual void delJob();
 
+    bool isMoving() const;
+
     virtual void resourceChanged();
 
     bool hasJob() const;
@@ -218,6 +220,7 @@ class AntEntity:public AGRubyObject
     bool isStarving() const;
 
     void setOnWater(bool p);
+    void setOnGround(bool p);
 
     // used only by Map - so that Position gets updated, when onGround
     void eventMapChanged();

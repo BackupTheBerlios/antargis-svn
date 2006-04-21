@@ -771,7 +771,8 @@ private
 			rs.each{|r|	
 				all=0
 				@men.each{|m|
-					all+=m.resource.get(r)
+					c=m.resource.get(r)
+					all+=c
 				}
 				if all>=@men.length
 					# give everyone 1 of these and put the rest on the hero
@@ -780,7 +781,7 @@ private
 					}
 					@hero.resource.add(r,all-@men.length)
 				else
-					men=@men.sort {|a,b|a.resource.get(r)<=>b.resource.get(r)}
+					men=@men.sort {|b,a|a.resource.get(r)<=>b.resource.get(r)} # sort descending
 					# put hero at first
 					men.delete(@hero)
 					men=[@hero]+men

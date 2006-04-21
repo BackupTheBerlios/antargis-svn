@@ -211,8 +211,9 @@ void AntEntity::setPos(const AGVector2 &p)
   else if(onWater)
     mPos=AGVector3(p,0);
   else
-    mPos=AGVector3(p,mPos[2]);
-  //  onGround=true;
+    {
+      mPos=AGVector3(p,mPos[2]);
+    }
   updatePos(mPos);
 }
 
@@ -343,10 +344,13 @@ void AntEntity::eventNoJob()
 
 void AntEntity::eventMapChanged()
 {
+  setPos(mPos);
+  /*
   if(onGround)
     mPos=getMap()->getPos(AGVector2(getPos2D()));
   else if(onWater)
     mPos=AGVector3(getPos2D()[0],getPos2D()[1],0);
+  */
   updatePos(mPos);
 }
 
@@ -732,6 +736,11 @@ void AntEntity::eventHitWaterMark(bool fromAbove)
 {
 }
 
+void AntEntity::setOnGround(bool p)
+{
+  onGround=false;
+}
+
 void AntEntity::setOnWater(bool p)
 {
   if(p)
@@ -745,4 +754,10 @@ void AntEntity::setOnWater(bool p)
       onGround=true;
     }
   
+}
+bool AntEntity::isMoving() const
+{
+  if(!mJob)
+    return false;
+  return dynamic_cast<MoveJob*>(mJob);
 }
