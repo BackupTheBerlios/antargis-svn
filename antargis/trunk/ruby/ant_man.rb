@@ -211,22 +211,7 @@ class AntMan<AntRubyEntity
 			puts name
 		end
 		@origMeshState=name
-
-		z=getMap.getPos(getPos2D).z
-		if isOnWater
-			# under water
-			if name=~/sit/ and not isOnOpenWater
-				name="stand"
-				setOnWater(false)
-			end
-			if isOnOpenWater and haveBoat
-				puts "onOpenWater"
-				setOnWater(true)
-				name="row"
-			end
-		else
-			setOnWater(false)
-		end
+		name=checkOnWater(name)
 		@meshState=name
 		dir=getDirection
 		case name
@@ -278,23 +263,6 @@ class AntMan<AntRubyEntity
 		setDirection(dir)
 	end
 
-	def eventHitWaterMark(fromAbove)
-		#setOnWater(fromAbove)
-		if fromAbove
-			if haveBoat
-				setMeshState("row")
-			else
-				# stop job
-				delJob
-				p=getMap.getNextPlaceAbove(getPos2D,-0.2)
-				newMoveJob(0,p,0)
-			end
-		else
-			setOnWater(false)
-			setPos(getMap.getPos(getPos2D))
-			setMeshState(@origMeshState)
-		end
-	end
 
 	def digResource(res)
 		newRestJob(2+getRand)
@@ -371,9 +339,6 @@ class AntMan<AntRubyEntity
 		_("This is {1}. He is {2} years old.",getName,age)+_("He obeys {1}.",@boss.getName)
 	end
 private
-	def haveBoat
-		resource.get("boat")>=1
-	end
 end
 
 	

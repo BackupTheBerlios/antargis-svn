@@ -52,11 +52,6 @@ module AntManBase
 		setMeshState("sitdown")
 	end
 
-# 	def delJob
-# 		setMode("")
-# 		super
-# 	end
-
 	def eventGotFight(other)
 		return
 		puts "EVENTGOTFIGHT"
@@ -69,9 +64,6 @@ module AntManBase
 			eventManDefeated(self)
 		elsif @boss then
 			@boss.eventManDefeated(self)
-			#@boss.removeMan(self)
-			#@boss=nil
-			#@bossName=""
 		end
 	end
 	def eventNoJob
@@ -116,6 +108,48 @@ module AntManBase
 	def shouldFight
 		canFight
 	end
+
+	def checkOnWater(name)
+		z=getMap.getPos(getPos2D).z
+		if isOnWater
+			# under water
+			if name=~/sit/ and not isOnOpenWater
+				name="stand"
+				setOnWater(false)
+			end
+			if isOnOpenWater and haveBoat
+				puts "onOpenWater"
+				setOnWater(true)
+				name="row"
+			end
+		else
+			setOnWater(false)
+		end
+		name
+	end
+
+	def eventHitWaterMark(fromAbove)
+		#setOnWater(fromAbove)
+		if fromAbove
+			if haveBoat
+				setMeshState("row")
+			else
+				# stop job
+				delJob
+				p=getMap.getNextPlaceAbove(getPos2D,-0.2)
+				newMoveJob(0,p,0)
+			end
+		else
+			setOnWater(false)
+			setPos(getMap.getPos(getPos2D))
+			setMeshState(@origMeshState)
+		end
+	end
+protected
+	def haveBoat
+		resource.get("boat")>=1
+	end
+
 private
 	def sendAngel
 		e=AntNewAngel.new

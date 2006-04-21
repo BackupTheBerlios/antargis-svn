@@ -257,13 +257,6 @@ class AntHero<AntBoss
 		end
 	end
 
-	def eventHitWaterMark(fromAbove)
-		if fromAbove
-			puts "HITWATER"
-			#newHLRestJob(10)
-		end
-	end
-	
 	def eventAttacked(by)
 		puts "eventAttacked #{by}"
 		newHLDefendJob(by)
@@ -278,10 +271,19 @@ class AntHero<AntBoss
 	end
 
 	def setMeshState(name)
+		@origMeshState=name
+		name=checkOnWater(name)
 		puts "FIXME: implement setMeshState(.)"
 		@meshState=name
 		dir=getDirection
 		case name
+			when "row"
+		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/hero_lp.ant2",0.08,"data/textures/models/hero_lp.png"),AGVector4.new(0,0,0,0),0))
+				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
+				#getFirstMesh.setAnimation("sit")
+				mesh=Mesh.new(getMap.getScene,getBoatMeshData,AGVector4.new(0,0,0),0)
+				addMesh(mesh,AGVector3.new(0,0,0))
+
 			when "dead"
 		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave3.png"),AGVector4.new(0,0,0,0),0))
 			else
