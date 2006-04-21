@@ -257,7 +257,7 @@ end
 def cpdir(dir,distdir)
 	mkdir(distdir+"/"+dir)
 	Dir[dir+"/*"].each{|f|
-		if (f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/.ogg/
+		if (f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/\.ogg/
 		elsif f=~/\.so/ and not windows
 		elsif f=~/Antargis.*package/ or f=~/autopackage/
 		elsif File.ftype(f)=="file"
