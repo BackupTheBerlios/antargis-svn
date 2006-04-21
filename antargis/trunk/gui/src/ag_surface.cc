@@ -336,6 +336,11 @@ AGSurface AGSurface::loadDRM(const std::string &pName,AGDecryptor &pDec)
   gDRM=true;
 
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
+  if(s==0)
+  {
+	cdebug("Load file failed:"<<pName);
+  }
+  assert(s);
   n.s->surface=s;
   return n;
   

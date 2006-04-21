@@ -144,11 +144,11 @@ void sge_SetError(const char *format, ...)
 
 	va_list ap;
 	
-	#ifdef __WIN32__
+/*	#ifdef __WIN32__
 	va_start((va_list*)ap, format); //Stupid w32 crosscompiler
-	#else
+	#else*/
 	va_start(ap, format);
-	#endif
+	//#endif
 	
 	vsprintf(buf, format, ap);
 	va_end(ap);

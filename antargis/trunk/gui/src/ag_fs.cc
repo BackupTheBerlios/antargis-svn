@@ -167,7 +167,10 @@ std::string checkFileName(std::string s)
 
 std::string directLoad(const std::string &pName)
 {
-  FILE *f=fopen(checkFileName(pName).c_str(),"rb");
+  std::string fn=checkFileName(pName);
+  cdebug("fn:"<<fn);
+  FILE *f=fopen(fn.c_str(),"rb");
+  cdebug("f:"<<f);
   if(!f)
     return "";
   fseek(f,0,SEEK_END);
@@ -231,7 +234,7 @@ std::string loadFromPath(const std::string &pName)
 
 std::string loadFile(const std::string &pName)
 {
-  return loadFromPath(pName);
+  return loadFromPath(checkFileName(pName));
 #ifdef USE_PHYSFS
   TRACE;
   assert(FSinited);

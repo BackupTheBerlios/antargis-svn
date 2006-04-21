@@ -56,7 +56,7 @@ end
 
 have_library('SDL')
 have_library('SDL_ttf')
-have_library('SGE')
+#have_library('SGE')
 if windows
 	have_library('GLU32')
 else
