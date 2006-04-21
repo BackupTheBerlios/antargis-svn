@@ -60,7 +60,7 @@ class AntSheep<AntAnimal
 		if @lastBirth>40 then
 			# make child
 			puts "A SHEEP IS BORN"
-			sheep=AntNewSheep.new
+			sheep=AntSheep.new
 			sheep.setPos(getPos2D)
 			$map.insertEntity(sheep)
 			getMap.endChange

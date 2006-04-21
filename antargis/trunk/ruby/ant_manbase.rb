@@ -152,7 +152,7 @@ protected
 
 private
 	def sendAngel
-		e=AntNewAngel.new
+		e=AntAngel.new
 		e.setPos(getPos2D)
 		getMap.insertEntity(e)
 		getMap.endChange

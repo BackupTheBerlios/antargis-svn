@@ -17,7 +17,7 @@ class AntFarmStead<AntHouse
 		# only men, which are at home can add to birth rate
 		@lastBirth+=[@atHome.length,30].min
 		if @lastBirth>50 then
-			man=AntNewMan.new
+			man=AntMan.new
 			getMap.insertEntity(man)
 			man.setPos(getPos2D)
 			getMap.endChange

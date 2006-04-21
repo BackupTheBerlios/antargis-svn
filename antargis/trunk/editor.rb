@@ -32,6 +32,7 @@ require 'ents.rb'
 require 'map.rb'
 require 'view.rb'
 require 'editview.rb'
+require 'map_generator.rb'
 
 class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
@@ -77,7 +78,8 @@ class AntGameApp < AntRubyEditView
 # 				#map.addFlat(x,y,30,rad)
 # 			end
 # 		}
-		
+		ps=GeneratorParameters.new
+		generateMap(getMap,ps)
 		return true
 	end
 	

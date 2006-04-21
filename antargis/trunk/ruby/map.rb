@@ -120,7 +120,7 @@ class AntRubyMap<AntMap
 					e=AntFish.new
 			end
 			if node.getName=="antNewMan" then
-				e=AntNewMan.new
+				e=AntMan.new
 			end
 			if node.getName=="antHero" then
 				e=AntHero.new
@@ -134,16 +134,16 @@ class AntRubyMap<AntMap
 				e=AntTower.new
 			end
 			if node.getName=="antNewStone" then
-				e=AntNewStone.new
+				e=AntStone.new
 			end
 			if node.getName=="antNewTree" or node.getName=="antTree" then
-				e=AntNewTree.new
+				e=AntTree.new
 			end
 			if node.getName=="antNewSheep" then
-				e=AntNewSheep.new
+				e=AntSheep.new
 			end
 			if node.getName=="antNewDeco" then
-				e=AntNewDeco.new
+				e=AntDeco.new
 			end
 			if e
 				raise "INVALID TYPE #{node.getName} #{e}"
