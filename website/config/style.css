@@ -232,8 +232,15 @@ div.thumbs
 {
 	margin-left:20px;
 	margin-right:20px;
-	background-color:#AAAAAA;
+	/*background-color:#AAAAAA;*/
 	padding:3px;
+}
+div.thumbs h2
+{
+	background-color:#AAAAAA;
+	border-color:#bd6c04;
+	border-width:1px;
+	border-style:solid;
 }
 
 .menu_bold
