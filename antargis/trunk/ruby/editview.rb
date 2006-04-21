@@ -281,7 +281,7 @@ class AntRubyEditView<GLApp
 			when "grassGreen"
 				@type=AntGrass
 			when "sheep"
-				@type=AntNewSheep
+				@type=AntSheep
 			when "tower"
 				@type=AntTower
 			when "farm"
@@ -293,9 +293,9 @@ class AntRubyEditView<GLApp
 			when "farmstead"
 				@type=AntFarmStead
 			when "stones"
-				@type=AntNewStone
+				@type=AntStone
 			when "man"
-				@type=AntNewMan
+				@type=AntMan
 			when "hero"
 				@type=AntHero
 				@appearance="hero"
@@ -305,7 +305,7 @@ class AntRubyEditView<GLApp
 			when "twig"
 				@type=AntTwig
 			when "tree"
-				@type=AntNewTree
+				@type=AntTree
 			when "bush"
 				@type=AntBush
 			when "highGrass"
@@ -325,7 +325,7 @@ class AntRubyEditView<GLApp
 		if callerName=="coach"
 			@type=AntDecoMesh
 		else
-			@type=AntNewDeco
+			@type=AntDeco
 		end
 		@decoType=callerName
 		return true
@@ -351,7 +351,7 @@ class AntRubyEditView<GLApp
 		puts "ADDENTITY"
 		#pos=getMarkerPos
 		dorand=true
-		if @type==AntNewDeco
+		if @type==AntDeco
 			tree=@type.new(@decoType)
 			if @decoType=="floor" or @decoType=="block"
 				dorand=false
