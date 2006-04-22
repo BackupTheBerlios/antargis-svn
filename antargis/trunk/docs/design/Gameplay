@@ -19,4 +19,28 @@ c) Loyalty or morality
 Each man has a morality value. If this goes to low, they desert. So you have to look after your people.
 d) No unit building
 As in a living world, you cannot create people out of nothing. You have to live to the people, animals and resources 
-that are given to the level.
+that are given to the level. Maybe at a later stage you will be able to build some new houses. But this is low priority.
+e) Main goal
+So the main goal of the game is creating weapons and tools and gathering people. But you have to hold the balance, so you'll
+have food and resources for later times.
+
+II Control your hero
+a) Aggressiveness
+You can control your hero by setting his aggressiveness. The higher it is the stronger he tries to achieve his goal.
+Sometimes too hard, so your people will suffer, desert or even die.
+
+b) Recruiting
+
+III Resources
+Current resources are:
+fruit,food,wood,stone,coal,ore,steel,sword,shield,bow,boat and maybe some more.
+There is a simple tech-tree. Some houses can produce resources out of others:
+Farm:
+ fruit=>food
+Workshop:
+ ore,coal=>steel
+ steel,wood=>sword
+ wood=>bow
+ wood=>boat
+ ...
+
