@@ -1,0 +1,22 @@
+Battles of Antargis - Gameplay document
+=========================================
+
+I Introduction
+Battles of Antargis (BoA) was meant to be a Powermonger clone with a strong story line.
+During development and some thinking it came appearant, that this was not good enough.
+So some (more) changes to this very old gameplay shall be made.
+
+Basic Ideas
+a) Living world
+The basic idea is a living world, that proceeds independently from your actions. There are animals
+like fish,sheep, wolf and deer, that eat, walk and die. The normal population does its
+occupations. A farmer grows crop and a craftsman builds tools.
+b) Limited control
+You have very limited control over your troops. You can only give your heroes direct commands, which then
+command their minions automatically. If you have more than one hero, your main hero will send a carrier pigeon, 
+that holds the command, to the selected one. So commands can be delayed.
+c) Loyalty or morality
+Each man has a morality value. If this goes to low, they desert. So you have to look after your people.
+d) No unit building
+As in a living world, you cannot create people out of nothing. You have to live to the people, animals and resources 
+that are given to the level.

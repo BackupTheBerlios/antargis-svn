@@ -18,16 +18,16 @@ ARTS
 
 [Arts - Graphics - 3D]
 ------------------------------------------------------
+[H] Mesh for pigeon
 [L] improve meshes for trees, bushes, men
 [M] animate hero, druid and smith
 [L] animate wolf
-[L] add meshes for fish, pigeon
+[L] add meshes for fish
 [L] add female meshes
 
 [Arts - Graphics - 2D]
 ------------------------------------------------------
 [M] tools-images: pick,axe, hark
-[M] weapon-images: bow
 [L] paint new portraits
 [L] paint campaign-images
 
