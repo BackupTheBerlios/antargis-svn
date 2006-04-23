@@ -1,6 +1,6 @@
 #include "anim_mesh_data.h"
 #include "ag_texturecache.h"
-#include "ant_config.h"
+#include "ag_config.h"
 #include "ag_xml.h"
 
 void setRotation(AGMatrix4 &m,const AGVector3 &angles); // from anim_mesh.cc

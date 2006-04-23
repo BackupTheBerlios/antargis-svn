@@ -21,4 +21,23 @@
 #ifndef AG_CONFIG_H
 #define AG_CONFIG_H
 
+#include <map>
+#include <string>
+
+class AGConfig
+{
+ public:
+  AGConfig();
+
+  std::string get(const std::string &pValue) const;
+  void set(const std::string &pName,const std::string &pValue);
+
+ private:
+  void writeToDisc();
+
+  std::map<std::string,std::string> singleValue;
+};
+
+AGConfig *getConfig();
+
 #endif

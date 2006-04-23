@@ -23,6 +23,7 @@
 #include "ag_debug.h"
 #include "ag_mutex.h"
 #include "ag_fs.h"
+#include "ag_config.h"
 
 #include <SDL_mixer.h>
 #include <map>
@@ -184,6 +185,9 @@ AGSound::AGSound():AGWidget(0,AGRect2(0,0,0,0)),sigMp3Finished(this,"sigMp3Finis
 {
   REGISTER_SINGLETON(this);
   soundVol=1.0f;
+
+  mNoSound=getConfig()->get("soundEnabled")=="false";
+  getConfig()->set("soundEnabled",mNoSound?"false":"true");
 }
 
 void AGSound::checkFinished()

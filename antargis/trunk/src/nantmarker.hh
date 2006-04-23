@@ -1746,6 +1746,11 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,AGColorButton,b);
  $result=*b;
 }
+%typemap(directorout) AGConfig {
+ AGConfig *b;
+ Data_Get_Struct($input,AGConfig,b);
+ $result=*b;
+}
 %typemap(directorout) AGDecryptor {
  AGDecryptor *b;
  Data_Get_Struct($input,AGDecryptor,b);
@@ -2034,11 +2039,6 @@ else if(dynamic_cast<AntMap*>($1))
 %typemap(directorout) AnimMeshData {
  AnimMeshData *b;
  Data_Get_Struct($input,AnimMeshData,b);
- $result=*b;
-}
-%typemap(directorout) AntConfig {
- AntConfig *b;
- Data_Get_Struct($input,AntConfig,b);
  $result=*b;
 }
 %typemap(directorout) AntEntity {

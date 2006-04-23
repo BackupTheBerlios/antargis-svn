@@ -5,7 +5,7 @@
 #include "ag_rendercontext.h"
 #include "ag_main.h"
 #include "map.h"
-#include "ant_config.h"
+#include "ag_config.h"
 
 bool gSmoke;
 long lastSmokeTest;

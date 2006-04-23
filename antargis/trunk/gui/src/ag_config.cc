@@ -1,7 +1,7 @@
-#include "ant_config.h"
+#include "ag_config.h"
 #include "ag_xml.h"
 
-AntConfig::AntConfig()
+AGConfig::AGConfig()
 {
   Document doc("config.xml");
 
@@ -13,9 +13,11 @@ AntConfig::AntConfig()
     }
 
   cdebug("singleValues:"<<singleValue.size());
+
+  writeToDisc();
 }
 
-std::string AntConfig::get(const std::string &pValue) const
+std::string AGConfig::get(const std::string &pValue) const
 {
   std::map<std::string,std::string>::const_iterator i=singleValue.find(pValue);
   if(i==singleValue.end())
@@ -24,13 +26,13 @@ std::string AntConfig::get(const std::string &pValue) const
     return i->second;
 }
 
-void AntConfig::set(const std::string &pName,const std::string &pValue)
+void AGConfig::set(const std::string &pName,const std::string &pValue)
 {
   singleValue[pName]=pValue;
   writeToDisc();
 }
 
-void AntConfig::writeToDisc()
+void AGConfig::writeToDisc()
 {
   Document doc;
   Node &root=doc.root();
@@ -47,10 +49,10 @@ void AntConfig::writeToDisc()
 
 
 
-AntConfig *gConfig=0;
-AntConfig *getConfig()
+AGConfig *gConfig=0;
+AGConfig *getConfig()
 {
   if(!gConfig)
-    gConfig=new AntConfig;
+    gConfig=new AGConfig;
   return gConfig;
 }
