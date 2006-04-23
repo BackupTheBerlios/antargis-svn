@@ -11,6 +11,17 @@ There are several kinds of graphics for BoA:
 5) Animated meshes
 	- can be imported from Milkshape-TXT format using ./ruby/anim_import4.rb
 
+Terrain-Textures
+-------------------------
+* different textures for seasons (get blended)
+
+Decals
+-------------------------
+* bloodstains when fighting - can be disabled
+* footprints
+* rain puddles
+* paths away from buildings
+
 Scenery
 -------------------------
 * bushes
@@ -18,6 +29,7 @@ Scenery
 * trees
 * decals
 * rock-formations (don't know how to do them ATM)
+* rain/snow
 
 Animated meshes
 -------------------------

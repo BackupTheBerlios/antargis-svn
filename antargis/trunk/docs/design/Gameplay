@@ -42,7 +42,11 @@ likely your enemies will die. That's not always good, as you might need them lat
 fighting.
 For giving you a better control over your men, different formations will be added. These would be "encircle","block" or "triangle".
 
-d) 
+d) Special-moves
+- hide in forest (?)
+- dig in if ground is soft
+- spying
+
 III Resources
 -----------------------------------------
 Current resources are:
@@ -95,3 +99,18 @@ Non-moving entities
 	- oak
 	- whatever
 * Rabbit
+* Birds
+	Pigeons are used to carry commands and messages between heroes. Normal
+	birds fly away when people come near.
+
+VI Level-types
+-----------------------------------------
+* flee
+* resist enemy
+* defeat enemy (standard)
+* build boats and get to other island
+* find person
+
+VII Game-options
+-----------------------------------------
+For single player games you should be able to set the game's speed.
