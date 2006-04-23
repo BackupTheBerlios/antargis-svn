@@ -107,6 +107,7 @@ no segfaults known
 
 [Game]
 ------------------------------------------------------
+[H] add no-sound option
 [H] add arrows in man-class
 [H] add fighting on boat
 [H] save current job :-(  high-level and low-level
