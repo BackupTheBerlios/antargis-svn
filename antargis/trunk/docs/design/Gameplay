@@ -2,6 +2,7 @@ Battles of Antargis - Gameplay document
 =========================================
 
 I Introduction
+-----------------------------------------
 Battles of Antargis (BoA) was meant to be a Powermonger clone with a strong story line.
 During development and some thinking it came appearant, that this was not good enough.
 So some (more) changes to this very old gameplay shall be made.
@@ -25,13 +26,17 @@ So the main goal of the game is creating weapons and tools and gathering people.
 have food and resources for later times.
 
 II Control your hero
+-----------------------------------------
 a) Aggressiveness
 You can control your hero by setting his aggressiveness. The higher it is the stronger he tries to achieve his goal.
 Sometimes too hard, so your people will suffer, desert or even die.
 
 b) Recruiting
 
+c) Fighting
+
 III Resources
+-----------------------------------------
 Current resources are:
 fruit,food,wood,stone,coal,ore,steel,sword,shield,bow,boat and maybe some more.
 There is a simple tech-tree. Some houses can produce resources out of others:
@@ -44,3 +49,23 @@ Workshop:
  wood=>boat
  ...
 
+IV Buildings
+-----------------------------------------
+Buildings that can hold people are:
+* Farm
+	- produces food out of fruit, meat
+	- produces crop
+* Farmstead
+	- produces men, when there are some
+* Workshop
+	- produces tools and maybe weapons
+* Tower
+	- does only gather everything, but cannot produce anything
+* Mill
+	- produces flour
+
+Buidlings without people:
+* Well
+	- produces water
+* Mine
+	- produces ore,coal
