@@ -1,0 +1,32 @@
+Battles of Antargis - Graphics design
+==========================================
+There are several kinds of graphics for BoA:
+1) "simple" 2D-graphics, as for
+	- portraits for heroes; these are shown, whenever a hero speaks or in the upper right corner to display the heroes properties
+	- campaign-images; maps, landscape views and small action scenes; these are shown between levels, telling some story
+2) GUI-themes
+3) Terrain-Textures
+4) Static meshes
+	- can be imported from OBJ-format using ./ruby/obj_import.rb
+5) Animated meshes
+	- can be imported from Milkshape-TXT format using ./ruby/anim_import4.rb
+
+Animated meshes
+-------------------------
+~ are needed for:
+* Man
+	- with sword, dagger, shield
+	- with fishing rod
+	- with bow
+	- with lance
+	- with bag on back
+* Hero
+* (Druid)
+* (Smith)
+* Sheep
+* Fish
+* Wolf
+* Deer
+* Horse
+* Boat
+* Pigeon
