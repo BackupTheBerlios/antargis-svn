@@ -10,7 +10,7 @@ function view()
 	$b.=p("<a href='mailto:antargis-dev@lists.berlios.de'>antargis-dev@lists.berlios.de</a>");
 	$b.=p("Subscribe to list here : $list");
 
-	$b.=h3("Or in IRC:");
+	$b.=h3("Or on IRC:");
 	$b.=p("Go to <a href='irc://irc.freenode.net'>irc.freenode.net</a> and join channel #antargis. Might be that someone's there.");
 
 	$b.=p("&nbsp;");

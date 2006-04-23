@@ -22,7 +22,7 @@ function view()
 	$b.=p("./run.rb","code");
 
 	$b.=h3("Problems");
-	$b.=p("If you come accross problems please go to our User FAQ page at <a href='http://antargis.berlios.de/wiki/User FAQ'>our Wiki</a>");
+	$b.=p("If you come accross problems please go to our User FAQ page at <a href='http://antargis.berlios.de/wiki/User_FAQ'>our Wiki</a>");
 
 
 	$b.=h3("Get Antargis from SVN");	
