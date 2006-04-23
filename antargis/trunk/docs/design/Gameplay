@@ -31,10 +31,18 @@ a) Aggressiveness
 You can control your hero by setting his aggressiveness. The higher it is the stronger he tries to achieve his goal.
 Sometimes too hard, so your people will suffer, desert or even die.
 
-b) Recruiting
+b) Recruiting, Dismissing
+You can recruit troops from whatever building you own. For transfer of troops from one hero to another you can use this, too.
+If you need some people in your buildings (e.g. for increasing population or gathering food), you can dismiss your people.
+Both recruiting and dismissing are affected by selected aggressiveness.
 
 c) Fighting
+When attacking enemies, the aggression affects the hardness with which the enemies energy is hit. When aggression is high, it's
+likely your enemies will die. That's not always good, as you might need them later. So it might be good to change the aggression while
+fighting.
+For giving you a better control over your men, different formations will be added. These would be "encircle","block" or "triangle".
 
+d) 
 III Resources
 -----------------------------------------
 Current resources are:
@@ -72,6 +80,7 @@ Buidlings without people:
 
 V Entities
 -----------------------------------------
+Moving entities
 * Hero
 * Man (Woman)
 * Sheep
@@ -79,3 +88,10 @@ V Entities
 * Wolf
 * Deer
 * Horse
+Non-moving entities
+* Stone
+* Trees
+	- fir
+	- oak
+	- whatever
+* Rabbit

@@ -11,6 +11,14 @@ There are several kinds of graphics for BoA:
 5) Animated meshes
 	- can be imported from Milkshape-TXT format using ./ruby/anim_import4.rb
 
+Scenery
+-------------------------
+* bushes
+* stones
+* trees
+* decals
+* rock-formations (don't know how to do them ATM)
+
 Animated meshes
 -------------------------
 ~ are needed for:
@@ -20,7 +28,11 @@ Animated meshes
 	- with bow
 	- with lance
 	- with bag on back
+	- with horse
 * Hero
+	- with sword, dagger, shield
+	- with bow
+	- with horse
 * (Druid)
 * (Smith)
 * Sheep
@@ -30,3 +42,5 @@ Animated meshes
 * Horse
 * Boat
 * Pigeon
+* (battle-machines ?)
+
