@@ -88,7 +88,7 @@ if not windows
 	
 end
 
-mf.puts "install: install-so install-rb install-bin install-headers"
+mf.puts "install: install-a install-so install-rb install-bin install-headers"
 
 mf.puts "install-bin:"
 mf.puts "	$(INSTALL_PROG) -D antargisgui-config #{$bindir}/antargisgui-config"
@@ -98,7 +98,10 @@ $allHeaders.each{|h|
 	mf.puts "	$(INSTALL_DATA) -D #{h} #{$includedir}/antargisgui/#{h}"
 }
 mf.puts "	$(INSTALL_DATA) -D createmarker.rb #{$datadir}/antargisgui/createmarker.rb"
-
+mf.puts "install-a:"
+mf.puts "	ar rc libantargisgui.a $(OBJS)"
+mf.puts "	ranlib libantargisgui.a"
+mf.puts "	$(INSTALL_PROG) -D libantargisgui.a $(libdir)/libantargisgui.a"
 
 mf.close
 
