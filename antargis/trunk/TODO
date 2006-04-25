@@ -107,6 +107,7 @@ no segfaults known
 
 [Game]
 ------------------------------------------------------
+[H] F1..F7 keys for hero selection
 [H] add no-sound option
 [H] add arrows in man-class
 [H] add fighting on boat
