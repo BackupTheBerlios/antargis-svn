@@ -1,2 +1,3 @@
 #!/bin/sh
-ruby run.rb >stderr.txt
+#echo $@
+ruby run.rb $@>stderr.txt

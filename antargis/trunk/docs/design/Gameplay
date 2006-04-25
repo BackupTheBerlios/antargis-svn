@@ -23,6 +23,21 @@ e) Main goal
 So the main goal of the game is creating weapons and tools and gathering people. But you have to hold the balance, so you'll
 have food and resources for later times.
 
+== User interface ==
+The user interface shall be fairly easy. Everything is done in-context. The things you can done always depend on the things you've selected.
+This has following advantages:
+* the interface is minimal - the world-view should be as big as possible
+* player has to discover the world to find out what's possible - player discovers other possibilities at a later stage of the game.
+	example:
+		- with torch and bow he's able to set something afire if aggression is high
+
+In normal mode, there's only:
+* the minimap in the screen's lower right corner
+* the portraits of the current heroes
+* (the inventory and properties of the selected entity)
+* (the action-buttons of the current hero)
+* some game-control buttons: pause,quit and options
+
 == Control your hero ==
 You have a primary, that is yourself. If he dies you have lost the game/level.
 
@@ -46,6 +61,8 @@ d) Special-moves
 - dig in if ground is soft
 - spying
 - bargain
+- start fire on something
+- help in building (let troops do the same as the inhabitants), help put out fire, rebuild
 
 == Resources ==
 Current resources are:
@@ -53,12 +70,16 @@ fruit,food,wood,stone,coal,ore,steel,sword,shield,bow,boat and maybe some more.
 There is a simple tech-tree. Some houses can produce resources out of others:
 Farm:
  fruit=>food
+ =>crop
 Workshop:
  ore,coal=>steel
  steel,wood=>sword
  wood=>bow
  wood=>boat
- ...
+Mill:
+ crop=>flour
+Bakery:
+ flour=>food
 
 == Buildings ==
 Buildings that can hold people are:
@@ -74,7 +95,7 @@ Buildings that can hold people are:
 * Mill
 	- produces flour
 
-Buidlings without people:
+Buildings without people:
 * Well
 	- produces water
 * Mine
@@ -155,21 +176,36 @@ For single player games you should be able to set the game's speed.
 
 
 == Fun aspects ==
+There should be several fun aspects in the game. The player is able to do some "funny" things, that are not
+really helpful in game (like destroying all the buildings in SimCity or like the disasters in Populous)
+
 * burn down anything
+	- burning people if they are in building
 * kill anything
 * discover new things while playing
 * puzzles
+* traps (for troops and animals)
+	- make swamp by spilling a lot of water
+	- hole with cover
+* non-expected attacks from hills or out of forest
+* build up defense-walls, that are not passable
+	- out of wood
+	- can be burnt
 
 == Ideas ==
 * Single hero should have some mobility advantage to hero with troops. For example a strong hero can alone defeat some small group of inexperienced warriors; esp. if he has a bow.
 
 === Multiplayer ===
-== User Interface ==
+== Special User Interface ==
 * need master-server with chat
 * need chat in-game:
 	- normal chat (all hear)
 	- email-system (optional: uses pigeons)
 == Game Types ==
+* capture the flag
+* capture every building
+* capture enemies
+* reach some point first (e.g. island)
 
 == Ideas ==
 * ever-running game:
@@ -178,4 +214,4 @@ For single player games you should be able to set the game's speed.
 	- starting-count of troops depends on your last stats
 	- must be very well balanced!
 	- typical game should be, that some weak attack players join to fight a strong one
-	- how shall such behaviour be ensured???
+	- how shall such behavior be ensured???

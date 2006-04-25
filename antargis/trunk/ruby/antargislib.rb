@@ -30,4 +30,28 @@ if not $antargislibinited
 	$main.setCaption("Antargis")
 	$main.setIcon("data/gui/editor/tower1.png")
 
+	# check options
+	ARGV.each{|arg|
+		if arg=~/--.*/ or arg=~/-.*/
+			a=arg[1..1000]
+			if arg[1..1]=="-"
+				a=arg[2..1000]
+			end
+			case a
+				when "no-sound"
+					getConfig.set("soundEnabled","false")
+				when "sound"
+					getConfig.set("soundEnabled","true")
+				when "help","h"
+					STDERR.puts "Possible options:
+--help     show this help message
+
+--sound    enables sound for now and future uses
+--no-sound disables sound for now and future uses"
+					exit
+			end
+		end
+	}
+
+
 end

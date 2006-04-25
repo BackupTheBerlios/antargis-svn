@@ -108,7 +108,6 @@ no segfaults known
 [Game]
 ------------------------------------------------------
 [H] F1..F7 keys for hero selection
-[H] add no-sound option
 [H] add arrows in man-class
 [H] add fighting on boat
 [H] save current job :-(  high-level and low-level
@@ -127,13 +126,6 @@ no segfaults known
 	- history function
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
-[L] implement loyalty ??? !!! this must be discussed or delayed.
-	a) too many fights => lower
-	b) fight won => up !!
-	c) enough food => up
-	d) rest => up
-	e) bad weather => lower
-	f) if loyality if too low => some men desert and go to next HouseEntity (additional heroes raise a new player!)
 [VL] very bad situation => raise heroes with a new player (rebellion)
 [L] add experience points and function to appoint hero
 [L] add formations

@@ -492,13 +492,11 @@ frustumTest
 
 if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
-	if ARGV.length>0
-		if ARGV[0]=~/\//
-			savegame=ARGV[0]+".antlvl"
-		else
-			savegame="savegames/"+ARGV[0]+".antlvl"  # was levels/
+	ARGV.each{|arg|
+		if arg=~/levels.*/ or arg=~/savegames.*/
+			savegame=arg+".antlvl"
 		end
-	end
+	}
 	puts "LOADING:"+savegame
 	startGame(savegame)	
 end
