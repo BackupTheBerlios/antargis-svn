@@ -159,18 +159,21 @@ void checkParentDirs(const std::string &s)
 std::string checkFileName(std::string s)
 {
 #ifdef WIN32
-  return replace(s,"/","\\");
-#else
-  return s;
+  if(s.length()>300)
+	throw std::runtime_error("possible segfault???");
+  s=replace(s,"/","\\");
+  s=replace(s,"\\\\","\\"); // prevent windows from searching on network
 #endif
+  return s;
 }
 
 std::string directLoad(const std::string &pName)
 {
   std::string fn=checkFileName(pName);
-  cdebug("fn:"<<fn);
+  if(!fileExists(fn))
+	return "";
+  
   FILE *f=fopen(fn.c_str(),"rb");
-  cdebug("f:"<<f);
   if(!f)
     return "";
   fseek(f,0,SEEK_END);
@@ -197,7 +200,6 @@ std::string findFile(const std::string &pName)
       if(fileExists(n))
 	return n;
     }
-  cdebug(pName);
 
 
   if(pName.length()>5)
@@ -400,6 +402,12 @@ void saveFile(const std::string &pName,const std::string &pContent)
 
 bool fileExists(const std::string &pName)
 {
+#ifdef WIN32
+  if(GetFileAttributes(pName.c_str()) == INVALID_FILE_ATTRIBUTES)
+	return false;
+  return true;
+#endif
+
   FILE *f=fopen(pName.c_str(),"r");
   if(f)
     {
