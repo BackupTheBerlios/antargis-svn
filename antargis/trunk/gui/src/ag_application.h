@@ -26,6 +26,16 @@
 #include <ag_tooltip.h>
 #include <ag_texture.h>
 
+
+/**
+  Use AGApplication as base class your application's class.
+  It contains a main-loop, which is started by run();
+  There are several events that can be overriden. If you want to
+  quit this application call tryQuit().
+
+  Each AGApplication has a single main-widget, which is drawn in every frame.
+  Set it by calling setMainWidget().
+*/
 class AGApplication:public AGMessageObject
 {
  public:
@@ -35,9 +45,9 @@ class AGApplication:public AGMessageObject
   bool run();
 
   virtual bool eventIdle();
-  // called between event-handling and drawing
+  /// called between event-handling and drawing
   virtual bool eventFrame(float pTime);
-  // called after drawing - so before event handling
+  /// called after drawing - so before event handling
   virtual bool eventFrameEnd(float pTime);
 
   virtual bool eventQuit(AGEvent *m);
@@ -81,6 +91,12 @@ class AGApplication:public AGMessageObject
   void mark();
 };
 
+/**
+   getApplication returns the current active application.
+   This gets set on each iteration of AGApplication::run. 
+   So it will be correct after finishing a frame, when you are
+   using nested AGApplications.
+*/
 AGApplication *getApplication(); // returns current active application
 
 void disableKeyrepeat();

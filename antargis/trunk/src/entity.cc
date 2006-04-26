@@ -236,10 +236,11 @@ void AntEntity::setJob(Job *pJob)
 	    }
 	  else
 	    {
-	      throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
-	      mJobFinished.push_back(pJob);
+	      // FIXME: Priorities are ignored for now
+	      //	      throw int(); // FIXME: delete this, it's a test if priorities get handled correctly
+	      mJobFinished.push_back(mJob);
 	      //	      delete pJob;
-	  return;
+	      //	  return;
 	    }
 	}
       else
@@ -760,4 +761,15 @@ bool AntEntity::isMoving() const
   if(!mJob)
     return false;
   return dynamic_cast<MoveJob*>(mJob);
+}
+
+AntEntity *AntEntity::getFightTarget()
+{
+  if(mJob)
+    {
+      FightJob *f=dynamic_cast<FightJob*>(mJob);
+      if(f)
+	return f->getTarget();
+    }
+  return 0;
 }

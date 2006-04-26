@@ -91,13 +91,16 @@ using std::endl;
 #define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl)
 #define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl)
 
+/** A helper class for tracing the program's flow
+    Use it by instantiating it with a proper name, or simply use TRACE; (or CTRACE for classes) in your functions */
 class D
 {
   std::string m;
   static int d;
 
  public:
-  D(std::string c);
+  /// the given text will be output on creation and deletion of this object
+  D(std::string text);
   ~D();
 private:
   void indent();

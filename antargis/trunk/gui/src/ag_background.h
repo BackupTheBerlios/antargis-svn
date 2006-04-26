@@ -28,6 +28,10 @@
 
 class AGPainter;
 
+/** AGBackground is a helper class for widget-drawing
+    It is used to draw gradients and tiled backgrounds of widgets.
+    It is themable.
+ */
 class AGBackground
 {
  public:

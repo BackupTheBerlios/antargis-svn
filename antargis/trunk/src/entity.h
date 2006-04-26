@@ -237,6 +237,7 @@ class AntEntity:public AGRubyObject
 
     void heal(float pTime);
 
+    AntEntity *getFightTarget();
 
   private:
     void init();

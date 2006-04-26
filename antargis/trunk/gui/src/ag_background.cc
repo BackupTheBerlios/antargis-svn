@@ -24,7 +24,9 @@
 #include "ag_debug.h"
 #include "ag_painter.h"
 
-
+/** sets a uniform background of color pColor
+    @param pColor an rgba-color. so you can use transparent backgrounds,too.
+*/
 AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
 {
   mColor=true;
@@ -36,6 +38,22 @@ AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
 }
 
 
+/**
+   This constructor set a themed background.
+   @param pThemeName a typical string is "button.background.normal". Then the entry in the theme.xml file should look something like:
+<pre>
+ <button>
+   <background>
+     <normal>
+       <color name='gradientColor1' color='#12141c'/>
+       <color name='gradientColor2' color='#12141c'/>
+       <color name='gradientColor3' color='#12141c'/>
+       <color name='gradientColor4' color='#12141c'/>
+     </normal>
+   </background>
+  </button>
+</pre>
+*/
 AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
 {
   //  CTRACE;
@@ -60,6 +78,8 @@ AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
   mBorder=theme->getInt(pThemeName+"."+std::string("border"));
 }
 
+
+/// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)
 {
   if(mTextureFlag)
@@ -71,6 +91,7 @@ void AGBackground::draw(const AGRect2 &r,AGPainter &p)
  
 }
 
+/// this is a help function, so that once made textures aren't automatically discarded.
 void AGBackground::useTextures()
 {
   mTexture.useTexture();

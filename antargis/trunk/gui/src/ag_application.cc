@@ -261,13 +261,14 @@ long AGApplication::getTicks() const
   return SDL_GetTicks();
 }
 
+/// delays execution for ms milliseconds. This can be used to decrease framerate and cpu-load.
 void AGApplication::delay(int ms)
 {
   SDL_Delay(ms);
 }
 
 
-
+/// mark my mainWidget and my tooltip, as they can be ruby-objects
 void AGApplication::mark()
 {
   //  CTRACE;
@@ -277,12 +278,16 @@ void AGApplication::mark()
     markObject(mTooltip);
 }
 
+/// this function sets the current tooltip, which is display above all widgets
 void AGApplication::setTooltip(AGTooltip *pTooltip)
 {
   delete mTooltip;
   mTooltip=pTooltip;
     
 }
+
+/// this functions resets the tooltip pTooltip.
+/// @param pTooltip a tooltip of a widget
 void AGApplication::resetTooltip(AGTooltip *pTooltip)
 {
   if(pTooltip==mTooltip)
@@ -298,13 +303,14 @@ bool AGApplication::eventMouseMotion(AGEvent *m)
   return AGMessageObject::eventMouseMotion(m);
 }
 
-
+/// this function disables hardware cursor and shows software-cursor instead
 void AGApplication::setCursor(const AGTexture &pTexture)
 {
   mCursor=new AGTexture(pTexture);
   SDL_ShowCursor(0);
 }
 
+/// this function enables hardware-cursor
 void AGApplication::setNormalCursor()
 {
   SDL_ShowCursor(1);
