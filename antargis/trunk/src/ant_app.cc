@@ -1,5 +1,6 @@
 #include "ant_app.h"
 #include "ag_debug.h"
+#include "ag_profiler.h"
 
 GLApp::GLApp(int w,int h):scene(w,h)
 {
@@ -19,12 +20,14 @@ GLApp::~GLApp()
 
 void GLApp::draw()
 {
+  STACKTRACE;
   drawGL();
   AGApplication::draw();
 }
 
 void GLApp::drawGL()
 {
+  STACKTRACE;
   glEnable(GL_DEPTH_TEST); // enable depth test
   glDepthMask(true);
 

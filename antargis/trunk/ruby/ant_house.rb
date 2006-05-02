@@ -229,7 +229,11 @@ class AntHouse<AntBoss
 	def addFlag(owner)
 	end
 	def getDescription
-		"This is a keep. It was build #{age} years ago. Currently #{getMen.length} men live here. #{@atHome.length} of them are at home."
+		"This is a #{houseType}. It was build #{age} years ago. Currently #{getMen.length} men live here. #{@atHome.length} of them are at home."
+	end
+
+	def houseType
+		"house"
 	end
 
 	private

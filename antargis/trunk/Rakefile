@@ -14,7 +14,8 @@ begin File.mkpath(".deps")
 rescue 
 end
 
-$debug=true
+$profile=false
+$debug=false
 
 #`mkdir .deps`
 
@@ -150,6 +151,10 @@ $GUISRC="gui/src"
 if $ccache!=""
 	$ccache+=" "
 end
+
+$CFLAGS=""
+#puts "CFLAGS:#{$CFLAGS}"
+
 $CXX=$ccache+"g++"
 $CC=$ccache+"gcc"
 if not windows
@@ -160,7 +165,11 @@ else
 	$CFLAGS="-Ic:/msys/local/include/SDL -Ic:/msys/local/include -Dmain=SDL_main"
 	$LDFLAGS="-s -Wl,--enable-auto-import,--export-all "
 	$LDFLAGS+=" -Lc:/msys/local/lib -lmingw32 -lSDLmain -lSDL -mwindows "+$libs
-	
+end
+
+if $profile
+	$CFLAGS+=" -pg"
+	$LDFLAGS+=" -pg"
 end
 
 if $debug

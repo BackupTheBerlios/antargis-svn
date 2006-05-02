@@ -33,5 +33,8 @@ class AntFarmStead<AntHouse
 		end
 	end
 
+	def houseType
+		"farmstead"
+	end
 end
 

@@ -28,6 +28,7 @@
 #include "terrain.h"
 #include "quadtree.h"
 #include "anim_mesh.h"
+#include "ag_profiler.h"
 
 
 
@@ -138,6 +139,7 @@ void AntMap::removeEntity(AntEntity *p)
 
 void AntMap::move(float pTime)
 {
+  STACKTRACE; 
   //return;
   // first remove entities, which shall be deleted
   std::list<AntEntity*>::iterator d=mToDel.begin();

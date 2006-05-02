@@ -11,6 +11,7 @@
 #include <math.h>
 
 #include "quadtree.h"
+#include "ag_profiler.h"
 
 bool PickNode::operator<(const PickNode &n) const
 {
@@ -189,6 +190,8 @@ void Scene::setCamera(AGVector4 v)
 
 void Scene::advance(float time)
 {
+  STACKTRACE; 
+
   if(!mEnabled)
     return;
   // advance only in view
@@ -218,6 +221,7 @@ Scene::NodeList Scene::getCurrentNodes()
 
 void Scene::calcShadowMap()
 {
+  STACKTRACE;
   assertGL;
   AGMatrix4 frustum=getFrustum();
 
@@ -232,18 +236,52 @@ void Scene::calcShadowMap()
   //  sort(sorted.begin(),sorted.end(),SortDistance(mCamera.getCameraPosition().dim3()));
 
 
+  /*
+
   //  AntFrustum lFrustum=mCamera.getLightProjection().getFrustum();
   AntFrustum lFrustum=mCamera.getCameraProjection().getFrustum();
   
+  {
+    STACKTRACE;
+    //    for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
+    for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
+      {
+	STACKTRACE;
+	//      if((*i)->bbox().collides(frustum) && (*i)->visible())
+	//      iflFrustum.collides((*i)->bbox()) && (*i)->visible())
+	if(!(*i)->transparent())
+	  if((*i)->visible())
+	    {
+	      (*i)->drawDepth();
+	      mTriangles+=(*i)->getTriangles();
+	    }
+      }
+  }
+  */
+  {
+    STACKTRACE;
+  NodeList l=getCurrentNodes();
+  Nodes sorted;
+  std::copy(l.begin(),l.end(),std::back_inserter(sorted));
+
+  //#endif
+
+  sort(sorted.begin(),sorted.end(),SortOrder());
+
   for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
     {
-      //      if((*i)->bbox().collides(frustum) && (*i)->visible())
-      if(lFrustum.collides((*i)->bbox()) && (*i)->visible())
+      //      if(!(*i)->transparent())
 	{
-	  (*i)->drawDepth();
-	  mTriangles+=(*i)->getTriangles();
+	  if((*i)->visible())
+	    {
+	      (*i)->drawDepth();
+	      mTriangles+=(*i)->getTriangles();
+	      //	      drawn++;
+	    }
 	}
     }
+  }
+
   getRenderer()->endShadowComputation();
 }
 
@@ -304,6 +342,7 @@ AGMatrix4 Scene::getFrustum()
 
 void Scene::drawScene()
 {
+  STACKTRACE; 
   AGMatrix4 frustum=getFrustum();
   AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
   
@@ -321,8 +360,6 @@ void Scene::drawScene()
   Nodes sorted;
   std::copy(l.begin(),l.end(),std::back_inserter(sorted));
 
-  //  cdebug(l.size()<<"   "<<mNodes.size());
-
 #endif
 
   sort(sorted.begin(),sorted.end(),SortOrder());
@@ -331,8 +368,7 @@ void Scene::drawScene()
     {
       if(!(*i)->transparent())
 	{
-	  //	  	  if((*i)->visible() && (*i)->bbox().collides(frustum))
-	  if((*i)->visible() && cFrustum.collides((*i)->bbox()))
+	  if((*i)->visible())
 	    {
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
@@ -346,8 +382,7 @@ void Scene::drawScene()
     {
       if((*i)->transparent())
 	{
-	  //if((*i)->visible() && (*i)->bbox().collides(frustum))
-	  if((*i)->visible() && cFrustum.collides((*i)->bbox()))
+	  if((*i)->visible())
 	    {
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
@@ -355,8 +390,6 @@ void Scene::drawScene()
 	    }
 	}
     }
-  //  cdebug("drawn:"<<drawn);
-
 }
 void Scene::drawShadow()
 {

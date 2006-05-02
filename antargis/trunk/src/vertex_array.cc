@@ -223,13 +223,14 @@ void VertexArray::drawPick()
 
 void VertexArray::drawDepth()
 {
+#ifdef OLD
   if(mChanged)
     init();
 
   glEnableClientState(GL_VERTEX_ARRAY);
 
 
-  glDisable(GL_TEXTURE_2D);
+  //  glDisable(GL_TEXTURE_2D);
 
   if(mBuffers)
     {
@@ -249,9 +250,51 @@ void VertexArray::drawDepth()
 		     &(mIndices[0]));
   }
 
-  glEnable(GL_TEXTURE_2D);
+  //  glEnable(GL_TEXTURE_2D);
 
   glDisableClientState(GL_VERTEX_ARRAY);
+#else
+  if(mChanged)
+    init();
+
+  glEnableClientState(GL_VERTEX_ARRAY);
+
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+
+  if(mBuffers)
+    {
+      glClientActiveTexture(GL_TEXTURE0);
+
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      glBindBufferARB( GL_ARRAY_BUFFER_ARB, mTexBuffer);
+      if(mTextures3D)
+	glTexCoordPointer(3, GL_FLOAT, 0, 0);
+      else
+	glTexCoordPointer(2, GL_FLOAT, 0, 0);
+
+      glBindBufferARB( GL_ARRAY_BUFFER_ARB, mVertexBuffer);
+      glVertexPointer(4, GL_FLOAT, 0, 0);
+
+      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
+      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+
+    }
+  else
+    {
+      if(mTextures3D)
+	glTexCoordPointer(3, GL_FLOAT, 0, &(mTexCoords3D[0]));
+      else
+	glTexCoordPointer(2, GL_FLOAT, 0, &(mTexCoords[0]));
+      glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
+
+      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+		     &(mIndices[0]));
+  }
+
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+#endif
 }
 
 

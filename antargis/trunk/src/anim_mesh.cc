@@ -100,7 +100,7 @@ void AnimMesh::setEntity(AntEntity *e)
 
 void AnimMesh::drawDepth()
 {
-  //  return;
+
   drawPrivate(false,false);
 }
 

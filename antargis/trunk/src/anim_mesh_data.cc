@@ -91,7 +91,8 @@ AGVector3 Bone::interpolateTrans(float t)
 
 AnimMeshData::AnimMeshData(const std::string &xmlfile):
   animShader("data/shaders/anim.vert","data/shaders/anim.frag"),
-  animShaderDepth("data/shaders/anim_depth.vert",""),
+  //  animShaderDepth("data/shaders/anim_depth.vert",""),
+  animShaderDepth("data/shaders/anim_depth.vert","data/shaders/anim_depth.frag"),
   mArray(&animShader),
   mArrayDepth(&animShaderDepth)
 {

@@ -2,6 +2,7 @@
 #include "scene.h"
 #include "ag_debug.h"
 #include "ag_kill.h"
+#include "ag_config.h"
 
 Renderer *gRenderer=0;
 
@@ -17,7 +18,26 @@ Renderer::Renderer():
   assert(gRenderer==0);
   gRenderer=this;
   mScene=0;
-  shadowMapSize=1024;//512;
+  
+  std::string shadowType=getConfig()->get("shadowType");
+  if(shadowType=="big")
+    shadowMapSize=1024;
+  else if(shadowType=="small")
+    shadowMapSize=512;
+  else
+    shadowMapSize=0;
+
+  switch(shadowMapSize)
+    {
+    case 0:
+      getConfig()->set("shadowType","none");break;
+    case 512:
+      getConfig()->set("shadowType","small");break;
+    case 1024:
+      getConfig()->set("shadowType","big");break;
+    }
+  
+
   shadowInited=false;
 }
 
@@ -37,7 +57,7 @@ bool Renderer::canMultitexture()
 
 bool Renderer::canShadow()
 {
-  if(mCanShadow<0)
+  if(mCanShadow<0 && shadowMapSize>0)
     mCanShadow=(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient);
   return mCanShadow;
 }

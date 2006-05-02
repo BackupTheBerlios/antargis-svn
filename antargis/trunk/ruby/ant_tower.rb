@@ -33,5 +33,8 @@ class AntTower<AntHouse
 		$map.insertEntity(@flag)
 	end
 
+	def houseType
+		"keep"
+	end
 
 end

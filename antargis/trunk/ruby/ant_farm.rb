@@ -53,4 +53,7 @@ class AntFarm<AntHouse
 			resource.add("fruit",0)
 		end
 	end
+	def houseType
+		"farm"
+	end
 end

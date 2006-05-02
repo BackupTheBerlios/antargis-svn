@@ -107,6 +107,7 @@ no segfaults known
 
 [Game]
 ------------------------------------------------------
+[H] Quitting in game doesn't really quit
 [H] F1..F7 keys for hero selection
 [H] add arrows in man-class
 [H] add fighting on boat

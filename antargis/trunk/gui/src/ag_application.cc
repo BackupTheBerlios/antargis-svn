@@ -25,6 +25,7 @@
 #include "ag_debug.h"
 #include "ag_mixer.h"
 #include "ag_texturecache.h"
+#include "ag_profiler.h"
 
 void disableKeyrepeat()
 {
@@ -70,8 +71,10 @@ AGWidget *AGApplication::getMainWidget()
 
 bool AGApplication::run() 
 {
+  STACKTRACE; 
   Uint32 last,now;
   SDL_Event event;
+  float t;
   mRunning=true;
 
   gApplication=this;
@@ -81,47 +84,59 @@ bool AGApplication::run()
   
   while(mRunning)
     {
+      STACKTRACE; 
+      
       gApplication=this;
 
-      // check for finished music
-      getSoundManager()->checkFinished();
-
-      //                 TRACE;
-      now=SDL_GetTicks();
-      //      TRACE;
-    
-      // pull motion events (may flood the eventqueue)
-      while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
-	;
-
-      clearOldMousePosition();
-      
-      if(mIdleCalls) 
-	{
-	  if (SDL_PollEvent(&event) == 0) 
-	    eventIdle();
-	  else
-	    {
-	      do
-		{
-		  doEvent(&event);
-		}while(SDL_PollEvent(&event)!=0);
-	    }
-	  
-	} 
-      else 
-	{
-	  SDL_WaitEvent(&event);
-	  doEvent(&event);
-	}
-      float t=(now-last)/1000.0;
-      if(mainWidget)
-	mainWidget->sigTick(t);
-
-      eventFrame(t);
       {
-	prepareDraw();
-	draw();
+	// event handling
+	STACKTRACE;
+	// check for finished music
+	getSoundManager()->checkFinished();
+	
+	now=SDL_GetTicks();
+	
+	// pull motion events (may flood the eventqueue)
+	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
+	  ;
+	
+	clearOldMousePosition();
+	
+	if(mIdleCalls) 
+	  {
+	    if (SDL_PollEvent(&event) == 0) 
+	      eventIdle();
+	    else
+	      {
+		do
+		  {
+		    doEvent(&event);
+		  }while(SDL_PollEvent(&event)!=0);
+	      }
+	    
+	  } 
+	else 
+	  {
+	    SDL_WaitEvent(&event);
+	    doEvent(&event);
+	  }
+	t=(now-last)/1000.0;
+	if(mainWidget)
+	  mainWidget->sigTick(t);
+	
+	eventFrame(t);
+      }
+      {
+	// drawing
+	STACKTRACE;
+	{
+	  STACKTRACE;
+	  prepareDraw();
+	}
+	{
+	  STACKTRACE;
+	  draw();
+	}
       }
       
       eventFrameEnd(t);
@@ -183,6 +198,8 @@ bool AGApplication::eventIdle()
 
 void AGApplication::prepareDraw()
 {
+  STACKTRACE; 
+
   if(mainWidget)
     {
       mainWidget->prepareDraw();
@@ -195,6 +212,7 @@ AGWidget *pLastDrawn=0;
 
 void AGApplication::draw()
 {
+  STACKTRACE;
   beginRender();
   if(mainWidget)
     {

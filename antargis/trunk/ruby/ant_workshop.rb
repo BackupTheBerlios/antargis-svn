@@ -71,7 +71,9 @@ class AntWorkshop<AntHouse
 		end
 		return minarg
 	end
-
+	def houseType
+		"workshop"
+	end
 private
 	def checkSmoke
 		if @smokeMesh
