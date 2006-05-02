@@ -51,7 +51,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def getHeroScreenPos(hero)
 		pos=hero.getPos3D+AGVector3.new(0,0,2)
 		sp=getScene.getPosition(AGVector4.new(pos,1))
-		return AGRect.new(sp.x-50,sp.y-55,100,50)
+		return AGRect.new(sp.x-50,sp.y-55,100,27)
 	end
 
 	def focusHero(hero)
@@ -285,25 +285,14 @@ class AntNameDisplay<AGWidget
 	def initialize(p,r,hero)
 		super(p,r)
 		@hero=hero
-		@cr=r.origin
-		@cr.setHeight(@cr.height/2)
-		@cr.setTop(@cr.height)
-		@cr=@cr.shrink(4)
 		@font=getTheme.getFont("heroName.font")
 		@oldfont=@font
 		@name=@hero.getName
-		addChild(@mb=AGButton.new(self,AGRect.new(0,0,width,height/2+4	),""))
-		@mb.setEnabled(false)
-		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height/2),@hero.getName,@font))
+		addChild(@mb=AGButton.new(self,AGRect.new(0,0,width,height),""))
 		
-		#b.setTheme("antButton")
-		if false
-			addChild(b=AGButton.new(self,AGRect.new(0,height/2,width,height/2-1),""))
-			b.setEnabled(false)
-			@energyWidget=AntEnergy.new(self,AGRect.new(5,height/2+5,width-10,height/2-11))
-			addChild(@energyWidget)
-			@energyWidget.setHero(hero)
-		end
+		@mb.setEnabled(false)
+		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height),@hero.getName,@font))
+		
 		@fonts={true=>getTheme.getFont("heroName.font"),false=>getTheme.getFont("enemyHero.font")}
 		setCaching(true)
 	end
@@ -327,6 +316,7 @@ class AntNameDisplay<AGWidget
 		end
 		super
 	end
+
 	private
 end
 

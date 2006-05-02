@@ -193,6 +193,7 @@ bool AGWindow::tryClose(AGEvent *m)
 {
   TRACE;
   hide();
+  m->setCaller(this);
   sigClose(m);
   return false;
 }

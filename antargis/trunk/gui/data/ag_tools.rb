@@ -79,7 +79,9 @@ module AGHandler
 		#dputs @handlers.keys.join(";")
 		#puts "SIGNAL"
 		#puts callerName,evName
-		#puts @handlers.keys.join(",")
+		puts "myhandlers:"+@handlers.keys.join(",")
+		puts "evName:#{evName}"
+		puts "callerName:#{callerName}"
 		
 		if @handlers.has_key?(evName) then
 			value=false

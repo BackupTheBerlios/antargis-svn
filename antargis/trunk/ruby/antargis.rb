@@ -127,6 +127,8 @@ class AntGameApp <AntRubyView
 				puts @hero
 				#@hero.newHLDismissJob
 			when "doRest"
+				#messageBox("restTitle","rest text",0) {|result|puts "RESULT:#{result}"}
+				#getMap.pause
 				if @hero
 					@hero.newHLRestJob(10)
 				end

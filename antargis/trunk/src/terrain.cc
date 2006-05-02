@@ -49,10 +49,13 @@ void TerrainPieceVA::mapChanged()
   AGVector3 tp3;
   float texFactor3w=0.5;
 
+  size_t stepping=1;
+
+
   // add Vertices
   size_t x,y;
-  for(x=mXs;x<=mXs+mW;x++)
-    for(y=mYs;y<=mYs+mH;y++)
+  for(x=mXs;x<=mXs+mW;x+=stepping)
+    for(y=mYs;y<=mYs+mH;y+=stepping)
       {
 	int sx=x*mScale,sy=y*mScale;
 	v=mMap->getVertex(sx,sy);
@@ -67,12 +70,12 @@ void TerrainPieceVA::mapChanged()
 	bb.include(v.dim3());
       }
 
-  for(x=mXs;x<mXs+mW;x++)
-    for(y=mYs;y<mYs+mH;y++)
+  for(x=mXs;x<mXs+mW;x+=stepping)
+    for(y=mYs;y<mYs+mH;y+=stepping)
       {
-	int p0=x-mXs+(y-mYs)*(mW+1);
+	int p0=(x-mXs)/stepping+(y-mYs)/stepping*(mW/stepping+1);
 	int p1=p0+1;
-	int p2=p0+(mW+1);
+	int p2=p0+(mW/stepping+1);
 	int p3=p2+1;
 	if(((x+y)%2)==0)
 	  {

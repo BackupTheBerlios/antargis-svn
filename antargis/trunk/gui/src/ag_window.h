@@ -38,7 +38,7 @@ class AGWindow:public AGTable
   void close();
 
   // slot
-  bool tryClose(AGEvent *m);
+  virtual bool tryClose(AGEvent *m);
 
   AGRect2 getClientRect() const;
 

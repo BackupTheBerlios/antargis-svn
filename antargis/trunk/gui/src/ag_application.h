@@ -57,6 +57,7 @@ class AGApplication:public AGMessageObject
   virtual void eventChangedRes();
 
   void setMainWidget(AGWidget *w);
+  AGWidget *getMainWidget();
 
   virtual void draw();
   virtual void prepareDraw();

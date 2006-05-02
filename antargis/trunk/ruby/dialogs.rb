@@ -56,6 +56,11 @@ class AntDialog<AGLayout
 		if getChild("cancel")
 			addHandler(getChild("cancel"),:sigClick,:eventCancel)
 		end
+		puts "ADD SIGCLOSE"
+		window=getChild("window")
+		puts window
+		addHandler(window,:sigClose,:eventClose)
+		puts "handler added"
 		addSignal("sigClosed")
 		#setModal(true)
 		if fade
@@ -64,11 +69,11 @@ class AntDialog<AGLayout
 		end
 	end
 	def eventOk(e)
-		eventClose
+		eventClose(e)
 		return true
 	end
-	def eventCancel
-		eventClose
+	def eventCancel(e)
+		eventClose(e)
 		return true
 	end
 	
@@ -76,7 +81,7 @@ class AntDialog<AGLayout
 		puts "DIALOG:KEY DOWN: #{self}"
 		if super then return true end
 		if e.getKey==SDLK_ESCAPE then	
-			eventClose
+			eventClose(e)
 			getMap.unpause
 			return true
 		elsif e.getKey==SDLK_RETURN then
@@ -84,8 +89,9 @@ class AntDialog<AGLayout
 		end
 		return false
 	end
-	def eventClose
+	def eventClose(e)
 		close
+		puts "antdialog::eventClose"
 		sigClosed(AGEvent.new(self,"sigClosed"))
 		setNormalVolumeWave
 		return true
@@ -116,6 +122,7 @@ class AntStoryTalk<AntDialog
 	end
 
 	def updateText
+		puts "UPDATE TEXT"
 		c=@flow.get
 		if c
 			setTitle(c[0])
@@ -128,13 +135,17 @@ class AntStoryTalk<AntDialog
 	end
 	
 	# signals	
-	def eventOk(e)
+	def eventClose(e)
+		puts "AntStory::eventClose"
 		if not updateText
 			sigStoryFinished(e)
 			puts "pCaller:"+e.getCaller.getName
 			getMap().unpause()
 			close
 			#toAGWindow(getChild("window")).close
+			super
+		else
+			getChild("window").show
 		end
 		return true
 	end
@@ -166,7 +177,7 @@ class AntQuitDialog<AntDialog
 		setName("QuitDialog")
 		getMap.pause
 	end
-	def eventClose
+	def eventClose(e)
 		super
 		getMap.unpause
 		return true
@@ -201,7 +212,7 @@ class AntOptionsDialog<AntDialog
 		close
 		return true
 	end
-	def eventClose
+	def eventClose(e)
 		super
 		getMap.unpause
 		return true
@@ -246,7 +257,7 @@ class AntSaveCampaignDialog<AntDialog
 		close
 		return true
 	end
-	def eventClose
+	def eventClose(e)
 		super
 		getMap.unpause
 		return true
@@ -277,7 +288,7 @@ class AntLoadDialog<AntDialog
 		close
 		return true
 	end
-	def eventClose
+	def eventClose(e)
 		super
 		getMap.unpause
 		return true
@@ -483,3 +494,5 @@ class LoadApp<AGApplication
 		draw
 	end
 end
+
+require 'ant_messagebox.rb'

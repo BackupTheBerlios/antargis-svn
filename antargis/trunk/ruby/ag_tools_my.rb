@@ -62,6 +62,9 @@ module AGHandler
 		end
 		callerName=toAGWidget(caller).getName
 		evName=callerName+":"+name
+
+		puts "callerName:#{callerName}"
+		puts "evName: #{evName}"
 		
 		if @handlers.has_key?(evName) then
 			value=false

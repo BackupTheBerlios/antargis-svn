@@ -8,6 +8,17 @@ def load(n)
 	AGSurface.load(n)
 end
 
+# make a new terrain tile out of a triple of textures
+# terrain_mask3.png is used as a grey-scale mask
+# pixels are assigned as follows:
+# * v<thresF-diffF is taken from triple[0]-texture
+# * v>=threhsF-diffF and v<=threshF+diffF taken from triple[1]
+# * v>threhsF+diffF taken from triple[1]
+#
+# the reason for this processing type is the typical appearance
+# of grass on ground. it appears in small "bushes", so the border
+# is slightly darker.
+
 def makeTerrain(triple,thresF=0.5,diffF=0.1)
 	ground=load("ground_4.png")
 	darkground=load("ground_5.png")
@@ -70,8 +81,10 @@ def makeTerrain(triple,thresF=0.5,diffF=0.1)
 	return terrain
 end
 
+# gather generated textures in ts
 ts=[]
 
+# out of this tripple a new texture is generated
 triple=["underwater4.png","underwater3.png","underwater3.png"]
 ts+=[-0.2,0.30,0.5,0.65].collect{|f|makeTerrain(triple,f)}
 
@@ -93,10 +106,6 @@ ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 triple=["forest2.png","underwater3.png","rock2.png"]
 ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 
-#triple=["rock.png","rock2.png","rock2.png"]
-#ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
-#ts+=[0.2,0.4,0.6].collect{|f|makeTerrain(triple,f)}
-
 triple=["rock2.png","rock7.png","rock7.png"]
 ts+=[0.5,1.2].collect{|f|makeTerrain(triple,f)}
 
@@ -105,6 +114,7 @@ ts+=[0.5,1.2].collect{|f|makeTerrain(triple,f)}
 
 puts "GENERATED:"
 puts ts.length
+# fill up to next power of 2
 while ts.length<32
 	ts.push(ts[ts.length-1])
 end
@@ -122,16 +132,8 @@ ts.each{|t|
 	all.blit(t,AGRect.new(0,128*i,128,128),AGRect.new(0,0,128,128),AGColor.new(0xFF,0xFF,0xFF,0xFF))
 	i+=1
 }
+# save texture in new3d.png
 all.save("new3d.png")
 $s.addChild(AGImage.new($s,AGRect.new(0,0,800,600),all,false))
-# ts.each{|t|
-# 	$s.addChild(AGImage.new($s,AGPoint.new(x,y),t,false))
-# 	t.save("terrain_tile#{i}.png")
-# 	x+=128
-# 	if x>=128*4
-# 		x=0
-# 		y+=128
-# 	end
-# 	i+=1
-# }
-app.run
+# display image
+#app.run

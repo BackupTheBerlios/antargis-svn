@@ -61,6 +61,12 @@ void AGApplication::setMainWidget(AGWidget *w)
   mainWidget=w;
 }
 
+AGWidget *AGApplication::getMainWidget()
+{
+  return mainWidget;
+}
+
+
 
 bool AGApplication::run() 
 {
