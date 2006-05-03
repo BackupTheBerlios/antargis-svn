@@ -89,8 +89,8 @@ no segfaults known
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
-[H] move camera according to map-height (higher areas don't get too near to camera)
 [H] add possibility to downscale textures ??
+[M] make particle engine more generic and include shader-support
 [L] make shadows work on other platforms too?
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
 		There is a problem, too when zoomed in, as it's the current default.

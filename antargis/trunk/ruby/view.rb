@@ -132,6 +132,18 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	def setCamera(p)
 		super(clipCamera(p))
 	end
+	def getCameraHeight(p)
+		# take some middle
+		h=0
+		(-1..1).each{|x|
+			(-1..1).each{|y|
+				h+=getMap.getHeight(p[0]+x,p[1]+y)
+			}
+		}
+		h/=9
+		puts h
+		return h
+	end
 
 	def clipCamera(p)
 		AGVector2.new([31,p[0],getMap.getW-31].sort[1],[14,p[1],getMap.getH-36].sort[1])

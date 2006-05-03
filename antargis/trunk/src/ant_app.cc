@@ -143,7 +143,7 @@ AGVector2 GLApp::getCamera() const
 
 void GLApp::setCamera(const AGVector2 &p)
 {
-  scene.setCamera(AGVector4(p[0],p[1],0));
+  scene.setCamera(AGVector4(p[0],p[1],getCameraHeight(p)));
 }
 
 bool GLApp::eventKeyDown(AGEvent *e)
@@ -169,4 +169,9 @@ void GLApp::mark()
 {
   //  CTRACE;
   markObject(&scene);
+}
+
+float GLApp::getCameraHeight(const AGVector2&p)
+{
+  return 0;
 }

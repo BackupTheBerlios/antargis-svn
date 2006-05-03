@@ -38,7 +38,7 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
 
   gUsedTexMemory+=w*h*4;
 
-  //  cdebug("used memory:"<<gUsedTexMemory);
+  cdebug("used memory:"<<gUsedTexMemory);
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -55,7 +55,7 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D)
                GL_UNSIGNED_BYTE, 0);
 
   gUsedTexMemory+=w*h*d*4;
-  //  cdebug("used memory:"<<gUsedTexMemory);
+  cdebug("used memory:"<<gUsedTexMemory);
 
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

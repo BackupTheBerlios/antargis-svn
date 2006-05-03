@@ -50,7 +50,7 @@ public:
 
   Scene &getScene();
 
-
+  virtual float getCameraHeight(const AGVector2&p);
   virtual void setCamera(const AGVector2&p);
   AGVector2 getCamera() const;
 
