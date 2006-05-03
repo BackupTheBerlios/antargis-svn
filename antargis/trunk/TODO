@@ -10,8 +10,7 @@ In special cases it can be Very High (=VH).
 
 WEBSITE & PR
 ==================================================
-[VH] add WIKI User-FAQ
-
+[M] help-anouncement on gamedev.net
 
 ARTS
 ==================================================
@@ -19,15 +18,16 @@ ARTS
 [Arts - Graphics - 3D]
 ------------------------------------------------------
 [H] Mesh for pigeon
-[L] improve meshes for trees, bushes, men
 [M] animate hero, druid and smith
 [M] a well, a mill
 [M] some statue (monument) representing the whole village
     it can be clicked to get information about a whole village or attacking it???
 [M] some more animals: cow, deer ??
+[L] improve meshes for trees, bushes, men
 [L] animate wolf
 [L] add meshes for fish
 [L] add female meshes
+[L] animated trees / falling trees
 
 [Arts - Graphics - 2D]
 ------------------------------------------------------
@@ -68,16 +68,15 @@ ARTS
 ------------------------------------------------------
 no segfaults known
 
-[Gui/View]
+[Gui/View - GUI-library]
 ------------------------------------------------------
-[L] add Framebuffer objects for paint to texture.
-[L] fix AGMenu*. This is broken, but not used ATM.
+[H] add memory checks for texture memory
+[H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [M] fix paint errors on text-elements (wrap-texture). Look at AGFontEngine::*.
 		set Texture to GL_CLAMP_TO_EDGE or something like this.
-[H] add campaign-loading functionality to load-dialog in-game  TRICKY
-		This is a real problem, because the current AGApplication is called by the campaign-code.
-		So the AntApp must be finished and the surrounding campaign-code, too. After this the
-		loaded campaign must be started.
+		this occures in intro when displaying text
+[L] add Framebuffer objects for paint to texture.
+[L] fix AGMenu*. This is broken, but not used ATM.
 [L] rewrite AGEdit - without AGEditLines
 		In AGEdit2 is a beginning of a rewrite. But it's a kind of crappy approach. AGEdit2 should
 		be able to 
@@ -85,14 +84,12 @@ no segfaults known
 		2) handle selections with mouse or SHIFT+CURSOR
 		3) copy/paste
 		4) insert images
-[L] fix decals (use clamp-to-edge and original cells)
+[L] add drawGradients-batcher to AGPainter
 
 
-[Graphics]
+[Graphics - 3d-engine]
 ------------------------------------------------------
-[H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [H] move camera according to map-height (higher areas don't get too near to camera)
-[H] add memory checks for texture memory
 [H] add possibility to downscale textures ??
 [L] make shadows work on other platforms too?
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
@@ -101,13 +98,16 @@ no segfaults known
 [L] snow,rain which falls down. Maybe as a simple overlay?
 [L] bushes, plants, high grass, flowers. Thats means there should be possibility to include
 		several imposters into one mesh and render them effiently.
-[VL] seasons - snow,spring... Exchange or fade terrain textures.
 [L] Fog of war - overlay darkness/fog
-[L] animated trees / falling trees
-[L] add drawGradients-batcher to AGPainter
+[L] fix decals (use clamp-to-edge and original cells)
+[VL] seasons - snow,spring... Exchange or fade terrain textures.
 
-[Game]
+[Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] add campaign-loading functionality to load-dialog in-game  TRICKY
+		This is a real problem, because the current AGApplication is called by the campaign-code.
+		So the AntApp must be finished and the surrounding campaign-code, too. After this the
+		loaded campaign must be started.
 [H] Quitting in game doesn't really quit
 [H] F1..F7 keys for hero selection
 [H] add arrows in man-class
@@ -128,11 +128,11 @@ no segfaults known
 	- history function
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
-[VL] very bad situation => raise heroes with a new player (rebellion)
 [L] add experience points and function to appoint hero
 [L] add formations
+[VL] very bad situation => raise heroes with a new player (rebellion)
 
-[Scripting]
+[Scripting - Levels and campaigns]
 ------------------------------------------------------
 [H] finish first level of birth-campaign
 [H] add some single maps
