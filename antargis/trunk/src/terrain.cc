@@ -2,6 +2,7 @@
 #include <ag_texturecache.h>
 #include <ag_rendercontext.h>
 #include <ag_profiler.h>
+#include <ag_config.h>
 
 //////////////////////////////////////////////////////////////////////////
 // TerrainPieceVA
@@ -142,13 +143,25 @@ size_t TerrainPieceVA::getTriangles() const
 }
 
 
+int getTerrainDownScale()
+{
+  int s=1;
+
+  if(getConfig()->get("terrainDownScaleExp")!="")
+    s=toInt(getConfig()->get("terrainDownScaleExp"));
+  
+  getConfig()->set("terrainDownScaleExp",toString(s));
+
+  return s;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // TerrainMesh
 ////////////////////////////////////////////////////////////////////////////
 
 
 Terrain::Terrain(Scene *pScene,HeightMap &map):
-  m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png")),
+  m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png",getTerrainDownScale())),
   mGrass(getTextureCache()->get("data/textures/terrain/grass4.png")),
   mMap(&map),
   mScene(pScene)

@@ -171,9 +171,23 @@ void AnimMeshData::setEvents(bool e)
 }
 
 
+int getMeshDownScale()
+{
+  int s=1;
+  std::string n="meshDownScaleExp";
+
+  if(getConfig()->get(n)!="")
+    s=toInt(getConfig()->get(n));
+  
+  getConfig()->set(n,toString(s));
+
+  return s;
+
+}
+
 void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::string &tex)
 {
-  mTexture=getTextureCache()->get(tex);
+  mTexture=getTextureCache()->get(tex,getMeshDownScale());
   Loader l(instr);
 
   Uint32 vs,ts;

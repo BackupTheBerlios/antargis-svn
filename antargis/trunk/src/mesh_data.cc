@@ -7,6 +7,9 @@
 // MeshData
 //////////////////////////////////////////////////////////////////////
 
+int getMeshDownScale(); // implemented in anim_mesh_data.cc
+
+
 MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShadow):mBBox(AGVector3(0,0,0),AGVector3(-1,0,0))
 {
   CTRACE;
@@ -14,7 +17,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
   mWithTexture=false;
   if(pTexture!="")
     {
-      mTexture=getTextureCache()->get(pTexture);
+      mTexture=getTextureCache()->get(pTexture,getMeshDownScale());
       mWithTexture=true;
     }
   mShadow=pShadow;
@@ -43,7 +46,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   mWithTexture=false;
   if(pTexture!="")
     {
-      mTexture=getTextureCache()->get(pTexture);
+      mTexture=getTextureCache()->get(pTexture,getMeshDownScale());
       mWithTexture=true;
     }
   

@@ -35,26 +35,40 @@ AGTextureCache::AGTextureCache()
 {
   getInstanceKiller()->reg(createKiller(this));
 }
-const AGTexture &AGTextureCache::get(const std::string &pTexture)
+const AGTexture &AGTextureCache::get(const std::string &pTexture,int downScaleExp)
   {
     std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
         // load
         AGSurface ms=AGSurface::load(pTexture);
+
+	while(downScaleExp>1 && ms.width()>16 && ms.height()>16)
+	  {
+	    ms=ms.scale(ms.width()/2,ms.height()/2);
+	    downScaleExp--;
+	  }
+
         mTextures[pTexture]=AGTexture(ms,false);
       }
     return mTextures[pTexture];
   }
 
 
-const AGTexture &AGTextureCache::get3D(const std::string &pTexture)
+const AGTexture &AGTextureCache::get3D(const std::string &pTexture,int downScaleExp)
   {
     std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
         // load
         AGSurface ms=AGSurface::load(pTexture);
+
+	while(downScaleExp>1 && ms.width()>16 && ms.height()>16)
+	  {
+	    ms=ms.scale(ms.width()/2,ms.height()/2);
+	    downScaleExp--;
+	  }
+
         mTextures[pTexture]=AGTexture(ms,true);
       }
     return mTextures[pTexture];

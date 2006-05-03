@@ -32,8 +32,8 @@ class AGTextureCache
   {
     AGTextureCache();
   public:
-    const AGTexture &get(const std::string &pTexture);
-    const AGTexture &get3D(const std::string &pTexture);
+    const AGTexture &get(const std::string &pTexture,int downScaleExp=1);
+    const AGTexture &get3D(const std::string &pTexture,int downScaleExp=1);
   private:
     std::map<std::string,AGTexture> mTextures;
     
