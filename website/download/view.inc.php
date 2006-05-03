@@ -27,7 +27,8 @@ function view()
 
 	$b.=h3("Get Antargis from SVN");	
 	$svn=anchor("http://developer.berlios.de/svn/?group_id=3474","Berlios' SVN instructions");
-	$b.=p("As this game is still in heavy development there are no packages or tarballs yet. But you can try the current state in svn. If you want to build BoA from SVN you must install <a href='www.swig.org'>swig</a>");
+	$b.=p("As this game is still in heavy development there are no packages or tarballs yet. But you can try the current state in svn.");
+	$b.=p("If you want to build BoA from SVN you must install <a href='www.swig.org'>swig</a> !");
 	$b.=p("For SVN-instruction please have a look at $svn");
 	
 	$b.=p("svn checkout svn://svn.berlios.de/antargis/antargis/trunk antargis","code");
