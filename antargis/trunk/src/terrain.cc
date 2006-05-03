@@ -1,6 +1,7 @@
 #include "terrain.h"
 #include <ag_texturecache.h>
 #include <ag_rendercontext.h>
+#include <ag_profiler.h>
 
 //////////////////////////////////////////////////////////////////////////
 // TerrainPieceVA
@@ -95,6 +96,7 @@ void TerrainPieceVA::mapChanged()
 
 void TerrainPieceVA::drawShadow()
 {
+  STACKTRACE;
   m3dArray.setColors(false);
   m3dArray.draw();
   m3dArray.setColors(true);
@@ -110,12 +112,14 @@ void TerrainPieceVA::drawDepth()
 
 void TerrainPieceVA::drawPick()
 {
+  STACKTRACE;
   m3dArray.drawPick();
 }
 
 
 void TerrainPieceVA::draw()
 {
+  STACKTRACE;
   AGRenderContext c;
   c.setLighting(true);
   c.setTexture(mTerrain->get3dTexture()->glTexture());

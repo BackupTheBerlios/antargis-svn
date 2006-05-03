@@ -7,6 +7,7 @@
 #include "ag_xml.h"
 #include "ag_fs.h"
 #include "ag_config.h"
+#include "ag_profiler.h"
 #include "entity.h"
 
 #include <math.h>
@@ -100,17 +101,19 @@ void AnimMesh::setEntity(AntEntity *e)
 
 void AnimMesh::drawDepth()
 {
-
+  STACKTRACE;
   drawPrivate(false,false);
 }
 
 void AnimMesh::draw()
 {
+  STACKTRACE;
   //return;
   drawPrivate(true,false);
 }
 void AnimMesh::drawPick()
 {
+  STACKTRACE;
   drawPrivate(false,true);
 }
 

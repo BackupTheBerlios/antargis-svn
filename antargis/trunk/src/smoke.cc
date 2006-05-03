@@ -6,6 +6,7 @@
 #include "ag_main.h"
 #include "map.h"
 #include "ag_config.h"
+#include "ag_profiler.h"
 
 bool gSmoke;
 long lastSmokeTest;
@@ -53,6 +54,7 @@ void Smoke::setMaxTime(float m)
 
 void Smoke::advance(float time)
 {
+  STACKTRACE;
   if(!smokeEnabled())
     return;
   //  return;
@@ -113,18 +115,12 @@ void Smoke::advance(float time)
 
 void Smoke::draw()
 {
+  STACKTRACE;
+
   if(!smokeEnabled())
     return;
-  //  return;
-  /*
-  //  return;
-  glDisable(GL_ALPHA_TEST);
-  glEnable(GL_BLEND);
-  glDepthMask(false);
-  */
-  AGVector3 dir=getRenderer()->getCurrentScene()->getCameraDirTo(getPos().dim3());
 
-  //  cdebug(dir);
+  AGVector3 dir=getRenderer()->getCurrentScene()->getCameraDirTo(getPos().dim3());
 
   AGVector3 pdown(0,0,-1);
   AGVector3 side=dir%pdown;
@@ -140,20 +136,23 @@ void Smoke::draw()
   c.setColor(AGVector4(1,1,1,1));
   c.begin();
 
+  glBegin(GL_QUADS);
+
+  float a,s,l;
+  AGVector4 color;
+
   for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
     {
-      float a=1;
+      a=1;
       if(!fire)
 	if((*i)->lived<1)
 	  a=(*i)->lived;
       
       a=std::min(maxtime-(*i)->lived,a);
 
-      //      glBindTexture(GL_TEXTURE_2D,mTexture.getTextureID());
-
-      float l=(*i)->light;
-      float s=(*i)->size;
-      AGVector4 color((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
+      l=(*i)->light;
+      s=(*i)->size;
+      color=AGVector4((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
       if(fire)
 	{
 	  float x=maxtime/(*i)->lived;
@@ -165,9 +164,6 @@ void Smoke::draw()
 	  if((*i)->lived<3)
 	    s*=(*i)->lived/3;
 	}
-
-      //      glColor4f((*i)->color[0]*l,(*i)->color[1]*l,(*i)->color[2]*l,a);
-      glBegin(GL_QUADS);
       glColor4fv(color);
       glTexCoord2f(0,0);
       glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side+up)*s);
@@ -183,24 +179,11 @@ void Smoke::draw()
       glColor4fv(color);
       glTexCoord2f(0,1);
       glVertex3fv((*i)->pos+(AGVector3(0,0,0)-side-up)*s);
-      glEnd();
+
     }
-  //  glDepthMask(true);
+  glEnd();
   
 }
-
-
-/*void Smoke::setPos(const AGVector3&pPos)
-{
-  p=pPos;  
-  mBBox=AGBox3(p+AGVector3(-0.5,-0.5,0),AGVector3(1,1,10));
-}
-
-AGBox3 Smoke::bbox() const
-{
-  return mBBox;
-}
-*/
 
 void Smoke::setEnabled(bool f)
 {

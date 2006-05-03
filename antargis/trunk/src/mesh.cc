@@ -5,6 +5,7 @@
 #include <math.h>
 #include <ag_debug.h>
 #include <ag_texturecache.h>
+#include <ag_profiler.h>
 
 
 
@@ -40,6 +41,7 @@ Mesh::~Mesh()
 
 void Mesh::draw()
 {
+  STACKTRACE;
   if(!mVisible)
     return;
 
@@ -55,6 +57,7 @@ void Mesh::draw()
 }
 void Mesh::drawDepth()
 {
+  STACKTRACE;
   if(!mVisible)
     return;
   begin();
@@ -64,6 +67,7 @@ void Mesh::drawDepth()
 }
 void Mesh::drawShadow()
 {
+  STACKTRACE;
   if(!mVisible)
     return;
   begin();
@@ -134,6 +138,8 @@ AGBox3 Mesh::bbox() const
 
 void Mesh::drawPick()
 {
+  STACKTRACE;
+
   if(!mVisible)
     return;
   begin();

@@ -2,6 +2,7 @@
 #include "ag_debug.h"
 #include "ag_kill.h"
 #include "ag_rendercontext.h"
+#include "ag_profiler.h"
 
 AntWaterShader *gWaterShader=0;
 AntWaterShader *getWaterShader()
@@ -91,6 +92,8 @@ void WaterPiece::addTriangle(int x0,int y0,int x1,int y1,int x2, int y2)
 
 void WaterPiece::draw()
 {
+  STACKTRACE;
+
   AGRenderContext c;
   c.setAlpha(0,GL_NONE);
   c.setCulling(false);

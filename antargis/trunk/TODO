@@ -113,9 +113,12 @@ no segfaults known
 [H] add arrows in man-class
 [H] add fighting on boat
 [H] save current job :-(  high-level and low-level
+		low-level saving should be finished, but high-level makes some problems
 [H] decrease morale on men when inventing and not resting
 [H] disable controls when telling story (after "come here my friend")
+		this means you shouldn't be able to move your hero.
 [H] add swords/shields/bows and apply them when fighting
+		sword and shield is ready.
 [H] describe men's health and morale when inspecting house
 [H] tough breath when hero suffers / some info-box appearing
 [H] check aggression (fight) - enemies don't die when agg==3

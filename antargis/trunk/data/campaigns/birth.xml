@@ -12,7 +12,7 @@
 	<cutscene>
 		<screen>
 			<image filename="data/gui/campaign/mountain_landscape_imp.png"/>
-			<text text="Your enemies fled northward. Your mission is it to find and defeat them."/>
+			<text text="Your enemies have fled northward. Your mission is find and crash them."/>
 		 </screen>
 	 </cutscene>
 	 <level file="data/levels/birth2.antlvl"/>
