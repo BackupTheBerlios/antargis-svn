@@ -118,5 +118,9 @@ class IntroApp<AGApplication
 end
 
 app=IntroApp.new
-app.run
+
+
+if getConfig.get("intro")!="false"
+  app.run
+end
 require 'ruby/mainmenu.rb'

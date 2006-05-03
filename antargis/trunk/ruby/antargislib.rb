@@ -42,9 +42,20 @@ if not $antargislibinited
 					getConfig.set("soundEnabled","false")
 				when "sound"
 					getConfig.set("soundEnabled","true")
+				when "profile"
+					require 'profile'
+				when "intro"
+					getConfig.set("intro","true")
+				when "no-intro"
+					getConfig.set("intro","false")
 				when "help","h"
 					STDERR.puts "Possible options:
 --help     show this help message
+
+--profile  enables profiling output of BoA's ruby-part
+
+--intro    enables the intro
+--no-intro disables the intro
 
 --sound    enables sound for now and future uses
 --no-sound disables sound for now and future uses"
