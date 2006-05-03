@@ -26,9 +26,7 @@ if not $antargislibinited
 	
 	$antargislibinited=true
 
-	$main=AGMain.new(1024,768,32,false,true)
-	$main.setCaption("Antargis")
-	$main.setIcon("data/gui/editor/tower1.png")
+	$fullscreen=false
 
 	# check options
 	ARGV.each{|arg|
@@ -48,21 +46,31 @@ if not $antargislibinited
 					getConfig.set("intro","true")
 				when "no-intro"
 					getConfig.set("intro","false")
+				when "fullscreen"
+					$fullscreen=true
+				when "window"
+					$fullscreen=false
 				when "help","h"
 					STDERR.puts "Possible options:
---help     show this help message
+--help         show this help message
 
---profile  enables profiling output of BoA's ruby-part
+--fullscreen   enable fullscreen
+--window       start in windows mode
 
---intro    enables the intro
---no-intro disables the intro
+--profile      enables profiling output of BoA's ruby-part
 
---sound    enables sound for now and future uses
---no-sound disables sound for now and future uses"
+--intro        enables the intro
+--no-intro     disables the intro
+
+--sound        enables sound for now and future uses
+--no-sound     disables sound for now and future uses"
 					exit
 			end
 		end
 	}
 
+	$main=AGMain.new(1024,768,32,$fullscreen,true)
+	$main.setCaption("Antargis")
+	$main.setIcon("data/gui/editor/tower1.png")
 
 end

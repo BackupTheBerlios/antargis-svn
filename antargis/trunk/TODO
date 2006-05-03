@@ -90,6 +90,7 @@ no segfaults known
 
 [Graphics]
 ------------------------------------------------------
+[H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [H] move camera according to map-height (higher areas don't get too near to camera)
 [H] add memory checks for texture memory
 [H] add possibility to downscale textures ??
