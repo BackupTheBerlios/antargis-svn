@@ -57,9 +57,9 @@ bool Renderer::canMultitexture()
 
 bool Renderer::canShadow()
 {
-  if(mCanShadow<0 && shadowMapSize>0)
+  if(mCanShadow<0)
     mCanShadow=(GLEE_ARB_shadow && GLEE_ARB_shadow_ambient);
-  return mCanShadow;
+  return mCanShadow && shadowMapSize>0;
 }
 
 bool Renderer::canGLSL()
@@ -192,6 +192,7 @@ void Renderer::beginShadowDrawing()
   // draw a flat shadow over 
   //  glDisable(GL_LIGHTING);
   //  glEnable(GL_COLOR_MATERIAL);
+  assertGL;
   
 
   if(usePlainGL)
