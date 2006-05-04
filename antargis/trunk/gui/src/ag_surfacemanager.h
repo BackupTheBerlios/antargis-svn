@@ -50,7 +50,7 @@ class AGSurfaceManager
   void registerMe(AGGLTexture *p);
   void deregisterMe(AGGLTexture *p);
 
-  void cleanup(bool force=false);
+  void cleanup(bool force=false, bool nomem=false);
   void clear();
 
   size_t getUsedTexMem() const;

@@ -24,6 +24,7 @@
 #include "ag_texture.h"
 #include "ag_kill.h"
 #include "ag_debug.h"
+#include "ag_config.h"
 
 #include <map>
 
@@ -55,8 +56,6 @@ AGSurfaceManager::~AGSurfaceManager()
 
 void AGSurfaceManager::clear()
 {
-  cleanup(true);
-  cleanup(true);
   cleanup(true);
 }
 
@@ -120,12 +119,34 @@ AGSurfaceManager *getSurfaceManager()
   return mSurfaceManager;
 }
 
+long globalTexMem=-1;
 
-void AGSurfaceManager::cleanup(bool force)
+long getTexMem()
 {
-  //return;
+  if(globalTexMem<0)
+    {
+      globalTexMem=16000000;
+      if(getConfig()->get("textureMemory")!="")
+	globalTexMem=toLong(getConfig()->get("textureMemory"));
+      getConfig()->set("textureMemory",toString(globalTexMem));
+    }
+  return globalTexMem;
+}
+
+
+void AGSurfaceManager::cleanup(bool force,bool nomem)
+{
   size_t oldTexMem=getUsedTexMem();
-  if(oldTexMem<16000000 && !force)
+  if(force && nomem)
+    {
+      if(oldTexMem>8000000) // do not lower it beyond 8MB - this makes no sense
+	{
+	  globalTexMem=oldTexMem;
+	  getConfig()->set("textureMemory",toString(globalTexMem)); // save it
+	}
+    }
+
+  if(oldTexMem<getTexMem() && !force)
     return;
   cdebug("oldTexMem:"<<oldTexMem);
   

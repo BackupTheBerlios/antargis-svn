@@ -70,7 +70,6 @@ no segfaults known
 
 [Gui/View - GUI-library]
 ------------------------------------------------------
-[H] add memory checks for texture memory
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [M] fix paint errors on text-elements (wrap-texture). Look at AGFontEngine::*.
 		set Texture to GL_CLAMP_TO_EDGE or something like this.

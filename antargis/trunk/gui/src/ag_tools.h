@@ -60,6 +60,7 @@ inline bool toBool(const std::string &s)
 }
 
 int toInt(const std::string &s);
+long toLong(const std::string &s);
 float toFloat(const std::string &s);
 int fromHex(const std::string &s);
 std::string toHex(int i);

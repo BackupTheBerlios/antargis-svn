@@ -25,6 +25,10 @@ int toInt(const std::string &s)
 {
   return atoi(s.c_str());
 }
+long toLong(const std::string &s)
+{
+  return atol(s.c_str());
+}
 float toFloat(const std::string &s)
 {
   float f=atof(s.c_str());

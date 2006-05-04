@@ -24,6 +24,7 @@
 #include "ag_rendercontext.h"
 #include "ag_sgeexport.h"
 #include "ag_surfacemanager.h"
+#include "ag_profiler.h"
 #include <stdexcept>
 
 size_t nextpow2(size_t i)
@@ -200,6 +201,22 @@ AGGLTexture *AGTexture::glTexture()
 	      version=s->version;
 	    }
 	}
+    }
+  else
+    {
+      STACKTRACE;
+      // check if resident
+      GLuint id=mTexture->id();
+      GLboolean b;
+      GLboolean r=glAreTexturesResident(1,&id,&b);
+      assert(r);
+      if(!b)
+	{
+	  std::cerr<<"Texture "<<id<<" is not resident - maybe you should lower the texture-level"<<std::endl;
+	  std::cerr<<"Check your ~/.Antargis/config.xml !"<<std::endl;
+	  getSurfaceManager()->cleanup(true,true);
+	}
+	
     }
   mTextureUsed=true;
   return mTexture;
