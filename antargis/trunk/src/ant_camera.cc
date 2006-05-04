@@ -74,7 +74,7 @@ void AntCamera::updateMatrices()
   
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(45.0f, ((float)mWidth)/mHeight, 3.0f, 50.0f);
+  gluPerspective(45.0f, ((float)mWidth)/mHeight, 3.0f, 63.0f);
   glGetFloatv(GL_PROJECTION_MATRIX, cameraProjection);
   glMatrixMode(GL_MODELVIEW);
   if(mPSM)

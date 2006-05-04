@@ -56,11 +56,11 @@ bool GLApp::eventMouseButtonDown(AGEvent *e)
 
   if(e->isSDLEvent())
     {
-      if(e->getButton()==4)
+      if(e->getButton()==5)
 	{
 	  getScene().getCameraObject().incCameraDistance();
 	}
-      else if(e->getButton()==5)
+      else if(e->getButton()==4)
 	{
 	  getScene().getCameraObject().decCameraDistance();
 	}
