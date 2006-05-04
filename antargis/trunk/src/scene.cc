@@ -233,50 +233,22 @@ void Scene::calcShadowMap()
   std::copy(l.begin(),l.end(),std::back_inserter(sorted));
 
   sort(sorted.begin(),sorted.end(),SortOrder());
-  //  sort(sorted.begin(),sorted.end(),SortDistance(mCamera.getCameraPosition().dim3()));
 
-
-  /*
-
-  //  AntFrustum lFrustum=mCamera.getLightProjection().getFrustum();
-  AntFrustum lFrustum=mCamera.getCameraProjection().getFrustum();
-  
   {
     STACKTRACE;
-    //    for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
+    NodeList l=getCurrentNodes();
+    Nodes sorted;
+    std::copy(l.begin(),l.end(),std::back_inserter(sorted));
+    
+    sort(sorted.begin(),sorted.end(),SortOrder());
+    
     for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
       {
-	STACKTRACE;
-	//      if((*i)->bbox().collides(frustum) && (*i)->visible())
-	//      iflFrustum.collides((*i)->bbox()) && (*i)->visible())
-	if(!(*i)->transparent())
-	  if((*i)->visible())
-	    {
-	      (*i)->drawDepth();
-	      mTriangles+=(*i)->getTriangles();
-	    }
-      }
-  }
-  */
-  {
-    STACKTRACE;
-  NodeList l=getCurrentNodes();
-  Nodes sorted;
-  std::copy(l.begin(),l.end(),std::back_inserter(sorted));
-
-  //#endif
-
-  sort(sorted.begin(),sorted.end(),SortOrder());
-
-  for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
-    {
-      //      if(!(*i)->transparent())
 	{
 	  if((*i)->visible())
 	    {
 	      (*i)->drawDepth();
 	      mTriangles+=(*i)->getTriangles();
-	      //	      drawn++;
 	    }
 	}
     }
@@ -361,6 +333,18 @@ void Scene::drawScene()
   std::copy(l.begin(),l.end(),std::back_inserter(sorted));
 
 #endif
+
+
+  {
+    STACKTRACE;
+    for(Nodes::iterator i=sorted.begin();i!=sorted.end();)
+      {
+	if(cFrustum.collides((*i)->bbox()))
+	  i++;
+	else
+	  i=sorted.erase(i);
+      }
+  }
 
   sort(sorted.begin(),sorted.end(),SortOrder());
 

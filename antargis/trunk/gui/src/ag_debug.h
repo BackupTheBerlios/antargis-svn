@@ -74,7 +74,6 @@ std::vector<std::string> split(const std::string &n,const std::string &h);
 #define assertGL
 
 #else
-
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
 template<class T>

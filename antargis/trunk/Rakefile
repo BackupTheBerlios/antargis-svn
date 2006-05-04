@@ -115,6 +115,13 @@ else
 	end
 	
 	$swig=test_program("swig","Swig was not found! If you make changes on the header-files this can lead to problems.")
+
+	if $swig=="" and (not File.exists?("src/swig.cc"))
+		puts "ERROR: Please install swig. This is needed for building from SVN trunk!"
+		exit
+	end
+
+
 	#$swig = with_config('swig', 'swig')
 	$INSTALL = test_program('install', 'Please install "install"')
 	$ccache = test_program("ccache","For faster recompiling while developing you can install ccache.")
