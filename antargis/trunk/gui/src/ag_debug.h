@@ -31,39 +31,11 @@
 #include <GL/glu.h>
 
 #include "ag_exception.h"
+#include "ag_tools.h"
 
 void setQuiet();
 
-
-std::string replace(const std::string &s,const std::string &a,const std::string &b);
-
-template<class T>
-inline std::string toString(const T&t)
-{
-  std::ostringstream os;
-  os<<t;
-  return os.str();
-}
-
-template<>
-inline std::string toString(const bool&b)
-{
-  if(b)
-    return "true";
-  else
-    return "false";
-}
-
-inline bool toBool(const std::string &s)
-{
-  return(s=="true");
-}
-
-
-std::ostream &getDebug();
-std::vector<std::string> split(const std::string &n,const std::string &h);
-
-#ifdef NDEBUG
+#ifdef MNDEBUG
 #define cdebug(x)
 #define ccdebug(x)
 #define debug(x)
@@ -71,9 +43,12 @@ std::vector<std::string> split(const std::string &n,const std::string &h);
 #define CTRACE
 #define CHECK_ZERO(x)
 #define STUB
-#define assertGL
+//#define assertGL
 
 #else
+
+std::ostream &getDebug();
+
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
 template<class T>
@@ -116,7 +91,6 @@ void setRubyRaising(bool flag);
 #ifndef __WIN32__
 #undef assert
 #define assert(x) {if(!(x)) agRaise((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
-//#define assert(x) {if(!(x)) throw std::runtime_error((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
 #endif
 
 #define Assert(x) assert(x)
@@ -129,11 +103,11 @@ void setRubyRaising(bool flag);
 #define CHECK_ZERO(x) if(!x) throw AGException(std::string(__STRING(x))+" is zero in "+__FILE__+" line:"+toString(__LINE__)+" functin:"+__PRETTY_FUNCTION__);
 #endif
 
-void agAssertGL(std::string s);
 
+#endif
+void agAssertGL(std::string s);
 #define assertGL agAssertGL(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 
 
-#endif
 
 #endif

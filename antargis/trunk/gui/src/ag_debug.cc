@@ -28,17 +28,18 @@
 #endif
 #include <ruby.h>
 
-#ifndef NDEBUG
-int D::d=0;
-
-std::ofstream debugOFS("debug.txt");
 
 bool quietLog=false;
-
 void setQuiet()
 {
   quietLog=true;
 }
+
+
+#ifndef MNDEBUG
+int D::d=0;
+
+std::ofstream debugOFS("debug.txt");
 
 std::ostream &getDebug()
 {
@@ -65,20 +66,6 @@ void setRubyRaising(bool flag)
 }
 
 
-void agAssertGL(std::string s)
-{
-  GLenum error = glGetError();
-  if(error != GL_NO_ERROR) {
-    std::ostringstream msg;
-    msg <<s<< ": OpenGLError "
-        << gluErrorString(error);
-    
-    cdebug(msg.str());
-    throw std::runtime_error(msg.str());
-  }
-}
-
-
 D::D(std::string c):
   m(c)
 {
@@ -98,32 +85,20 @@ void D::indent()
     debugout("  ");
 }
 
+
 #endif
-
-std::vector<std::string> split(const std::string &needle,const std::string &haystack)
+void agAssertGL(std::string s)
 {
-  std::vector<std::string> d;
-  size_t i,last=0;
-  for(i=haystack.find(needle);i!=std::string::npos;i=haystack.find(needle,i+1))
-    {
-      d.push_back(haystack.substr(last,i-last));
-      last=i+needle.length();
-    }
-  i=haystack.length();
-  d.push_back(haystack.substr(last,i-last));
-  return d;
+  GLenum error = glGetError();
+  if(error != GL_NO_ERROR) {
+    std::ostringstream msg;
+    msg <<s<< ": OpenGLError "
+        << gluErrorString(error);
+    
+    std::cerr<<msg.str()<<std::endl;
+    throw std::runtime_error(msg.str());
+  }
 }
 
 
 
-std::string replace(const std::string &s,const std::string &a,const std::string &b)
-{
-  std::string str=s;
-  size_t i=str.find(a);
-  while(i!=str.npos)
-    {
-      str=str.substr(0,i)+b+str.substr(i+a.length(),str.length()-i-a.length());
-      i=str.find(a,i+b.length());
-    }
-  return str;
-}

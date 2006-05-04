@@ -15,7 +15,7 @@ rescue
 end
 
 $profile=false
-$debug=false
+$debug=true
 
 #`mkdir .deps`
 
@@ -182,7 +182,7 @@ end
 if $debug
 	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -g -O0 -I"+Config::CONFIG['archdir']+" -Wall"
 else
-	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -O2 -I"+Config::CONFIG['archdir']+" -Wall"
+	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DMNDEBUG -DUSE_RUBY -O2 -I"+Config::CONFIG['archdir']+" -Wall"
 end
 $LDSHARED="#{$CXX} -shared"
 $INSTALL_PROG=$INSTALL+" -m 755 -D "

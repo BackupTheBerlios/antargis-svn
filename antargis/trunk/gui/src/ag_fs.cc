@@ -30,6 +30,7 @@
 #endif
 
 #include "ag_debug.h"
+#include "ag_tools.h"
 
 bool FSinited=false;
 

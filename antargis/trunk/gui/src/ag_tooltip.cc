@@ -23,6 +23,7 @@
 #include "ag_screen.h"
 #include "ag_edit.h"
 #include "ag_debug.h"
+#include "ag_tools.h"
 
 AGTooltip::AGTooltip(const AGRect2 &pRect,const std::string &pText):
   AGWidget(0,pRect),

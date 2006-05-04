@@ -23,6 +23,7 @@
 
 #include <string>
 #include <list>
+#include <sstream>
 
 #ifdef WIN32
 #include <windows.h>
@@ -30,6 +31,33 @@
 #endif
 
 #include <ag_fs.h>
+
+std::vector<std::string> split(const std::string &n,const std::string &h);
+
+
+std::string replace(const std::string &s,const std::string &a,const std::string &b);
+
+template<class T>
+inline std::string toString(const T&t)
+{
+  std::ostringstream os;
+  os<<t;
+  return os.str();
+}
+
+template<>
+inline std::string toString(const bool&b)
+{
+  if(b)
+    return "true";
+  else
+    return "false";
+}
+
+inline bool toBool(const std::string &s)
+{
+  return(s=="true");
+}
 
 int toInt(const std::string &s);
 float toFloat(const std::string &s);

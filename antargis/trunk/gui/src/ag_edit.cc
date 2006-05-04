@@ -25,6 +25,7 @@
 #include "ag_menu.h"
 #include "ag_sgeexport.h"
 #include "ag_glsurface.h"
+#include "ag_tools.h"
 
 
 AGEditLine::AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd):
