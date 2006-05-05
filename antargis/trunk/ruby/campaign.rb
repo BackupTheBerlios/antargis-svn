@@ -51,6 +51,9 @@ class CampaignLevel
 
 		$screen=nil
 		GC.start
+
+		puts "RESULT.won #{@result.won}"
+		puts @result
 		
 		case @result.won
 			when "lost"
@@ -283,4 +286,5 @@ def continueCampaign(campaign)
 	end while part.result.won!="canceled"
 	campaign.save("campaign0.antcmp") # FIXME:test save
 	$campaign=nil
+	puts "EXIT CAMPAIGNING"
 end

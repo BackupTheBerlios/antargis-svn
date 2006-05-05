@@ -67,6 +67,7 @@ module AGHandler
 				@handlers[object.getName+":"+event.to_s]=[]
 			end
 			@handlers[object.getName+":"+event.to_s].push(func)
+			#@handlers.uniq!
 		end
 	end
 	# event dispatcher

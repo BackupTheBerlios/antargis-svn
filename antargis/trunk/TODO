@@ -120,7 +120,6 @@ no segfaults known
 [H] Options not obvious 
  Options given on entity that are not valid should be not shown, or grayed out. I.e. if you click on a tree, the bar on the right hand side is updated, but it you cannot actually do anything with it at the moment. I think the icon should not be visible if you can't perform the action. 
 
-[H] Quitting in game doesn't really quit
 [H] add arrows in man-class
 [H] decrease morale on men when inventing and not resting
 [H] disable controls when telling story (after "come here my friend")

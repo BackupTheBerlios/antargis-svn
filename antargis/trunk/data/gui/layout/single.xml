@@ -20,8 +20,8 @@
 				
 				<table col="0" row="1" cols="1" rows="3">
 					<rowsize row="1" fixed="20"/>
-					<button row="0" col="0" name="start" caption="Start"/>
-					<button row="2" col="0" name="exit" caption="Exit"/>
+					<button row="0" col="0" name="singleStart" caption="Start"/>
+					<button row="2" col="0" name="singleExit" caption="Exit"/>
 				</table>
 			</table>
 			

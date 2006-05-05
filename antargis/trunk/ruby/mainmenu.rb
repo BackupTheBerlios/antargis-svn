@@ -108,8 +108,8 @@ class AntMenuApp <AGApplication
 		@singleMenu=AGLayout.new($screen)
 		@singleMenu.loadXML(loadFile("data/gui/layout/single.xml"))
 		@menues.push(@singleMenu)
-		addHandler(@singleMenu.getChild("exit"),:sigClick,:eventExit)
-		addHandler(@singleMenu.getChild("start"),:sigClick,:eventStart)
+		addHandler(@singleMenu.getChild("singleExit"),:sigClick,:eventExit)
+		addHandler(@singleMenu.getChild("singleStart"),:sigClick,:eventStart)
 	end
 	
 	def setupCampaign
@@ -206,7 +206,12 @@ class AntMenuApp <AGApplication
 		return true
 	end
 	
-	def eventStart
+	def eventStart(e)
+		if $campStarted
+			raise e
+		end
+		$campStarted=true
+		puts "EVENTSTART"
 		if @selCampaign
 			soundOff
 			#startGame(@selCampaign)
