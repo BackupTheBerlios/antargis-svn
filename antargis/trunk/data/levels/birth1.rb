@@ -78,7 +78,7 @@ class Level1<Level
 					s.push("Smith","Well, then recruit some of my men.")
 					tellStory(s)
 					# assign houses to Player Godrin
-					["Farmstead","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
+					["Dwelling","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
 					@smith=2
 				end
 			when "storyFinished"

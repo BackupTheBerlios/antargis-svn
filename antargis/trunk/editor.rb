@@ -79,7 +79,9 @@ class AntGameApp < AntRubyEditView
 # 			end
 # 		}
 		ps=GeneratorParameters.new
-		generateMap(getMap,ps)
+		if true
+			generateMap(getMap,ps)
+		end
 		return true
 	end
 	

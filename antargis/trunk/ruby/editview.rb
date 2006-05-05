@@ -58,7 +58,7 @@ class AntRubyEditView<GLApp
 		}
 		
 		
-		ents=["sheep","hero","tower","druid","stones","farm","farmstead","workshop","fir","grassGreen","twig","man","tree","bush","highGrass"]
+		ents=["sheep","hero","tower","druid","stones","farm","dwelling","workshop","fir","grassGreen","twig","man","tree","bush","highGrass"]
 		ents.each{|name|
 			addHandler(@layout.getChild(name),:sigClick,:eventAddEnt)
 		}
@@ -91,6 +91,7 @@ class AntRubyEditView<GLApp
 			addHandler(@newDialog.getChild("cancel"),:sigClick,:eventNewMapEnd)
 			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:eventNewMapEnd)
 		end
+		GC.start
 		return true
 	end
 	
@@ -290,8 +291,8 @@ class AntRubyEditView<GLApp
 				@type=AntFir
 			when "workshop"
 				@type=AntWorkshop
-			when "farmstead"
-				@type=AntFarmStead
+			when "dwelling"
+				@type=AntDwelling
 			when "stones"
 				@type=AntStone
 			when "man"

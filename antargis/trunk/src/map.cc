@@ -290,9 +290,17 @@ void AntMap::clear()
   //  getScene()->clear();
   CTRACE;
   //  mPlayers.clear();
-  mEntities.clear();
+
   mEntQuad->clear();
   mEntityMap.clear();
+
+  // save delete entities
+  for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
+    saveDelete(*i);
+  
+
+  mEntities.clear();
+
 }
 
 void AntMap::mapChanged()

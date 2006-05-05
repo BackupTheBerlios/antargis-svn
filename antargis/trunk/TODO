@@ -103,7 +103,6 @@ no segfaults known
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] rename farmstead to homestead
 [H] rename inventing to constructing
 
 [H] Add skip intro option
@@ -129,6 +128,7 @@ no segfaults known
 [H] add swords/shields/bows and apply them when fighting
 		sword and shield is ready.
 [H] describe men's health and morale when inspecting house
+[M] add simple method for direct level choosing
 [M] add fighting on boat
 [M] F1..F7 keys for hero selection
 [M] save current job :-(  high-level and low-level

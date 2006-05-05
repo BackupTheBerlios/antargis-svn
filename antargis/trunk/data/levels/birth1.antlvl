@@ -2,9 +2,9 @@
   <antFarm aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Farm" onGround="true" men="4">
     <position x="27.2146" y="21.3969" z="1"/>
   </antFarm>
-  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Farmstead" onGround="true" men="4">
+  <antDwelling aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Dwelling" onGround="true" men="4">
     <position x="33.1878" y="26.3071" z="1"/>
-  </antFarmStead>
+  </antDwelling>
   <antWorkshop aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Workshop" onGround="true" men="4">
     <position x="36.4328" y="17.9249" z="1"/>
   </antWorkshop>
@@ -65,9 +65,9 @@
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
     <position x="92.5383" y="51.2783" z="1"/>
   </antNewTree>
-  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.480631993272502" onGround="true">
+  <antDwelling aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.480631993272502" onGround="true">
     <position x="83.8969" y="58.4099" z="1"/>
-  </antFarmStead>
+  </antDwelling>
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="8">
     <position x="73.523" y="66.1925" z="1"/>
   </antNewTree>

@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-class AntFarmStead<AntHouse
+class AntDwelling<AntHouse
 	def initialize
 		super
-		setProvide("farmstead",true)
+		setProvide("dwelling",true)
 		@lastBirth=0
 		setDirection(-20)
 	end
@@ -34,7 +34,7 @@ class AntFarmStead<AntHouse
 	end
 
 	def houseType
-		"farmstead"
+		"dwelling"
 	end
 end
 

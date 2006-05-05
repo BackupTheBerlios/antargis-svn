@@ -36,7 +36,6 @@ Mesh::Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot):
 
 Mesh::~Mesh()
 {
-  //  TRACE;
 }
 
 void Mesh::draw()

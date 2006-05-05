@@ -141,9 +141,9 @@
   <antFarm aggression="0.5" energy="1" healSpeed="0.1" men="3" morale="1" name="" onGround="true">
     <position x="24.8749" y="19.3632" z="1"/>
   </antFarm>
-  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" men="5" morale="1" name="" onGround="true">
+  <antDwelling aggression="0.5" energy="1" healSpeed="0.1" men="5" morale="1" name="" onGround="true">
     <position x="21.7027" y="7.83159" z="1"/>
-  </antFarmStead>
+  </antDwelling>
   <antWorkshop aggression="0.5" energy="1" healSpeed="0.1" men="2" morale="1" name="" onGround="true">
     <position x="14.3411" y="22.3465" z="1"/>
   </antWorkshop>

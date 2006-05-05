@@ -17,7 +17,7 @@ SceneNode::SceneNode(Scene *s,const AGVector4 &pPos,const AGBox3 &b):
 
 SceneNode::~SceneNode()
 {
-  mRubyObject=false;
+  //  mRubyObject=false; // why was this here ??????
   if(mScene)
     mScene->removeNode(this);
 }
@@ -109,6 +109,7 @@ Scene *SceneNode::getScene()
 
 void SceneNode::clear()
 {
+  cdebug(typeid(*this).name());
   if(mScene)
     mScene->removeNode(this);
   resetScene();

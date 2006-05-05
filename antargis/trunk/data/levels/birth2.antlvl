@@ -135,9 +135,9 @@
   <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" men="7" onGround="true">
     <position x="69.2673" y="64.5525" z="1"/>
   </antHero>
-  <antFarmStead aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" men="6">
+  <antDwelling aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" men="6">
     <position x="81.6495" y="38.8832" z="3.99954"/>
-  </antFarmStead>
+  </antDwelling>
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="82.2895" y="35.4188" z="3.85922"/>
   </antGrass>
