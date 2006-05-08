@@ -17,7 +17,9 @@
 #define AG_PROFILER_H 
 
 #include <string> 
-//#include <SDL_types.h> 
+
+#ifdef MPROFILE
+
 #define Uint64 long long 
 #define Sint64 signed long long 
 
@@ -51,4 +53,9 @@ class UserStackTraceHelper
 #define _STACKTRACE(A) static SOURCE_LINE _srcline = {0, 0, __LINE__, __FILE__, __FUNCTION__, A }; UserStackTraceHelper _stacktrace_ ( &_srcline ); 
 
 
-#endif 
+#else // MPROFILE 
+#define STACKTRACE
+
+#endif // MPROFILE 
+
+#endif

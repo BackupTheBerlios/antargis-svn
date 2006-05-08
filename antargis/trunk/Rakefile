@@ -17,6 +17,14 @@ end
 $profile=false
 $debug=true
 
+def bigendian
+	[512].pack("f")==[512].pack("g")
+end
+
+if bigendian
+	$profile=false
+end
+
 #`mkdir .deps`
 
 def windows
@@ -174,16 +182,23 @@ else
 	$LDFLAGS+=" -Lc:/msys/local/lib -lmingw32 -lSDLmain -lSDL -mwindows "+$libs
 end
 
-if $profile
-	$CFLAGS+=" -pg"
-	$LDFLAGS+=" -pg"
-end
+#if $profile
+#	$CFLAGS+=" -pg"
+#	$LDFLAGS+=" -pg"
+#end
+
+
+$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -I"+Config::CONFIG['archdir']+" -Wall"
 
 if $debug
-	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -g -O0 -I"+Config::CONFIG['archdir']+" -Wall"
+	$CFLAGS+=" -g -O0"
 else
-	$CFLAGS+=" -Isrc -I"+$GUISRC+" -DMNDEBUG -DUSE_RUBY -O2 -I"+Config::CONFIG['archdir']+" -Wall"
+	$CFLAGS+=" -DMNDEBUG -O2"
 end
+if $profile
+	$CFLAGS+=" -DMPROFILE"
+end
+
 $LDSHARED="#{$CXX} -shared"
 $INSTALL_PROG=$INSTALL+" -m 755 -D "
 $INSTALL_DATA=$INSTALL+" -m 644 -D "

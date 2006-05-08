@@ -3,6 +3,8 @@
 #include "mesh_optimizer.h"
 #include <ag_rendercontext.h>
 
+#include <ant_serial.h>
+
 //////////////////////////////////////////////////////////////////////
 // MeshData
 //////////////////////////////////////////////////////////////////////
@@ -53,21 +55,45 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   MeshVertex mVertices[4];
   MeshOptimizer opt;
   bool withTex=filename.find(".ant2")!=filename.npos;
+
+  BinaryFileIn f(filename);
+  /*
   
   FILE *f=fopen(filename.c_str(),"rb");
   assert(f);
-  fread(&meshes,sizeof(Uint16),1,f);
+  fread(&meshes,sizeof(Uint16),1,f);*/
+
+  f>>meshes;
   
   for(;meshes>0;meshes--)
     {
-      fread(&faces,sizeof(Uint16),1,f);
+      f>>faces;
+      //      fread(&faces,sizeof(Uint16),1,f);
       
       for(Uint16 i=0;i<faces;i++)
 	{
-	  fread(&vertices,sizeof(Uint16),1,f);
+	  //  fread(&vertices,sizeof(Uint16),1,f);
+	  f>>vertices;
 	  assert(vertices<=4);
 	  for(Uint16 j=0;j<vertices;j++)
 	    {
+	      AGVector3 v,n,c;
+	      f>>v;
+	      mVertices[j].v=AGVector4(v,1);
+	      f>>n;
+	      mVertices[j].n=n;
+	      f>>c; // load here first, as mVertices[.].c is a AGVector4
+	      mVertices[j].c=AGVector4(c,1);
+	      if(withTex)
+		f>>mVertices[j].t;
+
+	      mVertices[j].t[1]=1-mVertices[j].t[1];
+
+	      mVertices[j].v*=zoom;
+	      mVertices[j].v[3]=1;
+
+	      mBBox.include(mVertices[j].v.dim3());
+	      /*
 	      fread(mVertices[j].v,sizeof(float),3,f);
 	      fread(mVertices[j].n,sizeof(float),3,f);
 	      fread(mVertices[j].c,sizeof(float),3,f);
@@ -79,6 +105,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
 	      mVertices[j].v[3]=1;
 
 	      mBBox.include(mVertices[j].v.dim3());
+	      */
 	    }
 	  if(vertices==3)
 	    {
@@ -97,7 +124,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
 	    }
 	}
     }
-  fclose(f);
+  //  fclose(f);
   mShadow=pShadow;
   mArray=opt.getArray();
   drawColors=true;

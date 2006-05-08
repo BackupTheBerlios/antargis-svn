@@ -3,6 +3,8 @@
 #include "ag_config.h"
 #include "ag_xml.h"
 
+#include <ant_serial.h>
+
 void setRotation(AGMatrix4 &m,const AGVector3 &angles); // from anim_mesh.cc
 void setTranslation(AGMatrix4 &m,const AGVector3 &t);
 void inverseRotate(AGVector3 &v, const AGMatrix4 &m );
@@ -18,40 +20,6 @@ bool useShaderAnimation()
 {
   return glslOk();
 }
-
-class Loader
-{
-  std::string s;
-  size_t pos;
-public:
-  Loader(const std::string &p):s(p)
-  {
-    pos=0;
-  }
-  Loader &operator>>(Sint32 &i)
-  {
-    std::string p=s.substr(pos,4);
-    i=*(Sint32*)(p.c_str());
-    pos+=4;
-    return *this;
-  }
-  Loader &operator>>(Uint32 &i)
-  {
-    std::string p=s.substr(pos,4);
-    i=*(Sint32*)(p.c_str());
-    pos+=4;
-    return *this;
-  }
-  Loader &operator>>(float &i)
-  {
-    std::string p=s.substr(pos,4);
-    i=*(float*)(p.c_str());
-    pos+=4;
-    return *this;
-  }
-};
-
-
 
 AGVector3 Bone::interpolate(const std::vector<KeyFrame> &frames,float t)
 {
@@ -188,7 +156,7 @@ int getMeshDownScale()
 void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::string &tex)
 {
   mTexture=getTextureCache()->get(tex,getMeshDownScale());
-  Loader l(instr);
+  BinaryStringIn l(instr);
 
   Uint32 vs,ts;
 

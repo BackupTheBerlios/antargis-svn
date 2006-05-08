@@ -8,6 +8,8 @@
 
 #include "ag_profiler.h" 
 
+#ifdef MPROFILE
+
 #define RDTSC_TIMER 
 
 double 
@@ -182,3 +184,6 @@ int main()
   return 0; 
 } 
 */
+
+
+#endif

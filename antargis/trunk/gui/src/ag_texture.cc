@@ -209,13 +209,13 @@ AGGLTexture *AGTexture::glTexture()
       GLuint id=mTexture->id();
       GLboolean b;
       GLboolean r=glAreTexturesResident(1,&id,&b);
-      assert(r);
-      if(!b)
-	{
-	  std::cerr<<"Texture "<<id<<" is not resident - maybe you should lower the texture-level"<<std::endl;
-	  std::cerr<<"Check your ~/.Antargis/config.xml !"<<std::endl;
-	  getSurfaceManager()->cleanup(true,true);
-	}
+      if(r)
+	if(!b)
+	  {
+	    std::cerr<<"Texture "<<id<<" is not resident - maybe you should lower the texture-level"<<std::endl;
+	    std::cerr<<"Check your ~/.Antargis/config.xml !"<<std::endl;
+	    getSurfaceManager()->cleanup(true,true);
+	  }
 	
     }
   mTextureUsed=true;
