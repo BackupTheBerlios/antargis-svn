@@ -89,6 +89,7 @@ no segfaults known
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
+[H] test for vertex-buffer-objects!
 [M] make particle engine more generic and include shader-support
 [L] make shadows work on other platforms too?
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.

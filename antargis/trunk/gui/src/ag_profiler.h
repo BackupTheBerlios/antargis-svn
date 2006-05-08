@@ -18,6 +18,13 @@
 
 #include <string> 
 
+#if CPU_FAMILY == PPC
+#ifdef MPROFILE
+#undef MRPOFILE
+#endif
+#endif
+
+
 #ifdef MPROFILE
 
 #define Uint64 long long 

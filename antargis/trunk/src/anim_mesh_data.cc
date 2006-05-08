@@ -18,7 +18,7 @@ bool useAnimation()
 
 bool useShaderAnimation()
 {
-  return glslOk();
+  return glslOk() && GLEE_ARB_vertex_buffer_object; // doesn't work with vbos
 }
 
 AGVector3 Bone::interpolate(const std::vector<KeyFrame> &frames,float t)

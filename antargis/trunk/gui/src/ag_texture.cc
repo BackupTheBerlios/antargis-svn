@@ -207,8 +207,11 @@ AGGLTexture *AGTexture::glTexture()
       STACKTRACE;
       // check if resident
       GLuint id=mTexture->id();
+
+#if CPU_FAMILY == PPC
+#else
       GLboolean b;
-      GLboolean r=glAreTexturesResident(1,&id,&b);
+      GLboolean r=glAreTexturesResident(1,&id,&b); // gives strange results on r300/ppc
       if(r)
 	if(!b)
 	  {
@@ -216,7 +219,7 @@ AGGLTexture *AGTexture::glTexture()
 	    std::cerr<<"Check your ~/.Antargis/config.xml !"<<std::endl;
 	    getSurfaceManager()->cleanup(true,true);
 	  }
-	
+#endif
     }
   mTextureUsed=true;
   return mTexture;

@@ -6,7 +6,10 @@
 VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
 {
   bColor=true;
-  mBuffers=true;//false;//true;
+  mBuffers=GLEE_ARB_vertex_buffer_object;
+
+  assert(GLEE_EXT_vertex_array);
+
   mChanged=false;
 
   mVertexBuffer=0;
@@ -129,11 +132,12 @@ void VertexArray::draw()
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mNormalBuffer );
       glNormalPointer(GL_FLOAT, 0, 0);
 
+      /*
       glClientActiveTexture(GL_TEXTURE1);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mTexBuffer);
       glTexCoordPointer(2, GL_FLOAT, 0, 0);
-
+      */
       glClientActiveTexture(GL_TEXTURE0);
 
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
