@@ -30,6 +30,7 @@
 #include <ag_tooltip.h>
 #include "ag_application.h"
 #include "ag_layout.h"
+#include "ag_config.h"
 
 #define FOCUS_BY_SORT
 
@@ -856,6 +857,10 @@ void AGWidget::prepareDraw()
 }
 void AGWidget::setCaching(bool pEnable)
 {
+  if(getConfig()->get("widgetTextureCache")=="false")
+    return;
+  getConfig()->set("widgetTextureCache","true");
+
   mCaching=pEnable;
   delete mCache;
 

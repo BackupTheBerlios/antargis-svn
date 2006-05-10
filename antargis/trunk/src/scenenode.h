@@ -57,6 +57,7 @@ class SceneNode:public AGRubyObject
   virtual void clear();
 
   Scene *getScene();
+  bool sceneValid() const;
 
   void setVisible(bool v);
   bool visible() const;

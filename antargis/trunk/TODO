@@ -66,14 +66,14 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-no segfaults known
+[H] a segfault appears when profiling with ruby (./run --profile)
+		couldn't find the problem yet. it's probably one of these problems:
+		1) some GC-problem
+		2) some ruby-error (?) within version 1.8.4
 
 [Gui/View - GUI-library]
 ------------------------------------------------------
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
-[M] fix paint errors on text-elements (wrap-texture). Look at AGFontEngine::*.
-		set Texture to GL_CLAMP_TO_EDGE or something like this.
-		this occures in intro when displaying text
 [M] add texture-space-saving
 [L] add Framebuffer objects for paint to texture.
 [L] fix AGMenu*. This is broken, but not used ATM.
@@ -127,7 +127,7 @@ no segfaults known
 		this means you shouldn't be able to move your hero.
 [H] add swords/shields/bows and apply them when fighting
 		sword and shield is ready.
-[H] describe men's health and morale when inspecting house
+[M] move from AntHouse to AntBoss:describe men's health and morale when inspecting
 [M] add simple method for direct level choosing
 [M] add fighting on boat
 [M] F1..F7 keys for hero selection

@@ -23,9 +23,7 @@ class TerrainPieceVA:public SceneNode
 {
  public:
   TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
-  virtual ~TerrainPieceVA()
-    {
-    }
+  virtual ~TerrainPieceVA();
 
   void draw();
   void drawShadow();

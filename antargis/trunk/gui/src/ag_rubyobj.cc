@@ -40,6 +40,9 @@ void AGRubyObject::markObject(AGRubyObject *o)
   assert(o);
   if(o->mRubyObject)
     {
+      assert(gExistingRubies.find(o)!=gExistingRubies.end());
+
+
       //cdebug(typeid(*o).name()<<"   "<<o);
       rb_gc_mark(o->mRUBY);
     }
@@ -71,14 +74,18 @@ void AGRubyObject::enableGC()
 /// it handles all the AGRubyObjects
 void general_markfunc(void *ptr)
 {
+  //  TRACE;
   if(!ptr)
     {
       cdebug("WARNING: a ptr==0 was given in general_markfunc!");
-      //throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
+      throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
       return; // ignore
     }
   assert(ptr);
   AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
+
+  //  printf("%lX\n",o->mRUBY);
+
   assert(o);
   o->mark();
 }

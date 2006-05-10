@@ -26,11 +26,22 @@
 AGBorder::AGBorder(const std::string &pTheme)
 {
   mTheme=pTheme;
-  if((mEnable=getTheme()->hasSurface(pTheme+".image")))
+  std::string imageName=pTheme+".image";
+
+  if((mEnable=getTheme()->hasSurface(imageName)))
     {
+      AGSurface surface(getTheme()->getSurface(imageName));
       //      mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
-      mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(pTheme+".image"));
+      mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(imageName));
       mWidth=mTexture->width()/3;
+
+      // build textures
+      for(int y=0;y<3;y++)
+	for(int x=0;x<3;x++)
+	  {
+	    AGRect2 r(x*mWidth,y*mWidth,mWidth,mWidth);
+	    mTextures.push_back(&getTextureCache()->get(getTheme()->getSurfaceName(imageName),r));
+	  }
     }
   else
     {
@@ -56,7 +67,7 @@ void AGBorder::draw(const AGRect2 &pd,AGPainter &p)
 
   float x2=d.x1();
   float y2=d.y1();
-
+  /*
   // corners
   p.blit(*mTexture,AGRect2(0,0,w,w),AGRect2(0,0,w,w));
  
@@ -74,8 +85,22 @@ void AGBorder::draw(const AGRect2 &pd,AGPainter &p)
   // ver
   p.tile(*mTexture,AGRect2(0,w,w,d.h()-w2),AGRect2(0,w,w,w));
   p.tile(*mTexture,AGRect2(x2-w,w,w,d.h()-w2),AGRect2(w2,w,w,w));
-
+*/
   // skip interior
+
+
+  p.tile(*mTextures[0],AGRect2(0,0,w,w));
+  p.tile(*mTextures[6],AGRect2(0,y2-w,w,w));
+  p.tile(*mTextures[2],AGRect2(x2-w,0,w,w));
+  p.tile(*mTextures[8],AGRect2(x2-w,y2-w,w,w));
+
+  // hor
+  p.tile(*mTextures[1],AGRect2(w,0,d.w()-w2,w));
+  p.tile(*mTextures[7],AGRect2(w,y2-w,d.w()-w2,w));
+  // ver
+  p.tile(*mTextures[3],AGRect2(0,w,w,d.h()-w2));
+  p.tile(*mTextures[5],AGRect2(x2-w,w,w,d.h()-w2));
+
   
 }
 
@@ -88,5 +113,9 @@ void AGBorder::useTextures()
 {
   if(mTexture)
     const_cast<AGTexture*>(mTexture)->useTexture();
+
+  for(std::vector<const AGTexture*>::iterator i=mTextures.begin();i!=mTextures.end();i++)
+    const_cast<AGTexture*>(*i)->useTexture();
+
 }
 

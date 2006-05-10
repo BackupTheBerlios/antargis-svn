@@ -282,6 +282,10 @@ float AGVector2::getY() const
 {
   return v;
 }
+(AGVector2::operator const float*)() const
+{
+  return v;
+}
 
 AGVector2 AGVector2::operator-(const AGVector2 &p) const
 {

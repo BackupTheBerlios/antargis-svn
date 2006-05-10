@@ -58,9 +58,9 @@ class AGEditLine
 
   bool hardEnd() const;
   void setHardEnd(bool pHardEnd);
-  std::pair<std::string,bool> AGEditLine::checkUnwrap(int pW,std::string s);
+  std::pair<std::string,bool> checkUnwrap(int pW,std::string s);
 
-  std::pair<std::string,bool> AGEditLine::checkWrap(int pW);
+  std::pair<std::string,bool> checkWrap(int pW);
 
   void setFont(const AGFont &pFont);
 
@@ -123,7 +123,7 @@ class AGEdit:public AGWidget
   void getActLine();
   void insertLine(AGEditLine l);
   void mergeLine(int p);
-  void AGEdit::checkWrap();
+  void checkWrap();
 
   std::list<AGEditLine> mLines;
   AGEditLine *actLine;

@@ -189,12 +189,12 @@ void MiniMap::draw(AGPainter &p)
       v-=AGVector2(w/2,h/2);
 
       AGRect2 r(v[0],v[1],w,h);
-      AGColor c1(0xff,0xaa,0);
-      AGColor c2(0xee,0x77,0);
+      AGColor c1(0xff,0xaa,0,0x77);
+      AGColor c2(0xee,0x77,0,0x77);
       
-      p.drawBorder(r,1,c1,c2);
+      p.drawBorder(r,2,c1,c2);
       r=r.shrink(1);
-      p.drawBorder(r,1,c2,c1);
+      p.drawBorder(r,2,c2,c1);
     }
 }
 

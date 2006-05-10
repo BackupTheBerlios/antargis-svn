@@ -26,6 +26,7 @@
 #include "ag_debug.h"
 #include "ag_button.h"
 #include "ag_caption.h"
+#include "ag_texturecache.h"
 
 #undef connect
 
@@ -47,6 +48,21 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTi
 
   //  cdebug("window_border:"<<s.width()<<"/"<<s.height());
   AGTable *t=0;
+
+
+  std::vector<const AGTexture*> textures;
+
+  // build textures
+  for(int y=0;y<3;y++)
+    for(int x=0;x<3;x++)
+      {
+	AGRect2 r(x*bw,y*bw,bw,bw);
+	
+	textures.push_back(&getTextureCache()->get(getTheme()->getSurfaceName(tstr),r));
+      }
+
+
+
  
   if(pTitle.length())
     {
@@ -60,33 +76,33 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTi
       addColumn(1.0);
       addFixedColumn(bw);
       
-      AGTable::addChild(0,0,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(0,0,bw,bw)));
-      AGTable::addChild(1,0,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(bw,0,bw,bw)));
-      AGTable::addChild(2,0,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(2*bw,0,bw,bw)));
+      AGTable::addChild(0,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[0],true));
+      AGTable::addChild(1,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[1],true));
+      AGTable::addChild(2,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[2],true));
       
       AGImage *i1,*i2;
 
-      AGTable::addChild(0,1,i1=new AGImage(this,AGRect2(0,0,bw,titBarHeight),s,true,AGRect2(0,bw,bw,bw)));
+      AGTable::addChild(0,1,i1=new AGImage(this,AGRect2(0,0,bw,titBarHeight),*textures[3],true));//,AGRect2(0,bw,bw,bw)));
       // title
-      //      AGTable::addChild(1,1,new AGImage(this,s,AGRect2(bw,0,bw,bw)));
-      //      AGTable::addChild(1,1,new AGText(this,AGRect2(0,0,40,20),pTitle,AGFont("Arial.ttf",14)));
-      t=dynamic_cast<AGTable*>(getTitleBar((int)(width()-2*bw),titBarHeight));//new AGButton(this,AGRect2(0,0,10,20),pTitle));
+      t=dynamic_cast<AGTable*>(getTitleBar((int)(width()-2*bw),titBarHeight));
 
-      //      t->setSurface(getTheme()->getSurface("close_button"));
+      AGTable::addChild(2,1,i2=new AGImage(this,AGRect2(0,0,bw,titBarHeight),*textures[5],true));
+      i1->setHeight(t->height());
+      i2->setHeight(t->height());
 
-      AGTable::addChild(2,1,i2=new AGImage(this,AGRect2(0,0,titBarHeight,bw),s,true,AGRect2(2*bw,bw,bw,bw)));
-            i1->setHeight(t->height());
-            i2->setHeight(t->height());
+      cdebug("i2:"<<i2->width()<<"   "<<i2->height());
+      cdebug("bw:"<<bw);
 
-      AGTable::addChild(0,2,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(0,bw,bw,bw)));
-      AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(2*bw,bw,bw,bw)));
       
-      AGTable::addChild(0,3,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(0,2*bw,bw,bw)));
-      AGTable::addChild(1,3,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(bw,2*bw,bw,bw)));
-      AGTable::addChild(2,3,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(2*bw,2*bw,bw,bw)));
+      AGTable::addChild(0,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[3],true));
+      AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[5],true));
+      
+      AGTable::addChild(0,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[6],true));
+      AGTable::addChild(1,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[7],true));
+      AGTable::addChild(2,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[8],true));
       
       AGTable::addChild(1,2,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
-      //      AGTable::addChild(1,2,mClient=new AGImage(this,AGVector2(0,0),s,true,AGRect2(bw,bw,bw,bw)));
+
     }
   else
     {
@@ -98,24 +114,21 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTi
       addColumn(1.0);
       addFixedColumn(bw);
       
-      AGTable::addChild(0,0,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(0,0,bw,bw)));
-      AGTable::addChild(1,0,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(bw,0,bw,bw)));
-      AGTable::addChild(2,0,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(2*bw,0,bw,bw)));
+      AGTable::addChild(0,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[0],true));
+      AGTable::addChild(1,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[1],true));
+      AGTable::addChild(2,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[2],true));
       
-      AGTable::addChild(0,1,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(0,bw,bw,bw)));
-      AGTable::addChild(2,1,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(2*bw,bw,bw,bw)));
+      AGTable::addChild(0,1,new AGImage(this,AGRect2(0,0,bw,bw),*textures[3],true));
+      AGTable::addChild(2,1,new AGImage(this,AGRect2(0,0,bw,bw),*textures[5],true));
       
-      AGTable::addChild(0,2,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(0,2*bw,bw,bw)));
-      AGTable::addChild(1,2,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(bw,2*bw,bw,bw)));
-      AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),s,true,AGRect2(2*bw,2*bw,bw,bw)));
+      AGTable::addChild(0,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[6],true));
+      AGTable::addChild(1,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[7],true));
+      AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[8],true));
       
       AGTable::addChild(1,1,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",getTheme()->getFont("window.title.font"),AGBackground("window.background")));
-      //      AGTable::addChild(1,1,mClient=new AGImage(this,AGVector2(0,0),s,true,AGRect2(bw,bw,bw,bw)));
     }
 
   arrange();
-  //  if(t)
-  //    t->arrange();
 }
 
 void AGWindow::addChild(AGWidget *w)

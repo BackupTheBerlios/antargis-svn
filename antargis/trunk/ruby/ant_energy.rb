@@ -21,6 +21,7 @@ class AntEnergy<AGWidget
 
 		setCaching(true)
 		@doRedraw=true
+		@hero=nil
 	end
 
 	def setHero(h)

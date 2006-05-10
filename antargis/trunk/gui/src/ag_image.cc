@@ -21,33 +21,33 @@
 #include "ag_image.h"
 #include "ag_debug.h"
 
-AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile,const AGRect2 &pRect):
+AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
   AGWidget(pParent,r),
   mTexture(pSurface),mTile(pTile)
 {
   mCenter=true;
   //  CTRACE;
-  if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
+  /*  if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
-      mSrcRect=pRect;
+      //      mSrcRect=pRect;
 
       setHeight(pRect.h());
       setWidth(pRect.w());
-    }
+      }*/
 }
-AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile,const AGRect2 &pRect):
+AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
   AGWidget(pParent,r),
   mTexture(pTexture),mTile(pTile)
 {
   mCenter=true;
   //  CTRACE;
-  if(pRect!=pTexture.getRect() && pRect.w()!=0 && pRect.h()!=0)
+  /*  if(pRect!=pTexture.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
       mSrcRect=pRect;
 
       setHeight(pRect.h());
       setWidth(pRect.w());
-    }
+      }*/
 }
 
 
@@ -64,9 +64,9 @@ void AGImage::draw(AGPainter &p)
 
   if(mTile)
     {
-      if(mSrcRect.w()==0 || mSrcRect.h()==0)
-	mSrcRect=mTexture.getRect();
-      p.tile(mTexture,getRect().origin(),mSrcRect);
+      //      if(mSrcRect.w()==0 || mSrcRect.h()==0)
+      //	mSrcRect=mTexture.getRect();
+      p.tile(mTexture,getRect().origin());//,mSrcRect);
     }
   else if(center)
     {

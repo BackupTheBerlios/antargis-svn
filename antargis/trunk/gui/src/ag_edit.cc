@@ -120,7 +120,7 @@ void AGEditLine::insert(char c,int cx,bool pInsert)
 {
   if(pInsert)
     mText=mText.substr(0,cx)+std::string(&c,1)+mText.substr(cx,std::string::npos);
-  else if(cx<mText.length())
+  else if(cx<(long)mText.length())
     mText[cx]=c;
   else
     mText+=std::string(&c,1);

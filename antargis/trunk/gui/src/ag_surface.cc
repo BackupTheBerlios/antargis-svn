@@ -217,7 +217,6 @@ AGColor AGSurface::getPixel(int x,int y) const
 AGSurface AGSurface::getSubSurface(const AGRect2 &sr) const
 {
   CHECK_ZERO(s);
-  CTRACE;
 
   AGInternalSurface *ns=AGCreate32BitSurface((int)sr.w(),(int)sr.h());
 
@@ -361,7 +360,7 @@ AGSurface AGSurface::scale(int w,int h) const
     for(int y=0;y<h;y++)
       {
 	if(fast)
-	  n.putPixel(x,y,getPixel(x*ow/w,y*oh/h));
+	  n.putPixel(x,y,getPixel((int)(x*ow/w),(int)(y*oh/h)));
 	else if(w>ow)
 	  {
 	    // interpolate
@@ -390,8 +389,8 @@ AGSurface AGSurface::scale(int w,int h) const
 	    float ty0=y*oh/h;
 	    float tx1=(x+1)*ow/w;
 	    float ty1=(y+1)*oh/h;
-	    for(int mx=tx0;mx<tx1;mx++)
-	      for(int my=ty0;my<ty1;my++)
+	    for(int mx=(int)tx0;mx<tx1;mx++)
+	      for(int my=(int)ty0;my<ty1;my++)
 		{
 		  AGColor c=getPixel(mx,my);
 		  r+=c.r;
@@ -406,7 +405,7 @@ AGSurface AGSurface::scale(int w,int h) const
 		g/=ps;
 		b/=ps;
 		a/=ps;
-		n.putPixel(x,y,AGColor(r,g,b,a));
+		n.putPixel(x,y,AGColor((int)r,(int)g,(int)b,(int)a));
 	      }
 
 	    

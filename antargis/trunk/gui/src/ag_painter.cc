@@ -18,13 +18,14 @@
  * License along with this program.
  */
 
-#include "ag_painter.h"
-#include "ag_debug.h"
-#include "ag_texture.h"
-#include "ag_draw.h"
-#include "ag_fontengine.h"
-#include "ag_glsurface.h"
-#include "ag_sdlsurface.h"
+#include <ag_debug.h>
+#include <ag_draw.h>
+#include <ag_fontengine.h>
+#include <ag_glsurface.h>
+#include <ag_painter.h>
+#include <ag_profiler.h>
+#include <ag_sdlsurface.h>
+#include <ag_texture.h>
 #include <math.h>
 
 //#define SPEED_TEST
@@ -244,13 +245,24 @@ bool AGPainter::pointOk(const AGVector2 &p) const
 
 void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
+  STACKTRACE;
   AGRect2 d;
   d=mCurrent.project(pDest);
+
+#ifdef OLDCLIP
+
   std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
 
   //  cdebug(p.first<<"   "<<p.second);
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     mTarget->blit(pSource,p.first,p.second);
+
+
+#else
+  #warning "add clipping!"
+
+  mTarget->blit(pSource,d,pSrc);//pSource.getRect());
+#endif
 }
 
 void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGColor &pColor)
@@ -262,6 +274,7 @@ void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGColor
 
 void AGPainter::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor)
 {
+  STACKTRACE;
 #ifdef SPEED_TEST
   mTarget->blit(pSource,pDest,pSrc,pColor);
   return;
@@ -282,18 +295,32 @@ void AGPainter::tile(const AGTexture &pSource)
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest)
 {
+  //  mTarget->tile(pSource,mCurrent.project(pDest),AGColor(0xff,0xff,0xff,0xff));
   tile(pSource,pDest,pSource.getRect());
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
+  //  return;
+  STACKTRACE;
   float x,y;
-  for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
-    for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
-      {
-	float w=std::min(pSrc.w(),pDest.x1()-x);
-	float h=std::min(pSrc.h(),pDest.y1()-y);
-	blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
-      }
+  if(!dynamic_cast<AGGLScreen*>(mTarget))
+    {
+      #warning "remove this and implement in agtexture*"
+      for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
+	for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
+	  {
+	    float w=std::min(pSrc.w(),pDest.x1()-x);
+	    float h=std::min(pSrc.h(),pDest.y1()-y);
+	    blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
+	  }
+      
+    }
+  else
+    {
+      mTarget->tile(pSource,mCurrent.project(pDest),AGColor(0xff,0xff,0xff,0xff));
+    }
+
+
 }
 
 
@@ -306,6 +333,7 @@ void AGPainter::blit(const AGSurface &pSource,const AGRect2 &pDest)
 }
 void AGPainter::blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
+  STACKTRACE;
   AGRect2 d;
   d=mCurrent.project(pDest);
   std::pair<AGRect2,AGRect2> p=mCurrent.clipRect(d,pSrc);
@@ -324,7 +352,10 @@ void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest)
 }
 void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
+  STACKTRACE;
   float x,y;
+
+  /*
   for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
     for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
       {
@@ -332,6 +363,21 @@ void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2
 	float h=std::min(pSrc.h(),pDest.y1()-y);
 	blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
       }
+  */
+
+  
+  std::vector<std::pair<AGRect2,AGRect2> > rects;
+  for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
+    for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
+      {
+	float w=std::min(pSrc.w(),pDest.x1()-x);
+	float h=std::min(pSrc.h(),pDest.y1()-y);
+	
+	rects.push_back(std::make_pair(AGRect2(pSrc.x0(),pSrc.y0(),w,h),AGRect2(x,y,w,h)));
+      }
+  mTarget->blit(pSource,rects,AGColor(0xff,0xff,0xff,0xff));
+  
+
 }
 
 AGColor calcColor(AGVector2 p,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
@@ -341,6 +387,7 @@ AGColor calcColor(AGVector2 p,const AGColor &pc0,const AGColor &pc1,const AGColo
   
 void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
 {
+  STACKTRACE;
   AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
   
   AGRect2 src(0,0,1,1);
@@ -383,6 +430,7 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 }
 void AGPainter::renderText(const std::string &pText,const AGVector2 &p,const AGFont &f)
 {
+  STACKTRACE;
   AGTexture *t=AGFontEngine::renderText(0,0,pText,f);
   if(t)
     blit(*t,AGRect2(p[0],p[1],t->getSurfaceWidth(),t->getSurfaceHeight()));
@@ -390,6 +438,7 @@ void AGPainter::renderText(const std::string &pText,const AGVector2 &p,const AGF
 }
 void AGPainter::drawBorder(const AGRect2& pRect,int width, const AGColor& c1, const AGColor& c2)
 {
+  STACKTRACE;
   AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
   if(glScreen)
     {
@@ -419,6 +468,7 @@ void AGPainter::drawBorder(const AGRect2& pRect,int width, const AGColor& c1, co
 
 void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
 {
+  STACKTRACE;
   AGRect2 d,pSrc;
   d=mCurrent.project(pDest);
   AGRect2 p=mCurrent.clipRect(d);
@@ -431,6 +481,7 @@ void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
 
 void AGPainter::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects)
 {
+  STACKTRACE;
   std::vector<std::pair<AGRect2,AGVector4> > rs;
 
   for(std::vector<std::pair<AGRect2,AGVector4> >::const_iterator i=pRects.begin();i!=pRects.end();++i)
@@ -448,6 +499,7 @@ void AGPainter::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRec
 
 void AGPainter::drawPoint(const AGVector2 &p,const AGColor &c,float size)
 {
+  STACKTRACE;
   AGVector2 d=mCurrent.project(p);
   if(mCurrent.pointOk(p))
     {

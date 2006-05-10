@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$antargislibinited||=false
+
 if not $antargislibinited
 
 	# try suspending arts

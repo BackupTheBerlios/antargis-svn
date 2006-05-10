@@ -25,6 +25,7 @@
 #include "ag_sgeexport.h"
 #include "ag_surfacemanager.h"
 #include "ag_profiler.h"
+#include "ag_glpainter.h"
 #include <stdexcept>
 
 size_t nextpow2(size_t i)
@@ -206,7 +207,7 @@ AGGLTexture *AGTexture::glTexture()
     {
       STACKTRACE;
       // check if resident
-      GLuint id=mTexture->id();
+      //      GLuint id=mTexture->id();
 
 #if CPU_FAMILY == PPC
 #else
@@ -236,9 +237,6 @@ void AGTexture::beginPaint()
   assert(!m3d);
   if(opengl())
     {
-      //      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      //      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
       // init 2d drawing
       getScreen().begin();
       
@@ -256,9 +254,7 @@ void AGTexture::beginPaint()
       
       glMatrixMode(GL_MODELVIEW);
       glPushMatrix();
-      glScalef(1,-1,1);
-
-      glTranslatef(0,-(int)getScreen().getHeight(),0);
+      glLoadIdentity();
 
       mPainting=true;
       if(!mCleared)
@@ -288,10 +284,12 @@ void AGTexture::endPaint()
       
       // copy buffer to texture
 
+      glReadBuffer(GL_BACK);
+
       glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, mTexture->width(),mTexture->height(),0);
 
-      //      getScreen().flip();
-      //      SDL_Delay(1000);
+      //            getScreen().flip();
+      //            SDL_Delay(1000);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -312,7 +310,7 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
       rc.begin();
 
       glBegin(GL_POINTS);
-      glVertex2f(x,getScreen().getHeight()-y);
+      glVertex2f(x,y);//getScreen().getHeight()-y);
       glEnd();
 	      
     }
@@ -329,7 +327,7 @@ void AGTexture::fillRect(const AGRect2 &pRect,const AGColor &c)
     {
       assert(mTexture);
       cdebug(pRect);
-      getScreen().fillRect(pRect,c);
+      AGGLPainter::fillRect(pRect,c);
     }
   else
     throw std::runtime_error("implement fillRect for sdl-texture");
@@ -341,7 +339,7 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
   if(opengl())
     {
       assert(mTexture);
-      getScreen().blit(pSource,pDest,pSrc);
+      AGGLPainter::blit(pSource,pDest,pSrc,AGColor(0xFF,0xFF,0xFF));
     }
   else
     {
@@ -359,7 +357,7 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
   if(opengl())
     {
       assert(mTexture);
-      getScreen().blit(pSource,pDest,pSrc,pColor);
+      AGGLPainter::blit(pSource,pDest,pSrc,pColor);
     }
   else
     throw std::runtime_error("implement blitting for sdl-texture");
@@ -369,7 +367,7 @@ void AGTexture::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &
   if(opengl())
     {
       assert(mTexture);
-      getScreen().drawLine(p0,p1,c);
+      AGGLPainter::drawLine(p0,p1,c);
     }
   else
     throw std::runtime_error("implement drawLine for sdl-texture");
@@ -380,7 +378,7 @@ void AGTexture::drawGradient(const AGRect2& rect, const AGColor& ul, const AGCol
   if(opengl())
     {
       assert(mTexture);
-      dynamic_cast<AGGLScreen*>(&getScreen())->drawGradient(rect,ul,ur,dl,dr);
+      AGGLPainter::drawGradientAlpha(rect,ul,ur,dl,dr);
     }
   else
     throw std::runtime_error("implement drawLine for sdl-texture");
@@ -391,7 +389,7 @@ void AGTexture::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const 
   if(opengl())
     {
       assert(mTexture);
-      dynamic_cast<AGGLScreen*>(&getScreen())->drawGradientAlpha(rect,ul,ur,dl,dr);
+      AGGLPainter::drawGradientAlpha(rect,ul,ur,dl,dr);
     }
   else
     throw std::runtime_error("implement drawLine for sdl-texture");
@@ -401,8 +399,8 @@ void AGTexture::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const 
 void AGTexture::setWrapping(bool pWrap)
 {
   bindTexture();
-  if(m3d && pWrap)
-    setClamp(GL_REPEAT,GL_REPEAT,GL_CLAMP_TO_EDGE );
+  //  if(m3d && pWrap)
+  //    setClamp(GL_REPEAT,GL_REPEAT,GL_CLAMP_TO_EDGE );
 }
 void AGTexture::setFilter(GLuint mag,GLuint min)
 {
@@ -441,11 +439,11 @@ float AGTexture::getSurfaceHeight() const
 
 float AGTexture::getTextureWidth() const
 {
-  return float(mTexture->width());
+  return float(const_cast<AGTexture*>(this)->glTexture()->width());
 }
 float AGTexture::getTextureHeight() const
 {
-  return float(mTexture->height());
+  return float(const_cast<AGTexture*>(this)->glTexture()->height());
 }
 
 bool AGTexture::is3d() const

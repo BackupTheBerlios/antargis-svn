@@ -41,6 +41,9 @@ class AGBorder
 
  private:
   const AGTexture *mTexture;
+
+  std::vector<const AGTexture*> mTextures;
+
   std::string mTheme;
   bool mEnable;
   size_t mWidth;

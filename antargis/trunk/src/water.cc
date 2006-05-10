@@ -34,6 +34,9 @@ WaterPiece::~WaterPiece()
 {
   //  delete mShader;
   //  mShader=0;
+  if(sceneValid())
+    getScene()->removeNode(this);
+
 }
 
 void WaterPiece::mapChanged()

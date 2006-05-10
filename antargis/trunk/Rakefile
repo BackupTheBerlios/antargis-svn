@@ -5,39 +5,18 @@ require 'mkmf'
 #require 'file'
 require 'ftools'
 
+require 'buildtools.rb'
+
 $LDFLAGS+=" -L/usr/X11R6/lib "
 $CFLAGS+=" -I/usr/X11R6/include "
 
 version="0.1.1"
 
-begin File.mkpath(".deps")
-rescue 
-end
-
-$profile=false
+$profile=true
 $debug=true
 
-def bigendian
-	[512].pack("f")==[512].pack("g")
-end
-
-if bigendian
-	$profile=false
-end
 
 #`mkdir .deps`
-
-def windows
-	if $mwindows==nil
-		$mwindows||=(have_library("opengl32"))
-		if not $mwindows
-			
-			puts "no opengl32 found - so expecting _not_ to use windows"
-		end
-	end
-	#puts "WINDOWS:"+$mwindows.to_s
-	return $mwindows
-end
 
 def getDestDir
 	d="/usr"
@@ -50,32 +29,6 @@ def getDestDir
 	return d
 end
 
-$failed_libs=[]
-def test_library(x)
-	if not have_library(x)
-		$failed_libs.push(x)
-	end
-end
-
-def test_program(p,er)
-	path=ENV["PATH"]
-	mp=""
-	path.split(":").each{|s|
-		c=s+"/"+p
-		if File.exists?(c)
-			mp=c
-		end
-	}
-	if mp==""
-		puts "NOTE: "+er
-	else
-		puts "Found #{p} at #{mp}"
-	end
-	#puts mp	
-	#x=`whereis #{p}`
-	#puts x,path
-	return mp
-end
 
 #test_program("swig","Swig was not found! If you make changes on the header-files this can lead to problems.")
 #exit
@@ -84,71 +37,19 @@ end
 windows # check once
 
 if File.exists?("config.rb")
-	puts "Config cached! - remove 'config.rb' or 'rake clean' to clear cache"
+	puts "Config cached! - remove 'config.rb' or 'rake allclean' to clear cache"
 	puts
 	require "config.rb"
 else
-	if windows
-		$LDFLAGS+=" -LC:/msys/local/lib"
-	end
-	test_library('SDL')
-	test_library('SDL_ttf')
-	#test_library('SGE')
-	if windows
-		test_library('GLU32')
-	else
-		test_library("GLU")
-		test_library("GL")
-	end
-	test_library('SDL_mixer')
-	test_library('SDL_image')
-	test_library('stdc++')
-	test_library('z')
-	test_library('png')
-	if windows
-		test_library('msvcrt-ruby18')
-	end
-
-	if $failed_libs.length>0
-		puts "----------------------------------------------------------------------"
-		puts "| ERROR:"
-		puts "| Following libraries failed when compiling:"
-		puts "| " +$failed_libs.join(" ")
-		puts "| Please install the corresponding packages and the development packages."
-		puts "| On Debian this would be something like:"
-		puts "| apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf1.2-dev libsdl-mixer1.2-dev ruby1.8-dev libsdl-sge-dev"
-		puts "| Note: libz is the famous zlib :-)"
-		puts "----------------------------------------------------------------------"
-		exit
-	end
-	
-	$swig=test_program("swig","Swig was not found! If you make changes on the header-files this can lead to problems.")
-
-	if $swig=="" and (not File.exists?("src/swig.cc"))
-		puts "ERROR: Please install swig. This is needed for building from SVN trunk!"
-		exit
-	end
-
-
-	#$swig = with_config('swig', 'swig')
-	$INSTALL = test_program('install', 'Please install "install"')
-	$ccache = test_program("ccache","For faster recompiling while developing you can install ccache.")
-	if windows
-		$ccache=""
-	end
-	
-	if not $libs
-		puts "ERROR: Not compatible with current mkmf!"
-		exit
-	end
-	f=File.open("config.rb","w")
-	f.puts "$libs='#{$libs}'"
-	f.puts "$swig='#{$swig}'"
-	f.puts "$INSTALL='#{$INSTALL}'"
-	f.puts "$ccache='#{$ccache}'"
-	f.close
-	
+  sh "./configure"
+	require "config.rb"
 end
+
+begin File.mkpath(".deps")
+rescue 
+end
+
+
 interfaceHeadersSRC=["ant_frustum.h","ant_projection.h",
 "scenenode.h","anim_mesh.h","anim_mesh_data.h","ant_app.h","ant_serial.h","entity.h","entptr.h","glsl.h","height_map.h","map.h","mesh_data.h","mesh.h","mesh_optimizer.h","minimap.h","new_decal.h","ant_renderer.h","resource.h","scene.h","smoke.h","terrain.h","vertex_array.h","water.h"]
 interfaceHeadersGUI=[
@@ -156,6 +57,13 @@ interfaceHeadersGUI=[
  "ag_geometry.h","ag_font.h","ag_color.h","ag_local.h","ag_config.h",
  "ag_widget.h","ag_colorbutton.h","ag_glwidget.h","ag_xml.h","ag_layout.h","ag_dialog.h","ag_mutex.h",
  "ag_application.h","ag_background.h","ag_border.h","ag_button.h","ag_text.h","ag_caption.h","ag_checkbox.h","ag_combo.h","ag_edit.h","ag_fontengine.h","ag_fs.h","ag_painttarget.h","ag_surface.h","ag_texture.h","ag_surfacemanager.h","ag_image.h","ag_layoutfactory.h","ag_listbox.h","ag_list.h","ag_main.h","ag_menu.h","ag_menuitem.h","ag_mixer.h","ag_mutex.h","ag_painter.h","ag_png.h","ag_radio.h","ag_screen.h","ag_table.h","ag_texturecache.h","ag_theme.h","ag_tools.h","ag_window.h","ag_xml.h"]
+
+interfaceHeadersGUI=[
+"ag_rubyobj.h",
+"ag_messageobject.h",
+ "ag_geometry.h","ag_font.h","ag_color.h","ag_local.h","ag_config.h",
+ "ag_widget.h","ag_colorbutton.h","ag_glwidget.h","ag_xml.h","ag_layout.h","ag_dialog.h","ag_mutex.h",
+ "ag_application.h","ag_background.h","ag_border.h","ag_button.h","ag_text.h","ag_caption.h","ag_checkbox.h","ag_combo.h","ag_edit.h","ag_fontengine.h","ag_fs.h","ag_painttarget.h","ag_surface.h","ag_texture.h","ag_surfacemanager.h","ag_image.h","ag_layoutfactory.h","ag_listbox.h","ag_list.h","ag_main.h","ag_mixer.h","ag_mutex.h","ag_painter.h","ag_radio.h","ag_screen.h","ag_table.h","ag_texturecache.h","ag_theme.h","ag_tools.h","ag_window.h","ag_xml.h","ag_menuitem.h","ag_menu.h"]
  
 
 PWD=Dir.pwd
@@ -272,9 +180,12 @@ task :clean do
 		sh "rm -f src/swig.*"
 		sh "rm -f src/nantmarker.hh"
 	end
-	sh "rm -f config.rb"
 	sh "rm -r -f .deps"
 	sh "rm -r -f docs/api"
+end
+
+task :allclean => :clean do
+	sh "rm -f config.rb"
 end
 
 def mkdir(d)

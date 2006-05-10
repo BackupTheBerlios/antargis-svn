@@ -64,18 +64,18 @@
 	result->mRubyObject=true;
 }
 %markfunc Mesh "general_markfunc"
-%exception AGSound::AGSound {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGSound "general_markfunc"
 %exception AGMenuItem::AGMenuItem {
 	$action
 	result->mRUBY=self;
 	result->mRubyObject=true;
 }
 %markfunc AGMenuItem "general_markfunc"
+%exception AGSound::AGSound {
+	$action
+	result->mRUBY=self;
+	result->mRubyObject=true;
+}
+%markfunc AGSound "general_markfunc"
 %exception AGMain::AGMain {
 	$action
 	result->mRUBY=self;
@@ -666,34 +666,6 @@ else if(dynamic_cast<AGCaption*>($1))
  }
  else $input=Qnil;
 }
-%typemap(out) AGSound*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(directorin) AGSound*{
- if($1)
- {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
-   }
- }
- else $input=Qnil;
-}
 %typemap(out) AGMenuItem*{
  if($1)
  {
@@ -722,6 +694,34 @@ else if(dynamic_cast<AGSubMenu*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AGSound*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGSound*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
    }
  }
  else $input=Qnil;

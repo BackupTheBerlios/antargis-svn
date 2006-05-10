@@ -210,11 +210,14 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventFrame(time)
+		#puts "eventFrame"
 		super(time)
+		#puts "eventFrame2"
 		if @fc==nil then 
 			@fc=0 
 			@elaps=0
 		end
+		#puts "eventFrame3"
 		if @fc>14 then
 			fps=sprintf("%3.0f",@fc/@elaps)
 			puts "FPS:"+fps
@@ -222,10 +225,13 @@ class AntGameApp <AntRubyView
 			puts "Tris:"+getScene.getTriangles.to_s
 			@fc=0
 			@elaps=0
+			puts "GC start"
 			GC.start # call GC often, so that it doesn't run soo long when called otherwise
+			puts "GC ok"
 		end
 		@fc+=1
 		@elaps+=time
+		#puts "getMap..."
 		getMap().move(time)
 #		GC.start
 		getScene.advance(time)
@@ -492,7 +498,21 @@ def frustumTest
 end
 frustumTest
 
-if $useMenu==nil and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
+$useMenu||=false
+
+if true
+	savegame=""
+	ARGV.each{|arg|
+		if arg=~/levels.*/ or arg=~/savegames.*/
+			savegame=arg+".antlvl"
+		end
+	}
+	if savegame!=""
+		startGame(savegame)	
+	end
+end
+if false
+if not $useMenu and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
 	savegame="levels/level1.antlvl"
 	ARGV.each{|arg|
 		if arg=~/levels.*/ or arg=~/savegames.*/
@@ -505,3 +525,4 @@ end
 
 
 
+end

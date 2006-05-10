@@ -43,6 +43,7 @@ class MyWidget<AGWidget
 		#@tex=AGTexture.new(64,64) #getTextureManager.makeTexture(surface)
 		#@tex=AGTexture.new(surface)
 		#return
+		puts "BEEGIN"
 		@tex.beginPaint
 		#@tex.blit(test,AGRect.new(0,0,128,128),AGRect.new(0,0,128,128))
 		#@tex.endPaint
@@ -57,6 +58,7 @@ class MyWidget<AGWidget
 				@tex.putPixel(x,y,AGColor.new(0xFF,0xFF,0xFF,0xFF))
 			end
 		end
+		puts "EEENND"
 		@tex.endPaint
 	end
 	def draw(p)

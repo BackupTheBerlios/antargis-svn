@@ -26,6 +26,11 @@
 
 class AGInternalSurface;
 
+
+/**
+   AGGLTexture is an internal class for managing opengl-textures.
+   You shouldn't use it directly - all functionality is provided by AGTexture.
+ */
 class AGGLTexture
 {
  public:
@@ -35,6 +40,7 @@ class AGGLTexture
 
   void setSurface(AGInternalSurface *pSurface,const AGVector2 &offset=AGVector2(0,0));
 
+  /// give gl-texture-id
   GLuint id();
   bool is3d() const;
 
@@ -44,6 +50,8 @@ class AGGLTexture
 
  private:
   size_t w,h,d;
+
+  /// is this a 3d-texture?
   bool m3d;
 
   GLuint mID;

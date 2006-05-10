@@ -41,12 +41,10 @@ AntEntity::AntEntity():mPos(0,0,0)
 
 void AntEntity::init()
 {
-  CTRACE;
   mRubyObject=false;
 
   mID=getMap()->getNewID();
-  cdebug("mID:"<<mID);
-  
+
   mShowOnMinimap=false;
   onGround=true;
   onWater=false;
@@ -85,6 +83,7 @@ void AntEntity::init()
 
 AntEntity::~AntEntity()
 {
+  CTRACE;
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     saveDelete(*i);
   mMeshes.clear();

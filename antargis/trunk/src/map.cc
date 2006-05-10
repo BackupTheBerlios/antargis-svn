@@ -75,7 +75,6 @@ AntEntity *AntMap::getEntity(int id) const
 // FIXME: exchange this function somehow!!
 int AntMap::getNewID()
 {
-  CTRACE;
   return maxID++;
 }
 

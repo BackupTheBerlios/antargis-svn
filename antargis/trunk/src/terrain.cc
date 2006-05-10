@@ -25,6 +25,12 @@ TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,in
   setOrder(TERRAIN_Z);
 }
 
+TerrainPieceVA::~TerrainPieceVA()
+{
+  if(sceneValid())
+    getScene()->removeNode(this);
+}
+
 void TerrainPieceVA::mapChanged()
 {
   AGBox3 bb=bbox();

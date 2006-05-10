@@ -40,6 +40,10 @@ void beginRender();
 void endRender();
 bool isRendering();
 
+/**
+   AGInternalSurface links plain sdl-surfaces (in main-memory) and textures (both gl-textures and
+   sdl-screenlike-surfaces)
+*/
 struct AGInternalSurface
 {
   AGInternalSurface  *sdlTexture;
@@ -51,6 +55,12 @@ struct AGInternalSurface
   ~AGInternalSurface();
 };
 
+
+/**
+   AGDecryptor provides functionaliy for DRM-plugged images and music-files.
+   You have to derive from this class and give an instance when loading a surface.
+   When you have done so saving is disabled afterwards.
+ */
 class AGDecryptor
 {
  public:
@@ -63,7 +73,7 @@ class AGDecryptor
     }
 };
 
-// Generic classes - for OpenGL and "normal" SDL
+/// Generic classes - for OpenGL and "normal" SDL
 class AGSurface:public AGPaintTarget
 {
  public:  

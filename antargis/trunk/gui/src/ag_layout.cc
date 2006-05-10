@@ -514,8 +514,9 @@ public:
     if(pNode.get("y").length())
       r.setY(toFloat(pNode.get("y")));
 
+#warning "add subsurfaces"
 
-    AGWidget *w=new AGImage(pParent,r,s,false,pRect);
+    AGWidget *w=new AGImage(pParent,r,s,false);//,pRect);
 
     return w;
   }

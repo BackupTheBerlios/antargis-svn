@@ -17,7 +17,13 @@ SceneNode::SceneNode(Scene *s,const AGVector4 &pPos,const AGBox3 &b):
 
 SceneNode::~SceneNode()
 {
-  //  mRubyObject=false; // why was this here ??????
+  //  CTRACE;
+  //mRubyObject=false; // why was this here ??????
+
+  // typical calling is:
+  // scenenode is saveDeleted by AntEntity - so mScene should be 0
+
+  assert(mScene==0);
   if(mScene)
     mScene->removeNode(this);
 }
@@ -107,9 +113,15 @@ Scene *SceneNode::getScene()
   return mScene;
 }
 
+bool SceneNode::sceneValid() const
+{
+  return mScene;
+}
+
+
 void SceneNode::clear()
 {
-  cdebug(typeid(*this).name());
+  //  cdebug(typeid(*this).name());
   if(mScene)
     mScene->removeNode(this);
   resetScene();

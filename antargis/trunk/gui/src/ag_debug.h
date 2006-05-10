@@ -27,6 +27,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "GLee.h"
 #include <SDL_opengl.h>
 #include <GL/glu.h>
 
@@ -89,8 +90,8 @@ void agRaise(const std::string &s);
 void setRubyRaising(bool flag);
 
 #ifndef __WIN32__
-#undef assert
-#define assert(x) {if(!(x)) agRaise((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
+//#undef assert
+//#define assert(x) {if(!(x)) agRaise((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
 #endif
 
 #define Assert(x) assert(x)

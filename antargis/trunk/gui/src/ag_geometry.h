@@ -119,6 +119,7 @@ class AGVector2
 
 #ifndef SWIG
   (operator float*)();
+  (operator const float*)() const;
 #endif
 };
 

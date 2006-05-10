@@ -170,7 +170,12 @@ void Renderer::endShadowComputation()
   assertGL;
 
   /// @todo switch to FBOs - this should bring an improvement of 17 to 19 fps
+
+  glReadBuffer(GL_BACK);
+
   glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, shadowMapSize, shadowMapSize,0);
+
+  glReadBuffer(GL_FRONT);
 
   assertGL;
 

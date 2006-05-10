@@ -48,8 +48,8 @@ AGRect2 AGSDLScreen::getRect() const
 
 void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
-  for(int x=pRect.x0();x<pRect.x1();x++)
-    for(int y=pRect.y0();y<pRect.y1();y++)
+  for(int x=(int)pRect.x0();x<(int)pRect.x1();x++)
+    for(int y=(int)pRect.y0();y<(int)pRect.y1();y++)
       putPixel(x,y,c);
   return;
   sge_FilledRectAlpha(s,

@@ -46,21 +46,36 @@ class AGPaintTarget
   virtual void fillRect(const AGRect2 &pr,const AGColor &c) MSTUB
 
   virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pr) MSTUB
-      
+   
+  virtual void blit(const AGTexture &pSource,const std::vector<std::pair<AGRect2,AGRect2> > &pSrcDestRects,const AGColor &pColor)
+    MSTUB
+
+  virtual void tile(const AGTexture &pSource,const AGRect2 &pTarget, const AGColor &pColor) MSTUB
+   
   virtual AGRect2 getRect() const
   {
     return AGRect2(0,0,0,0);
   }
   
+
+  // modify single pixels - don't use this much!
+
   virtual void putPixel(int x,int y,const AGColor &c) MSTUB
   virtual AGColor getPixel(int x,int y) const MSTUB
 
+  // manage painting sessions
+
   virtual void beginPaint()
-  {
-  }
+  {}
+  
   virtual void endPaint()
-  {
-  }
+  {}
+
+  virtual void clip(const AGRect2 &r)
+  {}
+  virtual void unclip()
+  {}
+
 };
 
 

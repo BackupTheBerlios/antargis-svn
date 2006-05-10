@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+#ifdef USE_NEWEDITOR
+
 #ifndef __AG_EDIT2_H
 #define __AG_EDIT2_H
 
@@ -113,6 +115,9 @@ class AGEdit2:public AGWidget
   AGBackground mBackground;
 
 };
+
+
+#endif
 
 
 #endif

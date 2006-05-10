@@ -47,7 +47,11 @@ class AGGLScreen:public AGScreen
   virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
   virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor);
 
-  //  virtual void tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
+
+  virtual void blit(const AGTexture &pSource,const std::vector<std::pair<AGRect2,AGRect2> > &pSrcDestRects,const AGColor &pColor);
+
+  virtual void tile(const AGTexture &pSource,const AGRect2 &pTarget,const AGColor &pColor);
+
 
   virtual void fillRect(const AGRect2 &pRect,const AGColor &c);
   virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
@@ -56,26 +60,24 @@ class AGGLScreen:public AGScreen
   virtual AGRect2 getRect() const;
 
   virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
-  //  void renderText (const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+
 
   virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   virtual void drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2);
   virtual void putPixel(int x,int y,const AGColor &c);
-  /*
-  virtual AGTexture makeTexture(const AGSurface &s);
-  virtual AGTexture makeTexture3D(const AGSurface &s);
-  virtual void deleteTexture(AGTexture &t);
-  */
+
   virtual void begin(); // call before start drawing
   void flip();
   bool inScreen(const AGRect2 &r) const;
-  //  bool inScreen(const AGRect22 &r) const;
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;
 
   void clip(const AGRect2 &r);
   void unclip();
+
+  void beginPaint();
+  void endPaint();
 
  private:
   AGRect2 getRect(SDL_Surface *s);

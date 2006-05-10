@@ -227,9 +227,23 @@ class AntMenuApp <AGApplication
 		return true
 	end
 	def eventIdle
-		delay(20)
+		#delay(20)
 		return true
 	end
+
+	def eventFrame(t)
+		@frameTime||=0
+		@frames||=0
+		@frameTime+=t
+		@frames+=1
+		if @frames>10
+			puts "FPS:#{10.0/@frameTime}"
+			@frameTime=0
+			@frames=0
+		end
+		return true
+	end
+
 	def soundOff
 		@sound=false
 		getSoundManager.fadeOutMusic(1000)

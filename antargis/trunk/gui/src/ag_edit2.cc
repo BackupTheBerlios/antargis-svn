@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+#ifdef USE_NEWEDITOR
+
 #include "ag_edit2.h"
 #include "ag_debug.h"
 
@@ -930,3 +932,5 @@ std::string AGEdit2::getText() const
 {
   
 }
+
+#endif

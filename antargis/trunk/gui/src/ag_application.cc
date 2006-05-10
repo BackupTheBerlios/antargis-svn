@@ -27,6 +27,8 @@
 #include "ag_texturecache.h"
 #include "ag_profiler.h"
 
+#include <ruby.h>
+
 void disableKeyrepeat()
 {
   SDL_EnableKeyRepeat(0,0);
@@ -124,7 +126,14 @@ bool AGApplication::run()
 	if(mainWidget)
 	  mainWidget->sigTick(t);
 	
-	eventFrame(t);
+	{
+	  //	  CTRACE;
+	  {
+	    //	    CTRACE;
+	    //	    rb_gc_start();
+	  }
+	  eventFrame(t);
+	}
       }
       {
 	// drawing
@@ -150,6 +159,7 @@ bool AGApplication::run()
 
 bool AGApplication::doEvent(const SDL_Event* event) 
 {
+  STACKTRACE;
   SDL_Event e;
   
   // eat up old mouse motion events
@@ -295,7 +305,6 @@ void AGApplication::delay(int ms)
 /// mark my mainWidget and my tooltip, as they can be ruby-objects
 void AGApplication::mark()
 {
-  //  CTRACE;
   if(mainWidget)
     markObject(mainWidget);
   if(mTooltip)
