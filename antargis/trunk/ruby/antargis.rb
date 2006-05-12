@@ -73,6 +73,7 @@ class AntGameApp <AntRubyView
 		puts "HeroBar:",@layout
 		puts c
 
+		@fps=0
 
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
@@ -221,24 +222,24 @@ class AntGameApp <AntRubyView
 		end
 		#puts "eventFrame3"
 		if @fc>14 then
-			fps=sprintf("%3.0f",@fc/@elaps)
+			@fps=@fc/@elaps
+			fps=sprintf("%3.0f",@fps)
 			puts "FPS:"+fps
 			@statusBar.setText("FPS:#{fps}")
 			puts "Tris:"+getScene.getTriangles.to_s
 			@fc=0
 			@elaps=0
-			puts "GC start"
-			GC.start # call GC often, so that it doesn't run soo long when called otherwise
-			puts "GC ok"
+			startGC
 		end
 		@fc+=1
 		@elaps+=time
-		#puts "getMap..."
 		getMap().move(time)
-#		GC.start
 		getScene.advance(time)
-		#delay(10)
 		checkHeroEnergy
+
+		if @fps>25
+			delay(5)
+		end
 		return true
 	end
 	
@@ -479,7 +480,9 @@ class AntGameApp <AntRubyView
 end
 
 def startGame(file="savegames/savegame0.antlvl")
+	disableGC
 	app=AntGameApp.new(file,getMain.width,getMain.height)
+	#app.disableGC
 	app.run
 	result=app.result
 	app=nil
@@ -487,7 +490,9 @@ def startGame(file="savegames/savegame0.antlvl")
 	$app=nil
 	$screen=nil
 	puts "GC RUN"
-	GC.start
+	#app.enableGC
+	enableGC
+	startGC
 	return result
 end
 # def frustumTest

@@ -73,4 +73,9 @@ class AGRubyObject
 void general_markfunc(void *ptr);
 bool saveDelete(AGRubyObject *o);
 
+
+// use with care! there's a counter back there
+void enableGC();
+void disableGC();
+
 #endif

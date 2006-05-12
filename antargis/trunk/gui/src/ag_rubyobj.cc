@@ -62,15 +62,25 @@ size_t disableDepth=0;
 
 void AGRubyObject::disableGC()
 {
-  rb_gc_disable();
-  disableDepth++;
+  ::disableGC();
 }
 void AGRubyObject::enableGC()
+{
+  ::enableGC();
+}
+
+void enableGC()
 {
   disableDepth--;
   if(disableDepth==0)
     rb_gc_enable();
 }
+void disableGC()
+{
+  rb_gc_disable();
+  disableDepth++;
+}
+
 
 
 /// this is the marking function, that gets called by ruby

@@ -107,7 +107,7 @@ end
 if $profile
 	$CFLAGS+=" -DMPROFILE"
 end
-if $gc_debug
+if $gcdebug
 	$CFLAGS+=" -DGCDEBUG"
 end
 

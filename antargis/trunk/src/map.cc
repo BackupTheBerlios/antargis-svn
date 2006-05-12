@@ -344,6 +344,7 @@ AntEntity *AntMap::getEntity(const AnimMesh &pMesh)
 
 void AntMap::mark()
 {
+  HeightMap::mark();
   AntMap::EntityList::iterator i=mEntities.begin();
 
   for(;i!=mEntities.end();i++)

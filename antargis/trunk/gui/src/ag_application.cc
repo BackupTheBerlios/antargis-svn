@@ -305,6 +305,7 @@ void AGApplication::delay(int ms)
 /// mark my mainWidget and my tooltip, as they can be ruby-objects
 void AGApplication::mark()
 {
+  //  CTRACE;
   if(mainWidget)
     markObject(mainWidget);
   if(mTooltip)

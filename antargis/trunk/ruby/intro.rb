@@ -114,6 +114,11 @@ class IntroApp<AGApplication
 		delay(10)
 		return true
 	end
+
+	def eventMouseButtonDown(e)
+		tryQuit
+		return super(e)
+	end
 	
 end
 

@@ -572,6 +572,7 @@ AGRect2 AntEntity::getRect() const
 
 void AntEntity::mark()
 {
+  AGRubyObject::mark();
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     markObject(*i);
 }

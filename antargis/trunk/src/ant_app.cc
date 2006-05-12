@@ -4,6 +4,7 @@
 
 GLApp::GLApp(int w,int h):scene(w,h)
 {
+  CTRACE;
   shadow=true;
   mx=my=0;
   omx=-1;
@@ -167,8 +168,9 @@ Scene &GLApp::getScene()
 
 void GLApp::mark()
 {
-  //  CTRACE;
+  //CTRACE;
   markObject(&scene);
+  AGApplication::mark();
 }
 
 float GLApp::getCameraHeight(const AGVector2&p)

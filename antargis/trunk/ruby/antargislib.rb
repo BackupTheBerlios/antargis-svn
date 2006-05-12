@@ -29,6 +29,7 @@ if not $antargislibinited
 	$antargislibinited=true
 
 	$fullscreen=false
+	$antProfiling=false
 
 	# check options
 	ARGV.each{|arg|
@@ -44,6 +45,7 @@ if not $antargislibinited
 					getConfig.set("soundEnabled","true")
 				when "profile"
 					require 'profile'
+					$antProfiling=true
 				when "gc-check"
 					GC.stress=true
 				when "intro"
@@ -78,4 +80,19 @@ if not $antargislibinited
 	$main.setCaption("Antargis")
 	$main.setIcon("data/gui/editor/tower1.png")
 
+end
+
+def startGC
+	if not $antProfiling
+		puts "starting GC"
+		GC.enable
+		GC.start
+		GC.disable
+		puts "GC ok"
+	else
+		puts "starting GC"
+		GC.enable
+		GC.disable
+		puts "GC ok"
+	end
 end

@@ -13,12 +13,12 @@ $gcdebug=false
 varnames=[]
 
 # try reading config.rb
-if File.exists?("config.rb")
-	File.open("config.rb").each_line{|l|
-		eval(l)
-		varnames.push(l.split("=")[0])
-	}
-end
+#if File.exists?("config.rb")
+#	File.open("config.rb").each_line{|l|
+#		eval(l)
+#		varnames.push(l.split("=")[0])
+#	}
+#end
 
 varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug']
 
@@ -41,6 +41,7 @@ ARGV.each{|arg|
 		when "--help","-h"
 			puts "--debug, -d     enable debugging"
 			puts "--profile, -p   enable profiling"
+                        puts "--gc-debug      enable debugging of garbage collection"
 			$help=true
 	end
 }
@@ -109,6 +110,8 @@ if not $help
 	
 	puts "debugging:#{$debug}"
 	puts "profiling:#{$profile}"
+	puts "debugging gc:#{$gcdebug}"
+
 	
 	f=File.new("config.rb","w")
 	
