@@ -20,9 +20,14 @@ AGRubyObject::AGRubyObject()
   mRubyObject=false;
   mDeleted=false;
   gExistingRubies.insert(this);
+  mRUBY=0;
 }
 AGRubyObject::~AGRubyObject()
 {
+  //  cdebug("DEL:"<<mRUBY);
+#ifdef GCDEBUG
+  printf("DEL:%lx  %s\n",mRUBY,mObjName.c_str());
+#endif
   mDeleted=true;
   gExistingRubies.erase(this);
   //  cdebug("DEL:"<<mRUBY);
@@ -38,15 +43,13 @@ void AGRubyObject::mark()
 void AGRubyObject::markObject(AGRubyObject *o)
 {
   assert(o);
+
+  assert(gExistingRubies.find(o)!=gExistingRubies.end());
+
   if(o->mRubyObject)
     {
-      assert(gExistingRubies.find(o)!=gExistingRubies.end());
-
-
-      //cdebug(typeid(*o).name()<<"   "<<o);
       rb_gc_mark(o->mRUBY);
     }
-  //  else
   o->mark(); // call this directly
 }
 
@@ -78,13 +81,15 @@ void general_markfunc(void *ptr)
   if(!ptr)
     {
       cdebug("WARNING: a ptr==0 was given in general_markfunc!");
-      throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
+      //      throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
       return; // ignore
     }
   assert(ptr);
   AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
 
-  //  printf("%lX\n",o->mRUBY);
+#ifdef GCDEBUG
+  printf("mark: 0x%lx\n",o->mRUBY);
+#endif
 
   assert(o);
   o->mark();

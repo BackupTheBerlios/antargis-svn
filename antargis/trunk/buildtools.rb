@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
+$mwindows||=nil
 def windows
+	
 	if $mwindows==nil
 		$mwindows||=(have_library("opengl32"))
 		if not $mwindows
-			
+			$mwindows=false
 			puts "no opengl32 found - so expecting _not_ to use windows"
 		end
 	end
@@ -44,4 +46,17 @@ end
 
 if bigendian
 	$profile=false
+end
+
+def msh(command,&block)
+	puts command
+
+  res = system(command)
+	status=$?
+	if not block.nil?
+  	block.call(res, $?)
+	end
+	if not res
+		fail "Command failed with status (#{status.exitstatus}): [#{command}]"
+	end
 end

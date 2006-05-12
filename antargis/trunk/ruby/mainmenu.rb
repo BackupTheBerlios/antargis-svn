@@ -227,7 +227,7 @@ class AntMenuApp <AGApplication
 		return true
 	end
 	def eventIdle
-		#delay(20)
+		delay(20)
 		return true
 	end
 

@@ -5,7 +5,7 @@ require 'ant_local.rb'
 
 class Black<AGWidget
 	def initialize(p,r)
-		super
+		super(p,r)
 		@r=r
 		@alpha=0.0
 	end

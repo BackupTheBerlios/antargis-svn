@@ -31,6 +31,8 @@
    @see saveDelete(AGRubyObject *o)
 */
 
+#include <string>
+
 class AGRubyObject
 {
  public:
@@ -59,6 +61,10 @@ class AGRubyObject
   bool mRubyObject;
   VALUE mRUBY;
   bool mDeleted;
+#ifdef GCDEBUG
+  std::string mObjName;
+#endif
+
 #endif
   friend void general_markfunc(void *ptr);
   friend bool saveDelete(AGRubyObject *o);

@@ -55,9 +55,11 @@ class AntGameApp <AntRubyView
 			loadscreen.tick
 		end
 		$map=@map
+		puts "MAPPPPPPPPPPPPPP:#{@map}"
+
 		@finish="quit"
 
-		GC.disable
+		#GC.disable
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
 
@@ -488,15 +490,15 @@ def startGame(file="savegames/savegame0.antlvl")
 	GC.start
 	return result
 end
-def frustumTest
-	puts "frustumTest"
-	p=AntPlane.new(AGVector3.new(1,1,-1).normalized,1)
-	
-	puts p.inside(AGVector3.new(2,5,6))
-	
-	#exit
-end
-frustumTest
+# def frustumTest
+# 	puts "frustumTest"
+# 	p=AntPlane.new(AGVector3.new(1,1,-1).normalized,1)
+# 	
+# 	puts p.inside(AGVector3.new(2,5,6))
+# 	
+# 	#exit
+# end
+# frustumTest
 
 $useMenu||=false
 

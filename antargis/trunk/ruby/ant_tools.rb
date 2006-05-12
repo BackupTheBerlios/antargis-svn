@@ -26,18 +26,19 @@ def getAnimMeshData(file)
 	return $meshes[file]
 end
 
-class AGVector3
-	def x=(p)
-		setX(p)
-	end
-	def y=(p)
-		setY(p)
-	end
-	def z=(p)
-		setZ(p)
+module Libantargis
+	class AGVector3
+		def x=(p)
+			setX(p)
+		end
+		def y=(p)
+			setY(p)
+		end
+		def z=(p)
+			setZ(p)
+		end
 	end
 end
-
 
 def displayError(error)
 	getSoundManager.playWave("data/sound/error.wav")

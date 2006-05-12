@@ -159,14 +159,25 @@ EOT
 	eval("@#{name}=AGSignal.new(self,'#{name}')\n")
 end
 
-class AGApplication
-	include AGHandler
+if hasLibantargis
+	module Libantargis
+		class AGApplication
+			include AGHandler
+		end
+		class AGWidget
+			include AGHandler
+		end
+	end
+else
+	module Libantargisgui
+		class AGApplication
+			include AGHandler
+		end
+		class AGWidget
+			include AGHandler
+		end
+	end
 end
-class AGWidget
-	include AGHandler
-end
-
-
 class Array
 	def shuffle
 		sort{0.5 <=> rand}

@@ -44,6 +44,8 @@ if not $antargislibinited
 					getConfig.set("soundEnabled","true")
 				when "profile"
 					require 'profile'
+				when "gc-check"
+					GC.stress=true
 				when "intro"
 					getConfig.set("intro","true")
 				when "no-intro"
@@ -60,6 +62,7 @@ if not $antargislibinited
 --window       start in windows mode
 
 --profile      enables profiling output of BoA's ruby-part
+--gc-check     enables debug mode for gc-check (GC.stress=true)
 
 --intro        enables the intro
 --no-intro     disables the intro

@@ -1,240 +1,400 @@
 %exception AGWindow::AGWindow {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGWindow "general_markfunc"
 %exception AGCaption::AGCaption {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGCaption "general_markfunc"
 %exception AGMessageObject::AGMessageObject {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMessageObject "general_markfunc"
 %exception WaterPiece::WaterPiece {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc WaterPiece "general_markfunc"
 %exception Scene::Scene {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc Scene "general_markfunc"
 %exception AnimMeshData::AnimMeshData {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AnimMeshData "general_markfunc"
 %exception AnimMesh::AnimMesh {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AnimMesh "general_markfunc"
 %exception AGTable::AGTable {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGTable "general_markfunc"
 %exception AGText::AGText {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGText "general_markfunc"
 %exception NewDecal::NewDecal {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc NewDecal "general_markfunc"
 %exception Mesh::Mesh {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc Mesh "general_markfunc"
-%exception AGMenuItem::AGMenuItem {
-	$action
-	result->mRUBY=self;
-	result->mRubyObject=true;
-}
-%markfunc AGMenuItem "general_markfunc"
 %exception AGSound::AGSound {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGSound "general_markfunc"
+%exception AGMenuItem::AGMenuItem {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGMenuItem "general_markfunc"
 %exception AGMain::AGMain {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMain "general_markfunc"
 %exception AGCheckBox::AGCheckBox {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGCheckBox "general_markfunc"
 %exception AGRadioGroup::AGRadioGroup {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGRadioGroup "general_markfunc"
 %exception AGImage::AGImage {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGImage "general_markfunc"
 %exception AGApplication::AGApplication {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGApplication "general_markfunc"
 %exception AGDialog::AGDialog {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGDialog "general_markfunc"
 %exception AGWidget::AGWidget {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGWidget "general_markfunc"
 %exception Smoke::Smoke {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc Smoke "general_markfunc"
 %exception AGGLWidget::AGGLWidget {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGGLWidget "general_markfunc"
 %exception AGListener::AGListener {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGListener "general_markfunc"
 %exception MeshData::MeshData {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc MeshData "general_markfunc"
 %exception AGEdit::AGEdit {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGEdit "general_markfunc"
 %exception AGLayout::AGLayout {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGLayout "general_markfunc"
 %exception AGButton::AGButton {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGButton "general_markfunc"
 %exception SceneNode::SceneNode {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc SceneNode "general_markfunc"
 %exception AGSubMenu::AGSubMenu {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGSubMenu "general_markfunc"
 %exception AGListBox::AGListBox {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGListBox "general_markfunc"
 %exception TerrainPieceVA::TerrainPieceVA {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc TerrainPieceVA "general_markfunc"
 %exception AGColorButton::AGColorButton {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGColorButton "general_markfunc"
 %exception MiniMap::MiniMap {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc MiniMap "general_markfunc"
 %exception AGMenu::AGMenu {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMenu "general_markfunc"
 %exception AGRubyObject::AGRubyObject {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGRubyObject "general_markfunc"
 %exception AntMap::AntMap {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AntMap "general_markfunc"
 %exception HeightMap::HeightMap {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc HeightMap "general_markfunc"
 %exception AntEntity::AntEntity {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AntEntity "general_markfunc"
 %exception GLApp::GLApp {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc GLApp "general_markfunc"
 %exception AGRadio::AGRadio {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGRadio "general_markfunc"
@@ -666,6 +826,34 @@ else if(dynamic_cast<AGCaption*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) AGSound*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGSound*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGMenuItem*{
  if($1)
  {
@@ -694,34 +882,6 @@ else if(dynamic_cast<AGSubMenu*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
-   }
- }
- else $input=Qnil;
-}
-%typemap(out) AGSound*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(directorin) AGSound*{
- if($1)
- {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
    }
  }
  else $input=Qnil;

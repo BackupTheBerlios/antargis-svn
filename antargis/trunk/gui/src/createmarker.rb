@@ -73,7 +73,10 @@ rubyClasses.each {|x,y|
 		file.puts "%exception "+x+"::"+x+" {"
 		file.puts "	$action"
 		file.puts "	result->mRUBY=self;"
-		#file.puts " std::cout<<self<<std::endl;"
+		file.puts "#ifdef GCDEBUG"
+		file.puts '     result->mObjName=typeid(*result).name();'
+		file.puts '     printf("%lx   %s\n",self,typeid(*result).name());'
+		file.puts "#endif"
 		file.puts "	result->mRubyObject=true;"
 		file.puts "}"
 		file.puts "%markfunc "+x+" \"general_markfunc\""

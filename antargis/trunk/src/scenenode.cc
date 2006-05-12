@@ -23,7 +23,7 @@ SceneNode::~SceneNode()
   // typical calling is:
   // scenenode is saveDeleted by AntEntity - so mScene should be 0
 
-  assert(mScene==0);
+  //  assert(mScene==0); // but not at program end - this is the reason this is commented
   if(mScene)
     mScene->removeNode(this);
 }

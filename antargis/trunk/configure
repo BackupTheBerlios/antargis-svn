@@ -8,6 +8,7 @@ require 'buildtools.rb'
 $profile=true
 $debug=false
 $help=false
+$gcdebug=false
 
 varnames=[]
 
@@ -19,7 +20,7 @@ if File.exists?("config.rb")
 	}
 end
 
-varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache']
+varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug']
 
 varnames.uniq!
 
@@ -29,6 +30,8 @@ ARGV.each{|arg|
 	case arg
 		when "--debug","-d","--enable-debug"
 			$debug=true
+		when "--gc-debug"
+			$gcdebug=true
 		when "--profile","-p","--enable-profile"
 			$profile=true
 		when "--disable-debug"
@@ -123,7 +126,7 @@ if not $help
 
 	begin
 		require 'rake'
-		sh "rake clean"
+		msh "rake clean"
 	end
 
 end

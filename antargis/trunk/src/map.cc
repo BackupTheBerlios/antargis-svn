@@ -53,6 +53,7 @@ AntMap::AntMap(Scene *pScene,int w,int h):
 AntMap::~AntMap()
 {
   CTRACE;
+  printf("%lX\n",mRUBY);
   if(myAntargisMap==this)
     myAntargisMap=0;
 }
