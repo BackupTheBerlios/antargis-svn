@@ -19,8 +19,7 @@ class AntEnergy<AGWidget
 		@hborder=0
 		@vborder=0
 
-		setCaching(true)
-		@doRedraw=true
+		#setCaching(true)
 		@hero=nil
 	end
 
@@ -29,17 +28,12 @@ class AntEnergy<AGWidget
 	end
 	
 	def eventTick(t)
-		#puts "MUH"
 		updateValues
 		super
 	end
-	#def redraw
-	#	@doRedraw
-	#end
 
 	def draw(p)
 		super
-		@doRedraw=false
 		r=p.getRect.origin
 		w=r.width
 		h=r.height-@vborder
@@ -74,9 +68,7 @@ private
 	def set(n,v)
 		o=@values[n]
 		if ((o-v).abs>0.1) or (o!=v and (v==0 or v==1))
-			puts "redraw #{o} #{n}"
 			queryRedraw
-			#@doRedraw=true
 			@values[n]=v
 		end
 	end

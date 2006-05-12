@@ -44,7 +44,9 @@ void AGRubyObject::markObject(AGRubyObject *o)
 {
   assert(o);
 
+#ifdef GCDEBUG
   assert(gExistingRubies.find(o)!=gExistingRubies.end());
+#endif
 
   if(o->mRubyObject)
     {
