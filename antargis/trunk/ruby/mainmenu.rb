@@ -207,10 +207,6 @@ class AntMenuApp <AGApplication
 	end
 	
 	def eventStart(e)
-		if $campStarted
-			raise e
-		end
-		$campStarted=true
 		puts "EVENTSTART"
 		if @selCampaign
 			soundOff

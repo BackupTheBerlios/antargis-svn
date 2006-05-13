@@ -14,7 +14,7 @@ class Level1<Level
 		end
 	end
 	def eventHLJobFinished(hero,job)
-		if hero.getName!="Godrin"
+		if hero.getName!="Rowen"
 			return
 		end
 		if job.class==AntHeroFightJob

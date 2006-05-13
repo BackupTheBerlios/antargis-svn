@@ -3,7 +3,7 @@
     <position x="56.642" y="51.0992" z="1.78436"/>
 		<resource food="30" stone="50"/>
   </antTower>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Godrin">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Rowen">
     <position x="64.4641" y="51.154" z="2.22674"/>
 		<resource food="10"/>
   </antHero>
@@ -83,8 +83,8 @@
   <antHighGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="62.1096" y="59.93" z="3.31196"/>
   </antHighGrass>
-	<humanPlayer name="Godrin">
-		<hero name="Godrin"/>
+	<humanPlayer name="Rowen">
+		<hero name="Rowen"/>
 		<hero name="Keep"/>
 	</humanPlayer>
 	<lazyPlayer name="Bantor">

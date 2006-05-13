@@ -138,7 +138,7 @@
   <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="0.581065478774894" onGround="true">
     <position x="9.4103" y="20.5318" z="1"/>
   </antTower>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Godrin" onGround="true">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Rowen" onGround="true">
     <position x="12.509" y="8.74495" z="1.73704"/>
   </antHero>
   <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true">

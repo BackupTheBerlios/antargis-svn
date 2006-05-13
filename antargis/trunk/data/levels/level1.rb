@@ -10,7 +10,7 @@ class Level1<Level
 	end
 	def eventOwnerChanged(ent)
 		case ent.getName	
-			when "Godrin"
+			when "Rowen"
 				lostLevel
 			when "Bantor"
 				wonLevel

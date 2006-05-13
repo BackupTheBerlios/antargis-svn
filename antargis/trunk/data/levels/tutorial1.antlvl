@@ -59,7 +59,7 @@
     <position x="45.914" y="74.4916" z="2.38217"/>
     <resource/>
   </antGrass>
-  <antHero aggression="1" appearance="hero" birthday="-2104.14120287278" energy="1" food="1" healSpeed="0.1" men="5" morale="1" name="Godrin" onGround="true">
+  <antHero aggression="1" appearance="hero" birthday="-2104.14120287278" energy="1" food="1" healSpeed="0.1" men="5" morale="1" name="Rowen" onGround="true">
     <position x="44.4067" y="58.566" z="2.02858"/>
     <resource/>
   </antHero>
@@ -103,7 +103,7 @@
     <position x="43.6842" y="43.4578" z="-0.12003"/>
     <resource/>
   </antNewStone>
-  <humanPlayer name="Godrin">
-    <hero name="Godrin"/>
+  <humanPlayer name="Rowen">
+    <hero name="Rowen"/>
   </humanPlayer>
 </antargisLevel>

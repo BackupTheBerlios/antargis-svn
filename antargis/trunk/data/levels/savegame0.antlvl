@@ -141,7 +141,7 @@
   <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true" men="2">
     <position x="25.9184" y="11.5744" z="2.30454"/>
   </antHero>
-  <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Godrin" onGround="true" men="3">
+  <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Rowen" onGround="true" men="3">
     <position x="28.6598" y="7.15123" z="2.58762"/>
   </antHero>
 	
@@ -167,8 +167,8 @@
   <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
     <position x="5.10569" y="17.4769" z="2.15074"/>
   </antNewStone>
-	<humanPlayer name="Godrin">
-		<hero name="Godrin"/>
+	<humanPlayer name="Rowen">
+		<hero name="Rowen"/>
 	</humanPlayer>
 	<lazyPlayer name="Bantor">
 		<hero name="Bantor"/>

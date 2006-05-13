@@ -128,7 +128,7 @@
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="38.6067" y="11.27" z="1.18358"/>
   </antGrass>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Godrin" men="20" onGround="true">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Rowen" men="20" onGround="true">
     <position x="62.7639" y="80.8467" z="1"/>
 <!--    <position x="34.1018" y="9.51682" z="1"/>-->
   </antHero>
@@ -180,8 +180,8 @@
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="69.9855" y="97.0097" z="1"/>
   </antGrass>
-	<humanPlayer name="Godrin">
-		<hero name="Godrin"/>
+	<humanPlayer name="Rowen">
+		<hero name="Rowen"/>
 	</humanPlayer>
 	<lazyPlayer name="Bantor">
 		<hero name="Bantor"/>

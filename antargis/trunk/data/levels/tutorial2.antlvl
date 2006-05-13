@@ -51,7 +51,7 @@
     <position x="41.4662" y="18.0888" z="1.36807"/>
     <resource food="5" wood="40"/>
   </antNewTree>
-  <antHero aggression="1" appearance="hero" birthday="-2286.55173594538" energy="1" food="1" healSpeed="0.1" id="0" mode="" morale="1" name="Godrin" onGround="true" men="7">
+  <antHero aggression="1" appearance="hero" birthday="-2286.55173594538" energy="1" food="1" healSpeed="0.1" id="0" mode="" morale="1" name="Rowen" onGround="true" men="7">
     <position x="75.3675" y="25.6145" z="2.19586"/>
     <resource/>
   </antHero>
@@ -103,7 +103,7 @@
     <position x="49.2536" y="26.6742" z="1.87187"/>
     <resource/>
   </antNewStone>
-  <humanPlayer name="Godrin">
-    <hero name="Godrin"/>
+  <humanPlayer name="Rowen">
+    <hero name="Rowen"/>
   </humanPlayer>
 </antargisLevel>

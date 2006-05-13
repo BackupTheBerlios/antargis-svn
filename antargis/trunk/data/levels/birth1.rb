@@ -18,9 +18,9 @@ class Level1<Level
 	def eventLevelStarted
 		if not @started
 			start=StoryFlow.new("beginning")
-			start.push("Godrin","Slowly you awake.")
-			start.push("Godrin","You remember that you have been attacked, but ...")
-			start.push("Godrin","Anything else is gone. You've lost your memory.")
+			start.push("Rowen","Slowly you awake.")
+			start.push("Rowen","You remember that you have been attacked, but ...")
+			start.push("Rowen","Anything else is gone. You've lost your memory.")
 			tellStory(start)
 			@started=true
 		end
@@ -49,14 +49,14 @@ class Level1<Level
 					s=StoryFlow.new("druid1")
 					s.push("Druid","Greetings stranger! I am the druid.")
 					s.push("Druid","These are dangerous times. Be watchful in these woods.")
-					s.push("Godrin","I think I have lost my memory.")
+					s.push("Rowen","I think I have lost my memory.")
 					s.push("Druid","Yes, but I see times of remembrance in your future...")
 					s.push("Druid","You should go east and meet the smith.")
-					s.push("Godrin","But there is a party of strangers on the way.")
+					s.push("Rowen","But there is a party of strangers on the way.")
 					s.push("Druid","They will be gone soon.")
 					tellStory(s)
 					getMap.getByName("Bantor").newHLMoveJob(0,getMap.getTarget("retreat").pos,0)
-					getMap.getByName("Godrin").newHLRestJob(10)
+					getMap.getByName("Rowen").newHLRestJob(10)
 				end
 			when "smith"
 				if @smith==nil
@@ -69,15 +69,15 @@ class Level1<Level
 				if @smith==1
 					s=StoryFlow.new("smith1")
 					s.push("Smith","Welcome to our small town! What is your name, boy?")
-					s.push("Godrin","My is name is .. well, I don't remember it.")
+					s.push("Rowen","My is name is .. well, I don't remember it.")
 					s.push("Smith","Then he is surely the man, the druid mentioned.")
-					s.push("Godrin","What do you mean?")
+					s.push("Rowen","What do you mean?")
 					s.push("Smith","Nothing. You look like a brave young man to me.")
 					s.push("Smith","If you promise to act wisely and defeat those men in the north, you can have some of my men.")
-					s.push("Godrin","Yes, these attacked my party - as much as this I remember.")
+					s.push("Rowen","Yes, these attacked my party - as much as this I remember.")
 					s.push("Smith","Well, then recruit some of my men.")
 					tellStory(s)
-					# assign houses to Player Godrin
+					# assign houses to Player Rowen
 					["Dwelling","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
 					@smith=2
 				end
@@ -86,14 +86,14 @@ class Level1<Level
 					when "end"
 						wonLevel
 					when "smith0"
-						getMap.getByName("Godrin").newHLMoveJob(0,getMap.getTarget("near_smith").pos,0)
+						getMap.getByName("Rowen").newHLMoveJob(0,getMap.getTarget("near_smith").pos,0)
 				end
 		end
 		return false # ignore
 	end
 	def eventOwnerChanged(ent)
 		case ent.getName	
-			when "Godrin"
+			when "Rowen"
 				lostLevel
 			when "Bantor"
 				wonLevel
