@@ -95,6 +95,7 @@ class AGSurface:public AGPaintTarget
   bool valid() const;
 
   AGSurface scale(int w,int h) const;
+  AGSurface grayed() const;
 
   AGSurface &operator=(const AGSurface &p);
 

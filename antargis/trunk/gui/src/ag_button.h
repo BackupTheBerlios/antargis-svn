@@ -83,6 +83,7 @@ class AGButton:public AGWidget
   State mState;
   int borderWidth;
   AGSurface mSurface;
+  AGSurface mGrayedSurface;
   bool mHasSurface;
   AGEdit *mTextW;
   AGImage *mImageW;

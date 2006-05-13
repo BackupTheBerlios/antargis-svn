@@ -150,6 +150,9 @@
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
     <position x="54.4987" y="14.6544" z="3.92009"/>
   </antNewTree>
+  <antMan bossName="Workshop" aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Galvador" onGround="true">
+    <position x="31.2377" y="16.9882" z="1"/>
+  </antMan>
   <antNPC aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Smith" npcType="smith" onGround="true">
     <position x="31.2377" y="16.9882" z="1"/>
   </antNPC>
@@ -238,7 +241,7 @@
     <position x="50.9935" y="28.4206" z="1"/>
 		<resource food="50" gold="10"/>
   </antHero>
-  <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" name="Keep">
+  <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" onGround="true" name="Keep">
     <position x="41.9545" y="90.2078" z="1"/>
   </antTower>
   <antDecal aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">

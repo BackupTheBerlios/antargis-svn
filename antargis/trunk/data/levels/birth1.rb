@@ -57,6 +57,7 @@ class Level1<Level
 					tellStory(s)
 					getMap.getByName("Bantor").newHLMoveJob(0,getMap.getTarget("retreat").pos,0)
 					getMap.getByName("Rowen").newHLRestJob(10)
+
 				end
 			when "smith"
 				if @smith==nil
@@ -79,6 +80,7 @@ class Level1<Level
 					tellStory(s)
 					# assign houses to Player Rowen
 					["Dwelling","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
+					getMap.getByName("Galvador").setBoss(getMap.getByName("Keep"))
 					@smith=2
 				end
 			when "storyFinished"

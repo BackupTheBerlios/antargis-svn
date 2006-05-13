@@ -59,6 +59,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,in
 void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
 {
   mSurface=pSurface;
+  mGrayedSurface=mSurface.grayed();
   if(!mImageW)
     {
       mImageW=new AGImage(this,getRect().origin(),mSurface,false);
@@ -97,7 +98,6 @@ void AGButton::draw(AGPainter &p)
 
   if(borderWidth==0)
     return;
-  //  AGSurface s(getScreen());
 
   AGColor bc1;
   AGColor bc2;
@@ -105,23 +105,17 @@ void AGButton::draw(AGPainter &p)
 
   bc1=theme->getColor(mTheme+"button.border.color1");
   bc2=theme->getColor(mTheme+"button.border.color2");
-  if(true)
-  {
+
+  // draw border
   
-    //  CTRACE;
-
-    //FIXME: use painter !!!!!!
-    AGRect2 mr;//=r.project(getRect());
-    //  cdebug(getRect());
-    //  cdebug(mr);
-    mr=getRect().origin();
-    //  cdebug(mr);
-    if(mState==NORMAL || mState==LIGHTED)
-      p.drawBorder(mr,borderWidth,bc1,bc2);
-    else 
-      p.drawBorder(mr,borderWidth,bc2,bc1);
-  }
-
+  AGRect2 mr;
+  
+  mr=getRect().origin();
+  
+  if(mState==NORMAL || mState==LIGHTED)
+    p.drawBorder(mr,borderWidth,bc1,bc2);
+  else 
+    p.drawBorder(mr,borderWidth,bc2,bc1);
 }
 
 
@@ -231,6 +225,14 @@ void AGButton::setEnabled(bool pEnable)
       mEnabled=pEnable;
       setState(mState); // check
       queryRedraw();
+      if(mImageW)
+	{
+	  if(mEnabled)
+	    mImageW->setSurface(mSurface);
+	  else
+	    mImageW->setSurface(mGrayedSurface);
+	}
+
     }
 }
 

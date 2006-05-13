@@ -12,7 +12,7 @@ class Level1<Level
 			start.push("Tutorial - Exploring your world.","When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.")
 
 			start.push("Tutorial","Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.")
-			start.push("Tutorial","You can move him by left-clicking on the terrain. Please wait with testing this until this small instructions are finished.")
+			start.push("Tutorial","You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.")
 			start.push("Tutorial","Now recruit some troops. Select the tower by left-clicking on it and then push the recruit-button on the right.")
 			tellStory(start)
 			@started=true

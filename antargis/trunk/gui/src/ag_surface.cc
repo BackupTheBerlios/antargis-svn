@@ -415,3 +415,16 @@ AGSurface AGSurface::scale(int w,int h) const
   return n;
 }
 
+AGSurface AGSurface::grayed() const
+{
+  AGSurface n(width(),height());
+
+  for(int x=0;x<width();x++)
+    for(int y=0;y<height();y++)
+      {
+	AGColor c=getPixel(x,y).grey();
+	n.putPixel(x,y,c);
+      }
+
+  return n;
+}

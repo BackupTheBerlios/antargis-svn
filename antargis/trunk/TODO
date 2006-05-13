@@ -115,13 +115,11 @@ ARTS
  Got to make it easy for newbies - we all start somewhere! 
 [H] Option to invert mouse zoom 
  For me at least, it's the long way around. It's opposite to Blender and counter-intuitive for me (roll forward to zoom out?). But to Godrin it must be intuitive, of course (otherwise he wouldn't have coded it that way). Thus the option will have to be there somewhere.
-[H] Tutorial says to left click on map to move hero, it's actually a right click 
- This is a simple typo, although I feel left click is more natural. The solution is to change the text on line 9 of /data/local/local_de.txt 
 [H] Hero doesn't really centre 
  When you click on the 'Godrin' icon, it re-centres the view so that the hero is in the centre of the physical screen/window, whereas it should really make it so that the hero is now at the centre of the map view area. Hope that makes sense. 
-[H] Options not obvious 
- Options given on entity that are not valid should be not shown, or grayed out. I.e. if you click on a tree, the bar on the right hand side is updated, but it you cannot actually do anything with it at the moment. I think the icon should not be visible if you can't perform the action. 
-
+[M] Options not obvious 
+	Options are now grayed out, but maybe they should be hidden.
+ 
 [M] add arrows in man-class
 [H] decrease morale on men when inventing and not resting
 [H] disable controls when telling story (after "come here my friend")
