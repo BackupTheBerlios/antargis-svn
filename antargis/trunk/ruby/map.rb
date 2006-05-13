@@ -80,22 +80,23 @@ class AntRubyMap<AntMap
 		@myPlayer
 	end
 	def loadEntity(node)
-		dputs node.getName
+		#puts "NODE: #{node.getName}"
 
 		nodeName=node.getName
-		nodeName.gsub!("New","")
+		nodeName.gsub!("New","")  # remove New out of old antNew.. Names
 
 		if @entTypeMap.keys.member?(nodeName)
 			e=@entTypeMap[nodeName].new
+
+			if e.is_a?(AntHero)
+				@heroes.push(e)
+			end
+
 		end
 		if node.getName=="humanPlayer" then
-			dputs "1"
 			player=AntHumanPlayer.new("")
-			dputs "2"
 			player.loadXML(node)
-			dputs "3"
 			@players.push(player)
-			dputs "4"
 			if not @myPlayer
 				@myPlayer=player
 			end
