@@ -106,6 +106,8 @@ ARTS
 ------------------------------------------------------
 [H] win when bantor is killed!
 [H] rename inventing to constructing
+[H] don't let enemies fetch food or so
+[H] don't let rowen attack bantor, when he's already fleeing
 
 [H] Add skip intro option
  You should be able to skip the intro - it gets boring 

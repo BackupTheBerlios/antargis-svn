@@ -1,19 +1,9 @@
 class Level1<Level
 	def initialize
 		puts "Level inited"
+		@appStory=false
+		@flee=false
 	end
-# 	def saveXML(n)
-# 		super
-# 		n.set("druid",@druid.to_s)
-# 		n.set("druid2",@druid2.to_s)
-# 		n.set("started",@started.to_s)
-# 	end
-# 	def loadXML(n)
-# 		super
-# 		@druid=n.get("druid")=="true"
-# 		@druid2=n.get("druid2")=="true"
-# 		@started=n.get("started")=="true"
-# 	end
 
 	def eventLevelStarted
 		if not @started
@@ -76,12 +66,30 @@ class Level1<Level
 					s.push("Smith","Nothing. You look like a brave young man to me.")
 					s.push("Smith","If you promise to act wisely and defeat those men in the north, you can have some of my men.")
 					s.push("Rowen","Yes, these attacked my party - as much as this I remember.")
-					s.push("Smith","Well, then recruit some of my men.")
+					s.push("Smith","Well, then recruit some of my men and defeat this group.")
+					s.push("Smith","Don't forget to capture the keep, too!")
 					tellStory(s)
 					# assign houses to Player Rowen
 					["Dwelling","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
-					getMap.getByName("Galvador").setBoss(getMap.getByName("Keep"))
+					galvador=getMap.getByName("Galvador")
+					galvador.setBoss(getMap.getByName("Bantor"))
+					galvador.addHandler(:eventNewRestJob) {
+						playApprenticeStory
+					}
 					@smith=2
+				end
+			when "keep"
+				if hero==getMap.getByName("Rowen") and @flee==false
+					# let bantor flee
+					bantor=getMap.getByName("Bantor")
+					bantor.newHLMoveJob(0,AGVector2.new(40,126),0)
+					men=bantor.getMen-[bantor]
+					keep=getMap.getByName("Keep")
+					men[0..4].each{|man|
+						man.setBoss(keep)
+					}
+	
+					@flee=true
 				end
 			when "storyFinished"
 				case @story.name
@@ -89,6 +97,8 @@ class Level1<Level
 						wonLevel
 					when "smith0"
 						getMap.getByName("Rowen").newHLMoveJob(0,getMap.getTarget("near_smith").pos,0)
+					when "won"
+						endLevel
 				end
 		end
 		return false # ignore
@@ -97,9 +107,29 @@ class Level1<Level
 		case ent.getName	
 			when "Rowen"
 				lostLevel
-			when "Bantor"
+			when "Bantor", "Keep"
 				wonLevel
 		end
+	end
+	def playApprenticeStory
+		if @appStory==false
+			@appStory=true
+			$app.focusHero(getMap.getByName("Bantor"))
+			s=StoryFlow.new("bantor")
+			s.push("Bantor","Boy, why do you leave your place?")
+			s.push("Apprentice","A stranger appeared and they want to follow him and drive you away.")
+			s.push("Bantor","These fools will see their failure! You will be payed and now get off to the keep.")
+			tellStory(s)
+			galvador=getMap.getByName("Galvador")
+			galvador.setBoss(getMap.getByName("Keep"))
+		end
+	end
+	def wonLevel
+		super
+		@won=true
+		start=StoryFlow.new("won")
+		start.push("","You have defeated the enemy.")
+		tellStory(start)
 	end
 end
 

@@ -39,6 +39,7 @@ class AntRubyEntity<AntEntity
 		@xmlProps={}
 		@birthday=getMap.getTime
 		@mode=""
+		@handlers={}
 
 		setHunger(0) # general entities have no hunger
 	end
@@ -135,6 +136,29 @@ class AntRubyEntity<AntEntity
 		xml=self.class.to_s
 		xml=xml[0..0].downcase+xml[1..1000]
 		return xml
+	end
+
+	def addHandler(eventName,&block)
+		@handlers[eventName]||=[]
+		@handlers[eventName].push(block)
+	end
+
+	def doEvent(name)
+		if @handlers[name]
+			@handlers[name].each{|b|
+				b.call
+			}
+		end
+	end
+
+	def newRestJob(t)
+		super
+		doEvent(:eventNewRestJob)
+	end
+
+	def eventNoJob
+		super
+		doEvent(:eventNoJob)
 	end
 end
 

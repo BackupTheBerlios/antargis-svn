@@ -392,4 +392,5 @@
 	<trigger name="smith" x="31.2377" y="16.9882" radius="10"/>
 	<trigger name="smith2" x="31.2377" y="16.9882" radius="2"/>
 	<target name="near_smith" x="32.4" y="16.988"/>
+  <trigger name="keep" x="41.9545" y="90.2078" radius="20"/>
 </antargisLevel>
