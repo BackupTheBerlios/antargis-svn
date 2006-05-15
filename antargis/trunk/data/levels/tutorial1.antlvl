@@ -59,7 +59,7 @@
     <position x="45.914" y="74.4916" z="2.38217"/>
     <resource/>
   </antGrass>
-  <antHero aggression="1" appearance="hero" birthday="-2104.14120287278" energy="1" food="1" healSpeed="0.1" men="5" morale="1" name="Rowen" onGround="true">
+  <antHero aggression="1" appearance="hero" birthday="-2104.14120287278" energy="1" food="1" healSpeed="0.1" men="5" morale="1" name="Rowen" onGround="true" primary="true">
     <position x="44.4067" y="58.566" z="2.02858"/>
     <resource/>
   </antHero>

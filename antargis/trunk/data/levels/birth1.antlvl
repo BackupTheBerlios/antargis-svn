@@ -89,7 +89,7 @@
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="0">
     <position x="81.3857" y="66.8041" z="1"/>
   </antNewTree>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Rowen" onGround="true">
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Rowen" onGround="true" primary="true">
 		<resource food="5" gold="0"/>
     <position x="68.4777" y="32.0214" z="1"/>
   </antHero>

@@ -58,6 +58,11 @@ class AntHero<AntBoss
 			@appearance="hero"
 		end
 		@portrait=node.get("portrait")
+
+		if node.get("primary")=="true"
+			#setMoraleHealSpeed=1000
+			setMoraleFlag(false)
+		end
 	end
 	
 	def noHLJob
@@ -329,6 +334,11 @@ class AntHero<AntBoss
 
 	def spreadResources
 		# FIXME
+	end
+
+	def eventDie
+		super
+		getMap.eventHeroDied(self)
 	end
 
 end

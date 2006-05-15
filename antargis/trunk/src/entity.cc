@@ -75,6 +75,7 @@ void AntEntity::init()
   mHungerHitEnergy=0.02;
   mHungerHitMorale=0.14;
 
+  mMoraleFlag=true;
 
   mDefense=1.0;
   //  mDirNum=1;
@@ -481,6 +482,17 @@ void AntEntity::setHealSpeed(float f)
   mHealSpeed=f;
 }
 
+void AntEntity::setMoraleHealSpeed(float f)
+{
+  mMoraleHeal=f;
+}
+
+void AntEntity::setMoraleFlag(bool f)
+{
+  mMoraleFlag=f;
+}
+
+
 void AntEntity::decEnergy(float amount)
 {
   mEnergy-=amount;
@@ -504,6 +516,8 @@ float AntEntity::getHealSpeed() const
 
 void AntEntity::decMorale(float amount)
 {
+  if(!mMoraleFlag)
+    return;
   mMorale-=amount;
   if(mMorale<0.0)
     {
@@ -546,6 +560,8 @@ void AntEntity::eventDefeated()
 
 void AntEntity::sigDefeated()
 {
+  if(!mMoraleFlag)
+    return;
   mMorale=-0.1; // really deep morale
   // this prevents other fight-jobs from not being discarded
   eventDefeated();

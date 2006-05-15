@@ -192,9 +192,6 @@ class AntRubyMap<AntMap
 		end
 		if not done
 			@players.each{|p|p.trigger(hero,t)}
-			#if @story[t.name]
-			#	playStory(t.name)
-			#end
 		end
 	end
 	def getTime
@@ -326,6 +323,12 @@ class AntRubyMap<AntMap
 		return ret
 	end
 
+	def eventHeroDied(ent)
+		if @script
+			@script.eventHeroDied(ent)
+		end
+		$app.setupHeroDisplay
+	end
 	def eventOwnerChanged(ent)
 		if @script
 			@script.eventOwnerChanged(ent)

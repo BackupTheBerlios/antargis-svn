@@ -62,6 +62,8 @@ class AntEntity:public AGRubyObject
     float mMorale;
     float mMoraleHeal;
 
+    bool mMoraleFlag;
+
     /// current food in stomach
     float mFood;
     /// food needed per second
@@ -112,6 +114,8 @@ class AntEntity:public AGRubyObject
     float getMoraleStrength() const;
     void setDefense(float f);
     float getDefense() const;
+
+    void setMoraleFlag(bool f);
 
 
     // Positions
@@ -167,6 +171,8 @@ class AntEntity:public AGRubyObject
 
     float getHealSpeed() const;
     void setHealSpeed(float f);
+
+    void setMoraleHealSpeed(float f);
 
     void setHunger(float f);
 

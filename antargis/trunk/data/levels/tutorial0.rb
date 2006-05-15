@@ -46,6 +46,15 @@ class Level1<Level
 		puts "TRIGGER"
 		return false #ignore
 	end
+	def eventHeroDied(ent)
+		case ent.getName	
+			when "Rowen"
+				lostLevel
+			when "Bantor"
+				wonLevel
+		end
+	end
+
 	def eventOwnerChanged(ent)
 		case ent.getName	
 			when "Rowen"

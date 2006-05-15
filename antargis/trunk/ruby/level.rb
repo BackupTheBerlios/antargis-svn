@@ -9,6 +9,8 @@ class Level
 	end
 	def eventOwnerChanged(ent)
 	end
+	def eventHeroDied(ent)
+	end
 	def eventHLJobFinished(hero,job)
 	end
 	def eventDismissed(hero)
