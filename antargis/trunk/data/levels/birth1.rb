@@ -90,6 +90,20 @@ class Level1<Level
 					}
 	
 					@flee=true
+					rowen=getMap.getByName("Rowen")
+					if rowen.getJob.class==AntHeroFightJob
+						rowen.newHLFightJob(keep)
+					end
+
+					# do not let rowen attack bantor anymore
+					rowen.addHandler(:newJobAssigned){
+						if rowen.getJob.class==AntHeroFightJob
+							if rowen.getJob.target==bantor
+								rowen.newHLRestJob(1)
+							end
+						end
+					}
+
 				end
 			when "storyFinished"
 				case @story.name

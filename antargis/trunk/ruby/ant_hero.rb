@@ -273,6 +273,7 @@ class AntHero<AntBoss
 		if @job.class!=AntHeroRestJob
 			setFire(false)
 		end
+		doEvent(:newJobAssigned)
 	end
 
 	def setMeshState(name)

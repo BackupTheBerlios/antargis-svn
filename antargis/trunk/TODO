@@ -105,8 +105,6 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] don't let rowen attack bantor, when he's already fleeing
-
 [H] Add skip intro option
  You should be able to skip the intro - it gets boring 
  Solution: :Comment out lines 120 and 121 of /ruby/intro.rb to do this 

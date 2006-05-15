@@ -155,7 +155,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
 
-		if @defend
+		if @defend or (not hero.is_a?(AntHero))
 			@state="fight"
 		end
 		@finished=false
@@ -280,6 +280,10 @@ class AntHeroFightJob<AntHeroMoveJob
 	
 	def startFightingMan(man)
 		tmen=@target.getJob.undefeatedMen
+		if tmen.length==0
+			won
+			return
+		end
 		# search nearest enemy
 		dist=1000.0
 		mtarget=nil
