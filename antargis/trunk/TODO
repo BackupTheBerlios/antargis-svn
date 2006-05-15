@@ -105,8 +105,6 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] rename inventing to constructing
-[H] don't let enemies fetch food or so
 [H] don't let rowen attack bantor, when he's already fleeing
 
 [H] Add skip intro option

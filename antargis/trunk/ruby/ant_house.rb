@@ -207,11 +207,13 @@ class AntHouse<AntBoss
 			#puts "No '"+good+"' found!"
 			ent.newRestJob(10)
 		else
-			ent.newFetchJob(0,tent,good)
-			#ent.newMoveJob(0,tent.getPos2D)
-			ent.setMode("fetching "+good)
-			@atHome.delete(ent)
-			ent.setVisible(true)
+			if tent.getPlayer!=getPlayer
+			else
+				ent.newFetchJob(0,tent,good)
+				ent.setMode("fetching "+good)
+				@atHome.delete(ent)
+				ent.setVisible(true)
+			end
 		end
 	end
 	
