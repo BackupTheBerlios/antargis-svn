@@ -542,37 +542,37 @@ $productionRules=[
 	ProductionRule.new("sword",[["wood",1],["steel",1]])
 ]
 
-# inventing runs like this:
-# * depending on aggression some count of men is used for inventing
+# constructing runs like this:
+# * depending on aggression some count of men is used for constructing
 # * those men run to "target" and work there
 # * when finished they leave tools/weapons/anything there and come back to hero to rest a little
 # * job finishes after some given time (20 seconds or so)
 
-class AntHeroInventJob<AntHeroMoveJob
+class AntHeroConstructJob<AntHeroMoveJob
 	attr_reader :finished
 	def initialize(hero,target,agg)
 		super(hero,0,target.getPos2D,4)
 		@target=target
 		@usedmen=0
 		@restype={}
-		@inventStarted=false
-		@productionRules=$productionRules # FIXME maybe exchange for different inventing types
+		@constructStarted=false
+		@productionRules=$productionRules # FIXME maybe exchange for different constructing types
 	end
 	def image
-		"data/gui/invent.png"
+		"data/gui/construct.png"
 	end
 	def check(man)
 		if moveFinished
 			if man.is_a?(AntBoss)
 				checkEat(man)
-				if not @inventStarted
+				if not @constructStarted
 					@men.each{|m|m.delJob}
-					@inventStarted=true
+					@constructStarted=true
 				end
 				man.newRestJob(20) # do nothing at all
 				return
 			end
-			@inventStarted=true
+			@constructStarted=true
 			wantmen=(@men.length-1)*@hero.getAggression/3.0
 			case man.getMode
 				when "fetch" # go to resource
@@ -602,19 +602,19 @@ class AntHeroInventJob<AntHeroMoveJob
 				when "after_brought"
 					fpos=@hero.getSitFormation(man)
 					man.newMoveJob(0,fpos,0)
-					man.setMode("invent_torest")
-				when "to_invent"  # do some inventing
+					man.setMode("construct_torest")
+				when "to_construct"  # do some constructing
 					@target.incSmoke
 					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
-					man.setMode("inventing")
-				when "inventing"
-					# was inventing
-					readyInvented
+					man.setMode("constructing")
+				when "constructing"
+					# was constructing
+					readyConstructed
 					@target.decSmoke
-					man.setMode("invent_torest")
+					man.setMode("construct_torest")
 					fpos=@hero.getSitFormation(man)
 					man.newMoveJob(0,fpos,0)
-				when "invent_torest"
+				when "construct_torest"
 					man.setMode("rest")
 					man.newRestJob(3/@hero.getAggression) # shorter pauses when aggression is higher
 					if man.getAggression<3
@@ -626,7 +626,7 @@ class AntHeroInventJob<AntHeroMoveJob
 						@usedmen+=1
 						man.newMoveJob(0,@target.getPos2D,0)
 						if enoughResources
-							man.setMode("to_invent")
+							man.setMode("to_construct")
 						else
 							man.setMode("fetch")
 						end
@@ -672,7 +672,7 @@ private
 	def heroHasFood
 		@hero.resource.get("food")>0
 	end
-	def readyInvented
+	def readyConstructed
 		# produce any
 		@productionRules.shuffle.each{|rule|
 			ok=true

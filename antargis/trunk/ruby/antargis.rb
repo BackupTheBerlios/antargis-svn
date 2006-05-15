@@ -153,8 +153,8 @@ class AntGameApp <AntRubyView
 				@hero.newHLTakeFoodJob(@target)
 			when "doTakeWeapons"
 				@hero.newHLTakeWeaponJob(@target)
-			when "doInvent"
-				@hero.newHLInventJob(@target)
+			when "doConstruct"
+				@hero.newHLConstructJob(@target)
 		end
 		return true
 	end

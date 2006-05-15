@@ -122,8 +122,8 @@ class AntHero<AntBoss
 		@job=AntHeroRecruitJob.new(self,target,$buttonPanel.getAggression)
 		assignJob2All
 	end
-	def newHLInventJob(target)
-		@job=AntHeroInventJob.new(self,target,$buttonPanel.getAggression)
+	def newHLConstructJob(target)
+		@job=AntHeroConstructJob.new(self,target,$buttonPanel.getAggression)
 		assignJob2All
 	end
 	def newHLTakeFoodJob(target)

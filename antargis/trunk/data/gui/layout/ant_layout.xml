@@ -81,7 +81,7 @@
 										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
 										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
 										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
-										<button  col="3" row="0" name="doInvent" caption-image="data/gui/invent.png" tooltip="Invent"/>
+										<button  col="3" row="0" name="doConstruct" caption-image="data/gui/construct.png" tooltip="Construct"/>
 										<button  col="4" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
 									</table>
 								</frame>

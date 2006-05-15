@@ -10,7 +10,7 @@ class AntInventory<AGWidget
 		setCaching(true)
 		@invinited=false
 
-		@buttonNames=["doRecruit","doTakeFood","doTakeWeapons","doInvent"]
+		@buttonNames=["doRecruit","doTakeFood","doTakeWeapons","doConstruct"]
 
 		addSignal("sigJobChanged")
 
@@ -68,7 +68,7 @@ private
 		getChild("doRecruit").setEnabled(my)
 		getChild("doTakeFood").setEnabled(my)
 		getChild("doTakeWeapons").setEnabled(my) # FIXME
-		getChild("doInvent").setEnabled((my and @inspect.is_a?(AntWorkshop)))
+		getChild("doConstruct").setEnabled((my and @inspect.is_a?(AntWorkshop)))
 	end
 
 	def setValue(name,value)
