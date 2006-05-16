@@ -239,6 +239,20 @@ void MiniMap::setScene(Scene *pScene)
   mScene=pScene;
 }
 
+bool MiniMap::eventMouseButtonDown(AGEvent *m)
+{
+  if(mMap==0 || mScene==0)
+    return AGWidget::eventMouseButtonDown(m);
+
+  AGWidget::eventMouseButtonDown(m);
+      
+      // eat up event - so antView, doesn't get it
+  if(m->isSDLEvent())
+    if(getScreenRect().contains(m->getMousePosition()))
+      return true;
+  return false;
+}
+
 bool MiniMap::eventMouseClick(AGEvent *m)
 {
   AGVector2 p(m->getMousePosition()-getScreenRect()[0]);

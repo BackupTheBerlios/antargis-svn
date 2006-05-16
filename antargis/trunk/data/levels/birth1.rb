@@ -111,6 +111,7 @@ class Level1<Level
 						wonLevel
 					when "smith0"
 						getMap.getByName("Rowen").newHLMoveJob(0,getMap.getTarget("near_smith").pos,0)
+						$app.hidePanel
 					when "won"
 						endLevel
 				end

@@ -21,6 +21,7 @@ class MiniMap:public AGWidget
   void setScene(Scene *pScene);
 
   virtual bool eventMouseClick(AGEvent *m);
+  virtual bool eventMouseButtonDown(AGEvent *m);
 
  private:
   float getNoise(int x,int y);

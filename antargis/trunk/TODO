@@ -120,8 +120,6 @@ ARTS
  
 [M] add arrows in man-class
 [H] decrease morale on men when inventing and not resting
-[H] disable controls when telling story (after "come here my friend")
-		this means you shouldn't be able to move your hero.
 [M] add swords/shields/bows and apply them when fighting
 		sword and shield is ready.
 [M] move from AntHouse to AntBoss:describe men's health and morale when inspecting

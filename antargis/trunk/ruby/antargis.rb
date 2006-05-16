@@ -192,10 +192,12 @@ class AntGameApp <AntRubyView
 	def showPanel
 		puts "SHOWPANEL"
 		@layout.getChild("SideBar").show
+		@controls=true
 	end
 	def hidePanel
 		puts "HIDEPANEL"
 		@layout.getChild("SideBar").hide
+		@controls=false
 	end
 
 

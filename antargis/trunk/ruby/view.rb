@@ -29,6 +29,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		super(w,h) #p,rect,pos,map)
 		$antView=self
 		@mousepos=AGVector2.new(200,200)
+		@controls=true
 	end
 	
 
@@ -96,14 +97,10 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 	end
 	
 	def eventClick(list,button)
-# 		list.each{|l|
-# 			puts l.node.to_s+"\t"+l.node.class.to_s+"  "+l.camDist.to_s
-# 			if l.node.class==Mesh
-# 				puts getMap.getEntity(l.node)
-# 			end
-# 		}
-# 		puts "---"
-		
+		if (not @controls)
+			puts "CONTROLS DISABLED"
+			return false
+		end
 		if list.length>0
 			first=list[0]
 			if [TerrainPieceVA,WaterPiece].member?(first.node.class) # == TerrainPieceVA or first.ntoTerrainMesh(first.node)==getMap.getTerrainMesh
