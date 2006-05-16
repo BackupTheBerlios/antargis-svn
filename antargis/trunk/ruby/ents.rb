@@ -160,6 +160,10 @@ class AntRubyEntity<AntEntity
 		super
 		doEvent(:eventNoJob)
 	end
+	def eventJobFinished
+		super
+		doEvent(:eventJobFinished)
+	end
 end
 
 

@@ -238,14 +238,18 @@ class AntHeroFightJob<AntHeroMoveJob
 		if not @finished
 			dputs "LOST!!!!!!!!!!"
 			@finished=true
-			@target.getJob.won
-			@hero.setOwner(@target)
-			@hero.killAllJobs
-			@target.killAllJobs
+
 			if @hero.is_a?(AntHero)
 				@hero.eventHLJobFinished(self)
 				@hero.newHLMoveJob(0,@sitpos[@hero],0)
 			end
+
+			if @target.getJob.is_a?(AntHeroFightJob)
+				@target.getJob.won
+			end
+			@hero.setOwner(@target)
+			@hero.killAllJobs
+			@target.killAllJobs
 		end
 	end
 	def won
@@ -253,13 +257,16 @@ class AntHeroFightJob<AntHeroMoveJob
 			dputs "WON!!!!!!!!!!"
 			playSound("won")
 			@finished=true
-			@target.getJob.lost
-			@hero.killAllJobs
-			@target.killAllJobs
 			if @hero.is_a?(AntHero)
 				@hero.eventHLJobFinished(self)
 				@hero.newHLMoveJob(0,@sitpos[@hero],0)
 			end
+
+			if @target.getJob.is_a?(AntHeroFightJob)
+				@target.getJob.lost
+			end
+			@hero.killAllJobs
+			@target.killAllJobs
 		end
 	end
 
@@ -421,6 +428,10 @@ class AntHeroRecruitJob<AntHeroMoveJob
 					else
 						man.newRestJob(1)
 						nman=@target.takeMan
+						if nman.nil?
+							@wantedMen=0
+							return
+						end
 						nman.setBoss(@hero)
 						nman.setMode("to_recruit")
 						@want=@want-1

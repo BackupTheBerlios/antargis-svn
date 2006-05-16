@@ -128,15 +128,17 @@
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="38.6067" y="11.27" z="1.18358"/>
   </antGrass>
-  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Rowen" men="20" onGround="true" primary="true">
-    <position x="62.7639" y="80.8467" z="1"/>
-<!--    <position x="34.1018" y="9.51682" z="1"/>-->
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Rowen" men="10" onGround="true" primary="true">
+<!--    <position x="62.7639" y="80.8467" z="1"/>-->
+    <position x="34.1018" y="9.51682" z="1"/>
   </antHero>
   <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" men="7" onGround="true">
+		<resource food="70" gold="20"/>
     <position x="69.2673" y="64.5525" z="1"/>
   </antHero>
   <antDwelling aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" men="6">
     <position x="81.6495" y="38.8832" z="3.99954"/>
+		<resource food="5" gold="0"/>
   </antDwelling>
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="82.2895" y="35.4188" z="3.85922"/>
@@ -159,8 +161,9 @@
   <antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="5">
     <position x="71.1991" y="41.8181" z="3.51669"/>
   </antNewTree>
-  <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" men="15">
+  <antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Keep" onGround="true" men="15">
     <position x="54.7639" y="80.8467" z="1"/>
+		<resource food="150" gold="20"/>
   </antTower>
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="46.9565" y="84.6645" z="3.18936"/>
@@ -180,10 +183,14 @@
   <antGrass aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true">
     <position x="69.9855" y="97.0097" z="1"/>
   </antGrass>
+  <antNPC aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="Marcus" onGround="true">
+		<position x="54.7639" y="80.8467" z="1"/>
+  </antNPC>
 	<humanPlayer name="Rowen">
 		<hero name="Rowen"/>
 	</humanPlayer>
 	<lazyPlayer name="Bantor">
 		<hero name="Bantor"/>
 	</lazyPlayer>
+	<target name="near_tower" x="59.7639" y="75.8467"/>
 </antargisLevel>

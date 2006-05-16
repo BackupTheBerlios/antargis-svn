@@ -47,7 +47,11 @@ class AntBoss<AntRubyEntity
 	end
 # for recruiting
 	def takeMan
-		m=@men[-1]
+		men=@men.select{|m|not m.is_a?(AntBoss)}
+		if men.length==0
+			return nil
+		end
+		m=men[-1]
 		removeMan(m)
 		return m
 	end
@@ -230,6 +234,7 @@ class AntBoss<AntRubyEntity
 	def eventHLJobFinished(job)
 		puts "eventHLJobFinished(job) #{self}"
 		getMap.eventHLJobFinished(self,job)
+		doEvent(:eventHLJobFinished)
 	end
 
 	def checkHLJobEnd(man)

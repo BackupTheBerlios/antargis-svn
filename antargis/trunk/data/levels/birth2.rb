@@ -30,8 +30,10 @@ class Level1<Level
 					getMap.getByName("Bantor").newHLMoveJob(0,getMap.getTarget("retreat").pos,0)
 				end
 			when "storyFinished"
-				if @story.name=="end"
+		
+				if @story.name=="end" or @story.name=="marcus1"
 					wonLevel
+					endLevel
 				end
 		end
 		return false # ignore
@@ -42,7 +44,44 @@ class Level1<Level
 				lostLevel
 			when "Bantor"
 				wonLevel
+			when "Keep"
+				rowen=getMap.getByName("Rowen")
+				#raise 1
+				rowen.newHLMoveJob(0,getMap.getTarget("near_tower").pos,0)
+				rowen.addHandler(:eventHLJobFinished){
+					puts "DIST::::::#{rowen.getPos2D} #{getMap.getTarget("near_tower").pos}"
+					if (rowen.getPos2D-getMap.getTarget("near_tower").pos).length<1
+						sendMarcus
+					else
+						rowen.newHLMoveJob(0,getMap.getTarget("near_tower").pos,0)
+					end
+				}
+				$app.hidePanel
 		end
 	end
+	def sendRowen
+	end
+	def sendMarcus
+		puts "SENDING MARCUS"
+		marcus=getMap.getByName("Marcus")
+		puts marcus
+		marcus.newMoveJob(0,getMap.getByName("Rowen").getPos2D,2)
+		$app.hidePanel
+		marcus.addHandler(:eventJobFinished){
+			s=StoryFlow.new("marcus1")
+			s.push("Marcus","I have a message for you.")
+			s.push("Rowen","Speak! What is it?")
+			s.push("Marcus","You seem to be against the new lords, so I think can trust you.")
+			s.push("Marcus","King Garon has been captured and Duke Dengal wants to enthrone himself.")
+			s.push("Rowen","This is very bad news.")
+			s.push("Marcus","It may get worse. Word came through that someone is starting a rebellion here in Green Hills.")
+			s.push("Marcus","You must flee into the hills.")
+			s.push("Rowen","And what will you do?")
+			s.push("Marcus","I'll stay behind and join with you later on.")
+
+			tellStory(s)
+		}
+	end
+
 end
 

@@ -16,4 +16,10 @@
 		 </screen>
 	 </cutscene>
 	 <level file="data/levels/birth2.antlvl"/>
+	 <cutscene>
+		 <screen>
+			 <!--<image filename="data/gui/campaign/mountain_landscape_imp.png"/>-->
+			 <text text="Rowen's story ends here for now. Come back later and finish his adventures!"/>
+		 </screen>
+	 </cutscene>
 </campaign>
