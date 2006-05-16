@@ -3,7 +3,7 @@
 function getScreenies()
 {
 	$screenies=array(
-		array("Current SVN (2006-04-21):",array(
+		array("Version 0.1.2 (06-05-16)",array(
 			array("screenies/shot060421","A hero considering to invent."),
 			array("screenies/shot060421a","Some fish."),
 			array("screenies/shot060421b","Row, row, row your boat..."),

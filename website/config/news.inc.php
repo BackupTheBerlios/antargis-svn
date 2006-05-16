@@ -11,6 +11,8 @@ function getNews($toponly=false)
 {
 	$b="";
 
+	$b.=news("2006-05-16","0.1.2 about to be released","Version 0.1.2 is nearly finished and it would be really cool, if some you could give it short test for showstoppers. A changelog is here:<a href='http://antargis.berlios.de/wiki/index.php/Release_Plan#Version_0.1.2'>Release Plan in wiki</a>.<br>The download link:<a href='http://developer.berlios.de/project/showfiles.php?group_id=3474'>Downloads</a>. It can be that I'll do some more work on the second campaign level, but that's not that important.");
+
 	$b.=news("2006-04-23","Forum back online again","I'm very happy to anounce, that the forums and the wiki are back online again.");
 	
 	$b.=news("2006-04-20","Forum and Wiki down","I'm sorry to tell you, that since yesterday the forums and the wiki are down. It's a problem with a database server at our provider Berlios. We have submitted an error message and hope that the problem will be solved soon.<br>In the meanwhile you can contact us on our mailing-list. Have a look the <a href='index.php?page=contact'>contact page</a>.");

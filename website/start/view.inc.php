@@ -4,6 +4,7 @@ include("config/news.inc.php");
 function screenshotPreview()
 {
 	$shot="screenies/shot060222d_thumb.jpg";
+	$shot="screenies/shot060421b_thumb.jpg";
 
 	$r=image($shot);
 
