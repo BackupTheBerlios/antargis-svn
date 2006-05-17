@@ -8,6 +8,8 @@
 
 #include "ag_profiler.h" 
 
+#include <SDL.h>
+
 #ifdef MPROFILE
 
 #define RDTSC_TIMER 
@@ -34,12 +36,17 @@ Uint64 convert_time(Uint64 t)
   if(period) 
     return (Uint64)(t*period); 
   Uint64 b = get_time_unit(); 
+#ifdef WIN32
+  SDL_Delay(50);
+  period = 50000.0/((get_time_unit()-b)); 
+#else
   usleep(1000000); 
 #ifdef RDTSC_TIMER 
   period = 1000.0/((get_time_unit()-b)); 
 #else 
   period = 1; 
 #endif 
+#endif
   return convert_time(t); 
 } 
 
@@ -128,6 +135,20 @@ std::string UserStackTraceHelper::getProfilerString()
 } 
 
 
+class AGProfilerWriter
+{
+public:
+  ~AGProfilerWriter()
+  {
+    std::ofstream os("prof.txt");
+    os<<UserStackTraceHelper::getProfilerString()<<std::endl;
+    os<<UserStackTraceHelper::getStackTraceString()<<std::endl;
+  }
+}; 
+AGProfilerWriter gProfilerWriter;
+
+
+/*
 //  Test code 
 #include <stdlib.h> 
 
@@ -156,18 +177,7 @@ public:
   } 
 };
 
-class AGProfilerWriter
-{
-public:
-  ~AGProfilerWriter()
-  {
-    std::ofstream os("prof.txt");
-    os<<UserStackTraceHelper::getProfilerString()<<std::endl;
-    os<<UserStackTraceHelper::getStackTraceString()<<std::endl;
-  }
-}; 
-AGProfilerWriter gProfilerWriter;
-/*
+
 int main() 
 { 
   {

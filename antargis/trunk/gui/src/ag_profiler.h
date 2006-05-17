@@ -17,6 +17,7 @@
 #define AG_PROFILER_H 
 
 #include <string> 
+#include <SDL.h>
 
 #if CPU_FAMILY == PPC
 #ifdef MPROFILE
