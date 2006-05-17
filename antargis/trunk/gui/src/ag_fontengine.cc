@@ -43,7 +43,7 @@ struct FontInfo
   }
 };
 
-std::map<FontInfo,TTF_Font*> fontEngineFonts;
+static std::map<FontInfo,TTF_Font*> fontEngineFonts;
 bool fontEngineInited=false;
 
 TTF_Font *getFont(std::string s,int i)

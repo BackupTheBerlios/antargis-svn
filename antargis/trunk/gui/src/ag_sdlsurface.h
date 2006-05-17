@@ -54,6 +54,10 @@ class AGSDLScreen:public AGScreen
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;
+
+  virtual void clip(const AGRect2 &r);
+  virtual void unclip();
+
  private:
   SDL_Surface *s;
  public:

@@ -190,3 +190,15 @@ size_t AGSDLScreen::getHeight() const
 {
   return s->h;
 }
+
+void AGSDLScreen::clip(const AGRect2 &r)
+{
+  //  cdebug(r);
+  SDL_Rect sr=r.sdl();
+  SDL_SetClipRect(s,&sr);
+}
+void AGSDLScreen::unclip()
+{
+  SDL_Rect sr=getRect().sdl();
+  SDL_SetClipRect(s,&sr);
+}

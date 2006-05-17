@@ -169,7 +169,6 @@ void AGWidget::delObjects()
 
 void AGWidget::drawAll(AGPainter &p)
 {
-
   delObjects();
 
   if(!mVisible)

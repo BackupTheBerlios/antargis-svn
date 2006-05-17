@@ -262,6 +262,9 @@ size_t AGGLScreen::getHeight() const
 }
 void AGGLScreen::clip(const AGRect2 &r)
 {
+  return;
+#warning "insert clipping facility for opengl"
+
   AGRect2 x=AGRect2(0,0,w,h);
   AGRect2 m=x.intersect(r);
 

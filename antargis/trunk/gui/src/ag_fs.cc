@@ -32,9 +32,9 @@
 #include "ag_debug.h"
 #include "ag_tools.h"
 
-bool FSinited=false;
+static bool FSinited=false;
 
-std::list<std::string> mFsPaths;
+static std::list<std::string> mFsPaths;
 
 void addPath(const std::string &pName)
 {

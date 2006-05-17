@@ -214,6 +214,7 @@ AGPainter::AGPainter(AGPaintTarget &pTarget):mCurrent(pTarget.getRect()),mTarget
 
 AGPainter::~AGPainter()
 {
+  mTarget->unclip();
   mTarget->endPaint();
 }
 
@@ -571,6 +572,7 @@ void AGPainter::clip(const AGRect2 &r)
 {
   AGRect2 p=mCurrent.project(r);
   mCurrent.setClip(p);
+  mTarget->clip(mCurrent.clip);
 }
 
 void AGPainter::transform(const AGRect2 &r)

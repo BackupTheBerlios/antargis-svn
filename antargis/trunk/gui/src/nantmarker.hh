@@ -1,162 +1,270 @@
 %exception AGScreenWidget::AGScreenWidget {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGScreenWidget "general_markfunc"
 %exception AGWindow::AGWindow {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGWindow "general_markfunc"
 %exception AGCaption::AGCaption {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGCaption "general_markfunc"
 %exception AGMessageObject::AGMessageObject {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMessageObject "general_markfunc"
 %exception AGTable::AGTable {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGTable "general_markfunc"
 %exception AGText::AGText {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGText "general_markfunc"
 %exception AGSound::AGSound {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGSound "general_markfunc"
 %exception AGMenuItem::AGMenuItem {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMenuItem "general_markfunc"
 %exception AGMain::AGMain {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMain "general_markfunc"
 %exception AGCheckBox::AGCheckBox {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGCheckBox "general_markfunc"
 %exception AGRadioGroup::AGRadioGroup {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGRadioGroup "general_markfunc"
 %exception AGImage::AGImage {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGImage "general_markfunc"
 %exception AGApplication::AGApplication {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGApplication "general_markfunc"
 %exception AGDialog::AGDialog {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGDialog "general_markfunc"
 %exception AGWidget::AGWidget {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGWidget "general_markfunc"
 %exception AGGLWidget::AGGLWidget {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGGLWidget "general_markfunc"
 %exception AGListener::AGListener {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGListener "general_markfunc"
 %exception AGEdit::AGEdit {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGEdit "general_markfunc"
 %exception AGLayout::AGLayout {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGLayout "general_markfunc"
 %exception AGButton::AGButton {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGButton "general_markfunc"
 %exception AGFrame::AGFrame {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGFrame "general_markfunc"
 %exception AGSubMenu::AGSubMenu {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGSubMenu "general_markfunc"
 %exception AGListBox::AGListBox {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGListBox "general_markfunc"
 %exception AGColorButton::AGColorButton {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGColorButton "general_markfunc"
 %exception AGMenu::AGMenu {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGMenu "general_markfunc"
 %exception AGRubyObject::AGRubyObject {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGRubyObject "general_markfunc"
 %exception AGRadio::AGRadio {
 	$action
 	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
 	result->mRubyObject=true;
 }
 %markfunc AGRadio "general_markfunc"
