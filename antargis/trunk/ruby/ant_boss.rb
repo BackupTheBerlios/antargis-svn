@@ -194,7 +194,7 @@ class AntBoss<AntRubyEntity
 		#puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @hovered and not @selected
-			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
 		end
 	end
 	def selected=(s)
@@ -204,7 +204,7 @@ class AntBoss<AntRubyEntity
 		puts @hovered,@selected
 		@ring.setVisible((@hovered or @selected))
 		if @selected
-			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))
+			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
 			#@ring.setColor(AGVector4.new(1,0.7,1,0.8))
 		end
 	end
@@ -222,9 +222,9 @@ class AntBoss<AntRubyEntity
 		@ring=getRing
 		if @selected
 			#f6c108
-			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))
+			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
 		else
-			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
 		end
 		addMesh(@ring,AGVector3.new(0,0,0))
 		#@ring.setVisible(false)
@@ -281,9 +281,9 @@ private
 	def updateRingColor
 		@ring.setVisible((@hovered or @selected))
 		if @hovered and not @selected
-			@ring.setColor(AGVector4.new(0.7,0.7,1,0.8))
+			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
 		elsif @selected
-			@ring.setColor(AGVector4.new(1,0.7,0.1,0.8))
+			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
 		end
 	end
 end

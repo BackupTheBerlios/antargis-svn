@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <layout name="GameLayout">
   <!-- main game layout -->
-	<table cols="2" rows="1" name="SideBar">
+	<table cols="2" rows="1">
 		<colsize col="1" fixed="216"/>
 
 		<cell col="0" row="0">
@@ -9,7 +9,7 @@
 			</table>
 		</cell>
 
-		<table col="1" row="0" cols="1" rows="5">
+		<table col="1" row="0" cols="1" rows="5" name="SideBar">
 			<rowsize row="0" fixed="90"/>
 			<rowsize row="1" fixed="160"/>
 			<rowsize row="3" fixed="216"/>

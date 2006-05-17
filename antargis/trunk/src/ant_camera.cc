@@ -255,3 +255,14 @@ AntProjection AntCamera::getLightProjection() const
 {
   return AntProjection(getLightView(),getLightProjectionMatrix(),getViewport());
 }
+
+void AntCamera::setWidth(int w)
+{
+  mWidth=w;
+  updateMatrices();
+}
+void AntCamera::setHeight(int h)
+{
+  mHeight=h;
+  updateMatrices();
+}

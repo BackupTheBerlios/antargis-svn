@@ -4,6 +4,8 @@ class AntTower<AntHouse
 	def initialize
 		super
 		setProvide("tower",true)
+		setMinimapColor(AGColor.new(0x22,0x22,0x22))
+		setMinimapSize(6)
 	end
 	
 	def setupMesh

@@ -87,6 +87,7 @@ class AntEntity:public AGRubyObject
 
     AGColor mMinimapColor;
     bool mShowOnMinimap;
+    float mMinimapSize;
 
     float mStrength;
     float mMoraleStrength;
@@ -105,8 +106,10 @@ class AntEntity:public AGRubyObject
     virtual ~AntEntity();
 
     void setMinimapColor(const AGColor &c);
+    void setMinimapSize(float f);
     AGColor getMinimapColor() const;
     bool showOnMinimap() const;
+    float getMinimapSize() const;
 
     void setStrength(float f);
     float getStrength() const;

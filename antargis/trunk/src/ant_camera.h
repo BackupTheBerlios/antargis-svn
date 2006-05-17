@@ -28,7 +28,7 @@
 #include <ag_rubyobj.h>
 
 
-class AntCamera//:public AGRubyObject
+class AntCamera
 {
  public:
   AntCamera(int w,int h);
@@ -51,6 +51,9 @@ class AntCamera//:public AGRubyObject
 
   int getWidth() const;
   int getHeight() const;
+
+  void setWidth(int w);
+  void setHeight(int h);
 
   AGMatrix4 getLightComplete() const;
   AGMatrix4 getLightView() const;

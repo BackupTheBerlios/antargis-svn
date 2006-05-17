@@ -35,7 +35,9 @@
 				<colsize col="1" fixed="606"/>
 				<rowsize row="1" fixed="456"/>
 				<rowsize row="0" fixed="5"/>
-				<button col="1" row="1"  enabled="false" caption-image="data/gui/small_old_nature.png"/>
+				<frame border="button.border.normal" width="30" col="1" row="1" name="imageFrame">
+					<image col="1" row="1"  enabled="false" filename="data/gui/small_forest.png"/>
+				</frame>
 			</table>
 			<!--<button col="2" row="0" enabled="false"/>-->
 		</table>

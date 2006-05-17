@@ -17,6 +17,7 @@ ARTS
 
 [Arts - Graphics - 3D]
 ------------------------------------------------------
+[M] team color
 [M] Mesh for pigeon
 [M] animate hero, druid and smith
 [M] a well, a mill
@@ -113,8 +114,6 @@ ARTS
  Got to make it easy for newbies - we all start somewhere! 
 [H] Option to invert mouse zoom 
  For me at least, it's the long way around. It's opposite to Blender and counter-intuitive for me (roll forward to zoom out?). But to Godrin it must be intuitive, of course (otherwise he wouldn't have coded it that way). Thus the option will have to be there somewhere.
-[H] Hero doesn't really centre 
- When you click on the 'Godrin' icon, it re-centres the view so that the hero is in the centre of the physical screen/window, whereas it should really make it so that the hero is now at the centre of the map view area. Hope that makes sense. 
 [M] Options not obvious 
 	Options are now grayed out, but maybe they should be hidden.
  
@@ -129,7 +128,6 @@ ARTS
 [M] save current job :-(  high-level and low-level
 		low-level saving should be finished, but high-level makes some problems
 [M] tough breath when hero suffers / some info-box appearing
-[M] check aggression (fight) - enemies don't die when agg==3
 [M] fishing (fishes)
 [M] add "eat-action", "sleep-action" "special??"
 [L] add campaign-loading functionality to load-dialog in-game  TRICKY

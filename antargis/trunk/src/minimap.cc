@@ -212,11 +212,26 @@ void MiniMap::drawEntities(AGPainter &p)
 	    {
 	      AGVector2 v=(*i)->getPos2D();
 	      v=fromMapCoords(v);
-	 
-	      rects.push_back(std::make_pair(AGRect2(v[0],v[1],2,2),(*i)->getMinimapColor().toVec()));
-	      rects.push_back(std::make_pair(AGRect2(v[0],v[1],1,1),((*i)->getMinimapColor()*1.5).toVec()));
-	      rects.push_back(std::make_pair(AGRect2(v[0]+1,v[1],1,1),((*i)->getMinimapColor()*1.2).toVec()));
-	      rects.push_back(std::make_pair(AGRect2(v[0],v[1]+1,1,1),((*i)->getMinimapColor()*1.2).toVec()));
+
+	      float s=(*i)->getMinimapSize();
+	      AGVector4 c0=(*i)->getMinimapColor().toVec();
+	      AGVector4 c1=((*i)->getMinimapColor()*1.2).toVec();
+	      AGVector4 c2=((*i)->getMinimapColor()*1.5).toVec();
+
+	      if(s>2)
+		{
+		  rects.push_back(std::make_pair(AGRect2(v[0],v[1],s,s),c2));
+		  rects.push_back(std::make_pair(AGRect2(v[0]+1,v[1]+1,s-2,s-2),AGVector4(1,1,1,1)));
+		  if(s>4)
+		    rects.push_back(std::make_pair(AGRect2(v[0]+2,v[1]+2,s-4,s-4),c2));
+		}
+	      else
+		{
+		  rects.push_back(std::make_pair(AGRect2(v[0],v[1],s,s),c0));
+		  rects.push_back(std::make_pair(AGRect2(v[0],v[1],1,1),c2));
+		  rects.push_back(std::make_pair(AGRect2(v[0]+1,v[1],1,1),c1));
+		  rects.push_back(std::make_pair(AGRect2(v[0],v[1]+1,1,1),c1));
+		}
 	      es++;
 	    }
 	}

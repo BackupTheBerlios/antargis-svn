@@ -51,7 +51,7 @@ rescue
 end
 
 
-interfaceHeadersSRC=["ant_frustum.h","ant_projection.h",
+interfaceHeadersSRC=["ant_frustum.h","ant_projection.h","ant_camera.h",
 "scenenode.h","anim_mesh.h","anim_mesh_data.h","ant_app.h","ant_serial.h","entity.h","entptr.h","glsl.h","height_map.h","map.h","mesh_data.h","mesh.h","mesh_optimizer.h","minimap.h","new_decal.h","ant_renderer.h","resource.h","scene.h","smoke.h","terrain.h","vertex_array.h","water.h"]
 interfaceHeadersGUI=[
 "ag_rubyobj.h","ag_messageobject.h",
@@ -205,7 +205,7 @@ end
 def cpdir(dir,distdir)
 	mkdir(distdir+"/"+dir)
 	Dir[dir+"/*"].each{|f|
-		if (f=~/~/ or f=~/\.o/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/\.ogg/
+		if (f=~/~/ or f=~/\.o$/ or f=~/\.a$/ or f=~/\.bak/ or f=~/\.xcf/ or f=~/\.svg/ or f=~/\.tar\.gz/ or f=~/antargis-.*/ or f=~/\.iss/ or f=~/vlog\.txt/) and not f=~/\.ogg/
 		elsif f=~/\.so/ and not windows
 		elsif f=~/Antargis.*package/ or f=~/autopackage/
 		elsif File.ftype(f)=="file"

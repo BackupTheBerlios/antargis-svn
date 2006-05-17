@@ -209,8 +209,7 @@ AGGLTexture *AGTexture::glTexture()
       // check if resident
       //      GLuint id=mTexture->id();
 
-#if CPU_FAMILY == PPC
-#else
+#if ((CPU_FAMILY != PPC) && (CPU_FAMILY != POWERPC))
       GLboolean b;
       GLboolean r=glAreTexturesResident(1,&id,&b); // gives strange results on r300/ppc
       if(r)

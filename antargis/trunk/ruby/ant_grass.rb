@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
 def getGrassMeshData(size,many=4,texture=nil,bush=false)
+	size=(size*10).to_i/10.0
+
+
+
 	if not $grassdata
 		$grassdata={}
 	end
@@ -8,7 +12,7 @@ def getGrassMeshData(size,many=4,texture=nil,bush=false)
 		return $grassdata[size]
 	end
 	
-	puts "MAKEFIRMESH"
+	puts "MAKEFIRMESH #{size}"
 	opt=MeshOptimizer.new
 	mv0=MeshVertex.new
 	mv1=MeshVertex.new

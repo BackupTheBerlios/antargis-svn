@@ -200,7 +200,8 @@ void Scene::advance(float time)
 
   for(NodeList::iterator i=l.begin();i!=l.end();i++)
     {
-      (*i)->advance(time);
+      if((*i)->visible())
+	(*i)->advance(time);
     }
 }
 

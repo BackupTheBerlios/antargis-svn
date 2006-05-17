@@ -191,13 +191,16 @@ class AntGameApp <AntRubyView
 	end
 	def showPanel
 		puts "SHOWPANEL"
-		@layout.getChild("SideBar").show
+		sideBar=@layout.getChild("SideBar")
+		sideBar.show
 		@controls=true
+		getScene.getCameraObject.setWidth((getScreen.getWidth-sideBar.width).to_i)
 	end
 	def hidePanel
 		puts "HIDEPANEL"
 		@layout.getChild("SideBar").hide
 		@controls=false
+		getScene.getCameraObject.setWidth(getScreen.getWidth)
 	end
 
 

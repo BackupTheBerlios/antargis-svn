@@ -45,6 +45,7 @@ class AntHouse<AntBoss
 		@atHome=Set.new
 		@lastBirth=0
 		setMinimapColor(AGColor.new(0x55,0x55,0x55))
+		setMinimapSize(5)
 		
 	end
 	

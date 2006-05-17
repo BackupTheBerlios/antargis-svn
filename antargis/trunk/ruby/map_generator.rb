@@ -195,7 +195,7 @@ def generateMap(map,params)
 	h=params.size
 
 	map.newMap(w,h)
-	getMap.setHeight(-2) # everything deep water
+	getMap.setHeight(2) # everything deep water
 
  		flat=[[30,10],[15,20],[10,8],[5,40],[4,10],[3,20],[2,20],[1,70]]
  		flat.each{|add|

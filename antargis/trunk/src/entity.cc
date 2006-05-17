@@ -79,6 +79,8 @@ void AntEntity::init()
 
   mDefense=1.0;
   //  mDirNum=1;
+
+  mMinimapSize=2;
 }
 
 
@@ -788,4 +790,14 @@ AntEntity *AntEntity::getFightTarget()
 	return f->getTarget();
     }
   return 0;
+}
+
+void AntEntity::setMinimapSize(float f)
+{
+  mMinimapSize=f;
+}
+
+float AntEntity::getMinimapSize() const
+{
+  return mMinimapSize;
 }
