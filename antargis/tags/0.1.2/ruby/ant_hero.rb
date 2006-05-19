@@ -340,6 +340,7 @@ class AntHero<AntBoss
 
 	def eventDie
 		super
+		@job=nil
 		getMap.eventHeroDied(self)
 	end
 
