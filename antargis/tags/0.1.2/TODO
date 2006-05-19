@@ -1,0 +1,162 @@
+Short Information:
+Problems are marked by priority. L is for low, M for medium and H high.
+In special cases it can be Very High (=VH).
+
+
+[General]
+------------------------------------------------------
+[VH] Add coding conventions for ruby/c++ and ensure them!
+
+
+WEBSITE & PR
+==================================================
+[M] help-anouncement on gamedev.net
+
+ARTS
+==================================================
+
+[Arts - Graphics - 3D]
+------------------------------------------------------
+[M] team color
+[M] Mesh for pigeon
+[M] animate hero, druid and smith
+[M] a well, a mill
+[M] some statue (monument) representing the whole village
+    it can be clicked to get information about a whole village or attacking it???
+[M] some more animals: cow, deer ??
+[L] improve meshes for trees, bushes, men
+[L] animate wolf
+[L] add meshes for fish
+[L] add female meshes
+[L] animated trees / falling trees
+
+[Arts - Graphics - 2D]
+------------------------------------------------------
+[M] tools-images: pick,axe, hark
+[L] paint new portraits
+[L] paint campaign-images
+
+
+[Story]
+------------------------------------------------------
+[VL] Intro cutscene:
+	- flashback on some victory-scene:
+		- look own from some tower upon an army
+		- look back from behind some warriors holding up some weapons
+	- scene of betrayal - some dark person stands above some king (in a hall)
+	- game begins
+[L] druids:
+	- use woods and lakes as holy places
+	- druids must learn about 20 years
+	
+
+[Music]
+------------------------------------------------------
+[M] menu music
+[M] won and lost jingle
+
+[Leveldesign]
+------------------------------------------------------
+[M] A Hero is born.
+	- scene with some bodies lying around - a broken carriage
+	- a cave for the druid
+
+
+[[Development]]
+==========================================================
+
+[Segfaults]
+------------------------------------------------------
+[M] a segfault appears when profiling with ruby (./run --profile)
+		couldn't find the problem yet. it's probably one of these problems:
+		1) some GC-problem
+		2) some ruby-error (?) within version 1.8.4
+		workaround done: simply disable gc nearly all the time
+
+[Gui/View - GUI-library]
+------------------------------------------------------
+[H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
+[M] add texture-space-saving
+[L] add Framebuffer objects for paint to texture.
+[L] fix AGMenu*. This is broken, but not used ATM.
+[L] rewrite AGEdit - without AGEditLines
+		In AGEdit2 is a beginning of a rewrite. But it's a kind of crappy approach. AGEdit2 should
+		be able to 
+		1) render quickly 
+		2) handle selections with mouse or SHIFT+CURSOR
+		3) copy/paste
+		4) insert images
+[L] add drawGradients-batcher to AGPainter
+
+
+[Graphics - 3d-engine]
+------------------------------------------------------
+[H] test for vertex-buffer-objects!
+[M] make particle engine more generic and include shader-support
+[L] make shadows work on other platforms too?
+[L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
+		There is a problem, too when zoomed in, as it's the current default.
+[L] check if TSM (trapezoidal shadow maps) are any good
+[L] snow,rain which falls down. Maybe as a simple overlay?
+[L] bushes, plants, high grass, flowers. Thats means there should be possibility to include
+		several imposters into one mesh and render them effiently.
+[L] Fog of war - overlay darkness/fog
+[L] fix decals (use clamp-to-edge and original cells)
+[VL] seasons - snow,spring... Exchange or fade terrain textures.
+
+[Game - Game-engine and ruby-scripts]
+------------------------------------------------------
+[H] Add skip intro option
+ You should be able to skip the intro - it gets boring 
+ Solution: :Comment out lines 120 and 121 of /ruby/intro.rb to do this 
+ Really, we should be checking command lines params before we even get this far, so you could do something like 'antargis --fullscreen --skip-intro' 
+[H] Tutorial should be on the main page, not start campaign page 
+ Got to make it easy for newbies - we all start somewhere! 
+[H] Option to invert mouse zoom 
+ For me at least, it's the long way around. It's opposite to Blender and counter-intuitive for me (roll forward to zoom out?). But to Godrin it must be intuitive, of course (otherwise he wouldn't have coded it that way). Thus the option will have to be there somewhere.
+[M] Options not obvious 
+	Options are now grayed out, but maybe they should be hidden.
+ 
+[M] add arrows in man-class
+[H] decrease morale on men when inventing and not resting
+[M] add swords/shields/bows and apply them when fighting
+		sword and shield is ready.
+[M] move from AntHouse to AntBoss:describe men's health and morale when inspecting
+[M] add simple method for direct level choosing
+[M] add fighting on boat
+[M] F1..F7 keys for hero selection
+[M] save current job :-(  high-level and low-level
+		low-level saving should be finished, but high-level makes some problems
+[M] tough breath when hero suffers / some info-box appearing
+[M] fishing (fishes)
+[M] add "eat-action", "sleep-action" "special??"
+[L] add campaign-loading functionality to load-dialog in-game  TRICKY
+		This is a real problem, because the current AGApplication is called by the campaign-code.
+		So the AntApp must be finished and the surrounding campaign-code, too. After this the
+		loaded campaign must be started.
+[L] add females
+[L] add aggression-leveling of non-hero bosses
+[L] computer-player only attacks when stock is used up
+[L] story-telling:
+	- history function
+	- browsing facility (scene=>number(person)=>text)
+[L] add wolf, fish, bird
+[L] add experience points and function to appoint hero
+[L] add formations
+[VL] very bad situation => raise heroes with a new player (rebellion)
+
+[Scripting - Levels and campaigns]
+------------------------------------------------------
+[M] finish first level of birth-campaign
+[M] add some single maps
+
+[Editor]
+------------------------------------------------------
+[L] Trigger definition
+[L] cleanup gui - remove unused elements
+[L] fix selecting group. When you switch the "tabs", the selected action should be changed, too
+
+[Packaging / Building]
+------------------------------------------------------
+[L] installer for linux. maybe some autopackage or .debs?
+[M] swig.* is not built automatically when headers are changed

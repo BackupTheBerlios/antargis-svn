@@ -1,0 +1,5 @@
+note:
+* now this shitty swig-dynamic-cast-problem is solved - once and for all!!!
+* case in typemap(out) - and never save tmp ruby-vars
+* do comparisons through c++-==-operators
+

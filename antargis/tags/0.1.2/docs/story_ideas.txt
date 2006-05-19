@@ -1,0 +1,5 @@
+* druid is always wandering between the villages and sometimes goes to the enemy, too
+* on one occasion you get to know that he does this - you have to decide what's to be done about this
+* the druid tells you, that things aren't always as they appear.
+* If you kill him, it will be as if was against you
+* If you don't kill him, he is on your side
