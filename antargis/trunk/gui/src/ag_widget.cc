@@ -560,14 +560,12 @@ bool AGWidget::canFocus() const
 
 bool AGWidget::eventGotFocus()
 {
-  //  CTRACE;
   mHasFocus=true;
   return false;
 }
 
 bool AGWidget::eventLostFocus()
 {
-  //  CTRACE;
   if(mFocus)
     mFocus->eventLostFocus();
   mHasFocus=false;

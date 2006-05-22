@@ -1,6 +1,7 @@
 #include "minimap.h"
 #include <ag_layoutfactory.h>
 #include <ag_screen.h>
+#include "ant_app.h"
 
 #define MAP_BORDER
 
@@ -292,7 +293,14 @@ bool MiniMap::eventMouseClick(AGEvent *m)
 
   v=toMapCoords(v);
 
-  mScene->setCamera(AGVector4(v[0],v[1],0,0));
+  //  mScene->setCamera(AGVector4(v[0],v[1],0,0));
+  AGApplication *app=getApplication();
+  if(app)
+    {
+      GLApp *glapp=dynamic_cast<GLApp*>(app);
+      if(glapp)
+	glapp->setCamera(v);
+    }
 
   return true;
 }

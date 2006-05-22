@@ -25,6 +25,7 @@
 #include "ag_kill.h"
 #include "ag_debug.h"
 #include "ag_config.h"
+#include "ag_glsurface.h"
 
 #include <map>
 
@@ -168,6 +169,9 @@ void AGSurfaceManager::cleanup(bool force,bool nomem)
 
 
   #warning "// ALSO FOR SDL-MODE!!"
+  if(!opengl())
+    return;
+
 
   std::set<AGGLTexture*> usedGL;
   for(std::set<AGTexture*>::iterator i=mTextures.begin();i!=mTextures.end();i++)

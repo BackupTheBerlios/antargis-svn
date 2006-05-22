@@ -295,11 +295,18 @@ void AGSurface::blit(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2
   SDL_Surface *ss=const_cast<SDL_Surface*>(pSource.s->surface);
   SDL_Surface *ds=s->surface;
 
+  Uint32 colorkey=ss->format->colorkey;
+  int usekey=(ss->flags&SDL_SRCCOLORKEY);
+
   for(y=0,sy=(int)pSrc.y(), dy=(int)pDest.y();y<pSrc.h() ; y++,sy++,dy++)
     for(x=0,sx=(int)pSrc.x(), dx=(int)pDest.x();x<pSrc.w() ; x++,sx++,dx++)
       {
 	c=sge_GetPixel(ss,sx,sy);
 
+	if(usekey)
+	  if(c==colorkey)
+	    continue;
+	    
 	SDL_GetRGBA(c,ss->format,&r,&g,&b,&a);
 	c=SDL_MapRGBA(ds->format,r,g,b,a);
 

@@ -62,6 +62,8 @@ class AGApplication:public AGMessageObject
   virtual void draw();
   virtual void prepareDraw();
 
+  void redraw();
+
   virtual void tryQuit();
 
   long getTicks() const;

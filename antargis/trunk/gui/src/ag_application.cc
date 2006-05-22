@@ -126,14 +126,7 @@ bool AGApplication::run()
 	if(mainWidget)
 	  mainWidget->sigTick(t);
 	
-	{
-	  //	  CTRACE;
-	  {
-	    //	    CTRACE;
-	    //	    rb_gc_start();
-	  }
-	  eventFrame(t);
-	}
+	eventFrame(t);
       }
       {
 	// drawing
@@ -220,6 +213,12 @@ void AGApplication::prepareDraw()
 
 AGWidget *pLastDrawn=0;
 
+void AGApplication::redraw()
+{
+  pLastDrawn=0;
+}
+
+
 void AGApplication::draw()
 {
   STACKTRACE;
@@ -231,12 +230,10 @@ void AGApplication::draw()
       if(pLastDrawn==mainWidget && !opengl())
 	{
 	  AGRect2 r=mainWidget->getChangeRect();
-	  r+=mCursorOld;
-	  //	  cdebug(r);
+	  if(mCursor)
+	    r+=mCursorOld;
+
 	  p.clip(r);
-	  //	  p.fillRect(AGRect2(0,0,getMain()->width(),getMain()->height()),AGColor(0,0,0));
-	  //	  getScreen().flip();
-	  //	  delay(500);
 	}
       mainWidget->drawAll(p);
 
@@ -270,6 +267,7 @@ bool AGApplication::eventKeyDown(AGEvent *m)
 	{
 	  getMain()->toggleFull();
 	  eventChangedRes();
+	  redraw();
 	}
       else if(k==SDLK_F10)
 	tryQuit();

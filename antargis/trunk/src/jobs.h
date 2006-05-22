@@ -96,7 +96,7 @@ class FightJob:public Job
   
  public:
   FightJob();
-  FightJob(int p,AntEntity *pTarget);
+  FightJob(int p,AntEntity *pTarget, float pDistance=1);
   
   virtual ~FightJob();
   void move(AntEntity *e,float ptime);

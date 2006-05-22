@@ -75,6 +75,8 @@ ARTS
 
 [Gui/View - GUI-library]
 ------------------------------------------------------
+[H] moving with left-mouse-button
+[H] fix sdl-ttf problem: letters have cyan backgrounds on ppc (fixed ???)
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [M] add texture-space-saving
 [L] add Framebuffer objects for paint to texture.
@@ -106,14 +108,14 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] add formations
 [H] Add skip intro option
  You should be able to skip the intro - it gets boring 
  Solution: :Comment out lines 120 and 121 of /ruby/intro.rb to do this 
  Really, we should be checking command lines params before we even get this far, so you could do something like 'antargis --fullscreen --skip-intro' 
 [H] Tutorial should be on the main page, not start campaign page 
  Got to make it easy for newbies - we all start somewhere! 
-[H] Option to invert mouse zoom 
- For me at least, it's the long way around. It's opposite to Blender and counter-intuitive for me (roll forward to zoom out?). But to Godrin it must be intuitive, of course (otherwise he wouldn't have coded it that way). Thus the option will have to be there somewhere.
+[M] make finite state machine approach in entities more visible (?)
 [M] Options not obvious 
 	Options are now grayed out, but maybe they should be hidden.
  
@@ -142,7 +144,8 @@ ARTS
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
 [L] add experience points and function to appoint hero
-[L] add formations
+[L] Option to invert mouse zoom 
+ For me at least, it's the long way around. It's opposite to Blender and counter-intuitive for me (roll forward to zoom out?). But to Godrin it must be intuitive, of course (otherwise he wouldn't have coded it that way). Thus the option will have to be there somewhere.
 [VL] very bad situation => raise heroes with a new player (rebellion)
 
 [Scripting - Levels and campaigns]
@@ -152,6 +155,7 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
+[H] add erosion to map-generator
 [L] Trigger definition
 [L] cleanup gui - remove unused elements
 [L] fix selecting group. When you switch the "tabs", the selected action should be changed, too

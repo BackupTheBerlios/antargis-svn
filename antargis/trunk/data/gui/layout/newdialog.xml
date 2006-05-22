@@ -19,8 +19,8 @@
 					<text col="1" row="3" caption="Sizes should be power of 2 and at least 16"/>
 				</table>
 				<table col="0" row="2" cols="2" rows="1">
-					<button col="1" row="0" name="ok" theme="antButton" caption="Ok"/>
-					<button col="0" row="0" name="cancel" theme="antButton" caption="Cancel"/>
+					<button col="0" row="0" name="ok" theme="antButton" caption="Ok"/>
+					<button col="1" row="0" name="cancel" theme="antButton" caption="Cancel"/>
 				</table>
 			</table>
 		</window>

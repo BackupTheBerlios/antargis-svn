@@ -388,7 +388,7 @@ class AntQueryDialog<AntDialog
 			getMap.pause
 		end
 	end
-	def eventCancel
+	def eventCancel(e)
 		super
 		getMap.unpause
 		return true

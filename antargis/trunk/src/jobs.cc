@@ -184,9 +184,9 @@ FightJob::FightJob():mTarget(0),mTargetID(-1)
 {
 }
 
-FightJob::FightJob(int p,AntEntity *pTarget):Job(p),mTarget(pTarget)
+FightJob::FightJob(int p,AntEntity *pTarget,float pDistance):Job(p),mTarget(pTarget)
 {
-  fightDistance=1;//0.20; // in pixels
+  fightDistance=pDistance;
   moving=true;
 }
 
@@ -391,17 +391,3 @@ std::string RestJob::xmlName() const
   return "restJob";
 }
 
-/*
-RestJob *newRestJob(int pTime)
-{
-  return new RestJob(pTime);
-}
-FetchJob *newFetchJob(int p,AGVector2 &pTarget,const std::string &what)
-{
-  return new FetchJob(p,pTarget,what);
-}
-MoveJob *newMoveJob(int p,const AGVector2 &pTarget,int pNear)
-{
-  return new MoveJob(p,pTarget,pNear);
-}
-*/
