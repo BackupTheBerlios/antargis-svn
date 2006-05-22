@@ -326,6 +326,14 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 	  as=copy;
 	  border(as,pFont.getBorderColor());
 	}
+      else
+	{
+	  // simply copy, so there are no more problems on PPC
+	  AGSurface copy(as.width(),as.height());
+	  copy.blit(as,as.getRect(),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
+	  as=copy;
+	  
+	}
       if(pFont.getEmbossed())
 	{
 	  if(pFont.getInset())
