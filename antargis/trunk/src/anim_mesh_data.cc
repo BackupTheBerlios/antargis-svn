@@ -3,7 +3,7 @@
 #include "ag_config.h"
 #include "ag_xml.h"
 
-#include <ant_serial.h>
+#include <ag_serial.h>
 
 void setRotation(AGMatrix4 &m,const AGVector3 &angles); // from anim_mesh.cc
 void setTranslation(AGMatrix4 &m,const AGVector3 &t);

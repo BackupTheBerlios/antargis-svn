@@ -6,7 +6,7 @@
 #include <ag_xml.h>
 #include "entptr.h"
 #include <ag_messageobject.h>
-#include "ant_serial.h"
+#include <ag_serial.h>
 
 class AntEntity;
 class AntEntityPtr;

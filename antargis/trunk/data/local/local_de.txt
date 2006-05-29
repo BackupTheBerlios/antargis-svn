@@ -1,31 +1,30 @@
-Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;
-Stone;;
-Argyn;;
-Gold;;
-For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;
-Keep;;
+Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;Jetzt fangen wir mit dem eigentlichen Spiel an. Am Anfang jeden Levels wird Dein Held zentiert und ausgewählt. In diesem Spiel kann man nur die Helden kontrollieren.
+Stone;;Stein
+Argyn;;Argyn
+Gold;;Gold
+For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Um die Ansicht zu bewegen kannst Du auf die kleine Karte klicken. (diese wird gleich erscheinen)
+Keep;;Burg
 huhu;;
-Minion    of Godrin;;
-You can move him by left-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;
-Coal;;
-Ore;;
-Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.;;
-Swords;;
-Food;;
-Troops;;
-Now recruit some troops by selecting the tower by left-clicking on it and then push the recruit-button on the right.;;
+You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;Um Deinen Held zu bewegen, klicke mit der echten Maustaste auf die Landschaft.
+Coal;;Kohle
+Ore;;Erz
+Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.;;Willkommen bei der Einführung zu Antargis. Als erstes zeige ich Dir, wie man sich die Welt anschaut.
+Swords;;Schwerter
+Food;;Essen
+Troops;;Truppen
+Now recruit some troops by selecting the tower by left-clicking on it and then push the recruit-button on the right.;;Jetzt kannst Du ein paar Truppen rekrutieren, indem Du zuerst den Turm mit einem Links-Klick auswählst und dann den "Rekrutieren"-Buttons drückst.
 Dador;;
 Banin;;
 Minion of Godrin;;
 If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;
 When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.;;
-NewTree;;
-Fire;;
-Tools;;
-Shields;;
+NewTree;;Baum
+Fire;;Feuer
+Tools;;Werkzeuge
+Shields;;Schilder
 Godrin;;
-Nobody supports him.;;
-Wood;;
+Nobody supports him.;;Niemand folgt ihm.
+Wood;;Holz
 Quit;;Beenden
 Cancel;;Abbrechen
 Statistics;;Statistik
@@ -53,7 +52,7 @@ Video;;Anzeige
 Inspect object;;Details anzeigen
 Here you learn how to play the game.;;Hier wird Dir gezeigt, wie man das Spiel bedient.
 Take weapons - FIXME;;Waffen nehmen
-Tutorial;;Einfhrung
+Tutorial;;Einführung
 1280x1024;;1280x1024
 He obeys {1}.;;Er gehorcht {1}.
 {1} men support him.;;3 Leute folgen ihm.
@@ -89,7 +88,7 @@ Abort this mission;;Mission abbrechen
 Rest;;Rasten
 1024x768;;1024x768
 The story of Antargis begins;;Die Geschichte von Antargis beginnt
-Tutorial - Exploring your world.;;Einfhrung - Entdecke Deine Welt
+Tutorial - Exploring your world.;;Einführung - Entdecke Deine Welt
 Directory:;;Verzeichnis:
 Exit;;Zurück
 no;;Nein

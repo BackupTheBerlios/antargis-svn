@@ -2,6 +2,7 @@
 #define __ANTARGIS_H__
 #include "../gui/src/ag_rubyobj.h"
 #include "../gui/src/ag_messageobject.h"
+#include "../gui/src/ag_serial.h"
 #include "../gui/src/ag_geometry.h"
 #include "../gui/src/ag_font.h"
 #include "../gui/src/ag_color.h"
@@ -55,7 +56,6 @@
 #include "anim_mesh.h"
 #include "anim_mesh_data.h"
 #include "ant_app.h"
-#include "ant_serial.h"
 #include "entity.h"
 #include "entptr.h"
 #include "glsl.h"
@@ -77,6 +77,7 @@
 #ifdef SWIG
 %include "../gui/src/ag_rubyobj.h"
 %include "../gui/src/ag_messageobject.h"
+%include "../gui/src/ag_serial.h"
 %include "../gui/src/ag_geometry.h"
 %include "../gui/src/ag_font.h"
 %include "../gui/src/ag_color.h"
@@ -130,7 +131,6 @@
 %include "anim_mesh.h"
 %include "anim_mesh_data.h"
 %include "ant_app.h"
-%include "ant_serial.h"
 %include "entity.h"
 %include "entptr.h"
 %include "glsl.h"
