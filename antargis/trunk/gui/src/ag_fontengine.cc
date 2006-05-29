@@ -303,7 +303,7 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 	  
 	}
 	else*/
-      ns=TTF_RenderText_Blended(f,pText.c_str(),pFont.getColor());
+      ns=TTF_RenderUTF8_Blended(f,pText.c_str(),pFont.getColor());
 
       assert(ns);
       
@@ -359,7 +359,7 @@ int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
     return 0;
    
   int w,h;
-  int ret=TTF_SizeText(f,pText.c_str(),&w,&h);
+  int ret=TTF_SizeUTF8(f,pText.c_str(),&w,&h);
   if(ret)
     return 0;
   return w;
@@ -373,7 +373,7 @@ int AGFontEngine::getHeight(const AGFont &pFont,const std::string &pText)
     return 0;
   
   int w,h;
-  int ret=TTF_SizeText(f,pText.c_str(),&w,&h);
+  int ret=TTF_SizeUTF8(f,pText.c_str(),&w,&h);
   if(ret)
     return 0;
 

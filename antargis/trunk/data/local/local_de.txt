@@ -33,7 +33,7 @@ Single map;;Einzelne Karte
 Game;;Spiel
 Ok;;Ok
 Gameoptions;;Spieleinstellungen
-'You awaken...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;'Du erwachst...\nDeine Umgebung ist Dir unbekannt.\nDu überlegst was passiert ist und wie Du hierher gekommen bist.'
+'You awaken...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;'Du erwachst...\nDeine Umgebung ist Dir unbekannt.\nDu berlegst was passiert ist und wie Du hierher gekommen bist.'
 A hero is born.;;Ein Held ist geboren.
 High aggression;;Aggressiv
 rough lands;;hartes Land
@@ -42,7 +42,7 @@ Sound;;Sound
 Start;;Starten
 Loading...;;Laden des Spiels...
 unify the people;;vereinige das Volk
-In future versions a screenshot will be given here.;;In zukünftigen Versionen wird hier ein Bild zu sehen sein.
+In future versions a screenshot will be given here.;;In zukÃ¼nftigen Versionen wird hier ein Bild zu sehen sein.
 1400 x 1050;;1400 x 1050
 1024 x 768;;1024 x 768
 Playername;;Spielername
@@ -53,7 +53,7 @@ Video;;Anzeige
 Inspect object;;Details anzeigen
 Here you learn how to play the game.;;Hier wird Dir gezeigt, wie man das Spiel bedient.
 Take weapons - FIXME;;Waffen nehmen
-Tutorial;;Einführung
+Tutorial;;Einfhrung
 1280x1024;;1280x1024
 He obeys {1}.;;Er gehorcht {1}.
 {1} men support him.;;3 Leute folgen ihm.
@@ -81,18 +81,18 @@ Low aggression;;Friedlich
 ...;;...
 Drop food;;Nahrung ablegen
 Sheep;;Schaf
-strong heroes;;mächtige Helden
+strong heroes;;mÃ¤chtige Helden
 Options...;;Einstellungen...
-Do you really want to ??;;Möchtest Du das wirklich?
+Do you really want to ??;;MÃ¶chtest Du das wirklich?
 Load game;;Spiel laden
 Abort this mission;;Mission abbrechen
 Rest;;Rasten
 1024x768;;1024x768
 The story of Antargis begins;;Die Geschichte von Antargis beginnt
-Tutorial - Exploring your world.;;Einführung - Entdecke Deine Welt
+Tutorial - Exploring your world.;;Einfhrung - Entdecke Deine Welt
 Directory:;;Verzeichnis:
-Exit;;Zurück
+Exit;;ZurÃ¼ck
 no;;Nein
-Do you really want\nto quit the game?;;Möchtest Du wirklich\naufhören zu spielen?
+Do you really want\nto quit the game?;;MÃ¶chtest Du wirklich\naufhÃ¶ren zu spielen?
 Pause the game;;Spiel pausieren
 Toggle fullscreen;;Vollbildmodus

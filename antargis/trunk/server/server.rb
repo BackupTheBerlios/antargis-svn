@@ -59,15 +59,19 @@ class LoginServer<Server
 	end
 end
 
-
-table=SimpleLoginTable.new
-table.addPlaintext("muh","puh")
-server=LoginServer.new(table)
-
-for i in 0..100
-	t=TimeMessage.new(i)
-	server.sendMessage(t)
-	sleep 0.5
+def serverTest
+	table=SimpleLoginTable.new
+	table.addPlaintext("muh","puh")
+	server=LoginServer.new(table)
+	
+	for i in 0..100
+		t=TimeMessage.new(i)
+		server.sendMessage(t)
+		sleep 0.5
+	end
+	
+	server.join
 end
 
-server.join
+
+#serverTest
