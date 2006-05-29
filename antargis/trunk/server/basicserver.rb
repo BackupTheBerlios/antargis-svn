@@ -22,14 +22,14 @@ class Connection
 	end
 	def run
 		while @session
-			c=@session.gets
+			c=@session.gets #recv(10000000)
 			if c.nil?
 				break
 			end
 			@instr+=c
 			begin
-				m=Marshal.load(@instr)
-				l=Marshal.dump(m).length
+				m=AntMarshal.load(@instr)
+				l=AntMarshal.dump(m).length
 				@instr=@instr[(l+1)..(@instr.length-1)]
 				@server.pushMessage(self,m)
 			rescue TypeError => e
@@ -44,14 +44,16 @@ class Connection
 
 	def sendMessage(m)
 		#puts "sent message #{m}"
-		x=Marshal.dump(m)
+		x=AntMarshal.dump(m)
 		#puts "DUMP:#{x}"
 		send(x)
+		puts "ok - sent"
 	end
 
 	def send(x)
 		begin
 			@session.puts(x)
+			#@session.flush
 			#puts "message sent '#{x}'!"
 		rescue
 		end
@@ -119,8 +121,12 @@ private
 		@mthread=Thread.new {
 			while (session = @server.accept)
 				Thread.start do
-					connection=Connection.new(session,self)
-					connection.runConnection
+					begin
+						connection=Connection.new(session,self)
+						connection.runConnection
+					rescue e
+						puts e
+					end
 				end
 			end
 		}

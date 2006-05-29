@@ -26,10 +26,11 @@ def checkLogin(m)
 end
 
 class LoginServer<Server
-	def initialize(loginTable)
+	def initialize(loginTable,app)
 		super()
 		@loginTable=loginTable
 		@challenges={}
+		@app=app
 	end
 	def eventNewConnection(c)
 		super
@@ -47,15 +48,33 @@ class LoginServer<Server
 			when LoginMessage
 				if @loginTable.check(m.name,m.pw,@challenges[c])
 					puts "LOGIN OK"
-					c.sendMessage(WelcomeMessage.new)
+					puts "muh"
+					puts @app
+					@app.syncCall { puts "SYNC" ; m=@app.makeWelcomeMessage ; c.sendMessage(m)}
+					
+					#puts m
+					#puts "savegame sent"
 				else
 					puts "LOGIN WRONG"
+					c.sendMessage(ErrorMessage.new("Wrong Login"))
+					c.close
 				end
 				return true
 			else
 				puts "elsse?????????"
 		end
 		return false
+	end
+	def makeWelcomeMessage
+		puts "SHIT"
+		puts "makeW"
+		d=Document.new
+		d.root.setName("antargisLevel")
+		@map.saveXML(d)
+		puts "toxml"
+		m=WelcomeMessage.new("") #d.toString)
+		puts "ok"
+		return m
 	end
 end
 

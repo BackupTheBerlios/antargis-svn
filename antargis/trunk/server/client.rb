@@ -1,6 +1,16 @@
 #!/usr/bin/env ruby
 
-require 'config.rb'
+$programDir=Dir.pwd+"/ruby"
+# add programdir to path
+$:.push($programDir)
+
+$serverDir=Dir.pwd+"/server"
+# add programdir to path
+$:.push($serverDir)
+
+require 'antargislib.rb'
+
+require 'server/config.rb'
 require 'socket'
 require 'messages.rb'
 require 'thread.rb'
@@ -27,37 +37,46 @@ class Client
 		if m.class==TimeMessage
 			puts "TIME:#{m.time}"
 		end
+		if m.class==WelcomeMessage
+			puts uncompress(m.level)
+		end
+		@queue.push(m)
 	end
 	def sendMessage(m)
-		@socket.puts(Marshal.dump(m))
+		@socket.puts(AntMarshal.dump(m))
+		#@socket.flush
 		puts "message sent"
 	end
 private
 	def runThread
 		while true
-			c=@socket.gets
-			if c.nil?
+			c=@socket.gets #recv(10000000)
+			if c.nil? or c==""
 				break
 			end
-			puts @instr.class
+			#puts @instr.class
+			#puts c.class
 			@instr+=c
+			#puts "next try"
 			begin
-				m=Marshal.load(@instr)
-				l=Marshal.dump(m).length
-				@instr=@instr[(l+1)..(@instr.length-1)]
+				m=AntMarshal.load(@instr)
+				l=AntMarshal.dump(m).length
+				@instr=@instr[(l+2)..-1] #(@instr.length-1)]
 				processMessage(m)
 			rescue TypeError => e
 				puts "crappy data"
 				@instr=@instr[1..(@instr.length-1)] # ignore one char
 				puts e
 			rescue ArgumentError => e
+				#puts "too few"
 				#puts e.class
 				#puts e
 			end
-			puts "INSTR: #{@instr}"
+
 			if @instr.nil?
 				@instr=""
 			end
+			puts "INSTR: #{@instr.length}"
 		end
 		puts "LOST CONNECTION"
 	end
@@ -68,18 +87,29 @@ class AntClient<Client
 		super()
 		@user=user
 		@pw=pw
+		@state=:login
 	end
 	def processMessage(m)
-		puts "PROC"
-		puts m
+		#puts "PROC"
+		#puts m
 		if m.class==ChallengeMessage
-			sendMessage(LoginMessage.new(@user,myhash(m.challenge+myhash(@user+@pw))))
+			sendMessage(LoginMessage.new(@user,myhash(m.challenge+myhash(@user+@pw)),getProtocolVersion))
+			puts "try login"
 		else
+			if m.class==WelcomeMessage
+				@state=:loggedin
+			end
 			return super(m)
 		end
 		return true
 	end
+
+	def state
+	end
 end
+
+
 client=AntClient.new("muh","puh")
+
 client.finish
 

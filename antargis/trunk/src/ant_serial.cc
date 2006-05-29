@@ -308,3 +308,100 @@ std::string BinaryStringOut::getString() const
 {
   return os.str();
 }
+
+
+unsigned char fromHexBS(unsigned char c)
+{
+  if(c>='a' && c<='f')
+    return c-'a'+0xA;
+  if(c>='A' && c<='F')
+    return c-'A'+0xA;
+
+  if(c>='0' && c<='9')
+    return c-'0';
+  throw std::runtime_error("wrong input in fromHex()");
+}
+
+void toHexBS(char c,std::ostream &os)
+{
+  unsigned char c0=(c&0xF);
+  unsigned char c1=((c>>4)&0xF);
+
+  char a,b;
+  //  std::ostringstream os;
+  if(c0<10)
+    a=(c0+'0');
+  else
+    a=((c0-10)+'A');
+
+  if(c1<10)
+    b=(c1+'0');
+  else
+    b=((c1-10)+'A');
+    
+  //  cdebug("a:"<<(int)a);
+  //  cdebug("b:"<<(int)b);
+  os<<b<<a;
+
+  //  return os.str();
+}
+
+
+std::string binaryToHex(const std::string &s)
+{
+  std::ostringstream os;
+  
+  std::cout<<s.length()<<std::endl;
+  for(size_t i=0;i<s.length();i++)
+    {
+      //      cdebug(i<<":"<<(int)s[i]);
+      toHexBS(s[i],os);
+      if(i>0)
+	{
+	  if((i%32)==0)
+	    os<<std::endl;
+	  else if((i%4)==0)
+	    os<<" ";
+	}
+    }
+  //  cdebug(os.getString());
+
+  return os.str();//getString();
+}
+
+
+std::string hexToBinary(const std::string &s)
+{
+  std::ostringstream os;
+  bool complete=false;
+  char current=0;
+
+  for(size_t i=0;i<s.length();i++)
+    {
+      char c=s[i];
+      if((c>='a' && c<='f') || (c>='A' && c<='F') || (c>='0' && c<='9'))
+	{
+	  //	  cdebug("scan:"<<(int)fromHexBS(c));
+	  if(complete)
+	    {
+	      //	      cdebug("current (2):"<<(int)current);
+	      current<<=4;
+	      //	      cdebug("current (2):"<<(int)current);
+	      current|=fromHexBS(c);
+	      //	      cdebug("current (2):"<<(int)current);
+	      os<<current;
+	      complete=false;
+	    }
+	  else
+	    {
+	      current=fromHexBS(c);
+	      complete=true;
+	      //	      cdebug("current (1st):"<<(int)current);
+	    }
+	}
+
+    }
+
+
+  return os.str();
+}

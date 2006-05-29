@@ -38,4 +38,7 @@ std::string findFile(const std::string &pName);
 
 void addPath(const std::string &pName);
 
+std::string compress(const std::string &pString);
+std::string uncompress(const std::string &pString);
+
 #endif

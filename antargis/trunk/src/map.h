@@ -66,6 +66,7 @@ class AntMap:public HeightMap
 
   void saveMap(const std::string &pFilename);
   virtual void loadMap(const std::string &pFilename);
+  virtual void loadMapFromMemory(const std::string &Memory);
 
   void move(float pTime);
 

@@ -31,6 +31,8 @@
 
 #include "ag_debug.h"
 #include "ag_tools.h"
+#include "ant_serial.h"
+#include <zlib.h>
 
 static bool FSinited=false;
 
@@ -486,4 +488,37 @@ std::vector<std::string> getDirectory(const std::string &pDir)
 
   return v;
 #endif
+}
+
+
+
+std::string compress(const std::string &pString)
+{
+  BinaryStringOut o;
+  o<<pString.length();
+
+  uLongf destlen=pString.length()+1000;
+  char *buf=new char[destlen];
+
+  compress((Bytef*)buf,&destlen,(Bytef*)pString.c_str(),pString.length());
+
+  std::string r=o.getString()+std::string(buf,destlen);
+  delete [] buf;
+  return r;
+}
+std::string uncompress(const std::string &pString)
+{
+  BinaryStringIn i(pString);
+  uLongf orig;
+  size_t o;
+  i>>o;
+  orig=o;
+
+
+  char *buf=new char[orig+10];
+  uncompress((Bytef*)buf,&orig,(Bytef*)pString.c_str()+4,pString.length()-4);
+  std::string r(buf,orig);
+  delete [] buf;
+
+  return r;
 }

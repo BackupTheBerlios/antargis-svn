@@ -100,6 +100,7 @@ class BinaryStringOut:public BinaryOut
   std::ostringstream os;
 };
 
-
+std::string binaryToHex(const std::string &s);
+std::string hexToBinary(const std::string &s);
 
 #endif

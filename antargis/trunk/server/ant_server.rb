@@ -29,7 +29,11 @@ $serverDir=Dir.pwd+"/server"
 $:.push($serverDir)
 
 require 'antargislib.rb'
+require 'server/config.rb'
 require 'server.rb'
+require 'ents.rb'
+require 'map.rb'
+
 
 class AntServer<AGApplication
 	def initialize
@@ -37,6 +41,45 @@ class AntServer<AGApplication
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/server.xml"))
 		setMainWidget(@layout)
+
+		@scene=Scene.new(128,128)
+		@map=AntRubyMap.new(@scene,128,128)
+		$map=@map
+		@map.loadMap("levels/birth2.antlvl")
+
+		table=SimpleLoginTable.new
+		table.addPlaintext("muh","puh")
+		@server=LoginServer.new(table,self)
+		@queue=Queue.new
+	end
+	def eventFrame(t)
+		delay(10)
+		@map.move(t)
+
+		# do sync-calls
+		while @queue.length>0
+			b=@queue.pop
+			b.call
+		end
+	end
+	def makeWelcomeMessage
+		puts "makeW"
+		d=Document.new
+		d.root.setName("antargisLevel")
+		@map.saveXML(d.root)
+		puts "toxml"
+		c=d.toString
+		File.open("test.level","w").puts c
+		#c="kasjdksdf skjsh skjsd sddsf  sdfkj sdfksd\nsdkjhdskjfh"
+		m=WelcomeMessage.new(compress(c))
+		puts "ok"
+		return m
+	end
+	def syncCall(&block)
+		#puts s
+		puts "SYNC CALL"
+		@queue.push(block)
+		puts "ok"
 	end
 end
 

@@ -108,6 +108,7 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] choosing/making player for multiplayer
 [H] add formations
 [H] Add skip intro option
  You should be able to skip the intro - it gets boring 

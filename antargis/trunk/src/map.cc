@@ -257,19 +257,20 @@ AntEntity *AntMap::getByName(const std::string &pName)
   return 0;
 }
 
+void AntMap::loadMapFromMemory(const std::string &pMem)
+{
+  if(pMem.length())
+    {
+      Document d;
+      d.parseMemory(pMem);
+      loadXML(d.root());
+    }
+}
+
 void AntMap::loadMap(const std::string &pFilename)
 {
   
-  //getScene()->clear();
-  CTRACE;
-  Document d;
-  std::string c=loadFile(pFilename);
-  if(c.length())
-    {
-      d.parseMemory(c);
-      clear();
-      loadXML(d.root());
-    }
+  loadMapFromMemory(loadFile(pFilename));
 }
 void AntMap::saveMap(const std::string &pFilename)
 {

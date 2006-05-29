@@ -2,38 +2,6 @@
 #include "terrain.h"
 #include "ant_serial.h"
 
-/*
-void serialTest()
-{
-  BinaryStringOut os;
-  os<<3.4f;
-  BinaryStringIn is(os.getString());
-  float f;
-  is>>f;
-  assert(f==3.4f);
-}
-
-void serialTest2()
-{
-  size_t i=9874;
-  size_t a=i;
-  TRACE;
-  {
-    
-    BinaryFileOut os("muh");
-    os<<i;
-    os<<3.4f;
-  }
-  BinaryFileIn is("muh");
-  float f;
-  is>>i;
-  is>>f;
-  assert(i==a);
-  assert(f==3.4f);
-}*/
-
-
-
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
 //////////////////////////////////////////////////////////////////////////
@@ -65,8 +33,6 @@ HeightMap::HeightMap(Scene *pScene,int w,int h):
   setTerrainScale(FOREST,23/32.0);
   setTerrainScale(ROCK,1);
   setTerrainScale(ROCK2,1);
-  //  serialTest();
-  //  serialTest2();
 }
 
 HeightMap::~HeightMap()
@@ -149,11 +115,11 @@ void HeightMap::set(size_t x,size_t y,float height)
   addChange(AGVector2(x,y));
 }
 
-void HeightMap::loadBinary(const std::string &pName)
+void HeightMap::loadBinary(BinaryIn &is)
 {
   CTRACE;
-  cdebug("file:"<<pName);
-  BinaryFileIn is(pName);
+  //  cdebug("file:"<<pName);
+  //  BinaryFileIn is(pName);
   float f;
 
   Uint32 tw,th; // temporary sizes for AMD64
@@ -162,7 +128,7 @@ void HeightMap::loadBinary(const std::string &pName)
   mH=th;
 
   cdebug("mw:"<<mW<<"  "<<mH);
-  cdebug("pos:"<<is.pos());
+  //  cdebug("pos:"<<is.pos());
 
   assert(mW<10000 && mH<10000);
   
@@ -194,13 +160,13 @@ void HeightMap::loadBinary(const std::string &pName)
     }
 }
 
-void HeightMap::saveBinary(const std::string &pName) const
+void HeightMap::saveBinary(BinaryOut &os) const
 {
   CTRACE;
-  BinaryFileOut os(pName);
+  //  BinaryFileOut os(pName);
 
   os<<(Uint32)mW<<(Uint32)mH;
-  cdebug("pos:"<<os.pos());
+  //  cdebug("pos:"<<os.pos());
 
   for(size_t y=0;y<mH+2;y++)
     {
@@ -228,58 +194,71 @@ void HeightMap::loadXML(const Node &node)
   CTRACE;
   std::string filename=node.get("filename");
   if(filename.length())
-    loadBinary(filename);
+    {
+      BinaryFileIn is(filename);
+      loadBinary(is);
+    }
   else
     {
-      mW=toInt(node.get("width"));
-      mH=toInt(node.get("height"));
-      
-      cdebug("mW:"<<mW);
-      cdebug("mH:"<<mH);
-      mHeights=std::vector<float>(mW*mH*4);
-      
-      for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
+      Node::NodeVector nv=node.getChildren("data");
+      if(nv.size())
 	{
-	  mTerrainTypes[TerrainType(i)]=std::vector<float>(mW*mH*4);
-	  cdebug(mW<<"   "<<mH);
-	  cdebug(mTerrainTypes[TerrainType(i)].size());
-	  Node::NodeVector gv=node.getChildren(TerrainNames[i]);
-	  if(gv.size()==0)
-	    continue;
-	  Node &g=**gv.begin();
+	  std::string c=nv[0]->getContent();
+	  BinaryStringIn is(hexToBinary(c));
+	  loadBinary(is);
+	}
+      else
+	{
+	  mW=toInt(node.get("width"));
+	  mH=toInt(node.get("height"));
 	  
-	  std::istringstream is(g.getContent());
+	  cdebug("mW:"<<mW);
+	  cdebug("mH:"<<mH);
+	  mHeights=std::vector<float>(mW*mH*4);
+	  
+	  for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
+	    {
+	      mTerrainTypes[TerrainType(i)]=std::vector<float>(mW*mH*4);
+	      cdebug(mW<<"   "<<mH);
+	      cdebug(mTerrainTypes[TerrainType(i)].size());
+	      Node::NodeVector gv=node.getChildren(TerrainNames[i]);
+	      if(gv.size()==0)
+		continue;
+	      Node &g=**gv.begin();
+	      
+	      std::istringstream is(g.getContent());
+	      
+	      float f;
+	      for(size_t y=0;y<mH+2;y++)
+		{
+		  for(size_t x=0;x<mW+2;x++)
+		    {
+		      is>>f;
+		      mTerrainTypes[TerrainType(i)][x+y*(mW+2)]=f;
+		      addChange(AGVector2(x,y));
+		    }
+		}
+	    }
+	  
+	  
+	  Node::NodeVector hv=node.getChildren("height");
+	  
+	  if(hv.size()==0)// || gv.size()==0)
+	    return;
+	  assert(hv.size()==1);
+	  Node &h=**hv.begin();
+	  
+	  
+	  std::istringstream ish(h.getContent());
 	  
 	  float f;
 	  for(size_t y=0;y<mH+2;y++)
 	    {
 	      for(size_t x=0;x<mW+2;x++)
 		{
-		  is>>f;
-		  mTerrainTypes[TerrainType(i)][x+y*(mW+2)]=f;
-		  addChange(AGVector2(x,y));
+		  ish>>f;
+		  mHeights[x+y*(mW+2)]=f;
 		}
-	    }
-	}
-      
-      
-      Node::NodeVector hv=node.getChildren("height");
-      
-      if(hv.size()==0)// || gv.size()==0)
-	return;
-      assert(hv.size()==1);
-      Node &h=**hv.begin();
-      
-      
-      std::istringstream ish(h.getContent());
-      
-      float f;
-      for(size_t y=0;y<mH+2;y++)
-	{
-	  for(size_t x=0;x<mW+2;x++)
-	    {
-	      ish>>f;
-	      mHeights[x+y*(mW+2)]=f;
 	    }
 	}
     }
@@ -365,11 +344,19 @@ void HeightMap::saveXML(Node &node) const
 	  
 	}
     }
-  else
+  else if(false)
     {
       std::string name=replace(mName,".antlvl",".hmap");
-      saveBinary(name);
+      BinaryFileOut os(name);
+      saveBinary(os);
       node.set("filename",name);
+    }
+  else
+    {
+      BinaryStringOut os;
+      saveBinary(os);
+      Node &n=node.addChild("data");
+      n.setContent(binaryToHex(os.getString()));
     }
 }
 
@@ -378,6 +365,10 @@ std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight)
 {
   std::vector<float> h(mW*mH);
   int randMax=10000;
+
+  for(int i=0;i<mW*mH;i++)
+    h[i]=0;
+  return h;
   
   for(int i=0;i<mW*mH;i++)
     h[i]=(rand()%randMax)*mMaxHeight/randMax;

@@ -25,6 +25,7 @@
 #include "ag_regex.h"
 #endif
 #include "ag_debug.h"
+#include "ag_profiler.h"
 
 /**
    Node
@@ -427,6 +428,12 @@ bool Parser::Data::first(const std::string &p) const
 
 std::string Parser::Data::getFirst(size_t i) const
 {
+  STACKTRACE;
+  if(pos>=s.length())
+    return "";
+  else
+    return s.substr(pos,std::min(s.length()-pos,i));
+
   std::ostringstream os;
   for(size_t k=pos;k<i+pos;k++)
     {
@@ -439,6 +446,7 @@ std::string Parser::Data::getFirst(size_t i) const
 
 void Parser::Data::eat(size_t i)
 {
+  STACKTRACE;
   if(pos+i>s.length())
     throw int();
   for(size_t j=0;j<i;j++)
@@ -486,7 +494,7 @@ std::string Parser::Data::getTil(const std::string &p) const
   size_t i=s.find(p,pos);
   if(i!=s.npos)
     return s.substr(pos,i-pos);
-  return "";
+  return s.substr(pos,i);
 }
 
 Parser::~Parser()
@@ -513,8 +521,11 @@ void Parser::parse(const std::string &pData)
 	    if(!i.startTag)
 	      if(!parseText())
 		{
-		  cdebug("ERROR AT line:"<<getLine()<<":"<<data.getFirst(20));
-		  break;
+		  if(!eod())
+		    {
+		      cdebug("ERROR AT line:"<<getLine()<<":"<<data.getFirst(20));
+		      break;
+		    }
 		}
 	  }
     }
@@ -522,6 +533,28 @@ void Parser::parse(const std::string &pData)
 
 bool Parser::parseText()
 {
+  STACKTRACE;
+  
+  if(!data.getFirst(1).length())
+    return false;
+  //  cdebug("current:"<<data.getFirst(10));
+  //  cdebug((int)data.getFirst(10)[0]<<"  "<<int(EOF));
+
+  std::string ctext=data.getTil("<");
+  //  data.eat(ctext.length());
+  if(ctext.length())
+    {
+      data.eat(ctext.length());
+      //  cdebug("text:"<<ctext);
+      //      cdebug("NEXT:"<<data.getFirst(1));
+
+
+      text(ctext);
+      return true;
+    }
+  return false;
+  
+
   std::ostringstream os;
   while(data.getFirst(1)!="<" && data.getFirst(1).length())
     {
@@ -531,8 +564,15 @@ bool Parser::parseText()
   if(os.str().length())
     {
       text(os.str());
+
+      cdebug(os.str().length()<<"  "<<ctext.length());
+      cdebug(":"<<os.str()<<"!");
+      cdebug((int)os.str()[0]);
+      assert(os.str()==ctext);
       return true;
     }
+  else
+    assert(ctext.length()==0);
   return false;
 }
 
@@ -694,6 +734,7 @@ Node::Attributes Parser::parseAttributes()
 
 bool Parser::eod()
 {
+  //  cdebug(data.pos<<"  "<<data.s.length());
   return data.pos>=data.s.length();
 }
 

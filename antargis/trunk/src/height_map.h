@@ -6,6 +6,7 @@
 #include <ag_xml.h>
 #include "entptr.h"
 #include <ag_messageobject.h>
+#include "ant_serial.h"
 
 class AntEntity;
 class AntEntityPtr;
@@ -82,8 +83,8 @@ class HeightMap:public AGMessageObject
 
  private:
 
-  void loadBinary(const std::string &pName);
-  void saveBinary(const std::string &pName) const;
+  void loadBinary(BinaryIn &s);
+  void saveBinary(BinaryOut &s) const;
 
 
   std::vector<float> mHeights;
