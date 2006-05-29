@@ -44,6 +44,19 @@ files.each{|file|
 
 }
 
+# get old
+`find -name "local_*.txt"`.split("\n").each{|f|
+	File.open(f).each_line{|line|
+		s=line.gsub(/;;.*/,"").gsub("\n","")
+		#puts "S:#{s}!"
+		strs.push(s)
+	}
+}
+
 strs.uniq!
 
-puts strs.join("\n")	
+puts strs.join("\n")
+
+f=File.open("local_new.txt","w")
+f.puts strs.join(";;\n")
+f.puts ";;\n"
