@@ -50,7 +50,7 @@ class LoginServer<Server
 					puts "LOGIN OK"
 					puts "muh"
 					puts @app
-					@app.syncCall { puts "SYNC" ; m=@app.makeWelcomeMessage ; c.sendMessage(m)}
+					@app.syncCall { puts "SYNC" ; m=@app.makeWelcomeMessage(m.name,c) ; c.sendMessage(m)}
 					
 					#puts m
 					#puts "savegame sent"

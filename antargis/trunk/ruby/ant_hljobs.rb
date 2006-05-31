@@ -462,7 +462,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 							@finished=true
 						end
 					when "recruit_resting"
-						man.newRestJob(1)
+						man.newRestJob(10)
 				end
 			end
 		else

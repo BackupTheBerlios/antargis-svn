@@ -15,6 +15,7 @@ require 'socket'
 require 'messages.rb'
 require 'thread.rb'
 require 'md5.rb'
+require 'antargis.rb'
 
 class Client
 	def initialize
@@ -33,14 +34,20 @@ class Client
 		:server
 	end
 	def processMessage(m)
-		puts m
+		#puts m
 		if m.class==TimeMessage
 			puts "TIME:#{m.time}"
 		end
-		if m.class==WelcomeMessage
-			puts uncompress(m.level)
-		end
+		#if m.class==WelcomeMessage
+		#	puts uncompress(m.level)
+		#end
 		@queue.push(m)
+	end
+	def getMessage
+		if @queue.length>0
+			return @queue.pop
+		end
+		return nil
 	end
 	def sendMessage(m)
 		@socket.puts(AntMarshal.dump(m))
@@ -90,26 +97,42 @@ class AntClient<Client
 		@state=:login
 	end
 	def processMessage(m)
-		#puts "PROC"
-		#puts m
-		if m.class==ChallengeMessage
-			sendMessage(LoginMessage.new(@user,myhash(m.challenge+myhash(@user+@pw)),getProtocolVersion))
-			puts "try login"
-		else
-			if m.class==WelcomeMessage
+		case m
+			when ChallengeMessage
+				sendMessage(LoginMessage.new(@user,myhash(m.challenge+myhash(@user+@pw)),getProtocolVersion))
+				puts "try login"
+				return true
+			when WelcomeMessage
 				@state=:loggedin
-			end
-			return super(m)
+				return true
 		end
-		return true
+		return false
 	end
 
 	def state
 	end
+	def getName
+		@user
+	end
 end
 
 
+#login
 client=AntClient.new("muh","puh")
 
-client.finish
+welcomeMessage=nil
+#wait for welcome message
+while true
+	welcomeMessage=client.getMessage
+	if (not welcomeMessage.nil?)
+		break
+	end
+	sleep 0.1
+end
+leveltext=uncompress(welcomeMessage.level)
+#puts leveltext
+# start level
+startGame(leveltext,client)
+
+#client.finish
 

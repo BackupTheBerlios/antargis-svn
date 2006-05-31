@@ -48,9 +48,10 @@ class TargetPos
 end
 
 class AntRubyMap<AntMap
-	def initialize(pScene,w,h)
+	def initialize(pScene,w,h,playerName="Rowen")
 		super(pScene,w,h)
 		@ents={}
+		@playerName=playerName
 		@players=[]
 		#GC.start
 		@lastGC=0
@@ -71,7 +72,7 @@ class AntRubyMap<AntMap
 			xml=xml[0..0].downcase+xml[1..1000]
 			@entTypeMap[xml]=t
 		}
-
+		@filename="dummy"
 	end
 	def getTarget(name)
 		@targets[name]
@@ -98,6 +99,8 @@ class AntRubyMap<AntMap
 			player.loadXML(node)
 			@players.push(player)
 			if not @myPlayer
+				@myPlayer=player
+			elsif player.getName==@playerName
 				@myPlayer=player
 			end
 		end
@@ -354,6 +357,24 @@ class AntRubyMap<AntMap
 		else
 			return AGSurface.load("data/gui/portraits/none.png")
 		end
+	end
+	def newPlayer(name)
+		# FIXME:get a free spawn point
+		#
+		@targets.each_key{|key|
+			if key=~/spawn/
+			end
+		}
+		pos=AGVector2.new(20,20)
+		player=AntHumanPlayer.new(name)
+		@players.push(player)
+		#new hero
+		hero=AntHero.new
+		hero.setName(name)
+		hero.setPlayer(player)
+		hero.setPos(pos)
+		insertEntity(hero)
+		return player,hero
 	end
 end
 

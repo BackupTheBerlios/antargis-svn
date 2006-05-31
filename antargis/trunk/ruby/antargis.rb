@@ -41,15 +41,21 @@ class AntGameApp <AntRubyView
 	attr_reader :hero
 
 	include AGHandler
-	def initialize(savegame,w,h,loadscreen=nil)
+	def initialize(savegameText,w,h,loadscreen=nil,connection=nil)
 		super(w,h)
 		@result=GameResult.new
+		@connection=connection
 		$app=self	
 		if loadscreen
 			loadscreen.setValue(0.1)
 			loadscreen.tick
 		end
-		@map=AntRubyMap.new(getScene,32,32) # some small dummy size - gets overriden by loadMap anyway
+		playerName=nil
+		if connection
+			playerName=connection.getName
+		end
+
+		@map=AntRubyMap.new(getScene,32,32,playerName) # some small dummy size - gets overriden by loadMap anyway
 		if loadscreen
 			loadscreen.setValue(0.4)
 			loadscreen.tick
@@ -99,9 +105,9 @@ class AntGameApp <AntRubyView
 			loadscreen.tick
 		end
 		
-		if savegame && savegame.length>0
+		if savegameText && savegameText.length>0
 			# load a level
-			getMap().loadMap(savegame)
+			getMap().loadMapFromMemory(savegameText)
 		end	
 		if loadscreen
 			loadscreen.setValue(0.95)
@@ -472,9 +478,14 @@ class AntGameApp <AntRubyView
 
 end
 
-def startGame(file="savegames/savegame0.antlvl")
+def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 	disableGC
-	app=AntGameApp.new(file,getMain.width,getMain.height)
+	app=nil
+	if clientConnection
+		app=AntGameApp.new(file,getMain.width,getMain.height,nil,clientConnection)
+	else
+		app=AntGameApp.new(loadFile(file),getMain.width,getMain.height,nil,clientConnection)
+	end
 	#app.disableGC
 	app.run
 	result=app.result
@@ -482,21 +493,10 @@ def startGame(file="savegames/savegame0.antlvl")
 	$map=nil
 	$app=nil
 	$screen=nil
-	puts "GC RUN"
-	#app.enableGC
 	enableGC
 	startGC
 	return result
 end
-# def frustumTest
-# 	puts "frustumTest"
-# 	p=AntPlane.new(AGVector3.new(1,1,-1).normalized,1)
-# 	
-# 	puts p.inside(AGVector3.new(2,5,6))
-# 	
-# 	#exit
-# end
-# frustumTest
 
 $useMenu||=false
 

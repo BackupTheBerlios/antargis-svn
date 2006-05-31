@@ -37,11 +37,8 @@ class AntPlayer
 		}
 	end
 	def loadXML(n)
-		puts "a"
 		@name=n.get("name")
-		puts "b"
 		children=n.getChildren("hero")
-		puts "c"
 		children.each{|c|
 			@heronames.push(c.get("name"))
 		}
@@ -51,12 +48,10 @@ class AntPlayer
 			@heronames.each{|n|
 				ent=getMap.getByName(n)
 				if ent
-					puts ent
-					puts ent.getName
 					ent.setPlayer(self)
 					@heroes.push(ent)
 				else
-					puts "HERO NOT FOUND!"
+					puts "HERO NOT FOUND: '#{n}'"
 				end
 			}
 			@heronames.clear
@@ -193,16 +188,16 @@ end
 class AntConqueringPlayer<AntComputerPlayer
 	def initialize(name)
 		super
-		@mode="rest"
+		@mode=:rest
 	end
 	def assignJob(hero)
 		case @mode
-			when "rest"
+			when :rest
 				hero.newHLRestJob(50)
-				@mode="fight"
-			when "fight"
+				@mode=:fight
+			when :fight
 				attackChecked(hero,getNextEnemyHouse(hero))
-				@mode="rest"
+				@mode=:rest
 		end
 	end
 end

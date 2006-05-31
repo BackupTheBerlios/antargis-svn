@@ -38,6 +38,11 @@ module Libantargis
 			setZ(p)
 		end
 	end
+	class AGVector2
+		def marshal_dump
+			[x,y]
+		end
+	end
 end
 
 def displayError(error)

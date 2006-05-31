@@ -45,7 +45,7 @@ class AntServer<AGApplication
 		@scene=Scene.new(128,128)
 		@map=AntRubyMap.new(@scene,128,128)
 		$map=@map
-		@map.loadMap("levels/birth2.antlvl")
+		@map.loadMap("levels/multiplayer/multimap1.antlvl")
 
 		table=SimpleLoginTable.new
 		table.addPlaintext("muh","puh")
@@ -53,7 +53,7 @@ class AntServer<AGApplication
 		@queue=Queue.new
 	end
 	def eventFrame(t)
-		delay(10)
+		delay(100)
 		@map.move(t)
 
 		# do sync-calls
@@ -61,9 +61,18 @@ class AntServer<AGApplication
 			b=@queue.pop
 			b.call
 		end
+
 	end
-	def makeWelcomeMessage
+	def makeNewHeroMessage(player,hero)
+		NewPlayerMessage.new(player.getName,hero.getPos2D)
+	end
+	def makeWelcomeMessage(name,c)
 		puts "makeW"
+		player,hero=@map.newPlayer(name)
+		
+		h=makeNewHeroMessage(player,hero)
+		@server.sendToAllBut(h,c)
+
 		d=Document.new
 		d.root.setName("antargisLevel")
 		@map.saveXML(d.root)

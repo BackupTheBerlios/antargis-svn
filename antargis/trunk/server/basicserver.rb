@@ -86,6 +86,15 @@ class Server
 		}
 		#send(Marshal.dump(m))
 	end
+
+	def sendToAllBut(m,but)
+		@connections.each{|c|
+			if c!=but
+				c.sendMessage(m)
+			end
+		}
+	end
+
 	def recvMessage
 		begin
 			r=@queue.pop

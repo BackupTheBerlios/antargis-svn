@@ -313,13 +313,23 @@ class AntHero<AntBoss
 	def getImage
 		@portrait||=""
 		r=nil
+
+		filename=""
 		if @portrait.length!=0
 			puts "port!=0"
-			r=getTextureCache.get(@portrait)
+			filename=@portrait
+			#r=getTextureCache.get(@portrait)
 		else
 			puts "port==0"
-			r=getTextureCache.get("data/gui/portraits/#{getName}.png")
+			#r=getTextureCache.get("data/gui/portraits/#{getName}.png")
+			filename="data/gui/portraits/#{getName}.png"
 		end
+		if fileExists(filename)
+			r=getTextureCache.get(filename)
+		else
+			r=getTextureCache.get("data/gui/portraits/none.png")
+		end
+
 		puts "getImage-ok"
 		return r
 	end

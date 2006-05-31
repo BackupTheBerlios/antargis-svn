@@ -24,6 +24,14 @@ class WelcomeMessage<Message
 	end
 end
 
+class NewPlayerMessage<Message
+	attr_reader :pos, :name
+	def initialize(pos,name)
+		@pos=pos
+		@name=name
+	end
+end
+
 class ChatMessage<Message
 	def initialize(name,text)
 		@name=name
