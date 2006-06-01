@@ -28,24 +28,28 @@ require "antargis.rb"
 require 'campaign.rb'
 require 'credits.rb'
 
+# AntMenuApp implements the whole menu-block of BoA
+# It uses the setMainWidget-function of AGApplication
+# This way the current menu can easily be exchanged.
+
 class AntMenuApp <AGApplication
 	include AGHandler
 	def initialize
 		super()
 		$menuapp=self
 		# init menues
-		@menues=[]	
+		@menues=[]
+		
+		# setup all the 
 		setupMain
 		setupCredits
 		setupCampaign
 		setupOptions
 		setupLoadMenu
 		setupSingle
-		# hie all menues
-		#hideAll
-		# and show mainmenu
-		@mainMenu.show
 		@sound=true
+
+		# add handler for music finished, simply restart music
 		addHandler(getSoundManager,:sigMp3Finished,:eventMusicEnd)
 	end
 	
@@ -56,17 +60,11 @@ class AntMenuApp <AGApplication
 		return true
 	end
 		
-	def hideAll
-		@menues.each {|x|x.hide}
-	end
-	
 	def setupMain()
 		@mainMenu=AGLayout.new($screen)
 		@mainMenu.loadXML(loadFile("data/gui/layout/mainmenu.xml"))
 		@menues.push(@mainMenu)
 		setMainWidget(@mainMenu)
-		#$screen.addChild(@mainMenu)
-		@mainMenu.hide
 		addHandler(@mainMenu.getChild("quit"),:sigClick,:eventQuit)
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)
 		addHandler(@mainMenu.getChild("campaign"),:sigClick,:eventCampaign)
@@ -251,14 +249,11 @@ class AntMenuApp <AGApplication
 
 	# load menu
 	def eventLoadSelect(e)
-		puts "LOAD SELECT"
 		@loadMenu.getChild("desc").setText("muh")
 		return true
 	end
 	def eventLoad(e)
 		id=@loadMenu.getChild("list").getSelectedID
-		puts "LLLLLLLLLLLLLLOAD"
-		puts id
 		if id!=""
 			c=Campaign.new(getWriteDir+"/savegames/"+id)
 			continueCampaign(c)

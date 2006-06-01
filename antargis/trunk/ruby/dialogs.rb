@@ -21,6 +21,11 @@
 
 #!/usr/bin/ruby
 
+
+# draws a simple rect all of the defined region (typically the whole screen)
+# this used for darkening the screen when the game is paused.
+#
+# the default time for blending to dark is 500 ms (this is not changeable)
 class RectWidget<AGWidget
 	def initialize(p,r,opac)
 		super(p,r)
@@ -36,6 +41,7 @@ class RectWidget<AGWidget
 		p.fillRect(getRect.origin,AGColor.new(c))
 	end
 	def eventMouseButtonDown(e)
+		# eat up the events when visible
 		if visible
 			return true
 		else
@@ -51,16 +57,13 @@ class AntDialog<AGLayout
 	include AGHandler
 	def initialize(parent,filename,fade=true)
 		super(parent)
-		loadXML(loadFile(filename)) # it's here to call loadXML in constructor as "self" is already a ruby-object
+		loadXML(loadFile(filename)) # it's safe here to call loadXML in constructor as "self" is already a ruby-object
 		addHandler(getChild("ok"),:sigClick,:eventOk)
 		if getChild("cancel")
 			addHandler(getChild("cancel"),:sigClick,:eventCancel)
 		end
-		puts "ADD SIGCLOSE"
 		window=getChild("window")
-		puts window
 		addHandler(window,:sigClose,:eventClose)
-		puts "handler added"
 		addSignal("sigClosed")
 		#setModal(true)
 		if fade
@@ -78,20 +81,19 @@ class AntDialog<AGLayout
 	end
 	
 	def eventKeyDown(e)
-		puts "DIALOG:KEY DOWN: #{self}"
 		if super then return true end
-		if e.getKey==SDLK_ESCAPE then	
-			eventClose(e)
-			getMap.unpause
-			return true
-		elsif e.getKey==SDLK_RETURN then
-			eventOk(e)
+		case e.getKey
+			when SDLK_ESCAPE
+				eventClose(e)
+				getMap.pause=false
+				return true
+			when SDLK_RETURN, SDLK_SPACE
+				eventOk(e)
 		end
 		return false
 	end
 	def eventClose(e)
 		close
-		puts "antdialog::eventClose"
 		sigClosed(AGEvent.new(self,"sigClosed"))
 		setNormalVolumeWave
 		return true
@@ -101,7 +103,7 @@ end
 class AntStoryTalk<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/storytalk.xml",false)
-		getMap().pause()
+		getMap().pause=true
 		addHandler(getChild("window"),:sigClose,:eventOk)
 		addSignal("sigStoryFinished")
 	end
@@ -140,7 +142,7 @@ class AntStoryTalk<AntDialog
 		if not updateText
 			sigStoryFinished(e)
 			puts "pCaller:"+e.getCaller.getName
-			getMap().unpause()
+			getMap().pause=false
 			close
 			#toAGWindow(getChild("window")).close
 			super
@@ -175,11 +177,11 @@ class AntQuitDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/quitquery.xml")
 		setName("QuitDialog")
-		getMap.pause
+		getMap.pause=true
 	end
 	def eventClose(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 		return true
 	end
 	def eventOk(e)
@@ -195,7 +197,7 @@ class AntOptionsDialog<AntDialog
 		addHandler(getChild("save"),:sigClick,:eventSave)
 		addHandler(getChild("load"),:sigClick,:eventLoad)
 		addHandler(getChild("video"),:sigClick,:eventVideo)
-		getMap.pause
+		getMap.pause=true
 	end
 	def eventVideo
 		$app.videoOptions
@@ -214,7 +216,7 @@ class AntOptionsDialog<AntDialog
 	end
 	def eventClose(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 		return true
 	end
 end
@@ -230,7 +232,7 @@ class AntSaveDialog<AntDialog
 			filename=filename+".antlvl"
 		end
 		getMap.saveMap("savegames/"+filename)
-		getMap.unpause
+		getMap.pause=false
 		close
 		setNormalVolumeWave
 		return true
@@ -253,13 +255,13 @@ class AntSaveCampaignDialog<AntDialog
 		end
 		$campaign.save("savegames/"+filename)
 		#getMap.saveMap("savegames/"+filename)
-		getMap.unpause
+		getMap.pause=false
 		close
 		return true
 	end
 	def eventClose(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 		return true
 	end
 end
@@ -284,13 +286,13 @@ class AntLoadDialog<AntDialog
 			getMap.loadMap("savegames/"+file)
 			GC.start
 		end
-		getMap.unpause
+		getMap.pause=false
 		close
 		return true
 	end
 	def eventClose(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 		return true
 	end
 end
@@ -305,10 +307,10 @@ class AntVideoOptionsDialog<AntDialog
 		addHandler(getChild("1024"),:sigClick,:event1024)
 		addHandler(getChild("1280"),:sigClick,:event1280)
 		addHandler(getChild("1400"),:sigClick,:event1400)
-		getMap.pause
+		getMap.pause=true
 	end
 	def eventOk(e)
-		getMap.unpause
+		getMap.pause=false
 		close
 		return true
 	end
@@ -363,12 +365,12 @@ class AntPauseDialog<AntDialog
 		super(parent,"data/gui/layout/pause.xml")
 		setName("PauseDialog")
 		if getMap
-			getMap.pause
+			getMap.pause=true
 		end
 	end
 	def eventOk(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 		#hide
 		return true
 	end
@@ -385,18 +387,18 @@ class AntQueryDialog<AntDialog
 
 		setName("PauseDialog")
 		if getMap
-			getMap.pause
+			getMap.pause=true
 		end
 	end
 	def eventCancel(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 		return true
 	end
 
 	def eventOk(e)
 		super
-		getMap.unpause
+		getMap.pause=false
 
 		@block.call
 		return true

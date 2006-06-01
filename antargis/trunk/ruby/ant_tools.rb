@@ -58,3 +58,9 @@ class Set<Array
 		uniq!
 	end
 end
+
+def getDescendantsOfClass(p)
+	c=[]
+	ObjectSpace.each_object(Class){|a|c.push(a) if a.ancestors.member?(p)}
+	return c
+end

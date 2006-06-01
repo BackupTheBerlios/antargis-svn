@@ -230,10 +230,10 @@ class AntGameApp <AntRubyView
 		return true
 	end
 	def eventPause(e)
-		if not getMap().paused then
+		if not getMap().pause then
 			@layout.addChild(AntPauseDialog.new(@layout))
 		else
-			getMap().unpause
+			getMap.pause=false
 		end
 		return true
 	end

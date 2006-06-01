@@ -21,21 +21,18 @@
 
 #!/usr/bin/ruby
 
-# try to implement alle entites in ruby
-# WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
-# could be that it has something to do with Init_Stack ???
-
 require 'ant_local.rb'
 
+# this variables are used for playing sounds, which should be done with AntRubyEntity::playSound
 INNER_VOL_SIZE=9 # size of circle around camera-middle with max volume
 OUTER_VOL_SIZE=25 # size circle around camera describing volume descend
 
+# AntRubyEntity slighty enhances the functionality already provided by AntEntity.
+# This should be used for all the entity-types.
 class AntRubyEntity<AntEntity
 	attr_accessor :birthday
 	def initialize(p)
 		super(p)
-		$map.registerEntity(self)
-		mRUBY=self
 		@xmlProps={}
 		@birthday=getMap.getTime
 		@mode=""
@@ -73,6 +70,8 @@ class AntRubyEntity<AntEntity
 	def getDescription
 		"This an entity - no more info here."
 	end
+
+	# simple comparison operator, so that ents can be distinguished
 	def <=>(e)
 		to_s<=>e.to_s
 	end
@@ -82,15 +81,11 @@ class AntRubyEntity<AntEntity
 	def getPlayer
 		nil
 	end
-	def newFightJob(p,target)
-		@fightTarget=target
-		super
-	end
 	def fightTarget
 		@fightTarget
 	end
 	def getRand
-		# FIXME - implement in c++ (net-code)
+		# FIXME - implement me (network code)
 		rand
 	end
 
@@ -151,11 +146,15 @@ class AntRubyEntity<AntEntity
 		end
 	end
 
+	def newFightJob(p,target)
+		@fightTarget=target
+		super
+		doEvent(:eventNewFightJob)
+	end
 	def newRestJob(t)
 		super
 		doEvent(:eventNewRestJob)
 	end
-
 	def eventNoJob
 		super
 		doEvent(:eventNoJob)
@@ -166,7 +165,7 @@ class AntRubyEntity<AntEntity
 	end
 end
 
-
+# here comes a list of all the different entity-types BoA currently uses:
 require 'ant_hero.rb'
 require 'ant_sheep.rb'
 require 'ant_man.rb'

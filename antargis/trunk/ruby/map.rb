@@ -25,12 +25,9 @@ require 'ant_player.rb'
 require 'ant_trigger.rb'
 require 'level.rb'
 
-def getDescendantsOfClass(p)
-	c=[]
-	ObjectSpace.each_object(Class){|a|c.push(a) if a.ancestors.member?(p)}
-	return c
-end
-
+# This class prodives support for defining target-positions in a level-file.
+# These positions can be used for scripting. This way code and level-data is
+# devided (MVC)
 class TargetPos
 	attr_reader :pos, :name
 	def loadXML(n)
@@ -47,22 +44,30 @@ class TargetPos
 	end
 end
 
+
+# AntRubyMap is not only the "map", but manages the moving and the actions of all the
+# entities around. Apart from that it contains the Players. So it might be better to call it "World"
 class AntRubyMap<AntMap
+	attr_accessor :pause
+
 	def initialize(pScene,w,h,playerName="Rowen")
 		super(pScene,w,h)
-		@ents={}
+		@pause=false # is game paused
+
+		$systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
+		@curTime=0.0     # curTime holds the current "date" of the world; the age of entities is measures by this
+
 		@playerName=playerName
 		@players=[]
-		#GC.start
-		@lastGC=0
-		$systemTime=0.0
 		@myPlayer=nil
+
 		@triggers=[]
+
 		@heroes=[]
-		@started=false
-		@story={}
+
+		@started=false		# started holds information about the map was already started. this is used for level-scripting
+
 		@targets={}
-		@curTime=0.0
 
 		# gather all entity types and map them to their xmlNames
 		@entTypes=getDescendantsOfClass(AntRubyEntity)
@@ -72,17 +77,103 @@ class AntRubyMap<AntMap
 			xml=xml[0..0].downcase+xml[1..1000]
 			@entTypeMap[xml]=t
 		}
-		@filename="dummy"
+
+		@filename="dummy"  # a dummy filename - used for level scripting
 	end
+
+	############################
+	# event handlers
+	############################
+
+	# some delegators
+	def eventHeroDied(ent)
+		if @script
+			@script.eventHeroDied(ent)
+		end
+		$app.setupHeroDisplay
+	end
+	def eventOwnerChanged(ent)
+		if @script
+			@script.eventOwnerChanged(ent)
+		end
+		$app.setupHeroDisplay
+	end
+	def eventHLJobFinished(hero,job)
+		if @script
+			@script.eventHLJobFinished(hero,job)
+		end
+	end
+	def eventHLDismissed(hero)
+		if @script
+			@script.eventDismissed(hero)
+		end
+	end
+
+	################################
+	# getting information
+	################################
+
 	def getTarget(name)
 		@targets[name]
 	end
 	def getPlayer
 		@myPlayer
 	end
-	def loadEntity(node)
-		#puts "NODE: #{node.getName}"
+	def getTime
+		@curTime
+	end
 
+	def getHeroes()
+		ents=getAllEntitiesV
+		ret=[]
+		ents.each{|eptr|
+			ent=eptr.get
+			#dputs ent
+			if ent.class==AntHero
+				ret.push(ent)
+			end
+		}
+		return ret
+	end
+
+	# returns AGSurfaces of the given hero for portraits
+	def getPortrait(hero)
+		f="data/gui/portraits/#{hero}.png"
+		if fileExists(f)
+			return AGSurface.load(f)
+		else
+			return AGSurface.load("data/gui/portraits/none.png")
+		end
+	end
+
+	def getOwnHeroes()
+		ents=getAllEntitiesV
+		ret=[]
+		ents.each{|eptr|
+			ent=eptr.get
+			#dputs ent
+			if ent.class==AntHero
+				p=ent.getPlayer
+				#dputs "player:",p,p.class
+				if p
+					if p.class==AntHumanPlayer
+						ret.push(ent)
+					end
+				end
+			end
+		}
+		return ret
+	end
+
+	def getNext(ent,type)
+		super(ent,type)
+	end
+
+	################################
+	# loading & saving
+	################################
+	
+	def loadEntity(node)
 		nodeName=node.getName
 		nodeName.gsub!("New","")  # remove New out of old antNew.. Names
 
@@ -120,110 +211,7 @@ class AntRubyMap<AntMap
 		if node.getName=="trigger" then
 			@triggers.push(Trigger.new(node))
 		end
-		if node.getName=="story" then
-			loadStory(node)
-		end
 		return e
-	end
-	
-	def loadStory(node)
-		node.getChildren.each{|n|
-			name=n.getName
-			a=[]
-			n.getChildren.each{|n2|
-				if n2.getName=="window"
-					text=""
-					n2.getChildren("text").each{|n3|
-						text+=n3.getText
-					}
-					a.push(text)
-				end
-			}
-			@story[name]=a
-		}
-	end
-
-	def loadMap(filename)
-		@filename=filename
-		super
-	end
-	
-	def removeEntity(e)
-		@ents.delete(e.getID)
-		super(e)
-	end
-	def clear
-		@ents.clear
-		super()
-	end
- 	def getById(ent)
- 		if ent
- 			return @ents[ent.getID]
- 		end
- 	end
-	def pause
-		@paused=true
-	end
-	def unpause
-		@paused=false
-	end
-	def paused
-		@paused
-	end
-	def getByName(name)
-		if name.class!=String
-			dputs name
-		end
-		super(name)
-	end
-	def endChange
-	end
-	
-	def checkTriggers
-		@heroes.each{|h|
-			@triggers.each{|t|
-				t.check(h)
-			}
-		}
-	end
-	def trigger(hero,t)
-		done=false
-		if @script
-			if @script.eventTrigger(hero,t)
-				done=true
-			end
-		end
-		if not done
-			@players.each{|p|p.trigger(hero,t)}
-		end
-	end
-	def getTime
-		@curTime
-	end
-	
-	def move(time)
-		if @paused
-			return
-		end
-		#time*=2 # increase speed
-		@curTime+=time
-		$systemTime+=time
-		super(time)
-		
-		checkTriggers
-		
-		@players.each{|player|
-			player.move(time)
-		}
-		
-		ambientSound(time)
-		if not @started
-		#	playStory("start")
-			@started=true
-			if @script
-				@script.eventLevelStarted
-			end
-		end
 	end
 	
 	def loadXML(n)
@@ -231,13 +219,15 @@ class AntRubyMap<AntMap
 		@players.each{|p|p.move(0)}
 		
 		if n.get("scriptfile").length>0 and n.get("scriptclass").length>0
+	
+			# FIXME: add some safetly level here!!!
+
 			@scriptFile=n.get("scriptfile")
 			@scriptClass=n.get("scriptclass")
 			c=loadFile(n.get("scriptfile"))
 			levelName=getLevelName
 			c="module #{levelName}\n"+c+"\nend\n"
-			puts c
-			puts eval(c)
+			eval(c)
 			cl="#{levelName}::"+n.get("scriptclass")
 			@script=eval(cl).new
 		end
@@ -252,10 +242,11 @@ class AntRubyMap<AntMap
 		end
 	end
 
-	def getLevelName
-		"L_"+@filename.gsub(".rb","").gsub(".","_").gsub("/","_")
+	def loadMap(filename)
+		@filename=filename
+		super
 	end
-	
+
 	def saveXML(n)
 		super(n)
 		@players.each{|player|
@@ -281,83 +272,14 @@ class AntRubyMap<AntMap
 			@script.saveXML(c)
 		end
 	end
-	
-	def getNext(ent,type)
-		super(ent,type)
-	end
-	
-	def registerEntity(e)
-		if not @ents.member?(e.getID)
-			@ents[e.getID]=e
-		end
-	end
-	
-	def setLight(e)
-	end
-	
-	def getHeroes()
-		ents=getAllEntitiesV
-		ret=[]
-		ents.each{|eptr|
-			ent=eptr.get
-			#dputs ent
-			if ent.class==AntHero
-				ret.push(ent)
-			end
-		}
-		return ret
-	end
-	
-	def getOwnHeroes()
-		ents=getAllEntitiesV
-		ret=[]
-		ents.each{|eptr|
-			ent=eptr.get
-			#dputs ent
-			if ent.class==AntHero
-				p=ent.getPlayer
-				#dputs "player:",p,p.class
-				if p
-					if p.class==AntHumanPlayer
-						ret.push(ent)
-					end
-				end
-			end
-		}
-		return ret
-	end
 
-	def eventHeroDied(ent)
-		if @script
-			@script.eventHeroDied(ent)
-		end
-		$app.setupHeroDisplay
-	end
-	def eventOwnerChanged(ent)
-		if @script
-			@script.eventOwnerChanged(ent)
-		end
-		$app.setupHeroDisplay
-	end
-	def eventHLJobFinished(hero,job)
-		if @script
-			@script.eventHLJobFinished(hero,job)
-		end
-	end
-	def eventHLDismissed(hero)
-		if @script
-			@script.eventDismissed(hero)
-		end
-	end
-
-	def getPortrait(hero)
-		f="data/gui/portraits/#{hero}.png"
-		if fileExists(f)
-			return AGSurface.load(f)
-		else
-			return AGSurface.load("data/gui/portraits/none.png")
-		end
-	end
+	######################################
+	# modify the world
+	######################################
+	
+	# make a new player at pre-defined spawn-positions
+	# used positions shall not be used again, until player leaves
+	# returns a pair of player and hero objects.
 	def newPlayer(name)
 		# FIXME:get a free spawn point
 		#
@@ -375,6 +297,73 @@ class AntRubyMap<AntMap
 		hero.setPos(pos)
 		insertEntity(hero)
 		return player,hero
+	end
+
+	
+	######################################
+	# modify the world
+	######################################
+
+	def getByName(name)
+		if name.class!=String
+			dputs name
+		end
+		super(name)
+	end
+	def endChange
+	end
+
+	# this function will be used for displaying lights and including "fog of war"
+	def setLight(e)
+	end
+
+	def move(time)
+		if @pause
+			return
+		end
+		#time*=2 # increase speed
+		@curTime+=time
+		$systemTime+=time
+		super(time)
+		
+		checkTriggers
+		
+		@players.each{|player|
+			player.move(time)
+		}
+		
+		ambientSound(time)
+		if not @started
+			@started=true
+			if @script
+				@script.eventLevelStarted
+			end
+		end
+	end
+
+	def trigger(hero,t)
+		done=false
+		if @script
+			if @script.eventTrigger(hero,t)
+				done=true
+			end
+		end
+		if not done
+			@players.each{|p|p.trigger(hero,t)}
+		end
+	end
+
+private	
+	def checkTriggers
+		@heroes.each{|h|
+			@triggers.each{|t|
+				t.check(h)
+			}
+		}
+	end
+
+	def getLevelName
+		"L_"+@filename.gsub(".rb","").gsub(".","_").gsub("/","_")
 	end
 end
 
