@@ -21,14 +21,12 @@
 
 #!/usr/bin/ruby
 
-#$debug=true
 
-$programDir=Dir.pwd+"/ruby"
 # add programdir to path
+$programDir=Dir.pwd+"/ruby"
 $:.push($programDir)
 
 require 'antargislib.rb'
-
 require 'dialogs.rb'
 require 'ents.rb'
 require 'map.rb'
@@ -36,79 +34,87 @@ require 'view.rb'
 require 'game_result.rb'
 require 'storyflow.rb'
 
+#
+# AntGameApp is the central class, that controls event handling of all the user interaction
+# in-game
+#
 class AntGameApp <AntRubyView
 	attr_accessor :result
 	attr_reader :hero
 
 	include AGHandler
+
 	def initialize(savegameText,w,h,loadscreen=nil,connection=nil)
 		super(w,h)
+
+		# the result of the level - won or lost or canceled
 		@result=GameResult.new
-		@connection=connection
-		$app=self	
+		$app=self
+	
+		# display loading screen
 		if loadscreen
 			loadscreen.setValue(0.1)
 			loadscreen.tick
 		end
+
 		playerName=nil
+
+		# init network mode
+		@connection=connection
 		if connection
+			# FIXME: check, if this is a server - then don't assign playerName
 			playerName=connection.getName
 		end
 
+		# init game-engine's map
 		@map=AntRubyMap.new(getScene,32,32,playerName) # some small dummy size - gets overriden by loadMap anyway
 		if loadscreen
 			loadscreen.setValue(0.4)
 			loadscreen.tick
 		end
 		$map=@map
-		puts "MAPPPPPPPPPPPPPP:#{@map}"
 
-		@finish="quit"
-
-		#GC.disable
+		# load GUI layout
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
 
+		# init pointers to different displays
+		# statusBar (FPS display)
 		@statusBar=@layout.getChild("statusBar")
-
-		c=@layout.getChild("inventory")
-		puts "inventory:"
-		puts c
-
-		c=@layout.getChild("HeroBar0")
-		puts "HeroBar:",@layout
-		puts c
-
+		@inventory=@layout.getChild("inventory")
+		@buttonpanel=@layout.getChild("antButtonPanel")
+		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@fps=0
 
 		setMainWidget(@layout)
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
 		addHandler(@layout.getChild("pause"),:sigClick,:eventPause)
 		addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
+
 		if loadscreen
 			loadscreen.setValue(0.5)
 			loadscreen.tick
 		end
 		
 		$screen=@layout
-		@miniMap=toMiniMap(@layout.getChild("miniMap"))
+	
 		if @miniMap
+			# connect MiniMap with Map for displaying terrain and entities
 			@miniMap.setMap(getMap)
+			# connect MiniMap with Scene for displaying frustrum
 			@miniMap.setScene(getScene)
 		end
-		if loadscreen
-			loadscreen.setValue(0.7)
-			loadscreen.tick
-		end
+
 		if loadscreen
 			loadscreen.setValue(0.8)
-			loadscreen.tick
+			loadscreen.tick()
 		end
 		
 		if savegameText && savegameText.length>0
 			# load a level
 			getMap().loadMapFromMemory(savegameText)
 		end	
+
 		if loadscreen
 			loadscreen.setValue(0.95)
 			loadscreen.tick
@@ -116,28 +122,31 @@ class AntGameApp <AntRubyView
 
 
 		# inventory and buttonpanel signals
-		@inventory=@layout.getChild("inventory")
-		addHandler(@inventory,:sigJobChanged,:eventInvJob)
-		@buttonpanel=@layout.getChild("antButtonPanel")
+		addHandler(@inventory,:sigJobChanged,:eventInventoryJob)
 		addHandler(@buttonpanel,:sigJobChanged,:eventHeroJob)
 
 		setupHeroDisplay(true)
 
+		# infobox is used for display a text "Your hero 'xy' suffers"
 		@infobox=nil
 
+		# frame counting
+		@frameCount=0
+		@elapsTime=0
 	end
 
+	####################################
+	# EVENT HANDLERS
+	####################################
+
+	# this handler is for the buttonpanel on the top
+	# the actions are direct ones, like rest,dimiss and so, which don't need an object to use (like fighting,taking,...)
 	def eventHeroJob(e)
-		puts "eventHeroJob"
-		puts @buttonpanel.job
 		case @buttonpanel.job
 			when "doDismiss"
+				# opens a query dialog "do really want to do this?", that is given a block, that's executed on confirmation
 				@layout.addChild(AntQueryDialog.new(@layout,nil) {puts @hero;@hero.newHLDismissJob})
-				puts @hero
-				#@hero.newHLDismissJob
 			when "doRest"
-				#messageBox("restTitle","rest text",0) {|result|puts "RESULT:#{result}"}
-				#getMap.pause
 				if @hero
 					@hero.newHLRestJob(10)
 				end
@@ -145,22 +154,22 @@ class AntGameApp <AntRubyView
 		return true
 	end
 
-	def eventInvJob(e)
-		puts "INVJOBBBBBBBBBBBBBBBBB"
-		if @target==nil
+	# react to inventory-based jobs - like taking, recruiting
+
+	def eventInventoryJob(e)
+		if @target.nil? some more overview as
 			puts "NO TARGET SELECTED"
-			return true
-		end
-		puts @inventory.job
-		case @inventory.job
-			when "doRecruit"
-				@hero.newHLRecruitJob(@target)
-			when "doTakeFood"
-				@hero.newHLTakeFoodJob(@target)
-			when "doTakeWeapons"
-				@hero.newHLTakeWeaponJob(@target)
-			when "doConstruct"
-				@hero.newHLConstructJob(@target)
+		else
+			case @inventory.job
+				when "doRecruit"
+					@hero.newHLRecruitJob(@target)
+				when "doTakeFood"
+					@hero.newHLTakeFoodJob(@target)
+				when "doTakeWeapons"
+					@hero.newHLTakeWeaponJob(@target)
+				when "doConstruct"
+					@hero.newHLConstructJob(@target)
+			end
 		end
 		return true
 	end
@@ -180,81 +189,42 @@ class AntGameApp <AntRubyView
 		return super(e)
 	end
 	
-	def setResult(r)
-		@result=r
-	end
-	
-	def initDebug
-		@debug=AGLayout.new(@layout)
-		@debug.loadXML(loadFile("debug.xml"))
-		@layout.addChild(@debug)
-		addHandler(@debug.getChild("load"),:sigClick,:load)
-	end
-
-	def panelVisible
-		puts @layout.getChild("SideBar").visible
-		@layout.getChild("SideBar").visible
-	end
-	def showPanel
-		puts "SHOWPANEL"
-		sideBar=@layout.getChild("SideBar")
-		sideBar.show
-		@controls=true
-		getScene.getCameraObject.setWidth((getScreen.getWidth-sideBar.width).to_i)
-	end
-	def hidePanel
-		puts "HIDEPANEL"
-		@layout.getChild("SideBar").hide
-		@controls=false
-		getScene.getCameraObject.setWidth(getScreen.getWidth)
-	end
-
-
-	def storyTalk(flow)
-		hidePanel
-		@story=AntStoryTalk.new(@layout)
-		@layout.addChild(@story)
-		@story.setFlow(flow)
-		addHandler(@story,:sigStoryFinished,:storyTalkFinished)
-	end
-
-	def storyTalkFinished
+	def eventStoryTalkFinished
 		showPanel
 		getMap.trigger(nil,Trigger.new("storyFinished"))
 	end
 
 	def eventFrame(time)
-		#puts "eventFrame"
 		super(time)
-		#puts "eventFrame2"
-		if @fc==nil then 
-			@fc=0 
-			@elaps=0
-		end
-		#puts "eventFrame3"
-		if @fc>14 then
-			@fps=@fc/@elaps
+
+		# FPS display
+		if @frameCount>14 then
+			@fps=@frameCount / @elapsTime
 			fps=sprintf("%3.0f",@fps)
 			puts "FPS:"+fps
 			@statusBar.setText("FPS:#{fps}")
 			puts "Tris:"+getScene.getTriangles.to_s
-			@fc=0
-			@elaps=0
+			@frameCount=0
+			@elapsTime=0
 			startGC
 		end
-		@fc+=1
-		@elaps+=time
+		@frameCount+=1
+		@elapsTime+=time
+
+
+		# move entities in game-engine
 		getMap().move(time)
+		# advance animations
 		getScene.advance(time)
 		checkHeroEnergy
 
+		# save some CPU-power, if available
 		if @fps>25
 			delay(5)
 		end
 		return true
 	end
 	
-	# signals	
 	def eventQuit(e)
 		@layout.addChild(AntQuitDialog.new(@layout))
 		return true
@@ -271,10 +241,82 @@ class AntGameApp <AntRubyView
 		@layout.addChild(AntOptionsDialog.new(@layout))
 		return true
 	end
-	
-	def enableEdit
-		toEditIsoView(@layout.getChild("mainView")).toggleEdit
+	def eventHeroButton(e)
+		c=e.getCaller.getName
+		num=c[4..4]
+		name=@layout.getChild("HeroName#{num}").getText
+		ent=getMap.getByName(name)
+		selectHero(ent)
+		if ent==@inspect
+			focusHero(ent)
+		end
+		inspectEntity(ent)
+		return true
+
 	end
+
+	def eventAggressionChanged(e)
+		h=getSelectedHero
+		if h
+			h.setAggression($buttonPanel.getAggression)
+		end
+		return true
+	end
+	
+	def eventEntitiesClicked(list,button)
+		# find first entity that's nearest to the camera
+		ent=nil
+		list.each{|node|
+			mesh=node.node
+			if [Mesh,AnimMesh].member?(mesh.class)
+				ent=getMap.getEntity(mesh)
+				break if ent
+			end
+		}
+
+		# if an entity was found - set new target
+		if ent
+			if ent.class==AntHero and ent.getPlayer==getMap.getPlayer
+				#@hero=ent
+				@target=ent
+				inspectEntity(ent)
+			else
+				@target=ent
+				inspectEntity(ent)
+			end
+		end
+
+		if button==1
+			# left button == select
+		elsif button==3
+			# right button == fight or goto
+			if ent==@target
+				if @target.is_a?(AntBoss)
+					if @target.getPlayer!=@hero.getPlayer
+						@hero.newHLFightJob(@target)
+						return
+					end
+				elsif @target.is_a?(AntAnimal)
+					@hero.newHLFightAnimalJob(@target)
+					return
+				end
+				# move near target
+				@hero.newHLMoveJob(0,@target.getPos2D,2)
+			end
+		end
+	end
+
+	def eventMapClicked(pos,button)
+		if @hero and button==3 then
+			# assign hero a move job
+			@hero.newHLMoveJob(0,pos,0)
+		end
+	end
+
+	###############################
+	# simple functions
+	###############################
+	
 	def save
 		if $campaign
 			@layout.addChild(AntSaveCampaignDialog.new(@layout))
@@ -285,12 +327,13 @@ class AntGameApp <AntRubyView
 	def load
 		@layout.addChild(AntLoadDialog.new(@layout))
 	end
-	def finished
-		@finish
-	end
 	def videoOptions
 		@layout.addChild(AntVideoOptionsDialog.new(@layout))
 	end
+
+	###############################################################
+	# Setting up of Hero displays (images, texts and eventHandlers
+	###############################################################
 
 	def setHeroImage(image,num)
 		@layout.getChild("HeroImage#{num}").setTexture(image)
@@ -305,11 +348,8 @@ class AntGameApp <AntRubyView
 	end
 	def setHero(flag,num)
 		name="hero#{num}"
-		puts "NAME:",name
 		c=@layout.getChild(name)
-		puts c
 		c.setEnabled(flag)
-		puts "setHero-ok"
 	end
 	def setupHeroDisplay(first=false)
 		#super
@@ -347,11 +387,11 @@ class AntGameApp <AntRubyView
 		checkHeroEnergy
 	end
 
+	# updates the energy displays of the heroes (if needed)
 	def checkHeroEnergy
 		name=nil
 		getMap.getPlayer.getHeroes.select{|h|
 			if h.class==AntHero
-				#puts h.getEnergy
 				if h.getEnergy<0.3
 					name=h.getName
 				end
@@ -363,6 +403,39 @@ class AntGameApp <AntRubyView
 			@infobox.close
 			@infobox=nil
 		end
+	end
+
+	# sets a new result
+	def setResult(r)
+		@result=r
+	end
+	
+	# returns boolean about the visibility of the panel
+	def panelVisible
+		@layout.getChild("SideBar").visible
+	end
+
+	def showPanel
+		sideBar=@layout.getChild("SideBar")
+		sideBar.show
+		@controls=true
+		# reset Scene's width
+		getScene.getCameraObject.setWidth((getScreen.getWidth-sideBar.width).to_i)
+	end
+	def hidePanel
+		@layout.getChild("SideBar").hide
+		@controls=false
+		# reset Scene's width
+		getScene.getCameraObject.setWidth(getScreen.getWidth)
+	end
+
+
+	def tellStory(flow)
+		hidePanel
+		@story=AntStoryTalk.new(@layout)
+		@layout.addChild(@story)
+		@story.setFlow(flow)
+		addHandler(@story,:sigStoryFinished,:eventStoryTalkFinished)
 	end
 
 	def inspectEntity(e)
@@ -380,28 +453,6 @@ class AntGameApp <AntRubyView
 		$inventory.inspect(e)
 	end
 
-	def eventHeroButton(e)
-		c=e.getCaller.getName
-		num=c[4..4]
-		name=@layout.getChild("HeroName#{num}").getText
-		ent=getMap.getByName(name)
-		selectHero(ent)
-		if ent==@inspect
-			focusHero(ent)
-		end
-		inspectEntity(ent)
-		return true
-
-	end
-
-	def eventAggressionChanged(e)
-		h=getSelectedHero
-		if h
-			h.setAggression($buttonPanel.getAggression)
-		end
-		return true
-	end
-	
 	def getSelectedHero
 		@hero
 	end
@@ -421,63 +472,17 @@ class AntGameApp <AntRubyView
 		# set hero's aggression
 		@buttonpanel.setAggression(@hero.getAggression)
 	end
+
+	# views an information window about the entity ent
 	def viewInformation(ent)
-		win=AntInspectWindow.new(@layout,ent) #.getDescription)
+		win=AntInspectWindow.new(@layout,ent)
 		@layout.addChild(win)
-	end
-	def clickEntities(list,button)
-		puts "clickEntities"
-		puts button
-
-		# find first entity
-		ent=nil
-		list.each{|node|
-			mesh=node.node
-			if [Mesh,AnimMesh].member?(mesh.class)
-				ent=getMap.getEntity(mesh)
-				break if ent
-			end
-		}
-		if ent
-			if ent.class==AntHero and ent.getPlayer==getMap.getPlayer
-				#@hero=ent
-				@target=ent
-				inspectEntity(ent)
-			else
-				@target=ent
-				inspectEntity(ent)
-			end
-		end
-
-		if button==1
-			# left button == select
-		elsif button==3
-			# right button == fight
-			if ent==@target
-				if @target.is_a?(AntBoss)
-					if @target.getPlayer!=@hero.getPlayer
-						@hero.newHLFightJob(@target)
-						return
-					end
-				elsif @target.is_a?(AntAnimal)
-					@hero.newHLFightAnimalJob(@target)
-					return
-				end
-				# move near target
-				@hero.newHLMoveJob(0,@target.getPos2D,2)
-			end
-		end
-	end
-
-	def clickMap(pos,button)
-		puts "CLICKMAP"
-		if @hero and button==3 then
-			@hero.newHLMoveJob(0,pos,0)
-		end
 	end
 
 end
 
+
+# this function is only for starting a level directly (mostly for testing purpose)
 def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 	disableGC
 	app=nil
@@ -489,17 +494,23 @@ def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 	#app.disableGC
 	app.run
 	result=app.result
+	# result all globals
 	app=nil
 	$map=nil
 	$app=nil
 	$screen=nil
 	enableGC
+	# run garbage collector
 	startGC
 	return result
 end
 
-$useMenu||=false
 
+# code for starting a level directly from command-line like this:
+# ./ruby/antargis.rb levels/birth1
+# or
+# ./ruby/antargis.rb savegames/savegame0
+$useMenu||=false
 if true
 	savegame=""
 	ARGV.each{|arg|
@@ -510,19 +521,4 @@ if true
 	if savegame!=""
 		startGame(savegame)	
 	end
-end
-if false
-if not $useMenu and (ENV["_"]=~/antargis.rb/ or ENV["_"]=~/bash/ or ENV["_"]=~/gdb/)
-	savegame="levels/level1.antlvl"
-	ARGV.each{|arg|
-		if arg=~/levels.*/ or arg=~/savegames.*/
-			savegame=arg+".antlvl"
-		end
-	}
-	puts "LOADING:"+savegame
-	startGame(savegame)	
-end
-
-
-
 end

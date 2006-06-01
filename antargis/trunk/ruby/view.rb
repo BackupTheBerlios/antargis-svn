@@ -104,9 +104,9 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		if list.length>0
 			first=list[0]
 			if [TerrainPieceVA,WaterPiece].member?(first.node.class) # == TerrainPieceVA or first.ntoTerrainMesh(first.node)==getMap.getTerrainMesh
-				clickMap(first.pos,button)
+				eventMapClicked(first.pos,button)
 			else
-				clickEntities(list,button)
+				eventEntitiesClicked(list,button)
 			end
 		end
 		return true

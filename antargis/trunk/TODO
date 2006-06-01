@@ -93,6 +93,8 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
+[VH] evtl. use glTexImage3DEXT instead?
+[VH] check for 3d-texture extension GL_EXT_texture3D
 [H] test for vertex-buffer-objects!
 [M] make particle engine more generic and include shader-support
 [L] make shadows work on other platforms too?

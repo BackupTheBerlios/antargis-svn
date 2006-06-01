@@ -1,15 +1,12 @@
 #!/usr/bin/env ruby
 
+# add directories to PATH
 $programDir=Dir.pwd+"/ruby"
-# add programdir to path
 $:.push($programDir)
-
 $serverDir=Dir.pwd+"/server"
-# add programdir to path
 $:.push($serverDir)
 
 require 'antargislib.rb'
-
 require 'server/config.rb'
 require 'socket'
 require 'messages.rb'
@@ -17,6 +14,8 @@ require 'thread.rb'
 require 'md5.rb'
 require 'antargis.rb'
 
+
+# a very simple TCP-client with a recv-thread
 class Client
 	def initialize
 		@port=$PORT.to_i
@@ -34,13 +33,9 @@ class Client
 		:server
 	end
 	def processMessage(m)
-		#puts m
 		if m.class==TimeMessage
 			puts "TIME:#{m.time}"
 		end
-		#if m.class==WelcomeMessage
-		#	puts uncompress(m.level)
-		#end
 		@queue.push(m)
 	end
 	def getMessage
@@ -57,14 +52,11 @@ class Client
 private
 	def runThread
 		while true
-			c=@socket.gets #recv(10000000)
+			c=@socket.gets
 			if c.nil? or c==""
 				break
 			end
-			#puts @instr.class
-			#puts c.class
 			@instr+=c
-			#puts "next try"
 			begin
 				m=AntMarshal.load(@instr)
 				l=AntMarshal.dump(m).length
@@ -116,7 +108,6 @@ class AntClient<Client
 	end
 end
 
-
 #login
 client=AntClient.new("muh","puh")
 
@@ -129,10 +120,10 @@ while true
 	end
 	sleep 0.1
 end
+
+# decompress level-text
 leveltext=uncompress(welcomeMessage.level)
-#puts leveltext
 # start level
 startGame(leveltext,client)
 
-#client.finish
 

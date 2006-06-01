@@ -36,10 +36,10 @@ class CampaignLevel
 		loadscreen.setValue(0)
 		loadscreen.tick
 		begin
-			@app=AntGameApp.new(@current,getMain.width,getMain.height,loadscreen)
+			@app=AntGameApp.new(loadFile(@current),getMain.width,getMain.height,loadscreen)
 			@app.run
 			@result=@app.result
-			@finish=@app.finished
+			#@finish=@app.finished
 			@app=nil
 			getSoundManager.stopAllChannels
 		end
@@ -66,9 +66,9 @@ class CampaignLevel
 		@result
 	end
 
-	def finished
-		@finish
-	end
+# 	def finished
+# 		@finish
+# 	end
 end
 
 class CutSceneDisplay<AGApplication
@@ -157,7 +157,7 @@ class CutSceneDisplay<AGApplication
 end
 
 class CutScene
-	attr_reader :finished
+	#attr_reader :finished
 	def initialize(node)
 		@screens=[]
 		node.getChildren("screen").each{|s|
@@ -175,7 +175,7 @@ class CutScene
 			}
 			@screens.push(screen)
 		}
-		@finished="won"
+		#@finished="won"
 	end
 	def save(n)
 		@screens.each{|s|

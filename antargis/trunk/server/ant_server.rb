@@ -20,12 +20,10 @@
 #
 
 
+# add ruby and server directory to PATH
 $programDir=Dir.pwd+"/ruby"
-# add programdir to path
 $:.push($programDir)
-
 $serverDir=Dir.pwd+"/server"
-# add programdir to path
 $:.push($serverDir)
 
 require 'antargislib.rb'
@@ -35,25 +33,43 @@ require 'ents.rb'
 require 'map.rb'
 
 
+#
+# AntServer is done from scratch, because we don't want any graphics display here.
+# it contains:
+#   - a Map-object (the game-world)
+#   - a simple gui for controlling the world:
+#     - watching the chat
+#     - kicking players
+#     - quitting
+# FIXME:
+#  - provide support for no display whatsoever (server with X)
+
 class AntServer<AGApplication
 	def initialize
 		super
+		# init GUI
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/server.xml"))
 		setMainWidget(@layout)
 
+		# add virtual Scene 
+		# FIXME: this should be discarded)
 		@scene=Scene.new(128,128)
+		# add Map
 		@map=AntRubyMap.new(@scene,128,128)
 		$map=@map
+		# load some map - currently a default one
 		@map.loadMap("levels/multiplayer/multimap1.antlvl")
 
+		# generate some login-table and insert some users
 		table=SimpleLoginTable.new
 		table.addPlaintext("muh","puh")
+		# now start the server-object
 		@server=LoginServer.new(table,self)
 		@queue=Queue.new
 	end
 	def eventFrame(t)
-		delay(100)
+		delay(50) # server should run at relatively low FPS=20 - this should be sufficient and saves CPU power
 		@map.move(t)
 
 		# do sync-calls
@@ -63,40 +79,36 @@ class AntServer<AGApplication
 		end
 
 	end
-	def makeNewHeroMessage(player,hero)
-		NewPlayerMessage.new(player.getName,hero.getPos2D)
-	end
-	def makeWelcomeMessage(name,c)
-		puts "makeW"
+	def eventNoPlayer(name,connection)
 		player,hero=@map.newPlayer(name)
 		
-		h=makeNewHeroMessage(player,hero)
-		@server.sendToAllBut(h,c)
+		h=sendNewHeroMessages(player,hero,connection)
+		@server.sendToAllBut(h,connection)
 
-		d=Document.new
-		d.root.setName("antargisLevel")
-		@map.saveXML(d.root)
-		puts "toxml"
-		c=d.toString
-		File.open("test.level","w").puts c
-		#c="kasjdksdf skjsh skjsd sddsf  sdfkj sdfksd\nsdkjhdskjfh"
-		m=WelcomeMessage.new(compress(c))
-		puts "ok"
-		return m
+		# make a savegame-text and send it to the new player
+		doc=Document.new
+		doc.root.setName("antargisLevel")
+		@map.saveXML(doc.root)
+		m=WelcomeMessage.new(compress(doc.toString))
+		c.sendMessage(m)
 	end
+
+	private
+	# this function executes any blocks that were queued in other threads in the main-thread
 	def syncCall(&block)
-		#puts s
-		puts "SYNC CALL"
 		@queue.push(block)
-		puts "ok"
+	end
+	def sendNewHeroMessages(player,hero,connection)
+		@server.sendToAllBut(NewPlayerMessage.new(player.getName,hero.getPos2D),connection)
 	end
 end
 
 
+# start some dummy server
 def startServer
 	app=AntServer.new
-	#app.disableGC
 	app.run
 end
 
 startServer
+

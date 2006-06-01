@@ -4,6 +4,13 @@ require 'basicserver.rb'
 require 'messages.rb'
 require 'md5.rb'
 
+#
+# This classes implement a very simple login-process (problems with man-in-the-middle??)
+# 1) On a new connection, the server sends a challenge-seed to the client
+# 2) the client computes hash(seed+hash(username+pw)) ands sends this with the username
+# 3) server has stored username and hash(username+pw) and can this way check if everything's ok
+
+
 class SimpleLoginTable
 	def initialize
 		@logins={}
@@ -20,11 +27,6 @@ class SimpleLoginTable
 	end
 end
 
-
-def checkLogin(m)
-	m.name=="puh" && m.pw==myhash("puhmuh")
-end
-
 class LoginServer<Server
 	def initialize(loginTable,app)
 		super()
@@ -36,24 +38,16 @@ class LoginServer<Server
 		super
 		puts "new connection"
 		# do nothing
-		puts c
 		seed=myhash(rand.to_s)
 		@challenges[c]=seed
 		cm=ChallengeMessage.new(seed)
 		c.sendMessage(cm)
-		puts "ok conn"
 	end
 	def processMessage(c,m)
 		case m
 			when LoginMessage
 				if @loginTable.check(m.name,m.pw,@challenges[c])
-					puts "LOGIN OK"
-					puts "muh"
-					puts @app
-					@app.syncCall { puts "SYNC" ; m=@app.makeWelcomeMessage(m.name,c) ; c.sendMessage(m)}
-					
-					#puts m
-					#puts "savegame sent"
+					@app.syncCall { eventNewPlayer }
 				else
 					puts "LOGIN WRONG"
 					c.sendMessage(ErrorMessage.new("Wrong Login"))
@@ -61,20 +55,9 @@ class LoginServer<Server
 				end
 				return true
 			else
-				puts "elsse?????????"
+				puts "Unknown message type."
 		end
 		return false
-	end
-	def makeWelcomeMessage
-		puts "SHIT"
-		puts "makeW"
-		d=Document.new
-		d.root.setName("antargisLevel")
-		@map.saveXML(d)
-		puts "toxml"
-		m=WelcomeMessage.new("") #d.toString)
-		puts "ok"
-		return m
 	end
 end
 

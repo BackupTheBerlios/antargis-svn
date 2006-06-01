@@ -37,7 +37,7 @@ class Level
 		$app.tryQuit
 	end
 	def tellStory(flow)
-		$app.storyTalk(flow)
+		$app.tellStory(flow)
 		@story=flow
 	end
 

@@ -4,8 +4,11 @@ require 'config.rb'
 require 'thread.rb'
 require 'socket'
 
-# threaded server
+#
+# These classes provide a threaded TCP-Server that handles messages
+#
 
+# A connection is an object handling the connection of a server to the client
 class Connection
 	attr_accessor :name
 	def initialize(session,server)
@@ -13,12 +16,30 @@ class Connection
 		@server=server
 		@instr=""
 	end
+
+	# this should be run by the server-object only
 	def runConnection
-		puts "new Client.."
 		@server.addConnection(self)
 		run
-		puts "lost Connection..."
 		@server.removeConnection(self)
+	end
+
+	# send some message to the client
+	def sendMessage(m)
+		x=AntMarshal.dump(m)
+		send(x)
+	end
+	# identifies the other side of the connection
+	def type
+		:client
+	end
+
+private
+	def send(x)
+		begin
+			@session.puts(x)
+		rescue
+		end
 	end
 	def run
 		while @session
@@ -41,28 +62,10 @@ class Connection
 			end
 		end
 	end
-
-	def sendMessage(m)
-		#puts "sent message #{m}"
-		x=AntMarshal.dump(m)
-		#puts "DUMP:#{x}"
-		send(x)
-		puts "ok - sent"
-	end
-
-	def send(x)
-		begin
-			@session.puts(x)
-			#@session.flush
-			#puts "message sent '#{x}'!"
-		rescue
-		end
-	end
-	def type
-		:client
-	end
 end
 
+
+# Server opens an TCP-port on $PORT (defined in config.rb) on the localhost 
 class Server
 	def initialize
 		@port = $PORT.to_i
@@ -71,6 +74,8 @@ class Server
 		@queue=Queue.new
 		run
 	end
+
+	# clean shutdown
 	def join
 		@mthread.join
 	end
@@ -84,7 +89,6 @@ class Server
 		@connections.each{|c|
 			c.sendMessage(m)
 		}
-		#send(Marshal.dump(m))
 	end
 
 	def sendToAllBut(m,but)
@@ -95,6 +99,7 @@ class Server
 		}
 	end
 
+	# deprecated function - see processMessage
 	def recvMessage
 		begin
 			r=@queue.pop
@@ -103,14 +108,23 @@ class Server
 		r
 	end
 
+
+	# event-handlers - can be overridden
 	def eventNewConnection(c)
 	end
 	def eventLostConnection(c)
 	end
+
+
+	# processMessage is run in the connection's thread - so beware not to call any BoA thingies
+	# FIME: call this via syncCall - this way we've moved all thread-dependent things to this class and don't have to care about this
+	#       anywhere else. Have a look at ant_server how to do this. Then we can discard these other queues, too.
 	def processMessage(c,m)
 	end
 
 
+	# semi-private functions - should be called by Connection-objects only
+	# add new connection
 	def addConnection(c)
 		@connections.push(c)
 		eventNewConnection(c)
