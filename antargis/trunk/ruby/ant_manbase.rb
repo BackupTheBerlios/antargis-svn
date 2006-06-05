@@ -74,7 +74,6 @@ module AntManBase
 	end
 
 	def eventDie
-		puts "eventDie "+self.to_s
 		simDeath
 		#eventDefeated
 		newRestJob(20)

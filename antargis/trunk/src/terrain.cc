@@ -161,13 +161,25 @@ int getTerrainDownScale()
   return s;
 }
 
+int getTerrainDownScaleZ()
+{
+  int s=1;
+
+  if(getConfig()->get("terrainDownScaleZExp")!="")
+    s=toInt(getConfig()->get("terrainDownScaleZExp"));
+  
+  getConfig()->set("terrainDownScaleZExp",toString(s));
+
+  return s;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // TerrainMesh
 ////////////////////////////////////////////////////////////////////////////
 
 
 Terrain::Terrain(Scene *pScene,HeightMap &map):
-  m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png",getTerrainDownScale())),
+  m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png",getTerrainDownScale(),getTerrainDownScaleZ())),
   mGrass(getTextureCache()->get("data/textures/terrain/grass4.png")),
   mMap(&map),
   mScene(pScene)

@@ -432,6 +432,7 @@ class AntEditPropDialog<AntDialog
 	end
 end
 
+# draw a simple (loading) bar
 class AGBar<AGWidget
 	def initialize(p,r,c,bc)
 		super(p,r)
@@ -454,13 +455,12 @@ class AGBar<AGWidget
 	end
 	def draw(p)
 		p.drawGradient(getRect.origin,@b0,@b1,@b2,@b3)
-		#p.fillRect(AGRect.new(0,0,width*@value,height),@color)
 		p.drawGradient(AGRect.new(0,0,width*@value,height),@c0,@c1,@c2,@c3)
-
 	end
 end
 
 
+# the creator class for a AGBar
 class AGBarCreator<AGLayoutCreator
 	def initialize
 		super("bar")
@@ -472,9 +472,10 @@ class AGBarCreator<AGLayoutCreator
 		return w
 	end
 end
-$agBarCreator=AGBarCreator.new
+$agBarCreator=AGBarCreator.new  # register creator class
 
 
+# a widget for displaying the "loading..." screen
 class LoadScreen<AGLayout
 	def initialize(p)
 		super(p)
@@ -482,6 +483,15 @@ class LoadScreen<AGLayout
 	end
 end
 
+# this is an application object for showing the screen with loading... bar
+# it's typical use goes like this:
+# loadscreen=LoadApp.new
+# loadscreen.setvalue(somevalue)
+# loadscreen.tick
+# -- do some stuff here --
+# loadscreen.setvalue(somevalue)
+# loadscreen.tick
+# and so on
 class LoadApp<AGApplication
 	def initialize
 		super
@@ -498,3 +508,4 @@ class LoadApp<AGApplication
 end
 
 require 'ant_messagebox.rb'
+

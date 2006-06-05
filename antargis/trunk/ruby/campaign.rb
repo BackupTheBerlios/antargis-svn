@@ -1,6 +1,15 @@
 #!/usr/bin/env ruby
 
-#require 'ruby/antargislib.rb'
+# Campaigning
+#################################
+# Campaigns consist of two kinds of parts:
+# - a level 
+# - a cutscene
+# These can be combined in random fashion.
+# They're loaded from an xml-file (look at data/campaigns/* for examples)
+# 
+#
+#
 
 def getCampaignFiles
 	Dir[File.join("data","campaigns","*.xml")]
@@ -31,6 +40,10 @@ class CampaignLevel
 			getMap.saveMap(sname)
 		end
 	end
+
+
+	# this function is very similar to startGame in antargis.rb
+	# FIXME: join them
 	def play
 		loadscreen=LoadApp.new
 		loadscreen.setValue(0)
@@ -39,7 +52,6 @@ class CampaignLevel
 			@app=AntGameApp.new(loadFile(@current),getMain.width,getMain.height,loadscreen)
 			@app.run
 			@result=@app.result
-			#@finish=@app.finished
 			@app=nil
 			getSoundManager.stopAllChannels
 		end
@@ -65,14 +77,9 @@ class CampaignLevel
 	def result
 		@result
 	end
-
-# 	def finished
-# 		@finish
-# 	end
 end
 
 class CutSceneDisplay<AGApplication
-	#include AGHandler
 	def initialize(image,text)
 		super()
 		@layout=AGLayout.new(nil)
@@ -96,12 +103,6 @@ class CutSceneDisplay<AGApplication
 	end
 	def eventKeyDown(e)
 		eventQuit
-# 		if @text==@ctext
-# 			tryQuit
-# 		else
-# 			@ctext=@text
-# 			setTextForReal(@ctext)
-# 		end
 		return super
 	end
 	

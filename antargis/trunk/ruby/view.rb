@@ -24,9 +24,9 @@
 require 'ant_inventory.rb'
 require 'ant_energy.rb'
 
-class AntRubyView <GLApp #AGWidget #CompleteIsoView
-	def initialize(w,h) #p,rect,pos,map)
-		super(w,h) #p,rect,pos,map)
+class AntRubyView <GLApp
+	def initialize(w,h)
+		super(w,h)
 		$antView=self
 		@mousepos=AGVector2.new(200,200)
 		@controls=true
@@ -38,7 +38,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		super
 	end
 	def updateNamePositions
-		#return
 		heroes=$map.getHeroes
 		heroes.each{|hero|
 			@names.each{|name|
@@ -57,7 +56,6 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 
 	def focusHero(hero)
 		setCamera(hero.getPos2D)
-		#getScene.setCamera(clipCamera(AGVector4.new(p.x,p.y,0)))
 	end
 	
 	def setupNames
@@ -103,7 +101,7 @@ class AntRubyView <GLApp #AGWidget #CompleteIsoView
 		end
 		if list.length>0
 			first=list[0]
-			if [TerrainPieceVA,WaterPiece].member?(first.node.class) # == TerrainPieceVA or first.ntoTerrainMesh(first.node)==getMap.getTerrainMesh
+			if [TerrainPieceVA,WaterPiece].member?(first.node.class)
 				eventMapClicked(first.pos,button)
 			else
 				eventEntitiesClicked(list,button)
@@ -201,8 +199,6 @@ class AntButtonPanel<AGWidget
 		setName("ButtonPanel")
 		$buttonPanel=self
 		clearHandlers
-		#@jobButtons=["doPoint","doMove","doFight","doRecruit","doDismiss","doInvent"]
-		#@jobButtons=["doFight","doInvent","doRest","doDismiss","doDropFood","doDropWeapon"]
 		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon"]
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
 		@inited=false
@@ -218,7 +214,6 @@ class AntButtonPanel<AGWidget
 	end
 	def initHandlers
 		getChild("doAgg0").setChecked(true)
-		#getChild("doRest").setChecked(true)
 		@job="doRest"
 		@jobButtons.each {|b|
 			c=getChild(b)

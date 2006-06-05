@@ -21,14 +21,8 @@
 
 #!/usr/bin/ruby
 
-# try to implement alle entites in ruby
-# WARNING: DON'T MEMBER_VARIABLES AS IT SEEMS TO CRASH RUBY SOMEHOW
-# could be that it has something to do with Init_Stack ???
-
 require 'ant_manbase.rb'
 require 'ant_config.rb'
-
-
 
 def genName
 	nstart=["Ban","Gor","Bal","Da","Arg","Ol","Gar","Hek","Gav"]
@@ -142,8 +136,6 @@ class AntMan<AntRubyEntity
 	end
 
 	
-
-	
 	def checkHideAtHome
 		if @boss
 			if @boss.methods.member?("atHome") and @boss.class!=AntHero
@@ -231,8 +223,6 @@ class AntMan<AntRubyEntity
 					setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
 					getFirstMesh.setAnimation("walk")
 				else
-					#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_fight.anim")))
-					#if false
 					case getWeapon
 						when "dagger"
 							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))

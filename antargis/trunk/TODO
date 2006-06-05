@@ -76,7 +76,6 @@ ARTS
 [Gui/View - GUI-library]
 ------------------------------------------------------
 [H] moving with left-mouse-button
-[H] fix sdl-ttf problem: letters have cyan backgrounds on ppc (fixed ???)
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [M] add texture-space-saving
 [L] add Framebuffer objects for paint to texture.

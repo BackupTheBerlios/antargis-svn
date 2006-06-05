@@ -80,22 +80,74 @@ const AGTexture &AGTextureCache::get(const std::string &pTexture,int downScaleEx
     return mTextures[pTexture];
   }
 
+AGSurface skipHalfTexture(const AGSurface &s)
+{
+  TRACE;
+  if(s.width()>s.height())
+    {
+      int w=s.width();
+      int h=s.height();
+      int nw=w/2;
+      int nh=h;
+      AGSurface n(nw,nh);
 
-const AGTexture &AGTextureCache::get3D(const std::string &pTexture,int downScaleExp)
-  {
-    std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
-    if(i==mTextures.end())
-      {
-        // load
-        AGSurface ms=AGSurface::load(pTexture);
+      for(int i=0;i<nw/nh;i++)
+	{
+	  for(int y=0;y<nh;y++)
+	    for(int x=0;x<nh;x++)
+	      {
+		n.putPixel(x+nh*i,y,s.getPixel(x+2*nh*i,y));
+	      }
+	}
 
-	while(downScaleExp>1 && ms.width()>16 && ms.height()>16)
-	  {
-	    ms=ms.scale(ms.width()/2,ms.height()/2);
-	    downScaleExp--;
-	  }
+      return n;
+    }
+  else
+    {
+      int w=s.width();
+      int h=s.height();
+      int nw=w;
+      int nh=h/2;
+      AGSurface n(nw,nh);
 
-        mTextures[pTexture]=AGTexture(ms,true);
-      }
-    return mTextures[pTexture];
-  }
+      for(int i=0;i<nh/nw;i++)
+	{
+	  for(int y=0;y<nw;y++)
+	    for(int x=0;x<nw;x++)
+	      {
+		n.putPixel(x,y+nw*i,s.getPixel(x,y+2*nw*i));
+	      }
+	}
+
+      return n;
+    }
+}
+
+
+const AGTexture &AGTextureCache::get3D(const std::string &pTexture,int downScaleExp,int downScaleZ)
+{
+  std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
+  if(i==mTextures.end())
+    {
+      // load
+      AGSurface ms=AGSurface::load(pTexture);
+      
+      while(downScaleExp>1 && ms.width()>16 && ms.height()>16)
+	{
+	  ms=ms.scale(ms.width()/2,ms.height()/2);
+	  downScaleExp--;
+	}
+
+      while(downScaleZ>1)
+	{
+	  ms=skipHalfTexture(ms);
+	  
+	  downScaleZ--;
+	}
+
+
+      
+      mTextures[pTexture]=AGTexture(ms,true);
+    }
+  return mTextures[pTexture];
+}
