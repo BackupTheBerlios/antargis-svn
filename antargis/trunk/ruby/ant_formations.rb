@@ -24,14 +24,21 @@ class AntFormation
 		@boss=boss
 		@cache={}
 		@sorted=nil
+		@inited=false
+		calcFormation
 	end
-	def getPosCached(man)
-		if @cache.member?(man)
-			return @cache[man]
+	def calcFormation
+	end
+	def getPosition(man,pos)
+		if pos.nil?
+			raise "pos nil"
 		end
-		r=getPosition(man)
+		if @cache.member?(man)
+			return @cache[man]+pos
+		end
+		r=getPositionReal(man)
 		@cache[man]=r
-		return r
+		return r+pos
 	end
 	def getSortedMen
 		if @sorted.nil?
@@ -57,29 +64,52 @@ end
 
 
 class AntFormationRest<AntFormation
-	def getPosition(man)
-		i=sort(@boss.getMen).index(man)
-		line,row=getLineRow(i)
-		getPositionPrivate(line,row)
+	def initialize(boss)
+		super(boss)
+	end
+
+	def calcFormation
+		@rpos={} # real positions as map from man to AGVector2
+		vpos={}  # virtual positions as map from man to pair of [row,line (circle)]
+
+		men=sort(@boss.getMen)
+		@men=men
+
+		linesizes={}
+		line=1
+		row=0
+		men.delete(@boss)
+		men.each{|m|
+			vpos[m]=[row,line]
+			linesizes[line]||=0
+			linesizes[line]+=1
+			row+=1
+			if row>getRowsOfLine(line)  # add check for new weapon group here
+				row-=getRowsOfLine(line)
+				line+=1
+			end
+		}
+		men.each{|m|
+			row,line=vpos[m]
+			radius=line*1.2
+			angle=row.to_f/linesizes[line]*Math::PI*2
+			@rpos[m]=AGVector2.new(Math::cos(angle)*radius,Math::sin(angle)*radius)
+			puts "SET:#{m}"
+		}
+		@rpos[@boss]=AGVector2.new(0,0)
+		if @men.length>0
+			@inited=true
+		end
+	end
+	def getPositionReal(man)
+		if (not @inited)
+			calcFormation
+		end
+		return @rpos[man]
 	end
 	private
-	def getPositionPrivate(line,row)
-		radius=line*1.5
-		angle=row.to_f/getRowsOfLine(line)*Math::PI*2
-		AGVector2.new(Math::cos(row)*radius,Math::sin(row)*radius)
-	end
-
-	def getLineRow(i)
-		line=1
-		while getRowsOfLine(line)<i
-			i-=getRowsOfLine(line)
-			line+=1
-		end
-		return line,i
-	end
-
 	def getRowsOfLine(line)
-		{1=>8,2=>14,3=>20}[line]
+		{1=>10,2=>14,3=>20}[line]
 	end
 
 	def sort(men)
@@ -89,8 +119,57 @@ class AntFormationRest<AntFormation
 end
 
 class AntFormationBlock<AntFormation
-	def getPosition(line,row)
-		
+	def initialize(boss,dir)
+		super(boss)
+		@dir=dir
+
+		# precalc formation and store into @rpos
+	
+		men=boss.getMen
+		# sort from back to front (lines)
+		men=sort(men)
+
+		vpos={}
+		@rpos={}
+		linesizes={}
+		line=0
+		row=0
+
+		rowsize=5
+
+		normal=dir.normal
+		men.each{|m|
+			vpos[m]=[row,line]
+			
+			linesizes[line]||=0
+			linesizes[line]+=1
+			row+=1
+			if row>rowsize-1 # or weapon-group changed
+				row=0
+				line+=1
+			end
+		}
+		men.each{|m|
+			row,line=vpos[m]
+			linesize=linesizes[line]
+			@rpos[m]=normal*(row-(linesize/2.0))*0.5 + dir*line*0.7
+		}
+
+
+	end
+	def getPositionReal(man)
+		@rpos[man]
+	end
+	def sort(men)
+		men=men.sort{|a,b|betterWeapons(a,b)}
+		men.delete(@boss)
+		a=men[0..1]
+		b=[@boss]
+		c=men[2..-1]
+		a||=[]
+		b||=[]
+		c||=[]
+		a+b+c
 	end
 end
 

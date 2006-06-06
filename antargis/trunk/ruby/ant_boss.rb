@@ -23,15 +23,19 @@
 
 require 'ents.rb'
 require 'ant_hljobs.rb'
+require 'ant_formations.rb'
 
 
 class AntBoss<AntRubyEntity
+	attr_accessor :formation
+
 	def initialize
 		super(AGVector2.new(0,0))
 		@men=[]
 		@job=nil
 		@createMen=0
 		@selected=@hovered=false
+		@formation=nil
 		setProvide("boss",true)
 		setupMeshBoss
 	end
@@ -257,9 +261,14 @@ class AntBoss<AntRubyEntity
 	def setAggression(a)
 		super
 		getMen.select{|m|(not m.is_a?(AntBoss))}.each{|m|m.setAggression(a)}
-	end	
-	def getSitFormation(man)
-		return getPos2D
+	end
+
+	def getFormation(man,pos=nil)
+		if @formation.nil?
+			getPos2D
+		else
+			return @formation.getPosition(man,pos)
+		end
 	end
 
 	def eventHaveDefeated(e)

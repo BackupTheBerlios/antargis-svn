@@ -105,8 +105,12 @@ class AntHero<AntBoss
 	def assignJob(man)
 		checkHLJobEnd(man)
 	end	
-	def moveHome(man)	
-		pos=getSitFormation(man)
+	def moveHome(man)
+		if @formation.nil?
+			raise "formation is nil!"
+		end
+		pos=@formation.getPosition(man)
+# 		pos=getSitFormation(man)
 		if (man.getPos2D-pos).length>1
 			man.newMoveJob(0,pos,0)
 		else
@@ -160,87 +164,6 @@ class AntHero<AntBoss
 	end
 	
 		
-	# formation:
-	# 1) wait for 3/4 of people are in formation but max. 5 seconds or so
-	# 2) start all at once
-	
-	def getSitFormation(man)
-
-		if man==self
-			return getPos2D
-		end
-		if not @men.member?(man)
-			raise "not my man! : #{man} self:#{self}"
-		end
-		id=@men.index(man)-1  # first index is hero himself
-		
-		if id then
-			ring=nil
-			last=nil
-			rings=[[1.2,10],[2,16],[3,50]]
-			count=@men.length-1
-			rings.each{|r|
-				if id<r[1]
-					ring=r
-					break
-				else
-					id-=r[1]
-					count-=r[1]
-				end
-			}
-			radius=ring[0]
-			c=[ring[1],count].min
-# 			if ring==rings[-1]
-# 				c=count
-# 			end
-			angle=id.to_f/(c)*Math::PI*2
-			#radius=1.4
-			return AGVector2.new(Math::sin(angle)*radius,Math::cos(angle)*radius)+getPos2D
-		else
-			dputs "ERROR in SitFormation!"
-			dputs "MEN:"+@men.to_s
-			dputs "man:"+man.to_s
-			dputs man.class
-			raise "sitting error"
-		end
-	end
-	
-	def getWalkFormation(man,dir)
-		if man==self
-			return AGVector2.new(0,0)
-		end
-		if not @men.member?(man)
-			raise "don't know #{man}"
-		end
-		id=@men.index(man)-1  # first index is hero himself
-		if id
-			if isOnOpenWater
-				lineWidth=1.3 # bigger distance on water
-			else
-				lineWidth=0.7
-			end
-			if @men.length>30
-				#lineWidth=1.5
-			end
-		
-			if id>=2 then
-				id+=1 # exclude hero's position
-			end
-			line=id/5
-			col=id%5
-			col=col-2
-			normal=dir.normal
-			l=dir*line*lineWidth
-			c=normal*col*0.5
-			
-			return l+c
-		else
-			dputs @men.length
-			dputs man
-			dputs "ERROR in WalkFormation!"
-			exit
-		end
-	end
 	
 	
 	def setFire(flag)

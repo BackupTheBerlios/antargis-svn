@@ -68,6 +68,7 @@ class AntHeroMoveJob<AntHLJob
 		@formatDir=(@pos-@hero.getPos2D).normalized
 		@moveFinished=false
 		@movingMen=0
+		@hero.formation=AntFormationBlock.new(@hero,@formatDir)
 	end
 	def image
 		"data/gui/move.png"
@@ -77,9 +78,11 @@ class AntHeroMoveJob<AntHLJob
 	end
 
 	def startWalking
+		@hero.formation=AntFormationBlock.new(@hero,@formatDir)
 		puts "START WALKING"
 		@men.each{|m|
-			f=@pos+@hero.getWalkFormation(m,@formatDir)
+# 			f=@pos+@hero.getFormation(m,@formatDir)
+			f=@hero.getFormation(m,@pos)
 			m.newMoveJob(0,f,@dist)
 			m.setMode("moving")
 			@movingMen+=1
@@ -95,10 +98,12 @@ class AntHeroMoveJob<AntHLJob
 # 		@men.each{|m|
 # 			puts "#{m} #{m.getName} #{m.getMode}"
 # 		}
+		puts "CHECK #{@state} #{man.getMode}"
 		case @state
 			when "format"
 				if man.getMode=="format"
-					f=@hero.getWalkFormation(man,@formatDir)+@hero.getPos2D
+					f=@hero.getFormation(man,@hero.getPos2D)
+					puts "FORMATTING:#{man} #{f} #{@hero.getPos2D}"
 					man.newMoveJob(0,f,@formatDist)
 					man.setMode("formating")
 				elsif man.getMode=="formatted"
@@ -108,6 +113,7 @@ class AntHeroMoveJob<AntHLJob
 				else
 					man.setMode("formatted")
 					man.newRestJob(7)
+					puts "WAIT"
 				end
 				if getMenState("formating").length==0
 					startWalking
@@ -145,6 +151,9 @@ class AntHeroFightJob<AntHeroMoveJob
 	attr_reader :target
 
 	def initialize(hero,target,defend=false)
+		@men=hero.getMen
+		@hero=hero
+		initSitpositions
 		puts "NEW ANTHEROFIGHT JOB #{hero.getName} #{target.getName}"
 
 		@hero=hero
@@ -164,7 +173,6 @@ class AntHeroFightJob<AntHeroMoveJob
 		dputs "defned:"+defend.to_s
 		dputs @state
 		#@hero.assignJob2All
-		initSitpositions
 	end
 
 	def finished
@@ -352,7 +360,7 @@ private
 		# gather sitting positions
 		@sitpos={}
 		@men.collect{|man|
-			@sitpos[man]=@hero.getSitFormation(man)
+			@sitpos[man]=@hero.getFormation(man,@hero.getPos2D)
 		}
 	end
 end
@@ -421,6 +429,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 
 	def check(man)
 		if moveFinished
+			@hero.formation=AntFormationRest.new(@hero)
 			if man.class==AntHero
 				if (not @state=~/recruit/)
 					if @want==0 then 
@@ -450,7 +459,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 			else
 				case man.getMode
 					when "to_recruit"
-						fp=@hero.getSitFormation(man)
+						fp=@hero.getFormation(man,@hero.getPos2D)
 						man.newMoveJob(0,fp,0)
 						man.setMode("recruit_torest")
 					when "recruit_torest"
@@ -578,6 +587,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 	end
 	def check(man)
 		if moveFinished
+			@hero.formation=AntFormationRest.new(@hero)
 			if man.is_a?(AntBoss)
 				checkEat(man)
 				if not @constructStarted
@@ -615,7 +625,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 						@target.resource.take(man.resource,r)
 					}
 				when "after_brought"
-					fpos=@hero.getSitFormation(man)
+					fpos=@hero.getFormation(man,@hero.getPos2D)
 					man.newMoveJob(0,fpos,0)
 					man.setMode("construct_torest")
 				when "to_construct"  # do some constructing
@@ -717,6 +727,8 @@ class AntHeroRestJob<AntHLJob
 		@hero.newRestJob(time)
 		@spreadThings=false
 		@men=hero.getMen
+		@hero.formation=AntFormationRest.new(@hero)
+		@basePos=@hero.getPos2D
 	end
 	def image
 		"data/gui/bed.png"
@@ -745,7 +757,13 @@ class AntHeroRestJob<AntHLJob
 	end
 private
 	def sit(man)
-		formationPos=@hero.getSitFormation(man)
+# 		formationPos=@hero.getSitFormation(man)
+ 		formationPos=@hero.getFormation(man,@basePos)
+		puts "FORMAT:"
+		puts formationPos
+		puts man.getPos2D
+
+
 		diff=(man.getPos2D-formationPos)
 		dist=diff.length2
 		if dist<0.1 then
