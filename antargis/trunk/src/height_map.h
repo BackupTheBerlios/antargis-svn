@@ -50,6 +50,7 @@ class HeightMap:public AGMessageObject
 
   // truncate pos at borders
   AGVector2 truncPos(const AGVector2 &p) const;
+  AGVector3 truncPos(const AGVector3 &p) const;
 
   // save load
   virtual void saveXML(Node &node) const;

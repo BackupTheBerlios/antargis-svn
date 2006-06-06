@@ -459,6 +459,14 @@ AGVector2 HeightMap::truncPos(const AGVector2 &p) const
 		   std::max(0.0f,std::min(maxPos[1],p[1])));
 }
 
+AGVector3 HeightMap::truncPos(const AGVector3 &p) const
+{
+  AGVector2 maxPos(mW+1,mH+1);
+  return AGVector3(std::max(0.0f,std::min(maxPos[0],p[0])),
+		   std::max(0.0f,std::min(maxPos[1],p[1])),
+		   p[2]);
+}
+
 void HeightMap::setTerrainScale(TerrainType t,float s)
 {
   mTerrainScale[t]=s;

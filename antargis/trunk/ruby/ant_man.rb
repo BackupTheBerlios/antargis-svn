@@ -188,6 +188,9 @@ class AntMan<AntRubyEntity
 	end
 
 	def getWeapon
+		if resource.get("bow")>0
+			return "bow"
+		end
 		if resource.get("sword")==0
 			return "dagger"
 		elsif resource.get("shield")==0
@@ -230,6 +233,8 @@ class AntMan<AntRubyEntity
 							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
 						when "sword"
 							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
+						when "bow"
+							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_bow.anim")))
 					end
 					#end
 				end
@@ -304,6 +309,8 @@ class AntMan<AntRubyEntity
 			when "hackaxe","pick","sword"
 				playSound(name)
 			when "ugh"
+			else
+				super
 				#playSound(name)
 		end
 	end
@@ -314,10 +321,12 @@ class AntMan<AntRubyEntity
 		end
 	end
 	def checkResources
-		if resource.get("sword")==0
-			setStrength(0.012)
-		else
+		if resource.get("bow")>0
+			setStrength(0.03)
+		elsif resource.get("sword")>0
 			setStrength(0.02)
+		else
+			setStrength(0.012)
 		end
 		if resource.get("shield")==0
 			setDefense(1)

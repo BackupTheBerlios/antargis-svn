@@ -138,11 +138,12 @@
   <!--<antTower aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="home" onGround="true" men="1">
     <position x="9.0708" y="9.55088" z="3.22989"/>
   </antTower>-->
-  <!--<antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true" men="10">
-    <position x="25.9184" y="11.5744" z="2.30454"/>
-  </antHero>-->
-  <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Rowen" onGround="true" men="16">
-    <position x="31.6598" y="7.15123" z="2.58762"/>
+  <antHero aggression="0.5" appearance="hero" energy="1" healSpeed="0.1" morale="1" name="Bantor" onGround="true" men="10">
+    <position x="20.9184" y="11.5744" z="2.30454"/>
+  </antHero>
+  <antHero aggression="0.5" appearance="druid" energy="1" healSpeed="0.1" morale="1" name="Rowen" onGround="true" men="10">
+    <position x="34.6598" y="7.15123" z="2.58762"/>
+    <resource sword="8" bow="5"/>
   </antHero>
 	
   <!--<antNewTree aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="8">

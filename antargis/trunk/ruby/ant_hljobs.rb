@@ -103,7 +103,7 @@ class AntHeroMoveJob<AntHLJob
 			when "format"
 				if man.getMode=="format"
 					f=@hero.getFormation(man,@hero.getPos2D)
-					puts "FORMATTING:#{man} #{f} #{@hero.getPos2D}"
+					#puts "FORMATTING:#{man} #{f} #{@hero.getPos2D}"
 					man.newMoveJob(0,f,@formatDist)
 					man.setMode("formating")
 				elsif man.getMode=="formatted"
@@ -164,9 +164,9 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
 
-		if @defend or (not hero.is_a?(AntHero))
-			@state="fight"
-		end
+# 		if @defend or (not hero.is_a?(AntHero))
+# 			@state="fight"
+# 		end
 		@finished=false
 		dputs "NEW:"
 		dputs self
@@ -637,7 +637,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 					readyConstructed
 					@target.decSmoke
 					man.setMode("construct_torest")
-					fpos=@hero.getSitFormation(man)
+					fpos=@hero.getFormation(man,@hero.getPos2D)
 					man.newMoveJob(0,fpos,0)
 				when "construct_torest"
 					man.setMode("rest")
@@ -759,9 +759,9 @@ private
 	def sit(man)
 # 		formationPos=@hero.getSitFormation(man)
  		formationPos=@hero.getFormation(man,@basePos)
-		puts "FORMAT:"
-		puts formationPos
-		puts man.getPos2D
+# 		puts "FORMAT:"
+# 		puts formationPos
+# 		puts man.getPos2D
 
 
 		diff=(man.getPos2D-formationPos)

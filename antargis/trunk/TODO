@@ -108,6 +108,7 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] game crashes when Rowen dies
 [H] choosing/making player for multiplayer
 [H] add formations
 [H] Add skip intro option

@@ -6,9 +6,9 @@ class Level1<Level
 		if not @started
 			start=StoryFlow.new("beginning")
 
-			start.push("Tutorial - Inventing","On this island you will learn about inventing.")
-			start.push("Tutorial - Inventing","You have to conquer the tower in the north. But it is too strong for you.")
-			start.push("Tutorial - Inventing","So you must increase your strength. To do so take over the workshop and press the invent-button when you have selected the workshop.")
+			start.push("Tutorial - Constructing","On this island you will learn about constructing.")
+			start.push("Tutorial - Constructing","You have to conquer the tower in the north. But it is too strong for you.")
+			start.push("Tutorial - Constructing","So you must increase your strength. To do so take over the workshop and press the construct-button when you have selected the workshop.")
 			tellStory(start)
 			@started=true
 		end
@@ -21,7 +21,7 @@ class Level1<Level
 			if job.target.class==AntWorkshop
 				@defeat=true
 				start=StoryFlow.new("sheep")
-				start.push("Tutorial","Press the invent button. But beware that your men do rest enough.")
+				start.push("Tutorial","Press the construct button. But beware that your men do rest enough.")
 				start.push("Tutorial","When you have enough weopons and armour you can take it all up by pressing the 'take weapon' button.")
 				tellStory(start)
 			else

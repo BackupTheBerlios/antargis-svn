@@ -146,7 +146,7 @@ class AntRubyEntity<AntEntity
 		end
 	end
 
-	def newFightJob(p,target)
+	def newFightJob(p,target,distance)
 		@fightTarget=target
 		super
 		doEvent(:eventNewFightJob)

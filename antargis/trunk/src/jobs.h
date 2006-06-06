@@ -69,11 +69,15 @@ class RestJob:public Job
 class MoveJob:public Job
 {
   AGVector2 mTarget;
+  AGVector3 mTarget3;
   float mNear;
   bool mRun;
+
+  bool m3d;
  public:
   MoveJob();
   MoveJob(int p,const AGVector2 &pTarget,float pnear=0,bool pRun=false);
+  MoveJob(int p,const AGVector3 &pTarget,float pnear=0,bool pRun=false);
   virtual ~MoveJob();
   void move(AntEntity *e,float ptime);
   AGVector2 getDirection(const AntEntity *e) const;

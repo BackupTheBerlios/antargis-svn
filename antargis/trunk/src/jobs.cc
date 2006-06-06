@@ -87,9 +87,19 @@ MoveJob::MoveJob()
 
 MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),mNear(pNear),mRun(pRun)
 {
+  m3d=false;
   // speed=70; // pixels per second
   //  runSpeed=100;
 }
+
+MoveJob::MoveJob(int p,const AGVector3 &pTarget,float pNear,bool pRun):Job(p),mTarget3(pTarget),mNear(pNear),mRun(pRun)
+{
+  m3d=true;
+  // speed=70; // pixels per second
+  //  runSpeed=100;
+}
+
+
 MoveJob::~MoveJob()
 {
 }
@@ -128,22 +138,46 @@ AGVector2 MoveJob::getDirection(const AntEntity *e) const
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
   float d0=getMap()->getPos(e->getPos2D())[2];
-  AGVector2 diff=e->getPos2D()-mTarget;
-  float norm=diff.length();
-
-  if(norm-mNear>ptime*aspeed)
+  if(m3d)
     {
-      diff=diff.normalized();
-      e->setDirection(-diff.getAngle().angle*180.0/M_PI);
-      e->setPos(e->getPos2D()-diff*ptime*aspeed);
+      AGVector3 diff=e->getPos3D()-mTarget3;
+      float norm=diff.length();
+
+      if(norm-mNear>ptime*aspeed)
+	{
+	  diff=diff.normalized();
+	  e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+	  e->setPos(e->getPos3D()-diff*ptime*aspeed);
+	}
+      else
+	{
+	  if(norm>mNear)
+	    e->setPos(mTarget3+diff.normalized()*mNear);
+	  e->setDirection(-diff.dim2().getAngle().angle*180.0/M_PI);
+	  jobFinished(e);
+	}
+
     }
   else
     {
-      if(norm>mNear)
-	e->setPos(mTarget+diff.normalized()*mNear);
-      e->setDirection(-diff.getAngle().angle*180.0/M_PI);
-      jobFinished(e);
+      AGVector2 diff=e->getPos2D()-mTarget;
+      float norm=diff.length();
+      
+      if(norm-mNear>ptime*aspeed)
+	{
+	  diff=diff.normalized();
+	  e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+	  e->setPos(e->getPos2D()-diff*ptime*aspeed);
+	}
+      else
+	{
+	  if(norm>mNear)
+	    e->setPos(mTarget+diff.normalized()*mNear);
+	  e->setDirection(-diff.getAngle().angle*180.0/M_PI);
+	  jobFinished(e);
+	}
     }
+
 
   float d1=getMap()->getPos(e->getPos2D())[2];
   if(d0<WATER_MARK && d1>WATER_MARK)

@@ -52,6 +52,14 @@ module AntManBase
 		setMeshState("sitdown")
 	end
 
+	def newFightJob(p,target)
+		if resource.get("bow")>0
+			super(p,target,10)
+		else
+			super(p,target,1)
+		end
+	end
+
 	def eventGotFight(other)
 		return
 		puts "EVENTGOTFIGHT"
@@ -142,6 +150,17 @@ module AntManBase
 			setOnWater(false)
 			setPos(getMap.getPos(getPos2D))
 			setMeshState(@origMeshState)
+		end
+	end
+
+	def animationEvent(name)
+		case name
+			when "bow"
+				arrow=AntArrow.new
+				arrow.setPos(getPos3D+AGVector3.new(0,0,1))
+				pos=@fightTarget.getPos3D+AGVector3.new(0,0,1)
+				arrow.newMoveJob(0,pos,0) #@target.getPos2D,0)
+				getMap.insertEntity(arrow)
 		end
 	end
 protected

@@ -455,8 +455,12 @@ void AntEntity::newMoveJob(int p,const AGVector2 &pTarget,float pnear)
 {
   setJob(new MoveJob(p,pTarget,pnear));
 }
+void AntEntity::newMoveJob(int p,const AGVector3 &pTarget,float pnear)
+{
+  setJob(new MoveJob(p,pTarget,pnear));
+}
 
-void AntEntity::newFightJob(int p,AntEntity *target)
+void AntEntity::newFightJob(int p,AntEntity *target,float distance)
 {
   if(!canFight())
     return;
@@ -467,7 +471,7 @@ void AntEntity::newFightJob(int p,AntEntity *target)
 	if(f->getTarget()==target)
 	  return;
     }
-  setJob(new FightJob(p,target));
+  setJob(new FightJob(p,target,distance));
 }
 
 void AntEntity::setSpeed(float f)

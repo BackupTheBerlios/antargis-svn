@@ -94,7 +94,7 @@ class AntFormationRest<AntFormation
 			radius=line*1.2
 			angle=row.to_f/linesizes[line]*Math::PI*2
 			@rpos[m]=AGVector2.new(Math::cos(angle)*radius,Math::sin(angle)*radius)
-			puts "SET:#{m}"
+			#puts "SET:#{m}"
 		}
 		@rpos[@boss]=AGVector2.new(0,0)
 		if @men.length>0
