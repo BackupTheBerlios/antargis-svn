@@ -116,8 +116,12 @@ ARTS
  Really, we should be checking command lines params before we even get this far, so you could do something like 'antargis --fullscreen --skip-intro' 
 [H] Tutorial should be on the main page, not start campaign page 
  Got to make it easy for newbies - we all start somewhere! 
+[H] Rowen can cross water without boat
+[H] Fire is always hearable - even when nobody is restign
+[M] add info-bar about troops to inventory or main-view, while fighting (?)
+[M] chase enemy when he's fleeing (a little and not too far)
 [M] make finite state machine approach in entities more visible (?)
-[M] Options not obvious 
+[M] Options not obvious Andreas
 	Options are now grayed out, but maybe they should be hidden.
  
 [M] add arrows in man-class
