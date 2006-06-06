@@ -92,8 +92,7 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
-[VH] evtl. use glTexImage3DEXT instead?
-[VH] check for 3d-texture extension GL_EXT_texture3D
+[H] include 3d-texture-scaling into AGGLTexture-constr.
 [H] test for vertex-buffer-objects!
 [M] make particle engine more generic and include shader-support
 [L] make shadows work on other platforms too?
@@ -133,7 +132,7 @@ ARTS
 		low-level saving should be finished, but high-level makes some problems
 [M] tough breath when hero suffers / some info-box appearing
 [M] fishing (fishes)
-[M] add "eat-action", "sleep-action" "special??"
+[M] add "special" actions?
 [L] add campaign-loading functionality to load-dialog in-game  TRICKY
 		This is a real problem, because the current AGApplication is called by the campaign-code.
 		So the AntApp must be finished and the surrounding campaign-code, too. After this the

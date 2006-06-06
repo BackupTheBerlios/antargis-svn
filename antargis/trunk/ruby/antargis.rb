@@ -157,7 +157,7 @@ class AntGameApp <AntRubyView
 	# react to inventory-based jobs - like taking, recruiting
 
 	def eventInventoryJob(e)
-		if @target.nil? some more overview as
+		if @target.nil? #some more overview as
 			puts "NO TARGET SELECTED"
 		else
 			case @inventory.job

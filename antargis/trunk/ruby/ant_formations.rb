@@ -19,28 +19,73 @@
 # License along with this program.
 #
 
-class AntFormation<AntFormation
+class AntFormation
 	def initialize(boss)
 		@boss=boss
+		@cache={}
+		@sorted=nil
 	end
-	def getSitFormation(man)
+	def getPosCached(man)
+		if @cache.member?(man)
+			return @cache[man]
+		end
+		r=getPosition(man)
+		@cache[man]=r
+		return r
 	end
-	def getWalkFormation(man,dir)
+	def getSortedMen
+		if @sorted.nil?
+			@sorted=sort(@boss.getMen)
+		end
+		@sorted
 	end
-	def getPosition(line,row)
+	def sort(men)
+		raise "not implemented"
 	end
 end
 
-class AntFormationRest
-	def getPosition(line,row)
+def betterWeapons(a,b)
+	weapons=["bow","sword"]
+	weapons.each{|w|
+		r=(a.resource.get(w)<=>b.resource.get(w))
+		if r!=0
+			return r
+		end
+	}
+	return 0
+end
+
+
+class AntFormationRest<AntFormation
+	def getPosition(man)
+		i=sort(@boss.getMen).index(man)
+		line,row=getLineRow(i)
+		getPositionPrivate(line,row)
+	end
+	private
+	def getPositionPrivate(line,row)
 		radius=line*1.5
 		angle=row.to_f/getRowsOfLine(line)*Math::PI*2
 		AGVector2.new(Math::cos(row)*radius,Math::sin(row)*radius)
 	end
 
+	def getLineRow(i)
+		line=1
+		while getRowsOfLine(line)<i
+			i-=getRowsOfLine(line)
+			line+=1
+		end
+		return line,i
+	end
+
 	def getRowsOfLine(line)
 		{1=>8,2=>14,3=>20}[line]
 	end
+
+	def sort(men)
+		men.sort{|a,b|betterWeapons(a,b)}
+	end
+
 end
 
 class AntFormationBlock<AntFormation
