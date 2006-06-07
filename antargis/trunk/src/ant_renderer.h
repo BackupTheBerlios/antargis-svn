@@ -4,6 +4,7 @@
 #include "GLee.h"
 
 class Scene;
+class AGFBO;
 
 class Renderer
 {
@@ -38,6 +39,9 @@ class Renderer
   int mCanGLSL;
 
   GLuint shadowMapTexture;
+
+  AGFBO *mFBO;
+
   int shadowMapSize;
   bool shadowInited;
 

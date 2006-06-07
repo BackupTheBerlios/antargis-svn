@@ -58,7 +58,7 @@ class MyWidget<AGWidget
 		@tex.endPaint
 	end
 	def draw(p)
-		p.fillRect(AGRect.new(0,0,64,64),AGColor.new(0,0,0))
+		p.fillRect(AGRect.new(0,0,64,64),AGColor.new(70,70,70))
 		p.blit(@tex,@tex.getRect.origin)
 	end
 end

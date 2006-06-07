@@ -88,6 +88,7 @@ AGRenderContext *AGRenderContext::getCurrent()
 
 void AGRenderContext::begin()
 {
+  assertGL;
 //return;
 #ifdef SLOWCONTEXT
   if(mColor)
@@ -103,8 +104,8 @@ void AGRenderContext::begin()
       //      glColor4f(1,1,1,1);
     }
 
-  glDepthMask(mDepthWrite);
 
+  glDepthMask(mDepthWrite);
   
   if(mCulling)
     {
@@ -113,7 +114,6 @@ void AGRenderContext::begin()
     }
   else
     glDisable(GL_CULL_FACE);
-
 
   if(mTexture)
     {
@@ -332,6 +332,7 @@ void AGRenderContext::begin()
 	}
     }  
 
+
   ///////////////////////////////
   // LIGHTING
 
@@ -347,6 +348,7 @@ void AGRenderContext::begin()
   gCurrentContext=*this;
 
 #endif
+  assertGL;
 }
 
 

@@ -84,6 +84,8 @@ size_t Mesh::getTriangles() const
 
 void Mesh::begin()
 {
+  assertGL;
+
   glPushMatrix();
   AGVector4 p=getPos();
   glTranslatef(p[0],p[1],p[2]);

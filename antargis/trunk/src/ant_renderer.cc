@@ -3,6 +3,7 @@
 #include "ag_debug.h"
 #include "ag_kill.h"
 #include "ag_config.h"
+#include "ag_fbo.h"
 
 Renderer *gRenderer=0;
 
@@ -13,6 +14,7 @@ Renderer::Renderer():
   mCanShadow(-1),
   mCanGLSL(-1)
 {
+  mFBO=0;
   CTRACE;
   GLeeInit(); // this call is essential for letting glee work
   assert(gRenderer==0);
@@ -49,6 +51,7 @@ Renderer::~Renderer()
   cdebug("gRenderer:"<<gRenderer);
   assert(gRenderer==this);
   gRenderer=0;
+  delete mFBO;
 }
 
 bool Renderer::canMultitexture()
@@ -132,13 +135,27 @@ void Renderer::initShadowTexture()
   cdebug(5);
 
   shadowInited=true;
+
+  if(canFBO())
+    {
+      mFBO=new AGFBO(shadowMapTexture,shadowMapSize,shadowMapSize);//,true);
+    }
+
 }
 
 void Renderer::beginShadowComputation()
 {
   if(!shadowInited)
     initShadowTexture();
+
+  if(mFBO)
+    {
+      mFBO->beginDraw();
+    }
+
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  assertGL;
+  
   
   glMatrixMode(GL_PROJECTION);
   glLoadMatrixf(getCurrentScene()->getLightProj());
@@ -157,11 +174,12 @@ void Renderer::beginShadowComputation()
   glShadeModel(GL_FLAT);
   glColorMask(0, 0, 0, 0);
   
-  
   //Draw the scene
   // Offset the drawing a little back, so that slopy surfaces don't get shadowed
   glEnable(GL_POLYGON_OFFSET_FILL);
   glPolygonOffset(1,1); // was 1,1
+
+  assertGL;
 
 }
 void Renderer::endShadowComputation()
@@ -174,11 +192,18 @@ void Renderer::endShadowComputation()
 
   /// @todo switch to FBOs - this should bring an improvement of 17 to 19 fps
 
-  glReadBuffer(GL_BACK);
-
-  glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, shadowMapSize, shadowMapSize,0);
-
-  glReadBuffer(GL_FRONT);
+    if(mFBO)
+      {
+	mFBO->endDraw();
+      }
+    else
+      {
+	glReadBuffer(GL_BACK);
+	
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, shadowMapSize, shadowMapSize,0);
+	
+	glReadBuffer(GL_FRONT);
+      }
 
   assertGL;
 

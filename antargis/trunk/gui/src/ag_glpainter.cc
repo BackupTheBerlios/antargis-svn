@@ -198,8 +198,9 @@ namespace AGGLPainter
     context.setCulling(false);
     context.setDepthTest(false);
     
+
     context.begin();
-    
+      
     glBegin(GL_QUADS);
     glColor(ul);
     glVertex2fv(pRect.getV0());

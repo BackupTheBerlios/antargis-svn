@@ -73,7 +73,6 @@ AGRect2 AGProjection::clipRect(AGRect2 target) const
 
 std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) const
 {
-  //return std::make_pair(target,src);
   AGRect2 i=clip.intersect(target);
   if(i.width()<=0 || i.height()<=0)
     return std::make_pair(AGRect2(0,0,0,0),AGRect2(0,0,0,0));
@@ -296,12 +295,10 @@ void AGPainter::tile(const AGTexture &pSource)
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest)
 {
-  //  mTarget->tile(pSource,mCurrent.project(pDest),AGColor(0xff,0xff,0xff,0xff));
   tile(pSource,pDest,pSource.getRect());
 }
 void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
-  //  return;
   STACKTRACE;
   float x,y;
   if(!dynamic_cast<AGGLScreen*>(mTarget))
@@ -406,9 +403,13 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     {
       if(glScreen)
-	glScreen->drawGradient(r,c0,c1,c2,c3);
+	{
+	  glScreen->drawGradient(r,c0,c1,c2,c3);
+	}
       else if(opengl() && dynamic_cast<AGTexture*>(mTarget))
-	dynamic_cast<AGTexture*>(mTarget)->drawGradient(r,c0,c1,c2,c3);
+	{
+	  dynamic_cast<AGTexture*>(mTarget)->drawGradient(r,c0,c1,c2,c3);
+	}
       else
 	{
 	  AGSDLScreen *sdlScreen=dynamic_cast<AGSDLScreen*>(mTarget);
@@ -426,6 +427,7 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 		for(cx=0,x=r.x0();x<r.x1();x+=1,cx+=dx)
 		  putPixel(AGVector2(x,y),(c0*(1-cx)+c1*cx)*(1-cy)+(c2*(1-cx)+c3*cx)*cy);
 	    }
+
 	}
     }
 }

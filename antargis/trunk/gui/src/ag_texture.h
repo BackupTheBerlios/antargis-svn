@@ -26,6 +26,8 @@
 #include "ag_gltexture.h"
 #include "ag_painttarget.h"
 
+class AGFBO;
+
 class AGTexture:public AGPaintTarget
 {
  public:
@@ -100,6 +102,8 @@ class AGTexture:public AGPaintTarget
 
   AGInternalSurface *s;
   AGInternalSurface *mSDLTexture;
+
+  AGFBO *mFBO; // used for render-to-texture
 
   size_t version;
   

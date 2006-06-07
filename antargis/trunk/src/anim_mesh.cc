@@ -120,6 +120,7 @@ void AnimMesh::drawPick()
 
 void AnimMesh::drawPrivate(bool textured, bool mem)
 {
+  assertGL;
   AGRenderContext c;
   if(textured)
     {
@@ -158,8 +159,11 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
       else
 	{
 	  mData->animShaderDepth.enable();
+
 	  mData->animShaderDepth.sendUniform("matrices",mShaderMatrices);
+
 	  mData->mArrayDepth.setColors(false);
+
 	  mData->mArrayDepth.draw(); // FIXME: drawDepth makes some problems here
 
 	  mData->animShaderDepth.disable();
@@ -223,6 +227,7 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
     }
   
   glPopMatrix();
+  assertGL;
 }
 
 void AnimMesh::advance(float time)

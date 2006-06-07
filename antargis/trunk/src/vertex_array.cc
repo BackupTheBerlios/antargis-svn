@@ -118,6 +118,8 @@ void VertexArray::draw()
   if(mChanged)
     init();
 
+  assertGL;
+
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);
   if(bColor)
@@ -125,7 +127,6 @@ void VertexArray::draw()
   else
     glDisableClientState(GL_COLOR_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
 
   if(mBuffers)
     {
@@ -156,7 +157,6 @@ void VertexArray::draw()
 	}
       glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
       glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
-
     }
   else
     {

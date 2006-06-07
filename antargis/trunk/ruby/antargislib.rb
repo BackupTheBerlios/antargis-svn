@@ -18,6 +18,7 @@ if not $antargislibinited
 	elsif File.exists?("../src/.libs/libantargis.so")
 		require '../src/.libs/libantargis'
 	else
+		puts "Please run 'rake' before starting this program!"
 		require 'libantargis'
 	end
 	include Libantargis

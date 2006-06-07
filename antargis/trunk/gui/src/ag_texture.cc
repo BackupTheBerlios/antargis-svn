@@ -26,6 +26,7 @@
 #include "ag_surfacemanager.h"
 #include "ag_profiler.h"
 #include "ag_glpainter.h"
+#include "ag_fbo.h"
 #include <stdexcept>
 
 size_t nextpow2(size_t i)
@@ -58,6 +59,8 @@ AGTexture::AGTexture(const AGTexture &t)
   version=t.version;
   getSurfaceManager()->registerMe(this);
   mCleared=false;
+
+  mFBO=0;
 }
 
 AGTexture &AGTexture::operator=(const AGTexture &t)
@@ -75,6 +78,7 @@ AGTexture &AGTexture::operator=(const AGTexture &t)
   version=t.version;
   getSurfaceManager()->registerMe(this);
   mCleared=false;
+  mFBO=0;
   return *this;
 }
 
@@ -91,6 +95,7 @@ AGTexture::AGTexture()
   getSurfaceManager()->registerMe(this);
   mPainting=false;
   mCleared=false;
+  mFBO=0;
 }
 
 AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
@@ -103,6 +108,7 @@ AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
   mPainting=false;
   getSurfaceManager()->registerMe(this);
   mCleared=false;
+  mFBO=0;
 }
 
 
@@ -123,6 +129,7 @@ AGTexture::AGTexture(const AGSurface &pSurface, bool p3d)
   getSurfaceManager()->registerMe(this);
   mPainting=false;
   mCleared=false;
+  mFBO=0;
 }
 
 
@@ -130,6 +137,7 @@ AGTexture::~AGTexture()
 {
   if(getSurfaceManager())
     getSurfaceManager()->deregisterMe(this);
+  delete mFBO;
 }
 
 int AGTexture::width() const
@@ -236,29 +244,49 @@ void AGTexture::beginPaint()
   assert(!m3d);
   if(opengl())
     {
-      // init 2d drawing
-      getScreen().begin();
-      
-      // do this so that texture generated
-      AGRenderContext c;
-      c.setColor(AGVector4(1,1,1,1));
-      c.setTexture(glTexture());
-      c.setCulling(false);
-      c.begin();
+      if(canFBO())
+	{
+	  //	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  getScreen().begin();
+	  if(!mFBO)
+	    mFBO=new AGFBO(glTexture());
+	  mFBO->beginDraw();
 
+	  AGRenderContext nc;
+	  nc.begin();
+	  
+	  glMatrixMode(GL_MODELVIEW);
+	  glPushMatrix();
+	  glLoadIdentity();
 
-
-      AGRenderContext nc;
-      nc.begin();
-      
-      glMatrixMode(GL_MODELVIEW);
-      glPushMatrix();
-      glLoadIdentity();
-
-      mPainting=true;
-      if(!mCleared)
-	blit(*this,getRect().origin(),getRect().origin());
-      mCleared=false;
+	  if(mCleared)
+	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  mCleared=false;
+	}
+      else
+	{
+	  // init 2d drawing
+	  getScreen().begin();
+	  
+	  // do this so that texture generated
+	  AGRenderContext c;
+	  c.setColor(AGVector4(1,1,1,1));
+	  c.setTexture(glTexture());
+	  c.setCulling(false);
+	  c.begin();
+	  
+	  AGRenderContext nc;
+	  nc.begin();
+	  
+	  glMatrixMode(GL_MODELVIEW);
+	  glPushMatrix();
+	  glLoadIdentity();
+	  
+	  mPainting=true;
+	  if(!mCleared)
+	    blit(*this,getRect().origin(),getRect().origin());
+	  mCleared=false;
+	}
     }
   else
     {
@@ -277,20 +305,30 @@ void AGTexture::endPaint()
 {
   if(opengl())
     {
-      glMatrixMode(GL_MODELVIEW);
-      glPopMatrix();
-      bindTexture();
-      
-      // copy buffer to texture
 
-      glReadBuffer(GL_BACK);
+     if(canFBO())
+        {
+	  glMatrixMode(GL_MODELVIEW);
+	  glPopMatrix();
+          assert(mFBO);
+          mFBO->endDraw();
+        }
+      else
+        {
+	  glMatrixMode(GL_MODELVIEW);
+	  glPopMatrix();
+	  bindTexture();
+	  
+	  // copy buffer to texture
+	  
+	  glReadBuffer(GL_BACK);
 
-      glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, mTexture->width(),mTexture->height(),0);
-
-      //            getScreen().flip();
-      //            SDL_Delay(1000);
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	  glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, mTexture->width(),mTexture->height(),0);
+	  
+	  //            getScreen().flip();
+	  //            SDL_Delay(1000);
+	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
 
     }
   mPainting=false;

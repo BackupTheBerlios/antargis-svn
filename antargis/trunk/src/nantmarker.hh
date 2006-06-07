@@ -1936,6 +1936,11 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,AGEvent,b);
  $result=*b;
 }
+%typemap(directorout) AGFBO {
+ AGFBO *b;
+ Data_Get_Struct($input,AGFBO,b);
+ $result=*b;
+}
 %typemap(directorout) AGFont {
  AGFont *b;
  Data_Get_Struct($input,AGFont,b);

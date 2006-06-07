@@ -256,6 +256,7 @@ void Scene::calcShadowMap()
   }
 
   getRenderer()->endShadowComputation();
+  assertGL;
 }
 
 void Scene::initScene()

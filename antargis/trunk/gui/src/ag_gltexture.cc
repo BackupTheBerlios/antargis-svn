@@ -29,41 +29,54 @@ static size_t gUsedTexMemory=0;
 
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false)
 {
+  assertGL;
   getSurfaceManager()->registerMe(this);
+  assertGL;
   glGenTextures( 1, &mID);
+  assertGL;
   glBindTexture( GL_TEXTURE_2D,mID);
+  assertGL;
 
   glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0, GL_RGBA,
                GL_UNSIGNED_BYTE, 0);
 
+  assertGL;
   gUsedTexMemory+=w*h*4;
 
   cdebug("used memory:"<<gUsedTexMemory);
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  assertGL;
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   assertGL;
 }
 AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D),m3d(true)
 {
+  assertGL;
   getSurfaceManager()->registerMe(this);
+  assertGL;
 
   glGenTextures( 1, &mID);
+  assertGL;
   glBindTexture( GL_TEXTURE_3D,mID);
+  assertGL;
 
   glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
                GL_UNSIGNED_BYTE, 0);
+  assertGL;
 
   gUsedTexMemory+=w*h*d*4;
   cdebug("used memory:"<<gUsedTexMemory);
 
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  assertGL;
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   assertGL;
 }
 
 AGGLTexture::~AGGLTexture()
 {
+  assertGL;
   glDeleteTextures(1,&mID);
 
   if(m3d)
@@ -77,6 +90,7 @@ AGGLTexture::~AGGLTexture()
 
 void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset)
 {
+  assertGL;
   GLint format;
 
   SDL_Surface *surface=pSurface->surface;

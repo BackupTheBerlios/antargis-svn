@@ -328,6 +328,7 @@ void MeshData::drawShadow()
 }
 void MeshData::drawDepth()
 {
+  assertGL;
   AGRenderContext c;
   if(mTransparent)
     {
@@ -345,6 +346,7 @@ void MeshData::drawDepth()
       //      cdebug("muh");
     }
   c.begin();
+  assertGL;
   if(mShadow)
     {
       mArray.setColors(false);
