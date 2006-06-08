@@ -170,6 +170,8 @@ bool AGTexture::hasTexture() const
 void AGTexture::clearTexture()
 {
   mTexture=0;
+  delete mFBO;
+  mFBO=0;
 }
 void AGTexture::clearTextureUsed()
 {
@@ -250,6 +252,7 @@ void AGTexture::beginPaint()
 	  getScreen().begin();
 	  if(!mFBO)
 	    mFBO=new AGFBO(glTexture());
+
 	  mFBO->beginDraw();
 
 	  AGRenderContext nc;
