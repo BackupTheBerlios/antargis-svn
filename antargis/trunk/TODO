@@ -75,7 +75,6 @@ ARTS
 
 [Gui/View - GUI-library]
 ------------------------------------------------------
-[H] moving with left-mouse-button
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [M] add texture-space-saving
 [L] add Framebuffer objects for paint to texture.
@@ -92,7 +91,7 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
-[H] add reasonable destructor into AGFBO
+[H] increase picking speed
 [H] include 3d-texture-scaling into AGGLTexture-constr.
 [H] test for vertex-buffer-objects!
 [M] FBO without color-attachment ????
@@ -112,13 +111,10 @@ ARTS
 ------------------------------------------------------
 [H] game crashes when Rowen dies
 [H] choosing/making player for multiplayer
-[H] add formations
 [H] Add skip intro option
  You should be able to skip the intro - it gets boring 
  Solution: :Comment out lines 120 and 121 of /ruby/intro.rb to do this 
  Really, we should be checking command lines params before we even get this far, so you could do something like 'antargis --fullscreen --skip-intro' 
-[H] Tutorial should be on the main page, not start campaign page 
- Got to make it easy for newbies - we all start somewhere! 
 [H] Rowen can cross water without boat
 [H] Fire is always hearable - even when nobody is restign
 [M] add info-bar about troops to inventory or main-view, while fighting (?)
@@ -140,6 +136,7 @@ ARTS
 [M] tough breath when hero suffers / some info-box appearing
 [M] fishing (fishes)
 [M] add "special" actions?
+[L] add formations
 [L] add campaign-loading functionality to load-dialog in-game  TRICKY
 		This is a real problem, because the current AGApplication is called by the campaign-code.
 		So the AntApp must be finished and the surrounding campaign-code, too. After this the
@@ -148,7 +145,6 @@ ARTS
 [L] add aggression-leveling of non-hero bosses
 [L] computer-player only attacks when stock is used up
 [L] story-telling:
-	- history function
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
 [L] add experience points and function to appoint hero

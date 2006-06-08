@@ -27,7 +27,8 @@ class AGFBO
 {
 public:
   AGFBO(AGGLTexture *pTexture, bool withDepth=false);
-  AGFBO(GLuint pTexture, size_t pW,size_t pH);//,bool withDepth=false);
+  AGFBO(GLuint pTexture, size_t pW,size_t pH);
+  ~AGFBO();
 
   void beginDraw();
   void endDraw();

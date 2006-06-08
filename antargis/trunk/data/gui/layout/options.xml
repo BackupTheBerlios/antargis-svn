@@ -14,11 +14,17 @@
 			
 			<cell col="1" row="0">
 				<!--<text caption="No options here for the time being"/>-->
-				<table cols="2" rows="6" name="VideoMenu">
+				<table cols="2" rows="6" name="VideoOptionsMenu" visible="false">
 					<button col="0" row="0" caption="Toggle fullscreen" name="fullscreen"/>
 					<button col="0" row="1" caption="1024 x 768" name="1024"/>
 					<button col="0" row="2" caption="1280 x 1024" name="1280"/>
 					<button col="0" row="3" caption="1400 x 1050" name="1400"/>
+				</table>
+				<table cols="5" rows="6" name="GameOptionsMenu" visible="true">
+					<text col="1" row="0" caption="Enable intro"/>
+					<checkbox col="2" row="0" name="optionIntro"/>
+				</table>
+				<table cols="5" rows="6" name="AudioOptionsMenu" visible="false">
 				</table>
 			</cell>
 			
@@ -28,9 +34,9 @@
 					<rowsize row="2" fixed="20"/>
 					<rowsize row="4" fixed="20"/>
 					<rowsize row="6" fixed="20"/>
-					<radio col="0" row="1" caption="Gameoptions" enabled="false"/>
-					<radio col="0" row="3" caption="Video" checked="true"/>
-					<radio col="0" row="5" caption="Audio" enabled="false"/>
+					<radio col="0" row="1" name="gameOptions" caption="Game" enabled="true" checked="true"/>
+					<radio col="0" row="3" name="videoOptions" caption="Video"/>
+					<radio col="0" row="5" name="audioOptions" caption="Audio" enabled="false"/>
 					
 					<button col="0" row="7" name="exit" caption="Exit"/>
 				</table>

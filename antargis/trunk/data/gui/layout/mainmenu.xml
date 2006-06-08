@@ -14,7 +14,7 @@
 			<colsize col="2" fixed="5"/>
 			<rowsize row="0" relative="1"/>
 			
-			<table col="1" row="0" cols="1" rows="11">
+			<table col="1" row="0" cols="1" rows="13">
 				<colsize col="0" relative="1"/>
 				<rowsize row="0" relative="2"/>
 				<rowsize row="2" relative="2"/>
@@ -22,13 +22,15 @@
 				<rowsize row="6" relative="2"/>
 				<rowsize row="8" relative="2"/>
 				<rowsize row="10" relative="2"/>
+				<rowsize row="12" relative="2"/>
 	
-				<button row="0" col="0" name="campaign" caption="Start campaign"/>
-				<button row="2" col="0" name="single" caption="Single map" enabled="false"/>
-				<button row="4" col="0" name="load" caption="Load game"/>
-				<button row="6" col="0" name="options" caption="Options"/>
-				<button row="8" col="0" name="credits" caption="Credits"/>
-				<button row="10" col="0" name="quit" caption="Quit"/>
+				<button row="0" col="0" name="tutorial" caption="Tutorial"/>
+				<button row="2" col="0" name="campaign" caption="Start campaign"/>
+				<button row="4" col="0" name="single" caption="Single map" enabled="false"/>
+				<button row="6" col="0" name="load" caption="Load game"/>
+				<button row="8" col="0" name="options" caption="Options"/>
+				<button row="10" col="0" name="credits" caption="Credits"/>
+				<button row="12" col="0" name="quit" caption="Quit"/>
 			
 			</table>
 			<table col="0" row="0" cols="3" rows="3">

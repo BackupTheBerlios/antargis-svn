@@ -81,6 +81,11 @@ size_t Scene::getTriangles() const
   return mTriangles;
 }
 
+size_t Scene::getPickTriangles() const
+{
+  return mPickTriangles;
+}
+
 
 void Scene::draw()
 {
@@ -93,6 +98,7 @@ void Scene::draw()
   assertGL;
  
   mTriangles=0;
+  mPickTriangles=0;
 
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     (*i)->sort(AGVector4(mCamera.getPosition(),1));
@@ -398,6 +404,7 @@ AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 
 void Scene::pickDraw()
 {
+  STACKTRACE;
   glDisable(GL_CULL_FACE);
   GLuint name=1;
   pickNames.clear();
@@ -415,6 +422,7 @@ void Scene::pickDraw()
 	  glPopName();
 	  pickNames.insert(std::make_pair(name,*i));
 	  name++;
+	  mPickTriangles+=(*i)->getTriangles();
 	}
     }
 
@@ -424,6 +432,7 @@ void Scene::pickDraw()
 
 Scene::PickResult Scene::pick(float x,float y,float w,float h)
 {
+  STACKTRACE;
   size_t bufsize=4000;
   GLuint buffer[bufsize+1];
   
@@ -472,6 +481,7 @@ Scene::PickResult Scene::pick(float x,float y,float w,float h)
 
 Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py)
 {
+  STACKTRACE;
   PickResult result;
   if(hits==0)
     return result;

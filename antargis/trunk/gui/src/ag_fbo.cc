@@ -36,6 +36,7 @@ AGFBO::AGFBO(AGGLTexture *pTexture, bool withDepth):
   mTextureID=mTexture->id();
   w=mTexture->width();
   h=mTexture->height();
+  fb=depth_rb=0;
 
   init();
 }
@@ -46,9 +47,11 @@ AGFBO::AGFBO(GLuint pTexture, size_t pW,size_t pH):
   mTexture(0),mTextureID(pTexture),
   mWithDepth(false)
 {
+  fb=depth_rb=0;
   w=pW;
   h=pH;
 
+#ifdef USE_FBO
 
   glGenFramebuffersEXT(1, &fb);
   if(mWithDepth)
@@ -63,34 +66,21 @@ AGFBO::AGFBO(GLuint pTexture, size_t pW,size_t pH):
   glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, mTextureID, 0);
   assertGL;
 
-  if(true)
   {
-    // try add a renderbuffer as color attachment 
-    unsigned int rb;
+    // add a renderbuffer as color attachment 
 
-    glGenRenderbuffersEXT(1,&rb);
+    glGenRenderbuffersEXT(1,&depth_rb);
 
-    glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, rb);
-    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGBA, w,h);//pTexture->width(), pTexture->height());
-    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, rb);
+    glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_rb);
+    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGBA, w,h);
+    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, depth_rb);
 
     
   }
 
-
-
-  
-  /*  if(mWithDepth)
-    {
-      throw std::runtime_error("AGFBO:not supported yet!");
-      // initialize depth renderbuffer
-      glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_rb);
-      glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT16, w,h);//pTexture->width(), pTexture->height());
-      glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, depth_rb);
-      }*/
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
-
+#endif
 }
 
 
@@ -122,6 +112,18 @@ void AGFBO::init()
   assertGL;
 #endif
 }
+
+AGFBO::~AGFBO()
+{
+#ifdef USE_FBO
+  CTRACE;
+  if(fb)
+    glDeleteFramebuffersEXT(1,&fb);
+  if(depth_rb)
+    glDeleteRenderbuffersEXT(1,&depth_rb);
+#endif
+}
+
 
 void AGFBO::beginDraw()
 {

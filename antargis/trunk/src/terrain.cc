@@ -148,6 +148,18 @@ size_t TerrainPieceVA::getTriangles() const
   return m3dArray.getTriangles();
 }
 
+int getTerrainTriangleSize()
+{
+  int s=1;
+
+  if(getConfig()->get("terrainTriangleSize")!="")
+    s=toInt(getConfig()->get("terrainTriangleSize"));
+  
+  getConfig()->set("terrainTriangleSize",toString(s));
+
+  return s;
+}
+
 
 int getTerrainDownScale()
 {
@@ -199,7 +211,7 @@ void Terrain::init()
   for(y=0; y<mMap->getH();y+=tilesize)
     for(x=0;x<mMap->getW();x+=tilesize)
       {
-	TerrainPieceVA *t=new TerrainPieceVA(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0),1);
+	TerrainPieceVA *t=new TerrainPieceVA(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0),getTerrainTriangleSize());
 	WaterPiece *w=new WaterPiece(getScene(),*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);

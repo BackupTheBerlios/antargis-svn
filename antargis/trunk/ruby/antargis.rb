@@ -202,6 +202,7 @@ class AntGameApp <AntRubyView
 			@fps=@frameCount / @elapsTime
 			fps=sprintf("%3.0f",@fps)
 			puts "FPS:"+fps
+			puts "pick-tris:"+getScene.getPickTriangles.to_s
 			@statusBar.setText("FPS:#{fps}")
 			puts "Tris:"+getScene.getTriangles.to_s
 			@frameCount=0
@@ -435,8 +436,11 @@ class AntGameApp <AntRubyView
 
 	def tellStory(flow)
 		hidePanel
-		@story=AntStoryTalk.new(@layout)
+		if @story.nil?
+			@story=AntStoryTalk.new(@layout)
+		end
 		@layout.addChild(@story)
+		@story.show
 		@story.setFlow(flow)
 		addHandler(@story,:sigStoryFinished,:eventStoryTalkFinished)
 	end

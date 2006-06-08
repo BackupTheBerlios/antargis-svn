@@ -2,6 +2,7 @@
 #include <SDL_opengl.h>
 #include <assert.h>
 #include <ag_debug.h>
+#include <ag_profiler.h>
 
 VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
 {
@@ -182,7 +183,21 @@ void VertexArray::draw()
 
 void VertexArray::drawPick()
 {
-  if(true)
+  STACKTRACE;
+  if(false)
+    {
+      // use vertex arrays
+      glEnableClientState(GL_VERTEX_ARRAY);
+
+      glVertexPointer(4, GL_FLOAT, 0, &(mVertices[0]));
+      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+		     &(mIndices[0]));
+      
+      glDisableClientState(GL_VERTEX_ARRAY);
+
+    }
+
+  else if(true)
     {
       // paint in software - because this is faster for picking
       glBegin(GL_TRIANGLES);

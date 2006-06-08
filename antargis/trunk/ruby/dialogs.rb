@@ -50,9 +50,6 @@ class RectWidget<AGWidget
 	end
 end
 
-#
-# Story talking window - appearance defined in storytalk.xml
-#
 class AntDialog<AGLayout
 	include AGHandler
 	def initialize(parent,filename,fade=true)
@@ -105,10 +102,16 @@ class AntStoryTalk<AntDialog
 		super(parent,"data/gui/layout/storytalk.xml",false)
 		getMap().pause=true
 		addHandler(getChild("window"),:sigClose,:eventOk)
+		addHandler(getChild("back"),:sigClick,:eventBack)
+		addHandler(getChild("forward"),:sigClick,:eventClose)
 		addSignal("sigStoryFinished")
 	end
 	def setFlow(flow)
-		@flow=flow
+		if @flow.nil?
+			@flow=flow
+		else
+			@flow.append(flow)
+		end
 		updateText
 	end
 	def setText(text)
@@ -124,7 +127,6 @@ class AntStoryTalk<AntDialog
 	end
 
 	def updateText
-		puts "UPDATE TEXT"
 		c=@flow.get
 		if c
 			setTitle(c[0])
@@ -138,18 +140,20 @@ class AntStoryTalk<AntDialog
 	
 	# signals	
 	def eventClose(e)
-		puts "AntStory::eventClose"
 		if not updateText
 			sigStoryFinished(e)
-			puts "pCaller:"+e.getCaller.getName
 			getMap().pause=false
-			close
-			#toAGWindow(getChild("window")).close
+			hide
 			super
 		else
 			getChild("window").show
 		end
 		return true
+	end
+	def eventBack(e)
+		@flow.back
+		@flow.back
+		updateText
 	end
 end
 
@@ -196,9 +200,16 @@ class AntOptionsDialog<AntDialog
 		setName("OptionsDialog")
 		addHandler(getChild("save"),:sigClick,:eventSave)
 		addHandler(getChild("load"),:sigClick,:eventLoad)
+		addHandler(getChild("story"),:sigClick,:eventStory)
 		addHandler(getChild("video"),:sigClick,:eventVideo)
 		addHandler(getChild("audio"),:sigClick,:eventAudio)
 		getMap.pause=true
+	end
+	def eventStory
+		close
+		f=StoryFlow.new("")
+		$app.tellStory(f)
+		return true
 	end
 	def eventVideo
 		$app.videoOptions

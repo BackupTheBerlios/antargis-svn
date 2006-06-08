@@ -69,6 +69,7 @@ class AntMenuApp <AGApplication
 		addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)
 		addHandler(@mainMenu.getChild("campaign"),:sigClick,:eventCampaign)
 		addHandler(@mainMenu.getChild("single"),:sigClick,:eventSingle)
+		addHandler(@mainMenu.getChild("tutorial"),:sigClick,:eventTutorial)
 		addHandler(@mainMenu.getChild("load"),:sigClick,:eventLoadGame)
 		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
 	end
@@ -136,6 +137,7 @@ class AntMenuApp <AGApplication
 	
 	def setupOptions
 		@optionsMenu=AGLayout.new($screen)
+		@optionSubMenus=["VideoOptionsMenu","AudioOptionsMenu","GameOptionsMenu"]
 		@optionsMenu.loadXML(loadFile("data/gui/layout/options.xml"))
 		@menues.push(@optionsMenu)
 		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)
@@ -144,7 +146,22 @@ class AntMenuApp <AGApplication
 		addHandler(@optionsMenu.getChild("1024"),:sigClick,:eventResChange)
 		addHandler(@optionsMenu.getChild("1280"),:sigClick,:eventResChange)
 		addHandler(@optionsMenu.getChild("1400"),:sigClick,:eventResChange)
+
+		addHandler(@optionsMenu.getChild("gameOptions"),:sigClick,:eventGameOptions)
+		addHandler(@optionsMenu.getChild("videoOptions"),:sigClick,:eventVideoOptions)
+
+		eventVideoOptions
 	end
+
+	def eventVideoOptions
+		@optionSubMenus.each{|m|@optionsMenu.getChild(m).hide}
+		@optionsMenu.getChild("VideoOptionsMenu").show
+	end
+	def eventGameOptions
+		@optionSubMenus.each{|m|@optionsMenu.getChild(m).hide}
+		@optionsMenu.getChild("GameOptionsMenu").show
+	end
+
 	def eventFullscreen
 		getMain.changeRes(getMain.width,getMain.height,32,(not getMain.fullscreen),true)
 		return true
@@ -174,6 +191,12 @@ class AntMenuApp <AGApplication
 	end
 	def eventSingle(e)
 		setMainWidget(@singleMenu)
+		return true
+	end
+
+	def eventTutorial(e)
+		tutCampaign=Campaign.new("data/campaigns/tutorial.xml")
+		startCampaign(tutCampaign)
 		return true
 	end
 
