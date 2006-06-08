@@ -92,6 +92,7 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
+[H] add reasonable destructor into AGFBO
 [H] include 3d-texture-scaling into AGGLTexture-constr.
 [H] test for vertex-buffer-objects!
 [M] FBO without color-attachment ????
