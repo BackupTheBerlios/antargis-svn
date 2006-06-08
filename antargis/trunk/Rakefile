@@ -81,8 +81,10 @@ $CFLAGS=""
 
 $CXX=$ccache+"g++"
 $CC=$ccache+"gcc"
+$INCLUDEDIRS=""
 if not windows
 	$CFLAGS+=`sdl-config --cflags`.chomp
+	$INCLUDEDIRS+=`sdl-config --cflags`.chomp
 	$LDFLAGS+=`sdl-config --libs`.chomp+" "+$libs
 	$CFLAGS+=" -fPIC"
 else
@@ -136,7 +138,7 @@ myInterfaces=interfaceHeaders.collect{|x|"src/"+x}+["src/interface.i"]
 
 if $swig!=""
 	file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
-		msh "cd src; swig -v -Wall -ruby -c++ -I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
+		msh "cd src; swig -v -Wall -ruby -c++ #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
 	end
 	
 	file ["src/nantmarker.hh"] => myInterfaces do |t|
