@@ -135,5 +135,5 @@ Abort this mission;;Abortar misión
 Rest;;Descansar
 The story of Antargis begins;;La leyenda de Antargis comienza
 Tutorial - Exploring your world.;;Tutorial - Explorando el mundo.
-Pause the game
-;;
+Pause the game;;Pausar el juego
+
