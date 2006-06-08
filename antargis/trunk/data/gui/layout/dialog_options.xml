@@ -15,7 +15,7 @@
 					<button theme="antButton" col="0" row="2" name="load" caption="Load"/>
 					
 					<button theme="antButton" col="1" row="1" name="video" caption="Video"/>
-					<button theme="antButton" col="1" row="2" name="sound" caption="Sound" enabled="false"/>
+					<button theme="antButton" col="1" row="2" name="audio" caption="Audio"/>
 					<button theme="antButton" col="1" row="3" name="gameoptions" caption="Gameoptions" enabled="false"/>
 				</table>
 				<button col="0" row="1" name="ok" theme="antButton" caption="Ready"/>

@@ -197,10 +197,16 @@ class AntOptionsDialog<AntDialog
 		addHandler(getChild("save"),:sigClick,:eventSave)
 		addHandler(getChild("load"),:sigClick,:eventLoad)
 		addHandler(getChild("video"),:sigClick,:eventVideo)
+		addHandler(getChild("audio"),:sigClick,:eventAudio)
 		getMap.pause=true
 	end
 	def eventVideo
 		$app.videoOptions
+		close
+		return true
+	end
+	def eventAudio
+		$app.audioOptions
 		close
 		return true
 	end
@@ -296,6 +302,61 @@ class AntLoadDialog<AntDialog
 		return true
 	end
 end
+
+class AntAudioOptionsDialog<AntDialog
+	def initialize(parent)
+		super(parent,"data/gui/layout/dialog_audio_options.xml")
+
+		@barnames=["music","ambient","sound"]
+		@bars={}
+		@barnames.each{|n|
+			@bars[n]=getChild(n+"Bar")
+		}
+		#@bars.each{|n,b|b.setValue(0.1)}
+
+		@barnames.each{|n|
+			cname="inc#{n[0..0].upcase+n[1..-1]}"
+			addHandler(getChild(cname),:sigClick,:eventModBar)
+			cname="dec#{n[0..0].upcase+n[1..-1]}"
+			addHandler(getChild(cname),:sigClick,:eventModBar)
+		}
+
+		getMap.pause=true
+		readVolumes
+	end
+	def eventModBar(e)
+		name=e.getCaller.getName
+		what=name[0..2]
+		barname=name[3..-1].downcase
+		case what
+			when "inc"
+				@bars[barname].setValue(@bars[barname].getValue+0.1)
+			when "dec"
+				@bars[barname].setValue(@bars[barname].getValue-0.1)
+		end
+		updateVolumesP
+	end
+	def eventOk(e)
+		getMap.pause=false
+		close
+		return true
+	end
+private
+	def readVolumes
+		@barnames.each{|n|
+			@bars[n].setValue(getConfig.get("#{n}Volume").to_f)
+		}
+	
+		updateVolumesP
+	end
+	def updateVolumesP
+		@bars.each{|n,v|
+			getConfig.set("#{n}Volume",v.getValue.to_s)
+		}
+		updateVolumes
+	end
+end
+
 
 class AntVideoOptionsDialog<AntDialog
 	def initialize(parent)
@@ -450,12 +511,20 @@ class AGBar<AGWidget
 		@b2=bc*1.2
 		@b3=bc
 	end
+	def getValue
+		@value
+	end
 	def setValue(v)
 		@value=[0,v,1].sort[1]
 	end
 	def draw(p)
 		p.drawGradient(getRect.origin,@b0,@b1,@b2,@b3)
 		p.drawGradient(AGRect.new(0,0,width*@value,height),@c0,@c1,@c2,@c3)
+	end
+	def loadXML(n)
+		super
+		@value=n.get("value").to_f
+		redraw
 	end
 end
 

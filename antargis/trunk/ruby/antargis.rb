@@ -330,6 +330,9 @@ class AntGameApp <AntRubyView
 	def videoOptions
 		@layout.addChild(AntVideoOptionsDialog.new(@layout))
 	end
+	def audioOptions
+		@layout.addChild(AntAudioOptionsDialog.new(@layout))
+	end
 
 	###############################################################
 	# Setting up of Hero displays (images, texts and eventHandlers

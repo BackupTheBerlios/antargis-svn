@@ -3,6 +3,19 @@
 $soundLastCall={}
 $soundInited=false
 
+def getVolume(type)
+	v=getConfig.get("#{type}Volume")
+	if v==""
+		if type=="music"
+			v=0.2
+		else
+			v=1
+		end
+	end
+	
+	v.to_f
+end
+
 def playSoundGlobal(name,volume,minDiff=0.5)
 	sounds={"sheep"=>"data/sound/sheep44.wav",
 		"error"=>"data/sound/error.wav",
@@ -39,15 +52,37 @@ end
 
 def ambientSound(time)
 	if not $ambientSound
-		$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",0.2)
+		$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",getVolume("ambient")*0.2)
+		$ambientMusic=getSoundManager.playMp3("data/music/in-game1.ogg")
+		puts getVolume("music")
+		#raise 1
+		getSoundManager.volumeMusic(getVolume("music"))
 		#getSoundManager.playMp3(
 		#getSoundManager.playMp3("data/music/ant2.ogg")
 	end
 end
 
 def setNormalVolumeWave
-	getSoundManager.volumeSound(0.4)
+	getSoundManager.volumeSound(0.4*getVolume("sound"))
+	getSoundManager.volumeMusic(getVolume("music"))
+	$normalVolume=true
 end
 def setQuietVolumeWave
-	getSoundManager.volumeSound(0.1)
+	getSoundManager.volumeSound(0.1*getVolume("sound"))
+	getSoundManager.volumeMusic(0.25*getVolume("music"))
+	$normalVolume=false
+end
+
+def updateVolumes
+	getSoundManager.volumeMusic(getVolume("music"))
+	if $normalVolume
+		setNormalVolumeWave
+	else
+		setQuietVolumeWave
+	end
+	if $ambientSound
+		getSoundManager.stopChannel($ambientSound)
+		$ambientSound=nil
+	end
+	ambientSound(1)
 end

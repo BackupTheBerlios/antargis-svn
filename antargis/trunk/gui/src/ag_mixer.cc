@@ -230,7 +230,7 @@ void AGSound::volumeMusic(float v)
   if(mNoSound)
     return;
   initSoundEngine();
-  Mix_VolumeMusic(((int)v*MIX_MAX_VOLUME));
+  Mix_VolumeMusic(((int)(v*MIX_MAX_VOLUME)));
 }
 
 
