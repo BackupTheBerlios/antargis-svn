@@ -238,7 +238,7 @@ class AntHouse<AntBoss
 			m="men"
 		end
 
-		r=_("This is a {1}. It was build {2} years ago. Currently {3} {4} live here.",houseType,age,getMen.length,_(m))+home
+		r=_("This is a {1}. It was build {2} years ago. Currently {3} {4} live here.",_(houseType),age,getMen.length,_(m))+home
 
 		morale=0
 		@men.each{|m|morale+=m.getMorale}
@@ -246,13 +246,13 @@ class AntHouse<AntBoss
 			morale/=@men.length
 		end
 		if morale>0.8
-			s="in good mood."
+			s=_("in good mood.")
 		elsif morale>0.5
-			s="content."
+			s=_("content.")
 		elsif morale>0.2
-			s="discontent."
+			s=_("discontent.")
 		else
-			s="bad tempered."
+			s=_("bad tempered.")
 		end
 		r+=_("They are {1}",_(s))
 		r

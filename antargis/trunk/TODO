@@ -109,6 +109,8 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] remove old texts from local_* files
+[H] add all config-parameters to config-file when created - and comment them a little
 [H] game crashes when Rowen dies
 [H] choosing/making player for multiplayer
 [H] Add skip intro option

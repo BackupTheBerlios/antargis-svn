@@ -118,12 +118,14 @@ class CutSceneDisplay<AGApplication
 	end
 	
 	def setText(text)
-		@text=text
+		@text=_(text)
 		@ctext=""
+		@time=0
 		setTextForReal("")
 	end
 	
 	def eventFrame(t)
+		t=[t,0.1].min
 		@time+=t
 		old=@ctext
 		while @time>@speed
@@ -142,6 +144,7 @@ class CutSceneDisplay<AGApplication
 				@finished=true
 			end
 		end
+		delay(20)
 		return true
 	end
 	

@@ -68,7 +68,7 @@ class AntRubyEntity<AntEntity
 		node.set("mode",@mode)
 	end
 	def getDescription
-		"This an entity - no more info here."
+		"This is an entity - no more info here."
 	end
 
 	# simple comparison operator, so that ents can be distinguished

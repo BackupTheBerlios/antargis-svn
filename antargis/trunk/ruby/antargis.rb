@@ -435,6 +435,7 @@ class AntGameApp <AntRubyView
 
 
 	def tellStory(flow)
+		getMap.pause=true
 		hidePanel
 		if @story.nil?
 			@story=AntStoryTalk.new(@layout)

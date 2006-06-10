@@ -60,7 +60,7 @@ class Level1<Level
 				if @smith==1
 					s=StoryFlow.new("smith1")
 					s.push("Smith","Welcome to our small town! What is your name, boy?")
-					s.push("Rowen","My is name is .. well, I don't remember it.")
+					s.push("Rowen","My name is .. well, I don't remember it.")
 					s.push("Smith","Then he is surely the man, the druid mentioned.")
 					s.push("Rowen","What do you mean?")
 					s.push("Smith","Nothing. You look like a brave young man to me.")
@@ -132,6 +132,8 @@ class Level1<Level
 			$app.focusHero(getMap.getByName("Bantor"))
 			s=StoryFlow.new("bantor")
 			s.push("Bantor","Boy, why do you leave your place?")
+			
+			# FIXME: replace "they" by sth like "people of the village"
 			s.push("Apprentice","A stranger appeared and they want to follow him and drive you away.")
 			s.push("Bantor","These fools will see their failure! You will be payed and now get off to the keep.")
 			tellStory(s)

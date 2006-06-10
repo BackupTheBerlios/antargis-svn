@@ -1,23 +1,26 @@
-Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;Jetzt fangen wir mit dem eigentlichen Spiel an. Am Anfang jeden Levels wird Dein Held zentiert und ausgewählt. In diesem Spiel kann man nur die Helden kontrollieren.
+Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;Jetzt fangen wir mit dem eigentlichen Spiel an. Am Anfang jeden Levels wird Dein Held zentriert und ausgewählt. In diesem Spiel kann man nur den Helden kontrollieren.
 Stone;;Stein
 Argyn;;Argyn
 Gold;;Gold
-For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Um die Ansicht zu bewegen kannst Du auf die kleine Karte klicken. (diese wird gleich erscheinen)
+For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Um sich schnell über die Ansicht zu bewegen kannst Du auf die kleine Karte klicken. (diese wird gleich rechts unten erscheinen)
 Keep;;Burg
+keep;;Burg
+man;;Mann
+men;;Männer
 huhu;;
-You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;Um Deinen Held zu bewegen, klicke mit der echten Maustaste auf die Landschaft.
+You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;Um Deinen Held zu bewegen, klicke mit der echten Maustaste auf die Landschaft. Bitte warte damit Deinen Helden über die Karte zu jagen, bis diese kleine Einführung beendet ist.
 Coal;;Kohle
 Ore;;Erz
 Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.;;Willkommen bei der Einführung zu Antargis. Als erstes zeige ich Dir, wie man sich die Welt anschaut.
 Swords;;Schwerter
 Food;;Essen
 Troops;;Truppen
-Now recruit some troops by selecting the tower by left-clicking on it and then push the recruit-button on the right.;;Jetzt kannst Du ein paar Truppen rekrutieren, indem Du zuerst den Turm mit einem Links-Klick auswählst und dann den "Rekrutieren"-Buttons drückst.
+Now recruit some troops. Select the tower by left-clicking on it and then push the recruit-button on the right.;;Jetzt kannst Du ein paar Truppen rekrutieren, indem Du zuerst den Turm mit einem Links-Klick auswählst und dann den "Rekrutieren"-Buttons im rechten Menü drückst.
 Dador;;
 Banin;;
-Minion of Godrin;;
-If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;
-When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.;;
+Minion of Godrin;;Lakei von Godrin
+If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;Wenn Du über die Karte scrollen willst klicke einfach mit der rechten Maustaste auf die Karte, halte die Taste gedrückt und bewege die Maus. Zum zoomen kannst du das Mausrad benutzen. 
+When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.;;Wenn du im Vollbild-Modus bist kannst du auch scrollen, indem du den Cursor an den Rand des Bildschirms bewegst. Mit ALT+RETURN kannst du in den Vollbildmodus wechseln.
 NewTree;;Baum
 Fire;;Feuer
 Tools;;Werkzeuge
@@ -32,37 +35,37 @@ Single map;;Einzelne Karte
 Game;;Spiel
 Ok;;Ok
 Gameoptions;;Spieleinstellungen
-'You awaken...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;'Du erwachst...\nDeine Umgebung ist Dir unbekannt.\nDu berlegst was passiert ist und wie Du hierher gekommen bist.'
+'You awaken...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;'Du erwachst...\nDeine Umgebung ist Dir unbekannt.\nDu überlegst was passiert ist und wie Du hierher gekommen bist.'
 A hero is born.;;Ein Held ist geboren.
 High aggression;;Aggressiv
 rough lands;;hartes Land
 Invent;;Erfinden
-Sound;;Sound
+Sound;;Audio
 Start;;Starten
 Loading...;;Laden des Spiels...
 unify the people;;vereinige das Volk
-In future versions a screenshot will be given here.;;In zukünftigen Versionen wird hier ein Bild zu sehen sein.
+In future versions a screenshot will be given here.;;In zukünftigen Versionen wird hier ein Screenshot zu sehen sein.
 1400 x 1050;;1400 x 1050
 1024 x 768;;1024 x 768
 Playername;;Spielername
 Recruit;;Rekrutieren
 Save game;;Spiel speichern
 Video;;Anzeige
-(C) 2005 by the Antargis-team;;(C) 2005 by the Antargis-team
+(C) 2005 by the Antargis-team;;(C) 2005 by the Antargis-Team
 Inspect object;;Details anzeigen
 Here you learn how to play the game.;;Hier wird Dir gezeigt, wie man das Spiel bedient.
-Take weapons - FIXME;;Waffen nehmen
+Take weapons;;Waffen nehmen
 Tutorial;;Einführung
 1280x1024;;1280x1024
 He obeys {1}.;;Er gehorcht {1}.
-{1} men support him.;;3 Leute folgen ihm.
+{1} men support him.;;{1} Leute folgen ihm.
 Attack;;Angreifen
 Load;;Laden
 Start campaign;;Starte Feldzug
 your mission;;Deine Mission
 yes;;Ja
 Drop weapons;;Waffen ablegen
-Credits;;Credits
+Credits;;Mitwirkende
 Medium aggression;;Aufmerksam
 1400x1050;;1400x1050
 This is {1}. He is {2} years old.;;Das ist {1}. Er ist {2} Jahre alt.
@@ -82,7 +85,7 @@ Drop food;;Nahrung ablegen
 Sheep;;Schaf
 strong heroes;;mächtige Helden
 Options...;;Einstellungen...
-Do you really want to ??;;Möchtest Du das wirklich?
+Do you really want to do this?;;Möchtest Du das wirklich?
 Load game;;Spiel laden
 Abort this mission;;Mission abbrechen
 Rest;;Rasten
@@ -95,3 +98,98 @@ no;;Nein
 Do you really want\nto quit the game?;;Möchtest Du wirklich\naufhören zu spielen?
 Pause the game;;Spiel pausieren
 Toggle fullscreen;;Vollbildmodus
+Here is where you learn how to play the game.;;Hier lernst du, wie man "Battles of Antargis" spielt.
+Ok, you have recruited some men.;;Sehr gut, Du hast ein paar Einheiten rekrutiert.
+If you want to recruit all men select the button with the three swords. This increases your aggressiveness. After that repeat the recruiting.;;Um alle Einheiten zu rekrutieren wähle erst den Button mit den drei Schwertern aus. Das erhöht deine Aggressivität. Rekrutiere danach weitere Einheiten.
+When you're done with this go north and defeat your enemies. You can fight an enemy by right clicking on him.;;Gehe danach mit Deinen Einheiten nach Norden und bezwinge Deine Gegner! Du kannst gegen einen Gegner kämpfen, indem du mit der rechten Maustaste auf ihn klickst.
+Construct;;Konstruktion
+Boat;;Boot
+Bow;;Bogen
+Steel;;Stahl
+Fishing rod;;Angelruten
+Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops;;Energiebalken\nGrün - Leben\nBlau - Moral\nBraun - Hunger\nRot - Einheiten
+This is a {1}. It was build {2} years ago. Currently {3} {4} live here.;;Dies ist ein {1}. Es wurde vor {2} Jahren erbaut. Zur Zeit wohnen hier {3} {4}.
+{1} of them are at home.;;Von ihnen sind zur Zeit {1} zu Hause.
+in good mood.;;zufrieden.
+They are {1};;Sie sind {1}
+content.;;freundlich.
+discontent.;;unfreundlich.
+bad tempered.;;schlecht gelaunt.
+So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.;;Du hast Bantor besiegt. Gehe jetzt zurück zur Burg und gebe einige deiner Leute wieder ab, indem du auf den "Entlassen"-Button rechts im Menü klickst.
+You have passed the first tutorial level.;;Yeah! Du hast das erste Tutorial-Level erfolgreich abgeschlossen!
+You have lost! Better luck next time!;;Du hast leider verloren. Viel Glück beim nächsten mal!
+Congratulations! You have successfully completed the tutorial!;;Herzlichen Glückwunsch! Du hast das Tutorial erfolgreich abgeschlossen!
+Yay! You have completed the first level!;;Yeah! Du hast das erste Level bestanden!
+Continue;;Weiter
+Tutorial - Food;;Tutorial - Nahrung
+On this island you will learn that your troops need food and how to get it.;;Auf dieser Insel lernst du, dass deine Einheiten Nahrung benötigen und wie du an diese Nahrung kommst.
+Your troops are constantly getting hungry. The current hunger of your hero can be seen in the brown bar at his portrait.;;Deine Truppen werden mit der Zeit immer hungriger. Wie hungrig dein Held ist kannst du an dem brauen Balken in seinem Portrait sehen.
+You can view your troops state by selecting one and then inspecting the bars on the right.;;Du kannst den Status deiner Truppen abfragen, indem du eine Einheit anwählst und Dir dann die Balken an der rechten Seite ansiehst.
+Toggle particle effects;;Partikeleffekte aus-/einschalten
+Toggle animation;;Animationen aus-/einschalten
+Video Options;;Anzeigeoptionen
+This won't be changed until restart;;Diese Einstellung wird erst bei einem Neustart übernommen
+So start now fetching food by slaughtering the sheep. (Right click);;Sammele nun Nahrung indem du das Schaf schlachtest (durch einen Rechts-Klick auf das Schaf).
+Now your troops have shared the food among them as you can see in their inventories.;;Deine Einheiten haben die Nahrung untereinander aufgeteilt, wie man in ihrem Inventar sehen kann.
+The more you do the faster they get hungry.;;Je mehr du machst um so schneller werden sie hungrig.
+Whenever they rest and are really hungry they will eat their food automatically. But you have to look that they have time to rest for this.;;Wenn deine Soldaten Hunger bekommen werden sie die Nahrung automatisch essen. Allerdings musst du rasten und ihnen Zeit geben, damit sie das tun können.
+It seems like someone has left a bag a little down here. Take it up. (Right click);;Es sieht so aus, als ob jemand da unten seinen Beutel verloren hat. Hebe ihn auf. (durch einen Rechts-Klick)
+Well done, now complete your task by conquering the farm and taking their food.;;Gut, beende dieses Tutorial nun indem du die Farm eroberst und die Nahrung stiehlst.
+Now take the food by selecting the farm and clicking on the 'take food' button.;;Jetzt schnapp dir die Nahrung indem du auf die Farm und anschließend auf den 'Nahrung nehmen' Button klickst.
+You finished this level.;;Du hast dieses Level bestanden!
+FIXME: INVENT=CONSTRUCT!!! also nicht Erfindung sondern eher produktion
+Tutorial - Inventing;;Tutorial - Erfindungen
+On this island you will learn about inventing.;;Auf dieser Insel wirst du lernen, wie man Sachen erforscht.
+You have to conquer the tower in the north. But it is too strong for you.;;Du musst den Turm im Norden einnehmen, aber du bist dafür (noch) zu schwach.
+So you must increase your strength. To do so take over the workshop and press the invent-button when you have selected the workshop.;;Also musst du stärker werden! Das kannst du durch neue Erfindungen. Übernehme die Werkstatt und drücke den "erfinden"-Button wenn du die Werkstatt ausgewählt hast.
+Press the invent button. But beware that your men do rest enough.;;Drücke den "erfinden"-Button, aber achte darauf, dass deine Leute gut ausgeruht sind.
+FIXME: TYPO weapons
+When you have enough weopons and armour you can take it all up by pressing the 'take weapon'-Button.;;Wenn du genug Waffen und Rüstung hast kannst du sie aufnehmen, indem du den "nehme Waffen"-Button drückst
+Workshop;;Werkstatt
+workshop;;Werkstatt
+Your hero suffers;;Dein Held leidet
+Strange visions cross your mind.;;Merkwürdige Visionen spuken dir im Kopf umher.
+Your head aches.;;Du hast Kopfschmerzen.
+Slowly you awake.;;Langsam wirst du wach.
+You remember that you have been attacked, but ...;;Du erinnerst dich, dass du angegriffen wurdest, aber ...
+Anything else is gone. You've lost your memory.;;Alles andere ist weg. Du hast dein Gedächtnis verloren.
+
+I will not go any further! There are strangers out there. They don't seem friendly.;;Ich gehe keinen schritt weiter! Da drüben sind Fremde, die nicht freundlich aussehen.
+Druid;;Druide
+Greetings stranger! I am the druid.;;Ich grüße dich, Fremder! ich bin der Druide
+These are dangerous times. Be watchful in these woods.;;Dies sind gefährliche Zeiten. In diesen Wäldern musst du ständig auf der Hut sein.
+I think I have lost my memory.;;Ich denke, ich habe mein Gedächtnis verloren.
+FIXME: Ja, aber ich sehe Zeiten der Erleuchtung in deiner Zukunft
+Yes, but I see times of remembrance in your future...;;Ich sehe, dass du dich wieder erinnern wirst.
+You should go east and meet the smith.;;Du solltest nach Westen gehen und dort den Schmied treffen.
+But there is a party of strangers on the way.;;Aber da sind einige Fremde, die mir den Weg versperren.
+They will be gone soon.;;Die werden bald weg sein.
+Go your path hero. I have important things to do.;;Gehe jetzt deinen Weg, ich habe wichtige Dinge zu tun.
+This is an entity - no more info here.;;Hierüber habe ich keine weiteren Informationen.
+Farm;;Hof
+Smith;;Schmied
+FIXME: Komm zu mir, mein Freund.
+Come here my friend!;;Willkommen, Fremder! Komm doch näher.
+Welcome to our small town! What is your name, boy?;;Willkommen in unserem Dorf. Was ist dein Name?
+My name is ... well, I don't remember it.;;Mein Name ist... arg, ich erinnere mich nicht
+Then he is surely the man, the druid mentioned.;;Dann ist er also der, von dem der Druide gesprochen hat.
+What do you mean?;;Was meinst du?
+Nothing. You look like a brave young man to me.;;Ach nichts, du siehst für mich wie ein starker junger Mann aus.
+If you promise to act wisely and defeat those men in the north, you can have some of my men.;;Wenn du mir versprichst weise zu handeln und die Leute im Norden vertreibst, gebe ich dir ein paar meiner Leute.
+Yes, these attacked my party - as much as this I remember.;;Ja, die griffen auch meine Truppe an - so weit ich mich erinnere
+Well, then recruit some of my men and defeat this group.;;Nun, dann schnapp dir einige meiner Männer und vertreib diese Schurken von hier!
+Don't forget to capture the keep, too!;;Vergiss nicht, auch die Burg einzunehmen!
+Boy, why do you leave your place?;;Hey, warum hast du deinen Standort verlassen?
+FIXME: Untergebener passt wohl besser als lehrling, oder?
+Apprentice;;Untergebener
+FIXME: was?
+A stranger appeared and they want to follow him and drive you away.;;Ein Fremder ist aufgetaucht und die Leute aus dem Dorf folgen ihm. Sie werden dich angreifen!
+FIXME: Belohnt oder bestraft?
+These fools will see their failure! You will be payed and now get off to the keep.;;Diese Idioten werden das noch bereuen! Dafür wirst du noch belohnt, doch jetzt geh auf die Burg.
+You have defeated the enemy.;;Du hast den Gegner besiegt!
+Your enemies have fled northward. Your mission is find and crash them.;;Deine Feine sind nach Norden geflüchtet. Deine Mission ist es sie zu finden und zu vernichten.
+Rowen's story ends here for now. Come back later and finish his adventures!;;Rowens Geschichte ist hier leider schon zu ende. Komm später noch mal wieder und beende sein Abenteuer!
+Tree;;Baum
+farm;;Hof
+dwelling;;Unterkunft
+Dwelling;;Unterkunft

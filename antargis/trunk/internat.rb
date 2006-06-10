@@ -32,7 +32,11 @@ def checkNode(node)
 	if caption!=""
 		res.push(caption)
 	end
-	res
+	caption=node.get("text")
+	if caption!=""
+		res.push(caption)
+	end
+	res.collect{|s|s.gsub("\n","\\n")}
 end
 
 files=`find -name "*.xml"|grep -v skat`.split("\n")
