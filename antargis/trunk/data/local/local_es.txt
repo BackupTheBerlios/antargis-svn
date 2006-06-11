@@ -2,29 +2,29 @@
 This is a {1}. It was build {2} years ago. Currently {3} {4} live 
 here.;;Esto es una {1} y fue construida hace {2} años.
 They are {1};;Son {1}
-This is {1}. He is {2} years old.;;Este es {1} y tiene {2} años.
+This is {1}. He is {2} years old.;;Es {1} y tiene {2} años.
 He obeys {1}.;; Obedece a {1}.
-Nobody supports him.;;Nadie le apoya.
-{1} men support him.;;{1} hombres le apoyan.
+Nobody supports him.;;No tiene apoyo.
+{1} men support him.;;{1} hombres a su servicio.
 Your hero {1} suffers.;;Tu heroe {1} sufre.
 Options;;Opciones
 Gameoptions;;Opciones de juego
 Video;;Video
 Audio;;Audio
-Exit;;Salida
-(C) 2005 by David Kamphausen;;(C) 2005 by David Kamphausen
+Exit;;Salir
+(C) 2005 by David Kamphausen;;(C) 2005 por David Kamphausen
 Credits;;Créditos
 Design & Programming;;Diseño y programación
-David Kamphausen;;David Kamphausen;
+David Kamphausen;;David Kamphausen
 Arts;;Arte
-David Kamphausen\n<david.kamphausen@web.de>;;David Kamphausen\n<david.kamphausen@web.de>;
+David Kamphausen\n<david.kamphausen@web.de>;;David Kamphausen\n<david.kamphausen@web.de>
 Website;;Web
 David Kamphausen\nMartin Kamphausen;;David Kamphausen\nMartin Kamphausen
 huhu;;huhu
-'Slowly you awake...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;Poco a poco despiertas...\nTe sientes desorientado y te preguntas\n qué pasó y cómo has llegado aqui.
+'Slowly you awake...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;Poco a poco despiertas...\nTe sientes desorientado y te preguntas qué\n ha pasado y cómo has llegado hasta aqui.
 Ok;;Ok
 Start campaign;;Comenzar la campaña
-Single map;;Mapa monojugador
+Single map;;Un solo jugador
 Load game;;Cargar partida
 Quit;;Salir
 Select a campaign;;Seleccionar campaña
@@ -38,7 +38,7 @@ Cancel;;Cancelar
 Open;;Abrir
 Start;;Empezar
 (C) 2005 by the Antargis-team;;(C) 2005 by the Antargis-team
-Do you really want to ??;;De verdad huyes?
+Do you really want to do it??;;¿Seguro?
 yes;;Sí
 no;;No
 The wolfs' lair;;La guarida del lobo
@@ -49,18 +49,18 @@ Toggle fullscreen;;Pantalla completa
 Directory:;;Directorio
 ...;;...
 muh;;muh
-Toggle shadow;;Sombras
-Toggle particle effects;;Efectos de particulas
-Toggle animation;;animaciones
+Toggle shadow;;Activar sombras
+Toggle particle effects;;Activar efectos de particulas
+Toggle animation;;Activar animaciones
 1024x768;;1024x768
 1280x1024;;1280x1024
 1400x1050;;1400x1050
 Ready;;Preparado
-In future versions a screenshot will be given here.;;En futuras versiones una foto irá aqui
+In future versions a screenshot will be given here.;;posteriormente aqui habrá una foto.
 Load;;Cargar
 Music volume;;Volumen de la música
 Ambient sound;;Sonido de ambiente
-Sound effects;;efectos de sonido
+Sound effects;;Efectos de sonido
 -;;-
 +;;+
 gen;;generar
@@ -68,7 +68,7 @@ Name:;;Nombre
 Men:;;Hombres
 NPCType:;;Tipo de NPC
 SERVER;;Servidor
-Do you really want\nto quit the game?;;Realmente te\npiras?
+Do you really want\nto quit the game?;;Realmente te piras?
 Continue;;Continuar
 Width:;;Anchura
 Height:;;Altura
@@ -82,12 +82,12 @@ Minion of Godrin;;Subordinado de Godrin
 0;;0
 FPS:0;;FPS:0
 Loading...;;Cargando...
-Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;Dejémonos de cháchara y vayamos al grano. A diferencia de otros juegos, en BoA sólo controlas tu heroe.
+Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;Vayamos al grano. A diferencia de otros juegos, en BoA sólo controlas tu heroe.
 Stone;;Piedra
 Argyn;;Argyn
 Gold;;Oro
 For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Para desplazarte por el mapa clicas en el minimapa que será mostrado en el margen inferior derecho tan pronto acabes el tutorial. 
-Keep;;Mantener
+Keep;;Casa
 You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;Le puedes mover clicando con el boton derecho en el terreno. Espera a que terminen las instrucciones antes de probarlo.
 Coal;;Carbón
 Ore;;Hierro
@@ -107,10 +107,10 @@ Shields;;Escudos
 Godrin;;Godrin
 Wood;;Madera
 Statistics;;Estadísticas
-A hero is born.;;Un hero ha nacido
+A hero is born.;;Nace un Heroe
 High aggression;;Agresividad alta
-rough lands;;duras tierras
-Invent;;fabricar
+rough lands;;Tierras ásperas
+invent;;fabricar
 Sound;;Sonido
 unify the people;;Unifica la gente
 Playername;;Nombre del jugador
@@ -118,7 +118,7 @@ Recruit;;Reclutar
 Save game;;Guardar 
 Inspect object;;Info
 Here you learn how to play the game.;;Aqui aprendes cómo jugar
-Take weapons - FIXME;;
+Take weapons - FIXME;;Coger armas
 Tutorial;;Tutorial
 Attack;;Atacar
 your mission;;Tu misión
@@ -135,5 +135,5 @@ Abort this mission;;Abortar misión
 Rest;;Descansar
 The story of Antargis begins;;La leyenda de Antargis comienza
 Tutorial - Exploring your world.;;Tutorial - Explorando el mundo.
-Pause the game;;Pausar el juego
-
+Pause the game
+;;
