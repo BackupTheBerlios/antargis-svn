@@ -335,7 +335,12 @@ class AntMan<AntRubyEntity
 		end
 	end
 	def getDescription
-		_("This is {1}. He is {2} years old.",getName,age)+_("He obeys {1}.",@boss.getName)
+		if @boss.nil?
+			bname=_("nobody")
+		else
+			bname=@boss.getName
+		end
+		_("This is {1}. He is {2} years old.",getName,age)+_("He obeys {1}.",bname)
 	end
 private
 end
