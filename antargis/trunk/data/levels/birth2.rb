@@ -1,4 +1,4 @@
-class Level1<Level
+class Level2<Level
 	def initialize
 		puts "Level inited"
 	end

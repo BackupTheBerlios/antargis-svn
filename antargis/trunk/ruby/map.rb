@@ -225,11 +225,16 @@ class AntRubyMap<AntMap
 			@scriptFile=n.get("scriptfile")
 			@scriptClass=n.get("scriptclass")
 			c=loadFile(n.get("scriptfile"))
+			@filename=@scriptFile.gsub(".rb",".antlvl")
 			levelName=getLevelName
 			c="module #{levelName}\n"+c+"\nend\n"
 			eval(c)
 			cl="#{levelName}::"+n.get("scriptclass")
 			@script=eval(cl).new
+	
+			puts @script.class
+			#raise 1
+	
 		end
 		if @script
 			sd=n.getChildren("scriptdata")
