@@ -41,6 +41,9 @@ class AntFormation
 			calcFormation # try to recalc formation
 			r=getPositionReal(man)
 			if r.nil?
+				if not @boss.getMen.member?(man)
+					raise "Man #{man} is not member of #{@boss}'s men!"
+				end
 				raise "Problem in AntFormation!"
 			end
 		end
