@@ -110,6 +110,8 @@ ARTS
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
 [H] fire is always hearable ?
+[H] fighting should proceed when already attacked while formating!
+[H] check saving/loading of ll-jobs
 [H] remove text about screenshot in load-screen
 [H] remove old texts from local_* files
 [H] add all config-parameters to config-file when created - and comment them a little

@@ -8,7 +8,7 @@ class Level1<Level
 
 			start.push("Tutorial - Exploring your world.","Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.")
 			start.push("Tutorial - Exploring your world.","For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).")
-			start.push("Tutorial - Exploring your world.","If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.")
+			start.push("Tutorial - Exploring your world.","If you want to scroll your view you can push and hold the left mouse-button and move it around. For zooming you can use your mouse-scrollers.")
 			start.push("Tutorial - Exploring your world.","When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.")
 
 			start.push("Tutorial","Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.")
