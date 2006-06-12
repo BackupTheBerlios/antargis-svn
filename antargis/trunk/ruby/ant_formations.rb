@@ -38,7 +38,11 @@ class AntFormation
 		end
 		r=getPositionReal(man)
 		if r.nil?
-			raise "Problem in AntFormation!"
+			calcFormation # try to recalc formation
+			r=getPositionReal(man)
+			if r.nil?
+				raise "Problem in AntFormation!"
+			end
 		end
 		@cache[man]=r
 		return r+pos
