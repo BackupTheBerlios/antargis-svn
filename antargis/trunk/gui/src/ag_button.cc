@@ -86,6 +86,21 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
   queryRedraw();
 }
 
+void AGButton::setTexture(const AGTexture &pTexture)
+{
+  if(!mImageW)
+    {
+      mImageW=new AGImage(this,getRect().origin(),mSurface,false);
+      addChild(mImageW);
+    }
+  else
+    {
+      //      mImageW->setSurface(pTexture);
+      mImageW->show();
+    }
+  mImageW->setTexture(pTexture);
+}
+
 
 void AGButton::draw(AGPainter &p)
 {
@@ -288,6 +303,12 @@ void AGButton::setState(const State &pState)
   else
     mState=DISABLED;
 }
+
+AGButton::State AGButton::getState() const
+{
+  return mState;
+}
+
 
 void AGButton::setChecked(bool pChecked)
 {

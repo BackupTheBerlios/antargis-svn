@@ -23,10 +23,13 @@
 #include "ag_text.h"
 #include "ag_theme.h"
 #include "ag_debug.h"
+#include "ag_layoutfactory.h"
+#include "ag_local.h"
 
 AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect2 pRect):
   AGButton(pParent,pRect,"")//,mChecked(false)
 {
+  mSurfaces[0]=mSurfaces[1]=0;
   /*  mImage=0;
   if(getTheme()->hasSurface(mType+".normal"))
     addChild(mImage=new AGImage(this,AGVector2(0,0),getTheme()->getSurface(mType+".normal"),false));
@@ -63,3 +66,65 @@ std::string AGCheckBox::getName() const
   return mName;
 }
 */
+
+
+void AGCheckBox::setSurfaces(AGSurface pDisabledSurface,AGSurface pEnabledSurface)
+{
+  delete mSurfaces[0];
+  delete mSurfaces[1];
+  mSurfaces[0]=new AGSurface(pDisabledSurface);
+  mSurfaces[1]=new AGSurface(pEnabledSurface);
+
+  //  setState(getState());
+  queryRedraw();
+}
+
+void AGCheckBox::setState(const State &pState)
+{
+  if(mSurfaces[0])
+    {
+      if(pState==NORMAL || pState==LIGHTED || pState==PRESSED)
+	setSurface(*(mSurfaces[0]));
+      else
+	setSurface(*(mSurfaces[1]));
+    }
+
+  AGButton::setState(pState);
+}
+
+
+
+// AGRadio creator
+class AGCheckBoxLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(CheckBox,"checkBox")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+  {
+    AGCheckBox *b=new AGCheckBox(pParent,pRect);
+    std::string caption=_(pNode.get("caption"));
+    if(caption.length())
+      b->setCaption(caption);
+
+    std::string captionImage=pNode.get("caption-image");
+    if(captionImage.length())
+      b->setSurface(AGSurface::load(captionImage),false);
+    if(pNode.get("enabled")=="false")
+      b->setEnabled(false);
+    if(pNode.get("theme").length())
+      b->setTheme(pNode.get("theme"));
+    if(pNode.get("checked")=="true")
+      b->setChecked(true);
+
+    if(pNode.get("disabledImage")!="" && pNode.get("enabledImage")!="")
+      {
+	b->setSurfaces(AGSurface::load(pNode.get("disabledImage")),AGSurface::load(pNode.get("enabledImage")));
+      }
+      
+
+
+    return b;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(CheckBox);

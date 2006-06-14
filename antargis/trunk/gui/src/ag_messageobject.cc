@@ -20,6 +20,7 @@
 
 #include "ag_messageobject.h"
 #include "ag_debug.h"
+#include "ag_main.h"
 
 // AGEvent
 AGEvent::AGEvent(AGListener *pCaller,const std::string &pName,const SDL_Event *e):mCaller(pCaller),mName(pName),mEvent(e)
@@ -73,14 +74,14 @@ AGVector2 AGEvent::getMousePosition() const
   AGVector2 p;
   switch(mEvent->type) {
   case SDL_MOUSEMOTION:
-    p[0]=mEvent->motion.x;
-    p[1]=mEvent->motion.y;
+    p[0]=mEvent->motion.x*getMain()->width()/getMain()->realWidth();
+    p[1]=mEvent->motion.y*getMain()->height()/getMain()->realHeight();
     break;
     
   case SDL_MOUSEBUTTONUP:
   case SDL_MOUSEBUTTONDOWN:
-    p[0]=mEvent->button.x;
-    p[1]=mEvent->button.y;
+    p[0]=mEvent->button.x*getMain()->width()/getMain()->realWidth();
+    p[1]=mEvent->button.y*getMain()->height()/getMain()->realHeight();
     break;
     
   }
@@ -423,8 +424,3 @@ AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s
   return new AGEvent(pCaller,pName,s);
 }
 
-/*AGSDLEvent &toAGSDLEvent(AGEvent &e)
-{
-  return dynamic_cast<AGSDLEvent&>(e);
-}
-*/

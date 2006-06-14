@@ -46,6 +46,7 @@ class AGButton:public AGWidget
   AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id=-1);
 
   void setSurface(AGSurface pSurface,bool pChangeSize=false);
+  void setTexture(const AGTexture &pTexture);
 
   virtual void draw(AGPainter &p);
 
@@ -67,7 +68,8 @@ class AGButton:public AGWidget
   void setCaption(const std::string &pCaption);
 
   /// sets the current state and ensures a redraw
-  void setState(const State &pState);
+  virtual void setState(const State &pState);
+  State getState() const;
 
   virtual void setChecked(bool pChecked);
   bool isChecked() const;

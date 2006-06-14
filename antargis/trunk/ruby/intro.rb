@@ -37,8 +37,8 @@ class IntroApp<AGApplication
 			r
 		}
 		@s=0
-		@img=AGImage.new(nil,AGRect.new(0,0,1024,768),@surfaces[0],false) #,AGRect.new(0,0,1024,768))
-		@black=Black.new(@img,AGRect.new(0,0,1024,768))
+		@img=AGImage.new(nil,AGRect.new(0,0,getScreen.getWidth,getScreen.getHeight),@surfaces[0],false)
+		@black=Black.new(@img,AGRect.new(0,0,getScreen.getWidth,getScreen.getHeight))
 		@img.addChild(@black)
 		setMainWidget(@img)
 		@time=0

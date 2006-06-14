@@ -34,6 +34,8 @@ class AGScreen:public AGPaintTarget
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;
+
+  virtual AGSurface screenshot();
 };
 
 AGScreen &getScreen();

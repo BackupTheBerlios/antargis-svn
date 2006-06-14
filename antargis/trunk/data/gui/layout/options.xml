@@ -16,13 +16,20 @@
 				<!--<text caption="No options here for the time being"/>-->
 				<table cols="2" rows="6" name="VideoOptionsMenu" visible="false">
 					<button col="0" row="0" caption="Toggle fullscreen" name="fullscreen"/>
-					<button col="0" row="1" caption="1024 x 768" name="1024"/>
-					<button col="0" row="2" caption="1280 x 1024" name="1280"/>
-					<button col="0" row="3" caption="1400 x 1050" name="1400"/>
+					<button col="0" row="1" caption="640 x 480" name="640"/>
+					<button col="0" row="2" caption="800 x 600" name="800"/>
+					<button col="0" row="3" caption="1024 x 768" name="1024"/>
+					<button col="0" row="4" caption="1280 x 1024" name="1280"/>
+					<button col="0" row="5" caption="1400 x 1050" name="1400"/>
 				</table>
-				<table cols="5" rows="6" name="GameOptionsMenu" visible="true">
-					<text col="1" row="0" caption="Enable intro"/>
-					<checkbox col="2" row="0" name="optionIntro"/>
+				<table cols="6" rows="6" name="GameOptionsMenu" visible="true">
+					<colsize col="1" relative="3"/>
+					<text col="1" row="0" caption="Play intro on start" valign="center"/>
+					<cell col="2" row="0">
+						<frame width="6">
+							<checkBox name="optionIntro" disabledImage="gui/data/box.png" enabledImage="gui/data/box_cross.png" theme="none"/>
+						</frame>
+					</cell>
 				</table>
 				<table cols="5" rows="6" name="AudioOptionsMenu" visible="false">
 				</table>

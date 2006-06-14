@@ -19,6 +19,8 @@
  */
 
 #include "ag_screen.h"
+#include "ag_debug.h"
+#include "ag_surface.h"
 
 ////////////////////////////////////////////////////////////////////////
 // AGScreen
@@ -40,3 +42,9 @@ size_t AGScreen::getHeight() const
   return 0;
 }
 
+
+AGSurface AGScreen::screenshot()
+{
+  cdebug("NOT YET IMPLEMENTED");
+  return AGSurface(0,0);
+}

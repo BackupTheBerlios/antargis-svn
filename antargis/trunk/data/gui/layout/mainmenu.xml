@@ -41,9 +41,7 @@
 					<image col="1" row="1"  enabled="false" filename="data/gui/small_forest.png"/>
 				</frame>
 			</table>
-			<!--<button col="2" row="0" enabled="false"/>-->
 		</table>
-		<!--<button col="0" row="1" caption-image="data/gui/small_old_nature.png"/>-->
 		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>
 	</table>
 </layout>

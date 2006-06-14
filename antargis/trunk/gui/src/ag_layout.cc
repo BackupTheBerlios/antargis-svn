@@ -65,6 +65,9 @@ void AGLayout::loadXML(const std::string &pXMLData)
   else
     geom=AGRect2(0,0,getMain()->width(),getMain()->height());
 
+
+  cdebug("GEOMETRY:"<<geom.toString());
+
   setRect(geom);
   setName(p.root().get("name"));
 
@@ -515,8 +518,14 @@ public:
       r.setY(toFloat(pNode.get("y")));
 
 #warning "add subsurfaces"
+    
 
-    AGWidget *w=new AGImage(pParent,r,s,false);//,pRect);
+    AGWidget *w;
+
+    if(pNode.get("tile")=="true")
+      w=new AGImage(pParent,r,s,true);
+    else
+      w=new AGImage(pParent,r,s,false);
 
     return w;
   }

@@ -107,7 +107,7 @@ AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
   mTextureUsed=false;
   mPainting=false;
   getSurfaceManager()->registerMe(this);
-  mCleared=false;
+  mCleared=true;
   mFBO=0;
 }
 

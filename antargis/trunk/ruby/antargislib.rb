@@ -77,7 +77,27 @@ if not $antargislibinited
 		end
 	}
 
+
 	$main=AGMain.new(1024,768,32,$fullscreen,true)
+	xres=1024
+	if getConfig.get("xRes")!=""
+		xres=getConfig.get("xRes").to_i
+	end
+	yres=768
+	if getConfig.get("yRes")!=""
+		yres=getConfig.get("yRes").to_i
+	end
+	
+	puts xres,yres
+	#raise 1
+
+	if xres!=1024 || yres!=768
+		$main.changeRes(xres,yres,32,$fullscreen,true,1024,768)
+	end
+
+	getConfig.set("xRes",xres.to_s)
+	getConfig.set("yRes",yres.to_s)
+
 	$main.setCaption("Antargis")
 	$main.setIcon("data/gui/editor/tower1.png")
 

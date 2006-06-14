@@ -41,11 +41,17 @@ class AntMenuApp <AGApplication
 		@menues=[]
 		
 		# setup all the 
+		puts "SETUPMAIN"
 		setupMain
+		puts "SETUPCREDITS"
 		setupCredits
+		puts "SETUPCAMPAIGN"
 		setupCampaign
+		puts "SETUPOPTIONS"
 		setupOptions
+		puts "SETUPLOADMENU"
 		setupLoadMenu
+		puts "SETUPSINGLE"
 		setupSingle
 		@sound=true
 
@@ -143,14 +149,26 @@ class AntMenuApp <AGApplication
 		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)
 		
 		addHandler(@optionsMenu.getChild("fullscreen"),:sigClick,:eventFullscreen)
-		addHandler(@optionsMenu.getChild("1024"),:sigClick,:eventResChange)
-		addHandler(@optionsMenu.getChild("1280"),:sigClick,:eventResChange)
+		["640","800","1024","1280","1400"].each{|n|
+			addHandler(@optionsMenu.getChild(n),:sigClick,:eventResChange)
+		}
+		#addHandler(@optionsMenu.getChild("1280"),:sigClick,:eventResChange)
 		addHandler(@optionsMenu.getChild("1400"),:sigClick,:eventResChange)
 
 		addHandler(@optionsMenu.getChild("gameOptions"),:sigClick,:eventGameOptions)
 		addHandler(@optionsMenu.getChild("videoOptions"),:sigClick,:eventVideoOptions)
 
-		eventVideoOptions
+		addHandler(@optionsMenu.getChild("optionIntro"),:sigClick,:eventOptionsChanged)
+
+		@optionsMenu.getChild("optionIntro").setChecked(getConfig.get("intro")=="true")
+	end
+
+	def eventOptionsChanged(e)
+		case e.getCaller.getName
+			when "optionIntro"
+				getConfig.set("intro",@optionsMenu.getChild("optionIntro").isChecked.to_s)
+				#getScreen.screenshot.save("muh76.png")
+		end
 	end
 
 	def eventVideoOptions
@@ -169,6 +187,10 @@ class AntMenuApp <AGApplication
 
 	def eventResChange(e)
 		case e.getCaller.getName
+			when "640"
+				setRes(640,480)
+			when "800"
+				setRes(800,600)
 			when "1024"
 				setRes(1024,768)
 			when "1280"
@@ -179,7 +201,7 @@ class AntMenuApp <AGApplication
 		return true
 	end
 	def setRes(w,h)
-		getMain.changeRes(w,h,32,true,true) #getMain.fullscreen,true)
+		getMain.changeRes(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
 		puts getSurfaceManager.getUsedTexMem
 		#raise 1
 	end

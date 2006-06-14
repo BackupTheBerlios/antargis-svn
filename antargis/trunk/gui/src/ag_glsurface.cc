@@ -85,9 +85,17 @@ void myFlip()
   SDL_GL_SwapBuffers();
 }
 
-AGGLScreen::AGGLScreen(int W,int H):
-  w(W),h(H)
+AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
+  rw(W),rh(H),
+  w(VW),h(VH)
 {
+  if(w<rw)
+    w=rw;
+  if(h<rh)
+    h=rh;
+
+  cdebug("w:"<<w<<" h:"<<h);
+
   // init GL
   glEnable(GL_TEXTURE_2D);
   glShadeModel(GL_SMOOTH);
@@ -98,7 +106,7 @@ AGGLScreen::AGGLScreen(int W,int H):
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
   glEnable(GL_BLEND);
 
-  glViewport( 0, 0, w, h );
+  glViewport( 0, 0, rw, rh );
   glMatrixMode( GL_PROJECTION );
   glLoadIdentity( );
 
@@ -121,9 +129,47 @@ AGGLScreen::~AGGLScreen()
 { 
 }
 
+AGSurface AGGLScreen::screenshot()
+{
+  AGSurface s(getWidth(),getHeight());
+
+  SDL_Surface *surface=s.surface()->surface;
+
+  unsigned char *buffer=new unsigned char[getWidth()*getHeight()*4];
+  glReadBuffer(GL_FRONT);
+
+  cdebug(s.surface());
+  cdebug(s.surface()->surface);
+
+  glPixelStorei(GL_PACK_ALIGNMENT, 1);
+  assertGL;
+  glPixelStorei(GL_PACK_ROW_LENGTH,
+                surface->pitch / surface->format->BytesPerPixel);
+  assertGL;
+
+
+  glReadPixels(0,0,getWidth(),getHeight(),GL_RGBA,GL_UNSIGNED_BYTE,s.surface()->surface);
+  glReadBuffer(GL_BACK);
+  /*
+
+  // copy
+  for(int x=0;x<getWidth();x++)
+    for(int y=0;y<getHeight();y++)
+      {
+	unsigned char*p=buffer+(x*4)+(y*4*getWidth()*4);
+	AGColor c(p[0],p[1],p[2],p[3]);
+	s.putPixel(x,y,c);
+      }
+  */
+
+  delete [] buffer;
+  return s;
+}
+
+
 void AGGLScreen::begin()
 {
-  glViewport( 0, 0, w, h );
+  glViewport( 0, 0, rw, rh );
   glDisable(GL_LIGHTING);
   glEnable(GL_TEXTURE_2D);
   glShadeModel(GL_SMOOTH);
@@ -133,7 +179,7 @@ void AGGLScreen::begin()
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
   glEnable(GL_BLEND);
 
-  glViewport( 0, 0, w, h );
+  glViewport( 0, 0, rw, rh );
   glMatrixMode( GL_PROJECTION );
   glLoadIdentity( );
 

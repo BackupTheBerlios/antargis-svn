@@ -12,6 +12,7 @@
 
 #include "quadtree.h"
 #include "ag_profiler.h"
+#include "ag_main.h"
 
 bool PickNode::operator<(const PickNode &n) const
 {
@@ -274,8 +275,11 @@ void Scene::initScene()
   
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
+  float xfactor=float(getMain()->realWidth())/getMain()->width();
+  float yfactor=float(getMain()->realHeight())/getMain()->height();
   
-  glViewport(0, 0, mCamera.getWidth(), mCamera.getHeight());
+  glViewport(0, 0, mCamera.getWidth()*xfactor, mCamera.getHeight()*yfactor);
   
   //Use dim light to represent shadowed areas
 

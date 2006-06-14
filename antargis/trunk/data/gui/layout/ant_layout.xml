@@ -9,11 +9,12 @@
 			</table>
 		</cell>
 
-		<table col="1" row="0" cols="1" rows="5" name="SideBar">
+		<table col="1" row="0" cols="1" rows="6" name="SideBar">
 			<rowsize row="0" fixed="90"/>
 			<rowsize row="1" fixed="160"/>
-			<rowsize row="3" fixed="216"/>
-			<rowsize row="4" fixed="50"/>
+			<rowsize row="2" fixed="240"/>
+			<rowsize row="4" fixed="216"/>
+			<rowsize row="5" fixed="50"/>
 			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops">
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
@@ -133,13 +134,19 @@
 					</antInventory>
 				</frame>
 			</cell>
+			
 			<cell col="0" row="3">
+					<!-- FIXME: insert some background here -->
+				<image filename="data/gui/wood_bg.png" tile="true"/>
+			</cell>
+			
+			<cell col="0" row="4">
 				<frame border="button.border.normal" visible="true">
 					<miniMap name="miniMap"/>
 				</frame>
 			</cell>
 			<!-- system buttons -->
-			<cell col="0" row="4">
+			<cell col="0" row="5">
 				<table cols="4" rows="1">
 					<button col="0" row="0" name="pause" caption-image="data/gui/pause.png" tooltip="Pause the game"/>
 					<button col="1" row="0" name="stats" caption-image="data/gui/stats.png" tooltip="Statistics" enabled="false"/>

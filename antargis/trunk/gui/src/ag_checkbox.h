@@ -31,7 +31,12 @@ class AGCheckBox:public AGButton
  public:
   AGCheckBox(AGWidget *pParent,AGRect2 pRect);
 
+  void setSurfaces(AGSurface pDisabledSurface,AGSurface pEnabledSurface);
+
+  void setState(const State &pState);
   virtual bool eventMouseClick(AGEvent *m);
+ private:
+  AGSurface *mSurfaces[2];
 };
 
 #endif

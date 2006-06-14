@@ -117,10 +117,6 @@ ARTS
 [H] add all config-parameters to config-file when created - and comment them a little
 [H] game crashes when Rowen dies
 [H] choosing/making player for multiplayer
-[H] Add skip intro option
- You should be able to skip the intro - it gets boring 
- Solution: :Comment out lines 120 and 121 of /ruby/intro.rb to do this 
- Really, we should be checking command lines params before we even get this far, so you could do something like 'antargis --fullscreen --skip-intro' 
 [H] Rowen can cross water without boat
 [H] Fire is always hearable - even when nobody is restign
 [M] add info-bar about troops to inventory or main-view, while fighting (?)

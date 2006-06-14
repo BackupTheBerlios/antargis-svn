@@ -38,7 +38,7 @@ typedef GLuint TextureID;
 class AGGLScreen:public AGScreen
 {
  public:
-  AGGLScreen(int W,int H);
+  AGGLScreen(int W,int H,int VW=-1,int VH=-1);
 
   virtual ~AGGLScreen();
 
@@ -67,6 +67,9 @@ class AGGLScreen:public AGScreen
   virtual void putPixel(int x,int y,const AGColor &c);
 
   virtual void begin(); // call before start drawing
+
+  AGSurface screenshot();
+
   void flip();
   bool inScreen(const AGRect2 &r) const;
 
@@ -84,6 +87,7 @@ class AGGLScreen:public AGScreen
   void checkUnusedTextures();
 
   int w,h;
+  int rw,rh;
 
   friend class AGTexture;
 };

@@ -33,11 +33,19 @@ class AGMain:public AGRubyObject
   ~AGMain();
 
   void flip();
-  void changeRes(int w,int h,int d,bool fs,bool gl);
+  /** change screen resolution to w*h*d with
+      fullscreen when fs is true and in opengl mode if gl is true
+      vw and vh describe virtual screen resolutions which implies scaling
+      This is supported in opengl-mode only.
+   */
+  void changeRes(int w,int h,int d,bool fs,bool gl,int vw=-1,int vh=-1);
   void toggleFull();
 
   int width() const;
   int height() const;
+
+  int realWidth() const;
+  int realHeight() const;
 
   void setIcon(const std::string &pFile);
   void setCaption(const std::string &pCaption);

@@ -36,6 +36,8 @@
 
 int lastWidth=0;
 int lastHeight=0;
+int lastVWidth=0;
+int lastVHeight=0;
 int lastDepth=0;
 bool fullScreen=false;
 bool lastGL=false;
@@ -96,7 +98,9 @@ AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
     videoFlags|=SDL_FULLSCREEN;
 
   lastWidth=w;
+  lastVWidth=w;
   lastHeight=h;
+  lastVHeight=h;
   lastDepth=pd;
   fullScreen=fs;
   lastGL=openGL;
@@ -137,7 +141,7 @@ void AGMain::flip()
   getScreen().flip();
 }
 
-void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
+void AGMain::changeRes(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 {
   fontCache.clear();
   getSurfaceManager()->clear();
@@ -175,8 +179,18 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
   SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
   if(mScreen)
     delete mScreen;
+
+  if(vw<w)
+    vw=w;
+  if(vh<h)
+    vh=h;
+
+  lastVWidth=vw;
+  lastVHeight=vh;
+
+
   if(gl)
-    setScreen(mScreen=new AGGLScreen(w,h));
+    setScreen(mScreen=new AGGLScreen(w,h,vw,vh));
   else
     setScreen(mScreen=new AGSDLScreen(ms));
 
@@ -186,7 +200,7 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl)
 
 void AGMain::toggleFull()
 {
-  changeRes(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL);
+  changeRes(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL,lastVWidth,lastVHeight);
 }
 
 AGMain *getMain()
@@ -203,12 +217,22 @@ AGMain *getMain()
 
 int AGMain::width() const
 {
-  return lastWidth;
+  return lastVWidth;
 }
 int AGMain::height() const
 {
+  return lastVHeight;
+}
+
+int AGMain::realWidth() const
+{
+  return lastWidth;
+}
+int AGMain::realHeight() const
+{
   return lastHeight;
 }
+
 
 void AGMain::setIcon(const std::string &pFile)
 {

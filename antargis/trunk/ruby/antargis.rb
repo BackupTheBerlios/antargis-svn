@@ -200,7 +200,12 @@ class AntGameApp <AntRubyView
 		# FPS display
 		if @frameCount>14 then
 			@fps=@frameCount / @elapsTime
-			fps=sprintf("%3.0f",@fps)
+			fps=""
+			if @fps<10
+				fps=sprintf("%3.2f",@fps)
+			else
+				fps=sprintf("%3.0f",@fps)
+			end
 			puts "FPS:"+fps
 			puts "pick-tris:"+getScene.getPickTriangles.to_s
 			@statusBar.setText("FPS:#{fps}")
