@@ -28,7 +28,6 @@ if not $antargislibinited
 	require 'ant_debug.rb'
 	
 	$antargislibinited=true
-
 	$fullscreen=false
 	$antProfiling=false
 
@@ -87,16 +86,25 @@ if not $antargislibinited
 	if getConfig.get("yRes")!=""
 		yres=getConfig.get("yRes").to_i
 	end
-	
-	puts xres,yres
-	#raise 1
 
-	if xres!=1024 || yres!=768
+
+
+	if not $fullscreen
+		if getConfig.get("fullscreen")=="true"
+			$fullscreen=true
+		end
+	end
+	
+	puts xres,yres,$fullscreen
+	#raise #1
+
+	if xres!=1024 || yres!=768 || $fullscreen
 		$main.changeRes(xres,yres,32,$fullscreen,true,1024,768)
 	end
 
 	getConfig.set("xRes",xres.to_s)
 	getConfig.set("yRes",yres.to_s)
+	getConfig.set("fullscreen",$fullscreen.to_s)
 
 	$main.setCaption("Antargis")
 	$main.setIcon("data/gui/editor/tower1.png")
