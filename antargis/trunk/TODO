@@ -92,8 +92,6 @@ ARTS
 [Graphics - 3d-engine]
 ------------------------------------------------------
 [H] increase picking speed
-[H] include 3d-texture-scaling into AGGLTexture-constr.
-[H] test for vertex-buffer-objects!
 [M] FBO without color-attachment ????
 [M] make particle engine more generic and include shader-support
 [L] make shadows work on other platforms too?
@@ -105,14 +103,13 @@ ARTS
 		several imposters into one mesh and render them effiently.
 [L] Fog of war - overlay darkness/fog
 [L] fix decals (use clamp-to-edge and original cells)
+[L] include 3d-texture-scaling into AGGLTexture-constr.
 [VL] seasons - snow,spring... Exchange or fade terrain textures.
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] fire is always hearable ?
 [H] fighting should proceed when already attacked while formating!
 [H] check saving/loading of ll-jobs
-[H] remove text about screenshot in load-screen
 [H] remove old texts from local_* files
 [H] add all config-parameters to config-file when created - and comment them a little
 [H] game crashes when Rowen dies
@@ -161,6 +158,7 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
+[H] cleanup gui
 [H] add erosion to map-generator
 [L] Trigger definition
 [L] cleanup gui - remove unused elements

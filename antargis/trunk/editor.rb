@@ -39,12 +39,11 @@ class AntGameApp < AntRubyEditView
 		super(sw,sh,nil) #AntRubyMap.new(64,64))
 		$app=self	
 		$map=@map=AntRubyMap.new(getScene,64,64)
-		@layout=AGLayout.new(@mainWidget)
-		@layout.loadXML(loadFile("data/gui/layout/editor.xml"))
-		@mainWidget.addChild(@layout)
+		#@layout=AGLayout.new(@mainWidget)
+		#@layout.loadXML(loadFile("data/gui/layout/editor.xml"))
+		#@mainWidget.addChild(@layout)
 		#$screen=@layout
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
-		addHandler(@layout.getChild("pause"),:sigClick,:eventPause)
 		addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
 		
 		addHandler(@layout.getChild("doGen"),:sigClick,:eventGenerate)
@@ -53,31 +52,15 @@ class AntGameApp < AntRubyEditView
 		@miniMap.setMap(getMap)
 		@miniMap.setScene(getScene)
 		
-		puts "LAYOUTNAME:"
-		puts @layout.getName
 		$screen=@layout
 		
-		eventGenerate
+		#eventGenerate
 	end
 	
 	
 	def eventGenerate
 		map=getMap
 		getMap.setHeight(-0.5)
-#		map.setAllWater
-		
-# 		w=map.width
-# 		h=map.height
-# 		
-# 		flat=[[15,9],[10,8],[5,40],[4,30],[3,70],[2,70],[1,70]]
-# 		flat.each{|add|
-# 			for i in 1..add[1]
-# 				rad=add[0]
-# 				x=rand*(w-2*rad)+rad
-# 				y=rand*(h-2*rad)+rad
-# 				#map.addFlat(x,y,30,rad)
-# 			end
-# 		}
 		ps=GeneratorParameters.new
 		if true
 			generateMap(getMap,ps)
@@ -130,7 +113,6 @@ app=AntGameApp.new(1024,768)
 if ARGV[0]
 	getMap.loadMap(ARGV[0]+".antlvl")
 end
-
 
 app.run
 

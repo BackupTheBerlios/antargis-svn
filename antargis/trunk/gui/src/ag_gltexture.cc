@@ -24,7 +24,9 @@
 #include "ag_rendercontext.h"
 #include "ag_debug.h"
 
-static size_t gUsedTexMemory=0;
+
+//FIXME: this should be static
+size_t gUsedTexMemory=0;
 
 
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false)
@@ -137,6 +139,7 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
 
 GLuint AGGLTexture::id()
 {
+
   return mID;
 }
 bool AGGLTexture::is3d() const

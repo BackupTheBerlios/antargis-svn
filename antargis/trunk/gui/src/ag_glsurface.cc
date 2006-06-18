@@ -141,26 +141,32 @@ AGSurface AGGLScreen::screenshot()
   cdebug(s.surface());
   cdebug(s.surface()->surface);
 
-  glPixelStorei(GL_PACK_ALIGNMENT, 1);
+  glPixelStorei(GL_PACK_ALIGNMENT, 2);
   assertGL;
-  glPixelStorei(GL_PACK_ROW_LENGTH,
-                surface->pitch / surface->format->BytesPerPixel);
+  glPixelStorei(GL_PACK_ROW_LENGTH, getWidth());
+  //                surface->pitch / surface->format->BytesPerPixel);
   assertGL;
 
 
-  glReadPixels(0,0,getWidth(),getHeight(),GL_RGBA,GL_UNSIGNED_BYTE,s.surface()->surface);
-  glReadBuffer(GL_BACK);
-  /*
+  {
+    TRACE;
+    glReadPixels(0,0,getWidth(),getHeight(),GL_RGBA,GL_UNSIGNED_BYTE,buffer);//s.surface()->surface);
+    glReadBuffer(GL_BACK);
+  }
 
-  // copy
-  for(int x=0;x<getWidth();x++)
-    for(int y=0;y<getHeight();y++)
-      {
-	unsigned char*p=buffer+(x*4)+(y*4*getWidth()*4);
-	AGColor c(p[0],p[1],p[2],p[3]);
-	s.putPixel(x,y,c);
-      }
-  */
+  {
+    // copy
+    TRACE;
+    int h=getHeight()-1;
+    for(int x=0;x<getWidth();x++)
+      for(int y=0;y<getHeight();y++)
+	{
+	  unsigned char*p=buffer+((x+(h-y)*getWidth())*4);
+	  AGColor c(p[0],p[1],p[2],p[3]);
+	  s.putPixel(x,y,c);
+	}
+  }
+  
 
   delete [] buffer;
   return s;

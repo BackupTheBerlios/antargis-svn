@@ -238,6 +238,18 @@ class AntOptionsDialog<AntDialog
 	end
 end
 
+def takeScreenshot
+	$app.hidePanel
+	$app.draw
+	s=getScreen.screenshot
+	$app.showPanel
+	s
+end
+
+def takeSmallScreenshot
+	takeScreenshot.scale(256,192)
+end
+
 class AntSaveDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/savedialog.xml")
@@ -248,10 +260,12 @@ class AntSaveDialog<AntDialog
 		if not filename =~ /.*\.antlvl/ then
 			filename=filename+".antlvl"
 		end
+		hide
 		getMap.saveMap("savegames/"+filename)
+		takeSmallScreenshot.save("savegames/#{filename.gsub("antlvl","png")}")
 		getMap.pause=false
-		close
 		setNormalVolumeWave
+		close
 		return true
 	end
 end
@@ -270,7 +284,9 @@ class AntSaveCampaignDialog<AntDialog
 		if not filename =~ /.*\.antcmp/ then
 			filename=filename+".antcmp"
 		end
+		hide
 		$campaign.save("savegames/"+filename)
+		takeSmallScreenshot.save("savegames/#{filename.gsub("antcmp","png")}")
 		#getMap.saveMap("savegames/"+filename)
 		getMap.pause=false
 		close

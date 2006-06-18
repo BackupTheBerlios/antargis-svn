@@ -861,9 +861,14 @@ void AGWidget::setCaching(bool pEnable)
   mCaching=pEnable;
   delete mCache;
 
-  mCache=new AGTexture(width(),height());
-
-  mCacheTouched=true;
+  mCache=0;
+  mCacheTouched=false;
+  if(pEnable)
+    {
+      mCache=new AGTexture(width(),height());
+      
+      mCacheTouched=true;
+    }
 }
 
 void AGWidget::setDrawn()

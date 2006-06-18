@@ -33,7 +33,9 @@ AGListBoxItem::AGListBoxItem(std::string pID,std::string pValue)
 
 
 
-AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pRect)
+AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pRect),
+							     sigSelect(this,"sigSelect"),
+							     sigDoubleClick(this,"sigDoubleClick")
 {
   mBackground=AGBackground("listbox.background");
   mHilight=AGBackground("listbox.selected");
@@ -192,6 +194,9 @@ bool AGListBox::eventMouseClick(AGEvent *e)
 	  cdebug("n:"<<n);
 	  if(n<mItems.size())
 	    mSelected=n;
+
+	  e->setName("sigSelect");
+	      
 	  sigSelect(e);
 	  return true;
 	}

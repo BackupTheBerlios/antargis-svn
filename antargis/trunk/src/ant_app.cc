@@ -81,6 +81,7 @@ bool GLApp::eventMouseButtonDown(AGEvent *e)
 }
 bool GLApp::eventMouseButtonUp(AGEvent *e)
 {
+  CTRACE;
   omx=-1;
   omy=-1;
   if(mMayClick)

@@ -21,10 +21,8 @@
 
 #!/usr/bin/ruby
 
-#require 'libantargis'
-#include Libantargis
-
 require 'ents.rb'
+require 'editor/ent_list.rb'
 
 class AntRubyEditView<GLApp
 	include AGHandler
@@ -38,31 +36,15 @@ class AntRubyEditView<GLApp
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/edit_layout.xml"))
 		
-		puts self.methods.sort.join(" ")
-		puts "------------------------"
 		setMainWidget(@layout)
 		@mainWidget=@layout
 		addHandler(@layout.getChild("allWater"),:sigClick,:eventAllWater)
 		addHandler(@layout.getChild("allGrass"),:sigClick,:eventAllGrass)
 		
 		addHandler(@layout.getChild("rubber"),:sigClick,:eventRubber)
-		
-		decos=["flower","gravel","grassLight","hole","rock","coach","floor","path","block"]
-		decos.each{|name|
-			#addHandler(@layout.getChild(name),:sigClick,:sigDeco)
-		}
-		
-		decals=["gravel"]
-		decals.each{|name|
-			addHandler(@layout.getChild(name),:sigClick,:eventDecal)
-		}
-		
-		
-		ents=["sheep","hero","tower","druid","stones","farm","dwelling","workshop","fir","grassGreen","twig","man","tree","bush","highGrass"]
-		ents.each{|name|
-			addHandler(@layout.getChild(name),:sigClick,:eventAddEnt)
-		}
-		
+
+		addHandler(@layout.getChild("entitiesTab"),:sigSelected,:eventEntitySelected)
+
 		addHandler(@layout.getChild("pointer"),:sigClick,:eventPointer)
 		
 		[1,2,3,5,10,15].each{|s|addHandler(@layout.getChild("edit#{s}"),:sigClick,:eventSize)}
@@ -78,12 +60,16 @@ class AntRubyEditView<GLApp
 		
 		addHandler(@layout.getChild("new"),:sigClick,:eventNewMap)
 		@buttonlayout=@layout
+		@modifiers={}
+		@modifiers["terrain"]="editHeight"
+		@modifiers["entities"]="addEntity"
+		@type=AntHero
+		@layout.getChild("editHeight").setChecked(true)
+		@layout.getChild("entitiesTab").entType=AntHero
 		setTab("terrain")
 	end
 	
 	def eventNewMap
-		#getMap.newMap(64,64)
-		#getMap.setHeight(-0.5)
 		if not @newDialog
 			@layout.addChild(@newDialog=AGLayout.new(@layout))
 			@newDialog.loadXML(loadFile("data/gui/layout/newdialog.xml"))
@@ -127,13 +113,18 @@ class AntRubyEditView<GLApp
 				if w
 					w.show
 				end
+				w=@buttonlayout.getChild(e)
+				w.setChecked(true)
 			else
 				w=@buttonlayout.getChild(e+"Tab")
 				if w
 					w.hide
 				end
+				w=@buttonlayout.getChild(e)
+				w.setChecked(false)
 			end
 		}
+		@modifier=@modifiers[name]
 	end
 	
 	def eventTabSelect(e)
@@ -151,6 +142,7 @@ class AntRubyEditView<GLApp
 				send(@modifier,list,button)
 			end
 		end
+		puts "back from eventClick"
 		#super(list)
 		return true
 	end
@@ -183,7 +175,9 @@ class AntRubyEditView<GLApp
 						end
 					end
 				end
+				puts "MAP CHANGED..."
 				@map.mapChanged
+				puts "MAP CHANGED!"
 			end
 		}
 	end
@@ -253,6 +247,7 @@ class AntRubyEditView<GLApp
 			@modifier="editTerrain"
 			@terrainType=e.getCaller.getName
 		end
+		@modifiers["terrain"]=@modifier
 		return true
 	end
 	
@@ -274,63 +269,72 @@ class AntRubyEditView<GLApp
 		@modifier="doRubber"
 		return true
 	end
+
+	def eventEntitySelected(e)
+		c=@layout.getChild("entitiesTab").entType
+		if not c.nil?
+			@modifier="addEntity"
+			@type=c
+		end
+		return true
+	end
 	
-	def eventAddEnt(e)
-		callerName=e.getCaller.getName
-		@modifier="addEntity"
-		case callerName
-			when "grassGreen"
-				@type=AntGrass
-			when "sheep"
-				@type=AntSheep
-			when "tower"
-				@type=AntTower
-			when "farm"
-				@type=AntFarm
-			when "fir"
-				@type=AntFir
-			when "workshop"
-				@type=AntWorkshop
-			when "dwelling"
-				@type=AntDwelling
-			when "stones"
-				@type=AntStone
-			when "man"
-				@type=AntMan
-			when "hero"
-				@type=AntHero
-				@appearance="hero"
-			when "druid"
-				@type=AntNPC
-				@appearance="druid"
-			when "twig"
-				@type=AntTwig
-			when "tree"
-				@type=AntTree
-			when "bush"
-				@type=AntBush
-			when "highGrass"
-				@type=AntHighGrass
-		end
-		return true
-	end
-	def eventDecal(e)
-		callerName=e.getCaller.getName
-		@modifier="addEntity"
-		@type=AntDecal
-		return true
-	end
-	def eventDeco(e)
-		callerName=e.getCaller.getName
-		@modifier="addEntity"
-		if callerName=="coach"
-			@type=AntDecoMesh
-		else
-			@type=AntDeco
-		end
-		@decoType=callerName
-		return true
-	end
+# 	def eventAddEnt(e)
+# 		callerName=e.getCaller.getName
+# 		@modifier="addEntity"
+# 		case callerName
+# 			when "grassGreen"
+# 				@type=AntGrass
+# 			when "sheep"
+# 				@type=AntSheep
+# 			when "tower"
+# 				@type=AntTower
+# 			when "farm"
+# 				@type=AntFarm
+# 			when "fir"
+# 				@type=AntFir
+# 			when "workshop"
+# 				@type=AntWorkshop
+# 			when "dwelling"
+# 				@type=AntDwelling
+# 			when "stones"
+# 				@type=AntStone
+# 			when "man"
+# 				@type=AntMan
+# 			when "hero"
+# 				@type=AntHero
+# 				@appearance="hero"
+# 			when "druid"
+# 				@type=AntNPC
+# 				@appearance="druid"
+# 			when "twig"
+# 				@type=AntTwig
+# 			when "tree"
+# 				@type=AntTree
+# 			when "bush"
+# 				@type=AntBush
+# 			when "highGrass"
+# 				@type=AntHighGrass
+# 		end
+# 		return true
+# 	end
+# 	def eventDecal(e)
+# 		callerName=e.getCaller.getName
+# 		@modifier="addEntity"
+# 		@type=AntDecal
+# 		return true
+# 	end
+# 	def eventDeco(e)
+# 		callerName=e.getCaller.getName
+# 		@modifier="addEntity"
+# 		if callerName=="coach"
+# 			@type=AntDecoMesh
+# 		else
+# 			@type=AntDeco
+# 		end
+# 		@decoType=callerName
+# 		return true
+# 	end
 	
 	def isTerrain(node)
 		[TerrainPieceVA,WaterPiece].member?(node.class)

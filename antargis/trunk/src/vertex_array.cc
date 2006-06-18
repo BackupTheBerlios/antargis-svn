@@ -3,11 +3,23 @@
 #include <assert.h>
 #include <ag_debug.h>
 #include <ag_profiler.h>
+#include <ag_config.h>
+
+static bool useVBO()
+{
+  std::string s=getConfig()->get("useVBO");
+  if(s!="true" && s!="false")
+    {
+      s="true";
+      getConfig()->set("useVBO",s);
+    }
+  return s=="true";
+}
 
 VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
 {
   bColor=true;
-  mBuffers=GLEE_ARB_vertex_buffer_object;
+  mBuffers=GLEE_ARB_vertex_buffer_object && useVBO();
 
   assert(GLEE_EXT_vertex_array);
 

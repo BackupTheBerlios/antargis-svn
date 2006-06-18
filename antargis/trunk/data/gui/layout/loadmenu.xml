@@ -29,9 +29,13 @@
 						</cell>
 						<cell col="2" row="0">
 							<table cols="1" rows="3">
+								<rowsize row="1" fixed="10"/>
 								<rowsize row="2" fixed="40"/>
 								<cell col="0" row="0">
-									<text caption="In future versions a screenshot will be given here." name="desc"/>
+									<text caption="" name="desc"/>
+								</cell>
+								<cell col="0" row="0">
+									<image name="screenshot"/>
 								</cell>
 								<cell col="0" row="2">
 									<button name="doLoad" caption="Load"/>

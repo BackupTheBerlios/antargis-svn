@@ -316,7 +316,7 @@ void Node::getContent(std::ostringstream &s,int depth) const
 std::string Node::toString(bool indent) const
   {
     std::ostringstream os;
-    cdebug(mName.length());
+    //    cdebug(mName.length());
     if(mName.length()==0)
       return mContent;
 

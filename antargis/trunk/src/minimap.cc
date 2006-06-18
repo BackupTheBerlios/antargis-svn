@@ -1,6 +1,7 @@
 #include "minimap.h"
 #include <ag_layoutfactory.h>
 #include <ag_screen.h>
+#include <ag_profiler.h>
 #include "ant_app.h"
 
 #define MAP_BORDER
@@ -167,6 +168,7 @@ void MiniMap::mapChangedP(bool forceFull=false)
 
 void MiniMap::draw(AGPainter &p)
 {
+  STACKTRACE;
   //  CTRACE;
   AGRect2 m=getRect().origin();
   //  cdebug(mTexture<<"   "<<m);
