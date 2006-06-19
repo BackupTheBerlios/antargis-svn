@@ -20,6 +20,7 @@
 
 #include "ant_frustum.h"
 #include "ag_debug.h"
+#include "ag_profiler.h"
 
 /////////////////////////////////////////////////////////////////////
 // AntPlane
@@ -31,7 +32,7 @@ AntPlane::AntPlane(const AGVector3 &dir,float offset):
 {
 }
 
-bool AntPlane::inside(const AGVector3 &v) const
+inline bool AntPlane::inside(const AGVector3 &v) const
 {
   return v*mDir-mOffset>0;
 }
@@ -70,13 +71,21 @@ bool AntFrustum::inside(const AGVector3 &v) const
 
 bool AntFrustum::collides(const AGBox3 &b) const
 {
-  for(std::vector<AntPlane>::const_iterator i=mPlanes.begin();i!=mPlanes.end();++i)
+  static std::vector<AGVector3> vs(8);
+  {
+    b.calcVertices(vs);
+  }
+  static bool outside;
+  static std::vector<AntPlane>::const_iterator i;
+  static std::vector<AGVector3>::iterator j;
+
+  
+  for(i=mPlanes.begin();i!=mPlanes.end();++i)
     {
-      std::vector<AGVector4> vs=b.getVertices();
-      bool outside=true;
-      for(std::vector<AGVector4>::iterator j=vs.begin();j!=vs.end();++j)
+      outside=true;
+      for(j=vs.begin();j!=vs.end();++j)
 	{
-	  if(i->inside(j->dim3()))
+	  if(i->inside(*j))
 	    {
 	      outside=false;
 	      break;

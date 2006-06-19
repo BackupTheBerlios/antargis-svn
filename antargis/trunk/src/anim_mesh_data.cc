@@ -13,7 +13,9 @@ void inverseTranslate(AGVector3 &v, const AGMatrix4 &m );
 
 bool useAnimation()
 {
-  return getConfig()->get("animationType")!="false";
+  bool anim=getConfig()->get("animationType")!="false";
+  getConfig()->set("animationType",anim?"true":"false");
+  return anim;
 }
 
 bool useShaderAnimation()

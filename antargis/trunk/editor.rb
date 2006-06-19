@@ -38,7 +38,9 @@ class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
 		super(sw,sh,nil) #AntRubyMap.new(64,64))
 		$app=self	
-		$map=@map=AntRubyMap.new(getScene,64,64)
+		$map=@map=AntRubyMap.new(getScene,128,128)
+		$map.setHeight(-0.5)
+
 		#@layout=AGLayout.new(@mainWidget)
 		#@layout.loadXML(loadFile("data/gui/layout/editor.xml"))
 		#@mainWidget.addChild(@layout)

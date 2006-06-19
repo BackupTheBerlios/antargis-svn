@@ -656,7 +656,8 @@ class AGBox3
 
   bool collides(const AGMatrix4 &frustum) const;
 
-  std::vector<AGVector4> getVertices() const;
+  std::vector<AGVector3> getVertices() const;
+  void calcVertices(std::vector<AGVector3> &vs) const;
 
   AGBox3 operator+(const AGVector3 &v) const;
   AGBox3 operator-(const AGVector3 &v) const;
@@ -672,5 +673,7 @@ std::ostream &operator<<(std::ostream &o,const AGVector3&v);
 std::ostream &operator<<(std::ostream &o,const AGVector4&v);
 std::ostream &operator<<(std::ostream &o,const AGRect2&v);
 std::ostream &operator<<(std::ostream &o,const AGBox3&v);
+
+#include "ag_geometry_inline.cc"
 
 #endif

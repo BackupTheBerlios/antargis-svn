@@ -91,6 +91,8 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
+[H] try using GL_DYNAMIC_DRAW_ARB for dynamic vertexarrays and combine multiple meshes some how?
+[H] editor crashes on exit when using FBOs
 [H] increase picking speed
 [M] FBO without color-attachment ????
 [M] make particle engine more generic and include shader-support

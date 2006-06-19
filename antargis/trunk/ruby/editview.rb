@@ -54,6 +54,7 @@ class AntRubyEditView<GLApp
 		[1,2,3].each{|h|addHandler(@layout.getChild("hard#{h}"),:sigClick,:eventHard)}
 		
 		@hard=2
+		@layout.getChild("hard2").setChecked(true)
 		
 		addHandler(@layout.getChild("terrain"),:sigClick,:eventTabSelect)
 		addHandler(@layout.getChild("entities"),:sigClick,:eventTabSelect)

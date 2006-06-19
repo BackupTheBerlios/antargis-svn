@@ -76,6 +76,8 @@ class Scene:public AGRubyObject
 
   AntCamera &getCameraObject();
 
+  size_t getDrawnMeshes() const;
+
   size_t getTriangles() const;
   size_t getPickTriangles() const;
 
@@ -132,6 +134,7 @@ class Scene:public AGRubyObject
 
   size_t mTriangles;
   size_t mPickTriangles;
+  size_t mMeshes;
 
   // picking vars
   std::map<GLuint,SceneNode*> pickNames;

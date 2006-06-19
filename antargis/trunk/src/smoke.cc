@@ -19,7 +19,9 @@ bool smokeEnabled()
     {
       gSmoke=getConfig()->get("particleEffects")!="false";
       lastSmokeTest=ts;
+      getConfig()->set("particleEffects",gSmoke?"true":"false");
     }
+
   return gSmoke;
 }
 

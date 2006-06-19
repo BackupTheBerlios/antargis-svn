@@ -51,7 +51,10 @@ void Mesh::draw()
   glColor4fv(mColor);*/
   begin();
   if(mData)
-    mData->draw(mColor);
+    {
+      //      mData->setColors(false);
+      mData->draw(mColor);
+    }
   end();
 }
 void Mesh::drawDepth()

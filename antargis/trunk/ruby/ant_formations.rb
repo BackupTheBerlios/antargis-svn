@@ -119,7 +119,7 @@ class AntFormationRest<AntFormation
 	end
 	private
 	def getRowsOfLine(line)
-		{1=>10,2=>14,3=>20}[line]
+		{1=>10,2=>14,3=>20,4=>40}[line]
 	end
 
 	def sort(men)

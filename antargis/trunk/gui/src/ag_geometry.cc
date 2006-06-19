@@ -553,10 +553,6 @@ AGVector3 &AGVector3::operator-=(const AGVector3 &p)
   return *this;
 }
 
-float AGVector3::operator*(const AGVector3 &p) const
-{
-  return v[0]*p.v[0]+v[1]*p.v[1]+v[2]*p.v[2];
-}
 AGVector3 &AGVector3::operator*=(float f)
 {
   v[0]*=f;
@@ -2241,16 +2237,16 @@ bool AGBox3::valid() const
 
 bool AGBox3::collides(const AGMatrix4 &frustum) const
 {
-  std::vector<AGVector4> a=getVertices();
+  std::vector<AGVector3> a=getVertices();
   float minx,miny,minz;
   float maxx,maxy,maxz;
 
   minx=miny=minz=10000;
   maxx=maxy=maxz=-10000;
   // simply check, if any of the box's vertices lie inside the frustum
-  for(std::vector<AGVector4>::iterator i=a.begin();i!=a.end();i++)
+  for(std::vector<AGVector3>::iterator i=a.begin();i!=a.end();i++)
     {
-      AGVector4 p(frustum*(*i));
+      AGVector4 p(frustum*AGVector4(*i,1));
       p/=p[3];
       if(p[0]>=-1 && p[0]<=1 &&
 	 p[1]>=-1 && p[1]<=1 &&
@@ -2290,18 +2286,18 @@ bool AGBox3::collides(const AGBox3 &box) const
 
 
 
-std::vector<AGVector4> AGBox3::getVertices() const
+std::vector<AGVector3> AGBox3::getVertices() const
 {
-  std::vector<AGVector4> a;
-  a.push_back(AGVector4(base,1)+AGVector4(0,0,0,0));
-  a.push_back(AGVector4(base,1)+AGVector4(dir[0],0,0,0));
-  a.push_back(AGVector4(base,1)+AGVector4(0,dir[1],0,0));
-  a.push_back(AGVector4(base,1)+AGVector4(0,0,dir[2],0));
+  std::vector<AGVector3> a;
+  a.push_back(base+AGVector3(0,0,0));
+  a.push_back(base+AGVector3(dir[0],0,0));
+  a.push_back(base+AGVector3(0,dir[1],0));
+  a.push_back(base+AGVector3(0,0,dir[2]));
 
-  a.push_back(AGVector4(base,1)+AGVector4(dir[0],dir[1],0,0));
-  a.push_back(AGVector4(base,1)+AGVector4(dir[0],0,dir[2],0));
-  a.push_back(AGVector4(base,1)+AGVector4(0,dir[1],dir[2],0));
-  a.push_back(AGVector4(base,1)+AGVector4(dir[0],dir[1],dir[2],0));
+  a.push_back(base+AGVector3(dir[0],dir[1],0));
+  a.push_back(base+AGVector3(dir[0],0,dir[2]));
+  a.push_back(base+AGVector3(0,dir[1],dir[2]));
+  a.push_back(base+AGVector3(dir[0],dir[1],dir[2]));
   return a;
 }
 

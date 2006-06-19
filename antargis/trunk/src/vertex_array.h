@@ -20,20 +20,23 @@ class VertexArray
 
   bool bColor;
   bool mBuffers;
+  bool mArrays;
   bool mChanged;
   bool mTextures3D;
+
+  /// VA is dynamic, when index-buffer changes
+  bool mDynamic;
 
   unsigned int mVertexBuffer,mColorBuffer,mNormalBuffer,mTexBuffer,mIndexBuffer;
 
   AGBox3 bbox;
 
  public:
-  VertexArray();
+  VertexArray(bool pDynamic=false);
   virtual ~VertexArray();
   void addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector2 pTex);
   void addVertex(AGVector4 pVertex, AGVector4 pColor, AGVector3 pNormal, AGVector3 pTex);
   void addTriangle(size_t p0,size_t p1,size_t p2);
-
 
   void setColors(bool color);
   void setBuffers(bool pBuffers);
@@ -61,6 +64,7 @@ class VertexArray
 
   AGVector4 lineHit(const AGLine3 &pLine) const;
 
+  bool useVertexArrays() const;
 };
 
 class VertexArrayShader:public VertexArray

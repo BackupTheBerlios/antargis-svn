@@ -3,6 +3,7 @@
 #include "ag_kill.h"
 #include "ag_rendercontext.h"
 #include "ag_profiler.h"
+#include "ag_config.h"
 
 AntWaterShader *gWaterShader=0;
 AntWaterShader *getWaterShader()
@@ -15,6 +16,17 @@ AntWaterShader *getWaterShader()
   assert(gWaterShader);
   return gWaterShader;
 }
+
+static int gWaterAnim=-10;
+bool useWaterAnimation()
+{
+  if(gWaterAnim==-10)
+    {
+      gWaterAnim=getConfig()->get("animationType")!="false";
+    }
+  return gWaterAnim;
+}
+
 
 WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
   SceneNode(pScene,pos,AGBox3()),
@@ -109,9 +121,11 @@ void WaterPiece::draw()
   glDisable(GL_CULL_FACE);
   glDisable(GL_ALPHA_TEST);
   glColor4f(1,1,1,1);
-  getWaterShader()->enable();
+  if(useWaterAnimation())
+    getWaterShader()->enable();
   mArray.draw();
-  getWaterShader()->disable();
+  if(useWaterAnimation())
+    getWaterShader()->disable();
 }
 
 void WaterPiece::drawPick()

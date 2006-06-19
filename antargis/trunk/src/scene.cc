@@ -77,6 +77,11 @@ Scene::~Scene()
   delete mTree;
 }
 
+size_t Scene::getDrawnMeshes() const
+{
+  return mMeshes;
+}
+
 size_t Scene::getTriangles() const
 {
   return mTriangles;
@@ -97,7 +102,8 @@ void Scene::draw()
 
   getRenderer()->setCurrentScene(this);
   assertGL;
- 
+
+  mMeshes=0;
   mTriangles=0;
   mPickTriangles=0;
 
@@ -323,9 +329,22 @@ AGMatrix4 Scene::getFrustum()
   //return cameraProjectionMatrix*cameraViewMatrix;
 }
 
+static GLuint displayList=0;
+static bool dlInited=false;
 
 void Scene::drawScene()
 {
+#ifdef TEST_DL
+  if(dlInited)
+    {
+      glCallList(displayList);
+    }
+  else
+    {
+      dlInited=true;
+      displayList=glGenLists(1);
+      glNewList(displayList,GL_COMPILE);
+#endif
   STACKTRACE; 
   AGMatrix4 frustum=getFrustum();
   AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
@@ -369,6 +388,7 @@ void Scene::drawScene()
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
 	      drawn++;
+	      mMeshes++;
 	    }
 	}
     }
@@ -383,9 +403,16 @@ void Scene::drawScene()
 	      (*i)->draw();
 	      mTriangles+=(*i)->getTriangles();
 	      drawn++;
+	      mMeshes++;
 	    }
 	}
     }
+#ifdef TEST_DL
+glEndList();
+      glCallList(displayList);
+    }
+#endif
+
 }
 void Scene::drawShadow()
 {

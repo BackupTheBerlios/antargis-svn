@@ -16,10 +16,23 @@ static bool useVBO()
   return s=="true";
 }
 
-VertexArray::VertexArray():bbox(AGVector3(),AGVector3())
+static bool useVertexArrays()
+{
+  std::string s=getConfig()->get("useVertexArrays");
+  if(s!="true" && s!="false")
+    {
+      s="true";
+      getConfig()->set("useVertexArrays",s);
+    }
+  return s=="true";
+}
+
+
+VertexArray::VertexArray(bool pDynamic):bbox(AGVector3(),AGVector3()),mDynamic(pDynamic)
 {
   bColor=true;
   mBuffers=GLEE_ARB_vertex_buffer_object && useVBO();
+  mArrays=GLEE_EXT_vertex_array && useVertexArrays();
 
   assert(GLEE_EXT_vertex_array);
 
@@ -42,7 +55,8 @@ VertexArray::~VertexArray()
       glDeleteBuffersARB( 1, &mColorBuffer );
       glDeleteBuffersARB( 1, &mNormalBuffer );
       glDeleteBuffersARB( 1, &mTexBuffer );
-      glDeleteBuffersARB( 1, &mIndexBuffer );
+      if(!mDynamic)
+	glDeleteBuffersARB( 1, &mIndexBuffer );
     }
 }
 
@@ -90,6 +104,7 @@ void VertexArray::init()
 {
   if(mBuffers)
     {
+      STACKTRACE;
       glGenBuffersARB( 1, &mVertexBuffer );
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mVertexBuffer );
       glBufferDataARB( GL_ARRAY_BUFFER_ARB, mVertices.size()*sizeof(AGVector4), &(mVertices[0]), GL_STATIC_DRAW_ARB );
@@ -108,10 +123,13 @@ void VertexArray::init()
 	glBufferDataARB( GL_ARRAY_BUFFER_ARB, mTexCoords3D.size()*sizeof(AGVector3), &(mTexCoords3D[0]), GL_STATIC_DRAW_ARB );
       else
 	glBufferDataARB( GL_ARRAY_BUFFER_ARB, mTexCoords.size()*sizeof(AGVector2), &(mTexCoords[0]), GL_STATIC_DRAW_ARB );
-      
-      glGenBuffersARB( 1, &mIndexBuffer );
-      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer );
-      glBufferDataARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndices.size()*sizeof(Uint16), &(mIndices[0]), GL_STATIC_DRAW_ARB );
+
+      if(!mDynamic)
+	{
+	  glGenBuffersARB( 1, &mIndexBuffer );
+	  glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer );
+	  glBufferDataARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndices.size()*sizeof(Uint16), &(mIndices[0]), GL_STATIC_DRAW_ARB );
+	}
 
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, 0);
       glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
@@ -133,13 +151,16 @@ void VertexArray::draw()
 
   assertGL;
 
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  if(bColor)
-    glEnableClientState(GL_COLOR_ARRAY);
-  else
-    glDisableClientState(GL_COLOR_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  if(mBuffers||mArrays)
+    {
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glEnableClientState(GL_NORMAL_ARRAY);
+      if(bColor)
+	glEnableClientState(GL_COLOR_ARRAY);
+      else
+	glDisableClientState(GL_COLOR_ARRAY);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    }
 
   if(mBuffers)
     {
@@ -168,13 +189,23 @@ void VertexArray::draw()
 	  glBindBufferARB( GL_ARRAY_BUFFER_ARB, mColorBuffer);
 	  glColorPointer(4, GL_FLOAT, 0, 0);
 	}
-      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
-      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+
+      if(mDynamic)
+	{
+	  glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+			 &(mIndices[0]));
+	}
+      else
+	{
+	  glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
+	  glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+	}
     }
-  else
+  else if(mArrays)
     {
       //      cdebug("too much work");
       glNormalPointer(GL_FLOAT, 0, &(mNormals[0]));
+      glClientActiveTexture(GL_TEXTURE0);
       if(mTextures3D)
 	glTexCoordPointer(3, GL_FLOAT, 0, &(mTexCoords3D[0]));
       else
@@ -185,11 +216,32 @@ void VertexArray::draw()
       glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
 		     &(mIndices[0]));
   }
+  else
+    {
+      glClientActiveTexture(GL_TEXTURE0);
+      glBegin(GL_TRIANGLES);
+      for(std::vector<Uint16>::iterator i=mIndices.begin();i!=mIndices.end();i++)
+	{
+	  glNormal3fv(mNormals[*i]);
+	  if(mTextures3D)
+	    glTexCoord3fv(mTexCoords3D[*i]);
+	  else
+	    glTexCoord2fv(mTexCoords[*i]);
+	  if(bColor)
+	    glColor4fv(mColors[*i]);
+	  glVertex4fv(mVertices[*i]);
+	}
+      glEnd();
+      
+    }
 
-  glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_COLOR_ARRAY);
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+  if(mBuffers||mArrays)
+    {
+      glDisableClientState(GL_VERTEX_ARRAY);
+      glDisableClientState(GL_NORMAL_ARRAY);
+      glDisableClientState(GL_COLOR_ARRAY);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    }
 
 }
 
@@ -268,8 +320,16 @@ void VertexArray::drawDepth()
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mVertexBuffer);
       glVertexPointer(4, GL_FLOAT, 0, 0);
 
-      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
-      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+      if(mDynamic)
+	{
+	  glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+			 &(mIndices[0]));
+	}
+      else
+	{
+	  glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
+	  glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+	}
 
     }
   else
@@ -307,8 +367,16 @@ void VertexArray::drawDepth()
       glBindBufferARB( GL_ARRAY_BUFFER_ARB, mVertexBuffer);
       glVertexPointer(4, GL_FLOAT, 0, 0);
 
-      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
-      glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+      if(mDynamic)
+	{
+	  glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,
+			 &(mIndices[0]));
+	}
+      else
+	{
+	  glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, mIndexBuffer);
+	  glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT,0);
+	}
 
     }
   else
@@ -419,6 +487,11 @@ void VertexArray::setTexCoord(size_t i,const AGVector2 &t)
   update();
 }
 
+bool VertexArray::useVertexArrays() const
+{
+  return mArrays;
+}
+
 
 
 
@@ -455,14 +528,17 @@ void VertexArrayShader::draw()
 
 void VertexArrayShader::attach()
 {
-  for(std::map<std::string,unsigned int>::iterator i=aids.begin();i!=aids.end();i++)
+  //  if(useVertexArrays())
     {
-      GLint loc=p->getAttr(i->first);
-      glEnableClientState(GL_VERTEX_ARRAY);
-      glEnableVertexAttribArrayARB(loc); // add array
-      glBindBufferARB( GL_ARRAY_BUFFER_ARB, i->second);
-      glVertexAttribPointerARB(loc,1,GL_FLOAT,0,0,0);
-      //      glTexCoordPointer(2, GL_FLOAT, 0, 0);
+      for(std::map<std::string,unsigned int>::iterator i=aids.begin();i!=aids.end();i++)
+	{
+	  GLint loc=p->getAttr(i->first);
+	  glEnableClientState(GL_VERTEX_ARRAY);
+	  glEnableVertexAttribArrayARB(loc); // add array
+	  glBindBufferARB( GL_ARRAY_BUFFER_ARB, i->second);
+	  glVertexAttribPointerARB(loc,1,GL_FLOAT,0,0,0);
+	  //      glTexCoordPointer(2, GL_FLOAT, 0, 0);
+	}
     }
 }
 

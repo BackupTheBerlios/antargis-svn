@@ -147,6 +147,7 @@ void AnimMesh::drawPrivate(bool textured, bool mem)
 
 	  mData->animShader.sendUniform("matrices",mShaderMatrices);
 	  
+	  //	  mData->mArrayDepth.setColors(false);
 	  mData->mArray.draw();
 
 	  mData->animShader.disable();
