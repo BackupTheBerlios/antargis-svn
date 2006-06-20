@@ -46,9 +46,13 @@ class AntGameApp < AntRubyEditView
 		#@mainWidget.addChild(@layout)
 		#$screen=@layout
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
-		addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
+		#addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
 		
 		addHandler(@layout.getChild("doGen"),:sigClick,:eventGenerate)
+
+		addHandler(@layout.getChild("loadButton"),:sigClick,:load)
+		addHandler(@layout.getChild("saveButton"),:sigClick,:save)
+
 		
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@miniMap.setMap(getMap)

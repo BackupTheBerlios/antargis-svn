@@ -556,3 +556,53 @@ void VertexArrayShader::aInit()
     }
   aInited=true;
 }
+
+
+VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts)
+{
+  VertexArray *na=new VertexArray;
+  size_t start=0;
+  size_t ci;
+
+  for(std::vector<AGMatrix4>::const_iterator i=ts.begin();i!=ts.end();i++)
+    {
+      assert(va.mVertices.size()==va.mNormals.size());
+      // transform normals and vertices
+      for(size_t j=0;j<va.mVertices.size();j++)
+	{
+	  AGVector4 v=va.mVertices[j];
+	  AGVector3 n=va.mNormals[j];
+
+	  v=*i*v;
+	  n=(*i*AGVector4(n,0)).dim3();
+	  
+	  na->mVertices.push_back(v);
+	  na->mNormals.push_back(n);
+	}
+
+      std::copy(va.mColors.begin(),va.mColors.end(),std::back_inserter(na->mColors));
+      std::copy(va.mTexCoords.begin(),va.mTexCoords.end(),std::back_inserter(na->mTexCoords));
+      std::copy(va.mTexCoords3D.begin(),va.mTexCoords3D.end(),std::back_inserter(na->mTexCoords3D));
+      for(std::vector<Uint16>::const_iterator j=va.mIndices.begin();j!=va.mIndices.end();j++)
+	{
+	  ci=*j+start;
+	  assert(ci>=start);
+	  assert(ci<na->mVertices.size());
+	  assert(ci<na->mColors.size());
+	  assert(ci<na->mNormals.size());
+	    
+	  na->mIndices.push_back(*j+start);
+	}
+      start+=va.mVertices.size();
+    }
+
+  na->bColor=va.bColor;
+  na->mChanged=true;
+
+  // calc bbox
+  na->bbox=AGBox3(AGVector3(),AGVector3());
+
+  
+
+  return na;
+}

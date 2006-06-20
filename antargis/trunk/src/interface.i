@@ -19,6 +19,7 @@
 %template(ResourceMap) std::map<std::string,float>;
 %template(AGNodeList) std::vector<Node>;
 %template(AGNodePList) std::vector<Node*>;
+%template(AGMatrixVector) std::vector<AGMatrix4>;
 
 %include "antargisgui.h"
 

@@ -28,6 +28,7 @@
 #include "ag_glsurface.h"
 #include "ag_fs.h"
 #include "ag_debug.h"
+#include "ag_mixer.h"
 #include "ag_surfacemanager.h"
 #include "privates.h"
 #include <SDL.h>
@@ -50,6 +51,8 @@ bool quited=false;
 void newInstanceKiller();
 void deleteInstanceKiller();
 
+void initSoundEngine();
+
 bool hasQuit()
 {
   return quited;
@@ -57,21 +60,13 @@ bool hasQuit()
 
 /**
    creates an AGMain object.
-   @param pw screen-width
-   @param ph screen height.
-   @param pd color depth in bits - typically 32
-   @param fs bool fullscreen. true for fullscreen, false for window
-   @param opengl use opengl or not
 */
-AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
+AGMain::AGMain()
 {
   assert(mAGMain==0);
   mAGMain=this;
 
   newInstanceKiller();
-
-  int w=pw;
-  int h=ph;
 
   // Initialize SDL
   if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
@@ -80,44 +75,13 @@ AGMain::AGMain(int pw,int ph,int pd,bool fs,bool openGL)
       exit(1);
     }
 
-  videoInfo = SDL_GetVideoInfo();
-  if(!videoInfo)
-    {
-      cdebug("SDL could not get video-info");
-      exit(1);
-    }
+  videoInfo=0;
 
-  int videoFlags=0;
-
-  if(openGL)
-    videoFlags|=SDL_OPENGL;
-  else
-    videoFlags|=SDL_SWSURFACE;
-
-  if(fs)
-    videoFlags|=SDL_FULLSCREEN;
-
-  lastWidth=w;
-  lastVWidth=w;
-  lastHeight=h;
-  lastVHeight=h;
-  lastDepth=pd;
-  fullScreen=fs;
-  lastGL=openGL;
-
-  // set video mode
-
-  SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
-
-  if(openGL)
-    setScreen(mScreen=new AGGLScreen(w,h));
-  else
-    setScreen(mScreen=new AGSDLScreen(ms));
-  //atexit(SDL_Quit);
+  initSoundEngine();
 
   initFS("");
-  // FIXME: set $main in ruby to this ???
-  
+
+  mScreen=0;
 }
 
 extern std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
@@ -141,10 +105,21 @@ void AGMain::flip()
   getScreen().flip();
 }
 
-void AGMain::changeRes(int w,int h,int d,bool fs,bool gl,int vw,int vh)
+/**
+   initializes video mode
+   @param pw screen-width
+   @param ph screen height.
+   @param pd color depth in bits - typically 32
+   @param fs bool fullscreen. true for fullscreen, false for window
+   @param opengl use opengl or not
+*/
+void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 {
-  fontCache.clear();
-  getSurfaceManager()->clear();
+  if(mScreen)
+    {
+      fontCache.clear();
+      getSurfaceManager()->clear();
+    }
 
   lastWidth=w;
   lastHeight=h;
@@ -153,7 +128,6 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
   if(!videoInfo)
     {
-      throw int();
       videoInfo = SDL_GetVideoInfo();
       if(!videoInfo)
 	{
@@ -200,7 +174,7 @@ void AGMain::changeRes(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
 void AGMain::toggleFull()
 {
-  changeRes(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL,lastVWidth,lastVHeight);
+  initVideo(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL,lastVWidth,lastVHeight);
 }
 
 AGMain *getMain()

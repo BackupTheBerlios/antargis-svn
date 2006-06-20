@@ -34,8 +34,6 @@
 #include "ag_serial.h"
 #include <zlib.h>
 
-static bool FSinited=false;
-
 static std::list<std::string> mFsPaths;
 
 void addPath(const std::string &pName)

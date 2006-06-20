@@ -65,7 +65,11 @@ class VertexArray
   AGVector4 lineHit(const AGLine3 &pLine) const;
 
   bool useVertexArrays() const;
+  friend VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
+
 };
+
+VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
 
 class VertexArrayShader:public VertexArray
 {

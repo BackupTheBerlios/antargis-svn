@@ -446,8 +446,10 @@ void Scene::pickDraw()
 
   for(NodeList::iterator i=l.begin();i!=l.end();i++)
     {
+      STACKTRACE;
       if((*i)->visible() && (*i)->bbox().collides(frustum))
 	{
+	  STACKTRACE;
 	  glPushName(name);
 	  (*i)->drawPick();
 	  glPopName();

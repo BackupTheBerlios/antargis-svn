@@ -127,6 +127,10 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   //  fclose(f);
   mShadow=pShadow;
   mArray=opt.getArray();
+
+
+
+
   drawColors=true;
   mPickable=true;
 }
@@ -375,4 +379,11 @@ void MeshData::texCoordFromPos(float scale)
 void MeshData::setPickable(bool p)
 {
   mPickable=p;
+}
+
+void MeshData::makeInstances(const std::vector<AGMatrix4> &ts)
+{
+  VertexArray *va=::makeInstances(mArray,ts);
+  mArray=*va;
+  delete va;
 }

@@ -106,6 +106,7 @@ void closeSoundEngine()
 	  Mix_FreeMusic(mMusic);
 	  mMusic=0;
 	}
+      //FIXME: readd this
       Mix_CloseAudio();
       delete mSoundMutex;
     }

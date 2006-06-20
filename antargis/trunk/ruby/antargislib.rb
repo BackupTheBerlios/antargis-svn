@@ -22,7 +22,10 @@ if not $antargislibinited
 		require 'libantargis'
 	end
 	include Libantargis
-	
+
+	#setQuiet
+
+
 	require 'gui/data/ag_tools.rb'
 	require 'ant_tools'
 	require 'ant_debug.rb'
@@ -77,7 +80,7 @@ if not $antargislibinited
 	}
 
 
-	$main=AGMain.new(1024,768,32,$fullscreen,true)
+	$main=AGMain.new
 	xres=1024
 	if getConfig.get("xRes")!=""
 		xres=getConfig.get("xRes").to_i
@@ -98,9 +101,9 @@ if not $antargislibinited
 	puts xres,yres,$fullscreen
 	#raise #1
 
-	if xres!=1024 || yres!=768 || $fullscreen
-		$main.changeRes(xres,yres,32,$fullscreen,true,1024,768)
-	end
+	#if xres!=1024 || yres!=768 || $fullscreen
+	$main.initVideo(xres,yres,32,$fullscreen,true,1024,768)
+	#end
 
 	getConfig.set("xRes",xres.to_s)
 	getConfig.set("yRes",yres.to_s)

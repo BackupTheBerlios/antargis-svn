@@ -15,8 +15,10 @@
 				<colsize col="0" fixed="50"/>
 				<colsize col="1" fixed="50"/>
 				<colsize col="2" fixed="50"/>
-				<button col="1" row="0" theme="antButton" name="options" caption-image="data/gui/options.png"/>
-				<button col="2" row="0" theme="antButton" name="quit" caption-image="data/gui/door.png"/>
+				<button col="0" row="0" name="loadButton" caption-image="data/gui/load.png"/>
+				<button col="1" row="0" name="saveButton" caption-image="data/gui/save.png"/>
+				<!--<button col="2" row="0" theme="antButton" name="options" caption-image="data/gui/options.png"/>-->
+				<button col="3" row="0" theme="antButton" name="quit" caption-image="data/gui/door.png"/>
 			</table>
 			<cell col="0" row="1">
 				<button theme="antButton" name="doGen" caption="generate Terrain"/>
@@ -76,9 +78,6 @@
 				</table>
 
 				
-			</cell>
-			<cell col="0" row="5">
-				<button theme="antButton" name="fight" caption="The wolfs' lair" enabled="false"/>
 			</cell>
 			<cell col="0" row="6">
 				<frame border="button.border.normal">

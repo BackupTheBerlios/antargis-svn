@@ -38,6 +38,8 @@ AGFBO::AGFBO(AGGLTexture *pTexture, bool withDepth):
   h=mTexture->height();
   fb=depth_rb=0;
 
+  std::cerr<<"WARNING: FBOs can make problems on some cards and drivers. Disable them in ~/.Antargis/config.xml !"<<std::endl;
+
   init();
 }
 
@@ -50,7 +52,9 @@ AGFBO::AGFBO(GLuint pTexture, size_t pW,size_t pH):
   fb=depth_rb=0;
   w=pW;
   h=pH;
+  std::cerr<<"WARNING: FBOs can make problems on some cards and drivers. Disable them in ~/.Antargis/config.xml !"<<std::endl;
 
+  
 #ifdef USE_FBO
 
   glGenFramebuffersEXT(1, &fb);
@@ -152,10 +156,8 @@ bool canFBO()
 #ifndef USE_FBO
   return false; // FIXME: FBO painting does not work yet
 #else
-  if(getConfig()->get("useFBO")=="")
-    getConfig()->set("useFBO","true");
-
-  if(getConfig()->get("useFBO")=="true")
+  
+  if(getConfig()->get("useFBO","false","<!--enable Frame-Buffer-Objects - can make problems on some drivers. options:true,false -->")=="true")
     return GLEE_EXT_framebuffer_object;
   else
     return false;

@@ -113,7 +113,7 @@ class Document
 
     Node &root();
 
-    std::string toString() const;
+    std::string toString(bool forceIndent=false) const;
 
     void parseMemory(const std::string &s);
   };

@@ -29,7 +29,7 @@ struct SDL_VideoInfo;
 class AGMain:public AGRubyObject
 {
  public:
-  AGMain(int w,int h,int d,bool fs,bool gl);
+  AGMain();
   ~AGMain();
 
   void flip();
@@ -38,7 +38,7 @@ class AGMain:public AGRubyObject
       vw and vh describe virtual screen resolutions which implies scaling
       This is supported in opengl-mode only.
    */
-  void changeRes(int w,int h,int d,bool fs,bool gl,int vw=-1,int vh=-1);
+  void initVideo(int w,int h,int d,bool fs,bool gl,int vw=-1,int vh=-1);
   void toggleFull();
 
   int width() const;

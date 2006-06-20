@@ -160,7 +160,7 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
-[H] cleanup gui
+[H] add directory-selector to load- and save-dialog (only in editor)
 [H] add erosion to map-generator
 [L] Trigger definition
 [L] cleanup gui - remove unused elements

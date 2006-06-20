@@ -29,6 +29,8 @@ class AGConfig
  public:
   AGConfig();
 
+  std::string get(const std::string &pValue,const std::string &pDefault,const std::string &pComment);
+
   std::string get(const std::string &pValue) const;
   void set(const std::string &pName,const std::string &pValue);
 
@@ -36,6 +38,7 @@ class AGConfig
   void writeToDisc();
 
   std::map<std::string,std::string> singleValue;
+  std::map<std::string,std::string> comments;
 };
 
 AGConfig *getConfig();

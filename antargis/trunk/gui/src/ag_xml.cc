@@ -378,9 +378,9 @@ Node *Document::getRootNode()
   return mRoot;
   }*/
 
-std::string Document::toString() const
+std::string Document::toString(bool forceIndent) const
   {
-    if(mRoot->hasTextNode())
+    if(mRoot->hasTextNode() && forceIndent==false)
       return mRoot->toString(false);
     else
       return mRoot->toString();
