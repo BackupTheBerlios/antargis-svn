@@ -120,11 +120,13 @@
 									<image col="4" row="1" filename="data/gui/bow.png" tooltip="Bow"/>
 									<image col="4" row="2" filename="data/gui/steel.png" tooltip="Steel"/>
 									<image col="4" row="3" filename="data/gui/fish_rod.png" tooltip="Fishing rod"/>
+									<image col="4" row="4" filename="data/gui/apple2.png" tooltip="Fruit"/>
 									
 									<text col="5" row="0" caption="0" align="right" name="boat" font="inventory.font"/>
 									<text col="5" row="1" caption="0" align="right" name="bow" font="inventory.font"/>
 									<text col="5" row="2" caption="0" align="right" name="steel" font="inventory.font"/>
 									<text col="5" row="3" caption="0" align="right" name="rod" font="inventory.font"/>
+									<text col="5" row="4" caption="0" align="right" name="fruit" font="inventory.font"/>
 									
 									
 								</table>

@@ -6,7 +6,7 @@ class AntInventory<AGWidget
 	def initialize(p,rect)
 		super(p,rect)
 		$inventory=self
-		@resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel","rod"]
+		@resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel","rod","fruit"]
 		setCaching(true)
 		@invinited=false
 
@@ -100,7 +100,10 @@ private
 			checkFriend
 			res=@inspect.resource.getAll
 			res["men"]=@inspect.menCount.to_f
-			res.each{|a,b|
+#			res.each{|a,b|
+			@resTypes.each{|a|
+				b=res[a]
+				b||=0
 				setValue(a,b)
 			}
 			setValue("name",@inspect.getName)
@@ -119,6 +122,7 @@ private
 					getChild("minion").setText("Obeys "+bossname.to_s)
 				end
 			end
+			#redraw
 		end
 	end
 end

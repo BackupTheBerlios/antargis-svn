@@ -35,6 +35,7 @@ class AntMan<AntRubyEntity
 	include AntManBase
 
 	attr_reader :meshState, :dead
+	attr_accessor :target
 	
 	def initialize()
 		super(AGVector2.new(0,0))
@@ -290,7 +291,9 @@ class AntMan<AntRubyEntity
 		setMeshState(@meshState)
 	end
 	
-
+	def canCarry
+		3
+	end
 	
 	def saveXML(node)
 		super(node)

@@ -49,8 +49,9 @@ class AntFarm<AntHouse
 
 	def process
 		if resource.get("fruit")>0
-			resource.add("food",1)
-			resource.add("fruit",0)
+			amount=[resource.get("fruit"),3].min
+			resource.add("food",amount)
+			resource.sub("fruit",amount)
 		end
 	end
 	def houseType

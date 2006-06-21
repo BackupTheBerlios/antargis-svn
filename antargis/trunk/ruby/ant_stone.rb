@@ -32,6 +32,7 @@ class AntStone<AntRubyEntity
 #		setMesh(NewDecal.new(AGVector2.new(3,3),5.3,getMap,"data/textures/gravel.png"))
 #		setMesh(NewDecal.new(AGVector2.new(3,3),5.3,getMap,"data/textures/terrain/rough_dirt2.png"))
 #		setMesh(Mesh.new(
+		resource.set("stone",500)
 	end
 	def setTreeType(t)
 		@typeID=t

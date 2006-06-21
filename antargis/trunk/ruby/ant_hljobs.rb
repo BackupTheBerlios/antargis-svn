@@ -613,7 +613,9 @@ class AntHeroConstructJob<AntHeroMoveJob
 				when "collect" # bring back
 					# FIXME: add sub resource from nearest
 					p=@restype[man]
-					man.resource.add(p[0],1)
+					amount=[p[1].resource.get(p[0]),man.canCarry].min
+					p[1].resource.sub(p[0],amount)
+					man.resource.add(p[0],amount)
 					man.newMoveJob(0,@target.getPos2D,0)
 					man.collectResource(@restype[man][0])
 					man.setMode("brought")
@@ -680,7 +682,7 @@ private
 	def getNextWithResource(res)
 		#goods={"wood"=>"tree","stone"=>"stone","food"=>"tree","coal"=>"mine","ore"=>"mine"}
 		#enttype=goods[res]
-		getMap.getNext(@target,res) #enttype)
+		getMap.getNext(@target,res,1) #enttype)
 	end
 	def checkEat(man)
 		puts "CHECKEAT"

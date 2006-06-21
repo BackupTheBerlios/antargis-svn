@@ -168,10 +168,6 @@ class AntRubyMap<AntMap
 		return ret
 	end
 
-	def getNext(ent,type)
-		super(ent,type)
-	end
-
 	################################
 	# loading & saving
 	################################

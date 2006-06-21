@@ -199,7 +199,7 @@ std::vector<AntEntityPtr> AntMap::getEntities(const std::string &pName)
 }
 
 
-AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType)
+AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType,size_t atLeast)
 {
   // FIXME: optimize this - use quadtree
 
@@ -214,7 +214,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType)
     {
       if(me!=*i)
         {
-          if((*i)->provides(pType))
+          if((*i)->provides(pType) && (*i)->resource.get(pType)>=atLeast)
             {
               AGVector2 p2=(*i)->getPos2D()-p;
               float norm=p2.length2();

@@ -69,23 +69,10 @@ class AntTree<AntRubyEntity
 		setProvide("fruit",true)
 		@angle=rand*360
 		
-		setMinimapColor(AGColor.new(0,0x77,0))
-		#setVirtualY(100)
-	
-		@crownMiddle=AGVector3.new(0,0,3)
-		@crownRadius=1.3
 		@maxApples=100
-		@applePos=[]
-		for i in 1..@maxApples
-			va=(rand-0.5)*Math::PI
-			ha=(rand+1)*Math::PI  # only on front side
-			z=@crownRadius*Math::sin(va)
-			rest=Math::sqrt(@crownRadius**2-z**2)
-			y=Math::sin(ha)*rest
-			x=Math::cos(ha)*rest
-			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
-		end
-		resource.set("food",5)
+		setMinimapColor(AGColor.new(0,0x77,0))
+	
+		resource.set("fruit",5)
 		resource.set("wood",40)
 		setupMesh
 	end
@@ -108,7 +95,7 @@ class AntTree<AntRubyEntity
 	
 	def eventNoJob
 		# grow apples
-		resource.set("food",[resource.get("food")+1,@maxApples].min)
+		resource.set("fruit",[resource.get("fruit")+1.7,@maxApples].min)
 		resourceChanged
 		newRestJob(20)
 	end
@@ -116,6 +103,22 @@ class AntTree<AntRubyEntity
 	private
 	def setupMesh
 		setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),@angle))
+	end
+
+	# an old function for display apples - this is too costly
+	def setupApples
+		@crownMiddle=AGVector3.new(0,0,3)
+		@crownRadius=1.3
+		@applePos=[]
+		for i in 1..@maxApples
+			va=(rand-0.5)*Math::PI
+			ha=(rand+1)*Math::PI  # only on front side
+			z=@crownRadius*Math::sin(va)
+			rest=Math::sqrt(@crownRadius**2-z**2)
+			y=Math::sin(ha)*rest
+			x=Math::cos(ha)*rest
+			@applePos.push(AGVector3.new(x,y,z)+@crownMiddle)
+		end
 	end
 end
 

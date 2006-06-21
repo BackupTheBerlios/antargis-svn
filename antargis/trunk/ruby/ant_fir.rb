@@ -27,7 +27,7 @@ require 'fir_mesh.rb'
 class AntBaseTree<AntRubyEntity
 	def initialize(p)
 		super
-		setType("tree")
+		#setType("tree")
 		setProvide("tree",true)
 	end
 	def resourceChanged

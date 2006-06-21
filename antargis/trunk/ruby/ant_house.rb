@@ -157,10 +157,15 @@ class AntHouse<AntBoss
 			e.digResource(res)
 			e.setMode("digging "+res)
 		elsif e.getMode=~/digging/
-			e.newMoveJob(0,getPos2D,0)#,false)
+			# digging ready - take home
+			e.newMoveJob(0,getPos2D,0)
 			res=e.getMode.gsub(/.* /,"")
 			e.collectResource(res)
 			e.setMode("homing")
+			# take resource
+			amount=[e.target.resource.get(res),e.canCarry].min
+			e.target.resource.sub(res,amount)
+			e.resource.add(res,amount)
 		elsif e.getMode=="homing"
 			e.newRestJob(1) # always rest a little
 			e.setMode("")
@@ -192,19 +197,16 @@ class AntHouse<AntBoss
 
 	# assigns ent a job for fetching good from a enttype
 	def fetch(good,ent)
-		# FIXME: check if tent has enough of good !!
-	
-		puts self, good,good.class
-		tent=getMap.getNext(self,good)
+		tent=getMap.getNext(self,good,1)
 		if tent == nil then
-			#puts "No '"+good+"' found!"
 			ent.newRestJob(10)
 		else
 			if tent.getPlayer!=getPlayer
 			else
-				ent.newFetchJob(0,tent,good)
+				ent.newMoveJob(0,tent.getPos2D,0.5)
 				ent.setMode("fetching "+good)
 				@atHome.delete(ent)
+				ent.target=tent
 				ent.setVisible(true)
 			end
 		end
