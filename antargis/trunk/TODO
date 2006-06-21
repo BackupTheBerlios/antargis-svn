@@ -113,7 +113,6 @@ ARTS
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 [H] add all config-parameters to config-file when created - and comment them a little
-[H] game crashes when Rowen dies
 [H] Rowen can cross water without boat
 [M] choosing/making player for multiplayer
 [M] add info-bar about troops to inventory or main-view, while fighting (?)
