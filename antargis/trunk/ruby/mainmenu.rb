@@ -100,7 +100,10 @@ class AntMenuApp <AGApplication
 			l.insertItem(f,x)
 		}
 		if fs.length>0
-			@loadMenu.getChild("screenshot").setSurface(AGSurface.load("savegames/"+fs[0].gsub("antcmp","png")))
+			fn="savegames/"+fs[0].gsub("antcmp","png")
+			if findFile(fn)!=""
+				@loadMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
+			end
 		end
 		#exit
 	end
@@ -307,7 +310,10 @@ class AntMenuApp <AGApplication
 		#raise 1
 		@loadMenu.getChild("desc").setText("")
 		filename=id=@loadMenu.getChild("list").getSelectedID
-		@loadMenu.getChild("screenshot").setSurface(AGSurface.load("savegames/"+id.gsub(".antcmp",".png")))
+		fn="savegames/"+id.gsub(".antcmp",".png")
+		if findFile(fn)!=""
+			@loadMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
+		end
 		return true
 	end
 	def eventLoad(e)

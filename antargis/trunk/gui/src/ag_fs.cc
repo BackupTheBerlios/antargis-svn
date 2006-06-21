@@ -209,7 +209,7 @@ std::string findFile(const std::string &pName)
 	return findFile(pName.substr(0,pName.length()-3)+"jpg");
     }
 
-  throw std::runtime_error("File not found!");
+  //  throw std::runtime_error("File not found!");
   return "";
 }
 
