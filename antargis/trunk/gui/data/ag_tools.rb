@@ -18,9 +18,12 @@
 # You should have received a copy of the GNU General Public
 # License along with this program.
 #
+# == File description
+# This file contains some helper functions to provide easier event-Handling in ruby.
+# Have a look at AGHandler for more information.
 
-#!/usr/bin/ruby
 
+# checks if libantargis is already loaded
 def hasLibantargis
 	begin
 		x=eval("Libantargis")
@@ -32,12 +35,13 @@ def hasLibantargis
 	#x!=nil
 end
 
+# if libantargis was not yet loaded, try loading libantargisgui alone
 if not hasLibantargis
-	puts "libant NOT found"
 	require 'libantargisgui'
 	include Libantargisgui
 end
 
+# some old abbrevs
 AGPoint=AGVector2
 AGRect=AGRect2
 
@@ -45,10 +49,13 @@ AGRect=AGRect2
 # EVENT_HANDLERS
 #
 # this module adds simpler event handling to your ruby code
-# each slot should have for parameters: (eventname,callerName,eventItself,callerHimself)
-# add a slot by addHandler(object,:signalName,:slotName)
+# each slot should have for parameters: (event)
+# add a slot with this:
+# * addHandler(object,:signalName,:slotName)
 # and also include this module into each class in which you want to use this :-)
+# this is not needed if you're using an AGWidget or AGApplication object
 module AGHandler
+	# clear all handlers
 	def clearHandlers
 		@handlers={}
 	end
@@ -71,19 +78,10 @@ module AGHandler
 		end
 	end
 	# event dispatcher
-	
 	def signal(e)
 		@handlers||={}
 		callerName=e.getCaller.getName
 		evName=callerName+":"+e.getName
-		#dputs "EVNAME",evName
-		#dputs @handlers.keys.join(";")
-		#puts "SIGNAL"
-		#puts callerName,evName
-		puts "myhandlers:"+@handlers.keys.join(",")
-		puts "evName:#{evName}"
-		puts "callerName:#{callerName}"
-		
 		if @handlers.has_key?(evName) then
 			value=false
 			@handlers[evName].each{|handler|
@@ -106,49 +104,16 @@ module AGHandler
 		end
 		return super(e)
 	end
-	
-	def signalOld(name,event,caller)
-		if not defined? @handlers then
-			@handlers={}
-		end
-		callerName=toAGWidget(caller).getName
-		evName=callerName+":"+name
-		
-		if @handlers.has_key?(evName) then
-			value=false
-			@handlers[evName].each{|handler|
-				m=method(handler)
-				if m.arity==4 then
-					if self.send(handler,name,callerName,event,caller) then
-						value=true
-					end
-				elsif m.arity==1 then
-					if self.send(handler,callerName) then
-						value=true
-					end
-				else
-					if self.send(handler) then
-						value=true
-					end
-				end
-			}
-			return value
-		else
-			puts "HANDLER NOT FOUND"
-		end
-		return super(name,event,caller)
-	end
 end
 
+# this function adds a signal to the current object
+# you can call this with signalName(e) afterwards
 def addSignal(name)
 	eval <<EOT
 class #{self.class}
 	def #{name}(e=nil)
-		#puts "SIGNALLLLLLLLLLLLLLLLLLLLLL"
-		#puts e
 		if e
 			e.setCaller(self)
-			#x=AGSignal.new(self,"#{name}")
 			return @#{name}.signal(e)
 		else
 			return @#{name}
@@ -178,7 +143,9 @@ else
 		end
 	end
 end
+
 class Array
+	# extend Array-class with a shuffle function
 	def shuffle
 		sort{0.5 <=> rand}
 	end

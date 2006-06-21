@@ -19,8 +19,9 @@
 # License along with this program.
 #
 
-#!/usr/bin/ruby
 
+# AntArrow is an entity class for displaing an arrow. That's all about it.
+# FIXME: Maybe this should be moved to plain C++ in a kind of ParticleSystem with meshes.
 class AntArrow<AntRubyEntity
 	def initialize
 		super(AGVector2.new(0,0))

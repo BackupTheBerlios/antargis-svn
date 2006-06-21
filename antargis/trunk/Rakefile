@@ -189,6 +189,7 @@ task :clean do
 	end
 	msh "rm -rf .deps"
 	msh "rm -rf docs/api"
+	msh "rm -rf docs/ruby"
 	msh "rm -rf libantargis.so"
 end
 
@@ -316,5 +317,5 @@ end
 task :doc do
 	puts "running doxygen"
 	`doxygen Doxyfile`
-	`rdoc --op docs/ruby --exclude "(.cc|.c)"`
+	`rdoc --op docs/ruby --exclude "(.cc|.c|skat|test\/)"`
 end

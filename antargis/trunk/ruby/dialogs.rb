@@ -330,6 +330,10 @@ class AntLoadDialog<AntDialog
 	end
 end
 
+
+# AntAudioOptionsDialog is the audio-dialog in-game
+# you can set music,ambient and sound volumes there
+# volumes are stored into the config.xml file.
 class AntAudioOptionsDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/dialog_audio_options.xml")
@@ -339,8 +343,6 @@ class AntAudioOptionsDialog<AntDialog
 		@barnames.each{|n|
 			@bars[n]=getChild(n+"Bar")
 		}
-		#@bars.each{|n,b|b.setValue(0.1)}
-
 		@barnames.each{|n|
 			cname="inc#{n[0..0].upcase+n[1..-1]}"
 			addHandler(getChild(cname),:sigClick,:eventModBar)
@@ -351,6 +353,9 @@ class AntAudioOptionsDialog<AntDialog
 		getMap.pause=true
 		readVolumes
 	end
+
+	# eventHandler for a + or - Button being pressed
+	# resets set bar-values then.
 	def eventModBar(e)
 		name=e.getCaller.getName
 		what=name[0..2]
@@ -369,6 +374,7 @@ class AntAudioOptionsDialog<AntDialog
 		return true
 	end
 private
+	# read volumes from config-file
 	def readVolumes
 		@barnames.each{|n|
 			@bars[n].setValue(getConfig.get("#{n}Volume").to_f)
@@ -376,6 +382,7 @@ private
 	
 		updateVolumesP
 	end
+	# saves volumes to config-file and sets current volumes
 	def updateVolumesP
 		@bars.each{|n,v|
 			getConfig.set("#{n}Volume",v.getValue.to_s)

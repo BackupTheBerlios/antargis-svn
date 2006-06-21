@@ -23,46 +23,48 @@
 
 require 'fir_mesh.rb'
 
+# really nothing special here - just a "grouper"
 class AntBaseTree<AntRubyEntity
-end
-
-class AntFir<AntBaseTree
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(p)
+		super
+		setType("tree")
 		setProvide("tree",true)
-		setProvide("fir",true)
-	
-		setupMesh
 	end
 	def resourceChanged
 		setupMesh
 	end
+end
+
+# a fir
+class AntFir<AntBaseTree
+	def initialize()
+		super(AGVector2.new(0,0))
+		setProvide("fir",true)
 	
-	private
+		setupMesh
+	end
+	
+protected
+	def setupMesh
+		setMesh(Mesh.new(getMap.getScene,meshData,AGVector4.new,0))
+	end
+private
 	def meshData
 		data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
 		data.setTransparent(true)
 		return data
 	end
-	def setupMesh
-		#setMesh(makeFirMesh)
-		setMesh(Mesh.new(getMap.getScene,meshData,AGVector4.new,0))
-	end
 end
 
-class AntBirch<AntRubyEntity
+# a birch representing a tree without fruit
+class AntBirch<AntBaseTree
 	def initialize()
 		super(AGVector2.new(0,0))
-		setType("tree")
 	
 		setupMesh
 	end
-	def resourceChanged
-		setupMesh
-	end
 	
-	private
-
+protected
 	def setupMesh
 		setMesh(makeBirchTreeMesh)
 	end

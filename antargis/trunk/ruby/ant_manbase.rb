@@ -21,6 +21,10 @@
 
 #!/usr/bin/ruby
 
+
+# AntAngle is an entity for displaying angels flying up
+# when an AntMan dies. This is currently not supported, because
+# there is no AntAngel mesh.
 class AntAngel<AntRubyEntity
 
 	def initialize
@@ -28,6 +32,9 @@ class AntAngel<AntRubyEntity
 		setProvide("angel",true)
 		@age=0
 	end
+	# simply move mesh up
+	# FIXME:
+	# this is very slow - should be removed and replaced by a MoveJob(3d)
 	def move(time)
 		p=getPos3D
 		p.y+=time*20
@@ -39,19 +46,28 @@ class AntAngel<AntRubyEntity
 			getMap.endChange
 		end
 	end
-	def getTexture
-		return "angel.png"
-	end
 end
 
-
+# AntManBase is a base-class/module for all men (including heroes)
+# it contains functionality for:
+# * rowing a boat
+# * sitting down
+# * dying (and sending an angel)
+# * shooting arrows
 module AntManBase
+
+	# call this to make a man sitdown
+	# * animation is played
+	# * setMeshState is needed for this
 	def sitDown
 		puts "sitDown"
 		newRestJob(0.4)
 		setMeshState("sitdown")
 	end
 
+	# overrides newFightJob from AntEntity
+	# fighting distance is assigned 1 or 10 
+	# depending on the man having a bow
 	def newFightJob(p,target)
 		if resource.get("bow")>0
 			super(p,target,10)
@@ -60,13 +76,6 @@ module AntManBase
 		end
 	end
 
-	def eventGotFight(other)
-		return
-		puts "EVENTGOTFIGHT"
-		if shouldFight and (not isFighting)
-			#newFightJob(0,other)
-		end
-	end
 	def eventDefeated
 		if is_a?(AntBoss)
 			eventManDefeated(self)

@@ -21,6 +21,7 @@
 
 #!/usr/bin/ruby
 
+# some very simple base-class for animals. contains really nothing.
 class AntAnimal<AntRubyEntity
 	def AntAnimal.xmlName
 		""
