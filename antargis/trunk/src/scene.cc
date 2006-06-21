@@ -448,11 +448,13 @@ AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
 void Scene::pickDraw()
 {
   STACKTRACE;
-  glDisable(GL_CULL_FACE);
+  //  glDisable(GL_CULL_FACE);
   GLuint name=1;
   pickNames.clear();
 
   AGMatrix4 frustum=cameraPickMatrix*mCamera.getModelview();
+
+  AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
   
   NodeList l=getCurrentNodes();
 
@@ -460,16 +462,19 @@ void Scene::pickDraw()
     {
       STACKTRACE;
       if((*i)->visible() && (*i)->bbox().collides(frustum))
-	{
-	  STACKTRACE;
-	  glPushName(name);
-	  (*i)->drawPick();
-	  glPopName();
-	  pickNames.insert(std::make_pair(name,*i));
-	  name++;
-	  mPickTriangles+=(*i)->getTriangles();
-	}
+	if(cFrustum.collides((*i)->bbox()))
+	  {
+	    STACKTRACE;
+	    glPushName(name);
+	    //	    std::cout<<typeid(**i).name()<<std::endl;
+	    (*i)->drawPick();
+	    glPopName();
+	    pickNames.insert(std::make_pair(name,*i));
+	    name++;
+	    mPickTriangles+=(*i)->getTriangles();
+	  }
     }
+  //  std::cout<<"NAMES:"<<name<<std::endl;
 
   glEnable(GL_CULL_FACE);
   

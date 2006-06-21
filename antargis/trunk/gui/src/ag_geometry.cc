@@ -2348,15 +2348,25 @@ bool AGBox3::collides(const AGVector3&p) const
 }
 bool AGBox3::collides(const AGLine3&p) const
 {
+  // FIXME: implement like this:http://www.garagegames.com/index.php?sec=mg&mod=resource&page=view&qid=309
+
   std::vector<AGRect3> sides=getSides();
   for(std::vector<AGRect3>::iterator i=sides.begin();i!=sides.end();++i)
     {
-      //      cdebug(i->toString());
       if((*i).collides(p))
 	return true;
     }
   return false;
 }
+
+bool AGBox3::contains(const AGTriangle3 &t) const
+{
+  for(size_t i=0;i<3;i++)
+    if(!collides(t[i]))
+      return false;
+  return true;
+}
+
 
 std::vector<AGRect3> AGBox3::getSides() const
 {

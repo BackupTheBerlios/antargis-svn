@@ -120,6 +120,8 @@ void TerrainPieceVA::drawDepth()
 void TerrainPieceVA::drawPick()
 {
   STACKTRACE;
+  //  cdebug(m3dArray.getTriangles());
+
   m3dArray.drawPick();
 }
 

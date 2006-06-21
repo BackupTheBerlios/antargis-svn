@@ -36,6 +36,8 @@ VertexArray::VertexArray(bool pDynamic):bbox(AGVector3(),AGVector3()),mDynamic(p
 
   assert(GLEE_EXT_vertex_array);
 
+  displayListInited=false;
+
   mChanged=false;
 
   mVertexBuffer=0;
@@ -263,11 +265,28 @@ void VertexArray::drawPick()
 
   else if(true)
     {
-      // paint in software - because this is faster for picking
-      glBegin(GL_TRIANGLES);
-      for(std::vector<Uint16>::iterator i=mIndices.begin();i!=mIndices.end();i++)
-	glVertex4fv(mVertices[*i]);
-      glEnd();
+      if(displayListInited)
+	{
+	  STACKTRACE;
+	  
+	  glCallList(displayList);
+	}
+      else
+	{
+	  displayList=glGenLists(1);
+	  glNewList(displayList,GL_COMPILE);
+	  {
+	    // paint in software - because this is faster for picking
+	    glBegin(GL_TRIANGLES);
+	    for(std::vector<Uint16>::iterator i=mIndices.begin();i!=mIndices.end();i++)
+	      glVertex4fv(mVertices[*i]);
+	    glEnd();
+	  }
+	  glEndList();
+	  glCallList(displayList);
+
+	  displayListInited=true;
+	}
     }
   else
     {

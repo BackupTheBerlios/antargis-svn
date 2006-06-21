@@ -1,5 +1,6 @@
 #include "ag_rubyobj.h"
 #include "ag_debug.h"
+#include "ag_profiler.h"
 #include <assert.h>
 #include <typeinfo>
 #include <set>
@@ -89,6 +90,7 @@ void disableGC()
 /// it handles all the AGRubyObjects
 void general_markfunc(void *ptr)
 {
+  STACKTRACE;
   //  TRACE;
   if(!ptr)
     {

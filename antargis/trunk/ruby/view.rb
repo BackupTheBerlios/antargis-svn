@@ -31,7 +31,6 @@ class AntRubyView <GLApp
 		@mousepos=AGVector2.new(200,200)
 		@controls=true
 	end
-	
 
 	def draw
 		updateNamePositions
@@ -39,12 +38,17 @@ class AntRubyView <GLApp
 	end
 	def updateNamePositions
 		heroes=$map.getHeroes
-		heroes.each{|hero|
-			@names.each{|name|
+		@names.each{|name|
+			found=false
+			heroes.each{|hero|
 				if hero.getName==name.getText
 					name.setRect(getHeroScreenPos(hero))
+					found=true
 				end
 			}
+			if (not found)
+				name.hide
+			end
 		}
 	end
 	
@@ -125,7 +129,9 @@ class AntRubyView <GLApp
 	end
 	
 	def setCamera(p)
-		super(clipCamera(p))
+		x=super(clipCamera(p))
+		updateSoundPos
+		x
 	end
 	def getCameraHeight(p)
 		# take some middle

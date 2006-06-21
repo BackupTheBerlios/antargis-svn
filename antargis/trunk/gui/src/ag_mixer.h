@@ -43,6 +43,7 @@ class AGSound:public AGWidget
   void stopChannel(int i,int ms=200);
   void stopAllChannels(int ms=200);
 
+  void volumeSound(int i,float v); // 0 to 1
   void volumeSound(float v); // 0 to 1
   void volumeMusic(float v); // 0 to 1
 

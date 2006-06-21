@@ -87,6 +87,7 @@ class AntRubyMap<AntMap
 
 	# some delegators for level-scripting - this should eventually be done somehow else
 	def eventHeroDied(ent)
+		@heroes.delete(ent)
 		if @script
 			@script.eventHeroDied(ent)
 		end
@@ -149,6 +150,8 @@ class AntRubyMap<AntMap
 		end
 	end
 
+	# FIXME:rewrite this!!!!
+	# take heroes from AntPlayer object
 	def getOwnHeroes()
 		ents=getAllEntitiesV
 		ret=[]

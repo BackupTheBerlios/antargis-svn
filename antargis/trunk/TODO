@@ -92,7 +92,7 @@ ARTS
 [Graphics - 3d-engine]
 ------------------------------------------------------
 [H] try using GL_DYNAMIC_DRAW_ARB for dynamic vertexarrays and combine multiple meshes some how?
-[H] increase picking speed
+[M] increase picking speed => use kd-tree or bsp
 [M] FBO without color-attachment ????
 [M] make particle engine more generic and include shader-support
 [L] make shadows work on other platforms too?
@@ -109,16 +109,13 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] check fruit=>food production
-[H] Trees and scenery shouldn't be represented as ruby-objects, it takes too long to mark them all!
 [H] fighting should proceed when already attacked while formating!
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 [H] add all config-parameters to config-file when created - and comment them a little
 [H] game crashes when Rowen dies
-[H] choosing/making player for multiplayer
 [H] Rowen can cross water without boat
-[H] Fire is always hearable - even when nobody is restign
+[M] choosing/making player for multiplayer
 [M] add info-bar about troops to inventory or main-view, while fighting (?)
 [M] chase enemy when he's fleeing (a little and not too far)
 [M] make finite state machine approach in entities more visible (?)
@@ -136,7 +133,11 @@ ARTS
 		low-level saving should be finished, but high-level makes some problems
 [M] tough breath when hero suffers / some info-box appearing
 [M] fishing (fishes)
-[M] add "special" actions?
+[M] add "special" actions:
+	- build house
+	- assign hero
+	- assign men to different houses when constructing
+[L] Trees and scenery shouldn't be represented as ruby-objects, it takes too long to mark them all!
 [L] add formations
 [L] add campaign-loading functionality to load-dialog in-game  TRICKY
 		This is a real problem, because the current AGApplication is called by the campaign-code.

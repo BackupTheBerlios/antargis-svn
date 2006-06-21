@@ -130,7 +130,9 @@ void WaterPiece::draw()
 
 void WaterPiece::drawPick()
 {
-  mArray.drawPick();
+  STACKTRACE;
+  //cdebug(mArray.getTriangles());
+  //  mArray.drawPick();
 }
 
 void WaterPiece::advance(float t)

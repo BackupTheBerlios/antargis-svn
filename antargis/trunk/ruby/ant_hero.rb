@@ -79,7 +79,7 @@ class AntHero<AntBoss
 	def startFireSound
 		if not @fireSound
 			dputs "STARTING FIRE"
-			@fireSound=getSoundManager.loopPlay("data/sound/fire.wav",0.4)
+			@fireSound=playLoopSoundGlobal(self,"fire",getPos2D,0.4)
 			dputs @fireSound
 		end
 	end	
@@ -90,7 +90,8 @@ class AntHero<AntBoss
 			if @job.class==AntHeroRestJob
 				#raise "bla"
 			end
-			getSoundManager.stopChannel(@fireSound)
+			stopLoopSound(self)
+			#getSoundManager.stopChannel(@fireSound)
 			@fireSound=nil
 		end
 	end
@@ -274,6 +275,9 @@ class AntHero<AntBoss
 	def eventDie
 		super
 		@job=nil
+		if @player
+			@player.remove(self)
+		end
 		getMap.eventHeroDied(self)
 	end
 

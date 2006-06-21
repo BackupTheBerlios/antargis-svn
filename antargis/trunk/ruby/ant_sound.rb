@@ -50,10 +50,45 @@ def playSoundGlobal(name,volume,minDiff=0.5)
 	end
 end
 
+$loopSounds={}
+def playLoopSoundGlobal(id,name,pos,volume)
+	s={"fire"=>"data/sound/fire.wav"}[name]
+	return nil if s.nil?
+	d=(($app.getScene.getCamera.dim2-pos).length-INNER_VOL_SIZE)
+	vol=1
+	if d>0
+		vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
+	end
+	handle=getSoundManager.loopPlay(s,volume*vol)
+	puts "HANDLE #{handle}"
+	puts "--------------------------------------------------"
+	$loopSounds[id]=[handle,name,pos,volume]
+	id
+end
+
+def stopLoopSound(id)
+	a=$loopSounds[id]
+	return if a.nil?
+	getSoundManager.stopChannel(a[0])
+	$loopSounds.delete(id)
+end
+def updateSoundPos
+	$loopSounds.each{|id,a|
+		pos=a[2]
+		d=(($app.getScene.getCamera.dim2-pos).length-INNER_VOL_SIZE)
+		vol=1
+		if d>0
+			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
+		end
+		getSoundManager.volumeSound(a[0],a[3]*vol)
+	}
+end
+
+
 def ambientSound(time)
 	if not $ambientSound
-		$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",getVolume("ambient")*0.2)
-		$ambientMusic=getSoundManager.playMp3("data/music/in-game1.ogg")
+		#$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",getVolume("ambient")*0.2)
+		#$ambientMusic=getSoundManager.playMp3("data/music/in-game1.ogg")
 		puts getVolume("music")
 		#raise 1
 		getSoundManager.volumeMusic(getVolume("music"))

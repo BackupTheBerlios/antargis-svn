@@ -31,6 +31,9 @@ class VertexArray
 
   AGBox3 bbox;
 
+  GLuint displayList;
+  bool displayListInited;
+
  public:
   VertexArray(bool pDynamic=false);
   virtual ~VertexArray();

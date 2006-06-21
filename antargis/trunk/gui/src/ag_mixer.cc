@@ -215,6 +215,15 @@ void AGSound::fadeOutMusic(int ms)
   Mix_FadeOutMusic(ms);
 }
 
+void AGSound::volumeSound(int i,float v)
+{
+  int mv=((int)(v*MIX_MAX_VOLUME));
+  mv=std::min(std::max(0,mv),MIX_MAX_VOLUME);
+  if(i>=0 && i<cSoundChannels)
+    Mix_Volume(i,mv);
+}
+
+
 void AGSound::volumeSound(float v)
 {
   if(mNoSound)

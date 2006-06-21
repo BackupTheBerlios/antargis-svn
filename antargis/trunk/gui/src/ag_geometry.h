@@ -648,6 +648,8 @@ class AGBox3
   bool collides(const AGLine3&p) const;
   bool collides(const AGBox3 &b) const;
 
+  bool contains(const AGTriangle3 &t) const;
+
   std::vector<AGRect3> getSides() const;
 
   std::string toString() const;
