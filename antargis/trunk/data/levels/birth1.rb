@@ -148,5 +148,12 @@ class Level1<Level
 		start.push("","You have defeated the enemy.")
 		tellStory(start)
 	end
+	def eventHeroDied(ent)
+		case ent.getName	
+			when "Rowen"
+				lostLevel
+				endLevel
+		end
+	end
 end
 

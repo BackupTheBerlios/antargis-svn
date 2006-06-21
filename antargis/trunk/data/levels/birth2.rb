@@ -82,6 +82,13 @@ class Level2<Level
 			tellStory(s)
 		}
 	end
+	def eventHeroDied(ent)
+		case ent.getName	
+			when "Rowen"
+				lostLevel
+				endLevel
+		end
+	end
 
 end
 

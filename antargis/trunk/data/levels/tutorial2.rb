@@ -59,5 +59,11 @@ class Level1<Level
 		start.push("Tutorial","You lost!")
 		tellStory(start)
 	end
+	def eventHeroDied(ent)
+		case ent.getName	
+			when "Rowen"
+				lostLevel
+		end
+	end
 
 end

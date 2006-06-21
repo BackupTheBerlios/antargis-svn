@@ -50,6 +50,7 @@ class Level1<Level
 		case ent.getName	
 			when "Rowen"
 				lostLevel
+				endLevel
 			when "Bantor"
 				wonLevel
 		end
