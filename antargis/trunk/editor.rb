@@ -33,6 +33,7 @@ require 'map.rb'
 require 'view.rb'
 require 'editview.rb'
 require 'map_generator.rb'
+require 'editor/dialogs.rb'
 
 class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
@@ -41,18 +42,12 @@ class AntGameApp < AntRubyEditView
 		$map=@map=AntRubyMap.new(getScene,128,128)
 		$map.setHeight(-0.5)
 
-		#@layout=AGLayout.new(@mainWidget)
-		#@layout.loadXML(loadFile("data/gui/layout/editor.xml"))
-		#@mainWidget.addChild(@layout)
-		#$screen=@layout
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)
-		#addHandler(@layout.getChild("options"),:sigClick,:eventOptions)
 		
-		addHandler(@layout.getChild("doGen"),:sigClick,:eventGenerate)
+		addHandler(@layout.getChild("doGen"),:sigClick,:eventGenerateDialog)
 
 		addHandler(@layout.getChild("loadButton"),:sigClick,:load)
 		addHandler(@layout.getChild("saveButton"),:sigClick,:save)
-
 		
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@miniMap.setMap(getMap)
@@ -62,12 +57,18 @@ class AntGameApp < AntRubyEditView
 		
 		#eventGenerate
 	end
-	
-	
+
+	def eventGenerateDialog
+		@layout.addChild(dialog=AntEditGeneratorDialog.new(@layout,GeneratorParameters.new))
+		addHandler(dialog,:sigGenerate,:eventGenerate)
+		@generatorDialog=dialog
+	end
 	def eventGenerate
 		map=getMap
 		getMap.setHeight(-0.5)
 		ps=GeneratorParameters.new
+		ps.readFromDialog(@generatorDialog)
+
 		if true
 			generateMap(getMap,ps)
 		end

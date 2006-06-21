@@ -160,8 +160,8 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
-[H] add directory-selector to load- and save-dialog (only in editor)
-[H] add erosion to map-generator
+[M] add directory-selector to load- and save-dialog (only in editor)
+[M] add erosion to map-generator
 [L] Trigger definition
 [L] cleanup gui - remove unused elements
 [L] fix selecting group. When you switch the "tabs", the selected action should be changed, too

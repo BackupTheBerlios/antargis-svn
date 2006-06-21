@@ -493,33 +493,6 @@ class AntQueryDialog<AntDialog
 	end
 end
 
-class AntEditPropDialog<AntDialog
-	def initialize(parent,ent)
-		super(parent,"data/gui/layout/editpropdialog.xml")
-		@ent=ent
-		menCountW=toAGEdit(getChild("MenCount"))
-		nameW=toAGEdit(getChild("AntName"))
-		menCountW.setText(@ent.getXMLProp("men"))
-		nameW.setText(@ent.getName)
-		
-		getChild("NpcTypeView").hide if @ent.class!=AntNPC
-		if @ent.class==AntNPC
-			@npcTypeW=toAGEdit(getChild("NpcType"))
-			@npcTypeW.setText(@ent.npcType)
-		end
-	end
-	def eventOk(e)
-		menCountW=toAGEdit(getChild("MenCount"))
-		nameW=toAGEdit(getChild("AntName"))
-		@ent.setName(nameW.getText)
-		@ent.setXMLProp("men",menCountW.getText)
-		close
-		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
-		@ent.setupMesh
-		return true
-	end
-end
-
 # draw a simple (loading) bar
 class AGBar<AGWidget
 	def initialize(p,r,c,bc)

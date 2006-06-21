@@ -21,12 +21,26 @@
 
 class GeneratorParameters
 	attr_accessor :size,:water,:hills,:population,:enemies
+	attr_reader :params
 	def initialize
+		@params=[:size,:water,:hills,:population,:enemies]
 		@size=128
 		@water=0.4
 		@hills=1
 		@population=40
 		@enemies=2
+	end
+	def readFromDialog(d)
+		@params.each{|p|
+			v=d.edits[p].getText
+			case p	
+				when :water
+					v=v.to_f
+				else
+					v=v.to_i
+			end
+			eval("self.#{p}=v")
+		}
 	end
 end
 
