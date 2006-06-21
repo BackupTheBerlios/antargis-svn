@@ -316,4 +316,5 @@ end
 task :doc do
 	puts "running doxygen"
 	`doxygen Doxyfile`
+	`rdoc --op docs/ruby --exclude "(.cc|.c)"`
 end

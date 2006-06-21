@@ -495,6 +495,12 @@ end
 
 # draw a simple (loading) bar
 class AGBar<AGWidget
+	# contructor-parameters:
+	# * p - parent widget
+	# * r - rectangle of widget in client area of p
+	# * c - color of the bar
+	# * bc - background-color of the bar
+	# the default value is 0.5
 	def initialize(p,r,c,bc)
 		super(p,r)
 		@color=c
@@ -511,16 +517,23 @@ class AGBar<AGWidget
 		@b2=bc*1.2
 		@b3=bc
 	end
+	# get the current value
 	def getValue
 		@value
 	end
+	# sets the bar to the value of v, which should be between 0 and 1
 	def setValue(v)
 		@value=[0,v,1].sort[1]
 	end
+
+	# draw 2 super-imposed gradients with painter p
+	# this is called automatically
 	def draw(p)
 		p.drawGradient(getRect.origin,@b0,@b1,@b2,@b3)
 		p.drawGradient(AGRect.new(0,0,width*@value,height),@c0,@c1,@c2,@c3)
 	end
+
+	# load value from XML - parameter "value"
 	def loadXML(n)
 		super
 		@value=n.get("value").to_f
@@ -534,6 +547,10 @@ class AGBarCreator<AGLayoutCreator
 	def initialize
 		super("bar")
 	end
+	# overrides the AGLayoutCreator function
+	# * p Widget parent
+	# * r client rectangle
+	# * n XML-Node describing the agbar
 	def create(p,r,n)
 		c=AGColor.new(n.get("color"))
 		bc=AGColor.new(n.get("bgcolor"))

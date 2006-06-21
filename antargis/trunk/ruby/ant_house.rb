@@ -36,6 +36,10 @@ class AntFlag<AntRubyEntity
 end
 
 
+# AntHouse is the base class for all building types
+# it provides functionality for:
+# * defending
+# * fetching resources
 class AntHouse<AntBoss
 	def initialize
 		super
@@ -43,7 +47,6 @@ class AntHouse<AntBoss
 		setProvide("house",true)
 		@defeated=[]
 		@atHome=Set.new
-		@lastBirth=0
 		setMinimapColor(AGColor.new(0x55,0x55,0x55))
 		setMinimapSize(5)
 		
@@ -60,7 +63,6 @@ class AntHouse<AntBoss
 	def eventJobFinished
 		#checkBirth
 		newRestJob(2)
-		eatFood
 		process
 	end
 
@@ -83,22 +85,6 @@ class AntHouse<AntBoss
 			man.newRestJob(2)
 		end
 
-	end
-	
-	def eatFood
-		return 
-		food=resource.get("food")
-		eatAmount=@men.length*0.04
-		if food>eatAmount
-			resource.set("food",food-eatAmount)
-		else
-			resource.set("food",0)
-			starve
-		end
-	end
-	
-	def starve
-		puts "FIXME: STARVING"
 	end
 	
 	def eventNoJob
@@ -136,7 +122,13 @@ class AntHouse<AntBoss
 		end
 	end
 
-	
+	# "normalFetching" is the current implementation for fetching resources of any kind
+	# this includes:
+	# * go to tree
+	# * chop tree
+	# * carry goods home
+	# * rest some time
+	# e: an entity - should be a man of this house
 	def normalFetching(e)
 		if atHome(e) then
 			checkFood(e)
@@ -229,8 +221,9 @@ class AntHouse<AntBoss
 			setName(rand.to_s)
 		end
 	end	
-	def addFlag(owner)
-	end
+
+
+	# get a description for displaying in the info-box
 	def getDescription
 		m="man"
 		home=_("{1} of them are at home.",@atHome.length)
@@ -258,11 +251,13 @@ class AntHouse<AntBoss
 		r
 	end
 
+protected
 	def houseType
 		"house"
 	end
 
-	private
+private
+	# check if my man has enough food otherwise I'll feed him
 	def checkFood(man)
 		if man.getFood<0.5
 			# eat
@@ -271,6 +266,10 @@ class AntHouse<AntBoss
 				resource.sub("food",1)
 			end
 		end
+	end
+
+	# add a new flag when owner has changed - currently not implemented
+	def addFlag(owner)
 	end
 
 end

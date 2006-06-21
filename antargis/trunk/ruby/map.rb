@@ -61,9 +61,9 @@ class AntRubyMap<AntMap
 		@players=[]
 		@myPlayer=nil
 
-		@triggers=[]
+		@triggers=[]			# triggers are being touched by heroes and are checked in each frame
 
-		@heroes=[]
+		@heroes=[]				# all heroes in the world
 
 		@started=false		# started holds information about the map was already started. this is used for level-scripting
 
@@ -85,7 +85,7 @@ class AntRubyMap<AntMap
 	# event handlers
 	############################
 
-	# some delegators
+	# some delegators for level-scripting - this should eventually be done somehow else
 	def eventHeroDied(ent)
 		if @script
 			@script.eventHeroDied(ent)
@@ -113,12 +113,15 @@ class AntRubyMap<AntMap
 	# getting information
 	################################
 
+	# get target-position which is stored unter "name" in the level-file
 	def getTarget(name)
 		@targets[name]
 	end
+	# get my player (the player-object of the player playing "this" client
 	def getPlayer
 		@myPlayer
 	end
+	# get current world time
 	def getTime
 		@curTime
 	end

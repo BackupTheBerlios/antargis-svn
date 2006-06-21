@@ -92,7 +92,6 @@ ARTS
 [Graphics - 3d-engine]
 ------------------------------------------------------
 [H] try using GL_DYNAMIC_DRAW_ARB for dynamic vertexarrays and combine multiple meshes some how?
-[H] editor crashes on exit when using FBOs
 [H] increase picking speed
 [M] FBO without color-attachment ????
 [M] make particle engine more generic and include shader-support
@@ -110,6 +109,8 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] check fruit=>food production
+[H] Trees and scenery shouldn't be represented as ruby-objects, it takes too long to mark them all!
 [H] fighting should proceed when already attacked while formating!
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
@@ -123,7 +124,6 @@ ARTS
 [M] make finite state machine approach in entities more visible (?)
 [M] Options not obvious Andreas
 	Options are now grayed out, but maybe they should be hidden.
- 
 [M] add arrows in man-class
 [H] decrease morale on men when inventing and not resting
 [M] add swords/shields/bows and apply them when fighting
@@ -149,8 +149,6 @@ ARTS
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
 [L] add experience points and function to appoint hero
-[L] Option to invert mouse zoom 
- For me at least, it's the long way around. It's opposite to Blender and counter-intuitive for me (roll forward to zoom out?). But to Godrin it must be intuitive, of course (otherwise he wouldn't have coded it that way). Thus the option will have to be there somewhere.
 [VL] very bad situation => raise heroes with a new player (rebellion)
 
 [Scripting - Levels and campaigns]

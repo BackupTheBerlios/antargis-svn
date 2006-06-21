@@ -220,6 +220,7 @@ void Scene::advance(float time)
 
 Scene::NodeList Scene::getCurrentNodes()
 {
+  STACKTRACE;
   AGVector2 p=mCamera.getPosition().dim2();
   NodeList l=mTree->get(AGRect2(p+AGVector2(-30,-30),p+AGVector2(30,30)));
 
@@ -238,24 +239,31 @@ void Scene::calcShadowMap()
   STACKTRACE;
   assertGL;
   AGMatrix4 frustum=getFrustum();
+  size_t shadowMeshes=0;
 
   getRenderer()->beginShadowComputation();
-  
-  NodeList l=getCurrentNodes();
-
-  Nodes sorted;
-  std::copy(l.begin(),l.end(),std::back_inserter(sorted));
-
-  sort(sorted.begin(),sorted.end(),SortOrder());
 
   {
     STACKTRACE;
     NodeList l=getCurrentNodes();
     Nodes sorted;
-    std::copy(l.begin(),l.end(),std::back_inserter(sorted));
+    std::copy(l.rbegin(),l.rend(),std::back_inserter(sorted));
     
+
+    {
+      // apply frustrum culling
+      AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
+      for(Nodes::iterator i=sorted.begin();i!=sorted.end();)
+	{
+	  if(cFrustum.collides((*i)->bbox()))
+	    i++;
+	  else
+	    i=sorted.erase(i);
+	}
+    }
+
     sort(sorted.begin(),sorted.end(),SortOrder());
-    
+      
     for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
       {
 	{
@@ -263,10 +271,12 @@ void Scene::calcShadowMap()
 	    {
 	      (*i)->drawDepth();
 	      mTriangles+=(*i)->getTriangles();
+	      shadowMeshes++;
 	    }
 	}
     }
   }
+  //  cdebug("shadowMeshes:"<<shadowMeshes);
 
   getRenderer()->endShadowComputation();
   assertGL;
@@ -407,6 +417,8 @@ void Scene::drawScene()
 	    }
 	}
     }
+  //  cdebug("sorted:"<<sorted.size());
+
 #ifdef TEST_DL
 glEndList();
       glCallList(displayList);
