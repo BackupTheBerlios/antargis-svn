@@ -224,7 +224,9 @@ class AntMenuApp <AGApplication
 
 	def eventTutorial(e)
 		tutCampaign=Campaign.new("data/campaigns/tutorial.xml")
+		soundOff
 		startCampaign(tutCampaign)
+		soundOn
 		return true
 	end
 
@@ -295,6 +297,7 @@ class AntMenuApp <AGApplication
 	end
 	def soundOn
 		@sound=true
+		getSoundManager.stopMp3
 		eventMusicEnd
 	end	
 

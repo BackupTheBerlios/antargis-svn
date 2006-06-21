@@ -88,6 +88,7 @@ end
 def ambientSound(time)
 	if not $ambientSound
 		$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",getVolume("ambient")*0.2)
+		getSoundManager.stopMp3
 		$ambientMusic=getSoundManager.playMp3("data/music/in-game1.ogg")
 		#raise 1
 		getSoundManager.volumeMusic(getVolume("music"))
