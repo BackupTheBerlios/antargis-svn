@@ -312,6 +312,7 @@ class AntMan<AntRubyEntity
 			when "hackaxe","pick","sword"
 				playSound(name)
 			when "ugh"
+				playSound(name)
 			else
 				super
 				#playSound(name)

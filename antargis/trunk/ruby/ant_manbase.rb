@@ -95,6 +95,8 @@ module AntManBase
 		#eventDefeated
 		newRestJob(20)
 		setMeshState("dead")
+		playSound("die")
+
 		if @boss
 			@boss.removeMan(self)
 		end

@@ -24,13 +24,13 @@ def playSoundGlobal(name,volume,minDiff=0.5)
 		"pick"=>"data/sound/new_pick.wav",
 		"sword"=>"data/sound/sword1.wav",
 		"fire"=>"data/sound/fire.wav",
-		"ugh"=>"data/sound/ugh.wav",
 		"ugh_end"=>"data/sound/ugh_end.wav",
 		"won"=>"data/sound/yay.wav",
 		"mylord"=>"data/sound/yes_mylord.wav",
+		"ugh"=>["data/sound/person_ugh2.wav","data/sound/person_ugh4.wav","data/sound/ugh.wav"],
+		"die"=>["data/sound/person_ugh1.wav","data/sound/person_ugh3.wav","data/sound/ugh2.wav"]
 		}
-	#puts "PLA"
-	#dputs $soundLastCall.keys
+
 	if not $soundLastCall.keys.member?(name)
 		$soundLastCall[name]=-minDiff-1
 		#puts "RESET:"+$soundLastCall[name].to_s
@@ -38,6 +38,8 @@ def playSoundGlobal(name,volume,minDiff=0.5)
 	s=sounds[name]
 	if not s
 		s=name
+	elsif s.class==Array
+		s=s.shuffle[0]
 	end
 	#dputs $soundLastCall[name].to_s+"   "+$systemTime.to_s
 	if s && $systemTime-$soundLastCall[name]>minDiff # at a second ago

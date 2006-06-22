@@ -9,7 +9,7 @@ $interfaceHeaders+=["ag_rubyobj.h","ag_messageobject.h",
 #$interfaceHeader+=["ag_edit2.h"]
 
 $addHeaders||=[]
-$addHeaders+=["GLee.h","ag_draw.h","ag_config.h","ag_exception.h","ag_glsurface.h","ag_kill.h","ag_gettext.h","ag_regex.h","ag_sdlsurface.h"]
+$addHeaders+=["GLee.h","ag_draw.h","ag_config.h","ag_exception.h","ag_glsurface.h","ag_kill.h","ag_gettext.h","ag_regex.h","ag_sdlsurface.h","ag_debug.h","ag_geometry_inline.cc"]
 
 $allHeaders=$interfaceHeaders + $addHeaders
 

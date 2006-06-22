@@ -23,39 +23,39 @@
 #    - fetch vegetables
 #    - farming (wheat)
 
-class AntFarm<AntHouse
+class AntTownHall<AntHouse
 	def initialize
 		super
 		@type=3
-		setProvide("food",true)
+		#setProvide("food",true)
 		@defeated=[]
 		@atHome=[]
-		@lastBirth=0
+		#@lastBirth=0
 		setDirection(-30)
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/farm.ant2",0.2,"data/textures/models/farm.png"),AGVector4.new(0,0,0),-30)
-		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
+		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/farm.ant2",0.2,"data/textures/models/farm.png"),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end
 
 	def needed
-		if resource.get("food")<30
+		if resource.get("food")<10
 			return "fruit"
 		else
 			return nil
 		end
 	end
 
-	def process
-		if resource.get("fruit")>0
-			amount=[resource.get("fruit"),3].min
-			resource.add("food",amount)
-			resource.sub("fruit",amount)
-		end
-	end
+# 	def process
+# 		if resource.get("fruit")>0
+# 			amount=[resource.get("fruit"),3].min
+# 			resource.add("food",amount)
+# 			resource.sub("fruit",amount)
+# 		end
+# 	end
 	def houseType
-		"farm"
+		"townhall"
 	end
 end

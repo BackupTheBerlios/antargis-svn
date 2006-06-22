@@ -3,5 +3,6 @@
 	<animation name="fight" begin="5" end="19" fps="15">
 		<event frame="8" name="sword"/>
 		<event frame="15" name="sword"/>
+		<event frame="11" name="ugh"/>
 	</animation>
 </animMesh>
