@@ -634,6 +634,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 					@target.incSmoke
 					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
 					man.setMode("constructing")
+					man.playSound("construct")
 				when "constructing"
 					# was constructing
 					readyConstructed

@@ -28,7 +28,8 @@ def playSoundGlobal(name,volume,minDiff=0.5)
 		"won"=>"data/sound/yay.wav",
 		"mylord"=>"data/sound/yes_mylord.wav",
 		"ugh"=>["data/sound/person_ugh2.wav","data/sound/person_ugh4.wav","data/sound/ugh.wav"],
-		"die"=>["data/sound/person_ugh1.wav","data/sound/person_ugh3.wav","data/sound/ugh2.wav"]
+		"die"=>["data/sound/person_ugh1.wav","data/sound/person_ugh3.wav","data/sound/ugh2.wav"],
+		"construct"=>["data/sound/workshop.wav"]
 		}
 
 	if not $soundLastCall.keys.member?(name)
