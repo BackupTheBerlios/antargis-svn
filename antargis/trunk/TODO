@@ -2,12 +2,6 @@ Short Information:
 Problems are marked by priority. L is for low, M for medium and H high.
 In special cases it can be Very High (=VH).
 
-
-[General]
-------------------------------------------------------
-[VH] Add coding conventions for ruby/c++ and ensure them!
-
-
 WEBSITE & PR
 ==================================================
 [M] help-anouncement on gamedev.net
@@ -109,12 +103,14 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] include worksop sound
+[H] Rowen can cross water without boat
+[H] single games - add village generator to map generator
+[H] single games - add some menu for options
+
 [H] fighting should proceed when already attacked while formating!
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 [H] add all config-parameters to config-file when created - and comment them a little
-[H] Rowen can cross water without boat
 [M] choosing/making player for multiplayer
 [M] add info-bar about troops to inventory or main-view, while fighting (?)
 [M] chase enemy when he's fleeing (a little and not too far)

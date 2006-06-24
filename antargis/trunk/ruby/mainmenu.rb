@@ -166,7 +166,7 @@ class AntMenuApp <AGApplication
 
 		addHandler(@optionsMenu.getChild("optionIntro"),:sigClick,:eventOptionsChanged)
 
-		@optionsMenu.getChild("optionIntro").setChecked(getConfig.get("intro")=="true")
+		@optionsMenu.getChild("optionIntro").setChecked(getConfig.get("intro")!="false")
 	end
 
 	def eventOptionsChanged(e)

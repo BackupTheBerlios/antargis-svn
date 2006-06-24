@@ -198,3 +198,7 @@ require 'ant_boat.rb'
 require 'ant_fish.rb'
 require 'ant_arrow.rb'
 require 'ant_townhall.rb'
+require 'ant_mill.rb'
+require 'ant_well.rb'
+
+
