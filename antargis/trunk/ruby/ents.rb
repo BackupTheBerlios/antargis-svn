@@ -200,5 +200,6 @@ require 'ant_arrow.rb'
 require 'ant_townhall.rb'
 require 'ant_mill.rb'
 require 'ant_well.rb'
+require 'ant_bakery.rb'
 
 
