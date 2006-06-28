@@ -427,7 +427,12 @@ class AntRubyEditView<GLApp
 		getMap.setHeight(1.0)
 		return true
 	end
-	
+	def hidePanel
+		@mainWidget.hide
+	end	
+	def showPanel
+		@mainWidget.show
+	end	
 	
 end
 

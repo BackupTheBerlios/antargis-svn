@@ -49,7 +49,7 @@ class AntHero<AntBoss
 	
 	def saveXML(node)
 		super(node)
-		node.set("appearance",@appearance)
+		node.set("appearance",@appearance.to_s)
 	end
 	def loadXML(node)
 		super(node)

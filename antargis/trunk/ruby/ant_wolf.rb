@@ -21,6 +21,9 @@
 
 #!/usr/bin/ruby
 
+class AntPack
+end
+
 class AntWolf<AntAnimal
 	def initialize()
 		super(AGVector2.new(0,0))
@@ -102,7 +105,7 @@ class AntWolf<AntAnimal
 		return t
 	end
 	def setMeshState(s)
-		getFirstMesh.setAnimation(s)
+		#getFirstMesh.setAnimation(s)
 	end
 	def getName
 		return "Corpse" if @dead
