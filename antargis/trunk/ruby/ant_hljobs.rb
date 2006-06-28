@@ -164,15 +164,10 @@ class AntHeroFightJob<AntHeroMoveJob
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
 
-# 		if @defend or (not hero.is_a?(AntHero))
-# 			@state="fight"
-# 		end
+ 		if @defend or (not hero.is_a?(AntHero))
+			@hero.newRestJob(2) # wait for 3 seconds; then set state to fight - have a look at check() for more
+ 		end
 		@finished=false
-		dputs "NEW:"
-		dputs self
-		dputs "defned:"+defend.to_s
-		dputs @state
-		#@hero.assignJob2All
 	end
 
 	def finished
@@ -200,9 +195,12 @@ class AntHeroFightJob<AntHeroMoveJob
 			lost
 		end
 		if moveFinished #or @defend
+			
 			puts "FightJob::checkState:MOVE FINISHED"
 			@state="fight"
 			@target.eventAttacked(@hero)
+			#startFighting
+			#raise "muh" if @hero.class!=AntHero
 		end
 		if @defend and @target.getJob.class!=self.class
 			@finished=true # quick flee
@@ -210,6 +208,11 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	
 	def check(man)
+		# if boss is defending and already waited for some seconds, then start fighting!!!
+		if man==@hero and @defend
+			@state="fight"
+			startFighting
+		end
 		puts "CHECKING #{man} #{man.getName} #{self} #{@hero.getName} #{@state} #{man.getMode}"
 		checkState
 		return if @finished
@@ -283,10 +286,14 @@ class AntHeroFightJob<AntHeroMoveJob
 		puts "START FIGHTING #{self} #{@hero.getName}"
 		initSitpositions
 
+		puts @hero.getMen.length
+
 		@hero.getMen.each{|man|
+			puts man
 			man.setMode("fight")
 			startFightingMan(man)
 		}
+		puts "startFighting end"
 	end
 	
 	def undefeatedMen

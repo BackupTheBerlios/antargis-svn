@@ -63,7 +63,11 @@ class AntHouse<AntBoss
 	def eventJobFinished
 		#checkBirth
 		newRestJob(2)
-		process
+		if @job
+			checkHLJobEnd(self)
+		else
+			process
+		end
 	end
 
 	def process
