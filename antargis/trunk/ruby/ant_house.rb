@@ -141,10 +141,12 @@ class AntHouse<AntBoss
 				resource.takeAll(e.resource)
 				# 2) give job
 				need=needed()
+				puts "normalFetch:#{self}"
 				# keep at least a third of all men at home
 				if need != nil and @atHome.length>@men.length/3 then
 					fetch( need,e)
 				else
+					puts "nothin needed"
 					e.newRestJob(5+getRand)
 					e.setVisible(false)
 				end
@@ -199,9 +201,11 @@ class AntHouse<AntBoss
 	def fetch(good,ent)
 		tent=getMap.getNext(self,good,1)
 		if tent == nil then
-			ent.newRestJob(10)
+			puts "nothing found"
+			ent.newRestJob(4)
 		else
-			if tent.getPlayer!=getPlayer
+			puts "#{tent.getPlayer} #{getPlayer}"
+			if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
 			else
 				ent.newMoveJob(0,tent.getPos2D,0.5)
 				ent.setMode("fetching "+good)
@@ -228,7 +232,7 @@ class AntHouse<AntBoss
 	# get a description for displaying in the info-box
 	def getDescription
 		m="man"
-		home=_("{1} of them are at home.",@atHome.length)
+		home=_("{1} of them are at home.",@atHome.uniq.length)
 		if getMen.length>1
 			m="men"
 		end

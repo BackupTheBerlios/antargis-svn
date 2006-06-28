@@ -130,9 +130,12 @@ end
 
 class AntFormationBlock<AntFormation
 	def initialize(boss,dir)
-		super(boss)
 		@dir=dir
-
+		super(boss)
+	end
+	def calcFormation
+		boss=@boss
+		dir=@dir
 		# precalc formation and store into @rpos
 	
 		men=boss.getMen

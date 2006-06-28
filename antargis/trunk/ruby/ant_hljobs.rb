@@ -601,11 +601,16 @@ class AntHeroConstructJob<AntHeroMoveJob
 			wantmen=(@men.length-1)*@hero.getAggression/3.0
 			case man.getMode
 				when "fetch" # go to resource
-					res=getNeededResource
-					nearest=getNextWithResource(res)
+					res=getNeededResources
+					res,nearest=getNextWithResource(res)
 					@restype[man]=[res,nearest]
-					man.newMoveJob(0,nearest.getPos2D,0.5) # near but not actually there
-					man.setMode("harvest")
+					if nearest.nil?
+						puts "resource not found! #{res}"
+						man.newRestJob(5)
+					else
+						man.newMoveJob(0,nearest.getPos2D,0.5) # near but not actually there
+						man.setMode("harvest")
+					end
 				when "harvest" # harvest resource
 					man.newRestJob(2)
 					man.digResource(@restype[man][0])
@@ -675,15 +680,24 @@ private
 		return value>5
 		#(@target.resource.get("stone")>5 and @target.resource.get("wood")>5)
 	end
-	def getNeededResource
-		m=myResources.min{|a,b|@target.resource.get(a)<=>@target.resource.get(b)}
+	def getNeededResources
+		m=myResources.sort{|a,b|@target.resource.get(a)<=>@target.resource.get(b)}
 		puts "NEEDED: #{m}"
 		return m
 	end
 	def getNextWithResource(res)
 		#goods={"wood"=>"tree","stone"=>"stone","food"=>"tree","coal"=>"mine","ore"=>"mine"}
 		#enttype=goods[res]
-		getMap.getNext(@target,res,1) #enttype)
+		ret=nil
+		res.each{|r|
+			ret=getMap.getNext(@target,r,1)
+			if not ret.nil?
+				ret=[r,ret]
+				break
+			end
+		}
+
+		ret
 	end
 	def checkEat(man)
 		puts "CHECKEAT"
