@@ -442,7 +442,7 @@ class AntVideoOptionsDialog<AntDialog
 		return true
 	end
 	def setRes(w,h)
-		getMain.changeRes(w,h,32,getMain.fullscreen,true)
+		getMain.initVideo(w,h,32,getMain.fullscreen,true)
 		return true
 	end
 private

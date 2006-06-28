@@ -187,7 +187,7 @@ class AntMenuApp <AGApplication
 	end
 
 	def eventFullscreen
-		getMain.changeRes(getMain.realWidth,getMain.realHeight,32,(not getMain.fullscreen),true,1024,768)
+		getMain.initVideo(getMain.realWidth,getMain.realHeight,32,(not getMain.fullscreen),true,1024,768)
 		getConfig.set("fullscreen",getMain.fullscreen.to_s)
 		return true
 	end
@@ -208,7 +208,7 @@ class AntMenuApp <AGApplication
 		return true
 	end
 	def setRes(w,h)
-		getMain.changeRes(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
+		getMain.initVideo(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
 		getConfig.set("xRes",getMain.realWidth.to_s)
 		getConfig.set("yRes",getMain.realHeight.to_s)
 		puts getSurfaceManager.getUsedTexMem
