@@ -115,6 +115,7 @@ class AntSheep<AntAnimal
 	end
 	def eventDie
 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
+		setProvide("sheep",false)
 		@dead=true
 		newRestJob(1)
 	end

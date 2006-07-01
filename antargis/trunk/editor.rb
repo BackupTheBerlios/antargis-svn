@@ -35,6 +35,11 @@ require 'editview.rb'
 require 'map_generator.rb'
 require 'editor/dialogs.rb'
 
+
+def getSavePath
+	"data/levels"
+end
+
 class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
 		super(sw,sh,nil) #AntRubyMap.new(64,64))

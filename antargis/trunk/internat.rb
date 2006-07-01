@@ -57,6 +57,7 @@ files.each{|file|
 	}
 }
 
+strs.sort!
 strs.uniq!
 
 puts strs.join("\n")

@@ -34,6 +34,10 @@ require 'view.rb'
 require 'game_result.rb'
 require 'storyflow.rb'
 
+def getSavePath
+	"savegames"
+end
+
 #
 # AntGameApp is the central class, that controls event handling of all the user interaction
 # in-game

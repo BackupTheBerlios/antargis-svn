@@ -261,8 +261,8 @@ class AntSaveDialog<AntDialog
 			filename=filename+".antlvl"
 		end
 		hide
-		getMap.saveMap("savegames/"+filename)
-		takeSmallScreenshot.save("savegames/#{filename.gsub("antlvl","png")}")
+		getMap.saveMap(getSavePath+"/"+filename)
+		takeSmallScreenshot.save(getSavePath+"/#{filename.gsub("antlvl","png")}")
 		getMap.pause=false
 		setNormalVolumeWave
 		close
@@ -316,7 +316,7 @@ class AntLoadDialog<AntDialog
 	def eventOk(e)
 		file=@lb.getSelectedID
 		if file!="" then
-			getMap.loadMap("savegames/"+file)
+			getMap.loadMap(getSavePath+"/"+file)
 			GC.start
 		end
 		getMap.pause=false
