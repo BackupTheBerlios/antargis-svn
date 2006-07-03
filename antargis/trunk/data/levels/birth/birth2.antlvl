@@ -1,4 +1,4 @@
-<antargisLevel filename="levels/birth2.hmap" height="128" width="128" scriptfile="levels/birth2.rb" scriptclass='Level2'>
+<antargisLevel filename="levels/birth/birth2.hmap" height="128" width="128" scriptfile="levels/birth/birth2.rb" scriptclass='Level2'>
   <antNewStone aggression="0.5" energy="1" healSpeed="0.1" morale="1" name="" onGround="true" typeID="1">
     <position x="24.5551" y="12.4395" z="5.18504"/>
   </antNewStone>

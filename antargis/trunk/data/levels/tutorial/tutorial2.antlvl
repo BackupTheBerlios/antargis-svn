@@ -1,4 +1,4 @@
-<antargisLevel filename="levels/tutorial2.hmap" height="128" width="128" scriptfile="levels/tutorial2.rb" scriptclass='Level1'>
+<antargisLevel filename="levels/tutorial/tutorial2.hmap" height="128" width="128" scriptfile="levels/tutorial/tutorial2.rb" scriptclass='Level1'>
   <antTower aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" id="0" mode="" morale="1" name="Keep" onGround="true" men="10">
     <position x="59.2397" y="71.2682" z="1.5455"/>
     <resource wood="100" stone="100" food="200"/>
