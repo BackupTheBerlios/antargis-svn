@@ -19029,7 +19029,7 @@ B7E2BE08 B7E8BE24 FDF0BEB1 6DFBBE00 0000BF00 0000BF00 0000BF00 0000BF00
     <position x="62.7852" y="50.8303" z="2.13082"/>
     <resource food="1"/>
   </antWolf>
-
+<!--
   <antWolf aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.07" id="2" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="62.7725" y="31.3605" z="2.05824"/>
     <resource food="1"/>
@@ -19038,7 +19038,7 @@ B7E2BE08 B7E8BE24 FDF0BEB1 6DFBBE00 0000BF00 0000BF00 0000BF00 0000BF00
     <position x="62.7852" y="30.8303" z="2.13082"/>
     <resource food="1"/>
   </antWolf>
-
+-->
 
   <antSheep aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.07" id="4" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="51.5095" y="57.921" z="0.495835"/>
