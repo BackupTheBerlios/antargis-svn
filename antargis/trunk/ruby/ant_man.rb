@@ -115,7 +115,14 @@ class AntMan<AntRubyEntity
 		@boss.eventHaveDefeated(e)
 	end
 
-	
+	def getPlayer
+		if @boss
+			@boss.getPlayer
+		else
+			nil
+		end
+	end
+
 	##########################
 	# setBoss
 	##########################

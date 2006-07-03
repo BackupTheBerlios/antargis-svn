@@ -105,7 +105,26 @@ class AntMenuApp <AGApplication
 				@loadMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
 			end
 		end
-		#exit
+	end
+
+	def updateSingleMenu
+		puts "DIR.."
+		fs=getDirectory("./data/levels")
+		puts fs.join(" ")
+		fs=fs.select{|f|f=~/\.antlvl/ and (not f=~/~/)}.sort.uniq
+		puts fs.join(" ")
+		l=@singleMenu.getChild("list")
+		l.clearList
+		fs.each{|f|
+			x=f.gsub(".antcmp","")
+			l.insertItem(f,x)
+		}
+		if fs.length>0
+			fn="data/levels/"+fs[0].gsub("antlvl","png")
+			if findFile(fn)!=""
+				@singleMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
+			end
+		end
 	end
 	
 	def setupCredits
@@ -121,6 +140,8 @@ class AntMenuApp <AGApplication
 		@menues.push(@singleMenu)
 		addHandler(@singleMenu.getChild("singleExit"),:sigClick,:eventExit)
 		addHandler(@singleMenu.getChild("singleStart"),:sigClick,:eventStart)
+		addHandler(@singleMenu.getChild("list"),:sigSelect,:eventSingleSelect)
+		updateSingleMenu
 	end
 	
 	def setupCampaign
@@ -303,6 +324,22 @@ class AntMenuApp <AGApplication
 		getSoundManager.stopMp3
 		eventMusicEnd
 	end	
+
+	# single menu
+	def eventSingleSelect(e)
+		puts "MUH"
+		#raise 1
+		@singleMenu.getChild("desc").setText("")
+		filename=id=@singleMenu.getChild("list").getSelectedID
+		fn="data/levels/"+id.gsub(".antlvl",".png")
+		if findFile(fn)!=""
+			@singleMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
+		end
+		doc=Document.new("data/levels/"+filename)
+		d=doc.root.get("desc")
+		@singleMenu.getChild("desc").setText(d)
+		return true
+	end
 
 	# load menu
 	def eventLoadSelect(e)

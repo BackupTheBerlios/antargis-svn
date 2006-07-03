@@ -318,6 +318,7 @@ class AntRubyMap<AntMap
 		super(name)
 	end
 	def endChange
+		mapChanged
 	end
 
 	# this function will be used for displaying lights and including "fog of war"
@@ -358,6 +359,11 @@ class AntRubyMap<AntMap
 		if not done
 			@players.each{|p|p.trigger(hero,t)}
 		end
+	end
+
+	def mapChanged
+		super
+		$app.setupNames
 	end
 
 private	

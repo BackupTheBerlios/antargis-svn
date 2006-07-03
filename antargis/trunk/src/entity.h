@@ -93,6 +93,9 @@ class AntEntity:public AGRubyObject
     float mMoraleStrength;
     
     float mDefense;
+  public:
+    float experience;
+    float learnAmount;
 
 
   public: //virtually protected
@@ -194,7 +197,8 @@ class AntEntity:public AGRubyObject
     virtual void eventStartFighting();
     virtual void eventStartMoving();
 
-    virtual void eventHitWaterMark(bool fromAbove);
+    // should return if it's ok to proceed
+    virtual bool eventHitWaterMark(bool fromAbove);
 
     void sigDefeated(); // morale too low
     void sigJobFinished();
@@ -225,9 +229,17 @@ class AntEntity:public AGRubyObject
     void decMorale(float amount);
     void incMorale(float pTime);
 
+    void incExperience(float amount);
+
+
+    virtual void experienceFull();
+
     float getFood() const;
     void incFood(float v);
     bool isStarving() const;
+
+    bool isOnWater() const;
+    bool isOnGround() const;
 
     void setOnWater(bool p);
     void setOnGround(bool p);

@@ -164,7 +164,24 @@ class AntHero<AntBoss
 		getMap.eventHLDismissed(self)
 	end
 	
+	def upgradeMan(man)
+		# copy properties through xml-node	
+		xmlnode=Node.new("test")
+		man.saveXML(xmlnode)
 		
+		nhero=AntHero.new
+		nhero.loadXML(xmlnode)
+		removeMan(man)
+		getMap.removeEntity(man)
+		getMap.insertEntity(nhero)
+		getMap.endChange # commit
+		nhero.newRestJob(0)
+		newHLRestJob(1)
+		#nhero.setName("Sir "+nhero.getName)
+		man.setName("xxxxxxxx") # reset name - so there's some distinction
+		nhero.setOwner(self)
+		nhero.experience=0
+	end
 	
 	
 	def setFire(flag)

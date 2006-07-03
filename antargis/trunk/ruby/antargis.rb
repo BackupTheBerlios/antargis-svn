@@ -154,6 +154,8 @@ class AntGameApp <AntRubyView
 				if @hero
 					@hero.newHLRestJob(10)
 				end
+			when "doBuild"
+				@job="doBuild"
 		end
 		return true
 	end
@@ -173,6 +175,8 @@ class AntGameApp <AntRubyView
 					@hero.newHLTakeWeaponJob(@target)
 				when "doConstruct"
 					@hero.newHLConstructJob(@target)
+				when "doUpgrade"
+					@hero.upgradeMan(@target)
 			end
 		end
 		return true
@@ -273,8 +277,9 @@ class AntGameApp <AntRubyView
 		end
 		return true
 	end
-	
+
 	def eventEntitiesClicked(list,button)
+		resetJob
 		# find first entity that's nearest to the camera
 		ent=nil
 		list.each{|node|
@@ -318,6 +323,15 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventMapClicked(pos,button)
+		puts "#{@job} #{button}"
+		if @job and button==1 then
+			case @job
+				when "doBuild"
+					buildHouse(pos.dim2)
+			end
+			resetJob
+			return
+		end
 		if @hero and button==3 then
 			# assign hero a move job
 			@hero.newHLMoveJob(0,pos,0)
@@ -327,6 +341,10 @@ class AntGameApp <AntRubyView
 	###############################
 	# simple functions
 	###############################
+
+	def buildHouse(pos)
+		@layout.addChild(AntBuildDialog.new(@layout,pos))
+	end
 	
 	def save
 		if $campaign
@@ -469,6 +487,11 @@ class AntGameApp <AntRubyView
 			end
 		end
 		$inventory.inspect(e)
+	end
+
+	def resetJob
+		#@job=nil
+		@layout.getChild("doBuild").setChecked(false)
 	end
 
 	def getSelectedHero

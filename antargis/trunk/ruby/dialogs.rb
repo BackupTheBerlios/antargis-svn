@@ -600,5 +600,35 @@ class LoadApp<AGApplication
 	end
 end
 
+class AntBuildDialog<AGLayout
+	def initialize(p,pos)
+		super(p)
+		@pos=pos
+		loadXML(loadFile("data/gui/layout/build_dialog.xml"))
+
+		addHandler(getChild("cancel"),:sigClick,:eventCancel)
+		ds=getDescendantsOfClass(AntHouse)
+		@map={}
+		ds.each{|d|
+			c=getChild(d.to_s)
+			if c
+				addHandler(c,:sigClick,:eventBuild)
+				@map[d.to_s]=d
+			end
+		}
+	end
+	def eventCancel(e)
+		close
+		return true
+	end
+	def eventBuild(e)
+		house=@map[e.getCaller.getName].new
+		puts "POS:#{@pos}"
+		house.setPos(@pos)
+		getMap.insertEntity(house)
+		return true
+	end
+end
+
 require 'ant_messagebox.rb'
 

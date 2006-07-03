@@ -81,6 +81,9 @@ void AntEntity::init()
   //  mDirNum=1;
 
   mMinimapSize=2;
+
+  experience=0;
+  learnAmount=0.1;
 }
 
 
@@ -111,6 +114,8 @@ void AntEntity::saveXML(Node &node) const
     node.set("aggression",toString(mAggression));
     node.set("food",toString(mFood));
     node.set("id",toString(mID));
+    node.set("exp",toString(experience));
+    node.set("learnAmount",toString(learnAmount));
     Node &res=node.addChild("resource");
     resource.saveXML(res);
 
@@ -148,6 +153,11 @@ void AntEntity::loadXML(const Node &node)
     mHunger=toFloat(node.get("hunger"));
 
   setName(node.get("name"));
+
+  if(node.get("exp")!="")
+    experience=toFloat(node.get("exp"));
+  if(node.get("learnAmount")!="")
+    learnAmount=toFloat(node.get("learnAmount"));
 
   Node::NodeVector v2=node.getChildren("resource");
   if(v2.size()>0)
@@ -755,8 +765,9 @@ void AntEntity::setHunger(float f)
   mHunger=f;
 }
 
-void AntEntity::eventHitWaterMark(bool fromAbove)
+bool AntEntity::eventHitWaterMark(bool fromAbove)
 {
+  return true;
 }
 
 void AntEntity::setOnGround(bool p)
@@ -804,4 +815,25 @@ void AntEntity::setMinimapSize(float f)
 float AntEntity::getMinimapSize() const
 {
   return mMinimapSize;
+}
+
+bool AntEntity::isOnWater() const
+{
+  return onWater;
+}
+
+bool AntEntity::isOnGround() const
+{
+  return onGround;
+}
+
+void AntEntity::experienceFull()
+{
+}
+
+void AntEntity::incExperience(float a)
+{
+  experience+=a;
+  if(experience>1)
+    experienceFull();
 }

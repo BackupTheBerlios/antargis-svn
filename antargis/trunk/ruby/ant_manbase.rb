@@ -147,20 +147,24 @@ module AntManBase
 	end
 
 	def eventHitWaterMark(fromAbove)
+		puts "eventHitWaterMark(#{fromAbove})"
 		#setOnWater(fromAbove)
 		if fromAbove
 			if haveBoat
 				setMeshState("row")
+				return true
 			else
 				# stop job
 				delJob
 				p=getMap.getNextPlaceAbove(getPos2D,-0.2)
 				newMoveJob(0,p,0)
+				return false
 			end
 		else
 			setOnWater(false)
 			setPos(getMap.getPos(getPos2D))
 			setMeshState(@origMeshState)
+			return true
 		end
 	end
 

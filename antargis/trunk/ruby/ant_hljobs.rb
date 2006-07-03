@@ -650,6 +650,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 				when "constructing"
 					# was constructing
 					readyConstructed
+					man.incExperience(man.learnAmount)
 					@target.decSmoke
 					man.setMode("construct_torest")
 					fpos=@hero.getFormation(man,@hero.getPos2D)

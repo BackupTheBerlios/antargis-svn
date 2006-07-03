@@ -21,6 +21,13 @@
 
 #!/usr/bin/ruby
 
+# Note:
+# This implementation is still very buggy. Apart from this there are some things missing:
+# * animation
+# * move wolves around a little while resting
+# * let them strive around when not hungry
+# * attack people if no sheep near
+
 # Wolves are controlled in a pack by a PackLeader.
 # Typically wolves are resting. When a member gets too much hunger (<0.5), then
 # the whole pack moves on to find some food (sheep or men)

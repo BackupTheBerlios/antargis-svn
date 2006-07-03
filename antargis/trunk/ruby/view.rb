@@ -63,18 +63,19 @@ class AntRubyView <GLApp
 	end
 	
 	def setupNames
+		puts "SETUPNAMES"
+		heroes=$map.getHeroes
 		if @names==nil
-			heroes=$map.getHeroes
 			@names=[]
-			heroes.each{|hero|
-				name=hero.getName
-				#FIXME: readd this
-				@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
-			}
-			@names.each{|n|
-				@layout.addChild(n)
-			}
 		end
+		heroes.each{|hero|
+			name=hero.getName
+			#FIXME: readd this
+			@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
+		}
+		@names.each{|n|
+			@layout.addChild(n)
+		}
 	end
 
 	def eventHover(list,button)
@@ -205,7 +206,7 @@ class AntButtonPanel<AGWidget
 		setName("ButtonPanel")
 		$buttonPanel=self
 		clearHandlers
-		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon"]
+		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon","doBuild"]
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
 		@inited=false
 		@agg=1

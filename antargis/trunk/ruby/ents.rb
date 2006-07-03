@@ -37,6 +37,9 @@ class AntRubyEntity<AntEntity
 		@birthday=getMap.getTime
 		@mode=""
 		@handlers={}
+		self.learnAmount=0.05
+
+		#self.experience=0
 
 		setHunger(0) # general entities have no hunger
 	end
@@ -50,6 +53,11 @@ class AntRubyEntity<AntEntity
 			return @xmlProps[n]
 		end
 	end
+	def experienceFull
+		super
+		self.experience=1
+	end
+
 	def loadXML(node)
 		super
 		if node.get("birthday")!=""

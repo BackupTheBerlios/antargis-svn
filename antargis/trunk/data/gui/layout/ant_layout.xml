@@ -10,16 +10,16 @@
 		</cell>
 
 		<table col="1" row="0" cols="1" rows="6" name="SideBar">
-			<rowsize row="0" fixed="90"/>
+			<rowsize row="0" fixed="100"/>
 			<rowsize row="1" fixed="160"/>
 			<rowsize row="2" fixed="240"/>
 			<rowsize row="4" fixed="216"/>
 			<rowsize row="5" fixed="50"/>
-			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops">
+			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops\nWhite - Experience">
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
 						<table cols="1" rows="3" name="Hero0">
-							<rowsize row="1" fixed="12"/>
+							<rowsize row="1" fixed="15"/>
 							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/none.png"/>
 							<antEnergy name="HeroBar0" col="0" row="1" hborder="5"/>
@@ -28,7 +28,7 @@
 					</radio>
 					<radio col="1" row="0" name="hero1">
 						<table cols="1" rows="3">
-							<rowsize row="1" fixed="9"/>
+							<rowsize row="1" fixed="15"/>
 							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage1" col="0" row="0" filename="data/gui/portraits/none.png"/>
 							<antEnergy name="HeroBar1" col="0" row="1" hborder="5"/>
@@ -37,7 +37,7 @@
 					</radio>
 					<radio col="2" row="0" name="hero2">
 						<table cols="1" rows="3">
-							<rowsize row="1" fixed="9"/>
+							<rowsize row="1" fixed="15"/>
 							<rowsize row="2" fixed="25"/>
 							<image name="HeroImage2" col="0" row="0" filename="data/gui/portraits/none.png"/>
 							<antEnergy name="HeroBar2" col="0" row="1" hborder="5"/>
@@ -82,6 +82,7 @@
 										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
 										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
 										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
+										<button  col="3" row="0" name="doUpgrade" caption-image="data/gui/upgrade.png" tooltip="Upgrade" enabled="false"/>
 										<button  col="3" row="0" name="doConstruct" caption-image="data/gui/construct.png" tooltip="Construct"/>
 										<button  col="4" row="0" name="doInspect" caption-image="data/gui/zoom.png" tooltip="Inspect object"/>
 									</table>
@@ -158,7 +159,8 @@
 			</cell>
 		</table>
 	</table>
-	<table cols="1" rows="2">
+	<table cols="2" rows="2">
+		<colsize col="1" fixed="216"/>
 		<rowsize row="1" fixed="30"/>
 		<text name="statusBar" col="0" row="1" caption="FPS:0" cache="true"/>
 	</table>

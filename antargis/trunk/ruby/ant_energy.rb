@@ -7,7 +7,7 @@ class AntEnergy<AGWidget
 	def initialize(p,rect)
 		super(p,rect)
 
-		@keys=[:energy,:morale,:food,:troops]
+		@keys=[:energy,:morale,:food,:troops,:exp]
 		@values={}
 		@colors={}
 		@keys.each{|k|@values[k]=0}
@@ -16,6 +16,7 @@ class AntEnergy<AGWidget
 		@colors[:energy]=AGColor.new(0,0xcf,0)
 		@colors[:morale]=AGColor.new("#5555ff")
 		@colors[:food]=AGColor.new("#975500")
+		@colors[:exp]=AGColor.new("#FFFFFF")
 		@hborder=0
 		@vborder=0
 
@@ -55,7 +56,7 @@ class AntEnergy<AGWidget
 			a2=c*1.0
 			a3=c*0.8
 		
-			mr=AGRect2.new(@hborder,i*mh+v,(w-@hborder*2)*v,mh*2)
+			mr=AGRect2.new(@hborder,i*mh,(w-@hborder*2)*v,mh*2)
 
 			p.drawGradient(mr,a0,a1,a2,a3)
 			i+=3
@@ -78,6 +79,7 @@ private
 			set(:morale,@hero.getMorale)
 			set(:troops,@hero.getMen.length/60.0)
 			set(:food,@hero.getFood)
+			set(:exp,@hero.experience)
 		else
 			@values.each{|k,v|@values[k]=1}
 		end

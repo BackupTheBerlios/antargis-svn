@@ -15,6 +15,28 @@
 			<colsize col="3" relative="0.3"/>
 			<rowsize row="0" relative="1"/>
 			
+			<cell col="1" row="0">
+				<frame width="50">
+					<table cols="2" rows="1">
+						<cell col="0" row="0">
+							<listBox name="list"/>
+						</cell>
+						<cell col="1" row="0">
+							<frame width="20">
+								<table cols="1" rows="2">
+									<cell col="0" row="0">
+										<image name="screenshot"/>
+									</cell>
+									<cell col="0" row="1">
+										<text caption="..." name="desc"/>
+									</cell>
+								</table>
+							</frame>
+						</cell>
+					</table>
+				</frame>
+			</cell>
+			
 			<table col="3" row="0" cols="1" rows="2">
 				<rowsize row="0" relative="3"/>
 				
@@ -24,14 +46,14 @@
 					<button row="2" col="0" name="singleExit" caption="Exit"/>
 				</table>
 			</table>
-			
+			<!--
 			<table col="1" row="0" cols="1" rows="3">
 				<rowsize row="0" relative="5"/>
 				<rowsize row="1" fixed="20"/>
 				<rowsize row="2" relative="2"/>
 				<image col="0" row="0" name="campaignImage"/>
 				<text col="0" row="2" name="campaignDescription" font="story.font" align="center" enabled="false" caption=""/>
-			</table>
+			</table>-->
 		</table>
 		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>
 	</table>

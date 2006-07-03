@@ -138,6 +138,20 @@ AGVector2 MoveJob::getDirection(const AntEntity *e) const
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
   float d0=getMap()->getPos(e->getPos2D())[2];
+
+  if(d0<WATER_MARK && e->isOnGround())
+    {
+      e->eventHitWaterMark(true);
+      return; // do nothing
+    }
+  else if(d0>WATER_MARK && e->isOnWater())
+    {
+      e->eventHitWaterMark(false);
+      return; // do nothing
+    }
+
+  AGVector3 oldPos=e->getPos3D();
+
   if(m3d)
     {
       AGVector3 diff=e->getPos3D()-mTarget3;
@@ -180,10 +194,27 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 
 
   float d1=getMap()->getPos(e->getPos2D())[2];
-  if(d0<WATER_MARK && d1>WATER_MARK)
+  /*  if(d0<WATER_MARK && d1>WATER_MARK)
     e->eventHitWaterMark(false);
   else if(d0>WATER_MARK && d1<WATER_MARK)
     e->eventHitWaterMark(true);
+  */
+
+  bool resetPos=false;
+
+  if(d1<WATER_MARK && e->isOnGround())
+    {
+      if(!e->eventHitWaterMark(true))
+	resetPos=true;
+    }
+  else if(d1>WATER_MARK && e->isOnWater())
+    {
+      if(!e->eventHitWaterMark(false))
+	resetPos=true;
+    }
+  if(resetPos)
+    e->setPos(oldPos);
+
 }
 
 void MoveJob::saveXML(Node &pNode) const
@@ -285,6 +316,7 @@ void FightJob::move(AntEntity *e,float ptime)
       mTarget->decMorale(ptime*e->getMoraleStrength()/mTarget->getDefense()); // FIXME: estimate this value
       mTarget->eventGotFight(e);
 
+      e->incExperience(ptime*e->learnAmount);
       if(moving)
 	{
 	  e->eventStartFighting();
