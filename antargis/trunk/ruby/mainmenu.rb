@@ -116,7 +116,7 @@ class AntMenuApp <AGApplication
 		l=@singleMenu.getChild("list")
 		l.clearList
 		fs.each{|f|
-			x=f.gsub(".antcmp","")
+			x=f.gsub(".antlvl","")
 			l.insertItem(f,x)
 		}
 		if fs.length>0
@@ -140,7 +140,7 @@ class AntMenuApp <AGApplication
 		@menues.push(@singleMenu)
 		addHandler(@singleMenu.getChild("singleExit"),:sigClick,:eventExit)
 		addHandler(@singleMenu.getChild("singleStart"),:sigClick,:eventStart)
-		addHandler(@singleMenu.getChild("list"),:sigSelect,:eventSingleSelect)
+		addHandler(@singleMenu.getChild("list"),:sigSelect,:eventLoadSelect)
 		updateSingleMenu
 	end
 	
@@ -343,13 +343,31 @@ class AntMenuApp <AGApplication
 
 	# load menu
 	def eventLoadSelect(e)
+		if getMainWidget==@singleMenu
+			@singleMenu.getChild("desc").setText("")
+			filename=id=@singleMenu.getChild("list").getSelectedID
+			fn="data/levels/"+id.gsub(".antlvl",".png")
+			if findFile(fn)!=""
+				s=AGSurface.load(fn)
+				if s.valid
+					@singleMenu.getChild("screenshot").setSurface(s)
+				end
+			end
+			doc=Document.new("data/levels/"+filename)
+			d=doc.root.get("desc")
+			@singleMenu.getChild("desc").setText(d)
+			return true
+		end
 		puts "MUH"
 		#raise 1
 		@loadMenu.getChild("desc").setText("")
 		filename=id=@loadMenu.getChild("list").getSelectedID
 		fn="savegames/"+id.gsub(".antcmp",".png")
 		if findFile(fn)!=""
-			@loadMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
+			s=AGSurface.load(fn)
+			if s.valid
+				@loadMenu.getChild("screenshot").setSurface(s)
+			end
 		end
 		return true
 	end

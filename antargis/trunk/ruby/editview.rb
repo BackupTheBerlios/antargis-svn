@@ -374,6 +374,9 @@ class AntRubyEditView<GLApp
 		tree.setPos(AGVector2.new(pos.x,pos.y))
 		getMap.insertEntity(tree)
 	end
+
+	def setupNames
+	end
 	
 	def edit(meshes,button)
 		meshes.each{|res|

@@ -1,21 +1,84 @@
 <?xml version="1.0"?>
 <layout name="GameLayout">
   <!-- main game layout -->
-	<table cols="2" rows="1">
+	<table cols="2" rows="1" name="SideBar">
 		<colsize col="1" fixed="216"/>
-
+		
+		<!-- new hero display on top left -->
 		<cell col="0" row="0">
-			<table cols="1" rows="1" name="GameBox">
+			<table cols="2" rows="2">
+				<rowsize row="0" fixed="100"/>
+				<colsize col="0" fixed="432"/>
+				<cell col="0" row="0">
+					<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops\nWhite - Experience">
+						<table col="0" row="0" cols="6" rows="1">
+							<radio col="0" row="0" name="hero0">
+								<table cols="1" rows="3" name="Hero0">
+									<rowsize row="1" fixed="15"/>
+									<rowsize row="2" fixed="25"/>
+									<image name="HeroImage0" col="0" row="0" filename="data/gui/portraits/none.png"/>
+									<antEnergy name="HeroBar0" col="0" row="1" hborder="5"/>
+									<text name="HeroName0" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+								</table>
+							</radio>
+							<radio col="1" row="0" name="hero1">
+								<table cols="1" rows="3">
+									<rowsize row="1" fixed="15"/>
+									<rowsize row="2" fixed="25"/>
+									<image name="HeroImage1" col="0" row="0" filename="data/gui/portraits/none.png"/>
+									<antEnergy name="HeroBar1" col="0" row="1" hborder="5"/>
+									<text name="HeroName1" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+								</table>
+							</radio>
+							<radio col="2" row="0" name="hero2">
+								<table cols="1" rows="3">
+									<rowsize row="1" fixed="15"/>
+									<rowsize row="2" fixed="25"/>
+									<image name="HeroImage2" col="0" row="0" filename="data/gui/portraits/none.png"/>
+									<antEnergy name="HeroBar2" col="0" row="1" hborder="5"/>
+									<text name="HeroName2" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+								</table>
+							</radio>
+							<radio col="3" row="0" name="hero3">
+								<table cols="1" rows="3">
+									<rowsize row="1" fixed="15"/>
+									<rowsize row="2" fixed="25"/>
+									<image name="HeroImage3" col="0" row="0" filename="data/gui/portraits/none.png"/>
+									<antEnergy name="HeroBar3" col="0" row="1" hborder="5"/>
+									<text name="HeroName3" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+								</table>
+							</radio>
+							<radio col="4" row="0" name="hero4">
+								<table cols="1" rows="3">
+									<rowsize row="1" fixed="15"/>
+									<rowsize row="2" fixed="25"/>
+									<image name="HeroImage4" col="0" row="0" filename="data/gui/portraits/none.png"/>
+									<antEnergy name="HeroBar4" col="0" row="1" hborder="5"/>
+									<text name="HeroName4" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+								</table>
+							</radio>
+							<radio col="5" row="0" name="hero5">
+								<table cols="1" rows="3">
+									<rowsize row="1" fixed="15"/>
+									<rowsize row="2" fixed="25"/>
+									<image name="HeroImage5" col="0" row="0" filename="data/gui/portraits/none.png"/>
+									<antEnergy name="HeroBar5" col="0" row="1" hborder="5"/>
+									<text name="HeroName5" col="0" row="2" font="button.text" align="center" valign="center" caption=""/>
+								</table>
+							</radio>
+						</table>
+					</radioGroup>
+				</cell>
 			</table>
 		</cell>
 
-		<table col="1" row="0" cols="1" rows="6" name="SideBar">
-			<rowsize row="0" fixed="100"/>
+		<table col="1" row="0" cols="1" rows="6" name="SideBarRight">
+			<rowsize row="0" fixed="1"/> <!-- was 100 -->
 			<rowsize row="1" fixed="160"/>
-			<rowsize row="2" fixed="240"/>
+			<rowsize row="2" fixed="280"/>
 			<rowsize row="4" fixed="216"/>
 			<rowsize row="5" fixed="50"/>
-			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops\nWhite - Experience">
+<!--			<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops\nWhite - Experience">
 				<table col="0" row="0" cols="3" rows="1">
 					<radio col="0" row="0" name="hero0">
 						<table cols="1" rows="3" name="Hero0">
@@ -45,7 +108,7 @@
 						</table>
 					</radio>
 				</table>
-			</radioGroup>
+			</radioGroup>-->
 			
 			
 			<!-- button panel -->
@@ -92,42 +155,48 @@
 								<text name="minion" caption="Minion of Godrin" font="inventory.font"/>
 							</cell>
 							<cell col="0" row="3">
-								<table cols="6" rows="5">
+								<table cols="6" rows="6">
 									<image col="0" row="0" filename="data/gui/man.png" tooltip="Troops"/>
 									<image col="0" row="1" filename="data/gui/apple2.png" tooltip="Food"/>
 									<image col="0" row="2" filename="data/gui/shield.png" tooltip="Shields"/>
 									<image col="0" row="3" filename="data/gui/sword.png" tooltip="Swords"/>
 									<image col="0" row="4" filename="data/gui/tools.png" tooltip="Tools"/>
+									<image col="0" row="5" filename="data/gui/bread.png" tooltip="Bread"/>
 									
 									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
 									<text col="1" row="1" caption="0" align="right" name="food" font="inventory.font"/>
 									<text col="1" row="2" caption="0" align="right" name="shield" font="inventory.font"/>
 									<text col="1" row="3" caption="0" align="right" name="sword" font="inventory.font"/>
 									<text col="1" row="4" caption="0" align="right" name="tool" font="inventory.font"/>
+									<text col="1" row="5" caption="0" align="right" name="bread" font="inventory.font"/>
 									
 									<image col="2" row="0" filename="data/gui/coal.png" tooltip="Coal"/>
 									<image col="2" row="1" filename="data/gui/ore.png" tooltip="Ore"/>
 									<image col="2" row="2" filename="data/gui/gold.png" tooltip="Gold"/>
 									<image col="2" row="3" filename="data/gui/stones.png" tooltip="Stone"/>
 									<image col="2" row="4" filename="data/gui/wood.png" tooltip="Wood"/>
+									<image col="2" row="5" filename="data/gui/flour.png" tooltip="Flour"/>
 									
 									<text col="3" row="0" caption="0" align="right" name="coal" font="inventory.font"/>
 									<text col="3" row="1" caption="0" align="right" name="ore" font="inventory.font"/>
 									<text col="3" row="2" caption="0" align="right" name="gold" font="inventory.font"/>
 									<text col="3" row="3" caption="0" align="right" name="stone" font="inventory.font"/>
 									<text col="3" row="4" caption="0" align="right" name="wood" font="inventory.font"/>
+									<text col="3" row="5" caption="0" align="right" name="flour" font="inventory.font"/>
 									
 									<image col="4" row="0" filename="data/gui/rowboat.png" tooltip="Boat"/>
 									<image col="4" row="1" filename="data/gui/bow.png" tooltip="Bow"/>
 									<image col="4" row="2" filename="data/gui/steel.png" tooltip="Steel"/>
 									<image col="4" row="3" filename="data/gui/fish_rod.png" tooltip="Fishing rod"/>
 									<image col="4" row="4" filename="data/gui/apple2.png" tooltip="Fruit"/>
+									<image col="4" row="5" filename="data/gui/crop.png" tooltip="Crop"/>
 									
 									<text col="5" row="0" caption="0" align="right" name="boat" font="inventory.font"/>
 									<text col="5" row="1" caption="0" align="right" name="bow" font="inventory.font"/>
 									<text col="5" row="2" caption="0" align="right" name="steel" font="inventory.font"/>
 									<text col="5" row="3" caption="0" align="right" name="rod" font="inventory.font"/>
 									<text col="5" row="4" caption="0" align="right" name="fruit" font="inventory.font"/>
+									<text col="5" row="5" caption="0" align="right" name="crop" font="inventory.font"/>
 									
 									
 								</table>

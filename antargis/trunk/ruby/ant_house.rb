@@ -171,6 +171,7 @@ class AntHouse<AntBoss
 			# take resource
 			amount=[e.target.resource.get(res),e.canCarry].min
 			e.target.resource.sub(res,amount)
+			e.target.resourceChanged
 			e.resource.add(res,amount)
 		elsif e.getMode=="homing"
 			e.newRestJob(1) # always rest a little

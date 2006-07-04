@@ -422,7 +422,7 @@ bool fileExists(const std::string &pName)
 #endif
 }
 
-std::vector<std::string> getDirectory(const std::string &pDir)
+std::vector<std::string> getDirectoryInternal(const std::string &pDir)
 {
 #ifdef USE_PHYSFS
   TRACE;
@@ -487,6 +487,24 @@ std::vector<std::string> getDirectory(const std::string &pDir)
   return v;
 #endif
 }
+
+std::vector<std::string> getDirectory(const std::string &pDir)
+{
+  std::vector<std::string> v;
+  std::list<std::string> ps=mFsPaths;
+  ps.push_front("."); // add current dir
+
+
+  for(std::list<std::string>::iterator i=ps.begin();i!=ps.end();i++)
+    {
+      
+      std::vector<std::string> a=getDirectoryInternal(*i+"/"+pDir);
+      std::copy(a.begin(),a.end(),std::back_inserter(v));
+    }
+      
+  return v;
+}
+
 
 
 

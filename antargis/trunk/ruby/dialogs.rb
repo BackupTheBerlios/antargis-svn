@@ -302,7 +302,7 @@ end
 class AntLoadDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/loaddialog.xml")
-		d=getDirectory(toAGEdit(getChild("Directory")).getText)
+		d=getDirectory(getSavePath)
 		@lb=toAGListBox(getChild("Files"))
 		puts d
 		d.each { |x|

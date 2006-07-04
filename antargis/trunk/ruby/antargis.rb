@@ -382,12 +382,13 @@ class AntGameApp <AntRubyView
 		name="hero#{num}"
 		c=@layout.getChild(name)
 		c.setEnabled(flag)
+		c.setVisible(flag)
 	end
 	def setupHeroDisplay(first=false)
 		#super
 		# setup Hero buttons
 		hs=getMap.getPlayer.getHeroes.select{|h|h.class==AntHero}
-		for i in 0..2
+		for i in 0..5
 			if hs.length>i
 				setHero(true,i)
 				setHeroName(hs[i].getName,i)
@@ -449,10 +450,11 @@ class AntGameApp <AntRubyView
 
 	def showPanel
 		sideBar=@layout.getChild("SideBar")
+		sideBarRight=@layout.getChild("SideBarRight")
 		sideBar.show
 		@controls=true
 		# reset Scene's width
-		getScene.getCameraObject.setWidth((getScreen.getWidth-sideBar.width).to_i)
+		getScene.getCameraObject.setWidth((getScreen.getWidth-sideBarRight.width).to_i)
 	end
 	def hidePanel
 		@layout.getChild("SideBar").hide

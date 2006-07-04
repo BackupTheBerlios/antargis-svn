@@ -38,16 +38,16 @@ class AntRubyView <GLApp
 	end
 	def updateNamePositions
 		heroes=$map.getHeroes
-		@names.each{|name|
+		@names.each{|k,w|
 			found=false
 			heroes.each{|hero|
-				if hero.getName==name.getText
-					name.setRect(getHeroScreenPos(hero))
+				if hero.getName==w.getText
+					w.setRect(getHeroScreenPos(hero))
 					found=true
 				end
 			}
 			if (not found)
-				name.hide
+				w.hide
 			end
 		}
 	end
@@ -64,17 +64,20 @@ class AntRubyView <GLApp
 	
 	def setupNames
 		puts "SETUPNAMES"
+		$setupNames||=0
+		$setupNames+=1
+		raise 1 if $setupNames>20
+
 		heroes=$map.getHeroes
-		if @names==nil
-			@names=[]
-		end
+		@names||={}
 		heroes.each{|hero|
 			name=hero.getName
 			#FIXME: readd this
-			@names.push(AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero))
-		}
-		@names.each{|n|
-			@layout.addChild(n)
+			if @names[hero].nil?
+				n=AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero)
+				@names[hero]=n
+				@layout.addChild(n)
+			end
 		}
 	end
 
@@ -305,6 +308,7 @@ class AntNameDisplay<AGWidget
 		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height),@hero.getName,@font))
 		
 		@fonts={true=>getTheme.getFont("heroName.font"),false=>getTheme.getFont("enemyHero.font")}
+		@oldPlayer=nil
 		setCaching(true)
 	end
 
@@ -320,7 +324,15 @@ class AntNameDisplay<AGWidget
 	def prepareDraw
 		@font=@fonts[@hero.getPlayer==$map.getPlayer]
 		if @font!=@oldfont
+			puts "#{@hero.getPlayer} #{$map.getPlayer} #{@oldPlayer}"
+			puts "#{@font} #{@oldfont}"
+			@oldPlayer=@hero.getPlayer
 			puts "font changed"
+			$fontChangeCount||=0
+			$fontChangeCount+=1
+			if $fontChangeCount>20
+				raise 1
+			end
 			@oldfont=@font
 			@textWidget.setFont(@font)
 			queryRedraw

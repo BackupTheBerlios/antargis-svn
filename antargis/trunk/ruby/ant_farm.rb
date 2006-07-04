@@ -31,6 +31,7 @@ class AntFarm<AntHouse
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
+		@fields=[]
 		setDirection(-30)
 	end
 	
@@ -40,12 +41,53 @@ class AntFarm<AntHouse
 		setMesh(mesh)
 	end
 
+# 	def needed()
+# 		goods=["wood","stone","food"]
+# 		minarg=goods.min {|a,b|resource.get(a)<=>resource.get(b)}
+# 		minval=resource.get(minarg)
+# 		if minval>=50
+# 			return nil
+# 		end
+# 		return minarg
+# 	end
+
 	def needed
 		if resource.get("food")<30
-			return "fruit"
+			return ["fruit","crop"].shuffle[0]
 		else
 			return nil
 		end
+	end
+
+	def assignJob(e)
+		if @job.nil?
+			if e.getMode=="makeField"
+				pos=e.getPos2D
+				f=AntField.new
+				f.setPos(pos)
+				getMap.insertEntity(f)
+				puts "INSERT ENT #{@fields.length}"
+				getMap.endChange
+				@fields.push(f)
+				f.farm=self
+				e.setMode("")
+				e.newMoveJob(0,getPos2D,0)
+				return
+			elsif @fields.length<7
+				e.setMode("makeField")
+				angle=getRand*360
+				radius=getRand*3+6
+				e.newMoveJob(0,getPos2D+AGVector2.new(AGAngle.new(angle))*radius,0)
+				return
+			end
+		end
+		super
+	end
+
+	def removeField(f)
+		@fields.delete(f)
+		getMap.removeEntity(f)
+		getMap.endChange
 	end
 
 	def process
