@@ -1,9 +1,20 @@
 class AntHeroBuildJob<AntHeroMoveJob
 	attr_reader :finished
 	def initialize(hero,targetpos,building)
-		super(hero,0,target.getPos2D,4)
+		super(hero,0,targetpos,5)
 		@targetpos=targetpos
 		@building=building
+		@usedmen=0
+
+		@restype={}
+		
+		@flat=0
+
+
+		# make buildingsite
+		@target=AntBuildingSite.new
+		@target.setPos(targetpos)
+		getMap.insertEntity(@target)
 	end
 	def image
 		"data/gui/build.png"
@@ -58,16 +69,20 @@ class AntHeroBuildJob<AntHeroMoveJob
 					fpos=@hero.getFormation(man,@hero.getPos2D)
 					man.newMoveJob(0,fpos,0)
 					man.setMode("construct_torest")
+				when "goto_construct"
+					man.newMoveJob(0,@targetpos,0)
+					man.setMode("to_construct")
 				when "to_construct"  # do some constructing
-					@target.incSmoke
+					#@target.incSmoke
 					man.newRestJob(5 - @hero.getAggression*0.5) # work for 3.5-5 seconds (depending on aggression)
 					man.setMode("constructing")
 					man.playSound("construct")
+					man.setMeshState("pick") # FIXME: add hammering
 				when "constructing"
 					# was constructing
 					readyConstructed
 					man.incExperience(man.learnAmount)
-					@target.decSmoke
+					#@target.decSmoke
 					man.setMode("construct_torest")
 					fpos=@hero.getFormation(man,@hero.getPos2D)
 					man.newMoveJob(0,fpos,0)
@@ -81,9 +96,9 @@ class AntHeroBuildJob<AntHeroMoveJob
 				else
 					if wantmen>@usedmen
 						@usedmen+=1
-						man.newMoveJob(0,@target.getPos2D,0)
+						man.newMoveJob(0,@targetpos,0)
 						if enoughResources
-							man.setMode("to_construct")
+							man.setMode("goto_construct")
 						else
 							man.setMode("fetch")
 						end
@@ -95,7 +110,7 @@ class AntHeroBuildJob<AntHeroMoveJob
 	end
 private
 	def myResources
-		["wood","stone","coal","ore"]
+		["wood","stone"]
 	end
 	def enoughResources
 		# FIXME support more resources
@@ -139,23 +154,62 @@ private
 		@hero.resource.get("food")>0
 	end
 	def readyConstructed
-		# produce any
-		@productionRules.shuffle.each{|rule|
-			ok=true
-			
-			rule.from.each{|w,n|
-				puts "#{w},#{n}"
-				if @target.resource.get(w)<n
-					ok=false
-				end
+
+		px=@targetpos.x.to_i+1
+		py=@targetpos.y.to_i+1
+		if @flatpositions.nil?
+			@flatpositions=[]
+			(-3..3).each{|y|
+				(-3..3).each{|x|
+					v=1-Math::sqrt(x**2+y**2)/4.0
+					v=[0,1,v*1.5].sort[1]
+					@flatpositions.push([x+px,y+py,v])
+				}
 			}
-			if ok
-				# we found a useful production
-				rule.from.each{|w,n|@target.resource.sub(w,n)}
-				@target.resource.add(rule.what,1)
-				return #out
+			@flatheight=getMap.get(px,py)
+			@flatpositions.shuffle
+		end
+
+
+		
+		if @flatpositions.length>0
+			(0..1).each{|i|
+				break if @flatpositions.length==0
+				p=@flatpositions.shift
+				v=getMap.get(p[0],p[1])*(1-p[2])+@flatheight*p[2]
+				getMap.set(p[0],p[1],v)
+				v=getMap.getTerrain(p[0],p[1],EARTH)*(1-p[2])+p[2]
+				getMap.setTerrain(p[0],p[1],EARTH,v)
+			}
+			getMap.endChange
+			return
+		end
+
+
+
+		#neededResources={"stone"=>2,"wood"=>2} # FIXME: depends on house-type
+		neededResources=@building.buildResources
+	
+		neededResources.each{|k,v|
+			if @target.resource.get(k)<v
+				return # oooooh
 			end
 		}
-		# something went wrong - we don't have enough resources - whatever
+		neededResources.each{|k,v|
+			@target.resource.sub(k,v)
+		}
+		@target.incProgress(@building.buildSteps)
+		
+		if @target.ready
+			# delete buildingsite and replace with building
+			getMap.removeEntity(@target)
+			house=@building.new
+			house.setPos(@targetpos)
+			getMap.insertEntity(house)
+			house.setPlayer(@hero.getPlayer)
+			house.setName(house.class.to_s.gsub("Ant",""))
+			house.resource.takeAll(@target.resource) # give remaining resources to house
+			@finished=true
+		end
 	end
 end

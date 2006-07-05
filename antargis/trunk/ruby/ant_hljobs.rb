@@ -870,3 +870,6 @@ class AntHouseFetchJob
 	def check
 	end
 end
+
+
+require 'ant_buildjob.rb'

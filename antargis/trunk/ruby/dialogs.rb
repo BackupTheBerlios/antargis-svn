@@ -601,9 +601,10 @@ class LoadApp<AGApplication
 end
 
 class AntBuildDialog<AGLayout
-	def initialize(p,pos)
+	def initialize(p,pos,hero)
 		super(p)
 		@pos=pos
+		@hero=hero
 		loadXML(loadFile("data/gui/layout/build_dialog.xml"))
 
 		addHandler(getChild("cancel"),:sigClick,:eventCancel)
@@ -622,10 +623,18 @@ class AntBuildDialog<AGLayout
 		return true
 	end
 	def eventBuild(e)
-		house=@map[e.getCaller.getName].new
-		puts "POS:#{@pos}"
-		house.setPos(@pos)
-		getMap.insertEntity(house)
+		if false
+			# direct placement
+			house=@map[e.getCaller.getName].new
+			puts "POS:#{@pos}"
+			house.setPos(@pos)
+			getMap.insertEntity(house)
+			house.setPlayer(getMap.getPlayer)
+			house.setName(house.class.to_s.gsub("Ant",""))
+		else
+			@hero.newHLBuildJob(@pos,@map[e.getCaller.getName])
+		end
+		close
 		return true
 	end
 end

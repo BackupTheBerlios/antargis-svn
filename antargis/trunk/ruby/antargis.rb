@@ -328,6 +328,7 @@ class AntGameApp <AntRubyView
 			case @job
 				when "doBuild"
 					buildHouse(pos.dim2)
+					@job=nil
 			end
 			resetJob
 			return
@@ -343,7 +344,7 @@ class AntGameApp <AntRubyView
 	###############################
 
 	def buildHouse(pos)
-		@layout.addChild(AntBuildDialog.new(@layout,pos))
+		@layout.addChild(AntBuildDialog.new(@layout,pos,@hero))
 	end
 	
 	def save

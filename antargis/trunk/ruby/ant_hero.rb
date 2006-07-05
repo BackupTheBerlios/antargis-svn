@@ -148,6 +148,10 @@ class AntHero<AntBoss
 		@job=AntHeroFightAnimalJob.new(self,target)
 		assignJob2All
 	end
+	def newHLBuildJob(pos,type)
+		@job=AntHeroBuildJob.new(self,pos,type)
+		assignJob2All
+	end
 	
 	def newHLDismissJob()
 		@job=nil

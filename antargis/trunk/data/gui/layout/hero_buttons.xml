@@ -24,7 +24,7 @@
 								<button  col="1" row="0" name="doDismiss" caption-image="data/gui/dismiss.png" tooltip="Dismiss"/>
 								<button  col="0" row="1" name="doDropFood" caption-image="data/gui/drop_apple.png" tooltip="Drop food"/>
 								<button  col="1" row="1" name="doDropWeapon" caption-image="data/gui/drop_weapon.png" tooltip="Drop weapons"/>
-								<radio  col="1" row="2" name="doBuild" caption-image="data/gui/build.png" tooltip="Build" enabled="false"/>
+								<radio  col="1" row="2" name="doBuild" caption-image="data/gui/build.png" tooltip="Build" enabled="true"/>
 							</table>
 						</radioGroup>
 					</cell>

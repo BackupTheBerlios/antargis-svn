@@ -41,6 +41,15 @@ end
 # * defending
 # * fetching resources
 class AntHouse<AntBoss
+	
+	def AntHouse.buildSteps
+		20
+	end
+	def AntHouse.buildResources
+		{"stone"=>2,"wood"=>2}
+	end
+
+
 	def initialize
 		super
 		@type=3

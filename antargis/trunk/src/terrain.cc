@@ -38,7 +38,7 @@ void TerrainPieceVA::mapChanged()
   // first check, if this piece was really affected
   if(bb.valid())
     {
-      AGRect2 r=AGRect2(AGVector2(bb.base[0],bb.base[1]),AGVector2(bb.base[0]+bb.dir[0],bb.base[1]+bb.dir[1]));
+      AGRect2 r=AGRect2(AGVector2(bb.base[0]-2,bb.base[1]-2),AGVector2(bb.base[0]+bb.dir[0]+4,bb.base[1]+bb.dir[1]+4));  // add some border (2)
 
       if(!r.collide(mMap->getChangeRect()))
 	{

@@ -64,9 +64,6 @@ class AntRubyView <GLApp
 	
 	def setupNames
 		puts "SETUPNAMES"
-		$setupNames||=0
-		$setupNames+=1
-		raise 1 if $setupNames>20
 
 		heroes=$map.getHeroes
 		@names||={}
