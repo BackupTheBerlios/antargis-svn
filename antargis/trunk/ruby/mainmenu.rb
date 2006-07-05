@@ -65,7 +65,9 @@ class AntMenuApp <AGApplication
 		end
 		return true
 	end
-		
+
+
+	# MAIN MENU
 	def setupMain()
 		@mainMenu=AGLayout.new($screen)
 		@mainMenu.loadXML(loadFile("data/gui/layout/mainmenu.xml"))
@@ -80,6 +82,44 @@ class AntMenuApp <AGApplication
 		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
 	end
 
+	def eventCredits(e)
+		setMainWidget(@creditsMenu)
+		return true
+	end
+	def eventSingle(e)
+		setMainWidget(@singleMenu)
+		return true
+	end
+
+	def eventTutorial(e)
+		tutCampaign=Campaign.new("data/campaigns/tutorial.xml")
+		soundOff
+		startCampaign(tutCampaign)
+		soundOn
+		return true
+	end
+
+	def eventCampaign(e)
+		setMainWidget(@campaignMenu)
+		return true
+	end
+	def eventLoadGame(e)
+		updateLoadMenu
+		setMainWidget(@loadMenu)
+		return true
+	end
+	def eventOptions(e)
+		setMainWidget(@optionsMenu)
+		return true
+	end
+	def eventQuit(e)
+		tryQuit
+		return true
+	end
+
+
+
+	# LOAD GAME MENU
 	def setupLoadMenu
 		@loadMenu=AGLayout.new($screen)
 		@loadMenu.loadXML(loadFile("data/gui/layout/loadmenu.xml"))
@@ -107,6 +147,47 @@ class AntMenuApp <AGApplication
 		end
 	end
 
+	def eventLoadSelect(e)
+		if getMainWidget==@singleMenu
+			@singleMenu.getChild("desc").setText("")
+			filename=id=@singleMenu.getChild("list").getSelectedID
+			fn="data/levels/"+id.gsub(".antlvl",".png")
+			if findFile(fn)!=""
+				s=AGSurface.load(fn)
+				if s.valid
+					@singleMenu.getChild("screenshot").setSurface(s)
+				end
+			end
+			doc=Document.new("data/levels/"+filename)
+			d=doc.root.get("desc")
+			@singleMenu.getChild("desc").setText(d)
+			return true
+		end
+		puts "MUH"
+		#raise 1
+		@loadMenu.getChild("desc").setText("")
+		filename=id=@loadMenu.getChild("list").getSelectedID
+		fn="savegames/"+id.gsub(".antcmp",".png")
+		if findFile(fn)!=""
+			s=AGSurface.load(fn)
+			if s.valid
+				@loadMenu.getChild("screenshot").setSurface(s)
+			end
+		end
+		return true
+	end
+	def eventLoad(e)
+		id=@loadMenu.getChild("list").getSelectedID
+		if id!=""
+			c=Campaign.new(getWriteDir+"/savegames/"+id)
+			continueCampaign(c)
+		end
+		setMainWidget(@mainMenu)
+		return true
+	end
+
+
+	# SINGLE GAME MENU
 	def updateSingleMenu
 		puts "DIR.."
 		fs=getDirectory("./data/levels")
@@ -126,14 +207,6 @@ class AntMenuApp <AGApplication
 			end
 		end
 	end
-	
-	def setupCredits
-		@creditsMenu=AGLayout.new($screen)
-		@creditsMenu.loadXML(loadFile("data/gui/layout/credits.xml"))
-		@menues.push(@creditsMenu)
-		addHandler(@creditsMenu.getChild("exit"),:sigClick,:eventExit)
-	end
-
 	def setupSingle
 		@singleMenu=AGLayout.new($screen)
 		@singleMenu.loadXML(loadFile("data/gui/layout/single.xml"))
@@ -144,6 +217,19 @@ class AntMenuApp <AGApplication
 		updateSingleMenu
 	end
 	
+
+
+
+
+	# CREDITS MENU
+	def setupCredits
+		@creditsMenu=AGLayout.new($screen)
+		@creditsMenu.loadXML(loadFile("data/gui/layout/credits.xml"))
+		@menues.push(@creditsMenu)
+		addHandler(@creditsMenu.getChild("exit"),:sigClick,:eventExit)
+	end
+
+	# CAMPAIGN MENU	
 	def setupCampaign
 		@campaignMenu=AGLayout.new($screen)
 		@campaignMenu.loadXML(loadFile("data/gui/layout/campaign.xml"))
@@ -167,7 +253,28 @@ class AntMenuApp <AGApplication
 			i+=1
 		}
 	end
+	def eventMission(e)
+		callerName=e.getCaller.getName
+		number=callerName[8..12].to_i
+		@selCampaign=@campaigns[number]
+		@campaignMenu.getChild("campaignImage").setTexture(@selCampaign.texture)
+		@campaignMenu.getChild("campaignDescription").setText(_(@selCampaign.description))
+		return true
+	end
 	
+	def eventStart(e)
+		puts "EVENTSTART"
+		if @selCampaign
+			soundOff
+			#startGame(@selCampaign)
+			startCampaign(@selCampaign)
+			soundOn
+		end
+		return true
+	end
+	
+
+	# OPTIONS MENU
 	def setupOptions
 		@optionsMenu=AGLayout.new($screen)
 		@optionSubMenus=["VideoOptionsMenu","AudioOptionsMenu","GameOptionsMenu"]
@@ -235,62 +342,8 @@ class AntMenuApp <AGApplication
 		puts getSurfaceManager.getUsedTexMem
 		#raise 1
 	end
-	# Mainmenu-sigs
-	
-	def eventCredits(e)
-		setMainWidget(@creditsMenu)
-		return true
-	end
-	def eventSingle(e)
-		setMainWidget(@singleMenu)
-		return true
-	end
 
-	def eventTutorial(e)
-		tutCampaign=Campaign.new("data/campaigns/tutorial.xml")
-		soundOff
-		startCampaign(tutCampaign)
-		soundOn
-		return true
-	end
-
-	def eventCampaign(e)
-		setMainWidget(@campaignMenu)
-		return true
-	end
-	def eventLoadGame(e)
-		updateLoadMenu
-		setMainWidget(@loadMenu)
-		return true
-	end
-	def eventOptions(e)
-		setMainWidget(@optionsMenu)
-		return true
-	end
-	def eventQuit(e)
-		tryQuit
-		return true
-	end
 	
-	def eventMission(e)
-		callerName=e.getCaller.getName
-		number=callerName[8..12].to_i
-		@selCampaign=@campaigns[number]
-		@campaignMenu.getChild("campaignImage").setTexture(@selCampaign.texture)
-		@campaignMenu.getChild("campaignDescription").setText(_(@selCampaign.description))
-		return true
-	end
-	
-	def eventStart(e)
-		puts "EVENTSTART"
-		if @selCampaign
-			soundOff
-			#startGame(@selCampaign)
-			startCampaign(@selCampaign)
-			soundOn
-		end
-		return true
-	end
 
 	# all exits to mainmenu	
 	def eventExit(e)
@@ -325,61 +378,7 @@ class AntMenuApp <AGApplication
 		eventMusicEnd
 	end	
 
-	# single menu
-	def eventSingleSelect(e)
-		puts "MUH"
-		#raise 1
-		@singleMenu.getChild("desc").setText("")
-		filename=id=@singleMenu.getChild("list").getSelectedID
-		fn="data/levels/"+id.gsub(".antlvl",".png")
-		if findFile(fn)!=""
-			@singleMenu.getChild("screenshot").setSurface(AGSurface.load(fn))
-		end
-		doc=Document.new("data/levels/"+filename)
-		d=doc.root.get("desc")
-		@singleMenu.getChild("desc").setText(d)
-		return true
-	end
-
 	# load menu
-	def eventLoadSelect(e)
-		if getMainWidget==@singleMenu
-			@singleMenu.getChild("desc").setText("")
-			filename=id=@singleMenu.getChild("list").getSelectedID
-			fn="data/levels/"+id.gsub(".antlvl",".png")
-			if findFile(fn)!=""
-				s=AGSurface.load(fn)
-				if s.valid
-					@singleMenu.getChild("screenshot").setSurface(s)
-				end
-			end
-			doc=Document.new("data/levels/"+filename)
-			d=doc.root.get("desc")
-			@singleMenu.getChild("desc").setText(d)
-			return true
-		end
-		puts "MUH"
-		#raise 1
-		@loadMenu.getChild("desc").setText("")
-		filename=id=@loadMenu.getChild("list").getSelectedID
-		fn="savegames/"+id.gsub(".antcmp",".png")
-		if findFile(fn)!=""
-			s=AGSurface.load(fn)
-			if s.valid
-				@loadMenu.getChild("screenshot").setSurface(s)
-			end
-		end
-		return true
-	end
-	def eventLoad(e)
-		id=@loadMenu.getChild("list").getSelectedID
-		if id!=""
-			c=Campaign.new(getWriteDir+"/savegames/"+id)
-			continueCampaign(c)
-		end
-		setMainWidget(@mainMenu)
-		return true
-	end
 end
 
 

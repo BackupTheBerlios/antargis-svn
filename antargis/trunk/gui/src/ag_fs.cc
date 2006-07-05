@@ -492,6 +492,7 @@ std::vector<std::string> getDirectory(const std::string &pDir)
 {
   std::vector<std::string> v;
   std::list<std::string> ps=mFsPaths;
+  ps.push_front(""); // add current dir
   ps.push_front("."); // add current dir
 
 

@@ -11,6 +11,8 @@ ARTS
 
 [Arts - Graphics - 3D]
 ------------------------------------------------------
+[H] modify bakery a little (http://antargis.berlios.de/phpBB2/viewtopic.php?p=359#359)
+
 [M] team color
 [M] Mesh for pigeon
 [M] animate hero, druid and smith
@@ -111,6 +113,8 @@ ARTS
 [H] fighting should proceed when already attacked while formating!
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
+
+[M] continue building site (enemies too)
 [M] choosing/making player for multiplayer
 [M] add info-bar about troops to inventory or main-view, while fighting (?)
 [M] chase enemy when he's fleeing (a little and not too far)
