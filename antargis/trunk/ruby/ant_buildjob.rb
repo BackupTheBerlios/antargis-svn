@@ -14,6 +14,7 @@ class AntHeroBuildJob<AntHeroMoveJob
 		# make buildingsite
 		@target=AntBuildingSite.new
 		@target.setPos(targetpos)
+		@target.building=building
 		getMap.insertEntity(@target)
 	end
 	def image
