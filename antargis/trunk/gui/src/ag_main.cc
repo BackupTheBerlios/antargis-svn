@@ -151,6 +151,14 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   // set video mode
   SDL_Init(SDL_INIT_VIDEO);
   SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
+
+  if(!ms)
+    {
+      std::cerr<<"Initing video mode failed!"<<std::endl;
+      exit(1);
+    }
+
+
   if(mScreen)
     delete mScreen;
 
