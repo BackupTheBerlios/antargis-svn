@@ -82,6 +82,7 @@ AGScreen *mAGGScreen=0;
 
 AGScreen &getScreen()
 {
+  assert(mAGGScreen);
   return *mAGGScreen;
 }
 

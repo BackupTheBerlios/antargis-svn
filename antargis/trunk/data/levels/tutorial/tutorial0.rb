@@ -19,7 +19,7 @@ class Level1<Level
 		end
 	end
 	def eventHLJobFinished(hero,job)
-		if job.class==AntHeroRecruitJob and hero.getName=="Rowen" and @recruit==nil
+		if job.class==AntHeroRecruitJob and hero.getName=="Rowen" and @recruit.nil?
 			@recruit=true
 			start=StoryFlow.new("recruit")
 			start.push("Tutorial","Ok, you have recruited some men.")

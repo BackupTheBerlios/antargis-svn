@@ -48,7 +48,7 @@ end
 # AntRubyMap is not only the "map", but manages the moving and the actions of all the
 # entities around. Apart from that it contains the Players. So it might be better to call it "World"
 class AntRubyMap<AntMap
-	attr_accessor :pause
+	attr_accessor :pause,:players
 
 	def initialize(pScene,w,h,playerName="Rowen")
 		super(pScene,w,h)

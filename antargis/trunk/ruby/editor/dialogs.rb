@@ -90,3 +90,94 @@ class AntEditGeneratorDialog<AntDialog
 	end
 end
 
+
+
+class AntPlayerEditDialog<AGLayout
+	include AGHandler
+	def initialize(parent)
+		super
+		loadXML(loadFile("data/gui/layout/editor_players_dialog.xml"))
+		@players={}
+		@list=getChild("playerList")
+		initPlayerNames
+		initPlayerTypes
+
+		if @players.length>0
+			eventPlayerSelected(nil)
+		end
+			
+		addHandler(@list,:sigSelect,:eventPlayerSelected)
+		addHandler(getChild("addPlayer"),:sigClick,:eventAddPlayer)
+		addHandler(getChild("changePlayer"),:sigClick,:eventChangePlayer)
+		addHandler(getChild("deletePlayer"),:sigClick,:eventDelPlayer)
+	end
+
+	def eventPlayerSelected(e)
+		name=@list.getSelectedID
+		getChild("playerName").setText(name)
+		getChild("playerType").selectItem(@players[name].class.to_s)
+		return true
+	end
+
+	def eventAddPlayer(e)
+		# check if already a player of this name exists
+		name=getChild("playerName").getText
+		if @players.keys.member?(name)
+			messageBox("Error","Please enter a new player-name. This already exists!",MB_OK)
+		else
+			type=eval(getChild("playerType").getSelectedID)
+			player=type.new(name)
+			getMap.players.push(player)
+			initPlayerNames
+		end
+		return true
+	end
+
+	def eventChangePlayer(e)
+		name=getChild("playerName").getText
+		sel=@list.getSelectedID
+		if @players.keys.member?(name) and sel!=name
+			messageBox("Error","Please enter a new player-name. This already exists!",MB_OK)
+		else
+			@players[sel].name=name
+			type=eval(getChild("playerType").getSelectedID)
+			if type!=@players[sel].class
+				# argh, assigned new player type - delete old one and generate new
+				getMap.players.delete(@players[sel])
+				player=type.new(name)
+				getMap.players.push(player)
+			end
+			initPlayerNames
+		end
+		return true
+	end
+	
+	def eventDelPlayer(e)
+		sel=@list.getSelectedID
+		if @players[sel]
+			getMap.players.delete(@players[sel])
+			initPlayerNames
+		end
+		return true
+	end
+
+private
+	def initPlayerNames
+		@list.clearList
+		@players={}
+		getMap.players.each{|p|
+			@list.insertItem(p.name,p.name)
+			@players[p.name]=p
+		}
+	end
+
+	def initPlayerTypes
+		@types=getDescendantsOfClass(AntPlayer)
+		l=getChild("playerType")
+		l.clearList
+		@types.each{|t|
+			l.insertItem(t.to_s,t.to_s)
+		}
+	end
+end
+

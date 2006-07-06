@@ -34,6 +34,10 @@ AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect2 &r):
 }
 AGRadioGroup::~AGRadioGroup()
 {
+  std::set<AGRadio*>::iterator i=mChildren.begin();
+
+  for(;i!=mChildren.end();i++)
+    (*i)->setGroup(0);
 }
 
 void AGRadioGroup::eventChange(const std::string &p)

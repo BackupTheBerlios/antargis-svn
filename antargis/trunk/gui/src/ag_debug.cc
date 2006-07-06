@@ -27,7 +27,7 @@
 #include <winsock2.h>
 #endif
 #include <ruby.h>
-
+#include <SDL.h>
 
 bool quietLog=false;
 void setQuiet()
@@ -98,6 +98,22 @@ void agAssertGL(std::string s)
     std::cerr<<msg.str()<<std::endl;
     throw std::runtime_error(msg.str());
   }
+
+  // asserting SDL_errors
+  char *se=SDL_GetError();
+  if(se)
+    {
+      if(strlen(se)>0)
+	{
+	  std::cerr<<"SDL_Error:"<<s<<":"<<se<<std::endl;
+	  throw std::runtime_error(se);
+	}
+    }
+  else
+    {
+      std::cerr<<"MUH"<<std::endl;
+    }
+
 }
 
 

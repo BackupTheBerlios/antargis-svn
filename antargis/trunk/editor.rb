@@ -53,6 +53,8 @@ class AntGameApp < AntRubyEditView
 
 		addHandler(@layout.getChild("loadButton"),:sigClick,:load)
 		addHandler(@layout.getChild("saveButton"),:sigClick,:save)
+
+		addHandler(@layout.getChild("playerButton"),:sigClick,:editPlayers)
 		
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@miniMap.setMap(getMap)
@@ -106,6 +108,11 @@ class AntGameApp < AntRubyEditView
 	end
 	def eventOptions(e)
 		@layout.addChild(AntOptionsDialog.new(@layout))
+		return true
+	end
+
+	def editPlayers
+		@layout.addChild(AntPlayerEditDialog.new(@layout))
 		return true
 	end
 	

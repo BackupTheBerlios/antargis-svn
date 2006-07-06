@@ -22,6 +22,7 @@
 #!/usr/bin/ruby
 
 class AntPlayer
+	attr_accessor :name
 	def initialize(name)
 		@heroes=[]
 		@heronames=[]

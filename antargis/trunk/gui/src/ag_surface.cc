@@ -323,12 +323,27 @@ AGInternalSurface *AGSurface::surface() const
 
 AGSurface AGSurface::load(const std::string &pFilename)
 {
-  AGSurface n;
-  n.s=new AGInternalSurface;
-  std::string file=loadFile(pFilename);
+  assert(&getScreen());
 
-  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
+  assertGL;
+  AGSurface n;
+  assertGL;
+  n.s=new AGInternalSurface;
+  assertGL;
+  std::string file=loadFile(pFilename);
+  assertGL;
+
+  SDL_RWops* rw=SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length());
+  assertGL;
+  
+  SDL_Surface *s=IMG_Load_RW(rw,0);
+  assertGL;
+  
+  SDL_FreeRW(rw);;
+  assertGL;
+
   n.s->surface=s;
+  assertGL;
   return n;
 }
 

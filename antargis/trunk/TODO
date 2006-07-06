@@ -63,6 +63,7 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
+[H] crash on windows when setting the icon (antargislib.rb:113)
 [M] a segfault appears when profiling with ruby (./run --profile)
 		couldn't find the problem yet. it's probably one of these problems:
 		1) some GC-problem
