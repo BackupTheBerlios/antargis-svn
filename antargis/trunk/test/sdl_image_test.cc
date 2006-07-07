@@ -1,17 +1,19 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <fstream>
 
-
-int main()
+int main(int argc,char *argv[])
 {
+	std::ofstream os("output.txt");
+
   // init SDL
   bool gl=true;  // opengl
   bool fs=false; // fullscreen
 
   if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
     {
-      std::cerr<<"SDL could not be initialized!"<<std::endl;
+      os<<"SDL could not be initialized!"<<std::endl;
       exit(1);
     }
 
@@ -22,7 +24,7 @@ int main()
       videoInfo = SDL_GetVideoInfo();
       if(!videoInfo)
 	{
-	  std::cerr<<"SDL could not get video-info"<<std::endl;
+	  os<<"SDL could not get video-info"<<std::endl;
 	  exit(1);
 	}
     }
@@ -31,7 +33,7 @@ int main()
   if(gl)
     {
       videoFlags|=SDL_OPENGL;
-      std::cout<<"initing opengl"<<std::endl;
+      os<<"initing opengl"<<std::endl;
     }
   else
     videoFlags |= SDL_SWSURFACE;
@@ -42,7 +44,7 @@ int main()
   int w=1024;
   int h=768;
 
-  std::cout<<"bits per pixel:"<<(int)videoInfo->vfmt->BitsPerPixel<<std::endl;
+  os<<"bits per pixel:"<<(int)videoInfo->vfmt->BitsPerPixel<<std::endl;
 
   // set video mode
   //  SDL_Init(SDL_INIT_VIDEO);
@@ -50,18 +52,18 @@ int main()
 
   if(!ms)
     {
-      std::cerr<<"Initing video mode failed!"<<std::endl;
+      os<<"Initing video mode failed!"<<std::endl;
       exit(1);
     }
 
 
-  std::cout<<"Trying to load a surface from file... (data/blue_cursor.png)"<<std::endl;
+  os<<"Trying to load a surface from file... (data/blue_cursor.png)"<<std::endl;
   SDL_Surface *s=IMG_Load("data/blue_cursor.png");
 
-  std::cout<<"loading from file: ok."<<std::endl;
+  os<<"loading from file: ok."<<std::endl;
 
 
-  std::cout<<"try loading indirectly..."<<std::endl;
+  os<<"try loading indirectly..."<<std::endl;
   {
   FILE *f=fopen("data/blue_cursor.png","rb");
   fseek(f,0,SEEK_END);
@@ -84,10 +86,18 @@ int main()
   
   SDL_FreeRW(rw);;
 
-  std::cout<<"everything's alright"<<std::endl;
+  os<<"everything's alright"<<std::endl;
   }
   
 
 
   return 0;
 }
+/*
+extern "C"
+{
+	int main()
+	{
+		return test();
+	}
+}*/
