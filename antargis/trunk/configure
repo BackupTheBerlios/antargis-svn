@@ -9,18 +9,11 @@ $profile=true
 $debug=false
 $help=false
 $gcdebug=false
+$xcompile=false
 
 varnames=[]
 
-# try reading config.rb
-#if File.exists?("config.rb")
-#	File.open("config.rb").each_line{|l|
-#		eval(l)
-#		varnames.push(l.split("=")[0])
-#	}
-#end
-
-varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug']
+varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug','$xcompile']
 
 varnames.uniq!
 
@@ -38,9 +31,12 @@ ARGV.each{|arg|
 			$debug=false
 		when "--disable-profile"
 			$profile=false
+		when "--xcompile"
+			$xcompile=true
 		when "--help","-h"
 			puts "--debug, -d     enable debugging"
 			puts "--profile, -p   enable profiling"
+			puts "--xcompile      enable cross-compiling using mingw32"
                         puts "--gc-debug      enable debugging of garbage collection"
 			$help=true
 	end

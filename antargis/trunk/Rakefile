@@ -2,8 +2,6 @@
 
 require 'rake'
 require 'mkmf'
-#require 'rake/clean.rb'
-#require 'file'
 require 'ftools'
 
 require 'buildtools.rb'
@@ -79,8 +77,13 @@ end
 $CFLAGS=""
 #puts "CFLAGS:#{$CFLAGS}"
 
-$CXX=$ccache+"g++"
-$CC=$ccache+"gcc"
+if $xcompile
+	$CXX=$ccache+"i586-mingw32msvc-g++"
+	$CC=$ccache+"i586-mingw32msvc-gcc"
+else
+	$CXX=$ccache+"g++"
+	$CC=$ccache+"gcc"
+end
 $INCLUDEDIRS=""
 if not windows
 	$CFLAGS+=`sdl-config --cflags`.chomp
