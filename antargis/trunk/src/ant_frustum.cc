@@ -32,11 +32,6 @@ AntPlane::AntPlane(const AGVector3 &dir,float offset):
 {
 }
 
-inline bool AntPlane::inside(const AGVector3 &v) const
-{
-  return v*mDir-mOffset>0;
-}
-
 AntPlane makePlane(const AGVector3 &p0,const AGVector3 &p1,const AGVector3 &p2)
 {
   AGVector3 up=p1-p0;

@@ -55,4 +55,9 @@ class AntFrustum
 std::ostream &operator<<(std::ostream &o,const AntPlane &p);
 std::ostream &operator<<(std::ostream &o,const AntFrustum &p);
 
+inline bool AntPlane::inside(const AGVector3 &v) const
+{
+  return v*mDir-mOffset>0;
+}
+
 #endif

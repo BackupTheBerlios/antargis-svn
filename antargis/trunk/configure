@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'mkmf'
 require 'ftools'
 
-require 'buildtools.rb'
 
 $profile=true
 $debug=false
@@ -42,10 +40,16 @@ ARGV.each{|arg|
 	end
 }
 
+# require them here, so that globals are already set
+require 'mkmf'
+require 'buildtools.rb'
+
 
 if not $help
 
-	if windows
+	if $xcompile
+		$LDFLAGS+=" -Lcontrib/usr/lib"
+	elsif windows
 		$LDFLAGS+=" -LC:/msys/local/lib"
 	end
 	test_library('SDL')
@@ -53,15 +57,20 @@ if not $help
 	if windows
 		test_library('GLU32')
 	else
-		test_library("GLU")
-		test_library("GL")
+		if $xcompile
+			test_library("opengl32")
+			test_library("glu32")
+		else
+			test_library("GLU")
+			test_library("GL")
+		end
 	end
 	test_library('SDL_mixer')
 	test_library('SDL_image')
 	test_library('stdc++')
 	test_library('z')
 	test_library('png')
-	if windows
+	if $xcompile or windows
 		test_library('msvcrt-ruby18')
 	end
 

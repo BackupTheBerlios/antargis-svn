@@ -2,7 +2,7 @@
 
 $mwindows||=nil
 def windows
-	
+	return false if $xcompile
 	if $mwindows==nil
 		$mwindows||=(have_library("opengl32"))
 		if not $mwindows
@@ -59,4 +59,17 @@ def msh(command,&block)
 	if not res
 		fail "Command failed with status (#{status.exitstatus}): [#{command}]"
 	end
+end
+
+
+if $xcompile
+	$CXX="i586-mingw32msvc-g++"
+	$CC="i586-mingw32msvc-gcc"
+	CC=$CC
+	CONFIG['CC']=$CC
+	#system("echo $(CC)")
+	#exit
+	#def test_library(x)
+	#	return true
+	#end
 end

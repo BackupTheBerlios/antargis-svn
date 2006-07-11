@@ -80,12 +80,21 @@ $CFLAGS=""
 if $xcompile
 	$CXX=$ccache+"i586-mingw32msvc-g++"
 	$CC=$ccache+"i586-mingw32msvc-gcc"
+	CC=$CC
+
 else
 	$CXX=$ccache+"g++"
 	$CC=$ccache+"gcc"
 end
 $INCLUDEDIRS=""
-if not windows
+if $xcompile
+	$CFLAGS+=`./contrib/usr/bin/sdl-config --cflags`.chomp
+	$INCLUDEDIRS+=`./contrib/usr/bin/sdl-config --cflags`.chomp
+	$LDFLAGS+=`./contrib/usr/bin/sdl-config --libs`.chomp+" "+$libs
+	#$CFLAGS+=" -fPIC"
+
+
+elsif not windows
 	$CFLAGS+=`sdl-config --cflags`.chomp
 	$INCLUDEDIRS+=`sdl-config --cflags`.chomp
 	$LDFLAGS+=`sdl-config --libs`.chomp+" "+$libs
@@ -102,7 +111,13 @@ end
 #end
 
 
-$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -I"+Config::CONFIG['archdir']+" -Wall"
+if $xcompile
+	rubyincludedir="contrib/usr/lib/ruby/1.8/i386-mingw32msvc/ -Icontrib/usr/include"
+else
+	rubyincludedir=Config::CONFIG['archdir']
+end
+
+$CFLAGS+=" -Isrc -I"+$GUISRC+" -DUSE_RUBY -I"+rubyincludedir+" -Wall"
 
 if $debug
 	$CFLAGS+=" -g -O0"
@@ -175,7 +190,9 @@ SRCS.each{|s|
 }
 
 task :test => "libantargis.so" do |t|
-	`ruby ruby/runtests.rb`
+	if (not $xcompile)
+		`ruby ruby/runtests.rb`
+	end
 	#require 'libantargis.so'
 end
 
@@ -288,7 +305,7 @@ task :dist => :test do
 	#sh "test -e #{distdir} || mkdir #{distdir}"
 	dirs=`find -type d`.split("\n").collect{|x|x.sub("./","")}
 	dirs=dirs.select{|x|(not x=~/\.svn/)}.select{|x|(not x=~/\./)}
-	dirs=dirs.select{|x|x!="Output" && x!="screenies" && (not x=~/^models/)}
+	dirs=dirs.select{|x|x!="Output" && x!="screenies" && (not x=~/^models/) && (not x=~/contrib/) && x!="autopackage"}
 
 	dirs.each{|dir|
 		cpdir(dir,distdir)
@@ -307,14 +324,29 @@ task :dist => :test do
 		}
 	end
 
+	if $xcompile
+		# copy dlls
+		Dir["contrib/usr/bin/*.dll"].each{|f|
+			msh "cp #{f} #{distdir}"
+		}
+		msh "cp libantargis.so #{distdir}"
+		msh "rm -rf #{distdir}/autopackage #{distdir}/contrib #{distdir}/mkmf.log"
+	
+		# FIXME: maybe del this
+		msh "cp #{distdir}/libpng13.dll #{distdir}/libpng12.dll"
+		msh "cp #{distdir}/libtiff3.dll #{distdir}/tiff.dll"
+	end
+	
 
 	# tar.gz
-	if not windows
+	if $xcompile
+		msh "zip -r #{distdir}.zip #{distdir}"
+	elsif not windows
 		msh "rm -rf #{distdir}/config.rb"
 		msh "tar cfz #{distdir}.tar.gz #{distdir}"
 		msh "rm -rf #{distdir}"
 	end
-	
+
 end
 
 task :doc do
