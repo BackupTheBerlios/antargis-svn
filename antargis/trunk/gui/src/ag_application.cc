@@ -44,8 +44,7 @@ AGApplication *getApplication()
 }
 
 
-AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTooltip(0)
-
+AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTooltip(0),mOverlay(0)
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
   setCursor(getTextureCache()->get("blue_cursor.png"));
@@ -160,11 +159,13 @@ bool AGApplication::doEvent(const SDL_Event* event)
   
   AGEvent *message=newEvent(this,"",event);
   bool processed=false;
-  if(mainWidget)
+  if(mOverlay)
+    processed=mOverlay->processEvent(message);
+  if(!processed && mainWidget)
     processed=mainWidget->processEvent(message);
   if(!processed)
     processed=processEvent(message);
-
+  
   delete message;
   return processed;
 }
@@ -208,6 +209,8 @@ void AGApplication::prepareDraw()
       mainWidget->prepareDraw();
       mainWidget->useTexturesRecursive();
     }
+  if(mOverlay)
+    mOverlay->prepareDraw();
 }  
 
 
@@ -221,6 +224,15 @@ void AGApplication::redraw()
 
 void AGApplication::draw()
 {
+  if(delCue.size()>0)
+    {
+      for(std::list<AGWidget*>::iterator i=delCue.begin();i!=delCue.end();i++)
+	if(*i)
+	  saveDelete(*i);
+      delCue.clear();
+    }
+
+
   STACKTRACE;
   beginRender();
   if(mainWidget)
@@ -241,6 +253,11 @@ void AGApplication::draw()
 	{
 	  AGPainter p;
 	  mTooltip->drawAll(p);
+	}
+      if(mOverlay)
+	{
+	  AGPainter p;
+	  mOverlay->drawAll(p);
 	}
 
       pLastDrawn=mainWidget;
@@ -328,6 +345,14 @@ void AGApplication::resetTooltip(AGTooltip *pTooltip)
       mTooltip=0;
     }
 }
+
+void AGApplication::setOverlay(AGWidget *pOverlay)
+{
+  if(mOverlay)
+    delCue.push_back(mOverlay);
+  mOverlay=pOverlay;
+}
+
 
 bool AGApplication::eventMouseMotion(AGEvent *m)
 {

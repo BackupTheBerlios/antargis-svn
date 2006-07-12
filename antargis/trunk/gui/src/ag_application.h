@@ -72,6 +72,8 @@ class AGApplication:public AGMessageObject
   void setTooltip(AGTooltip *pTooltip); // transfers ownage !
   void resetTooltip(AGTooltip *pTooltip); // try to reset this one
 
+  void setOverlay(AGWidget *pOverlay);
+
   void setCursor(const AGTexture &pTexture);
   void setNormalCursor();
   
@@ -87,8 +89,12 @@ class AGApplication:public AGMessageObject
   AGWidget *mainWidget;
   AGTooltip *mTooltip;
 
+  AGWidget *mOverlay;
+
   AGTexture *mCursor;
   AGRect2 mCursorOld;
+
+  std::list<AGWidget*> delCue;
 
  public:
   void mark();

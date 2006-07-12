@@ -318,6 +318,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGListBox "general_markfunc"
+%exception AGComboBox::AGComboBox {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGComboBox "general_markfunc"
 %exception TerrainPieceVA::TerrainPieceVA {
 	$action
 	result->mRUBY=self;
@@ -558,6 +568,8 @@ else if(dynamic_cast<AGGLWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGComboBox*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
 else if(dynamic_cast<AGListBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>(result))
@@ -626,6 +638,8 @@ else if(dynamic_cast<AGGLWidget*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGComboBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
 else if(dynamic_cast<AGListBox*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>($1))
@@ -1174,6 +1188,8 @@ else if(dynamic_cast<AGGLWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGComboBox*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
 else if(dynamic_cast<AGListBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>(result))
@@ -1232,6 +1248,8 @@ else if(dynamic_cast<AGGLWidget*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGComboBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
 else if(dynamic_cast<AGListBox*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>($1))
@@ -1346,6 +1364,8 @@ else if(dynamic_cast<AGGLWidget*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGComboBox*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
 else if(dynamic_cast<AGListBox*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>(result))
@@ -1416,6 +1436,8 @@ else if(dynamic_cast<AGGLWidget*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
 else if(dynamic_cast<AGEdit*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
+else if(dynamic_cast<AGComboBox*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
 else if(dynamic_cast<AGListBox*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
 else if(dynamic_cast<AGSubMenu*>($1))
@@ -1686,6 +1708,34 @@ else if(dynamic_cast<TerrainPieceVA*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AGComboBox*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGComboBox*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
    }
  }
  else $input=Qnil;
@@ -2004,6 +2054,11 @@ else if(dynamic_cast<AntMap*>($1))
 %typemap(directorout) AGColorButton {
  AGColorButton *b;
  Data_Get_Struct($input,AGColorButton,b);
+ $result=*b;
+}
+%typemap(directorout) AGComboBox {
+ AGComboBox *b;
+ Data_Get_Struct($input,AGComboBox,b);
  $result=*b;
 }
 %typemap(directorout) AGConfig {

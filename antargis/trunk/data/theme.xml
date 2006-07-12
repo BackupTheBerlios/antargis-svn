@@ -311,6 +311,9 @@
 			</background>
 		</button>
 	</antButton>
+	<combobox>
+		<font name="font" file="Arial.ttf" size="22" color="#DDDDDD"/>
+	</combobox>
 	<listbox>
 		<background>
 			<image name="image" file="data/gui/paper2.png"/>

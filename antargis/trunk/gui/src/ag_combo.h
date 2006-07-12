@@ -21,5 +21,38 @@
 #ifndef AG_COMBO_H
 #define AG_COMBO_H
 
+#include <ag_widget.h>
+
+class AGEdit;
+class AGListBox;
+
+class AGComboBox:public AGWidget
+{
+ public:
+  AGComboBox(AGWidget *pParent,const AGRect2 &pRect);
+
+  void insert(const std::string &pID,const std::string &pContent);
+
+  bool eventButtonClicked(AGEvent *pEvent);
+  bool eventSelected(AGEvent *pEvent);
+
+  AGSignal sigSelect;
+  
+  std::string getSelected() const;
+  void setSelected(const std::string &pID);
+
+  void clear();
+
+ private:
+  void update();
+
+  AGEdit *mEdit;
+  AGButton *mButton;
+  AGListBox *mListBox;
+
+  std::string mID;
+
+  std::list<std::pair<std::string,std::string> > ops;
+};
 
 #endif
