@@ -30,6 +30,18 @@ AGEvent::~AGEvent()
 {
 }
 
+
+void AGEvent::setVector(const AGVector2 &v)
+{
+  mVector=v;
+}
+/// returns the drag-vector in case of a drag-event
+AGVector2 AGEvent::getVector() const
+{
+  return mVector;
+}
+
+
 /// sets the caller of this event - shouldn't be used outside of AGWidget
 void AGEvent::setCaller(AGListener *pCaller)
 {

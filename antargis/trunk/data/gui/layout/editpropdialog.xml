@@ -2,9 +2,9 @@
 <layout name="OptionsMenu">
 	<table cols="3" rows="3"><!-- center window -->
 		<colsize col="1" fixed="400"/>
-		<rowsize row="1" fixed="160"/>
+		<rowsize row="1" fixed="260"/>
 		<window col="1" row="1" name="window" title="Edit Properties">
-			<table cols="1" rows="4">
+			<table cols="1" rows="5">
 				<colsize col="0" relative="1"/>
 				<rowsize row="0" relative="1"/>
 				<rowsize row="1" relative="1"/>
@@ -30,7 +30,13 @@
 					<text col="0" row="1" caption="NPCType:"/>
 					<edit col="1" tabindex="0" row="1" name="NpcType" text="0"/>
 				</table>
-				<table col="0" row="3" cols="2" rows="1">
+				<cell col="0" row="3">
+					<table cols="2" rows="1">
+						<text col="0" row="0" caption="Player:"/>
+						<listBox col="1" row="0" name="Player"/>
+					</table>
+				</cell>
+				<table col="0" row="4" cols="2" rows="1">
 					<button col="0" row="0" name="ok" theme="antButton" caption="Ok"/>
 					<button col="1" row="0" name="cancel" theme="antButton" caption="Cancel"/>
 				</table>

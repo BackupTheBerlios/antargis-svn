@@ -32,6 +32,16 @@ class AntEditPropDialog<AntDialog
 			@npcTypeW=toAGEdit(getChild("NpcType"))
 			@npcTypeW.setText(@ent.npcType)
 		end
+
+		# init player-list
+		plist=getChild("Player")
+		players=getMap.players
+		playernames=["NONE"]+players.collect{|p|p.getName}
+		playernames.each{|n|
+			plist.insertItem(n,n)
+		}
+
+
 	end
 	def eventOk(e)
 		menCountW=toAGEdit(getChild("MenCount"))

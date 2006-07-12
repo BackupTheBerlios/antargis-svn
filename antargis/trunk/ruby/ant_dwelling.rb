@@ -15,13 +15,13 @@ class AntDwelling<AntHouse
 		checkBirth
 	end
 
-protected
 	# setup the mesh
 	def setupMesh
 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/livinghouse.ant2",0.16,"data/textures/models/livinghouse.png"),AGVector4.new(0,0,0),-20)
 		setMesh(mesh)
 	end
 
+protected
 	# check if we need some resources - residents will gather this
 	def needed
 		if resource.get("food")<15

@@ -280,62 +280,6 @@ class AntRubyEditView<GLApp
 		return true
 	end
 	
-# 	def eventAddEnt(e)
-# 		callerName=e.getCaller.getName
-# 		@modifier="addEntity"
-# 		case callerName
-# 			when "grassGreen"
-# 				@type=AntGrass
-# 			when "sheep"
-# 				@type=AntSheep
-# 			when "tower"
-# 				@type=AntTower
-# 			when "farm"
-# 				@type=AntFarm
-# 			when "fir"
-# 				@type=AntFir
-# 			when "workshop"
-# 				@type=AntWorkshop
-# 			when "dwelling"
-# 				@type=AntDwelling
-# 			when "stones"
-# 				@type=AntStone
-# 			when "man"
-# 				@type=AntMan
-# 			when "hero"
-# 				@type=AntHero
-# 				@appearance="hero"
-# 			when "druid"
-# 				@type=AntNPC
-# 				@appearance="druid"
-# 			when "twig"
-# 				@type=AntTwig
-# 			when "tree"
-# 				@type=AntTree
-# 			when "bush"
-# 				@type=AntBush
-# 			when "highGrass"
-# 				@type=AntHighGrass
-# 		end
-# 		return true
-# 	end
-# 	def eventDecal(e)
-# 		callerName=e.getCaller.getName
-# 		@modifier="addEntity"
-# 		@type=AntDecal
-# 		return true
-# 	end
-# 	def eventDeco(e)
-# 		callerName=e.getCaller.getName
-# 		@modifier="addEntity"
-# 		if callerName=="coach"
-# 			@type=AntDecoMesh
-# 		else
-# 			@type=AntDeco
-# 		end
-# 		@decoType=callerName
-# 		return true
-# 	end
 	
 	def isTerrain(node)
 		[TerrainPieceVA,WaterPiece].member?(node.class)
@@ -351,9 +295,6 @@ class AntRubyEditView<GLApp
 		if not pos
 			return
 		end
-		#if toInt($clickEvent.getButton)!=1
-		#	return
-		#end
 		puts "ADDENTITY"
 		#pos=getMarkerPos
 		dorand=true

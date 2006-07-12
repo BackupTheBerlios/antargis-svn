@@ -27,6 +27,7 @@
 #include "ag_background.h"
 
 class AGEdit;
+class AGScroller;
 
 struct AGListBoxItem
 {
@@ -57,7 +58,11 @@ class AGListBox:public AGWidget
   virtual bool eventMouseButtonDown(AGEvent *m);
   virtual bool eventMouseButtonUp(AGEvent *m);
 
+  bool eventScroller(AGEvent *e);
+
   void clearList();
+
+  void updateScroller();
 
  private:
 
@@ -70,6 +75,8 @@ class AGListBox:public AGWidget
   int mItemHeight;
   std::vector<AGEdit*> mEdits;
   AGBackground mBackground,mHilight;
+
+  AGScroller *mScroller;
 };
 
 

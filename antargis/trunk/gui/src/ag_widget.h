@@ -80,6 +80,7 @@ class AGWidget:public AGMessageObject
   AGSignal sigMouseEnter;
   AGSignal sigMouseLeave;
   AGSignal sigClick;
+  AGSignal sigDragBy;
 
   virtual float minWidth() const;
   virtual float minHeight() const;

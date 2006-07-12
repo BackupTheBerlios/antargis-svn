@@ -58,11 +58,16 @@ class AGEvent
 
   void setName(const std::string &n);
 
+  void setVector(const AGVector2 &v);
+  AGVector2 getVector() const;
+
  private:
   AGListener *mCaller;
   std::string mName;
 
   const SDL_Event *mEvent;
+
+  AGVector2 mVector;
 };
 
 

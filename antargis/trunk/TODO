@@ -63,7 +63,6 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-[H] crash on windows when setting the icon (antargislib.rb:113)
 [M] a segfault appears when profiling with ruby (./run --profile)
 		couldn't find the problem yet. it's probably one of these problems:
 		1) some GC-problem
@@ -170,4 +169,3 @@ ARTS
 [Packaging / Building]
 ------------------------------------------------------
 [L] installer for linux. maybe some autopackage or .debs?
-[M] swig.* is not built automatically when headers are changed

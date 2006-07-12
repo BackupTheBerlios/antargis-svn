@@ -120,6 +120,9 @@ class AntRubyMap<AntMap
 	end
 	# get my player (the player-object of the player playing "this" client
 	def getPlayer
+		if @myPlayer.nil?
+			raise "no player defined in level!"
+		end
 		@myPlayer
 	end
 	# get current world time

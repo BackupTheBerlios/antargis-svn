@@ -297,7 +297,9 @@ bool AGWidget::eventMouseMotion(AGEvent *e)
       if(mButtonDown)
 	{
 	  //	  TRACE;
-	  eventDragBy(e,e->getMousePosition()-mOldMousePos);
+	  AGVector2 v=e->getMousePosition()-mOldMousePos;
+	  e->setVector(v);
+	  eventDragBy(e,v) || sigDragBy(e);
 	  mOldMousePos=e->getMousePosition();
 	}
     }
@@ -398,6 +400,8 @@ void AGWidget::setRect(const AGRect2 &pRect)
   regChange();
   mr=pRect;
   regChange();
+  if(mParent)
+    mParent->redraw();
 }
 
 float AGWidget::minWidth() const

@@ -18,10 +18,11 @@
  * License along with this program.
  */
 
-#include "ag_listbox.h"
-#include "ag_edit.h"
-#include "ag_theme.h"
 #include "ag_debug.h"
+#include "ag_edit.h"
+#include "ag_listbox.h"
+#include "ag_theme.h"
+#include "ag_scroller.h"
 
 #include <sstream>
 
@@ -30,8 +31,6 @@ AGListBoxItem::AGListBoxItem(std::string pID,std::string pValue)
   id=pID;
   value=pValue;
 }
-
-
 
 AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pRect),
 							     sigSelect(this,"sigSelect"),
@@ -48,10 +47,16 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pR
 
   AGFont f=getTheme()->getFont("listbox.font");
 
+
+  mScroller=new AGScroller(this,AGRect2(width()-mItemHeight,0,mItemHeight,height()),false);
+  addChild(mScroller);
+
+  mScroller->sigValueChanged.connect(slot(this,&AGListBox::eventScroller));
+
   for(;y<pRect.h();y+=mItemHeight,count++)
     {
-      AGRect2 r(0,y,pRect.w(),mItemHeight);
-      cdebug(r);
+      AGRect2 r(0,y,pRect.w()-mItemHeight,mItemHeight);
+      //      cdebug(r);
       AGEdit *e=new AGEdit(this,r);
       e->setMutable(false);
       e->setBackground(false);
@@ -138,6 +143,8 @@ void AGListBox::arrange()
 
   for(y=mY,y2=0;y<(size_t)(mY+mHeight) && y<mItems.size();y++,y2++)
     mEdits[y2]->setText(mItems[y].value);
+
+  updateScroller();
 }
 
 void AGListBox::draw(AGPainter &p)
@@ -165,7 +172,7 @@ bool AGListBox::eventMouseClick(AGEvent *e)
       AGVector2 p=e->getMousePosition();
 
       int b=e->getButton();
-      cdebug(b);
+      //      cdebug(b);
       if(b==4)
 	{
 	  // up wheel
@@ -186,12 +193,12 @@ bool AGListBox::eventMouseClick(AGEvent *e)
 	{
 
 	  int y=p[1]-getScreenRect().y();
-	  cdebug("y:"<<y);
+	  //	  cdebug("y:"<<y);
 	  y/=mItemHeight;
-	  cdebug("y:"<<y);
-	  cdebug(mItemHeight);
+	  //	  cdebug("y:"<<y);
+	  //	  cdebug(mItemHeight);
 	  int n=y+mY;
-	  cdebug("n:"<<n);
+	  //	  cdebug("n:"<<n);
 	  if(n<mItems.size())
 	    mSelected=n;
 
@@ -232,4 +239,33 @@ bool AGListBox::eventMouseButtonUp(AGEvent *m)
     if(getScreenRect().contains(m->getMousePosition()))
       return true;
   return r;
+}
+
+bool AGListBox::eventScroller(AGEvent *e)
+{
+  mY=mScroller->getValue();
+  arrange();
+  return false;
+}
+
+void AGListBox::updateScroller()
+{
+  // update scroller
+  {
+    int itemCount=mItems.size();
+    int visibleCount=height()/mItemHeight;
+
+    int maxVal=std::max(0,itemCount-visibleCount);
+
+    /*    cdebug("maxVal:"<<maxVal);
+    cdebug("vis:"<<visibleCount);
+    cdebug("items:"<<itemCount);
+    cdebug("my:"<<mY);
+    */
+    mScroller->setInterval(0,maxVal);
+    mScroller->setScrollerSize(std::min(visibleCount,maxVal));
+    mScroller->setValue(mY);
+    mScroller->setStepping(1);
+  }
+
 }
