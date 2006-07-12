@@ -26,6 +26,13 @@ def getLanguage
 	if $ENV["LANG"]
 		$ENV["LANG"].sub(/_.*/,"")
 	else
+		# windows - try estimating thruogh "Program Files"-dir name
+		known={"Programme"=>"de",
+		 "Archivos de programa"=>"es"}
+		n=$ENV["CommonProgramFiles"].split("\\")[1]
+		if known[n]
+			return known[n]
+		end
 		return "en"
 	end
 end

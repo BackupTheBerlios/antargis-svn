@@ -99,7 +99,9 @@ build_libsdl_mixer()
 	
 		tar xfz ${SDLMIXER}
 		cd `echo "${SDLMIXER}"|sed -e "s/\.tar\.gz//"`
-		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc
+		export CFLAGS="-I${TOPDIR}/usr/include"
+		echo ${CFLAGS}
+		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --disable-music-ogg-shared --enable-music-ogg
 		make
 		make install
 		cd ..
