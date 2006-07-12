@@ -61,6 +61,7 @@ AGApplication::~AGApplication()
 void AGApplication::setMainWidget(AGWidget *w)
 {
   mainWidget=w;
+  setOverlay(0);
 }
 
 AGWidget *AGApplication::getMainWidget()
@@ -161,10 +162,15 @@ bool AGApplication::doEvent(const SDL_Event* event)
   bool processed=false;
   if(mOverlay)
     processed=mOverlay->processEvent(message);
-  if(!processed && mainWidget)
-    processed=mainWidget->processEvent(message);
+
   if(!processed)
-    processed=processEvent(message);
+    {
+      if(!processed && mainWidget)
+	processed=mainWidget->processEvent(message);
+
+      if(!processed)
+	processed=processEvent(message);
+    }
   
   delete message;
   return processed;
@@ -346,8 +352,15 @@ void AGApplication::resetTooltip(AGTooltip *pTooltip)
     }
 }
 
+AGWidget *AGApplication::getOverlay()
+{
+  return mOverlay;
+}
+
+
 void AGApplication::setOverlay(AGWidget *pOverlay)
 {
+  CTRACE;
   if(mOverlay)
     delCue.push_back(mOverlay);
   mOverlay=pOverlay;

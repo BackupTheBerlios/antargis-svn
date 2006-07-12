@@ -39,7 +39,7 @@ class AntGameApp<AGApplication
 		setMainWidget(s)
 		l=AGComboBox.new(s,AGRect2.new(100,100,200,30))
 		s.addChild(l)
-		(0..20).each{|c|l.insert(c.to_s,c.to_s)}
+		(0..20).each{|c|l.insertItem(c.to_s,c.to_s)}
 		#l.updateScroller
 		addHandler(l,:sigSelect,:eventCombo)
 	end

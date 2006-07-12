@@ -82,6 +82,7 @@ module AGHandler
 		@handlers||={}
 		callerName=e.getCaller.getName
 		evName=callerName+":"+e.getName
+		puts "#{callerName} #{evName}"
 		if @handlers.has_key?(evName) then
 			value=false
 			@handlers[evName].each{|handler|

@@ -36,10 +36,16 @@ class AntEditPropDialog<AntDialog
 		# init player-list
 		plist=getChild("Player")
 		players=getMap.players
-		playernames=["NONE"]+players.collect{|p|p.getName}
+		playernames=["NONE"]
+		playernames+=players.collect{|p|p.getName} if ent.is_a?(AntBoss)
 		playernames.each{|n|
 			plist.insertItem(n,n)
 		}
+		if ent.is_a?(AntBoss)
+			if ent.getPlayer
+				plist.setSelected(ent.getPlayer.getName)
+			end
+		end
 
 
 	end
@@ -51,6 +57,10 @@ class AntEditPropDialog<AntDialog
 		close
 		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
 		@ent.setupMesh
+		if @ent.is_a?(AntBoss)
+			name=getChild("Player").getSelected
+			@ent.setPlayer(getMap.players.find{|n|n.getName==name})
+		end
 		return true
 	end
 end

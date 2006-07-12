@@ -332,7 +332,9 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
 	  if(was)
 	    {
 	      e->setName("sigClick");
-
+	      if(!isParent(getApplication()->getOverlay()))
+		getApplication()->setOverlay(0);
+	      
 	      if(canFocus())
 		gainFocus();
 
@@ -954,4 +956,13 @@ void AGWidget::close()
 {
   if(mParent)
     mParent->removeChild(this);
+}
+
+bool AGWidget::isParent(AGWidget *pParent)
+{
+  if(mParent==pParent)
+    return true;
+  else if(mParent!=0)
+    return mParent->isParent(pParent);
+  return false;
 }

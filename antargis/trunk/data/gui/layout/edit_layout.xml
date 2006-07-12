@@ -25,13 +25,15 @@
 				<button theme="antButton" name="doGen" caption="generate Terrain"/>
 			</cell>
 			<cell col="0" row="2">
-				<table cols="5" rows="1">
-					<button col="0" row="0" name="rubber" caption-image="data/gui/editor/rubber.png"/>
-					<button col="1" row="0" name="pointer" caption-image="data/gui/pointer3.png"/>
-					<button col="2" row="0" name="new" caption-image="data/gui/new.png"/>
-					<button col="3" row="0" name="allGrass" caption-image="data/gui/editor/grass2.png"/>
-					<button col="4" row="0" name="allWater" caption-image="data/gui/editor/water2.png"/>
-				</table>
+				<radioGroup name="SpecialGroup">
+					<table cols="5" rows="1">
+						<radio col="0" row="0" name="rubber" caption-image="data/gui/editor/rubber.png"/>
+						<radio col="1" row="0" name="pointer" caption-image="data/gui/pointer3.png"/>
+						<button col="2" row="0" name="new" caption-image="data/gui/new.png"/>
+						<button col="3" row="0" name="allGrass" caption-image="data/gui/editor/grass2.png"/>
+						<button col="4" row="0" name="allWater" caption-image="data/gui/editor/water2.png"/>
+					</table>
+				</radioGroup>
 			</cell>
 			<cell col="0" row="3">
 				<radioGroup name="ChooserGroup">

@@ -263,11 +263,13 @@ class AntRubyEditView<GLApp
 	
 	def eventPointer
 		@modifier="edit"
+		#@layout.getChild("entitiesTab").deselect
 		return true
 	end
 	
 	def eventRubber
 		@modifier="doRubber"
+		#@layout.getChild("entitiesTab").deselect
 		return true
 	end
 

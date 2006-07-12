@@ -24,6 +24,7 @@
 #include <ag_widget.h>
 
 class AGEdit;
+class AGButton;
 class AGListBox;
 
 class AGComboBox:public AGWidget
@@ -31,7 +32,7 @@ class AGComboBox:public AGWidget
  public:
   AGComboBox(AGWidget *pParent,const AGRect2 &pRect);
 
-  void insert(const std::string &pID,const std::string &pContent);
+  void insertItem(const std::string &pID,const std::string &pContent);
 
   bool eventButtonClicked(AGEvent *pEvent);
   bool eventSelected(AGEvent *pEvent);

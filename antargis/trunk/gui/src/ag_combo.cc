@@ -45,7 +45,7 @@ AGComboBox::AGComboBox(AGWidget *pParent,const AGRect2 &pRect):
 }
 
 
-void AGComboBox::insert(const std::string &pID,const std::string &pContent)
+void AGComboBox::insertItem(const std::string &pID,const std::string &pContent)
 {
   ops.push_back(std::make_pair(pID,pContent));
   if(ops.size()==1)
@@ -80,7 +80,7 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
   cdebug(sr.x());
   cdebug(sr.y());
   cdebug(width());
-  cdebug(getTheme()->getInt("listbox.item.height")*8);
+  cdebug(getTheme()->getInt("listbox.item.height")*std::min(8,(int)ops.size()));
 
   float mItemHeight=getTheme()->getInt("listbox.item.height");
   if(mItemHeight<5)
@@ -102,10 +102,12 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
 
 bool AGComboBox::eventSelected(AGEvent *pEvent)
 {
+  CTRACE;
   mID=mListBox->getSelectedID();
   update();
   getApplication()->setOverlay(0);
-  sigSelect(pEvent);
+
+  sigSelect(new AGEvent(this,"sigSelect"));
   return true;
 }
 

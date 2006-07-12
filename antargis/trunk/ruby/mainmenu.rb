@@ -295,6 +295,30 @@ class AntMenuApp <AGApplication
 		addHandler(@optionsMenu.getChild("optionIntro"),:sigClick,:eventOptionsChanged)
 
 		@optionsMenu.getChild("optionIntro").setChecked(getConfig.get("intro")!="false")
+
+		# texture quality
+		texQ=@optionsMenu.getChild("textureQuality")
+		texQ.setSelected({"1"=>"high","2"=>"medium","3"=>"low",nil=>"high"}[getConfig.get("terrainDownScaleExp")])
+		addHandler(texQ,:sigSelect,:eventTextureQuality)
+
+		# FBO
+		@optionsMenu.getChild("UseFBO").setChecked(getConfig.get("useFBO")=="true")
+		addHandler(@optionsMenu.getChild("UseFBO"),:sigClick,:eventOptionsChanged)
+		
+		# Anim
+		@optionsMenu.getChild("UseAnim").setChecked(getConfig.get("animationType")=="true")
+		addHandler(@optionsMenu.getChild("UseAnim"),:sigClick,:eventOptionsChanged)
+
+		# particle
+		@optionsMenu.getChild("UseParticle").setChecked(getConfig.get("particleEffects")=="true")
+		addHandler(@optionsMenu.getChild("UseParticle"),:sigClick,:eventOptionsChanged)
+	end
+	
+	def eventTextureQuality(e)
+		scale={"low"=>3,"medium"=>2,"high"=>1}[@optionsMenu.getChild("textureQuality").getSelected]
+		getConfig.set("terrainDownScaleExp",scale.to_s)
+		getConfig.set("meshDownScaleExp",scale.to_s)
+		return true
 	end
 
 	def eventOptionsChanged(e)
@@ -302,6 +326,12 @@ class AntMenuApp <AGApplication
 			when "optionIntro"
 				getConfig.set("intro",@optionsMenu.getChild("optionIntro").isChecked.to_s)
 				#getScreen.screenshot.save("muh76.png")
+			when "UseFBO"
+				getConfig.set("useFBO",@optionsMenu.getChild("UseFBO").isChecked.to_s)
+			when "UseAnim"
+				getConfig.set("animationType",@optionsMenu.getChild("UseAnim").isChecked.to_s)
+			when "UseParticle"
+				getConfig.set("particleEffects",@optionsMenu.getChild("UseParticle").isChecked.to_s)
 		end
 	end
 

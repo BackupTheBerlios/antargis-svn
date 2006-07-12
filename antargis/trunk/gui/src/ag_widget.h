@@ -54,6 +54,7 @@ class AGWidget:public AGMessageObject
   
   void setParent(AGWidget *pParent);
   AGWidget *getParent();
+  bool isParent(AGWidget *pParent);
 
   virtual bool eventShow();
   virtual bool eventHide();

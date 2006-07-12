@@ -23,6 +23,7 @@
 #include "ag_tools.h"
 #include "ag_theme.h"
 #include "ag_listbox.h"
+#include "ag_combo.h"
 #include "ag_image.h"
 #include "ag_frame.h"
 
@@ -475,6 +476,33 @@ public:
   }
 };
 IMPLEMENT_COMPONENT_FACTORY(ListBox);
+
+
+// AGComboBox creator
+class AGComboBoxLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(ComboBox,"comboBox")
+
+  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+  {
+    CTRACE;
+    AGComboBox *l=new AGComboBox(pParent,pRect);
+
+    Node::const_iterator i=pNode.begin();
+    for(;i!=pNode.end();i++)
+      {
+	if((*i)->getName()=="item")
+	  l->insertItem((*i)->get("id"),(*i)->get("text"));
+      }
+
+
+    return l;
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(ComboBox);
+
+
 
 // AGLayout creator
 class AGLayoutLayoutCreator:public AGLayoutCreator

@@ -73,6 +73,7 @@ class AGApplication:public AGMessageObject
   void resetTooltip(AGTooltip *pTooltip); // try to reset this one
 
   void setOverlay(AGWidget *pOverlay);
+  AGWidget *getOverlay();
 
   void setCursor(const AGTexture &pTexture);
   void setNormalCursor();

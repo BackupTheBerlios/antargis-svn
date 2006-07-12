@@ -2,7 +2,7 @@
 <layout name="OptionsMenu">
 	<table cols="3" rows="3"><!-- center window -->
 		<colsize col="1" fixed="400"/>
-		<rowsize row="1" fixed="260"/>
+		<rowsize row="1" fixed="220"/>
 		<window col="1" row="1" name="window" title="Edit Properties">
 			<table cols="1" rows="5">
 				<colsize col="0" relative="1"/>
@@ -33,7 +33,7 @@
 				<cell col="0" row="3">
 					<table cols="2" rows="1">
 						<text col="0" row="0" caption="Player:"/>
-						<listBox col="1" row="0" name="Player"/>
+						<comboBox col="1" row="0" name="Player"/>
 					</table>
 				</cell>
 				<table col="0" row="4" cols="2" rows="1">

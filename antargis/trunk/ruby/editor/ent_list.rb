@@ -78,20 +78,18 @@ class AntEntListWidget<AGWidget
 		puts c
 		c
 		@entType=c
+		@selWidget=e.getCaller
 		sigSelected(e)
 		return true
 	end
 	def entType=(c)
 		@wptrs[c].setChecked(true)
-# 		@wptrs.each{|k,v|
-# 			puts "#{k} #{c} #{v}"
-# 			if k==c
-# 				v.setChecked(false)
-# 			else
-# 				v.setChecked(true)
-# 			end
-# 		}
 		@entType=c
+	end
+	def deselect
+		if @selWidget
+			@selWidget.deselect
+		end
 	end
 end
 
