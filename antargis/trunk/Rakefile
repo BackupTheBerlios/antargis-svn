@@ -57,13 +57,9 @@ interfaceHeadersGUI=[
  "ag_widget.h","ag_colorbutton.h","ag_glwidget.h","ag_xml.h","ag_layout.h","ag_dialog.h","ag_mutex.h",
  "ag_application.h","ag_background.h","ag_border.h","ag_button.h","ag_text.h","ag_caption.h","ag_checkbox.h","ag_combo.h","ag_edit.h","ag_fontengine.h","ag_fs.h","ag_painttarget.h","ag_surface.h","ag_texture.h","ag_surfacemanager.h","ag_image.h","ag_layoutfactory.h","ag_listbox.h","ag_list.h","ag_main.h","ag_menu.h","ag_menuitem.h","ag_mixer.h","ag_mutex.h","ag_painter.h","ag_png.h","ag_radio.h","ag_screen.h","ag_table.h","ag_texturecache.h","ag_theme.h","ag_tools.h","ag_window.h","ag_xml.h","ag_screenwidget.h","ag_scroller.h"]
 
-# interfaceHeadersGUI=[
-# "ag_rubyobj.h",
-# "ag_messageobject.h",
-#  "ag_geometry.h","ag_font.h","ag_color.h","ag_local.h","ag_config.h",
-#  "ag_widget.h","ag_colorbutton.h","ag_glwidget.h","ag_xml.h","ag_layout.h","ag_dialog.h","ag_mutex.h",
-#  "ag_application.h","ag_background.h","ag_border.h","ag_button.h","ag_text.h","ag_caption.h","ag_checkbox.h","ag_combo.h","ag_edit.h","ag_fontengine.h","ag_fs.h","ag_painttarget.h","ag_surface.h","ag_texture.h","ag_surfacemanager.h","ag_image.h","ag_layoutfactory.h","ag_listbox.h","ag_list.h","ag_main.h","ag_mixer.h","ag_mutex.h","ag_painter.h","ag_radio.h","ag_screen.h","ag_table.h","ag_texturecache.h","ag_theme.h","ag_tools.h","ag_window.h","ag_xml.h","ag_menuitem.h","ag_menu.h"]
- 
+interfaceHeadersSRC.collect!{|s|"src/"+s}
+interfaceHeadersGUI.collect!{|s|"gui/src/"+s}
+
 
 PWD=Dir.pwd
 
@@ -91,9 +87,6 @@ if $xcompile
 	$CFLAGS+=`./contrib/usr/bin/sdl-config --cflags`.chomp
 	$INCLUDEDIRS+=`./contrib/usr/bin/sdl-config --cflags`.chomp
 	$LDFLAGS+=`./contrib/usr/bin/sdl-config --libs`.chomp+" "+$libs
-	#$CFLAGS+=" -fPIC"
-
-
 elsif not windows
 	$CFLAGS+=`sdl-config --cflags`.chomp
 	$INCLUDEDIRS+=`sdl-config --cflags`.chomp
@@ -135,9 +128,9 @@ $LDSHARED="#{$CXX} -shared"
 $INSTALL_PROG=$INSTALL+" -m 755 -D "
 $INSTALL_DATA=$INSTALL+" -m 644 -D "
 
-interfaceHeaders = interfaceHeadersGUI.collect{|x|"../"+$GUISRC+"/"+x} + interfaceHeadersSRC
+interfaceHeaders = interfaceHeadersGUI + interfaceHeadersSRC
 
-SRCS=(Dir[$GUISRC+"/*.cc"]+Dir[$GUISRC+"/*.c"]+(Dir["src/*.cc"]-["src/swig.cc"])+["src/swig.cc"]).uniq-[$GUISRC+"/swig.cc"]
+SRCS=(Dir[$GUISRC+"/*.cc"]+Dir[$GUISRC+"/*.c"]+Dir["src/*.cc"]+["src/swig.cc","gui/src/guiswig.cc"]).uniq
 OBJS=[]
 O2S={}
 SRCS.each{|s|
@@ -146,21 +139,39 @@ SRCS.each{|s|
 	O2S[o]=s
 }
 
-file "libantargis.so" => OBJS do |t|
-	msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{OBJS.join(" ")} "+$libs
+ANT_OBJS=OBJS-["gui/src/guiswig.o"]
+
+GUI_OBJS=OBJS.select{|o|o=~/gui/}
+
+file "libantargis.so" => ANT_OBJS do |t|
+	msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{ANT_OBJS.join(" ")} "+$libs
+end
+
+file "libantargisgui.so" => GUI_OBJS do |t|
+	msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{GUI_OBJS.join(" ")} "+$libs
 end
 
 # manage dependencies
 
-myInterfaces=interfaceHeaders.collect{|x|"src/"+x}+["src/interface.i"]
 
 if $swig!=""
-	file [PWD+"/src/swig.cc"] => [PWD+"/src/nantmarker.hh"]+myInterfaces do |t|
+	myInterfaces=interfaceHeaders+["src/interface.i"]
+	file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
 		msh "cd src; swig -v -Wall -ruby -c++ #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
 	end
 	
-	file [PWD+"/src/nantmarker.hh"] => myInterfaces do |t|
-		msh "cd src; ../#{$GUISRC}/createmarker.rb "+interfaceHeaders.join(" ")
+	file ["src/nantmarker.hh"] => myInterfaces do |t|
+		msh "cd src; ../#{$GUISRC}/createmarker.rb "+interfaceHeaders.collect{|h|"../"+h}.join(" ")
+	end
+
+	# libantargisgui
+	myInterfaces=interfaceHeadersGUI+["gui/src/interface.i"]
+	file ["gui/src/guiswig.cc"] => ["gui/src/nantmarker.hh"]+myInterfaces do |t|
+		msh "cd gui/src; swig -v -Wall -ruby -c++ #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o guiswig.cc interface.i 2>&1"
+	end
+	
+	file ["gui/src/nantmarker.hh"] => myInterfaces do |t|
+		msh "cd gui/src; ./createmarker.rb "+interfaceHeaders.collect{|h|"../../"+h}.join(" ")
 	end
 end
 
@@ -168,7 +179,7 @@ end
 SRCS.each{|s|
 	dep=".deps/"+s.gsub(/.*\//,"")
 	if File.exists?(dep)
-		deps=File.open(dep).read.gsub('\\','').gsub(/.*:/,"").split(" ")
+		deps=File.open(dep).read.gsub('\\','').gsub(/.*:/,"").split(" ").collect{|d|d.gsub(PWD+"/","")}
 	else
 		deps=[s]
 	end
@@ -179,7 +190,6 @@ SRCS.each{|s|
 		o=s.gsub(".cc",".o")
 		file [o] => deps do |f|
 			msh "#{$CXX} #{$CFLAGS} -Wp,-MD,#{dep} -c #{PWD}/#{s} -o #{o} "
-# do |x,y| puts "hu" end
 		end
 	else
 		o=s.gsub(".c",".o")
@@ -204,13 +214,14 @@ task :clean do
 		}
 	}
 	if $swig!=""
-		msh "rm -rf src/swig.*"
+		msh "rm -rf src/swig.* gui/src/guiswig.*"
 		msh "rm -rf src/nantmarker.hh"
 	end
 	msh "rm -rf .deps"
 	msh "rm -rf docs/api"
 	msh "rm -rf docs/ruby"
 	msh "rm -rf libantargis.so"
+	msh "rm -rf libantargisgui.so"
 end
 
 task :smallclean do

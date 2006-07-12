@@ -49,7 +49,7 @@ class IntroApp<AGApplication
 		@hide=0.3
 		@phase=0
 		@phases=[2,2,2,1]
-		getSoundManager.playMp3("data/music/ant2.ogg")
+		getSoundManager.playMp3("data/music/battle1.ogg")
 		
 		addHandler(getSoundManager,:sigMp3Finished,:musicEnd)
 	end

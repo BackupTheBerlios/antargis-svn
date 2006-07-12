@@ -98,6 +98,10 @@ def ambientSound(time)
 		#getSoundManager.playMp3(
 		#getSoundManager.playMp3("data/music/ant2.ogg")
 	end
+	if (not getSoundManager.isMusicPlaying)
+		$ambientMusic=getSoundManager.playMp3("data/music/in-game1.ogg")
+	end
+
 end
 
 def setNormalVolumeWave

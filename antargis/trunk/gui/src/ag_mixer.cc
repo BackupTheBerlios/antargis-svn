@@ -157,6 +157,12 @@ bool AGSound::playMp3(const std::string &pFilename)
   return true;
 }
 
+bool AGSound::isMusicPlaying() const
+{
+  return mMusicFinished;
+}
+
+
 bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
 {
   if(mNoSound)

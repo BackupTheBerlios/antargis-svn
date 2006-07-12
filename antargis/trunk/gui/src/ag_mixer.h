@@ -34,6 +34,8 @@ class AGSound:public AGWidget
   bool playMp3(const std::string &pFilename);
   bool playMp3DRM(const std::string &pFilename,AGDecryptor &pDec);
 
+  bool isMusicPlaying() const;
+
   void stopMp3();
   void checkFinished();
   void fadeOutMusic(int ms);
@@ -55,6 +57,7 @@ class AGSound:public AGWidget
 
   friend AGSound *getSoundManager();
   float soundVol;
+
 };
 
 AGSound *getSoundManager();

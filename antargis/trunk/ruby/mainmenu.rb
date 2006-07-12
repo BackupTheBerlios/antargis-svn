@@ -61,7 +61,7 @@ class AntMenuApp <AGApplication
 	
 	def eventMusicEnd
 		if @sound
-			getSoundManager.playMp3("data/music/ant2.ogg")
+			getSoundManager.playMp3("data/music/calm1.ogg")
 		end
 		return true
 	end
