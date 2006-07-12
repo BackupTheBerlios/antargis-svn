@@ -63,6 +63,7 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
+[H] segfault on windows when changing to fullscreen
 [M] a segfault appears when profiling with ruby (./run --profile)
 		couldn't find the problem yet. it's probably one of these problems:
 		1) some GC-problem
@@ -107,6 +108,8 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] buidling site disappear to soon
+
 [H] single games - add village generator to map generator
 [H] single games - add some menu for options
 
@@ -114,6 +117,7 @@ ARTS
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 
+[M] do building continuesly and not in steps (fetching, flattening and building)
 [M] continue building site (enemies too)
 [M] choosing/making player for multiplayer
 [M] add info-bar about troops to inventory or main-view, while fighting (?)
