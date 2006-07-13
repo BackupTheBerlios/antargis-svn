@@ -64,5 +64,7 @@ class AGMain:public AGRubyObject
 AGMain *getMain();
 
 bool hasQuit();
+bool glMode();
+
 
 #endif

@@ -19,6 +19,7 @@
  */
 
 #include "ag_debug.h"
+#include "ag_main.h"
 
 #include <fstream>
 #include <iostream>
@@ -89,15 +90,18 @@ void D::indent()
 #endif
 void agAssertGL(std::string s)
 {
-  GLenum error = glGetError();
-  if(error != GL_NO_ERROR) {
-    std::ostringstream msg;
-    msg <<s<< ": OpenGLError "
-        << gluErrorString(error);
-    
-    std::cerr<<msg.str()<<std::endl;
-    throw std::runtime_error(msg.str());
-  }
+  if(glMode())
+    {
+      GLenum error = glGetError();
+      if(error != GL_NO_ERROR) {
+	std::ostringstream msg;
+	msg <<s<< ": OpenGLError "
+	    << gluErrorString(error);
+	
+	std::cerr<<msg.str()<<std::endl;
+	throw std::runtime_error(msg.str());
+      }
+    }
 
   // asserting SDL_errors
   char *se=SDL_GetError();

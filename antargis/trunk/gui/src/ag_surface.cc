@@ -337,6 +337,11 @@ AGSurface AGSurface::load(const std::string &pFilename)
   assertGL;
   
   SDL_Surface *s=IMG_Load_RW(rw,0);
+  if(!s)
+    {
+      std::cerr<<"error reading file:"<<pFilename<<std::endl;
+    }
+
   assertGL;
   
   SDL_FreeRW(rw);;

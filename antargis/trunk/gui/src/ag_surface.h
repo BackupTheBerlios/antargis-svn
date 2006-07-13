@@ -124,6 +124,7 @@ class AGSurface:public AGPaintTarget
   AGInternalSurface *s;
 
   friend class AGFontEngine;
+  friend class AGSDLScreen;
   size_t mVersion;
 };
 

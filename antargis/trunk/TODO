@@ -117,6 +117,8 @@ ARTS
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 
+[M] solve translation problem with descriptions
+[M] troops can't cross to steep terrain
 [M] do building continuesly and not in steps (fetching, flattening and building)
 [M] continue building site (enemies too)
 [M] choosing/making player for multiplayer
@@ -164,6 +166,8 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
+[H] add painting by dragging
+[H] plain other terrain type
 [M] add directory-selector to load- and save-dialog (only in editor)
 [M] add erosion to map-generator
 [L] Trigger definition

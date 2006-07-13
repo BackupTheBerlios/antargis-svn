@@ -67,9 +67,6 @@ if $xcompile
 	$CC="i586-mingw32msvc-gcc"
 	CC=$CC
 	CONFIG['CC']=$CC
-	#system("echo $(CC)")
-	#exit
-	#def test_library(x)
-	#	return true
-	#end
 end
+
+

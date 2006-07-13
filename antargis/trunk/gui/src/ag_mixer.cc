@@ -71,6 +71,7 @@ void initSoundEngine()
 {
   if(!mMusicInited)
     {
+      TRACE;
       mSoundMutex=new AGMutex;
       if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
 	printf("Mix_OpenAudio: %s\n", Mix_GetError());
@@ -235,6 +236,8 @@ void AGSound::volumeSound(float v)
   if(mNoSound)
     return;
   initSoundEngine();
+  if(mNoSound)
+    return;
   int mv=((int)(v*MIX_MAX_VOLUME));
   mv=std::min(std::max(0,mv),MIX_MAX_VOLUME);
   for(int i=0;i<cSoundChannels;++i)

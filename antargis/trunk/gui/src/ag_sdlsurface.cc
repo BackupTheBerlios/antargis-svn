@@ -203,3 +203,10 @@ void AGSDLScreen::unclip()
   SDL_Rect sr=getRect().sdl();
   SDL_SetClipRect(s,&sr);
 }
+
+AGSurface AGSDLScreen::screenshot()
+{
+  AGInternalSurface *surface=new AGInternalSurface;
+  surface->surface=s;
+  return AGSurface(surface).copy();
+}
