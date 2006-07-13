@@ -52,6 +52,8 @@ private
 	def meshData
 		data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
 		data.setTransparent(true)
+		data.setCulling(false) # patch for old trees
+
 		return data
 	end
 end

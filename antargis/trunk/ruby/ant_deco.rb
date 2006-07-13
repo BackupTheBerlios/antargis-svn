@@ -46,7 +46,7 @@ class AntDeco<AntRubyEntity
 			@decoType=a[r]
 		end
 		setProvide("deco",true)
-		setMesh(Mesh.new(getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setDecoType(t)
 		@typeID=t
@@ -66,8 +66,8 @@ class AntTwig<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		@typeID=(rand()*2).to_i
-		setType("twig")
-		setMesh(Mesh.new(getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),rand*360))
+		#setType("twig")
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),rand*360))
 	end
 end
 
@@ -77,7 +77,7 @@ class AntDecoMesh<AntRubyEntity
 		@name=name
 # 		case name
 # 			else
-				setMesh(Mesh.new(getMeshData("data/models/ant_coach.ant2",0.08,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
+				setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/ant_coach.ant2",0.08,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
 # 		end
 	end
 	def saveXML(node)
