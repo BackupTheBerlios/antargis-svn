@@ -9,6 +9,7 @@ SDLIMAGE="SDL_image-1.2.5.tar.gz"
 SDLMIXER="SDL_mixer-1.2.7.tar.gz"
 SDLTTF="SDL_ttf-2.0.8.tar.gz"
 RUBY="ruby-1.8.4.tar.gz"
+SMPEG="smpeg-0.4.4.tar.gz"
 
 OGG="libogg-1.1.3.tar.gz"
 VORBIS="libvorbis-1.1.2.tar.gz"
@@ -26,6 +27,8 @@ download_file()
 
 download_files()
 {
+	download_file "${SMPEG}" "ftp://sunsite.dk/pub/os/linux/loki/open-source/smpeg/${SMPEG}"
+
 	download_file "${OGG}" "http://downloads.xiph.org/releases/ogg/${OGG}"
 	download_file "${VORBIS}" "http://downloads.xiph.org/releases/vorbis/${VORBIS}"
 
@@ -108,6 +111,36 @@ build_libsdl_mixer()
 	fi
 }
 
+build_smpeg()
+{
+  if test ! -f ${TOPDIR}/usr/lib/libsmpeg.a ; then
+	
+		echo "=========================="
+		echo "SMPEG"
+		echo "=========================="
+	
+		tar xfz ${SMPEG}
+		cd `echo "${SMPEG}"|sed -e "s/\.tar\.gz//"`
+		export CFLAGS="-I${TOPDIR}/usr/include"
+		export LDFLAGS="-L${TOPDIR}/usr/lib -L${TOPDIR}/usr/bin"
+		export CXX="i586-mingw32msvc-g++"
+		export CC="i586-mingw32msvc-g++"
+		export RANLIB="i586-mingw32msvc-ranlib"
+		echo ${CFLAGS}
+		echo ${CXX}
+		rm config.cache
+		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --with-sdl-prefix=${TOPDIR}/usr --disable-shared --enable-static
+		make
+		make install
+		cd ..
+		export CFLAGS=""
+		export LDFLAGS=""
+		export CXX=""
+		export CC=""
+		export RANLIB=""
+	fi
+}
+
 build_ruby()
 {
   if test ! -f ${TOPDIR}/usr/bin/ruby.exe ; then
@@ -182,6 +215,8 @@ install_baselibs
 build_ogg
 build_libsdl
 build_libsdl_image
+
+build_smpeg
 
 build_libsdl_ttf
 build_libsdl_mixer
