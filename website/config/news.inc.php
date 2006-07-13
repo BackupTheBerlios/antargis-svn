@@ -11,6 +11,8 @@ function getNews($toponly=false)
 {
 	$b="";
 
+	$b.=news("2006-07-13","0.1.3 about to be released","We're currently finishing the last things on 0.1.3. This time the <a href='http://antargis.berlios.de/wiki/index.php/Release_Plan'>Changelog</a> is really big . After this polishing we'll do a short alpha-testing period. Hopefully in one or two weeks 0.1.3 will be released. For the mean time your welcome to test <a href='http://antargis.berlios.de/index.php?page=download'>current SVN</a>.");
+
 	$b.=news("2006-05-22","IRC Meeting on 06-05-28","For further information go here: <a href='http://antargis.berlios.de/phpBB2/viewtopic.php?p=233#233'>News-Forum</a>");
 
 	$b.=news("2006-05-19","Release of 0.1.2","This is a major speed improvement release. The game made a big jump and is sometimes doubling its performance. The second improvement is that the first level of our campaign is finished. For a complete changelog go to our wiki: <a href='http://antargis.berlios.de/wiki/index.php/Release_Plan#Version_0.1.2'>Release Plan in wiki</a>.");
