@@ -143,6 +143,7 @@ class AntRubyView <GLApp
 			}
 		}
 		h/=9
+		h=[0,h].max
 		puts h
 		return h
 	end
@@ -268,6 +269,7 @@ class AntButtonPanel<AGWidget
 	end
 private
 	def updateJobView
+		return if @hero.nil?
 		if @hero.getJob
 			i=@hero.getJob.image
 		else

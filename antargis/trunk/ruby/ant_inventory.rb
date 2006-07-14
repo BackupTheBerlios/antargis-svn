@@ -56,6 +56,9 @@ class AntInventory<AGWidget
 	end
 private
 	def checkFriend
+		if @inspect.nil?
+			return
+		end
 		friend=(@inspect.getPlayer==getMap.getPlayer)
 		enemy=(not friend)
 		getChild("friend_true").setVisible(friend)
