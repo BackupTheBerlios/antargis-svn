@@ -14,25 +14,18 @@ class AntMill<AntHouse
 	
 	def setupMesh
 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_mill.ant2",3.2,"data/textures/models/ant_mill.png"),AGVector4.new(0,0,0),-30)
-		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
 	end
 
-	def needed
-		if resource.get("food")<30
-			return "food"
-		elsif resource.get("crop")<30
-			return "crop"
-		else
-			return nil
-		end
+	def neededStock
+		{"food"=>20,"crop"=>30}
 	end
 
 	def process
 		if resource.get("crop")>0
-			amount=[resource.get("crop"),3].min
-			resource.add("crop",amount)
-			resource.sub("flour",amount)
+			amount=[resource.get("crop"),1].min
+			resource.sub("crop",amount)
+			resource.add("flour",amount)
 		end
 	end
 	def houseType

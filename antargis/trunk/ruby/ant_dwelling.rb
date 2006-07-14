@@ -22,6 +22,10 @@ class AntDwelling<AntHouse
 	end
 
 protected
+	def neededStock
+		{"food"=>25}
+	end
+
 	# check if we need some resources - residents will gather this
 	def needed
 		if resource.get("food")<15

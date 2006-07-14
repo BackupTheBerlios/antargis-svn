@@ -48,7 +48,7 @@ class AntPlayer
 		if @heronames.length then
 			@heronames.each{|n|
 				ent=getMap.getByName(n)
-				if ent
+				if ent.is_a?(AntBoss)
 					ent.setPlayer(self)
 					@heroes.push(ent)
 				else

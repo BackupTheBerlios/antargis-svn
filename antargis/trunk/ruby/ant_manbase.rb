@@ -185,6 +185,7 @@ protected
 
 private
 	def sendAngel
+		return # do not send angels - they don't have meshes anyway
 		e=AntAngel.new
 		e.setPos(getPos2D)
 		getMap.insertEntity(e)

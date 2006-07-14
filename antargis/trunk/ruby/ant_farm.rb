@@ -28,6 +28,7 @@ class AntFarm<AntHouse
 		super
 		@type=3
 		setProvide("food",true)
+		setProvide("crop",true)
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
@@ -50,6 +51,10 @@ class AntFarm<AntHouse
 # 		end
 # 		return minarg
 # 	end
+
+	def neededStock
+		{"fruit"=>30,"crop"=>30}
+	end
 
 	def needed
 		if resource.get("food")<30

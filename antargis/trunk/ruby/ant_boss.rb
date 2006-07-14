@@ -129,7 +129,9 @@ class AntBoss<AntRubyEntity
 			@player.remove(self)
 		end
 		@player=player
-		@player.add(self)
+		if @player
+			@player.add(self)
+		end
 	end
 	def getPlayer
 		@player

@@ -40,6 +40,10 @@ class AntTownHall<AntHouse
 		setMesh(mesh)
 	end
 
+	def neededStock
+		{"food"=>30}
+	end
+
 	def needed
 		if resource.get("food")<10
 			return "fruit"

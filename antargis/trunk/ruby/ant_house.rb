@@ -144,8 +144,11 @@ class AntHouse<AntBoss
 	# e: an entity - should be a man of this house
 	def normalFetching(e)
 		if atHome(e) then
-			checkFood(e)
 			@atHome.push(e)
+			if checkFood(e)
+				e.newRestJob(3) # wait some time
+				return
+			end
 			if e.getMode=="resting"
 				e.setMode("")
 				e.setMeshState("stand")
@@ -153,15 +156,20 @@ class AntHouse<AntBoss
 				# 1) take everything from inventory
 				resource.takeAll(e.resource)
 				# 2) give job
-				need=needed()
-				puts "normalFetch:#{self}"
-				# keep at least a third of all men at home
-				if need != nil and @atHome.length>@men.length/3 then
-					fetch( need,e)
+				if false
+					need=needed()
+					puts "normalFetch:#{self}"
+					# keep at least a third of all men at home
+					if need != nil and @atHome.length>@men.length/3 then
+						fetch( need,e)
+					else
+						puts "nothin needed"
+						e.newRestJob(5+getRand)
+						e.setVisible(false)
+					end
 				else
-					puts "nothin needed"
-					e.newRestJob(5+getRand)
-					e.setVisible(false)
+					need=neededStock
+					fetchForStock(need,e)
 				end
 			else
 				e.setMode("resting")
@@ -210,6 +218,10 @@ class AntHouse<AntBoss
 		return minarg
 	end
 
+	def neededStock
+		{"wood"=>50,"stone"=>50,"food"=>50}
+	end
+
 
 	# assigns ent a job for fetching good from a enttype
 	def fetch(good,ent)
@@ -229,6 +241,34 @@ class AntHouse<AntBoss
 			end
 		end
 	end
+
+	# assigns ent a job for fetching good from a enttype
+	def fetchForStock(need,ent)
+		puts "fetchForStock"
+		need=need.to_a.sort!{|a,b|b[1]<=>a[1]} # sort descending in array
+		need.each{|goodArray|
+			good=goodArray[0]
+			tent=getMap.getNext(self,good,1)
+			#puts "GOOD #{good} #{tent}"
+			#raise 1 if good=="crop"
+		
+			if tent
+				puts "#{tent.getPlayer} #{getPlayer}"
+				if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
+				else
+					#puts "OK"
+					ent.newMoveJob(0,tent.getPos2D,0.5)
+					ent.setMode("fetching "+good)
+					@atHome.delete(ent)
+					ent.target=tent
+					ent.setVisible(true)
+					return
+				end
+			end
+			#raise 1 if good=="crop"
+		}
+	end
+
 	
 	########################################
 	# LOADING & SAVING
@@ -284,8 +324,10 @@ private
 			if resource.get("food")>1
 				man.incFood(1)
 				resource.sub("food",1)
+				return true
 			end
 		end
+		return false
 	end
 
 	# add a new flag when owner has changed - currently not implemented

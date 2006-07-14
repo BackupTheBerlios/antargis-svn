@@ -89,6 +89,9 @@ protected
 		"workshop"
 	end
 
+	def neededStock
+		{"wood"=>10,"stone"=>10,"food"=>10}
+	end
 	
 
 private

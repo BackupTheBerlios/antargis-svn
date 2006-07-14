@@ -10,7 +10,7 @@
 				<rowsize row="0" fixed="100"/>
 				<colsize col="0" fixed="432"/>
 				<cell col="0" row="0">
-					<radioGroup col="0" row="0" name="HeroGroup"  tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops\nWhite - Experience">
+					<radioGroup col="0" row="0" name="HeroGroup" tooltip="Energy-bars\nGreen - Life\nBlue - Morale\nBrown - Hunger\nRed - Troops\nWhite - Experience">
 						<table col="0" row="0" cols="6" rows="1">
 							<radio col="0" row="0" name="hero0">
 								<table cols="1" rows="3" name="Hero0">

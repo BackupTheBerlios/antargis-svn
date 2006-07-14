@@ -275,6 +275,9 @@ bool AGWidget::eventMouseLeave()
 
 bool AGWidget::eventMouseMotion(AGEvent *e)
 {
+  if(!visible())
+    return false;
+
   if(e->isSDLEvent())
     {
       if(getScreenRect().contains(e->getMousePosition()))
