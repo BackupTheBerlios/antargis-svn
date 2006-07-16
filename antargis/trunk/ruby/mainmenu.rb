@@ -298,7 +298,7 @@ class AntMenuApp <AGApplication
 
 		# texture quality
 		texQ=@optionsMenu.getChild("textureQuality")
-		texQ.setSelected({"1"=>"high","2"=>"medium","3"=>"low",nil=>"high"}[getConfig.get("terrainDownScaleExp")])
+		texQ.setSelected({"1"=>"high","2"=>"medium","3"=>"low",nil=>"high",""=>"high"}[getConfig.get("terrainDownScaleExp")])
 		addHandler(texQ,:sigSelect,:eventTextureQuality)
 
 		# FBO

@@ -83,7 +83,7 @@ class AntWolf<AntAnimal
 			wolf=AntWolf.new
 			wolf.setPos(getPos2D)
 			$map.insertEntity(wolf)
-			getMap.endChange
+			#getMap.endChange
 			newRestJob(2)
 			@lastBirth=-rand()*10
 		else

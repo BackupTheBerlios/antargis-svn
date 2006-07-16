@@ -26,9 +26,11 @@ require 'ant_appletree.rb'
 require 'ant_grass.rb'
 
 
+def getTreeStub
+	getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
+end
+
 def getTreeTypes
-
-
 	files=[
 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png"),
@@ -39,7 +41,6 @@ def getTreeTypes
 		getMeshData("data/models/tree6.ant2",0.45,"data/textures/models/tree5.png"),
 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png"),
 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
-		getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png"),
 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
 	]
 	files.each{|f|f.setCulling(false)} # patch for old trees
@@ -52,6 +53,9 @@ def getTreeTypes
 end
 
 def getTreeMeshByType(type)
+	if type<0
+		return getTreeStub
+	end
 	d=getTreeTypes[type]
 	d||=getTreeTypes[0]
 	
@@ -74,9 +78,14 @@ class AntTree<AntRubyEntity
 	
 		resource.set("fruit",5)
 		resource.set("wood",40)
-		setupMesh
+		resourceChanged
 	end
 	def resourceChanged
+		if resource.get("wood")<=0
+			@typeID=-1
+			setProvide("fruit",false)
+			setProvide("wood",false)
+		end
 		setupMesh
 	end
 	

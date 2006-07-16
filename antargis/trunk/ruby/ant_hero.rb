@@ -178,7 +178,7 @@ class AntHero<AntBoss
 		removeMan(man)
 		getMap.removeEntity(man)
 		getMap.insertEntity(nhero)
-		getMap.endChange # commit
+		#getMap.endChange # commit
 		nhero.newRestJob(0)
 		newHLRestJob(1)
 		#nhero.setName("Sir "+nhero.getName)

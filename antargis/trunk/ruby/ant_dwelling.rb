@@ -26,15 +26,6 @@ protected
 		{"food"=>25}
 	end
 
-	# check if we need some resources - residents will gather this
-	def needed
-		if resource.get("food")<15
-			return "food"
-		else
-			return nil
-		end
-	end
-
 	def houseType
 		"dwelling"
 	end
@@ -42,12 +33,12 @@ protected
 private
 	def checkBirth
 		# only men, which are at home can add to birth rate
-		@lastBirth+=[@atHome.length,30].min
+		@lastBirth+=[@atHome.length+resource.get("food")/3,30].min
 		if @lastBirth>50 then
 			man=AntMan.new
 			getMap.insertEntity(man)
 			man.setPos(getPos2D)
-			getMap.endChange
+			#getMap.endChange
 			@lastBirth=-10*rand
 		end
 	end

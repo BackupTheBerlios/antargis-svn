@@ -133,7 +133,24 @@ void AntMap::insertEntity(AntEntity *e)
 
 void AntMap::removeEntity(AntEntity *p)
 {
-  mToDel.push_back(p);
+  {
+    EntityList::iterator i=std::find(mToDel.begin(),mToDel.end(),p);
+    if(i!=mToDel.end())
+      {
+	cdebug("Entity already deleted:"<<p);
+	return;
+      }
+  }
+
+
+  EntityList::iterator i=std::find(mEntities.begin(),mEntities.end(),p);
+  if(i!=mEntities.end())
+    mToDel.push_back(p);
+  else
+    {
+      cdebug("ERROR: Entity not found while removing:"<<p);
+      //      throw std::runtime_error("ERROR: Entity not found while removing");
+    }
 }
 
 
@@ -147,8 +164,9 @@ void AntMap::move(float pTime)
     {
       EntityList::iterator i=std::find(mEntities.begin(),mEntities.end(),*d);
       if(i!=mEntities.end())
-	
 	mEntities.erase(i);
+      else
+	cdebug("ERROR: Entity not found while deleting:"<<*d);
       mEntityMap.erase((*d)->getID());
       mEntQuad->remove(*i);
       
@@ -345,11 +363,17 @@ AntEntity *AntMap::getEntity(const AnimMesh &pMesh)
 
 void AntMap::mark()
 {
+  CTRACE;
   HeightMap::mark();
   AntMap::EntityList::iterator i=mEntities.begin();
 
   for(;i!=mEntities.end();i++)
     markObject(*i);
+
+  // mark to del, too, otherwise it crashes when tidying before move() is called
+  for(i=mToDel.begin();i!=mToDel.end();i++)
+    markObject(*i);
+  
 }
 
 

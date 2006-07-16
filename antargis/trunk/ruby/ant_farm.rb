@@ -42,26 +42,8 @@ class AntFarm<AntHouse
 		setMesh(mesh)
 	end
 
-# 	def needed()
-# 		goods=["wood","stone","food"]
-# 		minarg=goods.min {|a,b|resource.get(a)<=>resource.get(b)}
-# 		minval=resource.get(minarg)
-# 		if minval>=50
-# 			return nil
-# 		end
-# 		return minarg
-# 	end
-
 	def neededStock
 		{"fruit"=>30,"crop"=>30}
-	end
-
-	def needed
-		if resource.get("food")<30
-			return ["fruit","crop"].shuffle[0]
-		else
-			return nil
-		end
 	end
 
 	def assignJob(e)
@@ -72,7 +54,7 @@ class AntFarm<AntHouse
 				f.setPos(pos)
 				getMap.insertEntity(f)
 				puts "INSERT ENT #{@fields.length}"
-				getMap.endChange
+				#getMap.endChange
 				@fields.push(f)
 				f.farm=self
 				e.setMode("")
@@ -92,7 +74,7 @@ class AntFarm<AntHouse
 	def removeField(f)
 		@fields.delete(f)
 		getMap.removeEntity(f)
-		getMap.endChange
+		#getMap.endChange
 	end
 
 	def process

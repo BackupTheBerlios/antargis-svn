@@ -58,6 +58,8 @@ class AntHouse<AntBoss
 		@atHome=Set.new
 		setMinimapColor(AGColor.new(0x55,0x55,0x55))
 		setMinimapSize(5)
+
+		@mode=""
 		
 	end
 	
@@ -156,21 +158,8 @@ class AntHouse<AntBoss
 				# 1) take everything from inventory
 				resource.takeAll(e.resource)
 				# 2) give job
-				if false
-					need=needed()
-					puts "normalFetch:#{self}"
-					# keep at least a third of all men at home
-					if need != nil and @atHome.length>@men.length/3 then
-						fetch( need,e)
-					else
-						puts "nothin needed"
-						e.newRestJob(5+getRand)
-						e.setVisible(false)
-					end
-				else
-					need=neededStock
-					fetchForStock(need,e)
-				end
+				need=neededStock
+				fetchForStock(need,e)
 			else
 				e.setMode("resting")
 				e.newRestJob(5+getRand)
@@ -206,18 +195,6 @@ class AntHouse<AntBoss
 		return n<1
 	end
 	
-	# what's needed most ATM?
-	# returns: [good,from] or nil
-	def needed()
-		goods=["wood","stone","food"]
-		minarg=goods.min {|a,b|resource.get(a)<=>resource.get(b)}
-		minval=resource.get(minarg)
-		if minval>=50
-			return nil
-		end
-		return minarg
-	end
-
 	def neededStock
 		{"wood"=>50,"stone"=>50,"food"=>50}
 	end
@@ -244,29 +221,44 @@ class AntHouse<AntBoss
 
 	# assigns ent a job for fetching good from a enttype
 	def fetchForStock(need,ent)
-		puts "fetchForStock"
-		need=need.to_a.sort!{|a,b|b[1]<=>a[1]} # sort descending in array
+		#puts "fetchForStock"
+		need=need.to_a
+		need=need.shuffle
+		need=need.sort!{|a,b|b[1]<=>a[1]} # sort descending in array
+
+		factor=2
+		if @mode=="rest"
+			factor=1
+		end
 		need.each{|goodArray|
 			good=goodArray[0]
-			tent=getMap.getNext(self,good,1)
-			#puts "GOOD #{good} #{tent}"
-			#raise 1 if good=="crop"
-		
-			if tent
-				puts "#{tent.getPlayer} #{getPlayer}"
-				if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
+			if resource.get(good)<factor*goodArray[1]  # we already have plenty of this
+				@mode="fetch"
+				tent=nil
+				if good=="food"
+					tent=getMap.getNext(self,good,11) # don't take away food
 				else
-					#puts "OK"
-					ent.newMoveJob(0,tent.getPos2D,0.5)
-					ent.setMode("fetching "+good)
-					@atHome.delete(ent)
-					ent.target=tent
-					ent.setVisible(true)
-					return
+					tent=getMap.getNext(self,good,1)
+				end
+			
+				if tent
+					#puts "#{tent.getPlayer} #{getPlayer}"
+					if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
+					else
+						#puts "OK"
+						ent.newMoveJob(0,tent.getPos2D,0.5)
+						ent.setMode("fetching "+good)
+						@atHome.delete(ent)
+						ent.target=tent
+						ent.setVisible(true)
+						return
+					end
 				end
 			end
 			#raise 1 if good=="crop"
 		}
+		@mode="rest"
+		ent.newRestJob(15) # do nothing for a longer time
 	end
 
 	

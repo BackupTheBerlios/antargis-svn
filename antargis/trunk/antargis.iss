@@ -5,28 +5,28 @@
 
 [Setup]
 AppName=Antargis
-AppVerName=Antargis 0.1.2
+AppVerName=Antargis 0.1.3
 DefaultDirName={pf}\Antargis
 DefaultGroupName=Antargis
 UninstallDisplayIcon={app}\Antargis.exe
 Compression=lzma/fast
 SolidCompression=yes
 ;InfoAfterFile=c:\Antargis\readme.txt
-OutputBaseFilename=Antargis-0.1.2-setup
+OutputBaseFilename=Antargis-0.1.3-setup
 AppPublisher=Antargis-Team
 AppPublisherURL=antargis.berlios.de
-AppVersion=0.1.2
+AppVersion=0.1.3
 
 
 [Files]
-Source: "c:\msys\home\root\ant\antargis-0.1.2\*"; DestDir: "{app}"; Flags:recursesubdirs
+Source: "z:\home\david\projects\antargis\ant\antargis-0.1.3\*"; DestDir: "{app}"; Flags:recursesubdirs
 
 [Icons]
 Name: "{group}\Antargis"; Filename: "{app}\Antargis.lnk" ; WorkingDir: "{app}"
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
-Name: nl; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: es; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: de; MessagesFile: "compiler:Languages\German.isl"
 
 [UninstallDelete]

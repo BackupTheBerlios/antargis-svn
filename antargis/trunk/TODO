@@ -166,6 +166,7 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
+[H] remove load script when in editor
 [H] add painting by dragging
 [H] plain other terrain type
 [M] add directory-selector to load- and save-dialog (only in editor)

@@ -43,7 +43,7 @@ class AntAngel<AntRubyEntity
 		if @age>10 then # 10 seconds old
 			# discard
 			getMap.removeEntity(self)
-			getMap.endChange
+			#getMap.endChange
 		end
 	end
 end
@@ -189,7 +189,7 @@ private
 		e=AntAngel.new
 		e.setPos(getPos2D)
 		getMap.insertEntity(e)
-		getMap.endChange
+		#getMap.endChange
 	end
 
 end

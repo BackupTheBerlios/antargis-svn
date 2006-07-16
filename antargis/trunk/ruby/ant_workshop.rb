@@ -71,18 +71,6 @@ protected
 	def notEnoughTools
 		resource.get("tool")<10
 	end
-	
-	# what's needed most ATM?
-	# returns: [good,from] or nil
-	def needed()
-		goods=["wood","stone","food"]
-		minarg=goods.min {|a,b|resource.get(a)<=>resource.get(b)}
-		minval=resource.get(minarg)
-		if minval>=10
-			return nil
-		end
-		return minarg
-	end
 
 	# returns my name "workshop"
 	def houseType

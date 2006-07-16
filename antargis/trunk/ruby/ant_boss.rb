@@ -83,7 +83,7 @@ class AntBoss<AntRubyEntity
 				man.setPos(getPos2D)
 				man.setBoss(self)
 			end
-			getMap.endChange
+			#getMap.endChange
 			@createMen=0
 		end
 	end

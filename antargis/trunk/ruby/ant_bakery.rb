@@ -26,21 +26,12 @@ class AntBakery<AntHouse
 	def neededStock
 		{"food"=>30,"flour"=>30}
 	end
-	def needed
-		if resource.get("food")<30
-			return "food"
-		elsif resource.get("crop")<30
-			return "crop"
-		else
-			return nil
-		end
-	end
 
 	def process
-		if resource.get("flour")>0
+		if resource.get("flour")>0 and resource.get("food")<60
 			amount=[resource.get("flour"),1].min
 			resource.sub("flour",amount)
-			resource.add("food",amount)
+			resource.add("food",amount*2)
 			@smoke=1
 			checkSmoke
 		else

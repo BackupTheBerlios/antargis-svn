@@ -64,7 +64,7 @@ class AntSheep<AntAnimal
 			sheep=AntSheep.new
 			sheep.setPos(getPos2D)
 			$map.insertEntity(sheep)
-			getMap.endChange
+			#getMap.endChange
 			newRestJob(2)
 			@lastBirth=-rand()*10
 		elsif rand<0.5 then
