@@ -177,6 +177,8 @@ class AntGameApp <AntRubyView
 					@hero.newHLConstructJob(@target)
 				when "doUpgrade"
 					@hero.upgradeMan(@target)
+				when "doContinue"
+					@hero.newHLBuildJob(@target,nil)
 			end
 		end
 		return true

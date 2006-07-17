@@ -108,6 +108,8 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] continue buildingsite function => check if already claimed
+[H] fetching in house (testai) - tries to go through water - maybe move fetching code to some common module
 [H] buidling site disappear to soon
 
 [H] single games - add village generator to map generator

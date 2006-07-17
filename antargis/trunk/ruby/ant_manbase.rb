@@ -158,6 +158,7 @@ module AntManBase
 				delJob
 				p=getMap.getNextPlaceAbove(getPos2D,-0.2)
 				newMoveJob(0,p,0)
+				delJob
 				return false
 			end
 		else

@@ -13,6 +13,11 @@ class AntTower<AntHouse
 		setMesh(mesh)
 	end	
 	
+
+	def neededStock
+		{"fruit"=>15,"stone"=>15,"wood"=>15}
+	end
+
 	
 	###############################
 	# FLAG support
@@ -39,4 +44,11 @@ class AntTower<AntHouse
 		"keep"
 	end
 
+	def process
+		if resource.get("fruit")>0 and resource.get("food")<15
+			amount=[resource.get("fruit"),3].min
+			resource.add("food",amount)
+			resource.sub("fruit",amount)
+		end
+	end
 end

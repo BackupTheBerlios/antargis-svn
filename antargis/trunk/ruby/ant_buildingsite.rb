@@ -22,7 +22,7 @@ class AntBuildingSite<AntRubyEntity
 		@progress=0
 		#init fieldMeshes-var
 		setupMesh
-		newRestJob(60) # wait at least 1:30
+		newRestJob(300) # wait at least 5:00 minutes
 		@doneSth=true
 	end
 

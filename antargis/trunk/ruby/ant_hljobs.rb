@@ -615,13 +615,24 @@ class AntHeroConstructJob<AntHeroMoveJob
 						puts "resource not found! #{res}"
 						man.newRestJob(5)
 					else
-						man.newMoveJob(0,nearest.getPos2D,0.5) # near but not actually there
-						man.setMode("harvest")
+						if (nearest.getPos2D-@target.getPos2D).length<20
+							man.newMoveJob(0,nearest.getPos2D,0.5) # near but not actually there
+							man.setMode("harvest")
+						else
+							man.newRestJob(1)
+							puts "TOO FAR"
+						end
 					end
 				when "harvest" # harvest resource
-					man.newRestJob(2)
-					man.digResource(@restype[man][0])
-					man.setMode("collect")
+					if (@restype[man][1].getPos2D-man.getPos2D).length<3
+						man.newRestJob(2)
+						man.digResource(@restype[man][0])
+						man.setMode("collect")
+					else
+						puts "WAS TOO FAR AWAY - Probably job discarded"
+						man.newMoveJob(0,@target.getPos2D,0)
+						man.setMode("")
+					end
 				when "collect" # bring back
 					# FIXME: add sub resource from nearest
 					p=@restype[man]
