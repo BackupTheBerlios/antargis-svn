@@ -137,6 +137,11 @@ class AntMan<AntRubyEntity
 	def setBoss(hero)
 		if @boss
 			@boss.removeMan(self)
+			@boss=nil
+		end
+		if hero.nil?
+			setNoBoss
+			return	
 		end
 		@bossName=hero.getName
 		@boss=hero
@@ -221,7 +226,7 @@ class AntMan<AntRubyEntity
 			when "wood"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_wood.anim")))
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_wood.anim")))
-			when "stone"
+			when "stone","flour","corn"
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_stones.anim")))
 				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_stones.anim")))
 			when "walk","sitdown","sit"
@@ -283,7 +288,7 @@ class AntMan<AntRubyEntity
 		case res	
 			when "wood"
 				setMeshState("wood")
-			when "stone","ore","coal" # FIXME new animation for other resources
+			when "stone","ore","coal","food","corn","crop","flour" # FIXME new animation for other resources
 				setMeshState("stone")
 		end
 	end

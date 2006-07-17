@@ -19015,43 +19015,43 @@ F5493ECD CC4C3EE2 F5493E0A 80413E85 96333EC5 7C203E89 88083E8F 36D83DE3
 00000000 00000000 00000000 00000000 00000000 000000  </data>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
     <position x="69.843" y="53.2743" z="1.94348"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
     <position x="69.1126" y="59.3443" z="2.30407"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
     <position x="72.8411" y="63.0995" z="2.38346"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
     <position x="75.6685" y="63.9318" z="2.34331"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
     <position x="73.3265" y="58.1464" z="2.37719"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
     <position x="69.8329" y="49.9178" z="1.57817"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
     <position x="73.4479" y="54.2375" z="2.12881"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
     <position x="79.6859" y="44.1373" z="1.45883"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
     <position x="82.9725" y="46.5084" z="1.69256"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
     <position x="86.3432" y="47.4121" z="1.71256"/>
-    <resource fruit="5" wood="40"/>
+    <resource fruit="5" wood="20"/>
   </antTree>
   <antMine aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="77.8132" y="63.6721" z="2.25477"/>
@@ -19066,10 +19066,6 @@ F5493ECD CC4C3EE2 F5493E0A 80413E85 96333EC5 7C203E89 88083E8F 36D83DE3
     <resource crop="10"/>
   </antFarm>
   <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="5" mode="" morale="1" name="0.145484345279232" onGround="true" onWater="false">
-    <position x="83.9325" y="55.2227" z="1.96786"/>
-    <resource/>
-  </antDwelling>
-  <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" men="5" morale="1" name="0.917323864402035" onGround="true" onWater="false">
     <position x="83.9325" y="55.2227" z="1.96786"/>
     <resource/>
   </antDwelling>
@@ -19121,5 +19117,6 @@ F5493ECD CC4C3EE2 F5493E0A 80413E85 96333EC5 7C203E89 88083E8F 36D83DE3
     <hero name="0.169908379852129"/>
     <hero name="0.714431661555914"/>
     <hero name="0.318970741191738"/>
+    <hero name="0.0232295422308006"/>
   </humanPlayer>
 </antargisLevel>

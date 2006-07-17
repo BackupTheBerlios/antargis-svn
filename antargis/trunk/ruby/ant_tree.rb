@@ -77,7 +77,7 @@ class AntTree<AntRubyEntity
 		setMinimapColor(AGColor.new(0,0x77,0))
 	
 		resource.set("fruit",5)
-		resource.set("wood",40)
+		resource.set("wood",20)
 		resourceChanged
 	end
 	def resourceChanged

@@ -18,14 +18,14 @@ class AntMill<AntHouse
 	end
 
 	def neededStock
-		{"food"=>20,"crop"=>30}
+		{"food"=>20,"corn"=>30}
 	end
 
 	def process
-		if resource.get("crop")>0
-			amount=[resource.get("crop"),1].min
-			resource.sub("crop",amount)
-			resource.add("flour",amount)
+		if resource.get("corn")>0 and resource.get("flour")<30
+			amount=[resource.get("corn"),1].min
+			resource.sub("corn",amount)
+			resource.add("flour",amount*2)
 		end
 	end
 	def houseType

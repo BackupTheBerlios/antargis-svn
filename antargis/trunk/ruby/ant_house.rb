@@ -63,6 +63,10 @@ class AntHouse<AntBoss
 		
 	end
 	
+	def removeMan(man)
+		@atHome.delete(man)
+		super
+	end
 	################################
 	# Viewing,etc.
 	################################
@@ -157,6 +161,7 @@ class AntHouse<AntBoss
 				# is home:
 				# 1) take everything from inventory
 				resource.takeAll(e.resource)
+				resourceChanged
 				# 2) give job
 				need=neededStock
 				fetchForStock(need,e)
@@ -196,7 +201,7 @@ class AntHouse<AntBoss
 	end
 	
 	def neededStock
-		{"wood"=>50,"stone"=>50,"food"=>50}
+		{"wood"=>15,"stone"=>15,"food"=>15}
 	end
 
 
@@ -222,8 +227,15 @@ class AntHouse<AntBoss
 	# assigns ent a job for fetching good from a enttype
 	def fetchForStock(need,ent)
 		#puts "fetchForStock"
+		needmap=need
 		need=need.to_a
 		need=need.shuffle
+
+		# FIXME: check need and has !
+
+		oneed=need
+
+		need.collect!{|a|a[1]-=resource.get(a[0]) ; a}
 		need=need.sort!{|a,b|b[1]<=>a[1]} # sort descending in array
 
 		factor=2
@@ -232,7 +244,7 @@ class AntHouse<AntBoss
 		end
 		need.each{|goodArray|
 			good=goodArray[0]
-			if resource.get(good)<factor*goodArray[1]  # we already have plenty of this
+			if goodArray[1]>0 or (goodArray[1]>-needmap[good]*0.5 and @mode=="fetch") 
 				@mode="fetch"
 				tent=nil
 				if good=="food"
@@ -242,10 +254,8 @@ class AntHouse<AntBoss
 				end
 			
 				if tent
-					#puts "#{tent.getPlayer} #{getPlayer}"
 					if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
 					else
-						#puts "OK"
 						ent.newMoveJob(0,tent.getPos2D,0.5)
 						ent.setMode("fetching "+good)
 						@atHome.delete(ent)
@@ -258,7 +268,7 @@ class AntHouse<AntBoss
 			#raise 1 if good=="crop"
 		}
 		@mode="rest"
-		ent.newRestJob(15) # do nothing for a longer time
+		ent.newRestJob(5) # do nothing for a longer time
 	end
 
 	

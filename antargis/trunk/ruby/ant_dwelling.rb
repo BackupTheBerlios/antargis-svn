@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+BIRTHING_TIME=80
+MAX_RESIDENTS=10
+
 # A dwelling has zero or more residents. Whenever there some residents they will reproduce themselves.
 class AntDwelling<AntHouse
 	def initialize
@@ -23,7 +26,7 @@ class AntDwelling<AntHouse
 
 protected
 	def neededStock
-		{"food"=>25}
+		{"food"=>15}
 	end
 
 	def houseType
@@ -33,14 +36,23 @@ protected
 private
 	def checkBirth
 		# only men, which are at home can add to birth rate
-		@lastBirth+=[@atHome.length+resource.get("food")/3,30].min
-		if @lastBirth>50 then
+		@lastBirth+=[@atHome.length+resource.get("food")/3,10].min
+		if @lastBirth>BIRTHING_TIME then
 			man=AntMan.new
 			getMap.insertEntity(man)
 			man.setPos(getPos2D)
+			man.setBoss(self)
 			#getMap.endChange
-			@lastBirth=-10*rand
+			@lastBirth=-BIRTHING_TIME
+		end
+
+		while getMen.length>MAX_RESIDENTS
+			m=getMen
+			m[0..4].each{|man|
+				man.setBoss(nil)
+			}
 		end
 	end
+	
 end
 

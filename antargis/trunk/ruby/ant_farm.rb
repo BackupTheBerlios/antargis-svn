@@ -28,7 +28,7 @@ class AntFarm<AntHouse
 		super
 		@type=3
 		setProvide("food",true)
-		setProvide("crop",true)
+		setProvide("corn",true)
 		@defeated=[]
 		@atHome=[]
 		@lastBirth=0
@@ -43,7 +43,7 @@ class AntFarm<AntHouse
 	end
 
 	def neededStock
-		{"fruit"=>30,"crop"=>30}
+		{"fruit"=>15,"crop"=>15}
 	end
 
 	def assignJob(e)
@@ -78,10 +78,15 @@ class AntFarm<AntHouse
 	end
 
 	def process
-		if resource.get("fruit")>0
+		if resource.get("fruit")>0 and resource.get("food")<15
 			amount=[resource.get("fruit"),3].min
 			resource.add("food",amount)
 			resource.sub("fruit",amount)
+		end
+		if resource.get("crop")>0 and resource.get("corn")<15
+			amount=[resource.get("crop"),3].min
+			resource.add("corn",amount)
+			resource.sub("crop",amount)
 		end
 	end
 	def houseType

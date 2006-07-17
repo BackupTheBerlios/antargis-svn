@@ -19,12 +19,13 @@ class AntBakery<AntHouse
 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_bakery.ant2",3.2,"data/textures/models/ant_bakery.png"),AGVector4.new(0,0,0),-30)
 		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
-		p=AGVector3.new(-1.3,-1.2,2.2)
+		p=AGVector3.new(0,1.6,2.2)
 		addMesh(@smokeMesh=Smoke.new(getMap.getScene,5),p)
+		checkSmoke
 	end
 
 	def neededStock
-		{"food"=>30,"flour"=>30}
+		{"food"=>15,"flour"=>15}
 	end
 
 	def process

@@ -157,18 +157,18 @@
 							<cell col="0" row="3">
 								<table cols="6" rows="6">
 									<image col="0" row="0" filename="data/gui/man.png" tooltip="Troops"/>
-									<image col="0" row="1" filename="data/gui/apple2.png" tooltip="Food"/>
+									<image col="0" row="1" filename="data/gui/bread.png" tooltip="Food"/>
 									<image col="0" row="2" filename="data/gui/shield.png" tooltip="Shields"/>
 									<image col="0" row="3" filename="data/gui/sword.png" tooltip="Swords"/>
 									<image col="0" row="4" filename="data/gui/tools.png" tooltip="Tools"/>
-									<image col="0" row="5" filename="data/gui/bread.png" tooltip="Bread"/>
+									<!--<image col="0" row="5" filename="data/gui/bread.png" tooltip="Bread"/>-->
 									
 									<text col="1" row="0" caption="0" align="right" name="men" font="inventory.font"/>
 									<text col="1" row="1" caption="0" align="right" name="food" font="inventory.font"/>
 									<text col="1" row="2" caption="0" align="right" name="shield" font="inventory.font"/>
 									<text col="1" row="3" caption="0" align="right" name="sword" font="inventory.font"/>
 									<text col="1" row="4" caption="0" align="right" name="tool" font="inventory.font"/>
-									<text col="1" row="5" caption="0" align="right" name="bread" font="inventory.font"/>
+									<!--<text col="1" row="5" caption="0" align="right" name="bread" font="inventory.font"/>-->
 									
 									<image col="2" row="0" filename="data/gui/coal.png" tooltip="Coal"/>
 									<image col="2" row="1" filename="data/gui/ore.png" tooltip="Ore"/>
@@ -189,14 +189,14 @@
 									<image col="4" row="2" filename="data/gui/steel.png" tooltip="Steel"/>
 									<image col="4" row="3" filename="data/gui/fish_rod.png" tooltip="Fishing rod"/>
 									<image col="4" row="4" filename="data/gui/apple2.png" tooltip="Fruit"/>
-									<image col="4" row="5" filename="data/gui/crop.png" tooltip="Crop"/>
+									<image col="4" row="5" filename="data/gui/crop.png" tooltip="Corn"/>
 									
 									<text col="5" row="0" caption="0" align="right" name="boat" font="inventory.font"/>
 									<text col="5" row="1" caption="0" align="right" name="bow" font="inventory.font"/>
 									<text col="5" row="2" caption="0" align="right" name="steel" font="inventory.font"/>
 									<text col="5" row="3" caption="0" align="right" name="rod" font="inventory.font"/>
 									<text col="5" row="4" caption="0" align="right" name="fruit" font="inventory.font"/>
-									<text col="5" row="5" caption="0" align="right" name="crop" font="inventory.font"/>
+									<text col="5" row="5" caption="0" align="right" name="corn" font="inventory.font"/>
 									
 									
 								</table>

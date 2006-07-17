@@ -29,16 +29,27 @@ class AntTownHall<AntHouse
 		@type=3
 		@defeated=[]
 		@atHome=[]
-		setDirection(-30)
+		setDirection(-10)
+	
+		@storeGood=["food","tool","corn"]
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall_try2.ant2",3.2,"data/textures/models/townhall_try2.png"),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall_try2.ant2",3.2,"data/textures/models/townhall_try2.png"),AGVector4.new(0,0,0),-60)
 		setMesh(mesh)
 	end
 
+	def resourceChanged
+		puts "RESOURCE CHANGED"
+		@storeGood.each{|r|
+			setProvide(r,resource.get(r)>0)
+		}
+	end
+
 	def neededStock
-		{"food"=>30}
+		s={}
+		@storeGood.each{|r|s[r]=15}
+		s
 	end
 
 	def houseType

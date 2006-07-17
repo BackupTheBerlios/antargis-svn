@@ -7,6 +7,7 @@ class AntWorkshop<AntHouse
 	def initialize
 		super
 		setProvide("workshop",true)
+		setProvide("tool",true)
 		@lastBirth=0
 		setDirection(-50)
 		@smoke=0
@@ -29,6 +30,7 @@ class AntWorkshop<AntHouse
 		if e.getMode=="invent"
 			produceOneTool
 			e.setMode("any")
+			decSmoke
 		end
 		if not @job
 			if allThereForTool && notEnoughTools && atHome(e)
@@ -54,6 +56,8 @@ protected
 	def startToolProduction
 		resource.sub("wood",1)
 		resource.sub("stone",1)
+		playSound("construct")
+		incSmoke
 	end
 	
 
