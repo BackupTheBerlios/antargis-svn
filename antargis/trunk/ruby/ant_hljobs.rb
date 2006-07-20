@@ -765,11 +765,20 @@ class AntHeroRestJob<AntHLJob
 		@men=hero.getMen
 		@hero.formation=AntFormationRest.new(@hero)
 		@basePos=@hero.getPos2D
+		@firstTime=true
 	end
 	def image
 		"data/gui/bed.png"
 	end
 	def check(man)
+		if man.is_a?(AntHero)
+			if @firstTime
+				man.newRestJob(@time)
+				@firstTime=false
+			end
+			#spreadThings
+			return
+		end
 		case man.getMode
 			when "rest_eat"
 				spreadThings
@@ -793,12 +802,7 @@ class AntHeroRestJob<AntHLJob
 	end
 private
 	def sit(man)
-# 		formationPos=@hero.getSitFormation(man)
  		formationPos=@hero.getFormation(man,@basePos)
-# 		puts "FORMAT:"
-# 		puts formationPos
-# 		puts man.getPos2D
-
 
 		diff=(man.getPos2D-formationPos)
 		dist=diff.length2

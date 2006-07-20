@@ -36,9 +36,13 @@ std::string checkFileName(std::string s);
 std::string getWriteDir();
 std::string findFile(const std::string &pName);
 
+std::string getDocumentsDir();
+
 void addPath(const std::string &pName);
 
 std::string compress(const std::string &pString);
 std::string uncompress(const std::string &pString);
+
+std::string getDirSep();
 
 #endif

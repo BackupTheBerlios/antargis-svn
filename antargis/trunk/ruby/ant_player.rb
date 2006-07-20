@@ -166,7 +166,20 @@ class AntComputerPlayer<AntPlayer
 		getNextEnemyX(hero,"house")
 	end
 	private
-	def getNextEnemyX(hero,name)
+
+	def getNextEnemyX(hero,name,tries=10)
+		while tries>0
+			e=getMap.getNext(hero,name,0)
+			if e.getPlayer!=self
+				return e
+			end
+			tries-=1
+		end
+		return nil
+	end
+	
+
+	def getNextEnemyXOld(hero,name)
 		ts=getMap.getEntities(name)
 		
 		target=nil
@@ -186,7 +199,7 @@ end
 class AntLazyPlayer<AntComputerPlayer
 end
 
-class AntConqueringPlayer<AntComputerPlayer
+class AntOldConqueringPlayer<AntComputerPlayer
 	def initialize(name)
 		super
 		@mode=:rest
@@ -201,4 +214,88 @@ class AntConqueringPlayer<AntComputerPlayer
 				@mode=:rest
 		end
 	end
+end
+
+class AntConqueringPlayer<AntComputerPlayer
+	def initialize(name)
+		super
+		@mode=:rest
+		@doneSth={}
+	end
+	def assignJob(hero)
+		puts "-------------------------------------------------assignJob(hero)"
+		puts "assignJob(hero)"
+		puts "-------------------------------------------------assignJob(hero)"
+		if @doneSth[hero]
+			hero.newHLRestJob(3)
+			@doneSth[hero]=nil
+			return
+		end
+		if enoughFood(hero)
+			if not attackEnemyHouse(hero)
+				case @mode
+					when :rest
+						hero.newHLRestJob(50)
+						@mode=:fight
+					when :fight
+						attackChecked(hero,getNextEnemyHouse(hero))
+						@mode=:rest
+				end
+			end
+		end
+	end
+
+	def attackEnemyHouse(hero)
+		puts "def attackEnemyHouse(hero)"
+		house=getWeakestEnemyHouse(hero)
+		if house
+			puts "HOUSE:"
+			puts house
+			puts "#{house.getMen.length}<#{hero.getMen.length}"
+			if house.getMen.length<hero.getMen.length
+				puts "AATTTAC"
+				attack(hero,house)
+				return true
+			end
+		end
+		return false
+	end
+
+	def getWeakestEnemyHouse(hero)
+		hs=getMap.getEntities("house")
+		hs=hs.collect{|h|h.get}.select{|h|h.getPlayer!=self}.sort{|a,b|a.getMen.length<=>b.getMen.length}
+		hs[0]
+	end
+
+
+	def enoughFood(hero)
+		if hero.resource.get("food")<2
+			tryGetFood(hero)
+			return false
+		end
+		return true
+	end
+	def tryGetFood(hero)
+		foodSource=getSource(hero,"food",1)
+		if foodSource.nil?
+			hero.newHLRestJob(1)
+		else
+			hero.newHLTakeFoodJob(foodSource)
+			@doneSth[hero]=true
+		end
+	end
+	def getSource(hero,what,atleast,tries=5)
+		while tries>0
+			e=getMap.getNext(hero,what,atleast)
+			if e.nil?
+				puts "NO SOURCE"
+				#return nil
+			elsif e.getPlayer==self
+				return e
+			end
+			tries-=1
+		end
+		puts "OUT OF TRIES"
+	end
+
 end

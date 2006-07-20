@@ -15,3 +15,4 @@ $allHeaders=$interfaceHeaders + $addHeaders
 
 #puts $interfaceHeaders
 	
+$interfaceHeaders+=['slimrqs.h','calg.h','mycrypt.h']

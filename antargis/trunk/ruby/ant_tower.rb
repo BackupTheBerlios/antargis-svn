@@ -6,6 +6,8 @@ class AntTower<AntHouse
 		setProvide("tower",true)
 		setMinimapColor(AGColor.new(0x22,0x22,0x22))
 		setMinimapSize(6)
+
+		@storeGood=["food","tool","corn","stone","wood"]
 	end
 	
 	def setupMesh
@@ -18,7 +20,13 @@ class AntTower<AntHouse
 		{"fruit"=>15,"stone"=>15,"wood"=>15}
 	end
 
-	
+	def resourceChanged
+		puts "RESOURCE CHANGED"
+		@storeGood.each{|r|
+			setProvide(r,resource.get(r)>0)
+		}
+	end
+
 	###############################
 	# FLAG support
 	###############################

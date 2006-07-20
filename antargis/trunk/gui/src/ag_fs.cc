@@ -27,9 +27,13 @@
 #include <sys/stat.h>
 #ifdef WIN32
 #include <windows.h>
+#include <shlobj.h>
+//#include <strsafe.h>
+
 #endif
 
 #include "ag_debug.h"
+#include "ag_main.h"
 #include "ag_tools.h"
 #include "ag_serial.h"
 #include <zlib.h>
@@ -288,75 +292,70 @@ std::string getUserDir()
   if(gUserDir=="")
     {
 #ifdef WIN32
-	char *userDir=0;
+      char *userDir=0;
 
-    DWORD psize = 0;
-    char dummy[1];
-    BOOL rc = 0;
-    HANDLE processHandle;            /* Current process handle */
-    HANDLE accessToken = NULL;       /* Security handle to process */
-    LPFNGETUSERPROFILEDIR GetUserProfileDirectory;
-    HMODULE lib;
-
-    assert(userDir == 0);
-
-    /*
-     * GetUserProfileDirectory() is only available on NT 4.0 and later.
-     *  This means Win95/98/ME (and CE?) users have to do without, so for
-     *  them, we'll default to the base directory when we can't get the
-     *  function pointer.
-     */
-
-    lib = LoadLibrary("userenv.dll");
-    if (lib)
-    {
-        /* !!! FIXME: Handle Unicode? */
-        GetUserProfileDirectory = (LPFNGETUSERPROFILEDIR)
-                              GetProcAddress(lib, "GetUserProfileDirectoryA");
-        if (GetUserProfileDirectory)
-        {
-            processHandle = GetCurrentProcess();
-            if (OpenProcessToken(processHandle, TOKEN_QUERY, &accessToken))
-            {
-                /*
-                 * Should fail. Will write the size of the profile path in
-                 *  psize. Also note that the second parameter can't be
-                 *  NULL or the function fails.
-                 */
-                rc = GetUserProfileDirectory(accessToken, dummy, &psize);
-                assert(!rc);  /* success?! */
-
-                /* Allocate memory for the profile directory */
-                userDir = new char[psize+1];
-                if (userDir != NULL)
-                {
-                    if (!GetUserProfileDirectory(accessToken, userDir, &psize))
-                    {
-                        delete [] userDir;
-                        userDir = NULL;
-                    } /* if */
-                } /* else */
-            } /* if */
-
-            CloseHandle(accessToken);
-        } /* if */
-
-        FreeLibrary(lib);
-    } /* if */
-
-    if (userDir == NULL)  /* couldn't get profile for some reason. */
-    {
-        /* Might just be a non-NT system; resort to the basedir. */
-        userDir = ".";
-        std::cerr<<"sorry, this game doesn't run correctly on non-nt systems (win98/me)"<<std::endl;
-    } /* if */
-	gUserDir=userDir;
-
-
-
-
-
-
+      DWORD psize = 0;
+      char dummy[1];
+      BOOL rc = 0;
+      HANDLE processHandle;            /* Current process handle */
+      HANDLE accessToken = NULL;       /* Security handle to process */
+      LPFNGETUSERPROFILEDIR GetUserProfileDirectory;
+      HMODULE lib;
+      
+      assert(userDir == 0);
+      
+      /*
+       * GetUserProfileDirectory() is only available on NT 4.0 and later.
+       *  This means Win95/98/ME (and CE?) users have to do without, so for
+       *  them, we'll default to the base directory when we can't get the
+       *  function pointer.
+       */
+      
+      lib = LoadLibrary("userenv.dll");
+      if (lib)
+	{
+	  /* !!! FIXME: Handle Unicode? */
+	  GetUserProfileDirectory = (LPFNGETUSERPROFILEDIR)
+	    GetProcAddress(lib, "GetUserProfileDirectoryA");
+	  if (GetUserProfileDirectory)
+	    {
+	      processHandle = GetCurrentProcess();
+	      if (OpenProcessToken(processHandle, TOKEN_QUERY, &accessToken))
+		{
+		  /*
+		   * Should fail. Will write the size of the profile path in
+		   *  psize. Also note that the second parameter can't be
+		   *  NULL or the function fails.
+		   */
+		  rc = GetUserProfileDirectory(accessToken, dummy, &psize);
+		  assert(!rc);  /* success?! */
+		  
+		  /* Allocate memory for the profile directory */
+		  userDir = new char[psize+1];
+		  if (userDir != NULL)
+		    {
+		      if (!GetUserProfileDirectory(accessToken, userDir, &psize))
+			{
+			  delete [] userDir;
+			  userDir = NULL;
+			} /* if */
+		    } /* else */
+		} /* if */
+	      
+	      CloseHandle(accessToken);
+	    } /* if */
+	  
+	  FreeLibrary(lib);
+	} /* if */
+      
+      if (userDir == NULL)  /* couldn't get profile for some reason. */
+	{
+	  /* Might just be a non-NT system; resort to the basedir. */
+	  userDir = ".";
+	  std::cerr<<"sorry, this game doesn't run correctly on non-nt systems (win98/me)"<<std::endl;
+	} /* if */
+      gUserDir=userDir;
+      
 #else
       gUserDir=getenv("HOME");
 #endif
@@ -365,10 +364,38 @@ std::string getUserDir()
 }
 
 
+#ifdef WIN32
+
+#define SHGFP_TYPE_CURRENT 0
+
+std::string getDocumentsDir()
+{
+  CHAR wszPath[MAX_PATH];
+  
+  HWND hWnd=0;
+
+  SHGetFolderPath( hWnd, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, wszPath );
+
+  std::string s(wszPath);
+
+  return s;
+
+}
+
+#else
+
+std::string getDocumentsDir()
+{
+  return getUserDir()+"/Desktop";
+}
+
+
+#endif
+
 
 std::string getWriteDir()
 {
-  return getUserDir()+"/.Antargis";
+  return getUserDir()+"/."+getAppName();
 }
 
 void saveFile(const std::string &pName,const std::string &pContent)
@@ -538,4 +565,13 @@ std::string uncompress(const std::string &pString)
   delete [] buf;
 
   return r;
+}
+
+std::string getDirSep()
+{
+#ifdef WIN32
+  return "\\";
+#else
+  return "/";
+#endif
 }

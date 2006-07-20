@@ -13,10 +13,10 @@ ARTS
 ------------------------------------------------------
 [H] modify bakery a little (http://antargis.berlios.de/phpBB2/viewtopic.php?p=359#359)
 
+[H] oil tower
 [M] team color
 [M] Mesh for pigeon
 [M] animate hero, druid and smith
-[M] a well, a mill
 [M] some statue (monument) representing the whole village
     it can be clicked to get information about a whole village or attacking it???
 [M] some more animals: cow, deer ??
@@ -28,7 +28,7 @@ ARTS
 
 [Arts - Graphics - 2D]
 ------------------------------------------------------
-[M] tools-images: pick,axe, hark
+[VL] tools-images: pick,axe, hark
 [L] paint new portraits
 [L] paint campaign-images
 
@@ -48,7 +48,6 @@ ARTS
 
 [Music]
 ------------------------------------------------------
-[M] menu music
 [M] won and lost jingle
 
 [Leveldesign]
@@ -168,6 +167,7 @@ ARTS
 
 [Editor]
 ------------------------------------------------------
+[H] loading doesn't remove old entities
 [H] remove load script when in editor
 [H] add painting by dragging
 [H] plain other terrain type

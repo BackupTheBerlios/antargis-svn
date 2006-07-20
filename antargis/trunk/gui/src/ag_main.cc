@@ -249,3 +249,14 @@ long AGMain::getTicks() const
 void AGMain::mark()
 {
 }
+
+
+std::string gAppName="Antargis";
+void setAppName(const std::string &pName)
+{
+  gAppName=pName;
+}
+std::string getAppName()
+{
+  return gAppName;
+}

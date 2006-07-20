@@ -66,5 +66,8 @@ AGMain *getMain();
 bool hasQuit();
 bool glMode();
 
+void setAppName(const std::string &pName);
+std::string getAppName();
+
 
 #endif
