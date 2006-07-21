@@ -212,11 +212,24 @@ class AntMenuApp <AGApplication
 		@singleMenu.loadXML(loadFile("data/gui/layout/single.xml"))
 		@menues.push(@singleMenu)
 		addHandler(@singleMenu.getChild("singleExit"),:sigClick,:eventExit)
-		addHandler(@singleMenu.getChild("singleStart"),:sigClick,:eventStart)
+		addHandler(@singleMenu.getChild("singleStart"),:sigClick,:eventSingleStart)
 		addHandler(@singleMenu.getChild("list"),:sigSelect,:eventLoadSelect)
 		updateSingleMenu
 	end
 	
+	def eventSingleStart(e)
+
+		id=@singleMenu.getChild("list").getSelectedID
+		if id!=""
+			soundOff
+			#c=Campaign.new(getWriteDir+"/savegames/"+id)
+			startGame("data/levels/"+id) #ampaign(c)
+			soundOn
+		end
+		setMainWidget(@mainMenu)
+		return true
+
+	end
 
 
 

@@ -180,6 +180,7 @@ class AntHouse<AntBoss
 			e.collectResource(res)
 			e.setMode("homing")
 			# take resource
+			return if e.target.nil? # FIXME: error while loading
 			amount=[e.target.resource.get(res),e.canCarry].min
 			e.target.resource.sub(res,amount)
 			e.target.resourceChanged

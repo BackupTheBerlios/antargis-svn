@@ -242,6 +242,7 @@ class AntHeroFightJob<AntHeroMoveJob
 			return
 		end
 		man.setMode("defeated")
+		raise "no sit position" if @sitpos[man].nil?
 		man.newMoveJob(0,@sitpos[man],0)
 	end
 	
