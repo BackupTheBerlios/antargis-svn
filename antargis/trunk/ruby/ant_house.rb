@@ -170,6 +170,12 @@ class AntHouse<AntBoss
 				e.newRestJob(5+getRand)
 			end	
 		elsif e.getMode=~/fetching/
+			# check if target is somehow to far away
+			if (e.target.getPos2D-e.getPos2D).length>2
+				e.setMode("homing")
+				e.newMoveJob(0,getPos2D,0)
+				return
+			end
 			res=e.getMode.gsub(/.* /,"")
 			e.digResource(res)
 			e.setMode("digging "+res)
@@ -177,10 +183,10 @@ class AntHouse<AntBoss
 			# digging ready - take home
 			e.newMoveJob(0,getPos2D,0)
 			res=e.getMode.gsub(/.* /,"")
-			e.collectResource(res)
 			e.setMode("homing")
 			# take resource
 			return if e.target.nil? # FIXME: error while loading
+			e.collectResource(res)
 			amount=[e.target.resource.get(res),e.canCarry].min
 			e.target.resource.sub(res,amount)
 			e.target.resourceChanged
@@ -206,24 +212,24 @@ class AntHouse<AntBoss
 	end
 
 
-	# assigns ent a job for fetching good from a enttype
-	def fetch(good,ent)
-		tent=getMap.getNext(self,good,1)
-		if tent == nil then
-			puts "nothing found"
-			ent.newRestJob(4)
-		else
-			puts "#{tent.getPlayer} #{getPlayer}"
-			if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
-			else
-				ent.newMoveJob(0,tent.getPos2D,0.5)
-				ent.setMode("fetching "+good)
-				@atHome.delete(ent)
-				ent.target=tent
-				ent.setVisible(true)
-			end
-		end
-	end
+# 	# assigns ent a job for fetching good from a enttype
+# 	def fetch(good,ent)
+# 		tent=getMap.getNext(self,good,1)
+# 		if tent == nil then
+# 			puts "nothing found"
+# 			ent.newRestJob(4)
+# 		else
+# 			puts "#{tent.getPlayer} #{getPlayer}"
+# 			if tent.getPlayer!=getPlayer and (not tent.getPlayer.nil?)
+# 			else
+# 				ent.newMoveJob(0,tent.getPos2D,0.5)
+# 				ent.setMode("fetching "+good)
+# 				@atHome.delete(ent)
+# 				ent.target=tent
+# 				ent.setVisible(true)
+# 			end
+# 		end
+# 	end
 
 	# assigns ent a job for fetching good from a enttype
 	def fetchForStock(need,ent)

@@ -88,6 +88,8 @@ AGScreen &getScreen()
 
 void setScreen(AGScreen *s)
 {
+  TRACE;
+  cdebug("s:"<<s);
   mAGGScreen=s;
 }
 

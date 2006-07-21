@@ -62,7 +62,6 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-[H] segfault on windows when changing to fullscreen
 [M] a segfault appears when profiling with ruby (./run --profile)
 		couldn't find the problem yet. it's probably one of these problems:
 		1) some GC-problem
@@ -107,22 +106,20 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
-[H] Rowen dies too fast of starvation when fighting
-[H] Rowen surrenders and does not die when fighting stoner's keep in testai
+[?] Rowen dies too fast of starvation when fighting
+[?] Rowen surrenders and does not die when fighting stoner's keep in testai
+
 
 [H] continue buildingsite function => check if already claimed
 [H] fetching in house (testai) - tries to go through water - maybe move fetching code to some common module
 [H] buidling site disappear to soon
-
-[H] single games - add village generator to map generator
-[H] single games - add some menu for options
 
 [H] fighting should proceed when already attacked while formating!
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 
 [M] solve translation problem with descriptions
-[M] troops can't cross to steep terrain
+[M] troops can't cross too steep terrain
 [M] do building continuesly and not in steps (fetching, flattening and building)
 [M] continue building site (enemies too)
 [M] choosing/making player for multiplayer
@@ -161,6 +158,9 @@ ARTS
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
 [L] add experience points and function to appoint hero
+[L] single games - add village generator to map generator
+[L] single games - add some menu for options
+
 [VL] very bad situation => raise heroes with a new player (rebellion)
 
 [Scripting - Levels and campaigns]

@@ -127,6 +127,7 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
       getSurfaceManager()->clear();
     }
 
+  lastGL=gl;
   lastWidth=w;
   lastHeight=h;
   lastDepth=d;
@@ -176,11 +177,14 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   lastVWidth=vw;
   lastVHeight=vh;
 
+  cdebug("gl:"<<gl);
 
   if(gl)
     setScreen(mScreen=new AGGLScreen(w,h,vw,vh));
   else
     setScreen(mScreen=new AGSDLScreen(ms));
+
+  cdebug("mscreen:"<<mScreen);
 
   SDL_WM_SetCaption("Antargis","Antargis");
   
@@ -188,6 +192,8 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
 void AGMain::toggleFull()
 {
+  CTRACE;
+  cdebug("lastGL:"<<lastGL);
   initVideo(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL,lastVWidth,lastVHeight);
 }
 
