@@ -108,7 +108,6 @@ ARTS
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
 [H] Rowen dies too fast of starvation when fighting
-[H] stoner uses boats after rowing
 [H] Rowen surrenders and does not die when fighting stoner's keep in testai
 
 [H] continue buildingsite function => check if already claimed

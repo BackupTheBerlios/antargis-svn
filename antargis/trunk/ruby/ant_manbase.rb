@@ -147,6 +147,7 @@ module AntManBase
 	end
 
 	def eventHitWaterMark(fromAbove)
+		#raise 1
 		puts "eventHitWaterMark(#{fromAbove})"
 		#setOnWater(fromAbove)
 		if fromAbove

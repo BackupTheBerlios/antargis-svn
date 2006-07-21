@@ -223,6 +223,11 @@ class AntHero<AntBoss
 	end
 
 	def setMeshState(name)
+
+		if name=="row"
+			name="walk"
+		end
+
 		@origMeshState=name
 		name=checkOnWater(name)
 		puts "FIXME: implement setMeshState(.)"

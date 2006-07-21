@@ -214,6 +214,12 @@ class AntMan<AntRubyEntity
 	end
 
 	def setMeshState(name)
+		# FIXME: get MeshState somehow from job and resource-contents ???
+		if name=="row"
+			name="walk"
+		end
+
+
 		if @meshState=="dead"
 			puts "ERROR in setMeshState"
 			puts name
