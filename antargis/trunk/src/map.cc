@@ -216,6 +216,47 @@ std::vector<AntEntityPtr> AntMap::getEntities(const std::string &pName)
   return v;
 }
 
+std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const std::string &pType,size_t atLeast)
+{
+  // FIXME: optimize this - use quadtree
+
+  std::multimap<float,AntEntity*> ents;
+
+
+  EntityList::iterator i=mEntities.begin();
+  AGVector2 p=me->getPos2D(); // FIXME: check for reachability, too ??
+
+  for(;i!=mEntities.end();i++)
+    {
+      if(me!=*i)
+        {
+          if((*i)->provides(pType) && (*i)->resource.get(pType)>=atLeast)
+            {
+              AGVector2 p2=(*i)->getPos2D()-p;
+              float norm=p2.length2();
+              ents.insert(std::make_pair(norm,*i));
+            }
+        }
+    }
+
+  std::vector<AntEntityPtr> vec;
+
+  // take one of the nearest, but no farer away than 30% of nearest
+  AntEntity *e=0;
+  if(ents.size())
+    {
+      std::multimap<float,AntEntity*>::iterator j=ents.begin();
+      float nearest=j->first;
+      for(;j!=ents.end();j++)
+	{
+	  if(j->first<=nearest*1.3)
+	    vec.push_back(j->second);
+	}
+    }
+
+  return vec;
+}
+
 
 AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType,size_t atLeast)
 {

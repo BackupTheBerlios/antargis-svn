@@ -58,6 +58,7 @@ class AntMap:public HeightMap
   AntEntity *getByName(const std::string &pName);
 
   AntEntity *getNext(AntEntity *me,const std::string &pType,size_t atLeast=0);
+  std::vector<AntEntityPtr> getNextList(AntEntity *me,const std::string &pType,size_t atLeast=0);
 
   virtual AntEntity *loadEntity(const Node &node);
 

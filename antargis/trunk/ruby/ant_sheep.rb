@@ -88,23 +88,38 @@ class AntSheep<AntAnimal
 		@lastBirth+=1
 	end
 	
+# 	def getTargetPos
+# 		puts "GettargetPos"
+# 		p=getPos2D
+# 		t=p
+# 		ok=true
+# 		# assure that sheep doesn't walk into water
+# 		while $map.getHeight(t.x,t.y)<0.1 or ok do
+# 			d=AGVector2.new(rand-0.5,rand-0.5).normalized*4
+# 			t=p+d
+# 			t=$map.truncPos(t)
+# 			puts "HUPE"
+# 			puts t
+# 			
+# 			puts $map.getHeight(t.x,t.y)
+# 			ok=false
+# 		end 
+# 		return t
+# 	end
 	def getTargetPos
-		puts "GettargetPos"
 		p=getPos2D
-		t=p
-		ok=true
+		tries=10
 		# assure that sheep doesn't walk into water
-		while $map.getHeight(t.x,t.y)<0.1 or ok do
-			d=AGVector2.new(rand-0.5,rand-0.5).normalized*4
+		while tries>0 do
+			d=AGVector2.new(rand-0.5,rand-0.5).normalized*2
 			t=p+d
 			t=$map.truncPos(t)
-			puts "HUPE"
-			puts t
-			
-			puts $map.getHeight(t.x,t.y)
-			ok=false
+			tries-=1
+			if $map.getHeight(t.x,t.y)>0
+				return t
+			end
 		end 
-		return t
+		return p
 	end
 	def setMeshState(s)
 		getFirstMesh.setAnimation(s)

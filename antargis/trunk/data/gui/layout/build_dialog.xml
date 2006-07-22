@@ -27,6 +27,9 @@
 						<cell col="0" row="1">
 							<button name="AntTownHall" caption-image="data/gui/editor/entities/AntTownHall.png"/>
 						</cell>
+						<cell col="1" row="1">
+							<button name="AntWorkshop" caption-image="data/gui/editor/entities/AntWorkshop.png"/>
+						</cell>
 					</table>
 				</cell>
 				<cell col="0" row="2">
