@@ -40,17 +40,34 @@ class AntFir<AntBaseTree
 	def initialize()
 		super(AGVector2.new(0,0))
 		setProvide("fir",true)
-	
+		setProvide("wood",true)
+		resource.set("wood",25)
+
 		setupMesh
 	end
+
+	def resourceChanged
+		if resource.get("wood")<=0
+			@typeID=-1
+			setProvide("wood",false)
+		end
+		setupMesh
+	end
+
 	
 protected
 	def setupMesh
+		#if resource.get("wood")<=0
+		#	data=getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
 		setMesh(Mesh.new(getMap.getScene,meshData,AGVector4.new,0))
 	end
 private
 	def meshData
-		data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
+		if resource.get("wood")<=0
+			data=getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
+		else
+			data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
+		end
 		data.setTransparent(true)
 		data.setCulling(false) # patch for old trees
 

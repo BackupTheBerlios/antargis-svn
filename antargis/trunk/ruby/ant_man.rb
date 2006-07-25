@@ -39,13 +39,12 @@ class AntMan<AntRubyEntity
 	
 	def initialize()
 		super(AGVector2.new(0,0))
-		puts "NEW MAN"
 		setProvide("man",true)
 		@signed=false
 		@dead=false
 		@fighting=false
 		@bossName=""
-		dputs "NEWMAN"
+		@boss=nil
 		setMeshState("walk")
 		@mode="wait"
 		setMinimapColor(AGColor.new(0x77,0x77,0x77))
@@ -78,35 +77,38 @@ class AntMan<AntRubyEntity
 		
 		setFighting(false)
 		
-		if @bossName=="" then
-		
-			house=getMap.getNext(self,"house")
-			if house
-				houseName=house.getName
-				if houseName=="" then
-					dputs "ERROR House has no name!"
-					exit
+		if @boss.nil?
+			if @bossName=="" then
+			
+				house=getMap.getNext(self,"house")
+				if house
+					houseName=house.getName
+					if houseName=="" then
+						dputs "ERROR House has no name!"
+						exit
+					end
+					@bossName=houseName
+					newRestJob(rand()*2)
+					#house=getMap.getRuby(house)
+					house.signUp(self)
+					@signed=true
 				end
-				@bossName=houseName
-				newRestJob(rand()*2)
-				#house=getMap.getRuby(house)
-				house.signUp(self)
-				@signed=true
+			else
+				boss=getMap.getByName(@bossName)
+				if not boss
+					@bossName=""
+					return
+				end
+				@boss=boss
 			end
-		else
-			boss=getMap.getByName(@bossName)
-			if not boss
-				@bossName=""
-				return
-			end
-			@boss=boss
-			if not @signed then
-				dputs @bossName
-				dputs boss
-				boss.signUp(self)
-				@signed=true
-			end
-			boss.assignJob(self)
+			puts "BOSS:#{@boss}"
+		end
+		if not @signed then
+			boss.signUp(self)
+			@signed=true
+		end
+		if @boss
+			@boss.assignJob(self)
 		end
 	end	
 
@@ -135,6 +137,7 @@ class AntMan<AntRubyEntity
 	end
 	
 	def setBoss(hero)
+		puts "SETBOSS:#{hero}"
 		if @boss
 			@boss.removeMan(self)
 			@boss=nil

@@ -10,6 +10,16 @@ class PathWeighter:public AGRubyObject
   virtual float weight(float h0,float h1);
 };
 
+class MapPathWeighter:public PathWeighter
+{
+ public:
+  MapPathWeighter(HeightMap *pMap);
+  virtual float weight(const AGVector2 &a,const AGVector2 &b);
+ private:
+  HeightMap *mMap;
+};
+
+
 class SimpleGraph
 {
  public:

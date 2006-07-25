@@ -216,8 +216,9 @@ void AntEntity::setPos(const AGVector3 &p)
   mPos=p;
   updatePos(p);
 }
-void AntEntity::setPos(const AGVector2 &p)
+void AntEntity::setPos(const AGVector2 &pp)
 {
+  AGVector2 p=getMap()->truncPos(pp); // make sure, that position is ok
   if(onGround)
     mPos=getMap()->getPos(p);
   else if(onWater)

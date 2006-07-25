@@ -112,6 +112,8 @@ ARTS
 [H] check saving/loading of ll-jobs
 [H] remove old texts from local_* files
 
+[M] helping in houses
+
 [M] solve translation problem with descriptions
 [M] troops can't cross too steep terrain
 [M] do building continuesly and not in steps (fetching, flattening and building)
@@ -125,10 +127,6 @@ ARTS
 		low-level saving should be finished, but high-level makes some problems
 [M] tough breath when hero suffers
 [M] fishing (fishes)
-[M] add "special" actions:
-	- build house
-	- assign hero
-	- assign men to different houses when constructing
 [L] add all config-parameters to config-file when created - and comment them a little
 [L] Trees and scenery shouldn't be represented as ruby-objects, it takes too long to mark them all!
 [L] add formations
@@ -137,17 +135,19 @@ ARTS
 		So the AntApp must be finished and the surrounding campaign-code, too. After this the
 		loaded campaign must be started.
 [L] add aggression-leveling of non-hero bosses
-[L] computer-player only attacks when stock is used up
 [L] story-telling:
 	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
-[L] add experience points and function to appoint hero
 [L] single games - add village generator to map generator
 [L] single games - add some menu for options
 [L] decrease morale on men when inventing and not resting
 
 [VL] very bad situation => raise heroes with a new player (rebellion)
 [VL] add females
+
+[Artificial Intelligence]
+------------------------------------------------------
+[L] computer-player only attacks when stock is used up
 
 [Multiplayer]
 ------------------------------------------------------

@@ -78,6 +78,7 @@ class AntBoss<AntRubyEntity
 	def checkCreateMen
 		if @createMen>0
 			for i in 0..(@createMen-1) do
+				puts "NEW ---------MAN"
 				man=AntMan.new
 				getMap.insertEntity(man)
 				man.setPos(getPos2D)
@@ -114,6 +115,9 @@ class AntBoss<AntRubyEntity
 		if not @men.member?(man) then	
 			@men.push(man)
 			man.setAggression(getAggression)
+			if @job.is_a?(AntHeroRestJob)
+				newHLRestJob(1)
+			end
 		end
 	end
 	

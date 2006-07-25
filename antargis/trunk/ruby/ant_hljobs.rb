@@ -777,6 +777,7 @@ class AntHeroRestJob<AntHLJob
 				man.newRestJob(@time)
 				@firstTime=false
 			end
+			eat(man)
 			#spreadThings
 			return
 		end

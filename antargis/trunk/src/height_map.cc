@@ -31,8 +31,8 @@ HeightMap::HeightMap(Scene *pScene,int w,int h):
   setTerrainScale(GRASS,16/32.0);
   setTerrainScale(GRASS2,20/32.0);
   setTerrainScale(FOREST,23/32.0);
-  setTerrainScale(ROCK,1);
-  setTerrainScale(ROCK2,1);
+  setTerrainScale(ROCK,31/32.0);
+  setTerrainScale(ROCK2,31/32.0);
 }
 
 HeightMap::~HeightMap()

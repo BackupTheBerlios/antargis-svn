@@ -2,7 +2,8 @@
 
 require 'antargisgui.rb'
 
-main=AGMain.new(800,600,32,false,false)
+main=AGMain.new
+main.initVideo(800,600,32,false,false)
 
 def load(n)
 	AGSurface.load(n)
@@ -103,13 +104,14 @@ ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 triple=["big_grass_2.png","big_grass3.png","forest2.png"]
 ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 
-triple=["forest2.png","underwater3.png","rock2.png"]
+triple=["forest2.png","underwater3.png","7.png"]
 ts+=[0.2,0.4,0.6,1.2].collect{|f|makeTerrain(triple,f)}
 
-triple=["rock2.png","rock7.png","rock7.png"]
+triple=["7.png","gravel.png","gravel.png"]
 ts+=[0.5,1.2].collect{|f|makeTerrain(triple,f)}
 
-triple=["rock7.png","rock6.png","rock6.png"]
+triple=["rock7.png","rough_rock.png","rough_rock.png"]
+triple=["gravel.png","6.png","6.png"]
 ts+=[0.5,1.2].collect{|f|makeTerrain(triple,f)}
 
 puts "GENERATED:"
