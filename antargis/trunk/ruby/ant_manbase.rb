@@ -104,6 +104,7 @@ module AntManBase
 			sack=AntSack.new(getPos2D+AGVector2.new(0.3,-0.3))
 			getMap.insertEntity(sack)
 			sack.resource.takeAll(self.resource)
+			sack.resourceChanged
 		end
 	end
 

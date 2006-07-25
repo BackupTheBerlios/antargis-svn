@@ -19017,14 +19017,13 @@ CC4C3E9A 99993ECD CC4C3ECD CCCC3D00 00000071 8D8C3D0A 749C3ECD CCCC3E0A
     <position x="96.0469" y="15.4145" z="1"/>
     <resource water="1000"/>
   </antWell>
-  <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.0122019963480702" onGround="true" onWater="false">
+  <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="5" mode="" morale="1" name="0.0122019963480702" onGround="true" onWater="false">
     <position x="93.0033" y="21.6519" z="1"/>
     <resource/>
-    <job priority="0" time="2" type="restJob"/>
   </antDwelling>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="103.221" y="9.62717" z="2.17424"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antHighGrass aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="85.6751" y="60.9877" z="0.388721"/>
@@ -19160,223 +19159,223 @@ CC4C3E9A 99993ECD CC4C3ECD CCCC3D00 00000071 8D8C3D0A 749C3ECD CCCC3E0A
   </antHighGrass>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="95.3079" y="49.0724" z="2.82541"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="89.3204" y="47.7365" z="1.40772"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="92.825" y="43.618" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="96.6968" y="60.805" z="4.5751"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="84.2981" y="70.3311" z="1.76511"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="72.9945" y="57.3205" z="1.47678"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="69.2256" y="67.6494" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="75.0869" y="77.1605" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="80.0051" y="84.9137" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="76.0253" y="68.4034" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="64.4517" y="86.3978" z="1.59471"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="67.8719" y="91.319" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="71.6407" y="84.9091" z="1.28884"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="68.828" y="81.0563" z="1.42705"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="64.2625" y="81.1131" z="1.98571"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="58.9467" y="87.2305" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="62.6061" y="94.7903" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="65.5976" y="85.4201" z="1.47528"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="67.3701" y="83.708" z="1.58683"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="57.8126" y="79.6567" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="56.1033" y="85.3827" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="53.7229" y="93.4674" z="1.01156"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="61.1398" y="84.1905" z="1.88828"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="65.0954" y="69.7941" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="69.9607" y="71.7386" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="72.7738" y="73.1645" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="67.3176" y="77.5745" z="1.54442"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="64.2784" y="74.5825" z="1.21619"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="61.0431" y="72.7783" z="1.45464"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="71.6792" y="75.9773" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="77.2938" y="87.4961" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="76.675" y="93.1742" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="71.4807" y="93.5943" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="74.2632" y="85.7773" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="76.5354" y="81.8415" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="85.5666" y="87.9105" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="82.1479" y="92.5823" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="83.3057" y="86.8269" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="87.4019" y="95.7002" z="2.00721"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="88.3185" y="85.9887" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="90.8381" y="90.2054" z="1.2764"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="91.5391" y="83.6666" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="83.9357" y="81.4988" z="0.793963"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="79.8343" y="75.0697" z="0.965789"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="70.0618" y="64.84" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="68.6523" y="60.8834" z="1.02789"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="64.8832" y="63.2188" z="1.14414"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="58.3866" y="67.9373" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="52.9852" y="72.1299" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="50.2606" y="80.1473" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="62.3658" y="64.3601" z="1.12082"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="54.3081" y="64.8149" z="1.72953"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="50.7897" y="69.9788" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="100.169" y="35.727" z="1.24351"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="88.4606" y="35.6449" z="1.7567"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
     <position x="110.79" y="28.9161" z="6.28505"/>
@@ -19416,7 +19415,7 @@ CC4C3E9A 99993ECD CC4C3ECD CCCC3D00 00000071 8D8C3D0A 749C3ECD CCCC3E0A
   </antStone>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="74.7196" y="45.9369" z="1.40068"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
     <position x="57.6956" y="99.4119" z="2.42629"/>
@@ -19477,300 +19476,270 @@ CC4C3E9A 99993ECD CC4C3ECD CCCC3D00 00000071 8D8C3D0A 749C3ECD CCCC3E0A
   <antFire aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="115" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="0" y="0" z="1"/>
     <resource/>
-    <job priority="0" time="10" type="restJob"/>
   </antFire>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="101.355" y="22.4686" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="92.5642" y="28.2902" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="84.2436" y="26.9264" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="98.0391" y="23.8791" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="108.514" y="17.1121" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="106.779" y="6.31078" z="1.00568"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="110.873" y="9.45247" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="80.9134" y="13.2346" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="88.3242" y="7.40778" z="3.98329"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="67.7676" y="30.0835" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="66.1064" y="36.0046" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="79.1642" y="29.2653" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="83.1429" y="35.4728" z="1.02318"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="33.4505" y="75.1445" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="41.2923" y="70.2019" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="40.7757" y="80.4515" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="47.7578" y="53.3465" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="57.344" y="49.3712" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="60.0888" y="55.6337" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="75.1159" y="67.2236" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="71.7718" y="68.6966" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="72.0582" y="62.9307" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="64.4643" y="68.2239" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="67.0425" y="65.7912" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="54.9905" y="75.934" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="60.7879" y="70.5652" z="1.13066"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="51.3711" y="88.0644" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="53.2391" y="82.572" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="46.606" y="79.1074" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="44.3031" y="87.098" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="61.7358" y="78.1454" z="1.08667"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="73.4638" y="79.9107" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="78.6401" y="79.61" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="85.0054" y="67.049" z="2.88471"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="94.3329" y="65.7228" z="3.55514"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="80.702" y="81.4157" z="1"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="69.2884" y="86.9697" z="1.01244"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="59.5238" y="80.1662" z="1"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="67.0611" y="73.9148" z="1.28449"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="74.0396" y="66.7837" z="1"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="54.7418" y="91.0024" z="1"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="49.4548" y="81.9635" z="1"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
     <position x="56.5866" y="73.6565" z="1"/>
     <resource food="1" wolf_leader="0"/>
-    <job priority="0" time="4" type="restJob"/>
   </antWolf>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="32.3781" y="18.0254" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="31.7041" y="22.4553" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="31.9959" y="15.2679" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="28.248" y="16.5263" z="1"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
     <position x="57.4413" y="63.9955" z="1.57529"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
     <position x="60.5697" y="62.3944" z="1.67561"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
     <position x="52.6075" y="79.0686" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
     <position x="48.3083" y="76.7751" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
     <position x="58.5481" y="76.4897" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
     <position x="76.1887" y="75.4975" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
     <position x="79.9543" y="71.5905" z="0.518882"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
     <position x="72.611" y="66.0928" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
     <position x="77.9713" y="64.8018" z="0.982978"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
     <position x="80.9914" y="63.2215" z="0.773395"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
     <position x="87.6456" y="62.0695" z="0.396821"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="10">
     <position x="76.7336" y="57.4187" z="1.08252"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
     <position x="86.3775" y="51.2741" z="4.30556"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
     <position x="95.763" y="55.5855" z="4.45642"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="10">
     <position x="90.1933" y="20.8864" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
     <position x="94.3554" y="19.7029" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="10">
     <position x="64.9073" y="16.9314" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
     <position x="62.834" y="25.2029" z="-0.437725"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
     <position x="73.2619" y="42.1187" z="-0.348253"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antBush aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="70.7771" y="39.7778" z="-0.116733"/>
@@ -19808,135 +19777,86 @@ CC4C3E9A 99993ECD CC4C3ECD CCCC3D00 00000071 8D8C3D0A 749C3ECD CCCC3E0A
     <position x="69.3135" y="28.7495" z="-0.853192"/>
     <resource/>
   </antBush>
-  <antTownHall aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.296444865973601" onGround="true" onWater="false">
+  <antTownHall aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="2" mode="" morale="1" name="0.296444865973601" onGround="true" onWater="false">
     <position x="51.3233" y="25.3869" z="1"/>
     <resource/>
-    <job priority="0" time="2" type="restJob"/>
   </antTownHall>
-  <antWorkshop aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.0405384645697591" onGround="true" onWater="false">
+  <antWorkshop aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="5" mode="" morale="1" name="0.0405384645697591" onGround="true" onWater="false">
     <position x="40.4863" y="21.6202" z="1"/>
     <resource/>
-    <job priority="0" time="2" type="restJob"/>
   </antWorkshop>
-  <antFarm aggression="1" birthday="0.0" energy="1" exp="0" food="25" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.381363297076546" onGround="true" onWater="false">
+  <antFarm aggression="1" birthday="0.0" energy="1" exp="0" food="25" healSpeed="0.07" id="0" learnAmount="0.05" men="2" mode="" morale="1" name="0.381363297076546" onGround="true" onWater="false">
     <position x="38.5253" y="36.8974" z="1.00024"/>
     <resource fruit="0"/>
-    <job priority="0" time="2" type="restJob"/>
   </antFarm>
   <antWell aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="43.1217" y="28.6719" z="1.78985"/>
     <resource water="1000"/>
   </antWell>
-  <antMill aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.270052980754108" onGround="true" onWater="false">
+  <antMill aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="6" mode="" morale="1" name="0.270052980754108" onGround="true" onWater="false">
     <position x="47.4604" y="37.9666" z="1.41174"/>
     <resource crop="0"/>
-    <job priority="0" time="2" type="restJob"/>
   </antMill>
   <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.719559836062424" onGround="true" onWater="false">
     <position x="56.4061" y="35.7274" z="1"/>
     <resource/>
-    <job priority="0" time="2" type="restJob"/>
   </antDwelling>
-  <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.770661024265958" onGround="true" onWater="false">
-    <position x="59.2852" y="34.4785" z="1"/>
-    <resource/>
-    <job priority="0" time="2" type="restJob"/>
-  </antDwelling>
-  <antHero aggression="1" appearance="hero" birthday="-2231.8981625616" energy="1" exp="0" food="200" healSpeed="0.07" id="0" learnAmount="0.05" mode="rest_sit" morale="1" name="Pepinillo" onGround="true" onWater="false">
+  <antHero aggression="1" appearance="hero" birthday="-2231.8981625616" energy="1" exp="0" food="200" healSpeed="0.07" id="0" learnAmount="0.05" men="3" mode="rest_sit" morale="1" name="Dengal" onGround="true" onWater="false">
     <position x="45.4871" y="28.261" z="1.66809"/>
     <resource boat="0" bow="0" food="0" shield="0" sword="0"/>
-    <job priority="0" time="0.4" type="restJob"/>
   </antHero>
-  <antBakery aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="0.658347212708799" onGround="true" onWater="false">
+  <antBakery aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="4" mode="" morale="1" name="0.658347212708799" onGround="true" onWater="false">
     <position x="47.593" y="17.6589" z="1"/>
     <resource crop="0"/>
-    <job priority="0" time="2" type="restJob"/>
   </antBakery>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
     <position x="42.0143" y="56.5503" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
     <position x="33.1969" y="58.773" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
     <position x="38.3132" y="50.0264" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
     <position x="43.8379" y="48.0431" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
     <position x="35.6467" y="46.6573" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="10">
     <position x="35.6414" y="35.6114" z="1.07861"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
     <position x="45.0101" y="21.82" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
     <position x="53.4423" y="22.4383" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
   <antFire aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="208" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="0" y="0" z="1"/>
     <resource/>
-    <job priority="0" time="10" type="restJob"/>
   </antFire>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
     <position x="49.9081" y="15.1335" z="1"/>
     <resource fruit="6.7" wood="40"/>
-    <job priority="0" time="20" type="restJob"/>
   </antTree>
-  <antHero aggression="1" appearance="hero" birthday="-2066.4170987724" energy="1" exp="0" food="200" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="Gazpachin" onGround="true" onWater="false">
+  <antHero aggression="1" appearance="hero" birthday="-2066.4170987724" energy="1" exp="0" food="200" healSpeed="0.07" id="0" learnAmount="0.05" men="6" mode="" morale="1" name="Rowen" onGround="true" onWater="false">
     <position x="89.3071" y="16.6779" z="1"/>
     <resource boat="0" bow="0" food="0" shield="0" sword="0"/>
-    <job priority="0" time="20" type="restJob"/>
   </antHero>
   <antFire aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="211" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="0" y="0" z="1"/>
     <resource/>
-    <job priority="0" time="10" type="restJob"/>
   </antFire>
-  <antMan aggression="1" birthday="-1306.46281460794" bossName="Gazpachin" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="rest_sit" morale="1" name="Argtor" onGround="true" onWater="false">
-    <position x="89.3071" y="16.6779" z="1"/>
-    <resource bow="0" shield="0" sword="0"/>
-    <job near="0" pos="(90.5071,16.6779)" priority="0" run="false" type="moveJob"/>
-  </antMan>
-  <antMan aggression="1" birthday="-2037.471313175" bossName="Gazpachin" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="rest_sit" morale="1" name="Gortor" onGround="true" onWater="false">
-    <position x="89.3071" y="16.6779" z="1"/>
-    <resource bow="0" shield="0" sword="0"/>
-    <job near="0" pos="(89.6779,17.8192)" priority="0" run="false" type="moveJob"/>
-  </antMan>
-  <antMan aggression="1" birthday="-1927.67016392732" bossName="Gazpachin" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="rest_sit" morale="1" name="Garin" onGround="true" onWater="false">
-    <position x="89.3071" y="16.6779" z="1"/>
-    <resource bow="0" shield="0" sword="0"/>
-    <job near="0" pos="(88.3363,17.3832)" priority="0" run="false" type="moveJob"/>
-  </antMan>
-  <antMan aggression="1" birthday="-932.434262506785" bossName="Gazpachin" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="rest_sit" morale="1" name="Baltor" onGround="true" onWater="false">
-    <position x="89.3071" y="16.6779" z="1"/>
-    <resource bow="0" shield="0" sword="0"/>
-    <job near="0" pos="(88.3363,15.9726)" priority="0" run="false" type="moveJob"/>
-  </antMan>
-  <antMan aggression="1" birthday="-1789.82545453114" bossName="Gazpachin" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="rest_sit" morale="1" name="Gavor" onGround="true" onWater="false">
-    <position x="89.3071" y="16.6779" z="1"/>
-    <resource bow="0" shield="0" sword="0"/>
-    <job near="0" pos="(89.6779,15.5366)" priority="0" run="false" type="moveJob"/>
-  </antMan>
   <antMine aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="47.3592" y="97.7682" z="1"/>
     <resource coal="500" ore="500"/>
@@ -19945,14 +19865,34 @@ CC4C3E9A 99993ECD CC4C3ECD CCCC3D00 00000071 8D8C3D0A 749C3ECD CCCC3E0A
     <position x="101.864" y="34.8345" z="1.26925"/>
     <resource coal="500" ore="500"/>
   </antMine>
-  <antFarm aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="220" learnAmount="0.05" men="2" mode="" morale="1" name="" onGround="true" onWater="false">
+  <antFarm aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="5" mode="" morale="1" name="0.889743910954461" onGround="true" onWater="false">
     <position x="97.1428" y="11.535" z="1"/>
-    <resource/>
+    <resource crop="0" fruit="0"/>
   </antFarm>
-  <humanPlayer name="Gazpacho">
+  <antMan aggression="1" birthday="-2081.16201185817" bossName="0.889743910954461" energy="1" exp="0" food="1" healSpeed="0.07" id="220" learnAmount="0.05" mode="makeField" morale="1" name="Oland" onGround="true" onWater="false">
+    <position x="97.1428" y="11.535" z="1"/>
+    <resource bow="0" shield="0" sword="0"/>
+  </antMan>
+  <antMan aggression="1" birthday="-1773.08743080675" bossName="0.889743910954461" energy="1" exp="0" food="1" healSpeed="0.07" id="221" learnAmount="0.05" mode="makeField" morale="1" name="Gortor" onGround="true" onWater="false">
+    <position x="97.1428" y="11.535" z="1"/>
+    <resource bow="0" shield="0" sword="0"/>
+  </antMan>
+  <antDwelling aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="222" learnAmount="0.05" men="3" mode="" morale="1" name="" onGround="true" onWater="false">
+    <position x="55.8052" y="18.9727" z="1"/>
+    <resource/>
+  </antDwelling>
+  <humanPlayer name="Rowen">
+    <hero name="Rowen"/>
     <hero name="0.0122019963480702"/>
-    <hero name="Gazpachin"/>
-    <hero name=""/>
+    <hero name="0.889743910954461"/>
   </humanPlayer>
-  <computerPlayer name="Pepinillo"/>
+  <computerPlayer name="Dengal">
+    <hero name=""/>
+    <hero name="0.296444865973601"/>
+    <hero name="0.658347212708799"/>
+    <hero name="Dengal"/>
+    <hero name="0.270052980754108"/>
+    <hero name="0.381363297076546"/>
+    <hero name="0.0405384645697591"/>
+  </computerPlayer>
 </antargisLevel>

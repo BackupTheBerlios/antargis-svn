@@ -8,8 +8,14 @@ class AntSack<AntAnimal
 		setMesh(mesh)
 		#setPos(AGVector2.new(p.x,p.y))
 		@enabled=true
+		@storeGood=["food","tool","corn","stone","wood"]
 	end
 	def eventDie
 		getMap.removeEntity(self)
+	end
+	def resourceChanged
+		@storeGood.each{|r|
+			setProvide(r,resource.get(r)>0)
+		}
 	end
 end

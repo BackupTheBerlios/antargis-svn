@@ -103,8 +103,8 @@ class AntMan<AntRubyEntity
 			end
 			puts "BOSS:#{@boss}"
 		end
-		if not @signed then
-			boss.signUp(self)
+		if @boss and not @signed then
+			@boss.signUp(self)
 			@signed=true
 		end
 		if @boss

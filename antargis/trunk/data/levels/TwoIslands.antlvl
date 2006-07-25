@@ -434,8 +434,8 @@ FA44C07F 1610C0E0 C09FBFA4 3994BEB6 9960BE24 C018BE23 CDA1BDF3 CF10BC4D
 327B3D26 A6063E15 BDAA3E4B B4053F61 0D2E3FB5 DA4C3F21 EC5B3FF4 03573FA7
 AD433F58 2B353FA5 B92F3F4D 07363FA6 4E3F3F30 B8363FA5 BE293F37 D71C3F26
 430D3F9B A2F43ED8 07E83E67 6BDD3E7A 428B3D26 C7A8BFBA 0F9BBECC 94AEBDB0
-77C93E40 FA6B3F3D EA6C3F00 2C663F89 F4573FB4 99423F47 A5293FCF 71233F39
-262A3F82 BD423FDD 71583F40 89613FEC 6E613FF8 A9593FBE B64B3FBA FA3D3F83
+77C93E40 FA6B3F3D EA6C3F00 2C663F89 F4573FB4 99423F04 B2313F8A E7313F5A
+4C393F28 B64B3FC7 8D5B3F40 89613FEC 6E613FF8 A9593FBE B64B3FBA FA3D3F83
 38343FA7 823C3F2B AE3F3FFE 4D3C3FD3 59333F0F 7C263F68 87163F9E C6033FB0
 A1DC3E02 59AC3E16 6E6D3E1F FAEE3D74 9C11BC1A 4D14BE26 0995BE47 4CBABE7B
 A0DFBE00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BFB9
@@ -450,8 +450,8 @@ E5C3C035 C2A7C09F A46AC07A 951AC09A 36B6BF2E B895BE10 DC63BE88 551CBE99
 C2A9BD3A 6258BC89 C5663DD9 B3003E12 5EB13E0E 0A0A3F45 46343F58 7B573FC9
 08743FEE F35B3F6E FF433FB8 BD303F42 37243F32 DE213F66 4F2A3F7B 1A2A3F58
 A8263F16 EA203F03 75143FF6 B4043F40 03F43E2A 9FF43E9E 3E99BFE0 D465BF42
-98C23E26 EA5A3E16 FF603FFA BC743F24 867B3FEB 53703F12 05593F62 703A3F4B
-6E233F2E 78183FEB C52A3F75 11433F26 A5583FC0 DF583F71 93503F14 84443FE8
+98C23E26 EA5A3E16 FF603FFA BC743F24 867B3FEB 53703F12 05593FDC 71433FD1
+6D3A3FA0 CE3A3F4C D2483FBB BF553F65 CD603F0D 455D3F71 93503F14 84443FE8
 3C353FFB 5F253F9E 37303F60 393B3FDA 60403F89 523A3F59 CC2D3F0F 8F1E3FA0
 F70C3FB0 20F23EE8 91C53EB4 1E943E51 543B3E81 7F883DA3 6A74BD71 CA48BEE7
 5B90BEBB F9B5BEF1 9BDBBE00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00
@@ -467,8 +467,8 @@ ECE83FD0 0CF73FCD 7901402C 6705406D F20640EA C105401C 750140FC 8AF33FAC
 30293F3D A5483F58 7B573FB5 DA4C3F63 57343FF6 241F3FD0 B20C3FA0 CE0A3FDD
 DE173F55 04203F81 E0263FD5 D3293F1B BD1C3F9C 630C3F36 FD073F18 46083F49
 4BF0BF56 0996BEA4 3415BEB7 85E03EA8 165C3F4C 3B793F62 D3883FF1 56753F2A
-F7523F14 6C2C3FCF 5E173F94 0B123FAF 8E2D3F11 F64B3F30 58673FEC B54F3F49
-3D3C3FE1 242D3FF2 8E223F45 A91C3F88 A2283F00 E4353FA4 8E423F96 24353FA7
+A7563FA8 E9403F61 6C403F83 3D493F98 F5583F1E 24633FDF A96D3F0E 5C5A3F7F
+53423FE1 242D3FF2 8E223F45 A91C3F88 A2283F00 E4353FA4 8E423F96 24353FA7
 A0253F65 8F133F20 B3003F2C B7D73ECD BCA93E32 6C6E3E8C CAFF3DC1 D5F33B21
 32F5BDDC 1A52BE12 CA8EBEB7 86B4BE5B 43DABE00 0000BF00 0000BF00 0000BF00
 0000BF00 0000BF00 0000BF00 0000BF38 BA5ABECC EF00BE47 AA963D6F 68593E6E
@@ -483,8 +483,8 @@ A0253F65 8F133F20 B3003F2C B7D73ECD BCA93E32 6C6E3E8C CAFF3DC1 D5F33B21
 596A3E53 92D23EFA E20E3F15 30293F45 46343F61 0D2E3F44 DD193F2A B2F63E8E
 F8C83EC0 17DB3E06 50023F8E CE133F84 19263F49 B93C3FD1 CF233F41 29133F1B
 290B3EB5 CE95BE4D 5533BEB4 E0AD3EE0 5B2D3F05 DC3B3FE0 724F3F8E C9663F19
-24753FC2 B9663F9A 514A3F24 D0273FC0 9B133FC3 FB0F3F6D 72273F73 F43D3F07
-B24B3F19 03433F42 6F323F24 0E233F5A EE163FBE 67103FA8 9E1B3F33 9C263FFD
+24753FC2 B9663F00 F6513FE3 82443F79 F0493FC1 11593F61 34663F71 12663FB1
+05633FA6 B6553FFC 433E3F24 0E233F5A EE163FBE 67103FA8 9E1B3F33 9C263FFD
 D32B3F49 60253FBB B4173F68 28063F09 5FE23EA1 D1B63EE6 0A883E35 9D293E70
 96673D99 597DBD3C 650ABE4B 8755BEE7 5B90BEBB F9B5BEF1 9BDBBE00 0000BF00
 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF38 D843BECF BB01BE17
@@ -499,8 +499,8 @@ CBABC043 744AC09A FCA3BF60 8BABBED5 9D89BE41 1950BE19 E40DBE0F CB99BD3A
 6258BC95 863E3D81 5ED33D00 848D3E53 92D23E31 57003F0E 0A0A3F4B B4053FCC
 49E93E39 A1B13EB8 7F4E3E1E 178C3E37 D4C13E03 52F73E08 D2133F44 3B203FEC
 65153FF7 430D3FCA 4529BE41 5062BF8C AB1EBFF0 F62C3E88 FC303F9F 99343F76
-133F3F5E 704C3F13 46543FDE 5F4B3F14 73363F17 0F1A3F84 C8043F61 D7073F32
-631A3F32 3C293FBC FF2E3FA6 63293FCC 8F1D3F42 3B103FC8 B0033F77 ED003F62
+133F3F5E 704C3F13 46543FDE 5F4B3F70 23433F00 CB3E3F88 6C4F3F18 CF6E3FDE
+E4753F7A C9733F30 585F3FBC FD473F69 3A2F3F42 3B103FC8 B0033F77 ED003F62
 6B0A3F89 2F123F7B AB143F90 EA0F3FA6 AC043F81 18E93E05 95C03E88 0E903EB0
 713F3E00 1FB13DAD 0711BB56 7497BDF1 9315BE42 B75FBE26 0995BE47 4CBABE7B
 A0DFBE00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BFE8
@@ -515,8 +515,8 @@ B468C1F0 7A6BC183 9D71C1C9 2879C115 1080C12D DA80C165 AE6FC1E8 9B4CC19C
 FD2DBE10 2AE0BDA4 4F51BD0F A6923B89 C5663D81 5ED33DE1 596A3E0C 549F3E12
 5EB13E15 BDAA3EB5 B18C3E2A D3323E8C CB123E46 8D323E05 7C8D3E37 53BF3EA7
 B5E73EFA 15F93E68 06ED3EFF 20F43E84 00E2BD82 14FDBE60 7291BE4F 92E63EC8
-F4313F0C 3E2A3FC0 FA2B3F3B 9A313F78 76323F07 A42C3F3F 471D3FEA 43143FC1
-6C063FC2 4B173F9B 991F3FE2 DA1F3FE6 E5163F7D 8F113F16 D2043F28 69E93EF4
+F4313F0C 3E2A3FC0 FA2B3F3B 9A313F78 76323F07 A42C3FD3 D12C3FF0 25383F46
+94653F51 52823F7B 45843F64 E4823FFD 116B3F02 70363FBD A6183F28 69E93EF4
 73D03EC1 7CDE3E1B 93EE3E80 20F93E49 CFFA3ED6 ADF13EE9 9CDD3EE1 A6BF3EF4
 AB983E16 F4513E51 A0E33D06 43353DD4 EEC5BC0E CDBFBDDC DC27BE44 6D70BEE9
 B99CBE69 6BC1BEB7 41E6BE00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00
@@ -531,9 +531,9 @@ F5083FED B59B3E92 C0E53D61 DAD9BF25 7D85C08B 6BFCC022 6E40C166 D060C192
 43A7BE3E 1488BE52 6D53BE24 C018BE8D 59C1BD38 AC2FBD0F A6923B95 863E3D7E
 87A73DD5 A8DE3DD9 B3003E26 A6063ED9 B3003ED5 A8DE3D7E 87A73D95 863E3DB7
 BE0F3E4D 8A693E20 CB943EB6 A9A13E51 9D983E6F 20AE3E90 A056BD36 9E01BF1C
-91603D8C 392D3F68 45263F35 B4173FDD 96153F0D 12153FFE 4F113F29 320E3F1B
-B9163F06 FA1A3F21 3F273FD0 F52A3F35 E82C3F54 53253FA4 67153FE8 DEF83E83
-07E33E1B 2EC33E25 24BF3EE1 D2C23E5D EACA3EB8 AECE3EEA 9DCC3EAB 75C33E7D
+91603D8C 392D3F68 45263F35 B4173FDD 96153F0D 12153FFE 4F113F29 320E3F42
+C5203F24 55343F55 BE7A3FCC A4903FB3 8C9F3F48 39903FD3 03743F16 4F1E3F0D
+FBFE3E1B 2EC33E25 24BF3EE1 D2C23E5D EACA3EB8 AECE3EEA 9DCC3EAB 75C33E7D
 CDB23E68 079B3EF9 A3793EF9 97313EC2 A3BD3D92 E1393C32 CE5BBD9F 72F6BD55
 C540BE49 A583BEE6 48A7BE4E 39CBBE71 67EFBE00 0000BF00 0000BF00 0000BF00
 0000BF00 0000BF00 0000BF00 0000BFA9 5025BECA F4BFBD02 21D5BC4B 3ABD3E4D
@@ -548,8 +548,8 @@ BE3E3FC4 8A4B3F64 1E543FFC E0563F68 98523F09 29313F69 B7D93E60 C6323EC0
 4F51BD3A 6258BC77 72943C6A B12A3D89 C5663D4D 327B3D89 C5663D6A B12A3D77
 72943C3A 6258BCCC A523BDFD 0E333DE5 7DCD3D4E 37FD3D7C C165BE15 8AE2BE6F
 756FBEC4 A352BD45 07583E7B 4F103F2B 7F103F23 04093F14 63003F25 6DED3E31
-EEE43E51 6F043F8C 051E3F3D E2343FC1 A2453F8C E64B3F6B 46443FB2 B6313FDA
-D9183FBD 68F83E8B B2D13E68 93CA3E38 4BC23E3E A8BD3EC8 D9BF3E73 DDBF3E39
+EEE43E51 6F043F8C 051E3F21 BB3E3FE0 8F7D3F61 47933F75 969A3F07 608F3FAC
+7D653F19 A30E3F8B B2D13E68 93CA3E38 4BC23E3E A8BD3EC8 D9BF3E73 DDBF3E39
 23BB3E58 D0B03E18 62A03E55 C1893E4A 3E5A3E8D 8D153E12 038C3D3C 7D9FBCB9
 D2B7BD87 F11CBE42 B75FBE59 EC91BEB7 86B4BE8B 8FD7BE23 F2FABE00 0000BF00
 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BFF8 C528BEFD A2C7BDBE
@@ -564,8 +564,8 @@ B2F0C088 9E8DC0DA C393C050 D48CC087 2771C052 202BC0E9 3883BFEF 2377BEC6
 0646BE24 C018BE10 2AE0BD0F CB99BDAD 8C40BD9C EDD5BC3A 6258BCF3 CF10BC3A
 6258BC9C EDD5BCAD 8C40BD0F CB99BD10 2AE0BD00 4BF0BDFD 45E4BD0A 2DD6BD3C
 D810BFD7 8A84BF83 1DE5BE1C BD8F3E84 9BC43ECF 49E53EBE 71EF3E2B 8FEF3EAD
-6CE93EB7 950E3F7F 30393FF0 305D3FB5 336D3FAA 326F3F25 23683F55 536A3FD1
-875E3FA9 C8463F40 FD2A3F46 AF0C3F5A CFDD3E1D F0D33E20 E8C93E0B 07C23E2A
+6CE93EB7 950E3F7F 30393FF0 305D3FB5 336D3FAA 326F3FAF A7733F56 9B8A3F55
+1E8D3F4C 5E7F3F29 17403F46 AF0C3F5A CFDD3E1D F0D33E20 E8C93E0B 07C23E2A
 7BB73EE2 06B43E60 94AC3E18 85A03EF9 578F3E9F 87713EAC 68393E1E DFEC3DF7
 60233D0D 6A3CBD93 A106BE60 4444BED8 0782BEDE C9A2BE7B 3DC4BEB7 41E6BE00
 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BF00 0000BFE8
@@ -19015,27 +19015,27 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
 00000000 00000000 00000000 00000000 00000000 000000  </data>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="28.786" y="19.5462" z="2.5077"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="24.7326" y="24.0722" z="2.08706"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="25.4295" y="18.4888" z="2.14819"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="26.1755" y="16.6633" z="2.11191"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="28.5541" y="15.5008" z="2.29672"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="30.4632" y="15.784" z="2.53076"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
     <position x="31.0839" y="9.69165" z="2.30173"/>
@@ -19354,7 +19354,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
-    <position x="47.638" y="99.4038" z="5.20375"/>
+    <position x="47.638" y="99.4038" z="5.20376"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
@@ -19542,43 +19542,43 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="93.5675" y="18.7808" z="0.261671"/>
+    <position x="93.5675" y="18.7808" z="0.261682"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="93.1326" y="18.8283" z="0.0749809"/>
+    <position x="93.1326" y="18.8283" z="0.0749792"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="93.5467" y="19.4464" z="0.127672"/>
+    <position x="93.5467" y="19.4464" z="0.127676"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="92.5225" y="18.3419" z="0.335428"/>
+    <position x="92.5225" y="18.3419" z="0.335434"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="92.1411" y="18.2419" z="0.681086"/>
+    <position x="92.1411" y="18.2419" z="0.681048"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="92.8481" y="19.0946" z="0.0954244"/>
+    <position x="92.8481" y="19.0946" z="0.0953894"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="92.338" y="19.0588" z="0.366148"/>
+    <position x="92.338" y="19.0588" z="0.366133"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="93.1475" y="19.7293" z="-0.120529"/>
+    <position x="93.1475" y="19.7293" z="-0.120556"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="93.5702" y="20.0773" z="0.0560175"/>
+    <position x="93.5702" y="20.0773" z="0.0559851"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="94.3646" y="20.7345" z="0.556544"/>
+    <position x="94.3646" y="20.7345" z="0.556537"/>
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
@@ -19586,15 +19586,15 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource stone="500"/>
   </antStone>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="92.182" y="17.2358" z="0.931994"/>
+    <position x="92.182" y="17.2358" z="0.931978"/>
     <resource stone="500"/>
   </antStone>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="81.0785" y="18.2554" z="0.89718"/>
+    <position x="81.0785" y="18.2554" z="0.897179"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="75.7342" y="21.4326" z="0.724818"/>
+    <position x="75.7342" y="21.4326" z="0.724819"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
@@ -19614,7 +19614,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
-    <position x="72.6079" y="21.3204" z="0.746354"/>
+    <position x="72.6079" y="21.3204" z="0.746355"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
@@ -19626,11 +19626,11 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="82.4611" y="12.6472" z="1.28475"/>
+    <position x="82.4611" y="12.6472" z="1.28474"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
-    <position x="83.3692" y="17.2515" z="0.848137"/>
+    <position x="83.3692" y="17.2515" z="0.848136"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
@@ -19642,15 +19642,15 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
-    <position x="69.5017" y="9.94899" z="1.25048"/>
+    <position x="69.5017" y="9.94899" z="1.25047"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
-    <position x="66.6643" y="13.0776" z="0.721063"/>
+    <position x="66.6643" y="13.0776" z="0.721077"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
-    <position x="69.7392" y="6.34298" z="0.68719"/>
+    <position x="69.7392" y="6.34298" z="0.687193"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
@@ -19658,7 +19658,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="79.6994" y="5.46873" z="0.919913"/>
+    <position x="79.6994" y="5.46873" z="0.919911"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
@@ -19678,15 +19678,15 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="76.8996" y="2.24775" z="1.00365"/>
+    <position x="76.8996" y="2.24775" z="1.00366"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="75.8787" y="1.14575" z="0.778337"/>
+    <position x="75.8787" y="1.14575" z="0.778338"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="72.8438" y="5.54232" z="0.763696"/>
+    <position x="72.8438" y="5.54232" z="0.763695"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
@@ -19702,11 +19702,11 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="67.5413" y="4.37125" z="0.365619"/>
+    <position x="67.5413" y="4.37125" z="0.365617"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
-    <position x="86.7093" y="14.4348" z="0.739707"/>
+    <position x="86.7093" y="14.4348" z="0.739709"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
@@ -19714,11 +19714,11 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="87.4833" y="5.6762" z="0.744121"/>
+    <position x="87.4833" y="5.6762" z="0.74412"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="87.9099" y="3.3134" z="0.708977"/>
+    <position x="87.9099" y="3.3134" z="0.708981"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
@@ -19726,7 +19726,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="85.3994" y="3.629" z="0.936714"/>
+    <position x="85.3994" y="3.629" z="0.936713"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
@@ -19734,15 +19734,15 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="80.8729" y="7.28021" z="0.972049"/>
+    <position x="80.8729" y="7.28021" z="0.97205"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="81.9907" y="4.44034" z="0.837932"/>
+    <position x="81.9907" y="4.44034" z="0.837931"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
-    <position x="82.4847" y="2.58786" z="0.756044"/>
+    <position x="82.4847" y="2.58786" z="0.756043"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
@@ -19750,23 +19750,23 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="90.2152" y="11.4339" z="0.930386"/>
+    <position x="90.2152" y="11.4339" z="0.930387"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
-    <position x="90.666" y="8.74001" z="0.870003"/>
+    <position x="90.666" y="8.74001" z="0.870001"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="91.1632" y="6.69536" z="0.704621"/>
+    <position x="91.1632" y="6.69536" z="0.70462"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="92.2659" y="3.81682" z="0.569044"/>
+    <position x="92.2659" y="3.81682" z="0.569043"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
-    <position x="94.4384" y="8.75115" z="0.820787"/>
+    <position x="94.4384" y="8.75115" z="0.820785"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
@@ -19774,7 +19774,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
-    <position x="96.0365" y="3.41068" z="0.624195"/>
+    <position x="96.0365" y="3.41068" z="0.624196"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
@@ -19790,11 +19790,11 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="82.8001" y="16.2776" z="0.982005"/>
+    <position x="82.8001" y="16.2776" z="0.982009"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
-    <position x="80.4626" y="13.5572" z="1.35098"/>
+    <position x="80.4626" y="13.5572" z="1.35099"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
@@ -19802,18 +19802,18 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="78.6112" y="19.1513" z="0.953658"/>
+    <position x="78.6112" y="19.1513" z="0.953656"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="78.543" y="22.5714" z="0.790713"/>
+    <position x="78.543" y="22.5714" z="0.790714"/>
     <resource fruit="5" wood="20"/>
   </antTree>
-  <antTower aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="8" mode="" morale="1" name="0.511463388830291" onGround="true" onWater="false">
-    <position x="98.7108" y="31.5108" z="0.639583"/>
+  <antTower aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="8" mode="" morale="1" name="Keep Rowen" onGround="true" onWater="false">
+    <position x="98.7108" y="31.5108" z="1.09501"/>
     <resource/>
   </antTower>
-  <antTower aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="8" mode="" morale="1" name="0.477206565235742" onGround="true" onWater="false">
+  <antTower aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="15" mode="" morale="1" name="Keep Dengal" onGround="true" onWater="false">
     <position x="36.3982" y="84.6502" z="4.45923"/>
     <resource/>
   </antTower>
@@ -19822,31 +19822,31 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="64.3664" y="87.4703" z="1.32163"/>
+    <position x="64.3664" y="87.4703" z="1.32164"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
-    <position x="68.8072" y="85.2766" z="1.06646"/>
+    <position x="68.8072" y="85.2766" z="1.06647"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="68.182" y="81.075" z="0.813812"/>
+    <position x="68.182" y="81.075" z="0.813813"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="64.6282" y="78.7275" z="2.18151"/>
+    <position x="64.6282" y="78.7275" z="2.1815"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="61.2128" y="85.5154" z="1.75079"/>
+    <position x="61.2128" y="85.5154" z="1.7508"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="54.959" y="82.0966" z="2.44661"/>
+    <position x="54.959" y="82.0966" z="2.44666"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
-    <position x="60.751" y="79.3234" z="1.80197"/>
+    <position x="60.751" y="79.3234" z="1.80198"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
@@ -19854,7 +19854,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="67.9543" y="77.7934" z="0.990876"/>
+    <position x="67.9543" y="77.7934" z="0.990891"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
@@ -19862,27 +19862,27 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="72.4175" y="86.9447" z="0.700134"/>
+    <position x="72.4175" y="86.9447" z="0.700142"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="70.565" y="89.6211" z="0.988844"/>
+    <position x="70.565" y="89.6211" z="0.988831"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
-    <position x="67.7001" y="92.7801" z="0.457088"/>
+    <position x="67.7001" y="92.7801" z="0.457092"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="67.7878" y="90.7003" z="0.238988"/>
+    <position x="67.7878" y="90.7003" z="0.238986"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="34.1035" y="70.6958" z="2.91805"/>
+    <position x="34.1035" y="70.6958" z="2.91806"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
-    <position x="36.3096" y="67.8658" z="2.57802"/>
+    <position x="36.3096" y="67.8658" z="2.57797"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
@@ -19890,7 +19890,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="37.2518" y="72.8732" z="2.71534"/>
+    <position x="37.2518" y="72.8732" z="2.71536"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="3">
@@ -19898,7 +19898,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="31.031" y="72.2922" z="3.59712"/>
+    <position x="31.031" y="72.2922" z="3.59708"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
@@ -19906,15 +19906,15 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="4">
-    <position x="34.9857" y="66.3759" z="2.08766"/>
+    <position x="34.9857" y="66.3759" z="2.08765"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
-    <position x="32.5943" y="65.2514" z="2.31305"/>
+    <position x="32.5943" y="65.2514" z="2.31306"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="28.1836" y="68.1888" z="2.21299"/>
+    <position x="28.1836" y="68.1888" z="2.213"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
@@ -19930,7 +19930,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="29.1552" y="64.3268" z="2.18316"/>
+    <position x="29.1552" y="64.3268" z="2.18315"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
@@ -19938,7 +19938,7 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
-    <position x="35.4359" y="63.5509" z="2.32402"/>
+    <position x="35.4359" y="63.5509" z="2.32403"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
@@ -19950,15 +19950,15 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="8">
-    <position x="40.5019" y="75.2035" z="2.59545"/>
+    <position x="40.5019" y="75.2035" z="2.59548"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="39.0844" y="76.7152" z="3.11995"/>
+    <position x="39.0844" y="76.7152" z="3.11994"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="9">
-    <position x="30.6173" y="79.3976" z="3.49079"/>
+    <position x="30.6173" y="79.3976" z="3.49077"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
@@ -19974,19 +19974,19 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="28.4711" y="79.691" z="4.12019"/>
+    <position x="28.4711" y="79.691" z="4.12017"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="104.1" y="35.8931" z="0.439535"/>
+    <position x="104.1" y="35.8931" z="0.439536"/>
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="103.522" y="38.163" z="0.53369"/>
+    <position x="103.522" y="38.163" z="0.53371"/>
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="105.656" y="37.3547" z="0.407513"/>
+    <position x="105.656" y="37.3547" z="0.407512"/>
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
@@ -19994,11 +19994,11 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="43.4852" y="85.566" z="3.77586"/>
+    <position x="43.4852" y="85.566" z="3.77582"/>
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="44.4684" y="85.6949" z="4.31666"/>
+    <position x="44.4684" y="85.6949" z="4.3167"/>
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
@@ -20006,11 +20006,11 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource food="1"/>
   </antSheep>
   <antSheep aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="104.993" y="39.2744" z="0.474304"/>
+    <position x="104.993" y="39.2744" z="0.47429"/>
     <resource food="1"/>
   </antSheep>
   <antStone aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="1">
-    <position x="25.5224" y="101.74" z="6.08475"/>
+    <position x="25.5224" y="101.74" z="6.08455"/>
     <resource stone="500"/>
   </antStone>
   <antMine aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
@@ -20019,18 +20019,18 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
   </antMine>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
     <position x="93.6207" y="35.0971" z="1.16607"/>
-    <resource/>
+    <resource wood="25"/>
   </antFir>
   <antFir aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false">
-    <position x="92.9626" y="29.0603" z="0.896889"/>
-    <resource/>
+    <position x="92.9626" y="29.0603" z="0.896887"/>
+    <resource wood="25"/>
   </antFir>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="7">
     <position x="97.2683" y="42.8196" z="1.1277"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="5">
-    <position x="106.312" y="27.4884" z="0.68864"/>
+    <position x="106.312" y="27.4884" z="0.688636"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
@@ -20042,39 +20042,39 @@ C3A03D00 00000029 EDFC3D00 00000000 00000000 00000000 00000000 00000000
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="0">
-    <position x="106.736" y="9.25462" z="0.801376"/>
+    <position x="106.736" y="9.25462" z="0.801377"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
-    <position x="109.964" y="12.8553" z="0.866905"/>
+    <position x="109.964" y="12.8553" z="0.866886"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="6">
-    <position x="106.467" y="13.4294" z="0.987244"/>
+    <position x="106.467" y="13.4294" z="0.987253"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antTree aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="" morale="1" name="" onGround="true" onWater="false" typeID="2">
-    <position x="104.083" y="2.95138" z="0.346738"/>
+    <position x="104.083" y="2.95138" z="0.346725"/>
     <resource fruit="5" wood="20"/>
   </antTree>
   <antWolf aggression="1" birthday="0.0" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" mode="resting" morale="1" name="" onGround="true" onWater="false">
-    <position x="66.8236" y="10.9723" z="0.813503"/>
+    <position x="66.8236" y="10.9723" z="0.813513"/>
     <resource food="1"/>
   </antWolf>
-  <antHero aggression="1" appearance="" birthday="-2344.36089354303" energy="1" exp="0" food="1" healSpeed="0.07" id="262" learnAmount="0.05" men="3" mode="" morale="1" name="Manzana" onGround="true" onWater="false">
-    <position x="101.657" y="27.8623" z="0.770273"/>
+  <antHero aggression="1" appearance="hero" birthday="-2344.36089354303" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="4" mode="" morale="1" name="Rowen" onGround="true" onWater="false">
+    <position x="101.657" y="27.8623" z="0.79686"/>
     <resource boat="0"/>
   </antHero>
-  <antHero aggression="1" appearance="" birthday="-1872.4356281495" energy="1" exp="0" food="1" healSpeed="0.07" id="263" learnAmount="0.05" men="3" mode="" morale="1" name="Sandia" onGround="true" onWater="false">
+  <antHero aggression="1" appearance="hero" birthday="-1872.4356281495" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="10" mode="" morale="1" name="Dengal" onGround="true" onWater="false">
     <position x="40.7975" y="83.8664" z="3.42804"/>
     <resource boat="0"/>
   </antHero>
-  <humanPlayer name="Human">
-    <hero name="Manzana"/>
+  <humanPlayer name="Rowen">
+    <hero name="Keep Rowen"/>
+    <hero name="Rowen"/>
   </humanPlayer>
-  <computerPlayer name="Cumputer">
-<!--    <hero name="Manzana"/>-->
-    <hero name="0.477206565235742"/>
-    <hero name="Sandia"/>
+  <computerPlayer name="Dengal">
+    <hero name="Keep Dengal"/>
+    <hero name="Dengal"/>
   </computerPlayer>
 </antargisLevel>

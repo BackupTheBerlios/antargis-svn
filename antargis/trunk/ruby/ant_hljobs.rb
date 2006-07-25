@@ -302,6 +302,7 @@ class AntHeroFightJob<AntHeroMoveJob
 	end
 	
 	def startFightingMan(man)
+		return if not @target.getJob.is_a?(AntHeroFightJob)
 		tmen=@target.getJob.undefeatedMen
 		if tmen.length==0
 			won

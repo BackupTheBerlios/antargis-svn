@@ -93,6 +93,11 @@ class AntHumanPlayer<AntPlayer
 end
 
 class AntComputerPlayer<AntPlayer
+	def initialize(name)
+		super
+		@doneSth={}
+	end
+
 	def xmlName
 		return "computerPlayer"
 	end
@@ -100,7 +105,9 @@ class AntComputerPlayer<AntPlayer
 		puts who.to_s+" is ready with is job:"+what.to_s
 	end
 	def assignJob(hero)
-		hero.newHLRestJob(20)
+		if enoughFood(hero)
+			hero.newHLRestJob(20)
+		end
 	end
 	
 	# simple trigger
@@ -165,7 +172,6 @@ class AntComputerPlayer<AntPlayer
 	def getNextEnemyHouse(hero)
 		getNextEnemyX(hero,"house")
 	end
-	private
 
 	def getNextEnemyX(hero,name,tries=10)
 		while tries>0
@@ -194,6 +200,37 @@ class AntComputerPlayer<AntPlayer
 		}
 		return target
 	end
+
+	def enoughFood(hero)
+		if hero.resource.get("food")<2
+			tryGetFood(hero)
+			return false
+		end
+		return true
+	end
+	def tryGetFood(hero)
+		foodSource=getSource(hero,"food",1)
+		if foodSource.nil?
+			hero.newHLRestJob(1)
+		else
+			hero.newHLTakeFoodJob(foodSource)
+			@doneSth[hero]=true
+		end
+	end
+	def getSource(hero,what,atleast,tries=5)
+		while tries>0
+			e=getMap.getNext(hero,what,atleast)
+			if e.nil?
+				puts "NO SOURCE"
+				#return nil
+			elsif e.getPlayer==self
+				return e
+			end
+			tries-=1
+		end
+		puts "OUT OF TRIES"
+	end
+
 end
 
 class AntLazyPlayer<AntComputerPlayer
@@ -220,7 +257,6 @@ class AntConqueringPlayer<AntComputerPlayer
 	def initialize(name)
 		super
 		@mode=:rest
-		@doneSth={}
 	end
 	def assignJob(hero)
 		puts "-------------------------------------------------assignJob(hero)"
@@ -268,34 +304,5 @@ class AntConqueringPlayer<AntComputerPlayer
 	end
 
 
-	def enoughFood(hero)
-		if hero.resource.get("food")<2
-			tryGetFood(hero)
-			return false
-		end
-		return true
-	end
-	def tryGetFood(hero)
-		foodSource=getSource(hero,"food",1)
-		if foodSource.nil?
-			hero.newHLRestJob(1)
-		else
-			hero.newHLTakeFoodJob(foodSource)
-			@doneSth[hero]=true
-		end
-	end
-	def getSource(hero,what,atleast,tries=5)
-		while tries>0
-			e=getMap.getNext(hero,what,atleast)
-			if e.nil?
-				puts "NO SOURCE"
-				#return nil
-			elsif e.getPlayer==self
-				return e
-			end
-			tries-=1
-		end
-		puts "OUT OF TRIES"
-	end
 
 end
