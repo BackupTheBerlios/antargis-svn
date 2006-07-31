@@ -1,0 +1,139 @@
+{1} of them are at home.;;{1} de ellos están en casa.
+This is a {1}. It was build {2} years ago. Currently {3} {4} live 
+here.;;Esto es una {1} y fue construida hace {2} años.
+They are {1};;Son {1}
+This is {1}. He is {2} years old.;;Es {1} y tiene {2} años.
+He obeys {1}.;; Obedece a {1}.
+Nobody supports him.;;No tiene apoyo.
+{1} men support him.;;{1} hombres a su servicio.
+Your hero {1} suffers.;;Tu heroe {1} sufre.
+Options;;Opciones
+Gameoptions;;Opciones de juego
+Video;;Video
+Audio;;Audio
+Exit;;Salir
+(C) 2005 by David Kamphausen;;(C) 2005 por David Kamphausen
+Credits;;Créditos
+Design & Programming;;Diseño y programación
+David Kamphausen;;David Kamphausen
+Arts;;Arte
+David Kamphausen\n<david.kamphausen@web.de>;;David Kamphausen\n<david.kamphausen@web.de>
+Website;;Web
+David Kamphausen\nMartin Kamphausen;;David Kamphausen\nMartin Kamphausen
+huhu;;huhu
+'Slowly you awake...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;Poco a poco despiertas...\nTe sientes desorientado y te preguntas qué\n ha pasado y cómo has llegado hasta aqui.
+Ok;;Ok
+Start campaign;;Comenzar la campaña
+Single map;;Un solo jugador
+Load game;;Cargar partida
+Quit;;Salir
+Select a campaign;;Seleccionar campaña
+The wolfs' lair;;La guarida del lobo
+Dark mountains;;Montañas oscuras
+Fight for the throne;;Lucha por el trono
+up;;arriba
+dir-list;;dir-list
+file-list;;file-list
+Cancel;;Cancelar
+Open;;Abrir
+Start;;Empezar
+(C) 2005 by the Antargis-team;;(C) 2005 by the Antargis-team
+Do you really want to do it??;;¿Seguro?
+yes;;Sí
+no;;No
+The wolfs' lair;;La guarida del lobo
+Toggle fullscreen;;Pantalla completa
+1024 x 768;;1024 x 768
+1280 x 1024;;1280 x 1024
+1400 x 1050;;1400 x 1050
+Directory:;;Directorio
+...;;...
+muh;;muh
+Toggle shadow;;Activar sombras
+Toggle particle effects;;Activar efectos de particulas
+Toggle animation;;Activar animaciones
+1024x768;;1024x768
+1280x1024;;1280x1024
+1400x1050;;1400x1050
+Ready;;Preparado
+In future versions a screenshot will be given here.;;posteriormente aqui habrá una foto.
+Load;;Cargar
+Music volume;;Volumen de la música
+Ambient sound;;Sonido de ambiente
+Sound effects;;Efectos de sonido
+-;;-
++;;+
+gen;;generar
+Name:;;Nombre
+Men:;;Hombres
+NPCType:;;Tipo de NPC
+SERVER;;Servidor
+Do you really want\nto quit the game?;;Realmente te piras?
+Continue;;Continuar
+Width:;;Anchura
+Height:;;Altura
+Sizes should be power of 2 and at least 16;;Los tamaños deben ser potencias de 2 y como mínimo 16
+Game;;Juego
+Save;;Grabar
+Game paused.;;Juego en pausa
+Resume;;Continuar
+Filename:;;Nombre del fichero
+Minion of Godrin;;Subordinado de Godrin
+0;;0
+FPS:0;;FPS:0
+Loading...;;Cargando...
+Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.;;Vayamos al grano. A diferencia de otros juegos, en BoA sólo controlas tu heroe.
+Stone;;Piedra
+Argyn;;Argyn
+Gold;;Oro
+For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Para desplazarte por el mapa clicas en el minimapa que será mostrado en el margen inferior derecho tan pronto acabes el tutorial. 
+Keep;;Casa
+You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.;;Le puedes mover clicando con el boton derecho en el terreno. Espera a que terminen las instrucciones antes de probarlo.
+Coal;;Carbón
+Ore;;Hierro
+Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.;;Bienvenido al tutorial the Battles of Antargis. Te mostraré como moverte por el mundo.
+Swords;;Espadas
+Food;;Comida
+Troops;;Tropas
+Now recruit some troops by selecting the tower by left-clicking on it and then push the recruit-button on the right.;;Ahora recluta algunos hombres seleccionando la torre con el boton izquierdo y dandole al boton Reclutar, a la derecha.
+Dador;;Dador
+Banin;;Banin
+If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;Si quieres desplazar la vista manten pulsado el botón derecho y mueve el ratón.
+When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.;;Para desplazarte mueve el cursor hacia los bordes de la pantalla. Pulsar alt + return hará que cambies a pantalla completa.
+NewTree;;Nuevo árbol
+Fire;;Fuego
+Tools;;Herramientas
+Shields;;Escudos
+Godrin;;Godrin
+Wood;;Madera
+Statistics;;Estadísticas
+A hero is born.;;Nace un Heroe
+High aggression;;Agresividad alta
+rough lands;;Tierras ásperas
+invent;;fabricar
+Sound;;Sonido
+unify the people;;Unifica la gente
+Playername;;Nombre del jugador
+Recruit;;Reclutar
+Save game;;Guardar 
+Inspect object;;Info
+Here you learn how to play the game.;;Aqui aprendes cómo jugar
+Take weapons - FIXME;;Coger armas
+Tutorial;;Tutorial
+Attack;;Atacar
+your mission;;Tu misión
+Drop weapons;;Soltar las armas
+Medium aggression;;Agresividad media
+Take food;;Coger comida
+Dismiss;;Licenciar
+Low aggression;;Agresividad baja
+Drop food;;Soltar comida
+Sheep;;Oveja
+strong heroes;;Heroes fuertes
+Options...;;Opciones
+Abort this mission;;Abortar misión
+Rest;;Descansar
+The story of Antargis begins;;La leyenda de Antargis comienza
+Tutorial - Exploring your world.;;Tutorial - Explorando el mundo.
+Pause the game
+;;

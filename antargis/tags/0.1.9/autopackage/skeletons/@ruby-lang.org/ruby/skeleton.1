@@ -1,0 +1,22 @@
+[Meta]
+RootName: @ruby-lang.org/ruby
+DisplayName: Ruby language runtime
+ShortName: ruby
+Skeleton-Author: David Kamphausen <david.kamphausen@web.de>
+Skeleton-Version: 1
+
+[Notes]
+INTERFACE_VERSIONS are set to match the currently installed version using the "ruby" executable name.
+For instance, python 2.2 causes INTERFACE_VERSIONS to contain "2.2 2.1 2.0". This skeleton assumes python1 and python2 are not parallel installed.
+SOFTWARE_VERSIONS is set to the result of python -V
+
+[Test]
+#v=`perl -V | sed -n '1p' | sed 's/.* \(version .\).*/\1/' | awk ' { print $2 } '`
+v=$(ruby -v 2>&1|awk '{print $2}' | awk -F. '{print $1 "." $2}')
+if [[ $v != "" ]]; then
+    INTERFACE_VERSIONS="$v"
+    SOFTWARE_VERSIONS="$INTERFACE_VERSIONS"
+fi
+
+
+
