@@ -47,8 +47,11 @@ AGApplication *getApplication()
 AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTooltip(0),mOverlay(0)
 {
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
-  setCursor(getTextureCache()->get("blue_cursor.png"));
-  setNormalCursor();
+  if(videoInited())
+    {
+      setCursor(getTextureCache()->get("blue_cursor.png"));
+      setNormalCursor();
+    }
 }
 
 AGApplication::~AGApplication()
@@ -181,6 +184,8 @@ void AGApplication::clearOldMousePosition()
 }
 void AGApplication::drawCursor()
 {
+  if(!videoInited())
+    return;
   AGPainter p;
   if(mCursor)
     {
@@ -237,6 +242,9 @@ void AGApplication::draw()
 	  saveDelete(*i);
       delCue.clear();
     }
+
+  if(!videoInited())
+    return;
 
 
   STACKTRACE;

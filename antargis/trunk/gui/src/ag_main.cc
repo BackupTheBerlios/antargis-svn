@@ -53,6 +53,12 @@ void deleteInstanceKiller();
 
 void initSoundEngine();
 
+#ifdef SIMPLE_DRM
+std::string gUserName=DRM_USERNAME;
+bool gDRMok=false;
+
+#endif
+
 bool hasQuit()
 {
   return quited;
@@ -109,6 +115,11 @@ AGMain::~AGMain()
 void AGMain::flip()
 {
   getScreen().flip();
+}
+
+std::string myHash(const std::string &p)
+{
+  return p;
 }
 
 /**
@@ -187,6 +198,40 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   cdebug("mscreen:"<<mScreen);
 
   SDL_WM_SetCaption("Antargis","Antargis");
+
+
+
+#ifdef SIMPLE_DRM
+
+  std::string hash(DRM_MD5);
+
+  if(myHash(gUserName.substr(32,std::string::npos)==hash.substr(32,std::string::npos)))
+    {
+      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName);
+      getScreen()->blit(t);
+      gDRMok=true;
+      getScreen()->flip();
+      SDL_delay(1000);
+    }
+  else
+    {
+      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName);
+      getScreen()->blit(t);
+      gDRMok=true;
+      getScreen()->flip();
+      SDL_delay(4000);
+      exit(1);
+    }
+
+#endif
+
+
+
+
+
+
+
+
   
 }
 

@@ -80,6 +80,11 @@ void AGSDLScreen::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRec
 
 AGScreen *mAGGScreen=0;
 
+bool videoInited()
+{
+  return mAGGScreen;
+}
+
 AGScreen &getScreen()
 {
   assert(mAGGScreen);

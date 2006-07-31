@@ -4,6 +4,7 @@
 #include <ag_debug.h>
 #include <ag_profiler.h>
 #include <ag_config.h>
+#include <ag_main.h>
 
 static bool useVBO()
 {
@@ -34,7 +35,8 @@ VertexArray::VertexArray(bool pDynamic):bbox(AGVector3(),AGVector3()),mDynamic(p
   mBuffers=GLEE_ARB_vertex_buffer_object && useVBO();
   mArrays=GLEE_EXT_vertex_array && useVertexArrays();
 
-  assert(GLEE_EXT_vertex_array);
+  if(videoInited())
+    assert(GLEE_EXT_vertex_array);
 
   displayListInited=false;
 

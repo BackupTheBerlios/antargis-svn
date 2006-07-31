@@ -185,6 +185,23 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventKeyDown(e)
+		hero={	SDLK_F1=>0,
+			SDLK_F2=>1,
+			SDLK_F3=>2,
+			SDLK_F4=>3,
+			SDLK_F5=>4,
+			SDLK_F6=>5,
+			SDLK_F7=>6}[e.getKey]
+		if hero
+			h=getHeroByNum(hero) 
+			if h
+				if @hero==h
+					focusHero(h)
+				end
+				selectHero(h)
+				return super(e)
+			end
+		end
 		case e.getKey
 			when SDLK_F9
 				if not panelVisible
@@ -195,6 +212,8 @@ class AntGameApp <AntRubyView
 			when SDLK_F8
 				@sceneEnabled=(not @sceneEnabled)
 				getScene.setEnabled(@sceneEnabled)
+			when SDLK_F1
+				hero=1
 		end
 		return super(e)
 	end
@@ -517,6 +536,10 @@ class AntGameApp <AntRubyView
 
 		# set hero's aggression
 		@buttonpanel.setAggression(@hero.getAggression)
+	end
+
+	def getHeroByNum(n)
+		getMap.getOwnHeroes[n]
 	end
 
 	# views an information window about the entity ent

@@ -11,7 +11,7 @@ $xcompile=false
 
 varnames=[]
 
-varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug','$xcompile']
+varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug','$xcompile','$drmuser','$drmmd5']
 
 varnames.uniq!
 
@@ -37,6 +37,10 @@ ARGV.each{|arg|
 			puts "--xcompile      enable cross-compiling using mingw32"
                         puts "--gc-debug      enable debugging of garbage collection"
 			$help=true
+                when /--drmuser/
+	                $drmuser=arg[10..1000]
+                when /--drmmd5/
+	                $drmmd5=arg[9..1000]
 	end
 }
 

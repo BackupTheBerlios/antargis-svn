@@ -89,7 +89,7 @@ void AntEntity::init()
 
 AntEntity::~AntEntity()
 {
-  CTRACE;
+  //  CTRACE;
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     saveDelete(*i);
   mMeshes.clear();

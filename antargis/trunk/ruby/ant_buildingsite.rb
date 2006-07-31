@@ -3,9 +3,9 @@
 def getBuildingSiteMeshData(size)
 	if $buildingSiteMeshes.nil?
 		$buildingSiteMeshes=[
-	getMeshData("data/models/crop_tiny.ant2",2.2,"data/textures/models/crop_tiny.png"),
-	getMeshData("data/models/crop_small.ant2",2.2,"data/textures/models/crop_green.png"),
-	getMeshData("data/models/crop_med.ant2",2.2,"data/textures/models/crop_yellow.png"),
+	getMeshData("data/models/building_site0.ant2",1.7,"data/textures/models/building_site0.png"),
+	getMeshData("data/models/building_site1.ant2",1.7,"data/textures/models/building_site1.png"),
+	getMeshData("data/models/building_site2.ant2",1.7,"data/textures/models/building_site1.png"),
 	getMeshData("data/models/crop_high.ant2",2.2,"data/textures/models/crop_gold.png")
 	]
 		
@@ -63,7 +63,7 @@ class AntBuildingSite<AntRubyEntity
 	private
 	def setupMesh
 		
-		mesh=Mesh.new(getMap.getScene,getBuildingSiteMeshData(@progress),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMap.getScene,getBuildingSiteMeshData(@progress),AGVector4.new(0,0,0),-10)
 		setMesh(mesh)
 	end
 

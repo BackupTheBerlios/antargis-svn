@@ -4,6 +4,7 @@
 #include <ag_rendercontext.h>
 
 #include <ag_serial.h>
+#include <ag_main.h>
 
 //////////////////////////////////////////////////////////////////////
 // MeshData
@@ -17,7 +18,7 @@ MeshData::MeshData(const VertexArray &va,const std::string &pTexture,bool pShado
   CTRACE;
   mArray=va;
   mWithTexture=false;
-  if(pTexture!="")
+  if(pTexture!="" && videoInited())
     {
       mTexture=getTextureCache()->get(pTexture,getMeshDownScale());
       mWithTexture=true;
@@ -46,7 +47,7 @@ MeshData::MeshData(const std::string &filename,float zoom,const std::string &pTe
   //  mAlpha=false;
 
   mWithTexture=false;
-  if(pTexture!="")
+  if(pTexture!="" && videoInited())
     {
       mTexture=getTextureCache()->get(pTexture,getMeshDownScale());
       mWithTexture=true;

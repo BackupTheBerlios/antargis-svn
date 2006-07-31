@@ -1,6 +1,7 @@
 #include "height_map.h"
 #include "terrain.h"
 #include <ag_serial.h>
+#include <ag_main.h>
 
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
@@ -23,7 +24,10 @@ HeightMap::HeightMap(Scene *pScene,int w,int h):
   for(int t=FIRSTTERRAIN;t<LASTTERRAIN; t++)
     mTerrainTypes[TerrainType(t)]=genSomeHeights(w+2,h+2,1);
 
-  mTerrain=new Terrain(mScene,*this);
+  if(videoInited())
+    mTerrain=new Terrain(mScene,*this);
+  else
+    mTerrain=0;
 
   setTerrainScale(WATER,0);
   setTerrainScale(SAND,8/32.0);
@@ -264,7 +268,8 @@ void HeightMap::loadXML(const Node &node)
     }
   
   // compete change
-  mTerrain->mapChangedComplete();
+  if(mTerrain)
+    mTerrain->mapChangedComplete();
   //  mTerrain->addToScenes();
   mChanges=0;
   mChangeRect=AGRect2(AGVector2(),AGVector2());

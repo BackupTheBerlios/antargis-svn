@@ -101,17 +101,18 @@ if not $antargislibinited
 	puts xres,yres,$fullscreen
 	#raise #1
 
-	#if xres!=1024 || yres!=768 || $fullscreen
-	$main.initVideo(xres,yres,32,$fullscreen,true,1024,768)
-	#end
-
-	getConfig.set("xRes",xres.to_s)
-	getConfig.set("yRes",yres.to_s)
-	getConfig.set("fullscreen",$fullscreen.to_s)
-
-	$main.setCaption("Antargis")
-	$main.setIcon("data/gui/editor/tower1.png")
-
+	if $noVideo.nil?
+		#if xres!=1024 || yres!=768 || $fullscreen
+		$main.initVideo(xres,yres,32,$fullscreen,true,1024,768)
+		#end
+	
+		getConfig.set("xRes",xres.to_s)
+		getConfig.set("yRes",yres.to_s)
+		getConfig.set("fullscreen",$fullscreen.to_s)
+	
+		$main.setCaption("Antargis")
+		$main.setIcon("data/gui/editor/tower1.png")
+	end
 end
 
 def startGC

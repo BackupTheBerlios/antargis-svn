@@ -37,7 +37,9 @@ class Connection
 private
 	def send(x)
 		begin
+			puts "TRY SENDING"
 			@session.puts(x)
+			puts "SENT STH"
 		rescue
 		end
 	end
@@ -127,7 +129,9 @@ class Server
 	# add new connection
 	def addConnection(c)
 		@connections.push(c)
+		puts "new connection #{c}"
 		eventNewConnection(c)
+		puts "ok. had new connection"
 	end
 	def removeConnection(c)
 		@connections.delete!(c)

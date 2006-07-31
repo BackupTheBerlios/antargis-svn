@@ -5,17 +5,17 @@
 
 [Setup]
 AppName=Antargis
-AppVerName=Antargis 0.1.3
+AppVerName=Antargis 0.1.9
 DefaultDirName={pf}\Antargis
 DefaultGroupName=Antargis
 UninstallDisplayIcon={app}\Antargis.exe
 Compression=lzma/fast
 SolidCompression=yes
 ;InfoAfterFile=c:\Antargis\readme.txt
-OutputBaseFilename=Antargis-0.1.3-setup
+OutputBaseFilename=Antargis-0.1.9-setup
 AppPublisher=Antargis-Team
 AppPublisherURL=antargis.berlios.de
-AppVersion=0.1.3
+AppVersion=0.1.9
 
 
 [Files]

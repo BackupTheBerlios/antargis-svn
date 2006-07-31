@@ -33,10 +33,13 @@ class Client
 		:server
 	end
 	def processMessage(m)
+		puts "PROCESS..."
 		if m.class==TimeMessage
 			puts "TIME:#{m.time}"
 		end
+		puts "push in queue"
 		@queue.push(m)
+		puts "pushed"
 	end
 	def getMessage
 		if @queue.length>0
@@ -52,7 +55,9 @@ class Client
 private
 	def runThread
 		while true
+			#puts "GETTING STH"
 			c=@socket.gets
+			#puts "READ STH"
 			if c.nil? or c==""
 				break
 			end
@@ -61,7 +66,9 @@ private
 				m=AntMarshal.load(@instr)
 				l=AntMarshal.dump(m).length
 				@instr=@instr[(l+2)..-1] #(@instr.length-1)]
+				puts "Processing message"
 				processMessage(m)
+				puts "Processing message!"
 			rescue TypeError => e
 				puts "crappy data"
 				@instr=@instr[1..(@instr.length-1)] # ignore one char
@@ -96,6 +103,7 @@ class AntClient<Client
 				return true
 			when WelcomeMessage
 				@state=:loggedin
+				super
 				return true
 		end
 		return false

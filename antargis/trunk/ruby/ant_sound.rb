@@ -57,6 +57,8 @@ $loopSounds={}
 def playLoopSoundGlobal(id,name,pos,volume)
 	s={"fire"=>"data/sound/fire.wav"}[name]
 	return nil if s.nil?
+	return nil if $app.nil? or $app.getScene.nil?
+
 	d=(($app.getScene.getCamera.dim2-pos).length-INNER_VOL_SIZE)
 	vol=1
 	if d>0
@@ -89,6 +91,7 @@ end
 
 
 def ambientSound(time)
+	return nil if $app.nil?
 	if not $ambientSound
 		$ambientSound=getSoundManager.loopPlay("data/sound/wind_loop.wav",getVolume("ambient")*0.2)
 		getSoundManager.stopMp3

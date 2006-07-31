@@ -38,7 +38,8 @@ Smoke::Smoke(Scene *pScene,float f):
   mtime=0;
   freq=f;
   stime=1/freq;
-  mTexture=getTextureCache()->get("data/textures/point.png");
+  if(videoInited())
+    mTexture=getTextureCache()->get("data/textures/point.png");
   fire=false;
   setOrder(PARTICLE_Z);
   enabled=true;

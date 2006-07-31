@@ -86,7 +86,6 @@ ARTS
 [M] increase picking speed => use kd-tree or bsp
 [M] FBO without color-attachment ????
 [M] make particle engine more generic and include shader-support
-[L] make shadows work on other platforms too?
 [L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
 		There is a problem, too when zoomed in, as it's the current default.
 [L] check if TSM (trapezoidal shadow maps) are any good
@@ -97,6 +96,7 @@ ARTS
 [L] fix decals (use clamp-to-edge and original cells)
 [L] include 3d-texture-scaling into AGGLTexture-constr.
 [VL] seasons - snow,spring... Exchange or fade terrain textures.
+[VL] make shadows work on other platforms too?
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
@@ -122,7 +122,6 @@ ARTS
 [M] make finite state machine approach in entities more visible (?)
 [M] move from AntHouse to AntBoss:describe men's health and morale when inspecting
 [M] add fighting on boat
-[M] F1..F7 keys for hero selection
 [M] save current job :-(  high-level and low-level
 		low-level saving should be finished, but high-level makes some problems
 [M] tough breath when hero suffers

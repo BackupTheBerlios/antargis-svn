@@ -32,7 +32,6 @@ require 'server.rb'
 require 'ents.rb'
 require 'map.rb'
 
-
 #
 # AntServer is done from scratch, because we don't want any graphics display here.
 # it contains:
@@ -46,11 +45,13 @@ require 'map.rb'
 
 class AntServer<AGApplication
 	def initialize
+		puts "agApp::"
 		super
+		puts "agApp!"
 		# init GUI
-		@layout=AGLayout.new(nil)
-		@layout.loadXML(loadFile("data/gui/layout/server.xml"))
-		setMainWidget(@layout)
+		#@layout=AGLayout.new(nil)
+		#@layout.loadXML(loadFile("data/gui/layout/server.xml"))
+		#setMainWidget(@layout)
 
 		# add virtual Scene 
 		# FIXME: this should be discarded)
@@ -69,35 +70,41 @@ class AntServer<AGApplication
 		@queue=Queue.new
 	end
 	def eventFrame(t)
-		delay(50) # server should run at relatively low FPS=20 - this should be sufficient and saves CPU power
+		delay(20) # server should run at relatively low FPS=20 - this should be sufficient and saves CPU power
 		@map.move(t)
 
 		# do sync-calls
 		while @queue.length>0
+			puts "CALL BLOCK"
 			b=@queue.pop
 			b.call
 		end
 
 	end
-	def eventNoPlayer(name,connection)
+	def eventNewPlayer(name,connection)
+		puts "eventNewPlayer(name,connection)"
 		player,hero=@map.newPlayer(name)
 		
-		h=sendNewHeroMessages(player,hero,connection)
-		@server.sendToAllBut(h,connection)
+		#connection=nil # FIXME
+
+		sendNewHeroMessages(player,hero,connection)
+		#@server.sendToAllBut(h,connection)
 
 		# make a savegame-text and send it to the new player
 		doc=Document.new
 		doc.root.setName("antargisLevel")
 		@map.saveXML(doc.root)
 		m=WelcomeMessage.new(compress(doc.toString))
-		c.sendMessage(m)
+		connection.sendMessage(m)
 	end
 
-	private
+	#private
 	# this function executes any blocks that were queued in other threads in the main-thread
 	def syncCall(&block)
+		puts "PUSH BLOCK"
 		@queue.push(block)
 	end
+	private
 	def sendNewHeroMessages(player,hero,connection)
 		@server.sendToAllBut(NewPlayerMessage.new(player.getName,hero.getPos2D),connection)
 	end

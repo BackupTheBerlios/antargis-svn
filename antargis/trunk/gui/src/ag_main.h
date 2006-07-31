@@ -68,6 +68,7 @@ bool glMode();
 
 void setAppName(const std::string &pName);
 std::string getAppName();
+bool videoInited();
 
 
 #endif

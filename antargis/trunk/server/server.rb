@@ -36,18 +36,29 @@ class LoginServer<Server
 	end
 	def eventNewConnection(c)
 		super
+		puts "---------------------------------"
 		puts "new connection"
+		puts "---------------------------------"
 		# do nothing
 		seed=myhash(rand.to_s)
+		puts "SEED #{seed}"
 		@challenges[c]=seed
-		cm=ChallengeMessage.new(seed)
+		cm=ChallengeMessage.new(seed,$VERSION)
+		puts "cm created"
 		c.sendMessage(cm)
 	end
 	def processMessage(c,m)
 		case m
 			when LoginMessage
 				if @loginTable.check(m.name,m.pw,@challenges[c])
-					@app.syncCall { eventNewPlayer }
+					puts "LOGIN OK"
+					puts "doin synccall"
+					puts @app
+					puts @app.methods.sort.join(" ; ")
+					puts "doin synccall"
+					con=c
+					@app.syncCall { @app.eventNewPlayer(m.name,con) }
+					puts "doin synccall!"
 				else
 					puts "LOGIN WRONG"
 					c.sendMessage(ErrorMessage.new("Wrong Login"))

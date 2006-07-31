@@ -9,7 +9,7 @@ require 'buildtools.rb'
 $LDFLAGS+=" -L/usr/X11R6/lib "
 $CFLAGS+=" -I/usr/X11R6/include "
 
-version="0.1.3"
+version="0.1.9"
 
 $profile=true
 #$debug=true
@@ -100,6 +100,10 @@ else
 	$CFLAGS="-Ic:/msys/local/include/SDL -Ic:/msys/local/include -Dmain=SDL_main"
 	$LDFLAGS="-s -Wl,--enable-auto-import,--export-all "
 	$LDFLAGS+=" -Lc:/msys/local/lib -lmingw32 -lSDLmain -lSDL -mwindows "+$libs
+end
+
+if $drmuser!="" and $drmmd5!=""
+  $CFLAGS+=" -DDRMUSER='\"#{$drmuser}\"' -DDRMMD5='\"#{$drmmd5}\"'"
 end
 
 if $xcompile
