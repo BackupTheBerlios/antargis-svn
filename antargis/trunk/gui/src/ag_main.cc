@@ -36,6 +36,8 @@
 #include "SDL_image.h"
 #include <SDL_mixer.h>
 
+#include <ruby.h>
+
 int lastWidth=0;
 int lastHeight=0;
 int lastVWidth=0;
@@ -119,10 +121,25 @@ void AGMain::flip()
 
 std::string myHash(const std::string &p)
 {
-	// FIXME: TRY USING ruby's Digest::MD5::digest("xy")
+  // FIXME: TRY USING ruby's Digest::MD5::digest("xy")
+  rb_eval_string("require 'digest/md5'");
 
+  //  VALUE l=rb_gv_get("Digest::MD5");
+  //  VALUE r=rb_funcall(l,rb_intern("digest"),1,rb_str_new2(p.c_str()));
 
-  return p;
+  std::ostringstream os;
+  os<<"s=''; Digest::MD5::digest('"<<p<<"').each_byte{|b|s+=sprintf('%X',b)};s";
+
+  VALUE r=rb_eval_string(os.str().c_str());
+
+  std::string s;
+
+  s=STR2CSTR(r);
+
+  std::cout<<"p:"<<p<<std::endl;
+  std::cout<<"s:"<<s<<std::endl;
+
+  return s;
 }
 
 /**
@@ -212,7 +229,7 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   if(myHash(gUserName.substr(32,std::string::npos))==mhash.substr(32,std::string::npos))
     {
       std::cout<<"drm ok"<<std::endl;
-      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName,f);
+      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName.substr(32,std::string::npos),f);
       getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
       gDRMok=true;
       getScreen().flip();
@@ -221,7 +238,7 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   else
     {
       std::cout<<"drm falied"<<std::endl;
-      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName,f);
+      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName.substr(32,std::string::npos),f);
       getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
       //      getScreen().blit(*t);
       gDRMok=true;
