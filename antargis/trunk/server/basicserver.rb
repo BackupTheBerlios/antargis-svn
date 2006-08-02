@@ -10,7 +10,7 @@ require 'socket'
 
 # A connection is an object handling the connection of a server to the client
 class Connection
-	attr_accessor :name
+	attr_accessor :name, :id
 	def initialize(session,server)
 		@session=session
 		@server=server
@@ -26,8 +26,12 @@ class Connection
 
 	# send some message to the client
 	def sendMessage(m)
-		x=AntMarshal.dump(m)
-		send(x)
+		#Thread.start{
+			#puts "Marshalling #{m.class}"
+			x=AntMarshal.dump(m)
+			#File.open("muh","w").puts x
+			send(x)
+		#}
 	end
 	# identifies the other side of the connection
 	def type
@@ -36,33 +40,61 @@ class Connection
 
 private
 	def send(x)
-		begin
+		#begin
 			puts "TRY SENDING"
-			@session.puts(x)
+			puts Thread.object_id
+			puts "#{x.length} #{x.class}"
+			begin
+				@session.puts(x)
+			rescue Errno::EPIPE => e
+				puts "pipe broken"
+				@server.removeConnection(self)
+			rescue Errno::ECONNRESET => e
+				puts "pipe broken"
+				@server.removeConnection(self)
+			end
 			puts "SENT STH"
-		rescue
-		end
+		#rescue
+		#end
 	end
 	def run
-		while @session
-			c=@session.gets #recv(10000000)
-			if c.nil?
-				break
+		begin
+			while @session
+				c=@session.gets #recv(10000000)
+				if c.nil? or c==""
+					break
+				end
+				@instr+=c
+				begin
+					m=AntMarshal.load(@instr)
+					l=AntMarshal.dump(m).length
+					@instr=@instr[(l+2)..-1] #(@instr.length-1)]
+					#@instr=@instr[(l+1)..-1]
+					@server.pushMessage(self,m)
+				rescue TypeError => e
+					@instr=@instr[1..-1] #(@instr.length-1)] # ignore one char
+					puts "crappy data"
+					puts e
+					raise
+				rescue ArgumentError => e
+					# ignore - short of data
+					puts "too short?"
+				end
+				if @instr.nil?
+					@instr=""
+				end
+				puts "INSTR: #{@instr.length}"
+	
 			end
-			@instr+=c
-			begin
-				m=AntMarshal.load(@instr)
-				l=AntMarshal.dump(m).length
-				@instr=@instr[(l+1)..(@instr.length-1)]
-				@server.pushMessage(self,m)
-			rescue TypeError => e
-				@instr=@instr[1..(@instr.length-1)] # ignore one char
-				puts "crappy data"
-				puts e
-			rescue ArgumentError => e
-				# ignore - short of data
-			end
+		rescue Errno::EPIPE => e
+			puts "pipe broken"
+			@server.removeConnection(self)
+		rescue Errno::ECONNRESET => e
+			puts "pipe broken"
+			@server.removeConnection(self)
 		end
+		puts "LOST CONNECTION"
+
 	end
 end
 
@@ -72,7 +104,7 @@ class Server
 	def initialize
 		@port = $PORT.to_i
 		@server = TCPServer.new('localhost', @port)
-		@connections=[]
+		@connections={}
 		@queue=Queue.new
 		run
 	end
@@ -81,21 +113,30 @@ class Server
 	def join
 		@mthread.join
 	end
-	def send(x)
-		@connections.each{|c|
-			c.send(x)
-		}
+# 	def send(x)
+# 		@connections.each{|k,c|
+# 			c.send(x)
+# 		}
+# 	end
+
+	def sendMessage(id,m)
+		c=@connections[id]
+		if c
+			c.sendMessage(m)
+		end
 	end
 
-	def sendMessage(m)
-		@connections.each{|c|
+	def sendMessageToAll(m)
+		@connections.each{|k,c|
 			c.sendMessage(m)
 		}
 	end
 
 	def sendToAllBut(m,but)
-		@connections.each{|c|
-			if c!=but
+		raise 1 if but.is_a?(Connection)
+		@connections.each{|k,c|
+			puts "sendToAllBut(m,but) #{k} #{c}"
+			if k!=but
 				c.sendMessage(m)
 			end
 		}
@@ -103,44 +144,47 @@ class Server
 
 	# deprecated function - see processMessage
 	def recvMessage
+		r=nil	
 		begin
-			r=@queue.pop
+			if @queue.length>0
+				r=@queue.pop
+			end
 		rescue
 		end
 		r
 	end
 
-
-	# event-handlers - can be overridden
-	def eventNewConnection(c)
-	end
-	def eventLostConnection(c)
-	end
-
-
-	# processMessage is run in the connection's thread - so beware not to call any BoA thingies
-	# FIME: call this via syncCall - this way we've moved all thread-dependent things to this class and don't have to care about this
-	#       anywhere else. Have a look at ant_server how to do this. Then we can discard these other queues, too.
-	def processMessage(c,m)
-	end
-
-
 	# semi-private functions - should be called by Connection-objects only
 	# add new connection
 	def addConnection(c)
-		@connections.push(c)
+		id=getFirstConnectionID
+		@connections[id]=c
+		c.id=id
 		puts "new connection #{c}"
-		eventNewConnection(c)
+		#eventNewConnection(c)
+		m=NewConnectionMessage.new(id)
+		@queue.push([id,m])
 		puts "ok. had new connection"
 	end
 	def removeConnection(c)
-		@connections.delete!(c)
-		eventLostConnection(c)
+		@connections.delete(c.id)
+		
+		#eventLostConnection(c)
+
+		if @connections.length==0
+			# FIXME
+			puts "EEEEEEEEEEEEEEEXXXXXXXXXXXXXXIT"
+			m=NoPlayersMessage.new
+			@queue.push([0,m])
+			#exit
+		end
 	end
 	def pushMessage(c,m)
-		if (not processMessage(c,m))
-			@queue.push(m)
-		end
+		#if (not processMessage(c,m))
+		id=@connections.find{|k,v|v==c}[0]
+		@queue.push([id,m])
+		puts "PUSHED MESSAGE #{m}"
+		#end
 	end
 		
 private
@@ -151,12 +195,18 @@ private
 					begin
 						connection=Connection.new(session,self)
 						connection.runConnection
-					rescue e
-						puts e
+					#rescue e
+					#	puts e
 					end
 				end
 			end
 		}
+	end
+	def getFirstConnectionID
+		(0..1000).each{|i|
+			return i if @connections[i].nil?
+		}
+		raise "problem - too many connections"
 	end
 end
 

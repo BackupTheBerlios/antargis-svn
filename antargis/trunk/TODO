@@ -80,6 +80,7 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
+[H] game crashes when toggling fullscreen (in game)
 [H] check for GLEE_texture_3D extension or gl>1.3 or what support
 [H] try using GL_DYNAMIC_DRAW_ARB for dynamic vertexarrays and combine multiple meshes some how?
 [M] add support for non-3d-texture-graphic cards
@@ -100,6 +101,8 @@ ARTS
 
 [Game - Game-engine and ruby-scripts]
 ------------------------------------------------------
+[H] check translation scripts
+
 [H] wolves should attack people
 
 [?] Rowen dies too fast of starvation when fighting

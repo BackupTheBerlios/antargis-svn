@@ -51,8 +51,12 @@ module Libantargis
 		end
 	end
 	class AGVector2
-		def marshal_dump
-			[x,y]
+		def _dump(depth)
+			[x,y].pack("gg")
+		end
+		def AGVector2._load(s)
+			a,b=s.unpack("gg")
+			AGVector2.new(a,b)
 		end
 	end
 end

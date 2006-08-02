@@ -181,8 +181,9 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def assignJob2All
-		puts "ASSIGNJOB2All:"
-		puts @job
+		if getMap
+			getMap.eventNewJobAssignedToBoss(self)
+		end
 		@men.each{|man|
 			man.delJob
 			assignJob(man)

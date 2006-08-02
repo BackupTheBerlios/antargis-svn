@@ -221,7 +221,6 @@ class AntHero<AntBoss
 	
 	def assignJob2All
 		super
-		dputs "ASSIGNJOB"
 		if @job.class!=AntHeroRestJob
 			setFire(false)
 		end

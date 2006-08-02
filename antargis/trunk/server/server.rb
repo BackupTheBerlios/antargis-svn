@@ -34,7 +34,18 @@ class LoginServer<Server
 		@challenges={}
 		@app=app
 	end
-	def eventNewConnection(c)
+
+	def processMessages(map)
+		puts "processMessages...................."
+		while (r=recvMessage)
+			puts "processMessages.!!!!!!!!!!!!!!!!!!!!!!!!..................."
+			c,m=r
+			puts "RECV: #{c.class} #{m.class}"
+			processMessage(c,m)
+			map.processMessage(m)
+		end
+	end
+	def eventNewConnectionOld(c)
 		super
 		puts "---------------------------------"
 		puts "new connection"
@@ -49,15 +60,24 @@ class LoginServer<Server
 	end
 	def processMessage(c,m)
 		case m
+			when NewConnectionMessage
+				seed=myhash(rand.to_s)
+				puts "SEED #{seed}  #{c}"
+				@challenges[c]=seed
+				cm=ChallengeMessage.new(seed,$VERSION)
+				puts "cm created"
+				sendMessage(c,cm)
+			when NoPlayersMessage
+				puts "NO PLAYERS LEFT!"
+				#exit
 			when LoginMessage
+				puts "login-try #{c}"
+				raise 1 if not c.is_a?(Fixnum)
 				if @loginTable.check(m.name,m.pw,@challenges[c])
 					puts "LOGIN OK"
-					puts "doin synccall"
 					puts @app
-					puts @app.methods.sort.join(" ; ")
-					puts "doin synccall"
 					con=c
-					@app.syncCall { @app.eventNewPlayer(m.name,con) }
+					@app.eventNewPlayer(m.name,con)
 					puts "doin synccall!"
 				else
 					puts "LOGIN WRONG"
@@ -66,6 +86,11 @@ class LoginServer<Server
 				end
 				return true
 			else
+				puts "------------------------------------------------"
+				puts "MESSAGE_TYPE: #{m}"
+				puts "------------------------------------------------"
+				
+				sendToAllBut(m,c)
 				puts "Unknown message type."
 		end
 		return false
@@ -75,7 +100,7 @@ end
 def serverTest
 	table=SimpleLoginTable.new
 	table.addPlaintext("muh","puh")
-	server=LoginServer.new(table)
+	server=LoginServer.new(table,nil)
 	
 	for i in 0..100
 		t=TimeMessage.new(i)

@@ -79,6 +79,28 @@ class AntRubyMap<AntMap
 		}
 
 		@filename="dummy"  # a dummy filename - used for level scripting
+		@uidstart=0
+	end
+
+	def getUniqueID
+		@uidstart+=1
+		@uidstart
+	end
+	def checkUID(i)
+		@uidstart=[i,@uidstart].max
+	end
+	def getByUID(id)
+		ents=getAllEntitiesV
+		ents.each{|e|
+			r=e.get
+			if r.uid==id
+				return r
+			end
+		}
+		puts id
+		puts id.class
+		raise "UID not found #{id}"
+		nil
 	end
 
 	############################
@@ -91,13 +113,13 @@ class AntRubyMap<AntMap
 		if @script
 			@script.eventHeroDied(ent)
 		end
-		$app.setupHeroDisplay
+		$app and $app.setupHeroDisplay
 	end
 	def eventOwnerChanged(ent)
 		if @script
 			@script.eventOwnerChanged(ent)
 		end
-		$app.setupHeroDisplay
+		$app and $app.setupHeroDisplay
 	end
 	def eventHLJobFinished(hero,job)
 		if @script

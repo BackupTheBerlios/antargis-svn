@@ -48,16 +48,28 @@ class Client
 		return nil
 	end
 	def sendMessage(m)
-		@socket.puts(AntMarshal.dump(m))
-		#@socket.flush
-		puts "message sent"
+		d=AntMarshal.dump(m)
+		Thread.critical=true
+		begin
+			@socket.puts d
+		rescue Errno::EPIPE => e
+			Thread.critical=false
+			connectLost
+		rescue Errno::ECONNRESET => e
+			Thread.critical=false
+			connectLost
+		end
+		puts "message sent    #{d.length}"
+	end
+
+	def connectLost
+			puts "CONNECTION LOST"	
+			exit
 	end
 private
 	def runThread
 		while true
-			#puts "GETTING STH"
 			c=@socket.gets
-			#puts "READ STH"
 			if c.nil? or c==""
 				break
 			end
@@ -89,22 +101,25 @@ private
 end
 
 class AntClient<Client
+	attr_accessor :name
 	def initialize(user,pw)
 		super()
-		@user=user
+		@name=user
 		@pw=pw
 		@state=:login
 	end
 	def processMessage(m)
 		case m
 			when ChallengeMessage
-				sendMessage(LoginMessage.new(@user,myhash(m.challenge+myhash(@user+@pw)),getProtocolVersion))
+				sendMessage(LoginMessage.new(@name,myhash(m.challenge+myhash(@name+@pw)),getProtocolVersion))
 				puts "try login"
 				return true
 			when WelcomeMessage
 				@state=:loggedin
 				super
 				return true
+			else
+				super
 		end
 		return false
 	end
@@ -112,7 +127,7 @@ class AntClient<Client
 	def state
 	end
 	def getName
-		@user
+		@name
 	end
 end
 
@@ -123,7 +138,7 @@ welcomeMessage=nil
 #wait for welcome message
 while true
 	welcomeMessage=client.getMessage
-	if (not welcomeMessage.nil?)
+	if welcomeMessage.is_a?(WelcomeMessage) #(not welcomeMessage.nil?)
 		break
 	end
 	sleep 0.1
@@ -131,6 +146,8 @@ end
 
 # decompress level-text
 leveltext=uncompress(welcomeMessage.level)
+client.name=welcomeMessage.name
+File.open("leveltext","w").puts leveltext
 # start level
 startGame(leveltext,client)
 

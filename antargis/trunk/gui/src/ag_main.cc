@@ -30,6 +30,7 @@
 #include "ag_debug.h"
 #include "ag_mixer.h"
 #include "ag_surfacemanager.h"
+#include "ag_fontengine.h"
 #include "privates.h"
 #include <SDL.h>
 #include "SDL_image.h"
@@ -53,10 +54,9 @@ void deleteInstanceKiller();
 
 void initSoundEngine();
 
-#ifdef SIMPLE_DRM
-std::string gUserName=DRM_USERNAME;
+#ifdef DRMUSER
+std::string gUserName=DRMUSER;
 bool gDRMok=false;
-
 #endif
 
 bool hasQuit()
@@ -119,6 +119,9 @@ void AGMain::flip()
 
 std::string myHash(const std::string &p)
 {
+	// FIXME: TRY USING ruby's Digest::MD5::digest("xy")
+
+
   return p;
 }
 
@@ -201,25 +204,29 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
 
 
-#ifdef SIMPLE_DRM
+#ifdef DRMMD5
 
-  std::string hash(DRM_MD5);
+  std::string mhash(DRMMD5);
+  AGFont f("Arial.ttf",23);
 
-  if(myHash(gUserName.substr(32,std::string::npos)==hash.substr(32,std::string::npos)))
+  if(myHash(gUserName.substr(32,std::string::npos))==mhash.substr(32,std::string::npos))
     {
-      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName);
-      getScreen()->blit(t);
+      std::cout<<"drm ok"<<std::endl;
+      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert fÃ¼r :"+gUserName,f);
+      getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
       gDRMok=true;
-      getScreen()->flip();
-      SDL_delay(1000);
+      getScreen().flip();
+      SDL_Delay(1000);
     }
   else
     {
-      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName);
-      getScreen()->blit(t);
+      std::cout<<"drm falied"<<std::endl;
+      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert fÃ¼r :"+gUserName,f);
+      getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
+      //      getScreen().blit(*t);
       gDRMok=true;
-      getScreen()->flip();
-      SDL_delay(4000);
+      getScreen().flip();
+      SDL_Delay(4000);
       exit(1);
     }
 

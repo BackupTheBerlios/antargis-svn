@@ -70,6 +70,11 @@ class AntHeroMoveJob<AntHLJob
 		@movingMen=0
 		@hero.formation=AntFormationBlock.new(@hero,@formatDir)
 	end
+
+	def makeMessage(boss)
+		MoveMessage.new(boss,@pos,@dist)
+	end
+
 	def image
 		"data/gui/move.png"
 	end
@@ -169,6 +174,11 @@ class AntHeroFightJob<AntHeroMoveJob
  		end
 		@finished=false
 	end
+
+	def makeMessage(boss)
+		FightMessage.new(@hero.uid,@target.uid,@defend)
+	end
+
 
 	def finished
 		@finished
@@ -768,6 +778,9 @@ class AntHeroRestJob<AntHLJob
 		@hero.formation=AntFormationRest.new(@hero)
 		@basePos=@hero.getPos2D
 		@firstTime=true
+	end
+	def makeMessage(boss)
+		RestMessage.new(boss,@time)
 	end
 	def image
 		"data/gui/bed.png"

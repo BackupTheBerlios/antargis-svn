@@ -33,6 +33,7 @@ require 'map.rb'
 require 'view.rb'
 require 'game_result.rb'
 require 'storyflow.rb'
+require 'mpmap.rb'
 
 def getSavePath
 	"savegames"
@@ -71,7 +72,7 @@ class AntGameApp <AntRubyView
 		end
 
 		# init game-engine's map
-		@map=AntRubyMap.new(getScene,32,32,playerName) # some small dummy size - gets overriden by loadMap anyway
+		@map=AntMpMap.new(connection,getScene,32,32,playerName) # some small dummy size - gets overriden by loadMap anyway
 		if loadscreen
 			loadscreen.setValue(0.4)
 			loadscreen.tick
@@ -254,7 +255,13 @@ class AntGameApp <AntRubyView
 		getScene.advance(time)
 		checkHeroEnergy
 
+		processMessages
+
 		# save some CPU-power, if available
+		if @connection
+			delay(20)
+		end
+
 		if @fps>25
 			delay(5)
 		end
@@ -360,9 +367,18 @@ class AntGameApp <AntRubyView
 		end
 	end
 
+
 	###############################
 	# simple functions
 	###############################
+
+	def processMessages
+		if @connection
+			while message=@connection.getMessage
+				@map.processMessage(message)
+			end
+		end
+	end
 
 	def buildHouse(pos)
 		@layout.addChild(AntBuildDialog.new(@layout,pos,@hero))

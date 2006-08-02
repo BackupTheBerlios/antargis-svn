@@ -7,6 +7,14 @@
 class Message
 end
 
+class NewConnectionMessage<Message
+	attr_reader :id
+	def initialize(id)
+		@id=id
+		puts "NewConnectionMessage<Message"
+	end
+end
+
 class ChallengeMessage<Message
 	attr_reader :challenge, :version
 	def initialize(c,version)
@@ -25,9 +33,12 @@ class LoginMessage<Message
 end
 
 class WelcomeMessage<Message
-	attr_reader :level
-	def initialize(level)
+	attr_reader :level,:name
+	def initialize(level,name)
 		@level=level
+		@name=name
+		#puts level
+		#exit
 	end
 end
 
@@ -60,6 +71,37 @@ class ErrorMessage<Message
 	end
 end
 
+class MoveMessage<Message
+	attr_reader :hero,:pos,:dist
+	def initialize(h,p,d)
+		@hero=h
+		@pos=p
+		@dist=d
+	end
+end
+
+class FightMessage<Message
+	attr_reader :hero,:target,:defend
+	def initialize(h,t,d)
+		@hero=h
+		@target=t
+		@defend=d
+	end
+end
+
+class RestMessage<Message
+	attr_reader :hero,:time
+	def initialize(h,t)
+		@hero=h
+		raise "uid is nil!" if @hero.nil?
+		@time=t
+	end
+end
+
+class NoPlayersMessage<Message
+end
+
+
 # Protocol-version
 # FIXME: this should be checked somewhere in the protocol
 def getProtocolVersion
@@ -75,6 +117,11 @@ module AntMarshal
 		d=Marshal.dump(x)
 		len=d.length
 		#puts "MARSHAL LEN:#{len}"
+
+		puts "ANtMarshal.dump            LEN:#{len}"
+
+		puts d[0].to_s+" "+d[1].to_s+" "+d[2].to_s
+
 		# add length (4 bytes) in network-byte-order
 		[len].pack("N")+d
 	end
@@ -85,13 +132,18 @@ module AntMarshal
 			raise ArgumentError.new
 		end
 		len=x.unpack("N")[0] # get the length
+		puts "ANtMarshal.load            LEN:#{len} #{x.length-4}"
+
 		if x.length>=len+4
 			rest=x[4..-1] # get the rest of the string
+			d=rest
+			puts d[0].to_s+" "+d[1].to_s+" "+d[2].to_s
+
 			begin
 				r=Marshal.load(rest) # recreate object
-			rescue e
+			#rescue e
 				# some major Problem arised.
-				raise "ERROR in AntMarshal"
+			#	raise "ERROR in AntMarshal"
 			end
 			return r
 		end

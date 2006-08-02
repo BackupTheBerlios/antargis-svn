@@ -31,6 +31,7 @@ OUTER_VOL_SIZE=25 # size circle around camera describing volume descend
 # This should be used for all the entity-types.
 class AntRubyEntity<AntEntity
 	attr_accessor :birthday
+	attr_reader :uid
 	def initialize(p)
 		super(p)
 		@xmlProps={}
@@ -38,6 +39,8 @@ class AntRubyEntity<AntEntity
 		@mode=""
 		@handlers={}
 		self.learnAmount=0.05
+	
+		@uid=getMap.getUniqueID
 
 		#self.experience=0
 
@@ -64,6 +67,10 @@ class AntRubyEntity<AntEntity
 			@birthday=node.get("birthday").to_f
 		end
 		@mode=node.get("mode")
+		if node.get("uid")!=""
+			@uid=node.get("uid").to_i
+			getMap.checkUID(@uid)
+		end
 	end
 	def saveXML(node)
 		super(node)
@@ -74,6 +81,7 @@ class AntRubyEntity<AntEntity
 			node.set("birthday",@birthday.to_s)
 		end
 		node.set("mode",@mode)
+		node.set("uid",@uid.to_s)
 	end
 	def getDescription
 		"This is an entity - no more info here."
@@ -118,6 +126,7 @@ class AntRubyEntity<AntEntity
 	end
 
 	def playSound(name,minDiff=0.5)
+		return if $app.nil?
 		d=(($app.getScene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
 		vol=1
 		if d>0

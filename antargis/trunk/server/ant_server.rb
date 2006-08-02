@@ -30,7 +30,7 @@ require 'antargislib.rb'
 require 'server/config.rb'
 require 'server.rb'
 require 'ents.rb'
-require 'map.rb'
+require 'mpmap.rb'
 
 #
 # AntServer is done from scratch, because we don't want any graphics display here.
@@ -49,15 +49,12 @@ class AntServer<AGApplication
 		super
 		puts "agApp!"
 		# init GUI
-		#@layout=AGLayout.new(nil)
-		#@layout.loadXML(loadFile("data/gui/layout/server.xml"))
-		#setMainWidget(@layout)
 
 		# add virtual Scene 
 		# FIXME: this should be discarded)
 		@scene=Scene.new(128,128)
 		# add Map
-		@map=AntRubyMap.new(@scene,128,128)
+		@map=AntMpMap.new(nil,@scene,128,128)
 		$map=@map
 		# load some map - currently a default one
 		@map.loadMap("levels/multiplayer/multimap1.antlvl")
@@ -67,46 +64,40 @@ class AntServer<AGApplication
 		table.addPlaintext("muh","puh")
 		# now start the server-object
 		@server=LoginServer.new(table,self)
-		@queue=Queue.new
+		@names=[]
+		@framenr=0
 	end
 	def eventFrame(t)
 		delay(20) # server should run at relatively low FPS=20 - this should be sufficient and saves CPU power
 		@map.move(t)
 
-		# do sync-calls
-		while @queue.length>0
-			puts "CALL BLOCK"
-			b=@queue.pop
-			b.call
+		@server.processMessages(@map)
+		@framenr+=1
+		if @framenr>50
+			@server.sendMessageToAll(TimeMessage.new(getMap.getTime))
+			@framenr=0
 		end
-
 	end
 	def eventNewPlayer(name,connection)
 		puts "eventNewPlayer(name,connection)"
+		while @names.member?(name)
+			name+="_"
+		end
+		@names.push(name)
+	
 		player,hero=@map.newPlayer(name)
-		
-		#connection=nil # FIXME
 
 		sendNewHeroMessages(player,hero,connection)
-		#@server.sendToAllBut(h,connection)
-
-		# make a savegame-text and send it to the new player
 		doc=Document.new
 		doc.root.setName("antargisLevel")
 		@map.saveXML(doc.root)
-		m=WelcomeMessage.new(compress(doc.toString))
-		connection.sendMessage(m)
+		m=WelcomeMessage.new(compress(doc.toString),name)
+		@server.sendMessage(connection,m)
 	end
 
-	#private
-	# this function executes any blocks that were queued in other threads in the main-thread
-	def syncCall(&block)
-		puts "PUSH BLOCK"
-		@queue.push(block)
-	end
 	private
 	def sendNewHeroMessages(player,hero,connection)
-		@server.sendToAllBut(NewPlayerMessage.new(player.getName,hero.getPos2D),connection)
+		@server.sendToAllBut(NewPlayerMessage.new(hero.getPos2D,player.getName),connection)
 	end
 end
 

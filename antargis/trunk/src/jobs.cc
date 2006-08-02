@@ -269,6 +269,10 @@ void FightJob::move(AntEntity *e,float ptime)
   if(mTarget==0)
     {
       mTarget=getMap()->getEntity(mTargetID);
+      if(!mTarget)
+	{
+	  cdebug("Could not find id:"<<mTargetID);
+	}
       assert(mTarget);
     }
 
