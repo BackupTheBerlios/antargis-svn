@@ -175,3 +175,12 @@ ARTS
 [Packaging / Building]
 ------------------------------------------------------
 [L] installer for linux. maybe some autopackage or .debs?
+
+
+
+DOCUMENTATION
+======================================================
+[H] Architecture
+[H] comments in ruby-scripts
+[H] comments in game-engine
+[H] comments in 3d-engine
