@@ -45,10 +45,7 @@ require 'mpmap.rb'
 
 class AntServer<AGApplication
 	def initialize
-		puts "agApp::"
 		super
-		puts "agApp!"
-		# init GUI
 
 		# add virtual Scene 
 		# FIXME: this should be discarded)
@@ -79,7 +76,6 @@ class AntServer<AGApplication
 		end
 	end
 	def eventNewPlayer(name,connection)
-		puts "eventNewPlayer(name,connection)"
 		while @names.member?(name)
 			name+="_"
 		end

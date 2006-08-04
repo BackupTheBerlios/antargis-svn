@@ -23,6 +23,15 @@
 
 require 'ents.rb'
 
+class UID
+	def initialize(id)
+		@id=id
+	end
+	def method_missing(n,*args)
+		getMap.getByUID(@id).send(n,*args)
+	end
+end
+
 class AntHLJob
 	def undefeatedMen
 		@hero.getMen
@@ -36,9 +45,73 @@ class AntHLJob
 		self.class.to_s
 	end
 	def saveXML(n)
+		puts "SAVEXML"
+		puts self
+		instance_variables.each{|name|
+			c=n.addChild("param")
+			value=instance_variable_get(name)
+			case value
+				when AntEntity
+					value=value.uid
+					type="uid"
+					c.set("type","AntEntity")
+				when Array
+					if value[0].is_a?(AntEntity)
+						c.set("type","AntEntities")
+						value=value.collect{|v|v.uid.to_s}.join(",")
+					end
+				when Fixnum,Float,TrueClass,FalseClass
+					c.set("type",value.class.to_s)
+				when AGVector2
+					c.set("type","AGVector2")
+				when String
+					# do nothing
+					c.set("type","String")
+				else
+					value=AntMarshal.dump(value)
+			end
+			puts "#{value} #{name}"
+			c.set("name",name)
+			c.set("value",value.to_s)
+		}
+	
 		#FIXME
 	end
 	def loadXML(n)
+		n.getChildren.each{|c|
+			name=c.get("name")
+			value=c.get("value")
+			type=c.get("type")
+			if name and name!=""
+				puts "TYPE: #{c.get("type")}"
+				case c.get("type")
+					when "AntEntity"
+						value=UID.new(value.to_i) #getMap.getByUID(value.to_i)
+					when "AntEntities"
+						value=value.split(",").collect{|v|UID.new(v.to_i)} #getMap.getByUID(v)}
+					when "AGVector2"
+						x,y=value.gsub("(","").gsub(")","").split(",").collect{|v|v.to_f}
+						value=AGVector2.new(x,y)
+						puts value
+						#raise 1
+					when "Fixnum"
+						value=value.to_i
+					when "Float"
+						value=value.to_f
+					when "TrueClass"
+						value=true
+					when "FalseClass"
+						value=false
+					when "String"
+						# do nothing
+					else
+						puts "unknown type for #{name}"
+						value=AntMarshal.load(c.get("value"))
+				end
+				instance_variable_set(name,value)
+			end
+		}
+		#raise 1
 		#FIXME
 	end
 	def playSound(s)

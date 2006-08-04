@@ -102,7 +102,7 @@ else
 	$LDFLAGS+=" -Lc:/msys/local/lib -lmingw32 -lSDLmain -lSDL -mwindows "+$libs
 end
 
-if $drmuser!="" and $drmmd5!=""
+if $drmuser and $drmmd5
   $CFLAGS+=" -DDRMUSER='\"#{$drmuser}\"' -DDRMMD5='\"#{$drmmd5}\"'"
 end
 
@@ -376,5 +376,5 @@ end
 task :doc do
 	puts "running doxygen"
 	`doxygen Doxyfile`
-	`rdoc --op docs/ruby --exclude "(.cc|.c|skat|test\/)"`
+	`rdoc --op docs/ruby --exclude "(\\.cc|\\.c|skat|test\/|contrib)"`
 end

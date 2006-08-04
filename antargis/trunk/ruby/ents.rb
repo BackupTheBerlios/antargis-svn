@@ -191,6 +191,13 @@ class AntRubyEntity<AntEntity
 		super
 		doEvent(:eventJobFinished)
 	end
+
+# 	def _dump(depth)
+# 		[@uid].pack("n")
+# 	end
+# 	def _load(s)
+# 		getMap.getByUID(s.unpack("n"))
+# 	end
 end
 
 # here comes a list of all the different entity-types BoA currently uses:

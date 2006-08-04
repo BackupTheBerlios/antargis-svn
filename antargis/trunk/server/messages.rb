@@ -114,9 +114,9 @@ end
 
 module AntMarshal
 	def AntMarshal.dump(x)
+		puts "try marshalling #{x}"
 		d=Marshal.dump(x)
 		len=d.length
-		#puts "MARSHAL LEN:#{len}"
 
 		puts "ANtMarshal.dump            LEN:#{len}"
 

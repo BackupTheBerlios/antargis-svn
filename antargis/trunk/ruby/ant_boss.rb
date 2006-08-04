@@ -47,6 +47,18 @@ class AntBoss<AntRubyEntity
 				@createMen=node.get("men").to_i
 			end
 		end
+		node.getChildren("hljob").each{|n|
+			t=n.get("type")
+			case t
+				when "AntHeroMoveJob"
+					@job=AntHeroMoveJob.new(self,0,AGVector2.new(0,0),0)
+				when "AntRestJob"
+					@job=AntHeroMoveJob.new(self,10)
+				else
+					raise "unknown job"
+			end
+			@job.loadXML(n)
+		}
 		setAggression(getAggression) # update aggression of men
 	end
 # for recruiting

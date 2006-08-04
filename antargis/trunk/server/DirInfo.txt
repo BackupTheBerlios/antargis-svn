@@ -1,0 +1,19 @@
+This directory contains the files for the base-functionality of client/server handling.
+There are some common files, which are used by both the client and the server:
+COMMON FILES:
+ config.rb       # contains some definitions about protocol and ports
+ messages.rb     # contains all the used message-types, that are sent and some additions to ruby's marshaling
+
+CLIENT:
+ client.rb       # this contains a simple threaded TCP-client, that encapsulates the threading and message passing
+ ant_client.rb   # this one contains a simple login-process and gives control to the AntGameApp in antargis.rb after that
+
+SERVER: (console only)
+ basicserver.rb  # this one contains (like client.rb) a threaded TCP-server encapsulating threading and message passing
+ server.rb       # contains functionality for a login-process and gives messages to the MultiPlayerMap-object (mpmap.rb)
+ ant_server.rb   # This hold the application object of the server
+
+
+This one is currently not used, because the ruby-marshalling is used for a start:
+* mymarshal.rb
+
