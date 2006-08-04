@@ -1,5 +1,6 @@
 This directory contains the files for the base-functionality of client/server handling.
 There are some common files, which are used by both the client and the server:
+
 COMMON FILES:
  config.rb       # contains some definitions about protocol and ports
  messages.rb     # contains all the used message-types, that are sent and some additions to ruby's marshaling
