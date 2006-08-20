@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 class PCRule
 end

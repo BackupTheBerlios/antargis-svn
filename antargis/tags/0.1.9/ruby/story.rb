@@ -2,7 +2,6 @@
 
 require 'ruby/antargislib.rb'
 
-
 class Black<AGWidget
 	def initialize(p,r)
 		super

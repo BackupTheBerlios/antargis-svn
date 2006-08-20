@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
@@ -115,11 +114,10 @@ class AntStoryTalk<AntDialog
 		updateText
 	end
 	def setText(text)
-		toAGEdit(getChild("text")).setText(_(text))
+		getChild("text").setText(_(text))
 	end
 	def setTitle(text)
-		# it's AGText # FIXME: maybe exchange all AGText usages by AGEdit
-		toAGText(getChild("title")).setText(_(text))
+		getChild("title").setText(_(text))
 	end
 
 	def setFace(s)

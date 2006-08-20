@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 def getFieldMeshData(size)
 	if $fieldMeshes.nil?

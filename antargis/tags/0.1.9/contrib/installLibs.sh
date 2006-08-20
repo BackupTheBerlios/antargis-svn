@@ -219,6 +219,7 @@ build_libsdl_image
 build_smpeg
 
 build_libsdl_ttf
+build_libsdl_ttf
 build_libsdl_mixer
 
 build_ruby

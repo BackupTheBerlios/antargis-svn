@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 require 'config.rb'
 require 'thread.rb'

@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 def getGrassMeshData(size,many=4,texture=nil,bush=false)
 	size=(size*10).to_i/10.0

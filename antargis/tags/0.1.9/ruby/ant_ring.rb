@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 def getRingData(w=1)
 	$ringdata||=[]

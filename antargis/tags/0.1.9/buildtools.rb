@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 $mwindows||=nil
 def windows

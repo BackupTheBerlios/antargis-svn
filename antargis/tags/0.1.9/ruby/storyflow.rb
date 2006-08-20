@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 class StoryFlow
 	attr_reader :name, :s

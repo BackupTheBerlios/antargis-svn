@@ -1,4 +1,3 @@
-#!/usr/bin/env
 
 def getFirMeshData
 	if $firdata

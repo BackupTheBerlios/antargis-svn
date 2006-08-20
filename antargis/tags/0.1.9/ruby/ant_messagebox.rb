@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 class MessageBox<AntDialog
 	include AGHandler

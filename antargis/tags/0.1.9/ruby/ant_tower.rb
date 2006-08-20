@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 class AntTower<AntHouse
 	def initialize

@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 # A farm produces food, uses men and tools
 #

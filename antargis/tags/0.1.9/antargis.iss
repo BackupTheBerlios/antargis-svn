@@ -19,7 +19,7 @@ AppVersion=0.1.9
 
 
 [Files]
-Source: "z:\home\david\projects\antargis\ant\antargis-0.1.3\*"; DestDir: "{app}"; Flags:recursesubdirs
+Source: "z:\home\david\projects\antargis\0.1.9\antargis-0.1.9\*"; DestDir: "{app}"; Flags:recursesubdirs
 
 [Icons]
 Name: "{group}\Antargis"; Filename: "{app}\Antargis.lnk" ; WorkingDir: "{app}"

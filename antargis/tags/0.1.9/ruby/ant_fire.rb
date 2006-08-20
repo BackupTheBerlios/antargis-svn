@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 class AntFire<AntRubyEntity
 	def initialize(p=AGVector2.new(0,0))

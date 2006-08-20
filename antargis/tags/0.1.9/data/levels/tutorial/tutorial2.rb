@@ -22,7 +22,7 @@ class Level1<Level
 				@defeat=true
 				start=StoryFlow.new("sheep")
 				start.push("Tutorial","Press the construct button. But beware that your men do rest enough.")
-				start.push("Tutorial","When you have enough weopons and armour you can take it all up by pressing the 'take weapon' button.")
+				start.push("Tutorial","When you have enough weapons and armour you can take it all up by pressing the 'take weapon' button.")
 				tellStory(start)
 			else
 				if hero.getPlayer==getMap.getPlayer

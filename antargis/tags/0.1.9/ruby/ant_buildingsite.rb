@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 def getBuildingSiteMeshData(size)
 	if $buildingSiteMeshes.nil?

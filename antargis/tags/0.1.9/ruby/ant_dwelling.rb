@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 BIRTHING_TIME=80
 MAX_RESIDENTS=10
