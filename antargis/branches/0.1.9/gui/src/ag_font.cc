@@ -34,7 +34,7 @@ AGFont::AGFont(const std::string &pFile,int size):
 
 AGFont::AGFont()
 {
-  mName="Arial.ttf";
+  mName="FreeSans.ttf";
   mSize=14;
   mColor=AGColor(0xFF,0xFF,0xFF);
   mAlpha=0xFF;

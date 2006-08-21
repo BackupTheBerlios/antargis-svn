@@ -11,8 +11,8 @@ class AntTicker<AGWidget
 		@y=-height
 		@time=0
 		@text=text.gsub("\t","").split("\n")
-		@nfont=AGFont.new("Arial.ttf",24)
-		@cfont=AGFont.new("Arial.ttf",24)
+		@nfont=AGFont.new("FreeSans.ttf",24)
+		@cfont=AGFont.new("FreeSans.ttf",24)
 		@starttime=-1
 		@speed=0.03
 	end

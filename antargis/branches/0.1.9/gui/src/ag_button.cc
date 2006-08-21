@@ -35,7 +35,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,in
 {
   mImageW=0;
   setTheme("");
-  AGFont font("Arial.ttf");
+  AGFont font("FreeSans.ttf");
   font.setColor(AGColor(0,0,0));
   mTextW=new AGEdit(this,r.origin().shrink(borderWidth));//,mText,font);
   mTextW->setText(mText);

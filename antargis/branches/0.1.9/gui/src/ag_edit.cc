@@ -268,8 +268,8 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   mMaxLength=-1;
   mMutable=true;
   mShowCursor=true;
-  AGFont font1("Arial.ttf",14);
-  AGFont font2("Arial.ttf",13);
+  AGFont font1("FreeSans.ttf",14);
+  AGFont font2("FreeSans.ttf",13);
   font1.setColor(AGColor(0,0,0));
   font2.setColor(AGColor(0,0,0xFF));
   AGEditLine l("",font1,true);
@@ -915,7 +915,7 @@ void AGEdit::clear()
   mLines.clear();
   mCx=mCy=0;
   mViewCy=0;
-  AGFont font1("Arial.ttf",14);
+  AGFont font1("FreeSans.ttf",14);
   AGEditLine l("",font1,true);
   l.setAlign(mAlign);
   l.setVAlign(mVAlign);

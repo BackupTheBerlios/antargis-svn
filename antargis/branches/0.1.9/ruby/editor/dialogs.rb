@@ -87,7 +87,7 @@ class AntEditGeneratorDialog<AntDialog
 		y=0
 		#table.arrange
 		params.params.each{|p|
-			n=AGText.new(table,AGRect2.new(0,0,80,20),p.to_s+":",AGFont.new("Arial.ttf",20))
+			n=AGText.new(table,AGRect2.new(0,0,80,20),p.to_s+":",AGFont.new("FreeSans.ttf",20))
 			#n.setAlign(AGText::RIGHT)
 			#n=AGButton.new(table,AGRect2.new(0,0,80,20),"huhuhu")
 			table.addChild(0,y,n)
