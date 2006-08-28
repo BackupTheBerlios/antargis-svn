@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 # here the current messages are defined
 # this is really easy. We let ruby make the work of serializing them to binary for now.

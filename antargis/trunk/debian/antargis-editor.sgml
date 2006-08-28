@@ -1,0 +1,138 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+
+<!-- Process this file with docbook-to-man to generate an nroff manual
+     page: `docbook-to-man manpage.sgml > manpage.1'.  You may view
+     the manual page with: `docbook-to-man manpage.sgml | nroff -man |
+     less'.  A typical entry in a Makefile or Makefile.am is:
+
+manpage.1: manpage.sgml
+	docbook-to-man $< > $@
+
+    
+	The docbook-to-man binary is found in the docbook-to-man package.
+	Please remember that if you create the nroff version in one of the
+	debian/rules file targets (such as build), you will need to include
+	docbook-to-man in your Build-Depends control field.
+
+  -->
+
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>Andreas</firstname>">
+  <!ENTITY dhsurname   "<surname>Bresser</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>Aug 20, 2006</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>bresser@informatik.uni-bremen.de</email>">
+  <!ENTITY dhusername  "Andreas Bresser">
+  <!ENTITY dhucpackage "<refentrytitle>Battles of Antargis Level Editor</refentrytitle>">
+  <!ENTITY dhpackage   "antargis-editor">
+
+  <!ENTITY debian      "<productname>Debian</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+  <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <author>
+      &dhfirstname;
+      &dhsurname;
+    </author>
+    <copyright>
+      <year>2006</year>
+      <holder>&dhusername;</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+  <refmeta>
+    &dhucpackage;
+
+    &dhsection;
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>Antargis-Editor for Battles of Antargis</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>
+      This manual page was written for the &debian; distribution
+      because the original program does not have a manual page.
+
+      <command>&dhpackage;</command> is a Level editor for the medieval
+      realtime strategy Battles of Antargis.
+      It is very easy to use.
+      
+      You can scroll over the map using drag'n'drop (with the left mouse).
+       
+      To upper the terrain just click on the button with the two arrows
+      on the right and select a size.
+      Then click on the terrain with the left mouse button to upper it 
+      (create mountains etc).
+      If you want to lower the terrain use the right mouse button.
+      
+      When you finished your work on the terrain click on the tree-button
+      and place your trees, buildings and finally your units on the map.
+      
+      Than save the file and copy it to /usr/share/antargis/data/levels/.
+      To load your map start the game and click on 'Single map', 
+      than select your map in the menu.
+      
+      TIP: Sometimes you have to wait one or two seconds until your changes 
+      take part, even on a fast computer, so just wait some seconds and check
+      your processor load. If it is very low click again, if not than eigher
+      antargis is crashed or you have to wait a bit longer.
+      
+      
+  </refsect1>
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>antargis (1).</para>
+
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>This manual page was written by &dhusername; &dhemail; for
+      the &debian; system (but may be used by others).  Permission is
+      granted to copy, distribute and/or modify this document under
+      the terms of the &gnu; General Public License, Version 2 any 
+	  later version published by the Free Software Foundation.
+    </para>
+	<para>
+	  On Debian systems, the complete text of the GNU General Public
+	  License can be found in /usr/share/common-licenses/GPL.
+	</para>
+
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

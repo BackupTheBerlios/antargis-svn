@@ -268,8 +268,8 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   mMaxLength=-1;
   mMutable=true;
   mShowCursor=true;
-  AGFont font1("Arial.ttf",14);
-  AGFont font2("Arial.ttf",13);
+  AGFont font1("FreeSans.ttf",14);
+  AGFont font2("FreeSans.ttf",13);
   font1.setColor(AGColor(0,0,0));
   font2.setColor(AGColor(0,0,0xFF));
   AGEditLine l("",font1,true);
@@ -464,7 +464,7 @@ bool AGEdit::eventKeyDown(AGEvent *m)
 	  doInsert=true;
 	  if(mRShift||mLShift)
 	    {
-	      std::string s="=!\"§$%&/()";
+	      std::string s="=!\"Â§$%&/()";
 	      ins=s[k-SDLK_0];
 	    }
 	  else
@@ -574,22 +574,22 @@ bool AGEdit::eventKeyDown(AGEvent *m)
 	}
       else if(k==SDLK_WORLD_68)
 	{
-	  ins=(mLShift||mRShift)?'Ä':'ä';
+	  ins=(mLShift||mRShift)?'Ã„':'Ã¤';
 	  doInsert=true;
 	}
       else if(k==SDLK_WORLD_86)
 	{
-	  ins=(mLShift||mRShift)?'Ö':'ö';
+	  ins=(mLShift||mRShift)?'Ã–':'Ã¶';
 	  doInsert=true;
 	}
       else if(k==SDLK_WORLD_92)
 	{
-	  ins=(mLShift||mRShift)?'Ü':'ü';
+	  ins=(mLShift||mRShift)?'Ãœ':'Ã¼';
 	  doInsert=true;
 	}
       else if(k==SDLK_WORLD_63)
 	{
-	  ins='ß';
+	  ins='ÃŸ';
 	  doInsert=true;
 	}
 
@@ -915,7 +915,7 @@ void AGEdit::clear()
   mLines.clear();
   mCx=mCy=0;
   mViewCy=0;
-  AGFont font1("Arial.ttf",14);
+  AGFont font1("FreeSans.ttf",14);
   AGEditLine l("",font1,true);
   l.setAlign(mAlign);
   l.setVAlign(mVAlign);

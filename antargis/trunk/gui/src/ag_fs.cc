@@ -91,6 +91,7 @@ void initFS(const char *argv0)
 #ifndef WIN32
   addPath("/usr/local/share/antargisgui/pics");
   addPath("/usr/local/share/antargisgui");
+  addPath("/usr/share/fonts/truetype/freefont/");
 #endif
   addPath(getWriteDir());
 #ifdef WIN32

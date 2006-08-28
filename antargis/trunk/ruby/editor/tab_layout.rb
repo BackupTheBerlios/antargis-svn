@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #

@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 require 'md5.rb'
 

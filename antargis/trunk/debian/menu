@@ -1,0 +1,4 @@
+?package(antargis):needs="X11"\
+  section="Games/Strategy"\
+  title="Battle of Antargis"\
+  command="/usr/games/antargis"

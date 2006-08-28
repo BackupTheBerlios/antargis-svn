@@ -1,4 +1,3 @@
-#!/usr/bin/env
 
 def genTree
 	f=loadFile("data/models/tree4.ant2")
