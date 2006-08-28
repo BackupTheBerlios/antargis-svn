@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 $interfaceHeaders||=[]
 $interfaceHeaders+=["ag_rubyobj.h","ag_messageobject.h",
