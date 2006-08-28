@@ -1,5 +1,13 @@
 #!/usr/bin/env ruby
 
+#
+# antargislib.rb does the following:
+# - load libantargis.so (the c++-lib for anything that's not ruby)
+# - init video-mode
+# - process config-file and parameter input
+#
+
+
 $antargislibinited||=false
 
 if not $antargislibinited

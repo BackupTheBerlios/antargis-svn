@@ -1,5 +1,13 @@
 #!/usr/bin/env
 
+# DEPRECATED
+
+#
+# This file contains functions for generating apple-tree-meshes, which
+# 1) don't look good
+# 2) have far too many triangles
+# SO FORGET bbout this!
+
 $genNewTree=false
 
 def makeTrunk(opt,p0,p1,r0,r1,segments)

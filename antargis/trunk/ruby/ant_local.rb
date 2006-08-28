@@ -21,6 +21,14 @@
 
 #!/usr/bin/ruby
 
+#
+#
+#
+#
+#
+#
+
+
 $ENV=ENV
 def getLanguage
 	if $ENV["LANG"]

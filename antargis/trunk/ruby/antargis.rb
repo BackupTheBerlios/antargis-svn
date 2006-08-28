@@ -21,6 +21,12 @@
 
 #!/usr/bin/ruby
 
+#
+# antargis.rb is the central file in antargis-level-playing.
+# it contains the main-application object for in-game looping, etc.
+# most of the GUI-events are processed here.
+#
+
 
 # add programdir to path
 $programDir=Dir.pwd+"/ruby"

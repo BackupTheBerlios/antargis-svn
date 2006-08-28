@@ -1,5 +1,15 @@
 #!/usr/bin/env ruby
 
+# DEPRECATED
+
+#
+# animation importer for deprecated ant3-format
+# DO NOT USE THIS
+#
+
+puts "DO NOT USE THIS!!!!!!!!"
+exit
+
 require 'antargisgui.rb'
 
 if ARGV == nil or ARGV.length<2

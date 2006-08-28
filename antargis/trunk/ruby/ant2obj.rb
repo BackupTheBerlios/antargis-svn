@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+#
+# ant2obj.rb converts BoA's static meshes in format ".ant2" to OBJ-format
+#
+
+
 infile=ARGV[0]
 
 class Reader

@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+#
+# anim_import4.rb imports animated mesh in milkshape-text-format into BoA's internal ant4-format
+# (which is more or less the same as milkshape-text-format in binary form)
+#
+
 require 'antargisgui.rb'
 
 if ARGV == nil or ARGV.length<2
