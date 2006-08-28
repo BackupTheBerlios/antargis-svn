@@ -13,7 +13,7 @@ build-stamp:
 	docbook-to-man debian/antargis-editor.sgml > antargis-editor.1
 
 	# remove double font-files
-	rm data/fonts/*.ttf
+	rm data/fonts/*.ttf||echo ""
 
 	# generate new starter-scripts with correct paths
 	echo -ne "#!/bin/sh\ncd /usr/share/antargis\nruby run.rb">antargis

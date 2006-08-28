@@ -1,4 +1,4 @@
-﻿'Slowly you awake...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;Poco a poco despiertas...\nTe sientes desorientado y te preguntas qué\n ha pasado y cómo has llegado hasta aqui.
+'Slowly you awake...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';;Poco a poco despiertas...\nTe sientes desorientado y te preguntas qué\n ha pasado y cómo has llegado hasta aqui.
 'You awake...\nThe surrounding is unfamiliar to you.\nYou wonder what happened and\nhow you have come here.';; Despiertas..../n no reconoces donde estás.../n ¿qué ha pasado? /n ¿Y cómo he llegado aqui?
 (C) 2005 by David Kamphausen;;(C) 2005 por David Kamphausen
 (C) 2005 by the Antargis-team;;(C) 2005 by the Antargis-team
@@ -90,7 +90,7 @@ Filename:;;Nombre
 Fire;;Fuego
 Fishing rod;;Caña de pesca
 Food;;Comida
-For fast moving of your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Para desplazarte rápidamente por el mapa haz clic en el minimapa que será mostrado en el margen inferior derecho tan pronto acabes el tutorial. 
+For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).;;Para desplazarte rápidamente por el mapa haz clic en el minimapa que será mostrado en el margen inferior derecho tan pronto acabes el tutorial. 
 Game;;Juego
 Game paused.;;Juego en pausa
 Gameoptions;;Opciones de juego
@@ -110,7 +110,7 @@ I will not go any further! There are strangers out there. They don't seem friend
 If we have forgot you,;; Si te hemos olvidado,
 If you promise to act wisely and defeat those men in the north, you can have some of my men.;;Si prometes actuar sabiamente y derrotar a esos hombres del norte, te permitiré que reclutes algunos de mis hombres.
 If you want to recruit all men select the button with the three swords. This increases your aggressiveness. After that repeat the recruiting.;;Para reclutar todos los hombres de un edificio clica en el boton de agresividad alta, el de las tres espadas. Hazlo ahora.
-If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;Si quieres desplazar la vista manten pulsado el botón derecho y mueve el ratón. Usa la rueda del botón para acercar o alejar la camara
+If you want to scroll your view you can push and hold the left mouse-button and move it around. For zooming you can use your mouse-scrollers.;;Si quieres desplazar la vista manten pulsado el botón izquierdo y mueve el ratón. Usa la rueda del botón para acercar o alejar la camara
 In future versions a screenshot will be given here.;;posteriormente aqui habrá una foto.
 Inspect object;;Info
 Invent;;Inventar
@@ -159,7 +159,7 @@ Pause the game;;Pausar
 Play intro on start;;Activar Intro
 Player:;;Jugador
 Playername;;Nombre del jugador
-Press the construct button. But beware that your men need rest enough.;;Construye, pero ten en cuenta que necesitas descansar de vez en cuando.
+Press the construct button. But beware that your men do rest enough.;;Construye, pero ten en cuenta que necesitas descansar de vez en cuando.
 Quit;;Salir
 Ready;;Preparado
 Recruit;;Reclutar
@@ -180,6 +180,7 @@ Slowly you awake.;;Lentamente despiertas
 Smith;;Herrero
 So start now fetching food by slaughtering the sheep. (Right click);;Bien, obten comida de las ovejas descuartizandolas con el botón derecho.
 So you have defeated Bantor. Now go back to your Keep and dismiss some of your men.;;Has derrotado a Bantor. Vuelve hacia el torreón y licencia algunos hombres. 
+So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.;;Has derrotado a Bantor. Vuelve hacia el torreón y licencia algunos hombres. 
 So you must increase your strength. To do so take over the workshop and press the construct-button when you have selected the workshop.;;Así que necesitas ser más poderoso. Para ello conquista el taller y presiona el botón invertir.
 Sound;;Sonido
 Sound effects;;Efectos de sonido
@@ -325,3 +326,6 @@ yes;;Sí
 your mission;;Tu misión
 {1} men support him.;;{1} hombres a su servicio.
 {1} of them are at home.;;{1} de ellos están en casa.
+Fruit;;Fruta
+Corn;;Grano
+Flour;;Harina

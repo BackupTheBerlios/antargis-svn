@@ -118,7 +118,7 @@ I will not go any further! There are strangers out there. They don't seem friend
 If we have forgot you,;;Wenn wir Dich vergessen haben,
 If you promise to act wisely and defeat those men in the north, you can have some of my men.;;Wenn Du versprichst weise zu handeln und die Leute im Norden vertreibst, gebe ich Dir ein paar meiner Leute.
 If you want to recruit all men select the button with the three swords. This increases your aggressiveness. After that repeat the recruiting.;;Um alle Einheiten zu rekrutieren wähle erst den Button mit den drei Schwertern aus. Das erhöht deine Aggressivität. Rekrutiere danach weitere Einheiten.
-If you want to scroll your view you can push and hold the right mouse-button and move it around. For zooming you can use your mouse-scrollers.;;Wenn Du über die Karte scrollen willst klicke einfach mit der linken Maustaste auf die Karte, halte die Taste gedrückt und bewege die Maus. Zum zoomen kannst du das Mausrad benutzen. 
+If you want to scroll your view you can push and hold the left mouse-button and move it around. For zooming you can use your mouse-scrollers.;;Wenn Du über die Karte scrollen willst klicke einfach mit der linken Maustaste auf die Karte, halte die Taste gedrückt und bewege die Maus. Zum zoomen kannst du das Mausrad benutzen. 
 In future versions a screenshot will be given here.;;In zukünftigen Versionen wird hier ein Screenshot zu sehen sein.
 Inspect object;;Details anzeigen
 Invent;;Erfinden
@@ -242,7 +242,7 @@ Well done, now complete your task by conquering the farm and taking their food.;
 Well, then recruit some of my men and defeat this group.;;Nun, dann schnapp dir einige meiner Männer und vertreib diese Schurken von hier!
 What do you mean?;;Was meinen Sie?
 When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.;;Wenn du im Vollbild-Modus bist kannst du auch scrollen, indem du den Cursor an den Rand des Bildschirms bewegst. Mit ALT+RETURN kannst du in den Vollbildmodus wechseln.
-When you have enough weopons and armour you can take it all up by pressing the 'take weapon' button.;;Wenn du genug Waffen und Rüstung hast kannst du sie aufnehmen, indem du den "nehme Waffen"-Button anklickst.
+When you have enough weapons and armour you can take it all up by pressing the 'take weapon' button.;;Wenn du genug Waffen und Rüstung hast kannst du sie aufnehmen, indem du den "nehme Waffen"-Button anklickst.
 When you're done with this go north and defeat your enemies. You can fight an enemy by right clicking on him.;;Gehe danach mit Deinen Einheiten nach Norden und bezwinge Bantor und seine Gefolgsleute! Du kannst gegen einen Gegner kämpfen, indem du mit der rechten Maustaste auf ihn klickst.
 Whenever they rest and are really hungry they will eat their food automatically. But you have to look that they have time to rest for this.;;Wenn deine Soldaten Hunger bekommen werden sie die Nahrung automatisch essen. Allerdings musst du rasten und ihnen Zeit geben, damit sie das tun können.
 Width:;;Breite:
@@ -333,3 +333,11 @@ yes;;Ja
 your mission;;Deine Mission
 {1} men support him.;;{1} Leute folgen ihm.
 {1} of them are at home.;;Von ihnen sind zur Zeit {1} zu Hause.
+Tutorial - Building;;Einführung - Bauen
+You are stranded on this small island. In the north there is the continent that you want to reach.;;Du bist gestrandet auf dieser kleinen Insel. Du musst auf den nördlichen Kontinent.
+It's a pity that you don't have any boats to get there. You don't have much food, either.;;Leider hast Du keine Boote um dorthin zu kommen.
+Build a tower. After that dismiss some of your troops so they can gather some food.;;Als erstes baust Du einen Turm. Danach kannst Du einige Deiner Leute entlassen, damit sie etwas Essen besorgen.
+When you are finished with this you can continue to build some food production cycle with farm, mill and bakery. At last you'll be able to build a workshop and get some boats.;;Wenn Du damit fertig bist, kannst Du einen kleinen Wirtschaftskreislauf mit Bauernhof, Mühle und Bäckerei aufbauen. Als letztes baust Du noch eine Werkstatt und kannst dann endlich die Boote herstellen.
+But ... \nchoose the positions of the buildings well!;;Aber ...\nüberlege gut, wohin Du die Gebäude baust!
+Congratulations! You have finally reached the continent!;;Glückwunsch! Du hast den Kontinent erreicht!
+

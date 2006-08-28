@@ -80,7 +80,7 @@
 				</checkedpressed>
 			</background>
 		<text>
-			<font name="font" file="Arial.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
+			<font name="font" file="FreeSans.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
 		</text>
 	</button>
 	
@@ -161,7 +161,7 @@
 				</checkedpressed>
 			</background>
 			<text>
-				<font name="font" file="Arial.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
+				<font name="font" file="FreeSans.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
 			</text>
 		</button>
 	</flatbutton>
@@ -189,7 +189,7 @@
 					<color name='gradientColor4' color='#12141c'/>
 <!--			<image name="image" file="bg_tile2.png"/>-->
 		</background>
-		<font name="font" file="Arial.ttf" size="14" color="#000000"/>
+		<font name="font" file="FreeSans.ttf" size="14" color="#000000"/>
 	</edit>
 
 	<screen>
@@ -203,7 +203,7 @@
 			<image name="image" file="data/gui/buttontest3.png" file2="win_border.png"/>
 		</border>
 		<title>
-			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
+			<font name="font" file="FreeSans.ttf" size="16" color='#FFFFFF'/>
 			<background>
 				<value name="border" value="0"/>
 				<color name='gradientColor1' color='#54555b'/>
@@ -238,7 +238,7 @@
 				<value name="width" value="1"/>
 			</border>
 			<text>
-				<font name='font' file="Arial.ttf" size="14" color='#000000'/>
+				<font name='font' file="FreeSans.ttf" size="14" color='#000000'/>
 			</text>
 		</button>
 	</yellowButton>
@@ -312,7 +312,7 @@
 		</button>
 	</antButton>
 	<combobox>
-		<font name="font" file="Arial.ttf" size="22" color="#DDDDDD"/>
+		<font name="font" file="FreeSans.ttf" size="22" color="#DDDDDD"/>
 	</combobox>
 	<listbox>
 		<background>
@@ -332,11 +332,11 @@
 			<color name='gradientColor3' color='#f3ac0e'/>
 			<color name='gradientColor4' color='#c18c1a'/>-->
 		</selected>
-		<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+		<font name="font" file="FreeSans.ttf" size="22" color="#000000"/>
 	</listbox>
 	<!--<button>
 		<text>
-			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
+			<font name="font" file="FreeSans.ttf" size="16" color='#FFFFFF'/>
 		</text>
 	</button>-->
 
@@ -344,7 +344,7 @@
 		<button>
 			<text>
 				<lighted>
-					<font name="font" file="Arial.ttf" size="20" color='#FFFFFF'/>
+					<font name="font" file="FreeSans.ttf" size="20" color='#FFFFFF'/>
 				</lighted>
 			</text>
 			<border>
@@ -404,31 +404,31 @@
 		</button>
 	</menuButton>
 	<yellow>
-		<font name='font' file="Arial.ttf" size="17" color='#AAAAAA' embossed="true"/>
+		<font name='font' file="FreeSans.ttf" size="17" color='#AAAAAA' embossed="true"/>
 	</yellow>
 	<credits>
-		<font name='font' file="Arial.ttf" size="28" color='#CCCCCC'/>
+		<font name='font' file="FreeSans.ttf" size="28" color='#CCCCCC'/>
 	</credits>
 	<cr_name>
-		<font name='font' file="Arial.ttf" size="18" color='#AAAAAA'/>
+		<font name='font' file="FreeSans.ttf" size="18" color='#AAAAAA'/>
 	</cr_name>
 	<cr_bold>
-		<font name='font' file="Arial.ttf" size="25" color='#f6c108'/>
+		<font name='font' file="FreeSans.ttf" size="25" color='#f6c108'/>
 	</cr_bold>
 	<inventory>
-		<font name='font' file="Arial.ttf" size="14" style="bold" color='#f6c108' borderWidth="1" borderColor="#330000" embossed="true"/>
+		<font name='font' file="FreeSans.ttf" size="14" style="bold" color='#f6c108' borderWidth="1" borderColor="#330000" embossed="true"/>
 	</inventory>
 	<invTitle>
-		<font name='font' file="Arial.ttf" size="20" style="bold" color='#f6c108' borderWidth="1" borderColor="#330000" embossed="true"/>
+		<font name='font' file="FreeSans.ttf" size="20" style="bold" color='#f6c108' borderWidth="1" borderColor="#330000" embossed="true"/>
 	</invTitle>
 	<heroName>
-		<font name='font' file="Arial.ttf" size="17" color='#f6c108' embossed="true" borderWidth="1" borderColor="#330000"/>
+		<font name='font' file="FreeSans.ttf" size="17" color='#f6c108' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</heroName>
 	<enemyHero>
-		<font name='font' file="Arial.ttf" size="17" color='#f66100' embossed="true" borderWidth="1" borderColor="#330000"/>
+		<font name='font' file="FreeSans.ttf" size="17" color='#f66100' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</enemyHero>
 	<intro>
-		<font name='font' file="Arial.ttf" size="35" color='#f6c108' embossed="true" borderWidth="3" borderColor="#AA0000"/>
+		<font name='font' file="FreeSans.ttf" size="35" color='#f6c108' embossed="true" borderWidth="3" borderColor="#AA0000"/>
 	</intro>
 	<story>
 		<button>
@@ -440,16 +440,16 @@
 		</button>
 	</story>	
 	<story>
-		<font name='font' file="Arial.ttf" size="25" color='#DDDDDD' embossed="true" borderWidth="4" borderColor="#AA5555"/>
+		<font name='font' file="FreeSans.ttf" size="25" color='#DDDDDD' embossed="true" borderWidth="4" borderColor="#AA5555"/>
 	</story>
 	<text>	
-		<font name='font' file="Arial.ttf" size="17" color='#FFFFFF' embossed="true" borderWidth="1" borderColor="#330000"/>
+		<font name='font' file="FreeSans.ttf" size="17" color='#FFFFFF' embossed="true" borderWidth="1" borderColor="#330000"/>
 	</text>
 	<big_border>
 		<image name="image" file="data/gui/big_border.png"/>
 	</big_border>
 	<tooltip>	
-		<font name='font' file="Arial.ttf" size="17" color='#ffd272' embossed="true" borderWidth="1" borderColor="#330000"/>
+		<font name='font' file="FreeSans.ttf" size="17" color='#ffd272' embossed="true" borderWidth="1" borderColor="#330000"/>
 		<color name='bordercolor' color='#ffd272'/>
 		<color name='bgcolor' color='#111111'/>
 	</tooltip>
