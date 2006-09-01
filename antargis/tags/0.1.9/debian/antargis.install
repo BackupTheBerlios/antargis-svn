@@ -1,0 +1,3 @@
+{data,gui,ruby,config.rb,editor.rb,internat.rb,libantargis.so,run.rb} usr/share/antargis
+antargis usr/games
+antargis-editor usr/games

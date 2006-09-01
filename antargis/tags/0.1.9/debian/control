@@ -1,0 +1,19 @@
+Source: antargis
+Section: games
+Priority: extra
+Maintainer: Andreas Bresser <bresser@informatik.uni-bremen.de>
+Build-Depends: debhelper (>= 5), autotools-dev, rake
+Standards-Version: 3.7.2
+
+Package: antargis
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby
+Description: Medieval realtime strategy game
+ Battles of Antargis is a medieval realtime strategy game. You are a hero who 
+ was betrayed and you have to unify the kingdom and rebuild the old empire.
+ Old myths will pass your way.
+ .
+ This package contains a mapeditor for the game.
+ .
+ The 3D-Engine is written in c++ and the game logic and menus are written in
+ ruby.
