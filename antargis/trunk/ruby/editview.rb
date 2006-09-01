@@ -326,10 +326,10 @@ class AntRubyEditView<GLApp
 			puts "NODE:"
 			puts node
 			if node.class==Mesh
-			ent=getMap.getEntity(toMesh(node))
-			if ent
-				editProperties(ent)
-			end
+				ent=getMap.getEntity(node)
+				if ent
+					editProperties(ent)
+				end
 			end
 		}
 	end

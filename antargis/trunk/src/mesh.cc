@@ -44,15 +44,9 @@ void Mesh::draw()
   if(!mVisible)
     return;
 
-  
-  /*  glEnable(GL_COLOR_MATERIAL);
-  glEnable(GL_LIGHTING);
-  glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-  glColor4fv(mColor);*/
   begin();
   if(mData)
     {
-      //      mData->setColors(false);
       mData->draw(mColor);
     }
   end();
@@ -117,13 +111,6 @@ AGVector4 Mesh::lineHit(const AGLine3 &pLine) const
 				AGVector3(p1[0],p1[1],p1[2])))+AGVector4(getPos().dim3(),0);
 }
 
-/*
-void Mesh::setPos(const AGVector3&pPos)
-{
-  getScene()->prepareUpdate(this);
-  mPos=AGVector4(pPos,1);
-  getScene()->updatePos(this);
-  }*/
 void Mesh::setRotation(float r)
 {
   mRotation=r;
@@ -133,12 +120,6 @@ MeshData *Mesh::getData()
 {
   return mData;
 }
-/*
-AGBox3 Mesh::bbox() const
-{
-  // FIXME: ignore rotation for now
-  return mData->bbox()+mPos.dim3();
-  }*/
 
 void Mesh::drawPick()
 {
@@ -151,12 +132,6 @@ void Mesh::drawPick()
   if(mData)
     mData->drawPick();
   end();
-}
-
-
-Mesh *toMesh(SceneNode *node)
-{
-  return dynamic_cast<Mesh*>(node);
 }
 
 

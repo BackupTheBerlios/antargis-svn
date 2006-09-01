@@ -8,6 +8,12 @@
 
 #include "mesh_data.h"
 
+/** A mesh is a scenenode, that displays a mesh ;)
+    ok, now for the real info.
+    it contains a MeshData object, color and positional information.
+    Actual drawing is done by MeshData.
+
+*/
 class Mesh:public SceneNode
 {
   MeshData *mData;
@@ -24,8 +30,6 @@ class Mesh:public SceneNode
   void drawDepth();
   void drawShadow();
   void drawPick();
-
-  //  AGBox3 bbox() const;
 
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
 
@@ -45,7 +49,5 @@ class Mesh:public SceneNode
   void begin();
   void end();
 };
-
-Mesh *toMesh(SceneNode *node);
 
 #endif

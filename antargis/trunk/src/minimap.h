@@ -12,6 +12,13 @@ class Scene;
    it's displayed through some single texture. the people are drawn on top of this.
    when the height-map changes, the texture has to be changed.
    So there are two different functions (mapChanged*)
+
+   Two things you have to take care of:
+   1) you have to set a map with setMap
+   2) you have to set a scene (for frustum-display) (setScene)
+
+   because typically this object is created within an xml-layout-file
+
  */
 class MiniMap:public AGWidget
 {
@@ -24,7 +31,7 @@ class MiniMap:public AGWidget
   /// call this only if the complete texture is changed - otherwise this is SLOW!
   bool mapChangedComplete(AGEvent *e);
 
-    void draw(AGPainter &p);
+  void draw(AGPainter &p);
 
   void setMap(AntMap *pMap);
   void setScene(Scene *pScene);

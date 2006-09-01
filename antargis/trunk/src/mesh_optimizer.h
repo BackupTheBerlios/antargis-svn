@@ -6,7 +6,15 @@
 
 #include <map>
 
-// simple Mesh building
+/** This file provides functionality for:
+    building of an indexed mesh out of a set of (vertex,color,normal,tex2dcoords)
+    each 3 of them a triangle. Similar vertices will be joined automatically.
+    Use it like this:
+    
+    1) generate a MeshOptimizer objet
+    2) add 3*n vertices
+    3) get a VertexArray by calling getArray()
+*/
 
 struct MeshVertex
 {
@@ -35,6 +43,9 @@ class MeshOptimizer
   AGVector4 getV(size_t i);
 };
 
+
+// some old function ???
+// used in gen_tree ?? this gen_tree shouldn't be used anymore, too
 MeshOptimizer loadFromText(const std::string &pText, bool withTex, float zoom);
 
 #endif
