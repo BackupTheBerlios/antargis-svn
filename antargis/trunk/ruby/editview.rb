@@ -283,7 +283,7 @@ class AntRubyEditView<GLApp
 	
 	
 	def isTerrain(node)
-		[TerrainPieceVA,WaterPiece].member?(node.class)
+		[TerrainPiece,WaterPiece].member?(node.class)
 	end
 	
 	def addEntity(list,button)

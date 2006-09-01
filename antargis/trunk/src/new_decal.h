@@ -6,6 +6,10 @@
 #include "vertex_array.h"
 #include "ag_texture.h"
 
+/** not yet used
+    decals are currently a little bad in BoA.
+    Should be reworked!!!
+*/
 class NewDecal:public SceneNode
 {
   AGVector2 mPos;

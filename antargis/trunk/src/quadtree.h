@@ -26,11 +26,22 @@
 
 #include <set>
 
-// QuadTree doesn't own objects - you have to delete them yourself
+/**
+   sadly enough C++ still doesn't support templating in out of object files...
 
+   This is a simple quad-tree, that's based upon some "unknown object", that must contain
+   these functions:
+   * getRect()
+   * any more ???
+   The Rectangles are defined with AGRect2.
+
+   QuadTree doesn't own objects - you have to delete them yourself
+
+*/
 template<class T>
 class QuadTree
   {
+    // ignore this node-structure - it works ;-)
     struct Node
       {
         std::set
@@ -63,8 +74,6 @@ class QuadTree
       
         void get(const AGRect2 &pr,std::list<T*> &l)
         {
-	  //	  TRACE;
-	  //	  cdebug(pr.toString()<<"  "<<r.toString());
           typename std::set<T*>::iterator i=ts.begin();
           for(;i!=ts.end();i++)
             l.push_back(*i);
@@ -77,7 +86,6 @@ class QuadTree
 
         void insert(T* t)
         {
-	  //	  cdebug(t->getRect().toString()<<"    "<<r.toString());
           if(children.size())
             {
               typename std::list<Node*>::iterator i=children.begin();
@@ -89,8 +97,6 @@ class QuadTree
                   }
             }
           ts.insert(t);
-	  //	  cdebug(typeid(*t).name());
-	  //	  cdebug("size:"<<ts.size());
 	  if(ts.size()>2 && children.size()==0 && r.w()>3 && r.h()>3)
 	    split();
         }
@@ -104,12 +110,7 @@ class QuadTree
             delete *i;
           }
           children.clear();
-	  /* expect that we don't own elements
-          typename std::set<T*>::iterator j=ts.begin();
-          for(;j!=ts.end();j++)
-          {
-            delete *j;
-	    }*/
+
           ts.clear();
           
         }
@@ -121,10 +122,8 @@ class QuadTree
           ts.clear();
           std::list<AGRect2> rs=r.split();
           std::list<AGRect2>::iterator i=rs.begin();
-	  //	  cdebug(r.toString());
           for(;i!=rs.end();i++)
             {
-	      //	      cdebug(i->toString());
               children.push_back(new Node(*i));
             }
           typename std::set
@@ -167,11 +166,13 @@ class QuadTree
 	delete root;
       }
 
+    /// insert an object
     void insert(T* t)
     {
       root->insert(t);
     }
 
+    /// get all the objects - should be used at all (only testing purpose)
     std::list<T*> getAll()
       {
 	std::list<T*> l;
@@ -179,6 +180,7 @@ class QuadTree
 	return l;
       }
     
+    /// this one you should call - get all objects, that intersect (or are included in) this rectangle
     std::list<T*> get(const AGRect2 &r)
     {
       std::list<T*> l;
@@ -186,6 +188,7 @@ class QuadTree
       return l;
     }
     
+    /// remove some object
     bool remove
       (T* t)
       {
@@ -194,6 +197,7 @@ class QuadTree
 	return false;
       }
       
+    /// empty this tree!
     void clear()
     {
       root->clear();

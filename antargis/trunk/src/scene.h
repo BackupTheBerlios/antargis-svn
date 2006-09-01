@@ -14,6 +14,13 @@
 #include "scenenode.h"
 #include "ant_camera.h"
 
+/**
+   some helper structure, which is used for storing
+   results when picking. it holds some information about:
+   * distance to camera (for sorting)
+   * the picked scene-node
+   * and the 3d-position, where the scene-node was touched
+   */
 struct PickNode
 {
   AGVector4 pos;
@@ -23,20 +30,17 @@ struct PickNode
   bool operator<(const PickNode &n) const;
 };
 
-/*
-struct Viewport
-{
-  GLint viewport[4];
-#ifndef SWIG
-  (operator GLint *)()
-  {
-    return viewport;
-  }
-#endif
-};*/
-
 template<class T>
 class QuadTree;
+
+
+/** Scene is scene-manager. it holds all the 3d-objects (meshes and particles).
+    These objects are stored in a quad-tree (could easily be exchanged for an octree, if needed).
+    It takes further for drawing modes like picking, shadow-rendering and depth-drawing (for shadow-depth-computation).
+    It contains a camera-object!
+    So in the current state it's not possible to render the same scene from to places at the same time.
+
+ */
 
 class Scene:public AGRubyObject
 {
@@ -55,7 +59,7 @@ class Scene:public AGRubyObject
 
 
   // ATTENTION: nodes are not owned by Scene afterwards - so they won't get deleted!
-  //            You have to do this yourself in the Entities or let ruby's GC do it for you 
+  //            You have to do this yourself in the Entities or let ruby's GC do it for you (which would be the normal case)
   void addNode(SceneNode *node);
   void removeNode(SceneNode *node);
   void prepareUpdate(SceneNode *node);
@@ -69,10 +73,13 @@ class Scene:public AGRubyObject
   AGVector4 getCamera() const;
   void advance(float time);
 
+  /**
+     picking is currently done with opengl. this uses software (at least on my box), which is
+     pretty slow. Some new implementation using BSPs would be cool!
+     VertexArray or MeshData should contain it's data in such a tree. rays can be transformed using
+     inverse transformation-matrices. This way data can stay as is.
+  */
   PickResult pick(float x,float y,float w,float h);
-
-  // Antargis-Map-extension
-  //  void mapChanged();
 
   AntCamera &getCameraObject();
 
@@ -81,10 +88,10 @@ class Scene:public AGRubyObject
   size_t getTriangles() const;
   size_t getPickTriangles() const;
 
+  /// get camera-viewing-direction to some 3d-point - used for particles
   AGVector3 getCameraDirTo(const AGVector3 &p) const;
 
-  AGMatrix4 getFrustum();
-
+  /// width and height of screen
   float width() const;
   float height() const;
 
@@ -93,8 +100,6 @@ class Scene:public AGRubyObject
   AGMatrix4 getLightComplete() const;
   AGMatrix4 getLightView() const;
   AGMatrix4 getLightProj() const;
-  
-  //  AGMatrix4 getInvCameraView() const;
 
   AGVector2 getPosition(const AGVector4 &v) const;
 

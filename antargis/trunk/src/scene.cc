@@ -19,6 +19,11 @@ bool PickNode::operator<(const PickNode &n) const
   return camDist<n.camDist;
 }
 
+/**
+   The class is for sorting purpose only. It provides the operator() function, that's needed
+   for the STL-sorting algorithms.
+   Here SceneNodes are sorted by their middle distance the camera.
+*/
 class SortDistance
 {
   AGVector3 cam;
@@ -34,6 +39,9 @@ public:
   }
 };
 
+/**
+   This is a sorting class, too. It sorts by the given "SortOrder" of the scene-nodes
+*/
 class SortOrder
 {
 public:
@@ -238,7 +246,7 @@ void Scene::calcShadowMap()
 {
   STACKTRACE;
   assertGL;
-  AGMatrix4 frustum=getFrustum();
+  //  AGMatrix4 frustum=getFrustum();
   size_t shadowMeshes=0;
 
   getRenderer()->beginShadowComputation();
@@ -282,6 +290,9 @@ void Scene::calcShadowMap()
   assertGL;
 }
 
+/**
+   setups up lighting and gl-matrices (projection and such)
+*/
 void Scene::initScene()
 {
   glClear(GL_DEPTH_BUFFER_BIT);
@@ -333,18 +344,16 @@ void Scene::initScene()
   glLoadMatrixf(mCamera.getModelview());
 }
 
-AGMatrix4 Scene::getFrustum()
-{
-  return mCamera.getProjection()*mCamera.getModelview();
-  //return cameraProjectionMatrix*cameraViewMatrix;
-}
-
 static GLuint displayList=0;
 static bool dlInited=false;
 
 void Scene::drawScene()
 {
 #ifdef TEST_DL
+  // this was for testing only - to check if display-lists are any good.
+  // it seems they are comparable with VBOs - the problem is that they're inflexible
+  // please leave this code, so we have some example, if we happen to use this again at a later stage
+
   if(dlInited)
     {
       glCallList(displayList);
@@ -355,8 +364,10 @@ void Scene::drawScene()
       displayList=glGenLists(1);
       glNewList(displayList,GL_COMPILE);
 #endif
+
   STACKTRACE; 
-  AGMatrix4 frustum=getFrustum();
+
+  // this is used for frustum cullin
   AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
   
   //2nd pass - Draw from camera's point of view
@@ -365,16 +376,9 @@ void Scene::drawScene()
 
   int drawn=0;
 
-#ifdef NOQUADTREE
-  Nodes sorted=mNodes;
-#else
-
   NodeList l=getCurrentNodes();
   Nodes sorted;
   std::copy(l.begin(),l.end(),std::back_inserter(sorted));
-
-#endif
-
 
   {
     STACKTRACE;
@@ -388,7 +392,7 @@ void Scene::drawScene()
   }
 
   sort(sorted.begin(),sorted.end(),SortOrder());
-
+  // draw opaque objects first, from front to back
   for(Nodes::iterator i=sorted.begin();i!=sorted.end();i++)
     {
       if(!(*i)->transparent())
@@ -403,7 +407,7 @@ void Scene::drawScene()
 	}
     }
   sort(sorted.begin(),sorted.end(),SortDistance(mCamera.getCameraPosition().dim3()));
-
+  // draw transparent ones next from back to front
   for(Nodes::reverse_iterator i=sorted.rbegin();i!=sorted.rend();i++)
     {
       if((*i)->transparent())
@@ -417,15 +421,18 @@ void Scene::drawScene()
 	    }
 	}
     }
-  //  cdebug("sorted:"<<sorted.size());
 
 #ifdef TEST_DL
-glEndList();
-      glCallList(displayList);
+  glEndList();
+  glCallList(displayList);
     }
 #endif
 
 }
+
+
+/// deprecated function - this is done in one pass with "normal" drawing
+/// it was used to paint the shadow afterwards in a 3rd pass
 void Scene::drawShadow()
 {
   assertGL;
@@ -444,11 +451,13 @@ AGVector3 Scene::getCameraDirTo(const AGVector3 &p) const
   return mCamera.getCameraPosition().dim3()-p;
 }
 
-
+/** pickDraw is used for picking ;-)
+    it draws all the objects with opengl
+    and not using texturing, shaders and such - if I'm right here??
+*/
 void Scene::pickDraw()
 {
   STACKTRACE;
-  //  glDisable(GL_CULL_FACE);
   GLuint name=1;
   pickNames.clear();
 
@@ -466,7 +475,6 @@ void Scene::pickDraw()
 	  {
 	    STACKTRACE;
 	    glPushName(name);
-	    //	    std::cout<<typeid(**i).name()<<std::endl;
 	    (*i)->drawPick();
 	    glPopName();
 	    pickNames.insert(std::make_pair(name,*i));
@@ -474,12 +482,14 @@ void Scene::pickDraw()
 	    mPickTriangles+=(*i)->getTriangles();
 	  }
     }
-  //  std::cout<<"NAMES:"<<name<<std::endl;
 
   glEnable(GL_CULL_FACE);
-  
 }
 
+/// this a global function - use this for picking!
+/// x and y are in screen-coordinates in normal fashion
+/// so (0,0) is the top left corner and (1023,767) bottom right.
+/// the same for w and h
 Scene::PickResult Scene::pick(float x,float y,float w,float h)
 {
   STACKTRACE;
@@ -529,6 +539,7 @@ Scene::PickResult Scene::pick(float x,float y,float w,float h)
   return r;
 }
 
+/// helper function for gettin PickResult from opengl's buffers
 Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py)
 {
   STACKTRACE;

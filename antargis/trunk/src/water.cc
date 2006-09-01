@@ -44,8 +44,6 @@ WaterPiece::WaterPiece(Scene *pScene,HeightMap &map,int x,int y,int w,int h,cons
 
 WaterPiece::~WaterPiece()
 {
-  //  delete mShader;
-  //  mShader=0;
   if(sceneValid())
     getScene()->removeNode(this);
 
@@ -53,7 +51,6 @@ WaterPiece::~WaterPiece()
 
 void WaterPiece::mapChanged()
 {
-  //  CTRACE;
   AGBox3 bb;
   mArray.clear();
 
@@ -78,7 +75,6 @@ void WaterPiece::mapChanged()
 	if(mMap->get(mX+x,mY+y)<0.1 && !vis)
 	  {
 	    vis=true;
-	    //	    cdebug(mX+x<<" "<<mY+y<<":"<<mMap->get(x,y));
 	  }
       }
   setBBox(bb-getPos().dim3());
@@ -93,10 +89,6 @@ void WaterPiece::mapChanged()
 
   if(vis)
     setVisible(true);
-    
-
-  //  mBBox=AGBox3(mPos.dim3()+AGVector3(0,0,-2),AGVector3(mW+1,mH+1,4));
-
 }
 
 void WaterPiece::addTriangle(int x0,int y0,int x1,int y1,int x2, int y2)

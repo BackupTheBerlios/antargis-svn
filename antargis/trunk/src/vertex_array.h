@@ -10,6 +10,19 @@
 
 #include <ag_surface.h>
 
+/**
+   VertexArray is for fast drawing meshes (3d-models).
+   It supports indexed vertex-arrays. If you do not have them in this format
+   look at mesh_optimizer.h.
+   The possible drawing modes are detected automatically. The best one is always used.
+   These include:
+   * vertex-arrays
+   * vertex-buffers
+   * direct drawing mode (glVertex4f...)
+
+   if you have to do special drawing like picking, use the corresp. functions (drawDepth,drawPick)
+*/
+
 class VertexArray
 {
   std::vector<AGVector4> mVertices,mColors;
@@ -72,8 +85,17 @@ class VertexArray
 
 };
 
+/**
+   makeInstances can be used for some kind of "batching".
+   It creates several instances of a mesh stored in va. The positions of the instances are 
+   given through transformation matrices in ts
+*/
 VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
 
+/**
+   VertexArrayShader adds shader-support to vertex-arrays. You might need to attach data
+   to each vertex. You can do so by calling addAttribute(.,.).
+ */
 class VertexArrayShader:public VertexArray
 {
   AntShaderProgram *p;
@@ -83,6 +105,7 @@ class VertexArrayShader:public VertexArray
  public:
   VertexArrayShader(AntShaderProgram *_p);
   ~VertexArrayShader();
+  /// adds attributes to each vertex. the size of a should equal the vertex count
   void addAttribute(const std::string &pName,const std::vector<float> &a);
 
   virtual void draw();

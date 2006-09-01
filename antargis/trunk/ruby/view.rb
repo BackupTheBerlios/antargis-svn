@@ -105,7 +105,7 @@ class AntRubyView <GLApp
 		end
 		if list.length>0
 			first=list[0]
-			if [TerrainPieceVA,WaterPiece].member?(first.node.class)
+			if [TerrainPiece,WaterPiece].member?(first.node.class)
 				eventMapClicked(first.pos,button)
 			else
 				eventEntitiesClicked(list,button)

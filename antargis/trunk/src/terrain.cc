@@ -5,9 +5,9 @@
 #include <ag_config.h>
 
 //////////////////////////////////////////////////////////////////////////
-// TerrainPieceVA
+// TerrainPiece
 //////////////////////////////////////////////////////////////////////////
-TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
+TerrainPiece::TerrainPiece(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
   SceneNode(pScene,AGVector4(),AGBox3()),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map)
@@ -25,13 +25,13 @@ TerrainPieceVA::TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int xs,in
   setOrder(TERRAIN_Z);
 }
 
-TerrainPieceVA::~TerrainPieceVA()
+TerrainPiece::~TerrainPiece()
 {
   if(sceneValid())
     getScene()->removeNode(this);
 }
 
-void TerrainPieceVA::mapChanged()
+void TerrainPiece::mapChanged()
 {
   AGBox3 bb=bbox();
 
@@ -101,14 +101,14 @@ void TerrainPieceVA::mapChanged()
   setBBox(bb);
 }
 
-void TerrainPieceVA::drawShadow()
+void TerrainPiece::drawShadow()
 {
   STACKTRACE;
   m3dArray.setColors(false);
   m3dArray.draw();
   m3dArray.setColors(true);
 }
-void TerrainPieceVA::drawDepth()
+void TerrainPiece::drawDepth()
 {
   return;
   glDepthMask(true);
@@ -117,7 +117,7 @@ void TerrainPieceVA::drawDepth()
   m3dArray.setColors(true);
 }
 
-void TerrainPieceVA::drawPick()
+void TerrainPiece::drawPick()
 {
   STACKTRACE;
   //  cdebug(m3dArray.getTriangles());
@@ -126,7 +126,7 @@ void TerrainPieceVA::drawPick()
 }
 
 
-void TerrainPieceVA::draw()
+void TerrainPiece::draw()
 {
   STACKTRACE;
   AGRenderContext c;
@@ -140,12 +140,12 @@ void TerrainPieceVA::draw()
 }
 
 
-AGVector4 TerrainPieceVA::lineHit(const AGLine3 &pLine) const
+AGVector4 TerrainPiece::lineHit(const AGLine3 &pLine) const
 {
   return m3dArray.lineHit(pLine);
 }
 
-size_t TerrainPieceVA::getTriangles() const
+size_t TerrainPiece::getTriangles() const
 {
   return m3dArray.getTriangles();
 }
@@ -213,7 +213,7 @@ void Terrain::init()
   for(y=0; y<mMap->getH();y+=tilesize)
     for(x=0;x<mMap->getW();x+=tilesize)
       {
-	TerrainPieceVA *t=new TerrainPieceVA(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0),getTerrainTriangleSize());
+	TerrainPiece *t=new TerrainPiece(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0),getTerrainTriangleSize());
 	WaterPiece *w=new WaterPiece(getScene(),*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);

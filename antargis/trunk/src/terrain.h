@@ -19,11 +19,16 @@ using namespace std;
 
 class Terrain;
 
-class TerrainPieceVA:public SceneNode
+/**
+   TerrainPiece displays (like WaterPiece) some small patch of terrain.
+   (Terrain and water is tiled for the ease of culling)
+   for more information on drawing-modes and such go to SceneNode.
+ */
+class TerrainPiece:public SceneNode
 {
  public:
-  TerrainPieceVA(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
-  virtual ~TerrainPieceVA();
+  TerrainPiece(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
+  virtual ~TerrainPiece();
 
   void draw();
   void drawShadow();
@@ -35,15 +40,12 @@ class TerrainPieceVA:public SceneNode
   AGVector4 lineHit(const AGLine3 &pLine) const;
   size_t getTriangles() const;
 
-  //  virtual AGBox3 bbox() const;
-
+  /// rebuilds the mesh
   virtual void mapChanged();
   
  private:
 
   Terrain *mTerrain;
-
-  //  AGBox3 mBBox;
 
   size_t mXs,mYs;
   size_t mW,mH;
@@ -51,15 +53,18 @@ class TerrainPieceVA:public SceneNode
   HeightMap *mMap;
 
   VertexArray m3dArray;
-  //  VertexArray mGrassArray;
-
 };
 
+/**
+   In a game-world there exists exactly one Terrain-object.
+   This object holds references to all water- and terrain-pieces, so
+   that in case the terrain changes these will be changed,too.
 
-
+*/
 class Terrain
 {
-  typedef std::list<TerrainPieceVA*> Pieces;
+  // Some containers for all the meshes
+  typedef std::list<TerrainPiece*> Pieces;
   typedef std::list<WaterPiece*> WPieces;
   typedef std::list<SceneNode*> Nodes;
   Nodes mNodes;
@@ -68,9 +73,13 @@ class Terrain
 
   float w,h;
 
+  /// 3d-texture used for the terrain
   AGTexture m3D;
 
+  /// some (currently not used) grass-texture
   AGTexture mGrass;
+
+  /// the height-map
   HeightMap *mMap;
   
   Scene *mScene;
@@ -80,13 +89,14 @@ public:
 
   virtual ~Terrain();
 
+  /// some parts of the map are changed
   virtual void mapChanged();
+  /// the whole map is changed - so better take care of this (texture-upload instead of repainting on GPU)
   virtual void mapChangedComplete();
 
 
   virtual bool slotMapChanged(AGEvent *e);
   virtual bool slotMapChangedComplete(AGEvent *e);
-  //  void addToScenes();
 
   AGTexture *get3dTexture();
   AGTexture *getGrassTexture();

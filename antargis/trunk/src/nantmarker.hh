@@ -168,6 +168,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGCheckBox "general_markfunc"
+%exception TerrainPiece::TerrainPiece {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc TerrainPiece "general_markfunc"
 %exception AGRadioGroup::AGRadioGroup {
 	$action
 	result->mRUBY=self;
@@ -328,16 +338,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGComboBox "general_markfunc"
-%exception TerrainPieceVA::TerrainPieceVA {
-	$action
-	result->mRUBY=self;
-#ifdef GCDEBUG
-     result->mObjName=typeid(*result).name();
-     printf("%lx   %s\n",self,typeid(*result).name());
-#endif
-	result->mRubyObject=true;
-}
-%markfunc TerrainPieceVA "general_markfunc"
 %exception AGColorButton::AGColorButton {
 	$action
 	result->mRUBY=self;
@@ -1044,6 +1044,34 @@ else if(dynamic_cast<AGRadio*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) TerrainPiece*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPiece,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) TerrainPiece*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainPiece,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGRadioGroup*{
  if($1)
  {
@@ -1620,10 +1648,10 @@ else if(dynamic_cast<Mesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
 else if(dynamic_cast<NewDecal*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
+else if(dynamic_cast<TerrainPiece*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPiece,0);
 else if(dynamic_cast<Smoke*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
-else if(dynamic_cast<TerrainPieceVA*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
    }
@@ -1646,10 +1674,10 @@ else if(dynamic_cast<Mesh*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh,0);
 else if(dynamic_cast<NewDecal*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_NewDecal,0);
+else if(dynamic_cast<TerrainPiece*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainPiece,0);
 else if(dynamic_cast<Smoke*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Smoke,0);
-else if(dynamic_cast<TerrainPieceVA*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainPieceVA,0);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_SceneNode,0);
    }
@@ -1736,34 +1764,6 @@ else if(dynamic_cast<TerrainPieceVA*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
-   }
- }
- else $input=Qnil;
-}
-%typemap(out) TerrainPieceVA*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPieceVA,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(directorin) TerrainPieceVA*{
- if($1)
- {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainPieceVA,0);
    }
  }
  else $input=Qnil;
@@ -2566,9 +2566,9 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,Terrain,b);
  $result=*b;
 }
-%typemap(directorout) TerrainPieceVA {
- TerrainPieceVA *b;
- Data_Get_Struct($input,TerrainPieceVA,b);
+%typemap(directorout) TerrainPiece {
+ TerrainPiece *b;
+ Data_Get_Struct($input,TerrainPiece,b);
  $result=*b;
 }
 %typemap(directorout) VertexArray {
