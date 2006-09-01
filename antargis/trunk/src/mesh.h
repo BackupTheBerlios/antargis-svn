@@ -34,8 +34,11 @@ class Mesh:public SceneNode
   virtual AGVector4 lineHit(const AGLine3 &pLine) const;
 
   virtual size_t getTriangles() const;
+
+  /// set rotation around y-axis (e.g. turn people)
   void setRotation(float r);
-  void setColor(const AGVector4 &pColor);
+  /// set color (for rings)
+  void setColor(const AGVector4 &pColor); 
   void setVisible(bool v);
 
   MeshData *getData();
