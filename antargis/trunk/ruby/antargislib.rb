@@ -67,6 +67,9 @@ if not $antargislibinited
 					$fullscreen=true
 				when "window"
 					$fullscreen=false
+				when "gui-test"
+					require 'ruby/tests/gui_tests.rb'
+					$cursorEnabled=true
 				when "help","h"
 					STDERR.puts "Possible options:
 --help         show this help message
@@ -81,7 +84,11 @@ if not $antargislibinited
 --no-intro     disables the intro
 
 --sound        enables sound for now and future uses
---no-sound     disables sound for now and future uses"
+--no-sound     disables sound for now and future uses
+
+--gui-test     tells BoA to use events.txt to produce GUI-events
+"
+
 					exit
 			end
 		end

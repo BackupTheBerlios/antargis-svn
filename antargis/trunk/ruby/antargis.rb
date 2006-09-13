@@ -144,6 +144,8 @@ class AntGameApp <AntRubyView
 		# frame counting
 		@frameCount=0
 		@elapsTime=0
+
+		setCursor(getTextureCache.get("blue_cursor.png"))
 	end
 
 	####################################
@@ -152,7 +154,7 @@ class AntGameApp <AntRubyView
 
 	# debugging-function - log all user-input
 	def getNewEvent
-		if true
+		if false
 			@eventDebugging||=File.open("events.txt","r")
 			s=@eventDebugging.readline
 			return toSDLEvent(s)
@@ -160,8 +162,11 @@ class AntGameApp <AntRubyView
 		e=super
 		s=toString(e)
 		@eventDebugging||=File.open("events.txt","w")
-		@eventDebugging.puts s
-		puts toSDLEvent(s)
+		begin
+			@eventDebugging.puts s
+			puts toSDLEvent(s)
+		rescue
+		end
 	
 		return e
 	end
