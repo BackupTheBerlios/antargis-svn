@@ -1,3 +1,8 @@
+#
+# The class StoryFlow contains a single dialog, that's displayed in-game.
+# * A dialog has a name and
+# * consists of several "sentences", which
+#   * themselves are spoken by a person
 
 class StoryFlow
 	attr_reader :name, :s

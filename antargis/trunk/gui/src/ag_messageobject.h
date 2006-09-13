@@ -222,4 +222,9 @@ AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))
 {
   return new AGSlot0<T>(base,f);
 }
+
+
+std::string toString(SDL_Event *pEvent);
+SDL_Event *toSDLEvent(const std::string &p);
+
 #endif

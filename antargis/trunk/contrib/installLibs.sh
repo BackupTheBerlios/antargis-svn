@@ -42,7 +42,7 @@ download_files()
 	download_file "${SDLMIXER}" "http://www.libsdl.org/projects/SDL_mixer/release/${SDLMIXER}"
 	download_file "${SDLTTF}" "http://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF}"
 
-	download_file "${RUBY}" "ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.8.4.tar.gz"
+	download_file "${RUBY}" "ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.4.tar.gz"
 
 }
 

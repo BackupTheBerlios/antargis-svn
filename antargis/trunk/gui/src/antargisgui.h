@@ -51,6 +51,8 @@
 #include "../../gui/src/ag_xml.h"
 #include "../../gui/src/ag_screenwidget.h"
 #include "../../gui/src/ag_scroller.h"
+#include "../../gui/src/ag_plugin.h"
+#include "../../gui/src/ag_aes.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
 %include "../../gui/src/ag_rubyobj.h"
@@ -104,6 +106,8 @@
 %include "../../gui/src/ag_xml.h"
 %include "../../gui/src/ag_screenwidget.h"
 %include "../../gui/src/ag_scroller.h"
+%include "../../gui/src/ag_plugin.h"
+%include "../../gui/src/ag_aes.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 #endif
 #endif

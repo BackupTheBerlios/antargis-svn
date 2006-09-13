@@ -2,6 +2,7 @@
 
 require 'ftools'
 
+$configuring=true
 
 $profile=true
 $debug=false
@@ -42,12 +43,23 @@ ARGV.each{|arg|
 		when /--drmmd5/
 			$drmmd5=arg[9..1000]
 	end
+	puts arg
 }
+puts $drmuser
+puts "DRM:",$drmuser
+
+begin
+	`rm config.rb||echo ""`
+	`touch config.rb`
+rescue
+end
 
 # require them here, so that globals are already set
 require 'mkmf'
+puts "DRM:",$drmuser
 require 'buildtools.rb'
 
+puts "DRM:",$drmuser
 
 if not $help
 
@@ -71,7 +83,7 @@ if not $help
 	end
 	test_library('SDL_mixer')
 	test_library('SDL_image')
-	test_library('stdc++')
+	#test_library('stdc++')
 	test_library('z')
 	test_library('png')
 	if $xcompile or windows

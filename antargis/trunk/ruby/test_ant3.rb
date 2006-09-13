@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-puts "a"
+# small (example) application to test animations and view animated meshes
+
 require 'ruby/antargislib.rb'
-puts "a"
 
 class App<GLApp
 	def initialize(w,h)
@@ -12,7 +12,7 @@ class App<GLApp
 		data.setTransform(AGMatrix4.new(Math::PI,AGVector3.new(0,0,1))*AGMatrix4.new(Math::PI/2,AGVector3.new(1,0,0)))
 		
 		puts "YAY"
-		@n=AnimMesh.new(data)
+		@n=AnimMesh.new(getScene,data)
 		
 		@n.setAnimation("go")
 		getScene.addNode(@n)
@@ -21,7 +21,7 @@ class App<GLApp
 	
 	def eventFrame(s)
 		super(s)
-		@rot+=2
+		@rot+=1
 		@n.setRotation(AGVector3.new(0,0,1),@rot)
 		if @rot>180
 			@n.setAnimation("eat")
@@ -29,6 +29,5 @@ class App<GLApp
 	end
 end
 
-m=AGMain.new(800,600,32,false,true)
 a=App.new(800,600)
 a.run

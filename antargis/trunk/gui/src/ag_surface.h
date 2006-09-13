@@ -31,6 +31,7 @@
 #include "ag_geometry.h"
 #include "ag_painttarget.h"
 #include "ag_gltexture.h"
+#include <ag_plugin.h>
 
 class AGColor;
 class AGSurface;
@@ -70,6 +71,17 @@ class AGDecryptor
   virtual std::string decrypt(const std::string &s,const std::string &n)
     {
       return s;
+    }
+};
+class AGDecryptorPlugin:public AGPlugin
+{
+ public:
+  virtual ~AGDecryptorPlugin()
+    {
+    }
+  virtual AGDecryptor *getDecryptor()
+    {
+      return 0;
     }
 };
 

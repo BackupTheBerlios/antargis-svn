@@ -21,6 +21,7 @@
 #ifndef AG_SCREEN_H
 #define AG_SCREEN_H
 
+#include <ag_config.h>
 #include <ag_painttarget.h>
 
 // this is virtually a pure virtual class ;-)

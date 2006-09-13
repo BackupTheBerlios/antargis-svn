@@ -150,6 +150,23 @@ class AntGameApp <AntRubyView
 	# EVENT HANDLERS
 	####################################
 
+	# debugging-function - log all user-input
+	def getNewEvent
+		if true
+			@eventDebugging||=File.open("events.txt","r")
+			s=@eventDebugging.readline
+			return toSDLEvent(s)
+		end
+		e=super
+		s=toString(e)
+		@eventDebugging||=File.open("events.txt","w")
+		@eventDebugging.puts s
+		puts toSDLEvent(s)
+	
+		return e
+	end
+
+
 	# this handler is for the buttonpanel on the top
 	# the actions are direct ones, like rest,dimiss and so, which don't need an object to use (like fighting,taking,...)
 	def eventHeroJob(e)

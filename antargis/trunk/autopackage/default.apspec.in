@@ -9,7 +9,7 @@ Packager: David Kamphausen <david.kamphausen@web.de>
 Summary: An open-source medieval realtime-strategy game.
 URL: http://antargis.berlios.de/
 License: GNU General Public License, Version 2
-SoftwareVersion: 0.1.2
+SoftwareVersion: 0.1.9
 AutopackageTarget: 1.0
 
 # Only uncomment InterfaceVersion if your package exposes interfaces to other software,

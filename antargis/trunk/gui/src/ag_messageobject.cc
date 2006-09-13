@@ -436,3 +436,206 @@ AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s
   return new AGEvent(pCaller,pName,s);
 }
 
+
+std::string toString(SDL_keysym k)
+{
+  std::ostringstream os;
+  os<<(int)k.scancode<<":"<<(int)k.sym<<":"<<(int)k.mod<<":"<<k.unicode;
+
+  return os.str();
+}
+
+Uint8 toUint8(const std::string &s)
+{
+  long i;
+  std::istringstream is;
+  is.str(s);
+  is>>i;
+  return i;
+}
+Sint16 toSint16(const std::string &s)
+{
+  long i;
+  std::istringstream is;
+  is.str(s);
+  is>>i;
+  return i;
+}
+
+std::string getUntil(std::string &b,const std::string &f)
+{
+  size_t i=b.find(f);
+  std::string s=b.substr(0,i);
+  if(i!=std::string::npos)
+    b=b.substr(i+1,std::string::npos);
+  return s;
+}
+
+SDL_keysym toKeysym(const std::string &s)
+{
+  SDL_keysym k;
+  std::string b=s;
+  k.scancode=toUint8(getUntil(b,":"));
+  k.sym=(SDLKey)toUint8(getUntil(b,":"));
+  k.mod=(SDLMod)toUint8(getUntil(b,":"));
+  k.unicode=toSint16(getUntil(b,":"));
+  
+
+  return k;
+}
+
+std::string toString(SDL_Event *pEvent)
+{
+  std::ostringstream os;
+  if(pEvent)
+    {
+      switch(pEvent->type)
+	{
+	case SDL_ACTIVEEVENT:
+	  os<<"SDL_ACTIVEEVENT:"<<(int)pEvent->active.gain<<":"<<(int)pEvent->active.state;
+	  break;
+	case SDL_KEYDOWN:
+	  os<<"SDL_KEYDOWN:"<<(int)pEvent->key.which<<":"<<(int)pEvent->key.state<<":"<<toString(pEvent->key.keysym);
+	  break;
+	case SDL_KEYUP:
+	  os<<"SDL_KEYUP:"<<(int)pEvent->key.which<<":"<<(int)pEvent->key.state<<":"<<toString(pEvent->key.keysym);
+	  break;
+	case SDL_MOUSEMOTION:
+	  os<<"SDL_MOUSEMOTION:"<<(int)pEvent->motion.which<<":"<<(int)pEvent->motion.state<<":"<<pEvent->motion.x<<":"<<pEvent->motion.y<<":"<<pEvent->motion.xrel<<":"<<pEvent->motion.yrel;
+	  break;
+	case SDL_MOUSEBUTTONDOWN:
+	  os<<"SDL_MOUSEBUTTONDOWN:"<<(int)pEvent->button.which<<":"<<(int)pEvent->button.button<<":"<<(int)pEvent->button.state<<":"<<pEvent->button.x<<":"<<pEvent->button.y;
+	  break;
+	case SDL_MOUSEBUTTONUP:
+	  os<<"SDL_MOUSEBUTTONUP:"<<(int)pEvent->button.which<<":"<<(int)pEvent->button.button<<":"<<(int)pEvent->button.state<<":"<<pEvent->button.x<<":"<<pEvent->button.y;
+	  break;
+	case SDL_JOYAXISMOTION:
+	  os<<"SDL_JOYAXISMOTION:"<<(int)pEvent->jaxis.which<<":"<<(int)pEvent->jaxis.axis<<":"<<pEvent->jaxis.value;
+	  break;
+	case SDL_JOYBALLMOTION:
+	  os<<"SDL_JOYBALLMOTION:"<<(int)pEvent->jball.which<<":"<<(int)pEvent->jball.ball<<":"<<pEvent->jball.xrel<<":"<<pEvent->jball.yrel;
+	  break;
+	case SDL_JOYHATMOTION:
+	  os<<"SDL_JOYHATMOTION:"<<(int)pEvent->jhat.which<<":"<<(int)pEvent->jhat.hat<<":"<<(int)pEvent->jhat.value;
+	  break;
+	case SDL_JOYBUTTONDOWN:
+	  os<<"SDL_JOYBUTTONDOWN:"<<(int)pEvent->jbutton.which<<":"<<(int)pEvent->jbutton.button<<":"<<(int)pEvent->jbutton.state;
+	  break;
+	case SDL_JOYBUTTONUP:
+	  os<<"SDL_JOYBUTTONUP:"<<(int)pEvent->jbutton.which<<":"<<(int)pEvent->jbutton.button<<":"<<(int)pEvent->jbutton.state;
+	  break;
+	case SDL_QUIT:
+	  os<<"SDL_QUIT:";
+	  break;
+	}
+      if(os.str().length())
+	return os.str();
+      
+    }
+  return "nil";
+}
+
+
+
+SDL_Event *toSDLEvent(const std::string &p)
+{
+  std::string b=p;
+  std::string t=getUntil(b,":");
+  static SDL_Event event;
+
+  event.type=0;
+
+  if(t=="SDL_ACTIVEEVENT")
+    {
+      event.type=SDL_ACTIVEEVENT;
+      event.active.gain=toUint8(getUntil(b,":"));
+      event.active.state=toUint8(getUntil(b,":"));
+    }
+  else if(t=="SDL_KEYDOWN")
+    {
+      event.type=SDL_KEYDOWN;
+      event.key.which=toUint8(getUntil(b,":"));
+      event.key.state=toUint8(getUntil(b,":"));
+      event.key.keysym=toKeysym(b);
+    }
+  else if(t=="SDL_KEYUP")
+    {
+      event.type=SDL_KEYUP;
+      event.key.which=toUint8(getUntil(b,":"));
+      event.key.state=toUint8(getUntil(b,":"));
+      event.key.keysym=toKeysym(b);
+
+    }
+  else if(t=="SDL_MOUSEMOTION")
+    {
+      event.type=SDL_MOUSEMOTION;
+      event.motion.which=toUint8(getUntil(b,":"));
+      event.motion.state=toUint8(getUntil(b,":"));
+      event.motion.x=toSint16(getUntil(b,":"));
+      event.motion.y=toSint16(getUntil(b,":"));
+      event.motion.xrel=toSint16(getUntil(b,":"));
+      event.motion.yrel=toSint16(getUntil(b,":"));
+    }
+  else if(t=="SDL_MOUSEBUTTONDOWN")
+    {
+      event.type=SDL_MOUSEBUTTONDOWN;
+      event.button.which=toUint8(getUntil(b,":"));
+      event.button.button=toUint8(getUntil(b,":"));
+      event.button.state=toUint8(getUntil(b,":"));
+      event.button.x=toSint16(getUntil(b,":"));
+      event.button.y=toSint16(getUntil(b,":"));
+    }
+  else if(t=="SDL_MOUSEBUTTONUP")
+    {
+      event.type=SDL_MOUSEBUTTONUP;
+      event.button.which=toUint8(getUntil(b,":"));
+      event.button.button=toUint8(getUntil(b,":"));
+      event.button.state=toUint8(getUntil(b,":"));
+      event.button.x=toSint16(getUntil(b,":"));
+      event.button.y=toSint16(getUntil(b,":"));
+    }
+  else if(t=="SDL_JOYAXISMOTION")
+    {
+      event.type=SDL_JOYAXISMOTION;
+      event.jaxis.which=toUint8(getUntil(b,":"));
+      event.jaxis.axis=toUint8(getUntil(b,":"));
+      event.jaxis.value=toUint8(getUntil(b,":"));
+    }
+  else if(t=="SDL_JOYBALLMOTION")
+    {
+      event.type=SDL_JOYBALLMOTION;
+      event.jball.which=toUint8(getUntil(b,":"));
+      event.jball.ball=toUint8(getUntil(b,":"));
+      event.jball.xrel=toSint16(getUntil(b,":"));
+      event.jball.yrel=toSint16(getUntil(b,":"));
+    }
+  else if(t=="SDL_JOYHATMOTION")
+    {
+      event.type=SDL_JOYHATMOTION;
+      event.jhat.which=toUint8(getUntil(b,":"));
+      event.jhat.hat=toUint8(getUntil(b,":"));
+      event.jhat.value=toUint8(getUntil(b,":"));
+    }
+  else if(t=="SDL_JOYBUTTONDOWN")
+    {
+      event.type=SDL_JOYBUTTONDOWN;
+      event.jbutton.which=toUint8(getUntil(b,":"));
+      event.jbutton.button=toUint8(getUntil(b,":"));
+      event.jbutton.state=toUint8(getUntil(b,":"));
+    }
+  else if(t=="SDL_JOYBUTTONUP")
+    {
+      event.type=SDL_JOYBUTTONUP;
+      event.jbutton.which=toUint8(getUntil(b,":"));
+      event.jbutton.button=toUint8(getUntil(b,":"));
+      event.jbutton.state=toUint8(getUntil(b,":"));
+    }
+  else if(t=="SDL_QUIT")
+    {
+      event.type=SDL_QUIT;
+    }
+  if(event.type)
+    return &event;
+
+  return 0;
+}

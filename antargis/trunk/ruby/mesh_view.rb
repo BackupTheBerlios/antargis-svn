@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
 
-puts "a"
 require 'ruby/antargislib.rb'
-puts "a"
-
-
 
 class App<GLApp
 	def initialize(w,h,file,tex,zoom=0.1)

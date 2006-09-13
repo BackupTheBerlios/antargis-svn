@@ -35,6 +35,7 @@ files.each{|fn|
 	g=File.open(fn)
 	cn=""
 	g.each{|a|
+		a.gsub!("EXPORT","")
 		if a =~ /^class.*/ then
 			cn=a.gsub("class ","").gsub(/[:;].*/,"").gsub(/\n/,"")
 			classList+=[cn]

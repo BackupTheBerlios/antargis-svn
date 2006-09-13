@@ -455,3 +455,8 @@ AGSurface AGSurface::grayed() const
 
   return n;
 }
+
+AGDecryptor *toDecryptor(AGPlugin *p)
+{
+  return (AGDecryptor*)(p);
+}

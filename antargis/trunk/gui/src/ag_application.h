@@ -77,6 +77,8 @@ class AGApplication:public AGMessageObject
 
   void setCursor(const AGTexture &pTexture);
   void setNormalCursor();
+
+  virtual SDL_Event *getNewEvent();
   
  private:
   void clearOldMousePosition();
@@ -96,6 +98,8 @@ class AGApplication:public AGMessageObject
   AGRect2 mCursorOld;
 
   std::list<AGWidget*> delCue;
+
+  SDL_Event mEvent;
 
  public:
   void mark();

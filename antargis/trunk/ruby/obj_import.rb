@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+#
+# obj_import.rb can import static meshes from OBJ-format.
+#
+#
+
+
+
 $swap=false
 
 if File.exists?("antargislib.rb")

@@ -78,7 +78,7 @@ bool AGApplication::run()
 {
   STACKTRACE; 
   Uint32 last,now;
-  SDL_Event event;
+  SDL_Event *event;
   float t;
   mRunning=true;
 
@@ -100,13 +100,25 @@ bool AGApplication::run()
 	getSoundManager()->checkFinished();
 	
 	now=SDL_GetTicks();
-	
+	/*
 	// pull motion events (may flood the eventqueue)
-	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
+		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
 	  ;
-	
+	*/
 	clearOldMousePosition();
-	
+	event=getNewEvent();
+	if(event)
+	  {
+	    do
+	      {
+		doEvent(event);
+		if(mIdleCalls)
+		  event=getNewEvent();
+		else
+		  event=0;
+	      }while(event);
+	  } 
+	/*
 	if(mIdleCalls) 
 	  {
 	    if (SDL_PollEvent(&event) == 0) 
@@ -124,7 +136,8 @@ bool AGApplication::run()
 	  {
 	    SDL_WaitEvent(&event);
 	    doEvent(&event);
-	  }
+	    }*/
+
 	t=(now-last)/1000.0;
 	if(mainWidget)
 	  mainWidget->sigTick(t);
@@ -151,6 +164,23 @@ bool AGApplication::run()
 
   return true;
 }
+
+SDL_Event *AGApplication::getNewEvent()
+{
+  // pull motion events (may flood the eventqueue)
+  while(SDL_PeepEvents(&mEvent, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
+    ;
+  
+  if(mIdleCalls) 
+    {
+      if (SDL_PollEvent(&mEvent) == 0) 
+	return 0;
+    } 
+  else 
+    SDL_WaitEvent(&mEvent);
+  return &mEvent;
+}
+
 
 
 bool AGApplication::doEvent(const SDL_Event* event) 

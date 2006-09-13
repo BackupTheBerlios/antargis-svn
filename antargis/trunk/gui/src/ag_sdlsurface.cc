@@ -91,6 +91,7 @@ AGScreen &getScreen()
   return *mAGGScreen;
 }
 
+
 void setScreen(AGScreen *s)
 {
   TRACE;
@@ -217,3 +218,10 @@ AGSurface AGSDLScreen::screenshot()
   surface->surface=s;
   return AGSurface(surface).copy();
 }
+/*
+extern "C"
+BOOL APIENTRY DllMain (HINSTANCE hInst, DWORD reason, LPVOID reserved)
+{
+	return true;
+}
+*/

@@ -18,7 +18,12 @@
 # License along with this program.
 #
 
-#!/usr/bin/ruby
+#
+# This file contains the main-views used in-game:
+# * main 3d-view
+# * the button-panel on the right
+# * AntNameDisplay (displaying the name of a hero directly above him)
+# * AntInfoBox (displays a suffering text when heroes are ill)
 
 require 'ant_inventory.rb'
 require 'ant_energy.rb'
@@ -62,8 +67,6 @@ class AntRubyView <GLApp
 	end
 	
 	def setupNames
-		puts "SETUPNAMES"
-
 		heroes=$map.getHeroes
 		@names||={}
 		heroes.each{|hero|
@@ -178,13 +181,7 @@ class AntRubyView <GLApp
 	end
 end
 
-class AntRubyEditViewTest<AGWidget #EditIsoView
-	def editMarkClicked(p,e)
-		
-	end
-end
-
-
+# View-Widget factory
 class AntRubyViewCreator<AGLayoutCreator
 	def initialize()
 		super("antRubyView")
@@ -195,8 +192,6 @@ class AntRubyViewCreator<AGLayoutCreator
 	end
 end
 $antRubyViewCreator=AntRubyViewCreator.new
-
-
 
 
 class AntButtonPanel<AGWidget
@@ -281,6 +276,7 @@ private
 	end
 end
 
+# factory for buttonpanel-widget
 class AntButtonPanelCreator<AGLayoutCreator
 	def initialize
 		super("antButtonPanel")
