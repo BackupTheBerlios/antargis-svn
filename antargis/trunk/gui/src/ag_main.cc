@@ -233,7 +233,7 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
       getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
       gDRMok=true;
       getScreen().flip();
-      SDL_Delay(1000);
+      SDL_Delay(3000);
     }
   else
     {
