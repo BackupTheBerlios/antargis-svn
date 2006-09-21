@@ -3,6 +3,10 @@
 function getScreenies()
 {
 	$screenies=array(
+		array("Version 0.1.9 (06-09-20)",array(
+			array("screenies/valley","You can build your own village now."),
+		)),
+
 		array("Version 0.1.2 (06-05-16)",array(
 			array("screenies/shot060421","A hero considering to invent."),
 			array("screenies/shot060421a","Some fish."),
