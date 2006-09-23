@@ -145,7 +145,7 @@ class AntGameApp <AntRubyView
 		@frameCount=0
 		@elapsTime=0
 
-		setCursor(getTextureCache.get("blue_cursor.png"))
+		#setCursor(getTextureCache.get("blue_cursor.png"))
 	end
 
 	####################################

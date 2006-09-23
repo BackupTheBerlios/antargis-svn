@@ -52,7 +52,7 @@
 #include "../gui/src/ag_screenwidget.h"
 #include "../gui/src/ag_scroller.h"
 #include "../gui/src/ag_plugin.h"
-#include "../gui/src/ag_aes.h"
+#include "../gui/src/ag_destructor.h"
 #include "../src/ant_frustum.h"
 #include "../src/ant_projection.h"
 #include "../src/ant_camera.h"
@@ -77,6 +77,7 @@
 #include "../src/terrain.h"
 #include "../src/vertex_array.h"
 #include "../src/water.h"
+#include "../src/path.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
 %include "../gui/src/ag_rubyobj.h"
@@ -131,7 +132,7 @@
 %include "../gui/src/ag_screenwidget.h"
 %include "../gui/src/ag_scroller.h"
 %include "../gui/src/ag_plugin.h"
-%include "../gui/src/ag_aes.h"
+%include "../gui/src/ag_destructor.h"
 %include "../src/ant_frustum.h"
 %include "../src/ant_projection.h"
 %include "../src/ant_camera.h"
@@ -156,6 +157,7 @@
 %include "../src/terrain.h"
 %include "../src/vertex_array.h"
 %include "../src/water.h"
+%include "../src/path.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 #endif
 #endif

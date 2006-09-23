@@ -7,6 +7,7 @@
 #include <set> 
 
 #include "ag_profiler.h" 
+#include "ag_debug.h" 
 
 #include <SDL.h>
 
@@ -140,6 +141,7 @@ class AGProfilerWriter
 public:
   ~AGProfilerWriter()
   {
+    CTRACE;
     std::ofstream os("prof.txt");
     os<<UserStackTraceHelper::getProfilerString()<<std::endl;
     os<<UserStackTraceHelper::getStackTraceString()<<std::endl;

@@ -43,10 +43,10 @@ ARGV.each{|arg|
 		when /--drmmd5/
 			$drmmd5=arg[9..1000]
 	end
-	puts arg
+	#puts arg
 }
-puts $drmuser
-puts "DRM:",$drmuser
+#puts $drmuser
+#puts "DRM:",$drmuser
 
 begin
 	`rm config.rb||echo ""`
@@ -56,10 +56,10 @@ end
 
 # require them here, so that globals are already set
 require 'mkmf'
-puts "DRM:",$drmuser
+#puts "DRM:",$drmuser
 require 'buildtools.rb'
 
-puts "DRM:",$drmuser
+#puts "DRM:",$drmuser
 
 if not $help
 

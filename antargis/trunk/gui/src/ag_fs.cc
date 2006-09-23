@@ -540,7 +540,7 @@ std::vector<std::string> getDirectory(const std::string &pDir)
 std::string compress(const std::string &pString)
 {
   BinaryStringOut o;
-  o<<pString.length();
+  o<<(Uint32)pString.length();
 
   uLongf destlen=pString.length()+1000;
   char *buf=new char[destlen];
@@ -555,7 +555,7 @@ std::string uncompress(const std::string &pString)
 {
   BinaryStringIn i(pString);
   uLongf orig;
-  size_t o;
+  Uint32 o;
   i>>o;
   orig=o;
 
