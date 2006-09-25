@@ -26,7 +26,7 @@ function view()
 	/*$body.=p("Battles of Antargis is a realtime strategy game. Its main purpose lies on conquering not on building.");
 	$body.=p("For a better overview have a look at the screenshots.");*/
 
-	$desc=p("Battles of Antargis is a medieval realtime strategy game. You are a hero who was betrayed and you have to unify the kingdom and rebuild the old empire. Old myths will pass your way.");
+	$desc=p("Battles of Antargis is a medieval-like realtime strategy game. You are a hero who was betrayed and you have to unify the kingdom and rebuild the old empire. Old myths will pass your way.");
 
 	$desc.=p("The game is currently in heavy development and taking up pace. The current features include:
 <ul>
