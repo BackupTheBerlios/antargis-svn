@@ -32,8 +32,9 @@
 */
 
 #include <string>
+#include <ag_base.h>
 
-class AGRubyObject
+class AGEXPORT AGRubyObject
 {
  public:
   /**

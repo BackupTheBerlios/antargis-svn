@@ -26,6 +26,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <ag_base.h>
 
 /* There are following classes:
 
@@ -55,7 +56,7 @@ struct AGAngle
   explicit AGAngle(float a);
 };
 
-class AGVector2
+class AGEXPORT AGVector2
 {
  public:
   float v[2];
@@ -389,7 +390,7 @@ class AGTriangle3
   AGVector3 operator[](int index) const;
 };
 
-class AGRect2
+class AGEXPORT AGRect2
 {
   AGVector2 v0,v1;
  public:

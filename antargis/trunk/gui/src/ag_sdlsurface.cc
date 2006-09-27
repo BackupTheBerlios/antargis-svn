@@ -85,7 +85,7 @@ bool videoInited()
   return mAGGScreen;
 }
 
-AGScreen &getScreen()
+AGScreen & AGEXPORT getScreen()
 {
   assert(mAGGScreen);
   return *mAGGScreen;

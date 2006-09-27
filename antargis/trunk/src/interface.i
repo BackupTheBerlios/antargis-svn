@@ -20,6 +20,7 @@
 %template(AGNodeList) std::vector<Node>;
 %template(AGNodePList) std::vector<Node*>;
 %template(AGMatrixVector) std::vector<AGMatrix4>;
+%template(AGVector2List) std::vector<AGVector2>;
 
 %include "antargisgui.h"
 

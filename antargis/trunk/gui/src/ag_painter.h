@@ -26,6 +26,7 @@
 #include <ag_geometry.h>
 #include <ag_font.h>
 #include <ag_painttarget.h>
+#include <ag_base.h>
 
 
 #include <list>
@@ -57,7 +58,12 @@ struct AGProjection
   AGRect2 getRect() const;
 };
 
-class AGPainter
+#ifdef SWIG
+#undef AGEXPORT
+#define AGEXPORT
+#endif
+
+class AGEXPORT AGPainter
 {
  public:
   AGPainter();

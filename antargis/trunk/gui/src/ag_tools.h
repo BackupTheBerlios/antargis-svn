@@ -31,11 +31,12 @@
 #endif
 
 #include <ag_fs.h>
+#include <ag_base.h>
 
-std::vector<std::string> split(const std::string &n,const std::string &h);
+std::vector<std::string> AGEXPORT split(const std::string &n,const std::string &h);
 
 
-std::string replace(const std::string &s,const std::string &a,const std::string &b);
+std::string AGEXPORT replace(const std::string &s,const std::string &a,const std::string &b);
 
 template<class T>
 inline std::string toString(const T&t)

@@ -24,11 +24,12 @@
 #include <SDL.h>
 #include <string>
 #include <iostream>
+#include <ag_base.h>
 
 class AGSurface;
 class AGVector4;
 
-class AGColor:public SDL_Color
+class AGEXPORT AGColor:public SDL_Color
 {
  public:
   AGColor(int pr,int pg,int pb,int pa=255);

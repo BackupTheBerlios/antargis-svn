@@ -127,11 +127,23 @@ class AntHeroMoveJob<AntHLJob
 		@pos=AGVector2.new(pos.x,pos.y)
 		@dist=dist
 		@formatDist=0
+
+		@waypoints=getMap.path.computePath(hero.getPos2D,pos)
+
+		@waypoints.unshift(@hero.getPos2D)
+		@waypoints.push(@pos)
+		puts @waypoints
+		#@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
+		puts "---"
+		puts @waypoints
+		#exit
+
+
 		if getMen.length>0
 			@state="format"
 		else
 			@state="torest"
-			@hero.newMoveJob(0,@pos,@dist)
+			@hero.newMoveJob(0,@waypoints[0],@dist)
 		end
 		@men=getMen
 		@men.each{|m|
@@ -156,8 +168,10 @@ class AntHeroMoveJob<AntHLJob
 	end
 
 	def startWalking
+		@pos=@waypoints.shift
 		@hero.formation=AntFormationBlock.new(@hero,@formatDir)
-		puts "START WALKING"
+		puts "START WALKING #{@pos}"
+		@movingMen=0
 		@men.each{|m|
 # 			f=@pos+@hero.getFormation(m,@formatDir)
 			f=@hero.getFormation(m,@pos)
@@ -165,17 +179,15 @@ class AntHeroMoveJob<AntHLJob
 			m.setMode("moving")
 			@movingMen+=1
 		}
-		@state="move"
+		if @waypoints.length==0
+			@state="move"
+		end
 	end
 	def getMenState(mode)
 		@men.select{|m|m.getMode==mode}
 	end
 
 	def check(man)
-# 		puts "CHECK (move-job): #{man.class.to_s} #{man.getName} #{man.getMode} state:#{@state}"
-# 		@men.each{|m|
-# 			puts "#{m} #{m.getName} #{m.getMode}"
-# 		}
 		puts "CHECK #{@state} #{man.getMode}"
 		case @state
 			when "format"

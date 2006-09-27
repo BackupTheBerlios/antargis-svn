@@ -17,7 +17,7 @@ typedef int (CALLBACK* LPFNDLLFUNC1)();
 AGPlugin *loadPlugin(const std::string &pFile)
 {
   std::cout<<"loadPlugin1"<<std::endl;
-  CTRACE;
+  TRACE;
   HMODULE hMod = LoadLibrary(pFile.c_str());
   std::cout<<"loadPlugin1"<<std::endl;
   cdebug("1");

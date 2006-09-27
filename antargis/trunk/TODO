@@ -62,6 +62,12 @@ ARTS
 		2) some ruby-error (?) within version 1.8.4
 		workaround done: simply disable gc nearly all the time
 
+[AI]
+------------------------------------------------------
+[H] heuristic compression for path-finding
+[H] map-weighting based on min/max of surrounding
+
+
 [Gui/View - GUI-library]
 ------------------------------------------------------
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)

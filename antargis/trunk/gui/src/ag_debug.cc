@@ -74,7 +74,7 @@ D::D(std::string c):
   debugout("start of:"<<c<<std::endl);
   d++;
 }
-D::~D()
+AGEXPORT D::~D()
 {
   d--;
   indent();

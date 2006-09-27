@@ -48,6 +48,7 @@ end
 # entities around. Apart from that it contains the Players. So it might be better to call it "World"
 class AntRubyMap<AntMap
 	attr_accessor :pause,:players
+	attr_reader :path
 
 	def initialize(pScene,w,h,playerName="Rowen")
 		super(pScene,w,h)
@@ -79,6 +80,7 @@ class AntRubyMap<AntMap
 
 		@filename="dummy"  # a dummy filename - used for level scripting
 		@uidstart=0
+
 	end
 
 	def getUniqueID
@@ -242,6 +244,16 @@ class AntRubyMap<AntMap
 	
 	def loadXML(n)
 		super(n)
+
+
+		# add pathfinder
+		@mweighter=MapPathWeighter.new(self)
+		@sgraph=makeGraph(self,@mweighter)
+		@dgraph=DecimatedGraph.new(@sgraph)
+		@dgraph.decimate(0.9,@mweighter)
+		@path=Pathfinder.new(@dgraph)
+
+
 		@players.each{|p|p.move(0)}
 		
 		if n.get("scriptfile").length>0 and n.get("scriptclass").length>0

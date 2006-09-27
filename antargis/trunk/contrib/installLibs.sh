@@ -33,8 +33,13 @@ download_files()
 	download_file "${VORBIS}" "http://downloads.xiph.org/releases/vorbis/${VORBIS}"
 
 	for a in ${baselibs}; {
-		download_file "${a}-bin.zip" "http://belnet.dl.sourceforge.net/sourceforge/gnuwin32/${a}-bin.zip"
-		download_file "${a}-lib.zip" "http://belnet.dl.sourceforge.net/sourceforge/gnuwin32/${a}-lib.zip"
+
+					      #http://belnet.dl.sourceforge.net/sourceforge/gnuwin32/libpng-1.2.8-lib.zip
+		download_file "${a}-bin.zip" "http://mesh.dl.sourceforge.net/sourceforge/gnuwin32/${a}-bin.zip"
+		download_file "${a}-lib.zip" "http://mesh.dl.sourceforge.net/sourceforge/gnuwin32/${a}-lib.zip"
+
+		#download_file "${a}-bin.zip" "http://belnet.dl.sourceforge.net/sourceforge/gnuwin32/${a}-bin.zip"
+		#download_file "${a}-lib.zip" "http://belnet.dl.sourceforge.net/sourceforge/gnuwin32/${a}-lib.zip"
 	}
 
 	download_file "${SDL}" "http://www.libsdl.org/release/${SDL}"

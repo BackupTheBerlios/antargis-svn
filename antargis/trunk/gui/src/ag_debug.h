@@ -33,6 +33,8 @@
 
 #include "ag_exception.h"
 #include "ag_tools.h"
+#include "ag_base.h"
+
 
 void setQuiet();
 
@@ -48,7 +50,7 @@ void setQuiet();
 
 #else
 
-std::ostream &getDebug();
+std::ostream & AGEXPORT getDebug();
 
 #define debug(c) mydebug(::toString(__FILE__),::toString(__LINE__),c)
 
@@ -68,7 +70,7 @@ using std::endl;
 
 /** A helper class for tracing the program's flow
     Use it by instantiating it with a proper name, or simply use TRACE; (or CTRACE for classes) in your functions */
-class D
+class AGEXPORT D
 {
   std::string m;
   static int d;

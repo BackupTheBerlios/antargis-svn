@@ -21,11 +21,12 @@
 #ifndef __AG_FONT_H
 #define __AG_FONT_H
 
-#include "ag_color.h"
+#include <ag_color.h>
+#include <ag_base.h>
 
 #include <string>
 
-class AGFont
+class AGEXPORT AGFont
 {
  public:
 

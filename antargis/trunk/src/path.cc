@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdexcept>
 #include <ag_profiler.h>
+#include <ag_debug.h>
 //#include <SDL.h>
 
 SimpleGraph::Edge::~Edge()
@@ -54,24 +55,75 @@ MapPathWeighter::MapPathWeighter(HeightMap *pMap):
 }
 float MapPathWeighter::weight(const AGVector2 &a,const AGVector2 &b)
 {
+  return complexWeight(a,b);
+
+
+
   float w=(a-b).length();
   if(w>1)
     throw std::runtime_error("not implemented");
   float h0=mMap->getHeight(a[0],a[1]);
   float h1=mMap->getHeight(b[0],b[1]);
 
-  float f=1; // some factor - to be estimated
-
-  if(h1>h0)
-    {
-      // uphill
-      w+=(h1-h0)*f;
-    }
-  else
-    w-=(h1-h0)*f*0.3; 
+  w+=weightHeight(h0,h1);
 
   return w;
 }
+
+float MapPathWeighter::complexWeight(const AGVector2 &a,const AGVector2 &b)
+{
+  // simply measure all "1 units"
+  AGVector2 delta=b-a;
+  float dist=delta.length();
+  AGVector2 dir=delta/dist;
+
+  float weight=0;
+  float stepping=0.1;
+
+
+  float i=std::min(stepping,dist);
+  float oi=0;
+
+
+  while(oi!=i)
+    {
+      float d=i-oi;
+      AGVector2 ca=a+dir*oi;
+      AGVector2 cb=a+dir*i;
+
+      float h0=mMap->getHeight(ca[0],ca[1]);
+      float h1=mMap->getHeight(cb[0],cb[1]);
+      float cw=d+weightHeight(h0,h1);
+
+      weight+=cw;
+
+      oi=i;
+      i=std::min(i+stepping,dist);
+    }
+  return weight;
+}
+
+float MapPathWeighter::weightHeight(float a,float b) const
+{
+  float f=1; // some factor - to be estimated
+
+  if(std::min(a,b)<0.5)
+    return 10;
+
+  if(std::min(a,b)<0)
+    return 1000;
+
+  if(b>a)
+    {
+      // uphill
+      return (b-a)*f;
+    }
+  else
+    return -(b-a)*f*0.3; 
+}
+
+
+
 
 bool MapPathWeighter::accessible(const AGVector2 &a)
 {
@@ -217,7 +269,7 @@ public:
   }
 };
 
-void DecimatedGraph::decimate(float amount)
+void DecimatedGraph::decimate(float amount,MapPathWeighter *pWeighter)
 {
   size_t m=mNodes.size()*(1.0-amount);
 
@@ -227,14 +279,14 @@ void DecimatedGraph::decimate(float amount)
     {
       Edge *s=*mEdges.begin();
 
-      tryRemove(*mEdges.begin());
+      tryRemove(*mEdges.begin(),pWeighter);
     }
 
 }
 
-void DecimatedGraph::tryRemove(Edge *e)
+void DecimatedGraph::tryRemove(Edge *e,MapPathWeighter *pWeighter)
 {
-  collapseEdge(e);
+  collapseEdge(e,pWeighter);
 }
 
 //   w0->  w0-> w0->
@@ -243,7 +295,7 @@ void DecimatedGraph::tryRemove(Edge *e)
 //
 
 
-void DecimatedGraph::collapseEdge(Edge *e)
+void DecimatedGraph::collapseEdge(Edge *e,MapPathWeighter *pWeighter)
 {
   if(mNodes.size()<=2)
     return;
@@ -276,22 +328,26 @@ void DecimatedGraph::collapseEdge(Edge *e)
 	  if((*i)->a==e->a)
 	    {
 	      // X <- a -> b
-	      nedges.insert(Edge((*i)->b,nn,(*i)->w1+e->w0/2, (*i)->w0+e->w1/2));
+	      nedges.insert(makeEdge((*i)->b,nn,pWeighter));
+	      //	      nedges.insert(Edge((*i)->b,nn,(*i)->w1+e->w0/2, (*i)->w0+e->w1/2));
 	    }
 	  else if((*i)->b==e->a)
 	    {
 	      // X -> a -> b
-	      nedges.insert(Edge((*i)->a,nn,(*i)->w0+e->w0/2, (*i)->w1+e->w1/2));
+	      nedges.insert(makeEdge((*i)->a,nn,pWeighter));
+	      //	      nedges.insert(Edge((*i)->a,nn,(*i)->w0+e->w0/2, (*i)->w1+e->w1/2));
 	    }
 	  else if((*i)->a==e->b)
 	    {
 	      // a -> b -> X
-	      nedges.insert(Edge(nn,(*i)->b,e->w0/2+(*i)->w0, e->w1/2+(*i)->w1));
+	      //nedges.insert(Edge(nn,(*i)->b,e->w0/2+(*i)->w0, e->w1/2+(*i)->w1));
+	      nedges.insert(makeEdge(nn,(*i)->b,pWeighter));
 	    }
 	  else if((*i)->b==e->b)
 	    {
 	      // a -> b <- X
-	      nedges.insert(Edge(nn,(*i)->a, e->w0/2+(*i)->w1, e->w1/2+(*i)->w0));
+	      //nedges.insert(Edge(nn,(*i)->a, e->w0/2+(*i)->w1, e->w1/2+(*i)->w0));
+	      nedges.insert(makeEdge(nn,(*i)->a,pWeighter));
 	    }
 	}
     }
@@ -313,6 +369,14 @@ void DecimatedGraph::collapseEdge(Edge *e)
   //  cdebug("ok........");
   
 }
+
+
+SimpleGraph::Edge DecimatedGraph::makeEdge(Node *a,Node *b,MapPathWeighter *pWeighter)
+{
+  return Edge(a,b,pWeighter->weight(a->p,b->p),pWeighter->weight(b->p,a->p));
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////
 // Graph generation
@@ -465,12 +529,16 @@ std::vector<AGVector2> Pathfinder::computePath(const AGVector2 &pFrom, const AGV
       if(last==to)
 	{
 	  Uint32 t1=SDL_GetTicks();
+	  std::cout<<"TIME:"<<t1-t0<<std::endl;
 	  cdebug("time:"<<t1-t0);
 	  cdebug("len:"<<path.size());
 	  cdebug("tries:"<<tries);
 	  cdebug("PATHHHHHHHHHHHHHHHHHHHH:");
 	  for(Path::iterator i=path.begin();i!=path.end();i++)
-	    cdebug((*i)->p);
+	    {
+	      cdebug((*i)->p);
+	      result.push_back((*i)->p);
+	    }
 
 	  return result; // ready
 	}
@@ -498,4 +566,36 @@ std::vector<AGVector2> Pathfinder::computePath(const AGVector2 &pFrom, const AGV
 
   return result;
 
+}
+
+std::vector<AGVector2> Pathfinder::refinePath(const std::vector<AGVector2> &p,MapPathWeighter *pWeighter)
+{
+  std::vector<AGVector2> result=p;
+  
+  if(result.size()<3)
+    return result;
+
+  std::vector<AGVector2>::iterator i=result.begin()+1;
+
+  for(;i!=result.end()-1;)
+    {
+      // check if waypoint is discardable
+      AGVector2 a=*(i-1);
+      AGVector2 b=*i;
+      AGVector2 c=*(i+1);
+
+      float w0=pWeighter->weight(a,b);
+      float w1=pWeighter->weight(b,c);
+      float w2=pWeighter->weight(a,c);
+
+      cdebug("WEIGHTS:"<<w0<<"  "<<w1<<"  "<<w2);
+
+      if(w0+w1>w2)
+	i=result.erase(i);
+      else
+	i++;
+    }
+
+
+  return result;
 }

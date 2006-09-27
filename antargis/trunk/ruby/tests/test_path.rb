@@ -16,7 +16,7 @@ graph.printInfo
 dg=DecimatedGraph.new(graph)
 dg.printInfo
 puts "decimating"
-dg.decimate(0.9)
+dg.decimate(0.95)
 
 #dg.print
 dg.printInfo

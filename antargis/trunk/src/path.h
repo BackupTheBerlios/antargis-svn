@@ -32,6 +32,10 @@ class MapPathWeighter:public PathWeighter
   virtual float weight(const AGVector2 &a,const AGVector2 &b);
   virtual bool accessible(const AGVector2 &a);
  private:
+
+  virtual float complexWeight(const AGVector2 &a,const AGVector2 &b);
+  virtual float weightHeight(float a,float b) const;
+
   HeightMap *mMap;
 };
 
@@ -205,10 +209,13 @@ class DecimatedGraph:public SimpleGraph
   DecimatedGraph(const SimpleGraph &g):SimpleGraph(g)
     {
     }
-  void decimate(float amount);
+  void decimate(float amount,MapPathWeighter *pWeighter);
  private:
-  void tryRemove(Edge *e);
-  void collapseEdge(Edge *e);
+  void tryRemove(Edge *e,MapPathWeighter *pWeighter);
+  void collapseEdge(Edge *e,MapPathWeighter *pWeighter);
+
+  Edge makeEdge(Node *a,Node *b,MapPathWeighter *pWeighter);
+
 };
 
 
@@ -221,6 +228,8 @@ class Pathfinder:public AGRubyObject
   virtual void mark();
 
   std::vector<AGVector2> computePath(const AGVector2 &from, const AGVector2 &to);
+
+  std::vector<AGVector2> refinePath(const std::vector<AGVector2> &p,MapPathWeighter *pWeighter);
 
  private:
   SimpleGraph *mGraph;

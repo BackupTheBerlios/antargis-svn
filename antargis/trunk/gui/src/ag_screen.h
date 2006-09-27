@@ -22,12 +22,13 @@
 #define AG_SCREEN_H
 
 #include <ag_config.h>
+#include <ag_base.h>
 #include <ag_painttarget.h>
 
 // this is virtually a pure virtual class ;-)
 // because swig directors have problems with this otherwise
 
-class AGScreen:public AGPaintTarget
+class AGEXPORT AGScreen:public AGPaintTarget
 {
  public:
   virtual void begin(); // call before start drawing
@@ -39,7 +40,7 @@ class AGScreen:public AGPaintTarget
   virtual AGSurface screenshot();
 };
 
-AGScreen &getScreen();
+AGScreen & AGEXPORT getScreen();
 void setScreen(AGScreen *s);
 
 #endif

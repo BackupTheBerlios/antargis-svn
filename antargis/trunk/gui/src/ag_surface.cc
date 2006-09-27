@@ -361,6 +361,8 @@ AGSurface AGSurface::loadDRM(const std::string &pName,AGDecryptor &pDec)
   file=pDec.decrypt(file,pName);
   gDRM=true;
 
+  cdebug("FIRST:"<<int(file[0])<<","<<int(file[1])<<","<<int(file[2]));
+
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
   if(s==0)
   {

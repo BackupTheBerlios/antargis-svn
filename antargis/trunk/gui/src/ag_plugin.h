@@ -4,7 +4,7 @@
 #include <string>
 #include <ag_rubyobj.h>
 
-class AGPlugin:public AGRubyObject
+class AGEXPORT AGPlugin:public AGRubyObject
 {
  public:
   virtual ~AGPlugin();
@@ -16,13 +16,18 @@ class AGPlugin:public AGRubyObject
 
 AGPlugin *loadPlugin(const std::string &pFile);
 
+
+
 #ifdef WIN32
-#define AGEXPORT __declspec(dllexport)
+#define AGPLEXPORT __declspec(dllexport)
+#define AGPLIMPORT __declspec(dllimport)
 #else
-#define AGEXPORT
+#define AGPLEXPORT
+#define AGPLIMPORT
 #endif
 
-#define DECLARE_PLUGIN(name) extern "C" {AGPlugin * AGEXPORT create(); }
-#define DEFINE_PLUGIN(name) extern "C" {AGPlugin * AGEXPORT create(){return new  name();} }
+
+#define DECLARE_PLUGIN(name) extern "C" {AGPlugin * AGPLIMPORT create(); }
+#define DEFINE_PLUGIN(name) extern "C" {AGPlugin * AGPLEXPORT create(){return new  name();} }
 
 #endif

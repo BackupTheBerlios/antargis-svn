@@ -69,7 +69,7 @@ bool glMode();
 void setAppName(const std::string &pName);
 std::string getAppName();
 bool videoInited();
-std::string myHash(const std::string &p);
+std::string AGEXPORT myHash(const std::string &p);
 
 
 #endif

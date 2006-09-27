@@ -6,8 +6,12 @@ require 'ftools'
 
 require 'buildtools.rb'
 
-$LDFLAGS+=" -L/usr/X11R6/lib "
-$CFLAGS+=" -I/usr/X11R6/include "
+if not $xcompile
+	$LDFLAGS+=" -L/usr/X11R6/lib "
+	$CFLAGS+=" -I/usr/X11R6/include "
+else
+	$CFLAGS+=" "
+end
 
 version="0.1.9"
 
@@ -102,7 +106,7 @@ GUI_OBJS=OBJS.select{|o|o=~/gui/}
 
 file "libantargis.so" => ANT_OBJS do |t|
 	if $xcompile
-		msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} --output-def=libantargis.def -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker libantargis.so.a #{ANT_OBJS.join(" ")} "+$libs
+		msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} --output-def=libantargis.def -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker libantargis.dll.a #{ANT_OBJS.join(" ")} "+$libs
 	else
 		msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{ANT_OBJS.join(" ")} "+$libs
 	end
@@ -134,9 +138,11 @@ plugins.each{|f|plugindeps[f]="lib"+f.gsub(/.*\//,"").gsub(".cc","").gsub("_",""
 #exit
 
 plugindeps.each{|k,v|
-	file v => [k.gsub(".cc",".o"),"libantargis.a"] do |t|
+	file v => [k.gsub(".cc",".o"),"libantargis.so"] do |t|
 		if $xcompile
-			msh "#{$LDSHARED} #{$LDFLAGS} -lantargis -L. -o #{t.name} #{t.prerequisites} -lantargis "+$libs
+			#msh "#{$LDSHARED}  -lstdc++ #{$LDFLAGS} -o #{t.name} #{t.prerequisites} "+$libs+""
+			x=t.prerequisites.select{|o|(not o=~/libant/)}
+			msh "#{$LDSHARED} #{$LDFLAGS} -lantargis -L. -o #{t.name} #{x.join(" ")} -lantargis "+$libs+" -lstdc++"
 		else
 			msh "#{$LDSHARED} #{$LDFLAGS} -o #{t.name} #{t.prerequisites} "+$libs
 		end
@@ -158,7 +164,7 @@ end
 if $swig!=""
 	myInterfaces=interfaceHeaders+["src/interface.i"]
 	file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
-		msh "cd src; swig -v -Wall -ruby -c++ #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
+		msh "cd src; swig -v -Wall -ruby -c++ -DAGEXPORT #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
 	end
 	
 	file ["src/nantmarker.hh"] => myInterfaces do |t|
@@ -168,7 +174,7 @@ if $swig!=""
 	# libantargisgui
 	myInterfaces=interfaceHeadersGUI+["gui/src/interface.i"]
 	file ["gui/src/guiswig.cc"] => ["gui/src/nantmarker.hh"]+myInterfaces do |t|
-		msh "cd gui/src; swig -v -Wall -ruby -c++ #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o guiswig.cc interface.i 2>&1"
+		msh "cd gui/src; swig -v -Wall -ruby -c++ -DAGEXPORT #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o guiswig.cc interface.i 2>&1"
 	end
 	
 	file ["gui/src/nantmarker.hh"] => myInterfaces do |t|
@@ -189,8 +195,13 @@ end
 	end
 	if s=~/.cc/
 		o=s.gsub(".cc",".o")
+		if s=~/plugins/
+			add="-DAGIMPORT"
+		else
+			add="-DAGEXPORT"
+		end
 		file [o] => deps do |f|
-			msh "#{$CXX} #{$CFLAGS} -Wp,-MD,#{dep} -c #{PWD}/#{s} -o #{o} "
+			msh "#{$CXX} #{$CFLAGS} #{add} -Wp,-MD,#{dep} -c #{PWD}/#{s} -o #{o} "
 		end
 	else
 		o=s.gsub(".c",".o")
@@ -209,7 +220,7 @@ end
 
 task :clean do
 	msh "rm -rf clean.rb"
-	["src",$GUISRC].each{|dir|
+	["src",$GUISRC,"gui/src/plugins"].each{|dir|
 		["*.o","*.oo"].each{|ext|
 			msh "rm -rf #{dir}/#{ext}"
 		}
@@ -223,6 +234,7 @@ task :clean do
 	msh "rm -rf docs/api"
 	msh "rm -rf docs/ruby"
 	msh "rm -rf libantargis.so"
+	msh "rm -rf libantargis.dll.a"
 	msh "rm -rf libantargisgui.so libantargisgui.a"
 
 	$files2clean.each{|f|
