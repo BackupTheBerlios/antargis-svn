@@ -1,14 +1,9 @@
 <?
 $dbuser="sh";
 $dbpass="bubi";
-$dbname="phpproject";
+$dbname="antargis";
 $dbhost="localhost";
 
 $DEBUGGING=false;
-
-function getTitle()
-{
-	return image("pics/title.jpg");
-}
 
 ?>

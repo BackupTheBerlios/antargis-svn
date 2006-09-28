@@ -80,16 +80,11 @@
 	{
 		global $menu;
 		
-		$title=getTitle();
-		$title=anchor("index.php?page=about",$title);
-		
-		$host='<table><tr><td valign="center" class="host">Kindly hosted by:</td><td><a href="http://developer.berlios.de" title="BerliOS Developer"> <img src="http://developer.berlios.de/bslogo.php?group_id=3474" width="124px" height="32px" border="0" alt="BerliOS Developer Logo"></a>&nbsp;</td></tr></table>';
+		$title=includeTemplate("views/title.thtml");
 		
 		$menu=showMenu2($menu);
 		
-		$notice="(C) 2005 by the Battles of Antargis team";
-		
-		return div($title,"title").div($menu,"menu").div($body,$bodyclass).div($notice,"notice").div($host,"host");
+		return div($title,"title").div($menu,"menu").div($body,$bodyclass).includeTemplate("views/bottom.thtml");
 	}
 
 ?>

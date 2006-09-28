@@ -49,6 +49,44 @@ class db
 		}
 		return $this->connection;
 	}
+	function getRowById($table, $id)
+	{
+		$r=$this->query("select * from $table where id=$id;");
+		if($this->num_rows($r)==0)
+			return array();
+		$row=$this->result($r);
+		return $row;
+	}
+
+	function getIds($table,$sort=array())
+	{
+		$q="select id from $table";
+		$sorting=false;
+		foreach($sort as $s)
+		{
+			$s=$this->save_string($s);
+			if($s=="")
+				return array();
+			if(!$sorting)
+				{
+					$sorting=true;
+					$q.=" order by";
+				}
+			else
+				$q.=",";
+			$q.=" $s";
+		}
+
+		$q.=";";
+		$r=$this->query($q);
+		$a=array();
+		for($i=0;$i<$this->num_rows($r);$i++)
+		{
+			$row=$this->result($r);
+			$a[]=$row[id];
+		}
+		return $a;
+	}
 	
 	function query($query)
 	{
@@ -103,7 +141,7 @@ class db
 			}
 		}
 
-function result_list($query_result)
+		function result_list($query_result)
 		{
 			$r = mysql_fetch_row($query_result);
 			if ($this->errno() != 0)
@@ -148,6 +186,33 @@ function result_list($query_result)
        }
 			 return "1";
 	}		
+		function escape_string($s)
+		{
+			return mysql_escape_string($s);
+		}
+
+		/// check if string save for sql-processing
+		function save_string($s)
+		{
+			$p=array("\"","'",";");
+			foreach($p as $x)
+			{
+				if(strpos($s,$p))
+					return "";
+			}
+			return $s;
+				
+		}	
+
+		function update_entry($table,$id,$name,$entry)
+		{
+			$table=$this->save_string($table);
+			$name=$this->save_string($name);
+			if($table=="" || $name=="")
+				return;
+			$q=sprintf("update %s set %s='%s' where id='%i';",$table,$name,$this->escape_string($entry),$this->escape_string($id));
+			$this->query($q);
+		}
 		
 };
 

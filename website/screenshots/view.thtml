@@ -1,0 +1,18 @@
+<h1>
+	Screenshots
+</h1>
+<p>
+	Click on small images for big screenshots.
+</p>
+<div class='thumbs'>
+	<? $output=getScreenies();
+		foreach($output as $date) { ?>
+		<h2><?=$date[0]?></h2>
+		<? foreach($date[1] as $shot) { ?>
+			<a style='text-decoration:none;' href='<?=$shot->url?>' target='_new'>
+				<img class='screenshot' src='<?=$shot->thumb?>'>
+			</a>
+		<? } ?>
+	<? } ?>
+</div>
+

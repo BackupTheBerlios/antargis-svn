@@ -1,0 +1,47 @@
+<h1>Welcome to Battles of Antargis</h1>
+
+<div class='screenshotPreview'>
+	<a href='index.php?page=screenshots'>
+		<img src='screenies/shot060421b_thumb.jpg'>
+		<br>More screenshots
+	</a>
+</div>
+
+<p>
+	Battles of Antargis is a medieval-like realtime strategy game. You are a hero who was betrayed and you have to unify the kingdom and rebuild the old empire. Old myths will pass your way.
+</p>
+
+<p>The game is currently in heavy development and taking up pace. The current features include:
+	<ul>
+		<li>A short tutorial giving you an introduction to the gameplay</li>
+		<li>Beginning of a real campaign</li>
+	</ul>
+</p>
+
+<p>
+	For a better overview have a look at the screenshots.
+</p>
+	
+<div class='news'>
+	<h2>Top news</h2>
+	<hr>
+	<? getTopNews(); ?>
+	<a href='index.php?page=news'>More news </a>
+</div>
+
+<div class='infos'>
+	<h3>Help wanted</h3>
+	<p>
+		If you are an artist or a developer and have some free time, then <a href='http://antargis.berlios.de/phpBB2/viewtopic.php?t=3'>join us</a> in creating a great game!
+	</p>
+</div>
+
+
+<div class='infos'>
+	
+	<h3>
+		Licensing/Copying
+	</h3>
+	<p>This game and its libraries are distributed under <a href='http://www.gnu.org/copyleft/gpl.html'>GPL</a>. So you are free to use it.</p>
+</div>
+<div style='clear:both;'>&nbsp;</div>

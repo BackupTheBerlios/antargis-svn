@@ -1,5 +1,6 @@
 <?
 	include("config/config.inc.php");
+	include("include/templating.inc.php");
 		include("include/messages.inc.php");
 		include("include/db.inc.php");
 		include("include/user.inc.php");

@@ -1,0 +1,13 @@
+<? foreach($output as $o) { ?>
+	<div class='newstitle'>
+		<?=$o->title?>
+	</div>
+	<div class='newsdate'>
+		<?=$o->date?>
+	</div>
+	<p>
+		<?=$o->text?>
+	</p>
+<?
+	}
+?>
