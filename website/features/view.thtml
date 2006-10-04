@@ -1,5 +1,35 @@
-<h1>Features</h1>
-	
+<h1>Game description</h1>
+
+<!--<h3>Features</h3>-->
+<p>
+	Battles of Antargis currently consists of:
+</p>
+	<ul>
+		<li>a tutorial and</li>
+		<li>a campaign for single players, which have several levels (or maps) each.</li>
+		<li>Apart from this there are two single maps.</li>
+	</ul>
+<p>
+	Your mission differs in each level. You'll have to:
+</p>
+	<ul>
+		<li>gather people</li>
+		<li>build a village</li>
+		<li>cross some obstacles</li>
+		<li>fight and defeat your enemy</li>
+		<li>flee</li>
+		<li>ambush or spy on your enemy</li>
+	</ul>
+<p>
+	The major difference to "normal" RTS-games like Warcraft or C&amp;C is your restricted control over your people.
+	You can only control your heroes directly. Their troopers and all the others of your people have their own mind.
+	You have to provide them with rest, food, weapons and so on. Otherwise they may leave you.
+</p>
+
+<h3></h3>
+
+
+<h1>Current techniques</h1>	
 <h3>Visuals</h3>
 <ul>
 	<li>animated milkshape models (MilkShape ASCII-importer)</li>
@@ -23,7 +53,7 @@
 	<li>place entities on map</li>
 </ul>
 	
-<h1>Planned features</h1>
+<h1>Planned techniques</h1>
 	
 <h3>Visuals</h3>
 <ul>
