@@ -26,8 +26,17 @@
 	You have to provide them with rest, food, weapons and so on. Otherwise they may leave you.
 </p>
 
-<h3></h3>
+<h3>Further reading:</h3>
 
+<p>For even more information read on in the wiki: <a href='http://antargis.berlios.de/wiki'>Wiki main-page</a>.
+</p>
+<ul>
+	<li>Information for developers and artists: <a href='http://antargis.berlios.de/wiki/index.php/Developer'>Developers and Artists' page</a>.<br>
+		This contains information on design and requirements. For more recent lists go to the release plan.
+	</li>
+	<li>Information for players (not finished): <a href="http://antargis.berlios.de/wiki/index.php/Player's_Guide">Players' guide</a></li>
+	<li>Release plan: <a href='http://antargis.berlios.de/wiki/index.php/Release_Plan'>List of old and future releases</a></li>
+</ul>
 
 <h1>Current techniques</h1>	
 <h3>Visuals</h3>
