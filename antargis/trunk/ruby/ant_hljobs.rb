@@ -277,9 +277,16 @@ class AntHeroFightJob<AntHeroMoveJob
 
 	def check(man)
 		# check state
-		if @state=="fighting" and getMenState("defeated").length==@men.length
-			lost
+		if @state=="fighting"
+			if getMenState("defeated").length==@men.length
+			  lost
+			end
+			if not @target.getJob.is_a?(AntHeroFightJob) # enemy gave up
+				@finished=true
+			end
 		end
+
+		return if @finished
 
 		puts "CHECK(FIGHT) #{man} #{man.getName}"
 		case @state
