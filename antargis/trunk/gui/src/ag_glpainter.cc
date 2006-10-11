@@ -278,7 +278,7 @@ namespace AGGLPainter
     
   }
 
-  void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c)
+  void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c,float pWidth)
   {
     STACKTRACE;
     AGRenderContext context;
@@ -286,7 +286,8 @@ namespace AGGLPainter
     context.setDepthTest(false);
     context.begin();
     
-    glLineWidth(2.0f);
+    glLineWidth(pWidth);
+    glEnable(GL_LINE_SMOOTH);
     glBegin(GL_LINES);
     glVertex2fv(p0);
     glVertex2fv(p1);

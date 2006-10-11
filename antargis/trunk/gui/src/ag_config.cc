@@ -15,25 +15,25 @@ AGConfig::AGConfig()
 	  if(c.substr(0,4)=="<!--")
 	    {
 	      comment=c;
-	      cdebug("comment:"<<comment);
+	      //	      cdebug("comment:"<<comment);
 	    }
 	  else
 	    {
-	      cdebug("no comment."<<c);
+	      //	      cdebug("no comment."<<c);
 	    }
 	}
       else
 	{
 	  singleValue[(*i)->get("name")]=(*i)->get("value");
 	  comments[(*i)->get("name")]=comment;
-	  cdebug((*i)->get("name")<<":"<<(*i)->get("value")<<":"<<comment);
+	  //	  cdebug((*i)->get("name")<<":"<<(*i)->get("value")<<":"<<comment);
 	  comment="";
 	}
     }
 
-  cdebug("singleValues:"<<singleValue.size());
+  //  cdebug("singleValues:"<<singleValue.size());
 
-  std::cerr<<doc.toString()<<std::endl;
+  //  std::cerr<<doc.toString()<<std::endl;
 
   writeToDisc();
 }

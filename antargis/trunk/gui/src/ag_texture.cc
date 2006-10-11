@@ -414,7 +414,8 @@ void AGTexture::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &
   if(opengl())
     {
       assert(mTexture);
-      AGGLPainter::drawLine(p0,p1,c);
+      #warning "FIXME"
+      AGGLPainter::drawLine(p0,p1,c,2); // FIX
     }
   else
     throw std::runtime_error("implement drawLine for sdl-texture");

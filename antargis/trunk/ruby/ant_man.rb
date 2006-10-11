@@ -315,6 +315,10 @@ class AntMan<AntRubyEntity
 	def canCarry
 		3
 	end
+
+	def getHero
+		@boss
+	end
 	
 	def saveXML(node)
 		super(node)

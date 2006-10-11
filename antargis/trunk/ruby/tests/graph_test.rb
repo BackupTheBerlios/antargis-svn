@@ -2,6 +2,14 @@
 
 require 'ruby/antargislib.rb'
 
+#@mweighter=MapPathWeighter.new(self)
+#		@sgraph=makeGraph(self,@mweighter,4)
+#		@dgraph=DecimatedGraph.new(@sgraph)
+#		@dgraph.decimate(0.2,@mweighter)
+#		@heuristic=computeHeuristic(@dgraph)
+
+
+
 g=DecimatedGraph.new
 
 n0=g.addNode(AGVector2.new(0,0))
@@ -18,7 +26,7 @@ e2=g.addEdge(n2,n3,1,1)
 g.print
 puts "---"
 
-g.decimate(0.25)
+#g.decimate(0.25,@mweighter)
 puts "---"
 
 g.print

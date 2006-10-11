@@ -61,7 +61,6 @@ class AGGLScreen:public AGScreen
 
   virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 
-
   virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
   virtual void drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2);
   virtual void putPixel(int x,int y,const AGColor &c);
@@ -82,12 +81,16 @@ class AGGLScreen:public AGScreen
   void beginPaint();
   void endPaint();
 
+  void setLineWidth(float w);
+
  private:
   AGRect2 getRect(SDL_Surface *s);
   void checkUnusedTextures();
 
   int w,h;
   int rw,rh;
+
+  float mLineWidth;
 
   friend class AGTexture;
 };

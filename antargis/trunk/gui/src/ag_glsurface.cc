@@ -94,6 +94,8 @@ AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
   if(h<rh)
     h=rh;
 
+  mLineWidth=2;
+
   cdebug("w:"<<w<<" h:"<<h);
 
   // init GL
@@ -296,7 +298,7 @@ void AGGLScreen::drawGradient(const AGRect2& rect, const AGColor& ul, const AGCo
 
 void AGGLScreen::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c)
 {
-  AGGLPainter::drawLine(p0,p1,c);
+  AGGLPainter::drawLine(p0,p1,c,mLineWidth);
 }
 
 void AGGLScreen::blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest)
@@ -350,6 +352,10 @@ void AGGLScreen::endPaint()
   glLoadIdentity();
 }
 
+void AGGLScreen::setLineWidth(float w)
+{
+  mLineWidth=w;
+}
 
 
 

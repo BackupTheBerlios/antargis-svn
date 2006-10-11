@@ -114,7 +114,8 @@ class AGEXPORT AGPainter
 
   AGVector2 project(const AGVector2 &p) const;
   bool pointOk(const AGVector2 &p) const;
-  
+
+  AGPaintTarget *getTarget();
 
  private:
   std::list<AGProjection> ps;

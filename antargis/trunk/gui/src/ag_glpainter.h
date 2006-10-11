@@ -44,7 +44,7 @@ namespace AGGLPainter
 
   void drawGradientAlpha(const AGRect2& pRect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 
-  void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
+  void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c,float pWidth);
 
   void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest);
 

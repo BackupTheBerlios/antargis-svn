@@ -265,6 +265,10 @@ class AntHero<AntBoss
 		makeRingMesh
 	end
 
+	def getHero
+		self
+	end
+
 	def getImage
 		@portrait||=""
 		r=nil

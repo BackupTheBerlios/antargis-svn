@@ -587,3 +587,8 @@ AGRect2 AGPainter::getRect() const
 {
   return mCurrent.getRect();
 }
+
+AGPaintTarget *AGPainter::getTarget()
+{
+  return mTarget;
+}

@@ -232,6 +232,7 @@ class AGMatrix3
   AGMatrix3 &operator*=(const AGMatrix3 &m);
 
   AGVector3 operator*(const AGVector3 &v) const;
+  //  AGVector2 operator*(const AGVector2 &v) const;
 
   AGMatrix3 operator-() const;
 

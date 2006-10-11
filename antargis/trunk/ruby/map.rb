@@ -44,6 +44,13 @@ class TargetPos
 end
 
 
+# class MyHeuristicFunction<HeuristicFunction
+# 	def distance(a,b)
+# 		(b-a).length*1.4
+# 	end
+# end
+
+
 # AntRubyMap is not only the "map", but manages the moving and the actions of all the
 # entities around. Apart from that it contains the Players. So it might be better to call it "World"
 class AntRubyMap<AntMap
@@ -248,10 +255,18 @@ class AntRubyMap<AntMap
 
 		# add pathfinder
 		@mweighter=MapPathWeighter.new(self)
-		@sgraph=makeGraph(self,@mweighter)
+		@sgraph=makeGraph(self,@mweighter,4)
 		@dgraph=DecimatedGraph.new(@sgraph)
-		@dgraph.decimate(0.9,@mweighter)
-		@path=Pathfinder.new(@dgraph)
+
+		factor=0.8
+		factor=1.0-400.0/@dgraph.size
+
+		@dgraph.decimate(factor,@mweighter)
+		@heuristic=computeHeuristic(@dgraph)
+		#exit
+
+		#@mheuristic=MyHeuristicFunction.new
+		@path=Pathfinder.new(@dgraph,@heuristic)
 
 
 		@players.each{|p|p.move(0)}

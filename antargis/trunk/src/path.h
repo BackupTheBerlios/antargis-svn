@@ -2,6 +2,9 @@
 #define PATH_H
 
 #include "height_map.h"
+#include "heuristic.h"
+
+#include <ag_surface.h>
 
 /**
    This file is WORK-IN-PROGRESS !!!!!!!!!!!!!!!!!!!!!!
@@ -17,6 +20,7 @@
 
 */
 
+class Heuristic;
 
 class PathWeighter:public AGRubyObject
 {
@@ -71,69 +75,17 @@ class SimpleGraph:public AGRubyObject
     Node *a,*b;
     float w0,w1;
 
-    Edge(Node *pa,Node *pb,float p0,float p1)
-    {
-      if(pa<pb)
-	{
-	  a=pa;
-	  b=pb;
-	  w0=p0;
-	  w1=p1;
-	}
-      else
-	{
-	  a=pb;
-	  b=pa;
-	  w0=p1;
-	  w1=p0;
-	}
-    }
+    Edge(Node *pa,Node *pb,float p0,float p1);
     ~Edge();
 
-    bool operator<(const Edge &e) const
-    {
-      return a<e.a || (a==e.a && b<e.b);
-    }
+    bool operator<(const Edge &e) const;
+    float maxWeight() const;
 
-    float maxWeight() const
-    {
-      return std::max(w0,w1);
-    }
+    Node *getOther(Node *n);
 
-    HalfEdge *getHalfEdgeFrom(Node *n)
-    {
-      HalfEdge *h;
-      if(a==n)
-	{
-	  h->a=a;
-	  h->b=b;
-	  h->w=w0;
-	}
-      else
-	{
-	  h->b=a;
-	  h->a=b;
-	  h->w=w1;
-	}
-      return h;
-    }
-    HalfEdge *getHalfEdgeTo(Node *n)
-    {
-      HalfEdge *h;
-      if(a!=n)
-	{
-	  h->a=a;
-	  h->b=b;
-	  h->w=w0;
-	}
-      else
-	{
-	  h->b=a;
-	  h->a=b;
-	  h->w=w1;
-	}
-      return h;
-    }
+    HalfEdge *getHalfEdgeFrom(Node *n);
+
+    HalfEdge *getHalfEdgeTo(Node *n);
   };
 
   struct Node
@@ -162,6 +114,8 @@ class SimpleGraph:public AGRubyObject
       return a->w0+a->w1;
     }
   };
+
+  SimpleGraph();
   
 
   Node *addNode(const AGVector2 &p);
@@ -183,6 +137,15 @@ class SimpleGraph:public AGRubyObject
   
 
   Node *findNearest(const AGVector2 &p);
+  AGVector2 findNearestVector(const AGVector2 &p);
+
+  float width() const;
+
+  size_t size() const;
+
+  void paint(const AGRect2& r,AGPaintTarget &t,Heuristic &heuristic);
+  void paintNode(const AGRect2& r,AGPaintTarget &t,const AGVector2 &p,const AGColor &c);
+
 
  protected:
 
@@ -191,14 +154,21 @@ class SimpleGraph:public AGRubyObject
   // FIXME: quadtree out of nodes !!!
 
   typedef std::map<AGVector2,Node*,AGVector2Sort> NodeMap;
+  typedef std::set<Node*> NodeSet;
   typedef std::set<Edge*,EdgeSort> EdgeSet;
-  NodeMap mNodes;
+  NodeMap mNodeMap;
+  NodeSet mNodes;
   EdgeSet mEdges;
-  
+  float mWidth;
+
+
+  friend HeuristicFunction *computeHeuristic(SimpleGraph *g);
+
 };
 
+SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res=1);
+HeuristicFunction *computeHeuristic(SimpleGraph *g);
 
-SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter);
 
 class DecimatedGraph:public SimpleGraph
 {
@@ -218,12 +188,49 @@ class DecimatedGraph:public SimpleGraph
 
 };
 
+struct Path;
 
+class Heuristic
+{
+  AGVector2 to;
+  HeuristicFunction *p;
+ public:
+  Heuristic(const AGVector2 &pTo,HeuristicFunction *f):to(pTo),p(f)
+    {
+    }
+  bool operator()(const Path &a,const Path &b);
+  float distance(const AGVector2&from);
+};
+
+struct Path:public std::list<SimpleGraph::Node*>
+{
+  float weight;
+  
+  Path();
+  
+  float getWeight(Heuristic *h) const;
+  
+  void push(SimpleGraph::Node *n,float w);
+  
+  void paint(const AGRect2 &r,AGPaintTarget &t,float scale);
+  
+};
+
+
+class PathDebugging
+{
+ public:
+  virtual void debugPath(Path &p,float heuristic)
+  {
+  }
+};
+  
 
 class Pathfinder:public AGRubyObject
 {
  public:
-  Pathfinder(SimpleGraph *pGraph);
+
+  Pathfinder(SimpleGraph *pGraph,HeuristicFunction *pHeuristic,PathDebugging *pDebugger=0);
 
   virtual void mark();
 
@@ -233,6 +240,8 @@ class Pathfinder:public AGRubyObject
 
  private:
   SimpleGraph *mGraph;
+  HeuristicFunction *mHeuristic;
+  PathDebugging *mDebug;
 };
 
 #endif

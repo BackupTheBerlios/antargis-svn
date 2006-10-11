@@ -35,6 +35,7 @@
 #include "SDL_image.h"
 
 #include <sstream>
+#include <math.h>
 
 #include <ag_fs.h>
 
@@ -457,6 +458,88 @@ AGSurface AGSurface::grayed() const
 
   return n;
 }
+
+void AGSurface::fillRect(const AGRect2 &pr,const AGColor &c)
+{
+  for(int x=(int)pr.x0();x<=pr.x1();x++)
+    for(int y=(int)pr.y0();y<=pr.y1();y++)
+      putPixel(x,y,c);
+}
+
+
+void AGSurface::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor &c)
+{
+  AGVector2 p0,p1;
+
+  p0=pp0;
+  p1=pp1;
+
+  float dx=p1[0]-p0[0];
+  float dy=p1[1]-p0[1];
+
+  if(fabs(dx)>fabs(dy))
+    {
+      if(dx<0)
+	{
+	  p0=pp1;
+	  p1=pp0;
+	}
+
+      dx=p1[0]-p0[0];
+      dy=p1[1]-p0[1];
+
+      float y=p0[1];
+      float e=0;
+      float de=((float)dy)/dx;
+      for(float x=p0[0];x<=p1[0];x++)
+	{
+	  putPixel(int(x),int(y),c);
+	  e+=de;
+	  if(e>0.5)
+	    {
+	      e-=1.0;
+	      y++;
+	    }
+	  else if(e<-0.5)
+	    {
+	      e+=1.0;
+	      y--;
+	    }
+	}
+    }
+  else
+    {
+      if(dy<0)
+	{
+	  p0=pp1;
+	  p1=pp0;
+	}
+
+      dx=p1[0]-p0[0];
+      dy=p1[1]-p0[1];
+
+      float x=p0[0];
+      float e=0;
+      float de=((float)dx)/dy;
+      for(float y=p0[1];y<=p1[1];y++)
+	{
+	  putPixel(int(x),int(y),c);
+	  e+=de;
+	  if(e>0.5)
+	    {
+	      e-=1.0;
+	      x++;
+	    }
+	  else if(e<-0.5)
+	    {
+	      e+=1.0;
+	      x--;
+	    }
+	}
+    }
+}
+
+
 
 AGDecryptor *toDecryptor(AGPlugin *p)
 {

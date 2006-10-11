@@ -24,13 +24,14 @@
 #include <ag_geometry.h>
 #include <ag_color.h>
 #include <ag_font.h>
+#include <ag_rubyobj.h>
 
 class AGSurface;
 class AGTexture;
 
 #define MSTUB { throw int();}
 
-class AGPaintTarget
+class AGPaintTarget:public AGRubyObject
 {
  public:
   virtual ~AGPaintTarget()

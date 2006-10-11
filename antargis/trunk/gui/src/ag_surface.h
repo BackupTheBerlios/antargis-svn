@@ -120,6 +120,10 @@ class AGSurface:public AGPaintTarget
   virtual void putPixel(int x,int y,const AGColor &c);
   virtual AGColor getPixel(int x,int y) const;
 
+  virtual void fillRect(const AGRect2 &pr,const AGColor &c);
+  virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
+
+
   void save(const std::string &pName) const;
 
   static AGSurface load(const std::string &pName);

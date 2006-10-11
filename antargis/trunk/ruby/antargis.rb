@@ -164,7 +164,7 @@ class AntGameApp <AntRubyView
 		@eventDebugging||=File.open("events.txt","w")
 		begin
 			@eventDebugging.puts s
-			puts toSDLEvent(s)
+			#puts toSDLEvent(s)
 		rescue
 		end
 	

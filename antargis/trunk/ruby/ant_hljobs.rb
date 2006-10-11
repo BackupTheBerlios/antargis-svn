@@ -119,9 +119,16 @@ class AntHLJob
 	end
 end
 
+#
+# This is the High-level move job for heroes.
+# it uses the path-finding-algorithm provided by the map-object. it runs in several stages:
+# 1) formatting the troops
+# 2) go to next waypoint - and go back to 1), if necessary
+# 3) moveFinished is set to true and eventMoveFinished is called
+#
 class AntHeroMoveJob<AntHLJob
 	def initialize(hero,prio,pos,dist,doFormat=true)
-		@hero=hero #getMap.getRuby(hero)
+		@hero=hero
 		@hero.delJob
 		@prio=prio
 		@pos=AGVector2.new(pos.x,pos.y)
@@ -132,32 +139,26 @@ class AntHeroMoveJob<AntHLJob
 
 		@waypoints.unshift(@hero.getPos2D)
 		@waypoints.push(@pos)
-		puts @waypoints
-		#@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
-		puts "---"
-		puts @waypoints
-		#exit
-
+		@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
+		@men=getMen
+		@moveFinished=false
 
 		if getMen.length>0
-			@state="format"
+			startFormatting
 		else
-			@state="torest"
-			@hero.newMoveJob(0,@waypoints[0],@dist)
+			startWalking
 		end
-		@men=getMen
-		@men.each{|m|
-			m.setMode "format"
-		}
-		
-		@formatDir=(@pos-@hero.getPos2D).normalized
-		@moveFinished=false
-		@movingMen=0
-		@hero.formation=AntFormationBlock.new(@hero,@formatDir)
+	end
+
+	def targetPos
+		@waypoints[0]
+	end
+	def formatDir
+		(targetPos-@hero.getPos2D).normalized
 	end
 
 	def makeMessage(boss)
-		MoveMessage.new(boss,@pos,@dist)
+		MoveMessage.new(boss,targetPos,@dist)
 	end
 
 	def image
@@ -167,66 +168,56 @@ class AntHeroMoveJob<AntHLJob
 		@hero.getMen
 	end
 
+	def startFormatting
+		puts "startFormatting:::::::::::"
+		@hero.formation=AntFormationBlock.new(@hero,formatDir)
+		@men.each{|man|
+			f=@hero.getFormation(man,@hero.getPos2D)
+			man.newMoveJob(0,f,@formatDist)
+			man.setMode("format")
+		}
+		@state="format"
+		puts "startFormatting."
+	end
+
 	def startWalking
+		puts "startWalking:::::::::::"
+		@hero.formation=AntFormationBlock.new(@hero,formatDir)
 		@pos=@waypoints.shift
-		@hero.formation=AntFormationBlock.new(@hero,@formatDir)
-		puts "START WALKING #{@pos}"
-		@movingMen=0
 		@men.each{|m|
-# 			f=@pos+@hero.getFormation(m,@formatDir)
 			f=@hero.getFormation(m,@pos)
 			m.newMoveJob(0,f,@dist)
 			m.setMode("moving")
-			@movingMen+=1
 		}
-		if @waypoints.length==0
-			@state="move"
-		end
+		@state="moving"
+		puts "startWalking."
 	end
 	def getMenState(mode)
 		@men.select{|m|m.getMode==mode}
 	end
 
 	def check(man)
-		puts "CHECK #{@state} #{man.getMode}"
+		if @moveFinished
+			return	
+		end
+		puts "CHECK #{@state} #{man.getMode} #{man}"
 		case @state
 			when "format"
 				if man.getMode=="format"
-					f=@hero.getFormation(man,@hero.getPos2D)
-					#puts "FORMATTING:#{man} #{f} #{@hero.getPos2D}"
-					man.newMoveJob(0,f,@formatDist)
-					man.setMode("formating")
-				elsif man.getMode=="formatted"
-					# some have already waited for 7 seconds
-					puts "I'm formatted"
+					man.setMode("ready")
+				end
+				if getMenState("format").length==0
 					startWalking
+				end
+			when "moving"
+				if @waypoints.length>0
+					startFormatting
 				else
-					man.setMode("formatted")
-					man.newRestJob(7)
-					puts "WAIT"
-				end
-				if getMenState("formating").length==0
-					startWalking
-				end
-			when "move"
-				case man.getMode
-					when "moving"
-						@movingMen-=1
-						man.setMode("torest")
-						if @movingMen>0
-							man.newRestJob(5)
-						end
-				end
-				puts "movingMen:#{@movingMen}"
-				if @movingMen==0
-					# FIXME - check if all men are really at destination
-					puts "move finished!"
-					@moveFinished=true
-					#@state="torest"
+					self.moveFinished=true
 				end
 		end
 	end
-	
+
 	def moveFinished
 		return @moveFinished
 	end
@@ -234,11 +225,21 @@ class AntHeroMoveJob<AntHLJob
 	def finished
 		moveFinished
 	end
-		
+
+	def moveFinished=(b)
+		@moveFinished=b
+		if b	
+			eventMoveFinished
+		end
+	end
+	def eventMoveFinished
+	end
+
 end
 
 class AntHeroFightJob<AntHeroMoveJob
 	attr_reader :target
+	attr_accessor :fightMap
 
 	def initialize(hero,target,defend=false)
 		@men=hero.getMen
@@ -248,14 +249,15 @@ class AntHeroFightJob<AntHeroMoveJob
 
 		@hero=hero
 		@target=target
-		@killStarted=false
-		@killJobsGiven=false
+		#@killStarted=false
+		#@killJobsGiven=false
 		@defend=defend
 		@hero.newRestJob(1)  #FIXME: this is an indirect method of killing actual job
 		super(hero,0,target.getPos2D,10,(not defend)) # near til 10
 
  		if @defend or (not hero.is_a?(AntHero))
-			@hero.newRestJob(2) # wait for 3 seconds; then set state to fight - have a look at check() for more
+			#@hero.newRestJob(2) # wait for 3 seconds; then set state to fight - have a look at check() for more
+			startFighting
  		end
 		@finished=false
 	end
@@ -264,11 +266,227 @@ class AntHeroFightJob<AntHeroMoveJob
 		FightMessage.new(@hero.uid,@target.uid,@defend)
 	end
 
-
 	def finished
 		@finished
 	end
 	
+	def eventMoveFinished
+		puts "MOVE FINISHED EVENT"
+		startFighting
+	end
+
+	def check(man)
+		# check state
+		if @state=="fighting" and getMenState("defeated").length==@men.length
+			lost
+		end
+
+		puts "CHECK(FIGHT) #{man} #{man.getName}"
+		case @state
+			when "fighting"
+				if [AntMan,AntHero].member?(man.class)
+					startFightingMan(man)
+				end
+			else
+				super
+		end
+	end
+
+	def startFighting
+		puts "--------------------"
+		puts "START FIGHTING #{@hero}"
+		if @state=="fighting"
+			raise "already fighting"
+		end
+		@state="fighting"
+		@target.eventGotHLFight(@hero)
+		@target.eventAttacked(@hero)
+		initSitpositions
+
+		if @fightMap.nil?
+			computeFightMap
+		end
+		
+		@hero.getMen.each{|man|
+			puts man
+			man.setMode("fight")
+			startFightingMan(man)
+		}
+		puts "--------------------"
+		@fightStarted=true
+	end
+
+	def computeFightMap
+		@fightMap={}
+		puts "mymen: #{@hero.getMen.join(" ")}"
+		puts "otheren: #{@target.getMen.join(" ")}"
+
+		if @target.getJob.is_a?(AntHeroFightJob)
+			map=@target.getJob.fightMap
+			if map
+				map.each{|k,v|
+					@fightMap[v]=k
+				}
+			end
+		end
+		undefeatedMen.each{|m|
+			if @fightMap[m].nil?
+				# find next enemy
+				e=findNextEnemy(m,@fightMap.values)
+
+				@fightMap[m]=e
+			end
+		}
+		@fightMap.each{|m,e|
+			puts "FIGHTMAP:#{m}:#{e}"
+		}
+	end
+
+	def startFightingMan(man)
+		puts "startFightingMan(man)"
+		target=nil
+		if @fightStarted
+			raise "Problem! Fightmap not defined" if not @fightMap		
+		
+			if @target.getJob.is_a?(AntHeroFightJob)
+				if @target.getJob.undefeatedMen.member?(@fightMap[man])
+					target=@fightMap[man]
+				end
+			end
+			if target.nil?
+				# find trooper with least energy and help him
+				least=nil
+				e=1000
+				undefeatedMen.each{|m|
+					if m.getEnergy<e and m!=man
+						least=m
+						e=m.getEnergy
+					end
+				}
+				target=getTargetFrom(least)
+			end
+		else
+			target=@fightMap[man]
+		end
+		if target.nil?
+			# probably won ?
+			if @target.getJob.is_a?(AntHeroFightJob)
+				puts "WON????"
+				puts @target.getJob.undefeatedMen
+				if @target.getJob.undefeatedMen.length==0
+					won
+					return
+				end
+			end
+			#raise "PROBLEM!"
+		else
+			attack(man,target)
+		end
+	end
+
+	def attack(man,target)
+		man.newFightJob(0,target)
+		#puts man
+		#puts "#{man.getName} attacks #{target.getName}"
+		puts "#{man.getHero.getName}(#{man.getName}) attacks #{target.getHero.getName}(#{target.getName})"
+	end
+
+	def findNextEnemy(man,but)
+		if @target.getJob.is_a?(AntHeroFightJob)
+			tmen=@target.getJob.undefeatedMen
+		else
+			tmen=@target.getMen
+		end
+		orig=tmen
+		tmen-=but
+		if tmen.length==0
+			return orig.shuffle[0]
+		end
+		# search nearest enemy
+		dist=1000.0
+		mtarget=nil
+		tmen.each{|t|
+			if t.getEnergy>0 and t.dead!=true
+				d=(t.getPos2D-man.getPos2D).length
+				if d<dist
+					dist=d
+					mtarget=t
+				end
+			end
+		}
+		return mtarget
+	end
+
+	def getTargetFrom(m)
+		raise "Problem! Fightmap not defined" if not @fightMap		
+		@fightMap[m]
+	end
+
+
+	def defeated(man)
+		playSound("ugh_end")
+		puts "DEFEATED:"+man.to_s
+		if man.is_a?(AntBoss)
+			lost
+			return
+		end
+		man.setMode("defeated")
+		raise "no sit position" if @sitpos[man].nil?
+		man.newMoveJob(0,@sitpos[man],0)
+	end
+
+	def haveDefeated(e)
+		puts "haveDefeated: #{e.getName}"
+		@men.each{|m|
+			puts "checking: #{m.fightTarget} #{e}"
+			if m.fightTarget==e
+				puts "#{m.getName} not longer attacks #{e.getName}"
+				m.delJob # search other target
+			end
+		}
+		@fightMap.delete_if{|k,v|v==e}
+	end
+
+	def lost
+		if not @finished
+			dputs "LOST!!!!!!!!!!"
+			@finished=true
+
+			if @hero.is_a?(AntHero)
+				@hero.eventHLJobFinished(self)
+				@hero.newHLMoveJob(0,@sitpos[@hero],0)
+			end
+
+			if @target.getJob.is_a?(AntHeroFightJob)
+				@target.getJob.won
+			end
+			@hero.setOwner(@target)
+			@hero.killAllJobs
+			@target.killAllJobs
+		end
+	end
+	def won
+		if not @finished
+			dputs "WON!!!!!!!!!!"
+			playSound("won")
+			@finished=true
+			if @hero.is_a?(AntHero)
+				@hero.eventHLJobFinished(self)
+				@hero.newHLMoveJob(0,@sitpos[@hero],0)
+			end
+
+			if @target.getJob.is_a?(AntHeroFightJob)
+				@target.getJob.lost
+			end
+			@hero.killAllJobs
+			@target.killAllJobs
+		end
+	end
+
+
+
+	
+	if false
 	def getEnergy
 		raise "deprecated"
 		e=0
@@ -276,6 +494,7 @@ class AntHeroFightJob<AntHeroMoveJob
 		return e*0.1
 	end
 	
+	# checks if the enemy is trying to flee - then leave him go
 	def checkFlee
 		dist=(@target.getPos2D-@hero.getPos2D).length
 		if dist>15 and @state=="fight"
@@ -455,9 +674,15 @@ class AntHeroFightJob<AntHeroMoveJob
 		
 		return false
 	end
+
+
+	end
+
 	def image
 		"data/gui/sword.png"
 	end
+
+
 
 private
 	def initSitpositions

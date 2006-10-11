@@ -78,16 +78,6 @@
 	result->mRubyObject=true;
 }
 %markfunc Scene "general_markfunc"
-%exception AGText::AGText {
-	$action
-	result->mRUBY=self;
-#ifdef GCDEBUG
-     result->mObjName=typeid(*result).name();
-     printf("%lx   %s\n",self,typeid(*result).name());
-#endif
-	result->mRubyObject=true;
-}
-%markfunc AGText "general_markfunc"
 %exception WaterPiece::WaterPiece {
 	$action
 	result->mRUBY=self;
@@ -98,6 +88,16 @@
 	result->mRubyObject=true;
 }
 %markfunc WaterPiece "general_markfunc"
+%exception AGText::AGText {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGText "general_markfunc"
 %exception AGScreenWidget::AGScreenWidget {
 	$action
 	result->mRUBY=self;
@@ -168,6 +168,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGComboBox "general_markfunc"
+%exception AGTexture::AGTexture {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGTexture "general_markfunc"
 %exception AGPlugin::AGPlugin {
 	$action
 	result->mRUBY=self;
@@ -368,6 +378,16 @@
 	result->mRubyObject=true;
 }
 %markfunc SceneNode "general_markfunc"
+%exception AGGLScreen::AGGLScreen {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGGLScreen "general_markfunc"
 %exception DecimatedGraph::DecimatedGraph {
 	$action
 	result->mRUBY=self;
@@ -388,6 +408,26 @@
 	result->mRubyObject=true;
 }
 %markfunc AGGLWidget "general_markfunc"
+%exception AGSurface::AGSurface {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGSurface "general_markfunc"
+%exception AGScreen::AGScreen {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGScreen "general_markfunc"
 %exception AGEdit::AGEdit {
 	$action
 	result->mRUBY=self;
@@ -448,6 +488,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGSound "general_markfunc"
+%exception AGPaintTarget::AGPaintTarget {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGPaintTarget "general_markfunc"
 %exception AGButton::AGButton {
 	$action
 	result->mRUBY=self;
@@ -1286,6 +1336,34 @@ else if(dynamic_cast<MapPathWeighter*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) AGTexture*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTexture,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGTexture*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTexture,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGApplication*{
  if($1)
  {
@@ -1722,6 +1800,34 @@ else if(dynamic_cast<AGMessageObject*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) AGGLScreen*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLScreen,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGGLScreen*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLScreen,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGEdit*{
  if($1)
  {
@@ -1934,6 +2040,38 @@ else if(dynamic_cast<AGDecryptorPlugin*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) AGScreen*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGGLScreen*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLScreen,0);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreen,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGScreen*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGGLScreen*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLScreen,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreen,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGSubMenu*{
  if($1)
  {
@@ -1986,6 +2124,34 @@ else if(dynamic_cast<AGDecryptorPlugin*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AGSurface*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSurface,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGSurface*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSurface,0);
    }
  }
  else $input=Qnil;
@@ -2098,6 +2264,50 @@ else if(dynamic_cast<AGDecryptorPlugin*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AGPaintTarget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGTexture*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTexture,0);
+else if(dynamic_cast<AGGLScreen*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLScreen,0);
+else if(dynamic_cast<AGSurface*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSurface,0);
+else if(dynamic_cast<AGScreen*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreen,0);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGPaintTarget,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGPaintTarget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<AGTexture*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTexture,0);
+else if(dynamic_cast<AGGLScreen*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLScreen,0);
+else if(dynamic_cast<AGSurface*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSurface,0);
+else if(dynamic_cast<AGScreen*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreen,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGPaintTarget,0);
    }
  }
  else $input=Qnil;
@@ -2397,6 +2607,11 @@ else if(dynamic_cast<AntMap*>($1))
 %typemap(directorout) AGFontEngine {
  AGFontEngine *b;
  Data_Get_Struct($input,AGFontEngine,b);
+ $result=*b;
+}
+%typemap(directorout) AGGLScreen {
+ AGGLScreen *b;
+ Data_Get_Struct($input,AGGLScreen,b);
  $result=*b;
 }
 %typemap(directorout) AGGLTexture {
@@ -2789,6 +3004,11 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,HeightMap,b);
  $result=*b;
 }
+%typemap(directorout) Heuristic {
+ Heuristic *b;
+ Data_Get_Struct($input,Heuristic,b);
+ $result=*b;
+}
 %typemap(directorout) Job {
  Job *b;
  Data_Get_Struct($input,Job,b);
@@ -2832,6 +3052,11 @@ else if(dynamic_cast<AntMap*>($1))
 %typemap(directorout) Parser {
  Parser *b;
  Data_Get_Struct($input,Parser,b);
+ $result=*b;
+}
+%typemap(directorout) PathDebugging {
+ PathDebugging *b;
+ Data_Get_Struct($input,PathDebugging,b);
  $result=*b;
 }
 %typemap(directorout) PathWeighter {
