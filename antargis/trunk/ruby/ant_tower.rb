@@ -45,7 +45,7 @@ class AntTower<AntHouse
 	def addFlag(owner)
 		@flag=AntFlag.new
 		setPos(getPos2D) # reset flag position
-		$map.insertEntity(@flag)
+		getMap.insertEntity(@flag)
 	end
 
 	def houseType

@@ -490,13 +490,9 @@ class AntHeroFightJob<AntHeroMoveJob
 		end
 	end
 
-
-
 	def image
 		"data/gui/sword.png"
 	end
-
-
 
 private
 	def initSitpositions

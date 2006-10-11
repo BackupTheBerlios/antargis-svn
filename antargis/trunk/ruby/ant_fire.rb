@@ -26,7 +26,7 @@ class AntFire<AntRubyEntity
 			newRestJob(10)
 		else
 			if @dead
-				$map.removeEntity(self)
+				getMap.removeEntity(self)
 			else
 				@dead=true
 				newRestJob(10)

@@ -50,7 +50,7 @@ class AntSheep<AntAnimal
 		if @dead
 			newRestJob(30)
 			if @alreadyDead
-				$map.removeEntity(self)
+				getMap.removeEntity(self)
 			end
 			@alreadyDead=true
 	
@@ -63,7 +63,7 @@ class AntSheep<AntAnimal
 			puts "A SHEEP IS BORN"
 			sheep=AntSheep.new
 			sheep.setPos(getPos2D)
-			$map.insertEntity(sheep)
+			getMap.insertEntity(sheep)
 			#getMap.endChange
 			newRestJob(2)
 			@lastBirth=-rand()*10
@@ -88,24 +88,6 @@ class AntSheep<AntAnimal
 		@lastBirth+=1
 	end
 	
-# 	def getTargetPos
-# 		puts "GettargetPos"
-# 		p=getPos2D
-# 		t=p
-# 		ok=true
-# 		# assure that sheep doesn't walk into water
-# 		while $map.getHeight(t.x,t.y)<0.1 or ok do
-# 			d=AGVector2.new(rand-0.5,rand-0.5).normalized*4
-# 			t=p+d
-# 			t=$map.truncPos(t)
-# 			puts "HUPE"
-# 			puts t
-# 			
-# 			puts $map.getHeight(t.x,t.y)
-# 			ok=false
-# 		end 
-# 		return t
-# 	end
 	def getTargetPos
 		p=getPos2D
 		tries=10
@@ -113,9 +95,9 @@ class AntSheep<AntAnimal
 		while tries>0 do
 			d=AGVector2.new(rand-0.5,rand-0.5).normalized*2
 			t=p+d
-			t=$map.truncPos(t)
+			t=getMap.truncPos(t)
 			tries-=1
-			if $map.getHeight(t.x,t.y)>0
+			if getMap.getHeight(t.x,t.y)>0
 				return t
 			end
 		end 

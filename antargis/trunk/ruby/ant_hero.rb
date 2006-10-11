@@ -66,7 +66,7 @@ class AntHero<AntBoss
 	end
 	
 	def noHLJob
-		puts "noHLJob"
+		puts "noHLJob #{self}"
 		if @player
 			@player.assignJob(self)
 			#stopFireSound
@@ -133,6 +133,7 @@ class AntHero<AntBoss
 		assignJob2All
 	end
 	def newHLTakeFoodJob(target)
+		puts "take food job #{self} #{target}"
 		@job=AntHeroTakeJob.new(self,target,$buttonPanel.getAggression,"food")
 		assignJob2All
 	end
@@ -221,6 +222,7 @@ class AntHero<AntBoss
 	
 	def assignJob2All
 		super
+		puts "ASSIGN JOB 2 All #{self}"
 		if @job.class!=AntHeroRestJob
 			setFire(false)
 		end

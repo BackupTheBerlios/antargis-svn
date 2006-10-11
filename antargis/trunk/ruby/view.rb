@@ -41,7 +41,7 @@ class AntRubyView <GLApp
 		super
 	end
 	def updateNamePositions
-		heroes=$map.getHeroes
+		heroes=@map.getHeroes
 		@names.each{|k,w|
 			found=false
 			heroes.each{|hero|
@@ -67,13 +67,13 @@ class AntRubyView <GLApp
 	end
 	
 	def setupNames
-		heroes=$map.getHeroes
+		heroes=@map.getHeroes
 		@names||={}
 		heroes.each{|hero|
 			name=hero.getName
 			#FIXME: readd this
 			if @names[hero].nil?
-				n=AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero)
+				n=AntNameDisplay.new(@layout,getHeroScreenPos(hero),hero,@map)
 				@names[hero]=n
 				@layout.addChild(n)
 			end
@@ -187,7 +187,7 @@ class AntRubyViewCreator<AGLayoutCreator
 		super("antRubyView")
 	end
 	def create(parent,rect,node)
-		w=AntRubyView.new(parent,rect,AGVector3.new(0,0,0),$map)
+		w=AntRubyView.new(parent,rect,AGVector3.new(0,0,0),nil) #$map)
 		return w
 	end
 end
@@ -290,8 +290,9 @@ $antBPCreator=AntButtonPanelCreator.new
 
 
 class AntNameDisplay<AGWidget
-	def initialize(p,r,hero)
+	def initialize(p,r,hero,map)
 		super(p,r)
+		@map=map
 		@hero=hero
 		@font=getTheme.getFont("heroName.font")
 		@oldfont=@font
@@ -316,9 +317,9 @@ class AntNameDisplay<AGWidget
 	end
 
 	def prepareDraw
-		@font=@fonts[@hero.getPlayer==$map.getPlayer]
+		@font=@fonts[@hero.getPlayer==@map.getPlayer]
 		if @font!=@oldfont
-			puts "#{@hero.getPlayer} #{$map.getPlayer} #{@oldPlayer}"
+			puts "#{@hero.getPlayer} #{@map.getPlayer} #{@oldPlayer}"
 			puts "#{@font} #{@oldfont}"
 			@oldPlayer=@hero.getPlayer
 			puts "font changed"

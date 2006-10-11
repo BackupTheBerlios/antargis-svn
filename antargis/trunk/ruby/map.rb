@@ -24,6 +24,8 @@ require 'ant_player.rb'
 require 'ant_trigger.rb'
 require 'level.rb'
 
+require 'ant_ai.rb'
+
 # This class prodives support for defining target-positions in a level-file.
 # These positions can be used for scripting. This way code and level-data is
 # devided (MVC)
@@ -87,6 +89,8 @@ class AntRubyMap<AntMap
 
 		@filename="dummy"  # a dummy filename - used for level scripting
 		@uidstart=0
+
+		AntRubyEntity.setMap(self)
 
 	end
 
@@ -173,6 +177,19 @@ class AntRubyMap<AntMap
 		return ret
 	end
 
+	def getBuildings
+		ents=getAllEntitiesV
+		ret=[]
+		ents.each{|eptr|
+			ent=eptr.get
+			#dputs ent
+			if ent.is_a?(AntHouse)
+				ret.push(ent)
+			end
+		}
+		return ret
+	end
+
 	# returns AGSurfaces of the given hero for portraits
 	def getPortrait(hero)
 		f="data/gui/portraits/#{hero}.png"
@@ -236,9 +253,19 @@ class AntRubyMap<AntMap
 			@targets[t.name]=t
 		end
 		
-		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer}
+		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer,"newAI"=>AntAttackAI}
 		if playerTypes.keys.member?(node.getName) then
-			player=playerTypes[node.getName].new("")
+			type=playerTypes[node.getName]
+			puts "TYPE #{type}"
+			if type.ancestors.member?(AntPlayer)
+				player=playerTypes[node.getName].new("")
+			else
+				puts "TYPE #{type}"
+				aiInterface=AIInterface.new(self,node.get("name"))
+				ai=type.new(aiInterface)
+				player=AntAIPlayer.new(ai)
+			end
+		
 			player.loadXML(node)
 			@players.push(player)
 		end
@@ -432,6 +459,3 @@ private
 end
 
 
-def getMap
-	$map
-end

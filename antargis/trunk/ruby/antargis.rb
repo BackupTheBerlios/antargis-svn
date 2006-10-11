@@ -83,11 +83,13 @@ class AntGameApp <AntRubyView
 			loadscreen.setValue(0.4)
 			loadscreen.tick
 		end
-		$map=@map
+		#$map=@map
 
 		# load GUI layout
 		@layout=AGLayout.new(nil)
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
+		
+		
 
 		# init pointers to different displays
 		# statusBar (FPS display)

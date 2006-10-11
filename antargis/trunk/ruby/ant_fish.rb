@@ -59,7 +59,7 @@ class AntFish<AntAnimal
 		if @dead
 			newRestJob(30)
 			if @alreadyDead
-				$map.removeEntity(self)
+				getMap.removeEntity(self)
 			end
 			@alreadyDead=true
 	
@@ -72,7 +72,7 @@ class AntFish<AntAnimal
 			puts "A FISH IS BORN"
 			fish=AntFish.new
 			fish.setPos(getPos2D)
-			$map.insertEntity(fish)
+			getMap.insertEntity(fish)
 			getMap.endChange
 			newRestJob(2)
 			@lastBirth=-rand()*10
@@ -99,9 +99,9 @@ class AntFish<AntAnimal
 		while tries>0 do
 			d=AGVector2.new(rand-0.5,rand-0.5).normalized*2
 			t=p+d
-			t=$map.truncPos(t)
+			t=getMap.truncPos(t)
 			tries-=1
-			if $map.getHeight(t.x,t.y)<0
+			if getMap.getHeight(t.x,t.y)<0
 				return t
 			end
 		end 

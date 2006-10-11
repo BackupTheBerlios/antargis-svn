@@ -27,7 +27,7 @@ class AntRubyEditView<GLApp
 	include AGHandler
 	def initialize(w,h,map)
 		super(w,h)
-		$map=map
+		#$map=map
 		@map=map
 		@size=3
 		$scene=getScene

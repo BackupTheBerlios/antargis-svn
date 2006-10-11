@@ -266,11 +266,12 @@ class AntBoss<AntRubyEntity
 				@job.check(man)
 			end
 			if @job.finished then 
-				eventHLJobFinished(@job)
-				if @player
-					@player.eventJobFinished(self,@job)
-				end
+				job=@job
 				@job=nil 
+				eventHLJobFinished(job)
+				if @player
+					@player.eventJobFinished(self,job)
+				end
 			end
 		end
 		if @job==nil

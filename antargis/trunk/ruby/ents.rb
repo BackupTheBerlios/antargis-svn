@@ -31,6 +31,16 @@ OUTER_VOL_SIZE=25 # size circle around camera describing volume descend
 class AntRubyEntity<AntEntity
 	attr_accessor :birthday
 	attr_reader :uid
+
+	def AntRubyEntity.setMap(map)
+		@@map=map
+	end
+	def getMap
+		@@map
+	end
+
+
+
 	def initialize(p)
 		super(p)
 		@xmlProps={}

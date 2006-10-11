@@ -64,7 +64,7 @@ class AntWolf<AntAnimal
 		if @dead
 			newRestJob(30)
 			if @alreadyDead
-				$map.removeEntity(self)
+				getMap.removeEntity(self)
 			end
 			@alreadyDead=true
 	
@@ -82,7 +82,7 @@ class AntWolf<AntAnimal
 			puts "A WOLF IS BORN"
 			wolf=AntWolf.new
 			wolf.setPos(getPos2D)
-			$map.insertEntity(wolf)
+			getMap.insertEntity(wolf)
 			#getMap.endChange
 			newRestJob(2)
 			@lastBirth=-rand()*10
@@ -218,10 +218,10 @@ class AntWolf<AntAnimal
 		ok=true
 		radius=4
 		# assure that sheep doesn't walk into water
-		while $map.getHeight(t.x,t.y)<0.1 or ok do
+		while getMap.getHeight(t.x,t.y)<0.1 or ok do
 			d=AGVector2.new(rand-0.5,rand-0.5).normalized*radius
 			t=p+d
-			t=$map.truncPos(t)
+			t=getMap.truncPos(t)
 			ok=false
 		end 
 		return t

@@ -185,22 +185,6 @@ class AntComputerPlayer<AntPlayer
 	end
 	
 
-	def getNextEnemyXOld(hero,name)
-		ts=getMap.getEntities(name)
-		
-		target=nil
-		dist=10000
-		ts.each{|tp|
-			t=tp.get
-			d=(t.getPos2D-hero.getPos2D).length
-			if d<dist and t.getPlayer!=self
-				dist=d
-				target=t
-			end
-		}
-		return target
-	end
-
 	def enoughFood(hero)
 		if hero.resource.get("food")<2
 			tryGetFood(hero)
@@ -268,7 +252,7 @@ class AntConqueringPlayer<AntComputerPlayer
 			return
 		end
 		if enoughFood(hero)
-			if not attackEnemyHouse(hero)
+			if not shouldAttackEnemyHouse(hero)
 				case @mode
 					when :rest
 						hero.newHLRestJob(50)
@@ -281,7 +265,7 @@ class AntConqueringPlayer<AntComputerPlayer
 		end
 	end
 
-	def attackEnemyHouse(hero)
+	def shouldAttackEnemyHouse(hero)
 		puts "def attackEnemyHouse(hero)"
 		house=getWeakestEnemyHouse(hero)
 		if house
