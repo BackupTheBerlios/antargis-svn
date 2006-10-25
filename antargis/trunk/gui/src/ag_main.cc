@@ -235,7 +235,7 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   if(myHash(gUserName.substr(32,std::string::npos))==mhash.substr(32,std::string::npos))
     {
       std::cout<<"drm ok"<<std::endl;
-      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName.substr(32,std::string::npos),f);
+      AGTexture *t=AGFontEngine::renderText(0,0,AGStringUtf8("Registriert für :"+gUserName.substr(32,std::string::npos)),f);
       getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
       gDRMok=true;
       getScreen().flip();
@@ -244,7 +244,7 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   else
     {
       std::cout<<"drm falied"<<std::endl;
-      AGTexture *t=AGFontEngine::renderText(0,0,"Registriert für :"+gUserName.substr(32,std::string::npos),f);
+      AGTexture *t=AGFontEngine::renderText(0,0,AGStringUtf8("Registriert für :"+gUserName.substr(32,std::string::npos)),f);
       getScreen().blit(*t,AGRect2(50,100,t->width(),t->height()),t->getRect());
       //      getScreen().blit(*t);
       gDRMok=true;
