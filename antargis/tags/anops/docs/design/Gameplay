@@ -1,0 +1,217 @@
+=== Battles of Antargis - Gameplay document ===
+
+== Introduction ==
+Battles of Antargis (BoA) was meant to be a Powermonger clone with a strong story line.
+During development and some thinking it came appearant, that this was not good enough.
+So some (more) changes to this very old gameplay shall be made.
+
+= Basic Ideas =
+a) Living world
+The basic idea is a living world, that proceeds independently from your actions. There are animals
+like fish,sheep, wolf and deer, that eat, walk and die. The normal population does its
+occupations. A farmer grows crop and a craftsman builds tools.
+b) Limited control
+You have very limited control over your troops. You can only give your heroes direct commands, which then
+command their minions automatically. If you have more than one hero, your main hero will send a carrier pigeon, 
+that holds the command, to the selected one. So commands can be delayed.
+c) Loyalty or morality
+Each man has a morality value. If this goes to low, they desert. So you have to look after your people.
+d) No unit building
+As in a living world, you cannot create people out of nothing. You have to live to the people, animals and resources 
+that are given to the level. Maybe at a later stage you will be able to build some new houses. But this is low priority.
+e) Main goal
+So the main goal of the game is creating weapons and tools and gathering people. But you have to hold the balance, so you'll
+have food and resources for later times.
+
+== User interface ==
+The user interface shall be fairly easy. Everything is done in-context. The things you can done always depend on the things you've selected.
+This has following advantages:
+* the interface is minimal - the world-view should be as big as possible
+* player has to discover the world to find out what's possible - player discovers other possibilities at a later stage of the game.
+	example:
+		- with torch and bow he's able to set something afire if aggression is high
+
+In normal mode, there's only:
+* the minimap in the screen's lower right corner
+* the portraits of the current heroes
+* (the inventory and properties of the selected entity)
+* (the action-buttons of the current hero)
+* some game-control buttons: pause,quit and options
+
+== Control your hero ==
+You have a primary, that is yourself. If he dies you have lost the game/level.
+
+a) Aggressiveness
+You can control your hero by setting his aggressiveness. The higher it is the stronger he tries to achieve his goal.
+Sometimes too hard, so your people will suffer, desert or even die.
+
+b) Recruiting, Dismissing
+You can recruit troops from whatever building you own. For transfer of troops from one hero to another you can use this, too.
+If you need some people in your buildings (e.g. for increasing population or gathering food), you can dismiss your people.
+Both recruiting and dismissing are affected by selected aggressiveness.
+
+c) Fighting
+When attacking enemies, the aggression affects the hardness with which the enemies energy is hit. When aggression is high, it's
+likely your enemies will die. That's not always good, as you might need them later. So it might be good to change the aggression while
+fighting.
+For giving you a better control over your men, different formations will be added. These would be "encircle","block" or "triangle".
+
+d) Special-moves
+- hide in forest (?)
+- dig in if ground is soft
+- spying
+- bargain
+- start fire on something
+- help in building (let troops do the same as the inhabitants), help put out fire, rebuild
+
+== Resources ==
+Current resources are:
+fruit,food,wood,stone,coal,ore,steel,sword,shield,bow,boat and maybe some more.
+There is a simple tech-tree. Some houses can produce resources out of others:
+Farm:
+ fruit=>food
+ =>crop
+Workshop:
+ ore,coal=>steel
+ steel,wood=>sword
+ wood=>bow
+ wood=>boat
+Mill:
+ crop=>flour
+Bakery:
+ flour=>food
+
+== Buildings ==
+Buildings that can hold people are:
+* Farm
+	- produces food out of fruit, meat
+	- produces crop
+* Dwelling
+	- produces men, when there are some
+* Workshop
+	- produces tools and maybe weapons
+* Tower
+	- does only gather everything, but cannot produce anything
+* Mill
+	- produces flour
+
+Buildings without people:
+* Well
+	- produces water
+* Mine
+	- produces ore,coal
+
+== Entities ==
+For the first versions no pathfinding is needed or implemented. For later versions this can be included.
+So that people enter buildings at the door and don't run through them. Collision detection between
+moving entities can be excluded.
+
+= Human entities=
+* Hero
+* Man (Woman)
+* NPC
+
+Humans have a loyalty, which is defined their morale. The morale is affected by whatever they are doing.
+Negative effect is:
+* fighting, inventing and starving
+Positive effects have:
+* resting, won a fight
+* get new inventory-item (sword, bow, boat...)
+
+When fighting humans gather experience. When experience is high enough a man can be raised to hero.
+Maybe different levels with different hitpoints should be included.
+
+= Animals =
+* Wolf
+  Wolves usually run with the pack. There is a leader that runs ahead; the others follow. They attack other animals and
+	humans, if hungry.
+* Sheep
+* Fish
+* Deer
+* Horse
+* Rabbit
+* Birds
+	Pigeons are used to carry commands and messages between heroes. Normal
+	birds fly away when people come near.
+
+
+= Non-moving entities =
+* Stone
+* Trees
+	- fir
+	- oak
+	- whatever
+* Bushes
+* Crop
+* Bag
+
+== Level-types; Strategic moves the player must do ==
+* flee
+* resist enemy
+* defeat enemy (standard)
+* build boats and get to other island
+* find person
+* spy on enemy
+* bargaining with goods/men
+
+* burn the woods (the crop, the buildings) of an enemy or kill all sheep to take his resources
+* enemy has to put out fire and fight enemy simultaneously
+
+== Seasons ==
+Seasons are NOT for visual effect only.
+* For example winter effects the speed of humans. Animals get more hungry then.
+* Need for tents and thicker cloth in winter.
+* In summer you need water - from well or lake.
+
+== Single map ==
+Before playing a single map, you can set some parameters for the generated map:
+* balance of water/land
+* population
+* vegetation level
+* resource level
+
+== Game-options ==
+* Gamespeed
+For single player games you should be able to set the game's speed.
+
+
+== Fun aspects ==
+There should be several fun aspects in the game. The player is able to do some "funny" things, that are not
+really helpful in game (like destroying all the buildings in SimCity or like the disasters in Populous)
+
+* burn down anything
+	- burning people if they are in building
+* kill anything
+* discover new things while playing
+* puzzles
+* traps (for troops and animals)
+	- make swamp by spilling a lot of water
+	- hole with cover
+* non-expected attacks from hills or out of forest
+* build up defense-walls, that are not passable
+	- out of wood
+	- can be burnt
+
+== Ideas ==
+* Single hero should have some mobility advantage to hero with troops. For example a strong hero can alone defeat some small group of inexperienced warriors; esp. if he has a bow.
+
+=== Multiplayer ===
+== Special User Interface ==
+* need master-server with chat
+* need chat in-game:
+	- normal chat (all hear)
+	- email-system (optional: uses pigeons)
+== Game Types ==
+* capture the flag
+* capture every building
+* capture enemies
+* reach some point first (e.g. island)
+
+== Ideas ==
+* ever-running game:
+	- some players come online, others log off
+	- whenever you come in, you will be brought to land by some boats, which go off after that
+	- starting-count of troops depends on your last stats
+	- must be very well balanced!
+	- typical game should be, that some weak attack players join to fight a strong one
+	- how shall such behavior be ensured???

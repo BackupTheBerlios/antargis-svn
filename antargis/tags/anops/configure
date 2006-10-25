@@ -1,0 +1,156 @@
+#!/usr/bin/env ruby
+
+require 'ftools'
+
+$configuring=true
+
+$profile=true
+$debug=false
+$help=false
+$gcdebug=false
+$xcompile=false
+
+varnames=[]
+
+varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug','$xcompile','$drmuser','$drmmd5']
+
+varnames.uniq!
+
+puts "Battle of Antargis - configure"
+puts "----------------------------------"
+ARGV.each{|arg|
+	case arg
+		when "--debug","-d","--enable-debug"
+			$debug=true
+		when "--gc-debug"
+			$gcdebug=true
+		when "--profile","-p","--enable-profile"
+			$profile=true
+		when "--disable-debug"
+			$debug=false
+		when "--disable-profile"
+			$profile=false
+		when "--xcompile"
+			$xcompile=true
+		when "--help","-h"
+			puts "--debug, -d     enable debugging"
+			puts "--profile, -p   enable profiling"
+			puts "--xcompile      enable cross-compiling using mingw32"
+                        puts "--gc-debug      enable debugging of garbage collection"
+			$help=true
+		when /--drmuser/
+			$drmuser=arg[10..1000]
+		when /--drmmd5/
+			$drmmd5=arg[9..1000]
+	end
+	#puts arg
+}
+#puts $drmuser
+#puts "DRM:",$drmuser
+
+begin
+	`rm config.rb||echo ""`
+	`touch config.rb`
+rescue
+end
+
+# require them here, so that globals are already set
+require 'mkmf'
+#puts "DRM:",$drmuser
+require 'buildtools.rb'
+
+#puts "DRM:",$drmuser
+
+if not $help
+
+	if $xcompile
+		$LDFLAGS+=" -Lcontrib/usr/lib"
+	elsif windows
+		$LDFLAGS+=" -LC:/msys/local/lib"
+	end
+	test_library('SDL')
+	test_library('SDL_ttf')
+	if windows
+		test_library('GLU32')
+	else
+		if $xcompile
+			test_library("opengl32")
+			test_library("glu32")
+		else
+			test_library("GLU")
+			test_library("GL")
+		end
+	end
+	test_library('SDL_mixer')
+	test_library('SDL_image')
+	#test_library('stdc++')
+	test_library('z')
+	test_library('png')
+	if $xcompile or windows
+		test_library('msvcrt-ruby18')
+	end
+
+	if $failed_libs.length>0
+		puts "----------------------------------------------------------------------"
+		puts "| ERROR:"
+		puts "| Following libraries failed when compiling:"
+		puts "| " +$failed_libs.join(" ")
+		puts "| Please install the corresponding packages and the development packages."
+		puts "| On Debian this would be something like:"
+		puts "| apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf1.2-dev libsdl-mixer1.2-dev ruby1.8-dev libsdl-sge-dev"
+		puts "| Note: libz is the famous zlib :-)"
+		puts "----------------------------------------------------------------------"
+		exit
+	end
+	
+	$swig=test_program("swig","Swig was not found! If you make changes on the header-files this can lead to problems.")
+
+	if $swig=="" and (not File.exists?("src/swig.cc"))
+		puts "ERROR: Please install swig. This is needed for building from SVN trunk!"
+		exit
+	end
+
+	$rake=test_program("rake","Rake was not found! You have to install rake - this is needed to build Battles of Antargis. Get it at http://rake.rubyforge.org/")
+
+
+	#$swig = with_config('swig', 'swig')
+	$INSTALL = test_program('install', 'Please install "install"')
+	$ccache = test_program("ccache","For faster recompiling while developing you can install ccache.")
+	if windows
+		$ccache=""
+	end
+	
+	if not $libs
+		puts "ERROR: Not compatible with current mkmf!"
+		exit
+	end
+	f=File.open("config.rb","w")
+	f.close
+
+
+	
+	puts "debugging:#{$debug}"
+	puts "profiling:#{$profile}"
+	puts "debugging gc:#{$gcdebug}"
+
+	
+	f=File.new("config.rb","w")
+	
+	varnames.each{|n|
+		v=eval(n)
+		
+		f.print n+"="
+		if v.class==String
+			f.puts "'"+v+"'"
+		else
+			f.puts v
+		end
+	}
+	f.close
+
+	begin
+		require 'rake'
+		msh "rake clean"
+	end
+
+end
