@@ -50,24 +50,24 @@ class AntMap:public HeightMap
   EntityList getEntities(const AGRect2&r);
   EntityList getAllEntities();
   std::vector<AntEntityPtr> getAllEntitiesV();
-  std::vector<AntEntityPtr> getEntities(const std::string &pName);
+  std::vector<AntEntityPtr> getEntities(const AGString &pName);
 
   AntEntity *getEntity(const Mesh &pMesh);
   AntEntity *getEntity(const AnimMesh &pMesh);
   AntEntity *getEntity(int id) const;
-  AntEntity *getByName(const std::string &pName);
+  AntEntity *getByName(const AGString &pName);
 
-  AntEntity *getNext(AntEntity *me,const std::string &pType,size_t atLeast=0);
-  std::vector<AntEntityPtr> getNextList(AntEntity *me,const std::string &pType,size_t atLeast=0);
+  AntEntity *getNext(AntEntity *me,const AGString &pType,size_t atLeast=0);
+  std::vector<AntEntityPtr> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
 
   virtual AntEntity *loadEntity(const Node &node);
 
   void saveXML(Node &node) const;
   void loadXML(const Node &node);
 
-  void saveMap(const std::string &pFilename);
-  virtual void loadMap(const std::string &pFilename);
-  virtual void loadMapFromMemory(const std::string &Memory);
+  void saveMap(const AGFilename &pFilename);
+  virtual void loadMap(const AGFilename &pFilename);
+  virtual void loadMapFromMemory(const AGData &Memory);
 
   void move(float pTime);
 

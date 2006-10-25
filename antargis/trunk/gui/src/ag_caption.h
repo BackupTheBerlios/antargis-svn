@@ -27,7 +27,7 @@
 class AGCaption:public AGText
 {
  public:
-  AGCaption(AGWidget *pParent,const AGRect2 &pRect,const std::string &pText,const AGFont &pFont,const AGBackground &pBG);
+  AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG);
 
   void draw(AGPainter &p);
 

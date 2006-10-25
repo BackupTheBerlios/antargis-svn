@@ -31,7 +31,6 @@ require 'ant_energy.rb'
 class AntRubyView <GLApp
 	def initialize(w,h)
 		super(w,h)
-		$antView=self
 		@mousepos=AGVector2.new(200,200)
 		@controls=true
 	end
@@ -133,7 +132,7 @@ class AntRubyView <GLApp
 	
 	def setCamera(p)
 		x=super(clipCamera(p))
-		updateSoundPos
+		AntSound.updateSoundPos(getScene)
 		x
 	end
 	def getCameraHeight(p)
@@ -187,11 +186,12 @@ class AntRubyViewCreator<AGLayoutCreator
 		super("antRubyView")
 	end
 	def create(parent,rect,node)
-		w=AntRubyView.new(parent,rect,AGVector3.new(0,0,0),nil) #$map)
+		w=AntRubyView.new(parent,rect,AGVector3.new(0,0,0),nil)
 		return w
 	end
+	@@antRubyViewCreator=AntRubyViewCreator.new
 end
-$antRubyViewCreator=AntRubyViewCreator.new
+
 
 
 class AntButtonPanel<AGWidget
@@ -199,7 +199,6 @@ class AntButtonPanel<AGWidget
 	def initialize(p,r)
 		super(p,r)
 		setName("ButtonPanel")
-		$buttonPanel=self
 		clearHandlers
 		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon","doBuild"]
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
@@ -285,11 +284,13 @@ class AntButtonPanelCreator<AGLayoutCreator
 	def create(p,r,n)
 		return AntButtonPanel.new(p,r)
 	end
+	@@antBPCreator=AntButtonPanelCreator.new
 end
-$antBPCreator=AntButtonPanelCreator.new
 
 
 class AntNameDisplay<AGWidget
+	@@fontChangeCount=0
+
 	def initialize(p,r,hero,map)
 		super(p,r)
 		@map=map
@@ -297,10 +298,10 @@ class AntNameDisplay<AGWidget
 		@font=getTheme.getFont("heroName.font")
 		@oldfont=@font
 		@name=@hero.getName
-		addChild(@mb=AGButton.new(self,AGRect.new(0,0,width,height),""))
+		addChild(@mb=AGButton.new(self,AGRect.new(0,0,width,height),_("")))
 		
 		@mb.setEnabled(false)
-		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height),@hero.getName,@font))
+		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height),AGStringUtf8.new(@hero.getName),@font))
 		
 		@fonts={true=>getTheme.getFont("heroName.font"),false=>getTheme.getFont("enemyHero.font")}
 		@oldPlayer=nil
@@ -323,9 +324,9 @@ class AntNameDisplay<AGWidget
 			puts "#{@font} #{@oldfont}"
 			@oldPlayer=@hero.getPlayer
 			puts "font changed"
-			$fontChangeCount||=0
-			$fontChangeCount+=1
-			if $fontChangeCount>20
+			@@fontChangeCount||=0
+			@@fontChangeCount+=1
+			if @@fontChangeCount>20
 				raise 1
 			end
 			@oldfont=@font

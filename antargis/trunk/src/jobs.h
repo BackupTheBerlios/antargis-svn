@@ -41,7 +41,7 @@ class Job
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
 
-  virtual std::string xmlName() const;
+  virtual AGString xmlName() const;
 
   virtual void jobFinished(AntEntity *e);
   bool operator<=(const Job &j) const;
@@ -62,7 +62,7 @@ class RestJob:public Job
 
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
-  virtual std::string xmlName() const;
+  virtual AGString xmlName() const;
 
 };
 
@@ -84,7 +84,7 @@ class MoveJob:public Job
   
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
-  virtual std::string xmlName() const;
+  virtual AGString xmlName() const;
   
  private:
   void moveBy(AntEntity *e,float ptime,float aspeed);
@@ -112,26 +112,26 @@ class FightJob:public Job
   
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
-  virtual std::string xmlName() const;
+  virtual AGString xmlName() const;
   
 };
 
 class FetchJob:public MoveJob
 {
-  std::string mWhat;
+  AGString mWhat;
   AntEntity *mTarget;
   int mTargetID;
  public:
   FetchJob();
-  FetchJob(int p,const AGVector2 &pTarget,std::string what);
-  FetchJob(int p,AntEntity *pTarget,std::string what);
+  FetchJob(int p,const AGVector2 &pTarget,AGString what);
+  FetchJob(int p,AntEntity *pTarget,AGString what);
   virtual ~FetchJob();
   void move(AntEntity *e,float ptime);
   virtual void jobFinished(AntEntity *e);
   
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
-  virtual std::string xmlName() const;
+  virtual AGString xmlName() const;
 };
 
 #endif

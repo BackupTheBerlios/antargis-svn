@@ -6,12 +6,12 @@ AGConfig::AGConfig()
   Document doc("config.xml");
 
   Node &root=doc.root();
-  std::string comment;
+  AGString comment;
   for(Node::iterator i=root.begin();i!=root.end();i++)
     {
       if((*i)->get("name")=="")
 	{
-	  std::string c=(*i)->getContent();
+	  AGString c=(*i)->getContent();
 	  if(c.substr(0,4)=="<!--")
 	    {
 	      comment=c;
@@ -38,9 +38,9 @@ AGConfig::AGConfig()
   writeToDisc();
 }
 
-std::string AGConfig::get(const std::string &pValue,const std::string &pDefault,const std::string &pComment)
+AGString AGConfig::get(const AGString &pValue,const AGString &pDefault,const AGString &pComment)
 {
-  std::string v=get(pValue);
+  AGString v=get(pValue);
   if(v=="")
     {
       comments[pValue]=pComment;
@@ -52,16 +52,16 @@ std::string AGConfig::get(const std::string &pValue,const std::string &pDefault,
 
 
 
-std::string AGConfig::get(const std::string &pValue) const
+AGString AGConfig::get(const AGString &pValue) const
 {
-  std::map<std::string,std::string>::const_iterator i=singleValue.find(pValue);
+  std::map<AGString,AGString>::const_iterator i=singleValue.find(pValue);
   if(i==singleValue.end())
     return "";
   else
     return i->second;
 }
 
-void AGConfig::set(const std::string &pName,const std::string &pValue)
+void AGConfig::set(const AGString &pName,const AGString &pValue)
 {
   singleValue[pName]=pValue;
   writeToDisc();
@@ -72,12 +72,12 @@ void AGConfig::writeToDisc()
   Document doc;
   Node &root=doc.root();
   root.setName("config");
-  for(std::map<std::string,std::string>::const_iterator i=singleValue.begin();i!=singleValue.end();i++)
+  for(std::map<AGString,AGString>::const_iterator i=singleValue.begin();i!=singleValue.end();i++)
     {
       if(comments[i->first]!="")
 	{
 	  Node &n=root.addChild("");
-	  n.setContent(std::string("\n")+comments[i->first]+"\n");
+	  n.setContent(AGString("\n")+comments[i->first]+"\n");
 	}
 
       Node &n=root.addChild("option");

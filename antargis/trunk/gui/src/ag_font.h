@@ -23,8 +23,9 @@
 
 #include <ag_color.h>
 #include <ag_base.h>
+#include <ag_utf8.h>
 
-#include <string>
+#include <ag_string_utf8.h>
 
 class AGEXPORT AGFont
 {
@@ -62,8 +63,8 @@ class AGEXPORT AGFont
   void setInset(bool e);
   bool getInset() const;
 
-  int getWidth(const std::string &mText) const;
-  int getHeight(const std::string &mText) const;
+  int getWidth(const AGStringUtf8 &mText) const;
+  int getHeight(const AGStringUtf8 &mText) const;
 
   AGFont &operator=(const AGFont &f);
 

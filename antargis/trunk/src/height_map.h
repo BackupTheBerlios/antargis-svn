@@ -107,7 +107,7 @@ class HeightMap:public AGMessageObject
  protected:
 
   Terrain *mTerrain;
-  std::string mName;
+  AGString mName;
 };
 
 #endif

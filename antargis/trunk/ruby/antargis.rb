@@ -61,6 +61,7 @@ class AntGameApp <AntRubyView
 		# the result of the level - won or lost or canceled
 		@result=GameResult.new
 		$app=self
+		AntSound.setApplication(self)
 	
 		# display loading screen
 		if loadscreen
@@ -109,7 +110,7 @@ class AntGameApp <AntRubyView
 			loadscreen.tick
 		end
 		
-		$screen=@layout
+		#$screen=@layout
 	
 		if @miniMap
 			# connect MiniMap with Map for displaying terrain and entities
@@ -331,7 +332,7 @@ class AntGameApp <AntRubyView
 	def eventAggressionChanged(e)
 		h=getSelectedHero
 		if h
-			h.setAggression($buttonPanel.getAggression)
+			h.setAggression(@buttonpanel.getAggression)
 		end
 		return true
 	end
@@ -439,7 +440,7 @@ class AntGameApp <AntRubyView
 		@layout.getChild("HeroImage#{num}").setTexture(image)
 	end
 	def setHeroName(name,num)
-		@layout.getChild("HeroName#{num}").setText(name)
+		@layout.getChild("HeroName#{num}").setText(_(name))
 		c=@layout.getChild("HeroBar#{num}")
 		c.setVisible((name!=""))
 	end

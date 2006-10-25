@@ -30,13 +30,13 @@
 
 #undef connect
 
-AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTitle,const std::string &pTheme):
+AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle,const AGString &pTheme):
   AGTable(pWidget,pRect),sigClose(this,"sigClose"),mTitle(pTitle)
 
 {
   CTRACE;
 
-  std::string tstr="window.border.image";
+  AGString tstr="window.border.image";
   if(pTheme!="")
     tstr=pTheme+"."+tstr;
 

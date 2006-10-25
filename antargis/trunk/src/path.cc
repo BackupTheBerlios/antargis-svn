@@ -288,7 +288,7 @@ void SimpleGraph::paint(const AGRect2& r,AGPaintTarget &t,Heuristic &heuristic)
 
       AGVector2 m((x0+x1)/2-10,(y0+y1)/2-10);
 
-      painter.renderText(toString((int)(*i)->w0)+":"+toString((int)(*i)->w1),m,AGFont());
+      painter.renderText(AGStringUtf8((int)(*i)->w0)+":"+AGStringUtf8((int)(*i)->w1),m,AGFont());
       
     }
 
@@ -301,7 +301,7 @@ void SimpleGraph::paint(const AGRect2& r,AGPaintTarget &t,Heuristic &heuristic)
 
       painter.fillRect(AGRect2(x,y,2,2),green);
 
-      painter.renderText(toString(toInt(heuristic.distance((*i)->p))),AGVector2(x-10,y-10),AGFont());
+      painter.renderText(AGStringUtf8(int(heuristic.distance((*i)->p))),AGVector2(x-10,y-10),AGFont());
 
     }
 }
@@ -635,14 +635,14 @@ HeuristicFunction *computeHeuristic(SimpleGraph *g)
 
 		  if(false)
 		  {
-		    int x=j->first->p[0];
-		    int y=j->first->p[1];
+		    int x=(int)j->first->p[0];
+		    int y=(int)j->first->p[1];
 		    //		    cdebug("w:"<<g->width());
 
-		    x*=32/g->width();
-		    y*=32/g->width();
-		    int c=weights[j->first]*4;
-		    int c2=weights[j->first];
+		    x=(int)(x*32/g->width());
+		    y=(int)(y*32/g->width());
+		    int c=(int)weights[j->first]*4;
+		    int c2=(int)weights[j->first];
 		    AGColor mc(c,c2,c2,255);
 		    //		    cdebug(x<<";"<<y<<":"<<mc);
 
@@ -720,8 +720,8 @@ void Path::paint(const AGRect2 &r,AGPaintTarget &t,float scale)
       painter.fillRect(AGRect2(current[0],current[1],3,3),red);
       old=current;
     }
-  painter.renderText(toString(weight),AGVector2(0,0),AGFont());
-  painter.renderText(toString(size()),AGVector2(0,50),AGFont());
+  painter.renderText(AGStringUtf8(weight),AGVector2(0,0),AGFont());
+  painter.renderText(AGStringUtf8(size()),AGVector2(0,50),AGFont());
   
 
 }

@@ -23,10 +23,10 @@
 #include "ag_theme.h"
 #include "ag_texturecache.h"
 
-AGBorder::AGBorder(const std::string &pTheme)
+AGBorder::AGBorder(const AGString &pTheme)
 {
   mTheme=pTheme;
-  std::string imageName=pTheme+".image";
+  AGString imageName=pTheme+".image";
 
   if((mEnable=getTheme()->hasSurface(imageName)))
     {

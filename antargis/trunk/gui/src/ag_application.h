@@ -79,6 +79,8 @@ class AGApplication:public AGMessageObject
   void setNormalCursor();
 
   virtual SDL_Event *getNewEvent();
+
+  void setKeyRepeat(bool enable);
   
  private:
   void clearOldMousePosition();

@@ -36,12 +36,23 @@ class AntFlag<AntRubyEntity
 end
 
 
+# AntVillage is only some small interface for reproducing "village" type of behaviour
+class AntVillage
+	def initialize(name,map)
+		@houses=map.getAllHousesOfVillage(name)		
+	end
+	def getTrooperCount
+		@houses.collect{|h|h.getMen.length}.inject{|a,b|a+b}
+	end
+end
+
 # AntHouse is the base class for all building types
 # it provides functionality for:
 # * defending
 # * fetching resources
 class AntHouse<AntBoss
-	
+	attr_reader :village
+
 	def AntHouse.buildSteps
 		20
 	end
@@ -60,7 +71,7 @@ class AntHouse<AntBoss
 		setMinimapSize(5)
 
 		@mode=""
-		
+		@village=""		
 	end
 	
 	def removeMan(man)
@@ -289,7 +300,13 @@ class AntHouse<AntBoss
 		if getName==""
 			setName(rand.to_s)
 		end
+		@village=node.get("village")
 	end	
+
+	def saveXML(node)
+		super
+		node.set("village",@village)
+	end
 
 
 	# get a description for displaying in the info-box

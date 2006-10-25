@@ -152,9 +152,9 @@ class AGWidget:public AGMessageObject
   AGLayout *getLayout();
 
 
-  std::string getName() const;
-  void setName(const std::string &pName);
-  AGWidget *getChild(const std::string &pName);
+  const AGString &getName() const;
+  void setName(const AGString &pName);
+  AGWidget *getChild(const AGString &pName);
 
   void setModal(bool pModal);
 
@@ -162,7 +162,7 @@ class AGWidget:public AGMessageObject
 
   void eventChildrenDeleted(AGWidget *pWidget);
 
-  void setTooltip(const std::string &pTooltip);
+  void setTooltip(const AGStringUtf8 &pTooltip);
 
  private:
 
@@ -195,12 +195,12 @@ class AGWidget:public AGMessageObject
 
   AGVector2 mOldMousePos;
 
-  std::string mName;
+  AGString mName;
   bool mModal;
 
   AGRect2 mChangeRect;
 
-  std::string mTooltip;
+  AGStringUtf8 mTooltip;
   AGTooltip *mTooltipWidget;
 
  protected:

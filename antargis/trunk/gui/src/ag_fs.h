@@ -21,30 +21,30 @@
 #ifndef __FS_H
 #define __FS_H
 
-#include <string>
+#include <ag_string.h>
 #include <vector>
 
 #include <ag_base.h>
 
 void initFS(const char *argv0);
-std::string AGEXPORT loadFile(const std::string &pName);
-void AGEXPORT saveFile(const std::string &pName,const std::string &pContent);
+AGData AGEXPORT loadFile(const AGFilename &pName);
+bool AGEXPORT saveFile(const AGFilename &pName,const AGData &pContent);
 
-bool AGEXPORT fileExists(const std::string &pName);
+bool AGEXPORT fileExists(const AGFilename &pName);
 
-std::vector<std::string> getDirectory(const std::string &pDir);
+std::vector<std::string> getDirectory(const AGFilename &pDir);
 
-std::string checkFileName(std::string s);
-std::string getWriteDir();
-std::string findFile(const std::string &pName);
+AGFilename checkFileName(AGFilename s);
+AGFilename getWriteDir();
+AGFilename findFile(const AGFilename &pName);
 
-std::string getDocumentsDir();
+AGFilename getDocumentsDir();
 
-void addPath(const std::string &pName);
+void addPath(const AGFilename &pName);
 
-std::string compress(const std::string &pString);
-std::string uncompress(const std::string &pString);
+AGData compress(const AGData &pString);
+AGData uncompress(const AGData &pString);
 
-std::string getDirSep();
+AGFilename getDirSep();
 
 #endif

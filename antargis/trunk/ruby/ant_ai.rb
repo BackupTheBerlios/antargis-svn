@@ -45,15 +45,17 @@ class AntAttackAI<AntBasicAI
 		super
 		# add rules
 		@rules=[]
-		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIRestAction.new))
-		@rules.push(AIRule.new(AIConditionFoodLow.new,AIGatherFoodAction.new))
-		@rules.push(AIRule.new(AICondition.new,AIRestAction.new)) # dummy rule - always rest
+		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIRestAction.new,interface))
+		@rules.push(AIRule.new(AIConditionFoodLow.new,AIGatherFoodAction.new,interface))
+		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIAttackAction.new,interface))
+		@rules.push(AIRule.new(AICondition.new,AIRestAction.new,interface)) # dummy rule - always rest
 	end
 
 	def eventHeroWithoutJob(heroId)
 		@rules.each{|r|
-			if r.value(@interface,heroId)>0
-				r.execute(@interface,heroId)
+			if r.value(heroId)>0
+				puts "GO"
+				r.execute(heroId)
 				return
 			end
 		}

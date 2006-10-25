@@ -104,18 +104,18 @@ void AntEntity::saveXML(Node &node) const
   {
     Node &child=node.addChild("position");
     mPos.saveXML(child);
-    node.set("energy",toString(mEnergy));
-    node.set("healSpeed",toString(mHealSpeed));
-    node.set("onGround",toString(onGround));
-    node.set("onWater",toString(onWater));
-    //    node.set("entityID",toString(getID()));
+    node.set("energy",AGString(mEnergy));
+    node.set("healSpeed",AGString(mHealSpeed));
+    node.set("onGround",AGString(onGround));
+    node.set("onWater",AGString(onWater));
+    //    node.set("entityID",AGString(getID()));
     node.set("name",getName());
-    node.set("morale",toString(mMorale));
-    node.set("aggression",toString(mAggression));
-    node.set("food",toString(mFood));
-    node.set("id",toString(mID));
-    node.set("exp",toString(experience));
-    node.set("learnAmount",toString(learnAmount));
+    node.set("morale",AGString(mMorale));
+    node.set("aggression",AGString(mAggression));
+    node.set("food",AGString(mFood));
+    node.set("id",AGString(mID));
+    node.set("exp",AGString(experience));
+    node.set("learnAmount",AGString(learnAmount));
     Node &res=node.addChild("resource");
     resource.saveXML(res);
 
@@ -129,35 +129,35 @@ void AntEntity::saveXML(Node &node) const
   }
 void AntEntity::loadXML(const Node &node)
 {
-  mEnergy=toFloat(node.get("energy"));
-  mHealSpeed=toFloat(node.get("healSpeed"));
-  onGround=toBool(node.get("onGround"));
-  onWater=toBool(node.get("onWater"));
+  mEnergy=node.get("energy").toFloat();
+  mHealSpeed=node.get("healSpeed").toFloat();
+  onGround=node.get("onGround").toBool();
+  onWater=node.get("onWater").toBool();
   //  assert(onGround);
   Node::NodeVector v=node.getChildren("position");
   Node::const_iterator i=v.begin();
   for(;i!=v.end();i++)
     mPos.loadXML(**i);
-  mID=toInt(node.get("entityID"));
+  mID=node.get("entityID").toInt();
   getMap()->useID(mID);
   if(node.get("morale")!="")
-    mMorale=toFloat(node.get("morale"));
+    mMorale=node.get("morale").toFloat();
   else
     mMorale=1.0f;
-  mAggression=toFloat(node.get("aggression"));
+  mAggression=node.get("aggression").toFloat();
   mAggression=std::min(3,std::max(1,int(mAggression))); //1,2,3 nothing else
 
   if(node.get("food")!="")
-    mFood=toFloat(node.get("food"));
+    mFood=node.get("food").toFloat();
   if(node.get("hunger")!="")
-    mHunger=toFloat(node.get("hunger"));
+    mHunger=node.get("hunger").toFloat();
 
   setName(node.get("name"));
 
   if(node.get("exp")!="")
-    experience=toFloat(node.get("exp"));
+    experience=node.get("exp").toFloat();
   if(node.get("learnAmount")!="")
-    learnAmount=toFloat(node.get("learnAmount"));
+    learnAmount=node.get("learnAmount").toFloat();
 
   Node::NodeVector v2=node.getChildren("resource");
   if(v2.size()>0)
@@ -168,12 +168,12 @@ void AntEntity::loadXML(const Node &node)
     {
       loadJob(v2[0]);
     }
-
+  resourceChanged();
 }
 
 void AntEntity::loadJob(const Node &pNode)
 {
-  std::string t=pNode.get("type");
+  AGString t=pNode.get("type");
   if(t=="restJob")
     mJob=new RestJob;
   else if(t=="fightJob")
@@ -419,7 +419,7 @@ int AntEntity::getID() const
   return mID;
 }
 
-std::string AntEntity::xmlName() const
+AGString AntEntity::xmlName() const
 {
   return "antEntity";
 }
@@ -454,11 +454,11 @@ void AntEntity::newRestJob(float pTime)
 {
   setJob(new RestJob(pTime));
 }
-void AntEntity::newFetchJob(int p,AGVector2 &pTarget,const std::string &what)
+void AntEntity::newFetchJob(int p,AGVector2 &pTarget,const AGString &what)
 {
   setJob(new FetchJob(p,pTarget,what));
 }
-void AntEntity::newFetchJob(int p,AntEntity *pTarget,const std::string &what)
+void AntEntity::newFetchJob(int p,AntEntity *pTarget,const AGString &what)
 {
   setJob(new FetchJob(p,pTarget,what));
 }
@@ -586,11 +586,11 @@ void AntEntity::sigDefeated()
 
 
 
-void AntEntity::setName(const std::string &pName)
+void AntEntity::setName(const AGString &pName)
 {
   mName=pName;
 }
-std::string AntEntity::getName() const
+AGString AntEntity::getName() const
 {
   return mName;
 }
@@ -626,7 +626,7 @@ void AntEntity::clearMeshes()
   mMeshes.clear();
 }
 
-void AntEntity::animationEvent(const std::string &pName)
+void AntEntity::animationEvent(const AGString &pName)
 {
 }
 
@@ -674,7 +674,7 @@ float AntEntity::getDefense() const
 }
 
 
-void AntEntity::setProvide(const std::string &pName,bool flag)
+void AntEntity::setProvide(const AGString &pName,bool flag)
 {
   if(flag)
     mProvides.insert(pName);
@@ -682,7 +682,7 @@ void AntEntity::setProvide(const std::string &pName,bool flag)
     mProvides.erase(pName);
 }
 
-bool AntEntity::provides(const std::string &pName) const
+bool AntEntity::provides(const AGString &pName) const
 {
   return(mProvides.find(pName)!=mProvides.end());
 }

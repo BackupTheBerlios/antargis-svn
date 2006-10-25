@@ -21,21 +21,22 @@
 #ifndef AG_LOCAL_H
 #define AG_LOCAL_H
 
-#include <string>
+#include <ag_string.h>
+#include <ag_string_utf8.h>
 
 class AGLocalizer
 {
  public:
   virtual ~AGLocalizer();
   
-  virtual std::string find(const std::string &p);
+  virtual AGStringUtf8 find(const AGString &p);
   
 };
 
 void setLocalizer(AGLocalizer *p);
 AGLocalizer *getLocalizer();
 
-std::string translate(const std::string &s);
+AGStringUtf8 translate(const AGString &s);
 
 #ifndef SWIG
 #ifdef _

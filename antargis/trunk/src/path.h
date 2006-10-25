@@ -220,6 +220,9 @@ struct Path:public std::list<SimpleGraph::Node*>
 class PathDebugging
 {
  public:
+  virtual ~PathDebugging()
+    {
+    }
   virtual void debugPath(Path &p,float heuristic)
   {
   }

@@ -25,7 +25,7 @@
 #include "ag_debug.h"
 #include "ag_tools.h"
 
-AGTooltip::AGTooltip(const AGRect2 &pRect,const std::string &pText):
+AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
   AGWidget(0,pRect),
   mText(pText),
   mFont(getTheme()->getFont("tooltip.font")),
@@ -36,16 +36,16 @@ AGTooltip::AGTooltip(const AGRect2 &pRect,const std::string &pText):
   float sw=getScreen().getWidth();
   float sh=getScreen().getHeight();
 
-  mText=replace(mText,"\\n","\n");
+  mText=mText.replace("\\n","\n");
 
   float tw,th;
 
   if(mText.find("\n")!=std::string::npos)
     {
       // estimate each line size
-      std::vector<std::string> a=split("\n",mText);
+      std::vector<AGStringUtf8> a=mText.split("\n");
       tw=th=0;
-      for(std::vector<std::string>::iterator i=a.begin();i!=a.end();++i)
+      for(std::vector<AGStringUtf8>::iterator i=a.begin();i!=a.end();++i)
 	{
 	  tw=std::max(tw,(float)mFont.getWidth(*i));
 	  th+=mFont.getHeight(*i);

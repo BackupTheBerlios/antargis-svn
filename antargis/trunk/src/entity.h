@@ -25,6 +25,7 @@
 #include <ag_xml.h>
 #include <ag_geometry.h>
 #include <ag_color.h>
+#include <ag_string.h>
 
 
 #include <set>
@@ -42,7 +43,7 @@ class AntEntity:public AGRubyObject
     typedef std::list<SceneNode*> Meshes;
   private:
     int mID;
-    std::string mName;
+    AGString mName;
 
     AGVector3 mPos;   // 3d-position
     bool onGround;    // is this on the ground of the map?
@@ -52,7 +53,7 @@ class AntEntity:public AGRubyObject
 
     std::list<Job*> mJobFinished;  // finished jobs, in cue, so that they get deleted next time possible
 
-    std::set<std::string> mProvides;
+    std::set<AGString> mProvides;
 
     // energy and healing
     float mEnergy;
@@ -78,7 +79,7 @@ class AntEntity:public AGRubyObject
 
     float mAggression;
 
-    std::string mType;
+    AGString mType;
 
     Meshes mMeshes;
     std::map<SceneNode*,AGVector3> mMeshPos;
@@ -133,14 +134,14 @@ class AntEntity:public AGRubyObject
     // IDs, names and types
     int getID() const;
 
-    std::string getName() const;
-    void setName(const std::string &pName);
+    AGString getName() const;
+    void setName(const AGString &pName);
 
-    void setProvide(const std::string &pName,bool flag);
-    bool provides(const std::string &pName) const;
+    void setProvide(const AGString &pName,bool flag);
+    bool provides(const AGString &pName) const;
 
     // saving and loading
-    virtual std::string xmlName() const;
+    virtual AGString xmlName() const;
 
     virtual void saveXML(Node &node) const;
     virtual void loadXML(const Node &node);
@@ -152,8 +153,8 @@ class AntEntity:public AGRubyObject
 
   public:
     virtual void newRestJob(float pTime);
-    virtual void newFetchJob(int p,AGVector2 &pTarget,const std::string &pWhat);
-    virtual void newFetchJob(int p,AntEntity *pTarget,const std::string &pWhat);
+    virtual void newFetchJob(int p,AGVector2 &pTarget,const AGString &pWhat);
+    virtual void newFetchJob(int p,AntEntity *pTarget,const AGString &pWhat);
     virtual void newMoveJob(int p,const AGVector2 &pTarget,float pnear=0.0);
     virtual void newMoveJob(int p,const AGVector3 &pTarget,float pnear=0.0);
     virtual void newFightJob(int p,AntEntity *target,float distance);
@@ -212,7 +213,7 @@ class AntEntity:public AGRubyObject
     // appearance
 
     // FIXME: this shouldn't be virtual, because it gets called too often!
-    //    virtual std::string getTexture() const;
+    //    virtual AGString getTexture() const;
 
     // anything below shouldn't be used by ruby-functions
 
@@ -255,7 +256,7 @@ class AntEntity:public AGRubyObject
 
     void setVisible(bool v);
 
-    virtual void animationEvent(const std::string &pName);
+    virtual void animationEvent(const AGString &pName);
 
     void heal(float pTime);
 

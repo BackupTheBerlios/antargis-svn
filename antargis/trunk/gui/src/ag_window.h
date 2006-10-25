@@ -26,7 +26,7 @@
 class AGWindow:public AGTable
 {
  public:
-  AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const std::string &pTitle="",const std::string &pTheme="");
+  AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle="",const AGString &pTheme="");
 
   void addChild(AGWidget *w);
 
@@ -48,7 +48,7 @@ class AGWindow:public AGTable
 
   AGWidget *getTitleBar(int w,int h);
 
-  std::string mTitle;
+  AGStringUtf8 mTitle;
   AGWidget *mClient;
 };
 

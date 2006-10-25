@@ -37,11 +37,11 @@ AGTheme::~AGTheme()
 {
 }
 
-void AGTheme::setFont(const std::string &pName,AGFont pFont)
+void AGTheme::setFont(const AGString &pName,AGFont pFont)
 {
   mFonts[pName]=pFont;
 }
-void AGTheme::setColor(const std::string &pName,AGColor pColor)
+void AGTheme::setColor(const AGString &pName,AGColor pColor)
 {
   //  cdebug(pName);
   mColors[pName]=pColor;
@@ -49,14 +49,14 @@ void AGTheme::setColor(const std::string &pName,AGColor pColor)
 }
 
 
-AGFont AGTheme::getFont(const std::string &pName)
+AGFont AGTheme::getFont(const AGString &pName)
 {
   //  cdebug(pName<<":"<<mFonts[pName].toString());
   if(mFonts.find(pName)==mFonts.end())
     return mFonts[trunk(pName)];
   return mFonts[pName];
 }
-AGColor AGTheme::getColor(const std::string &pName)
+AGColor AGTheme::getColor(const AGString &pName)
 {
   //  cdebug(pName);
   if(mColors.find(pName)==mColors.end())
@@ -64,7 +64,7 @@ AGColor AGTheme::getColor(const std::string &pName)
   return mColors[pName];
 }
 
-std::string AGTheme::trunk(std::string s)
+AGString AGTheme::trunk(AGString s)
 {
   //  cdebug(s);
   size_t i=s.find(".");
@@ -73,13 +73,13 @@ std::string AGTheme::trunk(std::string s)
   return s;
 }
 
-int AGTheme::getInt(const std::string &pName)
+int AGTheme::getInt(const AGString &pName)
 {
   if(mInts.find(pName)==mInts.end())
     return mInts[trunk(pName)];
   return mInts[pName];
 }
-void AGTheme::setInt(const std::string &pName,int i)
+void AGTheme::setInt(const AGString &pName,int i)
 {
   mInts[pName]=i;
 }
@@ -108,56 +108,56 @@ AGTheme *getTheme()
   return mTheme;
 }
 
-bool AGTheme::hasSurface(const std::string &pName) const
+bool AGTheme::hasSurface(const AGString &pName) const
 {
   //  cdebug(pName);
   return(mSurfaces.find(pName)!=mSurfaces.end());
 }
-bool AGTheme::hasColor(const std::string &pName) const
+bool AGTheme::hasColor(const AGString &pName) const
 {
   //  cdebug(pName);
   return(mColors.find(pName)!=mColors.end());
 }
 
 
-AGSurface AGTheme::getSurface(const std::string &pName)
+AGSurface AGTheme::getSurface(const AGString &pName)
 {
   if(mSurfaces.find(pName)==mSurfaces.end())
     return mSurfaces[trunk(pName)];
   return mSurfaces[pName];
 }
-void AGTheme::setSurface(const std::string &pName,const AGSurface &pSurface)
+void AGTheme::setSurface(const AGString &pName,const AGSurface &pSurface)
 {
   assert(pSurface.valid());
   mSurfaces[pName]=pSurface;
   assert(mSurfaces[pName].valid());
 }
 
-std::string AGTheme::getSurfaceName(const std::string &pName)
+std::string AGTheme::getSurfaceName(const AGString &pName)
 {
   if(mSurfaceNames.find(pName)==mSurfaceNames.end())
     return mSurfaceNames[trunk(pName)];
   return mSurfaceNames[pName];
 }
-void AGTheme::setSurfaceName(const std::string &pName,const std::string &pSurface)
+void AGTheme::setSurfaceName(const AGString &pName,const std::string &pSurface)
 {
   mSurfaceNames[pName]=pSurface;
 }
 
 
-void loadTheme(const Node&node,AGTheme &t,std::string name)
+void loadTheme(const Node&node,AGTheme &t,AGString name)
 {
   Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     {
       
-      std::string n=name;
+      AGString n=name;
       if(n.length())
 	n+=".";
       n+=(*i)->getName();
       if((*i)->get("name").length())
 	{
-	  std::string sname=name+"."+(*i)->get("name");
+	  AGString sname=name+"."+(*i)->get("name");
 	  // read color /image whatever
 	  if((*i)->getName()=="color")
 	    t.setColor(sname,AGColor((*i)->get("color")));
@@ -167,17 +167,17 @@ void loadTheme(const Node&node,AGTheme &t,std::string name)
 	      t.setSurfaceName(sname,(*i)->get("file"));
 	    }
 	  if((*i)->getName()=="value")
-	    t.setInt(sname,toInt((*i)->get("value")));
+	    t.setInt(sname,(*i)->get("value").toInt());
 	  if((*i)->getName()=="font")
 	    {
-	      AGFont f((*i)->get("file"),toInt((*i)->get("size")));
+	      AGFont f((*i)->get("file"),(*i)->get("size").toInt());
 	      f.setColor(AGColor((*i)->get("color")));
 	      f.setEmbossed((*i)->get("embossed")=="true");
 	      f.setInset((*i)->get("inset")=="true");
 	      if((*i)->get("style")=="bold")
 		f.setStyle(AGFont::BOLD);
 	      f.setBorderColor(AGColor((*i)->get("borderColor")));
-	      f.setBorder(toInt((*i)->get("borderWidth")));
+	      f.setBorder((*i)->get("borderWidth").toInt());
 
 	      t.setFont(sname,f);
 	    }
@@ -187,7 +187,7 @@ void loadTheme(const Node&node,AGTheme &t,std::string name)
     }
 }
 
-void loadTheme(const std::string &pXML)
+void loadTheme(const AGData &pXML)
 {
   AGTheme theme;
 
@@ -201,7 +201,7 @@ void loadTheme(const std::string &pXML)
   setTheme(theme);
 }
 
-bool loadThemeFile(const std::string &pFilename)
+bool loadThemeFile(const AGFilename &pFilename)
 {
   AGTheme theme;
 
@@ -217,7 +217,7 @@ bool loadThemeFile(const std::string &pFilename)
   return true;
 }
 
-std::string addPoint(const std::string &pTheme)
+AGString addPoint(const AGString &pTheme)
 {
   if(pTheme.length())
     if(pTheme[pTheme.length()-1]!='.')

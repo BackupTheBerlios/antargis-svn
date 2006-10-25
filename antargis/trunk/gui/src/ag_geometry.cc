@@ -28,6 +28,7 @@
 #include <ag_tools.h>
 #include <ag_xml.h>
 #include <ag_debug.h>
+#include <ag_stringstream.h>
 
 #include <ruby.h>
 
@@ -155,16 +156,16 @@ AGAngle::AGAngle(float p):angle(p)
 // AGVector2
 /////////////////////////////////////////////////////////////////////////////
 
-AGVector2::AGVector2(const std::string &s)
+AGVector2::AGVector2(const AGString &s)
 {
   assert(s.length()>=5);
   assert(s[0]=='(');
   assert(s[s.length()-1]==')');
-  std::string p=s.substr(1,s.length()-2);
+  AGString p=s.substr(1,s.length()-2);
   size_t i=p.find(",");
   assert(i!=p.npos);
-  v[0]=toFloat(p.substr(0,i));
-  v[1]=toFloat(p.substr(i+1,p.length()-i-1));
+  v[0]=p.substr(0,i).toFloat();
+  v[1]=p.substr(i+1,p.length()-i-1).toFloat();
 }
 
 
@@ -191,13 +192,13 @@ AGVector2::AGVector2()
 
 void AGVector2::saveXML(Node &node) const
 {
-  node.set("x",::toString(v[0]));
-  node.set("y",::toString(v[1]));
+  node.set("x",AGString(v[0]));
+  node.set("y",AGString(v[1]));
 }
 void AGVector2::loadXML(const Node &node)
 {
-  v[0]=toFloat(node.get("x"));
-  v[1]=toFloat(node.get("y"));
+  v[0]=node.get("x").toFloat();
+  v[1]=node.get("y").toFloat();
 }
 
 
@@ -237,11 +238,11 @@ bool AGVector2::operator!=(const AGVector2 &a) const
   return !operator==(a);
 }
 
-std::string AGVector2::toString() const
+AGString AGVector2::toString() const
 {
   std::ostringstream os;
   os<<"("<<v[0]<<","<<v[1]<<")";
-  return os.str();
+  return AGString(os.str());
 }
 
 float AGVector2::length2() const
@@ -414,15 +415,15 @@ AGVector3 AGVector3::operator-() const
 
 void AGVector3::saveXML(Node &node) const
 {
-  node.set("x",::toString(v[0]));
-  node.set("y",::toString(v[1]));
-  node.set("z",::toString(v[2]));
+  node.set("x",AGString(v[0]));
+  node.set("y",AGString(v[1]));
+  node.set("z",AGString(v[2]));
 }
 void AGVector3::loadXML(const Node &node)
 {
-  v[0]=toFloat(node.get("x"));
-  v[1]=toFloat(node.get("y"));
-  v[2]=toFloat(node.get("z"));
+  v[0]=node.get("x").toFloat();
+  v[1]=node.get("y").toFloat();
+  v[2]=node.get("z").toFloat();
 }
 
 
@@ -468,11 +469,11 @@ bool AGVector3::operator!=(const AGVector3 &a) const
   return !operator==(a);
 }
 
-std::string AGVector3::toString() const
+AGString AGVector3::toString() const
 {
   std::ostringstream os;
   os<<"("<<v[0]<<","<<v[1]<<","<<v[2]<<")";
-  return os.str();
+  return AGString(os.str());
 }
 
 float AGVector3::length2() const
@@ -794,13 +795,13 @@ AGVector3 AGMatrix3::operator*(const AGVector3 &v) const
 		   a[0][2]*v[0]+a[1][2]*v[1]+a[2][2]*v[2]);
 }
 
-std::string AGMatrix3::toString() const
+AGString AGMatrix3::toString() const
 {
   std::ostringstream os;
   os<<"("<<a[0][0]<<","<<a[1][0]<<","<<a[2][0]<<")"<<std::endl;
   os<<"("<<a[0][1]<<","<<a[1][1]<<","<<a[2][1]<<")"<<std::endl;
   os<<"("<<a[0][2]<<","<<a[1][2]<<","<<a[2][2]<<")"<<std::endl;
-  return os.str();
+  return AGString(os.str());
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -896,11 +897,11 @@ AGTriangle2 AGTriangle2::applied(const AGMatrix3 &m) const
 		     (m*AGVector3(p[2],1)).dim2());
 }
 
-std::string AGTriangle2::toString() const
+AGString AGTriangle2::toString() const
 {
   std::ostringstream os;
   os<<"["<<p[0].toString()<<" "<<p[1].toString()<<" "<<p[2].toString()<<"]";
-  return os.str();
+  return AGString(os.str());
 }
 
 AGVector2 AGTriangle2::get(int index) const
@@ -1145,11 +1146,11 @@ AGVector4 AGTriangle3::collide(const AGLine3 &pLine) const
 }
 
 
-std::string AGTriangle3::toString() const
+AGString AGTriangle3::toString() const
 {
   std::ostringstream os;
   os<<"["<<p[0].toString()<<";"<<p[1].toString()<<";"<<p[2].toString()<<"]";
-  return os.str();
+  return AGString(os.str());
 }
 
 AGVector3 AGTriangle3::operator[](int index) const
@@ -1171,7 +1172,7 @@ AGRect2::AGRect2(const SDL_Rect &r)
 }
 
 
-AGRect2::AGRect2(const std::string &ps)
+AGRect2::AGRect2(const AGString &ps)
 {
   std::istringstream is;
   char c;
@@ -1271,7 +1272,7 @@ AGVector2 AGRect2::operator[](size_t i) const
     case 1:
       return v1;
     default:
-      throw std::string("invalid index in AGRect2::operator[]");
+      throw AGString("invalid index in AGRect2::operator[]");
     }
   return v0;
 }
@@ -1284,7 +1285,7 @@ AGVector2 &AGRect2::operator[](size_t i)
     case 1:
       return v1;
     default:
-      throw std::string("invalid index in AGRect2::operator[]");
+      throw AGString("invalid index in AGRect2::operator[]");
     }
   return v0;
 }
@@ -1408,7 +1409,7 @@ bool AGRect2::contains(const AGVector2 &v) const
   return (v.getX()>= v0.getX() && v.getY()>=v0.getY() && v.getX()<=v1.getX() && v.getY()<=v1.getY());
 }
 
-std::string AGRect2::toString() const
+AGString AGRect2::toString() const
 {
   return v0.toString()+":"+v1.toString();
 }
@@ -1523,7 +1524,7 @@ AGVector2 &AGLine2::operator[](size_t i)
     case 1:
       return v1;
     default:
-      throw std::string("wrong index in AGLine::op[]");
+      throw AGString("wrong index in AGLine::op[]");
     }
   return v0;
 }
@@ -1536,7 +1537,7 @@ AGVector2 AGLine2::operator[](size_t i) const
     case 1:
       return v1;
     default:
-      throw std::string("wrong index in AGLine::op[]");
+      throw AGString("wrong index in AGLine::op[]");
     }
   return v0;
 }
@@ -1666,11 +1667,11 @@ AGVector2 AGLine2::direction() const
 
 
 
-std::string AGLine2::toString() const
+AGString AGLine2::toString() const
 {
   std::ostringstream os;
   os<<"("<<v0.toString()<<"-"<<v1.toString()<<")";
-  return os.str();
+  return AGString(os.str());
 }
 
 float AGLine2::distance(const AGVector2 &v) const
@@ -1723,9 +1724,9 @@ AGVector3 AGLine3::direction() const
 }
 
 
-std::string AGLine3::toString() const
+AGString AGLine3::toString() const
 {
-  std::ostringstream os;
+  AGStringStream os;
   os<<"("<<v0.toString()<<"-"<<v1.toString()<<")";
   return os.str();
 }
@@ -1950,9 +1951,9 @@ bool AGVector4::nonZero() const
     v[3]!=0;
 }
 
-std::string AGVector4::toString() const
+AGString AGVector4::toString() const
 {
-  std::ostringstream os;
+  AGStringStream os;
   os<<"("<<v[0]<<","<<v[1]<<","<<v[2]<<","<<v[3]<<")";
   return os.str();
 }
@@ -2143,14 +2144,14 @@ AGVector4 AGMatrix4::operator*(const AGVector4 &v) const
 		   get(0,3)*v[0]+get(1,3)*v[1]+get(2,3)*v[2]+get(3,3)*v[3]);
 }
 
-std::string AGMatrix4::toString() const
+AGString AGMatrix4::toString() const
 {
   std::ostringstream os;
   os<<"("<<get(0,0)<<","<<get(1,0)<<","<<get(2,0)<<","<<get(3,0)<<")"<<std::endl;
   os<<"("<<get(0,1)<<","<<get(1,1)<<","<<get(2,1)<<","<<get(3,1)<<")"<<std::endl;
   os<<"("<<get(0,2)<<","<<get(1,2)<<","<<get(2,2)<<","<<get(3,2)<<")"<<std::endl;
   os<<"("<<get(0,3)<<","<<get(1,3)<<","<<get(2,3)<<","<<get(3,3)<<")"<<std::endl;
-  return os.str();
+  return AGString(os.str());
 }
 
 (AGMatrix4::operator float*)()
@@ -2389,11 +2390,11 @@ bool AGBox3::includes(const AGBox3 &b)
 	  u1[0]<=u0[0] && u1[1]<=u0[1] && u1[2]<=u0[2]);
 }
 
-std::string AGBox3::toString() const
+AGString AGBox3::toString() const
 {
   std::ostringstream os;
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
-  return os.str();
+  return AGString(os.str());
 }
 
 std::vector<AGBox3> AGBox3::split() const
@@ -2476,11 +2477,11 @@ bool AGRect3::collides(const AGLine3&pLine) const
   return true;
 }
 
-std::string AGRect3::toString() const
+AGString AGRect3::toString() const
 {
   std::ostringstream os;
   os<<"["<<base.toString()<<";"<<dir.toString()<<"]";
-  return os.str();
+  return AGString(os.str());
 }
 
 

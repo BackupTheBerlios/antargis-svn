@@ -122,14 +122,14 @@ AGSurfaceManager *getSurfaceManager()
 
 long globalTexMem=-1;
 
-long getTexMem()
+size_t getTexMem()
 {
   if(globalTexMem<0)
     {
       globalTexMem=16000000;
       if(getConfig()->get("textureMemory")!="")
-	globalTexMem=toLong(getConfig()->get("textureMemory"));
-      getConfig()->set("textureMemory",toString(globalTexMem));
+	globalTexMem=getConfig()->get("textureMemory").toLong();
+      getConfig()->set("textureMemory",AGString(globalTexMem));
     }
   return globalTexMem;
 }
@@ -143,7 +143,7 @@ void AGSurfaceManager::cleanup(bool force,bool nomem)
       if(oldTexMem>8000000) // do not lower it beyond 8MB - this makes no sense
 	{
 	  globalTexMem=oldTexMem;
-	  getConfig()->set("textureMemory",toString(globalTexMem)); // save it
+	  getConfig()->set("textureMemory",AGString(globalTexMem)); // save it
 	}
     }
 

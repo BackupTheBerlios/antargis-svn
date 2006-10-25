@@ -36,7 +36,7 @@ MeshOptimizer::MeshOptimizer()
 }
 void MeshOptimizer::add(const MeshVertex &v)
 {
-  int index=mVertices.size();
+  size_t index=mVertices.size();
   std::map<MeshVertex,int>::iterator i=mMap.find(v);
   if(i!=mMap.end())
     {

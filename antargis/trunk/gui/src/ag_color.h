@@ -22,9 +22,9 @@
 #define AG_COLOR_H
 
 #include <SDL.h>
-#include <string>
 #include <iostream>
 #include <ag_base.h>
+#include <ag_string.h>
 
 class AGSurface;
 class AGVector4;
@@ -37,7 +37,7 @@ class AGEXPORT AGColor:public SDL_Color
   AGColor(const AGColor &c);
   AGColor(const AGVector4 &v);
   AGColor(Uint32 c,const AGSurface &pSurface);
-  AGColor(const std::string &s);
+  AGColor(const AGString &s);
 
   AGColor();
 
@@ -49,7 +49,7 @@ class AGEXPORT AGColor:public SDL_Color
 
   Uint32 mapRGB(SDL_PixelFormat *f) const;
 
-  std::string toString() const;
+  AGString toString() const;
 
   AGVector4 toVec() const;
 

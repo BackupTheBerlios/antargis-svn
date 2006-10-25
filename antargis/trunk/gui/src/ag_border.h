@@ -31,7 +31,7 @@ class AGPainter;
 class AGBorder
 {
  public:
-  AGBorder(const std::string &pTheme="");
+  AGBorder(const AGString &pTheme="");
 
   void draw(const AGRect2 &r,AGPainter &p);
 
@@ -44,7 +44,7 @@ class AGBorder
 
   std::vector<const AGTexture*> mTextures;
 
-  std::string mTheme;
+  AGString mTheme;
   bool mEnable;
   size_t mWidth;
 };

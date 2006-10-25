@@ -53,18 +53,25 @@ class AntLocalizer<AGLocalizer
 		read
 	end
 	def process(x)
+		r=myprocess(x)
+		#puts "TRANSLATE: #{x} #{r.class}"
+		return r
+	end
+	def myprocess(x)
 		if x==""
-			return x
+			return AGStringUtf8.new(x)
 		end
 		if @table.member?(x)
 			if @table[x]!="" and @table[x]!=nil
-				return @table[x].clone
+				return AGStringUtf8.new(@table[x].clone)
 			end
 		end
+		x||=""
+			
 		@table[x]=""
 		write
-		
-		return x
+		#puts "X:#{x}"		
+		return AGStringUtf8.new(x.to_s)
 	end
 	def find(x)
 		process(x)
@@ -88,6 +95,7 @@ private
 		# save incomplete at first
 		@table.each{|n,v|
 			if v=="" or v==nil
+				#puts "98: #{n} -- #{v}"
 				o+=n+";;"+v+"\n"
 			end
 		}
@@ -100,18 +108,20 @@ private
 	end
 end
 
-# set localizer, so that it can be accessed from c++ too
-setLocalizer($localizer=AntLocalizer.new) # set global due to GC
-
-def translate(a)
-	# FIXME:lookup
-	$localizer.process(a)
+module MyLocalizer
+	# set localizer, so that it can be accessed from c++ too
+	setLocalizer(@@localizer=AntLocalizer.new) # set global due to GC
+	
+	def MyLocalizer.translate(a)
+		# FIXME:lookup
+		@@localizer.process(a)
+	end
 end
-
 def _(a,*args)
-	a=translate(a).dup
+	a=MyLocalizer.translate(a).to_s
 	(1..args.length).each{|i|
 		a.sub!("{#{i}}",args[i-1].to_s)
 	}
+	a=AGStringUtf8.new(a)
 	return a
 end

@@ -22,7 +22,7 @@
 #include "ag_debug.h"
 #include "ag_kill.h"
 
-AGLayoutCreator::AGLayoutCreator(const std::string &pName)
+AGLayoutCreator::AGLayoutCreator(const AGString &pName)
 {
   getLayoutFactory()->addCreator(pName,this);
 }
@@ -42,7 +42,7 @@ AGLayoutFactory::~AGLayoutFactory()
 {
 }
 
-void AGLayoutFactory::addCreator(const std::string &pName,AGLayoutCreator *creator)
+void AGLayoutFactory::addCreator(const AGString &pName,AGLayoutCreator *creator)
 {
   mCreators[pName]=creator;
 }

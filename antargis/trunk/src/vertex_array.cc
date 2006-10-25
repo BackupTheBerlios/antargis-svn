@@ -8,7 +8,7 @@
 
 static bool useVBO()
 {
-  std::string s=getConfig()->get("useVBO");
+  AGString s=getConfig()->get("useVBO");
   if(s!="true" && s!="false")
     {
       s="true";
@@ -19,7 +19,7 @@ static bool useVBO()
 
 static bool useVertexArrays()
 {
-  std::string s=getConfig()->get("useVertexArrays");
+  AGString s=getConfig()->get("useVertexArrays");
   if(s!="true" && s!="false")
     {
       s="true";
@@ -29,7 +29,7 @@ static bool useVertexArrays()
 }
 
 
-VertexArray::VertexArray(bool pDynamic):bbox(AGVector3(),AGVector3()),mDynamic(pDynamic)
+VertexArray::VertexArray(bool pDynamic):mDynamic(pDynamic),bbox(AGVector3(),AGVector3())
 {
   bColor=true;
   mBuffers=GLEE_ARB_vertex_buffer_object && useVBO();

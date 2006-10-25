@@ -64,7 +64,7 @@ class AnimMeshData:public AGRubyObject
 
   std::vector<Bone*> bones;
 
-  std::map<int,std::string> frameEvents;
+  std::map<int,AGString> frameEvents;
 
   float animTime;
 
@@ -72,23 +72,23 @@ class AnimMeshData:public AGRubyObject
 
   AGMatrix4 mBase;
 
-  std::map<std::string,Animation> mAnimations;
+  std::map<AGString,Animation> mAnimations;
 
   AGBox3 mBBox;
 
   bool animate;
 
-  std::string mName;
+  AGString mName;
 
   bool events;
 
  private:
   void setupJoints();
   void setupArray();
-  void loadAnt3(const std::string &instr,float scale,const std::string &pTexName);
+  void loadAnt3(const AGData &instr,float scale,const AGFilename &pTexName);
 
  public:
-  AnimMeshData(const std::string &xmlfile);
+  AnimMeshData(const AGFilename &xmlfile);
   ~AnimMeshData();
 
   AGBox3 bbox() const;

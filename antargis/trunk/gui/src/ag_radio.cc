@@ -40,7 +40,7 @@ AGRadioGroup::~AGRadioGroup()
     (*i)->setGroup(0);
 }
 
-void AGRadioGroup::eventChange(const std::string &p)
+void AGRadioGroup::eventChange(const AGString &p)
 {
   std::set<AGRadio*>::iterator i=mChildren.begin();
 
@@ -151,11 +151,11 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGRadio *b=new AGRadio(pParent,pRect);
-    std::string caption=_(pNode.get("caption"));
+    AGStringUtf8 caption=_(pNode.get("caption"));
     if(caption.length())
-      b->setCaption(caption);
+      b->setCaption(AGStringUtf8(caption));
 
-    std::string captionImage=pNode.get("caption-image");
+    AGFilename captionImage=pNode.get("caption-image");
     if(captionImage.length())
       b->setSurface(AGSurface::load(captionImage),false);
     if(pNode.get("enabled")=="false")

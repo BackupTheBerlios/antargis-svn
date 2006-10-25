@@ -32,7 +32,7 @@ class AGRadioGroup:public AGWidget
   AGRadioGroup(AGWidget *pParent,const AGRect2 &pr);
   virtual ~AGRadioGroup();
 
-  virtual void eventChange(const std::string &p);
+  virtual void eventChange(const AGString &p);
 
   void add(AGRadio *r);
   void erase(AGRadio *r);

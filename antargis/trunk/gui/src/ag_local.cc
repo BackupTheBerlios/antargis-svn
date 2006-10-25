@@ -30,9 +30,9 @@ AGLocalizer::~AGLocalizer()
     gLocalizer=0;
 }
   
-std::string AGLocalizer::find(const std::string &p)
+AGStringUtf8 AGLocalizer::find(const AGString &p)
 {
-  return p;
+  return AGStringUtf8(p);
 }
 
 void setLocalizer(AGLocalizer *p)
@@ -46,11 +46,11 @@ AGLocalizer *getLocalizer()
 }
 
 
-std::string translate(const std::string &s)
+AGStringUtf8 translate(const AGString &s)
 {
   AGLocalizer *l=getLocalizer();
 
   if(l)
     return l->find(s);
-  return s;
+  return AGStringUtf8(s);
 }

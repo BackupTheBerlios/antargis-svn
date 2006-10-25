@@ -1,18 +1,5 @@
 #!/usr/bin/env ruby
 
-def getFieldMeshData(size)
-	if $fieldMeshes.nil?
-		$fieldMeshes=[
-	getMeshData("data/models/crop_tiny.ant2",2.2,"data/textures/models/crop_tiny.png"),
-	getMeshData("data/models/crop_small.ant2",2.2,"data/textures/models/crop_green.png"),
-	getMeshData("data/models/crop_med.ant2",2.2,"data/textures/models/crop_yellow.png"),
-	getMeshData("data/models/crop_high.ant2",2.2,"data/textures/models/crop_gold.png")]
-		
-	end
-	$fieldMeshes[size] #getMeshData("data/models/ant_bakery.ant2",3.2,"data/textures/models/ant_bakery.png")
-end
-
-
 class AntField<AntRubyEntity
 	attr_accessor :farm
 	def initialize
@@ -20,8 +7,8 @@ class AntField<AntRubyEntity
 		setProvide("field",true)
 		@size=0 # (rand*3).to_i
 		#init fieldMeshes-var
-		getFieldMeshData(0)
-		@max=$fieldMeshes.length-1
+		AntField.getFieldMeshData(0)
+		@max=@@fieldMeshes.length-1
 		setupMesh
 		@growTime=20
 		@begin=true
@@ -54,8 +41,21 @@ class AntField<AntRubyEntity
 	private
 	def setupMesh
 		
-		mesh=Mesh.new(getMap.getScene,getFieldMeshData(@size),AGVector4.new(0,0,0),-30)
+		mesh=Mesh.new(getMap.getScene,AntField.getFieldMeshData(@size),AGVector4.new(0,0,0),-30)
 		setMesh(mesh)
+	end
+
+	@@fieldMeshes=nil
+
+	def AntField.getFieldMeshData(size)
+		if @@fieldMeshes.nil?
+			@@fieldMeshes=[
+				getMeshData("data/models/crop_tiny.ant2",2.2,"data/textures/models/crop_tiny.png"),
+				getMeshData("data/models/crop_small.ant2",2.2,"data/textures/models/crop_green.png"),
+				getMeshData("data/models/crop_med.ant2",2.2,"data/textures/models/crop_yellow.png"),
+				getMeshData("data/models/crop_high.ant2",2.2,"data/textures/models/crop_gold.png")]
+		end
+		@@fieldMeshes[size]
 	end
 
 end

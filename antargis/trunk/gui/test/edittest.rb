@@ -21,16 +21,18 @@
 
 #!/usr/bin/ruby
 
-require 'libantargisruby'
+require 'ruby/antargislib.rb'
+# require 'libantargis'
 #require 'sdl'
-require 'testapp.rb'
-require 'theme.rb'
+require 'gui/test/testapp.rb'
+require 'gui/test/theme.rb'
 
-include Libantargisruby
+include Libantargis
 
 puts "MenuTest"
 
-main=AGMain.new
+# main=AGMain.new
+# main.initVideo(800,600,32,false,false)
 
 app=TestApp.new()#false)
 
@@ -39,7 +41,6 @@ widget=AGEdit.new(screen,AGRect.new(100,100,100,100))
 screen.addChild(widget)
 app.setMainWidget(screen)#widget)
 
-main.changeRes(800,600,32,false,false)
 
 app.run
 

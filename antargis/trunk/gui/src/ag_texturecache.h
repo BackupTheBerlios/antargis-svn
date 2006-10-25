@@ -34,12 +34,12 @@ class AGTextureCache
   {
     AGTextureCache();
   public:
-    const AGTexture &get(const std::string &pTexture,int downScaleExp=1);
-    const AGTexture &get3D(const std::string &pTexture,int downScaleExp=1,int downScaleZ=1);
+    const AGTexture &get(const AGFilename &pTexture,int downScaleExp=1);
+    const AGTexture &get3D(const AGFilename &pTexture,int downScaleExp=1,int downScaleZ=1);
 
-    const AGTexture &get(const std::string &pTexture,const AGRect2 &pSub);
+    const AGTexture &get(const AGFilename &pTexture,const AGRect2 &pSub);
   private:
-    std::map<std::string,AGTexture> mTextures;
+    std::map<AGFilename,AGTexture> mTextures;
     
     friend AGTextureCache *getTextureCache();
   };

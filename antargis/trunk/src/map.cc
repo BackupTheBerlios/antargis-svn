@@ -207,7 +207,7 @@ std::vector<AntEntityPtr> AntMap::getAllEntitiesV()
   std::copy(mEntities.begin(),mEntities.end(),std::back_inserter(v));
   return v;
 }
-std::vector<AntEntityPtr> AntMap::getEntities(const std::string &pName)
+std::vector<AntEntityPtr> AntMap::getEntities(const AGString &pName)
 {
   std::vector<AntEntityPtr> v;
   for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
@@ -216,7 +216,7 @@ std::vector<AntEntityPtr> AntMap::getEntities(const std::string &pName)
   return v;
 }
 
-std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const std::string &pType,size_t atLeast)
+std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const AGString &pType,size_t atLeast)
 {
   // FIXME: optimize this - use quadtree
 
@@ -242,7 +242,7 @@ std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const std::string &p
   std::vector<AntEntityPtr> vec;
 
   // take one of the nearest, but no farer away than 30% of nearest
-  AntEntity *e=0;
+  //  AntEntity *e=0;
   if(ents.size())
     {
       std::multimap<float,AntEntity*>::iterator j=ents.begin();
@@ -258,7 +258,7 @@ std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const std::string &p
 }
 
 
-AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType,size_t atLeast)
+AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
 {
   // FIXME: optimize this - use quadtree
 
@@ -304,7 +304,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const std::string &pType,size_t atLeast
 
   return e;
 }
-AntEntity *AntMap::getByName(const std::string &pName)
+AntEntity *AntMap::getByName(const AGString &pName)
 {
   EntityList::iterator i=mEntities.begin();
 
@@ -316,7 +316,7 @@ AntEntity *AntMap::getByName(const std::string &pName)
   return 0;
 }
 
-void AntMap::loadMapFromMemory(const std::string &pMem)
+void AntMap::loadMapFromMemory(const AGData &pMem)
 {
   if(pMem.length())
     {
@@ -326,21 +326,21 @@ void AntMap::loadMapFromMemory(const std::string &pMem)
     }
 }
 
-void AntMap::loadMap(const std::string &pFilename)
+void AntMap::loadMap(const AGFilename &pFilename)
 {
   
   loadMapFromMemory(loadFile(pFilename));
 }
-void AntMap::saveMap(const std::string &pFilename)
+void AntMap::saveMap(const AGFilename &pFilename)
 {
-  mName=pFilename;
+  mName=AGString(pFilename);
   Document d;
   Node &root=d.root();
   root.setName("antargisLevel");
   //  cdebug("root:"<<root);
   saveXML(root);
 
-  std::string c=d.toString();
+  AGData c=d.toString();
   cdebug(c);
   saveFile(pFilename,c);
 }

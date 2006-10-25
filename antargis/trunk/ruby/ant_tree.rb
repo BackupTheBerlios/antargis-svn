@@ -21,8 +21,8 @@
 
 #!/usr/bin/ruby
 
-require 'fir_mesh.rb'
-require 'ant_appletree.rb'
+#require 'fir_mesh.rb'
+#require 'ant_appletree.rb'
 require 'ant_grass.rb'
 
 

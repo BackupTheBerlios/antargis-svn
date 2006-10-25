@@ -34,7 +34,7 @@
 Node::Node()
 {
 }
-Node::Node(std::string name):mName(name)
+Node::Node(const AGString &name):mName(name)
 {
 }
 
@@ -76,7 +76,7 @@ Node::Attributes Node::getAttributes() const
 
 
 
-void Node::setName(std::string pName)
+void Node::setName(const AGString &pName)
 {
   mName=pName;
 }
@@ -95,7 +95,7 @@ const Node *Node::operator->() const
     return this;
   }
 
-Node::NodeVector Node::getChildren(std::string pName) const
+Node::NodeVector Node::getChildren(const AGString &pName) const
   {
     NodeVector l;
     NodeVector::const_iterator i=mNodes.begin();
@@ -107,12 +107,12 @@ Node::NodeVector Node::getChildren(std::string pName) const
     return l;
   }
 
-std::string Node::getName() const
+const AGString &Node::getName() const
   {
     return mName;
   }
 
-Node &Node::addChild(const std::string &pName)
+Node &Node::addChild(const AGString &pName)
 {
   Node *node=new Node(pName);
   mNodes.push_back(node);
@@ -142,23 +142,23 @@ Node::const_iterator Node::end() const
     return mNodes.end();
   }
 
-void Node::setContent(const std::string &s)
+void Node::setContent(const AGString &s)
 {
   mContent=s;
 }
 
-void Node::set(const std::string &pName,const std::string &pValue)
+void Node::set(const AGString &pName,const AGString &pValue)
   {
     mAttrs[pName]=pValue;
   }
-std::string Node::get(const std::string &pName) const
-    {
-      std::string v;
-      std::map<std::string,std::string>::const_iterator i=mAttrs.find(pName);
-      if(i!=mAttrs.end())
-        return i->second;
-      return "";//mAttrs[pName];
-    }
+AGString Node::get(const AGString &pName) const
+{
+  std::string v;
+  std::map<AGString,AGString>::const_iterator i=mAttrs.find(pName);
+  if(i!=mAttrs.end())
+    return i->second;
+  return "";
+}
 
 void Node::clear()
 {
@@ -168,60 +168,61 @@ void Node::clear()
   mName="";
 }
 
-std::string Node::escape(const std::string &s)
-  {
-    return replace(replace(s,"\\","\\\\"),"\"","\\\"");
-  }
-std::string Node::unescape(const std::string &s)
-  {
-    std::string n;
-    size_t i;
-    bool escape=false;
-    for(i=0;i<s.length();i++)
-      {
-        if(s[i]=='\\')
-          {
-            if(escape)
-              {
-                escape=false;
-                n+="\\";
-              }
-            else
-              escape=true;
-          }
-        else if(s[i]=='\"')
-          {
-            if(escape)
-              {
-                n+="\"";
-                escape=false;
-              }
-            else
-              throw std::string("Error in unescaping");
-          }
-        else
-          {
-            escape=false;
-            n+=s[i];
-          }
-      }
-    return n;
-  }
+AGString Node::escape(const AGString &s)
+{
+  return s.replace("\\","\\\\").replace("\"","\\\"");
+}
 
-void Node::getStart(std::ostringstream &s,bool complete) const
-  {
-    s<<"<"<<mName;
-    if(mAttrs.size()>0)
-      {
-        std::map<std::string,std::string>::const_iterator i=mAttrs.begin();
-        for(;i!=mAttrs.end();i++)
-          s<<" "<<i->first<<"=\""<<escape(i->second)<<"\"";
-      }
-    if(complete)
+AGString Node::unescape(const AGString &s)
+{
+  AGString n;
+  size_t i;
+  bool escape=false;
+  for(i=0;i<s.length();i++)
+    {
+      if(s[i]=='\\')
+	{
+	  if(escape)
+	    {
+	      escape=false;
+	      n+="\\";
+	    }
+	  else
+	    escape=true;
+	}
+      else if(s[i]=='\"')
+	{
+	  if(escape)
+	    {
+	      n+="\"";
+	      escape=false;
+	    }
+	  else
+	    throw std::string("Error in unescaping");
+	}
+      else
+	{
+	  escape=false;
+	  n+=s[i];
+	}
+    }
+  return n;
+}
+
+void Node::getStart(AGStringStream &s,bool complete) const
+{
+  s<<"<"<<mName;
+  if(mAttrs.size()>0)
+    {
+      std::map<AGString,AGString>::const_iterator i=mAttrs.begin();
+      for(;i!=mAttrs.end();i++)
+	s<<" "<<i->first<<"=\""<<escape(i->second)<<"\"";
+    }
+  if(complete)
       s<<"/";
-    s<<">";
-  }
-void Node::getEnd(std::ostringstream &s) const
+  s<<">";
+}
+void Node::getEnd(AGStringStream &s) const
   {
     s<<"</"<<mName<<">";
   }
@@ -231,7 +232,7 @@ size_t Node::size() const
   return mNodes.size();
 }
 
-std::string Node::getContent() const
+AGString Node::getContent() const
   {
     if(mContent.length()==0)
       {
@@ -242,7 +243,7 @@ std::string Node::getContent() const
     return mContent;
   }
 
-void Node::indent(std::ostringstream &s,int depth) const
+void Node::indent(AGStringStream &s,int depth) const
   {
     for(;depth>0;depth--)
       s<<" ";
@@ -252,7 +253,7 @@ bool Node::isTextNode() const
 {
   return mName.length()==0 && mAttrs.size()==0;
 }
-std::string Node::getText() const
+AGString Node::getText() const
 {
   return mContent;
 }
@@ -274,7 +275,7 @@ bool Node::hasTextNode() const
 
 
 
-void Node::getContent(std::ostringstream &s,int depth) const
+void Node::getContent(AGStringStream &s,int depth) const
   {
     NodeVector::const_iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
@@ -293,12 +294,12 @@ void Node::getContent(std::ostringstream &s,int depth) const
 		else
 		  {
 		    n->getStart(s);
-		    s<<std::endl;
+		    s<<"\n";
 		    n->getContent(s,depth+2);
 		    indent(s,depth);
 		    n->getEnd(s);
 		  }
-		s<<std::endl;
+		s<<"\n";
 		
 	      }
 	    else
@@ -313,9 +314,9 @@ void Node::getContent(std::ostringstream &s,int depth) const
     s<<mContent;
   }
 
-std::string Node::toString(bool indent) const
+AGString Node::toString(bool indent) const
   {
-    std::ostringstream os;
+    AGStringStream os;
     //    cdebug(mName.length());
     if(mName.length()==0)
       return mContent;
@@ -323,10 +324,10 @@ std::string Node::toString(bool indent) const
     if(indent)
       {
         getStart(os);
-        os<<std::endl;
+        os<<"\n";
         getContent(os,2);
         getEnd(os);
-        os<<std::endl;
+        os<<"\n";
       }
     else
       {
@@ -346,7 +347,7 @@ Document::Document()
 {
   mRoot=new Node;
 }
-Document::Document(std::string pFile)
+Document::Document(AGFilename pFile)
 {
   mRoot=new Node;
   mRoot->clear();
@@ -358,9 +359,9 @@ Document::~Document()
   delete mRoot;
 }
 
-bool Document::parseFile(std::string file)
+bool Document::parseFile(AGFilename file)
 {
-  std::string s;
+  AGData s;
   s=loadFile(file);
 
   parseMemory(s);
@@ -378,21 +379,21 @@ Node *Document::getRootNode()
   return mRoot;
   }*/
 
-std::string Document::toString(bool forceIndent) const
-  {
-    if(mRoot->hasTextNode() && forceIndent==false)
-      return mRoot->toString(false);
-    else
-      return mRoot->toString();
-  }
+AGData Document::toString(bool forceIndent) const
+{
+  if(mRoot->hasTextNode() && forceIndent==false)
+    return mRoot->toString(false);
+  else
+    return mRoot->toString();
+}
 /*
-void Document::parseMemory(const std::string &s)
+void Document::parseMemory(const AGString &s)
 {
   parseMemory(s);
 }
 */
 
-void Document::parseMemory(const std::string &s)
+void Document::parseMemory(const AGData &s)
 {
   DomParser p;
   p.parse(s,this);
@@ -417,7 +418,7 @@ Parser::Data::Data()
 }
 
 
-bool Parser::Data::first(const std::string &p) const
+bool Parser::Data::first(const AGString &p) const
 {
   if(s.length()>=p.length()+pos)
     {
@@ -426,7 +427,7 @@ bool Parser::Data::first(const std::string &p) const
   return false;
 }
 
-std::string Parser::Data::getFirst(size_t i) const
+AGString Parser::Data::getFirst(size_t i) const
 {
   STACKTRACE;
   if(pos>=s.length())
@@ -434,7 +435,7 @@ std::string Parser::Data::getFirst(size_t i) const
   else
     return s.substr(pos,std::min(s.length()-pos,i));
 
-  std::ostringstream os;
+  AGStringStream os;
   for(size_t k=pos;k<i+pos;k++)
     {
       if(k>=s.length())
@@ -479,7 +480,7 @@ void Parser::Data::discard()
 
 void Parser::Data::eatBlanks()
 {
-  std::string f=getFirst(1);
+  AGString f=getFirst(1);
 
   while(f==" " || f=="\t" || f=="\n")
     {
@@ -489,7 +490,7 @@ void Parser::Data::eatBlanks()
 
 }
 
-std::string Parser::Data::getTil(const std::string &p) const
+AGString Parser::Data::getTil(const AGString &p) const
 {
   size_t i=s.find(p,pos);
   if(i!=s.npos)
@@ -506,9 +507,9 @@ size_t Parser::getLine() const
   return data.line;
 }
 
-void Parser::parse(const std::string &pData)
+void Parser::parse(const AGData &pData)
 {
-  data.s=pData;
+  data.s=AGString(pData);
 
   parseHeader();
   while(!eod())
@@ -540,7 +541,7 @@ bool Parser::parseText()
   //  cdebug("current:"<<data.getFirst(10));
   //  cdebug((int)data.getFirst(10)[0]<<"  "<<int(EOF));
 
-  std::string ctext=data.getTil("<");
+  AGString ctext=data.getTil("<");
   //  data.eat(ctext.length());
   if(ctext.length())
     {
@@ -555,7 +556,7 @@ bool Parser::parseText()
   return false;
   
 
-  std::ostringstream os;
+  AGStringStream os;
   while(data.getFirst(1)!="<" && data.getFirst(1).length())
     {
       os<<data.getFirst(1);
@@ -567,7 +568,7 @@ bool Parser::parseText()
 
       cdebug(os.str().length()<<"  "<<ctext.length());
       cdebug(":"<<os.str()<<"!");
-      cdebug((int)os.str()[0]);
+      //      cdebug((int)os.str()[0]);
       assert(os.str()==ctext);
       return true;
     }
@@ -581,7 +582,7 @@ bool Parser::parseComment()
   if(data.first("<!--"))
     {
       data.eat(4);
-      std::string s=data.getTil("-->");
+      AGString s=data.getTil("-->");
       comment(s);
       data.eat(s.length()+3);
       return true;
@@ -589,10 +590,10 @@ bool Parser::parseComment()
   return false;
 }
 
-std::string Parser::parseName()
+AGString Parser::parseName()
 {
-  std::ostringstream os;
-  std::string first=data.getFirst(1);
+  AGStringStream os;
+  AGString first=data.getFirst(1);
   while(first!=" " && first!="\t" && first!=">" && first!="/")
     {
       os<<first;
@@ -611,7 +612,7 @@ Parser::NodeStartInfo Parser::parseNodeStart()
 
   info.startTag=true;
   data.eat(1);
-  std::string name=parseName();
+  AGString name=parseName();
   //  cdebug("name:"<<name);
   //  data.eat(name.length());
   
@@ -643,7 +644,7 @@ bool Parser::parseNodeEnd()
     return false;
   
   data.eat(2);
-  std::string name=data.getTil(">");
+  AGString name=data.getTil(">");
   data.eat(name.length()+1);
   endTag(name);
   return true;
@@ -657,7 +658,7 @@ bool Parser::parseHeader()
     return false;
   data.push();
   data.eat(2);
-  std::string c=data.getTil("?>");
+  AGString c=data.getTil("?>");
   //  cdebug("c:"<<c);
   if(c.length()==0)
     {
@@ -676,11 +677,11 @@ bool Parser::parseHeader()
   return false;
 }
 
-std::string Parser::parseString()
+AGString Parser::parseString()
 {
-  std::string start=data.getFirst(1);
-  std::string first;
-  std::ostringstream os;
+  AGString start=data.getFirst(1);
+  AGString first;
+  AGStringStream os;
   data.eat(1);
 
   bool escape, sescape;
@@ -715,7 +716,7 @@ std::string Parser::parseString()
 Node::Attributes Parser::parseAttributes()
 {
   Node::Attributes attrs;
-  std::string name,value;
+  AGString name,value;
   //  cdebug("first:"<<data.getFirst(1));
 
   while(!(data.first(">") || data.first("/")))
@@ -738,32 +739,32 @@ bool Parser::eod()
   return data.pos>=data.s.length();
 }
 
-void Parser::simpleTag(const std::string &pName,const Node::Attributes &pAttributes)
+void Parser::simpleTag(const AGString &pName,const Node::Attributes &pAttributes)
 {
   cdebug("simple:"<<pName);
 }
 
-void Parser::startTag(const std::string &pName,const Node::Attributes &pAttributes)
+void Parser::startTag(const AGString &pName,const Node::Attributes &pAttributes)
 {
   cdebug("start:"<<pName);
 }
-void Parser::endTag(const std::string &pName)
+void Parser::endTag(const AGString &pName)
 {
   cdebug("end:"<<pName);
 }
-void Parser::text(const std::string &pText)
+void Parser::text(const AGString &pText)
 {
   cdebug("text:"<<pText);
 
 }
-void Parser::comment(const std::string &pText)
+void Parser::comment(const AGString &pText)
 {
   cdebug("comment:"<<pText);
 }
 
 
 
-void Parser::header(const std::string &pText)
+void Parser::header(const AGString &pText)
 {
   cdebug("header:"<<pText);
 }
@@ -773,7 +774,7 @@ void Parser::header(const std::string &pText)
 // DomParser
 /////////////////////////////////////////////////////////////////////////////////////
 
-void DomParser::simpleTag(const std::string &pName,const Node::Attributes &pAttributes)
+void DomParser::simpleTag(const AGString &pName,const Node::Attributes &pAttributes)
 {
   if(nodes.size()==0)
     {
@@ -789,7 +790,7 @@ void DomParser::simpleTag(const std::string &pName,const Node::Attributes &pAttr
       n.setAttributes(pAttributes);
     }
 }
-void DomParser::startTag(const std::string &pName,const Node::Attributes &pAttributes)
+void DomParser::startTag(const AGString &pName,const Node::Attributes &pAttributes)
 {
   if(nodes.size()==0)
     {
@@ -807,7 +808,7 @@ void DomParser::startTag(const std::string &pName,const Node::Attributes &pAttri
       nodes.push_back(&n);
     }
 }
-void DomParser::endTag(const std::string &pName)
+void DomParser::endTag(const AGString &pName)
 {
   if(nodes.size()==0)
     {
@@ -825,24 +826,24 @@ void DomParser::endTag(const std::string &pName)
 	}
     }
 }
-void DomParser::text(const std::string &pText)
+void DomParser::text(const AGString &pText)
 {
   if(nodes.size()>0) // ignore text otherwise
     {
       nodes.back()->addChild("").setContent(pText);
     }
 }
-void DomParser::comment(const std::string &pText)
+void DomParser::comment(const AGString &pText)
 {
-  nodes.back()->addChild("").setContent(std::string("<!--")+pText+std::string("-->"));
+  nodes.back()->addChild("").setContent(AGString("<!--")+pText+AGString("-->"));
 }
-void DomParser::header(const std::string &pText)
+void DomParser::header(const AGString &pText)
 {
   // do nothing
 }
 
 
-Document *DomParser::parse(const std::string &pData,Document *d)
+Document *DomParser::parse(const AGData &pData,Document *d)
 {
   doc=d;
   nodes.clear();
@@ -852,7 +853,7 @@ Document *DomParser::parse(const std::string &pData,Document *d)
   return doc;
 }
 
-Document *DomParser::parse(const std::string &pData)
+Document *DomParser::parse(const AGData &pData)
 {
   return parse(pData,new Document);
 }

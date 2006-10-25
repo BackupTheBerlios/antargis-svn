@@ -26,16 +26,20 @@
 
 
 class AICondition
-	def value(interface,hero)
+	attr_accessor :interface
+	def value(hero)
 		return 1
 	end
 end
 
 class AIConditionFoodLow<AICondition
-	def value(interface,hero)
+	def value(hero)
+		puts "FOOD LOW ???"
 		if interface.getResourceInfo(hero,"food")<5 and interface.isAppliableResourceNear(hero,"food")
+			puts "YES"
 			return 1
 		else
+			puts "NO"
 			return 0
 		end
 	end
@@ -46,7 +50,7 @@ class AIEveryNthCondition<AICondition
 		@nth=nth
 		@v=0
 	end
-	def value(interface,hero)
+	def value(hero)
 		@v+=1
 		@v%=@nth
 		return @v==0?1:0
@@ -56,23 +60,46 @@ end
 
 # Dummy Action - does nothing at all
 class AIAction
+	attr_accessor :interface
 	def execute(interface,hero)
 	end
 end
 
 # get food from some building which is owned by the hero
 class AIGatherFoodAction<AIAction
-	def execute(interface,hero)
+	def execute(hero)
 		unit=interface.findResource(hero,"food")
 		puts "HERO TAKES FOOD"
-		interface.takeFood(hero,unit)
+		@interface.takeFood(hero,unit)
 	end
 end
 
 # rest for a second
 class AIRestAction<AIAction
-	def execute(interface,hero)
-		interface.rest(hero,1)
+	def execute(hero)
+		@interface.rest(hero,1)
+	end
+end
+
+class AIAttackAction<AIAction
+	def execute(hero)
+		e=findUsableEnemy(hero)
+		if e
+			@interface.attack(hero,e)
+		end
+	end
+	private
+	def findUsableEnemy(hero)
+		enemyPlayers=@interface.getPlayerNames-[@interface.getPlayerName]
+		allEnemyHeroes=enemyPlayers.collect{|p|@interface.getHeroes(p)+@interface.getVillages(p)}.flatten
+		allEnemyHeroes.sort!{|a,b|@interface.getHeroTroopCount(a)<=>@interface.getHeroTroopCount(b)}
+		e=allEnemyHeroes[0]
+		if e
+			if @interface.getHeroTroopCount(e)>@interface.getHeroTroopCount(hero)
+				e=nil
+			end
+		end
+		e
 	end
 end
 
@@ -81,18 +108,20 @@ end
 # or
 # AIRule.new(AICondition.new,[AIRestAction.new,Someotheraction.new])
 class AIRule
-	def initialize(condition,actions)
+	def initialize(condition,actions,interface)
 		@c=condition
 		@a=actions
+		@c.interface=interface
+		@a.interface=interface
 	end
-	def value(interface,hero)
-		@c.value(interface,hero)
+	def value(hero)
+		@c.value(hero)
 	end
-	def execute(interface,hero)
+	def execute(hero)
 		if @a.is_a?(Array)
-			@a.each{|a|a.execute(interface,hero)}
+			@a.each{|a|a.execute(hero)}
 		else
-			@a.execute(interface,hero)
+			@a.execute(hero)
 		end
 	end
 end

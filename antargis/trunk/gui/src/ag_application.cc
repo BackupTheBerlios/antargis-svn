@@ -60,6 +60,14 @@ AGApplication::~AGApplication()
   delete mCursor;
 }
 
+void AGApplication::setKeyRepeat(bool enable)
+{
+  if(enable)
+    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
+  else
+    SDL_EnableKeyRepeat(0,0);
+}
+
 
 void AGApplication::setMainWidget(AGWidget *w)
 {

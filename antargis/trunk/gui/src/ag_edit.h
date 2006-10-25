@@ -25,6 +25,8 @@
 #include "ag_font.h"
 #include "ag_surface.h"
 #include "ag_background.h"
+#include "ag_utf8.h"
+#include "ag_string_utf8.h"
 
 enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
 enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
@@ -32,7 +34,7 @@ enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
 class AGEditLine
 {
  public:
-  AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd);
+  AGEditLine(const AGStringUtf8 &pText,AGFont pFont,bool pHardEnd);
   virtual ~AGEditLine();
 
   void setAlign(AGAlign pAlign);
@@ -44,28 +46,28 @@ class AGEditLine
   int height() const;
   int width() const;
 
-  void insert(char c,int cx,bool pInsert);
+  void insert(const AGStringUtf8 &c,int cx,bool pInsert);
   void doDelete(int cx);
   AGEditLine split(int cx);
 
   int length() const;
 
-  void append(std::string s);
-  void prepend(std::string s);
-  std::string getText() const;
+  void append(const AGStringUtf8 &s);
+  void prepend(const AGStringUtf8 &s);
+  AGStringUtf8 getText() const;
   AGFont getFont() const;
-  void setText(const std::string &s);
+  void setText(const AGStringUtf8 &s);
 
   bool hardEnd() const;
   void setHardEnd(bool pHardEnd);
-  std::pair<std::string,bool> checkUnwrap(int pW,std::string s);
+  std::pair<AGStringUtf8,bool> checkUnwrap(int pW,const AGStringUtf8 &s);
 
-  std::pair<std::string,bool> checkWrap(int pW);
+  std::pair<AGStringUtf8,bool> checkWrap(int pW);
 
   void setFont(const AGFont &pFont);
 
  private:
-  std::string mText;
+  AGStringUtf8 mText;
   AGFont mFont;
   bool mHardEnd;
   AGAlign mAlign;
@@ -85,10 +87,10 @@ class AGEdit:public AGWidget
 
   void setMulti(bool mMultiLine);
 
-  bool insert(char c);
+  bool insert(const AGStringUtf8 &c);
   void doDelete(int p);
 
-  void setText(const std::string &pText);
+  void setText(const AGStringUtf8 &pText);
   void setFont(const AGFont &pFont);
 
   void clear();
@@ -101,11 +103,11 @@ class AGEdit:public AGWidget
   void setBackground(bool pDrawBackground);
   void setBackground(const AGBackground &bg);
 
-  void setTheme(const std::string &s);
+  void setTheme(const AGString &s);
 
   bool canFocus() const;
 
-  std::string getText() const;
+  AGStringUtf8 getText() const;
 
   void setMaxLength(int i);
 
@@ -154,7 +156,7 @@ class AGEdit:public AGWidget
   bool mMutable;
   bool mDrawBackground;
 
-  std::string mTheme;
+  AGString mTheme;
 
   int mMaxLength;
 };

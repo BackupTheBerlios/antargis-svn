@@ -260,13 +260,13 @@ void AnimMesh::advance(float time)
     {
       if(oldTime>mTime)
 	{
-	  for(std::map<int,std::string>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
+	  for(std::map<int,AGString>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
 	    if(i->first>=oldTime || i->first<mTime)
 	      mEntity->animationEvent(i->second);
 	}
       else
 	{
-	  for(std::map<int,std::string>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
+	  for(std::map<int,AGString>::iterator i=mData->frameEvents.begin();i!=mData->frameEvents.end();i++)
 	    {
 	      if(i->first>=oldTime && i->first<mTime)
 		mEntity->animationEvent(i->second);
@@ -362,18 +362,18 @@ void AnimMesh::setRotation(float r)
   setRotation(AGVector3(0,0,1),r+180);
 }
 
-std::string AnimMesh::getAnimation() const
+AGString AnimMesh::getAnimation() const
 {
   return mAnimName;
 }
 
-bool AnimMesh::setAnimation(const std::string &pName)
+bool AnimMesh::setAnimation(const AGString &pName)
 {
   if(mAnimName==pName)
     return true;
   if(mData->mAnimations.find(pName)==mData->mAnimations.end())
     {
-      cdebug(std::string("Animation ")+pName+" is known here!");
+      cdebug(AGString("Animation ")+pName+" is known here!");
       return false;
     }
 

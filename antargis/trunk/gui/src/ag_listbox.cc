@@ -23,10 +23,11 @@
 #include "ag_listbox.h"
 #include "ag_theme.h"
 #include "ag_scroller.h"
+#include "ag_stringstream.h"
 
 #include <sstream>
 
-AGListBoxItem::AGListBoxItem(std::string pID,std::string pValue)
+AGListBoxItem::AGListBoxItem(AGString pID,AGStringUtf8 pValue)
 {
   id=pID;
   value=pValue;
@@ -61,7 +62,7 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pR
       e->setMutable(false);
       e->setBackground(false);
       e->setFont(f);
-      std::ostringstream os;
+      AGStringStream os;
       os<<"ListBoxItem"<<count;
       e->setName(os.str());
 
@@ -73,12 +74,12 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pR
   mSelected=-1;
 }
 
-void AGListBox::insertItem(std::string pID,std::string pValue)
+void AGListBox::insertItem(AGString pID,AGStringUtf8 pValue)
 {
   mItems.push_back(AGListBoxItem(pID,pValue));
   arrange();
 }
-void AGListBox::selectItem(std::string pID)
+void AGListBox::selectItem(AGString pID)
 {
   for(size_t i=0;i<mItems.size();i++)
     if(mItems[i].id==pID)
@@ -89,14 +90,14 @@ void AGListBox::selectItem(std::string pID)
   arrange();
 }
 
-std::string AGListBox::getSelectedID() const
+AGString AGListBox::getSelectedID() const
 {
   if(mSelected>=0 && size_t(mSelected)<mItems.size())
     return mItems[mSelected].id;
   return "";
 }
 
-std::string AGListBox::getSelectedValue() const
+AGString AGListBox::getSelectedValue() const
 {
   if(mSelected>=0 && size_t(mSelected)<mItems.size())
     return mItems[mSelected].id;
@@ -184,7 +185,7 @@ bool AGListBox::eventMouseClick(AGEvent *e)
       else if(b==5)
 	{
 	  // down wheel
-	  if(mY<=mItems.size()-mHeight)
+	  if(mY<=(int)mItems.size()-mHeight)
 	    mY++;
 	  arrange();
 	  return true;
@@ -192,14 +193,14 @@ bool AGListBox::eventMouseClick(AGEvent *e)
       else
 	{
 
-	  int y=p[1]-getScreenRect().y();
+	  int y=(int)(p[1]-getScreenRect().y());
 	  //	  cdebug("y:"<<y);
 	  y/=mItemHeight;
 	  //	  cdebug("y:"<<y);
 	  //	  cdebug(mItemHeight);
 	  int n=y+mY;
 	  //	  cdebug("n:"<<n);
-	  if(n<mItems.size())
+	  if(n<(int)mItems.size())
 	    mSelected=n;
 
 	  e->setName("sigSelect");
@@ -243,7 +244,7 @@ bool AGListBox::eventMouseButtonUp(AGEvent *m)
 
 bool AGListBox::eventScroller(AGEvent *e)
 {
-  mY=mScroller->getValue();
+  mY=(int)mScroller->getValue();
   arrange();
   return false;
 }
@@ -253,7 +254,7 @@ void AGListBox::updateScroller()
   // update scroller
   {
     int itemCount=mItems.size();
-    int visibleCount=height()/mItemHeight;
+    int visibleCount=(int)(height()/mItemHeight);
 
     int maxVal=std::max(0,itemCount-visibleCount);
 

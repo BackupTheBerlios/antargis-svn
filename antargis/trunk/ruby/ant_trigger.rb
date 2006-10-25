@@ -14,7 +14,7 @@ class Trigger
 			@text=node.get("text")
 		else
 			@name=node
-			@triggerTime=$systemTime
+			@triggerTime=AntRubyMap.getSystemTime
 		end
 	end
 	def saveXML(n)
@@ -25,13 +25,13 @@ class Trigger
 		n.set("text",@text)
 	end
 	def check(hero)
-		if $systemTime-@triggerTime>1 # wait at least a second for repeating trigger
+		if AntRubyMap.getSystemTime-@triggerTime>1 # wait at least a second for repeating trigger
 			p2=hero.getPos2D
 			p3=AGVector3.new(p2.x,p2.y,1)
 			#dputs p3,@circle.inCircle(p3)
 			if @circle.inCircle(p3)
 				getMap.trigger(hero,self)
-				@triggerTime=$systemTime
+				@triggerTime=AntRubyMap.getSystemTime
 			end
 		end
 	end

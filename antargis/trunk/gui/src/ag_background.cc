@@ -54,7 +54,8 @@ AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
   </button>
 </pre>
 */
-AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
+
+AGBackground::AGBackground(const AGString &pThemeName):mTextureFlag(false)
 {
   //  CTRACE;
   AGTheme *theme=getTheme();
@@ -66,16 +67,16 @@ AGBackground::AGBackground(std::string pThemeName):mTextureFlag(false)
       mTexture=AGTexture(theme->getSurface(pThemeName+".image"));
       mTextureFlag=true;
     }
-  else if(theme->hasColor(pThemeName+"."+std::string("gradientColor1")))
+  else if(theme->hasColor(pThemeName+"."+"gradientColor1"))
     {
       mColor=true;
-      mColors[0]=theme->getColor(pThemeName+"."+std::string("gradientColor1"));
-      mColors[1]=theme->getColor(pThemeName+"."+std::string("gradientColor2"));
-      mColors[2]=theme->getColor(pThemeName+"."+std::string("gradientColor3"));
-      mColors[3]=theme->getColor(pThemeName+"."+std::string("gradientColor4"));
+      mColors[0]=theme->getColor(pThemeName+"."+"gradientColor1");
+      mColors[1]=theme->getColor(pThemeName+"."+"gradientColor2");
+      mColors[2]=theme->getColor(pThemeName+"."+"gradientColor3");
+      mColors[3]=theme->getColor(pThemeName+"."+"gradientColor4");
     }
 
-  mBorder=theme->getInt(pThemeName+"."+std::string("border"));
+  mBorder=theme->getInt(pThemeName+"."+"border");
 }
 
 

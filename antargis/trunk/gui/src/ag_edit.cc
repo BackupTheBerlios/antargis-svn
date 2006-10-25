@@ -28,7 +28,7 @@
 #include "ag_tools.h"
 
 
-AGEditLine::AGEditLine(const std::string &pText,AGFont pFont,bool pHardEnd):
+AGEditLine::AGEditLine(const AGStringUtf8 &pText,AGFont pFont,bool pHardEnd):
   mText(pText),mFont(pFont),mHardEnd(pHardEnd)
 {
   mAlign=EDIT_LEFT;
@@ -70,8 +70,8 @@ void AGEditLine::draw(AGPainter &p,const AGVector2 &pPoint,const AGRect2 &pClip)
 
 #ifdef SMALL_CHUNKS
   int mx=0;
-  std::vector<std::string> a=::split(" ",mText);
-  for(std::vector<std::string>::iterator i=a.begin();i!=a.end();i++)
+  std::vector<AGStringUtf8> a=mText.split(AGStringUtf8(" "));
+  for(std::vector<AGStringUtf8>::iterator i=a.begin();i!=a.end();i++)
     {
       //      cdebug(*i);
       p.renderText(*i,AGVector2(pPoint[0]+x+mx,pPoint[1]),mFont);
@@ -116,27 +116,27 @@ int AGEditLine::width() const
   return AGFontEngine::getWidth(mFont,mText);
 }
 
-void AGEditLine::insert(char c,int cx,bool pInsert)
+void AGEditLine::insert(const AGStringUtf8 &c,int cx,bool pInsert)
 {
   if(pInsert)
-    mText=mText.substr(0,cx)+std::string(&c,1)+mText.substr(cx,std::string::npos);
+    mText=mText.substr(0,cx)+c+mText.substr(cx,AGString::npos);
   else if(cx<(long)mText.length())
     mText[cx]=c;
   else
-    mText+=std::string(&c,1);
+    mText+=c;
 }
 
 void AGEditLine::doDelete(int cx)
 {
   if(mText.length()>0)
     if(cx>=0&&cx<int(mText.length()))
-      mText=mText.substr(0,cx)+mText.substr(cx+1,std::string::npos);
+      mText=mText.substr(0,cx)+mText.substr(cx+1,AGString::npos);
 
 }
 
 AGEditLine AGEditLine::split(int cx)
 {
-  std::string n=mText.substr(cx,mText.npos);
+  AGStringUtf8 n=mText.substr(cx,mText.npos);
   mText=mText.substr(0,cx);
   bool hard=mHardEnd;
   mHardEnd=true;
@@ -148,22 +148,22 @@ int AGEditLine::length() const
   return mText.length();
 }
 
-void AGEditLine::append(std::string s)
+void AGEditLine::append(const AGStringUtf8 &s)
 {
   mText+=s;
 }
 
-void AGEditLine::prepend(std::string s)
+void AGEditLine::prepend(const AGStringUtf8 &s)
 {
   mText=s+mText;
 }
-std::string AGEditLine::getText() const
+AGStringUtf8 AGEditLine::getText() const
 {
   return mText;
 }
 
 // returns the remaing string after wrapping
-std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
+std::pair<AGStringUtf8,bool> AGEditLine::checkWrap(int pW)
 {
   // first check, if line is too long
 
@@ -172,11 +172,11 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
 
   // ok, line is too long
   // so search for a good split (between words), but not before half of width
-  std::vector<std::string> words=::split(" ",mText);
+  std::vector<AGStringUtf8> words=mText.split(" ");
   
-  std::vector<std::string>::iterator i=words.begin();
+  std::vector<AGStringUtf8>::iterator i=words.begin();
   int w=0,ow=0;
-  std::string s,os;
+  AGStringUtf8 s,os;
 
   for(;i!=words.end();i++)
     {
@@ -192,7 +192,7 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
   if(ow>pW/4 && ow<width())
     {
       // check if width will be at least a 1/4 of whole width
-      std::string n=mText.substr(os.length()+1,n.npos);
+      AGStringUtf8 n=mText.substr(os.length()+1,n.npos);
       mText=mText.substr(0,os.length()+1);
 
       bool hard=mHardEnd;
@@ -217,7 +217,7 @@ std::pair<std::string,bool> AGEditLine::checkWrap(int pW)
     }
   if(k>=mText.length())
     return std::make_pair("",false); // some error
-  std::string n=mText.substr(k,mText.length());
+  AGStringUtf8 n=mText.substr(k,mText.length());
   mText=mText.substr(0,k);
   bool hard=mHardEnd;
   mHardEnd=false;
@@ -234,21 +234,21 @@ bool AGEditLine::hardEnd() const
   return mHardEnd;
 }
 
-std::pair<std::string,bool> AGEditLine::checkUnwrap(int pW,std::string s)
+std::pair<AGStringUtf8,bool> AGEditLine::checkUnwrap(int pW,const AGStringUtf8 &s)
 {
-  std::string oldtext=mText;
+  AGStringUtf8 oldtext=mText;
   //  mText+=" ";
   mText+=s;
-  std::string testtext=mText;
-  std::pair<std::string,bool> res=checkWrap(pW);
+  AGStringUtf8 testtext=mText;
+  std::pair<AGStringUtf8,bool> res=checkWrap(pW);
   if(mText!=oldtext)
-    return std::make_pair(testtext.substr(mText.length(),std::string::npos),true);
+    return std::make_pair(testtext.substr(mText.length(),AGString::npos),true);
   else
     return std::make_pair("",false);
   
 }
 
-void AGEditLine::setText(const std::string &s)
+void AGEditLine::setText(const AGStringUtf8 &s)
 {
   mText=s;
 }
@@ -282,7 +282,7 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   mCx=mCy=0;
   mViewCy=0;
 
-  std::string t=mTheme;
+  AGString t=mTheme;
   if(t.length())
     t+=".";
   mBackground=AGBackground(t+"edit.background");
@@ -413,7 +413,8 @@ bool AGEdit::eventKeyDown(AGEvent *m)
   if(m->isSDLEvent())
     {
       SDLKey k=m->getKey();
-      char ins=0;
+      Uint16 unicode=m->getUnicode();
+      AGStringUtf8 ins;
       bool doInsert=false;
       bool used=false;
       if(k==SDLK_RIGHT)
@@ -459,12 +460,12 @@ bool AGEdit::eventKeyDown(AGEvent *m)
 	    mCx=actLine->length();
 	  return true;
 	}
-      else if(k>=SDLK_0 && k<=SDLK_9)
+      /*      else if(k>=SDLK_0 && k<=SDLK_9)
 	{
 	  doInsert=true;
 	  if(mRShift||mLShift)
 	    {
-	      std::string s="=!\"Â§$%&/()";
+	      AGString s="=!\"Â§$%&/()";
 	      ins=s[k-SDLK_0];
 	    }
 	  else
@@ -477,11 +478,11 @@ bool AGEdit::eventKeyDown(AGEvent *m)
 	    ins='A'+(k-SDLK_a);
 	  else
 	    ins='a'+(k-SDLK_a);
-	}
+	    }*/
       else if(k==SDLK_SPACE)
 	{
 	  doInsert=true;
-	  ins=' ';
+	  ins=" ";
 	}
       else if(k==SDLK_BACKSPACE)
 	{
@@ -566,33 +567,54 @@ bool AGEdit::eventKeyDown(AGEvent *m)
 	  cdebug("ralt");
 	  mRAlt=true;
 	}
-      else if(strlen(SDL_GetKeyName(k))==1)
+      /*      else if(strlen(SDL_GetKeyName(k))==1)
 	{
 	  cdebug(k<<":"<<SDL_GetKeyName(k));
 	  ins=SDL_GetKeyName(k)[0];
 	  doInsert=true;
-	}
-      else if(k==SDLK_WORLD_68)
+	  }*/
+      //      else if(k==SDLK_WORLD_68)
+      else if((unicode&0xFFF8)!=0 || (k>=SDLK_0 && k<=SDLK_9) || (k>=SDLK_a && k<=SDLK_z))
 	{
-	  ins=(mLShift||mRShift)?'Ã„':'Ã¤';
+	  //	  ins=(mLShift||mRShift)?"Ä":"ä";
+
+	  /*
+	  cdebug(unicode);
+	  //	  ins=(mLShift||mRShift)?"Ä":"ä";
+
+	  cdebug(1);
+	  std::string n="  ";
+	  //	  ins="  ";
+	  cdebug(1);
+	  n[1]=(unicode>>8)&0xFF;
+	  cdebug(1);
+	  n[0]=(unicode)&0xFF;
+	  cdebug(1);
+	  ins=AGStringUtf8(n);
+	  cdebug(1);
+	  */
+	  ins=AGStringUtf8(unicode2Utf8(unicode));
+
+	  cdebug((int)ins.toString()[0]<<"  "<<(int)ins.toString()[1]);
+
 	  doInsert=true;
 	}
-      else if(k==SDLK_WORLD_86)
+      /*      else if(k==SDLK_WORLD_86)
 	{
-	  ins=(mLShift||mRShift)?'Ã–':'Ã¶';
+	  ins=(mLShift||mRShift)?"Ö":"ö";
 	  doInsert=true;
 	}
       else if(k==SDLK_WORLD_92)
 	{
-	  ins=(mLShift||mRShift)?'Ãœ':'Ã¼';
+	  ins=(mLShift||mRShift)?"Ü":"ü";
 	  doInsert=true;
 	}
       else if(k==SDLK_WORLD_63)
 	{
-	  ins='ÃŸ';
+	  ins="ß";
 	  doInsert=true;
 	}
-
+      */
       cdebug("KEY:"<<SDL_GetKeyName(k)<<"  "<<k);
 
       if(doInsert)
@@ -608,7 +630,7 @@ bool AGEdit::eventKeyDown(AGEvent *m)
   return false;
 }
 
-bool AGEdit::insert(char c)
+bool AGEdit::insert(const AGStringUtf8 &c)
 {
   if(mMaxLength>0)
     {
@@ -686,7 +708,7 @@ void AGEdit::checkWrap()
       std::list<AGEditLine>::iterator i=mLines.begin();
       for(;i!=mLines.end();)
 	{
-	  std::pair<std::string,bool> n=i->checkWrap((int)width());
+	  std::pair<AGStringUtf8,bool> n=i->checkWrap((int)width());
 	  if(n.first.length())
 	    {
 	      // make new line
@@ -737,7 +759,7 @@ void AGEdit::checkWrap()
 	  if(j!=mLines.end() && !i->hardEnd())
 	    {
 	      //	      cdebug(i->getText());
-	      std::pair<std::string,bool> nText=i->checkUnwrap((int)width(),j->getText());
+	      std::pair<AGStringUtf8,bool> nText=i->checkUnwrap((int)width(),j->getText());
 	      if(nText.second) // changed
 		{
 		  int count=j->getText().length()-nText.first.length();
@@ -796,7 +818,7 @@ void AGEdit::setFont(const AGFont &pFont)
 
 }
 
-void AGEdit::setText(const std::string &pText)
+void AGEdit::setText(const AGStringUtf8 &pText)
 {
   if(getText()==pText)
     return;
@@ -821,7 +843,7 @@ void AGEdit::setText(const std::string &pText)
 	}
       else
 	{
-	  insert(pText[i]);
+	  insert(AGStringUtf8(pText[i]));
 	  mCx++;
 	  checkWrap();
 	}
@@ -867,10 +889,10 @@ void AGEdit::setBackground(bool pDrawBackground)
   mDrawBackground=pDrawBackground;
 }
 
-void AGEdit::setTheme(const std::string &s)
+void AGEdit::setTheme(const AGString &s)
 {
   queryRedraw();
-  std::string ms=s;
+  AGString ms=s;
   if(ms=="")
     ms="edit";
 
@@ -878,7 +900,7 @@ void AGEdit::setTheme(const std::string &s)
   setFont(font);
   mTheme=s;
 
-  std::string t=mTheme;
+  AGString t=mTheme;
   if(t.length())
     t+=".";
 
@@ -895,19 +917,19 @@ AGEdit &toAGEdit(AGWidget &w)
   return dynamic_cast<AGEdit&>(w);
 }
 
-std::string AGEdit::getText() const
+AGStringUtf8 AGEdit::getText() const
 {
   std::ostringstream os;
   std::list<AGEditLine>::const_iterator i=mLines.begin();
   for(;i!=mLines.end();)
     {
       bool hard=i->hardEnd();
-      os<<i->getText();
+      os<<i->getText().toString();
       i++;
       if(i!=mLines.end() && hard)
 	os<<std::endl;
     }
-  return os.str();
+  return AGStringUtf8(os.str());
 }
 
 void AGEdit::clear()

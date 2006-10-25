@@ -22,9 +22,10 @@
 #define __MY_SIMPLE_XML
 
 #include <ag_tools.h>
+#include <ag_utf8.h>
 #include <vector>
 #include <map>
-#include <string>
+#include <ag_stringstream.h>
 #include <sstream>
 
 #include "ag_debug.h"
@@ -32,7 +33,7 @@
 class Node
   {
   public:
-    typedef std::map<std::string,std::string> Attributes;
+    typedef std::map<AGString,AGString> Attributes;
 
     typedef std::vector<Node*> NodeVector;
 
@@ -40,12 +41,12 @@ class Node
     typedef NodeVector::const_iterator const_iterator;
 
     Node();
-    Node(std::string name);
+    Node(const AGString &name);
     Node(const Node &n);
     Node(const Node *n);
     ~Node();
 
-    void setName(std::string pName);
+    void setName(const AGString &pName);
 
     NodeVector getChildren() const;
 
@@ -53,14 +54,14 @@ class Node
     const Node &(operator*)() const;
     const Node *(operator->)() const;
 #endif
-    NodeVector getChildren(std::string pName) const;
+    NodeVector getChildren(const AGString &pName) const;
     
-    std::string getName() const;
+    const AGString &getName() const;
 
     void setAttributes(const Attributes &pAttrs);
     Attributes getAttributes() const;
 
-    Node &addChild(const std::string &pName);
+    Node &addChild(const AGString &pName);
 
     void removeChild(Node &n);
 
@@ -69,36 +70,36 @@ class Node
     iterator end();
     const_iterator end() const;
 
-    void setContent(const std::string &s);
-    std::string getContent() const;
+    void setContent(const AGString &s);
+    AGString getContent() const;
 
-    void set(const std::string &pName,const std::string &pValue);
-    std::string get(const std::string &pName) const;
+    void set(const AGString &pName,const AGString &pValue);
+    AGString get(const AGString &pName) const;
     void clear();
 
-    static std::string escape(const std::string &s);
-    static std::string unescape(const std::string &s);
+    static AGString escape(const AGString &s);
+    static AGString unescape(const AGString &s);
 
     // dumping functions
-    void getStart(std::ostringstream &s,bool complete=false) const;
-    void getEnd(std::ostringstream &s) const;
+    void getStart(AGStringStream &s,bool complete=false) const;
+    void getEnd(AGStringStream &s) const;
       
-    void indent(std::ostringstream &s,int depth) const;
-    void getContent(std::ostringstream &s,int depth) const;
-    std::string toString(bool indent=true) const;
+    void indent(AGStringStream &s,int depth) const;
+    void getContent(AGStringStream &s,int depth) const;
+    AGString toString(bool indent=true) const;
     
     bool isTextNode() const;
-    std::string getText() const;
+    AGString getText() const;
 
     bool hasTextNode() const; // me or direct children is text node
 
     size_t size() const;
 
   private:
-    std::string mName;
+    AGString mName;
     std::vector<Node*> mNodes;
     Attributes mAttrs;
-    std::string mContent;
+    AGString mContent;
   };
 
 class Document
@@ -106,16 +107,16 @@ class Document
     Node *mRoot;
   public:
     Document();
-    Document(std::string pFile);
+    Document(AGFilename pFile);
     ~Document();
 
-    bool parseFile(std::string file);
+    bool parseFile(AGFilename file);
 
     Node &root();
 
     std::string toString(bool forceIndent=false) const;
 
-    void parseMemory(const std::string &s);
+    void parseMemory(const AGData &s);
   };
 
 class Parser
@@ -125,18 +126,18 @@ class Parser
     std::list<size_t> stack;
     std::list<size_t> linestack;
     size_t pos;
-    std::string s;
+    AGString s;
     size_t line;
 
     Data();
 
-    bool first(const std::string &p) const;
-    std::string getFirst(size_t i) const;
+    bool first(const AGString &p) const;
+    AGString getFirst(size_t i) const;
     void eat(size_t i);
     void push();
     void pop();
     void discard();
-    std::string getTil(const std::string &p) const;
+    AGString getTil(const AGString &p) const;
     void eatBlanks();
   };
 
@@ -144,7 +145,7 @@ class Parser
   {
     bool startTag;
     bool simple; // == <.../>
-    std::string name;
+    AGString name;
   };
 
   Data data;
@@ -153,12 +154,12 @@ class Parser
   bool parseNodeEnd();
   void parseNodeContent();
   bool parseHeader();
-  std::string parseString();
+  AGString parseString();
   Node::Attributes parseAttributes();
   bool parseComment();
   bool parseText();
   void parseNode();
-  std::string parseName();
+  AGString parseName();
 
   bool eod();
 
@@ -168,12 +169,12 @@ class Parser
   void parse(const std::string &pData);
   size_t getLine() const;
 
-  virtual void simpleTag(const std::string &pName,const Node::Attributes &pAttributes);
-  virtual void startTag(const std::string &pName,const Node::Attributes &pAttributes);
-  virtual void endTag(const std::string &pName);
-  virtual void text(const std::string &pText);
-  virtual void comment(const std::string &pText);
-  virtual void header(const std::string &pText);
+  virtual void simpleTag(const AGString &pName,const Node::Attributes &pAttributes);
+  virtual void startTag(const AGString &pName,const Node::Attributes &pAttributes);
+  virtual void endTag(const AGString &pName);
+  virtual void text(const AGString &pText);
+  virtual void comment(const AGString &pText);
+  virtual void header(const AGString &pText);
 };
 
 class DomParser:public Parser
@@ -181,12 +182,12 @@ class DomParser:public Parser
   Document *doc;
   std::list<Node*> nodes;
  public:
-  virtual void simpleTag(const std::string &pName,const Node::Attributes &pAttributes);
-  virtual void startTag(const std::string &pName,const Node::Attributes &pAttributes);
-  virtual void endTag(const std::string &pName);
-  virtual void text(const std::string &pText);
-  virtual void comment(const std::string &pText);
-  virtual void header(const std::string &pText);
+  virtual void simpleTag(const AGString &pName,const Node::Attributes &pAttributes);
+  virtual void startTag(const AGString &pName,const Node::Attributes &pAttributes);
+  virtual void endTag(const AGString &pName);
+  virtual void text(const AGString &pText);
+  virtual void comment(const AGString &pText);
+  virtual void header(const AGString &pText);
 
   Document *parse(const std::string &pData);
 

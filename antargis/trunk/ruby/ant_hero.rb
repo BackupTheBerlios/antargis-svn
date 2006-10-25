@@ -79,7 +79,7 @@ class AntHero<AntBoss
 	def startFireSound
 		if not @fireSound
 			dputs "STARTING FIRE"
-			@fireSound=playLoopSoundGlobal(self,"fire",getPos2D,0.4)
+			@fireSound=AntSound.playLoopSoundGlobal(self,"fire",getPos2D,0.4)
 			dputs @fireSound
 		end
 	end	
@@ -90,7 +90,7 @@ class AntHero<AntBoss
 			if @job.class==AntHeroRestJob
 				#raise "bla"
 			end
-			stopLoopSound(self)
+			AntSound.stopLoopSound(self)
 			#getSoundManager.stopChannel(@fireSound)
 			@fireSound=nil
 		end
@@ -125,20 +125,20 @@ class AntHero<AntBoss
 		assignJob2All
 	end
 	def newHLRecruitJob(target)
-		@job=AntHeroRecruitJob.new(self,target,$buttonPanel.getAggression)
+		@job=AntHeroRecruitJob.new(self,target,getAggression)
 		assignJob2All
 	end
 	def newHLConstructJob(target)
-		@job=AntHeroConstructJob.new(self,target,$buttonPanel.getAggression)
+		@job=AntHeroConstructJob.new(self,target,getAggression)
 		assignJob2All
 	end
 	def newHLTakeFoodJob(target)
 		puts "take food job #{self} #{target}"
-		@job=AntHeroTakeJob.new(self,target,$buttonPanel.getAggression,"food")
+		@job=AntHeroTakeJob.new(self,target,getAggression,"food")
 		assignJob2All
 	end
 	def newHLTakeWeaponJob(target)
-		@job=AntHeroTakeJob.new(self,target,$buttonPanel.getAggression,"weapon")
+		@job=AntHeroTakeJob.new(self,target,getAggression,"weapon")
 		assignJob2All
 	end
 	def newHLFightJob(target)
@@ -156,7 +156,7 @@ class AntHero<AntBoss
 	
 	def newHLDismissJob()
 		@job=nil
-		agg=$buttonPanel.getAggression
+		agg=getAggression
 		men=@men.select{|m|not m.is_a?(AntHero)} # exclude hero
 		c=(men.length-1)*agg/3
 			

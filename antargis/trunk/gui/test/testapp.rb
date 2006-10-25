@@ -60,4 +60,7 @@ class TestApp <AGApplication
 		delay(100)
 		return false
 	end
+# 	def getNewEvent
+# 		super
+# 	end
 end

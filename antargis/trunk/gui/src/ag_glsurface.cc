@@ -86,8 +86,8 @@ void myFlip()
 }
 
 AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
-  rw(W),rh(H),
-  w(VW),h(VH)
+  w(VW),h(VH),
+  rw(W),rh(H)
 {
   if(w<rw)
     w=rw;

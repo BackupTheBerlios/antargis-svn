@@ -21,4 +21,4 @@
 
 #!/usr/bin/ruby
 
-$YEAR=60 # one second
+YEAR=60 # one second

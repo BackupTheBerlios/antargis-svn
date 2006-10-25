@@ -196,7 +196,7 @@ void HeightMap::saveBinary(BinaryOut &os) const
 void HeightMap::loadXML(const Node &node)
 {
   CTRACE;
-  std::string filename=node.get("filename");
+  AGFilename filename=node.get("filename");
   if(filename.length())
     {
       BinaryFileIn is(filename);
@@ -207,14 +207,14 @@ void HeightMap::loadXML(const Node &node)
       Node::NodeVector nv=node.getChildren("data");
       if(nv.size())
 	{
-	  std::string c=nv[0]->getContent();
+	  AGString c=nv[0]->getContent();
 	  BinaryStringIn is(hexToBinary(c));
 	  loadBinary(is);
 	}
       else
 	{
-	  mW=toInt(node.get("width"));
-	  mH=toInt(node.get("height"));
+	  mW=node.get("width").toInt();
+	  mH=node.get("height").toInt();
 	  
 	  cdebug("mW:"<<mW);
 	  cdebug("mH:"<<mH);
@@ -315,12 +315,12 @@ void HeightMap::mapChanged()
 
 void HeightMap::saveXML(Node &node) const
 {
-  node.set("width",toString(mW));
-  node.set("height",toString(mH));
+  node.set("width",AGString(mW));
+  node.set("height",AGString(mH));
   
   if(false) //(mW<=64 && mH<=64) || mName.length()==0)
     {
-      std::ostringstream osh;
+      AGStringStream osh;
       osh.precision(2);
       
       for(size_t y=0;y<mH+2;y++)
@@ -329,7 +329,7 @@ void HeightMap::saveXML(Node &node) const
 	    {
 	      osh<<get(x,y)<<" ";
 	    }
-	  osh<<std::endl;
+	  osh<<"\n";
 	}
       node.addChild("height").setContent(osh.str());
       
@@ -345,23 +345,23 @@ void HeightMap::saveXML(Node &node) const
 		}
 	      os<<std::endl;
 	    }
-	  node.addChild(TerrainNames[i]).setContent(os.str());
+	  node.addChild(TerrainNames[i]).setContent(AGString(os.str()));
 	  
 	}
     }
   else if(false)
     {
-      std::string name=replace(mName,".antlvl",".hmap");
+      std::string name=mName.replace(".antlvl",".hmap");
       BinaryFileOut os(name);
       saveBinary(os);
-      node.set("filename",name);
+      node.set("filename",AGString(name));
     }
   else
     {
       BinaryStringOut os;
       saveBinary(os);
       Node &n=node.addChild("data");
-      n.setContent(binaryToHex(os.getString()));
+      n.setContent(AGString(binaryToHex(os.getString())));
     }
 }
 

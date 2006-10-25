@@ -63,7 +63,7 @@ class AntRubyMap<AntMap
 		super(pScene,w,h)
 		@pause=false # is game paused
 
-		$systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
+		@@systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
 		@curTime=0.0     # curTime holds the current "date" of the world; the age of entities is measures by this
 
 		@playerName=playerName
@@ -91,7 +91,10 @@ class AntRubyMap<AntMap
 		@uidstart=0
 
 		AntRubyEntity.setMap(self)
+	end
 
+	def AntRubyMap.getSystemTime
+		@@systemTime
 	end
 
 	def getUniqueID
@@ -163,6 +166,17 @@ class AntRubyMap<AntMap
 	def getTime
 		@curTime
 	end
+	
+	def getHousesOfVillage(name)
+		getAllEntitiesV.collect{|e|e.get}.select{|e|e.is_a?(AntHouse)}.select{|e|e.village==name}
+	end
+
+	def getVillages
+		getBuildings.collect{|e|e.village}.sort.uniq
+	end
+	#def getVillages(name)
+	#	getBuildings.collect{|e|e.village}.sort.uniq
+	#end
 
 	def getHeroes()
 		ents=getAllEntitiesV
@@ -310,7 +324,8 @@ class AntRubyMap<AntMap
 			c="module #{levelName}\n"+c+"\nend\n"
 			eval(c)
 			cl="#{levelName}::"+n.get("scriptclass")
-			@script=eval(cl).new
+			puts "class #{cl}"
+			@script=eval(cl).new(self)
 	
 			puts @script.class
 			#raise 1
@@ -409,7 +424,7 @@ class AntRubyMap<AntMap
 		end
 		time*=1 # increase speed
 		@curTime+=time
-		$systemTime+=time
+		@@systemTime+=time
 		super(time)
 		
 		checkTriggers
@@ -418,7 +433,7 @@ class AntRubyMap<AntMap
 			player.move(time)
 		}
 		
-		ambientSound(time)
+		AntSound.ambientSound(time)
 		if not @started
 			@started=true
 			if @script

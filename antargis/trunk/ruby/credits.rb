@@ -5,6 +5,7 @@ if ENV["_"]=~/credits.rb/
 end
 
 class AntTicker<AGWidget
+	attr_accessor :menuapp
 	def initialize(p,r,text)
 		super(p,r)
 		@text=text
@@ -23,7 +24,7 @@ class AntTicker<AGWidget
 		@cfont=f
 	end
 	def draw(p)
-		now=$menuapp.getTicks
+		now=@menuapp.getTicks
 		if @starttime>0
 			@y+=(now-@starttime)*@speed
 		end
@@ -39,6 +40,8 @@ class AntTicker<AGWidget
 			else
 				font=@nfont
 			end
+
+			r=AGStringUtf8.new(r)
 
 			w=font.getWidth(r)
 			tx=((width-w)/2).to_i
@@ -59,15 +62,15 @@ class AntTickerCreator<AGLayoutCreator
 		t.setCFont(getTheme.getFont(n.get("cfont")))
 		return t
 	end
+	@@antTickerCreator=AntTickerCreator.new
 end
-$antTickerCreator=AntTickerCreator.new
+
 
 if ENV["_"]=~/credits.rb/
 	m=AGMain.new(640,480,32,false,true)
 	
 	app=AGApplication.new
-	$menuapp=app
-	t=AntTicker.new(nil,AGRect.new(0,0,640,480),"bla\nxyz\nhallo\nkjsdhdfhdf ksdfhjsdfj h\nkjsdfjs")
+	t=AntTicker.new(nil,AGRect.new(0,0,640,480),"bla\nxyz\nhallo\nkjsdhdfhdf ksdfhjsdfj h\nkjsdfjs",app)
 	app.setMainWidget(t)
 	app.run
 end

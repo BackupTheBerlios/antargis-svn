@@ -96,7 +96,7 @@ class AGColorButtonLayoutCreator:public AGLayoutCreator
   {
     AGColorButton *b;
 
-    b=new AGColorButton(pParent,pRect,toInt(pNode.get("gridx")),toInt(pNode.get("gridy")));
+    b=new AGColorButton(pParent,pRect,pNode.get("gridx").toInt(),pNode.get("gridy").toInt());
     
     //    if(pNode.get("enabled")=="false")
     //      b->setEnabled(false);

@@ -93,7 +93,7 @@ class AGEXPORT AGPainter
   void tile(const AGSurface &pSource,const AGRect2 &pDest);
   void tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
   
-  void renderText(const std::string &pText,const AGVector2 &p,const AGFont &f);
+  void renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AGFont &f);
 
   AGRect2 getRect() const;
 

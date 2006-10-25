@@ -59,7 +59,7 @@ AGVector3 Bone::interpolateTrans(float t)
 
 
 
-AnimMeshData::AnimMeshData(const std::string &xmlfile):
+AnimMeshData::AnimMeshData(const AGFilename &xmlfile):
   animShader("data/shaders/anim.vert","data/shaders/anim.frag"),
   //  animShaderDepth("data/shaders/anim_depth.vert",""),
   animShaderDepth("data/shaders/anim_depth.vert","data/shaders/anim_depth.frag"),
@@ -80,7 +80,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
 
   cdebug("loading from:"<<root.get("model"));
 
-  loadAnt3(loadFile(root.get("model")),toFloat(root.get("scale")),root.get("texture"));
+  loadAnt3(loadFile(root.get("model")),root.get("scale").toFloat(),root.get("texture"));
   
   // load animations
   
@@ -89,9 +89,9 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
   Node::NodeVector anims=root.getChildren("animation");
   for(Node::NodeVector::iterator i=anims.begin();i!=anims.end();i++)
     {
-      float begin=toFloat((*i)->get("begin"))-1;
-      float end=toFloat((*i)->get("end"))-1;
-      float fps=toFloat((*i)->get("fps"));
+      float begin=(*i)->get("begin").toFloat()-1;
+      float end=(*i)->get("end").toFloat()-1;
+      float fps=(*i)->get("fps").toFloat();
       assert(fps>0);
       assert(begin>=0);
       assert(begin<animTime);
@@ -105,7 +105,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
       Node::NodeVector enodes=(*i)->getChildren("event");
       for(Node::NodeVector::iterator j=enodes.begin();j!=enodes.end();j++)
 	{
-	  frameEvents.insert(std::make_pair(toInt((*j)->get("frame")),(*j)->get("name")));
+	  frameEvents.insert(std::make_pair((*j)->get("frame").toInt(),(*j)->get("name")));
 	}
       
     }
@@ -115,7 +115,7 @@ AnimMeshData::AnimMeshData(const std::string &xmlfile):
       std::cerr<<"There are no animations in "<<xmlfile<<std::endl;
       throw std::string("no animations found in xmlfile");
     }
-  mName=xmlfile;
+  mName=AGString(xmlfile);
 }
 
 AnimMeshData::~AnimMeshData()
@@ -144,18 +144,18 @@ void AnimMeshData::setEvents(bool e)
 int getMeshDownScale()
 {
   int s=1;
-  std::string n="meshDownScaleExp";
+  AGString n="meshDownScaleExp";
 
   if(getConfig()->get(n)!="")
-    s=toInt(getConfig()->get(n));
+    s=getConfig()->get(n).toInt();
   
-  getConfig()->set(n,toString(s));
+  getConfig()->set(n,AGString(s));
 
   return s;
 
 }
 
-void AnimMeshData::loadAnt3(const std::string &instr,float scale,const std::string &tex)
+void AnimMeshData::loadAnt3(const AGData &instr,float scale,const AGFilename &tex)
 {
   mTexture=getTextureCache()->get(tex,getMeshDownScale());
   BinaryStringIn l(instr);

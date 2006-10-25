@@ -119,10 +119,10 @@ class AntRubyEntity<AntEntity
 		setMoraleStrength(v*2)
 	end
 	def age
-		((getMap.getTime-@birthday).to_f/$YEAR).to_i
+		((getMap.getTime-@birthday).to_f/YEAR).to_i
 	end
 	def age=(years)
-		@birthday=getMap.getTime-years*$YEAR
+		@birthday=getMap.getTime-years*YEAR
 	end
 	def getMen
 		[]
@@ -135,25 +135,15 @@ class AntRubyEntity<AntEntity
 	end
 
 	def playSound(name,minDiff=0.5)
-		return if $app.nil?
-		d=(($app.getScene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
+		scene=getMap.getScene
+		d=((scene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
 		vol=1
 		if d>0
 			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
 		end
-		playSoundGlobal(name,vol,minDiff)
+		AntSound.playSoundGlobal(name,vol,minDiff)
 	end
 
-# 	def playLoopSound(name)
-# 		s={"fire"=>"data/sound/fire.wav"}[name]
-# 		return nil if s.nil?
-# 		d=(($app.getScene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
-# 		vol=1
-# 		if d>0
-# 			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
-# 		end
-# 		getSoundManager.loopPlay(s,0.4*vol)
-# 	end
 
 	def isOnOpenWater(p=nil)
 		if (not p)

@@ -22,7 +22,7 @@
 #include "ag_debug.h"
 #include "ag_screen.h"
 
-AGCaption::AGCaption(AGWidget *pParent,const AGRect2 &pRect,const std::string &pText,const AGFont &pFont,const AGBackground &pBG):
+AGCaption::AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG):
   AGText(pParent,pRect,pText,pFont),
   mBG(pBG)
 {

@@ -35,7 +35,7 @@ module AISensorInterface
 	end
 
 	def getPlayerNames
-		@map.getPlayers.collect{|p|p.getName}
+		@map.players.collect{|p|p.getName}
 	end
 	def getOwnHeroes
 		getHeroes(@player)
@@ -47,9 +47,16 @@ module AISensorInterface
 	def getBuildings(playerName)
 		@map.getBuildings.select{|h|g.getPlayer and h.getPlayer.getName==playerName}.collect{|h|h.uid}
 	end
+	def getVillages(playerName)
+		@map.getVillages.select{|h|g.getPlayer and h.getPlayer.getName==playerName}.collect{|h|h.uid}
+		# FIXME
+	end
+	def getBuildingsOfVillage(villageId)
+		# FIXME
+	end
 
 	def getHeroTroopCount(heroId)
-		hs=@map.getHeroes.select{|h|h.uid==heroID}
+		hs=@map.getHeroes.select{|h|h.uid==heroId}
 		if hs.length==1
 			return hs[0].getMen.length
 		else
@@ -119,14 +126,14 @@ module AIActionInterface
 	end
 
 	def attack(heroId,targetId)
-		if heroOk(heroID) and (not buildingOk(targetId))
-			getHero(heroID).newHLFightJob(getHero(targetId))
+		if heroOk(heroId) and (not buildingOk(targetId))
+			getHero(heroId).newHLFightJob(getHero(targetId))
 		end
 	end
 	
 	def recruit(heroId,targetId)
-		if heroOk(heroID) and buildingOk(targetId)
-			getHero(heroID).newHLRecruitJob(getHero(targetId))
+		if heroOk(heroId) and buildingOk(targetId)
+			getHero(heroId).newHLRecruitJob(getHero(targetId))
 		end
 	end
 

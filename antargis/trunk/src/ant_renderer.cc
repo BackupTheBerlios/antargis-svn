@@ -21,7 +21,7 @@ Renderer::Renderer():
   gRenderer=this;
   mScene=0;
   
-  std::string shadowType=getConfig()->get("shadowType");
+  AGString shadowType=getConfig()->get("shadowType");
   if(shadowType=="big" || shadowType=="")
     shadowMapSize=1024;
   else if(shadowType=="small")

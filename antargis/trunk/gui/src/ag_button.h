@@ -43,7 +43,7 @@ class AGButton:public AGWidget
   /// the different drawing states
   enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED,CHECKEDPRESSED,DISABLED};
 
-  AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id=-1);
+  AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,int id=-1);
 
   void setSurface(AGSurface pSurface,bool pChangeSize=false);
   void setTexture(const AGTexture &pTexture);
@@ -59,13 +59,13 @@ class AGButton:public AGWidget
   virtual void setWidth(float w);
   virtual void setHeight(float w);
 
-  virtual std::string getCaption() const;
+  virtual AGStringUtf8 getCaption() const;
 
   void setEnabled(bool pEnable);
 
-  void setTheme(const std::string &pTheme);
+  void setTheme(const AGString &pTheme);
 
-  void setCaption(const std::string &pCaption);
+  void setCaption(const AGStringUtf8 &pCaption);
 
   /// sets the current state and ensures a redraw
   virtual void setState(const State &pState);
@@ -79,9 +79,9 @@ class AGButton:public AGWidget
   virtual void useTextures();
 
  private:
-  std::string mText;
+  AGStringUtf8 mText;
   int mID;
-  std::string mTheme;
+  AGString mTheme;
   State mState;
   int borderWidth;
   AGSurface mSurface;

@@ -21,9 +21,10 @@
 #include "ag_messageobject.h"
 #include "ag_debug.h"
 #include "ag_main.h"
+#include "ag_stringstream.h"
 
 // AGEvent
-AGEvent::AGEvent(AGListener *pCaller,const std::string &pName,const SDL_Event *e):mCaller(pCaller),mName(pName),mEvent(e)
+AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event *e):mCaller(pCaller),mName(pName),mEvent(e)
 {
 }
 AGEvent::~AGEvent()
@@ -49,13 +50,13 @@ void AGEvent::setCaller(AGListener *pCaller)
 }
 
 /// return the name of the event
-std::string AGEvent::getName() const
+AGString AGEvent::getName() const
 {
   return mName;
 }
 
 
-void AGEvent::setName(const std::string &n)
+void AGEvent::setName(const AGString &n)
 {
   mName=n;
 }
@@ -99,6 +100,13 @@ AGVector2 AGEvent::getMousePosition() const
   }
   return p;
 }
+
+Uint16 AGEvent::getUnicode() const
+{
+  assert(mEvent);
+  return mEvent->key.keysym.unicode;
+}
+
 
 SDLKey AGEvent::getKey() const
 {
@@ -176,7 +184,7 @@ AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
 {
 }
 
-AGSignal::AGSignal(AGMessageObject *pCaller,const std::string &pName):
+AGSignal::AGSignal(AGMessageObject *pCaller,const AGString &pName):
   mName(pName),mCaller(pCaller)
 {
 }
@@ -431,62 +439,45 @@ bool AGMessageObject::acceptEvent(const SDL_Event *pEvent)
   return true;
 }
 
-AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s)
+AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event*s)
 {
   return new AGEvent(pCaller,pName,s);
 }
 
 
-std::string toString(SDL_keysym k)
+AGString toString(SDL_keysym k)
 {
-  std::ostringstream os;
-  os<<(int)k.scancode<<":"<<(int)k.sym<<":"<<(int)k.mod<<":"<<k.unicode;
+  AGStringStream os;
+  os<<k.scancode<<":"<<(int)k.sym<<":"<<k.mod<<":"<<k.unicode;
 
   return os.str();
 }
 
-Uint8 toUint8(const std::string &s)
-{
-  long i;
-  std::istringstream is;
-  is.str(s);
-  is>>i;
-  return i;
-}
-Sint16 toSint16(const std::string &s)
-{
-  long i;
-  std::istringstream is;
-  is.str(s);
-  is>>i;
-  return i;
-}
-
-std::string getUntil(std::string &b,const std::string &f)
+AGString getUntil(AGString &b,const AGString &f)
 {
   size_t i=b.find(f);
-  std::string s=b.substr(0,i);
-  if(i!=std::string::npos)
-    b=b.substr(i+1,std::string::npos);
+  AGString s=b.substr(0,i);
+  if(i!=AGString::npos)
+    b=b.substr(i+1,AGString::npos);
   return s;
 }
 
-SDL_keysym toKeysym(const std::string &s)
+SDL_keysym toKeysym(const AGString &s)
 {
   SDL_keysym k;
-  std::string b=s;
-  k.scancode=toUint8(getUntil(b,":"));
-  k.sym=(SDLKey)toUint8(getUntil(b,":"));
-  k.mod=(SDLMod)toUint8(getUntil(b,":"));
-  k.unicode=toSint16(getUntil(b,":"));
+  AGString b=s;
+  k.scancode=getUntil(b,":").toUint8();
+  k.sym=(SDLKey)getUntil(b,":").toUint8();
+  k.mod=(SDLMod)getUntil(b,":").toUint8();
+  k.unicode=getUntil(b,":").toSint16();
   
 
   return k;
 }
 
-std::string toString(SDL_Event *pEvent)
+AGString toString(SDL_Event *pEvent)
 {
-  std::ostringstream os;
+  AGStringStream os;
   if(pEvent)
     {
       switch(pEvent->type)
@@ -537,10 +528,10 @@ std::string toString(SDL_Event *pEvent)
 
 
 
-SDL_Event *toSDLEvent(const std::string &p)
+SDL_Event *toSDLEvent(const AGString &p)
 {
-  std::string b=p;
-  std::string t=getUntil(b,":");
+  AGString b=p;
+  AGString t=getUntil(b,":");
   static SDL_Event event;
 
   event.type=0;
@@ -548,87 +539,87 @@ SDL_Event *toSDLEvent(const std::string &p)
   if(t=="SDL_ACTIVEEVENT")
     {
       event.type=SDL_ACTIVEEVENT;
-      event.active.gain=toUint8(getUntil(b,":"));
-      event.active.state=toUint8(getUntil(b,":"));
+      event.active.gain=getUntil(b,":").toUint8();
+      event.active.state=getUntil(b,":").toUint8();
     }
   else if(t=="SDL_KEYDOWN")
     {
       event.type=SDL_KEYDOWN;
-      event.key.which=toUint8(getUntil(b,":"));
-      event.key.state=toUint8(getUntil(b,":"));
+      event.key.which=getUntil(b,":").toUint8();
+      event.key.state=getUntil(b,":").toUint8();
       event.key.keysym=toKeysym(b);
     }
   else if(t=="SDL_KEYUP")
     {
       event.type=SDL_KEYUP;
-      event.key.which=toUint8(getUntil(b,":"));
-      event.key.state=toUint8(getUntil(b,":"));
+      event.key.which=getUntil(b,":").toUint8();
+      event.key.state=getUntil(b,":").toUint8();
       event.key.keysym=toKeysym(b);
 
     }
   else if(t=="SDL_MOUSEMOTION")
     {
       event.type=SDL_MOUSEMOTION;
-      event.motion.which=toUint8(getUntil(b,":"));
-      event.motion.state=toUint8(getUntil(b,":"));
-      event.motion.x=toSint16(getUntil(b,":"));
-      event.motion.y=toSint16(getUntil(b,":"));
-      event.motion.xrel=toSint16(getUntil(b,":"));
-      event.motion.yrel=toSint16(getUntil(b,":"));
+      event.motion.which=getUntil(b,":").toUint8();
+      event.motion.state=getUntil(b,":").toUint8();
+      event.motion.x=getUntil(b,":").toSint16();
+      event.motion.y=getUntil(b,":").toSint16();
+      event.motion.xrel=getUntil(b,":").toSint16();
+      event.motion.yrel=getUntil(b,":").toSint16();
     }
   else if(t=="SDL_MOUSEBUTTONDOWN")
     {
       event.type=SDL_MOUSEBUTTONDOWN;
-      event.button.which=toUint8(getUntil(b,":"));
-      event.button.button=toUint8(getUntil(b,":"));
-      event.button.state=toUint8(getUntil(b,":"));
-      event.button.x=toSint16(getUntil(b,":"));
-      event.button.y=toSint16(getUntil(b,":"));
+      event.button.which=getUntil(b,":").toUint8();
+      event.button.button=getUntil(b,":").toUint8();
+      event.button.state=getUntil(b,":").toUint8();
+      event.button.x=getUntil(b,":").toSint16();
+      event.button.y=getUntil(b,":").toSint16();
     }
   else if(t=="SDL_MOUSEBUTTONUP")
     {
       event.type=SDL_MOUSEBUTTONUP;
-      event.button.which=toUint8(getUntil(b,":"));
-      event.button.button=toUint8(getUntil(b,":"));
-      event.button.state=toUint8(getUntil(b,":"));
-      event.button.x=toSint16(getUntil(b,":"));
-      event.button.y=toSint16(getUntil(b,":"));
+      event.button.which=getUntil(b,":").toUint8();
+      event.button.button=getUntil(b,":").toUint8();
+      event.button.state=getUntil(b,":").toUint8();
+      event.button.x=getUntil(b,":").toSint16();
+      event.button.y=getUntil(b,":").toSint16();
     }
   else if(t=="SDL_JOYAXISMOTION")
     {
       event.type=SDL_JOYAXISMOTION;
-      event.jaxis.which=toUint8(getUntil(b,":"));
-      event.jaxis.axis=toUint8(getUntil(b,":"));
-      event.jaxis.value=toUint8(getUntil(b,":"));
+      event.jaxis.which=getUntil(b,":").toUint8();
+      event.jaxis.axis=getUntil(b,":").toUint8();
+      event.jaxis.value=getUntil(b,":").toUint8();
     }
   else if(t=="SDL_JOYBALLMOTION")
     {
       event.type=SDL_JOYBALLMOTION;
-      event.jball.which=toUint8(getUntil(b,":"));
-      event.jball.ball=toUint8(getUntil(b,":"));
-      event.jball.xrel=toSint16(getUntil(b,":"));
-      event.jball.yrel=toSint16(getUntil(b,":"));
+      event.jball.which=getUntil(b,":").toUint8();
+      event.jball.ball=getUntil(b,":").toUint8();
+      event.jball.xrel=getUntil(b,":").toSint16();
+      event.jball.yrel=getUntil(b,":").toSint16();
     }
   else if(t=="SDL_JOYHATMOTION")
     {
       event.type=SDL_JOYHATMOTION;
-      event.jhat.which=toUint8(getUntil(b,":"));
-      event.jhat.hat=toUint8(getUntil(b,":"));
-      event.jhat.value=toUint8(getUntil(b,":"));
+      event.jhat.which=getUntil(b,":").toUint8();
+      event.jhat.hat=getUntil(b,":").toUint8();
+      event.jhat.value=getUntil(b,":").toUint8();
     }
   else if(t=="SDL_JOYBUTTONDOWN")
     {
       event.type=SDL_JOYBUTTONDOWN;
-      event.jbutton.which=toUint8(getUntil(b,":"));
-      event.jbutton.button=toUint8(getUntil(b,":"));
-      event.jbutton.state=toUint8(getUntil(b,":"));
+      event.jbutton.which=getUntil(b,":").toUint8();
+      event.jbutton.button=getUntil(b,":").toUint8();
+      event.jbutton.state=getUntil(b,":").toUint8();
     }
   else if(t=="SDL_JOYBUTTONUP")
     {
       event.type=SDL_JOYBUTTONUP;
-      event.jbutton.which=toUint8(getUntil(b,":"));
-      event.jbutton.button=toUint8(getUntil(b,":"));
-      event.jbutton.state=toUint8(getUntil(b,":"));
+      event.jbutton.which=getUntil(b,":").toUint8();
+      event.jbutton.button=getUntil(b,":").toUint8();
+      event.jbutton.state=getUntil(b,":").toUint8();
     }
   else if(t=="SDL_QUIT")
     {

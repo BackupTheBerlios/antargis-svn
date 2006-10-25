@@ -45,7 +45,7 @@ AGComboBox::AGComboBox(AGWidget *pParent,const AGRect2 &pRect):
 }
 
 
-void AGComboBox::insertItem(const std::string &pID,const std::string &pContent)
+void AGComboBox::insertItem(const AGString &pID,const AGStringUtf8 &pContent)
 {
   ops.push_back(std::make_pair(pID,pContent));
   if(ops.size()==1)
@@ -58,8 +58,8 @@ void AGComboBox::update()
   if(ops.size()>0)
     {
       // find
-      std::string text;
-      for(std::list<std::pair<std::string,std::string> >::iterator i=ops.begin();i!=ops.end();i++)
+      AGStringUtf8 text;
+      for(std::list<std::pair<AGString,AGStringUtf8> >::iterator i=ops.begin();i!=ops.end();i++)
 	if(i->first==mID)
 	  {
 	    text=i->second;
@@ -91,7 +91,7 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
 
   mListBox->sigSelect.connect(slot(this,&AGComboBox::eventSelected));
 
-  for(std::list<std::pair<std::string,std::string> >::iterator i=ops.begin();i!=ops.end();i++)
+  for(std::list<std::pair<AGString,AGStringUtf8> >::iterator i=ops.begin();i!=ops.end();i++)
     mListBox->insertItem(i->first,i->second);
   if(ops.size()>0)
     mListBox->selectItem(mID);
@@ -111,11 +111,11 @@ bool AGComboBox::eventSelected(AGEvent *pEvent)
   return true;
 }
 
-std::string AGComboBox::getSelected() const
+AGString AGComboBox::getSelected() const
 {
   return mID;
 }
-void AGComboBox::setSelected(const std::string &pID)
+void AGComboBox::setSelected(const AGString &pID)
 {
   mID=pID;
   update();

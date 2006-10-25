@@ -79,7 +79,8 @@ TTF_Font *getFont(std::string s,int i)
 	mFont=TTF_OpenFont(name.c_str(),i);
       if(!mFont)
 	{
-	  std::cerr<<" Font not found:"<<s<<std::endl;
+	  std::cerr<<" Font not found:"<<s<<" probable file:"<<name<<std::endl;
+	  std::cerr<<" Error:"<<SDL_GetError()<<std::endl;
 	  throw std::runtime_error(std::string("Font '")+s+"' not found!");
 	}
       
@@ -106,7 +107,7 @@ AGFontEngine::~AGFontEngine()
 
 AGFontEngine myFontEngine;
 
-std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
+std::map<std::pair<AGFont,AGStringUtf8>,AGTexture> fontCache;
 
 void border(AGSurface &s,AGColor bc)
 {
@@ -279,12 +280,12 @@ void embossSurface(AGSurface &s,float depth=1.0f)
 
 }
 
-AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &pFont)
+AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &pFont)
 {
   if(pText.length()==0)
     return 0;
 
-  if(fontCache.find(make_pair(pFont,pText))==fontCache.end())
+  if(fontCache.find(std::make_pair(pFont,pText))==fontCache.end())
     {
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
@@ -303,7 +304,7 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
 	  
 	}
 	else*/
-      ns=TTF_RenderUTF8_Blended(f,pText.c_str(),pFont.getColor());
+      ns=TTF_RenderUTF8_Blended(f,pText.toString().c_str(),pFont.getColor());
 
       assert(ns);
       
@@ -345,27 +346,27 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const std::str
       AGTexture ms(as);
       ms.setClamp(GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE);
 	
-      fontCache[make_pair(pFont,pText)]=ms;
+      fontCache[std::make_pair(pFont,pText)]=ms;
     }
-  return &fontCache[make_pair(pFont,pText)];
+  return &fontCache[std::make_pair(pFont,pText)];
 
 }
 
 
-int AGFontEngine::getWidth(const AGFont &pFont,const std::string &pText)
+int AGFontEngine::getWidth(const AGFont &pFont,const AGStringUtf8 &pText)
 {
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
   if(!f)
     return 0;
    
   int w,h;
-  int ret=TTF_SizeUTF8(f,pText.c_str(),&w,&h);
+  int ret=TTF_SizeUTF8(f,pText.toString().c_str(),&w,&h);
   if(ret)
     return 0;
   return w;
 }
 
-int AGFontEngine::getHeight(const AGFont &pFont,const std::string &pText)
+int AGFontEngine::getHeight(const AGFont &pFont,const AGStringUtf8 &pText)
 {
   TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
 
@@ -373,7 +374,7 @@ int AGFontEngine::getHeight(const AGFont &pFont,const std::string &pText)
     return 0;
   
   int w,h;
-  int ret=TTF_SizeUTF8(f,pText.c_str(),&w,&h);
+  int ret=TTF_SizeUTF8(f,pText.toString().c_str(),&w,&h);
   if(ret)
     return 0;
 

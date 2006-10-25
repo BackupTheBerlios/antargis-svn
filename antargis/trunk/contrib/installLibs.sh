@@ -134,7 +134,8 @@ build_smpeg()
 		echo ${CFLAGS}
 		echo ${CXX}
 		rm config.cache
-		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --with-sdl-prefix=${TOPDIR}/usr --disable-shared --enable-static
+		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --with-sdl-prefix=${TOPDIR}/usr --disable-shared --enable-static --enable-threaded-system
+#		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --with-sdl-prefix=${TOPDIR}/usr --enable-shared --enable-threaded-system
 		make
 		make install
 		cd ..

@@ -155,9 +155,9 @@ int getTerrainTriangleSize()
   int s=1;
 
   if(getConfig()->get("terrainTriangleSize")!="")
-    s=toInt(getConfig()->get("terrainTriangleSize"));
+    s=getConfig()->get("terrainTriangleSize").toInt();
   
-  getConfig()->set("terrainTriangleSize",toString(s));
+  getConfig()->set("terrainTriangleSize",AGString(s));
 
   return s;
 }
@@ -168,9 +168,9 @@ int getTerrainDownScale()
   int s=1;
 
   if(getConfig()->get("terrainDownScaleExp")!="")
-    s=toInt(getConfig()->get("terrainDownScaleExp"));
+    s=getConfig()->get("terrainDownScaleExp").toInt();
   
-  getConfig()->set("terrainDownScaleExp",toString(s));
+  getConfig()->set("terrainDownScaleExp",AGString(s));
 
   return s;
 }
@@ -180,9 +180,9 @@ int getTerrainDownScaleZ()
   int s=1;
 
   if(getConfig()->get("terrainDownScaleZExp")!="")
-    s=toInt(getConfig()->get("terrainDownScaleZExp"));
+    s=getConfig()->get("terrainDownScaleZExp").toInt();
   
-  getConfig()->set("terrainDownScaleZExp",toString(s));
+  getConfig()->set("terrainDownScaleZExp",AGString(s));
 
   return s;
 }

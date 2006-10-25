@@ -20,7 +20,7 @@
 				<rowsize row="2" relative="1"/>
 				<text row="0" col="0" caption="Credits" align="center" font="credits.font"/>
 				<cell row="1" col="0">
-					<antTicker text="
+					<antTicker name="ticker" text="
 _Design & Programming
 David Kamphausen
 

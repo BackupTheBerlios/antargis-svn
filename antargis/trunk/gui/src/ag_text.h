@@ -27,21 +27,21 @@
 class AGText:public AGWidget
 {
  public:
-  AGText(AGWidget *pParent,const AGRect2 &pRect,const std::string &pText,const AGFont &pFont);
+  AGText(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont);
 #ifndef SWIG
-  AGText(AGWidget *pParent,const AGVector2 &pPoint,const std::string &pText,const AGFont &pFont);
+  AGText(AGWidget *pParent,const AGVector2 &pPoint,const AGStringUtf8 &pText,const AGFont &pFont);
 #endif
 
   void setDeriveRect();
   virtual void draw(AGPainter &p);
 
-  void setText(const std::string &pText);
-  std::string getText() const;
+  void setText(const AGStringUtf8 &pText);
+  AGStringUtf8 getText() const;
 
   void setFont(const AGFont &f);
 
  private:
-  std::string mText;
+  AGStringUtf8 mText;
   AGFont mFont;
   bool mFixedSize;
 };

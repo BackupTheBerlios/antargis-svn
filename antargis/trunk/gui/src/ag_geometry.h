@@ -22,11 +22,11 @@
 #define AG_TRIANGLE_H
 
 #include <SDL.h>
-#include <string>
 #include <iostream>
 #include <list>
 #include <vector>
 #include <ag_base.h>
+#include <ag_string.h>
 
 /* There are following classes:
 
@@ -61,7 +61,7 @@ class AGEXPORT AGVector2
  public:
   float v[2];
 
-  AGVector2(const std::string &s);
+  AGVector2(const AGString &s);
   AGVector2(float pX,float pY);
   AGVector2(const AGAngle &a);
   AGVector2(const AGVector2 &a);
@@ -116,7 +116,7 @@ class AGEXPORT AGVector2
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 
 #ifndef SWIG
   (operator float*)();
@@ -194,7 +194,7 @@ class AGVector3
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 
 #ifndef SWIG
   (operator float*)();
@@ -245,7 +245,7 @@ class AGMatrix3
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 };
 
 class AGLine2
@@ -278,7 +278,7 @@ class AGLine2
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 };
 
 class AGLine3
@@ -310,7 +310,7 @@ class AGLine3
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 };
 
 class AGCollisionData
@@ -355,7 +355,7 @@ class AGTriangle2
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 };
 
 class AGCircle2
@@ -386,7 +386,7 @@ class AGTriangle3
   // (x,y,z,1) for collision in point (x,y,z)
   AGVector4 collide(const AGLine3 &pLine) const;
 
-  std::string toString() const;
+  AGString toString() const;
 
   AGVector3 operator[](int index) const;
 };
@@ -398,7 +398,7 @@ class AGEXPORT AGRect2
   AGRect2();
   AGRect2(const AGVector2 &pv0,const AGVector2 &pv1);
   AGRect2(float x,float y,float w,float h);
-  AGRect2(const std::string &ps);
+  AGRect2(const AGString &ps);
   AGRect2(const SDL_Rect &r);
 
   bool collide(const AGRect2 &r) const;
@@ -468,7 +468,7 @@ class AGEXPORT AGRect2
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 };
 
 
@@ -554,7 +554,7 @@ class AGVector4
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 
 #ifndef SWIG
   (operator float*)();
@@ -611,7 +611,7 @@ class AGMatrix4
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
-  std::string toString() const;
+  AGString toString() const;
 
 #ifndef SWIG
   (operator float*)();
@@ -631,7 +631,7 @@ class AGRect3
 
   bool collides(const AGLine3&pLine) const;
 
-  std::string toString() const;
+  AGString toString() const;
 };
 
 // axis-aligned
@@ -654,7 +654,7 @@ class AGBox3
 
   std::vector<AGRect3> getSides() const;
 
-  std::string toString() const;
+  AGString toString() const;
 
   std::vector<AGBox3> split() const;
 

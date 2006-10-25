@@ -29,7 +29,7 @@ class AGMenu;
 class AGMenuItem:public AGTable
 {
  public:
-  AGMenuItem(AGWidget *pParent,const std::string &pText);
+  AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText);
   virtual ~AGMenuItem();
 
   void draw(AGPainter &p);
@@ -40,7 +40,7 @@ class AGMenuItem:public AGTable
   bool getSelected() const;
   void unSelect();
 
-  std::string getName() const;
+  AGString getName() const;
 
   virtual bool eventMouseClick(AGEvent *m);
 
@@ -48,7 +48,7 @@ class AGMenuItem:public AGTable
   virtual void eventUnselect();
 
  private:
-  std::string mText;
+  AGStringUtf8 mText;
   bool mMouseOver;
   bool mSelected;
 };
@@ -56,7 +56,7 @@ class AGMenuItem:public AGTable
 class AGSubMenu:public AGMenuItem
 {
  public:
-  AGSubMenu(AGWidget *pParent,const std::string &ptext);
+  AGSubMenu(AGWidget *pParent,const AGStringUtf8 &ptext);
   virtual ~AGSubMenu();
 
   AGMenu *getMenu();

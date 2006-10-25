@@ -58,7 +58,7 @@ void AGLayout::loadXML(const std::string &pXMLData)
   AGWidget *pgParent=getParent();
 
   AGRect2 geom;
-  std::string geomS=p.root().get("geometry");
+  AGString geomS=p.root().get("geometry");
   if(geomS.length())
     geom=AGRect2(geomS);
   else if(getParent())
@@ -137,7 +137,7 @@ AGLayout *getLayout(AGWidget *pWidget)
 
 AGWidget *parseNode(AGWidget *pParent,const Node &pNode)
 {
-  std::string n=pNode.getName();
+  AGString n=pNode.getName();
 
   AGRect2 geom=getLayoutGeometry(pParent,pNode);
 
@@ -161,7 +161,7 @@ AGWidget *parseNode(AGWidget *pParent,const Node &pNode)
       AGLayout *l=getLayout(pParent);
       if(l)
 	{
-	  l->addTabIndex(toInt(pNode.get("tabindex")),w);
+	  l->addTabIndex(pNode.get("tabindex").toInt(),w);
 	}
       else
 	cdebug("ERROR in parseNode(.):tabindex given but not embedded in layout???");
@@ -188,8 +188,8 @@ AGRect2 getLayoutGeometry(AGWidget *pParent,const Node &pNode)
   if(t)
     if(pNode.get("col")!="" && pNode.get("row")!="")
       {
-	int col=toInt(pNode.get("col"));
-	int row=toInt(pNode.get("row"));
+	int col=pNode.get("col").toInt();
+	int row=pNode.get("row").toInt();
 	
 	geom=t->getClientRect(col,row);
 	//	assert(pParent->getRect().origin().contains(geom));
@@ -204,7 +204,7 @@ AGRect2 getLayoutGeometry(AGWidget *pParent,const Node &pNode)
       }
   
 
-  std::string geomS=pNode.get("geometry");
+  AGString geomS=pNode.get("geometry");
   if(geomS.length())
     geom=AGRect2(geomS);
   return geom;
@@ -233,10 +233,10 @@ class AGButtonLayoutCreator:public AGLayoutCreator
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGButton *b;
-    std::string caption=_(pNode.get("caption"));
-    b=new AGButton(pParent,pRect,caption);
+    AGStringUtf8 caption=_(pNode.get("caption"));
+    b=new AGButton(pParent,pRect,AGStringUtf8(caption));
     
-    std::string captionImage=pNode.get("caption-image");
+    AGFilename captionImage=pNode.get("caption-image");
     if(captionImage.length())
       b->setSurface(AGSurface::load(captionImage),false);
     if(pNode.get("enabled")=="false")
@@ -268,8 +268,8 @@ AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom)
   t=new AGTable(pParent,geom);
 
   int w,h;
-  w=toInt(pNode.get("cols"));
-  h=toInt(pNode.get("rows"));
+  w=pNode.get("cols").toInt();
+  h=pNode.get("rows").toInt();
 
   t->setName(pNode.get("name"));
 
@@ -286,32 +286,32 @@ AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom)
     {
       if((*i)->getName()=="colsize")
 	{
-	  int id=toInt((*i)->get("col"));
+	  int id=(*i)->get("col").toInt();
 	  assert(id>=0 && id<w);
 	  //	  cdebug("id:"<<id);
-	  std::string s=(*i)->get("fixed");
+	  AGString s=(*i)->get("fixed");
 	  //	  cdebug("fixed:"<<s);
 	  if(s.length())
-	    cols[id]=std::make_pair(toFloat(s),true);
+	    cols[id]=std::make_pair(s.toFloat(),true);
 	  else
 	    {
 	      s=(*i)->get("relative");
 	      //	      cdebug("relative:"<<s);
-	      cols[id]=std::make_pair(toFloat(s),false);
+	      cols[id]=std::make_pair(s.toFloat(),false);
 	    }
 	}
       else if((*i)->getName()=="rowsize")
 	{
-	  int id=toInt((*i)->get("row"));
+	  int id=(*i)->get("row").toInt();
 	  assert(id>=0 && id<h);
 
-	  std::string s=(*i)->get("fixed");
+	  AGString s=(*i)->get("fixed");
 	  if(s.length())
-	    rows[id]=std::make_pair(toFloat(s),true);
+	    rows[id]=std::make_pair(s.toFloat(),true);
 	  else
 	    {
 	      s=(*i)->get("relative");
-	      rows[id]=std::make_pair(toFloat(s),false);
+	      rows[id]=std::make_pair(s.toFloat(),false);
 	    }
 	}
     }
@@ -343,8 +343,8 @@ AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom)
       AGWidget *w=parseNode(t,**i);
       if(w)
 	{
-	  int col=toInt((*i)->get("col"));
-	  int row=toInt((*i)->get("row"));
+	  int col=(*i)->get("col").toInt();
+	  int row=(*i)->get("row").toInt();
 	  //	  cdebug(col<<"/"<<row);
 	  t->addChild(col,row,w);
 	}
@@ -367,10 +367,10 @@ class AGWindowLayoutCreator:public AGLayoutCreator
   
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
-    std::string title=_(pNode.get("title"));
-    std::string theme=pNode.get("theme");
+    AGStringUtf8 title=_(pNode.get("title"));
+    AGString theme=pNode.get("theme");
     
-    AGWidget *w=new AGWindow(pParent,pRect,title,theme);
+    AGWidget *w=new AGWindow(pParent,pRect,AGStringUtf8(title),theme);
     return w;
   }
 };
@@ -388,13 +388,13 @@ public:
 
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
-    std::string text=_(pNode.get("caption"));
+    AGStringUtf8 text=_(pNode.get("caption"));
     
     //    AGWidget *w=new AGText(pParent,pRect,text,font);
     AGEdit *w=new AGEdit(pParent,pRect);
-    text=replace(text,"\\n","\n");
-    w->setText(text);
-    std::string fontname=pNode.get("font");
+    text=text.replace("\\n","\n");
+    w->setText(AGStringUtf8(text));
+    AGString fontname=pNode.get("font");
     if(fontname=="")
       fontname="text.font";
 
@@ -435,12 +435,12 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     CTRACE;
-    std::string text=pNode.get("text");
+    AGString text=pNode.get("text");
     bool multi=pNode.get("multi")=="true";
     
     //    AGWidget *w=new AGText(pParent,pRect,text,font);
     AGEdit *w=new AGEdit(pParent,pRect);
-    w->setText(text);
+    w->setText(AGStringUtf8(text));
     if(pNode.get("font")!="")
     {
       AGFont font;
@@ -493,7 +493,7 @@ public:
     for(;i!=pNode.end();i++)
       {
 	if((*i)->getName()=="item")
-	  l->insertItem((*i)->get("id"),(*i)->get("text"));
+	  l->insertItem((*i)->get("id"),AGStringUtf8((*i)->get("text")));
       }
 
 
@@ -513,7 +513,7 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     CTRACE;
-    std::string filename=pNode.get("filename");
+    AGFilename filename=pNode.get("filename");
     AGWidget *w=new AGWidget(pParent,pRect);
     AGLayout *l=new AGLayout(w);
     l->loadXML(loadFile(filename));//pRect);
@@ -533,7 +533,7 @@ public:
 
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
-    std::string filename=pNode.get("filename");
+    AGFilename filename=pNode.get("filename");
 
     AGSurface s(0,0);
     if(filename.length())
@@ -541,9 +541,9 @@ public:
 
     AGRect2 r=pRect;
     if(pNode.get("x").length())
-      r.setX(toFloat(pNode.get("x")));
+      r.setX(pNode.get("x").toFloat());
     if(pNode.get("y").length())
-      r.setY(toFloat(pNode.get("y")));
+      r.setY(pNode.get("y").toFloat());
 
 #warning "add subsurfaces"
     
@@ -570,8 +570,8 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     CTRACE;
-    std::string border=pNode.get("border");
-    size_t width=toInt(pNode.get("width"));
+    AGString border=pNode.get("border");
+    size_t width=pNode.get("width").toInt();
 
     AGFrame *w;
     if(border.length())

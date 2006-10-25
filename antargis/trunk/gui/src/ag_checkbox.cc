@@ -103,9 +103,9 @@ public:
   virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
     AGCheckBox *b=new AGCheckBox(pParent,pRect);
-    std::string caption=_(pNode.get("caption"));
+    AGStringUtf8 caption=_(pNode.get("caption"));
     if(caption.length())
-      b->setCaption(caption);
+      b->setCaption(AGStringUtf8(caption));
 
     std::string captionImage=pNode.get("caption-image");
     if(captionImage.length())

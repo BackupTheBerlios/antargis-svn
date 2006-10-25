@@ -21,13 +21,14 @@
 #ifndef AG_LAYOUTFACTORY_H
 #define AG_LAYOUTFACTORY_H
 
-#include "ag_widget.h"
-#include "ag_xml.h"
+#include <ag_widget.h>
+#include <ag_xml.h>
+#include <ag_utf8.h>
 
 class AGLayoutCreator
 {
  public:
-  AGLayoutCreator(const std::string &pName);
+  AGLayoutCreator(const AGString &pName);
   virtual ~AGLayoutCreator()
     {
     }
@@ -37,13 +38,13 @@ class AGLayoutCreator
 
 class AGLayoutFactory
 {
-  std::map<std::string,AGLayoutCreator*> mCreators;
+  std::map<AGString,AGLayoutCreator*> mCreators;
 
   AGLayoutFactory();
  public:
   ~AGLayoutFactory();
 
-  void addCreator(const std::string &pName,AGLayoutCreator *creator);
+  void addCreator(const AGString &pName,AGLayoutCreator *creator);
 
   AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
   

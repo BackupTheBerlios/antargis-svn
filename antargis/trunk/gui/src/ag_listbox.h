@@ -31,8 +31,9 @@ class AGScroller;
 
 struct AGListBoxItem
 {
-  AGListBoxItem(std::string pID,std::string pValue);
-  std::string id,value;
+  AGListBoxItem(AGString pID,AGStringUtf8 pValue);
+  AGString id;
+  AGStringUtf8 value;
 };
 
 
@@ -42,11 +43,11 @@ class AGListBox:public AGWidget
  public:
   AGListBox(AGWidget *pParent,const AGRect2 &pRect);
 
-  void insertItem(std::string pID,std::string pValue);
-  void selectItem(std::string pID);
+  void insertItem(AGString pID,AGStringUtf8 pValue);
+  void selectItem(AGString pID);
 
-  std::string getSelectedID() const;
-  std::string getSelectedValue() const;
+  AGString getSelectedID() const;
+  AGString getSelectedValue() const;
 
   virtual bool eventKeyDown(AGEvent *m);
 

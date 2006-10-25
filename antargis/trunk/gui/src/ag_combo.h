@@ -32,15 +32,15 @@ class AGComboBox:public AGWidget
  public:
   AGComboBox(AGWidget *pParent,const AGRect2 &pRect);
 
-  void insertItem(const std::string &pID,const std::string &pContent);
+  void insertItem(const AGString &pID,const AGStringUtf8 &pContent);
 
   bool eventButtonClicked(AGEvent *pEvent);
   bool eventSelected(AGEvent *pEvent);
 
   AGSignal sigSelect;
   
-  std::string getSelected() const;
-  void setSelected(const std::string &pID);
+  AGString getSelected() const;
+  void setSelected(const AGString &pID);
 
   void clear();
 
@@ -51,9 +51,9 @@ class AGComboBox:public AGWidget
   AGButton *mButton;
   AGListBox *mListBox;
 
-  std::string mID;
+  AGString mID;
 
-  std::list<std::pair<std::string,std::string> > ops;
+  std::list<std::pair<AGString,AGStringUtf8> > ops;
 };
 
 #endif

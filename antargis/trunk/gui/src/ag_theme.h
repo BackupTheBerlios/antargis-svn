@@ -32,41 +32,41 @@ class AGTheme
   AGTheme();
   virtual ~AGTheme();
 
-  AGFont getFont(const std::string &pName);
-  AGColor getColor(const std::string &pName);
+  AGFont getFont(const AGString &pName);
+  AGColor getColor(const AGString &pName);
 
-  void setFont(const std::string &pName,AGFont pFont);
-  void setColor(const std::string &pName,AGColor pColor);
+  void setFont(const AGString &pName,AGFont pFont);
+  void setColor(const AGString &pName,AGColor pColor);
 
-  int getInt(const std::string &pName);
-  void setInt(const std::string &pName,int i);
+  int getInt(const AGString &pName);
+  void setInt(const AGString &pName,int i);
 
-  AGSurface getSurface(const std::string &pName);
-  void setSurface(const std::string &pName,const AGSurface &pSurface);
+  AGSurface getSurface(const AGString &pName);
+  void setSurface(const AGString &pName,const AGSurface &pSurface);
 
-  std::string getSurfaceName(const std::string &pName);
-  void setSurfaceName(const std::string &pName,const std::string &pSurface);
+  std::string getSurfaceName(const AGString &pName);
+  void setSurfaceName(const AGString &pName,const std::string &pSurface);
 
 
-  bool hasSurface(const std::string &pName) const;
-  bool hasColor(const std::string &pName) const;
+  bool hasSurface(const AGString &pName) const;
+  bool hasColor(const AGString &pName) const;
 
  private:
 
-  std::string trunk(std::string s);
+  AGString trunk(AGString s);
 
-  std::map<std::string,AGFont> mFonts;
-  std::map<std::string,AGColor> mColors;
-  std::map<std::string,AGSurface> mSurfaces;
-  std::map<std::string,std::string> mSurfaceNames;
-  std::map<std::string,int> mInts;
+  std::map<AGString,AGFont> mFonts;
+  std::map<AGString,AGColor> mColors;
+  std::map<AGString,AGSurface> mSurfaces;
+  std::map<AGString,std::string> mSurfaceNames;
+  std::map<AGString,int> mInts;
 };
 
 AGTheme *getTheme();
 void setTheme(const AGTheme &aTheme);
-void loadTheme(const std::string &pXML);
-bool loadThemeFile(const std::string &pFilename);
+void loadTheme(const AGData &pXML);
+bool loadThemeFile(const AGFilename &pFilename);
 
-std::string addPoint(const std::string &pTheme);
+AGString addPoint(const AGString &pTheme);
 
 #endif

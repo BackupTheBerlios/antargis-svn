@@ -744,11 +744,11 @@ bool AGWidget::getFocus() const
   return mHasFocus;
 }
 
-std::string AGWidget::getName() const
+const AGString &AGWidget::getName() const
 {
   return mName;
 }
-void AGWidget::setName(const std::string &pName)
+void AGWidget::setName(const AGString &pName)
 {
   mName=pName;
 }
@@ -763,7 +763,7 @@ bool AGWidget::visible() const
 }
 
 
-AGWidget *AGWidget::getChild(const std::string &pName)
+AGWidget *AGWidget::getChild(const AGString &pName)
 {
   if(mName==pName)
     return this;
@@ -874,7 +874,7 @@ void AGWidget::setCaching(bool pEnable)
   mCacheTouched=false;
   if(pEnable)
     {
-      mCache=new AGTexture(width(),height());
+      mCache=new AGTexture((int)width(),(int)height());
       
       mCacheTouched=true;
     }
@@ -926,7 +926,7 @@ AGRect2 AGWidget::getChangeRect()
   return r;
 }
 
-void AGWidget::setTooltip(const std::string &pTooltip)
+void AGWidget::setTooltip(const AGStringUtf8 &pTooltip)
 {
   mTooltip=pTooltip;
 }

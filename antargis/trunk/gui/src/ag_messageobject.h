@@ -39,31 +39,32 @@ class AGSignal;
 class AGEvent
 {
  public:
-  AGEvent(AGListener *pCaller,const std::string &pName,const SDL_Event *pEvent=0);
+  AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event *pEvent=0);
   virtual ~AGEvent();
 
   AGListener *getCaller() const;
   
   void setCaller(AGListener *pCaller);
-  std::string getName() const;
+  AGString getName() const;
 
   AGVector2 getMousePosition() const;
   SDLKey getKey() const;
   SDLMod getMod() const;
+  Uint16 getUnicode() const;
   int getButton() const;
 
   const SDL_Event *get() const;
 
   bool isSDLEvent() const;
 
-  void setName(const std::string &n);
+  void setName(const AGString &n);
 
   void setVector(const AGVector2 &v);
   AGVector2 getVector() const;
 
  private:
   AGListener *mCaller;
-  std::string mName;
+  AGString mName;
 
   const SDL_Event *mEvent;
 
@@ -138,7 +139,7 @@ class AGSignal
  public:
   AGSignal();
   AGSignal(AGMessageObject *pCaller);
-  AGSignal(AGMessageObject *pCaller,const std::string &pName);
+  AGSignal(AGMessageObject *pCaller,const AGString &pName);
 
   virtual ~AGSignal();
 
@@ -156,7 +157,7 @@ class AGSignal
 
   std::set<AGCPPListener*> mSimpleListeners;
 
-  std::string mName;
+  AGString mName;
   AGMessageObject *mCaller;
 };
 
@@ -212,7 +213,7 @@ class AGMessageObject:public AGListener
 };
 
 
-AGEvent *newEvent(AGListener *pCaller,const std::string &pName,const SDL_Event*s);
+AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event*s);
 
 /**
  */   
@@ -224,7 +225,7 @@ AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))
 }
 
 
-std::string toString(SDL_Event *pEvent);
-SDL_Event *toSDLEvent(const std::string &p);
+AGString toString(SDL_Event *pEvent);
+SDL_Event *toSDLEvent(const AGString &p);
 
 #endif

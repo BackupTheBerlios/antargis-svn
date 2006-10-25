@@ -306,7 +306,7 @@ void Scene::initScene()
   float xfactor=float(getMain()->realWidth())/getMain()->width();
   float yfactor=float(getMain()->realHeight())/getMain()->height();
   
-  glViewport(0, 0, mCamera.getWidth()*xfactor, mCamera.getHeight()*yfactor);
+  glViewport(0, 0,(GLint)(mCamera.getWidth()*xfactor), (GLint)(mCamera.getHeight()*yfactor));
   
   //Use dim light to represent shadowed areas
 
@@ -344,8 +344,10 @@ void Scene::initScene()
   glLoadMatrixf(mCamera.getModelview());
 }
 
+#ifdef TEST_DL
 static GLuint displayList=0;
 static bool dlInited=false;
+#endif
 
 void Scene::drawScene()
 {

@@ -29,7 +29,7 @@
 
 using namespace std;
 
-AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const std::string&pText,int id):
+AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,int id):
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
 {
@@ -228,7 +228,7 @@ void AGButton::setHeight(float h)
     (*i)->setRect(getRect().shrink(borderWidth));
 }
 
-std::string AGButton::getCaption() const
+AGStringUtf8 AGButton::getCaption() const
 {
   return mText;
 }
@@ -251,7 +251,7 @@ void AGButton::setEnabled(bool pEnable)
     }
 }
 
-void AGButton::setTheme(const std::string &pTheme)
+void AGButton::setTheme(const AGString &pTheme)
 {
   queryRedraw();
   mTheme=addPoint(pTheme);
@@ -280,7 +280,7 @@ void AGButton::setTheme(const std::string &pTheme)
 
 }
 
-void AGButton::setCaption(const std::string &pCaption)
+void AGButton::setCaption(const AGStringUtf8 &pCaption)
 {
   queryRedraw();
   mText=pCaption;

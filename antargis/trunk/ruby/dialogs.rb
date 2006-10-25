@@ -65,7 +65,7 @@ class AntDialog<AGLayout
 		#setModal(true)
 		if fade
 			addChildBack(RectWidget.new(self,getRect.origin,0.5))
-			setQuietVolumeWave
+			AntSound.setQuietVolumeWave
 		end
 	end
 	def eventOk(e)
@@ -92,7 +92,7 @@ class AntDialog<AGLayout
 	def eventClose(e)
 		close
 		sigClosed(AGEvent.new(self,"sigClosed"))
-		setNormalVolumeWave
+		AntSound.setNormalVolumeWave
 		return true
 	end
 end
@@ -387,7 +387,7 @@ private
 		@bars.each{|n,v|
 			getConfig.set("#{n}Volume",v.getValue.to_s)
 		}
-		updateVolumes
+		AntSound.updateVolumes
 	end
 end
 

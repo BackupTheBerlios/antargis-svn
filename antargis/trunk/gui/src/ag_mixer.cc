@@ -25,6 +25,8 @@
 #include "ag_fs.h"
 #include "ag_config.h"
 
+#define USE_RWOPS
+
 #include <SDL_mixer.h>
 #include <map>
 #include <set>
@@ -73,7 +75,18 @@ void initSoundEngine()
     {
       TRACE;
       mSoundMutex=new AGMutex;
-      if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
+
+      size_t chunkSize=1024;
+      if(getConfig()->get("mixerChunkSize")=="2048")
+	chunkSize=2048;
+      if(getConfig()->get("mixerChunkSize")=="4096")
+	chunkSize=4096;
+      if(getConfig()->get("mixerChunkSize")=="8192")
+	chunkSize=8192;
+
+      cdebug("CHUNKSIZE:"<<chunkSize);
+
+      if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, chunkSize)==-1) {
 	printf("Mix_OpenAudio: %s\n", Mix_GetError());
 	mNoSound=true;
 	return;
@@ -132,9 +145,85 @@ bool AGSound::playMp3(const std::string &pFilename)
   mMusic=Mix_LoadMUS(pFilename.c_str());
   if(!mMusic) {
     printf("Mix_LoadMUS(\"%s\"): %s\n",pFilename.c_str(), Mix_GetError());
+    assertGL;
     return false;
   }
     
+  // this might be a critical error...
+  
+  
+  
+  // play music forever
+  // Mix_Music *music; // I assume this has been loaded already
+  // -1 is forever
+  // 0 is never
+  // 1 is once
+  if(Mix_PlayMusic(mMusic, 1)==-1) {
+    printf("Mix_PlayMusic: %s\n", Mix_GetError());
+    assertGL;
+    // well, there's no music, but most games don't break without music...
+  }
+  
+  
+    
+  mMusicFinished=false;
+
+  // set hook
+
+  assertGL;
+    
+  return true;
+}
+
+bool AGSound::isMusicPlaying() const
+{
+  return mMusicFinished;
+}
+
+
+bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
+{
+  assertGL;
+  if(mNoSound)
+    return false;
+  // must decrypt and write to disc :-(((
+  std::string file=loadFile(pFilename);
+
+  file=pDec.decrypt(file,pFilename);
+
+  /*  return playMp3(findFile("file.ogg"));
+  playWave(findFile("file.wav"),1);
+  return true;*/
+
+#ifndef OLDDEC
+  cdebug("ok decrypting");
+  if(!saveFile("drm.dat",file))
+    {
+      cdebug("error before playing!");
+      return false;
+    }
+  cdebug("playing");
+
+
+
+
+
+  return playMp3(findFile("drm.dat"));
+#else
+
+  SDL_RWops* rw=SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length());
+
+
+  initSoundEngine();
+  // load the MP3 file "music.mp3" to play as music
+  mMusic=Mix_LoadMUS_RW(rw);
+  if(!mMusic) {
+    printf("Mix_LoadMUS_RW(\"%s\"): %s\n",pFilename.c_str(), Mix_GetError());
+    assertGL;
+    return false;
+  }
+    
+  assertGL;
   // this might be a critical error...
   
   
@@ -150,30 +239,20 @@ bool AGSound::playMp3(const std::string &pFilename)
   }
   
   
+  assertGL;
     
   mMusicFinished=false;
 
   // set hook
     
   return true;
-}
-
-bool AGSound::isMusicPlaying() const
-{
-  return mMusicFinished;
-}
 
 
-bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
-{
-  if(mNoSound)
-    return false;
-  // must decrypt and write to disc :-(((
-  std::string file=loadFile(pFilename);
 
-  file=pDec.decrypt(file,pFilename);
-  saveFile("drm.dat",file);
-  return playMp3(findFile("drm.dat"));
+
+
+
+#endif
 }
 
 

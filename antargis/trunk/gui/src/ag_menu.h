@@ -27,23 +27,23 @@
 class AGMenu:public AGTable
 {
  public:
-  AGMenu(AGWidget *pParent,AGVector2 pWishPos,const std::string &pName);
+  AGMenu(AGWidget *pParent,AGVector2 pWishPos,const AGStringUtf8 &pName);
 
   void show(AGVector2 pWishPos);
 
-  void addItem(const std::string &pString);
-  AGMenu &addMenu(const std::string &pString);
+  void addItem(const AGStringUtf8 &pString);
+  AGMenu &addMenu(const AGStringUtf8 &pString);
 
   void draw(AGPainter &p);
 
-  void eventItemSelected(const std::string &pString);
-  void eventItemClicked(const std::string &pString);
+  void eventItemSelected(const AGString &pString);
+  void eventItemClicked(const AGString &pString);
 
   AGSignal sigSelected;
 
  private:
   AGTexture mBg;
-  std::string mName;
+  AGString mName;
   AGVector2 mWishPos;
 
   float mW,mH;

@@ -21,7 +21,7 @@
 
 #!/usr/bin/ruby
 
-require 'fir_mesh.rb'
+#require 'fir_mesh.rb'
 
 # really nothing special here - just a "grouper"
 class AntBaseTree<AntRubyEntity

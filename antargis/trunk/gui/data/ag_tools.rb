@@ -70,10 +70,12 @@ module AGHandler
 		else
 			#puts "MY CLASS:",self.class
 			object.send(event).connect(self)
-			if @handlers[object.getName+":"+event.to_s]==nil
-				@handlers[object.getName+":"+event.to_s]=[]
-			end
-			@handlers[object.getName+":"+event.to_s].push(func)
+			hname=object.getName+":"+event.to_s
+			@handlers[hname]||=[]
+# 			if @handlers[object.getName+":"+event.to_s]==nil
+# 				@handlers[object.getName+":"+event.to_s]=[]
+# 			end
+			@handlers[hname].push(func)
 			#@handlers.uniq!
 		end
 	end
@@ -149,5 +151,15 @@ class Array
 	# extend Array-class with a shuffle function
 	def shuffle
 		sort{0.5 <=> rand}
+	end
+end
+class String
+	alias oldadd +
+	def +(p)
+		#puts "puh"
+		if p.is_a?(AGString)
+			p=p.to_s
+		end
+		oldadd(p)
 	end
 end

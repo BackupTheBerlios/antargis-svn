@@ -399,7 +399,7 @@ std::string getWriteDir()
   return getUserDir()+"/."+getAppName();
 }
 
-void saveFile(const std::string &pName,const std::string &pContent)
+bool saveFile(const std::string &pName,const std::string &pContent)
 {
 #ifdef USE_PHYSFS
   TRACE;
@@ -423,10 +423,13 @@ void saveFile(const std::string &pName,const std::string &pContent)
 
 
   FILE *f=fopen(n.c_str(),"wb");
+  if(!f)
+    return false;
   fwrite(pContent.c_str(),pContent.length(),1,f);
   fclose(f);
 
 #endif
+  return true;
 }
 
 bool fileExists(const std::string &pName)

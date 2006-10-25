@@ -25,7 +25,7 @@
 #include "ag_image.h"
 #include "ag_menu.h"
 
-AGMenuItem::AGMenuItem(AGWidget *pParent,const std::string &pText):
+AGMenuItem::AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText):
   AGTable(pParent,AGRect2(0,0,0,0)),mText(pText),mMouseOver(false),mSelected(false)
 {
   AGFont font(getTheme()->getFont("Font.menu"));
@@ -55,17 +55,17 @@ void AGMenuItem::draw(AGPainter &p)//const AGRect2 &pr)
 
   AGColor c1,c2,c3,c4;
 
-  std::string style=".menu";
+  AGString style=".menu";
   if(mSelected)//MouseOver)
     {
       style+=".lighted";
       
       AGTheme *theme=getTheme();
       
-      c1=theme->getColor(std::string("gradientColor1")+style);
-      c2=theme->getColor(std::string("gradientColor2")+style);
-      c3=theme->getColor(std::string("gradientColor3")+style);
-      c4=theme->getColor(std::string("gradientColor4")+style);
+      c1=theme->getColor(AGString("gradientColor1")+style);
+      c2=theme->getColor(AGString("gradientColor2")+style);
+      c3=theme->getColor(AGString("gradientColor3")+style);
+      c4=theme->getColor(AGString("gradientColor4")+style);
       
       //      AGSurface s(getScreen());
       p.drawGradient(p.getRect(),c1,c2,c3,c4);
@@ -84,7 +84,7 @@ bool AGMenuItem::eventMouseEnter()
   //  cdebug(p);
   if(p)
     {
-      p->eventItemSelected(mText);
+      p->eventItemSelected(mText.toString());
     }
   return false;
 }
@@ -95,9 +95,9 @@ bool AGMenuItem::eventMouseLeave()
   return false;
 }
 
-std::string AGMenuItem::getName() const
+AGString AGMenuItem::getName() const
 {
-  return mText;
+  return mText.toString();
 }
 
 bool AGMenuItem::getSelected() const
@@ -123,7 +123,7 @@ bool AGMenuItem::eventMouseClick(AGEvent *m)
   AGMenu *me=dynamic_cast<AGMenu*>(getParent());
   if(me)
     {
-      me->eventItemClicked(mText);
+      me->eventItemClicked(mText.toString());
       
       return true;
     }
@@ -132,7 +132,7 @@ bool AGMenuItem::eventMouseClick(AGEvent *m)
 
 // AGSubMenu
 
-AGSubMenu::AGSubMenu(AGWidget *pParent,const std::string &pText):
+AGSubMenu::AGSubMenu(AGWidget *pParent,const AGStringUtf8 &pText):
   AGMenuItem(pParent,pText)
 {
   AGSurface surface2=AGSurface::load("right_arrow.png");

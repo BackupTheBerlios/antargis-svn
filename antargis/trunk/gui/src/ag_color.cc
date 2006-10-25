@@ -32,26 +32,26 @@ AGColor::AGColor(const AGVector4 &v)
   a=(Uint8)(v[3]*0xFF);
 }
 
-AGColor::AGColor(const std::string &s)
+AGColor::AGColor(const AGString &s)
 {
   r=g=b=0;
   a=0xFF;
   if(s.length()>0)
     {
-      std::string p=s.substr(1,s.npos);
+      AGString p=s.substr(1,s.npos);
       if(p.length()==6)
 	{
-	  r=fromHex(p.substr(0,2));
-	  g=fromHex(p.substr(2,2));
-	  b=fromHex(p.substr(4,2));
+	  r=p.substr(0,2).parseHex();
+	  g=p.substr(2,2).parseHex();
+	  b=p.substr(4,2).parseHex();
 	  a=0xFF;
 	}
       else if(p.length()==8)
 	{
-	  r=fromHex(p.substr(0,2));
-	  g=fromHex(p.substr(2,2));
-	  b=fromHex(p.substr(4,2));
-	  a=fromHex(p.substr(6,2));
+	  r=p.substr(0,2).parseHex();
+	  g=p.substr(2,2).parseHex();
+	  b=p.substr(4,2).parseHex();
+	  a=p.substr(6,2).parseHex();
 	}
     }
 }
@@ -107,9 +107,9 @@ Uint32 AGColor::mapRGB(SDL_PixelFormat *f) const
   return SDL_MapRGBA(f,r,g,b,a);
 }
 
-std::string AGColor::toString() const
+AGString AGColor::toString() const
 {
-  return std::string("#")+toHex(r)+toHex(g)+toHex(b)+toHex(a);
+  return AGString("#")+AGString::toHex(r)+AGString::toHex(g)+AGString::toHex(b)+AGString::toHex(a);
   /*
   std::ostringstream os;
   os<<"("<<int(r)<<","<<int(g)<<","<<int(b)<<")";

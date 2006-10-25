@@ -2519,6 +2519,11 @@ else if(dynamic_cast<AntMap*>($1))
  Data_Get_Struct($input,AGCaption,b);
  $result=*b;
 }
+%typemap(directorout) AGCharUtf8 {
+ AGCharUtf8 *b;
+ Data_Get_Struct($input,AGCharUtf8,b);
+ $result=*b;
+}
 %typemap(directorout) AGCheckBox {
  AGCheckBox *b;
  Data_Get_Struct($input,AGCheckBox,b);
@@ -2792,6 +2797,21 @@ else if(dynamic_cast<AntMap*>($1))
 %typemap(directorout) AGSound {
  AGSound *b;
  Data_Get_Struct($input,AGSound,b);
+ $result=*b;
+}
+%typemap(directorout) AGString {
+ AGString *b;
+ Data_Get_Struct($input,AGString,b);
+ $result=*b;
+}
+%typemap(directorout) AGStringUtf8 {
+ AGStringUtf8 *b;
+ Data_Get_Struct($input,AGStringUtf8,b);
+ $result=*b;
+}
+%typemap(directorout) AGStringUtf8Iterator {
+ AGStringUtf8Iterator *b;
+ Data_Get_Struct($input,AGStringUtf8Iterator,b);
  $result=*b;
 }
 %typemap(directorout) AGSubMenu {

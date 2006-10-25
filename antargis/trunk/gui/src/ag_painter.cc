@@ -431,7 +431,7 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 	}
     }
 }
-void AGPainter::renderText(const std::string &pText,const AGVector2 &p,const AGFont &f)
+void AGPainter::renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AGFont &f)
 {
   STACKTRACE;
   AGTexture *t=AGFontEngine::renderText(0,0,pText,f);
@@ -506,7 +506,7 @@ void AGPainter::drawPoint(const AGVector2 &p,const AGColor &c,float size)
   AGVector2 d=mCurrent.project(p);
   if(mCurrent.pointOk(p))
     {
-      mTarget->putPixel(d[0],d[1],c);
+      mTarget->putPixel((int)d[0],(int)d[1],c);
     }
 }
 

@@ -26,11 +26,11 @@
 class AGTooltip:public AGWidget
 {
  public:
-  AGTooltip(const AGRect2 &pRect,const std::string &pText);
+  AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText);
 
   virtual void draw(AGPainter &p);
  private:
-  std::string mText;
+  AGStringUtf8 mText;
   AGFont mFont;
   AGColor mBgColor;
   AGColor mBorderColor;

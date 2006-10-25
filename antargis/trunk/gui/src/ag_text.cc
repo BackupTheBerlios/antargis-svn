@@ -30,14 +30,14 @@
 
 using namespace std;
 
-AGText::AGText(AGWidget *pParent,const AGRect2 &r,const std::string &pText,const AGFont &pFont):
+AGText::AGText(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8 &pText,const AGFont &pFont):
   AGWidget(pParent,r),
   mText(pText),mFont(pFont)
 {
   mFixedSize=true;
 }
 
-AGText::AGText(AGWidget *pParent,const AGVector2 &p,const std::string &pText,const AGFont &pFont):
+AGText::AGText(AGWidget *pParent,const AGVector2 &p,const AGStringUtf8 &pText,const AGFont &pFont):
   AGWidget(pParent,AGRect2(p[0],p[1],pFont.getWidth(pText),pFont.getHeight(pText))),
   mText(pText),mFont(pFont)
 {
@@ -56,7 +56,7 @@ void AGText::setDeriveRect()
   setRect(AGRect2(getRect().x(),getRect().y(),mFont.getWidth(mText),mFont.getHeight(mText)));
 }
 
-void AGText::setText(const std::string &pText)
+void AGText::setText(const AGStringUtf8 &pText)
 {
   mText=pText;
   if(!mFixedSize)
@@ -65,7 +65,7 @@ void AGText::setText(const std::string &pText)
       setHeight(mFont.getHeight(pText));
     }
 }
-std::string AGText::getText() const
+AGStringUtf8 AGText::getText() const
 {
   return mText;
 }

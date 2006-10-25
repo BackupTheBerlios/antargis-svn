@@ -17,25 +17,25 @@ FIXME: maybe remove Resource from c++??
 */
 class Resource
 {
-  std::map<std::string,float> r;
+  std::map<AGString,float> r;
  public:
   Resource();
 
   void saveXML(Node &node) const;
   void loadXML(const Node &node);
 
-  float get(const std::string &pName);
-  void add(const std::string &pName,float value);
-  void sub(const std::string &pName,float value);
-  void set(const std::string &pName,float value);
+  float get(const AGString &pName);
+  void add(const AGString &pName,float value);
+  void sub(const AGString &pName,float value);
+  void set(const AGString &pName,float value);
 
-  std::map<std::string,float> getAll() const;
+  std::map<AGString,float> getAll() const;
 
   /// take everything, that's in r and put it into "this"
   void takeAll(Resource &r);
 
   /// take everything of type pname, that's in r and put it into "this"
-  void take(Resource &r,const std::string &pName);
+  void take(Resource &r,const AGString &pName);
 
   /// check if the "bag" is empty
   bool empty() const;

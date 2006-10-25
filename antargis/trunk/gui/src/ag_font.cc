@@ -104,11 +104,11 @@ std::string AGFont::getName() const
   return mName;
 }
 
-int AGFont::getWidth(const std::string &mText) const
+int AGFont::getWidth(const AGStringUtf8 &mText) const
 {
   return AGFontEngine::getWidth(*this,mText);
 }
-int AGFont::getHeight(const std::string &mText) const
+int AGFont::getHeight(const AGStringUtf8 &mText) const
 {
   return AGFontEngine::getHeight(*this,mText);
 }

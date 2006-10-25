@@ -25,7 +25,7 @@ class AnimMesh:public SceneNode
   AGMatrix4 mTransform;
   AGMatrix4 mComplete;
   AGVector4 mRot;
-  std::string mAnimName;
+  AGString mAnimName;
   Animation *mAnimation;
   AntEntity *mEntity;
 
@@ -38,8 +38,8 @@ class AnimMesh:public SceneNode
 
   void setTransform(const AGMatrix4 &m);
 
-  std::string getAnimation() const;
-  bool setAnimation(const std::string &pName);
+  AGString getAnimation() const;
+  bool setAnimation(const AGString &pName);
 
   void setPos(const AGVector3 &p);
   void setRotation(const AGVector3 &r,float a);

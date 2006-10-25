@@ -29,10 +29,10 @@
 
 using namespace std;
 
-AGMenu::AGMenu(AGWidget *pParent,AGVector2 pWishPos,const std::string &pName):
+AGMenu::AGMenu(AGWidget *pParent,AGVector2 pWishPos,const AGStringUtf8 &pName):
   AGTable(pParent,AGRect2(pWishPos[0],pWishPos[1],1,1)),
   sigSelected(this,"sigSelected"),
-  mName(pName),
+  mName(pName.toString()),
   mWishPos(pWishPos)
 {
   mBg=AGTexture(getTheme()->getSurface("menu.background.image"));
@@ -56,7 +56,7 @@ void AGMenu::show(AGVector2 pWishPos)
 
 }
 
-void AGMenu::addItem(const std::string &pString)
+void AGMenu::addItem(const AGStringUtf8 &pString)
 {
   AGMenuItem *i=new AGMenuItem(this,pString);
   addFixedRow(i->height());
@@ -69,7 +69,7 @@ void AGMenu::addItem(const std::string &pString)
   arrange();
 }
 
-AGMenu &AGMenu::addMenu(const std::string &pString)
+AGMenu &AGMenu::addMenu(const AGStringUtf8 &pString)
 {
   AGSubMenu *s=new AGSubMenu(this,pString);
   addFixedRow(s->height());
@@ -95,7 +95,7 @@ void AGMenu::draw(AGPainter &p)
   //  cdebug(r.project(getRect()).toString());
 }
 
-void AGMenu::eventItemSelected(const std::string &pString)
+void AGMenu::eventItemSelected(const AGString &pString)
 {
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
@@ -113,7 +113,7 @@ void AGMenu::eventItemSelected(const std::string &pString)
 	}
     }
 }
-void AGMenu::eventItemClicked(const std::string &pString)
+void AGMenu::eventItemClicked(const AGString &pString)
 {
   sigSelected(new AGEvent(this,pString));
   

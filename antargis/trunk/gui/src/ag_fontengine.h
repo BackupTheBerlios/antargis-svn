@@ -37,10 +37,10 @@ class AGFontEngine
   //  static bool renderText (AGSurface &pSurface, const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
   //  static bool renderTextOld (AGScreen *pScreen, const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
 
-  static AGTexture *renderText(int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+  static AGTexture *renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &ParamIn);
 
-  static int getWidth(const AGFont &pFont,const std::string &pText);
-  static int getHeight(const AGFont &pFont,const std::string &pText);
+  static int getWidth(const AGFont &pFont,const AGStringUtf8 &pText);
+  static int getHeight(const AGFont &pFont,const AGStringUtf8 &pText);
 };
 
 #endif

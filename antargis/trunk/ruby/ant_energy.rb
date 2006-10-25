@@ -97,5 +97,6 @@ class AntEnergyCreator<AGLayoutCreator
 		puts "AntEnergyCreator:",w
 		return w
 	end
+	@@antEnergyCreator=AntEnergyCreator.new
 end
-$antEnergyCreator=AntEnergyCreator.new
+

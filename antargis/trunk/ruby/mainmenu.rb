@@ -35,7 +35,6 @@ class AntMenuApp <AGApplication
 	include AGHandler
 	def initialize
 		super()
-		$menuapp=self
 		# init menues
 		@menues=[]
 		
@@ -68,7 +67,7 @@ class AntMenuApp <AGApplication
 
 	# MAIN MENU
 	def setupMain()
-		@mainMenu=AGLayout.new($screen)
+		@mainMenu=AGLayout.new(nil)
 		@mainMenu.loadXML(loadFile("data/gui/layout/mainmenu.xml"))
 		@menues.push(@mainMenu)
 		setMainWidget(@mainMenu)
@@ -120,7 +119,7 @@ class AntMenuApp <AGApplication
 
 	# LOAD GAME MENU
 	def setupLoadMenu
-		@loadMenu=AGLayout.new($screen)
+		@loadMenu=AGLayout.new(nil)
 		@loadMenu.loadXML(loadFile("data/gui/layout/loadmenu.xml"))
 		@menues.push(@loadMenu)
 		addHandler(@loadMenu.getChild("exit"),:sigClick,:eventExit)
@@ -136,7 +135,7 @@ class AntMenuApp <AGApplication
 		l.clearList
 		fs.each{|f|
 			x=f.gsub(".antcmp","")
-			l.insertItem(f,x)
+			l.insertItem(f,AGStringUtf8.new(x))  # FIXME: _() ??
 		}
 		if fs.length>0
 			fn="savegames/"+fs[0].gsub("antcmp","png")
@@ -197,7 +196,7 @@ class AntMenuApp <AGApplication
 		l.clearList
 		fs.each{|f|
 			x=f.gsub(".antlvl","")
-			l.insertItem(f,x)
+			l.insertItem(f,AGStringUtf8.new(x))
 		}
 		if fs.length>0
 			fn="data/levels/"+fs[0].gsub("antlvl","png")
@@ -207,7 +206,7 @@ class AntMenuApp <AGApplication
 		end
 	end
 	def setupSingle
-		@singleMenu=AGLayout.new($screen)
+		@singleMenu=AGLayout.new(nil)
 		@singleMenu.loadXML(loadFile("data/gui/layout/single.xml"))
 		@menues.push(@singleMenu)
 		addHandler(@singleMenu.getChild("singleExit"),:sigClick,:eventExit)
@@ -235,15 +234,17 @@ class AntMenuApp <AGApplication
 
 	# CREDITS MENU
 	def setupCredits
-		@creditsMenu=AGLayout.new($screen)
+		@creditsMenu=AGLayout.new(nil)
 		@creditsMenu.loadXML(loadFile("data/gui/layout/credits.xml"))
 		@menues.push(@creditsMenu)
 		addHandler(@creditsMenu.getChild("exit"),:sigClick,:eventExit)
+
+		@creditsMenu.getChild("ticker").menuapp=self
 	end
 
 	# CAMPAIGN MENU	
 	def setupCampaign
-		@campaignMenu=AGLayout.new($screen)
+		@campaignMenu=AGLayout.new(nil)
 		@campaignMenu.loadXML(loadFile("data/gui/layout/campaign.xml"))
 		@menues.push(@campaignMenu)
 		addHandler(@campaignMenu.getChild("exit"),:sigClick,:eventExit)
@@ -288,7 +289,7 @@ class AntMenuApp <AGApplication
 
 	# OPTIONS MENU
 	def setupOptions
-		@optionsMenu=AGLayout.new($screen)
+		@optionsMenu=AGLayout.new(nil)
 		@optionSubMenus=["VideoOptionsMenu","AudioOptionsMenu","GameOptionsMenu"]
 		@optionsMenu.loadXML(loadFile("data/gui/layout/options.xml"))
 		@menues.push(@optionsMenu)
@@ -421,11 +422,6 @@ class AntMenuApp <AGApplication
 	end	
 
 	# load menu
-end
-
-
-if not $main
-	$main=AGMain.new(1024,768,32,false,true)
 end
 
 app=AntMenuApp.new

@@ -1,6 +1,7 @@
 
 class Level
-	def initialize
+	def initialize(app)
+		@app=app
 	end
 
 	def eventTrigger(hero,t)
@@ -26,17 +27,16 @@ class Level
 
 	# use this to end a level
 	def wonLevel
-		puts "WON!!!!!!!!!!!!!!!!!!"
-		$app.setResult(GameResult.new("won"))
+		@app.setResult(GameResult.new("won"))
 	end
 	def lostLevel
-		$app.setResult(GameResult.new("lost"))
+		@app.setResult(GameResult.new("lost"))
 	end
 	def endLevel
-		$app.tryQuit
+		@app.tryQuit
 	end
 	def tellStory(flow)
-		$app.tellStory(flow)
+		@app.tellStory(flow)
 		@story=flow
 	end
 

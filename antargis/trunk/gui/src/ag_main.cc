@@ -89,7 +89,8 @@ AGMain::AGMain()
       cdebug("SDL could not be initialized!");
       exit(1);
     }
-
+  SDL_EnableUNICODE(1);
+		  
   videoInfo=0;
 
   initSoundEngine();
@@ -113,6 +114,9 @@ AGMain::~AGMain()
   cdebug("QUIT");
   SDL_Quit();
   quited=true;
+
+
+  setRubyRaising(true);
 }
 
 void AGMain::flip()
