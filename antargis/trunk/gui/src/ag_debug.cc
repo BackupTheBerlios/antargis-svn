@@ -36,6 +36,21 @@ void setQuiet()
   quietLog=true;
 }
 
+static bool gRubyRaising=true;
+void agRaise(const std::string &s)
+{
+  cdebug("assertiong failed:"<<s);
+  if(gRubyRaising)
+    rb_raise(rb_eRuntimeError,s.c_str(),"");
+  else
+    throw std::runtime_error(s);
+}
+
+void setRubyRaising(bool flag)
+{
+  gRubyRaising=flag;
+}
+
 
 #ifndef MNDEBUG
 int D::d=0;
@@ -51,20 +66,6 @@ std::ostream &getDebug()
 }
 
 
-static bool gRubyRaising=true;
-void agRaise(const std::string &s)
-{
-  cdebug("assertiong failed:"<<s);
-  if(gRubyRaising)
-    rb_raise(rb_eRuntimeError,s.c_str(),"");
-  else
-    throw std::runtime_error(s);
-}
-
-void setRubyRaising(bool flag)
-{
-  gRubyRaising=flag;
-}
 
 
 D::D(std::string c):
