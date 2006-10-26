@@ -27,6 +27,14 @@
 #include <ant_projection.h>
 #include <ag_rubyobj.h>
 
+/**
+   \brief a camera object for moving over a height map
+   \ingroup Engine3d
+
+   This function provides functions for moving a camera about and
+   computation of the used 4x4-matrixes for camera-view and lighting (mainly used for shadows)
+ */
+
 
 class AntCamera
 {

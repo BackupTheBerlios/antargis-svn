@@ -375,5 +375,10 @@ end
 task :doc do
 	puts "running doxygen"
 	`doxygen Doxyfile`
-	`rdoc --op docs/ruby --exclude "(\\.cc|\\.c|skat|test\/|contrib)"`
+	rubies=`find -name "*.rb"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}.join(" ")
+	readmes=`find -name "README"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}.join(" ")
+	headers=`find -name "*.h"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}.join(" ")
+	#puts rubies
+	#exit
+	`rdoc -m README --op docs/ruby #{rubies} #{readmes}` # --exclude "(\\.cc|\\.c|skat|test\/|contrib)"`
 end

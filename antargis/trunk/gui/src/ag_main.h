@@ -24,6 +24,17 @@
 #include <string>
 #include "ag_rubyobj.h"
 
+/**
+ * \defgroup AntargisGUI AntargisGUI
+ * \brief the GUI-library of the game Battles of Antargis
+ * 
+ * This library consists of different mechanisms to make your life easier
+ * with graphical user interfaces:
+ * \see widgets
+ * \see application
+ * \see events
+*/
+
 class AGScreen;
 struct SDL_VideoInfo;
 class AGMain:public AGRubyObject

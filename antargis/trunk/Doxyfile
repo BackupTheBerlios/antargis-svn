@@ -4,7 +4,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Antargis
-PROJECT_NUMBER         = 0.0.1
+PROJECT_NUMBER         = 0.1.9
 #OUTPUT_DIRECTORY       = /home/david/projects/antargis/ant/docs/api/
 OUTPUT_DIRECTORY       = docs/api/
 CREATE_SUBDIRS         = NO
@@ -38,7 +38,7 @@ TAB_SIZE               = 8
 ALIASES                = 
 OPTIMIZE_OUTPUT_FOR_C  = NO
 OPTIMIZE_OUTPUT_JAVA   = NO
-BUILTIN_STL_SUPPORT    = NO
+BUILTIN_STL_SUPPORT    = YES
 DISTRIBUTE_GROUP_DOC   = NO
 SUBGROUPING            = YES
 #---------------------------------------------------------------------------

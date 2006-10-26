@@ -49,10 +49,13 @@ class AGRect2;
 class AGBox3;
 class Node;
 
+/** \brief Simple structure holding an angle in degrees
+ */
 struct AGAngle
 {
   float angle;
   
+  /// @param an angle in degrees
   explicit AGAngle(float a);
 };
 

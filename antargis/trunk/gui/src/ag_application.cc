@@ -80,7 +80,12 @@ AGWidget *AGApplication::getMainWidget()
   return mainWidget;
 }
 
-
+/**
+ * \brief the main-loop of each application
+ *
+ * Each program has one or more application-objects.
+ * An application normally represents a single UI-screen. So it has
+ */
 
 bool AGApplication::run() 
 {
@@ -249,6 +254,13 @@ bool AGApplication::eventIdle()
 }
 
 
+/**
+   \brief prepares the actual drawing process
+
+   prepareDraw runs prepareDraw for the main-widget, which itself runs
+   prepareDraw recursively. This functions are meant to prepare possible
+   texture contents and other things, that might be updated in each frame.
+*/
 void AGApplication::prepareDraw()
 {
   STACKTRACE; 
@@ -265,11 +277,25 @@ void AGApplication::prepareDraw()
 
 AGWidget *pLastDrawn=0;
 
+/**
+ * \brief query redraw
+ *
+ * Queries a complete screen redraw. This makes sense in SDL-mode only.
+ * There a dirty rectangle kind of painting is used.
+ */
+
 void AGApplication::redraw()
 {
   pLastDrawn=0;
 }
 
+/**
+ * \brief calls the draw-function of the main-widget
+
+ * AGApplication::draw() calls the draw-function of the mainWidget and cares
+ * about drawing a custom mouse-cursor, the tooltip and possible overlays.
+ * At the end the screen-buffer is flipped.
+ */
 
 void AGApplication::draw()
 {
@@ -319,10 +345,17 @@ void AGApplication::draw()
   endRender();
 }
 
+/**
+ * \brief quit the application
+ *
+ * This sets the private mRunning to false. One might add a function, that
+ * checks if quitting is ok or reset mRunning to true. But this is not yet
+ * part of AGApplication.
+ */
+
 void AGApplication::tryQuit()
 {
   mRunning=false;
-  
 }
 
 bool AGApplication::eventKeyDown(AGEvent *m)

@@ -31,6 +31,18 @@
 class AGListener;
 class AGSignal;
 
+/** \defgroup events Event handling
+    \brief A small event handling mechanism
+
+    AntargisGUI contains a small event handling mechanism for both ruby and C++.
+    However they do work a little different.
+    
+    Each object that wants to send or receive a message (or event) must be derived from
+    AGMessageObject.
+
+*/
+
+
 
 /** AGEvent is the typical event which is passed when the user does anything.
     You can however derive from it and pass it through a signal.

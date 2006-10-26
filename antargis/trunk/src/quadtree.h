@@ -157,6 +157,14 @@ class QuadTree
     Node *root;
 
   public:
+
+    /**
+     * A quadtree tiles big rectangles into smaller ones. Elements get inserted into the smallest rectangle that contains an element.
+     * So you have a starting-rectangle
+     * @param r Starting rectangle, that gets tiled. This should contain everything that you want to store here. But don't make this
+     *  rectangle too big, because otherwise must be tiled several times before even one object can be inserted.
+    */
+
     QuadTree(AGRect2 r)
     {
       root=new Node(r);
@@ -166,7 +174,10 @@ class QuadTree
 	delete root;
       }
 
-    /// insert an object
+    /**
+       insert an object
+       @param t the object you want to insert
+    */
     void insert(T* t)
     {
       root->insert(t);

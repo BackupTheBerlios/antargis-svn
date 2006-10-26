@@ -31,7 +31,39 @@
 class AGTooltip;
 class AGLayout;
 
+/** 
+    \defgroup widgets Widgets
+    \brief contains all the widgets
+
+    Everything that has a display on screen is called a widget. There are plenty of different widget-types
+    and you are free to define new ones.
+
+    An AGApplication object has one single main-widget, that you can define.
+    All other widgets are children (or grandchildren ...) of this main-widget.
+
+    A simple example how to use nested widgets is:
+    <pre>
+    AGWidget *parent,*w;
+    AGApplication app;
+    
+    parent=new AGWidget(0,AGRect2(0,0,640,480));
+    w=new AGWidget(parent,AGRect2(0,0,100,100));
+    parent->addChild(w);
+    app.setMainWidget(parent);
+    </pre>
+
+    Nearly all of the widget-types are created this way. Adding a widget to another will automate
+    the drawing and event-processing.
+
+*/
+
+
+
 /**
+   \brief base class for all widgets
+
+   \ingroup widgets
+
    AGWidget is the base class for all widgets. It manages the hierarchy and memory of the widgets.
    You should never delete an AGWidget for yourself if you don't know exactly what you're doing.
    The widgets get deleted by their parents

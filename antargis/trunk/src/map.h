@@ -23,6 +23,13 @@
 
 #include "height_map.h"
 
+/**
+ * \defgroup GameEngine BoA Game-Engine
+ * \brief the C++ parts of the BoA game-engine
+ *
+*/
+
+
 //FIXME: add quadtree
 
 template<class T>

@@ -33,6 +33,9 @@ class AGEdit;
 class AGImage;
 
 /**
+   \brief implements push-buttons
+   \ingroup widgets
+
    AGButton represents a button, which can hold a text-caption or an image-caption, but not both.
    Further it can have following states:
 */

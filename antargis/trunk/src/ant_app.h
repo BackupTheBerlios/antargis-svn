@@ -1,6 +1,26 @@
 #ifndef ANT_APP_H
 #define ANT_APP_H
 
+/**
+ *	
+ * \mainpage Battles of Antargis - C++ documentation
+ *  \section Overview
+ *    This is the C++ part of the API-documentation.
+ *    It consists of three major parts:
+ *    \see AntargisGUI
+ *    \see Engine3d
+ *    \see GameEngine
+ * 
+ *    For information about the overall-architecture please refer to the ruby-documentation at: ../ruby/index.html
+ *
+ * 
+
+
+
+*/
+
+
+
 #include "scene.h"
 #include "ant_renderer.h"
 #include <iostream>

@@ -15,6 +15,15 @@
 #include "ant_camera.h"
 
 /**
+   \defgroup Engine3d 3d-engine of BoA
+   \brief a very small 3d-engine used within BoA
+
+   For more information go to \see Scene
+*/
+
+
+
+/**
    some helper structure, which is used for storing
    results when picking. it holds some information about:
    * distance to camera (for sorting)
@@ -34,8 +43,12 @@ template<class T>
 class QuadTree;
 
 
-/** Scene is scene-manager. it holds all the 3d-objects (meshes and particles).
-    These objects are stored in a quad-tree (could easily be exchanged for an octree, if needed).
+/** 
+    \brief quad-tree based scene-manager
+    \ingroup Engine3d
+
+    Scene is scene-manager. it holds all the 3d-objects (meshes and particles).
+    These objects are stored in a QuadTree (could easily be exchanged for an octree, if needed).
     It takes further for drawing modes like picking, shadow-rendering and depth-drawing (for shadow-depth-computation).
     It contains a camera-object!
     So in the current state it's not possible to render the same scene from to places at the same time.

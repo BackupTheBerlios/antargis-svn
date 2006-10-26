@@ -26,15 +26,52 @@
 #include <ag_tooltip.h>
 #include <ag_texture.h>
 
+/**
+   \defgroup application Application
+*/
+
 
 /**
+   \brief Base class for application - holds the main loop
+   \ingroup application
+
   Use AGApplication as base class your application's class.
-  It contains a main-loop, which is started by run();
-  There are several events that can be overriden. If you want to
-  quit this application call tryQuit().
+  In this library it's assumed that you have different parts of your program, that
+  are really different. Each of these parts has its own AGApplication.
+  The actual control of these applications is done through a main-loop, that
+  queries new events from libSDL and gives them to the correct widgets.
+  This main-loop can by started by run(). After this your have some possibilities to access
+  control. FOr instance there are the different event* functions, which you can override in
+  an AGApplication's subclass.
+
+  If you want to quit this application call tryQuit().
 
   Each AGApplication has a single main-widget, which is drawn in every frame.
   Set it by calling setMainWidget().
+
+  The typical usage looks like this:
+  <pre>
+  class MyApp:public AGApplication
+  {
+    public:
+    bool eventFrame(float t)
+    {
+      std::cout<<"In this frame "<<t<<" seconds have passed."<<std::endl;
+    }
+  };
+
+  int main()
+  {
+    // here you have to init the video mode
+    AGMain main;
+    main.initVideo(800,600,32,false,false);
+
+    // the actual example
+    MyApp app;
+    app.run();
+    return 0;
+  }
+  </pre>
 */
 class AGApplication:public AGMessageObject
 {
@@ -44,11 +81,13 @@ class AGApplication:public AGMessageObject
 
   bool run();
 
-  virtual bool eventIdle();
+  /// called in each frame when idling
+  virtual bool eventIdle();           
   /// called between event-handling and drawing
   virtual bool eventFrame(float pTime);
   /// called after drawing - so before event handling
   virtual bool eventFrameEnd(float pTime);
+
 
   virtual bool eventQuit(AGEvent *m);
   virtual bool eventKeyDown(AGEvent *m2);
