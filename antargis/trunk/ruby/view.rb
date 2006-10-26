@@ -231,7 +231,7 @@ class AntButtonPanel<AGWidget
 	end
 	def setName(n)
 		if getChild("heroName")
-			getChild("heroName").setText(n)
+			getChild("heroName").setText(_(n))
 		end
 	end
 	
@@ -343,6 +343,6 @@ class AntInfoBox<AGLayout
 	def initialize(p,n)
 		super(p)
 		loadXML(loadFile("data/gui/layout/infobox.xml"))
-		getChild("infotext").setText(n)
+		getChild("infotext").setText(_(n))
 	end
 end

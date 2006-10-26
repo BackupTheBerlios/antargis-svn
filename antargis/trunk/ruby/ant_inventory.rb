@@ -89,8 +89,8 @@ private
 			if value.class!=String
 				mv=value.to_i.to_s
 			end
-			if w.getText!=mv
-				w.setText mv
+			if w.getText.to_s!=mv
+				w.setText AGStringUtf8.new(mv)
 			end
 		end
 	end
@@ -100,7 +100,7 @@ private
 		if c.class==AGButton
 			c.setCaption(t)
 		else
-			c.setText(t)
+			c.setText(AGStringUtf8.new(t))
 		end
 	end
 	def updateInspection
@@ -109,7 +109,6 @@ private
 			checkFriend
 			res=@inspect.resource.getAll
 			res["men"]=@inspect.menCount.to_f
-#			res.each{|a,b|
 			@resTypes.each{|a|
 				b=res[a]
 				b||=0
@@ -126,9 +125,9 @@ private
 
 			if bossname
 				if bossname==@inspect.getName or bossname==""
-					getChild("minion").setText("Obeys nobody")
+					getChild("minion").setText(_("Obeys nobody"))
 				else
-					getChild("minion").setText("Obeys "+bossname.to_s)
+					getChild("minion").setText(_("Obeys {1}",bossname.to_s))
 				end
 			end
 			#redraw

@@ -35,8 +35,16 @@ end
 class AIConditionFoodLow<AICondition
 	def value(hero)
 		puts "FOOD LOW ???"
-		if interface.getResourceInfo(hero,"food")<5 and interface.isAppliableResourceNear(hero,"food")
+		if hero.resources("food")<5
 			puts "YES"
+			if hero.findNearResource("food").nil?
+				puts "BUT NOTHING NEAR!!"
+				if hero.resources("food")<1
+					puts "TOO LAZY TO WALK _ just dying!!"
+					return 1
+				end
+				return 0
+			end
 			return 1
 		else
 			puts "NO"
@@ -68,16 +76,16 @@ end
 # get food from some building which is owned by the hero
 class AIGatherFoodAction<AIAction
 	def execute(hero)
-		unit=interface.findResource(hero,"food")
+		unit=hero.findNearResource("food")
 		puts "HERO TAKES FOOD"
-		@interface.takeFood(hero,unit)
+		hero.takeFood(unit)
 	end
 end
 
 # rest for a second
 class AIRestAction<AIAction
 	def execute(hero)
-		@interface.rest(hero,1)
+		hero.rest(1)
 	end
 end
 
@@ -85,17 +93,17 @@ class AIAttackAction<AIAction
 	def execute(hero)
 		e=findUsableEnemy(hero)
 		if e
-			@interface.attack(hero,e)
+			hero.attack(e)
 		end
 	end
 	private
 	def findUsableEnemy(hero)
-		enemyPlayers=@interface.getPlayerNames-[@interface.getPlayerName]
-		allEnemyHeroes=enemyPlayers.collect{|p|@interface.getHeroes(p)+@interface.getVillages(p)}.flatten
-		allEnemyHeroes.sort!{|a,b|@interface.getHeroTroopCount(a)<=>@interface.getHeroTroopCount(b)}
+		enemyPlayers=@interface.enemyPlayers
+		allEnemyHeroes=enemyPlayers.collect{|p|p.getHeroes+p.getBuildings}.flatten
+		allEnemyHeroes.sort!{|a,b|a.menCount<=>b.menCount}
 		e=allEnemyHeroes[0]
 		if e
-			if @interface.getHeroTroopCount(e)>@interface.getHeroTroopCount(hero)
+			if e.menCount>hero.menCount
 				e=nil
 			end
 		end

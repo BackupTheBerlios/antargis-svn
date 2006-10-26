@@ -30,9 +30,9 @@ class AntBasicAI
 	end
 	def eventInit
 	end
-	def eventHeroWithoutJob(heroId)
+	def eventHeroWithoutJob(hero)
 	end
-	def eventHeroAttacked(heroId,enemyId)
+	def eventHeroAttacked(hero,enemy)
 	end
 	def eventTriggerHit(heroId,triggerName)
 	end
@@ -51,11 +51,11 @@ class AntAttackAI<AntBasicAI
 		@rules.push(AIRule.new(AICondition.new,AIRestAction.new,interface)) # dummy rule - always rest
 	end
 
-	def eventHeroWithoutJob(heroId)
+	def eventHeroWithoutJob(hero)
 		@rules.each{|r|
-			if r.value(heroId)>0
+			if r.value(hero)>0
 				puts "GO"
-				r.execute(heroId)
+				r.execute(hero)
 				return
 			end
 		}

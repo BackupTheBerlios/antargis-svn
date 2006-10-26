@@ -44,7 +44,15 @@ class AGButton:public AGWidget
 {
  public:
   /// the different drawing states
-  enum State {NORMAL,LIGHTED,PRESSED,CHECKED,CHECKEDLIGHTED,CHECKEDPRESSED,DISABLED};
+   enum State {
+     NORMAL,         //!< the normal state of a button
+     LIGHTED,        //!< the button is lighted or hovered
+     PRESSED,        //!< the button is pressed (typically hovered)
+     CHECKED,        //!< the button is checked (and not pressed)
+     CHECKEDLIGHTED, //!< a hovered and checked button
+     CHECKEDPRESSED, //!< hovered, checked and pressed
+     DISABLED        //!< the button disabled (greyed)
+   };
 
   AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,int id=-1);
 

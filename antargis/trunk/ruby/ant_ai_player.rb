@@ -1,12 +1,14 @@
 class AntAIPlayer
-	def initialize(ai)
+	attr_accessor :ai
+	def initialize(name,map)
 		@heroes=[]
 		@heronames=[]
-		@ai=ai
-		@name=@ai.interface.getPlayerName
+		@name=name
+		@map=map
+		#@name=@ai.interface.myPlayer.getName
 	end
 	def saveXML(n)
-		n.set("name",@name)
+		n.set("name",name)
 		@heroes.each{|hero|
 			c=n.addChild("hero")
 			c.set("name",hero.getName)
@@ -58,7 +60,9 @@ class AntAIPlayer
 
 
 	def eventJobFinished(hero,lastJob)
-		@ai.eventHeroWithoutJob(hero.uid)
+		h=AIMyHero.new(hero,self,@map)
+		raise "Hero is not valid" unless h.valid
+		@ai.eventHeroWithoutJob(h)
 	end
 
 end

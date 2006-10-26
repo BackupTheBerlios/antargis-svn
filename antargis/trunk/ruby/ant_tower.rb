@@ -23,7 +23,9 @@ class AntTower<AntHouse
 	def resourceChanged
 		puts "RESOURCE CHANGED"
 		@storeGood.each{|r|
+			puts "#{self} #{r} #{resource.get(r)} #{getName}"
 			setProvide(r,resource.get(r)>0)
+			puts provides(r)
 		}
 	end
 

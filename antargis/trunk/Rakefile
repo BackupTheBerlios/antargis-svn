@@ -162,7 +162,7 @@ end
 ############################################################################################
 
 if $swig!=""
-	myInterfaces=interfaceHeaders+["src/interface.i"]
+	myInterfaces=interfaceHeaders+["src/interface.i","src/AGString.i"]
 	file ["src/swig.cc"] => ["src/nantmarker.hh"]+myInterfaces do |t|
 		msh "cd src; swig -v -Wall -ruby -c++ -DAGEXPORT #{$INCLUDEDIRS}-I/usr/lib/ruby/1.8/i486-linux -I/usr/include/SDL -o swig.cc interface.i 2>&1"
 	end

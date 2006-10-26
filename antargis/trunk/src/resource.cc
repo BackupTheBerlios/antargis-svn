@@ -6,39 +6,39 @@
 Resource::Resource()
 {
 }
-float Resource::get(const AGString &pName)
+float Resource::get(const std::string &pName)
 {
   return r[pName];
 }
-void Resource::add(const AGString &pName,float value)
+void Resource::add(const std::string &pName,float value)
 {
   r[pName]+=value;
 }
-void Resource::sub(const AGString &pName,float value)
+void Resource::sub(const std::string &pName,float value)
 {
   r[pName]=std::max(r[pName]-value,0.0f);
 }
-void Resource::set(const AGString &pName,float value)
+void Resource::set(const std::string &pName,float value)
 {
   r[pName]=value;
 }
 
 void Resource::takeAll(Resource &pr)
 {
-  std::map<AGString,float>::iterator i=pr.r.begin();
+  std::map<std::string,float>::iterator i=pr.r.begin();
   for(;i!=pr.r.end();i++)
     add(i->first,i->second);
   pr.r.clear();
 }
 
-void Resource::take(Resource &r,const AGString &pName)
+void Resource::take(Resource &r,const std::string &pName)
 {
   add(pName,r.get(pName));
   r.set(pName,0);
 }
 
 
-std::map<AGString,float> Resource::getAll() const
+std::map<std::string,float> Resource::getAll() const
 {
   return r;
 }
@@ -46,7 +46,7 @@ std::map<AGString,float> Resource::getAll() const
 
 void Resource::saveXML(Node &node) const
 {
-  for(std::map<AGString,float>::const_iterator i=r.begin();i!=r.end();++i)
+  for(std::map<std::string,float>::const_iterator i=r.begin();i!=r.end();++i)
     node.set(i->first,AGString(i->second));
   
 }
@@ -59,7 +59,7 @@ void Resource::loadXML(const Node &node)
 
 bool Resource::empty() const
 {
-  for(std::map<AGString,float>::const_iterator i=r.begin();i!=r.end();++i)
+  for(std::map<std::string,float>::const_iterator i=r.begin();i!=r.end();++i)
     if(i->second>0)
       return false;
   return true;

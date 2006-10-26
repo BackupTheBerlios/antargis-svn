@@ -58,7 +58,7 @@ class AntLocalizer<AGLocalizer
 		return r
 	end
 	def myprocess(x)
-		if x==""
+		if x.to_s==""
 			return AGStringUtf8.new(x)
 		end
 		if @table.member?(x)
@@ -96,12 +96,12 @@ private
 		@table.each{|n,v|
 			if v=="" or v==nil
 				#puts "98: #{n} -- #{v}"
-				o+=n+";;"+v+"\n"
+				o+=n.to_s+";;"+v.to_s+"\n"
 			end
 		}
 		@table.each{|n,v|
 			if v!="" and v!=nil
-				o+=n+";;"+v+"\n"
+				o+=n.to_s+";;"+v.to_s+"\n"
 			end
 		}
 		saveFile("data/local/local_#{@lang}.txt",o)

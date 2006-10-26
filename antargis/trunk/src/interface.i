@@ -3,6 +3,9 @@
 %include "typemaps.i"
 
 %include "nantmarker.hh"
+/*
+%typemap(typecheck) AGString= char *;
+%typemap(typecheck) const AGString &= char *;
 
 %typemap(in) AGString () {
     if (TYPE($input) == T_STRING) {
@@ -52,11 +55,9 @@
         }
     }
 
+*/
 
 
-
-%typemap(typecheck) AGString= char *;
-%typemap(typecheck) const AGString &= char *;
 
 
 %{
@@ -64,6 +65,7 @@
 #include "antargisgui.h"
 %}
 %include "std_string.i"
+%include "AGString.i"
 %include "std_vector.i"
 %include "std_map.i"
 
@@ -73,6 +75,7 @@
 %template(PickResult) std::vector<PickNode>;
 %template(EntityVector) std::vector<AntEntityPtr>;
 %template(ResourceMap) std::map<std::string,float>;
+%template(AGResourceMap) std::map<AGString,float>;
 %template(AGNodeList) std::vector<Node>;
 %template(AGNodePList) std::vector<Node*>;
 %template(AGMatrixVector) std::vector<AGMatrix4>;

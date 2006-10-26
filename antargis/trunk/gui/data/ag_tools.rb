@@ -153,6 +153,9 @@ class Array
 		sort{0.5 <=> rand}
 	end
 end
+# just in case it isn't defined
+class AGString
+end
 class String
 	alias oldadd +
 	def +(p)

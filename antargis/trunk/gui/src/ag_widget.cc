@@ -894,10 +894,24 @@ void AGWidget::queryRedraw()
   regChange();
 }
 
+/**
+   \brief special function for "using textures"
+
+   within a texture-garbage-collection run all unused textures get cleaned,
+   so this function "uses" the textures. This way they won't get collected
+*/
 void AGWidget::useTextures()
 {
 }
 
+/**
+   \brief special function for "using textures"
+
+   within a texture-garbage-collection run all unused textures get cleaned,
+   so this function "uses" the textures. This way they won't get collected.
+
+   This function calles useTextures() recursively. Don't override this one!
+*/
 void AGWidget::useTexturesRecursive()
 {
   useTextures();

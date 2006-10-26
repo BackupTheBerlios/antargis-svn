@@ -275,9 +275,10 @@ class AntRubyMap<AntMap
 				player=playerTypes[node.getName].new("")
 			else
 				puts "TYPE #{type}"
-				aiInterface=AIInterface.new(self,node.get("name"))
+				player=AntAIPlayer.new(node.get("name"),self)
+				aiInterface=AIInterface.new(self,player)
 				ai=type.new(aiInterface)
-				player=AntAIPlayer.new(ai)
+				player.ai=ai
 			end
 		
 			player.loadXML(node)

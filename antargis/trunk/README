@@ -27,7 +27,7 @@ These parts are:
 
 1. On information about Antargis GUI-lib go to link:files/gui/README.html
 2. Information about Antargis game-engine can be found at link:files/src/README.html
-3.   
+3. Game logic, esp. Multiplayer, AI- and level-scripting: files/ruby/README.html
 
 == Installation
 

@@ -29,6 +29,15 @@
 
 using namespace std;
 
+/**
+ * \brief creates a button with a text
+ *
+ * @param pParent the parent widget
+ * @param r       relative position within the parent
+ * @param pText   the caption displayed on the button. take '' for no text
+ * @param id      currently not any longer used id
+*/
+
 AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,int id):
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
@@ -228,10 +237,20 @@ void AGButton::setHeight(float h)
     (*i)->setRect(getRect().shrink(borderWidth));
 }
 
+/**
+   \return returns the text displayed on the button
+*/
 AGStringUtf8 AGButton::getCaption() const
 {
   return mText;
 }
+
+/**
+   dis- or enables the button. disabled buttons are typically displayed greyed and are 
+   not hoverable or clckable
+
+   \param pEnable true or false
+*/
 
 void AGButton::setEnabled(bool pEnable)
 {
@@ -340,10 +359,22 @@ AGButton &toAGButton(AGWidget &pWidget)
   return dynamic_cast<AGButton&>(pWidget);
 }
 
+/**
+   \brief can this widget widget be focused.
+
+   \return always true
+*/
 bool AGButton::canFocus() const
 {
   return true;
 }
+
+/**
+   \brief special function for "using textures"
+
+   within a texture-garbage-collection run all unused textures get cleaned,
+   so this function "uses" the textures. This way they won't get collected
+*/
 
 void AGButton::useTextures()
 {
@@ -351,5 +382,4 @@ void AGButton::useTextures()
     i->second.useTextures();
   for(std::map<State,AGBorder>::iterator i=mBorder.begin();i!=mBorder.end();++i)
     i->second.useTextures();
-  
 }

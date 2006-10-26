@@ -269,7 +269,7 @@ class AntGameApp <AntRubyView
 			end
 			puts "FPS:"+fps
 			puts "pick-tris:"+getScene.getPickTriangles.to_s
-			@statusBar.setText("FPS:#{fps}")
+			@statusBar.setText(_("FPS:{1}",fps.to_s))
 			puts "Tris:"+getScene.getTriangles.to_s
 			puts "MESHES:"+getScene.getDrawnMeshes.to_s
 			@frameCount=0
@@ -576,7 +576,7 @@ class AntGameApp <AntRubyView
 		@buttonpanel.setHero(h)
 
 		for i in 0..2
-			if @layout.getChild("HeroName#{i}").getText==h.getName
+			if @layout.getChild("HeroName#{i}").getText.to_s==h.getName
 				@layout.getChild("hero#{i}").setChecked(true)
 			end
 		end
