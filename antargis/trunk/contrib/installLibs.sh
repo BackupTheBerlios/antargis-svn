@@ -24,8 +24,12 @@ download_file()
   fi
 }
 
-
 download_files()
+{
+	svn export --force svn://svn.berlios.de/antargis/contrib .
+}
+
+download_files_old()
 {
 	download_file "${SMPEG}" "ftp://sunsite.dk/pub/os/linux/loki/open-source/smpeg/${SMPEG}"
 
