@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setupMain (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 69</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setupMain</span>()
+                <span class="ruby-ivar">@mainMenu</span>=<span class="ruby-constant">AGLayout</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>)
+                <span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">loadFile</span>(<span class="ruby-value str">&quot;data/gui/layout/mainmenu.xml&quot;</span>))
+                <span class="ruby-ivar">@menues</span>.<span class="ruby-identifier">push</span>(<span class="ruby-ivar">@mainMenu</span>)
+                <span class="ruby-identifier">setMainWidget</span>(<span class="ruby-ivar">@mainMenu</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;quit&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventQuit</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;credits&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventCredits</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;campaign&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventCampaign</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;single&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventSingle</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;tutorial&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventTutorial</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;load&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventLoadGame</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@mainMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;options&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventOptions</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

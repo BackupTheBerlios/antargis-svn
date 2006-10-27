@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntRubyMap)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/map.rb, line 62</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">pScene</span>,<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>,<span class="ruby-identifier">playerName</span>=<span class="ruby-value str">&quot;Rowen&quot;</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">pScene</span>,<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                <span class="ruby-ivar">@pause</span>=<span class="ruby-keyword kw">false</span> <span class="ruby-comment cmt"># is game paused</span>
+
+                <span class="ruby-ivar">@@systemTime</span>=<span class="ruby-value">0</span><span class="ruby-value">.0</span>  <span class="ruby-comment cmt"># systemTime is needed for the playing of sounds - so they won't be played too often</span>
+                <span class="ruby-ivar">@curTime</span>=<span class="ruby-value">0</span><span class="ruby-value">.0</span>     <span class="ruby-comment cmt"># curTime holds the current &quot;date&quot; of the world; the age of entities is measures by this</span>
+
+                <span class="ruby-ivar">@playerName</span>=<span class="ruby-identifier">playerName</span>
+                <span class="ruby-ivar">@players</span>=[]
+                <span class="ruby-ivar">@myPlayer</span>=<span class="ruby-keyword kw">nil</span>
+
+                <span class="ruby-ivar">@triggers</span>=[]                  <span class="ruby-comment cmt"># triggers are being touched by heroes and are checked in each frame</span>
+
+                <span class="ruby-ivar">@heroes</span>=[]                            <span class="ruby-comment cmt"># all heroes in the world</span>
+
+                <span class="ruby-ivar">@started</span>=<span class="ruby-keyword kw">false</span>                <span class="ruby-comment cmt"># started holds information about the map was already started. this is used for level-scripting</span>
+
+                <span class="ruby-ivar">@targets</span>={}
+
+                <span class="ruby-comment cmt"># gather all entity types and map them to their xmlNames</span>
+                <span class="ruby-ivar">@entTypes</span>=<span class="ruby-identifier">getDescendantsOfClass</span>(<span class="ruby-constant">AntRubyEntity</span>)
+                <span class="ruby-ivar">@entTypeMap</span>={}
+                <span class="ruby-ivar">@entTypes</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">xml</span>=<span class="ruby-identifier">t</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">xml</span>=<span class="ruby-identifier">xml</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>].<span class="ruby-identifier">downcase</span><span class="ruby-operator">+</span><span class="ruby-identifier">xml</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">1000</span>]
+                        <span class="ruby-ivar">@entTypeMap</span>[<span class="ruby-identifier">xml</span>]=<span class="ruby-identifier">t</span>
+                }
+
+                <span class="ruby-ivar">@filename</span>=<span class="ruby-value str">&quot;dummy&quot;</span>  <span class="ruby-comment cmt"># a dummy filename - used for level scripting</span>
+                <span class="ruby-ivar">@uidstart</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-constant">AntRubyEntity</span>.<span class="ruby-identifier">setMap</span>(<span class="ruby-keyword kw">self</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

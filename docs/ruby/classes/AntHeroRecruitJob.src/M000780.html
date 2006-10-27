@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>check (AntHeroRecruitJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 569</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">moveFinished</span>
+                        <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">formation</span>=<span class="ruby-constant">AntFormationRest</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@hero</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHero</span>
+                                <span class="ruby-keyword kw">if</span> (<span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@state</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/recruit/</span>)
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@want</span><span class="ruby-operator">==</span><span class="ruby-value">0</span> <span class="ruby-keyword kw">then</span> 
+                                                <span class="ruby-ivar">@state</span>=<span class="ruby-value str">&quot;wait_recruit&quot;</span>
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">1</span>)
+                                                <span class="ruby-identifier">nman</span>=<span class="ruby-ivar">@target</span>.<span class="ruby-identifier">takeMan</span>
+                                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">nman</span>.<span class="ruby-identifier">nil?</span>
+                                                        <span class="ruby-ivar">@wantedMen</span>=<span class="ruby-value">0</span>
+                                                        <span class="ruby-keyword kw">return</span>
+                                                <span class="ruby-keyword kw">end</span>
+                                                <span class="ruby-identifier">nman</span>.<span class="ruby-identifier">setBoss</span>(<span class="ruby-ivar">@hero</span>)
+                                                <span class="ruby-identifier">nman</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;to_recruit&quot;</span>)
+                                                <span class="ruby-ivar">@want</span>=<span class="ruby-ivar">@want</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+
+                                                <span class="ruby-comment cmt"># FIXME:</span>
+                                                <span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                                                        <span class="ruby-identifier">m</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;to_recruit&quot;</span>)
+                                                }
+                                                <span class="ruby-ivar">@restingMen</span>=<span class="ruby-value">0</span>
+                                                <span class="ruby-ivar">@wantedMen</span>=<span class="ruby-ivar">@want</span><span class="ruby-operator">+</span><span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">man</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">getMode</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;to_recruit&quot;</span>
+                                                <span class="ruby-identifier">fp</span>=<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getFormation</span>(<span class="ruby-identifier">man</span>,<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getPos2D</span>)
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">fp</span>,<span class="ruby-value">0</span>)
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;recruit_torest&quot;</span>)
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;recruit_torest&quot;</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">1</span>)
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;recruit_resting&quot;</span>)
+                                                <span class="ruby-ivar">@restingMen</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;RESTTEST: #{@restingMen} #{@wantedMen}&quot;</span>
+                                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@restingMen</span><span class="ruby-operator">==</span><span class="ruby-ivar">@wantedMen</span>
+                                                        <span class="ruby-ivar">@finished</span>=<span class="ruby-keyword kw">true</span>
+                                                <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;recruit_resting&quot;</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">10</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

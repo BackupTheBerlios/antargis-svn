@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>decideWhatsToDo (AntWolf)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_wolf.rb, line 162</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decideWhatsToDo</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@job</span><span class="ruby-operator">==</span><span class="ruby-identifier">:resting</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">getFood</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>
+                                <span class="ruby-ivar">@job</span>=<span class="ruby-identifier">:resting</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;GETTING NEW SHEEP&quot;</span>
+                                <span class="ruby-ivar">@sheep</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getNext</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-value str">&quot;sheep&quot;</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@sheep</span>
+                                        <span class="ruby-ivar">@job</span>=<span class="ruby-identifier">:killsheep</span>
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-ivar">@job</span>=<span class="ruby-identifier">:resting</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                
+                        <span class="ruby-identifier">assignJobToAll</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">assignJob</span>(<span class="ruby-keyword kw">self</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

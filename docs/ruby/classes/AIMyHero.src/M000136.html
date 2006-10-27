@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>findNearResource (AIMyHero)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_ai_interface.rb, line 324</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">findNearResource</span>(<span class="ruby-identifier">resourceName</span>,<span class="ruby-identifier">far</span>=<span class="ruby-value">10</span>)
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">resourceName</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">far</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>)
+                <span class="ruby-identifier">atLeast</span>=<span class="ruby-value">3</span>
+                <span class="ruby-identifier">atLeast</span>=<span class="ruby-value">0</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">valid</span>
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">getSource</span>(<span class="ruby-ivar">@ent</span>,<span class="ruby-identifier">resourceName</span>,<span class="ruby-identifier">atLeast</span>)
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

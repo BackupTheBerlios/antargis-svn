@@ -1,0 +1,81 @@
+.TH "AGWindow" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGWindow \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_window.h>\fP
+.PP
+Inherits \fBAGTable\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGWindow\fP (\fBAGWidget\fP *pWidget, const \fBAGRect2\fP &pRect, const \fBAGStringUtf8\fP &pTitle='', const \fBAGString\fP &pTheme='')"
+.br
+.ti -1c
+.RI "void \fBaddChild\fP (\fBAGWidget\fP *w)"
+.br
+.ti -1c
+.RI "\fBAGWidget\fP * \fBgetClient\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "bool \fBeventDragBy\fP (\fBAGEvent\fP *event, const \fBAGVector2\fP &pDiff)"
+.br
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBtryClose\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetClientRect\fP () const "
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigClose\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGWindow::AGWindow (\fBAGWidget\fP * pWidget, const \fBAGRect2\fP & pRect, const \fBAGStringUtf8\fP & pTitle = \fC''\fP, const \fBAGString\fP & pTheme = \fC''\fP)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGWindow::addChild (\fBAGWidget\fP * w)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGWindow::close ()"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGWindow::eventDragBy (\fBAGEvent\fP * event, const \fBAGVector2\fP & pDiff)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGWindow::eventMouseButtonDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "\fBAGWidget\fP * AGWindow::getClient ()"
+.PP
+.SS "\fBAGRect2\fP AGWindow::getClientRect () const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGWindow::tryClose (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBAGSignal\fP \fBAGWindow::sigClose\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

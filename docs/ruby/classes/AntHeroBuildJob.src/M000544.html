@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntHeroBuildJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_buildjob.rb, line 3</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-identifier">targetpos</span>,<span class="ruby-identifier">building</span>)
+
+
+                <span class="ruby-identifier">tpos</span>=<span class="ruby-identifier">targetpos</span>
+                <span class="ruby-identifier">tpos</span>=<span class="ruby-identifier">targetpos</span>.<span class="ruby-identifier">getPos2D</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">targetpos</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntBuildingSite</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">tpos</span>,<span class="ruby-value">5</span>)
+                <span class="ruby-ivar">@targetpos</span>=<span class="ruby-identifier">tpos</span>
+                <span class="ruby-ivar">@building</span>=<span class="ruby-identifier">building</span>
+                <span class="ruby-ivar">@usedmen</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-ivar">@restype</span>={}
+                
+                <span class="ruby-ivar">@flat</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">targetpos</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntBuildingSite</span>)
+                        <span class="ruby-ivar">@target</span>=<span class="ruby-identifier">targetpos</span>
+                        <span class="ruby-ivar">@building</span>=<span class="ruby-ivar">@target</span>.<span class="ruby-identifier">building</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-comment cmt"># make buildingsite</span>
+                        <span class="ruby-ivar">@target</span>=<span class="ruby-constant">AntBuildingSite</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-identifier">targetpos</span>)
+                        <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">building</span>=<span class="ruby-identifier">building</span>
+                        <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">insertEntity</span>(<span class="ruby-ivar">@target</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

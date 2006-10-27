@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Thu Oct 26 11:28:55 CEST 2006</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2>Description</h2>
+<p>
+Battles of Antargis is a project to develop a real-time-strategy (RTS)
+game, which is a mixture of 3 three games:
+</p>
+<ul>
+<li>Powermonger
+
+</li>
+<li>Settlers
+
+</li>
+<li>Warcraft
+
+</li>
+</ul>
+<p>
+The main purpose of this game is conquering a medieval-like world. While
+doing so with your hero(es) you meet friends and enemies. Enemies can be
+fought with your troopers that you can arm with weapons and armour. In some
+cases you&#8217;ll have to build these weapons or new buildings.
+</p>
+<p>
+The deciding differences to normal RTS-games like Warcraft are:
+</p>
+<ul>
+<li><tt>Story-bound</tt> - the game is strongly story-bound. So you will be
+told some story while playing the game and not only in between the
+different levels
+
+</li>
+<li><tt>Only 2 unit-types</tt> - This game only provides 2 kinds of units:
+heroes and troopers. The latter are the normal people, which do their work
+and can be recruited by heroes. Each player has an avatar within the game.
+This one is the player himself. So if this avatar dies, the game (or the
+level) is lost. The player can however gain control over other heroes.
+
+</li>
+<li><tt>Restricted control</tt> - You can&#8217;t control your troopers
+directly. You can assign jobs to your heroes. They will then automatically
+control their troopers.
+
+</li>
+</ul>
+<h2>Overview</h2>
+<p>
+The game is devided into several parts, which have each a specified
+purpose. These parts are:
+</p>
+<ul>
+<li>a graphical-user-interface (GUI) library, which is called AntargisGUI
+
+</li>
+<li>a 3d-engine
+
+</li>
+<li>a c++-game-engine
+
+</li>
+<li>the actual game-logic in ruby
+
+</li>
+<li>much glue-code in ruby for menus, dialogs and the like
+
+</li>
+</ul>
+<ol>
+<li>On information about Antargis GUI-lib go to <a
+href="gui/README.html">files/gui/README.html</a>
+
+</li>
+<li>Information about Antargis game-engine can be found at <a
+href="src/README.html">files/src/README.html</a>
+
+</li>
+<li>Game logic, esp. Multiplayer, AI- and level-scripting:
+files/ruby/README.html
+
+</li>
+</ol>
+<h2>Installation</h2>
+<p>
+For installation and building have a look at the INSTALL file.
+</p>
+<p>
+Run the game by simply starting antargis: &gt; ./antargis
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>processMessage (LoginServer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File server/server.rb, line 56</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">processMessage</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">m</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">m</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">NewConnectionMessage</span>
+                                <span class="ruby-identifier">seed</span>=<span class="ruby-identifier">myhash</span>(<span class="ruby-identifier">rand</span>.<span class="ruby-identifier">to_s</span>)
+                                <span class="ruby-ivar">@challenges</span>[<span class="ruby-identifier">c</span>]=<span class="ruby-identifier">seed</span>
+                                <span class="ruby-identifier">cm</span>=<span class="ruby-constant">ChallengeMessage</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seed</span>,<span class="ruby-identifier">$VERSION</span>)
+                                <span class="ruby-identifier">sendMessage</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">cm</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">NoPlayersMessage</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;NO PLAYERS LEFT!&quot;</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">LoginMessage</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@loginTable</span>.<span class="ruby-identifier">check</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span>,<span class="ruby-identifier">m</span>.<span class="ruby-identifier">pw</span>,<span class="ruby-ivar">@challenges</span>[<span class="ruby-identifier">c</span>])
+                                        <span class="ruby-identifier">con</span>=<span class="ruby-identifier">c</span>
+                                        <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">eventNewPlayer</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span>,<span class="ruby-identifier">con</span>)
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;LOGIN WRONG&quot;</span>
+                                        <span class="ruby-identifier">c</span>.<span class="ruby-identifier">sendMessage</span>(<span class="ruby-constant">ErrorMessage</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Wrong Login&quot;</span>))
+                                        <span class="ruby-identifier">c</span>.<span class="ruby-identifier">close</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">sendToAllBut</span>(<span class="ruby-identifier">m</span>,<span class="ruby-identifier">c</span>)
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

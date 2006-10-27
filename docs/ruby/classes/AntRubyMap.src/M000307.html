@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>loadEntity (AntRubyMap)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/map.rb, line 242</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loadEntity</span>(<span class="ruby-identifier">node</span>)
+                <span class="ruby-identifier">nodeName</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span>
+                <span class="ruby-identifier">nodeName</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-value str">&quot;New&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>)  <span class="ruby-comment cmt"># remove New out of old antNew.. Names</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@entTypeMap</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">nodeName</span>)
+                        <span class="ruby-identifier">e</span>=<span class="ruby-ivar">@entTypeMap</span>[<span class="ruby-identifier">nodeName</span>].<span class="ruby-identifier">new</span>
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHero</span>)
+                                <span class="ruby-ivar">@heroes</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">e</span>)
+                        <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;humanPlayer&quot;</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-identifier">player</span>=<span class="ruby-constant">AntHumanPlayer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;&quot;</span>)
+                        <span class="ruby-identifier">player</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">node</span>)
+                        <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">player</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@myPlayer</span>
+                                <span class="ruby-ivar">@myPlayer</span>=<span class="ruby-identifier">player</span>
+                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">player</span>.<span class="ruby-identifier">getName</span><span class="ruby-operator">==</span><span class="ruby-ivar">@playerName</span>
+                                <span class="ruby-ivar">@myPlayer</span>=<span class="ruby-identifier">player</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;target&quot;</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-identifier">t</span>=<span class="ruby-constant">TargetPos</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">node</span>)
+                        <span class="ruby-ivar">@targets</span>[<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span>]=<span class="ruby-identifier">t</span>
+                <span class="ruby-keyword kw">end</span>
+                
+                <span class="ruby-identifier">playerTypes</span>={<span class="ruby-value str">&quot;computerPlayer&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-constant">AntComputerPlayer</span>, <span class="ruby-value str">&quot;lazyPlayer&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-constant">AntLazyPlayer</span>, <span class="ruby-value str">&quot;conqueringPlayer&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-constant">AntConqueringPlayer</span>,<span class="ruby-value str">&quot;newAI&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-constant">AntAttackAI</span>}
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">playerTypes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span>) <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-identifier">type</span>=<span class="ruby-identifier">playerTypes</span>[<span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span>]
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;TYPE #{type}&quot;</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-constant">AntPlayer</span>)
+                                <span class="ruby-identifier">player</span>=<span class="ruby-identifier">playerTypes</span>[<span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span>].<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;&quot;</span>)
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;TYPE #{type}&quot;</span>
+                                <span class="ruby-identifier">player</span>=<span class="ruby-constant">AntAIPlayer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;name&quot;</span>),<span class="ruby-keyword kw">self</span>)
+                                <span class="ruby-identifier">aiInterface</span>=<span class="ruby-constant">AIInterface</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">player</span>)
+                                <span class="ruby-identifier">ai</span>=<span class="ruby-identifier">type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">aiInterface</span>)
+                                <span class="ruby-identifier">player</span>.<span class="ruby-identifier">ai</span>=<span class="ruby-identifier">ai</span>
+                        <span class="ruby-keyword kw">end</span>
+                
+                        <span class="ruby-identifier">player</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">node</span>)
+                        <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">player</span>)
+                <span class="ruby-keyword kw">end</span>
+                
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">getName</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;trigger&quot;</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-ivar">@triggers</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Trigger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>))
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

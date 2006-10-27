@@ -1,0 +1,77 @@
+.TH "src/path.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/path.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'height_map.h'\fP
+.br
+\fC#include 'heuristic.h'\fP
+.br
+\fC#include <ag_surface.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBPathWeighter\fP"
+.br
+.ti -1c
+.RI "class \fBMapPathWeighter\fP"
+.br
+.ti -1c
+.RI "struct \fBAGVector2Sort\fP"
+.br
+.ti -1c
+.RI "class \fBSimpleGraph\fP"
+.br
+.ti -1c
+.RI "struct \fBSimpleGraph::HalfEdge\fP"
+.br
+.ti -1c
+.RI "struct \fBSimpleGraph::Edge\fP"
+.br
+.ti -1c
+.RI "struct \fBSimpleGraph::Node\fP"
+.br
+.ti -1c
+.RI "struct \fBSimpleGraph::EdgeSort\fP"
+.br
+.ti -1c
+.RI "class \fBDecimatedGraph\fP"
+.br
+.ti -1c
+.RI "class \fBHeuristic\fP"
+.br
+.ti -1c
+.RI "struct \fBPath\fP"
+.br
+.ti -1c
+.RI "class \fBPathDebugging\fP"
+.br
+.ti -1c
+.RI "class \fBPathfinder\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSimpleGraph\fP * \fBmakeGraph\fP (\fBHeightMap\fP *pMap, \fBMapPathWeighter\fP *pWeighter, size_t res=1)"
+.br
+.ti -1c
+.RI "\fBHeuristicFunction\fP * \fBcomputeHeuristic\fP (\fBSimpleGraph\fP *g)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBHeuristicFunction\fP* computeHeuristic (\fBSimpleGraph\fP * g)"
+.PP
+.SS "\fBSimpleGraph\fP* makeGraph (\fBHeightMap\fP * pMap, \fBMapPathWeighter\fP * pWeighter, size_t res = \fC1\fP)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

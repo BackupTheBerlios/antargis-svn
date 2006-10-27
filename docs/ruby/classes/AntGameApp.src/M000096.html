@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>showPanel (AntGameApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/antargis.rb, line 520</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">showPanel</span>
+                <span class="ruby-identifier">sideBar</span>=<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;SideBar&quot;</span>)
+                <span class="ruby-identifier">sideBarRight</span>=<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;SideBarRight&quot;</span>)
+                <span class="ruby-identifier">sideBar</span>.<span class="ruby-identifier">show</span>
+                <span class="ruby-ivar">@controls</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-comment cmt"># reset Scene's width</span>
+                <span class="ruby-identifier">getScene</span>.<span class="ruby-identifier">getCameraObject</span>.<span class="ruby-identifier">setWidth</span>((<span class="ruby-identifier">getScreen</span>.<span class="ruby-identifier">getWidth</span><span class="ruby-operator">-</span><span class="ruby-identifier">sideBarRight</span>.<span class="ruby-identifier">width</span>).<span class="ruby-identifier">to_i</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

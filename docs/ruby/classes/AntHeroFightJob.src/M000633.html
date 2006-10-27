@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>startFightingMan (AntHeroFightJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 352</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">startFightingMan</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;startFightingMan(man)&quot;</span>
+                <span class="ruby-identifier">target</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@fightStarted</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Problem! Fightmap not defined&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@fightMap</span>               
+                
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHeroFightJob</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">undefeatedMen</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-ivar">@fightMap</span>[<span class="ruby-identifier">man</span>])
+                                        <span class="ruby-identifier">target</span>=<span class="ruby-ivar">@fightMap</span>[<span class="ruby-identifier">man</span>]
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-comment cmt"># find trooper with least energy and help him</span>
+                                <span class="ruby-identifier">least</span>=<span class="ruby-keyword kw">nil</span>
+                                <span class="ruby-identifier">e</span>=<span class="ruby-value">1000</span>
+                                <span class="ruby-identifier">undefeatedMen</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">getEnergy</span><span class="ruby-operator">&lt;</span><span class="ruby-identifier">e</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">m!</span>=<span class="ruby-identifier">man</span>
+                                                <span class="ruby-identifier">least</span>=<span class="ruby-identifier">m</span>
+                                                <span class="ruby-identifier">e</span>=<span class="ruby-identifier">m</span>.<span class="ruby-identifier">getEnergy</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                }
+                                <span class="ruby-identifier">target</span>=<span class="ruby-identifier">getTargetFrom</span>(<span class="ruby-identifier">least</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">target</span>=<span class="ruby-ivar">@fightMap</span>[<span class="ruby-identifier">man</span>]
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-comment cmt"># probably won ?</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHeroFightJob</span>)
+                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;WON????&quot;</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">undefeatedMen</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">undefeatedMen</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
+                                        <span class="ruby-identifier">won</span>
+                                        <span class="ruby-keyword kw">return</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-comment cmt">#raise &quot;PROBLEM!&quot;</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">attack</span>(<span class="ruby-identifier">man</span>,<span class="ruby-identifier">target</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

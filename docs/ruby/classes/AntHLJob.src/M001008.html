@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>loadXML (AntHLJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 80</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">n</span>)
+                <span class="ruby-identifier">n</span>.<span class="ruby-identifier">getChildren</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">name</span>=<span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;name&quot;</span>)
+                        <span class="ruby-identifier">value</span>=<span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;value&quot;</span>)
+                        <span class="ruby-identifier">type</span>=<span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;type&quot;</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">name!</span>=<span class="ruby-value str">&quot;&quot;</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;TYPE: #{c.get(&quot;type&quot;)}&quot;</span>
+                                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;type&quot;</span>)
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;AntEntity&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-constant">UID</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-comment cmt">#getMap.getByUID(value.to_i)</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;AntEntities&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-identifier">value</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;,&quot;</span>).<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span><span class="ruby-constant">UID</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>)} <span class="ruby-comment cmt">#getMap.getByUID(v)}</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;AGVector2&quot;</span>
+                                                <span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>=<span class="ruby-identifier">value</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;(&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;)&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;,&quot;</span>).<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span><span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_f</span>}
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                                                <span class="ruby-identifier">puts</span> <span class="ruby-identifier">value</span>
+                                                <span class="ruby-comment cmt">#raise 1</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;Fixnum&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;Float&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;TrueClass&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-keyword kw">true</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;FalseClass&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-keyword kw">false</span>
+                                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;String&quot;</span>
+                                                <span class="ruby-comment cmt"># do nothing</span>
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;unknown type for #{name}&quot;</span>
+                                                <span class="ruby-identifier">value</span>=<span class="ruby-constant">AntMarshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;value&quot;</span>))
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">name</span>,<span class="ruby-identifier">value</span>)
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-comment cmt">#raise 1</span>
+                <span class="ruby-comment cmt">#FIXME</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

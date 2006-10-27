@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntEnergy)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_energy.rb, line 7</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">rect</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">rect</span>)
+
+                <span class="ruby-ivar">@keys</span>=[<span class="ruby-identifier">:energy</span>,<span class="ruby-identifier">:morale</span>,<span class="ruby-identifier">:food</span>,<span class="ruby-identifier">:troops</span>,<span class="ruby-identifier">:exp</span>]
+                <span class="ruby-ivar">@values</span>={}
+                <span class="ruby-ivar">@colors</span>={}
+                <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span><span class="ruby-ivar">@values</span>[<span class="ruby-identifier">k</span>]=<span class="ruby-value">0</span>}
+
+                <span class="ruby-ivar">@colors</span>[<span class="ruby-identifier">:troops</span>]=<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0xcf</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-ivar">@colors</span>[<span class="ruby-identifier">:energy</span>]=<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0xcf</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-ivar">@colors</span>[<span class="ruby-identifier">:morale</span>]=<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;#5555ff&quot;</span>)
+                <span class="ruby-ivar">@colors</span>[<span class="ruby-identifier">:food</span>]=<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;#975500&quot;</span>)
+                <span class="ruby-ivar">@colors</span>[<span class="ruby-identifier">:exp</span>]=<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;#FFFFFF&quot;</span>)
+                <span class="ruby-ivar">@hborder</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@vborder</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-comment cmt">#setCaching(true)</span>
+                <span class="ruby-ivar">@hero</span>=<span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntRubyEditView)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editview.rb, line 28</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>,<span class="ruby-identifier">map</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                <span class="ruby-comment cmt">#$map=map</span>
+                <span class="ruby-ivar">@map</span>=<span class="ruby-identifier">map</span>
+                <span class="ruby-ivar">@size</span>=<span class="ruby-value">3</span>
+                <span class="ruby-identifier">$scene</span>=<span class="ruby-identifier">getScene</span>
+        
+                <span class="ruby-ivar">@layout</span>=<span class="ruby-constant">AGLayout</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>)
+                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">loadFile</span>(<span class="ruby-value str">&quot;data/gui/layout/edit_layout.xml&quot;</span>))
+                
+                <span class="ruby-identifier">setMainWidget</span>(<span class="ruby-ivar">@layout</span>)
+                <span class="ruby-ivar">@mainWidget</span>=<span class="ruby-ivar">@layout</span>
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;allWater&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventAllWater</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;allGrass&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventAllGrass</span>)
+                
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;rubber&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventRubber</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;entitiesTab&quot;</span>),<span class="ruby-identifier">:sigSelected</span>,<span class="ruby-identifier">:eventEntitySelected</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;pointer&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventPointer</span>)
+                
+                [<span class="ruby-value">1</span>,<span class="ruby-value">2</span>,<span class="ruby-value">3</span>,<span class="ruby-value">5</span>,<span class="ruby-value">10</span>,<span class="ruby-value">15</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span><span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-node">&quot;edit#{s}&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventSize</span>)}
+                [<span class="ruby-value str">&quot;editHeight&quot;</span>,<span class="ruby-value str">&quot;editWater&quot;</span>,<span class="ruby-value str">&quot;editSand&quot;</span>,<span class="ruby-value str">&quot;editGround&quot;</span>,<span class="ruby-value str">&quot;editGrass&quot;</span>,<span class="ruby-value str">&quot;editGrass2&quot;</span>,<span class="ruby-value str">&quot;editForest&quot;</span>,<span class="ruby-value str">&quot;editRock&quot;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-identifier">n</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventSelectEdit</span>)
+                }
+                [<span class="ruby-value">1</span>,<span class="ruby-value">2</span>,<span class="ruby-value">3</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span><span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-node">&quot;hard#{h}&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventHard</span>)}
+                
+                <span class="ruby-ivar">@hard</span>=<span class="ruby-value">2</span>
+                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;hard2&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-keyword kw">true</span>)
+                
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;terrain&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventTabSelect</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;entities&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventTabSelect</span>)
+                
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;new&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventNewMap</span>)
+                <span class="ruby-ivar">@buttonlayout</span>=<span class="ruby-ivar">@layout</span>
+                <span class="ruby-ivar">@modifiers</span>={}
+                <span class="ruby-ivar">@modifiers</span>[<span class="ruby-value str">&quot;terrain&quot;</span>]=<span class="ruby-value str">&quot;editHeight&quot;</span>
+                <span class="ruby-ivar">@modifiers</span>[<span class="ruby-value str">&quot;entities&quot;</span>]=<span class="ruby-value str">&quot;addEntity&quot;</span>
+                <span class="ruby-ivar">@type</span>=<span class="ruby-constant">AntHero</span>
+                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;editHeight&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;entitiesTab&quot;</span>).<span class="ruby-identifier">entType</span>=<span class="ruby-constant">AntHero</span>
+                <span class="ruby-identifier">setTab</span>(<span class="ruby-value str">&quot;terrain&quot;</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

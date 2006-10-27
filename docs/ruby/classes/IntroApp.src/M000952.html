@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (IntroApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/intro.rb, line 22</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+                <span class="ruby-keyword kw">super</span>
+                
+                <span class="ruby-ivar">@pics</span>=[<span class="ruby-value str">&quot;data/gui/rough_lands.png&quot;</span>,<span class="ruby-value str">&quot;data/gui/strong_heroes.png&quot;</span>,<span class="ruby-value str">&quot;data/gui/logoGold.png&quot;</span>,<span class="ruby-value str">&quot;data/gui/your_mission.png&quot;</span>,<span class="ruby-value str">&quot;data/gui/unify_the_people.png&quot;</span>,<span class="ruby-value str">&quot;data/gui/castle_small.png&quot;</span>]
+
+                <span class="ruby-ivar">@pics</span>=[<span class="ruby-value str">&quot;rough lands&quot;</span>,<span class="ruby-value str">&quot;strong heroes&quot;</span>,<span class="ruby-value str">&quot;data/gui/logoGold.png&quot;</span>,<span class="ruby-value str">&quot;your mission&quot;</span>,<span class="ruby-value str">&quot;unify the people&quot;</span>,<span class="ruby-value str">&quot;data/gui/castle_small.png&quot;</span>]
+
+                <span class="ruby-identifier">font</span>=<span class="ruby-identifier">getTheme</span>.<span class="ruby-identifier">getFont</span>(<span class="ruby-value str">&quot;intro.font&quot;</span>)
+                <span class="ruby-ivar">@surfaces</span>=<span class="ruby-ivar">@pics</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">r</span>=<span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/\.png/</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">x</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/\.jpg/</span>
+                                <span class="ruby-identifier">r</span>=<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">x</span>)
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">r</span>=<span class="ruby-constant">AGFontEngine</span><span class="ruby-operator">::</span><span class="ruby-identifier">renderText</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">_</span>(<span class="ruby-identifier">x</span>),<span class="ruby-identifier">font</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">r</span>
+                }
+                <span class="ruby-ivar">@s</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@img</span>=<span class="ruby-constant">AGImage</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>,<span class="ruby-constant">AGRect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">getScreen</span>.<span class="ruby-identifier">getWidth</span>,<span class="ruby-identifier">getScreen</span>.<span class="ruby-identifier">getHeight</span>),<span class="ruby-ivar">@surfaces</span>[<span class="ruby-value">0</span>],<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-ivar">@black</span>=<span class="ruby-constant">Black</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@img</span>,<span class="ruby-constant">AGRect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">getScreen</span>.<span class="ruby-identifier">getWidth</span>,<span class="ruby-identifier">getScreen</span>.<span class="ruby-identifier">getHeight</span>))
+                <span class="ruby-ivar">@img</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-ivar">@black</span>)
+                <span class="ruby-identifier">setMainWidget</span>(<span class="ruby-ivar">@img</span>)
+                <span class="ruby-ivar">@time</span>=<span class="ruby-value">0</span>
+                
+                <span class="ruby-ivar">@blendin</span>=<span class="ruby-value">0</span><span class="ruby-value">.9</span>
+                <span class="ruby-ivar">@blendout</span>=<span class="ruby-value">0</span><span class="ruby-value">.6</span>
+                <span class="ruby-ivar">@show</span>=<span class="ruby-value">1.2</span>
+                <span class="ruby-ivar">@hide</span>=<span class="ruby-value">0</span><span class="ruby-value">.3</span>
+                <span class="ruby-ivar">@phase</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@phases</span>=[<span class="ruby-value">2</span>,<span class="ruby-value">2</span>,<span class="ruby-value">2</span>,<span class="ruby-value">1</span>]
+                <span class="ruby-identifier">getSoundManager</span>.<span class="ruby-identifier">playMp3</span>(<span class="ruby-value str">&quot;data/music/battle1.ogg&quot;</span>)
+                
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getSoundManager</span>,<span class="ruby-identifier">:sigMp3Finished</span>,<span class="ruby-identifier">:musicEnd</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

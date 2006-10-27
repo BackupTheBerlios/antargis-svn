@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventOptionsChanged (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 337</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventOptionsChanged</span>(<span class="ruby-identifier">e</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getCaller</span>.<span class="ruby-identifier">getName</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;optionIntro&quot;</span>
+                                <span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;intro&quot;</span>,<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;optionIntro&quot;</span>).<span class="ruby-identifier">isChecked</span>.<span class="ruby-identifier">to_s</span>)
+                                <span class="ruby-comment cmt">#getScreen.screenshot.save(&quot;muh76.png&quot;)</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;UseFBO&quot;</span>
+                                <span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;useFBO&quot;</span>,<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseFBO&quot;</span>).<span class="ruby-identifier">isChecked</span>.<span class="ruby-identifier">to_s</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;UseAnim&quot;</span>
+                                <span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;animationType&quot;</span>,<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseAnim&quot;</span>).<span class="ruby-identifier">isChecked</span>.<span class="ruby-identifier">to_s</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;UseParticle&quot;</span>
+                                <span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;particleEffects&quot;</span>,<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseParticle&quot;</span>).<span class="ruby-identifier">isChecked</span>.<span class="ruby-identifier">to_s</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

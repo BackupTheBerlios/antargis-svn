@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getWeakestEnemyHouse (AntConqueringPlayer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_player.rb, line 284</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getWeakestEnemyHouse</span>(<span class="ruby-identifier">hero</span>)
+                <span class="ruby-identifier">hs</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getEntities</span>(<span class="ruby-value str">&quot;house&quot;</span>)
+                <span class="ruby-identifier">hs</span>=<span class="ruby-identifier">hs</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span><span class="ruby-identifier">h</span>.<span class="ruby-identifier">get</span>}.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span><span class="ruby-identifier">h</span>.<span class="ruby-identifier">getPlayer!</span>=<span class="ruby-keyword kw">self</span>}.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span><span class="ruby-identifier">a</span>.<span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">b</span>.<span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">length</span>}
+                <span class="ruby-identifier">hs</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

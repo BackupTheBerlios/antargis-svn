@@ -1,0 +1,204 @@
+.TH "SceneNode" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SceneNode \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <scenenode.h>\fP
+.PP
+Inherits \fBAGRubyObject\fP.
+.PP
+Inherited by \fBAnimMesh\fP, \fBMesh\fP, \fBNewDecal\fP, \fBSmoke\fP, \fBTerrainPiece\fP, and \fBWaterPiece\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSceneNode\fP (\fBScene\fP *s, const \fBAGVector4\fP &pPos, const \fBAGBox3\fP &pBox)"
+.br
+.ti -1c
+.RI "virtual \fB~SceneNode\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBresetScene\fP ()"
+.br
+.RI "\fIreset my scene pointer - should not be called in 'normal' code - only by the Scene-object \fP"
+.ti -1c
+.RI "virtual void \fBdrawShadow\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBdrawDepth\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBdraw\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBdrawPick\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBadvance\fP (float time)"
+.br
+.RI "\fIadvance mesh - e.g. animation \fP"
+.ti -1c
+.RI "virtual size_t \fBgetTriangles\fP () const "
+.br
+.ti -1c
+.RI "virtual \fBAGVector4\fP \fBlineHit\fP (const \fBAGLine3\fP &pLine) const "
+.br
+.ti -1c
+.RI "virtual void \fBsort\fP (const \fBAGVector4\fP &pCamera)"
+.br
+.RI "\fIsort triangles for given camera-view - shouldn't be used often!!! \fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBSceneNode\fP &n) const "
+.br
+.RI "\fIreferences equal?? \fP"
+.ti -1c
+.RI "virtual void \fBsetPos\fP (const \fBAGVector3\fP &pPos)"
+.br
+.ti -1c
+.RI "\fBAGVector4\fP \fBgetPos\fP () const "
+.br
+.ti -1c
+.RI "virtual void \fBsetRotation\fP (float r)"
+.br
+.ti -1c
+.RI "void \fBsetBBox\fP (const \fBAGBox3\fP &pBox)"
+.br
+.ti -1c
+.RI "virtual bool \fBtransparent\fP ()"
+.br
+.ti -1c
+.RI "\fBAGBox3\fP \fBbbox\fP () const "
+.br
+.RI "\fIget bounding box \fP"
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetRect\fP () const "
+.br
+.ti -1c
+.RI "virtual void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "\fBScene\fP * \fBgetScene\fP ()"
+.br
+.ti -1c
+.RI "bool \fBsceneValid\fP () const "
+.br
+.RI "\fIthis checks, if the current object is inserted into a scene \fP"
+.ti -1c
+.RI "void \fBsetVisible\fP (bool v)"
+.br
+.ti -1c
+.RI "bool \fBvisible\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetOrder\fP (int o)"
+.br
+.RI "\fIthere is a drawing order, used by the scene-manager, which priorized. look at Scene::drawScene for more info. \fP"
+.ti -1c
+.RI "int \fBgetOrder\fP () const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A scenenode represents any part of a scene. It holds information about position, drawing order, bounding box and visibility. A scenenode is created for exactly one scene and it can't be assigned to any other scene, which shouldn't be necessary.
+.PP
+\fBScene\fP and \fBSceneNode\fP give each other information about their 'destroy-state'. That means the destructor notifies the other object. 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "SceneNode::SceneNode (\fBScene\fP * s, const \fBAGVector4\fP & pPos, const \fBAGBox3\fP & pBox)"
+.PP
+.SS "SceneNode::~SceneNode ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void SceneNode::advance (float time)\fC [virtual]\fP"
+.PP
+advance mesh - e.g. animation 
+.PP
+Reimplemented in \fBAnimMesh\fP, \fBSmoke\fP, and \fBWaterPiece\fP.
+.SS "\fBAGBox3\fP SceneNode::bbox () const"
+.PP
+get bounding box 
+.PP
+.SS "void SceneNode::clear ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGRubyObject\fP.
+.SS "void SceneNode::draw ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAnimMesh\fP, \fBMesh\fP, \fBNewDecal\fP, \fBSmoke\fP, \fBTerrainPiece\fP, and \fBWaterPiece\fP.
+.SS "void SceneNode::drawDepth ()\fC [virtual]\fP"
+.PP
+This functions is used in the 1st depth-drawing render-pass, so you should not use colors or textures, when not needed 
+.PP
+Reimplemented in \fBAnimMesh\fP, \fBMesh\fP, and \fBTerrainPiece\fP.
+.SS "void SceneNode::drawPick ()\fC [virtual]\fP"
+.PP
+this function is used for picking objects. Picking is done one CPU, so shader-animated models are out of place here. 
+.PP
+Reimplemented in \fBAnimMesh\fP, \fBMesh\fP, \fBTerrainPiece\fP, and \fBWaterPiece\fP.
+.SS "void SceneNode::drawShadow ()\fC [virtual]\fP"
+.PP
+this function is deprecated. It was once used for drawing shadow in a 3rd render-pass. 
+.PP
+Reimplemented in \fBMesh\fP, and \fBTerrainPiece\fP.
+.SS "int SceneNode::getOrder () const"
+.PP
+.SS "\fBAGVector4\fP SceneNode::getPos () const"
+.PP
+.SS "\fBAGRect2\fP SceneNode::getRect () const"
+.PP
+.SS "\fBScene\fP * SceneNode::getScene ()"
+.PP
+.SS "size_t SceneNode::getTriangles () const\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAnimMesh\fP, \fBMesh\fP, \fBTerrainPiece\fP, and \fBWaterPiece\fP.
+.SS "\fBAGVector4\fP SceneNode::lineHit (const \fBAGLine3\fP & pLine) const\fC [virtual]\fP"
+.PP
+Reimplemented in \fBMesh\fP, and \fBTerrainPiece\fP.
+.SS "bool SceneNode::operator== (const \fBSceneNode\fP & n) const"
+.PP
+references equal?? 
+.PP
+.SS "void SceneNode::resetScene ()\fC [virtual]\fP"
+.PP
+reset my scene pointer - should not be called in 'normal' code - only by the Scene-object 
+.PP
+.SS "bool SceneNode::sceneValid () const"
+.PP
+this checks, if the current object is inserted into a scene 
+.PP
+.SS "void SceneNode::setBBox (const \fBAGBox3\fP & pBox)"
+.PP
+.SS "void SceneNode::setOrder (int o)"
+.PP
+there is a drawing order, used by the scene-manager, which priorized. look at Scene::drawScene for more info. 
+.PP
+.SS "void SceneNode::setPos (const \fBAGVector3\fP & pPos)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAnimMesh\fP, and \fBNewDecal\fP.
+.SS "void SceneNode::setRotation (float r)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAnimMesh\fP, and \fBMesh\fP.
+.SS "void SceneNode::setVisible (bool v)"
+.PP
+Reimplemented in \fBMesh\fP.
+.SS "void SceneNode::sort (const \fBAGVector4\fP & pCamera)\fC [virtual]\fP"
+.PP
+sort triangles for given camera-view - shouldn't be used often!!! 
+.PP
+.SS "bool SceneNode::transparent ()\fC [virtual]\fP"
+.PP
+indicates, if this object is transparent. if that's the case, it will be drawn later. drawing goes like this:1)draw all opaque objects from front to back; 2)draw transparent from back to front this is the fastest way to do this 
+.PP
+Reimplemented in \fBMesh\fP, \fBSmoke\fP, and \fBWaterPiece\fP.
+.SS "bool SceneNode::visible () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

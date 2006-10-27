@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>makeRingMesh (ruby/ant_ring.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_ring.rb, line 82</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">makeRingMesh</span>
+        <span class="ruby-identifier">mesh</span>=<span class="ruby-constant">ColoredMesh</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getScene</span>,<span class="ruby-constant">RingData</span>.<span class="ruby-identifier">getRingData</span>,<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>),<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">setOrder</span>(<span class="ruby-constant">RING_Z</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">mesh</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

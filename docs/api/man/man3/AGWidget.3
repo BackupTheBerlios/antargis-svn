@@ -1,0 +1,489 @@
+.TH "AGWidget" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGWidget \- base class for all widgets  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_widget.h>\fP
+.PP
+Inherits \fBAGMessageObject\fP.
+.PP
+Inherited by \fBAGButton\fP, \fBAGColorButton\fP, \fBAGComboBox\fP, \fBAGEdit\fP, \fBAGFrame\fP, \fBAGGLWidget\fP, \fBAGImage\fP, \fBAGLayout\fP, \fBAGListBox\fP, \fBAGMoveWidget\fP, \fBAGRadioGroup\fP, \fBAGScreenWidget\fP, \fBAGScroller\fP, \fBAGSound\fP, \fBAGTable\fP, \fBAGText\fP, \fBAGTooltip\fP, and \fBMiniMap\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGWidget\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &r)"
+.br
+.ti -1c
+.RI "virtual \fB~AGWidget\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBinitHandlers\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawAfter\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawAll\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetRect\fP () const "
+.br
+.ti -1c
+.RI "virtual \fBAGRect2\fP \fBgetClientRect\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetRect\fP (const \fBAGRect2\fP &pRect)"
+.br
+.ti -1c
+.RI "void \fBsetParent\fP (\fBAGWidget\fP *pParent)"
+.br
+.ti -1c
+.RI "\fBAGWidget\fP * \fBgetParent\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisParent\fP (\fBAGWidget\fP *pParent)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventShow\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventHide\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseMotion\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseEnter\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseLeave\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseClick\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonUp\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventGotFocus\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventLostFocus\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBeventTick\fP (float pTime)"
+.br
+.ti -1c
+.RI "void \fBsigTick\fP (float pTime)"
+.br
+.ti -1c
+.RI "virtual bool \fBcanFocus\fP () const "
+.br
+.ti -1c
+.RI "bool \fBprocessEvent\fP (\fBAGEvent\fP *event)"
+.br
+.ti -1c
+.RI "virtual float \fBminWidth\fP () const "
+.br
+.ti -1c
+.RI "virtual float \fBminHeight\fP () const "
+.br
+.ti -1c
+.RI "float \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "float \fBheight\fP () const "
+.br
+.ti -1c
+.RI "float \fBtop\fP () const "
+.br
+.ti -1c
+.RI "float \fBleft\fP () const "
+.br
+.ti -1c
+.RI "float \fBbottom\fP () const "
+.br
+.ti -1c
+.RI "float \fBright\fP () const "
+.br
+.ti -1c
+.RI "bool \fBvisible\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetVisible\fP (bool v)"
+.br
+.ti -1c
+.RI "virtual void \fBsetWidth\fP (float w)"
+.br
+.ti -1c
+.RI "virtual void \fBsetHeight\fP (float w)"
+.br
+.ti -1c
+.RI "virtual void \fBsetTop\fP (float y)"
+.br
+.ti -1c
+.RI "virtual void \fBsetLeft\fP (float x)"
+.br
+.ti -1c
+.RI "bool \fBfixedWidth\fP () const "
+.br
+.ti -1c
+.RI "bool \fBfixedHeight\fP () const "
+.br
+.ti -1c
+.RI "void \fBshow\fP ()"
+.br
+.ti -1c
+.RI "void \fBhide\fP ()"
+.br
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBmark\fP ()"
+.br
+.RI "\fIoverride this function to mark your children \fP"
+.ti -1c
+.RI "virtual void \fBaddChild\fP (\fBAGWidget\fP *w)"
+.br
+.ti -1c
+.RI "virtual void \fBaddChildBack\fP (\fBAGWidget\fP *w)"
+.br
+.ti -1c
+.RI "virtual void \fBremoveChild\fP (\fBAGWidget\fP *w)"
+.br
+.ti -1c
+.RI "virtual bool \fBredraw\fP () const "
+.br
+.ti -1c
+.RI "virtual void \fBprepareDraw\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetCaching\fP (bool pEnable)"
+.br
+.ti -1c
+.RI "bool \fBcheckRedraw\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetDrawn\fP ()"
+.br
+.ti -1c
+.RI "void \fBqueryRedraw\fP ()"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetChangeRect\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBuseTextures\fP ()"
+.br
+.RI "\fIspecial function for 'using textures' \fP"
+.ti -1c
+.RI "void \fBuseTexturesRecursive\fP ()"
+.br
+.RI "\fIspecial function for 'using textures' \fP"
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetScreenRect\fP () const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgetScreenPosition\fP () const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBfromScreen\fP (const \fBAGVector2\fP &p) const "
+.br
+.ti -1c
+.RI "void \fBgainFocus\fP (\fBAGWidget\fP *pWidget=0)"
+.br
+.ti -1c
+.RI "void \fBgainCompleteFocus\fP (\fBAGWidget\fP *pWidget=0)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventDragBy\fP (\fBAGEvent\fP *event, const \fBAGVector2\fP &pDiff)"
+.br
+.ti -1c
+.RI "bool \fBgetFocus\fP () const "
+.br
+.ti -1c
+.RI "bool \fBhasFocus\fP (const \fBAGWidget\fP *pWidget=0)"
+.br
+.ti -1c
+.RI "\fBAGLayout\fP * \fBgetLayout\fP ()"
+.br
+.ti -1c
+.RI "const \fBAGString\fP & \fBgetName\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetName\fP (const \fBAGString\fP &pName)"
+.br
+.ti -1c
+.RI "\fBAGWidget\fP * \fBgetChild\fP (const \fBAGString\fP &pName)"
+.br
+.ti -1c
+.RI "void \fBsetModal\fP (bool pModal)"
+.br
+.ti -1c
+.RI "void \fBerase\fP (\fBAGWidget\fP *w)"
+.br
+.ti -1c
+.RI "void \fBeventChildrenDeleted\fP (\fBAGWidget\fP *pWidget)"
+.br
+.ti -1c
+.RI "void \fBsetTooltip\fP (const \fBAGStringUtf8\fP &pTooltip)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigMouseEnter\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigMouseLeave\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigClick\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigDragBy\fP"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::list< \fBAGWidget\fP * > \fBmChildren\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+base class for all widgets 
+
+\fBAGWidget\fP is the base class for all widgets. It manages the hierarchy and memory of the widgets. You should never delete an \fBAGWidget\fP for yourself if you don't know exactly what you're doing. The widgets get deleted by their parents 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGWidget::AGWidget (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & r)"
+.PP
+.SS "AGWidget::~AGWidget ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGWidget::addChild (\fBAGWidget\fP * w)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGWindow\fP.
+.SS "void AGWidget::addChildBack (\fBAGWidget\fP * w)\fC [virtual]\fP"
+.PP
+.SS "float AGWidget::bottom () const"
+.PP
+.SS "bool AGWidget::canFocus () const\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGEdit\fP.
+.SS "bool AGWidget::checkRedraw () const"
+.PP
+.SS "void AGWidget::clear ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGRubyObject\fP.
+.PP
+Reimplemented in \fBAGComboBox\fP, and \fBAGEdit\fP.
+.SS "void AGWidget::close ()"
+.PP
+Reimplemented in \fBAGWindow\fP.
+.SS "void AGWidget::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBMiniMap\fP, \fBAGButton\fP, \fBAGCaption\fP, \fBAGColorButton\fP, \fBAGEdit\fP, \fBAGFrame\fP, \fBAGImage\fP, \fBAGListBox\fP, \fBAGMenu\fP, \fBAGMenuItem\fP, \fBAGScreenWidget\fP, \fBAGScroller\fP, \fBAGText\fP, and \fBAGTooltip\fP.
+.SS "void AGWidget::drawAfter (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+.SS "void AGWidget::drawAll (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGGLWidget\fP.
+.SS "void AGWidget::erase (\fBAGWidget\fP * w)"
+.PP
+.SS "void AGWidget::eventChildrenDeleted (\fBAGWidget\fP * pWidget)"
+.PP
+.SS "bool AGWidget::eventDragBy (\fBAGEvent\fP * event, const \fBAGVector2\fP & pDiff)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGWindow\fP.
+.SS "bool AGWidget::eventGotFocus ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGEdit\fP.
+.SS "bool AGWidget::eventHide ()\fC [virtual]\fP"
+.PP
+.SS "bool AGWidget::eventLostFocus ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGEdit\fP.
+.SS "bool AGWidget::eventMouseButtonDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGMessageObject\fP.
+.PP
+Reimplemented in \fBMiniMap\fP, \fBAGButton\fP, \fBAGListBox\fP, and \fBAGWindow\fP.
+.SS "bool AGWidget::eventMouseButtonUp (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGMessageObject\fP.
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGListBox\fP.
+.SS "bool AGWidget::eventMouseClick (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBMiniMap\fP, \fBAGCheckBox\fP, \fBAGColorButton\fP, \fBAGListBox\fP, \fBAGMenuItem\fP, \fBAGSubMenu\fP, and \fBAGRadio\fP.
+.SS "bool AGWidget::eventMouseEnter ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGMenuItem\fP.
+.SS "bool AGWidget::eventMouseLeave ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGMenuItem\fP.
+.SS "bool AGWidget::eventMouseMotion (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGMessageObject\fP.
+.SS "bool AGWidget::eventShow ()\fC [virtual]\fP"
+.PP
+.SS "void AGWidget::eventTick (float pTime)\fC [virtual]\fP"
+.PP
+.SS "bool AGWidget::fixedHeight () const"
+.PP
+.SS "bool AGWidget::fixedWidth () const"
+.PP
+.SS "\fBAGVector2\fP AGWidget::fromScreen (const \fBAGVector2\fP & p) const"
+.PP
+.SS "void AGWidget::gainCompleteFocus (\fBAGWidget\fP * pWidget = \fC0\fP)"
+.PP
+.SS "void AGWidget::gainFocus (\fBAGWidget\fP * pWidget = \fC0\fP)"
+.PP
+should only be called by a child 
+.SS "\fBAGRect2\fP AGWidget::getChangeRect ()"
+.PP
+.SS "\fBAGWidget\fP * AGWidget::getChild (const \fBAGString\fP & pName)"
+.PP
+.SS "\fBAGRect2\fP AGWidget::getClientRect () const\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGFrame\fP, and \fBAGWindow\fP.
+.SS "bool AGWidget::getFocus () const"
+.PP
+.SS "\fBAGLayout\fP * AGWidget::getLayout ()"
+.PP
+.SS "const \fBAGString\fP & AGWidget::getName () const"
+.PP
+Reimplemented in \fBAGMenuItem\fP.
+.SS "\fBAGWidget\fP * AGWidget::getParent ()"
+.PP
+.SS "\fBAGRect2\fP AGWidget::getRect () const"
+.PP
+.SS "\fBAGVector2\fP AGWidget::getScreenPosition () const"
+.PP
+.SS "\fBAGRect2\fP AGWidget::getScreenRect () const"
+.PP
+.SS "bool AGWidget::hasFocus (const \fBAGWidget\fP * pWidget = \fC0\fP)"
+.PP
+.SS "float AGWidget::height () const"
+.PP
+.SS "void AGWidget::hide ()"
+.PP
+.SS "void AGWidget::initHandlers ()\fC [virtual]\fP"
+.PP
+.SS "bool AGWidget::isParent (\fBAGWidget\fP * pParent)"
+.PP
+.SS "float AGWidget::left () const"
+.PP
+.SS "void AGWidget::mark ()\fC [virtual]\fP"
+.PP
+override this function to mark your children 
+.PP
+Reimplemented from \fBAGRubyObject\fP.
+.SS "float AGWidget::minHeight () const\fC [virtual]\fP"
+.PP
+.SS "float AGWidget::minWidth () const\fC [virtual]\fP"
+.PP
+.SS "void AGWidget::prepareDraw ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGEdit\fP, and \fBAGFrame\fP.
+.SS "bool AGWidget::processEvent (\fBAGEvent\fP * event)"
+.PP
+Reimplemented from \fBAGMessageObject\fP.
+.SS "void AGWidget::queryRedraw ()"
+.PP
+.SS "bool AGWidget::redraw () const\fC [virtual]\fP"
+.PP
+.SS "void AGWidget::removeChild (\fBAGWidget\fP * w)\fC [virtual]\fP"
+.PP
+.SS "float AGWidget::right () const"
+.PP
+.SS "void AGWidget::setCaching (bool pEnable)"
+.PP
+.SS "void AGWidget::setDrawn ()"
+.PP
+.SS "void AGWidget::setHeight (float w)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGTable\fP.
+.SS "void AGWidget::setLeft (float x)\fC [virtual]\fP"
+.PP
+.SS "void AGWidget::setModal (bool pModal)"
+.PP
+.SS "void AGWidget::setName (const \fBAGString\fP & pName)"
+.PP
+.SS "void AGWidget::setParent (\fBAGWidget\fP * pParent)"
+.PP
+.SS "void AGWidget::setRect (const \fBAGRect2\fP & pRect)"
+.PP
+.SS "void AGWidget::setTooltip (const \fBAGStringUtf8\fP & pTooltip)"
+.PP
+.SS "void AGWidget::setTop (float y)\fC [virtual]\fP"
+.PP
+.SS "void AGWidget::setVisible (bool v)"
+.PP
+.SS "void AGWidget::setWidth (float w)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGTable\fP.
+.SS "void AGWidget::show ()"
+.PP
+.SS "void AGWidget::sigTick (float pTime)"
+.PP
+.SS "float AGWidget::top () const"
+.PP
+.SS "void AGWidget::useTextures ()\fC [virtual]\fP"
+.PP
+special function for 'using textures' 
+.PP
+within a texture-garbage-collection run all unused textures get cleaned, so this function 'uses' the textures. This way they won't get collected 
+.PP
+Reimplemented in \fBAGButton\fP, and \fBAGImage\fP.
+.SS "void AGWidget::useTexturesRecursive ()"
+.PP
+special function for 'using textures' 
+.PP
+within a texture-garbage-collection run all unused textures get cleaned, so this function 'uses' the textures. This way they won't get collected.
+.PP
+This function calles \fBuseTextures()\fP recursively. Don't override this one! 
+.SS "bool AGWidget::visible () const"
+.PP
+.SS "float AGWidget::width () const"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "std::list<\fBAGWidget\fP*> \fBAGWidget::mChildren\fP\fC [protected]\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGWidget::sigClick\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGWidget::sigDragBy\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGWidget::sigMouseEnter\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGWidget::sigMouseLeave\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

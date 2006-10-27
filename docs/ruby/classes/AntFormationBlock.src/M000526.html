@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>calcFormation (AntFormationBlock)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_formations.rb, line 136</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calcFormation</span>
+                <span class="ruby-identifier">boss</span>=<span class="ruby-ivar">@boss</span>
+                <span class="ruby-identifier">dir</span>=<span class="ruby-ivar">@dir</span>
+                <span class="ruby-comment cmt"># precalc formation and store into @rpos</span>
+        
+                <span class="ruby-identifier">men</span>=<span class="ruby-identifier">boss</span>.<span class="ruby-identifier">getMen</span>
+                <span class="ruby-comment cmt"># sort from back to front (lines)</span>
+                <span class="ruby-identifier">men</span>=<span class="ruby-identifier">sort</span>(<span class="ruby-identifier">men</span>)
+
+                <span class="ruby-identifier">vpos</span>={}
+                <span class="ruby-ivar">@rpos</span>={}
+                <span class="ruby-identifier">linesizes</span>={}
+                <span class="ruby-identifier">line</span>=<span class="ruby-value">0</span>
+                <span class="ruby-identifier">row</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-identifier">rowsize</span>=<span class="ruby-value">5</span>
+
+                <span class="ruby-identifier">normal</span>=<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">normal</span>
+                <span class="ruby-identifier">men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">vpos</span>[<span class="ruby-identifier">m</span>]=[<span class="ruby-identifier">row</span>,<span class="ruby-identifier">line</span>]
+                        
+                        <span class="ruby-identifier">linesizes</span>[<span class="ruby-identifier">line</span>]<span class="ruby-operator">||=</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">linesizes</span>[<span class="ruby-identifier">line</span>]<span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                        <span class="ruby-identifier">row</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">row</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">rowsize</span><span class="ruby-operator">-</span><span class="ruby-value">1</span> <span class="ruby-comment cmt"># or weapon-group changed</span>
+                                <span class="ruby-identifier">row</span>=<span class="ruby-value">0</span>
+                                <span class="ruby-identifier">line</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-identifier">men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">row</span>,<span class="ruby-identifier">line</span>=<span class="ruby-identifier">vpos</span>[<span class="ruby-identifier">m</span>]
+                        <span class="ruby-identifier">linesize</span>=<span class="ruby-identifier">linesizes</span>[<span class="ruby-identifier">line</span>]
+                        <span class="ruby-ivar">@rpos</span>[<span class="ruby-identifier">m</span>]=<span class="ruby-identifier">normal</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">row</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">linesize</span><span class="ruby-operator">/</span><span class="ruby-value">2.0</span>))<span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span><span class="ruby-operator">*</span><span class="ruby-identifier">line</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>
+                }
+
+
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

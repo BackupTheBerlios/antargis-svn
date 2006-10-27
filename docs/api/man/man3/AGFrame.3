@@ -1,0 +1,63 @@
+.TH "AGFrame" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGFrame \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_frame.h>\fP
+.PP
+Inherits \fBAGWidget\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGFrame\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &pRect, size_t width)"
+.br
+.ti -1c
+.RI "\fBAGFrame\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &pRect, const \fBAGBorder\fP &pBorder)"
+.br
+.ti -1c
+.RI "\fB~AGFrame\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetBackground\fP (const \fBAGBackground\fP &pBg)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetClientRect\fP () const "
+.br
+.ti -1c
+.RI "void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "void \fBprepareDraw\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGFrame::AGFrame (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & pRect, size_t width)"
+.PP
+.SS "AGFrame::AGFrame (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & pRect, const \fBAGBorder\fP & pBorder)"
+.PP
+.SS "AGFrame::~AGFrame ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGFrame::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "\fBAGRect2\fP AGFrame::getClientRect () const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGFrame::prepareDraw ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGFrame::setBackground (const \fBAGBackground\fP & pBg)"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

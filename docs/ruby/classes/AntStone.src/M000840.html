@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntStone)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_stone.rb, line 25</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>()
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>))
+                <span class="ruby-ivar">@typeID</span>=(<span class="ruby-identifier">rand</span>()<span class="ruby-operator">*</span><span class="ruby-value">2</span>).<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;stone&quot;</span>,<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-comment cmt">#setMesh(Mesh.new(getMeshData(&quot;data/models/floor.ant2&quot;,1,&quot;data/textures/splats/gravel_big2.png&quot;,false),AGVector4.new(0,0,0,0),0))</span>
+                <span class="ruby-identifier">setMesh</span>(<span class="ruby-constant">Mesh</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getScene</span>,<span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/big_stone.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-value str">&quot;data/textures/models/big_stone.png&quot;</span>),<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>),<span class="ruby-identifier">rand</span><span class="ruby-operator">*</span><span class="ruby-value">360</span>))
+                
+<span class="ruby-comment cmt">#               setMesh(NewDecal.new(AGVector2.new(3,3),5.3,getMap,&quot;data/textures/gravel.png&quot;))</span>
+<span class="ruby-comment cmt">#               setMesh(NewDecal.new(AGVector2.new(3,3),5.3,getMap,&quot;data/textures/terrain/rough_dirt2.png&quot;))</span>
+<span class="ruby-comment cmt">#               setMesh(Mesh.new(</span>
+                <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;stone&quot;</span>,<span class="ruby-value">500</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

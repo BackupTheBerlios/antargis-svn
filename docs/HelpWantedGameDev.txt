@@ -1,0 +1,77 @@
+Battles of Antargis is searching for help.
+ 
+ 
+ <b>Team name:</b>
+The Battles of Antargis team.
+ 
+ <b>Project name:</b> 
+Battles of Antargis.
+ 
+ <b>Brief description:</b>
+An open-source medieval realtime-strategy game. It includes its own game engine which is based upon libSDL and OpenGL.
+We have just released the third official version (0.1.2). It's time to gather more help and
+gain some speed.
+ 
+<b>Target aim:</b>
+This is and will be an open-source game. It's code and content is licensed under GPL.
+Artists are however free to provide content under another compatible license, which would be some kind of Creative Commons License.
+The GUI-library of the game is licensed under LGPL.
+ 
+<b>Compensation:</b>
+There will be no compensation whatsoever. This is just for fun and fame.
+ 
+<b>Technology:</b>
+Targetsystems are all we can cover. Currently it's Linux,Windows XP and FreeBSD - these are tested. But it's likely that it runs on MacOS X,Sun or whatever Unix-System, 
+too, or it can at least be easily ported.
+
+It depends mainly on OpenGL, libSDL (and descendants), the Ruby language and SWIG for interface building.
+The engine and the GUI-library are written in C++. The game-logic is mainly implemented using Ruby.
+
+<b>Talent needed:</b>
+We need:
+* all kind of artists (music, sound, 2d-images, 3d-models, story-writers and level-designers)
+* developers
+
+Artists can provide music, images and 3D-models.
+
+For music we need some tunes, that match with a medieval game. Formats would be Ogg/Vorbis, which shouldn't be a problem at all.
+
+2D-artists can provide images that will be displayed between single levels to tell the story and portraits of our heroes.
+
+3D-artists can contribute by creating 3d-models, skinning, texturing and animation. We are relatively free on formats as we use OBJ-format, which
+is supported by most programs. For animation currently only Milkshape-TXT-format is supported. Others can be added easily, but it's hardly necessary as Milkshape does
+support so many. (<a href='http://www.swissquake.ch/chumbalum-soft/'>Milkshape 3D</a>)
+
+For level-designers there exists a map-editor.
+
+Developers will have a whole bunch of things to do. There is plenty work to do for the game-engine (C++), the game-logic (Ruby and C++) and level-scripting (Ruby).
+Experiences with OOP are necessary. Ruby/C++ knowledge is recommended or needed. But remember, anything can be learnt!
+
+<b>Team structure:</b>
+I'm the current team leader and have done most of the development and artwork.
+After an anouncement on the Linux Game Tome some weeks ago, we have already gathered some contributors.
+But it would be nice to have some more!
+ 
+<b>Website:</b>
+http://antargis.berlios.de
+ 
+<b>Contacts:</b>
+There will be an IRC-meeting on May 27th. FFFFFFFFFFFFFFFFFFFFFFIIIIIIIIIIIIIIIXXXXXXXXXXXXXXXMEEEE (date)
+
+We have a forum at: http://antargis.berlios.de/phpBB2/index.php
+This is actively used.
+
+
+ 
+<b>Additional Info:</b>
+This game was planned as a Powermonger-clone. But Battles of Antargis shall outpace it.
+The gameplay is like this:
+You have one or more heroes that have some troops each. With these you fulfill different missions, like conquering everything or defending a map.
+The difference to typical RTS games is the restricted control over your people. You can only control your heroes. The rest of your people have "their own" mind.
+If they are dissatisfied, they will no longer support you.
+For the first versions this game will be single-player with big emphasis on story. When a first campaign is finished we'll head for multiplayer.
+
+For more detailed information have a look at out wiki: http://antargis.berlios.de/wiki/index.php
+ 
+ <b>Feedback:</b>
+Feedback is appreciated.

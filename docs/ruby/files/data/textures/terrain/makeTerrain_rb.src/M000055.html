@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>makeTerrain (data/textures/terrain/makeTerrain.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/textures/terrain/makeTerrain.rb, line 23</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">makeTerrain</span>(<span class="ruby-identifier">triple</span>,<span class="ruby-identifier">thresF</span>=<span class="ruby-value">0</span><span class="ruby-value">.5</span>,<span class="ruby-identifier">diffF</span>=<span class="ruby-value">0</span><span class="ruby-value">.1</span>)
+        <span class="ruby-identifier">ground</span>=<span class="ruby-identifier">load</span>(<span class="ruby-value str">&quot;ground_4.png&quot;</span>)
+        <span class="ruby-identifier">darkground</span>=<span class="ruby-identifier">load</span>(<span class="ruby-value str">&quot;ground_5.png&quot;</span>)
+        <span class="ruby-identifier">grass</span>=<span class="ruby-identifier">load</span>(<span class="ruby-value str">&quot;big_grass.png&quot;</span>)
+        
+        <span class="ruby-identifier">ground</span>=<span class="ruby-identifier">load</span>(<span class="ruby-identifier">triple</span>[<span class="ruby-value">2</span>])
+        <span class="ruby-identifier">darkground</span>=<span class="ruby-identifier">load</span>(<span class="ruby-identifier">triple</span>[<span class="ruby-value">1</span>])
+        <span class="ruby-identifier">grass</span>=<span class="ruby-identifier">load</span>(<span class="ruby-identifier">triple</span>[<span class="ruby-value">0</span>])
+        
+        
+        <span class="ruby-identifier">mask</span>=<span class="ruby-identifier">load</span>(<span class="ruby-value str">&quot;terrain_mask3.png&quot;</span>)
+        
+        <span class="ruby-identifier">terrain</span>=<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">128</span>,<span class="ruby-value">128</span>)
+        
+        <span class="ruby-identifier">min</span>=<span class="ruby-value">300</span>
+        <span class="ruby-identifier">max</span>=<span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">127</span>
+                <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">y</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">127</span>
+                        <span class="ruby-identifier">c</span>=<span class="ruby-identifier">mask</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                        <span class="ruby-identifier">r</span>=<span class="ruby-identifier">toInt</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">brightness</span>)
+                        <span class="ruby-identifier">min</span>=[<span class="ruby-identifier">min</span>,<span class="ruby-identifier">r</span>].<span class="ruby-identifier">min</span>
+                        <span class="ruby-identifier">max</span>=[<span class="ruby-identifier">max</span>,<span class="ruby-identifier">r</span>].<span class="ruby-identifier">max</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">thresh</span>=(<span class="ruby-identifier">max</span><span class="ruby-operator">-</span><span class="ruby-identifier">min</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">thresF</span><span class="ruby-operator">+</span><span class="ruby-identifier">min</span>
+        <span class="ruby-identifier">diff</span>=(<span class="ruby-identifier">max</span><span class="ruby-operator">-</span><span class="ruby-identifier">min</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">diffF</span>
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;DIFF:&quot;</span>,<span class="ruby-identifier">diff</span>
+        
+        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">127</span>
+                <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">y</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">127</span>
+                        <span class="ruby-identifier">c</span>=<span class="ruby-identifier">mask</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                        <span class="ruby-identifier">r</span>=<span class="ruby-identifier">toInt</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">brightness</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">thresh</span><span class="ruby-operator">+</span><span class="ruby-identifier">diff</span>
+                                <span class="ruby-identifier">terrain</span>.<span class="ruby-identifier">putPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">grass</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">r</span><span class="ruby-operator">&lt;</span><span class="ruby-identifier">thresh</span><span class="ruby-operator">-</span><span class="ruby-identifier">diff</span>
+                                <span class="ruby-identifier">terrain</span>.<span class="ruby-identifier">putPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">ground</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                        <span class="ruby-keyword kw">else</span>
+                                
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r</span><span class="ruby-operator">&lt;</span><span class="ruby-identifier">thresh</span>
+                                        <span class="ruby-identifier">g</span>=<span class="ruby-identifier">darkground</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                                        <span class="ruby-identifier">t</span>=<span class="ruby-identifier">ground</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                                        <span class="ruby-identifier">v</span>=(<span class="ruby-identifier">r</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">thresh</span><span class="ruby-operator">-</span><span class="ruby-identifier">diff</span>))<span class="ruby-operator">/</span><span class="ruby-identifier">diff</span>
+                                        <span class="ruby-comment cmt">#v=1-v</span>
+                                        <span class="ruby-identifier">n</span>=<span class="ruby-identifier">g</span><span class="ruby-operator">*</span><span class="ruby-identifier">v</span><span class="ruby-operator">+</span><span class="ruby-identifier">t</span><span class="ruby-operator">*</span>(<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-identifier">v</span>)
+<span class="ruby-comment cmt">#                                       terrain.putPixel(x,y,darkground.getPixel(x,y))</span>
+                                        <span class="ruby-identifier">terrain</span>.<span class="ruby-identifier">putPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">n</span>)
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">g</span>=<span class="ruby-identifier">darkground</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                                        <span class="ruby-identifier">t</span>=<span class="ruby-identifier">grass</span>.<span class="ruby-identifier">getPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+                                        <span class="ruby-identifier">v</span>=(<span class="ruby-identifier">r</span><span class="ruby-operator">-</span><span class="ruby-identifier">thresh</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">diff</span>
+                                        <span class="ruby-comment cmt">#v=1-v</span>
+                                        <span class="ruby-identifier">n</span>=<span class="ruby-identifier">g</span><span class="ruby-operator">*</span>(<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-identifier">v</span>)<span class="ruby-operator">+</span><span class="ruby-identifier">t</span><span class="ruby-operator">*</span><span class="ruby-identifier">v</span>
+<span class="ruby-comment cmt">#                                       terrain.putPixel(x,y,darkground.getPixel(x,y))</span>
+                                        <span class="ruby-identifier">terrain</span>.<span class="ruby-identifier">putPixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">n</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">terrain</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

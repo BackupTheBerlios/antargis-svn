@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntEditGeneratorDialog)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editor/dialogs.rb, line 70</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-identifier">params</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-value str">&quot;data/gui/layout/editor_generator.xml&quot;</span>)
+                <span class="ruby-identifier">addSignal</span>(<span class="ruby-value str">&quot;sigGenerate&quot;</span>)
+
+                <span class="ruby-ivar">@params</span>=<span class="ruby-identifier">params</span>
+                <span class="ruby-ivar">@edits</span>={}
+
+                <span class="ruby-identifier">frame</span>=<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;frame&quot;</span>)
+
+                <span class="ruby-identifier">table</span>=<span class="ruby-constant">AGTable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">frame</span>,<span class="ruby-identifier">frame</span>.<span class="ruby-identifier">getRect</span>.<span class="ruby-identifier">origin</span>)
+
+                <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addColumn</span>(<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addColumn</span>(<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">params</span>.<span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addRow</span>(<span class="ruby-value">1</span>)
+                }
+                <span class="ruby-identifier">y</span>=<span class="ruby-value">0</span>
+                <span class="ruby-comment cmt">#table.arrange</span>
+                <span class="ruby-identifier">params</span>.<span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">n</span>=<span class="ruby-constant">AGText</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>,<span class="ruby-constant">AGRect2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">80</span>,<span class="ruby-value">20</span>),<span class="ruby-identifier">p</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;:&quot;</span>,<span class="ruby-constant">AGFont</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;FreeSans.ttf&quot;</span>,<span class="ruby-value">20</span>))
+                        <span class="ruby-comment cmt">#n.setAlign(AGText::RIGHT)</span>
+                        <span class="ruby-comment cmt">#n=AGButton.new(table,AGRect2.new(0,0,80,20),&quot;huhuhu&quot;)</span>
+                        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">n</span>)
+                        <span class="ruby-identifier">e</span>=<span class="ruby-constant">AGEdit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>,<span class="ruby-constant">AGRect2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">80</span>,<span class="ruby-value">20</span>))
+                        <span class="ruby-identifier">edits</span>[<span class="ruby-identifier">p</span>]=<span class="ruby-identifier">e</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setText</span>(<span class="ruby-identifier">eval</span>(<span class="ruby-node">&quot;params.#{p}&quot;</span>).<span class="ruby-identifier">to_s</span>)
+                        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-value">1</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">e</span>)
+
+                        <span class="ruby-identifier">y</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                }
+                <span class="ruby-identifier">table</span>.<span class="ruby-identifier">arrange</span>
+
+                <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-identifier">table</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

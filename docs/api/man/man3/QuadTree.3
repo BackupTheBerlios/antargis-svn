@@ -1,0 +1,101 @@
+.TH "QuadTree" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+QuadTree \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <quadtree.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBQuadTree\fP (\fBAGRect2\fP r)"
+.br
+.ti -1c
+.RI "\fB~QuadTree\fP ()"
+.br
+.ti -1c
+.RI "void \fBinsert\fP (T *t)"
+.br
+.ti -1c
+.RI "std::list< T * > \fBgetAll\fP ()"
+.br
+.RI "\fIget all the objects - should be used at all (only testing purpose) \fP"
+.ti -1c
+.RI "std::list< T * > \fBget\fP (const \fBAGRect2\fP &r)"
+.br
+.RI "\fIthis one you should call - get all objects, that intersect (or are included in) this rectangle \fP"
+.ti -1c
+.RI "bool \fBremove\fP (T *t)"
+.br
+.RI "\fIremove some object \fP"
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.RI "\fIempty this tree! \fP"
+.ti -1c
+.RI "size_t \fBsize\fP () const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T> class QuadTree< T >"
+sadly enough C++ still doesn't support templating in out of object files...
+.PP
+This is a simple quad-tree, that's based upon some 'unknown object', that must contain these functions: getRect() any more ??? The Rectangles are defined with \fBAGRect2\fP.
+.PP
+\fBQuadTree\fP doesn't own objects - you have to delete them yourself 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T> \fBQuadTree\fP< T >::\fBQuadTree\fP (\fBAGRect2\fP r)\fC [inline]\fP"
+.PP
+A quadtree tiles big rectangles into smaller ones. Elements get inserted into the smallest rectangle that contains an element. So you have a starting-rectangle 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIr\fP Starting rectangle, that gets tiled. This should contain everything that you want to store here. But don't make this rectangle too big, because otherwise must be tiled several times before even one object can be inserted. 
+.RE
+.PP
+
+.SS "template<class T> \fBQuadTree\fP< T >::~\fBQuadTree\fP ()\fC [inline]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> void \fBQuadTree\fP< T >::clear ()\fC [inline]\fP"
+.PP
+empty this tree! 
+.PP
+.SS "template<class T> std::list<T*> \fBQuadTree\fP< T >::get (const \fBAGRect2\fP & r)\fC [inline]\fP"
+.PP
+this one you should call - get all objects, that intersect (or are included in) this rectangle 
+.PP
+.SS "template<class T> std::list<T*> \fBQuadTree\fP< T >::getAll ()\fC [inline]\fP"
+.PP
+get all the objects - should be used at all (only testing purpose) 
+.PP
+.SS "template<class T> void \fBQuadTree\fP< T >::insert (T * t)\fC [inline]\fP"
+.PP
+insert an object 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIt\fP the object you want to insert 
+.RE
+.PP
+
+.SS "template<class T> bool \fBQuadTree\fP< T >::remove (T * t)\fC [inline]\fP"
+.PP
+remove some object 
+.PP
+.SS "template<class T> size_t \fBQuadTree\fP< T >::size () const\fC [inline]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

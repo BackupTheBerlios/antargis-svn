@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntVideoOptionsDialog)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/dialogs.rb, line 396</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">parent</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-value str">&quot;data/gui/layout/dialog_video_options.xml&quot;</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;fullscreen&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventFullscreen</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;shadow&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventShadow</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;animation&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventAnimation</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;particle&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventParticle</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;1024&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:event1024</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;1280&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:event1280</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;1400&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:event1400</span>)
+                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">pause</span>=<span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

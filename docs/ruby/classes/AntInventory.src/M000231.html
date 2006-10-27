@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntInventory)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_inventory.rb, line 6</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">rect</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">rect</span>)
+                <span class="ruby-identifier">$inventory</span>=<span class="ruby-keyword kw">self</span>
+                <span class="ruby-ivar">@resTypes</span>=[<span class="ruby-value str">&quot;wood&quot;</span>,<span class="ruby-value str">&quot;stone&quot;</span>,<span class="ruby-value str">&quot;men&quot;</span>,<span class="ruby-value str">&quot;food&quot;</span>,<span class="ruby-value str">&quot;tool&quot;</span>,<span class="ruby-value str">&quot;gold&quot;</span>,<span class="ruby-value str">&quot;boat&quot;</span>,<span class="ruby-value str">&quot;shield&quot;</span>,<span class="ruby-value str">&quot;sword&quot;</span>,<span class="ruby-value str">&quot;bow&quot;</span>,<span class="ruby-value str">&quot;coal&quot;</span>,<span class="ruby-value str">&quot;ore&quot;</span>,<span class="ruby-value str">&quot;steel&quot;</span>,<span class="ruby-value str">&quot;rod&quot;</span>,<span class="ruby-value str">&quot;fruit&quot;</span>,<span class="ruby-value str">&quot;corn&quot;</span>,<span class="ruby-value str">&quot;flour&quot;</span>] <span class="ruby-comment cmt">#,&quot;bread&quot;]</span>
+                <span class="ruby-identifier">setCaching</span>(<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-ivar">@invinited</span>=<span class="ruby-keyword kw">false</span>
+
+                <span class="ruby-ivar">@buttonNames</span>=[<span class="ruby-value str">&quot;doRecruit&quot;</span>,<span class="ruby-value str">&quot;doTakeFood&quot;</span>,<span class="ruby-value str">&quot;doTakeWeapons&quot;</span>,<span class="ruby-value str">&quot;doConstruct&quot;</span>,<span class="ruby-value str">&quot;doUpgrade&quot;</span>,<span class="ruby-value str">&quot;doContinue&quot;</span>]
+
+                <span class="ruby-identifier">addSignal</span>(<span class="ruby-value str">&quot;sigJobChanged&quot;</span>)
+
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

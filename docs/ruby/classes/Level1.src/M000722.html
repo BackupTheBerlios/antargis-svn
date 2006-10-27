@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventLevelStarted (Level1)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/levels/tutorial/tutorial0.rb, line 5</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventLevelStarted</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@started</span>
+                        <span class="ruby-identifier">start</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;beginning&quot;</span>)
+
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Exploring your world.&quot;</span>,<span class="ruby-value str">&quot;Welcome to the Battles Of Antargis Tutorial. At first you will be shown how to move around in your world.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Exploring your world.&quot;</span>,<span class="ruby-value str">&quot;For fast moving your view you can click on the 'Mini-Map' on the lower right (which will be shown as soon as this tutorial is over).&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Exploring your world.&quot;</span>,<span class="ruby-value str">&quot;If you want to scroll your view you can push and hold the left mouse-button and move it around. For zooming you can use your mouse-scrollers.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Exploring your world.&quot;</span>,<span class="ruby-value str">&quot;When you are in Fullscreen-mode you scroll by moving the cursor to screen's borders. Push ALT+RETURN to toggle fullscreen mode.&quot;</span>)
+
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;Now lets start with the actual game. At the beginning of each level your hero is centered and selected. Unlike other games you can only control your heroes.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;You can move him by right-clicking on the terrain. Please wait with testing this until this small instructions are finished.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;Now recruit some troops. Select the tower by left-clicking on it and then push the recruit-button on the right.&quot;</span>)
+                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">start</span>)
+                        <span class="ruby-ivar">@started</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

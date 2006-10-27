@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventResChange (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 366</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventResChange</span>(<span class="ruby-identifier">e</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getCaller</span>.<span class="ruby-identifier">getName</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;640&quot;</span>
+                                <span class="ruby-identifier">setRes</span>(<span class="ruby-value">640</span>,<span class="ruby-value">480</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;800&quot;</span>
+                                <span class="ruby-identifier">setRes</span>(<span class="ruby-value">800</span>,<span class="ruby-value">600</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;1024&quot;</span>
+                                <span class="ruby-identifier">setRes</span>(<span class="ruby-value">1024</span>,<span class="ruby-value">768</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;1280&quot;</span>
+                                <span class="ruby-identifier">setRes</span>(<span class="ruby-value">1280</span>,<span class="ruby-value">1024</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;1400&quot;</span>
+                                <span class="ruby-identifier">setRes</span>(<span class="ruby-value">1400</span>,<span class="ruby-value">1050</span>)
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

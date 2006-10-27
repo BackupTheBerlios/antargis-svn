@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>check (AntHeroBuildJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_buildjob.rb, line 31</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">moveFinished</span>
+                        <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">formation</span>=<span class="ruby-constant">AntFormationRest</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@hero</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntBoss</span>)
+                                <span class="ruby-identifier">checkEat</span>(<span class="ruby-identifier">man</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@constructStarted</span>
+                                        <span class="ruby-ivar">@men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span><span class="ruby-identifier">m</span>.<span class="ruby-identifier">delJob</span>}
+                                        <span class="ruby-ivar">@constructStarted</span>=<span class="ruby-keyword kw">true</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">20</span>) <span class="ruby-comment cmt"># do nothing at all</span>
+                                <span class="ruby-keyword kw">return</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@constructStarted</span>=<span class="ruby-keyword kw">true</span>
+                        <span class="ruby-identifier">wantmen</span>=(<span class="ruby-ivar">@men</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)<span class="ruby-operator">*</span><span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getAggression</span><span class="ruby-operator">/</span><span class="ruby-value">3.0</span>
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">getMode</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;fetch&quot;</span> <span class="ruby-comment cmt"># go to resource</span>
+                                        <span class="ruby-identifier">res</span>=<span class="ruby-identifier">getNeededResources</span>
+                                        <span class="ruby-identifier">res</span>,<span class="ruby-identifier">nearest</span>=<span class="ruby-identifier">getNextWithResource</span>(<span class="ruby-identifier">res</span>)
+                                        <span class="ruby-ivar">@restype</span>[<span class="ruby-identifier">man</span>]=[<span class="ruby-identifier">res</span>,<span class="ruby-identifier">nearest</span>]
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">nearest</span>.<span class="ruby-identifier">nil?</span>
+                                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;resource not found! #{res}&quot;</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">5</span>)
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">nearest</span>.<span class="ruby-identifier">getPos2D</span><span class="ruby-operator">-</span><span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getPos2D</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">&lt;</span><span class="ruby-value">20</span>
+                                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">nearest</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span><span class="ruby-value">.5</span>) <span class="ruby-comment cmt"># near but not actually there</span>
+                                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;harvest&quot;</span>)
+                                                <span class="ruby-keyword kw">else</span>
+                                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">1</span>)
+                                                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;TOO FAR&quot;</span>
+                                                <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;harvest&quot;</span> <span class="ruby-comment cmt"># harvest resource</span>
+                                        <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@restype</span>[<span class="ruby-identifier">man</span>][<span class="ruby-value">1</span>].<span class="ruby-identifier">getPos2D</span><span class="ruby-operator">-</span><span class="ruby-identifier">man</span>.<span class="ruby-identifier">getPos2D</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">&lt;</span><span class="ruby-value">3</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">2</span>)
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">digResource</span>(<span class="ruby-ivar">@restype</span>[<span class="ruby-identifier">man</span>][<span class="ruby-value">0</span>])
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;collect&quot;</span>)
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;WAS TOO FAR AWAY - Probably job discarded&quot;</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;&quot;</span>)
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;collect&quot;</span> <span class="ruby-comment cmt"># bring back</span>
+                                        <span class="ruby-comment cmt"># FIXME: add sub resource from nearest</span>
+                                        <span class="ruby-identifier">p</span>=<span class="ruby-ivar">@restype</span>[<span class="ruby-identifier">man</span>]
+                                        <span class="ruby-identifier">amount</span>=[<span class="ruby-identifier">p</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>]),<span class="ruby-identifier">man</span>.<span class="ruby-identifier">canCarry</span>].<span class="ruby-identifier">min</span>
+                                        <span class="ruby-identifier">p</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">amount</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">amount</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">collectResource</span>(<span class="ruby-ivar">@restype</span>[<span class="ruby-identifier">man</span>][<span class="ruby-value">0</span>])
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;brought&quot;</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;brought&quot;</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;after_brought&quot;</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">1</span>)
+                                        <span class="ruby-comment cmt"># take all natural resources - but not food and weapons - otherwise men starve!</span>
+                                        <span class="ruby-identifier">myResources</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+                                                <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">take</span>(<span class="ruby-identifier">man</span>.<span class="ruby-identifier">resource</span>,<span class="ruby-identifier">r</span>)
+                                        }
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;after_brought&quot;</span>
+                                        <span class="ruby-identifier">fpos</span>=<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getFormation</span>(<span class="ruby-identifier">man</span>,<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getPos2D</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">fpos</span>,<span class="ruby-value">0</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;construct_torest&quot;</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;goto_construct&quot;</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@targetpos</span>,<span class="ruby-value">0</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;to_construct&quot;</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;to_construct&quot;</span>  <span class="ruby-comment cmt"># do some constructing</span>
+                                        <span class="ruby-comment cmt">#@target.incSmoke</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">5</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getAggression</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>) <span class="ruby-comment cmt"># work for 3.5-5 seconds (depending on aggression)</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;constructing&quot;</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">playSound</span>(<span class="ruby-value str">&quot;construct&quot;</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMeshState</span>(<span class="ruby-value str">&quot;pick&quot;</span>) <span class="ruby-comment cmt"># FIXME: add hammering</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;constructing&quot;</span>
+                                        <span class="ruby-comment cmt"># was constructing</span>
+                                        <span class="ruby-identifier">readyConstructed</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">incExperience</span>(<span class="ruby-identifier">man</span>.<span class="ruby-identifier">learnAmount</span>)
+                                        <span class="ruby-comment cmt">#@target.decSmoke</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;construct_torest&quot;</span>)
+                                        <span class="ruby-identifier">fpos</span>=<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getFormation</span>(<span class="ruby-identifier">man</span>,<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getPos2D</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">fpos</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;construct_torest&quot;</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;rest&quot;</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">3</span><span class="ruby-operator">/</span><span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getAggression</span>) <span class="ruby-comment cmt"># shorter pauses when aggression is higher</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">getAggression</span><span class="ruby-operator">&lt;</span><span class="ruby-value">3</span>
+                                                <span class="ruby-identifier">checkEat</span>(<span class="ruby-identifier">man</span>)
+                                        <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-ivar">@usedmen</span><span class="ruby-operator">-=</span><span class="ruby-value">1</span>
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">wantmen</span><span class="ruby-operator">&gt;</span><span class="ruby-ivar">@usedmen</span>
+                                                <span class="ruby-ivar">@usedmen</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@targetpos</span>,<span class="ruby-value">0</span>)
+                                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">enoughResources</span>
+                                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;goto_construct&quot;</span>)
+                                                <span class="ruby-keyword kw">else</span>
+                                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;fetch&quot;</span>)
+                                                <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

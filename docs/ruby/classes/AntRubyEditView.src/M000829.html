@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>addEntity (AntRubyEditView)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editview.rb, line 289</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">addEntity</span>(<span class="ruby-identifier">list</span>,<span class="ruby-identifier">button</span>)
+                <span class="ruby-identifier">pos</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">isTerrain</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">node</span>)
+                                <span class="ruby-identifier">pos</span>=<span class="ruby-identifier">c</span>.<span class="ruby-identifier">pos</span>
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">pos</span>
+                        <span class="ruby-keyword kw">return</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;ADDENTITY&quot;</span>
+                <span class="ruby-comment cmt">#pos=getMarkerPos</span>
+                <span class="ruby-identifier">dorand</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@type</span><span class="ruby-operator">==</span><span class="ruby-constant">AntDeco</span>
+                        <span class="ruby-identifier">tree</span>=<span class="ruby-ivar">@type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@decoType</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@decoType</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;floor&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@decoType</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;block&quot;</span>
+                                <span class="ruby-identifier">dorand</span>=<span class="ruby-keyword kw">false</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@type</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHero</span>
+                        <span class="ruby-identifier">tree</span>=<span class="ruby-ivar">@type</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">setAppearance</span>(<span class="ruby-ivar">@appearance</span>)
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;TYPE:&quot;</span>,<span class="ruby-ivar">@type</span>
+                        <span class="ruby-identifier">tree</span>=<span class="ruby-ivar">@type</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;type:&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-identifier">tree</span>
+                <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">x</span>,<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">y</span>))
+                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">insertEntity</span>(<span class="ruby-identifier">tree</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

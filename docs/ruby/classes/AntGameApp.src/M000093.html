@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>checkHeroEnergy (AntGameApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/antargis.rb, line 493</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkHeroEnergy</span>
+                <span class="ruby-identifier">name</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getPlayer</span>.<span class="ruby-identifier">getHeroes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHero</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">getEnergy</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span><span class="ruby-value">.3</span>
+                                        <span class="ruby-identifier">name</span>=<span class="ruby-identifier">h</span>.<span class="ruby-identifier">getName</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@infobox</span><span class="ruby-operator">==</span><span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">name!</span>=<span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-ivar">@infobox</span>=<span class="ruby-constant">AntInfoBox</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@layout</span>,<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;Your hero {1} suffers.&quot;</span>,<span class="ruby-identifier">name</span>)))
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@infobox!</span>=<span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">name</span><span class="ruby-operator">==</span><span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-ivar">@infobox</span>.<span class="ruby-identifier">close</span>
+                        <span class="ruby-ivar">@infobox</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getMeshData (ruby/ant_tools.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_tools.rb, line 5</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getMeshData</span>(<span class="ruby-identifier">file</span>,<span class="ruby-identifier">zoom</span>,<span class="ruby-identifier">texture</span>=<span class="ruby-value str">&quot;&quot;</span>,<span class="ruby-identifier">shadow</span>=<span class="ruby-keyword kw">true</span>)
+        <span class="ruby-identifier">id</span>=<span class="ruby-identifier">file</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;:&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">texture</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$meshes</span>
+                <span class="ruby-identifier">$meshes</span>={}
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$meshes</span>[<span class="ruby-identifier">id</span>]
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;LOAD MESH:&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">id</span>  
+                <span class="ruby-identifier">$meshes</span>[<span class="ruby-identifier">id</span>]=<span class="ruby-constant">MeshData</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>,<span class="ruby-identifier">zoom</span>,<span class="ruby-identifier">texture</span>,<span class="ruby-identifier">shadow</span>)
+
+<span class="ruby-comment cmt">#               # instancing test</span>
+<span class="ruby-comment cmt">#               puts &quot;FILE:#{file}&quot;</span>
+<span class="ruby-comment cmt">#               if file =~ /tree/</span>
+<span class="ruby-comment cmt">#                       ts=[]</span>
+<span class="ruby-comment cmt">#                       (0..2).each{|x|</span>
+<span class="ruby-comment cmt">#                               (0..2).each{|y|</span>
+<span class="ruby-comment cmt">#                                       ts.push(AGMatrix4.new(AGVector4.new(x*2+rand*1.7,y*2+rand*1.7,0,0)))</span>
+<span class="ruby-comment cmt">#                               }</span>
+<span class="ruby-comment cmt">#                       }</span>
+<span class="ruby-comment cmt">#                       $meshes[id].makeInstances(ts)</span>
+<span class="ruby-comment cmt">#               end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">$meshes</span>[<span class="ruby-identifier">id</span>]
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

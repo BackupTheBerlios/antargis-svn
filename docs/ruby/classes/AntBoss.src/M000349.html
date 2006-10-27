@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>checkCreateMen (AntBoss)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_boss.rb, line 90</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkCreateMen</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@createMen</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-ivar">@createMen</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>) <span class="ruby-keyword kw">do</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;NEW ---------MAN&quot;</span>
+                                <span class="ruby-identifier">man</span>=<span class="ruby-constant">AntMan</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">insertEntity</span>(<span class="ruby-identifier">man</span>)
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-identifier">getPos2D</span>)
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setBoss</span>(<span class="ruby-keyword kw">self</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-comment cmt">#getMap.endChange</span>
+                        <span class="ruby-ivar">@createMen</span>=<span class="ruby-value">0</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

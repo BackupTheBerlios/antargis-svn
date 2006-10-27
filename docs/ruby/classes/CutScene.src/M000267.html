@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (CutScene)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/campaign.rb, line 165</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">node</span>)
+                <span class="ruby-ivar">@screens</span>=[]
+                <span class="ruby-identifier">node</span>.<span class="ruby-identifier">getChildren</span>(<span class="ruby-value str">&quot;screen&quot;</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">screen</span>={}
+                        <span class="ruby-identifier">screen</span>[<span class="ruby-identifier">:text</span>]=<span class="ruby-value str">&quot;&quot;</span>
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">getChildren</span>(<span class="ruby-value str">&quot;image&quot;</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">imageName</span>=<span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;filename&quot;</span>)
+                                <span class="ruby-identifier">screen</span>[<span class="ruby-identifier">:imageName</span>]=<span class="ruby-identifier">imageName</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">imageName</span>
+                                        <span class="ruby-identifier">screen</span>[<span class="ruby-identifier">:image</span>]=<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">imageName</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        }
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">getChildren</span>(<span class="ruby-value str">&quot;text&quot;</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">screen</span>[<span class="ruby-identifier">:text</span>]<span class="ruby-operator">+=</span><span class="ruby-identifier">c</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;text&quot;</span>)
+                        }
+                        <span class="ruby-ivar">@screens</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">screen</span>)
+                }
+                <span class="ruby-comment cmt">#@finished=&quot;won&quot;</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntPlayerEditDialog)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editor/dialogs.rb, line 116</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">parent</span>)
+                <span class="ruby-keyword kw">super</span>
+                <span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">loadFile</span>(<span class="ruby-value str">&quot;data/gui/layout/editor_players_dialog.xml&quot;</span>))
+                <span class="ruby-ivar">@players</span>={}
+                <span class="ruby-ivar">@list</span>=<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;playerList&quot;</span>)
+                <span class="ruby-identifier">initPlayerNames</span>
+                <span class="ruby-identifier">initPlayerTypes</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">eventPlayerSelected</span>(<span class="ruby-keyword kw">nil</span>)
+                <span class="ruby-keyword kw">end</span>
+                        
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@list</span>,<span class="ruby-identifier">:sigSelect</span>,<span class="ruby-identifier">:eventPlayerSelected</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;addPlayer&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventAddPlayer</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;changePlayer&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventChangePlayer</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;deletePlayer&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventDelPlayer</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

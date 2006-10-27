@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventTrigger (Level2)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/levels/birth/birth2.rb, line 5</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventTrigger</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-identifier">t</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;nogo&quot;</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">getPlayer</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHumanPlayer</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@druid</span>
+                                        <span class="ruby-identifier">s</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;noFurther&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">hero</span>.<span class="ruby-identifier">getName</span>,<span class="ruby-value str">&quot;I will not go any further! There are strangers out there. They don't seem friendly.&quot;</span>)
+                                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">s</span>)
+                                        <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">newHLMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getTarget</span>(<span class="ruby-value str">&quot;goback&quot;</span>).<span class="ruby-identifier">pos</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;druid&quot;</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@druid</span>   
+                                        <span class="ruby-identifier">s</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;druid2&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Druid&quot;</span>,<span class="ruby-value str">&quot;Go your path hero.&quot;</span>)
+                                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">s</span>)
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-ivar">@druid</span>=<span class="ruby-keyword kw">true</span>
+                                        <span class="ruby-identifier">s</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;druid1&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Druid&quot;</span>,<span class="ruby-value str">&quot;Greetings stranger! I am the druid.&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Druid&quot;</span>,<span class="ruby-value str">&quot;These are dangerous times. Be watchful in these woods.&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Rowen&quot;</span>,<span class="ruby-value str">&quot;I think I have lost my memory.&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Druid&quot;</span>,<span class="ruby-value str">&quot;Yes, but I see times of remembrance in your future...&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Druid&quot;</span>,<span class="ruby-value str">&quot;You should go east and meet the smith.&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Rowen&quot;</span>,<span class="ruby-value str">&quot;But there is a party of strangers on the way.&quot;</span>)
+                                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Druid&quot;</span>,<span class="ruby-value str">&quot;They will be gone soon.&quot;</span>)
+                                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">s</span>)
+                                        <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-value str">&quot;Bantor&quot;</span>).<span class="ruby-identifier">newHLMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getTarget</span>(<span class="ruby-value str">&quot;retreat&quot;</span>).<span class="ruby-identifier">pos</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;storyFinished&quot;</span>
+                
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@story</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;end&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@story</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;marcus1&quot;</span>
+                                        <span class="ruby-identifier">wonLevel</span>
+                                        <span class="ruby-identifier">endLevel</span>
+                                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-comment cmt"># ignore</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

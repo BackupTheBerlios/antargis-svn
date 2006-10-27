@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>startWalking (AntHeroMoveJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 183</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">startWalking</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;startWalking:::::::::::&quot;</span>
+                <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">formation</span>=<span class="ruby-constant">AntFormationBlock</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@hero</span>,<span class="ruby-identifier">formatDir</span>)
+                <span class="ruby-ivar">@pos</span>=<span class="ruby-ivar">@waypoints</span>.<span class="ruby-identifier">shift</span>
+                <span class="ruby-ivar">@men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">f</span>=<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getFormation</span>(<span class="ruby-identifier">m</span>,<span class="ruby-ivar">@pos</span>)
+                        <span class="ruby-identifier">m</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">f</span>,<span class="ruby-ivar">@dist</span>)
+                        <span class="ruby-identifier">m</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;moving&quot;</span>)
+                }
+                <span class="ruby-ivar">@state</span>=<span class="ruby-value str">&quot;moving&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;startWalking.&quot;</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>newPlayer (AntRubyMap)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/map.rb, line 384</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">newPlayer</span>(<span class="ruby-identifier">name</span>)
+                <span class="ruby-comment cmt"># FIXME:get a free spawn point</span>
+                <span class="ruby-comment cmt">#</span>
+                <span class="ruby-ivar">@targets</span>.<span class="ruby-identifier">each_key</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/spawn/</span>
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-identifier">pos</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">20</span>,<span class="ruby-value">20</span>)
+                <span class="ruby-identifier">player</span>=<span class="ruby-constant">AntHumanPlayer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>)
+                <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">player</span>)
+                <span class="ruby-comment cmt">#new hero</span>
+                <span class="ruby-identifier">hero</span>=<span class="ruby-constant">AntHero</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">setName</span>(<span class="ruby-identifier">name</span>)
+                <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">setPlayer</span>(<span class="ruby-identifier">player</span>)
+                <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-identifier">pos</span>)
+                <span class="ruby-identifier">insertEntity</span>(<span class="ruby-identifier">hero</span>)
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">player</span>,<span class="ruby-identifier">hero</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

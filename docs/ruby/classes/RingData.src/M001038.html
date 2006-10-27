@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getRingData (RingData)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_ring.rb, line 5</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-constant">RingData</span>.<span class="ruby-identifier">getRingData</span>(<span class="ruby-identifier">w</span>=<span class="ruby-value">1</span>)
+                <span class="ruby-ivar">@@ringdata</span><span class="ruby-operator">||=</span>[]
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>]
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>]
+                <span class="ruby-keyword kw">end</span>
+        
+                <span class="ruby-comment cmt">#size=1</span>
+                        
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;MAKEFIRMESH&quot;</span>
+                <span class="ruby-identifier">opt</span>=<span class="ruby-constant">MeshOptimizer</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">mv0</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">mv1</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">mv2</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">mv3</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                
+                <span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>) <span class="ruby-comment cmt">#0.6,0.7,1,1) #0.9)</span>
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">c</span>=<span class="ruby-identifier">c</span>
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">c</span>=<span class="ruby-identifier">c</span>
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">c</span>=<span class="ruby-identifier">c</span>
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">c</span>=<span class="ruby-identifier">c</span>
+                
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span>)
+                
+                <span class="ruby-comment cmt">#w=size</span>
+                <span class="ruby-identifier">h</span>=<span class="ruby-value">0</span><span class="ruby-value">.1</span>
+                
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">w</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+                
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+                
+                <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>]=<span class="ruby-constant">MeshData</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">getArray</span>,<span class="ruby-value str">&quot;data/textures/ring.png&quot;</span>,<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>].<span class="ruby-identifier">setOverdraw</span>(<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>].<span class="ruby-identifier">setColors</span>(<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>].<span class="ruby-identifier">setPickable</span>(<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>].<span class="ruby-identifier">setLighting</span>(<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@@ringdata</span>[<span class="ruby-identifier">w</span>]
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

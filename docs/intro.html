@@ -1,0 +1,96 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="">
+  <title></title>
+</head>
+
+<body>
+<h1>Battles of Antargis - Documentation</h1>
+
+<h2>Overview</h2>
+
+<p>Because this a bigger project and splitted into a ruby and a c++-part,
+this documentation contains several parts:</p>
+<ol>
+  <li><a href="api/html/index.html">C++  API-documentation</a></li>
+  <li><a href="ruby/index.html">Ruby API-documentation</a></li>
+  <li><a href="tutorials/index.html">Tutorial section</a></li>
+</ol>
+
+<p>
+For detailed information about the several file formats used, go to the tutorial-section.
+</p>
+<p>
+	<strong>NOTE:</strong>The API-documentation is generated - so you have to run "rake doc" in your Antargis-directory to view them.
+</p>
+
+<h2>Game definition</h2>
+
+<p>Battles of Antargis is a project to develop a real-time-strategy (RTS)
+game, which is a mixture of 3 three games:</p>
+<ol>
+  <li>Powermonger</li>
+  <li>Settlers</li>
+  <li>Warcraft</li>
+</ol>
+
+<p>The main purpose of this game is conquering a medieval-like world. While
+doing so with your hero(es) you meet friends and enemies. Enemies can be
+fought with your troopers that you can arm with weapons and armour. In some
+cases you'll have to build these weapons or new buildings. Another thing is
+that resources are quiet rare.</p>
+
+The deciding differences to normal RTS-games like Warcraft are: 
+<ul>
+<li><tt>Story-bound</tt> - the game is strongly story-bound. So you will be
+told some story while playing the game and not only in between the
+different levels
+
+</li>
+<li><tt>Only 2 unit-types</tt> - This game only provides 2 kinds of units:
+heroes and troopers. The latter are the normal people, which do their work
+and can be recruited by heroes. Each player has an avatar within the game.
+This one is the player himself. So if this avatar dies, the game (or the
+level) is lost. The player can however gain control over other heroes.
+
+</li>
+<li><tt>Restricted control</tt> - You can&#8217;t control your troopers
+directly. You can assign jobs to your heroes. They will then automatically
+control their troopers.
+
+</li>
+</ul>
+
+
+
+<h2>Architectural overview</h2>
+
+<p>As mentioned above Battles of Antargis is splitted into a c++ and a ruby
+part. The advantage of this approach are the shorter development-cycles. It's
+easier to restart a program after modifying some lines of ruby code instead
+of having to compile the whole xxxx-load before doing so.</p>
+
+<p>So much for the reasons. Here's the logical structure of the game from
+bottom to the top:</p>
+<ul>
+  <li>C++ and libraries (OpenGL, libSDL, ...)<br>
+  </li>
+  <li>GUI-library named AntargisGUI</li>
+  <li>3d-Engine</li>
+  <li>Game-Engine</li>
+  <li>Scripting-Interface to Ruby done with <a
+    href="http://www.swig.org">swig</a>.</li>
+  <li>plain game-logic done in Ruby</li>
+  <li>scripting interfaces for AI and level-scripting</li>
+  <li>AI and levels' scripts</li>
+</ul>
+
+<h2>Further information &amp; help</h2>
+
+<p>Apart from this information you'll find many more (often outdated)
+documentation in the <a href="http://antargis.berlios.de/wiki/">Wiki</a>.</p>
+
+<p>If you have questions, don't hesitate to ask in the <a
+href="http://antargis.berlios.de/phpBB2/">Forums</a> !!!</p>
+</body>
+</html>

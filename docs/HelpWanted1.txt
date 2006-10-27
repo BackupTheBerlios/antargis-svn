@@ -1,0 +1,36 @@
+I've been working on this game for about 3 years and I think I've pushed it as far as I could alone.
+So now it's time to seriously call for help.  I don't want to publish this as a full release but mearly as
+a techdemo.
+
+Project name:
+Battles of Antargis
+
+Website:
+http://antargis.berlios.de
+
+Screenshots:
+[IMG]http://antargis.berlios.de/screenies/shot060222c.jpg[/IMG]
+For more screenshots have a look at http://antargis.berlios.de/index.php?page=screenshots
+
+Short description:
+This game is a real-time strategy which aims at conquering. The player isn't able to build units.
+The approach is very similar to Bullfrog's Powermonger. But there will be strong story lines in the game similar
+to Battle for Wesnoth. The license is GPL for the game and it's content; and LGPL for the built-in GUI-library.
+
+Status:
+The underlying engine is nearly complete but still needs some tweaking. I have started a tutorial and a first campaign.
+The main issues are:
+1) Lack of story, levels and maps
+2) Lack of arts (2d and 3d)
+3) object and level scripting (in Ruby)
+
+A first tech-demo can be found at the Downloads-section.
+
+I'm searching for:
+1) all kind of artists: music, sound, 2d- and 3d-arts
+2) level-designers and story-writers
+3) developers with ruby and/or c++ experience
+4) an "OpenGL-guru", who is able to optimize my current code.
+5) some testers and people with ideas how to improve the gameplay.
+
+Your invited to discuss the game at Antargis' forums!

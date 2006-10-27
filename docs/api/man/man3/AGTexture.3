@@ -1,0 +1,240 @@
+.TH "AGTexture" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGTexture \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_texture.h>\fP
+.PP
+Inherits \fBAGPaintTarget\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGTexture\fP ()"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP (const \fBAGSurface\fP &pSurface, bool p3d=false)"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP (const \fBAGTexture\fP &t)"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP (int W, int H)"
+.br
+.ti -1c
+.RI "\fB~AGTexture\fP ()"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP & \fBoperator=\fP (const \fBAGTexture\fP &t)"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP \fBcopy\fP () const "
+.br
+.ti -1c
+.RI "int \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "int \fBheight\fP () const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetRect\fP () const "
+.br
+.ti -1c
+.RI "\fBAGColor\fP \fBgetPixel\fP (int x, int y) const "
+.br
+.ti -1c
+.RI "float \fBgetSurfaceWidth\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetSurfaceHeight\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetTextureWidth\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetTextureHeight\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetTW\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetTH\fP () const "
+.br
+.ti -1c
+.RI "bool \fBhasTexture\fP () const "
+.br
+.ti -1c
+.RI "bool \fBtextureUsed\fP () const "
+.br
+.ti -1c
+.RI "void \fBclearTexture\fP ()"
+.br
+.ti -1c
+.RI "void \fBclearTextureUsed\fP ()"
+.br
+.ti -1c
+.RI "void \fBuseTexture\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBbeginPaint\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBendPaint\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBputPixel\fP (int x, int y, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "virtual void \fBfillRect\fP (const \fBAGRect2\fP &pRect, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "virtual void \fBblit\fP (const \fBAGTexture\fP &pSource, const \fBAGRect2\fP &\fBpDest\fP, const \fBAGRect2\fP &\fBpSrc\fP)"
+.br
+.ti -1c
+.RI "virtual void \fBblit\fP (const \fBAGTexture\fP &pSource, const \fBAGRect2\fP &\fBpDest\fP, const \fBAGRect2\fP &\fBpSrc\fP, const \fBAGColor\fP &pColor)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawLine\fP (const \fBAGVector2\fP &p0, const \fBAGVector2\fP &p1, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawGradient\fP (const \fBAGRect2\fP &rect, const \fBAGColor\fP &ul, const \fBAGColor\fP &ur, const \fBAGColor\fP &dl, const \fBAGColor\fP &dr)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawGradientAlpha\fP (const \fBAGRect2\fP &rect, const \fBAGColor\fP &ul, const \fBAGColor\fP &ur, const \fBAGColor\fP &dl, const \fBAGColor\fP &dr)"
+.br
+.ti -1c
+.RI "void \fBsetWrapping\fP (bool pWrap)"
+.br
+.ti -1c
+.RI "void \fBsetFilter\fP (GLuint mag, GLuint min)"
+.br
+.ti -1c
+.RI "void \fBsetClamp\fP (GLuint s, GLuint t, GLuint r)"
+.br
+.ti -1c
+.RI "\fBAGGLTexture\fP * \fBglTexture\fP ()"
+.br
+.ti -1c
+.RI "\fBAGInternalSurface\fP * \fBsdlTexture\fP ()"
+.br
+.ti -1c
+.RI "bool \fBis3d\fP () const "
+.br
+.ti -1c
+.RI "void \fBclearContent\fP ()"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGTexturePainter\fP"
+.br
+.ti -1c
+.RI "class \fBAGSDLScreen\fP"
+.br
+.ti -1c
+.RI "class \fBAGGLScreen\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGTexture::AGTexture ()"
+.PP
+.SS "AGTexture::AGTexture (const \fBAGSurface\fP & pSurface, bool p3d = \fCfalse\fP)"
+.PP
+.SS "AGTexture::AGTexture (const \fBAGTexture\fP & t)"
+.PP
+.SS "AGTexture::AGTexture (int W, int H)"
+.PP
+.SS "AGTexture::~AGTexture ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGTexture::beginPaint ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGPaintTarget\fP.
+.SS "void AGTexture::blit (const \fBAGTexture\fP & pSource, const \fBAGRect2\fP & pDest, const \fBAGRect2\fP & pSrc, const \fBAGColor\fP & pColor)\fC [virtual]\fP"
+.PP
+.SS "void AGTexture::blit (const \fBAGTexture\fP & pSource, const \fBAGRect2\fP & pDest, const \fBAGRect2\fP & pSrc)\fC [virtual]\fP"
+.PP
+.SS "void AGTexture::clearContent ()"
+.PP
+clears texture-content when you paint on a texture in gl-mode you must call this before creating the \fBAGPainter\fP object 
+.SS "void AGTexture::clearTexture ()"
+.PP
+.SS "void AGTexture::clearTextureUsed ()"
+.PP
+.SS "\fBAGTexture\fP AGTexture::copy () const"
+.PP
+.SS "void AGTexture::drawGradient (const \fBAGRect2\fP & rect, const \fBAGColor\fP & ul, const \fBAGColor\fP & ur, const \fBAGColor\fP & dl, const \fBAGColor\fP & dr)\fC [virtual]\fP"
+.PP
+.SS "void AGTexture::drawGradientAlpha (const \fBAGRect2\fP & rect, const \fBAGColor\fP & ul, const \fBAGColor\fP & ur, const \fBAGColor\fP & dl, const \fBAGColor\fP & dr)\fC [virtual]\fP"
+.PP
+.SS "void AGTexture::drawLine (const \fBAGVector2\fP & p0, const \fBAGVector2\fP & p1, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+.SS "void AGTexture::endPaint ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGPaintTarget\fP.
+.SS "void AGTexture::fillRect (const \fBAGRect2\fP & pRect, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+.SS "\fBAGColor\fP AGTexture::getPixel (int x, int y) const"
+.PP
+.SS "\fBAGRect2\fP AGTexture::getRect () const"
+.PP
+.SS "float AGTexture::getSurfaceHeight () const"
+.PP
+.SS "float AGTexture::getSurfaceWidth () const"
+.PP
+.SS "float AGTexture::getTextureHeight () const"
+.PP
+.SS "float AGTexture::getTextureWidth () const"
+.PP
+.SS "float AGTexture::getTH () const"
+.PP
+.SS "float AGTexture::getTW () const"
+.PP
+.SS "\fBAGGLTexture\fP * AGTexture::glTexture ()"
+.PP
+.SS "bool AGTexture::hasTexture () const"
+.PP
+.SS "int AGTexture::height () const"
+.PP
+.SS "bool AGTexture::is3d () const"
+.PP
+.SS "\fBAGTexture\fP & AGTexture::operator= (const \fBAGTexture\fP & t)"
+.PP
+.SS "void AGTexture::putPixel (int x, int y, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGPaintTarget\fP.
+.SS "\fBAGInternalSurface\fP * AGTexture::sdlTexture ()"
+.PP
+.SS "void AGTexture::setClamp (GLuint s, GLuint t, GLuint r)"
+.PP
+.SS "void AGTexture::setFilter (GLuint mag, GLuint min)"
+.PP
+.SS "void AGTexture::setWrapping (bool pWrap)"
+.PP
+.SS "bool AGTexture::textureUsed () const"
+.PP
+.SS "void AGTexture::useTexture ()"
+.PP
+.SS "int AGTexture::width () const"
+.PP
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBAGGLScreen\fP\fC [friend]\fP"
+.PP
+.SS "friend class \fBAGSDLScreen\fP\fC [friend]\fP"
+.PP
+.SS "friend class AGTexturePainter\fC [friend]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

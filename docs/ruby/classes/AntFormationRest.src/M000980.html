@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>calcFormation (AntFormationRest)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_formations.rb, line 81</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calcFormation</span>
+                <span class="ruby-ivar">@rpos</span>={} <span class="ruby-comment cmt"># real positions as map from man to AGVector2</span>
+                <span class="ruby-identifier">vpos</span>={}  <span class="ruby-comment cmt"># virtual positions as map from man to pair of [row,line (circle)]</span>
+
+                <span class="ruby-identifier">men</span>=<span class="ruby-identifier">sort</span>(<span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">getMen</span>)
+                <span class="ruby-ivar">@men</span>=<span class="ruby-identifier">men</span>
+
+                <span class="ruby-identifier">linesizes</span>={}
+                <span class="ruby-identifier">line</span>=<span class="ruby-value">1</span>
+                <span class="ruby-identifier">row</span>=<span class="ruby-value">0</span>
+                <span class="ruby-identifier">men</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-ivar">@boss</span>)
+                <span class="ruby-identifier">men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">vpos</span>[<span class="ruby-identifier">m</span>]=[<span class="ruby-identifier">row</span>,<span class="ruby-identifier">line</span>]
+                        <span class="ruby-identifier">linesizes</span>[<span class="ruby-identifier">line</span>]<span class="ruby-operator">||=</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">linesizes</span>[<span class="ruby-identifier">line</span>]<span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                        <span class="ruby-identifier">row</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">row</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">getRowsOfLine</span>(<span class="ruby-identifier">line</span>)  <span class="ruby-comment cmt"># add check for new weapon group here</span>
+                                <span class="ruby-identifier">row</span><span class="ruby-operator">-=</span><span class="ruby-identifier">getRowsOfLine</span>(<span class="ruby-identifier">line</span>)
+                                <span class="ruby-identifier">line</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-identifier">men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">row</span>,<span class="ruby-identifier">line</span>=<span class="ruby-identifier">vpos</span>[<span class="ruby-identifier">m</span>]
+                        <span class="ruby-identifier">radius</span>=<span class="ruby-identifier">line</span><span class="ruby-operator">*</span><span class="ruby-value">1.2</span>
+                        <span class="ruby-identifier">angle</span>=<span class="ruby-identifier">row</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-identifier">linesizes</span>[<span class="ruby-identifier">line</span>]<span class="ruby-operator">*</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>
+                        <span class="ruby-ivar">@rpos</span>[<span class="ruby-identifier">m</span>]=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">angle</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">radius</span>,<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">angle</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">radius</span>)
+                        <span class="ruby-comment cmt">#puts &quot;SET:#{m}&quot;</span>
+                }
+                <span class="ruby-ivar">@rpos</span>[<span class="ruby-ivar">@boss</span>]=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@men</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-ivar">@inited</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

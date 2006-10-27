@@ -1,0 +1,83 @@
+.TH "MoveJob" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MoveJob \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <jobs.h>\fP
+.PP
+Inherits \fBJob\fP.
+.PP
+Inherited by \fBFetchJob\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMoveJob\fP ()"
+.br
+.ti -1c
+.RI "\fBMoveJob\fP (int p, const \fBAGVector2\fP &pTarget, float pnear=0, bool pRun=false)"
+.br
+.ti -1c
+.RI "\fBMoveJob\fP (int p, const \fBAGVector3\fP &pTarget, float pnear=0, bool pRun=false)"
+.br
+.ti -1c
+.RI "virtual \fB~MoveJob\fP ()"
+.br
+.ti -1c
+.RI "void \fBmove\fP (\fBAntEntity\fP *e, float ptime)"
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgetDirection\fP (const \fBAntEntity\fP *e) const "
+.br
+.ti -1c
+.RI "virtual void \fBsaveXML\fP (\fBNode\fP &pNode) const "
+.br
+.ti -1c
+.RI "virtual void \fBloadXML\fP (const \fBNode\fP &pNode)"
+.br
+.ti -1c
+.RI "virtual \fBAGString\fP \fBxmlName\fP () const "
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MoveJob::MoveJob ()"
+.PP
+.SS "MoveJob::MoveJob (int p, const \fBAGVector2\fP & pTarget, float pnear = \fC0\fP, bool pRun = \fCfalse\fP)"
+.PP
+.SS "MoveJob::MoveJob (int p, const \fBAGVector3\fP & pTarget, float pnear = \fC0\fP, bool pRun = \fCfalse\fP)"
+.PP
+.SS "MoveJob::~MoveJob ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAGVector2\fP MoveJob::getDirection (const \fBAntEntity\fP * e) const"
+.PP
+.SS "void MoveJob::loadXML (const \fBNode\fP & pNode)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.PP
+Reimplemented in \fBFetchJob\fP.
+.SS "void MoveJob::move (\fBAntEntity\fP * e, float ptime)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.PP
+Reimplemented in \fBFetchJob\fP.
+.SS "void MoveJob::saveXML (\fBNode\fP & pNode) const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.PP
+Reimplemented in \fBFetchJob\fP.
+.SS "\fBAGString\fP MoveJob::xmlName () const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.PP
+Reimplemented in \fBFetchJob\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

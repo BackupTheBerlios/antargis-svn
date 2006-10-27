@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>processMessage (AntMpMap)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mpmap.rb, line 17</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">processMessage</span>(<span class="ruby-identifier">message</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">message</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">RestMessage</span>
+                                <span class="ruby-identifier">getByUID</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">hero</span>).<span class="ruby-identifier">newHLRestJob</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">time</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">MoveMessage</span>
+                                <span class="ruby-identifier">getByUID</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">hero</span>).<span class="ruby-identifier">newHLMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">message</span>.<span class="ruby-identifier">pos</span>,<span class="ruby-identifier">message</span>.<span class="ruby-identifier">dist</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FightMessage</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">message</span>.<span class="ruby-identifier">defend</span>
+                                        <span class="ruby-identifier">getByUID</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">hero</span>).<span class="ruby-identifier">newHLFightJob</span>(<span class="ruby-identifier">getByUID</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">target</span>))
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">getByUID</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">hero</span>).<span class="ruby-identifier">newHLFightJob</span>(<span class="ruby-identifier">getByUID</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">target</span>))
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">NewPlayerMessage</span>
+                                <span class="ruby-identifier">h</span>=<span class="ruby-constant">AntHero</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;C:#{message.pos.class}&quot;</span>
+                                <span class="ruby-identifier">h</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">pos</span>)
+                                <span class="ruby-identifier">h</span>.<span class="ruby-identifier">setName</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">name</span>)
+                                <span class="ruby-identifier">insertEntity</span>(<span class="ruby-identifier">h</span>)
+                <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

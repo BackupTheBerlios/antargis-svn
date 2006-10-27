@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getGrassMeshData (ruby/ant_grass.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_grass.rb, line 3</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getGrassMeshData</span>(<span class="ruby-identifier">size</span>,<span class="ruby-identifier">many</span>=<span class="ruby-value">4</span>,<span class="ruby-identifier">texture</span>=<span class="ruby-keyword kw">nil</span>,<span class="ruby-identifier">bush</span>=<span class="ruby-keyword kw">false</span>)
+        <span class="ruby-identifier">size</span>=(<span class="ruby-identifier">size</span><span class="ruby-operator">*</span><span class="ruby-value">10</span>).<span class="ruby-identifier">to_i</span><span class="ruby-operator">/</span><span class="ruby-value">10.0</span>
+
+
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">$grassdata</span>
+                <span class="ruby-identifier">$grassdata</span>={}
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>]
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>]
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;MAKEFIRMESH #{size}&quot;</span>
+        <span class="ruby-identifier">opt</span>=<span class="ruby-constant">MeshOptimizer</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">mv0</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">mv1</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">mv2</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">mv3</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">many</span>
+        
+        <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+        <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+        <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+        <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bush</span>
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+        <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">w</span>=<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">h</span>=<span class="ruby-identifier">w</span>
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bush</span>
+                <span class="ruby-identifier">h</span><span class="ruby-operator">*=</span><span class="ruby-value">0</span><span class="ruby-value">.6</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">v0</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">v1</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">w</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">v2</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">w</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+        <span class="ruby-identifier">v3</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">i</span><span class="ruby-operator">==</span><span class="ruby-value">1</span>
+                <span class="ruby-identifier">vadd</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">vadd</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rand</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>,<span class="ruby-identifier">rand</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">v0</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">v1</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">v2</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">v3</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        
+        <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>)
+        
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+        
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+        
+        <span class="ruby-identifier">turn</span>=<span class="ruby-constant">AGMatrix4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>,<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>))
+        
+        <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v0</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v1</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v2</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v3</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+<span class="ruby-comment cmt">#       </span>
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+        
+        <span class="ruby-identifier">turn</span>=<span class="ruby-constant">AGMatrix4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-1</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>,<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>))
+        
+        <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v0</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v1</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v2</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-identifier">turn</span><span class="ruby-operator">*</span><span class="ruby-identifier">v3</span><span class="ruby-operator">+</span><span class="ruby-identifier">vadd</span>
+        
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+<span class="ruby-comment cmt">#       </span>
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+        <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bush</span>
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">n</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>)
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">w</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">w</span>, <span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>, <span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>, <span class="ruby-identifier">w</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.7</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+                
+                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>, <span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">mv3</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>, <span class="ruby-identifier">w</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">/</span><span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv3</span>)
+        <span class="ruby-keyword kw">end</span>
+        
+        
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-comment cmt">#$grassdata[size]=MeshData.new(opt.getArray,&quot;data/textures/models/high_grass2.png&quot;,true) #false)</span>
+        <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>]=<span class="ruby-constant">MeshData</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">getArray</span>,<span class="ruby-identifier">texture</span>,<span class="ruby-keyword kw">true</span>) <span class="ruby-comment cmt">#false) # last is shadow</span>
+        <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>].<span class="ruby-identifier">setTransparent</span>(<span class="ruby-keyword kw">true</span>)
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">nil</span>
+                <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>]=<span class="ruby-constant">MeshData</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">getArray</span>,<span class="ruby-value str">&quot;data/textures/terrain/reed.png&quot;</span>,<span class="ruby-keyword kw">true</span>) <span class="ruby-comment cmt">#false)</span>
+                <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>].<span class="ruby-identifier">setLighting</span>(<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-comment cmt">#$grassdata[size].setOverdraw(true)</span>
+                <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>].<span class="ruby-identifier">setTransparent</span>(<span class="ruby-keyword kw">true</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-comment cmt">#$grassdata[size]=MeshData.new(opt.getArray,&quot;data/textures/models/flower1.png&quot;,false)</span>
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">$grassdata</span>[<span class="ruby-identifier">size</span>]
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

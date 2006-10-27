@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getDescription (AntMan)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_man.rb, line 366</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getDescription</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-identifier">bname</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;nobody&quot;</span>)
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">bname</span>=<span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">getName</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;This is {1}. He is {2} years old.&quot;</span>,<span class="ruby-identifier">getName</span>,<span class="ruby-identifier">age</span>)<span class="ruby-operator">+</span><span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;He obeys {1}.&quot;</span>,<span class="ruby-identifier">bname</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

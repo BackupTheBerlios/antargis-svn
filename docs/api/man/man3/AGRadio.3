@@ -1,0 +1,57 @@
+.TH "AGRadio" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGRadio \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_radio.h>\fP
+.PP
+Inherits \fBAGCheckBox\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGRadio\fP (\fBAGWidget\fP *pParent, \fBAGRect2\fP pRect)"
+.br
+.ti -1c
+.RI "virtual \fB~AGRadio\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetGroup\fP (\fBAGRadioGroup\fP *pGroup)"
+.br
+.ti -1c
+.RI "bool \fBeventMouseClick\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "void \fBdeselect\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBsetChecked\fP (bool pChecked)"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGRadio::AGRadio (\fBAGWidget\fP * pParent, \fBAGRect2\fP pRect)"
+.PP
+.SS "AGRadio::~AGRadio ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGRadio::deselect ()"
+.PP
+.SS "bool AGRadio::eventMouseClick (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGCheckBox\fP.
+.SS "void AGRadio::setChecked (bool pChecked)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGButton\fP.
+.SS "void AGRadio::setGroup (\fBAGRadioGroup\fP * pGroup)"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

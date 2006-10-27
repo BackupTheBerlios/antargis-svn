@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>fetchForStock (AntHouse)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_house.rb, line 246</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetchForStock</span>(<span class="ruby-identifier">need</span>,<span class="ruby-identifier">ent</span>)
+                <span class="ruby-comment cmt">#puts &quot;fetchForStock&quot;</span>
+                <span class="ruby-identifier">needmap</span>=<span class="ruby-identifier">need</span>
+                <span class="ruby-identifier">need</span>=<span class="ruby-identifier">need</span>.<span class="ruby-identifier">to_a</span>
+                <span class="ruby-identifier">need</span>=<span class="ruby-identifier">need</span>.<span class="ruby-identifier">shuffle</span>
+
+                <span class="ruby-comment cmt"># FIXME: check need and has !</span>
+
+                <span class="ruby-identifier">oneed</span>=<span class="ruby-identifier">need</span>
+
+                <span class="ruby-identifier">need</span>.<span class="ruby-identifier">collect!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span><span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">-=</span><span class="ruby-identifier">resource</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]) ; <span class="ruby-identifier">a</span>}
+                <span class="ruby-identifier">need</span>=<span class="ruby-identifier">need</span>.<span class="ruby-identifier">sort!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span><span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]} <span class="ruby-comment cmt"># sort descending in array</span>
+
+                <span class="ruby-identifier">factor</span>=<span class="ruby-value">2</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@mode</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;rest&quot;</span>
+                        <span class="ruby-identifier">factor</span>=<span class="ruby-value">1</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">need</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">goodArray</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">good</span>=<span class="ruby-identifier">goodArray</span>[<span class="ruby-value">0</span>]
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">goodArray</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">&gt;</span><span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">goodArray</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">&gt;</span><span class="ruby-operator">-</span><span class="ruby-identifier">needmap</span>[<span class="ruby-identifier">good</span>]<span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@mode</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;fetch&quot;</span>) 
+                                <span class="ruby-ivar">@mode</span>=<span class="ruby-value str">&quot;fetch&quot;</span>
+                                <span class="ruby-identifier">tent</span>=<span class="ruby-keyword kw">nil</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">good</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;food&quot;</span>
+                                        <span class="ruby-identifier">tent</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getNext</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">good</span>,<span class="ruby-value">11</span>) <span class="ruby-comment cmt"># don't take away food</span>
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">tent</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getNext</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">good</span>,<span class="ruby-value">1</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tent</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tent</span>.<span class="ruby-identifier">getPlayer!</span>=<span class="ruby-identifier">getPlayer</span> <span class="ruby-keyword kw">and</span> (<span class="ruby-keyword kw">not</span> <span class="ruby-identifier">tent</span>.<span class="ruby-identifier">getPlayer</span>.<span class="ruby-identifier">nil?</span>)
+                                        <span class="ruby-keyword kw">else</span>
+                                                <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">tent</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+                                                <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;fetching &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">good</span>)
+                                                <span class="ruby-ivar">@atHome</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">ent</span>)
+                                                <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">target</span>=<span class="ruby-identifier">tent</span>
+                                                <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">setVisible</span>(<span class="ruby-keyword kw">true</span>)
+                                                <span class="ruby-keyword kw">return</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-comment cmt">#raise 1 if good==&quot;crop&quot;</span>
+                }
+                <span class="ruby-ivar">@mode</span>=<span class="ruby-value str">&quot;rest&quot;</span>
+                <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">5</span>) <span class="ruby-comment cmt"># do nothing for a longer time</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

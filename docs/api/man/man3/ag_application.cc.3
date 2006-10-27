@@ -1,0 +1,68 @@
+.TH "gui/src/ag_application.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_application.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ag_application.h'\fP
+.br
+\fC#include 'ag_screen.h'\fP
+.br
+\fC#include 'ag_glsurface.h'\fP
+.br
+\fC#include 'ag_main.h'\fP
+.br
+\fC#include 'ag_debug.h'\fP
+.br
+\fC#include 'ag_mixer.h'\fP
+.br
+\fC#include 'ag_texturecache.h'\fP
+.br
+\fC#include 'ag_profiler.h'\fP
+.br
+\fC#include <ruby.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBdisableKeyrepeat\fP ()"
+.br
+.ti -1c
+.RI "\fBAGApplication\fP * \fBgetApplication\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBAGApplication\fP * \fBgApplication\fP = 0"
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgAppCursorPos\fP"
+.br
+.ti -1c
+.RI "\fBAGWidget\fP * \fBpLastDrawn\fP = 0"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void disableKeyrepeat ()"
+.PP
+.SS "\fBAGApplication\fP* getApplication ()"
+.PP
+getApplication returns the current active application. This gets set on each iteration of \fBAGApplication::run\fP. So it will be correct after finishing a frame, when you are using nested AGApplications. 
+.SH "Variable Documentation"
+.PP 
+.SS "\fBAGVector2\fP \fBgAppCursorPos\fP"
+.PP
+.SS "\fBAGApplication\fP* \fBgApplication\fP = 0"
+.PP
+.SS "\fBAGWidget\fP* \fBpLastDrawn\fP = 0"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

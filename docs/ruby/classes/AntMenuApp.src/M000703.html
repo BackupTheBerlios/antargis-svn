@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setRes (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 381</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setRes</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                <span class="ruby-identifier">getMain</span>.<span class="ruby-identifier">initVideo</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>,<span class="ruby-value">32</span>,<span class="ruby-keyword kw">true</span>,<span class="ruby-keyword kw">true</span>,<span class="ruby-value">1024</span>,<span class="ruby-value">768</span>) <span class="ruby-comment cmt">#getMain.fullscreen,true)</span>
+                <span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;xRes&quot;</span>,<span class="ruby-identifier">getMain</span>.<span class="ruby-identifier">realWidth</span>.<span class="ruby-identifier">to_s</span>)
+                <span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;yRes&quot;</span>,<span class="ruby-identifier">getMain</span>.<span class="ruby-identifier">realHeight</span>.<span class="ruby-identifier">to_s</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-identifier">getSurfaceManager</span>.<span class="ruby-identifier">getUsedTexMem</span>
+                <span class="ruby-comment cmt">#raise 1</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

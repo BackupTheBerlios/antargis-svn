@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>check (AntHeroRestJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 908</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHero</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@firstTime</span>
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-ivar">@time</span>)
+                                <span class="ruby-ivar">@firstTime</span>=<span class="ruby-keyword kw">false</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">eat</span>(<span class="ruby-identifier">man</span>)
+                        <span class="ruby-comment cmt">#spreadThings</span>
+                        <span class="ruby-keyword kw">return</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">getMode</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;rest_eat&quot;</span>
+                                <span class="ruby-identifier">spreadThings</span>
+                                <span class="ruby-identifier">eat</span>(<span class="ruby-identifier">man</span>)
+                                <span class="ruby-identifier">sit</span>(<span class="ruby-identifier">man</span>)
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;rest_sit&quot;</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;rest_sit&quot;</span>
+                                <span class="ruby-identifier">sit</span>(<span class="ruby-identifier">man</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">man</span>.<span class="ruby-identifier">getFood</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span><span class="ruby-value">.5</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">heroHasFood</span>
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                                        <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;rest_eat&quot;</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-comment cmt"># rest_eat</span>
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-identifier">man</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;rest_eat&quot;</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

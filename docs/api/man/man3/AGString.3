@@ -1,0 +1,184 @@
+.TH "AGString" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGString \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_string.h>\fP
+.PP
+Inherits std::string.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGString\fP ()"
+.br
+.ti -1c
+.RI "\fBAGString\fP (const std::string &p)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (const std::string &p, size_t many)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (const \fBAGString\fP &p)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (int i)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (size_t i)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (long i)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (float f)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (const char c, size_t many=1)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (const char *c)"
+.br
+.ti -1c
+.RI "\fBAGString\fP (const char *c, size_t size)"
+.br
+.ti -1c
+.RI "\fBAGString\fP & \fBoperator=\fP (const \fBAGString\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGString\fP & \fBoperator+=\fP (const \fBAGString\fP &p)"
+.br
+.ti -1c
+.RI "size_t \fBmemory\fP () const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBsubstr\fP (size_t from, size_t len) const "
+.br
+.ti -1c
+.RI "std::vector< \fBAGString\fP > \fBsplit\fP (const \fBAGString\fP &p) const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBreplace\fP (const \fBAGString\fP &what, const \fBAGString\fP &by) const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBoperator+\fP (const \fBAGString\fP &s) const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBoperator+\fP (const char *s) const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBoperator+\fP (const std::string &s) const "
+.br
+.ti -1c
+.RI "int \fBtoInt\fP () const "
+.br
+.ti -1c
+.RI "long \fBtoLong\fP () const "
+.br
+.ti -1c
+.RI "float \fBtoFloat\fP () const "
+.br
+.ti -1c
+.RI "bool \fBtoBool\fP () const "
+.br
+.ti -1c
+.RI "Uint8 \fBtoUint8\fP () const "
+.br
+.ti -1c
+.RI "Sint16 \fBtoSint16\fP () const "
+.br
+.ti -1c
+.RI "int \fBparseHex\fP () const "
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBAGString\fP \fBtoHex\fP (int i)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const size_t \fBnpos\fP = static_cast<size_t>(-1)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A string class that natively supports UTF-8 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGString::AGString ()"
+.PP
+.SS "AGString::AGString (const std::string & p)"
+.PP
+.SS "AGString::AGString (const std::string & p, size_t many)"
+.PP
+.SS "AGString::AGString (const \fBAGString\fP & p)"
+.PP
+.SS "AGString::AGString (int i)\fC [explicit]\fP"
+.PP
+.SS "AGString::AGString (size_t i)\fC [explicit]\fP"
+.PP
+.SS "AGString::AGString (long i)\fC [explicit]\fP"
+.PP
+.SS "AGString::AGString (float f)\fC [explicit]\fP"
+.PP
+.SS "AGString::AGString (const char c, size_t many = \fC1\fP)"
+.PP
+.SS "AGString::AGString (const char * c)"
+.PP
+.SS "AGString::AGString (const char * c, size_t size)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "size_t AGString::memory () const"
+.PP
+.SS "\fBAGString\fP AGString::operator+ (const std::string & s) const"
+.PP
+.SS "\fBAGString\fP AGString::operator+ (const char * s) const"
+.PP
+.SS "\fBAGString\fP AGString::operator+ (const \fBAGString\fP & s) const"
+.PP
+.SS "\fBAGString\fP & AGString::operator+= (const \fBAGString\fP & p)"
+.PP
+.SS "\fBAGString\fP & AGString::operator= (const \fBAGString\fP & s)"
+.PP
+.SS "int AGString::parseHex () const"
+.PP
+.SS "\fBAGString\fP AGString::replace (const \fBAGString\fP & what, const \fBAGString\fP & by) const"
+.PP
+.SS "std::vector< \fBAGString\fP > AGString::split (const \fBAGString\fP & p) const"
+.PP
+.SS "\fBAGString\fP AGString::substr (size_t from, size_t len) const"
+.PP
+.SS "bool AGString::toBool () const"
+.PP
+.SS "float AGString::toFloat () const"
+.PP
+.SS "\fBAGString\fP AGString::toHex (int i)\fC [static]\fP"
+.PP
+.SS "int AGString::toInt () const"
+.PP
+.SS "long AGString::toLong () const"
+.PP
+.SS "Sint16 AGString::toSint16 () const"
+.PP
+.SS "Uint8 AGString::toUint8 () const"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "const size_t \fBAGString::npos\fP = static_cast<size_t>(-1)\fC [static]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

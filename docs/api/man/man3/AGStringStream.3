@@ -1,0 +1,69 @@
+.TH "AGStringStream" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGStringStream \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_stringstream.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGStringStream\fP (const \fBAGString\fP &buffer='')"
+.br
+.ti -1c
+.RI "\fBAGStringStream\fP & \fBoperator<<\fP (const int &i)"
+.br
+.ti -1c
+.RI "\fBAGStringStream\fP & \fBoperator<<\fP (const Uint8 &i)"
+.br
+.ti -1c
+.RI "\fBAGStringStream\fP & \fBoperator<<\fP (const Sint16 &i)"
+.br
+.ti -1c
+.RI "\fBAGStringStream\fP & \fBoperator<<\fP (const \fBAGString\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGStringStream\fP & \fBoperator<<\fP (const float &f)"
+.br
+.ti -1c
+.RI "const \fBAGString\fP & \fBstr\fP () const "
+.br
+.ti -1c
+.RI "void \fBprecision\fP (int i)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+a text-based stream - you have to take care for separators yourself possible seperators are: ' ' ',' '_' ';' '
+.br
+' the standard behaviour on blanks and newlines is to eat them 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGStringStream::AGStringStream (const \fBAGString\fP & buffer = \fC''\fP)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAGStringStream\fP & AGStringStream::operator<< (const float & f)"
+.PP
+.SS "\fBAGStringStream\fP & AGStringStream::operator<< (const \fBAGString\fP & s)"
+.PP
+.SS "\fBAGStringStream\fP & AGStringStream::operator<< (const Sint16 & i)"
+.PP
+.SS "\fBAGStringStream\fP & AGStringStream::operator<< (const Uint8 & i)"
+.PP
+.SS "\fBAGStringStream\fP & AGStringStream::operator<< (const int & i)"
+.PP
+.SS "void AGStringStream::precision (int i)"
+.PP
+.SS "const \fBAGString\fP & AGStringStream::str () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

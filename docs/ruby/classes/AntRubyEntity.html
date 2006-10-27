@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: AntRubyEntity</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">AntRubyEntity</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/ruby/ents_rb.html">
+                ruby/ents.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                AntEntity
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="AntRubyEntity.html">AntRubyEntity</a> slighty enhances the
+functionality already provided by AntEntity. This should be used for all
+the entity-types.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000918">&lt;=&gt;</a>&nbsp;&nbsp;
+      <a href="#M000933">addHandler</a>&nbsp;&nbsp;
+      <a href="#M000924">age</a>&nbsp;&nbsp;
+      <a href="#M000925">age=</a>&nbsp;&nbsp;
+      <a href="#M000934">doEvent</a>&nbsp;&nbsp;
+      <a href="#M000938">eventJobFinished</a>&nbsp;&nbsp;
+      <a href="#M000937">eventNoJob</a>&nbsp;&nbsp;
+      <a href="#M000914">experienceFull</a>&nbsp;&nbsp;
+      <a href="#M000921">fightTarget</a>&nbsp;&nbsp;
+      <a href="#M000917">getDescription</a>&nbsp;&nbsp;
+      <a href="#M000910">getMap</a>&nbsp;&nbsp;
+      <a href="#M000926">getMen</a>&nbsp;&nbsp;
+      <a href="#M000928">getMode</a>&nbsp;&nbsp;
+      <a href="#M000920">getPlayer</a>&nbsp;&nbsp;
+      <a href="#M000922">getRand</a>&nbsp;&nbsp;
+      <a href="#M000913">getXMLProp</a>&nbsp;&nbsp;
+      <a href="#M000930">isOnOpenWater</a>&nbsp;&nbsp;
+      <a href="#M000931">isOnWater</a>&nbsp;&nbsp;
+      <a href="#M000915">loadXML</a>&nbsp;&nbsp;
+      <a href="#M000919">menCount</a>&nbsp;&nbsp;
+      <a href="#M000911">new</a>&nbsp;&nbsp;
+      <a href="#M000935">newFightJob</a>&nbsp;&nbsp;
+      <a href="#M000936">newRestJob</a>&nbsp;&nbsp;
+      <a href="#M000929">playSound</a>&nbsp;&nbsp;
+      <a href="#M000916">saveXML</a>&nbsp;&nbsp;
+      <a href="#M000909">setMap</a>&nbsp;&nbsp;
+      <a href="#M000927">setMode</a>&nbsp;&nbsp;
+      <a href="#M000923">setStrength</a>&nbsp;&nbsp;
+      <a href="#M000912">setXMLProp</a>&nbsp;&nbsp;
+      <a href="#M000932">xmlName</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">birthday</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">uid</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000911" class="method-detail">
+        <a name="M000911"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000911.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000911.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(p)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000909" class="method-detail">
+        <a name="M000909"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000909.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000909.html');return false;">
+          <span class="method-name">setMap</span><span class="method-args">(map)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000918" class="method-detail">
+        <a name="M000918"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000918.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000918.html');return false;">
+          <span class="method-name">&lt;=&gt;</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+simple comparison operator, so that ents can be distinguished
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000933" class="method-detail">
+        <a name="M000933"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000933.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000933.html');return false;">
+          <span class="method-name">addHandler</span><span class="method-args">(eventName,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000924" class="method-detail">
+        <a name="M000924"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000924.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000924.html');return false;">
+          <span class="method-name">age</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000925" class="method-detail">
+        <a name="M000925"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000925.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000925.html');return false;">
+          <span class="method-name">age=</span><span class="method-args">(years)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000934" class="method-detail">
+        <a name="M000934"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000934.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000934.html');return false;">
+          <span class="method-name">doEvent</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000938" class="method-detail">
+        <a name="M000938"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000938.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000938.html');return false;">
+          <span class="method-name">eventJobFinished</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000937" class="method-detail">
+        <a name="M000937"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000937.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000937.html');return false;">
+          <span class="method-name">eventNoJob</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000914" class="method-detail">
+        <a name="M000914"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000914.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000914.html');return false;">
+          <span class="method-name">experienceFull</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000921" class="method-detail">
+        <a name="M000921"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000921.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000921.html');return false;">
+          <span class="method-name">fightTarget</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000917" class="method-detail">
+        <a name="M000917"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000917.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000917.html');return false;">
+          <span class="method-name">getDescription</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000910" class="method-detail">
+        <a name="M000910"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000910.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000910.html');return false;">
+          <span class="method-name">getMap</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000926" class="method-detail">
+        <a name="M000926"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000926.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000926.html');return false;">
+          <span class="method-name">getMen</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000928" class="method-detail">
+        <a name="M000928"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000928.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000928.html');return false;">
+          <span class="method-name">getMode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000920" class="method-detail">
+        <a name="M000920"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000920.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000920.html');return false;">
+          <span class="method-name">getPlayer</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000922" class="method-detail">
+        <a name="M000922"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000922.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000922.html');return false;">
+          <span class="method-name">getRand</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000913" class="method-detail">
+        <a name="M000913"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000913.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000913.html');return false;">
+          <span class="method-name">getXMLProp</span><span class="method-args">(n)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000930" class="method-detail">
+        <a name="M000930"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000930.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000930.html');return false;">
+          <span class="method-name">isOnOpenWater</span><span class="method-args">(p=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000931" class="method-detail">
+        <a name="M000931"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000931.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000931.html');return false;">
+          <span class="method-name">isOnWater</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000915" class="method-detail">
+        <a name="M000915"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000915.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000915.html');return false;">
+          <span class="method-name">loadXML</span><span class="method-args">(node)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000919" class="method-detail">
+        <a name="M000919"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000919.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000919.html');return false;">
+          <span class="method-name">menCount</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000935" class="method-detail">
+        <a name="M000935"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000935.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000935.html');return false;">
+          <span class="method-name">newFightJob</span><span class="method-args">(p,target,distance)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000936" class="method-detail">
+        <a name="M000936"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000936.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000936.html');return false;">
+          <span class="method-name">newRestJob</span><span class="method-args">(t)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000929" class="method-detail">
+        <a name="M000929"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000929.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000929.html');return false;">
+          <span class="method-name">playSound</span><span class="method-args">(name,minDiff=0.5)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000916" class="method-detail">
+        <a name="M000916"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000916.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000916.html');return false;">
+          <span class="method-name">saveXML</span><span class="method-args">(node)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000927" class="method-detail">
+        <a name="M000927"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000927.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000927.html');return false;">
+          <span class="method-name">setMode</span><span class="method-args">(mode)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000923" class="method-detail">
+        <a name="M000923"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000923.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000923.html');return false;">
+          <span class="method-name">setStrength</span><span class="method-args">(v)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000912" class="method-detail">
+        <a name="M000912"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000912.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000912.html');return false;">
+          <span class="method-name">setXMLProp</span><span class="method-args">(n,v)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000932" class="method-detail">
+        <a name="M000932"></a>
+
+        <div class="method-heading">
+          <a href="AntRubyEntity.src/M000932.html" target="Code" class="method-signature"
+            onclick="popupCode('AntRubyEntity.src/M000932.html');return false;">
+          <span class="method-name">xmlName</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

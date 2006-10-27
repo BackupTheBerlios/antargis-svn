@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>stopFireSound (AntHero)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hero.rb, line 86</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stopFireSound</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@fireSound</span>
+                        <span class="ruby-identifier">dputs</span> <span class="ruby-value str">&quot;STOPPED&quot;</span>
+                        <span class="ruby-identifier">dputs</span> <span class="ruby-ivar">@job</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@job</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHeroRestJob</span>
+                                <span class="ruby-comment cmt">#raise &quot;bla&quot;</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-constant">AntSound</span>.<span class="ruby-identifier">stopLoopSound</span>(<span class="ruby-keyword kw">self</span>)
+                        <span class="ruby-comment cmt">#getSoundManager.stopChannel(@fireSound)</span>
+                        <span class="ruby-ivar">@fireSound</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

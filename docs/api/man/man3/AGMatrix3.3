@@ -1,0 +1,105 @@
+.TH "AGMatrix3" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGMatrix3 \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_geometry.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGMatrix3\fP ()"
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP (const \fBAGAngle\fP &a)"
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP (const \fBAGVector3\fP &a)"
+.br
+.ti -1c
+.RI "void \fBset\fP (size_t x, size_t y, float f)"
+.br
+.ti -1c
+.RI "float \fBget\fP (size_t x, size_t y) const "
+.br
+.ti -1c
+.RI "float & \fBget\fP (size_t x, size_t y)"
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP \fBoperator *\fP (const \fBAGMatrix3\fP &m) const "
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP & \fBoperator *=\fP (const \fBAGMatrix3\fP &m)"
+.br
+.ti -1c
+.RI "\fBAGVector3\fP \fBoperator *\fP (const \fBAGVector3\fP &v) const "
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP \fBoperator-\fP () const "
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP \fBinverted\fP () const "
+.br
+.ti -1c
+.RI "\fBAGMatrix3\fP \fBtransposed\fP () const "
+.br
+.ti -1c
+.RI "\fBRow\fP \fBoperator[]\fP (size_t y)"
+.br
+.ti -1c
+.RI "const \fBRow\fP \fBoperator[]\fP (size_t y) const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBtoString\fP () const "
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBRow\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGMatrix3::AGMatrix3 ()"
+.PP
+.SS "AGMatrix3::AGMatrix3 (const \fBAGAngle\fP & a)"
+.PP
+.SS "AGMatrix3::AGMatrix3 (const \fBAGVector3\fP & a)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "float & AGMatrix3::get (size_t x, size_t y)"
+.PP
+.SS "float AGMatrix3::get (size_t x, size_t y) const"
+.PP
+.SS "\fBAGMatrix3\fP AGMatrix3::inverted () const"
+.PP
+.SS "\fBAGVector3\fP AGMatrix3::operator * (const \fBAGVector3\fP & v) const"
+.PP
+.SS "\fBAGMatrix3\fP AGMatrix3::operator * (const \fBAGMatrix3\fP & m) const"
+.PP
+.SS "\fBAGMatrix3\fP & AGMatrix3::operator *= (const \fBAGMatrix3\fP & m)"
+.PP
+.SS "\fBAGMatrix3\fP AGMatrix3::operator- () const"
+.PP
+.SS "const \fBAGMatrix3::Row\fP AGMatrix3::operator[] (size_t y) const"
+.PP
+.SS "\fBAGMatrix3::Row\fP AGMatrix3::operator[] (size_t y)"
+.PP
+.SS "void AGMatrix3::set (size_t x, size_t y, float f)"
+.PP
+.SS "\fBAGString\fP AGMatrix3::toString () const"
+.PP
+.SS "\fBAGMatrix3\fP AGMatrix3::transposed () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

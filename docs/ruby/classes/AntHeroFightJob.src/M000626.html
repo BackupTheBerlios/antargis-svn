@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntHeroFightJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 244</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-identifier">target</span>,<span class="ruby-identifier">defend</span>=<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-ivar">@men</span>=<span class="ruby-identifier">hero</span>.<span class="ruby-identifier">getMen</span>
+                <span class="ruby-ivar">@hero</span>=<span class="ruby-identifier">hero</span>
+                <span class="ruby-identifier">initSitpositions</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;NEW ANTHEROFIGHT JOB #{hero.getName} #{target.getName}&quot;</span>
+
+                <span class="ruby-ivar">@hero</span>=<span class="ruby-identifier">hero</span>
+                <span class="ruby-ivar">@target</span>=<span class="ruby-identifier">target</span>
+                <span class="ruby-comment cmt">#@killStarted=false</span>
+                <span class="ruby-comment cmt">#@killJobsGiven=false</span>
+                <span class="ruby-ivar">@defend</span>=<span class="ruby-identifier">defend</span>
+                <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">1</span>)  <span class="ruby-comment cmt">#FIXME: this is an indirect method of killing actual job</span>
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">target</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">10</span>,(<span class="ruby-keyword kw">not</span> <span class="ruby-identifier">defend</span>)) <span class="ruby-comment cmt"># near til 10</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@defend</span> <span class="ruby-keyword kw">or</span> (<span class="ruby-keyword kw">not</span> <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHero</span>))
+                        <span class="ruby-comment cmt">#@hero.newRestJob(2) # wait for 3 seconds; then set state to fight - have a look at check() for more</span>
+                        <span class="ruby-identifier">startFighting</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-ivar">@finished</span>=<span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>messageBox (ruby/ant_messagebox.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_messagebox.rb, line 34</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">messageBox</span>(<span class="ruby-identifier">title</span>,<span class="ruby-identifier">text</span>,<span class="ruby-identifier">flags</span>,<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-identifier">mw</span>=<span class="ruby-identifier">getApplication</span>.<span class="ruby-identifier">getMainWidget</span>
+        <span class="ruby-identifier">w</span>=<span class="ruby-constant">MessageBox</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">mw</span>,<span class="ruby-value str">&quot;data/gui/layout/messagebox.xml&quot;</span>)
+        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">block</span>=<span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;title&quot;</span>).<span class="ruby-identifier">setText</span>(<span class="ruby-identifier">title</span>)
+        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;text&quot;</span>).<span class="ruby-identifier">setText</span>(<span class="ruby-identifier">text</span>)
+        <span class="ruby-identifier">mw</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-identifier">w</span>)
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

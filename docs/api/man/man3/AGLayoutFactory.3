@@ -1,0 +1,49 @@
+.TH "AGLayoutFactory" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGLayoutFactory \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_layoutfactory.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB~AGLayoutFactory\fP ()"
+.br
+.ti -1c
+.RI "void \fBaddCreator\fP (const \fBAGString\fP &pName, \fBAGLayoutCreator\fP *creator)"
+.br
+.ti -1c
+.RI "\fBAGWidget\fP * \fBcreate\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &pRect, const \fBNode\fP &pNode)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "\fBAGLayoutFactory\fP * \fBgetLayoutFactory\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGLayoutFactory::~AGLayoutFactory ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGLayoutFactory::addCreator (const \fBAGString\fP & pName, \fBAGLayoutCreator\fP * creator)"
+.PP
+.SS "\fBAGWidget\fP * AGLayoutFactory::create (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & pRect, const \fBNode\fP & pNode)"
+.PP
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "\fBAGLayoutFactory\fP* getLayoutFactory ()\fC [friend]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

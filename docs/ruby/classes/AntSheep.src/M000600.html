@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventJobFinished (AntSheep)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_sheep.rb, line 47</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventJobFinished</span>
+                <span class="ruby-keyword kw">super</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@dead</span>
+                        <span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">30</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@alreadyDead</span>
+                                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">removeEntity</span>(<span class="ruby-keyword kw">self</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@alreadyDead</span>=<span class="ruby-keyword kw">true</span>
+        
+                        <span class="ruby-keyword kw">return</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-comment cmt"># BIRTHRATE is here:</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lastBirth</span><span class="ruby-operator">&gt;</span><span class="ruby-value">40</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-comment cmt"># make child</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;A SHEEP IS BORN&quot;</span>
+                        <span class="ruby-identifier">sheep</span>=<span class="ruby-constant">AntSheep</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-identifier">sheep</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-identifier">getPos2D</span>)
+                        <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">insertEntity</span>(<span class="ruby-identifier">sheep</span>)
+                        <span class="ruby-comment cmt">#getMap.endChange</span>
+                        <span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">2</span>)
+                        <span class="ruby-ivar">@lastBirth</span>=<span class="ruby-operator">-</span><span class="ruby-identifier">rand</span>()<span class="ruby-operator">*</span><span class="ruby-value">10</span>
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">rand</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span><span class="ruby-value">.5</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getTargetPos</span>,<span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">setMeshState</span>(<span class="ruby-value str">&quot;go&quot;</span>)
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">3</span>)
+                        <span class="ruby-identifier">setMeshState</span>(<span class="ruby-value str">&quot;eat&quot;</span>)
+                        <span class="ruby-identifier">playSound</span>(<span class="ruby-value str">&quot;sheep&quot;</span>)
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-ivar">@foodAdd</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                <span class="ruby-comment cmt">#puts &quot;FOOOOOD #{@foodAdd}&quot;</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@foodAdd</span><span class="ruby-operator">&gt;</span><span class="ruby-value">3</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;food&quot;</span>)<span class="ruby-operator">&lt;</span><span class="ruby-value">10</span>
+                        <span class="ruby-comment cmt">#puts &quot;RESOURCE: #{resource.get(&quot;food&quot;)}&quot;</span>
+                        <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value str">&quot;food&quot;</span>,<span class="ruby-value">1</span>)
+                        <span class="ruby-comment cmt">#puts &quot;RESOURCE: #{resource.get(&quot;food&quot;)}&quot;</span>
+                        <span class="ruby-ivar">@foodAdd</span>=<span class="ruby-value">0</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-ivar">@lastBirth</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

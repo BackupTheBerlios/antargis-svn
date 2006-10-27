@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntTabLayout)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editor/tab_layout.rb, line 22</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>)
+                <span class="ruby-keyword kw">super</span>
+                <span class="ruby-ivar">@s</span>=<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">load</span>(<span class="ruby-value str">&quot;data/gui/buttontest3.png&quot;</span>)
+                <span class="ruby-ivar">@sw</span>=<span class="ruby-ivar">@s</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>
+                <span class="ruby-ivar">@sh</span>=<span class="ruby-ivar">@s</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>
+                <span class="ruby-ivar">@ts</span>={}
+                (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                        (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+                                <span class="ruby-ivar">@ts</span>[[<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>]]=<span class="ruby-constant">AGTexture</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@s</span>.<span class="ruby-identifier">getSubSurface</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">*</span><span class="ruby-ivar">@s</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">*</span><span class="ruby-ivar">@s</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>))
+                        }
+                }
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

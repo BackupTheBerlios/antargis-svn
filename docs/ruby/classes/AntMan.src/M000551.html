@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntMan)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_man.rb, line 40</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>()
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>))
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;man&quot;</span>,<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-ivar">@signed</span>=<span class="ruby-keyword kw">false</span>
+                <span class="ruby-ivar">@dead</span>=<span class="ruby-keyword kw">false</span>
+                <span class="ruby-ivar">@fighting</span>=<span class="ruby-keyword kw">false</span>
+                <span class="ruby-ivar">@bossName</span>=<span class="ruby-value str">&quot;&quot;</span>
+                <span class="ruby-ivar">@boss</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-identifier">setMeshState</span>(<span class="ruby-value str">&quot;walk&quot;</span>)
+                <span class="ruby-ivar">@mode</span>=<span class="ruby-value str">&quot;wait&quot;</span>
+                <span class="ruby-identifier">setMinimapColor</span>(<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0x77</span>,<span class="ruby-value">0x77</span>,<span class="ruby-value">0x77</span>))
+                <span class="ruby-identifier">setName</span>(<span class="ruby-identifier">genName</span>)
+
+                <span class="ruby-comment cmt">#resource.set(&quot;sword&quot;,1)</span>
+                <span class="ruby-identifier">checkResources</span>
+                <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">age</span>=(<span class="ruby-identifier">getRand</span><span class="ruby-operator">*</span><span class="ruby-value">20</span><span class="ruby-operator">+</span><span class="ruby-value">15</span>)
+                <span class="ruby-identifier">setHunger</span>(<span class="ruby-value">0</span><span class="ruby-value">.006</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

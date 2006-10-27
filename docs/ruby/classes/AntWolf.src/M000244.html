@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntWolf)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_wolf.rb, line 38</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>()
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>))
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;wolf&quot;</span>,<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;wolf_leader&quot;</span>,<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-identifier">setSpeed</span> <span class="ruby-value">3</span>
+                <span class="ruby-ivar">@lastBirth</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@foodAdd</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@mypack</span>=[]
+                <span class="ruby-ivar">@leader</span>=<span class="ruby-keyword kw">nil</span>
+                
+                <span class="ruby-identifier">mesh</span>=<span class="ruby-constant">Mesh</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getScene</span>,<span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/ant_wolf.ant2&quot;</span>,<span class="ruby-value">1</span>,<span class="ruby-value str">&quot;data/textures/models/ant_wolf.png&quot;</span>),<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>),<span class="ruby-value">-30</span>)
+                <span class="ruby-identifier">setMesh</span>(<span class="ruby-identifier">mesh</span>)
+                <span class="ruby-comment cmt"># data=getAnimMeshData(&quot;data/models/sheep.anim&quot;)</span>
+                <span class="ruby-comment cmt"># setMesh(AnimMesh.new(getMap.getScene,data))</span>
+
+                <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;food&quot;</span>,<span class="ruby-value">1</span>)
+                <span class="ruby-ivar">@job</span>=<span class="ruby-identifier">:resting</span>
+                <span class="ruby-identifier">setHunger</span>(<span class="ruby-value">0</span><span class="ruby-value">.01</span>)
+                <span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;resting&quot;</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

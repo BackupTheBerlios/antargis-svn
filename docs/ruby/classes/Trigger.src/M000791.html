@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Trigger)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_trigger.rb, line 5</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">node</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">Node</span>
+                        <span class="ruby-ivar">@pos</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-ivar">@pos</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">node</span>)
+                        <span class="ruby-ivar">@radius</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;radius&quot;</span>).<span class="ruby-identifier">to_f</span>
+                        <span class="ruby-ivar">@name</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;name&quot;</span>)
+                        <span class="ruby-ivar">@circle</span>=<span class="ruby-constant">AGCircle2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pos</span>.<span class="ruby-identifier">x</span>,<span class="ruby-ivar">@pos</span>.<span class="ruby-identifier">y</span>,<span class="ruby-value">1</span>),<span class="ruby-ivar">@radius</span>)
+                        <span class="ruby-ivar">@triggerTime</span>=<span class="ruby-identifier">$systemTime</span>
+                        <span class="ruby-ivar">@player</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;player&quot;</span>)
+                        <span class="ruby-ivar">@text</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;text&quot;</span>)
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-ivar">@name</span>=<span class="ruby-identifier">node</span>
+                        <span class="ruby-ivar">@triggerTime</span>=<span class="ruby-constant">AntRubyMap</span>.<span class="ruby-identifier">getSystemTime</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntServer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File server/ant_server.rb, line 46</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+                <span class="ruby-keyword kw">super</span>
+
+                <span class="ruby-comment cmt"># add virtual Scene </span>
+                <span class="ruby-comment cmt"># FIXME: this should be discarded)</span>
+                <span class="ruby-ivar">@scene</span>=<span class="ruby-constant">Scene</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">128</span>,<span class="ruby-value">128</span>)
+                <span class="ruby-comment cmt"># add Map</span>
+                <span class="ruby-ivar">@map</span>=<span class="ruby-constant">AntMpMap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>,<span class="ruby-ivar">@scene</span>,<span class="ruby-value">128</span>,<span class="ruby-value">128</span>)
+                <span class="ruby-identifier">$map</span>=<span class="ruby-ivar">@map</span>
+                <span class="ruby-comment cmt"># load some map - currently a default one</span>
+                <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">loadMap</span>(<span class="ruby-value str">&quot;levels/multiplayer/multimap1.antlvl&quot;</span>)
+
+                <span class="ruby-comment cmt"># generate some login-table and insert some users</span>
+                <span class="ruby-identifier">table</span>=<span class="ruby-constant">SimpleLoginTable</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addPlaintext</span>(<span class="ruby-value str">&quot;muh&quot;</span>,<span class="ruby-value str">&quot;puh&quot;</span>)
+                <span class="ruby-comment cmt"># now start the server-object</span>
+                <span class="ruby-ivar">@server</span>=<span class="ruby-constant">LoginServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>,<span class="ruby-keyword kw">self</span>)
+                <span class="ruby-ivar">@names</span>=[]
+                <span class="ruby-ivar">@framenr</span>=<span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

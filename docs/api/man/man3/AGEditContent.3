@@ -1,0 +1,97 @@
+.TH "AGEditContent" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGEditContent \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_editcontent.h>\fP
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::pair< int, int > \fBCursorPos\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBwrap\fP (size_t lineStart)"
+.br
+.ti -1c
+.RI "size_t \fBtoAt\fP (const \fBCursorPos\fP &p)"
+.br
+.ti -1c
+.RI "\fBCursorPos\fP \fBtoCP\fP (size_t at)"
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetFont\fP (const \fBAGFont\fP &pFont)"
+.br
+.ti -1c
+.RI "void \fBsetText\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "void \fBinsertSurface\fP (const \fBAGSurface\fP &pSurface, size_t at)"
+.br
+.ti -1c
+.RI "void \fBinsertChar\fP (char c, size_t at)"
+.br
+.ti -1c
+.RI "void \fBinsertWhiteSpace\fP (size_t at)"
+.br
+.ti -1c
+.RI "void \fBremoveChar\fP (size_t at)"
+.br
+.ti -1c
+.RI "void \fBinsertNewLine\fP (size_t at)"
+.br
+.ti -1c
+.RI "size_t \fBsize\fP ()"
+.br
+.ti -1c
+.RI "Words \fBgetLine\fP (size_t line)"
+.br
+.in -1c
+.SH "Member Typedef Documentation"
+.PP 
+.SS "typedef std::pair<int,int> \fBAGEditContent::CursorPos\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGEditContent::clear ()"
+.PP
+.SS "Words AGEditContent::getLine (size_t line)"
+.PP
+.SS "void AGEditContent::insertChar (char c, size_t at)"
+.PP
+.SS "void AGEditContent::insertNewLine (size_t at)"
+.PP
+.SS "void AGEditContent::insertSurface (const \fBAGSurface\fP & pSurface, size_t at)"
+.PP
+.SS "void AGEditContent::insertWhiteSpace (size_t at)"
+.PP
+.SS "void AGEditContent::removeChar (size_t at)"
+.PP
+.SS "void AGEditContent::setFont (const \fBAGFont\fP & pFont)"
+.PP
+.SS "void AGEditContent::setText (const std::string & s)"
+.PP
+.SS "size_t AGEditContent::size ()"
+.PP
+.SS "size_t AGEditContent::toAt (const \fBCursorPos\fP & p)"
+.PP
+.SS "\fBCursorPos\fP AGEditContent::toCP (size_t at)"
+.PP
+.SS "void AGEditContent::wrap (size_t lineStart)"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

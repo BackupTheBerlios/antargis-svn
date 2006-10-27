@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>addSignal (gui/data/ag_tools.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File gui/data/ag_tools.rb, line 114</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">addSignal</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-identifier">eval</span> <span class="ruby-value str">&quot;class \#{self.class}\n        def \#{name}(e=nil)\n                if e\n                        e.setCaller(self)\n                        return @\#{name}.signal(e)\n                else\n                        return @\#{name}\n                end\n        end\nend\n&quot;</span>
+        <span class="ruby-identifier">eval</span>(<span class="ruby-node">&quot;@#{name}=AGSignal.new(self,'#{name}')\n&quot;</span>)
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

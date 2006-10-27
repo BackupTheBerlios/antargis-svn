@@ -1,0 +1,15 @@
+.TH "Application" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Application \- 
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGApplication\fP"
+.br
+.RI "\fIBase class for application - holds the main loop
+.PP
+Use \fBAGApplication\fP as base class your application's class. In this library it's assumed that you have different parts of your program, that are really different. Each of these parts has its own \fBAGApplication\fP. The actual control of these applications is done through a main-loop, that queries new events from libSDL and gives them to the correct widgets. This main-loop can by started by \fBrun()\fP. After this your have some possibilities to access control. FOr instance there are the different event* functions, which you can override in an AGApplication's subclass. \fP"
+.in -1c

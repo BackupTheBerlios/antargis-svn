@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create (AntEnergyCreator)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_energy.rb, line 93</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-identifier">rect</span>,<span class="ruby-identifier">node</span>)
+                <span class="ruby-identifier">w</span>=<span class="ruby-constant">AntEnergy</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-identifier">rect</span>)
+                <span class="ruby-identifier">w</span>.<span class="ruby-identifier">hborder</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;hborder&quot;</span>).<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">w</span>.<span class="ruby-identifier">vborder</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;vborder&quot;</span>).<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;AntEnergyCreator:&quot;</span>,<span class="ruby-identifier">w</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">w</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

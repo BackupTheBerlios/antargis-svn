@@ -1,0 +1,61 @@
+.TH "AGInternalSurface" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGInternalSurface \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_surface.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGInternalSurface\fP ()"
+.br
+.ti -1c
+.RI "\fB~AGInternalSurface\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGInternalSurface\fP * \fBsdlTexture\fP"
+.br
+.ti -1c
+.RI "\fBAGGLTexture\fP * \fBglTexture\fP"
+.br
+.ti -1c
+.RI "SDL_Surface * \fBsurface\fP"
+.br
+.ti -1c
+.RI "size_t \fBversion\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBAGInternalSurface\fP links plain sdl-surfaces (in main-memory) and textures (both gl-textures and sdl-screenlike-surfaces) 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGInternalSurface::AGInternalSurface ()"
+.PP
+.SS "AGInternalSurface::~AGInternalSurface ()"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBAGGLTexture\fP* \fBAGInternalSurface::glTexture\fP"
+.PP
+.SS "\fBAGInternalSurface\fP* \fBAGInternalSurface::sdlTexture\fP"
+.PP
+.SS "SDL_Surface* \fBAGInternalSurface::surface\fP"
+.PP
+.SS "size_t \fBAGInternalSurface::version\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

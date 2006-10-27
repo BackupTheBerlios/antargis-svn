@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntHouse)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_house.rb, line 64</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+                <span class="ruby-keyword kw">super</span>
+                <span class="ruby-ivar">@type</span>=<span class="ruby-value">3</span>
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;house&quot;</span>,<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-ivar">@defeated</span>=[]
+                <span class="ruby-ivar">@atHome</span>=<span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">setMinimapColor</span>(<span class="ruby-constant">AGColor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0x55</span>,<span class="ruby-value">0x55</span>,<span class="ruby-value">0x55</span>))
+                <span class="ruby-identifier">setMinimapSize</span>(<span class="ruby-value">5</span>)
+
+                <span class="ruby-ivar">@mode</span>=<span class="ruby-value str">&quot;&quot;</span>
+                <span class="ruby-ivar">@village</span>=<span class="ruby-value str">&quot;&quot;</span>           
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

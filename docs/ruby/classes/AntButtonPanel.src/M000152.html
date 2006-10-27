@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntButtonPanel)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/view.rb, line 199</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>)
+                <span class="ruby-identifier">setName</span>(<span class="ruby-value str">&quot;ButtonPanel&quot;</span>)
+                <span class="ruby-identifier">clearHandlers</span>
+                <span class="ruby-ivar">@jobButtons</span>=[<span class="ruby-value str">&quot;doRest&quot;</span>,<span class="ruby-value str">&quot;doDismiss&quot;</span>,<span class="ruby-value str">&quot;doDropFood&quot;</span>,<span class="ruby-value str">&quot;doDropWeapon&quot;</span>,<span class="ruby-value str">&quot;doBuild&quot;</span>]
+                <span class="ruby-ivar">@aggButtons</span>={<span class="ruby-value str">&quot;doAgg0&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value">1</span>,<span class="ruby-value str">&quot;doAgg1&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value">2</span>,<span class="ruby-value str">&quot;doAgg2&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value">3</span>}
+                <span class="ruby-ivar">@inited</span>=<span class="ruby-keyword kw">false</span>
+                <span class="ruby-ivar">@agg</span>=<span class="ruby-value">1</span>
+
+                <span class="ruby-identifier">addSignal</span>(<span class="ruby-value str">&quot;sigAggressionChanged&quot;</span>)
+                <span class="ruby-identifier">addSignal</span>(<span class="ruby-value str">&quot;sigJobChanged&quot;</span>)
+
+                <span class="ruby-ivar">@hero</span>=<span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

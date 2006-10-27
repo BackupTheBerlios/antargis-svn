@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>checkHLJobEnd (AntBoss)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_boss.rb, line 263</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkHLJobEnd</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@job</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">man</span>
+                                <span class="ruby-ivar">@job</span>.<span class="ruby-identifier">check</span>(<span class="ruby-identifier">man</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@job</span>.<span class="ruby-identifier">finished</span> <span class="ruby-keyword kw">then</span> 
+                                <span class="ruby-identifier">job</span>=<span class="ruby-ivar">@job</span>
+                                <span class="ruby-ivar">@job</span>=<span class="ruby-keyword kw">nil</span> 
+                                <span class="ruby-identifier">eventHLJobFinished</span>(<span class="ruby-identifier">job</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@player</span>
+                                        <span class="ruby-ivar">@player</span>.<span class="ruby-identifier">eventJobFinished</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">job</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@job</span><span class="ruby-operator">==</span><span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-identifier">noHLJob</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

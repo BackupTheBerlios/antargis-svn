@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntEntListWidget)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editor/ent_list.rb, line 23</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>)
+                <span class="ruby-ivar">@entType</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-ivar">@classes</span>=<span class="ruby-identifier">getDescendantsOfClass</span>(<span class="ruby-constant">AntRubyEntity</span>)
+                <span class="ruby-ivar">@wptrs</span>={}
+                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span>              
+                        <span class="ruby-ivar">@classes</span>=<span class="ruby-ivar">@classes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">fn</span>=<span class="ruby-node">&quot;data/gui/editor/entities/#{n}.png&quot;</span>
+                                <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">fn</span>)
+                        }
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-identifier">group</span>=<span class="ruby-constant">AGRadioGroup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">getRect</span>.<span class="ruby-identifier">origin</span>)
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">setName</span>(<span class="ruby-value str">&quot;EntListGroup&quot;</span>)
+                <span class="ruby-identifier">addChild</span>(<span class="ruby-identifier">group</span>)
+                <span class="ruby-identifier">cells</span>=(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sqrt</span>(<span class="ruby-ivar">@classes</span>.<span class="ruby-identifier">length</span>)<span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">table</span>=<span class="ruby-constant">AGTable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">group</span>,<span class="ruby-identifier">getRect</span>.<span class="ruby-identifier">origin</span>)
+                <span class="ruby-ivar">@table</span>=<span class="ruby-identifier">table</span>
+                (<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">cells</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addColumn</span>(<span class="ruby-value">1</span>)
+                        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addRow</span>(<span class="ruby-value">1</span>)
+                }
+
+                <span class="ruby-identifier">i</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@classes</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">x</span>=<span class="ruby-identifier">i</span><span class="ruby-operator">%</span><span class="ruby-identifier">cells</span>
+                        <span class="ruby-identifier">y</span>=<span class="ruby-identifier">i</span><span class="ruby-operator">/</span><span class="ruby-identifier">cells</span>
+                        <span class="ruby-identifier">n</span>=<span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{i} #{x} #{y} #{n}&quot;</span>
+                        <span class="ruby-identifier">w</span>=<span class="ruby-constant">AGRadio</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>,<span class="ruby-constant">AGRect2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">40</span>,<span class="ruby-value">40</span>))
+                        <span class="ruby-ivar">@wptrs</span>[<span class="ruby-identifier">c</span>]=<span class="ruby-identifier">w</span>
+                        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">setName</span>(<span class="ruby-identifier">n</span>)
+                        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">setTooltip</span>(<span class="ruby-identifier">n</span>)
+                        <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventSelected</span>)
+                
+                        <span class="ruby-identifier">fn</span>=<span class="ruby-node">&quot;data/gui/editor/entities/#{n}.png&quot;</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">fn</span>)
+                                <span class="ruby-identifier">w</span>.<span class="ruby-identifier">setSurface</span>(<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">fn</span>))
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">w</span>.<span class="ruby-identifier">setEnabled</span>(<span class="ruby-keyword kw">false</span>)
+                        <span class="ruby-keyword kw">end</span>
+
+                        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">w</span>)
+                        <span class="ruby-identifier">i</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                }
+                <span class="ruby-identifier">table</span>.<span class="ruby-identifier">arrange</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-identifier">table</span>)
+
+                <span class="ruby-identifier">setCaching</span>(<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-identifier">addSignal</span>(<span class="ruby-value str">&quot;sigSelected&quot;</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

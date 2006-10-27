@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>genTree (ruby/gen_tree.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/gen_tree.rb, line 2</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">genTree</span>
+        <span class="ruby-identifier">f</span>=<span class="ruby-identifier">loadFile</span>(<span class="ruby-value str">&quot;data/models/tree4.ant2&quot;</span>)
+        <span class="ruby-identifier">opt</span>=<span class="ruby-identifier">loadFromText</span>(<span class="ruby-identifier">f</span>,<span class="ruby-keyword kw">true</span>,<span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+        
+                <span class="ruby-identifier">r</span>=<span class="ruby-value">4</span>
+                <span class="ruby-identifier">y0</span>=<span class="ruby-value">11</span>
+                <span class="ruby-identifier">y1</span>=<span class="ruby-value">12</span>
+                <span class="ruby-identifier">stepy</span>=<span class="ruby-value">0</span><span class="ruby-value">.7</span>
+                <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">k</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">9</span>
+                        <span class="ruby-identifier">r</span>=[<span class="ruby-value">1.3</span>,<span class="ruby-value">1.3</span>,<span class="ruby-value">1.5</span>,<span class="ruby-value">2</span>,<span class="ruby-value">2.5</span>,<span class="ruby-value">3</span>,<span class="ruby-value">3.5</span>,<span class="ruby-value">4</span>,<span class="ruby-value">4.3</span>,<span class="ruby-value">4.5</span>,<span class="ruby-value">4.5</span>][<span class="ruby-identifier">k</span>]
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">k</span><span class="ruby-operator">&lt;</span><span class="ruby-value">3</span>
+                                <span class="ruby-identifier">stepy</span>=<span class="ruby-value">0</span><span class="ruby-value">.5</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">stepy</span>=<span class="ruby-value">1</span>
+                        <span class="ruby-keyword kw">end</span>
+                
+                        <span class="ruby-identifier">segs</span>=<span class="ruby-value">8</span>
+                        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">segs</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                                <span class="ruby-identifier">a0</span>=<span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span><span class="ruby-operator">/</span><span class="ruby-identifier">segs</span><span class="ruby-operator">*</span><span class="ruby-identifier">i</span>
+                                <span class="ruby-identifier">a1</span>=<span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span><span class="ruby-operator">/</span><span class="ruby-identifier">segs</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+                        
+                                <span class="ruby-identifier">mv0</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">mv1</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">mv2</span>=<span class="ruby-constant">MeshVertex</span>.<span class="ruby-identifier">new</span>
+                        
+                                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+                                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+                                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">c</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+                                
+                                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">a0</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">r</span>,<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">a0</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">r</span>,<span class="ruby-identifier">y0</span>,<span class="ruby-value">1</span>)
+                                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">a1</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">r</span>,<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">a1</span>)<span class="ruby-operator">*</span><span class="ruby-identifier">r</span>,<span class="ruby-identifier">y0</span>,<span class="ruby-value">1</span>)
+                                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span>=<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">y1</span>,<span class="ruby-value">1</span>)
+                                
+                                <span class="ruby-identifier">n</span>=(<span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">v</span><span class="ruby-operator">-</span><span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>)<span class="ruby-operator">%</span>(<span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">v</span><span class="ruby-operator">-</span><span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">v</span>)
+                        
+                                <span class="ruby-identifier">n</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">dim3</span>
+                                <span class="ruby-identifier">n</span>=<span class="ruby-operator">-</span><span class="ruby-identifier">n</span>.<span class="ruby-identifier">normalized</span>     
+                        
+                                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">n</span>=<span class="ruby-identifier">n</span>
+                                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">n</span>=<span class="ruby-identifier">n</span>
+                                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">n</span>=<span class="ruby-identifier">n</span>
+                                
+                                <span class="ruby-identifier">middle</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span><span class="ruby-value">.5</span>,<span class="ruby-value">0</span><span class="ruby-value">.75</span>)
+                                
+                                <span class="ruby-identifier">mv0</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">a0</span><span class="ruby-operator">+</span><span class="ruby-identifier">k</span>),<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">a0</span><span class="ruby-operator">+</span><span class="ruby-identifier">k</span>)<span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>)<span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span><span class="ruby-operator">+</span><span class="ruby-identifier">middle</span>
+                                <span class="ruby-identifier">mv1</span>.<span class="ruby-identifier">t</span>=<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">a1</span><span class="ruby-operator">+</span><span class="ruby-identifier">k</span>),<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">a1</span><span class="ruby-operator">+</span><span class="ruby-identifier">k</span>)<span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>)<span class="ruby-operator">*</span><span class="ruby-value">0</span><span class="ruby-value">.5</span><span class="ruby-operator">+</span><span class="ruby-identifier">middle</span>
+                                <span class="ruby-identifier">mv2</span>.<span class="ruby-identifier">t</span>=<span class="ruby-identifier">middle</span>
+                                
+                                <span class="ruby-comment cmt"># front</span>
+                                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv2</span>)
+                                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv1</span>)
+                                <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">mv0</span>)                
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">y0</span><span class="ruby-operator">-=</span><span class="ruby-identifier">stepy</span>
+                        <span class="ruby-identifier">y1</span><span class="ruby-operator">-=</span><span class="ruby-identifier">stepy</span>
+                <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">va</span>=<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">getArray</span>
+        <span class="ruby-identifier">data</span>=<span class="ruby-constant">MeshData</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">va</span>,<span class="ruby-value str">&quot;data/textures/models/fir5.png&quot;</span>,<span class="ruby-keyword kw">true</span>)
+        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">setTransparent</span>(<span class="ruby-keyword kw">true</span>)
+        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">save</span>(<span class="ruby-value str">&quot;treetest2.ant2&quot;</span>)
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">getTriangles</span>
+        <span class="ruby-identifier">data</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

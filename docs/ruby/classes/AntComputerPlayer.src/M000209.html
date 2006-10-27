@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>goHome (AntComputerPlayer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_player.rb, line 150</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">goHome</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-identifier">home</span>)
+                <span class="ruby-identifier">housePos</span>=<span class="ruby-identifier">house</span>.<span class="ruby-identifier">getPos2D</span>
+                <span class="ruby-identifier">heroPos</span>=<span class="ruby-identifier">hero</span>.<span class="ruby-identifier">getPos2D</span>
+                <span class="ruby-identifier">diff</span>=<span class="ruby-identifier">housePos</span><span class="ruby-operator">-</span><span class="ruby-identifier">heroPos</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">length2</span><span class="ruby-operator">&gt;</span><span class="ruby-value">4</span>
+                        <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">newHLMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">house</span>.<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">2</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

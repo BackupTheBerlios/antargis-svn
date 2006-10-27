@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getDescription (AntBuildingSite)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_buildingsite.rb, line 38</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getDescription</span>
+                <span class="ruby-identifier">a</span>=<span class="ruby-identifier">_</span>(<span class="ruby-identifier">building</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;Ant&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>))
+                <span class="ruby-identifier">d</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;This will be a {1}.&quot;</span>,<span class="ruby-identifier">a</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@steps</span>
+                        <span class="ruby-identifier">b</span>=((<span class="ruby-ivar">@@buildingSiteMeshes</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)<span class="ruby-operator">-</span><span class="ruby-ivar">@progress</span>)<span class="ruby-operator">*</span><span class="ruby-ivar">@steps</span><span class="ruby-operator">/</span>(<span class="ruby-ivar">@@buildingSiteMeshes</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                        <span class="ruby-identifier">b</span>=<span class="ruby-identifier">b</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">d</span><span class="ruby-operator">+=</span><span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;It will be ready after {1} more steps.&quot;</span>,<span class="ruby-identifier">b</span>)
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">d</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

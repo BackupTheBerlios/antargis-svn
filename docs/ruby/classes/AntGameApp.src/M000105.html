@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntGameApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File editor.rb, line 44</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">sw</span>,<span class="ruby-identifier">sh</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">sw</span>,<span class="ruby-identifier">sh</span>,<span class="ruby-keyword kw">nil</span>) <span class="ruby-comment cmt">#AntRubyMap.new(64,64))</span>
+                <span class="ruby-identifier">$app</span>=<span class="ruby-keyword kw">self</span>     
+                <span class="ruby-identifier">$map</span>=<span class="ruby-ivar">@map</span>=<span class="ruby-constant">AntRubyMap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getScene</span>,<span class="ruby-value">128</span>,<span class="ruby-value">128</span>)
+                <span class="ruby-identifier">$map</span>.<span class="ruby-identifier">setHeight</span>(<span class="ruby-value">-0</span><span class="ruby-value">.5</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;quit&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventQuit</span>)
+                
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;doGen&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventGenerateDialog</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;loadButton&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:load</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;saveButton&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:save</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;playerButton&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:editPlayers</span>)
+                
+                <span class="ruby-ivar">@miniMap</span>=<span class="ruby-identifier">toMiniMap</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;miniMap&quot;</span>))
+                <span class="ruby-ivar">@miniMap</span>.<span class="ruby-identifier">setMap</span>(<span class="ruby-identifier">getMap</span>)
+                <span class="ruby-ivar">@miniMap</span>.<span class="ruby-identifier">setScene</span>(<span class="ruby-identifier">getScene</span>)
+                
+                <span class="ruby-identifier">$screen</span>=<span class="ruby-ivar">@layout</span>
+                
+                <span class="ruby-comment cmt">#eventGenerate</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

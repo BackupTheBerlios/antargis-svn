@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventLevelStarted (Level1)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/levels/tutorial/tutorial1.rb, line 8</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventLevelStarted</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@started</span>
+                        <span class="ruby-identifier">start</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;beginning&quot;</span>)
+
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Food&quot;</span>,<span class="ruby-value str">&quot;On this island you will learn that your troops need food and how to get it.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Food&quot;</span>,<span class="ruby-value str">&quot;Your troops are constantly getting hungry. The current hunger of your hero can be seen in the brown bar at his portrait.&quot;</span>)
+                        
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Food&quot;</span>,<span class="ruby-value str">&quot;You can view your troops state by selecting one and then inspecting the bars on the right.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Food&quot;</span>,<span class="ruby-value str">&quot;The more you do the faster they get hungry.&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial - Food&quot;</span>,<span class="ruby-value str">&quot;So start now fetching food by slaughtering the sheep. (Right click)&quot;</span>)
+                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">start</span>)
+                        <span class="ruby-ivar">@started</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

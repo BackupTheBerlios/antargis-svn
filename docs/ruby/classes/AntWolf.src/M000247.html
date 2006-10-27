@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>checkPackMerge (AntWolf)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_wolf.rb, line 119</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkPackMerge</span>
+                <span class="ruby-comment cmt"># find next leader</span>
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;wolf_leader&quot;</span>,<span class="ruby-keyword kw">false</span>)
+
+                <span class="ruby-identifier">tent</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getNext</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-value str">&quot;wolf_leader&quot;</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tent</span>
+                        <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">tent</span>.<span class="ruby-identifier">getPos2D</span><span class="ruby-operator">-</span><span class="ruby-identifier">getPos2D</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">&lt;</span><span class="ruby-value">10</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">tent</span>.<span class="ruby-identifier">inPack</span>(<span class="ruby-keyword kw">self</span>)
+                                        <span class="ruby-comment cmt"># simple take me as leader</span>
+                                        <span class="ruby-identifier">tent</span>.<span class="ruby-identifier">setLeader</span>(<span class="ruby-keyword kw">self</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

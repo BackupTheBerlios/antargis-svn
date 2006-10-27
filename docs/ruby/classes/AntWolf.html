@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: AntWolf</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">AntWolf</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/ruby/ant_wolf_rb.html">
+                ruby/ant_wolf.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="AntAnimal.html">
+                AntAnimal
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Wolves are controlled in a pack by a PackLeader. Typically wolves are
+resting. When a member gets too much hunger (&lt;0.5), then the whole pack
+moves on to find some food (sheep or men)
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000254">assignJob</a>&nbsp;&nbsp;
+      <a href="#M000253">assignJobToAll</a>&nbsp;&nbsp;
+      <a href="#M000248">assignLeader</a>&nbsp;&nbsp;
+      <a href="#M000247">checkPackMerge</a>&nbsp;&nbsp;
+      <a href="#M000252">decideWhatsToDo</a>&nbsp;&nbsp;
+      <a href="#M000261">eventDie</a>&nbsp;&nbsp;
+      <a href="#M000246">eventJobFinished</a>&nbsp;&nbsp;
+      <a href="#M000245">eventNoJob</a>&nbsp;&nbsp;
+      <a href="#M000257">getMen</a>&nbsp;&nbsp;
+      <a href="#M000260">getName</a>&nbsp;&nbsp;
+      <a href="#M000256">getTargetPos</a>&nbsp;&nbsp;
+      <a href="#M000249">inPack</a>&nbsp;&nbsp;
+      <a href="#M000258">menCount</a>&nbsp;&nbsp;
+      <a href="#M000244">new</a>&nbsp;&nbsp;
+      <a href="#M000250">setLeader</a>&nbsp;&nbsp;
+      <a href="#M000251">setLeaderDirect</a>&nbsp;&nbsp;
+      <a href="#M000259">setMeshState</a>&nbsp;&nbsp;
+      <a href="#M000255">shareFood</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">leader</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">mypack</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000244" class="method-detail">
+        <a name="M000244"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000244.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000244.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000254" class="method-detail">
+        <a name="M000254"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000254.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000254.html');return false;">
+          <span class="method-name">assignJob</span><span class="method-args">(wolf)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000253" class="method-detail">
+        <a name="M000253"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000253.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000253.html');return false;">
+          <span class="method-name">assignJobToAll</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000248" class="method-detail">
+        <a name="M000248"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000248.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000248.html');return false;">
+          <span class="method-name">assignLeader</span><span class="method-args">(pack)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000247" class="method-detail">
+        <a name="M000247"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000247.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000247.html');return false;">
+          <span class="method-name">checkPackMerge</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000252" class="method-detail">
+        <a name="M000252"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000252.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000252.html');return false;">
+          <span class="method-name">decideWhatsToDo</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000261" class="method-detail">
+        <a name="M000261"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000261.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000261.html');return false;">
+          <span class="method-name">eventDie</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000246" class="method-detail">
+        <a name="M000246"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000246.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000246.html');return false;">
+          <span class="method-name">eventJobFinished</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000245" class="method-detail">
+        <a name="M000245"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000245.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000245.html');return false;">
+          <span class="method-name">eventNoJob</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000257" class="method-detail">
+        <a name="M000257"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000257.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000257.html');return false;">
+          <span class="method-name">getMen</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000260" class="method-detail">
+        <a name="M000260"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000260.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000260.html');return false;">
+          <span class="method-name">getName</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000256" class="method-detail">
+        <a name="M000256"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000256.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000256.html');return false;">
+          <span class="method-name">getTargetPos</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000249" class="method-detail">
+        <a name="M000249"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000249.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000249.html');return false;">
+          <span class="method-name">inPack</span><span class="method-args">(wolf)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000258" class="method-detail">
+        <a name="M000258"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000258.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000258.html');return false;">
+          <span class="method-name">menCount</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000250" class="method-detail">
+        <a name="M000250"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000250.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000250.html');return false;">
+          <span class="method-name">setLeader</span><span class="method-args">(leader)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000251" class="method-detail">
+        <a name="M000251"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000251.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000251.html');return false;">
+          <span class="method-name">setLeaderDirect</span><span class="method-args">(leader)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000259" class="method-detail">
+        <a name="M000259"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000259.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000259.html');return false;">
+          <span class="method-name">setMeshState</span><span class="method-args">(s)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000255" class="method-detail">
+        <a name="M000255"></a>
+
+        <div class="method-heading">
+          <a href="AntWolf.src/M000255.html" target="Code" class="method-signature"
+            onclick="popupCode('AntWolf.src/M000255.html');return false;">
+          <span class="method-name">shareFood</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

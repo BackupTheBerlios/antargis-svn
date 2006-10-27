@@ -1,0 +1,179 @@
+.TH "AGMessageObject" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGMessageObject \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_messageobject.h>\fP
+.PP
+Inherits \fBAGListener\fP.
+.PP
+Inherited by \fBAGApplication\fP, \fBAGWidget\fP, and \fBHeightMap\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGMessageObject\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~AGMessageObject\fP ()"
+.br
+.ti -1c
+.RI "bool \fBprocessEvent\fP (\fBAGEvent\fP *pEvent)"
+.br
+.ti -1c
+.RI "virtual bool \fBacceptEvent\fP (const SDL_Event *pEvent)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventActive\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventKeyDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventKeyUp\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseMotion\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonUp\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventQuit\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventQuitModal\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventSysWM\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventResize\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual Uint8 \fBgetButtonState\fP () const "
+.br
+.ti -1c
+.RI "virtual \fBAGVector2\fP \fBgetMousePosition\fP () const "
+.br
+.ti -1c
+.RI "void \fBpushSignal\fP (\fBAGSignal\fP *pSignal)"
+.br
+.ti -1c
+.RI "void \fBpopSignal\fP (\fBAGSignal\fP *pSignal)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigActive\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigKeyDown\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigKeyUp\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigMouseMotion\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigMouseButtonDown\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigMouseButtonUp\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigQuit\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigSysWM\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigVideoResize\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBAGMessageObject\fP handles libSDL-events and provides virtual handlers. 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGMessageObject::AGMessageObject ()"
+.PP
+.SS "AGMessageObject::~AGMessageObject ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "bool AGMessageObject::acceptEvent (const SDL_Event * pEvent)\fC [virtual]\fP"
+.PP
+.SS "bool AGMessageObject::eventActive (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+.SS "bool AGMessageObject::eventKeyDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBGLApp\fP, \fBAGApplication\fP, \fBAGEdit\fP, \fBAGLayout\fP, and \fBAGListBox\fP.
+.SS "bool AGMessageObject::eventKeyUp (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGEdit\fP.
+.SS "bool AGMessageObject::eventMouseButtonDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBGLApp\fP, \fBMiniMap\fP, \fBAGButton\fP, \fBAGListBox\fP, \fBAGWidget\fP, and \fBAGWindow\fP.
+.SS "bool AGMessageObject::eventMouseButtonUp (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBGLApp\fP, \fBAGButton\fP, \fBAGListBox\fP, and \fBAGWidget\fP.
+.SS "bool AGMessageObject::eventMouseMotion (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBGLApp\fP, \fBAGApplication\fP, and \fBAGWidget\fP.
+.SS "bool AGMessageObject::eventQuit (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGApplication\fP.
+.SS "bool AGMessageObject::eventQuitModal (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+.SS "bool AGMessageObject::eventResize (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+.SS "bool AGMessageObject::eventSysWM (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+.SS "Uint8 AGMessageObject::getButtonState () const\fC [virtual]\fP"
+.PP
+.SS "\fBAGVector2\fP AGMessageObject::getMousePosition () const\fC [virtual]\fP"
+.PP
+.SS "void AGMessageObject::popSignal (\fBAGSignal\fP * pSignal)"
+.PP
+.SS "bool AGMessageObject::processEvent (\fBAGEvent\fP * pEvent)"
+.PP
+Reimplemented in \fBAGWidget\fP.
+.SS "void AGMessageObject::pushSignal (\fBAGSignal\fP * pSignal)"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigActive\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigKeyDown\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigKeyUp\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigMouseButtonDown\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigMouseButtonUp\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigMouseMotion\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigQuit\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigSysWM\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGMessageObject::sigVideoResize\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Campaign)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/campaign.rb, line 207</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">filename</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;NEW CAMPAIGN FOMR FILE:&quot;</span>,<span class="ruby-identifier">filename</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">fileExists</span>(<span class="ruby-identifier">filename</span>)
+                        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;file not found #{filename}&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;CONT&quot;</span>
+                <span class="ruby-ivar">@doc</span>=<span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filename</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;CONT&quot;</span>
+                <span class="ruby-ivar">@xmlRoot</span>=<span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">root</span>
+                <span class="ruby-ivar">@enabled</span>=(<span class="ruby-ivar">@xmlRoot</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;enabled&quot;</span>)<span class="ruby-operator">!=</span><span class="ruby-value str">&quot;false&quot;</span>)
+                <span class="ruby-ivar">@name</span>=<span class="ruby-ivar">@xmlRoot</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;name&quot;</span>)
+                <span class="ruby-ivar">@imageName</span>=<span class="ruby-ivar">@xmlRoot</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;image&quot;</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;imageName:&quot;</span>,<span class="ruby-ivar">@imageName</span>
+                <span class="ruby-ivar">@image</span>=<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">load</span>(<span class="ruby-ivar">@imageName</span>)
+                <span class="ruby-ivar">@texture</span>=<span class="ruby-constant">AGTexture</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@image</span>)
+                <span class="ruby-ivar">@description</span>=<span class="ruby-ivar">@xmlRoot</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;description&quot;</span>)
+                <span class="ruby-ivar">@partID</span>=<span class="ruby-ivar">@xmlRoot</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;part&quot;</span>).<span class="ruby-identifier">to_i</span>
+                
+                <span class="ruby-ivar">@part</span>=[]
+                <span class="ruby-ivar">@xmlRoot</span>.<span class="ruby-identifier">getChildren</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">getName</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;cutscene&quot;</span>
+                                        <span class="ruby-ivar">@part</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">CutScene</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">c</span>))
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;level&quot;</span>
+                                        <span class="ruby-ivar">@part</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">CampaignLevel</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">c</span>))
+                        <span class="ruby-keyword kw">end</span>
+                }
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

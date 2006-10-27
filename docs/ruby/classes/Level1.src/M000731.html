@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventHLJobFinished (Level1)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/levels/tutorial/tutorial1.rb, line 22</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventHLJobFinished</span>(<span class="ruby-identifier">hero</span>,<span class="ruby-identifier">job</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hero</span>.<span class="ruby-identifier">getName!</span>=<span class="ruby-value str">&quot;Rowen&quot;</span>
+                        <span class="ruby-keyword kw">return</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHeroFightAnimalJob</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntSheep</span> <span class="ruby-keyword kw">and</span> (<span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@sheep</span>)
+                                <span class="ruby-ivar">@sheep</span>=<span class="ruby-keyword kw">true</span>
+                                <span class="ruby-identifier">start</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;sheep&quot;</span>)
+                                <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;Now your troops have shared the food among them as you can see in their inventories.&quot;</span>)
+                                <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;Whenever they rest and are really hungry they will eat their food automatically. But you have to look that they have time to rest for this.&quot;</span>)
+                                <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;It seems like someone has left a bag a little down here. Take it up. (Right click)&quot;</span>)
+                                <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">start</span>)
+                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntSack</span>
+                                <span class="ruby-ivar">@sack</span>=<span class="ruby-keyword kw">true</span>
+                                <span class="ruby-identifier">start</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;sheep&quot;</span>)
+                                <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;Well done, now complete your task by conquering the farm and taking their food.&quot;</span>)
+                                <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">start</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHeroFightJob</span>
+                        <span class="ruby-ivar">@defeat</span>=<span class="ruby-keyword kw">true</span>
+                        <span class="ruby-identifier">start</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;sheep&quot;</span>)
+                        <span class="ruby-identifier">start</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Tutorial&quot;</span>,<span class="ruby-value str">&quot;Now take the food by selecting the farm and clicking on the 'take food' button.&quot;</span>)
+                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">start</span>)
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntHeroTakeJob</span>
+                        <span class="ruby-ivar">@takeFood</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@sheep</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@defeat</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@takeFood</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@sack</span>)
+                        <span class="ruby-identifier">wonLevel</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

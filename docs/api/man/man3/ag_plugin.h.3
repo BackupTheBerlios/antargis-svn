@@ -1,0 +1,60 @@
+.TH "gui/src/ag_plugin.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_plugin.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <ag_rubyobj.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGPlugin\fP"
+.br
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAGPLEXPORT\fP"
+.br
+.ti -1c
+.RI "#define \fBAGPLIMPORT\fP"
+.br
+.ti -1c
+.RI "#define \fBDECLARE_PLUGIN\fP(name)   extern 'C' {AGPlugin * AGPLIMPORT create(); }"
+.br
+.ti -1c
+.RI "#define \fBDEFINE_PLUGIN\fP(name)   extern 'C' {AGPlugin * AGPLEXPORT create(){return new  name();} }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGPlugin\fP * \fBloadPlugin\fP (const std::string &pFile)"
+.br
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define AGPLEXPORT"
+.PP
+.SS "#define AGPLIMPORT"
+.PP
+.SS "#define DECLARE_PLUGIN(name)   extern 'C' {AGPlugin * AGPLIMPORT create(); }"
+.PP
+.SS "#define DEFINE_PLUGIN(name)   extern 'C' {AGPlugin * AGPLEXPORT create(){return new  name();} }"
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "\fBAGPlugin\fP* loadPlugin (const std::string & pFile)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

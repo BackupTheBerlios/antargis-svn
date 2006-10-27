@@ -1,0 +1,66 @@
+.TH "AnimMeshData" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AnimMeshData \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <anim_mesh_data.h>\fP
+.PP
+Inherits \fBAGRubyObject\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAnimMeshData\fP (const \fBAGFilename\fP &xmlfile)"
+.br
+.ti -1c
+.RI "\fB~AnimMeshData\fP ()"
+.br
+.ti -1c
+.RI "\fBAGBox3\fP \fBbbox\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetEvents\fP (bool e)"
+.br
+.ti -1c
+.RI "void \fBsetTransform\fP (const \fBAGMatrix4\fP &m)"
+.br
+.ti -1c
+.RI "const \fBAGMatrix4\fP & \fBgetTransform\fP () const "
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBAnimMesh\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AnimMeshData::AnimMeshData (const \fBAGFilename\fP & xmlfile)"
+.PP
+.SS "AnimMeshData::~AnimMeshData ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAGBox3\fP AnimMeshData::bbox () const"
+.PP
+.SS "const \fBAGMatrix4\fP & AnimMeshData::getTransform () const"
+.PP
+.SS "void AnimMeshData::setEvents (bool e)"
+.PP
+.SS "void AnimMeshData::setTransform (const \fBAGMatrix4\fP & m)"
+.PP
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBAnimMesh\fP\fC [friend]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

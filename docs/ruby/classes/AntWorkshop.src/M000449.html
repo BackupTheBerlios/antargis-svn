@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setupMesh (AntWorkshop)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_workshop.rb, line 46</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setupMesh</span>
+                <span class="ruby-identifier">mesh</span>=<span class="ruby-constant">Mesh</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getScene</span>,<span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/workshop.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.18</span>,<span class="ruby-value str">&quot;data/textures/models/workshop.png&quot;</span>),<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>),<span class="ruby-value">-50</span>)
+                <span class="ruby-identifier">setMesh</span>(<span class="ruby-identifier">mesh</span>)
+                <span class="ruby-identifier">p</span>=<span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">-1.3</span>,<span class="ruby-value">-1.2</span>,<span class="ruby-value">2.2</span>)
+                <span class="ruby-identifier">addMesh</span>(<span class="ruby-ivar">@smokeMesh</span>=<span class="ruby-constant">Smoke</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getScene</span>,<span class="ruby-value">5</span>),<span class="ruby-identifier">p</span>)
+                <span class="ruby-identifier">checkSmoke</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventJobFinished (AntMan)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_man.rb, line 70</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventJobFinished</span>
+                <span class="ruby-identifier">setVisible</span>(<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-keyword kw">super</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">getEnergy</span><span class="ruby-operator">==</span><span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@dead</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-identifier">simDeath</span>
+                        <span class="ruby-keyword kw">return</span>
+                <span class="ruby-keyword kw">end</span>
+                
+                <span class="ruby-identifier">setFighting</span>(<span class="ruby-keyword kw">false</span>)
+                
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@bossName</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;&quot;</span> <span class="ruby-keyword kw">then</span>
+                        
+                                <span class="ruby-identifier">house</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getNext</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-value str">&quot;house&quot;</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">house</span>
+                                        <span class="ruby-identifier">houseName</span>=<span class="ruby-identifier">house</span>.<span class="ruby-identifier">getName</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">houseName</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;&quot;</span> <span class="ruby-keyword kw">then</span>
+                                                <span class="ruby-identifier">dputs</span> <span class="ruby-value str">&quot;ERROR House has no name!&quot;</span>
+                                                <span class="ruby-identifier">exit</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-ivar">@bossName</span>=<span class="ruby-identifier">houseName</span>
+                                        <span class="ruby-identifier">newRestJob</span>(<span class="ruby-identifier">rand</span>()<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+                                        <span class="ruby-comment cmt">#house=getMap.getRuby(house)</span>
+                                        <span class="ruby-identifier">house</span>.<span class="ruby-identifier">signUp</span>(<span class="ruby-keyword kw">self</span>)
+                                        <span class="ruby-ivar">@signed</span>=<span class="ruby-keyword kw">true</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">boss</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-ivar">@bossName</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">boss</span>
+                                        <span class="ruby-ivar">@bossName</span>=<span class="ruby-value str">&quot;&quot;</span>
+                                        <span class="ruby-keyword kw">return</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-ivar">@boss</span>=<span class="ruby-identifier">boss</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;BOSS:#{@boss}&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@boss</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@signed</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">signUp</span>(<span class="ruby-keyword kw">self</span>)
+                        <span class="ruby-ivar">@signed</span>=<span class="ruby-keyword kw">true</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@boss</span>
+                        <span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">assignJob</span>(<span class="ruby-keyword kw">self</span>)
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,56 @@
+.TH "gui/src/ag_messageobject.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_messageobject.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ag_messageobject.h'\fP
+.br
+\fC#include 'ag_debug.h'\fP
+.br
+\fC#include 'ag_main.h'\fP
+.br
+\fC#include 'ag_stringstream.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGEvent\fP * \fBnewEvent\fP (\fBAGListener\fP *pCaller, const \fBAGString\fP &pName, const SDL_Event *s)"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBtoString\fP (SDL_keysym k)"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBgetUntil\fP (\fBAGString\fP &b, const \fBAGString\fP &f)"
+.br
+.ti -1c
+.RI "SDL_keysym \fBtoKeysym\fP (const \fBAGString\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBtoString\fP (SDL_Event *pEvent)"
+.br
+.ti -1c
+.RI "SDL_Event * \fBtoSDLEvent\fP (const \fBAGString\fP &p)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBAGString\fP getUntil (\fBAGString\fP & b, const \fBAGString\fP & f)"
+.PP
+.SS "\fBAGEvent\fP* newEvent (\fBAGListener\fP * pCaller, const \fBAGString\fP & pName, const SDL_Event * s)"
+.PP
+.SS "SDL_keysym toKeysym (const \fBAGString\fP & s)"
+.PP
+.SS "SDL_Event* toSDLEvent (const \fBAGString\fP & p)"
+.PP
+.SS "\fBAGString\fP toString (SDL_Event * pEvent)"
+.PP
+.SS "\fBAGString\fP toString (SDL_keysym k)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

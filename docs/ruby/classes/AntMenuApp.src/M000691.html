@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventSingleStart (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 218</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventSingleStart</span>(<span class="ruby-identifier">e</span>)
+
+                <span class="ruby-identifier">id</span>=<span class="ruby-ivar">@singleMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;list&quot;</span>).<span class="ruby-identifier">getSelectedID</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">id!</span>=<span class="ruby-value str">&quot;&quot;</span>
+                        <span class="ruby-identifier">soundOff</span>
+                        <span class="ruby-comment cmt">#c=Campaign.new(getWriteDir+&quot;/savegames/&quot;+id)</span>
+                        <span class="ruby-identifier">startGame</span>(<span class="ruby-value str">&quot;data/levels/&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">id</span>) <span class="ruby-comment cmt">#ampaign(c)</span>
+                        <span class="ruby-identifier">soundOn</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">setMainWidget</span>(<span class="ruby-ivar">@mainMenu</span>)
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

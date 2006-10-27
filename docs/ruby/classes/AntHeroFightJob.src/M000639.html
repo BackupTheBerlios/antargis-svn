@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>lost (AntHeroFightJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 457</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lost</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@finished</span>
+                        <span class="ruby-identifier">dputs</span> <span class="ruby-value str">&quot;LOST!!!!!!!!!!&quot;</span>
+                        <span class="ruby-ivar">@finished</span>=<span class="ruby-keyword kw">true</span>
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHero</span>)
+                                <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">eventHLJobFinished</span>(<span class="ruby-keyword kw">self</span>)
+                                <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">newHLMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@sitpos</span>[<span class="ruby-ivar">@hero</span>],<span class="ruby-value">0</span>)
+                        <span class="ruby-keyword kw">end</span>
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHeroFightJob</span>)
+                                <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">won</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">setOwner</span>(<span class="ruby-ivar">@target</span>)
+                        <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">killAllJobs</span>
+                        <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">killAllJobs</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

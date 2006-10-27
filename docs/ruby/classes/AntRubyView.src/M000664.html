@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventHover (AntRubyView)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/view.rb, line 82</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventHover</span>(<span class="ruby-identifier">list</span>,<span class="ruby-identifier">button</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">n</span>=<span class="ruby-identifier">list</span>[<span class="ruby-value">0</span>]
+                        <span class="ruby-identifier">mesh</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">node</span>
+                        <span class="ruby-identifier">ok</span>=<span class="ruby-keyword kw">false</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">Mesh</span>
+                                <span class="ruby-identifier">ent</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getEntity</span>(<span class="ruby-identifier">mesh</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ent</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntBoss</span>) <span class="ruby-keyword kw">then</span>
+                                                <span class="ruby-identifier">hoverEntity</span>(<span class="ruby-identifier">ent</span>)
+                                                <span class="ruby-identifier">ok</span>=<span class="ruby-keyword kw">true</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">ok</span>
+                                <span class="ruby-identifier">hoverEntity</span>(<span class="ruby-keyword kw">nil</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntSheep)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_sheep.rb, line 32</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>()
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>))
+                <span class="ruby-identifier">setProvide</span>(<span class="ruby-value str">&quot;sheep&quot;</span>,<span class="ruby-keyword kw">true</span>)
+                <span class="ruby-identifier">setSpeed</span> <span class="ruby-value">0</span><span class="ruby-value">.4</span>
+                <span class="ruby-ivar">@lastBirth</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@foodAdd</span>=<span class="ruby-value">0</span>
+                
+                <span class="ruby-identifier">data</span>=<span class="ruby-identifier">getAnimMeshData</span>(<span class="ruby-value str">&quot;data/models/sheep.anim&quot;</span>)
+                <span class="ruby-identifier">setMesh</span>(<span class="ruby-constant">AnimMesh</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getScene</span>,<span class="ruby-identifier">data</span>))
+
+                <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;food&quot;</span>,<span class="ruby-value">1</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

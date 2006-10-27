@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Server)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File server/basicserver.rb, line 123</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+                <span class="ruby-ivar">@port</span> = <span class="ruby-identifier">$PORT</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-ivar">@server</span> = <span class="ruby-constant">TCPServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'localhost'</span>, <span class="ruby-ivar">@port</span>)
+                <span class="ruby-ivar">@connections</span>={} <span class="ruby-comment cmt"># holds the connections by id: {0=&gt;#Connection1, 2=&gt;Connection6}</span>
+                <span class="ruby-ivar">@queue</span>=<span class="ruby-constant">Queue</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">run</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,114 @@
+.TH "AntShaderProgram" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AntShaderProgram \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <glsl.h>\fP
+.PP
+Inherited by \fBAntShadowShader\fP, and \fBAntWaterShader\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAntShaderProgram\fP (const std::string &pVertexFile, const std::string &pFragFile)"
+.br
+.ti -1c
+.RI "virtual \fB~AntShaderProgram\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBenable\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBdisable\fP ()"
+.br
+.ti -1c
+.RI "void \fBupdate\fP (float time)"
+.br
+.ti -1c
+.RI "virtual void \fBdoUpdate\fP (float time)"
+.br
+.ti -1c
+.RI "GLint \fBgetLoc\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "GLint \fBgetAttr\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "void \fBsendUniform\fP (const std::string &pName, int i)"
+.br
+.ti -1c
+.RI "void \fBsendUniform\fP (const std::string &pName, float f)"
+.br
+.ti -1c
+.RI "void \fBsendUniform\fP (const std::string &pName, const \fBAGVector3\fP &m)"
+.br
+.ti -1c
+.RI "void \fBsendUniform\fP (const std::string &pName, const \fBAGVector4\fP &m)"
+.br
+.ti -1c
+.RI "void \fBsendUniform\fP (const std::string &pName, const \fBAGMatrix4\fP &m)"
+.br
+.ti -1c
+.RI "void \fBsendUniform\fP (const std::string &pName, const std::vector< \fBAGMatrix4\fP > &m)"
+.br
+.ti -1c
+.RI "void \fBsendAttribute\fP (const std::string &pName, const std::vector< float > &vf)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "GLhandleARB \fBp\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AntShaderProgram::AntShaderProgram (const std::string & pVertexFile, const std::string & pFragFile)"
+.PP
+.SS "AntShaderProgram::~AntShaderProgram ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AntShaderProgram::disable ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAntShadowShader\fP.
+.SS "void AntShaderProgram::doUpdate (float time)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAntShadowShader\fP, and \fBAntWaterShader\fP.
+.SS "void AntShaderProgram::enable ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAntShadowShader\fP.
+.SS "GLint AntShaderProgram::getAttr (const std::string & pName)"
+.PP
+.SS "GLint AntShaderProgram::getLoc (const std::string & pName)"
+.PP
+.SS "void AntShaderProgram::sendAttribute (const std::string & pName, const std::vector< float > & vf)"
+.PP
+.SS "void AntShaderProgram::sendUniform (const std::string & pName, const std::vector< \fBAGMatrix4\fP > & m)"
+.PP
+.SS "void AntShaderProgram::sendUniform (const std::string & pName, const \fBAGMatrix4\fP & m)"
+.PP
+.SS "void AntShaderProgram::sendUniform (const std::string & pName, const \fBAGVector4\fP & m)"
+.PP
+.SS "void AntShaderProgram::sendUniform (const std::string & pName, const \fBAGVector3\fP & m)"
+.PP
+.SS "void AntShaderProgram::sendUniform (const std::string & pName, float f)"
+.PP
+.SS "void AntShaderProgram::sendUniform (const std::string & pName, int i)"
+.PP
+.SS "void AntShaderProgram::update (float time)"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "GLhandleARB \fBAntShaderProgram::p\fP\fC [protected]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

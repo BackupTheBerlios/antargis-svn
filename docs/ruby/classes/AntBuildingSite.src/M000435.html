@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>incProgress (AntBuildingSite)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_buildingsite.rb, line 15</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">incProgress</span>(<span class="ruby-identifier">steps</span>)
+                <span class="ruby-ivar">@steps</span>=<span class="ruby-identifier">steps</span>
+                <span class="ruby-identifier">o</span>=<span class="ruby-ivar">@progress</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-ivar">@progress</span><span class="ruby-operator">+=</span>(<span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-identifier">steps</span>)<span class="ruby-operator">*</span>(<span class="ruby-ivar">@@buildingSiteMeshes</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">o!</span>=<span class="ruby-ivar">@progress</span>.<span class="ruby-identifier">to_i</span>
+                        <span class="ruby-identifier">setupMesh</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-ivar">@doneSth</span>=<span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

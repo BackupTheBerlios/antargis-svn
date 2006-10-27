@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>loadXML (AntRubyMap)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/map.rb, line 294</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">n</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">n</span>)
+
+
+                <span class="ruby-comment cmt"># add pathfinder</span>
+                <span class="ruby-ivar">@mweighter</span>=<span class="ruby-constant">MapPathWeighter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+                <span class="ruby-ivar">@sgraph</span>=<span class="ruby-identifier">makeGraph</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-ivar">@mweighter</span>,<span class="ruby-value">4</span>)
+                <span class="ruby-ivar">@dgraph</span>=<span class="ruby-constant">DecimatedGraph</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sgraph</span>)
+
+                <span class="ruby-identifier">factor</span>=<span class="ruby-value">0</span><span class="ruby-value">.8</span>
+                <span class="ruby-identifier">factor</span>=<span class="ruby-value">1.0</span><span class="ruby-operator">-</span><span class="ruby-value">400.0</span><span class="ruby-operator">/</span><span class="ruby-ivar">@dgraph</span>.<span class="ruby-identifier">size</span>
+
+                <span class="ruby-ivar">@dgraph</span>.<span class="ruby-identifier">decimate</span>(<span class="ruby-identifier">factor</span>,<span class="ruby-ivar">@mweighter</span>)
+                <span class="ruby-ivar">@heuristic</span>=<span class="ruby-identifier">computeHeuristic</span>(<span class="ruby-ivar">@dgraph</span>)
+                <span class="ruby-comment cmt">#exit</span>
+
+                <span class="ruby-comment cmt">#@mheuristic=MyHeuristicFunction.new</span>
+                <span class="ruby-ivar">@path</span>=<span class="ruby-constant">Pathfinder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dgraph</span>,<span class="ruby-ivar">@heuristic</span>)
+
+
+                <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">move</span>(<span class="ruby-value">0</span>)}
+                
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;scriptfile&quot;</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;scriptclass&quot;</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+        
+                        <span class="ruby-comment cmt"># FIXME: add some safetly level here!!!</span>
+
+                        <span class="ruby-ivar">@scriptFile</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;scriptfile&quot;</span>)
+                        <span class="ruby-ivar">@scriptClass</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;scriptclass&quot;</span>)
+                        <span class="ruby-identifier">c</span>=<span class="ruby-identifier">loadFile</span>(<span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;scriptfile&quot;</span>))
+                        <span class="ruby-ivar">@filename</span>=<span class="ruby-ivar">@scriptFile</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.rb&quot;</span>,<span class="ruby-value str">&quot;.antlvl&quot;</span>)
+                        <span class="ruby-identifier">levelName</span>=<span class="ruby-identifier">getLevelName</span>
+                        <span class="ruby-identifier">c</span>=<span class="ruby-node">&quot;module #{levelName}\n&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">c</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;\nend\n&quot;</span>
+                        <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">c</span>)
+                        <span class="ruby-identifier">cl</span>=<span class="ruby-node">&quot;#{levelName}::&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;scriptclass&quot;</span>)
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;class #{cl}&quot;</span>
+                        <span class="ruby-ivar">@script</span>=<span class="ruby-identifier">eval</span>(<span class="ruby-identifier">cl</span>).<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+        
+                        <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@script</span>.<span class="ruby-identifier">class</span>
+                        <span class="ruby-comment cmt">#raise 1</span>
+        
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@script</span>
+                        <span class="ruby-identifier">sd</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">getChildren</span>(<span class="ruby-value str">&quot;scriptdata&quot;</span>)
+                        <span class="ruby-identifier">sd</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+                                <span class="ruby-ivar">@script</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">c</span>)
+                        }
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;curTime&quot;</span>)<span class="ruby-operator">!=</span><span class="ruby-value str">&quot;&quot;</span>
+                        <span class="ruby-ivar">@curTime</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;curTime&quot;</span>).<span class="ruby-identifier">to_f</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

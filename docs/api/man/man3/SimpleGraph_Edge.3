@@ -1,0 +1,84 @@
+.TH "SimpleGraph::Edge" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SimpleGraph::Edge \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <path.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEdge\fP (\fBNode\fP *pa, \fBNode\fP *pb, float p0, float p1)"
+.br
+.ti -1c
+.RI "\fB~Edge\fP ()"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBEdge\fP &e) const "
+.br
+.ti -1c
+.RI "float \fBmaxWeight\fP () const "
+.br
+.ti -1c
+.RI "\fBNode\fP * \fBgetOther\fP (\fBNode\fP *n)"
+.br
+.ti -1c
+.RI "\fBHalfEdge\fP * \fBgetHalfEdgeFrom\fP (\fBNode\fP *n)"
+.br
+.ti -1c
+.RI "\fBHalfEdge\fP * \fBgetHalfEdgeTo\fP (\fBNode\fP *n)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBNode\fP * \fBa\fP"
+.br
+.ti -1c
+.RI "\fBNode\fP * \fBb\fP"
+.br
+.ti -1c
+.RI "float \fBw0\fP"
+.br
+.ti -1c
+.RI "float \fBw1\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "SimpleGraph::Edge::Edge (\fBNode\fP * pa, \fBNode\fP * pb, float p0, float p1)"
+.PP
+.SS "SimpleGraph::Edge::~Edge ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBSimpleGraph::HalfEdge\fP * SimpleGraph::Edge::getHalfEdgeFrom (\fBNode\fP * n)"
+.PP
+.SS "\fBSimpleGraph::HalfEdge\fP * SimpleGraph::Edge::getHalfEdgeTo (\fBNode\fP * n)"
+.PP
+.SS "\fBSimpleGraph::Node\fP * SimpleGraph::Edge::getOther (\fBNode\fP * n)"
+.PP
+.SS "float SimpleGraph::Edge::maxWeight () const"
+.PP
+.SS "bool SimpleGraph::Edge::operator< (const \fBEdge\fP & e) const"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBNode\fP* \fBSimpleGraph::Edge::a\fP"
+.PP
+.SS "\fBNode\fP * \fBSimpleGraph::Edge::b\fP"
+.PP
+.SS "float \fBSimpleGraph::Edge::w0\fP"
+.PP
+.SS "float \fBSimpleGraph::Edge::w1\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

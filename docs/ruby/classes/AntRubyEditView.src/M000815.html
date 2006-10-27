@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventNewMapEnd (AntRubyEditView)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editview.rb, line 84</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventNewMapEnd</span>(<span class="ruby-identifier">e</span>)
+                <span class="ruby-identifier">name</span>=<span class="ruby-identifier">e</span>.<span class="ruby-identifier">getCaller</span>.<span class="ruby-identifier">getName</span>
+                <span class="ruby-identifier">d</span>=<span class="ruby-ivar">@newDialog</span>
+                <span class="ruby-ivar">@newDialog</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">d</span>
+                        <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">removeChild</span>(<span class="ruby-identifier">d</span>)
+                        <span class="ruby-comment cmt">#d.close</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;ok&quot;</span>
+                                <span class="ruby-identifier">w</span>=<span class="ruby-identifier">toAGEdit</span>(<span class="ruby-identifier">d</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;width&quot;</span>)).<span class="ruby-identifier">getText</span>.<span class="ruby-identifier">to_i</span>
+                                <span class="ruby-identifier">h</span>=<span class="ruby-identifier">toAGEdit</span>(<span class="ruby-identifier">d</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;height&quot;</span>)).<span class="ruby-identifier">getText</span>.<span class="ruby-identifier">to_i</span>
+                                
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">h</span>
+                                        <span class="ruby-identifier">w</span>=<span class="ruby-value">2</span><span class="ruby-operator">**</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">log</span>(<span class="ruby-identifier">w</span>)<span class="ruby-operator">/</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">log</span>(<span class="ruby-value">2</span>)).<span class="ruby-identifier">to_i</span>
+                                        <span class="ruby-identifier">h</span>=<span class="ruby-value">2</span><span class="ruby-operator">**</span>(<span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">log</span>(<span class="ruby-identifier">h</span>)<span class="ruby-operator">/</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">log</span>(<span class="ruby-value">2</span>)).<span class="ruby-identifier">to_i</span>
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">w</span><span class="ruby-operator">&gt;=</span><span class="ruby-value">16</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">h</span><span class="ruby-operator">&gt;=</span><span class="ruby-value">16</span>
+                                                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">newMap</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+                                                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">setHeight</span>(<span class="ruby-value">-0</span><span class="ruby-value">.5</span>)
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">mapChanged</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

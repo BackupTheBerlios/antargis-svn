@@ -1,0 +1,53 @@
+.TH "AGLayout" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGLayout \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_layout.h>\fP
+.PP
+Inherits \fBAGWidget\fP.
+.PP
+Inherited by \fBAGDialog\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGLayout\fP (\fBAGWidget\fP *pgParent)"
+.br
+.ti -1c
+.RI "virtual void \fBloadXML\fP (const std::string &pXMLData)"
+.br
+.ti -1c
+.RI "void \fBaddTabIndex\fP (int i, \fBAGWidget\fP *pWidget)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventKeyDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "int \fBgetNextTabIndex\fP () const "
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGLayout::AGLayout (\fBAGWidget\fP * pgParent)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGLayout::addTabIndex (int i, \fBAGWidget\fP * pWidget)"
+.PP
+.SS "bool AGLayout::eventKeyDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGMessageObject\fP.
+.SS "int AGLayout::getNextTabIndex () const"
+.PP
+.SS "void AGLayout::loadXML (const std::string & pXMLData)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGDialog\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

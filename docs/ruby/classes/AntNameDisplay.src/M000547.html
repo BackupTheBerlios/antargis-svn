@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntNameDisplay)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/view.rb, line 294</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>,<span class="ruby-identifier">hero</span>,<span class="ruby-identifier">map</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">p</span>,<span class="ruby-identifier">r</span>)
+                <span class="ruby-ivar">@map</span>=<span class="ruby-identifier">map</span>
+                <span class="ruby-ivar">@hero</span>=<span class="ruby-identifier">hero</span>
+                <span class="ruby-ivar">@font</span>=<span class="ruby-identifier">getTheme</span>.<span class="ruby-identifier">getFont</span>(<span class="ruby-value str">&quot;heroName.font&quot;</span>)
+                <span class="ruby-ivar">@oldfont</span>=<span class="ruby-ivar">@font</span>
+                <span class="ruby-ivar">@name</span>=<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getName</span>
+                <span class="ruby-identifier">addChild</span>(<span class="ruby-ivar">@mb</span>=<span class="ruby-constant">AGButton</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-constant">AGRect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">width</span>,<span class="ruby-identifier">height</span>),<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;&quot;</span>)))
+                
+                <span class="ruby-ivar">@mb</span>.<span class="ruby-identifier">setEnabled</span>(<span class="ruby-keyword kw">false</span>)
+                <span class="ruby-identifier">addChild</span>(<span class="ruby-ivar">@textWidget</span>=<span class="ruby-constant">AGText</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-constant">AGRect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">width</span>,<span class="ruby-identifier">height</span>),<span class="ruby-constant">AGStringUtf8</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getName</span>),<span class="ruby-ivar">@font</span>))
+                
+                <span class="ruby-ivar">@fonts</span>={<span class="ruby-keyword kw">true</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">getTheme</span>.<span class="ruby-identifier">getFont</span>(<span class="ruby-value str">&quot;heroName.font&quot;</span>),<span class="ruby-keyword kw">false</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">getTheme</span>.<span class="ruby-identifier">getFont</span>(<span class="ruby-value str">&quot;enemyHero.font&quot;</span>)}
+                <span class="ruby-ivar">@oldPlayer</span>=<span class="ruby-keyword kw">nil</span>
+                <span class="ruby-identifier">setCaching</span>(<span class="ruby-keyword kw">true</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

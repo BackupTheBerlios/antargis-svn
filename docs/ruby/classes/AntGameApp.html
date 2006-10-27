@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: AntGameApp</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">AntGameApp</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/ruby/antargis_rb.html">
+                ruby/antargis.rb
+                </a>
+        <br />
+                <a href="../files/editor_rb.html">
+                editor.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="AntRubyView.html">
+                AntRubyView
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="AntGameApp.html">AntGameApp</a> is the central class, that
+controls event handling of all the user interaction in-game
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000087">audioOptions</a>&nbsp;&nbsp;
+      <a href="#M000083">buildHouse</a>&nbsp;&nbsp;
+      <a href="#M000093">checkHeroEnergy</a>&nbsp;&nbsp;
+      <a href="#M000113">editPlayers</a>&nbsp;&nbsp;
+      <a href="#M000114">enableEdit</a>&nbsp;&nbsp;
+      <a href="#M000079">eventAggressionChanged</a>&nbsp;&nbsp;
+      <a href="#M000080">eventEntitiesClicked</a>&nbsp;&nbsp;
+      <a href="#M000074">eventFrame</a>&nbsp;&nbsp;
+      <a href="#M000108">eventFrame</a>&nbsp;&nbsp;
+      <a href="#M000107">eventGenerate</a>&nbsp;&nbsp;
+      <a href="#M000106">eventGenerateDialog</a>&nbsp;&nbsp;
+      <a href="#M000078">eventHeroButton</a>&nbsp;&nbsp;
+      <a href="#M000070">eventHeroJob</a>&nbsp;&nbsp;
+      <a href="#M000109">eventIdle</a>&nbsp;&nbsp;
+      <a href="#M000071">eventInventoryJob</a>&nbsp;&nbsp;
+      <a href="#M000072">eventKeyDown</a>&nbsp;&nbsp;
+      <a href="#M000081">eventMapClicked</a>&nbsp;&nbsp;
+      <a href="#M000112">eventOptions</a>&nbsp;&nbsp;
+      <a href="#M000077">eventOptions</a>&nbsp;&nbsp;
+      <a href="#M000111">eventPause</a>&nbsp;&nbsp;
+      <a href="#M000076">eventPause</a>&nbsp;&nbsp;
+      <a href="#M000110">eventQuit</a>&nbsp;&nbsp;
+      <a href="#M000075">eventQuit</a>&nbsp;&nbsp;
+      <a href="#M000073">eventStoryTalkFinished</a>&nbsp;&nbsp;
+      <a href="#M000103">getHeroByNum</a>&nbsp;&nbsp;
+      <a href="#M000069">getNewEvent</a>&nbsp;&nbsp;
+      <a href="#M000101">getSelectedHero</a>&nbsp;&nbsp;
+      <a href="#M000097">hidePanel</a>&nbsp;&nbsp;
+      <a href="#M000099">inspectEntity</a>&nbsp;&nbsp;
+      <a href="#M000116">load</a>&nbsp;&nbsp;
+      <a href="#M000085">load</a>&nbsp;&nbsp;
+      <a href="#M000105">new</a>&nbsp;&nbsp;
+      <a href="#M000068">new</a>&nbsp;&nbsp;
+      <a href="#M000095">panelVisible</a>&nbsp;&nbsp;
+      <a href="#M000082">processMessages</a>&nbsp;&nbsp;
+      <a href="#M000100">resetJob</a>&nbsp;&nbsp;
+      <a href="#M000115">save</a>&nbsp;&nbsp;
+      <a href="#M000084">save</a>&nbsp;&nbsp;
+      <a href="#M000102">selectHero</a>&nbsp;&nbsp;
+      <a href="#M000091">setHero</a>&nbsp;&nbsp;
+      <a href="#M000090">setHeroEnergy</a>&nbsp;&nbsp;
+      <a href="#M000088">setHeroImage</a>&nbsp;&nbsp;
+      <a href="#M000089">setHeroName</a>&nbsp;&nbsp;
+      <a href="#M000094">setResult</a>&nbsp;&nbsp;
+      <a href="#M000092">setupHeroDisplay</a>&nbsp;&nbsp;
+      <a href="#M000096">showPanel</a>&nbsp;&nbsp;
+      <a href="#M000098">tellStory</a>&nbsp;&nbsp;
+      <a href="#M000086">videoOptions</a>&nbsp;&nbsp;
+      <a href="#M000104">viewInformation</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="AGHandler.html">AGHandler</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">hero</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">result</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000105.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000105.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(sw,sh)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000068.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000068.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(savegameText,w,h,loadscreen=nil,connection=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000087.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000087.html');return false;">
+          <span class="method-name">audioOptions</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000083" class="method-detail">
+        <a name="M000083"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000083.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000083.html');return false;">
+          <span class="method-name">buildHouse</span><span class="method-args">(pos)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000093" class="method-detail">
+        <a name="M000093"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000093.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000093.html');return false;">
+          <span class="method-name">checkHeroEnergy</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+updates the energy displays of the heroes (if needed)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000113" class="method-detail">
+        <a name="M000113"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000113.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000113.html');return false;">
+          <span class="method-name">editPlayers</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000114" class="method-detail">
+        <a name="M000114"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000114.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000114.html');return false;">
+          <span class="method-name">enableEdit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000079.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000079.html');return false;">
+          <span class="method-name">eventAggressionChanged</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000080.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000080.html');return false;">
+          <span class="method-name">eventEntitiesClicked</span><span class="method-args">(list,button)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000074.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000074.html');return false;">
+          <span class="method-name">eventFrame</span><span class="method-args">(time)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000108.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000108.html');return false;">
+          <span class="method-name">eventFrame</span><span class="method-args">(time)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000107.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000107.html');return false;">
+          <span class="method-name">eventGenerate</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000106.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000106.html');return false;">
+          <span class="method-name">eventGenerateDialog</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000078.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000078.html');return false;">
+          <span class="method-name">eventHeroButton</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000070.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000070.html');return false;">
+          <span class="method-name">eventHeroJob</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+this handler is for the buttonpanel on the top the actions are direct ones,
+like rest,dimiss and so, which don&#8217;t need an object to use (like
+fighting,taking,&#8230;)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000109.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000109.html');return false;">
+          <span class="method-name">eventIdle</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000071.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000071.html');return false;">
+          <span class="method-name">eventInventoryJob</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+react to inventory-based jobs - like taking, recruiting
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000072.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000072.html');return false;">
+          <span class="method-name">eventKeyDown</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000081.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000081.html');return false;">
+          <span class="method-name">eventMapClicked</span><span class="method-args">(pos,button)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000112" class="method-detail">
+        <a name="M000112"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000112.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000112.html');return false;">
+          <span class="method-name">eventOptions</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000077.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000077.html');return false;">
+          <span class="method-name">eventOptions</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000111" class="method-detail">
+        <a name="M000111"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000111.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000111.html');return false;">
+          <span class="method-name">eventPause</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000076.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000076.html');return false;">
+          <span class="method-name">eventPause</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000110" class="method-detail">
+        <a name="M000110"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000110.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000110.html');return false;">
+          <span class="method-name">eventQuit</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+signals
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000075.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000075.html');return false;">
+          <span class="method-name">eventQuit</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000073.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000073.html');return false;">
+          <span class="method-name">eventStoryTalkFinished</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000103.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000103.html');return false;">
+          <span class="method-name">getHeroByNum</span><span class="method-args">(n)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000069.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000069.html');return false;">
+          <span class="method-name">getNewEvent</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+debugging-function - log all user-input
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000101.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000101.html');return false;">
+          <span class="method-name">getSelectedHero</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000097" class="method-detail">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000097.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000097.html');return false;">
+          <span class="method-name">hidePanel</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000099.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000099.html');return false;">
+          <span class="method-name">inspectEntity</span><span class="method-args">(e)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000116" class="method-detail">
+        <a name="M000116"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000116.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000116.html');return false;">
+          <span class="method-name">load</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000085" class="method-detail">
+        <a name="M000085"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000085.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000085.html');return false;">
+          <span class="method-name">load</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000095" class="method-detail">
+        <a name="M000095"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000095.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000095.html');return false;">
+          <span class="method-name">panelVisible</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns boolean about the visibility of the panel
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000082.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000082.html');return false;">
+          <span class="method-name">processMessages</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+simple functions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000100.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000100.html');return false;">
+          <span class="method-name">resetJob</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000115" class="method-detail">
+        <a name="M000115"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000115.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000115.html');return false;">
+          <span class="method-name">save</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000084" class="method-detail">
+        <a name="M000084"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000084.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000084.html');return false;">
+          <span class="method-name">save</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000102.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000102.html');return false;">
+          <span class="method-name">selectHero</span><span class="method-args">(h)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000091" class="method-detail">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000091.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000091.html');return false;">
+          <span class="method-name">setHero</span><span class="method-args">(flag,num)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000090.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000090.html');return false;">
+          <span class="method-name">setHeroEnergy</span><span class="method-args">(hero,num)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000088.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000088.html');return false;">
+          <span class="method-name">setHeroImage</span><span class="method-args">(image,num)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Setting up of Hero displays (images, texts and eventHandlers
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000089.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000089.html');return false;">
+          <span class="method-name">setHeroName</span><span class="method-args">(name,num)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000094" class="method-detail">
+        <a name="M000094"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000094.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000094.html');return false;">
+          <span class="method-name">setResult</span><span class="method-args">(r)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+sets a new result
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000092" class="method-detail">
+        <a name="M000092"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000092.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000092.html');return false;">
+          <span class="method-name">setupHeroDisplay</span><span class="method-args">(first=false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000096" class="method-detail">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000096.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000096.html');return false;">
+          <span class="method-name">showPanel</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000098.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000098.html');return false;">
+          <span class="method-name">tellStory</span><span class="method-args">(flow)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000086" class="method-detail">
+        <a name="M000086"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000086.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000086.html');return false;">
+          <span class="method-name">videoOptions</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="AntGameApp.src/M000104.html" target="Code" class="method-signature"
+            onclick="popupCode('AntGameApp.src/M000104.html');return false;">
+          <span class="method-name">viewInformation</span><span class="method-args">(ent)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+views an information window about the entity ent
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

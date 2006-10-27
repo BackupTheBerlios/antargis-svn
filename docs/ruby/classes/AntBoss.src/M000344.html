@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>loadXML (AntBoss)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_boss.rb, line 42</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">node</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">node</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;men&quot;</span>)<span class="ruby-operator">!=</span><span class="ruby-value str">&quot;&quot;</span> <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-identifier">dputs</span> <span class="ruby-value str">&quot;LOAD:CREATING MEN:&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;men&quot;</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;men&quot;</span>)<span class="ruby-operator">!=</span><span class="ruby-value str">&quot;&quot;</span>
+                                <span class="ruby-ivar">@createMen</span>=<span class="ruby-identifier">node</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;men&quot;</span>).<span class="ruby-identifier">to_i</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">node</span>.<span class="ruby-identifier">getChildren</span>(<span class="ruby-value str">&quot;hljob&quot;</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">t</span>=<span class="ruby-identifier">n</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;type&quot;</span>)
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;AntHeroMoveJob&quot;</span>
+                                        <span class="ruby-ivar">@job</span>=<span class="ruby-constant">AntHeroMoveJob</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-value">0</span>,<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>),<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;AntRestJob&quot;</span>
+                                        <span class="ruby-ivar">@job</span>=<span class="ruby-constant">AntHeroMoveJob</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-value">10</span>)
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;unknown job&quot;</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@job</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">n</span>)
+                }
+                <span class="ruby-identifier">setAggression</span>(<span class="ruby-identifier">getAggression</span>) <span class="ruby-comment cmt"># update aggression of men</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

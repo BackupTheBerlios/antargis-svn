@@ -1,0 +1,153 @@
+.TH "gui/src/ag_fs.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_fs.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <assert.h>\fP
+.br
+\fC#include <ag_fs.h>\fP
+.br
+\fC#include <dirent.h>\fP
+.br
+\fC#include <errno.h>\fP
+.br
+\fC#include <sys/stat.h>\fP
+.br
+\fC#include 'ag_debug.h'\fP
+.br
+\fC#include 'ag_main.h'\fP
+.br
+\fC#include 'ag_tools.h'\fP
+.br
+\fC#include 'ag_serial.h'\fP
+.br
+\fC#include <zlib.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBaddPath\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "void \fBinitFS\fP (const char *argv0)"
+.br
+.ti -1c
+.RI "void \fBcheckDir\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "void \fBcheckParentDirs\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "std::string \fBcheckFileName\fP (std::string s)"
+.br
+.ti -1c
+.RI "std::string \fBdirectLoad\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "std::string \fBfindFile\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "std::string \fBloadFromPath\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "std::string \fBloadFile\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "std::string \fBgetUserDir\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBgetDocumentsDir\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBgetWriteDir\fP ()"
+.br
+.ti -1c
+.RI "bool \fBsaveFile\fP (const std::string &pName, const std::string &pContent)"
+.br
+.ti -1c
+.RI "bool \fBfileExists\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetDirectoryInternal\fP (const std::string &pDir)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBgetDirectory\fP (const std::string &pDir)"
+.br
+.ti -1c
+.RI "std::string \fBcompress\fP (const std::string &pString)"
+.br
+.ti -1c
+.RI "std::string \fBuncompress\fP (const std::string &pString)"
+.br
+.ti -1c
+.RI "std::string \fBgetDirSep\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static std::list< std::string > \fBmFsPaths\fP"
+.br
+.ti -1c
+.RI "std::string \fBgUserDir\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void addPath (const std::string & pName)"
+.PP
+.SS "void checkDir (const std::string & s)"
+.PP
+.SS "std::string checkFileName (std::string s)"
+.PP
+.SS "void checkParentDirs (const std::string & s)"
+.PP
+.SS "std::string compress (const std::string & pString)"
+.PP
+.SS "std::string directLoad (const std::string & pName)"
+.PP
+.SS "bool fileExists (const std::string & pName)"
+.PP
+.SS "std::string findFile (const std::string & pName)"
+.PP
+.SS "std::vector<std::string> getDirectory (const std::string & pDir)"
+.PP
+.SS "std::vector<std::string> getDirectoryInternal (const std::string & pDir)"
+.PP
+.SS "std::string getDirSep ()"
+.PP
+.SS "std::string getDocumentsDir ()"
+.PP
+.SS "std::string getUserDir ()"
+.PP
+.SS "std::string getWriteDir ()"
+.PP
+.SS "void initFS (const char * argv0)"
+.PP
+.SS "std::string loadFile (const std::string & pName)"
+.PP
+.SS "std::string loadFromPath (const std::string & pName)"
+.PP
+.SS "bool saveFile (const std::string & pName, const std::string & pContent)"
+.PP
+.SS "std::string uncompress (const std::string & pString)"
+.PP
+.SH "Variable Documentation"
+.PP 
+.SS "std::string \fBgUserDir\fP"
+.PP
+.SS "std::list<std::string> \fBmFsPaths\fP\fC [static]\fP"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

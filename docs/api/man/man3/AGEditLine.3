@@ -1,0 +1,133 @@
+.TH "AGEditLine" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGEditLine \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_edit.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGEditLine\fP (const \fBAGStringUtf8\fP &pText, \fBAGFont\fP pFont, bool pHardEnd)"
+.br
+.ti -1c
+.RI "virtual \fB~AGEditLine\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetAlign\fP (\fBAGAlign\fP pAlign)"
+.br
+.ti -1c
+.RI "void \fBsetVAlign\fP (\fBAGVAlign\fP pVAlign)"
+.br
+.ti -1c
+.RI "virtual void \fBdraw\fP (\fBAGPainter\fP &p, const \fBAGVector2\fP &pPoint, const \fBAGRect2\fP &pClip)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawCursor\fP (\fBAGPainter\fP &p, int cx, const \fBAGVector2\fP &pPoint, const \fBAGRect2\fP &pClip, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "int \fBheight\fP () const "
+.br
+.ti -1c
+.RI "int \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "void \fBinsert\fP (const \fBAGStringUtf8\fP &c, int cx, bool pInsert)"
+.br
+.ti -1c
+.RI "void \fBdoDelete\fP (int cx)"
+.br
+.ti -1c
+.RI "\fBAGEditLine\fP \fBsplit\fP (int cx)"
+.br
+.ti -1c
+.RI "int \fBlength\fP () const "
+.br
+.ti -1c
+.RI "void \fBappend\fP (const \fBAGStringUtf8\fP &s)"
+.br
+.ti -1c
+.RI "void \fBprepend\fP (const \fBAGStringUtf8\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP \fBgetText\fP () const "
+.br
+.ti -1c
+.RI "\fBAGFont\fP \fBgetFont\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetText\fP (const \fBAGStringUtf8\fP &s)"
+.br
+.ti -1c
+.RI "bool \fBhardEnd\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetHardEnd\fP (bool pHardEnd)"
+.br
+.ti -1c
+.RI "std::pair< \fBAGStringUtf8\fP, bool > \fBcheckUnwrap\fP (int pW, const \fBAGStringUtf8\fP &s)"
+.br
+.ti -1c
+.RI "std::pair< \fBAGStringUtf8\fP, bool > \fBcheckWrap\fP (int pW)"
+.br
+.ti -1c
+.RI "void \fBsetFont\fP (const \fBAGFont\fP &pFont)"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGEditLine::AGEditLine (const \fBAGStringUtf8\fP & pText, \fBAGFont\fP pFont, bool pHardEnd)"
+.PP
+.SS "AGEditLine::~AGEditLine ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGEditLine::append (const \fBAGStringUtf8\fP & s)"
+.PP
+.SS "std::pair< \fBAGStringUtf8\fP, bool > AGEditLine::checkUnwrap (int pW, const \fBAGStringUtf8\fP & s)"
+.PP
+.SS "std::pair< \fBAGStringUtf8\fP, bool > AGEditLine::checkWrap (int pW)"
+.PP
+.SS "void AGEditLine::doDelete (int cx)"
+.PP
+.SS "void AGEditLine::draw (\fBAGPainter\fP & p, const \fBAGVector2\fP & pPoint, const \fBAGRect2\fP & pClip)\fC [virtual]\fP"
+.PP
+.SS "void AGEditLine::drawCursor (\fBAGPainter\fP & p, int cx, const \fBAGVector2\fP & pPoint, const \fBAGRect2\fP & pClip, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+.SS "\fBAGFont\fP AGEditLine::getFont () const"
+.PP
+.SS "\fBAGStringUtf8\fP AGEditLine::getText () const"
+.PP
+.SS "bool AGEditLine::hardEnd () const"
+.PP
+.SS "int AGEditLine::height () const"
+.PP
+.SS "void AGEditLine::insert (const \fBAGStringUtf8\fP & c, int cx, bool pInsert)"
+.PP
+.SS "int AGEditLine::length () const"
+.PP
+.SS "void AGEditLine::prepend (const \fBAGStringUtf8\fP & s)"
+.PP
+.SS "void AGEditLine::setAlign (\fBAGAlign\fP pAlign)"
+.PP
+.SS "void AGEditLine::setFont (const \fBAGFont\fP & pFont)"
+.PP
+.SS "void AGEditLine::setHardEnd (bool pHardEnd)"
+.PP
+.SS "void AGEditLine::setText (const \fBAGStringUtf8\fP & s)"
+.PP
+.SS "void AGEditLine::setVAlign (\fBAGVAlign\fP pVAlign)"
+.PP
+.SS "\fBAGEditLine\fP AGEditLine::split (int cx)"
+.PP
+.SS "int AGEditLine::width () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

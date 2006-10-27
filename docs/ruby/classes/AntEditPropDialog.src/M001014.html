@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntEditPropDialog)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/editor/dialogs.rb, line 21</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-identifier">ent</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-value str">&quot;data/gui/layout/editpropdialog.xml&quot;</span>)
+                <span class="ruby-ivar">@ent</span>=<span class="ruby-identifier">ent</span>
+                <span class="ruby-identifier">menCountW</span>=<span class="ruby-identifier">toAGEdit</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;MenCount&quot;</span>))
+                <span class="ruby-identifier">nameW</span>=<span class="ruby-identifier">toAGEdit</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;AntName&quot;</span>))
+                <span class="ruby-identifier">menCountW</span>.<span class="ruby-identifier">setText</span>(<span class="ruby-ivar">@ent</span>.<span class="ruby-identifier">getXMLProp</span>(<span class="ruby-value str">&quot;men&quot;</span>))
+                <span class="ruby-identifier">nameW</span>.<span class="ruby-identifier">setText</span>(<span class="ruby-ivar">@ent</span>.<span class="ruby-identifier">getName</span>)
+                
+                <span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;NpcTypeView&quot;</span>).<span class="ruby-identifier">hide</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@ent</span>.<span class="ruby-identifier">class!</span>=<span class="ruby-constant">AntNPC</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@ent</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">==</span><span class="ruby-constant">AntNPC</span>
+                        <span class="ruby-ivar">@npcTypeW</span>=<span class="ruby-identifier">toAGEdit</span>(<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;NpcType&quot;</span>))
+                        <span class="ruby-ivar">@npcTypeW</span>.<span class="ruby-identifier">setText</span>(<span class="ruby-ivar">@ent</span>.<span class="ruby-identifier">npcType</span>)
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-comment cmt"># init player-list</span>
+                <span class="ruby-identifier">plist</span>=<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;Player&quot;</span>)
+                <span class="ruby-identifier">players</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">players</span>
+                <span class="ruby-identifier">playernames</span>=[<span class="ruby-value str">&quot;NONE&quot;</span>]
+                <span class="ruby-identifier">playernames</span><span class="ruby-operator">+=</span><span class="ruby-identifier">players</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">getName</span>} <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntBoss</span>)
+                <span class="ruby-identifier">playernames</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">plist</span>.<span class="ruby-identifier">insertItem</span>(<span class="ruby-identifier">n</span>,<span class="ruby-identifier">n</span>)
+                }
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntBoss</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">getPlayer</span>
+                                <span class="ruby-identifier">plist</span>.<span class="ruby-identifier">setSelected</span>(<span class="ruby-identifier">ent</span>.<span class="ruby-identifier">getPlayer</span>.<span class="ruby-identifier">getName</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+
+
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getDescription (AntHouse)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_house.rb, line 313</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getDescription</span>
+                <span class="ruby-identifier">m</span>=<span class="ruby-value str">&quot;man&quot;</span>
+                <span class="ruby-identifier">home</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;{1} of them are at home.&quot;</span>,<span class="ruby-ivar">@atHome</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">1</span>
+                        <span class="ruby-identifier">m</span>=<span class="ruby-value str">&quot;men&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-identifier">r</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;This is a {1}. It was build {2} years ago. Currently {3} {4} live here.&quot;</span>,<span class="ruby-identifier">_</span>(<span class="ruby-identifier">houseType</span>),<span class="ruby-identifier">age</span>,<span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">length</span>,<span class="ruby-identifier">_</span>(<span class="ruby-identifier">m</span>))<span class="ruby-operator">+</span><span class="ruby-identifier">home</span>
+
+                <span class="ruby-identifier">morale</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@men</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span><span class="ruby-identifier">morale</span><span class="ruby-operator">+=</span><span class="ruby-identifier">m</span>.<span class="ruby-identifier">getMorale</span>}
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@men</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">morale</span><span class="ruby-operator">/=</span><span class="ruby-ivar">@men</span>.<span class="ruby-identifier">length</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">morale</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span><span class="ruby-value">.8</span>
+                        <span class="ruby-identifier">s</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;in good mood.&quot;</span>)
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">morale</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span><span class="ruby-value">.5</span>
+                        <span class="ruby-identifier">s</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;content.&quot;</span>)
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">morale</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span><span class="ruby-value">.2</span>
+                        <span class="ruby-identifier">s</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;discontent.&quot;</span>)
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">s</span>=<span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;bad tempered.&quot;</span>)
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">r</span><span class="ruby-operator">+=</span><span class="ruby-identifier">_</span>(<span class="ruby-value str">&quot;They are {1}&quot;</span>,<span class="ruby-identifier">_</span>(<span class="ruby-identifier">s</span>))
+                <span class="ruby-identifier">r</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

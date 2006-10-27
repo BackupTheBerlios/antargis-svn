@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eventHeroJob (AntGameApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/antargis.rb, line 180</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eventHeroJob</span>(<span class="ruby-identifier">e</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-ivar">@buttonpanel</span>.<span class="ruby-identifier">job</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;doDismiss&quot;</span>
+                                <span class="ruby-comment cmt"># opens a query dialog &quot;do really want to do this?&quot;, that is given a block, that's executed on confirmation</span>
+                                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-constant">AntQueryDialog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@layout</span>,<span class="ruby-keyword kw">nil</span>) {<span class="ruby-identifier">puts</span> <span class="ruby-ivar">@hero</span>;<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">newHLDismissJob</span>})
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;doRest&quot;</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@hero</span>
+                                        <span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">newHLRestJob</span>(<span class="ruby-value">10</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;doBuild&quot;</span>
+                                <span class="ruby-ivar">@job</span>=<span class="ruby-value str">&quot;doBuild&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

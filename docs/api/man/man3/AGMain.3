@@ -1,0 +1,105 @@
+.TH "AGMain" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGMain \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_main.h>\fP
+.PP
+Inherits \fBAGRubyObject\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGMain\fP ()"
+.br
+.ti -1c
+.RI "\fB~AGMain\fP ()"
+.br
+.ti -1c
+.RI "void \fBflip\fP ()"
+.br
+.ti -1c
+.RI "void \fBinitVideo\fP (int w, int h, int d, bool fs, bool gl, int vw=-1, int vh=-1)"
+.br
+.ti -1c
+.RI "void \fBtoggleFull\fP ()"
+.br
+.ti -1c
+.RI "int \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "int \fBheight\fP () const "
+.br
+.ti -1c
+.RI "int \fBrealWidth\fP () const "
+.br
+.ti -1c
+.RI "int \fBrealHeight\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetIcon\fP (const std::string &pFile)"
+.br
+.ti -1c
+.RI "void \fBsetCaption\fP (const std::string &pCaption)"
+.br
+.ti -1c
+.RI "bool \fBfullscreen\fP () const "
+.br
+.ti -1c
+.RI "long \fBgetTicks\fP () const "
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBmark\fP ()"
+.br
+.RI "\fIoverride this function to mark your children \fP"
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGMain::AGMain ()"
+.PP
+creates an \fBAGMain\fP object. 
+.SS "AGMain::~AGMain ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGMain::flip ()"
+.PP
+.SS "bool AGMain::fullscreen () const"
+.PP
+.SS "long AGMain::getTicks () const"
+.PP
+.SS "int AGMain::height () const"
+.PP
+.SS "void AGMain::initVideo (int w, int h, int d, bool fs, bool gl, int vw = \fC-1\fP, int vh = \fC-1\fP)"
+.PP
+change screen resolution to w*h*d with fullscreen when fs is true and in opengl mode if gl is true vw and vh describe virtual screen resolutions which implies scaling This is supported in opengl-mode only. 
+.SS "void AGMain::mark ()\fC [protected, virtual]\fP"
+.PP
+override this function to mark your children 
+.PP
+Reimplemented from \fBAGRubyObject\fP.
+.SS "int AGMain::realHeight () const"
+.PP
+.SS "int AGMain::realWidth () const"
+.PP
+.SS "void AGMain::setCaption (const std::string & pCaption)"
+.PP
+.SS "void AGMain::setIcon (const std::string & pFile)"
+.PP
+.SS "void AGMain::toggleFull ()"
+.PP
+.SS "int AGMain::width () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

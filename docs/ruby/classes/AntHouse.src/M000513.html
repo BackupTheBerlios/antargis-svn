@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>normalFetching (AntHouse)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_house.rb, line 162</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">normalFetching</span>(<span class="ruby-identifier">e</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">atHome</span>(<span class="ruby-identifier">e</span>) <span class="ruby-keyword kw">then</span>
+                        <span class="ruby-ivar">@atHome</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">e</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">checkFood</span>(<span class="ruby-identifier">e</span>)
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">3</span>) <span class="ruby-comment cmt"># wait some time</span>
+                                <span class="ruby-keyword kw">return</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;resting&quot;</span>
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;&quot;</span>)
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMeshState</span>(<span class="ruby-value str">&quot;stand&quot;</span>)
+                                <span class="ruby-comment cmt"># is home:</span>
+                                <span class="ruby-comment cmt"># 1) take everything from inventory</span>
+                                <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">takeAll</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">resource</span>)
+                                <span class="ruby-identifier">resourceChanged</span>
+                                <span class="ruby-comment cmt"># 2) give job</span>
+                                <span class="ruby-identifier">need</span>=<span class="ruby-identifier">neededStock</span>
+                                <span class="ruby-identifier">fetchForStock</span>(<span class="ruby-identifier">need</span>,<span class="ruby-identifier">e</span>)
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;resting&quot;</span>)
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">5</span><span class="ruby-operator">+</span><span class="ruby-identifier">getRand</span>)
+                        <span class="ruby-keyword kw">end</span>  
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/fetching/</span>
+                        <span class="ruby-comment cmt"># check if target is somehow to far away</span>
+                        <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">e</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">getPos2D</span><span class="ruby-operator">-</span><span class="ruby-identifier">e</span>.<span class="ruby-identifier">getPos2D</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">2</span>
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;homing&quot;</span>)
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">return</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">res</span>=<span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/.* /</span>,<span class="ruby-value str">&quot;&quot;</span>)
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">digResource</span>(<span class="ruby-identifier">res</span>)
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;digging &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">res</span>)
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/digging/</span>
+                        <span class="ruby-comment cmt"># digging ready - take home</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">res</span>=<span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/.* /</span>,<span class="ruby-value str">&quot;&quot;</span>)
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;homing&quot;</span>)
+                        <span class="ruby-comment cmt"># take resource</span>
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment cmt"># FIXME: error while loading</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">collectResource</span>(<span class="ruby-identifier">res</span>)
+                        <span class="ruby-identifier">amount</span>=[<span class="ruby-identifier">e</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">res</span>),<span class="ruby-identifier">e</span>.<span class="ruby-identifier">canCarry</span>].<span class="ruby-identifier">min</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">res</span>,<span class="ruby-identifier">amount</span>)
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">resourceChanged</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">res</span>,<span class="ruby-identifier">amount</span>)
+                <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;homing&quot;</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newRestJob</span>(<span class="ruby-value">1</span>) <span class="ruby-comment cmt"># always rest a little</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;&quot;</span>)
+                <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-comment cmt"># is anywhere - come home</span>
+                        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)<span class="ruby-comment cmt">#,false)</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

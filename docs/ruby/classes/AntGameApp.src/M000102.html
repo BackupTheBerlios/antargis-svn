@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>selectHero (AntGameApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/antargis.rb, line 572</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">selectHero</span>(<span class="ruby-identifier">h</span>)
+                <span class="ruby-ivar">@hero</span>=<span class="ruby-identifier">h</span>
+                <span class="ruby-identifier">inspectEntity</span>(<span class="ruby-identifier">h</span>)
+                <span class="ruby-ivar">@buttonpanel</span>.<span class="ruby-identifier">setName</span>(<span class="ruby-identifier">h</span>.<span class="ruby-identifier">getName</span>)
+                <span class="ruby-ivar">@buttonpanel</span>.<span class="ruby-identifier">setHero</span>(<span class="ruby-identifier">h</span>)
+
+                <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-node">&quot;HeroName#{i}&quot;</span>).<span class="ruby-identifier">getText</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">==</span><span class="ruby-identifier">h</span>.<span class="ruby-identifier">getName</span>
+                                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-node">&quot;hero#{i}&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-keyword kw">true</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-comment cmt"># set hero's aggression</span>
+                <span class="ruby-ivar">@buttonpanel</span>.<span class="ruby-identifier">setAggression</span>(<span class="ruby-ivar">@hero</span>.<span class="ruby-identifier">getAggression</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

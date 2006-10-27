@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getTreeTypes (ruby/ant_tree.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_tree.rb, line 33</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getTreeTypes</span>
+        <span class="ruby-identifier">files</span>=[
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/fir2.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/fir5.png&quot;</span>),
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/fir2.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/fir7.png&quot;</span>),
+<span class="ruby-comment cmt">#               getMeshData(&quot;data/models/tree5.ant2&quot;,0.45,&quot;data/textures/models/fir5.png&quot;),</span>
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree5.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/tree3.png&quot;</span>),
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree5.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/tree5.png&quot;</span>),
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree5.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/tree9.png&quot;</span>),
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree6.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/tree5.png&quot;</span>),
+                <span class="ruby-comment cmt">#getMeshData(&quot;data/models/tree1.ant2&quot;,1,&quot;data/textures/models/fir_complete.png&quot;),</span>
+                <span class="ruby-comment cmt">#getMeshData(&quot;data/models/tree1.ant2&quot;,1,&quot;data/textures/models/birch_complete.png&quot;),</span>
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree5.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.45</span>,<span class="ruby-value str">&quot;data/textures/models/tree10.png&quot;</span>),
+        ]
+        <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span><span class="ruby-identifier">f</span>.<span class="ruby-identifier">setCulling</span>(<span class="ruby-keyword kw">false</span>)} <span class="ruby-comment cmt"># patch for old trees</span>
+        <span class="ruby-identifier">files</span><span class="ruby-operator">+=</span>[
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree_simple1.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.3</span>,<span class="ruby-value str">&quot;data/textures/models/tree_simple1.png&quot;</span>),
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree_simple2.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.3</span>,<span class="ruby-value str">&quot;data/textures/models/tree_simple1.png&quot;</span>),
+                <span class="ruby-identifier">getMeshData</span>(<span class="ruby-value str">&quot;data/models/tree_simple5.ant2&quot;</span>,<span class="ruby-value">0</span><span class="ruby-value">.3</span>,<span class="ruby-value str">&quot;data/textures/models/tree_simple5.png&quot;</span>)
+        ]
+
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

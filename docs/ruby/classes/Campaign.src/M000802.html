@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>save (Campaign)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/campaign.rb, line 238</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save</span>(<span class="ruby-identifier">filename</span>)
+                <span class="ruby-ivar">@savename</span>=<span class="ruby-identifier">filename</span>
+                <span class="ruby-identifier">doc</span>=<span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">root</span>=<span class="ruby-identifier">doc</span>.<span class="ruby-identifier">root</span>
+                <span class="ruby-identifier">root</span>.<span class="ruby-identifier">setName</span>(<span class="ruby-value str">&quot;campaign&quot;</span>)
+                <span class="ruby-identifier">root</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;name&quot;</span>,<span class="ruby-ivar">@name</span>)
+                <span class="ruby-identifier">root</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;image&quot;</span>,<span class="ruby-ivar">@imageName</span>)
+                <span class="ruby-identifier">root</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;description&quot;</span>,<span class="ruby-ivar">@description</span>)
+                <span class="ruby-identifier">root</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value str">&quot;part&quot;</span>,<span class="ruby-ivar">@partID</span>.<span class="ruby-identifier">to_s</span>)
+                <span class="ruby-ivar">@part</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">c</span>=<span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;CutScene&quot;</span>
+                                        <span class="ruby-identifier">c</span>=<span class="ruby-identifier">root</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-value str">&quot;cutscene&quot;</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;CampaignLevel&quot;</span>
+                                        <span class="ruby-identifier">c</span>=<span class="ruby-identifier">root</span>.<span class="ruby-identifier">addChild</span>(<span class="ruby-value str">&quot;level&quot;</span>)
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Unknown class type:&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save</span>(<span class="ruby-identifier">c</span>)
+                }
+                
+                <span class="ruby-identifier">saveFile</span>(<span class="ruby-identifier">filename</span>,<span class="ruby-identifier">doc</span>.<span class="ruby-identifier">toString</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

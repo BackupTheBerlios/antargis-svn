@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>computeFightMap (AntHeroFightJob)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_hljobs.rb, line 326</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">computeFightMap</span>
+                <span class="ruby-ivar">@fightMap</span>={}
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;mymen: #{@hero.getMen.join(&quot; &quot;)}&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;otheren: #{@target.getMen.join(&quot; &quot;)}&quot;</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">AntHeroFightJob</span>)
+                        <span class="ruby-identifier">map</span>=<span class="ruby-ivar">@target</span>.<span class="ruby-identifier">getJob</span>.<span class="ruby-identifier">fightMap</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">map</span>
+                                <span class="ruby-identifier">map</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-ivar">@fightMap</span>[<span class="ruby-identifier">v</span>]=<span class="ruby-identifier">k</span>
+                                }
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">undefeatedMen</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@fightMap</span>[<span class="ruby-identifier">m</span>].<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-comment cmt"># find next enemy</span>
+                                <span class="ruby-identifier">e</span>=<span class="ruby-identifier">findNextEnemy</span>(<span class="ruby-identifier">m</span>,<span class="ruby-ivar">@fightMap</span>.<span class="ruby-identifier">values</span>)
+
+                                <span class="ruby-ivar">@fightMap</span>[<span class="ruby-identifier">m</span>]=<span class="ruby-identifier">e</span>
+                        <span class="ruby-keyword kw">end</span>
+                }
+                <span class="ruby-ivar">@fightMap</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span>,<span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;FIGHTMAP:#{m}:#{e}&quot;</span>
+                }
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

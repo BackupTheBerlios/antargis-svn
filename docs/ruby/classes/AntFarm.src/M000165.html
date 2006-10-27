@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>assignJob (AntFarm)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_farm.rb, line 49</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assignJob</span>(<span class="ruby-identifier">e</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@job</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">getMode</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;makeField&quot;</span>
+                                <span class="ruby-identifier">pos</span>=<span class="ruby-identifier">e</span>.<span class="ruby-identifier">getPos2D</span>
+                                <span class="ruby-identifier">f</span>=<span class="ruby-constant">AntField</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">setPos</span>(<span class="ruby-identifier">pos</span>)
+                                <span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">insertEntity</span>(<span class="ruby-identifier">f</span>)
+                                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT ENT #{@fields.length}&quot;</span>
+                                <span class="ruby-comment cmt">#getMap.endChange</span>
+                                <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">f</span>)
+                                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">farm</span>=<span class="ruby-keyword kw">self</span>
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;&quot;</span>)
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">return</span>
+                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@fields</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&lt;</span><span class="ruby-value">7</span>
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">setMode</span>(<span class="ruby-value str">&quot;makeField&quot;</span>)
+                                <span class="ruby-identifier">angle</span>=<span class="ruby-identifier">getRand</span><span class="ruby-operator">*</span><span class="ruby-value">360</span>
+                                <span class="ruby-identifier">radius</span>=<span class="ruby-identifier">getRand</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">+</span><span class="ruby-value">6</span>
+                                <span class="ruby-identifier">e</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getPos2D</span><span class="ruby-operator">+</span><span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">AGAngle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">angle</span>))<span class="ruby-operator">*</span><span class="ruby-identifier">radius</span>,<span class="ruby-value">0</span>)
+                                <span class="ruby-keyword kw">return</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">super</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

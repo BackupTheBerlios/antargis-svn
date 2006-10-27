@@ -1,0 +1,76 @@
+.TH "src/scenenode.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/scenenode.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_geometry.h>\fP
+.br
+\fC#include <ag_rubyobj.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBSceneNode\fP"
+.br
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTERRAIN_Z\fP   1"
+.br
+.ti -1c
+.RI "#define \fBWATER_Z\fP   2"
+.br
+.ti -1c
+.RI "#define \fBDECAL_Z\fP   3"
+.br
+.ti -1c
+.RI "#define \fBRING_Z\fP   4"
+.br
+.ti -1c
+.RI "#define \fBMESH_Z\fP   5"
+.br
+.ti -1c
+.RI "#define \fBTREE_Z\fP   6"
+.br
+.ti -1c
+.RI "#define \fBPARTICLE_Z\fP   7"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBSceneNode\fP * \fBSceneNodePtr\fP"
+.br
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define DECAL_Z   3"
+.PP
+.SS "#define MESH_Z   5"
+.PP
+.SS "#define PARTICLE_Z   7"
+.PP
+.SS "#define RING_Z   4"
+.PP
+.SS "#define TERRAIN_Z   1"
+.PP
+these are the drawing orders, by which Scene::drawScene orders all the meshes 1 will be drawn first and so forth 
+.SS "#define TREE_Z   6"
+.PP
+.SS "#define WATER_Z   2"
+.PP
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef \fBSceneNode\fP* \fBSceneNodePtr\fP"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

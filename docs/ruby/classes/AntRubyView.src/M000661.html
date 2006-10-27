@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getHeroScreenPos (AntRubyView)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/view.rb, line 58</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getHeroScreenPos</span>(<span class="ruby-identifier">hero</span>)
+                <span class="ruby-identifier">pos</span>=<span class="ruby-identifier">hero</span>.<span class="ruby-identifier">getPos3D</span><span class="ruby-operator">+</span><span class="ruby-constant">AGVector3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">2</span>)
+                <span class="ruby-identifier">sp</span>=<span class="ruby-identifier">getScene</span>.<span class="ruby-identifier">getPosition</span>(<span class="ruby-constant">AGVector4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pos</span>,<span class="ruby-value">1</span>))
+                <span class="ruby-keyword kw">return</span> <span class="ruby-constant">AGRect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sp</span>.<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">50</span>,<span class="ruby-identifier">sp</span>.<span class="ruby-identifier">y</span><span class="ruby-operator">-</span><span class="ruby-value">55</span>,<span class="ruby-value">100</span>,<span class="ruby-value">27</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,248 @@
+.TH "AGStringUtf8" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGStringUtf8 \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_string_utf8.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGStringUtf8\fP ()"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (const std::string &p)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (const std::string &p, size_t many)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (const \fBAGStringUtf8\fP &p)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (\fBAGCharUtf8\fP c, size_t many=1)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (int i)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (size_t i)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (long i)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (float f)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (const char c, size_t many=1)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (const char *c)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP (const char *c, size_t size)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP & \fBoperator=\fP (const \fBAGStringUtf8\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP & \fBoperator=\fP (const \fBAGCharUtf8\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP & \fBoperator+=\fP (const \fBAGStringUtf8\fP &p)"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP & \fBoperator+=\fP (const \fBAGCharUtf8\fP &p)"
+.br
+.ti -1c
+.RI "size_t \fBlength\fP () const "
+.br
+.ti -1c
+.RI "size_t \fBmemory\fP () const "
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP \fBsubstr\fP (size_t from, size_t len) const "
+.br
+.ti -1c
+.RI "\fBAGCharUtf8\fP \fBoperator[]\fP (size_t i) const "
+.br
+.ti -1c
+.RI "\fBAGCharUtf8\fP \fBoperator[]\fP (size_t i)"
+.br
+.ti -1c
+.RI "void \fBset\fP (size_t i, const \fBAGCharUtf8\fP &c)"
+.br
+.ti -1c
+.RI "std::vector< \fBAGStringUtf8\fP > \fBsplit\fP (const \fBAGStringUtf8\fP &p) const "
+.br
+.ti -1c
+.RI "size_t \fBfind\fP (const \fBAGStringUtf8\fP &p, size_t pos=0) const "
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP \fBreplace\fP (const \fBAGStringUtf8\fP &what, const \fBAGStringUtf8\fP &by) const "
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP \fBoperator+\fP (const \fBAGStringUtf8\fP &s) const "
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBAGStringUtf8\fP &p) const "
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBAGStringUtf8\fP &p) const "
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBAGStringUtf8\fP &p) const "
+.br
+.ti -1c
+.RI "std::string \fBtoString\fP () const "
+.br
+.ti -1c
+.RI "std::string \fBascii\fP () const "
+.br
+.ti -1c
+.RI "int \fBtoInt\fP () const "
+.br
+.ti -1c
+.RI "long \fBtoLong\fP () const "
+.br
+.ti -1c
+.RI "float \fBtoFloat\fP () const "
+.br
+.ti -1c
+.RI "bool \fBtoBool\fP () const "
+.br
+.ti -1c
+.RI "Uint8 \fBtoUint8\fP () const "
+.br
+.ti -1c
+.RI "Sint16 \fBtoSint16\fP () const "
+.br
+.ti -1c
+.RI "int \fBparseHex\fP () const "
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBAGStringUtf8\fP \fBtoHex\fP (int i)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const size_t \fBnpos\fP = static_cast<size_t>(-1)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGCharUtf8\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A string class that natively supports UTF-8 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGStringUtf8::AGStringUtf8 ()"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (const std::string & p)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (const std::string & p, size_t many)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (const \fBAGStringUtf8\fP & p)"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (\fBAGCharUtf8\fP c, size_t many = \fC1\fP)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (int i)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (size_t i)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (long i)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (float f)\fC [explicit]\fP"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (const char c, size_t many = \fC1\fP)"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (const char * c)"
+.PP
+.SS "AGStringUtf8::AGStringUtf8 (const char * c, size_t size)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "std::string AGStringUtf8::ascii () const"
+.PP
+.SS "size_t AGStringUtf8::find (const \fBAGStringUtf8\fP & p, size_t pos = \fC0\fP) const"
+.PP
+.SS "size_t AGStringUtf8::length () const"
+.PP
+.SS "size_t AGStringUtf8::memory () const"
+.PP
+.SS "bool AGStringUtf8::operator!= (const \fBAGStringUtf8\fP & p) const"
+.PP
+.SS "\fBAGStringUtf8\fP AGStringUtf8::operator+ (const \fBAGStringUtf8\fP & s) const"
+.PP
+.SS "\fBAGStringUtf8\fP & AGStringUtf8::operator+= (const \fBAGCharUtf8\fP & p)"
+.PP
+.SS "\fBAGStringUtf8\fP & AGStringUtf8::operator+= (const \fBAGStringUtf8\fP & p)"
+.PP
+.SS "bool AGStringUtf8::operator< (const \fBAGStringUtf8\fP & p) const"
+.PP
+.SS "\fBAGStringUtf8\fP & AGStringUtf8::operator= (const \fBAGCharUtf8\fP & s)"
+.PP
+.SS "\fBAGStringUtf8\fP & AGStringUtf8::operator= (const \fBAGStringUtf8\fP & s)"
+.PP
+.SS "bool AGStringUtf8::operator== (const \fBAGStringUtf8\fP & p) const"
+.PP
+.SS "\fBAGCharUtf8\fP AGStringUtf8::operator[] (size_t i)"
+.PP
+.SS "\fBAGCharUtf8\fP AGStringUtf8::operator[] (size_t i) const"
+.PP
+.SS "int AGStringUtf8::parseHex () const"
+.PP
+.SS "\fBAGStringUtf8\fP AGStringUtf8::replace (const \fBAGStringUtf8\fP & what, const \fBAGStringUtf8\fP & by) const"
+.PP
+.SS "void AGStringUtf8::set (size_t i, const \fBAGCharUtf8\fP & c)"
+.PP
+.SS "std::vector< \fBAGStringUtf8\fP > AGStringUtf8::split (const \fBAGStringUtf8\fP & p) const"
+.PP
+.SS "\fBAGStringUtf8\fP AGStringUtf8::substr (size_t from, size_t len) const"
+.PP
+.SS "bool AGStringUtf8::toBool () const"
+.PP
+.SS "float AGStringUtf8::toFloat () const"
+.PP
+.SS "\fBAGStringUtf8\fP AGStringUtf8::toHex (int i)\fC [static]\fP"
+.PP
+.SS "int AGStringUtf8::toInt () const"
+.PP
+.SS "long AGStringUtf8::toLong () const"
+.PP
+.SS "Sint16 AGStringUtf8::toSint16 () const"
+.PP
+.SS "std::string AGStringUtf8::toString () const"
+.PP
+.SS "Uint8 AGStringUtf8::toUint8 () const"
+.PP
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBAGCharUtf8\fP\fC [friend]\fP"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "const size_t \fBAGStringUtf8::npos\fP = static_cast<size_t>(-1)\fC [static]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

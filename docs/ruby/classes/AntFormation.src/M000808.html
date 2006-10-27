@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getPosition (AntFormation)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_formations.rb, line 32</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getPosition</span>(<span class="ruby-identifier">man</span>,<span class="ruby-identifier">pos</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;pos nil&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">man</span>)
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">man</span>]<span class="ruby-operator">+</span><span class="ruby-identifier">pos</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">r</span>=<span class="ruby-identifier">getPositionReal</span>(<span class="ruby-identifier">man</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-identifier">calcFormation</span> <span class="ruby-comment cmt"># try to recalc formation</span>
+                        <span class="ruby-identifier">r</span>=<span class="ruby-identifier">getPositionReal</span>(<span class="ruby-identifier">man</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@boss</span>.<span class="ruby-identifier">getMen</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">man</span>)
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Man #{man} is not member of #{@boss}'s men!&quot;</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Problem in AntFormation!&quot;</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">man</span>]=<span class="ruby-identifier">r</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">r</span><span class="ruby-operator">+</span><span class="ruby-identifier">pos</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

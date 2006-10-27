@@ -1,0 +1,111 @@
+.TH "AGListBox" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGListBox \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_listbox.h>\fP
+.PP
+Inherits \fBAGWidget\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGListBox\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &pRect)"
+.br
+.ti -1c
+.RI "void \fBinsertItem\fP (\fBAGString\fP pID, \fBAGStringUtf8\fP pValue)"
+.br
+.ti -1c
+.RI "void \fBselectItem\fP (\fBAGString\fP pID)"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBgetSelectedID\fP () const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBgetSelectedValue\fP () const "
+.br
+.ti -1c
+.RI "virtual bool \fBeventKeyDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseClick\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonUp\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "bool \fBeventScroller\fP (\fBAGEvent\fP *e)"
+.br
+.ti -1c
+.RI "void \fBclearList\fP ()"
+.br
+.ti -1c
+.RI "void \fBupdateScroller\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigSelect\fP"
+.br
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigDoubleClick\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGListBox::AGListBox (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & pRect)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGListBox::clearList ()"
+.PP
+.SS "void AGListBox::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGListBox::eventKeyDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGMessageObject\fP.
+.SS "bool AGListBox::eventMouseButtonDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGListBox::eventMouseButtonUp (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGListBox::eventMouseClick (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGListBox::eventScroller (\fBAGEvent\fP * e)"
+.PP
+.SS "\fBAGString\fP AGListBox::getSelectedID () const"
+.PP
+.SS "\fBAGString\fP AGListBox::getSelectedValue () const"
+.PP
+.SS "void AGListBox::insertItem (\fBAGString\fP pID, \fBAGStringUtf8\fP pValue)"
+.PP
+.SS "void AGListBox::selectItem (\fBAGString\fP pID)"
+.PP
+.SS "void AGListBox::updateScroller ()"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBAGSignal\fP \fBAGListBox::sigDoubleClick\fP"
+.PP
+.SS "\fBAGSignal\fP \fBAGListBox::sigSelect\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

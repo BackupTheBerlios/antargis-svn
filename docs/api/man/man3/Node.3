@@ -1,0 +1,239 @@
+.TH "Node" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Node \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_xml.h>\fP
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::map< \fBAGString\fP, \fBAGString\fP > \fBAttributes\fP"
+.br
+.ti -1c
+.RI "typedef std::vector< \fBNode\fP * > \fBNodeVector\fP"
+.br
+.ti -1c
+.RI "typedef NodeVector::iterator \fBiterator\fP"
+.br
+.ti -1c
+.RI "typedef NodeVector::const_iterator \fBconst_iterator\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNode\fP ()"
+.br
+.ti -1c
+.RI "\fBNode\fP (const \fBAGString\fP &name)"
+.br
+.ti -1c
+.RI "\fBNode\fP (const \fBNode\fP &n)"
+.br
+.ti -1c
+.RI "\fBNode\fP (const \fBNode\fP *n)"
+.br
+.RI "\fIsomehow needed for swig-wrapping \fP"
+.ti -1c
+.RI "\fB~Node\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetName\fP (const \fBAGString\fP &pName)"
+.br
+.ti -1c
+.RI "\fBNodeVector\fP \fBgetChildren\fP () const "
+.br
+.ti -1c
+.RI "const \fBNode\fP & \fBoperator *)\fP () const "
+.br
+.ti -1c
+.RI "const \fBNode\fP * \fBoperator->)\fP () const "
+.br
+.ti -1c
+.RI "\fBNodeVector\fP \fBgetChildren\fP (const \fBAGString\fP &pName) const "
+.br
+.ti -1c
+.RI "const \fBAGString\fP & \fBgetName\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetAttributes\fP (const \fBAttributes\fP &pAttrs)"
+.br
+.ti -1c
+.RI "\fBAttributes\fP \fBgetAttributes\fP () const "
+.br
+.ti -1c
+.RI "\fBNode\fP & \fBaddChild\fP (const \fBAGString\fP &pName)"
+.br
+.ti -1c
+.RI "void \fBremoveChild\fP (\fBNode\fP &n)"
+.br
+.ti -1c
+.RI "\fBiterator\fP \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "\fBconst_iterator\fP \fBbegin\fP () const "
+.br
+.ti -1c
+.RI "\fBiterator\fP \fBend\fP ()"
+.br
+.ti -1c
+.RI "\fBconst_iterator\fP \fBend\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetContent\fP (const \fBAGString\fP &s)"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBgetContent\fP () const "
+.br
+.ti -1c
+.RI "void \fBset\fP (const \fBAGString\fP &pName, const \fBAGString\fP &pValue)"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBget\fP (const \fBAGString\fP &pName) const "
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "void \fBgetStart\fP (\fBAGStringStream\fP &s, bool complete=false) const "
+.br
+.ti -1c
+.RI "void \fBgetEnd\fP (\fBAGStringStream\fP &s) const "
+.br
+.ti -1c
+.RI "void \fBindent\fP (\fBAGStringStream\fP &s, int depth) const "
+.br
+.ti -1c
+.RI "void \fBgetContent\fP (\fBAGStringStream\fP &s, int depth) const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBtoString\fP (bool indent=true) const "
+.br
+.ti -1c
+.RI "bool \fBisTextNode\fP () const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBgetText\fP () const "
+.br
+.ti -1c
+.RI "bool \fBhasTextNode\fP () const "
+.br
+.ti -1c
+.RI "size_t \fBsize\fP () const "
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBAGString\fP \fBescape\fP (const \fBAGString\fP &s)"
+.br
+.ti -1c
+.RI "static \fBAGString\fP \fBunescape\fP (const \fBAGString\fP &s)"
+.br
+.in -1c
+.SH "Member Typedef Documentation"
+.PP 
+.SS "typedef std::map<\fBAGString\fP,\fBAGString\fP> \fBNode::Attributes\fP"
+.PP
+.SS "typedef NodeVector::const_iterator \fBNode::const_iterator\fP"
+.PP
+.SS "typedef NodeVector::iterator \fBNode::iterator\fP"
+.PP
+.SS "typedef std::vector<\fBNode\fP*> \fBNode::NodeVector\fP"
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Node::Node ()"
+.PP
+\fBNode\fP 
+.PP
+\fBTodo\fP
+.RS 4
+finish documentation 
+.RE
+.PP
+
+.SS "Node::Node (const \fBAGString\fP & name)"
+.PP
+.SS "Node::Node (const \fBNode\fP & n)"
+.PP
+.SS "Node::Node (const \fBNode\fP * n)"
+.PP
+somehow needed for swig-wrapping 
+.PP
+.SS "Node::~Node ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBNode\fP & Node::addChild (const \fBAGString\fP & pName)"
+.PP
+.SS "\fBNode::const_iterator\fP Node::begin () const"
+.PP
+.SS "\fBNode::iterator\fP Node::begin ()"
+.PP
+.SS "void Node::clear ()"
+.PP
+.SS "\fBNode::const_iterator\fP Node::end () const"
+.PP
+.SS "\fBNode::iterator\fP Node::end ()"
+.PP
+.SS "\fBAGString\fP Node::escape (const \fBAGString\fP & s)\fC [static]\fP"
+.PP
+.SS "\fBAGString\fP Node::get (const \fBAGString\fP & pName) const"
+.PP
+.SS "\fBNode::Attributes\fP Node::getAttributes () const"
+.PP
+.SS "\fBNode::NodeVector\fP Node::getChildren (const \fBAGString\fP & pName) const"
+.PP
+.SS "\fBNode::NodeVector\fP Node::getChildren () const"
+.PP
+.SS "void Node::getContent (\fBAGStringStream\fP & s, int depth) const"
+.PP
+.SS "\fBAGString\fP Node::getContent () const"
+.PP
+.SS "void Node::getEnd (\fBAGStringStream\fP & s) const"
+.PP
+.SS "const \fBAGString\fP & Node::getName () const"
+.PP
+.SS "void Node::getStart (\fBAGStringStream\fP & s, bool complete = \fCfalse\fP) const"
+.PP
+.SS "\fBAGString\fP Node::getText () const"
+.PP
+.SS "bool Node::hasTextNode () const"
+.PP
+.SS "void Node::indent (\fBAGStringStream\fP & s, int depth) const"
+.PP
+.SS "bool Node::isTextNode () const"
+.PP
+.SS "const \fBNode\fP& Node::operator *) () const"
+.PP
+.SS "const \fBNode\fP* Node::operator->) () const"
+.PP
+.SS "void Node::removeChild (\fBNode\fP & n)"
+.PP
+.SS "void Node::set (const \fBAGString\fP & pName, const \fBAGString\fP & pValue)"
+.PP
+.SS "void Node::setAttributes (const \fBAttributes\fP & pAttrs)"
+.PP
+.SS "void Node::setContent (const \fBAGString\fP & s)"
+.PP
+.SS "void Node::setName (const \fBAGString\fP & pName)"
+.PP
+.SS "size_t Node::size () const"
+.PP
+.SS "\fBAGString\fP Node::toString (bool indent = \fCtrue\fP) const"
+.PP
+.SS "\fBAGString\fP Node::unescape (const \fBAGString\fP & s)\fC [static]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

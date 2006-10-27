@@ -1,0 +1,87 @@
+.TH "MiniMap" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MiniMap \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <minimap.h>\fP
+.PP
+Inherits \fBAGWidget\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMiniMap\fP (\fBAGWidget\fP *p, const \fBAGRect2\fP &r, \fBAntMap\fP *pMap)"
+.br
+.ti -1c
+.RI "virtual \fB~MiniMap\fP ()"
+.br
+.ti -1c
+.RI "bool \fBmapChanged\fP (\fBAGEvent\fP *e)"
+.br
+.RI "\fIchanges only part of the texture - shouldn't be called if the whole texture is changed, because this is SLOW! \fP"
+.ti -1c
+.RI "bool \fBmapChangedComplete\fP (\fBAGEvent\fP *e)"
+.br
+.RI "\fIcall this only if the complete texture is changed - otherwise this is SLOW! \fP"
+.ti -1c
+.RI "void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "void \fBsetMap\fP (\fBAntMap\fP *pMap)"
+.br
+.ti -1c
+.RI "void \fBsetScene\fP (\fBScene\fP *pScene)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseClick\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonDown\fP (\fBAGEvent\fP *m)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBMiniMap\fP is the small map in lower corner. it's displayed through some single texture. the people are drawn on top of this. when the height-map changes, the texture has to be changed. So there are two different functions (mapChanged*)
+.PP
+Two things you have to take care of: 1) you have to set a map with setMap 2) you have to set a scene (for frustum-display) (setScene)
+.PP
+because typically this object is created within an xml-layout-file 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "MiniMap::MiniMap (\fBAGWidget\fP * p, const \fBAGRect2\fP & r, \fBAntMap\fP * pMap)"
+.PP
+.SS "MiniMap::~MiniMap ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void MiniMap::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool MiniMap::eventMouseButtonDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool MiniMap::eventMouseClick (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool MiniMap::mapChanged (\fBAGEvent\fP * e)"
+.PP
+changes only part of the texture - shouldn't be called if the whole texture is changed, because this is SLOW! 
+.PP
+.SS "bool MiniMap::mapChangedComplete (\fBAGEvent\fP * e)"
+.PP
+call this only if the complete texture is changed - otherwise this is SLOW! 
+.PP
+.SS "void MiniMap::setMap (\fBAntMap\fP * pMap)"
+.PP
+.SS "void MiniMap::setScene (\fBScene\fP * pScene)"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

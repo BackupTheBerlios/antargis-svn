@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setupOptions (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 291</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setupOptions</span>
+                <span class="ruby-ivar">@optionsMenu</span>=<span class="ruby-constant">AGLayout</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>)
+                <span class="ruby-ivar">@optionSubMenus</span>=[<span class="ruby-value str">&quot;VideoOptionsMenu&quot;</span>,<span class="ruby-value str">&quot;AudioOptionsMenu&quot;</span>,<span class="ruby-value str">&quot;GameOptionsMenu&quot;</span>]
+                <span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">loadFile</span>(<span class="ruby-value str">&quot;data/gui/layout/options.xml&quot;</span>))
+                <span class="ruby-ivar">@menues</span>.<span class="ruby-identifier">push</span>(<span class="ruby-ivar">@optionsMenu</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;exit&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventExit</span>)
+                
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;fullscreen&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventFullscreen</span>)
+                [<span class="ruby-value str">&quot;640&quot;</span>,<span class="ruby-value str">&quot;800&quot;</span>,<span class="ruby-value str">&quot;1024&quot;</span>,<span class="ruby-value str">&quot;1280&quot;</span>,<span class="ruby-value str">&quot;1400&quot;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-identifier">n</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventResChange</span>)
+                }
+                <span class="ruby-comment cmt">#addHandler(@optionsMenu.getChild(&quot;1280&quot;),:sigClick,:eventResChange)</span>
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;1400&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventResChange</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;gameOptions&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventGameOptions</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;videoOptions&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventVideoOptions</span>)
+
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;optionIntro&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventOptionsChanged</span>)
+
+                <span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;optionIntro&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;intro&quot;</span>)<span class="ruby-operator">!=</span><span class="ruby-value str">&quot;false&quot;</span>)
+
+                <span class="ruby-comment cmt"># texture quality</span>
+                <span class="ruby-identifier">texQ</span>=<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;textureQuality&quot;</span>)
+                <span class="ruby-identifier">texQ</span>.<span class="ruby-identifier">setSelected</span>({<span class="ruby-value str">&quot;1&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot;high&quot;</span>,<span class="ruby-value str">&quot;2&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot;medium&quot;</span>,<span class="ruby-value str">&quot;3&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot;low&quot;</span>,<span class="ruby-keyword kw">nil</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot;high&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot;high&quot;</span>}[<span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;terrainDownScaleExp&quot;</span>)])
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">texQ</span>,<span class="ruby-identifier">:sigSelect</span>,<span class="ruby-identifier">:eventTextureQuality</span>)
+
+                <span class="ruby-comment cmt"># FBO</span>
+                <span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseFBO&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;useFBO&quot;</span>)<span class="ruby-operator">==</span><span class="ruby-value str">&quot;true&quot;</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseFBO&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventOptionsChanged</span>)
+                
+                <span class="ruby-comment cmt"># Anim</span>
+                <span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseAnim&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;animationType&quot;</span>)<span class="ruby-operator">==</span><span class="ruby-value str">&quot;true&quot;</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseAnim&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventOptionsChanged</span>)
+
+                <span class="ruby-comment cmt"># particle</span>
+                <span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseParticle&quot;</span>).<span class="ruby-identifier">setChecked</span>(<span class="ruby-identifier">getConfig</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value str">&quot;particleEffects&quot;</span>)<span class="ruby-operator">==</span><span class="ruby-value str">&quot;true&quot;</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@optionsMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;UseParticle&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventOptionsChanged</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

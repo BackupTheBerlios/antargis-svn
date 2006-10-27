@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>updateLoadMenu (AntMenuApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/mainmenu.rb, line 131</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">updateLoadMenu</span>
+                <span class="ruby-identifier">fs</span>=<span class="ruby-identifier">getDirectory</span>(<span class="ruby-identifier">getWriteDir</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;/savegames&quot;</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/\.antcmp/</span>}.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-identifier">fs</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+                <span class="ruby-identifier">l</span>=<span class="ruby-ivar">@loadMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;list&quot;</span>)
+                <span class="ruby-identifier">l</span>.<span class="ruby-identifier">clearList</span>
+                <span class="ruby-identifier">fs</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">x</span>=<span class="ruby-identifier">f</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.antcmp&quot;</span>,<span class="ruby-value str">&quot;&quot;</span>)
+                        <span class="ruby-identifier">l</span>.<span class="ruby-identifier">insertItem</span>(<span class="ruby-identifier">f</span>,<span class="ruby-constant">AGStringUtf8</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>))  <span class="ruby-comment cmt"># FIXME: _() ??</span>
+                }
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">fs</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">fn</span>=<span class="ruby-value str">&quot;savegames/&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">fs</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;antcmp&quot;</span>,<span class="ruby-value str">&quot;png&quot;</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">findFile</span>(<span class="ruby-identifier">fn</span>)<span class="ruby-operator">!=</span><span class="ruby-value str">&quot;&quot;</span>
+                                <span class="ruby-ivar">@loadMenu</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;screenshot&quot;</span>).<span class="ruby-identifier">setSurface</span>(<span class="ruby-constant">AGSurface</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">fn</span>))
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

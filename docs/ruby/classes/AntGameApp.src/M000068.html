@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (AntGameApp)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/antargis.rb, line 58</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">savegameText</span>,<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>,<span class="ruby-identifier">loadscreen</span>=<span class="ruby-keyword kw">nil</span>,<span class="ruby-identifier">connection</span>=<span class="ruby-keyword kw">nil</span>)
+                <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">w</span>,<span class="ruby-identifier">h</span>)
+
+                <span class="ruby-comment cmt"># the result of the level - won or lost or canceled</span>
+                <span class="ruby-ivar">@result</span>=<span class="ruby-constant">GameResult</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">$app</span>=<span class="ruby-keyword kw">self</span>
+                <span class="ruby-constant">AntSound</span>.<span class="ruby-identifier">setApplication</span>(<span class="ruby-keyword kw">self</span>)
+        
+                <span class="ruby-comment cmt"># display loading screen</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loadscreen</span>
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">setValue</span>(<span class="ruby-value">0</span><span class="ruby-value">.1</span>)
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">tick</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-identifier">playerName</span>=<span class="ruby-keyword kw">nil</span>
+
+                <span class="ruby-comment cmt"># init network mode</span>
+                <span class="ruby-ivar">@connection</span>=<span class="ruby-identifier">connection</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">connection</span>
+                        <span class="ruby-comment cmt"># FIXME: check, if this is a server - then don't assign playerName</span>
+                        <span class="ruby-identifier">playerName</span>=<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">getName</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-comment cmt"># init game-engine's map</span>
+                <span class="ruby-ivar">@map</span>=<span class="ruby-constant">AntMpMap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">connection</span>,<span class="ruby-identifier">getScene</span>,<span class="ruby-value">32</span>,<span class="ruby-value">32</span>,<span class="ruby-identifier">playerName</span>) <span class="ruby-comment cmt"># some small dummy size - gets overriden by loadMap anyway</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loadscreen</span>
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">setValue</span>(<span class="ruby-value">0</span><span class="ruby-value">.4</span>)
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">tick</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-comment cmt">#$map=@map</span>
+
+                <span class="ruby-comment cmt"># load GUI layout</span>
+                <span class="ruby-ivar">@layout</span>=<span class="ruby-constant">AGLayout</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>)
+                <span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">loadXML</span>(<span class="ruby-identifier">loadFile</span>(<span class="ruby-value str">&quot;data/gui/layout/ant_layout.xml&quot;</span>))
+                
+                
+
+                <span class="ruby-comment cmt"># init pointers to different displays</span>
+                <span class="ruby-comment cmt"># statusBar (FPS display)</span>
+                <span class="ruby-ivar">@statusBar</span>=<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;statusBar&quot;</span>)
+                <span class="ruby-ivar">@inventory</span>=<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;inventory&quot;</span>)
+                <span class="ruby-ivar">@buttonpanel</span>=<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;antButtonPanel&quot;</span>)
+                <span class="ruby-ivar">@miniMap</span>=<span class="ruby-identifier">toMiniMap</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;miniMap&quot;</span>))
+                <span class="ruby-ivar">@fps</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-identifier">setMainWidget</span>(<span class="ruby-ivar">@layout</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;quit&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventQuit</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;pause&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventPause</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@layout</span>.<span class="ruby-identifier">getChild</span>(<span class="ruby-value str">&quot;options&quot;</span>),<span class="ruby-identifier">:sigClick</span>,<span class="ruby-identifier">:eventOptions</span>)
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loadscreen</span>
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">setValue</span>(<span class="ruby-value">0</span><span class="ruby-value">.5</span>)
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">tick</span>
+                <span class="ruby-keyword kw">end</span>
+                
+                <span class="ruby-comment cmt">#$screen=@layout</span>
+        
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@miniMap</span>
+                        <span class="ruby-comment cmt"># connect MiniMap with Map for displaying terrain and entities</span>
+                        <span class="ruby-ivar">@miniMap</span>.<span class="ruby-identifier">setMap</span>(<span class="ruby-identifier">getMap</span>)
+                        <span class="ruby-comment cmt"># connect MiniMap with Scene for displaying frustrum</span>
+                        <span class="ruby-ivar">@miniMap</span>.<span class="ruby-identifier">setScene</span>(<span class="ruby-identifier">getScene</span>)
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loadscreen</span>
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">setValue</span>(<span class="ruby-value">0</span><span class="ruby-value">.8</span>)
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">tick</span>()
+                <span class="ruby-keyword kw">end</span>
+                
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">savegameText</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">savegameText</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-comment cmt"># load a level</span>
+                        <span class="ruby-identifier">getMap</span>().<span class="ruby-identifier">loadMapFromMemory</span>(<span class="ruby-identifier">savegameText</span>)
+                <span class="ruby-keyword kw">end</span>   
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">loadscreen</span>
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">setValue</span>(<span class="ruby-value">0</span><span class="ruby-value">.95</span>)
+                        <span class="ruby-identifier">loadscreen</span>.<span class="ruby-identifier">tick</span>
+                <span class="ruby-keyword kw">end</span>
+
+
+                <span class="ruby-comment cmt"># inventory and buttonpanel signals</span>
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@inventory</span>,<span class="ruby-identifier">:sigJobChanged</span>,<span class="ruby-identifier">:eventInventoryJob</span>)
+                <span class="ruby-identifier">addHandler</span>(<span class="ruby-ivar">@buttonpanel</span>,<span class="ruby-identifier">:sigJobChanged</span>,<span class="ruby-identifier">:eventHeroJob</span>)
+
+                <span class="ruby-identifier">setupHeroDisplay</span>(<span class="ruby-keyword kw">true</span>)
+
+                <span class="ruby-comment cmt"># infobox is used for display a text &quot;Your hero 'xy' suffers&quot;</span>
+                <span class="ruby-ivar">@infobox</span>=<span class="ruby-keyword kw">nil</span>
+
+                <span class="ruby-comment cmt"># frame counting</span>
+                <span class="ruby-ivar">@frameCount</span>=<span class="ruby-value">0</span>
+                <span class="ruby-ivar">@elapsTime</span>=<span class="ruby-value">0</span>
+
+                <span class="ruby-comment cmt">#setCursor(getTextureCache.get(&quot;blue_cursor.png&quot;))</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

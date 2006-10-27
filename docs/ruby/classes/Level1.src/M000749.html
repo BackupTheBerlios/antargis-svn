@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>playApprenticeStory (Level1)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/levels/birth/birth1.rb, line 129</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">playApprenticeStory</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@appStory</span><span class="ruby-operator">==</span><span class="ruby-keyword kw">false</span>
+                        <span class="ruby-ivar">@appStory</span>=<span class="ruby-keyword kw">true</span>
+                        <span class="ruby-identifier">$app</span>.<span class="ruby-identifier">focusHero</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-value str">&quot;Bantor&quot;</span>))
+                        <span class="ruby-identifier">s</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;bantor&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Bantor&quot;</span>,<span class="ruby-value str">&quot;Boy, why do you leave your place?&quot;</span>)
+                        
+                        <span class="ruby-comment cmt"># FIXME: replace &quot;they&quot; by sth like &quot;people of the village&quot;</span>
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Apprentice&quot;</span>,<span class="ruby-value str">&quot;A stranger appeared and they want to follow him and drive you away.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Bantor&quot;</span>,<span class="ruby-value str">&quot;These fools will see their failure! You will be payed and now get off to the keep.&quot;</span>)
+                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">s</span>)
+                        <span class="ruby-identifier">galvador</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-value str">&quot;Galvador&quot;</span>)
+                        <span class="ruby-identifier">galvador</span>.<span class="ruby-identifier">setBoss</span>(<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-value str">&quot;Keep&quot;</span>))
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

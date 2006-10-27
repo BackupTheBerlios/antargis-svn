@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>playLoopSoundGlobal (AntSound)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/ant_sound.rb, line 49</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-constant">AntSound</span>.<span class="ruby-identifier">playLoopSoundGlobal</span>(<span class="ruby-identifier">id</span>,<span class="ruby-identifier">name</span>,<span class="ruby-identifier">pos</span>,<span class="ruby-identifier">volume</span>)
+                <span class="ruby-identifier">s</span>={<span class="ruby-value str">&quot;fire&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot;data/sound/fire.wav&quot;</span>}[<span class="ruby-identifier">name</span>]
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@@app</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@@app</span>.<span class="ruby-identifier">getScene</span>.<span class="ruby-identifier">nil?</span>
+        
+                <span class="ruby-identifier">d</span>=((<span class="ruby-ivar">@@app</span>.<span class="ruby-identifier">getScene</span>.<span class="ruby-identifier">getCamera</span>.<span class="ruby-identifier">dim2</span><span class="ruby-operator">-</span><span class="ruby-identifier">pos</span>).<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-constant">INNER_VOL_SIZE</span>)
+                <span class="ruby-identifier">vol</span>=<span class="ruby-value">1</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">d</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-identifier">vol</span>=[(<span class="ruby-constant">OUTER_VOL_SIZE</span><span class="ruby-operator">-</span><span class="ruby-identifier">d</span>)<span class="ruby-operator">/</span><span class="ruby-constant">OUTER_VOL_SIZE</span>,<span class="ruby-value">0</span>].<span class="ruby-identifier">max</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">handle</span>=<span class="ruby-identifier">getSoundManager</span>.<span class="ruby-identifier">loopPlay</span>(<span class="ruby-identifier">s</span>,<span class="ruby-identifier">volume</span><span class="ruby-operator">*</span><span class="ruby-identifier">vol</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;HANDLE #{handle}&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;--------------------------------------------------&quot;</span>
+                <span class="ruby-ivar">@@loopSounds</span>[<span class="ruby-identifier">id</span>]=[<span class="ruby-identifier">handle</span>,<span class="ruby-identifier">name</span>,<span class="ruby-identifier">pos</span>,<span class="ruby-identifier">volume</span>]
+                <span class="ruby-identifier">id</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

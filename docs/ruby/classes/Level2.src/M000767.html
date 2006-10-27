@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>sendMarcus (Level2)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File data/levels/birth/birth2.rb, line 64</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sendMarcus</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;SENDING MARCUS&quot;</span>
+                <span class="ruby-identifier">marcus</span>=<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-identifier">marcus</span>
+                <span class="ruby-identifier">marcus</span>.<span class="ruby-identifier">newMoveJob</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">getMap</span>.<span class="ruby-identifier">getByName</span>(<span class="ruby-value str">&quot;Rowen&quot;</span>).<span class="ruby-identifier">getPos2D</span>,<span class="ruby-value">2</span>)
+                <span class="ruby-identifier">$app</span>.<span class="ruby-identifier">hidePanel</span>
+                <span class="ruby-identifier">marcus</span>.<span class="ruby-identifier">addHandler</span>(<span class="ruby-identifier">:eventJobFinished</span>){
+                        <span class="ruby-identifier">s</span>=<span class="ruby-constant">StoryFlow</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;marcus1&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>,<span class="ruby-value str">&quot;I have a message for you.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Rowen&quot;</span>,<span class="ruby-value str">&quot;Speak! What is it?&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>,<span class="ruby-value str">&quot;You seem to be against the new lords, so I think can trust you.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>,<span class="ruby-value str">&quot;King Garon has been captured and Duke Dengal wants to enthrone himself.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Rowen&quot;</span>,<span class="ruby-value str">&quot;This is very bad news.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>,<span class="ruby-value str">&quot;It may get worse. Word came through that someone is starting a rebellion here in Green Hills.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>,<span class="ruby-value str">&quot;You must flee into the hills.&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Rowen&quot;</span>,<span class="ruby-value str">&quot;And what will you do?&quot;</span>)
+                        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;Marcus&quot;</span>,<span class="ruby-value str">&quot;I'll stay behind and join with you later on.&quot;</span>)
+
+                        <span class="ruby-identifier">tellStory</span>(<span class="ruby-identifier">s</span>)
+                }
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

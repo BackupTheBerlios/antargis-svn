@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw (AntTicker)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File ruby/credits.rb, line 26</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw</span>(<span class="ruby-identifier">p</span>)
+                <span class="ruby-identifier">now</span>=<span class="ruby-ivar">@menuapp</span>.<span class="ruby-identifier">getTicks</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@starttime</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+                        <span class="ruby-ivar">@y</span><span class="ruby-operator">+=</span>(<span class="ruby-identifier">now</span><span class="ruby-operator">-</span><span class="ruby-ivar">@starttime</span>)<span class="ruby-operator">*</span><span class="ruby-ivar">@speed</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-ivar">@starttime</span>=<span class="ruby-identifier">now</span>
+                <span class="ruby-identifier">ty</span>=<span class="ruby-value">0</span>
+                
+                <span class="ruby-ivar">@text</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">font</span>=<span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">r</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/_/</span>    
+                                <span class="ruby-comment cmt">#r.sub!(&quot;_&quot;,&quot;&quot;)</span>
+                                <span class="ruby-identifier">r</span>=<span class="ruby-identifier">r</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">r</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)]
+                                <span class="ruby-identifier">font</span>=<span class="ruby-ivar">@cfont</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">font</span>=<span class="ruby-ivar">@nfont</span>
+                        <span class="ruby-keyword kw">end</span>
+
+                        <span class="ruby-identifier">r</span>=<span class="ruby-constant">AGStringUtf8</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>)
+
+                        <span class="ruby-identifier">w</span>=<span class="ruby-identifier">font</span>.<span class="ruby-identifier">getWidth</span>(<span class="ruby-identifier">r</span>)
+                        <span class="ruby-identifier">tx</span>=((<span class="ruby-identifier">width</span><span class="ruby-operator">-</span><span class="ruby-identifier">w</span>)<span class="ruby-operator">/</span><span class="ruby-value">2</span>).<span class="ruby-identifier">to_i</span>
+                        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">renderText</span>(<span class="ruby-identifier">r</span>,<span class="ruby-constant">AGVector2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tx</span>,(<span class="ruby-identifier">ty</span><span class="ruby-operator">-</span><span class="ruby-ivar">@y</span>)),<span class="ruby-identifier">font</span>)
+                        <span class="ruby-identifier">ty</span><span class="ruby-operator">+=</span><span class="ruby-value">40</span>
+                }
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
