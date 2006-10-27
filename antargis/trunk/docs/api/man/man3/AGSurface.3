@@ -1,0 +1,177 @@
+.TH "AGSurface" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGSurface \- Generic classes - for OpenGL and 'normal' SDL.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_surface.h>\fP
+.PP
+Inherits \fBAGPaintTarget\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSurface\fP ()"
+.br
+.ti -1c
+.RI "\fBAGSurface\fP (int w, int h)"
+.br
+.ti -1c
+.RI "\fBAGSurface\fP (const \fBAGSurface\fP &p)"
+.br
+.ti -1c
+.RI "virtual \fB~AGSurface\fP ()"
+.br
+.ti -1c
+.RI "\fBAGSurface\fP \fBcopy\fP () const "
+.br
+.ti -1c
+.RI "int \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "int \fBheight\fP () const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgetRect\fP () const "
+.br
+.ti -1c
+.RI "\fBAGSurface\fP \fBgetSubSurface\fP (const \fBAGRect2\fP &r) const "
+.br
+.ti -1c
+.RI "bool \fBvalid\fP () const "
+.br
+.ti -1c
+.RI "\fBAGSurface\fP \fBscale\fP (int w, int h) const "
+.br
+.ti -1c
+.RI "\fBAGSurface\fP \fBgrayed\fP () const "
+.br
+.ti -1c
+.RI "\fBAGSurface\fP & \fBoperator=\fP (const \fBAGSurface\fP &p)"
+.br
+.ti -1c
+.RI "virtual void \fBblit\fP (const \fBAGSurface\fP &pSource, const \fBAGRect2\fP &\fBpDest\fP, const \fBAGRect2\fP &\fBpSrc\fP, const \fBAGColor\fP &pColor)"
+.br
+.ti -1c
+.RI "void \fBdrawGradient\fP (const \fBAGRect2\fP &rect, const \fBAGColor\fP &ul, const \fBAGColor\fP &ur, const \fBAGColor\fP &dl, const \fBAGColor\fP &dr)"
+.br
+.ti -1c
+.RI "void \fBdrawGradientAlpha\fP (const \fBAGRect2\fP &rect, const \fBAGColor\fP &ul, const \fBAGColor\fP &ur, const \fBAGColor\fP &dl, const \fBAGColor\fP &dr)"
+.br
+.ti -1c
+.RI "void \fBdrawBorder\fP (const \fBAGRect2\fP &rect, int width, const \fBAGColor\fP &c1, const \fBAGColor\fP &c2)"
+.br
+.ti -1c
+.RI "virtual void \fBputPixel\fP (int x, int y, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "virtual \fBAGColor\fP \fBgetPixel\fP (int x, int y) const "
+.br
+.ti -1c
+.RI "virtual void \fBfillRect\fP (const \fBAGRect2\fP &pr, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "virtual void \fBdrawLine\fP (const \fBAGVector2\fP &p0, const \fBAGVector2\fP &p1, const \fBAGColor\fP &c)"
+.br
+.ti -1c
+.RI "void \fBsave\fP (const std::string &pName) const "
+.br
+.ti -1c
+.RI "\fBAGInternalSurface\fP * \fBsurface\fP () const "
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBAGSurface\fP \fBload\fP (const std::string &pName)"
+.br
+.ti -1c
+.RI "static \fBAGSurface\fP \fBloadDRM\fP (const std::string &pName, \fBAGDecryptor\fP &pDec)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGFontEngine\fP"
+.br
+.ti -1c
+.RI "class \fBAGSDLScreen\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Generic classes - for OpenGL and 'normal' SDL. 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGSurface::AGSurface ()"
+.PP
+.SS "AGSurface::AGSurface (int w, int h)"
+.PP
+.SS "AGSurface::AGSurface (const \fBAGSurface\fP & p)"
+.PP
+.SS "AGSurface::~AGSurface ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGSurface::blit (const \fBAGSurface\fP & pSource, const \fBAGRect2\fP & pDest, const \fBAGRect2\fP & pSrc, const \fBAGColor\fP & pColor)\fC [virtual]\fP"
+.PP
+.SS "\fBAGSurface\fP AGSurface::copy () const"
+.PP
+.SS "void AGSurface::drawBorder (const \fBAGRect2\fP & rect, int width, const \fBAGColor\fP & c1, const \fBAGColor\fP & c2)"
+.PP
+.SS "void AGSurface::drawGradient (const \fBAGRect2\fP & rect, const \fBAGColor\fP & ul, const \fBAGColor\fP & ur, const \fBAGColor\fP & dl, const \fBAGColor\fP & dr)"
+.PP
+.SS "void AGSurface::drawGradientAlpha (const \fBAGRect2\fP & rect, const \fBAGColor\fP & ul, const \fBAGColor\fP & ur, const \fBAGColor\fP & dl, const \fBAGColor\fP & dr)"
+.PP
+.SS "void AGSurface::drawLine (const \fBAGVector2\fP & p0, const \fBAGVector2\fP & p1, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+.SS "void AGSurface::fillRect (const \fBAGRect2\fP & pr, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+.SS "\fBAGColor\fP AGSurface::getPixel (int x, int y) const\fC [virtual]\fP"
+.PP
+.SS "\fBAGRect2\fP AGSurface::getRect () const"
+.PP
+.SS "\fBAGSurface\fP AGSurface::getSubSurface (const \fBAGRect2\fP & r) const"
+.PP
+.SS "\fBAGSurface\fP AGSurface::grayed () const"
+.PP
+.SS "int AGSurface::height () const"
+.PP
+.SS "\fBAGSurface\fP AGSurface::load (const std::string & pName)\fC [static]\fP"
+.PP
+.SS "\fBAGSurface\fP AGSurface::loadDRM (const std::string & pName, \fBAGDecryptor\fP & pDec)\fC [static]\fP"
+.PP
+.SS "\fBAGSurface\fP & AGSurface::operator= (const \fBAGSurface\fP & p)"
+.PP
+.SS "void AGSurface::putPixel (int x, int y, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGPaintTarget\fP.
+.SS "void AGSurface::save (const std::string & pName) const"
+.PP
+.SS "\fBAGSurface\fP AGSurface::scale (int w, int h) const"
+.PP
+.SS "\fBAGInternalSurface\fP * AGSurface::surface () const"
+.PP
+.SS "bool AGSurface::valid () const"
+.PP
+.SS "int AGSurface::width () const"
+.PP
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "friend class \fBAGFontEngine\fP\fC [friend]\fP"
+.PP
+.SS "friend class \fBAGSDLScreen\fP\fC [friend]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

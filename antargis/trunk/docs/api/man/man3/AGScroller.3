@@ -1,0 +1,102 @@
+.TH "AGScroller" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGScroller \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_scroller.h>\fP
+.PP
+Inherits \fBAGWidget\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGScroller\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &pRect, bool pHor)"
+.br
+.ti -1c
+.RI "\fB~AGScroller\fP ()"
+.br
+.ti -1c
+.RI "void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "bool \fBeventDragBy\fP (\fBAGEvent\fP *pEvent)"
+.br
+.ti -1c
+.RI "bool \fBeventUpClick\fP (\fBAGEvent\fP *pEvent)"
+.br
+.ti -1c
+.RI "bool \fBeventDownClick\fP (\fBAGEvent\fP *pEvent)"
+.br
+.ti -1c
+.RI "void \fBsetValue\fP (float pValue)"
+.br
+.ti -1c
+.RI "void \fBsetScrollerSize\fP (float pSize)"
+.br
+.ti -1c
+.RI "void \fBsetInterval\fP (float pMin, float pMax)"
+.br
+.ti -1c
+.RI "void \fBsetStepping\fP (float pStep)"
+.br
+.ti -1c
+.RI "float \fBgetValue\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetMin\fP () const "
+.br
+.ti -1c
+.RI "float \fBgetMax\fP () const "
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSignal\fP \fBsigValueChanged\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGScroller::AGScroller (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & pRect, bool pHor)"
+.PP
+.SS "AGScroller::~AGScroller ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGScroller::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGScroller::eventDownClick (\fBAGEvent\fP * pEvent)"
+.PP
+.SS "bool AGScroller::eventDragBy (\fBAGEvent\fP * pEvent)"
+.PP
+.SS "bool AGScroller::eventUpClick (\fBAGEvent\fP * pEvent)"
+.PP
+.SS "float AGScroller::getMax () const"
+.PP
+.SS "float AGScroller::getMin () const"
+.PP
+.SS "float AGScroller::getValue () const"
+.PP
+.SS "void AGScroller::setInterval (float pMin, float pMax)"
+.PP
+.SS "void AGScroller::setScrollerSize (float pSize)"
+.PP
+.SS "void AGScroller::setStepping (float pStep)"
+.PP
+.SS "void AGScroller::setValue (float pValue)"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBAGSignal\fP \fBAGScroller::sigValueChanged\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

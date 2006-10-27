@@ -1,0 +1,91 @@
+.TH "AGMenuItem" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGMenuItem \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_menuitem.h>\fP
+.PP
+Inherits \fBAGTable\fP.
+.PP
+Inherited by \fBAGSubMenu\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGMenuItem\fP (\fBAGWidget\fP *pParent, const \fBAGStringUtf8\fP &pText)"
+.br
+.ti -1c
+.RI "virtual \fB~AGMenuItem\fP ()"
+.br
+.ti -1c
+.RI "void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseEnter\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseLeave\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgetSelected\fP () const "
+.br
+.ti -1c
+.RI "void \fBunSelect\fP ()"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBgetName\fP () const "
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseClick\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual void \fBeventSelect\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBeventUnselect\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGMenuItem::AGMenuItem (\fBAGWidget\fP * pParent, const \fBAGStringUtf8\fP & pText)"
+.PP
+.SS "AGMenuItem::~AGMenuItem ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void AGMenuItem::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGMenuItem::eventMouseClick (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.PP
+Reimplemented in \fBAGSubMenu\fP.
+.SS "bool AGMenuItem::eventMouseEnter ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGMenuItem::eventMouseLeave ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGMenuItem::eventSelect ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGSubMenu\fP.
+.SS "void AGMenuItem::eventUnselect ()\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGSubMenu\fP.
+.SS "\fBAGString\fP AGMenuItem::getName () const"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGMenuItem::getSelected () const"
+.PP
+.SS "void AGMenuItem::unSelect ()"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

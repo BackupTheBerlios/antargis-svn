@@ -1,0 +1,213 @@
+.TH "gui/src/sge_primitives.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/sge_primitives.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'SDL.h'\fP
+.br
+\fC#include 'sge_internal.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "DECLSPEC void \fBsge_HLine\fP (SDL_Surface *Surface, Sint16 x1, Sint16 x2, Sint16 y, Uint32 Color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_HLineAlpha\fP (SDL_Surface *Surface, Sint16 x1, Sint16 x2, Sint16 y, Uint32 Color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_VLine\fP (SDL_Surface *Surface, Sint16 x, Sint16 y1, Sint16 y2, Uint32 Color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_VLineAlpha\fP (SDL_Surface *Surface, Sint16 x, Sint16 y1, Sint16 y2, Uint32 Color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_DoLine\fP (SDL_Surface *Surface, Sint16 X1, Sint16 Y1, Sint16 X2, Sint16 Y2, Uint32 Color, void Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_Line\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 Color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_LineAlpha\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 Color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AALine\fP (SDL_Surface *dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AALineAlpha\fP (SDL_Surface *dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_DomcLine\fP (SDL_Surface *surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2, void Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_mcLine\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_mcLineAlpha\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AAmcLine\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AAmcLineAlpha\fP (SDL_Surface *dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_Rect\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_RectAlpha\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_FilledRect\fP (SDL_Surface *Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_FilledRectAlpha\fP (SDL_Surface *surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_DoEllipse\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color, void Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_Ellipse\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_EllipseAlpha\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color, Uint8 Alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_FilledEllipse\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_FilledEllipseAlpha\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AAEllipseAlpha\fP (SDL_Surface *surface, Sint16 xc, Sint16 yc, Sint16 rx, Sint16 ry, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AAEllipse\fP (SDL_Surface *surface, Sint16 xc, Sint16 yc, Sint16 rx, Sint16 ry, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AAFilledEllipse\fP (SDL_Surface *surface, Sint16 xc, Sint16 yc, Sint16 rx, Sint16 ry, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_DoCircle\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color, void Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_Circle\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_CircleAlpha\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_FilledCircle\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_FilledCircleAlpha\fP (SDL_Surface *Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AACircleAlpha\fP (SDL_Surface *surface, Sint16 xc, Sint16 yc, Sint16 r, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AACircle\fP (SDL_Surface *surface, Sint16 xc, Sint16 yc, Sint16 r, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AAFilledCircle\fP (SDL_Surface *surface, Sint16 xc, Sint16 yc, Sint16 r, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_Bezier\fP (SDL_Surface *surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_BezierAlpha\fP (SDL_Surface *surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color, Uint8 alpha)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AABezier\fP (SDL_Surface *surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color)"
+.br
+.ti -1c
+.RI "DECLSPEC void \fBsge_AABezierAlpha\fP (SDL_Surface *surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color, Uint8 alpha)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "DECLSPEC void sge_AABezier (SDL_Surface * surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_AABezierAlpha (SDL_Surface * surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_AACircle (SDL_Surface * surface, Sint16 xc, Sint16 yc, Sint16 r, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_AACircleAlpha (SDL_Surface * surface, Sint16 xc, Sint16 yc, Sint16 r, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_AAEllipse (SDL_Surface * surface, Sint16 xc, Sint16 yc, Sint16 rx, Sint16 ry, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_AAEllipseAlpha (SDL_Surface * surface, Sint16 xc, Sint16 yc, Sint16 rx, Sint16 ry, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_AAFilledCircle (SDL_Surface * surface, Sint16 xc, Sint16 yc, Sint16 r, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_AAFilledEllipse (SDL_Surface * surface, Sint16 xc, Sint16 yc, Sint16 rx, Sint16 ry, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_AALine (SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_AALineAlpha (SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_AAmcLine (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2)"
+.PP
+.SS "DECLSPEC void sge_AAmcLineAlpha (SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_Bezier (SDL_Surface * surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_BezierAlpha (SDL_Surface * surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Sint16 x4, Sint16 y4, int level, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_Circle (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_CircleAlpha (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_DoCircle (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color, void  Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.PP
+.SS "DECLSPEC void sge_DoEllipse (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color, void  Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.PP
+.SS "DECLSPEC void sge_DoLine (SDL_Surface * Surface, Sint16 X1, Sint16 Y1, Sint16 X2, Sint16 Y2, Uint32 Color, void  Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.PP
+.SS "DECLSPEC void sge_DomcLine (SDL_Surface * surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2, void  Callback(SDL_Surface *Surf, Sint16 X, Sint16 Y, Uint32 Color))"
+.PP
+.SS "DECLSPEC void sge_Ellipse (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_EllipseAlpha (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color, Uint8 Alpha)"
+.PP
+.SS "DECLSPEC void sge_FilledCircle (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_FilledCircleAlpha (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 r, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_FilledEllipse (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_FilledEllipseAlpha (SDL_Surface * Surface, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_FilledRect (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)"
+.PP
+.SS "DECLSPEC void sge_FilledRectAlpha (SDL_Surface * surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_HLine (SDL_Surface * Surface, Sint16 x1, Sint16 x2, Sint16 y, Uint32 Color)"
+.PP
+.SS "DECLSPEC void sge_HLineAlpha (SDL_Surface * Surface, Sint16 x1, Sint16 x2, Sint16 y, Uint32 Color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_Line (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 Color)"
+.PP
+.SS "DECLSPEC void sge_LineAlpha (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 Color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_mcLine (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2)"
+.PP
+.SS "DECLSPEC void sge_mcLineAlpha (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r1, Uint8 g1, Uint8 b1, Uint8 r2, Uint8 g2, Uint8 b2, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_Rect (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)"
+.PP
+Figure functions 
+.SS "DECLSPEC void sge_RectAlpha (SDL_Surface * Surface, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)"
+.PP
+.SS "DECLSPEC void sge_VLine (SDL_Surface * Surface, Sint16 x, Sint16 y1, Sint16 y2, Uint32 Color)"
+.PP
+.SS "DECLSPEC void sge_VLineAlpha (SDL_Surface * Surface, Sint16 x, Sint16 y1, Sint16 y2, Uint32 Color, Uint8 alpha)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

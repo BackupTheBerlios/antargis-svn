@@ -1,0 +1,87 @@
+.TH "AGSweepResult" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGSweepResult \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCollisionState\fP { \fBCOL_AT\fP, \fBCOL_ALWAYS\fP, \fBCOL_NEVER\fP }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGSweepResult\fP ()"
+.br
+.ti -1c
+.RI "void \fBcombine\fP (const \fBAGSweepResult\fP &r)"
+.br
+.ti -1c
+.RI "bool \fBcollision\fP (float delta) const "
+.br
+.ti -1c
+.RI "float \fBbegin\fP (float delta) const "
+.br
+.ti -1c
+.RI "bool \fBalways\fP () const "
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBCollisionState\fP \fBstate\fP"
+.br
+.ti -1c
+.RI "float \fBt0\fP"
+.br
+.ti -1c
+.RI "float \fBt1\fP"
+.br
+.in -1c
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBAGSweepResult::CollisionState\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fICOL_AT \fP\fP
+.TP
+\fB\fICOL_ALWAYS \fP\fP
+.TP
+\fB\fICOL_NEVER \fP\fP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGSweepResult::AGSweepResult ()\fC [inline]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "bool AGSweepResult::always () const\fC [inline]\fP"
+.PP
+.SS "float AGSweepResult::begin (float delta) const\fC [inline]\fP"
+.PP
+.SS "bool AGSweepResult::collision (float delta) const\fC [inline]\fP"
+.PP
+.SS "void AGSweepResult::combine (const \fBAGSweepResult\fP & r)\fC [inline]\fP"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBCollisionState\fP \fBAGSweepResult::state\fP"
+.PP
+.SS "float \fBAGSweepResult::t0\fP"
+.PP
+.SS "float \fBAGSweepResult::t1\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

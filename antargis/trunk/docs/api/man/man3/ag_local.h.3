@@ -1,0 +1,60 @@
+.TH "gui/src/ag_local.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_local.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_string.h>\fP
+.br
+\fC#include <ag_string_utf8.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGLocalizer\fP"
+.br
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_\fP(x)   translate(x)"
+.br
+.ti -1c
+.RI "#define \fB__\fP(x)   translate(x)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetLocalizer\fP (\fBAGLocalizer\fP *p)"
+.br
+.ti -1c
+.RI "\fBAGLocalizer\fP * \fBgetLocalizer\fP ()"
+.br
+.ti -1c
+.RI "\fBAGStringUtf8\fP \fBtranslate\fP (const \fBAGString\fP &s)"
+.br
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define _(x)   translate(x)"
+.PP
+.SS "#define __(x)   translate(x)"
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "\fBAGLocalizer\fP* getLocalizer ()"
+.PP
+.SS "void setLocalizer (\fBAGLocalizer\fP * p)"
+.PP
+.SS "\fBAGStringUtf8\fP translate (const \fBAGString\fP & s)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

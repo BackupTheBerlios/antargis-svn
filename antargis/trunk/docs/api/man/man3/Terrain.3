@@ -1,0 +1,78 @@
+.TH "Terrain" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Terrain \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <terrain.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTerrain\fP (\fBScene\fP *pScene, \fBHeightMap\fP &map)"
+.br
+.ti -1c
+.RI "virtual \fB~Terrain\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBmapChanged\fP ()"
+.br
+.RI "\fIsome parts of the map are changed \fP"
+.ti -1c
+.RI "virtual void \fBmapChangedComplete\fP ()"
+.br
+.RI "\fIthe whole map is changed - so better take care of this (texture-upload instead of repainting on GPU) \fP"
+.ti -1c
+.RI "virtual bool \fBslotMapChanged\fP (\fBAGEvent\fP *e)"
+.br
+.ti -1c
+.RI "virtual bool \fBslotMapChangedComplete\fP (\fBAGEvent\fP *e)"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP * \fBget3dTexture\fP ()"
+.br
+.ti -1c
+.RI "\fBAGTexture\fP * \fBgetGrassTexture\fP ()"
+.br
+.ti -1c
+.RI "\fBScene\fP * \fBgetScene\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+In a game-world there exists exactly one Terrain-object. This object holds references to all water- and terrain-pieces, so that in case the terrain changes these will be changed,too. 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Terrain::Terrain (\fBScene\fP * pScene, \fBHeightMap\fP & map)"
+.PP
+.SS "Terrain::~Terrain ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAGTexture\fP * Terrain::get3dTexture ()"
+.PP
+.SS "\fBAGTexture\fP * Terrain::getGrassTexture ()"
+.PP
+.SS "\fBScene\fP * Terrain::getScene ()"
+.PP
+.SS "void Terrain::mapChanged ()\fC [virtual]\fP"
+.PP
+some parts of the map are changed 
+.PP
+.SS "void Terrain::mapChangedComplete ()\fC [virtual]\fP"
+.PP
+the whole map is changed - so better take care of this (texture-upload instead of repainting on GPU) 
+.PP
+.SS "bool Terrain::slotMapChanged (\fBAGEvent\fP * e)\fC [virtual]\fP"
+.PP
+.SS "bool Terrain::slotMapChangedComplete (\fBAGEvent\fP * e)\fC [virtual]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

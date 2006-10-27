@@ -1,0 +1,142 @@
+.TH "gui/src/ag_debug.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_debug.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdexcept>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include <assert.h>\fP
+.br
+\fC#include <sstream>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include 'GLee.h'\fP
+.br
+\fC#include <SDL_opengl.h>\fP
+.br
+\fC#include <GL/glu.h>\fP
+.br
+\fC#include 'ag_exception.h'\fP
+.br
+\fC#include 'ag_tools.h'\fP
+.br
+\fC#include 'ag_base.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBD\fP"
+.br
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBdebug\fP(c)   mydebug(::toString(__FILE__),::toString(__LINE__),c)"
+.br
+.ti -1c
+.RI "#define \fBdebugout\fP(x)   getDebug()<<x"
+.br
+.ti -1c
+.RI "#define \fBcdebug\fP(x)   debugout('('<<__FILE__<<':'<<__LINE__<<':'<<__PRETTY_FUNCTION__<<'):'<<x<<endl)"
+.br
+.ti -1c
+.RI "#define \fBccdebug\fP(x)   debugout('('<<__FILE__<<':'<<__LINE__<<':'<<__PRETTY_FUNCTION__<<':'<<((void*)this)<<'):'<<x<<endl)"
+.br
+.ti -1c
+.RI "#define \fBLINEINFO\fP(x)   (::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__)+::toString(' ')+::toString(x)).c_str()"
+.br
+.ti -1c
+.RI "#define \fBTRACE\fP   \fBD\fP test__LINE__(::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__))"
+.br
+.ti -1c
+.RI "#define \fBCTRACE\fP   \fBD\fP test__LINE__(::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__)+::toString(' ')+::toString(((void*)this)))"
+.br
+.ti -1c
+.RI "#define \fBAssert\fP(x)   assert(x)"
+.br
+.ti -1c
+.RI "#define \fBSTUB\fP   cdebug('STUB in File '<<__FILE__<<' line:'<<__LINE__<<' function:'<<__PRETTY_FUNCTION__)"
+.br
+.ti -1c
+.RI "#define \fBCHECK_ZERO\fP(x)   if(!x) throw \fBAGException\fP(std::string(__STRING(x))+' is zero in '+__FILE__+' line:'+toString(__LINE__)+' functin:'+__PRETTY_FUNCTION__);"
+.br
+.ti -1c
+.RI "#define \fBassertGL\fP   agAssertGL(::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__))"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetQuiet\fP ()"
+.br
+.ti -1c
+.RI "std::ostream &AGEXPORT \fBgetDebug\fP ()"
+.br
+.ti -1c
+.RI "template<class T> void \fBmydebug\fP (std::string f, std::string l, const T &t)"
+.br
+.ti -1c
+.RI "void \fBagRaise\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "void \fBagAssertGL\fP (std::string s)"
+.br
+.ti -1c
+.RI "void \fBsetRubyRaising\fP (bool flag)"
+.br
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define Assert(x)   assert(x)"
+.PP
+.SS "#define assertGL   agAssertGL(::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__))"
+.PP
+.SS "#define ccdebug(x)   debugout('('<<__FILE__<<':'<<__LINE__<<':'<<__PRETTY_FUNCTION__<<':'<<((void*)this)<<'):'<<x<<endl)"
+.PP
+.SS "#define cdebug(x)   debugout('('<<__FILE__<<':'<<__LINE__<<':'<<__PRETTY_FUNCTION__<<'):'<<x<<endl)"
+.PP
+.SS "#define CHECK_ZERO(x)   if(!x) throw \fBAGException\fP(std::string(__STRING(x))+' is zero in '+__FILE__+' line:'+toString(__LINE__)+' functin:'+__PRETTY_FUNCTION__);"
+.PP
+.SS "#define CTRACE   \fBD\fP test__LINE__(::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__)+::toString(' ')+::toString(((void*)this)))"
+.PP
+.SS "#define debug(c)   mydebug(::toString(__FILE__),::toString(__LINE__),c)"
+.PP
+.SS "#define debugout(x)   getDebug()<<x"
+.PP
+.SS "#define LINEINFO(x)   (::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__)+::toString(' ')+::toString(x)).c_str()"
+.PP
+.SS "#define STUB   cdebug('STUB in File '<<__FILE__<<' line:'<<__LINE__<<' function:'<<__PRETTY_FUNCTION__)"
+.PP
+.SS "#define TRACE   \fBD\fP test__LINE__(::toString(__FILE__)+::toString(' ')+::toString(__LINE__)+::toString(' ')+::toString( __PRETTY_FUNCTION__))"
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "void agAssertGL (std::string s)"
+.PP
+.SS "void agRaise (const std::string & s)"
+.PP
+.SS "std::ostream& AGEXPORT getDebug ()"
+.PP
+.SS "template<class T> void mydebug (std::string f, std::string l, const T & t)\fC [inline]\fP"
+.PP
+.SS "void setQuiet ()"
+.PP
+.SS "void setRubyRaising (bool flag)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

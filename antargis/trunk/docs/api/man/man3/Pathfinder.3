@@ -1,0 +1,49 @@
+.TH "Pathfinder" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Pathfinder \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <path.h>\fP
+.PP
+Inherits \fBAGRubyObject\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPathfinder\fP (\fBSimpleGraph\fP *pGraph, \fBHeuristicFunction\fP *pHeuristic, \fBPathDebugging\fP *pDebugger=0)"
+.br
+.ti -1c
+.RI "virtual void \fBmark\fP ()"
+.br
+.RI "\fIoverride this function to mark your children \fP"
+.ti -1c
+.RI "std::vector< \fBAGVector2\fP > \fBcomputePath\fP (const \fBAGVector2\fP &from, const \fBAGVector2\fP &to)"
+.br
+.ti -1c
+.RI "std::vector< \fBAGVector2\fP > \fBrefinePath\fP (const std::vector< \fBAGVector2\fP > &p, \fBMapPathWeighter\fP *pWeighter)"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Pathfinder::Pathfinder (\fBSimpleGraph\fP * pGraph, \fBHeuristicFunction\fP * pHeuristic, \fBPathDebugging\fP * pDebugger = \fC0\fP)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "std::vector< \fBAGVector2\fP > Pathfinder::computePath (const \fBAGVector2\fP & from, const \fBAGVector2\fP & to)"
+.PP
+.SS "void Pathfinder::mark ()\fC [virtual]\fP"
+.PP
+override this function to mark your children 
+.PP
+Reimplemented from \fBAGRubyObject\fP.
+.SS "std::vector< \fBAGVector2\fP > Pathfinder::refinePath (const std::vector< \fBAGVector2\fP > & p, \fBMapPathWeighter\fP * pWeighter)"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

@@ -1,0 +1,99 @@
+.TH "gui/src/ag_tools.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_tools.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <sstream>\fP
+.br
+\fC#include <ag_fs.h>\fP
+.br
+\fC#include <ag_base.h>\fP
+.br
+
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAGsign\fP(x)   ((x)<0?-1:(x)>0?1:0)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "std::vector< std::string > AGEXPORT \fBsplit\fP (const std::string &n, const std::string &h)"
+.br
+.ti -1c
+.RI "std::string AGEXPORT \fBreplace\fP (const std::string &s, const std::string &a, const std::string &b)"
+.br
+.ti -1c
+.RI "template<class T> std::string \fBtoString\fP (const T &t)"
+.br
+.ti -1c
+.RI "template<> std::string \fBtoString\fP (const bool &b)"
+.br
+.ti -1c
+.RI "bool \fBtoBool\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "int \fBtoInt\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "long \fBtoLong\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "float \fBtoFloat\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "int \fBfromHex\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "std::string \fBtoHex\fP (int i)"
+.br
+.ti -1c
+.RI "template<class T> void \fBappend\fP (std::list< T > &l1, const std::list< T > &l2)"
+.br
+.ti -1c
+.RI "template<class T> void \fBappend\fP (std::vector< T > &l1, const std::vector< T > &l2)"
+.br
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define AGsign(x)   ((x)<0?-1:(x)>0?1:0)"
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "template<class T> void append (std::vector< T > & l1, const std::vector< T > & l2)"
+.PP
+.SS "template<class T> void append (std::list< T > & l1, const std::list< T > & l2)"
+.PP
+.SS "int fromHex (const std::string & s)"
+.PP
+.SS "std::string AGEXPORT replace (const std::string & s, const std::string & a, const std::string & b)"
+.PP
+.SS "std::vector<std::string> AGEXPORT split (const std::string & n, const std::string & h)"
+.PP
+.SS "bool toBool (const std::string & s)\fC [inline]\fP"
+.PP
+.SS "float toFloat (const std::string & s)"
+.PP
+.SS "std::string toHex (int i)"
+.PP
+.SS "int toInt (const std::string & s)"
+.PP
+.SS "long toLong (const std::string & s)"
+.PP
+.SS "template<> std::string toString (const bool & b)\fC [inline]\fP"
+.PP
+.SS "template<class T> std::string toString (const T & t)\fC [inline]\fP"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

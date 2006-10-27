@@ -1,0 +1,51 @@
+.TH "PickNode" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PickNode \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <scene.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBPickNode\fP &n) const "
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGVector4\fP \fBpos\fP"
+.br
+.ti -1c
+.RI "\fBSceneNode\fP * \fBnode\fP"
+.br
+.ti -1c
+.RI "float \fBcamDist\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+some helper structure, which is used for storing results when picking. it holds some information about: distance to camera (for sorting) the picked scene-node and the 3d-position, where the scene-node was touched 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "bool PickNode::operator< (const \fBPickNode\fP & n) const"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "float \fBPickNode::camDist\fP"
+.PP
+.SS "\fBSceneNode\fP* \fBPickNode::node\fP"
+.PP
+.SS "\fBAGVector4\fP \fBPickNode::pos\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

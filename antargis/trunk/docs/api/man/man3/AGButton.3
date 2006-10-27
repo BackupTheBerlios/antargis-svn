@@ -1,0 +1,230 @@
+.TH "AGButton" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGButton \- implements push-buttons
+.PP
+\fBAGButton\fP represents a button, which can hold a text-caption or an image-caption, but not both. Further it can have following states:  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_button.h>\fP
+.PP
+Inherits \fBAGWidget\fP.
+.PP
+Inherited by \fBAGCheckBox\fP.
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBState\fP { \fBNORMAL\fP, \fBLIGHTED\fP, \fBPRESSED\fP, \fBCHECKED\fP, \fBCHECKEDLIGHTED\fP, \fBCHECKEDPRESSED\fP, \fBDISABLED\fP }"
+.br
+.RI "\fIthe different drawing states \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGButton\fP (\fBAGWidget\fP *pParent, const \fBAGRect2\fP &r, const \fBAGStringUtf8\fP &pText, int id=-1)"
+.br
+.RI "\fIcreates a button with a text \fP"
+.ti -1c
+.RI "void \fBsetSurface\fP (\fBAGSurface\fP pSurface, bool pChangeSize=false)"
+.br
+.ti -1c
+.RI "void \fBsetTexture\fP (const \fBAGTexture\fP &pTexture)"
+.br
+.ti -1c
+.RI "virtual void \fBdraw\fP (\fBAGPainter\fP &p)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseEnter\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseLeave\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonDown\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual bool \fBeventMouseButtonUp\fP (\fBAGEvent\fP *m)"
+.br
+.ti -1c
+.RI "virtual void \fBsetWidth\fP (float w)"
+.br
+.ti -1c
+.RI "virtual void \fBsetHeight\fP (float w)"
+.br
+.ti -1c
+.RI "virtual \fBAGStringUtf8\fP \fBgetCaption\fP () const "
+.br
+.ti -1c
+.RI "void \fBsetEnabled\fP (bool pEnable)"
+.br
+.ti -1c
+.RI "void \fBsetTheme\fP (const \fBAGString\fP &pTheme)"
+.br
+.ti -1c
+.RI "void \fBsetCaption\fP (const \fBAGStringUtf8\fP &pCaption)"
+.br
+.ti -1c
+.RI "virtual void \fBsetState\fP (const \fBState\fP &pState)"
+.br
+.RI "\fIsets the current state and ensures a redraw \fP"
+.ti -1c
+.RI "\fBState\fP \fBgetState\fP () const "
+.br
+.ti -1c
+.RI "virtual void \fBsetChecked\fP (bool pChecked)"
+.br
+.ti -1c
+.RI "bool \fBisChecked\fP () const "
+.br
+.ti -1c
+.RI "bool \fBcanFocus\fP () const "
+.br
+.RI "\fIcan this widget widget be focused. \fP"
+.ti -1c
+.RI "virtual void \fBuseTextures\fP ()"
+.br
+.RI "\fIspecial function for 'using textures' \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+implements push-buttons
+.PP
+\fBAGButton\fP represents a button, which can hold a text-caption or an image-caption, but not both. Further it can have following states: 
+.PP
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBAGButton::State\fP"
+.PP
+the different drawing states 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fINORMAL \fP\fP
+the normal state of a button 
+.TP
+\fB\fILIGHTED \fP\fP
+the button is lighted or hovered 
+.TP
+\fB\fIPRESSED \fP\fP
+the button is pressed (typically hovered) 
+.TP
+\fB\fICHECKED \fP\fP
+the button is checked (and not pressed) 
+.TP
+\fB\fICHECKEDLIGHTED \fP\fP
+a hovered and checked button 
+.TP
+\fB\fICHECKEDPRESSED \fP\fP
+hovered, checked and pressed 
+.TP
+\fB\fIDISABLED \fP\fP
+the button disabled (greyed) 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGButton::AGButton (\fBAGWidget\fP * pParent, const \fBAGRect2\fP & r, const \fBAGStringUtf8\fP & pText, int id = \fC-1\fP)"
+.PP
+creates a button with a text 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpParent\fP the parent widget 
+.br
+\fIr\fP relative position within the parent 
+.br
+\fIpText\fP the caption displayed on the button. take '' for no text 
+.br
+\fIid\fP currently not any longer used id 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool AGButton::canFocus () const\fC [virtual]\fP"
+.PP
+can this widget widget be focused. 
+.PP
+\fBReturns:\fP
+.RS 4
+always true 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGButton::draw (\fBAGPainter\fP & p)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGButton::eventMouseButtonDown (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGButton::eventMouseButtonUp (\fBAGEvent\fP * m)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGButton::eventMouseEnter ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "bool AGButton::eventMouseLeave ()\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "\fBAGStringUtf8\fP AGButton::getCaption () const\fC [virtual]\fP"
+.PP
+\fBReturns:\fP
+.RS 4
+returns the text displayed on the button 
+.RE
+.PP
+
+.SS "\fBAGButton::State\fP AGButton::getState () const"
+.PP
+.SS "bool AGButton::isChecked () const"
+.PP
+.SS "void AGButton::setCaption (const \fBAGStringUtf8\fP & pCaption)"
+.PP
+.SS "void AGButton::setChecked (bool pChecked)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGRadio\fP.
+.SS "void AGButton::setEnabled (bool pEnable)"
+.PP
+dis- or enables the button. disabled buttons are typically displayed greyed and are not hoverable or clckable
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpEnable\fP true or false 
+.RE
+.PP
+
+.SS "void AGButton::setHeight (float w)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGButton::setState (const \fBState\fP & pState)\fC [virtual]\fP"
+.PP
+sets the current state and ensures a redraw 
+.PP
+.SS "void AGButton::setSurface (\fBAGSurface\fP pSurface, bool pChangeSize = \fCfalse\fP)"
+.PP
+.SS "void AGButton::setTexture (const \fBAGTexture\fP & pTexture)"
+.PP
+.SS "void AGButton::setTheme (const \fBAGString\fP & pTheme)"
+.PP
+.SS "void AGButton::setWidth (float w)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBAGWidget\fP.
+.SS "void AGButton::useTextures ()\fC [virtual]\fP"
+.PP
+special function for 'using textures' 
+.PP
+within a texture-garbage-collection run all unused textures get cleaned, so this function 'uses' the textures. This way they won't get collected 
+.PP
+Reimplemented from \fBAGWidget\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

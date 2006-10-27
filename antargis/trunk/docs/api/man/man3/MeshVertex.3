@@ -1,0 +1,58 @@
+.TH "MeshVertex" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MeshVertex \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <mesh_optimizer.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBMeshVertex\fP &p) const "
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBAGVector4\fP \fBv\fP"
+.br
+.ti -1c
+.RI "\fBAGVector4\fP \fBc\fP"
+.br
+.ti -1c
+.RI "\fBAGVector3\fP \fBn\fP"
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBt\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file provides functionality for: building of an indexed mesh out of a set of (vertex,color,normal,tex2dcoords) each 3 of them a triangle. Similar vertices will be joined automatically. Use it like this:
+.PP
+1) generate a \fBMeshOptimizer\fP objet 2) add 3*n vertices 3) get a \fBVertexArray\fP by calling getArray() 
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "bool MeshVertex::operator< (const \fBMeshVertex\fP & p) const"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBAGVector4\fP \fBMeshVertex::c\fP"
+.PP
+.SS "\fBAGVector3\fP \fBMeshVertex::n\fP"
+.PP
+.SS "\fBAGVector2\fP \fBMeshVertex::t\fP"
+.PP
+.SS "\fBAGVector4\fP \fBMeshVertex::v\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

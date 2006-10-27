@@ -1,0 +1,70 @@
+.TH "gui/src/ag_messageobject.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_messageobject.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <SDL.h>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <set>\fP
+.br
+\fC#include 'ag_geometry.h'\fP
+.br
+\fC#include 'ag_rubyobj.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGEvent\fP"
+.br
+.ti -1c
+.RI "class \fBAGListener\fP"
+.br
+.ti -1c
+.RI "class \fBAGCPPListener\fP"
+.br
+.ti -1c
+.RI "class \fBAGSlot0< T >\fP"
+.br
+.ti -1c
+.RI "class \fBAGSignal\fP"
+.br
+.ti -1c
+.RI "class \fBAGMessageObject\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGEvent\fP * \fBnewEvent\fP (\fBAGListener\fP *pCaller, const \fBAGString\fP &pName, const SDL_Event *s)"
+.br
+.ti -1c
+.RI "template<class T> \fBAGCPPListener\fP * \fBslot\fP (T *base, bool(T::*f)(\fBAGEvent\fP *))"
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBtoString\fP (SDL_Event *pEvent)"
+.br
+.ti -1c
+.RI "SDL_Event * \fBtoSDLEvent\fP (const \fBAGString\fP &p)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBAGEvent\fP* newEvent (\fBAGListener\fP * pCaller, const \fBAGString\fP & pName, const SDL_Event * s)"
+.PP
+.SS "template<class T> \fBAGCPPListener\fP* slot (T * base, bool(T::*)(\fBAGEvent\fP *) f)"
+.PP
+.SS "SDL_Event* toSDLEvent (const \fBAGString\fP & p)"
+.PP
+.SS "\fBAGString\fP toString (SDL_Event * pEvent)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

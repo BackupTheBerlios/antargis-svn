@@ -1,0 +1,112 @@
+.TH "gui/src/ag_geometry.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_geometry.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_geometry.h>\fP
+.br
+\fC#include <ag_tools.h>\fP
+.br
+\fC#include <ag_debug.h>\fP
+.br
+\fC#include <assert.h>\fP
+.br
+\fC#include <cmath>\fP
+.br
+\fC#include <map>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <ag_xml.h>\fP
+.br
+\fC#include <ag_stringstream.h>\fP
+.br
+\fC#include <ruby.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBAGSweepResult\fP"
+.br
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAXF\fP   100000.0f"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcollide1d\fP (float a1, float a2, float b1, float b2, bool normal=true)"
+.br
+.ti -1c
+.RI "\fBAGSweepResult\fP \fBcollide1d\fP (float pa1, float pa2, float pb1, float pb2, float v)"
+.br
+.ti -1c
+.RI "float \fBgetArcInternal\fP (float x, float y)"
+.br
+.ti -1c
+.RI "template<class AGMatrix3> void \fBgauss\fP (\fBAGMatrix3\fP &a, \fBAGMatrix3\fP &b, int size)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &o, const \fBAGVector2\fP &v)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &o, const \fBAGVector3\fP &v)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &o, const \fBAGVector4\fP &v)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &o, const \fBAGRect2\fP &v)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &o, const \fBAGBox3\fP &v)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBAGVector2\fP \fBinvalidVec2\fP"
+.br
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define MAXF   100000.0f"
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "\fBAGSweepResult\fP collide1d (float pa1, float pa2, float pb1, float pb2, float v)"
+.PP
+.SS "bool collide1d (float a1, float a2, float b1, float b2, bool normal = \fCtrue\fP)"
+.PP
+.SS "template<class AGMatrix3> void gauss (\fBAGMatrix3\fP & a, \fBAGMatrix3\fP & b, int size)"
+.PP
+.SS "float getArcInternal (float x, float y)"
+.PP
+.SS "std::ostream& operator<< (std::ostream & o, const \fBAGBox3\fP & v)"
+.PP
+.SS "std::ostream& operator<< (std::ostream & o, const \fBAGRect2\fP & v)"
+.PP
+.SS "std::ostream& operator<< (std::ostream & o, const \fBAGVector4\fP & v)"
+.PP
+.SS "std::ostream& operator<< (std::ostream & o, const \fBAGVector3\fP & v)"
+.PP
+.SS "std::ostream& operator<< (std::ostream & o, const \fBAGVector2\fP & v)"
+.PP
+.SH "Variable Documentation"
+.PP 
+.SS "\fBAGVector2\fP \fBinvalidVec2\fP"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

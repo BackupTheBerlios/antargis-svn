@@ -1,0 +1,47 @@
+.TH "gui/src/ag_application.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_application.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_messageobject.h>\fP
+.br
+\fC#include <ag_widget.h>\fP
+.br
+\fC#include <ag_tooltip.h>\fP
+.br
+\fC#include <ag_texture.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAGApplication\fP"
+.br
+.RI "\fIBase class for application - holds the main loop
+.PP
+Use \fBAGApplication\fP as base class your application's class. In this library it's assumed that you have different parts of your program, that are really different. Each of these parts has its own \fBAGApplication\fP. The actual control of these applications is done through a main-loop, that queries new events from libSDL and gives them to the correct widgets. This main-loop can by started by \fBrun()\fP. After this your have some possibilities to access control. FOr instance there are the different event* functions, which you can override in an AGApplication's subclass. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGApplication\fP * \fBgetApplication\fP ()"
+.br
+.ti -1c
+.RI "void \fBdisableKeyrepeat\fP ()"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void disableKeyrepeat ()"
+.PP
+.SS "\fBAGApplication\fP* getApplication ()"
+.PP
+getApplication returns the current active application. This gets set on each iteration of \fBAGApplication::run\fP. So it will be correct after finishing a frame, when you are using nested AGApplications. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

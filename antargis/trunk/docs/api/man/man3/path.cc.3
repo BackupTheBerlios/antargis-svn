@@ -1,0 +1,49 @@
+.TH "src/path.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/path.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'path.h'\fP
+.br
+\fC#include <math.h>\fP
+.br
+\fC#include <stdexcept>\fP
+.br
+\fC#include <ag_profiler.h>\fP
+.br
+\fC#include <ag_debug.h>\fP
+.br
+\fC#include <ag_surface.h>\fP
+.br
+\fC#include <ag_painter.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBSortEdges\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSimpleGraph\fP * \fBmakeGraph\fP (\fBHeightMap\fP *pMap, \fBMapPathWeighter\fP *pWeighter, size_t res)"
+.br
+.ti -1c
+.RI "\fBHeuristicFunction\fP * \fBcomputeHeuristic\fP (\fBSimpleGraph\fP *g)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBHeuristicFunction\fP* computeHeuristic (\fBSimpleGraph\fP * g)"
+.PP
+.SS "\fBSimpleGraph\fP* makeGraph (\fBHeightMap\fP * pMap, \fBMapPathWeighter\fP * pWeighter, size_t res)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

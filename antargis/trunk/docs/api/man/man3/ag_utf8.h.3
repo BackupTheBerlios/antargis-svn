@@ -1,0 +1,44 @@
+.TH "gui/src/ag_utf8.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_utf8.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <SDL.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBagFirstCharSize\fP (const std::string &s, size_t pos=0)"
+.br
+.ti -1c
+.RI "size_t \fBagStringLength\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "std::string \fBagSubStr\fP (const std::string &s, size_t from, size_t len)"
+.br
+.ti -1c
+.RI "std::string \fBunicode2Utf8\fP (Uint16 unicode)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "size_t agFirstCharSize (const std::string & s, size_t pos = \fC0\fP)"
+.PP
+.SS "size_t agStringLength (const std::string & s)"
+.PP
+.SS "std::string agSubStr (const std::string & s, size_t from, size_t len)"
+.PP
+.SS "std::string unicode2Utf8 (Uint16 unicode)"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

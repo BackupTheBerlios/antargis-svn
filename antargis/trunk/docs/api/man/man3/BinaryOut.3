@@ -1,0 +1,55 @@
+.TH "BinaryOut" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BinaryOut \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_serial.h>\fP
+.PP
+Inherited by \fBBinaryFileOut\fP, and \fBBinaryStringOut\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBinaryOut\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~BinaryOut\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBwrite\fP (char c)"
+.br
+.ti -1c
+.RI "\fBBinaryOut\fP & \fBoperator<<\fP (const Sint32 &i)"
+.br
+.ti -1c
+.RI "\fBBinaryOut\fP & \fBoperator<<\fP (const Uint32 &i)"
+.br
+.ti -1c
+.RI "\fBBinaryOut\fP & \fBoperator<<\fP (const float &f)"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "BinaryOut::BinaryOut ()"
+.PP
+.SS "BinaryOut::~BinaryOut ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBBinaryOut\fP & BinaryOut::operator<< (const float & f)"
+.PP
+.SS "\fBBinaryOut\fP & BinaryOut::operator<< (const Uint32 & i)"
+.PP
+.SS "\fBBinaryOut\fP & BinaryOut::operator<< (const Sint32 & i)"
+.PP
+.SS "void BinaryOut::write (char c)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBBinaryFileOut\fP, and \fBBinaryStringOut\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

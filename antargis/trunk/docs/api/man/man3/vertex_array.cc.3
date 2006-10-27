@@ -1,0 +1,48 @@
+.TH "src/vertex_array.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/vertex_array.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'vertex_array.h'\fP
+.br
+\fC#include <SDL_opengl.h>\fP
+.br
+\fC#include <assert.h>\fP
+.br
+\fC#include <ag_debug.h>\fP
+.br
+\fC#include <ag_profiler.h>\fP
+.br
+\fC#include <ag_config.h>\fP
+.br
+\fC#include <ag_main.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBuseVBO\fP ()"
+.br
+.ti -1c
+.RI "static bool \fBuseVertexArrays\fP ()"
+.br
+.ti -1c
+.RI "\fBVertexArray\fP * \fBmakeInstances\fP (const \fBVertexArray\fP &va, const std::vector< \fBAGMatrix4\fP > &ts)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBVertexArray\fP* makeInstances (const \fBVertexArray\fP & va, const std::vector< \fBAGMatrix4\fP > & ts)"
+.PP
+makeInstances can be used for some kind of 'batching'. It creates several instances of a mesh stored in va. The positions of the instances are given through transformation matrices in ts 
+.SS "static bool useVBO ()\fC [static]\fP"
+.PP
+.SS "static bool useVertexArrays ()\fC [static]\fP"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

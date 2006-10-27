@@ -1,0 +1,50 @@
+.TH "AGInstance" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGInstance \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_kill.h>\fP
+.PP
+Inherits \fBAGInstanceBase\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGInstance\fP (T *t)"
+.br
+.ti -1c
+.RI "virtual void \fBkill\fP ()"
+.br
+.ti -1c
+.RI "virtual void * \fBptr\fP () const "
+.br
+.ti -1c
+.RI "virtual bool \fBoperator<\fP (const \fBAGInstanceBase\fP &b) const "
+.br
+.in -1c
+
+.SS "template<class T> class AGInstance< T >"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T> \fBAGInstance\fP< T >::\fBAGInstance\fP (T * t)\fC [inline]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> virtual void \fBAGInstance\fP< T >::kill ()\fC [inline, virtual]\fP"
+.PP
+Implements \fBAGInstanceBase\fP.
+.SS "template<class T> virtual bool \fBAGInstance\fP< T >::operator< (const \fBAGInstanceBase\fP & b) const\fC [inline, virtual]\fP"
+.PP
+Implements \fBAGInstanceBase\fP.
+.SS "template<class T> virtual void* \fBAGInstance\fP< T >::ptr () const\fC [inline, virtual]\fP"
+.PP
+Implements \fBAGInstanceBase\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

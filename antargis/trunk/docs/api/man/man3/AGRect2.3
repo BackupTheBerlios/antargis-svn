@@ -1,0 +1,263 @@
+.TH "AGRect2" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGRect2 \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_geometry.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGRect2\fP ()"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP (const \fBAGVector2\fP &pv0, const \fBAGVector2\fP &pv1)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP (float x, float y, float w, float h)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP (const \fBAGString\fP &ps)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP (const SDL_Rect &r)"
+.br
+.ti -1c
+.RI "bool \fBcollide\fP (const \fBAGRect2\fP &r) const "
+.br
+.ti -1c
+.RI "void \fBinclude\fP (const \fBAGVector2\fP &v)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBoperator+\fP (const \fBAGVector2\fP &v) const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP & \fBoperator+=\fP (const \fBAGVector2\fP &v)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP & \fBoperator-=\fP (const \fBAGVector2\fP &v)"
+.br
+.ti -1c
+.RI "\fBAGRect2\fP & \fBoperator+=\fP (const \fBAGRect2\fP &r)"
+.br
+.ti -1c
+.RI "bool \fBcontains\fP (const \fBAGVector2\fP &v) const "
+.br
+.ti -1c
+.RI "bool \fBcontains\fP (const \fBAGRect2\fP &v) const "
+.br
+.ti -1c
+.RI "std::list< \fBAGRect2\fP > \fBsplit\fP () const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBoperator[]\fP (size_t i) const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP & \fBoperator[]\fP (size_t i)"
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgetV0\fP () const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgetV1\fP () const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgetV01\fP () const "
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBgetV10\fP () const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBshrink\fP (float f) const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBgrow\fP (float f) const "
+.br
+.ti -1c
+.RI "void \fBsetX\fP (float p)"
+.br
+.ti -1c
+.RI "void \fBsetY\fP (float p)"
+.br
+.ti -1c
+.RI "void \fBsetLeft\fP (float p)"
+.br
+.ti -1c
+.RI "void \fBsetTop\fP (float p)"
+.br
+.ti -1c
+.RI "void \fBsetRight\fP (float p)"
+.br
+.ti -1c
+.RI "void \fBsetBottom\fP (float p)"
+.br
+.ti -1c
+.RI "float \fBsetWidth\fP (float w)"
+.br
+.ti -1c
+.RI "float \fBsetHeight\fP (float w)"
+.br
+.ti -1c
+.RI "float \fBx\fP () const "
+.br
+.ti -1c
+.RI "float \fBy\fP () const "
+.br
+.ti -1c
+.RI "float \fBw\fP () const "
+.br
+.ti -1c
+.RI "float \fBh\fP () const "
+.br
+.ti -1c
+.RI "float \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "float \fBheight\fP () const "
+.br
+.ti -1c
+.RI "float \fBx0\fP () const "
+.br
+.ti -1c
+.RI "float \fBy0\fP () const "
+.br
+.ti -1c
+.RI "float \fBx1\fP () const "
+.br
+.ti -1c
+.RI "float \fBy1\fP () const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBorigin\fP () const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBintersect\fP (const \fBAGRect2\fP &r) const "
+.br
+.ti -1c
+.RI "SDL_Rect \fBsdl\fP () const "
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBAGRect2\fP &r) const "
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBAGRect2\fP &r) const "
+.br
+.ti -1c
+.RI "void \fBcheck\fP () const "
+.br
+.ti -1c
+.RI "\fBAGRect2\fP \fBalignGrid\fP () const "
+.br
+.ti -1c
+.RI "\fBAGString\fP \fBtoString\fP () const "
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGRect2::AGRect2 ()"
+.PP
+.SS "AGRect2::AGRect2 (const \fBAGVector2\fP & pv0, const \fBAGVector2\fP & pv1)"
+.PP
+.SS "AGRect2::AGRect2 (float x, float y, float w, float h)"
+.PP
+.SS "AGRect2::AGRect2 (const \fBAGString\fP & ps)"
+.PP
+.SS "AGRect2::AGRect2 (const SDL_Rect & r)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAGRect2\fP AGRect2::alignGrid () const"
+.PP
+.SS "void AGRect2::check () const"
+.PP
+.SS "bool AGRect2::collide (const \fBAGRect2\fP & r) const"
+.PP
+.SS "bool AGRect2::contains (const \fBAGRect2\fP & v) const"
+.PP
+.SS "bool AGRect2::contains (const \fBAGVector2\fP & v) const"
+.PP
+.SS "\fBAGVector2\fP AGRect2::getV0 () const"
+.PP
+.SS "\fBAGVector2\fP AGRect2::getV01 () const"
+.PP
+.SS "\fBAGVector2\fP AGRect2::getV1 () const"
+.PP
+.SS "\fBAGVector2\fP AGRect2::getV10 () const"
+.PP
+.SS "\fBAGRect2\fP AGRect2::grow (float f) const"
+.PP
+.SS "float AGRect2::h () const"
+.PP
+.SS "float AGRect2::height () const"
+.PP
+.SS "void AGRect2::include (const \fBAGVector2\fP & v)"
+.PP
+.SS "\fBAGRect2\fP AGRect2::intersect (const \fBAGRect2\fP & r) const"
+.PP
+.SS "bool AGRect2::operator!= (const \fBAGRect2\fP & r) const"
+.PP
+.SS "\fBAGRect2\fP AGRect2::operator+ (const \fBAGVector2\fP & v) const"
+.PP
+.SS "\fBAGRect2\fP & AGRect2::operator+= (const \fBAGRect2\fP & r)"
+.PP
+.SS "\fBAGRect2\fP & AGRect2::operator+= (const \fBAGVector2\fP & v)"
+.PP
+.SS "\fBAGRect2\fP & AGRect2::operator-= (const \fBAGVector2\fP & v)"
+.PP
+.SS "bool AGRect2::operator== (const \fBAGRect2\fP & r) const"
+.PP
+.SS "\fBAGVector2\fP & AGRect2::operator[] (size_t i)"
+.PP
+.SS "\fBAGVector2\fP AGRect2::operator[] (size_t i) const"
+.PP
+.SS "\fBAGRect2\fP AGRect2::origin () const"
+.PP
+.SS "SDL_Rect AGRect2::sdl () const"
+.PP
+.SS "void AGRect2::setBottom (float p)"
+.PP
+.SS "float AGRect2::setHeight (float w)"
+.PP
+.SS "void AGRect2::setLeft (float p)"
+.PP
+.SS "void AGRect2::setRight (float p)"
+.PP
+.SS "void AGRect2::setTop (float p)"
+.PP
+.SS "float AGRect2::setWidth (float w)"
+.PP
+.SS "void AGRect2::setX (float p)"
+.PP
+.SS "void AGRect2::setY (float p)"
+.PP
+.SS "\fBAGRect2\fP AGRect2::shrink (float f) const"
+.PP
+.SS "std::list< \fBAGRect2\fP > AGRect2::split () const"
+.PP
+.SS "\fBAGString\fP AGRect2::toString () const"
+.PP
+.SS "float AGRect2::w () const"
+.PP
+.SS "float AGRect2::width () const"
+.PP
+.SS "float AGRect2::x () const"
+.PP
+.SS "float AGRect2::x0 () const"
+.PP
+.SS "float AGRect2::x1 () const"
+.PP
+.SS "float AGRect2::y () const"
+.PP
+.SS "float AGRect2::y0 () const"
+.PP
+.SS "float AGRect2::y1 () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

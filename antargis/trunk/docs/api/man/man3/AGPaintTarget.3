@@ -1,0 +1,113 @@
+.TH "AGPaintTarget" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGPaintTarget \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_painttarget.h>\fP
+.PP
+Inherits \fBAGRubyObject\fP.
+.PP
+Inherited by \fBAGScreen\fP, \fBAGSurface\fP, and \fBAGTexture\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~AGPaintTarget\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBblitTri\fP (const \fBAGTexture\fP &pSource, const \fBAGTriangle2\fP &\fBpSrc\fP, const \fBAGTriangle2\fP &\fBpDest\fP) MSTUB virtual void blit(const \fBAGTexture\fP &pSource"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP &pColor virtual MSTUB void \fBblit\fP (const \fBAGTexture\fP &pSource, const \fBAGRect2\fP &\fBpDest\fP, const \fBAGRect2\fP &\fBpSrc\fP) MSTUB virtual void blit(const \fBAGSurface\fP &pSource"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP &pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP &\fBpSrc\fP virtual MSTUB void \fBdrawLine\fP (const \fBAGVector2\fP &p0, const \fBAGVector2\fP &p1, const \fBAGColor\fP &c) MSTUB virtual void fillRect(const \fBAGRect2\fP &pr"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP &pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP &\fBpSrc\fP virtual MSTUB void const \fBAGColor\fP &c virtual MSTUB void \fBfillRects\fP (const std::vector< std::pair< \fBAGRect2\fP, \fBAGVector4\fP > > &pr) MSTUB virtual void blit(const \fBAGTexture\fP &pSource"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP &pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP &\fBpSrc\fP virtual MSTUB void const \fBAGColor\fP &c virtual MSTUB void const std::vector< std::pair< \fBAGRect2\fP, \fBAGRect2\fP > > const \fBAGColor\fP &pColor virtual MSTUB void \fBtile\fP (const \fBAGTexture\fP &pSource, const \fBAGRect2\fP &pTarget, const \fBAGColor\fP &pColor) MSTUB virtual \fBAGRect2\fP getRect() const "
+.br
+.ti -1c
+.RI "virtual void \fBputPixel\fP (int x, int y, const \fBAGColor\fP &c) MSTUB virtual \fBAGColor\fP getPixel(int x"
+.br
+.ti -1c
+.RI "virtual void int y const virtual MSTUB void \fBbeginPaint\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBendPaint\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBclip\fP (const \fBAGRect2\fP &r)"
+.br
+.ti -1c
+.RI "virtual void \fBunclip\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP & \fBpDest\fP"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP & \fBpSrc\fP"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP &pColor virtual MSTUB void const \fBAGRect2\fP & \fBpDest\fP"
+.br
+.ti -1c
+.RI "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP &pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP &\fBpSrc\fP virtual MSTUB void const \fBAGColor\fP &c virtual MSTUB void const std::vector< std::pair< \fBAGRect2\fP, \fBAGRect2\fP > > & \fBpSrcDestRects\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual AGPaintTarget::~AGPaintTarget ()\fC [inline, virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void int y const virtual MSTUB void AGPaintTarget::beginPaint ()\fC [inline, virtual]\fP"
+.PP
+Reimplemented in \fBAGGLScreen\fP, and \fBAGTexture\fP.
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP& pColor virtual MSTUB void AGPaintTarget::blit (const \fBAGTexture\fP & pSource, const \fBAGRect2\fP & pDest, const \fBAGRect2\fP & pSrc) const\fC [virtual]\fP"
+.PP
+.SS "virtual void AGPaintTarget::blitTri (const \fBAGTexture\fP & pSource, const \fBAGTriangle2\fP & pSrc, const \fBAGTriangle2\fP & pDest) const\fC [virtual]\fP"
+.PP
+.SS "virtual void AGPaintTarget::clip (const \fBAGRect2\fP & r)\fC [inline, virtual]\fP"
+.PP
+Reimplemented in \fBAGGLScreen\fP, and \fBAGSDLScreen\fP.
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP& pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP& \fBpSrc\fP virtual MSTUB void AGPaintTarget::drawLine (const \fBAGVector2\fP & p0, const \fBAGVector2\fP & p1, const \fBAGColor\fP & c) const\fC [virtual]\fP"
+.PP
+.SS "virtual void AGPaintTarget::endPaint ()\fC [inline, virtual]\fP"
+.PP
+Reimplemented in \fBAGGLScreen\fP, and \fBAGTexture\fP.
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP& pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP& \fBpSrc\fP virtual MSTUB void const \fBAGColor\fP& c virtual MSTUB void AGPaintTarget::fillRects (const std::vector< std::pair< \fBAGRect2\fP, \fBAGVector4\fP > > & pr) const\fC [virtual]\fP"
+.PP
+.SS "virtual void AGPaintTarget::putPixel (int x, int y, const \fBAGColor\fP & c)\fC [virtual]\fP"
+.PP
+Reimplemented in \fBAGGLScreen\fP, \fBAGSDLScreen\fP, \fBAGSurface\fP, and \fBAGTexture\fP.
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP& pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP& \fBpSrc\fP virtual MSTUB void const \fBAGColor\fP& c virtual MSTUB void const std::vector<std::pair<\fBAGRect2\fP,\fBAGRect2\fP> > const \fBAGColor\fP& pColor virtual MSTUB void AGPaintTarget::tile (const \fBAGTexture\fP & pSource, const \fBAGRect2\fP & pTarget, const \fBAGColor\fP & pColor) const\fC [inline, virtual]\fP"
+.PP
+.SS "virtual void AGPaintTarget::unclip ()\fC [inline, virtual]\fP"
+.PP
+Reimplemented in \fBAGGLScreen\fP, and \fBAGSDLScreen\fP.
+.SH "Member Data Documentation"
+.PP 
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP& pColor virtual MSTUB void const \fBAGRect2\fP& \fBAGPaintTarget::pDest\fP"
+.PP
+.SS "virtual void const \fBAGRect2\fP& \fBAGPaintTarget::pDest\fP"
+.PP
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP& \fBAGPaintTarget::pSrc\fP"
+.PP
+.SS "virtual void const \fBAGRect2\fP const \fBAGRect2\fP const \fBAGColor\fP& pColor virtual MSTUB void const \fBAGRect2\fP const \fBAGRect2\fP& \fBpSrc\fP virtual MSTUB void const \fBAGColor\fP& c virtual MSTUB void const std::vector<std::pair<\fBAGRect2\fP,\fBAGRect2\fP> >& \fBAGPaintTarget::pSrcDestRects\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

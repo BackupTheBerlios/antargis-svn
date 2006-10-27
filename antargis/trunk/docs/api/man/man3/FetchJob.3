@@ -1,0 +1,74 @@
+.TH "FetchJob" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FetchJob \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <jobs.h>\fP
+.PP
+Inherits \fBMoveJob\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFetchJob\fP ()"
+.br
+.ti -1c
+.RI "\fBFetchJob\fP (int p, const \fBAGVector2\fP &pTarget, \fBAGString\fP what)"
+.br
+.ti -1c
+.RI "\fBFetchJob\fP (int p, \fBAntEntity\fP *pTarget, \fBAGString\fP what)"
+.br
+.ti -1c
+.RI "virtual \fB~FetchJob\fP ()"
+.br
+.ti -1c
+.RI "void \fBmove\fP (\fBAntEntity\fP *e, float ptime)"
+.br
+.ti -1c
+.RI "virtual void \fBjobFinished\fP (\fBAntEntity\fP *e)"
+.br
+.ti -1c
+.RI "virtual void \fBsaveXML\fP (\fBNode\fP &pNode) const "
+.br
+.ti -1c
+.RI "virtual void \fBloadXML\fP (const \fBNode\fP &pNode)"
+.br
+.ti -1c
+.RI "virtual \fBAGString\fP \fBxmlName\fP () const "
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "FetchJob::FetchJob ()"
+.PP
+.SS "FetchJob::FetchJob (int p, const \fBAGVector2\fP & pTarget, \fBAGString\fP what)"
+.PP
+.SS "FetchJob::FetchJob (int p, \fBAntEntity\fP * pTarget, \fBAGString\fP what)"
+.PP
+.SS "FetchJob::~FetchJob ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "void FetchJob::jobFinished (\fBAntEntity\fP * e)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.SS "void FetchJob::loadXML (const \fBNode\fP & pNode)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBMoveJob\fP.
+.SS "void FetchJob::move (\fBAntEntity\fP * e, float ptime)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBMoveJob\fP.
+.SS "void FetchJob::saveXML (\fBNode\fP & pNode) const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBMoveJob\fP.
+.SS "\fBAGString\fP FetchJob::xmlName () const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBMoveJob\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

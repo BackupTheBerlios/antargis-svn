@@ -1,0 +1,43 @@
+.TH "AntProjection" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AntProjection \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ant_projection.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAntProjection\fP (const \fBAGMatrix4\fP &pMv, const \fBAGMatrix4\fP &pPr, const \fBViewport\fP &pVp)"
+.br
+.ti -1c
+.RI "\fBAGVector3\fP \fBproject\fP (const \fBAGVector3\fP &p) const "
+.br
+.ti -1c
+.RI "\fBAGVector3\fP \fBunProject\fP (const \fBAGVector3\fP &p) const "
+.br
+.ti -1c
+.RI "\fBAntFrustum\fP \fBgetFrustum\fP () const "
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AntProjection::AntProjection (const \fBAGMatrix4\fP & pMv, const \fBAGMatrix4\fP & pPr, const \fBViewport\fP & pVp)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAntFrustum\fP AntProjection::getFrustum () const"
+.PP
+.SS "\fBAGVector3\fP AntProjection::project (const \fBAGVector3\fP & p) const"
+.PP
+.SS "\fBAGVector3\fP AntProjection::unProject (const \fBAGVector3\fP & p) const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

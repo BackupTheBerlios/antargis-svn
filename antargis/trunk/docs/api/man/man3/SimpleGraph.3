@@ -1,0 +1,207 @@
+.TH "SimpleGraph" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SimpleGraph \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <path.h>\fP
+.PP
+Inherits \fBAGRubyObject\fP.
+.PP
+Inherited by \fBDecimatedGraph\fP.
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::list< \fBEdge\fP * > \fBEdges\fP"
+.br
+.ti -1c
+.RI "typedef std::list< \fBNode\fP * > \fBNodes\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSimpleGraph\fP ()"
+.br
+.ti -1c
+.RI "\fBNode\fP * \fBaddNode\fP (const \fBAGVector2\fP &p)"
+.br
+.ti -1c
+.RI "\fBEdge\fP * \fBaddEdge\fP (\fBNode\fP *a, \fBNode\fP *b, float w0, float w1)"
+.br
+.ti -1c
+.RI "void \fBremoveEdge\fP (\fBEdge\fP *e)"
+.br
+.ti -1c
+.RI "void \fBremoveNode\fP (\fBNode\fP *n)"
+.br
+.ti -1c
+.RI "void \fBprint\fP ()"
+.br
+.ti -1c
+.RI "void \fBprintInfo\fP ()"
+.br
+.ti -1c
+.RI "\fB~SimpleGraph\fP ()"
+.br
+.ti -1c
+.RI "void \fBcheck\fP ()"
+.br
+.ti -1c
+.RI "\fBNode\fP * \fBfindNearest\fP (const \fBAGVector2\fP &p)"
+.br
+.ti -1c
+.RI "\fBAGVector2\fP \fBfindNearestVector\fP (const \fBAGVector2\fP &p)"
+.br
+.ti -1c
+.RI "float \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "size_t \fBsize\fP () const "
+.br
+.ti -1c
+.RI "void \fBpaint\fP (const \fBAGRect2\fP &r, \fBAGPaintTarget\fP &t, \fBHeuristic\fP &heuristic)"
+.br
+.ti -1c
+.RI "void \fBpaintNode\fP (const \fBAGRect2\fP &r, \fBAGPaintTarget\fP &t, const \fBAGVector2\fP &p, const \fBAGColor\fP &c)"
+.br
+.in -1c
+.SS "Protected Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::map< \fBAGVector2\fP, \fBNode\fP *, \fBAGVector2Sort\fP > \fBNodeMap\fP"
+.br
+.ti -1c
+.RI "typedef std::set< \fBNode\fP * > \fBNodeSet\fP"
+.br
+.ti -1c
+.RI "typedef std::set< \fBEdge\fP *, \fBEdgeSort\fP > \fBEdgeSet\fP"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNode\fP * \fBfindNode\fP (const \fBAGVector2\fP &p)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBNodeMap\fP \fBmNodeMap\fP"
+.br
+.ti -1c
+.RI "\fBNodeSet\fP \fBmNodes\fP"
+.br
+.ti -1c
+.RI "\fBEdgeSet\fP \fBmEdges\fP"
+.br
+.ti -1c
+.RI "float \fBmWidth\fP"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "\fBHeuristicFunction\fP * \fBcomputeHeuristic\fP (\fBSimpleGraph\fP *g)"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBEdge\fP"
+.br
+.ti -1c
+.RI "struct \fBEdgeSort\fP"
+.br
+.ti -1c
+.RI "struct \fBHalfEdge\fP"
+.br
+.ti -1c
+.RI "struct \fBNode\fP"
+.br
+.in -1c
+.SH "Member Typedef Documentation"
+.PP 
+.SS "typedef std::list<\fBEdge\fP*> \fBSimpleGraph::Edges\fP"
+.PP
+.SS "typedef std::set<\fBEdge\fP*,\fBEdgeSort\fP> \fBSimpleGraph::EdgeSet\fP\fC [protected]\fP"
+.PP
+.SS "typedef std::map<\fBAGVector2\fP,\fBNode\fP*,\fBAGVector2Sort\fP> \fBSimpleGraph::NodeMap\fP\fC [protected]\fP"
+.PP
+.SS "typedef std::list<\fBNode\fP*> \fBSimpleGraph::Nodes\fP"
+.PP
+.SS "typedef std::set<\fBNode\fP*> \fBSimpleGraph::NodeSet\fP\fC [protected]\fP"
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "SimpleGraph::SimpleGraph ()"
+.PP
+.SS "SimpleGraph::~SimpleGraph ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBSimpleGraph::Edge\fP * SimpleGraph::addEdge (\fBNode\fP * a, \fBNode\fP * b, float w0, float w1)"
+.PP
+\fBParameters:\fP
+.RS 4
+\fIw0\fP is weight of going from a to b 
+.br
+\fIw1\fP is weight of goinf from b to a 
+.RE
+.PP
+
+.SS "\fBSimpleGraph::Node\fP * SimpleGraph::addNode (const \fBAGVector2\fP & p)"
+.PP
+.SS "void SimpleGraph::check ()"
+.PP
+.SS "\fBSimpleGraph::Node\fP * SimpleGraph::findNearest (const \fBAGVector2\fP & p)"
+.PP
+.SS "\fBAGVector2\fP SimpleGraph::findNearestVector (const \fBAGVector2\fP & p)"
+.PP
+.SS "\fBSimpleGraph::Node\fP * SimpleGraph::findNode (const \fBAGVector2\fP & p)\fC [protected]\fP"
+.PP
+.SS "void SimpleGraph::paint (const \fBAGRect2\fP & r, \fBAGPaintTarget\fP & t, \fBHeuristic\fP & heuristic)"
+.PP
+.SS "void SimpleGraph::paintNode (const \fBAGRect2\fP & r, \fBAGPaintTarget\fP & t, const \fBAGVector2\fP & p, const \fBAGColor\fP & c)"
+.PP
+.SS "void SimpleGraph::print ()"
+.PP
+.SS "void SimpleGraph::printInfo ()"
+.PP
+.SS "void SimpleGraph::removeEdge (\fBEdge\fP * e)"
+.PP
+.SS "void SimpleGraph::removeNode (\fBNode\fP * n)"
+.PP
+.SS "size_t SimpleGraph::size () const"
+.PP
+.SS "float SimpleGraph::width () const"
+.PP
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "\fBHeuristicFunction\fP* computeHeuristic (\fBSimpleGraph\fP * g)\fC [friend]\fP"
+.PP
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBEdgeSet\fP \fBSimpleGraph::mEdges\fP\fC [protected]\fP"
+.PP
+.SS "\fBNodeMap\fP \fBSimpleGraph::mNodeMap\fP\fC [protected]\fP"
+.PP
+.SS "\fBNodeSet\fP \fBSimpleGraph::mNodes\fP\fC [protected]\fP"
+.PP
+.SS "float \fBSimpleGraph::mWidth\fP\fC [protected]\fP"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

@@ -1,0 +1,92 @@
+.TH "AGList" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGList \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_list.h>\fP
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBAGListIterator\fP< T > \fBiterator\fP"
+.br
+.ti -1c
+.RI "typedef \fBAGListIterator\fP< const T > \fBconst_iterator\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGList\fP ()"
+.br
+.ti -1c
+.RI "\fBAGList\fP (const \fBAGList\fP< T > &l)"
+.br
+.ti -1c
+.RI "\fBAGList\fP< T > & \fBoperator+=\fP (const \fBAGList\fP< T > &l)"
+.br
+.ti -1c
+.RI "\fBAGList\fP< T > \fBoperator+\fP (const \fBAGList\fP< T > &l) const "
+.br
+.ti -1c
+.RI "T \fBmax\fP () const "
+.br
+.ti -1c
+.RI "T \fBmin\fP () const "
+.br
+.ti -1c
+.RI "\fBiterator\fP \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "\fBconst_iterator\fP \fBbegin\fP () const "
+.br
+.ti -1c
+.RI "\fBiterator\fP \fBend\fP ()"
+.br
+.ti -1c
+.RI "\fBconst_iterator\fP \fBend\fP () const "
+.br
+.in -1c
+
+.SS "template<class T> class AGList< T >"
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<class T> typedef \fBAGListIterator\fP<const T> \fBAGList\fP< T >::\fBconst_iterator\fP"
+.PP
+.SS "template<class T> typedef \fBAGListIterator\fP<T> \fBAGList\fP< T >::\fBiterator\fP"
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T> \fBAGList\fP< T >::\fBAGList\fP ()"
+.PP
+.SS "template<class T> \fBAGList\fP< T >::\fBAGList\fP (const \fBAGList\fP< T > & l)"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T> \fBconst_iterator\fP \fBAGList\fP< T >::begin () const"
+.PP
+.SS "template<class T> \fBiterator\fP \fBAGList\fP< T >::begin ()"
+.PP
+.SS "template<class T> \fBconst_iterator\fP \fBAGList\fP< T >::end () const"
+.PP
+.SS "template<class T> \fBiterator\fP \fBAGList\fP< T >::end ()"
+.PP
+.SS "template<class T> T \fBAGList\fP< T >::max () const"
+.PP
+.SS "template<class T> T \fBAGList\fP< T >::min () const"
+.PP
+.SS "template<class T> \fBAGList\fP<T> \fBAGList\fP< T >::operator+ (const \fBAGList\fP< T > & l) const"
+.PP
+.SS "template<class T> \fBAGList\fP<T>& \fBAGList\fP< T >::operator+= (const \fBAGList\fP< T > & l)"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

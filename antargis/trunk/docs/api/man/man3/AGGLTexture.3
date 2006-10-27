@@ -1,0 +1,75 @@
+.TH "AGGLTexture" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AGGLTexture \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ag_gltexture.h>\fP
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAGGLTexture\fP (size_t W, size_t H, GLint format=GL_RGBA)"
+.br
+.ti -1c
+.RI "\fBAGGLTexture\fP (size_t W, size_t H, size_t \fBD\fP, GLint format=GL_RGBA)"
+.br
+.ti -1c
+.RI "\fB~AGGLTexture\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetSurface\fP (\fBAGInternalSurface\fP *pSurface, const \fBAGVector2\fP &offset=\fBAGVector2\fP(0, 0))"
+.br
+.ti -1c
+.RI "GLuint \fBid\fP ()"
+.br
+.RI "\fIgive gl-texture-id \fP"
+.ti -1c
+.RI "bool \fBis3d\fP () const "
+.br
+.ti -1c
+.RI "size_t \fBwidth\fP () const "
+.br
+.ti -1c
+.RI "size_t \fBheight\fP () const "
+.br
+.ti -1c
+.RI "size_t \fBdepth\fP () const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBAGGLTexture\fP is an internal class for managing opengl-textures. You shouldn't use it directly - all functionality is provided by \fBAGTexture\fP. 
+.PP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AGGLTexture::AGGLTexture (size_t W, size_t H, GLint format = \fCGL_RGBA\fP)"
+.PP
+.SS "AGGLTexture::AGGLTexture (size_t W, size_t H, size_t D, GLint format = \fCGL_RGBA\fP)"
+.PP
+.SS "AGGLTexture::~AGGLTexture ()"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "size_t AGGLTexture::depth () const"
+.PP
+.SS "size_t AGGLTexture::height () const"
+.PP
+.SS "GLuint AGGLTexture::id ()"
+.PP
+give gl-texture-id 
+.PP
+.SS "bool AGGLTexture::is3d () const"
+.PP
+.SS "void AGGLTexture::setSurface (\fBAGInternalSurface\fP * pSurface, const \fBAGVector2\fP & offset = \fC\fBAGVector2\fP(0, 0)\fP)"
+.PP
+.SS "size_t AGGLTexture::width () const"
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

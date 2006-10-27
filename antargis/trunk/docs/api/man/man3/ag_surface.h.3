@@ -1,0 +1,77 @@
+.TH "gui/src/ag_surface.h" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_surface.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <set>\fP
+.br
+\fC#include <list>\fP
+.br
+\fC#include <SDL.h>\fP
+.br
+\fC#include <GLee.h>\fP
+.br
+\fC#include <SDL_opengl.h>\fP
+.br
+\fC#include <GL/glu.h>\fP
+.br
+\fC#include 'ag_geometry.h'\fP
+.br
+\fC#include 'ag_painttarget.h'\fP
+.br
+\fC#include 'ag_gltexture.h'\fP
+.br
+\fC#include <ag_plugin.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBAGInternalSurface\fP"
+.br
+.ti -1c
+.RI "class \fBAGDecryptor\fP"
+.br
+.ti -1c
+.RI "class \fBAGDecryptorPlugin\fP"
+.br
+.ti -1c
+.RI "class \fBAGSurface\fP"
+.br
+.RI "\fIGeneric classes - for OpenGL and 'normal' SDL. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBbeginRender\fP ()"
+.br
+.ti -1c
+.RI "void \fBendRender\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisRendering\fP ()"
+.br
+.ti -1c
+.RI "void \fBAGFreeSurface\fP (SDL_Surface *s)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void AGFreeSurface (SDL_Surface * s)"
+.PP
+.SS "void beginRender ()"
+.PP
+.SS "void endRender ()"
+.PP
+.SS "bool isRendering ()"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

@@ -1,0 +1,76 @@
+.TH "gui/src/ag_debug.cc" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gui/src/ag_debug.cc \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ag_debug.h'\fP
+.br
+\fC#include 'ag_main.h'\fP
+.br
+\fC#include <fstream>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <ruby.h>\fP
+.br
+\fC#include <SDL.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetQuiet\fP ()"
+.br
+.ti -1c
+.RI "void \fBagRaise\fP (const std::string &s)"
+.br
+.ti -1c
+.RI "void \fBsetRubyRaising\fP (bool flag)"
+.br
+.ti -1c
+.RI "std::ofstream \fBdebugOFS\fP ('debug.txt')"
+.br
+.ti -1c
+.RI "std::ostream & \fBgetDebug\fP ()"
+.br
+.ti -1c
+.RI "void \fBagAssertGL\fP (std::string s)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "bool \fBquietLog\fP = false"
+.br
+.ti -1c
+.RI "static bool \fBgRubyRaising\fP = true"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void agAssertGL (std::string s)"
+.PP
+.SS "void agRaise (const std::string & s)"
+.PP
+.SS "std::ofstream debugOFS ('debug.txt')"
+.PP
+.SS "std::ostream& getDebug ()"
+.PP
+.SS "void setQuiet ()"
+.PP
+.SS "void setRubyRaising (bool flag)"
+.PP
+.SH "Variable Documentation"
+.PP 
+.SS "bool \fBgRubyRaising\fP = true\fC [static]\fP"
+.PP
+.SS "bool \fBquietLog\fP = false"
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.

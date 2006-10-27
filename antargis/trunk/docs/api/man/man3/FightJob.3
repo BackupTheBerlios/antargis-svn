@@ -1,0 +1,74 @@
+.TH "FightJob" 3 "27 Oct 2006" "Version 0.1.9" "Antargis" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FightJob \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <jobs.h>\fP
+.PP
+Inherits \fBJob\fP.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFightJob\fP ()"
+.br
+.ti -1c
+.RI "\fBFightJob\fP (int p, \fBAntEntity\fP *pTarget, float pDistance=1)"
+.br
+.ti -1c
+.RI "virtual \fB~FightJob\fP ()"
+.br
+.ti -1c
+.RI "void \fBmove\fP (\fBAntEntity\fP *e, float ptime)"
+.br
+.ti -1c
+.RI "virtual bool \fBneedsMorale\fP () const "
+.br
+.ti -1c
+.RI "\fBAntEntity\fP * \fBgetTarget\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBsaveXML\fP (\fBNode\fP &pNode) const "
+.br
+.ti -1c
+.RI "virtual void \fBloadXML\fP (const \fBNode\fP &pNode)"
+.br
+.ti -1c
+.RI "virtual \fBAGString\fP \fBxmlName\fP () const "
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "FightJob::FightJob ()"
+.PP
+.SS "FightJob::FightJob (int p, \fBAntEntity\fP * pTarget, float pDistance = \fC1\fP)"
+.PP
+.SS "FightJob::~FightJob ()\fC [virtual]\fP"
+.PP
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBAntEntity\fP* FightJob::getTarget ()\fC [inline]\fP"
+.PP
+.SS "void FightJob::loadXML (const \fBNode\fP & pNode)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.SS "void FightJob::move (\fBAntEntity\fP * e, float ptime)\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.SS "bool FightJob::needsMorale () const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.SS "void FightJob::saveXML (\fBNode\fP & pNode) const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+.SS "\fBAGString\fP FightJob::xmlName () const\fC [virtual]\fP"
+.PP
+Reimplemented from \fBJob\fP.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Antargis from the source code.
