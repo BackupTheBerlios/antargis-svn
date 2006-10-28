@@ -137,6 +137,10 @@
         </div>
       
         <div class="method-description">
+          <p>
+initialize any information for your AI here, but beware that this is called
+on reload, too. FIXME: loading and saving of AI-members!
+</p>
         </div>
       </div>
 
@@ -153,6 +157,11 @@
         </div>
       
         <div class="method-description">
+          <p>
+in each frame this function is called with the time that&#8217;s passed.
+Don&#8216;t use this function if you don&#8217;t need to, because this hits
+performance!
+</p>
         </div>
       </div>
 
@@ -167,6 +176,9 @@
         </div>
       
         <div class="method-description">
+          <p>
+the given hero is attacked by the given enemy
+</p>
         </div>
       </div>
 
@@ -181,6 +193,9 @@
         </div>
       
         <div class="method-description">
+          <p>
+the given hero has no job currently
+</p>
         </div>
       </div>
 
@@ -195,6 +210,11 @@
         </div>
       
         <div class="method-description">
+          <p>
+This an initializing event - this called only on new creation within a
+level - so it won&#8217;t be called when loading a level. You can savely
+initialize your values here.
+</p>
         </div>
       </div>
 
@@ -204,11 +224,15 @@
         <div class="method-heading">
           <a href="AntBasicAI.src/M000656.html" target="Code" class="method-signature"
             onclick="popupCode('AntBasicAI.src/M000656.html');return false;">
-          <span class="method-name">eventTriggerHit</span><span class="method-args">(heroId,triggerName)</span>
+          <span class="method-name">eventTriggerHit</span><span class="method-args">(hero,triggerName)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+your hero has hit a trigger - this SHOULDN&#8216;T really BE USED, because
+triggers are only reasonable within level-scripting (?)
+</p>
         </div>
       </div>
 

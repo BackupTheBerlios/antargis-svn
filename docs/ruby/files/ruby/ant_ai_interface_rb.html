@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Thu Oct 26 15:46:00 CEST 2006</td>
+      <td>Sat Oct 28 17:18:30 CEST 2006</td>
     </tr>
     </table>
   </div>
@@ -69,10 +69,39 @@
   <div id="contextContent">
 
     <div id="description">
-      <h2>File overview</h2>
+      <h2>AI Scripting Overview</h2>
 <p>
-This file contains all the modules and classes used for the scripting
-interface
+BoA&#8217;s AI is completely written in Ruby. This way it&#8217;s very
+simple to be exchanged or extended. For simplicity reasons there&#8217;s a
+whole interface only for writing AIs. It gives the AI all the information
+it needs to fulfill its job (and no more). This way it should be pretty
+easy to see that it doesn&#8217;t do any cheating.
+</p>
+<p>
+The main class of the interface is <a
+href="../../classes/AIInterface.html">AIInterface</a>. This gives you
+access to your player (the heroes, buildings and indirectly to their
+minions). You won&#8217;t have any chance to access any game-object
+directly. Instead of this anything is wrapped within some simple functions.
+</p>
+<h2>Current approach</h2>
+<p>
+On top of this interface you can build up any AI you like. The current one
+is based upon some architecture I copied from Glest (<a
+href="http://www.glest.org">www.glest.org</a>). The idea is that you set up
+some rules, which are then run down from the first one to the last. The
+first rule whose condition is true will be applied. This is very simple and
+doesn&#8217;t include any strategies or the like. So these have to be
+included later on.
+</p>
+<p>
+In <a href="ant_ai_rules_rb.html">files/ruby/ant_ai_rules_rb.html</a> the
+actual rules are defined. These are parted into a condition and an action.
+After implementing some of these rules on top of the already mentioned <a
+href="../../classes/AIInterface.html">AIInterface</a>, you can write your
+own AI. You have derive it from <a
+href="../../classes/AntBasicAI.html">AntBasicAI</a>, which is defined in <a
+href="ant_ai_rb.html">files/ruby/ant_ai_rb.html</a> .
 </p>
 
     </div>

@@ -13,8 +13,153 @@
 			gather information about the world and other entities. 
 		</p>
 		<p>
-			The Scripting-API can be found at
+			The Scripting-API can be found at <a href="../ruby/files/ruby/ant_ai_interface_rb.html">AIInterface</a>. As stated there
+			the current approach is devided into these parts:
 		</p>
-	
+		<ol>
+			<li>(BoA game-logic)</li>
+			<li>AI scripting interface</li>
+			<li>AI-conditions and AI-actions, which together build up the rules</li>
+			<li>a derived class from AntBasicAI, that uses these rules</li>
+		</ol>
+		<p>
+			This is a pretty simple approach and should be exchanged with something better in the future - like strategies and so on.
+			For a start we'll begin with this.
+		</p>
+	<h2>Building up a new AI</h2>
+		<p>
+			Ok, at first we want to have a look at the AntBasicAI-class. This is were we start from. Let's add our own AI.
+		</p>
+		<pre>
+class AntMyAI&lt;AntBasicAI
+	def eventHeroWithoutJob(hero)
+		hero.moveTo(getSomePlace)
+	end
+	private
+	def getSomePlace
+		AGVector2.new(......)
+	end
+end
+</pre>
+		<p>
+			Ok, this looks pretty complicated, but it isn't. We just derived a new class named <strong>AntMyAI</strong> from AntBasicAI and added
+			an event-handler for the case any of our heroes has no job. In this case we want to send him somewhere. The position is
+			not yet defined anyhow, because this should just be an example. What you can see here is that there are some event-handling functions pre-defined,
+			like eventHeroWithoutJob, eventHeroAttacked - go to <a href="../ruby/classes/AntBasicAI.html">AntBasicAI</a> for more.
+			On the other hand there are some actions you can assign to the given hero (here: moveTo). You can look up these actions in
+			<a href="../ruby/classes/AIMyHero.html">AIMyHero</a>.  
+		</p>
+		<p>
+			This approach is too simple to do a decent AI. So we'll have to get in some more abstraction. This is were the rules come into play.
+			A rule is built up out of a condition and an action.
+		</p>
+		<pre>
+class AIEveryNthCondition&lt;AICondition
+	def initialize(nth)
+		@nth=nth
+		@v=0
+	end
+	def value(hero)
+		@v+=1
+		@v%=@nth
+		return @v==0?1:0
+	end
+end
+</pre>
+		<p>
+			A pretty dumb condition is this one. Every nth time it's called it's true. So the corresponding action is executed every nth time. A more reasonable
+			condition is to check if the hero has enough food:
+		</p>
+		<pre>
+class AIConditionFoodLow&lt;AICondition
+	def value(hero)
+		if hero.resources("food")&lt;5
+			if hero.findNearResource("food").nil?
+				if hero.resources("food")&lt;1
+					return 1
+				end
+				return 0
+			end
+			return 1
+		else
+			return 0
+		end
+	end
+end
+
+</pre>
+		<p>
+			This already checks if there's any food in the vicinity. Ok, for now we're finished with conditions. Let's head on for actions. These are event simpler to do:
+		</p>
+<pre>
+class AIRestAction&lt;AIAction
+	def execute(hero)
+		hero.rest(1)
+	end
+end
+</pre>
+		<p>
+			This action lets the hero rest for about a second. This not quiet a decent thing to do, but it shows how simple actions are done. They're derived
+			from AIAction and have to reimplement the execute function. Within this you can do a lot of things like finding an opponent for fighting.
+		</p>
+		<p>
+			As we have some actions and conditions, we build up some rules of out them.
+		</p>
+<pre>
+class AntAttackAI&lt;AntBasicAI
+	def initialize(interface)
+		super
+		# add rules
+		@rules=[]
+		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIRestAction.new,interface))
+		@rules.push(AIRule.new(AIConditionFoodLow.new,AIGatherFoodAction.new,interface))
+		@rules.push(AIRule.new(AIEveryNthCondition.new(2),AIAttackAction.new,interface))
+		@rules.push(AIRule.new(AICondition.new,AIRestAction.new,interface)) # dummy rule - always rest
+	end
+
+	def eventHeroWithoutJob(hero)
+		@rules.each{|r|
+			if r.value(hero)>0
+				puts "GO"
+				r.execute(hero)
+				return
+			end
+		}
+	end
+end
+</pre>
+		<p>
+			This example shows a pretty simple possibility for these rules. We build up an array out of 4 rules and each time eventHeroWithJob is called, they're
+			checked from the first to the last. The first one with condition==1 will be applied. That's it for now with the current AI-implementation.
+		</p>
+ 	<h3>Include your AI into a level</h3>
+		<p>
+			Let's assume you have painted a simple level and already placed and named some heroes. Let's further assume the (2) heroes are "Sepp" and "Depp".
+			Normally you'd name the players after the heroes. But now we name them differently ("Seppel" and "Deppel") so you can see the differences. Go on and open the xml-level-file (.antvl). Somewhere in the file there is a tag like this: 
+		</p>
+<pre>
+  &lt;antHero aggression="1" appearance="hero" birthday="-2049.1202086714" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="5" mode="" morale="1" name="Sepp" onGround="true" onWater="false"&gt;
+    &lt;position x="176.315" y="164.746" z="1"/&gt;
+    &lt;resource/&gt;
+  &lt;/antHero&gt;
+</pre>
+		<p>
+			As you can see the name of the hero is "Sepp". Now we add a human player that's named Seppel. Put this simply at the end of the XML-file. directly before the close-tag of antargisLevel.
+		</p>
+<pre>
+  &lt;humanPlayer name="Seppel"&gt;
+    &lt;hero name="Sepp"/&gt;
+  &lt;/humanPlayer&gt;
+</pre>
+	Next thing you do is adding a entry for you new build AI, that's called AntMyAI.
+<pre>
+  &lt;antMyAI name="Deppel"&gt;
+    &lt;hero name="Depp"/&gt;
+  &lt;/antMyAI&gt;
+&lt;/antargisLevel&gt;
+</pre>
+	Ok, that's it - go and test your AI.
+
+
 </body>
 </html>

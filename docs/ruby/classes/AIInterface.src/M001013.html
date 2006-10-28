@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File ruby/ant_ai_interface.rb, line 237</span>
+  <pre><span class="ruby-comment cmt"># File ruby/ant_ai_interface.rb, line 255</span>
         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enemyPlayers</span>
                 <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">players</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span><span class="ruby-identifier">p!</span>=<span class="ruby-ivar">@player</span>}.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span><span class="ruby-constant">AIEnemyPlayer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">p</span>)}
         <span class="ruby-keyword kw">end</span></pre>
