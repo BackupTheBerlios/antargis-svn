@@ -134,7 +134,32 @@ end
 		</p>
  	<h3>Include your AI into a level</h3>
 		<p>
-			
+			Let's assume you have painted a simple level and already placed and named some heroes. Let's further assume the (2) heroes are "Sepp" and "Depp".
+			Normally you'd name the players after the heroes. But now we name them differently ("Seppel" and "Deppel") so you can see the differences. Go on and open the xml-level-file (.antvl). Somewhere in the file there is a tag like this: 
 		</p>
+<pre>
+  &lt;antHero aggression="1" appearance="hero" birthday="-2049.1202086714" energy="1" exp="0" food="1" healSpeed="0.07" id="0" learnAmount="0.05" men="5" mode="" morale="1" name="Sepp" onGround="true" onWater="false"&gt;
+    &lt;position x="176.315" y="164.746" z="1"/&gt;
+    &lt;resource/&gt;
+  &lt;/antHero&gt;
+</pre>
+		<p>
+			As you can see the name of the hero is "Sepp". Now we add a human player that's named Seppel. Put this simply at the end of the XML-file. directly before the close-tag of antargisLevel.
+		</p>
+<pre>
+  &lt;humanPlayer name="Seppel"&gt;
+    &lt;hero name="Sepp"/&gt;
+  &lt;/humanPlayer&gt;
+</pre>
+	Next thing you do is adding a entry for you new build AI, that's called AntMyAI.
+<pre>
+  &lt;antMyAI name="Deppel"&gt;
+    &lt;hero name="Depp"/&gt;
+  &lt;/antMyAI&gt;
+&lt;/antargisLevel&gt;
+</pre>
+	Ok, that's it - go and test your AI.
+
+
 </body>
 </html>
