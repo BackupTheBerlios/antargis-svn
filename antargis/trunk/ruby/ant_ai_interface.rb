@@ -18,8 +18,26 @@
 # License along with this program.
 #++
 #
-# == File overview
-# This file contains all the modules and classes used for the scripting interface
+# == AI Scripting Overview
+# BoA's AI is completely written in Ruby. This way it's very simple to be exchanged or extended.
+# For simplicity reasons there's a whole interface only for writing AIs. It gives the AI 
+# all the information it needs to fulfill its job (and no more).
+# This way it should be pretty easy to see that it doesn't do any cheating.
+#
+# The main class of the interface is AIInterface. This gives you access to your player (the heroes, 
+# buildings and indirectly to their minions). You won't have any chance to access any game-object directly.
+# Instead of this anything is wrapped within some simple functions.
+#
+# == Current approach
+#
+# On top of this interface you can build up any AI you like. The current one is based upon some architecture
+# I copied from Glest (www.glest.org). The idea is that you set up some rules, which are then run down from
+# the first one to the last. The first rule whose condition is true will be applied. This is very simple
+# and doesn't include any strategies or the like. So these have to be included later on.
+#
+# In link:files/ruby/ant_ai_rules_rb.html the actual rules are defined. These are parted into a condition
+# and an action. After implementing some of these rules on top of the already mentioned AIInterface, you
+# can write your own AI. You have derive it from AntBasicAI, which is defined in link:files/ruby/ant_ai_rb.html . 
 
 
 #

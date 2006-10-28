@@ -1,4 +1,4 @@
-#
+#--
 # Copyright (c) 2006 by David Kamphausen. All rights reserved.
 #
 # ant_ai.rb
@@ -16,7 +16,14 @@
 #
 # You should have received a copy of the GNU General Public
 # License along with this program.
+#++
+# == BoA AI
+# The AI within BoA is based upon the AntBasicAI class. So every AI you write has to be derived from this.
+# Within such an implementation you're allowed to use an interface, which is defined in AIInterface. For
+# more information on this refer to link:files/ruby/ant_ai_interface_rb.html.
 #
+# For more detailed information on how to program an AI go to  link:files/ruby/ant_ai_interface_rb.html or to 
+# link:../tutorials/ai_scripting.html
 
 require 'ant_ai_interface.rb'
 require 'ant_ai_rules.rb'
@@ -25,17 +32,27 @@ require 'ant_ai_player.rb'
 class AntBasicAI
 	attr_reader :interface
 
+	# initialize any information for your AI here, but beware that this is called on reload, too.
+	# FIXME: loading and saving of AI-members!
 	def initialize(interface)
 		@interface=interface
 	end
+	# This an initializing event - this called only on new creation within a level - so it won't be
+	# called when loading a level. You can savely initialize your values here.
 	def eventInit
 	end
+	# the given hero has no job currently 
 	def eventHeroWithoutJob(hero)
 	end
+	# the given hero is attacked by the given enemy
 	def eventHeroAttacked(hero,enemy)
 	end
-	def eventTriggerHit(heroId,triggerName)
+	# your hero has hit a trigger - this SHOULDN'T really BE USED, because triggers are only
+	# reasonable within level-scripting (?) 
+	def eventTriggerHit(hero,triggerName)
 	end
+	# in each frame this function is called with the time that's passed. Don't use this function if you
+	# don't need to, because this hits performance!
 	def eventFrame(time)
 	end
 end
