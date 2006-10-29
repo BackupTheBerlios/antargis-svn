@@ -1,0 +1,43 @@
+body
+{
+	font-family:Arial,Helvetica;
+	background-color:#FFEEAA;
+}
+
+h1
+{
+	font-family:Times;
+	border-bottom-style:solid;
+	border-bottom-width:2px;
+	border-bottom-color:#FFDD99;
+	color:#553300;
+	padding-left:10px;
+	padding-top:5px;
+}
+
+a:visited
+{
+	color:#0000FF;
+}
+
+h1,h2,h3
+{
+	padding-left:10px;
+}
+
+h2,h3
+{
+	background-color:#FFDD88;
+}
+
+p
+{
+	padding-left:20px;
+}
+
+pre
+{
+	background-color:#FFFFEE;
+	padding-left:10px;
+	margin-left:20px;
+}
