@@ -33,6 +33,7 @@ h2,h3
 p
 {
 	padding-left:20px;
+	max-width:50em;
 }
 
 pre
@@ -40,4 +41,9 @@ pre
 	background-color:#FFFFEE;
 	padding-left:10px;
 	margin-left:20px;
+}
+
+body img
+{
+	margin-left:40px;
 }
