@@ -18,6 +18,9 @@ function getScreenies()
 		array("Version 0.1.9 (06-09-20)",array(
 			new Screenshot("screenies/village","You can build your own village now."),
 			new Screenshot("screenies/new_terrain","Some new terrain textures."),
+			new Screenshot("screenies/Ovejas","What happens when there is no wolf to eat the sheeps?"),
+			new Screenshot("screenies/Antargis","A peaceful village in a peaceful island"),
+			new Screenshot("screenies/Antargis2","No comment"),
 		)),
 
 		array("Version 0.1.2 (06-05-16)",array(
