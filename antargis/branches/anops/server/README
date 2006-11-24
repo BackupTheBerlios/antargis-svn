@@ -1,0 +1,6 @@
+These are some basic ideas.
+------------------------------
+1) all randomizations will be done by some special random-number-generator, that goes like this seed:=md5(seed); return needed-bits-of(seed).
+	The seed is stored for each entity and is sent within the level-data on login. This way we don't have to care about many messages. But maybe we need to
+	do some time-syncs.
+

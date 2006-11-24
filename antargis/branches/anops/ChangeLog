@@ -1,0 +1,7 @@
+for 0.1.3:
+* moving with left-mouse-button
+* FBOs
+
+2006-04-05
+* all entities but men and heroes have no hunger
+* check that after Boss::removeMan man is removed from AntHLMoveJob
