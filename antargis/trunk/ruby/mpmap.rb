@@ -9,8 +9,8 @@
 require 'map.rb'
 
 class AntMpMap<AntRubyMap
-	def initialize(c,pScene,w,h,playerName="Rowen")
-		super(pScene,w,h,playerName)
+	def initialize(c,app,pScene,w,h,playerName="Rowen")
+		super(app,pScene,w,h,playerName)
 		@connection=c
 	end
 

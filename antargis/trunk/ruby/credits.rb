@@ -52,18 +52,14 @@ class AntTicker<AGWidget
 end
 
 class AntTickerCreator<AGLayoutCreator
-	def initialize
-		super("antTicker")
-	
-	end
 	def create(p,r,n)
 		t=AntTicker.new(p,r,n.get("text"))
 		t.setNFont(getTheme.getFont(n.get("nfont")))
 		t.setCFont(getTheme.getFont(n.get("cfont")))
-		return t
+		setResult t
 	end
-	@@antTickerCreator=AntTickerCreator.new
 end
+getLayoutFactory.addCreator("antTicker",AntTickerCreator.new)
 
 
 if ENV["_"]=~/credits.rb/

@@ -61,31 +61,6 @@ void AGRubyObject::clear()
   CTRACE;
 }
 
-size_t disableDepth=0;
-
-void AGRubyObject::disableGC()
-{
-  ::disableGC();
-}
-void AGRubyObject::enableGC()
-{
-  ::enableGC();
-}
-
-void enableGC()
-{
-  disableDepth--;
-  if(disableDepth==0)
-    rb_gc_enable();
-}
-void disableGC()
-{
-  rb_gc_disable();
-  disableDepth++;
-}
-
-
-
 /// this is the marking function, that gets called by ruby
 /// it handles all the AGRubyObjects
 void general_markfunc(void *ptr)

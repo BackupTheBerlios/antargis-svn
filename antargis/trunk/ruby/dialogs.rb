@@ -551,9 +551,6 @@ end
 
 # the creator class for a AGBar
 class AGBarCreator<AGLayoutCreator
-	def initialize
-		super("bar")
-	end
 	# overrides the AGLayoutCreator function
 	# * p Widget parent
 	# * r client rectangle
@@ -562,10 +559,10 @@ class AGBarCreator<AGLayoutCreator
 		c=AGColor.new(n.get("color"))
 		bc=AGColor.new(n.get("bgcolor"))
 		w=AGBar.new(p,r,c,bc)
-		return w
+		setResult(w)
 	end
 end
-$agBarCreator=AGBarCreator.new  # register creator class
+getLayoutFactory.addCreator("bar",AGBarCreator.new)
 
 
 # a widget for displaying the "loading..." screen

@@ -121,7 +121,7 @@ class CutSceneDisplay<AGApplication
 		@text=_(text)
 		@ctext=""
 		@time=0
-		setTextForReal("")
+		setTextForReal(_(""))
 	end
 	
 	def eventFrame(t)
@@ -129,7 +129,11 @@ class CutSceneDisplay<AGApplication
 		@time+=t
 		old=@ctext
 		while @time>@speed
-			len=[@ctext.length+1,@text.length].min
+			len=[@ctext.length+1,@text.length].min.to_i
+			puts len,len.class,@ctext,@ctext.class,@text,@text.class
+	
+			# FIXME: map [] to substr
+
 			@ctext=@text[0..(len-1)]
 			if old==@ctext
 				break

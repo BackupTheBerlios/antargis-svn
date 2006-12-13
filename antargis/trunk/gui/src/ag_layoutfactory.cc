@@ -22,15 +22,34 @@
 #include "ag_debug.h"
 #include "ag_kill.h"
 
-AGLayoutCreator::AGLayoutCreator(const AGString &pName)
+AGLayoutCreator::AGLayoutCreator():mWidget(0)
 {
-  getLayoutFactory()->addCreator(pName,this);
 }
 
-AGWidget *AGLayoutCreator::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+void AGLayoutCreator::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
 {
-  return 0;
 }
+
+void AGLayoutCreator::setResult(AGWidget *pWidget)
+{
+  mWidget=pWidget;
+}
+AGWidget *AGLayoutCreator::getResult()
+{
+  return mWidget;
+}
+
+void AGLayoutCreator::clearResult()
+{
+  mWidget=0;
+}
+
+void AGLayoutCreator::mark()
+{
+  if(mWidget)
+    markObject(mWidget);
+}
+
 
 
 AGLayoutFactory::AGLayoutFactory()
@@ -49,8 +68,17 @@ void AGLayoutFactory::addCreator(const AGString &pName,AGLayoutCreator *creator)
 
 AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
 {
-  if(mCreators[pNode.getName()])
-    return mCreators[pNode.getName()]->create(pParent,pRect,pNode);
+  AGLayoutCreator *creator=mCreators[pNode.getName()];
+
+  if(creator)
+    {
+      AGWidget *w;
+      creator->create(pParent,pRect,pNode);
+      w=creator->getResult();
+      creator->clearResult();
+
+      return w;
+    }
   std::string name;
   if(name!="" && name!="colsize" && name!="rowsize")
     {

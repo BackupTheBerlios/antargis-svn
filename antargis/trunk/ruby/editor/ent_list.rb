@@ -52,7 +52,7 @@ class AntEntListWidget<AGWidget
 			w=AGRadio.new(table,AGRect2.new(0,0,40,40))
 			@wptrs[c]=w
 			w.setName(n)
-			w.setTooltip(n)
+			w.setTooltip(_(n))
 			addHandler(w,:sigClick,:eventSelected)
 		
 			fn="data/gui/editor/entities/#{n}.png"

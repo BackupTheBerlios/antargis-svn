@@ -53,9 +53,6 @@ class AGEXPORT AGRubyObject
   virtual void mark();
   void markObject(AGRubyObject *o);
 
-  void disableGC();
-  void enableGC();
-
 #endif
  public:
 #ifndef SWIG
@@ -73,10 +70,5 @@ class AGEXPORT AGRubyObject
 
 void general_markfunc(void *ptr);
 bool saveDelete(AGRubyObject *o);
-
-
-// use with care! there's a counter back there
-void enableGC();
-void disableGC();
 
 #endif

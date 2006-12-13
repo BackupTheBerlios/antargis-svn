@@ -23,13 +23,13 @@ class AntEditPropDialog<AntDialog
 		@ent=ent
 		menCountW=toAGEdit(getChild("MenCount"))
 		nameW=toAGEdit(getChild("AntName"))
-		menCountW.setText(@ent.getXMLProp("men"))
-		nameW.setText(@ent.getName)
+		menCountW.setText(AGStringUtf8.new(@ent.getXMLProp("men")))
+		nameW.setText(AGStringUtf8.new(@ent.getName))
 		
 		getChild("NpcTypeView").hide if @ent.class!=AntNPC
 		if @ent.class==AntNPC
 			@npcTypeW=toAGEdit(getChild("NpcType"))
-			@npcTypeW.setText(@ent.npcType)
+			@npcTypeW.setText(AGStringUtf8.new(@ent.npcType))
 		end
 
 		# init player-list
@@ -38,7 +38,7 @@ class AntEditPropDialog<AntDialog
 		playernames=["NONE"]
 		playernames+=players.collect{|p|p.getName} if ent.is_a?(AntBoss)
 		playernames.each{|n|
-			plist.insertItem(n,n)
+			plist.insertItem(n,AGStringUtf8.new(n))
 		}
 		if ent.is_a?(AntBoss)
 			if ent.getPlayer
@@ -51,10 +51,10 @@ class AntEditPropDialog<AntDialog
 	def eventOk(e)
 		menCountW=toAGEdit(getChild("MenCount"))
 		nameW=toAGEdit(getChild("AntName"))
-		@ent.setName(nameW.getText)
-		@ent.setXMLProp("men",menCountW.getText)
+		@ent.setName(nameW.getText.to_s)
+		@ent.setXMLProp("men",menCountW.getText.to_s)
 		close
-		@ent.npcType=@npcTypeW.getText if @ent.class==AntNPC
+		@ent.npcType=@npcTypeW.getText.to_s if @ent.class==AntNPC
 		@ent.setupMesh
 		if @ent.is_a?(AntBoss)
 			name=getChild("Player").getSelected
@@ -86,13 +86,13 @@ class AntEditGeneratorDialog<AntDialog
 		y=0
 		#table.arrange
 		params.params.each{|p|
-			n=AGText.new(table,AGRect2.new(0,0,80,20),p.to_s+":",AGFont.new("FreeSans.ttf",20))
+			n=AGText.new(table,AGRect2.new(0,0,80,20),AGStringUtf8.new(p.to_s+":"),AGFont.new("FreeSans.ttf",20))
 			#n.setAlign(AGText::RIGHT)
 			#n=AGButton.new(table,AGRect2.new(0,0,80,20),"huhuhu")
 			table.addChild(0,y,n)
 			e=AGEdit.new(table,AGRect2.new(0,0,80,20))
 			edits[p]=e
-			e.setText(eval("params.#{p}").to_s)
+			e.setText(AGStringUtf8.new(eval("params.#{p}").to_s))
 			table.addChild(1,y,e)
 
 			y+=1
@@ -195,7 +195,7 @@ private
 		l=getChild("playerType")
 		l.clearList
 		@types.each{|t|
-			l.insertItem(t.to_s,t.to_s)
+			l.insertItem(t.to_s,AGStringUtf8.new(t.to_s))
 		}
 	end
 end

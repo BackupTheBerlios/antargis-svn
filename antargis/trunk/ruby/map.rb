@@ -22,7 +22,7 @@
 
 require 'ant_player.rb'
 require 'ant_trigger.rb'
-require 'level.rb'
+require 'ant_level.rb'
 
 require 'ant_ai.rb'
 
@@ -59,9 +59,10 @@ class AntRubyMap<AntMap
 	attr_accessor :pause,:players
 	attr_reader :path
 
-	def initialize(pScene,w,h,playerName="Rowen")
+	def initialize(app,pScene,w,h,playerName="Rowen")
 		super(pScene,w,h)
 		@pause=false # is game paused
+		@app=app
 
 		@@systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
 		@curTime=0.0     # curTime holds the current "date" of the world; the age of entities is measures by this
@@ -128,13 +129,13 @@ class AntRubyMap<AntMap
 		if @script
 			@script.eventHeroDied(ent)
 		end
-		$app and $app.setupHeroDisplay
+		@app and @app.setupHeroDisplay
 	end
 	def eventOwnerChanged(ent)
 		if @script
 			@script.eventOwnerChanged(ent)
 		end
-		$app and $app.setupHeroDisplay
+		@app and @app.setupHeroDisplay
 	end
 	def eventHLJobFinished(hero,job)
 		if @script
@@ -288,7 +289,10 @@ class AntRubyMap<AntMap
 		if node.getName=="trigger" then
 			@triggers.push(Trigger.new(node))
 		end
-		return e
+		if e
+			e.loadXML(node)
+			insertEntity(e)
+		end
 	end
 	
 	def loadXML(n)
@@ -326,10 +330,13 @@ class AntRubyMap<AntMap
 			eval(c)
 			cl="#{levelName}::"+n.get("scriptclass")
 			puts "class #{cl}"
-			@script=eval(cl).new(self)
-	
-			puts @script.class
-			#raise 1
+			pClass=eval(cl)
+			puts "pClass:",pClass
+			if pClass.ancestors.member?(AntLevelScript)
+				interface=AntLevelInterface.new(self,@app)
+				@script=pClass.new(interface)
+				puts @script.class
+			end
 	
 		end
 		if @script
@@ -446,7 +453,7 @@ class AntRubyMap<AntMap
 	def trigger(hero,t)
 		done=false
 		if @script
-			if @script.eventTrigger(hero,t)
+			if @script.eventTrigger(AntLevelHero.new(hero),t)
 				done=true
 			end
 		end
@@ -457,7 +464,7 @@ class AntRubyMap<AntMap
 
 	def mapChanged
 		super
-		$app.setupNames
+		@app.setupNames
 	end
 
 private	

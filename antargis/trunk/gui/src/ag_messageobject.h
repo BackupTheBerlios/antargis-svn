@@ -51,7 +51,7 @@ class AGSignal;
 class AGEvent
 {
  public:
-  AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event *pEvent=0);
+  AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &pEvent=NullEvent);
   virtual ~AGEvent();
 
   AGListener *getCaller() const;
@@ -65,7 +65,7 @@ class AGEvent
   Uint16 getUnicode() const;
   int getButton() const;
 
-  const SDL_Event *get() const;
+  const SDL_Event &get() const;
 
   bool isSDLEvent() const;
 
@@ -78,9 +78,12 @@ class AGEvent
   AGListener *mCaller;
   AGString mName;
 
-  const SDL_Event *mEvent;
+  SDL_Event mEvent;
 
   AGVector2 mVector;
+
+ protected:
+  static SDL_Event NullEvent;
 };
 
 
@@ -225,7 +228,7 @@ class AGMessageObject:public AGListener
 };
 
 
-AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event*s);
+AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &s);
 
 /**
  */   
@@ -239,5 +242,8 @@ AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))
 
 AGString toString(SDL_Event *pEvent);
 SDL_Event *toSDLEvent(const AGString &p);
+
+bool eventOk(const SDL_Event &pEvent);
+void resetEvent(SDL_Event &pEvent);
 
 #endif

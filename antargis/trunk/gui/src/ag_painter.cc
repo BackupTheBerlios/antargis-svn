@@ -434,7 +434,7 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 void AGPainter::renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AGFont &f)
 {
   STACKTRACE;
-  AGTexture *t=AGFontEngine::renderText(0,0,pText,f);
+  AGTexture *t=getFontEngine()->renderText(0,0,pText,f);
   if(t)
     blit(*t,AGRect2(p[0],p[1],t->getSurfaceWidth(),t->getSurfaceHeight()));
 

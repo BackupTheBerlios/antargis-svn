@@ -23,8 +23,11 @@
 #include "ag_main.h"
 #include "ag_stringstream.h"
 
+
+SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
+
 // AGEvent
-AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event *e):mCaller(pCaller),mName(pName),mEvent(e)
+AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e)
 {
 }
 AGEvent::~AGEvent()
@@ -63,7 +66,7 @@ void AGEvent::setName(const AGString &n)
 
 bool AGEvent::isSDLEvent() const
 {
-  return mEvent;
+  return eventOk(mEvent);
 }
 
 
@@ -75,26 +78,26 @@ AGListener *AGEvent::getCaller() const
 
 // AGSDLEvent
 
-const SDL_Event *AGEvent::get() const
+const SDL_Event &AGEvent::get() const
 {
-  assert(mEvent);
+  assert(eventOk(mEvent));
   return mEvent;
 }
 
 AGVector2 AGEvent::getMousePosition() const
 {
-  assert(mEvent);
+  assert(eventOk(mEvent));
   AGVector2 p;
-  switch(mEvent->type) {
+  switch(mEvent.type) {
   case SDL_MOUSEMOTION:
-    p[0]=mEvent->motion.x*getMain()->width()/getMain()->realWidth();
-    p[1]=mEvent->motion.y*getMain()->height()/getMain()->realHeight();
+    p[0]=mEvent.motion.x*getMain()->width()/getMain()->realWidth();
+    p[1]=mEvent.motion.y*getMain()->height()/getMain()->realHeight();
     break;
     
   case SDL_MOUSEBUTTONUP:
   case SDL_MOUSEBUTTONDOWN:
-    p[0]=mEvent->button.x*getMain()->width()/getMain()->realWidth();
-    p[1]=mEvent->button.y*getMain()->height()/getMain()->realHeight();
+    p[0]=mEvent.button.x*getMain()->width()/getMain()->realWidth();
+    p[1]=mEvent.button.y*getMain()->height()/getMain()->realHeight();
     break;
     
   }
@@ -103,34 +106,34 @@ AGVector2 AGEvent::getMousePosition() const
 
 Uint16 AGEvent::getUnicode() const
 {
-  assert(mEvent);
-  return mEvent->key.keysym.unicode;
+  assert(eventOk(mEvent));
+  return mEvent.key.keysym.unicode;
 }
 
 
 SDLKey AGEvent::getKey() const
 {
-  assert(mEvent);
-  return mEvent->key.keysym.sym;
+  assert(eventOk(mEvent));
+  return mEvent.key.keysym.sym;
 }
 
 SDLMod AGEvent::getMod() const
 {
-  assert(mEvent);
-  return mEvent->key.keysym.mod;
+  assert(eventOk(mEvent));
+  return mEvent.key.keysym.mod;
 }
 
 int AGEvent::getButton() const
 {
-  assert(mEvent);
-  switch(mEvent->type) {
+  assert(eventOk(mEvent));
+  switch(mEvent.type) {
   case SDL_MOUSEMOTION:
-    return mEvent->motion.state;
+    return mEvent.motion.state;
     break;
     
   case SDL_MOUSEBUTTONUP:
   case SDL_MOUSEBUTTONDOWN:
-    return mEvent->button.button;
+    return mEvent.button.button;
     break;
     
   }
@@ -330,8 +333,8 @@ bool AGMessageObject::processEvent(AGEvent* agEvent)
   //  const AGSDLEvent *agEvent=reinterpret_cast<const AGSDLEvent*>(pEvent);
   if(agEvent->isSDLEvent())
     {
-      const SDL_Event *event=agEvent->get();
-      switch(event->type) {
+      const SDL_Event &event=agEvent->get();
+      switch(event.type) {
       case SDL_ACTIVEEVENT:
 	rc = eventActive(agEvent) || sigActive(agEvent);
 	break;
@@ -439,7 +442,7 @@ bool AGMessageObject::acceptEvent(const SDL_Event *pEvent)
   return true;
 }
 
-AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event*s)
+AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &s)
 {
   return new AGEvent(pCaller,pName,s);
 }
@@ -629,4 +632,13 @@ SDL_Event *toSDLEvent(const AGString &p)
     return &event;
 
   return 0;
+}
+bool eventOk(const SDL_Event &pEvent)
+{
+  return pEvent.type!=SDL_NOEVENT;
+}
+
+void resetEvent(SDL_Event &pEvent)
+{
+  pEvent.type=SDL_NOEVENT;
 }

@@ -41,7 +41,7 @@ const AGTexture &AGTextureCache::get(const std::string &pTexture,const AGRect2 &
 {
   std::string s=pTexture+":"+pSub.toString();
 
-  std::map<std::string,AGTexture>::iterator i=mTextures.find(s);
+  std::map<std::string,AGTexture*>::iterator i=mTextures.find(s);
   if(i==mTextures.end())
     {
       // load
@@ -55,15 +55,15 @@ const AGTexture &AGTextureCache::get(const std::string &pTexture,const AGRect2 &
 	  downScaleExp--;
 	}
       */
-      mTextures[s]=AGTexture(ms,false);
+      mTextures[s]=new AGTexture(ms,false);
     }
-  return mTextures[s];
+  return *(mTextures[s]);
 }
 
 
 const AGTexture &AGTextureCache::get(const std::string &pTexture,int downScaleExp)
   {
-    std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
+    std::map<std::string,AGTexture*>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
         // load
@@ -75,9 +75,9 @@ const AGTexture &AGTextureCache::get(const std::string &pTexture,int downScaleEx
 	    downScaleExp--;
 	  }
 
-        mTextures[pTexture]=AGTexture(ms,false);
+        mTextures[pTexture]=new AGTexture(ms,false);
       }
-    return mTextures[pTexture];
+    return *(mTextures[pTexture]);
   }
 
 AGSurface skipHalfTexture(const AGSurface &s)
@@ -126,7 +126,7 @@ AGSurface skipHalfTexture(const AGSurface &s)
 
 const AGTexture &AGTextureCache::get3D(const std::string &pTexture,int downScaleExp,int downScaleZ)
 {
-  std::map<std::string,AGTexture>::iterator i=mTextures.find(pTexture);
+  std::map<std::string,AGTexture*>::iterator i=mTextures.find(pTexture);
   if(i==mTextures.end())
     {
       // load
@@ -152,7 +152,7 @@ const AGTexture &AGTextureCache::get3D(const std::string &pTexture,int downScale
       cdebug("3d texture size:"<<ms.width()<<","<<ms.height());
 
       
-      mTextures[pTexture]=AGTexture(ms,true);
+      mTextures[pTexture]=new AGTexture(ms,true);
     }
-  return mTextures[pTexture];
+  return *(mTextures[pTexture]);
 }

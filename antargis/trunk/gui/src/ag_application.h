@@ -117,7 +117,7 @@ class AGApplication:public AGMessageObject
   void setCursor(const AGTexture &pTexture);
   void setNormalCursor();
 
-  virtual SDL_Event *getNewEvent();
+  virtual SDL_Event getNewEvent();
 
   void setKeyRepeat(bool enable);
   
@@ -126,7 +126,7 @@ class AGApplication:public AGMessageObject
   void drawCursor();
 
   void flushEventQueue();
-  bool doEvent(const SDL_Event *e);
+  bool doEvent(const SDL_Event &e);
 
   bool mRunning;
   bool mIdleCalls;

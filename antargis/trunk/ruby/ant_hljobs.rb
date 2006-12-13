@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-#
+#--
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
 # ant_hljobs.rb
@@ -17,9 +16,14 @@
 #
 # You should have received a copy of the GNU General Public
 # License along with this program.
+#++
 #
-
-#!/usr/bin/ruby
+# BoA has two levels of jobs for entities:
+# - the first level are the low-level-jobs (ll-jobs). These contain moving, resting, fighting 
+# - the second level are high-level-jobs, which are only assigned to more complex entities (heroes and buildings)
+# This file is all about these high-level jobs.
+# The base-class for all of these high-levels job is AntHLJob .
+# 
 
 require 'ents.rb'
 
@@ -32,6 +36,9 @@ class UID
 	end
 end
 
+#
+# Base class for high-level jobs. It contains the basic functions that're needed for usage within
+# AntBoss (AntHero and AntHouse)
 class AntHLJob
 	def undefeatedMen
 		@hero.getMen
@@ -116,6 +123,31 @@ class AntHLJob
 	end
 	def playSound(s)
 		@hero.playSound(s)
+	end
+end
+
+
+module AntHeroSitting
+	def sit(man)
+ 		formationPos=@hero.getFormation(man,@basePos)
+
+		diff=(man.getPos2D-formationPos)
+		dist=diff.length2
+		if dist<0.1 then
+			man.setDirection(180-(@hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
+			if man.getPos3D.z<0 # under water
+				man.newRestJob(5)
+				man.setMeshState("stand")
+			elsif not ["sitdown","sit"].member?(man.meshState)
+				man.sitDown
+			else
+				man.newRestJob(5)
+				man.setMeshState("sit")
+			end
+		else
+			puts "#{man.getPos2D} #{formationPos} #{dist} #{diff}"
+			man.newMoveJob(0,formationPos,0)
+		end
 	end
 end
 
@@ -549,7 +581,21 @@ class AntHeroFightAnimalJob<AntHeroMoveJob
 	end
 end
 
+
+#
+# AntHeroRecruitJob is for recruiting troopers in your own buildings.
+# The behaviour should be like this:
+# - The hero goes near the selected building (about 4 units)
+# - This position is saved as "resting point" (basePos)
+# - According to the selected aggression a certain amount of people is defined - this is aggression/3*menCount
+# - the minimum of this number and the current menCount of the hero is then recruited
+# - recruiting itself is done like this:
+# - each of the current men goes out to a pre-selected man of the building and "touches" him.
+# - Then he is part of the party and both return to the saved resting point.
+# - For the actual resting the AntHeroSitting-module is used 
 class AntHeroRecruitJob<AntHeroMoveJob
+	include AntHeroSitting
+
 	attr_reader :finished
 	def initialize(hero,target,agg)
 		@target=target
@@ -559,6 +605,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 		@finished=false
 		@restingMen=0
 		@wantedMen=@want
+		@fetchingStarted=false
 		super(hero,0,target.getPos2D,4)
 	end
 
@@ -566,57 +613,59 @@ class AntHeroRecruitJob<AntHeroMoveJob
 		"data/gui/recruit.png"
 	end
 
+	def eventMoveFinished
+		doCollect
+	end
+
+	def doCollect
+		@fetchingStarted=true
+		@myMap={}
+		myMen=@hero.getMen
+		@basePos=@hero.getPos2D
+		otherMen=@target.getMen
+		(0..([myMen.length,@want].min-1)).each{|i|
+			my=myMen[i]
+			other=otherMen[i]
+			@myMap[my]=other
+			my.newMoveJob(0,other.getPos2D,0)
+			my.setMode("fetching")
+		}
+	end
+
 	def check(man)
 		if moveFinished
 			@hero.formation=AntFormationRest.new(@hero)
-			if man.class==AntHero
-				if (not @state=~/recruit/)
-					if @want==0 then 
-						@state="wait_recruit"
-					else
-						man.newRestJob(1)
-						nman=@target.takeMan
-						if nman.nil?
-							@wantedMen=0
-							return
-						end
-						nman.setBoss(@hero)
-						nman.setMode("to_recruit")
-						@want=@want-1
-
-						# FIXME:
-						getMen.each{|m|
-							m.setMode("to_recruit")
-						}
-						@restingMen=0
-						@wantedMen=@want+getMen.length-1
-
+			if @myMap.keys.member?(man)
+				other=@myMap[man]
+				if (man.getPos2D-other.getPos2D).length<1
+					# new boss
+					@myMap.delete(man)
+					other.setBoss(@hero)
+					if man.is_a?(AntHero)
+						man.newMoveJob(0,@basePos,0)
 					end
+					man.setMode("ready")
+					other.setMode("ready")
 				else
-					super(man)
+					man.newMoveJob(0,other.getPos2D,0)
 				end
 			else
-				case man.getMode
-					when "to_recruit"
-						fp=@hero.getFormation(man,@hero.getPos2D)
-						man.newMoveJob(0,fp,0)
-						man.setMode("recruit_torest")
-					when "recruit_torest"
-						man.newRestJob(1)
-						man.setMode("recruit_resting")
-						@restingMen+=1
-						puts "RESTTEST: #{@restingMen} #{@wantedMen}"
-						if @restingMen==@wantedMen
-							@finished=true
-						end
-					when "recruit_resting"
-						man.newRestJob(10)
+				#super
+				fp=@hero.getFormation(man,@basePos)
+				if (man.getPos2D-fp).length<0.2
+					sit(man)
+				else
+					man.newMoveJob(0,fp,0)
 				end
 			end
 		else
-			super(man)
+			super
+		end
+		if getMenState("fetching").length==0 and @fetchingStarted and (@hero.getPos2D-@basePos).length<0.2
+			@finished=true
 		end
 	end
+
 end
 
 
@@ -937,27 +986,7 @@ class AntHeroRestJob<AntHLJob
 		return (not @hero.hasJob)
 	end
 private
-	def sit(man)
- 		formationPos=@hero.getFormation(man,@basePos)
-
-		diff=(man.getPos2D-formationPos)
-		dist=diff.length2
-		if dist<0.1 then
-			man.setDirection(180-(@hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
-			if man.getPos3D.z<0 # under water
-				man.newRestJob(5)
-				man.setMeshState("stand")
-			elsif not ["sitdown","sit"].member?(man.meshState)
-				man.sitDown
-			else
-				man.newRestJob(5)
-				man.setMeshState("sit")
-			end
-		else
-			puts "#{man.getPos2D} #{formationPos} #{dist} #{diff}"
-			man.newMoveJob(0,formationPos,0)
-		end
-	end
+	include AntHeroSitting
 	def eat(man)
 		if man.getFood<0.5
 			if man.resource.get("food")>0

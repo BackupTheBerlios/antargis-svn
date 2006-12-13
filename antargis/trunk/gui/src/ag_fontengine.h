@@ -21,27 +21,32 @@
 #ifndef AG_FONTENGINE_H
 #define AG_FONTENGINE_H
 
+#include <map>
 #include <string>
 
-#include "ag_surface.h"
-#include "ag_font.h"
-#include "ag_geometry.h"
+#include <ag_font.h>
+#include <ag_geometry.h>
+#include <ag_singleton.h>
+#include <ag_surface.h>
 
-class AGFontEngine
+class AGFontEngine:public AGSingleton
 {
  public:
   AGFontEngine();
   ~AGFontEngine();
 
+  AGTexture *renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &ParamIn);
 
-  //  static bool renderText (AGSurface &pSurface, const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
-  //  static bool renderTextOld (AGScreen *pScreen, const AGRect2 &pClipRect, int BaseLineX, int BaseLineY, const std::string &pText, const AGFont &ParamIn);
+  int getWidth(const AGFont &pFont,const AGStringUtf8 &pText);
+  int getHeight(const AGFont &pFont,const AGStringUtf8 &pText);
 
-  static AGTexture *renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &ParamIn);
+  void mark();
 
-  static int getWidth(const AGFont &pFont,const AGStringUtf8 &pText);
-  static int getHeight(const AGFont &pFont,const AGStringUtf8 &pText);
+ private:
+  std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*> fontCache;
 };
+
+AGFontEngine *getFontEngine();
 
 #endif
 

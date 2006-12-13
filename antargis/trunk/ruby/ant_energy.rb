@@ -87,16 +87,13 @@ private
 end
 
 class AntEnergyCreator<AGLayoutCreator
-	def initialize()
-		super("antEnergy")
-	end
 	def create(parent,rect,node)
 		w=AntEnergy.new(parent,rect)
 		w.hborder=node.get("hborder").to_i
 		w.vborder=node.get("vborder").to_i
 		puts "AntEnergyCreator:",w
-		return w
+		setResult w
 	end
-	@@antEnergyCreator=AntEnergyCreator.new
 end
+getLayoutFactory.addCreator("antEnergy",AntEnergyCreator.new)
 

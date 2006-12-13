@@ -39,7 +39,7 @@ class AGTextureCache
 
     const AGTexture &get(const AGFilename &pTexture,const AGRect2 &pSub);
   private:
-    std::map<AGFilename,AGTexture> mTextures;
+    std::map<AGFilename,AGTexture*> mTextures;
     
     friend AGTextureCache *getTextureCache();
   };

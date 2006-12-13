@@ -21,6 +21,7 @@
 #include "ag_widget.h"
 #include "ag_debug.h"
 #include "ag_screen.h"
+#include "ag_main.h"
 #include "ag_menu.h"
 #include "ag_kill.h"
 #include <map>
@@ -85,11 +86,20 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mModal=false;
   if(getAllWidgets())
     getAllWidgets()->insert(this);
+
+  getMain()->getCollector()->insertGlobal(this);
 }
 
 AGWidget::~AGWidget()
 {
   CTRACE;
+
+  if(!mParent)
+    if(hasMain())
+      getMain()->getCollector()->removeGlobal(this);
+
+
+  //  throw int();
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)
     {
@@ -519,6 +529,9 @@ void AGWidget::setVisible(bool v)
 
 void AGWidget::setParent(AGWidget *pParent)
 {
+  if(!mParent)
+    getMain()->getCollector()->removeGlobal(this);
+
   mParent=pParent;
 }
 

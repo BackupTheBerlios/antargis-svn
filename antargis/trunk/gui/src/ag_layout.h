@@ -38,6 +38,8 @@ class AGLayout:public AGWidget
   virtual bool eventKeyDown(AGEvent *m);
   int getNextTabIndex() const;
 
+  static void registerLayouts();
+
  private:
   std::map<int,AGWidget*> mTabIndices;
 };

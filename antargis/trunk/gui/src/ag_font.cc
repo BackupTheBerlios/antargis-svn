@@ -106,11 +106,11 @@ std::string AGFont::getName() const
 
 int AGFont::getWidth(const AGStringUtf8 &mText) const
 {
-  return AGFontEngine::getWidth(*this,mText);
+  return getFontEngine()->getWidth(*this,mText);
 }
 int AGFont::getHeight(const AGStringUtf8 &mText) const
 {
-  return AGFontEngine::getHeight(*this,mText);
+  return getFontEngine()->getHeight(*this,mText);
 }
 
 void AGFont::setEmbossed(bool e)

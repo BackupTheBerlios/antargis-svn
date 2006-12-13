@@ -93,38 +93,3 @@ void AGCheckBox::setState(const State &pState)
 }
 
 
-
-// AGRadio creator
-class AGCheckBoxLayoutCreator:public AGLayoutCreator
-{
-public:
-  REGISTER_COMPONENT(CheckBox,"checkBox")
-
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGCheckBox *b=new AGCheckBox(pParent,pRect);
-    AGStringUtf8 caption=_(pNode.get("caption"));
-    if(caption.length())
-      b->setCaption(AGStringUtf8(caption));
-
-    std::string captionImage=pNode.get("caption-image");
-    if(captionImage.length())
-      b->setSurface(AGSurface::load(captionImage),false);
-    if(pNode.get("enabled")=="false")
-      b->setEnabled(false);
-    if(pNode.get("theme").length())
-      b->setTheme(pNode.get("theme"));
-    if(pNode.get("checked")=="true")
-      b->setChecked(true);
-
-    if(pNode.get("disabledImage")!="" && pNode.get("enabledImage")!="")
-      {
-	b->setSurfaces(AGSurface::load(pNode.get("disabledImage")),AGSurface::load(pNode.get("enabledImage")));
-      }
-      
-
-
-    return b;
-  }
-};
-IMPLEMENT_COMPONENT_FACTORY(CheckBox);

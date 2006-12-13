@@ -22,7 +22,9 @@
 #define __AG_MAIN
 
 #include <string>
-#include "ag_rubyobj.h"
+#include <ag_rubyobj.h>
+#include <ag_collector.h>
+
 
 /**
  * \defgroup AntargisGUI AntargisGUI
@@ -63,15 +65,19 @@ class AGMain:public AGRubyObject
 
   bool fullscreen() const;
   long getTicks() const;
+
+  AGCollector *getCollector();
  protected:
   virtual void mark();
 
  private:
   AGScreen *mScreen;
+  AGCollector *mCollector;
 
   const SDL_VideoInfo *videoInfo;
 };
 
+bool hasMain();
 AGMain *getMain();
 
 bool hasQuit();

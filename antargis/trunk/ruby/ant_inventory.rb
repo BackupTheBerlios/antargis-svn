@@ -136,11 +136,8 @@ private
 end
 
 class AntInventoryCreator<AGLayoutCreator
-	def initialize()
-		super("antInventory")
-	end
 	def create(parent,rect,node)
-		return AntInventory.new(parent,rect)
+		setResult(AntInventory.new(parent,rect))
 	end
 end
-$antInventoryCreator=AntInventoryCreator.new
+getLayoutFactory.addCreator("antInventory",AntInventoryCreator.new)

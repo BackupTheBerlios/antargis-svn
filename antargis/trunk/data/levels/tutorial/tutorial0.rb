@@ -1,7 +1,4 @@
-class Level1<Level
-	def initialize
-		puts "Level inited"
-	end
+class Level1<AntLevelScript
 	def eventLevelStarted
 		if not @started
 			start=StoryFlow.new("beginning")
@@ -19,7 +16,7 @@ class Level1<Level
 		end
 	end
 	def eventHLJobFinished(hero,job)
-		if job.class==AntHeroRecruitJob and hero.getName=="Rowen" and @recruit.nil?
+		if job.is_a?(AntHeroRecruitJob) and hero.getName=="Rowen" and @recruit.nil?
 			@recruit=true
 			start=StoryFlow.new("recruit")
 			start.push("Tutorial","Ok, you have recruited some men.")
@@ -59,17 +56,31 @@ class Level1<Level
 	def eventOwnerChanged(ent)
 		case ent.getName	
 			when "Rowen"
-				lostLevel
+				@interface.lostLevel
 			when "Bantor"
-				wonLevel
+				@interface.wonLevel
 		end
 	end
+
+	private
+
+	def endLevel
+		@interface.endLevel
+	end
+	def lostLevel
+		@interface.lostLevel
+	end
 	def wonLevel
-		super
+		@interface.wonLevel
 		@won=true
 		start=StoryFlow.new("recruit")
 		start.push("Tutorial","So you have defeated Bantor. Now go back to your Keep und dismiss some of your men.")
 		tellStory(start)
+	end
+
+	def tellStory(story)
+		@story=story
+		@interface.tellStory(story)
 	end
 
 end

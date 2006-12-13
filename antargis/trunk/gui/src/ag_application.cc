@@ -19,6 +19,7 @@
  */
 
 #include "ag_application.h"
+#include "ag_main.h"
 #include "ag_screen.h"
 #include "ag_glsurface.h"
 #include "ag_main.h"
@@ -91,7 +92,7 @@ bool AGApplication::run()
 {
   STACKTRACE; 
   Uint32 last,now;
-  SDL_Event *event;
+  SDL_Event event;
   float t;
   mRunning=true;
 
@@ -120,7 +121,7 @@ bool AGApplication::run()
 	*/
 	clearOldMousePosition();
 	event=getNewEvent();
-	if(event)
+	if(eventOk(event))
 	  {
 	    do
 	      {
@@ -128,8 +129,8 @@ bool AGApplication::run()
 		if(mIdleCalls)
 		  event=getNewEvent();
 		else
-		  event=0;
-	      }while(event);
+		  resetEvent(event);
+	      }while(eventOk(event));
 	  } 
 	/*
 	if(mIdleCalls) 
@@ -178,8 +179,9 @@ bool AGApplication::run()
   return true;
 }
 
-SDL_Event *AGApplication::getNewEvent()
+SDL_Event AGApplication::getNewEvent()
 {
+  SDL_Event mEvent;
   // pull motion events (may flood the eventqueue)
   while(SDL_PeepEvents(&mEvent, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
     ;
@@ -187,16 +189,19 @@ SDL_Event *AGApplication::getNewEvent()
   if(mIdleCalls) 
     {
       if (SDL_PollEvent(&mEvent) == 0) 
-	return 0;
+	{
+	  resetEvent(mEvent);
+	  return mEvent;
+	}
     } 
   else 
     SDL_WaitEvent(&mEvent);
-  return &mEvent;
+  return mEvent;
 }
 
 
 
-bool AGApplication::doEvent(const SDL_Event* event) 
+bool AGApplication::doEvent(const SDL_Event &event) 
 {
   STACKTRACE;
   SDL_Event e;

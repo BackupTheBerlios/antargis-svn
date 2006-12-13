@@ -37,15 +37,16 @@ class AGBackground
  public:
   AGBackground(const AGString &pThemeName="");
   AGBackground(const AGColor &pColor);
+  //  AGBackground(const AGBackground &pBackground);
+  //  ~AGBackground();
 
   void draw(const AGRect2 &r,AGPainter &p);
 
   void useTextures();
  private:
-  AGTexture mTexture;
+  const AGTexture *mTexture;
   AGColor mColors[4];
 
-  bool mTextureFlag;
   bool mColor;
   int mBorder;
 };

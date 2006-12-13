@@ -75,7 +75,7 @@ void AGEditLine::draw(AGPainter &p,const AGVector2 &pPoint,const AGRect2 &pClip)
     {
       //      cdebug(*i);
       p.renderText(*i,AGVector2(pPoint[0]+x+mx,pPoint[1]),mFont);
-      mx+=AGFontEngine::getWidth(mFont,*i+" ");
+      mx+=getFontEngine()->getWidth(mFont,*i+" ");
     }
 #else
   p.renderText(mText+(mHardEnd?"":""),AGVector2(pPoint.x+x,pPoint.y),mFont);
@@ -84,8 +84,8 @@ void AGEditLine::draw(AGPainter &p,const AGVector2 &pPoint,const AGRect2 &pClip)
 
 void AGEditLine::drawCursor(AGPainter &p,int cx,const AGVector2 &pPoint,const AGRect2 &pClip,const AGColor &c)
 {
-  int x1=AGFontEngine::getWidth(mFont,mText.substr(0,cx));
-  int x2=AGFontEngine::getWidth(mFont,mText.substr(0,cx+1));
+  int x1=getFontEngine()->getWidth(mFont,mText.substr(0,cx));
+  int x2=getFontEngine()->getWidth(mFont,mText.substr(0,cx+1));
 
   int w=x2-x1;
   if(w==0)
@@ -109,11 +109,11 @@ void AGEditLine::drawCursor(AGPainter &p,int cx,const AGVector2 &pPoint,const AG
 
 int AGEditLine::height() const
 {
-  return AGFontEngine::getHeight(mFont,mText);
+  return getFontEngine()->getHeight(mFont,mText);
 }
 int AGEditLine::width() const
 {
-  return AGFontEngine::getWidth(mFont,mText);
+  return getFontEngine()->getWidth(mFont,mText);
 }
 
 void AGEditLine::insert(const AGStringUtf8 &c,int cx,bool pInsert)
@@ -167,7 +167,7 @@ std::pair<AGStringUtf8,bool> AGEditLine::checkWrap(int pW)
 {
   // first check, if line is too long
 
-  if(AGFontEngine::getWidth(mFont,mText)<pW)
+  if(getFontEngine()->getWidth(mFont,mText)<pW)
     return std::make_pair("",false);
 
   // ok, line is too long
@@ -181,7 +181,7 @@ std::pair<AGStringUtf8,bool> AGEditLine::checkWrap(int pW)
   for(;i!=words.end();i++)
     {
       s+=*i;
-      w=AGFontEngine::getWidth(mFont,s);
+      w=getFontEngine()->getWidth(mFont,s);
       if(w>pW)
 	break;
 
@@ -208,7 +208,7 @@ std::pair<AGStringUtf8,bool> AGEditLine::checkWrap(int pW)
   for(;k<mText.length();k++)
     {
       s+=mText.substr(k,1);
-      w=AGFontEngine::getWidth(mFont,s);
+      w=getFontEngine()->getWidth(mFont,s);
       if(w>pW)
 	break;
 

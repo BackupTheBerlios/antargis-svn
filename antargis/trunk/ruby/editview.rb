@@ -89,8 +89,8 @@ class AntRubyEditView<GLApp
 			@layout.removeChild(d)
 			#d.close
 			if name=="ok"
-				w=toAGEdit(d.getChild("width")).getText.to_i
-				h=toAGEdit(d.getChild("height")).getText.to_i
+				w=toAGEdit(d.getChild("width")).getText.to_s.to_i
+				h=toAGEdit(d.getChild("height")).getText.to_s.to_i
 				
 				if w and h
 					w=2**(Math::log(w)/Math::log(2)).to_i

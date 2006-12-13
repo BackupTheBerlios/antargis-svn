@@ -39,7 +39,7 @@ void setQuiet()
 static bool gRubyRaising=true;
 void agRaise(const std::string &s)
 {
-  cdebug("assertiong failed:"<<s);
+  cdebug("assertion failed:"<<s);
   if(gRubyRaising)
     rb_raise(rb_eRuntimeError,s.c_str(),"");
   else
@@ -65,14 +65,21 @@ std::ostream &getDebug()
     return std::cout;
 }
 
+size_t gDebugIndex=0;
 
+size_t getDebugIndex()
+{
+  return gDebugIndex;
+}
 
 
 D::D(std::string c):
   m(c)
 {
   indent();
-  debugout("start of:"<<c<<std::endl);
+  gDebugIndex++;
+
+  debugout("start of:"<<c<<"("<<gDebugIndex<<")"<<std::endl);
   d++;
 }
 AGEXPORT D::~D()
@@ -111,7 +118,11 @@ void agAssertGL(std::string s)
       if(strlen(se)>0)
 	{
 	  std::cerr<<"SDL_Error:"<<s<<":"<<se<<std::endl;
-	  agRaise(se);
+	  if(std::string(se).substr(0,37)=="Failed loading glXGetSwapIntervalMESA")
+	    std::cerr<<"IGNORING THIS ERROR!"<<std::endl;
+	  else
+	    agRaise(se);
+	  SDL_ClearError();
 	}
     }
   else

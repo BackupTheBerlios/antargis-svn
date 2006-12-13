@@ -58,11 +58,12 @@ class AntLocalizer<AGLocalizer
 		return r
 	end
 	def myprocess(x)
-		if x.to_s==""
-			return AGStringUtf8.new(x)
+		if x.is_a?(AGStringUtf8)
+			x=x.to_s
 		end
+
 		if @table.member?(x)
-			if @table[x]!="" and @table[x]!=nil
+			if (not @table[x].nil?) and @table[x].length>0
 				return AGStringUtf8.new(@table[x].clone)
 			end
 		end
@@ -70,7 +71,6 @@ class AntLocalizer<AGLocalizer
 			
 		@table[x]=""
 		write
-		#puts "X:#{x}"		
 		return AGStringUtf8.new(x.to_s)
 	end
 	def find(x)
@@ -94,17 +94,19 @@ private
 		o=""
 		# save incomplete at first
 		@table.each{|n,v|
-			if v=="" or v==nil
+			if v.nil? or v.length==0
 				#puts "98: #{n} -- #{v}"
 				o+=n.to_s+";;"+v.to_s+"\n"
 			end
 		}
 		@table.each{|n,v|
-			if v!="" and v!=nil
+			if (not v.nil?) or v.length>0
 				o+=n.to_s+";;"+v.to_s+"\n"
 			end
 		}
 		saveFile("data/local/local_#{@lang}.txt",o)
+		o=""
+		#startGC # run GC because of much overhead
 	end
 end
 

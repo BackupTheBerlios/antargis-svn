@@ -23,12 +23,14 @@
 #include "ag_theme.h"
 #include "ag_debug.h"
 #include "ag_painter.h"
+#include "ag_texturecache.h"
 
 /** sets a uniform background of color pColor
     @param pColor an rgba-color. so you can use transparent backgrounds,too.
 */
-AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
+AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
 {
+  //  CTRACE;
   mColor=true;
   mColors[0]=pColor;
   mColors[1]=pColor;
@@ -55,17 +57,18 @@ AGBackground::AGBackground(const AGColor &pColor):mTextureFlag(false)
 </pre>
 */
 
-AGBackground::AGBackground(const AGString &pThemeName):mTextureFlag(false)
+AGBackground::AGBackground(const AGString &pThemeName):mTexture(0)
 {
   //  CTRACE;
+
   AGTheme *theme=getTheme();
   mColor=false;
   if(theme->hasSurface(pThemeName+".image"))
     {
       //      CTRACE;
       cdebug(pThemeName+".image");
-      mTexture=AGTexture(theme->getSurface(pThemeName+".image"));
-      mTextureFlag=true;
+      mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(pThemeName+".image"));
+      //mTexture=new AGTexture(theme->getSurface(pThemeName+".image"));
     }
   else if(theme->hasColor(pThemeName+"."+"gradientColor1"))
     {
@@ -79,13 +82,32 @@ AGBackground::AGBackground(const AGString &pThemeName):mTextureFlag(false)
   mBorder=theme->getInt(pThemeName+"."+"border");
 }
 
+/*
+AGBackground::AGBackground(const AGBackground &p):mTexture(0)
+{
+  if(p.mTexture)
+    mTexture=new AGTexture(*p.mTexture);
+  mColors[0]=p.mColors[0];
+  mColors[1]=p.mColors[1];
+  mColors[2]=p.mColors[2];
+  mColors[3]=p.mColors[3];
+
+  mColor=p.mColor;
+  mBorder=p.mBorder;
+}
+
+AGBackground::~AGBackground()
+{
+  delete mTexture;
+  }*/
+
 
 /// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)
 {
-  if(mTextureFlag)
+  if(mTexture)
     {
-      p.tile(mTexture,r.shrink(mBorder));
+      p.tile(*mTexture,r.shrink(mBorder));
     }
   else if(mColor)
     p.drawGradient(r.shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
@@ -95,5 +117,6 @@ void AGBackground::draw(const AGRect2 &r,AGPainter &p)
 /// this is a help function, so that once made textures aren't automatically discarded.
 void AGBackground::useTextures()
 {
-  mTexture.useTexture();
+  if(mTexture)
+    const_cast<AGTexture*>(mTexture)->useTexture();
 }

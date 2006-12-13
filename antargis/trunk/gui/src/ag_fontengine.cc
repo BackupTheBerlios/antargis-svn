@@ -105,9 +105,6 @@ AGFontEngine::~AGFontEngine()
   // font-deletion is ignored
 }
 
-AGFontEngine myFontEngine;
-
-std::map<std::pair<AGFont,AGStringUtf8>,AGTexture> fontCache;
 
 void border(AGSurface &s,AGColor bc)
 {
@@ -278,6 +275,13 @@ void embossSurface(AGSurface &s,float depth=1.0f)
   delete [] a;
   delete [] b;
 
+
+  static int i=0;
+  i++;
+  std::ostringstream os;
+  os<<"fonttest"<<i<<".png";
+  s.save(os.str());
+
 }
 
 AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &pFont)
@@ -319,9 +323,9 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGString
       is->surface=ns;
       AGSurface as(is);
       
-      if(pFont.getBorder()>0)
+      if(pFont.getBorder()>0 || pFont.getEmbossed())
 	{
-	  int move=2;
+	  int move=3;
 	  AGSurface copy(as.width()+2*move,as.height()+2*move);
 	  copy.blit(as,AGRect2(move,move,as.width(),as.height()),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
 	  as=copy;
@@ -343,12 +347,12 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGString
 	    embossSurface(as,1);
 	}
       
-      AGTexture ms(as);
-      ms.setClamp(GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE);
+      AGTexture *ms=new AGTexture(as);
+      ms->setClamp(GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE);
 	
       fontCache[std::make_pair(pFont,pText)]=ms;
     }
-  return &fontCache[std::make_pair(pFont,pText)];
+  return fontCache[std::make_pair(pFont,pText)];
 
 }
 
@@ -380,3 +384,21 @@ int AGFontEngine::getHeight(const AGFont &pFont,const AGStringUtf8 &pText)
 
   return h;
 }
+
+void AGFontEngine::mark()
+{
+  for(std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*>::iterator i=fontCache.begin();i!=fontCache.end();i++)
+    markObject(i->second);
+
+}
+
+
+static AGFontEngine *gFontEngine=0;
+
+AGFontEngine *getFontEngine()
+{
+  if(!gFontEngine)
+    gFontEngine=new AGFontEngine;
+  return gFontEngine;
+}
+

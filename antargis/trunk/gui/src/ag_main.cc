@@ -29,6 +29,7 @@
 #include "ag_sdlsurface.h"
 #include "ag_glsurface.h"
 #include "ag_fs.h"
+#include "ag_layout.h"
 #include "ag_debug.h"
 #include "ag_mixer.h"
 #include "ag_surfacemanager.h"
@@ -77,7 +78,8 @@ bool glMode()
 /**
    creates an AGMain object.
 */
-AGMain::AGMain()
+AGMain::AGMain():
+  mCollector(0)
 {
   assert(mAGMain==0);
   mAGMain=this;
@@ -99,14 +101,13 @@ AGMain::AGMain()
   initFS("");
 
   mScreen=0;
+  AGLayout::registerLayouts();
 }
 
-extern std::map<std::pair<AGFont,std::string>,AGTexture> fontCache;
 extern std::map<std::string,Mix_Chunk*> mSounds;
 
 AGMain::~AGMain()
 {
-  fontCache.clear();
   mSounds.clear();
   CTRACE;
   delete mScreen;
@@ -124,6 +125,16 @@ void AGMain::flip()
 {
   getScreen().flip();
 }
+
+AGCollector *AGMain::getCollector()
+{
+  if(!mCollector)
+    mCollector=new AGCollector;
+  return mCollector;
+}
+
+
+
 
 std::string myHash(const std::string &p)
 {
@@ -160,7 +171,6 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 {
   if(mScreen)
     {
-      fontCache.clear();
       getSurfaceManager()->clear();
     }
 
@@ -272,6 +282,11 @@ void AGMain::toggleFull()
   initVideo(lastWidth,lastHeight,lastDepth,!fullScreen,lastGL,lastVWidth,lastVHeight);
 }
 
+bool hasMain()
+{
+  return mAGMain;
+}
+
 AGMain *getMain()
 {
   if(!mAGMain)
@@ -329,6 +344,7 @@ long AGMain::getTicks() const
 
 void AGMain::mark()
 {
+  markObject(getCollector());
 }
 
 

@@ -21,18 +21,26 @@
 #ifndef AG_LAYOUTFACTORY_H
 #define AG_LAYOUTFACTORY_H
 
+#include <ag_singleton.h>
+#include <ag_utf8.h>
 #include <ag_widget.h>
 #include <ag_xml.h>
-#include <ag_utf8.h>
 
-class AGLayoutCreator
+class AGLayoutCreator:public AGSingleton
 {
  public:
-  AGLayoutCreator(const AGString &pName);
-  virtual ~AGLayoutCreator()
-    {
-    }
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
+  AGLayoutCreator();//const AGString &pName);
+  //  virtual ~AGLayoutCreator();
+  virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
+  void setResult(AGWidget *pWidget);
+  AGWidget *getResult();
+
+  void clearResult();
+
+  void mark();
+ private:
+  AGWidget *mWidget;
+    //std::string mName;
 
 };
 
@@ -45,6 +53,7 @@ class AGLayoutFactory
   ~AGLayoutFactory();
 
   void addCreator(const AGString &pName,AGLayoutCreator *creator);
+  void removeCreator(const AGString &pName,AGLayoutCreator *creator);
 
   AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
   
@@ -52,9 +61,15 @@ class AGLayoutFactory
 };
 
 AGLayoutFactory *getLayoutFactory();
-
+/*
 #define IMPLEMENT_COMPONENT_FACTORY(CLASS) \
 AG##CLASS##LayoutCreator factory_##CLASS
 
 #define REGISTER_COMPONENT(CLASS,NAME) AG##CLASS##LayoutCreator():AGLayoutCreator(NAME){}
+*/
+
+#define IMPLEMENT_COMPONENT_FACTORY(CLASS)
+#define REGISTER_COMPONENT(CLASS,NAME)
+
+
 #endif

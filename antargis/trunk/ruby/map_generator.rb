@@ -31,7 +31,7 @@ class GeneratorParameters
 	end
 	def readFromDialog(d)
 		@params.each{|p|
-			v=d.edits[p].getText
+			v=d.edits[p].getText.to_s
 			case p	
 				when :water
 					v=v.to_f

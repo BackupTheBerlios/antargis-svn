@@ -79,7 +79,7 @@ class AntGameApp <AntRubyView
 		end
 
 		# init game-engine's map
-		@map=AntMpMap.new(connection,getScene,32,32,playerName) # some small dummy size - gets overriden by loadMap anyway
+		@map=AntMpMap.new(connection,self,getScene,32,32,playerName) # some small dummy size - gets overriden by loadMap anyway
 		if loadscreen
 			loadscreen.setValue(0.4)
 			loadscreen.tick
@@ -87,16 +87,21 @@ class AntGameApp <AntRubyView
 		#$map=@map
 
 		# load GUI layout
+		puts "antargis.rb:CREATE LAYOUT"
 		@layout=AGLayout.new(nil)
+		puts "antargis.rb:LOAD LAYOUT"
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
-		
-		
+		puts "antargis.rb:GET CHILDREN"
+	
 
 		# init pointers to different displays
 		# statusBar (FPS display)
 		@statusBar=@layout.getChild("statusBar")
 		@inventory=@layout.getChild("inventory")
 		@buttonpanel=@layout.getChild("antButtonPanel")
+		puts "PANEL:",@buttonpanel
+		raise 1 if @buttonpanel.nil?
+
 		@miniMap=toMiniMap(@layout.getChild("miniMap"))
 		@fps=0
 
@@ -134,6 +139,7 @@ class AntGameApp <AntRubyView
 			loadscreen.tick
 		end
 
+		puts "PANEL:",@buttonpanel
 
 		# inventory and buttonpanel signals
 		addHandler(@inventory,:sigJobChanged,:eventInventoryJob)
@@ -157,6 +163,7 @@ class AntGameApp <AntRubyView
 
 	# debugging-function - log all user-input
 	def getNewEvent
+		puts "getNewEvent"
 		if false
 			@eventDebugging||=File.open("events.txt","r")
 			s=@eventDebugging.readline
@@ -442,6 +449,8 @@ class AntGameApp <AntRubyView
 	def setHeroName(name,num)
 		@layout.getChild("HeroName#{num}").setText(_(name))
 		c=@layout.getChild("HeroBar#{num}")
+		puts "LAYOUT:",@layout
+		raise 1 if c.nil?
 		c.setVisible((name!=""))
 	end
 	def setHeroEnergy(hero,num)

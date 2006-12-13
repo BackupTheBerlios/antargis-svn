@@ -32,7 +32,7 @@ class IntroApp<AGApplication
 			if x=~/\.png/ or x=~/\.jpg/
 				r=AGSurface.load(x)
 			else
-				r=AGFontEngine::renderText(0,0,_(x),font)
+				r=getFontEngine.renderText(0,0,_(x),font)
 			end
 			r
 		}

@@ -501,11 +501,21 @@ bool AGTexture::is3d() const
 
 void AGTexture::setClamp(GLuint s,GLuint t,GLuint r)
 {
-  return;
-  bindTexture();
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, s);
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, t);
-  glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, r);
+  if(!opengl())
+    return;
+  if(is3d())
+    {
+      bindTexture();
+      glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, s);
+      glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, t);
+      glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, r);
+    }
+  else
+    {
+      bindTexture();
+      glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, s);
+      glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, t);
+    }
 }
 
 void AGTexture::useTexture()

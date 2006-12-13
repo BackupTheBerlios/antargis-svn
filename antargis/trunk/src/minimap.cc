@@ -351,19 +351,6 @@ AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
 
 
 
-// AGLayout creator
-class AGMiniMapLayoutCreator:public AGLayoutCreator
-{
-public:
-  REGISTER_COMPONENT(MiniMap,"miniMap")
-
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    CTRACE;
-    return new MiniMap(pParent,pRect,0);
-  }
-};
-IMPLEMENT_COMPONENT_FACTORY(MiniMap);
 
 MiniMap *toMiniMap(AGWidget *w)
 {

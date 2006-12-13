@@ -182,15 +182,11 @@ end
 
 # View-Widget factory
 class AntRubyViewCreator<AGLayoutCreator
-	def initialize()
-		super("antRubyView")
-	end
 	def create(parent,rect,node)
-		w=AntRubyView.new(parent,rect,AGVector3.new(0,0,0),nil)
-		return w
+		setResult AntRubyView.new(parent,rect,AGVector3.new(0,0,0),nil)
 	end
-	@@antRubyViewCreator=AntRubyViewCreator.new
 end
+getLayoutFactory.addCreator("antRubyView",AntRubyViewCreator.new)
 
 
 
@@ -277,15 +273,11 @@ end
 
 # factory for buttonpanel-widget
 class AntButtonPanelCreator<AGLayoutCreator
-	def initialize
-		super("antButtonPanel")
-	
-	end
 	def create(p,r,n)
-		return AntButtonPanel.new(p,r)
+		setResult AntButtonPanel.new(p,r)
 	end
-	@@antBPCreator=AntButtonPanelCreator.new
 end
+getLayoutFactory.addCreator("antButtonPanel",AntButtonPanelCreator.new)
 
 
 class AntNameDisplay<AGWidget

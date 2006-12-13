@@ -87,22 +87,3 @@ bool AGColorButton::eventMouseClick(AGEvent *e)
 }
 
 
-// Layout-Factories
-class AGColorButtonLayoutCreator:public AGLayoutCreator
-{
- public:
-  REGISTER_COMPONENT(ColorButton,"colorButton")
-  virtual AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGColorButton *b;
-
-    b=new AGColorButton(pParent,pRect,pNode.get("gridx").toInt(),pNode.get("gridy").toInt());
-    
-    //    if(pNode.get("enabled")=="false")
-    //      b->setEnabled(false);
-    //    if(pNode.get("theme").length())
-    //      b->setTheme(pNode.get("theme"));
-    return b;
-  }
-};
-IMPLEMENT_COMPONENT_FACTORY(ColorButton);
