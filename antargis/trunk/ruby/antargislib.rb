@@ -153,3 +153,20 @@ end
 def startGC
 	MyAntargislib.startGC
 end
+
+class AGStringUtf8
+	def [](range)
+		if range.is_a?(Range)
+			ma=range.max
+			mi=range.min
+			if self.length>0
+				ma%=self.length
+				mi%=self.length
+			end
+			
+			return self.substr(mi,ma-mi+1)
+		end
+		puts range,range.class
+		super
+	end
+end

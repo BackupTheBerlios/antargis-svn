@@ -9,7 +9,7 @@ class Trigger
 			@radius=node.get("radius").to_f
 			@name=node.get("name")
 			@circle=AGCircle2.new(AGVector3.new(@pos.x,@pos.y,1),@radius)
-			@triggerTime=$systemTime
+			@triggerTime=AntRubyMap.getSystemTime
 			@player=node.get("player")
 			@text=node.get("text")
 		else

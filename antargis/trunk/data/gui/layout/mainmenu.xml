@@ -31,9 +31,9 @@
 				<button row="8" col="0" name="options" caption="Options"/>
 				<button row="10" col="0" name="credits" caption="Credits"/>
 				<button row="12" col="0" name="quit" caption="Quit"/>
-				<cell col="0" row="11">
+<!--				<cell col="0" row="11">
 					<edit/>
-				</cell>
+				</cell>-->
 			
 			</table>
 			<table col="0" row="0" cols="3" rows="3">

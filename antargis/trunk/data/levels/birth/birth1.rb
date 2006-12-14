@@ -1,11 +1,7 @@
-class Level1<Level
-	def initialize
-		puts "Level inited"
+class Level1<AntLevelScript
+	def eventLevelStarted
 		@appStory=false
 		@flee=false
-	end
-
-	def eventLevelStarted
 		if not @started
 			start=StoryFlow.new("beginning")
 			start.push("Rowen","Slowly you awake.")
@@ -154,6 +150,10 @@ class Level1<Level
 				lostLevel
 				endLevel
 		end
+	end
+	def tellStory(story)
+		@story=story
+		@interface.tellStory(story)
 	end
 end
 

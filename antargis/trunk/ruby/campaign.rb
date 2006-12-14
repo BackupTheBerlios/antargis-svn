@@ -138,7 +138,7 @@ class CutSceneDisplay<AGApplication
 			if old==@ctext
 				break
 			end
-			if @ctext[-1..-1]!=" "
+			if @ctext[-1..-1]!=AGStringUtf8.new(" ")
 				@time-=@speed
 			end
 		end
