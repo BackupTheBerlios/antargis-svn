@@ -167,7 +167,9 @@ class AntHeroMoveJob<AntHLJob
 		@dist=dist
 		@formatDist=0
 
-		@waypoints=getMap.path.computePath(hero.getPos2D,pos)
+# 		puts hero.getPos2D,pos
+# 		puts hero.getPos2D.class,pos.class
+		@waypoints=getMap.path.computePath(hero.getPos2D,@pos)
 
 		@waypoints.unshift(@hero.getPos2D)
 		@waypoints.push(@pos)

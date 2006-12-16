@@ -163,7 +163,6 @@ class AntGameApp <AntRubyView
 
 	# debugging-function - log all user-input
 	def getNewEvent
-		puts "getNewEvent"
 		if false
 			@eventDebugging||=File.open("events.txt","r")
 			s=@eventDebugging.readline
