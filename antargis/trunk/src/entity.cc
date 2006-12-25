@@ -110,6 +110,7 @@ void AntEntity::saveXML(Node &node) const
     node.set("onWater",AGString(onWater));
     //    node.set("entityID",AGString(getID()));
     node.set("name",getName());
+    //    node.set("classtype",getType());
     node.set("morale",AGString(mMorale));
     node.set("aggression",AGString(mAggression));
     node.set("food",AGString(mFood));
@@ -153,6 +154,7 @@ void AntEntity::loadXML(const Node &node)
     mHunger=node.get("hunger").toFloat();
 
   setName(node.get("name"));
+  //  setType(node.get("classtype"));
 
   if(node.get("exp")!="")
     experience=node.get("exp").toFloat();
@@ -594,6 +596,15 @@ AGString AntEntity::getName() const
 {
   return mName;
 }
+
+/*void AntEntity::setType(const AGString &pType)
+{
+  mType=pType;
+}
+AGString AntEntity::getType() const
+{
+  return mType;
+  }*/
 
 AGRect2 AntEntity::getRect() const
 {

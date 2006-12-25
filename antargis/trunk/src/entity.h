@@ -137,6 +137,9 @@ class AntEntity:public AGRubyObject
     AGString getName() const;
     void setName(const AGString &pName);
 
+    //    AGString getType() const;
+    //    void setType(const AGString &pType);
+
     void setProvide(const AGString &pName,bool flag);
     bool provides(const AGString &pName) const;
 

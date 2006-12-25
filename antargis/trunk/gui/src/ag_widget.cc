@@ -530,7 +530,10 @@ void AGWidget::setVisible(bool v)
 void AGWidget::setParent(AGWidget *pParent)
 {
   if(!mParent)
-    getMain()->getCollector()->removeGlobal(this);
+    {
+      if(hasMain())
+	getMain()->getCollector()->removeGlobal(this);
+    }
 
   mParent=pParent;
 }

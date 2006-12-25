@@ -608,7 +608,6 @@ end
 
 # this function is only for starting a level directly (mostly for testing purpose)
 def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
-	disableGC
 	app=nil
 	if clientConnection
 		app=AntGameApp.new(file,getMain.width,getMain.height,nil,clientConnection)
@@ -623,7 +622,6 @@ def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 	$map=nil
 	$app=nil
 	$screen=nil
-	enableGC
 	# run garbage collector
 	startGC
 	return result

@@ -51,7 +51,10 @@ class AntInventory<AGWidget
 	def prepareDraw
 		#return
 		checkFriend
-		updateInspection
+		# FIXME
+		if false
+			updateInspection
+		end
 		super
 	end
 private

@@ -64,17 +64,21 @@ class AntLocalizer<AGLocalizer
 
 		if @table.member?(x)
 			if (not @table[x].nil?) and @table[x].length>0
-				return AGStringUtf8.new(@table[x].clone)
+				return AGStringUtf8.new(@table[x].gsub("\\n","\n"))
 			end
 		end
 		x||=""
 			
 		@table[x]=""
-		write
+		#write
 		return AGStringUtf8.new(x.to_s)
 	end
 	def find(x)
 		process(x)
+	end
+
+	def finalize
+		write
 	end
 
 private
@@ -117,6 +121,9 @@ module MyLocalizer
 	def MyLocalizer.translate(a)
 		# FIXME:lookup
 		@@localizer.process(a)
+	end
+	def MyLocalizer.finalize
+		@@localizer.finalize
 	end
 end
 def _(a,*args)

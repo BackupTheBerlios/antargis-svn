@@ -26,6 +26,7 @@
 #include "ag_debug.h"
 #include "ag_config.h"
 #include "ag_glsurface.h"
+#include "ag_profiler.h"
 
 #include <map>
 
@@ -137,6 +138,7 @@ size_t getTexMem()
 
 void AGSurfaceManager::cleanup(bool force,bool nomem)
 {
+  STACKTRACE;
   size_t oldTexMem=getUsedTexMem();
   if(force && nomem)
     {

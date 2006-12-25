@@ -156,13 +156,13 @@ end
 # just in case it isn't defined
 class AGString
 end
-class String
-	alias oldadd +
-	def +(p)
-		#puts "puh"
-		if p.is_a?(AGString)
-			p=p.to_s
-		end
-		oldadd(p)
-	end
-end
+# class String
+# 	alias oldadd +
+# 	def +(p)
+# 		#puts "puh"
+# 		if p.is_a?(AGString)
+# 			p=p.to_s
+# 		end
+# 		oldadd(p)
+# 	end
+# end

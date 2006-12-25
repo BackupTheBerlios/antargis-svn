@@ -139,12 +139,13 @@ module MyAntargislib
 			puts "starting GC"
 			GC.enable
 			GC.start
-			GC.disable
+			#GC.disable
 			puts "GC ok"
 		else
 			puts "starting GC"
 			GC.enable
-			GC.disable
+			GC.start
+			#GC.disable
 			puts "GC ok"
 		end
 	end

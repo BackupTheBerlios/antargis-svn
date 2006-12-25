@@ -83,6 +83,9 @@ class AntMap:public HeightMap
   virtual void mark();
 
   virtual void mapChanged();  
+
+
+  //  std::vector<AntEntityPtr> getByType(const AGString &pType);
  private:
   typedef std::map<size_t,AntEntity*> EntityMap;
 
@@ -90,7 +93,11 @@ class AntMap:public HeightMap
   EntityMap mEntityMap;
   QuadTree<AntEntity> *mEntQuad;
 
+  //  typedef std::map<AGString,std::set<AntEntity*> > EntityByType;
+  
   EntityList mToDel;
+
+  //  EntityByType mByType;
 
   int maxID;
 

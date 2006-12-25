@@ -129,6 +129,7 @@ void AntMap::insertEntity(AntEntity *e)
   mEntityMap[e->getID()]=e;
   mEntQuad->insert(e);
   //  entsChanged();
+  //  mByType[e->getType()].insert(e);
 }
 
 void AntMap::removeEntity(AntEntity *p)
@@ -169,7 +170,7 @@ void AntMap::move(float pTime)
 	cdebug("ERROR: Entity not found while deleting:"<<*d);
       mEntityMap.erase((*d)->getID());
       mEntQuad->remove(*i);
-      
+      //      mByType[(*d)->getType()].erase(*d);
 
       saveDelete(*d);
     }
@@ -192,6 +193,19 @@ AntEntity *AntMap::loadEntity(const Node &node)
   cdebug("type unknown:"<<node.getName());
   return e;
 }
+
+/*std::vector<AntEntityPtr> AntMap::getByType(const AGString &pType)
+{
+  std::vector<AntEntityPtr> l;
+  EntityByType::iterator i=mByType.find(pType);
+  if(i!=mByType.end())
+    {
+      std::copy(i->second.begin(),i->second.end(),std::back_inserter(l));
+    }
+
+  return l;  
+  }*/
+
 
 AntMap::EntityList AntMap::getEntities(const AGRect2&r)
 {
