@@ -27,60 +27,6 @@
 
 require 'ents.rb'
 
-class UID
-	def initialize(id)
-		@id=id
-	end
-	def method_missing(n,*args)
-# 		args.collect!{|x|
-# 			if x.is_a?(UID)
-# 				return x.tryGet
-# 			else
-# 				return x
-# 			end
-# 		}
-		getMap.getByUID(@id).send(n,*args)
-	end
-	def getID
-		@id
-	end
-	def tryGet
-		o=getMap.getByUID(@id)
-		if o
-			return o
-		else
-			return self
-		end
-	end
-	def <=>(uid)
-		getID<=>uid.getID
-	end
-end
-
-class UIDArray<Array
-	def initialize(a)
-		super
-		@checked=false
-	end
-	def member?(m)
-		check
-		super(m.tryGet)
-	end
-
-	alias :oldeach :each
-	def each(&p)
-		check
-		oldeach(&p)
-	end
-	private
-	def check
-		if not @checked
-			@checked=true
-			collect!{|x|x.tryGet}
-		end
-	end
-end
-
 # Base class for high-level jobs. It contains the basic functions that're needed for usage within
 # AntBoss (AntHero and AntHouse)
 class AntHLJob
@@ -142,12 +88,9 @@ class AntHLJob
 				puts "TYPE: #{c.get("type")}"
 				case c.get("type")
 					when "AntEntity"
-						#value=UID.new(value.to_i) #getMap.getByUID(value.to_i)
 						value=getMap.getByUID(value.to_i)
 					when "AntEntities"
-	#					value=value.split(",").collect{|v|UID.new(v.to_i)} #getMap.getByUID(v)}
 						value=value.split(",").collect{|v|getMap.getByUID(v)}
-#						value=UIDArray.new(value)
 					when "AGVector2"
 						x,y=value.gsub("(","").gsub(")","").split(",").collect{|v|v.to_f}
 						value=AGVector2.new(x,y)
@@ -295,7 +238,9 @@ class AntHeroMoveJob<AntHLJob
 	def getMenState(mode)
 		@men.select{|m|m.getMode==mode}
 	end
-
+	def getMenMeshState(mode)
+		@hero.getMen.select{|m|m.meshState==mode}
+	end
 	def check(man)
 		if @moveFinished
 			return	
@@ -675,7 +620,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 		@want=@targetMen*agg/3
 		@finished=false
 		@restingMen=0
-		@wantedMen=@want
+		@wantedMen=@want.to_i
 		@fetchingStarted=false
 		super(hero,0,target.getPos2D,4)
 	end
@@ -691,10 +636,13 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	def doCollect
 		@fetchingStarted=true
 		@myMap={}
-		myMen=@hero.getMen
+		myMen=@hero.getMen.clone.reverse # put hero at last
+		if myMen.length>1
+			myMen.delete(@hero)
+		end
 		@basePos=@hero.getPos2D
 		otherMen=@target.getMen
-		(0..([myMen.length,@want].min-1)).each{|i|
+		(0..([myMen.length,@wantedMen].min-1)).each{|i|
 			my=myMen[i]
 			other=otherMen[i]
 			@myMap[my]=other
@@ -717,6 +665,7 @@ class AntHeroRecruitJob<AntHeroMoveJob
 					end
 					man.setMode("ready")
 					other.setMode("ready")
+					@wantedMen-=1
 				else
 					man.newMoveJob(0,other.getPos2D,0)
 				end
@@ -733,7 +682,16 @@ class AntHeroRecruitJob<AntHeroMoveJob
 			super
 		end
 		if getMenState("fetching").length==0 and @fetchingStarted and (@hero.getPos2D-@basePos).length<0.2
-			@finished=true
+			if getMenMeshState("sit").length>=@hero.getMen.length
+				if @wantedMen==0
+					@finished=true
+				else
+				#@hero.getMen.each{|m|puts "MS: #{m} #{m.meshState}"}
+				#if getMenMeshState("sit").length>=@hero.getMen.length
+ 					doCollect
+				#end
+				end
+			end
 		end
 	end
 

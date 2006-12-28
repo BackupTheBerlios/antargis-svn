@@ -79,6 +79,7 @@ class AntRubyEntity<AntEntity
 			@uid=node.get("uid").to_i
 			getMap.checkUID(@uid)
 		end
+		setName(node.get("name"))
 	end
 
 	def loadXML(node)
