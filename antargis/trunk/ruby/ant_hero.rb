@@ -187,6 +187,9 @@ class AntHero<AntBoss
 		xmlnode=Node.new("test")
 		man.setNoBoss
 		man.saveXML(xmlnode)
+		@@tmpName||=1
+		@@tmpName+=1
+		man.setName("xxxxxxxx #{@@tmpName}") # reset name - so there's some distinction
 					
 		nhero=AntHero.new
 		nhero.preloadXML(xmlnode)
@@ -199,7 +202,6 @@ class AntHero<AntBoss
 		nhero.newRestJob(0)
 		newHLRestJob(1)
 		#nhero.setName("Sir "+nhero.getName)
-		man.setName("xxxxxxxx") # reset name - so there's some distinction
 		nhero.setOwner(self)
 		nhero.experience=0
 	end
