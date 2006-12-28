@@ -85,14 +85,22 @@ MoveJob::MoveJob()
 {
 }
 
-MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),mNear(pNear),mRun(pRun)
+MoveJob::MoveJob(int p,AntEntity *pTarget,float pNear,bool pRun):Job(p),mTargetEntity(pTarget),mNear(pNear),mRun(pRun)
+{
+  assert(mTargetEntity);
+  m3d=false;
+  // speed=70; // pixels per second
+  //  runSpeed=100;
+}
+
+MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),mTargetEntity(0),mNear(pNear),mRun(pRun)
 {
   m3d=false;
   // speed=70; // pixels per second
   //  runSpeed=100;
 }
 
-MoveJob::MoveJob(int p,const AGVector3 &pTarget,float pNear,bool pRun):Job(p),mTarget3(pTarget),mNear(pNear),mRun(pRun)
+MoveJob::MoveJob(int p,const AGVector3 &pTarget,float pNear,bool pRun):Job(p),mTarget3(pTarget),mTargetEntity(0),mNear(pNear),mRun(pRun)
 {
   m3d=true;
   // speed=70; // pixels per second
@@ -109,10 +117,16 @@ void MoveJob::move(AntEntity *e,float ptime)
 {
   float aspeed;
   float speed=e->getSpeed();
+
+  if(mTargetEntity)
+    {
+      mTarget=mTargetEntity->getPos2D();
+      mTarget3=mTargetEntity->getPos3D();
+    }
  
 #ifdef ENABLE_RUNNING  
   float runSpeed=speed*1.3;
- 
+
   if(mRun && e->getCondition()>0.0)
   {
     // decrease condition and if condition is zero - switch of running

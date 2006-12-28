@@ -368,20 +368,6 @@ class AntMan<AntRubyEntity
 			setNoBoss
 		end
 	end
-	def checkResources
-		if resource.get("bow")>0
-			setStrength(0.03)
-		elsif resource.get("sword")>0
-			setStrength(0.02)
-		else
-			setStrength(0.012)
-		end
-		if resource.get("shield")==0
-			setDefense(1)
-		else
-			setDefense(1.5)
-		end
-	end
 	def getDescription
 		if @boss.nil?
 			bname=_("nobody")

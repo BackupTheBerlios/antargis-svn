@@ -1,6 +1,5 @@
-class Level2<Level
-	def initialize
-		puts "Level inited"
+class Level2<AntLevelScript
+	def eventLevelStarted
 	end
 	def eventTrigger(hero,t)
 		case t.name
@@ -43,7 +42,11 @@ class Level2<Level
 			when "Rowen"
 				lostLevel
 			when "Bantor"
-				wonLevel
+				s=StoryFlow.new("bantor")
+				s.push("Rowen","We have indeed defeated Bantor. But some foes are still left within the tower.")
+				s.push("Rowen","These must be defeated, too.")
+				tellStory(s)
+#				wonLevel
 			when "Keep"
 				rowen=getMap.getByName("Rowen")
 				#raise 1
@@ -88,6 +91,30 @@ class Level2<Level
 				lostLevel
 				endLevel
 		end
+	end
+private
+	def wonLevel
+		#super
+		@won=true
+		start=StoryFlow.new("won")
+		start.push("","You have defeated the enemy.")
+		tellStory(start)
+	end
+	def tellStory(story)
+		@story=story
+		@interface.tellStory(story)
+	end
+	def lostLevel
+		return if @lost 
+		@interface.lostLevel
+		#super
+		@lost=true
+		start=StoryFlow.new("end")
+		start.push("Tutorial","You lost!")
+		tellStory(start)
+	end
+	def endLevel
+		@interface.endLevel
 	end
 
 end

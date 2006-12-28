@@ -565,7 +565,7 @@ class AntGameApp <AntRubyView
 				@inspect.selected=true
 			end
 		end
-		$inventory.inspect(e)
+		AntInventory.inspectEntity(e)
 	end
 
 	def resetJob

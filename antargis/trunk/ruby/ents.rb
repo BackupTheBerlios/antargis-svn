@@ -195,6 +195,11 @@ class AntRubyEntity<AntEntity
 		doEvent(:eventJobFinished)
 	end
 
+	def resourceChanged	
+		super
+		AntInventory.update(self)
+	end
+
 # 	def _dump(depth)
 # 		[@uid].pack("n")
 # 	end

@@ -38,6 +38,7 @@ class AntBoss<AntRubyEntity
 		@formation=nil
 		setProvide("boss",true)
 		setupMeshBoss
+		setAggression(3)
 	end
 	def loadXML(node)
 		super(node)
@@ -187,6 +188,7 @@ class AntBoss<AntRubyEntity
 			@player.add(self)
 		end
 		getMap.eventOwnerChanged(self)
+		AntInventory.update(self)
 	end
 	def getOwner
 		@owner

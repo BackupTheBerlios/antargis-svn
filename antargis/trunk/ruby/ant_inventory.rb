@@ -2,10 +2,12 @@
 
 # Inventory view
 class AntInventory<AGWidget
+	@@inventory=nil
+
 	attr_reader :job
 	def initialize(p,rect)
 		super(p,rect)
-		$inventory=self
+		@@inventory=self
 		@resTypes=["wood","stone","men","food","tool","gold","boat","shield","sword","bow","coal","ore","steel","rod","fruit","corn","flour"] #,"bread"]
 		setCaching(true)
 		@invinited=false
@@ -33,7 +35,7 @@ class AntInventory<AGWidget
 		return true
 	end
 
-	def inspect(e)
+	def inspectEntity(e)
 		getChild("shutter").hide
 		if e.getName!="" and (not e.getName=~/0\./)
 			setTitle(e.getName)
@@ -56,6 +58,12 @@ class AntInventory<AGWidget
 			updateInspection
 		end
 		super
+	end
+
+	def update(e)
+		if @inspect==e
+			updateInspection
+		end
 	end
 private
 	def checkFriend
@@ -135,6 +143,16 @@ private
 			end
 			#redraw
 		end
+	end
+
+	def AntInventory.inspectEntity(entity)
+		@@inventory.inspectEntity(entity) if @@inventory
+	end
+	def AntInventory.update(entity)
+		@@inventory.update(entity) if @@inventory
+	end
+	def AntInventory.resetPointer
+		@@inventory=nil
 	end
 end
 

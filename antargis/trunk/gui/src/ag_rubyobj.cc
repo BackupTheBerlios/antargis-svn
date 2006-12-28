@@ -41,7 +41,7 @@ void AGRubyObject::mark()
 }
 
 // call this function with any object you want to mark.
-void AGRubyObject::markObject(AGRubyObject *o)
+void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
 {
   assert(o);
 
@@ -53,7 +53,8 @@ void AGRubyObject::markObject(AGRubyObject *o)
     {
       rb_gc_mark(o->mRUBY);
     }
-  o->mark(); // call this directly
+  if(recursive)
+    o->mark(); // call this directly
 }
 
 void AGRubyObject::clear()

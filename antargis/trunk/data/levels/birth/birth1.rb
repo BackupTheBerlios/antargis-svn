@@ -138,7 +138,7 @@ class Level1<AntLevelScript
 		end
 	end
 	def wonLevel
-		super
+		#super
 		@won=true
 		start=StoryFlow.new("won")
 		start.push("","You have defeated the enemy.")
@@ -154,6 +154,18 @@ class Level1<AntLevelScript
 	def tellStory(story)
 		@story=story
 		@interface.tellStory(story)
+	end
+	def lostLevel
+		return if @lost 
+		@interface.lostLevel
+		#super
+		@lost=true
+		start=StoryFlow.new("end")
+		start.push("Tutorial","You lost!")
+		tellStory(start)
+	end
+	def endLevel
+		@interface.endLevel
 	end
 end
 

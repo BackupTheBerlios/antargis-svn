@@ -641,12 +641,14 @@ class AntHeroRecruitJob<AntHeroMoveJob
 			myMen.delete(@hero)
 		end
 		@basePos=@hero.getPos2D
-		otherMen=@target.getMen
-		(0..([myMen.length,@wantedMen].min-1)).each{|i|
+		otherMen=@target.getMen-[@target]
+		# filter men, which are too far away (>10)
+		otherMen=otherMen.select{|m|(m.getPos2D-@hero.getPos2D).length<10}
+		(0..([myMen.length,otherMen.length,@wantedMen].min-1)).each{|i|
 			my=myMen[i]
 			other=otherMen[i]
 			@myMap[my]=other
-			my.newMoveJob(0,other.getPos2D,0)
+			my.newMoveJob(0,other,0)
 			my.setMode("fetching")
 		}
 	end

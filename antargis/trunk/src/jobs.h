@@ -70,12 +70,14 @@ class MoveJob:public Job
 {
   AGVector2 mTarget;
   AGVector3 mTarget3;
+  AntEntity *mTargetEntity;
   float mNear;
   bool mRun;
 
   bool m3d;
  public:
   MoveJob();
+  MoveJob(int p,AntEntity *pTarget,float pnear=0,bool pRun=false);
   MoveJob(int p,const AGVector2 &pTarget,float pnear=0,bool pRun=false);
   MoveJob(int p,const AGVector3 &pTarget,float pnear=0,bool pRun=false);
   virtual ~MoveJob();
@@ -85,6 +87,11 @@ class MoveJob:public Job
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
   virtual AGString xmlName() const;
+
+  AntEntity *getTarget()
+    {
+      return mTargetEntity;
+    }
   
  private:
   void moveBy(AntEntity *e,float ptime,float aspeed);

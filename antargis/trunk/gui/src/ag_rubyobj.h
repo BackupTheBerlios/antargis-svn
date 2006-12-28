@@ -51,7 +51,7 @@ class AGEXPORT AGRubyObject
   // functions shouldn't be exported and NEVER be used in ruby!
   virtual void clear();
   virtual void mark();
-  void markObject(AGRubyObject *o);
+  void markObject(AGRubyObject *o,bool recursive=true);
 
 #endif
  public:

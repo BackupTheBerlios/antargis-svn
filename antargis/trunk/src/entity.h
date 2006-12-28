@@ -164,6 +164,7 @@ class AntEntity:public AGRubyObject
     virtual void newFetchJob(int p,AntEntity *pTarget,const AGString &pWhat);
     virtual void newMoveJob(int p,const AGVector2 &pTarget,float pnear=0.0);
     virtual void newMoveJob(int p,const AGVector3 &pTarget,float pnear=0.0);
+    virtual void newMoveJob(int p,AntEntity *target,float pnear=0.0);
     virtual void newFightJob(int p,AntEntity *target,float distance);
     virtual void delJob();
 

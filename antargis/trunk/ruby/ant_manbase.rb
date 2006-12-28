@@ -147,6 +147,26 @@ module AntManBase
 		name
 	end
 
+	def checkResources
+		# FIXME: maybe make hero a little stronger ???
+		#        or even make experienced men stronger ???
+		if resource.get("bow")>0
+			setStrength(0.03)
+			setMoraleStrength(0.04)
+		elsif resource.get("sword")>0
+			setStrength(0.024)
+			setMoraleStrength(0.03)
+		else
+			setStrength(0.015)
+			setMoraleStrength(0.02)
+		end
+		if resource.get("shield")==0
+			setDefense(1)
+		else
+			setDefense(1.5)
+		end
+	end
+
 	def eventHitWaterMark(fromAbove)
 		#raise 1
 		puts "eventHitWaterMark(#{fromAbove})"

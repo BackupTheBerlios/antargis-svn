@@ -95,6 +95,13 @@ class AntHero<AntBoss
 			@fireSound=nil
 		end
 	end
+
+	def newFightJob(d,ptarget)
+		checkResources
+		super
+		@moving=true
+		setMeshState("fight")
+	end
 	
 	def newHLRestJob(time)
 		@job=nil

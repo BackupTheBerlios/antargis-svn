@@ -484,6 +484,12 @@ void AntEntity::newMoveJob(int p,const AGVector3 &pTarget,float pnear)
   setJob(new MoveJob(p,pTarget,pnear));
 }
 
+void AntEntity::newMoveJob(int p,AntEntity *pTarget,float pnear)
+{
+  setJob(new MoveJob(p,pTarget,pnear));
+}
+
+
 void AntEntity::newFightJob(int p,AntEntity *target,float distance)
 {
   if(!canFight())
@@ -632,6 +638,19 @@ void AntEntity::mark()
   AGRubyObject::mark();
   for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
     markObject(*i);
+
+  if(mJob)
+    {
+      MoveJob *mj=dynamic_cast<MoveJob*>(mJob);
+      FightJob *fj=dynamic_cast<FightJob*>(mJob);
+      if(mj)
+	if(mj->getTarget())
+	  markObject(mj->getTarget(),false);
+      if(fj)
+	if(fj->getTarget())
+	  markObject(fj->getTarget(),false);
+	
+    }
 }
 
 
