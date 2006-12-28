@@ -12,7 +12,7 @@ class AntInventory<AGWidget
 		setCaching(true)
 		@invinited=false
 
-		@buttonNames=["doRecruit","doTakeFood","doTakeWeapons","doConstruct","doUpgrade","doContinue"]
+		@buttonNames=["doRecruit","doTakeFood","doTakeWeapons","doConstruct","doUpgrade","doContinue","doSupport"]
 
 		addSignal("sigJobChanged")
 
@@ -79,9 +79,14 @@ private
 	end
 	def checkButtons
 		my=(@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero)
-		getChild("doRecruit").setEnabled(my)
-		getChild("doTakeFood").setEnabled(my)
-		getChild("doTakeWeapons").setEnabled(my) # FIXME
+		
+		myok=(my and (not @inspect.underAttack))
+
+			
+		getChild("doRecruit").setVisible(((not my) or (not @inspect.underAttack)))
+		getChild("doRecruit").setEnabled(myok)
+		getChild("doTakeFood").setEnabled(myok)
+		getChild("doTakeWeapons").setEnabled(myok) # FIXME
 
 		getChild("doConstruct").setVisible(@inspect.is_a?(AntHouse))
 		getChild("doUpgrade").setVisible((not @inspect.is_a?(AntHouse)))
@@ -89,6 +94,11 @@ private
 		getChild("doUpgrade").setEnabled((my and @inspect.experience>0.95))
 		getChild("doContinue").setVisible(@inspect.is_a?(AntBuildingSite)) # FIXME!!!!!!!!!!!
 		getChild("doContinue").setEnabled(@inspect.is_a?(AntBuildingSite)) # FIXME!!!!!!!!!!!
+
+		# support / hide recruit
+		getChild("doSupport").setVisible((my and @inspect.underAttack))
+
+		
 	end
 
 	def setValue(name,value)

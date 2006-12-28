@@ -105,6 +105,7 @@ class AntHouse<AntBoss
 	
 	def eventAttacked(by)
 		newHLDefendJob(by)
+		AntInventory.update(self)
 	end
 	
 	def moveHome(man)

@@ -200,6 +200,10 @@ class AntRubyEntity<AntEntity
 		AntInventory.update(self)
 	end
 
+	def underAttack
+		false
+	end
+
 # 	def _dump(depth)
 # 		[@uid].pack("n")
 # 	end

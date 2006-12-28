@@ -217,6 +217,14 @@ class AntGameApp <AntRubyView
 					@hero.upgradeMan(@target)
 				when "doContinue"
 					@hero.newHLBuildJob(@target,nil)
+				when "doSupport"
+					targetsTarget=nil
+					if @target.getJob.is_a?(AntHeroFightJob)
+						targetsTarget=@target.getJob.target
+					end
+					if targetsTarget
+						@hero.newHLFightJob(targetsTarget)
+					end
 			end
 		end
 		return true
@@ -252,6 +260,12 @@ class AntGameApp <AntRubyView
 				getScene.setEnabled(@sceneEnabled)
 			when SDLK_F1
 				hero=1
+			when SDLK_ESCAPE
+				if @hero
+					@hero.newHLRestJob(10)
+				end
+			when SDLK_p
+				eventPause(nil)
 		end
 		return super(e)
 	end

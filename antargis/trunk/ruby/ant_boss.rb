@@ -176,6 +176,10 @@ class AntBoss<AntRubyEntity
 		end
 	end
 
+	def underAttack
+		@job.is_a?(AntHeroFightJob)
+	end
+
 
 	def setOwner(owner)
 		@owner=owner

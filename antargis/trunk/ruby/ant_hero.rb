@@ -185,10 +185,13 @@ class AntHero<AntBoss
 	def upgradeMan(man)
 		# copy properties through xml-node	
 		xmlnode=Node.new("test")
+		man.setNoBoss
 		man.saveXML(xmlnode)
-		
+					
 		nhero=AntHero.new
+		nhero.preloadXML(xmlnode)
 		nhero.loadXML(xmlnode)
+		nhero.eventMapChanged
 		removeMan(man)
 		getMap.removeEntity(man)
 		getMap.insertEntity(nhero)

@@ -143,6 +143,7 @@
 								<frame width="3">
 									<table cols="5" rows="1">
 										<button  col="0" row="0" name="doRecruit" caption-image="data/gui/recruit.png" tooltip="Recruit"/>
+										<button  col="0" row="0" name="doSupport" caption-image="data/gui/support.png" tooltip="Support in defense"/>
 										<button  col="1" row="0" name="doTakeFood" caption-image="data/gui/take_apple.png" tooltip="Take food"/>
 										<button  col="2" row="0" name="doTakeWeapons" caption-image="data/gui/take_weapon.png" tooltip="Take weapons"/>
 										<button  col="3" row="0" name="doUpgrade" caption-image="data/gui/upgrade.png" tooltip="Upgrade" enabled="false"/>
