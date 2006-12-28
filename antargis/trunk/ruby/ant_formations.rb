@@ -42,6 +42,9 @@ class AntFormation
 			r=getPositionReal(man)
 			if r.nil?
 				if not @boss.getMen.member?(man)
+					puts "/// #{man} #{@boss}"
+					puts "MAN:",man.uid," BOSS:",@boss.uid
+					puts "MEN:",@boss.getMen.collect{|m|m.uid.to_s}.join(" ")
 					raise "Man #{man} is not member of #{@boss}'s men!"
 				end
 				raise "Problem in AntFormation!"

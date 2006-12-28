@@ -256,15 +256,15 @@ class AntSaveDialog<AntDialog
 	end
 	def eventOk(e)
 		filename=toAGEdit(getChild("Filename")).getText
-		puts "FILENAME:"+filename
+		#puts "FILENAME:"+filename.to_s
 		if not filename =~ /.*\.antlvl/ then
-			filename=filename+".antlvl"
+			filename=filename.to_s+".antlvl"
 		end
 		hide
 		getMap.saveMap(getSavePath+"/"+filename)
 		takeSmallScreenshot.save(getSavePath+"/#{filename.gsub("antlvl","png")}")
 		getMap.pause=false
-		setNormalVolumeWave
+		AntSound.setNormalVolumeWave
 		close
 		return true
 	end
@@ -309,13 +309,14 @@ class AntLoadDialog<AntDialog
 			if x =~ /.*\.antlvl/ then
 				puts "FILE:"+x
 				value=x.gsub(".antlvl","")
-				@lb.insertItem(x,value)
+				@lb.insertItem(x,AGStringUtf8.new(value))
 			end
 		}
 	end
 	def eventOk(e)
 		file=@lb.getSelectedID
 		if file!="" then
+			getMap.clear
 			getMap.loadMap(getSavePath+"/"+file)
 			GC.start
 		end

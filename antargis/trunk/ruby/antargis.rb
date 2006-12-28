@@ -324,7 +324,7 @@ class AntGameApp <AntRubyView
 	def eventHeroButton(e)
 		c=e.getCaller.getName
 		num=c[4..4]
-		name=@layout.getChild("HeroName#{num}").getText
+		name=@layout.getChild("HeroName#{num}").getText.to_s
 		ent=getMap.getByName(name)
 		selectHero(ent)
 		if ent==@inspect

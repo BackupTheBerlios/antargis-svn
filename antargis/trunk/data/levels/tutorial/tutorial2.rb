@@ -1,7 +1,4 @@
-class Level1<Level
-	def initialize
-		@started=false
-	end
+class Level1<AntLevelScript
 	def eventLevelStarted
 		if not @started
 			start=StoryFlow.new("beginning")
@@ -45,7 +42,8 @@ class Level1<Level
 	end
 	def wonLevel
 		return if @won 
-		super
+		@interface.wonLevel
+		#super
 		@won=true
 		start=StoryFlow.new("end")
 		start.push("Tutorial","You finished this level.")
@@ -53,7 +51,8 @@ class Level1<Level
 	end
 	def lostLevel
 		return if @lost 
-		super
+		@interface.lostLevel
+		#super
 		@lost=true
 		start=StoryFlow.new("end")
 		start.push("Tutorial","You lost!")
@@ -64,6 +63,14 @@ class Level1<Level
 			when "Rowen"
 				lostLevel
 		end
+	end
+
+	def tellStory(story)
+		@story=story
+		@interface.tellStory(story)
+	end
+	def endLevel
+		@interface.endLevel
 	end
 
 end

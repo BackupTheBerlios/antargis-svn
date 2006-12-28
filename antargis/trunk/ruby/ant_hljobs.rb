@@ -32,11 +32,55 @@ class UID
 		@id=id
 	end
 	def method_missing(n,*args)
+# 		args.collect!{|x|
+# 			if x.is_a?(UID)
+# 				return x.tryGet
+# 			else
+# 				return x
+# 			end
+# 		}
 		getMap.getByUID(@id).send(n,*args)
+	end
+	def getID
+		@id
+	end
+	def tryGet
+		o=getMap.getByUID(@id)
+		if o
+			return o
+		else
+			return self
+		end
+	end
+	def <=>(uid)
+		getID<=>uid.getID
 	end
 end
 
-#
+class UIDArray<Array
+	def initialize(a)
+		super
+		@checked=false
+	end
+	def member?(m)
+		check
+		super(m.tryGet)
+	end
+
+	alias :oldeach :each
+	def each(&p)
+		check
+		oldeach(&p)
+	end
+	private
+	def check
+		if not @checked
+			@checked=true
+			collect!{|x|x.tryGet}
+		end
+	end
+end
+
 # Base class for high-level jobs. It contains the basic functions that're needed for usage within
 # AntBoss (AntHero and AntHouse)
 class AntHLJob
@@ -66,6 +110,9 @@ class AntHLJob
 					if value[0].is_a?(AntEntity)
 						c.set("type","AntEntities")
 						value=value.collect{|v|v.uid.to_s}.join(",")
+					elsif value[0].is_a?(AGVector2)
+						c.set("type","AGVector2s")
+						value=value.collect{|v|v.to_s}.join(":")
 					end
 				when Fixnum,Float,TrueClass,FalseClass
 					c.set("type",value.class.to_s)
@@ -76,6 +123,8 @@ class AntHLJob
 					c.set("type","String")
 				else
 					value=AntMarshal.dump(value)
+					puts "UNKNOWN TYPE:#{value} #{value.class} #{name}"
+					raise 1
 			end
 			puts "#{value} #{name}"
 			c.set("name",name)
@@ -93,12 +142,24 @@ class AntHLJob
 				puts "TYPE: #{c.get("type")}"
 				case c.get("type")
 					when "AntEntity"
-						value=UID.new(value.to_i) #getMap.getByUID(value.to_i)
+						#value=UID.new(value.to_i) #getMap.getByUID(value.to_i)
+						value=getMap.getByUID(value.to_i)
 					when "AntEntities"
-						value=value.split(",").collect{|v|UID.new(v.to_i)} #getMap.getByUID(v)}
+	#					value=value.split(",").collect{|v|UID.new(v.to_i)} #getMap.getByUID(v)}
+						value=value.split(",").collect{|v|getMap.getByUID(v)}
+#						value=UIDArray.new(value)
 					when "AGVector2"
 						x,y=value.gsub("(","").gsub(")","").split(",").collect{|v|v.to_f}
 						value=AGVector2.new(x,y)
+						puts value
+						#raise 1
+					when "AGVector2s"
+						a=[]
+						value.split(":").each{|v|
+							x,y=v.gsub("(","").gsub(")","").split(",").collect{|v|v.to_f}
+							a.push(AGVector2.new(x,y))
+						}
+						value=a
 						puts value
 						#raise 1
 					when "Fixnum"
@@ -112,7 +173,7 @@ class AntHLJob
 					when "String"
 						# do nothing
 					else
-						puts "unknown type for #{name}"
+						puts "unknown type for #{name} #{type}"
 						value=AntMarshal.load(c.get("value"))
 				end
 				instance_variable_set(name,value)
@@ -169,11 +230,16 @@ class AntHeroMoveJob<AntHLJob
 
 # 		puts hero.getPos2D,pos
 # 		puts hero.getPos2D.class,pos.class
-		@waypoints=getMap.path.computePath(hero.getPos2D,@pos)
-
+		if getMap.path
+			@waypoints=getMap.path.computePath(hero.getPos2D,@pos)
+		else
+			@waypoints=[]
+		end
 		@waypoints.unshift(@hero.getPos2D)
 		@waypoints.push(@pos)
-		@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
+		if getMap.path
+			@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
+		end
 		@men=getMen
 		@moveFinished=false
 
@@ -429,7 +495,9 @@ class AntHeroFightJob<AntHeroMoveJob
 		man.newFightJob(0,target)
 		#puts man
 		#puts "#{man.getName} attacks #{target.getName}"
-		puts "#{man.getHero.getName}(#{man.getName}) attacks #{target.getHero.getName}(#{target.getName})"
+		if man and man.getHero and target and target.getHero
+			puts "#{man.getHero.getName}(#{man.getName}) attacks #{target.getHero.getName}(#{target.getName})"
+		end
 	end
 
 	def findNextEnemy(man,but)
@@ -472,6 +540,7 @@ class AntHeroFightJob<AntHeroMoveJob
 			return
 		end
 		man.setMode("defeated")
+		puts @sitpos.length
 		raise "no sit position" if @sitpos[man].nil?
 		man.newMoveJob(0,@sitpos[man],0)
 	end

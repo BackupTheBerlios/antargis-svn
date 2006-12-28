@@ -56,9 +56,9 @@ class Level1<AntLevelScript
 	def eventOwnerChanged(ent)
 		case ent.getName	
 			when "Rowen"
-				@interface.lostLevel
+				lostLevel
 			when "Bantor"
-				@interface.wonLevel
+				wonLevel
 		end
 	end
 
@@ -71,6 +71,7 @@ class Level1<AntLevelScript
 		@interface.lostLevel
 	end
 	def wonLevel
+		puts "INTERFACE:",@interface,self
 		@interface.wonLevel
 		@won=true
 		start=StoryFlow.new("recruit")

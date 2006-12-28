@@ -67,7 +67,7 @@ class AntMap:public HeightMap
   AntEntity *getNext(AntEntity *me,const AGString &pType,size_t atLeast=0);
   std::vector<AntEntityPtr> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
 
-  virtual AntEntity *loadEntity(const Node &node);
+  virtual void processXMLNode(const Node &node);
 
   void saveXML(Node &node) const;
   void loadXML(const Node &node);

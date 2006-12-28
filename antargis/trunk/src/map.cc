@@ -107,13 +107,13 @@ void AntMap::loadXML(const Node &node)
   Node::const_iterator i=node.begin();
   for(;i!=node.end();i++)
     {
-      AntEntity *e=0;
+      //      AntEntity *e=0;
       Node *n=*i;
-      if((e=loadEntity(*n)))
-        {
+      processXMLNode(*n);
+      /*        {
 	  e->loadXML(*n);
 	  insertEntity(e);
-	}
+	  }*/
     }
   // tell entities, that map has changed
   std::list<AntEntity*>::iterator k=mEntities.begin();
@@ -187,11 +187,11 @@ void AntMap::move(float pTime)
 }
 
 
-AntEntity *AntMap::loadEntity(const Node &node)
+void AntMap::processXMLNode(const Node &node)
 {
-  AntEntity *e=0;
+  //  AntEntity *e=0;
   cdebug("type unknown:"<<node.getName());
-  return e;
+  //  return e;
 }
 
 /*std::vector<AntEntityPtr> AntMap::getByType(const AGString &pType)

@@ -94,6 +94,8 @@ class AntEntity:public AGRubyObject
     float mMoraleStrength;
     
     float mDefense;
+
+    bool mDefeated;
   public:
     float experience;
     float learnAmount;
@@ -108,6 +110,8 @@ class AntEntity:public AGRubyObject
     AntEntity(const AGVector3 &p);
     AntEntity(const AGVector2 &p);
     virtual ~AntEntity();
+
+    bool defeated() const;
 
     void setMinimapColor(const AGColor &c);
     void setMinimapSize(float f);

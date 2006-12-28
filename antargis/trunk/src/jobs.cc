@@ -279,6 +279,14 @@ void FightJob::move(AntEntity *e,float ptime)
   if(e->getEnergy()<0)
     throw std::runtime_error("Problem: fighting, but I'm alread dead!");
     
+  if(mTarget->defeated())
+    {
+      // already died - so no sigDefeated
+      e->eventHaveDefeated(mTarget);
+      jobFinished(e);
+      return; // early out
+    }
+
   if(mTarget->getEnergy()<=0.0)
     {
       // already died - so no sigDefeated

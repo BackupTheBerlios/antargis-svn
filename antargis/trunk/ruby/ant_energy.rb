@@ -14,7 +14,8 @@ class AntEnergy<AGWidget
 
 		@colors[:troops]=AGColor.new(0xcf,0,0)
 		@colors[:energy]=AGColor.new(0,0xcf,0)
-		@colors[:morale]=AGColor.new("#5555ff")
+		@colors[:morale]=AGColor.new("#555555")
+		@colors[:morale_defeated]=AGColor.new("#5555ff")
 		@colors[:food]=AGColor.new("#975500")
 		@colors[:exp]=AGColor.new("#FFFFFF")
 		@hborder=0
@@ -48,9 +49,13 @@ class AntEnergy<AGWidget
 			v=check(@values[k])
 			if v<0
 				puts v
-			raise 1
+				raise 1
 			end
-			c=@colors[k]
+			if k==:morale and @hero.defeated
+				c=@colors[:morale_defeated]
+			else
+				c=@colors[k]
+			end
 			a0=c*0.7
 			a1=c*0.7
 			a2=c*1.0

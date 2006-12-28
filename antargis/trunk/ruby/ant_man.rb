@@ -323,12 +323,31 @@ class AntMan<AntRubyEntity
 	def saveXML(node)
 		super(node)
 		node.set("bossName",@bossName)
+		if @target
+			node.set("targetEntity",@target.uid.to_s)
+		end
 	end
+	def preloadXML(node)
+		super
+		@bossName=node.get("bossName")
+	end
+
 	def loadXML(node)
 		super(node)
-		@bossName=node.get("bossName")
+		if @bossName!=""
+			boss=getMap.getByName(@bossName)
+			if boss
+				@boss=boss
+				@boss.signUp(self)
+				@signed=true
+			end
+		end
+
 		if getMap.getPos(getPos2D).z>0
 			setOnWater(false)
+		end
+		if node.get("targetEntity")!=""
+			@target=getMap.getByUID(node.get("targetEntity").to_i)
 		end
 	end
 	

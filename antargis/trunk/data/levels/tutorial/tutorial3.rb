@@ -1,7 +1,4 @@
-class Level1<Level
-	def initialize
-		@started=false
-	end
+class Level1<AntLevelScript
 	def eventLevelStarted
 		if not @started
 			start=StoryFlow.new("beginning")
@@ -33,4 +30,17 @@ class Level1<Level
 		puts "TRIGGER"
 		return false #ignore
 	end
+private
+	def tellStory(story)
+		@story=story
+		@interface.tellStory(story)
+	end
+	def endLevel
+		@interface.endLevel
+	end
+	def lostLevel
+		@interface.lostLevel
+	end
+
+
 end

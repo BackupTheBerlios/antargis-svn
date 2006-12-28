@@ -52,10 +52,10 @@ class AntBoss<AntRubyEntity
 			case t
 				when "AntHeroMoveJob"
 					@job=AntHeroMoveJob.new(self,0,AGVector2.new(0,0),0)
-				when "AntRestJob"
-					@job=AntHeroMoveJob.new(self,10)
+				when "AntHeroRestJob"
+					@job=AntHeroRestJob.new(self,10)
 				else
-					raise "unknown job"
+					raise "unknown job: #{t}"
 			end
 			@job.loadXML(n)
 		}

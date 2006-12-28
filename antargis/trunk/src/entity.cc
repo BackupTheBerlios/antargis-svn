@@ -84,6 +84,8 @@ void AntEntity::init()
 
   experience=0;
   learnAmount=0.1;
+
+  mDefeated=false;
 }
 
 
@@ -117,8 +119,13 @@ void AntEntity::saveXML(Node &node) const
     node.set("id",AGString(mID));
     node.set("exp",AGString(experience));
     node.set("learnAmount",AGString(learnAmount));
+
+    node.set("defeated",AGString(mDefeated));
+
     Node &res=node.addChild("resource");
     resource.saveXML(res);
+
+
 
     if(mJob)
       {
@@ -134,6 +141,8 @@ void AntEntity::loadXML(const Node &node)
   mHealSpeed=node.get("healSpeed").toFloat();
   onGround=node.get("onGround").toBool();
   onWater=node.get("onWater").toBool();
+
+  mDefeated=node.get("defeated").toBool();
   //  assert(onGround);
   Node::NodeVector v=node.getChildren("position");
   Node::const_iterator i=v.begin();
@@ -343,6 +352,8 @@ void AntEntity::incMorale(float pTime)
       mMorale+=pTime*mMoraleHeal;
       if(mMorale>1.0)
 	mMorale=1.0;
+      if(mMorale>0.5)
+	mDefeated=false;
     }
 }
 
@@ -541,6 +552,7 @@ void AntEntity::decMorale(float amount)
   if(mMorale<0.0)
     {
       mMorale=0.0;
+      mDefeated=true;
       eventMoraleLow();
     }
 }
@@ -582,6 +594,7 @@ void AntEntity::sigDefeated()
   if(!mMoraleFlag)
     return;
   mMorale=-0.1; // really deep morale
+  mDefeated=true;
   // this prevents other fight-jobs from not being discarded
   eventDefeated();
 }
@@ -700,7 +713,7 @@ bool AntEntity::provides(const AGString &pName) const
 
 bool AntEntity::canFight() const
 {
-  return (getEnergy()>0.0 && getMorale()>=0.1);
+  return (getEnergy()>0.0 && getMorale()>=0.1 && !mDefeated);
 }
 
 bool AntEntity::isFighting() const
@@ -848,4 +861,9 @@ void AntEntity::incExperience(float a)
   experience+=a;
   if(experience>1)
     experienceFull();
+}
+
+bool AntEntity::defeated() const
+{
+  return mDefeated;
 }

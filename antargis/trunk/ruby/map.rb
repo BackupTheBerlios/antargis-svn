@@ -107,6 +107,7 @@ class AntRubyMap<AntMap
 	end
 	def getByUID(id)
 		ents=getAllEntitiesV
+		id=id.to_i
 		ents.each{|e|
 			r=e.get
 			if r.uid==id
@@ -127,24 +128,24 @@ class AntRubyMap<AntMap
 	def eventHeroDied(ent)
 		@heroes.delete(ent)
 		if @script
-			@script.eventHeroDied(ent)
+			@script.eventHeroDied(AntLevelHero.new(ent))
 		end
 		@app and @app.setupHeroDisplay
 	end
 	def eventOwnerChanged(ent)
 		if @script
-			@script.eventOwnerChanged(ent)
+			@script.eventOwnerChanged(AntLevelHero.new(ent))
 		end
 		@app and @app.setupHeroDisplay
 	end
 	def eventHLJobFinished(hero,job)
 		if @script
-			@script.eventHLJobFinished(hero,job)
+			@script.eventHLJobFinished(AntLevelHero.new(hero),AntLevelJob.new(job))
 		end
 	end
 	def eventHLDismissed(hero)
 		if @script
-			@script.eventDismissed(hero)
+			@script.eventDismissed(AntLevelHero.new(hero))
 		end
 	end
 
@@ -240,18 +241,24 @@ class AntRubyMap<AntMap
 	# loading & saving
 	################################
 	
-	def loadEntity(node)
+	def processXMLNode(node)
 		nodeName=node.getName
 		nodeName.gsub!("New","")  # remove New out of old antNew.. Names
 
 		if @entTypeMap.keys.member?(nodeName)
 			e=@entTypeMap[nodeName].new
-
+			@loadedEntsNum+=1
 			if e.is_a?(AntHero)
 				@heroes.push(e)
 			end
-
 		end
+		if e
+			e.preloadXML(node)
+			@loadedEntities[node]=e
+		end
+# 	end
+# 
+# 	def loadEntityFromXML(e,node)
 		if node.getName=="humanPlayer" then
 			player=AntHumanPlayer.new("")
 			player.loadXML(node)
@@ -289,14 +296,29 @@ class AntRubyMap<AntMap
 		if node.getName=="trigger" then
 			@triggers.push(Trigger.new(node))
 		end
-		if e
-			e.loadXML(node)
-			insertEntity(e)
-		end
+# 		if e
+# 			e.loadXML(node)
+# 			insertEntity(e)
+# 		end
 	end
 	
 	def loadXML(n)
+		@loadedEntsNum=1
+		@loadedEntities={}
 		super(n)
+# 		puts @loadedEntities.length
+# 		puts @loadedEntsNum
+# 		raise 1
+		@loadedEntities.each{|node,entity|
+			insertEntity(entity)
+		}
+
+		@loadedEntities.each{|node,entity|
+#			loadEntityFromXML(entity,node)
+			entity.loadXML(node)
+			entity.eventMapChanged
+		}
+		
 
 
 		# add pathfinder
@@ -335,7 +357,7 @@ class AntRubyMap<AntMap
 			if pClass.ancestors.member?(AntLevelScript)
 				interface=AntLevelInterface.new(self,@app)
 				@script=pClass.new(interface)
-				puts @script.class
+				puts "SCRIPT:",@script.class
 			end
 	
 		end
@@ -414,7 +436,7 @@ class AntRubyMap<AntMap
 
 	def getByName(name)
 		if name.class!=String
-			dputs name
+			dputs name,name.class
 		end
 		super(name)
 	end

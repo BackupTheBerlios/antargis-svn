@@ -1,12 +1,11 @@
-class Level1<Level
-	def initialize
-		@sheep=false
-		@sack=false
-		@defeat=false
-		@takeFood=false
-	end
+class Level1<AntLevelScript
 	def eventLevelStarted
+		@started||=false
 		if not @started
+			@sheep=false
+			@sack=false
+			@defeat=false
+			@takeFood=false
 			start=StoryFlow.new("beginning")
 
 			start.push("Tutorial - Food","On this island you will learn that your troops need food and how to get it.")
@@ -23,26 +22,27 @@ class Level1<Level
 		if hero.getName!="Rowen"
 			return
 		end
-		if job.class==AntHeroFightAnimalJob
-			if job.target.class==AntSheep and (not @sheep)
+
+		if job.is_a?(AntHeroFightAnimalJob)
+			if job.target.is_a?(AntSheep) and (not @sheep)
 				@sheep=true
 				start=StoryFlow.new("sheep")
 				start.push("Tutorial","Now your troops have shared the food among them as you can see in their inventories.")
 				start.push("Tutorial","Whenever they rest and are really hungry they will eat their food automatically. But you have to look that they have time to rest for this.")
 				start.push("Tutorial","It seems like someone has left a bag a little down here. Take it up. (Right click)")
 				tellStory(start)
-			elsif job.target.class==AntSack
+			elsif job.target.is_a?(AntSack)
 				@sack=true
 				start=StoryFlow.new("sheep")
 				start.push("Tutorial","Well done, now complete your task by conquering the farm and taking their food.")
 				tellStory(start)
 			end
-		elsif job.class==AntHeroFightJob
+		elsif job.is_a?(AntHeroFightJob)
 			@defeat=true
 			start=StoryFlow.new("sheep")
 			start.push("Tutorial","Now take the food by selecting the farm and clicking on the 'take food' button.")
 			tellStory(start)
-		elsif job.class==AntHeroTakeJob
+		elsif job.is_a?(AntHeroTakeJob)
 			@takeFood=true
 		end
 		if (@sheep and @defeat and @takeFood and @sack)
@@ -60,8 +60,9 @@ class Level1<Level
 		return false #ignore
 	end
 	def wonLevel
+		@interface.wonLevel
 		return if @won 
-		super
+		#super
 		@won=true
 		start=StoryFlow.new("end")
 		start.push("Tutorial","You finished this level.")
@@ -74,4 +75,18 @@ class Level1<Level
 				endLevel
 		end
 	end
+	private
+
+	def endLevel
+		@interface.endLevel
+	end
+	def lostLevel
+		@interface.lostLevel
+	end
+
+	def tellStory(story)
+		@story=story
+		@interface.tellStory(story)
+	end
+
 end

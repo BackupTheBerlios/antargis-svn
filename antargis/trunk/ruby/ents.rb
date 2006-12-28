@@ -70,8 +70,7 @@ class AntRubyEntity<AntEntity
 		self.experience=1
 	end
 
-	def loadXML(node)
-		super
+	def preloadXML(node)
 		if node.get("birthday")!=""
 			@birthday=node.get("birthday").to_f
 		end
@@ -80,6 +79,10 @@ class AntRubyEntity<AntEntity
 			@uid=node.get("uid").to_i
 			getMap.checkUID(@uid)
 		end
+	end
+
+	def loadXML(node)
+		super
 	end
 	def saveXML(node)
 		super(node)
