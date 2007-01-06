@@ -39,7 +39,25 @@ class AntLevelInterface
 
 	# get interface-objects for all players. returns an array of all the players
 	def getPlayers
-		@map.getPlayers.collect{|p|AntLevelPlayers.new(p)}
+		@map.players.collect{|p|AntLevelPlayer.new(p)}
+	end
+
+	def getPlayer(name)
+		return nil if not name.is_a?(String)
+		getPlayers.select{|p|p.getName==name}[0]
+	end
+
+	def getHero(name)
+		return nil if not name.is_a?(String)
+		e=@map.getByName(name)
+		if e
+			return AntLevelHero.new(e)
+		end
+	end
+
+	def getTarget(name)
+		return nil if not name.is_a?(String)
+		return getMap.getTarget(name)
 	end
 
 	# use this to set the level's state to "won"
@@ -65,9 +83,13 @@ class AntLevelInterface
 		@story=flow
 	end
 
+	def focusEntity(entity)
+		return unless entity.is_a?(AntLevelEntity)
+		@app.focusHero(getMap.getByName(entity.getName))
+	end
 end
 
-class AntLevelPlayers
+class AntLevelPlayer
 	def initialize(player)
 		@player=player
 	end
@@ -84,18 +106,34 @@ end
 
 class AntLevelEntity
 	include AntScriptingEntityFullAccess
+	include AntScriptingEntityEnhancedAccess
 	def initialize(ent)
 		@ent=ent
+		@valid=true
 	end
 	def is_a?(pclass)
-		@ent.is_a?(pclass)
+		@ent.is_a?(pclass) or super(pclass)
+	end
+	# FIXME: check this ???
+	def valid
+		@valid
+	end
+	def ==(e)
+		puts "== #{self} #{e}"
+		return -1 unless e.is_a?(AntLevelEntity)
+		@ent==getMap.getByName(e.getName)
+	end		
+	def <=>(e)
+		puts "<=> #{self} #{e}"
+		return -1 unless e.is_a?(AntLevelEntity)
+		@ent<=>getMap.getByName(e.getName)
 	end
 end
 
 class AntLevelHero<AntLevelEntity
 	include AntScriptingHeroFullAccess
 	def getPlayer
-		AntLevelPlayers.new(@ent.getPlayer)
+		AntLevelPlayer.new(@ent.getPlayer)
 	end
 end
 
@@ -134,6 +172,11 @@ class AntLevelScript
 	end
 	def loadXML(node)
 		loadLocals(node)
+	end
+	
+	def method_missing(*s)
+		dputs "method_missing:",s
+		@interface.send(*s)
 	end
 
 # maybe exchange this

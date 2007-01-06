@@ -117,7 +117,9 @@ class AntHLJob
 						# do nothing
 					else
 						puts "unknown type for #{name} #{type}"
-						value=AntMarshal.load(c.get("value"))
+						if c.get("value")!=""
+							value=AntMarshal.load(c.get("value"))
+						end
 				end
 				instance_variable_set(name,value)
 			end
@@ -168,6 +170,7 @@ class AntHeroMoveJob<AntHLJob
 		@hero.delJob
 		@prio=prio
 		@pos=AGVector2.new(pos.x,pos.y)
+		@overalltarget=@pos
 		@dist=dist
 		@formatDist=0
 
@@ -245,7 +248,9 @@ class AntHeroMoveJob<AntHLJob
 		if @moveFinished
 			return	
 		end
-		puts "CHECK #{@state} #{man.getMode} #{man}"
+		if @hero.getName=="Rowen"
+			puts "CHECK #{@state} #{man.getMode} #{man} #{man.getPos2D}"
+		end
 		case @state
 			when "format"
 				if man.getMode=="format"
@@ -255,9 +260,12 @@ class AntHeroMoveJob<AntHLJob
 					startWalking
 				end
 			when "moving"
+				dputs "WAYPOINTS:",@waypoints.collect{|w|w.to_s}.join(" ")
 				if @waypoints.length>0
 					startFormatting
 				else
+					dputs "FINISHED:",@hero.getPos2D,@pos,@overalltarget
+				
 					self.moveFinished=true
 				end
 		end

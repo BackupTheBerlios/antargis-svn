@@ -41,6 +41,9 @@
 
 bool gDRM=false;
 
+
+AGDecryptor *AGSurface::mDecryptor=0;  
+
 ///////////////////////////////////////////////////////////////////////
 // Tools
 ///////////////////////////////////////////////////////////////////////
@@ -353,13 +356,18 @@ AGSurface AGSurface::load(const std::string &pFilename)
   return n;
 }
 
-AGSurface AGSurface::loadDRM(const std::string &pName,AGDecryptor &pDec)
+AGSurface AGSurface::loadDRM(const std::string &pName)
 {
+  assert(mDecryptor);
+
   AGSurface n;
+  if(!mDecryptor)
+    return n;
+
   n.s=new AGInternalSurface;
   std::string file=loadFile(pName);
 
-  file=pDec.decrypt(file,pName);
+  file=mDecryptor->decrypt(file,pName);
   gDRM=true;
 
   cdebug("FIRST:"<<int(file[0])<<","<<int(file[1])<<","<<int(file[2]));
@@ -539,6 +547,11 @@ void AGSurface::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor
     }
 }
 
+
+void AGSurface::setDecryptor(AGDecryptor *pDecryptor)
+{
+  mDecryptor=pDecryptor;
+}
 
 
 AGDecryptor *toDecryptor(AGPlugin *p)

@@ -38,7 +38,7 @@
 
 using namespace std;
 
-AGWidget *agNoParent=0;
+//AGWidget *agNoParent=0;
 
 class MWidgetSet:public std::set<AGWidget*>
 {

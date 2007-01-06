@@ -29,6 +29,11 @@ class AntScriptingJob
 		return unless pClass.is_a?(Class)
 		@job.is_a?(pClass)
 	end
+	def target
+		if @job.respond_to?(:target)
+			AntLevelEntity.new(@job.target)
+		end
+	end
 end
 
 module AntScriptingEntityFullAccess
@@ -75,7 +80,7 @@ module AntScriptingHeroFullAccess
 
 	# set the aggression level (0,1,2)
 	def setAggression(level)
-		return unless [0,1,2].member?(level)
+		return unless [1,2,3].member?(level)
 		if valid
 			@ent.setAggression(level)
 		end
@@ -83,6 +88,10 @@ module AntScriptingHeroFullAccess
 
 	# move my hero to place
 	def moveTo(place)
+		dputs "MOVETO:",place,place.class
+		place=place.pos if place.is_a?(TargetPos)
+		place=place.dim2 if place.is_a?(AGVector3)
+		dputs "MOVETO:",place,place.class
 		return unless place.is_a?(AGVector2)
 		if valid
 			@ent.newHLMoveJob(0,place,0)
@@ -98,6 +107,10 @@ module AntScriptingHeroFullAccess
 				@ent.newHLFightJob(r)
 			end
 		end
+	end
+
+	def dismiss
+		@ent.newHLDismissJob
 	end
 	
 	# recruit from target
@@ -163,4 +176,29 @@ module AntScriptingHeroFullAccess
 			@ent.newHLRestJob(time)
 		end
 	end
+
+	def addHandler(eventName,&block)
+		@ent.addHandler(eventName,&block)
+	end
+
+end
+
+module AntScriptingEntityEnhancedAccess
+	# hacking
+	def setPlayer(player)
+		return nil if not player.is_a?(AntLevelPlayer)
+		p=getMap.players.select{|p|p.getName==player.getName}[0]
+		if p
+			@ent.setPlayer(p)
+		end
+	end
+
+	def setBoss(entity)
+		return unless entity.is_a?(AntLevelEntity)
+		@ent.setBoss(getMap.getByName(entity.getName))
+	end
+
+# 	def getMen
+# 		@ent.getMen.collect{|e|AntLevelEntity.new(e)}
+# 	end
 end

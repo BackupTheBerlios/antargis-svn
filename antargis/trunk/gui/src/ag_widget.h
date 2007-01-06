@@ -242,6 +242,6 @@ class AGWidget:public AGMessageObject
 
 AGWidget *toAGWidget(AGMessageObject *o);
 
-extern AGWidget *agNoParent;
+//extern AGWidget *agNoParent;
 
 #endif

@@ -130,6 +130,8 @@ class AntBoss<AntRubyEntity
 			man.setAggression(getAggression)
 			if @job.is_a?(AntHeroRestJob)
 				newHLRestJob(1)
+			elsif @job
+				@job.check(man)
 			end
 		end
 	end

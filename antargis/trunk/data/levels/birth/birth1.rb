@@ -15,11 +15,11 @@ class Level1<AntLevelScript
 	def eventTrigger(hero,t)
 		case t.name
 			when "nogo"
-				if hero.getPlayer.class==AntHumanPlayer and not @druid
+				if hero.getPlayer.getName=="Rowen" and not @druid
 					s=StoryFlow.new("noFurther")
 					s.push(hero.getName,"I will not go any further! There are strangers out there. They don't seem friendly.")
 					tellStory(s)
-					hero.newHLMoveJob(0,getMap.getTarget("goback").pos,0)
+					hero.moveTo(getTarget("goback").pos)
 				end
 			when "druid"
 				if @druid	
@@ -41,8 +41,8 @@ class Level1<AntLevelScript
 					s.push("Rowen","But there is a party of strangers on the way.")
 					s.push("Druid","They will be gone soon.")
 					tellStory(s)
-					getMap.getByName("Bantor").newHLMoveJob(0,getMap.getTarget("retreat").pos,0)
-					getMap.getByName("Rowen").newHLRestJob(10)
+					getHero("Bantor").moveTo(getTarget("retreat").pos)
+					getHero("Rowen").rest(10)
 
 				end
 			when "smith"
@@ -66,38 +66,45 @@ class Level1<AntLevelScript
 					s.push("Smith","Don't forget to capture the keep, too!")
 					tellStory(s)
 					# assign houses to Player Rowen
-					["Dwelling","Farm","Workshop"].each{|n|getMap.getByName(n).setPlayer(getMap.getPlayer)}
-					galvador=getMap.getByName("Galvador")
-					galvador.setBoss(getMap.getByName("Bantor"))
+					["Dwelling","Farm","Workshop"].each{|n|getHero(n).setPlayer(getPlayer("Rowen"))}
+					galvador=getHero("Galvador")
+					galvador.setBoss(getHero("Bantor"))
+					galvador.moveTo(getHero("Bantor"))
 					galvador.addHandler(:eventNewRestJob) {
 						playApprenticeStory
 					}
 					@smith=2
 				end
 			when "keep"
-				if hero==getMap.getByName("Rowen") and @flee==false
+				dputs "TRIGGER:",hero,getHero("Rowen"),hero.getName,getHero("Rowen").getName,@flee
+				#raise "keep"
+
+				if hero==getHero("Rowen") and @flee==false
 					# let bantor flee
-					bantor=getMap.getByName("Bantor")
-					bantor.newHLMoveJob(0,AGVector2.new(40,126),0)
-					men=bantor.getMen-[bantor]
-					keep=getMap.getByName("Keep")
-					men[0..4].each{|man|
-						man.setBoss(keep)
-					}
+					bantor=getHero("Bantor")
+					bantor.setAggression(1)
+					bantor.dismiss
+					bantor.moveTo(AGVector2.new(40,126))
+ 					keep=getHero("Keep")
+# 					men=bantor.getMen-[bantor]
+# 					men[0..4].each{|man|
+# 						man.setBoss(keep)
+# 					}
 	
 					@flee=true
-					rowen=getMap.getByName("Rowen")
-					if rowen.getJob.class==AntHeroFightJob
-						rowen.newHLFightJob(keep)
-					end
+					rowen=getHero("Rowen")
+					#if rowen.getJob.class==AntHeroFightJob
+					rowen.attack(keep)
+					#end
 
 					# do not let rowen attack bantor anymore
 					rowen.addHandler(:newJobAssigned){
-						if rowen.getJob.class==AntHeroFightJob
-							if rowen.getJob.target==bantor
-								rowen.newHLRestJob(1)
-							end
-						end
+ 						if rowen.getJob.is_a?(AntHeroFightJob)
+ 							if rowen.getJob.target==bantor
+# 								rowen.newHLRestJob(1)
+								rowen.rest(10)
+ 							end
+ 						end
 					}
 
 				end
@@ -106,7 +113,7 @@ class Level1<AntLevelScript
 					when "end"
 						wonLevel
 					when "smith0"
-						getMap.getByName("Rowen").newHLMoveJob(0,getMap.getTarget("near_smith").pos,0)
+						getHero("Rowen").moveTo(getTarget("near_smith"))
 						$app.hidePanel
 					when "won"
 						endLevel
@@ -125,12 +132,11 @@ class Level1<AntLevelScript
 	def playApprenticeStory
 		if @appStory==false
 			@appStory=true
-			$app.focusHero(getMap.getByName("Bantor"))
+			@interface.focusEntity(getHero("Bantor"))
 			s=StoryFlow.new("bantor")
 			s.push("Bantor","Boy, why do you leave your place?")
 			
-			# FIXME: replace "they" by sth like "people of the village"
-			s.push("Apprentice","A stranger appeared and they want to follow him and drive you away.")
+			s.push("Apprentice","A stranger appeared and the people of the village want to follow him and drive you away.")
 			s.push("Bantor","These fools will see their failure! You will be payed and now get off to the keep.")
 			tellStory(s)
 			galvador=getMap.getByName("Galvador")

@@ -81,7 +81,8 @@ AGString Job::xmlName() const
 * MoveJob
 ************************************************************************/
 
-MoveJob::MoveJob()
+MoveJob::MoveJob():
+  mTargetEntity(0)
 {
 }
 

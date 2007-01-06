@@ -390,7 +390,8 @@
 	<trigger name="druid" x="85.9007" y="50.092"  radius="3"/>
 	<target name="retreat" x="41" y="88"/>
 	<trigger name="smith" x="31.2377" y="16.9882" radius="10"/>
-	<trigger name="smith2" x="31.2377" y="16.9882" radius="2"/>
-	<target name="near_smith" x="32.4" y="16.988"/>
+	<trigger name="smith2" x="31.2377" y="16.9882" radius="3"/>
+	<target name="near_smith" x="32.2" y="16.988"/>
   <trigger name="keep" x="41.9545" y="90.2078" radius="20"/>
+<!--    <position x="31.2377" y="16.9882" z="1"/>-->
 </antargisLevel>

@@ -28,7 +28,7 @@ class Trigger
 		if AntRubyMap.getSystemTime-@triggerTime>1 # wait at least a second for repeating trigger
 			p2=hero.getPos2D
 			p3=AGVector3.new(p2.x,p2.y,1)
-			#dputs p3,@circle.inCircle(p3)
+			#dputs name," ",p3,@pos,@radius,@circle.inCircle(p3), (p2-@pos).length
 			if @circle.inCircle(p3)
 				getMap.trigger(hero,self)
 				@triggerTime=AntRubyMap.getSystemTime

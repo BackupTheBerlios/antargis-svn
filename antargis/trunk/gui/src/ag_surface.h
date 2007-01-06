@@ -73,17 +73,6 @@ class AGDecryptor
       return s;
     }
 };
-class AGDecryptorPlugin:public AGPlugin
-{
- public:
-  virtual ~AGDecryptorPlugin()
-    {
-    }
-  virtual AGDecryptor *getDecryptor()
-    {
-      return 0;
-    }
-};
 
 /// Generic classes - for OpenGL and "normal" SDL
 class AGSurface:public AGPaintTarget
@@ -127,9 +116,11 @@ class AGSurface:public AGPaintTarget
   void save(const std::string &pName) const;
 
   static AGSurface load(const std::string &pName);
-  static AGSurface loadDRM(const std::string &pName,AGDecryptor &pDec);
+  static AGSurface loadDRM(const std::string &pName);
 
   AGInternalSurface *surface() const;
+
+  static void setDecryptor(AGDecryptor *pDecryptor);
 
  private:
 
@@ -142,6 +133,8 @@ class AGSurface:public AGPaintTarget
   friend class AGFontEngine;
   friend class AGSDLScreen;
   size_t mVersion;
+
+  static AGDecryptor *mDecryptor;  
 };
 
 void AGFreeSurface(SDL_Surface *s);
