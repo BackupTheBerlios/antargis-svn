@@ -13,6 +13,8 @@ else
 	$CFLAGS+=" "
 end
 
+$CFLAGS+=$incs
+
 version="0.1.9"
 
 $profile=true
@@ -92,6 +94,9 @@ $INSTALL_DATA=$INSTALL+" -m 644 -D "
 interfaceHeaders = interfaceHeadersGUI + interfaceHeadersSRC
 
 SRCS=(Dir[$GUISRC+"/*.cc"]+Dir[$GUISRC+"/*.c"]+Dir["src/*.cc"]+["src/swig.cc","gui/src/guiswig.cc"]).uniq
+if $internalSGE
+	SRCS+=Dir[$GUISRC+"/sge/*.cc"]
+end
 OBJS=[]
 O2S={}
 SRCS.each{|s|

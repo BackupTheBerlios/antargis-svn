@@ -9,10 +9,12 @@ $debug=false
 $help=false
 $gcdebug=false
 $xcompile=false
+$internalSGE=false
 
 varnames=[]
+$incs=""
 
-varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug','$xcompile','$drmuser','$drmmd5']
+varnames+=['$debug','$profile','$libs','$swig','$INSTALL','$ccache','$gcdebug','$xcompile','$drmuser','$drmmd5','$incs','$internalSGE']
 
 varnames.uniq!
 
@@ -88,6 +90,13 @@ if not $help
 	test_library('png')
 	if $xcompile or windows
 		test_library('msvcrt-ruby18')
+	end
+	test_library('SGE')
+	if $failed_libs.member?('SGE')
+		$failed_libs.delete('SGE')
+		# use our own files
+		$incs+="-Igui/src/sge "
+		$internalSGE=true
 	end
 
 	if $failed_libs.length>0
