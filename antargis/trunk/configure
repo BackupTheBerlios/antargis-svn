@@ -91,7 +91,11 @@ if not $help
 	if $xcompile or windows
 		test_library('msvcrt-ruby18')
 	end
-	test_library('SGE')
+	if $xcompile
+		$failed_libs.push('SGE')
+	else
+		test_library('SGE')
+	end
 	if $failed_libs.member?('SGE')
 		$failed_libs.delete('SGE')
 		# use our own files

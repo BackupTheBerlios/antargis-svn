@@ -14,7 +14,7 @@ SMPEG="smpeg-0.4.4.tar.gz"
 OGG="libogg-1.1.3.tar.gz"
 VORBIS="libvorbis-1.1.2.tar.gz"
 
-export CFLAGS="-I${TOPDIR}/include"
+export CFLAGS="-I${TOPDIR}/include -I${TOPDIR}/include/freetype2"
 
 download_file()
 {
@@ -26,7 +26,9 @@ download_file()
 
 download_files()
 {
-	svn export --force svn://svn.berlios.de/antargis/contrib .
+	if test ! -e SDL-1.2.11.tar.gz ; then
+		svn export --force svn://svn.berlios.de/antargis/contrib .
+	fi
 }
 
 download_files_old()
@@ -93,7 +95,14 @@ build_libsdl_ttf()
 	
 		tar xfz ${SDLTTF}
 		cd `echo "${SDLTTF}"|sed -e "s/\.tar\.gz//"`
-		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc || exit
+		chmod 755 ${TOPDIR}/usr/bin/freetype-config
+		recode ibmpc->lat1 ${TOPDIR}/usr/bin/freetype-config
+		cat ${TOPDIR}/usr/bin/freetype-config|sed -e "s/-lgw32//">t
+		mv t ${TOPDIR}/usr/bin/freetype-config
+		ln -s ${TOPDIR}/usr/include/freetype2/freetype ${TOPDIR}/usr/include/freetype
+		echo ${LDFLAGS}
+		export LDFLAGS="-lfreetype -L${TOPDIR}/usr/lib"
+		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --with-freetype-prefix=${TOPDIR}/usr || exit
 		make
 		make install
 		cd ..
@@ -161,6 +170,9 @@ build_ruby()
 		tar xfz ${RUBY}
 		cd `echo "${RUBY}"|sed -e "s/\.tar\.gz//"`
 		./configure --prefix=${TOPDIR}/usr --host=i586-mingw32msvc --target=i586-mingw32msvc --enable-debug
+		# patch fake.rb
+		cat fake.rb |sed -e "s/\"\\\\\";/\"\\\\\"\";/">fake.tmp
+		mv fake.tmp fake.rb
 		make
 		make install
 		cd ..
@@ -234,3 +246,4 @@ build_libsdl_mixer
 build_ruby
 
 do_test
+
