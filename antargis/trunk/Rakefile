@@ -15,7 +15,7 @@ end
 
 $CFLAGS+=$incs
 
-version="0.1.9"
+version="0.2"
 
 $profile=true
 
@@ -225,7 +225,7 @@ end
 
 task :clean do
 	msh "rm -rf clean.rb"
-	["src",$GUISRC,"gui/src/plugins"].each{|dir|
+	["src",$GUISRC,"gui/src/plugins","gui/src/sge"].each{|dir|
 		["*.o","*.oo"].each{|ext|
 			msh "rm -rf #{dir}/#{ext}"
 		}
