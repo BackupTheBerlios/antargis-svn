@@ -58,6 +58,8 @@ class AntGameApp <AntRubyView
 	def initialize(savegameText,w,h,loadscreen=nil,connection=nil)
 		super(w,h)
 
+		@speed=1
+
 		# the result of the level - won or lost or canceled
 		@result=GameResult.new
 		$app=self
@@ -155,6 +157,10 @@ class AntGameApp <AntRubyView
 		@elapsTime=0
 
 		#setCursor(getTextureCache.get("blue_cursor.png"))
+	end
+
+	def getSpeed
+		@speed
 	end
 
 	####################################
