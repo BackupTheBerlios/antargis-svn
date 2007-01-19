@@ -101,12 +101,17 @@ class VertexArrayShader:public VertexArray
   AntShaderProgram *p;
   std::map<std::string,std::vector<float>*> as;
   std::map<std::string,unsigned int> aids;
+
+  std::map<std::string,std::vector<Uint16>*> elementAs;
+  std::map<std::string,unsigned int> elementIds;
+
   bool aInited;
  public:
   VertexArrayShader(AntShaderProgram *_p);
   ~VertexArrayShader();
   /// adds attributes to each vertex. the size of a should equal the vertex count
   void addAttribute(const std::string &pName,const std::vector<float> &a);
+  void addAttribute(const std::string &pName,const std::vector<Uint16> &a);
 
   virtual void draw();
 

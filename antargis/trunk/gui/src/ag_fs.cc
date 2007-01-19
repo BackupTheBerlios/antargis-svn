@@ -22,6 +22,7 @@
 #include <list>
 #include <assert.h>
 #include <ag_fs.h>
+#include <ag_config.h>
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
@@ -53,6 +54,7 @@ void addPath(const std::string &pName)
 
     }
 #endif
+  updateConfig();
 }
 
 
@@ -231,6 +233,9 @@ std::string loadFromPath(const std::string &pName)
       if(r.length())
 	return r;
     }
+
+  //  if(mFsPaths.size()==0)
+  //    throw std::runtime_error("Not yet inited fs-paths!");
 
   for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
     cdebug("path:"<<*i);

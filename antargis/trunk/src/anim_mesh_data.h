@@ -59,6 +59,7 @@ class AnimMeshData:public AGRubyObject
   std::vector<AGVector3> normal;
   std::vector<int> bone;
   std::vector<float> bonef;
+  std::vector<Uint16> boneui;
 
   std::vector<size_t> indices;
 

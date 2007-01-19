@@ -9,8 +9,10 @@
 static bool useVBO()
 {
   AGString s=getConfig()->get("useVBO");
+  //cdebug("useVBO:"<<s);
   if(s!="true" && s!="false")
     {
+      cdebug("useVBO:"<<s);
       s="true";
       getConfig()->set("useVBO",s);
     }
@@ -150,6 +152,7 @@ void VertexArray::setColors(bool color)
 
 void VertexArray::draw()
 {
+  assertGL;
   if(mChanged)
     init();
 
@@ -246,6 +249,7 @@ void VertexArray::draw()
       glDisableClientState(GL_COLOR_ARRAY);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     }
+  assertGL;
 
 }
 
@@ -528,6 +532,12 @@ VertexArrayShader::~VertexArrayShader()
 	delete i->second;
     }
 
+  for(std::map<std::string,std::vector<Uint16>*>::iterator i=elementAs.begin();i!=elementAs.end();++i)
+    {
+      if(i->second)
+	delete i->second;
+    }
+
 }
 
 void VertexArrayShader::addAttribute(const std::string &pName,const std::vector<float> &a)
@@ -536,13 +546,23 @@ void VertexArrayShader::addAttribute(const std::string &pName,const std::vector<
   aInited=false;
 }
 
+void VertexArrayShader::addAttribute(const std::string &pName,const std::vector<Uint16> &a)
+{
+  elementAs[pName]=new std::vector<Uint16>(a);
+  aInited=false;
+}
+
+
 void VertexArrayShader::draw()
 {
+  assertGL;
   p->enable();
+  assertGL;
   if(!aInited)
     aInit();
-
+  assertGL;
   attach();
+  assertGL;
   VertexArray::draw();
   p->disable();
 }
@@ -560,6 +580,23 @@ void VertexArrayShader::attach()
 	  glVertexAttribPointerARB(loc,1,GL_FLOAT,0,0,0);
 	  //      glTexCoordPointer(2, GL_FLOAT, 0, 0);
 	}
+
+      for(std::map<std::string,unsigned int>::iterator i=elementIds.begin();i!=elementIds.end();i++)
+	{
+  assertGL;
+	  GLint loc=p->getAttr(i->first);
+  assertGL;
+	  glEnableClientState(GL_VERTEX_ARRAY);
+  assertGL;
+	  glEnableVertexAttribArrayARB(loc); // add array
+  assertGL;
+	  glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, i->second);
+  assertGL;
+	  glVertexAttribPointerARB(loc,1,GL_UNSIGNED_SHORT,0,0,0);
+  assertGL;
+	  //      glTexCoordPointer(2, GL_FLOAT, 0, 0);
+	}
+
     }
 }
 
@@ -575,6 +612,19 @@ void VertexArrayShader::aInit()
 
       aids[i->first]=id;
     }
+
+  for(std::map<std::string,std::vector<Uint16>*>::iterator i=elementAs.begin();i!=elementAs.end();i++)
+    {
+      unsigned int id;
+
+      glGenBuffersARB( 1, &id);
+      glBindBufferARB( GL_ELEMENT_ARRAY_BUFFER_ARB, id);
+      glBufferDataARB( GL_ELEMENT_ARRAY_BUFFER_ARB, i->second->size()*sizeof(Uint16), &((*i->second)[0]), GL_STATIC_DRAW_ARB );
+
+      elementIds[i->first]=id;
+    }
+
+
   aInited=true;
 }
 

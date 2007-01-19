@@ -3,6 +3,7 @@
 
 AGConfig::AGConfig()
 {
+  CTRACE;
   Document doc("config.xml");
 
   Node &root=doc.root();
@@ -26,7 +27,7 @@ AGConfig::AGConfig()
 	{
 	  singleValue[(*i)->get("name")]=(*i)->get("value");
 	  comments[(*i)->get("name")]=comment;
-	  //	  cdebug((*i)->get("name")<<":"<<(*i)->get("value")<<":"<<comment);
+	  cdebug((*i)->get("name")<<":"<<(*i)->get("value")<<":"<<comment);
 	  comment="";
 	}
     }
@@ -35,7 +36,7 @@ AGConfig::AGConfig()
 
   //  std::cerr<<doc.toString()<<std::endl;
 
-  writeToDisc();
+  //  writeToDisc();
 }
 
 AGString AGConfig::get(const AGString &pValue,const AGString &pDefault,const AGString &pComment)
@@ -96,4 +97,11 @@ AGConfig *getConfig()
   if(!gConfig)
     gConfig=new AGConfig;
   return gConfig;
+}
+
+void updateConfig()
+{
+  delete gConfig;
+  gConfig=0;
+  //  getConfig();
 }

@@ -664,3 +664,5 @@ if true
 		startGame(savegame)	
 	end
 end
+
+getConfig.set("ok","ok")

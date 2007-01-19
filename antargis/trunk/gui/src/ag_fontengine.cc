@@ -275,13 +275,13 @@ void embossSurface(AGSurface &s,float depth=1.0f)
   delete [] a;
   delete [] b;
 
-
+  /*
   static int i=0;
   i++;
   std::ostringstream os;
   os<<"fonttest"<<i<<".png";
   s.save(os.str());
-
+  */
 }
 
 AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGStringUtf8 &pText, const AGFont &pFont)

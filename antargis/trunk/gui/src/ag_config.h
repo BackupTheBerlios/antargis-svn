@@ -42,6 +42,7 @@ class AGConfig
 };
 
 AGConfig *getConfig();
+void updateConfig();
 
 
 //#define EXPORT __declspec(dllexport)

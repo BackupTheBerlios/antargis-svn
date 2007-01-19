@@ -192,9 +192,15 @@ void AnimMeshData::loadAnt3(const AGData &instr,float scale,const AGFilename &te
   for(size_t k=0;k<bone.size();k++)
     {
       if(bone[k]==-1)
-	bonef.push_back(nbones);
+	{
+	  bonef.push_back(nbones);
+	  boneui.push_back(nbones);
+	}
       else
-	bonef.push_back(bone[k]);
+	{
+	  bonef.push_back(bone[k]);
+	  boneui.push_back(bone[k]);
+	}
     }
 
 
@@ -303,6 +309,7 @@ void AnimMeshData::setupArray()
 
   // set boneIDs
   mArray.addAttribute("bones",bonef);
+  //  mArray.addAttribute("ibones",boneui);
 
 
 
@@ -314,6 +321,7 @@ void AnimMeshData::setupArray()
 
   // set boneIDs
   mArrayDepth.addAttribute("bones",bonef);
+  //  mArrayDepth.addAttribute("ibones",boneui);
 
 
 }
