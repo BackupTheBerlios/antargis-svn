@@ -10,8 +10,8 @@ void main(void)
 
 	int i=int(bones); // convert to int
 	mat4 m=matrices[i];
-	//gl_Position = gl_ModelViewProjectionMatrix *m*v;
-	gl_Position = gl_ModelViewProjectionMatrix *v;
+	gl_Position = gl_ModelViewProjectionMatrix *m*v;
+	//gl_Position = gl_ModelViewProjectionMatrix *v;
 
 	normal = normalize(gl_NormalMatrix * gl_Normal);
 	
