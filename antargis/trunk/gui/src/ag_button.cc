@@ -25,7 +25,7 @@
 #include "ag_debug.h"
 #include "ag_image.h"
 #include "ag_border.h"
-#include "ag_glsurface.h"
+#include "ag_glscreen.h"
 
 using namespace std;
 

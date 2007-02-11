@@ -24,7 +24,7 @@
 #include "ag_debug.h"
 #include "ag_menu.h"
 #include "ag_sgeexport.h"
-#include "ag_glsurface.h"
+#include "ag_glscreen.h"
 #include "ag_tools.h"
 
 

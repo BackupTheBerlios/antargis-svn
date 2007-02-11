@@ -29,7 +29,7 @@
 #include "ag_sgeexport.h"
 #include "ag_kill.h"
 #include "ag_png.h"
-#include "ag_glsurface.h"
+#include "ag_glscreen.h"
 #include "ag_surfacemanager.h"
 
 #include "SDL_image.h"

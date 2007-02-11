@@ -27,7 +27,7 @@
 #include "ag_surface.h"
 #include "ag_texture.h"
 #include "ag_sdlsurface.h"
-#include "ag_glsurface.h"
+#include "ag_glscreen.h"
 #include "ag_fs.h"
 #include "ag_layout.h"
 #include "ag_debug.h"

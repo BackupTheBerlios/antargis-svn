@@ -21,7 +21,7 @@
 #include <ag_debug.h>
 #include <ag_draw.h>
 #include <ag_fontengine.h>
-#include <ag_glsurface.h>
+#include <ag_glscreen.h>
 #include <ag_painter.h>
 #include <ag_profiler.h>
 #include <ag_sdlsurface.h>

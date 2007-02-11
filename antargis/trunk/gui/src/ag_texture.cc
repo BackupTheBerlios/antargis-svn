@@ -19,7 +19,7 @@
  */
 
 #include "ag_texture.h"
-#include "ag_glsurface.h"
+#include "ag_glscreen.h"
 #include "ag_debug.h"
 #include "ag_rendercontext.h"
 #include "ag_sgeexport.h"
