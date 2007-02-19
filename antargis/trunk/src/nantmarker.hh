@@ -58,16 +58,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGScroller "general_markfunc"
-%exception AnimMesh::AnimMesh {
-	$action
-	result->mRUBY=self;
-#ifdef GCDEBUG
-     result->mObjName=typeid(*result).name();
-     printf("%lx   %s\n",self,typeid(*result).name());
-#endif
-	result->mRubyObject=true;
-}
-%markfunc AnimMesh "general_markfunc"
 %exception Scene::Scene {
 	$action
 	result->mRUBY=self;
@@ -78,6 +68,16 @@
 	result->mRubyObject=true;
 }
 %markfunc Scene "general_markfunc"
+%exception AnimMesh::AnimMesh {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AnimMesh "general_markfunc"
 %exception WaterPiece::WaterPiece {
 	$action
 	result->mRUBY=self;
@@ -1992,34 +1992,6 @@ else if(dynamic_cast<TerrainPiece*>($1))
  }
  else $input=Qnil;
 }
-%typemap(out) AGGLWidget*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(directorin) AGGLWidget*{
- if($1)
- {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
-   }
- }
- else $input=Qnil;
-}
 %typemap(out) DecimatedGraph*{
  if($1)
  {
@@ -2044,6 +2016,34 @@ else if(dynamic_cast<TerrainPiece*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_DecimatedGraph,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AGGLWidget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGGLWidget*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
    }
  }
  else $input=Qnil;
@@ -2572,6 +2572,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) AGBackground {
  AGBackground *b;
  Data_Get_Struct($input,AGBackground,b);
+ $result=*b;
+}
+%typemap(directorout) AGBaseObject {
+ AGBaseObject *b;
+ Data_Get_Struct($input,AGBaseObject,b);
  $result=*b;
 }
 %typemap(directorout) AGBorder {
@@ -3232,6 +3237,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) WaterPiece {
  WaterPiece *b;
  Data_Get_Struct($input,WaterPiece,b);
+ $result=*b;
+}
+%typemap(directorout) gc_ptr {
+ gc_ptr *b;
+ Data_Get_Struct($input,gc_ptr,b);
  $result=*b;
 }
 %typemap(directorout) Uint8 {

@@ -63,7 +63,7 @@ struct AGProjection
 #define AGEXPORT
 #endif
 
-class AGEXPORT AGPainter:public AGRubyObject
+class AGEXPORT AGPainter
 {
  public:
   AGPainter();
@@ -117,14 +117,12 @@ class AGEXPORT AGPainter:public AGRubyObject
 
   AGPaintTarget *getTarget();
 
-  virtual void mark();
-
  private:
   std::list<AGProjection> ps;
 
   AGProjection mCurrent;
 
-  AGPaintTarget *mTarget;
+  gc_ptr<AGPaintTarget> mTarget;
 };
 
 #endif

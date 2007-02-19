@@ -34,6 +34,7 @@
 #include <string>
 #include <set>
 #include <ag_base.h>
+#include <stdexcept>
 
 class AGRubyObject;
 
@@ -44,8 +45,13 @@ class AGEXPORT AGBaseObject
  public:
   AGBaseObject(AGRubyObject *p);
 
-  virtual ~AGBaseObject();
-  virtual void baseClear();
+  ~AGBaseObject();
+  void baseClear();
+
+  bool valid()
+  {
+    return mp;
+  }
 };
 
 template<class T>
@@ -58,6 +64,12 @@ class gc_ptr:public AGBaseObject
 
   T*operator->()
     {
+      return (T*)mp;
+    }
+  T* getPtr()
+    {
+      if(!mp)
+	throw std::runtime_error("mp not defined!");
       return (T*)mp;
     }
 };

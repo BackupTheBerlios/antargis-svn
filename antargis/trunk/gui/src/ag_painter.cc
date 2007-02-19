@@ -213,8 +213,11 @@ AGPainter::AGPainter(AGPaintTarget &pTarget):mCurrent(pTarget.getRect()),mTarget
 
 AGPainter::~AGPainter()
 {
-  mTarget->unclip();
-  mTarget->endPaint();
+  if(mTarget.valid())
+    {
+      mTarget->unclip();
+      mTarget->endPaint();
+    }
 }
 
 void AGPainter::putPixel(const AGVector2 &p,const AGColor &c)
@@ -301,7 +304,7 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
 {
   STACKTRACE;
   float x,y;
-  if(!dynamic_cast<AGGLScreen*>(mTarget))
+  if(!dynamic_cast<AGGLScreen*>(mTarget.getPtr()))
     {
       #warning "remove this and implement in agtexture*"
       for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
@@ -386,7 +389,7 @@ AGColor calcColor(AGVector2 p,const AGColor &pc0,const AGColor &pc1,const AGColo
 void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)
 {
   STACKTRACE;
-  AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
+  AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget.getPtr());
   
   AGRect2 src(0,0,1,1);
 
@@ -406,13 +409,13 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 	{
 	  glScreen->drawGradient(r,c0,c1,c2,c3);
 	}
-      else if(opengl() && dynamic_cast<AGTexture*>(mTarget))
+      else if(opengl() && dynamic_cast<AGTexture*>(mTarget.getPtr()))
 	{
-	  dynamic_cast<AGTexture*>(mTarget)->drawGradient(r,c0,c1,c2,c3);
+	  dynamic_cast<AGTexture*>(mTarget.getPtr())->drawGradient(r,c0,c1,c2,c3);
 	}
       else
 	{
-	  AGSDLScreen *sdlScreen=dynamic_cast<AGSDLScreen*>(mTarget);
+	  AGSDLScreen *sdlScreen=dynamic_cast<AGSDLScreen*>(mTarget.getPtr());
 	    
 	  if(sdlScreen)
 	    {
@@ -442,7 +445,7 @@ void AGPainter::renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AG
 void AGPainter::drawBorder(const AGRect2& pRect,int width, const AGColor& c1, const AGColor& c2)
 {
   STACKTRACE;
-  AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget);
+  AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget.getPtr());
   if(glScreen)
     {
       #warning "add clipping in gl"
@@ -590,11 +593,6 @@ AGRect2 AGPainter::getRect() const
 
 AGPaintTarget *AGPainter::getTarget()
 {
-  return mTarget;
+  return mTarget.getPtr();
 }
 
-void AGPainter::mark()
-{
-  if(mTarget)
-    markObject(mTarget);
-}
