@@ -123,6 +123,7 @@ module MyAntargislib
 		@@noVideo||=nil	
 		if @@noVideo.nil?
 			#if xres!=1024 || yres!=768 || $fullscreen
+			dputs @@fullscreen
 			@@main.initVideo(xres,yres,32,@@fullscreen,true,1024,768)
 			#end
 		

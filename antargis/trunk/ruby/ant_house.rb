@@ -38,6 +38,7 @@ end
 
 # AntVillage is only some small interface for reproducing "village" type of behaviour
 class AntVillage
+	attr_reader :houses
 	def initialize(name,map)
 		@houses=map.getAllHousesOfVillage(name)		
 	end
@@ -104,8 +105,18 @@ class AntHouse<AntBoss
 	end
 	
 	def eventAttacked(by)
-		newHLDefendJob(by)
-		AntInventory.update(self)
+		return unless super
+		# FIXME: defend as village
+		if @village and @village.length
+			v=AntVillage.new(@village,getMap)
+			if v
+				v.houses.each{|h|
+					if h!=self
+						h.eventAttacked(by)
+					end
+				}
+			end
+		end
 	end
 	
 	def moveHome(man)

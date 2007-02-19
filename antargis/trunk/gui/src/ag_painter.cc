@@ -592,3 +592,9 @@ AGPaintTarget *AGPainter::getTarget()
 {
   return mTarget;
 }
+
+void AGPainter::mark()
+{
+  if(mTarget)
+    markObject(mTarget);
+}

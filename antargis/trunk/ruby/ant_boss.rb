@@ -110,11 +110,12 @@ class AntBoss<AntRubyEntity
 		if @job
 			if @job.is_a?(AntHeroFightJob)
 				puts "I'm alread fighting!"
-				return # already fighting
+				return false # already fighting
 			end
 		end
 		@job=AntHeroFightJob.new(self,target,true) # FIXME: change this, so that fighting is stopped as soon as other stops
 		assignJob2All
+		return true
 	end
 	def newHLRestJob(time)
 		@job=AntHeroRestJob.new(self,time)
@@ -156,9 +157,15 @@ class AntBoss<AntRubyEntity
 		@player
 	end
 	
-	def eventGotHLFight(hero)
-		newHLDefendJob(hero)
-		return
+# 	def eventGotHLFight(hero)
+# 		newHLDefendJob(hero)
+# 		return
+# 	end
+
+	def eventAttacked(by)
+		ret=newHLDefendJob(by)
+		AntInventory.update(self)
+		ret
 	end
 	
 	def eventManDefeated(man)

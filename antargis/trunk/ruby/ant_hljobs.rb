@@ -359,7 +359,11 @@ class AntHeroFightJob<AntHeroMoveJob
 			raise "already fighting"
 		end
 		@state="fighting"
-		@target.eventGotHLFight(@hero)
+
+		# REALLY FIXME: these 2 calls do the same ?????
+
+
+		#@target.eventGotHLFight(@hero)
 		@target.eventAttacked(@hero)
 		initSitpositions
 

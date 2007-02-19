@@ -229,7 +229,7 @@ class AntHero<AntBoss
 
 	def eventAttacked(by)
 		puts "eventAttacked #{by}"
-		newHLDefendJob(by)
+		super
 	end
 	
 	def assignJob2All

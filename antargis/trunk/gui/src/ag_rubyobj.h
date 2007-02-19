@@ -32,7 +32,35 @@
 */
 
 #include <string>
+#include <set>
 #include <ag_base.h>
+
+class AGRubyObject;
+
+class AGEXPORT AGBaseObject
+{
+ protected:
+  AGRubyObject *mp;
+ public:
+  AGBaseObject(AGRubyObject *p);
+
+  virtual ~AGBaseObject();
+  virtual void baseClear();
+};
+
+template<class T>
+class gc_ptr:public AGBaseObject
+{
+ public:
+  gc_ptr(T*t):AGBaseObject(t)
+    {
+    }
+
+  T*operator->()
+    {
+      return (T*)mp;
+    }
+};
 
 class AGEXPORT AGRubyObject
 {
@@ -66,6 +94,11 @@ class AGEXPORT AGRubyObject
 #endif
   friend void general_markfunc(void *ptr);
   friend bool saveDelete(AGRubyObject *o);
+
+  void addRef(AGBaseObject *o);
+  void deleteRef(AGBaseObject *o);
+ private:
+  std::set<AGBaseObject*> mReferences;
 };
 
 void general_markfunc(void *ptr);

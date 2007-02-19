@@ -63,7 +63,7 @@ struct AGProjection
 #define AGEXPORT
 #endif
 
-class AGEXPORT AGPainter
+class AGEXPORT AGPainter:public AGRubyObject
 {
  public:
   AGPainter();
@@ -116,6 +116,8 @@ class AGEXPORT AGPainter
   bool pointOk(const AGVector2 &p) const;
 
   AGPaintTarget *getTarget();
+
+  virtual void mark();
 
  private:
   std::list<AGProjection> ps;

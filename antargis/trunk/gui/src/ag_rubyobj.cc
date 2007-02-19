@@ -25,6 +25,10 @@ AGRubyObject::AGRubyObject()
 }
 AGRubyObject::~AGRubyObject()
 {
+  for(std::set<AGBaseObject*>::iterator i=mReferences.begin();i!=mReferences.end();i++)
+    (*i)->baseClear();
+
+
   //  cdebug("DEL:"<<mRUBY);
 #ifdef GCDEBUG
   printf("DEL:%lx  %s\n",mRUBY,mObjName.c_str());
@@ -61,6 +65,18 @@ void AGRubyObject::clear()
 {
   CTRACE;
 }
+
+void AGRubyObject::addRef(AGBaseObject *o)
+{
+  mReferences.insert(o);
+}
+
+void AGRubyObject::deleteRef(AGBaseObject *o)
+{
+  mReferences.erase(o);
+}
+
+
 
 /// this is the marking function, that gets called by ruby
 /// it handles all the AGRubyObjects
@@ -115,4 +131,29 @@ bool saveDelete(AGRubyObject *o)
       return true;
     }
   return false;
+}
+
+
+
+
+
+
+
+
+AGBaseObject::AGBaseObject(AGRubyObject *p)
+  :mp(p)
+{
+  if(p)
+    p->addRef(this);
+}
+
+AGBaseObject::~AGBaseObject()
+{
+  if(mp)
+    mp->deleteRef(this);
+}
+
+void AGBaseObject::baseClear()
+{
+  mp=0;
 }

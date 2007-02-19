@@ -79,7 +79,7 @@ AGVertexProgram::AGVertexProgram(const std::string &pFile)
       glShaderSourceARB(vertexShader, 1, x,NULL);
       glCompileShaderARB(vertexShader);
       printInfoLog(vertexShader);
-      
+      assertGL;
     }
 }
 
@@ -88,6 +88,7 @@ AGVertexProgram::~AGVertexProgram()
   CTRACE;
   if(glslOk() && !hasQuit())
     glDeleteObjectARB(vertexShader);
+  assertGL;
 }
 
 AGFragProgram::AGFragProgram(const std::string &pFile)
@@ -104,7 +105,8 @@ AGFragProgram::AGFragProgram(const std::string &pFile)
       glCompileShaderARB(fragShader);
       printInfoLog(fragShader);
       mValid=true;
-      
+      assertGL;
+	
     }
 }
 
@@ -118,6 +120,8 @@ AGFragProgram::~AGFragProgram()
   CTRACE;
   if(glslOk() && !hasQuit())
     glDeleteObjectARB(fragShader);
+  assertGL;
+
 }
 
 
@@ -147,6 +151,8 @@ AGShaderProgram::AGShaderProgram(const std::string &pVertexFile,const std::strin
   on=false;
   matrixBuf=new float[16*100];
   name=pVertexFile+":"+pFragFile;
+  assertGL;
+
 }
 
 AGShaderProgram::~AGShaderProgram()
@@ -159,6 +165,8 @@ AGShaderProgram::~AGShaderProgram()
   cdebug("name:"<<name);
   delete [] matrixBuf;
   cdebug("name:"<<name);
+  assertGL;
+
 }
 
 
@@ -168,6 +176,8 @@ void AGShaderProgram::enable()
     {
       glUseProgramObjectARB(p);
       on=true;
+      assertGL;
+
     }
 }
 void AGShaderProgram::disable()
@@ -176,6 +186,7 @@ void AGShaderProgram::disable()
     {
       glUseProgramObjectARB(0);
       on=false;
+      assertGL;
     }
 }
 
@@ -186,6 +197,7 @@ void AGShaderProgram::update(float time)
       enable();
       doUpdate(time);
       disable();
+      assertGL;
     }
 }
 
@@ -196,22 +208,27 @@ void AGShaderProgram::doUpdate(float time)
 void AGShaderProgram::sendUniform(const std::string &pName,int i)
 {
   glUniform1iARB(getLoc(pName),i);
+  assertGL;
 }
 void AGShaderProgram::sendUniform(const std::string &pName,float f)
 {
   glUniform1fARB(getLoc(pName),f);
+  assertGL;
 }
 void AGShaderProgram::sendUniform(const std::string &pName,const AGVector3 &m)
 {
   glUniform3fARB(getLoc(pName),m[0],m[1],m[2]);
+  assertGL;
 }
 void AGShaderProgram::sendUniform(const std::string &pName,const AGVector4 &m)
 {
   glUniform4fARB(getLoc(pName),m[0],m[1],m[2],m[3]);
+  assertGL;
 }
 void AGShaderProgram::sendUniform(const std::string &pName,const AGMatrix4 &m)
 {
   glUniformMatrix4fvARB(getLoc(pName),1,false,m);
+  assertGL;
 }
 void AGShaderProgram::sendUniform(const std::string &pName,const std::vector<AGMatrix4> &m)
 {
@@ -239,6 +256,7 @@ GLint AGShaderProgram::getLoc(const std::string &pName)
   
   GLint k=glGetUniformLocationARB(p,pName.c_str());
   locations.insert(std::make_pair(pName,k));
+  assertGL;
   return k;
 }
 
@@ -260,6 +278,7 @@ GLint AGShaderProgram::getAttr(const std::string &pName)
     }
   assertGL;
   attrs.insert(std::make_pair(pName,k));
+  assertGL;
   return k;
 }
 
