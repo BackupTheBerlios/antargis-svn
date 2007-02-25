@@ -184,17 +184,18 @@ class MyHeightMap<MyMap
 	end
 
 	def blurHeights(w)
-		a=[1,2,1]
-		case w
-			when 5
-				a=[1,6,15,20,15,6,1]
-			when 4
-				a=[1,5,10,10,5,1]
-			when 3
-				a=[1,4,6,4,1]
-			when 2
-				a=[1,3,3,1]
-		end
+		a=filterMatrix(w)
+# 		a=[1,2,1]
+# 		case w
+# 			when 5
+# 				a=[1,6,15,20,15,6,1]
+# 			when 4
+# 				a=[1,5,10,10,5,1]
+# 			when 3
+# 				a=[1,4,6,4,1]
+# 			when 2
+# 				a=[1,3,3,1]
+# 		end
 		n=crossProductVecVec(a,a)
 		arr=toIndexMap(n)
 
@@ -243,6 +244,19 @@ class MyHeightMap<MyMap
 
 	def range(v,type)
 		case type
+			when :veryrough
+				case v
+					when :undefined
+						return [0,0]
+					when :green
+						return [0.3,6]
+					when :water
+						return [0,1]
+					when :wood
+						return [0.3,8]
+					when :rock
+						return [0.4,15]
+				end
 			when :rough
 				case v
 					when :undefined
@@ -362,7 +376,13 @@ class MyHeightMap<MyMap
 	end
 
 	def computeDistances(myTerrain)
-		ar=[[-1,0],[1,0],[0,1],[0,-1]]
+		ar=[]
+		(-1..1).each{|x|
+			(-1..1).each{|y|
+				ar.push([x,y,Math::sqrt(x*x+y*y)])
+			}
+		}
+
 		found=0
 		nfound=0
 		# initial run
@@ -374,7 +394,7 @@ class MyHeightMap<MyMap
 						dx=x+p[0]
 						dy=y+p[1]
 						if get(dx,dy)!=myTerrain
-							setDistance(x,y,1+rand)
+							setDistance(x,y,p[2]+rand)
 							found+=1
 							test+=1
 							break
@@ -421,11 +441,10 @@ class MyHeightMap<MyMap
 			(1..@w).each{|x|
 				(1..@h).each{|y|
 					if get(x,y)==myTerrain and getDistance(x,y)==0
-						#puts "hu"
 						ar.each{|p|
 							dx=x+p[0]
 							dy=y+p[1]
-							r=rand+1
+							r=rand+p[2]
 							cd=getDistance(dx,dy)
 							if cd>0 and (cd+r<getDistance(x,y) or getDistance(x,y)==0)
 								found+=1
@@ -444,35 +463,54 @@ class MyHeightMap<MyMap
 	end
 
 private
-def crossProductVecVec(a,b)
-	n=[]
-	a.each{|x|
-		l=[]
-		b.each{|y|
-			l.push(x*y)
+	def computeNextFilter(a)
+		n=[]
+		l=0
+		a.each{|c|
+			n.push(l+c)
+			l=c
 		}
 		n.push(l)
-	}
-	n
-end
-
-def toIndexMap(a)
-	n=[]
-	y=0
-	h=a.length
-	w=a[0].length
-	dy=h/2
-	dx=w/2
-	a.each{|r|
-		x=0
-		r.each{|v|
-			n.push([x-dx,y-dy,v])
-			x+=1
+		n
+	end
+	def filterMatrix(n)
+		m=[1,1]
+		while n>1
+			m=computeNextFilter(m)
+			n-=1
+		end
+		m
+	end
+	
+	def crossProductVecVec(a,b)
+		n=[]
+		a.each{|x|
+			l=[]
+			b.each{|y|
+				l.push(x*y)
+			}
+			n.push(l)
 		}
-		y+=1
-	}
-	n
-end
+		n
+	end
+	
+	def toIndexMap(a)
+		n=[]
+		y=0
+		h=a.length
+		w=a[0].length
+		dy=h/2
+		dx=w/2
+		a.each{|r|
+			x=0
+			r.each{|v|
+				n.push([x-dx,y-dy,v])
+				x+=1
+			}
+			y+=1
+		}
+		n
+	end
 
 
 end
@@ -489,9 +527,9 @@ myMap.someX(10,:wood)
 myMap.someX(10,:rock)
 myMap.blurAll
 myMap.to_surface.save("mapgen0.png")
-myMap.computeHeights(:rough)
-myMap.blurHeights(5)
 if false
+	myMap.computeHeights(:rough)
+	myMap.blurHeights(5)
 	myMap.computeHeights(:medium)
 	myMap.blurHeights(2)
 	myMap.computeHeights(:fine)
@@ -503,7 +541,13 @@ if false
 	myMap.erode([:rock])
 	myMap.erode([:rock])
 else
+	myMap.computeHeights(:veryrough)
+	myMap.blurHeights(20)
+	myMap.computeHeights(:rough)
+	myMap.blurHeights(5)
 	myMap.computeDistances(:rock)
+	myMap.computeHeights(:fine)
+	myMap.blurHeights(1)
 end
 myMap.to_surface.save("mapgen3.png")
 app=AGApplication.new
