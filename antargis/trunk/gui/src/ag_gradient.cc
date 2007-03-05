@@ -438,10 +438,10 @@ void AGDrawBorder(SDL_Surface *surface, const AGRect2& rect,int width, const AGC
 
   for(int i=0;i<width;i++)
     {
-      sge_HLine(surface,r.x(),r.x()+r.w()-1,r.y(),uc1);
-      sge_HLine(surface,r.x(),r.x()+r.w()-1,r.y()+r.h()-1,uc2);
-      sge_VLine(surface,r.x(),r.y(),r.y()+r.h()-1,uc1);
-      sge_VLine(surface,r.x()+r.w()-1,r.y(),r.y()+r.h()-1,uc2);
+      sge_HLine(surface,(Sint16)r.x()          , (Sint16)(r.x()+r.w()-1), (Sint16)r.y(),          uc1);
+      sge_HLine(surface,(Sint16)r.x()          , (Sint16)(r.x()+r.w()-1), (Sint16)(r.y()+r.h()-1),uc2);
+      sge_VLine(surface,(Sint16)r.x()          , (Sint16)r.y(),           (Sint16)(r.y()+r.h()-1),uc1);
+      sge_VLine(surface,(Sint16)(r.x()+r.w()-1), (Sint16)r.y(),           (Sint16)(r.y()+r.h()-1),uc2);
       r=r.shrink(1);
     }
 }

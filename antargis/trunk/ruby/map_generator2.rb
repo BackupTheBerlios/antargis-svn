@@ -542,7 +542,7 @@ if false
 	myMap.erode([:rock])
 else
 	myMap.computeHeights(:veryrough)
-	myMap.blurHeights(20)
+	myMap.blurHeights(10)
 	myMap.computeHeights(:rough)
 	myMap.blurHeights(5)
 	myMap.computeDistances(:rock)

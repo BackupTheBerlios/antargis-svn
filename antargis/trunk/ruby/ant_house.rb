@@ -40,7 +40,7 @@ end
 class AntVillage
 	attr_reader :houses
 	def initialize(name,map)
-		@houses=map.getAllHousesOfVillage(name)		
+		@houses=map.getHousesOfVillage(name)		
 	end
 	def getTrooperCount
 		@houses.collect{|h|h.getMen.length}.inject{|a,b|a+b}

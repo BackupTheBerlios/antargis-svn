@@ -477,6 +477,7 @@ void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
   STACKTRACE;
   AGRect2 d,pSrc;
   d=mCurrent.project(pDest);
+  // FIXME: remove clipRect !!
   AGRect2 p=mCurrent.clipRect(d);
   if(p.w()>0 && p.h()>0)
     {
@@ -493,7 +494,8 @@ void AGPainter::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRec
   for(std::vector<std::pair<AGRect2,AGVector4> >::const_iterator i=pRects.begin();i!=pRects.end();++i)
     {
       AGRect2 d=mCurrent.project(i->first);
-      d=mCurrent.clipRect(d);
+      if(!opengl())
+	d=mCurrent.clipRect(d);
       if(d.w()>0 && d.h()>0)
 	rs.push_back(std::make_pair(d,i->second));
     }
@@ -564,6 +566,7 @@ void AGPainter::popMatrix()
 {
   mCurrent=ps.back();
   ps.pop_back();
+  mTarget->clip(mCurrent.clip);
 }
 void AGPainter::translate(const AGVector2 &v)
 {

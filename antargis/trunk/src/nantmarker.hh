@@ -328,6 +328,16 @@
 	result->mRubyObject=true;
 }
 %markfunc PathWeighter "general_markfunc"
+%exception MiniMap::MiniMap {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc MiniMap "general_markfunc"
 %exception AntMap::AntMap {
 	$action
 	result->mRUBY=self;
@@ -348,16 +358,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGMenu "general_markfunc"
-%exception MiniMap::MiniMap {
-	$action
-	result->mRUBY=self;
-#ifdef GCDEBUG
-     result->mObjName=typeid(*result).name();
-     printf("%lx   %s\n",self,typeid(*result).name());
-#endif
-	result->mRubyObject=true;
-}
-%markfunc MiniMap "general_markfunc"
 %exception AGColorButton::AGColorButton {
 	$action
 	result->mRUBY=self;
@@ -936,10 +936,10 @@ else if(dynamic_cast<AGRadioGroup*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<MiniMap*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<AGColorButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGImage*>(result))
@@ -996,10 +996,10 @@ else if(dynamic_cast<AGRadioGroup*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
 else if(dynamic_cast<AGWindow*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<MiniMap*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<AGColorButton*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGImage*>($1))
@@ -1432,10 +1432,10 @@ else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AntMap*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<MiniMap*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<AGColorButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGImage*>(result))
@@ -1502,10 +1502,10 @@ else if(dynamic_cast<AGWindow*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AntMap*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<MiniMap*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<AGColorButton*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGImage*>($1))
@@ -2368,10 +2368,10 @@ else if(dynamic_cast<AGWindow*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AntMap*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<MiniMap*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGMenu*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<AGColorButton*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGImage*>(result))
@@ -2440,10 +2440,10 @@ else if(dynamic_cast<AGWindow*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
 else if(dynamic_cast<AntMap*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<MiniMap*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
+else if(dynamic_cast<AGMenu*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
 else if(dynamic_cast<AGColorButton*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
 else if(dynamic_cast<AGImage*>($1))
@@ -2692,6 +2692,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) AGFontEngine {
  AGFontEngine *b;
  Data_Get_Struct($input,AGFontEngine,b);
+ $result=*b;
+}
+%typemap(directorout) AGGLObject {
+ AGGLObject *b;
+ Data_Get_Struct($input,AGGLObject,b);
  $result=*b;
 }
 %typemap(directorout) AGGLScreen {

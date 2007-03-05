@@ -16,13 +16,16 @@ class AGCharUtf8
   AGCharUtf8(const AGCharUtf8 &p);
   AGCharUtf8(AGStringUtf8 *ps,size_t ppos);
 
+  bool operator==(const AGCharUtf8 &c) const;
+  bool operator==(const char pChar) const;
+
+#ifndef SWIG
   AGCharUtf8 &operator=(const AGCharUtf8 &c);
   AGCharUtf8 &operator=(const AGStringUtf8 &c);
 
-  bool operator==(const AGCharUtf8 &c) const;
-  bool operator==(const char pChar) const;
   bool operator!=(const AGCharUtf8 &c) const;
   bool operator!=(const char pChar) const;
+#endif
   
 
   std::string getString() const;
@@ -72,8 +75,10 @@ class AGEXPORT AGStringUtf8
   AGStringUtf8 &operator=(const AGStringUtf8 &s);
   AGStringUtf8 &operator=(const AGCharUtf8 &s);
 
+#ifndef SWIG
   AGStringUtf8 &operator+=(const AGStringUtf8 &p);
   AGStringUtf8 &operator+=(const AGCharUtf8 &p);
+#endif
   // size in UTF-8 characters
   size_t length() const;
 

@@ -151,6 +151,8 @@ void Scene::addNode(SceneNode *node)
 {
   if(mNodeSet.find(node)==mNodeSet.end())
     {
+      node->setScene(this);
+
       mNodes.push_back(node);
       mNodeSet.insert(node);
       assert(node->getScene()==this);

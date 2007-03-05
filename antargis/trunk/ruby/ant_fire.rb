@@ -6,7 +6,8 @@ class AntFire<AntRubyEntity
 		mp=AGVector3.new(0,0,0)
 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire.png"),AGVector4.new(0,0,0),0)
 		setMesh(mesh)
-		addMesh(Smoke.new(getMap.getScene,4),mp)
+		@smokeMesh=Smoke.new(getMap.getScene,4)
+		addMesh(@smokeMesh,mp)
 		smoke=Smoke.new(getMap.getScene,40)
 		smoke.setFire(true)
 		smoke.setMaxTime(0.8)
@@ -16,6 +17,9 @@ class AntFire<AntRubyEntity
 	end
 	def disable
 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))
+		getMap.getScene.addNode(@smokeMesh) # FIXME: dirty hack - solve this another way!!!
+		addMesh(@smokeMesh,AGVector3.new(0,0,0))
+		@smokeMesh.setEnabled(false)
 		@enabled=false
 	end
 	def loadXML(n)

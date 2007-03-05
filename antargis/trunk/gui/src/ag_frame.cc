@@ -3,14 +3,14 @@
 #include "ag_debug.h"
 
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t pWidth):AGWidget(pParent,pRect),
-								      mWidth(pWidth),mBorder(0),mTexture(width(),height())
+								       mWidth(pWidth),mBorder(0),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;
   mBg=0;
 }
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pParent,pRect),
-										 mWidth(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture(width(),height())
+										 mWidth(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;

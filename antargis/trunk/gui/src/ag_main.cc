@@ -214,7 +214,12 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
 
   if(mScreen)
-    delete mScreen;
+    {
+      AGGLScreen *ms=dynamic_cast<AGGLScreen*>(mScreen);
+      if(ms)
+	ms->screenDown();
+      delete mScreen;
+    }
 
   if(vw<w)
     vw=w;
@@ -227,7 +232,12 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   cdebug("gl:"<<gl);
 
   if(gl)
-    setScreen(mScreen=new AGGLScreen(w,h,vw,vh));
+    {
+      AGGLScreen *ms=new AGGLScreen(w,h,vw,vh);
+      ms->screenUp();
+
+      setScreen(mScreen=ms);
+    }
   else
     setScreen(mScreen=new AGSDLScreen(ms));
 

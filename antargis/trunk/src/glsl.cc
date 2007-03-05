@@ -102,27 +102,56 @@ bool AntFragProgram::valid() const
 
 AntShaderProgram::AntShaderProgram(const std::string &pVertexFile,const std::string &pFragFile):
   //  vertex(getVertexProgram(pVertexFile)),frag(getFragProgram(pFragFile))
-  vertex(pVertexFile),frag(pFragFile)
+  mVertexFile(pVertexFile),mFragFile(pFragFile),
+  vertex(0),frag(0)
 {
   //  CTRACE;
-  if(glslOk())
+  on=false;
+  matrixBuf=new float[16*100];
+  name=pVertexFile+":"+pFragFile;
+
+  init();
+}
+
+AntShaderProgram::~AntShaderProgram()
+{
+  takeDown();
+
+  delete [] matrixBuf;
+}
+
+void AntShaderProgram::onScreenUp()
+{
+  CTRACE;
+  init();
+}
+void AntShaderProgram::onScreenDown()
+{
+  CTRACE;
+  takeDown();
+}
+
+
+void AntShaderProgram::init()
+{
+ if(glslOk())
     {
+      vertex=new AntVertexProgram(mVertexFile);
+      frag=new AntFragProgram(mFragFile);
+
       p = glCreateProgramObjectARB();
-      glAttachObjectARB(p,vertex.vertexShader);
-      if(frag.valid())
-	glAttachObjectARB(p,frag.fragShader);
+      glAttachObjectARB(p,vertex->vertexShader);
+      if(frag->valid())
+	glAttachObjectARB(p,frag->fragShader);
       
       glLinkProgramARB(p);
       printInfoLog(p);
 
       assert(p);
     }
-  on=false;
-  matrixBuf=new float[16*100];
-  name=pVertexFile+":"+pFragFile;
 }
 
-AntShaderProgram::~AntShaderProgram()
+void AntShaderProgram::takeDown()
 {
   disable();
   CTRACE;
@@ -130,9 +159,11 @@ AntShaderProgram::~AntShaderProgram()
   if(glslOk() && !hasQuit())
     glDeleteObjectARB(p);
   cdebug("name:"<<name);
-  delete [] matrixBuf;
   cdebug("name:"<<name);
+  delete vertex;
+  delete frag;
 }
+
 
 
 void AntShaderProgram::enable()

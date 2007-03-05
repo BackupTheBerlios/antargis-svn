@@ -80,6 +80,8 @@ class SceneNode:public AGRubyObject
   int getOrder() const;
   
  private:
+  void setScene(Scene *pScene);
+
   int mOrder;
 
   Scene *mScene;
@@ -87,6 +89,8 @@ class SceneNode:public AGRubyObject
 
   AGVector4 mPos;
   AGBox3 mBBox;
+
+  friend class Scene;
 };
 
 typedef SceneNode *SceneNodePtr;

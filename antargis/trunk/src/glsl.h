@@ -4,6 +4,7 @@
 #include "ant_renderer.h"
 #include "ag_tools.h"
 #include "ag_geometry.h"
+#include "ag_glscreen.h"
 
 #include <map>
 
@@ -44,15 +45,17 @@ class AntShaderParameter
   
 };
 
-class AntShaderProgram
+class AntShaderProgram:public AGGLObject
 {
-  AntVertexProgram vertex;
-  AntFragProgram frag;
+  std::string mVertexFile,mFragFile;
+  AntVertexProgram *vertex;
+  AntFragProgram *frag;
   std::map<std::string,GLint> locations;
   std::map<std::string,GLint> attrs;
   float *matrixBuf;
   bool on;
   std::string name;
+
  protected:  
   GLhandleARB p;
 
@@ -76,6 +79,16 @@ class AntShaderProgram
   void sendUniform(const std::string &pName,const std::vector<AGMatrix4> &m);
 
   void sendAttribute(const std::string &pName,const std::vector<float> &vf);
+
+  void onScreenUp();
+  void onScreenDown();
+
+
+ private:
+  void check();
+  void init();
+  void takeDown();
+
 };
 
 class AntShadowShader:public AntShaderProgram

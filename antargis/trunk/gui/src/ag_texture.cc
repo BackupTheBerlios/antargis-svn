@@ -246,6 +246,8 @@ void AGTexture::beginPaint()
   assert(!m3d);
   if(opengl())
     {
+      glDisable(GL_SCISSOR_TEST); // to make sure
+
       if(canFBO())
 	{
 	  //	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -290,6 +292,7 @@ void AGTexture::beginPaint()
 	    blit(*this,getRect().origin(),getRect().origin());
 	  mCleared=false;
 	}
+      glDisable(GL_SCISSOR_TEST); // to make sure
     }
   else
     {

@@ -28,6 +28,13 @@ SceneNode::~SceneNode()
     mScene->removeNode(this);
 }
 
+void SceneNode::setScene(Scene *pScene)
+{
+  assert(mScene==0 || mScene==pScene);
+  mScene=pScene;
+}
+
+
 /// release attaching to scene
 void SceneNode::resetScene()
 {

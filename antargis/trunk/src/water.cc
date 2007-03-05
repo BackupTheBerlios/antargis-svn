@@ -100,6 +100,7 @@ void WaterPiece::addTriangle(int x0,int y0,int x1,int y1,int x2, int y2)
 void WaterPiece::draw()
 {
   STACKTRACE;
+  assertGL;
 
   AGRenderContext c;
   c.setAlpha(0,GL_NONE);
@@ -118,6 +119,7 @@ void WaterPiece::draw()
   mArray.draw();
   if(useWaterAnimation())
     getWaterShader()->disable();
+  assertGL;
 }
 
 void WaterPiece::drawPick()
@@ -129,7 +131,9 @@ void WaterPiece::drawPick()
 
 void WaterPiece::advance(float t)
 {
+  assertGL;
   getWaterShader()->update(t);
+  assertGL;
 }
 
 size_t WaterPiece::getTriangles() const

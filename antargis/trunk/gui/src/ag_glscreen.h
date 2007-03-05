@@ -35,6 +35,16 @@ class AGColor;
 
 typedef GLuint TextureID;
 
+class AGGLObject
+{
+ public:
+  AGGLObject();
+  virtual ~AGGLObject();
+
+  virtual void onScreenDown();
+  virtual void onScreenUp();
+};
+
 class AGGLScreen:public AGScreen
 {
  public:
@@ -83,6 +93,12 @@ class AGGLScreen:public AGScreen
 
   void setLineWidth(float w);
 
+  void screenDown();
+  void screenUp();
+
+  static void addGLObject(AGGLObject *pObject);
+  static void removeGLObject(AGGLObject *pObject);
+
  private:
   AGRect2 getRect(SDL_Surface *s);
   void checkUnusedTextures();
@@ -93,6 +109,8 @@ class AGGLScreen:public AGScreen
   float mLineWidth;
 
   friend class AGTexture;
+
+  static std::set<AGGLObject*> msObjects;
 };
 
 bool opengl();

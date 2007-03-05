@@ -128,6 +128,8 @@ void TerrainPiece::drawPick()
 
 void TerrainPiece::draw()
 {
+  assertGL;
+
   STACKTRACE;
   AGRenderContext c;
   c.setLighting(true);
@@ -137,6 +139,7 @@ void TerrainPiece::draw()
   c.begin();
 
   m3dArray.draw();
+  assertGL;
 }
 
 

@@ -26,9 +26,12 @@ class AGString:public std::string
   AGString(const char*c);
   AGString(const char*c,size_t size);
   
+#ifndef SWIG
   AGString &operator=(const AGString &s);
 
   AGString &operator+=(const AGString &p);
+#endif
+
   // size in UTF-8 characters
   //  size_t length() const;
 

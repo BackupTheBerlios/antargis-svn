@@ -47,6 +47,8 @@
 
 std::set<SDL_Surface *> glTestSurfaces;
 
+std::set<AGGLObject*> AGGLScreen::msObjects;
+
 #define SIMPLE
 
 
@@ -84,6 +86,35 @@ void myFlip()
 {
   SDL_GL_SwapBuffers();
 }
+
+////////////////////////////////////////////////////////////////////////
+// AGGLObject
+////////////////////////////////////////////////////////////////////////
+
+
+AGGLObject::AGGLObject()
+{
+  AGGLScreen::addGLObject(this);
+}
+
+AGGLObject::~AGGLObject()
+{
+  AGGLScreen::removeGLObject(this);
+}
+
+void AGGLObject::onScreenDown()
+{
+
+}
+
+void AGGLObject::onScreenUp()
+{
+}
+
+////////////////////////////////////////////////////////////////////////
+// AGGLScreen
+////////////////////////////////////////////////////////////////////////
+
 
 AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
   w(VW),h(VH),
@@ -135,7 +166,7 @@ AGSurface AGGLScreen::screenshot()
 {
   AGSurface s(getWidth(),getHeight());
 
-  SDL_Surface *surface=s.surface()->surface;
+  //  SDL_Surface *surface=s.surface()->surface;
 
   unsigned char *buffer=new unsigned char[getWidth()*getHeight()*4];
   glReadBuffer(GL_FRONT);
@@ -160,8 +191,8 @@ AGSurface AGGLScreen::screenshot()
     // copy
     TRACE;
     int h=getHeight()-1;
-    for(int x=0;x<getWidth();x++)
-      for(int y=0;y<getHeight();y++)
+    for(int x=0;x<(int)getWidth();x++)
+      for(int y=0;y<(int)getHeight();y++)
 	{
 	  unsigned char*p=buffer+((x+(h-y)*getWidth())*4);
 	  AGColor c(p[0],p[1],p[2],p[3]);
@@ -316,16 +347,29 @@ size_t AGGLScreen::getHeight() const
 }
 void AGGLScreen::clip(const AGRect2 &r)
 {
-  return;
+  //return;
 #warning "insert clipping facility for opengl"
 
   AGRect2 x=AGRect2(0,0,w,h);
   AGRect2 m=x.intersect(r);
 
+  GLint x0,y0,cw,ch;
+
+  x0=(GLint)m.x0();
+  y0=(GLint)(h-m.y1()); // -1
+  cw=(GLint)m.width();
+  ch=(GLint)m.height(); // +2
+
+  //  cdebug(x0<<";"<<y0<<";"<<cw<<";"<<ch);
+
+  glScissor(x0,y0,cw,ch);
+  /*
+
   glScissor((GLint)(m.x0()),
 	    (GLint)(h-1-m.y1()),
 	    (GLint)(m.width()),
 	    (GLint)(m.height()));
+  */
   assertGL;
   glEnable(GL_SCISSOR_TEST);
   assertGL;
@@ -342,7 +386,7 @@ void AGGLScreen::beginPaint()
   //  CTRACE;
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  glTranslatef(0,getHeight()+1,0);
+  glTranslatef(0,getHeight(),0);
   glScalef(1,-1,1);
 }
 
@@ -357,6 +401,27 @@ void AGGLScreen::setLineWidth(float w)
   mLineWidth=w;
 }
 
+void AGGLScreen::addGLObject(AGGLObject *pObject)
+{
+  msObjects.insert(pObject);
+}
+
+void AGGLScreen::removeGLObject(AGGLObject *pObject)
+{
+  msObjects.erase(pObject);
+}
+
+void AGGLScreen::screenDown()
+{
+  for(std::set<AGGLObject*>::iterator i=msObjects.begin();i!=msObjects.end();i++)
+    (*i)->onScreenDown();
+
+}
+void AGGLScreen::screenUp()
+{
+  for(std::set<AGGLObject*>::iterator i=msObjects.begin();i!=msObjects.end();i++)
+    (*i)->onScreenUp();
+}
 
 
 bool opengl()
