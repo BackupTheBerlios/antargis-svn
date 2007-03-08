@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module RingData
 	@@ringdata=nil
 	def RingData.getRingData(w=1)

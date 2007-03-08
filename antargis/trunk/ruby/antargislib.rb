@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 #
 # antargislib.rb does the following:
 # - load libantargis.so (the c++-lib for anything that's not ruby)
@@ -22,6 +20,53 @@ module MyAntargisLib
 		# add programdir to path
 		$:.push(@@programDir)
 	end
+end
+
+if $demoMode.nil?
+	$demoMode=false
+	$enableLogging=true
+end
+
+module AntMyEventHandler
+	def getNewEvent
+		if $demoMode
+			if hardwareCursor
+				setCursor(getTextureCache.get("blue_cursor.png"))
+			end
+			@@eventDebugging||=File.open("events.txt","r")
+			@@nextLine||=@@eventDebugging.readline
+			#puts "NEXTLINE:#{@@nextLine}"
+			if @@nextLine=~/T:.*/
+				time=@@nextLine.scan(/..(.*)/)[0][0].to_f
+				#puts "TIME:#{time}"
+				@@nextLine=nil
+				setDemoTime(time)
+				return toSDLEvent("")
+			else
+				s=@@nextLine
+				@@nextLine=nil
+				return toSDLEvent(s)
+			end
+		else
+			e=super
+			s=toString(e)
+			if $enableLogging
+				@@eventDebugging||=File.open("events.txt","w")
+				@@eventDebugging.puts s
+			end
+			return e
+		end
+	end
+
+
+	def eventPrepareFrame(t)
+		if $enableLogging and not $demoMode
+			@@eventDebugging||=File.open("events.txt","w")
+			@@eventDebugging.puts "T:#{t}"
+		end
+		return false
+	end
+
 end
 
 
@@ -71,6 +116,8 @@ module MyAntargislib
 						@@fullscreen=true
 					when "window"
 						@@fullscreen=false
+					when "demo"
+						$demoMode=true
 					when "gui-test"
 						require 'ruby/tests/gui_tests.rb'
 						@@cursorEnabled=true
@@ -171,4 +218,8 @@ class AGStringUtf8
 		puts range,range.class
 		super
 	end
+end
+
+class AntApplication<AGApplication
+	include AntMyEventHandler
 end

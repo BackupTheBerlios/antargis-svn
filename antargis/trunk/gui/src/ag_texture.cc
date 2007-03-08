@@ -382,8 +382,8 @@ extern size_t gUsedTexMemory;
 
 void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
-  if(gUsedTexMemory>20000000)
-    throw int();
+  //  if(gUsedTexMemory>20000000)
+  //    throw int();
 
 
   if(opengl())

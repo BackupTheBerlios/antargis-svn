@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
@@ -18,7 +17,5 @@
 # You should have received a copy of the GNU General Public
 # License along with this program.
 #
-
-#!/usr/bin/ruby
 
 YEAR=60 # one second

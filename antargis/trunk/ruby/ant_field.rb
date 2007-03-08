@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class AntField<AntRubyEntity
 	attr_accessor :farm
 	def initialize

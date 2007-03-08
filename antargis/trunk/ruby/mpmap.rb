@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 #
 # AntMpMap adds some helper functions to AntRubyMap. These include 
 # additional support for Mulitplayer-games (not yet completed !!)

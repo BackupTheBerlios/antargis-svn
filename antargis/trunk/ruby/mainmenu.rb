@@ -18,8 +18,6 @@
 # License along with this program.
 #
 
-#!/usr/bin/ruby
-
 require 'ruby/antargislib.rb'
 $useMenu=true
 
@@ -31,7 +29,7 @@ require 'credits.rb'
 # It uses the setMainWidget-function of AGApplication
 # This way the current menu can easily be exchanged.
 
-class AntMenuApp <AGApplication
+class AntMenuApp <AntApplication
 	include AGHandler
 	def initialize
 		super()

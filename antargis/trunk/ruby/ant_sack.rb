@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class AntSack<AntAnimal
 	def initialize(p=AGVector2.new(0,0))
 		super

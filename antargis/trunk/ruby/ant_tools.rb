@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require "ant_sound.rb"
 
 def getMeshData(file,zoom,texture="",shadow=true)

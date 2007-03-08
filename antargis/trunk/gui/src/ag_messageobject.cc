@@ -628,6 +628,11 @@ SDL_Event *toSDLEvent(const AGString &p)
     {
       event.type=SDL_QUIT;
     }
+  else
+    {
+      event.type=SDL_NOEVENT;
+      return &event;
+    }
   if(event.type)
     return &event;
 

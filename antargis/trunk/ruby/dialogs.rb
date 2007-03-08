@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
@@ -18,8 +17,6 @@
 # You should have received a copy of the GNU General Public
 # License along with this program.
 #
-
-#!/usr/bin/ruby
 
 
 # draws a simple rect all of the defined region (typically the whole screen)
@@ -276,11 +273,11 @@ class AntSaveCampaignDialog<AntDialog
 		if $campaign==nil
 			raise "saving while not in campaign!"
 		end
-		getChild("window").getChild("title").setText("Save campaign")
+		getChild("window").getChild("title").setText(_("Save campaign"))
 	end
 	def eventOk(e)
-		filename=toAGEdit(getChild("Filename")).getText
-		puts "FILENAME:"+filename
+		filename=toAGEdit(getChild("Filename")).getText.to_s
+		puts "FILENAME:"+filename.to_s
 		if not filename =~ /.*\.antcmp/ then
 			filename=filename+".antcmp"
 		end
@@ -583,7 +580,7 @@ end
 # loadscreen.setvalue(somevalue)
 # loadscreen.tick
 # and so on
-class LoadApp<AGApplication
+class LoadApp<AntApplication
 	def initialize
 		super
 		@s=LoadScreen.new(nil)

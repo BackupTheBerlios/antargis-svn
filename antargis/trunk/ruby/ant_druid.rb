@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-
-
 class AntNPC<AntRubyEntity
 	attr_accessor :npcType
 	def initialize()

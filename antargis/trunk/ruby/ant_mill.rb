@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-
-
 class AntMill<AntHouse
 	def initialize
 		super

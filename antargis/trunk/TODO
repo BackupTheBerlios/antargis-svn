@@ -56,11 +56,7 @@ ARTS
 
 [Segfaults]
 ------------------------------------------------------
-[M] a segfault appears when profiling with ruby (./run --profile)
-		couldn't find the problem yet. it's probably one of these problems:
-		1) some GC-problem
-		2) some ruby-error (?) within version 1.8.4
-		workaround done: simply disable gc nearly all the time
+None known.
 
 [AI]
 ------------------------------------------------------
@@ -72,7 +68,7 @@ ARTS
 ------------------------------------------------------
 [H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
 [M] add texture-space-saving
-[L] add Framebuffer objects for paint to texture.
+[L] add Framebuffer objects for paint to texture. -- still buggy ????
 [L] fix AGMenu*. This is broken, but not used ATM.
 [L] rewrite AGEdit - without AGEditLines
 		In AGEdit2 is a beginning of a rewrite. But it's a kind of crappy approach. AGEdit2 should
@@ -86,8 +82,10 @@ ARTS
 
 [Graphics - 3d-engine]
 ------------------------------------------------------
-[H] game crashes when toggling fullscreen (in game)
-[H] check for GLEE_texture_3D extension or gl>1.3 or what support
+[H] use AGGLWidget instead of GLApp - include generic AGApp
+
+
+[H] game crashes when toggling fullscreen (in game) -- FIXED ???? CHECK ON WINDOWS
 [H] try using GL_DYNAMIC_DRAW_ARB for dynamic vertexarrays and combine multiple meshes some how?
 [M] add support for non-3d-texture-graphic cards
 [M] increase picking speed => use kd-tree or bsp
@@ -110,9 +108,6 @@ ARTS
 [H] check translation scripts
 
 [H] wolves should attack people
-
-[?] Rowen dies too fast of starvation when fighting
-[?] Rowen surrenders and does not die when fighting stoner's keep in testai
 
 [H] continue buildingsite function => check if already claimed
 [H] fetching in house (testai) - tries to go through water - maybe move fetching code to some common module
@@ -143,8 +138,6 @@ ARTS
 		So the AntApp must be finished and the surrounding campaign-code, too. After this the
 		loaded campaign must be started.
 [L] add aggression-leveling of non-hero bosses
-[L] story-telling:
-	- browsing facility (scene=>number(person)=>text)
 [L] add wolf, fish, bird
 [L] single games - add village generator to map generator
 [L] single games - add some menu for options
@@ -152,6 +145,8 @@ ARTS
 
 [VL] very bad situation => raise heroes with a new player (rebellion)
 [VL] add females
+[VL] story-telling:
+	- browsing facility (scene=>number(person)=>text)
 
 [Artificial Intelligence]
 ------------------------------------------------------
@@ -181,7 +176,6 @@ ARTS
 [Packaging / Building]
 ------------------------------------------------------
 [L] installer for linux. maybe some autopackage or .debs?
-[VH] remove she-bangs here as in 0.1.9 tag
 
 
 DOCUMENTATION

@@ -83,6 +83,9 @@ class AGApplication:public AGMessageObject
 
   /// called in each frame when idling
   virtual bool eventIdle();           
+
+  virtual bool eventPrepareFrame(float pTime);
+
   /// called between event-handling and drawing
   virtual bool eventFrame(float pTime);
   /// called after drawing - so before event handling
@@ -116,10 +119,13 @@ class AGApplication:public AGMessageObject
 
   void setCursor(const AGTexture &pTexture);
   void setNormalCursor();
+  bool hardwareCursor() const;
 
   virtual SDL_Event getNewEvent();
 
   void setKeyRepeat(bool enable);
+
+  void setDemoTime(float t);
   
  private:
   void clearOldMousePosition();
@@ -141,6 +147,8 @@ class AGApplication:public AGMessageObject
   std::list<AGWidget*> delCue;
 
   SDL_Event mEvent;
+
+  float mDemoTime;
 
  public:
   void mark();

@@ -60,6 +60,12 @@ class AntHLJob
 						c.set("type","AGVector2s")
 						value=value.collect{|v|v.to_s}.join(":")
 					end
+				when Hash
+					c.set("type","HashEntities")
+					value=value.collect{|k,v|
+						k.uid.to_s+"="+v.uid.to_s
+					}.join("&")
+					
 				when Fixnum,Float,TrueClass,FalseClass
 					c.set("type",value.class.to_s)
 				when AGVector2
@@ -68,8 +74,9 @@ class AntHLJob
 					# do nothing
 					c.set("type","String")
 				else
-					value=AntMarshal.dump(value)
 					puts "UNKNOWN TYPE:#{value} #{value.class} #{name}"
+					
+					value=AntMarshal.dump(value)
 					raise 1
 			end
 			puts "#{value} #{name}"
@@ -89,6 +96,16 @@ class AntHLJob
 				case c.get("type")
 					when "AntEntity"
 						value=getMap.getByUID(value.to_i)
+					when "HashEntities"
+						vs={}
+						value=value.split("&").each{|s|
+							k,v=s.split("=").collect{|u|getMap.getByUID(u.to_i)}
+							#puts "K:#{k} V:#{v}"
+							vs[k]=v
+						}
+						#puts vs,vs.class
+						#raise 1
+						value=vs
 					when "AntEntities"
 						value=value.split(",").collect{|v|getMap.getByUID(v)}
 					when "AGVector2"
@@ -625,11 +642,10 @@ class AntHeroRecruitJob<AntHeroMoveJob
 	include AntHeroSitting
 
 	attr_reader :finished
-	def initialize(hero,target,agg)
+	def initialize(hero,target)
 		@target=target
-		@aggression=agg
 		@targetMen=target.menCount
-		@want=@targetMen*agg/3
+		@want=@targetMen*hero.getAggression/3
 		@finished=false
 		@restingMen=0
 		@wantedMen=@want.to_i
@@ -714,11 +730,10 @@ end
 
 class AntHeroTakeJob<AntHeroMoveJob
 	attr_reader :finished
-	def initialize(hero,target,agg,what="food")
+	def initialize(hero,target,what="food")
 		super(hero,0,target.getPos2D,4)
 		@what=what
 		@target=target
-		@aggression=agg
 		@want=@men
 		@oldpos=nil
 		@takeStarted=false
@@ -805,7 +820,7 @@ $productionRules=[
 
 class AntHeroConstructJob<AntHeroMoveJob
 	attr_reader :finished
-	def initialize(hero,target,agg)
+	def initialize(hero,target)
 		super(hero,0,target.getPos2D,4)
 		@target=target
 		@usedmen=0

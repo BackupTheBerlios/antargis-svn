@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
@@ -18,8 +17,6 @@
 # You should have received a copy of the GNU General Public
 # License along with this program.
 #
-
-#!/usr/bin/ruby
 
 require 'ents.rb'
 require 'ant_hljobs.rb'
@@ -55,7 +52,17 @@ class AntBoss<AntRubyEntity
 					@job=AntHeroMoveJob.new(self,0,AGVector2.new(0,0),0)
 				when "AntHeroRestJob"
 					@job=AntHeroRestJob.new(self,10)
+				when "AntHeroRecruitJob"
+					target=n.getChildren.select{|c|c.get("name")=="@target"}[0]
+					if target
+						target=getMap.getByUID(target.get("value"))
+					
+						@job=AntHeroRecruitJob.new(self,target)
+					else
+						raise "target missing in saved AntHeroRecruitJob"
+					end
 				else
+					# FIXME!!!
 					raise "unknown job: #{t}"
 			end
 			@job.loadXML(n)

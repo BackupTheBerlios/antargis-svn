@@ -53,6 +53,7 @@ AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTo
       setCursor(getTextureCache()->get("blue_cursor.png"));
       setNormalCursor();
     }
+  mDemoTime=-1;
 }
 
 AGApplication::~AGApplication()
@@ -152,10 +153,20 @@ bool AGApplication::run()
 	    doEvent(&event);
 	    }*/
 
-	t=(now-last)/1000.0;
+	if(mDemoTime>0)
+	  {
+	    t=mDemoTime;
+	    mDemoTime=-1;
+	  }
+	else
+	  {
+	    t=(now-last)/1000.0;
+	  }
 	if(mainWidget)
 	  mainWidget->sigTick(t);
 	
+	eventPrepareFrame(t);
+
 	eventFrame(t);
       }
       {
@@ -178,6 +189,12 @@ bool AGApplication::run()
 
   return true;
 }
+
+void AGApplication::setDemoTime(float t)
+{
+  mDemoTime=t;
+}
+
 
 SDL_Event AGApplication::getNewEvent()
 {
@@ -386,6 +403,12 @@ void AGApplication::eventChangedRes()
 {
 }
 
+bool AGApplication::eventPrepareFrame(float pTime)
+{
+  return false;
+}
+
+
 bool AGApplication::eventFrame(float pTime)
 {
   return false;
@@ -470,4 +493,9 @@ void AGApplication::setNormalCursor()
   SDL_ShowCursor(1);
   delete mCursor;
   mCursor=0;
+}
+
+bool AGApplication::hardwareCursor() const
+{
+  return mCursor==0;
 }

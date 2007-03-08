@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-
-
 #FIXME
 
 class AntBakery<AntHouse

@@ -17,7 +17,7 @@ class Black<AGWidget
 	end
 end
 
-class IntroApp<AGApplication
+class IntroApp<AntApplication
 	include AGHandler
 	def initialize
 		super

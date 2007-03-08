@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 $debug||=false
 if $debug
 	module Kernel

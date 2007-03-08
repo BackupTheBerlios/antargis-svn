@@ -18,8 +18,6 @@
 # License along with this program.
 #
 
-#!/usr/bin/ruby
-
 require 'ents.rb'
 require 'editor/ent_list.rb'
 

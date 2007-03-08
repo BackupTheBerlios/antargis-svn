@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 
 class AntFishingHut<AntHouse
 	def initialize

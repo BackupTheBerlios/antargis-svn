@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class Trigger
 	attr_reader :name, :player
 	def initialize(node)

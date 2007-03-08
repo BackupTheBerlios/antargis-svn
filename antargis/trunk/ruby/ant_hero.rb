@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
@@ -18,8 +17,6 @@
 # You should have received a copy of the GNU General Public
 # License along with this program.
 #
-
-#!/usr/bin/ruby
 
 require 'ents.rb'
 require 'ant_hljobs.rb'
@@ -132,20 +129,20 @@ class AntHero<AntBoss
 		assignJob2All
 	end
 	def newHLRecruitJob(target)
-		@job=AntHeroRecruitJob.new(self,target,getAggression)
+		@job=AntHeroRecruitJob.new(self,target)
 		assignJob2All
 	end
 	def newHLConstructJob(target)
-		@job=AntHeroConstructJob.new(self,target,getAggression)
+		@job=AntHeroConstructJob.new(self,target)
 		assignJob2All
 	end
 	def newHLTakeFoodJob(target)
 		puts "take food job #{self} #{target}"
-		@job=AntHeroTakeJob.new(self,target,getAggression,"food")
+		@job=AntHeroTakeJob.new(self,target,"food")
 		assignJob2All
 	end
 	def newHLTakeWeaponJob(target)
-		@job=AntHeroTakeJob.new(self,target,getAggression,"weapon")
+		@job=AntHeroTakeJob.new(self,target,"weapon")
 		assignJob2All
 	end
 	def newHLFightJob(target)

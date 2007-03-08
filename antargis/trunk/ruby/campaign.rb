@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 
 # Campaigning
 #################################
@@ -79,7 +78,7 @@ class CampaignLevel
 	end
 end
 
-class CutSceneDisplay<AGApplication
+class CutSceneDisplay<AntApplication
 	def initialize(image,text)
 		super()
 		@layout=AGLayout.new(nil)

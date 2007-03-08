@@ -167,24 +167,7 @@ class AntGameApp <AntRubyView
 	# EVENT HANDLERS
 	####################################
 
-	# debugging-function - log all user-input
-	def getNewEvent
-		if false
-			@eventDebugging||=File.open("events.txt","r")
-			s=@eventDebugging.readline
-			return toSDLEvent(s)
-		end
-		e=super
-		s=toString(e)
-		@eventDebugging||=File.open("events.txt","w")
-		begin
-			@eventDebugging.puts s
-			#puts toSDLEvent(s)
-		rescue
-		end
-	
-		return e
-	end
+	include AntMyEventHandler
 
 
 	# this handler is for the buttonpanel on the top

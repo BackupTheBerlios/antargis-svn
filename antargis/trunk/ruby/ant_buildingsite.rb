@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 
 class AntBuildingSite<AntRubyEntity
 	attr_accessor :building

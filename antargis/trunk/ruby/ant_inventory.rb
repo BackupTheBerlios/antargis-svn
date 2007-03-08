@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # Inventory view
 class AntInventory<AGWidget
 	@@inventory=nil

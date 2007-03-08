@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 def getBoatMeshData
 	getMeshData("data/models/boat_simple.ant2",0.12,"data/textures/models/boat_simple.png")
 end

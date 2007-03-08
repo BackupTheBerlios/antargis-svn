@@ -18,8 +18,6 @@
 # License along with this program.
 #
 
-#!/usr/bin/ruby
-
 require 'ant_player.rb'
 require 'ant_trigger.rb'
 require 'ant_level.rb'

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # Inventory view
 class AntEnergy<AGWidget
 	attr_accessor :hborder

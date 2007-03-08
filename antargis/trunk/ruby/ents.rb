@@ -18,8 +18,6 @@
 # License along with this program.
 #
 
-#!/usr/bin/ruby
-
 require 'ant_local.rb'
 
 # this variables are used for playing sounds, which should be done with AntRubyEntity::playSound
