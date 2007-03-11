@@ -2834,6 +2834,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
  Data_Get_Struct($input,AGRadioGroup,b);
  $result=*b;
 }
+%typemap(directorout) AGRandomizer {
+ AGRandomizer *b;
+ Data_Get_Struct($input,AGRandomizer,b);
+ $result=*b;
+}
 %typemap(directorout) AGRect2 {
  AGRect2 *b;
  Data_Get_Struct($input,AGRect2,b);
