@@ -22,10 +22,19 @@
 #define __AG_RAND
 
 #include <string>
+#include "ag_rubyobj.h"
 
-class AGRandomizer
+// Randomizer using Mersenne Twister - it's even faster
+// than the common libc-implementation of rand()
+// Second reason to use it is the possibility to save
+// the prng (pseudo-random-number generator)'s state
+// to a string and restore it. This way we can deterministically
+// rerun a "randomized" game
+class AGRandomizer:public AGRubyObject
 {
  public:
+  // restore a randomizer from a state-string (pretty long)
+  // for an initial seed - call with pSeed==""
   AGRandomizer(const std::string &pSeed);
 #ifdef SWIG
   %rename(randFloat) operator()(float f);
@@ -34,9 +43,18 @@ class AGRandomizer
   float operator()(float f);
   int operator()(int i);
 
+  // give state-string, to be saved
   std::string stateToString() const;
 
 };
+
+/// calls getMain()->getRand()->rand()
+int agRand(int i);
+/// calls getMain()->getRand()->rand()
+float agRand(float f);
+
+/// runs a small speed test
+void randSpeed();
 
 
 #endif

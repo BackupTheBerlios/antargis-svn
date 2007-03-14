@@ -21,7 +21,7 @@
 class AntDecal<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
-		@typeID=(rand()*2).to_i
+		@typeID=(getRand()*2).to_i
 		setProvide("decal",true)
 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.8,"data/textures/gravel4.png",false),AGVector4.new(0,0,0,0),0))
 	end

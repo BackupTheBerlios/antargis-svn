@@ -307,7 +307,7 @@ class AntHouse<AntBoss
 		super(node)
 		setPos(getPos2D) # set to ground
 		if getName==""
-			setName(rand.to_s)
+			setName(getRand.to_s)
 		end
 		@village=node.get("village")
 	end	

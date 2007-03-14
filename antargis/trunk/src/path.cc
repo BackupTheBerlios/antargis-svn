@@ -19,9 +19,15 @@ SimpleGraph::Node::~Node()
 
 }
 
-std::map<SimpleGraph::Node*,float> SimpleGraph::Node::getNextNodes()
+bool SimpleGraph::NodePtrCompare::operator()(const Node *a,const Node *b)
 {
-  std::map<SimpleGraph::Node*,float> m;
+  return a->p<b->p;
+}
+
+
+SimpleGraph::Node::NodeMap SimpleGraph::Node::getNextNodes()
+{
+  SimpleGraph::Node::NodeMap m;
 
   for(Edges::iterator i=edges.begin();i!=edges.end();i++)
     {
@@ -58,6 +64,12 @@ SimpleGraph::Edge::Edge(Node *pa,Node *pb,float p0,float p1)
 SimpleGraph::Edge::~Edge()
 {
 }
+
+bool SimpleGraph::EdgePtrCompare::operator()(const Edge *a,const Edge *b)
+{
+  return(a->a->p < b->a->p || (a->a->p==b->a->p && a->b->p<b->b->p));
+}
+
 
 bool SimpleGraph::Edge::operator<(const Edge &e) const
 {
@@ -620,10 +632,10 @@ HeuristicFunction *computeHeuristic(SimpleGraph *g)
 	  SimpleGraph::Node *n=*modified.begin();
 	  modified.erase(modified.begin());
 	  
-	  std::map<SimpleGraph::Node*,float> ns=n->getNextNodes();
+	  SimpleGraph::Node::NodeMap ns=n->getNextNodes();
 	  float old=weights[n];
 
-	  for(std::map<SimpleGraph::Node*,float>::iterator j=ns.begin();j!=ns.end();j++)
+	  for(SimpleGraph::Node::NodeMap::iterator j=ns.begin();j!=ns.end();j++)
 	    {
 	      float now=weights[j->first];
 	      //	      cdebug("now:"<<now<<"  old:"<<old<<" plus:"<<j->second);
@@ -843,12 +855,12 @@ std::vector<AGVector2> Pathfinder::computePath(const AGVector2 &pFrom, const AGV
       cdebug("tries:"<<tries);
       
 
-      std::map<SimpleGraph::Node*,float> nextNodes=last->getNextNodes();
+      SimpleGraph::Node::NodeMap nextNodes=last->getNextNodes();
 
       std::set<SimpleGraph::Node*> alreadyGone;
       std::copy(path.begin(),path.end(),std::inserter(alreadyGone,alreadyGone.begin()));
 
-      for(std::map<SimpleGraph::Node*,float>::iterator i=nextNodes.begin();i!=nextNodes.end();i++)
+      for(SimpleGraph::Node::NodeMap::iterator i=nextNodes.begin();i!=nextNodes.end();i++)
 	{
 	  if(alreadyGone.find(i->first)==alreadyGone.end())
 	    {

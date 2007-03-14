@@ -21,10 +21,10 @@
 class AntStone<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
-		@typeID=(rand()*2).to_i
+		@typeID=(getRand*2).to_i
 		setProvide("stone",true)
 		#setMesh(Mesh.new(getMeshData("data/models/floor.ant2",1,"data/textures/splats/gravel_big2.png",false),AGVector4.new(0,0,0,0),0))
-		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/big_stone.ant2",0.7,"data/textures/models/big_stone.png"),AGVector4.new(0,0,0,0),rand*360))
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/big_stone.ant2",0.7,"data/textures/models/big_stone.png"),AGVector4.new(0,0,0,0),getRand*360))
 		
 #		setMesh(NewDecal.new(AGVector2.new(3,3),5.3,getMap,"data/textures/gravel.png"))
 #		setMesh(NewDecal.new(AGVector2.new(3,3),5.3,getMap,"data/textures/terrain/rough_dirt2.png"))

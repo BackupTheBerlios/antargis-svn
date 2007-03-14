@@ -10,3 +10,6 @@ puts a.randInt(20)
 puts a.randInt(20)
 puts a.randInt(20)
 
+main=AGMain.new
+main.setRand(AGRandomizer.new(""))
+randSpeed

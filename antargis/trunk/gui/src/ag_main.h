@@ -24,6 +24,7 @@
 #include <string>
 #include <ag_rubyobj.h>
 #include <ag_collector.h>
+#include <ag_rand.h>
 
 
 /**
@@ -66,6 +67,9 @@ class AGMain:public AGRubyObject
   bool fullscreen() const;
   long getTicks() const;
 
+  void setRand(AGRandomizer *pRand);
+  AGRandomizer *getRand();
+
   AGCollector *getCollector();
  protected:
   virtual void mark();
@@ -75,6 +79,8 @@ class AGMain:public AGRubyObject
   AGCollector *mCollector;
 
   const SDL_VideoInfo *videoInfo;
+
+  AGRandomizer *mRand;
 };
 
 bool hasMain();

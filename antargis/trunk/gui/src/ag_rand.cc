@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005 by David Kamphausen. All rights reserved.
+ * Copyright (c) 2007 by David Kamphausen. All rights reserved.
  *
  * ag_rand.cc
  * by David Kamphausen (david.kamphausen@web.de)
@@ -18,8 +18,10 @@
  * License along with this program.
  */
 
-#include "ag_rand.h"
 #include "ag_debug.h"
+#include "ag_main.h"
+#include "ag_profiler.h"
+#include "ag_rand.h"
 #include "mtwist.h"
 
 #include <sstream>
@@ -71,5 +73,34 @@ std::string AGRandomizer::stateToString() const
 
 }
 
+int agRand(int i)
+{
+  AGRandomizer *r=getMain()->getRand();
+  if(!r)
+    throw std::runtime_error("Randomizer not set!");
+  return (*r)(i);
+}
+float agRand(float f)
+{
+  AGRandomizer *r=getMain()->getRand();
+  if(!r)
+    throw std::runtime_error("Randomizer not set!");
+  return (*r)(f);
+}
 
-
+void randSpeed()
+{
+  long m=10000000;
+  int t;
+  int max=100;
+  {
+    STACKTRACE;
+    for(long i=0;i<m;i++)
+      t=rand()%max;
+  }
+  {
+    STACKTRACE;
+    for(long i=0;i<m;i++)
+      t=agRand(max);
+  }
+}

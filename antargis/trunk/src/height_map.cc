@@ -369,14 +369,13 @@ void HeightMap::saveXML(Node &node) const
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight)
 {
   std::vector<float> h(mW*mH);
-  int randMax=10000;
 
   for(int i=0;i<mW*mH;i++)
     h[i]=0;
   return h;
   
   for(int i=0;i<mW*mH;i++)
-    h[i]=(rand()%randMax)*mMaxHeight/randMax;
+    h[i]=agRand(mMaxHeight);
   
   int x,y;
   // blur

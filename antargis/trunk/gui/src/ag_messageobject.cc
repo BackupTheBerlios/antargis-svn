@@ -521,12 +521,25 @@ AGString toString(SDL_Event *pEvent)
 	case SDL_QUIT:
 	  os<<"SDL_QUIT:";
 	  break;
+	case SDL_SYSWMEVENT:
+	  os<<"SDL_DUMMY;";
+	  break;
+	case SDL_VIDEOEXPOSE:
+	  os<<"SDL_VIDEOEXPOSE";
+	  break;
+	case SDL_NOEVENT:
+	  os<<"SDL_NOEVENT";
+	  break;
+	default:
+	  cdebug("UNKNOWN SDL_EVENT:"<<pEvent->type);
+	  os<<"SDL_NOEVENT";
+	  break;
 	}
       if(os.str().length())
 	return os.str();
       
     }
-  return "nil";
+  return "SDL_NOEVENT";
 }
 
 
@@ -624,6 +637,20 @@ SDL_Event *toSDLEvent(const AGString &p)
       event.jbutton.button=getUntil(b,":").toUint8();
       event.jbutton.state=getUntil(b,":").toUint8();
     }
+  else if(t=="SDL_SYSWMEVENT")
+    {
+      event.type=SDL_SYSWMEVENT;
+      // FIXME
+    }
+  else if(t=="SDL_VIDEOEXPOSE")
+    {
+      event.type=SDL_VIDEOEXPOSE;
+      
+    }
+  else if(t=="SDL_DUMMY")
+    {
+      event.type=SDL_USEREVENT;
+    }
   else if(t=="SDL_QUIT")
     {
       event.type=SDL_QUIT;
@@ -640,7 +667,8 @@ SDL_Event *toSDLEvent(const AGString &p)
 }
 bool eventOk(const SDL_Event &pEvent)
 {
-  return pEvent.type!=SDL_NOEVENT;
+  cdebug("eventOk: check "<<(int)pEvent.type<<"!="<<SDL_NOEVENT<<" ???");
+  return (int)pEvent.type!=SDL_NOEVENT;
 }
 
 void resetEvent(SDL_Event &pEvent)

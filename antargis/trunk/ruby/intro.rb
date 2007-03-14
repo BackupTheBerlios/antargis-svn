@@ -78,6 +78,7 @@ class IntroApp<AntApplication
 	end
 	
 	def checkPhase
+		puts "#{@time}>#{@phases[@phase]}"
 		if @time>@phases[@phase]
 			@time-=@phases[@phase]
 			@phase+=1

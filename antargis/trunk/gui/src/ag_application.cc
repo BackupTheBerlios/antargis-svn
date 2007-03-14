@@ -101,6 +101,8 @@ bool AGApplication::run()
   
   flushEventQueue();
   last=now=SDL_GetTicks();
+
+  size_t loopCount=0;
   
   while(mRunning)
     {
@@ -121,18 +123,24 @@ bool AGApplication::run()
 	  ;
 	*/
 	clearOldMousePosition();
+	cdebug("loop pre-event:"<<loopCount);
 	event=getNewEvent();
 	if(eventOk(event))
 	  {
 	    do
 	      {
+		cdebug("eventok  "<<toString(&event));
 		doEvent(event);
 		if(mIdleCalls)
-		  event=getNewEvent();
+		  {
+		    cdebug("getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
+		    event=getNewEvent();
+		  }
 		else
 		  resetEvent(event);
 	      }while(eventOk(event));
 	  } 
+	cdebug("loop post-event:"<<loopCount);
 	/*
 	if(mIdleCalls) 
 	  {
@@ -153,10 +161,11 @@ bool AGApplication::run()
 	    doEvent(&event);
 	    }*/
 
-	if(mDemoTime>0)
+	if(mDemoTime>=0)
 	  {
 	    t=mDemoTime;
 	    mDemoTime=-1;
+	    cdebug("demo time:"<<t);
 	  }
 	else
 	  {
@@ -165,6 +174,7 @@ bool AGApplication::run()
 	if(mainWidget)
 	  mainWidget->sigTick(t);
 	
+	cdebug("frame events:"<<t);
 	eventPrepareFrame(t);
 
 	eventFrame(t);
@@ -184,6 +194,9 @@ bool AGApplication::run()
       
       eventFrameEnd(t);
       last=now;
+
+      loopCount++;
+      cdebug("Running:"<<mRunning);
     }
   gApplication=0;
 
@@ -192,6 +205,7 @@ bool AGApplication::run()
 
 void AGApplication::setDemoTime(float t)
 {
+  cdebug("demoTime:"<<t);
   mDemoTime=t;
 }
 
@@ -199,6 +213,7 @@ void AGApplication::setDemoTime(float t)
 SDL_Event AGApplication::getNewEvent()
 {
   SDL_Event mEvent;
+  resetEvent(mEvent);
   // pull motion events (may flood the eventqueue)
   while(SDL_PeepEvents(&mEvent, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
     ;
@@ -266,6 +281,7 @@ void AGApplication::flushEventQueue()
  
 bool AGApplication::eventQuit(AGEvent *m)
 {
+  CTRACE;
   mRunning=false;
   return false;
 }
@@ -377,6 +393,7 @@ void AGApplication::draw()
 
 void AGApplication::tryQuit()
 {
+  CTRACE;
   mRunning=false;
 }
 
@@ -426,6 +443,7 @@ long AGApplication::getTicks() const
 /// delays execution for ms milliseconds. This can be used to decrease framerate and cpu-load.
 void AGApplication::delay(int ms)
 {
+  cdebug("delay:"<<ms);
   SDL_Delay(ms);
 }
 

@@ -79,10 +79,12 @@ bool glMode()
    creates an AGMain object.
 */
 AGMain::AGMain():
-  mCollector(0)
+  mCollector(0),mRand(0)
 {
   assert(mAGMain==0);
   mAGMain=this;
+
+  mRand=new AGRandomizer("");
 
   newInstanceKiller();
 
@@ -116,6 +118,8 @@ AGMain::~AGMain()
   cdebug("QUIT");
   SDL_Quit();
   quited=true;
+
+  saveDelete(mRand);
 
 
   setRubyRaising(true);
@@ -355,6 +359,17 @@ long AGMain::getTicks() const
 void AGMain::mark()
 {
   markObject(getCollector());
+  markObject(mRand);
+}
+
+void AGMain::setRand(AGRandomizer *pRand)
+{
+  mRand=pRand;
+}
+
+AGRandomizer *AGMain::getRand()
+{
+  return mRand;
 }
 
 

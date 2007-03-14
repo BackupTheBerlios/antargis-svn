@@ -10,7 +10,7 @@ module MyAntargisLib
 	@@antargislibinited||=false
 
 	if not @@antargislibinited
-		puts "TRY"
+		puts "MYTRY"
 		# try suspending arts
 		if File.exists?("/usr/bin/artsshell")
 			File.popen("/usr/bin/artsshell suspend 2>&1").close
@@ -35,12 +35,13 @@ module AntMyEventHandler
 			end
 			@@eventDebugging||=File.open("events.txt","r")
 			@@nextLine||=@@eventDebugging.readline
-			#puts "NEXTLINE:#{@@nextLine}"
+			puts "NEXTLINE:#{@@nextLine}"
 			if @@nextLine=~/T:.*/
 				time=@@nextLine.scan(/..(.*)/)[0][0].to_f
-				#puts "TIME:#{time}"
+				puts "TIME:#{time}"
 				@@nextLine=nil
 				setDemoTime(time)
+				
 				return toSDLEvent("")
 			else
 				s=@@nextLine
@@ -49,11 +50,19 @@ module AntMyEventHandler
 			end
 		else
 			e=super
-			s=toString(e)
-			if $enableLogging
-				@@eventDebugging||=File.open("events.txt","w")
-				@@eventDebugging.puts s
+			if not e.nil?
+				if eventOk(e)
+					s=toString(e)
+					if $enableLogging
+						@@eventDebugging||=File.open("events.txt","w")
+						@@eventDebugging.puts s
+						puts "NEWEVENT: #{self}  #{s}"
+					end
+				end
 			end
+# 			if e.nil?
+# 				return toSDLEvent("")
+# 			end
 			return e
 		end
 	end
@@ -62,7 +71,8 @@ module AntMyEventHandler
 	def eventPrepareFrame(t)
 		if $enableLogging and not $demoMode
 			@@eventDebugging||=File.open("events.txt","w")
-			@@eventDebugging.puts "T:#{t}"
+			@@eventDebugging.puts "T: #{t}"
+			puts "TIME #{t}"
 		end
 		return false
 	end
@@ -138,6 +148,8 @@ module MyAntargislib
 	--no-sound     disables sound for now and future uses
 	
 	--gui-test     tells BoA to use events.txt to produce GUI-events
+
+	--demo         enable demo mode - reading events from events.txt
 	"
 	
 						exit
@@ -197,7 +209,16 @@ module MyAntargislib
 			puts "GC ok"
 		end
 	end
+
+	def MyAntargislib.demoMode
+		$demoMove
+	end
 end
+
+def demoMode
+	MyAntargislib.demoMode
+end
+
 #include Libantargis
 def startGC
 	MyAntargislib.startGC
@@ -222,4 +243,16 @@ end
 
 class AntApplication<AGApplication
 	include AntMyEventHandler
+
+	def delay(ms)
+		puts "DELAY  #{ms}"
+		return 
+		if not demoMode
+			super
+		end
+	end
 end
+
+# def rand
+# 	raise "This Function shouldn't be called at all!!!!!"
+# end

@@ -3,7 +3,7 @@ class AntField<AntRubyEntity
 	def initialize
 		super(AGVector2.new(0,0))
 		setProvide("field",true)
-		@size=0 # (rand*3).to_i
+		@size=0
 		#init fieldMeshes-var
 		AntField.getFieldMeshData(0)
 		@max=@@fieldMeshes.length-1

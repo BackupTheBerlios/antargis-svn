@@ -113,7 +113,12 @@ class AntRubyEntity<AntEntity
 	end
 	def getRand
 		# FIXME - implement me (network code)
-		rand
+		#rand
+# 		@mrand||=AGRandomizer.new("")
+# 		return @mrand.randFloat(1)
+		puts "#{self} getRand"
+		puts caller.join("\n")
+		agRand(1.0)
 	end
 
 	def setStrength(v)

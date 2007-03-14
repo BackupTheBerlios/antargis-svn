@@ -41,6 +41,7 @@ class AntBoss<AntRubyEntity
 		super(node)
 		if node.get("men")!="" then
 			dputs "LOAD:CREATING MEN:"+node.get("men")
+			dputs caller.join("\n")
 			if node.get("men")!=""
 				@createMen=node.get("men").to_i
 			end
@@ -90,7 +91,8 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def eventNoJob
-		puts "eventNoJob "+self.class.to_s+" "+@job.to_s
+		dputs "eventNoJob "+self.class.to_s+" "+@job.to_s
+		dputs caller.join("\n")
 		checkHLJobEnd(self)
  		checkCreateMen
 	end

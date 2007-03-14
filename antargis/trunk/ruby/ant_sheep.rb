@@ -63,8 +63,8 @@ class AntSheep<AntAnimal
 			getMap.insertEntity(sheep)
 			#getMap.endChange
 			newRestJob(2)
-			@lastBirth=-rand()*10
-		elsif rand<0.5 then
+			@lastBirth=-getRand*10
+		elsif getRand<0.5 then
 			newMoveJob(0,getTargetPos,0)
 			setMeshState("go")
 		else
@@ -90,7 +90,7 @@ class AntSheep<AntAnimal
 		tries=10
 		# assure that sheep doesn't walk into water
 		while tries>0 do
-			d=AGVector2.new(rand-0.5,rand-0.5).normalized*2
+			d=AGVector2.new(getRand-0.5,getRand-0.5).normalized*2
 			t=p+d
 			t=getMap.truncPos(t)
 			tries-=1

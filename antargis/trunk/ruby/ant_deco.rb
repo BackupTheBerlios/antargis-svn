@@ -24,7 +24,7 @@ class AntDeco<AntRubyEntity
 		@decoType=decoType
 		if @decoType==nil
 			a=["flower1a","flower2a","twig","gravel","small_bush","hole","grass4","grass4a","grass4b","gravel_big","gravel_big2","rock1"]
-			r=(rand()*a.size).to_i
+			r=(getRand()*a.size).to_i
 			@decoType=a[r]
 		else
 			b={"coach"=>["coach2"],
@@ -39,7 +39,7 @@ class AntDeco<AntRubyEntity
 					"block"=>["block2"],
 					"grassGreen"=>["grass3"]}
 			a=b[@decoType]
-			r=(rand()*a.size).to_i
+			r=(getRand()*a.size).to_i
 			@decoType=a[r]
 		end
 		setProvide("deco",true)
@@ -62,9 +62,9 @@ end
 class AntTwig<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
-		@typeID=(rand()*2).to_i
+		@typeID=(getRand()*2).to_i
 		#setType("twig")
-		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),rand*360))
+		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),getRand*360))
 	end
 end
 

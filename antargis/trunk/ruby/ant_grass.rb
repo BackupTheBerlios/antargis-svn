@@ -52,7 +52,7 @@ def getGrassMeshData(size,many=4,texture=nil,bush=false)
 	if i==1
 		vadd=AGVector4.new(0,0,0,0)
 	else
-		vadd=AGVector4.new(rand*2,rand*2,0,0)
+		vadd=AGVector4.new(agRand(1.0)*2,agRand(1.0)*2,0,0)
 	end
 	
 	mv0.v=v0+vadd
@@ -182,9 +182,9 @@ class AntGrass<AntRubyEntity
 		super(AGVector2.new(0,0))
 		setProvide("grass",true)
 		if high
-			@size=rand*0.25+0.5
+			@size=getRand*0.25+0.5
 		else
-			@size=rand*0.25+0.25
+			@size=getRand*0.25+0.25
 		end
 		setupMesh
 	end
@@ -210,7 +210,7 @@ class AntBush<AntRubyEntity
 	def initialize()
 		super(AGVector2.new(0,0))
 		setProvide("bush",true)
-		@size=rand*0.25+0.25
+		@size=getRand*0.25+0.25
 		setupMesh
 	end
 	def resourceChanged

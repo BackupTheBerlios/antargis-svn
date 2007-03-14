@@ -9,17 +9,6 @@ def getMeshData(file,zoom,texture="",shadow=true)
 		puts "LOAD MESH:"+id	
 		$meshes[id]=MeshData.new(file,zoom,texture,shadow)
 
-# 		# instancing test
-# 		puts "FILE:#{file}"
-# 		if file =~ /tree/
-# 			ts=[]
-# 			(0..2).each{|x|
-# 				(0..2).each{|y|
-# 					ts.push(AGMatrix4.new(AGVector4.new(x*2+rand*1.7,y*2+rand*1.7,0,0)))
-# 				}
-# 			}
-# 			$meshes[id].makeInstances(ts)
-# 		end
 	end
 	return $meshes[id]
 end

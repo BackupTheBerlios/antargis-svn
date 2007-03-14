@@ -19,6 +19,7 @@
  */
 
 #include "scene.h"
+#include "ag_rand.h"
 #include "map.h"
 #include "entity.h"
 #include <vector>
@@ -303,7 +304,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
     {
       std::multimap<float,AntEntity*>::iterator j=ents.begin();
       float nearest=j->first;
-      int r=rand()%std::min((Uint32)ents.size(),5U);
+      int r=agRand(std::min((int)ents.size(),5));
       while(r>0 && (j->first<=nearest*1.3 || j->first<2000*2000))
         {
           j++;

@@ -408,6 +408,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGLayoutCreator "general_markfunc"
+%exception AGRandomizer::AGRandomizer {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AGRandomizer "general_markfunc"
 %exception AGGLScreen::AGGLScreen {
 	$action
 	result->mRUBY=self;
@@ -508,6 +518,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGSound "general_markfunc"
+%exception Mesh::Mesh {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc Mesh "general_markfunc"
 %exception AGPaintTarget::AGPaintTarget {
 	$action
 	result->mRUBY=self;
@@ -538,16 +558,6 @@
 	result->mRubyObject=true;
 }
 %markfunc AGListener "general_markfunc"
-%exception Mesh::Mesh {
-	$action
-	result->mRUBY=self;
-#ifdef GCDEBUG
-     result->mObjName=typeid(*result).name();
-     printf("%lx   %s\n",self,typeid(*result).name());
-#endif
-	result->mRubyObject=true;
-}
-%markfunc Mesh "general_markfunc"
 %exception TerrainPiece::TerrainPiece {
 	$action
 	result->mRUBY=self;
@@ -568,6 +578,34 @@
 	result->mRubyObject=true;
 }
 %markfunc NewDecal "general_markfunc"
+%typemap(out) MapPathWeighter*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MapPathWeighter,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) MapPathWeighter*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MapPathWeighter,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGRadio*{
  if($1)
  {
@@ -620,34 +658,6 @@
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_GLApp,0);
-   }
- }
- else $input=Qnil;
-}
-%typemap(out) MapPathWeighter*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MapPathWeighter,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(directorin) MapPathWeighter*{
- if($1)
- {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MapPathWeighter,0);
    }
  }
  else $input=Qnil;
@@ -1960,6 +1970,34 @@ else if(dynamic_cast<TerrainPiece*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayoutCreator,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AGRandomizer*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRandomizer,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AGRandomizer*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRandomizer,0);
    }
  }
  else $input=Qnil;

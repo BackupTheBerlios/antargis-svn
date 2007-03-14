@@ -24,7 +24,7 @@ class AntMine<AntRubyEntity
 		super(AGVector2.new(0,0))
 		setProvide("coal",true)
 		setProvide("ore",true)
-		@angle=rand*360
+		@angle=getRand*360
 		
 		setMinimapColor(AGColor.new(0,0,0))
 	

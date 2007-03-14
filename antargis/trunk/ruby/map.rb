@@ -252,7 +252,7 @@ class AntRubyMap<AntMap
 		end
 		if e
 			e.preloadXML(node)
-			@loadedEntities[node]=e
+			@loadedEntities<<[node,e]
 		end
 # 	end
 # 
@@ -302,16 +302,18 @@ class AntRubyMap<AntMap
 	
 	def loadXML(n)
 		@loadedEntsNum=1
-		@loadedEntities={}
+		@loadedEntities=[]
 		super(n)
 # 		puts @loadedEntities.length
 # 		puts @loadedEntsNum
 # 		raise 1
-		@loadedEntities.each{|node,entity|
+		@loadedEntities.each{|pair|
+			node,entity=pair
 			insertEntity(entity)
 		}
 
-		@loadedEntities.each{|node,entity|
+		@loadedEntities.each{|pair|
+			node,entity=pair
 #			loadEntityFromXML(entity,node)
 			entity.loadXML(node)
 			entity.eventMapChanged

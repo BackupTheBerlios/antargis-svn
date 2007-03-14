@@ -54,7 +54,6 @@ struct AGVector2Sort
 };
 
 
-
 class SimpleGraph:public AGRubyObject
 {
  public:
@@ -63,6 +62,18 @@ class SimpleGraph:public AGRubyObject
 
   typedef std::list<Edge*> Edges;
   typedef std::list<Node*> Nodes;
+
+  class NodePtrCompare
+  {
+  public:
+    bool operator()(const Node *a,const Node *b);
+  };
+    
+  class EdgePtrCompare
+  {
+  public:
+    bool operator()(const Edge *a,const Edge *b);
+  };
 
   // only used for processing and not for storing !
   struct HalfEdge
@@ -86,17 +97,18 @@ class SimpleGraph:public AGRubyObject
     HalfEdge *getHalfEdgeFrom(Node *n);
 
     HalfEdge *getHalfEdgeTo(Node *n);
+
   };
 
   struct Node
   {
     AGVector2 p;
     Edges edges;
+    typedef std::map<Node*,float,NodePtrCompare> NodeMap;
     
     ~Node();
 
-    std::map<Node*,float> getNextNodes();
-
+    NodeMap getNextNodes();
   };
 
   struct EdgeSort
@@ -154,7 +166,7 @@ class SimpleGraph:public AGRubyObject
   // FIXME: quadtree out of nodes !!!
 
   typedef std::map<AGVector2,Node*,AGVector2Sort> NodeMap;
-  typedef std::set<Node*> NodeSet;
+  typedef std::set<Node*,NodePtrCompare> NodeSet;
   typedef std::set<Edge*,EdgeSort> EdgeSet;
   NodeMap mNodeMap;
   NodeSet mNodes;

@@ -232,10 +232,12 @@ class AntHero<AntBoss
 	def assignJob2All
 		super
 		puts "ASSIGN JOB 2 All #{self}"
+		puts "---"
 		if @job.class!=AntHeroRestJob
 			setFire(false)
 		end
 		doEvent(:newJobAssigned)
+		puts "ASSIGN JOB ready."
 	end
 
 	def setMeshState(name)

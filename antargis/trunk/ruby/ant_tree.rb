@@ -65,10 +65,10 @@ class AntTree<AntRubyEntity
 	def initialize(typeID=nil)
 		super(AGVector2.new(0,0))
 		@typeID=typeID
-		@typeID||=(rand*getTreeTypes.length).to_i
+		@typeID||=(getRand*getTreeTypes.length).to_i
 		setProvide("wood",true)
 		setProvide("fruit",true)
-		@angle=rand*360
+		@angle=getRand*360
 		
 		@maxApples=100
 		setMinimapColor(AGColor.new(0,0x77,0))
@@ -117,8 +117,8 @@ class AntTree<AntRubyEntity
 		@crownRadius=1.3
 		@applePos=[]
 		for i in 1..@maxApples
-			va=(rand-0.5)*Math::PI
-			ha=(rand+1)*Math::PI  # only on front side
+			va=(getRand-0.5)*Math::PI
+			ha=(getRand+1)*Math::PI  # only on front side
 			z=@crownRadius*Math::sin(va)
 			rest=Math::sqrt(@crownRadius**2-z**2)
 			y=Math::sin(ha)*rest
