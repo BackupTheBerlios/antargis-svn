@@ -50,7 +50,7 @@ void addPath(const std::string &pName)
   char **p=PHYSFS_getSearchPath();
   for(;*p;p++)
     {
-      cdebug(*p);
+      dbout(0,*p);
 
     }
 #endif
@@ -66,9 +66,9 @@ void initFS(const char *argv0)
   PHYSFS_setSaneConfig("Antargis","Antargis","ZIP",false,false);
   FSinited=true;
   const char *wp=PHYSFS_getWriteDir();
-  cdebug("writedir:"<<wp);
+  dbout(0,"writedir:"<<wp);
 
-  cdebug("searchpath:");
+  dbout(0,"searchpath:");
 
   PHYSFS_addToSearchPath("./data/",1);
   PHYSFS_addToSearchPath("/usr/share/antargisgui/",1);
@@ -81,11 +81,11 @@ void initFS(const char *argv0)
   char **p=PHYSFS_getSearchPath();
   for(;*p;p++)
     {
-      cdebug(*p);
+      dbout(0,*p);
 
     }
 
-  cdebug("--");
+  dbout(0,"--");
 
 #endif
   addPath("data");
@@ -115,8 +115,8 @@ void checkDir(const std::string &s)
 		}
 	  else
 	  {
-		  cdebug("could not create dir:"<<s);
-		  cdebug("rc:"<<rc);
+		  dbout(0,"could not create dir:"<<s);
+		  dbout(0,"rc:"<<rc);
 		  throw std::runtime_error("could not create dir");
 		}
     }
@@ -133,7 +133,7 @@ void checkDir(const std::string &s)
 	case EACCES: 
 	  return; // probably exists - we don't have access
 	default:
-	  cdebug("could not create dir:"<<s);
+	  dbout(0,"could not create dir:"<<s);
 	  throw std::runtime_error("could not create dir");
 	}
     }
@@ -238,9 +238,9 @@ std::string loadFromPath(const std::string &pName)
   //    throw std::runtime_error("Not yet inited fs-paths!");
 
   for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
-    cdebug("path:"<<*i);
+    dbout(0,"path:"<<*i);
 
-  cdebug("LOAD FAILED:"<<pName);
+  dbout(0,"LOAD FAILED:"<<pName);
 
   return r;
 }
@@ -414,7 +414,7 @@ bool saveFile(const std::string &pName,const std::string &pContent)
 
   if(!f)
     {
-      cdebug("Error saving file:"<<pName);
+      dbout(0,"Error saving file:"<<pName);
     }
   assert(f);
 
@@ -506,13 +506,13 @@ std::vector<std::string> getDirectoryInternal(const std::string &pDir)
   struct dirent *ent;
   DIR *dir;
   std::string dirname=pDir;//+"/*";
-  cdebug("DIR:"<<dirname);
+  dbout(0,"DIR:"<<dirname);
   dir=opendir(dirname.c_str());
   if(dir)
     {
       while((ent=readdir(dir)))
 	{
-	  cdebug("found:"<<ent->d_name);
+	  dbout(0,"found:"<<ent->d_name);
 	  v.push_back(ent->d_name);
 	}
     }

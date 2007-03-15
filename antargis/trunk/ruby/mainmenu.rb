@@ -397,7 +397,6 @@ class AntMenuApp <AntApplication
 	end
 
 	def eventFrame(t)
-		puts "evenFrame #{t}"
 		@frameTime||=0
 		@frames||=0
 		@frameTime+=t

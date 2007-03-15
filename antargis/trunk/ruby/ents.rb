@@ -112,12 +112,18 @@ class AntRubyEntity<AntEntity
 		@fightTarget
 	end
 	def getRand
-		# FIXME - implement me (network code)
-		#rand
-# 		@mrand||=AGRandomizer.new("")
-# 		return @mrand.randFloat(1)
-		puts "#{self} getRand"
-		puts caller.join("\n")
+		if false
+			# FIXME - implement me (network code)
+			#rand
+			puts "mrand:#{@mrand}"
+			@mrand||=AGRandomizer.new("")
+			val=@mrand.randFloat(1)
+	
+			puts "#{self} getRand #{val}  #{@mrand}"
+			puts caller.join("\n")
+	
+			return val
+		end
 		agRand(1.0)
 	end
 

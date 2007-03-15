@@ -325,7 +325,7 @@ void AGMessageObject::popSignal(AGSignal *pSignal)
 bool AGMessageObject::processEvent(AGEvent* agEvent) 
 {
 
-  //  cdebug("typeid:"<<typeid(this).name());
+  //  dbout(1,"typeid:"<<typeid(this).name());
   //  TRACE;
   //  SDL_Event e;
   bool rc=false;
@@ -531,7 +531,7 @@ AGString toString(SDL_Event *pEvent)
 	  os<<"SDL_NOEVENT";
 	  break;
 	default:
-	  cdebug("UNKNOWN SDL_EVENT:"<<pEvent->type);
+	  dbout(1,"UNKNOWN SDL_EVENT:"<<pEvent->type);
 	  os<<"SDL_NOEVENT";
 	  break;
 	}
@@ -667,7 +667,7 @@ SDL_Event *toSDLEvent(const AGString &p)
 }
 bool eventOk(const SDL_Event &pEvent)
 {
-  cdebug("eventOk: check "<<(int)pEvent.type<<"!="<<SDL_NOEVENT<<" ???");
+  dbout(1,"eventOk: check "<<(int)pEvent.type<<"!="<<SDL_NOEVENT<<" ???");
   return (int)pEvent.type!=SDL_NOEVENT;
 }
 

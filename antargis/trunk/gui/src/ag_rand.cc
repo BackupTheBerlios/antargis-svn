@@ -22,29 +22,49 @@
 #include "ag_main.h"
 #include "ag_profiler.h"
 #include "ag_rand.h"
-#include "mtwist.h"
 
 #include <sstream>
 
-static mt_state mState;
+//static mt_state mState;
 
 
 AGRandomizer::AGRandomizer(const std::string &pSeed)
 {
+  CTRACE;
+
   std::istringstream is;
   is.str(pSeed);
+
+  mState.stateptr=0;
+  mState.initialized=0;
+
 
   is>>mState.stateptr;
   is>>mState.initialized;
 
   for(unsigned long i=0;i<MT_STATE_SIZE;i++)
-    is>>mState.statevec[i];
+    {
+      mState.statevec[i]=0;
+      is>>mState.statevec[i];
+    }
+
+  cdebug("state"<<mState.stateptr);
+  cdebug("seed:"<<pSeed);
+
+  assert(mState.stateptr<MT_STATE_SIZE && mState.stateptr>=0);
   
   //  mts_seed(&mState);
 
 }
+
+AGRandomizer::~AGRandomizer()
+{
+  CTRACE;
+}
+
 float AGRandomizer::operator()(float f)
 {
+  CTRACE;
   float d=(float)mts_drand(&mState);
   cdebug("d:"<<d<<" f:"<<f);
   d*=f;
@@ -54,6 +74,7 @@ float AGRandomizer::operator()(float f)
 }
 int AGRandomizer::operator()(int i)
 {
+  CTRACE;
   int r=mts_lrand(&mState);
   cdebug("r:"<<r<<" i:"<<i);
   r%=i;

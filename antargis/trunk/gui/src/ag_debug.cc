@@ -66,11 +66,22 @@ std::ostream &getDebug()
 }
 
 size_t gDebugIndex=0;
+size_t gDebugLevel=0;
 
 size_t getDebugIndex()
 {
   return gDebugIndex;
 }
+
+size_t getDebugLevel()
+{
+  return gDebugLevel;
+}
+void setDebugLevel(size_t t)
+{
+  gDebugLevel=t;
+}
+
 
 
 D::D(std::string c):
@@ -79,19 +90,19 @@ D::D(std::string c):
   indent();
   gDebugIndex++;
 
-  debugout("start of:"<<c<<"("<<gDebugIndex<<")"<<std::endl);
+  dbout(2,"start of:"<<c<<"("<<gDebugIndex<<")"<<std::endl);
   d++;
 }
 AGEXPORT D::~D()
 {
   d--;
   indent();
-  debugout("end   of:"<<m<<std::endl);
+  dbout(2,"end   of:"<<m<<std::endl);
 }
 void D::indent()
 {
   for(int i=0;i<d;i++)
-    debugout("  ");
+    debugout_checked(2,"  ");
 }
 
 

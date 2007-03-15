@@ -23,6 +23,7 @@
 
 #include <string>
 #include "ag_rubyobj.h"
+#include "mtwist.h"
 
 // Randomizer using Mersenne Twister - it's even faster
 // than the common libc-implementation of rand()
@@ -36,6 +37,7 @@ class AGRandomizer:public AGRubyObject
   // restore a randomizer from a state-string (pretty long)
   // for an initial seed - call with pSeed==""
   AGRandomizer(const std::string &pSeed);
+  ~AGRandomizer();
 #ifdef SWIG
   %rename(randFloat) operator()(float f);
   %rename(randInt) operator()(int i);
@@ -46,6 +48,7 @@ class AGRandomizer:public AGRubyObject
   // give state-string, to be saved
   std::string stateToString() const;
 
+  mt_state mState;
 };
 
 /// calls getMain()->getRand()->rand()

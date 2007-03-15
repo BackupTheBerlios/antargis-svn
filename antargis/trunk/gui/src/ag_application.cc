@@ -123,24 +123,24 @@ bool AGApplication::run()
 	  ;
 	*/
 	clearOldMousePosition();
-	cdebug("loop pre-event:"<<loopCount);
+	dbout(2,"loop pre-event:"<<loopCount);
 	event=getNewEvent();
 	if(eventOk(event))
 	  {
 	    do
 	      {
-		cdebug("eventok  "<<toString(&event));
+		dbout(2,"eventok  "<<toString(&event));
 		doEvent(event);
 		if(mIdleCalls)
 		  {
-		    cdebug("getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
+		    dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
 		    event=getNewEvent();
 		  }
 		else
 		  resetEvent(event);
 	      }while(eventOk(event));
 	  } 
-	cdebug("loop post-event:"<<loopCount);
+	dbout(2,"loop post-event:"<<loopCount);
 	/*
 	if(mIdleCalls) 
 	  {
@@ -165,7 +165,7 @@ bool AGApplication::run()
 	  {
 	    t=mDemoTime;
 	    mDemoTime=-1;
-	    cdebug("demo time:"<<t);
+	    dbout(2,"demo time:"<<t);
 	  }
 	else
 	  {
@@ -174,7 +174,7 @@ bool AGApplication::run()
 	if(mainWidget)
 	  mainWidget->sigTick(t);
 	
-	cdebug("frame events:"<<t);
+	dbout(2,"frame events:"<<t);
 	eventPrepareFrame(t);
 
 	eventFrame(t);
@@ -196,7 +196,7 @@ bool AGApplication::run()
       last=now;
 
       loopCount++;
-      cdebug("Running:"<<mRunning);
+      dbout(2,"Running:"<<mRunning);
     }
   gApplication=0;
 
@@ -205,7 +205,7 @@ bool AGApplication::run()
 
 void AGApplication::setDemoTime(float t)
 {
-  cdebug("demoTime:"<<t);
+  dbout(2,"demoTime:"<<t);
   mDemoTime=t;
 }
 
@@ -443,7 +443,7 @@ long AGApplication::getTicks() const
 /// delays execution for ms milliseconds. This can be used to decrease framerate and cpu-load.
 void AGApplication::delay(int ms)
 {
-  cdebug("delay:"<<ms);
+  dbout(2,"delay:"<<ms);
   SDL_Delay(ms);
 }
 

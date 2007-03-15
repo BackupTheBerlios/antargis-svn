@@ -56,7 +56,7 @@ module AntMyEventHandler
 					if $enableLogging
 						@@eventDebugging||=File.open("events.txt","w")
 						@@eventDebugging.puts s
-						puts "NEWEVENT: #{self}  #{s}"
+						#puts "NEWEVENT: #{self}  #{s}"
 					end
 				end
 			end
@@ -72,7 +72,7 @@ module AntMyEventHandler
 		if $enableLogging and not $demoMode
 			@@eventDebugging||=File.open("events.txt","w")
 			@@eventDebugging.puts "T: #{t}"
-			puts "TIME #{t}"
+			#puts "TIME #{t}"
 		end
 		return false
 	end
@@ -100,6 +100,8 @@ module MyAntargislib
 		@@antargislibinited=true
 		@@fullscreen=false
 		@@antProfiling=false
+
+		setDebugLevel(1000)
 	
 		# check options
 		ARGV.each{|arg|
@@ -126,6 +128,9 @@ module MyAntargislib
 						@@fullscreen=true
 					when "window"
 						@@fullscreen=false
+					when /debug-level/
+						level=a.split("=")[1].to_i
+						setDebugLevel(level)
 					when "demo"
 						$demoMode=true
 					when "gui-test"
@@ -150,6 +155,8 @@ module MyAntargislib
 	--gui-test     tells BoA to use events.txt to produce GUI-events
 
 	--demo         enable demo mode - reading events from events.txt
+
+	--debug-level=x
 	"
 	
 						exit
@@ -244,13 +251,14 @@ end
 class AntApplication<AGApplication
 	include AntMyEventHandler
 
-	def delay(ms)
-		puts "DELAY  #{ms}"
-		return 
-		if not demoMode
-			super
-		end
-	end
+# # Here you can bypass some functions - if you might want to -
+# 	def delay(ms)
+# 		puts "DELAY  #{ms}"
+# 		return 
+# 		if not demoMode
+# 			super
+# 		end
+# 	end
 end
 
 # def rand

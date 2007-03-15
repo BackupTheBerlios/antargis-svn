@@ -94,5 +94,9 @@ std::string getAppName();
 bool videoInited();
 std::string AGEXPORT myHash(const std::string &p);
 
+// from ag_debug
+size_t getDebugLevel();
+void setDebugLevel(size_t t);
+
 
 #endif

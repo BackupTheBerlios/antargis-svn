@@ -68,8 +68,12 @@ using std::endl;
 #define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl)
 #define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl)
 
-
 size_t getDebugIndex();
+size_t getDebugLevel();
+void setDebugLevel(size_t t);
+
+#define debugout_checked(level,x) { if(level>getDebugLevel()) { getDebug()<<x; }}
+#define dbout(level,x) {if(level>getDebugLevel()) { cdebug(x); }}
 
 /** A helper class for tracing the program's flow
     Use it by instantiating it with a proper name, or simply use TRACE; (or CTRACE for classes) in your functions */
