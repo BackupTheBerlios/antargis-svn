@@ -452,7 +452,7 @@ class AntRubyMap<AntMap
 		if @pause
 			return
 		end
-		time*=@app.getSpeed # increase speed
+		#time*=@app.getSpeed # increase speed  # moved to app
 		@curTime+=time
 		@@systemTime+=time
 		super(time)

@@ -159,9 +159,9 @@ class AntGameApp <AntRubyView
 		#setCursor(getTextureCache.get("blue_cursor.png"))
 	end
 
-	def getSpeed
-		@speed
-	end
+# 	def getSpeed
+# 		@speed
+# 	end
 
 	####################################
 	# EVENT HANDLERS
@@ -253,6 +253,11 @@ class AntGameApp <AntRubyView
 				if @hero
 					@hero.newHLRestJob(10)
 				end
+			when SDLK_PLUS
+				@speed=[@speed+1,5].min
+			when SDLK_MINUS
+				@speed=[@speed-1,1].max
+			
 			when SDLK_p
 				eventPause(nil)
 		end
@@ -290,7 +295,7 @@ class AntGameApp <AntRubyView
 
 
 		# move entities in game-engine
-		getMap().move(time)
+		getMap().move(time*@speed)
 		# advance animations
 		getScene.advance(time)
 		checkHeroEnergy

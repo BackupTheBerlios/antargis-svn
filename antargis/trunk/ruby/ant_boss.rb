@@ -91,8 +91,8 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def eventNoJob
-		dputs "eventNoJob "+self.class.to_s+" "+@job.to_s
-		dputs caller.join("\n")
+# 		dputs "eventNoJob "+self.class.to_s+" "+@job.to_s
+# 		dputs caller.join("\n")
 		checkHLJobEnd(self)
  		checkCreateMen
 	end

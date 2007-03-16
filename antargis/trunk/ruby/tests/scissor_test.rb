@@ -18,7 +18,8 @@ class MyApp<AGApplication
 	end
 	def eventFrame(t)
 		#puts "eventFram"
-		delay(20)
+		#delay(20)
+		tryQuit
 		return true
 	end
 

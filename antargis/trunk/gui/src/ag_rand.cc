@@ -111,7 +111,7 @@ float agRand(float f)
 
 void randSpeed()
 {
-  long m=10000000;
+  long m=100000;
   int t;
   int max=100;
   {

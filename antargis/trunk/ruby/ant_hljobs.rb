@@ -826,7 +826,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 		@usedmen=0
 		@restype={}
 		@constructStarted=false
-		@productionRules=$productionRules # FIXME maybe exchange for different constructing types
+		@@productionRules=$productionRules # FIXME maybe exchange for different constructing types
 	end
 	def image
 		"data/gui/construct.png"
@@ -974,7 +974,7 @@ private
 	end
 	def readyConstructed
 		# produce any
-		@productionRules.shuffle.each{|rule|
+		@@productionRules.shuffle.each{|rule|
 			ok=true
 			
 			rule.from.each{|w,n|

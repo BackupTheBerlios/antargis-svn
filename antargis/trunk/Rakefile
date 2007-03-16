@@ -218,7 +218,7 @@ end
 
 task :test => "libantargis.so" do |t|
 	if (not $xcompile)
-		`ruby ruby/runtests.rb`
+		msh "ruby ruby/runtests.rb"
 	end
 	#require 'libantargis.so'
 end
