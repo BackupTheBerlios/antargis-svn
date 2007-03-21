@@ -250,6 +250,11 @@ float AGVector2::length2() const
   return v[0]*v[0]+v[1]*v[1];
 }
 
+AGVector2 AGVector2::dim2() const
+{
+  return *this;
+}
+
 
 bool AGVector2::nonZero() const
 {

@@ -67,3 +67,15 @@ def getDescendantsOfClass(p)
 	ObjectSpace.each_object(Class){|a|c.push(a) if a.ancestors.member?(p)}
 	return c
 end
+
+def trace
+	puts "TRACE #{caller[0]}"
+end
+
+def assert(&block)
+	if not block.call
+		raise "Assertion #{block} failed in #{caller[0]} #{block.binding}"
+	end
+end
+
+

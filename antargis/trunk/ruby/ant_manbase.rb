@@ -62,6 +62,26 @@ module AntManBase
 		setMeshState("sitdown")
 	end
 
+	def walkTo(p)
+		newMoveJob(0,p,0)
+	end
+	
+	def standStill
+		newRestJob(2)
+		setMeshState("stand")
+	end
+
+	def standStillShort
+		newRestJob(0.2)
+		setMeshState("stand")
+	end
+
+	def sitStill
+		newRestJob(2)
+		setMeshState("sit")
+	end
+
+
 	# overrides newFightJob from AntEntity
 	# fighting distance is assigned 1 or 10 
 	# depending on the man having a bow
@@ -74,6 +94,14 @@ module AntManBase
 	end
 
 	def eventDefeated
+		# FIXME: check, if this ok !!!! /HLJobs
+		if newHLJobs
+			hlJobMode[:defeated]=true
+			eventNoJob
+			return
+		end
+
+
 		if is_a?(AntBoss)
 			eventManDefeated(self)
 		elsif @boss then

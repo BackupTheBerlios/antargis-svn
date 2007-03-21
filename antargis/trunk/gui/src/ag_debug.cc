@@ -51,6 +51,17 @@ void setRubyRaising(bool flag)
   gRubyRaising=flag;
 }
 
+size_t gDebugLevel=0;
+
+size_t getDebugLevel()
+{
+  return gDebugLevel;
+}
+void setDebugLevel(size_t t)
+{
+  gDebugLevel=t;
+}
+
 
 #ifndef MNDEBUG
 int D::d=0;
@@ -66,20 +77,10 @@ std::ostream &getDebug()
 }
 
 size_t gDebugIndex=0;
-size_t gDebugLevel=0;
 
 size_t getDebugIndex()
 {
   return gDebugIndex;
-}
-
-size_t getDebugLevel()
-{
-  return gDebugLevel;
-}
-void setDebugLevel(size_t t)
-{
-  gDebugLevel=t;
 }
 
 

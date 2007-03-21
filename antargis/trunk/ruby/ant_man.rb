@@ -33,9 +33,14 @@ class AntMan<AntRubyEntity
 
 	attr_reader :meshState, :dead
 	attr_accessor :target
+
+	attr_accessor :hlJobMode
 	
 	def initialize()
 		super(AGVector2.new(0,0))
+
+		@hlJobMode={}
+
 		setProvide("man",true)
 		@signed=false
 		@dead=false
@@ -177,7 +182,7 @@ class AntMan<AntRubyEntity
 		super
 		setGoAnim
 	end
-	
+
 	def newMoveJob(p,target,n)
 		if isOnWater and isOnOpenWater(target) and (not haveBoat)
 			newRestJob(2)

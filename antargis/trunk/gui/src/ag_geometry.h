@@ -73,6 +73,8 @@ class AGEXPORT AGVector2
   void setX(float pX);
   void setY(float pY);
 
+  AGVector2 dim2() const;
+
   
 #ifdef SWIG
   %rename(x) getX() const;

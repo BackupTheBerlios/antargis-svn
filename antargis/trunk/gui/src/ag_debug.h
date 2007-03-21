@@ -39,6 +39,7 @@
 void setQuiet();
 
 #ifdef MNDEBUG
+#define dbout(x,l)
 #define cdebug(x)
 #define ccdebug(x)
 #define debug(x)

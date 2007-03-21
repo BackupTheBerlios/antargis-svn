@@ -26,9 +26,12 @@ require 'ant_formations.rb'
 class AntBoss<AntRubyEntity
 	attr_accessor :formation
 
+	attr_accessor :hlJobMode
+
 	def initialize
 		super(AGVector2.new(0,0))
 		@men=[]
+		@hlJobMode={}
 		@job=nil
 		@createMen=0
 		@selected=@hovered=false
@@ -220,6 +223,13 @@ class AntBoss<AntRubyEntity
 		if getMap
 			getMap.eventNewJobAssignedToBoss(self)
 		end
+
+		begin
+		# discard reassigning in this case
+		return if ObjectSpace.const_get(:AntNewHLJob)
+		rescue
+		end
+
 		@men.each{|man|
 			man.delJob
 			assignJob(man)

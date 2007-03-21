@@ -1111,3 +1111,10 @@ end
 
 
 require 'ant_buildjob.rb'
+
+
+def newHLJobs
+	return false
+end
+
+#require 'ant_new_hljobs.rb'
