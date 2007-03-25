@@ -290,6 +290,13 @@ div.thumbs h2
 	margin-top:40px;
 }
 
+.helpwanted
+{
+	border-style:ridge;
+	border-width:2px;
+	border-color:#773300; /*bd6c04;*/
+}
+
 hr
 {
 	border-top:1px solid gray;
