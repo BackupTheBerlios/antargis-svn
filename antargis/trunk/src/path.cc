@@ -459,7 +459,7 @@ void DecimatedGraph::decimate(float amount,MapPathWeighter *pWeighter)
 {
   size_t m=(size_t)(mNodes.size()*(1.0-amount));
 
-  m=std::max(m,2U);
+  m=std::max((unsigned int)m,2U);
 
   while(mNodes.size()>m)
     {

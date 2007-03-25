@@ -198,11 +198,12 @@ class AntBoss<AntRubyEntity
 	end
 
 	def underAttack
-		@job.is_a?(AntHeroFightJob)
+		(@job.is_a?(AntHeroFightJob) and (not @job.finished))
 	end
 
 
 	def setOwner(owner)
+		trace
 		@owner=owner
 		dputs "RESETING PLAYER:"
 		if @player
@@ -213,7 +214,10 @@ class AntBoss<AntRubyEntity
 			@player.add(self)
 		end
 		getMap.eventOwnerChanged(self)
+		trace
 		AntInventory.update(self)
+		trace
+		#resourceChanged
 	end
 	def getOwner
 		@owner
@@ -326,6 +330,10 @@ class AntBoss<AntRubyEntity
 	end
 
 	def eventHaveDefeated(e)
+		if newHLJobs
+			eventNoJob
+			return
+		end
 		puts "#{getName} has defeated #{e.getName}"
 		if @job.is_a?(AntHeroFightJob)
 			@job.haveDefeated(e)

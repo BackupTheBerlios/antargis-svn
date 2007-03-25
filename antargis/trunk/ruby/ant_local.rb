@@ -34,9 +34,11 @@ def getLanguage
 		# windows - try estimating thruogh "Program Files"-dir name
 		known={"Programme"=>"de",
 		 "Archivos de programa"=>"es"}
-		n=$ENV["CommonProgramFiles"].split("\\")[1]
-		if known[n]
-			return known[n]
+		if $ENV.has_key?("CommonProgramFiles")
+			n=$ENV["CommonProgramFiles"].split("\\")[1]
+			if known[n]
+				return known[n]
+			end
 		end
 		return "en"
 	end

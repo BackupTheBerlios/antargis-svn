@@ -1117,4 +1117,4 @@ def newHLJobs
 	return false
 end
 
-#require 'ant_new_hljobs.rb'
+require 'ant_new_hljobs.rb'

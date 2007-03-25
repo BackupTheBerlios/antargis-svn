@@ -115,8 +115,12 @@ class AntMan<AntRubyEntity
 	end	
 
 	def eventHaveDefeated(e)
-		puts "#{getName} has defeated #{e.getName}"
-		@boss.eventHaveDefeated(e)
+		if newHLJobs
+			eventNoJob
+		else
+			puts "#{getName} has defeated #{e.getName}"
+			@boss.eventHaveDefeated(e)
+		end
 	end
 
 	def getPlayer

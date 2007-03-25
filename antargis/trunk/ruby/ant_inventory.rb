@@ -59,28 +59,34 @@ class AntInventory<AGWidget
 	end
 
 	def update(e)
+		trace
 		if @inspect==e
+			trace
 			updateInspection
 		end
 	end
 private
 	def checkFriend
+		trace
 		if @inspect.nil?
 			return
 		end
 		friend=(@inspect.getPlayer==getMap.getPlayer)
 		enemy=(not friend)
+		puts "friend #{friend}"
 		getChild("friend_true").setVisible(friend)
 		getChild("friend_false").setVisible(enemy)
 		getChild("enemy_true").setVisible(enemy)
 		getChild("enemy_false").setVisible(friend)
 	end
 	def checkButtons
+		trace	
 		my=(@inspect.getPlayer==getMap.getPlayer and @inspect!=$app.hero)
 		
+		#myok=my # reenable other options when under attack
 		myok=(my and (not @inspect.underAttack))
 
-			
+		puts "my #{my} myok #{myok}"
 		getChild("doRecruit").setVisible(((not my) or (not @inspect.underAttack)))
 		getChild("doRecruit").setEnabled(myok)
 		getChild("doTakeFood").setEnabled(myok)
@@ -123,7 +129,9 @@ private
 		end
 	end
 	def updateInspection
+		trace
 		if @inspect then
+			trace
 			checkButtons
 			checkFriend
 			res=@inspect.resource.getAll
@@ -157,7 +165,9 @@ private
 		@@inventory.inspectEntity(entity) if @@inventory
 	end
 	def AntInventory.update(entity)
+		trace
 		@@inventory.update(entity) if @@inventory
+		trace
 	end
 	def AntInventory.resetPointer
 		@@inventory=nil

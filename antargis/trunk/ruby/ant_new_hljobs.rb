@@ -15,7 +15,7 @@
 # 
 
 def newHLJobs
-	return false
+	return true
 end
 
 # 
@@ -198,6 +198,7 @@ class AntNewHLFight<AntNewHLJob
 		@target=target
 		if defend
 			@state=:Fight
+			@workflow=[]
 			#trace
 		else
 			@state=:FormatWalk
@@ -213,6 +214,12 @@ class AntNewHLFight<AntNewHLJob
 
 	def image
 		"data/gui/sword.png"
+	end
+
+	def eventWon(opponent)
+	end
+	def eventLost(opponent)
+		hero.setOwner(opponent) #.getPlayer)
 	end
 
 
