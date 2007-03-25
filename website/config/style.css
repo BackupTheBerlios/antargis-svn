@@ -294,7 +294,9 @@ div.thumbs h2
 {
 	border-style:ridge;
 	border-width:2px;
-	border-color:#773300; /*bd6c04;*/
+	border-color:#773300;
+	width:20em;
+	background-color:#fad68e;
 }
 
 hr
