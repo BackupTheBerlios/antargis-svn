@@ -111,7 +111,7 @@ AGWidget::~AGWidget()
 	{
 	  if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
 	    {
-	      cdebug("WARNING:Error in ~AGWidget!!!");
+	      dbout(5000,"WARNING:Error in ~AGWidget!!!");
 	    }
 	  else
 	    getParent()->eventChildrenDeleted(this);
@@ -169,7 +169,7 @@ void AGWidget::delObjects()
 	{
 	  if(!(*i)->mRubyObject) // don't delete ruby-objects - they get deleted by garbage collection
 	    {
-	      cdebug("type:"<<typeid(**i).name());
+	      dbout(5000,"type:"<<typeid(**i).name());
 	      delete *i;
 	    }
 	}
@@ -309,7 +309,6 @@ bool AGWidget::eventMouseMotion(AGEvent *e)
 
       if(mButtonDown)
 	{
-	  //	  TRACE;
 	  AGVector2 v=e->getMousePosition()-mOldMousePos;
 	  e->setVector(v);
 	  eventDragBy(e,v) || sigDragBy(e);
@@ -522,7 +521,9 @@ void AGWidget::hide()
 void AGWidget::setVisible(bool v)
 {
   if(mVisible!=v)
-    queryRedraw();
+    {
+      queryRedraw();
+    }
   mVisible=v;
 }
 
@@ -611,14 +612,14 @@ void AGWidget::gainCompleteFocus(AGWidget *pWidget)
     mParent->gainCompleteFocus(this);
   if(pWidget)
     {
-      //      cdebug(mChildren.size());
+      //      dbout(5000,mChildren.size());
       std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
       if(i!=mChildren.end())
 	{
 	  mChildren.erase(i);
 	  mChildren.push_front(pWidget);
 	}
-      //      cdebug(mChildren.size());
+      //      dbout(5000,mChildren.size());
     }
 #endif
 }
@@ -628,7 +629,7 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 #ifdef FOCUS_BY_SORT
   if(pWidget)
     {
-      //      cdebug(mChildren.size());
+      //      dbout(5000,mChildren.size());
       std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
       if(i!=mChildren.end())
 	{
@@ -641,7 +642,7 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 	  pWidget->eventGotFocus();
 
 	}
-      //      cdebug(mChildren.size());
+      //      dbout(5000,mChildren.size());
     }
   else if(mParent)
     {
@@ -662,7 +663,6 @@ void AGWidget::gainFocus(AGWidget *pWidget)
 
 void AGWidget::gainFocusDown(AGWidget *pWidget)
 {
-  //  CTRACE;
   std::list<AGWidget*>::iterator i;
   i=std::find(mChildren.begin(),mChildren.end(),pWidget);
   if(i!=mChildren.end())
@@ -700,14 +700,13 @@ void AGWidget::checkFocus()
     {
       if(mFocus!=*mChildren.begin())
 	{
-	  //	  TRACE;
 	  std::list<AGWidget*>::iterator i;
 	  
 	  i=std::find(mChildren.begin(),mChildren.end(),mFocus);
 	  // delete children and set to front 
 	  mChildren.erase(i);
 	  mChildren.push_front(mFocus);
-	  //	  cdebug("mchildren #:"<<mChildren.size());
+	  //	  dbout(5000,"mchildren #:"<<mChildren.size());
 	}
     }
 }
@@ -828,12 +827,26 @@ bool AGWidget::redraw() const
 
 bool AGWidget::checkRedraw() const
 {
+  if(!mVisible)
+    return false;
   if(redraw())
     return true;
   for(std::list<AGWidget*>::const_iterator i=mChildren.begin();i!=mChildren.end();++i)
     if((*i)->checkRedraw())
       return true;
   return false;
+}
+
+void AGWidget::prepareDrawAll()
+{
+  if(!mVisible)
+    return;
+
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+    (*i)->prepareDrawAll();
+
+  prepareDraw();
+  
 }
 
 
@@ -846,8 +859,6 @@ void AGWidget::prepareDraw()
     {
       if(checkRedraw() || !mCache->hasTexture())
 	{
-	  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
-	    (*i)->prepareDraw();
 	  mCache->clearContent();
 
 	  AGPainter p(*mCache);
@@ -856,7 +867,7 @@ void AGWidget::prepareDraw()
 	    draw(p);
 	  
 	  std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
-	  
+
 	  for(;i!=mChildren.rend();i++)
 	    (*i)->drawAll(p);
 
@@ -864,17 +875,16 @@ void AGWidget::prepareDraw()
 	    draw(p);
 
 	  drawAfter(p);
-	  mCacheTouched=false;
+
 	  setDrawn();
 
 	  if(mParent)
-	    mParent->queryRedraw();
+	    {
+	      mParent->queryRedraw();
+	    }
+
+	  assert(checkRedraw()==false);
 	}
-    }
-  else
-    {
-      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
-	(*i)->prepareDraw();
     }
 }
 void AGWidget::setCaching(bool pEnable)
@@ -898,6 +908,9 @@ void AGWidget::setCaching(bool pEnable)
 
 void AGWidget::setDrawn()
 {
+  if(!mVisible)
+    return;
+
   mCacheTouched=false;
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
     (*i)->setDrawn();

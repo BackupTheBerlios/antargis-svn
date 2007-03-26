@@ -48,15 +48,15 @@ class AntInventory<AGWidget
 		getChild("InvBar").setHero(e)
 		updateInspection
 	end
-	def prepareDraw
-		#return
-		checkFriend
-		# FIXME
-		if false
-			updateInspection
-		end
-		super
-	end
+# 	def prepareDraw
+# 		#return
+# 		# FIXME
+# 		if false
+# 			checkFriend
+# 			updateInspection
+# 		end
+# 		super
+# 	end
 
 	def update(e)
 		trace
@@ -65,9 +65,14 @@ class AntInventory<AGWidget
 			updateInspection
 		end
 	end
+
+	def draw(p)
+		trace
+		super
+	end
 private
 	def checkFriend
-		trace
+		#trace
 		if @inspect.nil?
 			return
 		end

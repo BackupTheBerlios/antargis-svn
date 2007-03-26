@@ -305,11 +305,11 @@ void AGApplication::prepareDraw()
 
   if(mainWidget)
     {
-      mainWidget->prepareDraw();
+      mainWidget->prepareDrawAll();
       mainWidget->useTexturesRecursive();
     }
   if(mOverlay)
-    mOverlay->prepareDraw();
+    mOverlay->prepareDrawAll();
 }  
 
 

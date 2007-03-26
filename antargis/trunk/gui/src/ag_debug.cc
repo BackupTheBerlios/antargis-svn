@@ -91,14 +91,14 @@ D::D(std::string c):
   indent();
   gDebugIndex++;
 
-  dbout(2,"start of:"<<c<<"("<<gDebugIndex<<")"<<std::endl);
+  debugout_checked(2,"start of:"<<c<<"("<<gDebugIndex<<")"<<std::endl);
   d++;
 }
 AGEXPORT D::~D()
 {
   d--;
   indent();
-  dbout(2,"end   of:"<<m<<std::endl);
+  debugout_checked(2,"end   of:"<<m<<std::endl);
 }
 void D::indent()
 {

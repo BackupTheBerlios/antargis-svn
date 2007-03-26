@@ -219,6 +219,7 @@ class AntNewHLFight<AntNewHLJob
 	def eventWon(opponent)
 	end
 	def eventLost(opponent)
+		@finished=true
 		hero.setOwner(opponent) #.getPlayer)
 	end
 

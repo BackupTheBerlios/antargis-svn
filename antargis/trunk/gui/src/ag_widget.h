@@ -150,6 +150,9 @@ class AGWidget:public AGMessageObject
   // Functions for caching appearance
   virtual bool redraw() const;
   virtual void prepareDraw();
+
+  void prepareDrawAll();
+
   void setCaching(bool pEnable);
   bool checkRedraw() const;
   void setDrawn();
