@@ -1,0 +1,8 @@
+== Overview
+
+This part of the documentation deals with all the Ruby-parts, which contain:
+* user interfaces like menus and dialogs
+* basic game logic like maps, entities and jobs
+* level-scripting
+* AI-scripting
+* multi-player support

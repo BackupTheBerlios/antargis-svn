@@ -1,0 +1,16 @@
+[Meta]
+RootName: @libsdl.org/sge
+DisplayName: SGELibrary
+ShortName: sge
+Skeleton-Author: David Kamphausen <david.kamphausen@web.de>
+Skeleton-Version: 1
+#Repository: http://lincity-ng.berlios.de/autopackage/sdl_image.xml
+
+[Notes]
+The interface version follows the software version in this library.
+
+[Test]
+testForLib libSGE.so.0 && {
+    INTERFACE_VERSIONS="1.2"
+    SOFTWARE_VERSIONS="1.2"
+}

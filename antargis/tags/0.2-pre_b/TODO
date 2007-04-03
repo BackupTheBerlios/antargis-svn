@@ -1,0 +1,201 @@
+* check if reachable before fetching !!! (in house) - or even better use heuristic for estimating distance in getNear(...)
+* saving of new hljobs
+* Translation tut3
+* fix jobs some more
+* what's wrong with pathfinding-test ???
+
+
+
+
+
+
+==========
+
+
+
+Short Information:
+Problems are marked by priority. L is for low, M for medium and H high.
+In special cases it can be Very High (=VH).
+
+WEBSITE & PR
+==================================================
+
+ARTS
+==================================================
+
+[Arts - Graphics - 3D]
+------------------------------------------------------
+[H] modify bakery a little (http://antargis.berlios.de/phpBB2/viewtopic.php?p=359#359)
+[H] do bow animation
+
+[H] oil tower
+[M] team color
+[M] animate hero, druid and smith
+[M] some statue (monument) representing the whole village
+    it can be clicked to get information about a whole village or attacking it???
+[M] some more animals: cow, deer ??
+[L] Mesh for pigeon
+[L] improve meshes for trees, bushes, men
+[L] animate wolf
+[L] add meshes for fish
+[L] add female meshes
+[L] animated trees / falling trees
+
+[Arts - Graphics - 2D]
+------------------------------------------------------
+[VL] tools-images: pick,axe, hark
+[L] paint new portraits
+[L] paint campaign-images
+
+
+[Story]
+------------------------------------------------------
+[VL] Intro cutscene:
+	- flashback on some victory-scene:
+		- look own from some tower upon an army
+		- look back from behind some warriors holding up some weapons
+	- scene of betrayal - some dark person stands above some king (in a hall)
+	- game begins
+[L] druids:
+	- use woods and lakes as holy places
+	- druids must learn about 20 years
+	
+
+[Music]
+------------------------------------------------------
+[M] won and lost jingle
+
+
+[[Development]]
+==========================================================
+
+[Segfaults]
+------------------------------------------------------
+None known.
+
+[AI]
+------------------------------------------------------
+[H] heuristic compression for path-finding
+[H] map-weighting based on min/max of surrounding
+
+
+[Gui/View - GUI-library]
+------------------------------------------------------
+[H] fix texture-painting on GeForce - backgrounds are always black, but they should be transparent (like FPS-display)
+[M] add texture-space-saving
+[L] add Framebuffer objects for paint to texture. -- still buggy ????
+[L] fix AGMenu*. This is broken, but not used ATM.
+[L] rewrite AGEdit - without AGEditLines
+		In AGEdit2 is a beginning of a rewrite. But it's a kind of crappy approach. AGEdit2 should
+		be able to 
+		1) render quickly 
+		2) handle selections with mouse or SHIFT+CURSOR
+		3) copy/paste
+		4) insert images
+[L] add drawGradients-batcher to AGPainter
+
+
+[Graphics - 3d-engine]
+------------------------------------------------------
+[H] use AGGLWidget instead of GLApp - include generic AGApp
+
+
+[H] game crashes when toggling fullscreen (in game) -- FIXED ???? CHECK ON WINDOWS
+[H] try using GL_DYNAMIC_DRAW_ARB for dynamic vertexarrays and combine multiple meshes some how?
+[M] add support for non-3d-texture-graphic cards
+[M] increase picking speed => use kd-tree or bsp
+[M] FBO without color-attachment ????
+[M] make particle engine more generic and include shader-support
+[L] check depth of view old=(1,100) new(1,20) or so - maybe better for PSMs.
+		There is a problem, too when zoomed in, as it's the current default.
+[L] check if TSM (trapezoidal shadow maps) are any good
+[L] snow,rain which falls down. Maybe as a simple overlay?
+[L] bushes, plants, high grass, flowers. Thats means there should be possibility to include
+		several imposters into one mesh and render them effiently.
+[L] Fog of war - overlay darkness/fog
+[L] fix decals (use clamp-to-edge and original cells)
+[L] include 3d-texture-scaling into AGGLTexture-constr.
+[VL] seasons - snow,spring... Exchange or fade terrain textures.
+[VL] make shadows work on other platforms too?
+
+[Game - Game-engine and ruby-scripts]
+------------------------------------------------------
+[H] check translation scripts
+
+[H] wolves should attack people
+
+[H] continue buildingsite function => check if already claimed
+[H] fetching in house (testai) - tries to go through water - maybe move fetching code to some common module
+
+[H] fighting should proceed when already attacked while formating!
+[H] check saving/loading of ll-jobs
+[H] remove old texts from local_* files
+
+[M] helping in houses
+
+[M] solve translation problem with descriptions
+[M] troops can't cross too steep terrain
+[M] do building continuesly and not in steps (fetching, flattening and building)
+[M] add info-bar about troops to inventory or main-view, while fighting (?)
+[M] chase enemy when he's fleeing (a little and not too far)
+[M] make finite state machine approach in entities more visible (?)
+[M] move from AntHouse to AntBoss:describe men's health and morale when inspecting
+[M] add fighting on boat
+[M] save current job :-(  high-level and low-level
+		low-level saving should be finished, but high-level makes some problems
+[M] tough breath when hero suffers
+[M] fishing (fishes)
+[L] add all config-parameters to config-file when created - and comment them a little
+[L] Trees and scenery shouldn't be represented as ruby-objects, it takes too long to mark them all!
+[L] add formations
+[L] add campaign-loading functionality to load-dialog in-game  TRICKY
+		This is a real problem, because the current AGApplication is called by the campaign-code.
+		So the AntApp must be finished and the surrounding campaign-code, too. After this the
+		loaded campaign must be started.
+[L] add aggression-leveling of non-hero bosses
+[L] add wolf, fish, bird
+[L] single games - add village generator to map generator
+[L] single games - add some menu for options
+[L] decrease morale on men when inventing and not resting
+
+[VL] very bad situation => raise heroes with a new player (rebellion)
+[VL] add females
+[VL] story-telling:
+	- browsing facility (scene=>number(person)=>text)
+
+[Artificial Intelligence]
+------------------------------------------------------
+[L] computer-player only attacks when stock is used up
+
+[Multiplayer]
+------------------------------------------------------
+[M] choosing/making player for multiplayer
+
+[Scripting - Levels and campaigns]
+------------------------------------------------------
+[M] finish first level of birth-campaign
+[M] add some single maps
+
+[Editor]
+------------------------------------------------------
+[H] loading doesn't remove old entities
+[H] remove load script when in editor
+[H] add painting by dragging
+[H] plain other terrain type
+[M] add directory-selector to load- and save-dialog (only in editor)
+[M] add erosion to map-generator
+[L] Trigger definition
+[L] cleanup gui - remove unused elements
+[L] fix selecting group. When you switch the "tabs", the selected action should be changed, too
+
+[Packaging / Building]
+------------------------------------------------------
+[L] installer for linux. maybe some autopackage or .debs?
+
+
+DOCUMENTATION
+======================================================
+[H] Architecture
+[H] comments in ruby-scripts
+[H] comments in game-engine
+[H] comments in 3d-engine

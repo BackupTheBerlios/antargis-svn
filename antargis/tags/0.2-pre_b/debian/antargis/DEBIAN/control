@@ -1,0 +1,17 @@
+Package: antargis
+Version: 0.1.9-1
+Section: games
+Priority: extra
+Architecture: i386
+Depends: libc6 (>= 2.3.6-6), libgcc1 (>= 1:4.1.0), libgl1-mesa-glx | libgl1, libglu1-mesa | libglu1, libpng12-0 (>= 1.2.8rel), libsdl-image1.2 (>= 1.2.5), libsdl-mixer1.2 (>= 1.2.6), libsdl-ttf2.0-0, libsdl1.2debian (>= 1.2.10-1), libstdc++6 (>= 4.1.0), zlib1g (>= 1:1.2.1), ruby
+Installed-Size: 67324
+Maintainer: Andreas Bresser <bresser@informatik.uni-bremen.de>
+Description: Medieval realtime strategy game
+ Battles of Antargis is a medieval realtime strategy game. You are a hero who
+ was betrayed and you have to unify the kingdom and rebuild the old empire.
+ Old myths will pass your way.
+ .
+ This package contains a mapeditor for the game.
+ .
+ The 3D-Engine is written in c++ and the game logic and menus are written in
+ ruby.
