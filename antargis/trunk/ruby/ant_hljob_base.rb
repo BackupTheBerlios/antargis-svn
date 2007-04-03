@@ -1,5 +1,5 @@
 class AntNewHLJob
-	attr_reader :finished
+	attr_reader :finished, :stopped
 	# some magic here
 	def initialize(hero)
 		@hero=hero
@@ -20,6 +20,13 @@ class AntNewHLJob
 	end
 	def hero
 		@hero
+	end
+
+	def stopJob
+		@stopped=true
+		if @state
+			call(@state,"leave")
+		end
 	end
 
 	def check(man)
@@ -57,7 +64,7 @@ class AntNewHLJob
 
 	def call(state,event)
 		m=methodName(state,event)
-		print "CALL #{state} #{event} #{m}  #{getTime} -- "
+		print "CALL #{hero.getName} #{state} #{event} #{m}  #{getTime} -- "
 		if self.class.method_defined?(m)
 			v=send(m)
 			puts v
@@ -73,7 +80,7 @@ class AntNewHLJob
 
 	def call2(state,event,man)
 		m=methodName(state,event)
-		print "CALL2 #{state} #{event} #{m} #{man} #{getTime} -- "
+		print "CALL2 #{hero.getName} #{state} #{event} #{m} #{man} #{getTime} -- "
 		if self.class.method_defined?(m)
 			v=send(m,man)
 			puts v

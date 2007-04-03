@@ -41,6 +41,9 @@ class AntHLJob
 	def xmlName
 		self.class.to_s
 	end
+	def stopJob
+	end
+
 	def saveXML(n)
 		puts "SAVEXML"
 		puts self

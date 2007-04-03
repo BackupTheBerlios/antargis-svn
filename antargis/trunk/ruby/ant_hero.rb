@@ -101,6 +101,7 @@ class AntHero<AntBoss
 	end
 	
 	def newHLRestJob(time)
+		@job.stopJob if @job
 		@job=nil
 		setFire(true)
 		super(time)
@@ -125,40 +126,49 @@ class AntHero<AntBoss
 	
 	
 	def newHLMoveJob(prio,pos,dist)
+		@job.stopJob if @job
 		@job=AntHeroMoveJob.new(self,prio,pos,dist)
 		assignJob2All
 	end
 	def newHLRecruitJob(target)
+		@job.stopJob if @job
 		@job=AntHeroRecruitJob.new(self,target)
 		assignJob2All
 	end
 	def newHLConstructJob(target)
+		@job.stopJob if @job
 		@job=AntHeroConstructJob.new(self,target)
 		assignJob2All
 	end
 	def newHLTakeFoodJob(target)
+		@job.stopJob if @job
 		puts "take food job #{self} #{target}"
 		@job=AntHeroTakeJob.new(self,target,"food")
 		assignJob2All
 	end
 	def newHLTakeWeaponJob(target)
+		@job.stopJob if @job
 		@job=AntHeroTakeJob.new(self,target,"weapon")
 		assignJob2All
 	end
 	def newHLFightJob(target)
+		@job.stopJob if @job
 		@job=AntHeroFightJob.new(self,target)
 		assignJob2All
 	end
 	def newHLFightAnimalJob(target)
+		@job.stopJob if @job
 		@job=AntHeroFightAnimalJob.new(self,target)
 		assignJob2All
 	end
 	def newHLBuildJob(pos,type)
+		@job.stopJob if @job
 		@job=AntHeroBuildJob.new(self,pos,type)
 		assignJob2All
 	end
 	
 	def newHLDismissJob()
+		@job.stopJob if @job
 		@job=nil
 		agg=getAggression
 		men=@men.select{|m|not m.is_a?(AntHero)} # exclude hero

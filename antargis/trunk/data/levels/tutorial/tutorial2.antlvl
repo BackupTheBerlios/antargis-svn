@@ -3,7 +3,7 @@
     <position x="59.2397" y="71.2682" z="1.5455"/>
     <resource wood="100" stone="100" food="200"/>
   </antTower>
-  <antWorkshop aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" id="0" mode="" morale="1" name="0.737592943267599" onGround="true" men="1">
+  <antWorkshop aggression="1" birthday="0.0" energy="1" food="1" healSpeed="0.1" id="0" mode="" morale="1" name="0.737592943267599" onGround="true" men="1" village="small Village">
     <position x="42.8217" y="21.9856" z="1.96389"/>
     <resource/>
   </antWorkshop>

@@ -1,5 +1,6 @@
+* check if reachable before fetching !!! (in house) - or even better use heuristic for estimating distance in getNear(...)
+* saving of new hljobs
 * Translation tut3
-* Fighting tut2 - problems men belong to more than one buildign ???
 * fix jobs some more
 * what's wrong with pathfinding-test ???
 

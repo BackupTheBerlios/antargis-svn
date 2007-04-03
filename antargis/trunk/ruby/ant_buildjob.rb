@@ -1,4 +1,6 @@
 class AntHeroBuildJob<AntHeroMoveJob
+	FARTHEST_AWAY=40
+
 	attr_reader :finished
 	def initialize(hero,targetpos,building)
 
@@ -51,7 +53,7 @@ class AntHeroBuildJob<AntHeroMoveJob
 						puts "resource not found! #{res}"
 						man.newRestJob(5)
 					else
-						if (nearest.getPos2D-@target.getPos2D).length<20
+						if (nearest.getPos2D-@target.getPos2D).length<FARTHEST_AWAY
 							man.newMoveJob(0,nearest.getPos2D,0.5) # near but not actually there
 							man.setMode("harvest")
 						else

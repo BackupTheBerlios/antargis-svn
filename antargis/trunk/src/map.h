@@ -22,6 +22,7 @@
 #define __MAP_H__
 
 #include "height_map.h"
+#include "heuristic.h"
 
 /**
  * \defgroup GameEngine BoA Game-Engine
@@ -67,6 +68,8 @@ class AntMap:public HeightMap
   AntEntity *getNext(AntEntity *me,const AGString &pType,size_t atLeast=0);
   std::vector<AntEntityPtr> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
 
+  void setHeuristic(HeuristicFunction *pFunction);
+
   virtual void processXMLNode(const Node &node);
 
   void saveXML(Node &node) const;
@@ -100,6 +103,8 @@ class AntMap:public HeightMap
   //  EntityByType mByType;
 
   int maxID;
+
+  HeuristicFunction *mHeuristicFunction;
 
 
 };

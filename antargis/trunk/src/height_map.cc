@@ -458,14 +458,14 @@ AGVector3 HeightMap::getNormal(int x,int y) const
 
 AGVector2 HeightMap::truncPos(const AGVector2 &p) const
 {
-  AGVector2 maxPos(mW+1,mH+1);
+  AGVector2 maxPos(mW+0.5,mH+0.5);
   return AGVector2(std::max(0.0f,std::min(maxPos[0],p[0])),
 		   std::max(0.0f,std::min(maxPos[1],p[1])));
 }
 
 AGVector3 HeightMap::truncPos(const AGVector3 &p) const
 {
-  AGVector2 maxPos(mW+1,mH+1);
+  AGVector2 maxPos(mW+0.5,mH+0.5);
   return AGVector3(std::max(0.0f,std::min(maxPos[0],p[0])),
 		   std::max(0.0f,std::min(maxPos[1],p[1])),
 		   p[2]);

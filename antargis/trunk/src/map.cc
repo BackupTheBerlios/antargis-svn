@@ -46,7 +46,8 @@ AntMap *getMap()
 
 AntMap::AntMap(Scene *pScene,int w,int h):
   HeightMap(pScene,w,h),
-  mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h)))
+  mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h))),
+  mHeuristicFunction(0)
 {
   myAntargisMap=this;
   maxID=0;
@@ -233,6 +234,8 @@ std::vector<AntEntityPtr> AntMap::getEntities(const AGString &pName)
 
 std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const AGString &pType,size_t atLeast)
 {
+  //  assert(mHeuristicFunction);
+
   // FIXME: optimize this - use quadtree
 
   std::multimap<float,AntEntity*> ents;
@@ -247,8 +250,14 @@ std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const AGString &pTyp
         {
           if((*i)->provides(pType) && (*i)->resource.get(pType)>=atLeast)
             {
+	      /*
               AGVector2 p2=(*i)->getPos2D()-p;
-              float norm=p2.length2();
+              float norm=p2.length2();*/
+	      float norm;
+	      if(mHeuristicFunction)
+		norm=(*mHeuristicFunction)(std::make_pair((*i)->getPos2D(),p));
+	      else
+		norm=((*i)->getPos2D()-p).length2();
               ents.insert(std::make_pair(norm,*i));
             }
         }
@@ -275,6 +284,7 @@ std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const AGString &pTyp
 
 AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
 {
+  //  assert(mHeuristicFunction);
   // FIXME: optimize this - use quadtree
 
   std::multimap<float,AntEntity*> ents;
@@ -290,8 +300,15 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
         {
           if((*i)->provides(pType) && (*i)->resource.get(pType)>=atLeast)
             {
-              AGVector2 p2=(*i)->getPos2D()-p;
-              float norm=p2.length2();
+	      //              AGVector2 p2=(*i)->getPos2D()-p;
+	      float norm;
+
+	      if(mHeuristicFunction)
+	        norm=(*mHeuristicFunction)(std::make_pair((*i)->getPos2D(),p));
+	      else
+		norm=((*i)->getPos2D()-p).length2();
+	      cdebug("norm:"<<norm<<" i:"<<*i<<" name:"<<(*i)->getName());
+	      //              float norm=p2.length2();
               ents.insert(std::make_pair(norm,*i));
             }
         }
@@ -319,6 +336,13 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
 
   return e;
 }
+
+void AntMap::setHeuristic(HeuristicFunction *pFunction)
+{
+  mHeuristicFunction=pFunction;
+}
+
+
 AntEntity *AntMap::getByName(const AGString &pName)
 {
   EntityList::iterator i=mEntities.begin();

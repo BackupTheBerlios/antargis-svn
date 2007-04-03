@@ -215,15 +215,18 @@ end
 module HLJob_GetResource
 	# needed: resources return array of resource-strings
 	def getResource_enter
-		allMen.each{|man|
-			resources.each{|r|
-				a=target.resource.get(r)
-				if a>1
-					man.resource.add(r,1)
-					target.resource.sub(r,1)
-				end
+		for i in 1..hero.getAggression
+			allMen.each{|man|
+				resources.each{|r|
+					a=target.resource.get(r)
+					if a>1
+						man.resource.add(r,1)
+						target.resource.sub(r,1)
+					end
+				}
 			}
-		}
+		end
+		allMen.each{|m|m.resourceChanged}
 	end
 	def getResource_ready
 		return true
@@ -234,6 +237,7 @@ module HLJob_KillAnimal
 	def killAnimal_enter
 		target.eventDie
 		hero.resource.takeAll(target.resource)
+		allMen.each{|m|m.resourceChanged}
 	end
 end
 
@@ -311,6 +315,8 @@ module HLJob_SpreadThings
 		for i in 1..food
 			allMen[i-1].resource.add("food",1)
 		end
+
+		allMen.each{|m|m.resourceChanged}
 	end
 	
 end
@@ -329,12 +335,14 @@ class HLJob_FightData
 		reshuffle
 	end
 
+	# this called if (and only if) the hero has won or is fleeing (and thus aborting the fight)
 	def remove(fightJob)
 		@parties[fightJob.fightType].delete(fightJob)
 		@oldparties[fightJob.fightType].delete(fightJob)
 		reshuffle
 	end
 
+	# this called if (and only if) the hero has lost
 	def removeLost(fightJob)
 		@parties[fightJob.fightType].delete(fightJob)
 		reshuffle
@@ -369,25 +377,6 @@ class HLJob_FightData
 		end
 	end
 
-# 	def eventWon(whichType)
-# 		trace
-# 		
-# 
-# 		# FIXME: should be parted !!!
-# 		owners=@oldparties[whichType].collect{|j|j.hero}
-# 		i=0
-# 		puts "whichType:#{whichType}"
-# 		assert{owners.length>0}
-# 		@oldparties[otherType(whichType)].each{|p|
-# 			newOwner=owners[i]
-# 			p.hero.setOwner(newOwner)
-# 			i+=1
-# 			i%=owners.length
-# 		}
-# 	end
-# 	def eventLost(type)
-# 		eventWon(otherType(type))
-# 	end
 	private
 
 	def otherType(my)
@@ -398,11 +387,14 @@ class HLJob_FightData
 		# reinit and assign
 
 		menGroup={}
+		leave=false
 		@parties.each{|type,jobs|
 			puts "parties: #{type}:#{jobs}"
 			menGroup[type]=jobs.collect{|job|job.undefeatedMen}.flatten.uniq
-			return if @inited and menGroup[type].length==0 # a fightjob is leaving
+			menGroup[type].each{|man|man.delJob}
+			leave=true if @inited and menGroup[type].length==0 # a fightjob is leaving
 		}
+		return if leave
 	
 		# check that each group has more than 0 members
 		assert{menGroup.select{|k,v|v.length==0}.length==0}
@@ -456,7 +448,6 @@ module HLJob_Fight
 			puts "NOT YET INITED #{self} hero:#{hero} target:#{target}"
 			target.newHLDefendJob(hero)
 		end
-		#@fightData.init
 		assignAllJobs
 	end
 
@@ -556,7 +547,15 @@ module HLJob_Fight
 			man.hlJobMode[:fighting]=true
 		}
 	end
+end
 
-
+module HLJob_Recruit
+	def recruit_enter
+	end
+	
+	private
+	def recruitGetMen
+		
+	end
 end
 
