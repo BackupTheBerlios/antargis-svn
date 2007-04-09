@@ -77,7 +77,7 @@ class AGGLScreen:public AGScreen
 
   virtual void begin(); // call before start drawing
 
-  AGSurface screenshot();
+  AGSurface screenshot(bool frontBuffer=true);
 
   void flip();
   bool inScreen(const AGRect2 &r) const;

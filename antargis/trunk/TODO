@@ -1,12 +1,9 @@
+* List of project-parts and progress bar
+
 * check if reachable before fetching !!! (in house) - or even better use heuristic for estimating distance in getNear(...)
 * saving of new hljobs
-* Translation tut3
 * fix jobs some more
 * what's wrong with pathfinding-test ???
-
-
-
-
 
 
 ==========

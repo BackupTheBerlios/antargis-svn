@@ -23,7 +23,7 @@
    if you have to do special drawing like picking, use the corresp. functions (drawDepth,drawPick)
 */
 
-class VertexArray
+class VertexArray:public AGGLObject
 {
   std::vector<AGVector4> mVertices,mColors;
   std::vector<AGVector3> mNormals;
@@ -82,6 +82,9 @@ class VertexArray
 
   bool useVertexArrays() const;
   friend VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
+
+  void onScreenUp();
+  void onScreenDown();
 
 };
 

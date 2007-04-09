@@ -84,6 +84,7 @@
 #include "../src/vertex_array.h"
 #include "../src/water.h"
 #include "../src/path.h"
+#include "../src/impostor.h"
 #include <SDL_keysym.h>
 #ifdef SWIG
 %include "../gui/src/ag_rubyobj.h"
@@ -170,6 +171,7 @@
 %include "../src/vertex_array.h"
 %include "../src/water.h"
 %include "../src/path.h"
+%include "../src/impostor.h"
 %include "/usr/include/SDL/SDL_keysym.h"
 #endif
 #endif

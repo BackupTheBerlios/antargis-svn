@@ -191,13 +191,13 @@
 		</background>
 		<font name="font" file="FreeSans.ttf" size="14" color="#000000"/>
 	</edit>
-
+<!--
 	<screen>
 		<background>
 			<image name="image" file="data/gui/bigbg_tile.png"/>
 		</background>
 	</screen>
-	
+	-->
 	<window>
 		<border>
 			<image name="image" file="data/gui/buttontest3.png" file2="win_border.png"/>

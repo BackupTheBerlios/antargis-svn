@@ -37,7 +37,7 @@ class AGEXPORT AGScreen:public AGPaintTarget
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;
 
-  virtual AGSurface screenshot();
+  virtual AGSurface screenshot(bool frontBuffer=true);
 };
 
 AGScreen & AGEXPORT getScreen();

@@ -75,6 +75,8 @@ void AGApplication::setMainWidget(AGWidget *w)
 {
   mainWidget=w;
   setOverlay(0);
+  if(w)
+    w->redraw();
 }
 
 AGWidget *AGApplication::getMainWidget()
@@ -325,6 +327,9 @@ AGWidget *pLastDrawn=0;
 void AGApplication::redraw()
 {
   pLastDrawn=0;
+
+  if(mainWidget)
+    mainWidget->redraw();
 }
 
 /**

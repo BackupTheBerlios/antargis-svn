@@ -58,7 +58,7 @@ class AGSDLScreen:public AGScreen
   virtual void clip(const AGRect2 &r);
   virtual void unclip();
 
-  AGSurface screenshot();
+  AGSurface screenshot(bool frontBuffer=true);
 
  private:
   SDL_Surface *s;

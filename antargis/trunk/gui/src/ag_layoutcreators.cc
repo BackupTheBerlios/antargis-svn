@@ -12,6 +12,7 @@
 #include <ag_table.h>
 #include <ag_theme.h>
 #include <ag_window.h>
+#include <ag_screenwidget.h>
 
 #include <minimap.h>
 
@@ -494,6 +495,20 @@ public:
 IMPLEMENT_COMPONENT_FACTORY(MiniMap);
 
 
+class AGScreenWidgetLayoutCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(ScreenWidget,"screenWidget")
+
+  virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+  {
+    CTRACE;
+    setResult(new AGScreenWidget());
+  }
+};
+IMPLEMENT_COMPONENT_FACTORY(ScreenWidget);
+
+
 void AGLayout::registerLayouts()
 {
   getLayoutFactory()->addCreator("checkBox",new AGCheckBoxLayoutCreator);
@@ -512,5 +527,6 @@ void AGLayout::registerLayouts()
   getLayoutFactory()->addCreator("radioGroup",new AGRadioGroupLayoutCreator);
   getLayoutFactory()->addCreator("radio",new AGRadioLayoutCreator);
   getLayoutFactory()->addCreator("miniMap",new AGMiniMapLayoutCreator);
+  getLayoutFactory()->addCreator("screenWidget",new AGScreenWidgetLayoutCreator);
 
 }

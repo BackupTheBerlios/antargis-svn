@@ -162,14 +162,18 @@ AGGLScreen::~AGGLScreen()
 { 
 }
 
-AGSurface AGGLScreen::screenshot()
+AGSurface AGGLScreen::screenshot(bool frontBuffer)
 {
   AGSurface s(getWidth(),getHeight());
 
   //  SDL_Surface *surface=s.surface()->surface;
 
   unsigned char *buffer=new unsigned char[getWidth()*getHeight()*4];
-  glReadBuffer(GL_FRONT);
+
+  if(frontBuffer)
+    glReadBuffer(GL_FRONT);
+  else
+    glReadBuffer(GL_BACK);
 
   cdebug(s.surface());
   cdebug(s.surface()->surface);

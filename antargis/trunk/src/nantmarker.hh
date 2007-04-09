@@ -278,6 +278,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGCaption "general_markfunc"
+%exception AntImpostorData::AntImpostorData {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AntImpostorData "general_markfunc"
 %exception AGRadioGroup::AGRadioGroup {
 	$action
 	result->mRUBY=self;
@@ -408,6 +418,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGLayoutCreator "general_markfunc"
+%exception AntImpostor::AntImpostor {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc AntImpostor "general_markfunc"
 %exception AGRandomizer::AGRandomizer {
 	$action
 	result->mRUBY=self;
@@ -1578,6 +1598,34 @@ else if(dynamic_cast<AGWidget*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) AntImpostorData*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntImpostorData,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AntImpostorData*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostorData,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGRadioGroup*{
  if($1)
  {
@@ -1690,6 +1738,38 @@ else if(dynamic_cast<AGSubMenu*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) PathWeighter*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<MapPathWeighter*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MapPathWeighter,0);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_PathWeighter,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) PathWeighter*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<MapPathWeighter*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MapPathWeighter,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_PathWeighter,0);
    }
  }
  else $input=Qnil;
@@ -1834,38 +1914,6 @@ else if(dynamic_cast<AGSubMenu*>($1))
  }
  else $input=Qnil;
 }
-%typemap(out) PathWeighter*{
- if($1)
- {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<MapPathWeighter*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MapPathWeighter,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_PathWeighter,0);
-   }
- }
- else vresult=Qnil;
-}
-%typemap(directorin) PathWeighter*{
- if($1)
- {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<MapPathWeighter*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MapPathWeighter,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_PathWeighter,0);
-   }
- }
- else $input=Qnil;
-}
 %typemap(out) AGMain*{
  if($1)
  {
@@ -1906,6 +1954,8 @@ else if(dynamic_cast<AnimMesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
 else if(dynamic_cast<WaterPiece*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
+else if(dynamic_cast<AntImpostor*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntImpostor,0);
 else if(dynamic_cast<Smoke*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
 else if(dynamic_cast<Mesh*>(result))
@@ -1932,6 +1982,8 @@ else if(dynamic_cast<AnimMesh*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AnimMesh,0);
 else if(dynamic_cast<WaterPiece*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_WaterPiece,0);
+else if(dynamic_cast<AntImpostor*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostor,0);
 else if(dynamic_cast<Smoke*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Smoke,0);
 else if(dynamic_cast<Mesh*>($1))
@@ -1970,6 +2022,34 @@ else if(dynamic_cast<TerrainPiece*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayoutCreator,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) AntImpostor*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntImpostor,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) AntImpostor*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostor,0);
    }
  }
  else $input=Qnil;
@@ -3060,6 +3140,16 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) AntFrustum {
  AntFrustum *b;
  Data_Get_Struct($input,AntFrustum,b);
+ $result=*b;
+}
+%typemap(directorout) AntImpostor {
+ AntImpostor *b;
+ Data_Get_Struct($input,AntImpostor,b);
+ $result=*b;
+}
+%typemap(directorout) AntImpostorData {
+ AntImpostorData *b;
+ Data_Get_Struct($input,AntImpostorData,b);
  $result=*b;
 }
 %typemap(directorout) AntMap {

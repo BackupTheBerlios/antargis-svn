@@ -54,6 +54,16 @@ class AntMenuApp <AntApplication
 		# add handler for music finished, simply restart music
 		addHandler(getSoundManager,:sigMp3Finished,:eventMusicEnd)
 	end
+
+	def setMainWidget(w)
+		if @myScreen.nil?
+			@myScreen||=AGScreenWidget.new
+			super(@myScreen)
+		end
+		@myScreen.removeChild(@curMainWidget)
+		@myScreen.addChild(w)
+		@curMainWidget=w
+	end
 	
 	def eventMusicEnd
 		if @sound
@@ -145,7 +155,7 @@ class AntMenuApp <AntApplication
 
 	def eventLoadSelect(e)
 		if getMainWidget==@singleMenu
-			@singleMenu.getChild("desc").setText("")
+			@singleMenu.getChild("desc").setText(AGStringUtf8.new(""))
 			filename=id=@singleMenu.getChild("list").getSelectedID
 			fn="data/levels/"+id.gsub(".antlvl",".png")
 			if findFile(fn)!=""
@@ -156,12 +166,12 @@ class AntMenuApp <AntApplication
 			end
 			doc=Document.new("data/levels/"+filename)
 			d=doc.root.get("desc")
-			@singleMenu.getChild("desc").setText(d)
+			@singleMenu.getChild("desc").setText(AGStringUtf8.new(d))
 			return true
 		end
 		puts "MUH"
 		#raise 1
-		@loadMenu.getChild("desc").setText("")
+		@loadMenu.getChild("desc").setText(AGStringUtf8.new(""))
 		filename=id=@loadMenu.getChild("list").getSelectedID
 		fn="savegames/"+id.gsub(".antcmp",".png")
 		if findFile(fn)!=""

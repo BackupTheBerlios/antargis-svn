@@ -158,6 +158,8 @@ class Scene:public AGRubyObject
   std::map<GLuint,SceneNode*> pickNames;
 
   bool mEnabled;
+
+  friend class AntImpostorData;
 };
 
 

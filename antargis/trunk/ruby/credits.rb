@@ -23,6 +23,9 @@ class AntTicker<AGWidget
 	def setCFont(f)
 		@cfont=f
 	end
+	def prepareDraw
+		queryRedraw
+	end
 	def draw(p)
 		now=@menuapp.getTicks
 		if @starttime>0

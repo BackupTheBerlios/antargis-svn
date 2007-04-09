@@ -48,9 +48,20 @@ AGRect2 AGSDLScreen::getRect() const
 
 void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
-  for(int x=(int)pRect.x0();x<(int)pRect.x1();x++)
-    for(int y=(int)pRect.y0();y<(int)pRect.y1();y++)
-      putPixel(x,y,c);
+  if(c.a<0xFF)
+    {
+      for(int x=(int)pRect.x0();x<(int)pRect.x1();x++)
+	for(int y=(int)pRect.y0();y<(int)pRect.y1();y++)
+	  {
+	    putPixel(x,y,c);
+	  }
+    }
+  else
+    {
+      for(int x=(int)pRect.x0();x<(int)pRect.x1();x++)
+	for(int y=(int)pRect.y0();y<(int)pRect.y1();y++)
+	  putPixel(x,y,c);
+    }
   return;
   sge_FilledRectAlpha(s,
 		      (int)pRect.x(),
@@ -212,7 +223,7 @@ void AGSDLScreen::unclip()
   SDL_SetClipRect(s,&sr);
 }
 
-AGSurface AGSDLScreen::screenshot()
+AGSurface AGSDLScreen::screenshot(bool frontBuffer)
 {
   AGInternalSurface *surface=new AGInternalSurface;
   surface->surface=s;

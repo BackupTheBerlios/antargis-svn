@@ -11,8 +11,10 @@ class Black<AGWidget
 	end
 	def setAlpha(a)
 		@alpha=a
+		queryRedraw
 	end
 	def draw(painter)
+		#painter.fillRect(@r,AGColor.new(0,0,0,0x1F))
 		painter.fillRect(@r,AGColor.new(0,0,0,(0xFF*@alpha).to_i))
 	end
 end
@@ -107,6 +109,7 @@ class IntroApp<AntApplication
 					tryQuit
 				end
 		end
+		@img.redraw
 	end
 	
 	def eventFrame(t)

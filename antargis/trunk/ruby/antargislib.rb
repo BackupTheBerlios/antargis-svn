@@ -100,6 +100,7 @@ module MyAntargislib
 		@@antargislibinited=true
 		@@fullscreen=false
 		@@antProfiling=false
+		@@opengl=true
 
 		setDebugLevel(1000)
 	
@@ -131,6 +132,8 @@ module MyAntargislib
 					when /debug-level/
 						level=a.split("=")[1].to_i
 						setDebugLevel(level)
+					when "nogl"
+						@@opengl=false
 					when "demo"
 						$demoMode=true
 					when "gui-test"
@@ -157,6 +160,8 @@ module MyAntargislib
 	--demo         enable demo mode - reading events from events.txt
 
 	--debug-level=x
+
+	--nogl         disable GL-mode (3d-acceleration) - THIS IS NOT YET FULLY SUPPORTED!!
 	"
 	
 						exit
@@ -190,7 +195,7 @@ module MyAntargislib
 		if @@noVideo.nil?
 			#if xres!=1024 || yres!=768 || $fullscreen
 			dputs @@fullscreen
-			@@main.initVideo(xres,yres,32,@@fullscreen,true,1024,768)
+			@@main.initVideo(xres,yres,32,@@fullscreen,@@opengl,1024,768)
 			#end
 		
 			getConfig.set("xRes",xres.to_s)

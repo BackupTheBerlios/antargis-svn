@@ -43,7 +43,7 @@ size_t AGScreen::getHeight() const
 }
 
 
-AGSurface AGScreen::screenshot()
+AGSurface AGScreen::screenshot(bool frontBuffer)
 {
   cdebug("NOT YET IMPLEMENTED");
   return AGSurface(0,0);

@@ -176,6 +176,12 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   if(mScreen)
     {
       getSurfaceManager()->clear();
+      getSurfaceManager()->clear();
+
+      AGGLScreen *ms=dynamic_cast<AGGLScreen*>(mScreen);
+      if(ms)
+	ms->screenDown();
+
     }
 
   lastGL=gl;
@@ -206,6 +212,8 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   if(fs)
     videoFlags|=SDL_FULLSCREEN;
 
+
+
   // set video mode
   SDL_Init(SDL_INIT_VIDEO);
   SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
@@ -219,9 +227,6 @@ void AGMain::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
   if(mScreen)
     {
-      AGGLScreen *ms=dynamic_cast<AGGLScreen*>(mScreen);
-      if(ms)
-	ms->screenDown();
       delete mScreen;
     }
 

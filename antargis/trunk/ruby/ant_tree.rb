@@ -108,7 +108,12 @@ class AntTree<AntRubyEntity
 	
 	private
 	def setupMesh
-		setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),@angle))
+		#setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),@angle))
+		typeId="stub"
+		if @typeID>=0
+			typeId=@typeID%10
+		end
+		setMesh(createModel(:tree,typeId,@angle))
 	end
 
 	# an old function for display apples - this is too costly

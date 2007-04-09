@@ -518,6 +518,32 @@ bool VertexArray::useVertexArrays() const
 }
 
 
+void VertexArray::onScreenUp()
+{
+    init();
+}
+
+void VertexArray::onScreenDown()
+{
+  if(mBuffers && mVertexBuffer!=0) //mChanged==false)
+    {
+      glDeleteBuffersARB( 1, &mVertexBuffer );
+      glDeleteBuffersARB( 1, &mColorBuffer );
+      glDeleteBuffersARB( 1, &mNormalBuffer );
+      glDeleteBuffersARB( 1, &mTexBuffer );
+      if(!mDynamic)
+	glDeleteBuffersARB( 1, &mIndexBuffer );
+    }
+  mVertexBuffer=mColorBuffer=mNormalBuffer=mTexBuffer=mIndexBuffer=0;
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////
+// VertexArrayShader
+////////////////////////////////////////////////////////////////////
+
 
 
 VertexArrayShader::VertexArrayShader(AntShaderProgram *_p):p(_p)
