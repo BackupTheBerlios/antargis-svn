@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<layout geometry="(0,0,1024,768)" name="MainMenu">
+	<table cols="1" rows="4">
+		<colsize col="0" relative="1"/>
+		<rowsize row="0" fixed="200"/>
+		<rowsize row="1" fixed="30"/>
+		<rowsize row="2" relative="1"/>
+		<rowsize row="3" fixed="34"/>
+		<button col="0" row="0" caption-image="antargisLogo.png" enabled="false"/>
+		<button col="0" row="1" theme="yellowButton" enabled="false" caption="Select a campaign"/>
+		<table col="0" row="2" cols="2" rows="1">
+			<colsize col="0" relative="1"/>
+			<colsize col="1" relative="2"/>
+			<rowsize row="0" relative="1"/>
+			
+			<table col="0" row="0" cols="1" rows="6">
+				<rowsize row="0" relative="1"/>
+				<rowsize row="1" relative="1"/>
+				<rowsize row="2" relative="1"/>
+				<rowsize row="3" relative="1"/>
+				<rowsize row="4" relative="1"/>
+				<rowsize row="5" relative="1"/>
+				<colsize col="0" relative="1"/>
+	
+				<button row="0" col="0" caption="The wolfs lair"/>
+				<button row="1" col="0" caption="Dark mountains"/>
+				<button row="2" col="0" caption="Fight for the throne"/>
+				<button row="3" col="0" caption=""/>
+				<button row="4" col="0" caption=""/>
+				<button row="5" col="0" name="exit" caption="Exit"/>
+			
+			</table>
+			<button col="1" row="0"  enabled="false" caption-image="MainMenuBg3.png"/>
+		</table>
+		<!-- <button col="0" row="2" caption-image="MainMenuBg3.png"/>-->
+		<button col="0" row="3" theme="yellowButton" enabled="false" caption="(C) 2005 by David Kamphausen"/>
+	</table>
+</layout>

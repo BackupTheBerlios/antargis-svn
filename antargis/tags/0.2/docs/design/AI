@@ -1,0 +1,18 @@
+Battles of Antargis - Artificial intelligence
+==========================================
+AI is needed for the enemy heroes (players).
+There are one or more enemy players, which themselves have one or more heroes.
+
+In ruby/ant_player.rb there is a foundation for these. There are/will be several different
+types of player-classes.
+A player responds to given events.
+
+Current ideas for player-types are:
+* lazy player
+	- does nothing special, but responding to attacks (which is automatically done by AntBoss)
+* conquering player
+	- waits until an enemy is weak enough to attack him
+* smart player
+	- builds weapons, boats
+	- then attacks player
+
