@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<theme>
+	<button>
+		<background>
+			<normal>
+				<color name='gradientColor1' color='#E7E7E7'/>
+				<color name='gradientColor2' color='#C9C9C9'/>
+				<color name='gradientColor3' color='#CCCCCC'/>
+				<color name='gradientColor4' color='#AEAEAE'/>
+			</normal>
+			<lighted>
+				<color name='gradientColor1' color='#F5E1FF'/>
+				<color name='gradientColor2' color='#DCC8FF'/>
+				<color name='gradientColor3' color='#DCC8FF'/>
+				<color name='gradientColor4' color='#C3AFFF'/>
+			</lighted>
+			<pressed>
+				<color name='gradientColor1' color='#CFAFFF'/>
+				<color name='gradientColor2' color='#DCC8FF'/>
+				<color name='gradientColor3' color='#DCC8FF'/>
+				<color name='gradientColor4' color='#F5E1FF'/>
+			</pressed>
+		</background>
+		<border>
+			<color name="color1" color='#E0E0E0'/>
+			<color name="color2" color="#404040"/>
+			<value name="width" value="1"/>
+		</border>
+		<text>
+			<font name="font" file="Arial.ttf" size="26" color="#000000" embossed="true"/>
+		</text>
+	</button>
+	
+	<menu>
+		<background>
+			<normal>
+				<color name='gradientColor1' color='#E7E7E7FF'/>
+				<color name='gradientColor2' color='#E7E7E7FF'/>
+				<color name='gradientColor3' color='#E7E7E77F'/>
+				<color name='gradientColor4' color='#E7E7E77F'/>
+			</normal>
+			<image name="image" file="bg_tile2.png"/>
+		</background>
+		<item>
+			<image name="image" file="menu_house_small.png"/>
+		</item>
+	</menu>
+	
+	<edit>
+		<background>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+<!--			<image name="image" file="bg_tile2.png"/>-->
+		</background>
+		<font name="font" file="Arial.ttf" size="14" color="#000000"/>
+	</edit>
+
+	<screen>
+		<background>
+			<image name="image" file="bigbg_tile.png"/>
+		</background>
+	</screen>
+	
+	<window>
+		<border>
+			<image name="image" file="buttontest3.png" file2="win_border.png"/>
+		</border>
+		<title>
+			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
+			<background>
+				<value name="border" value="0"/>
+				<color name='gradientColor1' color='#54555b'/>
+				<color name='gradientColor2' color='#3c3d41'/>
+				<color name='gradientColor3' color='#3c3d41'/>
+				<color name='gradientColor4' color='#12141c'/>
+			</background>
+		</title>
+		<buttons>
+			<image name="close" file="close_button.png"/>
+		</buttons>
+		<background>
+			<value name="border" value="0"/>
+			<image name="image" file="oldpaper.png"/>
+			<!--
+			<color name='gradientColor1' color='#54555b'/>
+			<color name='gradientColor2' color='#3c3d41'/>
+			<color name='gradientColor3' color='#3c3d41'/>
+			<color name='gradientColor4' color='#12141c'/>-->
+		</background>
+	</window>
+	
+	
+	<yellowButton>
+		<button>
+			<background>
+				<normal>
+					<color name='gradientColor1' color='#f6c108'/>
+					<color name='gradientColor2' color='#bc9716'/>
+					<color name='gradientColor3' color='#bc9716'/>
+					<color name='gradientColor4' color='#a08320'/>
+				</normal>
+			</background>
+			<border>
+				<color name="color1" color='#f6c108'/>
+				<color name="color2" color="#a08320"/>
+				<value name="width" value="1"/>
+			</border>
+			<text>
+				<font name='font' file="Arial.ttf" size="24" color='#f6c108' embossed="true" borderWidth="1" borderColor="#770000"/>
+			</text>
+		</button>
+	</yellowButton>
+	<antButton>
+		<button>
+			<border>
+				<normal>
+					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+				</normal>
+				<lighted>
+					<image name="image" file2="win_border.png" file="buttontest3.png"/>
+				</lighted>
+				<pressed>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</pressed>
+				<checked>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</checked>
+				<checkedlighted>
+					<image name="image" file2="win_border.png" file="buttontest3b.png"/>
+				</checkedlighted>
+			</border>
+			<background>
+				<normal>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#54555b'/>
+					<color name='gradientColor2' color='#3c3d41'/>
+					<color name='gradientColor3' color='#3c3d41'/>
+					<color name='gradientColor4' color='#12141c'/>
+				</normal>
+				<lighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#515488'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#262849'/>
+				</lighted>
+				<pressed>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#262849'/>
+					<color name='gradientColor2' color='#434674'/>
+					<color name='gradientColor3' color='#434674'/>
+					<color name='gradientColor4' color='#515488'/>
+				</pressed>
+				<checkedlighted>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#856c30'/>
+					<color name='gradientColor2' color='#6f5926'/>
+					<color name='gradientColor3' color='#6f5926'/>
+					<color name='gradientColor4' color='#645021'/>
+				</checkedlighted>
+				<checked>
+					<value name="border" value="4"/>
+					<color name='gradientColor1' color='#765f27'/>
+					<color name='gradientColor2' color='#614e20'/>
+					<color name='gradientColor3' color='#53431b'/>
+					<color name='gradientColor4' color='#443616'/>
+				</checked>
+			</background>
+			<text>
+				<font name='font' file="Arial.ttf" size="16" color='#f6c108' embossed="true"/>
+			</text>
+		</button>
+	</antButton>
+	<listbox>
+		<background>
+			<color name='gradientColor1' color='#54555b'/>
+			<color name='gradientColor2' color='#3c3d41'/>
+			<color name='gradientColor3' color='#3c3d41'/>
+			<color name='gradientColor4' color='#12141c'/>
+		</background>
+		<selected>
+			<color name='gradientColor1' color='#54555b'/>
+			<color name='gradientColor2' color='#3c3d41'/>
+			<color name='gradientColor3' color='#3c3d41'/>
+			<color name='gradientColor4' color='#12141c'/>
+		</selected>
+		<font name="font" file="Arial.ttf" size="22" color="#000000"/>
+	</listbox>
+	<button>
+		<text>
+			<font name="font" file="Arial.ttf" size="16" color='#FFFFFF'/>
+		</text>
+	</button>
+</theme>
