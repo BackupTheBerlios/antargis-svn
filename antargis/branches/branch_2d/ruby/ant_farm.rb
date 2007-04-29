@@ -35,9 +35,7 @@ class AntFarm<AntHouse
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/farm.ant2",0.2,"data/textures/models/farm.png"),AGVector4.new(0,0,0),-30)
-		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
+		setMesh(createModel(:farm))
 	end
 
 	def neededStock

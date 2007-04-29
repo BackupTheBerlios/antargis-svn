@@ -5,8 +5,7 @@ class AntField<AntRubyEntity
 		setProvide("field",true)
 		@size=0
 		#init fieldMeshes-var
-		AntField.getFieldMeshData(0)
-		@max=@@fieldMeshes.length-1
+		@max=getMeshCount(:field)-1
 		setupMesh
 		@growTime=20
 		@begin=true
@@ -38,22 +37,6 @@ class AntField<AntRubyEntity
 	
 	private
 	def setupMesh
-		
-		mesh=Mesh.new(getMap.getScene,AntField.getFieldMeshData(@size),AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
+		setMesh(createModel(:field,@size))		
 	end
-
-	@@fieldMeshes=nil
-
-	def AntField.getFieldMeshData(size)
-		if @@fieldMeshes.nil?
-			@@fieldMeshes=[
-				getMeshData("data/models/crop_tiny.ant2",2.2,"data/textures/models/crop_tiny.png"),
-				getMeshData("data/models/crop_small.ant2",2.2,"data/textures/models/crop_green.png"),
-				getMeshData("data/models/crop_med.ant2",2.2,"data/textures/models/crop_yellow.png"),
-				getMeshData("data/models/crop_high.ant2",2.2,"data/textures/models/crop_gold.png")]
-		end
-		@@fieldMeshes[size]
-	end
-
 end

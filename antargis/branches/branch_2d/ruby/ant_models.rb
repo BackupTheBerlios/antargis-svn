@@ -11,7 +11,8 @@ def getStaticModelRotation(name)
 		"well"=>-30,
 		"ant_bakery"=>-30,
 		"ant_coach"=>-50,
-		"livinghouse"=>-20
+		"livinghouse"=>-20,
+		"farm"=>-30,
 	}
 
 	if rot.member?(name)
@@ -40,6 +41,9 @@ def getStaticModelScaling(name)
 		"druid_lp"=>0.08,
 		"smith_lp"=>0.08,
 		"livinghouse"=>0.16,
+		"farm"=>0.2,
+		"fire"=>0.3,
+		"big_stone"=>0.7,
 	}
 
 	if scales.member?(name)
@@ -79,6 +83,12 @@ def getMeshMap
 			[0]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site0.png"],
 			[1]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site1.png"],
 			[2]=>["data/models/building_site2.ant2",1.7,"data/textures/models/building_site1.png"],
+		},
+		:field=>{
+			[0]=>["data/models/crop_tiny.ant2",2.2,"data/textures/models/crop_tiny.png"],
+			[1]=>["data/models/crop_small.ant2",2.2,"data/textures/models/crop_green.png"],
+			[2]=>["data/models/crop_med.ant2",2.2,"data/textures/models/crop_yellow.png"],
+			[3]=>["data/models/crop_high.ant2",2.2,"data/textures/models/crop_gold.png"]
 		},
 		:tower=>{
 			[]=>"tower"
@@ -144,7 +154,23 @@ def getMeshMap
 		{
 			[]=>"livinghouse"
 		},
-	
+		:farm=>
+		{
+			[]=>"farm"
+		},	
+		:fire=>
+		{
+			[:on]=>["data/models/fire.ant2",0.3,"data/textures/models/fire.png"],
+			[:off]=>["data/models/fire.ant2",0.3,"data/textures/models/fire2.png"]
+		},
+		:fishing_hut=>
+		{
+			[]=>["data/models/fishing_hut.ant2",3.2,"data/textures/models/fishing_hut.png",false]
+		},
+		:stone=>
+		{
+			[]=>"big_stone"
+		},
 	}
 end
 

@@ -11,10 +11,13 @@ class AntFishingHut<AntHouse
 	end
 	
 	def setupMesh
-		data=getMeshData("data/models/fishing_hut.ant2",3.2,"data/textures/models/fishing_hut.png")
-		data.setTransparent(true)
-		mesh=Mesh.new(getMap.getScene,data,AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
+		setMesh(createModel(:fishing_hut))
+# 
+# 
+# 		data=getMeshData("data/models/fishing_hut.ant2",3.2,"data/textures/models/fishing_hut.png")
+# 		data.setTransparent(true)
+# 		mesh=Mesh.new(getMap.getScene,data,AGVector4.new(0,0,0),-30)
+# 		setMesh(mesh)
 	end
 
 	def neededStock
