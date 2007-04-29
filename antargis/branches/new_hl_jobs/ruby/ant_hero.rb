@@ -64,6 +64,7 @@ class AntHero<AntBoss
 	
 	def noHLJob
 		puts "noHLJob #{self}"
+		assert{getEnergy>0}
 		if @player
 			@player.assignJob(self)
 			#stopFireSound
@@ -74,6 +75,7 @@ class AntHero<AntBoss
 	end
 	
 	def startFireSound
+		assert{getEnergy>0}
 		if not @fireSound
 			dputs "STARTING FIRE"
 			@fireSound=AntSound.playLoopSoundGlobal(self,"fire",getPos2D,0.4)
@@ -94,6 +96,7 @@ class AntHero<AntBoss
 	end
 
 	def newFightJob(d,ptarget)
+		assert{ptarget.canFight}
 		checkResources
 		super
 		@moving=true
@@ -109,6 +112,7 @@ class AntHero<AntBoss
 	end
 	
 	def assignJob(man)
+		puts "#{self}:#{getName}:assignJob(#{man}:#{man.getName}"
 		checkHLJobEnd(man)
 	end	
 	def moveHome(man)
@@ -131,32 +135,38 @@ class AntHero<AntBoss
 		assignJob2All
 	end
 	def newHLRecruitJob(target)
+		assert{target.is_a?(AntBoss)}
 		@job.stopJob if @job
 		@job=AntHeroRecruitJob.new(self,target)
 		assignJob2All
 	end
 	def newHLConstructJob(target)
+		assert{target.is_a?(AntWorkshop)}
 		@job.stopJob if @job
 		@job=AntHeroConstructJob.new(self,target)
 		assignJob2All
 	end
 	def newHLTakeFoodJob(target)
+		assert{target.is_a?(AntHouse)}
 		@job.stopJob if @job
 		puts "take food job #{self} #{target}"
 		@job=AntHeroTakeJob.new(self,target,"food")
 		assignJob2All
 	end
 	def newHLTakeWeaponJob(target)
+		assert{target.is_a?(AntBoss)}
 		@job.stopJob if @job
 		@job=AntHeroTakeJob.new(self,target,"weapon")
 		assignJob2All
 	end
 	def newHLFightJob(target)
+		assert{target.is_a?(AntBoss) and target.canFight}
 		@job.stopJob if @job
 		@job=AntHeroFightJob.new(self,target)
 		assignJob2All
 	end
 	def newHLFightAnimalJob(target)
+		assert{target.is_a?(AntAnimal)}
 		@job.stopJob if @job
 		@job=AntHeroFightAnimalJob.new(self,target)
 		assignJob2All
@@ -234,20 +244,20 @@ class AntHero<AntBoss
 		end
 	end
 
-	def eventAttacked(by)
-		puts "eventAttacked #{by}"
-		super
-	end
+# 	def eventAttacked(by)
+# 		puts "eventAttacked #{by}"
+# 		super
+# 	end
 	
 	def assignJob2All
 		super
-		puts "ASSIGN JOB 2 All #{self}"
-		puts "---"
+# 		puts "ASSIGN JOB 2 All #{self}"
+# 		puts "---"
 		if @job.class!=AntHeroRestJob
 			setFire(false)
 		end
-		doEvent(:newJobAssigned)
-		puts "ASSIGN JOB ready."
+ 		doEvent(:newJobAssigned)
+# 		puts "ASSIGN JOB ready."
 	end
 
 	def setMeshState(name)
@@ -331,13 +341,33 @@ class AntHero<AntBoss
 	end
 
 	def eventDie
+		puts "ENERGY:#{self} #{self.getEnergy}"
 		super
-		@job=nil
+		puts "ENERGY:#{self} #{self.getEnergy}"
+		puts "hero #{self} died.(#{getName})"
+		# release all men
+		puts "# men:#{@men.length}"
+		@men.each{|man|
+			puts "myMen:#{man}:#{man.getName}"
+			if man.is_a?(AntMan)
+				puts "#{man} #{man.getName}:setBoss(nil)"
+				man.setBoss(nil)
+				@men.delete(man)
+			end
+		}
+
+		killJob
 		if @player
 			@player.remove(self)
 		end
 		getMap.eventHeroDied(self)
 	end
 
+
+	def killJob
+		@job.kill if @job
+		@job=nil
+	
+	end
 end
 

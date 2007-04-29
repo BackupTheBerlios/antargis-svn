@@ -4,6 +4,12 @@
 #include <ag_profiler.h>
 #include <ag_config.h>
 
+bool use3dTextures()
+{
+  return false;
+}
+
+
 //////////////////////////////////////////////////////////////////////////
 // TerrainPiece
 //////////////////////////////////////////////////////////////////////////
@@ -70,10 +76,19 @@ void TerrainPiece::mapChanged()
 
 	n=mMap->getNormal(sx,sy);
 
-	float texHeight=mMap->getTerrainScale(sx,sy);
+	if(use3dTextures())
+	  {
+	    float texHeight=mMap->getTerrainScale(sx,sy);
+	    
+	    tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
+	    m3dArray.addVertex(v,white,n,tp3);
+	  }
+	else
+	  {
+	    tp=AGVector2(-v[0]*texFactor3w,-v[1]*texFactor3w);
+	    m3dArray.addVertex(v,white,n,tp);
+	  }
 
-        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
-        m3dArray.addVertex(v,white,n,tp3);
 
 	bb.include(v.dim3());
       }
@@ -133,8 +148,13 @@ void TerrainPiece::draw()
   STACKTRACE;
   AGRenderContext c;
   c.setLighting(true);
-  c.setTexture(mTerrain->get3dTexture()->glTexture());
-  mTerrain->get3dTexture()->setFilter(GL_LINEAR,GL_LINEAR);
+  if(use3dTextures())
+    {
+      c.setTexture(mTerrain->get3dTexture()->glTexture());
+      mTerrain->get3dTexture()->setFilter(GL_LINEAR,GL_LINEAR);
+    }
+  else
+    c.setTexture(mTerrain->getGrassTexture()->glTexture());
 
   c.begin();
 

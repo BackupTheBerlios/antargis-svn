@@ -44,6 +44,7 @@ class Level1<AntLevelScript
 		return false #ignore
 	end
 	def eventHeroDied(ent)
+		puts "eventHeroDied(#{ent}) - #{ent.getName}"
 		case ent.getName	
 			when "Rowen"
 				lostLevel
@@ -72,6 +73,7 @@ class Level1<AntLevelScript
 	end
 	def wonLevel
 		puts "INTERFACE:",@interface,self
+		#raise 1
 		@interface.wonLevel
 		@won=true
 		start=StoryFlow.new("recruit")

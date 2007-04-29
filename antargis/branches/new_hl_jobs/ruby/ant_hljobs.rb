@@ -825,6 +825,7 @@ class AntHeroConstructJob<AntHeroMoveJob
 	attr_reader :finished
 	def initialize(hero,target)
 		super(hero,0,target.getPos2D,4)
+		assert{target.is_a?(AntWorkshop)}
 		@target=target
 		@usedmen=0
 		@restype={}
@@ -1120,5 +1121,5 @@ def newHLJobs
 	return false
 end
 
-#require 'ant_new_hljobs.rb'
+require 'ant_new_hljobs.rb'
 

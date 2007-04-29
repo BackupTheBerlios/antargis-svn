@@ -339,6 +339,7 @@ void AntEntity::heal(float pTime)
 {
   if(!isStarving())
     {
+      assert(mEnergy>0);
       mEnergy+=pTime*getHealSpeed()*0.8; // only rest til 1.0
       if(mEnergy>1.0)
 	mEnergy=1.0;
@@ -469,31 +470,40 @@ void AntEntity::newRestJob(float pTime)
 }
 void AntEntity::newFetchJob(int p,AGVector2 &pTarget,const AGString &what)
 {
+  assert(getEnergy()>0);
   setJob(new FetchJob(p,pTarget,what));
 }
 void AntEntity::newFetchJob(int p,AntEntity *pTarget,const AGString &what)
 {
+  assert(getEnergy()>0);
   setJob(new FetchJob(p,pTarget,what));
 }
 void AntEntity::newMoveJob(int p,const AGVector2 &pTarget,float pnear)
 {
+  assert(getEnergy()>0);
   setJob(new MoveJob(p,pTarget,pnear));
 }
 void AntEntity::newMoveJob(int p,const AGVector3 &pTarget,float pnear)
 {
+  assert(getEnergy()>0);
   setJob(new MoveJob(p,pTarget,pnear));
 }
 
 void AntEntity::newMoveJob(int p,AntEntity *pTarget,float pnear)
 {
+  assert(getEnergy()>0);
   setJob(new MoveJob(p,pTarget,pnear));
 }
 
 
 void AntEntity::newFightJob(int p,AntEntity *target,float distance)
 {
+  assert(target);
+  assert(target->canFight());
+  assert(canFight());
   if(!canFight())
     return;
+
   if(mJob)
     {
       FightJob *f=dynamic_cast<FightJob*>(mJob);
@@ -531,6 +541,7 @@ void AntEntity::setMoraleFlag(bool f)
 
 void AntEntity::decEnergy(float amount)
 {
+  assert(mEnergy>0);
   mEnergy-=amount;
   if(mEnergy<0.0)
     {

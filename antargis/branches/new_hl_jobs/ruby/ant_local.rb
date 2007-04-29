@@ -52,7 +52,11 @@ class AntLocalizer<AGLocalizer
 		read
 	end
 	def process(x)
-		x=x.gsub("\n","\\n")
+		if x.is_a?(AGStringUtf8)
+			x=x.replace(AGStringUtf8.new("\n"),AGStringUtf8.new("\\n"))
+		else
+			x=x.gsub("\n","\\n")
+		end
 		r=myprocess(x)
 		#puts "TRANSLATE: #{x} #{r.class}"
 		return r

@@ -358,11 +358,13 @@ task :dist => :test do
 			msh "cp #{f} #{distdir}"
 		}
 		msh "cp libantargis.so #{distdir}"
-		msh "rm -rf #{distdir}/autopackage #{distdir}/contrib #{distdir}/mkmf.log"
+		msh "rm -rf #{distdir}/autopackage #{distdir}/contrib #{distdir}/mkmf.log #{distdir}/*.txt #{distdir}/FIXME #{distdir}/*TODO #{distdir}/*.html"
 	
 		# FIXME: maybe del this
 		msh "cp #{distdir}/libpng13.dll #{distdir}/libpng12.dll"
 		msh "cp #{distdir}/libtiff3.dll #{distdir}/tiff.dll"
+	else
+		msh "rm -rf #{distdir}/autopackage #{distdir}/contrib #{distdir}/mkmf.log #{distdir}/*.txt #{distdir}/FIXME #{distdir}/*TODO #{distdir}/*.html #{distdir}/debian #{distdir}/test"
 	end
 	
 

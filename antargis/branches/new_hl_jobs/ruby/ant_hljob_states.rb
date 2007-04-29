@@ -1,35 +1,74 @@
 # Does the walk-formation
 # 
 #
-module HLJob_FormatWalk
+require 'ant_state_machine.rb'
+
+class Module
+	def wrap(objectName,methodName,objectMethodName=nil)
+		objectMethodName||=methodName
+		ts="*s"
+		ts="s" if methodName=~/.*=$/
+		s="def #{methodName}(#{ts})\n#{objectName}.#{objectMethodName}(#{ts})\nend\n"
+		puts s
+		module_eval s
+	end
+end
+
+
+module HLJob_Additions
+	attr_accessor :machine
+	#include AntWrapper
+	["hero","allMen","getTime","targetPos","targetPos=","formatDir","formatDir=","target"].each{|n|wrap "machine",n}
+end
+
+class HLJob_BaseState
+	include HLJob_Additions
+
+	def trace
+		if @hero.nil?
+			puts "TRACE #{caller[0]} #{self}"
+		else
+			puts "TRACE #{caller[0]} #{self} #{hero} #{getTime}"
+		end
+	end
+end
+
+class HLJob_DummyState<HLJob_BaseState
+end
+
+class HLJob_FormatWalk<HLJob_BaseState
 	# needed: getTime
 
 	# wait 5 seconds at max for formatting
 	FORMAT_MAX_TIME=5
 
-	def formatWalk_enter
+	def enter
+		puts "#{self}:enter"
 		trace
-		hero.formation=AntFormationBlock.new(@hero,formatDir)
-		heroPos=@hero.getPos2D
+		hero.formation=AntFormationBlock.new(hero,formatDir)
+		heroPos=hero.getPos2D
 		allMen.each{|man|
-			pos=@hero.getFormation(man,heroPos)
+			pos=hero.getFormation(man,heroPos)
 			man.walkTo(pos)
 			man.hlJobMode[:formatting]=true
 		}
 		@formatStart=getTime
 	end
 
-	def formatWalk_assign(man)
+	def assign(man)
+		#raise 1
 		man.setDirection(180-(targetPos-hero.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
 		man.standStill
 		man.hlJobMode.delete(:formatting)
 	end
 
-	def formatWalk_ready
+	def ready
 		if getTime-@formatStart>FORMAT_MAX_TIME
+			puts "MUST BE READY"
 			return true
 		end
 		allMen.each{|man|
+			puts "formatting:#{man}:#{man.hlJobMode[:formatting]}"
 			if man.hlJobMode[:formatting]
 				return false
 			end
@@ -38,44 +77,41 @@ module HLJob_FormatWalk
 	end
 
 private
-	def formatDir
-		(targetPos-hero.getPos2D).normalized
-	end
 
 end
 
-module HLJob_FormatSit
+class HLJob_FormatSit<HLJob_BaseState
 	# needed: getTime
 
 	# wait 5 seconds at max for formatting
 	FORMAT_MAX_TIME=15
 
-	def formatSit_enter
+	def enter
+		#raise 1
 		trace
-		hero.formation=AntFormationRest.new(@hero)
-		heroPos=@hero.getPos2D
+		hero.formation=AntFormationRest.new(hero)
+		heroPos=hero.getPos2D
 		allMen.each{|man|
-			pos=@hero.getFormation(man,heroPos)
+			pos=hero.getFormation(man,heroPos)
 			man.walkTo(pos)
 			man.hlJobMode[:formatting]=true
-			#puts "formatSit_enter: #{man} to #{pos}  (heroPos:#{heroPos})"
 		}
 		@formatStart=getTime
 	end
 
-	def formatSit_assign(man)
+	def assign(man)
 		man.setDirection(180-(hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
 		man.standStill
 		man.hlJobMode.delete(:formatting)
 	end
 
-	def formatSit_ready
+	def ready
+		puts "#{self}:ready"
 		if getTime-@formatStart>FORMAT_MAX_TIME
 			# FIXME:rest deserts
 			return true
 		end
 		allMen.each{|man|
-			#puts "formatSit_ready: #{man}:#{man.hlJobMode[:formatting]}"
 			if man.hlJobMode[:formatting]
 				return false
 			end
@@ -84,29 +120,34 @@ module HLJob_FormatSit
 	end
 end
 
-module HLJob_MoveToNextWayPoint
+class HLJob_MoveToNextWayPoint<HLJob_BaseState
 	# needed: hero,allMen,targetPos, near
-	def near
-		0
+
+	attr_accessor :near
+
+	def initialize
+		super
+		@near=0
 	end
 
-	def moveToNextWayPoint_enter
-		hero.formation=AntFormationBlock.new(@hero,formatDir)
+	def enter
+		puts "#{self}:enter"
+		hero.formation=AntFormationBlock.new(hero,formatDir)
 		allMen.each{|man|
-			pos=@hero.getFormation(man,targetPos)
+			pos=hero.getFormation(man,targetPos)
 			man.newMoveJob(0,pos,near)
 			man.hlJobMode[:walking]=true
 		}
 	end
 
-	def moveToNextWayPoint_assign(man)
+	def assign(man)
 		man.standStill
 		man.hlJobMode.delete(:walking)
 
 		# FIXME: maybe let him desert if this is called too often ?
 	end
 
-	def moveToNextWayPoint_ready
+	def ready
 		allMen.each{|man|
 			if man.hlJobMode[:walking]
 				return false
@@ -117,8 +158,83 @@ module HLJob_MoveToNextWayPoint
 
 end
 
-module HLJob_SitDown
-	def sitDown_enter
+class HLJob_MoveComplete<BaseState
+	include HLJob_Additions
+	state :moveToNextPoint=>HLJob_MoveToNextWayPoint
+	state :formatWalk=>HLJob_FormatWalk
+	state :endState=>HLJob_DummyState
+
+	startState :formatWalk
+	endState :endState
+	
+	edge :moveToNextPoint, :formatWalk, :stillHasWaypoints
+	edge :formatWalk, :moveToNextPoint
+	edge :moveToNextPoint, :endState, :noMoreWaypoints
+
+	def enter
+		puts "#{self}:enter"
+		if @waypoints.nil?
+			initWaypoints
+		end
+	end
+
+	def stillHasWaypoints
+		puts state
+		if @waypoints.length>0
+			self.targetPos=@waypoints.shift
+			puts "targetPos:#{targetPos}"
+			return true
+		end
+		false
+	end
+
+	def near=(n)
+		@states[:moveToNextPoint].near=n
+	end
+
+	def noMoreWaypoints
+		@waypoints.length==0
+	end
+
+	def moveDirectly
+		@state=:moveToNextPoint
+	end
+
+	def assign(man)
+		#raise 1
+		state.assign(man)
+	end
+
+	def hero
+		machine.hero
+	end
+	def formatDir
+		(targetPos-hero.getPos2D).normalized
+	end
+
+	private
+
+	def initWaypoints
+		if getMap.path
+			@waypoints=[hero.getPos2D]+getMap.path.computePath(hero.getPos2D,targetPos)+[targetPos]
+			# remove waypoints in between - if they're not necessary - origin must be given, too
+			@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
+			# remove origin for waypoint-list
+			assert{@waypoints.length>=2}
+			@waypoints.shift
+			
+			@waypoints+=[targetPos]
+
+		else
+			@waypoints=[targetPos]
+		end
+		@completeTargetPos=targetPos
+		self.targetPos=@waypoints.shift
+	end
+end
+
+class HLJob_SitDown<HLJob_BaseState
+	def enter
 		allMen.each{|man|
 			man.setDirection(180-(hero.getPos2D-man.getPos2D).normalized.getAngle.angle*180.0/Math::PI)
 			man.sitDown
@@ -126,12 +242,12 @@ module HLJob_SitDown
 		}
 	end
 
-	def sitDown_assign(man)
+	def assign(man)
 		man.sitStill
 		man.hlJobMode.delete(:sitting)
 	end
 
-	def sitDown_ready
+	def ready
 		allMen.each{|man|
 			if man.hlJobMode[:sitting]
 				return false
@@ -141,32 +257,32 @@ module HLJob_SitDown
 	end
 end
 
-module HLJob_JustSit
-	def justSit_enter
+class HLJob_JustSit<HLJob_BaseState
+	def enter
 		allMen.each{|man|
 			man.sitStill
 		}
 	end
-	def justSit_assign(man)
+	def assign(man)
 		man.sitStill # and rest
 	end
 
-	def justSit_ready
+	def ready
 		return false
 	end
 end
 
-module HLJob_JustSitOnce
-	def justSitOnce_enter
+class HLJob_JustSitOnce<HLJob_BaseState
+	def enter
 		allMen.each{|man|
 			man.sitStill
 			man.hlJobMode[:justSitting]=true
 		}
 	end
-	def justSitOnce_assign(man)
+	def assign(man)
 		man.hlJobMode.delete(:justSitting)
 	end
-	def justSitOnce_ready
+	def ready
 		allMen.each{|man|
 			if man.hlJobMode[:justSitting]
 				return false
@@ -178,11 +294,11 @@ module HLJob_JustSitOnce
 end
 	
 
-module HLJob_FetchStart
+class HLJob_FetchStart<HLJob_BaseState
 	# needed a target-entity
-	def fetchStart_enter
+	def enter
 		trace
-		fetchPoint=target.getPos2D
+		fetchPoint=machine.target.getPos2D
 		puts "fetchPoint:#{fetchPoint}  heroPos:#{hero.getPos2D}"
 		allMen.each{|man|
 			man.walkTo(fetchPoint)
@@ -192,13 +308,13 @@ module HLJob_FetchStart
 		
 	end
 
-	def fetchStart_assign(man)
+	def assign(man)
 		trace
 		man.standStill
 		man.hlJobMode.delete(:fetching)
 	end
 
-	def fetchStart_ready
+	def ready
 		trace
 		allMen.each{|man|
 			puts "fetchStart_ready check: #{man} : #{man.hlJobMode[:fetching]}"
@@ -212,13 +328,19 @@ module HLJob_FetchStart
 	end
 end
 
-module HLJob_GetResource
+class HLJob_GetResource<HLJob_BaseState
 	# needed: resources return array of resource-strings
-	def getResource_enter
+	attr_accessor :resources
+
+	def initialize
+		@resources=[]
+	end
+
+	def enter
 		for i in 1..hero.getAggression
 			allMen.each{|man|
 				resources.each{|r|
-					a=target.resource.get(r)
+					a=machine.target.resource.get(r)
 					if a>1
 						man.resource.add(r,1)
 						target.resource.sub(r,1)
@@ -228,13 +350,13 @@ module HLJob_GetResource
 		end
 		allMen.each{|m|m.resourceChanged}
 	end
-	def getResource_ready
+	def ready
 		return true
 	end
 end
 
-module HLJob_KillAnimal
-	def killAnimal_enter
+class HLJob_KillAnimal<HLJob_BaseState
+	def enter
 		target.eventDie
 		hero.resource.takeAll(target.resource)
 		allMen.each{|m|m.resourceChanged}
@@ -242,10 +364,10 @@ module HLJob_KillAnimal
 end
 
 # spread things among team-members
-module HLJob_SpreadThings
+class HLJob_SpreadThings<HLJob_BaseState
 	RESOURCES_TO_SPREAD=["sword","shield","bow","boat"]
 
-	def spreadThings_enter
+	def enter
 		allMen.each{|man|
 			man.walkTo(hero.getPos2D)
 			man.hlJobMode[:gatherToSpread]=true
@@ -253,7 +375,7 @@ module HLJob_SpreadThings
 		@alreadySpread=false
 	end
 
-	def spreadThings_assign(man)
+	def assign(man)
 		man.standStillShort
 		if man.hlJobMode[:gatherToSpread]
 			man.hlJobMode.delete(:gatherToSpread)
@@ -265,7 +387,7 @@ module HLJob_SpreadThings
 		end
 	end
 
-	def spreadThings_ready
+	def ready
 		return true if @alreadySpread		
 		allMen.each{|man|
 			return false if man.hlJobMode[:gatherToSpread] or man.hlJobMode[:waitForSpread]
@@ -321,7 +443,7 @@ module HLJob_SpreadThings
 	
 end
 
-class HLJob_FightData
+class HLJob_FightData<HLJob_BaseState
 
 	attr_reader :inited
 	# only attacker creates fightData
@@ -357,9 +479,12 @@ class HLJob_FightData
 	end
 
 	def getNewOpponent(man,fightJob)
+		assert{man.canFight}
 		assert{man.is_a?(AntHero) or man.is_a?(AntMan)}
 		assert{man.getHero==fightJob.hero}
 	
+		checkForUpdate
+
 		# for a start: get next opponent
 		# (maybe take next free opponent ??)
 		# (maybe: find weakest friend and help him ???)
@@ -373,8 +498,28 @@ class HLJob_FightData
 			#eventWon(myType)
 			return nil
 		else
+			assert{opponent.canFight}
 			return opponent
 		end
+	end
+
+	def checkForUpdate
+
+		#raise "FIXME"
+		# check, if heroes are still able to fight, else reshuffle - let hero lose or sth else
+
+		nparties={}
+		oldparties=@parties
+		@parties.each{|type,jobs|
+			njobs=jobs.select{|job|job.hero.canFight}
+			nparties[type]=njobs
+		}
+		@parties=nparties
+
+		if @parties!=oldparties
+			reshuffle
+		end
+
 	end
 
 	private
@@ -383,7 +528,15 @@ class HLJob_FightData
 		{:attacker=>:defender,:defender=>:attacker}[my]
 	end
 
+	def getAllJobs
+		@parties.collect{|type,jobs|jobs}.flatten
+	end
+	def getAllHeroes
+		getAllJobs.collect{|job|job.hero}
+	end
+
 	def reshuffle
+		trace
 		# reinit and assign
 
 		menGroup={}
@@ -433,12 +586,13 @@ class HLJob_FightData
 
 end
 
-module HLJob_Fight
+class HLJob_Fight<HLJob_BaseState
 	# needed: hero,target, undefeatedMen
 
 	attr_reader :fightType, :fightData, :won
 
-	def fight_enter
+	def enter
+		trace
 
 		targetHadFightData=target.hlJobMode[:fightData].nil?
 		
@@ -448,14 +602,21 @@ module HLJob_Fight
 			puts "NOT YET INITED #{self} hero:#{hero} target:#{target}"
 			target.newHLDefendJob(hero)
 		end
+		trace
 		assignAllJobs
 	end
 
-	def fight_assign(man)
+	def assign(man)
 		if man.is_a?(AntHouse)
 			man.newRestJob(20)
 			return
 		end
+
+		if @won or @lost
+			man.newRestJob(20)
+			return
+		end
+
 
 		if man.hlJobMode[:defeated]
 			# FIXME:send away
@@ -473,18 +634,22 @@ module HLJob_Fight
 			man.hlJobMode[:defeated]=true
 			man.hlJobMode.delete(:fighting)
 		else
+			puts ".canFight:#{man.canFight} #{man.getEnergy} #{man.getMorale}"
+			assert{man.canFight}
+
 			opponent=@fightData.getNewOpponent(man,self)
 			if opponent.nil?
 				# won
 				@won=true
 			else
+				assert{man.canFight and opponent.canFight}
 				man.hlJobMode[:fightTarget]=opponent
 				man.newFightJob(0,man.hlJobMode[:fightTarget])
 			end
 		end
 	end
 
-	def fight_leave
+	def leave
 		if lost
 			@fightData.removeLost(self)
 		else
@@ -502,15 +667,18 @@ module HLJob_Fight
 		}
 	end
 
-	def fight_ready
+	def ready
+		return true if @ready
 		if won 
-			eventWon(target)
-			return true
+			@won=true
+			machine.eventWon(target)
+			@ready=true
 		elsif lost
-			eventLost(target)
-			return true
+			@lost=true
+			machine.eventLost(target)
+			@ready=true
 		end
-		return false
+		return @ready
 	end
 
 	def lost
@@ -518,18 +686,22 @@ module HLJob_Fight
 	end
 
 	def undefeatedMen
-		allMen.select{|man|man.hlJobMode[:defeated].nil?}
+		allMen.select{|man|man.hlJobMode[:defeated].nil? && man.canFight}
 	end
 
 	private
 	# return true if fightData already exists
 	def checkForFightData
+		trace
+		puts "TARGET #{target}"
 		if target.hlJobMode[:fightData]
+			trace
 			@fightData=target.hlJobMode[:fightData]
 			@fightData.add(self)
 			@fightType=@fightData.getFightType(self)
 			return true
 		else
+			trace
 			@fightData=HLJob_FightData.new(self)
 			@fightType=:attacker
 		end
@@ -538,6 +710,7 @@ module HLJob_Fight
 	end
 	def assignAllJobs
 		# FIXME:assign a fight-job to every member (undefeatedMen)
+		trace
 
 		undefeatedMen.each{|man|
 			assert{not man.hlJobMode[:fightTarget].nil?}
@@ -549,8 +722,8 @@ module HLJob_Fight
 	end
 end
 
-module HLJob_Recruit
-	def recruit_enter
+class HLJob_Recruit<HLJob_BaseState
+	def enter
 	end
 	
 	private

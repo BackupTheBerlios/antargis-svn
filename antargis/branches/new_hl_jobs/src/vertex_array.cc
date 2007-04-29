@@ -37,8 +37,9 @@ VertexArray::VertexArray(bool pDynamic):mDynamic(pDynamic),bbox(AGVector3(),AGVe
   mBuffers=GLEE_ARB_vertex_buffer_object && useVBO();
   mArrays=GLEE_EXT_vertex_array && useVertexArrays();
 
-  if(videoInited())
-    assert(GLEE_EXT_vertex_array);
+  // vertex-arrays are standard from opengl 1.1 - so don't check
+  //  if(videoInited())
+  //    assert(GLEE_EXT_vertex_array);
 
   displayListInited=false;
 

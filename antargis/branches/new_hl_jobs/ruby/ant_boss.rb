@@ -94,6 +94,7 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def eventNoJob
+		#return if @meshState!="dead"
 # 		dputs "eventNoJob "+self.class.to_s+" "+@job.to_s
 # 		dputs caller.join("\n")
 		checkHLJobEnd(self)
@@ -150,7 +151,10 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def removeMan(man)
-		@men.delete(man)
+		if @men.member?(man)
+			@men.delete(man)
+			man.setBoss(nil)
+		end
 		if @job
 			@job.delete(man)
 		end
@@ -174,11 +178,11 @@ class AntBoss<AntRubyEntity
 # 		return
 # 	end
 
-	def eventAttacked(by)
-		ret=newHLDefendJob(by)
-		AntInventory.update(self)
-		ret
-	end
+# 	def eventAttacked(by)
+# 		ret=newHLDefendJob(by)
+# 		AntInventory.update(self)
+# 		ret
+# 	end
 	
 	def eventManDefeated(man)
 		dputs "AntBoss:eventManDefeated: #{man} #{man.getName}"
@@ -224,20 +228,20 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def assignJob2All
-		if getMap
-			getMap.eventNewJobAssignedToBoss(self)
-		end
-
-		begin
-		# discard reassigning in this case
-		return if ObjectSpace.const_get(:AntNewHLJob)
-		rescue
-		end
-
-		@men.each{|man|
-			man.delJob
-			assignJob(man)
-		}
+# 		if getMap
+# 			getMap.eventNewJobAssignedToBoss(self)
+# 		end
+# 
+# 		begin
+# 		# discard reassigning in this case
+# 		return if ObjectSpace.const_get(:AntNewHLJob)
+# 		rescue
+# 		end
+# 
+# 		@men.each{|man|
+# 			man.delJob
+# 			assignJob(man)
+# 		}
 	end
 	def killAllJobs
 		@men.each{|man|man.delJob}

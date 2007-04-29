@@ -99,9 +99,11 @@ private:
 void agRaise(const std::string &s);
 
 #ifndef __WIN32__
-//#undef assert
-//#define assert(x) {if(!(x)) agRaise((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
+#undef assert
+#define assert(x) {if(!(x)) agRaise((::toString("assert failed ")+LINEINFO(__STRING(x))).c_str()); }
 #endif
+
+//#undef assert
 
 #define Assert(x) assert(x)
 

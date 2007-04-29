@@ -1,16 +1,23 @@
-class AntNewHLJob
+require 'ant_state_machine.rb'
+
+class AntNewHLJob<BaseMachine
 	attr_reader :finished, :stopped
 	# some magic here
-	def initialize(hero)
+	def initialize(hero,startState=nil)
+		super(startState)
 		@hero=hero
+		assert{not @hero.nil?}
 
 		@finished=false
 
 		firstCall
 	end
+
 	def getTime
+		puts "getTime"
 		@hero.getMap.getTime
 	end
+
 	def allMen
 		if @hero.is_a?(AntHero)
 			@hero.getMen
@@ -18,86 +25,47 @@ class AntNewHLJob
 			@hero.getMen-[@hero]
 		end
 	end
+
 	def hero
 		@hero
 	end
 
 	def stopJob
 		@stopped=true
-		if @state
-			call(@state,"leave")
-		end
+		stateCall("leave")
 	end
 
 	def check(man)
-		return if @state.nil?
-		call2(@state,"assign",man)
-		while call(@state,"ready")
-			call(@state,"leave")
-			goToNextState
-			break if @state.nil? or @finished
+		#raise 1
+		if @state.nil?
+			@finished=true
+			return
 		end
-		puts "FINISHED: #{@finished}"
+		#raise 1
+		stateCall("assign",man)
+		advance
+		@finished=ready
 	end
 
-	# override this one
-	def goToNextState
-		@workflow.each{|p|
-			if p[0]==@state
-				@state=p[1]
-				call(@state,"enter")
-				return
-			end
-		}
-		@finished=true
-	end
-
-	def switchToState(state)
-		call(@state,"leave")
-		@state=state
-		call(@state,"enter")
-	end
-
-	def firstCall
-		call(@state,"enter")
-	end
-
-	def call(state,event)
-		m=methodName(state,event)
-		print "CALL #{hero.getName} #{state} #{event} #{m}  #{getTime} -- "
-		if self.class.method_defined?(m)
-			v=send(m)
-			puts v
-			return v
-		else
-			puts "UNKNOWN"
-			true
-		end
-	end
-	def xmlName
-		self.class.to_s
-	end
-
-	def call2(state,event,man)
-		m=methodName(state,event)
-		print "CALL2 #{hero.getName} #{state} #{event} #{m} #{man} #{getTime} -- "
-		if self.class.method_defined?(m)
-			v=send(m,man)
-			puts v
-			return v
-		else
-			puts "UNKNOWN"
-			true
+	def delete(man)
+		puts "IGNORING AntNewHLJob::delete(#{man})"
+		if man==@hero
+			puts "STOPPING JOB - because hero died"
+			@finished=true
+			@state=nil
 		end
 	end
 
-	def methodName(state,event)
-		m=state.to_s+"_"+event
-		m=m[0..0].downcase+m[1..-1]
-	end
 
 	def trace
-		puts "TRACE #{caller[0]} #{getTime}"
+		if @hero.nil?
+			puts "TRACE #{caller[0]} #{self}"
+		else
+			puts "TRACE #{caller[0]} #{self} #{hero} #{getTime}"
+		end
 	end
-		
+
+	def kill
+		stateCall("kill")
+	end		
 end

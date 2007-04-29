@@ -110,6 +110,7 @@ class AntMan<AntRubyEntity
 			@signed=true
 		end
 		if @boss
+			assert{@boss.getEnergy>0}
 			@boss.assignJob(self)
 		end
 	end	

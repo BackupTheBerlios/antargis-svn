@@ -136,6 +136,8 @@ module MyAntargislib
 						@@opengl=false
 					when "demo"
 						$demoMode=true
+					when "ruby-raise"
+						setRubyRaising(true)
 					when "gui-test"
 						require 'ruby/tests/gui_tests.rb'
 						@@cursorEnabled=true
@@ -162,6 +164,8 @@ module MyAntargislib
 	--debug-level=x
 
 	--nogl         disable GL-mode (3d-acceleration) - THIS IS NOT YET FULLY SUPPORTED!!
+
+	--ruby-raise   raises ruby-exception when assertions fail
 	"
 	
 						exit

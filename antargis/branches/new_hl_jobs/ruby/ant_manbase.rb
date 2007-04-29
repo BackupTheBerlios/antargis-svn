@@ -111,11 +111,13 @@ module AntManBase
 	def eventNoJob
 		if @meshState=="dead"
 			getMap.removeEntity(self)
+			return
 		end
 		super
 	end
 
 	def eventDie
+		assert{@dead!=true}
 		simDeath
 		#eventDefeated
 		newRestJob(20)

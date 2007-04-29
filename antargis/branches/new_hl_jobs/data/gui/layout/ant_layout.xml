@@ -233,6 +233,6 @@
 	<table cols="2" rows="2">
 		<colsize col="1" fixed="216"/>
 		<rowsize row="1" fixed="30"/>
-		<text name="statusBar" col="0" row="1" caption="FPS:0" cache="true"/>
+		<text name="statusBar" col="0" row="1" caption="FPS:0" cache="false"/>
 	</table>
 </layout>

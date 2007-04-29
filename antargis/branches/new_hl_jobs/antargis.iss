@@ -5,21 +5,21 @@
 
 [Setup]
 AppName=Antargis
-AppVerName=Antargis 0.1.9
+AppVerName=Antargis 0.2
 DefaultDirName={pf}\Antargis
 DefaultGroupName=Antargis
 UninstallDisplayIcon={app}\Antargis.exe
 Compression=lzma/fast
 SolidCompression=yes
 ;InfoAfterFile=c:\Antargis\readme.txt
-OutputBaseFilename=Antargis-0.1.9-setup
+OutputBaseFilename=Antargis-0.2-setup
 AppPublisher=Antargis-Team
 AppPublisherURL=antargis.berlios.de
-AppVersion=0.1.9
+AppVersion=0.2
 
 
 [Files]
-Source: "z:\home\david\projects\antargis\ant\antargis-0.1.9\*"; DestDir: "{app}"; Flags:recursesubdirs
+Source: "z:\home\david\projects\antargis\ant\antargis-0.2\*"; DestDir: "{app}"; Flags:recursesubdirs
 
 [Icons]
 Name: "{group}\Antargis"; Filename: "{app}\Antargis.lnk" ; WorkingDir: "{app}"

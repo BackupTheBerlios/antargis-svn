@@ -18,10 +18,6 @@ def newHLJobs
 	return true
 end
 
-# 
-# FIXME: * add path-finding to moving
-#        * do FIXME s ;-)
-
 module HLJob
 	def hero
 		@hero
@@ -36,16 +32,21 @@ require 'ant_hljob_base.rb'
 
 
 class AntNewHLRestJob<AntNewHLJob
-	include HLJob_FormatSit
-	include HLJob_SitDown
-	include HLJob_JustSitOnce
-	include HLJob_SpreadThings
+	state :formatSit=>HLJob_FormatSit
+	state :sitDown=>HLJob_SitDown
+	state :justSitOnce=>HLJob_JustSitOnce
+	state :spreadThings=>HLJob_SpreadThings
+
+	startState :formatSit
+	edge :formatSit, :sitDown
+	edge :sitDown,:justSitOnce
+	edge :justSitOnce,:spreadThings,:checkSpread
+	edge :justSitOnce,:justSitOnce,:notCheckSpread
+	edge :spreadThings,:formatSit,:lastSpread
 
 	SPREAD_CHECK_TIME=10 # all 10 seconds spread things
 
 	def initialize(hero,time)
-		@state=:FormatSit
-		@workflow=[[:FormatSit,:SitDown],[:SitDown,:CheckSpread],[:SpreadThings,:FormatSit],[:JustSitOnce,:CheckSpread]] #JustSit],[:JustSit]
 		super(hero)
 	end
 	def image
@@ -56,50 +57,48 @@ class AntNewHLRestJob<AntNewHLJob
 		RestMessage.new(boss,@time)
 	end
 
-	def sitDown_leave
-		if @spreadOnce.nil?
-			@spreadTime=getTime-SPREAD_CHECK_TIME
-			@spreadOnce=true
-		else
-			@spreadTime=getTime
-		end
+	def lastSpread
+		@spreadTime=getTime
+		true
 	end
-	
 
-	def checkSpread_enter
+	def checkSpread
 		curTime=getTime
+		puts "SPREADTIME: #{@spreadTime}   getTime:#{curTime}"
+		return true if @spreadTime.nil?
 		puts "#{curTime-@spreadTime}>#{SPREAD_CHECK_TIME}"
-		if curTime-@spreadTime>SPREAD_CHECK_TIME
-			switchToState(:SpreadThings)
-		else
-			switchToState(:JustSitOnce)
-		end
+		return curTime-@spreadTime>SPREAD_CHECK_TIME
 	end
+
+	def notCheckSpread
+		not checkSpread
+	end
+		
 end
 
-class AntNewHLMoveJob<AntNewHLJob
-	include HLJob_FormatWalk
-	include HLJob_MoveToNextWayPoint
-	include HLJob_FormatSit
-	include HLJob_SitDown
-	# FIXME: time is irrelevant here!
-	#def initialize(hero,time)
+AntHeroRestJobOld=AntHeroRestJob
+AntHeroRestJob=AntNewHLRestJob
 
-	attr_reader :targetPos
+
+
+class AntNewHLMoveJob<AntNewHLJob
+	state :moveComplete=>	HLJob_MoveComplete
+	state :endState => HLJob_DummyState
+
+	startState :moveComplete
+	endState :endState
+
+	edge :moveComplete,:endState
+
+	attr_accessor :targetPos
+	attr_accessor :formatDir
 
 	def initialize(hero,prio,pos,dist,doFormat=true)
 		@targetPos=pos.dim2
-		if doFormat
-			@state=:FormatWalk
-		else
-			@state=:MoveToNextWayPoint
-		end
-		@workflow=[
-			[:FormatWalk,:MoveToNextWayPoint],
-# 			[:MoveToNextWayPoint,:FormatSit],
-# 			[:FormatSit,:SitDown]
-		]
 		super(hero)
+		if not doFormat
+			state.moveDirectly			
+		end
 	end
 	# FIXME: move this to a config-file !
 	def image
@@ -112,30 +111,37 @@ class AntNewHLMoveJob<AntNewHLJob
 
 end
 
+AntHeroMoveJobOld=AntHeroMoveJob
+AntHeroMoveJob=AntNewHLMoveJob
+
+
+
+
 
 class AntNewHLTakeJob<AntNewHLJob
-	include HLJob_FormatWalk
-	include HLJob_FetchStart
-	include HLJob_GetResource
-	include HLJob_MoveToNextWayPoint
+	state :fetchStart => HLJob_FetchStart
+	state :getResource => HLJob_GetResource
+	state :move =>HLJob_MoveComplete
+	state :moveBack => HLJob_MoveComplete
+	state :endState => HLJob_DummyState
 
-	attr_reader :resources, :targetPos, :near, :target
+	startState :move
+	endState :endState
+
+	edge :move,:fetchStart,:fetchStart
+	edge :fetchStart,:getResource,:gettingResource
+	edge :getResource, :moveBack
+	edge :moveBack, :endState
+
+	attr_accessor :targetPos, :near, :target
 
 	def initialize(phero,target,what="food")
-		@resources={"food"=>["food"],"weapon"=>["sword","bow","boat","shield"]}[what]
 
-		@state=:FormatWalk
-		@workflow=[
-			[:FormatWalk,:MoveToNextWayPoint],
-			[:MoveToNextWayPoint,:MyStore],
-			[:MyStore,:FetchStart],
-			[:FetchStart,:GetResource],
-			[:GetResource,:MoveToNextWayPoint]
-		]
 		@targetPos=target.getPos2D
 		@target=target
-		@near=4
 		super(phero)
+		@states[:move].near=4
+		@states[:getResource].resources={"food"=>["food"],"weapon"=>["sword","bow","boat","shield"]}[what]
 	end
 
 	def image
@@ -146,37 +152,32 @@ class AntNewHLTakeJob<AntNewHLJob
 		end
 	end
 
-
-	def myStore_enter
-		trace
-		if @taken
-			@finished=true
-			return 
-		end
+	def fetchStart
 		@targetPos=hero.getPos2D
-		puts "#{@targetPos} #{hero.getPos2D}"
-		@near=0
-		@taken=true
+		true
+	end
+	def gettingResource
+		true
 	end
 end
 
+AntHeroTakeJobOld=AntHeroTakeJob
+AntHeroTakeJob=AntNewHLTakeJob
+
+
+
+
 class AntNewHLKillAnimal<AntNewHLTakeJob
-	def fetchStart_leave
+	inheritMachine
+
+	def gettingResource
 		# kill animal
 		playSound
 		killAnimal
+		super
 	end
 
 	
-	def myStore_enter
-		if @taken
-			@finished=true
-			return 
-		end
-		# no need to return to separate position
-		@taken=true
-	end
-
 	private
 	def playSound
 		# FIXME: play eat sound
@@ -186,30 +187,41 @@ class AntNewHLKillAnimal<AntNewHLTakeJob
 		hero.resource.takeAll(target.resource)
 	end
 end
+AntHeroFightAnimalJobOld=AntHeroFightAnimalJob
+AntHeroFightAnimalJob=AntNewHLKillAnimal
+
+
 
 class AntNewHLFight<AntNewHLJob
-	include HLJob_FormatWalk
-	include HLJob_MoveToNextWayPoint
-	include HLJob_Fight
+	state :move=>HLJob_MoveComplete
+	state :fight=>HLJob_Fight
+	state :endState=>HLJob_DummyState
 
-	attr_reader :targetPos,:near,:target
+	edge :move,:fight
+	edge :fight,:endState
+
+	startState :move
+	endState :endState
+
+	attr_accessor :targetPos,:near,:target
 
 	def initialize(hero,target,defend=false)
+		@targetPos=target.getPos2D
 		@target=target
+		puts "DEFEND #{defend}"
 		if defend
-			@state=:Fight
-			@workflow=[]
-			#trace
+			trace
+			super(hero,:fight)
+			trace
 		else
-			@state=:FormatWalk
-			@targetPos=target.getPos2D
-			@near=10
-			@workflow=[
-				[:FormatWalk,:MoveToNextWayPoint],
-				[:MoveToNextWayPoint,:Fight]
-			]
+			trace
+			super(hero)
+			trace
 		end
-		super(hero)
+		assert{@state==:fight || defend==false}
+		@states[:move].near=10
+
+		puts "STATE #{state}"
 	end
 
 	def image
@@ -219,8 +231,7 @@ class AntNewHLFight<AntNewHLJob
 	def eventWon(opponent)
 	end
 	def eventLost(opponent)
-		@finished=true
-		hero.setOwner(opponent) #.getPlayer)
+		hero.setOwner(opponent)
 	end
 
 
@@ -228,17 +239,15 @@ end
 
 # rename and replace old hl-jobs
 
-AntHeroRestJobOld=AntHeroRestJob
-AntHeroRestJob=AntNewHLRestJob
 
-AntHeroMoveJobOld=AntHeroMoveJob
-AntHeroMoveJob=AntNewHLMoveJob
 
-AntHeroTakeJobOld=AntHeroTakeJob
-AntHeroTakeJob=AntNewHLTakeJob
 
-AntHeroFightAnimalJobOld=AntHeroFightAnimalJob
-AntHeroFightAnimalJob=AntNewHLKillAnimal
-
+# AntHeroFightAnimalJobOld=AntHeroFightAnimalJob
+# AntHeroFightAnimalJob=AntNewHLKillAnimal
+# 
 AntHeroFightJobOld=AntHeroFightJob
 AntHeroFightJob=AntNewHLFight
+
+if false
+
+end
