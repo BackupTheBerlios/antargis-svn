@@ -92,17 +92,19 @@ class AntEntListWidget<AGWidget
 end
 
 class AntEntListCreator<AGLayoutCreator
-	def initialize()
-		super("antEntList")
-	end
+# 	def initialize()
+# 		super("antEntList")
+# 	end
 	def create(parent,rect,node)
 		e=AntEntListWidget.new(parent,rect)
 		e.setName(node.get("name"))
 		puts node.get("name")
+		setResult e
 		#raise 1
-		return e
+		#return e
 	end
 end
+getLayoutFactory.addCreator("antEntList",AntEntListCreator.new)
 
 
-$antEntListCreator=AntEntListCreator.new
+#$antEntListCreator=AntEntListCreator.new

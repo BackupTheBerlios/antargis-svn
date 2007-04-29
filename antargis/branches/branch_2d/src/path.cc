@@ -90,7 +90,7 @@ SimpleGraph::Node *SimpleGraph::Edge::getOther(Node *n)
   return 0;
 }
 
-
+/*
 SimpleGraph::HalfEdge *SimpleGraph::Edge::getHalfEdgeFrom(Node *n)
 {
   HalfEdge *h;
@@ -124,7 +124,7 @@ SimpleGraph::HalfEdge *SimpleGraph::Edge::getHalfEdgeTo(Node *n)
       h->w=w1;
     }
   return h;
-}
+  }*/
 
 
 ///////////////////////////////////////////////////////////////////////

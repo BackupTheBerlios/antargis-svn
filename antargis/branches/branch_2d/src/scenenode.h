@@ -4,7 +4,7 @@
 #include <ag_geometry.h>
 #include <ag_rubyobj.h>
 
-class Scene;
+class SceneBase;
 
 /// these are the drawing orders, by which Scene::drawScene orders all the meshes
 /// 1 will be drawn first and so forth
@@ -30,7 +30,7 @@ class Scene;
 class SceneNode:public AGRubyObject
 {
  public:
-  SceneNode(Scene *s,const AGVector4 &pPos,const AGBox3 &pBox);
+  SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &pBox);
   virtual ~SceneNode();
 
   /// reset my scene pointer - should not be called in "normal" code - only by the Scene-object
@@ -68,7 +68,7 @@ class SceneNode:public AGRubyObject
 
   virtual void clear();
 
-  Scene *getScene();
+  SceneBase *getScene();
   /// this checks, if the current object is inserted into a scene
   bool sceneValid() const;
 
@@ -80,17 +80,17 @@ class SceneNode:public AGRubyObject
   int getOrder() const;
   
  private:
-  void setScene(Scene *pScene);
+  void setScene(SceneBase *pScene);
 
   int mOrder;
 
-  Scene *mScene;
+  SceneBase *mScene;
   bool mVisible;
 
   AGVector4 mPos;
   AGBox3 mBBox;
 
-  friend class Scene;
+  friend class SceneBase;
 };
 
 typedef SceneNode *SceneNodePtr;

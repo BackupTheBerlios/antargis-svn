@@ -3,6 +3,15 @@ $useImpostors=false
 
 def getStaticModelRotation(name)
 	rot={
+		"tower"=>-30,
+		"ant_mill"=>-30,
+		"mine2"=>-40,
+		"workshop"=>-50,
+		"townhall_try2"=>-60,
+		"well"=>-30,
+		"ant_bakery"=>-30,
+		"ant_coach"=>-50,
+		"livinghouse"=>-20
 	}
 
 	if rot.member?(name)
@@ -15,6 +24,22 @@ def getStaticModelScaling(name)
 	scales={
 		"sack"=>0.3,
 		"stub"=>0.04,
+		"tower"=>3,
+		"ant_mill"=>3.2,
+		"mine2"=>0.2,
+		"workshop"=>0.18,
+		"townhall_try2"=>3.2,
+		"well"=>0.06,
+		"rip"=>0.3,
+		"fish"=>0.02,
+		"arrow"=>0.1,
+		"ant_bakery"=>3.0,
+		"boat_simple"=>0.12,
+		"twig"=>0.7,
+		"ant_coach"=>0.08,
+		"druid_lp"=>0.08,
+		"smith_lp"=>0.08,
+		"livinghouse"=>0.16,
 	}
 
 	if scales.member?(name)
@@ -23,9 +48,7 @@ def getStaticModelScaling(name)
 	return 1
 end
 
-def createModel(entityType,subType=nil,angle=nil)
-	mesh=nil
-
+def getMeshMap
 	animMeshes={
 		:man=>{
 			["wood"]=>"data/models/man_e_wood.anim",
@@ -51,9 +74,88 @@ def createModel(entityType,subType=nil,angle=nil)
 			[7]=>["data/models/tree_simple1.ant2",0.3,"data/textures/models/tree_simple1.png"],
 			[8]=>["data/models/tree_simple2.ant2",0.3,"data/textures/models/tree_simple1.png"],
 			[9]=>["data/models/tree_simple5.ant2",0.3,"data/textures/models/tree_simple5.png"]
-		}
-
+		},
+		:buildingsite=>{
+			[0]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site0.png"],
+			[1]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site1.png"],
+			[2]=>["data/models/building_site2.ant2",1.7,"data/textures/models/building_site1.png"],
+		},
+		:tower=>{
+			[]=>"tower"
+		},
+		:wolf=>{
+			[]=>"ant_wolf"
+		},
+		:mill=>{
+			[]=>"ant_mill"
+		},
+		:mine=>{
+			[]=>"mine2"
+		},
+		:workshop=>{
+			[]=>"workshop"
+		},
+		:townhall=>{
+			[]=>"townhall_try2"
+		},
+		:well=>{
+			[]=>"well"
+		},
+		:rip=>{
+			[]=>"rip"
+		},
+		:fish=>{
+			[]=>"fish"
+		},
+		:sheep=>{
+			[]=>"data/models/sheep.anim"
+		},
+		:arrow=>{
+			[]=>"arrow"
+		},
+		:bakery=>{
+			[]=>"ant_bakery"
+		},
+		:boat=>{
+			[]=>"boat_simple"
+		},
+		:floor_deco=>{
+			[]=>["data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png"],
+		},
+		:twig=>{	
+			[]=>"twig"
+		},
+		:coach=>{
+			[]=>"ant_coach"
+		},
+		:floor_gravel=>
+		{
+			[]=>["data/models/floor.ant2",0.8,"data/textures/gravel4.png"],
+		},
+		:druid=>
+		{
+			[]=>"druid_lp"
+		},
+		:smith=>
+		{
+			[]=>"smith_lp"
+		},	
+		:dwelling=>
+		{
+			[]=>"livinghouse"
+		},
+	
 	}
+end
+
+def getMeshCount(entityType)
+	getMeshMap[entityType].length
+end
+
+def createModel(entityType,subType=nil,angle=nil)
+	mesh=nil
+
+	animMeshes=getMeshMap
 
 	map=animMeshes[entityType]
 
@@ -75,6 +177,7 @@ def createModel(entityType,subType=nil,angle=nil)
 			data=getMeshData(ant2name,scale,pngname)
 			data.setCulling(culling)
 			data.setTransparent(true)
+			name=mesh
 			angle||=getStaticModelRotation(name)
 			scenenode=Mesh.new(getMap.getScene,data,AGVector4.new(0,0,0),angle)
 					
@@ -85,6 +188,10 @@ def createModel(entityType,subType=nil,angle=nil)
 			pngname="data/textures/models/"+mesh+".png"
 			name=mesh
 			angle||=getStaticModelRotation(name)
+			if not fileExists(pngname)
+				pngname=""
+			end
+
 			scenenode=Mesh.new(getMap.getScene,getMeshData(ant2name,getStaticModelScaling(name),pngname),AGVector4.new(0,0,0),angle)
 		end
 	end

@@ -94,10 +94,11 @@ class SimpleGraph:public AGRubyObject
 
     Node *getOther(Node *n);
 
+    /*
     HalfEdge *getHalfEdgeFrom(Node *n);
 
     HalfEdge *getHalfEdgeTo(Node *n);
-
+    */
   };
 
   struct Node

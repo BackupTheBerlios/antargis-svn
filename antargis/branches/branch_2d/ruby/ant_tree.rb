@@ -23,49 +23,50 @@
 require 'ant_grass.rb'
 
 
-def getTreeStub
-	getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
-end
-
-def getTreeTypes
-	files=[
-		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
-		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png"),
-#		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/fir5.png"),
-		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png"),
-		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree5.png"),
-		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree9.png"),
-		getMeshData("data/models/tree6.ant2",0.45,"data/textures/models/tree5.png"),
-		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png"),
-		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
-		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
-	]
-	files.each{|f|f.setCulling(false)} # patch for old trees
-	files+=[
-		getMeshData("data/models/tree_simple1.ant2",0.3,"data/textures/models/tree_simple1.png"),
-		getMeshData("data/models/tree_simple2.ant2",0.3,"data/textures/models/tree_simple1.png"),
-		getMeshData("data/models/tree_simple5.ant2",0.3,"data/textures/models/tree_simple5.png")
-	]
-
-end
-
-def getTreeMeshByType(type)
-	if type<0
-		return getTreeStub
-	end
-	d=getTreeTypes[type]
-	d||=getTreeTypes[0]
-	
-	d.setTransparent(true)
-	#d.setCulling(true) #false)
-	return d
-end
+# def getTreeStub
+# 	getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
+# end
+# 
+# def getTreeTypes
+# 	files=[
+# 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
+# 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png"),
+# #		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/fir5.png"),
+# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png"),
+# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree5.png"),
+# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree9.png"),
+# 		getMeshData("data/models/tree6.ant2",0.45,"data/textures/models/tree5.png"),
+# 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png"),
+# 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
+# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
+# 	]
+# 	files.each{|f|f.setCulling(false)} # patch for old trees
+# 	files+=[
+# 		getMeshData("data/models/tree_simple1.ant2",0.3,"data/textures/models/tree_simple1.png"),
+# 		getMeshData("data/models/tree_simple2.ant2",0.3,"data/textures/models/tree_simple1.png"),
+# 		getMeshData("data/models/tree_simple5.ant2",0.3,"data/textures/models/tree_simple5.png")
+# 	]
+# 
+# end
+# 
+# def getTreeMeshByType(type)
+# 	if type<0
+# 		return getTreeStub
+# 	end
+# 	d=getTreeTypes[type]
+# 	d||=getTreeTypes[0]
+# 	
+# 	d.setTransparent(true)
+# 	#d.setCulling(true) #false)
+# 	return d
+# end
 
 class AntTree<AntRubyEntity
 	def initialize(typeID=nil)
 		super(AGVector2.new(0,0))
 		@typeID=typeID
-		@typeID||=(getRand*getTreeTypes.length).to_i
+		#@typeID||=(getRand*getTreeTypes.length).to_i
+		@typeID||=(getRand*(getMeshCount(:tree)-1)).to_i
 		setProvide("wood",true)
 		setProvide("fruit",true)
 		@angle=getRand*360
@@ -108,7 +109,6 @@ class AntTree<AntRubyEntity
 	
 	private
 	def setupMesh
-		#setMesh(Mesh.new(getMap.getScene,getTreeMeshByType(@typeID),AGVector4.new(0,0,0,0),@angle))
 		typeId="stub"
 		if @typeID>=0
 			typeId=@typeID%10

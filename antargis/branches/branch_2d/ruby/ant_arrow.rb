@@ -26,7 +26,8 @@ class AntArrow<AntRubyEntity
 	def initialize
 		super(AGVector2.new(0,0))
 		@typeID=(getRand*2).to_i
-		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/arrow.ant2",0.1,"data/textures/models/arrow.png"),AGVector4.new(0,0,0,0),getRand*360))
+		setMesh(createModel(:arrow))
+# 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/arrow.ant2",0.1,"data/textures/models/arrow.png"),AGVector4.new(0,0,0,0),getRand*360))
 		setSpeed(10)
 	end
 	def eventNoJob

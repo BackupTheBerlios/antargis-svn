@@ -10,8 +10,9 @@ class AntMill<AntHouse
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_mill.ant2",3.2,"data/textures/models/ant_mill.png"),AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
+		setMesh(createModel(:mill))
+#		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_mill.ant2",3.2,"data/textures/models/ant_mill.png"),AGVector4.new(0,0,0),-30)
+#		setMesh(mesh)
 	end
 
 	def neededStock

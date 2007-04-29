@@ -35,8 +35,9 @@ class AntFish<AntAnimal
 
 		puts "FISH:#{getPos3D}"
 		
-		mesh=Mesh.new(getMap.getScene,getFishMeshData,AGVector4.new(0,0,0),0)
-		setMesh(mesh)
+		setMesh(createModel(:fish))
+		#mesh=Mesh.new(getMap.getScene,getFishMeshData,AGVector4.new(0,0,0),0)
+		#setMesh(mesh)
 
 		resource.set("food",1)
 		puts "FISH:#{getPos3D}"

@@ -98,6 +98,10 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
 	    }
 	}
     }
+  else
+    {
+      cdebug("click failed");
+    }
   return AGApplication::eventMouseButtonUp(e);
 }
 

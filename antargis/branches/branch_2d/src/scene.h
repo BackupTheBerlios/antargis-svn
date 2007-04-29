@@ -12,6 +12,7 @@
 #include <map>
 
 #include "scenenode.h"
+#include "scene_base.h"
 #include "ant_camera.h"
 
 /**
@@ -23,24 +24,6 @@
 
 
 
-/**
-   some helper structure, which is used for storing
-   results when picking. it holds some information about:
-   * distance to camera (for sorting)
-   * the picked scene-node
-   * and the 3d-position, where the scene-node was touched
-   */
-struct PickNode
-{
-  AGVector4 pos;
-  SceneNode *node;
-  float camDist;
-  
-  bool operator<(const PickNode &n) const;
-};
-
-template<class T>
-class QuadTree;
 
 
 /** 
@@ -55,11 +38,11 @@ class QuadTree;
 
  */
 
-class Scene:public AGRubyObject
+class Scene:public SceneBase
 {
  public:
-  typedef std::vector<PickNode> PickResult;
-  typedef std::list<SceneNode*> NodeList;
+  ////  typedef std::vector<PickNode> PickResult;
+  ////  typedef std::list<SceneNode*> NodeList;
 
   Scene(int w,int h);
   virtual ~Scene();
@@ -73,49 +56,58 @@ class Scene:public AGRubyObject
 
   // ATTENTION: nodes are not owned by Scene afterwards - so they won't get deleted!
   //            You have to do this yourself in the Entities or let ruby's GC do it for you (which would be the normal case)
-  void addNode(SceneNode *node);
+  /*  void addNode(SceneNode *node);
   void removeNode(SceneNode *node);
   void prepareUpdate(SceneNode *node);
   void updatePos(SceneNode *node);
-
+  
 
   void clear();
 
   // (mx,my,0)
   void setCamera(AGVector4 v);
-  AGVector4 getCamera() const;
-  void advance(float time);
-
+  AGVector4 getCamera() const;*/
+  virtual void advance(float time);
+  
   /**
      picking is currently done with opengl. this uses software (at least on my box), which is
      pretty slow. Some new implementation using BSPs would be cool!
      VertexArray or MeshData should contain it's data in such a tree. rays can be transformed using
      inverse transformation-matrices. This way data can stay as is.
   */
+  
   PickResult pick(float x,float y,float w,float h);
-
+  /*
   AntCamera &getCameraObject();
-
+*/
   size_t getDrawnMeshes() const;
 
   size_t getTriangles() const;
   size_t getPickTriangles() const;
 
+
+  /**
+     get 2d-Position on screen for a 3dim vector in 3-space
+   */
+  AGVector2 getPosition(const AGVector4 &v) const;
+
   /// get camera-viewing-direction to some 3d-point - used for particles
   AGVector3 getCameraDirTo(const AGVector3 &p) const;
 
+  /*
   /// width and height of screen
   float width() const;
   float height() const;
 
   void mark();
-
+  */
   AGMatrix4 getLightComplete() const;
   AGMatrix4 getLightView() const;
   AGMatrix4 getLightProj() const;
 
+  /*
   AGVector2 getPosition(const AGVector4 &v) const;
-
+  */
   NodeList getCurrentNodes();
 
 
@@ -135,7 +127,7 @@ class Scene:public AGRubyObject
   int mShadow;
 
   AGMatrix4 cameraPickMatrix;
-  
+  /*
   typedef std::vector<SceneNode*> Nodes;
   typedef std::set<SceneNode*> NodeSet;
 
@@ -147,7 +139,7 @@ class Scene:public AGRubyObject
 
   Nodes mNodes;
   NodeSet mNodeSet;
-
+  */
   AGVector4 white,black;
 
   size_t mTriangles;

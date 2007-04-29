@@ -14,9 +14,7 @@ class AntWell<AntRubyEntity
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/well.ant2",0.06,"data/textures/models/well.png"),AGVector4.new(0,0,0),-30)
-		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
+		setMesh(createModel(:well))
 	end
 
 

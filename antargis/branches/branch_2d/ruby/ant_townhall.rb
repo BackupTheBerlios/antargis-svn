@@ -33,8 +33,7 @@ class AntTownHall<AntHouse
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall_try2.ant2",3.2,"data/textures/models/townhall_try2.png"),AGVector4.new(0,0,0),-60)
-		setMesh(mesh)
+		setMesh(createModel(:townhall))
 	end
 
 	def resourceChanged

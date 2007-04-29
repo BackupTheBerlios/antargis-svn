@@ -42,10 +42,7 @@ class AntWolf<AntAnimal
 		@mypack=[]
 		@leader=nil
 		
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_wolf.ant2",1,"data/textures/models/ant_wolf.png"),AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
-		# data=getAnimMeshData("data/models/sheep.anim")
-		# setMesh(AnimMesh.new(getMap.getScene,data))
+		setMesh(createModel(:wolf))
 
 		resource.set("food",1)
 		@job=:resting
@@ -239,7 +236,8 @@ class AntWolf<AntAnimal
 		"Wolf"
 	end
 	def eventDie
-		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
+		setMesh(createModel(:rip))
+		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
 		@dead=true
 		
 		newRestJob(1)

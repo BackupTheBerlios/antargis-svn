@@ -33,7 +33,7 @@ end
 
 
 interfaceHeadersSRC=["ant_frustum.h","ant_projection.h","ant_camera.h",
-"scenenode.h","anim_mesh.h","anim_mesh_data.h","ant_app.h","entity.h","entptr.h","glsl.h","height_map.h","map.h","mesh_data.h","mesh.h","mesh_optimizer.h","minimap.h","new_decal.h","ant_renderer.h","resource.h","scene.h","smoke.h","terrain.h","vertex_array.h","water.h","path.h","impostor.h"]
+"scenenode.h","anim_mesh.h","anim_mesh_data.h","ant_app.h","entity.h","entptr.h","glsl.h","height_map.h","map.h","mesh_data.h","mesh.h","mesh_optimizer.h","minimap.h","new_decal.h","ant_renderer.h","resource.h","scene_base.h","scene.h","smoke.h","terrain.h","vertex_array.h","water.h","path.h","impostor.h"]
 interfaceHeadersGUI=[
 "ag_rubyobj.h","ag_messageobject.h","ag_serial.h","ag_aes.h","ag_singleton.h",
  "ag_geometry.h","ag_font.h","ag_color.h","ag_local.h","ag_config.h","ag_string.h","ag_string_utf8.h",

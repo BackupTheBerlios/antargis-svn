@@ -2,7 +2,7 @@
 #include "scene.h"
 #include "ag_debug.h"
 
-SceneNode::SceneNode(Scene *s,const AGVector4 &pPos,const AGBox3 &b):
+SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
   mPos(pPos),mBBox(b)
 {
   assert(s);
@@ -28,7 +28,7 @@ SceneNode::~SceneNode()
     mScene->removeNode(this);
 }
 
-void SceneNode::setScene(Scene *pScene)
+void SceneNode::setScene(SceneBase *pScene)
 {
   assert(mScene==0 || mScene==pScene);
   mScene=pScene;
@@ -113,7 +113,7 @@ AGRect2 SceneNode::getRect() const
 }
 
 
-Scene *SceneNode::getScene()
+SceneBase *SceneNode::getScene()
 {
   if(!mScene)
     throw std::runtime_error("scene==0");

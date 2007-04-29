@@ -44,7 +44,7 @@ class AntGameApp < AntRubyEditView
 	def initialize(sw,sh)
 		super(sw,sh,nil) #AntRubyMap.new(64,64))
 		$app=self	
-		$map=@map=AntRubyMap.new(getScene,128,128)
+		$map=@map=AntRubyMap.new(self,getScene,128,128)
 		$map.setHeight(-0.5)
 
 		addHandler(@layout.getChild("quit"),:sigClick,:eventQuit)

@@ -56,19 +56,22 @@ protected
 	def setupMesh
 		#if resource.get("wood")<=0
 		#	data=getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
-		setMesh(Mesh.new(getMap.getScene,meshData,AGVector4.new,0))
-	end
-private
-	def meshData
-		if resource.get("wood")<=0
-			data=getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
-		else
-			data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
+# 		setMesh(Mesh.new(getMap.getScene,meshData,AGVector4.new,0))
+# 	end
+# private
+# 	def meshData
+		typeId="stub"
+		if resource.get("wood")>0
+			typeId=1
+# 			data=getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
+# 		else
+# 			data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
 		end
-		data.setTransparent(true)
-		data.setCulling(false) # patch for old trees
+		setMesh(createModel(:tree,typeId))
+		#data.setTransparent(true)
+		#data.setCulling(false) # patch for old trees
 
-		return data
+# 		return data
 	end
 end
 

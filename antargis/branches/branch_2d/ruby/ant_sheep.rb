@@ -33,8 +33,9 @@ class AntSheep<AntAnimal
 		@lastBirth=0
 		@foodAdd=0
 		
-		data=getAnimMeshData("data/models/sheep.anim")
-		setMesh(AnimMesh.new(getMap.getScene,data))
+		setMesh(createModel(:sheep))
+# 		data=getAnimMeshData("data/models/sheep.anim")
+# 		setMesh(AnimMesh.new(getMap.getScene,data))
 
 		resource.set("food",1)
 	end
@@ -108,7 +109,8 @@ class AntSheep<AntAnimal
 		"Sheep"
 	end
 	def eventDie
-		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
+		setMesh(createModel(:rip))
+		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
 		setProvide("sheep",false)
 		@dead=true
 		newRestJob(1)

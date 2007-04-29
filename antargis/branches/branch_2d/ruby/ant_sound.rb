@@ -3,6 +3,7 @@ module AntSound
 	@@soundInited=false
 	@@loopSounds={}
 	@@ambientSound=nil
+	@@app=nil
 
 	def AntSound.setApplication(app)
 		@@app=app

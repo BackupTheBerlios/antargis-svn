@@ -18,7 +18,7 @@ AntImpostorData::AntImpostorData(SceneNode *pNode):mTexture(512,512)
 
 
   assert(pNode);
-  Scene *pScene=pNode->getScene();
+  Scene *pScene=dynamic_cast<Scene*>(pNode->getScene());
   assert(pScene);
 
   pScene->initScene();

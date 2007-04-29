@@ -13,9 +13,10 @@ class AntBakery<AntHouse
 	end
 	
 	def setupMesh
-		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_bakery.ant2",3.2,"data/textures/models/ant_bakery.png"),AGVector4.new(0,0,0),-30)
+		setMesh(createModel(:bakery))
+		#		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/ant_bakery.ant2",3.2,"data/textures/models/ant_bakery.png"),AGVector4.new(0,0,0),-30)
 		#mesh=Mesh.new(getMap.getScene,getMeshData("data/models/townhall.ant2",3.2,"data/textures/models/townhall.png"),AGVector4.new(0,0,0),-30)
-		setMesh(mesh)
+		#setMesh(mesh)
 		p=AGVector3.new(0,1.6,2.2)
 		addMesh(@smokeMesh=Smoke.new(getMap.getScene,5),p)
 		checkSmoke

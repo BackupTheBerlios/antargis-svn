@@ -55,8 +55,7 @@ public:
 
 
 Scene::Scene(int w,int h):
-  mTree(new QuadTree<SceneNode>(AGRect2(AGVector2(),AGVector2(w,h)))),
-  mCamera(w,h)
+  SceneBase(w,h)
 {
   white=AGVector4(1,1,1,1);
   black=AGVector4(0,0,0,1);
@@ -76,13 +75,9 @@ Scene::Scene(int w,int h):
 
 }
 
+
 Scene::~Scene()
 {
-  // tell nodes, that I'm no longer there :-)
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    (*i)->resetScene(); 
-
-  delete mTree;
 }
 
 size_t Scene::getDrawnMeshes() const
@@ -147,86 +142,7 @@ int Scene::getShadow() const
 }
 
 
-void Scene::addNode(SceneNode *node)
-{
-  if(mNodeSet.find(node)==mNodeSet.end())
-    {
-      node->setScene(this);
 
-      mNodes.push_back(node);
-      mNodeSet.insert(node);
-      assert(node->getScene()==this);
-      mTree->insert(node);
-    }
-}
-
-void Scene::updatePos(SceneNode *node)
-{
-  if(mNodeSet.find(node)==mNodeSet.end())
-    throw std::string("Dont know about this!");
-  mTree->insert(node);
-}
-
-void Scene::prepareUpdate(SceneNode *node)
-{
-  if(mNodeSet.find(node)==mNodeSet.end())
-    throw std::string("Dont know about this!");
-  mTree->remove(node);
-}
-
-
-void Scene::removeNode(SceneNode *node)
-{
-  if(mNodeSet.find(node)!=mNodeSet.end())
-    {
-      Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
-      mNodes.erase(i);
-      mNodeSet.erase(node);
-      assert(node->getScene()==this);
-      node->resetScene();
-      assert(mTree->remove(node));
-    }
-  else
-    {
-      throw std::runtime_error("Trying to remove unknown node");
-    }
-}
-
-void Scene::clear()
-{
-  for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    {
-      assert((*i)->getScene()==this);
-      (*i)->resetScene();
-    }
-  TRACE;
-  mNodes.clear();
-  mNodeSet.clear();
-  mTree->clear();
-}
-
-  // (mx,my,0)
-void Scene::setCamera(AGVector4 v)
-{
-  mCamera.setPosition(v.dim3());
-}
-
-void Scene::advance(float time)
-{
-  STACKTRACE; 
-
-  if(!mEnabled)
-    return;
-  // advance only in view
-
-  NodeList l=getCurrentNodes();
-
-  for(NodeList::iterator i=l.begin();i!=l.end();i++)
-    {
-      if((*i)->visible())
-	(*i)->advance(time);
-    }
-}
 
 Scene::NodeList Scene::getCurrentNodes()
 {
@@ -604,24 +520,6 @@ Viewport Scene::getViewport() const
 }
 
 
-float Scene::width() const
-{
-  return mCamera.getWidth();
-}
-float Scene::height() const
-{
-  return mCamera.getHeight();
-}
-
-void Scene::mark()
-{
-  Scene::Nodes::iterator i=mNodes.begin();
-
-  for(;i!=mNodes.end();i++)
-    {
-      markObject(*i);
-    }
-}
 
 AGMatrix4 Scene::getLightComplete() const
 {
@@ -637,10 +535,6 @@ AGMatrix4 Scene::getLightProj() const
   return mCamera.getLightProjectionMatrix();
 }
 
-AGVector4 Scene::getCamera() const
-{
-  return AGVector4(mCamera.getPosition(),1);
-}
 
 AGVector2 Scene::getPosition(const AGVector4 &v) const
 {
@@ -664,7 +558,9 @@ void Scene::setEnabled(bool p)
   mEnabled=p;
 }
 
-AntCamera &Scene::getCameraObject()
+
+void Scene::advance(float time)
 {
-  return mCamera;
+  if(mEnabled)
+    SceneBase::advance(time);
 }
