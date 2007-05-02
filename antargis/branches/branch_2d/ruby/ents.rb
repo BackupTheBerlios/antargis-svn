@@ -219,6 +219,25 @@ class AntRubyEntity<AntEntity
 # 	def _load(s)
 # 		getMap.getByUID(s.unpack("n"))
 # 	end
+
+
+	def setMesh(subtype="",sym=nil)
+		if subtype.is_a?(SceneNode)
+			puts  "THIS SHOULD NOT BE USED ANY LONGER: setMesh(realMesh) !!!!!!!!!!!!"
+			super(subtype) # wrapper
+			return subtype
+		end
+		@map={:AntSack=>:sack}
+		t=self.class.to_s
+		t=t.gsub("Ant","").downcase
+		t=t.to_sym
+		if sym
+			t=sym
+		end
+		
+		super(mesh=AntModels.createModel(t,subtype))
+		return mesh
+	end
 end
 
 # here comes a list of all the different entity-types BoA currently uses:

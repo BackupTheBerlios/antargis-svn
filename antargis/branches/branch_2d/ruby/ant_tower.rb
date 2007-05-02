@@ -9,7 +9,7 @@ class AntTower<AntHouse
 	end
 	
 	def setupMesh
-		setMesh(createModel(:tower))
+		setMesh
 	end	
 	
 

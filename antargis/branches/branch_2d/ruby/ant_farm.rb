@@ -35,7 +35,7 @@ class AntFarm<AntHouse
 	end
 	
 	def setupMesh
-		setMesh(createModel(:farm))
+		setMesh
 	end
 
 	def neededStock

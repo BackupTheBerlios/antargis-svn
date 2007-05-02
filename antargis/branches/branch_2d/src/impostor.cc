@@ -3,7 +3,7 @@
 #include <ag_screen.h>
 #include <ag_rendercontext.h>
 
-AntImpostorData::AntImpostorData(SceneNode *pNode):mTexture(512,512)
+AntImpostorData::AntImpostorData(SceneNode *pNode,int width,int height):mTexture(width,height)
 {
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); // clear screen and depth buffer
 
@@ -42,8 +42,6 @@ AntImpostorData::AntImpostorData(SceneNode *pNode):mTexture(512,512)
   */
   int sw=getScreen().getWidth(),sh=getScreen().getHeight();
   int w=mTexture.width(),h=mTexture.height();
-  
-  
 
   glViewport(-sw/2+w/2,-sh/2+h/2,sw,sh);
 
@@ -56,11 +54,12 @@ AntImpostorData::AntImpostorData(SceneNode *pNode):mTexture(512,512)
   AGSurface s=getScreen().screenshot(false);
   s.save("impostor.png");
 
-
   mTexture.endPaint();
 
   AGSurface subs=s.getSubSurface(AGRect2(0,sh-h,w,h));
   subs.save("impostor3.png");
+
+  mSurface=subs;
 
   //  mTexture.save("impostor.png");
 }
@@ -68,6 +67,11 @@ AntImpostorData::AntImpostorData(SceneNode *pNode):mTexture(512,512)
 AGTexture &AntImpostorData::getTexture()
 {
   return mTexture;
+}
+
+AGSurface &AntImpostorData::getSurface()
+{
+  return mSurface;
 }
 
 void AntImpostorData::mark()

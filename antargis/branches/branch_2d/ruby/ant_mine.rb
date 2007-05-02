@@ -38,7 +38,7 @@ class AntMine<AntRubyEntity
 	
 	private
 	def setupMesh
-		setMesh(createModel(:mine))
+		setMesh
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/mine2.ant2",0.2,"data/textures/models/mine.png"),AGVector4.new(0,0,0),-40))
 	end
 end

@@ -88,6 +88,16 @@
 	result->mRubyObject=true;
 }
 %markfunc WaterPiece "general_markfunc"
+%exception Mesh2D::Mesh2D {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc Mesh2D "general_markfunc"
 %exception AGText::AGText {
 	$action
 	result->mRUBY=self;
@@ -108,6 +118,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGScreenWidget "general_markfunc"
+%exception Mesh2DData::Mesh2DData {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc Mesh2DData "general_markfunc"
 %exception AGRubyObject::AGRubyObject {
 	$action
 	result->mRUBY=self;
@@ -398,6 +418,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AGMain "general_markfunc"
+%exception Scene2D::Scene2D {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc Scene2D "general_markfunc"
 %exception SceneNode::SceneNode {
 	$action
 	result->mRUBY=self;
@@ -860,6 +890,34 @@
  }
  else $input=Qnil;
 }
+%typemap(out) Mesh2D*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh2D,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) Mesh2D*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh2D,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGText*{
  if($1)
  {
@@ -1096,6 +1154,34 @@ else if(dynamic_cast<GLApp*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_GLApp,0);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) Mesh2DData*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh2DData,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) Mesh2DData*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh2DData,0);
    }
  }
  else $input=Qnil;
@@ -1962,6 +2048,8 @@ else if(dynamic_cast<MapPathWeighter*>($1))
      if(false);
 else if(dynamic_cast<AnimMesh*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
+else if(dynamic_cast<Mesh2D*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh2D,0);
 else if(dynamic_cast<WaterPiece*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
 else if(dynamic_cast<AntImpostor*>(result))
@@ -1990,6 +2078,8 @@ else if(dynamic_cast<TerrainPiece*>(result))
      if(false);
 else if(dynamic_cast<AnimMesh*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AnimMesh,0);
+else if(dynamic_cast<Mesh2D*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh2D,0);
 else if(dynamic_cast<WaterPiece*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_WaterPiece,0);
 else if(dynamic_cast<AntImpostor*>($1))
@@ -2032,6 +2122,34 @@ else if(dynamic_cast<TerrainPiece*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayoutCreator,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) Scene2D*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene2D,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) Scene2D*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene2D,0);
    }
  }
  else $input=Qnil;
@@ -2130,6 +2248,8 @@ else if(dynamic_cast<TerrainPiece*>($1))
      if(false);
 else if(dynamic_cast<Scene*>(result))
   vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene,0);
+else if(dynamic_cast<Scene2D*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene2D,0);
    else
      vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneBase,0);
    }
@@ -2146,6 +2266,8 @@ else if(dynamic_cast<Scene*>(result))
      if(false);
 else if(dynamic_cast<Scene*>($1))
   $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene,0);
+else if(dynamic_cast<Scene2D*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene2D,0);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_SceneBase,0);
    }
@@ -3309,6 +3431,16 @@ else if(dynamic_cast<AGMessageObject*>($1))
  Data_Get_Struct($input,Mesh,b);
  $result=*b;
 }
+%typemap(directorout) Mesh2D {
+ Mesh2D *b;
+ Data_Get_Struct($input,Mesh2D,b);
+ $result=*b;
+}
+%typemap(directorout) Mesh2DData {
+ Mesh2DData *b;
+ Data_Get_Struct($input,Mesh2DData,b);
+ $result=*b;
+}
 %typemap(directorout) MeshData {
  MeshData *b;
  Data_Get_Struct($input,MeshData,b);
@@ -3372,6 +3504,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) Scene {
  Scene *b;
  Data_Get_Struct($input,Scene,b);
+ $result=*b;
+}
+%typemap(directorout) Scene2D {
+ Scene2D *b;
+ Data_Get_Struct($input,Scene2D,b);
  $result=*b;
 }
 %typemap(directorout) SceneBase {

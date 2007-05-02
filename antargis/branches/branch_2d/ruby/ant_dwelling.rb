@@ -18,9 +18,7 @@ class AntDwelling<AntHouse
 
 	# setup the mesh
 	def setupMesh
-		setMesh(createModel(:dwelling))
-# 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/livinghouse.ant2",0.16,"data/textures/models/livinghouse.png"),AGVector4.new(0,0,0),-20)
-# 		setMesh(mesh)
+		setMesh
 	end
 
 protected

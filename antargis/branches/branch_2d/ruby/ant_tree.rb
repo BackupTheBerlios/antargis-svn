@@ -66,7 +66,7 @@ class AntTree<AntRubyEntity
 		super(AGVector2.new(0,0))
 		@typeID=typeID
 		#@typeID||=(getRand*getTreeTypes.length).to_i
-		@typeID||=(getRand*(getMeshCount(:tree)-1)).to_i
+		@typeID||=(getRand*(AntModels.getMeshCount(:tree)-1)).to_i
 		setProvide("wood",true)
 		setProvide("fruit",true)
 		@angle=getRand*360
@@ -113,7 +113,8 @@ class AntTree<AntRubyEntity
 		if @typeID>=0
 			typeId=@typeID%10
 		end
-		setMesh(createModel(:tree,typeId,@angle))
+		mesh=setMesh(typeId)
+		mesh.setRotation(@angle)
 	end
 
 	# an old function for display apples - this is too costly

@@ -222,3 +222,5 @@ class AntBush<AntRubyEntity
 		setMesh(makeBushMesh(@size*3))
 	end
 end
+
+

@@ -33,7 +33,7 @@ class AntSheep<AntAnimal
 		@lastBirth=0
 		@foodAdd=0
 		
-		setMesh(createModel(:sheep))
+		setMesh
 # 		data=getAnimMeshData("data/models/sheep.anim")
 # 		setMesh(AnimMesh.new(getMap.getScene,data))
 
@@ -109,7 +109,7 @@ class AntSheep<AntAnimal
 		"Sheep"
 	end
 	def eventDie
-		setMesh(createModel(:rip))
+		setMesh(:rip)
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/rip.ant2",0.3,"data/textures/models/rip.png"),AGVector4.new(0,0,0,0),0))
 		setProvide("sheep",false)
 		@dead=true

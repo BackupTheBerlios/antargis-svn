@@ -5,7 +5,7 @@ class AntField<AntRubyEntity
 		setProvide("field",true)
 		@size=0
 		#init fieldMeshes-var
-		@max=getMeshCount(:field)-1
+		@max=AntModels.getMeshCount(:field)-1
 		setupMesh
 		@growTime=20
 		@begin=true
@@ -37,6 +37,6 @@ class AntField<AntRubyEntity
 	
 	private
 	def setupMesh
-		setMesh(createModel(:field,@size))		
+		setMesh(@size)
 	end
 end

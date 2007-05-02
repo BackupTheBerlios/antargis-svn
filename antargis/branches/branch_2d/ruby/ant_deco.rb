@@ -43,7 +43,7 @@ class AntDeco<AntRubyEntity
 			@decoType=a[r]
 		end
 		setProvide("deco",true)
-		setMesh(createModel(:floor_deco))
+		setMesh(:floor_deco)
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png",false),AGVector4.new(0,0,0,0),0))
 	end
 	def setDecoType(t)
@@ -66,7 +66,7 @@ class AntTwig<AntRubyEntity
 		@typeID=(getRand()*2).to_i
 		#setType("twig")
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),getRand*360))
-		setMesh(mesh=createModel(:twig))
+		mesh=setMesh
 		mesh.setRotation(getRand*360)
 	end
 end

@@ -11,7 +11,7 @@ class AntFishingHut<AntHouse
 	end
 	
 	def setupMesh
-		setMesh(createModel(:fishing_hut))
+		setMesh
 # 
 # 
 # 		data=getMeshData("data/models/fishing_hut.ant2",3.2,"data/textures/models/fishing_hut.png")

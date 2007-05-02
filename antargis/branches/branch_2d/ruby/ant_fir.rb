@@ -67,7 +67,7 @@ protected
 # 		else
 # 			data=getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png")
 		end
-		setMesh(createModel(:tree,typeId))
+		setMesh(typeId,:tree)
 		#data.setTransparent(true)
 		#data.setCulling(false) # patch for old trees
 

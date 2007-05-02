@@ -10,8 +10,6 @@ class AntBoat<AntRubyEntity
 	end
 private
 	def setupMesh
-# 		mesh=Mesh.new(getMap.getScene,getBoatMeshData,AGVector4.new(0,0,0),0)
-# 		setMesh(mesh)
-		setMesh(createModel(:boat))
+		setMesh
 	end
 end

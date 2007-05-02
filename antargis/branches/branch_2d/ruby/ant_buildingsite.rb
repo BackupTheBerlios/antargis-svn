@@ -13,14 +13,14 @@ class AntBuildingSite<AntRubyEntity
 	def incProgress(steps)
 		@steps=steps
 		o=@progress.to_i
-		@progress+=(1.0/steps)*getMeshCount(:buildingsite) #(@@buildingSiteMeshes.length-1)
+		@progress+=(1.0/steps)*AntModels.getMeshCount(:buildingsite)
 		if o!=@progress.to_i
 			setupMesh
 		end
 		@doneSth=true
 	end
 	def ready
-		@progress>getMeshCount(:buildingsite) #@@buildingSiteMeshes.length-1
+		@progress>AntModels.getMeshCount(:buildingsite) #@@buildingSiteMeshes.length-1
 	end
 
 	# removes building site if nothing was done in some time
@@ -46,7 +46,7 @@ class AntBuildingSite<AntRubyEntity
 
 	private
 	def setupMesh
-		setMesh(createModel(:buildingsite,@progress.to_i))
+		setMesh(@progress.to_i)
 		
 # 		mesh=Mesh.new(getMap.getScene,AntBuildingSite.getBuildingSiteMeshData(@progress),AGVector4.new(0,0,0),-10)
 # 		setMesh(mesh)

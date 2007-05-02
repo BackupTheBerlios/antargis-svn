@@ -263,16 +263,12 @@ class AntHero<AntBoss
 		dir=getDirection
 		case name
 			when "row"
-		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/hero_lp.ant2",0.08,"data/textures/models/hero_lp.png"),AGVector4.new(0,0,0,0),0))
-				#setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
-				#getFirstMesh.setAnimation("sit")
-				mesh=Mesh.new(getMap.getScene,getBoatMeshData,AGVector4.new(0,0,0),0)
-				addMesh(mesh,AGVector3.new(0,0,0))
-
+				setMesh
+				addMesh(createModel(:boat),AGVector3.new(0,0,0))
 			when "dead"
-		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave3.png"),AGVector4.new(0,0,0,0),0))
+				setMesh(:grave_hero)
 			else
-		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/hero_lp.ant2",0.08,"data/textures/models/hero_lp.png"),AGVector4.new(0,0,0,0),0))
+				setMesh
 		end
 		setDirection(dir)
 		setupRing

@@ -3,7 +3,7 @@ require 'ant_models.rb'
 class AntSack<AntAnimal
 	def initialize(p=AGVector2.new(0,0))
 		super
-		setMesh(createModel(:sack))
+		setMesh
 		@enabled=true
 		@storeGood=["food","tool","corn","stone","wood"]
 	end

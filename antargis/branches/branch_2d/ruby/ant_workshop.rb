@@ -41,7 +41,7 @@ class AntWorkshop<AntHouse
 	end
 	# sets up the mesh and adds a smoke-particle engine, which is disabled at first
 	def setupMesh
-		setMesh(createModel(:workshop))
+		setMesh
 		p=AGVector3.new(-1.3,-1.2,2.2)
 		addMesh(@smokeMesh=Smoke.new(getMap.getScene,5),p)
 		checkSmoke

@@ -23,8 +23,7 @@ class AntDecal<AntRubyEntity
 		super(AGVector2.new(0,0))
 		@typeID=(getRand()*2).to_i
 		setProvide("decal",true)
-# 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/floor.ant2",0.8,"data/textures/gravel4.png",false),AGVector4.new(0,0,0,0),0))	
-		setMesh(createModel(:floor_gravel))
+		setMesh(:floor_gravel)
 	end
 	def setTreeType(t)
 		@typeID=t

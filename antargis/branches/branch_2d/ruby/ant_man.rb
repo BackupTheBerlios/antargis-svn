@@ -238,50 +238,27 @@ class AntMan<AntRubyEntity
 		@meshState=name
 		dir=getDirection
 		case name
-			when "wood"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_wood.anim")))
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_wood.anim")))
-			when "stone","flour","corn"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_stones.anim")))
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_stones.anim")))
-			when "walk","sitdown","sit"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
-				getFirstMesh.setAnimation(name)
 			when "fight"
 				if @moving
-					# FIXME: fill in man_e_dagger ...
-					setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
+					setMesh("walk")
 					getFirstMesh.setAnimation("walk")
 				else
-					case getWeapon
-						when "dagger"
-							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_dagger.anim")))
-						when "shield"
-							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_shield.anim")))
-						when "sword"
-							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_sword.anim")))
-						when "bow"
-							setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_bow.anim")))
-					end
-					#end
+					#	raise 1
+					puts "name:#{name}"
+					assert{["dagger","shield","sword","bow"].member?(getWeapon)}
+					setMesh("fight_"+getWeapon)
 				end
-			when "axe"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_axe.anim")))
-				#getSoundManager.playWave("data/sound/tree_chop.wav")
-			when "pick"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_pick.anim")))
-			when "stand"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
-				getFirstMesh.setAnimation("stand")
 			when "dead"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_walk.anim")))
-		 		setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/grave.ant2",0.2,"data/textures/models/grave.png"),AGVector4.new(0,0,0,0),0))
+				setMesh(:grave)
 			when "row"
-				setMesh(AnimMesh.new(getMap.getScene,getAnimMeshData("data/models/man_e_walk.anim")))
-				getFirstMesh.setAnimation("sit")
-				mesh=Mesh.new(getMap.getScene,getBoatMeshData,AGVector4.new(0,0,0),0)
-				addMesh(mesh,AGVector3.new(0,0,0))
+				mesh=setMesh("sit")
+				mesh.setAnimation("sit")
+				addMesh(createModel(:boat),AGVector3.new(0,0,0))
+			when "stand","axe","pick","wood","stone","flour","corn","walk","sitdown","sit"
+				setMesh(name)
+				if ["stand","walk","sitdown","sit"].member?(name)
+					getFirstMesh.setAnimation(name)
+				end
 		end
 		setDirection(dir)
 	end

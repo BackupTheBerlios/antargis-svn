@@ -7,12 +7,14 @@
 class AntImpostorData:public AGRubyObject
 {
   AGTexture mTexture;
+  AGSurface mSurface;
   
  public:
   // create impostor from a scene-node - to make it as simple as possible
-  AntImpostorData(SceneNode *pNode);
+  AntImpostorData(SceneNode *pNode,int width,int height);
 
   AGTexture &getTexture();
+  AGSurface &getSurface();
 
   void mark();
 

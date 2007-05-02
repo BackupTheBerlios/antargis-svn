@@ -33,7 +33,7 @@ class AntTownHall<AntHouse
 	end
 	
 	def setupMesh
-		setMesh(createModel(:townhall))
+		setMesh
 	end
 
 	def resourceChanged

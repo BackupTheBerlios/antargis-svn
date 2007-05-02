@@ -2,7 +2,7 @@ class AntFire<AntRubyEntity
 	def initialize(p=AGVector2.new(0,0))
 		super
 		mp=AGVector3.new(0,0,0)
-		setMesh(createModel(:fire,:on))
+		setMesh(:on)
 # 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire.png"),AGVector4.new(0,0,0),0)
 # 		setMesh(mesh)
 		@smokeMesh=Smoke.new(getMap.getScene,4)
@@ -15,7 +15,7 @@ class AntFire<AntRubyEntity
 		@enabled=true
 	end
 	def disable
-		setMesh(createModel(:fire,:off))
+		setMesh(:off)
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))
 		getMap.getScene.addNode(@smokeMesh) # FIXME: dirty hack - solve this another way!!!
 		addMesh(@smokeMesh,AGVector3.new(0,0,0))

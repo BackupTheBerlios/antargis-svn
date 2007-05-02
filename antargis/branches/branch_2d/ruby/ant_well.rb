@@ -14,7 +14,7 @@ class AntWell<AntRubyEntity
 	end
 	
 	def setupMesh
-		setMesh(createModel(:well))
+		setMesh
 	end
 
 
