@@ -4,6 +4,12 @@
 #include <ag_profiler.h>
 #include <ag_config.h>
 
+bool use3dTextures()
+{
+  return false;
+}
+
+
 //////////////////////////////////////////////////////////////////////////
 // TerrainPiece
 //////////////////////////////////////////////////////////////////////////
@@ -70,10 +76,19 @@ void TerrainPiece::mapChanged()
 
 	n=mMap->getNormal(sx,sy);
 
-	float texHeight=mMap->getTerrainScale(sx,sy);
+	if(use3dTextures())
+	  {
+	    float texHeight=mMap->getTerrainScale(sx,sy);
+	    
+	    tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
+	    m3dArray.addVertex(v,white,n,tp3);
+	  }
+	else
+	  {
+	    tp=AGVector2(-v[0]*texFactor3w,-v[1]*texFactor3w);
+	    m3dArray.addVertex(v,white,n,tp);
+	  }
 
-        tp3=AGVector3(-v[0]*texFactor3w,-v[1]*texFactor3w,texHeight);
-        m3dArray.addVertex(v,white,n,tp3);
 
 	bb.include(v.dim3());
       }
@@ -133,8 +148,13 @@ void TerrainPiece::draw()
   STACKTRACE;
   AGRenderContext c;
   c.setLighting(true);
-  c.setTexture(mTerrain->get3dTexture()->glTexture());
-  mTerrain->get3dTexture()->setFilter(GL_LINEAR,GL_LINEAR);
+  if(use3dTextures())
+    {
+      c.setTexture(mTerrain->get3dTexture()->glTexture());
+      mTerrain->get3dTexture()->setFilter(GL_LINEAR,GL_LINEAR);
+    }
+  else
+    c.setTexture(mTerrain->getGrassTexture()->glTexture());
 
   c.begin();
 
@@ -191,20 +211,63 @@ int getTerrainDownScaleZ()
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// TerrainMesh
+// TerrainBase
 ////////////////////////////////////////////////////////////////////////////
 
 
+TerrainBase::TerrainBase(Scene *pScene,HeightMap &map):
+  mMap(&map),mScene(pScene)
+{
+  map.sigMapChanged.connect(slot(this,&TerrainBase::slotMapChanged));
+  map.sigMapChangedComplete.connect(slot(this,&TerrainBase::slotMapChangedComplete));
+}
+
+TerrainBase::~TerrainBase()
+{
+}
+
+bool TerrainBase::slotMapChanged(AGEvent *e)
+{
+  mapChanged();
+  return false;
+}
+bool TerrainBase::slotMapChangedComplete(AGEvent *e)
+{
+  mapChangedComplete();
+  return false;
+}
+
+
+Scene *TerrainBase::getScene()
+{
+  return mScene;
+}
+
+HeightMap *TerrainBase::getMap()
+{
+  return mMap;
+}
+
+void TerrainBase::mapChanged()
+{
+}
+
+void TerrainBase::mapChangedComplete()
+{
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+// Terrain
+////////////////////////////////////////////////////////////////////////////
+
 Terrain::Terrain(Scene *pScene,HeightMap &map):
+  TerrainBase(pScene,map),
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png",getTerrainDownScale(),getTerrainDownScaleZ())),
-  mGrass(getTextureCache()->get("data/textures/terrain/grass4.png")),
-  mMap(&map),
-  mScene(pScene)
+  mGrass(getTextureCache()->get("data/textures/terrain/grass4.png"))
 {
   init();
 
-  map.sigMapChanged.connect(slot(this,&Terrain::slotMapChanged));
-  map.sigMapChangedComplete.connect(slot(this,&Terrain::slotMapChangedComplete));
 }
 
 void Terrain::init()
@@ -213,11 +276,13 @@ void Terrain::init()
   int tilesize=16;
   size_t tiles=0;
 
-  for(y=0; y<mMap->getH();y+=tilesize)
-    for(x=0;x<mMap->getW();x+=tilesize)
+  HeightMap *map=getMap();
+
+  for(y=0; y<map->getH();y+=tilesize)
+    for(x=0;x<map->getW();x+=tilesize)
       {
-	TerrainPiece *t=new TerrainPiece(getScene(),this,*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0),getTerrainTriangleSize());
-	WaterPiece *w=new WaterPiece(getScene(),*mMap,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
+	TerrainPiece *t=new TerrainPiece(getScene(),this,*map,x,y,tilesize,tilesize,AGVector4(x,y,0,0),getTerrainTriangleSize());
+	WaterPiece *w=new WaterPiece(getScene(),*map,x,y,tilesize,tilesize,AGVector4(x,y,0,0));
 	pieces.push_front(t); // at least it's correct at the beginning
 	water.push_front(w);
 	mNodes.push_back(w);
@@ -225,8 +290,8 @@ void Terrain::init()
 	tiles++;
       }
 
-  w=mMap->getW();
-  h=mMap->getH();
+  w=map->getW();
+  h=map->getH();
 }
 
 void Terrain::mapChangedComplete()
@@ -273,18 +338,3 @@ AGTexture *Terrain::getGrassTexture()
   return &mGrass;
 }
 
-bool Terrain::slotMapChanged(AGEvent *e)
-{
-  mapChanged();
-  return false;
-}
-bool Terrain::slotMapChangedComplete(AGEvent *e)
-{
-  mapChangedComplete();
-  return false;
-}
-
-Scene *Terrain::getScene()
-{
-  return mScene;
-}

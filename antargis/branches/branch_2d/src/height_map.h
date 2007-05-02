@@ -81,6 +81,8 @@ class HeightMap:public AGMessageObject
 
   Scene *getScene();
 
+  /// override this function to include another terrain-mesh-type (like 2d-terrain)
+  virtual void initTerrainMesh();
 
  private:
 

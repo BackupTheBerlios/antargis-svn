@@ -10,6 +10,9 @@ def makeExampleMesh(scene,type)
 	mesh=Mesh2D.new(scene,data,AGVector4.new(0,0,0,1),0)
 end
 
+class MyTerrain<SceneNode
+end
+
 
 class My2dWidget<AGWidget
 	def initialize(p,r)

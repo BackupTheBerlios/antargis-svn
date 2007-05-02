@@ -55,13 +55,40 @@ class TerrainPiece:public SceneNode
   VertexArray m3dArray;
 };
 
+
+class TerrainBase
+{
+ public:
+  TerrainBase(Scene *pScene,HeightMap &map);
+  virtual ~TerrainBase();
+
+  HeightMap *getMap();
+  Scene *getScene();
+
+  /// some parts of the map are changed
+  virtual void mapChanged();
+  /// the whole map is changed - so better take care of this (texture-upload instead of repainting on GPU)
+  virtual void mapChangedComplete();
+
+
+  virtual bool slotMapChanged(AGEvent *e);
+  virtual bool slotMapChangedComplete(AGEvent *e);
+
+
+ private:
+  /// the height-map
+  HeightMap *mMap;
+  
+  Scene *mScene;
+};
+
 /**
    In a game-world there exists exactly one Terrain-object.
    This object holds references to all water- and terrain-pieces, so
    that in case the terrain changes these will be changed,too.
 
 */
-class Terrain
+class Terrain:public TerrainBase
 {
   // Some containers for all the meshes
   typedef std::list<TerrainPiece*> Pieces;
@@ -79,29 +106,19 @@ class Terrain
   /// some (currently not used) grass-texture
   AGTexture mGrass;
 
-  /// the height-map
-  HeightMap *mMap;
-  
-  Scene *mScene;
 
 public:
   Terrain(Scene *pScene,HeightMap &map);
 
   virtual ~Terrain();
 
+  AGTexture *get3dTexture();
+  AGTexture *getGrassTexture();
+
   /// some parts of the map are changed
   virtual void mapChanged();
   /// the whole map is changed - so better take care of this (texture-upload instead of repainting on GPU)
   virtual void mapChangedComplete();
-
-
-  virtual bool slotMapChanged(AGEvent *e);
-  virtual bool slotMapChangedComplete(AGEvent *e);
-
-  AGTexture *get3dTexture();
-  AGTexture *getGrassTexture();
-
-  Scene *getScene();
 
  private:
   void init();

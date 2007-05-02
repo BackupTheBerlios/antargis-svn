@@ -3541,6 +3541,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
  Data_Get_Struct($input,Terrain,b);
  $result=*b;
 }
+%typemap(directorout) TerrainBase {
+ TerrainBase *b;
+ Data_Get_Struct($input,TerrainBase,b);
+ $result=*b;
+}
 %typemap(directorout) TerrainPiece {
  TerrainPiece *b;
  Data_Get_Struct($input,TerrainPiece,b);

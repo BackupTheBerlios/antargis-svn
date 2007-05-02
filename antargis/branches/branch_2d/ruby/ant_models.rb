@@ -236,11 +236,18 @@ module AntModels
 	
 		if @@useImpostors
 			# FIXME:replace by impostor
-			if entityType!=:sack
-				return createModel(:sack)
+			if entityType!=:fish
+				return createModel(:fish)
 			end
 		end
 	
 		return scenenode
 	end
+end
+
+module Libantargis
+class Mesh
+	def setAnimation(name)
+	end
+end
 end

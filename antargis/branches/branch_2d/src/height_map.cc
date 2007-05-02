@@ -24,10 +24,9 @@ HeightMap::HeightMap(Scene *pScene,int w,int h):
   for(int t=FIRSTTERRAIN;t<LASTTERRAIN; t++)
     mTerrainTypes[TerrainType(t)]=genSomeHeights(w+2,h+2,1);
 
-  if(videoInited())
-    mTerrain=new Terrain(mScene,*this);
-  else
-    mTerrain=0;
+  mTerrain=0;
+  initTerrainMesh();
+
 
   setTerrainScale(WATER,0);
   setTerrainScale(SAND,8/32.0);
@@ -43,6 +42,13 @@ HeightMap::~HeightMap()
 {
   delete mTerrain;
 }
+
+void HeightMap::initTerrainMesh()
+{
+  if(videoInited())
+    mTerrain=new Terrain(mScene,*this);
+}
+
 
 void HeightMap::setHeight(float height)
 {
