@@ -64,7 +64,8 @@ class GLApp<AGApplication
 		if @mayclick
 			nodes=tryClick(e.getMousePosition)
 			nodes.each{|n|
-				puts "NODE:"+(getMap.getEntity(n).to_s)
+        puts "NODE: #{n}(#{n.class})"
+        #puts "NODE:"+(getMap.getEntity(n).to_s)
 			}
 			eventClick(nodes,e.getButton)
 		end

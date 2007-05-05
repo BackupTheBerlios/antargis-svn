@@ -29,6 +29,7 @@
 #include "terrain.h"
 #include "quadtree.h"
 #include "anim_mesh.h"
+#include "mesh_2d.h"
 #include "ag_profiler.h"
 
 

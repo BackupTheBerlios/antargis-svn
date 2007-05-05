@@ -1,3 +1,6 @@
+class Terrain2DTile<Mesh2D
+end
+
 class Terrain2D<TerrainBase
 	def initialize(scene,map)
 		super
@@ -31,7 +34,7 @@ class Terrain2D<TerrainBase
 # 				if x+y>5
 # 					t=:grass2
 # 				end
-				mesh=Mesh2D.new(@scene,@meshdata[t],v,0)
+				mesh=Terrain2DTile.new(@scene,@meshdata[t],v,0)
 				@scene.addNode(mesh)
 				mesh.setOrder(TERRAIN_Z)
 			}
