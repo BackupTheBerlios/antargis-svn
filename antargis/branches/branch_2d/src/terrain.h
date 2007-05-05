@@ -27,7 +27,7 @@ class Terrain;
 class TerrainPiece:public SceneNode
 {
  public:
-  TerrainPiece(Scene *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
+  TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
   virtual ~TerrainPiece();
 
   void draw();
@@ -56,14 +56,14 @@ class TerrainPiece:public SceneNode
 };
 
 
-class TerrainBase
+class TerrainBase:public AGRubyObject
 {
  public:
-  TerrainBase(Scene *pScene,HeightMap &map);
+  TerrainBase(SceneBase *pScene,HeightMap &map);
   virtual ~TerrainBase();
 
   HeightMap *getMap();
-  Scene *getScene();
+  SceneBase *getScene();
 
   /// some parts of the map are changed
   virtual void mapChanged();
@@ -79,7 +79,7 @@ class TerrainBase
   /// the height-map
   HeightMap *mMap;
   
-  Scene *mScene;
+  SceneBase *mScene;
 };
 
 /**
@@ -108,7 +108,7 @@ class Terrain:public TerrainBase
 
 
 public:
-  Terrain(Scene *pScene,HeightMap &map);
+  Terrain(SceneBase *pScene,HeightMap &map);
 
   virtual ~Terrain();
 

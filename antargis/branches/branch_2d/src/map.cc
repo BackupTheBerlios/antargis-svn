@@ -44,7 +44,7 @@ AntMap *getMap()
   return myAntargisMap;
 }
 
-AntMap::AntMap(Scene *pScene,int w,int h):
+AntMap::AntMap(SceneBase *pScene,int w,int h):
   HeightMap(pScene,w,h),
   mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h))),
   mHeuristicFunction(0)
@@ -433,6 +433,17 @@ AntEntity *AntMap::getEntity(const AnimMesh &pMesh)
   return 0;
 }
 
+AntEntity *AntMap::getEntity(const Mesh2D &pMesh)
+{
+  for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
+    {
+      AntEntity::Meshes meshes=(*i)->getMesh();
+      if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
+	//      if((*i)->getMesh()==&pMesh)
+	return *i;
+    }
+  return 0;
+}
 
 
 

@@ -3,23 +3,25 @@ class AntFire<AntRubyEntity
 		super
 		mp=AGVector3.new(0,0,0)
 		setMesh(:on)
-# 		mesh=Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire.png"),AGVector4.new(0,0,0),0)
-# 		setMesh(mesh)
-		@smokeMesh=Smoke.new(getMap.getScene,4)
-		addMesh(@smokeMesh,mp)
-		smoke=Smoke.new(getMap.getScene,40)
-		smoke.setFire(true)
-		smoke.setMaxTime(0.8)
-		addMesh(smoke,mp)
+		if MyAntargislib.opengl
+			@smokeMesh=Smoke.new(getMap.getScene,4)
+			addMesh(@smokeMesh,mp)
+			smoke=Smoke.new(getMap.getScene,40)
+			smoke.setFire(true)
+			smoke.setMaxTime(0.8)
+			addMesh(smoke,mp)
+		end
 		setPos(AGVector2.new(p.x,p.y))
 		@enabled=true
 	end
 	def disable
 		setMesh(:off)
-		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))
-		getMap.getScene.addNode(@smokeMesh) # FIXME: dirty hack - solve this another way!!!
-		addMesh(@smokeMesh,AGVector3.new(0,0,0))
-		@smokeMesh.setEnabled(false)
+		if MyAntargislib.opengl
+			#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))
+			getMap.getScene.addNode(@smokeMesh) # FIXME: dirty hack - solve this another way!!!
+			addMesh(@smokeMesh,AGVector3.new(0,0,0))
+			@smokeMesh.setEnabled(false)
+		end
 		@enabled=false
 	end
 	def loadXML(n)

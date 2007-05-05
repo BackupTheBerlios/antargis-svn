@@ -252,7 +252,7 @@ void MiniMap::setMap(AntMap *pMap)
       mapChangedComplete(0);
     }
 }
-void MiniMap::setScene(Scene *pScene)
+void MiniMap::setScene(SceneBase *pScene)
 {
   mScene=pScene;
 }

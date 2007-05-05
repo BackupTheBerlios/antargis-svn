@@ -5,7 +5,7 @@
 #include <ag_widget.h>
 #include <ag_texture.h>
 
-class Scene;
+class SceneBase;
 
 /**
    MiniMap is the small map in lower corner.
@@ -34,7 +34,7 @@ class MiniMap:public AGWidget
   void draw(AGPainter &p);
 
   void setMap(AntMap *pMap);
-  void setScene(Scene *pScene);
+  void setScene(SceneBase *pScene);
 
   virtual bool eventMouseClick(AGEvent *m);
   virtual bool eventMouseButtonDown(AGEvent *m);
@@ -52,7 +52,7 @@ class MiniMap:public AGWidget
 
   float mMapBorder;
   AntMap *mMap;
-  Scene *mScene;
+  SceneBase *mScene;
   AGTexture *mTexture;
   AGSurface mSurface;
 };

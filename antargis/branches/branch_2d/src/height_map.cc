@@ -11,7 +11,7 @@ char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock"
 
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 
-HeightMap::HeightMap(Scene *pScene,int w,int h):
+HeightMap::HeightMap(SceneBase *pScene,int w,int h):
   sigMapChanged(this,"mapChanged"),
   sigMapChangedComplete(this,"mapChangedComplete"),
   mTerrainTypes(LASTTERRAIN+1),
@@ -25,7 +25,7 @@ HeightMap::HeightMap(Scene *pScene,int w,int h):
     mTerrainTypes[TerrainType(t)]=genSomeHeights(w+2,h+2,1);
 
   mTerrain=0;
-  initTerrainMesh();
+  //  initTerrainMesh();
 
 
   setTerrainScale(WATER,0);
@@ -47,6 +47,13 @@ void HeightMap::initTerrainMesh()
 {
   if(videoInited())
     mTerrain=new Terrain(mScene,*this);
+}
+
+void HeightMap::setTerrain(TerrainBase *pTerrain)
+{
+  assert(pTerrain);
+  assert(!mTerrain);
+  mTerrain=pTerrain;
 }
 
 
@@ -273,6 +280,8 @@ void HeightMap::loadXML(const Node &node)
 	}
     }
   
+  checkTerrain();
+  
   // compete change
   if(mTerrain)
     mTerrain->mapChangedComplete();
@@ -294,8 +303,11 @@ void HeightMap::newMap(int w,int h)
   for(int t=FIRSTTERRAIN;t<LASTTERRAIN; t++)
     mTerrainTypes[TerrainType(t)]=genSomeHeights(w+2,h+2,1);
   
+  checkTerrain();
+
   // compete change
-  mTerrain->mapChangedComplete();
+  if(mTerrain)
+    mTerrain->mapChangedComplete();
   //  mTerrain->addToScenes();
   mChanges=0;
   mChangeRect=AGRect2(AGVector2(),AGVector2());
@@ -565,7 +577,7 @@ float HeightMap::getTerrainScale(float x,float y)
   return s1*(1-mean)+s2*mean;
 }
 
-Scene *HeightMap::getScene()
+SceneBase *HeightMap::getScene()
 {
   return mScene;
 }
@@ -605,4 +617,16 @@ AGVector2 HeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
 	break;
     }
   return found;
+}
+
+void HeightMap::mark()
+{
+  if(mTerrain)
+    markObject(mTerrain);
+}
+
+void HeightMap::checkTerrain()
+{
+  if(!mTerrain)
+    initTerrainMesh();
 }

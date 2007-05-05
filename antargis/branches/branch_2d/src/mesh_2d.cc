@@ -17,20 +17,31 @@ Mesh2D::~Mesh2D()
 
 void Mesh2D::draw()
 {
-  //FIXME: drawing
   Scene2D *s=dynamic_cast<Scene2D*>(getScene());
   assert(s);
   AGPainter *painter=s->getPainter();
 
   assert(painter);
+
+  AGRect2 r=getDrawingRect();
+  AGTexture *t=mData->getTexture();
+
+  //  cdebug("r:"<<r);
+  painter->blit(*t,r);
+}
+
+AGRect2 Mesh2D::getDrawingRect()
+{
+  Scene2D *s=dynamic_cast<Scene2D*>(getScene());
+  assert(s);
+
   AGTexture *t=mData->getTexture();
   AGVector2 middle(s->getPosition(getPos()));
   float w=t->width();
   float h=t->height();
   AGRect2 r(middle.getX()-w/2,middle.getY()-h/2,w,h);
 
-  //  cdebug("r:"<<r);
-  painter->blit(*t,r);
+  return r;
 }
 
 AGVector4 Mesh2D::lineHit(const AGLine3 &pLine) const
@@ -59,4 +70,17 @@ Mesh2DData *Mesh2D::getData()
 void Mesh2D::mark()
 {
   markObject(mData);
+}
+
+bool Mesh2D::hit(const AGVector2 &screenPos)
+{
+  AGRect2 dRect=getDrawingRect();
+  if(dRect.contains(screenPos))
+    {
+      // check if texture is !=transparent there
+      AGVector2 p=screenPos-dRect.getV0();
+      return mData->getTexture()->getPixel(p[0],p[1]).a>10; // some threshold here
+      
+    }
+  return false;
 }

@@ -28,6 +28,10 @@
 require 'ant_inventory.rb'
 require 'ant_energy.rb'
 
+if (not MyAntargislib.opengl)
+	require 'two_d_app.rb'
+end
+
 class AntRubyView <GLApp
 	def initialize(w,h)
 		super(w,h)

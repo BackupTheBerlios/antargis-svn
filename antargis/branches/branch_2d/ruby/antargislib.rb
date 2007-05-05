@@ -139,6 +139,8 @@ module MyAntargislib
 					when "gui-test"
 						require 'ruby/tests/gui_tests.rb'
 						@@cursorEnabled=true
+					when "ruby-raise"
+						setRubyRaising(true)
 					when "help","h"
 						STDERR.puts "Possible options:
 	--help         show this help message
@@ -162,6 +164,7 @@ module MyAntargislib
 	--debug-level=x
 
 	--nogl         disable GL-mode (3d-acceleration) - THIS IS NOT YET FULLY SUPPORTED!!
+	--ruby-raise   raise exceptions as ruby-exceptions
 	"
 	
 						exit
@@ -224,6 +227,9 @@ module MyAntargislib
 
 	def MyAntargislib.demoMode
 		$demoMove
+	end
+	def MyAntargislib.opengl
+		@@opengl
 	end
 end
 

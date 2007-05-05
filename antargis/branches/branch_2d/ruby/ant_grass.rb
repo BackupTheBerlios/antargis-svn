@@ -195,7 +195,11 @@ class AntGrass<AntRubyEntity
 	
 	private
 	def setupMesh
-		setMesh(makeGrassMesh(@size))
+		if MyAntargislib.opengl
+			setMesh(makeGrassMesh(@size))
+		else
+			puts "PROBLEM: NO GRASS WITHOUT GL!"
+		end
 	end
 end
 
@@ -219,7 +223,11 @@ class AntBush<AntRubyEntity
 	
 	private
 	def setupMesh
-		setMesh(makeBushMesh(@size*3))
+		if MyAntargislib.opengl
+			setMesh(makeBushMesh(@size*3))
+		else
+			puts "PROBLEM: NO GRASS WITHOUT GL!"
+		end
 	end
 end
 

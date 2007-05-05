@@ -13,7 +13,7 @@ bool use3dTextures()
 //////////////////////////////////////////////////////////////////////////
 // TerrainPiece
 //////////////////////////////////////////////////////////////////////////
-TerrainPiece::TerrainPiece(Scene *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
+TerrainPiece::TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
   SceneNode(pScene,AGVector4(),AGBox3()),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map)
@@ -215,7 +215,7 @@ int getTerrainDownScaleZ()
 ////////////////////////////////////////////////////////////////////////////
 
 
-TerrainBase::TerrainBase(Scene *pScene,HeightMap &map):
+TerrainBase::TerrainBase(SceneBase *pScene,HeightMap &map):
   mMap(&map),mScene(pScene)
 {
   map.sigMapChanged.connect(slot(this,&TerrainBase::slotMapChanged));
@@ -238,7 +238,7 @@ bool TerrainBase::slotMapChangedComplete(AGEvent *e)
 }
 
 
-Scene *TerrainBase::getScene()
+SceneBase *TerrainBase::getScene()
 {
   return mScene;
 }
@@ -261,7 +261,7 @@ void TerrainBase::mapChangedComplete()
 // Terrain
 ////////////////////////////////////////////////////////////////////////////
 
-Terrain::Terrain(Scene *pScene,HeightMap &map):
+Terrain::Terrain(SceneBase *pScene,HeightMap &map):
   TerrainBase(pScene,map),
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png",getTerrainDownScale(),getTerrainDownScaleZ())),
   mGrass(getTextureCache()->get("data/textures/terrain/grass4.png"))

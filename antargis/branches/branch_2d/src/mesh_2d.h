@@ -26,7 +26,12 @@ class Mesh2D:public SceneNode
 
   void mark();
 
+  bool hit(const AGVector2 &screenPos);
+
  public:
+
+  AGRect2 getDrawingRect();
+
   Mesh2DData *mData;
 };
 

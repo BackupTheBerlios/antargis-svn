@@ -35,6 +35,7 @@ class AGSDLScreen:public AGScreen
   virtual AGRect2 getRect() const;
 
   virtual void fillRect(const AGRect2 &pRect,const AGColor &c);
+  virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
   virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
 
   virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);

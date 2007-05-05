@@ -12,7 +12,7 @@ class AntEntity;
 class AntEntityPtr;
 class Scene;
 class Mesh;
-class Terrain;
+class TerrainBase;
 
 enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LASTTERRAIN};
 
@@ -21,7 +21,7 @@ enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LAS
 class HeightMap:public AGMessageObject
 {
  public:
-  HeightMap(Scene *pScene,int w,int h);
+  HeightMap(SceneBase *pScene,int w,int h);
   virtual ~HeightMap();
 
   // get status
@@ -79,12 +79,19 @@ class HeightMap:public AGMessageObject
   AGSignal sigMapChanged;
   AGSignal sigMapChangedComplete;
 
-  Scene *getScene();
+  SceneBase *getScene();
 
   /// override this function to include another terrain-mesh-type (like 2d-terrain)
   virtual void initTerrainMesh();
 
+  void mark();
+
+  /// to be used by initTerrainMesh() - not otherwise !!!
+  void setTerrain(TerrainBase *pTerrain);
+
  private:
+
+  void checkTerrain();
 
   void loadBinary(BinaryIn &s);
   void saveBinary(BinaryOut &s) const;
@@ -104,11 +111,11 @@ class HeightMap:public AGMessageObject
   AGRect2 mChangeRect;
   size_t mChanges;
 
-  Scene *mScene;
+  SceneBase *mScene;
 
  protected:
 
-  Terrain *mTerrain;
+  TerrainBase *mTerrain;
   AGString mName;
 };
 

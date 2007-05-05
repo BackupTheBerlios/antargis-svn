@@ -1,6 +1,8 @@
 #ifndef NO
 
 #include "scene_2d.h"
+#include "mesh_2d.h"
+#include "mesh_sort.h"
 #include <ag_debug.h>
 
 Scene2D::Scene2D(int w,int h):
@@ -17,17 +19,47 @@ void Scene2D::draw()
   // FIXME
   
   NodeList nodeList=getCurrentNodes();
+  Nodes ns;
+  std::copy(nodeList.begin(),nodeList.end(),std::back_inserter(ns));
+
+
+  sort(ns.begin(),ns.end(),SortOrder());
 
   //FIXME:sort!!
 
-  for(NodeList::iterator i=nodeList.begin();i!=nodeList.end();i++)
+  for(Nodes::iterator i=ns.begin();i!=ns.end();i++)
     (*i)->draw();
 }
 
 SceneBase::PickResult Scene2D::pick(float x,float y,float w,float h)
 {
-  throw std::runtime_error("FIXME");
-  return PickResult();
+  PickResult result;
+  NodeList nodeList=getCurrentNodes();
+
+  Nodes ns;
+  std::copy(nodeList.begin(),nodeList.end(),std::back_inserter(ns));
+  sort(ns.begin(),ns.end(),SortOrder());
+
+  for(Nodes::reverse_iterator i=ns.rbegin();i!=ns.rend();i++)
+    {
+      Mesh2D*m=dynamic_cast<Mesh2D*>(*i);
+      if(m)
+	{
+	  if(m->hit(AGVector2(x,y)))
+	    {
+	      PickNode node;
+	      node.pos=m->getPos();
+	      node.node=m;
+	      node.camDist=0;
+
+	      cdebug("hit:"<<node.pos<<"   "<<node.node);
+	      result.push_back(node);
+	    }
+	}
+    }
+  
+
+  return result;
 }
 
 AGVector2 Scene2D::getPosition(const AGVector4 &v) const
@@ -36,9 +68,16 @@ AGVector2 Scene2D::getPosition(const AGVector4 &v) const
   AGVector2 center(width()/2,height()/2);
   AGVector2 cam(mCamera.getPosition().dim2());
 
-  AGVector2 n=v.dim2()+center-cam;
+  AGVector2 n=v.dim2()-cam;
 
   //  cdebug("n:"<<n);
+
+  //  cdebug("n:"<<n);
+  n*=32;
+  //  cdebug("n:"<<n);
+
+  n+=center;
+
 
   return AGVector2(n[0],height()-n[1]);
 

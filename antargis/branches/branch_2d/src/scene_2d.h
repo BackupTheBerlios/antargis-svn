@@ -24,7 +24,7 @@ class Scene2D:public SceneBase
   */
   PickResult pick(float x,float y,float w,float h);
 
-  AntCamera &getCameraObject();
+  //  AntCamera &getCameraObject();
 
   AGVector2 getPosition(const AGVector4 &v) const;
 

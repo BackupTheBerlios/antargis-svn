@@ -37,13 +37,14 @@ template<class T>
 class QuadTree;
 
 class AnimMesh;
+class Mesh2D;
 
 class AntMap:public HeightMap
 {
  public:
   typedef std::list<AntEntity*> EntityList;
 
-  AntMap(Scene *pScene,int w,int h);
+  AntMap(SceneBase *pScene,int w,int h);
   ~AntMap();
   
   virtual void insertEntity(AntEntity *e);
@@ -62,6 +63,7 @@ class AntMap:public HeightMap
 
   AntEntity *getEntity(const Mesh &pMesh);
   AntEntity *getEntity(const AnimMesh &pMesh);
+  AntEntity *getEntity(const Mesh2D &pMesh);
   AntEntity *getEntity(int id) const;
   AntEntity *getByName(const AGString &pName);
 

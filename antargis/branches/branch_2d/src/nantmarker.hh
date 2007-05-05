@@ -188,6 +188,16 @@
 	result->mRubyObject=true;
 }
 %markfunc Pathfinder "general_markfunc"
+%exception TerrainBase::TerrainBase {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc TerrainBase "general_markfunc"
 %exception AGComboBox::AGComboBox {
 	$action
 	result->mRUBY=self;
@@ -308,6 +318,16 @@
 	result->mRubyObject=true;
 }
 %markfunc AntImpostorData "general_markfunc"
+%exception Terrain::Terrain {
+	$action
+	result->mRUBY=self;
+#ifdef GCDEBUG
+     result->mObjName=typeid(*result).name();
+     printf("%lx   %s\n",self,typeid(*result).name());
+#endif
+	result->mRubyObject=true;
+}
+%markfunc Terrain "general_markfunc"
 %exception AGRadioGroup::AGRadioGroup {
 	$action
 	result->mRUBY=self;
@@ -1242,6 +1262,38 @@ else if(dynamic_cast<GLApp*>($1))
  }
  else $input=Qnil;
 }
+%typemap(out) TerrainBase*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<Terrain*>(result))
+  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Terrain,0);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainBase,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) TerrainBase*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+else if(dynamic_cast<Terrain*>($1))
+  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Terrain,0);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainBase,0);
+   }
+ }
+ else $input=Qnil;
+}
 %typemap(out) AGComboBox*{
  if($1)
  {
@@ -1718,6 +1770,34 @@ else if(dynamic_cast<AGWidget*>($1))
      if(false);
    else
      $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostorData,0);
+   }
+ }
+ else $input=Qnil;
+}
+%typemap(out) Terrain*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $result=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Terrain,0);
+   }
+ }
+ else vresult=Qnil;
+}
+%typemap(directorin) Terrain*{
+ if($1)
+ {
+  if($1->mRubyObject)
+    $input=$1->mRUBY;
+  else
+   {
+     if(false);
+   else
+     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Terrain,0);
    }
  }
  else $input=Qnil;

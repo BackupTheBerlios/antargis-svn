@@ -70,6 +70,15 @@ void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 		      (int)(pRect.y()+pRect.h()-1),
 		      c.mapRGB(s->format),c.a);
 }
+
+void AGSDLScreen::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects)
+{
+  for(std::vector<std::pair<AGRect2,AGVector4> >::const_iterator i=pRects.begin();i!=pRects.end();i++)
+    {
+      fillRect(i->first,i->second);
+    }
+}
+
 void AGSDLScreen::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
 {
   SDL_Rect sr=pSrc.sdl();

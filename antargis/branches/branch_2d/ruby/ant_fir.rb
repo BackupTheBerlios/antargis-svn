@@ -85,6 +85,10 @@ class AntBirch<AntBaseTree
 	
 protected
 	def setupMesh
-		setMesh(makeBirchTreeMesh)
+		if MyAntargislib.opengl
+			setMesh(makeBirchTreeMesh)
+		else
+			puts "NO BIRCHES WITHOUT GL ATM"
+		end
 	end
 end
