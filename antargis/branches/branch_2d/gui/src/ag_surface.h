@@ -122,6 +122,8 @@ class AGSurface:public AGPaintTarget
 
   static void setDecryptor(AGDecryptor *pDecryptor);
 
+  AGVector2 shrink2Fit(int alphaThresh=20);
+
  private:
 
   AGSurface(AGInternalSurface *i);

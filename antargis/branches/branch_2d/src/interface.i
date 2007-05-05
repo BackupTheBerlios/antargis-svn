@@ -67,6 +67,7 @@
 %include "std_string.i"
 %include "AGString.i"
 %include "std_vector.i"
+%include "std_pair.i"
 %include "std_map.i"
 
 %template(StringVector) std::vector<std::string>;
@@ -80,6 +81,7 @@
 %template(AGNodePList) std::vector<Node*>;
 %template(AGMatrixVector) std::vector<AGMatrix4>;
 %template(AGVector2List) std::vector<AGVector2>;
+%template(AGPairVec2Surface) std::pair<AGVector2,AGSurface*>;
 
 %include "antargisgui.h"
 

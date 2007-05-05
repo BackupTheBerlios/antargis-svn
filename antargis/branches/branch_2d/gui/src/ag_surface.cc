@@ -547,6 +547,47 @@ void AGSurface::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor
     }
 }
 
+/**
+
+@returns hot-spot int the left upper corner
+
+*/
+AGVector2 AGSurface::shrink2Fit(int alphaThresh)
+{
+  int x0,x1;
+  int y0,y1;
+  int x,y;
+
+  x0=width();
+  y0=height();
+  x1=0;
+  y1=0;
+  for(y=0;y<height();y++)
+    for(x=0;x<width();x++)
+      {
+	if(getPixel(x,y).a>alphaThresh)
+	  {
+	    x0=std::min(x0,x);
+	    y0=std::min(y0,y);
+	    x1=std::max(x1,x);
+	    y1=std::max(y1,y);
+	  }
+      }
+  int nw=std::max(0,x1-x0+1);
+  int nh=std::max(0,y1-y0+1);
+
+  AGSurface n(nw,nh);
+
+  for(x=0;x<nw;x++)
+    for(y=0;y<nh;y++)
+      {
+	n.putPixel(x,y,getPixel(x+x0,y+y0));
+      }
+  (*this)=n;
+  return AGVector2(x0,x1);
+
+}
+
 
 void AGSurface::setDecryptor(AGDecryptor *pDecryptor)
 {
