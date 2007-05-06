@@ -17,7 +17,7 @@ function getScreenies()
 	$screenies=array(
 		array("Additional included display for those without OpenGL-support (07-05-06)",array(
 			new Screenshot("screenies/nogltest_0","Some test screenshots"),
-			new Screenshot("screenies/nogltest_0","Some test screenshots"),
+			new Screenshot("screenies/nogltest_1","Some other test screenshots"),
 		)),
 		array("Version 0.1.9 (06-09-20)",array(
 			new Screenshot("screenies/village","You can build your own village now."),
