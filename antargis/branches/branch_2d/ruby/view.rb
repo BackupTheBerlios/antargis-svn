@@ -27,12 +27,16 @@
 
 require 'ant_inventory.rb'
 require 'ant_energy.rb'
+require 'terrain_2d.rb' # used in 2d-display, but needed anywhere
 
 if (not MyAntargislib.opengl)
 	require 'two_d_app.rb'
+else
+	class AntBaseMapView<GLApp
+	end
 end
 
-class AntRubyView <GLApp
+class AntRubyView <AntBaseMapView
 	def initialize(w,h)
 		super(w,h)
 		@mousepos=AGVector2.new(200,200)

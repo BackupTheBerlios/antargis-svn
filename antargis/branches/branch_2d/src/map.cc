@@ -465,7 +465,6 @@ void AntMap::mark()
   // mark to del, too, otherwise it crashes when tidying before move() is called
   for(i=mToDel.begin();i!=mToDel.end();i++)
     markObject(*i);
-  
 }
 
 

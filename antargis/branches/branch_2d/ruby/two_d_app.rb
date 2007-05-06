@@ -12,7 +12,7 @@ class Scene2D
 	end
 end
 
-class GLApp<AGApplication
+class AntBaseMapView<AGApplication
 	def initialize(w,h)
 		super()
 		@scene=Scene2D.new(w,h)
@@ -34,16 +34,8 @@ class GLApp<AGApplication
 	end
 	def eventFrame(t)
 	end
-# 	def eventMouseMotion(e)
-# 		super
-# 	end
-	def eventKeyDown(e)
-		super
-	end
-# 	def eventMouseButtonDown(e)
-# 		super
-# 	end
-# 	def eventMouseButtonUp(e)
+
+# 	def eventKeyDown(e)
 # 		super
 # 	end
 
