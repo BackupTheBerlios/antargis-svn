@@ -77,6 +77,7 @@ module AntManBase
 	end
 
 	def sitStill
+		checkEat
 		newRestJob(2)
 		setMeshState("sit")
 	end
@@ -117,6 +118,7 @@ module AntManBase
 	end
 
 	def eventDie
+
 		assert{@dead!=true}
 		simDeath
 		#eventDefeated
@@ -228,6 +230,16 @@ module AntManBase
 				getMap.insertEntity(arrow)
 		end
 	end
+	def checkEat
+		puts "CHECKEAT"
+		if getFood<0.5
+			if resource.get("food")>0
+				incFood(1)
+				resource.sub("food",1)
+			end
+		end
+	end
+
 protected
 	def haveBoat
 		resource.get("boat")>=1

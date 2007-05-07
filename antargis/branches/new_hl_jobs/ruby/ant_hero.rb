@@ -341,22 +341,24 @@ class AntHero<AntBoss
 	end
 
 	def eventDie
+		#raise "herodie"
 		puts "ENERGY:#{self} #{self.getEnergy}"
-		super
+		
 		puts "ENERGY:#{self} #{self.getEnergy}"
 		puts "hero #{self} died.(#{getName})"
 		# release all men
 		puts "# men:#{@men.length}"
-		@men.each{|man|
+		@men.clone.each{|man|
 			puts "myMen:#{man}:#{man.getName}"
 			if man.is_a?(AntMan)
 				puts "#{man} #{man.getName}:setBoss(nil)"
-				man.setBoss(nil)
+				man.setNoBoss
 				@men.delete(man)
 			end
 		}
-
+		
 		killJob
+		super
 		if @player
 			@player.remove(self)
 		end

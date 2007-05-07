@@ -31,7 +31,8 @@ class AntFire<AntRubyEntity
 				getMap.removeEntity(self)
 			else
 				@dead=true
-				newRestJob(10)
+				# wait 20 seconds, before we delete this entity - the smoke must fade away at least ;-)
+				newRestJob(20)
 			end
 		end
 	end

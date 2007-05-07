@@ -78,7 +78,11 @@ class AntMan<AntRubyEntity
 		end
 		
 		setFighting(false)
-		
+
+ 		if @boss
+			assert{@boss.getEnergy>0}
+ 		end
+ 		
 		if @boss.nil?
 			if @bossName=="" then
 			
@@ -111,6 +115,8 @@ class AntMan<AntRubyEntity
 		end
 		if @boss
 			assert{@boss.getEnergy>0}
+			assert{getEnergy>0}
+			#assert{canFight}
 			@boss.assignJob(self)
 		end
 	end	

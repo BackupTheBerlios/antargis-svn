@@ -1,3 +1,6 @@
+* walk faster when aggression is higher, but lower mood then, too
+
+
 * List of project-parts and progress bar
 
 * check if reachable before fetching !!! (in house) - or even better use heuristic for estimating distance in getNear(...)

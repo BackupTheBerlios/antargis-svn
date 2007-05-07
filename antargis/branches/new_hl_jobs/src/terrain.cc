@@ -4,9 +4,15 @@
 #include <ag_profiler.h>
 #include <ag_config.h>
 
+static bool gUse3dTextures=true;
+void setUsing3dTextures(bool use3dTextures)
+{
+  gUse3dTextures=use3dTextures;
+}
+
 bool use3dTextures()
 {
-  return false;
+  return gUse3dTextures;
 }
 
 

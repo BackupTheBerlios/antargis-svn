@@ -229,8 +229,15 @@ class AntNewHLFight<AntNewHLJob
 	end
 
 	def eventWon(opponent)
+
+		trace
+		puts hero,hero.getName
+		raise 1
 	end
 	def eventLost(opponent)
+		trace
+		puts hero,hero.getName
+		raise 1
 		hero.setOwner(opponent)
 	end
 

@@ -617,6 +617,9 @@ class HLJob_Fight<HLJob_BaseState
 			return
 		end
 
+		if not man.canFight	
+			man.hlJobMode[:defeated]=true
+		end
 
 		if man.hlJobMode[:defeated]
 			# FIXME:send away
@@ -678,6 +681,7 @@ class HLJob_Fight<HLJob_BaseState
 			machine.eventLost(target)
 			@ready=true
 		end
+			
 		return @ready
 	end
 
