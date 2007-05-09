@@ -1,6 +1,9 @@
 #ifndef MESH_SORT_H
 #define MESH_SORT_H
 
+#include <ag_geometry.h>
+#include "scenenode.h"
+
 /**
    The class is for sorting purpose only. It provides the operator() function, that's needed
    for the STL-sorting algorithms.
@@ -12,13 +15,7 @@ class SortDistance
 public:
   SortDistance(AGVector3 c):cam(c){}
 
-  bool operator()(const SceneNode *n1,const SceneNode *n2)
-  {
-    AGVector3 m1=const_cast<SceneNode*>(n1)->bbox().base+const_cast<SceneNode*>(n1)->bbox().dir*0.5;
-    AGVector3 m2=const_cast<SceneNode*>(n2)->bbox().base+const_cast<SceneNode*>(n2)->bbox().dir*0.5;
-
-    return (m1-cam).length2()<(m2-cam).length2();
-  }
+  bool operator()(const SceneNode *n1,const SceneNode *n2);
 };
 
 /**
@@ -29,10 +26,15 @@ class SortOrder
 public:
   SortOrder(){}
 
-  bool operator()(const SceneNode *n1,const SceneNode *n2)
-  {
-    return n1->getOrder()<n2->getOrder();
-  }
+  bool operator()(const SceneNode *n1,const SceneNode *n2);
+};
+
+class SortYCoord
+{
+ public:
+  SortYCoord(){}
+  
+  bool operator()(const SceneNode *n1,const SceneNode *n2);
 };
 
 

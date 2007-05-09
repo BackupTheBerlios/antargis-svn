@@ -100,6 +100,8 @@ class AnimMeshData:public AGRubyObject
   const AGMatrix4 &getTransform() const;
 
   friend class AnimMesh;
+
+  std::vector<std::string> getAnimations() const;
 };
 
 #endif

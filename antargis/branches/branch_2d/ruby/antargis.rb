@@ -357,7 +357,7 @@ class AntGameApp <AntRubyView
 		ent=nil
 		list.each{|node|
 			mesh=node.node
-			if [Mesh,AnimMesh].member?(mesh.class)
+			if [Mesh,AnimMesh,Mesh2D].member?(mesh.class)
 				ent=getMap.getEntity(mesh)
 				break if ent
 			end

@@ -27,6 +27,7 @@
 #include "ag_profiler.h"
 #include "ag_glpainter.h"
 #include "ag_fbo.h"
+#include "ag_main.h"
 #include <stdexcept>
 
 size_t nextpow2(size_t i)
@@ -165,7 +166,7 @@ AGColor AGTexture::getPixel(int x,int y) const
 
 bool AGTexture::hasTexture() const
 {
-  return mTexture;
+  return mTexture || !glMode();
 }
 void AGTexture::clearTexture()
 {
@@ -184,6 +185,9 @@ AGInternalSurface *AGTexture::sdlTexture()
   if(mSDLTexture==0)
     {
       mSDLTexture=new AGInternalSurface;
+      assert(s);
+      if(!s)
+	s=AGSurface(w,h).surface();
       mSDLTexture->surface=SDL_DisplayFormatAlpha(s->surface);
       s->sdlTexture=mSDLTexture;
     }
@@ -359,6 +363,10 @@ void AGTexture::putPixel(int x,int y,const AGColor &c)
     }
   else
     {
+      sdlTexture();
+      sge_PutPixel(mSDLTexture->surface,x,y,c.mapRGB(mSDLTexture->surface->format));
+
+
       sge_PutPixel(s->surface,x,y,c.mapRGB(s->surface->format));
     }
 }
@@ -373,7 +381,13 @@ void AGTexture::fillRect(const AGRect2 &pRect,const AGColor &c)
       AGGLPainter::fillRect(pRect,c);
     }
   else
-    throw std::runtime_error("implement fillRect for sdl-texture");
+    {
+      for(int x=(int)pRect.x0();x<=pRect.x1();x++)
+	for(int y=(int)pRect.y0();y<=pRect.y1();y++)
+	  putPixel(x,y,c);
+      
+      //      throw std::runtime_error("implement fillRect for sdl-texture");
+    }
   
 }
 
@@ -393,13 +407,41 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
     }
   else
     {
+      SDL_Rect clip;
+
+      //      throw std::runtime_error("my blitting");
       SDL_Rect sr,dr;
       sr=pSrc.sdl();
       dr=pDest.sdl();
+
+      const_cast<AGTexture&>(pSource).sdlTexture();
+      cdebug("sr:"<<sr<<" dr:"<<dr);
+      cdebug(pSource.mSDLTexture);
+      cdebug(pSource.mSDLTexture->surface);
+      cdebug(sdlTexture()->surface);
+
+      AGSurface(pSource.s).save("source.s.png");
+      AGSurface(pSource.mSDLTexture).save("source.tex.png");
+      SDL_GetClipRect(s->surface,&clip);
+      cdebug("clip:"<<clip);
+      cdebug("format:"<<*s->surface->format);
+      AGRect2 my(0,0,64,64);
+      SDL_SetClipRect(s->surface,&my.sdl());
+      SDL_UnlockSurface(s->surface);
+      if(SDL_BlitSurface(pSource.s->surface,&sr,s->surface,&dr))
+	cdebug("ERROR");
+      /*
+      for(int x=0;x<64;x++)
+	for(int y=0;y<64;y++)
+	  putPixel(x,y,pSource.getPixel(x,y));
+      */
+      AGSurface(s).save("dest.s.png");
+
+
       if(pSource.mSDLTexture)
-	SDL_BlitSurface(pSource.mSDLTexture->surface,&sr,mSDLTexture->surface,&dr);
+	SDL_BlitSurface(pSource.mSDLTexture->surface,&sr,sdlTexture()->surface,&dr);
       else
-	SDL_BlitSurface(pSource.s->surface,&sr,mSDLTexture->surface,&dr);
+	SDL_BlitSurface(pSource.s->surface,&sr,sdlTexture()->surface,&dr);
     }
 }
 void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor)

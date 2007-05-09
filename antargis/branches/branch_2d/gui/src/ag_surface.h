@@ -124,9 +124,11 @@ class AGSurface:public AGPaintTarget
 
   AGVector2 shrink2Fit(int alphaThresh=20);
 
- private:
+  // private:
 
   AGSurface(AGInternalSurface *i);
+
+ private:
 
   Uint32 color(const AGColor &c) const;
 
@@ -141,4 +143,5 @@ class AGSurface:public AGPaintTarget
 
 void AGFreeSurface(SDL_Surface *s);
 
+std::ostream &operator<<(std::ostream &o,SDL_PixelFormat *f);
 #endif

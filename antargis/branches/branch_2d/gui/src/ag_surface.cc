@@ -573,8 +573,11 @@ AGVector2 AGSurface::shrink2Fit(int alphaThresh)
 	    y1=std::max(y1,y);
 	  }
       }
-  int nw=std::max(0,x1-x0+1);
-  int nh=std::max(0,y1-y0+1);
+
+  
+
+  int nw=std::max(1,x1-x0+1);
+  int nh=std::max(1,y1-y0+1);
 
   AGSurface n(nw,nh);
 

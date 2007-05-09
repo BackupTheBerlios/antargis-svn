@@ -419,7 +419,8 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 	    
 	  if(sdlScreen)
 	    {
-	      sdlScreen->drawGradient(r,c0,c1,c2,c3);
+	      sdlScreen->drawGradient(d,pc0,pc1,pc2,pc3);
+	      //	      sdlScreen->drawGradient(r,c0,c1,c2,c3);
 	    }
 	  else
 	    {

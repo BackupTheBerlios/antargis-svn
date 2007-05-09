@@ -325,3 +325,13 @@ void AnimMeshData::setupArray()
 
 
 }
+
+std::vector<std::string> AnimMeshData::getAnimations() const
+{
+  std::vector<std::string> l;
+
+  for(std::map<AGString,Animation>::const_iterator i=mAnimations.begin();i!=mAnimations.end();i++)
+    l.push_back(i->first);
+
+  return l;
+}

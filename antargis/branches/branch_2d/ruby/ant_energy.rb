@@ -72,6 +72,7 @@ private
 	def set(n,v)
 		o=@values[n]
 		if ((o-v).abs>0.1) or (o!=v and (v==0 or v==1))
+			puts "queryRedraw in ant_energy"
 			queryRedraw
 			@values[n]=v
 		end

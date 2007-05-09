@@ -23,7 +23,7 @@ void Scene2D::draw()
   std::copy(nodeList.begin(),nodeList.end(),std::back_inserter(ns));
 
 
-  sort(ns.begin(),ns.end(),SortOrder());
+  sort(ns.begin(),ns.end(),SortYCoord());
 
   //FIXME:sort!!
 

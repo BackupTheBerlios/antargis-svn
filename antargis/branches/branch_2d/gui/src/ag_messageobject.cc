@@ -667,7 +667,7 @@ SDL_Event *toSDLEvent(const AGString &p)
 }
 bool eventOk(const SDL_Event &pEvent)
 {
-  dbout(1,"eventOk: check "<<(int)pEvent.type<<"!="<<SDL_NOEVENT<<" ???");
+  //  dbout(1,"eventOk: check "<<(int)pEvent.type<<"!="<<SDL_NOEVENT<<" ???");
   return (int)pEvent.type!=SDL_NOEVENT;
 }
 

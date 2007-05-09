@@ -878,17 +878,37 @@ void AGWidget::prepareDraw()
 
 	  setDrawn();
 
+
+	  {
+	    static int i=0;
+	    i++;
+	    std::ostringstream os;
+	    os<<"widget_"<<i<<".png";
+	    AGSurface ms(mCache->sdlTexture());
+	    ms.save(os.str());
+	    
+	  }
+
+
 	  if(mParent)
 	    {
+	      //CTRACE;
+	      cdebug("parent->queryRedraw::"<<typeid(*this).name()<<":"<<getName());
 	      mParent->queryRedraw();
 	    }
 
 	  assert(checkRedraw()==false);
+	  assert(mCache->hasTexture());
 	}
     }
 }
 void AGWidget::setCaching(bool pEnable)
 {
+  // FIXME: really no caching without GL? 
+  //  if(!glMode())
+  //    return;
+
+
   if(getConfig()->get("widgetTextureCache")=="false")
     return;
   getConfig()->set("widgetTextureCache","true");
@@ -919,6 +939,7 @@ void AGWidget::setDrawn()
 
 void AGWidget::queryRedraw()
 {
+  cdebug(getName()<<"::"<<typeid(*this).name());
   mCacheTouched=true;
   regChange();
 }

@@ -52,12 +52,12 @@ AntImpostorData::AntImpostorData(SceneNode *pNode,int width,int height):mTexture
   //  mTexture.endPaint();
 
   AGSurface s=getScreen().screenshot(false);
-  s.save("impostor.png");
+  //  s.save("impostor.png");
 
   mTexture.endPaint();
 
   AGSurface subs=s.getSubSurface(AGRect2(0,sh-h,w,h));
-  subs.save("impostor3.png");
+  //  subs.save("impostor3.png");
 
   mSurface=subs;
 

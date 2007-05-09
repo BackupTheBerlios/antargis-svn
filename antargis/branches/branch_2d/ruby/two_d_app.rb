@@ -20,10 +20,17 @@ class AntBaseMapView<AGApplication
 	end
 
 	def draw
-		p=AGPainter.new
-		@scene.setPainter(p)
-		@scene.draw
-		@scene.discardPainter
+		@frame||=0
+		@frame+=1
+
+		if (@frame%2)==0
+			p=AGPainter.new
+			@scene.setPainter(p)
+			@scene.draw
+			@scene.discardPainter
+			p=nil
+			GC.start
+		end
 		super
 	end
 	def getScene
@@ -57,7 +64,7 @@ class AntBaseMapView<AGApplication
 			nodes=tryClick(e.getMousePosition)
 			nodes.each{|n|
         puts "NODE: #{n}(#{n.class})"
-        #puts "NODE:"+(getMap.getEntity(n).to_s)
+        puts "NODE:"+(getMap.getEntity(n.node).to_s)
 			}
 			eventClick(nodes,e.getButton)
 		end
@@ -95,7 +102,10 @@ require 'ant_models.rb'
 module AntModels
 	def AntModels.createModel(entityType,subType=nil,angle=nil)
 		trace
-		type=entityType
+		type=entityType.to_s
+		if subType.to_s!=""
+			type+="_"+subType.to_s
+		end
 		t=AGTexture.new(AGSurface.load("data/textures/2d/#{type}.png"))
 		data=Mesh2DData.new(t)
 		mesh=Mesh2D.new(getMap.getScene,data,AGVector4.new(0,0,0,1),0)

@@ -1,6 +1,11 @@
 %module(directors="1") libantargis
 %feature("director");
 %include "typemaps.i"
+%include "std_string.i"
+%include "AGString.i"
+%include "std_vector.i"
+%include "std_pair.i"
+%include "std_map.i"
 
 %include "nantmarker.hh"
 /*
@@ -59,16 +64,10 @@
 
 
 
-
 %{
 #include "scene.h"
 #include "antargisgui.h"
 %}
-%include "std_string.i"
-%include "AGString.i"
-%include "std_vector.i"
-%include "std_pair.i"
-%include "std_map.i"
 
 %template(StringVector) std::vector<std::string>;
 %template(AGStringVector) std::vector<AGString>;

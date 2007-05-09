@@ -29,6 +29,8 @@
 #include "ag_sgeexport.h"
 #include <math.h>
 
+static bool gUseSDLclipping=true;
+
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height);
 
 AGSDLScreen::AGSDLScreen(SDL_Surface *S):s(S)
@@ -223,13 +225,19 @@ size_t AGSDLScreen::getHeight() const
 void AGSDLScreen::clip(const AGRect2 &r)
 {
   //  cdebug(r);
-  SDL_Rect sr=r.sdl();
-  SDL_SetClipRect(s,&sr);
+  if(gUseSDLclipping)
+    {
+      SDL_Rect sr=r.sdl();
+      SDL_SetClipRect(s,&sr);
+    }
 }
 void AGSDLScreen::unclip()
 {
-  SDL_Rect sr=getRect().sdl();
-  SDL_SetClipRect(s,&sr);
+  if(gUseSDLclipping)
+    {
+      SDL_Rect sr=getRect().sdl();
+      SDL_SetClipRect(s,&sr);
+    }
 }
 
 AGSurface AGSDLScreen::screenshot(bool frontBuffer)
