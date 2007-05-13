@@ -33,6 +33,11 @@ void AGScreen::begin()
 void AGScreen::flip()
 {
 }
+void AGScreen::update(const std::list<AGRect2> &rs)
+{
+}
+
+
 size_t AGScreen::getWidth() const
 {
   return 0;

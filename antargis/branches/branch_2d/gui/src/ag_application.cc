@@ -353,6 +353,7 @@ void AGApplication::draw()
   if(!videoInited())
     return;
 
+  bool oldClippingTechnique=false;
 
   STACKTRACE;
   beginRender();
@@ -362,11 +363,18 @@ void AGApplication::draw()
       AGPainter p;
       if(pLastDrawn==mainWidget && !opengl())
 	{
-	  AGRect2 r=mainWidget->getChangeRect();
-	  if(mCursor)
-	    r+=mCursorOld;
-
-	  p.clip(r);
+	  if(oldClippingTechnique)
+	    {
+	      AGRect2 r=mainWidget->getChangeRect();
+	      if(mCursor)
+		r+=mCursorOld;
+	      
+	      p.clip(r);
+	    }
+	  else
+	    {
+	      // FIXME: do some advanced clipping
+	    }
 	}
       mainWidget->drawAll(p);
 
@@ -384,8 +392,19 @@ void AGApplication::draw()
       pLastDrawn=mainWidget;
     }
   drawCursor();
-  getScreen().flip();
+
+  std::list<AGRect2> changeList;
+  if(mainWidget)
+    {
+      changeList=mainWidget->aquireChanges();
+      mainWidget->clearChangeRects();
+    }
+  if(changeList.size())
+    getScreen().update(changeList);
+  else
+    getScreen().flip();
   endRender();
+  cdebug("end render");
 }
 
 /**

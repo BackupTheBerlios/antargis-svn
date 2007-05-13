@@ -186,9 +186,20 @@ AGInternalSurface *AGTexture::sdlTexture()
     {
       mSDLTexture=new AGInternalSurface;
       assert(s);
+      bool sempty=false;
       if(!s)
-	s=AGSurface(w,h).surface();
+	{
+	  s=AGSurface(w,h).surface();
+	  //SDL_SetColorKey(s->surface,0,0);
+	  //	  SDL_SetAlpha(s->surface,0,0);
+	  sempty=true;
+	}
+      
       mSDLTexture->surface=SDL_DisplayFormatAlpha(s->surface);
+      //      if(!sempty)
+      //      	SDL_SetAlpha(mSDLTexture->surface,0,0);
+	//SDL_SetColorKey(mSDLTexture->surface,0,0);
+
       s->sdlTexture=mSDLTexture;
     }
   return mSDLTexture;
@@ -407,41 +418,37 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
     }
   else
     {
-      SDL_Rect clip;
-
-      //      throw std::runtime_error("my blitting");
       SDL_Rect sr,dr;
       sr=pSrc.sdl();
       dr=pDest.sdl();
 
       const_cast<AGTexture&>(pSource).sdlTexture();
-      cdebug("sr:"<<sr<<" dr:"<<dr);
-      cdebug(pSource.mSDLTexture);
-      cdebug(pSource.mSDLTexture->surface);
-      cdebug(sdlTexture()->surface);
 
-      AGSurface(pSource.s).save("source.s.png");
-      AGSurface(pSource.mSDLTexture).save("source.tex.png");
-      SDL_GetClipRect(s->surface,&clip);
-      cdebug("clip:"<<clip);
-      cdebug("format:"<<*s->surface->format);
-      AGRect2 my(0,0,64,64);
-      SDL_SetClipRect(s->surface,&my.sdl());
-      SDL_UnlockSurface(s->surface);
       if(SDL_BlitSurface(pSource.s->surface,&sr,s->surface,&dr))
 	cdebug("ERROR");
-      /*
-      for(int x=0;x<64;x++)
-	for(int y=0;y<64;y++)
-	  putPixel(x,y,pSource.getPixel(x,y));
-      */
-      AGSurface(s).save("dest.s.png");
 
+      Uint32 saved_flags;
+      Uint8  saved_alpha;
+
+      SDL_Surface *sourceSurface;
 
       if(pSource.mSDLTexture)
-	SDL_BlitSurface(pSource.mSDLTexture->surface,&sr,sdlTexture()->surface,&dr);
+	sourceSurface=pSource.mSDLTexture->surface;
       else
-	SDL_BlitSurface(pSource.s->surface,&sr,sdlTexture()->surface,&dr);
+	sourceSurface=pSource.s->surface;
+      
+      // save alpha-settings
+      saved_flags = sourceSurface->flags&(SDL_SRCALPHA|SDL_RLEACCELOK);
+      saved_alpha = sourceSurface->format->alpha;
+      
+      // clear alpha-settings, so that rgba is copied completely
+      SDL_SetAlpha(sourceSurface,0,0);
+	    
+      if(SDL_BlitSurface(sourceSurface,&sr,sdlTexture()->surface,&dr))
+	cdebug("ERROR Blitting");
+
+      // restore settings
+      SDL_SetAlpha(sourceSurface,saved_flags,saved_alpha);
     }
 }
 void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc,const AGColor &pColor)

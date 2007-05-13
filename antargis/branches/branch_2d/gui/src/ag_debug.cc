@@ -36,7 +36,7 @@ void setQuiet()
   quietLog=true;
 }
 
-static bool gRubyRaising=true;
+static bool gRubyRaising=false;
 void agRaise(const std::string &s)
 {
   cdebug("assertion failed:"<<s);

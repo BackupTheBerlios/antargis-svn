@@ -23,14 +23,14 @@ class AntBaseMapView<AGApplication
 		@frame||=0
 		@frame+=1
 
-		if (@frame%2)==0
+		#if (@frame%2)==0
 			p=AGPainter.new
 			@scene.setPainter(p)
 			@scene.draw
 			@scene.discardPainter
 			p=nil
 			GC.start
-		end
+		#end
 		super
 	end
 	def getScene

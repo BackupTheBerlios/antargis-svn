@@ -602,3 +602,50 @@ AGDecryptor *toDecryptor(AGPlugin *p)
 {
   return (AGDecryptor*)(p);
 }
+
+std::ostream &operator<<(std::ostream &o,SDL_PixelFormat *f)
+{
+  o<<"(";
+    //    SDL_Palette *palette;
+  o<<(int)f->BitsPerPixel<<";";
+  o<<(int)f->BytesPerPixel<<";";
+  o<<(int)f->Rloss<<";";
+  o<<(int)f->Gloss<<";";
+  o<<(int)f->Bloss<<";";
+  o<<(int)f->Aloss<<";";
+  o<<(int)f->Rshift<<";";
+  o<<(int)f->Gshift<<";";
+  o<<(int)f->Bshift<<";";
+  o<<(int)f->Ashift<<";";
+  o<<(int)f->Rmask<<";";
+  o<<(int)f->Gmask<<";";
+  o<<(int)f->Bmask<<";";
+  o<<(int)f->Amask<<";";
+  o<<(int)f->colorkey<<";";
+  o<<(int)f->alpha<<")";
+  o<<"\n";
+
+
+  return o;
+}
+
+std::ostream &operator<<(std::ostream &o,SDL_Surface *f)
+{
+  o<<"(";
+  o<<f->flags<<",";
+  o<<f->format<<",";                /* Read-only */
+  o<<f->w<<","<<f->h<<",";
+  o<<f->pitch<<";";                           /* Read-only */
+  o<<f->offset<<";";                             /* Private */
+
+  o<<f->clip_rect<<";";                     /* Read-only */
+
+  o<<f->locked<<";";                          /* Private */
+
+  o<<f->format_version<<";";            /* Private */
+
+        /* Reference count -- used when freeing surface */
+  o<<f->refcount<<")\n";
+
+  return o;
+}

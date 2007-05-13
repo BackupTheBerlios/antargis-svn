@@ -144,4 +144,6 @@ class AGSurface:public AGPaintTarget
 void AGFreeSurface(SDL_Surface *s);
 
 std::ostream &operator<<(std::ostream &o,SDL_PixelFormat *f);
+std::ostream &operator<<(std::ostream &o,SDL_Surface *f);
+
 #endif

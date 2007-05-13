@@ -40,6 +40,7 @@ s.save("test2.png")
 	end
 	def draw(p)
 		#p.
+		p.fillRect(AGRect2.new(0,0,256,256),AGColor.new(0,0xFF,0))
 		p.blit(@t1,AGRect2.new(0,0,64,64))
 		p.blit(@t2,AGRect2.new(64,0,64,64))
 		p.blit(@t3,AGRect2.new(128,0,64,64))

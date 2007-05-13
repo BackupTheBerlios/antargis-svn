@@ -33,6 +33,7 @@ class AGEXPORT AGScreen:public AGPaintTarget
  public:
   virtual void begin(); // call before start drawing
   virtual void flip();
+  virtual void update(const std::list<AGRect2> &rs); // call this instead of flip, if you want
 
   virtual size_t getWidth() const;
   virtual size_t getHeight() const;

@@ -31,6 +31,7 @@ class AGSDLScreen:public AGScreen
   virtual void blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc);
 
   virtual void flip();
+  virtual void update(const std::list<AGRect2> &rs);
 
   virtual AGRect2 getRect() const;
 

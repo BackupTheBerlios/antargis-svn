@@ -878,7 +878,7 @@ void AGWidget::prepareDraw()
 
 	  setDrawn();
 
-
+	  /*
 	  {
 	    static int i=0;
 	    i++;
@@ -888,7 +888,7 @@ void AGWidget::prepareDraw()
 	    ms.save(os.str());
 	    
 	  }
-
+	  */
 
 	  if(mParent)
 	    {
@@ -1032,4 +1032,28 @@ bool AGWidget::isParent(AGWidget *pParent)
   else if(mParent!=0)
     return mParent->isParent(pParent);
   return false;
+}
+
+
+std::list<AGRect2> AGWidget::aquireChanges()
+{
+  std::list<AGRect2> l;
+
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+    {
+      std::list<AGRect2> t=(*i)->aquireChanges();
+      // FIXME: check, if opaque and truncates rectangles
+      std::copy(t.begin(),t.end(),std::back_inserter(l));
+    }
+  std::copy(mMyChanges.begin(),mMyChanges.end(),std::back_inserter(l));
+  
+  return l;
+}
+void AGWidget::pushChangeRect(const AGRect2 &pRect)
+{
+  mMyChanges.push_back(pRect);
+}
+void AGWidget::clearChangeRects()
+{
+  mMyChanges.clear();
 }

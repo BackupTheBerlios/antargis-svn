@@ -40,8 +40,36 @@ AGSDLScreen::AGSDLScreen(SDL_Surface *S):s(S)
 
 void AGSDLScreen::flip()
 {
+  CTRACE;
   SDL_Flip(s);
 }
+
+void AGSDLScreen::update(const std::list<AGRect2> &rs)
+{
+  CTRACE;
+  SDL_Rect *nrs=new SDL_Rect[rs.size()];
+
+  cdebug("RS:"<<rs.size());
+
+  AGRect2 scr=getRect();
+  size_t j=0;
+  for(std::list<AGRect2>::const_iterator i=rs.begin();i!=rs.end();i++,j++)
+    {
+      AGRect2 n=scr.intersect(*i);
+      //      #warning "FIXME: 
+      nrs[j].x=n.x();
+      nrs[j].y=n.y();
+      nrs[j].w=n.w();
+      nrs[j].h=n.h();
+      cdebug(*i);
+      ///      #error FIXME
+    }
+
+  SDL_UpdateRects(s,rs.size(),nrs);
+
+  delete [] nrs;
+}
+
 
 AGRect2 AGSDLScreen::getRect() const
 {
@@ -52,6 +80,13 @@ void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
 {
   if(c.a<0xFF)
     {
+  sge_FilledRectAlpha(s,
+		      (int)pRect.x(),
+		      (int)pRect.y(),
+		      (int)(pRect.x()+pRect.w()-1),
+		      (int)(pRect.y()+pRect.h()-1),
+		      c.mapRGB(s->format),c.a);
+  return;
       for(int x=(int)pRect.x0();x<(int)pRect.x1();x++)
 	for(int y=(int)pRect.y0();y<(int)pRect.y1();y++)
 	  {
@@ -60,6 +95,9 @@ void AGSDLScreen::fillRect(const AGRect2 &pRect,const AGColor &c)
     }
   else
     {
+      SDL_Rect r=pRect.sdl();
+      SDL_FillRect(s,&r,c.mapRGB(s->format));
+      return;
       for(int x=(int)pRect.x0();x<(int)pRect.x1();x++)
 	for(int y=(int)pRect.y0();y<(int)pRect.y1();y++)
 	  putPixel(x,y,c);

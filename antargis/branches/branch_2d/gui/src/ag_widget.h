@@ -199,7 +199,12 @@ class AGWidget:public AGMessageObject
 
   void setTooltip(const AGStringUtf8 &pTooltip);
 
+  std::list<AGRect2> aquireChanges();
+  void pushChangeRect(const AGRect2 &pRect);
+  void clearChangeRects();
+
  private:
+  std::list<AGRect2> mMyChanges;
 
   void regChange();
 
