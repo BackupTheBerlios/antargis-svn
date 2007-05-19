@@ -80,6 +80,7 @@ class AGGLScreen:public AGScreen
   AGSurface screenshot(bool frontBuffer=true);
 
   void flip();
+  virtual void update(const std::list<AGRect2> &rs); // call this instead of flip, if you want
   bool inScreen(const AGRect2 &r) const;
 
   virtual size_t getWidth() const;

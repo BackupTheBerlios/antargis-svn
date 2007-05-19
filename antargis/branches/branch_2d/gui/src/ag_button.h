@@ -89,6 +89,8 @@ class AGButton:public AGWidget
 
   virtual void useTextures();
 
+  bool isOpaque() const;
+
  private:
   AGStringUtf8 mText;
   int mID;

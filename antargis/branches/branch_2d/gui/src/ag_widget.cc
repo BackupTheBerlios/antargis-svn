@@ -32,6 +32,7 @@
 #include "ag_application.h"
 #include "ag_layout.h"
 #include "ag_config.h"
+#include "ag_clip.h"
 
 #define FOCUS_BY_SORT
 
@@ -39,6 +40,19 @@
 using namespace std;
 
 //AGWidget *agNoParent=0;
+
+static bool gNewClippingTechnique=true;
+
+void setNewClippingTechnique(bool f)
+{
+  gNewClippingTechnique=f;
+}
+bool getNewClippingTechnique()
+{
+  return gNewClippingTechnique;
+}
+
+
 
 class MWidgetSet:public std::set<AGWidget*>
 {
@@ -399,7 +413,10 @@ void AGWidget::addChildBack(AGWidget *w)
 
 void AGWidget::regChange()
 {
-  AGRect2 t=getScreenRect().grow(20);
+  AGRect2 t=getScreenRect().grow(5);
+
+  pushChangeRect(t);
+
   if(mChangeRect.width()==0 || mChangeRect.height()==0)
     mChangeRect=t;
   else
@@ -777,6 +794,13 @@ bool AGWidget::visible() const
   return mVisible;
 }
 
+/// override this and return true, if widget is opaque and you want to increase performance
+bool AGWidget::isOpaque() const
+{
+  return false;
+}
+
+
 
 AGWidget *AGWidget::getChild(const AGString &pName)
 {
@@ -1034,6 +1058,27 @@ bool AGWidget::isParent(AGWidget *pParent)
   return false;
 }
 
+void AGWidget::acquireClipping(AGClipping &p)
+{
+  if(!visible())
+    return;
+
+  cdebug("clipping before:"<<p.toString());
+  if(isOpaque())
+    p.exclude(getScreenRect());
+  
+  for(std::list<AGRect2>::iterator i=mMyChanges.begin();i!=mMyChanges.end();i++)
+    p.include(*i+getScreenPosition());
+
+  cdebug("clipping in:"<<p.toString());
+  
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+    (*i)->acquireClipping(p);
+
+  cdebug("clipping after:"<<p.toString());
+  return;
+}
+
 
 std::list<AGRect2> AGWidget::aquireChanges()
 {
@@ -1051,9 +1096,13 @@ std::list<AGRect2> AGWidget::aquireChanges()
 }
 void AGWidget::pushChangeRect(const AGRect2 &pRect)
 {
+  cdebug("push:"<<pRect);
   mMyChanges.push_back(pRect);
 }
 void AGWidget::clearChangeRects()
 {
+  cdebug("clearing - size was:"<<mMyChanges.size());
   mMyChanges.clear();
+  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+    (*i)->clearChangeRects();
 }

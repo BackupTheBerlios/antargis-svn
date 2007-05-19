@@ -29,6 +29,7 @@
 #include <ag_xml.h>
 #include <ag_debug.h>
 #include <ag_stringstream.h>
+#include <ag_gauss.h>
 
 #include <ruby.h>
 
@@ -199,6 +200,11 @@ void AGVector2::loadXML(const Node &node)
 {
   v[0]=node.get("x").toFloat();
   v[1]=node.get("y").toFloat();
+}
+
+AGVector2 AGVector2::operator-() const
+{
+  return AGVector2(-v[0],-v[1]);
 }
 
 
@@ -646,6 +652,19 @@ AGMatrix3::AGMatrix3(const AGVector3 &n)
   a[2][1]=n[1];
 }
 
+AGMatrix3::AGMatrix3(float x,float y)
+{
+  a[0][0]=x;
+  a[1][1]=y;
+  a[2][2]=1.0f;
+  a[0][1]=a[0][2]=
+    a[1][0]=a[1][2]=
+    a[2][0]=a[2][1]=0.0f;
+  a[2][0]=0.0f;
+  a[2][1]=0.0f;
+  
+}
+
 AGMatrix3 AGMatrix3::transposed() const
 {
   AGMatrix3 a;
@@ -656,69 +675,6 @@ AGMatrix3 AGMatrix3::transposed() const
 }
 
 
-template<class AGMatrix3>
-void gauss(AGMatrix3 &a,AGMatrix3 &b,int size)
-{
-  // lower-left triangle
-  for(int c=0;c<size-1;c++) // cols
-    {
-      for(int r=c+1;r<size;r++) // rows
-	{
-	  if(fabs(b.get(c,r))>0.0001)
-	    {
-	      float f=-b.get(c,r-1)/b.get(c,r);
-	      //	      cdebug("f:"<<f);
-	      for(int i=0;i<size;i++)
-		{
-		  // modify row
-		  a.set(i,r,a.get(i,r-1)+a.get(i,r)*f);
-		  //		  if(i==0)
-		  //		    cdebug(b.get(c,r-1)<<"    "<<b.get(c,r));
-		  b.set(i,r,b.get(i,r-1)+b.get(i,r)*f);
-		}
-	    }
-	}
-    }
-  //  cdebug("A:\n"<<a.toString());
-  //  cdebug("B:\n"<<b.toString());
-
-  // upper-right triangle
-  for(int c=size-1;c>0;c--) // cols
-    {
-      for(int r=0;r<c;r++) // rows
-	{
-	  if(fabs(b.get(c,r))>0.0001)
-	    {
-	      float f=-b.get(c,r+1)/b.get(c,r);
-	      for(int i=0;i<size;i++)
-		{
-		  // modify row
-		  a.set(i,r,a.get(i,r+1)+a.get(i,r)*f);
-		  b.set(i,r,b.get(i,r+1)+b.get(i,r)*f);
-		}
-	    }
-	}
-    }
-  //  cdebug("A:\n"<<a.toString());
-  //  cdebug("B:\n"<<b.toString());
-
-  // norming
-
-  for(int r=0;r<size;r++)
-    {
-      float v=b.get(r,r);
-      if(v!=0)
-      for(int c=0;c<size;c++)
-	{
-	  a.set(c,r,a.get(c,r)/v);
-	  b.set(c,r,b.get(c,r)/v);
-	}
-    }
-  //  cdebug("A:\n"<<a.toString());
-  //  cdebug("B:\n"<<b.toString());
-
-}
-
 AGMatrix3 AGMatrix3::inverted() const
 {
   // gauss-alg.
@@ -727,6 +683,34 @@ AGMatrix3 AGMatrix3::inverted() const
 
   gauss(a,b,3);
   return a;
+}
+
+void AGMatrix3::swapRows(size_t a,size_t b)
+{
+  if(a==b)
+    return;
+  assert(a<3);
+  assert(b<3);
+  for(size_t x=0;x<3;x++)
+    {
+      float t=get(x,a);
+      set(x,a,get(x,b));
+      set(x,b,t);
+    }
+}
+
+void AGMatrix3::swapCols(size_t a,size_t b)
+{
+  if(a==b)
+    return;
+  assert(a<3);
+  assert(b<3);
+  for(size_t y=0;y<3;y++)
+    {
+      float t=get(a,y);
+      set(a,y,get(b,y));
+      set(b,y,t);
+    }
 }
 
 
@@ -1267,6 +1251,57 @@ AGRect2 AGRect2::intersect(const AGRect2 &r) const
 		 AGVector2(mx1,my1));
 }
 
+std::vector<AGRect2> AGRect2::difference(const AGRect2 &r) const
+{
+  std::vector<AGRect2> l;
+  for(int i=0;i<3;i++)
+    for(int j=0;j<3;j++)
+      {
+	
+	float nx,ny,nw,nh;
+	
+	switch(i)
+	  {
+	  case 0:
+	    nx=x0();
+	    nw=r.x0()-x0();
+	    break;
+	  case 1:
+	    nx=r.x0();
+	    nw=r.x1()-r.x0();
+	    break;
+	  case 2:
+	    nx=r.x1();
+	    nw=x1()-r.x1();
+	    break;
+	  };
+	switch(j)
+	  {
+	  case 0:
+	    ny=y0();
+	    nh=r.y0()-y0();
+	    break;
+	  case 1:
+	    ny=r.y0();
+	    nh=r.y1()-r.y0();
+	    break;
+	  case 2:
+	    ny=r.y1();
+	    nh=y1()-r.y1();
+	    break;
+	  };
+	if(nw>0 && nh>0)
+	  {
+	    AGRect2 n=intersect(AGRect2(nx,ny,nw,nh));
+	    if(n.w()>0 && n.h()>0)
+	      if(!r.contains(n))
+		l.push_back(n);
+	  }
+      }
+  return l;
+}
+
+
 
 AGVector2 AGRect2::operator[](size_t i) const
 {
@@ -1361,6 +1396,11 @@ float AGRect2::y1() const
 AGRect2 AGRect2::origin() const
 {
   return AGRect2(0,0,w(),h());
+}
+
+float AGRect2::content() const
+{
+  return (v1[0]-v0[0])*(v1[1]-v0[1]);
 }
 
 
@@ -2088,6 +2128,34 @@ AGMatrix4 AGMatrix4::inverted() const
 
   gauss(a,b,4);
   return a;
+}
+
+void AGMatrix4::swapRows(size_t a,size_t b)
+{
+  if(a==b)
+    return;
+  assert(a<4);
+  assert(b<4);
+  for(size_t x=0;x<4;x++)
+    {
+      float t=get(x,a);
+      set(x,a,get(x,b));
+      set(x,b,t);
+    }
+}
+
+void AGMatrix4::swapCols(size_t a,size_t b)
+{
+  if(a==b)
+    return;
+  assert(a<4);
+  assert(b<4);
+  for(size_t y=0;y<4;y++)
+    {
+      float t=get(a,y);
+      set(a,y,get(b,y));
+      set(b,y,t);
+    }
 }
 
 

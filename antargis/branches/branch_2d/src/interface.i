@@ -6,6 +6,7 @@
 %include "std_vector.i"
 %include "std_pair.i"
 %include "std_map.i"
+//%include "std_list.i"
 
 %include "nantmarker.hh"
 /*
@@ -81,6 +82,8 @@
 %template(AGMatrixVector) std::vector<AGMatrix4>;
 %template(AGVector2List) std::vector<AGVector2>;
 %template(AGPairVec2Surface) std::pair<AGVector2,AGSurface*>;
+%template(AGRect2Vector) std::vector<AGRect2>;
+//%template(AGRect2List) std::list<AGRect2>;
 
 %include "antargisgui.h"
 

@@ -27,6 +27,7 @@
 #include "ag_mixer.h"
 #include "ag_texturecache.h"
 #include "ag_profiler.h"
+#include "ag_clip_painttarget.h"
 
 #include <ruby.h>
 
@@ -354,13 +355,16 @@ void AGApplication::draw()
     return;
 
   bool oldClippingTechnique=false;
+  AGClipping clip;
 
   STACKTRACE;
   beginRender();
   if(mainWidget)
     {
       getScreen().begin();
-      AGPainter p;
+      AGClipPaintTarget paintTarget(&getScreen());
+      AGPainter p(paintTarget);
+      clip.exclude(mainWidget->getScreenRect());
       if(pLastDrawn==mainWidget && !opengl())
 	{
 	  if(oldClippingTechnique)
@@ -374,8 +378,12 @@ void AGApplication::draw()
 	  else
 	    {
 	      // FIXME: do some advanced clipping
+	      mainWidget->acquireClipping(clip);
 	    }
 	}
+
+      cdebug("CLIP:"<<clip.toString());
+      paintTarget.clip(clip);
       mainWidget->drawAll(p);
 
       if(mTooltip)
@@ -391,6 +399,8 @@ void AGApplication::draw()
 
       pLastDrawn=mainWidget;
     }
+  else
+    cdebug("no mainwidget");
   drawCursor();
 
   std::list<AGRect2> changeList;
@@ -399,10 +409,16 @@ void AGApplication::draw()
       changeList=mainWidget->aquireChanges();
       mainWidget->clearChangeRects();
     }
-  if(changeList.size())
-    getScreen().update(changeList);
-  else
+  if(opengl())// || true)
     getScreen().flip();
+  else
+    {
+      std::vector<AGRect2> changeV=clip.clip(mainWidget->getScreenRect());
+      changeList.clear();
+      std::copy(changeV.begin(),changeV.end(),std::back_inserter(changeList));
+      getScreen().update(changeList);
+    }
+
   endRender();
   cdebug("end render");
 }

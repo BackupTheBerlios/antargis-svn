@@ -48,6 +48,20 @@ AGProjection::AGProjection(const AGRect2 &pClip):clip(pClip)
   a.set(2,2,0);
 }
 
+AGProjection::AGProjection(const AGClipping &pClip):advancedClipping(pClip)
+{
+  a.set(0,0,1);
+  a.set(0,1,0);
+  a.set(0,2,0);
+  a.set(1,0,0);
+  a.set(1,1,1);
+  a.set(1,2,0);
+  a.set(2,0,0);
+  a.set(2,1,0);
+  a.set(2,2,0);
+}
+
+
 AGVector2 AGProjection::project(const AGVector2 &p) const
 {
   AGVector2 r=(a*AGVector3(p[0],p[1],1)).dim2();
@@ -356,17 +370,6 @@ void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2
   STACKTRACE;
   float x,y;
 
-  /*
-  for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
-    for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
-      {
-	float w=std::min(pSrc.w(),pDest.x1()-x);
-	float h=std::min(pSrc.h(),pDest.y1()-y);
-	blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
-      }
-  */
-
-  
   std::vector<std::pair<AGRect2,AGRect2> > rects;
   for(y=pDest.y0();y<pDest.y1();y+=pSrc.h())
     for(x=pDest.x0();x<pDest.x1();x+=pSrc.w())
@@ -377,8 +380,6 @@ void AGPainter::tile(const AGSurface &pSource,const AGRect2 &pDest,const AGRect2
 	rects.push_back(std::make_pair(AGRect2(pSrc.x0(),pSrc.y0(),w,h),AGRect2(x,y,w,h)));
       }
   mTarget->blit(pSource,rects,AGColor(0xff,0xff,0xff,0xff));
-  
-
 }
 
 AGColor calcColor(AGVector2 p,const AGColor &pc0,const AGColor &pc1,const AGColor &pc2,const AGColor &pc3)

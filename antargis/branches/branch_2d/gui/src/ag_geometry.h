@@ -85,6 +85,7 @@ class AGEXPORT AGVector2
 
   AGAngle getAngle() const;
 
+  AGVector2 operator-() const;
   AGVector2 operator-(const AGVector2 &p) const;
   AGVector2 operator+(const AGVector2 &p) const;
   AGVector2 &operator+=(const AGVector2 &p);
@@ -227,8 +228,9 @@ class AGMatrix3
   };
 
   AGMatrix3();
-  AGMatrix3(const AGAngle &a);
-  AGMatrix3(const AGVector3 &a);
+  AGMatrix3(const AGAngle &a); // rotate
+  AGMatrix3(const AGVector3 &a); // transpose
+  AGMatrix3(float x,float y); // scale
   void set(size_t x,size_t y,float f);
   float get(size_t x,size_t y) const;
   float &get(size_t x,size_t y);
@@ -246,6 +248,10 @@ class AGMatrix3
 
   Row operator[](size_t y);
   const Row operator[](size_t y) const;
+
+  void swapRows(size_t a,size_t b);
+  void swapCols(size_t a,size_t b);
+  
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -461,6 +467,9 @@ class AGEXPORT AGRect2
 
   AGRect2 intersect(const AGRect2 &r) const;
 
+  //result=this-r
+  std::vector<AGRect2> difference(const AGRect2 &r) const;
+
   SDL_Rect sdl() const;
 
   bool operator==(const AGRect2 &r) const;
@@ -469,6 +478,8 @@ class AGEXPORT AGRect2
   void check() const;
 
   AGRect2 alignGrid() const; // align to integer grid
+
+  float content() const;
 
 #ifdef SWIG
   %rename(to_s) toString() const;
@@ -612,6 +623,9 @@ class AGMatrix4
 
   MRow operator[](size_t y);
   //  const Row operator[](size_t y) const;
+
+  void swapRows(size_t a,size_t b);
+  void swapCols(size_t a,size_t b);
 
 #ifdef SWIG
   %rename(to_s) toString() const;

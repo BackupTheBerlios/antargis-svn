@@ -798,7 +798,7 @@ std::vector<AGVector2> Pathfinder::computePath(const AGVector2 &pFrom, const AGV
 
   size_t tries=0;
 
-  while(tries<50000 && pathSet.size()>0)
+  while(tries<1000 && pathSet.size()>0)
     {
       Path path=*pathSet.begin();
 

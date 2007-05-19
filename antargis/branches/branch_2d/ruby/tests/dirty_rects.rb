@@ -14,7 +14,7 @@ class MyWidget<AGWidget
 	def prepareDraw
 	end
 	def draw(p)
-		p.fillRect(AGRect2.new(0,0,300,300),AGColor.new(0,0,0))
+		#p.fillRect(AGRect2.new(0,0,300,300),AGColor.new(0,0,0))
 		p.fillRect(AGRect2.new(@x,@y,10,10),AGColor.new(0xFF,0,0))
 	end
 	def eventFrame(t)

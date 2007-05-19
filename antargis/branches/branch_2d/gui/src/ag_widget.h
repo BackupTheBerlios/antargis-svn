@@ -30,6 +30,7 @@
 
 class AGTooltip;
 class AGLayout;
+class AGClipping;
 
 /** 
     \defgroup widgets Widgets
@@ -127,6 +128,7 @@ class AGWidget:public AGMessageObject
 
   bool visible() const;
   void setVisible(bool v);
+  bool isOpaque() const;
 
   virtual void setWidth(float w);
   virtual void setHeight(float w);
@@ -199,6 +201,8 @@ class AGWidget:public AGMessageObject
 
   void setTooltip(const AGStringUtf8 &pTooltip);
 
+  void acquireClipping(AGClipping &p);
+
   std::list<AGRect2> aquireChanges();
   void pushChangeRect(const AGRect2 &pRect);
   void clearChangeRects();
@@ -250,6 +254,8 @@ class AGWidget:public AGMessageObject
 
 AGWidget *toAGWidget(AGMessageObject *o);
 
-//extern AGWidget *agNoParent;
+void setNewClippingTechnique(bool f);
+bool getNewClippingTechnique();
+
 
 #endif

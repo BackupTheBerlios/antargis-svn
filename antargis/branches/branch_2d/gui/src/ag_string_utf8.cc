@@ -305,6 +305,21 @@ AGStringUtf8 AGStringUtf8::operator+(const AGStringUtf8 &p) const
   return n;
 }
 
+AGStringUtf8 AGStringUtf8::operator+(const AGString &s) const
+{
+  AGStringUtf8 n(*this);
+  n+=AGStringUtf8(s);
+  return n;
+}
+
+AGStringUtf8 AGStringUtf8::operator+(const char *s) const
+{
+  AGStringUtf8 n(*this);
+  n+=AGStringUtf8(s);
+  return n;
+}
+
+
 bool AGStringUtf8::operator==(const AGStringUtf8 &p) const
 {
   return s==p.s;

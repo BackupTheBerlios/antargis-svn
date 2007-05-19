@@ -26,6 +26,7 @@
 #include <ag_geometry.h>
 #include <ag_font.h>
 #include <ag_painttarget.h>
+#include <ag_clip.h>
 #include <ag_base.h>
 
 
@@ -38,8 +39,10 @@ struct AGProjection
 {
   AGMatrix3 a;
   AGRect2 clip;
+  AGClipping advancedClipping;
 
   AGProjection(const AGRect2 &pClip);
+  AGProjection(const AGClipping &pClip);
 
   AGVector2 project(const AGVector2 &p) const;
   bool pointOk(const AGVector2 &p) const;
@@ -110,6 +113,9 @@ class AGEXPORT AGPainter
   void translate(const AGVector2 &v);
   void scale(const AGVector2 &v);
   void clip(const AGRect2 &r);
+
+  void clip(const AGClipping &clip);
+
   void transform(const AGRect2 &r);
 
   AGVector2 project(const AGVector2 &p) const;

@@ -383,3 +383,8 @@ void AGButton::useTextures()
   for(std::map<State,AGBorder>::iterator i=mBorder.begin();i!=mBorder.end();++i)
     i->second.useTextures();
 }
+
+bool AGButton::isOpaque() const
+{
+  return true;
+}

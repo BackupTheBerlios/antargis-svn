@@ -2981,6 +2981,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
  Data_Get_Struct($input,AGCircle2,b);
  $result=*b;
 }
+%typemap(directorout) AGClipping {
+ AGClipping *b;
+ Data_Get_Struct($input,AGClipping,b);
+ $result=*b;
+}
 %typemap(directorout) AGCollisionData {
  AGCollisionData *b;
  Data_Get_Struct($input,AGCollisionData,b);
@@ -3151,6 +3156,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
  Data_Get_Struct($input,AGMatrix4,b);
  $result=*b;
 }
+%typemap(directorout) AGMatrixN {
+ AGMatrixN *b;
+ Data_Get_Struct($input,AGMatrixN,b);
+ $result=*b;
+}
 %typemap(directorout) AGMenu {
  AGMenu *b;
  Data_Get_Struct($input,AGMenu,b);
@@ -3184,6 +3194,11 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) AGPlugin {
  AGPlugin *b;
  Data_Get_Struct($input,AGPlugin,b);
+ $result=*b;
+}
+%typemap(directorout) AGProjection2D {
+ AGProjection2D *b;
+ Data_Get_Struct($input,AGProjection2D,b);
  $result=*b;
 }
 %typemap(directorout) AGRadio {

@@ -7,6 +7,7 @@
 #include <ag_base.h>
 
 class AGStringUtf8;
+class AGString;
 
 class AGCharUtf8
 {
@@ -106,6 +107,8 @@ class AGEXPORT AGStringUtf8
   AGStringUtf8 replace(const AGStringUtf8 &what, const AGStringUtf8 &by) const;
   
   AGStringUtf8 operator+(const AGStringUtf8 &s) const;
+  AGStringUtf8 operator+(const AGString &s) const;
+  AGStringUtf8 operator+(const char *s) const;
 
 
   bool operator==(const AGStringUtf8 &p) const;

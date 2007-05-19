@@ -52,7 +52,7 @@ class AntLocalizer<AGLocalizer
 		read
 	end
 	def process(x)
-		x=x.gsub("\n","\\n")
+		x=x.to_s.gsub("\n","\\n")
 		r=myprocess(x)
 		#puts "TRANSLATE: #{x} #{r.class}"
 		return r

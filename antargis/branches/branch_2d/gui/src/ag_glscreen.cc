@@ -251,6 +251,11 @@ void AGGLScreen::flip()
 
   initGUIView(w,h);
 }
+void AGGLScreen::update(const std::list<AGRect2> &rs)
+{
+  flip();
+}
+
 
 size_t next2pow(size_t i)
 {
