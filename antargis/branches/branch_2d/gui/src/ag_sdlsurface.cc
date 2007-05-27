@@ -29,6 +29,8 @@
 #include "ag_sgeexport.h"
 #include <math.h>
 
+#include "ag_sdlpainter.h"
+
 static bool gUseSDLclipping=true;
 
 SDL_Surface *AGCreate32BitSurface(size_t width,size_t height);
@@ -124,14 +126,7 @@ void AGSDLScreen::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRec
   SDL_Rect sr=pSrc.sdl();
   SDL_Rect dr=pDest.sdl();
 
-  //  cdebug(pDest<<"  "<<pSrc);
-
   SDL_Surface *source=const_cast<AGTexture&>(pSource).sdlTexture()->surface;
-
-  //  cdebug(source->w<<"  "<<source->h);
-
-  //  cdebug(sr.x<<" "<<sr.y<<" "<<sr.w<<" "<<sr.h);
-  //  cdebug(dr.x<<" "<<dr.y<<" "<<dr.w<<" "<<dr.h);
 
   SDL_BlitSurface(source,&sr,s,&dr);
 }
@@ -171,84 +166,17 @@ void AGSDLScreen::putPixel(int x,int y,const AGColor &c)
 
 void AGSDLScreen::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
-  AGDrawGradientAlpha(s,rect,ul,ur,dl,dr);
+  AGSDLPainter::drawGradientAlpha(s,rect,ul,ur,dl,dr);
 
 }
 void AGSDLScreen::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
-  AGDrawGradient(s,rect,ul,ur,dl,dr);
+  AGSDLPainter::drawGradient(s,rect,ul,ur,dl,dr);
 }
 
 void AGSDLScreen::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor &c)
 {
-  AGVector2 p0,p1;
-
-  p0=pp0;
-  p1=pp1;
-
-  float dx=p1[0]-p0[0];
-  float dy=p1[1]-p0[1];
-
-  if(fabs(dx)>fabs(dy))
-    {
-      if(dx<0)
-	{
-	  p0=pp1;
-	  p1=pp0;
-	}
-
-      dx=p1[0]-p0[0];
-      dy=p1[1]-p0[1];
-
-      float y=p0[1];
-      float e=0;
-      float de=((float)dy)/dx;
-      for(float x=p0[0];x<=p1[0];x++)
-	{
-	  sge_PutPixel(s,int(x),int(y),c.mapRGB(s->format));
-	  e+=de;
-	  if(e>0.5)
-	    {
-	      e-=1.0;
-	      y++;
-	    }
-	  else if(e<-0.5)
-	    {
-	      e+=1.0;
-	      y--;
-	    }
-	}
-    }
-  else
-    {
-      if(dy<0)
-	{
-	  p0=pp1;
-	  p1=pp0;
-	}
-
-      dx=p1[0]-p0[0];
-      dy=p1[1]-p0[1];
-
-      float x=p0[0];
-      float e=0;
-      float de=((float)dx)/dy;
-      for(float y=p0[1];y<=p1[1];y++)
-	{
-	  sge_PutPixel(s,int(x),int(y),c.mapRGB(s->format));
-	  e+=de;
-	  if(e>0.5)
-	    {
-	      e-=1.0;
-	      x++;
-	    }
-	  else if(e<-0.5)
-	    {
-	      e+=1.0;
-	      x--;
-	    }
-	}
-    }
+  AGSDLPainter::drawLine(s,pp0,pp1,c);
 }
 
 size_t AGSDLScreen::getWidth() const
@@ -284,10 +212,3 @@ AGSurface AGSDLScreen::screenshot(bool frontBuffer)
   surface->surface=s;
   return AGSurface(surface).copy();
 }
-/*
-extern "C"
-BOOL APIENTRY DllMain (HINSTANCE hInst, DWORD reason, LPVOID reserved)
-{
-	return true;
-}
-*/

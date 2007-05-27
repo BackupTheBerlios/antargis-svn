@@ -343,6 +343,7 @@ void AGApplication::redraw()
 
 void AGApplication::draw()
 {
+  CTRACE;
   if(delCue.size()>0)
     {
       for(std::list<AGWidget*>::iterator i=delCue.begin();i!=delCue.end();i++)
@@ -359,11 +360,20 @@ void AGApplication::draw()
 
   STACKTRACE;
   beginRender();
+
+  cdebug("mainWidget:"<<mainWidget);
   if(mainWidget)
     {
       getScreen().begin();
+      
+      AGPainter *p;
       AGClipPaintTarget paintTarget(&getScreen());
-      AGPainter p(paintTarget);
+
+      if(opengl())
+	p=new AGPainter(getScreen());
+      else
+	p=new AGPainter(paintTarget);
+
       clip.exclude(mainWidget->getScreenRect());
       if(pLastDrawn==mainWidget && !opengl())
 	{
@@ -373,7 +383,7 @@ void AGApplication::draw()
 	      if(mCursor)
 		r+=mCursorOld;
 	      
-	      p.clip(r);
+	      p->clip(r);
 	    }
 	  else
 	    {
@@ -381,10 +391,14 @@ void AGApplication::draw()
 	      mainWidget->acquireClipping(clip);
 	    }
 	}
+      else
+	{
+	  clip.include(mainWidget->getScreenRect());
+	}
 
       cdebug("CLIP:"<<clip.toString());
       paintTarget.clip(clip);
-      mainWidget->drawAll(p);
+      mainWidget->drawAll(*p);
 
       if(mTooltip)
 	{
@@ -398,6 +412,8 @@ void AGApplication::draw()
 	}
 
       pLastDrawn=mainWidget;
+
+      delete p;
     }
   else
     cdebug("no mainwidget");

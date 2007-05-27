@@ -30,6 +30,7 @@
 #include "ag_kill.h"
 #include "ag_png.h"
 #include "ag_glscreen.h"
+#include "ag_sdlpainter.h"
 #include "ag_surfacemanager.h"
 
 #include "SDL_image.h"
@@ -274,20 +275,20 @@ int AGSurface::height() const
 void AGSurface::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
-  AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
+  AGSDLPainter::drawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
   s->version++;
 }
 
 void AGSurface::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
 {
   CHECK_ZERO(s);
-  AGDrawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
+  AGSDLPainter::drawGradientAlpha(s->surface,rect,ul,ur,dl,dr);
   s->version++;
 }
 void AGSurface::drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2)
 {
   CHECK_ZERO(s);
-  AGDrawBorder(s->surface,rect,W,c1,c2);
+  AGSDLPainter::drawBorder(s->surface,rect,W,c1,c2);
   s->version++;
 }
 

@@ -8,8 +8,19 @@ AGProjection2D::AGProjection2D(const AGRect2 &from, const AGRect2 &to)
 
   float sx=to.w()/from.w();
   float sy=to.h()/from.h();
+  AGMatrix3 m1(-from.getV0());
+  AGMatrix3 m2(sx,sy);
+  AGMatrix3 m3(to.getV0());
 
-  m=AGMatrix3(-from.getV0())*AGMatrix3(sx,sy)*AGMatrix3(to.getV0());
+  m=m3*m2*m1;
+  /*  cdebug("m1:"<<m1.toString());
+  cdebug("m2:"<<m2.toString());
+  cdebug("m3:"<<m3.toString());
+  
+
+  cdebug("sx:"<<sx);
+  cdebug("sy:"<<sy);
+  cdebug("M:"<<m.toString());*/
 }
   
 AGRect2 AGProjection2D::project(const AGRect2 &r)

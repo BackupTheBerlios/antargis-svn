@@ -28,6 +28,7 @@
 #include "ag_glpainter.h"
 #include "ag_fbo.h"
 #include "ag_main.h"
+#include "ag_sdlpainter.h"
 #include <stdexcept>
 
 size_t nextpow2(size_t i)
@@ -470,7 +471,8 @@ void AGTexture::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &
       AGGLPainter::drawLine(p0,p1,c,2);
     }
   else
-    throw std::runtime_error("implement drawLine for sdl-texture");
+    AGSDLPainter::drawLine(mSDLTexture->surface,p0,p1,c);
+  //    throw std::runtime_error("implement drawLine for sdl-texture");
 }
 
 void AGTexture::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
@@ -481,7 +483,8 @@ void AGTexture::drawGradient(const AGRect2& rect, const AGColor& ul, const AGCol
       AGGLPainter::drawGradientAlpha(rect,ul,ur,dl,dr);
     }
   else
-    throw std::runtime_error("implement drawLine for sdl-texture");
+    AGSDLPainter::drawGradientAlpha(mSDLTexture->surface,rect,ul,ur,dl,dr);
+  //    throw std::runtime_error("implement drawLine for sdl-texture");
 }
 
 void AGTexture::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
@@ -492,7 +495,8 @@ void AGTexture::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const 
       AGGLPainter::drawGradientAlpha(rect,ul,ur,dl,dr);
     }
   else
-    throw std::runtime_error("implement drawLine for sdl-texture");
+    AGSDLPainter::drawGradientAlpha(mSDLTexture->surface,rect,ul,ur,dl,dr);
+  //    throw std::runtime_error("implement drawLine for sdl-texture");
 }
 
 

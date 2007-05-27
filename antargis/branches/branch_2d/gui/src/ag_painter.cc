@@ -406,6 +406,8 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 
   if(p.first.w()>0 && p.first.h()>0 && p.second.w()>0 && p.second.h()>0)
     {
+      mTarget->drawGradient(r,c0,c1,c2,c3);
+      /*
       if(glScreen)
 	{
 	  glScreen->drawGradient(r,c0,c1,c2,c3);
@@ -433,7 +435,7 @@ void AGPainter::drawGradient(const AGRect2 &pr,const AGColor &pc0,const AGColor 
 		  putPixel(AGVector2(x,y),(c0*(1-cx)+c1*cx)*(1-cy)+(c2*(1-cx)+c3*cx)*cy);
 	    }
 
-	}
+	    }*/
     }
 }
 void AGPainter::renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AGFont &f)

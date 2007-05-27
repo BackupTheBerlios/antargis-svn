@@ -43,7 +43,7 @@ class AntRubyView <AntBaseMapView
 		@controls=true
 	end
 
-	def draw
+	def prepareDraw
 		updateNamePositions
 		super
 	end

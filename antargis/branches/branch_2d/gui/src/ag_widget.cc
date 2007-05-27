@@ -1063,19 +1063,19 @@ void AGWidget::acquireClipping(AGClipping &p)
   if(!visible())
     return;
 
-  cdebug("clipping before:"<<p.toString());
+  //  cdebug("clipping before:"<<p.toString());
   if(isOpaque())
     p.exclude(getScreenRect());
   
   for(std::list<AGRect2>::iterator i=mMyChanges.begin();i!=mMyChanges.end();i++)
-    p.include(*i+getScreenPosition());
+    p.include(*i);//+getScreenPosition());
 
-  cdebug("clipping in:"<<p.toString());
+  //  cdebug("clipping in:"<<p.toString());
   
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
     (*i)->acquireClipping(p);
 
-  cdebug("clipping after:"<<p.toString());
+  //  cdebug("clipping after:"<<p.toString());
   return;
 }
 

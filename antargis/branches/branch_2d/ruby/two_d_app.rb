@@ -12,27 +12,70 @@ class Scene2D
 	end
 end
 
+class AntBaseMapViewWidget<AGWidget
+	def initialize(p,r,scene)
+		super(p,r)
+		@scene=scene
+	end
+
+	def draw(p)
+		@frame||=0
+		@frame+=1
+
+		#if (@frame%2)==0
+			#p=AGPainter.new
+			@scene.setPainter(p)
+			@scene.draw
+			@scene.discardPainter
+			#p=nil
+			#GC.start
+		#end
+		super
+	end
+	def prepareDraw
+		queryRedraw
+		return
+		currentNodes=@scene.getCurrentNodes
+		puts "currentNodes:#{currentNodes}(#{currentNodes.class})!"
+		currentNodes.each{|n|
+			r=n.getLastDrawingRect
+			r2=n.getDrawingRect
+			if r!=r2
+				pushChangeRect(r)
+				pushChangeRect(r2)
+			end
+		}
+
+	end
+end
+
 class AntBaseMapView<AGApplication
 	def initialize(w,h)
 		super()
 		@scene=Scene2D.new(w,h)
 		@submain=nil
+		@mainWidget=nil
+		setMainWidget(@realMainWidget=AntBaseMapViewWidget.new(nil,AGRect2.new(0,0,w,h),@scene))
 	end
 
-	def draw
-		@frame||=0
-		@frame+=1
+ 	def setMainWidget(w)
+ 		if w.is_a?(AntBaseMapViewWidget)
+ 			super(w)
+ 		else
+ 			@realMainWidget.removeChild(@mainWidget) if @mainWidget
+ 			@mainWidget=w
+ 			@realMainWidget.addChild(w)
+ 		end
+ 	end
+ 
+ 	def getMainWidget
+ 		@mainWidget
+ 	end
+# 	def draw()
+# 		super()
+# 	end
 
-		#if (@frame%2)==0
-			p=AGPainter.new
-			@scene.setPainter(p)
-			@scene.draw
-			@scene.discardPainter
-			p=nil
-			GC.start
-		#end
-		super
-	end
+
 	def getScene
 		@scene
 	end

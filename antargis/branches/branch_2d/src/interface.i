@@ -6,7 +6,39 @@
 %include "std_vector.i"
 %include "std_pair.i"
 %include "std_map.i"
-//%include "std_list.i"
+%include "std_list.i"
+#include "antargis.h"
+
+%{
+#include "scene.h"
+#include "antargisgui.h"
+
+%}
+
+%{
+
+SWIGRUNTIME VALUE
+AG_NewPointerObj(void *ptr, swig_type_info *type, int flags)
+{
+/* 	cdebug("ptr:"<<ptr); */
+	AGRubyObject *o=(AGRubyObject*)ptr;
+/*	cdebug("o:"<<o);
+	cdebug("o:"<<o->mRubyObject);
+	cdebug("o:"<<o->mRUBY);*/
+	if(o->mRubyObject)
+		return o->mRUBY;
+
+	swig_type_info *t=SWIG_TypeDynamicCast(type,(void**)&o);
+
+	o->mRubyObject=true;
+	o->mRUBY=SWIG_NewPointerObj((void *) o, t,flags);
+/*	cdebug("o:"<<o);
+	cdebug("o:"<<o->mRubyObject);
+	cdebug("o:"<<o->mRUBY);*/
+	return o->mRUBY;
+}
+
+%}
 
 %include "nantmarker.hh"
 /*
@@ -68,6 +100,7 @@
 %{
 #include "scene.h"
 #include "antargisgui.h"
+
 %}
 
 %template(StringVector) std::vector<std::string>;
@@ -83,7 +116,8 @@
 %template(AGVector2List) std::vector<AGVector2>;
 %template(AGPairVec2Surface) std::pair<AGVector2,AGSurface*>;
 %template(AGRect2Vector) std::vector<AGRect2>;
-//%template(AGRect2List) std::list<AGRect2>;
+%template(AGRect2List) std::list<AGRect2>;
+%template(SceneNodeList) std::list<SceneNode*>;
 
 %include "antargisgui.h"
 

@@ -124,25 +124,27 @@ deriveList.keys.each{|s|
 		file.puts "%typemap(out) #{s}*{"
 		file.puts " if($1)"
 		file.puts " {"
-		file.puts "  if($1->mRubyObject)"
-		file.puts "    $result=$1->mRUBY;"
-		file.puts "  else"
-		file.puts "   {"
-		file.puts "     if(false);"
-		for i in 0..30
-			derivations.each{|a,cs|
-				if cs.length==i && derivations[s].member?(a)
-					#puts s+"  "+a+" "+i.to_s
-					file.puts "else if(dynamic_cast<#{a}*>(result))"
-					file.puts "  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_#{a},0);"
-				end
-			}
-		end
-		file.puts "   else"
-		file.puts "     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_#{s},0);"
-		file.puts "   }"
+		file.puts "   $result=AG_NewPointerObj($1,SWIGTYPE_p_#{s},0);"
 		file.puts " }"
-		file.puts " else vresult=Qnil;"
+# 		file.puts "  if($1->mRubyObject)"
+# 		file.puts "    $result=$1->mRUBY;"
+# 		file.puts "  else"
+# 		file.puts "   {"
+# 		file.puts "     if(false);"
+# 		for i in 0..30
+# 			derivations.each{|a,cs|
+# 				if cs.length==i && derivations[s].member?(a)
+# 					#puts s+"  "+a+" "+i.to_s
+# 					file.puts "else if(dynamic_cast<#{a}*>(result))"
+# 					file.puts "  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_#{a},0);"
+# 				end
+# 			}
+# 		end
+# 		file.puts "   else"
+# 		file.puts "     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_#{s},0);"
+# 		file.puts "   }"
+# 		file.puts " }"
+# 		file.puts " else vresult=Qnil;"
 		file.puts "}"
 
 
@@ -150,25 +152,27 @@ deriveList.keys.each{|s|
 		file.puts "%typemap(directorin) #{s}*{"
 		file.puts " if($1)"
 		file.puts " {"
-		file.puts "  if($1->mRubyObject)"
-		file.puts "    $input=$1->mRUBY;"
-		file.puts "  else"
-		file.puts "   {"
-		file.puts "     if(false);"
-		for i in 0..30
-			derivations.each{|a,cs|
-				if cs.length==i && derivations[s].member?(a)
-					#puts s+"  "+a+" "+i.to_s
-					file.puts "else if(dynamic_cast<#{a}*>($1))"
-					file.puts "  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_#{a},0);"
-				end
-			}
-		end
-		file.puts "   else"
-		file.puts "     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_#{s},0);"
-		file.puts "   }"
+		file.puts "   $input=AG_NewPointerObj($1,SWIGTYPE_p_#{s},0);"
 		file.puts " }"
-		file.puts " else $input=Qnil;"
+# 		file.puts "  if($1->mRubyObject)"
+# 		file.puts "    $input=$1->mRUBY;"
+# 		file.puts "  else"
+# 		file.puts "   {"
+# 		file.puts "     if(false);"
+# 		for i in 0..30
+# 			derivations.each{|a,cs|
+# 				if cs.length==i && derivations[s].member?(a)
+# 					#puts s+"  "+a+" "+i.to_s
+# 					file.puts "else if(dynamic_cast<#{a}*>($1))"
+# 					file.puts "  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_#{a},0);"
+# 				end
+# 			}
+# 		end
+# 		file.puts "   else"
+# 		file.puts "     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_#{s},0);"
+# 		file.puts "   }"
+# 		file.puts " }"
+# 		file.puts " else $input=Qnil;"
 		file.puts "}"
 end
 
@@ -186,6 +190,45 @@ classList.each{|c|
 file.puts "%typemap(directorout) Uint8 {"
 file.puts " $result=NUM2INT($input);"
 file.puts "}"
+
+
+truncClasses={}
+
+deriveList.each{|b,a|
+	if rubyClasses[b] and rubyClasses[a]
+		#puts "DERIVE #{a} #{b}"
+		truncClasses[a]||=[]
+		truncClasses[a] << b
+	end
+}
+truncClasses.each{|k,a|
+	file.puts <<EOT
+%{
+static swig_type_info* #{k}_dynamic_cast(void **ptr) {
+EOT
+			a.each{|x|
+				file.puts <<EOT
+  {
+		#{x} *e = dynamic_cast<#{x} *>((#{k}*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_#{x};
+		}
+  }
+EOT
+			}
+	file.puts <<EOT
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_#{k}, #{k}_dynamic_cast);
+EOT
+
+
+}
+exit
+
 file.close
 
 # now generate antargis.h

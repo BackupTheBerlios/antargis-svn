@@ -27,7 +27,9 @@
 #include "ag_draw.h"
 #include "ag_sgeexport.h"
 
-void AGDrawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+namespace AGSDLPainter
+{
+void drawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {
     AGRect2 rect=prect;
     Sint32 v00,v01,v02;
@@ -199,7 +201,7 @@ void AGDrawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& u
     }		
   }
 
-void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
+void drawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) 
   {
     AGRect2 rect=prect;
     Sint32 v00,v01,v02,v03;
@@ -429,7 +431,7 @@ void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGCol
   }
 
 
-void AGDrawBorder(SDL_Surface *surface, const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2)
+void drawBorder(SDL_Surface *surface, const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2)
 {
   AGRect2 r=rect;
 
@@ -463,3 +465,5 @@ void AGDraw::drawBorder(AGScreen *surface, const AGRect2& rect,int width, const 
   surface->drawBorder(rect,width,c1,c2);
 }
 */
+
+}

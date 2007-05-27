@@ -44,6 +44,9 @@ class AGClipPaintTarget:public AGPaintTarget
   virtual void blit(const AGTexture &pSource,const std::vector<std::pair<AGRect2,AGRect2> > &pSrcDestRects,const AGColor &pColor);
 
   virtual void tile(const AGTexture &pSource,const AGRect2 &pTarget, const AGColor &pColor);
+
+  virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
+  virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
    
   virtual AGRect2 getRect() const;
 

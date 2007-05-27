@@ -25,9 +25,10 @@ class MyWidget2<AGWidget
 	end
 	def draw(p)
 		c=AGColor.new((rand*0xFF).to_i,(rand*0xFF).to_i,(rand*0xFF).to_i)
+		#c=AGColor.new(0,0,0)
 		p.fillRect(getRect.origin,c) #AGColor.new(0,0,0))
 		c=AGColor.new(0,0xFF,0) #(rand*0xFF).to_i,(rand*0xFF).to_i,(rand*0xFF).to_i)
-		p.fillRect(@r,c)
+		#p.fillRect(@r,c)
 	end
 	def eventFrame(t)
 		if @inited

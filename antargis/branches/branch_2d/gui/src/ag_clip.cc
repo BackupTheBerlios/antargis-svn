@@ -1,4 +1,5 @@
 #include "ag_clip.h"
+#include "ag_projection.h"
 #include "ag_stringstream.h"
 #include <stdexcept>
 
@@ -62,12 +63,14 @@ std::vector<std::pair<AGRect2,AGRect2> > AGClipping::clip(const AGRect2&r,const 
   std::vector<std::pair<AGRect2,AGRect2> > n;
 
   std::vector<AGRect2> t=clip(r);
+
+  AGProjection2D p(r,sync);
   
   for(std::vector<AGRect2>::iterator i=t.begin();i!=t.end();i++)
     {
-      
+      n.push_back(std::make_pair(*i,p.project(*i)));
     }
-  throw std::runtime_error("not implemented yet!");
+
   return n;
 }
 
@@ -81,4 +84,12 @@ AGString AGClipping::toString() const
   os<<"]";
 
   return os.str();
+}
+
+std::vector<AGLine2> AGClipping::clip(const AGLine2 &p)
+{
+  #warning "implement me"
+  std::vector<AGLine2> l;
+  l.push_back(p);
+  return l;
 }

@@ -41,7 +41,14 @@ AGRect2 Mesh2D::getDrawingRect()
   float h=t->height();
   AGRect2 r(middle.getX()-w/2,middle.getY()-h/2,w,h);
 
+  mLast=r;
+
   return r;
+}
+
+AGRect2 Mesh2D::getLastDrawingRect()
+{
+  return mLast;
 }
 
 AGVector4 Mesh2D::lineHit(const AGLine3 &pLine) const

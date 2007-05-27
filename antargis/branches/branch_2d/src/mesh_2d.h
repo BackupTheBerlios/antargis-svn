@@ -31,8 +31,13 @@ class Mesh2D:public SceneNode
  public:
 
   AGRect2 getDrawingRect();
+  AGRect2 getLastDrawingRect();
 
   Mesh2DData *mData;
+
+
+ private:
+  AGRect2 mLast;
 };
 
 

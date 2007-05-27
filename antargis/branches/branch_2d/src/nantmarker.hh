@@ -661,2270 +661,782 @@
 %typemap(out) MapPathWeighter*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MapPathWeighter,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_MapPathWeighter,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) MapPathWeighter*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MapPathWeighter,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_MapPathWeighter,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGRadio*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGRadio,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGRadio*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGRadio,0);
  }
- else $input=Qnil;
 }
 %typemap(out) GLApp*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_GLApp,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) GLApp*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_GLApp,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_GLApp,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGDialog*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGDialog,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGDialog*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGDialog,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AnimMeshData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMeshData,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AnimMeshData,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AnimMeshData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AnimMeshData,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AnimMeshData,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGScroller*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScroller,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGScroller,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGScroller*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScroller,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGScroller,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AnimMesh*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AnimMesh,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AnimMesh*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AnimMesh,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AnimMesh,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Scene*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Scene,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Scene*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Scene,0);
  }
- else $input=Qnil;
 }
 %typemap(out) WaterPiece*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_WaterPiece,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) WaterPiece*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_WaterPiece,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_WaterPiece,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Mesh2D*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh2D,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Mesh2D,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Mesh2D*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh2D,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Mesh2D,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGText*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGCaption*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGText,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGText*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGCaption*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGText,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGScreenWidget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGScreenWidget,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGScreenWidget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGScreenWidget,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGSubMenu*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGSubMenu,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGSubMenu*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGSubMenu,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGWidget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGScroller*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScroller,0);
-else if(dynamic_cast<AGScreenWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGComboBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
-else if(dynamic_cast<AGListBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
-else if(dynamic_cast<AGCaption*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
-else if(dynamic_cast<AGWindow*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<MiniMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGColorButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
-else if(dynamic_cast<AGImage*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
-else if(dynamic_cast<AGGLWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
-else if(dynamic_cast<AGEdit*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
-else if(dynamic_cast<AGText*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGLayout*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGCheckBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGTable*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGWidget,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGWidget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<AGDialog*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGScroller*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScroller,0);
-else if(dynamic_cast<AGScreenWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
-else if(dynamic_cast<AGSubMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGComboBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
-else if(dynamic_cast<AGListBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
-else if(dynamic_cast<AGCaption*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
-else if(dynamic_cast<AGWindow*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<MiniMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGColorButton*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
-else if(dynamic_cast<AGImage*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
-else if(dynamic_cast<AGGLWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
-else if(dynamic_cast<AGEdit*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
-else if(dynamic_cast<AGText*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGLayout*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGCheckBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGButton*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGTable*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWidget,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGWidget,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGApplication*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<GLApp*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGApplication,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGApplication*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<GLApp*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_GLApp,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGApplication,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Mesh2DData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh2DData,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Mesh2DData,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Mesh2DData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh2DData,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Mesh2DData,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGFontEngine*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGFontEngine,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGFontEngine,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGFontEngine*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGFontEngine,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGFontEngine,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Pathfinder*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Pathfinder,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Pathfinder,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Pathfinder*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Pathfinder,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Pathfinder,0);
  }
- else $input=Qnil;
 }
 %typemap(out) TerrainBase*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<Terrain*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Terrain,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainBase,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_TerrainBase,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) TerrainBase*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<Terrain*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Terrain,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainBase,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_TerrainBase,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGComboBox*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGComboBox,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGComboBox*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGComboBox,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGTexture*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTexture,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGTexture,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGTexture*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTexture,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGTexture,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGSingleton*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGFontEngine*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGFontEngine,0);
-else if(dynamic_cast<AGLayoutCreator*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayoutCreator,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSingleton,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGSingleton,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGSingleton*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGFontEngine*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGFontEngine,0);
-else if(dynamic_cast<AGLayoutCreator*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayoutCreator,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSingleton,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGSingleton,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGPlugin*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGPlugin,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGPlugin,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGPlugin*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGPlugin,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGPlugin,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGTable*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGWindow*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGTable,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGTable*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGSubMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGWindow*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGMenuItem*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGTable,0);
  }
- else $input=Qnil;
 }
 %typemap(out) HeightMap*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AntMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_HeightMap,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) HeightMap*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AntMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntMap,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_HeightMap,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_HeightMap,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGLayout*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGLayout,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGLayout*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGDialog*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGLayout,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGListBox*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGListBox,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGListBox*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGListBox,0);
  }
- else $input=Qnil;
 }
 %typemap(out) MeshData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MeshData,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_MeshData,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) MeshData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MeshData,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_MeshData,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGMessageObject*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<GLApp*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGScroller*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScroller,0);
-else if(dynamic_cast<AGScreenWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGComboBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
-else if(dynamic_cast<AGListBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
-else if(dynamic_cast<AGCaption*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
-else if(dynamic_cast<AGWindow*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AntMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<MiniMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGColorButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
-else if(dynamic_cast<AGImage*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
-else if(dynamic_cast<AGGLWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
-else if(dynamic_cast<AGEdit*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
-else if(dynamic_cast<AGText*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGApplication*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
-else if(dynamic_cast<HeightMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-else if(dynamic_cast<AGLayout*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGCheckBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGTable*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<AGWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMessageObject,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGMessageObject,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGMessageObject*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<GLApp*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_GLApp,0);
-else if(dynamic_cast<AGDialog*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGScroller*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScroller,0);
-else if(dynamic_cast<AGScreenWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
-else if(dynamic_cast<AGSubMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGComboBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
-else if(dynamic_cast<AGListBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
-else if(dynamic_cast<AGCaption*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
-else if(dynamic_cast<AGWindow*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AntMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<MiniMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGColorButton*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
-else if(dynamic_cast<AGImage*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
-else if(dynamic_cast<AGGLWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
-else if(dynamic_cast<AGEdit*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
-else if(dynamic_cast<AGText*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGApplication*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
-else if(dynamic_cast<HeightMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_HeightMap,0);
-else if(dynamic_cast<AGLayout*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGCheckBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGButton*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGTable*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<AGWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWidget,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMessageObject,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGMessageObject,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGCaption*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGCaption,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGCaption*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGCaption,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AntImpostorData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntImpostorData,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AntImpostorData,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AntImpostorData*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostorData,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AntImpostorData,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Terrain*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Terrain,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Terrain,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Terrain*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Terrain,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Terrain,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGRadioGroup*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGRadioGroup,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGRadioGroup*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGRadioGroup,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGWindow*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGWindow,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGWindow*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGWindow,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AntEntity*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntEntity,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AntEntity,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AntEntity*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntEntity,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AntEntity,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGMenuItem*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGMenuItem,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGMenuItem*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGSubMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGMenuItem,0);
  }
- else $input=Qnil;
 }
 %typemap(out) PathWeighter*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<MapPathWeighter*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MapPathWeighter,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_PathWeighter,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_PathWeighter,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) PathWeighter*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<MapPathWeighter*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MapPathWeighter,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_PathWeighter,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_PathWeighter,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AntMap*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AntMap,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AntMap*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntMap,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AntMap,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGMenu*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGMenu,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGMenu*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGMenu,0);
  }
- else $input=Qnil;
 }
 %typemap(out) MiniMap*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_MiniMap,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) MiniMap*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_MiniMap,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGColorButton*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGColorButton,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGColorButton*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGColorButton,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGImage*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGImage,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGImage*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGImage,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGMain*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMain,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGMain,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGMain*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMain,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGMain,0);
  }
- else $input=Qnil;
 }
 %typemap(out) SceneNode*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AnimMesh*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AnimMesh,0);
-else if(dynamic_cast<Mesh2D*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh2D,0);
-else if(dynamic_cast<WaterPiece*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_WaterPiece,0);
-else if(dynamic_cast<AntImpostor*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntImpostor,0);
-else if(dynamic_cast<Smoke*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
-else if(dynamic_cast<Mesh*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-else if(dynamic_cast<NewDecal*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
-else if(dynamic_cast<TerrainPiece*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPiece,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneNode,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_SceneNode,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) SceneNode*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AnimMesh*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AnimMesh,0);
-else if(dynamic_cast<Mesh2D*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh2D,0);
-else if(dynamic_cast<WaterPiece*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_WaterPiece,0);
-else if(dynamic_cast<AntImpostor*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostor,0);
-else if(dynamic_cast<Smoke*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Smoke,0);
-else if(dynamic_cast<Mesh*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh,0);
-else if(dynamic_cast<NewDecal*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_NewDecal,0);
-else if(dynamic_cast<TerrainPiece*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainPiece,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_SceneNode,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_SceneNode,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGLayoutCreator*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayoutCreator,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGLayoutCreator,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGLayoutCreator*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayoutCreator,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGLayoutCreator,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Scene2D*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene2D,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Scene2D,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Scene2D*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene2D,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Scene2D,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AntImpostor*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntImpostor,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AntImpostor,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AntImpostor*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntImpostor,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AntImpostor,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGRandomizer*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRandomizer,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGRandomizer,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGRandomizer*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRandomizer,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGRandomizer,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGGLScreen*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLScreen,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGGLScreen,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGGLScreen*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLScreen,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGGLScreen,0);
  }
- else $input=Qnil;
 }
 %typemap(out) SceneBase*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<Scene*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene,0);
-else if(dynamic_cast<Scene2D*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Scene2D,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SceneBase,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_SceneBase,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) SceneBase*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<Scene*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene,0);
-else if(dynamic_cast<Scene2D*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Scene2D,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_SceneBase,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_SceneBase,0);
  }
- else $input=Qnil;
 }
 %typemap(out) DecimatedGraph*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_DecimatedGraph,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_DecimatedGraph,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) DecimatedGraph*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_DecimatedGraph,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_DecimatedGraph,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGGLWidget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGGLWidget,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGGLWidget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGGLWidget,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGSurface*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSurface,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGSurface,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGSurface*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSurface,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGSurface,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGScreen*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGGLScreen*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLScreen,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreen,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGScreen,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGScreen*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGGLScreen*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLScreen,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreen,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGScreen,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGEdit*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGEdit,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGEdit*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGEdit,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGCheckBox*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGCheckBox,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGCheckBox*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGCheckBox,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Smoke*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Smoke,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Smoke,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Smoke*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Smoke,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Smoke,0);
  }
- else $input=Qnil;
 }
 %typemap(out) SimpleGraph*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<DecimatedGraph*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_DecimatedGraph,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_SimpleGraph,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_SimpleGraph,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) SimpleGraph*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<DecimatedGraph*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_DecimatedGraph,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_SimpleGraph,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_SimpleGraph,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGSound*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGSound,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGSound*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGSound,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGPaintTarget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGTexture*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTexture,0);
-else if(dynamic_cast<AGGLScreen*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLScreen,0);
-else if(dynamic_cast<AGSurface*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSurface,0);
-else if(dynamic_cast<AGScreen*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreen,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGPaintTarget,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGPaintTarget,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGPaintTarget*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGTexture*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTexture,0);
-else if(dynamic_cast<AGGLScreen*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLScreen,0);
-else if(dynamic_cast<AGSurface*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSurface,0);
-else if(dynamic_cast<AGScreen*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreen,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGPaintTarget,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGPaintTarget,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGButton*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<AGCheckBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGButton,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGButton*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<AGCheckBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGButton,0);
  }
- else $input=Qnil;
 }
 %typemap(out) AGListener*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<GLApp*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_GLApp,0);
-else if(dynamic_cast<AGDialog*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGScroller*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScroller,0);
-else if(dynamic_cast<AGScreenWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGScreenWidget,0);
-else if(dynamic_cast<AGSubMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGComboBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGComboBox,0);
-else if(dynamic_cast<AGListBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListBox,0);
-else if(dynamic_cast<AGCaption*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGRadioGroup,0);
-else if(dynamic_cast<AGWindow*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AntMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<MiniMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGMenu*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGColorButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGColorButton,0);
-else if(dynamic_cast<AGImage*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGImage,0);
-else if(dynamic_cast<AGGLWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGGLWidget,0);
-else if(dynamic_cast<AGEdit*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGSound,0);
-else if(dynamic_cast<AGText*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGApplication*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGApplication,0);
-else if(dynamic_cast<HeightMap*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_HeightMap,0);
-else if(dynamic_cast<AGLayout*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGCheckBox*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGButton*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGTable*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<AGWidget*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGWidget,0);
-else if(dynamic_cast<AGMessageObject*>(result))
-  vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGMessageObject,0);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_AGListener,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_AGListener,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) AGListener*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-else if(dynamic_cast<AGRadio*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadio,0);
-else if(dynamic_cast<GLApp*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_GLApp,0);
-else if(dynamic_cast<AGDialog*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGDialog,0);
-else if(dynamic_cast<AGScroller*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScroller,0);
-else if(dynamic_cast<AGScreenWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGScreenWidget,0);
-else if(dynamic_cast<AGSubMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSubMenu,0);
-else if(dynamic_cast<AGComboBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGComboBox,0);
-else if(dynamic_cast<AGListBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListBox,0);
-else if(dynamic_cast<AGCaption*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCaption,0);
-else if(dynamic_cast<AGRadioGroup*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGRadioGroup,0);
-else if(dynamic_cast<AGWindow*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWindow,0);
-else if(dynamic_cast<AntMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AntMap,0);
-else if(dynamic_cast<MiniMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_MiniMap,0);
-else if(dynamic_cast<AGMenu*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenu,0);
-else if(dynamic_cast<AGColorButton*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGColorButton,0);
-else if(dynamic_cast<AGImage*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGImage,0);
-else if(dynamic_cast<AGGLWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGGLWidget,0);
-else if(dynamic_cast<AGEdit*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGEdit,0);
-else if(dynamic_cast<AGSound*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGSound,0);
-else if(dynamic_cast<AGText*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGText,0);
-else if(dynamic_cast<AGApplication*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGApplication,0);
-else if(dynamic_cast<HeightMap*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_HeightMap,0);
-else if(dynamic_cast<AGLayout*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGLayout,0);
-else if(dynamic_cast<AGMenuItem*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMenuItem,0);
-else if(dynamic_cast<AGCheckBox*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGCheckBox,0);
-else if(dynamic_cast<AGButton*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGButton,0);
-else if(dynamic_cast<AGTable*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGTable,0);
-else if(dynamic_cast<AGWidget*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGWidget,0);
-else if(dynamic_cast<AGMessageObject*>($1))
-  $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGMessageObject,0);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_AGListener,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_AGListener,0);
  }
- else $input=Qnil;
 }
 %typemap(out) Mesh*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_Mesh,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_Mesh,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) Mesh*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_Mesh,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_Mesh,0);
  }
- else $input=Qnil;
 }
 %typemap(out) TerrainPiece*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_TerrainPiece,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_TerrainPiece,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) TerrainPiece*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_TerrainPiece,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_TerrainPiece,0);
  }
- else $input=Qnil;
 }
 %typemap(out) NewDecal*{
  if($1)
  {
-  if($1->mRubyObject)
-    $result=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_NewDecal,0);
-   }
+   $result=AG_NewPointerObj($1,SWIGTYPE_p_NewDecal,0);
  }
- else vresult=Qnil;
 }
 %typemap(directorin) NewDecal*{
  if($1)
  {
-  if($1->mRubyObject)
-    $input=$1->mRUBY;
-  else
-   {
-     if(false);
-   else
-     $input = SWIG_NewPointerObj((void *)$1, SWIGTYPE_p_NewDecal,0);
-   }
+   $input=AG_NewPointerObj($1,SWIGTYPE_p_NewDecal,0);
  }
- else $input=Qnil;
 }
 %typemap(directorout) AGApplication {
  AGApplication *b;
@@ -3669,3 +2181,643 @@ else if(dynamic_cast<AGMessageObject*>($1))
 %typemap(directorout) Uint8 {
  $result=NUM2INT($input);
 }
+%{
+static swig_type_info* AGMessageObject_dynamic_cast(void **ptr) {
+  {
+		AGWidget *e = dynamic_cast<AGWidget *>((AGMessageObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGWidget;
+		}
+  }
+  {
+		AGApplication *e = dynamic_cast<AGApplication *>((AGMessageObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGApplication;
+		}
+  }
+  {
+		HeightMap *e = dynamic_cast<HeightMap *>((AGMessageObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_HeightMap;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGMessageObject, AGMessageObject_dynamic_cast);
+%{
+static swig_type_info* SceneBase_dynamic_cast(void **ptr) {
+  {
+		Scene *e = dynamic_cast<Scene *>((SceneBase*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Scene;
+		}
+  }
+  {
+		Scene2D *e = dynamic_cast<Scene2D *>((SceneBase*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Scene2D;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_SceneBase, SceneBase_dynamic_cast);
+%{
+static swig_type_info* AGTable_dynamic_cast(void **ptr) {
+  {
+		AGWindow *e = dynamic_cast<AGWindow *>((AGTable*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGWindow;
+		}
+  }
+  {
+		AGMenuItem *e = dynamic_cast<AGMenuItem *>((AGTable*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGMenuItem;
+		}
+  }
+  {
+		AGMenu *e = dynamic_cast<AGMenu *>((AGTable*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGMenu;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGTable, AGTable_dynamic_cast);
+%{
+static swig_type_info* AGText_dynamic_cast(void **ptr) {
+  {
+		AGCaption *e = dynamic_cast<AGCaption *>((AGText*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGCaption;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGText, AGText_dynamic_cast);
+%{
+static swig_type_info* AGMenuItem_dynamic_cast(void **ptr) {
+  {
+		AGSubMenu *e = dynamic_cast<AGSubMenu *>((AGMenuItem*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGSubMenu;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGMenuItem, AGMenuItem_dynamic_cast);
+%{
+static swig_type_info* AGCheckBox_dynamic_cast(void **ptr) {
+  {
+		AGRadio *e = dynamic_cast<AGRadio *>((AGCheckBox*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGRadio;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGCheckBox, AGCheckBox_dynamic_cast);
+%{
+static swig_type_info* AGWidget_dynamic_cast(void **ptr) {
+  {
+		AGScroller *e = dynamic_cast<AGScroller *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGScroller;
+		}
+  }
+  {
+		AGText *e = dynamic_cast<AGText *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGText;
+		}
+  }
+  {
+		AGScreenWidget *e = dynamic_cast<AGScreenWidget *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGScreenWidget;
+		}
+  }
+  {
+		AGComboBox *e = dynamic_cast<AGComboBox *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGComboBox;
+		}
+  }
+  {
+		AGTable *e = dynamic_cast<AGTable *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGTable;
+		}
+  }
+  {
+		AGLayout *e = dynamic_cast<AGLayout *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGLayout;
+		}
+  }
+  {
+		AGListBox *e = dynamic_cast<AGListBox *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGListBox;
+		}
+  }
+  {
+		AGRadioGroup *e = dynamic_cast<AGRadioGroup *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGRadioGroup;
+		}
+  }
+  {
+		MiniMap *e = dynamic_cast<MiniMap *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_MiniMap;
+		}
+  }
+  {
+		AGColorButton *e = dynamic_cast<AGColorButton *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGColorButton;
+		}
+  }
+  {
+		AGImage *e = dynamic_cast<AGImage *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGImage;
+		}
+  }
+  {
+		AGGLWidget *e = dynamic_cast<AGGLWidget *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGGLWidget;
+		}
+  }
+  {
+		AGEdit *e = dynamic_cast<AGEdit *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGEdit;
+		}
+  }
+  {
+		AGSound *e = dynamic_cast<AGSound *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGSound;
+		}
+  }
+  {
+		AGButton *e = dynamic_cast<AGButton *>((AGWidget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGButton;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGWidget, AGWidget_dynamic_cast);
+%{
+static swig_type_info* AGApplication_dynamic_cast(void **ptr) {
+  {
+		GLApp *e = dynamic_cast<GLApp *>((AGApplication*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_GLApp;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGApplication, AGApplication_dynamic_cast);
+%{
+static swig_type_info* PathWeighter_dynamic_cast(void **ptr) {
+  {
+		MapPathWeighter *e = dynamic_cast<MapPathWeighter *>((PathWeighter*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_MapPathWeighter;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_PathWeighter, PathWeighter_dynamic_cast);
+%{
+static swig_type_info* AGListener_dynamic_cast(void **ptr) {
+  {
+		AGMessageObject *e = dynamic_cast<AGMessageObject *>((AGListener*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGMessageObject;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGListener, AGListener_dynamic_cast);
+%{
+static swig_type_info* AGLayout_dynamic_cast(void **ptr) {
+  {
+		AGDialog *e = dynamic_cast<AGDialog *>((AGLayout*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGDialog;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGLayout, AGLayout_dynamic_cast);
+%{
+static swig_type_info* AGButton_dynamic_cast(void **ptr) {
+  {
+		AGCheckBox *e = dynamic_cast<AGCheckBox *>((AGButton*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGCheckBox;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGButton, AGButton_dynamic_cast);
+%{
+static swig_type_info* SimpleGraph_dynamic_cast(void **ptr) {
+  {
+		DecimatedGraph *e = dynamic_cast<DecimatedGraph *>((SimpleGraph*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_DecimatedGraph;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_SimpleGraph, SimpleGraph_dynamic_cast);
+%{
+static swig_type_info* AGScreen_dynamic_cast(void **ptr) {
+  {
+		AGGLScreen *e = dynamic_cast<AGGLScreen *>((AGScreen*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGGLScreen;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGScreen, AGScreen_dynamic_cast);
+%{
+static swig_type_info* SceneNode_dynamic_cast(void **ptr) {
+  {
+		AnimMesh *e = dynamic_cast<AnimMesh *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AnimMesh;
+		}
+  }
+  {
+		WaterPiece *e = dynamic_cast<WaterPiece *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_WaterPiece;
+		}
+  }
+  {
+		Mesh2D *e = dynamic_cast<Mesh2D *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Mesh2D;
+		}
+  }
+  {
+		AntImpostor *e = dynamic_cast<AntImpostor *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AntImpostor;
+		}
+  }
+  {
+		Smoke *e = dynamic_cast<Smoke *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Smoke;
+		}
+  }
+  {
+		Mesh *e = dynamic_cast<Mesh *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Mesh;
+		}
+  }
+  {
+		TerrainPiece *e = dynamic_cast<TerrainPiece *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_TerrainPiece;
+		}
+  }
+  {
+		NewDecal *e = dynamic_cast<NewDecal *>((SceneNode*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_NewDecal;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_SceneNode, SceneNode_dynamic_cast);
+%{
+static swig_type_info* AGPaintTarget_dynamic_cast(void **ptr) {
+  {
+		AGTexture *e = dynamic_cast<AGTexture *>((AGPaintTarget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGTexture;
+		}
+  }
+  {
+		AGSurface *e = dynamic_cast<AGSurface *>((AGPaintTarget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGSurface;
+		}
+  }
+  {
+		AGScreen *e = dynamic_cast<AGScreen *>((AGPaintTarget*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGScreen;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGPaintTarget, AGPaintTarget_dynamic_cast);
+%{
+static swig_type_info* AGSingleton_dynamic_cast(void **ptr) {
+  {
+		AGFontEngine *e = dynamic_cast<AGFontEngine *>((AGSingleton*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGFontEngine;
+		}
+  }
+  {
+		AGLayoutCreator *e = dynamic_cast<AGLayoutCreator *>((AGSingleton*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGLayoutCreator;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGSingleton, AGSingleton_dynamic_cast);
+%{
+static swig_type_info* AGRubyObject_dynamic_cast(void **ptr) {
+  {
+		AnimMeshData *e = dynamic_cast<AnimMeshData *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AnimMeshData;
+		}
+  }
+  {
+		Mesh2DData *e = dynamic_cast<Mesh2DData *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Mesh2DData;
+		}
+  }
+  {
+		Pathfinder *e = dynamic_cast<Pathfinder *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Pathfinder;
+		}
+  }
+  {
+		TerrainBase *e = dynamic_cast<TerrainBase *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_TerrainBase;
+		}
+  }
+  {
+		AGSingleton *e = dynamic_cast<AGSingleton *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGSingleton;
+		}
+  }
+  {
+		AGPlugin *e = dynamic_cast<AGPlugin *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGPlugin;
+		}
+  }
+  {
+		MeshData *e = dynamic_cast<MeshData *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_MeshData;
+		}
+  }
+  {
+		AntImpostorData *e = dynamic_cast<AntImpostorData *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AntImpostorData;
+		}
+  }
+  {
+		AntEntity *e = dynamic_cast<AntEntity *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AntEntity;
+		}
+  }
+  {
+		PathWeighter *e = dynamic_cast<PathWeighter *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_PathWeighter;
+		}
+  }
+  {
+		AGMain *e = dynamic_cast<AGMain *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGMain;
+		}
+  }
+  {
+		SceneNode *e = dynamic_cast<SceneNode *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_SceneNode;
+		}
+  }
+  {
+		AGRandomizer *e = dynamic_cast<AGRandomizer *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGRandomizer;
+		}
+  }
+  {
+		SceneBase *e = dynamic_cast<SceneBase *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_SceneBase;
+		}
+  }
+  {
+		SimpleGraph *e = dynamic_cast<SimpleGraph *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_SimpleGraph;
+		}
+  }
+  {
+		AGPaintTarget *e = dynamic_cast<AGPaintTarget *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGPaintTarget;
+		}
+  }
+  {
+		AGListener *e = dynamic_cast<AGListener *>((AGRubyObject*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AGListener;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_AGRubyObject, AGRubyObject_dynamic_cast);
+%{
+static swig_type_info* HeightMap_dynamic_cast(void **ptr) {
+  {
+		AntMap *e = dynamic_cast<AntMap *>((HeightMap*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_AntMap;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_HeightMap, HeightMap_dynamic_cast);
+%{
+static swig_type_info* TerrainBase_dynamic_cast(void **ptr) {
+  {
+		Terrain *e = dynamic_cast<Terrain *>((TerrainBase*)*ptr);
+		if (e) 
+		{
+			*ptr = (void *) e;
+			return SWIGTYPE_p_Terrain;
+		}
+  }
+  return 0;
+ }
+%}
+DYNAMIC_CAST(SWIGTYPE_p_TerrainBase, TerrainBase_dynamic_cast);

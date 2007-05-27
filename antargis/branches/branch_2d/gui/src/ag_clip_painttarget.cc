@@ -1,5 +1,6 @@
 #include "ag_clip_painttarget.h"
 #include "ag_debug.h"
+#include "ag_projection.h"
 
 AGClipPaintTarget::AGClipPaintTarget(AGPaintTarget *pTarget):mTarget(pTarget)
 {
@@ -110,4 +111,87 @@ void AGClipPaintTarget::unclip()
 AGRect2 AGClipPaintTarget::getRect() const
 {
   return mTarget->getRect();
+}
+
+void AGClipPaintTarget::drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  CTRACE;
+  std::vector<AGRect2> rs=mClipping.clip(rect);
+
+  AGRect2 t(0,0,1,1);
+  AGProjection2D p(rect,t);
+
+  for(std::vector<AGRect2>::iterator i=rs.begin();i!=rs.end();i++)
+    {
+      AGRect2 r2=p.project(*i);
+      float x,y;
+      AGColor ul2,ur2,dl2,dr2;
+      
+      x=r2.x0();y=r2.y0();
+      ul2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      x=r2.x1();y=r2.y0();
+      ur2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      x=r2.x0();y=r2.y1();
+      dl2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      x=r2.x1();y=r2.y1();
+      dr2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      mTarget->drawGradientAlpha(*i,ul2,ur2,dl2,dr2);
+			    
+    }
+}
+
+void AGClipPaintTarget::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)
+{
+  std::vector<AGRect2> rs=mClipping.clip(rect);
+
+  AGRect2 t(0,0,1,1);
+  AGProjection2D p(rect,t);
+
+  for(std::vector<AGRect2>::iterator i=rs.begin();i!=rs.end();i++)
+    {
+      AGRect2 r2=p.project(*i);
+      float x,y;
+      AGColor ul2,ur2,dl2,dr2;
+
+      cdebug("rect:"<<rect);
+      cdebug("r2:"<<r2);
+      cdebug("i:"<<*i);
+      
+      x=r2.x0();y=r2.y0();
+      ul2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      x=r2.x1();y=r2.y0();
+      ur2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      x=r2.x0();y=r2.y1();
+      dl2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      x=r2.x1();y=r2.y1();
+      dr2=(ul*(1-x)+ur*x)*(1-y)+
+	(dl*(1-x)+dr*x)*y;
+
+      cdebug("ul:"<<ul);
+      cdebug("ur:"<<ur);
+      cdebug("dl:"<<dl);
+      cdebug("dr:"<<dr);
+
+      cdebug("ul2:"<<ul2);
+      cdebug("ur2:"<<ur2);
+      cdebug("dl2:"<<dl2);
+      cdebug("dr2:"<<dr2);
+
+      mTarget->drawGradient(*i,ul2,ur2,dl2,dr2);
+			    
+    }
 }
