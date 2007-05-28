@@ -4,11 +4,16 @@
 #include <ag_profiler.h>
 #include <ag_config.h>
 
-bool use3dTextures()
+static bool gUse3dTextures=true;
+void setUsing3dTextures(bool use3dTextures)
 {
-  return false;
+  gUse3dTextures=use3dTextures;
 }
 
+bool use3dTextures()
+{
+  return gUse3dTextures;
+}
 
 //////////////////////////////////////////////////////////////////////////
 // TerrainPiece

@@ -54,7 +54,7 @@ $INCLUDEDIRS=""
 if $xcompile
 	$CFLAGS+=`./contrib/usr/bin/sdl-config --cflags`.chomp
 	$INCLUDEDIRS+=`./contrib/usr/bin/sdl-config --cflags`.chomp
-	$LDFLAGS+=`./contrib/usr/bin/sdl-config --libs`.chomp+" "+$libs
+	$LDFLAGS+=" "+`./contrib/usr/bin/sdl-config --libs`.chomp+" "+$libs+" "
 elsif not windows
 	# standard way (unix)
 	$CFLAGS+=`sdl-config --cflags`.chomp

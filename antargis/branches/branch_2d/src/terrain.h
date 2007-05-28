@@ -124,5 +124,7 @@ public:
   void init();
 };
 
+void setUsing3dTextures(bool use3dTextures);
+
 
 #endif

@@ -141,6 +141,8 @@ module MyAntargislib
 						@@cursorEnabled=true
 					when "ruby-raise"
 						setRubyRaising(true)
+					when "no-3d-textures"
+          	setUsing3dTextures(false)
 					when "help","h"
 						STDERR.puts "Possible options:
 	--help         show this help message
@@ -165,6 +167,8 @@ module MyAntargislib
 
 	--nogl         disable GL-mode (3d-acceleration) - THIS IS NOT YET FULLY SUPPORTED!!
 	--ruby-raise   raise exceptions as ruby-exceptions
+
+	--no-3d-textures disables 3d-textures - they're bad on some graphics chipsets (esp. Intel)
 	"
 	
 						exit
