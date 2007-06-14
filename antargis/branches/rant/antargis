@@ -1,0 +1,3 @@
+#!/bin/sh
+#echo $@
+ruby run.rb $@>/tmp/ant-stdout.txt 2>/tmp/ant-stderr.txt
