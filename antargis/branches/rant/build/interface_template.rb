@@ -1,4 +1,7 @@
-def interface_template(moduleName,files,swigInput,addfiles=[])
+def interface_template(moduleName,files,swigInput,addfiles=[],outputDir="")
+	dirname=outputDir
+
+
 <<EOT
 %module(directors="1") #{moduleName}
 
@@ -16,13 +19,20 @@ def interface_template(moduleName,files,swigInput,addfiles=[])
 #{swigInput.collect{|i|"%import \"#{i}\""}.join("\n")}
 
 %{
+#include <string>
 #{addfiles.collect{|f|"#include \"#{f}\""}.join("\n")}
 #{files.collect{|f|"#include \"#{f}\""}.join("\n")}
 %}
+%include "std_string.i"
+%include "#{dirname}/marker.i"
+%include "ext/#{moduleName.gsub("antargis","")}/templates.i"
+
 #{files.collect{|f|"%include \"#{f}\""}.join("\n")}
 
 
 // FIXME: add templates !
+
+
 EOT
 end
 

@@ -26,7 +26,7 @@
 # checks if libantargis is already loaded
 def hasLibantargis
 	begin
-		x=eval("Libantargis")
+		x=eval("Antargis")
 	rescue
 		return false
 	end
@@ -37,8 +37,8 @@ end
 
 # if libantargis was not yet loaded, try loading libantargisgui alone
 if not hasLibantargis
-	require 'libantargisgui'
-	include Libantargisgui
+	require 'antargisgui'
+	include Antargisgui
 end
 
 # some old abbrevs
@@ -61,30 +61,29 @@ module AGHandler
 	end
 	# add Event Handler - this function should go into AGRubyApp
 	def addHandler(object,event,func)
+		puts event
+		puts object,object.class
 		if not defined? @handlers then
 			@handlers={}
 		end
-		#puts event
-		if object==nil then
+		if object.nil? then
 			raise "AGHandler.addHandler: object does not exist!"
 		else
-			#puts "MY CLASS:",self.class
 			object.send(event).connect(self)
-			hname=object.getName+":"+event.to_s
+			hname=makeHandlerName(object,event)
+			#hname=object.getName+":"+event.to_s
 			@handlers[hname]||=[]
-# 			if @handlers[object.getName+":"+event.to_s]==nil
-# 				@handlers[object.getName+":"+event.to_s]=[]
-# 			end
 			@handlers[hname].push(func)
-			#@handlers.uniq!
 		end
 	end
 	# event dispatcher
 	def signal(e)
 		@handlers||={}
-		callerName=e.getCaller.getName
-		evName=callerName+":"+e.getName
-		puts "#{callerName} #{evName}"
+		mcaller=e.getCaller
+		evName=makeHandlerName(mcaller,e.getName)
+		#callerName=e.getCaller.getName
+		#evName=callerName+":"+e.getName
+		#puts "#{callerName} #{evName}"
 		if @handlers.has_key?(evName) then
 			value=false
 			@handlers[evName].each{|handler|
@@ -106,6 +105,14 @@ module AGHandler
 			return value
 		end
 		return super(e)
+	end
+
+	def makeHandlerName(object,event)
+		if object.respond_to?(:getName)
+			return object.getName+":"+event.to_s
+		else
+			return object.object_id.to_s+":"+event.to_s
+		end
 	end
 end
 

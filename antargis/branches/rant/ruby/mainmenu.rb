@@ -264,7 +264,9 @@ class AntMenuApp <AntApplication
 		campaignButtons=(0..(buttonCount-1)).to_a.collect{|c|"campaign#{c}"}
 		i=0
 		campaignButtons.each{|b|
+			puts "get widget named: #{b}"
 			c=@campaignMenu.getChild(b)
+			puts "got widget #{c} of type #{c.class}"
 			addHandler(c,:sigClick,:eventMission)
 			if @campaigns.length>i
 				c.setCaption(_(@campaigns[i].name))

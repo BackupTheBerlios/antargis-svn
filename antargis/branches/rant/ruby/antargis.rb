@@ -31,10 +31,11 @@
 # add programdir to path
 $programDir=Dir.pwd+"/ruby"
 $:.push($programDir)
+$:.push($programDir+"/entities")
 
 require 'antargislib.rb'
 require 'dialogs.rb'
-require 'ents.rb'
+require 'entities.rb'
 require 'map.rb'
 require 'view.rb'
 require 'game_result.rb'
@@ -618,9 +619,9 @@ end
 def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 	app=nil
 	if clientConnection
-		app=AntGameApp.new(file,getMain.width,getMain.height,nil,clientConnection)
+		app=AntGameApp.new(file,getVideo.width,getVideo.height,nil,clientConnection)
 	else
-		app=AntGameApp.new(loadFile(file),getMain.width,getMain.height,nil,clientConnection)
+		app=AntGameApp.new(loadFile(file),getVideo.width,getVideo.height,nil,clientConnection)
 	end
 	#app.disableGC
 	app.run

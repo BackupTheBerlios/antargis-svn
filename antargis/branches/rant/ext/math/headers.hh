@@ -22,10 +22,14 @@
 #include "ext/basic/ag_singleton.h"
 #include "ext/basic/ag_kill.h"
 #include "ext/basic/ag_serial.h"
-#include "/home/david/projects/antargis/rant/ext/math/ag_geometry.h"
+#include "ext/basic/ag_messageobject.h"
+#include "ext/basic/ag_mutex.h"
 #include "/home/david/projects/antargis/rant/ext/math/ag_rand.h"
+#include "/home/david/projects/antargis/rant/ext/math/ag_geometry.h"
+#include "/home/david/projects/antargis/rant/ext/math/ag_algebra.h"
 #ifdef SWIG
-%include "/home/david/projects/antargis/rant/ext/math/ag_geometry.h"
 %include "/home/david/projects/antargis/rant/ext/math/ag_rand.h"
+%include "/home/david/projects/antargis/rant/ext/math/ag_geometry.h"
+%include "/home/david/projects/antargis/rant/ext/math/ag_algebra.h"
 #endif
 #endif

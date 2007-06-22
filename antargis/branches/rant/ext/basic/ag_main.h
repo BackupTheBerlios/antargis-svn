@@ -44,6 +44,17 @@
 class AGScreen;
 
 struct SDL_VideoInfo;
+
+// will be called repeatedely (by AGApplication - if available)
+// simply instantiate a subclass of this type - and it'll be registered within AGMain
+class AGRepeatedCall
+{
+ public:
+  AGRepeatedCall();
+  virtual ~AGRepeatedCall();
+  virtual void call();
+};
+
 class AGMain:public AGRubyObject
 {
  public:
@@ -57,7 +68,10 @@ class AGMain:public AGRubyObject
 
   AGCollector *getCollector();
 
-	AGVideoBase *getVideo();
+  AGVideoBase *getVideo();
+  void setVideo(AGVideoBase *p);
+
+  void repeatedCalls();
 
  protected:
   virtual void mark();
@@ -69,6 +83,9 @@ class AGMain:public AGRubyObject
   const SDL_VideoInfo *videoInfo;
 
   AGRandomizerBase *mRand;
+
+  std::set<AGRepeatedCall*> mCalls;
+  friend class AGRepeatedCall;
 };
 
 bool hasMain();

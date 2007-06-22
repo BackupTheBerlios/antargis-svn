@@ -39,9 +39,9 @@
 #include "ag_serial.h"
 #include <zlib.h>
 
-static std::list<std::string> mFsPaths;
+static std::list<AGFilename> mFsPaths;
 
-void addPath(const std::string &pName)
+void addPath(const AGFilename &pName)
 {
   mFsPaths.push_back(pName);
 #ifdef USE_PHYSFS
@@ -164,7 +164,7 @@ void checkParentDirs(const std::string &s)
     }
 }
 
-std::string checkFileName(std::string s)
+AGFilename checkFileName(AGFilename s)
 {
 #ifdef WIN32
   if(s.length()>300)
@@ -197,11 +197,11 @@ std::string directLoad(const std::string &pName)
   return r;
 }
 
-std::string findFile(const std::string &pName)
+AGFilename findFile(const AGFilename &pName)
 {
   if(fileExists(pName))
     return pName;
-  for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
+  for(std::list<AGFilename>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
     {
       std::string n=*i+"/"+pName;
       n=checkFileName(n);
@@ -227,7 +227,7 @@ std::string loadFromPath(const std::string &pName)
   if(r.length())
     return r;
 
-  for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
+  for(std::list<AGFilename>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
     {
       r=directLoad(*i+"/"+pName);
       if(r.length())
@@ -237,7 +237,7 @@ std::string loadFromPath(const std::string &pName)
   //  if(mFsPaths.size()==0)
   //    throw std::runtime_error("Not yet inited fs-paths!");
 
-  for(std::list<std::string>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
+  for(std::list<AGFilename>::iterator i=mFsPaths.begin();i!=mFsPaths.end();i++)
     dbout(0,"path:"<<*i);
 
   dbout(0,"LOAD FAILED:"<<pName);
@@ -245,7 +245,7 @@ std::string loadFromPath(const std::string &pName)
   return r;
 }
 
-std::string loadFile(const std::string &pName)
+AGData loadFile(const AGFilename &pName)
 {
   return loadFromPath(checkFileName(pName));
 #ifdef USE_PHYSFS
@@ -390,7 +390,7 @@ std::string getDocumentsDir()
 
 #else
 
-std::string getDocumentsDir()
+AGFilename getDocumentsDir()
 {
   return getUserDir()+"/Desktop";
 }
@@ -399,12 +399,12 @@ std::string getDocumentsDir()
 #endif
 
 
-std::string getWriteDir()
+AGFilename getWriteDir()
 {
   return getUserDir()+"/."+getAppName();
 }
 
-bool saveFile(const std::string &pName,const std::string &pContent)
+bool saveFile(const AGFilename &pName,const AGData &pContent)
 {
 #ifdef USE_PHYSFS
   TRACE;
@@ -437,7 +437,7 @@ bool saveFile(const std::string &pName,const std::string &pContent)
   return true;
 }
 
-bool fileExists(const std::string &pName)
+bool fileExists(const AGFilename &pName)
 {
 #ifdef WIN32
   if(GetFileAttributes(pName.c_str()) == INVALID_FILE_ATTRIBUTES)
@@ -458,7 +458,7 @@ bool fileExists(const std::string &pName)
 #endif
 }
 
-std::vector<std::string> getDirectoryInternal(const std::string &pDir)
+std::vector<AGFilename> getDirectoryInternal(const AGFilename &pDir)
 {
 #ifdef USE_PHYSFS
   TRACE;
@@ -477,7 +477,7 @@ std::vector<std::string> getDirectoryInternal(const std::string &pDir)
   return v;
 #else
 
-  std::vector<std::string> v;
+  std::vector<AGFilename> v;
 
 #ifdef WIN32
   WIN32_FIND_DATA ent;
@@ -524,18 +524,18 @@ std::vector<std::string> getDirectoryInternal(const std::string &pDir)
 #endif
 }
 
-std::vector<std::string> getDirectory(const std::string &pDir)
+std::vector<AGFilename> getDirectory(const AGFilename &pDir)
 {
-  std::vector<std::string> v;
-  std::list<std::string> ps=mFsPaths;
+  std::vector<AGFilename> v;
+  std::list<AGFilename> ps=mFsPaths;
   ps.push_front(""); // add current dir
   ps.push_front("."); // add current dir
 
 
-  for(std::list<std::string>::iterator i=ps.begin();i!=ps.end();i++)
+  for(std::list<AGFilename>::iterator i=ps.begin();i!=ps.end();i++)
     {
       
-      std::vector<std::string> a=getDirectoryInternal(*i+"/"+pDir);
+      std::vector<AGFilename> a=getDirectoryInternal(*i+"/"+pDir);
       std::copy(a.begin(),a.end(),std::back_inserter(v));
     }
       
@@ -545,7 +545,7 @@ std::vector<std::string> getDirectory(const std::string &pDir)
 
 
 
-std::string compress(const std::string &pString)
+AGData compress(const AGData &pString)
 {
   BinaryStringOut o;
   o<<(Uint32)pString.length();
@@ -559,7 +559,7 @@ std::string compress(const std::string &pString)
   delete [] buf;
   return r;
 }
-std::string uncompress(const std::string &pString)
+AGData uncompress(const AGData &pString)
 {
   BinaryStringIn i(pString);
   uLongf orig;
@@ -576,7 +576,7 @@ std::string uncompress(const std::string &pString)
   return r;
 }
 
-std::string getDirSep()
+AGFilename getDirSep()
 {
 #ifdef WIN32
   return "\\";

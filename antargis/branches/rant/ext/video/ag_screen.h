@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #ifndef AG_SCREEN_H
 #define AG_SCREEN_H
 

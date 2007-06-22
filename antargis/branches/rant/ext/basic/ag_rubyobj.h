@@ -33,6 +33,8 @@
    @see saveDelete(AGRubyObject *o)
 */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <string>
 #include <set>
 #include <ag_base.h>

@@ -1,9 +1,11 @@
 #ifndef AG_VIDEO_BASE_H
 #define AG_VIDEO_BASE_H
 
-#include <ag_rubyobj.h>
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-class AGVideoBase:public AGRubyObject
+#include <ag_singleton.h>
+
+class AGVideoBase:public AGSingleton
 {
 
 };

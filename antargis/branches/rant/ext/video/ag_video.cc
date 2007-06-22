@@ -6,6 +6,7 @@
 #include <ag_screen.h>
 #include <ag_sdlscreen.h>
 #include <ag_surfacemanager.h>
+#include <ag_main.h>
 
 #include <SDL_image.h>
 
@@ -18,6 +19,11 @@ static bool fullScreen=false;
 static bool lastGL=false;
 
 static const SDL_VideoInfo *videoInfo;
+
+AGVideoManager::AGVideoManager()
+{
+  mScreen=0;
+}
 
 void AGVideoManager::flip()
 {
@@ -36,6 +42,7 @@ void AGVideoManager::flip()
 */
 void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 {
+  CTRACE;
   if(mScreen)
     {
       getSurfaceManager()->clear();
@@ -202,4 +209,11 @@ int AGVideoManager::width() const
 int AGVideoManager::height() const
 {
   return lastVHeight;
+}
+
+AGVideoManager *getVideo()
+{
+  AGVideoManager *m=dynamic_cast<AGVideoManager*>(getMain()->getVideo());
+  assert(m);
+  return m;
 }

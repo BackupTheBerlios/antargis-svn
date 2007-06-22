@@ -18,7 +18,7 @@
 # License along with this program.
 #
 
-require 'ents.rb'
+require 'entities.rb'
 require 'editor/ent_list.rb'
 
 class AntRubyEditView<GLApp

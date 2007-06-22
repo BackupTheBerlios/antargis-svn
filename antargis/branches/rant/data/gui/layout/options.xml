@@ -52,7 +52,7 @@
 								<text caption="Use frame buffer objects"/>
 							</cell>
 							<cell col="2" row="0">
-								<checkBox name="UseFBO" disabledImage="gui/data/box.png" enabledImage="gui/data/box_cross.png" theme="none"/>
+								<checkBox name="UseFBO" disabledImage="gui/images/basic/box.png" enabledImage="gui/images/basic/box_cross.png" theme="none"/>
 							</cell>
 						</table>
 					</cell>
@@ -63,7 +63,7 @@
 								<text caption="Use animations"/>
 							</cell>
 							<cell col="2" row="0">
-								<checkBox name="UseAnim" disabledImage="gui/data/box.png" enabledImage="gui/data/box_cross.png" theme="none"/>
+								<checkBox name="UseAnim" disabledImage="gui/images/basic/box.png" enabledImage="gui/images/basic/box_cross.png" theme="none"/>
 							</cell>
 						</table>
 					</cell>
@@ -74,7 +74,7 @@
 								<text caption="Use particle effects"/>
 							</cell>
 							<cell col="2" row="0">
-								<checkBox name="UseParticle" disabledImage="gui/data/box.png" enabledImage="gui/data/box_cross.png" theme="none"/>
+								<checkBox name="UseParticle" disabledImage="gui/images/basic/box.png" enabledImage="gui/images/basic/box_cross.png" theme="none"/>
 							</cell>
 						</table>
 					</cell>
@@ -84,7 +84,7 @@
 					<text col="1" row="0" caption="Play intro on start" valign="center"/>
 					<cell col="2" row="0">
 						<frame width="6">
-							<checkBox name="optionIntro" disabledImage="gui/data/box.png" enabledImage="gui/data/box_cross.png" theme="none"/>
+							<checkBox name="optionIntro" disabledImage="gui/images/basic/box.png" enabledImage="gui/images/basic/box_cross.png" theme="none"/>
 						</frame>
 					</cell>
 				</table>

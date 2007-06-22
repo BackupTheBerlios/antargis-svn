@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'libantargis.so'
-include Libantargis
+require 'ruby/antargismath.rb'
 
 setDebugLevel(0)
 

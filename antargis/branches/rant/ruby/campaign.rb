@@ -48,7 +48,10 @@ class CampaignLevel
 		loadscreen.setValue(0)
 		loadscreen.tick
 		begin
-			@app=AntGameApp.new(loadFile(@current),getMain.width,getMain.height,loadscreen)
+			fileContent=loadFile(@current)
+			w=getVideo.width
+			h=getVideo.height
+			@app=AntGameApp.new(fileContent,w,h,loadscreen)
 			@app.run
 			@result=@app.result
 			@app=nil
@@ -213,6 +216,7 @@ class Campaign
 			raise "file not found #{filename}"
 		end
 		puts "CONT"
+		puts filename,filename.class
 		@doc=Document.new(filename)
 		puts "CONT"
 		@xmlRoot=@doc.root

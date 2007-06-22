@@ -1,25 +1,11 @@
-import "md5"
-import "autoclean"
-require 'mkmf'
+import "md5"                          # md5 is needed for automatic checksum-check for changes in files
+import "autoclean"                    # autoclean includes the a simple facility for a clean-make-target
 
 require 'build/base_tools.rb'
     
-#puts self
-#puts self.methods.sort.join("\n")
-
-
-def getConfig(s)
-  r=CONFIG[s]
-  return r if r.nil?
-  r.gsub(/\$\(([^\)]*)\)/) {|a|getConfig(a[2..-2])}
-end
 
 # sitearchdir - include in usr/local
 
-#CONFIG.each{|a,b|
-# puts "#{a} --  #{getConfig(a)}"
-#}
-#exit
 rubyIncDir=getConfig("archdir")
 
 sdlLibs=[`sdl-config --libs`]
@@ -29,10 +15,13 @@ sourceDeps=[
 	["ext/basic",["ext/external"]+sdlLibs],
 	["ext/math",["ext/basic"]],
 	["ext/video",["ext/math","ext/basic","-lSDL_image","-lSDL_ttf","-lGL","-lGLU"]],
-	["ext/sound",["ext/basic"]],
-	["ext/gui",["ext/video"]],
-	["ext/game",["ext/basic","ext/gui"]],
+	["ext/gui",["ext/basic","ext/math","ext/video"]],
+	["ext/sound",["ext/basic","-lSDL_mixer"]], # FIXME: remove dependency from AGWidget somehow !
+	["ext/3dengine",["ext/basic"]],
+	["ext/game",["ext/basic","ext/math","ext/video","ext/gui","ext/3dengine"]],
 ]
+
+$sourceDeps=sourceDeps
 
 sourceDirs=sourceDeps.collect{|a|a[0]}
 
@@ -44,7 +33,7 @@ externalIncludes=`sdl-config --cflags`.gsub("\n","")
 var :INCLUDES => sourceDirs+[rubyIncDir,"."] #.collect{|d|"-I#{d}"}.join(" ")+" "+externalIncludes+" "+rubyIncDir
 var :INCLUDESTR => var[:INCLUDES].collect{|d|"-I#{d}"}.join(" ")+" "+externalIncludes
 
-var :CFLAGS => var[:INCLUDESTR]
+var :CFLAGS => var[:INCLUDESTR]+" -g -O0 -DGCDEBUG"
     
 var.env %w(CC CFLAGS)
     
@@ -187,6 +176,15 @@ end
 #
 
 def importsForInterface(name)
+	
+	$sourceDeps.each{|t|
+		if name=~/#{t[0]}/
+			return t[1].select{|f|not f=~/-.*/}.collect{|f|f+"/interface.i"}.join(":")
+		end
+	}
+	return ""
+
+
 	case name
 		when /ext\/math/
 			"ext/basic/interface.i"
@@ -206,7 +204,7 @@ interfaceSrc = lambda { |target|
 	list
 }
 gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
-	sys "ruby build/create_interface.rb -d=#{getDir(sys.expand_path(t.name))} -i=#{importsForInterface(t.name)}"
+	sys "ruby build/create_interface_new.rb -d=#{getDir(sys.expand_path(t.name))} -i=#{importsForInterface(t.name)}"
 end
 #
 ###########################################

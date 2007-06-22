@@ -34,7 +34,7 @@ bool AGEXPORT saveFile(const AGFilename &pName,const AGData &pContent);
 
 bool AGEXPORT fileExists(const AGFilename &pName);
 
-std::vector<std::string> getDirectory(const AGFilename &pDir);
+std::vector<AGFilename> getDirectory(const AGFilename &pDir);
 
 AGFilename checkFileName(AGFilename s);
 AGFilename getWriteDir();

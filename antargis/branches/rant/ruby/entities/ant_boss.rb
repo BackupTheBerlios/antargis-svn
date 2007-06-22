@@ -18,7 +18,7 @@
 # License along with this program.
 #
 
-require 'ents.rb'
+require 'entities.rb'
 require 'ant_hljobs.rb'
 require 'ant_formations.rb'
 

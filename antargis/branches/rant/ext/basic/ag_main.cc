@@ -173,3 +173,34 @@ std::string getAppName()
 {
   return gAppName;
 }
+
+
+void AGMain::repeatedCalls()
+{
+  for(std::set<AGRepeatedCall*>::iterator i=mCalls.begin();i!=mCalls.end();i++)
+    {
+      (*i)->call();
+    }
+}
+
+void AGMain::setVideo(AGVideoBase *p)
+{
+  mVideo=p;
+}
+
+
+
+///   AGRepeatedCall
+AGRepeatedCall::AGRepeatedCall()
+{
+  assert(hasMain());
+  getMain()->mCalls.insert(this);
+}
+AGRepeatedCall::~AGRepeatedCall()
+{
+  if(hasMain())
+    getMain()->mCalls.erase(this);
+}
+void AGRepeatedCall::call()
+{
+}

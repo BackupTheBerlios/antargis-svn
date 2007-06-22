@@ -7,9 +7,4 @@
 
 extern std::map<std::string,Mix_Chunk*> mSounds;
 
-void initSoundEngine()
-{
-
-}
-
 #warning FIXME: cleanup stored sounds ???

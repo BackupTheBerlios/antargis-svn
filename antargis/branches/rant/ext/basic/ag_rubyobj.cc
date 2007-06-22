@@ -50,15 +50,22 @@ void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
   assert(o);
 
 #ifdef GCDEBUG
+	printf("marking : %lx\n",o);
   assert(gExistingRubies.find(o)!=gExistingRubies.end());
 #endif
 
   if(o->mRubyObject)
     {
+#ifdef GCDEBUG
+			printf("marking ruby : %lx\n",o->mRUBY);
+#endif
       rb_gc_mark(o->mRUBY);
     }
   if(recursive)
     o->mark(); // call this directly
+#ifdef GCDEBUG
+	printf("endmarking : %lx\n",o);
+#endif
 }
 
 void AGRubyObject::clear()

@@ -17,4 +17,7 @@ class AGCollector:public AGRubyObject
   
 };
 
+AGCollector *getCollector();
+
+
 #endif

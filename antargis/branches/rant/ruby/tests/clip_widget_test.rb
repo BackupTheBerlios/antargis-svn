@@ -2,7 +2,7 @@
 
 require 'ruby/antargislib.rb'
 
-getMain.initVideo(640,480,32,false,false)
+getVideo.initVideo(640,480,32,false,false)
 
 setDebugLevel(0)
 

@@ -25,7 +25,7 @@
 # The base-class for all of these high-levels job is AntHLJob .
 # 
 
-require 'ents.rb'
+require 'entities.rb'
 
 # Base class for high-level jobs. It contains the basic functions that're needed for usage within
 # AntBoss (AntHero and AntHouse)

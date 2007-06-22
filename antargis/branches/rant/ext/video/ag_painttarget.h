@@ -21,6 +21,8 @@
 #ifndef __AG_PAINTTARGET_H
 #define __AG_PAINTTARGET_H
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <ag_geometry.h>
 #include <ag_color.h>
 #include <ag_font.h>

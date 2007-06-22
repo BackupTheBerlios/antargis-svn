@@ -19,6 +19,10 @@ module MyAntargisLib
 		@@programDir=Dir.pwd+"/ruby"
 		# add programdir to path
 		$:.push(@@programDir)
+
+		@@extDir=Dir.pwd+"/ext"
+		# add programdir to path
+		$:.push(@@extDir)
 	end
 end
 
@@ -83,10 +87,18 @@ end
 if File.exists?("ext/antargisgame.so")
 	require 'ext/antargisgame'
 else
-	puts "Please run 'rake' before starting this program!"
+	puts "Please run 'rant' before starting this program!"
 	require 'antargisgame'
 end
+
+require 'antargissound.so'
+
 include Antargisgame
+include Antargisbasic
+include Antargisvideo
+include Antargisgui
+include Antargis3dengine
+include Antargissound
 	
 require 'ruby/gui/ag_tools.rb'
 require 'ant_tools'
@@ -175,7 +187,7 @@ module MyAntargislib
 		}
 	
 	
-		@@main=AGMain.new
+		@@main=getMain #AGMain.new
 		xres=1024
 		if getConfig.get("xRes")!=""
 			xres=getConfig.get("xRes").to_i
@@ -200,15 +212,15 @@ module MyAntargislib
 		if @@noVideo.nil?
 			#if xres!=1024 || yres!=768 || $fullscreen
 			dputs @@fullscreen
-			@@main.initVideo(xres,yres,32,@@fullscreen,@@opengl,1024,768)
+			getVideo.initVideo(xres,yres,32,@@fullscreen,@@opengl,1024,768)
 			#end
 		
 			getConfig.set("xRes",xres.to_s)
 			getConfig.set("yRes",yres.to_s)
 			getConfig.set("fullscreen",@@fullscreen.to_s)
 		
-			@@main.setCaption("Antargis")
-			@@main.setIcon("data/gui/editor/tower1.png")
+			getVideo.setCaption("Antargis")
+			getVideo.setIcon("data/gui/editor/tower1.png")
 		end
 	end
 	def MyAntargislib.startGC

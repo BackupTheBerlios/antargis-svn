@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'libantargis.so'
-include Libantargis
+require 'ruby/antargisgui.rb'
+# libantargis.so'
+# include Libantargis
 
 setDebugLevel(0)
 

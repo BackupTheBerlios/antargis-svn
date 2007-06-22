@@ -92,7 +92,7 @@ interfaceI=File.open(filename,"w")
 
 moduleName="Libantargis"
 moduleName=makeLibName(outputDir)
-interfaceI.puts interface_template(moduleName,files,swigInput,addfiles)
+interfaceI.puts interface_template(moduleName,files,swigInput,addfiles,outputDir)
 
 interfaceI.close
 
@@ -129,10 +129,6 @@ deriveList={} # x=>y :x is child of y
 rubyClasses={} # all, which are derived from AGRubyObject
 class2File={}
 
-
-
-
-#files=ARGV
 
 # take RubyObject as base for RubyObjects :-)
 # so simply search for classes deriveListd from this!
@@ -293,30 +289,3 @@ EOT
 
 
 }
-exit
-
-file.close
-
-# now generate antargis.h
-#filename="antargisgui.h"
-filename=outputDir+Dir.separator+"/headers.hh"
-file=File.open(filename,"w")
-
-file.puts "#ifndef __ANTARGIS_H__"
-file.puts "#define __ANTARGIS_H__"
-files.each{|f|
-	file.puts "#include \"#{f}\""
-}
-file.puts "#include <SDL_keysym.h>"
-file.puts "#ifdef SWIG"
-files.each{|f|
-	file.puts "%include \"#{f}\""
-}
-file.puts '%include "/usr/include/SDL/SDL_keysym.h"'
-file.puts "#endif"
-file.puts "#endif"
-
-
-file.close
-
-puts "created nantmarker.hh"

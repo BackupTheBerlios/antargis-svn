@@ -116,7 +116,7 @@ class Document
 
     Node &root();
 
-    std::string toString(bool forceIndent=false) const;
+    AGString toString(bool forceIndent=false) const;
 
     void parseMemory(const AGData &s);
   };
@@ -168,7 +168,7 @@ class Parser
  public:
   virtual ~Parser();
 
-  void parse(const std::string &pData);
+  void parse(const AGData &pData);
   size_t getLine() const;
 
   virtual void simpleTag(const AGString &pName,const Node::Attributes &pAttributes);
@@ -191,9 +191,9 @@ class DomParser:public Parser
   virtual void comment(const AGString &pText);
   virtual void header(const AGString &pText);
 
-  Document *parse(const std::string &pData);
+  Document *parse(const AGData &pData);
 
-  Document *parse(const std::string &pData,Document *d);
+  Document *parse(const AGData &pData,Document *d);
 };
   
 

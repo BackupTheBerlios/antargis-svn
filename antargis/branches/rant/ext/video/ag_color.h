@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #ifndef AG_COLOR_H
 #define AG_COLOR_H
 

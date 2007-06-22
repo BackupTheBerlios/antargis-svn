@@ -8,7 +8,7 @@
 template<class TMatrix>
 bool gauss(TMatrix &a,TMatrix &b,int size)
 {
-  TRACE;
+  //TRACE;
   // cdebug("A:\n"<<a.toString());
   // cdebug("B:\n"<<b.toString());
 

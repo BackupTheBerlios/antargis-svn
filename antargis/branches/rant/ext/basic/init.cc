@@ -1,9 +1,22 @@
 #include <ag_main.h>
 #include <ag_debug.h>
 
+#include <list>
+#include <string>
+#include <map>
+
+//#include "antargisexternalswig.h"
+
+typedef struct swig_type_info;
+
+typedef swig_type_info*(*CastFunction)(void**);
+
+std::map<std::string,std::list<CastFunction> > agCastFunctions;
+
 void AG_Init_libantargisbasic()
 {
-	TRACE;
-	AGMain *main=new AGMain;
+  TRACE;
+  if(!hasMain())
+    AGMain *main=new AGMain;
 }
 

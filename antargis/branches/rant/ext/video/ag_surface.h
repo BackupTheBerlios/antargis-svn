@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #ifndef __GUI_SURFACE_H
 #define __GUI_SURFACE_H
 

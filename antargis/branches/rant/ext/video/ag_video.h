@@ -1,6 +1,8 @@
 #ifndef AG_VIDEO_H
 #define AG_VIDEO_H
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <ag_video_base.h>
 
 #include <string>
@@ -38,6 +40,8 @@ class AGVideoManager:public AGVideoBase
 };
 
 bool glMode();
+
+AGVideoManager *getVideo();
 
 #endif
 
