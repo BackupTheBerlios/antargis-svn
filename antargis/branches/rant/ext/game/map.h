@@ -60,8 +60,10 @@ class AntMap:public HeightMap
   
   EntityList getEntities(const AGRect2&r);
   EntityList getAllEntities();
-  std::vector<AntEntityPtr> getAllEntitiesV();
-  std::vector<AntEntityPtr> getEntities(const AGString &pName);
+//  std::vector<AntEntityPtr> getAllEntitiesV();
+//  std::vector<AntEntityPtr> getEntities(const AGString &pName);
+  std::vector<AntEntity*> getAllEntitiesV();
+  std::vector<AntEntity*> getEntities(const AGString &pName);
 
   AntEntity *getEntity(const Mesh &pMesh);
   AntEntity *getEntity(const AnimMesh &pMesh);
@@ -70,7 +72,8 @@ class AntMap:public HeightMap
   AntEntity *getByName(const AGString &pName);
 
   AntEntity *getNext(AntEntity *me,const AGString &pType,size_t atLeast=0);
-  std::vector<AntEntityPtr> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
+//  std::vector<AntEntityPtr> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
+  std::vector<AntEntity*> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
 
   void setHeuristic(HeuristicFunction *pFunction);
 

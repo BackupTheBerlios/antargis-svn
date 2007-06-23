@@ -33,6 +33,7 @@
 #include "/home/david/projects/antargis/rant/ext/3dengine/mesh_2d.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/scene.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/anim_mesh.h"
+#include "/home/david/projects/antargis/rant/ext/3dengine/mesh_optimizer.h"
 #ifdef SWIG
 %include "/home/david/projects/antargis/rant/ext/3dengine/mesh_data.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/scene_base.h"
@@ -43,5 +44,6 @@
 %include "/home/david/projects/antargis/rant/ext/3dengine/mesh_2d.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/scene.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/anim_mesh.h"
+%include "/home/david/projects/antargis/rant/ext/3dengine/mesh_optimizer.h"
 #endif
 #endif

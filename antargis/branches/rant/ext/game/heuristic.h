@@ -1,6 +1,8 @@
 #ifndef HEURISTIC_H
 #define HEURISTIC_H
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <ag_geometry.h>
 
 class HeuristicFunction

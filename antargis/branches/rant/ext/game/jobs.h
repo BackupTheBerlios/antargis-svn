@@ -22,6 +22,8 @@
 #define ANT_JOBS_H
 #include <ag_geometry.h>
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 class AntEntity;
 
 /**

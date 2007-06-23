@@ -1,6 +1,8 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <map>
 #include <ag_xml.h>
 

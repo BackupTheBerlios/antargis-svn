@@ -1,6 +1,8 @@
 #ifndef __antargis_gl_water_h
 #define __antargis_gl_water_h
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include "glsl.h"
 #include "scene.h"
 #include "ag_texturecache.h"

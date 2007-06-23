@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #ifndef __TEXTURE_CACHE_H__
 #define __TEXTURE_CACHE_H__
 
