@@ -131,7 +131,7 @@ class SimpleGraph:public AGRubyObject
   };
 
   SimpleGraph();
-  
+  SimpleGraph(const SimpleGraph &g);
 
   Node *addNode(const AGVector2 &p);
   /**
@@ -188,12 +188,9 @@ HeuristicFunction *computeHeuristic(SimpleGraph *g);
 class DecimatedGraph:public SimpleGraph
 {
  public:
-  DecimatedGraph()
-    {
-    }
-  DecimatedGraph(const SimpleGraph &g):SimpleGraph(g)
-    {
-    }
+  DecimatedGraph();
+  DecimatedGraph(const SimpleGraph &g);
+  ~DecimatedGraph();
   void decimate(float amount,MapPathWeighter *pWeighter);
  private:
   void tryRemove(Edge *e,MapPathWeighter *pWeighter);

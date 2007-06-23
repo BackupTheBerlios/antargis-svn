@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #ifndef ANT_FRUSTUM_H
 #define ANT_FRUSTUM_H
 
@@ -42,6 +44,7 @@ AntPlane makePlane(const AGVector3 &p0,const AGVector3 &p1,const AGVector3 &p2);
 class AntFrustum
 {
  public:
+  AntFrustum();
   AntFrustum(const std::vector<AntPlane> &pPlanes);
 
   bool inside(const AGVector3 &v) const;

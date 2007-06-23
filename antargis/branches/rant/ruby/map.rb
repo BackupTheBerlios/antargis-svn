@@ -178,10 +178,10 @@ class AntRubyMap<AntMap
 	#end
 
 	def getHeroes()
-		ents=getAllEntitiesV
+		ents=getAllEntities
 		ret=[]
 		ents.each{|eptr|
-			ent=eptr.get
+			ent=eptr
 			#dputs ent
 			if ent.class==AntHero
 				ret.push(ent)

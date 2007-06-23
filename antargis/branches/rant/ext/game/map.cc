@@ -218,22 +218,25 @@ AntMap::EntityList AntMap::getAllEntities()
 {
   return mEntities;
 }
+/*
 std::vector<AntEntityPtr> AntMap::getAllEntitiesV()
 {
   std::vector<AntEntityPtr> v;
   std::copy(mEntities.begin(),mEntities.end(),std::back_inserter(v));
   return v;
 }
-std::vector<AntEntityPtr> AntMap::getEntities(const AGString &pName)
+*/
+
+std::vector<AntEntity*> AntMap::getEntities(const AGString &pName)
 {
-  std::vector<AntEntityPtr> v;
+  std::vector<AntEntity*> v;
   for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
     if((*i)->provides(pName))
       v.push_back(*i);
   return v;
 }
 
-std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const AGString &pType,size_t atLeast)
+std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,size_t atLeast)
 {
   //  assert(mHeuristicFunction);
 
@@ -264,7 +267,7 @@ std::vector<AntEntityPtr> AntMap::getNextList(AntEntity *me,const AGString &pTyp
         }
     }
 
-  std::vector<AntEntityPtr> vec;
+  std::vector<AntEntity*> vec;
 
   // take one of the nearest, but no farer away than 30% of nearest
   //  AntEntity *e=0;

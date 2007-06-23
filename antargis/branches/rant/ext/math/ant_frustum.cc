@@ -48,6 +48,11 @@ AntPlane makePlane(const AGVector3 &p0,const AGVector3 &p1,const AGVector3 &p2)
 /////////////////////////////////////////////////////////////////////
 // AntFrustum
 /////////////////////////////////////////////////////////////////////
+AntFrustum::AntFrustum()
+{
+	throw std::runtime_error("Possible error in AntFrustum::AntFrustum(): this function shouldn't be called!");
+}
+
 AntFrustum::AntFrustum(const std::vector<AntPlane> &pPlanes):
   mPlanes(pPlanes)
 {

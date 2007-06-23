@@ -26,10 +26,12 @@
 #include "ext/basic/ag_mutex.h"
 #include "/home/david/projects/antargis/rant/ext/math/ag_rand.h"
 #include "/home/david/projects/antargis/rant/ext/math/ag_geometry.h"
+#include "/home/david/projects/antargis/rant/ext/math/ant_frustum.h"
 #include "/home/david/projects/antargis/rant/ext/math/ag_algebra.h"
 #ifdef SWIG
 %include "/home/david/projects/antargis/rant/ext/math/ag_rand.h"
 %include "/home/david/projects/antargis/rant/ext/math/ag_geometry.h"
+%include "/home/david/projects/antargis/rant/ext/math/ant_frustum.h"
 %include "/home/david/projects/antargis/rant/ext/math/ag_algebra.h"
 #endif
 #endif

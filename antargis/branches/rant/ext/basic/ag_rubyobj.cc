@@ -22,6 +22,10 @@ AGRubyObject::AGRubyObject()
   mDeleted=false;
   gExistingRubies.insert(this);
   mRUBY=0;
+#ifdef GCDEBUG
+  printf("NEW ME:%lx\n",this);
+#endif
+  
 }
 AGRubyObject::~AGRubyObject()
 {
@@ -31,7 +35,7 @@ AGRubyObject::~AGRubyObject()
 
   //  cdebug("DEL:"<<mRUBY);
 #ifdef GCDEBUG
-  printf("DEL:%lx  %s\n",mRUBY,mObjName.c_str());
+  printf("DEL:%lx  %s (me:%lx)\n",mRUBY,mObjName.c_str(),this);
 #endif
   mDeleted=true;
   gExistingRubies.erase(this);

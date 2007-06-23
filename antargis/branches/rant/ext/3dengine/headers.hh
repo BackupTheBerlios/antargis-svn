@@ -31,9 +31,12 @@
 #include "/home/david/projects/antargis/rant/ext/3dengine/anim_mesh_data.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/mesh.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/mesh_2d.h"
+#include "/home/david/projects/antargis/rant/ext/3dengine/ant_particle.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/scene.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/anim_mesh.h"
+#include "/home/david/projects/antargis/rant/ext/3dengine/ant_camera.h"
 #include "/home/david/projects/antargis/rant/ext/3dengine/mesh_optimizer.h"
+#include "/home/david/projects/antargis/rant/ext/3dengine/ant_projection.h"
 #ifdef SWIG
 %include "/home/david/projects/antargis/rant/ext/3dengine/mesh_data.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/scene_base.h"
@@ -42,8 +45,11 @@
 %include "/home/david/projects/antargis/rant/ext/3dengine/anim_mesh_data.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/mesh.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/mesh_2d.h"
+%include "/home/david/projects/antargis/rant/ext/3dengine/ant_particle.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/scene.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/anim_mesh.h"
+%include "/home/david/projects/antargis/rant/ext/3dengine/ant_camera.h"
 %include "/home/david/projects/antargis/rant/ext/3dengine/mesh_optimizer.h"
+%include "/home/david/projects/antargis/rant/ext/3dengine/ant_projection.h"
 #endif
 #endif

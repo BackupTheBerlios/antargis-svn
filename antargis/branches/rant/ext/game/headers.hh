@@ -103,6 +103,7 @@
 #include "ext/3dengine/mesh_2d_data.h"
 #include "ext/3dengine/ant_projection.h"
 #include "ext/3dengine/ag_glsl.h"
+#include "ext/3dengine/ant_particle.h"
 #include "/home/david/projects/antargis/rant/ext/game/path.h"
 #include "/home/david/projects/antargis/rant/ext/game/terrain.h"
 #include "/home/david/projects/antargis/rant/ext/game/entity.h"

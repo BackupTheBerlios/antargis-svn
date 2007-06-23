@@ -166,7 +166,7 @@ class AntRubyView <AntBaseMapView
 		return true
 	end
 	def checkMove(t)
-		if getMain.fullscreen
+		if getVideo.fullscreen
 			p=@mousepos
 			m=0
 			w=20

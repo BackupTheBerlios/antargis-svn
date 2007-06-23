@@ -424,7 +424,7 @@ namespace std {
             }
 		
             void each() {
-		for(std::list<T*>::iterator i=self->begin();i!=self->end();i++) // with ptr2
+		for(std::list<T>::iterator i=self->begin();i!=self->end();i++) // with ptr2
                     rb_yield(CONVERT_TO(&(*i));
             }
         }

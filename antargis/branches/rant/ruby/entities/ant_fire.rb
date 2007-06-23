@@ -4,9 +4,9 @@ class AntFire<AntRubyEntity
 		mp=AGVector3.new(0,0,0)
 		setMesh(:on)
 		if MyAntargislib.opengl
-			@smokeMesh=Smoke.new(getMap.getScene,4)
+			@smokeMesh=AntParticle.new(getMap.getScene,4)
 			addMesh(@smokeMesh,mp)
-			smoke=Smoke.new(getMap.getScene,40)
+			smoke=AntParticle.new(getMap.getScene,40)
 			smoke.setFire(true)
 			smoke.setMaxTime(0.8)
 			addMesh(smoke,mp)

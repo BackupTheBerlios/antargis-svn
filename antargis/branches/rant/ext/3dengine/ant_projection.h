@@ -1,6 +1,8 @@
 #ifndef ANT_PROJECTION_H
 #define ANT_PROJECTION_H
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <GLee.h>
 
 #include <ant_frustum.h>
@@ -20,6 +22,7 @@ struct Viewport
 class AntProjection
 {
  public:
+  AntProjection();
   AntProjection(const AGMatrix4 &pMv,const AGMatrix4 &pPr,const Viewport &pVp);
 
   AGVector3 project(const AGVector3 &p) const;

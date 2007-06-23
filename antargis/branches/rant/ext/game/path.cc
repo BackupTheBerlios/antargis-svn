@@ -244,8 +244,23 @@ bool MapPathWeighter::accessible(const AGVector2 &a)
 
 SimpleGraph::SimpleGraph()
 {
+  CTRACE;
   mWidth=0.00001;
 }
+
+SimpleGraph::SimpleGraph(const SimpleGraph &g)
+{
+  mWidth=g.mWidth;
+
+  std::map<Node*,Node*> nodemap;
+  for(NodeMap::const_iterator i=g.mNodeMap.begin();i!=g.mNodeMap.end();i++)
+    {
+      nodemap[i->second]=addNode(i->first);
+    }
+  for(EdgeSet::const_iterator i=g.mEdges.begin();i!=g.mEdges.end();i++)
+    addEdge(nodemap[(*i)->a],nodemap[(*i)->b],(*i)->w0,(*i)->w1);
+}
+
 
 
 SimpleGraph::Node *SimpleGraph::addNode(const AGVector2 &p)
@@ -371,6 +386,7 @@ void SimpleGraph::removeNode(Node *n)
 
 SimpleGraph::~SimpleGraph()
 {
+  CTRACE;
   for(NodeSet::iterator i=mNodes.begin();i!=mNodes.end();i++)
     delete *i;
   for(EdgeSet::iterator i=mEdges.begin();i!=mEdges.end();i++)
@@ -454,6 +470,25 @@ public:
     return e1->maxWeight()<e2->maxWeight();
   }
 };
+
+
+DecimatedGraph::DecimatedGraph()
+{
+  CTRACE;
+}
+
+DecimatedGraph::DecimatedGraph(const SimpleGraph &g):SimpleGraph(g)
+{
+  CTRACE;
+  cdebug("old:"<<(&g));
+}
+
+DecimatedGraph::~DecimatedGraph()
+{
+  CTRACE;
+}
+
+
 
 void DecimatedGraph::decimate(float amount,MapPathWeighter *pWeighter)
 {
@@ -747,6 +782,8 @@ Pathfinder::Pathfinder(SimpleGraph *pGraph,HeuristicFunction *pHeuristic,PathDeb
   mGraph(pGraph),mHeuristic(pHeuristic),
   mDebug(d)
 {
+  CTRACE;
+  cdebug("Simplegraph:"<<mGraph);
 }
 
 void Pathfinder::mark()

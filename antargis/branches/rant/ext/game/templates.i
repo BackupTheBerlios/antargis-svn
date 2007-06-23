@@ -16,8 +16,8 @@ bool SWIG_ANTENTITY_P(VALUE x) {
 
 namespace std
 {
-	specialize_std_vector(AntEntity*,SWIG_ANTENTITY_P,SWIG_RB2AntEntity,SWIG_AntEntity2RB);
-	specialize_std_list(AntEntity*,SWIG_ANTENTITY_P,SWIG_RB2AntEntity,SWIG_AntEntity2RB);
+	specialize_std_vector(AntEntity,SWIG_ANTENTITY_P,SWIG_RB2AntEntity,SWIG_AntEntity2RB);
+	specialize_std_list(AntEntity,SWIG_ANTENTITY_P,SWIG_RB2AntEntity,SWIG_AntEntity2RB);
 }
 
 

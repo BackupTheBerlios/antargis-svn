@@ -165,23 +165,23 @@ class ParsedClasses
 				end
 			}
 		end
-		puts "-------------------------"
-		puts "CLASSLIST:"
-		puts @classList
-
-		puts "-------------------------"
-		puts "RUBY CLASSLIST:"
-		puts @rubyClasses
-
-		puts "-------------------------"
-		puts "DERIVATIONS:"
-			@deriveList.each {|x,y|
-				puts "#{x} #{y} #{@class2File[x]} "
-			}
-		puts "-------------------------"
-		puts "my ruby:"
-		puts getMyRubyClasses
-		puts "-------------------------"
+# 		puts "-------------------------"
+# 		puts "CLASSLIST:"
+# 		puts @classList
+# 
+# 		puts "-------------------------"
+# 		puts "RUBY CLASSLIST:"
+# 		puts @rubyClasses
+# 
+# 		puts "-------------------------"
+# 		puts "DERIVATIONS:"
+# 			@deriveList.each {|x,y|
+# 				puts "#{x} #{y} #{@class2File[x]} "
+# 			}
+# 		puts "-------------------------"
+# 		puts "my ruby:"
+# 		puts getMyRubyClasses
+# 		puts "-------------------------"
 	end
 
 	def initLevels

@@ -1,7 +1,13 @@
 #include "ant_projection.h"
+#include <ag_debug.h>
 
 #include <GL/glu.h>
 
+
+AntProjection::AntProjection()
+{
+  cdebug("Possible Error: AntProjection not initialized!");
+}
 
 AntProjection::AntProjection(const AGMatrix4 &pMv,const AGMatrix4 &pPr,const Viewport &pVp):
   modelview(pMv),projection(pPr),viewport(pVp)

@@ -21,6 +21,8 @@
 #ifndef ANT_CAMERA_H
 #define ANT_CAMERA_H
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <GLee.h>
 
 #include <ant_frustum.h>
