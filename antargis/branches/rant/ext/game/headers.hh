@@ -104,15 +104,17 @@
 #include "ext/3dengine/ant_projection.h"
 #include "ext/3dengine/ag_glsl.h"
 #include "/home/david/projects/antargis/rant/ext/game/terrain.h"
+#include "/home/david/projects/antargis/rant/ext/game/entity.h"
 #include "/home/david/projects/antargis/rant/ext/game/height_map.h"
 #include "/home/david/projects/antargis/rant/ext/game/ant_app.h"
+#include "/home/david/projects/antargis/rant/ext/game/minimap.h"
 #include "/home/david/projects/antargis/rant/ext/game/map.h"
-#include "/home/david/projects/antargis/rant/ext/game/entity.h"
 #ifdef SWIG
 %include "/home/david/projects/antargis/rant/ext/game/terrain.h"
+%include "/home/david/projects/antargis/rant/ext/game/entity.h"
 %include "/home/david/projects/antargis/rant/ext/game/height_map.h"
 %include "/home/david/projects/antargis/rant/ext/game/ant_app.h"
+%include "/home/david/projects/antargis/rant/ext/game/minimap.h"
 %include "/home/david/projects/antargis/rant/ext/game/map.h"
-%include "/home/david/projects/antargis/rant/ext/game/entity.h"
 #endif
 #endif

@@ -52,11 +52,11 @@ bool hasQuit()
 {
   return quited;
 }
-
+/*
 bool glMode()
 {
   return lastGL;
-}
+}*/
 
 
 /**

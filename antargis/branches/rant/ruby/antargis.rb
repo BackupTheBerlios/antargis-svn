@@ -105,7 +105,7 @@ class AntGameApp <AntRubyView
 		puts "PANEL:",@buttonpanel
 		raise 1 if @buttonpanel.nil?
 
-		@miniMap=toMiniMap(@layout.getChild("miniMap"))
+		@miniMap=@layout.getChild("miniMap")
 		@fps=0
 
 		setMainWidget(@layout)

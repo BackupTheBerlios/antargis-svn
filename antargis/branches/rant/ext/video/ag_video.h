@@ -39,7 +39,8 @@ class AGVideoManager:public AGVideoBase
 
 };
 
-bool glMode();
+//bool glMode();
+bool opengl();
 
 AGVideoManager *getVideo();
 

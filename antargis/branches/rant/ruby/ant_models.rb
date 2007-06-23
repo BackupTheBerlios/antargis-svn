@@ -229,8 +229,14 @@ module AntModels
 				if not fileExists(pngname)
 					pngname=""
 				end
-	
-				scenenode=Mesh.new(getMap.getScene,getMeshData(ant2name,getStaticModelScaling(name),pngname),AGVector4.new(0,0,0),angle)
+
+				s=getMap.getScene
+
+				s=getMap.getScene
+				data=getMeshData(ant2name,getStaticModelScaling(name),pngname)
+				v=AGVector4.new(0,0,0)
+				puts "scene:#{s} data:#{data} vec:#{v} angle:#{angle}"
+				scenenode=Mesh.new(s,data,v,angle)
 			end
 		end
 	

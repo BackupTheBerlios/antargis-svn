@@ -3,7 +3,7 @@
 
 void agAssertGL(std::string s)
 {
-  if(glMode())
+  if(opengl())
     {
       GLenum error = glGetError();
       if(error != GL_NO_ERROR) {

@@ -134,23 +134,12 @@ EOT
 	eval("@#{name}=AGSignal.new(self,'#{name}')\n")
 end
 
-if hasLibantargis
-	module Libantargis
-		class AGApplication
-			include AGHandler
-		end
-		class AGWidget
-			include AGHandler
-		end
+module Antargisgui
+	class AGApplication
+		include AGHandler
 	end
-else
-	module Libantargisgui
-		class AGApplication
-			include AGHandler
-		end
-		class AGWidget
-			include AGHandler
-		end
+	class AGWidget
+		include AGHandler
 	end
 end
 

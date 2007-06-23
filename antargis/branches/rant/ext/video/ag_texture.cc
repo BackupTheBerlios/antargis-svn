@@ -169,7 +169,7 @@ AGColor AGTexture::getPixel(int x,int y) const
 
 bool AGTexture::hasTexture() const
 {
-  return mTexture || !glMode();
+  return mTexture || !opengl();
 }
 void AGTexture::clearTexture()
 {

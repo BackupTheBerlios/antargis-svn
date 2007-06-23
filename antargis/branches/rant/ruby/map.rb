@@ -52,6 +52,11 @@ class AntRubyMap<AntMap
 	attr_reader :path
 
 	def initialize(app,pScene,w,h,playerName="Rowen")
+		assert{app.is_a?(AGApplication)}
+		assert{pScene.is_a?(SceneBase)}
+		assert{w.is_a?(Numeric)}
+		assert{h.is_a?(Numeric)}
+
 		super(pScene,w,h)
 		@pause=false # is game paused
 		@app=app
