@@ -204,7 +204,7 @@ interfaceSrc = lambda { |target|
 	list
 }
 gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
-	sys "ruby build/create_interface_new.rb -d=#{getDir(sys.expand_path(t.name))} -i=#{importsForInterface(t.name)}"
+	sys "ruby build/create_interface.rb -d=#{getDir(sys.expand_path(t.name))} -i=#{importsForInterface(t.name)}"
 end
 #
 ###########################################
