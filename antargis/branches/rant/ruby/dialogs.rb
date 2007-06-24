@@ -76,10 +76,6 @@ class AntDialog<AGLayout
 	
 	def eventKeyDown(e)
 		if super then return true end
-		
-		puts "#{e.getKey},#{SDLK_ESCAPE}"
-		raise 1
-
 
 		case e.getKey
 			when SDLK_ESCAPE

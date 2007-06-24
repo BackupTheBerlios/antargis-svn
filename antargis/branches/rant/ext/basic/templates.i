@@ -1,3 +1,5 @@
+%include <SDL_keysym.h>
+
 %template(StdVectorPNode) std::vector<Node*>;
 %template(AGNodeList) std::vector<Node>;
 //%template(AGNodePList) std::vector<Node*>;
