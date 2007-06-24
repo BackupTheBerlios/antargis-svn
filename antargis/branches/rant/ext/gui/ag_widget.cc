@@ -1103,7 +1103,7 @@ void AGWidget::pushChangeRect(const AGRect2 &pRect)
 }
 void AGWidget::clearChangeRects()
 {
-  cdebug("clearing - size was:"<<mMyChanges.size());
+  //  cdebug("clearing - size was:"<<mMyChanges.size());
   mMyChanges.clear();
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
     (*i)->clearChangeRects();
