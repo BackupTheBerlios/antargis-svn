@@ -23,7 +23,7 @@
 
     // Ruby wants class names to start with a capital letter
     // %rename(String) string;
-//    class string;
+    class AGData;
 
     /* Overloading check */
     %typemap(typecheck) AGData = char *;

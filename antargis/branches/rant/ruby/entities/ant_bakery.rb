@@ -15,7 +15,7 @@ class AntBakery<AntHouse
 	def setupMesh
 		setMesh
 		p=AGVector3.new(0,1.6,2.2)
-		addMesh(@smokeMesh=Smoke.new(getMap.getScene,5),p)
+		addMesh(@smokeMesh=AntParticle.new(getMap.getScene,5),p)
 		checkSmoke
 	end
 

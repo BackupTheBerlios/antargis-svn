@@ -1,4 +1,4 @@
-import "md5"                          # md5 is needed for automatic checksum-check for changes in files
+#import "md5"                          # md5 is needed for automatic checksum-check for changes in files
 import "autoclean"                    # autoclean includes the a simple facility for a clean-make-target
 
 require 'build/base_tools.rb'
@@ -6,34 +6,41 @@ require 'build/base_tools.rb'
 require 'config.rb'                   # include build-options
     
 
-# sitearchdir - include in usr/local
 
-rubyIncDir=getConfig("archdir")
-
+# get library-dependencies for libSDL
 sdlLibs=[`sdl-config --libs`]
-   
+
+# configure source-directories.
+# DLLs will be build for each directory and in the given order.
+# on the left the directory containing the sources is given
+# on the right the dependencies, which can be one of the following:
+# - an external library, which then marked by "-l" in front, like "-lz" for the z-library
+# - an internal dependency on a directory
+# NOTE: dependencies are not automatically inherited, you have to include them yourself!
+
 sourceDeps=[
 	["ext/external",["-lz"]],
 	["ext/basic",["ext/external"]+sdlLibs],
 	["ext/math",["ext/basic"]],
 	["ext/video",["ext/math","ext/basic","-lSDL_image","-lSDL_ttf","-lGL","-lGLU"]],
 	["ext/gui",["ext/basic","ext/math","ext/video"]],
-	["ext/sound",["ext/basic","-lSDL_mixer"]], # FIXME: remove dependency from AGWidget somehow !
+	["ext/sound",["ext/basic","-lSDL_mixer"]],
 	["ext/3dengine",["ext/basic"]],
 	["ext/game",["ext/basic","ext/math","ext/video","ext/gui","ext/3dengine"]],
 ]
 
 $sourceDeps=sourceDeps
 
-sourceDirs=sourceDeps.collect{|a|a[0]}
-
-# puts sourceDirs
-# exit
+sourceDirs=sourceDeps.collect{|a|a[0]}    # collect dirs containing source (in the correct order !)
 
 externalIncludes=`sdl-config --cflags`.gsub("\n","")
+
+# sitearchdir - include in usr/local
+rubyIncDir=getConfig("archdir")
     
-var :INCLUDES => sourceDirs+[rubyIncDir,"."] #.collect{|d|"-I#{d}"}.join(" ")+" "+externalIncludes+" "+rubyIncDir
-var :INCLUDESTR => var[:INCLUDES].collect{|d|"-I#{d}"}.join(" ")+" "+externalIncludes
+# gather include-directories (separately from other cflags, so they can be used for swig later on
+var :INCLUDES => sourceDirs+[rubyIncDir,"."]
+var :INCLUDESTR => var[:INCLUDES].collect{|d|"-I#{d}"}.join(" ")+" "+externalIncludes    # build include-string (-I...)
 
 
 # configure cflags out of config.rb
@@ -43,14 +50,9 @@ cflags+=" -g -O0"    if $antConfig["debug"]     # disable optimizations for bett
 cflags+=" -O2"       unless $antConfig["debug"] # enable optimizations
 	
 
+var :CFLAGS => var[:INCLUDESTR]+cflags          # store cflags in "var" for later read-out while compiling
 
-var :CFLAGS => var[:INCLUDESTR]+cflags
-    
-var.env %w(CC CFLAGS)
-    
-sources=sourceDirs.collect{|dir,deps|sys[dir+"/*.cc"]}.flatten.collect{|f|f.sub_ext("oo")}
-
-sources+=(sourceDirs-["ext/external"]).collect{|dir|dir+"/swig.oo"}
+var.env %w(CC CFLAGS)                           # get cflags from environment
 
 ###########################################
 # all-target
@@ -66,10 +68,7 @@ task :all => allTargets
 ###########################################
 # configure - clean-task
 gen AutoClean, :clean
-var[:clean].include "**/marker.i"
-var[:clean].include "**/*swig.h"
-var[:clean].include "**/*swig.cc"
-var[:clean].include "**/*.so"
+#var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
 ###########################################
 
 
@@ -79,32 +78,26 @@ var[:clean].include "**/*.so"
 # build libraries (without swig)
 #
 sourceDeps.each{|pair|
-	dir,dep=pair
-	target="ext"+Dir.separator+"lib"+makeLibName(dir)+".so"
-	tsources=Dir[dir+Dir.separator+"*.cc"]-[dir+Dir.separator+"swig.cc"]
-	tsources.collect!{|f|f.sub_ext("oo")}
-	tsources+=Dir[dir+Dir.separator+"*.c"].collect!{|f|f.sub_ext("o")}
+	dir,dep=pair                                                               # get directory and dependencies
+	target="ext"+Dir.separator+"lib"+makeLibName(dir)+".so"                    # make library name like "ext/libantargisgui.so"
+	tsources=Dir[dir+Dir.separator+"*.cc"].select{|f|not f=~/swig/}            # get all *.cc files (without the swig-generated file)
+	tsources.collect!{|f|f.sub_ext("oo")}                                      # translate the .cc files to .oo
+	tsources+=Dir[dir+Dir.separator+"*.c"].collect!{|f|f.sub_ext("o")}         # add *.c files if there are any
 	extlibs=[]
 	dep.each{|d|
 		if d[0..0]=="-"
-			extlibs << d
+			extlibs << d                                                           # gather external libraries (-lz)
 		else
-			tsources+=["ext"+Dir.separator+"lib"+makeLibName(d)+".so"]
+			tsources+=["ext"+Dir.separator+"lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
 		end
 	}
-# 	puts "DIR:",dir
-# 	puts "TSOURCES:"
-# 	puts tsources
-# 	puts "TARGET:",target
-	task target => tsources do |t|
-# 		puts extlibs
-# 		puts t.prerequisites
-		cmd="g++ -shared -o "+sys.expand_path(t.name)+" "+(t.prerequisites.collect{|f|sys.expand_path(f)}+ extlibs).join(" ")
+	gen Rule, target => tsources do |t|
+		# build command
+		cmd=makeCommand($antConfig["LINKSHARED"],sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
 		sys cmd
-		#sys %w(g++ -shared -o ), sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}+ extlibs
 	end
 }
-#exit
+#
 ###########################################
 
 
@@ -123,17 +116,11 @@ sourceDeps.each{|pair|
 			tsources+=["ext"+Dir.separator+makeLibName(d)+".so"]
 		end
 	}
-#  	puts "DIR:",dir
-#  	puts "TSOURCES:"
-#  	puts tsources
-#  	puts "TARGET:",target
-	task target => tsources do |t|
-		sys %w(g++ -shared -o ), sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}
+	gen Rule, target => tsources do |t|
+		cmd=makeCommand($antConfig["LINKSHARED"],sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}.join(" "))
+		sys cmd
 	end
 }
-# task "libantargis.so" => sources do |t|
-#   sys %w(g++ -shared -o ), sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}
-# end
 ###########################################
     
 
@@ -141,7 +128,8 @@ sourceDeps.each{|pair|
 # build c
 #
 gen Rule, '.o' => '.c' do |t|
-        sys "ccache gcc -c -o #{sys.expand_path(t.name)} #{var :CFLAGS} #{sys.expand_path(t.source)}"
+	cmd=makeCommand($antConfig["CC"],sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
+	sys cmd
 end
 ###########################################
 
@@ -149,19 +137,10 @@ end
 # build c++
 #
 gen Rule, '.oo' => '.cc' do |t|
-        sys "ccache g++ -c -o #{sys.expand_path(t.name)} #{var :CFLAGS} #{sys.expand_path(t.source)}"
+	cmd=makeCommand($antConfig["CXX"],sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
+	sys cmd
 end
-
-# # task "ext/math/swig.oo" => "ext/math/swig.cc" do |t|
-# # 	raise 123
-# # end
-# # 
-# # swigOsrc = lambda {|target|
-# # 	[target.sub("swig.oo","swig.cc")]
-# # }
-# # gen Rule, /^.*swig.oo/ => swigOsrc do |t|
-# #         sys "ccache g++ -c -o #{sys.expand_path(t.name)} #{var :CFLAGS} #{sys.expand_path(t.source)}"
-# # end
+#
 ###########################################
 
 
@@ -174,8 +153,9 @@ swigSrc = lambda { |target|
 	[target.sub(name+"swig.cc","interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
 }
 
-gen Rule, /^.*swig.cc$/ => swigSrc do |t|
-	sys "swig -v -Wall -ruby -c++ -o #{sys.expand_path(t.name)} -DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}"
+gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
+	cmd=makeCommand($antConfig["SWIG"],sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}")
+	sys cmd
 end
 #
 ###########################################
@@ -187,35 +167,25 @@ end
 #
 
 def importsForInterface(name)
-	
 	$sourceDeps.each{|t|
 		if name=~/#{t[0]}/
 			return t[1].select{|f|not f=~/-.*/}.collect{|f|f+"/interface.i"}.join(":")
 		end
 	}
 	return ""
-
-
-	case name
-		when /ext\/math/
-			"ext/basic/interface.i"
-		when /ext\/video/
-			"ext/basic/interface.i:ext/math/interface.i"
-		else
-			""
-	end
-#	puts "NAME:",name
-#	exit
 end
 
 interfaceSrc = lambda { |target| 
 	list=Dir[getDir(target)+Dir.separator+"*.h"].select{|f|not f=~/swig.h/}+Dir["build/*.rb"] # FIXME:replace
 	list+=importsForInterface(target).split(":")
-	puts "LIST:",list,"---"
 	list
 }
-gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
-	sys "ruby build/create_interface.rb -d=#{getDir(sys.expand_path(t.name))} -i=#{importsForInterface(t.name)}"
+gen Rule, /^.*(marker|interface).i$/ => interfaceSrc do |t|
+	cmd=makeCommand($antConfig["CREATEINTERFACE"],getDir(sys.expand_path(t.name)),importsForInterface(t.name))
+	sys cmd
 end
 #
 ###########################################
+
+
+

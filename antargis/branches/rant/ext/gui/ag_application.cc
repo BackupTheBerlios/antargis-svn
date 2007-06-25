@@ -363,7 +363,7 @@ void AGApplication::draw()
   STACKTRACE;
   beginRender();
 
-  cdebug("mainWidget:"<<mainWidget);
+//  cdebug("mainWidget:"<<mainWidget);
   if(mainWidget)
     {
       getScreen().begin();
@@ -398,7 +398,7 @@ void AGApplication::draw()
 	  clip.include(mainWidget->getScreenRect());
 	}
 
-      cdebug("CLIP:"<<clip.toString());
+  //    cdebug("CLIP:"<<clip.toString());
       paintTarget.clip(clip);
       mainWidget->drawAll(*p);
 
@@ -438,7 +438,7 @@ void AGApplication::draw()
     }
 
   endRender();
-  cdebug("end render");
+//  cdebug("end render");
 }
 
 /**

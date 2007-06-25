@@ -817,7 +817,7 @@ AGWidget *AGWidget::getChild(const AGString &pName)
       if(w)
 				break;
     }
-	cdebug("w:"<<w);
+//	cdebug("w:"<<w);
   return w;
 }
 
@@ -965,7 +965,7 @@ void AGWidget::setDrawn()
 
 void AGWidget::queryRedraw()
 {
-  cdebug(getName()<<"::"<<typeid(*this).name());
+//  cdebug(getName()<<"::"<<typeid(*this).name());
   mCacheTouched=true;
   regChange();
 }
@@ -1098,7 +1098,7 @@ std::list<AGRect2> AGWidget::aquireChanges()
 }
 void AGWidget::pushChangeRect(const AGRect2 &pRect)
 {
-  cdebug("push:"<<pRect);
+//  cdebug("push:"<<pRect);
   mMyChanges.push_back(pRect);
 }
 void AGWidget::clearChangeRects()

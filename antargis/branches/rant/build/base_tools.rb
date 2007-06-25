@@ -22,3 +22,8 @@ def getConfig(s)
   return r if r.nil?
   r.gsub(/\$\(([^\)]*)\)/) {|a|getConfig(a[2..-2])} # replace recursive values within this form: $(...)
 end
+
+# build a command out of templates in config.rb
+def makeCommand(cmd,output,input)
+	cmd.sub("§OUTPUT§",output).sub("§INPUT§",input)
+end

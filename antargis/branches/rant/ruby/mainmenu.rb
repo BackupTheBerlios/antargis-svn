@@ -170,7 +170,6 @@ class AntMenuApp <AntApplication
 			return true
 		end
 		puts "MUH"
-		#raise 1
 		@loadMenu.getChild("desc").setText(AGStringUtf8.new(""))
 		filename=id=@loadMenu.getChild("list").getSelectedID
 		fn="savegames/"+id.gsub(".antcmp",".png")

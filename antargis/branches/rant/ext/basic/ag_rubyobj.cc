@@ -131,7 +131,9 @@ bool saveDelete(AGRubyObject *o)
   assert(o);
   if(gExistingRubies.find(o)==gExistingRubies.end())
     {
+#ifdef GCDEBUG
       cdebug("already deleted!");
+#endif
       return false; // already deleted
     }
   assert(!o->mDeleted);

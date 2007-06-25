@@ -50,6 +50,6 @@
 				<text col="0" row="2" name="campaignDescription" font="story.font" align="center" enabled="false" caption=""/>
 			</table>
 		</table>
-		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005 by the Antargis-team"/>
+		<text col="0" row="3" font="yellow.font" align="center" enabled="false" caption="(C) 2005-2007 by the Antargis-team"/>
 	</table>
 </layout>
