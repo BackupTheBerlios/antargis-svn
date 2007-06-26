@@ -68,7 +68,8 @@ task :all => allTargets
 ###########################################
 # configure - clean-task
 gen AutoClean, :clean
-#var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
+var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
+var[:clean].include "ext/*.so"
 ###########################################
 
 
@@ -91,7 +92,7 @@ sourceDeps.each{|pair|
 			tsources+=["ext"+Dir.separator+"lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
 		end
 	}
-	gen Rule, target => tsources do |t|
+	task target => tsources do |t|
 		# build command
 		cmd=makeCommand($antConfig["LINKSHARED"],sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
 		sys cmd
@@ -116,7 +117,7 @@ sourceDeps.each{|pair|
 			tsources+=["ext"+Dir.separator+makeLibName(d)+".so"]
 		end
 	}
-	gen Rule, target => tsources do |t|
+	task target => tsources do |t|
 		cmd=makeCommand($antConfig["LINKSHARED"],sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}.join(" "))
 		sys cmd
 	end
@@ -180,7 +181,7 @@ interfaceSrc = lambda { |target|
 	list+=importsForInterface(target).split(":")
 	list
 }
-gen Rule, /^.*(marker|interface).i$/ => interfaceSrc do |t|
+gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
 	cmd=makeCommand($antConfig["CREATEINTERFACE"],getDir(sys.expand_path(t.name)),importsForInterface(t.name))
 	sys cmd
 end

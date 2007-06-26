@@ -19,6 +19,12 @@
 # License along with this program.
 #
 
+# = Short Description =
+# 
+
+
+
+
 require 'build/interface_template.rb'
 require 'build/base_tools.rb'
 
@@ -69,40 +75,21 @@ class MyInput
 	end
 end
 
-class MClass
-  def initialize(name,superClass)
-    @name=name
-    @superClass=superClass
-  end
-end
-
-class SimpleParser
-	@mclasses=[]
-	def initialize(files)
-	end
-	
-end
-
-def getDirs
-  files=`find ext -type d`.gsub("\r","").split("\n")
-end
-
 def getFiles(dir)
 	Dir[dir+Dir.separator+"*.h"].select{|f|not f=~/swig.h/} #-[dir+Dir.separator+"swig.h"]
 end
 
+## check if the given string is contained in the file specified by filename
 def grepBool(filename,string)
 	File.open(filename).each_line{|l|return true if l=~/#{string}/}
 	false
 end
 
+## select those files that are set be exported through swig
 def getSwigInterfaceFiles(files)
 	files.select{|f|
 		grepBool(f,"INCLUDE_SWIG")
 	}
-end
-
-def getClasses
 end
 
 class ParsedClasses
@@ -150,6 +137,7 @@ class ParsedClasses
 		@classList=@class2File.keys
 	end
 
+	# check which classes are derived from AGRubyObject and thus handled specifically
 	def processDerivations
 		@rubyClasses << "AGRubyObject"
 		@classList.sort!.uniq!
@@ -165,31 +153,12 @@ class ParsedClasses
 				end
 			}
 		end
-# 		puts "-------------------------"
-# 		puts "CLASSLIST:"
-# 		puts @classList
-# 
-# 		puts "-------------------------"
-# 		puts "RUBY CLASSLIST:"
-# 		puts @rubyClasses
-# 
-# 		puts "-------------------------"
-# 		puts "DERIVATIONS:"
-# 			@deriveList.each {|x,y|
-# 				puts "#{x} #{y} #{@class2File[x]} "
-# 			}
-# 		puts "-------------------------"
-# 		puts "my ruby:"
-# 		puts getMyRubyClasses
-# 		puts "-------------------------"
 	end
 
-	def initLevels
-		puts "initLevels..."
-		@levels={}
-		@levels["AGRubyObject"]=0
+	## through derivations
+	def spreadLevels
 		changed=true
-		l=0
+		l=@levels.values.max
 		while changed
 			changed=false
 			@deriveList.each{|x,y|
@@ -200,17 +169,15 @@ class ParsedClasses
 			}
 			l+=1
 		end
+	end
 
-		(0..l).each{|i|
-			@levels.each{|n,level|
-				if level==i
-					puts "#{i} #{n}"
-				end
-			}
-		}
-	#if false
-		puts "-------------"		
-		# give classes with no parent next level
+	def initLevels
+		puts "initLevels..."
+		@levels={}
+		@levels["AGRubyObject"]=0
+		spreadLevels
+
+		# give classes with no extisting parent next level
 		@classList.each{|c|
 			if @levels[c].nil?
 				if (not @deriveList.keys.member?(c)) 
@@ -219,43 +186,24 @@ class ParsedClasses
 			end
 		}
 
-		# repeat process
-		changed=true
-		while changed
-			changed=false
-			@deriveList.each{|x,y|
-				if @levels[y]==l and @levels[x].nil?
-					@levels[x]=l+1
-					changed=true
+		spreadLevels
+
+		if true
+			l=@levels.values.max+1
+			# give classes with no parent next level
+			@classList.each{|c|
+				if @levels[c].nil?
+					if (@deriveList[@deriveList[c]].nil?)
+						@levels[c]=l
+					end
 				end
 			}
-			l+=1
+	
+			spreadLevels
 		end
 
-		puts "-------------"		
-		# give classes with no parent next level
-		@classList.each{|c|
-			if @levels[c].nil?
-				if (@deriveList[@deriveList[c]].nil?)
-					@levels[c]=l
-				end
-			end
-		}
+		l=@levels.values.max
 
-		# repeat process
-		changed=true
-		while changed
-			changed=false
-			@deriveList.each{|x,y|
-				if @levels[y]==l and @levels[x].nil?
-					@levels[x]=l+1
-					changed=true
-				end
-			}
-			l+=1
-		end
-
-#end
 		(0..l).each{|i|
 			@levels.each{|n,level|
 				if level==i
@@ -263,18 +211,20 @@ class ParsedClasses
 				end
 			}
 		}
+		failed=false
 		@classList.each{|c|
 			if @levels[c].nil?
 				puts "-- #{c}"
+				failed=true
 			end
 		}
-
-		puts "initLevels...ok"
-
+		raise "Non processes classes found!" if failed
 	end
 
 	# in correct order
 	def getFileList
+
+		# build file list out of class-order (files may appear several times)
 		files=[]
 		l=@levels.values.max
 		(0..l).each{|i|
@@ -285,32 +235,21 @@ class ParsedClasses
 			}
 		}
 
-		puts "getFileList:"
-		puts files,files.class
-		puts "---------"
-
+		# add files of classes with unknown level
 		@classList.each{|c|
 			if @levels[c].nil? and @class2File[c]
 				files << @class2File[c]
 			end
 		}
 
-		puts "getFileList:"
-		puts files,files.class
-		puts "---------"
-		files=files.select{|f|@myfiles.member?(f)}
+		files=files.select{|f|@myfiles.member?(f)} # select only "my" files - those included in this directory
 		addfiles=@files-files
-		files+=addfiles
+		files+=addfiles                            # add files that are in other directories
 
-
-		puts "getFileList:"
-		puts files,files.class
-		puts "---------"
+		# unique the array
 		if files.length>0
 			files.uniq!
 		end
-		puts files,files.class
-		puts "---------"
 		files
 	end
 
@@ -326,11 +265,7 @@ end
 
 def generateInterfaceFile(myInput,files,addfiles)
 	filename=myInput.interfaceName
-	puts "filename:",filename
 	interfaceI=File.open(filename,"w")
-	
-	
-	puts "SWIGINPUTS:",myInput.swigInput,"--------------"
 	
 	interfaceI.puts interface_template(myInput.moduleName,files,myInput.swigInput,addfiles,myInput.outputDir)
 	
@@ -356,12 +291,6 @@ files=getSwigInterfaceFiles(getFiles(myInput.outputDir))
 
 parsedClasses=ParsedClasses.new(files,`find $(pwd) -name "*.h"|grep -v swig`.split("\n"))
 files=parsedClasses.getFileList
-
-#exit
-
-puts "GETFILES:",files,files.class
-
-puts files.join("|")
 
 addfiles=[]
 myInput.swigInput.each{|inDir|
@@ -521,9 +450,6 @@ deriveList.each{|b,a|
 }
 
 myClasses=myClasses.sort.uniq
-
-puts "rubyClasses:",rubyClasses
-puts "myClasses:",myClasses
 
 file.puts <<EOT
 %{
