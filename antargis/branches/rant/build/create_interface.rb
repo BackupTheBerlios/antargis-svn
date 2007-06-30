@@ -204,21 +204,23 @@ class ParsedClasses
 
 		l=@levels.values.max
 
-		(0..l).each{|i|
-			@levels.each{|n,level|
-				if level==i
-					puts "#{i} #{n}"
-				end
-			}
-		}
-		failed=false
-		@classList.each{|c|
-			if @levels[c].nil?
-				puts "-- #{c}"
-				failed=true
-			end
-		}
-		raise "Non processes classes found!" if failed
+		# 		# output levels
+		# 		(0..l).each{|i|
+		# 			@levels.each{|n,level|
+		# 				if level==i
+		# 					puts "#{i} #{n}"
+		# 				end
+		# 			}
+		# 		}
+		# 		# check for failed classes
+		# 		failed=false
+		# 		@classList.each{|c|
+		# 			if @levels[c].nil?
+		# 				puts "-- #{c}"
+		# 				failed=true
+		# 			end
+		# 		}
+		# 		raise "Non processes classes found!" if failed
 	end
 
 	# in correct order
