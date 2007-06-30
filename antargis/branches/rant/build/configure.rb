@@ -1,3 +1,17 @@
+#
+# This is a library for simple build-configuration management.
+# For a brief example have a look at BoA's configure-script.
+# 
+# The configuration-process goes like this
+# 1) include this file
+# 2) define cmd-line-options with CFG.addOption
+# 3) add checks for programs, files, libraries (checkProgram, checkFile, checkLibrary)
+# 4) add custom-checks with addCheck(...)
+# 5) include basic-configuration functionality with CFG.includeConfig - have a look at build/configs/unix.rb for more information on this
+# 6) run the configuration with CFG.run - a config.rb file will be written 
+##
+
+
 module CFG
 	@@options=[]
 	@@config={}
