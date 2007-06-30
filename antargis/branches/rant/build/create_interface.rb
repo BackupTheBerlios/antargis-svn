@@ -109,6 +109,7 @@ class ParsedClasses
 	def loadAllDerivations(allfiles)
 		@class2File={}
 		@deriveList={} # x=>y :x is child of y
+		@allClasses=[]
 
 		allfiles.each{|fn|
 			g=File.open(fn)
@@ -120,9 +121,11 @@ class ParsedClasses
 				
 				if a =~ /^class.*/ then
 					cn=a.gsub("class ","").gsub(/:.*/,"").gsub("\n","").gsub(" ","")
+					@allClasses << cn.gsub(";","")
 					if cn=~/^[A-Z].*/
 						if a=~ /.*public.*/ then
 							pn=a.gsub(/.*public /,"").gsub("\n","")
+							@allClasses << pn
 							@deriveList[cn]=pn
 							@class2File[cn]=fn
 						elsif not a=~/;/ then
@@ -135,6 +138,7 @@ class ParsedClasses
 			}
 		}
 		@classList=@class2File.keys
+		@allClasses=@allClasses.sort.uniq
 	end
 
 	# check which classes are derived from AGRubyObject and thus handled specifically
@@ -262,6 +266,9 @@ class ParsedClasses
 	def getAllRubyClasses
 		@rubyClasses
 	end
+	def getAllClasses
+		@allClasses
+	end
 end
 
 
@@ -303,61 +310,6 @@ myInput.swigInput.each{|inDir|
 
 generateInterfaceFile(myInput,files,addfiles)
 
-# old implementation
-
-
-classList=[]
-deriveList={} # x=>y :x is child of y
-rubyClasses={} # all, which are derived from AGRubyObject
-class2File={}
-
-
-# take RubyObject as base for RubyObjects :-)
-# so simply search for classes deriveListd from this!
-
-files.each{|fn|
-	g=File.open(fn)
-	cn=""
-	g.each{|a|
-		abak=a
-		a.gsub!("AGEXPORT","")
-		a.gsub!("EXPORT","")
-		
-		if a =~ /^class.*/ then
-			cn=a.gsub("class ","").gsub(/[:;].*/,"").gsub(/\n/,"").gsub(" ","")
-			if cn=~/^[A-Z].*/
-				classList+=[cn]
-				if a=~ /.*public.*/ then
-					pn=a.gsub(/.*public /,"").gsub(/\n/,"")
-					deriveList[cn]=pn
-					rubyClasses[cn]=false
-					rubyClasses[pn]=false
-					class2File[cn]=fn
-				elsif not a=~/;/ then
-					deriveList[cn]=nil
-				end
-			end
-		end
-	
-	}
-}
-
-rubyClasses["AGRubyObject"]=true
-
-classList.sort!.uniq!
-
-# check for children of AGWidget
-changed=true
-while changed do
-	changed=false
-	deriveList.each {|x,y|
-		if rubyClasses[y] and rubyClasses[x]==false then
-			rubyClasses[x]=true
-			changed=true
-		end
-	}
-end
-
 file=File.open(myInput.markerName,"w")
 
 # ok, first marking is included
@@ -375,36 +327,6 @@ parsedClasses.getMyRubyClasses.each {|x|
 		file.puts "%markfunc "+x+" \"general_markfunc\""
 	#end
 }
-
-# calculate class-derivations
-derivations={}
-rubyClasses.each{|x,y|
-	derivations[x]=[]
-}
-deriveList.each{|x,y|
-	if not derivations[y]
-		derivations[y]=[]
-	end
-	derivations[y].push(x)
-}
-changed=true
-while changed
-	changed=false
-	derivations.each{|x,y|
-		y.each{|a|
-			if derivations[a]
-				old=derivations[x]
-				derivations[x]+=derivations[a]
-				derivations[x].sort!
-				derivations[x].uniq!
-				#puts x+":"+old.length.to_s+" "+derivations[x].length.to_s
-				if old.length<derivations[x].length
-					changed=true
-				end
-			end
-		}
-	}
-end
 
 # swig typemaps
 # so that always the lowest children in a derivation hierarchy is returned
@@ -427,6 +349,8 @@ parsedClasses.deriveList.keys.each{|s|
 
 	end
 }
+
+classList=parsedClasses.getAllClasses
 # normal typemaps
 classList.each{|c|
 	file.puts "%typemap(directorout) #{c} {"
@@ -443,15 +367,7 @@ file.puts "}"
 rubyClasses=parsedClasses.getMyRubyClasses
 allRubyClasses=parsedClasses.getAllRubyClasses
 
-myClasses=[]
-
-deriveList.each{|b,a|
-	if rubyClasses.member?(b) || b=="AGRubyObject"
-		myClasses << b
-	end
-}
-
-myClasses=myClasses.sort.uniq
+myClasses=parsedClasses.getMyRubyClasses
 
 file.puts <<EOT
 %{
@@ -488,7 +404,7 @@ DYNAMIC_CAST(SWIGTYPE_p_#{k}, #{k}_dynamic_cast);
 EOT
 }
 
-deriveList.each{|b,a|
+parsedClasses.deriveList.each{|b,a|
 	if rubyClasses.member?(b) and allRubyClasses.member?(a)
 		# for each pair generate a casting function and register it into agCastFunctions
 file.puts <<EOT
