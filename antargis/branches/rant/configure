@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'build/configure.rb'
+
+puts <<EOT
+Battle of Antargis - Configuration
+-------------------------------------------------------------------------------
+EOT
+
+CFG.addOption("enable-debug","d",
+	"enable debugging") do  ||
+		CFG.set("debug",true)
+	end
+
+CFG.addOption("enable-gc-debug","g",
+	"enable debugging of garbage collector") do  ||
+		CFG.set("gcdebug",true)
+	end
+
+CFG.addOption("prefix","",
+	"set prefix directory","dir") do |d|
+		CFG.set("prefix",d)
+	end
+
+CFG.addOption("profile","p",
+	"enable profiling of C++-code") do ||
+		CFG.set("profile",true)
+	end
+
+CFG.addOption("drmuser","",
+	"set user for DRM","user") do |v|
+		CFG.set("drmuser",v)
+	end
+
+CFG.addOption("drmpw","",
+	"set password for DRM","password") do |v|
+		CFG.set("drmpass",v)
+	end
+
+CFG.checkProgram("ccache")
+CFG.checkProgram("gcc")
+CFG.checkProgram("g++")
+CFG.checkProgram("swig")
+CFG.checkProgram("ruby")
+
+CFG.includeConfig
+
+
+CFG.run
+
+puts 

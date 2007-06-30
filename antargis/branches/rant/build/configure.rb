@@ -1,0 +1,177 @@
+module CFG
+	@@options=[]
+	@@config={}
+	@@checks=[]
+
+	def CFG.addOption(name,short,help,param=nil,&proc)
+		@@options.push({:name=>name,:short=>short,:help=>help,:proc=>proc,:param=>param})
+	end
+	def CFG.options
+		@@options
+	end
+	def CFG.addCheck(name,&proc)
+		@@checks << {:name=>name,:proc=>proc}
+	end
+
+	def CFG.call(name)
+		@@options.each{|op|
+			if op[:name]==name || op[:short]==name
+				op[:proc].call
+			end
+		}
+	end
+	def CFG.parseArgs
+		ARGV.each{|arg|
+			found=false
+			# parse single arguments like "-d" or "-dgh" (like tar -xfz)
+			if arg=~/^-[a-z]+$/
+				found=true
+				# check if all characters represent a correct option
+				arg[1..-1].scan(/./){|byte|
+					found=false if @@options.select{|op|op[:short]==byte}.length==0
+				}
+				if found
+					# all were ok, so call each these options
+					arg[1..-1].scan(/./){|byte|
+						@@options.each{|op|op[:proc].call if op[:short]==byte}
+					}
+				end
+			end
+			if not found
+				# option could not yet be processed, so do a second try
+				@@options.each{|op|
+					name=op[:name]
+					ename=name.gsub("+","\\\\+")
+					#puts "ENAME:#{ename}"
+					# parse "simple" options without parameters
+					if arg=~/^--#{ename}$/ or arg=~/^-#{op[:short]}$/
+						found=true
+						op[:proc].call
+					# parse options with parameter, given like this : "-d=<somedir>" or "--dir=bladir"
+					elsif arg=~/^--#{ename}=.+/ or arg=~/^-#{op[:short]}=.+$/
+						found=true
+						op[:proc].call(arg.gsub(/^[^=]+=/,""))
+					end
+				}
+			end
+			puts "ERROR: argument '#{arg}' could not be processed!" if not found
+		}
+	end
+
+	def CFG.run
+		parseArgs
+		ok=runChecks
+		saveConfig if ok
+	end
+
+	def CFG.runChecks
+		puts 
+		failed=[]
+		@@checks.each{|c|
+			text="checking "+c[:name]+" ..."
+			print text
+			ok=c[:proc].call
+			#ok=(not ok.nil?)
+			print " "*(40-text.length)
+			puts ({true=>"ok",false=>"failed"}[ok])
+			failed << c[:name] unless ok
+		}
+		if failed.length>0
+			puts 
+			puts "ERROR:"
+			puts "The following tests failed:"
+			failed.each{|f|puts f}
+		end
+
+		failed.length==0
+	end
+
+	def CFG.saveConfig
+		configName="config.rb"
+		f=File.open(configName,"w")
+		f.puts <<EOT
+$config={
+#{@@config.collect{|k,v|"  '"+k+"'=>"+toS(v)}.join(",\n")}
+}
+EOT
+		f.close
+		puts File.open(configName).read
+	
+	end
+
+	def CFG.toS(v)
+		case v
+			when String
+				"'"+v.to_s+"'"
+			else
+				v.to_s
+		end
+	end
+
+	def CFG.set(n,v)
+		@@config[n]=v
+	end
+	def CFG.get(n)
+		@@config[n]
+	end
+
+	def CFG.checkProgram(program)
+		addOption("path-"+program,"",
+			"set path to program '#{program}' like this:\n --path-#{program}=/usr/local/bin/#{program}","path") do |d|
+				set(program,d)
+			end
+
+		addCheck ("program "+program) do ||
+			path=get(program)
+			path||=findProgram(program)
+			r=testProgram(path)
+			set (program,path) if r
+			r
+		end
+	end
+
+	def CFG.findProgram(program)
+		`whereis #{program}`.gsub(/[^:]*: */,"").split(" ")[0]
+	end
+
+	def CFG.testProgram(path)
+		#puts path,File.exists?(path),"--"
+			File.exists?(path)
+	end
+
+	def CFG.includeConfig
+		avail=["unix"]
+		addOption("base-config","",
+			"set base-config like "+avail.join(", "),"config") do |v|
+			set("base-config",v)
+		end
+		addCheck ("base-config") do ||
+			c=get("base-config")
+			c=nil unless avail.member?(c)
+			c||="unix"
+			require "build/configs/"+c+".rb"
+			$config.each{|k,v|@@config[k]||=v}
+			true
+		end
+	end
+
+
+	addOption("help","h",
+		"display help text") do
+			CFG.options.each{|op|
+				text=""
+				text << "--#{op[:name]}"
+				text << "=<#{op[:param]}>" if op[:param]
+				text << ", -#{op[:short]}" if op[:short]!=""
+				text << "=<#{op[:param]}>" if op[:short]!="" and op[:param]
+				text+=" "*(40-text.length)
+				l=text.length
+				helpa=op[:help].split("\n")
+				text+=helpa[0]
+				helpa[1..-1].each{|h|
+					text << "\n"+" "*l+h
+				}
+				puts text
+			}
+	end
+end

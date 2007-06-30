@@ -45,9 +45,9 @@ var :INCLUDESTR => var[:INCLUDES].collect{|d|"-I#{d}"}.join(" ")+" "+externalInc
 
 # configure cflags out of config.rb
 cflags=""
-cflags+=" -DGCDEBUG" if $antConfig["gcdebug"]   # enable debuggin of garbage-collection
-cflags+=" -g -O0"    if $antConfig["debug"]     # disable optimizations for better debugging
-cflags+=" -O2"       unless $antConfig["debug"] # enable optimizations
+cflags+=" -DGCDEBUG" if $config["gcdebug"]   # enable debuggin of garbage-collection
+cflags+=" -g -O0"    if $config["debug"]     # disable optimizations for better debugging
+cflags+=" -O2"       unless $config["debug"] # enable optimizations
 	
 
 var :CFLAGS => var[:INCLUDESTR]+cflags          # store cflags in "var" for later read-out while compiling
@@ -94,7 +94,7 @@ sourceDeps.each{|pair|
 	}
 	task target => tsources do |t|
 		# build command
-		cmd=makeCommand($antConfig["LINKSHARED"],sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
+		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
 		sys cmd
 	end
 }
@@ -118,7 +118,7 @@ sourceDeps.each{|pair|
 		end
 	}
 	task target => tsources do |t|
-		cmd=makeCommand($antConfig["LINKSHARED"],sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}.join(" "))
+		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}.join(" "))
 		sys cmd
 	end
 }
@@ -129,7 +129,7 @@ sourceDeps.each{|pair|
 # build c
 #
 gen Rule, '.o' => '.c' do |t|
-	cmd=makeCommand($antConfig["CC"],sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
+	cmd=makeCommand("CC_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
 	sys cmd
 end
 ###########################################
@@ -138,7 +138,7 @@ end
 # build c++
 #
 gen Rule, '.oo' => '.cc' do |t|
-	cmd=makeCommand($antConfig["CXX"],sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
+	cmd=makeCommand("CXX_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
 	sys cmd
 end
 #
@@ -155,7 +155,7 @@ swigSrc = lambda { |target|
 }
 
 gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
-	cmd=makeCommand($antConfig["SWIG"],sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}")
+	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}")
 	sys cmd
 end
 #
@@ -182,7 +182,7 @@ interfaceSrc = lambda { |target|
 	list
 }
 gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
-	cmd=makeCommand($antConfig["CREATEINTERFACE"],getDir(sys.expand_path(t.name)),importsForInterface(t.name))
+	cmd=makeCommand("CREATEINTERFACE",getDir(sys.expand_path(t.name)),importsForInterface(t.name))
 	sys cmd
 end
 #
