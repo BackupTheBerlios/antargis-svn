@@ -2,6 +2,8 @@
 
 require 'build/configure.rb'
 
+version="0.2.1"
+
 puts <<EOT
 Battle of Antargis - Configuration
 -------------------------------------------------------------------------------
@@ -35,6 +37,11 @@ CFG.addOption("drmuser","",
 CFG.addOption("drmpw","",
 	"set password for DRM","password") do |v|
 		CFG.set("drmpass",v)
+	end
+
+CFG.addOption("version","v",
+	"set release version of BoA","version",version) do |v|
+		CFG.set("version",v)
 	end
 
 CFG.checkProgram("ccache")

@@ -1,5 +1,7 @@
-#import "md5"                          # md5 is needed for automatic checksum-check for changes in files
+#import "md5"                         # md5 is needed for automatic checksum-check for changes in files
 import "autoclean"                    # autoclean includes the a simple facility for a clean-make-target
+import "package/tgz"                  # support for packaging (tar.gz, zip)
+import "rubydoc"
 
 require 'build/base_tools.rb'
 
@@ -65,15 +67,7 @@ task :all => allTargets
 
 
 
-###########################################
-# configure - clean-task
-gen AutoClean, :clean
-var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
-var[:clean].include "ext/*.so"
-###########################################
-
-
-    
+   
 
 ###########################################
 # build libraries (without swig)
@@ -188,5 +182,77 @@ end
 #
 ###########################################
 
+###########################################
+# make swig-sources
+#
+task :swigSources =>sourceDirs.collect{|d|d+Dir.separator+makeLibName(d)+"swig.cc"} do
+end
+#
+###########################################
+
+###########################################
+# make rant-stand-alone
+#
+task :rantStandAlone =>[] do |t|
+	`rant-import --auto build.rb`
+end
+#
+###########################################
+
+###########################################
+# build extensions
+#
+task :extensions=>allTargets do |t|
+end
+#
+###########################################
 
 
+###########################################
+# build source-distribution
+#
+task :dist=>[:swigSources,:rantStandAlone] do |t|
+end
+#
+###########################################
+
+###########################################
+# build source-distribution
+#
+binpkg=gen Package::Tgz, "packages","antargis-"+extendCommand($config,"system")+"-"+extendCommand($config,"version"), :extension => ".tar.gz", :files => (sys["ext/*.so"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/)}
+
+task :bindist=>[:extensions,binpkg.path] do |t| #"packages/antargis-"+extendCommand($config,"version")+".tar.gz"] do |t|
+end
+#
+###########################################
+
+# # build documentation
+# task :doc do
+# 	puts "running doxygen"
+# 	`doxygen Doxyfile`
+# 	rubies=`find -name "*.rb"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}.join(" ")
+# 	readmes=`find -name "README"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}.join(" ")
+# 	headers=`find -name "*.h"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}.join(" ")
+# 	`rdoc -m README --op docs/ruby #{rubies} #{readmes}` # --exclude "(\\.cc|\\.c|skat|test\/|contrib)"`
+# end
+
+desc "Generate html documentation for c++-sources"
+task :doxygen=>[] do |t|
+			# run doxygen in here
+ 			`doxygen build/Doxyfile`
+ end
+desc "Generate html documentation."
+	gen RubyDoc do |t|
+			readmes=`find -name "README"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}
+			rubies=`find ruby -name "*.rb"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}
+			a=(readmes+rubies)
+			t.opts = %w(--title Battles\ of\ Antargis --main README )+a
+			t.dir = "docs/ruby"
+	end
+
+###########################################
+# configure - clean-task
+gen AutoClean, :clean
+var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
+var[:clean].include "ext/*.so"
+###########################################

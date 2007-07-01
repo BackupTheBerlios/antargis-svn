@@ -17,8 +17,8 @@ module CFG
 	@@config={}
 	@@checks=[]
 
-	def CFG.addOption(name,short,help,param=nil,&proc)
-		@@options.push({:name=>name,:short=>short,:help=>help,:proc=>proc,:param=>param})
+	def CFG.addOption(name,short,help,param=nil,default=nil,&proc)
+		@@options.push({:name=>name,:short=>short,:help=>help,:proc=>proc,:param=>param,:default=>default})
 	end
 	def CFG.options
 		@@options
@@ -72,8 +72,17 @@ module CFG
 		}
 	end
 
+	def CFG.checkDefaults
+		@@options.each{|op|
+			if get(op[:name]).nil? and op[:default]
+				set(op[:name],op[:default])
+			end
+		}
+	end
+
 	def CFG.run
 		parseArgs
+		checkDefaults
 		ok=runChecks
 		saveConfig if ok
 	end
@@ -139,7 +148,7 @@ EOT
 			path=get(program)
 			path||=findProgram(program)
 			r=testProgram(path)
-			set (program,path) if r
+			set(program,path) if r
 			r
 		end
 	end
