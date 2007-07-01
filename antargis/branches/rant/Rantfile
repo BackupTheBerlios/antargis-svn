@@ -5,6 +5,7 @@ import "rubydoc"
 
 require 'build/base_tools.rb'
 
+puts "ERROR: Please run ./configure before building!" unless File.exists?("config.rb")
 require 'config.rb'                   # include build-options
     
 
@@ -244,9 +245,6 @@ task :doxygen=>[] do |t|
 desc "Generate html documentation."
 	gen RubyDoc do |t|
 			a=sys["**/README"]+sys["ruby/**/*.rb"]
-			#a=sys["**/README"]+sys["ext/*/*swig.{h,cc}"]+sys["ext/*/ag_application.h"]
-			#a=sys["**/README"]+sys["ext/basic/*swig.{h,cc}"]+sys["ext/basic/*.h"]
-puts a
 			t.opts = %w(--title Battles\ of\ Antargis --main README )+a
 			t.dir = "docs/ruby"
 	end

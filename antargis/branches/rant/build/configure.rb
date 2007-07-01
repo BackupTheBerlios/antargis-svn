@@ -118,7 +118,7 @@ $config={
 }
 EOT
 		f.close
-		puts File.open(configName).read
+		#puts File.open(configName).read
 	
 	end
 
