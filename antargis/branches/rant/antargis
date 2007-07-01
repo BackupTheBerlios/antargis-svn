@@ -1,3 +1,4 @@
 #!/bin/sh
 #echo $@
+test -e ext/antargisgame.so || echo "ERROR:Ruby extensions were not built yet! Please type this first:\n> ruby build.rb\nor\n> rant\nif the first one doesn't work."
 ruby run.rb $@>/tmp/ant-stdout.txt 2>/tmp/ant-stderr.txt
