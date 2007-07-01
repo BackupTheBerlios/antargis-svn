@@ -243,9 +243,10 @@ task :doxygen=>[] do |t|
  end
 desc "Generate html documentation."
 	gen RubyDoc do |t|
-			readmes=`find -name "README"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}
-			rubies=`find ruby -name "*.rb"`.split("\n").select{|f|not (f=~/(contrib|skat|test)/)}
-			a=(readmes+rubies)
+			a=sys["**/README"]+sys["ruby/**/*.rb"]
+			#a=sys["**/README"]+sys["ext/*/*swig.{h,cc}"]+sys["ext/*/ag_application.h"]
+			#a=sys["**/README"]+sys["ext/basic/*swig.{h,cc}"]+sys["ext/basic/*.h"]
+puts a
 			t.opts = %w(--title Battles\ of\ Antargis --main README )+a
 			t.dir = "docs/ruby"
 	end
