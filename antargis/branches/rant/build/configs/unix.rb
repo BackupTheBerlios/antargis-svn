@@ -14,6 +14,8 @@ $config={
 	"CCACHE"=>"$(ccache)",
 
 	"LINK"=>"$(CXX)",
+    "LIBS"=>"",
+
 
   # call the compiler using the standard unix-style mechanism <CC> -c -o <outputname> <input0> [<input1> ...]
 	"COMPILE_PARAMS"=>" -c -o $(OUTPUT) $(INPUT)",

@@ -11,7 +11,7 @@ require 'config.rb'                   # include build-options
 
 
 # get library-dependencies for libSDL
-sdlLibs=[`sdl-config --libs`]
+sdlLibs=$config['LIBS'].split(" ")
 
 # configure source-directories.
 # DLLs will be build for each directory and in the given order.
@@ -22,8 +22,8 @@ sdlLibs=[`sdl-config --libs`]
 # NOTE: dependencies are not automatically inherited, you have to include them yourself!
 
 sourceDeps=[
-	["ext/external",["-lz"]],
-	["ext/basic",["ext/external"]+sdlLibs],
+	["ext/external",["-lz"]+sdlLibs],
+	["ext/basic",["ext/external","-lmsvcrt-ruby18","-lz"]+sdlLibs],
 	["ext/math",["ext/basic"]],
 	["ext/video",["ext/math","ext/basic","-lSDL_image","-lSDL_ttf","-lGL","-lGLU"]],
 	["ext/gui",["ext/basic","ext/math","ext/video"]],
@@ -36,7 +36,8 @@ $sourceDeps=sourceDeps
 
 sourceDirs=sourceDeps.collect{|a|a[0]}    # collect dirs containing source (in the correct order !)
 
-externalIncludes=`sdl-config --cflags`.gsub("\n","")
+externalIncludes=$config['CFLAGS']
+#externalIncludes+=`sdl-config --cflags`.gsub("\n","")
 
 # sitearchdir - include in usr/local
 rubyIncDir=getConfig("archdir")
@@ -76,21 +77,37 @@ task :all => allTargets
 sourceDeps.each{|pair|
 	dir,dep=pair                                                               # get directory and dependencies
 	target="ext"+Dir.separator+"lib"+makeLibName(dir)+".so"                    # make library name like "ext/libantargisgui.so"
-	tsources=Dir[dir+Dir.separator+"*.cc"].select{|f|not f=~/swig/}            # get all *.cc files (without the swig-generated file)
+	tsources=Dir[dir+"/*.cc"].select{|f|not f=~/swig/}            # get all *.cc files (without the swig-generated file)
 	tsources.collect!{|f|f.sub_ext("oo")}                                      # translate the .cc files to .oo
-	tsources+=Dir[dir+Dir.separator+"*.c"].collect!{|f|f.sub_ext("o")}         # add *.c files if there are any
+	tsources+=Dir[dir+"/*.c"].collect!{|f|f.sub_ext("o")}         # add *.c files if there are any
 	extlibs=[]
+    
+    puts "TARGET:",target
+    puts "TSOURCES:",tsources
+    
 	dep.each{|d|
 		if d[0..0]=="-"
 			extlibs << d                                                           # gather external libraries (-lz)
 		else
 			tsources+=["ext"+Dir.separator+"lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
+            #tsources+=["-l"+makeLibName(d)]
 		end
 	}
 	task target => tsources do |t|
 		# build command
-		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
+        sources=t.prerequisites
+        if ENV['WINDIR']
+            puts "EXTLIBS #{extlibs}"
+            extlibs+=sources.select{|f|f=~/\.so/}.collect!{|s|s.gsub(/.*lib(.*)\.so/,'-l\1')}
+            puts "SOURCES #{sources}"
+            puts "EXTLIBS #{extlibs}"
+            sources=sources.select{|f|not f=~/\.so/}
+        end
+		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), (sources.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
 		sys cmd
+        if ENV['WINDIR']
+            sys "mv #{sys.expand_path(t.name)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll")}.a"
+        end
 	end
 }
 #

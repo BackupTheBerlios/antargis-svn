@@ -11,6 +11,7 @@
 # 6) run the configuration with CFG.run - a config.rb file will be written 
 ##
 
+require 'build/platform.rb'
 
 module CFG
 	@@options=[]
@@ -23,8 +24,8 @@ module CFG
 	def CFG.options
 		@@options
 	end
-	def CFG.addCheck(name,&proc)
-		@@checks << {:name=>name,:proc=>proc}
+	def CFG.addCheck(name,needed=true,&proc)
+		@@checks << {:name=>name,:proc=>proc,:needed=>needed}
 	end
 
 	def CFG.call(name)
@@ -97,7 +98,7 @@ module CFG
 			#ok=(not ok.nil?)
 			print " "*(40-text.length)
 			puts ({true=>"ok",false=>"failed"}[ok])
-			failed << c[:name] unless ok
+			failed << c[:name] unless ok or not c[:needed]
 		}
 		if failed.length>0
 			puts 
@@ -138,13 +139,13 @@ EOT
 		@@config[n]
 	end
 
-	def CFG.checkProgram(program)
+	def CFG.checkProgram(program,needed=true)
 		addOption("path-"+program,"",
 			"set path to program '#{program}' like this:\n --path-#{program}=/usr/local/bin/#{program}","path") do |d|
 				set(program,d)
 			end
 
-		addCheck ("program "+program) do ||
+		addCheck("program "+program,needed) do
 			path=get(program)
 			path||=findProgram(program)
 			r=testProgram(path)
@@ -153,8 +154,33 @@ EOT
 		end
 	end
 
+    def CFG.getPath
+        p=ENV['PATH']
+        psep={"/"=>":","\\"=>";"}[Dir.separator]
+        #puts p,p.class,psep
+        ps=p.split(psep)
+        #puts get("prefix")
+        ps << get("prefix")+Dir.separator+"bin" if get("prefix")
+        if Dir.separator=="\\"
+            ps << (Dir.pwd+"/build/win32/usr/bin").gsub("/",Dir.separator)
+        end
+        ps
+    end
+
 	def CFG.findProgram(program)
-		`whereis #{program}`.gsub(/[^:]*: */,"").split(" ")[0]
+        #program+=".exe" if Dir.separator=="\\" and not program=~/\.\{exe|com|bat\}$/
+        paths=getPath
+        paths.each{|p|
+            currentPath=p+Dir.separator+program
+            puts "TST #{currentPath}"
+            if File.exists?(currentPath)
+                puts "FOUND! at #{currentPath}"
+                return currentPath
+            end
+        }
+        return findProgram(program+".exe") if Dir.separator=="\\" and not program=~/exe$/
+        return ""
+		#`whereis #{program}`.gsub(/[^:]*: */,"").split(" ")[0]
 	end
 
 	def CFG.testProgram(path)
@@ -163,7 +189,7 @@ EOT
 	end
 
 	def CFG.includeConfig
-		avail=["unix"]
+		avail=["unix","mingw32"]
 		addOption("base-config","",
 			"set base-config like "+avail.join(", "),"config") do |v|
 			set("base-config",v)

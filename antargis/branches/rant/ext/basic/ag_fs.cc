@@ -374,7 +374,7 @@ std::string getUserDir()
 
 #define SHGFP_TYPE_CURRENT 0
 
-std::string getDocumentsDir()
+AGFilename getDocumentsDir()
 {
   CHAR wszPath[MAX_PATH];
   
@@ -382,7 +382,7 @@ std::string getDocumentsDir()
 
   SHGetFolderPath( hWnd, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, wszPath );
 
-  std::string s(wszPath);
+  AGFilename s(wszPath);
 
   return s;
 

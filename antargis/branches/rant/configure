@@ -44,11 +44,21 @@ CFG.addOption("version","v",
 		CFG.set("version",v)
 	end
 
-CFG.checkProgram("ccache")
+CFG.checkProgram("ccache",false)
 CFG.checkProgram("gcc")
 CFG.checkProgram("g++")
 CFG.checkProgram("swig")
 CFG.checkProgram("ruby")
+CFG.checkProgram("sdl-config")
+
+CFG.addCheck("sdl-config --libs",false) do
+        libs=nil
+        begin
+            libs=`#{CFG.get("sdl-config")} --libs`
+        rescue
+        end
+        CFG.set("LIBS",libs) if libs        
+    end
 
 CFG.includeConfig
 

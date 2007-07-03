@@ -27,8 +27,9 @@
 #include <string>
 #include <set>
 
-#include "ag_geometry.h"
+//#include "ag_geometry.h"
 #include "ag_rubyobj.h"
+#include <ag_string.h>
 
 class AGListener;
 class AGSignal;

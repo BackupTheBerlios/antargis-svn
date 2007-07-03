@@ -1,10 +1,6 @@
-require 'mkmf'                        # mkmf holds information about the compiler-settings while compiling ruby (by the maintainer)
+#require 'mkmf'                        # mkmf holds information about the compiler-settings while compiling ruby (by the maintainer)
 
-class Dir
-	def Dir.separator
-		"/" # FIXME
-	end
-end
+require 'build/platform.rb'
 
 def getDir(path)
 	# FIXME: check for windows
@@ -13,7 +9,8 @@ end
 
 
 def makeLibName(dir)
-	"antargis"+dir.split(Dir.separator)[-1]
+    puts "makeLibName #{dir}"
+	"antargis"+dir.split("/")[-1]
 end
 
 # build a command out of templates in config.rb
