@@ -90,14 +90,14 @@ AGVector2 AGEvent::getMousePosition() const
   AGVector2 p;
   switch(mEvent.type) {
   case SDL_MOUSEMOTION:
-    p[0]=mEvent.motion.x*getVideo()->width()/getVideo()->realWidth();
-    p[1]=mEvent.motion.y*getVideo()->height()/getVideo()->realHeight();
+    p[0]=mEvent.motion.x*getMain()->getVideo()->width()/getMain()->getVideo()->realWidth();
+    p[1]=mEvent.motion.y*getMain()->getVideo()->height()/getMain()->getVideo()->realHeight();
     break;
     
   case SDL_MOUSEBUTTONUP:
   case SDL_MOUSEBUTTONDOWN:
-    p[0]=mEvent.button.x*getVideo()->width()/getVideo()->realWidth();
-    p[1]=mEvent.button.y*getVideo()->height()/getVideo()->realHeight();
+    p[0]=mEvent.button.x*getMain()->getVideo()->width()/getMain()->getVideo()->realWidth();
+    p[1]=mEvent.button.y*getMain()->getVideo()->height()/getMain()->getVideo()->realHeight();
     break;
     
   }

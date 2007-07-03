@@ -1,13 +1,14 @@
 #ifndef AG_STRING
 #define AG_STRING
 
+#include <ag_base.h>
 #include <string>
 #include <vector>
 #include <SDL.h>
 
 
 /** A string class that natively supports UTF-8 */
-class AGString:public std::string
+class AGEXPORT AGString:public std::string
 {
  public:
   static const size_t npos = static_cast<size_t>(-1);

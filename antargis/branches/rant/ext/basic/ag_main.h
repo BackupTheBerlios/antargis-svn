@@ -55,7 +55,7 @@ class AGRepeatedCall
   virtual void call();
 };
 
-class AGMain:public AGRubyObject
+class AGEXPORT AGMain:public AGRubyObject
 {
  public:
   AGMain();
@@ -89,7 +89,7 @@ class AGMain:public AGRubyObject
 };
 
 bool hasMain();
-AGMain *getMain();
+AGEXPORT AGMain *getMain();
 
 bool hasQuit();
 

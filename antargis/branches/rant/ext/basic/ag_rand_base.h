@@ -5,7 +5,7 @@
 
 #include <ag_rubyobj.h>
 
-class AGRandomizerBase:public AGRubyObject
+class AGEXPORT AGRandomizerBase:public AGRubyObject
 {
  public:
 #ifdef SWIG

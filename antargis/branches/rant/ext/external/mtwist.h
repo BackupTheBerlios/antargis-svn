@@ -1,6 +1,8 @@
 #ifndef MTWIST_H
 #define MTWIST_H
 
+#include <ag_base.h>
+
 /*
  * $Id: mtwist.h,v 1.15 2003/09/11 23:56:20 geoff Exp geoff $
  *
@@ -194,7 +196,11 @@ extern void		mts_bestseed(mt_state* state);
 					/* ..If /dev/random is unavailable, */
 					/* ..falls back to mt_goodseed().  */
 					/* ..Not usually worth the cost.  */
-extern void		mts_refresh(mt_state* state);
+                    
+                    
+// was extern                    
+                    
+AGEXPORT void		mts_refresh(mt_state* state);
 					/* Generate 624 more random values */
 extern int		mts_savestate(FILE* statefile, mt_state* state);
 					/* Save state to a file (ASCII). */
@@ -331,8 +337,21 @@ extern double		mt_ldrand(void);
 	while (0)
 
 extern mt_state		mt_default_state;
-					/* State of the default generator */
-extern double		mt_32_to_double;
+
+/* State of the default generator */
+#ifdef __cplusplus
+extern "C" {
+    #ifdef WIN32
+__declspec(dllimport)
+#endif
+    extern double		mt_32_to_double;
+}
+    #else
+#ifdef WIN32
+__declspec(dllexport) 
+#endif
+extern   double		mt_32_to_double;
+#endif
 					/* Multiplier to convert long to dbl */
 extern double		mt_64_to_double;
 					/* Mult'r to cvt long long to dbl */

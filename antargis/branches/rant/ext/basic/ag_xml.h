@@ -32,7 +32,7 @@
 
 #include "ag_debug.h"
 
-class Node
+class AGEXPORT Node
   {
   public:
     typedef std::map<AGString,AGString> Attributes;

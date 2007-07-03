@@ -7,6 +7,12 @@
 
 class AGVideoBase:public AGSingleton
 {
+public:
+  virtual int width() const;
+  virtual int height() const;
+
+  virtual int realWidth() const;
+  virtual int realHeight() const;
 
 };
 

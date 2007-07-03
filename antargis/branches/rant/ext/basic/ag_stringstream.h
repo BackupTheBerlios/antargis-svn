@@ -11,7 +11,7 @@
 /// possible seperators are:
 ///  ' '    ','    '_'  ';' '\n'
 /// the standard behaviour on blanks and newlines is to eat them
-class AGStringStream
+class AGEXPORT AGStringStream
 {
  public:
   AGStringStream(const AGString &buffer="");

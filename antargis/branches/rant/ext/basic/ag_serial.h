@@ -11,7 +11,7 @@ class SerialException
 {
 };
 
-class BinaryIn
+class AGEXPORT BinaryIn
 {
  public:
   BinaryIn();
@@ -26,7 +26,7 @@ class BinaryIn
   BinaryIn &operator>>(float &f);
 };
 
-class BinaryOut
+class AGEXPORT BinaryOut
 {
  public:
   BinaryOut();
@@ -39,7 +39,7 @@ class BinaryOut
   BinaryOut &operator<<(const float &f);
 };
 
-class BinaryFileIn:public BinaryIn
+class AGEXPORT BinaryFileIn:public BinaryIn
 {
  public:
   BinaryFileIn(const std::string &pName);
@@ -57,7 +57,7 @@ class BinaryFileIn:public BinaryIn
   size_t size;
 };
 
-class BinaryFileOut:public BinaryOut
+class AGEXPORT BinaryFileOut:public BinaryOut
 {
  public:
   BinaryFileOut(const std::string &pName);
@@ -74,7 +74,7 @@ class BinaryFileOut:public BinaryOut
   size_t p;
 };
 
-class BinaryStringIn:public BinaryIn
+class AGEXPORT BinaryStringIn:public BinaryIn
 {
  public:
   BinaryStringIn(const std::string &pText);
@@ -85,7 +85,7 @@ class BinaryStringIn:public BinaryIn
   std::istringstream is;
 };
 
-class BinaryStringOut:public BinaryOut
+class AGEXPORT BinaryStringOut:public BinaryOut
 {
  public:
   BinaryStringOut();

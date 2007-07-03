@@ -32,7 +32,7 @@ for a in `find -name "SDL*.h" ` ; {
     cp $a usr/include 2>/dev/null
 }
 
-for a in begin_code.h close_code.h zlib.h zconf.h ; {
+for a in begin_code.h close_code.h zlib.h zconf.h png.h pngconf.h; {
     cp `find -name $a` usr/include
 }
 

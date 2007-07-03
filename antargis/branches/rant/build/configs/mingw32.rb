@@ -16,7 +16,7 @@ $config={
     
     "LIBS"=>"-lmingw32 -lSDLmain -lSDL -mwindows",
     "LIBDIR"=>"-L#{Dir.pwd}/build/win32/usr/lib",
-
+    "LIBGL"=>"-lopengl32 -lglu32",
 	"LINK"=>"$(CXX)",
     #"CFLAGS"=>"-D_GNU_SOURCE=1 -Dmain=SDL_main",
     "CFLAGS"=>"-Dmain=SDL_main -IC:/antargis/rant/build/win32/usr/lib/ruby/1.8/i386-mingw32",
