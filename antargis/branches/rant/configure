@@ -54,10 +54,19 @@ CFG.checkProgram("sdl-config")
 CFG.addCheck("sdl-config --libs",false) do
         libs=nil
         begin
-            libs=`#{CFG.get("sdl-config")} --libs`
+            libs=`#{CFG.get("sdl-config")} --libs`.gsub("\n","")
         rescue
         end
         CFG.set("LIBS",libs) if libs        
+    end
+
+CFG.addCheck("sdl-config --cflags",false) do
+        libs=nil
+        begin
+            libs=`#{CFG.get("sdl-config")} --cflags`.gsub("\n","")
+        rescue
+        end
+        CFG.set("CFLAGS",libs) if libs        
     end
 
 CFG.includeConfig
