@@ -15,6 +15,7 @@ $config={
 
 	"LINK"=>"$(CXX)",
   "LIBS"=>"",
+	"RUBYLIB"=>"ruby1.8",
 	"INCLUDES"=>"",
     "LIBGL"=>"-lGL -lGLU",
   # call the compiler using the standard unix-style mechanism <CC> -c -o <outputname> <input0> [<input1> ...]

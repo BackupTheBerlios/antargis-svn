@@ -13,7 +13,8 @@ $config={
 	"SWIG"=>"$(swig)",
 	"RUBY"=>"$(ruby)",
 	"CCACHE"=>"$(ccache)",
-    
+
+	"RUBYLIB"=>"msvcrt-ruby18",
     "LIBS"=>"-lmingw32 -lSDLmain -lSDL -mwindows",
     "LIBDIR"=>"-L#{Dir.pwd}/build/win32/usr/lib",
     "LIBGL"=>"-lopengl32 -lglu32",

@@ -204,6 +204,13 @@ EOT
 		end
 	end
 
+	def CFG.checkCompile
+		
+	end
+
+	def CFG.checkLibrary(libname)
+	end
+
 
 	addOption("help","h",
 		"display help text") do

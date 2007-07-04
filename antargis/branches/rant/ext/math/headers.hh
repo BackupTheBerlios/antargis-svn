@@ -1,5 +1,11 @@
 #ifndef __ANTARGIS_H__
 #define __ANTARGIS_H__
+#include "ext/external/mtwist.h"
+#include "ext/external/randistrs.h"
+#include "ext/external/sge_config.h"
+#include "ext/external/sge_internal.h"
+#include "ext/external/sge_primitives.h"
+#include "ext/external/sge_surface.h"
 #include "ext/basic/ag_base.h"
 #include "ext/basic/ag_collector.h"
 #include "ext/basic/ag_config.h"

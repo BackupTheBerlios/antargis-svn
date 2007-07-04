@@ -23,7 +23,7 @@ sdlLibs=$config['LIBS'].split(" ")
 
 sourceDeps=[
 	["ext/external",["-lz"]+sdlLibs],
-	["ext/basic",["ext/external","-lmsvcrt-ruby18","-lz"]+sdlLibs],
+	["ext/basic",["ext/external","-l"+$config['RUBYLIB'],"-lz"]+sdlLibs],
 	["ext/math",["ext/external","ext/basic"]],
 	["ext/video",["ext/external","ext/basic","ext/math","-lSDL_image","-lSDL_ttf"]+$config["LIBGL"].split(" ")+sdlLibs],
 	["ext/gui",["ext/basic","ext/math","ext/video"]],
