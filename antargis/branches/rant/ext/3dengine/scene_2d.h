@@ -5,7 +5,7 @@
 
 class AGPainter;
 
-class Scene2D:public SceneBase
+class AGEXPORT Scene2D:public SceneBase
 {
  public:
   typedef std::vector<PickNode> PickResult;

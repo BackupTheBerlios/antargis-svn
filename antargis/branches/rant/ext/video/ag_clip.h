@@ -5,7 +5,7 @@
 
 #include <ag_geometry.h>
 
-class AGClipping
+class AGEXPORT AGClipping
 {
  public:
   void include(const AGRect2 &r);

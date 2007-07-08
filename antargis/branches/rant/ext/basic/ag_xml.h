@@ -104,7 +104,7 @@ class AGEXPORT Node
     AGString mContent;
   };
 
-class Document
+class AGEXPORT Document
   {
     Node *mRoot;
   public:
@@ -121,7 +121,7 @@ class Document
     void parseMemory(const AGData &s);
   };
 
-class Parser
+class AGEXPORT Parser
 {
   struct Data
   {
@@ -179,7 +179,7 @@ class Parser
   virtual void header(const AGString &pText);
 };
 
-class DomParser:public Parser
+class AGEXPORT DomParser:public Parser
 {
   Document *doc;
   std::list<Node*> nodes;

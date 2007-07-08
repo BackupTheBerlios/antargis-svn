@@ -31,7 +31,7 @@ class AGInternalSurface;
    AGGLTexture is an internal class for managing opengl-textures.
    You shouldn't use it directly - all functionality is provided by AGTexture.
  */
-class AGGLTexture
+class AGEXPORT AGGLTexture
 {
  public:
   AGGLTexture(size_t W,size_t H,GLint format=GL_RGBA);

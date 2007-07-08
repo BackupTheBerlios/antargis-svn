@@ -4,7 +4,7 @@
 #include <ag_geometry.h>
 
 
-class AGProjection2D
+class AGEXPORT AGProjection2D
 {
   AGMatrix3 m;
  public:

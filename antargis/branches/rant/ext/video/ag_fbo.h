@@ -21,9 +21,11 @@
 #ifndef AG_FBO_H
 #define AG_FBO_H
 
+#include <ag_base.h>
+
 class AGGLTexture;
 
-class AGFBO
+class AGEXPORT AGFBO
 {
 public:
   AGFBO(AGGLTexture *pTexture, bool withDepth=false);
@@ -46,6 +48,6 @@ public:
 
 };
 
-bool canFBO();
+AGEXPORT bool canFBO();
 
 #endif

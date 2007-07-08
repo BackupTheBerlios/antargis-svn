@@ -25,7 +25,7 @@
 #include <ag_clip.h>
 
 /// virtual paint target - use this for advanced clipping !
-class AGClipPaintTarget:public AGPaintTarget
+class AGEXPORT AGClipPaintTarget:public AGPaintTarget
 {
  public:
   AGClipPaintTarget(AGPaintTarget *pTarget);

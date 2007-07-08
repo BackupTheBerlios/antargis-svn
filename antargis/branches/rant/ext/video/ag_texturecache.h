@@ -32,7 +32,7 @@
 
 class AGRect2;
 
-class AGTextureCache
+class AGEXPORT AGTextureCache
   {
     AGTextureCache();
   public:
@@ -46,7 +46,7 @@ class AGTextureCache
     friend AGTextureCache *getTextureCache();
   };
 
-AGTextureCache *getTextureCache();
+AGEXPORT AGTextureCache *getTextureCache();
 
 
 #endif

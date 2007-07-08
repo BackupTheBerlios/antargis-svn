@@ -11,7 +11,7 @@
 class AGStringUtf8;
 class AGString;
 
-class AGCharUtf8
+class AGEXPORT AGCharUtf8
 {
  public:
   explicit AGCharUtf8(const char p);
@@ -41,7 +41,7 @@ class AGCharUtf8
   size_t pos;
 };
 
-class AGStringUtf8Iterator
+class AGEXPORT AGStringUtf8Iterator
 {
   
 };
@@ -155,7 +155,7 @@ class AGEXPORT AGStringUtf8
 
 };
 
-std::ostream &operator<<(std::ostream &o,const AGStringUtf8 &s);
+AGEXPORT std::ostream &operator<<(std::ostream &o,const AGStringUtf8 &s);
 
 
 #endif

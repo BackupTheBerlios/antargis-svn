@@ -13,7 +13,7 @@
    * the picked scene-node
    * and the 3d-position, where the scene-node was touched
    */
-struct PickNode
+struct AGEXPORT PickNode
 {
   AGVector4 pos;
   SceneNode *node;
@@ -26,7 +26,7 @@ template<class T>
 class QuadTree;
 
 
-class SceneBase:public AGRubyObject
+class AGEXPORT SceneBase:public AGRubyObject
 {
  public:
   typedef std::vector<PickNode> PickResult;

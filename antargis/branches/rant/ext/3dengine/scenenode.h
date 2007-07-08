@@ -29,7 +29,7 @@ class SceneBase;
    "destroy-state". That means the destructor notifies the other object.
 
 */
-class SceneNode:public AGRubyObject
+class AGEXPORT SceneNode:public AGRubyObject
 {
  public:
   SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &pBox);

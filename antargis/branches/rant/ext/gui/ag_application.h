@@ -75,7 +75,7 @@
   }
   </pre>
 */
-class AGApplication:public AGMessageObject
+class AGEXPORT AGApplication:public AGMessageObject
 {
  public:
   AGApplication();
@@ -162,8 +162,8 @@ class AGApplication:public AGMessageObject
    So it will be correct after finishing a frame, when you are
    using nested AGApplications.
 */
-AGApplication *getApplication(); // returns current active application
+AGEXPORT AGApplication *getApplication(); // returns current active application
 
-void disableKeyrepeat();
+AGEXPORT void disableKeyrepeat();
 
 #endif

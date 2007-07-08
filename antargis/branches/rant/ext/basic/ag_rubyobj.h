@@ -59,7 +59,7 @@ class AGEXPORT AGBaseObject
 };
 
 template<class T>
-class gc_ptr:public AGBaseObject
+class AGEXPORT gc_ptr:public AGBaseObject
 {
  public:
   gc_ptr(T*t):AGBaseObject(t)
@@ -117,7 +117,7 @@ class AGEXPORT AGRubyObject
   std::set<AGBaseObject*> mReferences;
 };
 
-void general_markfunc(void *ptr);
-bool saveDelete(AGRubyObject *o);
+AGEXPORT void general_markfunc(void *ptr);
+AGEXPORT bool saveDelete(AGRubyObject *o);
 
 #endif

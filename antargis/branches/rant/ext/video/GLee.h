@@ -72,7 +72,17 @@
 #define APIENTRYP APIENTRY *
 #endif
 
+#include <ag_base.h>
+
+#ifdef WIN32
+#ifdef __cplusplus
+#define GLEE_EXTERN extern 
+#else
+#define GLEE_EXTERN __declspec(dllexport) extern
+#endif
+#else
 #define GLEE_EXTERN extern
+#endif
 
 #ifdef __cplusplus 
 extern "C" {		/* begin C linkage */

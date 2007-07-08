@@ -5,9 +5,10 @@
 
 #include <ag_singleton.h>
 
-class AGVideoBase:public AGSingleton
+class AGEXPORT AGVideoBase:public AGSingleton
 {
 public:
+  virtual ~AGVideoBase();
   virtual int width() const;
   virtual int height() const;
 

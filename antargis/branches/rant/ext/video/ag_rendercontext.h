@@ -29,7 +29,7 @@
 
 class AGShaderProgram;
 
-class AGRenderContext
+class AGEXPORT AGRenderContext
 {
  public:
   AGRenderContext();

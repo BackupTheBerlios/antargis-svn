@@ -23,7 +23,7 @@
 
 #include "ag_screen.h"
 
-class AGSDLScreen:public AGScreen
+class AGEXPORT AGSDLScreen:public AGScreen
 {
  public:
   AGSDLScreen(SDL_Surface *s);

@@ -47,7 +47,7 @@ struct SDL_VideoInfo;
 
 // will be called repeatedely (by AGApplication - if available)
 // simply instantiate a subclass of this type - and it'll be registered within AGMain
-class AGRepeatedCall
+class AGEXPORT AGRepeatedCall
 {
  public:
   AGRepeatedCall();
@@ -88,21 +88,21 @@ class AGEXPORT AGMain:public AGRubyObject
   friend class AGRepeatedCall;
 };
 
-bool hasMain();
+AGEXPORT bool hasMain();
 AGEXPORT AGMain *getMain();
 
-bool hasQuit();
+AGEXPORT bool hasQuit();
 
-void setAppName(const std::string &pName);
-std::string getAppName();
+AGEXPORT void setAppName(const std::string &pName);
+AGEXPORT std::string getAppName();
 //std::string AGEXPORT myHash(const std::string &p);
 
 // from ag_debug
-size_t getDebugLevel();
-void setDebugLevel(size_t t);
-void setRubyRaising(bool flag);
+AGEXPORT size_t getDebugLevel();
+AGEXPORT void setDebugLevel(size_t t);
+AGEXPORT void setRubyRaising(bool flag);
 
-bool videoInited();
+AGEXPORT bool videoInited();
 
 
 #endif

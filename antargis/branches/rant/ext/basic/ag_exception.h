@@ -21,8 +21,10 @@
 #ifndef __ANTARGISGUI_EXCEPTION_H__
 #define __ANTARGISGUI_EXCEPTION_H__
 
+#include <ag_base.h>
+#include <stdexcept>
 
-class AGException:public std::exception
+class AGEXPORT AGException:public std::exception
 {
  public:
   AGException(const std::string &e):s(e)

@@ -5,7 +5,7 @@
 
 #include <ag_rubyobj.h>
 
-class AGSingleton:public AGRubyObject
+class AGEXPORT AGSingleton:public AGRubyObject
 {
  public:
   AGSingleton();

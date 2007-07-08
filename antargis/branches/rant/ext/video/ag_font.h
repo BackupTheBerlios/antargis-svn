@@ -86,6 +86,6 @@ class AGEXPORT AGFont
   friend bool operator<(const AGFont&f1,const AGFont &f2);
 };
 
-bool operator<(const AGFont&f1,const AGFont &f2);
+AGEXPORT bool operator<(const AGFont&f1,const AGFont &f2);
 
 #endif

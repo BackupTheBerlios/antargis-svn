@@ -51,7 +51,7 @@ class AGSignal;
     You can however derive from it and pass it through a signal.
     But you shouldn't delete it for yourself.
  */
-class AGEvent
+class AGEXPORT AGEvent
 {
  public:
   AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &pEvent=NullEvent);
@@ -96,7 +96,7 @@ class AGEvent
    facilities.
    @see AGEvent
 */
-class AGListener:public AGRubyObject
+class AGEXPORT AGListener:public AGRubyObject
 {
  public:
   AGListener();
@@ -110,7 +110,7 @@ class AGListener:public AGRubyObject
    @see AGSignal
    @see AGMessageObject
 */
-class AGCPPListener
+class AGEXPORT AGCPPListener
 {
  public:
   virtual ~AGCPPListener();
@@ -123,7 +123,7 @@ class AGCPPListener
    @see AGMessageObject
 */
 template<class T>
-class AGSlot0:public AGCPPListener
+class AGEXPORT AGSlot0:public AGCPPListener
 {
  public:
   typedef bool (T::*FKT)(AGEvent *m);
@@ -152,7 +152,7 @@ class AGMessageObject;
     You call sigClick(event) in the button and the connected slot is automatically called.
     @see connect()
 */
-class AGSignal
+class AGEXPORT AGSignal
 {
  public:
   AGSignal();
@@ -182,7 +182,7 @@ class AGSignal
 /**
    AGMessageObject handles libSDL-events and provides virtual handlers.
 */
-class AGMessageObject:public AGListener
+class AGEXPORT AGMessageObject:public AGListener
 {
  public:
   AGMessageObject();
@@ -231,7 +231,7 @@ class AGMessageObject:public AGListener
 };
 
 
-AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &s);
+AGEXPORT AGEvent *newEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &s);
 
 /**
  */   
@@ -243,10 +243,10 @@ AGCPPListener *slot(T *base,bool (T::*f)(AGEvent *))
 }
 
 
-AGString toString(SDL_Event *pEvent);
-SDL_Event *toSDLEvent(const AGString &p);
+AGEXPORT AGString toString(SDL_Event *pEvent);
+AGEXPORT SDL_Event *toSDLEvent(const AGString &p);
 
-bool eventOk(const SDL_Event &pEvent);
-void resetEvent(SDL_Event &pEvent);
+AGEXPORT bool eventOk(const SDL_Event &pEvent);
+AGEXPORT void resetEvent(SDL_Event &pEvent);
 
 #endif

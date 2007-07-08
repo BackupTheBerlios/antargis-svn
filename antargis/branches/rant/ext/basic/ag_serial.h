@@ -7,7 +7,7 @@
 #include <SDL.h>
 #include <sstream>
 
-class SerialException
+class AGEXPORT SerialException
 {
 };
 
@@ -78,6 +78,7 @@ class AGEXPORT BinaryStringIn:public BinaryIn
 {
  public:
   BinaryStringIn(const std::string &pText);
+  virtual ~BinaryStringIn();
 
   virtual bool eof();
   virtual char read();
@@ -98,7 +99,7 @@ class AGEXPORT BinaryStringOut:public BinaryOut
   std::ostringstream os;
 };
 
-std::string binaryToHex(const std::string &s);
-std::string hexToBinary(const std::string &s);
+AGEXPORT std::string binaryToHex(const std::string &s);
+AGEXPORT std::string hexToBinary(const std::string &s);
 
 #endif

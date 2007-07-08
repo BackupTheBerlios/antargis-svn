@@ -25,7 +25,7 @@
 
 #include "ag_geometry.h"
 
-class AntPlane
+class AGEXPORT AntPlane
 {
  public:
   AntPlane(const AGVector3 &dir,float offset);
@@ -39,9 +39,9 @@ class AntPlane
 };
 
 /// p0 is center - p1 is above and p2 at the right, then positive normal points into screen
-AntPlane makePlane(const AGVector3 &p0,const AGVector3 &p1,const AGVector3 &p2);
+AGEXPORT AntPlane makePlane(const AGVector3 &p0,const AGVector3 &p1,const AGVector3 &p2);
 
-class AntFrustum
+class AGEXPORT AntFrustum
 {
  public:
   AntFrustum();
@@ -55,8 +55,8 @@ class AntFrustum
   std::vector<AntPlane> mPlanes;
 };
 
-std::ostream &operator<<(std::ostream &o,const AntPlane &p);
-std::ostream &operator<<(std::ostream &o,const AntFrustum &p);
+AGEXPORT std::ostream &operator<<(std::ostream &o,const AntPlane &p);
+AGEXPORT std::ostream &operator<<(std::ostream &o,const AntFrustum &p);
 
 inline bool AntPlane::inside(const AGVector3 &v) const
 {

@@ -26,7 +26,7 @@
 #include <map>
 #include <ag_string.h>
 
-class AGConfig
+class AGEXPORT AGConfig
 {
  public:
   AGConfig();
@@ -43,8 +43,8 @@ class AGConfig
   std::map<AGString,AGString> comments;
 };
 
-AGConfig *getConfig();
-void updateConfig();
+AGEXPORT AGConfig *getConfig();
+AGEXPORT void updateConfig();
 
 
 //#define EXPORT __declspec(dllexport)

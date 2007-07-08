@@ -31,7 +31,7 @@
 #include <ag_singleton.h>
 #include <ag_surface.h>
 
-class AGFontEngine:public AGSingleton
+class AGEXPORT AGFontEngine:public AGSingleton
 {
  public:
   AGFontEngine();
@@ -48,7 +48,7 @@ class AGFontEngine:public AGSingleton
   std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*> fontCache;
 };
 
-AGFontEngine *getFontEngine();
+AGEXPORT AGFontEngine *getFontEngine();
 
 #endif
 

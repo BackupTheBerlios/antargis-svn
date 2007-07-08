@@ -22,8 +22,9 @@
 #define __ANT_KILL_H__
 
 #include <set>
+#include <ag_base.h>
 
-class AGInstanceBase
+class AGEXPORT AGInstanceBase
 {
  public:
   virtual ~AGInstanceBase()
@@ -36,7 +37,7 @@ class AGInstanceBase
 };
 
 template<class T>
-class AGInstance:public AGInstanceBase
+class AGEXPORT AGInstance:public AGInstanceBase
 {
   T *instance;
  public:
@@ -61,12 +62,12 @@ class AGInstance:public AGInstanceBase
 };
 
 template<class T>
-AGInstanceBase *createKiller(T *t)
+AGEXPORT AGInstanceBase *createKiller(T *t)
 {
   return new AGInstance<T>(t);
 }
 
-class ContentCompare
+class AGEXPORT ContentCompare
 {
  public:
   bool operator()(AGInstanceBase*a,AGInstanceBase *b)
@@ -75,7 +76,7 @@ class ContentCompare
   }
 };
 
-class AGInstanceKiller
+class AGEXPORT AGInstanceKiller
 {
   std::set<AGInstanceBase*,ContentCompare> bs;
  public:
@@ -84,7 +85,7 @@ class AGInstanceKiller
   void reg(AGInstanceBase *b);
 };
 
-AGInstanceKiller *getInstanceKiller();
+AGEXPORT AGInstanceKiller *getInstanceKiller();
 
 #define REGISTER_SINGLETON(s) getInstanceKiller()->reg(createKiller(s));
 

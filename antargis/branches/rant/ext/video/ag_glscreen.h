@@ -35,7 +35,7 @@ class AGColor;
 
 typedef GLuint TextureID;
 
-class AGGLObject
+class AGEXPORT AGGLObject
 {
  public:
   AGGLObject();
@@ -45,7 +45,7 @@ class AGGLObject
   virtual void onScreenUp();
 };
 
-class AGGLScreen:public AGScreen
+class AGEXPORT AGGLScreen:public AGScreen
 {
  public:
   AGGLScreen(int W,int H,int VW=-1,int VH=-1);
@@ -114,6 +114,6 @@ class AGGLScreen:public AGScreen
   static std::set<AGGLObject*> msObjects;
 };
 
-bool opengl();
+AGEXPORT bool opengl();
 
 #endif

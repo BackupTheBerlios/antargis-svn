@@ -60,11 +60,11 @@ inline bool toBool(const std::string &s)
   return(s=="true");
 }
 
-int toInt(const std::string &s);
-long toLong(const std::string &s);
-float toFloat(const std::string &s);
-int fromHex(const std::string &s);
-std::string toHex(int i);
+AGEXPORT int toInt(const std::string &s);
+AGEXPORT long toLong(const std::string &s);
+AGEXPORT float toFloat(const std::string &s);
+AGEXPORT int fromHex(const std::string &s);
+AGEXPORT std::string toHex(int i);
 
 template<class T>
 void append(std::list<T> &l1,const std::list<T> &l2)

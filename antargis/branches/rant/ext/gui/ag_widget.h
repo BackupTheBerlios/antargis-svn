@@ -72,7 +72,7 @@ class AGClipping;
    The widgets get deleted by their parents
 */
 
-class AGWidget:public AGMessageObject
+class AGEXPORT AGWidget:public AGMessageObject
 {
  public:
   AGWidget(AGWidget *pParent,const AGRect2 &r);
@@ -254,7 +254,7 @@ class AGWidget:public AGMessageObject
 
 };
 
-AGWidget *toAGWidget(AGMessageObject *o);
+//AGWidget *toAGWidget(AGMessageObject *o);
 
 void setNewClippingTechnique(bool f);
 bool getNewClippingTechnique();

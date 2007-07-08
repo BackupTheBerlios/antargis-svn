@@ -21,6 +21,7 @@
 #ifndef AG_SURFACEMANAGER_H
 #define AG_SURFACEMANAGER_H
 
+#include <ag_base.h>
 #include <set>
 
 class AGRenderContext;
@@ -29,7 +30,7 @@ class AGTexture;
 class AGInternalSurface;
 class AGGLTexture;
 
-class AGSurfaceManager
+class AGEXPORT AGSurfaceManager
 {
  public:
   ~AGSurfaceManager();
@@ -66,7 +67,7 @@ class AGSurfaceManager
 
   friend AGSurfaceManager *getSurfaceManager();
 };
-AGSurfaceManager *getSurfaceManager();
+AGEXPORT AGSurfaceManager *getSurfaceManager();
 
 #endif
 

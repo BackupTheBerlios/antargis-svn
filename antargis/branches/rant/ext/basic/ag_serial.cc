@@ -258,6 +258,10 @@ BinaryStringIn::BinaryStringIn(const std::string &pText)
   is.str(pText);
 }
 
+BinaryStringIn::~BinaryStringIn()
+{
+}
+
 bool BinaryStringIn::eof()
 {
   return is.eof();

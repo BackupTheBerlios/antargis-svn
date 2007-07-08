@@ -8,7 +8,7 @@
 #include <string>
 class AGScreen;
 
-class AGVideoManager:public AGVideoBase
+class AGEXPORT AGVideoManager:public AGVideoBase
 {
  public:
   AGVideoManager();
@@ -40,9 +40,9 @@ class AGVideoManager:public AGVideoBase
 };
 
 //bool glMode();
-bool opengl();
+AGEXPORT bool opengl();
 
-AGVideoManager *getVideo();
+AGEXPORT AGVideoManager *getVideo();
 
 #endif
 

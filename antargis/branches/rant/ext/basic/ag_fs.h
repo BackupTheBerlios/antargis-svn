@@ -28,25 +28,25 @@
 
 #include <ag_base.h>
 
-void initFS(const char *argv0);
-AGData AGEXPORT loadFile(const AGFilename &pName);
-bool AGEXPORT saveFile(const AGFilename &pName,const AGData &pContent);
+AGEXPORT void initFS(const char *argv0);
+AGEXPORT AGData loadFile(const AGFilename &pName);
+AGEXPORT bool saveFile(const AGFilename &pName,const AGData &pContent);
 
-bool AGEXPORT fileExists(const AGFilename &pName);
+AGEXPORT bool fileExists(const AGFilename &pName);
 
-std::vector<AGFilename> getDirectory(const AGFilename &pDir);
+AGEXPORT std::vector<AGFilename> getDirectory(const AGFilename &pDir);
 
-AGFilename checkFileName(AGFilename s);
-AGFilename getWriteDir();
-AGFilename findFile(const AGFilename &pName);
+AGEXPORT AGFilename checkFileName(AGFilename s);
+AGEXPORT AGFilename getWriteDir();
+AGEXPORT AGFilename findFile(const AGFilename &pName);
 
-AGFilename getDocumentsDir();
+AGEXPORT AGFilename getDocumentsDir();
 
-void addPath(const AGFilename &pName);
+AGEXPORT void addPath(const AGFilename &pName);
 
-AGData compress(const AGData &pString);
-AGData uncompress(const AGData &pString);
+AGEXPORT AGData compress(const AGData &pString);
+AGEXPORT AGData uncompress(const AGData &pString);
 
-AGFilename getDirSep();
+AGEXPORT AGFilename getDirSep();
 
 #endif

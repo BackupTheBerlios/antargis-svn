@@ -37,7 +37,7 @@
 class AGTriangle2;
 class AGRect2;
 
-struct AGProjection
+struct AGEXPORT AGProjection
 {
   AGMatrix3 a;
   AGRect2 clip;

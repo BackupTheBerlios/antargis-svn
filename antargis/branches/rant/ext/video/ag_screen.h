@@ -43,7 +43,7 @@ class AGEXPORT AGScreen:public AGPaintTarget
   virtual AGSurface screenshot(bool frontBuffer=true);
 };
 
-AGScreen & AGEXPORT getScreen();
-void setScreen(AGScreen *s);
+AGEXPORT AGScreen &getScreen();
+AGEXPORT void setScreen(AGScreen *s);
 
 #endif

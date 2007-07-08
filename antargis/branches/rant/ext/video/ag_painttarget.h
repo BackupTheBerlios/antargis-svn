@@ -33,7 +33,7 @@ class AGTexture;
 
 #define MSTUB { throw int();}
 
-class AGPaintTarget:public AGRubyObject
+class AGEXPORT AGPaintTarget:public AGRubyObject
 {
  public:
   virtual ~AGPaintTarget()

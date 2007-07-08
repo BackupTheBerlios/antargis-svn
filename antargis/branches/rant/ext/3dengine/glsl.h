@@ -10,7 +10,7 @@
 
 class Scene;
 
-class AntVertexProgram
+class AGEXPORT AntVertexProgram
 {
  public:
   AntVertexProgram(const std::string &pFile);
@@ -22,7 +22,7 @@ class AntVertexProgram
   friend class AntShaderProgram;
 };
 
-class AntFragProgram
+class AGEXPORT AntFragProgram
 {
  public:
   AntFragProgram(const std::string &pFile);
@@ -39,13 +39,13 @@ class AntFragProgram
 };
 
 
-class AntShaderParameter
+class AGEXPORT AntShaderParameter
 {
  public:
   
 };
 
-class AntShaderProgram:public AGGLObject
+class AGEXPORT AntShaderProgram:public AGGLObject
 {
   std::string mVertexFile,mFragFile;
   AntVertexProgram *vertex;
@@ -91,7 +91,7 @@ class AntShaderProgram:public AGGLObject
 
 };
 
-class AntShadowShader:public AntShaderProgram
+class AGEXPORT AntShadowShader:public AntShaderProgram
 {
  public:
   AntShadowShader(const std::string &pVertexFile,const std::string &pFragFile);
@@ -100,7 +100,7 @@ class AntShadowShader:public AntShaderProgram
   virtual void disable();
 };
 
-class AntWaterShader:public AntShaderProgram
+class AGEXPORT AntWaterShader:public AntShaderProgram
 {
   float t;
  public:
@@ -108,6 +108,6 @@ class AntWaterShader:public AntShaderProgram
   void doUpdate(float time);
 };
 
-bool glslOk();
+AGEXPORT bool glslOk();
 
 #endif

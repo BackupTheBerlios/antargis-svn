@@ -26,7 +26,7 @@
 #include <string>
 
 // uses extended regex's
-class RegEx
+class AGEXPORT RegEx
 {
   regex_t matcher;
 public:

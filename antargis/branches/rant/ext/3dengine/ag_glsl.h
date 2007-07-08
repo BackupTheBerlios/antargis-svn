@@ -30,7 +30,7 @@
 
 class Scene;
 
-class AGVertexProgram
+class AGEXPORT AGVertexProgram
 {
  public:
   AGVertexProgram(const std::string &pFile);
@@ -42,7 +42,7 @@ class AGVertexProgram
   friend class AGShaderProgram;
 };
 
-class AGFragProgram
+class AGEXPORT AGFragProgram
 {
  public:
   AGFragProgram(const std::string &pFile);
@@ -59,13 +59,13 @@ class AGFragProgram
 };
 
 
-class AGShaderParameter
+class AGEXPORT AGShaderParameter
 {
  public:
   
 };
 
-class AGShaderProgram
+class AGEXPORT AGShaderProgram
 {
   AGVertexProgram vertex;
   AGFragProgram frag;
@@ -99,6 +99,6 @@ class AGShaderProgram
   void sendAttribute(const std::string &pName,const std::vector<float> &vf);
 };
 
-bool glslOk();
+AGEXPORT bool glslOk();
 
 #endif

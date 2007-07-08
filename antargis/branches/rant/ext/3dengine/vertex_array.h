@@ -23,7 +23,7 @@
    if you have to do special drawing like picking, use the corresp. functions (drawDepth,drawPick)
 */
 
-class VertexArray:public AGGLObject
+class AGEXPORT VertexArray:public AGGLObject
 {
   std::vector<AGVector4> mVertices,mColors;
   std::vector<AGVector3> mNormals;
@@ -93,13 +93,13 @@ class VertexArray:public AGGLObject
    It creates several instances of a mesh stored in va. The positions of the instances are 
    given through transformation matrices in ts
 */
-VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
+AGEXPORT VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
 
 /**
    VertexArrayShader adds shader-support to vertex-arrays. You might need to attach data
    to each vertex. You can do so by calling addAttribute(.,.).
  */
-class VertexArrayShader:public VertexArray
+class AGEXPORT VertexArrayShader:public VertexArray
 {
   AntShaderProgram *p;
   std::map<std::string,std::vector<float>*> as;

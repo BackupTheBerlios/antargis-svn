@@ -29,7 +29,7 @@
 
 class AGFBO;
 
-class AGTexture:public AGPaintTarget
+class AGEXPORT AGTexture:public AGPaintTarget
 {
  public:
   AGTexture();

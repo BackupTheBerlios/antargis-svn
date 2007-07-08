@@ -5,7 +5,7 @@
 
 #include <ag_rubyobj.h>
 
-class AGCollector:public AGRubyObject
+class AGEXPORT AGCollector:public AGRubyObject
 {
  public:
   void insertGlobal(AGRubyObject *pObject);
@@ -17,7 +17,7 @@ class AGCollector:public AGRubyObject
   
 };
 
-AGCollector *getCollector();
+AGEXPORT AGCollector *getCollector();
 
 
 #endif

@@ -39,15 +39,15 @@ class AGColor;
 class AGSurface;
 class AGGLTexture;
 
-void beginRender();
-void endRender();
-bool isRendering();
+AGEXPORT void beginRender();
+AGEXPORT void endRender();
+AGEXPORT bool isRendering();
 
 /**
    AGInternalSurface links plain sdl-surfaces (in main-memory) and textures (both gl-textures and
    sdl-screenlike-surfaces)
 */
-struct AGInternalSurface
+struct AGEXPORT AGInternalSurface
 {
   AGInternalSurface  *sdlTexture;
   AGGLTexture *glTexture;
@@ -64,7 +64,7 @@ struct AGInternalSurface
    You have to derive from this class and give an instance when loading a surface.
    When you have done so saving is disabled afterwards.
  */
-class AGDecryptor
+class AGEXPORT AGDecryptor
 {
  public:
   virtual ~AGDecryptor()
@@ -77,7 +77,7 @@ class AGDecryptor
 };
 
 /// Generic classes - for OpenGL and "normal" SDL
-class AGSurface:public AGPaintTarget
+class AGEXPORT AGSurface:public AGPaintTarget
 {
  public:  
   AGSurface();
@@ -143,9 +143,9 @@ class AGSurface:public AGPaintTarget
   static AGDecryptor *mDecryptor;  
 };
 
-void AGFreeSurface(SDL_Surface *s);
+AGEXPORT void AGFreeSurface(SDL_Surface *s);
 
-std::ostream &operator<<(std::ostream &o,SDL_PixelFormat *f);
-std::ostream &operator<<(std::ostream &o,SDL_Surface *f);
+AGEXPORT std::ostream &operator<<(std::ostream &o,SDL_PixelFormat *f);
+AGEXPORT std::ostream &operator<<(std::ostream &o,SDL_Surface *f);
 
 #endif

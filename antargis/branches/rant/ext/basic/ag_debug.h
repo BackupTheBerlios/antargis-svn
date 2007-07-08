@@ -36,7 +36,7 @@
 #include "ag_base.h"
 
 
-void setQuiet();
+AGEXPORT void setQuiet();
 
 #ifdef MNDEBUG
 #define dbout(x,l)
@@ -69,9 +69,9 @@ using std::endl;
 #define cdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<"):"<<x<<endl)
 #define ccdebug(x) debugout("("<<__FILE__<<":"<<__LINE__<<":"<<__PRETTY_FUNCTION__<<":"<<((void*)this)<<"):"<<x<<endl)
 
-size_t getDebugIndex();
-size_t getDebugLevel();
-void setDebugLevel(size_t t);
+AGEXPORT size_t getDebugIndex();
+AGEXPORT size_t getDebugLevel();
+AGEXPORT void setDebugLevel(size_t t);
 
 #define debugout_checked(level,x) { if(level>getDebugLevel()) { getDebug()<<x; }}
 #define dbout(level,x) {if(level>getDebugLevel()) { cdebug(x); }}
@@ -96,7 +96,7 @@ private:
 #define TRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__))
 #define CTRACE D test__LINE__(::toString(__FILE__)+::toString(" ")+::toString(__LINE__)+::toString(" ")+::toString( __PRETTY_FUNCTION__)+::toString(" ")+::toString(((void*)this))+::toString(" ")+typeid(*this).name())
 
-void agRaise(const std::string &s);
+AGEXPORT void agRaise(const std::string &s);
 
 #ifndef __WIN32__
 #undef assert

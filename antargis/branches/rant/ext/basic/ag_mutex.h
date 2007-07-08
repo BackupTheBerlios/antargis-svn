@@ -1,10 +1,11 @@
 #ifndef AG_MUTEX
 #define AG_MUTEX
 
+#include <ag_base.h>
 #include <SDL.h>
 #include <SDL_thread.h>
 
-class AGMutex
+class AGEXPORT AGMutex
 {
  public:
   AGMutex();

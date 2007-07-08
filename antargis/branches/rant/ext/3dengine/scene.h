@@ -40,7 +40,7 @@
 
  */
 
-class Scene:public SceneBase
+class AGEXPORT Scene:public SceneBase
 {
  public:
   ////  typedef std::vector<PickNode> PickResult;

@@ -1,4 +1,4 @@
-#import "md5"                         # md5 is needed for automatic checksum-check for changes in files
+import "md5"                         # md5 is needed for automatic checksum-check for changes in files
 import "autoclean"                    # autoclean includes the a simple facility for a clean-make-target
 import "package/tgz"                  # support for packaging (tar.gz, zip)
 import "rubydoc"
@@ -13,6 +13,9 @@ require 'config.rb'                   # include build-options
 # get library-dependencies for libSDL
 sdlLibs=$config['LIBS'].split(" ")
 
+allSDLlibs=sdlLibs+["-lSDL_image","-lSDL_ttf","-lpng"]
+glLibs=$config["LIBGL"].split(" ")
+
 # configure source-directories.
 # DLLs will be build for each directory and in the given order.
 # on the left the directory containing the sources is given
@@ -25,11 +28,11 @@ sourceDeps=[
 	["ext/external",["-lz"]+sdlLibs],
 	["ext/basic",["ext/external","-l"+$config['RUBYLIB'],"-lz"]+sdlLibs],
 	["ext/math",["ext/external","ext/basic"]],
-	["ext/video",["ext/external","ext/basic","ext/math","-lSDL_image","-lSDL_ttf"]+$config["LIBGL"].split(" ")+sdlLibs],
-	["ext/gui",["ext/basic","ext/math","ext/video"]],
-	["ext/sound",["ext/basic","-lSDL_mixer"]],
-	["ext/3dengine",["ext/basic"]],
-	["ext/game",["ext/basic","ext/math","ext/video","ext/gui","ext/3dengine"]],
+	["ext/video",["ext/external","ext/basic","ext/math"]+glLibs+allSDLlibs],
+	["ext/gui",["ext/basic","ext/math","ext/video"]+allSDLlibs],
+	["ext/sound",["ext/basic","-lSDL_mixer"]+sdlLibs],
+	["ext/3dengine",["ext/external","ext/basic","ext/math","ext/video"]+glLibs+sdlLibs],
+	["ext/game",["ext/basic","ext/math","ext/video","ext/gui","ext/3dengine"]+glLibs+sdlLibs],
 ]
 
 $sourceDeps=sourceDeps

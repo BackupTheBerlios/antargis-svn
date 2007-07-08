@@ -45,7 +45,7 @@ struct SOURCE_LINE
 /// 
 /// Object of this class is created on stack in STACKTRACE macro, so it's creating/destruction can 
 /// be used to manage  call stack. 
-class UserStackTraceHelper 
+class AGEXPORT UserStackTraceHelper 
 { 
  public: 
   UserStackTraceHelper( SOURCE_LINE* srcline); 
