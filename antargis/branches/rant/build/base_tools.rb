@@ -7,9 +7,13 @@ def getDir(path)
 	path.split(Dir.separator)[0..-2].join("/")
 end
 
+def getDirUnix(path)
+    path.split("/")[0..-2].join("/")
+end
+
 
 def makeLibName(dir)
-    puts "makeLibName #{dir}"
+    #puts "makeLibName #{dir}"
 	"antargis"+dir.split("/")[-1]
 end
 
@@ -41,4 +45,8 @@ end
 # the getConfig function reads out compiler-information out of the mkmf-configuration variables - these are defined in a recursive manner
 def getConfig(s)
 	extendCommand(CONFIG,s)
+end
+
+def U2W(path)
+    path.gsub("/",Dir.separator)
 end

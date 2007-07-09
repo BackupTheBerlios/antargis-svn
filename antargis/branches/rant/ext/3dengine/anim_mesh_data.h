@@ -49,7 +49,7 @@ struct Animation
   }
 };
 
-class AnimMeshData:public AGRubyObject
+class AGEXPORT AnimMeshData:public AGRubyObject
 {
   AntShaderProgram animShader;
   AntShaderProgram animShaderDepth;

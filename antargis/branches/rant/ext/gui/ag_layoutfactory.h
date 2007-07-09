@@ -28,7 +28,7 @@
 #include <ag_widget.h>
 #include <ag_xml.h>
 
-class AGLayoutCreator:public AGSingleton
+class AGEXPORT AGLayoutCreator:public AGSingleton
 {
  public:
   AGLayoutCreator();//const AGString &pName);
@@ -46,7 +46,7 @@ class AGLayoutCreator:public AGSingleton
 
 };
 
-class AGLayoutFactory
+class AGEXPORT AGLayoutFactory
 {
   std::map<AGString,AGLayoutCreator*> mCreators;
 
@@ -62,7 +62,7 @@ class AGLayoutFactory
   friend AGLayoutFactory *getLayoutFactory();
 };
 
-AGLayoutFactory *getLayoutFactory();
+AGEXPORT AGLayoutFactory *getLayoutFactory();
 /*
 #define IMPLEMENT_COMPONENT_FACTORY(CLASS) \
 AG##CLASS##LayoutCreator factory_##CLASS

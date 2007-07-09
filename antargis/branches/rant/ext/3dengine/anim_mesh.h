@@ -19,7 +19,7 @@ class AntEntity;
    AnimMesh is a skeleton animated mesh.
    It support either shader-based and cpu-based animation.
 */
-class AnimMesh:public SceneNode
+class AGEXPORT AnimMesh:public SceneNode
 {
   AnimMeshData *mData;
   size_t curKey;

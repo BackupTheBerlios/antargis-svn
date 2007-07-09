@@ -38,7 +38,7 @@
  */
 
 
-class AntCamera
+class AGEXPORT AntCamera
 {
  public:
   AntCamera(int w,int h);

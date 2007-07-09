@@ -27,6 +27,7 @@
 
 require 'build/interface_template.rb'
 require 'build/base_tools.rb'
+require 'find.rb'
 
 class MyInput
 	attr_reader :swigInput, :outputDir
@@ -275,7 +276,8 @@ end
 def generateInterfaceFile(myInput,files,addfiles)
 	filename=myInput.interfaceName
 	interfaceI=File.open(filename,"w")
-	
+	puts filename
+    #raise 1
 	interfaceI.puts interface_template(myInput.moduleName,files,myInput.swigInput,addfiles,myInput.outputDir)
 	
 	interfaceI.close
@@ -293,12 +295,28 @@ def generateInterfaceFile(myInput,files,addfiles)
 	headersH.close
 end
 
+def findFilesWith(str)
+    files=[]
+    Find.find("ext") {|file|files << file}
+    files=files.select{|f|f=~/\.h$/}.select{|f|File.open(f).read=~/#{str}/}
+    #dirs=findDirsRecursively(".")
+    puts files
+    #exit
+    files
+    #Dir["*/*"].collect{|f|f.gsub(/\/.*/,"")}.uniq
+end
+
 
 myInput=MyInput.new
 
 files=getSwigInterfaceFiles(getFiles(myInput.outputDir))
 
-parsedClasses=ParsedClasses.new(files,`find $(pwd) -name "*.h"|grep -v swig`.split("\n"))
+
+cfiles=findFilesWith("swig")
+#exit
+
+#parsedClasses=ParsedClasses.new(files,`find $(pwd) -name "*.h"|grep -v swig`.split("\n"))
+parsedClasses=ParsedClasses.new(files,cfiles)
 files=parsedClasses.getFileList
 
 addfiles=[]
@@ -371,6 +389,10 @@ myClasses=parsedClasses.getMyRubyClasses
 
 file.puts <<EOT
 %{
+
+#undef write
+#undef read
+
 // cast-function map
 // it contains the mapping from parent-classes=>dyn-cast-functions to child-classes
 #include <string>

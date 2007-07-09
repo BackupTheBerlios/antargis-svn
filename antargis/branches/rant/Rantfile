@@ -24,9 +24,11 @@ glLibs=$config["LIBGL"].split(" ")
 # - an internal dependency on a directory
 # NOTE: dependencies are not automatically inherited, you have to include them yourself!
 
+rubyLib=["-l"+$config['RUBYLIB']]
+
 sourceDeps=[
 	["ext/external",["-lz"]+sdlLibs],
-	["ext/basic",["ext/external","-l"+$config['RUBYLIB'],"-lz"]+sdlLibs],
+	["ext/basic",["ext/external","-lz"]+sdlLibs+rubyLib],
 	["ext/math",["ext/external","ext/basic"]],
 	["ext/video",["ext/external","ext/basic","ext/math"]+glLibs+allSDLlibs],
 	["ext/gui",["ext/basic","ext/math","ext/video"]+allSDLlibs],
@@ -63,8 +65,8 @@ var.env %w(CC CFLAGS)                           # get cflags from environment
 
 ###########################################
 # all-target
-buildLibs=sourceDirs.collect{|d|"ext"+Dir.separator+"lib"+makeLibName(d)+".so"}
-interfaceLibs=sourceDirs.collect{|d|"ext"+Dir.separator+makeLibName(d)+".so"}
+buildLibs=sourceDirs.collect{|d|"ext/"+"lib"+makeLibName(d)+".so"}
+interfaceLibs=sourceDirs.collect{|d|"ext/"+makeLibName(d)+".so"}
 allTargets = buildLibs + interfaceLibs
 task :all => allTargets
 #
@@ -79,20 +81,20 @@ task :all => allTargets
 #
 sourceDeps.each{|pair|
 	dir,dep=pair                                                               # get directory and dependencies
-	target="ext"+Dir.separator+"lib"+makeLibName(dir)+".so"                    # make library name like "ext/libantargisgui.so"
+	target="ext/"+"lib"+makeLibName(dir)+".so"                    # make library name like "ext/libantargisgui.so"
 	tsources=Dir[dir+"/*.cc"].select{|f|not f=~/swig/}            # get all *.cc files (without the swig-generated file)
 	tsources.collect!{|f|f.sub_ext("oo")}                                      # translate the .cc files to .oo
 	tsources+=Dir[dir+"/*.c"].collect!{|f|f.sub_ext("o")}         # add *.c files if there are any
 	extlibs=[]
     
-    puts "TARGET:",target
-    puts "TSOURCES:",tsources
+    #puts "TARGET:",target
+    #puts "TSOURCES:",tsources
     
 	dep.each{|d|
 		if d[0..0]=="-"
 			extlibs << d                                                           # gather external libraries (-lz)
 		else
-			tsources+=["ext"+Dir.separator+"lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
+			tsources+=["ext/lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
             #tsources+=["-l"+makeLibName(d)]
 		end
 	}
@@ -106,7 +108,7 @@ sourceDeps.each{|pair|
             puts "EXTLIBS #{extlibs}"
             sources=sources.select{|f|not f=~/\.so/}
         end
-		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), (sources.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
+		cmd=makeCommand("LINK_SHARED",sys.expand_path(U2W(t.name)), (sources.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
 		sys cmd
         if ENV['WINDIR']
             sys "mv #{sys.expand_path(t.name)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll")}.a"
@@ -123,15 +125,21 @@ sourceDeps.each{|pair|
 sourceDeps.each{|pair|
 	dir,dep=pair
 	libname=makeLibName(dir)
-	target="ext"+Dir.separator+makeLibName(dir)+".so"
-	tsources=[dir+Dir.separator+libname+"swig.cc"]
+	target="ext/"+makeLibName(dir)+".so"
+	#tsources=[dir+Dir.separator+libname+"swig.cc"]
+	tsources=[dir+"/"+libname+"swig.cc"]
 	tsources.collect!{|f|f.sub_ext("oo")}
-	tsources+=["ext"+Dir.separator+"lib"+makeLibName(dir)+".so"]
+	tsources+=["ext/lib"+makeLibName(dir)+".so"]
+    
+    
 	dep.each{|d|
 		if d[0..0]!="-"
-			tsources+=["ext"+Dir.separator+makeLibName(d)+".so"]
+			tsources+=["ext/"+makeLibName(d)+".so"]
 		end
 	}
+    puts "TARGET:",target
+    puts "SOURES:",tsources
+    puts "---"
 	task target => tsources do |t|
 		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}.join(" "))
 		sys cmd
@@ -164,7 +172,8 @@ end
 # swig - interfacing for ruby
 #
 swigSrc = lambda { |target| 
-	dir=getDir(target)
+	dir=getDirUnix(target)
+    puts "TARGET:#{target} DIR:#{dir}"
 	name=makeLibName(dir)
 	[target.sub(name+"swig.cc","interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
 }
@@ -183,6 +192,7 @@ end
 #
 
 def importsForInterface(name)
+puts "?=="
 	$sourceDeps.each{|t|
 		if name=~/#{t[0]}/
 			return t[1].select{|f|not f=~/-.*/}.collect{|f|f+"/interface.i"}.join(":")
@@ -192,12 +202,12 @@ def importsForInterface(name)
 end
 
 interfaceSrc = lambda { |target| 
-	list=Dir[getDir(target)+Dir.separator+"*.h"].select{|f|not f=~/swig.h/}+Dir["build/*.rb"] # FIXME:replace
+	list=Dir[getDirUnix(target)+"/"+"*.h"].select{|f|not f=~/swig.h/}+Dir["build/*.rb"] # FIXME:replace
 	list+=importsForInterface(target).split(":")
 	list
 }
 gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
-	cmd=makeCommand("CREATEINTERFACE",getDir(sys.expand_path(t.name)),importsForInterface(t.name))
+    cmd=makeCommand("CREATEINTERFACE",getDirUnix(sys.expand_path(t.name)),importsForInterface(t.name))
 	sys cmd
 end
 #

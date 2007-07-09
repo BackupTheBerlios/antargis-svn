@@ -11,7 +11,8 @@ $config={
 	"CXX"=>"$(g++)",
 	"CC"=>"$(gcc)",
 	"SWIG"=>"$(swig)",
-	"RUBY"=>"$(ruby)",
+	#"RUBY"=>"$(ruby)",
+    "RUBY"=>"c:\\antargis\\rant\\build\\win32\\usr\\bin\\ruby",
 	"CCACHE"=>"$(ccache)",
 
 	"RUBYLIB"=>"msvcrt-ruby18",
@@ -29,7 +30,8 @@ $config={
 	# a c++ compiler call with parameters (using ccache if available)
 	"CXX_CALL"=>"$(CCACHE) $(CXX) $(COMPILE_PARAMS)",
 	# build a shared library (.so or .dll)
-	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib --add-stdcall-alias -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
+	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
+	#"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib --add-stdcall-alias -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
 	# generate c++-code from a swig-interface file
 	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) $(INPUT)",
 	# generate dependencies for swig-interface files

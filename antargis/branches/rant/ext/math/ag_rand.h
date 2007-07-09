@@ -33,7 +33,7 @@
 // the prng (pseudo-random-number generator)'s state
 // to a string and restore it. This way we can deterministically
 // rerun a "randomized" game
-class AGRandomizer:public AGRandomizerBase
+class AGEXPORT AGRandomizer:public AGRandomizerBase
 {
  public:
   // restore a randomizer from a state-string (pretty long)
@@ -54,12 +54,12 @@ class AGRandomizer:public AGRandomizerBase
 };
 
 /// calls getMain()->getRand()->rand()
-int agRand(int i);
+AGEXPORT int agRand(int i);
 /// calls getMain()->getRand()->rand()
-float agRand(float f);
+AGEXPORT float agRand(float f);
 
 /// runs a small speed test
-void randSpeed();
+AGEXPORT void randSpeed();
 
 
 #endif
