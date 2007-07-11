@@ -21,7 +21,7 @@
 #ifndef AG_REGEX_H
 #define AG_REGEX_H
 
-#include "/usr/include/regex.h"
+#include <regex.h>
 #include <sys/types.h>
 #include <string>
 

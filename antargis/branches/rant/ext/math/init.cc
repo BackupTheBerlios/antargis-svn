@@ -3,7 +3,7 @@
 #include <ag_rand.h>
 
 
-void AG_Init_libantargismath()
+void AGEXPORT AG_Init_libantargismath()
 {
 	TRACE;
 	getMain()->setRand(new AGRandomizer(""));

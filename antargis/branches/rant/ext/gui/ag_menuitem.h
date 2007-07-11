@@ -28,7 +28,7 @@
 
 class AGMenu;
 
-class AGMenuItem:public AGTable
+class AGEXPORT AGMenuItem:public AGTable
 {
  public:
   AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText);
@@ -55,7 +55,7 @@ class AGMenuItem:public AGTable
   bool mSelected;
 };
 
-class AGSubMenu:public AGMenuItem
+class AGEXPORT AGSubMenu:public AGMenuItem
 {
  public:
   AGSubMenu(AGWidget *pParent,const AGStringUtf8 &ptext);

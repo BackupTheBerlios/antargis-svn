@@ -16,7 +16,8 @@ $config={
 	"CCACHE"=>"$(ccache)",
 
 	"RUBYLIB"=>"msvcrt-ruby18",
-    "LIBS"=>"-lmingw32 -lSDLmain -lSDL -mwindows",
+    "LIBS"=>"-lmingw32 -lSDL -mwindows",
+    #"LIBS"=>"-lmingw32 -lSDLmain -lSDL -mwindows",
     "LIBDIR"=>"-L#{Dir.pwd}/build/win32/usr/lib",
     "LIBGL"=>"-lopengl32 -lglu32",
 	"LINK"=>"$(CXX)",
@@ -31,9 +32,10 @@ $config={
 	"CXX_CALL"=>"$(CCACHE) $(CXX) $(COMPILE_PARAMS)",
 	# build a shared library (.so or .dll)
 	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
-	#"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib --add-stdcall-alias -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
+	#"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
+	##"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib --add-stdcall-alias -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
 	# generate c++-code from a swig-interface file
-	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) $(INPUT)",
+	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) -Ic:/antargis/rant/build/win32/usr/include $(INPUT) ",
 	# generate dependencies for swig-interface files
 	"SWIGDEPS"=>"$(SWIG) -ruby -c++ -M $(INPUT)",
 

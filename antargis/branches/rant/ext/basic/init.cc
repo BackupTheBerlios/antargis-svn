@@ -13,7 +13,7 @@ typedef swig_type_info*(*CastFunction)(void**);
 
 std::map<std::string,std::list<CastFunction> > agCastFunctions;
 
-void AG_Init_libantargisbasic()
+AGEXPORT void AG_Init_libantargisbasic()
 {
   TRACE;
   if(!hasMain())

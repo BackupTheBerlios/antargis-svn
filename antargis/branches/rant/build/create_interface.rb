@@ -77,7 +77,10 @@ class MyInput
 end
 
 def getFiles(dir)
-	Dir[dir+Dir.separator+"*.h"].select{|f|not f=~/swig.h/} #-[dir+Dir.separator+"swig.h"]
+    pattern=dir+"/"+"*.h"
+	files=Dir[pattern].select{|f|not f=~/swig.h/} #-[dir+Dir.separator+"swig.h"]
+    puts "getFiles #{dir}",pattern,"--",files,"----"
+    files  
 end
 
 ## check if the given string is contained in the file specified by filename
@@ -98,6 +101,7 @@ class ParsedClasses
 	attr_reader :deriveList
 
 	def initialize(files,allfiles)
+        puts "ParsedClasses:init()",files,"--",allfiles,"-----"
 		@rubyClasses=[]
 		@files=files
 		loadAllDerivations(allfiles)
@@ -298,9 +302,11 @@ end
 def findFilesWith(str)
     files=[]
     Find.find("ext") {|file|files << file}
-    files=files.select{|f|f=~/\.h$/}.select{|f|File.open(f).read=~/#{str}/}
+    files=files.select{|f|f=~/\.h$/}.select{|f|not f=~/swig.h/}.select{|f|File.open(f).read=~/#{str}/}
     #dirs=findDirsRecursively(".")
+    puts "findFilesWith #{str}:"
     puts files
+    puts "---"
     #exit
     files
     #Dir["*/*"].collect{|f|f.gsub(/\/.*/,"")}.uniq
@@ -312,7 +318,7 @@ myInput=MyInput.new
 files=getSwigInterfaceFiles(getFiles(myInput.outputDir))
 
 
-cfiles=findFilesWith("swig")
+cfiles=findFilesWith("INCLUDE_SWIG")
 #exit
 
 #parsedClasses=ParsedClasses.new(files,`find $(pwd) -name "*.h"|grep -v swig`.split("\n"))
@@ -321,9 +327,10 @@ files=parsedClasses.getFileList
 
 addfiles=[]
 myInput.swigInput.each{|inDir|
-	pattern=getDir(inDir)+Dir.separator+"*.h"
-	puts "PATTERN:",pattern
-	addfiles+=Dir[pattern].select{|f|not f=~/swig.h/}
+    puts "inDir #{inDir}"
+	pattern=getDirUnix(inDir)+"/*.h"
+	puts "PATTERN:",pattern,"!!!!"
+	addfiles+=Dir[pattern].select{|f|not f=~/swig.h/}.select{|f|File.open(f).read=~/INCLUDE_SWIG/}
 }
 
 generateInterfaceFile(myInput,files,addfiles)

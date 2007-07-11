@@ -6,7 +6,7 @@
 #include <vector>
 #include <ag_string.h>
 
-class AGMatrixN
+class AGEXPORT AGMatrixN
 {
  public:
   AGMatrixN(size_t w,size_t h);

@@ -123,7 +123,7 @@ class AGEXPORT Document
 
 class AGEXPORT Parser
 {
-  struct Data
+  struct AGEXPORT Data
   {
     std::list<size_t> stack;
     std::list<size_t> linestack;

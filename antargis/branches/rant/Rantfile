@@ -66,7 +66,7 @@ var.env %w(CC CFLAGS)                           # get cflags from environment
 ###########################################
 # all-target
 buildLibs=sourceDirs.collect{|d|"ext/"+"lib"+makeLibName(d)+".so"}
-interfaceLibs=sourceDirs.collect{|d|"ext/"+makeLibName(d)+".so"}
+interfaceLibs=sourceDirs[1..-1].collect{|d|"ext/"+makeLibName(d)+".so"} # exclude "ext/external"
 allTargets = buildLibs + interfaceLibs
 task :all => allTargets
 #
@@ -109,6 +109,7 @@ sourceDeps.each{|pair|
             sources=sources.select{|f|not f=~/\.so/}
         end
 		cmd=makeCommand("LINK_SHARED",sys.expand_path(U2W(t.name)), (sources.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
+        puts "------",cmd,"--------------!"
 		sys cmd
         if ENV['WINDIR']
             sys "mv #{sys.expand_path(t.name)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll")}.a"
@@ -126,22 +127,27 @@ sourceDeps.each{|pair|
 	dir,dep=pair
 	libname=makeLibName(dir)
 	target="ext/"+makeLibName(dir)+".so"
-	#tsources=[dir+Dir.separator+libname+"swig.cc"]
-	tsources=[dir+"/"+libname+"swig.cc"]
+
+    # FIXME:re-include this
+    tsources=[]
+    tsources+=[dir+"/"+libname+"swig.cc"]
 	tsources.collect!{|f|f.sub_ext("oo")}
-	tsources+=["ext/lib"+makeLibName(dir)+".so"]
-    
+	#tsources+=["ext/lib"+makeLibName(dir)+".so"]
+    extlibs=["-l"+makeLibName(dir)]
     
 	dep.each{|d|
-		if d[0..0]!="-"
-			tsources+=["ext/"+makeLibName(d)+".so"]
+		if d[0..0]!="-" and d!="ext/external"
+			extlibs+=["-l"+makeLibName(d)]
 		end
 	}
+    #tsources+=rubyLib
+    
     puts "TARGET:",target
     puts "SOURES:",tsources
     puts "---"
 	task target => tsources do |t|
-		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), t.prerequisites.collect{|f|sys.expand_path(f)}.join(" "))
+		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs+rubyLib).join(" "))
+        puts "------",cmd,"--------------!"
 		sys cmd
 	end
 }
@@ -179,7 +185,7 @@ swigSrc = lambda { |target|
 }
 
 gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
-	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}")
+	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
 	sys cmd
 end
 #
@@ -195,7 +201,7 @@ def importsForInterface(name)
 puts "?=="
 	$sourceDeps.each{|t|
 		if name=~/#{t[0]}/
-			return t[1].select{|f|not f=~/-.*/}.collect{|f|f+"/interface.i"}.join(":")
+			return t[1].select{|f|not f=~/-.*/}.select{|f|not f=~/external/}.collect{|f|f+"/interface.i"}.join(":")
 		end
 	}
 	return ""
@@ -206,6 +212,7 @@ interfaceSrc = lambda { |target|
 	list+=importsForInterface(target).split(":")
 	list
 }
+
 gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
     cmd=makeCommand("CREATEINTERFACE",getDirUnix(sys.expand_path(t.name)),importsForInterface(t.name))
 	sys cmd
