@@ -41,7 +41,7 @@ class QuadTree;
 class AnimMesh;
 class Mesh2D;
 
-class AntMap:public HeightMap
+class AGEXPORT AntMap:public HeightMap
 {
  public:
   typedef std::list<AntEntity*> EntityList;
@@ -116,7 +116,7 @@ class AntMap:public HeightMap
 
 };
 
-AntMap *getMap();
+AGEXPORT AntMap *getMap();
 
 
 #endif

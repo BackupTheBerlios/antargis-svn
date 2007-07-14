@@ -7,7 +7,7 @@
 #include "scene_2d.h"
 #include "mesh_2d_data.h"
 
-class Mesh2D:public SceneNode
+class AGEXPORT Mesh2D:public SceneNode
 {
  public:
   Mesh2D(Scene2D *pScene);

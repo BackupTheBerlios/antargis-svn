@@ -79,7 +79,7 @@ end
 def getFiles(dir)
     pattern=dir+"/"+"*.h"
 	files=Dir[pattern].select{|f|not f=~/swig.h/} #-[dir+Dir.separator+"swig.h"]
-    puts "getFiles #{dir}",pattern,"--",files,"----"
+    #puts "getFiles #{dir}",pattern,"--",files,"----"
     files  
 end
 
@@ -101,11 +101,11 @@ class ParsedClasses
 	attr_reader :deriveList
 
 	def initialize(files,allfiles)
-        puts "ParsedClasses:init()",files,"--",allfiles,"-----"
+        #puts "ParsedClasses:init()",files,"--",allfiles,"-----"
 		@rubyClasses=[]
-		@files=files
-		loadAllDerivations(allfiles)
-		@myfiles=files
+		@files=files.collect{|f|f.gsub(/.*\/ext\//,"ext/")}
+		loadAllDerivations(allfiles.collect{|f|f.gsub(/.*\/ext\//,"ext/")})
+		@myfiles=@files #files.collect{|f|f.gsub(/.*ext/,"ext")}
 		processDerivations
 		initLevels
 	end
@@ -239,11 +239,14 @@ class ParsedClasses
 		files=[]
 		l=@levels.values.max
 		(0..l).each{|i|
+            puts "LEVEL #{i}"
 			@levels.each{|n,level|
 				if level==i and @class2File[n]
+                    puts n
 					files << @class2File[n]
 				end
 			}
+            puts "----"
 		}
 
 		# add files of classes with unknown level
@@ -252,15 +255,21 @@ class ParsedClasses
 				files << @class2File[c]
 			end
 		}
-
+        puts "myfiles:",@myfiles,"---"
+        
+        puts "FILES:",files,"---"
 		files=files.select{|f|@myfiles.member?(f)} # select only "my" files - those included in this directory
+        puts "FILES after select:",files,"---"
 		addfiles=@files-files
 		files+=addfiles                            # add files that are in other directories
+        puts "FILES (add:",files,"---"
 
 		# unique the array
 		if files.length>0
 			files.uniq!
 		end
+        puts "FILES (uniq):",files,"---"
+
 		files
 	end
 
@@ -280,7 +289,7 @@ end
 def generateInterfaceFile(myInput,files,addfiles)
 	filename=myInput.interfaceName
 	interfaceI=File.open(filename,"w")
-	puts filename
+	#puts filename
     #raise 1
 	interfaceI.puts interface_template(myInput.moduleName,files,myInput.swigInput,addfiles,myInput.outputDir)
 	
@@ -304,9 +313,9 @@ def findFilesWith(str)
     Find.find("ext") {|file|files << file}
     files=files.select{|f|f=~/\.h$/}.select{|f|not f=~/swig.h/}.select{|f|File.open(f).read=~/#{str}/}
     #dirs=findDirsRecursively(".")
-    puts "findFilesWith #{str}:"
-    puts files
-    puts "---"
+    #puts "findFilesWith #{str}:"
+    #puts files
+    #puts "---"
     #exit
     files
     #Dir["*/*"].collect{|f|f.gsub(/\/.*/,"")}.uniq

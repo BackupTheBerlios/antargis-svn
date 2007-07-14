@@ -26,7 +26,7 @@
 #include <ag_string.h>
 #include <ag_string_utf8.h>
 
-class AGLocalizer
+class AGEXPORT AGLocalizer
 {
  public:
   virtual ~AGLocalizer();
@@ -35,10 +35,10 @@ class AGLocalizer
   
 };
 
-void setLocalizer(AGLocalizer *p);
-AGLocalizer *getLocalizer();
+AGEXPORT void setLocalizer(AGLocalizer *p);
+AGEXPORT AGLocalizer *getLocalizer();
 
-AGStringUtf8 translate(const AGString &s);
+AGEXPORT AGStringUtf8 translate(const AGString &s);
 
 #ifndef SWIG
 #ifdef _

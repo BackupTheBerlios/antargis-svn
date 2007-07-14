@@ -18,7 +18,7 @@
     3) get a VertexArray by calling getArray()
 */
 
-struct MeshVertex
+struct AGEXPORT MeshVertex
 {
   AGVector4 v,c;
   AGVector3 n;
@@ -29,7 +29,7 @@ struct MeshVertex
 };
 
 // generates index list for same vertices (with same colors/normals..)
-class MeshOptimizer
+class AGEXPORT MeshOptimizer
 {
   std::map<MeshVertex,int> mMap;
   std::vector<int> mIndices;
@@ -48,6 +48,6 @@ class MeshOptimizer
 
 // some old function ???
 // used in gen_tree ?? this gen_tree shouldn't be used anymore, too
-MeshOptimizer loadFromText(const std::string &pText, bool withTex, float zoom);
+AGEXPORT MeshOptimizer loadFromText(const std::string &pText, bool withTex, float zoom);
 
 #endif

@@ -26,7 +26,7 @@
 #include "ag_table.h"
 #include "ag_texture.h"
 
-class AGMenu:public AGTable
+class AGEXPORT AGMenu:public AGTable
 {
  public:
   AGMenu(AGWidget *pParent,AGVector2 pWishPos,const AGStringUtf8 &pName);

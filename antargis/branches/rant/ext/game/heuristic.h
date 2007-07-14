@@ -5,7 +5,7 @@
 
 #include <ag_geometry.h>
 
-class HeuristicFunction
+class AGEXPORT HeuristicFunction
 {
  public:
   typedef std::pair<AGVector2,AGVector2> Input;
@@ -18,7 +18,7 @@ class HeuristicFunction
   virtual Output operator()(const Input &input);
 };
 
-class StoredHeuristicFunction:public HeuristicFunction
+class AGEXPORT StoredHeuristicFunction:public HeuristicFunction
 {
   // FIXME: maybe store measure-count, too - and average!!!
 

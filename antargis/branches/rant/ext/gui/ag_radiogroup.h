@@ -28,7 +28,7 @@
 class AGRadio;
 
 // derive from AGWidget, so that it can be put into the hierarchy
-class AGRadioGroup:public AGWidget
+class AGEXPORT AGRadioGroup:public AGWidget
 {
  public:
   AGRadioGroup(AGWidget *pParent,const AGRect2 &pr);

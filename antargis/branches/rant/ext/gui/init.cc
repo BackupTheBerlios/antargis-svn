@@ -1,7 +1,8 @@
+#include <ag_base.h>
 #include <ag_debug.h>
 #include <ag_layout.h>
 
-void AG_Init_libantargisgui()
+AGEXPORT void AG_Init_libantargisgui()
 {
 	TRACE;
 

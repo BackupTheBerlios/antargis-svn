@@ -26,11 +26,13 @@ template<class T>
 class QuadTree;
 
 
+typedef std::vector<PickNode> PickResult;
+typedef std::list<SceneNode*> SceneNodeList;
+
 class AGEXPORT SceneBase:public AGRubyObject
 {
  public:
-  typedef std::vector<PickNode> PickResult;
-  typedef std::list<SceneNode*> NodeList;
+  //
 
   SceneBase(int w,int h);
   virtual ~SceneBase();
@@ -71,7 +73,7 @@ class AGEXPORT SceneBase:public AGRubyObject
 
 
   /** get currently visible nodes */
-  virtual NodeList getCurrentNodes();
+  virtual SceneNodeList getCurrentNodes();
 
   //  void setEnabled(bool p);
 

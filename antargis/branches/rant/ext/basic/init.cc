@@ -11,7 +11,7 @@ typedef struct swig_type_info;
 
 typedef swig_type_info*(*CastFunction)(void**);
 
-std::map<std::string,std::list<CastFunction> > agCastFunctions;
+AGEXPORT std::map<std::string,std::list<CastFunction> > agCastFunctions;
 
 AGEXPORT void AG_Init_libantargisbasic()
 {

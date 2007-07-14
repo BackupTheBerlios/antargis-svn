@@ -42,7 +42,7 @@ class AGImage;
    Further it can have following states:
 */
 
-class AGButton:public AGWidget
+class AGEXPORT AGButton:public AGWidget
 {
  public:
   /// the different drawing states
@@ -113,6 +113,6 @@ class AGButton:public AGWidget
   bool mEnabled;
 };
 
-AGButton &toAGButton(AGWidget &pWidget);
+AGEXPORT AGButton &toAGButton(AGWidget &pWidget);
 
 #endif

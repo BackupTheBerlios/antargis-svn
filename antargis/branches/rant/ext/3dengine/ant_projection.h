@@ -7,7 +7,7 @@
 
 #include <ant_frustum.h>
 
-struct Viewport
+struct AGEXPORT Viewport
 {
   GLint viewport[4];
 #ifndef SWIG
@@ -19,7 +19,7 @@ struct Viewport
 };
 
 
-class AntProjection
+class AGEXPORT AntProjection
 {
  public:
   AntProjection();

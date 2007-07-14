@@ -17,7 +17,7 @@
 FIXME: maybe remove Resource from c++??
 
 */
-class Resource
+class AGEXPORT Resource
 {
   std::map<std::string,float> r;
  public:

@@ -18,7 +18,7 @@ void Scene2D::draw()
 {
   // FIXME
   
-  NodeList nodeList=getCurrentNodes();
+  SceneNodeList nodeList=getCurrentNodes();
   Nodes ns;
   std::copy(nodeList.begin(),nodeList.end(),std::back_inserter(ns));
 
@@ -31,10 +31,10 @@ void Scene2D::draw()
     (*i)->draw();
 }
 
-SceneBase::PickResult Scene2D::pick(float x,float y,float w,float h)
+PickResult Scene2D::pick(float x,float y,float w,float h)
 {
   PickResult result;
-  NodeList nodeList=getCurrentNodes();
+  SceneNodeList nodeList=getCurrentNodes();
 
   Nodes ns;
   std::copy(nodeList.begin(),nodeList.end(),std::back_inserter(ns));
@@ -85,11 +85,11 @@ AGVector2 Scene2D::getPosition(const AGVector4 &v) const
   return v.dim2();
 }
 
-SceneBase::NodeList Scene2D::getCurrentNodes()
+SceneNodeList Scene2D::getCurrentNodes()
 {
   //  cdebug("FIXME");
 
-  NodeList l;
+  SceneNodeList l;
   std::copy(mNodes.begin(),mNodes.end(),std::back_inserter(l));
 
   //  throw std::runtime_error("FIXME");

@@ -22,7 +22,7 @@ class SceneBase;
    because typically this object is created within an xml-layout-file
 
  */
-class MiniMap:public AGWidget
+class AGEXPORT MiniMap:public AGWidget
 {
  public:
   MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap);
@@ -59,8 +59,8 @@ class MiniMap:public AGWidget
   AGSurface mSurface;
 };
 
-MiniMap *toMiniMap(AGWidget *w);
+//MiniMap *toMiniMap(AGWidget *w);
 
-void registerMinimapCreator();
+AGEXPORT void registerMinimapCreator();
 
 #endif

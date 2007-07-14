@@ -2,7 +2,7 @@
 
 #include <minimap.h>
 
-void AG_Init_libantargisgame()
+AGEXPORT void AG_Init_libantargisgame()
 {
 	TRACE;
 

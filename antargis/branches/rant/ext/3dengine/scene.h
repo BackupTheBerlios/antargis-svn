@@ -110,7 +110,7 @@ class AGEXPORT Scene:public SceneBase
   /*
   AGVector2 getPosition(const AGVector4 &v) const;
   */
-  NodeList getCurrentNodes();
+  SceneNodeList getCurrentNodes();
 
 
   void setEnabled(bool p);

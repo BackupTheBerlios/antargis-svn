@@ -1,9 +1,10 @@
 #ifndef ENTPTR_H
 #define ENTPTR_H
 
+#include <ag_base.h>
 #include "entity.h"
 
-class AntEntityPtr
+class AGEXPORT AntEntityPtr
 {
  public:
   AntEntityPtr(const AntEntityPtr &p);

@@ -27,7 +27,7 @@
 #include "ag_color.h"
 #include <vector>
 
-class AGColorButton:public AGWidget
+class AGEXPORT AGColorButton:public AGWidget
 {
  public:
   AGColorButton(AGWidget *pParent,const AGRect2 &r,int x,int y);
@@ -47,6 +47,6 @@ class AGColorButton:public AGWidget
   AGColor mColor;
 };
 
-AGColorButton &toAGColorButton(AGWidget &pWidget);
+AGEXPORT AGColorButton &toAGColorButton(AGWidget &pWidget);
 
 #endif

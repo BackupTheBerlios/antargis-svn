@@ -14,14 +14,14 @@
 #include "ext/basic/ag_utf8.h"
 #include "ext/basic/ag_video_base.h"
 #include "ext/basic/ag_xml.h"
-#include "c:/antargis/rant/ext/math/ag_algebra.h"
-#include "c:/antargis/rant/ext/math/ag_geometry.h"
-#include "c:/antargis/rant/ext/math/ag_rand.h"
-#include "c:/antargis/rant/ext/math/ant_frustum.h"
+#include "ext/math/ag_rand.h"
+#include "ext/math/ant_frustum.h"
+#include "ext/math/ag_algebra.h"
+#include "ext/math/ag_geometry.h"
 #ifdef SWIG
-%include "c:/antargis/rant/ext/math/ag_algebra.h"
-%include "c:/antargis/rant/ext/math/ag_geometry.h"
-%include "c:/antargis/rant/ext/math/ag_rand.h"
-%include "c:/antargis/rant/ext/math/ant_frustum.h"
+%include "ext/math/ag_rand.h"
+%include "ext/math/ant_frustum.h"
+%include "ext/math/ag_algebra.h"
+%include "ext/math/ag_geometry.h"
 #endif
 #endif

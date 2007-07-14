@@ -29,7 +29,7 @@ class AGButton;
 class AGBorder;
 class AGBackground;
 
-class AGScroller:public AGWidget
+class AGEXPORT AGScroller:public AGWidget
 {
  public:
   AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor);

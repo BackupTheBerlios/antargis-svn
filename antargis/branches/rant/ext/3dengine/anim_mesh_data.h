@@ -7,13 +7,13 @@
 #include "glsl.h"
 #include "ag_texture.h"
 
-struct KeyFrame
+struct AGEXPORT KeyFrame
 {
   float time;
   AGVector3 v;
 };
 
-struct Bone
+struct AGEXPORT Bone
 {
   size_t id;
   AGVector3 pos,rot;
@@ -30,7 +30,7 @@ struct Bone
   AGVector3 interpolate(const std::vector<KeyFrame> &frames,float t);
 };
 
-struct Animation
+struct AGEXPORT Animation
 {
   float begin;
   float end;

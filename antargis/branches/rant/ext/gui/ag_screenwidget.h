@@ -26,7 +26,7 @@
 #include "ag_widget.h"
 #include "ag_texture.h"
 
-class AGScreenWidget:public AGWidget
+class AGEXPORT AGScreenWidget:public AGWidget
 {
  public:
   AGScreenWidget();

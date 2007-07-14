@@ -28,7 +28,7 @@
 #include <ag_surface.h> // for decryptor
 
 // use widget, though this isn't one, because it provides useable functions
-class AGSound:public AGMessageObject
+class AGEXPORT AGSound:public AGMessageObject
 // #Widget
 {
  public:
@@ -63,7 +63,7 @@ class AGSound:public AGMessageObject
 
 };
 
-AGSound *getSoundManager();
+AGEXPORT AGSound *getSoundManager();
 
 #endif
 

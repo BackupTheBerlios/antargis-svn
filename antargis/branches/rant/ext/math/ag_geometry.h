@@ -133,7 +133,7 @@ class AGEXPORT AGVector2
 };
 
 // 2-dim homogenous vector
-class AGVector3
+class AGEXPORT AGVector3
 {
  public:
   float v[3];
@@ -210,7 +210,7 @@ class AGVector3
 };
 
 
-class AGMatrix3
+class AGEXPORT AGMatrix3
 {
   float a[3][3];
  public:
@@ -261,7 +261,7 @@ class AGMatrix3
   AGString toString() const;
 };
 
-class AGLine2
+class AGEXPORT AGLine2
 {
   AGVector2 v0,v1;
  public:
@@ -294,7 +294,7 @@ class AGLine2
   AGString toString() const;
 };
 
-class AGLine3
+class AGEXPORT AGLine3
 {
   AGVector3 v0,v1;
  public:
@@ -326,13 +326,13 @@ class AGLine3
   AGString toString() const;
 };
 
-class AGCollisionData
+class AGEXPORT AGCollisionData
 {
 };
 
 class AGRect2;
 
-class AGTriangle2
+class AGEXPORT AGTriangle2
 {
   AGVector2 p[3];
  public:
@@ -371,7 +371,7 @@ class AGTriangle2
   AGString toString() const;
 };
 
-class AGCircle2
+class AGEXPORT AGCircle2
 {
   AGVector3 p;
   float radius;
@@ -389,7 +389,7 @@ class AGCircle2
 };
 
 class AGVector4;
-class AGTriangle3
+class AGEXPORT AGTriangle3
 {
   AGVector3 p[3];
  public:
@@ -490,7 +490,7 @@ class AGEXPORT AGRect2
 };
 
 
-class AGVector4
+class AGEXPORT AGVector4
 {
  public:
   float v[4];
@@ -580,7 +580,7 @@ class AGVector4
 #endif
 };
 
-class AGMatrix4
+class AGEXPORT AGMatrix4
 {
   float a[16];
  public:
@@ -644,7 +644,7 @@ class AGMatrix4
 };
 
 // axis-aligned
-class AGRect3
+class AGEXPORT AGRect3
 {
   AGVector3 base,dir;
  public:
@@ -656,7 +656,7 @@ class AGRect3
 };
 
 // axis-aligned
-class AGBox3
+class AGEXPORT AGBox3
 {
  public:
   AGVector3 base,dir;

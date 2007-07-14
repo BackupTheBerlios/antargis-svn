@@ -28,7 +28,7 @@
 
 #include <map>
 
-class AGTheme
+class AGEXPORT AGTheme
 {
  public:
   AGTheme();
@@ -64,11 +64,11 @@ class AGTheme
   std::map<AGString,int> mInts;
 };
 
-AGTheme *getTheme();
-void setTheme(const AGTheme &aTheme);
-void loadTheme(const AGData &pXML);
-bool loadThemeFile(const AGFilename &pFilename);
+AGEXPORT AGTheme *getTheme();
+AGEXPORT void setTheme(const AGTheme &aTheme);
+AGEXPORT void loadTheme(const AGData &pXML);
+AGEXPORT bool loadThemeFile(const AGFilename &pFilename);
 
-AGString addPoint(const AGString &pTheme);
+AGEXPORT AGString addPoint(const AGString &pTheme);
 
 #endif

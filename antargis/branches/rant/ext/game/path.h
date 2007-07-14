@@ -24,14 +24,14 @@
 
 class Heuristic;
 
-class PathWeighter:public AGRubyObject
+class AGEXPORT PathWeighter:public AGRubyObject
 {
  public:
   virtual ~PathWeighter();
   virtual float weight(float h0,float h1);
 };
 
-class MapPathWeighter:public PathWeighter
+class AGEXPORT MapPathWeighter:public PathWeighter
 {
  public:
   MapPathWeighter(HeightMap *pMap);
@@ -46,7 +46,7 @@ class MapPathWeighter:public PathWeighter
 };
 
 
-struct AGVector2Sort
+struct AGEXPORT AGVector2Sort
 {
   public:
   bool operator()(const AGVector2 &a,const AGVector2 &b)
@@ -56,7 +56,7 @@ struct AGVector2Sort
 };
 
 
-class SimpleGraph:public AGRubyObject
+class AGEXPORT SimpleGraph:public AGRubyObject
 {
  public:
   struct Node;
@@ -181,11 +181,11 @@ class SimpleGraph:public AGRubyObject
 
 };
 
-SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res=1);
-HeuristicFunction *computeHeuristic(SimpleGraph *g);
+AGEXPORT SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res=1);
+AGEXPORT HeuristicFunction *computeHeuristic(SimpleGraph *g);
 
 
-class DecimatedGraph:public SimpleGraph
+class AGEXPORT DecimatedGraph:public SimpleGraph
 {
  public:
   DecimatedGraph();
@@ -202,7 +202,7 @@ class DecimatedGraph:public SimpleGraph
 
 struct Path;
 
-class Heuristic
+class AGEXPORT Heuristic
 {
   AGVector2 to;
   HeuristicFunction *p;
@@ -214,7 +214,7 @@ class Heuristic
   float distance(const AGVector2&from);
 };
 
-struct Path:public std::list<SimpleGraph::Node*>
+struct AGEXPORT Path:public std::list<SimpleGraph::Node*>
 {
   float weight;
   
@@ -229,7 +229,7 @@ struct Path:public std::list<SimpleGraph::Node*>
 };
 
 
-class PathDebugging
+class AGEXPORT PathDebugging
 {
  public:
   virtual ~PathDebugging()
@@ -241,7 +241,7 @@ class PathDebugging
 };
   
 
-class Pathfinder:public AGRubyObject
+class AGEXPORT Pathfinder:public AGRubyObject
 {
  public:
 

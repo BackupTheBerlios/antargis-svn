@@ -29,7 +29,7 @@ class AGEdit;
 class AGButton;
 class AGListBox;
 
-class AGComboBox:public AGWidget
+class AGEXPORT AGComboBox:public AGWidget
 {
  public:
   AGComboBox(AGWidget *pParent,const AGRect2 &pRect);

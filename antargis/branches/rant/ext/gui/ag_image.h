@@ -26,7 +26,7 @@
 #include "ag_widget.h"
 #include "ag_texture.h"
 
-class AGImage:public AGWidget
+class AGEXPORT AGImage:public AGWidget
 {
  public:
   AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile);

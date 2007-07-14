@@ -36,7 +36,7 @@
 extern std::ofstream out;
 #endif
 
-class GLApp:public AGApplication
+class AGEXPORT GLApp:public AGApplication
 {
   bool shadow;
   float mx,my;
@@ -62,8 +62,8 @@ public:
 
   bool eventFrame(float t);
 
-  virtual void eventClick(const Scene::PickResult &pNodes,int button);
-  virtual void eventHover(const Scene::PickResult &pNodes,int button);
+  virtual void eventClick(const PickResult &pNodes,int button);
+  virtual void eventHover(const PickResult &pNodes,int button);
 
   virtual bool eventMouseButtonDown(AGEvent *m);
   virtual bool eventMouseButtonUp(AGEvent *m);

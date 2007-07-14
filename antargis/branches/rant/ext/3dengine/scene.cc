@@ -114,13 +114,13 @@ int Scene::getShadow() const
 
 
 
-Scene::NodeList Scene::getCurrentNodes()
+SceneNodeList Scene::getCurrentNodes()
 {
   STACKTRACE;
   AGVector2 p=mCamera.getPosition().dim2();
-  NodeList l=mTree->get(AGRect2(p+AGVector2(-30,-30),p+AGVector2(30,30)));
+  SceneNodeList l=mTree->get(AGRect2(p+AGVector2(-30,-30),p+AGVector2(30,30)));
 
-  for(NodeList::iterator i=l.begin();i!=l.end();i++)
+  for(SceneNodeList::iterator i=l.begin();i!=l.end();i++)
     {
       if(mNodeSet.find(*i)==mNodeSet.end())
 	cdebug("ERROR:"<<*i);
@@ -141,7 +141,7 @@ void Scene::calcShadowMap()
 
   {
     STACKTRACE;
-    NodeList l=getCurrentNodes();
+    SceneNodeList l=getCurrentNodes();
     Nodes sorted;
     std::copy(l.rbegin(),l.rend(),std::back_inserter(sorted));
     
@@ -266,7 +266,7 @@ void Scene::drawScene()
 
   int drawn=0;
 
-  NodeList l=getCurrentNodes();
+  SceneNodeList l=getCurrentNodes();
   Nodes sorted;
   std::copy(l.begin(),l.end(),std::back_inserter(sorted));
 
@@ -355,9 +355,9 @@ void Scene::pickDraw()
 
   AntFrustum cFrustum=mCamera.getCameraProjection().getFrustum();
   
-  NodeList l=getCurrentNodes();
+  SceneNodeList l=getCurrentNodes();
 
-  for(NodeList::iterator i=l.begin();i!=l.end();i++)
+  for(SceneNodeList::iterator i=l.begin();i!=l.end();i++)
     {
       STACKTRACE;
       if((*i)->visible() && (*i)->bbox().collides(frustum))
@@ -380,7 +380,7 @@ void Scene::pickDraw()
 /// x and y are in screen-coordinates in normal fashion
 /// so (0,0) is the top left corner and (1023,767) bottom right.
 /// the same for w and h
-Scene::PickResult Scene::pick(float x,float y,float w,float h)
+PickResult Scene::pick(float x,float y,float w,float h)
 {
   STACKTRACE;
   size_t bufsize=4000;
@@ -430,7 +430,7 @@ Scene::PickResult Scene::pick(float x,float y,float w,float h)
 }
 
 /// helper function for gettin PickResult from opengl's buffers
-Scene::PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py)
+PickResult Scene::processHits (int hits, GLuint *buffer,float px,float py)
 {
   STACKTRACE;
   PickResult result;

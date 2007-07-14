@@ -256,8 +256,8 @@ class AGEXPORT AGWidget:public AGMessageObject
 
 //AGWidget *toAGWidget(AGMessageObject *o);
 
-void setNewClippingTechnique(bool f);
-bool getNewClippingTechnique();
+AGEXPORT void setNewClippingTechnique(bool f);
+AGEXPORT bool getNewClippingTechnique();
 
 
 #endif

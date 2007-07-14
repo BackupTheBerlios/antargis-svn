@@ -31,7 +31,7 @@
 class AGEdit;
 class AGScroller;
 
-struct AGListBoxItem
+struct AGEXPORT AGListBoxItem
 {
   AGListBoxItem(AGString pID,AGStringUtf8 pValue);
   AGString id;
@@ -40,7 +40,7 @@ struct AGListBoxItem
 
 
 // Single selection for a start
-class AGListBox:public AGWidget
+class AGEXPORT AGListBox:public AGWidget
 {
  public:
   AGListBox(AGWidget *pParent,const AGRect2 &pRect);
@@ -83,6 +83,6 @@ class AGListBox:public AGWidget
 };
 
 
-AGListBox &toAGListBox(AGWidget &w);
+//AGListBox &toAGListBox(AGWidget &w);
 
 #endif

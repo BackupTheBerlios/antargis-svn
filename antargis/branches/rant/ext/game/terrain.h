@@ -26,7 +26,7 @@ class Terrain;
    (Terrain and water is tiled for the ease of culling)
    for more information on drawing-modes and such go to SceneNode.
  */
-class TerrainPiece:public SceneNode
+class AGEXPORT TerrainPiece:public SceneNode
 {
  public:
   TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
@@ -58,7 +58,7 @@ class TerrainPiece:public SceneNode
 };
 
 
-class TerrainBase:public AGRubyObject
+class AGEXPORT TerrainBase:public AGRubyObject
 {
  public:
   TerrainBase(SceneBase *pScene,HeightMap &map);
@@ -90,7 +90,7 @@ class TerrainBase:public AGRubyObject
    that in case the terrain changes these will be changed,too.
 
 */
-class Terrain:public TerrainBase
+class AGEXPORT Terrain:public TerrainBase
 {
   // Some containers for all the meshes
   typedef std::list<TerrainPiece*> Pieces;
@@ -126,7 +126,7 @@ public:
   void init();
 };
 
-void setUsing3dTextures(bool use3dTextures);
+AGEXPORT void setUsing3dTextures(bool use3dTextures);
 
 
 #endif

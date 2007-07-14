@@ -26,7 +26,7 @@
 #include "ag_widget.h"
 #include "ag_font.h"
 
-class AGText:public AGWidget
+class AGEXPORT AGText:public AGWidget
 {
  public:
   AGText(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont);
@@ -48,6 +48,6 @@ class AGText:public AGWidget
   bool mFixedSize;
 };
 
-AGText &toAGText(AGWidget &w);
+//AGText &toAGText(AGWidget &w);
 
 #endif

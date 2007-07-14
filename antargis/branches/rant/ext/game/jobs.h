@@ -30,7 +30,7 @@ class AntEntity;
    Job class won't be exported to Ruby, because their constant
    creation and deletion fills up the GC otherwise.
 */
-class Job
+class AGEXPORT Job
 {
   int priority;
   bool inited;
@@ -53,7 +53,7 @@ class Job
   bool valid() const;
 };
 
-class RestJob:public Job
+class AGEXPORT RestJob:public Job
 {
   float mTime;
  public:
@@ -68,7 +68,7 @@ class RestJob:public Job
 
 };
 
-class MoveJob:public Job
+class AGEXPORT MoveJob:public Job
 {
   AGVector2 mTarget;
   AGVector3 mTarget3;
@@ -100,7 +100,7 @@ class MoveJob:public Job
 };
 
 // FIXME: implement near and far fighting (arrows)
-class FightJob:public Job
+class AGEXPORT FightJob:public Job
 {
   AntEntity *mTarget;
   float fightDistance;
@@ -125,7 +125,8 @@ class FightJob:public Job
   
 };
 
-class FetchJob:public MoveJob
+// FIXME: check if this can be discarded ???
+class AGEXPORT FetchJob:public MoveJob
 {
   AGString mWhat;
   AntEntity *mTarget;

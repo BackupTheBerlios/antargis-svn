@@ -30,7 +30,7 @@
 class AGPainter;
 
 
-class AGBorder
+class AGEXPORT AGBorder
 {
  public:
   AGBorder(const AGString &pTheme="");

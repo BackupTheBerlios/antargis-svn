@@ -39,7 +39,7 @@ class Job;
 
 #include "resource.h"
 
-class AntEntity:public AGRubyObject
+class AGEXPORT AntEntity:public AGRubyObject
   {
   public:
     typedef std::list<SceneNode*> Meshes;

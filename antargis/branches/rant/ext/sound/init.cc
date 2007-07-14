@@ -3,7 +3,7 @@
 
 extern void initSoundEngine();
 
-void AG_Init_libantargissound()
+AGEXPORT void AG_Init_libantargissound()
 {
 	initSoundEngine();
 }

@@ -10,7 +10,7 @@
    some very simple particle engine for displaying
    smoke and ugly fire.
 */
-class AntParticle:public SceneNode
+class AGEXPORT AntParticle:public SceneNode
 {
   /// this represents one single particle
   struct Piece

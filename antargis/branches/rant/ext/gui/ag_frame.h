@@ -7,7 +7,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-class AGFrame:public AGWidget
+class AGEXPORT AGFrame:public AGWidget
 {
  public:
   AGFrame(AGWidget *pParent,const AGRect2 &pRect,size_t width); // transparent frame

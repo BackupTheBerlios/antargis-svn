@@ -21,7 +21,7 @@ class AntWaterShader;
    for animation.
    In future some fragment shader using fresnel effects would be nice :-)
 */
-class WaterPiece:public SceneNode
+class AGEXPORT WaterPiece:public SceneNode
 {
   AGTexture tex;
  public:

@@ -28,7 +28,7 @@
 
 class AGTable;
 
-class AGLayout:public AGWidget
+class AGEXPORT AGLayout:public AGWidget
 {
  public:
   AGLayout(AGWidget *pgParent);
@@ -46,9 +46,9 @@ class AGLayout:public AGWidget
   std::map<int,AGWidget*> mTabIndices;
 };
 
-AGWidget *parseNode(AGWidget *pParent,const Node &pNode);
-void parseChildren(AGWidget *pParent,const Node &pNode);
+AGEXPORT AGWidget *parseNode(AGWidget *pParent,const Node &pNode);
+AGEXPORT void parseChildren(AGWidget *pParent,const Node &pNode);
 //AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom);
-AGRect2 getLayoutGeometry(AGWidget *pParent,const Node &pNode);
+AGEXPORT AGRect2 getLayoutGeometry(AGWidget *pParent,const Node &pNode);
 
 #endif

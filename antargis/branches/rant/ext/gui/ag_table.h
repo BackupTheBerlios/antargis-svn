@@ -37,7 +37,7 @@
    @todo children should be re-arranged whenever AGTable::arrange() is called!
 */
 
-class AGTable:public AGWidget
+class AGEXPORT AGTable:public AGWidget
 {
  public:
   AGTable(AGWidget *pWidget,const AGRect2 &pRect);

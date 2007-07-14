@@ -25,7 +25,7 @@
 
 #include <ag_widget.h>
 
-class AGTooltip:public AGWidget
+class AGEXPORT AGTooltip:public AGWidget
 {
  public:
   AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText);

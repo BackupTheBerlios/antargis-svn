@@ -98,9 +98,9 @@ void SceneBase::advance(float time)
   //    return;
   // advance only in view
 
-  NodeList l=getCurrentNodes();
+  SceneNodeList l=getCurrentNodes();
 
-  for(NodeList::iterator i=l.begin();i!=l.end();i++)
+  for(SceneNodeList::iterator i=l.begin();i!=l.end();i++)
     {
       if((*i)->visible())
 	(*i)->advance(time);
@@ -136,8 +136,8 @@ AntCamera &SceneBase::getCameraObject()
   return mCamera;
 }
 
-SceneBase::NodeList SceneBase::getCurrentNodes()
+SceneNodeList SceneBase::getCurrentNodes()
 {
   throw std::runtime_error("not implemented!");
-  return NodeList();
+  return SceneNodeList();
 }

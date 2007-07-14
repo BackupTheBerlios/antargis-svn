@@ -16,7 +16,7 @@
     Actual drawing is done by MeshData.
 
 */
-class Mesh:public SceneNode
+class AGEXPORT Mesh:public SceneNode
 {
   MeshData *mData;
   float mRotation;

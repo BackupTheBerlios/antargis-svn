@@ -26,7 +26,7 @@
 #include "ag_text.h"
 #include "ag_background.h"
 
-class AGCaption:public AGText
+class AGEXPORT AGCaption:public AGText
 {
  public:
   AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG);

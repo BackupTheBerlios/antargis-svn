@@ -20,7 +20,7 @@ enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LAS
 
 #define FIRSTTERRAIN WATER
 
-class HeightMap:public AGMessageObject
+class AGEXPORT HeightMap:public AGMessageObject
 {
  public:
   HeightMap(SceneBase *pScene,int w,int h);

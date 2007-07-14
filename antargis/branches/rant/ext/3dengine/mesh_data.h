@@ -10,7 +10,7 @@
 
 // Mesh organizing
 
-class MeshData:public AGRubyObject
+class AGEXPORT MeshData:public AGRubyObject
 {
   VertexArray mArray;
   AGTexture mTexture;

@@ -28,7 +28,7 @@
 
 class AGImage;
 
-class AGCheckBox:public AGButton
+class AGEXPORT AGCheckBox:public AGButton
 {
  public:
   AGCheckBox(AGWidget *pParent,AGRect2 pRect);

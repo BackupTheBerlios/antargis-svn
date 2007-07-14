@@ -33,7 +33,7 @@
 enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
 enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};
 
-class AGEditLine
+class AGEXPORT AGEditLine
 {
  public:
   AGEditLine(const AGStringUtf8 &pText,AGFont pFont,bool pHardEnd);
@@ -76,7 +76,7 @@ class AGEditLine
   AGVAlign mVAlign;
 };
 
-class AGEdit:public AGWidget
+class AGEXPORT AGEdit:public AGWidget
 {
  public:
   AGEdit(AGWidget *pParent,const AGRect2 &pRect);
@@ -163,6 +163,6 @@ class AGEdit:public AGWidget
   int mMaxLength;
 };
 
-AGEdit &toAGEdit(AGWidget &w);
+//AGEdit &toAGEdit(AGWidget &w);
 
 #endif

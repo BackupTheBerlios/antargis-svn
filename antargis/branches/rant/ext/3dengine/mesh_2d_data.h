@@ -5,7 +5,7 @@
 
 #include <ag_texture.h>
 
-class Mesh2DData:public AGRubyObject
+class AGEXPORT Mesh2DData:public AGRubyObject
 {
  public:
   Mesh2DData(AGTexture *pTexture);

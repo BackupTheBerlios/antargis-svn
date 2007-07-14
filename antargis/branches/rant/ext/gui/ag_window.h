@@ -25,7 +25,7 @@
 
 #include "ag_table.h"
 
-class AGWindow:public AGTable
+class AGEXPORT AGWindow:public AGTable
 {
  public:
   AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle="",const AGString &pTheme="");
@@ -54,6 +54,6 @@ class AGWindow:public AGTable
   AGWidget *mClient;
 };
 
-AGWindow &toAGWindow(AGWidget &w);
+//AGWindow &toAGWindow(AGWidget &w);
 
 #endif

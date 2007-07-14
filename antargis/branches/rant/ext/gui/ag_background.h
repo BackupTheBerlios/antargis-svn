@@ -34,7 +34,7 @@ class AGPainter;
     It is used to draw gradients and tiled backgrounds of widgets.
     It is themable.
  */
-class AGBackground
+class AGEXPORT AGBackground
 {
  public:
   AGBackground(const AGString &pThemeName="");
