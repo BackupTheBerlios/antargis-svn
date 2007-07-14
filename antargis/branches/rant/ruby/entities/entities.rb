@@ -95,7 +95,7 @@ class AntRubyEntity<AntEntity
 		node.set("uid",@uid.to_s)
 	end
 	def getDescription
-		"This is an entity - no more info here."
+		_("This is an entity - no more info here.")
 	end
 
 	# simple comparison operator, so that ents can be distinguished

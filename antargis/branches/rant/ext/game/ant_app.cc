@@ -42,7 +42,7 @@ bool GLApp::eventFrame(float t)
   if(hx>=0)
     {
       // check hovering
-      Scene::PickResult nodes=scene.pick(hx,hy,1,1);
+      PickResult nodes=scene.pick(hx,hy,1,1);
       
       if(nodes.size())
 	eventHover(nodes,hb);
@@ -92,7 +92,7 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
 	    {
 	      STACKTRACE;
 	      AGVector2 p=e->getMousePosition();
-	      Scene::PickResult nodes=scene.pick(p[0],p[1],1,1);
+	      PickResult nodes=scene.pick(p[0],p[1],1,1);
 
 	      eventClick(nodes,e->getButton());
 	    }
@@ -105,11 +105,11 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
   return AGApplication::eventMouseButtonUp(e);
 }
 
-void GLApp::eventClick(const Scene::PickResult &pNodes,int button)
+void GLApp::eventClick(const PickResult &pNodes,int button)
 {
 }
 
-void GLApp::eventHover(const Scene::PickResult &pNodes,int button)
+void GLApp::eventHover(const PickResult &pNodes,int button)
 {
 }
 
