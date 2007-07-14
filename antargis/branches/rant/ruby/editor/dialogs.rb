@@ -21,14 +21,14 @@ class AntEditPropDialog<AntDialog
 	def initialize(parent,ent)
 		super(parent,"data/gui/layout/editpropdialog.xml")
 		@ent=ent
-		menCountW=toAGEdit(getChild("MenCount"))
-		nameW=toAGEdit(getChild("AntName"))
+		menCountW=getChild("MenCount")
+		nameW=getChild("AntName")
 		menCountW.setText(AGStringUtf8.new(@ent.getXMLProp("men")))
 		nameW.setText(AGStringUtf8.new(@ent.getName))
 		
 		getChild("NpcTypeView").hide if @ent.class!=AntNPC
 		if @ent.class==AntNPC
-			@npcTypeW=toAGEdit(getChild("NpcType"))
+			@npcTypeW=getChild("NpcType")
 			@npcTypeW.setText(AGStringUtf8.new(@ent.npcType))
 		end
 
@@ -49,8 +49,8 @@ class AntEditPropDialog<AntDialog
 
 	end
 	def eventOk(e)
-		menCountW=toAGEdit(getChild("MenCount"))
-		nameW=toAGEdit(getChild("AntName"))
+		menCountW=getChild("MenCount")
+		nameW=getChild("AntName")
 		@ent.setName(nameW.getText.to_s)
 		@ent.setXMLProp("men",menCountW.getText.to_s)
 		close

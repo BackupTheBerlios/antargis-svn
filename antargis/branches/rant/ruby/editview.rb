@@ -73,7 +73,7 @@ class AntRubyEditView<GLApp
 			@newDialog.loadXML(loadFile("data/gui/layout/newdialog.xml"))
 			addHandler(@newDialog.getChild("ok"),:sigClick,:eventNewMapEnd)
 			addHandler(@newDialog.getChild("cancel"),:sigClick,:eventNewMapEnd)
-			addHandler(toAGWindow(@newDialog.getChild("window")),:sigClose,:eventNewMapEnd)
+			addHandler(@newDialog.getChild("window"),:sigClose,:eventNewMapEnd)
 		end
 		GC.start
 		return true
@@ -87,8 +87,8 @@ class AntRubyEditView<GLApp
 			@layout.removeChild(d)
 			#d.close
 			if name=="ok"
-				w=toAGEdit(d.getChild("width")).getText.to_s.to_i
-				h=toAGEdit(d.getChild("height")).getText.to_s.to_i
+				w=d.getChild("width").getText.to_s.to_i
+				h=d.getChild("height").getText.to_s.to_i
 				
 				if w and h
 					w=2**(Math::log(w)/Math::log(2)).to_i

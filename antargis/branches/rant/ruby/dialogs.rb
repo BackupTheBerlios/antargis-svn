@@ -113,11 +113,11 @@ class AntStoryTalk<AntDialog
 		updateText
 	end
 	def setText(text)
-		toAGEdit(getChild("text")).setText(_(text))
+		getChild("text").setText(_(text))
 	end
 	def setTitle(text)
 		# it's AGText # FIXME: maybe exchange all AGText usages by AGEdit
-		toAGText(getChild("title")).setText(_(text))
+		getChild("title").setText(_(text))
 	end
 
 	def setFace(s)
@@ -253,7 +253,7 @@ class AntSaveDialog<AntDialog
 		super(parent,"data/gui/layout/savedialog.xml")
 	end
 	def eventOk(e)
-		filename=toAGEdit(getChild("Filename")).getText
+		filename=getChild("Filename").getText
 		#puts "FILENAME:"+filename.to_s
 		if not filename =~ /.*\.antlvl/ then
 			filename=filename.to_s+".antlvl"
@@ -277,7 +277,7 @@ class AntSaveCampaignDialog<AntDialog
 		getChild("window").getChild("title").setText(_("Save campaign"))
 	end
 	def eventOk(e)
-		filename=toAGEdit(getChild("Filename")).getText.to_s
+		filename=getChild("Filename").getText.to_s
 		puts "FILENAME:"+filename.to_s
 		if not filename =~ /.*\.antcmp/ then
 			filename=filename+".antcmp"
@@ -301,7 +301,7 @@ class AntLoadDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/loaddialog.xml")
 		d=getDirectory(getSavePath)
-		@lb=toAGListBox(getChild("Files"))
+		@lb=getChild("Files")
 		puts d
 		d.each { |x|
 			if x =~ /.*\.antlvl/ then
