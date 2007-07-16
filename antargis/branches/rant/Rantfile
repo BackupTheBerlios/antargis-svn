@@ -2,6 +2,9 @@ import "md5"                         # md5 is needed for automatic checksum-chec
 import "autoclean"                    # autoclean includes the a simple facility for a clean-make-target
 import "package/tgz"                  # support for packaging (tar.gz, zip)
 import "rubydoc"
+import "c/dependencies"
+
+#gen C::Dependencies
 
 require 'build/base_tools.rb'
 
@@ -112,7 +115,7 @@ sourceDeps.each{|pair|
         puts "------",cmd,"--------------!"
 		sys cmd
         if ENV['WINDIR']
-            sys "mv #{sys.expand_path(t.name)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll")}.a"
+            sys "copy #{sys.expand_path(t.name).gsub("/",Dir.separator)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll").gsub("/",Dir.separator)}.a"
         end
 	end
 }

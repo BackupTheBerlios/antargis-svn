@@ -172,7 +172,7 @@ EOT
         paths=getPath
         paths.each{|p|
             currentPath=p+Dir.separator+program
-            puts "TST #{currentPath}"
+            #puts "TST #{currentPath}"
             if File.exists?(currentPath)
                 puts "FOUND! at #{currentPath}"
                 return currentPath

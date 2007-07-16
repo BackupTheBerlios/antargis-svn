@@ -67,7 +67,7 @@ dir=$(pwd)
 cd tmp
 tar xfz ../libs/ruby-1.8.6.tar.gz
 cd ruby-1.8.6
-        ./configure --prefix=/usr --enable-debug
+        ./configure --prefix=/usr --enable-debug --enable-install-doc
 ####                # patch fake.rb
 #####                cat fake.rb |sed -e "s/\"\\\\\";/\"\\\\\"\";/">fake.tmp
 #####                mv fake.tmp fake.rb

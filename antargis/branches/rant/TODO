@@ -1,3 +1,9 @@
+* download allinoneruby.rb
+* build allinoneruby.exe
+* put ag_sdl*.tar.gz into svn
+* put up instructions into wiki
+
+
 * docs
 * configure
 * "contrib"

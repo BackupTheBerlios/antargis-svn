@@ -49,7 +49,7 @@ CFG.checkProgram("gcc")
 CFG.checkProgram("g++")
 CFG.checkProgram("swig")
 CFG.checkProgram("ruby")
-CFG.checkProgram("sdl-config")
+CFG.checkProgram("sdl-config",false)
 
 CFG.addCheck("sdl-config --libs",false) do
         libs=nil

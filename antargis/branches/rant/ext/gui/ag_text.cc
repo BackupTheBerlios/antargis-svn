@@ -70,11 +70,6 @@ AGStringUtf8 AGText::getText() const
   return mText;
 }
 
-AGText &toAGText(AGWidget &w)
-{
-  return dynamic_cast<AGText&>(w);
-}
-
 void AGText::setFont(const AGFont &f)
 {
   mFont=f;

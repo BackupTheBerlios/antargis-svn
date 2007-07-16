@@ -43,7 +43,9 @@ class AGEXPORT AGColor:public SDL_Color
 
   AGColor();
 
+#ifndef SWIG
   AGColor &operator=(const AGColor&c);
+#endif
   AGColor &operator*=(float f);
 
   AGColor operator*(float f) const;

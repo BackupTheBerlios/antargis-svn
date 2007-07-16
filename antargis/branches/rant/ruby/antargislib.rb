@@ -23,6 +23,11 @@ module MyAntargisLib
 		@@extDir=Dir.pwd+"/ext"
 		# add programdir to path
 		$:.push(@@extDir)
+        if ENV["PATH"].split(";").length>3 # FIXME: is windows ?
+            ENV["PATH"]+=";.\\ext"
+        else
+            ENV["PATH"]+=":./ext"
+        end
 	end
 end
 
