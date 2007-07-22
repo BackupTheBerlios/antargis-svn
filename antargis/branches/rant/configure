@@ -2,7 +2,7 @@
 
 require 'build/configure.rb'
 
-version="0.2.1"
+version="0.2.1.1"
 
 puts <<EOT
 Battle of Antargis - Configuration

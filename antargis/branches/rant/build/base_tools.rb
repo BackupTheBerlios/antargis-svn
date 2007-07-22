@@ -50,3 +50,7 @@ end
 def U2W(path)
     path.gsub("/",Dir.separator)
 end
+
+def isWindows
+	(not ENV['WINDIR'].nil?)
+end

@@ -97,26 +97,26 @@ sourceDeps.each{|pair|
 		if d[0..0]=="-"
 			extlibs << d                                                           # gather external libraries (-lz)
 		else
-			tsources+=["ext/lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
+			extlibs+=["ext/lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
             #tsources+=["-l"+makeLibName(d)]
 		end
 	}
 	task target => tsources do |t|
 		# build command
-        sources=t.prerequisites
-        if ENV['WINDIR']
-            puts "EXTLIBS #{extlibs}"
-            extlibs+=sources.select{|f|f=~/\.so/}.collect!{|s|s.gsub(/.*lib(.*)\.so/,'-l\1')}
-            puts "SOURCES #{sources}"
-            puts "EXTLIBS #{extlibs}"
-            sources=sources.select{|f|not f=~/\.so/}
-        end
+		sources=t.prerequisites
+		if ENV['WINDIR']
+				puts "EXTLIBS #{extlibs}"
+				extlibs+=sources.select{|f|f=~/\.so/}.collect!{|s|s.gsub(/.*lib(.*)\.so/,'-l\1')}
+				puts "SOURCES #{sources}"
+				puts "EXTLIBS #{extlibs}"
+				sources=sources.select{|f|not f=~/\.so/}
+		end
 		cmd=makeCommand("LINK_SHARED",sys.expand_path(U2W(t.name)), (sources.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
         puts "------",cmd,"--------------!"
 		sys cmd
-        if ENV['WINDIR']
-            sys "copy #{sys.expand_path(t.name).gsub("/",Dir.separator)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll").gsub("/",Dir.separator)}.a"
-        end
+		if isWindows
+				sys "copy #{sys.expand_path(t.name).gsub("/",Dir.separator)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll").gsub("/",Dir.separator)}.a"
+		end
 	end
 }
 #
@@ -131,16 +131,22 @@ sourceDeps.each{|pair|
 	libname=makeLibName(dir)
 	target="ext/"+makeLibName(dir)+".so"
 
-    # FIXME:re-include this
-    tsources=[]
-    tsources+=[dir+"/"+libname+"swig.cc"]
+	# FIXME:re-include this
+	tsources=[]
+	tsources+=[dir+"/"+libname+"swig.cc"]
 	tsources.collect!{|f|f.sub_ext("oo")}
 	#tsources+=["ext/lib"+makeLibName(dir)+".so"]
-    extlibs=["-l"+makeLibName(dir)]
+	extlibs=[] #["-l"+makeLibName(dir)]
     
 	dep.each{|d|
 		if d[0..0]!="-" and d!="ext/external"
-			extlibs+=["-l"+makeLibName(d)]
+			if isWindows
+				extlibs+=["-l"+makeLibName(d)]
+			else
+				# take some direct path instead ???
+				#tsources+=["ext/lib"+makeLibName(dir)+".so"]
+				extlibs+=["ext/lib"+makeLibName(dir)+".so"]
+			end
 		end
 	}
     #tsources+=rubyLib
@@ -226,7 +232,7 @@ end
 ###########################################
 # make swig-sources
 #
-task :swigSources =>sourceDirs.collect{|d|d+Dir.separator+makeLibName(d)+"swig.cc"} do
+task :swigSources =>sourceDirs.select{|d|not d=~/external/}.collect{|d|d+Dir.separator+makeLibName(d)+"swig.cc"} do
 end
 #
 ###########################################
@@ -252,7 +258,7 @@ end
 ###########################################
 # build source-distribution
 #
-files=(sys["build/**/*"]+sys["ext/**/*"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/ or f=~/swig/ or f=~/packages/)}
+files=(sys["build/**/*"]+sys["ext/**/*"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/ or f=~/swig/ or f=~/packages/ or f=~/\.o/ or f=~/\.so/)}
 #puts files
 #exit
 
