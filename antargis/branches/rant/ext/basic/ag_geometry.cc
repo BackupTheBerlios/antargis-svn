@@ -202,6 +202,12 @@ void AGVector2::loadXML(const Node &node)
   v[1]=node.get("y").toFloat();
 }
 
+bool AGVector2::operator<(const AGVector2 &p) const
+{
+  return v[0]<p.v[0] || (v[0]==p.v[0] && v[1]<p.v[1]);
+}
+
+
 AGVector2 AGVector2::operator-() const
 {
   return AGVector2(-v[0],-v[1]);
@@ -237,7 +243,7 @@ AGAngle AGVector2::getAngle() const
 
 bool AGVector2::operator==(const AGVector2 &a) const
 {
-  return v[0]==a.v[0] && v[1]==a.v[1] && v[2]==a.v[2];
+  return v[0]==a.v[0] && v[1]==a.v[1];// && v[2]==a.v[2];
 }
 bool AGVector2::operator!=(const AGVector2 &a) const
 {

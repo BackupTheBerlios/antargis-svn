@@ -53,7 +53,7 @@ class Node;
 
 /** \brief Simple structure holding an angle in degrees
  */
-struct AGEXPORT AGAngle
+struct AGAngle
 {
   float angle;
   
@@ -86,6 +86,9 @@ class AGEXPORT AGVector2
   float getY() const;
 
   AGAngle getAngle() const;
+
+
+  bool operator<(const AGVector2 &p) const;
 
   AGVector2 operator-() const;
   AGVector2 operator-(const AGVector2 &p) const;
@@ -693,11 +696,11 @@ class AGEXPORT AGBox3
   bool mValid;
 };
 
-AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector2&v);
-AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector3&v);
-AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector4&v);
-AGEXPORT std::ostream &operator<<(std::ostream &o,const AGRect2&v);
-AGEXPORT std::ostream &operator<<(std::ostream &o,const AGBox3&v);
+std::ostream &operator<<(std::ostream &o,const AGVector2&v);
+std::ostream &operator<<(std::ostream &o,const AGVector3&v);
+std::ostream &operator<<(std::ostream &o,const AGVector4&v);
+std::ostream &operator<<(std::ostream &o,const AGRect2&v);
+std::ostream &operator<<(std::ostream &o,const AGBox3&v);
 
 #include "ag_geometry_inline.cc"
 

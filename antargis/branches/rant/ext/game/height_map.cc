@@ -41,7 +41,8 @@ HeightMap::HeightMap(SceneBase *pScene,int w,int h):
 
 HeightMap::~HeightMap()
 {
-  saveDelete(mTerrain);
+  if(mTerrain)
+    saveDelete(mTerrain);
 }
 
 void HeightMap::initTerrainMesh()

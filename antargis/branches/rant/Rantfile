@@ -252,7 +252,13 @@ end
 ###########################################
 # build source-distribution
 #
-task :dist=>[:swigSources,:rantStandAlone] do |t|
+files=(sys["build/**/*"]+sys["ext/**/*"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/ or f=~/swig/ or f=~/packages/)}
+#puts files
+#exit
+
+sourcePkg=gen Package::Tgz, "packages","antargis-source-"+extendCommand($config,"version"), :extension => ".tar.gz", :files => files
+
+task :dist=>[:swigSources,:rantStandAlone,sourcePkg.path] do |t|
 end
 #
 ###########################################

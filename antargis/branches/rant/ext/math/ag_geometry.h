@@ -87,6 +87,9 @@ class AGEXPORT AGVector2
 
   AGAngle getAngle() const;
 
+
+  bool operator<(const AGVector2 &p) const;
+
   AGVector2 operator-() const;
   AGVector2 operator-(const AGVector2 &p) const;
   AGVector2 operator+(const AGVector2 &p) const;

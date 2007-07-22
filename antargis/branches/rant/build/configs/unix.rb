@@ -25,7 +25,7 @@ $config={
 	# a c++ compiler call with parameters (using ccache if available)
 	"CXX_CALL"=>"$(CCACHE) $(CXX) $(COMPILE_PARAMS)",
 	# build a shared library (.so or .dll)
-	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) $(INPUT)",
+	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Lext $(INPUT)",
 	# generate c++-code from a swig-interface file
 	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) $(INPUT)",
 	# generate dependencies for swig-interface files

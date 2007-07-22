@@ -21,6 +21,9 @@
 #ifndef AG_REGEX_H
 #define AG_REGEX_H
 
+
+#ifdef UNDEF
+
 #include <regex.h>
 #include <sys/types.h>
 #include <string>
@@ -99,5 +102,7 @@ public:
 
 };
 
+
+#endif
 
 #endif

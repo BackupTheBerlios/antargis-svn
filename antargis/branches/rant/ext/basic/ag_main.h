@@ -73,6 +73,8 @@ class AGEXPORT AGMain:public AGRubyObject
 
   void repeatedCalls();
 
+  void delay(int ms);
+
  protected:
   virtual void mark();
 

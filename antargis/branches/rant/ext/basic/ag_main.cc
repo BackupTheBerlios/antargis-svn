@@ -188,6 +188,12 @@ void AGMain::setVideo(AGVideoBase *p)
   mVideo=p;
 }
 
+void AGMain::delay(int ms)
+{
+  SDL_Delay(ms);
+}
+
+
 
 
 ///   AGRepeatedCall
