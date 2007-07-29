@@ -50,7 +50,7 @@ CFG.addOption("version","v",
 		CFG.set("version",v)
 	end
 
-if $:.join("")=~/ruby1.8/
+if $:.join("")=~/1.8/
 	if isWindows
 		CFG.set("RUBYLIB","msvcrt-ruby18")
 	else

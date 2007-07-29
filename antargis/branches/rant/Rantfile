@@ -1,6 +1,7 @@
 import "md5"                         # md5 is needed for automatic checksum-check for changes in files
 import "autoclean"                    # autoclean includes the a simple facility for a clean-make-target
 import "package/tgz"                  # support for packaging (tar.gz, zip)
+import "package/zip"                  # support for packaging (tar.gz, zip)
 import "rubydoc"
 import "c/dependencies"
 
@@ -52,6 +53,7 @@ rubyIncDir=getConfig("archdir")
     
 # gather include-directories (separately from other cflags, so they can be used for swig later on
 var :INCLUDES => sourceDirs+[rubyIncDir,"."]
+
 var :INCLUDESTR => var[:INCLUDES].collect{|d|"-I#{d}"}.join(" ")+" "+externalIncludes    # build include-string (-I...)
 
 
@@ -263,7 +265,8 @@ end
 # make rant-stand-alone
 #
 task :rantStandAlone =>[] do |t|
-	`rant-import --auto build.rb`
+	cmd="rant-import --auto build.rb"
+    sys cmd
 end
 #
 ###########################################
@@ -284,7 +287,11 @@ files=(sys["build/**/*"]+sys["ext/**/*"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sy
 #puts files
 #exit
 
-sourcePkg=gen Package::Tgz, "packages","antargis-source-"+extendCommand($config,"version"), :extension => ".tar.gz", :files => files
+if isWindows
+    sourcePkg=gen Package::Zip, "packages","antargis-source-"+extendCommand($config,"version"), :files => files
+else
+    sourcePkg=gen Package::Tgz, "packages","antargis-source-"+extendCommand($config,"version"), :extension => ".tar.gz", :files => files
+end
 
 task :dist=>[:swigSources,:rantStandAlone,sourcePkg.path] do |t|
 end
@@ -294,7 +301,11 @@ end
 ###########################################
 # build source-distribution
 #
-binpkg=gen Package::Tgz, "packages","antargis-"+extendCommand($config,"system")+"-"+extendCommand($config,"version"), :extension => ".tar.gz", :files => (sys["ext/*.so"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/)}
+if isWindows
+    binpkg=gen Package::Zip, "packages","antargis-"+extendCommand($config,"system")+"-"+extendCommand($config,"version"), :files => (sys["ext/*.so"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/)}
+else
+    binpkg=gen Package::Tgz, "packages","antargis-"+extendCommand($config,"system")+"-"+extendCommand($config,"version"), :extension => ".tar.gz", :files => (sys["ext/*.so"]+sys["ruby/**/*.rb"]+sys["data/**/*"]+sys["*"]).select{|f|not (f=~/~/ or f=~/.xcf/)}
+end
 
 task :bindist=>[:extensions,binpkg.path] do |t| #"packages/antargis-"+extendCommand($config,"version")+".tar.gz"] do |t|
 end

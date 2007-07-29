@@ -7,7 +7,7 @@
 # 
 
 $config={
-	"system"=>"unix",
+	"system"=>"windows",
 	"CXX"=>"$(g++)",
 	"CC"=>"$(gcc)",
 	"SWIG"=>"$(swig)",
