@@ -281,5 +281,6 @@ class AGEXPORT AntEntity:public AGRubyObject
     void loadJob(const Node &pNode);
   };
 
+typedef AntEntity *PAntEntity;
 
 #endif

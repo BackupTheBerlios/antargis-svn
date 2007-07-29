@@ -174,7 +174,7 @@ EOT
             currentPath=p+Dir.separator+program
             #puts "TST #{currentPath}"
             if File.exists?(currentPath)
-                puts "FOUND! at #{currentPath}"
+	#                puts "FOUND! at #{currentPath}"
                 return currentPath
             end
         }

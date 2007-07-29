@@ -47,7 +47,7 @@ HeightMap::~HeightMap()
 
 void HeightMap::initTerrainMesh()
 {
-  if(videoInited())
+  if(videoInited() && mScene)
     mTerrain=new Terrain(mScene,*this);
 }
 

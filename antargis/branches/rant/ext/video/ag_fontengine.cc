@@ -24,6 +24,7 @@
 #include "ag_texture.h"
 #include "ag_fs.h"
 #include "ag_sgeexport.h"
+#include "ag_profiler.h"
 
 #include <SDL_ttf.h>
 
@@ -292,6 +293,7 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGString
 
   if(fontCache.find(std::make_pair(pFont,pText))==fontCache.end())
     {
+      STACKTRACE;
       SDL_Surface *ns;
       TTF_Font *f=getFont(pFont.getName(),pFont.getSize());
       
@@ -324,30 +326,33 @@ AGTexture *AGFontEngine::renderText(int BaseLineX, int BaseLineY, const AGString
       is->surface=ns;
       AGSurface as(is);
       
-      if(pFont.getBorder()>0 || pFont.getEmbossed())
+      //      if(false)
 	{
-	  int move=3;
-	  AGSurface copy(as.width()+2*move,as.height()+2*move);
-	  copy.blit(as,AGRect2(move,move,as.width(),as.height()),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
-	  as=copy;
-	  border(as,pFont.getBorderColor());
-	}
-      else
-	{
-	  // simply copy, so there are no more problems on PPC
-	  AGSurface copy(as.width(),as.height());
-	  copy.blit(as,as.getRect(),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
-	  as=copy;
-	  
-	}
-      if(pFont.getEmbossed())
-	{
-	  if(pFont.getInset())
-	    embossSurface(as,-1);
+	  if(pFont.getBorder()>0 || pFont.getEmbossed())
+	    {
+	      int move=3;
+	      AGSurface copy(as.width()+2*move,as.height()+2*move);
+	      copy.blit(as,AGRect2(move,move,as.width(),as.height()),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
+	      as=copy;
+	      border(as,pFont.getBorderColor());
+	    }
 	  else
-	    embossSurface(as,1);
+	    {
+	      // simply copy, so there are no more problems on PPC
+	      AGSurface copy(as.width(),as.height());
+	      copy.blit(as,as.getRect(),as.getRect(),AGColor(0xFF,0xFF,0xFF,0xFF));
+	      as=copy;
+	      
+	    }
+	  
+	  if(pFont.getEmbossed())
+	    {
+	      if(pFont.getInset())
+		embossSurface(as,-1);
+	      else
+		embossSurface(as,1);
+	    }
 	}
-      
       AGTexture *ms=new AGTexture(as);
       ms->setClamp(GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE);
 	

@@ -171,10 +171,10 @@ class AntRubyView <AntBaseMapView
 			m=0
 			w=20
 			s=10
-			{AGRect.new(0,m,w,getMain.height-m*2)=>AGVector2.new(-1,0),
-				AGRect.new(m,0,getMain.width-m*2,w)=>AGVector2.new(0,1),
-				AGRect.new(getMain.width-w-1,m,w,getMain.height-m*2)=>AGVector2.new(1,0),
-				AGRect.new(m,getMain.height-w-1,getMain.width-m*2,w)=>AGVector2.new(0,-1)}.each{|r,n|
+			{AGRect.new(0,m,w,getMain.getVideo.height-m*2)=>AGVector2.new(-1,0),
+				AGRect.new(m,0,getMain.getVideo.width-m*2,w)=>AGVector2.new(0,1),
+				AGRect.new(getMain.getVideo.width-w-1,m,w,getMain.getVideo.height-m*2)=>AGVector2.new(1,0),
+				AGRect.new(m,getMain.getVideo.height-w-1,getMain.getVideo.width-m*2,w)=>AGVector2.new(0,-1)}.each{|r,n|
 				if r.contains(p)
 					setCamera(getCamera+n*t*s) # FIXME: Include time
 				end

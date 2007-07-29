@@ -25,7 +25,7 @@ def getAnimMeshData(file)
 	return $meshes[file]
 end
 
-module Libantargis
+module Libantargisbasic
 	class AGVector3
 		def x=(p)
 			setX(p)

@@ -60,6 +60,7 @@ cflags=""
 cflags+=" -DGCDEBUG" if $config["gcdebug"]   # enable debuggin of garbage-collection
 cflags+=" -g -O0"    if $config["debug"]     # disable optimizations for better debugging
 cflags+=" -O2"       unless $config["debug"] # enable optimizations
+cflags+=" -DMPROFILE" if $config["profile"]  # enable profiling
 	
 
 var :CFLAGS => var[:INCLUDESTR]+cflags          # store cflags in "var" for later read-out while compiling
@@ -105,17 +106,19 @@ sourceDeps.each{|pair|
 		# build command
 		sources=t.prerequisites
 		if ENV['WINDIR']
-				puts "EXTLIBS #{extlibs}"
+				#puts "EXTLIBS #{extlibs}"
 				extlibs+=sources.select{|f|f=~/\.so/}.collect!{|s|s.gsub(/.*lib(.*)\.so/,'-l\1')}
-				puts "SOURCES #{sources}"
-				puts "EXTLIBS #{extlibs}"
+				#puts "SOURCES #{sources}"
+				#puts "EXTLIBS #{extlibs}"
 				sources=sources.select{|f|not f=~/\.so/}
 		end
 		cmd=makeCommand("LINK_SHARED",sys.expand_path(U2W(t.name)), (sources.collect{|f|sys.expand_path(f)}+extlibs).join(" "))
-        puts "------",cmd,"--------------!"
+        #puts "------",cmd,"--------------!"
 		sys cmd
+		puts
 		if isWindows
 				sys "copy #{sys.expand_path(t.name).gsub("/",Dir.separator)}.a #{sys.expand_path(t.name).sub(/\.so/,".dll").gsub("/",Dir.separator)}.a"
+				puts
 		end
 	end
 }
@@ -151,13 +154,14 @@ sourceDeps.each{|pair|
 	}
     #tsources+=rubyLib
     
-    puts "TARGET:",target
-    puts "SOURES:",tsources
-    puts "---"
+    #puts "TARGET:",target
+    #puts "SOURES:",tsources
+    #puts "---"
 	task target => tsources do |t|
 		cmd=makeCommand("LINK_SHARED",sys.expand_path(t.name), (t.prerequisites.collect{|f|sys.expand_path(f)}+extlibs+rubyLib).join(" "))
-        puts "------",cmd,"--------------!"
+        #puts "------",cmd,"--------------!"
 		sys cmd
+		puts
 	end
 }
 ###########################################
@@ -169,6 +173,7 @@ sourceDeps.each{|pair|
 gen Rule, '.o' => '.c' do |t|
 	cmd=makeCommand("CC_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
 	sys cmd
+	puts
 end
 ###########################################
 
@@ -178,6 +183,7 @@ end
 gen Rule, '.oo' => '.cc' do |t|
 	cmd=makeCommand("CXX_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
 	sys cmd
+	puts
 end
 #
 ###########################################
@@ -188,7 +194,7 @@ end
 #
 swigSrc = lambda { |target| 
 	dir=getDirUnix(target)
-    puts "TARGET:#{target} DIR:#{dir}"
+    #puts "TARGET:#{target} DIR:#{dir}"
 	name=makeLibName(dir)
 	[target.sub(name+"swig.cc","interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
 }
@@ -196,6 +202,7 @@ swigSrc = lambda { |target|
 gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
 	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
 	sys cmd
+	puts
 end
 #
 ###########################################
@@ -207,7 +214,7 @@ end
 #
 
 def importsForInterface(name)
-puts "?=="
+#puts "?=="
 	$sourceDeps.each{|t|
 		if name=~/#{t[0]}/
 			return t[1].select{|f|not f=~/-.*/}.select{|f|not f=~/external/}.collect{|f|f+"/interface.i"}.join(":")
@@ -307,3 +314,5 @@ gen AutoClean, :clean
 var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
 var[:clean].include "ext/*.so"
 ###########################################
+
+

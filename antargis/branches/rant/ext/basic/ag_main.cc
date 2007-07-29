@@ -27,6 +27,8 @@
 #include "ag_fs.h"
 #include "ag_debug.h"
 
+#include <ruby.h>
+
 int lastWidth=0;
 int lastHeight=0;
 int lastVWidth=0;
@@ -127,6 +129,19 @@ AGMain *getMain()
       throw std::runtime_error("AGMain not initialized");
       exit(1);
     }
+
+
+  static bool registered=false;
+  if(!registered)
+    {
+      registered=true;
+
+      // IMPORTANT:
+      //   put it into a global variable - so that it won't get garbage collected
+      rb_eval_string("include Antargisbasic;$agMain=getMain");
+    }
+
+
   return mAGMain;
 }
 

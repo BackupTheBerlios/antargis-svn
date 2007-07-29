@@ -16,6 +16,7 @@
 #ifndef AG_PROFILER_H 
 #define AG_PROFILER_H 
 
+#include <ag_base.h>
 #include <string> 
 #include <SDL.h>
 

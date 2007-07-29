@@ -81,8 +81,10 @@
 #include "ext/game/minimap.h"
 #include "ext/game/map.h"
 #include "ext/game/heuristic.h"
+#include "ext/game/path_weighter.h"
 #include "ext/game/jobs.h"
 #include "ext/game/resource.h"
+#include "ext/game/path_data_v3.h"
 #ifdef SWIG
 %include "ext/game/path.h"
 %include "ext/game/path_v2.h"
@@ -95,7 +97,9 @@
 %include "ext/game/minimap.h"
 %include "ext/game/map.h"
 %include "ext/game/heuristic.h"
+%include "ext/game/path_weighter.h"
 %include "ext/game/jobs.h"
 %include "ext/game/resource.h"
+%include "ext/game/path_data_v3.h"
 #endif
 #endif

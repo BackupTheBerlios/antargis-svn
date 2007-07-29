@@ -54,3 +54,18 @@ end
 def isWindows
 	(not ENV['WINDIR'].nil?)
 end
+
+
+module Build
+
+	def compile(cFile)
+	end
+	
+	def link(objs,libs)
+	end
+end
+
+module Testing
+	def runCTest(cFile)
+	end
+end

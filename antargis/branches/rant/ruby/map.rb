@@ -167,7 +167,7 @@ class AntRubyMap<AntMap
 	end
 	
 	def getHousesOfVillage(name)
-		getAllEntitiesV.collect{|e|e.get}.select{|e|e.is_a?(AntHouse)}.select{|e|e.village==name}
+		getAllEntities.collect{|e|e.get}.select{|e|e.is_a?(AntHouse)}.select{|e|e.village==name}
 	end
 
 	def getVillages

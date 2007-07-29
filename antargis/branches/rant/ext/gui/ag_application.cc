@@ -128,24 +128,24 @@ bool AGApplication::run()
 	  ;
 	*/
 	clearOldMousePosition();
-	dbout(2,"loop pre-event:"<<loopCount);
+	//	dbout(2,"loop pre-event:"<<loopCount);
 	event=getNewEvent();
 	if(eventOk(event))
 	  {
 	    do
 	      {
-		dbout(2,"eventok  "<<toString(&event));
+		//		dbout(2,"eventok  "<<toString(&event));
 		doEvent(event);
 		if(mIdleCalls)
 		  {
-		    dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
+		    //		    dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
 		    event=getNewEvent();
 		  }
 		else
 		  resetEvent(event);
 	      }while(eventOk(event));
 	  } 
-	dbout(2,"loop post-event:"<<loopCount);
+	//	dbout(2,"loop post-event:"<<loopCount);
 	/*
 	if(mIdleCalls) 
 	  {
@@ -201,7 +201,7 @@ bool AGApplication::run()
       last=now;
 
       loopCount++;
-      dbout(2,"Running:"<<mRunning);
+      //      dbout(2,"Running:"<<mRunning);
     }
   gApplication=0;
 

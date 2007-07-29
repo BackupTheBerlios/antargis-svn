@@ -238,6 +238,12 @@ class AntRubyEntity<AntEntity
 		super(mesh=AntModels.createModel(t,subtype))
 		return mesh
 	end
+
+
+	# FIXME: remove this - this is a backward-compability function 
+	def get
+		self
+	end
 end
 
 # here comes a list of all the different entity-types BoA currently uses:

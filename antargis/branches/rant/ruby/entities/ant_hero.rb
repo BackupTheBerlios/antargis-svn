@@ -177,7 +177,7 @@ class AntHero<AntBoss
 		men=men[0..c]
 		men.each{|m|
 			# seek new boss
-			b=getMap.getNextList(m,"house",0).collect{|e|e.get}.select{|e|e.getPlayer==getPlayer}.shuffle[0]
+			b=getMap.getNextList(m,"house",0).collect{|e|puts e,e.class;e.get}.select{|e|e.getPlayer==getPlayer}.shuffle[0]
 			if b
 				m.setBoss(b)
 			else

@@ -18,5 +18,14 @@ AGEXPORT void AG_Init_libantargisbasic()
   TRACE;
   if(!hasMain())
     AGMain *main=new AGMain;
+
+
+  // register main in ruby-var
+
+  //  AG_NewPointerObj(result,SWIGTYPE_p_AGMain,0);
+  //  rb_eval_string("include Libantargisbasic;$agMain=getMain");
+
+  //  #error "DO IT!"
+
 }
 
