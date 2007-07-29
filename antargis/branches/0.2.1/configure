@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+
+require 'build/configure.rb'
+
+version="0.2.1.1"
+
+puts <<EOT
+Battle of Antargis - Configuration
+-------------------------------------------------------------------------------
+EOT
+
+CFG.addOption("enable-debug","d",
+	"enable debugging") do  ||
+		CFG.set("debug",true)
+	end
+
+CFG.addOption("enable-gc-debug","g",
+	"enable debugging of garbage collector") do  ||
+		CFG.set("gcdebug",true)
+	end
+
+CFG.addOption("enable-profile","p",
+	"enable c++ profiling") do  ||
+		CFG.set("profile",true)
+	end
+
+
+CFG.addOption("prefix","",
+	"set prefix directory","dir") do |d|
+		CFG.set("prefix",d)
+	end
+
+CFG.addOption("profile","p",
+	"enable profiling of C++-code") do ||
+		CFG.set("profile",true)
+	end
+
+CFG.addOption("drmuser","",
+	"set user for DRM","user") do |v|
+		CFG.set("drmuser",v)
+	end
+
+CFG.addOption("drmpw","",
+	"set password for DRM","password") do |v|
+		CFG.set("drmpass",v)
+	end
+
+CFG.addOption("version","v",
+	"set release version of BoA","version",version) do |v|
+		CFG.set("version",v)
+	end
+
+if $:.join("")=~/1.8/
+	if isWindows
+		CFG.set("RUBYLIB","msvcrt-ruby18")
+	else
+		CFG.set("RUBYLIB","ruby1.8")
+	end
+else
+	if isWindows
+		CFG.set("RUBYLIB","msvcrt-ruby19")
+	else
+		CFG.set("RUBYLIB","ruby1.9")
+	end
+end
+
+CFG.checkProgram("ccache",false)
+CFG.checkProgram("gcc")
+CFG.checkProgram("g++")
+CFG.checkProgram("swig")
+CFG.checkProgram("ruby")
+CFG.checkProgram("sdl-config",false)
+
+CFG.addCheck("sdl-config --libs",false) do
+        libs=nil
+        begin
+            libs=`#{CFG.get("sdl-config")} --libs`.gsub("\n","")
+        rescue
+        end
+        CFG.set("LIBS",libs) if libs        
+    end
+
+CFG.addCheck("sdl-config --cflags",false) do
+        libs=nil
+        begin
+            libs=`#{CFG.get("sdl-config")} --cflags`.gsub("\n","")
+        rescue
+        end
+        CFG.set("CFLAGS",libs) if libs        
+    end
+
+CFG.includeConfig
+
+
+CFG.run
+
+puts
+puts "You should run '>rant clean && rant' to let changes take effect!"
+puts 
