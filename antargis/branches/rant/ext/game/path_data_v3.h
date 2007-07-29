@@ -14,7 +14,7 @@
 namespace PathFinding
 {
 
-  class Field
+  class AGEXPORT Field
   {
   public:
     Field(const AGVector2 &pMiddle,size_t pID);
@@ -35,7 +35,7 @@ namespace PathFinding
     AGVector2 mMiddle;
   };
 
-  class FieldCollection
+  class AGEXPORT FieldCollection
   {
   public:
     void assign(const AGVector2 &v,size_t pField,DistanceComputer &pDist);
@@ -53,10 +53,10 @@ namespace PathFinding
   };
 
 
-void assignFields(FieldCollection &pCollection,DistanceComputer &pDist,size_t pFieldCount);
+AGEXPORT void assignFields(FieldCollection &pCollection,DistanceComputer &pDist,size_t pFieldCount);
 
 
-  class FieldAssigner
+  class AGEXPORT FieldAssigner
   {
   public:
     

@@ -99,15 +99,16 @@ sourceDeps.each{|pair|
 			extlibs << d                                                           # gather external libraries (-lz)
 		else
 			extlibs+=["ext/lib"+makeLibName(d)+".so"]             # gather internal deps like (ext/libantargisbasic.so)
-            #tsources+=["-l"+makeLibName(d)]
 		end
 	}
 	task target => tsources do |t|
 		# build command
 		sources=t.prerequisites
+        
 		if ENV['WINDIR']
-				#puts "EXTLIBS #{extlibs}"
-				extlibs+=sources.select{|f|f=~/\.so/}.collect!{|s|s.gsub(/.*lib(.*)\.so/,'-l\1')}
+                extlibs=extlibs.collect{|s|s.gsub(/.*lib(.*)\.so/,'-l\1')}
+                
+                
 				#puts "SOURCES #{sources}"
 				#puts "EXTLIBS #{extlibs}"
 				sources=sources.select{|f|not f=~/\.so/}
@@ -141,6 +142,10 @@ sourceDeps.each{|pair|
 	#tsources+=["ext/lib"+makeLibName(dir)+".so"]
 	extlibs=[] #["-l"+makeLibName(dir)]
     
+    if isWindows
+	    extlibs+=["-l"+makeLibName(dir)]
+    end
+    
 	dep.each{|d|
 		if d[0..0]!="-" and d!="ext/external"
 			if isWindows
@@ -152,6 +157,8 @@ sourceDeps.each{|pair|
 			end
 		end
 	}
+    
+    puts "EXTLIBS:#{extlibs}"
     #tsources+=rubyLib
     
     #puts "TARGET:",target
@@ -196,10 +203,18 @@ swigSrc = lambda { |target|
 	dir=getDirUnix(target)
     #puts "TARGET:#{target} DIR:#{dir}"
 	name=makeLibName(dir)
-	[target.sub(name+"swig.cc","interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
+	a=[target.sub(name+"swig.cc","interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
+    puts "A: #{a}"
+    puts "name: #{name}"
+    puts "dir: #{dir}"
+    puts "target: #{target}"
+    a
 }
 
 gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
+
+    puts "SOURCE #{t.source} #{t.name}"
+
 	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
 	sys cmd
 	puts
@@ -239,7 +254,7 @@ end
 ###########################################
 # make swig-sources
 #
-task :swigSources =>sourceDirs.select{|d|not d=~/external/}.collect{|d|d+Dir.separator+makeLibName(d)+"swig.cc"} do
+task :swigSources =>sourceDirs.select{|d|not d=~/external/}.collect{|d|d+"/"+makeLibName(d)+"swig.cc"} do
 end
 #
 ###########################################
