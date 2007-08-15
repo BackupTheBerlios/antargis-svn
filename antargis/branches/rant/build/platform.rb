@@ -15,4 +15,5 @@ if ENV['WINDIR']
     
 else
     require 'mkmf'
+#CONFIG={"archdir"=>Dir.pwd+"/build/win32/usr/lib","CFLAGS"=>""}
 end

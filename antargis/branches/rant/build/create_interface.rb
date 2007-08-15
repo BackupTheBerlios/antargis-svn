@@ -117,15 +117,17 @@ class ParsedClasses
 		@allClasses=[]
 
 		allfiles.each{|fn|
-			g=File.open(fn)
+			file=File.open(fn)
 			cn=""
-			g.each{|a|
+			content=file.read.gsub(/\/\*([^*]|\*[^\/])*\*\//,"") # /*...*/ delete comments - FIXME: // comments will be ignored!!!
+
+			content.split("\n").each{|a|
 				abak=a
 				a.gsub!("AGEXPORT","")
 				a.gsub!("EXPORT","")
 				
-				if a =~ /^class.*/ then
-					cn=a.gsub("class ","").gsub(/:.*/,"").gsub("\n","").gsub(" ","")
+				if a =~ /^ *class.*/ then
+					cn=a.gsub(/ *class /,"").gsub(/:.*/,"").gsub("\n","").gsub(" ","")
 					@allClasses << cn.gsub(";","")
 					if cn=~/^[A-Z].*/
 						if a=~ /.*public.*/ then

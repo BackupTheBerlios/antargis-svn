@@ -1,3 +1,18 @@
+
+
+
+0.2.1.2 (2007-08-09)
+	- increased performance on heuristic-computation
+	- included saving and thus caching of heuristic
+
+0.2.1.1 (about 2007-07)
+	- refactoring
+	- switched over to rant (from rake) as a build-system
+	- it's now possible to compile BoA on Windows (for Windows), that's more comfortable, because you test it there
+
+
+Very old changes:
+
 0.2
 	- major refactoring and documentation effort
 	- many bugs fixed

@@ -24,6 +24,7 @@ class AGEXPORT BinaryIn
   BinaryIn &operator>>(Uint32 &i);
   BinaryIn &operator>>(Uint16 &i);
   BinaryIn &operator>>(float &f);
+  BinaryIn &operator>>(std::string &f);
 };
 
 class AGEXPORT BinaryOut
@@ -36,7 +37,9 @@ class AGEXPORT BinaryOut
 
   BinaryOut &operator<<(const Sint32 &i);
   BinaryOut &operator<<(const Uint32 &i);
+  BinaryOut &operator<<(const Uint16 &i);
   BinaryOut &operator<<(const float &f);
+  BinaryOut &operator<<(const std::string &s);
 };
 
 class AGEXPORT BinaryFileIn:public BinaryIn

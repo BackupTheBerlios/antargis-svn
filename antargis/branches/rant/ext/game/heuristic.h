@@ -5,6 +5,8 @@
 
 #include <ag_geometry.h>
 
+#include <map>
+
 class AGEXPORT HeuristicFunction
 {
  public:
@@ -15,28 +17,33 @@ class AGEXPORT HeuristicFunction
     {
     }
 
+  virtual void printTo(BinaryOut &pOut);
+
   virtual Output operator()(const Input &input);
+
+  float get(const AGVector2 &a,const AGVector2 &b);
 };
 
 class AGEXPORT StoredHeuristicFunction:public HeuristicFunction
 {
-  // FIXME: maybe store measure-count, too - and average!!!
-
-  std::vector<float> a;
-  size_t r;
-  float w;
  public:
-  StoredHeuristicFunction(size_t res,float width);
+  StoredHeuristicFunction();
+  StoredHeuristicFunction(BinaryIn &pIn);
 
   void store(Input in,Output out);
 
-  void display();
+  void store(const AGVector2 &from,const AGVector2 &to,float value);
+
+  //  void display();
 
   virtual Output operator()(const Input &input);
- private:
-  size_t getIndex(const Input &in);
-};
 
+  void printTo(BinaryOut &pOut);
+
+ private:
+  std::map<Input,Output> mMap;
+  
+};
 
 #endif
 

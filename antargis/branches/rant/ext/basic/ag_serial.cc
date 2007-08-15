@@ -92,6 +92,29 @@ BinaryIn &BinaryIn::operator>>(float &f)
   return *this;
 }
 
+BinaryIn &BinaryIn::operator>>(std::string &f)
+{
+  Uint32 l;
+  (*this)>>l;
+
+  cdebug("L:"<<l);
+
+  assert(l<1000000);
+  char *s=new char[l+1];
+  char c;
+  for(Uint32 i=0;i<l;i++)
+    {
+      c=read();
+      cdebug("C:"<<(int)c);
+      s[i]=c;
+    }
+
+
+  f=std::string(s,l);
+  delete s;
+
+  return *this;
+}
 
 
 /////////////////////////////////////////////////////////////
@@ -120,6 +143,15 @@ BinaryOut &BinaryOut::operator<<(const Uint32 &u)
   write((u>>24)&0xFF);
   return *this;
 }
+
+BinaryOut &BinaryOut::operator<<(const Uint16 &u)
+{
+  write((u>>0 )&0xFF);
+  write((u>>8 )&0xFF);
+  return *this;
+}
+
+
 BinaryOut &BinaryOut::operator<<(const float &f)
 {
   if(sizeof(float)!=4)
@@ -144,6 +176,18 @@ BinaryOut &BinaryOut::operator<<(const float &f)
       write(s[0]);
     }
 
+  return *this;
+}
+
+
+BinaryOut &BinaryOut::operator<<(const std::string &s)
+{
+  assert(s.size()<(1L<<31));
+
+  (*this)<<Uint32(s.size());
+
+  for(size_t i=0;i<s.length();i++)
+    write(s[i]);
   return *this;
 }
 

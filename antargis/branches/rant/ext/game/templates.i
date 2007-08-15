@@ -27,3 +27,4 @@ namespace std
 %template(EntityVector) std::vector<AntEntityPtr>;
 %template(ResourceMap) std::map<std::string,float>;
 %template(AGResourceMap) std::map<AGString,float>;
+%template(AGVector2Pair) std::pair<AGVector2,AGVector2>;

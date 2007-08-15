@@ -92,6 +92,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
     ~Edge();
 
     bool operator<(const Edge &e) const;
+    bool operator==(const Edge &e) const;
     float maxWeight() const;
 
     Node *getOther(Node *n);
@@ -107,11 +108,16 @@ class AGEXPORT SimpleGraph:public AGRubyObject
   {
     AGVector2 p;
     Edges edges;
+    float tmpWeight;
+
     typedef std::map<Node*,float,NodePtrCompare> NodeMap;
     
     ~Node();
 
     NodeMap getNextNodes();
+
+    bool hasEdge(Edge *e);
+
   };
 
   struct EdgeSort
@@ -156,7 +162,18 @@ class AGEXPORT SimpleGraph:public AGRubyObject
 
   float width() const;
 
+  /**
+     @return count of nodes
+  */
   size_t size() const;
+
+  /**
+     @return edge count
+  */
+  size_t edges() const;
+
+  std::pair<AGVector2,AGVector2> getEdgePosition(size_t i);
+
 
   void paint(const AGRect2& r,AGPaintTarget &t,Heuristic &heuristic);
   void paintNode(const AGRect2& r,AGPaintTarget &t,const AGVector2 &p,const AGColor &c);

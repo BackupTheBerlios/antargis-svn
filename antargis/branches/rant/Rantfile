@@ -5,7 +5,7 @@ import "package/zip"                  # support for packaging (tar.gz, zip)
 import "rubydoc"
 import "c/dependencies"
 
-#gen C::Dependencies
+#gen C::Dependencies, :sources=> (sys["**/*.cc"]+sys["**/*.c"]+sys["**/*.h"]).select{|f|not (f=~/packages/ or f=~/build/)}
 
 require 'build/base_tools.rb'
 
@@ -37,7 +37,7 @@ sourceDeps=[
 	["ext/video",["ext/external","ext/basic","ext/math"]+glLibs+allSDLlibs],
 	["ext/gui",["ext/basic","ext/math","ext/video"]+allSDLlibs],
 	["ext/sound",["ext/basic","-lSDL_mixer"]+sdlLibs],
-	["ext/3dengine",["ext/external","ext/basic","ext/math","ext/video"]+glLibs+sdlLibs],
+	["ext/3dengine",["ext/external","ext/basic","ext/math","ext/video","ext/gui"]+glLibs+sdlLibs],
 	["ext/game",["ext/basic","ext/math","ext/video","ext/gui","ext/3dengine"]+glLibs+sdlLibs],
 ]
 
@@ -265,7 +265,7 @@ end
 # make rant-stand-alone
 #
 task :rantStandAlone =>[] do |t|
-	cmd="rant-import --auto build.rb"
+	cmd="rant-import --force --auto build.rb"
     sys cmd
 end
 #

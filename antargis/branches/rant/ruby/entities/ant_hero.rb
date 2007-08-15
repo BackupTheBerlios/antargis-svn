@@ -264,7 +264,7 @@ class AntHero<AntBoss
 		case name
 			when "row"
 				setMesh
-				addMesh(createModel(:boat),AGVector3.new(0,0,0))
+				addMesh(AntModels.createModel(:boat),AGVector3.new(0,0,0))
 			when "dead"
 				setMesh(:grave_hero)
 			else

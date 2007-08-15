@@ -8,5 +8,9 @@ AGEXPORT BinaryIn &operator>>(BinaryIn &i,AGVector2 &v);
 AGEXPORT BinaryIn &operator>>(BinaryIn &i,AGVector3 &v);
 AGEXPORT BinaryIn &operator>>(BinaryIn &i,AGVector4 &v);
 
+AGEXPORT BinaryOut &operator<<(BinaryOut &i,const AGVector2 &v);
+AGEXPORT BinaryOut &operator<<(BinaryOut &i,const AGVector3 &v);
+AGEXPORT BinaryOut &operator<<(BinaryOut &i,const AGVector4 &v);
+
 
 #endif

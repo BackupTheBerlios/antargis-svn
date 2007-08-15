@@ -1,6 +1,7 @@
 #include "path_weighter.h"
 
 #include <ag_debug.h>
+#include <ag_profiler.h>
 #include "height_map.h"
 #include <math.h>
 
@@ -56,6 +57,7 @@ float DistanceComputer::height() const
 // FIXME: maybe move this to other class ?
 float DistanceComputer::simpleWeight(const AGVector2 &a,const AGVector2 &b) const
 {
+  STACKTRACE;
   float ha=mHeightMap->getHeight(a[0],a[1]);
   float hb=mHeightMap->getHeight(b[0],b[1]);
 
@@ -70,9 +72,11 @@ float DistanceComputer::simpleWeight(const AGVector2 &a,const AGVector2 &b) cons
 /**
  * compute possible neighbors (w.r.t. to map-borders)
  */
-std::list<AGVector2> DistanceComputer::getNeighbors(const AGVector2 &p) const
+std::vector<AGVector2> DistanceComputer::getNeighbors(const AGVector2 &p) const
 {
-  std::list<AGVector2> diffList,rList;
+  STACKTRACE;
+
+  std::vector<AGVector2> diffList,rList;
   AGVector2 t;
 
   diffList.push_back(AGVector2(-stepX(),0));
@@ -80,37 +84,53 @@ std::list<AGVector2> DistanceComputer::getNeighbors(const AGVector2 &p) const
   diffList.push_back(AGVector2(0,-stepY()));
   diffList.push_back(AGVector2(0,+stepY()));
 
-  for(std::list<AGVector2>::iterator i=diffList.begin();i!=diffList.end();i++)
+  /*  
+  diffList.push_back(AGVector2(-stepX(),-stepY()));
+  diffList.push_back(AGVector2(+stepX(),-stepY()));
+  diffList.push_back(AGVector2(-stepX(),+stepY()));
+  diffList.push_back(AGVector2(+stepX(),+stepY()));
+  */
+  for(std::vector<AGVector2>::iterator i=diffList.begin();i!=diffList.end();i++)
     {
       t=*i+p;
-      if(t.getX() >= beginX() &&
-	 t.getX()<=endX() && 
-	 t.getY()>=beginY() && 
-	 t.getY()<=endY())
-	rList.push_back(t);
+      {
+	STACKTRACE;
+	
+	if(t.getX() >= beginX() &&
+	   t.getX()<=endX() && 
+	   t.getY()>=beginY() && 
+	   t.getY()<=endY())
+	  rList.push_back(t);
+      }
     }
 
   return rList;
 }
 
-std::map<AGVector2,float> DistanceComputer::getAllReachableFrom(const AGVector2 &p) const
+std::vector<std::pair<AGVector2,float> > DistanceComputer::getAllReachableFrom(const AGVector2 &p) const
 {
+  STACKTRACE;
   float w;
-  std::map<AGVector2,float> rList;
-  std::list<AGVector2> nList=getNeighbors(p);
+  std::vector<std::pair<AGVector2,float> > rList;
+  std::vector<AGVector2> nList=getNeighbors(p);
 
-  for(std::list<AGVector2>::iterator i=nList.begin();i!=nList.end();i++)
+  for(std::vector<AGVector2>::iterator i=nList.begin();i!=nList.end();i++)
     {
-      w=simpleWeight(p,*i);
-      rList.insert(std::make_pair(*i,w));
+      STACKTRACE;
+
+      {
+	w=simpleWeight(p,*i);
+	STACKTRACE;
+      }
+      rList.push_back(std::make_pair(*i,w));
     }
   return rList;
 }
 
 
-std::list<AGVector2> DistanceComputer::getAllPassable() const
+std::vector<AGVector2> DistanceComputer::getAllPassable() const
 {
-  std::list<AGVector2> l;
+  std::vector<AGVector2> l;
 
   float x,y;
   AGVector2 v(x,y);

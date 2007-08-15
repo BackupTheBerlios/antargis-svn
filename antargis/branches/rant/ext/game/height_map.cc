@@ -4,6 +4,8 @@
 #include <ag_main.h>
 #include <ag_rand.h>
 
+#include <ag_rtools.h>
+
 //////////////////////////////////////////////////////////////////////////
 // HeightMap
 //////////////////////////////////////////////////////////////////////////
@@ -631,4 +633,14 @@ void HeightMap::checkTerrain()
 {
   if(!mTerrain)
     initTerrainMesh();
+}
+
+std::string HeightMap::hash() const
+{
+  BinaryStringOut s;
+  for(std::vector<float>::const_iterator i=mHeights.begin();i!=mHeights.end();i++)
+    s<<*i;
+
+  return rubyHash(s.getString());
+
 }

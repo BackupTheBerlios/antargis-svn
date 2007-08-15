@@ -40,6 +40,19 @@ SimpleGraph::Node::NodeMap SimpleGraph::Node::getNextNodes()
   return m;
 }
 
+bool SimpleGraph::Node::hasEdge(Edge *e)
+{
+  for(Edges::iterator i=edges.begin();i!=edges.end();i++)
+    {
+      if(**i==*e)
+	return true;
+    }
+  return false;
+  //  EdgePtrCompare cmp;
+  //  return(std::find(edges.begin(),edges.end(),e,cmp)!=edges.end());
+}
+
+
 ///////////////////////////////////////////////////////////////////////
 // Edge
 ///////////////////////////////////////////////////////////////////////
@@ -75,6 +88,12 @@ bool SimpleGraph::Edge::operator<(const Edge &e) const
 {
   return a<e.a || (a==e.a && b<e.b);
 }
+
+bool SimpleGraph::Edge::operator==(const Edge &e) const
+{
+  return (a==e.a && b==e.b) || (a==e.b && b==e.a);
+}
+
 
 float SimpleGraph::Edge::maxWeight() const
 {
@@ -345,6 +364,27 @@ size_t SimpleGraph::size() const
   return mNodes.size();
 }
 
+size_t SimpleGraph::edges() const
+{
+  return mEdges.size();
+}
+
+std::pair<AGVector2,AGVector2> SimpleGraph::getEdgePosition(size_t i)
+{
+  assert(i<mEdges.size());
+
+  size_t j=0;
+  Edge *e=0;
+  for(EdgeSet::iterator k=mEdges.begin();k!=mEdges.end() && j<=i;k++,j++)
+    e=*k;
+
+  cdebug("i:"<<i<<"  size:"<<mEdges.size());
+  assert(e);
+
+  return std::make_pair(e->a->p,e->b->p);
+}
+
+
 
 SimpleGraph::Edge *SimpleGraph::addEdge(Node *a, Node *b,float w0,float w1)
 {
@@ -354,9 +394,15 @@ SimpleGraph::Edge *SimpleGraph::addEdge(Node *a, Node *b,float w0,float w1)
   assert(n2);
   Edge *e=new Edge(n1,n2,w0,w1);
 
+  assert(!n1->hasEdge(e));
+  assert(!n2->hasEdge(e));
+  //#error add check, if edge already exists
+
   n1->edges.push_back(e);
 
   n2->edges.push_back(e);
+
+  assert(e);
 
   mEdges.insert(e);
 
@@ -498,9 +544,10 @@ void DecimatedGraph::decimate(float amount,MapPathWeighter *pWeighter)
 
   while(mNodes.size()>m)
     {
-      cdebug(mNodes.size()<<" vs. "<<m);
-
-      tryRemove(*mEdges.begin(),pWeighter);
+      Edge *e=*mEdges.begin();
+      cdebug(mNodes.size()<<" vs. "<<m<<" edge:"<<e);
+      assert(e);
+      tryRemove(e,pWeighter);
     }
 
 }
@@ -520,14 +567,17 @@ void DecimatedGraph::collapseEdge(Edge *e,MapPathWeighter *pWeighter)
 {
   if(mNodes.size()<=2)
     return;
-  
+
+  assert(e);
 
   AGVector2 np=(e->a->p+e->b->p)*0.5;
   //  e->a->p=np;
 
+  // create a new node in the middle of the edge
   Node *nn=addNode(np);
 
   Edges all;
+  // collect all neighbring edges
   std::copy(e->a->edges.begin(),e->a->edges.end(),std::back_inserter(all));
   std::copy(e->b->edges.begin(),e->b->edges.end(),std::back_inserter(all));
 
@@ -535,10 +585,13 @@ void DecimatedGraph::collapseEdge(Edge *e,MapPathWeighter *pWeighter)
 
   std::set<Edge> nedges; // collect edges and sort out doubles
 
+  // create new edges for the neighboring edges now going to the new node
   for(Edges::iterator i=all.begin();i!=all.end();i++)
     {
       if(*i!=e)
 	{
+	  if(((*i)->a==e->a && (*i)->b==e->b) || ((*i)->a==e->b && (*i)->b==e->a))
+	    continue;
 	  if((*i)->a==e->a)
 	    {
 	      // X <- a -> b
@@ -580,6 +633,8 @@ void DecimatedGraph::collapseEdge(Edge *e,MapPathWeighter *pWeighter)
   for(Edges::iterator i=all.begin();i!=all.end();i++)
     removeEdge(*i);
 
+  removeEdge(e);
+
   //  cdebug("ok........");
   
 }
@@ -591,10 +646,32 @@ SimpleGraph::Edge DecimatedGraph::makeEdge(Node *a,Node *b,MapPathWeighter *pWei
 }
 
 
+std::list<std::pair<size_t,size_t> > getPossibleNeighbors(size_t w,size_t h,const std::pair<size_t,size_t> &curPos)
+{
+  std::list<std::pair<size_t,size_t> > result;
+  int x,y,dx,dy;
+  int r=5;
+  for(x=-r+1;x<r;x++)
+    for(y=0;y<r;y++)
+      if(x>0 || y>0)
+	//	if(x!=y) // FIXME
+	  {
+	    dx=x+curPos.first;
+	    dy=y+curPos.second;
+
+	    if(dx<w-1 && dy<h-1 && dx>=0 && dy>=0)
+	      result.push_back(std::make_pair(dx,dy));
+	  }
+
+  return result;
+}
+
 
 ///////////////////////////////////////////////////////////////////////
 // Graph generation
 ///////////////////////////////////////////////////////////////////////
+
+
 
 SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res)
 {
@@ -618,6 +695,7 @@ SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res)
   for(x=0;x<w;x+=res)
     for(y=0;y<h;y+=res)
       {
+#if false
 	std::pair<size_t,size_t> p(x,y);
 	std::pair<size_t,size_t> p1(x+res,y);
 	std::pair<size_t,size_t> p2(x,y+res);
@@ -635,14 +713,52 @@ SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res)
 	    if(a && b)
 	      graph->addEdge(a,b,pWeighter->weight(AGVector2(x,y),AGVector2(x,y+res)),pWeighter->weight(AGVector2(x,y+res),AGVector2(x,y)));
 	  }
+#else
+	std::pair<size_t,size_t> p(x,y);
+	std::list<std::pair<size_t,size_t> > l=getPossibleNeighbors(w,h,std::make_pair(x,y));
+	SimpleGraph::Node *a=nodes[p];
+	for(std::list<std::pair<size_t,size_t> >::iterator i=l.begin();i!=l.end();i++)
+	  {
+	    //	    cdebug(i->first<<":"<<i->second);
+	    SimpleGraph::Node *b=nodes[*i];
+	    if(a && b)
+	      {
+		graph->addEdge(a,b,pWeighter->weight(AGVector2(x,y),AGVector2(i->first,i->second)),pWeighter->weight(AGVector2(i->first,i->second),AGVector2(x,y)));
+	      }
+	  }
+#endif
+
       }
   return graph;
 
 }
 
+struct NodeInfo
+{
+  SimpleGraph::Node *node;
+
+  NodeInfo(SimpleGraph::Node *p):node(p)
+  {
+  }
+
+  bool operator<(const NodeInfo &i) const
+  {
+    bool result=false;
+    if(node->tmpWeight<i.node->tmpWeight)
+      result=true;
+    else if(node->tmpWeight==i.node->tmpWeight)
+      result=node<i.node;
+    //    cdebug("operator<:"<<node<<"("<<node->tmpWeight<<")<"<<i.node<<"("<<i.node->tmpWeight<<")  "<<result);
+    return result;
+  }
+};
+
+#if false
+
 HeuristicFunction *computeHeuristic(SimpleGraph *g)
 {
-  StoredHeuristicFunction *h=new StoredHeuristicFunction(32,g->width());
+  //  StoredHeuristicFunction *h=new StoredHeuristicFunction(32,g->width());
+  StoredHeuristicFunction *h=new StoredHeuristicFunction;
 
   size_t c=0;
 
@@ -725,6 +841,93 @@ HeuristicFunction *computeHeuristic(SimpleGraph *g)
 
   return h;
 }
+
+
+
+#else
+
+
+HeuristicFunction *computeHeuristic(SimpleGraph *g)
+{
+  STACKTRACE;
+  StoredHeuristicFunction *h=new StoredHeuristicFunction;
+
+  size_t c=0;
+
+  for(SimpleGraph::NodeSet::iterator i=g->mNodes.begin();i!=g->mNodes.end();i++)
+    {
+      STACKTRACE;
+
+      // clear all weights in nodes
+      for(SimpleGraph::NodeSet::iterator k=g->mNodes.begin();k!=g->mNodes.end();k++)
+	{
+	  STACKTRACE;
+
+	  (*k)->tmpWeight=0;
+	}
+
+
+      std::set<NodeInfo> weights;
+      std::list<NodeInfo> completed;
+      weights.insert(NodeInfo(*i));
+      size_t tries=0;
+      float minWeight=0;
+
+      while(weights.size())
+	{
+	  STACKTRACE;
+	  NodeInfo info=*weights.begin();
+	  weights.erase(weights.begin());
+	  
+	  SimpleGraph::Node *n=info.node;
+
+	  SimpleGraph::Node::NodeMap ns=n->getNextNodes();
+	  float old=n->tmpWeight;
+
+	  assert(old>=minWeight);
+	  minWeight=old;
+
+	  for(SimpleGraph::Node::NodeMap::iterator j=ns.begin();j!=ns.end();j++)
+	    {
+	      float now=j->first->tmpWeight;
+	      float compare=j->second+old;
+
+	      if(now==0 || (now>compare))
+		{
+		  if(now!=0)
+		    weights.erase(j->first);
+		  j->first->tmpWeight=compare;
+		  weights.insert(j->first);
+		}
+	    }
+	  completed.push_back(n);
+	  tries++;
+	}
+
+      //FIXME: store data !!
+
+      for(std::list<NodeInfo>::iterator j=completed.begin();j!=completed.end();j++)
+	{
+	  STACKTRACE;
+	  h->store(std::make_pair((*i)->p,j->node->p),j->node->tmpWeight);
+	}
+
+      h->store(std::make_pair((*i)->p,(*i)->p),0);
+
+      c++;
+      cdebug(c<<" out of "<<g->mNodes.size()<<" completed:"<<completed.size()<<" tries:"<<tries);
+    }
+
+  return h;
+}
+
+
+
+
+#endif
+
+
+
 
 ///////////////////////////////////////////////////////////////////////
 // Path

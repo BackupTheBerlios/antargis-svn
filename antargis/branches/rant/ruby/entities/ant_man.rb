@@ -253,7 +253,7 @@ class AntMan<AntRubyEntity
 			when "row"
 				mesh=setMesh("sit")
 				mesh.setAnimation("sit")
-				addMesh(createModel(:boat),AGVector3.new(0,0,0))
+				addMesh(AntModels.createModel(:boat),AGVector3.new(0,0,0))
 			when "stand","axe","pick","wood","stone","flour","corn","walk","sitdown","sit"
 				setMesh(name)
 				if ["stand","walk","sitdown","sit"].member?(name)

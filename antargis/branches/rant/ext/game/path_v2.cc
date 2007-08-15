@@ -57,9 +57,9 @@ void PathV2Data::traceFrom(const DistanceComputer &pCalc,const AGVector2 &p)
       curPos=queue.front();
       queue.pop_front();
       cDist=distances[curPos];
-      std::map<AGVector2,float> neighbors=pCalc.getAllReachableFrom(curPos);
+      std::vector<std::pair<AGVector2,float> > neighbors=pCalc.getAllReachableFrom(curPos);
 
-      for(std::map<AGVector2,float>::iterator i=neighbors.begin();i!=neighbors.end();i++)
+      for(std::vector<std::pair<AGVector2,float> >::iterator i=neighbors.begin();i!=neighbors.end();i++)
 	{
 	  nextDist=cDist+i->second;
 	  oldDist=distances[i->first];
@@ -190,11 +190,11 @@ void PathV3Data::compute(const DistanceComputer &pCalc)
 	  growField.erase(currentPoint);
 	  mVec2Field[currentPoint]=mFields.size();
 
-	  std::map<AGVector2,float> reachable=pCalc.getAllReachableFrom(currentPoint);
+	  std::vector<std::pair<AGVector2,float> > reachable=pCalc.getAllReachableFrom(currentPoint);
 
 	  //	  cdebug("reachable:"<<reachable.size()<<" currentPoint:"<<currentPoint);
 
-	  for(std::map<AGVector2,float>::iterator i=reachable.begin();i!=reachable.end();i++)
+	  for(std::vector<std::pair<AGVector2,float> >::iterator i=reachable.begin();i!=reachable.end();i++)
 	    {
 	      //	      cdebug("1");
 	      if(growField.find(i->first)==growField.end())

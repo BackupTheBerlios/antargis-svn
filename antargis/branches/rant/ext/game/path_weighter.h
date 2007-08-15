@@ -27,17 +27,17 @@ class AGEXPORT DistanceComputer
   float width() const;
   float height() const;
 
-  std::map<AGVector2,float> getAllReachableFrom(const AGVector2 &p) const;
+  std::vector<std::pair<AGVector2,float> > getAllReachableFrom(const AGVector2 &p) const;
 
   // compute weight for to neighboring points (from a to b)
   float simpleWeight(const AGVector2 &a,const AGVector2 &b) const;
 
   bool isPassable(const AGVector2 &pPoint) const;
 
-  std::list<AGVector2> getNeighbors(const AGVector2 &p) const;
+  std::vector<AGVector2> getNeighbors(const AGVector2 &p) const;
 
 
-  std::list<AGVector2> getAllPassable() const;
+  std::vector<AGVector2> getAllPassable() const;
 
  private:
 

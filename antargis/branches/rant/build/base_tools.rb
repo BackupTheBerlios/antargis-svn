@@ -1,6 +1,7 @@
 #require 'mkmf'                        # mkmf holds information about the compiler-settings while compiling ruby (by the maintainer)
 
 require 'build/platform.rb'
+require 'config.rb'                   # include build-options
 
 def getDir(path)
 	# FIXME: check for windows
@@ -55,17 +56,46 @@ def isWindows
 	(not ENV['WINDIR'].nil?)
 end
 
+module Cmd
+	def Cmd.sys(cmd)
+		puts cmd
+		#as=`#{cmd}`
+		
+		#puts "-#{cmd}-",cmd.class
+		res=system(cmd)
+		#puts a
+		raise 1 unless res
+		
+	end
+end
+
 
 module Build
+	include Cmd
 
-	def compile(cFile)
+	def Build.includes
+		includes=Dir.glob(File.join("ext","**","*.h")).collect{|f|f.sub(/\/[^\/]*$/,"")}.uniq+[getConfig("archdir")]
+		includes.collect{|i|"-I#{i}"}.join(" ")
+	end
+
+	def Build.cflags
+		includes+" "+getConfig("CFLAGS")+" "+$config["CFLAGS"]
+	end
+
+	def Build.compile(cFile)
+		cObj=cFileToObj(cFile)
+		cmd=makeCommand("CXX_CALL",cObj,cflags+" "+cFile)
+		Cmd.sys cmd
 	end
 	
-	def link(objs,libs)
+	def Build.linkToLib(target,objs,libs)
+		cmd=makeCommand("LINK_SHARED",target,(objs+libs).join(" "))
+		Cmd.sys cmd
 	end
+
+	def Build.cFileToObj(filename)
+		filename.sub(/\.cc$/,".oo").sub(/\.c$/,".o")
+	end
+
 end
 
-module Testing
-	def runCTest(cFile)
-	end
-end

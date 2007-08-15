@@ -91,6 +91,8 @@ class AGEXPORT HeightMap:public AGMessageObject
   /// to be used by initTerrainMesh() - not otherwise !!!
   void setTerrain(TerrainBase *pTerrain);
 
+  std::string hash() const;
+
  private:
 
   void checkTerrain();

@@ -293,10 +293,6 @@ class AntRubyMap<AntMap
 		if node.getName=="trigger" then
 			@triggers.push(Trigger.new(node))
 		end
-# 		if e
-# 			e.loadXML(node)
-# 			insertEntity(e)
-# 		end
 	end
 	
 	def loadXML(n)
@@ -322,15 +318,56 @@ class AntRubyMap<AntMap
 
 		# add pathfinder
 		@mweighter=MapPathWeighter.new(self)
-		@sgraph=makeGraph(self,@mweighter,4)
+		@sgraph=makeGraph(self,@mweighter,2)
 		@dgraph=DecimatedGraph.new(@sgraph)
 
 		factor=0.8
-		factor=1.0-400.0/@dgraph.size
+		factor=1.0-800.0/@dgraph.size
+
+		#factor=0.4
+
+		factor=1.0-220.0/@dgraph.size
 
 		@dgraph.decimate(factor,@mweighter)
-		@heuristic=computeHeuristic(@dgraph)
-		#exit
+
+		if true # display dgraph
+			wireframe=Boa3dWireframe.new(getScene,AGVector4.new(1,0,0,1))
+			(0..(@dgraph.edges-1)).each{|i|
+				edge=@dgraph.getEdgePosition(i)
+				puts edge
+				a=edge[0]
+				b=edge[1]
+				a=AGVector3.new(a.x,a.y,getHeight(a.x,a.y)+0.05)
+				b=AGVector3.new(b.x,b.y,getHeight(b.x,b.y)+0.05)
+				wireframe.addLine(a,b)
+			}
+			getScene.addNode(wireframe)
+			#raise 1
+		end
+
+
+		#raise self.hash
+		# FIXME: insert hash here
+
+		hFilename="heuristic.test"
+
+		if File.exists?(hFilename) and false # FIXME: reenable saving
+			fin=BinaryFileIn.new(hFilename)
+			@heuristic=StoredHeuristicFunction.new(fin)
+		else
+			@heuristic=computeHeuristic(@dgraph)
+			#exit
+	
+	
+			stream=BinaryStringOut.new
+			@heuristic.printTo(stream)
+			f=File.open(hFilename,"w")
+			f.puts stream.getString
+			f.close
+		end
+
+
+		#raise "FIXME"
 
 		# FIXME: readd this when heuristics are better!!!
 		#setHeuristic(@heuristic)

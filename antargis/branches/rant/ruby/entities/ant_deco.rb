@@ -79,7 +79,7 @@ class AntDecoMesh<AntRubyEntity
 # 			else
 				#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/ant_coach.ant2",0.08,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
 # 		end
-		setMesh(createModel(:coach))
+		setMesh(AntModels.createModel(:coach))
 	end
 	def saveXML(node)
 		super
