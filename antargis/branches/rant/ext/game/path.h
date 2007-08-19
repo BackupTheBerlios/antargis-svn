@@ -6,6 +6,8 @@
 #include "height_map.h"
 #include "heuristic.h"
 
+#include <ag_serial.h>
+
 #include <ag_surface.h>
 
 /**
@@ -138,6 +140,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
 
   SimpleGraph();
   SimpleGraph(const SimpleGraph &g);
+  SimpleGraph(BinaryIn &pIn);
 
   Node *addNode(const AGVector2 &p);
   /**
@@ -178,6 +181,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
   void paint(const AGRect2& r,AGPaintTarget &t,Heuristic &heuristic);
   void paintNode(const AGRect2& r,AGPaintTarget &t,const AGVector2 &p,const AGColor &c);
 
+  void printTo(BinaryOut &os) const;
 
  protected:
 

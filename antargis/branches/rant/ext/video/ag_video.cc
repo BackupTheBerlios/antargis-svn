@@ -91,6 +91,7 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   if(!ms)
     {
       std::cerr<<"Initing video mode failed!"<<std::endl;
+      std::cerr<<"SDL:Error:"<<SDL_GetError()<<std::endl;
       exit(1);
     }
 

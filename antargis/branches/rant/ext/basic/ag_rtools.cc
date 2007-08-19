@@ -1,4 +1,5 @@
 #include <ag_rtools.h>
+#include <ag_serial.h>
 
 #include <ruby.h>
 
@@ -6,6 +7,18 @@
 #include <sstream>
 
 std::string rubyHash(const std::string &p)
+{
+  rb_eval_string("require 'digest/md5'");
+  VALUE l=rb_eval_string("Digest::MD5");
+  VALUE r=rb_funcall(l,rb_intern("digest"),1,rb_str_new(p.c_str(),p.length()));
+
+  std::string s(RSTRING_PTR(r), RSTRING_LEN(r));
+
+  return binaryToHex(s,false);
+  
+}
+
+std::string rubyHashOld(const std::string &p)
 {
   // FIXME: TRY USING ruby's Digest::MD5::digest("xy")
   rb_eval_string("require 'digest/md5'");

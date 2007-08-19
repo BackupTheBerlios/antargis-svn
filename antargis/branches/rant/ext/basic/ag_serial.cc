@@ -378,7 +378,7 @@ void toHexBS(char c,std::ostream &os)
 }
 
 
-std::string binaryToHex(const std::string &s)
+std::string binaryToHex(const std::string &s,bool separators)
 {
   std::ostringstream os;
   
@@ -387,7 +387,7 @@ std::string binaryToHex(const std::string &s)
     {
       //      cdebug(i<<":"<<(int)s[i]);
       toHexBS(s[i],os);
-      if(i>0)
+      if(i>0 && separators)
 	{
 	  if((i%32)==0)
 	    os<<std::endl;

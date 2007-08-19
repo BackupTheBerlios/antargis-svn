@@ -19,7 +19,7 @@ $config={
 	"INCLUDES"=>"",
     "LIBGL"=>"-lGL -lGLU",
   # call the compiler using the standard unix-style mechanism <CC> -c -o <outputname> <input0> [<input1> ...]
-	"COMPILE_PARAMS"=>" -c -o $(OUTPUT) $(INPUT)",
+	"COMPILE_PARAMS"=>" -Wp,-MD,$(DEP) -c -o $(OUTPUT) $(INPUT)",
 	# an ansi-c compiler call with parameters (using ccache if available)
 	"CC_CALL"=>"$(CCACHE) $(CC) $(COMPILE_PARAMS)",
 	# a c++ compiler call with parameters (using ccache if available)

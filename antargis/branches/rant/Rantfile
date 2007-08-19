@@ -5,8 +5,6 @@ import "package/zip"                  # support for packaging (tar.gz, zip)
 import "rubydoc"
 import "c/dependencies"
 
-#gen C::Dependencies, :sources=> (sys["**/*.cc"]+sys["**/*.c"]+sys["**/*.h"]).select{|f|not (f=~/packages/ or f=~/build/)}
-
 require 'build/base_tools.rb'
 
 puts "ERROR: Please run ./configure before building!" unless File.exists?("config.rb")
@@ -174,13 +172,21 @@ sourceDeps.each{|pair|
 	end
 }
 ###########################################
-    
+
+
+depC=lambda{|target|
+	source=target.gsub(/\.o$/,".c").gsub(/\.oo$/,".cc")
+	target=sys.expand_path(target)
+	deps=getDependencies(target)
+	#puts "MUH:"+([source]+deps).join(":::")
+	[source]+deps
+}    
 
 ###########################################
 # build c
 #
-gen Rule, '.o' => '.c' do |t|
-	cmd=makeCommand("CC_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
+gen Rule, '.o' => depC do |t|
+	cmd=makeCommand("CC_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{(t.source)}")
 	sys cmd
 	puts
 end
@@ -189,8 +195,8 @@ end
 ###########################################
 # build c++
 #
-gen Rule, '.oo' => '.cc' do |t|
-	cmd=makeCommand("CXX_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
+gen Rule, '.oo' => depC do |t|
+	cmd=makeCommand("CXX_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{(t.source)}")
 	sys cmd
 	puts
 end
@@ -205,7 +211,7 @@ swigSrc = lambda { |target|
 	dir=getDirUnix(target)
     #puts "TARGET:#{target} DIR:#{dir}"
 	name=makeLibName(dir)
-	a=[target.sub(name+"swig.cc","interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
+	a=[target.sub(/#{name}swig.*/,"interface.i")]+sys["build/*.i"]+importsForInterface(target).split(":") 
     puts "A: #{a}"
     puts "name: #{name}"
     puts "dir: #{dir}"
@@ -217,7 +223,7 @@ gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
 
     puts "SOURCE #{t.source} #{t.name}"
 
-	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
+	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name.gsub(/\.h$/,".cc")),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
 	sys cmd
 	puts
 end
@@ -339,6 +345,7 @@ desc "Generate html documentation."
 gen AutoClean, :clean
 var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
 var[:clean].include "ext/*.so"
+#var[:clean].include ".deps/*"
 ###########################################
 
 

@@ -299,9 +299,6 @@ class AntRubyMap<AntMap
 		@loadedEntsNum=1
 		@loadedEntities=[]
 		super(n)
-# 		puts @loadedEntities.length
-# 		puts @loadedEntsNum
-# 		raise 1
 		@loadedEntities.each{|pair|
 			node,entity=pair
 			insertEntity(entity)
@@ -309,70 +306,12 @@ class AntRubyMap<AntMap
 
 		@loadedEntities.each{|pair|
 			node,entity=pair
-#			loadEntityFromXML(entity,node)
 			entity.loadXML(node)
 			entity.eventMapChanged
 		}
 		
 
-
-		# add pathfinder
-		@mweighter=MapPathWeighter.new(self)
-		@sgraph=makeGraph(self,@mweighter,2)
-		@dgraph=DecimatedGraph.new(@sgraph)
-
-		factor=0.8
-		factor=1.0-800.0/@dgraph.size
-
-		#factor=0.4
-
-		factor=1.0-220.0/@dgraph.size
-
-		@dgraph.decimate(factor,@mweighter)
-
-		if true # display dgraph
-			wireframe=Boa3dWireframe.new(getScene,AGVector4.new(1,0,0,1))
-			(0..(@dgraph.edges-1)).each{|i|
-				edge=@dgraph.getEdgePosition(i)
-				puts edge
-				a=edge[0]
-				b=edge[1]
-				a=AGVector3.new(a.x,a.y,getHeight(a.x,a.y)+0.05)
-				b=AGVector3.new(b.x,b.y,getHeight(b.x,b.y)+0.05)
-				wireframe.addLine(a,b)
-			}
-			getScene.addNode(wireframe)
-			#raise 1
-		end
-
-
-		#raise self.hash
-		# FIXME: insert hash here
-
-		hFilename="heuristic.test"
-
-		if File.exists?(hFilename) and false # FIXME: reenable saving
-			fin=BinaryFileIn.new(hFilename)
-			@heuristic=StoredHeuristicFunction.new(fin)
-		else
-			@heuristic=computeHeuristic(@dgraph)
-			#exit
-	
-	
-			stream=BinaryStringOut.new
-			@heuristic.printTo(stream)
-			f=File.open(hFilename,"w")
-			f.puts stream.getString
-			f.close
-		end
-
-
-		#raise "FIXME"
-
-		# FIXME: readd this when heuristics are better!!!
-		#setHeuristic(@heuristic)
-
-		@path=Pathfinder.new(@dgraph,@heuristic)
+		createPathfinder
 
 
 		@players.each{|p|p.move(0)}
@@ -538,6 +477,72 @@ private
 
 	def getLevelName
 		"L_"+@filename.gsub(".rb","").gsub(".","_").gsub("/","_")
+	end
+
+
+
+	def createPathfinder
+
+		levelHash=self.hash # build a hash out of the height-map
+		cacheFilename=levelHash+".cache"
+
+		# cache the whole path-finding graph and heuristic computations
+		if fileExists(findFile(cacheFilename))
+			puts "LOAD PATHFINDING FROM CACHE....."
+			content=loadFile(cacheFilename)
+			stream=BinaryStringIn.new(content)
+			@dgraph=SimpleGraph.new(stream)
+			@heuristic=StoredHeuristicFunction.new(stream)
+			puts "LOAD PATHFINDING FROM CACHE-READY."
+		else
+			# build a map-height/distance weighter
+			@mweighter=MapPathWeighter.new(self)
+
+			# set initial distance of waypoints	
+			minDist=2
+			if getW*getH>128*128
+				minDist=4
+			end
+	
+			# make a path-finding graph
+			@sgraph=makeGraph(self,@mweighter,minDist)
+			# copy to a decimating graph
+			@dgraph=DecimatedGraph.new(@sgraph)
+	
+			# compute a decimation-factor
+			factor=1.0-800.0/@dgraph.size
+	
+			# debugging settings
+			#factor=0.4
+			#factor=1.0-220.0/@dgraph.size
+	
+			@dgraph.decimate(factor,@mweighter)
+	
+			# compute a distance-field and use this as a pre-computed heuristic
+			@heuristic=computeHeuristic(@dgraph)
+	
+			# save everything to the cachefile
+			stream=BinaryStringOut.new
+			@dgraph.printTo(stream)
+			@heuristic.printTo(stream)
+		
+			saveFile(cacheFilename,stream.getString)
+		end	
+		@path=Pathfinder.new(@dgraph,@heuristic)
+		
+		#displayPathfindingGraph
+	end
+	def displayPathfindingGraph
+		wireframe=Boa3dWireframe.new(getScene,AGVector4.new(1,0,0,1))
+		(0..(@dgraph.edges-1)).each{|i|
+			edge=@dgraph.getEdgePosition(i)
+			a=edge[0]
+			b=edge[1]
+			a=AGVector3.new(a.x,a.y,getHeight(a.x,a.y)+0.05)
+			b=AGVector3.new(b.x,b.y,getHeight(b.x,b.y)+0.05)
+			wireframe.addLine(a,b)
+		}
+		getScene.addNode(wireframe)
 	end
 end
 

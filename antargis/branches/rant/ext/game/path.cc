@@ -281,6 +281,52 @@ SimpleGraph::SimpleGraph(const SimpleGraph &g)
 }
 
 
+SimpleGraph::SimpleGraph(BinaryIn &pIn)
+{
+  std::vector<AGVector2> vecs;
+  std::vector<Node*> nodes;
+  AGVector2 p;
+  size_t a,b;
+  float w0,w1;
+
+  size_t count,i;
+  pIn>>count;
+  for(i=0;i<count;i++)
+    {
+      pIn>>p;
+      vecs.push_back(p);
+      nodes.push_back(addNode(p));
+    }
+  pIn>>count;
+  for(i=0;i<count;i++)
+    {
+      pIn>>a>>b>>w0>>w1;
+      assert(a<nodes.size());
+      assert(b<nodes.size());
+      addEdge(nodes[a],nodes[b],w0,w1);
+    }
+  pIn>>mWidth;
+}
+
+void SimpleGraph::printTo(BinaryOut &pOut) const
+{
+  std::map<AGVector2,size_t> saveMap;
+  size_t j=0;
+  pOut<<mNodes.size();
+  for(NodeSet::const_iterator i=mNodes.begin();i!=mNodes.end();i++,j++)
+    {
+      pOut<<(*i)->p;
+      saveMap[(*i)->p]=j;
+    }
+  pOut<<mEdges.size();
+  for(EdgeSet::const_iterator i=mEdges.begin();i!=mEdges.end();i++)
+    {
+      pOut<<saveMap[(*i)->a->p]<<saveMap[(*i)->b->p]<<(*i)->w0<<(*i)->w1;
+    }
+
+  pOut<<mWidth;
+}
+
 
 SimpleGraph::Node *SimpleGraph::addNode(const AGVector2 &p)
 {
@@ -378,7 +424,7 @@ std::pair<AGVector2,AGVector2> SimpleGraph::getEdgePosition(size_t i)
   for(EdgeSet::iterator k=mEdges.begin();k!=mEdges.end() && j<=i;k++,j++)
     e=*k;
 
-  cdebug("i:"<<i<<"  size:"<<mEdges.size());
+  //  cdebug("i:"<<i<<"  size:"<<mEdges.size());
   assert(e);
 
   return std::make_pair(e->a->p,e->b->p);

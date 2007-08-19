@@ -18,10 +18,32 @@ def makeLibName(dir)
 	"antargis"+dir.split("/")[-1]
 end
 
+def makeDepName(output)
+	dep=".deps/"+output.gsub("/","_")
+end
+
+def getDependencies(output)
+	dep=makeDepName(output)
+	if File.exists?(dep)
+		content=File.open(dep).read
+		content=content.gsub(/^[^:]*:/,"")
+		files=content.gsub("\\\n","").split(" ")
+		#puts files
+		return files
+	end
+	#raise 1
+	[]
+end
+
 # build a command out of templates in config.rb
 def makeCommand(cmd,output,input)
 	#cmd.sub("§OUTPUT§",output).sub("§INPUT§",input)
-	extendCommand($config,cmd,{"OUTPUT"=>output,"INPUT"=>input})
+	begin
+		Dir.mkdir(".deps")
+	rescue
+	end
+	dep=makeDepName(output)
+	extendCommand($config,cmd,{"OUTPUT"=>output,"INPUT"=>input,"DEP"=>dep})
 end
 
 
