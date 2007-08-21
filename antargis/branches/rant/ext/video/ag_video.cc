@@ -92,6 +92,10 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
     {
       std::cerr<<"Initing video mode failed!"<<std::endl;
       std::cerr<<"SDL:Error:"<<SDL_GetError()<<std::endl;
+      std::cerr<<"If you experience errors here, it may be that one following is true:"<<std::endl;
+      std::cerr<<"* SDL is compiled without OpenGL support"<<std::endl;
+      std::cerr<<"* Your display has no support for GLX"<<std::endl;
+      std::cerr<<"* You're running SDL with framebuffer - instead of X"<<std::endl;
       exit(1);
     }
 

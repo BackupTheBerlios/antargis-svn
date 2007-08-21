@@ -134,6 +134,7 @@ AGMain *getMain()
   static bool registered=false;
   if(!registered)
     {
+      // registered must be set here, so that we don't get into an endless recursion
       registered=true;
 
       // IMPORTANT:

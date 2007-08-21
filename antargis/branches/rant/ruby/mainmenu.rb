@@ -412,8 +412,8 @@ class AntMenuApp <AntApplication
 		@frames||=0
 		@frameTime+=t
 		@frames+=1
-		if @frames>10
-			puts "FPS:#{10.0/@frameTime}"
+		if @frames>100
+			puts "FPS:#{100.0/@frameTime}"
 			@frameTime=0
 			@frames=0
 		end

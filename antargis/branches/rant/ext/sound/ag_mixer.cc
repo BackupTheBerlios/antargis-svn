@@ -293,10 +293,13 @@ void AGSound::stopMp3()
 }
 AGSound::AGSound():AGMessageObject(),sigMp3Finished(this,"sigMp3Finished")
 {
-	if(getCollector())
-		getCollector()->insertGlobal(this);
-	else
-		std::cerr<<"Possible Error:getCollector()==0!"<<std::endl;
+  if(getCollector())
+    getCollector()->insertGlobal(this);
+  else
+    {
+      std::cerr<<"Error:getCollector()==0!"<<std::endl;
+      exit(1);
+    }
   REGISTER_SINGLETON(this);
   soundVol=1.0f;
 
@@ -449,6 +452,9 @@ AGSound *getSoundManager()
     {
       mSoundManager=new AGSound;
     }
+
+  getMain()->getCollector()->insertGlobal(mSoundManager);
+
   return mSoundManager;
 }
 

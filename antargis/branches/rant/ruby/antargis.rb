@@ -282,11 +282,11 @@ class AntGameApp <AntRubyView
 			else
 				fps=sprintf("%3.0f",@fps)
 			end
-			puts "FPS:"+fps
-			puts "pick-tris:"+getScene.getPickTriangles.to_s
+			#puts "FPS:"+fps
+			#puts "pick-tris:"+getScene.getPickTriangles.to_s
 			@statusBar.setText(_("FPS:{1}",fps.to_s))
-			puts "Tris:"+getScene.getTriangles.to_s
-			puts "MESHES:"+getScene.getDrawnMeshes.to_s
+			#puts "Tris:"+getScene.getTriangles.to_s
+			#puts "MESHES:"+getScene.getDrawnMeshes.to_s
 			@frameCount=0
 			@elapsTime=0
 			startGC

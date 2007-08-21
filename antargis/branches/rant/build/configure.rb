@@ -12,6 +12,7 @@
 ##
 
 require 'build/platform.rb'
+require 'build/config_tools.rb'
 
 module CFG
 	@@options=[]
@@ -21,6 +22,7 @@ module CFG
 	def CFG.addOption(name,short,help,param=nil,default=nil,&proc)
 		@@options.push({:name=>name,:short=>short,:help=>help,:proc=>proc,:param=>param,:default=>default})
 	end
+
 	def CFG.options
 		@@options
 	end
@@ -206,6 +208,11 @@ EOT
 
 	def CFG.checkCompile
 		
+	end
+
+
+	def CFG.gatherMkmfInfo
+		CFG.set("RUBYLIB",getConfig("LIBRUBYARG_SHARED"))
 	end
 
 	def CFG.checkLibrary(libname)

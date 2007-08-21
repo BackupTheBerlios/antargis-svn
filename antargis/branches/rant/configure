@@ -52,15 +52,15 @@ CFG.addOption("version","v",
 
 if $:.join("")=~/1.8/
 	if isWindows
-		CFG.set("RUBYLIB","msvcrt-ruby18")
+		CFG.set("RUBYLIB","-lmsvcrt-ruby18")
 	else
-		CFG.set("RUBYLIB","ruby1.8")
+		CFG.set("RUBYLIB","-lruby1.8")
 	end
 else
 	if isWindows
-		CFG.set("RUBYLIB","msvcrt-ruby19")
+		CFG.set("RUBYLIB","-lmsvcrt-ruby19")
 	else
-		CFG.set("RUBYLIB","ruby1.9")
+		CFG.set("RUBYLIB","-lruby1.9")
 	end
 end
 
@@ -88,6 +88,13 @@ CFG.addCheck("sdl-config --cflags",false) do
         end
         CFG.set("CFLAGS",libs) if libs        
     end
+
+
+CFG.addOption("use-mkmf","",
+	"use ruby's configuration mechanism for configuration") do  ||
+		CFG.gatherMkmfInfo
+	end
+
 
 CFG.includeConfig
 

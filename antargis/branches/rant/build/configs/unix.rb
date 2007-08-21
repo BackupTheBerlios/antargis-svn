@@ -17,7 +17,7 @@ $config={
   "LIBS"=>"",
 	"RUBYLIB"=>"ruby1.8",
 	"INCLUDES"=>"",
-    "LIBGL"=>"-lGL -lGLU",
+  "LIBGL"=>"-lGL -lGLU",
   # call the compiler using the standard unix-style mechanism <CC> -c -o <outputname> <input0> [<input1> ...]
 	"COMPILE_PARAMS"=>" -Wp,-MD,$(DEP) -c -o $(OUTPUT) $(INPUT)",
 	# an ansi-c compiler call with parameters (using ccache if available)

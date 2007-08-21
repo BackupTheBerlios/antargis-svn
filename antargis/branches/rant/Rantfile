@@ -26,7 +26,7 @@ glLibs=$config["LIBGL"].split(" ")
 # - an internal dependency on a directory
 # NOTE: dependencies are not automatically inherited, you have to include them yourself!
 
-rubyLib=["-l"+$config['RUBYLIB']]
+rubyLib=[$config['RUBYLIB']]
 
 sourceDeps=[
 	["ext/external",["-lz"]+sdlLibs],

@@ -5,5 +5,5 @@ extern void initSoundEngine();
 
 AGEXPORT void AG_Init_libantargissound()
 {
-	initSoundEngine();
+  initSoundEngine();
 }

@@ -1,9 +1,12 @@
 
 
 
-0.2.1.2 (2007-08-09)
+0.2.1.2 (2007-08-21)
 	- increased performance on heuristic-computation
+	- some minor cleanup of map.rb
 	- included saving and thus caching of heuristic
+	- fixed error in garbage-collection - main was not stored always, so garbage collector collected some objects too much
+  - reenabled editor
 
 0.2.1.1 (about 2007-07)
 	- refactoring

@@ -1,7 +1,6 @@
-#require 'mkmf'                        # mkmf holds information about the compiler-settings while compiling ruby (by the maintainer)
-
 require 'build/platform.rb'
 require 'config.rb'                   # include build-options
+require 'build/config_tools.rb'
 
 def getDir(path)
 	# FIXME: check for windows
@@ -47,28 +46,6 @@ def makeCommand(cmd,output,input)
 end
 
 
-def extendCommandLine(config,s)
-  r=config[s]
-  return r if r.nil?
-  r.gsub(/\$\(([^\)]*)\)/) {|a|
-		n=a[2..-2] # filter "$(xy..z)" to "xy..z"
-		raise "Endless recursion in #{n}!" if n==s
-		extendCommandLine(config,n)  # replace recursive values within this form: $(...)
-	}
-end
-
-def extendCommand(config,name,map={})
-	c=config.clone
-	map.each{|k,v|
-		c[k]=v
-	}
-	extendCommandLine(c,name)
-end
-
-# the getConfig function reads out compiler-information out of the mkmf-configuration variables - these are defined in a recursive manner
-def getConfig(s)
-	extendCommand(CONFIG,s)
-end
 
 def U2W(path)
     path.gsub("/",Dir.separator)
