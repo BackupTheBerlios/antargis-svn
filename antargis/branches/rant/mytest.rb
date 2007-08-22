@@ -2,12 +2,11 @@
 
 require 'build/testing.rb'
 
+Cmd.setQuiet(true)
 
 testFiles=Dir[File.join("ext/**/tests/*.cc")]
 
-
 testFiles.each{|file|
-	puts "TEST: #{file}"
 	Testing.runCTest(file)
 }
 

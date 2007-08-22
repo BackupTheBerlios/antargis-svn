@@ -3,7 +3,7 @@
 #include <set>
 #include <ag_debug.h>
 
-int test_vector_sort()
+bool test_vector_sort()
 {
   AGVector2 m(2,2);
   DistanceOrder order(m);
@@ -33,11 +33,17 @@ int test_vector_sort()
   cdebug("2:"<<v[2]<<"  "<<b<<"  "<<(b-m).length());
   cdebug("3:"<<v[3]<<"  "<<c<<"  "<<(c-m).length());
   */
-
+return false;
   assert(v[0]==d);
   assert(v[1]==a);
   assert(v[2]==b);
   assert(v[3]==c);
 
-  return 0;
+  return true;
+}
+
+
+bool test_my_test()
+{
+	return true;
 }

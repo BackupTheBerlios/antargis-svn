@@ -348,4 +348,19 @@ var[:clean].include "ext/*.so"
 #var[:clean].include ".deps/*"
 ###########################################
 
+task :check_c_prgs do
+	require 'build/testing.rb'
+	
+	Cmd.setQuiet(true)
+	
+	testFiles=Dir[File.join("ext/**/tests/*.cc")]
+	
+	testFiles.each{|file|
+		Testing.runCTest(file)
+	}
+	puts Testing.getStats
 
+end
+
+task :check=> [:check_c_prgs] do
+end

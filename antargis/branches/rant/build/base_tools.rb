@@ -56,8 +56,10 @@ def isWindows
 end
 
 module Cmd
+	@@quiet=false 
 	def Cmd.sys(cmd)
-		puts cmd
+		
+		puts cmd if not @@quiet
 		#as=`#{cmd}`
 		
 		#puts "-#{cmd}-",cmd.class
@@ -65,6 +67,10 @@ module Cmd
 		#puts a
 		raise 1 unless res
 		
+	end
+
+	def Cmd.setQuiet(flag)
+		@@quiet=flag
 	end
 end
 
