@@ -109,46 +109,14 @@ SimpleGraph::Node *SimpleGraph::Edge::getOther(Node *n)
   return 0;
 }
 
-/*
-SimpleGraph::HalfEdge *SimpleGraph::Edge::getHalfEdgeFrom(Node *n)
-{
-  HalfEdge *h;
-  if(a==n)
-    {
-      h->a=a;
-      h->b=b;
-      h->w=w0;
-    }
-  else
-    {
-      h->b=a;
-      h->a=b;
-      h->w=w1;
-    }
-  return h;
-}
-SimpleGraph::HalfEdge *SimpleGraph::Edge::getHalfEdgeTo(Node *n)
-{
-  HalfEdge *h;
-  if(a!=n)
-    {
-      h->a=a;
-      h->b=b;
-      h->w=w0;
-    }
-  else
-    {
-      h->b=a;
-      h->a=b;
-      h->w=w1;
-    }
-  return h;
-  }*/
-
 
 ///////////////////////////////////////////////////////////////////////
 // PathWeighter
 ///////////////////////////////////////////////////////////////////////
+
+PathWeighter::PathWeighter(bool pWaterPassable):mWaterPassable(pWaterPassable)
+{
+}
 
 PathWeighter::~PathWeighter()
 {
@@ -156,36 +124,46 @@ PathWeighter::~PathWeighter()
 float PathWeighter::weight(float h0,float h1)
 {
   if(h0<0.3 || h1<0.3)
-    return 100000; // high weight for non-passable water ;-)
+    {
+      if(mWaterPassable)
+	{
+	  return 0;//fabs(std::max(h0,h1)-std::max(0.3f,std::min(h0,h1)));
+	}
+      else
+	return 100000; // high weight for non-passable water ;-)
+    }
 
   return fabs(h0-h1);
+}
+
+bool PathWeighter::isWaterPassable() const
+{
+  return mWaterPassable;
 }
 
 ///////////////////////////////////////////////////////////////////////
 // MapPathWeighter
 ///////////////////////////////////////////////////////////////////////
 
-MapPathWeighter::MapPathWeighter(HeightMap *pMap):
+MapPathWeighter::MapPathWeighter(HeightMap *pMap,bool pWaterPassable):
+  PathWeighter(pWaterPassable),
   mMap(pMap)
 {
 }
 float MapPathWeighter::weight(const AGVector2 &a,const AGVector2 &b)
 {
   return complexWeight(a,b);
-
-
-
-  float w=(a-b).length();
-  if(w>1)
-    throw std::runtime_error("not implemented");
-  float h0=mMap->getHeight(a[0],a[1]);
-  float h1=mMap->getHeight(b[0],b[1]);
-
-  w+=weightHeight(h0,h1);
-
-  return w;
 }
 
+/**
+   computes a weight between a and b, which can be far apart. the computed path between
+   the waypoints is linear!
+
+   \param a waypoint
+   \param b waypoint
+   \return weight
+
+*/
 float MapPathWeighter::complexWeight(const AGVector2 &a,const AGVector2 &b)
 {
   // simply measure all "1 units"
@@ -223,6 +201,9 @@ float MapPathWeighter::weightHeight(float a,float b) const
 {
   float f=1; // some factor - to be estimated
 
+  if((a<0.3 && b<0.3) && isWaterPassable())
+    return 0; // water
+
 
   if(b<0.2)
     return (0.2-b)*1000;
@@ -236,12 +217,12 @@ float MapPathWeighter::weightHeight(float a,float b) const
     return -(b-a)*f*0.3; 
 }
 
-
-
-
 bool MapPathWeighter::accessible(const AGVector2 &a)
 {
-  //  return true;
+  // FIXME: maybe make some terrain impassable
+
+  if(isWaterPassable())
+    return true;
   float hmin=10;
   for(int x=-1;x<2;x++)
     for(int y=-1;y<2;y++)
@@ -254,6 +235,9 @@ bool MapPathWeighter::accessible(const AGVector2 &a)
       }
   return hmin>0;
 }
+
+
+
 
 
 

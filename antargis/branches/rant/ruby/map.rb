@@ -23,6 +23,7 @@ require 'ant_trigger.rb'
 require 'ant_level.rb'
 
 require 'ant_ai.rb'
+require 'ant_path.rb'
 
 # This class prodives support for defining target-positions in a level-file.
 # These positions can be used for scripting. This way code and level-data is
@@ -480,8 +481,12 @@ private
 	end
 
 
-
 	def createPathfinder
+		@path=CombinedPathFinder.new(self)
+		@path.displayPathfindingGraph(self,getScene)
+	end
+
+	def createPathfinderOLD
 
 		levelHash=self.hash # build a hash out of the height-map
 		cacheFilename=levelHash+".cache"
@@ -531,18 +536,6 @@ private
 		@path=Pathfinder.new(@dgraph,@heuristic)
 		
 		#displayPathfindingGraph
-	end
-	def displayPathfindingGraph
-		wireframe=Boa3dWireframe.new(getScene,AGVector4.new(1,0,0,1))
-		(0..(@dgraph.edges-1)).each{|i|
-			edge=@dgraph.getEdgePosition(i)
-			a=edge[0]
-			b=edge[1]
-			a=AGVector3.new(a.x,a.y,getHeight(a.x,a.y)+0.05)
-			b=AGVector3.new(b.x,b.y,getHeight(b.x,b.y)+0.05)
-			wireframe.addLine(a,b)
-		}
-		getScene.addNode(wireframe)
 	end
 end
 

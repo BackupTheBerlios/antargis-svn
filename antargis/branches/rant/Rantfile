@@ -221,11 +221,18 @@ swigSrc = lambda { |target|
 
 gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
 
-    puts "SOURCE #{t.source} #{t.name}"
+	puts "SOURCE #{t.source} #{t.name}"
 
 	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name.gsub(/\.h$/,".cc")),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
 	sys cmd
 	puts
+
+	incs="-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR}"
+	out=".deps"+Dir.separator+sys.expand_path(t.name).gsub("/","_")
+	cmd=makeCommand("SWIGDEPS",out,incs+" "+sys.expand_path(t.name.gsub(/[0-9_a-z]*\.h$/,"interface.i")))
+	sys cmd
+	puts
+
 end
 #
 ###########################################
@@ -345,7 +352,7 @@ desc "Generate html documentation."
 gen AutoClean, :clean
 var[:clean].include "**/marker.i"   # not needed any more - managed by Rule
 var[:clean].include "ext/*.so"
-#var[:clean].include ".deps/*"
+var[:clean].include ".deps"
 ###########################################
 
 task :check_c_prgs do

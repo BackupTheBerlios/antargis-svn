@@ -197,7 +197,7 @@ class AntHeroMoveJob<AntHLJob
 # 		puts hero.getPos2D,pos
 # 		puts hero.getPos2D.class,pos.class
 		if getMap.path
-			@waypoints=getMap.path.computePath(hero.getPos2D,@pos)
+			@waypoints=getMap.path.computePath(hero.getPos2D,@pos,@hero)
 		else
 			@waypoints=[]
 		end
@@ -205,7 +205,7 @@ class AntHeroMoveJob<AntHLJob
 		@waypoints.push(@pos)
 		if getMap.path
 			#puts "FIXME: ant_hljobs.rb:207"
-			@waypoints=getMap.path.refinePath(@waypoints,MapPathWeighter.new(getMap))
+			@waypoints=getMap.path.refinePath(@waypoints,@hero)
 		end
 		@men=getMen
 		@moveFinished=false

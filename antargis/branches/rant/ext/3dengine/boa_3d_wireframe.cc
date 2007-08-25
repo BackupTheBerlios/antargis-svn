@@ -2,8 +2,9 @@
 #include <ag_rendercontext.h>
 #include <ag_debug.h>
 
-Boa3dWireframe::Boa3dWireframe(Scene *pScene,const AGVector4 &pColor):
-  SceneNode(pScene,AGVector4(0,0,0,0),AGBox3(AGVector3(0,0,0),AGVector3(100,100,100)))
+Boa3dWireframe::Boa3dWireframe(Scene *pScene,const AGVector4 &pColor,float pWidth):
+  SceneNode(pScene,AGVector4(0,0,0,0),AGBox3(AGVector3(0,0,0),AGVector3(100,100,100))),
+  mWidth(pWidth)
 {
   mColor=pColor;
   mChanged=true;
@@ -21,7 +22,7 @@ void Boa3dWireframe::draw()
 
   
   AGRenderContext c;
-  glLineWidth(3);
+  glLineWidth(mWidth);
 
   //  c.setDepthTest(false);
 

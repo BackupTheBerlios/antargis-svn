@@ -7,47 +7,71 @@
 #include "heuristic.h"
 
 #include <ag_serial.h>
-
 #include <ag_surface.h>
 
 /**
-   This file is WORK-IN-PROGRESS !!!!!!!!!!!!!!!!!!!!!!
-
-   The purpose is some path-finding-algorithm based upon "A-star". (A*)
+   The purpose of this file is some path-finding-algorithm based upon "A-star". (A*)
    
    Because path-finding is a somewhat hard topic, we should try some
    hierarchical approach:
    * build some graph out of the height-map - weight come from height and terrain-type (swamp and deep sand vs. plain grass)
-   * nodes that are near each other get eliminated (thrown together), if terrain connection is possible (and too much longer)
-   * several levels of this graph can be used, according to the distance that has to be gone
+   * nodes that are near each other get eliminated (thrown together), if terrain connection is possible (and not too much longer)
+   * (mayto TODO: several levels of this graph can be used, according to the distance that has to be gone)
    * for people that have boats, water can be crossed, so there has to be a different path-graph !
 
+   Computation goes as follows:
+   * You define a Path-Weighter, that weighs distances on a map (or without a map - for very simple cases (that we won't use here though))
+   * Feed this into a makeGraph(...)-call
+   * decimate the graph, if you want to
+   * compute a heuristic on the resulting-graph - e.g. the full-computed distance-field for all nodes (in StoredHeuristicFunction)
+   * create a Pathfinder-object using graph and heuristic
+   * use this Pathfinder to compute distances and pathes :-)
+
+   NOTE:
+   * Within the game these classes won't be used directly, but through the CombinedPathFinder-ruby-class
 */
 
 class Heuristic;
 
+/**
+   PathWeighter is a (not-really-used) base-class for the path-weighing-facility. It though stores, if water is
+   passable.
+   
+   FIXME: integrate PathWeighter into MapPathWeighter!
+ */
 class AGEXPORT PathWeighter:public AGRubyObject
 {
  public:
+  PathWeighter(bool pWaterPassable=false);
   virtual ~PathWeighter();
+  /// this function can be overridden - and will be
   virtual float weight(float h0,float h1);
+
+  bool isWaterPassable() const;
+ private:
+  bool mWaterPassable;
 };
 
 class AGEXPORT MapPathWeighter:public PathWeighter
 {
  public:
-  MapPathWeighter(HeightMap *pMap);
+  MapPathWeighter(HeightMap *pMap,bool pWaterPassable);
   virtual float weight(const AGVector2 &a,const AGVector2 &b);
   virtual bool accessible(const AGVector2 &a);
  private:
 
   virtual float complexWeight(const AGVector2 &a,const AGVector2 &b);
+
+  /// compute a weight for a flank. Compares the heights a and b. used by complexWeight
   virtual float weightHeight(float a,float b) const;
 
   HeightMap *mMap;
 };
 
 
+/**
+   AGVector2Sort is a simple sorting class for use in sorting containers, like map or set.
+ */
 struct AGEXPORT AGVector2Sort
 {
   public:
@@ -99,11 +123,6 @@ class AGEXPORT SimpleGraph:public AGRubyObject
 
     Node *getOther(Node *n);
 
-    /*
-    HalfEdge *getHalfEdgeFrom(Node *n);
-
-    HalfEdge *getHalfEdgeTo(Node *n);
-    */
   };
 
   struct Node

@@ -29,7 +29,7 @@ $config={
 	# generate c++-code from a swig-interface file
 	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) $(INPUT)",
 	# generate dependencies for swig-interface files
-	"SWIGDEPS"=>"$(SWIG) -ruby -c++ -M $(INPUT)",
+	"SWIGDEPS"=>"$(SWIG) -ruby -c++ -M $(INPUT)>$(OUTPUT)",
 
 	# generate a swig-interface-file from the c++-sources and some other pre-defined interface-files (.i)
 	# go to build/*.i or ext/*/*.i for more information

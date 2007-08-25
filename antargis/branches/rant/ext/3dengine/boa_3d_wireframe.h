@@ -14,7 +14,7 @@ class AGEXPORT Boa3dWireframe:public SceneNode
   };
 
  public:
-  Boa3dWireframe(Scene *pScene,const AGVector4 &pColor);
+  Boa3dWireframe(Scene *pScene,const AGVector4 &pColor,float pWidth);
 
   void draw();
 
@@ -28,6 +28,8 @@ class AGEXPORT Boa3dWireframe:public SceneNode
   VertexArray mArray;
 
   bool mChanged;
+
+  float mWidth;
 
 };
 
