@@ -6,3 +6,18 @@ This part of the documentation deals with all the Ruby-parts, which contain:
 * level-scripting
 * AI-scripting
 * multi-player support
+
+== Entities
+The basic objects of the game, like trees, people, buildings and so forth are called entities.
+To read more about entities go here: link:files/ruby/entities/README.html
+
+== Map
+A map represents the complete world of BoA. It consists of:
+* a height-map
+* entities on the map
+* some game-logic, that holds everything in place
+
+To make things a little easier, it's implemented in several layers:
+* C++-HeightMap
+* C++-AntargisMap
+

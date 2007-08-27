@@ -18,20 +18,32 @@ The deciding differences to normal RTS-games like Warcraft are:
 == Overview
 
 The game is devided into several parts, which have each a specified purpose.
-These parts are:
-* a graphical-user-interface (GUI) library, which is called AntargisGUI
-* a 3d-engine
-* a c++-game-engine
-* the actual game-logic in ruby
-* much glue-code in ruby for menus, dialogs and the like 
+The main difference between parts is the language, in that they're written, C++ or Ruby.
 
-1. On information about Antargis GUI-lib go to link:files/gui/README.html
-2. Information about Antargis game-engine can be found at link:files/src/README.html
-3. Game logic, esp. Multiplayer, AI- and level-scripting: files/ruby/README.html
+The main language of BoA is Ruby. But because most low-level-libraries cannot directly be used by Ruby and
+for some things Ruby is just too slow, there are some parts of the Engine, that are written in C++.
+
+The game is parted into several layers, that shouldn't be mixed too much. These layers are:
+* external libraries (Ruby,SDL,libstdc++,...)
+* basic-lib, which includes basic functions like filesystem-access, basic geometry-processing, event-handling and so forth
+* math-lib - holding extended math-functions
+* video-lib - providing a (nearly) seamless usage of either OpenGL or plain (2D-) SDL-Mode for video-access
+* sound-lib - providing some simplified access to SDL_Mixer
+* gui-lib - a small gui-lib, that's pretty easy to use and designed for usage in games
+* 3dengine - a pretty small 3d-engine, that can be used for RTS-games (it's not designed to work for FPS or the like)
+* game-lib - basic functionality for RTS games. It includes those functions that are called frequently and thus must be pretty fast.
+
+The layers above are all done in C++. What now follows are the Ruby-parts:
+* much glue-code in ruby for menus, dialogs and the like 
+* game-logic
+
+1. On information about Antargis GUI-lib go to link:files/ext/gui/README.html
+2. Information about Antargis game-engine can be found at link:files/ext/game/README.html
+3. Game logic, esp. Multiplayer, AI- and level-scripting: link:files/ruby/README.html
 
 == Installation
 
-For installation and building have a look at the INSTALL file.
+For installation and building have a look at the link:files/INSTALL.html file.
 
 Run the game by simply starting antargis:
 > ./antargis

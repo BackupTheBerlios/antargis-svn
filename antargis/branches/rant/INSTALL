@@ -1,13 +1,14 @@
-INSTALLATION of Battles of Antargis
-==========================================
+== INSTALLATION of Battles of Antargis
 Quick Start:
-1) Install ruby, libsdl, libsdl-image, libsdl-ttf, libsdl-mixer, opengl.
-	You need the developer-packages of all these libraries/programs!
-  If you want to do serious developing you should install rant, too!
+
+1) Install ruby, libsdl, libsdl-image, libsdl-ttf, libsdl-mixer, opengl. You need the developer-packages of all these libraries/programs! If you want to do serious developing you should install rant, too!
+
 2) Don't forget to install ruby1.8-dev (or ruby1.9-dev if you use ruby 1.9)
+
 3) After this step no root-privileges are needed.
-4) If you have installed rant in step 1: Run "rant" in this directory
-   Otherwise: Run "ruby build.rb" in the current directory
+
+4) If you have installed rant in step 1: Run "rant" in this directory. Otherwise: Run "ruby build.rb" in the current directory
+
 5) Run "./antargis" in this directory
 
 Essentials: Ruby, (Rant)
@@ -15,10 +16,15 @@ This game is mostly written in Ruby (www.ruby-lang.org) and C++. It uses Rant (R
 
 Libraries: libSDL,libSDL_mixer libSDL_ttf, libSDL_image, opengl
 
-Links:
+== Links
 Ruby          http://www.ruby-lang.org
+
 Rant          http://rant.rubyforge.org/
+
 libSDL        http://www.libsdl.org
+
 libSDL-image  http://www.libsdl.org/projects/SDL_image
+
 libSDL-ttf    http://www.libsdl.org/projects/SDL_ttf
+
 libSDL-mixer  http://www.libsdl.org/projects/SDL_mixer
