@@ -26,9 +26,22 @@ require 'campaign.rb'
 require 'credits.rb'
 
 # AntMenuApp implements the whole menu-block of BoA
-# It uses the setMainWidget-function of AGApplication
-# This way the current menu can easily be exchanged.
-
+# It uses the setMainWidget-function of AGApplication to exchange
+# whole layouts of menus.
+#
+# These are the different layouts (description about each menu can be found in each of its setup-function)
+# * main - setupMain
+# * credits - setupCredits
+# * campaign - setupCampaign
+# * options - setupOptions
+# * load - setupLoadMenu
+# * single-game - setupSingle
+#
+# each layout has its own buttons and so forth. They are connected to event-handlers in the AntMenuApp-class.
+# These connections are done in the setup-functions. So any time each of the events can be handled. However
+# because at any time only one layout is displayed the other events won't be called. But you must be careful
+# not to name events the same!
+#
 class AntMenuApp <AntApplication
 	include AGHandler
 	def initialize
@@ -37,17 +50,11 @@ class AntMenuApp <AntApplication
 		@menues=[]
 		
 		# setup all the 
-		puts "SETUPMAIN"
 		setupMain
-		puts "SETUPCREDITS"
 		setupCredits
-		puts "SETUPCAMPAIGN"
 		setupCampaign
-		puts "SETUPOPTIONS"
 		setupOptions
-		puts "SETUPLOADMENU"
 		setupLoadMenu
-		puts "SETUPSINGLE"
 		setupSingle
 		@sound=true
 
@@ -55,6 +62,10 @@ class AntMenuApp <AntApplication
 		addHandler(getSoundManager,:sigMp3Finished,:eventMusicEnd)
 	end
 
+
+	# overrides AGWidget.setMainWidget, so that the given Widget *w* is
+	# embedded into an outer AGScreenWidget. The reason for this is
+	# redrawing AFAIK (?)
 	def setMainWidget(w)
 		if @myScreen.nil?
 			@myScreen||=AGScreenWidget.new
@@ -65,15 +76,14 @@ class AntMenuApp <AntApplication
 		@curMainWidget=w
 	end
 	
-	def eventMusicEnd
-		if @sound
-			getSoundManager.playMp3("data/music/calm1.ogg")
-		end
-		return true
-	end
 
 
-	# MAIN MENU
+	# :section: set up the menus
+
+
+	# this function sets up the main-menu layout of out data/gui/layout/mainmenu.xml
+	# * event handlers are initialized
+	# * the MainWidget is set to this menu at startup
 	def setupMain()
 		@mainMenu=AGLayout.new(nil)
 		@mainMenu.loadXML(loadFile("data/gui/layout/mainmenu.xml"))
@@ -86,41 +96,6 @@ class AntMenuApp <AntApplication
 		addHandler(@mainMenu.getChild("tutorial"),:sigClick,:eventTutorial)
 		addHandler(@mainMenu.getChild("load"),:sigClick,:eventLoadGame)
 		addHandler(@mainMenu.getChild("options"),:sigClick,:eventOptions)
-	end
-
-	def eventCredits(e)
-		setMainWidget(@creditsMenu)
-		return true
-	end
-	def eventSingle(e)
-		setMainWidget(@singleMenu)
-		return true
-	end
-
-	def eventTutorial(e)
-		tutCampaign=Campaign.new("data/campaigns/tutorial.xml")
-		soundOff
-		startCampaign(tutCampaign)
-		soundOn
-		return true
-	end
-
-	def eventCampaign(e)
-		setMainWidget(@campaignMenu)
-		return true
-	end
-	def eventLoadGame(e)
-		updateLoadMenu
-		setMainWidget(@loadMenu)
-		return true
-	end
-	def eventOptions(e)
-		setMainWidget(@optionsMenu)
-		return true
-	end
-	def eventQuit(e)
-		tryQuit
-		return true
 	end
 
 
@@ -221,6 +196,48 @@ class AntMenuApp <AntApplication
 		addHandler(@singleMenu.getChild("list"),:sigSelect,:eventLoadSelect)
 		updateSingleMenu
 	end
+
+	# OPTIONS MENU
+	def setupOptions
+		@optionsMenu=AGLayout.new(nil)
+		@optionSubMenus=["VideoOptionsMenu","AudioOptionsMenu","GameOptionsMenu"]
+		@optionsMenu.loadXML(loadFile("data/gui/layout/options.xml"))
+		@menues.push(@optionsMenu)
+		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)
+		
+		addHandler(@optionsMenu.getChild("fullscreen"),:sigClick,:eventFullscreen)
+		["640","800","1024","1280","1400"].each{|n|
+			addHandler(@optionsMenu.getChild(n),:sigClick,:eventResChange)
+		}
+		#addHandler(@optionsMenu.getChild("1280"),:sigClick,:eventResChange)
+		addHandler(@optionsMenu.getChild("1400"),:sigClick,:eventResChange)
+
+		addHandler(@optionsMenu.getChild("gameOptions"),:sigClick,:eventGameOptions)
+		addHandler(@optionsMenu.getChild("videoOptions"),:sigClick,:eventVideoOptions)
+
+		addHandler(@optionsMenu.getChild("optionIntro"),:sigClick,:eventOptionsChanged)
+
+		@optionsMenu.getChild("optionIntro").setChecked(getConfig.get("intro")!="false")
+
+		# texture quality
+		texQ=@optionsMenu.getChild("textureQuality")
+		texQ.setSelected({"1"=>"high","2"=>"medium","3"=>"low",nil=>"high",""=>"high"}[getConfig.get("terrainDownScaleExp")])
+		addHandler(texQ,:sigSelect,:eventTextureQuality)
+
+		# FBO
+		@optionsMenu.getChild("UseFBO").setChecked(getConfig.get("useFBO")=="true")
+		addHandler(@optionsMenu.getChild("UseFBO"),:sigClick,:eventOptionsChanged)
+		
+		# Anim
+		@optionsMenu.getChild("UseAnim").setChecked(getConfig.get("animationType")=="true")
+		addHandler(@optionsMenu.getChild("UseAnim"),:sigClick,:eventOptionsChanged)
+
+		# particle
+		@optionsMenu.getChild("UseParticle").setChecked(getConfig.get("particleEffects")=="true")
+		addHandler(@optionsMenu.getChild("UseParticle"),:sigClick,:eventOptionsChanged)
+	end
+
+
 	
 	def eventSingleStart(e)
 
@@ -296,45 +313,6 @@ class AntMenuApp <AntApplication
 	end
 	
 
-	# OPTIONS MENU
-	def setupOptions
-		@optionsMenu=AGLayout.new(nil)
-		@optionSubMenus=["VideoOptionsMenu","AudioOptionsMenu","GameOptionsMenu"]
-		@optionsMenu.loadXML(loadFile("data/gui/layout/options.xml"))
-		@menues.push(@optionsMenu)
-		addHandler(@optionsMenu.getChild("exit"),:sigClick,:eventExit)
-		
-		addHandler(@optionsMenu.getChild("fullscreen"),:sigClick,:eventFullscreen)
-		["640","800","1024","1280","1400"].each{|n|
-			addHandler(@optionsMenu.getChild(n),:sigClick,:eventResChange)
-		}
-		#addHandler(@optionsMenu.getChild("1280"),:sigClick,:eventResChange)
-		addHandler(@optionsMenu.getChild("1400"),:sigClick,:eventResChange)
-
-		addHandler(@optionsMenu.getChild("gameOptions"),:sigClick,:eventGameOptions)
-		addHandler(@optionsMenu.getChild("videoOptions"),:sigClick,:eventVideoOptions)
-
-		addHandler(@optionsMenu.getChild("optionIntro"),:sigClick,:eventOptionsChanged)
-
-		@optionsMenu.getChild("optionIntro").setChecked(getConfig.get("intro")!="false")
-
-		# texture quality
-		texQ=@optionsMenu.getChild("textureQuality")
-		texQ.setSelected({"1"=>"high","2"=>"medium","3"=>"low",nil=>"high",""=>"high"}[getConfig.get("terrainDownScaleExp")])
-		addHandler(texQ,:sigSelect,:eventTextureQuality)
-
-		# FBO
-		@optionsMenu.getChild("UseFBO").setChecked(getConfig.get("useFBO")=="true")
-		addHandler(@optionsMenu.getChild("UseFBO"),:sigClick,:eventOptionsChanged)
-		
-		# Anim
-		@optionsMenu.getChild("UseAnim").setChecked(getConfig.get("animationType")=="true")
-		addHandler(@optionsMenu.getChild("UseAnim"),:sigClick,:eventOptionsChanged)
-
-		# particle
-		@optionsMenu.getChild("UseParticle").setChecked(getConfig.get("particleEffects")=="true")
-		addHandler(@optionsMenu.getChild("UseParticle"),:sigClick,:eventOptionsChanged)
-	end
 	
 	def eventTextureQuality(e)
 		scale={"low"=>3,"medium"=>2,"high"=>1}[@optionsMenu.getChild("textureQuality").getSelected]
@@ -387,26 +365,14 @@ class AntMenuApp <AntApplication
 		end
 		return true
 	end
-	def setRes(w,h)
-		getMain.initVideo(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
-		getConfig.set("xRes",getMain.realWidth.to_s)
-		getConfig.set("yRes",getMain.realHeight.to_s)
-		puts getSurfaceManager.getUsedTexMem
-		#raise 1
-	end
 
 	
 
-	# all exits to mainmenu	
-	def eventExit(e)
-		setMainWidget(@mainMenu)
-		return true
-	end
-	def eventIdle
-		delay(20)
-		return true
-	end
 
+	# :section: Global Event Handlers
+
+	# simple frame-event-handler - only counts how much FPS we have
+	# and displays this on CLI
 	def eventFrame(t)
 		@frameTime||=0
 		@frames||=0
@@ -419,18 +385,105 @@ class AntMenuApp <AntApplication
 		end
 		return true
 	end
+	# idle-event - sets a delay of 20ms
+	def eventIdle
+		delay(20)
+		return true
+	end
 
+	# quits the application (is called by the Quit-button in the main-menu
+	# current you won't be asked if this is ok.
+	def eventQuit(e)
+		tryQuit
+		return true
+	end
+
+
+	# event-handler for end of music-playing
+	# start another track (a different one)
+	def eventMusicEnd
+		if @sound
+			getSoundManager.playMp3("data/music/calm1.ogg")
+		end
+		return true
+	end
+
+	# -------------------------------
+	# :section: Menu Event Handlers
+	# -------------------------------
+
+	# called by exit-button in submenus and always exits to mainmenu	
+	def eventExit(e)
+		setMainWidget(@mainMenu)
+		return true
+	end
+
+	# -------------------------------
+	# :section: Main Menu Event Handlers
+	# -------------------------------
+	def eventCredits(e)
+		setMainWidget(@creditsMenu)
+		return true
+	end
+	def eventSingle(e)
+		setMainWidget(@singleMenu)
+		return true
+	end
+
+	# start the tutorial-campaign directly for new users, so
+	# they won't have to deal with "campaigning", where tutorial can be found, too
+	def eventTutorial(e)
+		tutCampaign=Campaign.new("data/campaigns/tutorial.xml")
+		soundOff
+		startCampaign(tutCampaign)
+		soundOn
+		return true
+	end
+
+	def eventCampaign(e)
+		setMainWidget(@campaignMenu)
+		return true
+	end
+	def eventLoadGame(e)
+		updateLoadMenu
+		setMainWidget(@loadMenu)
+		return true
+	end
+	def eventOptions(e)
+		setMainWidget(@optionsMenu)
+		return true
+	end
+
+
+	
+protected
+	# -------------------------------
+	# :section: changing settings
+	# -------------------------------
+
+	# fades the sound out
 	def soundOff
 		@sound=false
 		getSoundManager.fadeOutMusic(1000)
 	end
+
+	# if there is music running it gets stopped
+	# and eventMusicEnd is called, so that a new track is started
 	def soundOn
 		@sound=true
 		getSoundManager.stopMp3
 		eventMusicEnd
 	end	
 
-	# load menu
+	# switch to the video-resolution with pixel-width *w* and height *h*
+	def setRes(w,h)
+		getMain.initVideo(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
+		getConfig.set("xRes",getMain.realWidth.to_s)
+		getConfig.set("yRes",getMain.realHeight.to_s)
+		puts getSurfaceManager.getUsedTexMem
+		#raise 1
+	end
+
 end
 
 app=AntMenuApp.new

@@ -1,31 +1,49 @@
 #
 # This is a library for simple build-configuration management.
-# For a brief example have a look at BoA's configure-script.
+# For a brief example have a look at BoA's configure-script (link:files/configure.html)
+# This file may contain some examples how to use this.
 # 
 # The configuration-process goes like this
-# 1) include this file
-# 2) define cmd-line-options with CFG.addOption
-# 3) add checks for programs, files, libraries (checkProgram, checkFile, checkLibrary)
-# 4) add custom-checks with addCheck(...)
-# 5) include basic-configuration functionality with CFG.includeConfig - have a look at build/configs/unix.rb for more information on this
-# 6) run the configuration with CFG.run - a config.rb file will be written 
-##
+#  1) include this file
+#  2) define cmd-line-options with CFG.addOption
+#  3) add checks for programs, files, libraries (checkProgram, checkFile, checkLibrary)
+#  4) add custom-checks with addCheck(...)
+#  5) include basic-configuration functionality with CFG.includeConfig - have a look at build/configs/unix.rb for more information on this
+#  6) run the configuration with CFG.run - a config.rb file will be written 
+#
 
 require 'build/platform.rb'
 require 'build/config_tools.rb'
 
+# the CFG-module serves with many functions that may be used in a configure script
 module CFG
 	@@options=[]
 	@@config={}
 	@@checks=[]
 
+	# add a cli-option with name *name* and short-cut *short*
+	# Example:
+	#  CFG.addOption("enable-debug","d",
+	#  	"enable debugging") do  ||
+	#  	  	CFG.set("debug",true)
+	#   end
+	# will result in an output like this:
+	#   -Battle of Antargis - Configuration
+  #   -------------------------------------------------------------------------------
+  #   --help, -h                              display help text
+	#   --enable-debug, -d                      enable debugging
+	# the given block *proc* will do whatever you define for instance setting debug to true in set configuration hash
 	def CFG.addOption(name,short,help,param=nil,default=nil,&proc)
 		@@options.push({:name=>name,:short=>short,:help=>help,:proc=>proc,:param=>param,:default=>default})
 	end
 
+	# return an array containing a hash, that describes, how the possible options will be checked
+	# have a loog at CFG.addOption
 	def CFG.options
 		@@options
 	end
+
+	# add check identified by *name*
 	def CFG.addCheck(name,needed=true,&proc)
 		@@checks << {:name=>name,:proc=>proc,:needed=>needed}
 	end
@@ -37,43 +55,7 @@ module CFG
 			end
 		}
 	end
-	def CFG.parseArgs
-		ARGV.each{|arg|
-			found=false
-			# parse single arguments like "-d" or "-dgh" (like tar -xfz)
-			if arg=~/^-[a-z]+$/
-				found=true
-				# check if all characters represent a correct option
-				arg[1..-1].scan(/./){|byte|
-					found=false if @@options.select{|op|op[:short]==byte}.length==0
-				}
-				if found
-					# all were ok, so call each these options
-					arg[1..-1].scan(/./){|byte|
-						@@options.each{|op|op[:proc].call if op[:short]==byte}
-					}
-				end
-			end
-			if not found
-				# option could not yet be processed, so do a second try
-				@@options.each{|op|
-					name=op[:name]
-					ename=name.gsub("+","\\\\+")
-					#puts "ENAME:#{ename}"
-					# parse "simple" options without parameters
-					if arg=~/^--#{ename}$/ or arg=~/^-#{op[:short]}$/
-						found=true
-						op[:proc].call
-					# parse options with parameter, given like this : "-d=<somedir>" or "--dir=bladir"
-					elsif arg=~/^--#{ename}=.+/ or arg=~/^-#{op[:short]}=.+$/
-						found=true
-						op[:proc].call(arg.gsub(/^[^=]+=/,""))
-					end
-				}
-			end
-			puts "ERROR: argument '#{arg}' could not be processed!" if not found
-		}
-	end
+
 
 	def CFG.checkDefaults
 		@@options.each{|op|
@@ -86,6 +68,7 @@ module CFG
 	def CFG.run
 		parseArgs
 		checkDefaults
+		checkCompile
 		ok=runChecks
 		saveConfig if ok
 	end
@@ -125,15 +108,6 @@ EOT
 	
 	end
 
-	def CFG.toS(v)
-		case v
-			when String
-				"'"+v.to_s+"'"
-			else
-				v.to_s
-		end
-	end
-
 	def CFG.set(n,v)
 		@@config[n]=v
 	end
@@ -156,18 +130,18 @@ EOT
 		end
 	end
 
-    def CFG.getPath
-        p=ENV['PATH']
-        psep={"/"=>":","\\"=>";"}[Dir.separator]
-        #puts p,p.class,psep
-        ps=p.split(psep)
-        #puts get("prefix")
-        ps << get("prefix")+Dir.separator+"bin" if get("prefix")
-        if Dir.separator=="\\"
-            ps << (Dir.pwd+"/build/win32/usr/bin").gsub("/",Dir.separator)
-        end
-        ps
-    end
+	def CFG.getPath
+			p=ENV['PATH']
+			psep={"/"=>":","\\"=>";"}[Dir.separator]
+			#puts p,p.class,psep
+			ps=p.split(psep)
+			#puts get("prefix")
+			ps << get("prefix")+Dir.separator+"bin" if get("prefix")
+			if Dir.separator=="\\"
+					ps << (Dir.pwd+"/build/win32/usr/bin").gsub("/",Dir.separator)
+			end
+			ps
+	end
 
 	def CFG.findProgram(program)
         #program+=".exe" if Dir.separator=="\\" and not program=~/\.\{exe|com|bat\}$/
@@ -185,6 +159,7 @@ EOT
 		#`whereis #{program}`.gsub(/[^:]*: */,"").split(" ")[0]
 	end
 
+	# check if +path+ exists. Maybe we should check, if +path+ is executable
 	def CFG.testProgram(path)
 		#puts path,File.exists?(path),"--"
 			File.exists?(path)
@@ -206,6 +181,8 @@ EOT
 		end
 	end
 
+	# *FIXME: implement this*
+	# This function will test if the compiler is able to compile.
 	def CFG.checkCompile
 		
 	end
@@ -218,6 +195,59 @@ EOT
 	def CFG.checkLibrary(libname)
 	end
 
+
+	private
+
+	# this function parses the cli-inputs
+	#
+	# *FIXME: replace this with the standard ruby-cli-input-parser
+	def CFG.parseArgs
+		ARGV.each{|arg|
+			found=false
+			# parse single arguments like "-d" or "-dgh" (like tar -xfz)
+			if arg=~/^-[a-z]+$/
+				found=true
+				# check if all characters represent a correct option
+				arg[1..-1].scan(/./){|byte|
+					found=false if @@options.select{|op|op[:short]==byte}.length==0
+				}
+				if found
+					# all were ok, so call each these options
+					arg[1..-1].scan(/./){|byte|
+						@@options.each{|op|op[:proc].call if op[:short]==byte}
+					}
+				end
+			end
+			if not found
+				# option could not yet be processed, so do a second try
+				@@options.each{|op|
+					name=op[:name]
+					ename=name.gsub("+","\\\\+")
+					#puts "ENAME:#{ename}"
+					# parse "simple" options without parameters
+					if arg=~/^--#{ename}$/ or arg=~/^-#{op[:short]}$/
+						found=true
+						op[:proc].call
+					# parse options with parameter, given like this : "-d=<somedir>" or "--dir=bladir"
+					elsif arg=~/^--#{ename}=.+/ or arg=~/^-#{op[:short]}=.+$/
+						found=true
+						op[:proc].call(arg.gsub(/^[^=]+=/,""))
+					end
+				}
+			end
+			puts "ERROR: argument '#{arg}' could not be processed!" if not found
+		}
+	end
+
+	# convert *v* into a string. used by CFG.saveConfig to write the config.rb
+	def CFG.toS(v)
+		case v
+			when String
+				"'"+v.to_s+"'"
+			else
+				v.to_s
+		end
+	end
 
 	addOption("help","h",
 		"display help text") do

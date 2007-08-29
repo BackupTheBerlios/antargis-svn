@@ -7,11 +7,22 @@ This part of the documentation deals with all the Ruby-parts, which contain:
 * AI-scripting
 * multi-player support
 
-== Entities
+== Global structure
+There are several different "applications" used when playing around with BoA.
+* you begin with an intro, that's run by IntroApp
+* after that you enter the menus, which are handled by AntMenuApp. There you can:: a) start a campaign, b) a single-map or c) load a game
+
+=== Campaigns
+* For more information about campaigns go ahead to Campaign.
+* For single-maps *FIXME*
+
+== BoA's world
+
+=== Entities
 The basic objects of the game, like trees, people, buildings and so forth are called entities.
 To read more about entities go here: link:files/ruby/entities/README.html
 
-== Map
+=== Map
 A map represents the complete world of BoA. It consists of:
 * a height-map
 * entities on the map

@@ -95,9 +95,7 @@ CFG.addOption("use-mkmf","",
 		CFG.gatherMkmfInfo
 	end
 
-
 CFG.includeConfig
-
 
 CFG.run
 

@@ -37,9 +37,9 @@ The layers above are all done in C++. What now follows are the Ruby-parts:
 * much glue-code in ruby for menus, dialogs and the like 
 * game-logic
 
-1. On information about Antargis GUI-lib go to link:files/ext/gui/README.html
-2. Information about Antargis game-engine can be found at link:files/ext/game/README.html
-3. Game logic, esp. Multiplayer, AI- and level-scripting: link:files/ruby/README.html
+1. link:files/ext/gui/README.html - information about Antargis GUI-lib
+2. link:files/ext/game/README.html - Information about Antargis game-engine
+3. link:files/ruby/README.html - Game logic, esp. Multiplayer, AI- and level-scripting, dialogs, menus...
 
 == Installation
 
@@ -47,3 +47,7 @@ For installation and building have a look at the link:files/INSTALL.html file.
 
 Run the game by simply starting antargis:
 > ./antargis
+
+== Building
+
+For more information on how to build Antargis and how the build-process work, please refer to link:files/build/README.html

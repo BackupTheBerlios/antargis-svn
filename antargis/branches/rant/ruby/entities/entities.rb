@@ -53,6 +53,25 @@ class AntRubyEntity<AntEntity
 
 		setHunger(0) # general entities have no hunger
 	end
+
+
+	# play a sound identified by +name+. Sounds of this type shouldn't called when they were only called
+	# +minDiff+ (or less) seconds before. Note that the sound is played at the place where this entity is placed.
+	# So it's not hearable far away from it.
+	def playSound(name,minDiff=0.5)
+		scene=getMap.getScene
+		d=((scene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
+		vol=1
+		if d>0
+			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
+		end
+		AntSound.playSoundGlobal(name,vol,minDiff)
+	end
+
+	
+	# :section: Editing
+
+	# Within the editor you can change additional properties, e.g. count of men for a hero. This functions are used for this.
 	def setXMLProp(n,v)
 		@xmlProps[n]=v
 	end
@@ -63,10 +82,8 @@ class AntRubyEntity<AntEntity
 			return @xmlProps[n]
 		end
 	end
-	def experienceFull
-		super
-		self.experience=1
-	end
+
+	# :section: XML loading/saving
 
 	def preloadXML(node)
 		if node.get("birthday")!=""
@@ -102,6 +119,7 @@ class AntRubyEntity<AntEntity
 	def <=>(e)
 		to_s<=>e.to_s
 	end
+
 	def menCount
 		0
 	end
@@ -140,6 +158,8 @@ class AntRubyEntity<AntEntity
 	def getMen
 		[]
 	end
+
+	
 	def setMode(mode)
 		@mode=mode
 	end
@@ -147,15 +167,6 @@ class AntRubyEntity<AntEntity
 		@mode
 	end
 
-	def playSound(name,minDiff=0.5)
-		scene=getMap.getScene
-		d=((scene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
-		vol=1
-		if d>0
-			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
-		end
-		AntSound.playSoundGlobal(name,vol,minDiff)
-	end
 
 
 	def isOnOpenWater(p=nil)
@@ -167,6 +178,10 @@ class AntRubyEntity<AntEntity
 	def isOnWater
 		getMap.getPos(getPos2D).z<0
 	end
+
+	# give name under which this entity is stored in xml. It's generated from the classname. The first character is downcased.
+	# The rest is camel-case as usual.
+	# For instace: AntShop => antShop
 	def xmlName
 		xml=self.class.to_s
 		xml=xml[0..0].downcase+xml[1..1000]
@@ -186,6 +201,14 @@ class AntRubyEntity<AntEntity
 		end
 	end
 
+	# :section: job-handling
+	# These functions add support for event-Handling within Entities' jobs. This is (will be) used for
+	# scripting and AI.
+	#	
+	# FIXME: THis should be moved somewhere else (?)
+	#
+	# For more information on scripting link:files/ruby/scripting/README.html
+
 	def newFightJob(p,target,distance)
 		@fightTarget=target
 		super
@@ -195,6 +218,8 @@ class AntRubyEntity<AntEntity
 		super
 		doEvent(:eventNewRestJob)
 	end
+
+	# :section eventHandling
 	def eventNoJob
 		super
 		doEvent(:eventNoJob)
@@ -204,22 +229,26 @@ class AntRubyEntity<AntEntity
 		doEvent(:eventJobFinished)
 	end
 
+	def experienceFull
+		super
+		self.experience=1
+	end
+
+
+	# :section: status-information
+
+	# an event-handler for resources being changed. In this case a possible view on the inventory is updated
 	def resourceChanged	
 		super
 		AntInventory.update(self)
 	end
 
+	# is this entity under attack - here this is always false, because it doesn't make sense for all entities
 	def underAttack
 		false
 	end
 
-# 	def _dump(depth)
-# 		[@uid].pack("n")
-# 	end
-# 	def _load(s)
-# 		getMap.getByUID(s.unpack("n"))
-# 	end
-
+	# :section: state-changes
 
 	def setMesh(subtype="",sym=nil)
 		if subtype.is_a?(SceneNode)
@@ -238,6 +267,11 @@ class AntRubyEntity<AntEntity
 		super(mesh=AntModels.createModel(t,subtype))
 		return mesh
 	end
+
+
+
+
+	# :section: deprecated
 
 
 	# FIXME: remove this - this is a backward-compability function 

@@ -3,22 +3,34 @@
 require 'ruby/antargislib.rb'
 require 'ant_local.rb'
 
-class Black<AGWidget
+# *BlackFade* fades the screen to black. This Widget is laid over other widgets and
+# draws a black rectangle with varying alpha-channel. This way you
+# can fade in and out pictures and text-displays.
+class BlackFade<AGWidget
+	# alpha-value is set to 0 by default
 	def initialize(p,r)
 		super(p,r)
 		@r=r
 		@alpha=0.0
 	end
+	# set the alpha-value *a* in range from 0.0 to 1.0
+	# the default-value is 0
 	def setAlpha(a)
 		@alpha=a
 		queryRedraw
 	end
+
+	# draws the black rectangle with set pre-set alpha-value
 	def draw(painter)
 		#painter.fillRect(@r,AGColor.new(0,0,0,0x1F))
 		painter.fillRect(@r,AGColor.new(0,0,0,(0xFF*@alpha).to_i))
 	end
 end
 
+
+# This application-class handles the display and event-handling of BoA's intro
+# It's able to display images and text-elements (that are drawn using the intro.font-Font from the theme)
+# Each image/text-element is faded-in and faded-out. While the intro runs some music-track is played
 class IntroApp<AntApplication
 	include AGHandler
 	def initialize
@@ -40,7 +52,7 @@ class IntroApp<AntApplication
 		}
 		@s=0
 		@img=AGImage.new(nil,AGRect.new(0,0,getScreen.getWidth,getScreen.getHeight),@surfaces[0],false)
-		@black=Black.new(@img,AGRect.new(0,0,getScreen.getWidth,getScreen.getHeight))
+		@black=BlackFade.new(@img,AGRect.new(0,0,getScreen.getWidth,getScreen.getHeight))
 		@img.addChild(@black)
 		setMainWidget(@img)
 		@time=0
@@ -56,19 +68,29 @@ class IntroApp<AntApplication
 		addHandler(getSoundManager,:sigMp3Finished,:musicEnd)
 	end
 	
+
+	# if a key was pressed, we cancel the intro playing
 	def eventKeyDown(e)
 		cancel
 		return super
 	end
 	
+	# cancel the intro
+	# resets the *@phases*
 	def cancel
 		@canceled=true
 		@phases=[0.2,0.2,2,10]
 	end	
+
+	# if the music has finished, we cancel the intro
 	def musicEnd
 		cancel
 	end
 	
+
+	# this function is called, when you press F10 to quit the application
+	# the first call cancels the intro (thus it will still fade out)
+	# the second call will quit the intro directly
 	def tryQuit
 		if @canceled
 			#getSoundManager.stopMp3
@@ -78,7 +100,11 @@ class IntroApp<AntApplication
 			cancel
 		end
 	end
-	
+
+	# this function does:
+	# * increase the phase - set alpha for BlackFade-Widget
+	# * switch to newer textures/text-elements
+	# * quit the intro, when its finished
 	def checkPhase
 		#puts "#{@time}>#{@phases[@phase]}"
 		if @time>@phases[@phase]
@@ -112,6 +138,7 @@ class IntroApp<AntApplication
 		@img.redraw
 	end
 	
+	# gets called in each frame (and sets a delay of 10ms between frames)
 	def eventFrame(t)
 		@time+=t
 		checkPhase
@@ -119,6 +146,7 @@ class IntroApp<AntApplication
 		return true
 	end
 
+	# when a mouse-button is clicked the intro is canceled
 	def eventMouseButtonDown(e)
 		tryQuit
 		return super(e)
