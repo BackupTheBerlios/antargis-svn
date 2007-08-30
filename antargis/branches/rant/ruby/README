@@ -9,8 +9,10 @@ This part of the documentation deals with all the Ruby-parts, which contain:
 
 == Global structure
 There are several different "applications" used when playing around with BoA.
-* you begin with an intro, that's run by IntroApp
-* after that you enter the menus, which are handled by AntMenuApp. There you can:: a) start a campaign, b) a single-map or c) load a game
+* IntroApp - BoA always begins with an intro
+* AntMenuApp - after the intro menus are displayed. There you can:: a) start a campaign, b) a single-map or c) load a game
+* Campaign - in case you selected a campaign, this class manages the its flow
+* AntGameApp - This class handles the actual game application.
 
 === Campaigns
 * For more information about campaigns go ahead to Campaign.

@@ -51,3 +51,7 @@ Run the game by simply starting antargis:
 == Building
 
 For more information on how to build Antargis and how the build-process work, please refer to link:files/build/README.html
+
+
+== Debugging
+Go to link:files/ruby/debugging/README.html

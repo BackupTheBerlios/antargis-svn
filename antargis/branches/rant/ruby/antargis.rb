@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-#
+#--
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
 # game.rb
@@ -17,13 +17,10 @@
 #
 # You should have received a copy of the GNU General Public
 # License along with this program.
-#
-
-#!/usr/bin/ruby
-
+#++
 #
 # antargis.rb is the central file in antargis-level-playing.
-# it contains the main-application object for in-game looping, etc.
+# it contains the main-application class AntGameApp for in-game looping, etc.
 # most of the GUI-events are processed here.
 #
 
@@ -32,6 +29,7 @@
 $programDir=Dir.pwd+"/ruby"
 $:.push($programDir)
 $:.push($programDir+"/entities")
+$:.push($programDir+"/widgets")
 
 require 'antargislib.rb'
 require 'dialogs.rb'
@@ -42,13 +40,18 @@ require 'game_result.rb'
 require 'storyflow.rb'
 require 'mpmap.rb'
 
+# get save path where savegames are stored
+# NOTE: this is combined with getWriteDir from ag_fs.h !
 def getSavePath
 	"savegames"
 end
 
 #
-# AntGameApp is the central class, that controls event handling of all the user interaction
-# in-game
+# AntGameApp is the central application-class in game. It controls:
+# * event handling of all the user interaction
+# * holds all the game-objects
+# * calls the advance-function in each frame
+# * it's derived from AntRubyView, which implements/manages the (3d-)displaying in-game
 #
 class AntGameApp <AntRubyView
 	attr_accessor :result
@@ -56,6 +59,23 @@ class AntGameApp <AntRubyView
 
 	include AGHandler
 
+	# creating an AntGameApp-object needs the following parameters:
+	# * *savegameText* - this is the actual level serialized in a string (the xml-text you see when you open an .antlvl-file)
+	#   it contains the height- and terrain-map, too. This has the advantage, that everything about a level is stored in one
+	#   text and can thus be transfered easily over internet 
+	# * *w* and *h* are the width and height of the screen, which is currently needed to init the underlying GLApp-class from C++
+	#   *FIXME:* this could be replaced by a call to getMain.getVideo.getWidth and such
+	# * *loadscreen* is a LoadApp-object (or nil); if it's set that indicates that a loadscreen (a progress bar) is displayed
+	# * *connection* is a network-connection to a BoA multiplayer-server for future networking-support. link:files/ruby/multiplayer/README.html
+	#
+	# this function does all the initializing of a level:
+	# * from the super-classes: create a scene (for more go to the parent-class)
+	# * display a load-screen (and set the progress)
+	# * create a AntMpMap object
+	# * create a displaying layout from data/gui/layout/ant_layout.xml
+	# * initializes some event-handlers (glue code between level-displaying and the game-world object of type AntMpMap
+	# * load the map fom *savegameText*
+	# * setup of the hero-display-list at the top of the screen
 	def initialize(savegameText,w,h,loadscreen=nil,connection=nil)
 		super(w,h)
 
@@ -589,7 +609,6 @@ class AntGameApp <AntRubyView
 	def selectHero(h)
 		@hero=h
 		inspectEntity(h)
-		@buttonpanel.setName(h.getName)
 		@buttonpanel.setHero(h)
 
 		for i in 0..2
@@ -615,7 +634,9 @@ class AntGameApp <AntRubyView
 end
 
 
-# this function is only for starting a level directly (mostly for testing purpose)
+# this function is only for starting a level directly (single map from the mainmenu or from cli)
+# you can start BoA from the cli by giving a level-name directly
+# For more information on that topic please refer to link:files/ruby/debugging/README.html
 def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 	app=nil
 	if clientConnection

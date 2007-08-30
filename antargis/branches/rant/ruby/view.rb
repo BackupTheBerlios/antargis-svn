@@ -29,6 +29,9 @@ require 'ant_inventory.rb'
 require 'ant_energy.rb'
 require 'terrain_2d.rb' # used in 2d-display, but needed anywhere
 
+require 'ant_buttonpanel.rb'
+require 'ant_name_display.rb'
+
 if (not MyAntargislib.opengl)
 	require 'two_d_app.rb'
 else
@@ -36,6 +39,10 @@ else
 	end
 end
 
+
+# AntRubyView is the central view class of antargis. It contains several sub-views like:
+# * AntButtonPanel
+# * FIXME
 class AntRubyView <AntBaseMapView
 	def initialize(w,h)
 		super(w,h)
@@ -198,147 +205,8 @@ getLayoutFactory.addCreator("antRubyView",AntRubyViewCreator.new)
 
 
 
-class AntButtonPanel<AGWidget
-	attr_reader :job
-	def initialize(p,r)
-		super(p,r)
-		setName("ButtonPanel")
-		puts self,self.class,respond_to?(:clearHandlers),self.is_a?(AGWidget),self.methods.join("//")
-		clearHandlers
-		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon","doBuild"]
-		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}
-		@inited=false
-		@agg=1
-
-		addSignal("sigAggressionChanged")
-		addSignal("sigJobChanged")
-
-		@hero=nil
-	end
-	def setHero(h)
-		@hero=h
-	end
-	def initHandlers
-		getChild("doAgg0").setChecked(true)
-		@job="doRest"
-		@jobButtons.each {|b|
-			c=getChild(b)
-			addHandler(c,:sigClick,:eventJobSelected)
-		}
-		@aggButtons.each {|b,a|
-			c=getChild(b)
-			addHandler(c,:sigClick,:eventAggSelected)
-		}
-	end
-	def prepareDraw
-		updateJobView
-		super
-	end
-	def setName(n)
-		if getChild("heroName")
-			getChild("heroName").setText(_(n))
-		end
-	end
-	
-	def eventJobSelected(e)
-		@job=e.getCaller.getName
-		sigJobChanged(e)
-		return true
-	end
-	def eventAggSelected(e)
-		@agg=@aggButtons[e.getCaller.getName]
-		sigAggressionChanged(e)
-		return true
-	end
-	
-	def setAggression(l)
-		l=l.to_i
-		@aggButtons.each{|n,b|
-			getChild(n).setChecked((b==l))
-		}
-		@agg=l
-	end
-	def getAggression()
-		return @agg
-	end
-	def setPointing
-		@job="doPoint"
-		getChild("doFight").setChecked(true)
-	end
-private
-	def updateJobView
-		return if @hero.nil?
-		if @hero.getJob
-			i=@hero.getJob.image
-		else
-			i="data/gui/bed.png"
-		end
-		if @job!=i
-			@job=i
-			getChild("jobView").setTexture(getTextureCache.get(i))
-		end
-	end
-end
-
-# factory for buttonpanel-widget
-class AntButtonPanelCreator<AGLayoutCreator
-	def create(p,r,n)
-		setResult AntButtonPanel.new(p,r)
-	end
-end
-getLayoutFactory.addCreator("antButtonPanel",AntButtonPanelCreator.new)
 
 
-class AntNameDisplay<AGWidget
-	@@fontChangeCount=0
-
-	def initialize(p,r,hero,map)
-		super(p,r)
-		@map=map
-		@hero=hero
-		@font=getTheme.getFont("heroName.font")
-		@oldfont=@font
-		@name=@hero.getName
-		addChild(@mb=AGButton.new(self,AGRect.new(0,0,width,height),_("")))
-		
-		@mb.setEnabled(false)
-		addChild(@textWidget=AGText.new(self,AGRect.new(0,0,width,height),AGStringUtf8.new(@hero.getName),@font))
-		
-		@fonts={true=>getTheme.getFont("heroName.font"),false=>getTheme.getFont("enemyHero.font")}
-		@oldPlayer=nil
-		setCaching(true)
-	end
-
-	# enforce integer position	
-	def setRect(r)
-		super(AGRect.new(r.x.to_i,r.y.to_i,r.w.to_i,r.h.to_i))
-	end
-	
-	def getText
-		@name
-	end
-
-	def prepareDraw
-		@font=@fonts[@hero.getPlayer==@map.getPlayer]
-		if @font!=@oldfont
-			puts "#{@hero.getPlayer} #{@map.getPlayer} #{@oldPlayer}"
-			puts "#{@font} #{@oldfont}"
-			@oldPlayer=@hero.getPlayer
-			puts "font changed"
-			@@fontChangeCount||=0
-			@@fontChangeCount+=1
-			if @@fontChangeCount>20
-				raise 1
-			end
-			@oldfont=@font
-			@textWidget.setFont(@font)
-			queryRedraw
-		end
-		super
-	end
-
-	private
-end
 
 class AntInfoBox<AGLayout
 	def initialize(p,n)

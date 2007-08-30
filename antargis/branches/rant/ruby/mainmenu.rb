@@ -1,7 +1,7 @@
-#
+#--
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
-# layout.rb
+# mainmenu.rb
 # by David Kamphausen (david.kamphausen@web.de)
 #
 # The "Antargis" project, including all files needed to compile it,
@@ -16,7 +16,7 @@
 #
 # You should have received a copy of the GNU General Public
 # License along with this program.
-#
+#++
 
 require 'ruby/antargislib.rb'
 $useMenu=true
@@ -292,6 +292,9 @@ class AntMenuApp <AntApplication
 			i+=1
 		}
 	end
+
+	# :section: Campaign Menu Event Handlers
+
 	def eventMission(e)
 		callerName=e.getCaller.getName
 		number=callerName[8..12].to_i
@@ -312,7 +315,7 @@ class AntMenuApp <AntApplication
 		return true
 	end
 	
-
+	# :section: Options Menu Event handlers
 	
 	def eventTextureQuality(e)
 		scale={"low"=>3,"medium"=>2,"high"=>1}[@optionsMenu.getChild("textureQuality").getSelected]
@@ -421,15 +424,17 @@ class AntMenuApp <AntApplication
 	# -------------------------------
 	# :section: Main Menu Event Handlers
 	# -------------------------------
+	
+	# open the credits screen
 	def eventCredits(e)
 		setMainWidget(@creditsMenu)
 		return true
 	end
+	# go to the single-game selection screen
 	def eventSingle(e)
 		setMainWidget(@singleMenu)
 		return true
 	end
-
 	# start the tutorial-campaign directly for new users, so
 	# they won't have to deal with "campaigning", where tutorial can be found, too
 	def eventTutorial(e)
@@ -439,16 +444,18 @@ class AntMenuApp <AntApplication
 		soundOn
 		return true
 	end
-
+	# go to the campaign-selection screen
 	def eventCampaign(e)
 		setMainWidget(@campaignMenu)
 		return true
 	end
+	# loading a game-screen will follow after this event
 	def eventLoadGame(e)
 		updateLoadMenu
 		setMainWidget(@loadMenu)
 		return true
 	end
+	# go to the options-screen
 	def eventOptions(e)
 		setMainWidget(@optionsMenu)
 		return true
