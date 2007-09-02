@@ -483,7 +483,7 @@ private
 
 	def createPathfinder
 		@path=CombinedPathFinder.new(self)
-		@path.displayPathfindingGraph(self,getScene)
+		#@path.displayPathfindingGraph(self,getScene)
 	end
 
 	def createPathfinderOLD

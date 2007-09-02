@@ -27,6 +27,9 @@
 
 require 'entities.rb'
 
+if false
+
+
 # Base class for high-level jobs. It contains the basic functions that're needed for usage within
 # AntBoss (AntHero and AntHouse)
 class AntHLJob
@@ -1121,5 +1124,7 @@ def newHLJobs
 	return false
 end
 
-#require 'ant_new_hljobs.rb'
+end
+
+require 'jobs/ant_new_hljobs.rb'
 

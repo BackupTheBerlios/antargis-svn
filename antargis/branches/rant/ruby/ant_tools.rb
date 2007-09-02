@@ -1,4 +1,4 @@
-require "ant_sound.rb"
+require "ruby/ant_sound.rb"
 
 def getMeshData(file,zoom,texture="",shadow=true)
 	id=file+":"+texture
@@ -72,9 +72,15 @@ def trace
 	puts "TRACE #{caller[0]}"
 end
 
-def assert(&block)
+class AntargisException<Exception
+	attr_accessor :text
+end
+
+def assert(text="",&block)
 	if not block.call
-		raise "Assertion #{block} failed in #{caller[0]} #{block.binding}"
+		exception=AntargisException.new
+		exception.text="#{text} #{block} failed in #{caller[0]} #{block.binding}"
+		raise exception
 	end
 end
 

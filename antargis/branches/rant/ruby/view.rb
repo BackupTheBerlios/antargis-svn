@@ -42,7 +42,9 @@ end
 
 # AntRubyView is the central view class of antargis. It contains several sub-views like:
 # * AntButtonPanel
+# * AntNameDisplay
 # * FIXME
+#
 class AntRubyView <AntBaseMapView
 	def initialize(w,h)
 		super(w,h)

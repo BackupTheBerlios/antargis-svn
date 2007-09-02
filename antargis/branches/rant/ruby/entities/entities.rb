@@ -38,9 +38,12 @@ class AntRubyEntity<AntEntity
 	end
 
 
-
-	def initialize(p)
-		super(p)
+	# create a new entity at the position *p*
+	# set some default settings
+	# get a unique ID
+	# loading must be done externally in loadXML !
+	def initialize(position)
+		super(position)
 		@xmlProps={}
 		@birthday=getMap.getTime
 		@mode=""
@@ -48,8 +51,6 @@ class AntRubyEntity<AntEntity
 		self.learnAmount=0.05
 	
 		@uid=getMap.getUniqueID
-
-		#self.experience=0
 
 		setHunger(0) # general entities have no hunger
 	end
@@ -115,7 +116,10 @@ class AntRubyEntity<AntEntity
 		_("This is an entity - no more info here.")
 	end
 
+	# :section: miscellanous
+
 	# simple comparison operator, so that ents can be distinguished
+	# for what is this needed ???
 	def <=>(e)
 		to_s<=>e.to_s
 	end
@@ -149,9 +153,12 @@ class AntRubyEntity<AntEntity
 		super
 		setMoraleStrength(v*2)
 	end
+
+	# get the age of this entity - computed from @birthday
 	def age
 		((getMap.getTime-@birthday).to_f/YEAR).to_i
 	end
+	# @birthday will be set according to the current date (get it by calling getMap.getTime)
 	def age=(years)
 		@birthday=getMap.getTime-years*YEAR
 	end
@@ -250,6 +257,10 @@ class AntRubyEntity<AntEntity
 
 	# :section: state-changes
 
+	# set a mesh for this entity - have a look at AntModels for more information on how this works
+	# * normally you give a subtype or nothing at all to this function and AntModels will take care of the right
+	#   mesh. *sym* override the current entities type.
+	# * you can pipe in a SceneNode-based object through *subtype* though this is no good !
 	def setMesh(subtype="",sym=nil)
 		if subtype.is_a?(SceneNode)
 			puts  "THIS SHOULD NOT BE USED ANY LONGER: setMesh(realMesh) !!!!!!!!!!!!"

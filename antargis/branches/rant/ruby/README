@@ -20,10 +20,6 @@ There are several different "applications" used when playing around with BoA.
 
 == BoA's world
 
-=== Entities
-The basic objects of the game, like trees, people, buildings and so forth are called entities.
-To read more about entities go here: link:files/ruby/entities/README.html
-
 === Map
 A map represents the complete world of BoA. It consists of:
 * a height-map
@@ -34,3 +30,11 @@ To make things a little easier, it's implemented in several layers:
 * C++-HeightMap
 * C++-AntargisMap
 
+
+=== Entities
+The basic objects of the game, like trees, people, buildings and so forth are called entities.
+To read more about entities go here: link:files/ruby/entities/README.html
+
+=== Jobs
+Each entity has a job, a low-level-job (LLJob) to be more specific. Certain entities additionally have high-level-jobs (HLJobs).
+For more information on this topic head on to link:files/ruby/jobs/README.html
