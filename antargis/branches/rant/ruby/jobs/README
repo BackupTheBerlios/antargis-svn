@@ -1,0 +1,10 @@
+== High level jobs
+What high level jobs (further named as HLJobs) are or do:
+* assigned to AntBoss objects only (heroes and buildings (or maybe Villages in future ?))
+* organize all men that are assigned to this with low-level-jobs (LLJobs)
+* each AntBoss can have only one HLJob at a time.
+
+High level jobs are organized as state-machines. These state-machines are handled by BaseMachine.
+A job-base-class (AntNewHLJob) is derived from that. 
+
+
