@@ -31,6 +31,12 @@
 #include "ag_rubyobj.h"
 #include <ag_string.h>
 
+#if SDL_COMPILEDVERSION>1300
+#define MSDLMod Uint16
+#else
+#define MSDLMod SDLMod
+#endif
+
 class AGListener;
 class AGSignal;
 
@@ -64,7 +70,7 @@ class AGEXPORT AGEvent
 
   AGVector2 getMousePosition() const;
   SDLKey getKey() const;
-  SDLMod getMod() const;
+  MSDLMod getMod() const;
   Uint16 getUnicode() const;
   int getButton() const;
 

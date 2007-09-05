@@ -27,7 +27,7 @@
 
 require 'entities.rb'
 
-if false
+if true
 
 
 # Base class for high-level jobs. It contains the basic functions that're needed for usage within
@@ -1126,5 +1126,5 @@ end
 
 end
 
-require 'jobs/ant_new_hljobs.rb'
+#require 'jobs/ant_new_hljobs.rb'
 

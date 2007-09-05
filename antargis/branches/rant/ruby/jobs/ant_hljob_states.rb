@@ -17,7 +17,7 @@ end
 
 module HLJob_Additions
 	attr_accessor :machine
-	["hero","allMen","getTime","targetPos","targetPos=","formatDir","formatDir=","target"].each{|n|wrap "machine",n}
+	["getRand","hero","allMen","getTime","targetPos","targetPos=","formatDir","formatDir=","target"].each{|n|wrap "machine",n}
 end
 
 class HLJob_BaseState
@@ -726,6 +726,7 @@ end
 
 class HLJob_Recruit<HLJob_BaseState
 	def enter
+		raise "IMPLEMENT ME"
 	end
 	
 	private

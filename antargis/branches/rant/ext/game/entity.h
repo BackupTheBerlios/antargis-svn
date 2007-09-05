@@ -175,6 +175,7 @@ class AGEXPORT AntEntity:public AGRubyObject
     virtual void resourceChanged();
 
     bool hasJob() const;
+    AGString getJobName() const;
 
     AGRect2 getRect() const;
 

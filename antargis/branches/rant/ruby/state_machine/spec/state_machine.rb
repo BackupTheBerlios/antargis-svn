@@ -74,7 +74,7 @@ class MockState<StateMachineNode
 	def finished=(f)
 		@finished=f
 	end
-	def isFinished?
+	def ready
 		@finished
 	end
 
@@ -194,7 +194,7 @@ class DelayState<StateMachineNode
 		t-=d
 		t
 	end
-	def isFinished?
+	def ready
 		@time<=0
 	end
 end

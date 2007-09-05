@@ -19,10 +19,14 @@ class StateMachineNode
 	def eventLeave
 	end
 	def eventFrame(t)
-		t	
+		#raise "should not be used!"
+		t-0.5
 	end
 
-	def isFinished?
+	def assign(entity)
+	end
+
+	def ready
 		true
 	end
 
@@ -123,6 +127,7 @@ class StateMachine
 	MAX_LOOPS=20
 	attr_reader :finished
 	attr_accessor :dict
+	attr_accessor :debug
 
 	def initialize(definition)
 		assert{definition.is_a?(StateMachineDefinition)}
@@ -141,11 +146,12 @@ class StateMachine
 		while restTime>0 and loops<MAX_LOOPS
 			if not @started
 				@started=true
+				puts "#{@currentNode.id}.eventEnter" if @debug
 				@currentNode.eventEnter
 			end
 			restTime=@currentNode.eventFrame(restTime)
 			assert{restTime.is_a?(Numeric)}
-			if @currentNode.isFinished?
+			if @currentNode.ready
 				output=@currentNode.output
 				nextNodeName=@definition.getNextNode(@currentNode.id,output)
 				#sputs "FROM #{@currentNode.id} TO #{nextNodeName}"

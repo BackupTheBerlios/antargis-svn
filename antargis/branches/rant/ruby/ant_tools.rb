@@ -74,6 +74,10 @@ end
 
 class AntargisException<Exception
 	attr_accessor :text
+	
+	def to_s
+		super+":"+text.to_s
+	end
 end
 
 def assert(text="",&block)

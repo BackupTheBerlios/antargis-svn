@@ -225,7 +225,7 @@ class AntBoss<AntRubyEntity
 	
 	def assignJob2All
 		if getMap
-			getMap.eventNewJobAssignedToBoss(self)
+			getMap.eventNewJobAssignedToBoss(self) if getMap.respond_to?(:eventNewJobAssignedToBoss)
 		end
 
 		begin

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-#
+#--
 # Copyright (c) 2005 by David Kamphausen. All rights reserved.
 #
 # create_interface.rb
@@ -17,17 +17,27 @@
 #
 # You should have received a copy of the GNU General Public
 # License along with this program.
+#++
+# == Short Description
+# This ruby-script generates swig-interface (input)-files out of
+# C++-header files.
+# The header-files to include are marked with INCLUDE_SWIG somewhere in the file.
+# Apart from simple including classes that are derived from AGRubyObject get
+# a special treatment to be handled within the garbage collection.
 #
-
-# = Short Description =
-# 
-
-
-
 
 require 'build/interface_template.rb'
 require 'build/base_tools.rb'
 require 'find.rb'
+
+def vputs(*a)
+	puts *a if $verbose
+end
+
+def iputs(*a)
+	print "   "
+	puts *a
+end
 
 class MyInput
 	attr_reader :swigInput, :outputDir
@@ -43,12 +53,15 @@ class MyInput
 					@outputDir=a[3..-1]
 				when /^-i=/
 					@swigInput=a[3..-1]
+				when /^-v$/
+					$verbose=true
 				when /^-h/, /^--help/
 					@help=true
 					puts "Arguments:"
 					puts " -h, --help     print this help"
 					puts " -d=<DIR>       define output-directory"
 					puts " -i=<SWIGFILE>  define SWIG-input-file (swig.h) - can be set multiple times"
+					puts " -v             verbose output"
 			end
 		}
 
@@ -61,7 +74,6 @@ class MyInput
 
 	def interfaceName
 		name=@outputDir+Dir.separator+"interface.i"
-		puts "INTERFACENAME:",name
 		name
 	end
 
@@ -77,10 +89,9 @@ class MyInput
 end
 
 def getFiles(dir)
-    pattern=dir+"/"+"*.h"
+	pattern=dir+"/"+"*.h"
 	files=Dir[pattern].select{|f|not f=~/swig.h/} #-[dir+Dir.separator+"swig.h"]
-    #puts "getFiles #{dir}",pattern,"--",files,"----"
-    files  
+	files  
 end
 
 ## check if the given string is contained in the file specified by filename
@@ -183,7 +194,7 @@ class ParsedClasses
 	end
 
 	def initLevels
-		puts "initLevels..."
+		vputs "initLevels..."
 		@levels={}
 		@levels["AGRubyObject"]=0
 		spreadLevels
@@ -214,24 +225,6 @@ class ParsedClasses
 		end
 
 		l=@levels.values.max
-
-		# 		# output levels
-		# 		(0..l).each{|i|
-		# 			@levels.each{|n,level|
-		# 				if level==i
-		# 					puts "#{i} #{n}"
-		# 				end
-		# 			}
-		# 		}
-		# 		# check for failed classes
-		# 		failed=false
-		# 		@classList.each{|c|
-		# 			if @levels[c].nil?
-		# 				puts "-- #{c}"
-		# 				failed=true
-		# 			end
-		# 		}
-		# 		raise "Non processes classes found!" if failed
 	end
 
 	# in correct order
@@ -241,14 +234,14 @@ class ParsedClasses
 		files=[]
 		l=@levels.values.max
 		(0..l).each{|i|
-            puts "LEVEL #{i}"
+            vputs "LEVEL #{i}"
 			@levels.each{|n,level|
 				if level==i and @class2File[n]
-                    puts n
+                    vputs n
 					files << @class2File[n]
 				end
 			}
-            puts "----"
+            vputs "----"
 		}
 
 		# add files of classes with unknown level
@@ -257,20 +250,20 @@ class ParsedClasses
 				files << @class2File[c]
 			end
 		}
-        puts "myfiles:",@myfiles,"---"
+        vputs "myfiles:",@myfiles,"---"
         
-        puts "FILES:",files,"---"
+        vputs "FILES:",files,"---"
 		files=files.select{|f|@myfiles.member?(f)} # select only "my" files - those included in this directory
-        puts "FILES after select:",files,"---"
+        vputs "FILES after select:",files,"---"
 		addfiles=@files-files
 		files+=addfiles                            # add files that are in other directories
-        puts "FILES (add:",files,"---"
+        vputs "FILES (add:",files,"---"
 
 		# unique the array
 		if files.length>0
 			files.uniq!
 		end
-        puts "FILES (uniq):",files,"---"
+        vputs "FILES (uniq):",files,"---"
 
 		files
 	end
@@ -323,13 +316,21 @@ def findFilesWith(str)
     #Dir["*/*"].collect{|f|f.gsub(/\/.*/,"")}.uniq
 end
 
-
+iputs "processing input parameter..."
 myInput=MyInput.new
 
+iputs "getting input interface files (of current directory #{myInput.outputDir})..."
 files=getSwigInterfaceFiles(getFiles(myInput.outputDir))
-
-
+vputs "--"
+vputs files.join("\n")
+vputs "--"
+iputs "found #{files.length} files"
+iputs "filtering INCLUDE_SWIG to get header files (all of the whole project)..."
 cfiles=findFilesWith("INCLUDE_SWIG")
+iputs "found #{cfiles.length} files"
+vputs "--"
+vputs cfiles.join("\n")
+vputs "--"
 #exit
 
 #parsedClasses=ParsedClasses.new(files,`find $(pwd) -name "*.h"|grep -v swig`.split("\n"))
@@ -338,9 +339,9 @@ files=parsedClasses.getFileList
 
 addfiles=[]
 myInput.swigInput.each{|inDir|
-    puts "inDir #{inDir}"
+  vputs "inDir #{inDir}"
 	pattern=getDirUnix(inDir)+"/*.h"
-	puts "PATTERN:",pattern,"!!!!"
+	vputs "PATTERN:",pattern,"!!!!"
 	addfiles+=Dir[pattern].select{|f|not f=~/swig.h/}.select{|f|File.open(f).read=~/INCLUDE_SWIG/}
 }
 

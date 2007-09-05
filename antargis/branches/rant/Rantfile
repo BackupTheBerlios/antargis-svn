@@ -229,7 +229,7 @@ gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
 
 	incs="-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR}"
 	out=".deps"+Dir.separator+sys.expand_path(t.name).gsub("/","_")
-	cmd=makeCommand("SWIGDEPS",out,incs+" "+sys.expand_path(t.name.gsub(/[0-9_a-z]*\.h$/,"interface.i")))
+	cmd=makeCommand("SWIGDEPS",out,incs+" "+sys.expand_path(t.name.gsub(/[0-9_a-z]*\.(h|cc)$/,"interface.i")))
 	sys cmd
 	puts
 

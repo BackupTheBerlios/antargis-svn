@@ -29,6 +29,10 @@ class AntNewHLJob<BaseMachine
 	def hero
 		@hero
 	end
+	
+	def getRand
+		@hero.getRand
+	end
 
 	def stopJob
 		@stopped=true

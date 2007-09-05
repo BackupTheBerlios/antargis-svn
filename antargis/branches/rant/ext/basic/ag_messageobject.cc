@@ -117,7 +117,7 @@ SDLKey AGEvent::getKey() const
   return mEvent.key.keysym.sym;
 }
 
-SDLMod AGEvent::getMod() const
+MSDLMod AGEvent::getMod() const
 {
   assert(eventOk(mEvent));
   return mEvent.key.keysym.mod;
@@ -471,7 +471,7 @@ SDL_keysym toKeysym(const AGString &s)
   AGString b=s;
   k.scancode=getUntil(b,":").toUint8();
   k.sym=(SDLKey)getUntil(b,":").toUint8();
-  k.mod=(SDLMod)getUntil(b,":").toUint8();
+  k.mod=(MSDLMod)getUntil(b,":").toUint8();
   k.unicode=getUntil(b,":").toSint16();
   
 

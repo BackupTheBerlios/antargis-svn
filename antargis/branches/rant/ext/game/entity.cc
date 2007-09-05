@@ -544,6 +544,14 @@ bool AntEntity::hasJob() const
         return mJob;
       }
 
+AGString AntEntity::getJobName() const
+{
+  if(mJob)
+    return mJob->xmlName();
+  return "";
+}
+
+
 float AntEntity::getHealSpeed() const
       {
         return mHealSpeed;

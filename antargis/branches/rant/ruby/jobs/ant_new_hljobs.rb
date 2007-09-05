@@ -257,6 +257,8 @@ end
 
 
 
+
+
 # AntHeroFightAnimalJobOld=AntHeroFightAnimalJob
 # AntHeroFightAnimalJob=AntNewHLKillAnimal
 # 
@@ -265,9 +267,44 @@ AntHeroFightJobOld=AntHeroFightJob
 rescue;end
 AntHeroFightJob=AntNewHLFight
 
-if false
+class AntNewHLRecruitJob<AntNewHLJob
+	state :moveComplete=>	HLJob_MoveComplete
+	state :recruit=>HLJob_Recruit
+	state :endState => HLJob_DummyState
+
+	startState :moveComplete
+	endState :endState
+
+	edge :moveComplete,:endState
+
+	attr_accessor :targetPos
+	attr_accessor :formatDir
+	attr_accessor :target
+
+	def initialize(hero,target)
+		@targetPos=target.getPos2D
+		@target=target
+		super(hero)
+		@states[:moveComplete].near=4
+		
+		if (hero.getPos2D-target.getPos2D).length<4
+			state.moveDirectly			
+		end
+	end
+	# FIXME: move this to a config-file !
+	def image
+		"data/gui/move.png"
+	end
+	# FIXME: discard this
+	def makeMessage(boss)
+		MoveMessage.new(boss,targetPos,@dist)
+	end
 
 end
+begin
+AntHeroRecruitJobOld=AntHeroRecruitJob
+rescue ; end
+AntHeroRecruitJob=AntNewHLRecruitJob
 
 
 # FIXME:
