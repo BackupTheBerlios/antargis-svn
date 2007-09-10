@@ -21,6 +21,7 @@
 require 'ant_player.rb'
 require 'ant_trigger.rb'
 require 'ant_level.rb'
+require 'entity.rb'
 
 require 'ant_ai.rb'
 require 'ant_path.rb'
@@ -48,22 +49,29 @@ end
 
 # AntRubyMap is not only the "map", but manages the moving and the actions of all the
 # entities around. Apart from that it contains the Players. So it might be better to call it "World"
+# It might be important to mention, that currently only one map at a moment is supported, because
+# AntRubyEntity contains a pointer the current instance - this makes it possible that all entities can
+# access the map through getMap - FIXME
 class AntRubyMap<AntMap
 	attr_accessor :pause,:players
 	attr_reader :path
 
 	def initialize(app,pScene,w,h,playerName="Rowen")
-		assert{app.is_a?(AGApplication)}
-		assert{pScene.is_a?(SceneBase)}
+# 		assert{app.is_a?(AGApplication)}
+# 		assert{pScene.is_a?(SceneBase)}
 		assert{w.is_a?(Numeric)}
 		assert{h.is_a?(Numeric)}
+
+		if pScene.nil?
+			require 'ant_mock.rb'
+		end
 
 		super(pScene,w,h)
 		@pause=false # is game paused
 		@app=app
 
 		@@systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
-		@curTime=0.0     # curTime holds the current "date" of the world; the age of entities is measures by this
+		@curTime=0.0      # curTime holds the current "date" of the world; the age of entities is measures by this
 
 		@playerName=playerName
 		@players=[]

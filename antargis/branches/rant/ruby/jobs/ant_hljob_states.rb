@@ -15,6 +15,17 @@ class Module
 end
 
 
+# class Object
+# 	def describe(t,&block)
+# 		if block
+# 			puts t
+# 			block.call
+# 		else
+# 			puts "WARNING: #{t} not implemented"
+# 		end
+# 	end
+# end
+
 module HLJob_Additions
 	attr_accessor :machine
 	["getRand","hero","allMen","getTime","targetPos","targetPos=","formatDir","formatDir=","target"].each{|n|wrap "machine",n}
@@ -30,6 +41,7 @@ class HLJob_BaseState
 			puts "TRACE #{caller[0]} #{self} #{hero} #{getTime}"
 		end
 	end
+
 end
 
 class HLJob_DummyState<HLJob_BaseState
@@ -724,14 +736,95 @@ class HLJob_Fight<HLJob_BaseState
 end
 
 
+#
+# Recruiting goes like follows:
+# 
+#
 class HLJob_Recruit<HLJob_BaseState
 	def enter
-		raise "IMPLEMENT ME"
+#		describe "Initialize state-vars: countToRecruit" do
+			@countTargetMen=target.getMen.length
+			@countRecruiting=0
+			@countRecruited=0
+			@myPos=hero.getPos2D
+#		end
+		initRecruiting
 	end
-	
+
+	def ready
+		((@countRecruited>=howManyToRecruit) or nonToRecruitLeft) and (hero.getPos2D-hero.getFormation(hero,@myPos)).length<0.1
+	end
+
+	def assign(man)
+		if checkRecruited(man)
+			returnToStart(man)
+			return
+		end
+
+		if (not ready)
+			letRecruit(man)
+		else
+			returnToStart(man)
+		end
+	end
+
 	private
-	def recruitGetMen
-		
+
+	def howManyToRecruit
+		@countTargetMen*hero.getAggression/3
+	end
+
+	def checkRecruited(man)
+		if man.hlJobMode[:recruitTarget]
+			target=man.hlJobMode[:recruitTarget]
+			target.setBoss(hero)
+			target.hlJobMode[:recruitTarget]=nil
+			man.hlJobMode[:recruitTarget]=nil
+			returnToStart(target)
+			@countRecruited+=1
+			return true
+		end
+		return false
+	end
+
+	def returnToStart(man)
+		pos=hero.getFormation(man,@myPos)
+		if (man.getPos2D-pos).length<0.1
+			man.lookTo(@myPos)
+			man.standStill
+		else
+			man.walkTo(pos)
+		end
+	end
+
+	def getAssignableTargets
+		target.getMen-hero.getMen.map{|man|man.getTarget}		
+	end
+
+	def nonToRecruitLeft
+		getAssignableTargets==0
+	end
+
+	def getNext(man,targets)
+		targets.min{|a,b|(a.getPos2D-man.getPos2D).length<=>(b.getPos2D-man.getPos2D).length}
+	end
+
+	def letRecruit(man)
+		target=getNext(man,getAssignableTargets)
+		if target
+			man.hlJobMode[:recruitTarget]=target
+			man.newMoveJob(0,target,1)
+			@countRecruiting=@countRecruiting+1
+		end
+	end
+
+	def initRecruiting
+		hero.getMen.each{|man|man.hlJobMode[:recruitTarget]=nil}
+		# hero at last
+		hero.getMen.reverse.each{|man|
+			letRecruit(man)
+			break if @countRecruiting>=howManyToRecruit
+		}
 	end
 end
 

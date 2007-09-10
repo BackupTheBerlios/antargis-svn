@@ -25,14 +25,14 @@ MiniMap::~MiniMap()
 
 bool MiniMap::mapChangedComplete(AGEvent *e)
 {
-  CTRACE;
+  //  CTRACE;
   mapChangedP(true);
   return false;
 }
   
 bool MiniMap::mapChanged(AGEvent *e)
 {
-  CTRACE;
+  //  CTRACE;
   mapChangedP(false);
   return false;
 }
@@ -44,7 +44,7 @@ float MiniMap::getNoise(int x,int y)
 
 void MiniMap::mapChangedP(bool forceFull=false)
 {
-  CTRACE;
+  //  CTRACE;
   if(!mMap)
     return;
   int w,h;
@@ -365,14 +365,14 @@ public:
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
   {
-    CTRACE;
+    //    CTRACE;
     setResult(new MiniMap(pParent,pRect,0));
   }
 };
 
 void registerMinimapCreator()
 {
-	TRACE;
+  //	TRACE;
   getLayoutFactory()->addCreator("miniMap",new AGMiniMapLayoutCreator);
 }
 

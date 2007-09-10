@@ -167,10 +167,12 @@ def getGrassMeshData(size,many=4,texture=nil,bush=false)
 end
 
 def makeGrassMesh(size=0.4)
+	return nil if getMap.getScene.nil?
 	return Mesh.new(getMap.getScene,getGrassMeshData(size,4,"data/textures/models/high_grass2.png"),AGVector4.new(0,0,0,0),0)
 end
 
 def makeBushMesh(size=0.4)
+	return nil if getMap.getScene.nil?
 	return Mesh.new(getMap.getScene,getGrassMeshData(size,1,"data/textures/models/bush5.png",true),AGVector4.new(0,0,0,0),0)
 end
 
@@ -189,6 +191,7 @@ class AntGrass<AntRubyEntity
 		setupMesh
 	end
 	def resourceChanged
+		super
 		setupMesh
 	end
 	

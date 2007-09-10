@@ -78,6 +78,7 @@ end
 
 
 def makeRingMesh
+	return nil if getMap.getScene.nil?
 	return AntModels.createModel(:sack) if not opengl # FIXME
 	mesh=ColoredMesh.new(getMap.getScene,RingData.getRingData,AGVector4.new(0,0,0,0),0)
 	mesh.setOrder(RING_Z)
@@ -85,6 +86,7 @@ def makeRingMesh
 end
 
 def makeBigRingMesh
+	return nil if getMap.getScene.nil?
 	return AntModels.createModel(:sack) if not opengl # FIXME
 	mesh=ColoredMesh.new(getMap.getScene,RingData.getRingData(4),AGVector4.new(0,0,0,0),0)
 	mesh.setOrder(RING_Z)

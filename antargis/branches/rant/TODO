@@ -1,6 +1,9 @@
-* introduce path-finder with water
+* configure -
+	* make mkmf as default
+	* redesign addOption to ???
+	
 
-* download allinoneruby.rb
+
 * build allinoneruby.exe
 * put ag_sdl*.tar.gz into svn
 * put up instructions into wiki

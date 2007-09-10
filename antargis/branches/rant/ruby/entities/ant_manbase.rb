@@ -62,6 +62,10 @@ module AntManBase
 		setMeshState("sitdown")
 	end
 
+	def lookTo(p)
+		setDirection(180-(p-getPos2D).normalized.getAngle.angle*180.0/Math::PI)
+	end
+
 	def walkTo(p)
 		newMoveJob(0,p,0)
 	end

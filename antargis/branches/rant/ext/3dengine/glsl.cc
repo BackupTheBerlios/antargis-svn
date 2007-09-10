@@ -155,11 +155,10 @@ void AntShaderProgram::takeDown()
 {
   disable();
   CTRACE;
-  cdebug("name:"<<name);
+  //  cdebug("name:"<<name);
   if(glslOk() && !hasQuit())
     glDeleteObjectARB(p);
-  cdebug("name:"<<name);
-  cdebug("name:"<<name);
+  //  cdebug("name:"<<name);
   delete vertex;
   delete frag;
 }

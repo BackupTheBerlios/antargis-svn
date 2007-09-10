@@ -24,6 +24,7 @@ class AntTower<AntHouse
 			setProvide(r,resource.get(r)>0)
 			puts provides(r)
 		}
+		super
 	end
 
 	###############################

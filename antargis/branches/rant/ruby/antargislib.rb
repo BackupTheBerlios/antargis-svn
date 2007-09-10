@@ -10,7 +10,6 @@ module MyAntargisLib
 	@@antargislibinited||=false
 
 	if not @@antargislibinited
-		puts "MYTRY"
 		# try suspending arts
 		if File.exists?("/usr/bin/artsshell")
 			File.popen("/usr/bin/artsshell suspend 2>&1").close
@@ -19,6 +18,7 @@ module MyAntargisLib
 		@@programDir=Dir.pwd+"/ruby"
 		# add programdir to path
 		$:.push(@@programDir)
+		$:.push(@@programDir+"/entities")
 
 		@@extDir=Dir.pwd+"/ext"
 		# add programdir to path

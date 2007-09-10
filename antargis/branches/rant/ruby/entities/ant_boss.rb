@@ -147,6 +147,7 @@ class AntBoss<AntRubyEntity
 				@job.check(man)
 			end
 		end
+		resourceChanged
 	end
 	
 	def removeMan(man)
@@ -154,6 +155,8 @@ class AntBoss<AntRubyEntity
 		if @job
 			@job.delete(man)
 		end
+		resourceChanged
+		#raise 1
 	end
 	
 	def setPlayer(player)
@@ -281,6 +284,7 @@ class AntBoss<AntRubyEntity
 
 	def setupRing
 		@ring=getRing
+		return if @ring.nil?
 		if @selected
 			#f6c108
 			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))

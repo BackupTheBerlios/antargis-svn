@@ -5,7 +5,7 @@
 
 AGSingleton::AGSingleton()
 {
-  CTRACE;
+  //  CTRACE;
   assert(hasMain());
   assert(getMain()->getCollector());
 

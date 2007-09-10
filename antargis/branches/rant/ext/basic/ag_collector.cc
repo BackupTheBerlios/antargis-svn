@@ -5,26 +5,26 @@
 
 void AGCollector::insertGlobal(AGRubyObject *pObject)
 {
-  CTRACE;
+  //  CTRACE;
   mGlobals.insert(pObject);
 }
 
 void AGCollector::removeGlobal(AGRubyObject *pObject)
 {
-  CTRACE;
+  //  CTRACE;
   mGlobals.erase(pObject);
 }
 
 void AGCollector::mark()
 {
-  CTRACE;
+  //  CTRACE;
   for(std::set<AGRubyObject*>::iterator i=mGlobals.begin();i!=mGlobals.end();i++)
     markObject(*i);
 }
 
 AGCollector *getCollector()
 {
-	if(getMain())
-		return getMain()->getCollector();
-	return 0;
+  if(getMain())
+    return getMain()->getCollector();
+  return 0;
 }

@@ -13,6 +13,7 @@ class AntBakery<AntHouse
 	end
 	
 	def setupMesh
+		return if getScene.nil?
 		setMesh
 		p=AGVector3.new(0,1.6,2.2)
 		addMesh(@smokeMesh=AntParticle.new(getMap.getScene,5),p)
@@ -41,6 +42,7 @@ class AntBakery<AntHouse
 private
 	# checks if smoke should be displayed
 	def checkSmoke
+		return if getScene.nil?
 		if @smokeMesh
 			if @smoke
 				@smokeMesh.setEnabled((@smoke>0))

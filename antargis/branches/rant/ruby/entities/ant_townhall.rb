@@ -37,10 +37,10 @@ class AntTownHall<AntHouse
 	end
 
 	def resourceChanged
-		puts "RESOURCE CHANGED"
 		@storeGood.each{|r|
 			setProvide(r,resource.get(r)>0)
 		}
+		super
 	end
 
 	def neededStock

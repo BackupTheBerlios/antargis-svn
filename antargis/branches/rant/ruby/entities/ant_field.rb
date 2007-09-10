@@ -21,6 +21,7 @@ class AntField<AntRubyEntity
 			end
 		end
 		setupMesh
+		super
 	end
 
 	def eventNoJob

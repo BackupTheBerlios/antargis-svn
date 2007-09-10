@@ -13,7 +13,9 @@ void agAssertGL(std::string s)
 	
 	std::cerr<<msg.str()<<std::endl;
 	throw std::runtime_error(msg.str());
+#ifndef MNDEBUG
 	agRaise(msg.str());
+#endif
       }
     }
 
@@ -26,8 +28,10 @@ void agAssertGL(std::string s)
 	  std::cerr<<"SDL_Error:"<<s<<":"<<se<<std::endl;
 	  if(std::string(se).substr(0,37)=="Failed loading glXGetSwapIntervalMESA")
 	    std::cerr<<"IGNORING THIS ERROR!"<<std::endl;
+#ifndef MNDEBUG
 	  else
 	    agRaise(se);
+#endif
 	  SDL_ClearError();
 	}
     }

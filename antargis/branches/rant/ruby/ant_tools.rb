@@ -68,6 +68,12 @@ def getDescendantsOfClass(p)
 	return c
 end
 
+class Class
+	def descendants
+		getDescendantsOfClass(self)
+	end
+end
+
 def trace
 	puts "TRACE #{caller[0]}"
 end

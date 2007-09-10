@@ -15,7 +15,7 @@ AGEXPORT std::map<std::string,std::list<CastFunction> > agCastFunctions;
 
 AGEXPORT void AG_Init_libantargisbasic()
 {
-  TRACE;
+  //  TRACE;
   if(!hasMain())
     AGMain *main=new AGMain;
 

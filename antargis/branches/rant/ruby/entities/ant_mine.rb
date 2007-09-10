@@ -34,6 +34,7 @@ class AntMine<AntRubyEntity
 	end
 	def resourceChanged
 		setupMesh
+		super
 	end
 	
 	private

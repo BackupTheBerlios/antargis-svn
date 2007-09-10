@@ -848,13 +848,18 @@ bool AntEntity::isMoving() const
   return dynamic_cast<MoveJob*>(mJob);
 }
 
-AntEntity *AntEntity::getFightTarget()
+AntEntity *AntEntity::getTarget()
 {
   if(mJob)
     {
       FightJob *f=dynamic_cast<FightJob*>(mJob);
       if(f)
 	return f->getTarget();
+      
+      MoveJob *m=dynamic_cast<MoveJob*>(mJob);
+      if(m)
+	return m->getTarget();
+      
     }
   return 0;
 }
@@ -894,3 +899,4 @@ bool AntEntity::defeated() const
 {
   return mDefeated;
 }
+

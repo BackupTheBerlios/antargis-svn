@@ -5,6 +5,7 @@
 SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
   mPos(pPos),mBBox(b)
 {
+  std::cout<<"new scene-node: "<<this<<std::endl;
   assert(s);
   mRubyObject=false;
   mScene=s;
@@ -17,6 +18,7 @@ SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
 
 SceneNode::~SceneNode()
 {
+  std::cout<<"del scene-node: "<<this<<" scene:"<<mScene<<std::endl;
   //  CTRACE;
   //mRubyObject=false; // why was this here ??????
 
@@ -32,12 +34,14 @@ void SceneNode::setScene(SceneBase *pScene)
 {
   assert(mScene==0 || mScene==pScene);
   mScene=pScene;
+  std::cout<<"setscene:"<<this<<" to "<<mScene<<std::endl;
 }
 
 
 /// release attaching to scene
 void SceneNode::resetScene()
 {
+  std::cout<<"resetScene from "<<this<<std::endl;
   mScene=0;
 }
 

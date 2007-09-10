@@ -3,7 +3,6 @@
 
 AGConfig::AGConfig()
 {
-  CTRACE;
   Document doc("config.xml");
 
   Node &root=doc.root();
@@ -27,7 +26,7 @@ AGConfig::AGConfig()
 	{
 	  singleValue[(*i)->get("name")]=(*i)->get("value");
 	  comments[(*i)->get("name")]=comment;
-	  cdebug((*i)->get("name")<<":"<<(*i)->get("value")<<":"<<comment);
+	  //	  cdebug((*i)->get("name")<<":"<<(*i)->get("value")<<":"<<comment);
 	  comment="";
 	}
     }

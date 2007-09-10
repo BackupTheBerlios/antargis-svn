@@ -28,6 +28,7 @@ class AntBaseTree<AntRubyEntity
 		setProvide("tree",true)
 	end
 	def resourceChanged
+		super
 		setupMesh
 	end
 end
@@ -48,7 +49,7 @@ class AntFir<AntBaseTree
 			@typeID=-1
 			setProvide("wood",false)
 		end
-		setupMesh
+		super
 	end
 
 	

@@ -85,6 +85,7 @@ class AntTree<AntRubyEntity
 			setProvide("wood",false)
 		end
 		setupMesh
+		super
 	end
 	
 	def setTreeType(t)
@@ -114,7 +115,8 @@ class AntTree<AntRubyEntity
 			typeId=@typeID%10
 		end
 		mesh=setMesh(typeId)
-		mesh.setRotation(@angle)
+		
+		mesh.setRotation(@angle) if mesh
 	end
 
 	# an old function for display apples - this is too costly

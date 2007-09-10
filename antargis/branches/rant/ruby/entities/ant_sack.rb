@@ -14,5 +14,6 @@ class AntSack<AntAnimal
 		@storeGood.each{|r|
 			setProvide(r,resource.get(r)>0)
 		}
+		super
 	end
 end

@@ -24,6 +24,8 @@ class AGEXPORT HeuristicFunction
   float get(const AGVector2 &a,const AGVector2 &b);
 };
 
+#define NEW_STORE
+
 class AGEXPORT StoredHeuristicFunction:public HeuristicFunction
 {
  public:
@@ -41,7 +43,15 @@ class AGEXPORT StoredHeuristicFunction:public HeuristicFunction
   void printTo(BinaryOut &pOut);
 
  private:
+
   std::map<Input,Output> mMap;
+#ifdef NEW_STORE
+  std::map<AGVector2,size_t> mVecs;
+  std::vector<float> mMapVec;
+
+  size_t getIndex(const Input &input);
+#endif
+
   
 };
 

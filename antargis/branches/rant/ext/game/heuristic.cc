@@ -1,5 +1,6 @@
 #include "heuristic.h"
 #include <ag_debug.h>
+#include <ag_profiler.h>
 #include "ag_serial_vec.h"
 
 #include <set>
@@ -26,6 +27,7 @@ StoredHeuristicFunction::StoredHeuristicFunction()
 
 StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn &pIn)
 {
+#ifdef OLD_STORE
   Uint32 s;
   AGVector2 v;
   Uint16 ai,bi;
@@ -36,12 +38,13 @@ StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn &pIn)
   assert(s<10000);
 
   std::vector<AGVector2> allVecs;
-  
+
+  cdebug("reading vecs..");
   for(size_t i=0;i<s;i++)
     {
       pIn>>v;
       allVecs.push_back(v);
-      cdebug(i<<":"<<v);
+      //      cdebug(i<<":"<<v);
     }
 
 
@@ -51,22 +54,73 @@ StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn &pIn)
 
   assert(s<2000000); // sanity check
 
+  cdebug("reading edges..");
   for(size_t i=0;i<s;i++)
     {
-      pIn>>ai>>bi>>w;
-      //      cdebug("ai:"<<ai<<" bi:"<<bi<<" w:"<<w);
-      mMap.insert(std::make_pair(std::make_pair(allVecs[ai],allVecs[bi]),w));
+      {
+	STACKTRACE;
+	pIn>>ai>>bi>>w;
+      }
+      {
+	STACKTRACE;
+	//      cdebug("ai:"<<ai<<" bi:"<<bi<<" w:"<<w);
+	mMap.insert(std::make_pair(std::make_pair(allVecs[ai],allVecs[bi]),w));
+      }
     }
+  cdebug("ready.");
+#else
+  Uint32 s;
+  AGVector2 v;
+  Uint16 ai,bi;
+  float w;
+  pIn>>s;
+
+  assert(s<10000);
+
+  for(size_t i=0;i<s;i++)
+    {
+      pIn>>v;
+      mVecs[v]=i;
+      //      cdebug(i<<":"<<v);
+    }
+
+
+  pIn>>s;
+
+  assert(s==mVecs.size()*mVecs.size());
+  assert(s<2000000); // sanity check
+
+  mMapVec=std::vector<float>(s);
+
+  for(size_t i=0;i<s;i++)
+    {
+      {
+	STACKTRACE;
+	pIn>>ai>>bi>>w;
+      }
+      {
+	STACKTRACE;
+
+	mMapVec[ai+bi*mVecs.size()]=w;
+      }
+    }
+#endif
 }
 
 
 void StoredHeuristicFunction::store(Input in,Output out)
 {
+#ifdef NEW_STORE
+  assert(mMapVec.size()==0);
+#endif
   mMap[in]=out;
 }
 
 void StoredHeuristicFunction::store(const AGVector2 &from,const AGVector2 &to,float value)
 {
+#ifdef NEW_STORE
+  assert(mMapVec.size()==0);
+#endif
   mMap[std::make_pair(from,to)]=value;
 }
 
@@ -75,15 +129,34 @@ void StoredHeuristicFunction::store(const AGVector2 &from,const AGVector2 &to,fl
 
 StoredHeuristicFunction::Output StoredHeuristicFunction::operator()(const Input &input)
 {
+#ifdef NEW_STORE
+  if(mMapVec.size()>0)
+    {
+      size_t i=getIndex(input);
+      return mMapVec[i];
+    }
+#endif
   return mMap[input];
 }
+
+
+#ifdef NEW_STORE
+size_t StoredHeuristicFunction::getIndex(const Input &input)
+{
+  size_t x=mVecs[input.first];
+  size_t y=mVecs[input.second];
+
+  return x+y*mVecs.size();
+}
+#endif
 
 
 
 void StoredHeuristicFunction::printTo(BinaryOut &pOut)
 {
   std::set<AGVector2> allVecs;
-  
+
+  assert(mMapVec.size()==0);
 
   for(std::map<Input,Output>::iterator i=mMap.begin();i!=mMap.end();i++)
     {

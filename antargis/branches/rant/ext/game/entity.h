@@ -29,7 +29,6 @@
 #include <ag_color.h>
 #include <ag_string.h>
 
-
 #include <set>
 #include <vector>
 
@@ -271,7 +270,7 @@ class AGEXPORT AntEntity:public AGRubyObject
 
     void heal(float pTime);
 
-    AntEntity *getFightTarget();
+    AntEntity *getTarget();
 
   private:
     void init();

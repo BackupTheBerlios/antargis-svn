@@ -12,7 +12,6 @@
 # to waiting men, because otherwise this function gets called for
 # each waiting man in each frame, which can have impact on the performance.
 #
-# 
 
 def newHLJobs
 	return true
@@ -275,7 +274,8 @@ class AntNewHLRecruitJob<AntNewHLJob
 	startState :moveComplete
 	endState :endState
 
-	edge :moveComplete,:endState
+	edge :moveComplete,:recruit
+	edge :recruit,:endState
 
 	attr_accessor :targetPos
 	attr_accessor :formatDir
@@ -308,7 +308,6 @@ AntHeroRecruitJob=AntNewHLRecruitJob
 
 
 # FIXME:
-# 1) recruiting
 # 2) constructing
 # 3) build houses
 

@@ -3,7 +3,7 @@ class AntFire<AntRubyEntity
 		super
 		mp=AGVector3.new(0,0,0)
 		setMesh(:on)
-		if MyAntargislib.opengl
+		if MyAntargislib.opengl and getScene
 			@smokeMesh=AntParticle.new(getMap.getScene,4)
 			addMesh(@smokeMesh,mp)
 			smoke=AntParticle.new(getMap.getScene,40)
@@ -15,6 +15,7 @@ class AntFire<AntRubyEntity
 		@enabled=true
 	end
 	def disable
+		return if getScene
 		setMesh(:off)
 		if MyAntargislib.opengl
 			#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))

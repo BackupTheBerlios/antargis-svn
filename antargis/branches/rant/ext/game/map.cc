@@ -458,6 +458,7 @@ AntEntity *AntMap::getEntity(const Mesh2D &pMesh)
 
 void AntMap::mark()
 {
+  cout<<"AntMap::mark()"<<std::endl;
   CTRACE;
   HeightMap::mark();
   AntMap::EntityList::iterator i=mEntities.begin();

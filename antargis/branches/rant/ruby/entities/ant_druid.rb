@@ -7,6 +7,7 @@ class AntNPC<AntRubyEntity
 		setupMesh
 	end
 	def resourceChanged
+		super
 		setupMesh
 	end
 	

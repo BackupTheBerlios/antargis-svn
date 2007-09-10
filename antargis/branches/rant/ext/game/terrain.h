@@ -122,6 +122,8 @@ public:
   /// the whole map is changed - so better take care of this (texture-upload instead of repainting on GPU)
   virtual void mapChangedComplete();
 
+  void mark();
+
  private:
   void init();
 };

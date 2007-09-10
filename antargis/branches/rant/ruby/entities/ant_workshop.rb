@@ -41,6 +41,7 @@ class AntWorkshop<AntHouse
 	end
 	# sets up the mesh and adds a smoke-particle engine, which is disabled at first
 	def setupMesh
+		return if getScene.nil?
 		setMesh
 		p=AGVector3.new(-1.3,-1.2,2.2)
 		if opengl
@@ -87,6 +88,7 @@ protected
 private
 	# checks if smoke should be displayed
 	def checkSmoke
+		return if getScene.nil?
 		if @smokeMesh
 			if @smoke
 				@smokeMesh.setEnabled((@smoke>0))
