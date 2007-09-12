@@ -15,26 +15,23 @@
 require 'build/platform.rb'
 require 'build/config_tools.rb'
 
+alias :oldGetConfig :getConfig
+def getConfig(n)
+	v=CFG.get(n)
+	v=oldGetConfig(n) if v.nil?
+	#puts "GETCONFIG #{n}:#{v}"
+	v
+end
+
 # the CFG-module serves with many functions that may be used in a configure script
 module CFG
-	@@options=[]
 	@@config={}
 	@@checks=[]
+	@@options={}
+	@@failed=[]
 
-	# add a cli-option with name *name* and short-cut *short*
-	# Example:
-	#  CFG.addOption("enable-debug","d",
-	#  	"enable debugging") do  ||
-	#  	  	CFG.set("debug",true)
-	#   end
-	# will result in an output like this:
-	#   -Battle of Antargis - Configuration
-  #   -------------------------------------------------------------------------------
-  #   --help, -h                              display help text
-	#   --enable-debug, -d                      enable debugging
-	# the given block *proc* will do whatever you define for instance setting debug to true in set configuration hash
-	def CFG.addOption(name,short,help,param=nil,default=nil,&proc)
-		@@options.push({:name=>name,:short=>short,:help=>help,:proc=>proc,:param=>param,:default=>default})
+	def self.setOptions(ops)
+		ops.each{|k,v|CFG.set(k,v)}
 	end
 
 	# return an array containing a hash, that describes, how the possible options will be checked
@@ -48,29 +45,20 @@ module CFG
 		@@checks << {:name=>name,:proc=>proc,:needed=>needed}
 	end
 
-	def CFG.call(name)
-		@@options.each{|op|
-			if op[:name]==name || op[:short]==name
-				op[:proc].call
-			end
-		}
-	end
-
-
-	def CFG.checkDefaults
-		@@options.each{|op|
-			if get(op[:name]).nil? and op[:default]
-				set(op[:name],op[:default])
-			end
-		}
-	end
-
 	def CFG.run
-		parseArgs
-		checkDefaults
 		checkCompile
 		ok=runChecks
 		saveConfig if ok
+	end
+
+	def CFG.runCheck(name,needed=true,&proc)
+		text="checking "+name+" ..."
+		print text
+		ok=proc.call
+		#ok=(not ok.nil?)
+		print " "*(40-text.length)
+		puts ({true=>"ok",false=>"failed",nil=>"failed"}[ok])
+		@@failed << c[:name] unless ok or not c[:needed]
 	end
 
 	def CFG.runChecks
@@ -82,7 +70,7 @@ module CFG
 			ok=c[:proc].call
 			#ok=(not ok.nil?)
 			print " "*(40-text.length)
-			puts ({true=>"ok",false=>"failed"}[ok])
+			puts ({true=>"ok",false=>"failed",nil=>"failed"}[ok])
 			failed << c[:name] unless ok or not c[:needed]
 		}
 		if failed.length>0
@@ -100,7 +88,7 @@ module CFG
 		f=File.open(configName,"w")
 		f.puts <<EOT
 $config={
-#{@@config.collect{|k,v|"  '"+k+"'=>"+toS(v)}.join(",\n")}
+#{@@config.collect{|k,v|"  '#{k}'=>"+toS(v)}.join(",\n")}
 }
 EOT
 		f.close
@@ -116,15 +104,16 @@ EOT
 	end
 
 	def CFG.checkProgram(program,needed=true)
-		addOption("path-"+program,"",
-			"set path to program '#{program}' like this:\n --path-#{program}=/usr/local/bin/#{program}","path") do |d|
-				set(program,d)
-			end
+# 		addOption("path-"+program,"",
+# 			"set path to program '#{program}' like this:\n --path-#{program}=/usr/local/bin/#{program}","path") do |d|
+# 				set(program,d)
+# 			end
 
 		addCheck("program "+program,needed) do
 			path=get(program)
 			path||=findProgram(program)
 			r=testProgram(path)
+			#puts "found at #{path}"
 			set(program,path) if r
 			r
 		end
@@ -167,10 +156,6 @@ EOT
 
 	def CFG.includeConfig
 		avail=["unix","mingw32"]
-		addOption("base-config","",
-			"set base-config like "+avail.join(", "),"config") do |v|
-			set("base-config",v)
-		end
 		addCheck ("base-config") do ||
 			c=get("base-config")
 			c=nil unless avail.member?(c)
@@ -192,7 +177,35 @@ EOT
 		CFG.set("RUBYLIB",getConfig("LIBRUBYARG_SHARED"))
 	end
 
-	def CFG.checkLibrary(libname)
+	def CFG.checkLibrary(libname,description,needed=true)
+		addCheck("lib"+libname,needed) do ||
+			#puts "FIXME checkLibrary #{libname}  #{description}"
+			if true
+				
+				# C-check
+				begin Dir.mkdir(".tmp"); rescue ;end
+				filename=".tmp/test.c"
+				f=File.open(filename,"w")
+				f.puts "int main(){return 0;}"
+				f.close
+				require 'build/build.rb'
+				Build.silent=true
+				Build.compile(filename)
+				obj=Build.cFileToObj(filename)
+				exe=".tmp/test"
+				Build.link(exe,[obj],["-l"+libname])
+				result=system(exe)
+				
+				set("LIBS",get("LIBS").to_s+" -l#{libname}") if result
+				result
+			end
+			
+
+		end
+	end
+
+	def self.hasLibrary(libname)
+		get("LIBS").split(" ").map{|l|l[2..-1]}.member?(libname)
 	end
 
 
@@ -201,7 +214,7 @@ EOT
 	# this function parses the cli-inputs
 	#
 	# *FIXME: replace this with the standard ruby-cli-input-parser
-	def CFG.parseArgs
+	def CFG.parseArgsOld
 		ARGV.each{|arg|
 			found=false
 			# parse single arguments like "-d" or "-dgh" (like tar -xfz)
@@ -214,7 +227,12 @@ EOT
 				if found
 					# all were ok, so call each these options
 					arg[1..-1].scan(/./){|byte|
-						@@options.each{|op|op[:proc].call if op[:short]==byte}
+						@@options.each{|op|
+							if op[:short]==byte
+								puts "* #{op[:help]}"
+								op[:proc].call(true)
+							end
+						}
 					}
 				end
 			end
@@ -227,7 +245,8 @@ EOT
 					# parse "simple" options without parameters
 					if arg=~/^--#{ename}$/ or arg=~/^-#{op[:short]}$/
 						found=true
-						op[:proc].call
+						puts "* #{op[:help]}"
+						op[:proc].call(found)
 					# parse options with parameter, given like this : "-d=<somedir>" or "--dir=bladir"
 					elsif arg=~/^--#{ename}=.+/ or arg=~/^-#{op[:short]}=.+$/
 						found=true
@@ -244,27 +263,19 @@ EOT
 		case v
 			when String
 				"'"+v.to_s+"'"
+			when Array
+				"'"+v.join(";")+"'"
+			when Hash
+				"'"+v.collect{|k,v|"#{k}=>#{v}"}.join(";")+"'"
 			else
+				#puts v,v.class
+				#raise "MUH"
 				v.to_s
 		end
 	end
+end
 
-	addOption("help","h",
-		"display help text") do
-			CFG.options.each{|op|
-				text=""
-				text << "--#{op[:name]}"
-				text << "=<#{op[:param]}>" if op[:param]
-				text << ", -#{op[:short]}" if op[:short]!=""
-				text << "=<#{op[:param]}>" if op[:short]!="" and op[:param]
-				text+=" "*(40-text.length)
-				l=text.length
-				helpa=op[:help].split("\n")
-				text+=helpa[0]
-				helpa[1..-1].each{|h|
-					text << "\n"+" "*l+h
-				}
-				puts text
-			}
-	end
+
+def getConfigDirect(v,config={})
+	CFG.get(v)
 end

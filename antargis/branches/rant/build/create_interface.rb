@@ -434,7 +434,7 @@ static swig_type_info* #{k}_dynamic_cast(void **ptr)
     for(std::list<CastFunction>::iterator i=funcs.begin();i!=funcs.end();i++)
       {
          swig_type_info*t=(*i)(ptr);
-	       std::cout<<"test:"<<t<<std::endl;
+	       //std::cout<<"test:"<<t<<std::endl;
          if(t)
            return t;
       }
@@ -454,7 +454,7 @@ swig_type_info* #{a}2#{b}cast(void **p)
 {
         #{a}*a=(#{a}*)(*p);
         #{b}*b=dynamic_cast<#{b}*>(a);
-				printf("TRY CAST #{a} 2 #{b} : %lx\\n",b);
+				//printf("TRY CAST #{a} 2 #{b} : %lx\\n",b);
         if(b)
         {
                 *p=(void*)b;

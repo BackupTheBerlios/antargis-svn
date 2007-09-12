@@ -26,7 +26,7 @@ SceneBase::~SceneBase()
 
 void SceneBase::addNode(SceneNode *node)
 {
-  std::cout<<"addNode:(this:"<<this<<") "<<node<<"  "<<typeid(*node).name()<<std::endl;
+  //  std::cout<<"addNode:(this:"<<this<<") "<<node<<"  "<<typeid(*node).name()<<std::endl;
   if(mNodeSet.find(node)==mNodeSet.end())
     {
       node->setScene(this);
@@ -57,7 +57,7 @@ void SceneBase::prepareUpdate(SceneNode *node)
 
 void SceneBase::removeNode(SceneNode *node)
 {
-  std::cout<<"remove node:"<<node<<std::endl;
+  //  std::cout<<"remove node:"<<node<<std::endl;
   if(mNodeSet.find(node)!=mNodeSet.end())
     {
       Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
@@ -107,8 +107,8 @@ void SceneBase::advance(float time)
     {
       if((*i)->visible())
 	{
-	  std::cout<<(*i)<<std::endl;
-	  std::cout<<(typeid(**i).name())<<std::endl;
+	  //	  std::cout<<(*i)<<std::endl;
+	  //	  std::cout<<(typeid(**i).name())<<std::endl;
 	  (*i)->advance(time);
 	}
     }
@@ -125,12 +125,12 @@ float SceneBase::height() const
 
 void SceneBase::mark()
 {
-  std::cout<<"SceneBase::mark()"<<std::endl;
+  //  std::cout<<"SceneBase::mark()"<<std::endl;
   SceneBase::Nodes::iterator i=mNodes.begin();
 
   for(;i!=mNodes.end();i++)
     {
-      std::cout<<"scenebase-mark:"<< this<<"  "<<*i<<std::endl;
+      //  std::cout<<"scenebase-mark:"<< this<<"  "<<*i<<std::endl;
       markObject(*i);
     }
 }

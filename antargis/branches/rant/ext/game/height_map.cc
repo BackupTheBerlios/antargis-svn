@@ -625,7 +625,7 @@ AGVector2 HeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
 
 void HeightMap::mark()
 {
-  std::cout<<"HeightMap::mark tihs:"<<this<<" scene:"<<mScene<<std::endl;
+  //  std::cout<<"HeightMap::mark tihs:"<<this<<" scene:"<<mScene<<std::endl;
   if(mScene)
     markObject(mScene);
   if(mTerrain)

@@ -1,103 +1,147 @@
 #!/usr/bin/env ruby
 
 require 'build/configure.rb'
-
-version="0.2.1.3"
+require 'ostruct'
+require 'optparse'
+require 'pp'
 
 puts <<EOT
 Battle of Antargis - Configuration
 -------------------------------------------------------------------------------
 EOT
 
-CFG.addOption("enable-debug","d",
-	"enable debugging") do  ||
-		CFG.set("debug",true)
-	end
+NEEDED_PROGRAMS=["gcc","g++","swig","ruby"]
+POSSIBLE_PROGRAMS=["ccache","sdl-config"]
 
-CFG.addOption("enable-gc-debug","g",
-	"enable debugging of garbage collector") do  ||
-		CFG.set("gcdebug",true)
-	end
-
-CFG.addOption("enable-profile","p",
-	"enable c++ profiling") do  ||
-		CFG.set("profile",true)
-	end
-
-
-CFG.addOption("prefix","",
-	"set prefix directory","dir") do |d|
-		CFG.set("prefix",d)
-	end
-
-CFG.addOption("profile","p",
-	"enable profiling of C++-code") do ||
-		CFG.set("profile",true)
-	end
-
-CFG.addOption("drmuser","",
-	"set user for DRM","user") do |v|
-		CFG.set("drmuser",v)
-	end
-
-CFG.addOption("drmpw","",
-	"set password for DRM","password") do |v|
-		CFG.set("drmpass",v)
-	end
-
-CFG.addOption("version","v",
-	"set release version of BoA","version",version) do |v|
-		CFG.set("version",v)
-	end
-
-if $:.join("")=~/1.8/
-	if isWindows
-		CFG.set("RUBYLIB","-lmsvcrt-ruby18")
-	else
-		CFG.set("RUBYLIB","-lruby1.8")
-	end
-else
-	if isWindows
-		CFG.set("RUBYLIB","-lmsvcrt-ruby19")
-	else
-		CFG.set("RUBYLIB","-lruby1.9")
-	end
+def allPrograms
+	POSSIBLE_PROGRAMS+NEEDED_PROGRAMS
 end
 
-CFG.checkProgram("ccache",false)
-CFG.checkProgram("gcc")
-CFG.checkProgram("g++")
-CFG.checkProgram("swig")
-CFG.checkProgram("ruby")
-CFG.checkProgram("sdl-config",false)
+class ConfigureOptions
+	def self.parse(args)
+		options={}
+		options[:use_mkmf]=true
+		options[:debug]=false
+		options[:gcdebug]=false
+		options[:profile]=false
+		options[:version]="0.2.1.4"
+
+		options[:programs]={}
+		allPrograms.each{|p|
+			options[:programs][p]=p
+		}
+	
+		opts=OptionParser.new do |opts|
+		  opts.banner = "Usage: configure [options]"
+
+			opts.separator ""
+			opts.separator "Specific options:"
+
+			opts.on("-d", "--enable-debug",
+							"enable debugging") do 
+				options[:debug]=true
+			end
+
+			opts.on("-g","--enable-gc-debug",
+							"enable debugging of garbage collector") do
+				options[:gcdebug]=true
+			end
+
+			opts.on("-p","--enable-profile",
+							"enable c++ profiling") do 
+				options[:profile]=true
+			end
+
+			opts.on("--prefix PREFIXDIR",
+							"set prefix directory PREFIXDIR") do |dir|
+				options[:prefix]=dir
+			end
+
+			opts.on("--drmuser DRMUSER",
+				"set user for DRM") do |v|
+					options[:drmuser]=v
+			end
+			
+			opts.on("--drmpw DRMPASSWORD",
+				"set password for DRM") do |v|
+					options[:drmpass]=v
+			end
+			
+			opts.on("-v","--version",
+				"set release version of BoA") do |v|
+					options[:version]=v
+			end
+
+			opts.on("--ext-config CONFIG",
+				"use user-defined config instead of ruby's mkmf","CONFIG maybe in mingw32 or unix") do |extconfig|
+					options[:extconfig]=extconfig
+			end
+
+			allPrograms.each{|program|
+				opts.on("--path-"+program+" PATH",
+					"set path to program '#{program}'") do |d|
+					CFG.set(program,d)
+				end
+			}
+
+
+		end
+		opts.parse!(args)
+		options
+	end
+end
+		
+options = ConfigureOptions.parse(ARGV)
+
+
+NEEDED_PROGRAMS.each{|program|
+	CFG.checkProgram(program,true)
+}
+POSSIBLE_PROGRAMS.each{|program|
+	CFG.checkProgram(program,false)
+}
+
+CFG.setOptions(options)
+
 
 CFG.addCheck("sdl-config --libs",false) do
-        libs=nil
-        begin
-            libs=`#{CFG.get("sdl-config")} --libs`.gsub("\n","")
-        rescue
-        end
-        CFG.set("LIBS",libs) if libs        
-    end
+	libs=nil
+	begin
+		call="#{CFG.get("sdl-config")} --libs"
+		libs=`#{call}`.gsub("\n","")
+	rescue
+	end
+	CFG.set("LIBS",libs) if libs        
+	true if libs
+end
 
 CFG.addCheck("sdl-config --cflags",false) do
-        libs=nil
-        begin
-            libs=`#{CFG.get("sdl-config")} --cflags`.gsub("\n","")
-        rescue
-        end
-        CFG.set("CFLAGS",libs) if libs        
-    end
-
-
-CFG.addOption("use-mkmf","",
-	"use ruby's configuration mechanism for configuration") do  ||
-		CFG.gatherMkmfInfo
+	libs=nil
+	begin
+			libs=`#{CFG.get("sdl-config")} --cflags`.gsub("\n","")
+	rescue
 	end
+	CFG.set("CFLAGS",libs) if libs        
+	true if libs
+end
 
 CFG.includeConfig
+CFG.gatherMkmfInfo if options[:use_mkmf]
+
+CFG.checkLibrary("opengl32","OpenGL library (win32)",false)
+CFG.checkLibrary("glu32","OpenGL Utility library (win32)",false)
+#puts foundGL
+CFG.checkLibrary("GL","OpenGL library",false)
+CFG.checkLibrary("GLU","OpenGL Utility library",false)
 
 CFG.run
+
+if (not (CFG.hasLibrary("opengl32") or CFG.hasLibrary("GL")))
+	puts "NO opengl-library found. Please install one - including dev-packages!"
+end
+if (not (CFG.hasLibrary("glu32") or CFG.hasLibrary("GLU")))
+	puts "NO glu-library found. Please install one - including dev-packages!"
+end
 
 puts
 puts "You should run '>rant clean && rant' to let changes take effect!"

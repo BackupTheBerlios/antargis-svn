@@ -1,5 +1,9 @@
 def extendCommandLine(config,s)
-  r=config[s]
+	if config[s] 
+		r=config[s]
+	else
+  	r=getConfigDirect(s)
+	end
   return r if r.nil?
   r.gsub(/\$\(([^\)]*)\)/) {|a|
 		n=a[2..-2] # filter "$(xy..z)" to "xy..z"

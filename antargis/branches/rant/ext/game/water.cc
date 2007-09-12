@@ -33,7 +33,7 @@ WaterPiece::WaterPiece(SceneBase *pScene,HeightMap &map,int x,int y,int w,int h,
   mX(x),mY(y),mW(w),mH(h),mMap(&map)
 {
   CTRACE;
-  std::cout<<"water:"<<this<<std::endl;
+
   step=2;
   tex=getTextureCache()->get("data/textures/terrain/water.png");
 
@@ -46,7 +46,6 @@ WaterPiece::WaterPiece(SceneBase *pScene,HeightMap &map,int x,int y,int w,int h,
 
 WaterPiece::~WaterPiece()
 {
-  std::cout<<"water killed:"<<this<<std::endl;
   if(sceneValid())
     getScene()->removeNode(this);
 

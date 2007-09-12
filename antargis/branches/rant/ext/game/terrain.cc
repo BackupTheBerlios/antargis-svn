@@ -346,7 +346,7 @@ AGTexture *Terrain::getGrassTexture()
 
 void Terrain::mark()
 {
-  std::cout<<"Terrain::mark()"<<std::endl;
+  //  std::cout<<"Terrain::mark()"<<std::endl;
   for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
     markObject(*i);
 }
