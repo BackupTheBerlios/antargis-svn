@@ -27,7 +27,6 @@ module AntSound
 	
 		if not @@soundLastCall.keys.member?(name)
 			@@soundLastCall[name]=-minDiff-1
-			#puts "RESET:"+@@soundLastCall[name].to_s
 		end
 		s=sounds[name]
 		if not s
@@ -56,8 +55,6 @@ module AntSound
 			vol=[(OUTER_VOL_SIZE-d)/OUTER_VOL_SIZE,0].max
 		end
 		handle=getSoundManager.loopPlay(s,volume*vol)
-		puts "HANDLE #{handle}"
-		puts "--------------------------------------------------"
 		@@loopSounds[id]=[handle,name,pos,volume]
 		id
 	end

@@ -3,7 +3,7 @@ MAX_RESIDENTS=10
 
 # A dwelling has zero or more residents. Whenever there some residents they will reproduce themselves.
 class AntDwelling<AntHouse
-	def initialize
+	def initialize(map)
 		super
 		setProvide("dwelling",true)
 		@lastBirth=0

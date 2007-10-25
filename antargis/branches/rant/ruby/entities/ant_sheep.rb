@@ -20,14 +20,17 @@
 
 # some very simple base-class for animals. contains really nothing.
 class AntAnimal<AntRubyEntity
+	def initialize(map)
+		super
+	end
 	def AntAnimal.xmlName
 		""
 	end
 end
 
 class AntSheep<AntAnimal
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("sheep",true)
 		setSpeed 0.4
 		@lastBirth=0

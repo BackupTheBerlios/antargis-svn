@@ -61,8 +61,6 @@ module AGHandler
 	end
 	# add Event Handler - this function should go into AGRubyApp
 	def addHandler(object,event,func)
-		puts event
-		puts object,object.class
 		if not defined? @handlers then
 			@handlers={}
 		end
@@ -163,3 +161,32 @@ end
 # 		oldadd(p)
 # 	end
 # end
+
+module Antargisbasic
+	class AGVector3
+		def x=(p)
+			setX(p)
+		end
+		def y=(p)
+			setY(p)
+		end
+		def z=(p)
+			setZ(p)
+		end
+	end
+	class AGVector2
+		def x=(p)
+			setX(p)
+		end
+		def y=(p)
+			setY(p)
+		end
+		def _dump(depth)
+			[x,y].pack("gg")
+		end
+		def AGVector2._load(s)
+			a,b=s.unpack("gg")
+			AGVector2.new(a,b)
+		end
+	end
+end

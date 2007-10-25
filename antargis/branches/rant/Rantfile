@@ -198,7 +198,7 @@ end
 # build c++
 #
 gen Rule, '.oo' => depC do |t|
-	cmd=makeCommand("CXX_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{(t.source)}")
+	cmd=makeCommand("CXX_CALL",sys.expand_path(t.name),"#{var :CFLAGS} #{sys.expand_path(t.source)}")
 	sys cmd
 	puts
 end
@@ -225,13 +225,19 @@ gen Rule, /^.*swig.(cc|h)$/ => swigSrc do |t|
 
 	puts "SOURCE #{t.source} #{t.name}"
 
-	cmd=makeCommand("SWIG_CALL",sys.expand_path(t.name.gsub(/\.h$/,".cc")),"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{sys.expand_path(t.source)}".gsub("/",Dir.separator))
+	#tsource=sys.expand_path(t.source)
+	tsource=t.source
+
+	#tname=sys.expand_path(t.name.gsub(/\.h$/,".cc"))
+	tname=t.name.gsub(/\.h$/,".cc")
+
+	cmd=makeCommand("SWIG_CALL",tname,"-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR} #{tsource}".gsub("/",Dir.separator))
 	sys cmd
 	puts
 
 	incs="-DAGEXPORT -Ibuild -I#{sys.expand_path(getDir(t.name))} #{var :INCLUDESTR}"
 	out=".deps"+Dir.separator+sys.expand_path(t.name).gsub("/","_")
-	cmd=makeCommand("SWIGDEPS",out,incs+" "+sys.expand_path(t.name.gsub(/[0-9_a-z]*\.(h|cc)$/,"interface.i")))
+	cmd=makeCommand("SWIGDEPS",out,incs+" "+t.name.gsub(/[0-9_a-z]*\.(h|cc)$/,"interface.i"))
 	sys cmd
 	puts
 
@@ -247,6 +253,7 @@ end
 
 def importsForInterface(name)
 #puts "?=="
+	#puts "importsForInterface:#{name}"
 	$sourceDeps.each{|t|
 		if name=~/#{t[0]}/
 			return t[1].select{|f|not f=~/-.*/}.select{|f|not f=~/external/}.collect{|f|f+"/interface.i"}.join(":")
@@ -262,6 +269,7 @@ interfaceSrc = lambda { |target|
 }
 
 gen Rule, /^.*interface.i$/ => interfaceSrc do |t|
+	# FIXME: remove expand_ath ???
     cmd=makeCommand("CREATEINTERFACE",getDirUnix(sys.expand_path(t.name)),importsForInterface(t.name))
 	sys cmd
 end
@@ -374,3 +382,10 @@ end
 
 task :check=> [:check_c_prgs] do
 end
+
+
+task :spec do
+ 	cmd="find ruby -name \"*.rb\"|grep spec|xargs spec -f h>test.html"
+	`#{cmd}`
+end
+

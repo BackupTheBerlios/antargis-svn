@@ -28,8 +28,8 @@ class AntBoss<AntRubyEntity
 
 	attr_accessor :hlJobMode
 
-	def initialize
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super(map)
 		@men=[]
 		@hlJobMode={}
 		@job=nil
@@ -43,8 +43,6 @@ class AntBoss<AntRubyEntity
 	def loadXML(node)
 		super(node)
 		if node.get("men")!="" then
-			dputs "LOAD:CREATING MEN:"+node.get("men")
-			dputs caller.join("\n")
 			if node.get("men")!=""
 				@createMen=node.get("men").to_i
 			end
@@ -94,8 +92,6 @@ class AntBoss<AntRubyEntity
 	end
 	
 	def eventNoJob
-# 		dputs "eventNoJob "+self.class.to_s+" "+@job.to_s
-# 		dputs caller.join("\n")
 		checkHLJobEnd(self)
  		checkCreateMen
 	end
@@ -103,8 +99,7 @@ class AntBoss<AntRubyEntity
 	def checkCreateMen
 		if @createMen>0
 			for i in 0..(@createMen-1) do
-				puts "NEW ---------MAN"
-				man=AntMan.new
+				man=AntMan.new(getMap)
 				getMap.insertEntity(man)
 				man.setPos(getPos2D)
 				man.setBoss(self)
@@ -206,9 +201,7 @@ class AntBoss<AntRubyEntity
 
 
 	def setOwner(owner)
-		trace
 		@owner=owner
-		dputs "RESETING PLAYER:"
 		if @player
 			@player.remove(self)
 		end
@@ -217,10 +210,7 @@ class AntBoss<AntRubyEntity
 			@player.add(self)
 		end
 		getMap.eventOwnerChanged(self)
-		trace
 		AntInventory.update(self)
-		trace
-		#resourceChanged
 	end
 	def getOwner
 		@owner
@@ -251,50 +241,17 @@ class AntBoss<AntRubyEntity
 	def setupMesh
 	end
 	
-	def hovered=(s)
-		@hovered=s
-		updateRingColor
-		return
-		#puts @hovered,@selected
-		@ring.setVisible((@hovered or @selected))
-		if @hovered and not @selected
-			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
-		end
-	end
-	def selected=(s)
-		@selected=s
-		updateRingColor
-		return
-		puts @hovered,@selected
-		@ring.setVisible((@hovered or @selected))
-		if @selected
-			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
-			#@ring.setColor(AGVector4.new(1,0.7,1,0.8))
-		end
-	end
-
-		
+	
 	def getRing
 		makeBigRingMesh
 	end
+
+
 	def setupMeshBoss
 		setupMesh
 		setupRing
 	end
 
-	def setupRing
-		@ring=getRing
-		return if @ring.nil?
-		if @selected
-			#f6c108
-			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
-		else
-			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
-		end
-		addMesh(@ring,AGVector3.new(0,0,0))
-		#@ring.setVisible(false)
-		updateRingColor
-	end
 
 	def eventHLJobFinished(job)
 		puts "eventHLJobFinished(job) #{self}"
@@ -352,15 +309,6 @@ class AntBoss<AntRubyEntity
 		end
 	end
 
-private
-	def updateRingColor
-		@ring.setVisible((@hovered or @selected))
-		if @hovered and not @selected
-			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
-		elsif @selected
-			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
-		end
-	end
 end
 
 

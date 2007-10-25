@@ -1,7 +1,7 @@
 class AntNPC<AntRubyEntity
 	attr_accessor :npcType
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("NPC",true)
 		@npcType="smith" #druid"
 		setupMesh

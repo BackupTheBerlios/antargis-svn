@@ -94,7 +94,7 @@ MoveJob::MoveJob(int p,AntEntity *pTarget,float pNear,bool pRun):Job(p),mTargetE
   //  runSpeed=100;
 }
 
-MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(getMap()->truncPos(pTarget)),mTargetEntity(0),mNear(pNear),mRun(pRun)
+MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(pTarget),mTargetEntity(0),mNear(pNear),mRun(pRun)
 {
   m3d=false;
   // speed=70; // pixels per second
@@ -124,6 +124,8 @@ void MoveJob::move(AntEntity *e,float ptime)
       mTarget=mTargetEntity->getPos2D();
       mTarget3=mTargetEntity->getPos3D();
     }
+#warning FIXME: move this ?
+  mTarget=e->getMap()->truncPos(mTarget);
  
 #ifdef ENABLE_RUNNING  
   float runSpeed=speed*1.3;
@@ -152,7 +154,8 @@ AGVector2 MoveJob::getDirection(const AntEntity *e) const
 
 void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
 {
-  float d0=getMap()->getPos(e->getPos2D())[2];
+  assert(e);
+  float d0=e->getMap()->getPos(e->getPos2D())[2];
 
   if(d0<WATER_MARK && e->isOnGround())
     {
@@ -208,7 +211,7 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
     }
 
 
-  float d1=getMap()->getPos(e->getPos2D())[2];
+  float d1=e->getMap()->getPos(e->getPos2D())[2];
   /*  if(d0<WATER_MARK && d1>WATER_MARK)
     e->eventHitWaterMark(false);
   else if(d0>WATER_MARK && d1<WATER_MARK)
@@ -281,9 +284,10 @@ bool FightJob::needsMorale() const
 
 void FightJob::move(AntEntity *e,float ptime)
 {
+  assert(e);
   if(mTarget==0)
     {
-      mTarget=getMap()->getEntity(mTargetID);
+      mTarget=e->getMap()->getEntity(mTargetID);
       if(!mTarget)
 	{
 	  cdebug("Could not find id:"<<mTargetID);
@@ -447,11 +451,11 @@ AGString FetchJob::xmlName() const
  *
  ***************************************************************************/
 
-RestJob::RestJob():mTime(0)
+RestJob::RestJob():mTime(0),mWork(false)
 {
 }
 
-RestJob::RestJob(float pTime):Job(0),mTime(pTime)
+RestJob::RestJob(float pTime,bool pWork):Job(0),mTime(pTime),mWork(pWork)
 {
 }
 RestJob::~RestJob()
@@ -459,8 +463,13 @@ RestJob::~RestJob()
 }
 void RestJob::move(AntEntity *e,float ptime)
 {
-  e->incMorale(std::min(ptime,mTime));
-  e->heal(std::min(ptime,mTime));
+  if(mWork)
+    e->decMorale(std::min(ptime,mTime)/30);
+  else
+    {
+      e->incMorale(std::min(ptime,mTime));
+      e->heal(std::min(ptime,mTime));
+    }
   mTime-=ptime;
   if(mTime<0)
     jobFinished(e);

@@ -31,6 +31,12 @@ end
 module Build
 	include Cmd
 	@@silent=false
+	@@logFile=nil
+	@@log=nil
+
+	def self.log=(log)
+		@@log=log
+	end
 
 	def self.silent=(flag)
 		@@silent=flag
@@ -67,12 +73,32 @@ module Build
 private	
 	def self.call(cmd)
 		if @@silent
-			cmd+=" 2>/dev/null"
-			#puts cmd
-			system(cmd)
+			if @@log
+				initLog
+				pushLog cmd
+				cmd+=" 2>&1 >>#{@@log}"
+				output=`#{cmd}`
+				pushLog(output)
+				$?
+			else
+				cmd+=" 2>/dev/null"
+				system(cmd)
+			end
 		else
 			Cmd.sys(cmd)
 		end
+	end
+	def self.initLog
+		@@logFile=File.open(@@log,"w") if @@log and @@logFile.nil?
+		@@logFile.puts "INIT"
+		#@@logFile.close
+	end
+	def self.pushLog(text)
+		return if @@logFile.nil?
+		#@@logFile=File.open(@@log,"a")
+		raise 1 if @@logFile.nil?
+		@@logFile.puts text
+		#@@logFile.close
 	end
 end
 

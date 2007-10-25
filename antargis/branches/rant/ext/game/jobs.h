@@ -56,16 +56,16 @@ class AGEXPORT Job
 class AGEXPORT RestJob:public Job
 {
   float mTime;
+  bool mWork;
  public:
   RestJob();
-  RestJob(float pTime);
+  RestJob(float pTime,bool pWork=false);
   virtual ~RestJob();
   void move(AntEntity *e,float ptime);
 
   virtual void saveXML(Node &pNode) const;
   virtual void loadXML(const Node &pNode);
   virtual AGString xmlName() const;
-
 };
 
 class AGEXPORT MoveJob:public Job

@@ -22,7 +22,7 @@
 #    - farming (wheat)
 
 class AntFarm<AntHouse
-	def initialize
+	def initialize(map)
 		super
 		@type=3
 		setProvide("food",true)
@@ -46,7 +46,7 @@ class AntFarm<AntHouse
 		if @job.nil?
 			if e.getMode=="makeField"
 				pos=e.getPos2D
-				f=AntField.new
+				f=AntField.new(getMap)
 				f.setPos(pos)
 				getMap.insertEntity(f)
 				puts "INSERT ENT #{@fields.length}"

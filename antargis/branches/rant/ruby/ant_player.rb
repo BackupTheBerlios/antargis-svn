@@ -20,7 +20,9 @@
 
 class AntPlayer
 	attr_accessor :name
-	def initialize(name)
+	def initialize(map,name)
+		assert{map.is_a?(AntMap)}
+		@map=map
 		@heroes=[]
 		@heronames=[]
 		@name=name
@@ -75,6 +77,9 @@ class AntPlayer
 		@heroes.uniq!
 		@heroes.clone
 	end
+	def getMap
+		@map
+	end
 end
 
 class AntHumanPlayer<AntPlayer
@@ -90,7 +95,7 @@ class AntHumanPlayer<AntPlayer
 end
 
 class AntComputerPlayer<AntPlayer
-	def initialize(name)
+	def initialize(map,name)
 		super
 		@doneSth={}
 	end

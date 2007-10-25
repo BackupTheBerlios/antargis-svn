@@ -1,7 +1,7 @@
 #FIXME
 
 class AntBakery<AntHouse
-	def initialize
+	def initialize(map)
 		super
 		@type=3
 		setProvide("food",true)

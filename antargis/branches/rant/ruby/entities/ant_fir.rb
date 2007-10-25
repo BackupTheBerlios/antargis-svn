@@ -22,21 +22,21 @@
 
 # really nothing special here - just a "grouper"
 class AntBaseTree<AntRubyEntity
-	def initialize(p)
+	def initialize(map)
 		super
 		#setType("tree")
 		setProvide("tree",true)
 	end
 	def resourceChanged
 		super
-		setupMesh
+		setupMesh if respond_to?(:setupMesh)
 	end
 end
 
 # a fir
 class AntFir<AntBaseTree
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("fir",true)
 		setProvide("wood",true)
 		resource.set("wood",25)
@@ -76,20 +76,20 @@ protected
 	end
 end
 
-# a birch representing a tree without fruit
-class AntBirch<AntBaseTree
-	def initialize()
-		super(AGVector2.new(0,0))
-	
-		setupMesh
-	end
-	
-protected
-	def setupMesh
-		if MyAntargislib.opengl
-			setMesh(makeBirchTreeMesh)
-		else
-			puts "NO BIRCHES WITHOUT GL ATM"
-		end
-	end
-end
+# # a birch representing a tree without fruit
+# class AntBirch<AntBaseTree
+# 	def initialize()
+# 		super(AGVector2.new(0,0))
+# 	
+# 		setupMesh
+# 	end
+# 	
+# protected
+# 	def setupMesh
+# 		if MyAntargislib.opengl
+# 			setMesh(makeBirchTreeMesh)
+# 		else
+# 			puts "NO BIRCHES WITHOUT GL ATM"
+# 		end
+# 	end
+# end

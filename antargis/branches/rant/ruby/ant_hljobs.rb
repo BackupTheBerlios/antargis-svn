@@ -47,6 +47,10 @@ class AntHLJob
 	def stopJob
 	end
 
+	def getMap
+		@hero.getMap
+	end
+
 	def saveXML(n)
 		puts "SAVEXML"
 		puts self

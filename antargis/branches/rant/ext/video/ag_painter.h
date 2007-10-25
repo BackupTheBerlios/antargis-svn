@@ -104,6 +104,7 @@ class AGEXPORT AGPainter
 
   void drawGradient(const AGRect2 &r,const AGColor &c0,const AGColor &c1,const AGColor &c2,const AGColor &c3);
   void drawBorder(const AGRect2& rect,int width, const AGColor& c1, const AGColor& c2);
+  void drawRect(const AGRect2& rect,const AGColor& c);
   void fillRect(const AGRect2 &pRect,const AGColor &c);
   void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
   void drawPoint(const AGVector2 &p,const AGColor &c,float size);

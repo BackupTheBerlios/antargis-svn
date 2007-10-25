@@ -20,7 +20,6 @@ class AntButtonPanel<AGWidget
 	def initialize(p,r)
 		super(p,r)
 		setName("ButtonPanel")
-		puts self,self.class,respond_to?(:clearHandlers),self.is_a?(AGWidget),self.methods.join("//")
 		clearHandlers
 		@jobButtons=["doRest","doDismiss","doDropFood","doDropWeapon","doBuild"]
 		@aggButtons={"doAgg0"=>1,"doAgg1"=>2,"doAgg2"=>3}

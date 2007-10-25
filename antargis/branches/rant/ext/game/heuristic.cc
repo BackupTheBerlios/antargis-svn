@@ -87,6 +87,8 @@ StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn &pIn)
 
   pIn>>s;
 
+  cdebug("s:"<<s<<" vecs^2:"<<mVecs.size()*mVecs.size());
+
   assert(s==mVecs.size()*mVecs.size());
   assert(s<2000000); // sanity check
 
@@ -100,6 +102,8 @@ StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn &pIn)
       }
       {
 	STACKTRACE;
+	assert(ai<mVecs.size());
+	assert(bi<mVecs.size());
 
 	mMapVec[ai+bi*mVecs.size()]=w;
       }
@@ -167,6 +171,8 @@ void StoredHeuristicFunction::printTo(BinaryOut &pOut)
   std::vector<AGVector2> vecs;
   std::copy(allVecs.begin(),allVecs.end(),std::back_inserter(vecs));
   std::map<AGVector2,size_t> indices;
+  
+  assert(vecs.size()<1000);
 
   pOut<<(Uint32)vecs.size();
 
@@ -176,7 +182,33 @@ void StoredHeuristicFunction::printTo(BinaryOut &pOut)
       pOut<<vecs[i];
     }
 
+  pOut<<(Uint32)(vecs.size()*vecs.size());
+
+  size_t written=0;
+  for(std::map<AGVector2,size_t>::iterator ai=indices.begin();ai!=indices.end();ai++)
+    for(std::map<AGVector2,size_t>::iterator bi=indices.begin();bi!=indices.end();bi++)
+      {
+	Input in(ai->first,bi->first);
+	float w=mMap[in];
+	Uint16 i0,i1;
+	i0=ai->second;
+	i1=bi->second;
+	pOut<<i0;
+	pOut<<i1;
+	//	if(w<=0)
+	//	  w=-1;
+
+	pOut<<w;
+	written++;
+      }
+
+  assert(written==vecs.size()*vecs.size());
+  /*
+
   pOut<<(Uint32)mMap.size();
+
+  cdebug("mMap:"<<mMap.size()<<" vecs^2:"<<vecs.size()*vecs.size());
+  assert(mMap.size()==vecs.size()*vecs.size());
 
   for(std::map<Input,Output>::iterator i=mMap.begin();i!=mMap.end();i++)
     {
@@ -188,5 +220,5 @@ void StoredHeuristicFunction::printTo(BinaryOut &pOut)
       pOut<<bi;
       pOut<<w;
     }
-
+  */
 }

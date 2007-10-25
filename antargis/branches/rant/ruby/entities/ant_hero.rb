@@ -29,7 +29,7 @@ class AntHero<AntBoss
 	include AntManBase
 
 	attr_reader :meshState, :dead
-	def initialize
+	def initialize(map)
 		super
 		@men.push(self)
 		setProvide("hero",true)
@@ -63,7 +63,6 @@ class AntHero<AntBoss
 	end
 	
 	def noHLJob
-		puts "noHLJob #{self}"
 		if @player
 			@player.assignJob(self)
 			#stopFireSound
@@ -75,15 +74,15 @@ class AntHero<AntBoss
 	
 	def startFireSound
 		if not @fireSound
-			dputs "STARTING FIRE"
+			#dputs "STARTING FIRE"
 			@fireSound=AntSound.playLoopSoundGlobal(self,"fire",getPos2D,0.4)
-			dputs @fireSound
+			#dputs @fireSound
 		end
 	end	
 	def stopFireSound
 		if @fireSound
-			dputs "STOPPED"
-			dputs @job
+			#dputs "STOPPED"
+			#dputs @job
 			if @job.class==AntHeroRestJob
 				#raise "bla"
 			end
@@ -142,7 +141,7 @@ class AntHero<AntBoss
 	end
 	def newHLTakeFoodJob(target)
 		@job.stopJob if @job
-		puts "take food job #{self} #{target}"
+		#puts "take food job #{self} #{target}"
 		@job=AntHeroTakeJob.new(self,target,"food")
 		assignJob2All
 	end
@@ -163,7 +162,15 @@ class AntHero<AntBoss
 	end
 	def newHLBuildJob(pos,type)
 		@job.stopJob if @job
-		@job=AntHeroBuildJob.new(self,pos,type)
+		if true
+			target=AntBuildingSite.new(getMap)
+			target.setPos(pos)
+			target.building=type
+			getMap.insertEntity(target)
+			@job=AntHeroBuildJob.new(self,target) #pos,type)
+		else
+			@job=AntHeroBuildJob.new(self,pos,type)
+		end
 		assignJob2All
 	end
 	
@@ -177,7 +184,7 @@ class AntHero<AntBoss
 		men=men[0..c]
 		men.each{|m|
 			# seek new boss
-			b=getMap.getNextList(m,"house",0).collect{|e|puts e,e.class;e.get}.select{|e|e.getPlayer==getPlayer}.shuffle[0]
+			b=getMap.getNextList(m,"house",0).collect{|e|log e,e.class;e.get}.select{|e|e.getPlayer==getPlayer}.shuffle[0]
 			if b
 				m.setBoss(b)
 			else
@@ -215,11 +222,12 @@ class AntHero<AntBoss
 	
 	
 	def setFire(flag)
-		puts "setFire #{flag}"
+		#puts "setFire #{flag}"
 		if flag
 			if getPos3D.z>0 # won't start fire in water!!
 				if not @fire
-					@fire=AntFire.new(getPos3D+AGVector3.new(0.7,0,0))
+					@fire=AntFire.new(getMap)
+					@fire.setPos(getPos3D+AGVector3.new(0.7,0,0))
 					getMap.insertEntity(@fire)
 				end
 				startFireSound
@@ -235,19 +243,19 @@ class AntHero<AntBoss
 	end
 
 	def eventAttacked(by)
-		puts "eventAttacked #{by}"
+		#puts "eventAttacked #{by}"
 		super
 	end
 	
 	def assignJob2All
 		super
-		puts "ASSIGN JOB 2 All #{self}"
-		puts "---"
+		#puts "ASSIGN JOB 2 All #{self}"
+		#puts "---"
 		if @job.class!=AntHeroRestJob
 			setFire(false)
 		end
 		doEvent(:newJobAssigned)
-		puts "ASSIGN JOB ready."
+		#puts "ASSIGN JOB ready."
 	end
 
 	def setMeshState(name)
@@ -258,13 +266,12 @@ class AntHero<AntBoss
 
 		@origMeshState=name
 		name=checkOnWater(name)
-		puts "FIXME: implement setMeshState(.)"
 		@meshState=name
 		dir=getDirection
 		case name
 			when "row"
 				setMesh
-				addMesh(AntModels.createModel(:boat),AGVector3.new(0,0,0))
+				addMesh(AntModels.createModel(self,:boat),AGVector3.new(0,0,0))
 			when "dead"
 				setMesh(:grave_hero)
 			else
@@ -294,12 +301,10 @@ class AntHero<AntBoss
 
 		filename=""
 		if @portrait.length!=0
-			puts "port!=0"
 			filename=@portrait
 			#r=getTextureCache.get(@portrait)
 		else
-			puts "port==0"
-			#r=getTextureCache.get("data/gui/portraits/#{getName}.png")
+			log "no portrait defined"
 			filename="data/gui/portraits/#{getName}.png"
 		end
 		if fileExists(filename)
@@ -308,7 +313,6 @@ class AntHero<AntBoss
 			r=getTextureCache.get("data/gui/portraits/none.png")
 		end
 
-		puts "getImage-ok"
 		return r
 	end
 	def getDescription

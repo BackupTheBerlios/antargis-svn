@@ -21,7 +21,7 @@ class AntHeroBuildJob<AntHeroMoveJob
 			@building=@target.building
 		else
 			# make buildingsite
-			@target=AntBuildingSite.new
+			@target=AntBuildingSite.new(getMap)
 			@target.setPos(targetpos)
 			@target.building=building
 			getMap.insertEntity(@target)

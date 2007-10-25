@@ -26,6 +26,7 @@
 # 
 
 require 'ant_scripting.rb'
+require 'storyflow.rb'
 
 # This is the base scripting interface. Everything you want to do within level-scripting
 # can be accessed through this class and the objects you can get here. 
@@ -119,12 +120,10 @@ class AntLevelEntity
 		@valid
 	end
 	def ==(e)
-		puts "== #{self} #{e}"
 		return -1 unless e.is_a?(AntLevelEntity)
 		@ent==getMap.getByName(e.getName)
 	end		
 	def <=>(e)
-		puts "<=> #{self} #{e}"
 		return -1 unless e.is_a?(AntLevelEntity)
 		@ent<=>getMap.getByName(e.getName)
 	end
@@ -152,7 +151,6 @@ end
 class AntLevelScript
 	def initialize(interface)
 		@interface=interface
-		puts "INTERFACE:",@interface,self
 	end
 	def eventTrigger(hero,trigger)
 	end

@@ -14,7 +14,7 @@ class BaseState
 		@@edges[self]<<[v0,v1,f]
 	end
 	def BaseState.startState(s)
-		puts "setting startstate for #{self}:#{s}"
+		#puts "setting startstate for #{self}:#{s}"
 		@@startstate[self]=s
 	end
 	def BaseState.endState(s)
@@ -82,7 +82,7 @@ class BaseState
 	def stateCall(*s)
 		if @state
 			if @states[@state]
-				puts "(#{s})(#{s[0]})"
+				#puts "(#{s})(#{s[0]})"
 				if @states[@state].respond_to?(s[0])
 					@states[@state].send(*s) #(s[1..-1]))
 				end
@@ -92,22 +92,22 @@ class BaseState
 
 protected
 	def enterRecursive(selftoo=true)
-		puts "#{self}:enterRecursive"
+		#puts "#{self}:enterRecursive"
 
 		if self.respond_to?("enter") and selftoo
-			puts "#{self}:enterRecursive - enter..."
+			#puts "#{self}:enterRecursive - enter..."
 			enter
-			puts "#{self}:enterRecursive - enter.ok"
+			#puts "#{self}:enterRecursive - enter.ok"
 		end
 
-		puts "#{self}:enterRecursive - hasState:#{hasState}"
+		#puts "#{self}:enterRecursive - hasState:#{hasState}"
 		if hasState
-			puts "#{self}:enterRecursive - respond_to(enterRec):#{state.respond_to?("enterRecursive")}"
-			puts "#{self}:enterRecursive - state:#{state}"
+			#puts "#{self}:enterRecursive - respond_to(enterRec):#{state.respond_to?("enterRecursive")}"
+			#puts "#{self}:enterRecursive - state:#{state}"
 			if state.respond_to?("enterRecursive")
 				state.enterRecursive
 			else
-				puts "#{self}:enterRecursive - statecall-enter..."
+				#puts "#{self}:enterRecursive - statecall-enter..."
 				stateCall("enter")
 			end
 		end
@@ -125,7 +125,7 @@ private
 	end
 	
 	def toNextState
-		puts "#{self} toNextState:#{@state}:#{state}"
+		#puts "#{self} toNextState:#{@state}:#{state}"
 		nstate=nil
 		@@edges[self.class].each{|e|
 			if e[0]==@state

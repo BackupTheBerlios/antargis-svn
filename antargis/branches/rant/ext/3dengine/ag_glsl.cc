@@ -57,11 +57,12 @@ void printInfoLog(GLhandleARB obj)
 
     if (infologLength > 0)
     {
-      printf("GLSL ERROR:\n");
-        infoLog = (char *)malloc(infologLength);
-        glGetInfoLogARB(obj, infologLength, &charsWritten, infoLog);
-                printf("%s\n",infoLog);
-        free(infoLog);
+      cdebug("GLSL ERROR:");
+      infoLog = (char *)malloc(infologLength);
+      glGetInfoLogARB(obj, infologLength, &charsWritten, infoLog);
+      if(infoLog)
+	cdebug(infoLog);
+      free(infoLog);
     }
 }
 

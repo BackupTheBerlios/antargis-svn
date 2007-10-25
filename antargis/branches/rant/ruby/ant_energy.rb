@@ -12,7 +12,7 @@ class AntEnergy<AGWidget
 
 		@colors[:troops]=AGColor.new(0xcf,0,0)
 		@colors[:energy]=AGColor.new(0,0xcf,0)
-		@colors[:morale]=AGColor.new("#555555")
+		@colors[:morale]=AGColor.new("#0000FF")
 		@colors[:morale_defeated]=AGColor.new("#5555ff")
 		@colors[:food]=AGColor.new("#975500")
 		@colors[:exp]=AGColor.new("#FFFFFF")
@@ -72,7 +72,6 @@ private
 	def set(n,v)
 		o=@values[n]
 		if ((o-v).abs>0.1) or (o!=v and (v==0 or v==1))
-			puts "queryRedraw in ant_energy"
 			queryRedraw
 			@values[n]=v
 		end

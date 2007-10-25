@@ -101,13 +101,13 @@ class AntRubyView <AntBaseMapView
 			n=list[0]
 			mesh=n.node
 			ok=false
-			if mesh.class==Mesh
+			if mesh.class==Mesh or mesh.class==AnimMesh
 				ent=getMap.getEntity(mesh)
 				if ent
-					if ent.is_a?(AntBoss) then
+					#if ent.is_a?(AntBoss) then
 						hoverEntity(ent)
 						ok=true
-					end
+					#end
 				end
 			end
 			if not ok
@@ -119,7 +119,7 @@ class AntRubyView <AntBaseMapView
 	
 	def eventClick(list,button)
 		if (not @controls)
-			puts "CONTROLS DISABLED"
+			log "CONTROLS DISABLED"
 			return false
 		end
 		if list.length>0
@@ -135,15 +135,15 @@ class AntRubyView <AntBaseMapView
 	
 	def hoverEntity(e)
 		if @hover
-			if @hover.class==AntHero or @hover.is_a?(AntHouse)
+			#if @hover.class==AntHero or @hover.is_a?(AntHouse)
 				@hover.hovered=false
-			end
+			#end
 		end
 		@hover=e
 		if @hover
-			if @hover.class==AntHero or @hover.is_a?(AntHouse)
+			#if @hover.class==AntHero or @hover.is_a?(AntHouse)
 				@hover.hovered=true
-			end
+			#end
 		end
 	end
 	
@@ -162,7 +162,6 @@ class AntRubyView <AntBaseMapView
 		}
 		h/=9
 		h=[0,h].max
-		puts h
 		return h
 	end
 

@@ -291,6 +291,8 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
   //  assert(mHeuristicFunction);
   // FIXME: optimize this - use quadtree
 
+  assert(me);
+
   std::multimap<float,AntEntity*> ents;
 
 

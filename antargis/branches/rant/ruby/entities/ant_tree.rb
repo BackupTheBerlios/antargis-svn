@@ -18,52 +18,12 @@
 # License along with this program.
 #
 
-#require 'fir_mesh.rb'
-#require 'ant_appletree.rb'
 require 'ant_grass.rb'
 
 
-# def getTreeStub
-# 	getMeshData("data/models/stub.ant2",0.04,"data/textures/models/stub.png")
-# end
-# 
-# def getTreeTypes
-# 	files=[
-# 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir5.png"),
-# 		getMeshData("data/models/fir2.ant2",0.45,"data/textures/models/fir7.png"),
-# #		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/fir5.png"),
-# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree3.png"),
-# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree5.png"),
-# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree9.png"),
-# 		getMeshData("data/models/tree6.ant2",0.45,"data/textures/models/tree5.png"),
-# 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/fir_complete.png"),
-# 		#getMeshData("data/models/tree1.ant2",1,"data/textures/models/birch_complete.png"),
-# 		getMeshData("data/models/tree5.ant2",0.45,"data/textures/models/tree10.png"),
-# 	]
-# 	files.each{|f|f.setCulling(false)} # patch for old trees
-# 	files+=[
-# 		getMeshData("data/models/tree_simple1.ant2",0.3,"data/textures/models/tree_simple1.png"),
-# 		getMeshData("data/models/tree_simple2.ant2",0.3,"data/textures/models/tree_simple1.png"),
-# 		getMeshData("data/models/tree_simple5.ant2",0.3,"data/textures/models/tree_simple5.png")
-# 	]
-# 
-# end
-# 
-# def getTreeMeshByType(type)
-# 	if type<0
-# 		return getTreeStub
-# 	end
-# 	d=getTreeTypes[type]
-# 	d||=getTreeTypes[0]
-# 	
-# 	d.setTransparent(true)
-# 	#d.setCulling(true) #false)
-# 	return d
-# end
-
 class AntTree<AntRubyEntity
-	def initialize(typeID=nil)
-		super(AGVector2.new(0,0))
+	def initialize(map,typeID=nil)
+		super(map)
 		@typeID=typeID
 		#@typeID||=(getRand*getTreeTypes.length).to_i
 		@typeID||=(getRand*(AntModels.getMeshCount(:tree)-1)).to_i

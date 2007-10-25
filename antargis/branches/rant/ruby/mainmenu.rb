@@ -113,7 +113,6 @@ class AntMenuApp <AntApplication
 
 	def updateLoadMenu
 		fs=getDirectory(getWriteDir+"/savegames").select{|f|f=~/\.antcmp/}.sort.uniq
-		puts fs.join(" ")
 		l=@loadMenu.getChild("list")
 		l.clearList
 		fs.each{|f|
@@ -169,11 +168,8 @@ class AntMenuApp <AntApplication
 
 	# SINGLE GAME MENU
 	def updateSingleMenu
-		puts "DIR.."
 		fs=getDirectory("./data/levels")
-		puts fs.join(" ")
 		fs=fs.select{|f|f=~/\.antlvl/ and (not f=~/~/)}.sort.uniq
-		puts fs.join(" ")
 		l=@singleMenu.getChild("list")
 		l.clearList
 		fs.each{|f|
@@ -280,9 +276,7 @@ class AntMenuApp <AntApplication
 		campaignButtons=(0..(buttonCount-1)).to_a.collect{|c|"campaign#{c}"}
 		i=0
 		campaignButtons.each{|b|
-			puts "get widget named: #{b}"
 			c=@campaignMenu.getChild(b)
-			puts "got widget #{c} of type #{c.class}"
 			addHandler(c,:sigClick,:eventMission)
 			if @campaigns.length>i
 				c.setCaption(_(@campaigns[i].name))
@@ -305,7 +299,6 @@ class AntMenuApp <AntApplication
 	end
 	
 	def eventStart(e)
-		puts "EVENTSTART"
 		if @selCampaign
 			soundOff
 			#startGame(@selCampaign)
@@ -382,7 +375,7 @@ class AntMenuApp <AntApplication
 		@frameTime+=t
 		@frames+=1
 		if @frames>100
-			puts "FPS:#{100.0/@frameTime}"
+			log "FPS:#{100.0/@frameTime}"
 			@frameTime=0
 			@frames=0
 		end

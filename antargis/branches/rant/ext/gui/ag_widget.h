@@ -33,6 +33,7 @@
 class AGTooltip;
 class AGLayout;
 class AGClipping;
+class AGApplication;
 
 /** 
     \defgroup widgets Widgets
@@ -77,6 +78,9 @@ class AGEXPORT AGWidget:public AGMessageObject
  public:
   AGWidget(AGWidget *pParent,const AGRect2 &r);
   virtual ~AGWidget();
+
+	AGApplication *getApp();
+	void setApp(AGApplication *pApp);
 
   virtual void initHandlers();
   
@@ -210,6 +214,9 @@ class AGEXPORT AGWidget:public AGMessageObject
   void clearChangeRects();
 
  private:
+
+	AGApplication *mApp;
+
   std::list<AGRect2> mMyChanges;
 
   void regChange();

@@ -6,9 +6,7 @@ def getMeshData(file,zoom,texture="",shadow=true)
 		$meshes={}
 	end
 	if not $meshes[id]
-		puts "LOAD MESH:"+id	
 		$meshes[id]=MeshData.new(file,zoom,texture,shadow)
-
 	end
 	return $meshes[id]
 end
@@ -23,29 +21,6 @@ def getAnimMeshData(file)
 
 	end
 	return $meshes[file]
-end
-
-module Libantargisbasic
-	class AGVector3
-		def x=(p)
-			setX(p)
-		end
-		def y=(p)
-			setY(p)
-		end
-		def z=(p)
-			setZ(p)
-		end
-	end
-	class AGVector2
-		def _dump(depth)
-			[x,y].pack("gg")
-		end
-		def AGVector2._load(s)
-			a,b=s.unpack("gg")
-			AGVector2.new(a,b)
-		end
-	end
 end
 
 def displayError(error)

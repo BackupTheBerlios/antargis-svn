@@ -30,7 +30,7 @@ require 'jobs/ant_hljob_states.rb'
 require 'jobs/ant_hljob_base.rb'
 
 
-class AntNewHLRestJob<AntNewHLJob
+class AntHeroRestJob<AntNewHLJob
 	state :formatSit=>HLJob_FormatSit
 	state :sitDown=>HLJob_SitDown
 	state :justSitOnce=>HLJob_JustSitOnce
@@ -63,9 +63,9 @@ class AntNewHLRestJob<AntNewHLJob
 
 	def checkSpread
 		curTime=getTime
-		puts "SPREADTIME: #{@spreadTime}   getTime:#{curTime}"
+		#puts "SPREADTIME: #{@spreadTime}   getTime:#{curTime}"
 		return true if @spreadTime.nil?
-		puts "#{curTime-@spreadTime}>#{SPREAD_CHECK_TIME}"
+		#puts "#{curTime-@spreadTime}>#{SPREAD_CHECK_TIME}"
 		return curTime-@spreadTime>SPREAD_CHECK_TIME
 	end
 
@@ -75,15 +75,9 @@ class AntNewHLRestJob<AntNewHLJob
 		
 end
 
-begin
-AntHeroRestJobOld=AntHeroRestJob
-rescue
-end
-AntHeroRestJob=AntNewHLRestJob
 
 
-
-class AntNewHLMoveJob<AntNewHLJob
+class AntHeroMoveJob<AntNewHLJob
 	state :moveComplete=>	HLJob_MoveComplete
 	state :endState => HLJob_DummyState
 
@@ -112,16 +106,10 @@ class AntNewHLMoveJob<AntNewHLJob
 	end
 
 end
-begin
-AntHeroMoveJobOld=AntHeroMoveJob
-rescue ; end
-AntHeroMoveJob=AntNewHLMoveJob
 
 
 
-
-
-class AntNewHLTakeJob<AntNewHLJob
+class AntHeroTakeJob<AntNewHLJob
 	state :fetchStart => HLJob_FetchStart
 	state :getResource => HLJob_GetResource
 	state :move =>HLJob_MoveComplete
@@ -164,15 +152,9 @@ class AntNewHLTakeJob<AntNewHLJob
 	end
 end
 
-begin
-AntHeroTakeJobOld=AntHeroTakeJob
-rescue; end
-AntHeroTakeJob=AntNewHLTakeJob
 
 
-
-
-class AntNewHLKillAnimal<AntNewHLTakeJob
+class AntHeroFightAnimalJob<AntHeroTakeJob
 	inheritMachine
 
 	def gettingResource
@@ -181,7 +163,6 @@ class AntNewHLKillAnimal<AntNewHLTakeJob
 		killAnimal
 		super
 	end
-
 	
 	private
 	def playSound
@@ -192,14 +173,9 @@ class AntNewHLKillAnimal<AntNewHLTakeJob
 		hero.resource.takeAll(target.resource)
 	end
 end
-begin
-AntHeroFightAnimalJobOld=AntHeroFightAnimalJob
-rescue;end
-AntHeroFightAnimalJob=AntNewHLKillAnimal
 
 
-
-class AntNewHLFight<AntNewHLJob
+class AntHeroFightJob<AntNewHLJob
 	state :move=>HLJob_MoveComplete
 	state :fight=>HLJob_Fight
 	state :endState=>HLJob_DummyState
@@ -215,7 +191,7 @@ class AntNewHLFight<AntNewHLJob
 	def initialize(hero,target,defend=false)
 		@targetPos=target.getPos2D
 		@target=target
-		puts "DEFEND #{defend}"
+		#puts "DEFEND #{defend}"
 		if defend
 			trace
 			super(hero,:fight)
@@ -228,7 +204,7 @@ class AntNewHLFight<AntNewHLJob
 		assert{@state==:fight || defend==false}
 		@states[:move].near=10
 
-		puts "STATE #{state}"
+		#puts "STATE #{state}"
 	end
 
 	def image
@@ -236,37 +212,18 @@ class AntNewHLFight<AntNewHLJob
 	end
 
 	def eventWon(opponent)
-
-# 		trace
-# 		puts hero,hero.getName
-# 		raise 1
+		log "eventWon hero:#{hero} opp:(#{opponent})"
 	end
 	def eventLost(opponent)
-# 		trace
-# 		puts hero,hero.getName
-# 		raise 1
+		log "eventLog hero:#{hero} opp:(#{opponent})"
 		hero.setOwner(opponent)
 	end
 
 
 end
 
-# rename and replace old hl-jobs
 
-
-
-
-
-
-# AntHeroFightAnimalJobOld=AntHeroFightAnimalJob
-# AntHeroFightAnimalJob=AntNewHLKillAnimal
-# 
-begin
-AntHeroFightJobOld=AntHeroFightJob
-rescue;end
-AntHeroFightJob=AntNewHLFight
-
-class AntNewHLRecruitJob<AntNewHLJob
+class AntHeroRecruitJob<AntNewHLJob
 	state :moveComplete=>	HLJob_MoveComplete
 	state :recruit=>HLJob_Recruit
 	state :endState => HLJob_DummyState
@@ -299,15 +256,85 @@ class AntNewHLRecruitJob<AntNewHLJob
 	def makeMessage(boss)
 		MoveMessage.new(boss,targetPos,@dist)
 	end
-
 end
-begin
-AntHeroRecruitJobOld=AntHeroRecruitJob
-rescue ; end
-AntHeroRecruitJob=AntNewHLRecruitJob
+
+
+
+class AntHeroConstructJob<AntNewHLJob
+	state :moveComplete=>	HLJob_MoveComplete
+	state :spreadThings=>HLJob_SpreadThings
+	state :construct=>HLJob_Construct
+	state :endState => HLJob_DummyState
+
+	startState :moveComplete
+	endState :endState
+
+	edge :moveComplete,:spreadThings
+	edge :spreadThings,:construct
+	edge :construct,:endState
+
+	attr_accessor :targetPos
+	attr_accessor :formatDir
+	attr_accessor :target
+
+	def initialize(hero,target)
+		@targetPos=target.getPos2D
+		@target=target
+		super(hero)
+		@states[:moveComplete].near=4
+		
+		if (hero.getPos2D-target.getPos2D).length<4
+			state.moveDirectly			
+		end
+	end
+	# FIXME: move this to a config-file !
+	def image
+		"data/gui/construct.png"
+	end
+	# FIXME: discard this
+	def makeMessage(boss)
+		MoveMessage.new(boss,targetPos,@dist)
+	end
+end
+
+class AntHeroBuildJob<AntNewHLJob
+	state :moveComplete=>	HLJob_MoveComplete
+	state :spreadThings=>HLJob_SpreadThings
+	state :build=>HLJob_Build
+	state :endState => HLJob_DummyState
+
+	startState :moveComplete
+	endState :endState
+
+	edge :moveComplete,:spreadThings
+	edge :spreadThings,:build
+	edge :build,:endState
+
+	attr_accessor :targetPos
+	attr_accessor :formatDir
+	attr_accessor :target
+
+	def initialize(hero,target)
+		@targetPos=target.getPos2D
+		@target=target
+		super(hero)
+		@states[:moveComplete].near=4
+		
+		if (hero.getPos2D-target.getPos2D).length<4
+			state.moveDirectly			
+		end
+	end
+	# FIXME: move this to a config-file !
+	def image
+		"data/gui/build.png"
+	end
+	# FIXME: discard this
+	def makeMessage(boss)
+		MoveMessage.new(boss,targetPos,@dist)
+	end
+end
 
 
 # FIXME:
-# 2) constructing
 # 3) build houses
-
+# saving/loading

@@ -3,24 +3,24 @@ require 'ruby/antargislib.rb'
 require 'ruby/entities/entities.rb'
 require 'ruby/map.rb'
 
+class AntRubyEntity
+	alias :resourceChangedOld :resourceChanged
+	def resourceChanged
+		$ok=true
+	end
+end
+
 (AntRubyEntity.descendants-[AntRubyEntity]).each{|aClass|
 	describe aClass do
-		it "should call AntRubyEntity.resourceChanged when resourceChanges is called on a descendant" do
-			puts "TESTING #{aClass}"
-			class AntRubyEntity
-				alias :resourceChangedOld :resourceChanged
-				def resourceChanged
-					$ok=true
-				end
-			end
+		it "(#{aClass}) should call AntRubyEntity.resourceChanged when resourceChanges is called on a descendant" do
+			#puts "TESTING #{aClass}"
 			$ok=false
-			map=AntRubyMap.new(nil,nil,32,32)
-			object=aClass.new #(AGVector2.new(0,0))
+			app=GLApp.new(800,600)
+			scene=app.getScene
+			map=AntRubyMap.new(app,scene,32,32)
+			object=aClass.new(map)
 			object.setPos(AGVector2.new(1,1))
 			object.resourceChanged
-			class AntRubyEntity
-				alias :resourceChanged :resourceChangedOld
-			end
 			$ok.should == true
 			
 		end

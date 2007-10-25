@@ -211,7 +211,9 @@
 			
 			<cell col="0" row="3">
 					<!-- FIXME: insert some background here -->
-				<image filename="data/gui/wood_bg.png" tile="true"/>
+				<frame border="button.border.normal" visible="true">
+					<image filename="data/gui/wood_bg.png" tile="true"/>
+				</frame>
 			</cell>
 			
 			<cell col="0" row="4">

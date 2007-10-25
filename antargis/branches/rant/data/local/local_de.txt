@@ -27,7 +27,6 @@ A stranger appeared and they want to follow him and drive you away.;;Ein Fremder
 Abort this mission;;Mission abbrechen
 Alexandru Lazar;;
 Alexandru Lazar (std);;
-Ambien Sound;;Lautstärke (Geräusche)
 Ambient sound;;Lautstärke (Geräusche)
 Andreas Bresser (Pscho);;
 Anything else is gone. You've lost your memory.;;Alles andere ist weg. Du hast dein Gedächtnis verloren.

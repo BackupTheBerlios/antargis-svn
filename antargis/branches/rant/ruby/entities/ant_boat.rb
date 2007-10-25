@@ -4,7 +4,7 @@ end
 
 # A boat lying around - for rowing this is not used!
 class AntBoat<AntRubyEntity
-	def initialize(p=AGVector2.new(0,0))
+	def initialize(map)
 		super
 		setupMesh
 	end

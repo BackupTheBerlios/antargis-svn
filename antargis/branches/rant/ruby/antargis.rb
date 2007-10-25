@@ -40,6 +40,8 @@ require 'game_result.rb'
 require 'storyflow.rb'
 require 'mpmap.rb'
 
+require 'pp'
+
 # get save path where savegames are stored
 # NOTE: this is combined with getWriteDir from ag_fs.h !
 def getSavePath
@@ -107,14 +109,12 @@ class AntGameApp <AntRubyView
 			loadscreen.setValue(0.4)
 			loadscreen.tick
 		end
-		#$map=@map
 
 		# load GUI layout
-		puts "antargis.rb:CREATE LAYOUT"
 		@layout=AGLayout.new(nil)
-		puts "antargis.rb:LOAD LAYOUT"
+		@layout.setApp(self)
+		assert{@layout.getApp}
 		@layout.loadXML(loadFile("data/gui/layout/ant_layout.xml"))
-		puts "antargis.rb:GET CHILDREN"
 	
 
 		# init pointers to different displays
@@ -122,8 +122,6 @@ class AntGameApp <AntRubyView
 		@statusBar=@layout.getChild("statusBar")
 		@inventory=@layout.getChild("inventory")
 		@buttonpanel=@layout.getChild("antButtonPanel")
-		puts "PANEL:",@buttonpanel
-		raise 1 if @buttonpanel.nil?
 
 		@miniMap=@layout.getChild("miniMap")
 		@fps=0
@@ -137,12 +135,10 @@ class AntGameApp <AntRubyView
 			loadscreen.setValue(0.5)
 			loadscreen.tick
 		end
-		
-		#$screen=@layout
 	
 		if @miniMap
 			# connect MiniMap with Map for displaying terrain and entities
-			@miniMap.setMap(getMap)
+			@miniMap.setMap(@map)
 			# connect MiniMap with Scene for displaying frustrum
 			@miniMap.setScene(getScene)
 		end
@@ -154,15 +150,13 @@ class AntGameApp <AntRubyView
 		
 		if savegameText && savegameText.length>0
 			# load a level
-			getMap().loadMapFromMemory(savegameText)
+			@map.loadMapFromMemory(savegameText)
 		end	
 
 		if loadscreen
 			loadscreen.setValue(0.95)
 			loadscreen.tick
 		end
-
-		puts "PANEL:",@buttonpanel
 
 		# inventory and buttonpanel signals
 		addHandler(@inventory,:sigJobChanged,:eventInventoryJob)
@@ -180,10 +174,6 @@ class AntGameApp <AntRubyView
 		#setCursor(getTextureCache.get("blue_cursor.png"))
 	end
 
-# 	def getSpeed
-# 		@speed
-# 	end
-
 	####################################
 	# EVENT HANDLERS
 	####################################
@@ -197,7 +187,7 @@ class AntGameApp <AntRubyView
 		case @buttonpanel.job
 			when "doDismiss"
 				# opens a query dialog "do really want to do this?", that is given a block, that's executed on confirmation
-				@layout.addChild(AntQueryDialog.new(@layout,nil) {puts @hero;@hero.newHLDismissJob})
+				@layout.addChild(AntQueryDialog.new(@layout,nil) {@hero.newHLDismissJob})
 			when "doRest"
 				if @hero
 					@hero.newHLRestJob(10)
@@ -212,7 +202,7 @@ class AntGameApp <AntRubyView
 
 	def eventInventoryJob(e)
 		if @target.nil? #some more overview as
-			puts "NO TARGET SELECTED"
+			log "NO TARGET SELECTED"
 		else
 			case @inventory.job
 				when "doRecruit"
@@ -302,11 +292,7 @@ class AntGameApp <AntRubyView
 			else
 				fps=sprintf("%3.0f",@fps)
 			end
-			#puts "FPS:"+fps
-			#puts "pick-tris:"+getScene.getPickTriangles.to_s
 			@statusBar.setText(_("FPS:{1}",fps.to_s))
-			#puts "Tris:"+getScene.getTriangles.to_s
-			#puts "MESHES:"+getScene.getDrawnMeshes.to_s
 			@frameCount=0
 			@elapsTime=0
 			startGC
@@ -417,7 +403,6 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventMapClicked(pos,button)
-		puts "#{@job} #{button}"
 		if @job and button==1 then
 			case @job
 				when "doBuild"
@@ -437,6 +422,10 @@ class AntGameApp <AntRubyView
 	###############################
 	# simple functions
 	###############################
+
+	def getMap
+		@map
+	end
 
 	def processMessages
 		if @connection
@@ -477,7 +466,6 @@ class AntGameApp <AntRubyView
 	def setHeroName(name,num)
 		@layout.getChild("HeroName#{num}").setText(_(name))
 		c=@layout.getChild("HeroBar#{num}")
-		puts "LAYOUT:",@layout
 		raise 1 if c.nil?
 		c.setVisible((name!=""))
 	end
@@ -577,6 +565,7 @@ class AntGameApp <AntRubyView
 			@story=AntStoryTalk.new(@layout)
 		end
 		@layout.addChild(@story)
+		assert{@story.getApp}
 		@story.show
 		@story.setFlow(flow)
 		addHandler(@story,:sigStoryFinished,:eventStoryTalkFinished)
@@ -584,15 +573,15 @@ class AntGameApp <AntRubyView
 
 	def inspectEntity(e)
 		if @inspect
-			if @inspect.is_a?(AntBoss)
+			#if @inspect.is_a?(AntBoss)
 				@inspect.selected=false
-			end
+			#end
 		end
 		@inspect=e
 		if @inspect
-			if @inspect.is_a?(AntBoss)
+			#if @inspect.is_a?(AntBoss)
 				@inspect.selected=true
-			end
+			#end
 		end
 		AntInventory.inspectEntity(e)
 	end

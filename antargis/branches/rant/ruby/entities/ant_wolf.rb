@@ -32,8 +32,8 @@
 class AntWolf<AntAnimal
 	attr_accessor :leader,:mypack
 
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("wolf",true)
 		setProvide("wolf_leader",true)
 		setSpeed 3

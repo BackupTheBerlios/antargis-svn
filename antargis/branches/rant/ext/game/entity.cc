@@ -25,6 +25,12 @@
 #include "mesh.h"
 #include "anim_mesh.h"
 
+AntEntity::AntEntity(AntMap *pMap):mMap(pMap),mPos(0,0,0)
+{
+  assert(mMap);
+  init();
+}
+/*
 AntEntity::AntEntity(const AGVector3 &p):mPos(p)
 {
   init();
@@ -37,7 +43,7 @@ AntEntity::AntEntity(const AGVector2 &p):mPos(getMap()->getPos(p))
 AntEntity::AntEntity():mPos(0,0,0)
 {
   init();
-}
+  }*/
 
 void AntEntity::init()
 {
@@ -422,6 +428,7 @@ AntEntity::Meshes AntEntity::getMesh()
 
 SceneNode *AntEntity::getFirstMesh()
 {
+  assert(mMeshes.size()>0);
   return mMeshes.front();
 }
 
@@ -463,9 +470,9 @@ void AntEntity::setVisible(bool v)
 
 
 
-void AntEntity::newRestJob(float pTime)
+void AntEntity::newRestJob(float pTime,bool pWork)
 {
-  setJob(new RestJob(pTime));
+  setJob(new RestJob(pTime,pWork));
 }
 void AntEntity::newFetchJob(int p,AGVector2 &pTarget,const AGString &what)
 {
@@ -900,3 +907,8 @@ bool AntEntity::defeated() const
   return mDefeated;
 }
 
+
+AntMap *AntEntity::getMap()
+{
+  return mMap;
+}

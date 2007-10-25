@@ -79,8 +79,8 @@ class AntDialog<AGLayout
 
 		case e.getKey
 			when SDLK_ESCAPE
+				getApp.getMap.pause=false
 				eventClose(e)
-				getMap.pause=false
 				return true
 			when SDLK_RETURN, SDLK_SPACE
 				eventOk(e)
@@ -98,7 +98,7 @@ end
 class AntStoryTalk<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/storytalk.xml",false)
-		getMap().pause=true
+		getApp.getMap().pause=true
 		addHandler(getChild("window"),:sigClose,:eventOk)
 		addHandler(getChild("back"),:sigClick,:eventBack)
 		addHandler(getChild("forward"),:sigClick,:eventClose)
@@ -128,7 +128,7 @@ class AntStoryTalk<AntDialog
 		c=@flow.get
 		if c
 			setTitle(c[0])
-			setFace(getMap.getPortrait(c[0]))
+			setFace(getApp.getMap.getPortrait(c[0]))
 			setText(c[1])
 			return true
 		else
@@ -140,7 +140,7 @@ class AntStoryTalk<AntDialog
 	def eventClose(e)
 		if not updateText
 			sigStoryFinished(e)
-			getMap().pause=false
+			getApp.getMap().pause=false
 			hide
 			super
 		else
@@ -179,11 +179,11 @@ class AntQuitDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/quitquery.xml")
 		setName("QuitDialog")
-		getMap.pause=true
+		getApp.getMap.pause=true
 	end
 	def eventClose(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
 		return true
 	end
 	def eventOk(e)
@@ -201,7 +201,7 @@ class AntOptionsDialog<AntDialog
 		addHandler(getChild("story"),:sigClick,:eventStory)
 		addHandler(getChild("video"),:sigClick,:eventVideo)
 		addHandler(getChild("audio"),:sigClick,:eventAudio)
-		getMap.pause=true
+		getApp.getMap.pause=true
 	end
 	def eventStory
 		close
@@ -230,8 +230,8 @@ class AntOptionsDialog<AntDialog
 		return true
 	end
 	def eventClose(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
 		return true
 	end
 end
@@ -259,9 +259,9 @@ class AntSaveDialog<AntDialog
 			filename=filename.to_s+".antlvl"
 		end
 		hide
-		getMap.saveMap(getSavePath+"/"+filename)
+		getApp.getMap.saveMap(getSavePath+"/"+filename)
 		takeSmallScreenshot.save(getSavePath+"/#{filename.gsub("antlvl","png")}")
-		getMap.pause=false
+		getApp.getMap.pause=false
 		AntSound.setNormalVolumeWave
 		close
 		return true
@@ -285,14 +285,14 @@ class AntSaveCampaignDialog<AntDialog
 		hide
 		$campaign.save("savegames/"+filename)
 		takeSmallScreenshot.save("savegames/#{filename.gsub("antcmp","png")}")
-		#getMap.saveMap("savegames/"+filename)
-		getMap.pause=false
+		#getApp.getMap.saveMap("savegames/"+filename)
+		getApp.getMap.pause=false
 		close
 		return true
 	end
 	def eventClose(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
 		return true
 	end
 end
@@ -314,17 +314,17 @@ class AntLoadDialog<AntDialog
 	def eventOk(e)
 		file=@lb.getSelectedID
 		if file!="" then
-			getMap.clear
-			getMap.loadMap(getSavePath+"/"+file)
+			getApp.getMap.clear
+			getApp.getMap.loadMap(getSavePath+"/"+file)
 			GC.start
 		end
-		getMap.pause=false
+		getApp.getMap.pause=false
 		close
 		return true
 	end
 	def eventClose(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
 		return true
 	end
 end
@@ -349,7 +349,7 @@ class AntAudioOptionsDialog<AntDialog
 			addHandler(getChild(cname),:sigClick,:eventModBar)
 		}
 
-		getMap.pause=true
+		getApp.getMap.pause=true
 		readVolumes
 	end
 
@@ -368,7 +368,7 @@ class AntAudioOptionsDialog<AntDialog
 		updateVolumesP
 	end
 	def eventOk(e)
-		getMap.pause=false
+		getApp.getMap.pause=false
 		close
 		return true
 	end
@@ -401,10 +401,10 @@ class AntVideoOptionsDialog<AntDialog
 		addHandler(getChild("1024"),:sigClick,:event1024)
 		addHandler(getChild("1280"),:sigClick,:event1280)
 		addHandler(getChild("1400"),:sigClick,:event1400)
-		getMap.pause=true
+		getApp.getMap.pause=true
 	end
 	def eventOk(e)
-		getMap.pause=false
+		getApp.getMap.pause=false
 		close
 		return true
 	end
@@ -458,14 +458,13 @@ class AntPauseDialog<AntDialog
 	def initialize(parent)
 		super(parent,"data/gui/layout/pause.xml")
 		setName("PauseDialog")
-		if getMap
-			getMap.pause=true
+		if getApp.getMap
+			getApp.getMap.pause=true
 		end
 	end
 	def eventOk(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
-		#hide
 		return true
 	end
 end
@@ -480,19 +479,19 @@ class AntQueryDialog<AntDialog
 		@block=block
 
 		setName("PauseDialog")
-		if getMap
-			getMap.pause=true
+		if getApp.getMap
+			getApp.getMap.pause=true
 		end
 	end
 	def eventCancel(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
 		return true
 	end
 
 	def eventOk(e)
+		getApp.getMap.pause=false
 		super
-		getMap.pause=false
 
 		@block.call
 		return true
@@ -624,8 +623,8 @@ class AntBuildDialog<AGLayout
 			house=@map[e.getCaller.getName].new
 			puts "POS:#{@pos}"
 			house.setPos(@pos)
-			getMap.insertEntity(house)
-			house.setPlayer(getMap.getPlayer)
+			getApp.getMap.insertEntity(house)
+			house.setPlayer(getApp.getMap.getPlayer)
 			house.setName(house.class.to_s.gsub("Ant",""))
 		else
 			@hero.newHLBuildJob(@pos,@map[e.getCaller.getName])

@@ -78,6 +78,9 @@ module CFG
 			puts "ERROR:"
 			puts "The following tests failed:"
 			failed.each{|f|puts f}
+			puts ""
+			puts "For more information look into the log-file config.log."
+			puts "And don't hesitate to ask questions our forum: http://antargis.berlios.de/phpBB2"
 		end
 
 		failed.length==0
@@ -92,8 +95,10 @@ $config={
 }
 EOT
 		f.close
-		#puts File.open(configName).read
-	
+	end
+
+	def self.add(n,v)
+		set(n,get(n).to_s+" "+v)
 	end
 
 	def CFG.set(n,v)
@@ -104,54 +109,42 @@ EOT
 	end
 
 	def CFG.checkProgram(program,needed=true)
-# 		addOption("path-"+program,"",
-# 			"set path to program '#{program}' like this:\n --path-#{program}=/usr/local/bin/#{program}","path") do |d|
-# 				set(program,d)
-# 			end
-
 		addCheck("program "+program,needed) do
 			path=get(program)
 			path||=findProgram(program)
 			r=testProgram(path)
-			#puts "found at #{path}"
 			set(program,path) if r
 			r
 		end
 	end
 
 	def CFG.getPath
-			p=ENV['PATH']
-			psep={"/"=>":","\\"=>";"}[Dir.separator]
-			#puts p,p.class,psep
-			ps=p.split(psep)
-			#puts get("prefix")
-			ps << get("prefix")+Dir.separator+"bin" if get("prefix")
-			if Dir.separator=="\\"
-					ps << (Dir.pwd+"/build/win32/usr/bin").gsub("/",Dir.separator)
-			end
-			ps
+		p=ENV['PATH']
+		psep={"/"=>":","\\"=>";"}[Dir.separator]
+		#puts p,p.class,psep
+		ps=p.split(psep)
+		#puts get("prefix")
+		ps << get("prefix")+Dir.separator+"bin" if get("prefix")
+		if Dir.separator=="\\"
+				ps << (Dir.pwd+"/build/win32/usr/bin").gsub("/",Dir.separator)
+		end
+		ps
 	end
 
 	def CFG.findProgram(program)
-        #program+=".exe" if Dir.separator=="\\" and not program=~/\.\{exe|com|bat\}$/
-        paths=getPath
-        paths.each{|p|
-            currentPath=p+Dir.separator+program
-            #puts "TST #{currentPath}"
-            if File.exists?(currentPath)
-	#                puts "FOUND! at #{currentPath}"
-                return currentPath
-            end
-        }
-        return findProgram(program+".exe") if Dir.separator=="\\" and not program=~/exe$/
-        return ""
-		#`whereis #{program}`.gsub(/[^:]*: */,"").split(" ")[0]
+		paths=getPath
+		paths.each{|p|
+			currentPath=p+Dir.separator+program
+			if File.exists?(currentPath)
+				return currentPath
+			end
+		}
+		return findProgram(program+".exe") if Dir.separator=="\\" and not program=~/exe$/
 	end
 
 	# check if +path+ exists. Maybe we should check, if +path+ is executable
 	def CFG.testProgram(path)
-		#puts path,File.exists?(path),"--"
-			File.exists?(path)
+		File.exists?(path)
 	end
 
 	def CFG.includeConfig
@@ -175,32 +168,35 @@ EOT
 
 	def CFG.gatherMkmfInfo
 		CFG.set("RUBYLIB",getConfig("LIBRUBYARG_SHARED"))
+		CFG.set("LIBS",CFG.get("LIBS").to_s+" "+CFG.get("RUBYLIB"))
+		#pp CFG.get("LIBS")
+	end
+
+	def CFG.checkCProgram(text,addlibs=[])
+		require 'build/build.rb'
+		begin Dir.mkdir(".tmp"); rescue ;end
+		filename=".tmp/test.c"
+		obj=Build.cFileToObj(filename)
+		exe=".tmp/test"
+		[filename,obj,exe].each{|f|begin File.delete(f); rescue;end}
+
+		f=File.open(filename,"w")
+		f.puts text
+		f.close
+		Build.log="config.log"
+		Build.silent=true
+		Build.compile(filename)
+		Build.link(exe,[obj],addlibs)
+		result=system(exe)
+		#puts exe,result
+		result
 	end
 
 	def CFG.checkLibrary(libname,description,needed=true)
 		addCheck("lib"+libname,needed) do ||
-			#puts "FIXME checkLibrary #{libname}  #{description}"
-			if true
-				
-				# C-check
-				begin Dir.mkdir(".tmp"); rescue ;end
-				filename=".tmp/test.c"
-				f=File.open(filename,"w")
-				f.puts "int main(){return 0;}"
-				f.close
-				require 'build/build.rb'
-				Build.silent=true
-				Build.compile(filename)
-				obj=Build.cFileToObj(filename)
-				exe=".tmp/test"
-				Build.link(exe,[obj],["-l"+libname])
-				result=system(exe)
-				
-				set("LIBS",get("LIBS").to_s+" -l#{libname}") if result
-				result
-			end
-			
-
+			result=checkCProgram("int main(){return 0;}",["-l"+libname])
+			set("LIBS",get("LIBS").to_s+" -l#{libname}") if result
+			result
 		end
 	end
 
@@ -208,55 +204,26 @@ EOT
 		get("LIBS").split(" ").map{|l|l[2..-1]}.member?(libname)
 	end
 
+	def self.checkFunction(name,needed=true)
+		addCheck("function #{name}",needed) do ||
+			#puts CFG.get("LIBS")
+			result=checkCProgram("extern \"C\" int #{name}(...);int main(){#{name}();return 0;}",[get("LIBS")])
+			raise 1 unless result
+			result
+		end
+	end
+
+	def self.checkHeader(header,function=nil,error=nil,needed=true)
+		error="header #{header}" if error.nil?
+		addCheck(error,needed) do ||
+			#function+="();" if function
+			result=checkCProgram("#include <#{header}>\nint main(){void *f=(void*)#{function};return !f;}",[get("LIBS")])
+		end
+	end
+
 
 	private
 
-	# this function parses the cli-inputs
-	#
-	# *FIXME: replace this with the standard ruby-cli-input-parser
-	def CFG.parseArgsOld
-		ARGV.each{|arg|
-			found=false
-			# parse single arguments like "-d" or "-dgh" (like tar -xfz)
-			if arg=~/^-[a-z]+$/
-				found=true
-				# check if all characters represent a correct option
-				arg[1..-1].scan(/./){|byte|
-					found=false if @@options.select{|op|op[:short]==byte}.length==0
-				}
-				if found
-					# all were ok, so call each these options
-					arg[1..-1].scan(/./){|byte|
-						@@options.each{|op|
-							if op[:short]==byte
-								puts "* #{op[:help]}"
-								op[:proc].call(true)
-							end
-						}
-					}
-				end
-			end
-			if not found
-				# option could not yet be processed, so do a second try
-				@@options.each{|op|
-					name=op[:name]
-					ename=name.gsub("+","\\\\+")
-					#puts "ENAME:#{ename}"
-					# parse "simple" options without parameters
-					if arg=~/^--#{ename}$/ or arg=~/^-#{op[:short]}$/
-						found=true
-						puts "* #{op[:help]}"
-						op[:proc].call(found)
-					# parse options with parameter, given like this : "-d=<somedir>" or "--dir=bladir"
-					elsif arg=~/^--#{ename}=.+/ or arg=~/^-#{op[:short]}=.+$/
-						found=true
-						op[:proc].call(arg.gsub(/^[^=]+=/,""))
-					end
-				}
-			end
-			puts "ERROR: argument '#{arg}' could not be processed!" if not found
-		}
-	end
 
 	# convert *v* into a string. used by CFG.saveConfig to write the config.rb
 	def CFG.toS(v)

@@ -97,7 +97,11 @@ class AntRubyMap<AntMap
 		@filename="dummy"  # a dummy filename - used for level scripting
 		@uidstart=0
 
-		AntRubyEntity.setMap(self)
+#		AntRubyEntity.setMap(self)
+	end
+
+	def disableScript
+		@script=nil
 	end
 
 	def AntRubyMap.getSystemTime
@@ -252,7 +256,7 @@ class AntRubyMap<AntMap
 		nodeName.gsub!("New","")  # remove New out of old antNew.. Names
 
 		if @entTypeMap.keys.member?(nodeName)
-			e=@entTypeMap[nodeName].new
+			e=@entTypeMap[nodeName].new(self)
 			@loadedEntsNum+=1
 			if e.is_a?(AntHero)
 				@heroes.push(e)
@@ -266,7 +270,7 @@ class AntRubyMap<AntMap
 # 
 # 	def loadEntityFromXML(e,node)
 		if node.getName=="humanPlayer" then
-			player=AntHumanPlayer.new("")
+			player=AntHumanPlayer.new(self,"")
 			player.loadXML(node)
 			@players.push(player)
 			if not @myPlayer
@@ -284,11 +288,9 @@ class AntRubyMap<AntMap
 		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer,"newAI"=>AntAttackAI}
 		if playerTypes.keys.member?(node.getName) then
 			type=playerTypes[node.getName]
-			puts "TYPE #{type}"
 			if type.ancestors.member?(AntPlayer)
-				player=playerTypes[node.getName].new("")
+				player=playerTypes[node.getName].new(self,"")
 			else
-				puts "TYPE #{type}"
 				player=AntAIPlayer.new(node.get("name"),self)
 				aiInterface=AIInterface.new(self,player)
 				ai=type.new(aiInterface)
@@ -337,13 +339,10 @@ class AntRubyMap<AntMap
 			c="module #{levelName}\n"+c+"\nend\n"
 			eval(c)
 			cl="#{levelName}::"+n.get("scriptclass")
-			puts "class #{cl}"
 			pClass=eval(cl)
-			puts "pClass:",pClass
 			if pClass.ancestors.member?(AntLevelScript)
 				interface=AntLevelInterface.new(self,@app)
 				@script=pClass.new(interface)
-				puts "SCRIPT:",@script.class
 			end
 	
 		end

@@ -10,24 +10,19 @@ class AntRubyEntity<AntEntity
 	attr_accessor :birthday
 	attr_reader :uid
 
-	def AntRubyEntity.setMap(map)
-		@@map=map
-	end
-	def getMap
-		@@map
-	end
-
+	# get the 3d-scene-object out of the Map-object
 	def getScene
-		@@map.getScene
+		getMap.getScene
 	end
-
 
 	# create a new entity at the position *p*
 	# set some default settings
 	# get a unique ID
 	# loading must be done externally in loadXML !
-	def initialize(position)
-		super(position)
+	def initialize(map)
+		@hovered=@selected=false
+		assert{map.is_a?(AntMap)}
+		super(map)
 		@xmlProps={}
 		@birthday=getMap.getTime
 		@mode=""
@@ -35,7 +30,6 @@ class AntRubyEntity<AntEntity
 		self.learnAmount=0.05
 	
 		@uid=getMap.getUniqueID
-
 		setHunger(0) # general entities have no hunger
 	end
 
@@ -44,7 +38,7 @@ class AntRubyEntity<AntEntity
 	# +minDiff+ (or less) seconds before. Note that the sound is played at the place where this entity is placed.
 	# So it's not hearable far away from it.
 	def playSound(name,minDiff=0.5)
-		scene=getMap.getScene
+		scene=getScene
 		d=((scene.getCamera.dim2-getPos2D).length-INNER_VOL_SIZE)
 		vol=1
 		if d>0
@@ -121,12 +115,8 @@ class AntRubyEntity<AntEntity
 		if false
 			# FIXME - implement me (network code)
 			#rand
-			puts "mrand:#{@mrand}"
 			@mrand||=AGRandomizer.new("")
 			val=@mrand.randFloat(1)
-	
-			puts "#{self} getRand #{val}  #{@mrand}"
-			puts caller.join("\n")
 	
 			return val
 		end
@@ -205,7 +195,7 @@ class AntRubyEntity<AntEntity
 		super
 		doEvent(:eventNewFightJob)
 	end
-	def newRestJob(t)
+	def newRestJob(t,working=false)
 		super
 		doEvent(:eventNewRestJob)
 	end
@@ -251,8 +241,9 @@ class AntRubyEntity<AntEntity
 	def setMesh(subtype="",sym=nil)
 		return if getMap.getScene.nil?
 		if subtype.is_a?(SceneNode)
-			puts  "THIS SHOULD NOT BE USED ANY LONGER: setMesh(realMesh) !!!!!!!!!!!!"
+			raise  "THIS SHOULD NOT BE USED ANY LONGER: setMesh(realMesh) !!!!!!!!!!!!"
 			super(subtype) # wrapper
+			setupRing
 			return subtype
 		end
 		@map={:AntSack=>:sack}
@@ -262,13 +253,52 @@ class AntRubyEntity<AntEntity
 		if sym
 			t=sym
 		end
-		
-		super(mesh=AntModels.createModel(t,subtype))
+		super(mesh=AntModels.createModel(self,t,subtype))
+		setupRing
 		return mesh
 	end
 
 
 
+	# :section: hovering/selection display with ring
+	def hovered=(s)
+		@hovered=s
+		updateRingColor
+	end
+	def selected=(s)
+		@selected=s
+		updateRingColor
+	end
+
+	def getRing
+		makeRingMesh
+	end
+
+	def setupRing
+		@ring=getRing
+		return if @ring.nil?
+		if @selected
+			#f6c108
+			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
+		else
+			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
+		end
+		addMesh(@ring,AGVector3.new(0,0,0))
+		#@ring.setVisible(false)
+		updateRingColor
+	end
+
+private
+	def updateRingColor
+		setupRing if @ring.nil?
+		@ring.setVisible((@hovered or @selected))
+		if @hovered and not @selected
+			@ring.setRingColor(AGVector4.new(0.7,0.7,1,0.8))
+		elsif @selected
+			@ring.setRingColor(AGVector4.new(1,0.7,0.1,0.8))
+		end
+	end
+public
 
 	# :section: deprecated
 

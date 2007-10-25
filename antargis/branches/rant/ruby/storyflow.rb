@@ -48,6 +48,14 @@ class StoryFlow
 		@s.push([name,text])
 	end
 
+	# return current text
+	def getCurrent
+		return nil if @s.length<=@pos
+		c=@s[@pos]
+		return c
+	end
+		
+
 	# you won't need this unless you're implementing within the actual application-object
 	def get
 		return nil if @s.length<=@pos

@@ -23,8 +23,8 @@
 # FIXME: Maybe this should be moved to plain C++ in a kind of ParticleSystem with meshes.
 
 class AntArrow<AntRubyEntity
-	def initialize
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super(map)
 		@typeID=(getRand*2).to_i
 		setMesh
 		setSpeed(10)

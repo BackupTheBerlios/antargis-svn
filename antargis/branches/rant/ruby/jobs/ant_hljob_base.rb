@@ -14,7 +14,7 @@ class AntNewHLJob<BaseMachine
 	end
 
 	def getTime
-		puts "getTime"
+		#puts "getTime"
 		@hero.getMap.getTime
 	end
 
@@ -28,6 +28,10 @@ class AntNewHLJob<BaseMachine
 
 	def hero
 		@hero
+	end
+
+	def getMap
+		hero.getMap
 	end
 	
 	def getRand
@@ -62,6 +66,7 @@ class AntNewHLJob<BaseMachine
 
 
 	def trace
+		return
 		if @hero.nil?
 			puts "TRACE #{caller[0]} #{self}"
 		else
@@ -71,5 +76,9 @@ class AntNewHLJob<BaseMachine
 
 	def kill
 		stateCall("kill")
-	end		
+	end
+
+	def loadXML(node)
+		puts "FIXME !!!!!!!!!!!!!!!! AntNewHLJob::loadXML"
+	end
 end

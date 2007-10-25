@@ -12,6 +12,7 @@ EOT
 
 NEEDED_PROGRAMS=["gcc","g++","swig","ruby"]
 POSSIBLE_PROGRAMS=["ccache","sdl-config"]
+#POSSIBLE_PROGRAMS=["ccache"]
 
 def allPrograms
 	POSSIBLE_PROGRAMS+NEEDED_PROGRAMS
@@ -93,7 +94,6 @@ end
 		
 options = ConfigureOptions.parse(ARGV)
 
-
 NEEDED_PROGRAMS.each{|program|
 	CFG.checkProgram(program,true)
 }
@@ -103,26 +103,38 @@ POSSIBLE_PROGRAMS.each{|program|
 
 CFG.setOptions(options)
 
+CFG.add("CFLAGS","-I/usr/include/GL")
 
 CFG.addCheck("sdl-config --libs",false) do
-	libs=nil
-	begin
-		call="#{CFG.get("sdl-config")} --libs"
-		libs=`#{call}`.gsub("\n","")
-	rescue
+	if CFG.get("sdl-config").nil?
+		puts "\nWARNING: sdl-config was not found!"
+	else
+		libs=nil
+		begin
+			call="#{CFG.get("sdl-config")} --libs"
+			libs=`#{call}`.gsub("\n","")
+		rescue
+			
+		end
+		CFG.add("LIBS",libs) if libs        
+		true if libs
 	end
-	CFG.set("LIBS",libs) if libs        
-	true if libs
 end
 
+
 CFG.addCheck("sdl-config --cflags",false) do
-	libs=nil
-	begin
-			libs=`#{CFG.get("sdl-config")} --cflags`.gsub("\n","")
-	rescue
+	if CFG.get("sdl-config").nil?
+		puts "\nWARNING: sdl-config was not found!"
+	else
+		libs=nil
+		begin
+				libs=`#{CFG.get("sdl-config")} --cflags`.gsub("\n","")
+		rescue
+			puts "WARNING: sdl-config was not found!"
+		end
+		CFG.add("CFLAGS",libs) if libs        
+		true if libs
 	end
-	CFG.set("CFLAGS",libs) if libs        
-	true if libs
 end
 
 CFG.includeConfig
@@ -130,18 +142,37 @@ CFG.gatherMkmfInfo if options[:use_mkmf]
 
 CFG.checkLibrary("opengl32","OpenGL library (win32)",false)
 CFG.checkLibrary("glu32","OpenGL Utility library (win32)",false)
-#puts foundGL
 CFG.checkLibrary("GL","OpenGL library",false)
 CFG.checkLibrary("GLU","OpenGL Utility library",false)
 
-CFG.run
+CFG.checkLibrary("png","PNG library",true)
+CFG.checkLibrary("SDL","the famous SDL library",true)
+CFG.checkLibrary("SDL_image","SDL_image library",true)
+CFG.checkLibrary("SDL_ttf","SDL_ttf library",true)
+CFG.checkLibrary("SDL_mixer","SDL_mixer library",false)
 
-if (not (CFG.hasLibrary("opengl32") or CFG.hasLibrary("GL")))
-	puts "NO opengl-library found. Please install one - including dev-packages!"
+CFG.checkFunction("SDL_Init")
+CFG.checkFunction("TTF_Init")
+CFG.checkFunction("Mix_PlayingMusic")
+CFG.checkFunction("ruby_init")
+
+CFG.checkHeader("SDL.h","SDL_Init")
+CFG.checkHeader("SDL.h","SDL_Flip")
+CFG.checkHeader("SDL.h","SDL_GL_SwapBuffers","SDL compiled with GL")
+CFG.checkHeader("SDL_mixer.h","Mix_PlayingMusic")
+CFG.checkHeader("SDL_ttf.h","TTF_Init")
+CFG.checkHeader("ruby.h","ruby_init")
+CFG.checkHeader("gl.h","glBegin")
+
+
+CFG.addCheck("any opengl-library found") do ||
+	(CFG.hasLibrary("opengl32") or CFG.hasLibrary("GL"))
 end
-if (not (CFG.hasLibrary("glu32") or CFG.hasLibrary("GLU")))
-	puts "NO glu-library found. Please install one - including dev-packages!"
+CFG.addCheck("any glu-library found") do ||
+	(CFG.hasLibrary("glu32") or CFG.hasLibrary("GLU"))
 end
+
+CFG.run
 
 puts
 puts "You should run '>rant clean && rant' to let changes take effect!"

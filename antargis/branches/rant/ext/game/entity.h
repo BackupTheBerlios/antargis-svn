@@ -35,6 +35,7 @@
 class Mesh;
 class SceneNode;
 class Job;
+class AntMap;
 
 #include "resource.h"
 
@@ -43,6 +44,8 @@ class AGEXPORT AntEntity:public AGRubyObject
   public:
     typedef std::list<SceneNode*> Meshes;
   private:
+    AntMap *mMap;
+
     int mID;
     AGString mName;
 
@@ -107,9 +110,7 @@ class AGEXPORT AntEntity:public AGRubyObject
     Resource resource;
 
   public:
-    AntEntity();
-    AntEntity(const AGVector3 &p);
-    AntEntity(const AGVector2 &p);
+    AntEntity(AntMap *pMap);
     virtual ~AntEntity();
 
     bool defeated() const;
@@ -160,7 +161,7 @@ class AGEXPORT AntEntity:public AGRubyObject
     void setJob(Job *pJob); // only for internal use and reseting
 
   public:
-    virtual void newRestJob(float pTime);
+    virtual void newRestJob(float pTime,bool pWork=false);
     virtual void newFetchJob(int p,AGVector2 &pTarget,const AGString &pWhat);
     virtual void newFetchJob(int p,AntEntity *pTarget,const AGString &pWhat);
     virtual void newMoveJob(int p,const AGVector2 &pTarget,float pnear=0.0);
@@ -269,6 +270,8 @@ class AGEXPORT AntEntity:public AGRubyObject
     virtual void animationEvent(const AGString &pName);
 
     void heal(float pTime);
+
+    AntMap *getMap();
 
     AntEntity *getTarget();
 

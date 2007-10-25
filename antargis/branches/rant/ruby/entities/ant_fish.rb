@@ -23,8 +23,8 @@ def getFishMeshData
 end
 
 class AntFish<AntAnimal
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("fish",true)
 		setSpeed 0.6
 		@lastBirth=0
@@ -33,14 +33,14 @@ class AntFish<AntAnimal
 		setOnGround(false)
 		setPos(AGVector3.new(0,0,-0.3))
 
-		puts "FISH:#{getPos3D}"
+		#puts "FISH:#{getPos3D}"
 		
 		setMesh
 		#mesh=Mesh.new(getMap.getScene,getFishMeshData,AGVector4.new(0,0,0),0)
 		#setMesh(mesh)
 
 		resource.set("food",1)
-		puts "FISH:#{getPos3D}"
+		#puts "FISH:#{getPos3D}"
 	end
 	def saveXML(node)
 		super(node)
@@ -67,8 +67,8 @@ class AntFish<AntAnimal
 		# BIRTHRATE is here:
 		if @lastBirth>40 then
 			# make child
-			puts "A FISH IS BORN"
-			fish=AntFish.new
+			#puts "A FISH IS BORN"
+			fish=AntFish.new(getMap)
 			fish.setPos(getPos2D)
 			getMap.insertEntity(fish)
 			getMap.endChange

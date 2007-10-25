@@ -1,7 +1,7 @@
 # This is a workshop. Residents will produce tools and fetch needed resources
 # which are wood and stone. Apart from this they'll try to gather food so they won't starve
 class AntWorkshop<AntHouse
-	def initialize
+	def initialize(map)
 		super
 		setProvide("workshop",true)
 		setProvide("tool",true)

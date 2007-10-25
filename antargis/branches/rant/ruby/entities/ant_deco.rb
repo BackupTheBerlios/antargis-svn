@@ -19,8 +19,8 @@
 #
 
 class AntDeco<AntRubyEntity
-	def initialize(decoType=nil)
-		super(AGVector2.new(0,0))
+	def initialize(map,decoType=nil)
+		super(map)
 		@decoType=decoType
 		if @decoType==nil
 			a=["flower1a","flower2a","twig","gravel","small_bush","hole","grass4","grass4a","grass4b","gravel_big","gravel_big2","rock1"]
@@ -61,8 +61,8 @@ class AntDeco<AntRubyEntity
 end
 
 class AntTwig<AntRubyEntity
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		@typeID=(getRand()*2).to_i
 		#setType("twig")
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/twig.ant2",0.7),AGVector4.new(0,0,0,0),getRand*360))
@@ -72,14 +72,11 @@ class AntTwig<AntRubyEntity
 end
 
 class AntDecoMesh<AntRubyEntity
-	def initialize(name="coach")
-		super(AGVector2.new(0,0))
+	def initialize(map,name="coach")
+		super(map)
 		@name=name
-# 		case name
-# 			else
-				#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/ant_coach.ant2",0.08,"data/textures/models/ant_coach.png"),AGVector4.new(0,0,0,0),-50))
-# 		end
-		setMesh(AntModels.createModel(:coach))
+		setMesh
+		#setMesh(AntModels.createModel(self,:coach))
 	end
 	def saveXML(node)
 		super

@@ -1,3 +1,5 @@
+require 'pp'
+require 'meshes/grass.rb'
 
 module AntModels
 	@@useImpostors=false
@@ -54,6 +56,18 @@ module AntModels
 		end
 		return 1
 	end
+
+	def AntModels.generateMesh(entity,size)
+		case entity
+			when AntBush
+				makeBushMesh(entity.getMap.getScene,size*3)
+			when AntGrass
+				makeGrassMesh(entity.getMap.getScene,size)
+			else
+				nil
+		end
+		
+	end
 	
 	def AntModels.getMeshMap
 		animMeshes={
@@ -94,7 +108,7 @@ module AntModels
 			:buildingsite=>{
 				[]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site0.png"],
 				[0]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site0.png"],
-				[1]=>["data/models/building_site0.ant2",1.7,"data/textures/models/building_site1.png"],
+				[1]=>["data/models/building_site1.ant2",1.7,"data/textures/models/building_site1.png"],
 				[2]=>["data/models/building_site2.ant2",1.7,"data/textures/models/building_site1.png"],
 			},
 			:field=>{
@@ -148,6 +162,9 @@ module AntModels
 			:twig=>{	
 				[]=>"twig"
 			},
+			:decomesh=>{ # FIXME: remove this and the class, too ??
+				[]=>"ant_coach"
+			},
 			:coach=>{
 				[]=>"ant_coach"
 			},
@@ -188,13 +205,18 @@ module AntModels
 		getMeshMap[entityType].length
 	end
 	
-	def AntModels.createModel(entityType,subType=nil,angle=nil)
+	def AntModels.createModel(entity,entityType,subType=nil,angle=nil)
+		assert {entity.is_a?(AntRubyEntity)}
+		
+		generatedMesh=generateMesh(entity,subType)
+		return generatedMesh if generatedMesh
+
+		assert {entityType.is_a?(Symbol)}
 		mesh=nil
 	
 		animMeshes=getMeshMap
-	
-		puts "#{entityType}(#{entityType.class})"
-		assert{animMeshes.member?(entityType)}
+		#raise "muh" unless animMeshes.member?(entityType)
+		assert{animMeshes.keys.member?(entityType)}
 		map=animMeshes[entityType]
 	
 		map.each{|k,v|
@@ -217,10 +239,10 @@ module AntModels
 				data.setTransparent(true)
 				name=mesh
 				angle||=getStaticModelRotation(name)
-				scenenode=Mesh.new(getMap.getScene,data,AGVector4.new(0,0,0),angle)
+				scenenode=Mesh.new(entity.getMap.getScene,data,AGVector4.new(0,0,0),angle)
 						
 			elsif mesh=~/anim$/
-				scenenode=AnimMesh.new(getMap.getScene,getAnimMeshData(mesh))
+				scenenode=AnimMesh.new(entity.getMap.getScene,getAnimMeshData(mesh))
 			else
 				ant2name="data/models/"+mesh+".ant2"
 				pngname="data/textures/models/"+mesh+".png"
@@ -230,12 +252,11 @@ module AntModels
 					pngname=""
 				end
 
-				s=getMap.getScene
+				s=entity.getMap.getScene
 
-				s=getMap.getScene
+				#s=getMap.getScene
 				data=getMeshData(ant2name,getStaticModelScaling(name),pngname)
 				v=AGVector4.new(0,0,0)
-				puts "scene:#{s} data:#{data} vec:#{v} angle:#{angle}"
 				scenenode=Mesh.new(s,data,v,angle)
 			end
 		end

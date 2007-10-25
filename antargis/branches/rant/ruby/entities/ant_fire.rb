@@ -1,5 +1,5 @@
 class AntFire<AntRubyEntity
-	def initialize(p=AGVector2.new(0,0))
+	def initialize(map)
 		super
 		mp=AGVector3.new(0,0,0)
 		setMesh(:on)
@@ -11,11 +11,11 @@ class AntFire<AntRubyEntity
 			smoke.setMaxTime(0.8)
 			addMesh(smoke,mp)
 		end
-		setPos(AGVector2.new(p.x,p.y))
+		#setPos(getAGVector2.new(p.x,p.y))
 		@enabled=true
 	end
 	def disable
-		return if getScene
+		return unless getScene
 		setMesh(:off)
 		if MyAntargislib.opengl
 			#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/fire.ant2",0.3,"data/textures/models/fire2.png"),AGVector4.new(0,0,0),0))

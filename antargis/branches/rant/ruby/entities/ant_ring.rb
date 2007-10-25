@@ -6,9 +6,6 @@ module RingData
 			return @@ringdata[w]
 		end
 	
-		#size=1
-			
-		puts "MAKEFIRMESH"
 		opt=MeshOptimizer.new
 		mv0=MeshVertex.new
 		mv1=MeshVertex.new

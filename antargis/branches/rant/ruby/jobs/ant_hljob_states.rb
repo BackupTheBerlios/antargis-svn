@@ -9,26 +9,15 @@ class Module
 		ts="*s"
 		ts="s" if methodName=~/.*=$/
 		s="def #{methodName}(#{ts})\n#{objectName}.#{objectMethodName}(#{ts})\nend\n"
-		puts s
+		#puts s
 		module_eval s
 	end
 end
 
 
-# class Object
-# 	def describe(t,&block)
-# 		if block
-# 			puts t
-# 			block.call
-# 		else
-# 			puts "WARNING: #{t} not implemented"
-# 		end
-# 	end
-# end
-
 module HLJob_Additions
 	attr_accessor :machine
-	["getRand","hero","allMen","getTime","targetPos","targetPos=","formatDir","formatDir=","target"].each{|n|wrap "machine",n}
+	["getMap","getRand","hero","allMen","getTime","targetPos","targetPos=","formatDir","formatDir=","target"].each{|n|wrap "machine",n}
 end
 
 class HLJob_BaseState
@@ -98,8 +87,6 @@ class HLJob_FormatSit<HLJob_BaseState
 	FORMAT_MAX_TIME=15
 
 	def enter
-		#raise 1
-		trace
 		hero.formation=AntFormationRest.new(hero)
 		heroPos=hero.getPos2D
 		allMen.each{|man|
@@ -360,6 +347,7 @@ class HLJob_GetResource<HLJob_BaseState
 			}
 		end
 		allMen.each{|m|m.resourceChanged}
+		machine.target.resourceChanged
 	end
 	def ready
 		return true
@@ -371,6 +359,7 @@ class HLJob_KillAnimal<HLJob_BaseState
 		target.eventDie
 		hero.resource.takeAll(target.resource)
 		allMen.each{|m|m.resourceChanged}
+		target.resourceChanged
 	end
 end
 
@@ -827,4 +816,467 @@ class HLJob_Recruit<HLJob_BaseState
 		}
 	end
 end
+
+begin
+	class ProductionRule
+		attr_reader :what, :from
+		def initialize(what,from)
+			@what=what
+			@from=from
+		end
+	end
+rescue;end
+
+class ConstructException<Exception
+end
+
+
+module HLJob_HarvestModule
+	# :section: harvesting
+protected
+	def goHarvesting(man)
+		list=whatToHarvestList
+		list.each{|what|
+			#pp what
+			assert{what.is_a?(String)}
+			# check if 'what' is reachable
+			entity=getNextWithResource(what)
+			if entity
+				man.hlJobMode[:task]=:harvest
+				man.hlJobMode[:what]=what
+				man.hlJobMode[:target]=entity
+				man.walkTo(entity)
+				break
+			end
+		}
+	end
+
+	def harvest(man)
+		error("wrong fetch-resource") unless resources.member?(man.hlJobMode[:what])
+		error("man has invalid target") if man.hlJobMode[:target].nil?
+		error("target doesn't have resource (#{man.hlJobMode[:what]})") unless man.hlJobMode[:target].resource.get(man.hlJobMode[:what])>0
+		error("target is too far away") unless (man.hlJobMode[:target].getPos2D-man.getPos2D).length<1
+
+		man.newRestJob(4,true)
+		man.digResource(man.hlJobMode[:what])
+		man.hlJobMode[:task]=:comeBack
+	end
+
+	def comeBack(man)
+		ctarget=man.hlJobMode[:target]
+		what=man.hlJobMode[:what]
+		error("target is not ok") unless ctarget.is_a?(AntEntity)
+		error("selected resource is not ok") unless what.is_a?(String)
+		error("target doesn't have enough resource") unless ctarget.resource.get(what)>0
+		# ok, finished harvesting - take what's harvested
+		
+		amount=[ctarget.resource.get(what),man.canCarry].min
+		ctarget.resource.sub(what,amount)
+		man.resource.add(what,amount)
+		man.newMoveJob(0,target.getPos2D,0)
+		man.collectResource(what)
+
+		# come back
+		man.hlJobMode[:task]=:deliverAll
+		log "#{man}(#{man.getPos2D}) coming back to #{target}(#{target.getPos2D}) from #{ctarget}(#{ctarget.getPos2D})"
+		log "job of #{man}:#{man.getJobName}"
+		man.hlJobMode[:target]=nil
+	end
+
+	def deliverAll(man)
+		error("not yet at target") if (target.getPos2D-man.getPos2D).length>1
+		resources.each{|res|
+			amount=man.resource.get(res)
+			target.resource.add(res,amount)
+			man.resource.sub(res,amount)
+		}
+		man.resourceChanged
+		target.resourceChanged
+		man.newRestJob(2)
+		man.hlJobMode[:task]=nil
+		man.hlJobMode[:done]+=1
+		man.hlJobMode[:what]=nil
+	end
+
+end
+
+module HLJob_RestingModule
+	# :section: Resting
+
+	def goResting(man)
+		man.walkTo(hero.getFormation(man,hero.getPos2D))
+		man.hlJobMode[:task]=:sitDown
+	end
+	def sitDown(man)
+		man.sitDown
+		man.hlJobMode[:task]=:rest
+	end
+	def rest(man)
+		man.sitStill
+		man.hlJobMode[:task]=nil
+		man.hlJobMode[:done]=0
+	end
+end
+
+
+
+class HLJob_CreationBase<HLJob_BaseState
+	def enter
+		hero.getMen.each{|man| man.hlJobMode.clear ; man.hlJobMode[:done]=0}
+		hero.getMen.each{|man|assign(man)}
+	end
+
+	def leave
+		hero.getMen.each{|man|target.decSmoke if man.hlJobMode[:task]==:producing}
+	end
+
+	def assign(man)
+		if man.is_a?(AntHero)
+			man.sitStill
+			return
+		end
+
+		#pp man.hlJobMode
+		begin
+			if man.hlJobMode[:task].nil?
+				man.hlJobMode[:task]=whatToDo(man)
+			end
+			self.send(man.hlJobMode[:task],man)
+		rescue ConstructException => e
+			log "don't know what to do for #{man} : exceptino #{e}"
+			man.hlJobMode.clear
+			assign(man)
+		end
+	end
+
+end
+
+
+class HLJob_Construct<HLJob_CreationBase
+	PRODUCTION_RULES=[
+		ProductionRule.new("rod",[["wood",1]]),
+		ProductionRule.new("steel",[["ore",1],["coal",1]]),
+		ProductionRule.new("gold",[["ore",4],["coal",1]]),
+		ProductionRule.new("boat",[["wood",2]]),
+		ProductionRule.new("shield",[["wood",1]]),
+		ProductionRule.new("bow",[["wood",1],["stone",1]]),
+		ProductionRule.new("sword",[["wood",1],["steel",1]])
+	]
+	RESOURCES=PRODUCTION_RULES.map{|rule|rule.from.map{|f|f[0]}}.flatten.uniq-PRODUCTION_RULES.map{|rule|rule.what}
+	TARGETS=PRODUCTION_RULES.map{|rule|rule.what}.uniq
+
+	include HLJob_HarvestModule
+	include HLJob_RestingModule
+
+	VALID_STATES=[
+		:goHarvesting,:harvest,:comeBack,:deliverAll,
+		:goProducing,:produce,:endProduce,
+		:goResting,:sitDown,:rest
+	]
+
+	def resources
+		RESOURCES
+	end
+
+
+	def ready
+		TARGETS.each{|t|return false if target.resource.get(t)<constructAtMost}
+		true
+	end
+
+	private
+
+	# :section: Producing
+
+	def goProducing(man)
+		man.walkTo(target)
+		man.hlJobMode[:task]=:produce
+	end
+
+	def produce(man)
+		target.incSmoke
+		man.hlJobMode[:task]=:endProduce
+		man.newRestJob(3,true)
+	end
+
+	def endProduce(man)
+		target.decSmoke
+		man.hlJobMode[:task]=nil
+
+		# decide whats to produce
+		PRODUCTION_RULES.shuffle.each{|rule|
+			what=rule.what
+			from=rule.from
+
+			if target.resource.get(what)<constructAtMost
+				ok=true
+				from.each{|f|	
+					ok=false if target.resource.get(f[0])<f[1]
+				}
+				if ok
+					from.each{|f|	target.resource.sub(f[0],f[1])}
+					target.resource.add(what,1)
+					break
+				end
+			end
+		}
+
+	end
+
+	def whatToDo(man)
+		man.hlJobMode[:done]||=0
+		return :goResting if man.hlJobMode[:done]>=man.getAggression
+		return :goHarvesting if whatToHarvestList.length>0 
+		return :goProducing if whatToConstructList.length>0 # ATM this is always true
+	end
+
+	# what the stock of all resources should be
+	def stockShouldBe
+		5
+	end
+
+	def constructAtMost
+		15
+	end
+
+	# for each resource get the target's stock; check if it's below stockShouldbe;
+	# collect those with lower stock first
+	def whatToHarvestList
+		list=RESOURCES.map{|res|[res,getResourceNearing(res)]}.select{|p|p[1]<stockShouldBe}.sort{|a,b|a[1]<=>b[1]}.map{|r|r[0]}
+	end
+
+	# get resources of target and resources that men are already harvesting
+	def getResourceNearing(resource)
+		target.resource.get(resource)+hero.getMen.select{|man|man.hlJobMode[:what]==resource}.length
+	end
+
+	def whatToConstructList
+		list=TARGETS.map{|res|[res,getTargetNearing(res)]}.select{|p|p[1]<constructAtMost}.sort{|a,b|a[1]<=>b[1]}.map{|r|r[0]}
+	end
+
+	def getTargetNearing(resource)
+		target.resource.get(resource)+hero.getMen.select{|man|man.hlJobMode[:construct]==resource}.length
+	end
+
+	def getNextWithResource(res)
+		getMap.getNext(target,res,1)
+	end
+
+	def error(text)
+		raise ConstructException.new(text)
+	end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class HLJob_Build<HLJob_CreationBase
+	RESOURCES=["wood","stone"]
+
+	include HLJob_HarvestModule
+	include HLJob_RestingModule
+
+	VALID_STATES=[
+		:goHarvesting,:harvest,:comeBack,:deliverAll,
+		:goBuilding,:build,:endBuild,
+		:goResting,:sitDown,:rest,
+		:goFlatten,:flatten,:endFlatten
+	]
+
+	def resources
+		RESOURCES
+	end
+
+	def ready
+		target.ready
+	end
+
+	private
+
+	def goFlatten(man)
+		possible=getWhatToFlatten
+		position=possible[0]
+		man.hlJobMode[:flattening]=position
+		assert{not position.nil?}
+		man.walkTo(AGVector2.new(position[0],position[1]))
+		man.hlJobMode[:task]=:flatten
+	end
+	def flatten(man)
+		man.hlJobMode[:task]=:endFlatten
+		man.newRestJob(3,true)
+		man.setMeshState("pick")
+	end
+
+	def endFlatten(man)
+		p=man.hlJobMode[:flattening]
+		puts man
+		pp man.hlJobMode
+		assert{not p.nil?}
+		v=getMap.get(p[0],p[1])*(1-p[2])+@flatheight*p[2]
+		getMap.set(p[0],p[1],v)
+		v=getMap.getTerrain(p[0],p[1],EARTH)*(1-p[2])+p[2]
+		getMap.setTerrain(p[0],p[1],EARTH,v)
+		getMap.endChange
+		@flatpositions.delete(p)
+		man.hlJobMode[:flattening]=nil
+		man.hlJobMode[:task]=nil
+	end
+	def somethingToFlattenLeft
+		getWhatToFlatten.length>0
+	end
+
+	def getWhatToFlatten
+		if @flatpositions.nil?
+			targetpos=target.getPos2D
+	
+			px=targetpos.x.to_i+1
+			py=targetpos.y.to_i+1
+			@flatpositions=[]
+			(-3..3).each{|y|
+				(-3..3).each{|x|
+					v=1-Math::sqrt(x**2+y**2)/4.0
+					v=[0,1,v*1.5].sort[1]
+					@flatpositions.push([x+px,y+py,v])
+				}
+			}
+			@flatheight=getMap.get(px,py)
+			@flatpositions=@flatpositions.shuffle
+		end
+		
+		@flatpositions-hero.getMen.collect{|man|man.hlJobMode[:flattening]}
+	end
+
+	# :section: Producing
+
+	def goBuilding(man)
+		man.walkTo(target)
+		man.hlJobMode[:task]=:build
+	end
+
+	def build(man)
+		man.hlJobMode[:task]=:endBuild
+		man.newRestJob(3,true)
+		man.setMeshState("pick")
+	end
+
+	def endBuild(man)
+		man.incExperience(man.learnAmount)
+		buildIncrease
+	end
+
+	def whatToDo(man)
+		man.hlJobMode[:done]||=0
+		return :goResting if man.hlJobMode[:done]>=man.getAggression
+		return :goFlatten if somethingToFlattenLeft
+		return :goHarvesting if whatToHarvestList.length>0
+		return :goBuilding if not target.ready
+	end
+
+	# what the stock of all resources should be
+	def stockShouldBe
+		5
+	end
+
+	# for each resource get the target's stock; check if it's below stockShouldbe;
+	# collect those with lower stock first
+	def whatToHarvestList
+		list=RESOURCES.map{|res|[res,getResourceNearing(res),target.resource.get(res)]}.select{|p|p[1]<stockShouldBe or p[2]<2}.sort{|a,b|a[1]<=>b[1]}.map{|r|r[0]}
+	end
+
+	# get resources of target and resources that men are already harvesting
+	def getResourceNearing(resource)
+		target.resource.get(resource)+(hero.getMen-[hero]).select{|man|man.hlJobMode[:what]==resource}.length
+	end
+
+	def getNextWithResource(res)
+		getMap.getNext(target,res,1)
+	end
+
+	def error(text)
+		raise ConstructException.new(text)
+	end
+
+
+	def flattenLand
+		targetpos=target.getPos2D
+
+
+		px=targetpos.x.to_i+1
+		py=targetpos.y.to_i+1
+		if @flatpositions.nil?
+			@flatpositions=[]
+			(-3..3).each{|y|
+				(-3..3).each{|x|
+					v=1-Math::sqrt(x**2+y**2)/4.0
+					v=[0,1,v*1.5].sort[1]
+					@flatpositions.push([x+px,y+py,v])
+				}
+			}
+			@flatheight=getMap.get(px,py)
+			@flatpositions.shuffle
+		end
+
+
+		
+		if @flatpositions.length>0
+			(0..1).each{|i|
+				break if @flatpositions.length==0
+				p=@flatpositions.shift
+				v=getMap.get(p[0],p[1])*(1-p[2])+@flatheight*p[2]
+				getMap.set(p[0],p[1],v)
+				v=getMap.getTerrain(p[0],p[1],EARTH)*(1-p[2])+p[2]
+				getMap.setTerrain(p[0],p[1],EARTH,v)
+			}
+			getMap.endChange
+			return true
+		end
+		false
+	end
+
+	def buildIncrease
+		puts "buildIncrease"
+		#return if flattenLand
+
+		building=target.building
+		neededResources=building.buildResources
+	
+		neededResources.each{|k,v|
+			if target.resource.get(k)<v
+				puts "NOT FOUDN: #{k}:#{v}"
+				return # oooooh
+			end
+		}
+		neededResources.each{|k,v|
+			target.resource.sub(k,v)
+		}
+
+		puts "inc:",target.building.buildSteps
+		puts "stepcount:",target.getStepCount
+		target.incProgress(target.building.buildSteps)
+		
+		if target.ready
+			puts "READY"
+			# delete buildingsite and replace with building
+			getMap.removeEntity(target)
+			house=building.new(getMap)
+			house.setPos(target.getPos2D)
+			getMap.insertEntity(house)
+			house.setPlayer(hero.getPlayer)
+			house.setName(house.class.to_s.gsub("Ant",""))
+			house.resource.takeAll(target.resource) # give remaining resources to house
+		end
+	end
+
+end
+
 

@@ -82,11 +82,11 @@ MWidgetSet *getAllWidgets()
   return mPAllWidgets;
 }
 
-
 AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
   sigClick(this,"sigClick"),
+	mApp(0),
   mr(r),mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
   mHasFocus(false),mFocus(0)
@@ -385,6 +385,8 @@ void AGWidget::addChild(AGWidget *w)
     {
       gainFocus(w);
     }
+	if(!w->getParent())
+		w->setParent(this);
   queryRedraw();
 }
 
@@ -1048,7 +1050,10 @@ void AGWidget::sigTick(float pTime)
 void AGWidget::close()
 {
   if(mParent)
+  {
     mParent->removeChild(this);
+    mParent=0;
+  }
 }
 
 bool AGWidget::isParent(AGWidget *pParent)
@@ -1108,3 +1113,18 @@ void AGWidget::clearChangeRects()
   for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
     (*i)->clearChangeRects();
 }
+
+AGApplication *AGWidget::getApp()
+{
+	if(!mApp)
+		if(mParent)
+			return mParent->getApp();
+	return mApp;
+}
+
+void AGWidget::setApp(AGApplication *pApp)
+{
+	assert(!mApp);
+	mApp=pApp;
+}
+

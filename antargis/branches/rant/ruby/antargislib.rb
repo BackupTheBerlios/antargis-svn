@@ -23,11 +23,11 @@ module MyAntargisLib
 		@@extDir=Dir.pwd+"/ext"
 		# add programdir to path
 		$:.push(@@extDir)
-        if ENV["PATH"].split(";").length>3 # FIXME: is windows ?
-            ENV["PATH"]+=";.\\ext"
-        else
-            ENV["PATH"]+=":./ext"
-        end
+		if ENV["PATH"].split(";").length>3 # FIXME: is windows ?
+				ENV["PATH"]+=";.\\ext"
+		else
+				ENV["PATH"]+=":./ext"
+		end
 	end
 end
 
@@ -65,13 +65,9 @@ module AntMyEventHandler
 					if $enableLogging
 						@@eventDebugging||=File.open("events.txt","w")
 						@@eventDebugging.puts s
-						#puts "NEWEVENT: #{self}  #{s}"
 					end
 				end
 			end
-# 			if e.nil?
-# 				return toSDLEvent("")
-# 			end
 			return e
 		end
 	end
@@ -210,15 +206,10 @@ module MyAntargislib
 			end
 		end
 		
-		puts xres,yres,@@fullscreen
-		#raise #1
 
 		@@noVideo||=nil	
 		if @@noVideo.nil?
-			#if xres!=1024 || yres!=768 || $fullscreen
-			dputs @@fullscreen
 			getVideo.initVideo(xres,yres,32,@@fullscreen,@@opengl,1024,768)
-			#end
 		
 			getConfig.set("xRes",xres.to_s)
 			getConfig.set("yRes",yres.to_s)
@@ -229,19 +220,8 @@ module MyAntargislib
 		end
 	end
 	def MyAntargislib.startGC
-		if not @@antProfiling
-			puts "starting GC"
-			GC.enable
-			GC.start
-			#GC.disable
-			puts "GC ok"
-		else
-			puts "starting GC"
-			GC.enable
-			GC.start
-			#GC.disable
-			puts "GC ok"
-		end
+		GC.enable
+		GC.start
 	end
 
 	def MyAntargislib.demoMode
@@ -273,9 +253,23 @@ class AGStringUtf8
 			
 			return self.substr(mi,ma-mi+1)
 		end
-		puts range,range.class
+		#puts range,range.class
 		super
 	end
+end
+
+class Logger
+	@@log=File.open("log.txt","w")
+	def self.log(*s)
+		@@log.print("[")
+		@@log.print(Time.new)
+		@@log.print("] ")
+		@@log.puts(*s)
+	end
+end
+
+def log(*s)
+	Logger.log(*s)
 end
 
 class AntApplication<AGApplication
@@ -291,6 +285,5 @@ class AntApplication<AGApplication
 # 	end
 end
 
-# def rand
-# 	raise "This Function shouldn't be called at all!!!!!"
-# end
+
+

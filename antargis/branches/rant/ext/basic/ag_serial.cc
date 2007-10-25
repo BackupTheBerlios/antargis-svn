@@ -382,7 +382,6 @@ std::string binaryToHex(const std::string &s,bool separators)
 {
   std::ostringstream os;
   
-  std::cout<<s.length()<<std::endl;
   for(size_t i=0;i<s.length();i++)
     {
       //      cdebug(i<<":"<<(int)s[i]);

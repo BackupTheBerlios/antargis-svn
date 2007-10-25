@@ -20,8 +20,8 @@
 
 
 class AntMine<AntRubyEntity
-	def initialize(typeID=nil)
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("coal",true)
 		setProvide("ore",true)
 		@angle=getRand*360

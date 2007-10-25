@@ -124,18 +124,7 @@ AGMatrixN AGMatrixN::inverse() const
 
   a.makeUnitMatrix();
   b.copyFrom(*this);
-  /*
-  std::cout<<"A:"<<std::endl;
-  a.output();
-  std::cout<<"B:"<<std::endl;
-  b.output();
-  */
   gauss(a,b,nw);
-  /*
-  std::cout<<"A:"<<std::endl;
-  a.output();
-  std::cout<<"B:"<<std::endl;
-  b.output();*/
   return a;
 }
 

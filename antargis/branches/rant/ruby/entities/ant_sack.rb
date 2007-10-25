@@ -1,7 +1,7 @@
 require 'ant_models.rb'
 
 class AntSack<AntAnimal
-	def initialize(p=AGVector2.new(0,0))
+	def initialize(map)
 		super
 		setMesh
 		@enabled=true

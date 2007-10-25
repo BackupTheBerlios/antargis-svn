@@ -478,6 +478,16 @@ void AGPainter::drawBorder(const AGRect2& pRect,int width, const AGColor& c1, co
     }
 }
 
+void AGPainter::drawRect(const AGRect2& rect,const AGColor& c)
+{
+  drawLine(rect.getV0(),rect.getV01(),c);
+  drawLine(rect.getV0(),rect.getV10(),c);
+  
+  drawLine(rect.getV01(),rect.getV1(),c);
+  drawLine(rect.getV10(),rect.getV1(),c);
+}
+
+
 void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
 {
   STACKTRACE;

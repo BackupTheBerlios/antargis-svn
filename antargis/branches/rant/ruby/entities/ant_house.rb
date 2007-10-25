@@ -22,8 +22,8 @@ require 'ant_boss.rb'
 require 'ant_tools.rb'
 
 class AntFlag<AntRubyEntity
-	def initialize
-		super(AGVector3.new(0,0,0))
+	def initialize(map)
+		super
 		setProvide("flag",true)
 		@age=0
 	end
@@ -59,7 +59,7 @@ class AntHouse<AntBoss
 	end
 
 
-	def initialize
+	def initialize(map)
 		super
 		@type=3
 		setProvide("house",true)

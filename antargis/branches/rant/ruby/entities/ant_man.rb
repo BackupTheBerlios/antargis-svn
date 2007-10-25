@@ -36,8 +36,8 @@ class AntMan<AntRubyEntity
 
 	attr_accessor :hlJobMode
 	
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 
 		@hlJobMode={}
 
@@ -118,7 +118,6 @@ class AntMan<AntRubyEntity
 		if newHLJobs
 			eventNoJob
 		else
-			puts "#{getName} has defeated #{e.getName}"
 			@boss.eventHaveDefeated(e)
 		end
 	end
@@ -143,7 +142,6 @@ class AntMan<AntRubyEntity
 	end
 	
 	def setBoss(hero)
-		puts "SETBOSS:#{hero}"
 		if @boss
 			@boss.removeMan(self)
 			@boss=nil
@@ -169,10 +167,10 @@ class AntMan<AntRubyEntity
 		return false
 	end
 	
-	def newRestJob(time)
+	def newRestJob(time,working=false)
 		vis=checkHideAtHome
 		setStandAnim
-		super(time)
+		super(time,working)
 	end
 	
 	def newFightJob(d,ptarget)
@@ -253,7 +251,7 @@ class AntMan<AntRubyEntity
 			when "row"
 				mesh=setMesh("sit")
 				mesh.setAnimation("sit")
-				addMesh(AntModels.createModel(:boat),AGVector3.new(0,0,0))
+				addMesh(AntModels.createModel(self,:boat),AGVector3.new(0,0,0))
 			when "stand","axe","pick","wood","stone","flour","corn","walk","sitdown","sit"
 				setMesh(name)
 				if ["stand","walk","sitdown","sit"].member?(name)
@@ -265,7 +263,7 @@ class AntMan<AntRubyEntity
 
 
 	def digResource(res)
-		newRestJob(2+getRand)
+		newRestJob(2+getRand,true)
 		case res
 			when "wood"
 				setMeshState("axe")

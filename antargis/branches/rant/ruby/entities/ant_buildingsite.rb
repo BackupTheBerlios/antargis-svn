@@ -1,8 +1,8 @@
 
 class AntBuildingSite<AntRubyEntity
 	attr_accessor :building
-	def initialize
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super(map)
 		@progress=0
 		#init fieldMeshes-var
 		setupMesh
@@ -13,14 +13,15 @@ class AntBuildingSite<AntRubyEntity
 	def incProgress(steps)
 		@steps=steps
 		o=@progress.to_i
-		@progress+=(1.0/steps)*AntModels.getMeshCount(:buildingsite)
+		@progress+=(1.0/steps)*getStepCount
+		pp @progress
 		if o!=@progress.to_i
 			setupMesh
 		end
 		@doneSth=true
 	end
 	def ready
-		@progress>AntModels.getMeshCount(:buildingsite) #@@buildingSiteMeshes.length-1
+		@progress>AntModels.getMeshCount(:buildingsite)
 	end
 
 	# removes building site if nothing was done in some time
@@ -37,36 +38,20 @@ class AntBuildingSite<AntRubyEntity
 		a=_(building.to_s.gsub("Ant",""))
 		d=_("This will be a {1}.",a)
 		if @steps
-			b=((@@buildingSiteMeshes.length-1)-@progress)*@steps/(@@buildingSiteMeshes.length-1)
+			b=((getStepCount-1)-@progress)*@steps/(getStepCount-1)
 			b=b.to_i.to_s
 			d+=_("It will be ready after {1} more steps.",b)
 		end
 		d
 	end
 
-	private
+#	private
 	def setupMesh
+		pp @progress.to_i
 		setMesh(@progress.to_i)
-		
-# 		mesh=Mesh.new(getMap.getScene,AntBuildingSite.getBuildingSiteMeshData(@progress),AGVector4.new(0,0,0),-10)
-# 		setMesh(mesh)
 	end
 
-# 	@@buildingSiteMeshes=nil
-# 	def AntBuildingSite.getBuildingSiteMeshData(size)
-# 		
-# 		if @@buildingSiteMeshes.nil?
-# 			@@buildingSiteMeshes=[
-# 				getMeshData("data/models/building_site0.ant2",1.7,"data/textures/models/building_site0.png"),
-# 				getMeshData("data/models/building_site1.ant2",1.7,"data/textures/models/building_site1.png"),
-# 				getMeshData("data/models/building_site2.ant2",1.7,"data/textures/models/building_site1.png"),
-# 				getMeshData("data/models/crop_high.ant2",2.2,"data/textures/models/crop_gold.png")
-# 				]
-# 			
-# 		end
-# 		size=[0,size.to_i,@@buildingSiteMeshes.length-1].sort[1]
-# 		@@buildingSiteMeshes[size]
-# 	end
-
-
+	def getStepCount
+		AntModels.getMeshCount(:buildingsite)
+	end
 end

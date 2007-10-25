@@ -116,7 +116,7 @@ class AGEXPORT AntMap:public HeightMap
 
 };
 
-AGEXPORT AntMap *getMap();
+//AGEXPORT AntMap *getMap();
 
 
 #endif

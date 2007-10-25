@@ -144,7 +144,6 @@ require 'ant_models.rb'
 
 module AntModels
 	def AntModels.createModel(entityType,subType=nil,angle=nil)
-		trace
 		type=entityType.to_s
 		if subType.to_s!=""
 			type+="_"+subType.to_s

@@ -19,8 +19,8 @@
 #
 
 class AntStone<AntRubyEntity
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		@typeID=(getRand*2).to_i
 		setProvide("stone",true)
 		#setMesh(Mesh.new(getMap.getScene,getMeshData("data/models/big_stone.ant2",0.7,"data/textures/models/big_stone.png"),AGVector4.new(0,0,0,0),getRand*360))

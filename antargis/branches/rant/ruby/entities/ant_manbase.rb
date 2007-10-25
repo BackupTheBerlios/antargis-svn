@@ -24,8 +24,8 @@
 # there is no AntAngel mesh.
 class AntAngel<AntRubyEntity
 
-	def initialize
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super
 		setProvide("angel",true)
 		@age=0
 	end
@@ -57,7 +57,6 @@ module AntManBase
 	# * animation is played
 	# * setMeshState is needed for this
 	def sitDown
-		puts "sitDown"
 		newRestJob(0.4)
 		setMeshState("sitdown")
 	end
@@ -67,6 +66,7 @@ module AntManBase
 	end
 
 	def walkTo(p)
+		p=p.getPos2D if p.is_a?(AntEntity)
 		newMoveJob(0,p,0)
 	end
 	
@@ -81,6 +81,7 @@ module AntManBase
 	end
 
 	def sitStill
+		checkEat
 		newRestJob(2)
 		setMeshState("sit")
 	end
@@ -130,7 +131,8 @@ module AntManBase
 			@boss.removeMan(self)
 		end
 		if not self.resource.empty
-			sack=AntSack.new(getPos2D+AGVector2.new(0.3,-0.3))
+			sack=AntSack.new(getMap)
+			sack.setPos(getPos2D+AGVector2.new(0.3,-0.3))
 			getMap.insertEntity(sack)
 			sack.resource.takeAll(self.resource)
 			sack.resourceChanged
@@ -198,7 +200,7 @@ module AntManBase
 
 	def eventHitWaterMark(fromAbove)
 		#raise 1
-		puts "eventHitWaterMark(#{fromAbove})"
+		log "eventHitWaterMark(#{fromAbove})"
 		#setOnWater(fromAbove)
 		if fromAbove
 			if haveBoat
@@ -230,6 +232,16 @@ module AntManBase
 				getMap.insertEntity(arrow)
 		end
 	end
+	def checkEat
+		log "CHECKEAT"
+		if getFood<0.5
+			if resource.get("food")>0
+				incFood(1)
+				resource.sub("food",1)
+			end
+		end
+	end
+
 protected
 	def haveBoat
 		resource.get("boat")>=1
@@ -243,5 +255,8 @@ private
 		getMap.insertEntity(e)
 		#getMap.endChange
 	end
+
+
+	
 
 end

@@ -1,7 +1,7 @@
 require 'ruby/antargislib.rb'
 require 'map.rb'
 
-module Testing
+module TestingMap
 	@@testing=false
 	def Testing.initTesting
 		return if @@testing

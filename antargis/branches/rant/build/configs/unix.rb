@@ -25,7 +25,7 @@ $config={
 	# a c++ compiler call with parameters (using ccache if available)
 	"CXX_CALL"=>"$(CCACHE) $(CXX) $(COMPILE_PARAMS)",
 	# build a shared library (.so or .dll)
-	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Lext $(INPUT)",
+	"LINK_SHARED"=>"$(CCACHE) $(LINK) -shared -o $(OUTPUT) -Lext $(INPUT)",
 	# build a program (.exe)
 	"LINK_EXE"=>"$(LINK) -o $(OUTPUT) -Lext $(INPUT)",
 

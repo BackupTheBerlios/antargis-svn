@@ -1,5 +1,5 @@
 class AntTower<AntHouse
-	def initialize
+	def initialize(map)
 		super
 		setProvide("tower",true)
 		setMinimapColor(AGColor.new(0x22,0x22,0x22))
@@ -18,11 +18,10 @@ class AntTower<AntHouse
 	end
 
 	def resourceChanged
-		puts "RESOURCE CHANGED"
 		@storeGood.each{|r|
-			puts "#{self} #{r} #{resource.get(r)} #{getName}"
+			#puts "#{self} #{r} #{resource.get(r)} #{getName}"
 			setProvide(r,resource.get(r)>0)
-			puts provides(r)
+			#puts provides(r)
 		}
 		super
 	end

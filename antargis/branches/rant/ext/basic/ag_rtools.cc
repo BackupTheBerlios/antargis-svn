@@ -35,8 +35,5 @@ std::string rubyHashOld(const std::string &p)
 
   s=STR2CSTR(r);
 
-  std::cout<<"p:"<<p<<std::endl;
-  std::cout<<"s:"<<s<<std::endl;
-
   return s;
 }

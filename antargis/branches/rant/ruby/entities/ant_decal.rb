@@ -19,8 +19,8 @@
 #
 
 class AntDecal<AntRubyEntity
-	def initialize()
-		super(AGVector2.new(0,0))
+	def initialize(map)
+		super(map)
 		@typeID=(getRand()*2).to_i
 		setProvide("decal",true)
 		setMesh(:floor_gravel)
