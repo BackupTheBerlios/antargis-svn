@@ -16,6 +16,7 @@
 			<cell col="1" row="0">
 				<!--<text caption="No options here for the time being"/>-->
 				<table cols="2" rows="13" name="VideoOptionsMenu" visible="false">
+					<colsize col="0" relative="0.6"/>
 					<colsize col="1" relative="2"/>
 					<!--<rowsize row="0" relative="5"/>
 					<rowsize row="2" relative="5"/>
@@ -37,11 +38,13 @@
 								<text caption="Texture quality"/>
 							</cell>
 							<cell col="2" row="0">
-								<comboBox name="textureQuality">
-									<item id="low" text="low"/>
-									<item id="medium" text="medium"/>
-									<item id="high" text="high"/>
-								</comboBox>
+								<frame border="button.border.normal" visible="true">
+									<comboBox name="textureQuality" cache="false">
+										<item id="low" text="low"/>
+										<item id="medium" text="medium"/>
+										<item id="high" text="high"/>
+									</comboBox>
+								</frame>
 							</cell>
 						</table>
 					</cell>

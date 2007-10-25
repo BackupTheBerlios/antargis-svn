@@ -341,7 +341,7 @@ class AntMenuApp <AntApplication
 	end
 
 	def eventFullscreen
-		getMain.initVideo(getMain.realWidth,getMain.realHeight,32,(not getMain.fullscreen),true,1024,768)
+		getMain.getVideo.initVideo(getMain.getVideo.realWidth,getMain.getVideo.realHeight,32,(not getMain.getVideo.fullscreen),true,1024,768)
 		getConfig.set("fullscreen",getMain.fullscreen.to_s)
 		return true
 	end
@@ -370,6 +370,7 @@ class AntMenuApp <AntApplication
 	# simple frame-event-handler - only counts how much FPS we have
 	# and displays this on CLI
 	def eventFrame(t)
+		delay(5)
 		@frameTime||=0
 		@frames||=0
 		@frameTime+=t
@@ -477,10 +478,10 @@ protected
 
 	# switch to the video-resolution with pixel-width *w* and height *h*
 	def setRes(w,h)
-		getMain.initVideo(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
-		getConfig.set("xRes",getMain.realWidth.to_s)
-		getConfig.set("yRes",getMain.realHeight.to_s)
-		puts getSurfaceManager.getUsedTexMem
+		getMain.getVideo.initVideo(w,h,32,true,true,1024,768) #getMain.fullscreen,true)
+		getConfig.set("xRes",getMain.getVideo.realWidth.to_s)
+		getConfig.set("yRes",getMain.getVideo.realHeight.to_s)
+		#puts getSurfaceManager.getUsedTexMem
 		#raise 1
 	end
 
