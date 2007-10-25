@@ -56,7 +56,7 @@ void AGLayout::loadXML(const std::string &pXMLData)
   p.parseMemory(pXMLData);
 
 
-	cdebug("dump of XML:"<<p.toString());
+  //	cdebug("dump of XML:"<<p.toString());
 
 
   AGWidget *pgParent=getParent();
@@ -220,7 +220,7 @@ void parseChildren(AGWidget *pParent,const Node &pNode)
       Node::const_iterator i=pNode.begin();
       for(;i!=pNode.end();i++)
 	{
-		cdebug("I:"<<(*i)->getName()<<" name:"<<(*i)->get("name"));
+	  //		cdebug("I:"<<(*i)->getName()<<" name:"<<(*i)->get("name"));
 	  AGWidget *w=parseNode(pParent,**i);
 	  if(w)
 	    pParent->addChild(w);

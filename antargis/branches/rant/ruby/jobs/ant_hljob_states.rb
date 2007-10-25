@@ -731,12 +731,10 @@ end
 #
 class HLJob_Recruit<HLJob_BaseState
 	def enter
-#		describe "Initialize state-vars: countToRecruit" do
-			@countTargetMen=target.getMen.length
-			@countRecruiting=0
-			@countRecruited=0
-			@myPos=hero.getPos2D
-#		end
+		@countTargetMen=target.getMen.length
+		@countRecruiting=0
+		@countRecruited=0
+		@myPos=hero.getPos2D
 		initRecruiting
 	end
 
@@ -751,7 +749,9 @@ class HLJob_Recruit<HLJob_BaseState
 		end
 
 		if (not ready)
-			letRecruit(man)
+			if not letRecruit(man)
+				returnToStart(man)
+			end
 		else
 			returnToStart(man)
 		end
@@ -778,11 +778,13 @@ class HLJob_Recruit<HLJob_BaseState
 
 	def returnToStart(man)
 		pos=hero.getFormation(man,@myPos)
-		if (man.getPos2D-pos).length<0.1
+		if (man.getPos2D-pos).length<0.3
 			man.lookTo(@myPos)
 			man.standStill
+			puts "standStill #{man}"
 		else
 			man.walkTo(pos)
+			puts "walkTo #{pos} #{man}"
 		end
 	end
 
@@ -804,7 +806,9 @@ class HLJob_Recruit<HLJob_BaseState
 			man.hlJobMode[:recruitTarget]=target
 			man.newMoveJob(0,target,1)
 			@countRecruiting=@countRecruiting+1
+			return true
 		end
+		false
 	end
 
 	def initRecruiting

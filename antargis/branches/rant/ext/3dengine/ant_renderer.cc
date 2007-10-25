@@ -109,30 +109,18 @@ void Renderer::initShadowTexture()
 
   CTRACE;
   glGenTextures(1, &shadowMapTexture);
-  cdebug(1);
   glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
   //  glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,
   //		  GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-  cdebug(2);
-
-  cdebug(shadowMapSize);
   glTexImage2D(   GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, shadowMapSize, shadowMapSize, 0,
 		  GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
-  cdebug(3);
-
   assertGL;
-  cdebug(30);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //NEAREST);
-  cdebug(31);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //NEAREST);
-  cdebug(32);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-  cdebug(33);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-  cdebug(4);
   
   glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
-  cdebug(5);
 
   shadowInited=true;
 
