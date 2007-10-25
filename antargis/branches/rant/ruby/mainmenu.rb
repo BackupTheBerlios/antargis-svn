@@ -128,7 +128,7 @@ class AntMenuApp <AntApplication
 	end
 
 	def eventLoadSelect(e)
-		if getMainWidget==@singleMenu
+		if @curMainWidget==@singleMenu
 			@singleMenu.getChild("desc").setText(AGStringUtf8.new(""))
 			filename=id=@singleMenu.getChild("list").getSelectedID
 			fn="data/levels/"+id.gsub(".antlvl",".png")
@@ -137,13 +137,14 @@ class AntMenuApp <AntApplication
 				if s.valid
 					@singleMenu.getChild("screenshot").setSurface(s)
 				end
+			else
+				puts "Screenshot-file #{fn} not found!"
 			end
 			doc=Document.new("data/levels/"+filename)
 			d=doc.root.get("desc")
 			@singleMenu.getChild("desc").setText(AGStringUtf8.new(d))
 			return true
 		end
-		puts "MUH"
 		@loadMenu.getChild("desc").setText(AGStringUtf8.new(""))
 		filename=id=@loadMenu.getChild("list").getSelectedID
 		fn="savegames/"+id.gsub(".antcmp",".png")

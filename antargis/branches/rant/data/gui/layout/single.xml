@@ -25,7 +25,9 @@
 							<frame width="20">
 								<table cols="1" rows="2">
 									<cell col="0" row="0">
-										<image name="screenshot"/>
+										<frame border="button.border.normal" visible="true">
+											<image name="screenshot"/>
+										</frame>
 									</cell>
 									<cell col="0" row="1">
 										<text caption="..." name="desc"/>
