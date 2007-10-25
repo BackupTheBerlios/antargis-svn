@@ -45,6 +45,14 @@ AntParticle::AntParticle(Scene *pScene,float f):
   enabled=true;
 }
 
+AntParticle::~AntParticle()
+{
+  for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
+    delete *i;
+  mPieces.clear();
+
+}
+
 void AntParticle::setFire(bool f)
 {
   fire=f;

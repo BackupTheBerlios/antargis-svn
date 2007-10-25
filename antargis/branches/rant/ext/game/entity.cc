@@ -102,6 +102,7 @@ AntEntity::~AntEntity()
     saveDelete(*i);
   mMeshes.clear();
   delete mJob;
+  removeOldJobs();
 }
 
 void AntEntity::resourceChanged()
@@ -302,16 +303,21 @@ void AntEntity::eventGotNewJob()
 {
 }
 
+void AntEntity::removeOldJobs()
+{
+  std::list<Job*>::iterator i=mJobFinished.begin();
+  for(;i!=mJobFinished.end();i++)
+    delete *i;
+  mJobFinished.clear();
+}
+
 
 /** do anything in given time frame */
 void AntEntity::move(float pTime)
 {
   if(mJobFinished.size() || mEnergy==0.0)
     {
-      std::list<Job*>::iterator i=mJobFinished.begin();
-      for(;i!=mJobFinished.end();i++)
-	delete *i;
-      mJobFinished.clear();
+      removeOldJobs();
     }
   else if(mEnergy>0.0)
     {

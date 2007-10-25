@@ -37,6 +37,9 @@ class AGEXPORT AntParticle:public SceneNode
  public:
   /// make some smoke (or fire) in Scene pScene with output frequency f
   AntParticle(Scene *pScene,float f);
+  
+  virtual ~AntParticle();
+
   /// if f is true this object will display a fire - otherwise it's smoke
   /// default is smoke
   void setFire(bool f);

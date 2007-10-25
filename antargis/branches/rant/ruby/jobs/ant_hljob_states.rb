@@ -914,11 +914,13 @@ module HLJob_RestingModule
 	def sitDown(man)
 		man.sitDown
 		man.hlJobMode[:task]=:rest
+		man.lookTo(hero.getPos2D)
 	end
 	def rest(man)
 		man.sitStill
 		man.hlJobMode[:task]=nil
 		man.hlJobMode[:done]=0
+		man.lookTo(hero.getPos2D)
 	end
 end
 
@@ -1123,8 +1125,6 @@ class HLJob_Build<HLJob_CreationBase
 
 	def endFlatten(man)
 		p=man.hlJobMode[:flattening]
-		puts man
-		pp man.hlJobMode
 		assert{not p.nil?}
 		v=getMap.get(p[0],p[1])*(1-p[2])+@flatheight*p[2]
 		getMap.set(p[0],p[1],v)
@@ -1163,11 +1163,13 @@ class HLJob_Build<HLJob_CreationBase
 	# :section: Producing
 
 	def goBuilding(man)
+		puts "goBuilding #{man}"
 		man.walkTo(target)
 		man.hlJobMode[:task]=:build
 	end
 
 	def build(man)
+		puts "build #{man}"
 		man.hlJobMode[:task]=:endBuild
 		man.newRestJob(3,true)
 		man.setMeshState("pick")
@@ -1179,11 +1181,18 @@ class HLJob_Build<HLJob_CreationBase
 	end
 
 	def whatToDo(man)
+		res=whatToDo2(man)
+		print "whatToDo:"
+		pp res
+		res
+	end
+
+	def whatToDo2(man)
 		man.hlJobMode[:done]||=0
 		return :goResting if man.hlJobMode[:done]>=man.getAggression
 		return :goFlatten if somethingToFlattenLeft
+		return :goBuilding if enoughResourceLeft and not target.ready
 		return :goHarvesting if whatToHarvestList.length>0
-		return :goBuilding if not target.ready
 	end
 
 	# what the stock of all resources should be
@@ -1204,6 +1213,20 @@ class HLJob_Build<HLJob_CreationBase
 
 	def getNextWithResource(res)
 		getMap.getNext(target,res,1)
+	end
+
+	def enoughResourceLeft
+		alreadyBuilding=hero.getMen.select{|man|man.hlJobMode[:task]==:build}.length+1
+		puts "alreadyBuilding:#{alreadyBuilding}"
+		#return true if alreadyBuilding==0
+		neededResources=target.building.buildResources
+		ok=true
+		neededResources.each{|k,v|
+
+			ok=false if target.resource.get(k)<v*alreadyBuilding
+		}
+		puts "ok: #{ok}"
+		ok
 	end
 
 	def error(text)

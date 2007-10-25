@@ -30,10 +30,10 @@ Scene::Scene(int w,int h):
   white=AGVector4(1,1,1,1);
   black=AGVector4(0,0,0,1);
   
+  GLeeInit();
+
   cdebug("SHADOW:"<<(int)GLEE_ARB_shadow);
   cdebug("SHADOW_AMB:"<<(int)GLEE_ARB_shadow_ambient);
-  
-  GLeeInit();
   
   if(getRenderer()->canShadow())
     mShadow=1;
