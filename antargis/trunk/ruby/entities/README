@@ -1,0 +1,18 @@
+== Entities 
+
+=== Introduction
+
+Entities are objects. There are many classes of entities, that have an entirely different behaviour.
+But they have some simple things in common:
+* each entity has an inventory (like in RP-games)
+* each entity has properties like energy or experience - no matter how reasonable this may seem ATM.
+* a low-level-job
+* it can have one (or more) mesh(es)
+* it has many different events, that are called, when certain things happen.
+
+Because events and movements for every entity are computed in each frame of the game (should be at least 25 times a second), that's pretty much to do. Because Ruby isn't that fast, these things are done in C++.
+
+So there is a basic entity-class in C++-code that's called AntEntity
+
+Above this c++-class there is a Ruby-Class named AntRubyEntity, that contains some more basic stuff, that's implemented in Ruby more easily.
+

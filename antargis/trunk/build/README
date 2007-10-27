@@ -1,0 +1,19 @@
+== Antargis build-process
+
+BoA's building bases on http://rant.rubyforge.org
+
+It runs in two steps like most GPL-programs:
+ > ./configure
+ > rant
+
+In future releases we might include installing, too:
+ > rant install
+
+== Configure
+
+BoA's configure is totally independent of autotools - just in case in you might thought this.
+Instead it uses some proprietary functions, that you'll find in link:files/build/configure_rb.html
+
+The actual configure-script is thus written in Ruby, too.
+
+link:files/configure.html

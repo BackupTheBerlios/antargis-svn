@@ -1,0 +1,40 @@
+== Overview
+
+This part of the documentation deals with all the Ruby-parts, which contain:
+* user interfaces like menus and dialogs
+* basic game logic like maps, entities and jobs
+* level-scripting
+* AI-scripting
+* multi-player support
+
+== Global structure
+There are several different "applications" used when playing around with BoA.
+* IntroApp - BoA always begins with an intro
+* AntMenuApp - after the intro menus are displayed. There you can:: a) start a campaign, b) a single-map or c) load a game
+* Campaign - in case you selected a campaign, this class manages the its flow
+* AntGameApp - This class handles the actual game application.
+
+=== Campaigns
+* For more information about campaigns go ahead to Campaign.
+* For single-maps *FIXME*
+
+== BoA's world
+
+=== Map
+A map represents the complete world of BoA. It consists of:
+* a height-map
+* entities on the map
+* some game-logic, that holds everything in place
+
+To make things a little easier, it's implemented in several layers:
+* C++-HeightMap
+* C++-AntargisMap
+
+
+=== Entities
+The basic objects of the game, like trees, people, buildings and so forth are called entities.
+To read more about entities go here: link:files/ruby/entities/README.html
+
+=== Jobs
+Each entity has a job, a low-level-job (LLJob) to be more specific. Certain entities additionally have high-level-jobs (HLJobs).
+For more information on this topic head on to link:files/ruby/jobs/README.html
