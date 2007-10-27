@@ -64,21 +64,21 @@ AGRandomizer::~AGRandomizer()
 
 float AGRandomizer::operator()(float f)
 {
-  CTRACE;
+  //  CTRACE;
   float d=(float)mts_drand(&mState);
-  cdebug("d:"<<d<<" f:"<<f);
+  //  cdebug("d:"<<d<<" f:"<<f);
   d*=f;
-  cdebug("d2:"<<d);
+  //  cdebug("d2:"<<d);
   
   return d;
 }
 int AGRandomizer::operator()(int i)
 {
-  CTRACE;
+  //  CTRACE;
   int r=mts_lrand(&mState);
-  cdebug("r:"<<r<<" i:"<<i);
+  //  cdebug("r:"<<r<<" i:"<<i);
   r%=i;
-  cdebug("r2:"<<r);
+  //  cdebug("r2:"<<r);
   return r;
 }
 

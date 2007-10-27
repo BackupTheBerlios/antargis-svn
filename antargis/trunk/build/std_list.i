@@ -211,7 +211,7 @@ namespace std {
         %typemap(out) list<T*> {
             $result = rb_ary_new2($1.size());
             size_t j=0;
-             for($1_type::iterator i=$1.begin();i!=$1.end();i++) {
+             for($1_type::iterator i=$1.begin();i!=$1.end();i++,j++) {
 		rb_ary_store($result,j,AG_NewPointerObj(*i,$descriptor(T*),1));
             }
         }

@@ -59,7 +59,7 @@ class AGEXPORT AntMap:public HeightMap
   void newMap(int w,int h);
   
   EntityList getEntities(const AGRect2&r);
-  EntityList getAllEntities();
+  std::list<AntEntity*> getAllEntities();
 //  std::vector<AntEntityPtr> getAllEntitiesV();
 //  std::vector<AntEntityPtr> getEntities(const AGString &pName);
 //  std::vector<AntEntity*> getAllEntitiesV();
@@ -94,8 +94,6 @@ class AGEXPORT AntMap:public HeightMap
 
   virtual void mapChanged();  
 
-
-  //  std::vector<AntEntityPtr> getByType(const AGString &pType);
  private:
   typedef std::map<size_t,AntEntity*> EntityMap;
 

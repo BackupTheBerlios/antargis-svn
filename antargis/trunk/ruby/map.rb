@@ -474,6 +474,12 @@ class AntRubyMap<AntMap
 		@app.setupNames
 	end
 
+	def getAllByType(type)
+		getAllEntities.select{|e|
+			e.is_a?(type)
+		}
+	end
+
 private	
 	def checkTriggers
 		@heroes.each{|h|

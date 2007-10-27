@@ -4,12 +4,12 @@ import "package/tgz"                  # support for packaging (tar.gz, zip)
 import "package/zip"                  # support for packaging (tar.gz, zip)
 import "rubydoc"
 import "c/dependencies"
-
-require 'build/base_tools.rb'
+require 'pp'
 
 puts "ERROR: Please run ./configure before building!" unless File.exists?("config.rb")
+require 'build/base_tools.rb'
+
 require 'config.rb'                   # include build-options
-    
 
 
 # get library-dependencies for libSDL

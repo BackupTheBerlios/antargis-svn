@@ -1192,7 +1192,7 @@ class HLJob_Build<HLJob_CreationBase
 		return :goResting if man.hlJobMode[:done]>=man.getAggression
 		return :goFlatten if somethingToFlattenLeft
 		return :goBuilding if enoughResourceLeft and not target.ready
-		return :goHarvesting if whatToHarvestList.length>0
+		return :goHarvesting #if whatToHarvestList.length>0 # always
 	end
 
 	# what the stock of all resources should be
@@ -1216,7 +1216,7 @@ class HLJob_Build<HLJob_CreationBase
 	end
 
 	def enoughResourceLeft
-		alreadyBuilding=hero.getMen.select{|man|man.hlJobMode[:task]==:build}.length+1
+		alreadyBuilding=hero.getMen.select{|man|[:build,:goBuilding].member?(man.hlJobMode[:task])}.length+1
 		puts "alreadyBuilding:#{alreadyBuilding}"
 		#return true if alreadyBuilding==0
 		neededResources=target.building.buildResources

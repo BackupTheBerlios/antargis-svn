@@ -33,14 +33,9 @@ class AntFish<AntAnimal
 		setOnGround(false)
 		setPos(AGVector3.new(0,0,-0.3))
 
-		#puts "FISH:#{getPos3D}"
-		
 		setMesh
-		#mesh=Mesh.new(getMap.getScene,getFishMeshData,AGVector4.new(0,0,0),0)
-		#setMesh(mesh)
 
 		resource.set("food",1)
-		#puts "FISH:#{getPos3D}"
 	end
 	def saveXML(node)
 		super(node)
@@ -64,21 +59,7 @@ class AntFish<AntAnimal
 			return
 		end
 
-		# BIRTHRATE is here:
-		if @lastBirth>40 then
-			# make child
-			#puts "A FISH IS BORN"
-			fish=AntFish.new(getMap)
-			fish.setPos(getPos2D)
-			getMap.insertEntity(fish)
-			getMap.endChange
-			newRestJob(2)
-			@lastBirth=-getRand()*10
-		else
-			setPos(AGVector3.new(getPos2D,-0.3))
-			newMoveJob(0,getTargetPos,0)
-			setMeshState("go")
-		end
+		giveBirth
 
 		@foodAdd+=1
 		#puts "FOOOOOD #{@foodAdd}"
@@ -110,5 +91,25 @@ class AntFish<AntAnimal
 	end
 	def getName
 		"Fish"
+	end
+private
+	def giveBirth
+		# BIRTHRATE is here:
+		if @lastBirth>40 then
+			fishList=getMap.getAllByType(self.class)
+			return if fishList.length>50
+			# make child
+			#puts "A FISH IS BORN"
+			fish=AntFish.new(getMap)
+			fish.setPos(getPos2D)
+			getMap.insertEntity(fish)
+			getMap.endChange
+			newRestJob(2)
+			@lastBirth=-getRand()*10
+		else
+			setPos(AGVector3.new(getPos2D,-0.3))
+			newMoveJob(0,getTargetPos,0)
+			setMeshState("go")
+		end
 	end
 end

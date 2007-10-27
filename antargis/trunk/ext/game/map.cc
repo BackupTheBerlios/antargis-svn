@@ -196,20 +196,6 @@ void AntMap::processXMLNode(const Node &node)
   cdebug("type unknown:"<<node.getName());
   //  return e;
 }
-
-/*std::vector<AntEntityPtr> AntMap::getByType(const AGString &pType)
-{
-  std::vector<AntEntityPtr> l;
-  EntityByType::iterator i=mByType.find(pType);
-  if(i!=mByType.end())
-    {
-      std::copy(i->second.begin(),i->second.end(),std::back_inserter(l));
-    }
-
-  return l;  
-  }*/
-
-
 AntMap::EntityList AntMap::getEntities(const AGRect2&r)
 {
   return mEntQuad->get(r);
