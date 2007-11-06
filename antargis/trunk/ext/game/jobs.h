@@ -72,6 +72,7 @@ class AGEXPORT MoveJob:public Job
 {
   AGVector2 mTarget;
   AGVector3 mTarget3;
+  AGVector2 mNearTarget;
   AntEntity *mTargetEntity;
   float mNear;
   bool mRun;
@@ -82,6 +83,7 @@ class AGEXPORT MoveJob:public Job
   MoveJob(int p,AntEntity *pTarget,float pnear=0,bool pRun=false);
   MoveJob(int p,const AGVector2 &pTarget,float pnear=0,bool pRun=false);
   MoveJob(int p,const AGVector3 &pTarget,float pnear=0,bool pRun=false);
+
   virtual ~MoveJob();
   void move(AntEntity *e,float ptime);
   AGVector2 getDirection(const AntEntity *e) const;

@@ -27,7 +27,6 @@ class AntFish<AntAnimal
 		super
 		setProvide("fish",true)
 		setSpeed 0.6
-		@lastBirth=0
 		@foodAdd=0
 
 		setOnGround(false)
@@ -59,7 +58,11 @@ class AntFish<AntAnimal
 			return
 		end
 
-		giveBirth
+		if (not giveBirth)
+			setPos(AGVector3.new(getPos2D,-0.3))
+			newMoveJob(0,getTargetPos,0)
+			setMeshState("go")
+		end
 
 		@foodAdd+=1
 		#puts "FOOOOOD #{@foodAdd}"
@@ -68,7 +71,6 @@ class AntFish<AntAnimal
 			@foodAdd=0
 		end
 
-		@lastBirth+=1
 	end
 	
 	def getTargetPos
@@ -93,23 +95,4 @@ class AntFish<AntAnimal
 		"Fish"
 	end
 private
-	def giveBirth
-		# BIRTHRATE is here:
-		if @lastBirth>40 then
-			fishList=getMap.getAllByType(self.class)
-			return if fishList.length>50
-			# make child
-			#puts "A FISH IS BORN"
-			fish=AntFish.new(getMap)
-			fish.setPos(getPos2D)
-			getMap.insertEntity(fish)
-			getMap.endChange
-			newRestJob(2)
-			@lastBirth=-getRand()*10
-		else
-			setPos(AGVector3.new(getPos2D,-0.3))
-			newMoveJob(0,getTargetPos,0)
-			setMeshState("go")
-		end
-	end
 end

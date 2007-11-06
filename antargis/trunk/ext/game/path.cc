@@ -219,6 +219,8 @@ float MapPathWeighter::weightHeight(float a,float b) const
 
 bool MapPathWeighter::accessible(const AGVector2 &a)
 {
+  float thres=0;
+
   // FIXME: maybe make some terrain impassable
 
   if(isWaterPassable())
@@ -233,7 +235,12 @@ bool MapPathWeighter::accessible(const AGVector2 &a)
 	py=std::max(0.0f,std::min(py,mMap->getH()-1.0f));
 	hmin=std::min(hmin,mMap->getHeight(px,py));
       }
-  return hmin>0;
+  if(hmin<=thres)
+    {
+      cdebug("not accessible:"<<a<<":"<<hmin);
+    }
+
+  return hmin>thres;
 }
 
 
@@ -572,6 +579,9 @@ void DecimatedGraph::decimate(float amount,MapPathWeighter *pWeighter)
 
   m=std::max((unsigned int)m,2U);
 
+  assert(mNodes.size()>0);
+  assert(mEdges.size()>0);
+
   while(mNodes.size()>m)
     {
       Edge *e=*mEdges.begin();
@@ -676,18 +686,18 @@ SimpleGraph::Edge DecimatedGraph::makeEdge(Node *a,Node *b,MapPathWeighter *pWei
 }
 
 
-std::list<std::pair<size_t,size_t> > getPossibleNeighbors(size_t w,size_t h,const std::pair<size_t,size_t> &curPos)
+std::list<std::pair<size_t,size_t> > getPossibleNeighbors(size_t w,size_t h,const std::pair<size_t,size_t> &curPos,size_t res)
 {
   std::list<std::pair<size_t,size_t> > result;
   int x,y,dx,dy;
-  int r=5;
+  int r=2;
   for(x=-r+1;x<r;x++)
     for(y=0;y<r;y++)
       if(x>0 || y>0)
 	//	if(x!=y) // FIXME
 	  {
-	    dx=x+curPos.first;
-	    dy=y+curPos.second;
+	    dx=x*res+curPos.first;
+	    dy=y*res+curPos.second;
 
 	    if(dx<w-1 && dy<h-1 && dx>=0 && dy>=0)
 	      result.push_back(std::make_pair(dx,dy));
@@ -745,7 +755,7 @@ SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res)
 	  }
 #else
 	std::pair<size_t,size_t> p(x,y);
-	std::list<std::pair<size_t,size_t> > l=getPossibleNeighbors(w,h,std::make_pair(x,y));
+	std::list<std::pair<size_t,size_t> > l=getPossibleNeighbors(w,h,std::make_pair(x,y),res);
 	SimpleGraph::Node *a=nodes[p];
 	for(std::list<std::pair<size_t,size_t> >::iterator i=l.begin();i!=l.end();i++)
 	  {
@@ -1172,7 +1182,7 @@ std::vector<AGVector2> Pathfinder::refinePath(const std::vector<AGVector2> &p,Ma
 
       cdebug("WEIGHTS:"<<w0<<"  "<<w1<<"  "<<w2);
 
-      if(w0+w1>w2)
+      if(w0+w1>w2 && w2<16)
 	i=result.erase(i);
       else
 	i++;

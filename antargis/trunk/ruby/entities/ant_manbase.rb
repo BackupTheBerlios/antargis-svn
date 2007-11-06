@@ -115,7 +115,13 @@ module AntManBase
 	end
 	def eventNoJob
 		if @meshState=="dead"
-			getMap.removeEntity(self)
+			if @mdead
+				getMap.removeEntity(self)
+			else
+				newRestJob(20)
+				@mdead=true
+				return
+			end
 		end
 		super
 	end

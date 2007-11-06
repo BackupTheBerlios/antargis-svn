@@ -376,19 +376,20 @@ class AGEXPORT AGTriangle2
 
 class AGEXPORT AGCircle2
 {
-  AGVector3 p;
+  AGVector2 p;
   float radius;
  public:
-  AGCircle2(const AGVector3 &v,float rad);
+  AGCircle2(const AGVector2 &v,float rad);
 
   bool inCircle(const AGTriangle2 &t) const;
   bool outCircle(const AGTriangle2 &t) const;
-  bool inCircle(const AGVector3 &v) const;
-  bool outCircle(const AGVector3 &v) const;
+  bool inCircle(const AGVector2 &v) const;
+  bool outCircle(const AGVector2 &v) const;
 
-  AGVector3 getPos() const;
+  AGVector2 getPos() const;
   float getRadius() const;
 
+  std::list<AGVector2> collide(const AGLine2 &pLine) const;
 };
 
 class AGVector4;

@@ -42,7 +42,7 @@ class AntTower<AntHouse
 	end
 	
 	def addFlag(owner)
-		@flag=AntFlag.new
+		@flag=AntFlag.new(getMap)
 		setPos(getPos2D) # reset flag position
 		getMap.insertEntity(@flag)
 	end

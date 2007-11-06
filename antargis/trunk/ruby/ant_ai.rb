@@ -52,7 +52,7 @@ class AntBasicAI
 	def eventTriggerHit(hero,triggerName)
 	end
 	# in each frame this function is called with the time that's passed. Don't use this function if you
-	# don't need to, because this hits performance!
+	# don't need to, because this hits performance rather badly!
 	def eventFrame(time)
 	end
 end

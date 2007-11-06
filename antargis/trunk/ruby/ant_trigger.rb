@@ -6,7 +6,7 @@ class Trigger
 			@pos.loadXML(node)
 			@radius=node.get("radius").to_f
 			@name=node.get("name")
-			@circle=AGCircle2.new(AGVector3.new(@pos.x,@pos.y,1),@radius)
+			@circle=AGCircle2.new(AGVector2.new(@pos.x,@pos.y),@radius)
 			@triggerTime=AntRubyMap.getSystemTime
 			@player=node.get("player")
 			@text=node.get("text")
@@ -25,7 +25,7 @@ class Trigger
 	def check(hero)
 		if AntRubyMap.getSystemTime-@triggerTime>1 # wait at least a second for repeating trigger
 			p2=hero.getPos2D
-			p3=AGVector3.new(p2.x,p2.y,1)
+			p3=AGVector2.new(p2.x,p2.y)
 			#dputs name," ",p3,@pos,@radius,@circle.inCircle(p3), (p2-@pos).length
 			if @circle.inCircle(p3)
 				getMap.trigger(hero,self)

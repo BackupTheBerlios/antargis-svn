@@ -19,13 +19,13 @@ $config={
 	"INCLUDES"=>"",
   "LIBGL"=>"-lGL -lGLU",
   # call the compiler using the standard unix-style mechanism <CC> -c -o <outputname> <input0> [<input1> ...]
-	"COMPILE_PARAMS"=>" -Wp,-MD,$(DEP) -c -o $(OUTPUT) $(INPUT)",
+	"COMPILE_PARAMS"=>" -dH -Wp,-MD,$(DEP) -c -o $(OUTPUT) $(INPUT)",
 	# an ansi-c compiler call with parameters (using ccache if available)
 	"CC_CALL"=>"$(CCACHE) $(CC) $(COMPILE_PARAMS)",
 	# a c++ compiler call with parameters (using ccache if available)
 	"CXX_CALL"=>"$(CCACHE) $(CXX) $(COMPILE_PARAMS)",
 	# build a shared library (.so or .dll)
-	"LINK_SHARED"=>"$(CCACHE) $(LINK) -shared -o $(OUTPUT) -Lext $(INPUT)",
+	"LINK_SHARED"=>"$(CCACHE) $(LINK) -dH -shared -o $(OUTPUT) -Lext $(INPUT)",
 	# build a program (.exe)
 	"LINK_EXE"=>"$(LINK) -o $(OUTPUT) -Lext $(INPUT)",
 

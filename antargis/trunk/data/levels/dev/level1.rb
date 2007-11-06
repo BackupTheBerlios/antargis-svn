@@ -1,8 +1,6 @@
-class Level1<Level
-	def initialize
+class Level1<AntLevelScript
+	def eventLevelStarted
 		puts "Level inited"
-		#tellStory("title","Level started")
-		#exit
 	end
 	def eventTrigger(hero,t)
 		puts "TRIGGER"

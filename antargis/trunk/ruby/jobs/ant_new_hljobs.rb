@@ -35,10 +35,15 @@ class AntHeroRestJob<AntNewHLJob
 	state :sitDown=>HLJob_SitDown
 	state :justSitOnce=>HLJob_JustSitOnce
 	state :spreadThings=>HLJob_SpreadThings
+	state :endState=>HLJob_DummyState
 
 	startState :formatSit
+	endState :endState
+
 	edge :formatSit, :sitDown
-	edge :sitDown,:justSitOnce
+	edge :sitDown,:justSitOnce,:notRestFinished
+	edge :sitDown,:endState,:restFinished
+
 	edge :justSitOnce,:spreadThings,:checkSpread
 	edge :justSitOnce,:justSitOnce,:notCheckSpread
 	edge :spreadThings,:formatSit,:lastSpread
@@ -47,6 +52,8 @@ class AntHeroRestJob<AntNewHLJob
 
 	def initialize(hero,time)
 		super(hero)
+		@restTime=time
+		@startTime=getTime
 	end
 	def image
 		"data/gui/bed.png"
@@ -73,6 +80,14 @@ class AntHeroRestJob<AntNewHLJob
 		not checkSpread
 	end
 		
+	def restFinished
+		finished=(getTime-@startTime)>@restTime
+		#log "RESTJOB FINISHED: #{finished} ((#{getTime}-#{@startTime})>#{@restTime})"
+		finished
+	end
+	def notRestFinished
+		not restFinished
+	end
 end
 
 

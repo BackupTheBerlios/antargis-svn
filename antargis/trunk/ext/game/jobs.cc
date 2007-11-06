@@ -94,7 +94,7 @@ MoveJob::MoveJob(int p,AntEntity *pTarget,float pNear,bool pRun):Job(p),mTargetE
   //  runSpeed=100;
 }
 
-MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(pTarget),mTargetEntity(0),mNear(pNear),mRun(pRun)
+MoveJob::MoveJob(int p,const AGVector2 &pTarget,float pNear,bool pRun):Job(p),mTarget(pTarget),mNearTarget(pTarget),mTargetEntity(0),mNear(pNear),mRun(pRun)
 {
   m3d=false;
   // speed=70; // pixels per second
@@ -107,7 +107,6 @@ MoveJob::MoveJob(int p,const AGVector3 &pTarget,float pNear,bool pRun):Job(p),mT
   // speed=70; // pixels per second
   //  runSpeed=100;
 }
-
 
 MoveJob::~MoveJob()
 {
@@ -194,8 +193,10 @@ void MoveJob::moveBy(AntEntity *e,float ptime,float aspeed)
     {
       AGVector2 diff=e->getPos2D()-mTarget;
       float norm=diff.length();
+
+      float nearDist=(e->getPos2D()-mNearTarget).length();
       
-      if(norm-mNear>ptime*aspeed)
+      if(norm-mNear>ptime*aspeed && nearDist-mNear>ptime*aspeed)
 	{
 	  diff=diff.normalized();
 	  e->setDirection(-diff.getAngle().angle*180.0/M_PI);

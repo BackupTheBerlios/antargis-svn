@@ -64,11 +64,11 @@ class HLJob_FormatWalk<HLJob_BaseState
 
 	def ready
 		if getTime-@formatStart>FORMAT_MAX_TIME
-			puts "MUST BE READY"
+			#log "MUST BE READY"
 			return true
 		end
 		allMen.each{|man|
-			puts "formatting:#{man}:#{man.hlJobMode[:formatting]}"
+			#log "formatting:#{man}:#{man.hlJobMode[:formatting]}"
 			if man.hlJobMode[:formatting]
 				return false
 			end
@@ -170,6 +170,7 @@ class HLJob_MoveComplete<BaseState
 	edge :moveToNextPoint, :endState, :noMoreWaypoints
 
 	def enter
+		@near=0
 		puts "#{self}:enter"
 		if @waypoints.nil?
 			initWaypoints
@@ -180,14 +181,20 @@ class HLJob_MoveComplete<BaseState
 		puts state
 		if @waypoints.length>0
 			self.targetPos=@waypoints.shift
-			puts "targetPos:#{targetPos}"
+
+			if @waypoints.length==0
+				self.targetPos=checkPosNear(self.targetPos)
+				@states[:moveToNextPoint].near=@near 
+			end
+			
 			return true
 		end
 		false
 	end
 
 	def near=(n)
-		@states[:moveToNextPoint].near=n
+		@near=n
+		#@states[:moveToNextPoint].near=n
 	end
 
 	def noMoreWaypoints
@@ -213,6 +220,7 @@ class HLJob_MoveComplete<BaseState
 	private
 
 	def initWaypoints
+		@finalPos=targetPos
 		if getMap.path
 			@waypoints=[hero.getPos2D]+getMap.path.computePath(hero.getPos2D,targetPos,hero)+[targetPos]
 			# remove waypoints in between - if they're not necessary - origin must be given, too
@@ -221,13 +229,26 @@ class HLJob_MoveComplete<BaseState
 			assert{@waypoints.length>=2}
 			@waypoints.shift
 			
-			@waypoints+=[targetPos]
+			#@waypoints+=[targetPos]
 
 		else
 			@waypoints=[targetPos]
 		end
 		@completeTargetPos=targetPos
 		self.targetPos=@waypoints.shift
+		self.targetPos=checkPosNear(self.targetPos)
+	end
+
+	def checkPosNear(to)
+		from=hero.getPos2D
+		line=AGLine2.new(from,to)
+		circle=AGCircle2.new(@finalPos,@near)
+		list=circle.collide(line)
+		if list.length>0
+			to=list.min{|a,b|(a-from).length<=>(b-from).length}
+		end
+
+		to
 	end
 end
 
@@ -545,9 +566,17 @@ class HLJob_FightData<HLJob_BaseState
 			puts "parties: #{type}:#{jobs}"
 			menGroup[type]=jobs.collect{|job|job.undefeatedMen}.flatten.uniq
 			menGroup[type].each{|man|man.delJob}
-			leave=true if @inited and menGroup[type].length==0 # a fightjob is leaving
+			if menGroup[type].length==0
+				if @inited
+					leave=true # a fightjob is leaving
+				else
+					# party is still defeated, but job is not yet finished ?
+					leave=true 
+				end
+			end
 		}
 		return if leave
+		assert{@parties.length>0}
 	
 		# check that each group has more than 0 members
 		assert{menGroup.select{|k,v|v.length==0}.length==0}
@@ -715,11 +744,16 @@ class HLJob_Fight<HLJob_BaseState
 		trace
 
 		undefeatedMen.each{|man|
-			assert{not man.hlJobMode[:fightTarget].nil?}
-			man.newFightJob(0,man.hlJobMode[:fightTarget])
-			# FIXME: check if morale is high enough
-			man.hlJobMode.delete(:defeated)
-			man.hlJobMode[:fighting]=true
+			if man.hlJobMode[:fightTarget]
+				assert{not man.hlJobMode[:fightTarget].nil?}
+				man.newFightJob(0,man.hlJobMode[:fightTarget])
+				# FIXME: check if morale is high enough
+				man.hlJobMode.delete(:defeated)
+				man.hlJobMode[:fighting]=true
+			else
+				# this the case, when an already defeated party is attacked
+				puts "POSSIBLE ERROR: #{man} has no opponent ?"
+			end
 		}
 	end
 end

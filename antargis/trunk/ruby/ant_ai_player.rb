@@ -7,6 +7,11 @@ class AntAIPlayer
 		@map=map
 		#@name=@ai.interface.myPlayer.getName
 	end
+
+	def getMap
+		@map
+	end
+
 	def saveXML(n)
 		n.set("name",name)
 		@heroes.each{|hero|

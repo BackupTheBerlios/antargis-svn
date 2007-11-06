@@ -85,7 +85,7 @@ end
 # rest for a second
 class AIRestAction<AIAction
 	def execute(hero)
-		hero.rest(1)
+		hero.rest(10)
 	end
 end
 

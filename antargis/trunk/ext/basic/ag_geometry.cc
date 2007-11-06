@@ -1049,15 +1049,42 @@ AGLine2 AGTriangle2::nearestLine(const AGVector2 &v) const
 // AGCircle2
 /////////////////////////////////////////////////////////////////////////////
 
-AGCircle2::AGCircle2(const AGVector3 &v,float rad):p(v),radius(rad)
+AGCircle2::AGCircle2(const AGVector2 &v,float rad):p(v),radius(rad)
 {
 }
 
-bool AGCircle2::inCircle(const AGVector3 &v) const
+std::list<AGVector2> AGCircle2::collide(const AGLine2 &pLine) const
+{
+  std::list<AGVector2> l;
+
+  AGVector2 normal=pLine.normal();
+  AGVector2 mp(p.dim2());
+
+  float dist=(mp-pLine[0])*normal;
+
+  if(radius>fabs(dist))
+    {
+      AGVector2 dir=pLine.direction().normalized();
+      // ground-point
+      float alpha=dir*(mp-pLine[0]);
+      AGVector2 g=pLine[0]+dir*alpha;
+
+      float dist=(g-mp).length();
+      assert(radius>dist);
+      float rest=sqrt(radius*radius-dist*dist);
+      l.push_back(g+dir*rest);
+      l.push_back(g+dir*(-rest));
+    }
+
+  return l;
+}
+
+
+bool AGCircle2::inCircle(const AGVector2 &v) const
 {
   return (v-p).length2()<radius*radius;
 }
-bool AGCircle2::outCircle(const AGVector3 &v) const
+bool AGCircle2::outCircle(const AGVector2 &v) const
 {
   return (v-p).length2()>radius*radius;
 }
@@ -1071,7 +1098,7 @@ bool AGCircle2::outCircle(const AGTriangle2 &t) const
   return outCircle(t.get(0)) && outCircle(t.get(1)) && outCircle(t.get(2));
 }
 
-AGVector3 AGCircle2::getPos() const
+AGVector2 AGCircle2::getPos() const
 {
   return p;
 }

@@ -178,13 +178,5 @@
 	<!--<conqueringPlayer name="Bantor">
 		<hero name="Bantor"/>
 	</conqueringPlayer>-->
-	<!--
 	<trigger name="attack" x="15" y="0"  radius="2" player="Bantor"/>
-	<story>
-		<start>
-			<window>
-				<text>You awaken.</text>
-			</window>
-		</start>
-	</story>-->
 </antargisLevel>

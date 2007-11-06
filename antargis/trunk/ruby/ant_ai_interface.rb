@@ -109,6 +109,9 @@ class AIMyEntity
 	def getPos
 		@ent.getPos2D
 	end
+	def getMap
+		@map
+	end
 	private
 	def getRef(t)
 		@map.getByUID(t.uid)

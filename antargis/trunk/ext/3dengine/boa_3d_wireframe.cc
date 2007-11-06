@@ -54,6 +54,12 @@ void Boa3dWireframe::addLine(const AGVector3 &a,const AGVector3 &b)
   line.b=b;
   mLines.push_back(line);
   mChanged=true;
+
+  AGBox3 bb=bbox();
+
+  bb.include(a);
+  bb.include(b);
+  setBBox(bb);
 }
 
 bool Boa3dWireframe::transparent()

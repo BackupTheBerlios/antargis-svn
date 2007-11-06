@@ -15,6 +15,7 @@
 # * Pathfinder
 #
 class CombinedPathFinder
+	attr_accessor :scene
 
 	# the current available modes, in which pathes will be computed. You can add some more here
   # but you'll have to modify the functions getPathWeighter, getMode, displayPathfindingGraph
@@ -46,15 +47,20 @@ class CombinedPathFinder
 	end
 
 	def computePath(p0,p1,entity)
-		@path[getMode(entity)].computePath(p0,p1)
+		path=@path[getMode(entity)].computePath(p0,p1)
+		#displayPath(path)
+		path
 	end
 	def refinePath(waypoints,entity)
 		mode=getMode(entity)
-		@path[mode].refinePath(waypoints,getPathWeighter(@map,mode))
+		path=@path[mode].refinePath(waypoints,getPathWeighter(@map,mode))
+		#displayPath(path,AGVector4.new(1,0,0,1))
+		path
 	end
 
 
 	def displayPathfindingGraph(map,scene)
+		return
 		colors={:normal=>AGVector4.new(1,0,0,1),:overWater=>AGVector4.new(1,1,0,1)}
 		width=2
 		MODES.each{|mode|
@@ -63,13 +69,31 @@ class CombinedPathFinder
 				edge=@graph[mode].getEdgePosition(i)
 				a=edge[0]
 				b=edge[1]
-				a=AGVector3.new(a.x,a.y,map.getHeight(a.x,a.y)+0.05)
-				b=AGVector3.new(b.x,b.y,map.getHeight(b.x,b.y)+0.05)
+				a=AGVector3.new(a.x,a.y,map.getHeight(a.x,a.y)+0.15)
+				b=AGVector3.new(b.x,b.y,map.getHeight(b.x,b.y)+0.15)
 				wireframe.addLine(a,b)
 			}
 			scene.addNode(wireframe)
 			width+=2
 		}
+	end
+
+	def displayPath(path,color=AGVector4.new(1,1,0,1))
+		if path.length>2
+			width=5
+			node=Boa3dWireframe.new(@scene,color,width)
+			on=nil
+			path.each{|n|
+				if on
+					a=AGVector3.new(n.x,n.y,@map.getHeight(n.x,n.y)+0.15)
+					b=AGVector3.new(on.x,on.y,@map.getHeight(on.x,on.y)+0.15)
+					node.addLine(a,b)
+					pp a,b
+				end
+				on=n
+			}
+			@scene.addNode(node)
+		end
 	end
 
 private
@@ -117,13 +141,19 @@ private
 		weighter=getPathWeighter(map,mode)
 
 		# set initial distance of waypoints	
-		minDist=2
+		minDist=4
 
 		begin
 			# make a path-finding graph
 			sgraph=makeGraph(map,weighter,minDist)
 			minDist*=2
+			puts "---"
+			pp minDist
+			pp sgraph.size,sgraph.edges
 		end while(sgraph.size>2000) # use a smaller resolution, if there are too many nodes in graph
+
+		assert {sgraph.size>0}
+		assert {sgraph.edges>0}
 
 		# copy to a decimating graph
 		graph=DecimatedGraph.new(sgraph)

@@ -18,27 +18,16 @@
 # License along with this program.
 #
 
-# some very simple base-class for animals. contains really nothing.
-class AntAnimal<AntRubyEntity
-	def initialize(map)
-		super
-	end
-	def AntAnimal.xmlName
-		""
-	end
-end
+require 'ant_animal.rb'
 
 class AntSheep<AntAnimal
 	def initialize(map)
 		super
 		setProvide("sheep",true)
 		setSpeed 0.4
-		@lastBirth=0
 		@foodAdd=0
 		
 		setMesh
-# 		data=getAnimMeshData("data/models/sheep.anim")
-# 		setMesh(AnimMesh.new(getMap.getScene,data))
 
 		resource.set("food",1)
 	end
@@ -58,23 +47,25 @@ class AntSheep<AntAnimal
 			return
 		end
 
-		# BIRTHRATE is here:
-		if @lastBirth>40 then
-			# make child
-			puts "A SHEEP IS BORN"
-			sheep=AntSheep.new
-			sheep.setPos(getPos2D)
-			getMap.insertEntity(sheep)
-			#getMap.endChange
-			newRestJob(2)
-			@lastBirth=-getRand*10
-		elsif getRand<0.5 then
-			newMoveJob(0,getTargetPos,0)
-			setMeshState("go")
-		else
-			newRestJob(3)
-			setMeshState("eat")
-			playSound("sheep")
+		if (not giveBirth)
+# 		# BIRTHRATE is here:
+# 		if @lastBirth>40 then
+# 			# make child
+# 			puts "A SHEEP IS BORN"
+# 			sheep=AntSheep.new
+# 			sheep.setPos(getPos2D)
+# 			getMap.insertEntity(sheep)
+# 			#getMap.endChange
+# 			newRestJob(2)
+# 			@lastBirth=-getRand*10
+			if getRand<0.5 then
+				newMoveJob(0,getTargetPos,0)
+				setMeshState("go")
+			else
+				newRestJob(3)
+				setMeshState("eat")
+				playSound("sheep")
+			end
 		end
 
 		@foodAdd+=1
@@ -85,8 +76,6 @@ class AntSheep<AntAnimal
 			#puts "RESOURCE: #{resource.get("food")}"
 			@foodAdd=0
 		end
-
-		@lastBirth+=1
 	end
 	
 	def getTargetPos

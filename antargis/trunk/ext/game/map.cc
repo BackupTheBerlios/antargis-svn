@@ -299,7 +299,7 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
 	        norm=(*mHeuristicFunction)(std::make_pair((*i)->getPos2D(),p));
 	      else
 		norm=((*i)->getPos2D()-p).length2();
-	      cdebug("norm:"<<norm<<" i:"<<*i<<" name:"<<(*i)->getName());
+//	      cdebug("norm:"<<norm<<" i:"<<*i<<" name:"<<(*i)->getName());
 	      //              float norm=p2.length2();
               ents.insert(std::make_pair(norm,*i));
             }

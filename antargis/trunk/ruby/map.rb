@@ -116,7 +116,8 @@ class AntRubyMap<AntMap
 		@uidstart=[i,@uidstart].max
 	end
 	def getByUID(id)
-		ents=getAllEntitiesV
+		puts "WARNING: THIS function is slow!"
+		ents=getAllEntities
 		id=id.to_i
 		ents.each{|e|
 			r=e.get
@@ -496,7 +497,8 @@ private
 
 	def createPathfinder
 		@path=CombinedPathFinder.new(self)
-		#@path.displayPathfindingGraph(self,getScene)
+		@path.scene=getScene
+		@path.displayPathfindingGraph(self,getScene)
 	end
 
 	def createPathfinderOLD

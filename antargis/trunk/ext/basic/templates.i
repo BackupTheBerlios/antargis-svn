@@ -9,5 +9,6 @@
 %template(StringVector) std::vector<std::string>;
 %template(AGStringVector) std::vector<AGString>;
 %template(AGFilenameVector) std::vector<AGFilename>;
+%template(AGVector2List) std::list<AGVector2>;
 
 

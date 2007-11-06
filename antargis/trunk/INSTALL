@@ -7,9 +7,11 @@ Quick Start:
 
 3) After this step no root-privileges are needed.
 
-4) If you have installed rant in step 1: Run "rant" in this directory. Otherwise: Run "ruby build.rb" in the current directory
+4) Run "ruby configure" or just "./configure" to configure the building. You may want to give additional options, which will be explained if you give the parameter "-h" - so run "./configure -h"
 
-5) Run "./antargis" in this directory
+5) If you have installed rant in step 1: Run "rant" in this directory. Otherwise: Run "ruby build.rb" in the current directory
+
+6) Run "./antargis" in this directory
 
 Essentials: Ruby, (Rant)
 This game is mostly written in Ruby (www.ruby-lang.org) and C++. It uses Rant (Rant - Flexible, Ruby based make) as build system.

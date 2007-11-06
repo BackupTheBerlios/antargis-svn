@@ -79,12 +79,15 @@ namespace std {
         }
         %typemap(out) list<T> {
             $result = rb_ary_new2($1.size());
-	    size_t j=0;
-	    for($1_type::iterator i=$1.begin();i!=$1.end();i++,j++)
-	    {
+            size_t j=0;
+            for($1_type::iterator i=$1.begin();i!=$1.end();i++,j++)
+            {
                 T* x = new T(*i);
-		rb_ary_store($result,j,AG_NewPointerObj((void*)x,$descriptor(T*),1));
+                assert(x);
+                // no AG_NewPointerObj needed, because object is definitely created above and thus has no mRubyObject defined
+                rb_ary_store($result,j,SWIG_NewPointerObj((void*)x,$descriptor(T*),1));
             }
+            assert(j==$1.size());
         }
         %typecheck(SWIG_TYPECHECK_LIST) list<T> {
             /* native sequence? */
@@ -212,8 +215,9 @@ namespace std {
             $result = rb_ary_new2($1.size());
             size_t j=0;
              for($1_type::iterator i=$1.begin();i!=$1.end();i++,j++) {
-		rb_ary_store($result,j,AG_NewPointerObj(*i,$descriptor(T*),1));
-            }
+               rb_ary_store($result,j,AG_NewPointerObj(*i,$descriptor(T*),1));
+             }
+            assert(j==$1.size());
         }
         %typecheck(SWIG_TYPECHECK_LIST) list<T*> {
             /* native sequence? */
