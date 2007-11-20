@@ -117,6 +117,7 @@ module AntManBase
 		if @meshState=="dead"
 			if @mdead
 				getMap.removeEntity(self)
+				return
 			else
 				newRestJob(20)
 				@mdead=true
@@ -127,22 +128,8 @@ module AntManBase
 	end
 
 	def eventDie
+		super
 		simDeath
-		#eventDefeated
-		newRestJob(20)
-		setMeshState("dead")
-		playSound("die")
-
-		if @boss
-			@boss.removeMan(self)
-		end
-		if not self.resource.empty
-			sack=AntSack.new(getMap)
-			sack.setPos(getPos2D+AGVector2.new(0.3,-0.3))
-			getMap.insertEntity(sack)
-			sack.resource.takeAll(self.resource)
-			sack.resourceChanged
-		end
 	end
 
 
@@ -150,14 +137,29 @@ module AntManBase
 	#   - transfer appearance to gravestone
 	#   - start angel
 	def simDeath
-		if @dead
-			return
-		else
-			@dead=true
-			#setMesh(Mesh.new(getMeshData("data/models/grave.ant2",1.0),AGVector4.new(0,0,0,0),40))
-			#updateSurface
-			sendAngel
+		playSound("die")
+		if @boss
+			@boss.removeMan(self)
 		end
+
+		# add grave
+		grave=AntGrave.new(getMap)
+		grave.type=:hero if self.is_a?(AntHero)
+		grave.setPos(getPos2D)
+		getMap.insertEntity(grave)
+
+		# remove myself
+		getMap.removeEntity(self)
+
+		# add sack if resources not empty
+		if not self.resource.empty
+			sack=AntSack.new(getMap)
+			sack.setPos(getPos2D+AGVector2.new(0.3,-0.3))
+			getMap.insertEntity(sack)
+			sack.resource.takeAll(self.resource)
+			sack.resourceChanged
+		end
+
 	end
 
 
@@ -231,7 +233,7 @@ module AntManBase
 	def animationEvent(name)
 		case name
 			when "bow"
-				arrow=AntArrow.new
+				arrow=AntArrow.new(getMap)
 				arrow.setPos(getPos3D+AGVector3.new(0,0,1))
 				pos=@fightTarget.getPos3D+AGVector3.new(0,0,1)
 				arrow.newMoveJob(0,pos,0) #@target.getPos2D,0)
@@ -261,8 +263,4 @@ private
 		getMap.insertEntity(e)
 		#getMap.endChange
 	end
-
-
-	
-
 end

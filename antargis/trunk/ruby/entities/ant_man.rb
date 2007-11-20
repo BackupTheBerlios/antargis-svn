@@ -142,6 +142,7 @@ class AntMan<AntRubyEntity
 	end
 	
 	def setBoss(hero)
+		return if @boss==hero
 		if @boss
 			@boss.removeMan(self)
 			@boss=nil

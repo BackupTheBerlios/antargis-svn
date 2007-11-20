@@ -34,6 +34,9 @@ class HLJob_BaseState
 end
 
 class HLJob_DummyState<HLJob_BaseState
+	def ready
+		true
+	end
 end
 
 class HLJob_FormatWalk<HLJob_BaseState
@@ -170,7 +173,8 @@ class HLJob_MoveComplete<BaseState
 	edge :moveToNextPoint, :endState, :noMoreWaypoints
 
 	def enter
-		@near=0
+		@near=machine.near
+		@near||=0
 		puts "#{self}:enter"
 		if @waypoints.nil?
 			initWaypoints
@@ -237,17 +241,20 @@ class HLJob_MoveComplete<BaseState
 		@completeTargetPos=targetPos
 		self.targetPos=@waypoints.shift
 		self.targetPos=checkPosNear(self.targetPos)
+ 		#puts "--"
+ 		#pp self.targetPos,hero.getPos2D,@near,(hero.getPos2D-self.targetPos).length
+ 		#raise 1
 	end
 
 	def checkPosNear(to)
 		from=hero.getPos2D
+		return from if (from-to).length<@near
 		line=AGLine2.new(from,to)
 		circle=AGCircle2.new(@finalPos,@near)
 		list=circle.collide(line)
 		if list.length>0
 			to=list.min{|a,b|(a-from).length<=>(b-from).length}
 		end
-
 		to
 	end
 end
@@ -360,7 +367,7 @@ class HLJob_GetResource<HLJob_BaseState
 			allMen.each{|man|
 				resources.each{|r|
 					a=machine.target.resource.get(r)
-					if a>1
+					if a>0
 						man.resource.add(r,1)
 						target.resource.sub(r,1)
 					end
@@ -777,6 +784,13 @@ class HLJob_Recruit<HLJob_BaseState
 	end
 
 	def assign(man)
+		if hero.getMen.length>0
+			if man.is_a?(AntHero)
+				man.newRestJob(10)
+				return
+			end
+		end
+
 		if checkRecruited(man)
 			returnToStart(man)
 			return
@@ -823,7 +837,8 @@ class HLJob_Recruit<HLJob_BaseState
 	end
 
 	def getAssignableTargets
-		target.getMen-hero.getMen.map{|man|man.getTarget}		
+		# all target's men without already assigned and target(hero) itself
+		target.getMen-hero.getMen.map{|man|man.getTarget}-[target]
 	end
 
 	def nonToRecruitLeft
@@ -847,8 +862,10 @@ class HLJob_Recruit<HLJob_BaseState
 
 	def initRecruiting
 		hero.getMen.each{|man|man.hlJobMode[:recruitTarget]=nil}
-		# hero at last
-		hero.getMen.reverse.each{|man|
+		# exclude hero, if there are other men
+		menList=hero.getMen
+		menList=menList-[hero] if menList.length>1
+		menList.reverse.each{|man|
 			letRecruit(man)
 			break if @countRecruiting>=howManyToRecruit
 		}

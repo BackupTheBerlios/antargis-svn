@@ -7,9 +7,14 @@ import "c/dependencies"
 require 'pp'
 
 puts "ERROR: Please run ./configure before building!" unless File.exists?("config.rb")
-require 'build/base_tools.rb'
+
+begin
+system 'echo "doing this for you now...";ruby configure' unless File.exists?("config.rb")
+rescue;end
 
 require 'config.rb'                   # include build-options
+require 'build/base_tools.rb'
+
 
 
 # get library-dependencies for libSDL
@@ -63,6 +68,10 @@ cflags+=" -DNDEBUG -DMNDEBUG"  if not $config["debug"] # disable debug-output
 cflags+=" -O0 -g"       unless $config["debug"] # enable optimizations
 #cflags+=" -O2"       unless $config["debug"] # enable optimizations
 cflags+=" -DMPROFILE" if $config["profile"]  # enable profiling
+
+
+# FIXME: discard this before submiting to SVN
+cflags+=" -g -O0"
 	
 
 var :CFLAGS => var[:INCLUDESTR]+cflags          # store cflags in "var" for later read-out while compiling

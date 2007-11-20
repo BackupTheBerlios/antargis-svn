@@ -36,7 +36,7 @@ class AntFire<AntRubyEntity
 				getMap.removeEntity(self)
 			else
 				@dead=true
-				newRestJob(10)
+				newRestJob(30)
 			end
 		end
 	end

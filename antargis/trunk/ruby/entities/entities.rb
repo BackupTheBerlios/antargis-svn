@@ -49,5 +49,6 @@ require 'ant_field.rb'
 require 'ant_wolf.rb'
 require 'ant_buildingsite.rb'
 require 'ant_fishing_hut.rb'
+require 'ant_grave.rb'
 
 

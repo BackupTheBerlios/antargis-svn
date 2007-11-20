@@ -161,13 +161,15 @@ class AGEXPORT SimpleGraph:public AGRubyObject
   SimpleGraph(const SimpleGraph &g);
   SimpleGraph(BinaryIn &pIn);
 
+
+  #ifndef SWIG
   Node *addNode(const AGVector2 &p);
   /**
      @param w0 is weight of going from a to b
      @param w1 is weight of goinf from b to a
   */
   Edge *addEdge(Node *a,Node *b,float w0,float w1);
-
+#endif
   void removeEdge(Edge *e);
   void removeNode(Node *n);
   void print();

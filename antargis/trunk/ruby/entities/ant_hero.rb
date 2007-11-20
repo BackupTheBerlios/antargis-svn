@@ -130,6 +130,7 @@ class AntHero<AntBoss
 		assignJob2All
 	end
 	def newHLRecruitJob(target)
+		assert{target!=self}
 		@job.stopJob if @job
 		@job=AntHeroRecruitJob.new(self,target)
 		assignJob2All
@@ -332,6 +333,7 @@ class AntHero<AntBoss
 
 	def eventDie
 		super
+		setFire(false)
 		@job=nil
 		if @player
 			@player.remove(self)

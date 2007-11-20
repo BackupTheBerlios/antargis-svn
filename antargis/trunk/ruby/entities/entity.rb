@@ -154,6 +154,10 @@ class AntRubyEntity<AntEntity
 		if (not p)
 			p=getPos2D
 		end
+		if (not p.is_a?(AGVector2))
+			p=p.getPos2D
+		end
+		assert{p.is_a?(AGVector2)}
 		getMap.getPos(p).z<-0.2
 	end
 	def isOnWater

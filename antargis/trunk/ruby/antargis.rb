@@ -231,6 +231,8 @@ class AntGameApp <AntRubyView
 	end
 
 	def eventKeyDown(e)
+
+		# hero-selection by pressing F1 to F7
 		hero={	SDLK_F1=>0,
 			SDLK_F2=>1,
 			SDLK_F3=>2,
@@ -248,8 +250,10 @@ class AntGameApp <AntRubyView
 				return super(e)
 			end
 		end
+
+		
 		case e.getKey
-			when SDLK_F9
+			when SDLK_F9 # F9 toggles panel on the right
 				if not panelVisible
 					showPanel
 				else
@@ -265,9 +269,9 @@ class AntGameApp <AntRubyView
 					@hero.newHLRestJob(10)
 				end
 			when SDLK_PLUS
-				@speed=[@speed+1,5].min
+				@speed=[@speed+1,10].min
 			when SDLK_MINUS
-				@speed=[@speed-1,1].max
+				@speed=[@speed-1,0.2].max
 			
 			when SDLK_p
 				eventPause(nil)
@@ -278,6 +282,15 @@ class AntGameApp <AntRubyView
 	def eventStoryTalkFinished
 		showPanel
 		getMap.trigger(nil,Trigger.new("storyFinished"))
+	end
+
+	def moveMap(time)
+		granularity=0.2
+		while time>granularity
+			getMap().move(granularity)
+			time-=granularity
+		end
+		getMap().move(time)
 	end
 
 	def eventFrame(time)
@@ -301,8 +314,10 @@ class AntGameApp <AntRubyView
 		@elapsTime+=time
 
 
-		# move entities in game-engine
-		getMap().move(time*@speed)
+# 		# move entities in game-engine
+		#getMap().move(time*@speed)
+		moveMap(time*@speed)
+
 		# advance animations
 		getScene.advance(time)
 		checkHeroEnergy
@@ -481,7 +496,7 @@ class AntGameApp <AntRubyView
 	def setupHeroDisplay(first=false)
 		#super
 		# setup Hero buttons
-		hs=getMap.getPlayer.getHeroes.select{|h|h.class==AntHero}
+		hs=getMap.getPlayer.getHeroes
 		for i in 0..5
 			if hs.length>i
 				setHero(true,i)
@@ -517,16 +532,15 @@ class AntGameApp <AntRubyView
 	# updates the energy displays of the heroes (if needed)
 	def checkHeroEnergy
 		name=nil
-		getMap.getPlayer.getHeroes.select{|h|
-			if h.class==AntHero
-				if h.getEnergy<0.3
-					name=h.getName
-				end
+		# FIXME: support more than 1 hero !
+		getMap.getPlayer.getHeroes.each{|h|
+			if h.getEnergy<0.3
+				name=h.getName
 			end
 		}
-		if @infobox==nil and name!=nil
+		if @infobox.nil? and name
 			@layout.addChild(@infobox=AntInfoBox.new(@layout,_("Your hero {1} suffers.",name)))
-		elsif @infobox!=nil and name==nil
+		elsif @infobox and name.nil?
 			@infobox.close
 			@infobox=nil
 		end

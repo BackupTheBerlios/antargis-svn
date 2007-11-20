@@ -95,10 +95,10 @@ class AntLevelPlayer
 		@player=player
 	end
 	def getHeroes
-		@player.getHeroes.select{|p|p.is_a?(AntHero)}.collect{|p|AIMyHero.new(p,@player)}
+		@player.getHeroes.map{|p|AIMyHero.new(p,@player)}
 	end
 	def getBuildings
-		@player.getHeroes.select{|p|p.is_a?(AntHouse)}.collect{|p|AIMyBuilding.new(p,@player)}
+		@player.getBuildings.map{|p|AIMyBuilding.new(p,@player)}
 	end
 	def getName
 		@player.getName

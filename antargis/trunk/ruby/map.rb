@@ -26,6 +26,8 @@ require 'entity.rb'
 require 'ant_ai.rb'
 require 'ant_path.rb'
 
+require 'benchmark.rb'
+
 # This class prodives support for defining target-positions in a level-file.
 # These positions can be used for scripting. This way code and level-data is
 # devided (MVC)
@@ -85,19 +87,8 @@ class AntRubyMap<AntMap
 
 		@targets={}
 
-		# gather all entity types and map them to their xmlNames
-		@entTypes=getDescendantsOfClass(AntRubyEntity)
-		@entTypeMap={}
-		@entTypes.each{|t|
-			xml=t.to_s
-			xml=xml[0..0].downcase+xml[1..1000]
-			@entTypeMap[xml]=t
-		}
-
 		@filename="dummy"  # a dummy filename - used for level scripting
 		@uidstart=0
-
-#		AntRubyEntity.setMap(self)
 	end
 
 	def disableScript
@@ -187,34 +178,15 @@ class AntRubyMap<AntMap
 	def getVillages
 		getBuildings.collect{|e|e.village}.sort.uniq
 	end
-	#def getVillages(name)
-	#	getBuildings.collect{|e|e.village}.sort.uniq
-	#end
 
-	def getHeroes()
-		ents=getAllEntities
-		ret=[]
-		ents.each{|eptr|
-			ent=eptr
-			#dputs ent
-			if ent.class==AntHero
-				ret.push(ent)
-			end
-		}
-		return ret
+	def getHeroes
+		getByType(AntHero)
 	end
-
 	def getBuildings
-		ents=getAllEntitiesV
-		ret=[]
-		ents.each{|eptr|
-			ent=eptr.get
-			#dputs ent
-			if ent.is_a?(AntHouse)
-				ret.push(ent)
-			end
-		}
-		return ret
+		getByType(AntHouse)
+	end
+	def getByType(type)
+		getAllEntities.select{|e|e.is_a?(type)}
 	end
 
 	# returns AGSurfaces of the given hero for portraits
@@ -227,25 +199,9 @@ class AntRubyMap<AntMap
 		end
 	end
 
-	# FIXME:rewrite this!!!!
 	# take heroes from AntPlayer object
 	def getOwnHeroes()
-		ents=getAllEntitiesV
-		ret=[]
-		ents.each{|eptr|
-			ent=eptr.get
-			#dputs ent
-			if ent.class==AntHero
-				p=ent.getPlayer
-				#dputs "player:",p,p.class
-				if p
-					if p.class==AntHumanPlayer
-						ret.push(ent)
-					end
-				end
-			end
-		}
-		return ret
+		getPlayer.getHeroes if getPlayer
 	end
 
 	################################
@@ -256,8 +212,11 @@ class AntRubyMap<AntMap
 		nodeName=node.getName
 		nodeName.gsub!("New","")  # remove New out of old antNew.. Names
 
-		if @entTypeMap.keys.member?(nodeName)
-			e=@entTypeMap[nodeName].new(self)
+		return if nodeName.length<1
+
+		entTypeMap=xmlName2ClassMap
+		if entTypeMap.keys.member?(nodeName)
+			e=entTypeMap[nodeName].new(self)
 			@loadedEntsNum+=1
 			if e.is_a?(AntHero)
 				@heroes.push(e)
@@ -286,7 +245,11 @@ class AntRubyMap<AntMap
 			@targets[t.name]=t
 		end
 		
+		# FIXME: deprecated - remove this list!
 		playerTypes={"computerPlayer"=>AntComputerPlayer, "lazyPlayer"=>AntLazyPlayer, "conqueringPlayer"=>AntConqueringPlayer,"newAI"=>AntAttackAI}
+
+		playerTypes.update(getPlayerTypeMap)
+
 		if playerTypes.keys.member?(node.getName) then
 			type=playerTypes[node.getName]
 			if type.ancestors.member?(AntPlayer)
@@ -308,9 +271,11 @@ class AntRubyMap<AntMap
 	end
 	
 	def loadXML(n)
+		puts "loadXML(n)"
 		@loadedEntsNum=1
 		@loadedEntities=[]
 		super(n)
+		puts "loadXML(n) -1 "
 		@loadedEntities.each{|pair|
 			node,entity=pair
 			insertEntity(entity)
@@ -322,9 +287,7 @@ class AntRubyMap<AntMap
 			entity.eventMapChanged
 		}
 		
-
 		createPathfinder
-
 
 		@players.each{|p|p.move(0)}
 		
@@ -496,62 +459,42 @@ private
 
 
 	def createPathfinder
+		puts "createPathfinder"
 		@path=CombinedPathFinder.new(self)
 		@path.scene=getScene
 		@path.displayPathfindingGraph(self,getScene)
+		puts "createPathfinder ready"
 	end
 
-	def createPathfinderOLD
+	# returns a map of possible xmlNames to their classes like {"antMan"=>AntMan}
+	def xmlName2ClassMap
+		return @classMapCache if @classMapCache
 
-		levelHash=self.hash # build a hash out of the height-map
-		cacheFilename=levelHash+".cache"
-
-		# cache the whole path-finding graph and heuristic computations
-		if fileExists(findFile(cacheFilename))
-			puts "LOAD PATHFINDING FROM CACHE....."
-			content=loadFile(cacheFilename)
-			stream=BinaryStringIn.new(content)
-			@dgraph=SimpleGraph.new(stream)
-			@heuristic=StoredHeuristicFunction.new(stream)
-			puts "LOAD PATHFINDING FROM CACHE-READY."
-		else
-			# build a map-height/distance weighter
-			@mweighter=MapPathWeighter.new(self)
-
-			# set initial distance of waypoints	
-			minDist=2
-			if getW*getH>128*128
-				minDist=4
-			end
-	
-			# make a path-finding graph
-			@sgraph=makeGraph(self,@mweighter,minDist)
-			# copy to a decimating graph
-			@dgraph=DecimatedGraph.new(@sgraph)
-	
-			# compute a decimation-factor
-			factor=1.0-800.0/@dgraph.size
-	
-			# debugging settings
-			#factor=0.4
-			#factor=1.0-220.0/@dgraph.size
-	
-			@dgraph.decimate(factor,@mweighter)
-	
-			# compute a distance-field and use this as a pre-computed heuristic
-			@heuristic=computeHeuristic(@dgraph)
-	
-			# save everything to the cachefile
-			stream=BinaryStringOut.new
-			@dgraph.printTo(stream)
-			@heuristic.printTo(stream)
-		
-			saveFile(cacheFilename,stream.getString)
-		end	
-		@path=Pathfinder.new(@dgraph,@heuristic)
-		
-		#displayPathfindingGraph
+		# gather all entity types and map them to their xmlNames
+		entTypes=getDescendantsOfClass(AntRubyEntity)
+		entTypeMap={}
+		entTypes.each{|t|
+			entTypeMap[makeXmlName(t.to_s)]=t
+		}
+		@classMapCache=entTypeMap
 	end
+
+	def getPlayerTypeMap
+		return @playerTypeMap if @playerTypeMap
+
+
+		types=getDescendantsOfClass(AntBasicAI)
+		typeMap={}
+		types.each{|t|
+			typeMap[makeXmlName(t.to_s)]=t
+		}
+		@playerTypeMap = typeMap
+	end
+	def makeXmlName(str)
+		xml=str.to_s
+		xml[0..0].downcase+xml[1..-1]
+	end
+
 end
 
 

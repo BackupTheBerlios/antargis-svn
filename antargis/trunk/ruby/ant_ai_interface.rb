@@ -57,6 +57,13 @@ class AIInterface
 		@player=player
 	end
 	def myPlayer
+# 		puts "myPlayer:"
+# 		puts @player,"--"
+# 		puts @map.players
+# 		puts "_-"
+# 		puts @player.getHeroes
+# 		puts @player.getBuildings
+# 		raise 1
 		AIMyPlayer.new(@player)
 	end
 	def enemyPlayers
@@ -69,10 +76,13 @@ class AIMyPlayer
 		@player=player
 	end
 	def getHeroes
-		@player.getHeroes.select{|p|p.is_a?(AntHero)}.collect{|p|AIMyHero.new(p,@player)}
+		@player.getHeroes.map{|p|AIMyHero.new(p,@player,@player.getMap)}
 	end
 	def getBuildings
-		@player.getHeroes.select{|p|p.is_a?(AntHouse)}.collect{|p|AIMyBuilding.new(p,@player)}
+		@player.getBuildings.map{|p|AIMyBuilding.new(p,@player,@player.getMap)}
+	end
+	def getBosses
+		getBuildings+getHeroes
 	end
 	def getName
 		@player.getName
@@ -97,6 +107,10 @@ class AIMyEntity
 			return {}
 		end
 	end
+	def ==(other)
+		@ent==getRef(other)
+	end
+
 	def uid
 		@ent.uid
 	end
@@ -141,6 +155,13 @@ class AIMyEntity
 end
 
 class AIMyBuilding<AIMyEntity
+	def menCount
+		@ent.getMen.length
+	end
+	def isBuildingType(type)
+		@ent.class.ancestors.select{|c|c.to_s==type}.length>0
+	end
+
 end
 
 class AIMyHero<AIMyEntity
@@ -189,10 +210,24 @@ class AIMyHero<AIMyEntity
 	
 	# recruit from target
 	def recruit(target)
+		puts "RECRUITING from #{target} #{target.class}"
+		assert{getRef(target)!=@ent}
+		return unless target.is_a?(AIMyBuilding) or target.is_a?(AIMyHero)
+		if valid and target.valid
+			r=getRef(target)
+			puts "ref:#{r}"
+			@ent.newHLRecruitJob(r) if r
+		else
+			raise "sth invalid"
+		end
+	end
+
+	def construct(target)
+		puts "construct: #{target}"
 		return unless target.is_a?(AIMyBuilding)
 		if valid and target.valid
 			r=getRef(target)
-			@ent.newHLRecruitJob(r) if r
+			@ent.newHLConstructJob(r) if r
 		end
 	end
 
@@ -250,6 +285,17 @@ class AIMyHero<AIMyEntity
 			@ent.newHLRestJob(time)
 		end
 	end
+
+	def getMorale
+		@ent.getMorale
+	end
+
+	def getEnergy
+		@ent.getEnergy
+	end
+	def getFood
+		@ent.getFood
+	end
 end
 
 class AIEnemyPlayer
@@ -257,10 +303,10 @@ class AIEnemyPlayer
 		@player=player
 	end
 	def getHeroes
-		@player.getHeroes.select{|p|p.is_a?(AntHero)}.collect{|p|AIEnemyHero.new(p,@player)}
+		@player.getHeroes.map{|p|AIEnemyHero.new(p,@player)}
 	end
 	def getBuildings
-		@player.getHeroes.select{|p|p.is_a?(AntHouse)}.collect{|p|AIEnemyBuilding.new(p,@player)}
+		@player.getBuildings.map{|p|AIEnemyBuilding.new(p,@player)}
 	end
 	def getName
 		@player.getName

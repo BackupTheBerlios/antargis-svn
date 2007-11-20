@@ -1,0 +1,12 @@
+== AI in BoA
+The AI consists of several bigger components:
+* world-interface
+* sensor-bank
+* action-generator
+
+Currently there are two approaches, that may be reasonable in BoA:
+* heuristic-based - using the sensor bank fuzzy-rules are defined that call the actions
+* min/max-tree - using the actions a game-tree is built. The actual game world is copied and represented in simplified state. Thus many game-world-states can be stored at once. The weighing for the min/max-computation is done using the sensor-bank and some weighted sum on its results.
+
+So... for the heuristic-based approach, we need a rules-list, too.
+On the other hand the min/max-tree needs the game-world to be copied and made modifyable (without changing the actual game-state).

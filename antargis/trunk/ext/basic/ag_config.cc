@@ -63,8 +63,12 @@ AGString AGConfig::get(const AGString &pValue) const
 
 void AGConfig::set(const AGString &pName,const AGString &pValue)
 {
-  singleValue[pName]=pValue;
-  writeToDisc();
+	AGString old=singleValue[pName];
+	if(old!=pValue)
+	{
+		singleValue[pName]=pValue;
+		writeToDisc();
+	}
 }
 
 void AGConfig::writeToDisc()

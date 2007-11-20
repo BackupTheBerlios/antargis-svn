@@ -29,6 +29,8 @@ require 'ant_ai_interface.rb'
 require 'ant_ai_rules.rb'
 require 'ant_ai_player.rb'
 
+require 'ruby/ai/rules.rb'
+
 class AntBasicAI
 	attr_reader :interface
 
@@ -76,6 +78,37 @@ class AntAttackAI<AntBasicAI
 				return
 			end
 		}
+	end
+end
+
+class AntFuzzyAI<AntBasicAI
+	def initialize(interface)
+		super
+
+		classes=[
+			[AI::Rule::AttackHero,1.5],
+			[AI::Rule::GetFood,1],
+			[AI::Rule::Rest,1],
+			[AI::Rule::RecruitFromBuilding,1],
+			[AI::Rule::Construct,1],
+			[AI::Rule::GetWeapon,1],
+		]
+		@rules=classes.map{|pair|[pair[0].new(interface),pair[1]]}
+	end
+
+	def eventHeroWithoutJob(hero)
+		puts "eventHeroWithoutJob(hero) #{hero.getName}"
+		process(hero)
+	end
+
+	private
+	def process(hero)
+		bestRules=@rules.map{|r|[r,r[0].value(hero)*r[1]]}
+		puts "-------"
+		bestRules.each{|r|puts "RULE #{r[0]} - value:#{r[1]}"}
+		puts "-------"
+		bestRule=bestRules.max{|a,b|a[1]<=>b[1]}[0]
+		bestRule[0].start(hero)
 	end
 end
 

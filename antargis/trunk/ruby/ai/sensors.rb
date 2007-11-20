@@ -1,13 +1,11 @@
+require 'value_map.rb'
+
 module AI
 	class Sensor
 		attr_reader :player
 
 		def initialize(player)
 			@player=player
-		end
-
-		def logValue
-			Math.log(value)
 		end
 	end
 
@@ -32,6 +30,30 @@ module AI
 		end
 	end
 
+	class InDangerSensor<Sensor
+	end
+
+	# the opposite of InDangerSensor
+	class GoodAttackPosSensor<Sensor
+	end
+
+	# enough resources in vicinity of buildings
+	class GoodResourceSensor<Sensor
+		RESOURCES=[:wood,:stone,:ore]
+		MAX_DIST=50
+		MIN_RESOURCE=5
+		def value
+			
+			player.getBuildings.map{|building|
+				RESOURCES.map{|resource|
+					map.getNext(building,resource,MIN_RESOURCE).map{|r|
+						mapValue01(MIN_RESOURCE,r.resource.get(resource))
+					}.min
+				}
+			}
+		end
+	end
+
 	class CompletenessOfProdChainSensor<Sensor
 		MAX_DIST=20
 
@@ -44,7 +66,7 @@ module AI
 		end
 	private
 		def completenessOfChain(block)
-			
+			#FIXME
 		end
 		def createBlocks(blocks)
 			nblocks=blocks.inject([]){|blocklist,newBuilding|

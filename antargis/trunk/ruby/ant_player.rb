@@ -73,7 +73,13 @@ class AntPlayer
 		@heroes.push(hero)
 		@heroes.uniq!
 	end
+	def getBuildings
+		getBosses.select{|boss|boss.is_a?(AntHouse)}
+	end
 	def getHeroes
+		getBosses.select{|boss|boss.is_a?(AntHero)}
+	end
+	def getBosses
 		@heroes.uniq!
 		@heroes.clone
 	end

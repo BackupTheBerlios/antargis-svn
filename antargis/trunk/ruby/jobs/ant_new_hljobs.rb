@@ -103,9 +103,11 @@ class AntHeroMoveJob<AntNewHLJob
 
 	attr_accessor :targetPos
 	attr_accessor :formatDir
+	attr_accessor :near
 
 	def initialize(hero,prio,pos,dist,doFormat=true)
 		@targetPos=pos.dim2
+		@near=0
 		super(hero)
 		if not doFormat
 			state.moveDirectly			
@@ -125,9 +127,9 @@ end
 
 
 class AntHeroTakeJob<AntNewHLJob
+	state :move =>HLJob_MoveComplete
 	state :fetchStart => HLJob_FetchStart
 	state :getResource => HLJob_GetResource
-	state :move =>HLJob_MoveComplete
 	state :moveBack => HLJob_MoveComplete
 	state :endState => HLJob_DummyState
 
@@ -145,6 +147,7 @@ class AntHeroTakeJob<AntNewHLJob
 
 		@targetPos=target.getPos2D
 		@target=target
+		@near=4
 		super(phero)
 		@states[:move].near=4
 		@states[:getResource].resources={"food"=>["food"],"weapon"=>["sword","bow","boat","shield"]}[what]
@@ -160,6 +163,7 @@ class AntHeroTakeJob<AntNewHLJob
 
 	def fetchStart
 		@targetPos=hero.getPos2D
+		@near=0
 		true
 	end
 	def gettingResource
@@ -206,6 +210,7 @@ class AntHeroFightJob<AntNewHLJob
 	def initialize(hero,target,defend=false)
 		@targetPos=target.getPos2D
 		@target=target
+		@near=10
 		#puts "DEFEND #{defend}"
 		if defend
 			trace
@@ -217,7 +222,6 @@ class AntHeroFightJob<AntNewHLJob
 			trace
 		end
 		assert{@state==:fight || defend==false}
-		@states[:move].near=10
 
 		#puts "STATE #{state}"
 	end
@@ -252,10 +256,12 @@ class AntHeroRecruitJob<AntNewHLJob
 	attr_accessor :targetPos
 	attr_accessor :formatDir
 	attr_accessor :target
+	attr_accessor :near
 
 	def initialize(hero,target)
 		@targetPos=target.getPos2D
 		@target=target
+		@near=4
 		super(hero)
 		@states[:moveComplete].near=4
 		

@@ -1,3 +1,21 @@
+* check how many times AG_NewPointer is called !!!!
+* check if it's any good to switch over to standard-swig ???
+
+!!! AGTexture - not wrapped correctly in bliTri etc ???
+
+
+* check swig-wrapping of: 
+	AGCollector *getCollector (basic/ag_collector.h)
+	AGEXPORT AGConfig *getConfig();
+ std::Vector<SceneNode*>
+ std::vector<AntEntity*> (game)
+path.h - don't export path-internals to ruby
+
+* moveto doesn't really work with "near" (hljob)
+* heroes don't die in reasonable fashion - starving men too
+* add seasons
+* remove -O0 -g out of Rantfile !
+* take food - near doesn't work - same for attack (in some cases?)
 
 * Spreading should be done only for men who need it!
 

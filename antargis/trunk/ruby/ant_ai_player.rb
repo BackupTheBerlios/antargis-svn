@@ -59,15 +59,24 @@ class AntAIPlayer
 		@heroes.uniq!
 	end
 	def getHeroes
+		getBosses.select{|b|b.is_a?(AntHero)}
+	end
+	def getBuildings
+		getBosses.select{|b|b.is_a?(AntHouse)}
+	end
+
+	def getBosses
 		@heroes.uniq!
 		@heroes.clone
 	end
 
 
 	def eventJobFinished(hero,lastJob)
-		h=AIMyHero.new(hero,self,@map)
-		raise "Hero is not valid" unless h.valid
-		@ai.eventHeroWithoutJob(h)
+		if hero.is_a?(AntHero)
+			h=AIMyHero.new(hero,self,@map)
+			raise "Hero is not valid" unless h.valid
+			@ai.eventHeroWithoutJob(h)
+		end
 	end
 
 end

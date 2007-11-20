@@ -84,6 +84,10 @@ module AntModels
 				["axe"]=>"data/models/man_axe.anim",
 				[:grave]=>"grave",
 			},
+			:grave=>{
+				[:normal]=>"grave",
+				[:hero]=>["data/models/grave.ant2",0.2,"data/textures/models/grave3.png"],
+			},
 			:hero=>{
 				[]=>"hero_lp",
 				[:grave_hero]=>["data/models/grave.ant2",0.2,"data/textures/models/grave3.png"],
