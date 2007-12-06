@@ -69,7 +69,7 @@ module CFG
 			print text
 			ok=c[:proc].call
 			#ok=(not ok.nil?)
-			print " "*(40-text.length)
+			print " "*(60-text.length)
 			puts ({true=>"ok",false=>"failed",nil=>"failed"}[ok])
 			failed << c[:name] unless ok or not c[:needed]
 		}
@@ -105,15 +105,20 @@ EOT
 		@@config[n]=v
 	end
 	def CFG.get(n)
+		puts "GET #{n}:#{@@config[n]}"
+
+
 		@@config[n]
 	end
 
-	def CFG.checkProgram(program,needed=true)
+	def CFG.checkProgram(name,program,needed=true)
 		addCheck("program "+program,needed) do
 			path=get(program)
 			path||=findProgram(program)
 			r=testProgram(path)
-			set(program,path) if r
+			#set(program,path) if r
+			set(name,path) if r
+			#pp @@config
 			r
 		end
 	end
@@ -123,6 +128,8 @@ EOT
 		psep={"/"=>":","\\"=>";"}[Dir.separator]
 		#puts p,p.class,psep
 		ps=p.split(psep)
+		ps+=get("PATHS") if get("PATHS")
+
 		#puts get("prefix")
 		ps << get("prefix")+Dir.separator+"bin" if get("prefix")
 		if Dir.separator=="\\"
@@ -148,21 +155,30 @@ EOT
 	end
 
 	def CFG.includeConfig
-		avail=["unix","mingw32"]
-		addCheck ("base-config") do ||
-			c=get("base-config")
-			c=nil unless avail.member?(c)
-			c||="unix"
-			require "build/configs/"+c+".rb"
-			$config.each{|k,v|@@config[k]||=v}
-			true
-		end
+		readConfig("base")
+
+
+
+# 		avail=["unix","mingw32"]
+# 		addCheck ("base-config") do ||
+# 			c=get("base-config")
+# 			c=nil unless avail.member?(c)
+# 			c||="unix"
+# 			require "build/configs/"+c+".rb"
+# 			$config.each{|k,v|@@config[k]||=v}
+# 			true
+# 		end
 	end
 
 	# *FIXME: implement this*
 	# This function will test if the compiler is able to compile.
 	def CFG.checkCompile
 		
+	end
+
+	def CFG.readConfig(file)
+		require "build/configs/"+file+".rb"
+		$config.each{|k,v|@@config[k]||=v}
 	end
 
 
@@ -235,8 +251,6 @@ EOT
 			when Hash
 				"'"+v.collect{|k,v|"#{k}=>#{v}"}.join(";")+"'"
 			else
-				#puts v,v.class
-				#raise "MUH"
 				v.to_s
 		end
 	end

@@ -56,6 +56,7 @@
 #include "ext/gui/ag_window.h"
 #include "ext/gui/ag_layout.h"
 #include "ext/gui/ag_border.h"
+#include "ext/sound/ag_mixer.h"
 #include "ext/3dengine/mesh_data.h"
 #include "ext/3dengine/scene_base.h"
 #include "ext/3dengine/scenenode.h"
