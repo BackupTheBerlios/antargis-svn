@@ -15,7 +15,8 @@ AGEXPORT std::map<std::string,std::list<CastFunction> > agCastFunctions;
 
 AGEXPORT void AG_Init_libantargisbasic()
 {
-  //  TRACE;
+  TRACE;
+  SDL_Init(SDL_INIT_VIDEO);
   if(!hasMain())
     AGMain *main=new AGMain;
 

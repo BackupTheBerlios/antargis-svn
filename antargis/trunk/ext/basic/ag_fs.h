@@ -43,6 +43,7 @@ AGEXPORT AGFilename findFile(const AGFilename &pName);
 AGEXPORT AGFilename getDocumentsDir();
 
 AGEXPORT void addPath(const AGFilename &pName);
+AGEXPORT void addPathFront(const AGFilename &pName);
 
 AGEXPORT AGData compress(const AGData &pString);
 AGEXPORT AGData uncompress(const AGData &pString);

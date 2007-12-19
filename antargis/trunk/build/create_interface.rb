@@ -29,6 +29,7 @@
 require 'build/interface_template.rb'
 require 'build/base_tools.rb'
 require 'find.rb'
+require 'pp'
 
 def vputs(*a)
 	puts *a if $verbose
@@ -112,7 +113,6 @@ class ParsedClasses
 	attr_reader :deriveList
 
 	def initialize(files,allfiles)
-        #puts "ParsedClasses:init()",files,"--",allfiles,"-----"
 		@rubyClasses=[]
 		@files=files.collect{|f|f.gsub(/.*\/ext\//,"ext/")}
 		loadAllDerivations(allfiles.collect{|f|f.gsub(/.*\/ext\//,"ext/")})
@@ -423,7 +423,7 @@ typedef swig_type_info*(*CastFunction)(void**);
 extern std::map<std::string,std::list<CastFunction> > agCastFunctions;
 %}
 EOT
-
+pp myClasses
 myClasses.each{|k|
 file.puts <<EOT	
 %{

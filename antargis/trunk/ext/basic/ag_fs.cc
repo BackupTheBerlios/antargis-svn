@@ -57,6 +57,22 @@ void addPath(const AGFilename &pName)
   updateConfig();
 }
 
+void addPathFront(const AGFilename &pName)
+{
+  mFsPaths.push_front(pName);
+#ifdef USE_PHYSFS
+  TRACE;
+  PHYSFS_addToSearchPath(pName.c_str(),1);
+  char **p=PHYSFS_getSearchPath();
+  for(;*p;p++)
+    {
+      dbout(0,*p);
+
+    }
+#endif
+  updateConfig();
+}
+
 
 void initFS(const char *argv0)
 {
@@ -446,12 +462,16 @@ bool fileExists(const AGFilename &pName)
 #endif
 
   FILE *f=fopen(pName.c_str(),"r");
+	bool found=false;
+	
   if(f)
     {
+			found=true;
       fclose(f);
-      return true;
     }
-  return false;
+	cdebug("file exists:"<<pName<<":"<<found);
+
+  return found;
 #ifdef USE_PHYSFS
   TRACE;
   return PHYSFS_exists(pName.c_str());

@@ -1,5 +1,6 @@
-* check how many times AG_NewPointer is called !!!!
-* check if it's any good to switch over to standard-swig ???
+
+* check how many times AG_NewPointer is called !!!! - not so often - could be replaced by traceobjects from swig
+** check if it's any good to switch over to standard-swig ??? seems so.
 
 !!! AGTexture - not wrapped correctly in bliTri etc ???
 
@@ -14,7 +15,6 @@ path.h - don't export path-internals to ruby
 * moveto doesn't really work with "near" (hljob)
 * heroes don't die in reasonable fashion - starving men too
 * add seasons
-* remove -O0 -g out of Rantfile !
 * take food - near doesn't work - same for attack (in some cases?)
 
 * Spreading should be done only for men who need it!

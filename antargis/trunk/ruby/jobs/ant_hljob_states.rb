@@ -771,22 +771,29 @@ end
 # 
 #
 class HLJob_Recruit<HLJob_BaseState
+	MAX_DIST=0.01
 	def enter
 		@countTargetMen=target.getMen.length
 		@countRecruiting=0
 		@countRecruited=0
 		@myPos=hero.getPos2D
+		hero.formation=AntFormationRest.new(hero)
 		initRecruiting
 	end
 
 	def ready
-		((@countRecruited>=howManyToRecruit) or nonToRecruitLeft) and (hero.getPos2D-hero.getFormation(hero,@myPos)).length<0.1
+		recruitedEnough=((@countRecruited>=howManyToRecruit) or nonToRecruitLeft)
+		everyoneIsAtHisPlace=(hero.getMen).map{|man|(man.getPos2D-hero.getFormation(man,@myPos)).length}.max<MAX_DIST
+		heroIsAtHisPlace=(hero.getPos2D-hero.getFormation(hero,@myPos)).length<MAX_DIST
+		return (recruitedEnough and everyoneIsAtHisPlace)
 	end
 
 	def assign(man)
-		if hero.getMen.length>0
+		puts "MAN:#{man}"
+		if hasAtLeastOneFollower # has more than the hero himself
 			if man.is_a?(AntHero)
-				man.newRestJob(10)
+				#man.newRestJob(10)
+				returnToStart(man)
 				return
 			end
 		end
@@ -807,6 +814,10 @@ class HLJob_Recruit<HLJob_BaseState
 
 	private
 
+	def hasAtLeastOneFollower
+		hero.getMen.length>1
+	end
+
 	def howManyToRecruit
 		@countTargetMen*hero.getAggression/3
 	end
@@ -826,9 +837,9 @@ class HLJob_Recruit<HLJob_BaseState
 
 	def returnToStart(man)
 		pos=hero.getFormation(man,@myPos)
-		if (man.getPos2D-pos).length<0.3
+		if (man.getPos2D-pos).length<MAX_DIST
 			man.lookTo(@myPos)
-			man.standStill
+			man.standStillShort # FIXME: really short ?
 			puts "standStill #{man}"
 		else
 			man.walkTo(pos)
@@ -864,7 +875,7 @@ class HLJob_Recruit<HLJob_BaseState
 		hero.getMen.each{|man|man.hlJobMode[:recruitTarget]=nil}
 		# exclude hero, if there are other men
 		menList=hero.getMen
-		menList=menList-[hero] if menList.length>1
+		menList=menList-[hero] if hasAtLeastOneFollower
 		menList.reverse.each{|man|
 			letRecruit(man)
 			break if @countRecruiting>=howManyToRecruit

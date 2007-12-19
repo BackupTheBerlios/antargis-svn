@@ -252,13 +252,9 @@ module AntModels
 				pngname="data/textures/models/"+mesh+".png"
 				name=mesh
 				angle||=getStaticModelRotation(name)
-				if not fileExists(pngname)
-					pngname=""
-				end
 
 				s=entity.getMap.getScene
 
-				#s=getMap.getScene
 				data=getMeshData(ant2name,getStaticModelScaling(name),pngname)
 				v=AGVector4.new(0,0,0)
 				scenenode=Mesh.new(s,data,v,angle)
@@ -277,8 +273,9 @@ module AntModels
 end
 
 module Libantargis
-class Mesh
-	def setAnimation(name)
+	# dummy function - so that for meshes and animmeshes you can call setAnimation(.)
+	class Mesh
+		def setAnimation(name)
+		end
 	end
-end
 end

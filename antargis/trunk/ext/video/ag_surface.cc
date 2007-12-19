@@ -328,6 +328,8 @@ AGInternalSurface *AGSurface::surface() const
 
 AGSurface AGSurface::load(const std::string &pFilename)
 {
+  cdebug("load:"<<pFilename);
+	assertGL;
   assert(&getScreen());
 
   assertGL;
@@ -337,6 +339,8 @@ AGSurface AGSurface::load(const std::string &pFilename)
   assertGL;
   std::string file=loadFile(pFilename);
   assertGL;
+  if(file.length()==0)
+    cdebug("File "<<pFilename<<" is empty!");
 
   SDL_RWops* rw=SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length());
   assertGL;
@@ -374,6 +378,7 @@ AGSurface AGSurface::loadDRM(const std::string &pName)
   cdebug("FIRST:"<<int(file[0])<<","<<int(file[1])<<","<<int(file[2]));
 
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
+  assertGL;
   if(s==0)
   {
 	cdebug("Load file failed:"<<pName);

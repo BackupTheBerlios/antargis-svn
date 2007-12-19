@@ -10,28 +10,18 @@ require 'pp'
 module MyAntargisLib
 	@@antargislibinited||=false
 
-	if not @@antargislibinited
-		# try suspending arts
+
+ 	if not @@antargislibinited
+		@@programDir=File.expand_path(File.split(__FILE__)[0])
+		$:.push(@@programDir)
+		#$:.push(File.join(@@programDir,"entities"))
+ 		# try suspending arts
 		if File.exists?("/usr/bin/artsshell")
-			unless ENV["PATH"]=~/^[A-Za-z]:\\/
+			unless ENV["PATH"] =~ /^[A-Za-z]:\\.*/
 				File.popen("/usr/bin/artsshell suspend 2>&1").close
 			end
 		end
-		
-		@@programDir=Dir.pwd+"/ruby"
-		# add programdir to path
-		$:.push(@@programDir)
-		$:.push(@@programDir+"/entities")
-
-		@@extDir=Dir.pwd+"/ext"
-		# add programdir to path
-		$:.push(@@extDir)
-		if ENV["PATH"].split(";").length>3 # FIXME: is windows ?
-				ENV["PATH"]+=";.\\ext"
-		else
-				ENV["PATH"]+=":./ext"
-		end
-	end
+ 	end
 end
 
 if $demoMode.nil?
@@ -41,11 +31,13 @@ end
 
 module AntMyEventHandler
 	def getNewEvent
+		filename=File.join(getWriteDir,"events.txt")
 		if $demoMode
 			if hardwareCursor
 				setCursor(getTextureCache.get("blue_cursor.png"))
 			end
-			@@eventDebugging||=File.open("events.txt","r")
+
+			@@eventDebugging||=File.open(filename,"r")
 			@@nextLine||=@@eventDebugging.readline
 			puts "NEXTLINE:#{@@nextLine}"
 			if @@nextLine=~/T:.*/
@@ -66,7 +58,7 @@ module AntMyEventHandler
 				if eventOk(e)
 					s=toString(e)
 					if $enableLogging
-						@@eventDebugging||=File.open("events.txt","w")
+						@@eventDebugging||=File.open(filename,"w")
 						@@eventDebugging.puts s
 					end
 				end
@@ -87,27 +79,36 @@ module AntMyEventHandler
 
 end
 
+require 'ext/antargis'
+# if File.exists?("ext/antargisgame.so")
+# 	require 'ext/antargisgame'
+# else
+# 	puts "Please run 'rant' before starting this program!"
+# 	require 'antargisgame'
+# end
 
-if File.exists?("ext/antargisgame.so")
-	require 'ext/antargisgame'
-else
-	puts "Please run 'rant' before starting this program!"
-	require 'antargisgame'
-end
+#require 'antargissound.so'
 
-require 'antargissound.so'
-
-include Antargisgame
-include Antargisbasic
-include Antargismath
-include Antargisvideo
-include Antargisgui
-include Antargis3dengine
-include Antargissound
+include Antargis
+#game
+#include Antargisbasic
+#include Antargismath
+#include Antargisvideo
+#include Antargisgui
+#include Antargis3dengine
+#include Antargissound
 	
 require 'ruby/gui/ag_tools.rb'
 require 'ant_tools'
 require 'ant_debug.rb'
+
+
+# add path
+@basePath=File.split(File.split(__FILE__)[0])[0]
+addPath(@basePath)
+addPath(File.join(@basePath,"data"))
+addPath(File.join(@basePath,"data","fonts"))
+
 		
 module MyAntargislib
 	@@antargislibinited||=false
@@ -213,7 +214,9 @@ module MyAntargislib
 
 		@@noVideo||=nil	
 		if @@noVideo.nil?
+			puts "initVideo..."
 			getVideo.initVideo(xres,yres,32,@@fullscreen,@@opengl,1024,768)
+			puts "initVideo ok"
 		
 			getConfig.set("xRes",xres.to_s)
 			getConfig.set("yRes",yres.to_s)
@@ -263,7 +266,8 @@ class AGStringUtf8
 end
 
 class Logger
-	@@log=File.open("log.txt","w")
+	filename=File.join(getWriteDir,"log.txt")
+	@@log=File.open(filename,"w")
 	def self.log(*s)
 		@@log.print("[")
 		@@log.print(Time.new)

@@ -163,11 +163,14 @@ bool AGSound::playMp3(const std::string &pFilename)
     {
       return false;
     }
+
+	std::string filename=findFile(pFilename);
+
   initSoundEngine();
   // load the MP3 file "music.mp3" to play as music
-  mMusic=Mix_LoadMUS(pFilename.c_str());
+  mMusic=Mix_LoadMUS(filename.c_str());
   if(!mMusic) {
-    printf("Mix_LoadMUS(\"%s\"): %s\n",pFilename.c_str(), Mix_GetError());
+    printf("Mix_LoadMUS(\"%s\"): %s\n",filename.c_str(), Mix_GetError());
     //    assertGL;
     return false;
   }

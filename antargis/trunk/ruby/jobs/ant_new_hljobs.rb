@@ -271,7 +271,7 @@ class AntHeroRecruitJob<AntNewHLJob
 	end
 	# FIXME: move this to a config-file !
 	def image
-		"data/gui/move.png"
+		"data/gui/recruit.png"
 	end
 	# FIXME: discard this
 	def makeMessage(boss)

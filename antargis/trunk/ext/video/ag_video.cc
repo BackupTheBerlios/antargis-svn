@@ -1,6 +1,7 @@
 #include <ag_video.h>
 
 #include <ag_debug.h>
+#include <ag_vdebug.h>
 #include <ag_gltexture.h>
 #include <ag_glscreen.h>
 #include <ag_screen.h>
@@ -43,6 +44,7 @@ void AGVideoManager::flip()
 void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 {
   CTRACE;
+  cdebug("mScreen:"<<mScreen);
   if(mScreen)
     {
       getSurfaceManager()->clear();
@@ -60,6 +62,7 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
   lastDepth=d;
   fullScreen=fs;
 
+  cdebug("videoInfo:"<<videoInfo);
   if(!videoInfo)
     {
       videoInfo = SDL_GetVideoInfo();
@@ -83,11 +86,12 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
     videoFlags|=SDL_FULLSCREEN;
 
 
-
+  cdebug("SDL_Init...");
   // set video mode
-  SDL_Init(SDL_INIT_VIDEO);
+  //  SDL_Init(SDL_INIT_VIDEO);
+  cdebug("SDL_SetVideoMode...");
   SDL_Surface *ms=SDL_SetVideoMode(w,h,videoInfo->vfmt->BitsPerPixel,videoFlags);
-
+  cdebug("ms:"<<ms);
   if(!ms)
     {
       std::cerr<<"Initing video mode failed!"<<std::endl;
@@ -98,6 +102,7 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
       std::cerr<<"* You're running SDL with framebuffer - instead of X"<<std::endl;
       exit(1);
     }
+
 
 
   if(mScreen)
@@ -181,8 +186,12 @@ void AGVideoManager::setIcon(const std::string &pFile)
 {
   std::string file=loadFile(pFile);
   
+	if(file.length()==0)
+		cdebug("file :"<<pFile<<" possibly not found!");
+
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
   SDL_WM_SetIcon(s,0);
+	assertGL;
 }
 
 void AGVideoManager::setCaption(const std::string &pCaption)

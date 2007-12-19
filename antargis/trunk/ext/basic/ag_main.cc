@@ -139,7 +139,7 @@ AGMain *getMain()
 
       // IMPORTANT:
       //   put it into a global variable - so that it won't get garbage collected
-      rb_eval_string("include Antargisbasic;$agMain=getMain");
+      rb_eval_string("include Antargis;$agMain=getMain");
     }
 
 

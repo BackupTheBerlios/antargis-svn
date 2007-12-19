@@ -14,6 +14,7 @@
 #include "ext/basic/ag_fs.h"
 #include "ext/basic/ag_messageobject.h"
 #include "ext/basic/ag_rubyobj.h"
+#include "ext/sound/ag_mixer.h"
 #include "ext/math/ag_rand.h"
 #include "ext/math/ag_algebra.h"
 #include "ext/math/ant_frustum.h"

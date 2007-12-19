@@ -12,12 +12,15 @@ def interface_template(moduleName,files,swigInput,addfiles=[],outputDir="")
 	void AG_Init_lib#{moduleName}();
 %}
 %insert("init") %{
+/*
 	#{swigInput.collect{|i|"rb_require(\"antargis#{i.split("/")[-2]+".so"}\");"}.join("\n")}
+*/
 	AG_Init_lib#{moduleName}(); 
 %}
 
+/*
 #{swigInput.collect{|i|"%import \"#{i}\""}.join("\n")}
-
+*/
 %{
 #include <string>
 #{addfiles.collect{|f|"#include \"#{f}\""}.join("\n")}

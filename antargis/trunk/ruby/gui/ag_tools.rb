@@ -133,7 +133,7 @@ EOT
 	eval("@#{name}=AGSignal.new(self,'#{name}')\n")
 end
 
-module Antargisgui
+module Antargis
 	class AGApplication
 		include AGHandler
 	end
@@ -162,7 +162,7 @@ end
 # 	end
 # end
 
-module Antargisbasic
+module Antargis
 	class AGVector3
 		def x=(p)
 			setX(p)

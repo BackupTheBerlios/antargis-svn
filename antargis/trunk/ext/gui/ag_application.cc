@@ -29,6 +29,7 @@
 #include "ag_profiler.h"
 #include "ag_clip_painttarget.h"
 #include "ag_video.h"
+#include "ag_vdebug.h"
 
 #include <ruby.h>
 
@@ -49,6 +50,7 @@ AGApplication *getApplication()
 
 AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTooltip(0),mOverlay(0)
 {
+  assertGL;
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
   if(videoInited())
     {

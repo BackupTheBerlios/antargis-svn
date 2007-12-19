@@ -33,6 +33,7 @@
 #include <iostream>
 #include <fstream>
 #include <assert.h>
+#include <ag_vdebug.h>
 
 using namespace std;
 #include <SDL_image.h>
@@ -217,5 +218,7 @@ std::string toPNG(const SDL_Surface *s)
 
 SDL_Surface *fromPNG(std::string s)
 {
-  return IMG_LoadPNG_RW(SDL_RWFromMem(const_cast<char*>(s.c_str()),s.length()));
+  SDL_Surface *surface=IMG_LoadPNG_RW(SDL_RWFromMem(const_cast<char*>(s.c_str()),s.length()));
+  assertGL;
+  return surface;
 }

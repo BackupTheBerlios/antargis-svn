@@ -21,7 +21,7 @@
 require 'ruby/antargislib.rb'
 $useMenu=true
 
-require "antargis.rb"
+require "run_game.rb"
 require 'campaign.rb'
 require 'credits.rb'
 

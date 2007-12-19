@@ -26,10 +26,10 @@
 
 
 # add programdir to path
-$programDir=Dir.pwd+"/ruby"
+$programDir=File.split(__FILE__)[0]
 $:.push($programDir)
-$:.push($programDir+"/entities")
-$:.push($programDir+"/widgets")
+$:.push(File.join($programDir,"entities"))
+$:.push(File.join($programDir,"widgets"))
 
 require 'antargislib.rb'
 require 'dialogs.rb'
@@ -662,9 +662,9 @@ end
 
 
 # code for starting a level directly from command-line like this:
-# ./ruby/antargis.rb levels/birth1
+# ./ruby/run_game.rb levels/birth1
 # or
-# ./ruby/antargis.rb savegames/savegame0
+# ./ruby/run_game.rb savegames/savegame0
 $useMenu||=false
 if true
 	savegame=""
