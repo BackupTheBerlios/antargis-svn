@@ -79,24 +79,30 @@ module AntMyEventHandler
 
 end
 
-require 'ext/antargis'
-# if File.exists?("ext/antargisgame.so")
-# 	require 'ext/antargisgame'
-# else
-# 	puts "Please run 'rant' before starting this program!"
-# 	require 'antargisgame'
-# end
+begin
+	if File.exists?("ext/antargis.so")
+		require 'ext/antargis'
+	else
+		puts "Please run 'rake' before starting this program!"
+		require 'antargis'
+	end
+	include Antargis
+rescue
+	puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
+	system "rake"
+	puts "Try starting again..."
+	if File.exists?("ext/antargis.so")
+		require 'ext/antargis'
+	else
+		puts "Please run 'rake' before starting this program!"
+		require 'antargis'
+	end
+	include Antargis
+	puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
 
-#require 'antargissound.so'
+end
 
-include Antargis
-#game
-#include Antargisbasic
-#include Antargismath
-#include Antargisvideo
-#include Antargisgui
-#include Antargis3dengine
-#include Antargissound
+
 	
 require 'ruby/gui/ag_tools.rb'
 require 'ant_tools'
