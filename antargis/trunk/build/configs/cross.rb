@@ -11,7 +11,7 @@ $CONFIG={
   'RUBY'=>'/usr/bin/ruby',
   'DEFINES'=>'',
   'gcdebug'=>'false',
-  'INCLUDEPATH'=>'-I/home/david/projects/antargis/build/build/win32/libs/usr/include -I/home/david/projects/antargis/build/build/win32/libs/usr/lib/ruby/1.8/i386-mingw32 -I/home/david/projects/antargis/build/build/win32/libs/usr/lib/ruby/site_ruby/1.8/i386-msvcrt  -I/usr/i586-mingw32msvc/include/GL -I. ',
+  'INCLUDEPATH'=>'-Ibuild/win32/libs/usr/include -Ibuild/win32/libs/usr/lib/ruby/1.8/i386-mingw32 -Ibuild/win32/libs/usr/lib/ruby/site_ruby/1.8/i386-msvcrt  -I/usr/i586-mingw32msvc/include/GL -I. ',
   'LIBS'=>'-lmsvcrt-ruby18 -lSDL -lz -lSDL_mixer -lSDL_ttf -lpng -lopengl32 -lSDL_image -lglu32',
   'use_mkmf'=>'true',
   'profile'=>'false',
@@ -19,6 +19,6 @@ $CONFIG={
   'use_env'=>'true',
   'PATH'=>['c:\windows\system32','c:\windows'],
   'version'=>'0.2.1.5',
-  'LIBPATH'=>'-L/home/david/projects/antargis/build/build/win32/libs/usr/lib/ruby/1.8/i386-mingw32  -L/home/david/projects/antargis/build/build/win32/libs/usr/lib -L/home/david/projects/antargis/build/build/win32/libs/usr/lib/ruby/site_ruby/1.8/i386-msvcrt  -L/usr/i586-mingw32msvc/lib/GL',
+  'LIBPATH'=>'-Lbuild/win32/libs/usr/lib/ruby/1.8/i386-mingw32  -Lbuild/win32/libs/usr/lib -Lbuild/win32/libs/usr/lib/ruby/site_ruby/1.8/i386-msvcrt  -L/usr/i586-mingw32msvc/lib/GL',
 	'target_os'=>'windows'
 }
