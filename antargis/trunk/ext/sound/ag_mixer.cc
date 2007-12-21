@@ -102,6 +102,7 @@ void initSoundEngine()
 
       if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, chunkSize)==-1) {
 	printf("Mix_OpenAudio: %s\n", Mix_GetError());
+	printf("Disabling sound\n");
 	mNoSound=true;
 	return;
       }

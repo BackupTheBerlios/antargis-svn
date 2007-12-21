@@ -191,7 +191,7 @@ void AGVideoManager::setIcon(const std::string &pFile)
 
   SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
   SDL_WM_SetIcon(s,0);
-	assertGL;
+  assertGL;
 }
 
 void AGVideoManager::setCaption(const std::string &pCaption)

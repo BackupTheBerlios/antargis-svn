@@ -26,7 +26,8 @@ void agAssertGL(std::string s)
       if(strlen(se)>0)
 	{
 	  std::cerr<<"SDL_Error:"<<s<<":"<<se<<std::endl;
-	  if(std::string(se).substr(0,37)=="Failed loading glXGetSwapIntervalMESA")
+	  if(std::string(se).substr(0,37)=="Failed loading glXGetSwapIntervalMESA" ||
+	     std::string(se).substr(0,40)=="DirectSoundCreate: No audio device found")
 	    std::cerr<<"IGNORING THIS ERROR!"<<std::endl;
 #ifndef MNDEBUG
 	  else

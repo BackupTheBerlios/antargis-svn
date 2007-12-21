@@ -25,7 +25,7 @@ AGRubyObject::AGRubyObject()
 #ifdef GCDEBUG
   printf("NEW ME:%lx\n",this);
 #endif
-  cdebug("existing rubies:"<<gExistingRubies.size());
+  //  cdebug("existing rubies:"<<gExistingRubies.size());
   
 }
 AGRubyObject::~AGRubyObject()
@@ -40,7 +40,7 @@ AGRubyObject::~AGRubyObject()
 #endif
   mDeleted=true;
   gExistingRubies.erase(this);
-  cdebug("existing rubies:"<<gExistingRubies.size());
+  //  cdebug("existing rubies:"<<gExistingRubies.size());
   //  cdebug("DEL:"<<mRUBY);
 }
 
