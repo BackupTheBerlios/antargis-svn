@@ -338,20 +338,40 @@ extern double		mt_ldrand(void);
 
 extern mt_state		mt_default_state;
 
-/* State of the default generator */
+
 #ifdef __cplusplus
+//extern "C" {
+extern "C" 
+#ifdef WIN32
+/*
+#ifdef MT_EXTERN
+__declspec(dllexport)
+#else
+__declspec(dllimport)
+#endif*/
+#endif
+double		mt_32_to_double;
+#else
+extern double		mt_32_to_double;
+#endif
+#ifdef __cplusplus
+//}
+#endif
+
+/* State of the default generator */
+/*#ifdef __cplusplus
 extern "C" {
-    #ifdef WIN32
+#ifdef WIN32
 __declspec(dllimport)
 #endif
     extern double		mt_32_to_double;
 }
-    #else
+#else
 #ifdef WIN32
 __declspec(dllexport) 
 #endif
 extern   double		mt_32_to_double;
-#endif
+#endif*/
 					/* Multiplier to convert long to dbl */
 extern double		mt_64_to_double;
 					/* Mult'r to cvt long long to dbl */
