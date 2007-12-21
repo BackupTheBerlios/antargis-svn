@@ -277,7 +277,7 @@ $BOA_LIBRARIES=$SOURCEDIRS.map{|dir|"ext/libantargis"+dir.split("/")[1]+".so"}+$
 task :libraries=>$BOA_LIBRARIES do
 end
 
-task "ext/antargis.so" => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
+task "ext/antargis.so" => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not file=~/[a-z]swig/}.map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
 #+$SOURCEDIRS.map{|dir|"ext/libantargis"+dir.split("/")[1]+".so"}) do|t|
 	linkLib(t.name,t.prerequisites+$CONFIG["LIBS"].split(" "))
 end
