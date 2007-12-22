@@ -305,7 +305,7 @@ def runChecks(config)
 end
 
 def saveConfigurationFile(config)
-	file=File.open("config.rb","w")
+	file=File.open("antconfig.rb","w")
 	file.puts config.toRuby
 	file.close
 end
