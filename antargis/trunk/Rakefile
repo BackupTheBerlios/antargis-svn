@@ -28,7 +28,6 @@ PKG_FILES=Dir["ruby/**/*.rb"]+Dir["*.rb"]+DATA_FILES+Dir["build/*.rb"]+Dir["buil
     s.files = PKG_FILES
 		s.bindir="." #File.join("build","bin")
 		s.executables << "antargis"
-		#s.extensions=
     s.description = <<EOF
 Battles of Antargis is a medieval-like realtime strategy game. 
 You are a hero who was betrayed and you have to unify the kingdom 
