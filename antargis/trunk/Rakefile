@@ -278,7 +278,6 @@ task :libraries=>$BOA_LIBRARIES do
 end
 
 task "ext/antargis.so" => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not file=~/[a-z]swig/}.map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
-#+$SOURCEDIRS.map{|dir|"ext/libantargis"+dir.split("/")[1]+".so"}) do|t|
 	linkLib(t.name,t.prerequisites+$CONFIG["LIBS"].split(" "))
 end
 
@@ -296,7 +295,6 @@ task "ext/swig.cc"=>($SOURCEDIRS[1..-1].map{|dir|dir+"/interface.i"}) do
 	cflags=$CONFIG["INCLUDEPATH"]+" "+$CONFIG["DEFINES"]+" -DAGEXPORT"
 	cmd=$CONFIG["SWIG"]+" #{cflags} -v -Wall -ruby -c++ -o #{output} ext/interface.i"
 	puts ""
-#	pp cmd
 	sh cmd
 	$?
 end
