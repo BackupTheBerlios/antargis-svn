@@ -101,7 +101,7 @@ rescue
 	puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
 
 end
-
+puts "extension loaded"
 
 	
 require 'ruby/gui/ag_tools.rb'
