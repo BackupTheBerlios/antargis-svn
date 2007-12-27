@@ -288,9 +288,13 @@ end
 task :library=>"ext/antargis.so" do
 end
 
-task "ext/swig.cc"=>($SOURCEDIRS[1..-1].map{|dir|dir+"/interface.i"}) do
+mSwigDeps=$SOURCEDIRS[1..-1].map{|dir|dir+"/interface.i"}.sort
+#pp mSwigDeps
+#exit
+task "ext/swig.cc"=>mSwigDeps do
 	output="ext/swig.cc"
 	input=$BOASOURCES.map{|dir|File.join(dir,"interface.i")}
+	File.delete(output) if File.exists?(output)
 	file=File.open("ext/interface.i","w")
 	file.puts '%module(directors="1") antargis'
 	input.each{|filename|file.puts "%include \"#{filename}\""}
@@ -308,7 +312,7 @@ task :default=>[:library] do
 end
 
 
-task :allclean=>[:clobber_package] do
+task :allclean=>[:clobber_package,:clean] do
 	File.delete("antconfig.rb")
 end
 
