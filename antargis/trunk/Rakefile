@@ -16,11 +16,13 @@ require 'rake/packagetask.rb'
 
 DATA_FILES=Dir["data/**/*"].select{|file|not (file=~/svn/ or file=~/xcf/ or file=~/\.svg/)}
 RUBY_FILES=Dir["ruby/**/*.rb"]+Dir["*.rb"]+Dir["antargis"]
-C_FILES=Dir["ext/*/*.c"]+Dir["ext/*/*.cc"]+Dir["ext/*/*.h"]
+SWIG_FILES=["ext/swig.cc","ext/swig.h"]
+C_FILES=Dir["ext/*/*.c"]+Dir["ext/*/*.cc"]+Dir["ext/*/*.h"]+SWIG_FILES
 RAKE_FILES=Dir["Rakefile"]+Dir["ext/**/Rakefile"]+Dir["ext/extconf.rb"]
 BUILD_FILES=Dir["build/*.rb"]+Dir["build/*/*.rb"]+Dir["build/*.i"]+Dir["ext/*/templates.i"]
+SOURCE_FILES=BUILD_FILES+C_FILES+RAKE_FILES
 BINARY_FILES=["ext/antargis.so"]
-PKG_FILES=DATA_FILES+RUBY_FILES+C_FILES+RAKE_FILES+BUILD_FILES
+PKG_FILES=DATA_FILES+RUBY_FILES
 
 BOA_DESCRIPTION = <<EOF
 Battles of Antargis is a medieval-like realtime strategy game. 
@@ -30,15 +32,20 @@ Its gameplay is very similar to that of Powermonger.
 EOF
 
 def makeSpec(s)
-	s.platform = Gem::Platform::LINUX_586
+	if $CONFIG['target_os']=='windows'
+		s.platform = Gem::Platform::WIN32
+		s.name = 'antargis-win32'
+	else
+		s.platform = Gem::Platform::LINUX_586
+		s.name = 'antargis-linux'
+	end
 	s.summary = "A real-time strategy game."
-	s.name = 'antargis-linux'
 	s.version = PKG_VERSION
 	s.requirements << 'none'
 	#s.require_path = 'lib'
 	s.require_paths << 'ext'
 	s.autorequire = 'rake'
-	s.files = PKG_FILES-BINARY_FILES
+	s.files = PKG_FILES+BINARY_FILES
 	s.bindir="." #File.join("build","bin")
 	s.executables << "antargis"
 	s.description = BOA_DESCRIPTION
@@ -48,17 +55,31 @@ def makeSourceSpec(s)
 	makeSpec(s)
 	s.name = 'antargis'
 	s.extensions << 'ext/extconf.rb'
+	s.files=PKG_FILES+SOURCE_FILES
 	s.platform = Gem::Platform::RUBY
 end
 
+# make Linux-gem
+spec = Gem::Specification.new do |s|
+	makeSpec(s)
+end
+
+Rake::GemPackageTask.new(spec) do |pkg|
+	pkg.need_zip = true
+	pkg.need_tar = true
+end
+
+# make source-gem
 spec = Gem::Specification.new do |s|
 	makeSourceSpec(s)
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
-#	pkg.need_zip = true
-#	pkg.need_tar = true
+	pkg.need_zip = true
+	pkg.need_tar = true
 end
+
+# make windows gem
 
 
 # normal package

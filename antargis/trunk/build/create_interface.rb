@@ -27,9 +27,15 @@
 #
 
 require 'build/interface_template.rb'
-require 'build/base_tools.rb'
+#require 'build/base_tools.rb'
 require 'find.rb'
 require 'pp'
+
+#$verbose=true
+
+def getDirUnix(path)
+    path.split("/")[0..-2].join("/")
+end
 
 def vputs(*a)
 	puts *a if $verbose
@@ -38,6 +44,11 @@ end
 def iputs(*a)
 	print "   "
 	puts *a
+end
+
+def makeLibName(dir)
+    #puts "makeLibName #{dir}"
+	"antargis"+dir.split("/")[-1]
 end
 
 class MyInput
@@ -74,7 +85,7 @@ class MyInput
 	end
 
 	def interfaceName
-		name=@outputDir+Dir.separator+"interface.i"
+		name=File.join(@outputDir,"interface.i")
 		name
 	end
 
@@ -82,10 +93,10 @@ class MyInput
 		moduleName=makeLibName(@outputDir)
 	end
 	def headersName
-		@outputDir+Dir.separator+"/headers.hh"
+		File.join(@outputDir,"headers.hh")
 	end
 	def markerName
-		@outputDir+Dir.separator+"marker.i"
+		File.join(@outputDir,"marker.i")
 	end
 end
 

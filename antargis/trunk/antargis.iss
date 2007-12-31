@@ -5,21 +5,21 @@
 
 [Setup]
 AppName=Antargis
-AppVerName=Antargis 0.2.1.1
+AppVerName=Antargis 0.2.1.5
 DefaultDirName={pf}\Antargis
 DefaultGroupName=Antargis
 UninstallDisplayIcon={app}\Antargis.exe
 Compression=lzma/fast
 SolidCompression=yes
 ;InfoAfterFile=c:\Antargis\readme.txt
-OutputBaseFilename=Antargis-0.2.1.1-setup
+OutputBaseFilename=Antargis-0.2.1.5-setup
 AppPublisher=Antargis-Team
 AppPublisherURL=antargis.berlios.de
-AppVersion=0.2.1.1
+AppVersion=0.2.1.5
 
 
 [Files]
-Source: "c:\antargis\rant\packages\antargis-windows-0.2.1.1\*"; DestDir: "{app}"; Flags:recursesubdirs
+Source: "pkg\antargis-win32-0.2.1.5\*"; DestDir: "{app}"; Flags:recursesubdirs
 
 [Icons]
 Name: "{group}\Antargis"; Filename: "{app}\Antargis.lnk" ; WorkingDir: "{app}"
@@ -46,8 +46,8 @@ begin
         CreateShellLink(
         ExpandConstant('{app}\Antargis.lnk'),
         'Antargis 0.1',
-        ExpandConstant('{app}\allinoneruby186.exe'),
-        ExpandConstant('"{app}\run.rb"'),
+        ExpandConstant('{app}\allinoneruby.exe'),
+        ExpandConstant('"{app}\antargis"'),
         ExpandConstant('{app}'),
           '',
           0,
