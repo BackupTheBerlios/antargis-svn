@@ -1,0 +1,8 @@
+When you're debugging it's in nice, when you can start at a specific place within the game, so mustn't 
+go through all these menus and stuff. This file explains how to do this.
+
+== Running levels from CLI
+ ruby ruby/antargis.rb levels/tutorial/tutorial0
+will start the first level of the tutorial campaign.
+ ruby ruby/antargis.rb savegames/savegame0
+will start a savegame (which is normally stored in ~/.Antargis/savegames/savegame0.antlvl)

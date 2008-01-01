@@ -1,0 +1,10 @@
+Approaches:
+* Script-based
+* heuristic-based (without prediction)
+* min-max-tree (with prediction)
+** needs estimation of current state
+** current state must be editable/saveable
+** copy real-world to est-world
+*** heroes incl. position/health/man-count/resource
+*** trees/resources
+*** buildings with resources/man-count
