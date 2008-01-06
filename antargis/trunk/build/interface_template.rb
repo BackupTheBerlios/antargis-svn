@@ -6,7 +6,7 @@ def interface_template(moduleName,files,swigInput,addfiles=[],outputDir="")
 %module(directors="1") #{moduleName}
 
 // include common (stdc++) thingies and set options
-%include "build/common.i"
+%include "build/swig/common.i"
 
 %{
 	void AG_Init_lib#{moduleName}();
@@ -44,7 +44,6 @@ end
 def interface_templateBAK(moduleName,files)
 <<EOT
 %module(directors="1") #{moduleName}
-//%include "build/common.i"
 
 
 

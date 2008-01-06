@@ -328,8 +328,8 @@ AGInternalSurface *AGSurface::surface() const
 
 AGSurface AGSurface::load(const std::string &pFilename)
 {
-  cdebug("load:"<<pFilename);
-	assertGL;
+  //  cdebug("load:"<<pFilename);
+  assertGL;
   assert(&getScreen());
 
   assertGL;

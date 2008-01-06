@@ -31,6 +31,8 @@ class AntRubyEditView<GLApp
 		$scene=getScene
 	
 		@layout=AGLayout.new(nil)
+
+		@layout.setApp(self)
 		@layout.loadXML(loadFile("data/gui/layout/edit_layout.xml"))
 		
 		setMainWidget(@layout)

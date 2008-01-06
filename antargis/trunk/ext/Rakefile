@@ -70,7 +70,7 @@ def generateSwigDeps(dir)
 	input=dir+"/interface.i"
 	cflags=$CONFIG["INCLUDEPATH"]+" "+$CONFIG["DEFINES"]+" -DAGEXPORT"
 	puts ""
-	cmd=$CONFIG["SWIG"]+" #{cflags} -ruby -c++ -M #{input} >#{output}"
+	cmd=$CONFIG["SWIG"]+" #{cflags} -ruby -c++ -Ibuild/swig -M #{input} >#{output}"
 	sh cmd
 	$?
 end
@@ -79,7 +79,7 @@ def generateSwig(dir)
 	output=dir+"/swig.cc"
 	input=dir+"/interface.i"
 	cflags=$CONFIG["INCLUDEPATH"]+" "+$CONFIG["DEFINES"]+" -DAGEXPORT"
-	cmd=$CONFIG["SWIG"]+" #{cflags} -v -Wall -ruby -c++ -o #{output} #{input}"
+	cmd=$CONFIG["SWIG"]+" #{cflags} -v -Wall -ruby -c++ -Ibuild/swig -o #{output} #{input}"
 	puts ""
 	pp cmd
 	sh cmd
@@ -263,7 +263,21 @@ end
 task :library=>"ext/antargis.so" do
 end
 
-if SWIG_ENABLED
+if SWIG_ENABLED and false
+	mSwigDeps=Dir["ext/*/*.h"].select{|file|not file=~/swig/}
+	
+	# this can be used with a later version of rake - 0.7.1 makes problems with rules and more than one dependency
+	mSwigDepLambda=lambda{|t|
+		mSwigDeps
+	}
+	
+	task "ext/swig.cc" => mSwigDeps do
+		# FIXME
+		system($CONFIG["RUBY"]+" "+File.join("ext","create_interface_test.rb"))
+	end
+
+
+elsif SWIG_ENABLED
 
 	
 	def importsForInterface(name)
@@ -311,7 +325,7 @@ if SWIG_ENABLED
 		input.each{|filename|file.puts "%include \"#{filename}\""}
 		file.close
 		cflags=$CONFIG["INCLUDEPATH"]+" "+$CONFIG["DEFINES"]+" -DAGEXPORT"
-		cmd=$CONFIG["SWIG"]+" #{cflags} -v -Wall -ruby -c++ -o #{output} ext/interface.i"
+		cmd=$CONFIG["SWIG"]+" #{cflags} -v -Wall -ruby -c++ -Ibuild/swig -o #{output} ext/interface.i"
 		puts ""
 		sh cmd
 		$?

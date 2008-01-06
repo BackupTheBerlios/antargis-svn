@@ -326,7 +326,9 @@ class AntRubyMap<AntMap
 		super
 	end
 
-	def saveXML(n)
+	def saveXMLTRest(n)
+		puts self
+		pp n
 		super(n)
 		@players.each{|player|
 			c=n.addChild(player.xmlName)

@@ -36,7 +36,7 @@ class CampaignLevel
 			raise 'Problem - $campaign not net' if $campaign==nil
 			sname=$campaign.savename.gsub("antcmp","antlvl")
 			n.set("current",sname)
-			getMap.saveMap(sname)
+			@app.getMap.saveMap(sname)
 		end
 	end
 

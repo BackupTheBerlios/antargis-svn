@@ -91,13 +91,18 @@ void AntMap::useID(int id)
 void AntMap::saveXML(Node &node) const
 {
   HeightMap::saveXML(node);
-  
+  cdebug("height map saving ready");
   // entities
   std::list<AntEntity*>::const_iterator i=mEntities.begin();
   for(;i!=mEntities.end();i++)
     {
-      Node &child=node.addChild((*i)->xmlName());
+      cdebug("try saving child1 "<<*i);
+			AGString s=(*i)->xmlName();
+			cdebug("xmlName:"<<s);
+      Node &child=node.addChild(s);
+      cdebug("try saving child2 "<<*i);
       (*i)->saveXML(child);
+      cdebug("try saving child3 "<<*i);
     }
   
 }
@@ -364,11 +369,12 @@ void AntMap::loadMap(const AGFilename &pFilename)
 }
 void AntMap::saveMap(const AGFilename &pFilename)
 {
+	CTRACE;
   mName=AGString(pFilename);
   Document d;
   Node &root=d.root();
   root.setName("antargisLevel");
-  //  cdebug("root:"<<root);
+  cdebug("root:"<<&root);
   saveXML(root);
 
   AGData c=d.toString();

@@ -449,6 +449,15 @@ AGString AntEntity::xmlName() const
 {
   return "antEntity";
 }
+std::string AntEntity::xmlName2() const
+{
+  return "antEntity";
+}
+AGString AntEntity::xmlName3() const
+{
+  return "antEntity";
+}
+
 float AntEntity::getDirection() const
 {
   return mDir;

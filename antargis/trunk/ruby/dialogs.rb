@@ -259,7 +259,9 @@ class AntSaveDialog<AntDialog
 			filename=filename.to_s+".antlvl"
 		end
 		hide
-		getApp.getMap.saveMap(getSavePath+"/"+filename)
+		map=getApp.getMap
+		path=getSavePath+"/"+filename
+		map.saveMap(path)
 		takeSmallScreenshot.save(getSavePath+"/#{filename.gsub("antlvl","png")}")
 		getApp.getMap.pause=false
 		AntSound.setNormalVolumeWave

@@ -376,14 +376,19 @@ void HeightMap::saveXML(Node &node) const
       std::string name=mName.replace(".antlvl",".hmap");
       BinaryFileOut os(name);
       saveBinary(os);
+      cdebug("try setting filename:");
       node.set("filename",AGString(name));
+      cdebug("done");
     }
   else
     {
       BinaryStringOut os;
       saveBinary(os);
+      cdebug("try setting data:");
       Node &n=node.addChild("data");
+      cdebug("done1");
       n.setContent(AGString(binaryToHex(os.getString())));
+      cdebug("done2");
     }
 }
 

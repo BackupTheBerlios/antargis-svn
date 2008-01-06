@@ -457,19 +457,19 @@ bool fileExists(const AGFilename &pName)
 {
 #ifdef WIN32
   if(GetFileAttributes(pName.c_str()) == INVALID_FILE_ATTRIBUTES)
-	return false;
+    return false;
   return true;
 #endif
 
   FILE *f=fopen(pName.c_str(),"r");
-	bool found=false;
+  bool found=false;
 	
   if(f)
     {
 			found=true;
       fclose(f);
     }
-	cdebug("file exists:"<<pName<<":"<<found);
+  //	cdebug("file exists:"<<pName<<":"<<found);
 
   return found;
 #ifdef USE_PHYSFS

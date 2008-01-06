@@ -1,3 +1,5 @@
+
+* fix saving - problem occurs only if game is loaded ? (in editor, too)
 * move build/*.rb files to build/unused_tools/* if they're not used
 * google for "/tmp/cciSLVG5.s:932678: Warning: .stabs: description field '1c216' too big, try a different debug format"
 
@@ -18,7 +20,6 @@ path.h - don't export path-internals to ruby
 * moveto doesn't really work with "near" (hljob)
 * heroes don't die in reasonable fashion - starving men too
 * add seasons
-* take food - near doesn't work - same for attack (in some cases?)
 
 * Spreading should be done only for men who need it!
 

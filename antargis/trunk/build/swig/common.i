@@ -1,11 +1,11 @@
 %feature("director");
 %include "typemaps.i"
 %include "std_string.i"
-//%include "AGString.i"
 %include "std_vector.i"
 %include "std_pair.i"
 %include "std_map.i"
 %include "std_list.i"
+%include "ag_string_new.i"
 %include "ag_string.i"
 %include "ag_filename.i"
 %include "ag_data.i"

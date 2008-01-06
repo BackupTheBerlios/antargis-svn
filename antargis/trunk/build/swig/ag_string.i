@@ -20,11 +20,11 @@
 %}
 
 
-    // Ruby wants class names to start with a capital letter
+// Ruby wants class names to start with a capital letter
 %rename(String) AGString;
 class AGString;
 
-    /* Overloading check */
+    //
     %typemap(typecheck) AGString = char *;
     %typemap(typecheck) const AGString & = char *;
 
@@ -36,10 +36,10 @@ class AGString;
         }
     }
 
-    %typemap(in) const AGString & (AGString temp) {
+    %typemap(in) const AGString & (AGString res) {
         if (TYPE($input) == T_STRING) {
-            temp = AGString(RSTRING($input)->ptr,RSTRING($input)->len);
-            $1 = &temp;
+            res = AGString(RSTRING($input)->ptr,RSTRING($input)->len);
+            $1 = &res;
         } else {
             SWIG_exception(SWIG_TypeError, "not a string");
         }
@@ -64,21 +64,15 @@ class AGString;
             throw Swig::DirectorTypeMismatchException("string expected");
     }
     
-    %typemap(directorout) const AGString & (AGString temp) {
+    %typemap(directorout) const AGString & (AGString res) {
         if (TYPE($input) == T_STRING) {
-            temp = AGString(RSTRING($input)->ptr,RSTRING($input)->len);
-            $result = &temp;
+            res = AGString(RSTRING($input)->ptr,RSTRING($input)->len);
+            $result = &res;
         } else {
             throw Swig::DirectorTypeMismatchException("string expected");
         }
     }
-/*
-    %typemap(throws) AGString, const string &
-        "rb_raise(rb_eRuntimeError, $1.c_str());";
 
-    %typemap(throws) string *, const string *
-        "rb_raise(rb_eRuntimeError, $1->c_str());";
-*/
 
 %{
 AGString SWIG_RB2AGSTR(VALUE x) {
@@ -94,3 +88,26 @@ namespace std
 	specialize_std_vector(AGFilename,SWIG_STRING_P,SWIG_RB2AGSTR,SWIG_AGSTR2RB);
 	specialize_std_vector(AGData,SWIG_STRING_P,SWIG_RB2AGSTR,SWIG_AGSTR2RB);
 }
+
+
+
+/*
+%apply std::string { AGString };  
+%apply const std::string { const AGString }; 
+
+%apply std::string* { AGString* };  
+// Not defined yet 
+//%apply const std::string* { const AGString* }; 
+ 
+%apply std::string& { AGString& }; 
+%apply const std::string& { const AGString& };  
+*/
+/*
+
+%include <typemaps/std_string.swg>
+
+%naturalvar AGString;
+//typedef std::string AGString;
+class AGString:public std::string {
+};
+*/

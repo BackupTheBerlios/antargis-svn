@@ -151,6 +151,8 @@ class AGEXPORT AntEntity:public AGRubyObject
 
     // saving and loading
     virtual AGString xmlName() const;
+    virtual std::string xmlName2() const;
+    virtual AGString xmlName3() const;
 
     virtual void saveXML(Node &node) const;
     virtual void loadXML(const Node &node);
