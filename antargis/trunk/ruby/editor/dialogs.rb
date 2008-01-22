@@ -18,8 +18,9 @@
 # License along with this program.
 #
 class AntEditPropDialog<AntDialog
-	def initialize(parent,ent)
+	def initialize(parent,ent,map)
 		super(parent,"data/gui/layout/editpropdialog.xml")
+		@map=map
 		@ent=ent
 		menCountW=getChild("MenCount")
 		nameW=getChild("AntName")
@@ -34,7 +35,7 @@ class AntEditPropDialog<AntDialog
 
 		# init player-list
 		plist=getChild("Player")
-		players=getMap.players
+		players=@map.players
 		playernames=["NONE"]
 		playernames+=players.collect{|p|p.getName} if ent.is_a?(AntBoss)
 		playernames.each{|n|
@@ -113,8 +114,9 @@ end
 
 class AntPlayerEditDialog<AGLayout
 	include AGHandler
-	def initialize(parent)
-		super
+	def initialize(parent,map)
+		super(parent)
+		@map=map
 		loadXML(loadFile("data/gui/layout/editor_players_dialog.xml"))
 		@players={}
 		@list=getChild("playerList")
@@ -145,8 +147,8 @@ class AntPlayerEditDialog<AGLayout
 			messageBox("Error","Please enter a new player-name. This already exists!",MB_OK)
 		else
 			type=eval(getChild("playerType").getSelectedID)
-			player=type.new(name)
-			getMap.players.push(player)
+			player=type.new(@map,name)
+			@map.players.push(player)
 			initPlayerNames
 		end
 		return true
@@ -184,7 +186,7 @@ private
 	def initPlayerNames
 		@list.clearList
 		@players={}
-		getMap.players.each{|p|
+		@map.players.each{|p|
 			@list.insertItem(p.name,p.name)
 			@players[p.name]=p
 		}

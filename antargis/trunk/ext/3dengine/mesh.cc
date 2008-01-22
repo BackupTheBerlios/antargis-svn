@@ -15,7 +15,7 @@
 //////////////////////////////////////////////////////////////////////
 
 Mesh::Mesh(Scene *pScene):
-  SceneNode(pScene,AGVector4(),AGBox3())
+  MeshBase(pScene,AGVector4(),AGBox3())
 {
   mData=0;
   mRotation=0;
@@ -25,7 +25,7 @@ Mesh::Mesh(Scene *pScene):
 }
 
 Mesh::Mesh(Scene *pScene,MeshData &data,const AGVector4 &pPos,float pRot):
-  SceneNode(pScene,pPos,data.bbox())
+  MeshBase(pScene,pPos,data.bbox())
 {
   mData=&data;
   mRotation=pRot;

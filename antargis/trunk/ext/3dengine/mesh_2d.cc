@@ -3,11 +3,11 @@
 #include <ag_painter.h>
 
 Mesh2D::Mesh2D(Scene2D *pScene):
-  SceneNode(pScene,AGVector4(),AGBox3())
+  MeshBase(pScene,AGVector4(),AGBox3())
 {
 }
 Mesh2D::Mesh2D(Scene2D *pScene,Mesh2DData &data,const AGVector4 &pPos,float pRot):
-  SceneNode(pScene,pPos,data.bbox()),
+  MeshBase(pScene,pPos,data.bbox()),
   mData(&data)
 {
 }

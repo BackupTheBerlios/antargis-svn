@@ -257,10 +257,7 @@ protected
 
 private
 	def sendAngel
+		# FIXME: create mesh for angels ??
 		return # do not send angels - they don't have meshes anyway
-		e=AntAngel.new
-		e.setPos(getPos2D)
-		getMap.insertEntity(e)
-		#getMap.endChange
 	end
 end

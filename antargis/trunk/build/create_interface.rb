@@ -400,13 +400,19 @@ parsedClasses.deriveList.keys.each{|s|
 
 classList=parsedClasses.getAllClasses
 # normal typemaps
-classList.each{|c|
-	file.puts "%typemap(directorout) #{c} {"
-	file.puts " #{c} *b;"
-	file.puts " Data_Get_Struct($input,#{c},b);"
-	file.puts " $result=*b;"
-	file.puts "}"
-}
+
+
+# FIXME
+# 
+
+# 
+# classList.each{|c|
+# 	file.puts "%typemap(directorout) #{c} {"
+# 	file.puts " #{c} *b;"
+# 	file.puts " Data_Get_Struct($input,#{c},b);"
+# 	file.puts " $result=*b;"
+# 	file.puts "}"
+# }
 
 file.puts "%typemap(directorout) Uint8 {"
 file.puts " $result=NUM2INT($input);"

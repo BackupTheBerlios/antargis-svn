@@ -229,7 +229,7 @@ class AntLazyPlayer<AntComputerPlayer
 end
 
 class AntOldConqueringPlayer<AntComputerPlayer
-	def initialize(name)
+	def initialize(map,name)
 		super
 		@mode=:rest
 	end
@@ -246,7 +246,7 @@ class AntOldConqueringPlayer<AntComputerPlayer
 end
 
 class AntConqueringPlayer<AntComputerPlayer
-	def initialize(name)
+	def initialize(map,name)
 		super
 		@mode=:rest
 	end

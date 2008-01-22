@@ -92,6 +92,7 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
 	    {
 	      STACKTRACE;
 	      AGVector2 p=e->getMousePosition();
+        cdebug("p:"<<p);
 	      PickResult nodes=scene.pick(p[0],p[1],1,1);
 
 	      eventClick(nodes,e->getButton());

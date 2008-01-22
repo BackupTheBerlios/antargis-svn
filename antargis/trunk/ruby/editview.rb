@@ -67,6 +67,7 @@ class AntRubyEditView<GLApp
 		@layout.getChild("editHeight").setChecked(true)
 		@layout.getChild("entitiesTab").entType=AntHero
 		setTab("terrain")
+		puts "EditView inizalizing ready."
 	end
 	
 	def eventNewMap
@@ -277,6 +278,8 @@ class AntRubyEditView<GLApp
 		if not c.nil?
 			@modifier="addEntity"
 			@type=c
+			@layout.getChild("rubber").setChecked(false)
+			@layout.getChild("pointer").setChecked(false)
 		end
 		return true
 	end
@@ -297,22 +300,18 @@ class AntRubyEditView<GLApp
 			return
 		end
 		puts "ADDENTITY"
-		#pos=getMarkerPos
 		dorand=true
 		if @type==AntDeco
-			tree=@type.new(@decoType)
+			tree=@type.new(@map,@decoType)
 			if @decoType=="floor" or @decoType=="block"
 				dorand=false
 			end
 		elsif @type==AntHero
-			tree=@type.new
+			tree=@type.new(@map)
 			tree.setAppearance(@appearance)
 		else
-			puts "TYPE:",@type
-			tree=@type.new
+			tree=@type.new(@map)
 		end
-		puts "type:"
-		puts tree
 		tree.setPos(AGVector2.new(pos.x,pos.y))
 		getMap.insertEntity(tree)
 	end
@@ -325,7 +324,7 @@ class AntRubyEditView<GLApp
 			node=res.node
 			puts "NODE:"
 			puts node
-			if node.class==Mesh
+			if node.is_a?(MeshBase)
 				ent=getMap.getEntity(node)
 				if ent
 					editProperties(ent)
@@ -343,7 +342,7 @@ class AntRubyEditView<GLApp
 	end
 	
 	def editProperties(ent)
-		d=AntEditPropDialog.new($screen,ent)
+		d=AntEditPropDialog.new($screen,ent,@map)
 		$screen.addChild(d)
 	end
 	
@@ -351,7 +350,7 @@ class AntRubyEditView<GLApp
 		puts "DOING RUBBER"
 		list.each{|res|
 			mesh=res.node
-			if mesh.class==Mesh
+			if mesh.is_a?(MeshBase)
 				ent=getMap.getEntity(mesh)
 				if ent
 					getMap.removeEntity(ent)

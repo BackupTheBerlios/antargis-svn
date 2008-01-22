@@ -163,9 +163,9 @@ module AntModels
 			:deco=>{
 				[:floor_deco]=>["data/models/floor.ant2",0.5,"data/textures/splats/stones1a.png"],
 			},
-			:twig=>{	
-				[]=>"twig"
-			},
+ 			:twig=>{	
+ 				[]=>"twig"
+ 			},
 			:decomesh=>{ # FIXME: remove this and the class, too ??
 				[]=>"ant_coach"
 			},
@@ -231,6 +231,7 @@ module AntModels
 		scenenode=nil
 		if mesh
 			if mesh.is_a?(Array)
+				pp mesh
 				ant2name=mesh[0]
 				scale=mesh[1]
 				pngname=mesh[2]
@@ -250,6 +251,7 @@ module AntModels
 			else
 				ant2name="data/models/"+mesh+".ant2"
 				pngname="data/textures/models/"+mesh+".png"
+				pngname="" unless fileExists(pngname)
 				name=mesh
 				angle||=getStaticModelRotation(name)
 

@@ -255,6 +255,10 @@ void AGSignal::disconnect(AGCPPListener *pListener)
 
 bool AGSignal::signal(AGEvent *m)
 {
+  CTRACE;
+  //cdebug("event:"<<*m);
+  //  cdebug("listeners:"<<mListeners.size());
+  // cdebug("simplelist:"<<mSimpleListeners.size());
   m->setName(mName);
   std::set<AGListener*>::iterator i=mListeners.begin();
   bool value=false;
@@ -270,6 +274,7 @@ bool AGSignal::signal(AGEvent *m)
       if((*j)->signal(m))
 	value=true;
     }
+  // cdebug("value:"<<value);
 
   return value;
 }

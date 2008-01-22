@@ -67,11 +67,11 @@ class AntNewHLJob<BaseMachine
 
 	def trace
 		return
-		if @hero.nil?
-			puts "TRACE #{caller[0]} #{self}"
-		else
-			puts "TRACE #{caller[0]} #{self} #{hero} #{getTime}"
-		end
+# 		if @hero.nil?
+# 			puts "TRACE #{caller[0]} #{self}"
+# 		else
+# 			puts "TRACE #{caller[0]} #{self} #{hero} #{getTime}"
+# 		end
 	end
 
 	def kill

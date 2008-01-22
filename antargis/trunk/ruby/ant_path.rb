@@ -61,21 +61,21 @@ class CombinedPathFinder
 
 	def displayPathfindingGraph(map,scene)
 		return
-		colors={:normal=>AGVector4.new(1,0,0,1),:overWater=>AGVector4.new(1,1,0,1)}
-		width=2
-		MODES.each{|mode|
-			wireframe=Boa3dWireframe.new(scene,colors[mode],width)
-			(0..(@graph[mode].edges-1)).each{|i|
-				edge=@graph[mode].getEdgePosition(i)
-				a=edge[0]
-				b=edge[1]
-				a=AGVector3.new(a.x,a.y,map.getHeight(a.x,a.y)+0.15)
-				b=AGVector3.new(b.x,b.y,map.getHeight(b.x,b.y)+0.15)
-				wireframe.addLine(a,b)
-			}
-			scene.addNode(wireframe)
-			width+=2
-		}
+		# 		colors={:normal=>AGVector4.new(1,0,0,1),:overWater=>AGVector4.new(1,1,0,1)}
+		# 		width=2
+		# 		MODES.each{|mode|
+		# 			wireframe=Boa3dWireframe.new(scene,colors[mode],width)
+		# 			(0..(@graph[mode].edges-1)).each{|i|
+		# 				edge=@graph[mode].getEdgePosition(i)
+		# 				a=edge[0]
+		# 				b=edge[1]
+		# 				a=AGVector3.new(a.x,a.y,map.getHeight(a.x,a.y)+0.15)
+		# 				b=AGVector3.new(b.x,b.y,map.getHeight(b.x,b.y)+0.15)
+		# 				wireframe.addLine(a,b)
+		# 			}
+		# 			scene.addNode(wireframe)
+		# 			width+=2
+		# 		}
 	end
 
 	def displayPath(path,color=AGVector4.new(1,1,0,1))

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<layout name="OptionsMenu">
+<layout name="SaveDialog">
 	<table cols="3" rows="3"><!-- center window -->
 		<colsize col="1" fixed="400"/>
 		<rowsize row="1" fixed="90"/>

@@ -6,6 +6,8 @@ def getMeshData(file,zoom,texture="",shadow=true)
 		$meshes={}
 	end
 	if not $meshes[id]
+		pp file,zoom,texture,shadow
+		raise "Texture-file not found!" unless (fileExists(texture) or texture=="")
 		$meshes[id]=MeshData.new(file,zoom,texture,shadow)
 	end
 	return $meshes[id]

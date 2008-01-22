@@ -73,7 +73,7 @@ void inverseTranslate(AGVector3 &v, const AGMatrix4 &m )
 
 
 AnimMesh::AnimMesh(Scene *pScene,AnimMeshData *data):
-  SceneNode(pScene,AGVector4(),data->bbox()),
+  MeshBase(pScene,AGVector4(),data->bbox()),
   mData(data),mMatrices(data->bones.size()+1),mShaderMatrices(20)
 {
   curKey=0;

@@ -4,6 +4,7 @@
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
 #include "scene.h"
+#include "mesh_base.h"
 #include "ag_surface.h"
 #include "ag_geometry.h"
 #include "scenenode.h"
@@ -19,7 +20,7 @@ class AntEntity;
    AnimMesh is a skeleton animated mesh.
    It support either shader-based and cpu-based animation.
 */
-class AGEXPORT AnimMesh:public SceneNode
+class AGEXPORT AnimMesh:public MeshBase
 {
   AnimMeshData *mData;
   size_t curKey;

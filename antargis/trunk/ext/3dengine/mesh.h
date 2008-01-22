@@ -4,6 +4,7 @@
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
 #include "scene.h"
+#include "mesh_base.h"
 #include "vertex_array.h"
 
 #include <map>
@@ -16,7 +17,7 @@
     Actual drawing is done by MeshData.
 
 */
-class AGEXPORT Mesh:public SceneNode
+class AGEXPORT Mesh:public MeshBase
 {
   MeshData *mData;
   float mRotation;

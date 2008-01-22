@@ -13,6 +13,7 @@ load 'ext/Rakefile'
 require 'rubygems'
 require 'rake/gempackagetask.rb'
 require 'rake/packagetask.rb'
+require 'spec/rake/spectask'
 
 DATA_FILES=Dir["data/**/*"].select{|file|not (file=~/svn/ or file=~/xcf/ or file=~/\.svg/)}
 RUBY_FILES=Dir["ruby/**/*.rb"]+Dir["*.rb"]+Dir["antargis"]
@@ -97,4 +98,14 @@ Rake::PackageTask.new("antargis-unix-386-binary", PKG_VERSION) do |p|
 	p.package_files += PKG_FILES+BINARY_FILES
 end
 
+end
+
+
+
+# rspec
+Spec::Rake::SpecTask.new do |t|
+	t.spec_files = FileList['ruby/**/spec_*.rb']
+	t.warning = true
+	#t.rcov = true
+	t.spec_opts=["--format html:spec_output.html"]
 end

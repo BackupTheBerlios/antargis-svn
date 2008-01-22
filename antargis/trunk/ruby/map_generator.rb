@@ -157,7 +157,7 @@ def addGrass(map)
 				map.setTerrain(x,y,tt,r)
 				if r>0.97
 					# add tree
-					t=AntGrass.new
+					t=AntGrass.new(map)
 					t.setPos(AGVector2.new(x,y))
 					map.insertEntity(t)
 				end
@@ -193,7 +193,7 @@ def addForest(map)
 				map.setTerrain(x,y,tt,r)
 				if r>0.97 and map.getTerrain(x,y,ROCK)<0.3
 					# add tree
-					t=AntTree.new
+					t=AntTree.new(map)
 					t.setPos(AGVector2.new(x,y))
 					map.insertEntity(t)
 				end

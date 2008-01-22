@@ -255,6 +255,7 @@ def startGC
 end
 
 class AGStringUtf8
+	alias  :oldIndex :[]
 	def [](range)
 		if range.is_a?(Range)
 			ma=range.max
