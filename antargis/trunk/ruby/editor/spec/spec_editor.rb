@@ -1,3 +1,4 @@
+if false
 Dir.chdir(File.split(File.split(File.split(File.split(File.expand_path(__FILE__))[0])[0])[0])[0])
 puts Dir.pwd
 
@@ -59,13 +60,26 @@ describe "MapEditor" do
 	end
 
 	it "should be ok to save" do
+
+
 		widget("saveButton").click
-		widget("SaveDialog").should be_a_kind_of(AGWidget)
-		widget("SaveDialog").should be_visible
-		while true
-			@app.step
-		end
+
+
+		saveDialog=widget("SaveDialog")
+
+
+		saveDialog.should be_a_kind_of(AGWidget)
+		saveDialog.should be_visible
+		filename=saveDialog.child("Filename")
+		filename.should be_a_kind_of(AGEdit)
+		filename.setText(AGStringUtf8.new("mytestfile"))
+		okButton=saveDialog.child("ok")
+		okButton.should be_a_kind_of(AGButton)
+		okButton.click
+		File.should be_exists(getWriteDir+"/data/levels/mytestfile.png")
+		File.should be_exists(getWriteDir+"/data/levels/mytestfile.antlvl")
 	end
 
 
+end
 end

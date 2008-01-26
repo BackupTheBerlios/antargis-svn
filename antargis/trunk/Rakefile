@@ -106,6 +106,6 @@ end
 Spec::Rake::SpecTask.new do |t|
 	t.spec_files = FileList['ruby/**/spec_*.rb']
 	t.warning = true
-	#t.rcov = true
+	t.rcov = true
 	t.spec_opts=["--format html:spec_output.html"]
 end

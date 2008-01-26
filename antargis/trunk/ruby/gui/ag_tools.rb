@@ -22,25 +22,6 @@
 # This file contains some helper functions to provide easier event-Handling in ruby.
 # Have a look at AGHandler for more information.
 
-
-# checks if libantargis is already loaded
-def hasLibantargis
-	begin
-		x=eval("Antargis")
-	rescue
-		return false
-	end
-	return true
-	#puts x
-	#x!=nil
-end
-
-# if libantargis was not yet loaded, try loading libantargisgui alone
-if not hasLibantargis
-	require 'antargisgui'
-	include Antargisgui
-end
-
 # some old abbrevs
 AGPoint=AGVector2
 AGRect=AGRect2

@@ -1,3 +1,4 @@
+require 'ant_local.rb'
 
 # Campaigning
 #################################

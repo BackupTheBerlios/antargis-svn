@@ -343,7 +343,7 @@ class AntMenuApp <AntApplication
 
 	def eventFullscreen
 		getMain.getVideo.initVideo(getMain.getVideo.realWidth,getMain.getVideo.realHeight,32,(not getMain.getVideo.fullscreen),true,1024,768)
-		getConfig.set("fullscreen",getMain.fullscreen.to_s)
+		getConfig.set("fullscreen",getMain.getVideo.fullscreen.to_s)
 		return true
 	end
 
@@ -488,7 +488,4 @@ protected
 
 end
 
-app=AntMenuApp.new
-
-app.run
 

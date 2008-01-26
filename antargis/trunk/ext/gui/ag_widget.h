@@ -117,6 +117,8 @@ class AGEXPORT AGWidget:public AGMessageObject
 
   bool processEvent(AGEvent *event);
 
+	bool doClick(AGEvent *e);
+
   AGSignal sigMouseEnter;
   AGSignal sigMouseLeave;
   AGSignal sigClick;

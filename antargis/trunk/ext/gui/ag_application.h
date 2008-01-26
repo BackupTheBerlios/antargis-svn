@@ -109,6 +109,7 @@ class AGEXPORT AGApplication:public AGMessageObject
   void redraw();
 
   virtual void tryQuit();
+  bool isRunning() const;
 
   long getTicks() const;
   void delay(int ms);

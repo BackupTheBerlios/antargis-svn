@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<layout geometry="(0,0,1024,768)" name="MainMenu">
+<layout geometry="(0,0,1024,768)" name="OptionsMenu">
 	<table cols="1" rows="4">
 		<colsize col="0" relative="1"/>
 		<rowsize row="0" fixed="200"/>

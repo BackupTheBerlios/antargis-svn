@@ -577,3 +577,8 @@ bool AGApplication::hardwareCursor() const
 {
   return mCursor==0;
 }
+
+bool AGApplication::isRunning() const
+{
+  return mRunning;
+}

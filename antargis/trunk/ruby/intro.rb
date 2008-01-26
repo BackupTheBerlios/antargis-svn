@@ -155,11 +155,11 @@ class IntroApp<AntApplication
 	end
 	
 end
-
-app=IntroApp.new
-
-
-if getConfig.get("intro")!="false"
-  app.run
-end
-require 'ruby/mainmenu.rb'
+# 
+# app=IntroApp.new
+# 
+# 
+# if getConfig.get("intro")!="false"
+#   app.run
+# end
+# require 'ruby/mainmenu.rb'

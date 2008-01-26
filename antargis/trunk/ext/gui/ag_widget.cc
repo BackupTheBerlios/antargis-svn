@@ -364,13 +364,17 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
 	      if(canFocus())
 		gainFocus();
 
-	      return (eventMouseClick(e) || sigClick(e));
+	      return doClick(e);
 
 	    }
 	}
     }
   return false;
+}
 
+bool AGWidget::doClick(AGEvent *e)
+{
+  return (eventMouseClick(e) || sigClick(e));
 }
 
 bool AGWidget::eventMouseClick(AGEvent *m)

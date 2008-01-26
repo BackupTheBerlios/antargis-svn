@@ -5,6 +5,17 @@
 Dir.chdir(File.split(__FILE__)[0])
 
 require 'ruby/intro.rb'
+require 'ruby/mainmenu.rb'
+
+
+if getConfig.get("intro")!="false"
+	app=IntroApp.new
+	app.run
+end
+
+# run menu
+app=AntMenuApp.new
+app.run
 
 
 MyLocalizer.finalize
