@@ -119,7 +119,7 @@ def gatherENVConfig
 	}
 	# FIXME: add system-switch to cmd-line options
 	system=nil
-	if config["PATH"]=~/^\/usr/
+	unless config["PATH"]=~/^[a-zA-Z]:\\/
 		config["PATH"]=config["PATH"].split(":") # Unix ?
 		system=:unix
 	else
@@ -217,9 +217,11 @@ def searchPrograms(config)
 		end
 		unless ok
 			pathes=config["PATH"].value
+			pp pathes
 			
 			pathes.each{|path|
 				cpath=File.join(path,v)
+				pp cpath
 				
 				if testProgram(cpath)
 					config[k]=cpath
@@ -231,6 +233,8 @@ def searchPrograms(config)
 		end
 		if ok
 			puts "#{k.ljust(10)} found at #{config[k].value.ljust(25)} #{info}"
+		else
+			puts "#{k.ljust(10)} not found!"
 		end
 	}
 	config
@@ -309,6 +313,8 @@ def saveConfigurationFile(config)
 	file.puts config.toRuby
 	file.close
 end
+
+$LDFLAGS+=" -L/usr/X11R6/lib -L/opt/local/lib"
 
 
 userInput=getUserInput

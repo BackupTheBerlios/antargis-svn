@@ -1,3 +1,5 @@
+* check for ccache in configure and only use it if available!
+
 
 * fix saving - problem occurs only if game is loaded ? (in editor, too)
 * move build/*.rb files to build/unused_tools/* if they're not used

@@ -277,10 +277,10 @@ SimpleGraph::SimpleGraph(BinaryIn &pIn)
   std::vector<AGVector2> vecs;
   std::vector<Node*> nodes;
   AGVector2 p;
-  size_t a,b;
+  Uint32 a,b;
   float w0,w1;
 
-  size_t count,i;
+  Uint32 count,i;
   pIn>>count;
   for(i=0;i<count;i++)
     {
@@ -301,15 +301,15 @@ SimpleGraph::SimpleGraph(BinaryIn &pIn)
 
 void SimpleGraph::printTo(BinaryOut &pOut) const
 {
-  std::map<AGVector2,size_t> saveMap;
+  std::map<AGVector2,Uint32> saveMap;
   size_t j=0;
-  pOut<<mNodes.size();
+  pOut<<(Uint32)mNodes.size();
   for(NodeSet::const_iterator i=mNodes.begin();i!=mNodes.end();i++,j++)
     {
       pOut<<(*i)->p;
       saveMap[(*i)->p]=j;
     }
-  pOut<<mEdges.size();
+  pOut<<(Uint32)mEdges.size();
   for(EdgeSet::const_iterator i=mEdges.begin();i!=mEdges.end();i++)
     {
       pOut<<saveMap[(*i)->a->p]<<saveMap[(*i)->b->p]<<(*i)->w0<<(*i)->w1;

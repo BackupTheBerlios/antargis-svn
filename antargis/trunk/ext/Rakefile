@@ -29,6 +29,8 @@ $SOURCEDIRS=[
 	"ext/game",
 ]
 
+AntargisLibName="antargis."+CONFIG["DLEXT"]
+
 $LIBDEPS={"ext/basic"=>["SDL","RUBY"]}
 
 $BOASOURCES=$SOURCEDIRS.select{|dir|not dir=~/external/}
@@ -93,7 +95,19 @@ def linkLib(name,objects)
 		winadd="-Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker #{name.gsub(/\.so$/,".dll")}.a"
 	end
 
-	cmd=$CONFIG["CXX"]+" -dH -shared -o #{name} -Lext #{winadd} -Wl,-\\( #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+
+	add=""
+	if $CONFIG["target_os"]=~/darwin/
+	    add="-framework OpenGL"
+	else
+		add="-Wl,-\\("
+	end
+
+	cmd=$CONFIG["CXX"]+" -dH -shared -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+	
+	cmd=$CONFIG["LDSHARED"]+" -dH  -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+	pp cmd
+	#exit
 	if $CONFIG["CCACHE"]
 		cmd=$CONFIG["CCACHE"]+" "+cmd
 	end
@@ -255,12 +269,12 @@ $BOA_LIBRARIES=$SOURCEDIRS.map{|dir|"ext/libantargis"+dir.split("/")[1]+".so"}+$
 task :libraries=>$BOA_LIBRARIES do
 end
 
-task "ext/antargis.so" => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not file=~/[a-z]swig/}.map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
+task AntargisLibName => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not file=~/[a-z]swig/}.map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
 	linkLib(t.name,t.prerequisites+$CONFIG["LIBS"].split(" "))
 end
 
 
-task :library=>"ext/antargis.so" do
+task :library=>AntargisLibName do
 end
 
 if SWIG_ENABLED and false
