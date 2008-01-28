@@ -26,11 +26,36 @@ describe Campaign do
 	it "birth campaign starts with cutscene" do
 		@birth.getCurrentPart.should be_a_kind_of(CutScene)
 	end
-	it "should run a story fine" do
-		cutscene=@birth.getCurrentPart
-		lambda {cutscene.play}.should_not cross(CutSceneDisplay,:new)
-		
-	end
+ 	it "should run a story fine" do
+		OldDisplay=CutSceneDisplay.clone
+		class CutSceneDisplay
+			@@ok=false
+			@@calls={}
+			
+			# remove all methods
+			self.instance_methods.each{|m|undef_method(m) unless m=~/__.*__/}
+			def initialize
+				@@ok=true
+			end
+			def CutSceneDisplay.initok
+				@@ok 
+			end
+			def CutSceneDisplay.callCount(name)
+				@@calls[name]
+			end
+			def method_missing(name,*s)
+				@@calls[name]||=0
+				@@calls[name]+=1
+			end
+		end
+ 		cutscene=@birth.getCurrentPart
+ 		lambda {cutscene.play}.should cross(CutSceneDisplay,:initialize)
+		CutSceneDisplay.initok.should be_false # because it wasn't hit due to "should cross"
+		CutSceneDisplay.callCount(:setImage).should >0
+		CutSceneDisplay.callCount(:setImage).should equal(CutSceneDisplay.callCount(:setText))
+		CutSceneDisplay.callCount(:setImage).should equal(CutSceneDisplay.callCount(:run))
+ 		CutSceneDisplay=OldDisplay
+ 	end
 
 
 end

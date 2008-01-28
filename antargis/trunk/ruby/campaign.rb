@@ -167,6 +167,9 @@ class CutSceneDisplay<AntApplication
 	end
 end
 
+class TestClass
+end
+
 class CutScene
 	#attr_reader :finished
 	def initialize(node)
@@ -194,6 +197,10 @@ class CutScene
 			c.addChild("text").set("text",s[:text]) if s[:text]
 			c.addChild("image").set("filename",s[:imageName]) if s[:imageName]
 		}
+	end
+	def mytest
+		puts "muh"
+		#TestClass.new
 	end
 	def play
 		display=CutSceneDisplay.new(@image,@text)

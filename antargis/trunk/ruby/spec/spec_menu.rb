@@ -1,9 +1,7 @@
-if false
-Dir.chdir(File.split(File.split(File.split(File.expand_path(__FILE__))[0])[0])[0])
-puts Dir.pwd
+Dir.chdir(File.split(__FILE__)[0])
 
+require '../spec_helper.rb'
 require 'ruby/gui/testing.rb'
-require 'ruby/spec_helper.rb'
 require 'ruby/mainmenu.rb'
 
 describe 'Main-Menu' do
@@ -31,7 +29,7 @@ describe 'Main-Menu' do
 	it "should be possible to select tutorial and this will start this one" do
 		tutorialButton=widget("tutorial")
 		tutorialButton.should be_an_instance_of(AGButton)
-		lambda {tutorialButton.click}.should call(:startCampaign)
+		lambda {tutorialButton.click}.should cross(:startCampaign)
 	end
 	it "should be possible to select the tutorial in the campaign section and start it" do
 		playCampaign(0)
@@ -65,8 +63,7 @@ describe 'Main-Menu' do
 		campaignRadio.should be_checked
 		startButton=menu.child("start")
 		startButton.should be_a_kind_of(AGButton)
-		lambda {startButton.click}.should call(:startCampaign)
+		lambda {startButton.click}.should cross(:startCampaign)
 	end
 end
 
-end
