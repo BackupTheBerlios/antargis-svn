@@ -13,8 +13,8 @@
 #include "ext/basic/ag_xml.h"
 #include "ext/basic/ag_string_utf8.h"
 #include "ext/basic/ag_stringstream.h"
-#include "ext/basic/ag_fs.h"
 #include "ext/basic/ag_utf8.h"
+#include "ext/basic/ag_fs.h"
 #ifdef SWIG
 %include "ext/basic/ag_rubyobj.h"
 %include "ext/basic/ag_messageobject.h"
@@ -28,7 +28,7 @@
 %include "ext/basic/ag_xml.h"
 %include "ext/basic/ag_string_utf8.h"
 %include "ext/basic/ag_stringstream.h"
-%include "ext/basic/ag_fs.h"
 %include "ext/basic/ag_utf8.h"
+%include "ext/basic/ag_fs.h"
 #endif
 #endif
