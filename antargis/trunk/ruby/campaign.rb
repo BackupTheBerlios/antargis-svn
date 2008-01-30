@@ -16,7 +16,7 @@ def getCampaignFiles
 end
 
 def getCampaigns
-	$campaigns||=getCampaignFiles.collect{|f|Campaign.new(f)}.select{|f|f.enabled}
+	$campaigns||=getCampaignFiles.collect{|f|Campaign.new(f)}.select{|f|f.enabled}.sort_by{|campaign|campaign.order}
 end
 
 class CampaignLevel
@@ -217,7 +217,7 @@ class CutScene
 end
 
 class Campaign
-	attr_reader :name, :image, :imageName, :description, :texture, :enabled
+	attr_reader :name, :image, :imageName, :description, :texture, :enabled, :order
 	def initialize(filename)
 		if not fileExists(filename)
 			raise "file not found #{filename}"
@@ -226,6 +226,7 @@ class Campaign
 		@xmlRoot=@doc.root
 		@enabled=(@xmlRoot.get("enabled")!="false")
 		@name=@xmlRoot.get("name")
+		@order=@xmlRoot.get("order").to_i
 		@imageName=@xmlRoot.get("image")
 		@image=AGSurface.load(@imageName)
 		@texture=AGTexture.new(@image)

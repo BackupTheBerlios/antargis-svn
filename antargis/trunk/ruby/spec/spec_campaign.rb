@@ -13,6 +13,14 @@ describe Campaign do
 	it "first campaign is tutorial" do
 		@tutorial.name.should == "Tutorial"
 	end
+	
+	it "tutorial has lower order than birth-campaign" do
+		tut=@campaigns.find{|c|c.name=="Tutorial"}
+		tut.should_not be_nil
+		birth=@campaigns.find{|c|c.name=="A hero is born."}
+		birth.should_not be_nil
+		tut.order.should < birth.order
+	end
 
 	it "tutorial starts with level" do
 		@tutorial.getCurrentPart.should be_a_kind_of(CampaignLevel)

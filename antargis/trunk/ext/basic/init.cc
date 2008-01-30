@@ -16,10 +16,16 @@ AGEXPORT std::map<std::string,std::list<CastFunction> > agCastFunctions;
 AGEXPORT void AG_Init_libantargisbasic()
 {
   TRACE;
+  cdebug("SDL_Init...");
   SDL_Init(SDL_INIT_VIDEO);
+  cdebug("hasMain?");
   if(!hasMain())
-    AGMain *main=new AGMain;
+  {
+	  cdebug("new AGMain..");
 
+	  AGMain *main=new AGMain;
+	  cdebug("new AGMAin!");
+  }
 
   // register main in ruby-var
 

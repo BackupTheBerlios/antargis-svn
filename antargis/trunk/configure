@@ -235,6 +235,7 @@ def searchPrograms(config)
 			puts "#{k.ljust(10)} found at #{config[k].value.ljust(25)} #{info}"
 		else
 			puts "#{k.ljust(10)} not found!"
+			config[k]=""
 		end
 	}
 	config
@@ -314,7 +315,12 @@ def saveConfigurationFile(config)
 	file.close
 end
 
-$LDFLAGS+=" -L/usr/X11R6/lib -L/opt/local/lib"
+# FIXME: add check for darwin
+unless CONFIG["host_os"]=~/darwin
+  $LDFLAGS+=" -L/usr/X11R6/lib"
+end
+
+$LDFLAGS+=" -L/opt/local/lib"
 
 
 userInput=getUserInput

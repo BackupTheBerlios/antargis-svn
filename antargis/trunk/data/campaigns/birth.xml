@@ -1,4 +1,4 @@
-<campaign image="data/gui/map1.png" name="A hero is born." description="The story of Antargis begins">
+<campaign image="data/gui/map1.png" name="A hero is born." description="The story of Antargis begins" order="1">
 	<cutscene>
 		<screen>
 			<text text="Strange visions cross your mind."/>

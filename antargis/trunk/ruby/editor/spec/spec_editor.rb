@@ -1,4 +1,4 @@
-if false
+#if false
 Dir.chdir(File.split(File.split(File.split(File.split(File.expand_path(__FILE__))[0])[0])[0])[0])
 puts Dir.pwd
 
@@ -82,4 +82,4 @@ describe "MapEditor" do
 
 
 end
-end
+#end

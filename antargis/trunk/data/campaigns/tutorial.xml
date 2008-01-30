@@ -1,4 +1,4 @@
-<campaign image="data/gui/map1.png" name="Tutorial" description="Here is where you learn how to play the game.">
+<campaign image="data/gui/map1.png" name="Tutorial" description="Here is where you learn how to play the game." order="0">
 	<level file="data/levels/tutorial/tutorial0.antlvl">
 		<failscene>
 			<screen>
