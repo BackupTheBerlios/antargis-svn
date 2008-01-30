@@ -1,0 +1,11 @@
+Dir.chdir(File.split(File.split(__FILE__)[0])[0])
+require 'antconfig.rb'
+
+
+task 'starter'=>"main/starter.cc" do
+	cmd="g++ -o starter main/starter.cc "+$CONFIG["CFLAGS"]+" "+$CONFIG["INCLUDEPATH"]+" "+`sdl-config --libs`.chomp+" -lruby"
+	cmd.gsub!("-arch ppc","")
+	sh cmd
+end
+
+task :default=>'starter'
