@@ -124,8 +124,14 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
     {
       int mw=std::min(surface->w,surface->h);
       int mh=std::max(surface->w,surface->h)/mw;
-      glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
+SDL_SaveBMP(surface,"terrain.bmp");
+	cdebug("OFFSET:"<<offset);
+	cdebug("size:"<<mw<<","<<mw<<";"<<mh<<(int)(format==GL_RGBA));
+    glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
 		      mw,mw,mh,format,GL_UNSIGNED_BYTE,surface->pixels);
+    std::cout<<("PIXELFORMAT:")<<surface->format<<std::endl;
+//    glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
+//		      mw,mw,mh,format,GL_UNSIGNED_BYTE,surface->pixels);
     }
   else
     {

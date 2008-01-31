@@ -350,9 +350,6 @@ else
 	puts
 end
 
-desc "Build all"
-task :default=>[:library] do
-end
 
 
 task :allclean=>[:clobber_package,:clean] do

@@ -277,13 +277,19 @@ def addSDLConfig(config,userInput)
 	config
 end
 
+def darwin?
+  CONFIG["host_os"]=~/darwin/
+end
+
 def addStandardFallbacks(config,options)
 	if options[:use_fallbacks]
-		dirs=["/usr/include/GL","/usr/include/X11","/usr/X11R6/include"]
+		dirs=["/usr/include/GL"]
+		dirs+=["/usr/include/X11","/usr/X11R6/include"] #unless darwin?
 		config["INCLUDEPATH"]=dirs.inject(""){|str,d|str+" -I"+d}+" -I."
 		config["CFLAGS"]="-dH"
 	
-		dirs=["/usr/lib/GL","/usr/lib/X11","/usr/X11R6/lib"]
+		dirs=["/usr/lib/GL"]
+		dirs+=["/usr/lib/X11","/usr/X11R6/lib"] unless darwin?
 		config["LIBPATH"]=dirs.inject(""){|str,d|str+" -L"+d}
 	end	
 	config
@@ -316,7 +322,7 @@ def saveConfigurationFile(config)
 end
 
 # FIXME: add check for darwin
-unless CONFIG["host_os"]=~/darwin
+unless CONFIG["host_os"]=~/darwin/
   $LDFLAGS+=" -L/usr/X11R6/lib"
 end
 
@@ -332,6 +338,14 @@ config=addStandardFallbacks(config,userInput)
 config=checkFlags(config,userInput)
 config=splitLDFLAGS(config)
 config=splitCFLAGS(config)
+
+if CONFIG["host_os"]=~/darwin/
+ 
+  ["LDSHARED","LDFLAGS","CFLAGS"].each{|name|
+    config[name].value=config[name].value.gsub("-arch ppc","")
+  }
+end
+
 saveConfigurationFile(config)
 runChecks(config)
 
