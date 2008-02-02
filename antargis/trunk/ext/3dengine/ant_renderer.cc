@@ -43,7 +43,7 @@ Renderer::Renderer():
   shadowInited=false;
 
   if(!GLEE_EXT_texture3D)
-    std::cerr<<"Sorry, Battles of Antargis won't work without GL_EXT_texture3D extension!"<<std::endl;
+    std::cerr<<"Sorry, Battles of Antargis won't work properly without GL_EXT_texture3D extension!"<<std::endl;
 }
 
 Renderer::~Renderer()
