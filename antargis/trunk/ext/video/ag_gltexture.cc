@@ -116,12 +116,12 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
 	c.begin();
 	assertGL;
 
-	
-  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-  assertGL;
-  glPixelStorei(GL_UNPACK_ROW_LENGTH,
-                surface->pitch / surface->format->BytesPerPixel);
-	 
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	assertGL;
+	glPixelStorei(GL_UNPACK_ROW_LENGTH,
+			surface->pitch / surface->format->BytesPerPixel);
+
 
 	assertGL;
 	if(m3d)
@@ -130,10 +130,13 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
 		int mw=std::min(surface->w,surface->h);
 		int mh=std::max(surface->w,surface->h)/mw;
 
-	//	glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
-	//			GL_UNSIGNED_BYTE, surface->pixels);
-	    glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
-				      mw,mw,mh,format,GL_UNSIGNED_BYTE,surface->pixels);
+		// FIXME: use glTexImage instead of glTexSubImage, because it makes problems
+		// on MacOSX 10.5.1 (at least on my macbook pro - godrin)
+
+		glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
+				GL_UNSIGNED_BYTE, surface->pixels);
+		glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
+				mw,mw,mh,format,GL_UNSIGNED_BYTE,surface->pixels);
 	}
 	else
 	{

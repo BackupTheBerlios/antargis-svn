@@ -661,21 +661,3 @@ def startGame(file="savegames/savegame0.antlvl",clientConnection=nil)
 end
 
 
-# code for starting a level directly from command-line like this:
-# ./ruby/run_game.rb levels/birth1
-# or
-# ./ruby/run_game.rb savegames/savegame0
-$useMenu||=false
-if true
-	savegame=""
-	ARGV.each{|arg|
-		if arg=~/levels.*/ or arg=~/savegames.*/
-			savegame=arg+".antlvl"
-		end
-	}
-	if savegame!=""
-		startGame(savegame)	
-	end
-end
-
-getConfig.set("ok","ok")
