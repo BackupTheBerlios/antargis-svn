@@ -329,7 +329,7 @@ class AntGameApp <AntRubyView
 			delay(20)
 		end
 
-		if @fps>25
+		if @fps>25 and isRunning
 			delay(5)
 		end
 		return true

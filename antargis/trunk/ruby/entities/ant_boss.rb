@@ -86,6 +86,10 @@ class AntBoss<AntRubyEntity
 		@job
 	end
 	
+	def hasHLJob
+		@job and (not @job.is_a?(AntHeroRestJob))
+	end
+	
 	def menCount
 		@men=@men.uniq
 		return @men.length

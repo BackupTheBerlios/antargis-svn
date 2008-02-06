@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+task 'gl_text_3d' => 'gl_text_3d.cc' do
+  cflags=`sdl-config --cflags`.chomp
+  ldflags=`sdl-config --libs`.chomp
+  cmd="g++ -o gl_text_3d gl_text_3d.cc -framework OpenGL "+cflags+" "+ldflags+" -lSDL_image"
+  sh cmd 
+end
+
+
+task :default=>["gl_text_3d"]

@@ -925,7 +925,7 @@ void AGWidget::prepareDraw()
 	  if(mParent)
 	    {
 	      //CTRACE;
-	      cdebug("parent->queryRedraw::"<<typeid(*this).name()<<":"<<getName());
+	      // cdebug("parent->queryRedraw::"<<typeid(*this).name()<<":"<<getName());
 	      mParent->queryRedraw();
 	    }
 

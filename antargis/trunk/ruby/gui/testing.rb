@@ -4,7 +4,6 @@ module TestModule
 		run
 	end
 	def eventFrame(t)
-		puts "FRAME"
 		super
 		tryQuit
 		true
