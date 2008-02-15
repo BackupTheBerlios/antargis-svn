@@ -83,8 +83,8 @@ class AGEXPORT VertexArray:public AGGLObject
   bool useVertexArrays() const;
   friend VertexArray *makeInstances(const VertexArray &va,const std::vector<AGMatrix4> &ts);
 
-  void onScreenUp();
-  void onScreenDown();
+  virtual void onScreenUp();
+  virtual void onScreenDown();
 
 };
 
@@ -117,6 +117,9 @@ class AGEXPORT VertexArrayShader:public VertexArray
   void addAttribute(const std::string &pName,const std::vector<Uint16> &a);
 
   virtual void draw();
+
+  virtual void onScreenUp();
+  virtual void onScreenDown();
 
  private:
   void aInit();

@@ -136,6 +136,8 @@ void AntShaderProgram::init()
 {
  if(glslOk())
     {
+	  locations.clear();
+	  attrs.clear();
       vertex=new AntVertexProgram(mVertexFile);
       frag=new AntFragProgram(mFragFile);
 
@@ -161,6 +163,7 @@ void AntShaderProgram::takeDown()
   //  cdebug("name:"<<name);
   delete vertex;
   delete frag;
+  locations.clear();
 }
 
 

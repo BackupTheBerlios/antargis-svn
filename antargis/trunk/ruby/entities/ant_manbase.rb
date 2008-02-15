@@ -76,7 +76,7 @@ module AntManBase
 	end
 
 	def standStillShort
-		newRestJob(0.2)
+		newRestJob(0.1)
 		setMeshState("stand")
 	end
 

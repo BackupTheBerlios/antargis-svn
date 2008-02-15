@@ -145,6 +145,12 @@ void MoveJob::move(AntEntity *e,float ptime)
   
 }
 
+AGVector2 MoveJob::getTargetPos2D() const
+{
+	return mTarget;
+}
+
+
 AGVector2 MoveJob::getDirection(const AntEntity *e) const
 {
   return (mTarget-e->getPos2D()).normalized();

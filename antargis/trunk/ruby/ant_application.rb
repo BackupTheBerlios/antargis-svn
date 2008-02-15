@@ -314,8 +314,7 @@ class AntGameApp <AntRubyView
 		@elapsTime+=time
 
 
-# 		# move entities in game-engine
-		#getMap().move(time*@speed)
+ 		# move entities in game-engine
 		moveMap(time*@speed)
 
 		# advance animations

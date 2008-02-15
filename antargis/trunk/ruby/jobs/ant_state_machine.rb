@@ -78,6 +78,10 @@ class BaseState
 		end
 		raise "no state defined!"
 	end
+	
+	def stateName
+		@state
+	end
 
 	def stateCall(*s)
 		if @state

@@ -2,9 +2,11 @@ module TestModule
 	attr_reader :quitCounter
 	def step
 		run
+		puts "step end"
 	end
 	def eventFrame(t)
 		super
+		puts "FRAME - try Quit..."
 		tryQuit
 		true
 	end

@@ -782,6 +782,7 @@ class HLJob_Recruit<HLJob_BaseState
 	end
 
 	def ready
+		#return false
 		recruitedEnough=((@countRecruited>=howManyToRecruit) or nonToRecruitLeft)
 		everyoneIsAtHisPlace=(hero.getMen).map{|man|(man.getPos2D-hero.getFormation(man,@myPos)).length}.max<MAX_DIST
 		heroIsAtHisPlace=(hero.getPos2D-hero.getFormation(hero,@myPos)).length<MAX_DIST
@@ -837,10 +838,13 @@ class HLJob_Recruit<HLJob_BaseState
 
 	def returnToStart(man)
 		pos=hero.getFormation(man,@myPos)
+		puts "RETURN to start: mypos:#{@myPos} diffHero:#{@myPos-hero.getPos2D} manpos:#{man.getPos2D} tposman:#{pos} diff:#{pos-man.getPos2D}"
+		
+		
 		if (man.getPos2D-pos).length<MAX_DIST
 			man.lookTo(@myPos)
 			man.standStillShort # FIXME: really short ?
-			puts "standStill #{man}"
+			puts "standStill #{man} #{pos}==#{man.getPos2D}  ---#{@myPos} "
 		else
 			man.walkTo(pos)
 			puts "walkTo #{pos} #{man}"

@@ -870,6 +870,17 @@ bool AntEntity::isMoving() const
   return dynamic_cast<MoveJob*>(mJob);
 }
 
+AGVector2 AntEntity::getTargetPos2D()
+{
+	if(mJob) {
+		MoveJob *m=dynamic_cast<MoveJob*>(mJob);
+		if(m)
+			return m->getTargetPos2D();
+	}
+	return getPos2D();
+}
+
+
 AntEntity *AntEntity::getTarget()
 {
   if(mJob)

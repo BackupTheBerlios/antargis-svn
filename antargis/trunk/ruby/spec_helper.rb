@@ -25,6 +25,7 @@ require 'ruby/antargislib.rb'
 	end
 	class Cross
 		@@called={}
+		@@backtrace={}
 		def initialize(target,function)
 			@target=target
 			@function=function
@@ -50,6 +51,7 @@ require 'ruby/antargislib.rb'
 				return @@called[callName]>0
 	
 			end
+			@callName=callName
 			mclass=@target
 			mclass=@target.class unless @target.is_a?(Class)
 	
@@ -65,10 +67,13 @@ require 'ruby/antargislib.rb'
 			"expected #{@proc.inspect} to call #{@expected}"
 		end
 		def negative_failure_message
-			"expected #{@proc.inspect} not to call #{@expected}"
+			bt=""
+			bt=@@backtrace[@callName].join("\n") if @@backtrace[@callName] 
+			"expected #{@proc.inspect} not to call #{@expected} BT:#{bt}"
 		end
 		def Cross.symCall(name)
 			@@called[name]+=1
+			@@backtrace[name]=caller
 			nil
 		end
 	end
@@ -82,3 +87,43 @@ require 'ruby/antargislib.rb'
 		Cross.new(target,function)
 	end
 #end
+	
+	
+class Observer
+	attr_accessor :ok
+	def initialize(object,methodName)
+		@methodName=methodName
+		@object=object
+		@ok=false
+	end
+	def run
+		method=@object.method(@methodName)
+		this=self
+		@object.class.send(:define_method,@methodName) {|*s|this.ok=true;puts "MUH";method.call(*s)} 
+		yield
+		@object.class.send(:define_method,@methodName,method)
+		@ok
+	end
+	def isNotCalled
+	   @ok==false
+	end
+	def isCalled
+	   @ok
+	end
+end	
+
+def observe(object,method,&block)
+	observer=Observer.new(object,method)
+	
+	observer.run {block.call(observer)}
+end
+
+#class A
+#	def b
+#		puts "B"
+#	end
+#end
+#
+#a=A.new
+#call=CalledIn.new(a,:b)
+#call.run {}

@@ -96,6 +96,7 @@ class AGEXPORT MoveJob:public Job
     {
       return mTargetEntity;
     }
+  AGVector2 getTargetPos2D() const;
   
  private:
   void moveBy(AntEntity *e,float ptime,float aspeed);

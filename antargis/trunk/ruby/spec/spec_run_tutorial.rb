@@ -91,19 +91,36 @@ describe 'Tutorial campaign' do
 		end
 		it "should be possible to defeat enemy" do
 	       clickAwayStory
-					hero=getHero
+			hero=getHero
 			enemy=getEnemy
 			hero.newHLFightJob(enemy)
 			hero.getJob.should be_a_kind_of(AntHeroFightJob)
 			enemy.hasHLJob.should be_false
 			while hero.hasHLJob
 				puts hero.getJob
-					advance
+				advance
 			end
 			clickAwayStory
+			advance
 		    @app.result.won.should == "won"
             map.getOwnHeroes.length.should == 2
 		end
+		
+		
+		it "should be possible to dismiss some people" do
+			hero=getHero
+			hero.setAggression(1)
+			oldMenCount=hero.getMen.length
+			oldMenCount.should > 1
+			hero.newHLDismissJob
+			while hero.hasHLJob
+				advance
+			end
+			menCount=hero.getMen.length
+			menCount.should < oldMenCount
+		end
+		
+		
 	
 		def getEnemies
 			enemies=map.getHeroes-map.getOwnHeroes

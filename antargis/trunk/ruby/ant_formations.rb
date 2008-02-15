@@ -28,10 +28,16 @@ class AntFormation
 	end
 	def calcFormation
 	end
+	
+	
 	def getPosition(man,pos)
 		if pos.nil?
 			raise "pos nil"
 		end
+		# clear cache if men have changed
+		if changedMen
+		  @cache={}
+	    end
 		if @cache.member?(man)
 			return @cache[man]+pos
 		end
@@ -50,7 +56,9 @@ class AntFormation
 			end
 		end
 		@cache[man]=r
-		return r+pos
+		ret= r+pos
+		puts "RET:#{ret}=#{r}+#{pos}"
+		ret
 	end
 	def getSortedMen
 		if @sorted.nil?
@@ -61,8 +69,16 @@ class AntFormation
 	def sort(men)
 		raise "not implemented"
 	end
+	
+
+    def changedMen
+        nmen=sort(@boss.getMen-[@boss])
+        @men!=nmen
+    end	
 end
 
+#
+# *a* has better weaponry than *b*
 def betterWeapons(a,b)
 	weapons=["bow","sword"]
 	weapons.each{|w|
@@ -72,15 +88,18 @@ def betterWeapons(a,b)
 		end
 	}
 	return 0
+
 end
 
 
 class AntFormationRest<AntFormation
 	def initialize(boss)
 		super(boss)
+		puts "new formation"
 	end
 
 	def calcFormation
+		puts "calcFormation"
 		@rpos={} # real positions as map from man to AGVector2
 		vpos={}  # virtual positions as map from man to pair of [row,line (circle)]
 
@@ -105,6 +124,7 @@ class AntFormationRest<AntFormation
 			row,line=vpos[m]
 			radius=line*1.2
 			angle=row.to_f/linesizes[line]*Math::PI*2
+			puts "#{m} #{row} #{line} #{angle} #{radius} #{linesizes[line]}"
 			@rpos[m]=AGVector2.new(Math::cos(angle)*radius,Math::sin(angle)*radius)
 			#puts "SET:#{m}"
 		}
@@ -112,14 +132,22 @@ class AntFormationRest<AntFormation
 		if @men.length>0
 			@inited=true
 		end
+		
+		@rpos.keys.each{|key|
+			puts "FORMAT #{key} : #{@rpos[key]}"
+		}
+		
 	end
 	def getPositionReal(man)
-		if (not @inited)
+		if (not @inited) or changedMen
 			calcFormation
 		end
 		return @rpos[man]
 	end
+		
 	private
+	
+
 	def getRowsOfLine(line)
 		{1=>10,2=>14,3=>20,4=>40}[line]
 	end

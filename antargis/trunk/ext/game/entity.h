@@ -276,6 +276,7 @@ class AGEXPORT AntEntity:public AGRubyObject
     AntMap *getMap();
 
     AntEntity *getTarget();
+    AGVector2 getTargetPos2D();
 
   private:
     void init();

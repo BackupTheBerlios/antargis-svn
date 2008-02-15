@@ -8,7 +8,7 @@ OUTER_VOL_SIZE=25 # size circle around camera describing volume descend
 # This should be used for all the entity-types.
 class AntRubyEntity<AntEntity
 	attr_accessor :birthday
-	attr_reader :uid
+	attr_reader :uid, :selected
 
 	# get the 3d-scene-object out of the Map-object
 	def getScene

@@ -163,14 +163,17 @@ class AntHero<AntBoss
 	end
 	def newHLBuildJob(pos,type)
 		@job.stopJob if @job
-		if true
+		puts "POSHL:#{pos} #{pos.class}"
+		if pos.is_a?(AGVector2) or pos.is_a?(AGVector3)
+			assert{pos.is_a?(AGVector2) or pos.is_a?(AGVector3)}
 			target=AntBuildingSite.new(getMap)
 			target.setPos(pos)
 			target.building=type
 			getMap.insertEntity(target)
 			@job=AntHeroBuildJob.new(self,target) #pos,type)
 		else
-			@job=AntHeroBuildJob.new(self,pos,type)
+			assert{pos.is_a?(AntBuildingSite)}
+			@job=AntHeroBuildJob.new(self,pos)
 		end
 		assignJob2All
 	end

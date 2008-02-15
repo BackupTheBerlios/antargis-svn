@@ -334,12 +334,13 @@ class AntHeroBuildJob<AntNewHLJob
 	attr_accessor :targetPos
 	attr_accessor :formatDir
 	attr_accessor :target
-
+    attr_accessor :near
+	
 	def initialize(hero,target)
 		@targetPos=target.getPos2D
 		@target=target
+        @near=4
 		super(hero)
-		@states[:moveComplete].near=4
 		
 		if (hero.getPos2D-target.getPos2D).length<4
 			state.moveDirectly			

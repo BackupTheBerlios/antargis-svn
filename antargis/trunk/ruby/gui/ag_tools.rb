@@ -57,10 +57,8 @@ module AGHandler
 	end
 	# event dispatcher
 	def signal(e)
-		pp e
 		@handlers||={}
 		mcaller=e.getCaller
-		pp mcaller
 		evName=makeHandlerName(mcaller,e.getName)
 		#callerName=e.getCaller.getName
 		#evName=callerName+":"+e.getName

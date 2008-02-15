@@ -54,7 +54,7 @@ def makeSpec(s)
 		s.platform = Gem::Platform::WIN32
 		s.name = 'antargis-win32'
 	else
-		s.platform = Gem::Platform::LINUX_586
+		s.platform = Gem::Platform::CURRENT
 		s.name = 'antargis-linux'
 	end
 	s.summary = "A real-time strategy game."
@@ -130,5 +130,5 @@ end
 
 
 desc "Build all"
-task :default=>[:starter,:library] do
+task :default=>[:starterPrg,:library] do
 end
