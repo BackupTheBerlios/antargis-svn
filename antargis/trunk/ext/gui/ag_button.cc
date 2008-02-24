@@ -222,7 +222,6 @@ bool AGButton::eventMouseButtonUp(AGEvent *e)
 void AGButton::setWidth(float w)
 {
   assert(w>=0);
-  ccdebug(w);
   AGWidget::setWidth(w);
   std::list<AGWidget*>::iterator i=mChildren.begin();
   for(;i!=mChildren.end();i++)

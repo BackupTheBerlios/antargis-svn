@@ -46,26 +46,25 @@ module LevelTesting
 		end
 	end
 	
-    def clickAwayStory
-        telltaleWidget=widget("TellTale")
+  def clickAwayStory
+	  telltaleWidget=widget("TellTale")
 		raise if telltaleWidget.nil?
-        return if telltaleWidget.nil?
+    return if telltaleWidget.nil?
+	
+    telltaleWidget.should_not be_nil
+    telltaleWidget.should be_visible
+    okButton=telltaleWidget.child("ok")
+    okButton.should_not be_nil
+    okButton.click
+    trials=0
 
-        telltaleWidget.should_not be_nil
-        telltaleWidget.should be_visible
-        okButton=telltaleWidget.child("ok")
-        okButton.should_not be_nil
-        okButton.click
-        trials=0
-		
-        while telltaleWidget.visible?
-            okButton.click
-            @app.step
-            trials+=1
-            trials.should <10
-        end
-
+    while telltaleWidget.visible?
+      okButton.click
+      @app.step
+      trials+=1
+      trials.should <10
     end
+  end
 	
 	
 	def advance(time=nil)
@@ -78,12 +77,12 @@ module LevelTesting
 		end while time>step
 	end	
 
-    def hero(name)
-    	h=map.getByName(name)
+  def hero(name)
+  	h=map.getByName(name)
 		h.should_not be_nil
 		h.should be_a_kind_of(AntHero)
 		h
-    end
+  end
 	def building(name)
 		b=map.getByName(name)
 		b.should_not be_nil
@@ -99,8 +98,11 @@ module LevelTesting
 	end
 	
 	def waitForStory
-		while not (widget("TellTale").valid and widget("TellTale").visible?)
+	  while not storyIsDisplayed
 			advance
 		 end
-	end		
+	end
+  def storyIsDisplayed
+    widget("TellTale").valid and widget("TellTale").visible?
+  end  
 end

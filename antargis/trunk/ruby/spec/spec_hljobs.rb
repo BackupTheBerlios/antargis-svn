@@ -1,3 +1,4 @@
+
 require 'ruby/spec/level_testing.rb'
 
 
@@ -83,8 +84,9 @@ end
 
 
 describe "Recruit job - aggression" do
+  include LevelTesting
 	it "men should fetch a few men if aggression is low"
-    it "men should fetch all men if aggression if high"
+  it "men should fetch all men if aggression if high"
 end
 
 
@@ -117,11 +119,22 @@ describe "Build job" do
 		rowen=hero("Rowen")
 		waitForStory
 		clickAwayStory
+    widget("MessageBox").should be_nil
 		rowen.newHLBuildJob(rowen.getPos2D+AGVector2.new(-5,-10),AntTower)
+    widget("MessageBox").should_not be_nil
+    widget("MessageBox").should be_visible
+    widget("MessageBox").child("text").getText.should ==_("You can't build on water.")
 		rowen.getJob.should_not be_a_kind_of(AntHeroBuildJob)
 	end
+  it "should use meshes correctly (in correct order)"
+  it "should find resources correctly"
+  
 	describe "Continue a build job" do
 		it "should work correctly"
 	end
-	
+  
+  it "should let people rest enough when aggression is low"
+	it "should let people rest at the correct position"
 end
+
+

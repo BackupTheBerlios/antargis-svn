@@ -1,10 +1,8 @@
 def getGrassMeshData(size,many=4,texture=nil,bush=false)
 	size=(size*10).to_i/10.0
 
-	if not $grassdata
-		$grassdata={}
-	end
-	if $grassdata[size]
+	$grassdata||={}
+ 	if $grassdata[size]
 		return $grassdata[size]
 	end
 	

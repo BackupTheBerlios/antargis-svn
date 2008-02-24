@@ -772,9 +772,12 @@ end
 #
 class HLJob_Recruit<HLJob_BaseState
 	MAX_DIST=0.01
+  
+  attr_reader :countRecruited
+  
 	def enter
 		@countTargetMen=target.getMen.length
-		@countRecruiting=0
+		#@countRecruiting=0
 		@countRecruited=0
 		@myPos=hero.getPos2D
 		hero.formation=AntFormationRest.new(hero)
@@ -783,10 +786,11 @@ class HLJob_Recruit<HLJob_BaseState
 
 	def ready
 		#return false
-		recruitedEnough=((@countRecruited>=howManyToRecruit) or nonToRecruitLeft)
+	  recruitedEnough=(((@countRecruited+countRecruiting)>=howManyToRecruit) or nonToRecruitLeft)
 		everyoneIsAtHisPlace=(hero.getMen).map{|man|(man.getPos2D-hero.getFormation(man,@myPos)).length}.max<MAX_DIST
 		heroIsAtHisPlace=(hero.getPos2D-hero.getFormation(hero,@myPos)).length<MAX_DIST
-		return (recruitedEnough and everyoneIsAtHisPlace)
+    allReady=(countRecruiting==0)
+		return (recruitedEnough and everyoneIsAtHisPlace and allReady)
 	end
 
 	def assign(man)
@@ -850,10 +854,14 @@ class HLJob_Recruit<HLJob_BaseState
 			puts "walkTo #{pos} #{man}"
 		end
 	end
+  
+  def assignedTargets
+    hero.getMen.map{|man|man.hlJobMode[:recruitTarget]}
+  end
 
 	def getAssignableTargets
 		# all target's men without already assigned and target(hero) itself
-		target.getMen-hero.getMen.map{|man|man.getTarget}-[target]
+	  target.getMen-hero.getMen.map{|man|man.getTarget}-[target]-assignedTargets
 	end
 
 	def nonToRecruitLeft
@@ -865,11 +873,13 @@ class HLJob_Recruit<HLJob_BaseState
 	end
 
 	def letRecruit(man)
+	  return false if countRecruited+countRecruiting>howManyToRecruit
 		target=getNext(man,getAssignableTargets)
 		if target
+      assert{countRecruited+countRecruiting<=howManyToRecruit}
 			man.hlJobMode[:recruitTarget]=target
 			man.newMoveJob(0,target,1)
-			@countRecruiting=@countRecruiting+1
+			#@countRecruiting=@countRecruiting+1
 			return true
 		end
 		false
@@ -882,9 +892,13 @@ class HLJob_Recruit<HLJob_BaseState
 		menList=menList-[hero] if hasAtLeastOneFollower
 		menList.reverse.each{|man|
 			letRecruit(man)
-			break if @countRecruiting>=howManyToRecruit
+			break if countRecruiting+countRecruited>=howManyToRecruit
 		}
 	end
+  
+  def countRecruiting
+    hero.getMen.select{|man|man.hlJobMode[:recruitTarget]}.length
+  end
 end
 
 begin

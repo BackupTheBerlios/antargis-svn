@@ -18,6 +18,9 @@
  * License along with this program.
  */
 
+
+// TODO: Is this still used ? 
+
 #include "ag_kill.h"
 #include "ag_debug.h"
 
@@ -25,42 +28,42 @@ AGInstanceKiller *mInstanceKiller=0;
 bool mIndirectInstance=false;
 
 void newInstanceKiller()
-{
-  assert(mInstanceKiller==0 || mIndirectInstance);
-  mInstanceKiller=new AGInstanceKiller;
-}
+  {
+    assert(mInstanceKiller==0 || mIndirectInstance);
+    mInstanceKiller=new AGInstanceKiller;
+  }
 void deleteInstanceKiller()
-{
-  assert(mInstanceKiller);
-  delete mInstanceKiller;
-}
+  {
+    assert(mInstanceKiller);
+    delete mInstanceKiller;
+  }
 
 AGInstanceKiller *getInstanceKiller()
-{
-  if(!mInstanceKiller)
-    {
-      mIndirectInstance=true;
-      newInstanceKiller();
-    }
-  assert(mInstanceKiller);
-  return mInstanceKiller;
-}
+  {
+    if(!mInstanceKiller)
+      {
+        mIndirectInstance=true;
+        newInstanceKiller();
+      }
+    assert(mInstanceKiller);
+    return mInstanceKiller;
+  }
 
 
 AGInstanceKiller::AGInstanceKiller()
-    {
-    }
+  {
+  }
 AGInstanceKiller::~AGInstanceKiller()
-    {
-      CTRACE;
-      std::set<AGInstanceBase*>::iterator i=bs.begin();
-      for(;i!=bs.end();i++)
-	{
-	  (*i)->kill();
-	  delete *i;
-	}
-      
-    }
+  {
+    CTRACE;
+    std::set<AGInstanceBase*>::iterator i=bs.begin();
+    for(;i!=bs.end();i++)
+      {
+        (*i)->kill();
+        delete *i;
+      }
+
+  }
 void AGInstanceKiller::reg(AGInstanceBase *b)
   {
     bs.insert(b);

@@ -6,7 +6,9 @@ Dir.chdir(File.split(File.split(__FILE__)[0])[0])
 
 task './starter'=>File.join("main","starter.cc") do
 	require 'antconfig.rb'
-	cmd="g++ -o starter main/starter.cc "+$CONFIG["CFLAGS"]+" "+$CONFIG["INCLUDEPATH"]+" "+`sdl-config --libs`.chomp+" -l"+CONFIG["RUBY_SO_NAME"]
+	#debug="antargis.bundle -g"
+	debug=""
+	cmd="g++ -o starter main/starter.cc #{debug} "+$CONFIG["CFLAGS"]+" "+$CONFIG["INCLUDEPATH"]+" "+`#{$CONFIG["SDL_CONFIG"]} --libs`.chomp+" -l"+CONFIG["RUBY_SO_NAME"]
 	cmd.gsub!("-arch ppc","")
 	sh cmd
 end

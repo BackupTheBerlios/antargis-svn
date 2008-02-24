@@ -334,8 +334,8 @@ class AntHeroBuildJob<AntNewHLJob
 	attr_accessor :targetPos
 	attr_accessor :formatDir
 	attr_accessor :target
-    attr_accessor :near
-	
+  attr_accessor :near
+
 	def initialize(hero,target)
 		@targetPos=target.getPos2D
 		@target=target

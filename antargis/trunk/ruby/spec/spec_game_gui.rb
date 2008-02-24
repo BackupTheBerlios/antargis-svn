@@ -1,3 +1,5 @@
+#if false
+
 require 'ruby/spec/level_testing.rb'
 
 describe "Aggression buttons" do
@@ -69,3 +71,23 @@ describe AntNameDisplay do
 	it "should switch text color when enemy is pwned"
 end
 
+describe AntInfoBox do
+    include LevelTesting
+    before(:all) do
+      getTestApp(:tutorial0)
+      waitForStory
+      clickAwayStory
+    end
+
+	it "should be displayed when hero is badly hurt" do
+	   widget("InfoBox").should be_nil#
+	   hero("Rowen").decEnergy(0.9)
+	   advance
+       widget("InfoBox").should_not be_nil
+       widget("InfoBox").should be_visible
+	end
+end
+
+
+
+#end

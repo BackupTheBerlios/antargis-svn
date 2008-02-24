@@ -7,112 +7,110 @@
 SceneBase::SceneBase(int w,int h):
   mTree(new QuadTree<SceneNode>(AGRect2(AGVector2(),AGVector2(w,h)))),
   mCamera(w,h)
-{
-}
+  {
+  }
 
 
 SceneBase::~SceneBase()
-{
-  // tell nodes, that I'm no longer there :-)
-  for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    (*i)->resetScene(); 
+  {
+    // tell nodes, that I'm no longer there :-)
+    for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
+      (*i)->resetScene(); 
 
-  delete mTree;
-}
+    delete mTree;
+  }
 
 
 
 
 
 void SceneBase::addNode(SceneNode *node)
-{
-  //  std::cout<<"addNode:(this:"<<this<<") "<<node<<"  "<<typeid(*node).name()<<std::endl;
-  if(mNodeSet.find(node)==mNodeSet.end())
-    {
-      node->setScene(this);
+  {
+    //  std::cout<<"addNode:(this:"<<this<<") "<<node<<"  "<<typeid(*node).name()<<std::endl;
+    if(mNodeSet.find(node)==mNodeSet.end())
+      {
+        node->setScene(this);
 
-      mNodes.push_back(node);
-      mNodeSet.insert(node);
-      assert(node->getScene()==this);
-      mTree->insert(node);
-    }
-}
+        mNodes.push_back(node);
+        mNodeSet.insert(node);
+        assert(node->getScene()==this);
+        mTree->insert(node);
+      }
+  }
 
 
 
 void SceneBase::updatePos(SceneNode *node)
-{
-  if(mNodeSet.find(node)==mNodeSet.end())
-    throw std::string("Dont know about this!");
-  mTree->insert(node);
-}
+  {
+    if(mNodeSet.find(node)==mNodeSet.end())
+      throw std::string("Dont know about this!");
+    mTree->insert(node);
+  }
 
 void SceneBase::prepareUpdate(SceneNode *node)
-{
-  if(mNodeSet.find(node)==mNodeSet.end())
-    throw std::string("Dont know about this!");
-  mTree->remove(node);
-}
+  {
+    if(mNodeSet.find(node)==mNodeSet.end())
+      throw std::string("Dont know about this!");
+    mTree->remove(node);
+  }
 
 
 void SceneBase::removeNode(SceneNode *node)
-{
-  //  std::cout<<"remove node:"<<node<<std::endl;
-  if(mNodeSet.find(node)!=mNodeSet.end())
-    {
-      Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
-      mNodes.erase(i);
-      mNodeSet.erase(node);
-      assert(node->getScene()==this);
-      node->resetScene();
-      bool ok=(mTree->remove(node));
-      assert(ok);
-    }
-  else
-    {
-      throw std::runtime_error("Trying to remove unknown node");
-    }
-}
+  {
+    //  std::cout<<"remove node:"<<node<<std::endl;
+    if(mNodeSet.find(node)!=mNodeSet.end())
+      {
+        Nodes::iterator i=std::find(mNodes.begin(),mNodes.end(),node);
+        mNodes.erase(i);
+        mNodeSet.erase(node);
+        assert(node->getScene()==this);
+        node->resetScene();
+        bool ok=(mTree->remove(node));
+        assert(ok);
+      }
+    else
+      {
+        throw std::runtime_error("Trying to remove unknown node");
+      }
+  }
 
 void SceneBase::clear()
-{
-  for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
-    {
-      assert((*i)->getScene()==this);
-      (*i)->resetScene();
-    }
-  TRACE;
-  mNodes.clear();
-  mNodeSet.clear();
-  mTree->clear();
-}
+  {
+    for(std::vector<SceneNode*>::iterator i=mNodes.begin();i!=mNodes.end();i++)
+      {
+        assert((*i)->getScene()==this);
+        (*i)->resetScene();
+      }
+    TRACE;
+    mNodes.clear();
+    mNodeSet.clear();
+    mTree->clear();
+  }
 
-  // (mx,my,0)
+// (mx,my,0)
 void SceneBase::setCamera(AGVector4 v)
-{
-  mCamera.setPosition(v.dim3());
-}
+  {
+    mCamera.setPosition(v.dim3());
+  }
 
 void SceneBase::advance(float time)
-{
-  STACKTRACE; 
+  {
+    STACKTRACE; 
 
-  //  if(!mEnabled)
-  //    return;
-  // advance only in view
+    //  if(!mEnabled)
+    //    return;
+    // advance only in view
 
-  SceneNodeList l=getCurrentNodes();
+    SceneNodeList l=getCurrentNodes();
 
-  for(SceneNodeList::iterator i=l.begin();i!=l.end();i++)
-    {
-      if((*i)->visible())
-	{
-	  //	  std::cout<<(*i)<<std::endl;
-	  //	  std::cout<<(typeid(**i).name())<<std::endl;
-	  (*i)->advance(time);
-	}
-    }
-}
+    for(SceneNodeList::iterator i=l.begin();i!=l.end();i++)
+      {
+        if((*i)->visible())
+          {
+            (*i)->advance(time);
+          }
+      }
+  }
 
 float SceneBase::width() const
 {
@@ -124,16 +122,16 @@ float SceneBase::height() const
 }
 
 void SceneBase::mark()
-{
-  //  std::cout<<"SceneBase::mark()"<<std::endl;
-  SceneBase::Nodes::iterator i=mNodes.begin();
+  {
+    //  std::cout<<"SceneBase::mark()"<<std::endl;
+    SceneBase::Nodes::iterator i=mNodes.begin();
 
-  for(;i!=mNodes.end();i++)
-    {
-      //  std::cout<<"scenebase-mark:"<< this<<"  "<<*i<<std::endl;
-      markObject(*i);
-    }
-}
+    for(;i!=mNodes.end();i++)
+      {
+        //  std::cout<<"scenebase-mark:"<< this<<"  "<<*i<<std::endl;
+        markObject(*i);
+      }
+  }
 
 AGVector4 SceneBase::getCamera() const
 {
@@ -141,12 +139,12 @@ AGVector4 SceneBase::getCamera() const
 }
 
 AntCamera &SceneBase::getCameraObject()
-{
-  return mCamera;
-}
+  {
+    return mCamera;
+  }
 
 SceneNodeList SceneBase::getCurrentNodes()
-{
-  throw std::runtime_error("not implemented!");
-  return SceneNodeList();
-}
+  {
+    throw std::runtime_error("not implemented!");
+    return SceneNodeList();
+  }

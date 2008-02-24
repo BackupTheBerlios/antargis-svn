@@ -132,3 +132,6 @@ end
 desc "Build all"
 task :default=>[:starterPrg,:library] do
 end
+
+task :all=>:default do
+end

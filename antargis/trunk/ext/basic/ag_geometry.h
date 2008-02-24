@@ -697,11 +697,13 @@ class AGEXPORT AGBox3
   bool mValid;
 };
 
+#ifndef SWIG
 AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector2&v);
 AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector3&v);
 AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector4&v);
 AGEXPORT std::ostream &operator<<(std::ostream &o,const AGRect2&v);
 AGEXPORT std::ostream &operator<<(std::ostream &o,const AGBox3&v);
+#endif
 
 #include "ag_geometry_inline.cc"
 

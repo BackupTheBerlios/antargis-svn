@@ -29,8 +29,8 @@ MB_CANCEL=2
 MB_YES=4
 MB_NO=8
 
-def messageBox(title,text,flags,&block)
-	mw=getApplication.getMainWidget
+def messageBox(app,title,text,flags,&block)
+	mw=app.getMainWidget
 	w=MessageBox.new(mw,"data/gui/layout/messagebox.xml")
 	w.block=block
 	w.getChild("title").setText(title)

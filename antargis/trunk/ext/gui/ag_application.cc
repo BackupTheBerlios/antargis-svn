@@ -34,18 +34,18 @@
 #include <ruby.h>
 
 void disableKeyrepeat()
-{
-  SDL_EnableKeyRepeat(0,0);
-}
+  {
+    SDL_EnableKeyRepeat(0,0);
+  }
 
 AGApplication *gApplication=0;
 
 AGVector2 gAppCursorPos;
 
 AGApplication *getApplication()
-{
-  return gApplication;
-}
+  {
+    return gApplication;
+  }
 
 
 AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTooltip(0),mOverlay(0)
@@ -61,32 +61,32 @@ AGApplication::AGApplication():mRunning(true),mIdleCalls(true),mainWidget(0),mTo
 }
 
 AGApplication::~AGApplication()
-{
-  CTRACE;
-  delete mCursor;
-}
+  {
+    CTRACE;
+    delete mCursor;
+  }
 
 void AGApplication::setKeyRepeat(bool enable)
-{
-  if(enable)
-    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
-  else
-    SDL_EnableKeyRepeat(0,0);
-}
+  {
+    if(enable)
+      SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
+    else
+      SDL_EnableKeyRepeat(0,0);
+  }
 
 
 void AGApplication::setMainWidget(AGWidget *w)
-{
-  mainWidget=w;
-  setOverlay(0);
-  if(w)
-    w->redraw();
-}
+  {
+    mainWidget=w;
+    setOverlay(0);
+    if(w)
+      w->redraw();
+  }
 
 AGWidget *AGApplication::getMainWidget()
-{
-  return mainWidget;
-}
+  {
+    return mainWidget;
+  }
 
 /**
  * \brief the main-loop of each application
@@ -96,59 +96,59 @@ AGWidget *AGApplication::getMainWidget()
  */
 
 bool AGApplication::run() 
-{
-  STACKTRACE; 
-  Uint32 last,now;
-  SDL_Event event;
-  float t;
-  mRunning=true;
+  {
+    STACKTRACE; 
+    Uint32 last,now;
+    SDL_Event event;
+    float t;
+    mRunning=true;
 
-  gApplication=this;
-  
-  flushEventQueue();
-  last=now=SDL_GetTicks();
+    gApplication=this;
 
-  size_t loopCount=0;
-  
-  while(mRunning)
-    {
-      STACKTRACE; 
-      
-      gApplication=this;
+    flushEventQueue();
+    last=now=SDL_GetTicks();
 
+    size_t loopCount=0;
+
+    while(mRunning)
       {
-	// event handling
-	STACKTRACE;
-	// check for finished music
-	getMain()->repeatedCalls();
-	//	getSoundManager()->checkFinished();
-	
-	now=SDL_GetTicks();
-	/*
+        STACKTRACE; 
+
+        gApplication=this;
+
+          {
+            // event handling
+            STACKTRACE;
+            // check for finished music
+            getMain()->repeatedCalls();
+            //	getSoundManager()->checkFinished();
+
+            now=SDL_GetTicks();
+            /*
 	// pull motion events (may flood the eventqueue)
 		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
 	  ;
-	*/
-	clearOldMousePosition();
-	//	dbout(2,"loop pre-event:"<<loopCount);
-	event=getNewEvent();
-	if(eventOk(event))
-	  {
-	    do
-	      {
-		//		dbout(2,"eventok  "<<toString(&event));
-		doEvent(event);
-		if(mIdleCalls)
-		  {
-		    //		    dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
-		    event=getNewEvent();
-		  }
-		else
-		  resetEvent(event);
-	      }while(eventOk(event));
-	  } 
-	//	dbout(2,"loop post-event:"<<loopCount);
-	/*
+             */
+            clearOldMousePosition();
+            //	dbout(2,"loop pre-event:"<<loopCount);
+            event=getNewEvent();
+            if(eventOk(event))
+              {
+                do
+                  {
+                    //		dbout(2,"eventok  "<<toString(&event));
+                    doEvent(event);
+                    if(mIdleCalls)
+                      {
+                        //		    dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
+                        event=getNewEvent();
+                      }
+                    else
+                      resetEvent(event);
+                  }while(eventOk(event));
+              } 
+            //	dbout(2,"loop post-event:"<<loopCount);
+            /*
 	if(mIdleCalls) 
 	  {
 	    if (SDL_PollEvent(&event) == 0) 
@@ -160,7 +160,7 @@ bool AGApplication::run()
 		    doEvent(&event);
 		  }while(SDL_PollEvent(&event)!=0);
 	      }
-	    
+
 	  } 
 	else 
 	  {
@@ -168,135 +168,135 @@ bool AGApplication::run()
 	    doEvent(&event);
 	    }*/
 
-	if(mDemoTime>=0)
-	  {
-	    t=mDemoTime;
-	    mDemoTime=-1;
-	    dbout(2,"demo time:"<<t);
-	  }
-	else
-	  {
-	    t=(now-last)/1000.0;
-	  }
-	if(mainWidget)
-	  mainWidget->sigTick(t);
-	
-	dbout(2,"frame events:"<<t);
-	eventPrepareFrame(t);
+            if(mDemoTime>=0)
+              {
+                t=mDemoTime;
+                mDemoTime=-1;
+                dbout(2,"demo time:"<<t);
+              }
+            else
+              {
+                t=(now-last)/1000.0;
+              }
+            if(mainWidget)
+              mainWidget->sigTick(t);
 
-	eventFrame(t);
+            dbout(2,"frame events:"<<t);
+            eventPrepareFrame(t);
+
+            eventFrame(t);
+          }
+            {
+              // drawing
+              STACKTRACE;
+                {
+                  STACKTRACE;
+                  prepareDraw();
+                }
+                  {
+                    STACKTRACE;
+                    draw();
+                  }
+            }
+
+            eventFrameEnd(t);
+            last=now;
+
+            loopCount++;
+            //      dbout(2,"Running:"<<mRunning);
       }
-      {
-	// drawing
-	STACKTRACE;
-	{
-	  STACKTRACE;
-	  prepareDraw();
-	}
-	{
-	  STACKTRACE;
-	  draw();
-	}
-      }
-      
-      eventFrameEnd(t);
-      last=now;
+    gApplication=0;
 
-      loopCount++;
-      //      dbout(2,"Running:"<<mRunning);
-    }
-  gApplication=0;
-
-  return true;
-}
+    return true;
+  }
 
 void AGApplication::setDemoTime(float t)
-{
-  dbout(2,"demoTime:"<<t);
-  mDemoTime=t;
-}
+  {
+    dbout(2,"demoTime:"<<t);
+    mDemoTime=t;
+  }
 
 
 SDL_Event AGApplication::getNewEvent()
-{
-  SDL_Event mEvent;
-  resetEvent(mEvent);
-  // pull motion events (may flood the eventqueue)
-  while(SDL_PeepEvents(&mEvent, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
-    ;
-  
-  if(mIdleCalls) 
-    {
-      if (SDL_PollEvent(&mEvent) == 0) 
-	{
-	  resetEvent(mEvent);
-	  return mEvent;
-	}
-    } 
-  else 
-    SDL_WaitEvent(&mEvent);
-  return mEvent;
-}
+  {
+    SDL_Event mEvent;
+    resetEvent(mEvent);
+    // pull motion events (may flood the eventqueue)
+    while(SDL_PeepEvents(&mEvent, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
+      ;
+
+    if(mIdleCalls) 
+      {
+        if (SDL_PollEvent(&mEvent) == 0) 
+          {
+            resetEvent(mEvent);
+            return mEvent;
+          }
+      } 
+    else 
+      SDL_WaitEvent(&mEvent);
+    return mEvent;
+  }
 
 
 
 bool AGApplication::doEvent(const SDL_Event &event) 
-{
-  STACKTRACE;
-  SDL_Event e;
-  
-  // eat up old mouse motion events
-  while(SDL_PeepEvents(&e, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0);
-  
-  AGEvent *message=newEvent(this,"",event);
-  bool processed=false;
-  if(mOverlay)
-    processed=mOverlay->processEvent(message);
+  {
+    STACKTRACE;
+    SDL_Event e;
 
-  if(!processed)
-    {
-      if(!processed && mainWidget)
-	processed=mainWidget->processEvent(message);
+    // eat up old mouse motion events
+    while(SDL_PeepEvents(&e, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0);
 
-      if(!processed)
-	processed=processEvent(message);
-    }
-  
-  delete message;
-  return processed;
-}
+    AGEvent *message=newEvent(this,"",event);
+    bool processed=false;
+    if(mOverlay)
+      processed=mOverlay->processEvent(message);
+
+    if(!processed)
+      {
+        if(!processed && mainWidget)
+          processed=mainWidget->processEvent(message);
+
+        if(!processed)
+          processed=processEvent(message);
+      }
+
+    delete message;
+    return processed;
+  }
 
 void AGApplication::clearOldMousePosition()
-{
-}
+  {
+  }
 void AGApplication::drawCursor()
-{
-  if(!videoInited())
-    return;
-  AGPainter p;
-  if(mCursor)
-    {
-      mCursorOld=AGRect2(gAppCursorPos[0],gAppCursorPos[1],mCursor->width(),mCursor->height());
-      p.blit(*mCursor,mCursorOld);
-    }
+  {
+    if(!videoInited())
+      return;
+    AGPainter p;
+    if(mCursor)
+      {
+        mCursorOld=AGRect2(gAppCursorPos[0],gAppCursorPos[1],mCursor->width(),mCursor->height());
+        p.blit(*mCursor,mCursorOld);
+      }
 
-}
+  }
 
 void AGApplication::flushEventQueue()
-{
-}
- 
+  {
+  }
+
 bool AGApplication::eventQuit(AGEvent *m)
-{
-  CTRACE;
-  mRunning=false;
-  return false;
-}
+  {
+    CTRACE;
+    mRunning=false;
+    return false;
+  }
 
 bool AGApplication::eventIdle()
-{
-  return false;
-}
+  {
+    return false;
+  }
 
 
 /**
@@ -305,19 +305,19 @@ bool AGApplication::eventIdle()
    prepareDraw runs prepareDraw for the main-widget, which itself runs
    prepareDraw recursively. This functions are meant to prepare possible
    texture contents and other things, that might be updated in each frame.
-*/
+ */
 void AGApplication::prepareDraw()
-{
-  STACKTRACE; 
+  {
+    STACKTRACE; 
 
-  if(mainWidget)
-    {
-      mainWidget->prepareDrawAll();
-      mainWidget->useTexturesRecursive();
-    }
-  if(mOverlay)
-    mOverlay->prepareDrawAll();
-}  
+    if(mainWidget)
+      {
+        mainWidget->prepareDrawAll();
+        mainWidget->useTexturesRecursive();
+      }
+    if(mOverlay)
+      mOverlay->prepareDrawAll();
+  }  
 
 
 AGWidget *pLastDrawn=0;
@@ -330,12 +330,12 @@ AGWidget *pLastDrawn=0;
  */
 
 void AGApplication::redraw()
-{
-  pLastDrawn=0;
+  {
+    pLastDrawn=0;
 
-  if(mainWidget)
-    mainWidget->redraw();
-}
+    if(mainWidget)
+      mainWidget->redraw();
+  }
 
 /**
  * \brief calls the draw-function of the main-widget
@@ -346,102 +346,102 @@ void AGApplication::redraw()
  */
 
 void AGApplication::draw()
-{
-  CTRACE;
-  if(delCue.size()>0)
-    {
-      for(std::list<AGWidget*>::iterator i=delCue.begin();i!=delCue.end();i++)
-	if(*i)
-	  saveDelete(*i);
-      delCue.clear();
-    }
+  {
+    CTRACE;
+    if(delCue.size()>0)
+      {
+        for(std::list<AGWidget*>::iterator i=delCue.begin();i!=delCue.end();i++)
+          if(*i)
+            saveDelete(*i);
+        delCue.clear();
+      }
 
-  if(!videoInited())
-    return;
+    if(!videoInited())
+      return;
 
-  bool oldClippingTechnique=false;
-  AGClipping clip;
+    bool oldClippingTechnique=false;
+    AGClipping clip;
 
-  STACKTRACE;
-  beginRender();
+    STACKTRACE;
+    beginRender();
 
-//  cdebug("mainWidget:"<<mainWidget);
-  if(mainWidget)
-    {
-      getScreen().begin();
-      
-      AGPainter *p;
-      AGClipPaintTarget paintTarget(&getScreen());
+    //  cdebug("mainWidget:"<<mainWidget);
+    if(mainWidget)
+      {
+        getScreen().begin();
 
-      if(opengl())
-	p=new AGPainter(getScreen());
-      else
-	p=new AGPainter(paintTarget);
+        AGPainter *p;
+        AGClipPaintTarget paintTarget(&getScreen());
 
-      clip.exclude(mainWidget->getScreenRect());
-      if(pLastDrawn==mainWidget && !opengl())
-	{
-	  if(oldClippingTechnique)
-	    {
-	      AGRect2 r=mainWidget->getChangeRect();
-	      if(mCursor)
-		r+=mCursorOld;
-	      
-	      p->clip(r);
-	    }
-	  else
-	    {
-	      // FIXME: do some advanced clipping
-	      mainWidget->acquireClipping(clip);
-	    }
-	}
-      else
-	{
-	  clip.include(mainWidget->getScreenRect());
-	}
+        if(opengl())
+          p=new AGPainter(getScreen());
+        else
+          p=new AGPainter(paintTarget);
 
-  //    cdebug("CLIP:"<<clip.toString());
-      paintTarget.clip(clip);
-      mainWidget->drawAll(*p);
+        clip.exclude(mainWidget->getScreenRect());
+        if(pLastDrawn==mainWidget && !opengl())
+          {
+            if(oldClippingTechnique)
+              {
+                AGRect2 r=mainWidget->getChangeRect();
+                if(mCursor)
+                  r+=mCursorOld;
 
-      if(mTooltip)
-	{
-	  AGPainter p;
-	  mTooltip->drawAll(p);
-	}
-      if(mOverlay)
-	{
-	  AGPainter p;
-	  mOverlay->drawAll(p);
-	}
+                p->clip(r);
+              }
+            else
+              {
+                // FIXME: do some advanced clipping
+                mainWidget->acquireClipping(clip);
+              }
+          }
+        else
+          {
+            clip.include(mainWidget->getScreenRect());
+          }
 
-      pLastDrawn=mainWidget;
+        //    cdebug("CLIP:"<<clip.toString());
+        paintTarget.clip(clip);
+        mainWidget->drawAll(*p);
 
-      delete p;
-    }
-  else
-    cdebug("no mainwidget");
-  drawCursor();
+        if(mTooltip)
+          {
+            AGPainter p;
+            mTooltip->drawAll(p);
+          }
+        if(mOverlay)
+          {
+            AGPainter p;
+            mOverlay->drawAll(p);
+          }
 
-  std::list<AGRect2> changeList;
-  if(mainWidget)
-    {
-      changeList=mainWidget->aquireChanges();
-      mainWidget->clearChangeRects();
-    }
-  if(opengl())// || true)
-    getScreen().flip();
-  else
-    {
-      std::vector<AGRect2> changeV=clip.clip(mainWidget->getScreenRect());
-      changeList.clear();
-      std::copy(changeV.begin(),changeV.end(),std::back_inserter(changeList));
-      getScreen().update(changeList);
-    }
+        pLastDrawn=mainWidget;
 
-  endRender();
-//  cdebug("end render");
-}
+        delete p;
+      }
+    else
+      cdebug("no mainwidget");
+    drawCursor();
+
+    std::list<AGRect2> changeList;
+    if(mainWidget)
+      {
+        changeList=mainWidget->aquireChanges();
+        mainWidget->clearChangeRects();
+      }
+    if(opengl())// || true)
+      getScreen().flip();
+    else
+      {
+        std::vector<AGRect2> changeV=clip.clip(mainWidget->getScreenRect());
+        changeList.clear();
+        std::copy(changeV.begin(),changeV.end(),std::back_inserter(changeList));
+        getScreen().update(changeList);
+      }
+
+    endRender();
+    //  cdebug("end render");
+  }
 
 /**
  * \brief quit the application
@@ -452,48 +452,48 @@ void AGApplication::draw()
  */
 
 void AGApplication::tryQuit()
-{
-  CTRACE;
-  mRunning=false;
-}
+  {
+    CTRACE;
+    mRunning=false;
+  }
 
 bool AGApplication::eventKeyDown(AGEvent *m)
-{
-  if(m->isSDLEvent())
-    {
-      SDLKey k=m->getKey();
-      SDLMod mod=m->getMod();
+  {
+    if(m->isSDLEvent())
+      {
+        SDLKey k=m->getKey();
+        SDLMod mod=m->getMod();
 
-      if(k==SDLK_RETURN && ((mod&KMOD_LALT)||(mod&KMOD_RALT)))
-	{
-	  getVideo()->toggleFull();
-	  eventChangedRes();
-	  redraw();
-	}
-      else if(k==SDLK_F10)
-	tryQuit();
-    }
-  return false;
-}
+        if(k==SDLK_RETURN && ((mod&KMOD_LALT)||(mod&KMOD_RALT)))
+          {
+            getVideo()->toggleFull();
+            eventChangedRes();
+            redraw();
+          }
+        else if(k==SDLK_F10)
+          tryQuit();
+      }
+    return false;
+  }
 
 void AGApplication::eventChangedRes()
-{
-}
+  {
+  }
 
 bool AGApplication::eventPrepareFrame(float pTime)
-{
-  return false;
-}
+  {
+    return false;
+  }
 
 
 bool AGApplication::eventFrame(float pTime)
-{
-  return false;
-}
+  {
+    return false;
+  }
 bool AGApplication::eventFrameEnd(float pTime)
-{
-  return false;
-}
+  {
+    return false;
+  }
 
 long AGApplication::getTicks() const
 {
@@ -502,76 +502,76 @@ long AGApplication::getTicks() const
 
 /// delays execution for ms milliseconds. This can be used to decrease framerate and cpu-load.
 void AGApplication::delay(int ms)
-{
-  dbout(2,"delay:"<<ms);
-  SDL_Delay(ms);
-}
+  {
+    dbout(2,"delay:"<<ms);
+    SDL_Delay(ms);
+  }
 
 
 /// mark my mainWidget and my tooltip, as they can be ruby-objects
 void AGApplication::mark()
-{
-  //  CTRACE;
-  if(mainWidget)
-    markObject(mainWidget);
-  if(mTooltip)
-    markObject(mTooltip);
-}
+  {
+    CTRACE;
+    if(mainWidget)
+      markObject(mainWidget);
+    if(mTooltip)
+      markObject(mTooltip);
+  }
 
 /// this function sets the current tooltip, which is display above all widgets
 void AGApplication::setTooltip(AGTooltip *pTooltip)
-{
-  delete mTooltip;
-  mTooltip=pTooltip;
-    
-}
+  {
+    delete mTooltip;
+    mTooltip=pTooltip;
+
+  }
 
 /// this functions resets the tooltip pTooltip.
 /// @param pTooltip a tooltip of a widget
 void AGApplication::resetTooltip(AGTooltip *pTooltip)
-{
-  if(pTooltip==mTooltip)
-    {
-      delete mTooltip;
-      mTooltip=0;
-    }
-}
+  {
+    if(pTooltip==mTooltip)
+      {
+        delete mTooltip;
+        mTooltip=0;
+      }
+  }
 
 AGWidget *AGApplication::getOverlay()
-{
-  return mOverlay;
-}
+  {
+    return mOverlay;
+  }
 
 
 void AGApplication::setOverlay(AGWidget *pOverlay)
-{
-  CTRACE;
-  if(mOverlay)
-    delCue.push_back(mOverlay);
-  mOverlay=pOverlay;
-}
+  {
+    CTRACE;
+    if(mOverlay)
+      delCue.push_back(mOverlay);
+    mOverlay=pOverlay;
+  }
 
 
 bool AGApplication::eventMouseMotion(AGEvent *m)
-{
-  gAppCursorPos=m->getMousePosition();
-  return AGMessageObject::eventMouseMotion(m);
-}
+  {
+    gAppCursorPos=m->getMousePosition();
+    return AGMessageObject::eventMouseMotion(m);
+  }
 
 /// this function disables hardware cursor and shows software-cursor instead
 void AGApplication::setCursor(const AGTexture &pTexture)
-{
-  mCursor=new AGTexture(pTexture);
-  SDL_ShowCursor(0);
-}
+  {
+    mCursor=new AGTexture(pTexture);
+    SDL_ShowCursor(0);
+  }
 
 /// this function enables hardware-cursor
 void AGApplication::setNormalCursor()
-{
-  SDL_ShowCursor(1);
-  delete mCursor;
-  mCursor=0;
-}
+  {
+    SDL_ShowCursor(1);
+    delete mCursor;
+    mCursor=0;
+  }
 
 bool AGApplication::hardwareCursor() const
 {

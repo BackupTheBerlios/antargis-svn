@@ -120,4 +120,7 @@ class AGEXPORT AGRubyObject
 AGEXPORT void general_markfunc(void *ptr);
 AGEXPORT bool saveDelete(AGRubyObject *o);
 
+AGEXPORT void *getAddressOfRubyObject(AGRubyObject *object);
+AGEXPORT bool rubyObjectExists(void *o);
+
 #endif

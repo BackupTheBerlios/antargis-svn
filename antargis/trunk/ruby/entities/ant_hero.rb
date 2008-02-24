@@ -163,6 +163,15 @@ class AntHero<AntBoss
 	end
 	def newHLBuildJob(pos,type)
 		@job.stopJob if @job
+    
+    if pos.is_a?(AGVector2) or pos.is_a?(AGVector3) 
+	    if getMap.getHeight(pos[0],pos[1])<=0
+	      # TODO: should view an error message
+	      messageBox(getMap.getApp,_("Warning"),_("You can't build on water."),MB_OK)
+	      return
+	    end
+    end
+    
 		puts "POSHL:#{pos} #{pos.class}"
 		if pos.is_a?(AGVector2) or pos.is_a?(AGVector3)
 			assert{pos.is_a?(AGVector2) or pos.is_a?(AGVector3)}

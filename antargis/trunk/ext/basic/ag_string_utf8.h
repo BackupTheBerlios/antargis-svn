@@ -50,7 +50,10 @@ class AGEXPORT AGStringUtf8Iterator
 class AGEXPORT AGStringUtf8
 {
  public:
-  static const size_t npos = static_cast<size_t>(-1);
+#ifdef SWIG
+   %rename(Npos) npos;
+#endif
+   static const size_t npos = static_cast<size_t>(-1);
 
   AGStringUtf8();
 #ifndef SWIG

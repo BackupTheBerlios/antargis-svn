@@ -1,3 +1,5 @@
+#if false
+
 Dir.chdir(File.split(__FILE__)[0])
 
 require '../spec_helper.rb'
@@ -67,3 +69,4 @@ describe 'Main-Menu' do
 	end
 end
 
+#end

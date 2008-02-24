@@ -64,13 +64,16 @@ class AntRubyMap<AntMap
 		assert{w.is_a?(Numeric)}
 		assert{h.is_a?(Numeric)}
 
-		if pScene.nil?
-			require 'ant_mock.rb'
-		end
+    # TODO: remove that ???
+		#if pScene.nil?
+		#	require 'ant_mock.rb'
+		#end
 
 		super(pScene,w,h)
 		@pause=false # is game paused
 		@app=app
+    
+    @classMapCache=nil
 
 		@@systemTime=0.0  # systemTime is needed for the playing of sounds - so they won't be played too often
 		@curTime=0.0      # curTime holds the current "date" of the world; the age of entities is measures by this
@@ -445,6 +448,10 @@ class AntRubyMap<AntMap
 			e.is_a?(type)
 		}
 	end
+  
+  def getApp
+    @app
+  end
 
 private	
 	def checkTriggers
