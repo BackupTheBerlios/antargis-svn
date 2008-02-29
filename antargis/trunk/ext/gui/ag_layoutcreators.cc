@@ -23,151 +23,147 @@ AGWidget *parseNode(AGWidget *pParent,const Node &pNode);
 // Layout-Factories
 class AGButtonLayoutCreator:public AGLayoutCreator
 {
- public:
+public:
   REGISTER_COMPONENT(Button,"button")
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGButton *b;
-    AGStringUtf8 caption=_(pNode.get("caption"));
-    b=new AGButton(pParent,pRect,AGStringUtf8(caption));
-    setResult(b);
-    AGFilename captionImage=pNode.get("caption-image");
-    if(captionImage.length())
-      b->setSurface(AGSurface::load(captionImage),false);
-    if(pNode.get("enabled")=="false")
-      b->setEnabled(false);
+    {
+      AGButton *b;
+      AGStringUtf8 caption=_(pNode.get("caption"));
+      b=new AGButton(pParent,pRect,AGStringUtf8(caption));
+      setResult(b);
+      AGFilename captionImage=pNode.get("caption-image");
+      if(captionImage.length())
+        b->setSurface(AGSurface::load(captionImage),false);
+      if(pNode.get("enabled")=="false")
+        b->setEnabled(false);
 
-    b->setTheme(pNode.get("theme"));
-  }
+      b->setTheme(pNode.get("theme"));
+    }
 };
 
 
 class AGTableLayoutCreator:public AGLayoutCreator
 {
- public:
+public:
   REGISTER_COMPONENT(Table,"table")
 
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGWidget *w=parseTable(pParent,pNode,pRect);
-    pParent->addChild(w);
-    w=0;
-    setResult(0);
-  }
-
-AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom)
-{
-  AGTable *t;
-  t=new AGTable(pParent,geom);
-  setResult(t); // set result - so garbage collector gets to know this one
-
-  int w,h;
-  w=pNode.get("cols").toInt();
-  h=pNode.get("rows").toInt();
-
-  t->setName(pNode.get("name"));
-
-  if(pNode.get("visible")=="false")
-    t->hide();
-
-
-  std::vector<std::pair<float,bool> > rows(h);
-  std::vector<std::pair<float,bool> > cols(w);
-
-  // parse rows/cols info
-  Node::const_iterator i=pNode.begin();
-  for(;i!=pNode.end();i++)
     {
-      if((*i)->getName()=="colsize")
-	{
-	  int id=(*i)->get("col").toInt();
-	  assert(id>=0 && id<w);
-	  //	  cdebug("id:"<<id);
-	  AGString s=(*i)->get("fixed");
-	  //	  cdebug("fixed:"<<s);
-	  if(s.length())
-	    cols[id]=std::make_pair(s.toFloat(),true);
-	  else
-	    {
-	      s=(*i)->get("relative");
-	      //	      cdebug("relative:"<<s);
-	      cols[id]=std::make_pair(s.toFloat(),false);
-	    }
-	}
-      else if((*i)->getName()=="rowsize")
-	{
-	  int id=(*i)->get("row").toInt();
-	  assert(id>=0 && id<h);
-
-	  AGString s=(*i)->get("fixed");
-	  if(s.length())
-	    rows[id]=std::make_pair(s.toFloat(),true);
-	  else
-	    {
-	      s=(*i)->get("relative");
-	      rows[id]=std::make_pair(s.toFloat(),false);
-	    }
-	}
+      AGWidget *w=parseTable(pParent,pNode,pRect);
+      pParent->addChild(w);
+      w=0;
+      setResult(0);
     }
 
-  for(int k=0;k<w;k++)
+  AGTable *parseTable(AGWidget *pParent,const Node &pNode,const AGRect2 &geom)
     {
-      if(cols[k].first==0.0f) // not inited
-	t->addColumn(1.0f);
-      else if(cols[k].second)
-	t->addFixedColumn(cols[k].first);
-      else
-	t->addColumn(cols[k].first);
+      AGTable *t;
+      t=new AGTable(pParent,geom);
+      setResult(t); // set result - so garbage collector gets to know this one
+
+      int w,h;
+      w=pNode.get("cols").toInt();
+      h=pNode.get("rows").toInt();
+
+      t->setName(pNode.get("name"));
+
+      if(pNode.get("visible")=="false")
+        t->hide();
+
+
+      std::vector<std::pair<float,bool> > rows(h);
+      std::vector<std::pair<float,bool> > cols(w);
+
+      // parse rows/cols info
+      Node::const_iterator i=pNode.begin();
+      for(;i!=pNode.end();i++)
+        {
+          if((*i)->getName()=="colsize")
+            {
+              int id=(*i)->get("col").toInt();
+              assert(id>=0 && id<w);
+              AGString s=(*i)->get("fixed");
+              if(s.length())
+                cols[id]=std::make_pair(s.toFloat(),true);
+              else
+                {
+                  s=(*i)->get("relative");
+                  cols[id]=std::make_pair(s.toFloat(),false);
+                }
+            }
+          else if((*i)->getName()=="rowsize")
+            {
+              int id=(*i)->get("row").toInt();
+              assert(id>=0 && id<h);
+
+              AGString s=(*i)->get("fixed");
+              if(s.length())
+                rows[id]=std::make_pair(s.toFloat(),true);
+              else
+                {
+                  s=(*i)->get("relative");
+                  rows[id]=std::make_pair(s.toFloat(),false);
+                }
+            }
+        }
+
+      for(int k=0;k<w;k++)
+        {
+          if(cols[k].first==0.0f) // not inited
+            t->addColumn(1.0f);
+          else if(cols[k].second)
+            t->addFixedColumn(cols[k].first);
+          else
+            t->addColumn(cols[k].first);
+        }
+      for(int k=0;k<h;k++)
+        {
+          if(rows[k].first==0.0f) // not inited
+            t->addRow(1.0f);
+          else if(rows[k].second)
+            t->addFixedRow(rows[k].first);
+          else
+            t->addRow(rows[k].first);
+        }
+
+      // now get children
+
+      i=pNode.begin();
+      for(;i!=pNode.end();i++)
+        {
+          AGWidget *w=parseNode(t,**i);
+          if(w)
+            {
+              int col=(*i)->get("col").toInt();
+              int row=(*i)->get("row").toInt();
+              t->addChild(col,row,w);
+            }
+        }
+      //  t->arrange();
+
+      if(pNode.get("cache")=="true")
+        t->setCaching(true);
+
+      return t;
     }
-  for(int k=0;k<h;k++)
-    {
-      if(rows[k].first==0.0f) // not inited
-	t->addRow(1.0f);
-      else if(rows[k].second)
-	t->addFixedRow(rows[k].first);
-      else
-	t->addRow(rows[k].first);
-    }
-
-  // now get children
-
-  i=pNode.begin();
-  for(;i!=pNode.end();i++)
-    {
-      AGWidget *w=parseNode(t,**i);
-      if(w)
-	{
-	  int col=(*i)->get("col").toInt();
-	  int row=(*i)->get("row").toInt();
-	  //	  cdebug(col<<"/"<<row);
-	  t->addChild(col,row,w);
-	}
-    }
-  //  t->arrange();
-
-  if(pNode.get("cache")=="true")
-    t->setCaching(true);
-
-  return t;
-}
 
 
 };
 
 class AGWindowLayoutCreator:public AGLayoutCreator
 {
- public:
+public:
   REGISTER_COMPONENT(Window,"window")
-  
+
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGStringUtf8 title=_(pNode.get("title"));
-    AGString theme=pNode.get("theme");
-    
-    AGWidget *w=new AGWindow(pParent,pRect,AGStringUtf8(title),theme);
-    setResult(w);
-  }
+    {
+      AGStringUtf8 title=_(pNode.get("title"));
+      AGString theme=pNode.get("theme");
+
+      AGWidget *w=new AGWindow(pParent,pRect,AGStringUtf8(title),theme);
+      setResult(w);
+    }
 };
 
 IMPLEMENT_COMPONENT_FACTORY(Table);
@@ -182,41 +178,41 @@ public:
   REGISTER_COMPONENT(Text,"text")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    //    AGWidget *w=new AGText(pParent,pRect,text,font);
-    AGEdit *w=new AGEdit(pParent,pRect);
-    setResult(w);
+    {
+      //    AGWidget *w=new AGText(pParent,pRect,text,font);
+      AGEdit *w=new AGEdit(pParent,pRect);
+      setResult(w);
 
 
-    AGStringUtf8 text=_(pNode.get("caption"));
-    text=text.replace("\\n","\n");
-    w->setText(AGStringUtf8(text));
-    AGString fontname=pNode.get("font");
-    if(fontname=="")
-      fontname="text.font";
+      AGStringUtf8 text=_(pNode.get("caption"));
+      text=text.replace("\\n","\n");
+      w->setText(AGStringUtf8(text));
+      AGString fontname=pNode.get("font");
+      if(fontname=="")
+        fontname="text.font";
 
-    AGFont font;
-    font=getTheme()->getFont(fontname);
-    w->setFont(font);
-    
-    if(pNode.get("align")=="left")
-      w->setAlign(EDIT_LEFT);
-    if(pNode.get("align")=="right")
-      w->setAlign(EDIT_RIGHT);
-    if(pNode.get("align")=="center")
-      w->setAlign(EDIT_CENTER);
+      AGFont font;
+      font=getTheme()->getFont(fontname);
+      w->setFont(font);
 
-    if(pNode.get("valign")=="top")
-      w->setVAlign(EDIT_TOP);
-    if(pNode.get("valign")=="bottom")
-      w->setVAlign(EDIT_BOTTOM);
-    if(pNode.get("valign")=="center")
-      w->setVAlign(EDIT_VCENTER);
+      if(pNode.get("align")=="left")
+        w->setAlign(EDIT_LEFT);
+      if(pNode.get("align")=="right")
+        w->setAlign(EDIT_RIGHT);
+      if(pNode.get("align")=="center")
+        w->setAlign(EDIT_CENTER);
 
-    //    w->setAlign(EDIT_CENTER);
-    w->setMutable(false);
-    w->setBackground(false);
-  }
+      if(pNode.get("valign")=="top")
+        w->setVAlign(EDIT_TOP);
+      if(pNode.get("valign")=="bottom")
+        w->setVAlign(EDIT_BOTTOM);
+      if(pNode.get("valign")=="center")
+        w->setVAlign(EDIT_VCENTER);
+
+      //    w->setAlign(EDIT_CENTER);
+      w->setMutable(false);
+      w->setBackground(false);
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(Text);
 
@@ -228,28 +224,28 @@ public:
   REGISTER_COMPONENT(Edit,"edit")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    CTRACE;
-    AGString text=pNode.get("text");
-    bool multi=pNode.get("multi")=="true";
-    
-    //    AGWidget *w=new AGText(pParent,pRect,text,font);
-    AGEdit *w=new AGEdit(pParent,pRect);
-    setResult(w);
-    w->setText(AGStringUtf8(text));
-    if(pNode.get("font")!="")
     {
-      AGFont font;
-      font=getTheme()->getFont(pNode.get("font"));
-      w->setFont(font);
+      CTRACE;
+      AGString text=pNode.get("text");
+      bool multi=pNode.get("multi")=="true";
+
+      //    AGWidget *w=new AGText(pParent,pRect,text,font);
+      AGEdit *w=new AGEdit(pParent,pRect);
+      setResult(w);
+      w->setText(AGStringUtf8(text));
+      if(pNode.get("font")!="")
+        {
+          AGFont font;
+          font=getTheme()->getFont(pNode.get("font"));
+          w->setFont(font);
+        }
+      //    w->setAlign(EDIT_CENTER);
+      w->setMutable(true);//false);
+      w->setBackground(true);//false);
+      w->setMulti(multi);
+      if(!multi)
+        w->setVAlign(EDIT_VCENTER);
     }
-    //    w->setAlign(EDIT_CENTER);
-    w->setMutable(true);//false);
-    w->setBackground(true);//false);
-    w->setMulti(multi);
-    if(!multi)
-      w->setVAlign(EDIT_VCENTER);
-  }
 };
 IMPLEMENT_COMPONENT_FACTORY(Edit);
 
@@ -262,9 +258,9 @@ public:
   REGISTER_COMPONENT(ListBox,"listBox")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    setResult(new AGListBox(pParent,pRect));
-  }
+    {
+      setResult(new AGListBox(pParent,pRect));
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(ListBox);
 
@@ -276,19 +272,19 @@ public:
   REGISTER_COMPONENT(ComboBox,"comboBox")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    CTRACE;
-    AGComboBox *l=new AGComboBox(pParent,pRect);
-    setResult(l);
+    {
+      CTRACE;
+      AGComboBox *l=new AGComboBox(pParent,pRect);
+      setResult(l);
 
-    Node::const_iterator i=pNode.begin();
-    for(;i!=pNode.end();i++)
-      {
-	if((*i)->getName()=="item")
-	  l->insertItem((*i)->get("id"),AGStringUtf8((*i)->get("text")));
-      }
+      Node::const_iterator i=pNode.begin();
+      for(;i!=pNode.end();i++)
+        {
+          if((*i)->getName()=="item")
+            l->insertItem((*i)->get("id"),AGStringUtf8((*i)->get("text")));
+        }
 
-  }
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(ComboBox);
 
@@ -301,15 +297,15 @@ public:
   REGISTER_COMPONENT(Layout,"layout")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    CTRACE;
-    AGFilename filename=pNode.get("filename");
-    AGWidget *w=new AGWidget(pParent,pRect);
-    setResult(w);
-    AGLayout *l=new AGLayout(w);
-    l->loadXML(loadFile(filename));//pRect);
-    w->addChild(l);
-  }
+    {
+      CTRACE;
+      AGFilename filename=pNode.get("filename");
+      AGWidget *w=new AGWidget(pParent,pRect);
+      setResult(w);
+      AGLayout *l=new AGLayout(w);
+      l->loadXML(loadFile(filename));//pRect);
+      w->addChild(l);
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(Layout);
 
@@ -321,31 +317,31 @@ public:
   REGISTER_COMPONENT(Image,"image")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGFilename filename=pNode.get("filename");
+    {
+      AGFilename filename=pNode.get("filename");
 
-    AGSurface s(0,0);
-    if(filename.length())
-      s=AGSurface::load(filename);
+      AGSurface s(0,0);
+      if(filename.length())
+        s=AGSurface::load(filename);
 
-    AGRect2 r=pRect;
-    if(pNode.get("x").length())
-      r.setX(pNode.get("x").toFloat());
-    if(pNode.get("y").length())
-      r.setY(pNode.get("y").toFloat());
+      AGRect2 r=pRect;
+      if(pNode.get("x").length())
+        r.setX(pNode.get("x").toFloat());
+      if(pNode.get("y").length())
+        r.setY(pNode.get("y").toFloat());
 
 #warning "add subsurfaces"
-    
 
-    AGWidget *w;
 
-    if(pNode.get("tile")=="true")
-      w=new AGImage(pParent,r,s,true);
-    else
-      w=new AGImage(pParent,r,s,false);
+      AGWidget *w;
 
-    setResult(w);
-  }
+      if(pNode.get("tile")=="true")
+        w=new AGImage(pParent,r,s,true);
+      else
+        w=new AGImage(pParent,r,s,false);
+
+      setResult(w);
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(Image);
 
@@ -357,21 +353,21 @@ public:
   REGISTER_COMPONENT(Frame,"frame")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    CTRACE;
-    AGString border=pNode.get("border");
-    size_t width=pNode.get("width").toInt();
+    {
+      CTRACE;
+      AGString border=pNode.get("border");
+      size_t width=pNode.get("width").toInt();
 
-    AGFrame *w;
-    if(border.length())
-      w=new AGFrame(pParent,pRect,AGBorder(border));
-    else
-      w=new AGFrame(pParent,pRect,width);
+      AGFrame *w;
+      if(border.length())
+        w=new AGFrame(pParent,pRect,AGBorder(border));
+      else
+        w=new AGFrame(pParent,pRect,width);
 
-    setResult(w);
-    if(pNode.get("background").length())
-      w->setBackground(AGBackground(pNode.get("background")));
-  }
+      setResult(w);
+      if(pNode.get("background").length())
+        w->setBackground(AGBackground(pNode.get("background")));
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(Frame);
 
@@ -383,9 +379,9 @@ public:
   REGISTER_COMPONENT(Cell,"cell")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    setResult(new AGWidget(pParent,pRect));
-  }
+    {
+      setResult(new AGWidget(pParent,pRect));
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(Cell);
 
@@ -397,42 +393,42 @@ public:
   REGISTER_COMPONENT(CheckBox,"checkBox")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGCheckBox *b=new AGCheckBox(pParent,pRect);
-    AGStringUtf8 caption=_(pNode.get("caption"));
-    if(caption.length())
-      b->setCaption(AGStringUtf8(caption));
+    {
+      AGCheckBox *b=new AGCheckBox(pParent,pRect);
+      AGStringUtf8 caption=_(pNode.get("caption"));
+      if(caption.length())
+        b->setCaption(AGStringUtf8(caption));
 
-    std::string captionImage=pNode.get("caption-image");
-    if(captionImage.length())
-      b->setSurface(AGSurface::load(captionImage),false);
-    if(pNode.get("enabled")=="false")
-      b->setEnabled(false);
-    if(pNode.get("theme").length())
-      b->setTheme(pNode.get("theme"));
-    if(pNode.get("checked")=="true")
-      b->setChecked(true);
+      std::string captionImage=pNode.get("caption-image");
+      if(captionImage.length())
+        b->setSurface(AGSurface::load(captionImage),false);
+      if(pNode.get("enabled")=="false")
+        b->setEnabled(false);
+      if(pNode.get("theme").length())
+        b->setTheme(pNode.get("theme"));
+      if(pNode.get("checked")=="true")
+        b->setChecked(true);
 
-    if(pNode.get("disabledImage")!="" && pNode.get("enabledImage")!="")
-      {
-	b->setSurfaces(AGSurface::load(pNode.get("disabledImage")),AGSurface::load(pNode.get("enabledImage")));
-      }
-      
+      if(pNode.get("disabledImage")!="" && pNode.get("enabledImage")!="")
+        {
+          b->setSurfaces(AGSurface::load(pNode.get("disabledImage")),AGSurface::load(pNode.get("enabledImage")));
+        }
 
-    setResult(b);
-  }
+
+      setResult(b);
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(CheckBox);
 
 // Layout-Factories
 class AGColorButtonLayoutCreator:public AGLayoutCreator
 {
- public:
+public:
   REGISTER_COMPONENT(ColorButton,"colorButton")
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    setResult(new AGColorButton(pParent,pRect,pNode.get("gridx").toInt(),pNode.get("gridy").toInt()));
-  }
+    {
+      setResult(new AGColorButton(pParent,pRect,pNode.get("gridx").toInt(),pNode.get("gridy").toInt()));
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(ColorButton);
 
@@ -445,9 +441,9 @@ public:
   REGISTER_COMPONENT(RadioGroup,"radioGroup")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    setResult(new AGRadioGroup(pParent,pRect));
-  }
+    {
+      setResult(new AGRadioGroup(pParent,pRect));
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(RadioGroup);
 
@@ -458,23 +454,23 @@ public:
   REGISTER_COMPONENT(Radio,"radio")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    AGRadio *b=new AGRadio(pParent,pRect);
-    AGStringUtf8 caption=_(pNode.get("caption"));
-    if(caption.length())
-      b->setCaption(AGStringUtf8(caption));
+    {
+      AGRadio *b=new AGRadio(pParent,pRect);
+      AGStringUtf8 caption=_(pNode.get("caption"));
+      if(caption.length())
+        b->setCaption(AGStringUtf8(caption));
 
-    AGFilename captionImage=pNode.get("caption-image");
-    if(captionImage.length())
-      b->setSurface(AGSurface::load(captionImage),false);
-    if(pNode.get("enabled")=="false")
-      b->setEnabled(false);
-    if(pNode.get("theme").length())
-      b->setTheme(pNode.get("theme"));
-    if(pNode.get("checked")=="true")
-      b->setChecked(true);
-    setResult(b);
-  }
+      AGFilename captionImage=pNode.get("caption-image");
+      if(captionImage.length())
+        b->setSurface(AGSurface::load(captionImage),false);
+      if(pNode.get("enabled")=="false")
+        b->setEnabled(false);
+      if(pNode.get("theme").length())
+        b->setTheme(pNode.get("theme"));
+      if(pNode.get("checked")=="true")
+        b->setChecked(true);
+      setResult(b);
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(Radio);
 
@@ -486,33 +482,33 @@ public:
   REGISTER_COMPONENT(ScreenWidget,"screenWidget")
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-  {
-    CTRACE;
-    setResult(new AGScreenWidget());
-  }
+    {
+      CTRACE;
+      setResult(new AGScreenWidget());
+    }
 };
 IMPLEMENT_COMPONENT_FACTORY(ScreenWidget);
 
 
 void AGLayout::registerLayouts()
-{
-	TRACE;
-  getLayoutFactory()->addCreator("checkBox",new AGCheckBoxLayoutCreator);
-  getLayoutFactory()->addCreator("colorButton",new AGColorButtonLayoutCreator);
-  getLayoutFactory()->addCreator("table",new AGTableLayoutCreator);
-  getLayoutFactory()->addCreator("button",new AGButtonLayoutCreator);
-  getLayoutFactory()->addCreator("window",new AGWindowLayoutCreator);
-  getLayoutFactory()->addCreator("text",new AGTextLayoutCreator);
-  getLayoutFactory()->addCreator("edit",new AGEditLayoutCreator);
-  getLayoutFactory()->addCreator("listBox",new AGListBoxLayoutCreator);
-  getLayoutFactory()->addCreator("comboBox",new AGComboBoxLayoutCreator);
-  getLayoutFactory()->addCreator("layout",new AGLayoutLayoutCreator);
-  getLayoutFactory()->addCreator("image",new AGImageLayoutCreator);
-  getLayoutFactory()->addCreator("frame",new AGFrameLayoutCreator);
-  getLayoutFactory()->addCreator("cell",new AGCellLayoutCreator);
-  getLayoutFactory()->addCreator("radioGroup",new AGRadioGroupLayoutCreator);
-  getLayoutFactory()->addCreator("radio",new AGRadioLayoutCreator);
-//  getLayoutFactory()->addCreator("miniMap",new AGMiniMapLayoutCreator);
-  getLayoutFactory()->addCreator("screenWidget",new AGScreenWidgetLayoutCreator);
+  {
+    TRACE;
+    getLayoutFactory()->addCreator("checkBox",new AGCheckBoxLayoutCreator);
+    getLayoutFactory()->addCreator("colorButton",new AGColorButtonLayoutCreator);
+    getLayoutFactory()->addCreator("table",new AGTableLayoutCreator);
+    getLayoutFactory()->addCreator("button",new AGButtonLayoutCreator);
+    getLayoutFactory()->addCreator("window",new AGWindowLayoutCreator);
+    getLayoutFactory()->addCreator("text",new AGTextLayoutCreator);
+    getLayoutFactory()->addCreator("edit",new AGEditLayoutCreator);
+    getLayoutFactory()->addCreator("listBox",new AGListBoxLayoutCreator);
+    getLayoutFactory()->addCreator("comboBox",new AGComboBoxLayoutCreator);
+    getLayoutFactory()->addCreator("layout",new AGLayoutLayoutCreator);
+    getLayoutFactory()->addCreator("image",new AGImageLayoutCreator);
+    getLayoutFactory()->addCreator("frame",new AGFrameLayoutCreator);
+    getLayoutFactory()->addCreator("cell",new AGCellLayoutCreator);
+    getLayoutFactory()->addCreator("radioGroup",new AGRadioGroupLayoutCreator);
+    getLayoutFactory()->addCreator("radio",new AGRadioLayoutCreator);
+    //  getLayoutFactory()->addCreator("miniMap",new AGMiniMapLayoutCreator);
+    getLayoutFactory()->addCreator("screenWidget",new AGScreenWidgetLayoutCreator);
 
-}
+  }

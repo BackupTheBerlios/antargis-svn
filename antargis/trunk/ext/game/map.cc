@@ -115,13 +115,8 @@ void AntMap::loadXML(const Node &node)
     Node::const_iterator i=node.begin();
     for(;i!=node.end();i++)
       {
-        //      AntEntity *e=0;
         Node *n=*i;
         processXMLNode(*n);
-        /*        {
-	  e->loadXML(*n);
-	  insertEntity(e);
-	  }*/
       }
     // tell entities, that map has changed
     std::list<AntEntity*>::iterator k=mEntities.begin();
@@ -297,15 +292,12 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
           {
             if((*i)->provides(pType) && (*i)->resource.get(pType)>=atLeast)
               {
-                //              AGVector2 p2=(*i)->getPos2D()-p;
                 float norm;
 
                 if(mHeuristicFunction)
                   norm=(*mHeuristicFunction)(std::make_pair((*i)->getPos2D(),p));
                 else
                   norm=((*i)->getPos2D()-p).length2();
-                //	      cdebug("norm:"<<norm<<" i:"<<*i<<" name:"<<(*i)->getName());
-                //              float norm=p2.length2();
                 ents.insert(std::make_pair(norm,*i));
               }
           }

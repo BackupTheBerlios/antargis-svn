@@ -1,6 +1,6 @@
 describe "Coding style C/++" do
   it "shouldn't include any TABs anymore" do
-    (Dir["**/*.cc"]+Dir["**/*.h"]).each {|filename|
+    (Dir["ext/**/*.cc"]+Dir["ext/**/*.h"]).select{|filename|not filename=~/swig/}.each {|filename|
       file=File.open(filename)
       c=file.read
       file.close

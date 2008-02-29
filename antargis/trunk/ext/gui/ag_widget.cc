@@ -44,1091 +44,1074 @@ using namespace std;
 static bool gNewClippingTechnique=true;
 
 void setNewClippingTechnique(bool f)
-{
-  gNewClippingTechnique=f;
-}
+  {
+    gNewClippingTechnique=f;
+  }
 bool getNewClippingTechnique()
-{
-  return gNewClippingTechnique;
-}
+  {
+    return gNewClippingTechnique;
+  }
 
 
 
 class MWidgetSet:public std::set<AGWidget*>
-{
-public:
-  virtual ~MWidgetSet();
-};
-MWidgetSet *mPAllWidgets=0; // workaround - to check if still widget exists or not
-bool mWidgetSetDeleted=false;
+  {
+  public:
+    virtual ~MWidgetSet();
+  };
+  MWidgetSet *mPAllWidgets=0; // workaround - to check if still widget exists or not
+  bool mWidgetSetDeleted=false;
 
-MWidgetSet::~MWidgetSet()
-{
-  CTRACE;
-  mPAllWidgets=0;
-  mWidgetSetDeleted=true;
-}
-
-MWidgetSet *getAllWidgets()
-{
-  if(!mPAllWidgets)
+  MWidgetSet::~MWidgetSet()
     {
-      if(!mWidgetSetDeleted)
-	{
-	  mPAllWidgets=new MWidgetSet;
-	  REGISTER_SINGLETON(mPAllWidgets);
-	}
-    }
-  return mPAllWidgets;
-}
-
-AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
-  sigMouseEnter(this,"sigMouseEnter"),
-  sigMouseLeave(this,"sigMouseLeave"),
-  sigClick(this,"sigClick"),
-	mApp(0),
-  mr(r),mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
-  mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
-  mHasFocus(false),mFocus(0)
-
-{
-  mChangeRect=AGRect2(0,0,0,0);
-  mCache=0;
-  mCacheTouched=false;
-  mTooltipWidget=0;
-  mRubyObject=false;
-  mModal=false;
-  if(getAllWidgets())
-    getAllWidgets()->insert(this);
-
-  getMain()->getCollector()->insertGlobal(this);
-}
-
-AGWidget::~AGWidget()
-{
-  CTRACE;
-
-  if(!mParent)
-    if(hasMain())
-      getMain()->getCollector()->removeGlobal(this);
-
-
-  //  throw int();
-  std::list<AGWidget*>::iterator i=mChildren.begin();
-  for(;i!=mChildren.end();i++)
-    {
-      (*i)->setParent(0);
-    }
-  if(getParent())
-    {
-      if(getAllWidgets())
-	{
-	  if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
-	    {
-	      dbout(5000,"WARNING:Error in ~AGWidget!!!");
-	    }
-	  else
-	    getParent()->eventChildrenDeleted(this);
-	}
-    }
-  if(getAllWidgets())
-    getAllWidgets()->erase(this);
-}
-
-void AGWidget::removeChild(AGWidget *w)
-{
-  std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),w);
-  if(i!=mChildren.end())
-    {
-      mChildren.erase(i);
-      w->setParent(0);
-    }
-}
-
-
-void AGWidget::eventChildrenDeleted(AGWidget *pWidget)
-{
-  std::list<AGWidget*>::iterator i=mChildren.begin();
-  for(;i!=mChildren.end();i++)
-    {
-      if(*i==pWidget)
-	{
-	  mChildren.erase(i);
-	  break;
-	}
-    }
-  i=mToClear.begin();
-  for(;i!=mToClear.end();i++)
-    {
-      if(*i==pWidget)
-	{
-	  mToClear.erase(i);
-	  break;
-	}
-    }
-}
-
-
-void AGWidget::draw(AGPainter &p)
-{
-}
-
-void AGWidget::delObjects()
-{
- // clearing widgets
-  if(mToClear.size())
-    {
-      std::list<AGWidget*>::iterator i=mToClear.begin();
-      for(;i!=mToClear.end();i++)
-	{
-	  if(!(*i)->mRubyObject) // don't delete ruby-objects - they get deleted by garbage collection
-	    {
-	      dbout(5000,"type:"<<typeid(**i).name());
-	      delete *i;
-	    }
-	}
-      mToClear.clear();
-    }
-}
-
-void AGWidget::drawAll(AGPainter &p)
-{
-  delObjects();
-
-  if(!mVisible)
-    return;
-
-  if(mCache)
-    {
-      p.blit(*mCache,getRect(),getRect().origin());
-    }
-  else
-    {
-      p.pushMatrix();
-
-      p.transform(getRect());
-
-      if(!mChildrenDrawFirst)
-	draw(p);
-
-      std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
-      
-      for(;i!=mChildren.rend();i++)
-	(*i)->drawAll(p);
-      
-      if(mChildrenDrawFirst)
-	draw(p);
-
-      drawAfter(p);
-    
-      p.popMatrix();
-      setDrawn();
-      //	  getScreen().flip();
-      //	  SDL_Delay(500);
-    }
-}
-
-AGRect2 AGWidget::getRect() const
-{
-  return mr;
-}
-
-AGRect2 AGWidget::getClientRect() const
-{
-  return mr.origin();
-}
-
-bool AGWidget::processEvent(AGEvent *event)
-{
-  if(!mVisible)
-    return false;
-
-  bool processed = false;
-  // do i have a capturehook set ? (modal)
-  // i will send that event to my children
-
-  std::list<AGWidget*>::iterator i;
-
-  std::list<AGWidget*> children=mChildren; // copy children, so that changes do not affect iteration
-  for(i=children.begin();i!=children.end() && !processed; i++)
-    processed=(*i)->processEvent(event);
-  
-  if(processed)
-    return processed;
-
-  event->setCaller(this);
-  
-  // let me see if i can process it myself
-  if(AGMessageObject::processEvent(event))
-    return true;
-  
-  checkFocus();
-  if(mModal)
-    return true;
-  return false;
-}
-
-bool AGWidget::eventShow()
-{
-  return false;
-}
-bool AGWidget::eventHide()
-{
-  return false;
-}
-
-bool AGWidget::eventMouseEnter()
-{
-  if(mTooltip.length())
-    {
-      mTooltipWidget=new AGTooltip(getScreenRect(),mTooltip);
-      getApplication()->setTooltip(mTooltipWidget);
+      CTRACE;
+      mPAllWidgets=0;
+      mWidgetSetDeleted=true;
     }
 
-  return false;
-}
-bool AGWidget::eventMouseLeave()
-{
-  if(mTooltipWidget)
+  MWidgetSet *getAllWidgets()
     {
-      getApplication()->resetTooltip(mTooltipWidget);
+      if(!mPAllWidgets)
+        {
+          if(!mWidgetSetDeleted)
+            {
+              mPAllWidgets=new MWidgetSet;
+              REGISTER_SINGLETON(mPAllWidgets);
+            }
+        }
+      return mPAllWidgets;
+    }
+
+  AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
+    sigMouseEnter(this,"sigMouseEnter"),
+    sigMouseLeave(this,"sigMouseLeave"),
+    sigClick(this,"sigClick"),
+    mApp(0),
+    mr(r),mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
+    mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
+    mHasFocus(false),mFocus(0)
+
+    {
+      mChangeRect=AGRect2(0,0,0,0);
+      mCache=0;
+      mCacheTouched=false;
       mTooltipWidget=0;
+      mRubyObject=false;
+      mModal=false;
+      if(getAllWidgets())
+        getAllWidgets()->insert(this);
+
+      getMain()->getCollector()->insertGlobal(this);
     }
-  return false;
-}
 
-bool AGWidget::eventMouseMotion(AGEvent *e)
-{
-  if(!visible())
-    return false;
-
-  if(e->isSDLEvent())
+  AGWidget::~AGWidget()
     {
-      if(getScreenRect().contains(e->getMousePosition()))
-	{
-	  if(!mMouseIn)
-	    {
-	      mMouseIn=true;
-	      eventMouseEnter() || sigMouseEnter(e);
-	    }
-	}
+      CTRACE;
+
+      if(!mParent)
+        if(hasMain())
+          getMain()->getCollector()->removeGlobal(this);
+
+
+      //  throw int();
+      std::list<AGWidget*>::iterator i=mChildren.begin();
+      for(;i!=mChildren.end();i++)
+        {
+          (*i)->setParent(0);
+        }
+      if(getParent())
+        {
+          if(getAllWidgets())
+            {
+              if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
+                {
+                  dbout(5000,"WARNING:Error in ~AGWidget!!!");
+                }
+              else
+                getParent()->eventChildrenDeleted(this);
+            }
+        }
+      if(getAllWidgets())
+        getAllWidgets()->erase(this);
+    }
+
+  void AGWidget::removeChild(AGWidget *w)
+    {
+      std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),w);
+      if(i!=mChildren.end())
+        {
+          mChildren.erase(i);
+          w->setParent(0);
+        }
+    }
+
+
+  void AGWidget::eventChildrenDeleted(AGWidget *pWidget)
+    {
+      std::list<AGWidget*>::iterator i=mChildren.begin();
+      for(;i!=mChildren.end();i++)
+        {
+          if(*i==pWidget)
+            {
+              mChildren.erase(i);
+              break;
+            }
+        }
+      i=mToClear.begin();
+      for(;i!=mToClear.end();i++)
+        {
+          if(*i==pWidget)
+            {
+              mToClear.erase(i);
+              break;
+            }
+        }
+    }
+
+
+  void AGWidget::draw(AGPainter &p)
+    {
+    }
+
+  void AGWidget::delObjects()
+    {
+      // clearing widgets
+      if(mToClear.size())
+        {
+          std::list<AGWidget*>::iterator i=mToClear.begin();
+          for(;i!=mToClear.end();i++)
+            {
+              if(!(*i)->mRubyObject) // don't delete ruby-objects - they get deleted by garbage collection
+                {
+                  dbout(5000,"type:"<<typeid(**i).name());
+                  delete *i;
+                }
+            }
+          mToClear.clear();
+        }
+    }
+
+  void AGWidget::drawAll(AGPainter &p)
+    {
+      delObjects();
+
+      if(!mVisible)
+        return;
+
+      if(mCache)
+        {
+          p.blit(*mCache,getRect(),getRect().origin());
+        }
       else
-	{
-	  if(mMouseIn)
-	    {
-	      mMouseIn=false;
-	      eventMouseLeave() || sigMouseLeave(e);
-	    }
-	}
+        {
+          p.pushMatrix();
 
-      if(mButtonDown)
-	{
-	  AGVector2 v=e->getMousePosition()-mOldMousePos;
-	  e->setVector(v);
-	  eventDragBy(e,v) || sigDragBy(e);
-	  mOldMousePos=e->getMousePosition();
-	}
+          p.transform(getRect());
+
+          if(!mChildrenDrawFirst)
+            draw(p);
+
+          std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+
+          for(;i!=mChildren.rend();i++)
+            (*i)->drawAll(p);
+
+          if(mChildrenDrawFirst)
+            draw(p);
+
+          drawAfter(p);
+
+          p.popMatrix();
+          setDrawn();
+        }
     }
-  return false;
-}
 
-bool AGWidget::eventMouseButtonDown(AGEvent *e)
-{
-  if(e->isSDLEvent())
+  AGRect2 AGWidget::getRect() const
+  {
+    return mr;
+  }
+
+  AGRect2 AGWidget::getClientRect() const
+  {
+    return mr.origin();
+  }
+
+  bool AGWidget::processEvent(AGEvent *event)
     {
-      if(getScreenRect().contains(e->getMousePosition()))
-	{
-	  mButtonDown=true;
-	  mOldMousePos=e->getMousePosition();
-	}
+      if(!mVisible)
+        return false;
+
+      bool processed = false;
+      // do i have a capturehook set ? (modal)
+      // i will send that event to my children
+
+      std::list<AGWidget*>::iterator i;
+
+      std::list<AGWidget*> children=mChildren; // copy children, so that changes do not affect iteration
+      for(i=children.begin();i!=children.end() && !processed; i++)
+        processed=(*i)->processEvent(event);
+
+      if(processed)
+        return processed;
+
+      event->setCaller(this);
+
+      // let me see if i can process it myself
+      if(AGMessageObject::processEvent(event))
+        return true;
+
+      checkFocus();
+      if(mModal)
+        return true;
+      return false;
     }
-  return false;
-}
 
-bool AGWidget::eventMouseButtonUp(AGEvent *e)
-{
-  bool was=mButtonDown;
-
-  mButtonDown=false;
-  
-  if(e->isSDLEvent())
+  bool AGWidget::eventShow()
     {
-      if(getScreenRect().contains(e->getMousePosition()))
-	{
-	  if(was)
-	    {
-	      e->setName("sigClick");
-	      if(!isParent(getApplication()->getOverlay()))
-		getApplication()->setOverlay(0);
-	      
-	      if(canFocus())
-		gainFocus();
-
-	      return doClick(e);
-
-	    }
-	}
+      return false;
     }
-  return false;
-}
-
-bool AGWidget::doClick(AGEvent *e)
-{
-  return (eventMouseClick(e) || sigClick(e));
-}
-
-bool AGWidget::eventMouseClick(AGEvent *m)
-{
-  return false;
-}
-
-void AGWidget::addChild(AGWidget *w)
-{
-  mChildren.push_front(w); // set on top
-  if(mHasFocus && w->canFocus())
+  bool AGWidget::eventHide()
     {
-      gainFocus(w);
+      return false;
     }
-	if(!w->getParent())
-		w->setParent(this);
-  queryRedraw();
-}
 
-void AGWidget::clear()
-{
-  // delay it till be draw everything - so this doesn't kill widgets while processing events
-  std::copy(mChildren.begin(),mChildren.end(),std::back_inserter(mToClear));
-  mChildren.clear();
-}
-
-void AGWidget::erase(AGWidget *w)
-{
-  std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),w);
-  if(i!=mChildren.end())
+  bool AGWidget::eventMouseEnter()
     {
-      mToClear.push_back(w);
-      
-      mChildren.erase(i);
+      if(mTooltip.length())
+        {
+          mTooltipWidget=new AGTooltip(getScreenRect(),mTooltip);
+          getApplication()->setTooltip(mTooltipWidget);
+        }
+
+      return false;
     }
-}
-
-void AGWidget::addChildBack(AGWidget *w)
-{
-  mChildren.push_back(w); // set on top
-}
-
-void AGWidget::regChange()
-{
-  AGRect2 t=getScreenRect().grow(5);
-
-  pushChangeRect(t);
-
-  if(mChangeRect.width()==0 || mChangeRect.height()==0)
-    mChangeRect=t;
-  else
+  bool AGWidget::eventMouseLeave()
     {
-      mChangeRect.include(t[0]);
-      mChangeRect.include(t[1]);
+      if(mTooltipWidget)
+        {
+          getApplication()->resetTooltip(mTooltipWidget);
+          mTooltipWidget=0;
+        }
+      return false;
     }
-}
 
-void AGWidget::setRect(const AGRect2 &pRect)
-{
-  regChange();
-  mr=pRect;
-  regChange();
-  if(mParent)
-    mParent->redraw();
-}
-
-float AGWidget::minWidth() const
-{
-  // accumulate max
-  std::list<AGWidget*>::const_iterator i=mChildren.begin();
-  float m=0;
-
-  for(;i!=mChildren.end();i++)
-    m=std::max(m,(*i)->minWidth());
-
-  return m;
-}
-
-float AGWidget::minHeight() const
-{
-  // accumulate max
-  std::list<AGWidget*>::const_iterator i=mChildren.begin();
-  float m=0;
-
-  for(;i!=mChildren.end();i++)
-    m=std::max(m,(*i)->minHeight());
-
-  return m;
-}
-
-float AGWidget::width() const
-{
-  return mr.w();
-}
-
-float AGWidget::height() const
-{
-  return mr.h();
-}
-
-bool AGWidget::fixedWidth() const
-{
-  return mFixedWidth;
-}
-
-bool AGWidget::fixedHeight() const
-{
-  return mFixedHeight;
-}
-
-void AGWidget::setWidth(float w)
-{
-  regChange();
-  mr.setWidth(w);
-  regChange();
-}
-void AGWidget::setHeight(float h)
-{
-  regChange();
-  mr.setHeight(h);
-  regChange();
-}
-
-void AGWidget::setTop(float y)
-{
-  regChange();
-  mr.setTop(y);
-  regChange();
-}
-void AGWidget::setLeft(float x)
-{
-  regChange();
-  mr.setLeft(x);
-  regChange();
-}
-float AGWidget::bottom() const
-{
-  return mr[1][1];
-}
-float AGWidget::right() const
-{
-  return mr[1][0];
-}
-
-
-float AGWidget::top() const
-{
-  return mr.y();
-}
-
-float AGWidget::left() const
-{
-  return mr.x();
-}
-
-void AGWidget::show()
-{
-  mVisible=true;
-  queryRedraw();
-}
-void AGWidget::hide()
-{
-  mVisible=false;
-  queryRedraw();
-}
-
-void AGWidget::setVisible(bool v)
-{
-  if(mVisible!=v)
+  bool AGWidget::eventMouseMotion(AGEvent *e)
     {
+      if(!visible())
+        return false;
+
+      if(e->isSDLEvent())
+        {
+          if(getScreenRect().contains(e->getMousePosition()))
+            {
+              if(!mMouseIn)
+                {
+                  mMouseIn=true;
+                  eventMouseEnter() || sigMouseEnter(e);
+                }
+            }
+          else
+            {
+              if(mMouseIn)
+                {
+                  mMouseIn=false;
+                  eventMouseLeave() || sigMouseLeave(e);
+                }
+            }
+
+          if(mButtonDown)
+            {
+              AGVector2 v=e->getMousePosition()-mOldMousePos;
+              e->setVector(v);
+              eventDragBy(e,v) || sigDragBy(e);
+              mOldMousePos=e->getMousePosition();
+            }
+        }
+      return false;
+    }
+
+  bool AGWidget::eventMouseButtonDown(AGEvent *e)
+    {
+      if(e->isSDLEvent())
+        {
+          if(getScreenRect().contains(e->getMousePosition()))
+            {
+              mButtonDown=true;
+              mOldMousePos=e->getMousePosition();
+            }
+        }
+      return false;
+    }
+
+  bool AGWidget::eventMouseButtonUp(AGEvent *e)
+    {
+      bool was=mButtonDown;
+
+      mButtonDown=false;
+
+      if(e->isSDLEvent())
+        {
+          if(getScreenRect().contains(e->getMousePosition()))
+            {
+              if(was)
+                {
+                  e->setName("sigClick");
+                  if(!isParent(getApplication()->getOverlay()))
+                    getApplication()->setOverlay(0);
+
+                  if(canFocus())
+                    gainFocus();
+
+                  return doClick(e);
+
+                }
+            }
+        }
+      return false;
+    }
+
+  bool AGWidget::doClick(AGEvent *e)
+    {
+      return (eventMouseClick(e) || sigClick(e));
+    }
+
+  bool AGWidget::eventMouseClick(AGEvent *m)
+    {
+      return false;
+    }
+
+  void AGWidget::addChild(AGWidget *w)
+    {
+      mChildren.push_front(w); // set on top
+      if(mHasFocus && w->canFocus())
+        {
+          gainFocus(w);
+        }
+      if(!w->getParent())
+        w->setParent(this);
       queryRedraw();
     }
-  mVisible=v;
-}
 
-
-void AGWidget::setParent(AGWidget *pParent)
-{
-  if(!mParent)
+  void AGWidget::clear()
     {
-      if(hasMain())
-	getMain()->getCollector()->removeGlobal(this);
+      // delay it till be draw everything - so this doesn't kill widgets while processing events
+      std::copy(mChildren.begin(),mChildren.end(),std::back_inserter(mToClear));
+      mChildren.clear();
     }
 
-  mParent=pParent;
-}
+  void AGWidget::erase(AGWidget *w)
+    {
+      std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),w);
+      if(i!=mChildren.end())
+        {
+          mToClear.push_back(w);
+
+          mChildren.erase(i);
+        }
+    }
+
+  void AGWidget::addChildBack(AGWidget *w)
+    {
+      mChildren.push_back(w); // set on top
+    }
+
+  void AGWidget::regChange()
+    {
+      AGRect2 t=getScreenRect().grow(5);
+
+      pushChangeRect(t);
+
+      if(mChangeRect.width()==0 || mChangeRect.height()==0)
+        mChangeRect=t;
+      else
+        {
+          mChangeRect.include(t[0]);
+          mChangeRect.include(t[1]);
+        }
+    }
+
+  void AGWidget::setRect(const AGRect2 &pRect)
+    {
+      regChange();
+      mr=pRect;
+      regChange();
+      if(mParent)
+        mParent->redraw();
+    }
+
+  float AGWidget::minWidth() const
+  {
+    // accumulate max
+    std::list<AGWidget*>::const_iterator i=mChildren.begin();
+    float m=0;
+
+    for(;i!=mChildren.end();i++)
+      m=std::max(m,(*i)->minWidth());
+
+    return m;
+  }
+
+  float AGWidget::minHeight() const
+  {
+    // accumulate max
+    std::list<AGWidget*>::const_iterator i=mChildren.begin();
+    float m=0;
+
+    for(;i!=mChildren.end();i++)
+      m=std::max(m,(*i)->minHeight());
+
+    return m;
+  }
+
+  float AGWidget::width() const
+  {
+    return mr.w();
+  }
+
+  float AGWidget::height() const
+  {
+    return mr.h();
+  }
+
+  bool AGWidget::fixedWidth() const
+  {
+    return mFixedWidth;
+  }
+
+  bool AGWidget::fixedHeight() const
+  {
+    return mFixedHeight;
+  }
+
+  void AGWidget::setWidth(float w)
+    {
+      regChange();
+      mr.setWidth(w);
+      regChange();
+    }
+  void AGWidget::setHeight(float h)
+    {
+      regChange();
+      mr.setHeight(h);
+      regChange();
+    }
+
+  void AGWidget::setTop(float y)
+    {
+      regChange();
+      mr.setTop(y);
+      regChange();
+    }
+  void AGWidget::setLeft(float x)
+    {
+      regChange();
+      mr.setLeft(x);
+      regChange();
+    }
+  float AGWidget::bottom() const
+  {
+    return mr[1][1];
+  }
+  float AGWidget::right() const
+  {
+    return mr[1][0];
+  }
 
 
-AGWidget *AGWidget::getParent()
-{
-  return mParent;
-}
+  float AGWidget::top() const
+  {
+    return mr.y();
+  }
 
-AGVector2 AGWidget::getScreenPosition() const
-{
-  AGVector2 p=mr[0];
+  float AGWidget::left() const
+  {
+    return mr.x();
+  }
 
-  if(mParent)
-    p+=mParent->getScreenPosition();
+  void AGWidget::show()
+    {
+      mVisible=true;
+      queryRedraw();
+    }
+  void AGWidget::hide()
+    {
+      mVisible=false;
+      queryRedraw();
+    }
 
-  return p;
-}
+  void AGWidget::setVisible(bool v)
+    {
+      if(mVisible!=v)
+        {
+          queryRedraw();
+        }
+      mVisible=v;
+    }
 
 
-AGRect2 AGWidget::getScreenRect() const
-{
-  AGRect2 srect(mr.origin()+getScreenPosition());
-  return srect;
-}
+  void AGWidget::setParent(AGWidget *pParent)
+    {
+      if(!mParent)
+        {
+          if(hasMain())
+            getMain()->getCollector()->removeGlobal(this);
+        }
 
-AGVector2 AGWidget::fromScreen(const AGVector2 &p) const
-{
-  if(!mParent)
+      mParent=pParent;
+    }
+
+
+  AGWidget *AGWidget::getParent()
+    {
+      return mParent;
+    }
+
+  AGVector2 AGWidget::getScreenPosition() const
+  {
+    AGVector2 p=mr[0];
+
+    if(mParent)
+      p+=mParent->getScreenPosition();
+
     return p;
-  AGRect2 r(mParent->getScreenRect());
-  return p-r[0];
-}
+  }
 
-bool AGWidget::canFocus() const
-{
-  std::list<AGWidget*>::const_iterator i=mChildren.begin();
 
-  for(;i!=mChildren.end();i++)
-    if((*i)->canFocus())
-      {
+  AGRect2 AGWidget::getScreenRect() const
+  {
+    AGRect2 srect(mr.origin()+getScreenPosition());
+    return srect;
+  }
 
-	return true;
-      }
+  AGVector2 AGWidget::fromScreen(const AGVector2 &p) const
+  {
+    if(!mParent)
+      return p;
+    AGRect2 r(mParent->getScreenRect());
+    return p-r[0];
+  }
 
-  return false;
-}
+  bool AGWidget::canFocus() const
+  {
+    std::list<AGWidget*>::const_iterator i=mChildren.begin();
 
-bool AGWidget::eventGotFocus()
-{
-  mHasFocus=true;
-  return false;
-}
+    for(;i!=mChildren.end();i++)
+      if((*i)->canFocus())
+        {
 
-bool AGWidget::eventLostFocus()
-{
-  if(mFocus)
-    mFocus->eventLostFocus();
-  mHasFocus=false;
-  mFocus=0;
-  
-  return false;
-}
-/*
+          return true;
+        }
+
+    return false;
+  }
+
+  bool AGWidget::eventGotFocus()
+    {
+      mHasFocus=true;
+      return false;
+    }
+
+  bool AGWidget::eventLostFocus()
+    {
+      if(mFocus)
+        mFocus->eventLostFocus();
+      mHasFocus=false;
+      mFocus=0;
+
+      return false;
+    }
+  /*
 void AGWidget::setMenu(AGMenu *pMenu)
 {
   mMenu=pMenu;
   }*/
 
-void AGWidget::gainCompleteFocus(AGWidget *pWidget)
-{
-#ifdef FOCUS_BY_SORT
-  if(mParent)
-    mParent->gainCompleteFocus(this);
-  if(pWidget)
+  void AGWidget::gainCompleteFocus(AGWidget *pWidget)
     {
-      //      dbout(5000,mChildren.size());
-      std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
-      if(i!=mChildren.end())
-	{
-	  mChildren.erase(i);
-	  mChildren.push_front(pWidget);
-	}
-      //      dbout(5000,mChildren.size());
-    }
+#ifdef FOCUS_BY_SORT
+      if(mParent)
+        mParent->gainCompleteFocus(this);
+      if(pWidget)
+        {
+          //      dbout(5000,mChildren.size());
+          std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+          if(i!=mChildren.end())
+            {
+              mChildren.erase(i);
+              mChildren.push_front(pWidget);
+            }
+          //      dbout(5000,mChildren.size());
+        }
 #endif
-}
+    }
 
-void AGWidget::gainFocus(AGWidget *pWidget)
-{
+  void AGWidget::gainFocus(AGWidget *pWidget)
+    {
 #ifdef FOCUS_BY_SORT
-  if(pWidget)
-    {
-      //      dbout(5000,mChildren.size());
-      std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
-      if(i!=mChildren.end())
-	{
-	  mChildren.erase(i);
+      if(pWidget)
+        {
+          //      dbout(5000,mChildren.size());
+          std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+          if(i!=mChildren.end())
+            {
+              mChildren.erase(i);
 
-	  if(mChildren.size()>0)
-	    (*mChildren.begin())->eventLostFocus();
+              if(mChildren.size()>0)
+                (*mChildren.begin())->eventLostFocus();
 
-	  mChildren.push_front(pWidget);
-	  pWidget->eventGotFocus();
+              mChildren.push_front(pWidget);
+              pWidget->eventGotFocus();
 
-	}
-      //      dbout(5000,mChildren.size());
-    }
-  else if(mParent)
-    {
-      if(canFocus())
-	{
-	  mParent->gainFocus(this);
-	}
-    }
+            }
+          //      dbout(5000,mChildren.size());
+        }
+      else if(mParent)
+        {
+          if(canFocus())
+            {
+              mParent->gainFocus(this);
+            }
+        }
 #else
-  if(pWidget==0 && mParent)
-    mParent->gainFocus(this);
-  else if(mParent)
-    mParent->gainFocus(pWidget);
-  else
-    gainFocusDown(pWidget);
+      if(pWidget==0 && mParent)
+        mParent->gainFocus(this);
+      else if(mParent)
+        mParent->gainFocus(pWidget);
+      else
+        gainFocusDown(pWidget);
 #endif
-}
-
-void AGWidget::gainFocusDown(AGWidget *pWidget)
-{
-  std::list<AGWidget*>::iterator i;
-  i=std::find(mChildren.begin(),mChildren.end(),pWidget);
-  if(i!=mChildren.end())
-    {
-      // found
-      if(!mHasFocus)
-	{
-	  if(mParent)
-	    mParent->gainFocus(this);
-	  else
-	    {
-	      mHasFocus=true;
-	      eventGotFocus();
-	    }
-	}
-      
-      if(mFocus!=pWidget)
-	{
-	  if(mFocus)
-	    mFocus->eventLostFocus();
-	  mFocus=pWidget;
-	  mFocus->eventGotFocus();
-	}
     }
-  else
-    {
-      for(i=mChildren.begin();i!=mChildren.end();i++)
-	(*i)->gainFocusDown(pWidget);
-    }
-}
 
-void AGWidget::checkFocus()
-{
-  if(mChildren.size()>0 && mFocus && mHasFocus)
+  void AGWidget::gainFocusDown(AGWidget *pWidget)
     {
-      if(mFocus!=*mChildren.begin())
-	{
-	  std::list<AGWidget*>::iterator i;
-	  
-	  i=std::find(mChildren.begin(),mChildren.end(),mFocus);
-	  // delete children and set to front 
-	  mChildren.erase(i);
-	  mChildren.push_front(mFocus);
-	  //	  dbout(5000,"mchildren #:"<<mChildren.size());
-	}
-    }
-}
+      std::list<AGWidget*>::iterator i;
+      i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+      if(i!=mChildren.end())
+        {
+          // found
+          if(!mHasFocus)
+            {
+              if(mParent)
+                mParent->gainFocus(this);
+              else
+                {
+                  mHasFocus=true;
+                  eventGotFocus();
+                }
+            }
 
-bool AGWidget::hasFocus(const AGWidget *pWidget)
-{
+          if(mFocus!=pWidget)
+            {
+              if(mFocus)
+                mFocus->eventLostFocus();
+              mFocus=pWidget;
+              mFocus->eventGotFocus();
+            }
+        }
+      else
+        {
+          for(i=mChildren.begin();i!=mChildren.end();i++)
+            (*i)->gainFocusDown(pWidget);
+        }
+    }
+
+  void AGWidget::checkFocus()
+    {
+      if(mChildren.size()>0 && mFocus && mHasFocus)
+        {
+          if(mFocus!=*mChildren.begin())
+            {
+              std::list<AGWidget*>::iterator i;
+
+              i=std::find(mChildren.begin(),mChildren.end(),mFocus);
+              // delete children and set to front 
+              mChildren.erase(i);
+              mChildren.push_front(mFocus);
+            }
+        }
+    }
+
+  bool AGWidget::hasFocus(const AGWidget *pWidget)
+    {
 #ifdef FOCUS_BY_SORT
-  if(pWidget==0)
-    {
-      if(mParent)
-	return mParent->hasFocus(this);
-      else
-	return true;
-    }
-  if(mChildren.size()==0)
-    return true; // some error
+      if(pWidget==0)
+        {
+          if(mParent)
+            return mParent->hasFocus(this);
+          else
+            return true;
+        }
+      if(mChildren.size()==0)
+        return true; // some error
 
-  if(*mChildren.begin()==pWidget)
-    {
-      if(mParent)
-	return mParent->hasFocus(this); // ok - so go on and check if "this" has focus
-      return true; // ok
-    }
+      if(*mChildren.begin()==pWidget)
+        {
+          if(mParent)
+            return mParent->hasFocus(this); // ok - so go on and check if "this" has focus
+          return true; // ok
+        }
 
-  return false;
+      return false;
 #else
-  if(pWidget==0)
-    {
-      if(mParent)
-	return mParent->hasFocus(this);
-      else
-	return true;
-    }
-  else if(mFocus!=pWidget)
-    return false;
-  else if(mParent)
-    return mParent->hasFocus(this);
-  return true;
-#endif
-}
-
-
-bool AGWidget::eventDragBy(AGEvent *event,const AGVector2 &pDiff)
-{
-  return false;
-}
-
-bool AGWidget::getFocus() const
-{
-  return mHasFocus;
-}
-
-const AGString &AGWidget::getName() const
-{
-  return mName;
-}
-void AGWidget::setName(const AGString &pName)
-{
-  mName=pName;
-}
-
-void AGWidget::drawAfter(AGPainter &p)
-{
-}
-
-bool AGWidget::visible() const
-{
-  return mVisible;
-}
-
-/// override this and return true, if widget is opaque and you want to increase performance
-bool AGWidget::isOpaque() const
-{
-  return false;
-}
-
-
-
-AGWidget *AGWidget::getChild(const AGString &pName)
-{
-	CTRACE;
-  if(mName==pName)
-    return this;
-
-  AGWidget *w=0;
-  std::list<AGWidget*>::iterator i=mChildren.begin();
-
-  for(;i!=mChildren.end();i++)
-    {
-      w=(*i)->getChild(pName);
-      if(w)
-				break;
-    }
-//	cdebug("w:"<<w);
-  return w;
-}
-
-void AGWidget::setModal(bool pModal)
-{
-  mModal=pModal;
-}
-
-void AGWidget::mark()
-{
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
-    {
-      markObject(*i);
-    }
-
-  // mark mToClear also - as it can be that they are still used on stack
-  for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)
-    markObject(*i);
-}
-
-
-
-AGWidget *toAGWidget(AGMessageObject *o)
-{
-  return dynamic_cast<AGWidget*>(o);
-}
-
-
-bool AGWidget::redraw() const
-{
-  return mCacheTouched;
-}
-
-bool AGWidget::checkRedraw() const
-{
-  if(!mVisible)
-    return false;
-  if(redraw())
-    return true;
-  for(std::list<AGWidget*>::const_iterator i=mChildren.begin();i!=mChildren.end();++i)
-    if((*i)->checkRedraw())
+      if(pWidget==0)
+        {
+          if(mParent)
+            return mParent->hasFocus(this);
+          else
+            return true;
+        }
+      else if(mFocus!=pWidget)
+        return false;
+      else if(mParent)
+        return mParent->hasFocus(this);
       return true;
-  return false;
-}
+#endif
+    }
 
-void AGWidget::prepareDrawAll()
-{
-  if(!mVisible)
-    return;
 
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
-    (*i)->prepareDrawAll();
+  bool AGWidget::eventDragBy(AGEvent *event,const AGVector2 &pDiff)
+    {
+      return false;
+    }
 
-  prepareDraw();
+  bool AGWidget::getFocus() const
+  {
+    return mHasFocus;
+  }
+
+  const AGString &AGWidget::getName() const
+  {
+    return mName;
+  }
+  void AGWidget::setName(const AGString &pName)
+    {
+      mName=pName;
+    }
+
+  void AGWidget::drawAfter(AGPainter &p)
+    {
+    }
+
+  bool AGWidget::visible() const
+  {
+    return mVisible;
+  }
+
+  /// override this and return true, if widget is opaque and you want to increase performance
+  bool AGWidget::isOpaque() const
+  {
+    return false;
+  }
+
+
+
+  AGWidget *AGWidget::getChild(const AGString &pName)
+    {
+      CTRACE;
+      if(mName==pName)
+        return this;
+
+      AGWidget *w=0;
+      std::list<AGWidget*>::iterator i=mChildren.begin();
+
+      for(;i!=mChildren.end();i++)
+        {
+          w=(*i)->getChild(pName);
+          if(w)
+            break;
+        }
+      return w;
+    }
+
+  void AGWidget::setModal(bool pModal)
+    {
+      mModal=pModal;
+    }
+
+  void AGWidget::mark()
+    {
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+        {
+          markObject(*i);
+        }
+
+      // mark mToClear also - as it can be that they are still used on stack
+      for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)
+        markObject(*i);
+    }
+
+
+
+  AGWidget *toAGWidget(AGMessageObject *o)
+    {
+      return dynamic_cast<AGWidget*>(o);
+    }
+
+
+  bool AGWidget::redraw() const
+  {
+    return mCacheTouched;
+  }
+
+  bool AGWidget::checkRedraw() const
+  {
+    if(!mVisible)
+      return false;
+    if(redraw())
+      return true;
+    for(std::list<AGWidget*>::const_iterator i=mChildren.begin();i!=mChildren.end();++i)
+      if((*i)->checkRedraw())
+        return true;
+    return false;
+  }
+
+  void AGWidget::prepareDrawAll()
+    {
+      if(!mVisible)
+        return;
+
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+        (*i)->prepareDrawAll();
+
+      prepareDraw();
+
+    }
+
+
+  void AGWidget::prepareDraw()
+    {
+      if(!mVisible)
+        return;
+
+      if(mCache)
+        {
+          if(checkRedraw() || !mCache->hasTexture())
+            {
+              mCache->clearContent();
+
+              AGPainter p(*mCache);
+
+              if(!mChildrenDrawFirst)
+                draw(p);
+
+              std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+
+              for(;i!=mChildren.rend();i++)
+                (*i)->drawAll(p);
+
+              if(mChildrenDrawFirst)
+                draw(p);
+
+              drawAfter(p);
+
+              setDrawn();
+
+              if(mParent)
+                {
+                  mParent->queryRedraw();
+                }
+
+              assert(checkRedraw()==false);
+              assert(mCache->hasTexture());
+            }
+        }
+    }
   
-}
-
-
-void AGWidget::prepareDraw()
-{
-  if(!mVisible)
-    return;
-
-  if(mCache)
+  /**
+   * enable texture caching for this widget (widgetTextureCache in config must be enabled for this)
+   * cache will be discarded whenever you modify the widget (e.g. by setting its text or the like).
+   * You'll have to call queryRedraw in subclasses. This works for both gl- and sdl-mode.
+   */
+  void AGWidget::setCaching(bool pEnable)
     {
-      if(checkRedraw() || !mCache->hasTexture())
-	{
-	  mCache->clearContent();
+      if(getConfig()->get("widgetTextureCache")=="false")
+        return;
+      getConfig()->set("widgetTextureCache","true");
 
-	  AGPainter p(*mCache);
+      mCaching=pEnable;
+      delete mCache;
 
-	  if(!mChildrenDrawFirst)
-	    draw(p);
-	  
-	  std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+      mCache=0;
+      mCacheTouched=false;
+      if(pEnable)
+        {
+          mCache=new AGTexture((int)width(),(int)height());
 
-	  for(;i!=mChildren.rend();i++)
-	    (*i)->drawAll(p);
-
-	  if(mChildrenDrawFirst)
-	    draw(p);
-
-	  drawAfter(p);
-
-	  setDrawn();
-
-	  /*
-	  {
-	    static int i=0;
-	    i++;
-	    std::ostringstream os;
-	    os<<"widget_"<<i<<".png";
-	    AGSurface ms(mCache->sdlTexture());
-	    ms.save(os.str());
-	    
-	  }
-	  */
-
-	  if(mParent)
-	    {
-	      //CTRACE;
-	      // cdebug("parent->queryRedraw::"<<typeid(*this).name()<<":"<<getName());
-	      mParent->queryRedraw();
-	    }
-
-	  assert(checkRedraw()==false);
-	  assert(mCache->hasTexture());
-	}
+          mCacheTouched=true;
+        }
     }
-}
-void AGWidget::setCaching(bool pEnable)
-{
-  // FIXME: really no caching without GL? 
-  //  if(!glMode())
-  //    return;
 
-
-  if(getConfig()->get("widgetTextureCache")=="false")
-    return;
-  getConfig()->set("widgetTextureCache","true");
-
-  mCaching=pEnable;
-  delete mCache;
-
-  mCache=0;
-  mCacheTouched=false;
-  if(pEnable)
+  void AGWidget::setDrawn()
     {
-      mCache=new AGTexture((int)width(),(int)height());
-      
+      if(!mVisible)
+        return;
+
+      mCacheTouched=false;
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+        (*i)->setDrawn();
+      mChangeRect=AGRect2(0,0,0,0);
+    }
+
+  void AGWidget::queryRedraw()
+    {
+      //  cdebug(getName()<<"::"<<typeid(*this).name());
       mCacheTouched=true;
+      regChange();
     }
-}
 
-void AGWidget::setDrawn()
-{
-  if(!mVisible)
-    return;
-
-  mCacheTouched=false;
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
-    (*i)->setDrawn();
-  mChangeRect=AGRect2(0,0,0,0);
-}
-
-void AGWidget::queryRedraw()
-{
-//  cdebug(getName()<<"::"<<typeid(*this).name());
-  mCacheTouched=true;
-  regChange();
-}
-
-/**
+  /**
    \brief special function for "using textures"
 
    within a texture-garbage-collection run all unused textures get cleaned,
    so this function "uses" the textures. This way they won't get collected
-*/
-void AGWidget::useTextures()
-{
-}
+   */
+  void AGWidget::useTextures()
+    {
+    }
 
-/**
+  /**
    \brief special function for "using textures"
 
    within a texture-garbage-collection run all unused textures get cleaned,
    so this function "uses" the textures. This way they won't get collected.
 
    This function calles useTextures() recursively. Don't override this one!
-*/
-void AGWidget::useTexturesRecursive()
-{
-  useTextures();
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
-    (*i)->useTexturesRecursive();
-}
-
-AGRect2 AGWidget::getChangeRect()
-{
-  AGRect2 r=mChangeRect;
-  
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+   */
+  void AGWidget::useTexturesRecursive()
     {
-      AGRect2 n=(*i)->getChangeRect();
-      if(n.width()!=0 && n.height()!=0)
-	{
-	  if(r.width()!=0 && r.height()!=0)
-	    {
-	      r.include(n[0]);
-	      r.include(n[1]);
-	    }
-	  else
-	    r=n;
-	}
+      useTextures();
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+        (*i)->useTexturesRecursive();
     }
-  return r;
-}
 
-void AGWidget::setTooltip(const AGStringUtf8 &pTooltip)
-{
-  mTooltip=pTooltip;
-}
-
-AGLayout *AGWidget::getLayout()
-{
-  AGLayout *l=dynamic_cast<AGLayout*>(this);
-  if(l)
-    return l;
-  if(mParent)
-    return mParent->getLayout();
-  return 0;
-}
-
-void AGWidget::initHandlers()
-{
-}
-
-void AGWidget::eventTick(float pTime)
-{
-}
-void AGWidget::sigTick(float pTime)
-{
-  eventTick(pTime);
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
-    (*i)->sigTick(pTime);
-}
-
-void AGWidget::close()
-{
-  if(mParent)
-  {
-    mParent->removeChild(this);
-    mParent=0;
-  }
-}
-
-bool AGWidget::isParent(AGWidget *pParent)
-{
-  if(mParent==pParent)
-    return true;
-  else if(mParent!=0)
-    return mParent->isParent(pParent);
-  return false;
-}
-
-void AGWidget::acquireClipping(AGClipping &p)
-{
-  if(!visible())
-    return;
-
-  //  cdebug("clipping before:"<<p.toString());
-  if(isOpaque())
-    p.exclude(getScreenRect());
-  
-  for(std::list<AGRect2>::iterator i=mMyChanges.begin();i!=mMyChanges.end();i++)
-    p.include(*i);//+getScreenPosition());
-
-  //  cdebug("clipping in:"<<p.toString());
-  
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
-    (*i)->acquireClipping(p);
-
-  //  cdebug("clipping after:"<<p.toString());
-  return;
-}
-
-
-std::list<AGRect2> AGWidget::aquireChanges()
-{
-  std::list<AGRect2> l;
-
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+  AGRect2 AGWidget::getChangeRect()
     {
-      std::list<AGRect2> t=(*i)->aquireChanges();
-      // FIXME: check, if opaque and truncates rectangles
-      std::copy(t.begin(),t.end(),std::back_inserter(l));
+      AGRect2 r=mChangeRect;
+
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+        {
+          AGRect2 n=(*i)->getChangeRect();
+          if(n.width()!=0 && n.height()!=0)
+            {
+              if(r.width()!=0 && r.height()!=0)
+                {
+                  r.include(n[0]);
+                  r.include(n[1]);
+                }
+              else
+                r=n;
+            }
+        }
+      return r;
     }
-  std::copy(mMyChanges.begin(),mMyChanges.end(),std::back_inserter(l));
-  
-  return l;
-}
-void AGWidget::pushChangeRect(const AGRect2 &pRect)
-{
-//  cdebug("push:"<<pRect);
-  mMyChanges.push_back(pRect);
-}
-void AGWidget::clearChangeRects()
-{
-  //  cdebug("clearing - size was:"<<mMyChanges.size());
-  mMyChanges.clear();
-  for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
-    (*i)->clearChangeRects();
-}
 
-AGApplication *AGWidget::getApp()
-{
-	if(!mApp)
-		if(mParent)
-			return mParent->getApp();
-	return mApp;
-}
+  void AGWidget::setTooltip(const AGStringUtf8 &pTooltip)
+    {
+      mTooltip=pTooltip;
+    }
 
-void AGWidget::setApp(AGApplication *pApp)
-{
-	assert(!mApp);
-	mApp=pApp;
-}
+  AGLayout *AGWidget::getLayout()
+    {
+      AGLayout *l=dynamic_cast<AGLayout*>(this);
+      if(l)
+        return l;
+      if(mParent)
+        return mParent->getLayout();
+      return 0;
+    }
+
+  void AGWidget::initHandlers()
+    {
+    }
+
+  void AGWidget::eventTick(float pTime)
+    {
+    }
+  void AGWidget::sigTick(float pTime)
+    {
+      eventTick(pTime);
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();++i)
+        (*i)->sigTick(pTime);
+    }
+
+  void AGWidget::close()
+    {
+      if(mParent)
+        {
+          mParent->removeChild(this);
+          mParent=0;
+        }
+    }
+
+  bool AGWidget::isParent(AGWidget *pParent)
+    {
+      if(mParent==pParent)
+        return true;
+      else if(mParent!=0)
+        return mParent->isParent(pParent);
+      return false;
+    }
+
+  void AGWidget::acquireClipping(AGClipping &p)
+    {
+      if(!visible())
+        return;
+
+      //  cdebug("clipping before:"<<p.toString());
+      if(isOpaque())
+        p.exclude(getScreenRect());
+
+      for(std::list<AGRect2>::iterator i=mMyChanges.begin();i!=mMyChanges.end();i++)
+        p.include(*i);//+getScreenPosition());
+
+      //  cdebug("clipping in:"<<p.toString());
+
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+        (*i)->acquireClipping(p);
+
+      //  cdebug("clipping after:"<<p.toString());
+      return;
+    }
+
+
+  std::list<AGRect2> AGWidget::aquireChanges()
+    {
+      std::list<AGRect2> l;
+
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+        {
+          std::list<AGRect2> t=(*i)->aquireChanges();
+          // FIXME: check, if opaque and truncates rectangles
+          std::copy(t.begin(),t.end(),std::back_inserter(l));
+        }
+      std::copy(mMyChanges.begin(),mMyChanges.end(),std::back_inserter(l));
+
+      return l;
+    }
+  void AGWidget::pushChangeRect(const AGRect2 &pRect)
+    {
+      //  cdebug("push:"<<pRect);
+      mMyChanges.push_back(pRect);
+    }
+  void AGWidget::clearChangeRects()
+    {
+      //  cdebug("clearing - size was:"<<mMyChanges.size());
+      mMyChanges.clear();
+      for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
+        (*i)->clearChangeRects();
+    }
+
+  AGApplication *AGWidget::getApp()
+    {
+      if(!mApp)
+        if(mParent)
+          return mParent->getApp();
+      return mApp;
+    }
+
+  void AGWidget::setApp(AGApplication *pApp)
+    {
+      assert(!mApp);
+      mApp=pApp;
+    }
 

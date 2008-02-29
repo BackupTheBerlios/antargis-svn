@@ -19,7 +19,7 @@ class AntEntity;
 /**
    AnimMesh is a skeleton animated mesh.
    It support either shader-based and cpu-based animation.
-*/
+ */
 class AGEXPORT AnimMesh:public MeshBase
 {
   AnimMeshData *mData;
@@ -35,7 +35,7 @@ class AGEXPORT AnimMesh:public MeshBase
   std::vector<AGMatrix4> mMatrices;
   std::vector<AGMatrix4> mShaderMatrices;
 
- public:
+public:
   AnimMesh(Scene *pScene,AnimMeshData *data);
   virtual ~AnimMesh();
 
@@ -54,14 +54,14 @@ class AGEXPORT AnimMesh:public MeshBase
   virtual void drawDepth();
   virtual void drawPick();
   virtual void advance(float time);
-	
+
   virtual void mark();
 
   void setEntity(AntEntity *e);
 
   virtual size_t getTriangles() const;
 
- private:
+private:
 
   void drawPrivate(bool textured,bool mem);
 

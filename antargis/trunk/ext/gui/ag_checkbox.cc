@@ -27,69 +27,42 @@
 #include "ag_local.h"
 
 AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect2 pRect):
-  AGButton(pParent,pRect,"")//,mChecked(false)
-{
-  mSurfaces[0]=mSurfaces[1]=0;
-  /*  mImage=0;
-  if(getTheme()->hasSurface(mType+".normal"))
-    addChild(mImage=new AGImage(this,AGVector2(0,0),getTheme()->getSurface(mType+".normal"),false));
-  addChild(new AGText(this,AGVector2(0,0),pName,getTheme()->getFont(std::string("Font.")+mType)));
-
-  adaptHeightFromChildren();*/
-}
+  AGButton(pParent,pRect,"")
+  {
+    mSurfaces[0]=mSurfaces[1]=0;
+  }
 
 bool AGCheckBox::eventMouseClick(AGEvent *m)
-{
-  CTRACE;
-  setChecked(!isChecked());
-  /*
-  mChecked=!mChecked;
-  if(mChecked)
-    setState(CHECKED);
-  else
-  setState(NORMAL);*/
-    /*
+  {
+    CTRACE;
+    setChecked(!isChecked());
+    return AGButton::eventMouseClick(m);//false;//true; // eat
+  }
 
-  if(mImage)
-    {
-      if(mChecked)
-	mImage->setSurface(getTheme()->getSurface(mType+".checked"));
-      else
-	mImage->setSurface(getTheme()->getSurface(mType+".normal"));
-	}*/
-  return AGButton::eventMouseClick(m);//false;//true; // eat
-}
-
-/*
-std::string AGCheckBox::getName() const
-{
-  return mName;
-}
-*/
 
 
 void AGCheckBox::setSurfaces(AGSurface pDisabledSurface,AGSurface pEnabledSurface)
-{
-  delete mSurfaces[0];
-  delete mSurfaces[1];
-  mSurfaces[0]=new AGSurface(pDisabledSurface);
-  mSurfaces[1]=new AGSurface(pEnabledSurface);
+  {
+    delete mSurfaces[0];
+    delete mSurfaces[1];
+    mSurfaces[0]=new AGSurface(pDisabledSurface);
+    mSurfaces[1]=new AGSurface(pEnabledSurface);
 
-  //  setState(getState());
-  queryRedraw();
-}
+    //  setState(getState());
+    queryRedraw();
+  }
 
 void AGCheckBox::setState(const State &pState)
-{
-  if(mSurfaces[0])
-    {
-      if(pState==NORMAL || pState==LIGHTED || pState==PRESSED)
-	setSurface(*(mSurfaces[0]));
-      else
-	setSurface(*(mSurfaces[1]));
-    }
+  {
+    if(mSurfaces[0])
+      {
+        if(pState==NORMAL || pState==LIGHTED || pState==PRESSED)
+          setSurface(*(mSurfaces[0]));
+        else
+          setSurface(*(mSurfaces[1]));
+      }
 
-  AGButton::setState(pState);
-}
+    AGButton::setState(pState);
+  }
 
 

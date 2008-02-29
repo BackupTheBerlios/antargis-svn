@@ -22,80 +22,60 @@
 #include "ag_debug.h"
 
 int toInt(const std::string &s)
-{
-  return atoi(s.c_str());
-}
+  {
+    return atoi(s.c_str());
+  }
 long toLong(const std::string &s)
-{
-  return atol(s.c_str());
-}
+  {
+    return atol(s.c_str());
+  }
 float toFloat(const std::string &s)
-{
-  float f=atof(s.c_str());
-  return f;
-}
+  {
+    float f=atof(s.c_str());
+    return f;
+  }
 
 int fromHex(const std::string &s)
-{
-  int i=0;
-  for(size_t j=0;j<s.length();j++)
-    {
-      int k=0;
-      i<<=4;
-      char c=s[j];
-      if(c>='A'&&c<='F')
-	k=c-'A'+10;
-      else if(c>='a' && c<='f')
-	k=c-'a'+10;
-      else if(c>='0' && c<='9')
-	k=c-'0';
-      i+=k;
-    }
-  return i;
-}
+  {
+    int i=0;
+    for(size_t j=0;j<s.length();j++)
+      {
+        int k=0;
+        i<<=4;
+        char c=s[j];
+        if(c>='A'&&c<='F')
+          k=c-'A'+10;
+        else if(c>='a' && c<='f')
+          k=c-'a'+10;
+        else if(c>='0' && c<='9')
+          k=c-'0';
+        i+=k;
+      }
+    return i;
+  }
 std::string toHex(int i)
-{
-  std::string s;
-  std::string c="0";
-  while(i!=0)
-    {
-      int k=i&0xF;
+  {
+    std::string s;
+    std::string c="0";
+    while(i!=0)
+      {
+        int k=i&0xF;
 
-      if(k>9)
-	c[0]='A'+k-10;
-      else
-	c[0]='0'+k;
+        if(k>9)
+          c[0]='A'+k-10;
+        else
+          c[0]='0'+k;
 
-      s=c+s;
-      i>>=4;
-    }
-    
-  
-  while(s.length()<2)
-    s=std::string("0")+s;
-  return s;
-}
-/*
-std::string getFile(const std::string &pFilename)
-{
-  FILE *f;
-  std::string s;
+        s=c+s;
+        i>>=4;
+      }
 
-  f=fopen(pFilename.c_str(),"rb");
-  if(f)
-    {
-      char buf[1002];
-      size_t l;
-      while(!feof(f))
-	{
-	  
-	  if((l=fread(buf,sizeof(char),1000,f))>0)
-	    s+=std::string(buf,l);
-	}
-    }
 
-  return s;
-  }*/
+    while(s.length()<2)
+      s=std::string("0")+s;
+    return s;
+  }
+
 
 std::vector<std::string> split(const std::string &needle,const std::string &haystack)
 {
@@ -114,13 +94,13 @@ std::vector<std::string> split(const std::string &needle,const std::string &hays
 
 
 std::string replace(const std::string &s,const std::string &a,const std::string &b)
-{
-  std::string str=s;
-  size_t i=str.find(a);
-  while(i!=str.npos)
-    {
-      str=str.substr(0,i)+b+str.substr(i+a.length(),str.length()-i-a.length());
-      i=str.find(a,i+b.length());
-    }
-  return str;
-}
+  {
+    std::string str=s;
+    size_t i=str.find(a);
+    while(i!=str.npos)
+      {
+        str=str.substr(0,i)+b+str.substr(i+a.length(),str.length()-i-a.length());
+        i=str.find(a,i+b.length());
+      }
+    return str;
+  }

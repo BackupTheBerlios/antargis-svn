@@ -121,52 +121,52 @@ bool AGApplication::run()
             STACKTRACE;
             // check for finished music
             getMain()->repeatedCalls();
-            //	getSoundManager()->checkFinished();
+            //  getSoundManager()->checkFinished();
 
             now=SDL_GetTicks();
             /*
-	// pull motion events (may flood the eventqueue)
-		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
-	  ;
+  // pull motion events (may flood the eventqueue)
+    while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
+    ;
              */
             clearOldMousePosition();
-            //	dbout(2,"loop pre-event:"<<loopCount);
+            //  dbout(2,"loop pre-event:"<<loopCount);
             event=getNewEvent();
             if(eventOk(event))
               {
                 do
                   {
-                    //		dbout(2,"eventok  "<<toString(&event));
+                    //    dbout(2,"eventok  "<<toString(&event));
                     doEvent(event);
                     if(mIdleCalls)
                       {
-                        //		    dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
+                        //        dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
                         event=getNewEvent();
                       }
                     else
                       resetEvent(event);
                   }while(eventOk(event));
               } 
-            //	dbout(2,"loop post-event:"<<loopCount);
+            //  dbout(2,"loop post-event:"<<loopCount);
             /*
-	if(mIdleCalls) 
-	  {
-	    if (SDL_PollEvent(&event) == 0) 
-	      eventIdle();
-	    else
-	      {
-		do
-		  {
-		    doEvent(&event);
-		  }while(SDL_PollEvent(&event)!=0);
-	      }
+  if(mIdleCalls) 
+    {
+      if (SDL_PollEvent(&event) == 0) 
+        eventIdle();
+      else
+        {
+    do
+      {
+        doEvent(&event);
+      }while(SDL_PollEvent(&event)!=0);
+        }
 
-	  } 
-	else 
-	  {
-	    SDL_WaitEvent(&event);
-	    doEvent(&event);
-	    }*/
+    } 
+  else 
+    {
+      SDL_WaitEvent(&event);
+      doEvent(&event);
+      }*/
 
             if(mDemoTime>=0)
               {

@@ -25,42 +25,42 @@
 #include <sstream>
 
 AGColor::AGColor(const AGVector4 &v)
-{
-  r=(Uint8)(v[0]*0xFF);
-  g=(Uint8)(v[1]*0xFF);
-  b=(Uint8)(v[2]*0xFF);
-  a=(Uint8)(v[3]*0xFF);
-}
+  {
+    r=(Uint8)(v[0]*0xFF);
+    g=(Uint8)(v[1]*0xFF);
+    b=(Uint8)(v[2]*0xFF);
+    a=(Uint8)(v[3]*0xFF);
+  }
 
 AGColor::AGColor(const AGString &s)
-{
-  r=g=b=0;
-  a=0xFF;
-  if(s.length()>0)
-    {
-      AGString p=s.substr(1,s.npos);
-      if(p.length()==6)
-	{
-	  r=p.substr(0,2).parseHex();
-	  g=p.substr(2,2).parseHex();
-	  b=p.substr(4,2).parseHex();
-	  a=0xFF;
-	}
-      else if(p.length()==8)
-	{
-	  r=p.substr(0,2).parseHex();
-	  g=p.substr(2,2).parseHex();
-	  b=p.substr(4,2).parseHex();
-	  a=p.substr(6,2).parseHex();
-	}
-    }
-}
+  {
+    r=g=b=0;
+    a=0xFF;
+    if(s.length()>0)
+      {
+        AGString p=s.substr(1,s.npos);
+        if(p.length()==6)
+          {
+            r=p.substr(0,2).parseHex();
+            g=p.substr(2,2).parseHex();
+            b=p.substr(4,2).parseHex();
+            a=0xFF;
+          }
+        else if(p.length()==8)
+          {
+            r=p.substr(0,2).parseHex();
+            g=p.substr(2,2).parseHex();
+            b=p.substr(4,2).parseHex();
+            a=p.substr(6,2).parseHex();
+          }
+      }
+  }
 
 AGColor::AGColor()//:  mr(0),mg(0),mb(0),ma(0)
-{
-  r=g=b=0;
-  a=0xFF;
-}
+  {
+    r=g=b=0;
+    a=0xFF;
+  }
 
 AGColor::AGColor(int pr,int pg,int pb,int pa)/*:
 AGColor::AGColor(Uint8 pr,Uint8 pg,Uint8 pb,Uint8 pa):
@@ -68,22 +68,22 @@ AGColor::AGColor(Uint8 pr,Uint8 pg,Uint8 pb,Uint8 pa):
   mg(g),
   mb(b),
   ma(a)*/
-{
-  r=pr;
-  g=pg;
-  b=pb;
-  a=pa;
-}
+  {
+    r=pr;
+    g=pg;
+    b=pb;
+    a=pa;
+  }
 AGColor::AGColor(const AGColor &c):
   /*  r(c.r),
   g(c.g),
   b(c.b),*/
   a(c.a)
-{
-  r=c.r;
-  g=c.g;
-  b=c.b;
-}
+  {
+    r=c.r;
+    g=c.g;
+    b=c.b;
+  }
 
 AGVector4 AGColor::toVec() const
 {
@@ -100,7 +100,7 @@ SDL_Color AGColor::sdlColor() const
   c.g=mg;
   c.b=mb;
 }
-*/
+ */
 
 Uint32 AGColor::mapRGB(SDL_PixelFormat *f) const
 {
@@ -117,25 +117,25 @@ AGString AGColor::toString() const
 }
 
 AGColor &AGColor::operator=(const AGColor&c)
-{
-  r=c.r;
-  g=c.g;
-  b=c.b;
-  a=c.a;
-  return *this;
-}
+  {
+    r=c.r;
+    g=c.g;
+    b=c.b;
+    a=c.a;
+    return *this;
+  }
 
 bool operator<(const AGColor &c1,const AGColor &c2)
-{
-  return c1.r<c2.r || (c1.r==c2.r && (c1.g<c2.g || (c1.g==c2.g && (c1.b<c2.b || (c1.b==c2.b && c1.a<c2.a)))));
-}
+  {
+    return c1.r<c2.r || (c1.r==c2.r && (c1.g<c2.g || (c1.g==c2.g && (c1.b<c2.b || (c1.b==c2.b && c1.a<c2.a)))));
+  }
 
 bool operator==(const AGColor &c1,const AGColor &c2)
 {
   return c1.r==c2.r &&
-    c1.g==c2.g &&
-    c1.b==c2.b &&
-    c1.a==c2.a;
+  c1.g==c2.g &&
+  c1.b==c2.b &&
+  c1.a==c2.a;
 }
 
 bool operator!=(const AGColor &c1,const AGColor &c2)
@@ -144,11 +144,11 @@ bool operator!=(const AGColor &c1,const AGColor &c2)
 }
 
 std::ostream &operator<<(std::ostream &o,const AGColor &c)
-{
-  o<<c.toString();
-  //  o<<"("<<(int)c.r<<","<<(int)c.g<<","<<(int)c.b<<","<<(int)c.a<<")";
-  return o;
-}
+  {
+    o<<c.toString();
+    //  o<<"("<<(int)c.r<<","<<(int)c.g<<","<<(int)c.b<<","<<(int)c.a<<")";
+    return o;
+  }
 
 AGColor AGColor::grey() const
 {
@@ -167,16 +167,16 @@ Uint8 AGColor::brightness() const
 }
 
 void AGColor::light(Uint8 l)
-{
-  r=(((Uint16)r)*l)>>8;
-  g=(((Uint16)g)*l)>>8;
-  b=(((Uint16)b)*l)>>8;
-}
+  {
+    r=(((Uint16)r)*l)>>8;
+    g=(((Uint16)g)*l)>>8;
+    b=(((Uint16)b)*l)>>8;
+  }
 
 AGColor::AGColor(Uint32 c,const AGSurface &pSurface)
-{
-  SDL_GetRGBA(c,pSurface.surface()->surface->format,&r,&g,&b,&a);
-}
+  {
+    SDL_GetRGBA(c,pSurface.surface()->surface->format,&r,&g,&b,&a);
+  }
 
 AGColor &AGColor::operator*=(float f)
 {

@@ -10,7 +10,7 @@
 /** A string class that natively supports UTF-8 */
 class AGEXPORT AGString:public std::string
 {
- public:
+public:
   static const size_t npos = static_cast<size_t>(-1);
 
   AGString();
@@ -24,7 +24,7 @@ class AGEXPORT AGString:public std::string
   AGString(const char c,size_t many=1);
   AGString(const char*c);
   AGString(const char*c,size_t size);
-  
+
 #ifndef SWIiG
   AGString &operator=(const AGString &s);
 
@@ -33,13 +33,13 @@ class AGEXPORT AGString:public std::string
 
   // size in bytes
   size_t memory() const;
-  
+
   AGString substr(size_t from,size_t len) const;
 
   std::vector<AGString> split(const AGString &p) const;
 
   AGString replace(const AGString &what, const AGString &by) const;
-  
+
   AGString operator+(const AGString &s) const;
   AGString operator+(const char *s) const;
   AGString operator+(const std::string &s) const;
@@ -60,7 +60,7 @@ class AGEXPORT AGString:public std::string
 //std::ostream &operator<<(std::ostream &o,const AGString &s);
 
 typedef AGString AGFilename;
-typedef	AGString AGData;
+typedef AGString AGData;
 
 
 #endif

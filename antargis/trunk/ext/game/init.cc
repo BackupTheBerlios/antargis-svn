@@ -3,9 +3,9 @@
 #include <minimap.h>
 
 AGEXPORT void AG_Init_libantargisgame()
-{
-	TRACE;
+  {
+    TRACE;
 
-	registerMinimapCreator();
-}
+    registerMinimapCreator();
+  }
 

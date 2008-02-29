@@ -26,21 +26,21 @@
 
 class AGEXPORT AGException:public std::exception
 {
- public:
+public:
   AGException(const std::string &e):s(e)
-    {
-    }
+  {
+  }
 
-    virtual ~AGException() throw ()
-      {
-      }
+  virtual ~AGException() throw ()
+  {
+  }
 
-    const char*what() const throw()
-      {
-	return s.c_str();
-      }
+  const char*what() const throw()
+  {
+    return s.c_str();
+  }
 
- private:
+private:
   std::string s;
 };
 

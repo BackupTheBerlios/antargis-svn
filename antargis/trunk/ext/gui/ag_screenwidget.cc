@@ -27,16 +27,16 @@
 
 AGScreenWidget::AGScreenWidget():
   AGWidget(0,getScreen().getRect())
-{
-  //  mTexture=AGTexture(getTheme()->getSurface("screen.background.image"));
-}
+  {
+    //  mTexture=AGTexture(getTheme()->getSurface("screen.background.image"));
+  }
 AGScreenWidget::~AGScreenWidget()
-{
-}
+  {
+  }
 
 void AGScreenWidget::draw(AGPainter &p)
-{
-  //  p.clip(AGRect2(10,10,50,50));
-  //p.tile(mTexture);
-  p.fillRect(p.getRect().origin(),AGColor(0,0,0));
-}
+  {
+    //  p.clip(AGRect2(10,10,50,50));
+    //p.tile(mTexture);
+    p.fillRect(p.getRect().origin(),AGColor(0,0,0));
+  }

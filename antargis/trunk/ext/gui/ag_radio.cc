@@ -30,60 +30,60 @@
 
 AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect):
   AGCheckBox(pParent,pRect),mGroup(0)
-{
-  // search mGroup
-  AGWidget *w=pParent;
-  AGRadioGroup *g=0;
-  while(w && g==0)
-    {
-      g=dynamic_cast<AGRadioGroup*>(w);
-      w=w->getParent();
-    }
-  if(g)
-    mGroup=g;
+  {
+    // search mGroup
+    AGWidget *w=pParent;
+    AGRadioGroup *g=0;
+    while(w && g==0)
+      {
+        g=dynamic_cast<AGRadioGroup*>(w);
+        w=w->getParent();
+      }
+    if(g)
+      mGroup=g;
 
-  if(mGroup)
-    mGroup->add(this);
-}
+    if(mGroup)
+      mGroup->add(this);
+  }
 
 AGRadio::~AGRadio()
-{
-  if(mGroup)
-    mGroup->erase(this);
-}
+  {
+    if(mGroup)
+      mGroup->erase(this);
+  }
 
 void AGRadio::setChecked(bool pChecked)
-{
-  bool c=isChecked();
-  if(c!=pChecked)
-    {
-      AGCheckBox::setChecked(pChecked);
-      
-      if(pChecked)
-	{
-	  if(mGroup)
-	    mGroup->eventChange(getName());
-	}
-    }
-}
+  {
+    bool c=isChecked();
+    if(c!=pChecked)
+      {
+        AGCheckBox::setChecked(pChecked);
+
+        if(pChecked)
+          {
+            if(mGroup)
+              mGroup->eventChange(getName());
+          }
+      }
+  }
 
 void AGRadio::deselect()
-{
-  setChecked(false);
-}
+  {
+    setChecked(false);
+  }
 
 void AGRadio::setGroup(AGRadioGroup *pGroup)
-{
-  mGroup=pGroup;
-}
+  {
+    mGroup=pGroup;
+  }
 
 bool AGRadio::eventMouseClick(AGEvent *m)
-{
-  if(!isChecked())
-    setChecked(true);
+  {
+    if(!isChecked())
+      setChecked(true);
 
-  return AGButton::eventMouseClick(m);
-}
+    return AGButton::eventMouseClick(m);
+  }
 
 
 

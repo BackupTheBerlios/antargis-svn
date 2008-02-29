@@ -29,38 +29,38 @@
 
 
 AGRandomizer::AGRandomizer(const std::string &pSeed)
-{
-  CTRACE;
+  {
+    CTRACE;
 
-  std::istringstream is;
-  is.str(pSeed);
+    std::istringstream is;
+    is.str(pSeed);
 
-  mState.stateptr=0;
-  mState.initialized=0;
+    mState.stateptr=0;
+    mState.initialized=0;
 
 
-  is>>mState.stateptr;
-  is>>mState.initialized;
+    is>>mState.stateptr;
+    is>>mState.initialized;
 
-  for(unsigned long i=0;i<MT_STATE_SIZE;i++)
-    {
-      mState.statevec[i]=0;
-      is>>mState.statevec[i];
-    }
+    for(unsigned long i=0;i<MT_STATE_SIZE;i++)
+      {
+        mState.statevec[i]=0;
+        is>>mState.statevec[i];
+      }
 
-  cdebug("state"<<mState.stateptr);
-  cdebug("seed:"<<pSeed);
+    cdebug("state"<<mState.stateptr);
+    cdebug("seed:"<<pSeed);
 
-  assert(mState.stateptr<MT_STATE_SIZE && mState.stateptr>=0);
-  
-  //  mts_seed(&mState);
+    assert(mState.stateptr<MT_STATE_SIZE && mState.stateptr>=0);
 
-}
+    //  mts_seed(&mState);
+
+  }
 
 AGRandomizer::~AGRandomizer()
-{
-  CTRACE;
-}
+  {
+    CTRACE;
+  }
 
 float AGRandomizer::operator()(float f)
 {
@@ -69,7 +69,7 @@ float AGRandomizer::operator()(float f)
   //  cdebug("d:"<<d<<" f:"<<f);
   d*=f;
   //  cdebug("d2:"<<d);
-  
+
   return d;
 }
 int AGRandomizer::operator()(int i)
@@ -95,33 +95,33 @@ std::string AGRandomizer::stateToString() const
 }
 
 int agRand(int i)
-{
-  AGRandomizerBase *r=getMain()->getRand();
-  if(!r)
-    throw std::runtime_error("Randomizer not set!");
-  return (*r)(i);
-}
+  {
+    AGRandomizerBase *r=getMain()->getRand();
+    if(!r)
+      throw std::runtime_error("Randomizer not set!");
+    return (*r)(i);
+  }
 float agRand(float f)
-{
-  AGRandomizerBase *r=getMain()->getRand();
-  if(!r)
-    throw std::runtime_error("Randomizer not set!");
-  return (*r)(f);
-}
+  {
+    AGRandomizerBase *r=getMain()->getRand();
+    if(!r)
+      throw std::runtime_error("Randomizer not set!");
+    return (*r)(f);
+  }
 
 void randSpeed()
-{
-  long m=100000;
-  int t;
-  int max=100;
   {
-    STACKTRACE;
-    for(long i=0;i<m;i++)
-      t=rand()%max;
+    long m=100000;
+    int t;
+    int max=100;
+      {
+        STACKTRACE;
+        for(long i=0;i<m;i++)
+          t=rand()%max;
+      }
+        {
+          STACKTRACE;
+          for(long i=0;i<m;i++)
+            t=agRand(max);
+        }
   }
-  {
-    STACKTRACE;
-    for(long i=0;i<m;i++)
-      t=agRand(max);
-  }
-}

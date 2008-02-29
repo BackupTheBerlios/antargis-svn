@@ -31,36 +31,36 @@
 AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect2 &r):
   AGWidget(p,r),
   sigChanged(this,"sigChanged")
-{
-}
+  {
+  }
 AGRadioGroup::~AGRadioGroup()
-{
-  std::set<AGRadio*>::iterator i=mChildren.begin();
+  {
+    std::set<AGRadio*>::iterator i=mChildren.begin();
 
-  for(;i!=mChildren.end();i++)
-    (*i)->setGroup(0);
-}
+    for(;i!=mChildren.end();i++)
+      (*i)->setGroup(0);
+  }
 
 void AGRadioGroup::eventChange(const AGString &p)
-{
-  std::set<AGRadio*>::iterator i=mChildren.begin();
+  {
+    std::set<AGRadio*>::iterator i=mChildren.begin();
 
-  for(;i!=mChildren.end();i++)
-    {
-      if((*i)->getName()!=p)
-	(*i)->deselect();
-    }
+    for(;i!=mChildren.end();i++)
+      {
+        if((*i)->getName()!=p)
+          (*i)->deselect();
+      }
 
-}
+  }
 
 void AGRadioGroup::add(AGRadio *r)
-{
-  mChildren.insert(r);
-}
+  {
+    mChildren.insert(r);
+  }
 void AGRadioGroup::erase(AGRadio *r)
-{
-  mChildren.erase(r);
-}
+  {
+    mChildren.erase(r);
+  }
 
 
 

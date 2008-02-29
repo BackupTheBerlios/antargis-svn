@@ -27,15 +27,15 @@
 ////////////////////////////////////////////////////////////////////////
 
 void AGScreen::begin()
-{
-}
+  {
+  }
 
 void AGScreen::flip()
-{
-}
+  {
+  }
 void AGScreen::update(const std::list<AGRect2> &rs)
-{
-}
+  {
+  }
 
 
 size_t AGScreen::getWidth() const
@@ -49,7 +49,7 @@ size_t AGScreen::getHeight() const
 
 
 AGSurface AGScreen::screenshot(bool frontBuffer)
-{
-  cdebug("NOT YET IMPLEMENTED");
-  return AGSurface(0,0);
-}
+  {
+    cdebug("NOT YET IMPLEMENTED");
+    return AGSurface(0,0);
+  }

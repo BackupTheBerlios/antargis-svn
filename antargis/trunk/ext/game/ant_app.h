@@ -4,7 +4,7 @@
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
 /**
- *	
+ *
  * \mainpage Battles of Antargis - C++ documentation
  *  \section Overview
  *    This is the C++ part of the API-documentation.
@@ -19,7 +19,7 @@
 
 
 
-*/
+ */
 
 
 
@@ -52,7 +52,7 @@ class AGEXPORT GLApp:public AGApplication
 
 protected:
   Scene scene;
-  
+
 public:
   GLApp(int w,int h);
   ~GLApp();

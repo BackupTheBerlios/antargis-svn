@@ -27,81 +27,81 @@ AGLayoutCreator::AGLayoutCreator():mWidget(0)
 }
 
 void AGLayoutCreator::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-{
-}
+  {
+  }
 
 void AGLayoutCreator::setResult(AGWidget *pWidget)
-{
-  mWidget=pWidget;
-}
+  {
+    mWidget=pWidget;
+  }
 AGWidget *AGLayoutCreator::getResult()
-{
-  return mWidget;
-}
+  {
+    return mWidget;
+  }
 
 void AGLayoutCreator::clearResult()
-{
-  mWidget=0;
-}
+  {
+    mWidget=0;
+  }
 
 void AGLayoutCreator::mark()
-{
-  if(mWidget)
-    markObject(mWidget);
-}
+  {
+    if(mWidget)
+      markObject(mWidget);
+  }
 
 
 
 AGLayoutFactory::AGLayoutFactory()
-{
-  REGISTER_SINGLETON(this);
-}
+  {
+    REGISTER_SINGLETON(this);
+  }
 
 AGLayoutFactory::~AGLayoutFactory()
-{
-}
+  {
+  }
 
 void AGLayoutFactory::addCreator(const AGString &pName,AGLayoutCreator *creator)
-{
-  mCreators[pName]=creator;
-}
+  {
+    mCreators[pName]=creator;
+  }
 
 void AGLayoutFactory::removeCreator(const AGString &pName,AGLayoutCreator *creator)
-{
-  std::map<AGString,AGLayoutCreator*>::iterator i=mCreators.find(pName);
-  if(i->second==creator)
-    mCreators.erase(i);
-}
+  {
+    std::map<AGString,AGLayoutCreator*>::iterator i=mCreators.find(pName);
+    if(i->second==creator)
+      mCreators.erase(i);
+  }
 
 
 AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-{
-  AGLayoutCreator *creator=mCreators[pNode.getName()];
+  {
+    AGLayoutCreator *creator=mCreators[pNode.getName()];
 
-  if(creator)
-    {
-      AGWidget *w;
-      creator->create(pParent,pRect,pNode);
-      w=creator->getResult();
-      creator->clearResult();
+    if(creator)
+      {
+        AGWidget *w;
+        creator->create(pParent,pRect,pNode);
+        w=creator->getResult();
+        creator->clearResult();
 
-      return w;
-    }
-  std::string name;
-  if(name!="" && name!="colsize" && name!="rowsize")
-    {
-      cdebug("no creation at:"<<name);
-    }
-  return 0;
-}
-  
+        return w;
+      }
+    std::string name;
+    if(name!="" && name!="colsize" && name!="rowsize")
+      {
+        cdebug("no creation at:"<<name);
+      }
+    return 0;
+  }
+
 AGLayoutFactory *mLayoutFactory=0;
 AGLayoutFactory *getLayoutFactory()
-{
-  if(!mLayoutFactory)
-    mLayoutFactory=new AGLayoutFactory;
-  return mLayoutFactory;
-}
+  {
+    if(!mLayoutFactory)
+      mLayoutFactory=new AGLayoutFactory;
+    return mLayoutFactory;
+  }
 
 
 

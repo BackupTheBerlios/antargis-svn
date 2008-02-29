@@ -49,7 +49,7 @@ class AGApplication;
     <pre>
     AGWidget *parent,*w;
     AGApplication app;
-    
+
     parent=new AGWidget(0,AGRect2(0,0,640,480));
     w=new AGWidget(parent,AGRect2(0,0,100,100));
     parent->addChild(w);
@@ -59,7 +59,7 @@ class AGApplication;
     Nearly all of the widget-types are created this way. Adding a widget to another will automate
     the drawing and event-processing.
 
-*/
+ */
 
 
 
@@ -71,26 +71,26 @@ class AGApplication;
    AGWidget is the base class for all widgets. It manages the hierarchy and memory of the widgets.
    You should never delete an AGWidget for yourself if you don't know exactly what you're doing.
    The widgets get deleted by their parents
-*/
+ */
 
 class AGEXPORT AGWidget:public AGMessageObject
 {
- public:
+public:
   AGWidget(AGWidget *pParent,const AGRect2 &r);
   virtual ~AGWidget();
 
-	AGApplication *getApp();
-	void setApp(AGApplication *pApp);
+  AGApplication *getApp();
+  void setApp(AGApplication *pApp);
 
   virtual void initHandlers();
-  
+
   virtual void draw(AGPainter &p);
   virtual void drawAfter(AGPainter &p);
   virtual void drawAll(AGPainter &p);
   AGRect2 getRect() const;
   virtual AGRect2 getClientRect() const;
   void setRect(const AGRect2 &pRect);
-  
+
   void setParent(AGWidget *pParent);
   AGWidget *getParent();
   bool isParent(AGWidget *pParent);
@@ -117,7 +117,7 @@ class AGEXPORT AGWidget:public AGMessageObject
 
   bool processEvent(AGEvent *event);
 
-	bool doClick(AGEvent *e);
+  bool doClick(AGEvent *e);
 
   AGSignal sigMouseEnter;
   AGSignal sigMouseLeave;
@@ -215,9 +215,9 @@ class AGEXPORT AGWidget:public AGMessageObject
   void pushChangeRect(const AGRect2 &pRect);
   void clearChangeRects();
 
- private:
+private:
 
-	AGApplication *mApp;
+  AGApplication *mApp;
 
   std::list<AGRect2> mMyChanges;
 
@@ -258,7 +258,7 @@ class AGEXPORT AGWidget:public AGMessageObject
   AGStringUtf8 mTooltip;
   AGTooltip *mTooltipWidget;
 
- protected:
+protected:
   std::list<AGWidget*> mChildren;
 
 };

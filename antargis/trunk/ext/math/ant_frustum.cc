@@ -29,37 +29,37 @@
 AntPlane::AntPlane(const AGVector3 &dir,float offset):
   mDir(dir),
   mOffset(offset)
-{
-}
+  {
+  }
 
 AntPlane makePlane(const AGVector3 &p0,const AGVector3 &p1,const AGVector3 &p2)
-{
-  AGVector3 up=p1-p0;
-  AGVector3 right=p2-p0;
-  up/=up.length();
-  right/=right.length();
+  {
+    AGVector3 up=p1-p0;
+    AGVector3 right=p2-p0;
+    up/=up.length();
+    right/=right.length();
 #warning "maybe this must be swapped!"
-  AGVector3 dir=up%right;
-  
-  return AntPlane(dir,dir*p0);
-}
+    AGVector3 dir=up%right;
+
+    return AntPlane(dir,dir*p0);
+  }
 
 
 /////////////////////////////////////////////////////////////////////
 // AntFrustum
 /////////////////////////////////////////////////////////////////////
 AntFrustum::AntFrustum()
-{
-	throw std::runtime_error("Possible error in AntFrustum::AntFrustum(): this function shouldn't be called!");
-}
+  {
+    throw std::runtime_error("Possible error in AntFrustum::AntFrustum(): this function shouldn't be called!");
+  }
 
 AntFrustum::AntFrustum(const std::vector<AntPlane> &pPlanes):
   mPlanes(pPlanes)
-{
-  assert(mPlanes.size()==6);
+  {
+    assert(mPlanes.size()==6);
 
-  //  cdebug(*this);
-}
+    //  cdebug(*this);
+  }
 
 bool AntFrustum::inside(const AGVector3 &v) const
 {
@@ -72,40 +72,40 @@ bool AntFrustum::inside(const AGVector3 &v) const
 bool AntFrustum::collides(const AGBox3 &b) const
 {
   static std::vector<AGVector3> vs(8);
-  {
-    b.calcVertices(vs);
-  }
-  static bool outside;
-  static std::vector<AntPlane>::const_iterator i;
-  static std::vector<AGVector3>::iterator j;
-
-  
-  for(i=mPlanes.begin();i!=mPlanes.end();++i)
     {
-      outside=true;
-      for(j=vs.begin();j!=vs.end();++j)
-	{
-	  if(i->inside(*j))
-	    {
-	      outside=false;
-	      break;
-	    }
-	}
-      if(outside)
-	return false;
+      b.calcVertices(vs);
     }
-  return true;
+    static bool outside;
+    static std::vector<AntPlane>::const_iterator i;
+    static std::vector<AGVector3>::iterator j;
+
+
+    for(i=mPlanes.begin();i!=mPlanes.end();++i)
+      {
+        outside=true;
+        for(j=vs.begin();j!=vs.end();++j)
+          {
+            if(i->inside(*j))
+              {
+                outside=false;
+                break;
+              }
+          }
+        if(outside)
+          return false;
+      }
+    return true;
 }
 
 
 std::ostream &operator<<(std::ostream &o,const AntPlane &p)
-{
-  o<<"("<<p.mDir<<","<<p.mOffset<<")";
-  return o;
-}
+  {
+    o<<"("<<p.mDir<<","<<p.mOffset<<")";
+    return o;
+  }
 std::ostream &operator<<(std::ostream &o,const AntFrustum &p)
-{
-  for(std::vector<AntPlane>::const_iterator i=p.mPlanes.begin();i!=p.mPlanes.end();++i)
-    o<<*i<<";";
-  return o;
-}
+  {
+    for(std::vector<AntPlane>::const_iterator i=p.mPlanes.begin();i!=p.mPlanes.end();++i)
+      o<<*i<<";";
+    return o;
+  }

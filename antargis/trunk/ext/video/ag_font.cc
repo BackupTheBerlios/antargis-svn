@@ -24,71 +24,71 @@
 
 AGFont::AGFont(const std::string &pFile,int size):
   mName(pFile),mSize(size),mColor(0xFF,0xFF,0xFF)
-{
-  mAlpha=0xFF;
-  mStyle=NORMAL;
-  borderSize=0;
-  embossed=false;
-  inset=false;
-}
+  {
+    mAlpha=0xFF;
+    mStyle=NORMAL;
+    borderSize=0;
+    embossed=false;
+    inset=false;
+  }
 
 AGFont::AGFont()
-{
-  mName="FreeSans.ttf";
-  mSize=14;
-  mColor=AGColor(0xFF,0xFF,0xFF);
-  mAlpha=0xFF;
-  mStyle=NORMAL;
-  borderSize=0;
-  embossed=false;
-  inset=false;
-}
+  {
+    mName="FreeSans.ttf";
+    mSize=14;
+    mColor=AGColor(0xFF,0xFF,0xFF);
+    mAlpha=0xFF;
+    mStyle=NORMAL;
+    borderSize=0;
+    embossed=false;
+    inset=false;
+  }
 
 AGFont &AGFont::operator=(const AGFont &f)
-{
-  mName=f.mName;
-  mSize=f.mSize;
-  mColor=f.mColor;
-  mBorderColor=f.mBorderColor;
-  mAlpha=f.mAlpha;
-  mStyle=f.mStyle;
-  borderSize=f.borderSize;
-  embossed=f.embossed;
-  inset=f.inset;
-  return *this;
-}
+  {
+    mName=f.mName;
+    mSize=f.mSize;
+    mColor=f.mColor;
+    mBorderColor=f.mBorderColor;
+    mAlpha=f.mAlpha;
+    mStyle=f.mStyle;
+    borderSize=f.borderSize;
+    embossed=f.embossed;
+    inset=f.inset;
+    return *this;
+  }
 
 void AGFont::setColor(const AGColor &pColor)
-{
-  mColor=pColor;
-}
+  {
+    mColor=pColor;
+  }
 AGColor AGFont::getColor() const
 {
   return mColor;
 }
 
 void AGFont::setAlpha(Uint8 pAlpha)
-{
-  mAlpha=pAlpha;
-}
+  {
+    mAlpha=pAlpha;
+  }
 Uint8 AGFont::getAlpha() const
 {
   return mAlpha;
 }
 
 void AGFont::setSize(Uint8 pSize)
-{
-  mSize=pSize;
-}
+  {
+    mSize=pSize;
+  }
 Uint8 AGFont::getSize() const
 {
   return mSize;
 }
 
 void AGFont::setStyle(const Style &s)
-{
-  mStyle=s;
-}
+  {
+    mStyle=s;
+  }
 
 AGFont::Style AGFont::getStyle() const
 {
@@ -96,9 +96,9 @@ AGFont::Style AGFont::getStyle() const
 }
 
 void AGFont::setName(const std::string &s)
-{
-  mName=s;
-}
+  {
+    mName=s;
+  }
 std::string AGFont::getName() const
 {
   return mName;
@@ -114,36 +114,36 @@ int AGFont::getHeight(const AGStringUtf8 &mText) const
 }
 
 void AGFont::setEmbossed(bool e)
-{
-  embossed=e;
-}
+  {
+    embossed=e;
+  }
 bool AGFont::getEmbossed() const
 {
   return embossed;
 }
 
 void AGFont::setBorderColor(const AGColor &pColor)
-{
-  mBorderColor=pColor;
-}
+  {
+    mBorderColor=pColor;
+  }
 AGColor AGFont::getBorderColor() const
 {
   return mBorderColor;
 }
 
 void AGFont::setBorder(int i)
-{
-  borderSize=i;
-}
+  {
+    borderSize=i;
+  }
 int AGFont::getBorder() const
 {
   return borderSize;
 }
 
 void AGFont::setInset(bool e)
-{
-  inset=e;
-}
+  {
+    inset=e;
+  }
 bool AGFont::getInset() const
 {
   return inset;
@@ -163,15 +163,15 @@ std::string AGFont::toString() const
 #define COMPARE(x,y) if(x!=y) return x<y
 
 bool operator<(const AGFont&f1,const AGFont &f2)
-{
-  COMPARE(f1.mStyle,f2.mStyle);
-  COMPARE(f1.mName,f2.mName);
-  COMPARE(f1.mSize,f2.mSize);
-  COMPARE(f1.mAlpha,f2.mAlpha);
-  COMPARE(f1.mColor,f2.mColor);
-  COMPARE(f1.embossed,f2.embossed);
-  COMPARE(f1.inset,f2.inset);
-  COMPARE(f1.mBorderColor,f2.mBorderColor);
-  COMPARE(f1.borderSize,f2.borderSize);
-  return false;
-}
+  {
+    COMPARE(f1.mStyle,f2.mStyle);
+    COMPARE(f1.mName,f2.mName);
+    COMPARE(f1.mSize,f2.mSize);
+    COMPARE(f1.mAlpha,f2.mAlpha);
+    COMPARE(f1.mColor,f2.mColor);
+    COMPARE(f1.embossed,f2.embossed);
+    COMPARE(f1.inset,f2.inset);
+    COMPARE(f1.mBorderColor,f2.mBorderColor);
+    COMPARE(f1.borderSize,f2.borderSize);
+    return false;
+  }

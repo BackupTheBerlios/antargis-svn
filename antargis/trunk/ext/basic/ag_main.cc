@@ -51,9 +51,9 @@ bool gDRMok=false;
 #endif
 
 bool hasQuit()
-{
-  return quited;
-}
+  {
+    return quited;
+  }
 /*
 bool glMode()
 {
@@ -63,88 +63,88 @@ bool glMode()
 
 /**
    creates an AGMain object.
-*/
+ */
 AGMain::AGMain():
   mCollector(0),mRand(0)
-{
-  assert(mAGMain==0);
-  mAGMain=this;
+  {
+    assert(mAGMain==0);
+    mAGMain=this;
 
-  mRand=0;
+    mRand=0;
 
-  newInstanceKiller();
+    newInstanceKiller();
 
-  // Initialize SDL
-  if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
-    {
-      cdebug("SDL could not be initialized!");
-      exit(1);
-    }
-  SDL_EnableUNICODE(1);
-		  
-  videoInfo=0;
+    // Initialize SDL
+    if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
+      {
+        cdebug("SDL could not be initialized!");
+        exit(1);
+      }
+    SDL_EnableUNICODE(1);
 
-  initFS("");
+    videoInfo=0;
 
-  mVideo=0;
-}
+    initFS("");
+
+    mVideo=0;
+  }
 
 AGMain::~AGMain()
-{
-  CTRACE;
-  saveDelete(mVideo);
-  deleteInstanceKiller();
-  mAGMain=0;
-  cdebug("QUIT");
-  SDL_Quit();
-  quited=true;
+  {
+    CTRACE;
+    saveDelete(mVideo);
+    deleteInstanceKiller();
+    mAGMain=0;
+    cdebug("QUIT");
+    SDL_Quit();
+    quited=true;
 
-  //  saveDelete(mRand);
+    //  saveDelete(mRand);
 
 
-  setRubyRaising(true);
-}
+    setRubyRaising(true);
+  }
 
 
 AGCollector *AGMain::getCollector()
-{
-  if(!mCollector)
-    mCollector=new AGCollector;
-  return mCollector;
-}
+  {
+    if(!mCollector)
+      mCollector=new AGCollector;
+    return mCollector;
+  }
 
 
 
 bool hasMain()
-{
-  return mAGMain;
-}
+  {
+    return mAGMain;
+  }
 
 AGMain *getMain()
-{
-  if(!mAGMain)
-    {
-      std::cerr<<"AGMain not initialized!"<<std::endl;
-      assert(0==1);
-      throw std::runtime_error("AGMain not initialized");
-      exit(1);
-    }
+  {
+    if(!mAGMain)
+      {
+        std::cerr<<"AGMain not initialized!"<<std::endl;
+        assert(0==1);
+        throw std::runtime_error("AGMain not initialized");
+        exit(1);
+      }
 
 
-  static bool registered=false;
-  if(!registered)
-    {
-      // registered must be set here, so that we don't get into an endless recursion
-      registered=true;
+    static bool registered=false;
+    if(!registered)
+      {
+        // registered must be set here, so that we don't get into an endless recursion
+        registered=true;
 
-      // IMPORTANT:
-      //   put it into a global variable - so that it won't get garbage collected
-      rb_eval_string("include Antargis;$agMain=getMain");
-    }
+        // IMPORTANT:
+        //   put it into a global variable - so that it won't get garbage collected
+        rb_eval_string("include Antargis;$agMain=getMain");
+      }
 
 
-  return mAGMain;
-}
+    return mAGMain;
+  }
 
 long AGMain::getTicks() const
 {
@@ -153,76 +153,76 @@ long AGMain::getTicks() const
 
 
 void AGMain::mark()
-{
-  markObject(getCollector());
-  markObject(mRand);
-}
+  {
+    markObject(getCollector());
+    markObject(mRand);
+  }
 
 void AGMain::setRand(AGRandomizerBase *pRand)
-{
-  mRand=pRand;
-}
+  {
+    mRand=pRand;
+  }
 
 AGRandomizerBase *AGMain::getRand()
-{
-  return mRand;
-}
+  {
+    return mRand;
+  }
 
 AGVideoBase *AGMain::getVideo()
-{
-	return mVideo;
-}
+  {
+    return mVideo;
+  }
 
 
 bool videoInited()
-{
-	return getMain()->getVideo();
-}
+  {
+    return getMain()->getVideo();
+  }
 
 
 std::string gAppName="Antargis";
 void setAppName(const std::string &pName)
-{
-  gAppName=pName;
-}
+  {
+    gAppName=pName;
+  }
 std::string getAppName()
-{
-  return gAppName;
-}
+  {
+    return gAppName;
+  }
 
 
 void AGMain::repeatedCalls()
-{
-  for(std::set<AGRepeatedCall*>::iterator i=mCalls.begin();i!=mCalls.end();i++)
-    {
-      (*i)->call();
-    }
-}
+  {
+    for(std::set<AGRepeatedCall*>::iterator i=mCalls.begin();i!=mCalls.end();i++)
+      {
+        (*i)->call();
+      }
+  }
 
 void AGMain::setVideo(AGVideoBase *p)
-{
-  mVideo=p;
-}
+  {
+    mVideo=p;
+  }
 
 void AGMain::delay(int ms)
-{
-  SDL_Delay(ms);
-}
+  {
+    SDL_Delay(ms);
+  }
 
 
 
 
 ///   AGRepeatedCall
 AGRepeatedCall::AGRepeatedCall()
-{
-  assert(hasMain());
-  getMain()->mCalls.insert(this);
-}
+  {
+    assert(hasMain());
+    getMain()->mCalls.insert(this);
+  }
 AGRepeatedCall::~AGRepeatedCall()
-{
-  if(hasMain())
-    getMain()->mCalls.erase(this);
-}
+  {
+    if(hasMain())
+      getMain()->mCalls.erase(this);
+  }
 void AGRepeatedCall::call()
-{
-}
+  {
+  }

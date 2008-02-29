@@ -6,22 +6,22 @@
 
 
 AGMatrixN::AGMatrixN(size_t w,size_t h):m(w*h,0),
-					mW(w),mH(h)
+mW(w),mH(h)
 {
 }
 
 AGMatrixN::AGMatrixN(const AGMatrixN &n):m(n.m),
-					mW(n.mW),
-					mH(n.mH)
+mW(n.mW),
+mH(n.mH)
 {
 }
 
 void AGMatrixN::set(size_t x,size_t y,float v)
-{
-  assert(x<mW);
-  assert(y<mH);
-  m[index(x,y)]=v;
-}
+  {
+    assert(x<mW);
+    assert(y<mH);
+    m[index(x,y)]=v;
+  }
 float AGMatrixN::get(size_t x,size_t y) const
 {
   assert(x<mW);
@@ -36,14 +36,14 @@ AGMatrixN &AGMatrixN::operator*=(const AGMatrixN &p)
   for(size_t x=0;x<p.mW;x++)
     for(size_t y=0;y<mH;y++)
       {
-	float v=0;
-	for(size_t k=0;k<mW;k++)
-	  v+=get(k,y)*p.get(x,k);
-	n.set(x,y,v);
+        float v=0;
+        for(size_t k=0;k<mW;k++)
+          v+=get(k,y)*p.get(x,k);
+        n.set(x,y,v);
       }
   *this=n;
   return *this;
-    
+
 }
 AGMatrixN AGMatrixN::operator*(const AGMatrixN &p) const
 {
@@ -52,10 +52,10 @@ AGMatrixN AGMatrixN::operator*(const AGMatrixN &p) const
   for(size_t x=0;x<p.mW;x++)
     for(size_t y=0;y<mH;y++)
       {
-	float v=0;
-	for(size_t k=0;k<mW;k++)
-	  v+=get(k,y)*p.get(x,k);
-	n.set(x,y,v);
+        float v=0;
+        for(size_t k=0;k<mW;k++)
+          v+=get(k,y)*p.get(x,k);
+        n.set(x,y,v);
       }
   return n;
 }
@@ -79,8 +79,8 @@ float AGMatrixN::scalar() const
   for(size_t x=0;x<mW;x++)
     for(size_t y=0;y<mH;y++)
       {
-	v=get(x,y);
-	s+=v*v;
+        v=get(x,y);
+        s+=v*v;
       }
   return sqrt(s);
 }
@@ -129,27 +129,27 @@ AGMatrixN AGMatrixN::inverse() const
 }
 
 void AGMatrixN::makeUnitMatrix()
-{
-  for(size_t x=0;x<mW;x++)
-    for(size_t y=0;y<mH;y++)
-      set(x,y,(x==y?1:0));
-}
-  
+  {
+    for(size_t x=0;x<mW;x++)
+      for(size_t y=0;y<mH;y++)
+        set(x,y,(x==y?1:0));
+  }
+
 void AGMatrixN::copyFrom(const AGMatrixN &p)
-{
-  for(size_t x=0;x<mW && x<p.mW;x++)
-    for(size_t y=0;y<mH && y<p.mH;y++)
-      set(x,y,p.get(x,y));
-}
+  {
+    for(size_t x=0;x<mW && x<p.mW;x++)
+      for(size_t y=0;y<mH && y<p.mH;y++)
+        set(x,y,p.get(x,y));
+  }
 
 void AGMatrixN::output() const
 {
   for(size_t y=0;y<mH;y++)
     {
       for(size_t x=0;x<mW;x++)
-	{
-	  std::cout<<get(x,y)<<"\t";
-	}
+        {
+          std::cout<<get(x,y)<<"\t";
+        }
       std::cout<<"\n";
     }
 
@@ -161,37 +161,37 @@ AGString AGMatrixN::toString() const
   for(size_t y=0;y<mH;y++)
     {
       for(size_t x=0;x<mW;x++)
-	{
-	  s<<get(x,y)<<"\t";
-	}
+        {
+          s<<get(x,y)<<"\t";
+        }
       s<<"\n";
     }
   return s.str();
 }
 
 void AGMatrixN::swapRows(size_t a,size_t b)
-{
-  if(a==b)
-    return;
-  assert(a<mH);
-  assert(b<mH);
-  for(size_t x=0;x<mW;x++)
-    {
-      float t=get(x,a);
-      set(x,a,get(x,b));
-      set(x,b,t);
-    }
-}
+  {
+    if(a==b)
+      return;
+    assert(a<mH);
+    assert(b<mH);
+    for(size_t x=0;x<mW;x++)
+      {
+        float t=get(x,a);
+        set(x,a,get(x,b));
+        set(x,b,t);
+      }
+  }
 void AGMatrixN::swapCols(size_t a,size_t b)
-{
-  if(a==b)
-    return;
-  assert(a<mW);
-  assert(b<mW);
-  for(size_t y=0;y<mH;y++)
-    {
-      float t=get(a,y);
-      set(a,y,get(b,y));
-      set(b,y,t);
-    }
-}
+  {
+    if(a==b)
+      return;
+    assert(a<mW);
+    assert(b<mW);
+    for(size_t y=0;y<mH;y++)
+      {
+        float t=get(a,y);
+        set(a,y,get(b,y));
+        set(b,y,t);
+      }
+  }

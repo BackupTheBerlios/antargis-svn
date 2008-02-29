@@ -12,67 +12,67 @@
 ///////////
 
 AGCharUtf8::AGCharUtf8(char p)
-{
-  c=std::string(p,1);
-  s=0;
-  pos=0;
-}
+  {
+    c=std::string(p,1);
+    s=0;
+    pos=0;
+  }
 
 AGCharUtf8::AGCharUtf8(const std::string &p)
-{
-  c=p;
-  s=0;
-  pos=0;
-}
+  {
+    c=p;
+    s=0;
+    pos=0;
+  }
 
 AGCharUtf8::AGCharUtf8(const AGCharUtf8 &p):
   c(p.c),
   s(p.s),
   pos(p.pos)
-{
-  
-}
+  {
+
+  }
 AGCharUtf8::AGCharUtf8(AGStringUtf8 *ps,size_t ppos)
-{
-  c=ps->get(ppos);
-  s=ps;
-  pos=ppos;
-}
+  {
+    c=ps->get(ppos);
+    s=ps;
+    pos=ppos;
+  }
 
 AGCharUtf8 &AGCharUtf8::operator=(const AGStringUtf8 &p)
-{
-  if(!s)
-    {
-      cdebug("Possible error while assigning constant AGCharUtf8");
-      if(c.length()!=1)
-	cdebug("Probable error while assigning AGCharUtf8 - string-length!=1 !");
-      else
-	c=p[0].c;
-    }
-  else
-    {
-      if(c.length()!=1)
-	cdebug("Probable error while assigning AGCharUtf8 - string-length!=1 !");
-      else
-	{
-	  s->set(pos,c=p[0].c);
-	}
-    }
-  return *this;
-}
+  {
+    if(!s)
+      {
+        cdebug("Possible error while assigning constant AGCharUtf8");
+        if(c.length()!=1)
+          cdebug("Probable error while assigning AGCharUtf8 - string-length!=1 !");
+        else
+          c=p[0].c;
+      }
+    else
+      {
+        if(c.length()!=1)
+          cdebug("Probable error while assigning AGCharUtf8 - string-length!=1 !");
+        else
+          {
+            s->set(pos,c=p[0].c);
+          }
+      }
+    return *this;
+  }
 
 
 AGCharUtf8 &AGCharUtf8::operator=(const AGCharUtf8 &p)
-{
-  if(!s)
-    cdebug("Possible error while assigning constant AGCharUtf8");
-  else
-    {
-      s->set(pos,p.c);
-    }
-  c=p.c;
-  return *this;
-}
+  {
+    if(!s)
+      cdebug("Possible error while assigning constant AGCharUtf8");
+    else
+      {
+        s->set(pos,p.c);
+      }
+    c=p.c;
+    return *this;
+  }
 
 bool AGCharUtf8::operator==(const AGCharUtf8 &p) const
 {
@@ -117,102 +117,102 @@ size_t AGCharUtf8::memory() const
 ///////////
 
 AGStringUtf8::AGStringUtf8(int i)
-{
-  std::ostringstream os;
-  os<<i;
-  s=os.str();
-  mLength=npos;
-}
+  {
+    std::ostringstream os;
+    os<<i;
+    s=os.str();
+    mLength=npos;
+  }
 AGStringUtf8::AGStringUtf8(long i)
-{
-  std::ostringstream os;
-  os<<i;
-  s=os.str();
-  mLength=npos;
-}
+  {
+    std::ostringstream os;
+    os<<i;
+    s=os.str();
+    mLength=npos;
+  }
 AGStringUtf8::AGStringUtf8(size_t i)
-{
-  std::ostringstream os;
-  os<<i;
-  s=os.str();
-  mLength=npos;
-}
+  {
+    std::ostringstream os;
+    os<<i;
+    s=os.str();
+    mLength=npos;
+  }
 AGStringUtf8::AGStringUtf8(float f)
-{
-  std::ostringstream os;
-  os<<f;
-  s=os.str();
-  mLength=npos;
-}
+  {
+    std::ostringstream os;
+    os<<f;
+    s=os.str();
+    mLength=npos;
+  }
 
 
 AGStringUtf8::AGStringUtf8()
-{
-  mLength=npos;
-}
+  {
+    mLength=npos;
+  }
 
 AGStringUtf8::AGStringUtf8(const char*c)
-{
-  //CTRACE;
-  s=c;
-  mLength=npos;
-}
+  {
+    //CTRACE;
+    s=c;
+    mLength=npos;
+  }
 
 AGStringUtf8::AGStringUtf8(const char*c,size_t size)
-{
-  //CTRACE;
-  s=std::string(c,size);
-  mLength=npos;
-}
+  {
+    //CTRACE;
+    s=std::string(c,size);
+    mLength=npos;
+  }
 
 AGStringUtf8::AGStringUtf8(const std::string &p)
-{
-  //CTRACE;
-  s=p;
-  mLength=npos;
-}
+  {
+    //CTRACE;
+    s=p;
+    mLength=npos;
+  }
 AGStringUtf8::AGStringUtf8(const std::string &p,size_t many)
-{
-  //CTRACE;
-  for(size_t i=0;i<many;i++)
-    s+=p;
-  mLength=npos;
-}
+  {
+    //CTRACE;
+    for(size_t i=0;i<many;i++)
+      s+=p;
+    mLength=npos;
+  }
 AGStringUtf8::AGStringUtf8(const AGStringUtf8 &p)
-{
-  //CTRACE;
-  s=p.s;
-  mLength=npos;
-}
+  {
+    //CTRACE;
+    s=p.s;
+    mLength=npos;
+  }
 AGStringUtf8::AGStringUtf8(AGCharUtf8 c,size_t many)
-{
-  //CTRACE;
-  for(size_t i=0;i<many;i++)
-    operator+=(c);
-  mLength=npos;
-}
+  {
+    //CTRACE;
+    for(size_t i=0;i<many;i++)
+      operator+=(c);
+    mLength=npos;
+  }
 
 AGStringUtf8::AGStringUtf8(const char c,size_t many)
-{
-  //CTRACE;
-  s=std::string(c,many);
-  mLength=npos;
-}
-  
+  {
+    //CTRACE;
+    s=std::string(c,many);
+    mLength=npos;
+  }
+
 AGStringUtf8 &AGStringUtf8::operator=(const AGStringUtf8 &p)
-{
-  //CTRACE;
-  s=p.s;
-  mLength=npos;
-  return *this;
-}
+  {
+    //CTRACE;
+    s=p.s;
+    mLength=npos;
+    return *this;
+  }
 AGStringUtf8 &AGStringUtf8::operator=(const AGCharUtf8 &pChar)
-{
-  //CTRACE;
-  s=pChar.getString();
-  mLength=npos;
-  return *this;
-}
+  {
+    //CTRACE;
+    s=pChar.getString();
+    mLength=npos;
+    return *this;
+  }
 
 
 AGStringUtf8 &AGStringUtf8::operator+=(const AGStringUtf8 &p)
@@ -274,7 +274,7 @@ size_t AGStringUtf8::find(const AGStringUtf8 &p,size_t pos) const
   while(c<s.length())
     {
       if(s.substr(c,p.s.length())==p.s)
-	return i;
+        return i;
       c+=agFirstCharSize(s,c);
       i++;
     }
@@ -292,7 +292,7 @@ std::vector<AGStringUtf8> AGStringUtf8::split(const AGStringUtf8 &p) const
       i=find(p,oi);
       a.push_back(substr(oi,i-oi));
       if(i==std::string::npos)
-	break;
+        break;
       oi=i+1;
     }
   return a;
@@ -347,15 +347,13 @@ std::string AGStringUtf8::ascii() const
     {
       char c=s[i];
       if((c&0x80)!=0)
-	{
-	  //	  cdebug("C:"<<c<<"  "<<(c&0x80));
-	  p=i;
-	}
+        {
+          p=i;
+        }
     }
   if(p!=npos)
     {
       cdebug("WARNING: Probable problem within ascii for position "<<p<<" in string:"<<s);
-      //      cdebug("Character is :"<<s[p]<<"--"<<(int)s[p]<<"  "<<(s[p]&0x80));
     }
   return s;
 }
@@ -372,7 +370,7 @@ AGStringUtf8 AGStringUtf8::replace(const AGStringUtf8 &what, const AGStringUtf8 
       i=find(what,oi);
       n+=substr(oi,i-oi);
       if(i==npos)
-	break;
+        break;
       n+=by;
       oi=i+1;
     }
@@ -420,37 +418,37 @@ int AGStringUtf8::parseHex() const
       i<<=4;
       char c=s[j];
       if(c>='A'&&c<='F')
-	k=c-'A'+10;
+        k=c-'A'+10;
       else if(c>='a' && c<='f')
-	k=c-'a'+10;
+        k=c-'a'+10;
       else if(c>='0' && c<='9')
-	k=c-'0';
+        k=c-'0';
       i+=k;
     }
   return i;
 }
 
 AGStringUtf8 AGStringUtf8::toHex(int i)
-{
-  std::string s;
-  std::string c="0";
-  while(i!=0)
-    {
-      int k=i&0xF;
+  {
+    std::string s;
+    std::string c="0";
+    while(i!=0)
+      {
+        int k=i&0xF;
 
-      if(k>9)
-	c[0]='A'+k-10;
-      else
-	c[0]='0'+k;
+        if(k>9)
+          c[0]='A'+k-10;
+        else
+          c[0]='0'+k;
 
-      s=c+s;
-      i>>=4;
-    }
-    
-  while(s.length()<2)
-    s=std::string("0")+s;
-  return AGStringUtf8(s);
-}
+        s=c+s;
+        i>>=4;
+      }
+
+    while(s.length()<2)
+      s=std::string("0")+s;
+    return AGStringUtf8(s);
+  }
 
 bool AGStringUtf8::toBool() const
 {
@@ -469,18 +467,18 @@ std::string AGStringUtf8::get(size_t pos) const
   return agSubStr(s,pos,1);
 }
 void AGStringUtf8::set(size_t pos,const std::string &pStr)
-{
-  mLength=npos;
-  s=agSubStr(s,0,pos)+pStr+agSubStr(s,pos+1,std::string::npos);
-}
+  {
+    mLength=npos;
+    s=agSubStr(s,0,pos)+pStr+agSubStr(s,pos+1,std::string::npos);
+  }
 
 std::ostream &operator<<(std::ostream &o,const AGStringUtf8 &s)
-{
-  o<<s.toString();
-  return o;
-}
+  {
+    o<<s.toString();
+    return o;
+  }
 
 void AGStringUtf8::set(size_t i,const AGCharUtf8 &c)
-{
-  operator[](i)=c;
-}
+  {
+    operator[](i)=c;
+  }

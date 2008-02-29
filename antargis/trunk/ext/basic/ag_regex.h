@@ -34,71 +34,71 @@ class AGEXPORT RegEx
   regex_t matcher;
 public:
   RegEx(const std::string &s, bool newline=false)
-  {
-    int flags=REG_EXTENDED;//|REG_NOSUB;
+    {
+      int flags=REG_EXTENDED;//|REG_NOSUB;
       if(newline)
-	flags|=REG_NEWLINE;
-    int ret=regcomp(&matcher,s.c_str(),flags);
-    switch(ret)
+        flags|=REG_NEWLINE;
+      int ret=regcomp(&matcher,s.c_str(),flags);
+      switch(ret)
       {
       case REG_BADPAT:
-	err("A regular expression was invalid.");break;
+        err("A regular expression was invalid.");break;
       case REG_ECOLLATE:
-	err("An invalid collating element was referenced.");break;
+        err("An invalid collating element was referenced.");break;
       case REG_ECTYPE:
-	err("An invalid character class type was referenced.");break;
+        err("An invalid character class type was referenced.");break;
       case REG_EESCAPE:
-	err("A trailing \\ was in the pattern.");break;
+        err("A trailing \\ was in the pattern.");break;
       case REG_ESUBREG:
-	err("A number in \\digit was invalid or in error.");break;
+        err("A number in \\digit was invalid or in error.");break;
       case REG_EBRACK:
-	err("A [ ] imbalance exists");break;
+        err("A [ ] imbalance exists");break;
       case REG_ENOSYS:
-	err("The function is not supported.");break;
+        err("The function is not supported.");break;
       case REG_EPAREN:
-	err("A \\( \\) or ( ) imbalance exists.");break;
+        err("A \\( \\) or ( ) imbalance exists.");break;
       case REG_EBRACE:
-	err("A \\{ \\} imbalance exists.");break;
+        err("A \\{ \\} imbalance exists.");break;
       case REG_BADBR:
-	err("The contents of \\{ \\} are invalid: not a number, number too large, more than two numbers, first larger than second.");break;
+        err("The contents of \\{ \\} are invalid: not a number, number too large, more than two numbers, first larger than second.");break;
       case REG_ERANGE:
-	err("An endpoint in a range expression is invalid.");break;
+        err("An endpoint in a range expression is invalid.");break;
       case REG_ESPACE:
-	err("Out of memory.");break;
+        err("Out of memory.");break;
       case REG_BADRPT:
-	err("?, * or + is not preceded by valid regular expression.");break;
+        err("?, * or + is not preceded by valid regular expression.");break;
       }
-  }
+    }
   ~RegEx()
-  {
-    regfree(&matcher);
-  }
-  void err(const std::string &s)
-  {
-    std::cout<<"An error occured:"<<s<<std::endl;
-  }
-  bool matchFirst(const std::string &s)
-  {
-    regmatch_t pmatch[1];
-    int ret=regexec(&matcher, s.c_str(), 0, pmatch,0);// REG_NOTBOL);
-    return ret==0;
-  }
-  int first(const std::string &s)
-  {
-    regmatch_t pmatch[3];
-    int ret=regexec(&matcher, s.c_str(), 3, pmatch,0);
-    if(ret==0)
-      return pmatch[0].rm_so;
-    return -1;
-  }
-  std::pair<int,int> firstMatch(const std::string &s)
     {
+      regfree(&matcher);
+    }
+  void err(const std::string &s)
+    {
+      std::cout<<"An error occured:"<<s<<std::endl;
+    }
+  bool matchFirst(const std::string &s)
+    {
+      regmatch_t pmatch[1];
+      int ret=regexec(&matcher, s.c_str(), 0, pmatch,0);// REG_NOTBOL);
+      return ret==0;
+    }
+  int first(const std::string &s)
+    {
+      regmatch_t pmatch[3];
+      int ret=regexec(&matcher, s.c_str(), 3, pmatch,0);
+      if(ret==0)
+        return pmatch[0].rm_so;
+      return -1;
+    }
+  std::pair<int,int> firstMatch(const std::string &s)
+  {
     regmatch_t pmatch[3];
     int ret=regexec(&matcher, s.c_str(), 3, pmatch,0);
     if(ret==0)
       return std::make_pair(pmatch[0].rm_so,pmatch[0].rm_eo);
     return std::make_pair(-1,-1);
-    }
+  }
 
 };
 

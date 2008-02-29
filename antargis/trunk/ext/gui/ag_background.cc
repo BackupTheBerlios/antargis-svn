@@ -27,7 +27,7 @@
 
 /** sets a uniform background of color pColor
     @param pColor an rgba-color. so you can use transparent backgrounds,too.
-*/
+ */
 AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
 {
   //  CTRACE;
@@ -55,7 +55,7 @@ AGBackground::AGBackground(const AGColor &pColor):mTexture(0)
    </background>
   </button>
 </pre>
-*/
+ */
 
 AGBackground::AGBackground(const AGString &pThemeName):mTexture(0)
 {
@@ -104,19 +104,19 @@ AGBackground::~AGBackground()
 
 /// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)
-{
-  if(mTexture)
-    {
-      p.tile(*mTexture,r.shrink(mBorder));
-    }
-  else if(mColor)
-    p.drawGradient(r.shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
- 
-}
+  {
+    if(mTexture)
+      {
+        p.tile(*mTexture,r.shrink(mBorder));
+      }
+    else if(mColor)
+      p.drawGradient(r.shrink(mBorder),mColors[0],mColors[1],mColors[2],mColors[3]);
+
+  }
 
 /// this is a help function, so that once made textures aren't automatically discarded.
 void AGBackground::useTextures()
-{
-  if(mTexture)
-    const_cast<AGTexture*>(mTexture)->useTexture();
-}
+  {
+    if(mTexture)
+      const_cast<AGTexture*>(mTexture)->useTexture();
+  }

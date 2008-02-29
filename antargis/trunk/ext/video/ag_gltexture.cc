@@ -32,143 +32,143 @@ size_t gUsedTexMemory=0;
 
 AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(false)
 {
-	assertGL;
-	getSurfaceManager()->registerMe(this);
-	assertGL;
-	glGenTextures( 1, &mID);
-	assertGL;
-	glBindTexture( GL_TEXTURE_2D,mID);
-	assertGL;
+  assertGL;
+  getSurfaceManager()->registerMe(this);
+  assertGL;
+  glGenTextures( 1, &mID);
+  assertGL;
+  glBindTexture( GL_TEXTURE_2D,mID);
+  assertGL;
 
-	glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0, GL_RGBA,
-			GL_UNSIGNED_BYTE, 0);
+  glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0, GL_RGBA,
+      GL_UNSIGNED_BYTE, 0);
 
-	assertGL;
-	gUsedTexMemory+=w*h*4;
+  assertGL;
+  gUsedTexMemory+=w*h*4;
 
-	dbout(4,"used memory:"<<gUsedTexMemory);
+  dbout(4,"used memory:"<<gUsedTexMemory);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	assertGL;
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	assertGL;
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  assertGL;
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  assertGL;
 }
 AGGLTexture::AGGLTexture(size_t W,size_t H,size_t D,GLint format):w(W),h(H),d(D),m3d(true)
 {
-	assertGL;
-	getSurfaceManager()->registerMe(this);
-	assertGL;
+  assertGL;
+  getSurfaceManager()->registerMe(this);
+  assertGL;
 
-	glGenTextures( 1, &mID);
-	assertGL;
-	glBindTexture( GL_TEXTURE_3D,mID);
-	assertGL;
+  glGenTextures( 1, &mID);
+  assertGL;
+  glBindTexture( GL_TEXTURE_3D,mID);
+  assertGL;
 
-	//w=h=128;
-	//d=2;
+  //w=h=128;
+  //d=2;
 
-	glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
-			GL_UNSIGNED_BYTE, 0);
-	assertGL;
+  glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
+      GL_UNSIGNED_BYTE, 0);
+  assertGL;
 
-	gUsedTexMemory+=w*h*d*4;
-	dbout(4,"used memory:"<<gUsedTexMemory);
+  gUsedTexMemory+=w*h*d*4;
+  dbout(4,"used memory:"<<gUsedTexMemory);
 
-	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	assertGL;
-	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	assertGL;
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  assertGL;
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  assertGL;
 }
 
 AGGLTexture::~AGGLTexture()
-{
-	assertGL;
-	glDeleteTextures(1,&mID);
+  {
+    assertGL;
+    glDeleteTextures(1,&mID);
 
-	if(m3d)
-		gUsedTexMemory-=w*h*d*4;
-	else
-		gUsedTexMemory-=w*h*4;
+    if(m3d)
+      gUsedTexMemory-=w*h*d*4;
+    else
+      gUsedTexMemory-=w*h*4;
 
-	assertGL;
-	getSurfaceManager()->deregisterMe(this);
-}
+    assertGL;
+    getSurfaceManager()->deregisterMe(this);
+  }
 
 void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset)
-{
-	assertGL;
-	GLint format;
+  {
+    assertGL;
+    GLint format;
 
-	SDL_Surface *surface=pSurface->surface;
+    SDL_Surface *surface=pSurface->surface;
 
-	switch(surface->format->BytesPerPixel)
-	{
-	case 3:
-		format = GL_RGB;break;
-	case 4:
-		format = GL_RGBA;break;
-	default:
-		throw std::runtime_error("Surface-format not supported for texturing!");
-	}
+    switch(surface->format->BytesPerPixel)
+    {
+    case 3:
+      format = GL_RGB;break;
+    case 4:
+      format = GL_RGBA;break;
+    default:
+      throw std::runtime_error("Surface-format not supported for texturing!");
+    }
 
-	AGRenderContext c;
-	c.setTexture(this);
-	c.begin();
-	assertGL;
-
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	assertGL;
-	glPixelStorei(GL_UNPACK_ROW_LENGTH,
-			surface->pitch / surface->format->BytesPerPixel);
+    AGRenderContext c;
+    c.setTexture(this);
+    c.begin();
+    assertGL;
 
 
-	assertGL;
-	if(m3d)
-	{
-		assert(glIsEnabled(GL_TEXTURE_3D));
-		int mw=std::min(surface->w,surface->h);
-		int mh=std::max(surface->w,surface->h)/mw;
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    assertGL;
+    glPixelStorei(GL_UNPACK_ROW_LENGTH,
+        surface->pitch / surface->format->BytesPerPixel);
 
-		// FIXME: use glTexImage instead of glTexSubImage, because it makes problems
-		// on MacOSX 10.5.1 (at least on my macbook pro - godrin)
 
-		glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
-				GL_UNSIGNED_BYTE, surface->pixels);
-		glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
-				mw,mw,mh,format,GL_UNSIGNED_BYTE,surface->pixels);
-	}
-	else
-	{
-		assertGL;
+    assertGL;
+    if(m3d)
+      {
+        assert(glIsEnabled(GL_TEXTURE_3D));
+        int mw=std::min(surface->w,surface->h);
+        int mh=std::max(surface->w,surface->h)/mw;
 
-		glTexSubImage2D(GL_TEXTURE_2D, 0, int(offset[0]), int(offset[1]),
-				surface->w, surface->h, format, GL_UNSIGNED_BYTE,
-				surface->pixels);
-	}
-	assertGL;
-	AGRenderContext().begin();
-}
+        // FIXME: use glTexImage instead of glTexSubImage, because it makes problems
+        // on MacOSX 10.5.1 (at least on my macbook pro - godrin)
+
+        glTexImage3D(GL_TEXTURE_3D, 0, format, w, h, d, 0, GL_RGBA,
+            GL_UNSIGNED_BYTE, surface->pixels);
+        glTexSubImage3D(GL_TEXTURE_3D,0,int(offset[0]),int(offset[1]),0,
+            mw,mw,mh,format,GL_UNSIGNED_BYTE,surface->pixels);
+      }
+    else
+      {
+        assertGL;
+
+        glTexSubImage2D(GL_TEXTURE_2D, 0, int(offset[0]), int(offset[1]),
+            surface->w, surface->h, format, GL_UNSIGNED_BYTE,
+            surface->pixels);
+      }
+    assertGL;
+    AGRenderContext().begin();
+  }
 
 GLuint AGGLTexture::id()
-{
+  {
 
-	return mID;
-}
+    return mID;
+  }
 bool AGGLTexture::is3d() const
 {
-	return m3d;
+  return m3d;
 }
 
 size_t AGGLTexture::width() const
 {
-	return w;
+  return w;
 }
 size_t AGGLTexture::height() const
 {
-	return h;
+  return h;
 }
 size_t AGGLTexture::depth() const
 {
-	return d;
+  return d;
 }

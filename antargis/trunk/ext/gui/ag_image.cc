@@ -24,82 +24,80 @@
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
   AGWidget(pParent,r),
   mTexture(pSurface),mTile(pTile)
-{
-  mCenter=true;
-  //  CTRACE;
-  /*  if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
+  {
+    mCenter=true;
+    //  CTRACE;
+    /*  if(pRect!=pSurface.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
       //      mSrcRect=pRect;
 
       setHeight(pRect.h());
       setWidth(pRect.w());
       }*/
-}
+  }
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
   AGWidget(pParent,r),
   mTexture(pTexture),mTile(pTile)
-{
-  mCenter=true;
-  //  CTRACE;
-  /*  if(pRect!=pTexture.getRect() && pRect.w()!=0 && pRect.h()!=0)
+  {
+    mCenter=true;
+    //  CTRACE;
+    /*  if(pRect!=pTexture.getRect() && pRect.w()!=0 && pRect.h()!=0)
     {
       mSrcRect=pRect;
 
       setHeight(pRect.h());
       setWidth(pRect.w());
       }*/
-}
+  }
 
 
 
 AGImage::~AGImage()
-{
-}
+  {
+  }
 
 void AGImage::draw(AGPainter &p)
-{
-  // do always center for now
-  bool center=true;
+  {
+    // do always center for now
+    bool center=true;
 
 
-  if(mTile)
-    {
-      //      if(mSrcRect.w()==0 || mSrcRect.h()==0)
-      //	mSrcRect=mTexture.getRect();
-      p.tile(mTexture,getRect().origin());//,mSrcRect);
-    }
-  else if(center)
-    {
-      
-      AGRect2 mr=getRect().origin();
+    if(mTile)
+      {
+        p.tile(mTexture,getRect().origin());//,mSrcRect);
+      }
+    else if(center)
+      {
 
-      if(mCenter)
-	mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
+        AGRect2 mr=getRect().origin();
 
-      p.blit(mTexture,mr);
-    }
-  else
-    p.blit(mTexture,getRect().origin());
-}
+        if(mCenter)
+          mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
+
+        p.blit(mTexture,mr);
+      }
+    else
+      p.blit(mTexture,getRect().origin());
+  }
 
 void AGImage::setSurface(const AGSurface &pSurface)
-{
-  AGTexture t(pSurface);
-  mTexture=t;
-  queryRedraw();
-}
+  {
+    AGTexture t(pSurface);
+    mTexture=t;
+    queryRedraw();
+  }
 void AGImage::setTexture(const AGTexture &pTexture)
-{
-  mTexture=pTexture;
-  queryRedraw();
-}
+  {
+    mTexture=pTexture;
+    queryRedraw();
+  }
 
 void AGImage::useTextures()
-{
-  mTexture.useTexture();
-}
+  {
+    mTexture.useTexture();
+  }
 
 void AGImage::setCenter(bool c)
-{
-  mCenter=c;
-}
+  {
+    mCenter=c;
+  }

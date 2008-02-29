@@ -25,32 +25,32 @@
 AGLocalizer *gLocalizer=0;
 
 AGLocalizer::~AGLocalizer()
-{
-  if(gLocalizer==this)
-    gLocalizer=0;
-}
-  
+  {
+    if(gLocalizer==this)
+      gLocalizer=0;
+  }
+
 AGStringUtf8 AGLocalizer::find(const AGString &p)
-{
-  return AGStringUtf8(p);
-}
+  {
+    return AGStringUtf8(p);
+  }
 
 void setLocalizer(AGLocalizer *p)
-{
-  gLocalizer=p;
-}
+  {
+    gLocalizer=p;
+  }
 
 AGLocalizer *getLocalizer()
-{
-  return gLocalizer;
-}
+  {
+    return gLocalizer;
+  }
 
 
 AGStringUtf8 translate(const AGString &s)
-{
-  AGLocalizer *l=getLocalizer();
+  {
+    AGLocalizer *l=getLocalizer();
 
-  if(l)
-    return l->find(s);
-  return AGStringUtf8(s);
-}
+    if(l)
+      return l->find(s);
+    return AGStringUtf8(s);
+  }

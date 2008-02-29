@@ -31,7 +31,7 @@
    object, if it's not a ruby-managed one.
 
    @see saveDelete(AGRubyObject *o)
-*/
+ */
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
@@ -44,53 +44,53 @@ class AGRubyObject;
 
 class AGEXPORT AGBaseObject
 {
- protected:
+protected:
   AGRubyObject *mp;
- public:
+public:
   AGBaseObject(AGRubyObject *p);
 
   ~AGBaseObject();
   void baseClear();
 
   bool valid()
-  {
-    return mp;
-  }
+    {
+      return mp;
+    }
 };
 
 template<class T>
 class AGEXPORT gc_ptr:public AGBaseObject
 {
- public:
+public:
   gc_ptr(T*t):AGBaseObject(t)
-    {
-    }
+  {
+  }
 
   T*operator->()
     {
       return (T*)mp;
     }
   T* getPtr()
-    {
-      if(!mp)
-	throw std::runtime_error("mp not defined!");
-      return (T*)mp;
-    }
+  {
+    if(!mp)
+      throw std::runtime_error("mp not defined!");
+    return (T*)mp;
+  }
 };
 
 class AGEXPORT AGRubyObject
 {
- public:
+public:
   /**
      This is copied from ruby.h, so that this header-file is not included all over the place.
      FIXME: this must eventually be changed - when the ruby implementation changes
-  */
+   */
   typedef unsigned long VALUE;
- 
+
   AGRubyObject();
   virtual ~AGRubyObject();
 
- protected:
+protected:
 #ifndef SWIG
   // functions shouldn't be exported and NEVER be used in ruby!
   virtual void clear();
@@ -98,7 +98,7 @@ class AGEXPORT AGRubyObject
   void markObject(AGRubyObject *o,bool recursive=true);
 
 #endif
- public:
+public:
 #ifndef SWIG
   bool mRubyObject;
   VALUE mRUBY;
@@ -113,7 +113,7 @@ class AGEXPORT AGRubyObject
 
   void addRef(AGBaseObject *o);
   void deleteRef(AGBaseObject *o);
- private:
+private:
   std::set<AGBaseObject*> mReferences;
 };
 
