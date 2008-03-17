@@ -109,16 +109,16 @@ class AGEXPORT Document
     Node *mRoot;
   public:
     Document();
-    Document(AGFilename pFile);
+    Document(const AGString &pFilename);
     ~Document();
 
-    bool parseFile(AGFilename file);
+    bool parseFile(const AGString &pFilename);
 
     Node &root();
 
     AGString toString(bool forceIndent=false) const;
 
-    void parseMemory(const AGData &s);
+    void parseMemory(const AGString &s);
   };
 
 class AGEXPORT Parser
@@ -168,7 +168,7 @@ class AGEXPORT Parser
  public:
   virtual ~Parser();
 
-  void parse(const AGData &pData);
+  void parse(const AGString &pData);
   size_t getLine() const;
 
   virtual void simpleTag(const AGString &pName,const Node::Attributes &pAttributes);
@@ -191,9 +191,9 @@ class AGEXPORT DomParser:public Parser
   virtual void comment(const AGString &pText);
   virtual void header(const AGString &pText);
 
-  Document *parse(const AGData &pData);
+  Document *parse(const AGString &pData);
 
-  Document *parse(const AGData &pData,Document *d);
+  Document *parse(const AGString &pData,Document *d);
 };
   
 

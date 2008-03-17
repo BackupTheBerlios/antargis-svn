@@ -1,3 +1,4 @@
+require 'ruby/spec_helper.rb'
 module TestModule
 	attr_reader :quitCounter
 	def step
@@ -109,4 +110,12 @@ protected
 		@app.eventMouseButtonDown(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONDOWN:0:1:1:#{x.to_i}:#{y.to_i}")))
 		@app.eventMouseButtonUp(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONUP:0:1:1:#{x.to_i}:#{y.to_i}")))
 	end
+  def key(pkey)
+    sym=pkey[0]
+    s1="SDL_KEYDOWN:0:1:0:#{sym}:0:#{sym}"
+    puts s1
+    #exit
+    @app.eventKeyDown(newEvent(@app,"",toSDLEvent(s1)))
+    @app.eventKeyUp(newEvent(@app,"",toSDLEvent("SDL_KEYUP:0:0:0:#{sym}:0:#{sym}")))
+  end
 end

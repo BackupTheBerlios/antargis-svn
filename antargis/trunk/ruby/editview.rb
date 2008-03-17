@@ -286,12 +286,14 @@ class AntRubyEditView<GLApp
 	
 	
 	def isTerrain(node)
-		[TerrainPiece,WaterPiece].member?(node.class)
+	  # Terrain is for testign purpose only
+	  [TerrainPiece,WaterPiece,Terrain].member?(node.class)
 	end
 	
 	def addEntity(list,button)
 		pos=nil
 		list.each{|c|
+		  puts "LIST #{c} #{c.node}"
 			if isTerrain(c.node)
 				pos=c.pos
 			end
@@ -300,20 +302,22 @@ class AntRubyEditView<GLApp
 			return
 		end
 		puts "ADDENTITY"
+    entity=nil
 		dorand=true
 		if @type==AntDeco
-			tree=@type.new(@map,@decoType)
+			entity=@type.new(@map,@decoType)
 			if @decoType=="floor" or @decoType=="block"
 				dorand=false
 			end
 		elsif @type==AntHero
-			tree=@type.new(@map)
-			tree.setAppearance(@appearance)
+			entity=@type.new(@map)
+			entity.setAppearance(@appearance)
 		else
-			tree=@type.new(@map)
+			entity=@type.new(@map)
 		end
-		tree.setPos(AGVector2.new(pos.x,pos.y))
-		getMap.insertEntity(tree)
+    puts "SETPOS #{pos.x} #{pos.y}"
+		entity.setPos(AGVector2.new(pos.x,pos.y))
+		getMap.insertEntity(entity)
 	end
 
 	def setupNames

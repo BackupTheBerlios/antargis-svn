@@ -59,7 +59,7 @@ class AntEditPropDialog<AntDialog
 		@ent.setupMesh
 		if @ent.is_a?(AntBoss)
 			name=getChild("Player").getSelected
-			@ent.setPlayer(getMap.players.find{|n|n.getName==name})
+			@ent.setPlayer(@map.players.find{|n|n.getName==name})
 		end
 		return true
 	end
@@ -187,7 +187,8 @@ private
 		@list.clearList
 		@players={}
 		@map.players.each{|p|
-			@list.insertItem(p.name,p.name)
+		  puts "initPlayNames:#{p}:#{p.class}:#{p.name}:#{p.name.class}"
+			@list.insertItem(p.name.to_s,p.name)
 			@players[p.name]=p
 		}
 	end

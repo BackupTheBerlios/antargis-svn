@@ -56,7 +56,7 @@ class AGEXPORT HeightMap:public AGMessageObject
 
   // save load
   virtual void saveXML(Node &node) const;
-  virtual void loadXML(const Node &node);
+  virtual bool loadXML(const Node &node);
 
   // editing
   void setHeight(float height); // for whole plane
@@ -90,6 +90,7 @@ class AGEXPORT HeightMap:public AGMessageObject
 
   /// to be used by initTerrainMesh() - not otherwise !!!
   void setTerrain(TerrainBase *pTerrain);
+  TerrainBase *getTerrainMesh();
 
   std::string hash() const;
 

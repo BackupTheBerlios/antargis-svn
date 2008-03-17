@@ -84,3 +84,13 @@ namespace std {
     %typemap(throws) string *, const string *
         "rb_raise(rb_eRuntimeError, $1->c_str());";
 }
+
+%{
+int SWIG_AsVal_std_string(VALUE x,std::string *s) {
+    s=new std::string(RSTRING_PTR(x), RSTRING_LEN(x));
+return 0;
+}
+VALUE SWIG_From_std_string(const std::string& s) {
+    return rb_str_new(s.data(), s.size());
+}
+%}

@@ -347,11 +347,11 @@ Document::Document()
   {
     mRoot=new Node;
   }
-Document::Document(AGFilename pFile)
+Document::Document(const AGString &pFilename)
   {
     mRoot=new Node;
     mRoot->clear();
-    parseFile(pFile);
+    parseFile(pFilename);
   }
 
 Document::~Document()
@@ -359,9 +359,9 @@ Document::~Document()
     delete mRoot;
   }
 
-bool Document::parseFile(AGFilename file)
+bool Document::parseFile(const AGString &filename)
   {
-    AGData s;
+    AGString s;
     s=loadFile(file);
 
     parseMemory(s);
@@ -379,7 +379,7 @@ Node *Document::getRootNode()
   return mRoot;
   }*/
 
-AGData Document::toString(bool forceIndent) const
+AGString Document::toString(bool forceIndent) const
 {
   if(mRoot->hasTextNode() && forceIndent==false)
     return mRoot->toString(false);
@@ -393,7 +393,7 @@ void Document::parseMemory(const AGString &s)
 }
  */
 
-void Document::parseMemory(const AGData &s)
+void Document::parseMemory(const AGString &s)
   {
     DomParser p;
     p.parse(s,this);
@@ -507,7 +507,7 @@ size_t Parser::getLine() const
   return data.line;
 }
 
-void Parser::parse(const AGData &pData)
+void Parser::parse(const AGString &pData)
   {
     data.s=AGString(pData);
 
@@ -843,7 +843,7 @@ void DomParser::header(const AGString &pText)
   }
 
 
-Document *DomParser::parse(const AGData &pData,Document *d)
+Document *DomParser::parse(const AGString &pData,Document *d)
   {
     doc=d;
     nodes.clear();
@@ -853,7 +853,7 @@ Document *DomParser::parse(const AGData &pData,Document *d)
     return doc;
   }
 
-Document *DomParser::parse(const AGData &pData)
+Document *DomParser::parse(const AGString &pData)
   {
     return parse(pData,new Document);
   }

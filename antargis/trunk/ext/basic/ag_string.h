@@ -57,10 +57,4 @@ public:
   static AGString toHex(int i);
 };
 
-//std::ostream &operator<<(std::ostream &o,const AGString &s);
-
-typedef AGString AGFilename;
-typedef AGString AGData;
-
-
 #endif

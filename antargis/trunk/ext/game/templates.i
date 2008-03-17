@@ -21,10 +21,10 @@ namespace std
 }
 
 
-%template(EntityPVector2) std::vector<PAntEntity>;
+//%template(EntityPVector2) std::vector<PAntEntity>;
 %template(EntityPVector) std::vector<AntEntity*>;
 %template(EntityPList) std::list<AntEntity*>;
-%template(EntityVector) std::vector<AntEntityPtr>;
+//%template(EntityVector) std::vector<AntEntityPtr>;
 %template(ResourceMap) std::map<std::string,float>;
 %template(AGResourceMap) std::map<AGString,float>;
 %template(AGVector2Pair) std::pair<AGVector2,AGVector2>;

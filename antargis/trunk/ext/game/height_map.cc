@@ -39,6 +39,8 @@ HeightMap::HeightMap(SceneBase *pScene,int w,int h):
     setTerrainScale(FOREST,23/32.0);
     setTerrainScale(ROCK,31/32.0);
     setTerrainScale(ROCK2,31/32.0);
+    
+    checkTerrain();
   }
 
 HeightMap::~HeightMap()
@@ -178,6 +180,7 @@ void HeightMap::loadBinary(BinaryIn &is)
               }
           }
       }
+    checkTerrain();
   }
 
 void HeightMap::saveBinary(BinaryOut &os) const
@@ -209,10 +212,10 @@ void HeightMap::saveBinary(BinaryOut &os) const
     }
 }
 
-void HeightMap::loadXML(const Node &node)
+bool HeightMap::loadXML(const Node &node)
   {
     CTRACE;
-    AGFilename filename=node.get("filename");
+    AGString filename=node.get("filename");
     if(filename.length())
       {
         BinaryFileIn is(filename);
@@ -264,7 +267,7 @@ void HeightMap::loadXML(const Node &node)
             Node::NodeVector hv=node.getChildren("height");
 
             if(hv.size()==0)// || gv.size()==0)
-              return;
+              return false;
             assert(hv.size()==1);
             Node &h=**hv.begin();
 
@@ -294,6 +297,7 @@ void HeightMap::loadXML(const Node &node)
 
 
     sigMapChangedComplete(new AGEvent(this,"mapChangedComplete"));
+    return true;
   }
 
 void HeightMap::newMap(int w,int h)
@@ -651,3 +655,13 @@ std::string HeightMap::hash() const
   return rubyHash(s.getString());
 
 }
+
+/**
+ * returns the mesh (scene-node) of the height-map
+ * FIXME: this is for testing-purpose only and shouldn't be used at all (?)
+ * it could be, that HeightMap introduced more than 1 mesh at some time
+ * */
+TerrainBase *HeightMap::getTerrainMesh()
+  {
+    return mTerrain;
+  }

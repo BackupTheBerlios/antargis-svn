@@ -7,7 +7,7 @@
 %include "std_list.i"
 %include "ag_string_new.i"
 %include "ag_string.i"
-%include "ag_filename.i"
+//%include "ag_filename.i"
 %include "ag_data.i"
 
 %{

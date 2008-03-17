@@ -66,8 +66,8 @@ class AGEXPORT AGTheme
 
 AGEXPORT AGTheme *getTheme();
 AGEXPORT void setTheme(const AGTheme &aTheme);
-AGEXPORT void loadTheme(const AGData &pXML);
-AGEXPORT bool loadThemeFile(const AGFilename &pFilename);
+AGEXPORT void loadTheme(const AGString &pXML);
+AGEXPORT bool loadThemeFile(const AGString &pFilename);
 
 AGEXPORT AGString addPoint(const AGString &pTheme);
 

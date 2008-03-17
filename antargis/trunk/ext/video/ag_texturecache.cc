@@ -37,11 +37,11 @@ AGTextureCache::AGTextureCache()
     getInstanceKiller()->reg(createKiller(this));
   }
 
-const AGTexture &AGTextureCache::get(const AGFilename &pTexture,const AGRect2 &pSub)
+const AGTexture &AGTextureCache::get(const AGString &pTexture,const AGRect2 &pSub)
   {
     std::string s=pTexture+":"+pSub.toString();
 
-    std::map<AGFilename,AGTexture*>::iterator i=mTextures.find(s);
+    std::map<AGString,AGTexture*>::iterator i=mTextures.find(s);
     if(i==mTextures.end())
       {
         // load
@@ -53,9 +53,9 @@ const AGTexture &AGTextureCache::get(const AGFilename &pTexture,const AGRect2 &p
   }
 
 
-const AGTexture &AGTextureCache::get(const AGFilename &pTexture,int downScaleExp)
+const AGTexture &AGTextureCache::get(const AGString &pTexture,int downScaleExp)
   {
-    std::map<AGFilename,AGTexture*>::iterator i=mTextures.find(pTexture);
+    std::map<AGString,AGTexture*>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
         // load
@@ -116,9 +116,9 @@ AGSurface skipHalfTexture(const AGSurface &s)
   }
 
 
-const AGTexture &AGTextureCache::get3D(const AGFilename &pTexture,int downScaleExp,int downScaleZ)
+const AGTexture &AGTextureCache::get3D(const AGString &pTexture,int downScaleExp,int downScaleZ)
   {
-    std::map<AGFilename,AGTexture*>::iterator i=mTextures.find(pTexture);
+    std::map<AGString,AGTexture*>::iterator i=mTextures.find(pTexture);
     if(i==mTextures.end())
       {
         // load

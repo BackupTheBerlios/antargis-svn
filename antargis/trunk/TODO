@@ -1,3 +1,6 @@
+* AGFilename remove!
+
+
 * bug-report at apple site on glTexSubImage issue 
 * fix shadows on mac (on shadow-extension ?)
 * check mingw on macosx

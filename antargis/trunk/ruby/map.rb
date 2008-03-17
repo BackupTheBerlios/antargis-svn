@@ -322,6 +322,7 @@ class AntRubyMap<AntMap
 		if n.get("curTime")!=""
 			@curTime=n.get("curTime").to_f
 		end
+    return true
 	end
 
 	def loadMap(filename)

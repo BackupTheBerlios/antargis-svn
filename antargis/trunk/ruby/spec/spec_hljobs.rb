@@ -38,24 +38,24 @@ describe "Recruit job - run through" do
 
   it "should then send hero to tower (at most 10 low-level move-jobs for format and move)" do
     rowen=hero("Rowen")
-  keep=building("Keep")
+    keep=building("Keep")
 
   	# format
     while rowen.getJob.stateName==:moveComplete
 	  advance
     end
 	
-	rowen.getJobName.should =="moveJob"
-	rowen.getTarget.should be_a_kind_of(AntMan)
-	@store[:oldPos]=rowen.getPos2D
+		rowen.getJobName.should =="moveJob"
+		rowen.getTarget.should be_a_kind_of(AntMan)
+		@store[:oldPos]=rowen.getPos2D
   end
   it "hero should only go fetch one man;go back and then stay at his position" do
-  	rowen=hero("Rowen")
-	man=rowen.getTarget
-  	runUntilLowLevelJobToFinish(rowen)
-	rowen.getJobName.should == "moveJob"
-	rowen.getTarget.should be_nil
-	trials=0
+		rowen=hero("Rowen")
+		man=rowen.getTarget
+		runUntilLowLevelJobToFinish(rowen)
+		rowen.getJobName.should == "moveJob"
+		rowen.getTarget.should be_nil
+		trials=0
 	while rowen.getJobName=="moveJob"
         runUntilLowLevelJobToFinish(rowen)
 		trials+=1

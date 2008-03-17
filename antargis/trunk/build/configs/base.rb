@@ -20,7 +20,7 @@ $config={
 	"LINK_SHARED"=>"$(LINK) -shared -o $(OUTPUT) -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker $(OUTPUT).a  $(INPUT) $(LIBDIR) -Lext",
 
 	# generate c++-code from a swig-interface file
-	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) -Ic:/antargis/rant/build/win32/usr/include $(INPUT) ",
+	"SWIG_CALL"=>"$(SWIG) -v -Wall -ruby -c++ -o $(OUTPUT) -Ic:/antargis/ant/build/win32/usr/include $(INPUT) ",
 	# generate dependencies for swig-interface files
 	"SWIGDEPS"=>"$(SWIG) -ruby -c++ -M $(INPUT)",
 

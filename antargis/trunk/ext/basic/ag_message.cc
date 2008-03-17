@@ -1,5 +1,10 @@
 #include "ag_message.h"
 
+AGMessageData::AGMessageData(size_t pID):
+  mID(pID)
+  {
+  }
+
 
 AGMessageDataSDL::AGMessageDataSDL(size_t pID,const SDL_Event &pEvent):
   AGMessageData(pID),
@@ -107,6 +112,12 @@ const AGMessageSource &AGMessage::getSource() const
 {
   return mSource;
 }
+
+AGMessageTransceiver *AGMessage::getSender()
+  {
+    return mSource.getSender();
+  }
+
 
 // class AGMessageQueue
 

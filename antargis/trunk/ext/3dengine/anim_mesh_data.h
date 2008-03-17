@@ -88,10 +88,10 @@ class AGEXPORT AnimMeshData:public AGRubyObject
  private:
   void setupJoints();
   void setupArray();
-  void loadAnt3(const AGData &instr,float scale,const AGFilename &pTexName);
+  void loadAnt3(const AGString &instr,float scale,const AGString &pTextureFilename);
 
  public:
-  AnimMeshData(const AGFilename &xmlfile);
+  AnimMeshData(const AGString &xmlFilename);
   ~AnimMeshData();
 
   AGBox3 bbox() const;

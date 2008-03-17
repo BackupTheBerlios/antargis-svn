@@ -108,9 +108,10 @@ void AntMap::saveXML(Node &node) const
 }
 
 
-void AntMap::loadXML(const Node &node)
+bool AntMap::loadXML(const Node &node)
   {
-    HeightMap::loadXML(node);
+    bool seemsok;
+    seemsok=HeightMap::loadXML(node);
 
     Node::const_iterator i=node.begin();
     for(;i!=node.end();i++)
@@ -122,6 +123,8 @@ void AntMap::loadXML(const Node &node)
     std::list<AntEntity*>::iterator k=mEntities.begin();
     for(;k!=mEntities.end();k++)
       (*k)->eventMapChanged();
+    
+    return seemsok;
   }
 
 void AntMap::insertEntity(AntEntity *e)
@@ -344,26 +347,31 @@ AntEntity *AntMap::getByName(const AGString &pName)
     return 0;
   }
 
-void AntMap::loadMapFromMemory(const AGData &pMem)
+bool AntMap::loadMapFromMemory(const AGString &pMem)
   {
     if(pMem.length())
       {
         Document d;
         d.parseMemory(pMem);
-        loadXML(d.root());
+        return loadXML(d.root());
       }
+    return false;
   }
 
-void AntMap::loadMap(const AGFilename &pFilename)
+bool AntMap::loadMap(const AGString &pFilename)
   {
-
-    loadMapFromMemory(loadFile(pFilename));
+    AGString filename=findFile(pFilename);
+    if(!fileExists(filename)) {
+      cdebug("File "<<pFilename<<" does not exists!");
+      return false;
+    }
+    return loadMapFromMemory(loadFile(filename));
   }
 
 /**
  * save the current map into an xml-file named pFilename
  */
-void AntMap::saveMap(const AGFilename &pFilename)
+void AntMap::saveMap(const AGString &pFilename)
   {
     CTRACE;
     mName=AGString(pFilename);
@@ -373,7 +381,7 @@ void AntMap::saveMap(const AGFilename &pFilename)
     cdebug("root:"<<&root);
     saveXML(root);
 
-    AGData c=d.toString();
+    AGString c=d.toString();
     saveFile(pFilename,c);
   }
 

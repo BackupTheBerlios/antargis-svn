@@ -31,7 +31,7 @@ public:
       AGStringUtf8 caption=_(pNode.get("caption"));
       b=new AGButton(pParent,pRect,AGStringUtf8(caption));
       setResult(b);
-      AGFilename captionImage=pNode.get("caption-image");
+      AGString captionImage=pNode.get("caption-image");
       if(captionImage.length())
         b->setSurface(AGSurface::load(captionImage),false);
       if(pNode.get("enabled")=="false")
@@ -299,7 +299,7 @@ public:
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
     {
       CTRACE;
-      AGFilename filename=pNode.get("filename");
+      AGString filename=pNode.get("filename");
       AGWidget *w=new AGWidget(pParent,pRect);
       setResult(w);
       AGLayout *l=new AGLayout(w);
@@ -318,7 +318,7 @@ public:
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
     {
-      AGFilename filename=pNode.get("filename");
+      AGString filename=pNode.get("filename");
 
       AGSurface s(0,0);
       if(filename.length())
@@ -460,7 +460,7 @@ public:
       if(caption.length())
         b->setCaption(AGStringUtf8(caption));
 
-      AGFilename captionImage=pNode.get("caption-image");
+      AGString captionImage=pNode.get("caption-image");
       if(captionImage.length())
         b->setSurface(AGSurface::load(captionImage),false);
       if(pNode.get("enabled")=="false")

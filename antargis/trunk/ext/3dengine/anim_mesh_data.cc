@@ -59,14 +59,14 @@ AGVector3 Bone::interpolateTrans(float t)
 
 
 
-AnimMeshData::AnimMeshData(const AGFilename &xmlfile):
+AnimMeshData::AnimMeshData(const AGString &xmlFilename):
   animShader("data/shaders/anim.vert","data/shaders/anim.frag"),
   //  animShaderDepth("data/shaders/anim_depth.vert",""),
   animShaderDepth("data/shaders/anim_depth.vert","data/shaders/anim_depth.frag"),
   mArray(&animShader),
   mArrayDepth(&animShaderDepth)
   {
-    Document doc(xmlfile);
+    Document doc(xmlFilename);
 
     Node &root=doc.root();
 
@@ -112,10 +112,10 @@ AnimMeshData::AnimMeshData(const AGFilename &xmlfile):
 
     if(anims.size()==0)
       {
-        std::cerr<<"There are no animations in "<<xmlfile<<std::endl;
+        std::cerr<<"There are no animations in "<<xmlFilename<<std::endl;
         throw std::string("no animations found in xmlfile");
       }
-    mName=AGString(xmlfile);
+    mName=AGString(xmlFilename);
   }
 
 AnimMeshData::~AnimMeshData()
@@ -155,9 +155,9 @@ int getMeshDownScale()
 
   }
 
-void AnimMeshData::loadAnt3(const AGData &instr,float scale,const AGFilename &tex)
+void AnimMeshData::loadAnt3(const AGString &instr,float scale,const AGString &pTextureFilename)
   {
-    mTexture=getTextureCache()->get(tex,getMeshDownScale());
+    mTexture=getTextureCache()->get(pTextureFilename,getMeshDownScale());
     BinaryStringIn l(instr);
 
     Uint32 vs,ts;

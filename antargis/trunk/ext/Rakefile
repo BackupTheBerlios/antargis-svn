@@ -30,6 +30,8 @@ $SOURCEDIRS=[
 ]
 
 AntargisLibName="antargis."+CONFIG["DLEXT"]
+AntargisSo="libantargis.dylib"
+AntargisA="libantargis.a"
 
 $LIBDEPS={"ext/basic"=>["SDL","RUBY"]}
 
@@ -88,6 +90,8 @@ def generateSwig(dir)
 	$?
 end
 
+
+
 def linkLib(name,objects)
 	name=name.to_s
 	winadd=""
@@ -116,6 +120,78 @@ def linkLib(name,objects)
 	sh cmd
 	$?
 end
+
+
+def linkSo(name,objects)
+  # FIXME !!!
+  name=name.to_s
+  winadd=""
+  if $CONFIG["target_os"]=="windows"
+    winadd="-Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker #{name.gsub(/\.so$/,".dll")}.a"
+  end
+
+
+  add=""
+  if $CONFIG["target_os"]=~/darwin/
+      add="-framework OpenGL"
+  else
+    add="-Wl,-\\("
+  end
+
+  cmd=$CONFIG["CXX"]+" -dH -shared -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+#FIXME
+    cmd=$CONFIG["CXX"]+" -dH -dynamiclib -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+  
+  #cmd=$CONFIG["LDSHARED"]+" -dH  -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+  pp cmd
+  #exit
+  if $CONFIG["CCACHE"]
+    cmd=$CONFIG["CCACHE"]+" "+cmd
+  end
+  puts ""
+  #pp cmd
+  sh cmd
+  $?
+end
+
+
+
+def linkA(name,objects)
+  # FIXME !!!
+  name=name.to_s
+  winadd=""
+  if $CONFIG["target_os"]=="windows"
+    winadd="-Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker #{name.gsub(/\.so$/,".dll")}.a"
+  end
+
+
+  add=""
+  if $CONFIG["target_os"]=~/darwin/
+      add="-framework OpenGL"
+  else
+    add="-Wl,-\\("
+  end
+
+  cmd=$CONFIG["CXX"]+" -dH -shared -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+#FIXME
+    cmd=$CONFIG["CXX"]+" -dH -dynamiclib -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+    
+    cmd="libtool -static -o #{name} #{objects.join(" ")}"
+  
+  #cmd=$CONFIG["LDSHARED"]+" -dH  -o #{name} -Lext #{winadd} #{add}  #{$CONFIG["LDFLAGS"]} #{$CONFIG["LIBPATH"]} #{objects.join(" ")}"
+  pp cmd
+  #exit
+  if $CONFIG["CCACHE"]
+    cmd=$CONFIG["CCACHE"]+" "+cmd
+  end
+  puts ""
+  #pp cmd
+  sh cmd
+  $?
+end
+
+
+
 
 def makeDepFilename(file)
 	File.join(".deps",file.gsub("\\","_").gsub("/","_"))
@@ -273,8 +349,16 @@ task AntargisLibName => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not f
 	linkLib(t.name,t.prerequisites+$CONFIG["LIBS"].split(" "))
 end
 
+task AntargisSo => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not file=~/[a-z]swig/}.map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
+  linkSo(t.name,t.prerequisites+$CONFIG["LIBS"].split(" "))
+end
 
-task :library=>AntargisLibName do
+
+task AntargisA => ((Dir["ext/*/*.cc"]+Dir["ext/*/*.c"]).select{|file|not file=~/[a-z]swig/}.map{|file|file.sub(".cc",".oo").sub(".c",".o")}+["ext/swig.oo"]) do |t|
+  linkA(t.name,t.prerequisites)
+end
+
+task :library=>[AntargisLibName,AntargisSo] do
 end
 
 if SWIG_ENABLED and false

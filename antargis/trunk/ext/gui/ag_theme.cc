@@ -187,7 +187,7 @@ void loadTheme(const Node&node,AGTheme &t,AGString name)
       }
   }
 
-void loadTheme(const AGData &pXML)
+void loadTheme(const AGString &pXML)
   {
     AGTheme theme;
 
@@ -201,7 +201,7 @@ void loadTheme(const AGData &pXML)
     setTheme(theme);
   }
 
-bool loadThemeFile(const AGFilename &pFilename)
+bool loadThemeFile(const AGString &pFilename)
   {
     AGTheme theme;
 

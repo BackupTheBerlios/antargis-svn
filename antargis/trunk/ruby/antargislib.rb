@@ -80,26 +80,32 @@ module AntMyEventHandler
 end
 
 begin
-	if File.exists?("ext/antargis.so")
-		require 'ext/antargis'
-	else
-		puts "Please run 'rake' before starting this program!"
-		require 'antargis'
-	end
-	include Antargis
+  include Antargis
+  puts "Antargis-module included"
 rescue
-	puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
-	system "rake"
-	puts "Try starting again..."
-	if File.exists?("ext/antargis.so")
-		require 'ext/antargis'
-	else
-		puts "Please run 'rake' before starting this program!"
-		require 'antargis'
+  puts "Antargis-module not found - trying to load .so"
+	begin
+		if File.exists?("ext/antargis.so")
+			require 'ext/antargis'
+		else
+			puts "Please run 'rake' before starting this program!"
+			require 'antargis'
+		end
+		include Antargis
+	rescue
+		puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
+		system "rake"
+		puts "Try starting again..."
+		if File.exists?("ext/antargis.so")
+			require 'ext/antargis'
+		else
+			puts "Please run 'rake' before starting this program!"
+			require 'antargis'
+		end
+		include Antargis
+		puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
+	
 	end
-	include Antargis
-	puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
-
 end
 puts "extension loaded"
 

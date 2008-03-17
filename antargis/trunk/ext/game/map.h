@@ -60,9 +60,6 @@ class AGEXPORT AntMap:public HeightMap
   
   EntityList getEntities(const AGRect2&r);
   std::list<AntEntity*> getAllEntities();
-//  std::vector<AntEntityPtr> getAllEntitiesV();
-//  std::vector<AntEntityPtr> getEntities(const AGString &pName);
-//  std::vector<AntEntity*> getAllEntitiesV();
   std::vector<AntEntity*> getEntities(const AGString &pName);
 
   AntEntity *getEntity(const Mesh &pMesh);
@@ -80,11 +77,11 @@ class AGEXPORT AntMap:public HeightMap
   virtual void processXMLNode(const Node &node);
 
   void saveXML(Node &node) const;
-  void loadXML(const Node &node);
+  bool loadXML(const Node &node);
 
-  void saveMap(const AGFilename &pFilename);
-  virtual void loadMap(const AGFilename &pFilename);
-  virtual void loadMapFromMemory(const AGData &Memory);
+  void saveMap(const AGString &pFilename);
+  virtual bool loadMap(const AGString &pFilename);
+  virtual bool loadMapFromMemory(const AGString &Memory);
 
   void move(float pTime);
 
