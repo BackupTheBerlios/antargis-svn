@@ -3,11 +3,9 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "GLee.h"
-#include "ag_geometry.h"
 #include "ag_geometry.h"
 
-#include <SDL_opengl.h>
+#include "ag_gl.h"
 
 #include <vector>
 #include <set>

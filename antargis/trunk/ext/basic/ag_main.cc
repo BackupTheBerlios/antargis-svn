@@ -139,7 +139,10 @@ AGMain *getMain()
 
         // IMPORTANT:
         //   put it into a global variable - so that it won't get garbage collected
-        rb_eval_string("include Antargis;$agMain=getMain");
+        rb_eval_string("include Antargis");
+        //rb_eval_string("Antargis");
+        registered=(rb_eval_string("if Antargis.respond_to?(:getMain) \n $agMain=getMain\n puts $agMain\n true \n else \n false \nend")==Qtrue);
+        cdebug("registered:"<<registered);
       }
 
 

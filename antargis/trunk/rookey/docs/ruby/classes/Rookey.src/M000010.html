@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>getOrderedCppHeaders (Rookey)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File cpp_hierarchy_parser.rb, line 14</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Rookey</span>.<span class="ruby-identifier">getOrderedCppHeaders</span>(<span class="ruby-identifier">classes</span>)
+    <span class="ruby-identifier">map</span>={}
+    <span class="ruby-identifier">order</span>={}
+    
+    <span class="ruby-identifier">allClasses</span>=<span class="ruby-identifier">classes</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">classes</span>=<span class="ruby-identifier">getRubyClasses</span>(<span class="ruby-identifier">classes</span>)
+    
+    <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">map</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]=<span class="ruby-identifier">c</span>
+    }
+    <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">order</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>]=<span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">map</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">to_s</span>].<span class="ruby-identifier">nil?</span> 
+    }
+    <span class="ruby-identifier">oneNotSet</span>=<span class="ruby-keyword kw">false</span>
+    <span class="ruby-identifier">maxNumber</span>=<span class="ruby-value">0</span>
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-identifier">oneNotSet</span>=<span class="ruby-keyword kw">false</span>
+      <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">order</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>].<span class="ruby-identifier">nil?</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">order</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">parent</span>].<span class="ruby-identifier">nil?</span>
+            <span class="ruby-identifier">oneNotSet</span>=<span class="ruby-keyword kw">true</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">order</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>]=<span class="ruby-identifier">order</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">parent</span>]<span class="ruby-operator">+</span><span class="ruby-value">1</span>
+            <span class="ruby-identifier">maxNumber</span>=[<span class="ruby-identifier">maxNumber</span>,<span class="ruby-identifier">order</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>]].<span class="ruby-identifier">max</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      }
+    <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">oneNotSet</span>
+    <span class="ruby-comment cmt">#puts &quot;MAX:&quot;,maxNumber</span>
+    <span class="ruby-identifier">cs</span>=[]
+    (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">maxNumber</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">order</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span><span class="ruby-operator">==</span><span class="ruby-identifier">i</span>
+          <span class="ruby-identifier">cs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">map</span>[<span class="ruby-identifier">k</span>]
+        <span class="ruby-keyword kw">end</span>
+      }
+    }
+    <span class="ruby-identifier">pp</span> <span class="ruby-identifier">order</span>
+    <span class="ruby-identifier">allFiles</span>=<span class="ruby-identifier">allClasses</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span><span class="ruby-identifier">c</span>.<span class="ruby-identifier">header_file</span>}.<span class="ruby-identifier">uniq</span>
+    <span class="ruby-identifier">result</span>=<span class="ruby-identifier">classes</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span><span class="ruby-identifier">order</span>[<span class="ruby-identifier">a</span>.<span class="ruby-identifier">name</span>]<span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">order</span>[<span class="ruby-identifier">b</span>.<span class="ruby-identifier">name</span>]}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span><span class="ruby-identifier">c</span>.<span class="ruby-identifier">header_file</span>}.<span class="ruby-identifier">uniq</span>
+    <span class="ruby-identifier">result</span>=<span class="ruby-identifier">result</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">allFiles</span><span class="ruby-operator">-</span><span class="ruby-identifier">result</span>)
+    <span class="ruby-identifier">pp</span> <span class="ruby-identifier">result</span>
+    <span class="ruby-identifier">result</span>
+    <span class="ruby-comment cmt">#cs.map{|c|c.header_file}.uniq</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

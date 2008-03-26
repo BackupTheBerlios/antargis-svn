@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>makeObject (Rookey::Compiler)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File compile.rb, line 97</span>
+          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">makeObject</span>(<span class="ruby-identifier">sourceName</span>)
+            <span class="ruby-identifier">file</span>=<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">getBuildDir</span>,<span class="ruby-identifier">sourceName</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;.o&quot;</span>)
+      <span class="ruby-identifier">dir</span>=<span class="ruby-constant">File</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">file</span>)[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword kw">begin</span>
+<span class="ruby-comment cmt">#        pp @config</span>
+<span class="ruby-comment cmt">#        pp &quot;DIR:&quot;,dir</span>
+        <span class="ruby-comment cmt">#if dir</span>
+        <span class="ruby-constant">Rookey</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Object</span>
+        <span class="ruby-identifier">pp</span> <span class="ruby-identifier">$!</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">file</span>
+          <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

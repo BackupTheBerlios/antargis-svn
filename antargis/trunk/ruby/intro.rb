@@ -150,6 +150,7 @@ class IntroApp<AntApplication
 
 	# when a mouse-button is clicked the intro is canceled
 	def eventMouseButtonDown(e)
+	  puts "HU"
 		tryQuit
 		return super(e)
 	end

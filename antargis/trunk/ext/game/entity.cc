@@ -30,25 +30,9 @@ AntEntity::AntEntity(AntMap *pMap):mMap(pMap),mPos(0,0,0)
   assert(mMap);
   init();
 }
-/*
-AntEntity::AntEntity(const AGVector3 &p):mPos(p)
-{
-  init();
-}
-AntEntity::AntEntity(const AGVector2 &p):mPos(getMap()->getPos(p))
-{
-  init();
-}
-
-AntEntity::AntEntity():mPos(0,0,0)
-{
-  init();
-  }*/
 
 void AntEntity::init()
   {
-    mRubyObject=false;
-
     mID=getMap()->getNewID();
 
     mShowOnMinimap=false;

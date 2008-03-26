@@ -6,5 +6,9 @@
 void AGEXPORT AG_Init_libantargismath()
   {
     TRACE;
-    getMain()->setRand(new AGRandomizer(""));
+    AGRandomizer *r=new AGRandomizer("");
+    cdebug("r:"<<r);
+    AGMain *main=getMain();
+    cdebug("main:"<<main);
+    main->setRand(r);
   }

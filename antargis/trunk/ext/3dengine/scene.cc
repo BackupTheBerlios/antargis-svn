@@ -41,9 +41,7 @@ Scene::Scene(int w,int h):
     else
       mShadow=0;
 
-    mRubyObject=false;
     mEnabled=true;
-
   }
 
 

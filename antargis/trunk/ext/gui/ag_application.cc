@@ -92,7 +92,9 @@ AGWidget *AGApplication::getMainWidget()
  * \brief the main-loop of each application
  *
  * Each program has one or more application-objects.
- * An application normally represents a single UI-screen. So it has
+ * An application normally represents a single UI-screen. So it has (FIXME)
+ * 
+ * FIXME: redesign this!
  */
 
 bool AGApplication::run() 
@@ -181,7 +183,7 @@ bool AGApplication::run()
             if(mainWidget)
               mainWidget->sigTick(t);
 
-            dbout(2,"frame events:"<<t);
+//            dbout(2,"frame events:"<<t);
             eventPrepareFrame(t);
 
             eventFrame(t);
@@ -347,7 +349,6 @@ void AGApplication::redraw()
 
 void AGApplication::draw()
   {
-    CTRACE;
     if(delCue.size()>0)
       {
         for(std::list<AGWidget*>::iterator i=delCue.begin();i!=delCue.end();i++)
@@ -459,6 +460,7 @@ void AGApplication::tryQuit()
 
 bool AGApplication::eventKeyDown(AGEvent *m)
   {
+    CTRACE;
     if(m->isSDLEvent())
       {
         SDLKey k=m->getKey();

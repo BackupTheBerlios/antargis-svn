@@ -27,7 +27,7 @@
 #include <SDL.h>
 #include "ag_geometry.h"
 #include "ag_screen.h"
-#include <GL/gl.h>
+#include "ag_gl.h"
 
 #define NEW_TEXTURES
 

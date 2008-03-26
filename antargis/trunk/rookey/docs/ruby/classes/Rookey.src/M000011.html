@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>swig_interface (Rookey)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tasks.rb, line 24</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Rookey</span>.<span class="ruby-identifier">swig_interface</span>(<span class="ruby-identifier">ops</span>)
+    <span class="ruby-identifier">target</span>=<span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-identifier">source</span>=<span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-identifier">inits</span>=[]
+    <span class="ruby-identifier">ops</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">n</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:initializers</span>
+          <span class="ruby-identifier">inits</span>=<span class="ruby-identifier">v</span>
+        <span class="ruby-keyword kw">else</span>
+                      <span class="ruby-identifier">target</span>=<span class="ruby-identifier">n</span>
+                      <span class="ruby-identifier">source</span>=<span class="ruby-identifier">v</span>
+      <span class="ruby-keyword kw">end</span>
+    }
+    <span class="ruby-identifier">file</span>=<span class="ruby-identifier">target</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;_interface.i&quot;</span>
+    <span class="ruby-identifier">templates</span>=[<span class="ruby-identifier">source</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/i$/</span>}
+    <span class="ruby-identifier">source</span>=<span class="ruby-identifier">source</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp re">/INCLUDE_SWIG/</span>)
+    
+    <span class="ruby-identifier">rule</span> <span class="ruby-identifier">file</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">source</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">parser</span>=<span class="ruby-constant">CppHierarchyParser</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">source</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/h$/</span>})
+            <span class="ruby-identifier">classes</span>=<span class="ruby-identifier">parser</span>.<span class="ruby-identifier">getAllClasses</span>
+            
+            <span class="ruby-identifier">files</span>=(<span class="ruby-identifier">getOrderedCppHeaders</span>(<span class="ruby-identifier">classes</span>)<span class="ruby-operator">+</span><span class="ruby-identifier">source</span>).<span class="ruby-identifier">uniq</span>
+            <span class="ruby-identifier">interfaceBuilder</span>=<span class="ruby-constant">SwigInterfaceBuilder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>,<span class="ruby-identifier">target</span>,<span class="ruby-identifier">classes</span>,<span class="ruby-identifier">files</span>,<span class="ruby-identifier">source</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/i$/</span>},<span class="ruby-identifier">inits</span>,<span class="ruby-identifier">templates</span>)
+            <span class="ruby-identifier">interfaceBuilder</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">parser</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-constant">CLEAN</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">file</span>
+    [<span class="ruby-identifier">file</span>]
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

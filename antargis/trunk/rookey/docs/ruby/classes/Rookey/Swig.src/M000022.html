@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>swig (Rookey::Swig)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File swig.rb, line 8</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">swig</span>(<span class="ruby-identifier">t</span>,<span class="ruby-identifier">interface</span>)
+      <span class="ruby-identifier">options</span>=[]
+      <span class="ruby-identifier">program</span>=<span class="ruby-ivar">@config</span>[<span class="ruby-value str">&quot;SWIG&quot;</span>]
+      <span class="ruby-identifier">program</span><span class="ruby-operator">||=</span><span class="ruby-value str">&quot;swig&quot;</span>
+      <span class="ruby-identifier">program</span>=<span class="ruby-value str">&quot;swig&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">program</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;-#{@target}&quot;</span>
+      <span class="ruby-identifier">options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;-c++&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@cpp</span>
+      <span class="ruby-identifier">swigOptions</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-value str">&quot;SWIG_OPTIONS&quot;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot; &quot;</span>)
+      <span class="ruby-identifier">swigOptions</span><span class="ruby-operator">||=</span>[]
+      <span class="ruby-identifier">includeDirs</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-value str">&quot;INCLUDEDIRS&quot;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot; &quot;</span>)
+      <span class="ruby-identifier">includeDirs</span><span class="ruby-operator">||=</span>[]
+      <span class="ruby-identifier">includes</span>=<span class="ruby-identifier">includeDirs</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span><span class="ruby-value str">&quot;-I&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">d</span>}
+      <span class="ruby-identifier">options</span><span class="ruby-operator">+=</span><span class="ruby-identifier">swigOptions</span><span class="ruby-operator">+</span><span class="ruby-identifier">includes</span>
+      <span class="ruby-identifier">options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;-o &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span>
+      <span class="ruby-identifier">options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">interface</span>
+      <span class="ruby-identifier">call</span>=<span class="ruby-identifier">program</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot; &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">sh</span> <span class="ruby-identifier">call</span>
+      <span class="ruby-keyword kw">rescue</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span>)
+        <span class="ruby-keyword kw">rescue</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">raise</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># write deps</span>
+      <span class="ruby-comment cmt"># rmove -o</span>
+      <span class="ruby-identifier">options</span>=<span class="ruby-identifier">options</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">op</span><span class="ruby-operator">|</span><span class="ruby-keyword kw">not</span> <span class="ruby-identifier">op</span><span class="ruby-operator">=~</span><span class="ruby-regexp re">/^-o/</span>}
+      <span class="ruby-identifier">depsfile</span>=<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;.deps&quot;</span>,<span class="ruby-identifier">interface</span>)
+      <span class="ruby-identifier">depsdir</span>=<span class="ruby-constant">File</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">depsfile</span>)[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-identifier">depsdir</span>)
+      <span class="ruby-keyword kw">rescue</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">options</span>=<span class="ruby-identifier">options</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>]<span class="ruby-operator">+</span>[<span class="ruby-value str">&quot;-o &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">depsfile</span>,<span class="ruby-value str">&quot;-M&quot;</span>]<span class="ruby-operator">+</span><span class="ruby-identifier">options</span>[<span class="ruby-value">3</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+      <span class="ruby-identifier">call</span>=<span class="ruby-identifier">program</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot; &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+      <span class="ruby-identifier">sh</span> <span class="ruby-identifier">call</span>
+      
+      <span class="ruby-identifier">puts</span>    
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

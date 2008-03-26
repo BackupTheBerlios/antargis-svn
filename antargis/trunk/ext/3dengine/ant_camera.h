@@ -23,8 +23,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <GLee.h>
-
+#include "ag_gl.h"
 #include <ant_frustum.h>
 #include <ant_projection.h>
 #include <ag_rubyobj.h>

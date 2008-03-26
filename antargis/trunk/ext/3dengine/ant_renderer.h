@@ -1,7 +1,7 @@
 #ifndef __RENDERER_H
 #define __RENDERER_H
 
-#include "GLee.h"
+#include "ag_gl.h"
 
 class Scene;
 class AGFBO;

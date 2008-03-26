@@ -5,9 +5,7 @@
 SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
   mPos(pPos),mBBox(b)
 {
-  //  std::cout<<"new scene-node: "<<this<<std::endl;
   assert(s);
-  mRubyObject=false;
   mScene=s;
   mVisible=true;
   mOrder=1;
@@ -18,14 +16,6 @@ SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
 
 SceneNode::~SceneNode()
 {
-  //  std::cout<<"del scene-node: "<<this<<" scene:"<<mScene<<std::endl;
-  //  CTRACE;
-  //mRubyObject=false; // why was this here ??????
-
-  // typical calling is:
-  // scenenode is saveDeleted by AntEntity - so mScene should be 0
-
-  //  assert(mScene==0); // but not at program end - this is the reason this is commented
   if(mScene)
     mScene->removeNode(this);
 }

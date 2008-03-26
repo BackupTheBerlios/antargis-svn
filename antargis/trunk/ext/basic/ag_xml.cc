@@ -362,7 +362,7 @@ Document::~Document()
 bool Document::parseFile(const AGString &filename)
   {
     AGString s;
-    s=loadFile(file);
+    s=loadFile(filename);
 
     parseMemory(s);
     return true;

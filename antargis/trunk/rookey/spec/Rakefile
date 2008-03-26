@@ -1,0 +1,12 @@
+require '../tasks.rb'
+
+swigTarget = Rookey::swig "swig.cc"=>"interface.i"
+
+targets = Rookey::compile ["main.cc",swigTarget]
+
+
+antargisDll = Rookey::link_dll "antargis",targets
+antargisExe = Rookey::link_exe "antargis",targets
+
+task :default=>[antargisExe,antargisDll] do
+end

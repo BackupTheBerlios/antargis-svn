@@ -1,0 +1,14 @@
+require 'rake/rdoctask.rb'
+require 'spec/rake/spectask'
+
+
+Rake::RDocTask.new do |rd|
+	 rd.main = "README"
+	 rd.title="Rookey (Part of Battles of Antargis)"
+	 #rd.options << "--diagram"
+	 rd.rdoc_dir="docs/ruby"
+	 a=Dir["**/README"]+Dir["**/*.rb"]
+	 a=a.select{|f|not (f=~/_test/ or f=~/spec/)}
+	 rd.rdoc_files.include(a)
+end
+ 

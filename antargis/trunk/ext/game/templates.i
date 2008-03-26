@@ -1,3 +1,4 @@
+/*
 %{
 PAntEntity SWIG_RB2AntEntity(VALUE x) {
 	PAntEntity e=0;
@@ -19,6 +20,7 @@ namespace std
 	specialize_std_vector(PAntEntity,SWIG_ANTENTITY_P,SWIG_RB2AntEntity,SWIG_AntEntity2RB);
 	specialize_std_list(PAntEntity,SWIG_ANTENTITY_P,SWIG_RB2AntEntity,SWIG_AntEntity2RB);
 }
+*/
 
 
 //%template(EntityPVector2) std::vector<PAntEntity>;

@@ -100,12 +100,6 @@ protected:
 #endif
 public:
 #ifndef SWIG
-  bool mRubyObject;
-  VALUE mRUBY;
-  bool mDeleted;
-#ifdef GCDEBUG
-  std::string mObjName;
-#endif
 
 #endif
   friend void general_markfunc(void *ptr);

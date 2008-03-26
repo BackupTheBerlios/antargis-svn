@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <typeinfo>
 #include <set>
+#include <map>
 #include <iostream>
 
 
@@ -14,7 +15,7 @@
 
 #include <ag_main.h>
 
-std::set<AGRubyObject*> gExistingRubies;
+VALUE convertCpp2Ruby(AGRubyObject *cObject);
 
 AGEXPORT void *getAddressOfRubyObject(AGRubyObject *o)
   {
@@ -23,36 +24,17 @@ AGEXPORT void *getAddressOfRubyObject(AGRubyObject *o)
 
 AGEXPORT bool rubyObjectExists(void *po)
   {
-    AGRubyObject *o=reinterpret_cast<AGRubyObject*>(po);
-    return gExistingRubies.find(o)!=gExistingRubies.end();
+    VALUE v=convertCpp2Ruby((AGRubyObject*)po);
+    return(v!=Qnil);
   }
 
 AGRubyObject::AGRubyObject()
   {
-    mRubyObject=false;
-    mDeleted=false;
-    gExistingRubies.insert(this);
-    mRUBY=0;
-#ifdef GCDEBUG
-    printf("NEW ME:%lx\n",this);
-#endif
-    //  cdebug("existing rubies:"<<gExistingRubies.size());
-
   }
 AGRubyObject::~AGRubyObject()
   {
     for(std::set<AGBaseObject*>::iterator i=mReferences.begin();i!=mReferences.end();i++)
       (*i)->baseClear();
-
-
-    //  cdebug("DEL:"<<mRUBY);
-#ifdef GCDEBUG
-    printf("DEL:%lx  %s (me:%lx)\n",mRUBY,mObjName.c_str(),this);
-#endif
-    mDeleted=true;
-    gExistingRubies.erase(this);
-    //  cdebug("existing rubies:"<<gExistingRubies.size());
-    //  cdebug("DEL:"<<mRUBY);
   }
 
 
@@ -61,30 +43,17 @@ void AGRubyObject::mark()
   {
   }
 
+
 // call this function with any object you want to mark.
 void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
   {
- //   CTRACE;
+    VALUE v=convertCpp2Ruby(o);
+    if(v!=Qnil)
+      rb_gc_mark(v);
+    
     assert(o);
-//    cdebug("o:"<<o);
-
-#ifdef GCDEBUG
-    printf("marking : %lx\n",o);
-    assert(gExistingRubies.find(o)!=gExistingRubies.end());
-#endif
-
-    if(o->mRubyObject)
-      {
-#ifdef GCDEBUG
-        printf("marking ruby : %lx\n",o->mRUBY);
-#endif
-        rb_gc_mark(o->mRUBY);
-      }
     if(recursive)
       o->mark(); // call this directly
-#ifdef GCDEBUG
-    printf("endmarking : %lx\n",o);
-#endif
   }
 
 void AGRubyObject::clear()
@@ -143,22 +112,15 @@ bool saveDelete(AGRubyObject *o)
     if(hasQuit())
       return false; // we are quitting - so memory is discarded anyway - hopefully ;-)
 
+    VALUE v=convertCpp2Ruby(o);
+    if(v!=Qnil)
+      return false; // do not delete - it's under ruby's control!
+
+    
     assert(o);
-    if(gExistingRubies.find(o)==gExistingRubies.end())
-      {
-#ifdef GCDEBUG
-        cdebug("already deleted!");
-#endif
-        return false; // already deleted
-      }
-    assert(!o->mDeleted);
     o->clear();
-    if(!o->mRubyObject)
-      {
-        delete o;
-        return true;
-      }
-    return false;
+    delete o;
+    return true;
   }
 
 

@@ -21,7 +21,7 @@
 #ifndef AG_GLSL_H
 #define AG_GLSL_H
 
-#include "GLee.h"
+#include "ag_gl.h"
 //#include "renderer.h"
 #include "ag_tools.h"
 #include "ag_geometry.h"

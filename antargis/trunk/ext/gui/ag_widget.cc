@@ -96,7 +96,6 @@ class MWidgetSet:public std::set<AGWidget*>
       mCache=0;
       mCacheTouched=false;
       mTooltipWidget=0;
-      mRubyObject=false;
       mModal=false;
       if(getAllWidgets())
         getAllWidgets()->insert(this);
@@ -181,11 +180,7 @@ class MWidgetSet:public std::set<AGWidget*>
           std::list<AGWidget*>::iterator i=mToClear.begin();
           for(;i!=mToClear.end();i++)
             {
-              if(!(*i)->mRubyObject) // don't delete ruby-objects - they get deleted by garbage collection
-                {
-                  dbout(5000,"type:"<<typeid(**i).name());
-                  delete *i;
-                }
+              saveDelete(*i);
             }
           mToClear.clear();
         }

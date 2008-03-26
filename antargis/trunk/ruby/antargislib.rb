@@ -87,6 +87,8 @@ rescue
 	begin
 		if File.exists?("ext/antargis.so")
 			require 'ext/antargis'
+    elsif File.exists?("antargis.bundle")
+      require 'antargis.bundle'
 		else
 			puts "Please run 'rake' before starting this program!"
 			require 'antargis'
@@ -94,7 +96,7 @@ rescue
 		include Antargis
 	rescue
 		puts "I'll try to run rake for you. Please try again yourself when it doesn't work."
-		system "rake"
+		#system "rake"
 		puts "Try starting again..."
 		if File.exists?("ext/antargis.so")
 			require 'ext/antargis'

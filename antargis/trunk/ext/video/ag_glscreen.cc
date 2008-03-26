@@ -17,9 +17,7 @@
  * You should have received a copy of the GNU General Public
  * License along with this program.
  */
-#include "GLee.h"
 
-#include <SDL_opengl.h>
 #include "ag_glscreen.h"
 #include "ag_color.h"
 #include "ag_debug.h"
