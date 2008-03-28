@@ -38,7 +38,7 @@ sdlLibZip="ag_sdl_libs.tar.gz"
 rubyZip="ag_ruby_bin.tar.gz"
 
 downloadTo("http://svn.berlios.de/wsvn/antargis/contrib/binary/ag_sdl_libs.tar.gz?op=file&rev=0&sc=0",File.join(libdir,sdlLibZip))
-downloadTo("http://svn.berlios.de/wsvn/antargis/contrib/binary/ag_ruby_libs.tar.gz?op=file&rev=0&sc=0",File.join(libdir,rubyZip))
+downloadTo("http://svn.berlios.de/wsvn/antargis/contrib/binary/ag_ruby_bin.tar.gz?op=file&rev=0&sc=0",File.join(libdir,rubyZip))
 #downloadTo("ftp://ftp.ruby-lang.org/pub/ruby/binaries/mswin32/ruby-1.8.6-i386-mswin32.zip",File.join(libdir,rubyZip))
 
 unzip(sdlLibZip,libdir)

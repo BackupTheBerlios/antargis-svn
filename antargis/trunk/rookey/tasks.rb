@@ -36,7 +36,7 @@ module Rookey
     }
     file=target+"_interface.i"
     templates=[source].flatten.select{|f|f=~/i$/}
-    source=source.grep(/INCLUDE_SWIG/)
+    source=source.grep(/INCLUDE_SWIG/)+[getAGRubyObjectHeader]
     
     rule file=>source do
 	    parser=CppHierarchyParser.new([source].flatten.select{|f|f=~/h$/})
@@ -71,8 +71,14 @@ module Rookey
 	    swigCompiler.swig(t,interface)
 	  end
 	  CLEAN << output << output.gsub(/\.cc?/,".h")
-	  output
+	  [output,getAGRubyObjectSource]
 	end
+  def Rookey.getAGRubyObjectSource
+    File.join(File.split(__FILE__)[0],"cpp","ag_rubyobj.cc")
+  end
+  def Rookey.getAGRubyObjectHeader
+    File.join(File.split(__FILE__)[0],"cpp","ag_rubyobj.h")
+  end
 	
 	def Rookey.compile(files,config=nil)
 	  files=[files].flatten

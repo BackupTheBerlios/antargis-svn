@@ -33,5 +33,5 @@ Spec::Rake::SpecTask.new(:spec=>:default) do |t|
         t.spec_files = FileList['**/spec_*.rb']
         t.warning = true
         t.rcov = true
-        t.spec_opts=["--format html:spec_output.html"]
+        t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
 end

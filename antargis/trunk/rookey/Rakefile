@@ -12,3 +12,13 @@ Rake::RDocTask.new do |rd|
 	 rd.rdoc_files.include(a)
 end
  
+
+# rspec
+Spec::Rake::SpecTask.new(:spec) do |t|
+	t.spec_files = FileList['**/spec_*.rb']
+	t.warning = true
+	#t.rcov = true
+	t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
+end
+
+task :default=>:spec

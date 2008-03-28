@@ -1,12 +1,7 @@
 require '../tasks.rb'
-
-swigTarget = Rookey::swig "swig.cc"=>"interface.i"
-
-targets = Rookey::compile ["main.cc",swigTarget]
-
-
-antargisDll = Rookey::link_dll "antargis",targets
-antargisExe = Rookey::link_exe "antargis",targets
-
-task :default=>[antargisExe,antargisDll] do
-end
+require 'rake/clean.rb'
+var1=Rookey.swig_interface('file3'=>['a.h'])
+var2=Rookey.swig('file3_swig.cc'=>[var1])
+var4=Rookey.compile(['main.cc',var2])
+var5=Rookey.link_dll(File.split(var4.flatten.select{|f|f=~/swig/}[0])[1].sub(/_swig.*/,''),var4)
+task :default=>var5

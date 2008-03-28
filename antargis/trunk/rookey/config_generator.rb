@@ -31,7 +31,7 @@ module Rookey
     end
   end
   
-  CONFIG_FILENAME="antconfig.rb"
+  CONFIG_FILENAME="config_cache.rb"
   
   @@config=nil
   
@@ -117,7 +117,6 @@ EOT
   end
   
  
-  # 
   def Rookey.getDescendantsOfClass(p)
     c=[]
     ObjectSpace.each_object(Class){|a|c.push(a) if a.ancestors.member?(p)}

@@ -15,6 +15,8 @@ module Rookey
     map={}
     order={}
     
+    pp classes
+    
     allClasses=classes.dup
     classes=getRubyClasses(classes)
     
@@ -109,7 +111,7 @@ module Rookey
       }
     end
     
-	  def parseFiles(files)
+	  def parseFiles(files)	    
 		  class2File={}
 		  deriveList={} # x=>y :x is child of y
 		  allClasses=[]

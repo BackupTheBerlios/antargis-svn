@@ -31,7 +31,13 @@ module Rookey
 	    includes=includeDirs.map{|d|"-I"+d}
 	    options+=includes
 	    
-	    options << "-c "+File.expand_path(source)
+      expanded_path=File.expand_path(source)
+      sourcepath=source
+      sourcepath=expanded_path if File.exists?(expanded_path) and not File.exists?(source)
+      sourcepath="/"+sourcepath if File.exists?("/"+sourcepath) and not File.exists?(sourcepath)
+      #pp sourcepath,source
+      #exit
+	    options << "-c "+sourcepath
 	    options << "-o "+target
       
       

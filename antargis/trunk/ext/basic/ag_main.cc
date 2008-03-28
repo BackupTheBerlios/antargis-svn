@@ -50,6 +50,7 @@ std::string gUserName=DRMUSER;
 bool gDRMok=false;
 #endif
 
+//FIXME: discard this function!
 bool hasQuit()
   {
     return quited;
@@ -98,6 +99,7 @@ AGMain::~AGMain()
     cdebug("QUIT");
     SDL_Quit();
     quited=true;
+    setQuitting();
 
     //  saveDelete(mRand);
 
