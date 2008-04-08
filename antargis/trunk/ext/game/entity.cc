@@ -26,10 +26,10 @@
 #include "anim_mesh.h"
 
 AntEntity::AntEntity(AntMap *pMap):mMap(pMap),mPos(0,0,0)
-{
-  assert(mMap);
-  init();
-}
+      {
+        assert(mMap);
+        init();
+      }
 
 void AntEntity::init()
   {
@@ -81,7 +81,8 @@ void AntEntity::init()
 
 AntEntity::~AntEntity()
   {
-    //  CTRACE;
+    CTRACE;
+    //#error called several times
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
       saveDelete(*i);
     mMeshes.clear();
@@ -651,7 +652,9 @@ void AntEntity::mark()
   {
     AGRubyObject::mark();
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-      markObject(*i);
+      {
+        markObject(*i);
+      }
 
     if(mJob)
       {

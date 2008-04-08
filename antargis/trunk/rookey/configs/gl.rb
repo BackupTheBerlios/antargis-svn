@@ -9,6 +9,7 @@ module Rookey
       case get("host_os")
         when /darwin/
           config.add("INCLUDEDIRS","/usr/X11/include")        
+          config.add("LDFLAGS","-Wl,-framework,OpenGL")
       end      
     end   
   end 

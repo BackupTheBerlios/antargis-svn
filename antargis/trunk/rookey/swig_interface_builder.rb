@@ -77,6 +77,34 @@ EOT
       
     end
     
+    # include dyn-casts for template-containers like std::vector<SceneNode*>
+    # this is missing in the dyncast-implementation of swig (at the time of 1.3.34)
+    def dynFroms
+      str=""
+      str<<"%wrapper %{"
+      str<< "namespace swig{"
+      getClasses.each{|c|
+        name=c.name
+        str << "
+        template <> struct traits_from_ptr<#{name}> {
+          static VALUE from (#{name} *val,int owner=0) {
+          
+            // insert Dynamic_cast(...)
+            swig_type_info *info=SWIGTYPE_p_#{name}; //type_info<#{name}>();
+            swig_type_info *ninfo=SWIG_TypeDynamicCast(info,(void**)&val);
+            if(ninfo==0)
+              ninfo=info;
+          
+            return SWIG_NewPointerObj(val, ninfo, owner);
+          }
+        };        
+        "
+      }
+      str<<"}"
+      str<<"%}"
+      str
+    end
+    
     def generate
 
 "%module(directors=\"1\") #{@moduleName}
@@ -89,12 +117,13 @@ EOT
 #{headerIncludes}
 %}
 
+#{dynFroms}
+
 #{directors}
 #{markers}
 %{
 #{cpp2RubyFunctions}
 %}
-#{templates}
 
 %{
 #{initDefs}
@@ -107,6 +136,8 @@ EOT
 %typemaps_std_string(AGString, char, SWIG_AsCharPtrAndSize, SWIG_FromCharPtrAndSize, %checkcode(STDSTRING));
 
 #{dynamicCasts}
+
+#{templates}
 
 %feature(\"trackobjects\");
 

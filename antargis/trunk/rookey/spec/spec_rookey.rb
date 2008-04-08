@@ -63,6 +63,16 @@ describe "Interface generation" do
     
     rakefile.clean
   end
+  it "should generate dyn-casts within containers (vectors e.g.), too" do
+    rakefile=rake do
+      dll=link_dll(compile(swig(["a.h","d.h","my_vector.i"])))
+    end
+    rakefile.default
+    ruby do
+      require(dll)
+      
+    end
+  end
 end
 
 

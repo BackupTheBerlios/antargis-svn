@@ -1,7 +1,13 @@
-
+require 'rake/clean.rb'
 require File.join(File.split(__FILE__)[0],'rookey.rb')
 require File.join(File.split(__FILE__)[0],'swig.rb')
 require File.join(File.split(__FILE__)[0],'compile.rb')
+
+
+require File.join(File.split(__FILE__)[0],'rookey_config.rb')
+Rookey::Configure.load
+Rookey::Configure.cleanTask
+
 require File.join(File.split(__FILE__)[0],'config_generator.rb')
 require File.join(File.split(__FILE__)[0],'cpp_hierarchy_parser.rb')
 require File.join(File.split(__FILE__)[0],'swig_interface_builder.rb')

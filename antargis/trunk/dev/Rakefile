@@ -1,0 +1,12 @@
+require File.join(File.split(__FILE__)[0],"..",'rookey','tasks.rb')
+
+Rookey::getConfig.add("INCLUDEDIRS","3dengine_v2")
+
+objs=Rookey::compile(Dir["**/*.cc"])
+exe=Rookey::link_exe("test3d",objs)
+
+task :test=>[exe] do
+  sh "./"+exe
+end
+
+task :default => [:test]

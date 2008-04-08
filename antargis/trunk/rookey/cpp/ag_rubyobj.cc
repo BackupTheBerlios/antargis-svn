@@ -17,11 +17,16 @@
 
 bool mRubyQuitting=false;
 
+// this set keeps track of all valid instances of AGRubyObject
+std::set<AGRubyObject*> mRubyObjects;
+
 void setQuitting()
   {
     mRubyQuitting=true;
   }
 
+// swig-function for handling "tracked" objects
+// BEWARE: this does not support multiple libraries yet (FIXME)
 VALUE convertCpp2Ruby(AGRubyObject *cObject);
 
 AGEXPORT void *getAddressOfRubyObject(AGRubyObject *o)
@@ -37,11 +42,13 @@ AGEXPORT bool rubyObjectExists(void *po)
 
 AGRubyObject::AGRubyObject()
   {
+    mRubyObjects.insert(this);
   }
 AGRubyObject::~AGRubyObject()
   {
     for(std::set<AGBaseObject*>::iterator i=mReferences.begin();i!=mReferences.end();i++)
       (*i)->baseClear();
+    mRubyObjects.erase(this);
   }
 
 
@@ -52,20 +59,28 @@ void AGRubyObject::mark()
 
 
 // call this function with any object you want to mark.
+// recursive should be set true only in one direction, otherwise you'll generate endless-loops (!!)
 void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
   {
+    // o must be a valid ruby-object
+    assert(mRubyObjects.find(o)!=mRubyObjects.end());
+
+    // look up, if it's registered within ruby
     VALUE v=convertCpp2Ruby(o);
     if(v!=Qnil)
-      rb_gc_mark(v);
-    
+      {
+        // then mark it
+        rb_gc_mark(v);
+      }
+
     assert(o);
+    // recurse through hierarchy
     if(recursive)
       o->mark(); // call this directly
   }
 
 void AGRubyObject::clear()
   {
-    //CTRACE;
   }
 
 void AGRubyObject::addRef(AGBaseObject *o)
@@ -84,17 +99,16 @@ void AGRubyObject::deleteRef(AGBaseObject *o)
 /// it handles all the AGRubyObjects
 void general_markfunc(void *ptr)
   {
-    //STACKTRACE;
-    //  TRACE;
     if(!ptr)
       {
         // FIXME: add logging!!!
         std::cerr<<("WARNING: a ptr==0 was given in general_markfunc!")<<std::endl;
-        //      throw std::runtime_error("WARNING: a ptr==0 was given in general_markfunc!");
-        return; // ignore
+        return; // ignore this !
       }
     assert(ptr);
+    // the given object must be a AGRubyObject and it must be valid (it's in mRubyObjects)
     AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
+    assert(mRubyObjects.find(o)!=mRubyObjects.end());
 
 #ifdef GCDEBUG
     printf("mark: 0x%lx\n",o->mRUBY);
@@ -107,48 +121,42 @@ void general_markfunc(void *ptr)
 
 /**
    saveDelete is used to delete AGRubyObjects savely.
-
-   ruby does a gc-run and then deletes everything, which is not marked
-   so eventually sub-instances of a rubyobject are killed before
-   a workaround for this:
-   1) put all deleted objects in a set
-   2) check set before clearing/deleting
-   3) clear this set when marking
  */
 bool saveDelete(AGRubyObject *o)
   {
-    
-    
-    //FIXME: can this really be discarded ?
     if(mRubyQuitting)
       return false; // we are quitting - so memory is discarded anyway - hopefully ;-)
 
-    
+    // check, if this object is existant any longer
+    // in case we're quitting this the deletion order is not defined for ruby-objects !!
+    if(mRubyObjects.find(o)==mRubyObjects.end())
+      {
+        std::cerr<<"RubyObject "<<o<<" no longer existant - maybe we're quitting ?!"<<std::endl;
+        return false;
+      }
+
+    assert(o);
+    // send object a message, that it will be deleted. This can help with detachin connections
+    // between objects.
+    o->clear();
     
     VALUE v=convertCpp2Ruby(o);
     if(v!=Qnil)
       return false; // do not delete - it's under ruby's control!
-
     
-    assert(o);
-    o->clear();
+    
     delete o;
     return true;
   }
 
 
 
-
-
-
-
-
 AGBaseObject::AGBaseObject(AGRubyObject *p)
 :mp(p)
-{
-  if(p)
-    p->addRef(this);
-}
+    {
+      if(p)
+        p->addRef(this);
+    }
 
 AGBaseObject::~AGBaseObject()
   {

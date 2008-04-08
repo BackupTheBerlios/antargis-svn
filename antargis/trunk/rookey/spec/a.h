@@ -2,7 +2,7 @@
 
 //INCLUDE_SWIG
 
-class B:public AGRubyObject
+class A:public AGRubyObject
   {
 public:
   virtual void x()

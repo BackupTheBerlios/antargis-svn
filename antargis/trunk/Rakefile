@@ -27,11 +27,21 @@ task :default=>[lib,main] do
 end
 
 
+alias :oldSystem :system
+def system(cmd)
+  #puts Dir.pwd
+  if cmd=~/ruby .*/
+    cmd.gsub!(/^ruby/,"./starter")
+  end
+  #puts cmd
+  oldSystem(cmd)
+end
+
 
 # rspec
 Spec::Rake::SpecTask.new(:spec=>:default) do |t|
-        t.spec_files = FileList['**/spec_*.rb']
-        t.warning = true
-        t.rcov = true
-        t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
+  t.spec_files = FileList['ruby/**/spec_*.rb'].map{|f|File.expand_path(f)}
+  t.warning = true
+  t.rcov = true
+  t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
 end

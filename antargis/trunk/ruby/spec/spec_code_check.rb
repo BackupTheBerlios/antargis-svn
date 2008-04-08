@@ -1,7 +1,8 @@
 describe "The source code" do
   it "should have no mentioning of rant or Rantfile" do
     extensions=["rb","cc","c","h"]
-    (extensions.map{|e|Dir["**/*."+e]}+Dir["**/README"]).flatten.select{|filename|not filename=~/spec/}.each{|filename|
+    okdirs=["ruby","ext","starter"]
+    (extensions.map{|e|Dir["**/*."+e]}+Dir["**/README"]).flatten.select{|filename|okdirs.inject(true){|a,b|a and filename=~/^#{b}/} and not filename=~/spec/}.each{|filename|
       file=File.open(filename)
       content=file.read
       file.close

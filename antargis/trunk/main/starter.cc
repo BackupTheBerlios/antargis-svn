@@ -15,7 +15,7 @@ int main(int argc,char*argv[])
     std::cout<<"Init_antargis out of starter-ready"<<std::endl;
     ruby_options(argc,argv);
     std::cout<<"AAA"<<std::endl;
-    ruby_script("sdl_starter");
+    //ruby_script("sdl_starter");
     std::cout<<"BBB"<<std::endl;
     ruby_run();
     std::cout<<"CCC"<<std::endl;

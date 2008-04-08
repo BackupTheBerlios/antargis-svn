@@ -8,7 +8,10 @@ describe "AGEdit" do
     @app.setMainWidget(widget)
     @app.step
     key('a')
-    while true; @app.run;end
+    widget.getText.to_s.should == "a"
+    #"it should work".should == ""
+    
+    #while true; @app.run;end
   end
 end
 

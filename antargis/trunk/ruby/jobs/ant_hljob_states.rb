@@ -228,7 +228,7 @@ class HLJob_MoveComplete<BaseState
 		if getMap.path
 			@waypoints=[hero.getPos2D]+getMap.path.computePath(hero.getPos2D,targetPos,hero)+[targetPos]
 			# remove waypoints in between - if they're not necessary - origin must be given, too
-			@waypoints=getMap.path.refinePath(@waypoints,hero)
+			@waypoints=getMap.path.refinePath(@waypoints,hero).dup
 			# remove origin for waypoint-list
 			assert{@waypoints.length>=2}
 			@waypoints.shift

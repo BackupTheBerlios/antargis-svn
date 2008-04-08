@@ -257,7 +257,11 @@ class AntRubyEntity<AntEntity
 		if sym
 			t=sym
 		end
-		super(mesh=AntModels.createModel(self,t,subtype))
+    mesh=AntModels.createModel(self,t,subtype)
+    #print "MESH for #{self}:#{mesh} "
+    #pp mesh
+		super(mesh)
+    #pp getMesh.class,getMesh
 		setupRing
 		return mesh
 	end

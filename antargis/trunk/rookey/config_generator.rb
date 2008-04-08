@@ -67,16 +67,23 @@ EOT
     end
     
     def searchProgram(program)
+      searchPrograms(program)[0]
+    end
+    
+    def searchPrograms(program)
       programs=[program].flatten
-      programs.each{|program|
-	      getPath.each{|dir|
+      result=programs.map{|program|
+	      getPath.map{|dir|
+	        
 	        p=File.join(dir,program)
-	        if File.exists?(p)
-	          return p
-	        end
+          #puts "TEST:"+p
+	        p=nil unless File.exists?(p)
+          #puts "RES:"+p.to_s
+          p
 	      }
-      }
-      nil
+      }.flatten.uniq-[nil]
+      pp result
+      result
     end
     def checkProgram(program)      
     end
@@ -99,6 +106,10 @@ EOT
     end
     private
     def getPath
+      # add paths in externals/build/*/bin
+      getEnvPath+Dir[File.expand_path(File.join(File.split(__FILE__)[0],"externals","built","*"))].map{|d|File.join(d,"bin")}
+    end
+    def getEnvPath
       p=ENV["PATH"]
       if File.join("a","b")=~/\\/
         p.split(";")

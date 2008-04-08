@@ -72,6 +72,8 @@ module Rookey
 	    programcall=getCompiler(:cpp)+" " +@config["LDSHAREDFLAGS"]
       
       options=[]
+      pp t.methods.sort
+      pp t.prerequisites
       
       options << "-o "+t.name
       options += t.prerequisites

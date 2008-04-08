@@ -1,0 +1,354 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'mkmf'
+require 'build/property.rb'
+require 'build/mkmf_support.rb'
+require 'pp'
+require 'logger'
+
+NEEDED_PROGRAMS={"CC"=>"gcc","CXX"=>"g++","SWIG"=>"swig","RUBY"=>"ruby"}
+POSSIBLE_PROGRAMS={"CCACHE"=>"ccache","SDL_CONFIG"=>"sdl-config"}
+
+NEEDED_LIBS=[
+	"GL","GLU","png","SDL","SDL_image","SDL_ttf","SDL_mixer","stdc++","zs"
+]
+FALLBACK_LIBS={"GLU"=>"glu32","GL"=>"opengl32","ruby"=>"msvcrt-ruby18","zs"=>"z"}
+
+def allPrograms
+	POSSIBLE_PROGRAMS.merge(NEEDED_PROGRAMS)
+end
+
+class ConfigureOptions
+	def self.parse(args)
+		options={}
+		options[:use_mkmf]=true
+		options[:use_env]=true
+		options[:use_sdlconfig]=true
+		options[:use_fallbacks]=true
+		options[:debug]=false
+		options[:gcdebug]=false
+		options[:profile]=false
+		options[:version]="0.2.1.5"
+
+		options[:programs]={}
+		allPrograms.keys.each{|p|
+			options[:programs][p]=p
+		}
+	
+		opts=OptionParser.new do |opts|
+			opts.banner = "Usage: configure [options]"
+
+			opts.separator ""
+			opts.separator "Specific options:"
+
+			opts.on("-d", "--enable-debug",
+							"enable debugging") do 
+				options[:debug]=true
+			end
+
+			opts.on("-g","--enable-gc-debug",
+							"enable debugging of garbage collector") do
+				options[:gcdebug]=true
+			end
+
+			opts.on("-p","--enable-profile",
+							"enable c++ profiling") do 
+				options[:profile]=true
+			end
+
+			opts.on("--disable-sdlconfig",
+							"do not use sdl-config for configuration") do 
+				options[:use_sdlconfig]=false
+			end
+			opts.on("--disable-fallbacks",
+							"do not use fallback dirs for X11 and GL") do 
+				options[:use_fallbacks]=false
+			end
+
+			opts.on("--prefix PREFIXDIR",
+							"set prefix directory PREFIXDIR") do |dir|
+				options[:prefix]=dir
+			end
+
+			opts.on("--drmuser DRMUSER",
+				"set user for DRM") do |v|
+					options[:drmuser]=v
+			end
+			
+			opts.on("--drmpw DRMPASSWORD",
+				"set password for DRM") do |v|
+					options[:drmpass]=v
+			end
+			
+			opts.on("-v","--version",
+				"set release version of BoA") do |v|
+					options[:version]=v
+			end
+
+			opts.on("--ext-config CONFIG",
+				"use user-defined config instead of ruby's mkmf","CONFIG maybe in mingw32 or unix") do |extconfig|
+					options[:extconfig]=extconfig
+					options[:use_mkmf]=false
+			end
+
+			allPrograms.keys.each{|program|
+				opts.on("--path-"+program+" PATH",
+					"set path to program '#{program}'") do |d|
+					options[program]=d
+				end
+			}
+
+
+		end
+		opts.parse!(args)
+		options
+	end
+end
+
+######################
+# helpers
+######################
+
+def gatherENVConfig
+	config={}
+	["PATH","LDFLAGS","CFLAGS","CXX","CC","SWIG"].each{|name|
+		if ENV[name]
+			config[name]=ENV[name]
+		end
+	}
+	# FIXME: add system-switch to cmd-line options
+	system=nil
+	unless config["PATH"]=~/^[a-zA-Z]:\\/
+		config["PATH"]=config["PATH"].split(":") # Unix ?
+		system=:unix
+	else
+		config["PATH"]=config["PATH"].split(";") # Windows ?
+		system=:windows
+	end
+	config["PATH"].each{|d|
+		puts "\nWARNING: Something went wrong while checking PATH. Detected #{system} - was it wrong ? \n" unless File.exists?(d)
+	}
+
+	config
+end
+
+def splitLDFLAGS(config)
+	ldflags=config["LDFLAGS"].value.split(" ")
+	config.set!("LIBS",ldflags.select{|s|s=~/^-l/}.join(" "))
+	config.set!("LDFLAGS",ldflags.select{|s|not s=~/^-l/}.join(" "))
+	config
+end
+
+def splitCFLAGS(config)
+	cflags=config["CFLAGS"].value.split(" ")
+	config["INCLUDEPATH"]=cflags.select{|s|s=~/^-I/}.join(" ")
+	config["DEFINES"]=cflags.select{|s|s=~/^-D/}.join(" ")
+	config
+end
+
+
+def gatherMkmfConfig
+	mkmfs={
+		"CC"=>"$(CC)",
+		"LDSHARED"=>"$(LDSHARED)",
+		"RUBY"=>"$(bindir)/$(ruby_install_name)",
+		"LIBPATH"=>"-L$(archdir) -L$(sitearchdir)",
+		"CFLAGS"=>"$(CFLAGS)",
+		"LDFLAGS"=>"$(LDFLAGS) $(LIBRUBYARG)",
+		"INCLUDEPATH"=>"-I$(includedir) -I$(archdir) -I$(sitearchdir)",
+		"target_os"=>"$(target_os)"
+	}
+
+	config={}
+
+	mkmfs.each{|k,v|
+		value=checkMkmf(v,CONFIG)
+		config[k]=value if value
+	}
+
+	# post-process to get LIBS to separate variable
+	config
+end
+
+
+######################
+
+def getUserInput
+	options = ConfigureOptions.parse(ARGV)
+end
+
+def generateHardConfiguration(options)
+	config=Properties.new
+
+	allPrograms.each{|k,v|config[k]=v}
+
+	# FIXME: include default-dirs (/usr/include/GL, /usr/include/X11 /usr/X11/include and such - same for libs!!!
+
+	if options[:use_mkmf]
+		config.merge!(gatherMkmfConfig)
+	end
+	if options[:use_env]
+		config.merge!(gatherENVConfig)
+	end
+	config.merge!(Properties.new(options))
+
+	config
+end
+
+def testProgram(prg)
+	return false unless File.exist?(prg)
+	return true
+	#`#{prg} --help`
+	#$?==0
+end
+
+def searchPrograms(config)
+	allPrograms.each{|k,v|
+		ok=false
+		info=""
+		if config[k].value!=v
+			# not default - check if ok
+			ok=testProgram(config[k].value)
+			info="(given by config)"
+			unless ok
+				puts "Given path #{config[k].value} for #{k} was not correct!"
+			end
+		end
+		unless ok
+			pathes=config["PATH"].value
+			pp pathes
+			
+			pathes.each{|path|
+				cpath=File.join(path,v)
+				pp cpath
+				
+				if testProgram(cpath)
+					config[k]=cpath
+					ok=true
+					break
+				end
+			}
+
+		end
+		if ok
+			puts "#{k.ljust(10)} found at #{config[k].value.ljust(25)} #{info}"
+		else
+			puts "#{k.ljust(10)} not found!"
+			config[k]=""
+		end
+	}
+	config
+end
+
+def tryAddMissingLibs(config)
+	NEEDED_LIBS.each{|lib|
+		ok=have_library(lib)
+		unless ok
+			# check fallback
+
+			begin
+				have_library(FALLBACK_LIBS[lib])
+			rescue
+			end
+		end
+	}
+	if not $libs
+		puts "ERROR: Not compatible with current mkmf!"
+		exit
+	end
+	config["LDFLAGS"]=$libs
+	config
+end
+
+def addSDLConfig(config,userInput)
+	if userInput[:use_sdlconfig]
+		sdlconf=config["SDL_CONFIG"].value
+		pp sdlconf
+		return config if sdlconf=="sdl-config"
+		#pp sdlconf
+		cflags=`#{sdlconf} --cflags`.chomp
+		config["CFLAGS"]=cflags if $?==0
+		puts "#{sdlconf} --cflags exited with #{$?} and gave the output:\n#{cflags}" if $?!=0
+		libs=`#{sdlconf} --libs`.chomp
+		config["LDFLAGS"]=libs if $?==0
+		puts "#{sdlconf} --libs exited with #{$?} and gave the output:\n#{libs}" if $?!=0
+	end
+	config
+end
+
+def darwin?
+  CONFIG["host_os"]=~/darwin/
+end
+
+def addStandardFallbacks(config,options)
+	if options[:use_fallbacks]
+		dirs=["/usr/include/GL"]
+		dirs+=["/usr/include/X11","/usr/X11R6/include"] #unless darwin?
+		config["INCLUDEPATH"]=dirs.inject(""){|str,d|str+" -I"+d}+" -I."
+		config["CFLAGS"]="-dH"
+	
+		dirs=["/usr/lib/GL"]
+		dirs+=["/usr/lib/X11","/usr/X11R6/lib"] unless darwin?
+		config["LIBPATH"]=dirs.inject(""){|str,d|str+" -L"+d}
+	end	
+	config
+end
+
+def checkFlags(config,options)
+	if options[:debug]
+		options=config["CFLAGS"].value.split(" ").select{|op|not op=~/^-O[0-5]$/}.join(" ")
+		config.set!("CFLAGS",options+" -O0 -g")
+	end
+	if options[:profile]
+		config["CFLAGS"]="-pg" 
+		config["LDFLAGS"]="-pg"
+	end
+	config
+end
+
+def runChecks(config)
+	begin
+		`rake test`
+	rescue
+		puts "Test failed"
+	end
+end
+
+def saveConfigurationFile(config)
+	file=File.open("antconfig.rb","w")
+	file.puts config.toRuby
+	file.close
+end
+
+# FIXME: add check for darwin
+unless CONFIG["host_os"]=~/darwin/
+  $LDFLAGS+=" -L/usr/X11R6/lib"
+end
+
+$LDFLAGS+=" -L/opt/local/lib"
+
+
+userInput=getUserInput
+config=generateHardConfiguration(userInput)
+config=searchPrograms(config)
+config=tryAddMissingLibs(config)
+config=addSDLConfig(config,userInput)
+config=addStandardFallbacks(config,userInput)
+config=checkFlags(config,userInput)
+config=splitLDFLAGS(config)
+config=splitCFLAGS(config)
+
+if CONFIG["host_os"]=~/darwin/
+ 
+  ["LDSHARED","LDFLAGS","CFLAGS"].each{|name|
+    config[name].value=config[name].value.gsub("-arch ppc","")
+  }
+end
+
+saveConfigurationFile(config)
+runChecks(config)
+
+
+
+#pp config

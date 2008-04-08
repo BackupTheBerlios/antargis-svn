@@ -37,6 +37,7 @@ AGStringUtf8 AGLocalizer::find(const AGString &p)
 
 void setLocalizer(AGLocalizer *p)
   {
+    cdebug("setLocal:"<<p);
     gLocalizer=p;
   }
 

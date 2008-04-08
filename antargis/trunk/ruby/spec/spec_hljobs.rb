@@ -19,11 +19,36 @@ describe "HL-MoveJob" do
 	it "should use only limited count of ll-jobs"
 end
 
+describe "Recruit job" do
+  include LevelTesting
+  before(:each) do
+    getTestApp(:tutorial0)
+  end
+  it "should let hero near the target before starting to recruit" do
+    advance
+    clickAwayStory
+    rowen=hero("Rowen")
+    rowen.newHLMoveJob(0,rowen.getPos2D+AGVector2.new(7,7),0)
+    while rowen.getJob.is_a?(AntHeroMoveJob)
+      advance
+    end
+    keep=building("Keep")
+    rowen.newHLRecruitJob(keep)
+    (rowen.getPos2D-keep.getPos2D).length.should >12
+    
+    while rowen.getJob.stateName==:moveComplete
+      advance
+    end
+    (rowen.getPos2D-keep.getPos2D).length.should <6
+    
+  end
+end  
+
 describe "Recruit job - run through" do
   include LevelTesting
   before(:all) do
     getTestApp(:tutorial0)
-	@store=Store.new
+	  @store=Store.new
   end
   it "should start off with hero with no men" do
   	advance
@@ -32,8 +57,8 @@ describe "Recruit job - run through" do
   end
   it "starting recruit-job should work" do
   	rowen=hero("Rowen")
-	rowen.newHLRecruitJob(building("Keep"))
-	rowen.getJob.should be_a_kind_of(AntHeroRecruitJob)
+		rowen.newHLRecruitJob(building("Keep"))
+		rowen.getJob.should be_a_kind_of(AntHeroRecruitJob)
   end
 
   it "should then send hero to tower (at most 10 low-level move-jobs for format and move)" do
@@ -42,7 +67,7 @@ describe "Recruit job - run through" do
 
   	# format
     while rowen.getJob.stateName==:moveComplete
-	  advance
+		  advance
     end
 	
 		rowen.getJobName.should =="moveJob"
@@ -56,26 +81,27 @@ describe "Recruit job - run through" do
 		rowen.getJobName.should == "moveJob"
 		rowen.getTarget.should be_nil
 		trials=0
-	while rowen.getJobName=="moveJob"
-        runUntilLowLevelJobToFinish(rowen)
-		trials+=1
-		raise "too many trials" if trials>10
-	end
-	(rowen.getPos2D-@store[:oldPos]).length.should < 0.1
+		while rowen.getJobName=="moveJob"
+      runUntilLowLevelJobToFinish(rowen)
+			trials+=1
+			raise "too many trials" if trials>10
+		end
+		(rowen.getPos2D-@store[:oldPos]).length.should < 0.1
   end
   it "all men should stand at the sitting-position when job is finished" do
   	while rowen.getJob.stateName == :recruit
   		advance
-	end
+	 end
  
 	
-	clickAwayStory
-	rowen.getJob.should_not be_a_kind_of(AntHeroRecruitJob)
-	rowen.formation.should be_a_kind_of(AntFormationRest)
-	rowen.getMen.each{|man|
-		(man.getPos2D-rowen.getFormation(man,rowen.getPos2D)).length.should < 0.1
-	}
+		clickAwayStory
+		rowen.getJob.should_not be_a_kind_of(AntHeroRecruitJob)
+		rowen.formation.should be_a_kind_of(AntFormationRest)
+		rowen.getMen.each{|man|
+			(man.getPos2D-rowen.getFormation(man,rowen.getPos2D)).length.should < 0.1
+		}
   end
+  
   
   def rowen
   	hero("Rowen")
