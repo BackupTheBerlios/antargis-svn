@@ -214,6 +214,8 @@ public:
   std::list<AGRect2> aquireChanges();
   void pushChangeRect(const AGRect2 &pRect);
   void clearChangeRects();
+  
+  std::list<AGWidget*> getChildren();
 
 private:
 

@@ -1,8 +1,18 @@
 require File.join(File.split(__FILE__)[0],"..",'rookey','tasks.rb')
 
-Rookey::getConfig.add("INCLUDEDIRS","3dengine_v2")
+paths=["3dengine_v2","../ext/basic","../ext/video","../ext/external"]
 
-objs=Rookey::compile(Dir["**/*.cc"])
+srcs=[]
+paths.each{|path|
+  Rookey::getConfig.add("INCLUDEDIRS",File.expand_path(path))
+  srcs+=Dir[File.expand_path(path)+"/*.cc"]+Dir[File.expand_path(path)+"/*.c"]
+}
+srcs+=Dir["*.cc"]
+objs=Rookey::compile(srcs)
+#Rookey::getConfig.add("INCLUDEDIRS","3dengine_v2")
+#Rookey::getConfig.add("INCLUDEDIRS",File.expand_path("../ext/basic"))
+
+#objs=Rookey::compile(Dir["**/*.cc"]+Dir[File.expand_path("../ext/basic")+"/*.cc"])
 exe=Rookey::link_exe("test3d",objs)
 
 task :test=>[exe] do

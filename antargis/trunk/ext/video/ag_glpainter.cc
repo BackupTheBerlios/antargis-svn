@@ -25,6 +25,7 @@
 #include "ag_texture.h"
 #include "ag_rendercontext.h"
 #include "ag_debug.h"
+#include "ag_vdebug.h"
 
 namespace AGGLPainter
 {
@@ -281,6 +282,7 @@ namespace AGGLPainter
   void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c,float pWidth)
     {
       STACKTRACE;
+      assertGL;
       AGRenderContext context;
       context.setColor(c);
       context.setDepthTest(false);
@@ -293,6 +295,8 @@ namespace AGGLPainter
       glVertex2fv(p1);
 
       glEnd();
+      assertGL;
+
     }
 
   void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest)

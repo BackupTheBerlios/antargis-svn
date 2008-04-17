@@ -18,7 +18,7 @@ void AntRenderPipeline::render()
     buildPipeletOrder();
     
     for(std::list<AntRenderPipelet*>::iterator i=mPipeletOrder.begin();i!=mPipeletOrder.end();i++)
-      (*i)->render();
+      (*i)->doRender();
   }
 
 void AntRenderPipeline::buildPipeletOrder()

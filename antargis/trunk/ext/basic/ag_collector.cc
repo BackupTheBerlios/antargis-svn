@@ -1,4 +1,3 @@
-
 #include <ag_collector.h>
 #include <ag_debug.h>
 #include <ag_main.h>

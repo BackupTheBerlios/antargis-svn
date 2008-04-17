@@ -14,7 +14,7 @@ void AntSceneGraph::erase(AntSceneNode *pNode)
     mAllNodes.erase(pNode); 
   }
 
-const std::set<AntSceneNode*> AntSceneGraph::getAllNodes() const
+const std::set<AntSceneNode*> &AntSceneGraph::getAllNodes() const
 {
   return mAllNodes;
 }

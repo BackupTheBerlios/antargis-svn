@@ -122,6 +122,8 @@ module Rookey
 
   def Rookey.link_exe(name,files,config=nil)
     files.flatten!
+    files << compile(File.join(File.split(__FILE__)[0],"cpp","ag_rubyobj.cc"),config)
+    files << compile(File.join(File.split(__FILE__)[0],"cpp","swig_dummy.cc"),config) if files.select{|f|f=~/swig/}.length==0
     files.uniq!
     config||=Rookey::getConfig
     

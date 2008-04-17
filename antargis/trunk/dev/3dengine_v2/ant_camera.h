@@ -4,6 +4,7 @@
 class AntCamera
   {
 public:
+  virtual ~AntCamera();
   virtual void setupView();
   };
 

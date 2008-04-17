@@ -27,7 +27,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "ag_gl.h"
+//#include "ag_gl.h"
 
 #include "ag_exception.h"
 #include "ag_tools.h"

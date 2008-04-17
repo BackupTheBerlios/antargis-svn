@@ -1236,6 +1236,11 @@ AGRect2 AGRect2::alignGrid() const
       (int)h());
 }
 
+AGVector2 AGRect2::getMiddle() const
+{
+  return (v0+v1)/2;
+}
+
 
 void AGRect2::check() const
 {

@@ -22,7 +22,6 @@
 #include "ag_debug.h"
 #include "ag_main.h"
 #include "ag_stringstream.h"
-#include "ag_video.h"
 
 SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout name="CampaignEditorLayout">
+  <table cols="2" rows="1" name="SideBar">
+    <colsize col="0" fixed="128"/>
+    <cell col="0" row="0">
+      <dragSources name="dragSources"/>
+    </cell>
+    <cell col="1" row="0">
+      <dragGrid name="dragGrid"/>
+    </cell>
+  </table>
+</layout>

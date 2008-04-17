@@ -1,6 +1,6 @@
 require 'rake/rdoctask.rb'
 require 'spec/rake/spectask'
-
+require 'rake/cleantask.rb'
 
 Rake::RDocTask.new do |rd|
 	 rd.main = "README"
@@ -20,5 +20,8 @@ Spec::Rake::SpecTask.new(:spec) do |t|
 	#t.rcov = true
 	t.spec_opts=["--format html:"+File.expand_path("spec_output.html")]
 end
+
+CLEAN << "spec_output.html"
+CLEAN << Dir["docs/ruby"]
 
 task :default=>:spec

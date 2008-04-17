@@ -110,6 +110,8 @@ class AGEXPORT AGPainter
   void drawPoint(const AGVector2 &p,const AGColor &c,float size);
 
   void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
+  
+  void setLineWidth(float w);
 
   void pushMatrix();
   void popMatrix();

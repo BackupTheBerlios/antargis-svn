@@ -1,0 +1,8413 @@
+Init_antargis out of starter...
+Init_antargis out of starter-ready
+Init_antargis out of starter-ready
+AAA
+BBB
+Antargis-module not found - trying to load .so
+AG_Init_libantargisexternal()
+start of:ext/basic/init.cc 19 void AG_Init_libantargisbasic()(1)
+(ext/basic/init.cc:20:void AG_Init_libantargisbasic()):SDL_Init...
+(ext/basic/init.cc:22:void AG_Init_libantargisbasic()):hasMain?
+(ext/basic/init.cc:25:void AG_Init_libantargisbasic()):new AGMain..
+NEW:0xc567d50
+(ext/basic/init.cc:28:void AG_Init_libantargisbasic()):new AGMAin!
+end   of:ext/basic/init.cc 19 void AG_Init_libantargisbasic()
+start of:ext/math/init.cc 8 void AG_Init_libantargismath()(2)
+NEW:0x84a400
+  start of:ext/math/ag_rand.cc 33 AGRandomizer::AGRandomizer(const std::string&) 0x84a400 12AGRandomizer(3)
+(ext/math/ag_rand.cc:51:AGRandomizer::AGRandomizer(const std::string&)):state0
+(ext/math/ag_rand.cc:52:AGRandomizer::AGRandomizer(const std::string&)):seed:
+  end   of:ext/math/ag_rand.cc 33 AGRandomizer::AGRandomizer(const std::string&) 0x84a400 12AGRandomizer
+(ext/math/init.cc:10:void AG_Init_libantargismath()):r:0x84a400
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/math/init.cc:12:void AG_Init_libantargismath()):main:0xc567d50
+end   of:ext/math/init.cc 8 void AG_Init_libantargismath()
+start of:ext/video/init.cc 7 void AG_Init_libantargisvideo()(4)
+NEW:0xc568080
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc568420
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+end   of:ext/video/init.cc 7 void AG_Init_libantargisvideo()
+start of:ext/sound/init.cc 9 void AG_Init_libantargissound()(5)
+  start of:ext/sound/ag_mixer.cc 90 void initSoundEngine()(6)
+(ext/sound/ag_mixer.cc:101:void initSoundEngine()):CHUNKSIZE:1024
+  end   of:ext/sound/ag_mixer.cc 90 void initSoundEngine()
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+end   of:ext/sound/init.cc 9 void AG_Init_libantargissound()
+start of:ext/gui/ag_layoutcreators.cc 495 static void AGLayout::registerLayouts()(7)
+NEW:0xc577940
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc577db0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc5780d0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc5783f0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc578710
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc578a30
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc578d50
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc579070
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc579390
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc5796b0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc5799d0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc579cf0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc57a010
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc57a330
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc57a650
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+NEW:0xc57a970
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+end   of:ext/gui/ag_layoutcreators.cc 495 static void AGLayout::registerLayouts()
+start of:ext/3dengine/init.cc 5 void AG_Init_libantargis3dengine()(8)
+end   of:ext/3dengine/init.cc 5 void AG_Init_libantargis3dengine()
+start of:ext/game/init.cc 7 void AG_Init_libantargisgame()(9)
+NEW:0xc577bb0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:0
+end   of:ext/game/init.cc 7 void AG_Init_libantargisgame()
+extension loaded
+#<Antargis::AGMain:0xc3fee5c>
+(ext/basic/ag_main.cc:147:AGMain* getMain()):registered:1
+initVideo...
+(ext/video/ag_video.cc:47:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):mScreen:0
+(ext/video/ag_video.cc:65:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):videoInfo:0
+(ext/video/ag_video.cc:80:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):initing opengl
+(ext/video/ag_video.cc:89:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):SDL_Init...
+(ext/video/ag_video.cc:92:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):SDL_SetVideoMode...
+(ext/video/ag_video.cc:94:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):ms:(2,(32;4;0;0;0;8;16;8;0;0;16711680;65280;255;0;0;255)
+,1024,768,0;0;(0,0):(0,0);0;2;1)
+
+(ext/video/ag_video.cc:121:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):gl:1
+NEW:0xef23d60
+(ext/video/ag_glscreen.cc:129:AGGLScreen::AGGLScreen(int, int, int, int)):w:1024 h:768
+(ext/video/ag_sdlscreen.cc:153:void setScreen(AGScreen*)):s:0xef23d60
+(ext/video/ag_video.cc:133:void AGVideoManager::initVideo(int, int, int, bool, bool, int, int)):mscreen:0xef23d60
+initVideo ok
+Antargis-module included
+extension loaded
+NEW:0xef6fb90
+(ext/gui/ag_local.cc:40:void setLocalizer(AGLocalizer*)):setLocal:0xef859e0
+not marked0xc568420
+marked:0xc568080:205516000
+not marked0xc577940
+not marked0xc577bb0
+not marked0xc577db0
+not marked0xc5780d0
+not marked0xc5783f0
+not marked0xc578710
+not marked0xc578a30
+not marked0xc578d50
+not marked0xc579070
+not marked0xc579390
+not marked0xc5796b0
+not marked0xc5799d0
+not marked0xc579cf0
+not marked0xc57a010
+not marked0xc57a330
+not marked0xc57a650
+not marked0xc57a970
+marked:0xef6fb90:205336520
+not marked0x84a400
+not marked0xc568420
+marked:0xc568080:205516000
+not marked0xc577940
+not marked0xc577bb0
+not marked0xc577db0
+not marked0xc5780d0
+not marked0xc5783f0
+not marked0xc578710
+not marked0xc578a30
+not marked0xc578d50
+not marked0xc579070
+not marked0xc579390
+not marked0xc5796b0
+not marked0xc5799d0
+not marked0xc579cf0
+not marked0xc57a010
+not marked0xc57a330
+not marked0xc57a650
+not marked0xc57a970
+marked:0xef6fb90:205336520
+not marked0x84a400
+NEW:0xc21f850
+NEW:0xc22aee0
+NEW:0xc235e60
+NEW:0xc240cb0
+NEW:0x83e400
+NEW:0xbfff58d0
+NEW:0xc50b020
+DEL:0xbfff58d0
+NEW:0xc50afd0
+DEL:0xc50afd0
+NEW:0x83e6d4
+(ext/3dengine/scene.cc:36:Scene::Scene(int, int)):SHADOW:1
+(ext/3dengine/scene.cc:37:Scene::Scene(int, int)):SHADOW_AMB:0
+NEW:0x83ea00
+NEW:0xc50c4d0
+NEW:0xbfff4dbc
+(ext/video/ag_texturecache.cc:127:const AGTexture& AGTextureCache::get3D(const AGString&, int, int)):3d texture size old0:128,4096
+(ext/video/ag_texturecache.cc:135:const AGTexture& AGTextureCache::get3D(const AGString&, int, int)):3d texture size old1:128,4096
+(ext/video/ag_texturecache.cc:144:const AGTexture& AGTextureCache::get3D(const AGString&, int, int)):3d texture size:128,4096
+NEW:0xc50d0e0
+DEL:0xbfff4dbc
+NEW:0xc50c514
+NEW:0xbfff4de0
+NEW:0xc50d450
+DEL:0xbfff4de0
+NEW:0xc50c550
+NEW:0xc50d200
+NEW:0xc50d5f0
+NEW:0xc50d644
+NEW:0xbfff4c50
+NEW:0xc50da80
+DEL:0xbfff4c50
+NEW:0xc50d750
+NEW:0xc50e750
+NEW:0xc50e7a4
+NEW:0xc50e610
+NEW:0xc50e890
+NEW:0xc50e8e4
+NEW:0xc50e9d0
+NEW:0xc50eca0
+NEW:0xc50ecf4
+NEW:0x903800
+(ext/gui/ag_layout.cc:73:virtual void AGLayout::loadXML(const std::string&)):GEOMETRY:(0,0):(1024,768)
+NEW:0x923c00
+NEW:0x921000
+NEW:0x929e00
+NEW:0x92a200
+NEW:0x930e00
+NEW:0x92a600
+NEW:0x931400
+NEW:0x9317cc
+NEW:0x9317f0
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5aab74
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5ab034
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5ab464
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5ab2c4
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5ab364
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5aaeb4
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff455c
+NEW:0xbfff43ec
+NEW:0xbfff43c8
+NEW:0xc5ab914
+DEL:0xbfff43c8
+DEL:0xbfff43ec
+DEL:0xbfff455c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5ad864
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5addd4
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5ade94
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5ad904
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5ae494
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xc5b0ed4
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xc5b14d4
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xc5b1ab4
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xc5b1c44
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xc5b1d34
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b2de4
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b2ad4
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b3284
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b3574
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b3694
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b39f4
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xc5b57f4
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b5e64
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b61f4
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b6054
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xc5b6394
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xef27e04
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff441c
+NEW:0xbfff42ac
+NEW:0xbfff4288
+NEW:0xef2c604
+DEL:0xbfff4288
+DEL:0xbfff42ac
+DEL:0xbfff441c
+NEW:0xbfff47dc
+NEW:0xbfff466c
+NEW:0xbfff4648
+NEW:0xef2c854
+DEL:0xbfff4648
+DEL:0xbfff466c
+DEL:0xbfff47dc
+NEW:0xbfff469c
+NEW:0xbfff452c
+NEW:0xbfff4508
+NEW:0xef2ca94
+DEL:0xbfff4508
+DEL:0xbfff452c
+DEL:0xbfff469c
+NEW:0xef2e424
+NEW:0xef2e4a4
+NEW:0xef2e524
+NEW:0xef2e5a4
+NEW:0xef2e624
+NEW:0xef2e6a4
+NEW:0xef2e724
+NEW:0xef2e7a4
+NEW:0xef2e824
+NEW:0xef2e8a4
+NEW:0xef2e924
+NEW:0xef2e9a4
+NEW:0xef2ea24
+NEW:0xef2f954
+NEW:0xef2f9d4
+NEW:0xef2fa54
+NEW:0xef2fad4
+NEW:0xef2fb54
+NEW:0xef2fbd4
+NEW:0xef2fc54
+NEW:0xef2fcd4
+NEW:0xef2fd54
+NEW:0xef2fdd4
+NEW:0xef2fe54
+NEW:0xef2fed4
+NEW:0xef2ff54
+NEW:0xef2ffd4
+NEW:0xef30054
+NEW:0xef300d4
+NEW:0xef30154
+NEW:0xef301d4
+NEW:0xef30254
+DEL:0xef2ca94
+DEL:0xc5b1c44
+DEL:0xc5b1ab4
+DEL:0xc5b1d34
+DEL:0xef2c604
+DEL:0xc5b6054
+DEL:0xc5b5e64
+DEL:0xc5b61f4
+DEL:0xef27e04
+DEL:0xc5b6394
+DEL:0xc5b14d4
+DEL:0xc5b0ed4
+DEL:0xc5b57f4
+DEL:0xc5ade94
+DEL:0xc5ad864
+DEL:0xc5addd4
+DEL:0xc5ae494
+DEL:0xc5ad904
+DEL:0xc5ab2c4
+DEL:0xc5aab74
+DEL:0xc5ab464
+DEL:0xc5ab034
+DEL:0xc5ab914
+DEL:0xc5aaeb4
+DEL:0xc5ab364
+DEL:0xef2c854
+DEL:0xc5b3284
+DEL:0xc5b2de4
+DEL:0xc5b2ad4
+DEL:0xc5b39f4
+DEL:0xc5b3694
+DEL:0xc5b3574
+NEW:0xbfff4a58
+NEW:0xbfff49b0
+NEW:0xc5b5b40
+DEL:0xbfff49b0
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5b5400
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5b3f30
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5b1050
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5af4d0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5b2dd0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc52fb40
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5ac750
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xef2b9c0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a9520
+DEL:0xbfff4994
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+NEW:0xbfff49b0
+NEW:0xc5adca0
+DEL:0xbfff49b0
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5ade00
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5b0ec0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5346e0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc537ce0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5aa2c0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5ab900
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5b1a60
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a8fb0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc525a50
+DEL:0xbfff4994
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+NEW:0xbfff49b0
+NEW:0xc5a7480
+DEL:0xbfff49b0
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5320e0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc536f60
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5370e0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc525c10
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a9c90
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc537c70
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc537b30
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc53dc90
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a8360
+DEL:0xbfff4994
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+NEW:0xbfff49b0
+NEW:0xc5a9e80
+DEL:0xbfff49b0
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5aa030
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a93b0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a9410
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a8790
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a87f0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a8100
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a8010
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a79c0
+DEL:0xbfff4994
+NEW:0xbfff49d4
+NEW:0xbfff4994
+DEL:0xbfff49d4
+NEW:0xc5a7c00
+DEL:0xbfff4994
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0x93a200
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xc5404c0
+NEW:0x92aa00
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x935c00
+NEW:0x935fb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x936000
+NEW:0x93ac00
+NEW:0x93b200
+NEW:0x93b5cc
+NEW:0x93b5f0
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0x93b800
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xc5a50c0
+NEW:0x93a800
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x93be00
+NEW:0x93c1b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x936400
+NEW:0x936c00
+NEW:0x937200
+NEW:0x9375cc
+NEW:0x9375f0
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0x937800
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xc53b4c0
+NEW:0x936800
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x937e00
+NEW:0x9381b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x94ea00
+NEW:0x94f200
+NEW:0x94f800
+NEW:0x94fbcc
+NEW:0x94fbf0
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0x94fe00
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xc53d830
+NEW:0x94ee00
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x955800
+NEW:0x955bb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x955c00
+NEW:0x950800
+NEW:0x956000
+NEW:0x9563cc
+NEW:0x9563f0
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0x956600
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xc536e80
+NEW:0x950400
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x948000
+NEW:0x9483b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x948400
+NEW:0x957000
+NEW:0x957600
+NEW:0x9579cc
+NEW:0x9579f0
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0x95a200
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xbfff4a58
+DEL:0xbfff4a58
+NEW:0xc539e60
+NEW:0x956c00
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x95a800
+NEW:0x95abb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x95ac00
+NEW:0x95b400
+NEW:0x95b000
+NEW:0x95ba00
+NEW:0x95be00
+NEW:0x95c200
+(ext/gui/ag_layout.cc:73:virtual void AGLayout::loadXML(const std::string&)):GEOMETRY:(0,0):(216,160)
+NEW:0xbfff5038
+DEL:0xbfff5038
+NEW:0x95ec00
+NEW:0x95efc0
+NEW:0x95f000
+NEW:0x95f3c0
+NEW:0x95f400
+NEW:0x95f800
+NEW:0x95fc00
+NEW:0x948800
+NEW:0x960000
+NEW:0x960400
+NEW:0x948e00
+NEW:0x949200
+NEW:0xbfff414c
+NEW:0xbfff4188
+DEL:0xbfff4188
+NEW:0xbfff41f8
+NEW:0x94a400
+NEW:0x94a7b4
+DEL:0xbfff41f8
+DEL:0xbfff414c
+NEW:0x94a800
+NEW:0x94b000
+NEW:0x94ac00
+NEW:0x94ba00
+NEW:0x94bdcc
+NEW:0x94bdf0
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0x94c000
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xc52a920
+NEW:0xbfff4098
+NEW:0xbfff3fc8
+DEL:0xbfff3fc8
+NEW:0xbfff400c
+NEW:0x94b600
+NEW:0x94b9b4
+DEL:0xbfff400c
+DEL:0xbfff4098
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0x964800
+NEW:0x964bcc
+NEW:0x964bf0
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0x966000
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xc528d40
+NEW:0xbfff4098
+NEW:0xbfff3fc8
+DEL:0xbfff3fc8
+NEW:0xbfff400c
+NEW:0x964400
+NEW:0x9647b4
+DEL:0xbfff400c
+DEL:0xbfff4098
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0x967600
+NEW:0x9679cc
+NEW:0x9679f0
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0x967c00
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xc526e60
+NEW:0xbfff4098
+NEW:0xbfff3fc8
+DEL:0xbfff3fc8
+NEW:0xbfff400c
+NEW:0x964e00
+NEW:0x9651b4
+DEL:0xbfff400c
+DEL:0xbfff4098
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0x96aa00
+NEW:0x96adcc
+NEW:0x96adf0
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0x96c200
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xbfff3c78
+DEL:0xbfff3c78
+NEW:0xc527f40
+NEW:0xbfff4098
+NEW:0xbfff3fc8
+DEL:0xbfff3fc8
+NEW:0xbfff400c
+NEW:0x96d800
+NEW:0x96dbb4
+DEL:0xbfff400c
+DEL:0xbfff4098
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0xbfff3d48
+DEL:0xbfff3d48
+NEW:0x968200
+NEW:0x9685cc
+NEW:0x9685f0
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0x96e000
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xef31a40
+NEW:0xbfff4088
+NEW:0xbfff3fb8
+DEL:0xbfff3fb8
+NEW:0xbfff3ffc
+NEW:0x96dc00
+NEW:0x96dfb4
+DEL:0xbfff3ffc
+DEL:0xbfff4088
+NEW:0x96e600
+NEW:0x971000
+NEW:0x970c00
+NEW:0x972c00
+NEW:0x972fcc
+NEW:0x972ff0
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0x973200
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xef33a40
+NEW:0xbfff4088
+NEW:0xbfff3fb8
+DEL:0xbfff3fb8
+NEW:0xbfff3ffc
+NEW:0x974800
+NEW:0x974bb4
+DEL:0xbfff3ffc
+DEL:0xbfff4088
+NEW:0x971600
+NEW:0x9719cc
+NEW:0x9719f0
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0x975000
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xef35270
+NEW:0xbfff4088
+NEW:0xbfff3fb8
+DEL:0xbfff3fb8
+NEW:0xbfff3ffc
+NEW:0x974c00
+NEW:0x974fb4
+DEL:0xbfff3ffc
+DEL:0xbfff4088
+NEW:0x977c00
+NEW:0x977fcc
+NEW:0x977ff0
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0x979200
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xbfff3bd8
+DEL:0xbfff3bd8
+NEW:0xef37140
+NEW:0xbfff4088
+NEW:0xbfff3fb8
+DEL:0xbfff3fb8
+NEW:0xbfff3ffc
+NEW:0x97a800
+NEW:0x97abb4
+DEL:0xbfff3ffc
+DEL:0xbfff4088
+NEW:0x975600
+NEW:0xbfff5378
+DEL:0xbfff5378
+NEW:0x960800
+NEW:0x960bc0
+NEW:0x960c00
+NEW:0xc531650
+NEW:0x97ac00
+NEW:0x97b000
+NEW:0x97b400
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x97b800
+NEW:0x97bbb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x97cc00
+NEW:0x97cfb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x97e000
+NEW:0x97e3b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+(ext/gui/ag_table.cc:96:void AGTable::addChild(int, int, AGWidget*)):Children 0,0 already set!
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x97d800
+NEW:0x97dbb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+(ext/gui/ag_table.cc:96:void AGTable::addChild(int, int, AGWidget*)):Children 1,0 already set!
+NEW:0x97d400
+NEW:0x97c400
+NEW:0x97c000
+NEW:0x97f600
+NEW:0x97fa00
+NEW:0x97fdc0
+NEW:0x97fe00
+NEW:0x980600
+NEW:0x9809cc
+NEW:0x9809f0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x980c00
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef3b830
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x980200
+NEW:0x9805b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0x982a00
+NEW:0x982dcc
+NEW:0x982df0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x983000
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef3d7d0
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x981200
+NEW:0x9815b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+(ext/gui/ag_table.cc:96:void AGTable::addChild(int, int, AGWidget*)):Children 0,0 already set!
+NEW:0x985e00
+NEW:0x9861cc
+NEW:0x9861f0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x987600
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef3eb60
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x988c00
+NEW:0x988fb4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0x983600
+NEW:0x9839cc
+NEW:0x9839f0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x989400
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef3fe00
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x989000
+NEW:0x9893b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0x98ca00
+NEW:0x98cdcc
+NEW:0x98cdf0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x98ae00
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef41330
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x98b400
+NEW:0x98b7b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff48a4
+DEL:0xbfff48a4
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0x98e800
+NEW:0x98ebcc
+NEW:0x98ebf0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x98ee00
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef43930
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x990400
+NEW:0x9907b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+(ext/gui/ag_table.cc:96:void AGTable::addChild(int, int, AGWidget*)):Children 3,0 already set!
+NEW:0x991800
+NEW:0x991bcc
+NEW:0x991bf0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x991e00
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef44c30
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x98e400
+NEW:0x98e7b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+(ext/gui/ag_table.cc:96:void AGTable::addChild(int, int, AGWidget*)):Children 3,0 already set!
+NEW:0x993800
+NEW:0x993bcc
+NEW:0x993bf0
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0x993e00
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xbfff4558
+DEL:0xbfff4558
+NEW:0xef46780
+NEW:0xbfff4978
+NEW:0xbfff48a8
+DEL:0xbfff48a8
+NEW:0xbfff48ec
+NEW:0x993400
+NEW:0x9937b4
+DEL:0xbfff48ec
+DEL:0xbfff4978
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0xbfff4628
+DEL:0xbfff4628
+NEW:0x996400
+NEW:0x996c00
+NEW:0xef47030
+NEW:0x99b800
+NEW:0x9a0800
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a0c00
+NEW:0x9a0fb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a1e00
+NEW:0x9a21b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a7000
+NEW:0x9a73b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a7400
+NEW:0x9a77b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a8800
+NEW:0x9a8bb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x9aae00
+NEW:0x9ab400
+NEW:0x9aba00
+NEW:0x9ac000
+NEW:0x9ac600
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9aaa00
+NEW:0x9aadb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b0000
+NEW:0x9b03b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a5800
+NEW:0x9a5bb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9a5c00
+NEW:0x9a5fb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b0400
+NEW:0x9b07b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b0800
+NEW:0x9b0bb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x9ade00
+NEW:0x9a2200
+NEW:0x9a2800
+NEW:0x9a3e00
+NEW:0x9a4400
+NEW:0x9b1c00
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9ada00
+NEW:0x9addb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b3200
+NEW:0x9b35b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b8600
+NEW:0x9b89b4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b9a00
+NEW:0x9b9db4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9baa00
+NEW:0x9badb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0xbfff4a2c
+NEW:0xbfff4a68
+DEL:0xbfff4a68
+NEW:0xbfff4ad8
+NEW:0x9b6c00
+NEW:0x9b6fb4
+DEL:0xbfff4ad8
+DEL:0xbfff4a2c
+NEW:0x9b9e00
+NEW:0x9ba400
+NEW:0x9bbe00
+NEW:0x9bc400
+NEW:0x9b3600
+NEW:0x9b3c00
+NEW:0x9b7000
+NEW:0x9b73c0
+(ext/gui/ag_background.cc:69:AGBackground::AGBackground(const AGString&)):wood.background.image
+NEW:0xbfff5050
+NEW:0xef517d0
+DEL:0xbfff5050
+NEW:0x9b4200
+NEW:0xbfff5378
+DEL:0xbfff5378
+NEW:0x9b4600
+NEW:0x9b49c0
+NEW:0xbfff52cc
+NEW:0xbfff5308
+DEL:0xbfff5308
+NEW:0xbfff5354
+NEW:0x9b4a00
+NEW:0x9b4db4
+DEL:0xbfff5354
+DEL:0xbfff52cc
+NEW:0x9b4e00
+NEW:0xbfff5378
+DEL:0xbfff5378
+NEW:0x9b5200
+NEW:0x9b55c0
+NEW:0x9b5600
+NEW:0x9b59c4
+NEW:0xef53a60
+NEW:0x9bd800
+NEW:0x9bdc00
+NEW:0x9be400
+NEW:0x9be7cc
+NEW:0x9be7f0
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0x9bea00
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xef54c20
+NEW:0xbfff51b8
+NEW:0xbfff50e8
+DEL:0xbfff50e8
+NEW:0xbfff512c
+NEW:0x9c0000
+NEW:0x9c03b4
+DEL:0xbfff512c
+DEL:0xbfff51b8
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0x9c1400
+NEW:0x9c17cc
+NEW:0x9c17f0
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0x9c1a00
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xef55b90
+NEW:0xbfff51b8
+NEW:0xbfff50e8
+DEL:0xbfff50e8
+NEW:0xbfff512c
+NEW:0x9be000
+NEW:0x9be3b4
+DEL:0xbfff512c
+DEL:0xbfff51b8
+NEW:0xbfff50e4
+DEL:0xbfff50e4
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0x9c3400
+NEW:0x9c37cc
+NEW:0x9c37f0
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0x9c4c00
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xef56cd0
+NEW:0xbfff51b8
+NEW:0xbfff50e8
+DEL:0xbfff50e8
+NEW:0xbfff512c
+NEW:0x9c6200
+NEW:0x9c65b4
+DEL:0xbfff512c
+DEL:0xbfff51b8
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0x9c7600
+NEW:0x9c79cc
+NEW:0x9c79f0
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0x9c7c00
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xbfff4d98
+DEL:0xbfff4d98
+NEW:0xef581f0
+NEW:0xbfff51b8
+NEW:0xbfff50e8
+DEL:0xbfff50e8
+NEW:0xbfff512c
+NEW:0x9c9200
+NEW:0x9c95b4
+DEL:0xbfff512c
+DEL:0xbfff51b8
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0xbfff4e68
+DEL:0xbfff4e68
+NEW:0x9c3000
+NEW:0x9caa00
+NEW:0xef48560
+(ext/game/minimap.cc:160:void MiniMap::mapChangedP(bool)):0xef53a60
+DEL:0xef53a60
+NEW:0xef53a60
+(ext/game/minimap.cc:163:void MiniMap::mapChangedP(bool)):0xef53a60
+loadXML(n)
+(ext/game/height_map.cc:153:void HeightMap::loadBinary(BinaryIn&)):mw:128  128
+DEL:0xc50e9d0
+DEL:0xc50e610
+DEL:0xc50d750
+DEL:0xc50d200
+DEL:0xc50ecf4
+DEL:0xc50eca0
+DEL:0xc50e8e4
+DEL:0xc50e890
+DEL:0xc50e7a4
+DEL:0xc50e750
+DEL:0xc50d644
+DEL:0xc50d5f0
+NEW:0xc50d750
+NEW:0xc50eca0
+NEW:0xc50ecf4
+NEW:0xc50d5f0
+NEW:0xc50e5b0
+NEW:0xc50e604
+NEW:0xc50d200
+NEW:0xc50e750
+NEW:0xc50e7a4
+NEW:0xc50e890
+NEW:0xc516ba0
+NEW:0xc516bf4
+NEW:0xc521170
+NEW:0xc520ae0
+NEW:0xc520b34
+NEW:0xc5212b0
+NEW:0xc519e10
+NEW:0xc519e64
+NEW:0xc519f50
+NEW:0xc520520
+NEW:0xc520574
+NEW:0xc520660
+NEW:0xc51ed20
+NEW:0xc51ed74
+NEW:0xc5202e0
+NEW:0xc51f100
+NEW:0xc51f154
+NEW:0xc5203f0
+NEW:0xc51fe60
+NEW:0xc51feb4
+NEW:0xc51e890
+NEW:0xc51e5c0
+NEW:0xc51e614
+NEW:0xc51ead0
+NEW:0xc51cfc0
+NEW:0xc51d014
+NEW:0xc51d100
+NEW:0xc51f330
+NEW:0xc51f384
+NEW:0xc51d540
+NEW:0xc51d2b0
+NEW:0xc51d304
+NEW:0xc51d660
+NEW:0xc51cd50
+NEW:0xc51cda4
+NEW:0xc51d850
+NEW:0xc51d9b0
+NEW:0xc51da04
+NEW:0xc51c3a0
+NEW:0xc51cb20
+NEW:0xc51cb74
+NEW:0xc518360
+NEW:0xc518660
+NEW:0xc5186b4
+NEW:0xc5197e0
+NEW:0xc519530
+NEW:0xc519584
+NEW:0xc519670
+NEW:0xc518820
+NEW:0xc518874
+NEW:0xc518960
+NEW:0xc510030
+NEW:0xc510084
+NEW:0xc510230
+NEW:0xc518a80
+NEW:0xc518ad4
+NEW:0xc518bc0
+NEW:0xc518cc0
+NEW:0xc518d14
+NEW:0xc5147b0
+NEW:0xc514ae0
+NEW:0xc514b34
+NEW:0xc5161d0
+NEW:0xc515d00
+NEW:0xc515d54
+NEW:0xc512f80
+NEW:0xc515e40
+NEW:0xc515e94
+NEW:0xc515f80
+NEW:0xc514d10
+NEW:0xc514d64
+NEW:0xc514e50
+NEW:0xc511550
+NEW:0xc5115a4
+NEW:0xc5116e0
+NEW:0xc513380
+NEW:0xc5133d4
+NEW:0xc514f90
+NEW:0xc512730
+NEW:0xc512784
+NEW:0xc511820
+NEW:0xc511920
+NEW:0xc511974
+NEW:0xc512870
+NEW:0xc510cd0
+NEW:0xc510d24
+NEW:0xc511d00
+NEW:0xef58f20
+NEW:0xef58f74
+NEW:0xef59060
+NEW:0xef59760
+NEW:0xef597b4
+NEW:0xef598a0
+NEW:0xc511030
+NEW:0xc511084
+NEW:0xef5a150
+NEW:0xef5a290
+NEW:0xef5a2e4
+NEW:0xc510e10
+NEW:0xef5a580
+NEW:0xef5a5d4
+NEW:0xef5a710
+NEW:0xef5a890
+NEW:0xef5a8e4
+NEW:0xef5aaa0
+NEW:0xef5ac50
+NEW:0xef5aca4
+NEW:0xef5aed0
+NEW:0xef5b050
+NEW:0xef5b0a4
+NEW:0xef5b260
+NEW:0xef5b3e0
+NEW:0xef5b434
+NEW:0xef5b800
+NEW:0xef5be70
+NEW:0xef5bec4
+NEW:0xef5bfb0
+NEW:0xef5c0f0
+NEW:0xef5c144
+NEW:0xef5c410
+NEW:0xef5c740
+NEW:0xef5c794
+NEW:0xef5d190
+NEW:0xef5c880
+NEW:0xef5c8d4
+NEW:0xef5c9c0
+NEW:0xef5d4f0
+NEW:0xef5d544
+NEW:0xef5d670
+NEW:0xef5d7d0
+NEW:0xef5d824
+NEW:0xef5da30
+NEW:0xef5dd60
+NEW:0xef5ddb4
+NEW:0xef5def0
+NEW:0xef5e050
+NEW:0xef5e0a4
+NEW:0xef5e260
+NEW:0xef5ebf0
+NEW:0xef5ec44
+NEW:0xef5f3f0
+NEW:0xef5f4f0
+NEW:0xef5f544
+NEW:0xef5e3e0
+NEW:0xef5f870
+NEW:0xef5f8c4
+NEW:0xef5f9c0
+NEW:0xef5fb40
+NEW:0xef5fb94
+NEW:0xef60830
+NEW:0xef61810
+NEW:0xef61864
+NEW:0xef619e0
+NEW:0xef61ae0
+NEW:0xef61b34
+NEW:0xef609c0
+NEW:0xef61c70
+NEW:0xef61cc4
+NEW:0xef61df0
+NEW:0xef61f50
+NEW:0xef61fa4
+NEW:0xef626b0
+NEW:0xef63060
+NEW:0xef630b4
+NEW:0xef621b0
+NEW:0xef63360
+NEW:0xef633b4
+NEW:0xef622b0
+NEW:0xef623b0
+NEW:0xef62404
+NEW:0xef63d80
+NEW:0xef63e80
+NEW:0xef63ed4
+NEW:0xef64090
+NEW:0xef64210
+NEW:0xef64264
+NEW:0xef644c0
+NEW:0xef64620
+NEW:0xef64674
+NEW:0xef64880
+NEW:0xef64a00
+NEW:0xef64a54
+DEL:0xef64880
+DEL:0xef644c0
+DEL:0xef64090
+DEL:0xef63d80
+DEL:0xef622b0
+DEL:0xef621b0
+DEL:0xef626b0
+DEL:0xef61df0
+DEL:0xef609c0
+DEL:0xef619e0
+DEL:0xef60830
+DEL:0xef5f9c0
+DEL:0xef5e3e0
+DEL:0xef5f3f0
+DEL:0xef5e260
+DEL:0xef5def0
+DEL:0xef5da30
+DEL:0xef5d670
+DEL:0xef5c9c0
+DEL:0xef5d190
+DEL:0xef5c410
+DEL:0xef5bfb0
+DEL:0xef5b800
+DEL:0xef5b260
+DEL:0xef5aed0
+DEL:0xef5aaa0
+DEL:0xef5a710
+DEL:0xc510e10
+DEL:0xef5a150
+DEL:0xef598a0
+DEL:0xef59060
+DEL:0xc511d00
+DEL:0xc512870
+DEL:0xc511820
+DEL:0xc514f90
+DEL:0xc5116e0
+DEL:0xc514e50
+DEL:0xc515f80
+DEL:0xc512f80
+DEL:0xc5161d0
+DEL:0xc5147b0
+DEL:0xc518bc0
+DEL:0xc510230
+DEL:0xc518960
+DEL:0xc519670
+DEL:0xc5197e0
+DEL:0xc518360
+DEL:0xc51c3a0
+DEL:0xc51d850
+DEL:0xc51d660
+DEL:0xc51d540
+DEL:0xc51d100
+DEL:0xc51ead0
+DEL:0xc51e890
+DEL:0xc5203f0
+DEL:0xc5202e0
+DEL:0xc520660
+DEL:0xc519f50
+DEL:0xc5212b0
+DEL:0xc521170
+DEL:0xc50e890
+DEL:0xc50d200
+DEL:0xc50d5f0
+DEL:0xc50d750
+DEL:0xef64a54
+DEL:0xef64a00
+DEL:0xef64674
+DEL:0xef64620
+DEL:0xef64264
+DEL:0xef64210
+DEL:0xef63ed4
+DEL:0xef63e80
+DEL:0xef62404
+DEL:0xef623b0
+DEL:0xef633b4
+DEL:0xef63360
+DEL:0xef630b4
+DEL:0xef63060
+DEL:0xef61fa4
+DEL:0xef61f50
+DEL:0xef61cc4
+DEL:0xef61c70
+DEL:0xef61b34
+DEL:0xef61ae0
+DEL:0xef61864
+DEL:0xef61810
+DEL:0xef5fb94
+DEL:0xef5fb40
+DEL:0xef5f8c4
+DEL:0xef5f870
+DEL:0xef5f544
+DEL:0xef5f4f0
+DEL:0xef5ec44
+DEL:0xef5ebf0
+DEL:0xef5e0a4
+DEL:0xef5e050
+DEL:0xef5ddb4
+DEL:0xef5dd60
+DEL:0xef5d824
+DEL:0xef5d7d0
+DEL:0xef5d544
+DEL:0xef5d4f0
+DEL:0xef5c8d4
+DEL:0xef5c880
+DEL:0xef5c794
+DEL:0xef5c740
+DEL:0xef5c144
+DEL:0xef5c0f0
+DEL:0xef5bec4
+DEL:0xef5be70
+DEL:0xef5b434
+DEL:0xef5b3e0
+DEL:0xef5b0a4
+DEL:0xef5b050
+DEL:0xef5aca4
+DEL:0xef5ac50
+DEL:0xef5a8e4
+DEL:0xef5a890
+DEL:0xef5a5d4
+DEL:0xef5a580
+DEL:0xef5a2e4
+DEL:0xef5a290
+DEL:0xc511084
+DEL:0xc511030
+DEL:0xef597b4
+DEL:0xef59760
+DEL:0xef58f74
+DEL:0xef58f20
+DEL:0xc510d24
+DEL:0xc510cd0
+DEL:0xc511974
+DEL:0xc511920
+DEL:0xc512784
+DEL:0xc512730
+DEL:0xc5133d4
+DEL:0xc513380
+DEL:0xc5115a4
+DEL:0xc511550
+DEL:0xc514d64
+DEL:0xc514d10
+DEL:0xc515e94
+DEL:0xc515e40
+DEL:0xc515d54
+DEL:0xc515d00
+DEL:0xc514b34
+DEL:0xc514ae0
+DEL:0xc518d14
+DEL:0xc518cc0
+DEL:0xc518ad4
+DEL:0xc518a80
+DEL:0xc510084
+DEL:0xc510030
+DEL:0xc518874
+DEL:0xc518820
+DEL:0xc519584
+DEL:0xc519530
+DEL:0xc5186b4
+DEL:0xc518660
+DEL:0xc51cb74
+DEL:0xc51cb20
+DEL:0xc51da04
+DEL:0xc51d9b0
+DEL:0xc51cda4
+DEL:0xc51cd50
+DEL:0xc51d304
+DEL:0xc51d2b0
+DEL:0xc51f384
+DEL:0xc51f330
+DEL:0xc51d014
+DEL:0xc51cfc0
+DEL:0xc51e614
+DEL:0xc51e5c0
+DEL:0xc51feb4
+DEL:0xc51fe60
+DEL:0xc51f154
+DEL:0xc51f100
+DEL:0xc51ed74
+DEL:0xc51ed20
+DEL:0xc520574
+DEL:0xc520520
+DEL:0xc519e64
+DEL:0xc519e10
+DEL:0xc520b34
+DEL:0xc520ae0
+DEL:0xc516bf4
+DEL:0xc516ba0
+DEL:0xc50e7a4
+DEL:0xc50e750
+DEL:0xc50e604
+DEL:0xc50e5b0
+DEL:0xc50ecf4
+DEL:0xc50eca0
+NEW:0xc5121f0
+NEW:0xc50eca0
+NEW:0xc50ecf4
+NEW:0xc50d750
+NEW:0xc50d5f0
+NEW:0xc50d644
+NEW:0xef60cb0
+NEW:0xc510770
+NEW:0xc5107c4
+NEW:0xc51ba10
+NEW:0xc50e5b0
+NEW:0xc50e604
+NEW:0xef64c80
+NEW:0xef60830
+NEW:0xef60884
+NEW:0xc514f90
+NEW:0xc50d200
+NEW:0xc50d254
+NEW:0xc518360
+NEW:0xc512f80
+NEW:0xc512fd4
+NEW:0xc516ba0
+NEW:0xc5147b0
+NEW:0xc514804
+NEW:0xef5b800
+NEW:0xef5c410
+NEW:0xef5c464
+NEW:0xef5da30
+NEW:0xef65380
+NEW:0xef653d4
+NEW:0xc518600
+NEW:0xef64880
+NEW:0xef648d4
+NEW:0xef649c0
+NEW:0xef64ac0
+NEW:0xef64b14
+NEW:0xef643e0
+NEW:0xef644e0
+NEW:0xef64534
+NEW:0xef63360
+NEW:0xef63460
+NEW:0xef634b4
+NEW:0xef64620
+NEW:0xef64720
+NEW:0xef64774
+NEW:0xef61c50
+NEW:0xef61d50
+NEW:0xef61da4
+NEW:0xef61e90
+NEW:0xef61f90
+NEW:0xef61fe4
+NEW:0xef620d0
+NEW:0xef621d0
+NEW:0xef62224
+NEW:0xef62310
+NEW:0xef62410
+NEW:0xef62464
+NEW:0xef609c0
+NEW:0xef617b0
+NEW:0xef61804
+NEW:0xef62550
+NEW:0xef62650
+NEW:0xef626a4
+NEW:0xef5eb90
+NEW:0xef5d490
+NEW:0xef5d4e4
+NEW:0xef5d600
+NEW:0xef5d760
+NEW:0xef5d7b4
+NEW:0xef5d140
+NEW:0xef5d280
+NEW:0xef5d2d4
+NEW:0xef5a640
+NEW:0xef5a7a0
+NEW:0xef5a7f4
+NEW:0xef5aa00
+NEW:0xef5ab60
+NEW:0xef5abb4
+NEW:0xc51c9e0
+NEW:0xc51cae0
+NEW:0xc51cb34
+NEW:0xef5a150
+NEW:0xc5114f0
+NEW:0xc511544
+NEW:0xc5116f0
+NEW:0xef5a2f0
+NEW:0xef5a344
+NEW:0xc514af0
+NEW:0xc514d10
+NEW:0xc514d64
+NEW:0xc518820
+NEW:0xc518920
+NEW:0xc518974
+NEW:0xc518af0
+NEW:0xc518c70
+NEW:0xc518cc4
+NEW:0xc51c2d0
+NEW:0xc51d2b0
+NEW:0xc51d304
+NEW:0xc51d410
+NEW:0xc51cd90
+NEW:0xc51cde4
+NEW:0xc519860
+NEW:0xc51f330
+NEW:0xc51f384
+NEW:0xc51e7e0
+NEW:0xc51e8e0
+NEW:0xc51e934
+NEW:0xc51f1b0
+NEW:0xc51ed30
+NEW:0xc51ed84
+NEW:0xc51ea70
+NEW:0xc51d540
+NEW:0xc51d594
+NEW:0xc51ebe0
+NEW:0xc520340
+NEW:0xc520394
+NEW:0xc5100d0
+NEW:0xc520ae0
+NEW:0xc520b34
+NEW:0xc510230
+NEW:0xef5e260
+NEW:0xef5e2b4
+NEW:0xc515d60
+NEW:0xc515e60
+NEW:0xc515eb4
+NEW:0xc515fe0
+NEW:0xc51d850
+NEW:0xc51d8a4
+NEW:0xc511d00
+NEW:0xef59760
+NEW:0xef597b4
+NEW:0xef598a0
+NEW:0xc51cfc0
+NEW:0xc51d014
+NEW:0xef5aea0
+NEW:0xef5afc0
+NEW:0xef5b014
+NEW:0xef630b0
+NEW:0xef5b1c0
+NEW:0xef5b214
+NEW:0xef5b300
+NEW:0xef63d80
+NEW:0xef63dd4
+NEW:0xef63ec0
+NEW:0xef63fe0
+NEW:0xef64034
+NEW:0xc50e750
+NEW:0xef641e0
+NEW:0xef64234
+NEW:0xc519e10
+NEW:0xc521190
+NEW:0xc5211e4
+NEW:0xc51e5c0
+NEW:0xc520520
+NEW:0xc520574
+NEW:0xc520670
+NEW:0xc51fe60
+NEW:0xc51feb4
+NEW:0xc516270
+NEW:0xc519530
+NEW:0xc519584
+NEW:0xc513340
+NEW:0xc511820
+NEW:0xc511874
+NEW:0xc511960
+NEW:0xef58f20
+NEW:0xef58f74
+NEW:0xef590c0
+NEW:0xc5126d0
+NEW:0xc512724
+NEW:0xc511030
+NEW:0xef5be70
+NEW:0xef5bec4
+NEW:0xc510cd0
+NEW:0xc510dd0
+NEW:0xc510e24
+NEW:0xef5c7c0
+NEW:0xef5c920
+NEW:0xef5c974
+NEW:0xef5bfc0
+NEW:0xef5c120
+NEW:0xef5c174
+NEW:0xef5f4a0
+NEW:0xef5ddc0
+NEW:0xef5de14
+NEW:0xef5df50
+NEW:0xef5e0d0
+NEW:0xef5e124
+NEW:0xef61aa0
+NEW:0xef5f8b0
+NEW:0xef5f904
+(ext/game/minimap.cc:160:void MiniMap::mapChangedP(bool)):0xef53a60
+DEL:0xef53a60
+NEW:0xef53a60
+(ext/game/minimap.cc:163:void MiniMap::mapChangedP(bool)):0xef53a60
+NEW:0xef80720
+"data/models/tower.ant2"
+3
+"data/textures/models/tower.png"
+true
+NEW:0xefa2810
+NEW:0xefa28b8
+NEW:0xbfff0b30
+NEW:0xefa29a0
+DEL:0xbfff0b30
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.996835
+NEW:0xefa5190
+MESH for #<AntTower:0x10d62648>:#<Antargis::Mesh:0x10d55ad8> #<Antargis::Mesh:0x10d55ad8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d55308 @__swigtype__="_p_SceneNode">]
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.666667
+NEW:0xefebc00
+NEW:0xefebca8
+NEW:0xbfff0570
+NEW:0xefec400
+DEL:0xbfff0570
+NEW:0xefec2e0
+NEW:0xefeca30
+NEW:0x10b07650
+"data/models/hero_lp.ant2"
+0.08
+"data/textures/models/hero_lp.png"
+true
+NEW:0x10b0edf0
+NEW:0x10b0ee98
+NEW:0xbfff0b40
+NEW:0x10b0f040
+DEL:0xbfff0b40
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.995449
+NEW:0x10b0f810
+MESH for #<AntHero:0x10d4a2c8>:#<Antargis::Mesh:0x10d47e4c> #<Antargis::Mesh:0x10d47e4c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d47690 @__swigtype__="_p_SceneNode">]
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.666667
+NEW:0x10b38c90
+NEW:0x10b38d38
+NEW:0xef513a0
+NEW:0x10b39650
+NEW:0x10b39c40
+NEW:0x10b3afb0
+NEW:0xc17e00
+NEW:0xc18128
+(ext/3dengine/anim_mesh_data.cc:81:AnimMeshData::AnimMeshData(const AGString&)):loading from:data/models/sheep.ant4
+NEW:0xbfff1d10
+NEW:0x10b4c8f0
+DEL:0xbfff1d10
+(ext/3dengine/anim_mesh_data.cc:87:AnimMeshData::AnimMeshData(const AGString&)):animTime:100
+NEW:0x10b4c6f0
+MESH for #<AntSheep:0x10d45cc8>:#<Antargis::AnimMesh:0x10d446e8> #<Antargis::AnimMesh:0x10d446e8 @__swigtype__="_p_AnimMesh">
+Array
+[#<Antargis::SceneNode:0x10d43e3c @__swigtype__="_p_SceneNode">]
+NEW:0x10b57ea0
+NEW:0x10b59170
+NEW:0x10b5c290
+MESH for #<AntSheep:0x10d42be0>:#<Antargis::AnimMesh:0x10d41600> #<Antargis::AnimMesh:0x10d41600 @__swigtype__="_p_AnimMesh">
+Array
+[#<Antargis::SceneNode:0x10d40e58 @__swigtype__="_p_SceneNode">]
+NEW:0x10b640d0
+NEW:0x10b652b0
+NEW:0x10b695c0
+MESH for #<AntHero:0x10d3fc74>:#<Antargis::Mesh:0x10d3e02c> #<Antargis::Mesh:0x10d3e02c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d3d884 @__swigtype__="_p_SceneNode">]
+NEW:0x10b71a20
+NEW:0x10b71fa0
+NEW:0x10b72500
+NEW:0x10b737b0
+["data/models/tree6.ant2", 0.45, "data/textures/models/tree5.png", false]
+"data/models/tree6.ant2"
+0.45
+"data/textures/models/tree5.png"
+true
+NEW:0x10b7e440
+NEW:0x10b7e4e8
+NEW:0xbfff10f0
+NEW:0x10b7e690
+DEL:0xbfff10f0
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.997807
+NEW:0x10b7e9f0
+MESH for #<AntTree:0x10d3c2a4>:#<Antargis::Mesh:0x10d383e8> #<Antargis::Mesh:0x10d383e8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d37c40 @__swigtype__="_p_SceneNode">]
+NEW:0x10b8f780
+NEW:0x10b90980
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+"data/models/fir2.ant2"
+0.45
+"data/textures/models/fir5.png"
+true
+NEW:0x10b9b610
+NEW:0x10b9b6b8
+NEW:0xbfff10f0
+NEW:0x10b9ba20
+DEL:0xbfff10f0
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.998397
+NEW:0x10b9bbc0
+MESH for #<AntTree:0x10d36a20>:#<Antargis::Mesh:0x10d32b64> #<Antargis::Mesh:0x10d32b64 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d323bc @__swigtype__="_p_SceneNode">]
+NEW:0x10bafdd0
+NEW:0x10bb0f40
+["data/models/tree5.ant2", 0.45, "data/textures/models/tree10.png", false]
+"data/models/tree5.ant2"
+0.45
+"data/textures/models/tree10.png"
+true
+NEW:0x10bbbbd0
+NEW:0x10bbbc78
+NEW:0xbfff10f0
+NEW:0x10bbbe20
+DEL:0xbfff10f0
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.997807
+NEW:0x10bbc180
+MESH for #<AntTree:0x10d311d8>:#<Antargis::Mesh:0x10d2d31c> #<Antargis::Mesh:0x10d2d31c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d2cb74 @__swigtype__="_p_SceneNode">]
+NEW:0x10bccf10
+NEW:0x10bce080
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x10bd5ae0
+MESH for #<AntTree:0x10d2b990>:#<Antargis::Mesh:0x10d2831c> #<Antargis::Mesh:0x10d2831c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d27b74 @__swigtype__="_p_SceneNode">]
+NEW:0x10bddbe0
+NEW:0x10bded50
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x10be67b0
+MESH for #<AntTree:0x10d26990>:#<Antargis::Mesh:0x10d2331c> #<Antargis::Mesh:0x10d2331c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d22b74 @__swigtype__="_p_SceneNode">]
+NEW:0x10bee8b0
+NEW:0x10befa20
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x10bf7480
+MESH for #<AntTree:0x10d21990>:#<Antargis::Mesh:0x10d1e31c> #<Antargis::Mesh:0x10d1e31c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d1db74 @__swigtype__="_p_SceneNode">]
+NEW:0x11603450
+NEW:0x116044e0
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x1160bf40
+MESH for #<AntTree:0x10d1c9b8>:#<Antargis::Mesh:0x10d19344> #<Antargis::Mesh:0x10d19344 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d18b9c @__swigtype__="_p_SceneNode">]
+NEW:0x11614040
+NEW:0x116150a0
+["data/models/tree_simple1.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+"data/models/tree_simple1.ant2"
+0.3
+"data/textures/models/tree_simple1.png"
+true
+NEW:0x1161fb30
+NEW:0x1161fbd8
+NEW:0xbfff10f0
+NEW:0x1161fd80
+DEL:0xbfff10f0
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.987654
+NEW:0x11625db0
+MESH for #<AntTree:0x10d179b8>:#<Antargis::Mesh:0x10d13c28> #<Antargis::Mesh:0x10d13c28 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d13480 @__swigtype__="_p_SceneNode">]
+NEW:0x1162e0d0
+NEW:0x1162f240
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x11636ca0
+MESH for #<AntTree:0x10d1229c>:#<Antargis::Mesh:0x10d0ec28> #<Antargis::Mesh:0x10d0ec28 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d0e480 @__swigtype__="_p_SceneNode">]
+NEW:0x1163eda0
+NEW:0x1163ff10
+["data/models/tree5.ant2", 0.45, "data/textures/models/tree10.png", false]
+NEW:0x11647970
+MESH for #<AntTree:0x10d0d29c>:#<Antargis::Mesh:0x10d09c28> #<Antargis::Mesh:0x10d09c28 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d09480 @__swigtype__="_p_SceneNode">]
+NEW:0x1164fa70
+NEW:0x11650b80
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.986111
+NEW:0x11658dc0
+NEW:0x11658e68
+NEW:0xbfff1260
+NEW:0x11659120
+DEL:0xbfff1260
+NEW:0x11659050
+MESH for #<AntGrass:0x10d082d8>:#<Antargis::Mesh:0x10d061b8> #<Antargis::Mesh:0x10d061b8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d05a38 @__swigtype__="_p_SceneNode">]
+NEW:0x11661280
+NEW:0x11662400
+NEW:0x11663060
+MESH for #<AntGrass:0x10d04854>:#<Antargis::Mesh:0x10d04534> #<Antargis::Mesh:0x10d04534 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d03db4 @__swigtype__="_p_SceneNode">]
+NEW:0x1166afb0
+NEW:0x1166c0e0
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.986111
+NEW:0x116743d0
+NEW:0x11674478
+NEW:0x11674540
+MESH for #<AntGrass:0x10d02c0c>:#<Antargis::Mesh:0x10d00b00> #<Antargis::Mesh:0x10d00b00 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10d00380 @__swigtype__="_p_SceneNode">]
+NEW:0x1167c6e0
+NEW:0x1167d7d0
+NEW:0x1167e430
+MESH for #<AntGrass:0x10cff1d8>:#<Antargis::Mesh:0x10cfeeb8> #<Antargis::Mesh:0x10cfeeb8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cfe738 @__swigtype__="_p_SceneNode">]
+NEW:0x11686380
+NEW:0x11687470
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.972222
+NEW:0x1168c010
+NEW:0x1168c0b8
+NEW:0xbfff1290
+NEW:0x1168cac0
+DEL:0xbfff1290
+NEW:0x1168c970
+MESH for #<AntBush:0x10cfd590>:#<Antargis::Mesh:0x10cfc2a8> #<Antargis::Mesh:0x10cfc2a8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cfbb00 @__swigtype__="_p_SceneNode">]
+NEW:0x11694a90
+NEW:0x11695c10
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.972222
+NEW:0x1169a7b0
+NEW:0x1169a858
+NEW:0x1169b120
+MESH for #<AntBush:0x10cfa91c>:#<Antargis::Mesh:0x10cf9634> #<Antargis::Mesh:0x10cf9634 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cf8e8c @__swigtype__="_p_SceneNode">]
+NEW:0x116a3090
+NEW:0x116a4180
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.972222
+NEW:0x116a8d20
+NEW:0x116a8dc8
+NEW:0x116a9690
+MESH for #<AntBush:0x10cf7ce4>:#<Antargis::Mesh:0x10cf69fc> #<Antargis::Mesh:0x10cf69fc @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cf6254 @__swigtype__="_p_SceneNode">]
+NEW:0x116b1600
+NEW:0x116b26f0
+NEW:0x116b40a0
+MESH for #<AntBush:0x10cf50ac>:#<Antargis::Mesh:0x10cf4cd8> #<Antargis::Mesh:0x10cf4cd8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cf4530 @__swigtype__="_p_SceneNode">]
+NEW:0x116bc010
+NEW:0x116bd100
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.972222
+NEW:0x116c1ca0
+NEW:0x116c1d48
+NEW:0x116c2610
+MESH for #<AntBush:0x10cf3388>:#<Antargis::Mesh:0x10cf20a0> #<Antargis::Mesh:0x10cf20a0 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cf18f8 @__swigtype__="_p_SceneNode">]
+NEW:0x116ca580
+NEW:0x116cb670
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.972222
+NEW:0x116d0210
+NEW:0x116d02b8
+NEW:0x116d0b80
+MESH for #<AntBush:0x10cf0750>:#<Antargis::Mesh:0x10cef468> #<Antargis::Mesh:0x10cef468 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ceecc0 @__swigtype__="_p_SceneNode">]
+NEW:0x116d8af0
+NEW:0x116d9be0
+["data/models/floor.ant2", 0.8, "data/textures/gravel4.png"]
+"data/models/floor.ant2"
+0.8
+"data/textures/gravel4.png"
+true
+NEW:0x116e2780
+NEW:0x116e2828
+NEW:0xbfff1cf0
+NEW:0x116e2b90
+DEL:0xbfff1cf0
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.833333
+NEW:0x116e2db0
+MESH for #<AntDecal:0x10cedb18>:#<Antargis::Mesh:0x10ceb4d0> #<Antargis::Mesh:0x10ceb4d0 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cead28 @__swigtype__="_p_SceneNode">]
+NEW:0x116eabe0
+NEW:0x116ebd90
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.986111
+NEW:0x116f4180
+NEW:0x116f4228
+NEW:0x116f42f0
+MESH for #<AntHighGrass:0x10ce9b44>:#<Antargis::Mesh:0x10ce7a24> #<Antargis::Mesh:0x10ce7a24 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ce72a4 @__swigtype__="_p_SceneNode">]
+NEW:0x118005d0
+loadXML(n) -1 
+["data/models/tree6.ant2", 0.45, "data/textures/models/tree5.png", false]
+NEW:0x118099c0
+MESH for #<AntTree:0x10d3c2a4>:#<Antargis::Mesh:0x10ce2d6c> #<Antargis::Mesh:0x10ce2d6c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ce25c4 @__swigtype__="_p_SceneNode">]
+NEW:0x11811c10
+["data/models/tree_simple2.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+"data/models/tree_simple2.ant2"
+0.3
+"data/textures/models/tree_simple1.png"
+true
+NEW:0x1181a9e0
+NEW:0x1181aa88
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.987654
+NEW:0x11820b20
+MESH for #<AntTree:0x10d3c2a4>:#<Antargis::Mesh:0x10cded70> #<Antargis::Mesh:0x10cded70 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cde5c8 @__swigtype__="_p_SceneNode">]
+NEW:0x11828b10
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x1182eda0
+MESH for #<AntTree:0x10d36a20>:#<Antargis::Mesh:0x10cdb3b4> #<Antargis::Mesh:0x10cdb3b4 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cdac0c @__swigtype__="_p_SceneNode">]
+NEW:0x11836ff0
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir7.png", false]
+"data/models/fir2.ant2"
+0.45
+"data/textures/models/fir7.png"
+true
+NEW:0x1183ff30
+NEW:0x1183ffd8
+NEW:0xbfff1d90
+NEW:0x11840340
+DEL:0xbfff1d90
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.998397
+NEW:0x118404e0
+MESH for #<AntTree:0x10d36a20>:#<Antargis::Mesh:0x10cd72c8> #<Antargis::Mesh:0x10cd72c8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cd6b20 @__swigtype__="_p_SceneNode">]
+NEW:0x11854430
+["data/models/tree5.ant2", 0.45, "data/textures/models/tree10.png", false]
+NEW:0x1185a630
+MESH for #<AntTree:0x10d311d8>:#<Antargis::Mesh:0x10cd3948> #<Antargis::Mesh:0x10cd3948 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cd31a0 @__swigtype__="_p_SceneNode">]
+NEW:0x11862880
+["data/models/tree_simple2.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+NEW:0x11868500
+MESH for #<AntTree:0x10d311d8>:#<Antargis::Mesh:0x10cd01d0> #<Antargis::Mesh:0x10cd01d0 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ccfa28 @__swigtype__="_p_SceneNode">]
+NEW:0x11870240
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x11876440
+MESH for #<AntTree:0x10d2b990>:#<Antargis::Mesh:0x10ccc850> #<Antargis::Mesh:0x10ccc850 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ccc0a8 @__swigtype__="_p_SceneNode">]
+NEW:0x1187e690
+["data/models/tree6.ant2", 0.45, "data/textures/models/tree5.png", false]
+NEW:0x11884520
+MESH for #<AntTree:0x10d2b990>:#<Antargis::Mesh:0x10cc8fac> #<Antargis::Mesh:0x10cc8fac @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cc8804 @__swigtype__="_p_SceneNode">]
+NEW:0x1188c260
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x11892460
+MESH for #<AntTree:0x10d26990>:#<Antargis::Mesh:0x10cc562c> #<Antargis::Mesh:0x10cc562c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cc4e84 @__swigtype__="_p_SceneNode">]
+NEW:0x1189a6b0
+["data/models/tree_simple2.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+NEW:0x118a0330
+MESH for #<AntTree:0x10d26990>:#<Antargis::Mesh:0x10cc1eb4> #<Antargis::Mesh:0x10cc1eb4 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cc170c @__swigtype__="_p_SceneNode">]
+NEW:0x118a8070
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x118ae270
+MESH for #<AntTree:0x10d21990>:#<Antargis::Mesh:0x10cbe534> #<Antargis::Mesh:0x10cbe534 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cbdd8c @__swigtype__="_p_SceneNode">]
+NEW:0x118b64c0
+["data/models/tree_simple5.ant2", 0.3, "data/textures/models/tree_simple5.png"]
+"data/models/tree_simple5.ant2"
+0.3
+"data/textures/models/tree_simple5.png"
+true
+NEW:0x118bf200
+NEW:0x118bf2a8
+NEW:0xbfff1d90
+NEW:0x118bf450
+DEL:0xbfff1d90
+(ext/3dengine/mesh_optimizer.cc:111:VertexArray MeshOptimizer::getArray()):SAVED:0.99789
+NEW:0x118c89a0
+MESH for #<AntTree:0x10d21990>:#<Antargis::Mesh:0x10cba574> #<Antargis::Mesh:0x10cba574 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cb9dcc @__swigtype__="_p_SceneNode">]
+NEW:0x118d0630
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x118d6930
+MESH for #<AntTree:0x10d1c9b8>:#<Antargis::Mesh:0x10cb6bf4> #<Antargis::Mesh:0x10cb6bf4 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cb644c @__swigtype__="_p_SceneNode">]
+NEW:0x118deb80
+["data/models/tree_simple1.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+NEW:0x118e4800
+MESH for #<AntTree:0x10d1c9b8>:#<Antargis::Mesh:0x10cb347c> #<Antargis::Mesh:0x10cb347c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cb2cd4 @__swigtype__="_p_SceneNode">]
+NEW:0x118ec540
+["data/models/tree_simple1.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+NEW:0x118f2530
+MESH for #<AntTree:0x10d179b8>:#<Antargis::Mesh:0x10cafc28> #<Antargis::Mesh:0x10cafc28 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10caf480 @__swigtype__="_p_SceneNode">]
+NEW:0x118fa780
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir7.png", false]
+NEW:0x11904590
+MESH for #<AntTree:0x10d179b8>:#<Antargis::Mesh:0x10cac384> #<Antargis::Mesh:0x10cac384 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10cabbdc @__swigtype__="_p_SceneNode">]
+NEW:0x1190c2d0
+["data/models/fir2.ant2", 0.45, "data/textures/models/fir5.png", false]
+NEW:0x119124d0
+MESH for #<AntTree:0x10d1229c>:#<Antargis::Mesh:0x10ca8a04> #<Antargis::Mesh:0x10ca8a04 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ca825c @__swigtype__="_p_SceneNode">]
+NEW:0x1191a720
+["data/models/tree_simple1.ant2", 0.3, "data/textures/models/tree_simple1.png"]
+NEW:0x119203a0
+MESH for #<AntTree:0x10d1229c>:#<Antargis::Mesh:0x10ca528c> #<Antargis::Mesh:0x10ca528c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ca4ae4 @__swigtype__="_p_SceneNode">]
+NEW:0x119281e0
+["data/models/tree5.ant2", 0.45, "data/textures/models/tree10.png", false]
+NEW:0x1192e3e0
+MESH for #<AntTree:0x10d0d29c>:#<Antargis::Mesh:0x10ca190c> #<Antargis::Mesh:0x10ca190c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10ca1164 @__swigtype__="_p_SceneNode">]
+NEW:0x11936630
+["data/models/tree5.ant2", 0.45, "data/textures/models/tree10.png", false]
+NEW:0x1193c4c0
+MESH for #<AntTree:0x10d0d29c>:#<Antargis::Mesh:0x10c9e068> #<Antargis::Mesh:0x10c9e068 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c9d8c0 @__swigtype__="_p_SceneNode">]
+NEW:0x11944200
+NEW:0x11944f60
+MESH for #<AntGrass:0x10d082d8>:#<Antargis::Mesh:0x10c9c77c> #<Antargis::Mesh:0x10c9c77c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c9bffc @__swigtype__="_p_SceneNode">]
+NEW:0x1194d000
+NEW:0x1194ddd0
+MESH for #<AntGrass:0x10d04854>:#<Antargis::Mesh:0x10c9ae7c> #<Antargis::Mesh:0x10c9ae7c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c9a6fc @__swigtype__="_p_SceneNode">]
+NEW:0x11955e70
+NEW:0x11956bb0
+MESH for #<AntGrass:0x10d02c0c>:#<Antargis::Mesh:0x10c995b8> #<Antargis::Mesh:0x10c995b8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c98e38 @__swigtype__="_p_SceneNode">]
+NEW:0x1195ec50
+NEW:0x1195f990
+MESH for #<AntGrass:0x10cff1d8>:#<Antargis::Mesh:0x10c97cf4> #<Antargis::Mesh:0x10c97cf4 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c97574 @__swigtype__="_p_SceneNode">]
+NEW:0x11967a30
+NEW:0x11969530
+MESH for #<AntBush:0x10cfd590>:#<Antargis::Mesh:0x10c9637c> #<Antargis::Mesh:0x10c9637c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c95bd4 @__swigtype__="_p_SceneNode">]
+NEW:0x119715f0
+NEW:0x119730f0
+MESH for #<AntBush:0x10cfa91c>:#<Antargis::Mesh:0x10c949dc> #<Antargis::Mesh:0x10c949dc @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c94234 @__swigtype__="_p_SceneNode">]
+NEW:0x1197b1b0
+NEW:0x1197ccb0
+MESH for #<AntBush:0x10cf7ce4>:#<Antargis::Mesh:0x10c9303c> #<Antargis::Mesh:0x10c9303c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c92894 @__swigtype__="_p_SceneNode">]
+NEW:0x11984e70
+NEW:0x11986970
+MESH for #<AntBush:0x10cf50ac>:#<Antargis::Mesh:0x10c9169c> #<Antargis::Mesh:0x10c9169c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c90ef4 @__swigtype__="_p_SceneNode">]
+NEW:0x1198ea30
+NEW:0x11990530
+MESH for #<AntBush:0x10cf3388>:#<Antargis::Mesh:0x10c8fcfc> #<Antargis::Mesh:0x10c8fcfc @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c8f554 @__swigtype__="_p_SceneNode">]
+NEW:0x119986f0
+NEW:0x1199a1f0
+MESH for #<AntBush:0x10cf0750>:#<Antargis::Mesh:0x10c8e35c> #<Antargis::Mesh:0x10c8e35c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c8dbb4 @__swigtype__="_p_SceneNode">]
+NEW:0x119a22b0
+NEW:0x119a3020
+MESH for #<AntHighGrass:0x10ce9b44>:#<Antargis::Mesh:0x10c8c9f8> #<Antargis::Mesh:0x10c8c9f8 @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10c8c278 @__swigtype__="_p_SceneNode">]
+NEW:0x119ab0d0
+createPathfinder
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x9c3000
+marked:0x9caa00:282471500
+not marked0x923c00
+not marked0x95b000
+not marked0x9bd800
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9b4e00
+not marked0x9b5200
+marked:0x9b5600:282471200
+not marked0x9b4200
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x975600
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x95ba00
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x921000
+not marked0x929e00
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+marked:0xefebc00:282411560
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xefa5190(Keep:this:0xef80720
+marked:0xefa5190:282415880
+marked:0xefa2810:282418100
+marked:0xefa2810:282418100
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xefec2e0(Keep:this:0xef80720
+marked:0xefec2e0:282411500
+marked:0xefebc00:282411560
+marked:0xefebc00:282411560
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xefeca30(Keep:this:0xef80720
+marked:0xefeca30:282411120
+marked:0xefebc00:282411560
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b0f810(Rowen:this:0x10b07650
+marked:0x10b0f810:282359440
+marked:0x10b0edf0:282361640
+marked:0x10b0edf0:282361640
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xef513a0(Rowen:this:0x10b07650
+marked:0xef513a0:282355100
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b39650(Rowen:this:0x10b07650
+marked:0x10b39650:282354720
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b39c40(Rowen:this:0x10b07650
+marked:0x10b39c40:282354300
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b4c6f0(:this:0x10b3afb0
+marked:0x10b4c6f0:282345020
+marked:0xc17e00:282347220
+marked:0xc17e00:282347220
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b57ea0(:this:0x10b3afb0
+marked:0x10b57ea0:282341560
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b5c290(:this:0x10b59170
+marked:0x10b5c290:282332760
+marked:0xc17e00:282347220
+marked:0xc17e00:282347220
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b640d0(:this:0x10b59170
+marked:0x10b640d0:282329300
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b695c0(Bantor:this:0x10b652b0
+marked:0x10b695c0:282318980
+marked:0x10b0edf0:282361640
+marked:0x10b0edf0:282361640
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b71a20(Bantor:this:0x10b652b0
+marked:0x10b71a20:282315520
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b71fa0(Bantor:this:0x10b652b0
+marked:0x10b71fa0:282315140
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b72500(Bantor:this:0x10b652b0
+marked:0x10b72500:282314780
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11820b20(:this:0x10b737b0
+marked:0x11820b20:281929160
+marked:0x1181a9e0:281931580
+marked:0x1181a9e0:281931580
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11828b10(:this:0x10b737b0
+marked:0x11828b10:281925700
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118404e0(:this:0x10b90980
+marked:0x118404e0:281897760
+marked:0x1183ff30:281900180
+marked:0x1183ff30:281900180
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11854430(:this:0x10b90980
+marked:0x11854430:281894300
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11868500(:this:0x10bb0f40
+marked:0x11868500:281868840
+marked:0x1181a9e0:281931580
+marked:0x1181a9e0:281931580
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11870240(:this:0x10bb0f40
+marked:0x11870240:281865380
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11884520(:this:0x10bce080
+marked:0x11884520:281839620
+marked:0x10b7e440:282297780
+marked:0x10b7e440:282297780
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1188c260(:this:0x10bce080
+marked:0x1188c260:281836160
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118a0330(:this:0x10bded50
+marked:0x118a0330:281810700
+marked:0x1181a9e0:281931580
+marked:0x1181a9e0:281931580
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118a8070(:this:0x10bded50
+marked:0x118a8070:281807240
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118c89a0(:this:0x10befa20
+marked:0x118c89a0:281779660
+marked:0x118bf200:281782080
+marked:0x118bf200:281782080
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118d0630(:this:0x10befa20
+marked:0x118d0630:281776200
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118e4800(:this:0x116044e0
+marked:0x118e4800:281750740
+marked:0x1161fb30:282148340
+marked:0x1161fb30:282148340
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118ec540(:this:0x116044e0
+marked:0x118ec540:281747280
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11904590(:this:0x116150a0
+marked:0x11904590:281721820
+marked:0x1183ff30:281900180
+marked:0x1183ff30:281900180
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1190c2d0(:this:0x116150a0
+marked:0x1190c2d0:281718360
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119203a0(:this:0x1162f240
+marked:0x119203a0:281692900
+marked:0x1161fb30:282148340
+marked:0x1161fb30:282148340
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119281e0(:this:0x1162f240
+marked:0x119281e0:281689440
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1193c4c0(:this:0x1163ff10
+marked:0x1193c4c0:281663680
+marked:0x10bbbbd0:282252520
+marked:0x10bbbbd0:282252520
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11944200(:this:0x1163ff10
+marked:0x11944200:281660220
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11944f60(:this:0x11650b80
+marked:0x11944f60:281657340
+marked:0x11658dc0:282092020
+marked:0x11658dc0:282092020
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1194d000(:this:0x11650b80
+marked:0x1194d000:281653880
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1194ddd0(:this:0x11662400
+marked:0x1194ddd0:281650940
+marked:0x11658dc0:282092020
+marked:0x11658dc0:282092020
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11955e70(:this:0x11662400
+marked:0x11955e70:281647480
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11956bb0(:this:0x1166c0e0
+marked:0x11956bb0:281644600
+marked:0x116743d0:282069820
+marked:0x116743d0:282069820
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1195ec50(:this:0x1166c0e0
+marked:0x1195ec50:281641140
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1195f990(:this:0x1167d7d0
+marked:0x1195f990:281638260
+marked:0x11658dc0:282092020
+marked:0x11658dc0:282092020
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11967a30(:this:0x1167d7d0
+marked:0x11967a30:281634800
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11969530(:this:0x11687470
+marked:0x11969530:281631700
+marked:0x1168c010:282051300
+marked:0x1168c010:282051300
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119715f0(:this:0x11687470
+marked:0x119715f0:281628240
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119730f0(:this:0x11695c10
+marked:0x119730f0:281625140
+marked:0x1169a7b0:282039920
+marked:0x1169a7b0:282039920
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1197b1b0(:this:0x11695c10
+marked:0x1197b1b0:281621680
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1197ccb0(:this:0x116a4180
+marked:0x1197ccb0:281618580
+marked:0x116a8d20:282028600
+marked:0x116a8d20:282028600
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11984e70(:this:0x116a4180
+marked:0x11984e70:281615120
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11986970(:this:0x116b26f0
+marked:0x11986970:281612020
+marked:0x1169a7b0:282039920
+marked:0x1169a7b0:282039920
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1198ea30(:this:0x116b26f0
+marked:0x1198ea30:281608560
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11990530(:this:0x116bd100
+marked:0x11990530:281605460
+marked:0x116c1ca0:282009820
+marked:0x116c1ca0:282009820
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119986f0(:this:0x116bd100
+marked:0x119986f0:281602000
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1199a1f0(:this:0x116cb670
+marked:0x1199a1f0:281598900
+marked:0x116d0210:281998500
+marked:0x116d0210:281998500
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119a22b0(:this:0x116cb670
+marked:0x119a22b0:281595440
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x116e2db0(:this:0x116d9be0
+marked:0x116e2db0:281980200
+marked:0x116e2780:281982620
+marked:0x116e2780:281982620
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x116eabe0(:this:0x116d9be0
+marked:0x116eabe0:281976740
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119a3020(:this:0x116ebd90
+marked:0x119a3020:281592440
+marked:0x116f4180:281967200
+marked:0x116f4180:281967200
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119ab0d0(:this:0x116ebd90
+marked:0x119ab0d0:281588980
+marked:0x10b38c90:282355160
+marked:0x83e6d4:282485680
+not marked0xc5121f0
+not marked0xc50eca0
+not marked0xc50d750
+not marked0xc50d5f0
+not marked0xef60cb0
+not marked0xc510770
+not marked0xc51ba10
+not marked0xc50e5b0
+not marked0xef64c80
+not marked0xef60830
+not marked0xc514f90
+not marked0xc50d200
+not marked0xc518360
+not marked0xc512f80
+not marked0xc516ba0
+not marked0xc5147b0
+not marked0xef5b800
+not marked0xef5c410
+not marked0xef5da30
+not marked0xef65380
+not marked0xc518600
+not marked0xef64880
+not marked0xef649c0
+not marked0xef64ac0
+not marked0xef643e0
+not marked0xef644e0
+not marked0xef63360
+not marked0xef63460
+not marked0xef64620
+not marked0xef64720
+not marked0xef61c50
+not marked0xef61d50
+not marked0xef61e90
+not marked0xef61f90
+not marked0xef620d0
+not marked0xef621d0
+not marked0xef62310
+not marked0xef62410
+not marked0xef609c0
+not marked0xef617b0
+not marked0xef62550
+not marked0xef62650
+not marked0xef5eb90
+not marked0xef5d490
+not marked0xef5d600
+not marked0xef5d760
+not marked0xef5d140
+not marked0xef5d280
+not marked0xef5a640
+not marked0xef5a7a0
+not marked0xef5aa00
+not marked0xef5ab60
+not marked0xc51c9e0
+not marked0xc51cae0
+not marked0xef5a150
+not marked0xc5114f0
+not marked0xc5116f0
+not marked0xef5a2f0
+not marked0xc514af0
+not marked0xc514d10
+not marked0xc518820
+not marked0xc518920
+not marked0xc518af0
+not marked0xc518c70
+not marked0xc51c2d0
+not marked0xc51d2b0
+not marked0xc51d410
+not marked0xc51cd90
+not marked0xc519860
+not marked0xc51f330
+not marked0xc51e7e0
+not marked0xc51e8e0
+not marked0xc51f1b0
+not marked0xc51ed30
+not marked0xc51ea70
+not marked0xc51d540
+not marked0xc51ebe0
+not marked0xc520340
+not marked0xc5100d0
+not marked0xc520ae0
+not marked0xc510230
+not marked0xef5e260
+not marked0xc515d60
+not marked0xc515e60
+not marked0xc515fe0
+not marked0xc51d850
+not marked0xc511d00
+not marked0xef59760
+not marked0xef598a0
+not marked0xc51cfc0
+not marked0xef5aea0
+not marked0xef5afc0
+not marked0xef630b0
+not marked0xef5b1c0
+not marked0xef5b300
+not marked0xef63d80
+not marked0xef63ec0
+not marked0xef63fe0
+not marked0xc50e750
+not marked0xef641e0
+not marked0xc519e10
+not marked0xc521190
+not marked0xc51e5c0
+not marked0xc520520
+not marked0xc520670
+not marked0xc51fe60
+not marked0xc516270
+not marked0xc519530
+not marked0xc513340
+not marked0xc511820
+not marked0xc511960
+not marked0xef58f20
+not marked0xef590c0
+not marked0xc5126d0
+not marked0xc511030
+not marked0xef5be70
+not marked0xc510cd0
+not marked0xc510dd0
+not marked0xef5c7c0
+not marked0xef5c920
+not marked0xef5bfc0
+not marked0xef5c120
+not marked0xef5f4a0
+not marked0xef5ddc0
+not marked0xef5df50
+not marked0xef5e0d0
+not marked0xef61aa0
+not marked0xef5f8b0
+marked:0xefa5190:282415880
+marked:0xefa2810:282418100
+marked:0xefec2e0:282411500
+marked:0xefebc00:282411560
+marked:0xefeca30:282411120
+marked:0xefebc00:282411560
+marked:0x10b0f810:282359440
+marked:0x10b0edf0:282361640
+marked:0xef513a0:282355100
+marked:0x10b38c90:282355160
+marked:0x10b39650:282354720
+marked:0x10b38c90:282355160
+marked:0x10b39c40:282354300
+marked:0x10b38c90:282355160
+marked:0x10b4c6f0:282345020
+marked:0xc17e00:282347220
+marked:0x10b57ea0:282341560
+marked:0x10b38c90:282355160
+marked:0x10b5c290:282332760
+marked:0xc17e00:282347220
+marked:0x10b640d0:282329300
+marked:0x10b38c90:282355160
+marked:0x10b695c0:282318980
+marked:0x10b0edf0:282361640
+marked:0x10b71a20:282315520
+marked:0x10b38c90:282355160
+marked:0x10b71fa0:282315140
+marked:0x10b38c90:282355160
+marked:0x10b72500:282314780
+marked:0x10b38c90:282355160
+marked:0x10b7e9f0:282295360
+marked:0x10b7e440:282297780
+marked:0x10b7e440:282297780
+marked:0x10b8f780:282291900
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x10b9bbc0:282272700
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x10bafdd0:282269240
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x10bbc180:282250100
+marked:0x10bbbbd0:282252520
+marked:0x10bbbbd0:282252520
+marked:0x10bccf10:282246640
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x10bd5ae0:282229620
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x10bddbe0:282226160
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x10be67b0:282209140
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x10bee8b0:282205680
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x10bf7480:282188660
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x11603450:282185200
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x1160bf40:282168220
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x11614040:282164760
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11625db0:282145920
+marked:0x1161fb30:282148340
+marked:0x1161fb30:282148340
+marked:0x1162e0d0:282142460
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11636ca0:282125440
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x1163eda0:282121980
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11647970:282104960
+marked:0x10bbbbd0:282252520
+marked:0x10bbbbd0:282252520
+marked:0x1164fa70:282101500
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11659050:282090040
+marked:0x11658dc0:282092020
+marked:0x11658dc0:282092020
+marked:0x11661280:282086580
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11663060:282082740
+marked:0x11658dc0:282092020
+marked:0x11658dc0:282092020
+marked:0x1166afb0:282079280
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11674540:282067840
+marked:0x116743d0:282069820
+marked:0x116743d0:282069820
+marked:0x1167c6e0:282064380
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x1167e430:282060600
+marked:0x11658dc0:282092020
+marked:0x11658dc0:282092020
+marked:0x11686380:282057140
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x1168c970:282049280
+marked:0x1168c010:282051300
+marked:0x1168c010:282051300
+marked:0x11694a90:282045820
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x1169b120:282037900
+marked:0x1169a7b0:282039920
+marked:0x1169a7b0:282039920
+marked:0x116a3090:282034440
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x116a9690:282026580
+marked:0x116a8d20:282028600
+marked:0x116a8d20:282028600
+marked:0x116b1600:282023120
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x116b40a0:282019120
+marked:0x1169a7b0:282039920
+marked:0x1169a7b0:282039920
+marked:0x116bc010:282015660
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x116c2610:282007800
+marked:0x116c1ca0:282009820
+marked:0x116c1ca0:282009820
+marked:0x116ca580:282004340
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x116d0b80:281996480
+marked:0x116d0210:281998500
+marked:0x116d0210:281998500
+marked:0x116d8af0:281993020
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x116e2db0:281980200
+marked:0x116e2780:281982620
+marked:0x116eabe0:281976740
+marked:0x10b38c90:282355160
+marked:0x116f42f0:281965220
+marked:0x116f4180:281967200
+marked:0x116f4180:281967200
+marked:0x118005d0:281961760
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x118099c0:281945540
+marked:0x10b7e440:282297780
+marked:0x10b7e440:282297780
+marked:0x11811c10:281942080
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11820b20:281929160
+marked:0x1181a9e0:281931580
+marked:0x11828b10:281925700
+marked:0x10b38c90:282355160
+marked:0x1182eda0:281914380
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x11836ff0:281910920
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x118404e0:281897760
+marked:0x1183ff30:281900180
+marked:0x11854430:281894300
+marked:0x10b38c90:282355160
+marked:0x1185a630:281883040
+marked:0x10bbbbd0:282252520
+marked:0x10bbbbd0:282252520
+marked:0x11862880:281879580
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11868500:281868840
+marked:0x1181a9e0:281931580
+marked:0x11870240:281865380
+marked:0x10b38c90:282355160
+marked:0x11876440:281854120
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x1187e690:281850660
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11884520:281839620
+marked:0x10b7e440:282297780
+marked:0x1188c260:281836160
+marked:0x10b38c90:282355160
+marked:0x11892460:281824900
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x1189a6b0:281821440
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x118a0330:281810700
+marked:0x1181a9e0:281931580
+marked:0x118a8070:281807240
+marked:0x10b38c90:282355160
+marked:0x118ae270:281795980
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x118b64c0:281792520
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x118c89a0:281779660
+marked:0x118bf200:281782080
+marked:0x118d0630:281776200
+marked:0x10b38c90:282355160
+marked:0x118d6930:281764940
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x118deb80:281761480
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x118e4800:281750740
+marked:0x1161fb30:282148340
+marked:0x118ec540:281747280
+marked:0x10b38c90:282355160
+marked:0x118f2530:281736320
+marked:0x1161fb30:282148340
+marked:0x1161fb30:282148340
+marked:0x118fa780:281732860
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x11904590:281721820
+marked:0x1183ff30:281900180
+marked:0x1190c2d0:281718360
+marked:0x10b38c90:282355160
+marked:0x119124d0:281707100
+marked:0x10b9b610:282275120
+marked:0x10b9b610:282275120
+marked:0x1191a720:281703640
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x119203a0:281692900
+marked:0x1161fb30:282148340
+marked:0x119281e0:281689440
+marked:0x10b38c90:282355160
+marked:0x1192e3e0:281678180
+marked:0x10bbbbd0:282252520
+marked:0x10bbbbd0:282252520
+marked:0x11936630:281674720
+marked:0x10b38c90:282355160
+marked:0x10b38c90:282355160
+marked:0x1193c4c0:281663680
+marked:0x10bbbbd0:282252520
+marked:0x11944200:281660220
+marked:0x10b38c90:282355160
+marked:0x11944f60:281657340
+marked:0x11658dc0:282092020
+marked:0x1194d000:281653880
+marked:0x10b38c90:282355160
+marked:0x1194ddd0:281650940
+marked:0x11658dc0:282092020
+marked:0x11955e70:281647480
+marked:0x10b38c90:282355160
+marked:0x11956bb0:281644600
+marked:0x116743d0:282069820
+marked:0x1195ec50:281641140
+marked:0x10b38c90:282355160
+marked:0x1195f990:281638260
+marked:0x11658dc0:282092020
+marked:0x11967a30:281634800
+marked:0x10b38c90:282355160
+marked:0x11969530:281631700
+marked:0x1168c010:282051300
+marked:0x119715f0:281628240
+marked:0x10b38c90:282355160
+marked:0x119730f0:281625140
+marked:0x1169a7b0:282039920
+marked:0x1197b1b0:281621680
+marked:0x10b38c90:282355160
+marked:0x1197ccb0:281618580
+marked:0x116a8d20:282028600
+marked:0x11984e70:281615120
+marked:0x10b38c90:282355160
+marked:0x11986970:281612020
+marked:0x1169a7b0:282039920
+marked:0x1198ea30:281608560
+marked:0x10b38c90:282355160
+marked:0x11990530:281605460
+marked:0x116c1ca0:282009820
+marked:0x119986f0:281602000
+marked:0x10b38c90:282355160
+marked:0x1199a1f0:281598900
+marked:0x116d0210:281998500
+marked:0x119a22b0:281595440
+marked:0x10b38c90:282355160
+marked:0x119a3020:281592440
+marked:0x116f4180:281967200
+marked:0x119ab0d0:281588980
+marked:0x10b38c90:282355160
+not marked0xc5121f0
+not marked0xc50eca0
+not marked0xc50d750
+not marked0xc50d5f0
+not marked0xef60cb0
+not marked0xc510770
+not marked0xc51ba10
+not marked0xc50e5b0
+not marked0xef64c80
+not marked0xef60830
+not marked0xc514f90
+not marked0xc50d200
+not marked0xc518360
+not marked0xc512f80
+not marked0xc516ba0
+not marked0xc5147b0
+not marked0xef5b800
+not marked0xef5c410
+not marked0xef5da30
+not marked0xef65380
+not marked0xc518600
+not marked0xef64880
+not marked0xef649c0
+not marked0xef64ac0
+not marked0xef643e0
+not marked0xef644e0
+not marked0xef63360
+not marked0xef63460
+not marked0xef64620
+not marked0xef64720
+not marked0xef61c50
+not marked0xef61d50
+not marked0xef61e90
+not marked0xef61f90
+not marked0xef620d0
+not marked0xef621d0
+not marked0xef62310
+not marked0xef62410
+not marked0xef609c0
+not marked0xef617b0
+not marked0xef62550
+not marked0xef62650
+not marked0xef5eb90
+not marked0xef5d490
+not marked0xef5d600
+not marked0xef5d760
+not marked0xef5d140
+not marked0xef5d280
+not marked0xef5a640
+not marked0xef5a7a0
+not marked0xef5aa00
+not marked0xef5ab60
+not marked0xc51c9e0
+not marked0xc51cae0
+not marked0xef5a150
+not marked0xc5114f0
+not marked0xc5116f0
+not marked0xef5a2f0
+not marked0xc514af0
+not marked0xc514d10
+not marked0xc518820
+not marked0xc518920
+not marked0xc518af0
+not marked0xc518c70
+not marked0xc51c2d0
+not marked0xc51d2b0
+not marked0xc51d410
+not marked0xc51cd90
+not marked0xc519860
+not marked0xc51f330
+not marked0xc51e7e0
+not marked0xc51e8e0
+not marked0xc51f1b0
+not marked0xc51ed30
+not marked0xc51ea70
+not marked0xc51d540
+not marked0xc51ebe0
+not marked0xc520340
+not marked0xc5100d0
+not marked0xc520ae0
+not marked0xc510230
+not marked0xef5e260
+not marked0xc515d60
+not marked0xc515e60
+not marked0xc515fe0
+not marked0xc51d850
+not marked0xc511d00
+not marked0xef59760
+not marked0xef598a0
+not marked0xc51cfc0
+not marked0xef5aea0
+not marked0xef5afc0
+not marked0xef630b0
+not marked0xef5b1c0
+not marked0xef5b300
+not marked0xef63d80
+not marked0xef63ec0
+not marked0xef63fe0
+not marked0xc50e750
+not marked0xef641e0
+not marked0xc519e10
+not marked0xc521190
+not marked0xc51e5c0
+not marked0xc520520
+not marked0xc520670
+not marked0xc51fe60
+not marked0xc516270
+not marked0xc519530
+not marked0xc513340
+not marked0xc511820
+not marked0xc511960
+not marked0xef58f20
+not marked0xef590c0
+not marked0xc5126d0
+not marked0xc511030
+not marked0xef5be70
+not marked0xc510cd0
+not marked0xc510dd0
+not marked0xef5c7c0
+not marked0xef5c920
+not marked0xef5bfc0
+not marked0xef5c120
+not marked0xef5f4a0
+not marked0xef5ddc0
+not marked0xef5df50
+not marked0xef5e0d0
+not marked0xef61aa0
+not marked0xef5f8b0
+marked:0xefa5190:282415880
+marked:0xefa2810:282418100
+marked:0xefec2e0:282411500
+marked:0xefebc00:282411560
+marked:0xefeca30:282411120
+marked:0xefebc00:282411560
+marked:0x10b0f810:282359440
+marked:0x10b0edf0:282361640
+marked:0xef513a0:282355100
+marked:0x10b38c90:282355160
+marked:0x10b39650:282354720
+marked:0x10b38c90:282355160
+marked:0x10b39c40:282354300
+marked:0x10b38c90:282355160
+marked:0x10b4c6f0:282345020
+marked:0xc17e00:282347220
+marked:0x10b57ea0:282341560
+marked:0x10b38c90:282355160
+marked:0x10b5c290:282332760
+marked:0xc17e00:282347220
+marked:0x10b640d0:282329300
+marked:0x10b38c90:282355160
+marked:0x10b695c0:282318980
+marked:0x10b0edf0:282361640
+marked:0x10b71a20:282315520
+marked:0x10b38c90:282355160
+marked:0x10b71fa0:282315140
+marked:0x10b38c90:282355160
+marked:0x10b72500:282314780
+marked:0x10b38c90:282355160
+marked:0x10b7e9f0:282295360
+marked:0x10b7e440:282297780
+marked:0x10b8f780:282291900
+marked:0x10b38c90:282355160
+marked:0x10b9bbc0:282272700
+marked:0x10b9b610:282275120
+marked:0x10bafdd0:282269240
+marked:0x10b38c90:282355160
+marked:0x10bbc180:282250100
+marked:0x10bbbbd0:282252520
+marked:0x10bccf10:282246640
+marked:0x10b38c90:282355160
+marked:0x10bd5ae0:282229620
+marked:0x10b9b610:282275120
+marked:0x10bddbe0:282226160
+marked:0x10b38c90:282355160
+marked:0x10be67b0:282209140
+marked:0x10b9b610:282275120
+marked:0x10bee8b0:282205680
+marked:0x10b38c90:282355160
+marked:0x10bf7480:282188660
+marked:0x10b9b610:282275120
+marked:0x11603450:282185200
+marked:0x10b38c90:282355160
+marked:0x1160bf40:282168220
+marked:0x10b9b610:282275120
+marked:0x11614040:282164760
+marked:0x10b38c90:282355160
+marked:0x11625db0:282145920
+marked:0x1161fb30:282148340
+marked:0x1162e0d0:282142460
+marked:0x10b38c90:282355160
+marked:0x11636ca0:282125440
+marked:0x10b9b610:282275120
+marked:0x1163eda0:282121980
+marked:0x10b38c90:282355160
+marked:0x11647970:282104960
+marked:0x10bbbbd0:282252520
+marked:0x1164fa70:282101500
+marked:0x10b38c90:282355160
+marked:0x11659050:282090040
+marked:0x11658dc0:282092020
+marked:0x11661280:282086580
+marked:0x10b38c90:282355160
+marked:0x11663060:282082740
+marked:0x11658dc0:282092020
+marked:0x1166afb0:282079280
+marked:0x10b38c90:282355160
+marked:0x11674540:282067840
+marked:0x116743d0:282069820
+marked:0x1167c6e0:282064380
+marked:0x10b38c90:282355160
+marked:0x1167e430:282060600
+marked:0x11658dc0:282092020
+marked:0x11686380:282057140
+marked:0x10b38c90:282355160
+marked:0x1168c970:282049280
+marked:0x1168c010:282051300
+marked:0x11694a90:282045820
+marked:0x10b38c90:282355160
+marked:0x1169b120:282037900
+marked:0x1169a7b0:282039920
+marked:0x116a3090:282034440
+marked:0x10b38c90:282355160
+marked:0x116a9690:282026580
+marked:0x116a8d20:282028600
+marked:0x116b1600:282023120
+marked:0x10b38c90:282355160
+marked:0x116b40a0:282019120
+marked:0x1169a7b0:282039920
+marked:0x116bc010:282015660
+marked:0x10b38c90:282355160
+marked:0x116c2610:282007800
+marked:0x116c1ca0:282009820
+marked:0x116ca580:282004340
+marked:0x10b38c90:282355160
+marked:0x116d0b80:281996480
+marked:0x116d0210:281998500
+marked:0x116d8af0:281993020
+marked:0x10b38c90:282355160
+marked:0x116e2db0:281980200
+marked:0x116e2780:281982620
+marked:0x116eabe0:281976740
+marked:0x10b38c90:282355160
+marked:0x116f42f0:281965220
+marked:0x116f4180:281967200
+marked:0x118005d0:281961760
+marked:0x10b38c90:282355160
+marked:0x118099c0:281945540
+marked:0x10b7e440:282297780
+marked:0x11811c10:281942080
+marked:0x10b38c90:282355160
+marked:0x11820b20:281929160
+marked:0x1181a9e0:281931580
+marked:0x11828b10:281925700
+marked:0x10b38c90:282355160
+marked:0x1182eda0:281914380
+marked:0x10b9b610:282275120
+marked:0x11836ff0:281910920
+marked:0x10b38c90:282355160
+marked:0x118404e0:281897760
+marked:0x1183ff30:281900180
+marked:0x11854430:281894300
+marked:0x10b38c90:282355160
+marked:0x1185a630:281883040
+marked:0x10bbbbd0:282252520
+marked:0x11862880:281879580
+marked:0x10b38c90:282355160
+marked:0x11868500:281868840
+marked:0x1181a9e0:281931580
+marked:0x11870240:281865380
+marked:0x10b38c90:282355160
+marked:0x11876440:281854120
+marked:0x10b9b610:282275120
+marked:0x1187e690:281850660
+marked:0x10b38c90:282355160
+marked:0x11884520:281839620
+marked:0x10b7e440:282297780
+marked:0x1188c260:281836160
+marked:0x10b38c90:282355160
+marked:0x11892460:281824900
+marked:0x10b9b610:282275120
+marked:0x1189a6b0:281821440
+marked:0x10b38c90:282355160
+marked:0x118a0330:281810700
+marked:0x1181a9e0:281931580
+marked:0x118a8070:281807240
+marked:0x10b38c90:282355160
+marked:0x118ae270:281795980
+marked:0x10b9b610:282275120
+marked:0x118b64c0:281792520
+marked:0x10b38c90:282355160
+marked:0x118c89a0:281779660
+marked:0x118bf200:281782080
+marked:0x118d0630:281776200
+marked:0x10b38c90:282355160
+marked:0x118d6930:281764940
+marked:0x10b9b610:282275120
+marked:0x118deb80:281761480
+marked:0x10b38c90:282355160
+marked:0x118e4800:281750740
+marked:0x1161fb30:282148340
+marked:0x118ec540:281747280
+marked:0x10b38c90:282355160
+marked:0x118f2530:281736320
+marked:0x1161fb30:282148340
+marked:0x118fa780:281732860
+marked:0x10b38c90:282355160
+marked:0x11904590:281721820
+marked:0x1183ff30:281900180
+marked:0x1190c2d0:281718360
+marked:0x10b38c90:282355160
+marked:0x119124d0:281707100
+marked:0x10b9b610:282275120
+marked:0x1191a720:281703640
+marked:0x10b38c90:282355160
+marked:0x119203a0:281692900
+marked:0x1161fb30:282148340
+marked:0x119281e0:281689440
+marked:0x10b38c90:282355160
+marked:0x1192e3e0:281678180
+marked:0x10bbbbd0:282252520
+marked:0x11936630:281674720
+marked:0x10b38c90:282355160
+marked:0x1193c4c0:281663680
+marked:0x10bbbbd0:282252520
+marked:0x11944200:281660220
+marked:0x10b38c90:282355160
+marked:0x11944f60:281657340
+marked:0x11658dc0:282092020
+marked:0x1194d000:281653880
+marked:0x10b38c90:282355160
+marked:0x1194ddd0:281650940
+marked:0x11658dc0:282092020
+marked:0x11955e70:281647480
+marked:0x10b38c90:282355160
+marked:0x11956bb0:281644600
+marked:0x116743d0:282069820
+marked:0x1195ec50:281641140
+marked:0x10b38c90:282355160
+marked:0x1195f990:281638260
+marked:0x11658dc0:282092020
+marked:0x11967a30:281634800
+marked:0x10b38c90:282355160
+marked:0x11969530:281631700
+marked:0x1168c010:282051300
+marked:0x119715f0:281628240
+marked:0x10b38c90:282355160
+marked:0x119730f0:281625140
+marked:0x1169a7b0:282039920
+marked:0x1197b1b0:281621680
+marked:0x10b38c90:282355160
+marked:0x1197ccb0:281618580
+marked:0x116a8d20:282028600
+marked:0x11984e70:281615120
+marked:0x10b38c90:282355160
+marked:0x11986970:281612020
+marked:0x1169a7b0:282039920
+marked:0x1198ea30:281608560
+marked:0x10b38c90:282355160
+marked:0x11990530:281605460
+marked:0x116c1ca0:282009820
+marked:0x119986f0:281602000
+marked:0x10b38c90:282355160
+marked:0x1199a1f0:281598900
+marked:0x116d0210:281998500
+marked:0x119a22b0:281595440
+marked:0x10b38c90:282355160
+marked:0x119a3020:281592440
+marked:0x116f4180:281967200
+marked:0x119ab0d0:281588980
+marked:0x10b38c90:282355160
+not marked0xc50c4d0
+not marked0xc50eca0
+not marked0xc5121f0
+not marked0xc50d5f0
+not marked0xc50d750
+not marked0xc510770
+not marked0xef60cb0
+not marked0xc50e5b0
+not marked0xc51ba10
+not marked0xef60830
+not marked0xef64c80
+not marked0xc50d200
+not marked0xc514f90
+not marked0xc512f80
+not marked0xc518360
+not marked0xc5147b0
+not marked0xc516ba0
+not marked0xef5c410
+not marked0xef5b800
+not marked0xef65380
+not marked0xef5da30
+not marked0xef64880
+not marked0xc518600
+not marked0xef64ac0
+not marked0xef649c0
+not marked0xef644e0
+not marked0xef643e0
+not marked0xef63460
+not marked0xef63360
+not marked0xef64720
+not marked0xef64620
+not marked0xef61d50
+not marked0xef61c50
+not marked0xef61f90
+not marked0xef61e90
+not marked0xef621d0
+not marked0xef620d0
+not marked0xef62410
+not marked0xef62310
+not marked0xef617b0
+not marked0xef609c0
+not marked0xef62650
+not marked0xef62550
+not marked0xef5d490
+not marked0xef5eb90
+not marked0xef5d760
+not marked0xef5d600
+not marked0xef5d280
+not marked0xef5d140
+not marked0xef5a7a0
+not marked0xef5a640
+not marked0xef5ab60
+not marked0xef5aa00
+not marked0xc51cae0
+not marked0xc51c9e0
+not marked0xc5114f0
+not marked0xef5a150
+not marked0xef5a2f0
+not marked0xc5116f0
+not marked0xc514d10
+not marked0xc514af0
+not marked0xc518920
+not marked0xc518820
+not marked0xc518c70
+not marked0xc518af0
+not marked0xc51d2b0
+not marked0xc51c2d0
+not marked0xc51cd90
+not marked0xc51d410
+not marked0xc51f330
+not marked0xc519860
+not marked0xc51e8e0
+not marked0xc51e7e0
+not marked0xc51ed30
+not marked0xc51f1b0
+not marked0xc51d540
+not marked0xc51ea70
+not marked0xc520340
+not marked0xc51ebe0
+not marked0xc520ae0
+not marked0xc5100d0
+not marked0xef5e260
+not marked0xc510230
+not marked0xc515e60
+not marked0xc515d60
+not marked0xc51d850
+not marked0xc515fe0
+not marked0xef59760
+not marked0xc511d00
+not marked0xc51cfc0
+not marked0xef598a0
+not marked0xef5afc0
+not marked0xef5aea0
+not marked0xef5b1c0
+not marked0xef630b0
+not marked0xef63d80
+not marked0xef5b300
+not marked0xef63fe0
+not marked0xef63ec0
+not marked0xef641e0
+not marked0xc50e750
+not marked0xc521190
+not marked0xc519e10
+not marked0xc520520
+not marked0xc51e5c0
+not marked0xc51fe60
+not marked0xc520670
+not marked0xc519530
+not marked0xc516270
+not marked0xc511820
+not marked0xc513340
+not marked0xef58f20
+not marked0xc511960
+not marked0xc5126d0
+not marked0xef590c0
+not marked0xef5be70
+not marked0xc511030
+not marked0xc510dd0
+not marked0xc510cd0
+not marked0xef5c920
+not marked0xef5c7c0
+not marked0xef5c120
+not marked0xef5bfc0
+not marked0xef5ddc0
+not marked0xef5f4a0
+not marked0xef5e0d0
+not marked0xef5df50
+not marked0xef5f8b0
+not marked0xef61aa0
+marked:0xef80720:282469960
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xefa5190(Keep:this:0xef80720
+marked:0xefa5190:282415880
+marked:0xefa2810:282418100
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xefec2e0(Keep:this:0xef80720
+marked:0xefec2e0:282411500
+marked:0xefebc00:282411560
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xefeca30(Keep:this:0xef80720
+marked:0xefeca30:282411120
+marked:0xefebc00:282411560
+marked:0x10b07650:282370760
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b0f810(Rowen:this:0x10b07650
+marked:0x10b0f810:282359440
+marked:0x10b0edf0:282361640
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0xef513a0(Rowen:this:0x10b07650
+marked:0xef513a0:282355100
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b39650(Rowen:this:0x10b07650
+marked:0x10b39650:282354720
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b39c40(Rowen:this:0x10b07650
+marked:0x10b39c40:282354300
+marked:0x10b38c90:282355160
+marked:0x10b3afb0:282352840
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b4c6f0(:this:0x10b3afb0
+marked:0x10b4c6f0:282345020
+marked:0xc17e00:282347220
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b57ea0(:this:0x10b3afb0
+marked:0x10b57ea0:282341560
+marked:0x10b38c90:282355160
+marked:0x10b59170:282340320
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b5c290(:this:0x10b59170
+marked:0x10b5c290:282332760
+marked:0xc17e00:282347220
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b640d0(:this:0x10b59170
+marked:0x10b640d0:282329300
+marked:0x10b38c90:282355160
+marked:0x10b652b0:282328180
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b695c0(Bantor:this:0x10b652b0
+marked:0x10b695c0:282318980
+marked:0x10b0edf0:282361640
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b71a20(Bantor:this:0x10b652b0
+marked:0x10b71a20:282315520
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b71fa0(Bantor:this:0x10b652b0
+marked:0x10b71fa0:282315140
+marked:0x10b38c90:282355160
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x10b72500(Bantor:this:0x10b652b0
+marked:0x10b72500:282314780
+marked:0x10b38c90:282355160
+marked:0x10b737b0:282313380
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11820b20(:this:0x10b737b0
+marked:0x11820b20:281929160
+marked:0x1181a9e0:281931580
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11828b10(:this:0x10b737b0
+marked:0x11828b10:281925700
+marked:0x10b38c90:282355160
+marked:0x10b90980:282290720
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118404e0(:this:0x10b90980
+marked:0x118404e0:281897760
+marked:0x1183ff30:281900180
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11854430(:this:0x10b90980
+marked:0x11854430:281894300
+marked:0x10b38c90:282355160
+marked:0x10bb0f40:282268120
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11868500(:this:0x10bb0f40
+marked:0x11868500:281868840
+marked:0x1181a9e0:281931580
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11870240(:this:0x10bb0f40
+marked:0x11870240:281865380
+marked:0x10b38c90:282355160
+marked:0x10bce080:282245520
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11884520(:this:0x10bce080
+marked:0x11884520:281839620
+marked:0x10b7e440:282297780
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1188c260(:this:0x10bce080
+marked:0x1188c260:281836160
+marked:0x10b38c90:282355160
+marked:0x10bded50:282225040
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118a0330(:this:0x10bded50
+marked:0x118a0330:281810700
+marked:0x1181a9e0:281931580
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118a8070(:this:0x10bded50
+marked:0x118a8070:281807240
+marked:0x10b38c90:282355160
+marked:0x10befa20:282204560
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118c89a0(:this:0x10befa20
+marked:0x118c89a0:281779660
+marked:0x118bf200:281782080
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118d0630(:this:0x10befa20
+marked:0x118d0630:281776200
+marked:0x10b38c90:282355160
+marked:0x116044e0:282184120
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118e4800(:this:0x116044e0
+marked:0x118e4800:281750740
+marked:0x1161fb30:282148340
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x118ec540(:this:0x116044e0
+marked:0x118ec540:281747280
+marked:0x10b38c90:282355160
+marked:0x116150a0:282163640
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11904590(:this:0x116150a0
+marked:0x11904590:281721820
+marked:0x1183ff30:281900180
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1190c2d0(:this:0x116150a0
+marked:0x1190c2d0:281718360
+marked:0x10b38c90:282355160
+marked:0x1162f240:282141340
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119203a0(:this:0x1162f240
+marked:0x119203a0:281692900
+marked:0x1161fb30:282148340
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119281e0(:this:0x1162f240
+marked:0x119281e0:281689440
+marked:0x10b38c90:282355160
+marked:0x1163ff10:282120860
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1193c4c0(:this:0x1163ff10
+marked:0x1193c4c0:281663680
+marked:0x10bbbbd0:282252520
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11944200(:this:0x1163ff10
+marked:0x11944200:281660220
+marked:0x10b38c90:282355160
+marked:0x11650b80:282100440
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11944f60(:this:0x11650b80
+marked:0x11944f60:281657340
+marked:0x11658dc0:282092020
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1194d000(:this:0x11650b80
+marked:0x1194d000:281653880
+marked:0x10b38c90:282355160
+marked:0x11662400:282085460
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1194ddd0(:this:0x11662400
+marked:0x1194ddd0:281650940
+marked:0x11658dc0:282092020
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11955e70(:this:0x11662400
+marked:0x11955e70:281647480
+marked:0x10b38c90:282355160
+marked:0x1166c0e0:282078220
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11956bb0(:this:0x1166c0e0
+marked:0x11956bb0:281644600
+marked:0x116743d0:282069820
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1195ec50(:this:0x1166c0e0
+marked:0x1195ec50:281641140
+marked:0x10b38c90:282355160
+marked:0x1167d7d0:282063320
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1195f990(:this:0x1167d7d0
+marked:0x1195f990:281638260
+marked:0x11658dc0:282092020
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11967a30(:this:0x1167d7d0
+marked:0x11967a30:281634800
+marked:0x10b38c90:282355160
+marked:0x11687470:282056080
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11969530(:this:0x11687470
+marked:0x11969530:281631700
+marked:0x1168c010:282051300
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119715f0(:this:0x11687470
+marked:0x119715f0:281628240
+marked:0x10b38c90:282355160
+marked:0x11695c10:282044700
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119730f0(:this:0x11695c10
+marked:0x119730f0:281625140
+marked:0x1169a7b0:282039920
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1197b1b0(:this:0x11695c10
+marked:0x1197b1b0:281621680
+marked:0x10b38c90:282355160
+marked:0x116a4180:282033380
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1197ccb0(:this:0x116a4180
+marked:0x1197ccb0:281618580
+marked:0x116a8d20:282028600
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11984e70(:this:0x116a4180
+marked:0x11984e70:281615120
+marked:0x10b38c90:282355160
+marked:0x116b26f0:282022060
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11986970(:this:0x116b26f0
+marked:0x11986970:281612020
+marked:0x1169a7b0:282039920
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1198ea30(:this:0x116b26f0
+marked:0x1198ea30:281608560
+marked:0x10b38c90:282355160
+marked:0x116bd100:282014600
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x11990530(:this:0x116bd100
+marked:0x11990530:281605460
+marked:0x116c1ca0:282009820
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119986f0(:this:0x116bd100
+marked:0x119986f0:281602000
+marked:0x10b38c90:282355160
+marked:0x116cb670:282003280
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x1199a1f0(:this:0x116cb670
+marked:0x1199a1f0:281598900
+marked:0x116d0210:281998500
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119a22b0(:this:0x116cb670
+marked:0x119a22b0:281595440
+marked:0x10b38c90:282355160
+marked:0x116d9be0:281991960
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x116e2db0(:this:0x116d9be0
+marked:0x116e2db0:281980200
+marked:0x116e2780:281982620
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x116eabe0(:this:0x116d9be0
+marked:0x116eabe0:281976740
+marked:0x10b38c90:282355160
+marked:0x116ebd90:281975620
+(ext/game/entity.cc:655:virtual void AntEntity::mark()):start marking
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119a3020(:this:0x116ebd90
+marked:0x119a3020:281592440
+marked:0x116f4180:281967200
+(ext/game/entity.cc:658:virtual void AntEntity::mark()):trying to mark:0x119ab0d0(:this:0x116ebd90
+marked:0x119ab0d0:281588980
+marked:0x10b38c90:282355160
+marked:0x83e6d4:282485680
+not marked0xc5121f0
+not marked0xc50eca0
+not marked0xc50d750
+not marked0xc50d5f0
+not marked0xef60cb0
+not marked0xc510770
+not marked0xc51ba10
+not marked0xc50e5b0
+not marked0xef64c80
+not marked0xef60830
+not marked0xc514f90
+not marked0xc50d200
+not marked0xc518360
+not marked0xc512f80
+not marked0xc516ba0
+not marked0xc5147b0
+not marked0xef5b800
+not marked0xef5c410
+not marked0xef5da30
+not marked0xef65380
+not marked0xc518600
+not marked0xef64880
+not marked0xef649c0
+not marked0xef64ac0
+not marked0xef643e0
+not marked0xef644e0
+not marked0xef63360
+not marked0xef63460
+not marked0xef64620
+not marked0xef64720
+not marked0xef61c50
+not marked0xef61d50
+not marked0xef61e90
+not marked0xef61f90
+not marked0xef620d0
+not marked0xef621d0
+not marked0xef62310
+not marked0xef62410
+not marked0xef609c0
+not marked0xef617b0
+not marked0xef62550
+not marked0xef62650
+not marked0xef5eb90
+not marked0xef5d490
+not marked0xef5d600
+not marked0xef5d760
+not marked0xef5d140
+not marked0xef5d280
+not marked0xef5a640
+not marked0xef5a7a0
+not marked0xef5aa00
+not marked0xef5ab60
+not marked0xc51c9e0
+not marked0xc51cae0
+not marked0xef5a150
+not marked0xc5114f0
+not marked0xc5116f0
+not marked0xef5a2f0
+not marked0xc514af0
+not marked0xc514d10
+not marked0xc518820
+not marked0xc518920
+not marked0xc518af0
+not marked0xc518c70
+not marked0xc51c2d0
+not marked0xc51d2b0
+not marked0xc51d410
+not marked0xc51cd90
+not marked0xc519860
+not marked0xc51f330
+not marked0xc51e7e0
+not marked0xc51e8e0
+not marked0xc51f1b0
+not marked0xc51ed30
+not marked0xc51ea70
+not marked0xc51d540
+not marked0xc51ebe0
+not marked0xc520340
+not marked0xc5100d0
+not marked0xc520ae0
+not marked0xc510230
+not marked0xef5e260
+not marked0xc515d60
+not marked0xc515e60
+not marked0xc515fe0
+not marked0xc51d850
+not marked0xc511d00
+not marked0xef59760
+not marked0xef598a0
+not marked0xc51cfc0
+not marked0xef5aea0
+not marked0xef5afc0
+not marked0xef630b0
+not marked0xef5b1c0
+not marked0xef5b300
+not marked0xef63d80
+not marked0xef63ec0
+not marked0xef63fe0
+not marked0xc50e750
+not marked0xef641e0
+not marked0xc519e10
+not marked0xc521190
+not marked0xc51e5c0
+not marked0xc520520
+not marked0xc520670
+not marked0xc51fe60
+not marked0xc516270
+not marked0xc519530
+not marked0xc513340
+not marked0xc511820
+not marked0xc511960
+not marked0xef58f20
+not marked0xef590c0
+not marked0xc5126d0
+not marked0xc511030
+not marked0xef5be70
+not marked0xc510cd0
+not marked0xc510dd0
+not marked0xef5c7c0
+not marked0xef5c920
+not marked0xef5bfc0
+not marked0xef5c120
+not marked0xef5f4a0
+not marked0xef5ddc0
+not marked0xef5df50
+not marked0xef5e0d0
+not marked0xef61aa0
+not marked0xef5f8b0
+marked:0xefa5190:282415880
+marked:0xefa2810:282418100
+marked:0xefec2e0:282411500
+marked:0xefebc00:282411560
+marked:0xefeca30:282411120
+marked:0xefebc00:282411560
+marked:0x10b0f810:282359440
+marked:0x10b0edf0:282361640
+marked:0xef513a0:282355100
+marked:0x10b38c90:282355160
+marked:0x10b39650:282354720
+marked:0x10b38c90:282355160
+marked:0x10b39c40:282354300
+marked:0x10b38c90:282355160
+marked:0x10b4c6f0:282345020
+marked:0xc17e00:282347220
+marked:0x10b57ea0:282341560
+marked:0x10b38c90:282355160
+marked:0x10b5c290:282332760
+marked:0xc17e00:282347220
+marked:0x10b640d0:282329300
+marked:0x10b38c90:282355160
+marked:0x10b695c0:282318980
+marked:0x10b0edf0:282361640
+marked:0x10b71a20:282315520
+marked:0x10b38c90:282355160
+marked:0x10b71fa0:282315140
+marked:0x10b38c90:282355160
+marked:0x10b72500:282314780
+marked:0x10b38c90:282355160
+marked:0x10b7e9f0:282295360
+marked:0x10b7e440:282297780
+marked:0x10b8f780:282291900
+marked:0x10b38c90:282355160
+marked:0x10b9bbc0:282272700
+marked:0x10b9b610:282275120
+marked:0x10bafdd0:282269240
+marked:0x10b38c90:282355160
+marked:0x10bbc180:282250100
+marked:0x10bbbbd0:282252520
+marked:0x10bccf10:282246640
+marked:0x10b38c90:282355160
+marked:0x10bd5ae0:282229620
+marked:0x10b9b610:282275120
+marked:0x10bddbe0:282226160
+marked:0x10b38c90:282355160
+marked:0x10be67b0:282209140
+marked:0x10b9b610:282275120
+marked:0x10bee8b0:282205680
+marked:0x10b38c90:282355160
+marked:0x10bf7480:282188660
+marked:0x10b9b610:282275120
+marked:0x11603450:282185200
+marked:0x10b38c90:282355160
+marked:0x1160bf40:282168220
+marked:0x10b9b610:282275120
+marked:0x11614040:282164760
+marked:0x10b38c90:282355160
+marked:0x11625db0:282145920
+marked:0x1161fb30:282148340
+marked:0x1162e0d0:282142460
+marked:0x10b38c90:282355160
+marked:0x11636ca0:282125440
+marked:0x10b9b610:282275120
+marked:0x1163eda0:282121980
+marked:0x10b38c90:282355160
+marked:0x11647970:282104960
+marked:0x10bbbbd0:282252520
+marked:0x1164fa70:282101500
+marked:0x10b38c90:282355160
+marked:0x11659050:282090040
+marked:0x11658dc0:282092020
+marked:0x11661280:282086580
+marked:0x10b38c90:282355160
+marked:0x11663060:282082740
+marked:0x11658dc0:282092020
+marked:0x1166afb0:282079280
+marked:0x10b38c90:282355160
+marked:0x11674540:282067840
+marked:0x116743d0:282069820
+marked:0x1167c6e0:282064380
+marked:0x10b38c90:282355160
+marked:0x1167e430:282060600
+marked:0x11658dc0:282092020
+marked:0x11686380:282057140
+marked:0x10b38c90:282355160
+marked:0x1168c970:282049280
+marked:0x1168c010:282051300
+marked:0x11694a90:282045820
+marked:0x10b38c90:282355160
+marked:0x1169b120:282037900
+marked:0x1169a7b0:282039920
+marked:0x116a3090:282034440
+marked:0x10b38c90:282355160
+marked:0x116a9690:282026580
+marked:0x116a8d20:282028600
+marked:0x116b1600:282023120
+marked:0x10b38c90:282355160
+marked:0x116b40a0:282019120
+marked:0x1169a7b0:282039920
+marked:0x116bc010:282015660
+marked:0x10b38c90:282355160
+marked:0x116c2610:282007800
+marked:0x116c1ca0:282009820
+marked:0x116ca580:282004340
+marked:0x10b38c90:282355160
+marked:0x116d0b80:281996480
+marked:0x116d0210:281998500
+marked:0x116d8af0:281993020
+marked:0x10b38c90:282355160
+marked:0x116e2db0:281980200
+marked:0x116e2780:281982620
+marked:0x116eabe0:281976740
+marked:0x10b38c90:282355160
+marked:0x116f42f0:281965220
+marked:0x116f4180:281967200
+marked:0x118005d0:281961760
+marked:0x10b38c90:282355160
+marked:0x118099c0:281945540
+marked:0x10b7e440:282297780
+marked:0x11811c10:281942080
+marked:0x10b38c90:282355160
+marked:0x11820b20:281929160
+marked:0x1181a9e0:281931580
+marked:0x11828b10:281925700
+marked:0x10b38c90:282355160
+marked:0x1182eda0:281914380
+marked:0x10b9b610:282275120
+marked:0x11836ff0:281910920
+marked:0x10b38c90:282355160
+marked:0x118404e0:281897760
+marked:0x1183ff30:281900180
+marked:0x11854430:281894300
+marked:0x10b38c90:282355160
+marked:0x1185a630:281883040
+marked:0x10bbbbd0:282252520
+marked:0x11862880:281879580
+marked:0x10b38c90:282355160
+marked:0x11868500:281868840
+marked:0x1181a9e0:281931580
+marked:0x11870240:281865380
+marked:0x10b38c90:282355160
+marked:0x11876440:281854120
+marked:0x10b9b610:282275120
+marked:0x1187e690:281850660
+marked:0x10b38c90:282355160
+marked:0x11884520:281839620
+marked:0x10b7e440:282297780
+marked:0x1188c260:281836160
+marked:0x10b38c90:282355160
+marked:0x11892460:281824900
+marked:0x10b9b610:282275120
+marked:0x1189a6b0:281821440
+marked:0x10b38c90:282355160
+marked:0x118a0330:281810700
+marked:0x1181a9e0:281931580
+marked:0x118a8070:281807240
+marked:0x10b38c90:282355160
+marked:0x118ae270:281795980
+marked:0x10b9b610:282275120
+marked:0x118b64c0:281792520
+marked:0x10b38c90:282355160
+marked:0x118c89a0:281779660
+marked:0x118bf200:281782080
+marked:0x118d0630:281776200
+marked:0x10b38c90:282355160
+marked:0x118d6930:281764940
+marked:0x10b9b610:282275120
+marked:0x118deb80:281761480
+marked:0x10b38c90:282355160
+marked:0x118e4800:281750740
+marked:0x1161fb30:282148340
+marked:0x118ec540:281747280
+marked:0x10b38c90:282355160
+marked:0x118f2530:281736320
+marked:0x1161fb30:282148340
+marked:0x118fa780:281732860
+marked:0x10b38c90:282355160
+marked:0x11904590:281721820
+marked:0x1183ff30:281900180
+marked:0x1190c2d0:281718360
+marked:0x10b38c90:282355160
+marked:0x119124d0:281707100
+marked:0x10b9b610:282275120
+marked:0x1191a720:281703640
+marked:0x10b38c90:282355160
+marked:0x119203a0:281692900
+marked:0x1161fb30:282148340
+marked:0x119281e0:281689440
+marked:0x10b38c90:282355160
+marked:0x1192e3e0:281678180
+marked:0x10bbbbd0:282252520
+marked:0x11936630:281674720
+marked:0x10b38c90:282355160
+marked:0x1193c4c0:281663680
+marked:0x10bbbbd0:282252520
+marked:0x11944200:281660220
+marked:0x10b38c90:282355160
+marked:0x11944f60:281657340
+marked:0x11658dc0:282092020
+marked:0x1194d000:281653880
+marked:0x10b38c90:282355160
+marked:0x1194ddd0:281650940
+marked:0x11658dc0:282092020
+marked:0x11955e70:281647480
+marked:0x10b38c90:282355160
+marked:0x11956bb0:281644600
+marked:0x116743d0:282069820
+marked:0x1195ec50:281641140
+marked:0x10b38c90:282355160
+marked:0x1195f990:281638260
+marked:0x11658dc0:282092020
+marked:0x11967a30:281634800
+marked:0x10b38c90:282355160
+marked:0x11969530:281631700
+marked:0x1168c010:282051300
+marked:0x119715f0:281628240
+marked:0x10b38c90:282355160
+marked:0x119730f0:281625140
+marked:0x1169a7b0:282039920
+marked:0x1197b1b0:281621680
+marked:0x10b38c90:282355160
+marked:0x1197ccb0:281618580
+marked:0x116a8d20:282028600
+marked:0x11984e70:281615120
+marked:0x10b38c90:282355160
+marked:0x11986970:281612020
+marked:0x1169a7b0:282039920
+marked:0x1198ea30:281608560
+marked:0x10b38c90:282355160
+marked:0x11990530:281605460
+marked:0x116c1ca0:282009820
+marked:0x119986f0:281602000
+marked:0x10b38c90:282355160
+marked:0x1199a1f0:281598900
+marked:0x116d0210:281998500
+marked:0x119a22b0:281595440
+marked:0x10b38c90:282355160
+marked:0x119a3020:281592440
+marked:0x116f4180:281967200
+marked:0x119ab0d0:281588980
+marked:0x10b38c90:282355160
+marked:0x903800:282485280
+not marked0x9c3000
+marked:0x9caa00:282471500
+not marked0x923c00
+not marked0x95b000
+not marked0x9bd800
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9b4e00
+not marked0x9b5200
+marked:0x9b5600:282471200
+not marked0x9b4200
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x975600
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x95ba00
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x921000
+not marked0x929e00
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0xc568420
+marked:0x903800:282485280
+not marked0x9c3000
+marked:0x9caa00:282471500
+not marked0x923c00
+not marked0x95b000
+not marked0x9bd800
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9b4e00
+not marked0x9b5200
+marked:0x9b5600:282471200
+not marked0x9b4200
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x975600
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x95ba00
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x921000
+not marked0x929e00
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x921000
+not marked0x929e00
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x923c00
+not marked0x95b000
+not marked0x9bd800
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9b4e00
+not marked0x9b5200
+marked:0x9b5600:282471200
+not marked0x9b4200
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x975600
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x95ba00
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x921000
+not marked0x929e00
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x929e00
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x92a200
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x930e00
+not marked0x92a600
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x931400
+marked:0x92aa00:282485120
+not marked0x93ac00
+marked:0x936000:282484940
+not marked0x935c00
+not marked0x93a200
+not marked0x935c00
+marked:0x936000:282484940
+marked:0x936400:282484340
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x936c00
+not marked0x937200
+marked:0x936800:282484360
+not marked0x94f200
+marked:0x94ea00:282483740
+not marked0x937e00
+not marked0x937800
+not marked0x937800
+not marked0x937e00
+not marked0x93a200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93ac00
+not marked0x93b200
+marked:0x93a800:282484960
+not marked0x936c00
+marked:0x936400:282484340
+not marked0x93be00
+not marked0x93b800
+not marked0x93b800
+not marked0x93be00
+not marked0x948000
+marked:0x948400:282482540
+not marked0x948800
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x949200
+not marked0x94a400
+not marked0x94a400
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x94b600
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x94c000
+marked:0x94ea00:282483740
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94f200
+not marked0x94f800
+marked:0x94ee00:282483760
+not marked0x950800
+marked:0x955c00:282483140
+not marked0x955800
+not marked0x94fe00
+not marked0x94fe00
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x950800
+not marked0x955800
+marked:0x955c00:282483140
+not marked0x956000
+marked:0x950400:282483160
+not marked0x957000
+marked:0x948400:282482540
+not marked0x948000
+not marked0x956600
+not marked0x956600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x957000
+not marked0x957600
+marked:0x956c00:282482560
+not marked0x95b400
+marked:0x95ac00:282481940
+not marked0x95a800
+not marked0x95a200
+not marked0x95a200
+not marked0x95a800
+marked:0x95ac00:282481940
+not marked0x95b000
+not marked0x9bd800
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9b4e00
+not marked0x9b5200
+marked:0x9b5600:282471200
+not marked0x9b4200
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x975600
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x95ba00
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x95b400
+not marked0x95ba00
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x95be00
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x95c200
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x95ec00
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+marked:0x95f000:282481960
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+marked:0x95f400:282481280
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+marked:0x95f800:282478280
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x95fc00
+not marked0x948800
+not marked0x95fc00
+not marked0x948800
+not marked0x960000
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+not marked0x960400
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x94a800
+not marked0x94b000
+not marked0x94ac00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+marked:0x94ba00:282478060
+not marked0x94b600
+not marked0x94c000
+not marked0x948e00
+not marked0x949200
+not marked0x94a400
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x964400
+marked:0x964800:282478100
+not marked0x964400
+not marked0x966000
+not marked0x964e00
+not marked0x966000
+marked:0x967600:282478080
+not marked0x964e00
+not marked0x967c00
+not marked0x967c00
+marked:0x968200:282477780
+not marked0x96dc00
+not marked0x96e000
+marked:0x96aa00:282478020
+not marked0x96d800
+not marked0x96c200
+not marked0x96c200
+not marked0x96d800
+not marked0x96dc00
+not marked0x96e000
+not marked0x96e600
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x971000
+not marked0x970c00
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+marked:0x971600:282476800
+not marked0x974c00
+not marked0x975000
+marked:0x972c00:282478160
+not marked0x974800
+not marked0x973200
+not marked0x973200
+not marked0x974800
+not marked0x974c00
+not marked0x975000
+not marked0x975600
+marked:0x960800:282478200
+marked:0x960c00:282476000
+marked:0x9b7000:282473340
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+marked:0x977c00:282476540
+not marked0x97a800
+not marked0x979200
+not marked0x979200
+not marked0x97a800
+marked:0x97ac00:282473960
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x996400
+not marked0x996c00
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x97b000
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+marked:0x97b400:282474060
+marked:0x97c000:282473940
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97cc00
+not marked0x97b800
+not marked0x97b800
+marked:0x97c000:282473940
+not marked0x97c400
+not marked0x97cc00
+not marked0x97d400
+not marked0x97c400
+not marked0x97d800
+not marked0x97e000
+not marked0x97f600
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97fa00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x97fe00
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x980200
+marked:0x980600:282473200
+not marked0x980200
+not marked0x980c00
+not marked0x980c00
+not marked0x981200
+marked:0x982a00:282471960
+not marked0x981200
+not marked0x983000
+not marked0x983000
+marked:0x983600:282472920
+not marked0x989000
+not marked0x989400
+marked:0x985e00:282473160
+not marked0x988c00
+not marked0x987600
+not marked0x987600
+not marked0x988c00
+not marked0x989000
+not marked0x989400
+not marked0x98ae00
+not marked0x98b400
+marked:0x98ca00:282472440
+not marked0x98b400
+not marked0x98ae00
+not marked0x98e400
+marked:0x98e800:282472680
+not marked0x990400
+not marked0x98ee00
+not marked0x98ee00
+not marked0x990400
+marked:0x991800:282472200
+not marked0x98e400
+not marked0x991e00
+not marked0x991e00
+not marked0x993400
+marked:0x993800:282473240
+not marked0x993400
+not marked0x993e00
+not marked0x993e00
+not marked0x996400
+not marked0x996c00
+not marked0x996c00
+not marked0x99b800
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x9a0800
+not marked0x9b3c00
+not marked0x9b3600
+not marked0x9bc400
+not marked0x9bbe00
+not marked0x9ba400
+not marked0x9b9e00
+not marked0x9b6c00
+not marked0x9baa00
+not marked0x9b9a00
+not marked0x9b8600
+not marked0x9b3200
+not marked0x9ada00
+not marked0x9b1c00
+not marked0x9a4400
+not marked0x9a3e00
+not marked0x9a2800
+not marked0x9a2200
+not marked0x9ade00
+not marked0x9b0800
+not marked0x9b0400
+not marked0x9a5c00
+not marked0x9a5800
+not marked0x9b0000
+not marked0x9aaa00
+not marked0x9ac600
+not marked0x9ac000
+not marked0x9aba00
+not marked0x9ab400
+not marked0x9aae00
+not marked0x9a8800
+not marked0x9a7400
+not marked0x9a7000
+not marked0x9a1e00
+not marked0x9a0c00
+not marked0x9a0c00
+not marked0x9a1e00
+not marked0x9a2200
+not marked0x9a2800
+not marked0x9a3e00
+not marked0x9a4400
+not marked0x9a5800
+not marked0x9a5c00
+not marked0x9a7000
+not marked0x9a7400
+not marked0x9a8800
+not marked0x9aaa00
+not marked0x9aae00
+not marked0x9ab400
+not marked0x9aba00
+not marked0x9ac000
+not marked0x9ac600
+not marked0x9ada00
+not marked0x9ade00
+not marked0x9b0000
+not marked0x9b0400
+not marked0x9b0800
+not marked0x9b1c00
+not marked0x9b3200
+not marked0x9b3600
+not marked0x9b3c00
+not marked0x9b4200
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x9b4600
+not marked0x9b4a00
+not marked0x9b4a00
+not marked0x9b4e00
+not marked0x9b5200
+marked:0x9b5600:282471200
+not marked0x9b5200
+marked:0x9b5600:282471200
+marked:0x9b5600:282471200
+not marked0x9b6c00
+marked:0x9b7000:282473340
+not marked0x9b8600
+not marked0x9b9a00
+not marked0x9b9e00
+not marked0x9ba400
+not marked0x9baa00
+not marked0x9bbe00
+not marked0x9bc400
+not marked0x9bd800
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9bdc00
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9be000
+marked:0x9be400:282470880
+not marked0x9c0000
+not marked0x9bea00
+not marked0x9bea00
+not marked0x9c0000
+not marked0x9c1400
+not marked0x9be000
+not marked0x9c1a00
+not marked0x9c1a00
+not marked0x9c3000
+marked:0x9caa00:282471500
+marked:0x9c3400:282470620
+not marked0x9c6200
+not marked0x9c4c00
+not marked0x9c4c00
+not marked0x9c6200
+marked:0x9c7600:282471140
+not marked0x9c9200
+not marked0x9c7c00
+not marked0x9c7c00
+not marked0x9c9200
+marked:0x9caa00:282471500
+marked:0xc21f850:282768380
+marked:0xc22aee0:282753740
+marked:0xc235e60:282735160
+marked:0xc240cb0:282728400
+marked:0xc568080:205516000
+not marked0xc577940
+not marked0xc577bb0
+not marked0xc577db0
+not marked0xc5780d0
+not marked0xc5783f0
+not marked0xc578710
+not marked0xc578a30
+not marked0xc578d50
+not marked0xc579070
+not marked0xc579390
+not marked0xc5796b0
+not marked0xc5799d0
+not marked0xc579cf0
+not marked0xc57a010
+not marked0xc57a330
+not marked0xc57a650
+not marked0xc57a970
+not marked0xef47030
+marked:0xef6fb90:205336520
+not marked0x84a400
+DEL:0x119a3020
+DEL:0x1199a1f0
+DEL:0x11990530
+DEL:0x11986970
+DEL:0x1197ccb0
+DEL:0x119730f0
+DEL:0x11969530
+DEL:0x1195f990
+DEL:0x11956bb0
+DEL:0x1194ddd0
+DEL:0x11944f60
+DEL:0x1193c4c0
+DEL:0x1192e3e0
+DEL:0x119203a0
+DEL:0x119124d0
+DEL:0x11904590
+DEL:0x118f2530
+DEL:0x118e4800
+DEL:0x118d6930
+DEL:0x118c89a0
+DEL:0x118ae270
+DEL:0x118a0330
+DEL:0x11892460
+DEL:0x11884520
+DEL:0x11876440
+DEL:0x11868500
+DEL:0x1185a630
+DEL:0x118404e0
+DEL:0x1182eda0
+DEL:0x11820b20
+DEL:0x118099c0
+DEL:0x116f42f0
+DEL:0x116e2db0
+DEL:0x116d0b80
+DEL:0x116c2610
+DEL:0x116b40a0
+DEL:0x116a9690
+DEL:0x1169b120
+DEL:0x1168c970
+DEL:0x1167e430
+DEL:0x11674540
+DEL:0x11663060
+DEL:0x11659050
+DEL:0x11647970
+DEL:0x11636ca0
+DEL:0x11625db0
+DEL:0x1160bf40
+DEL:0x10bf7480
+DEL:0x10be67b0
+DEL:0x10bd5ae0
+DEL:0x10bbc180
+DEL:0x10b9bbc0
+DEL:0x10b7e9f0
+DEL:0x10b695c0
+DEL:0x10b5c290
+DEL:0x10b4c6f0
+DEL:0x10b0f810
+DEL:0xefa5190
+NEW:0xc23aa30
+(ext/game/heuristic.cc:90:StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn&)):s:7569 vecs^2:7569
+NEW:0xc22eaa0
+(ext/game/heuristic.cc:90:StoredHeuristicFunction::StoredHeuristicFunction(BinaryIn&)):s:640000 vecs^2:640000
+NEW:0xef7bac0
+(ext/game/path.cc:1029:Pathfinder::Pathfinder(SimpleGraph*, HeuristicFunction*, PathDebugging*)):Simplegraph:0xc23aa30
+NEW:0xef6c830
+(ext/game/path.cc:1029:Pathfinder::Pathfinder(SimpleGraph*, HeuristicFunction*, PathDebugging*)):Simplegraph:0xc22eaa0
+createPathfinder ready
+NEW:0xbfff47e0
+NEW:0xc51aba0
+DEL:0xbfff47e0
+NEW:0xbfff4f20
+NEW:0xc50f780
+DEL:0xbfff4f20
+NEW:0x845000
+NEW:0x89c800
+NEW:0x89cbcc
+NEW:0x89cbf0
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0x8dd200
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xc2f9160
+NEW:0x859400
+NEW:0xc2186c0
+NEW:0x859c00
+NEW:0xd52000
+NEW:0xd523cc
+NEW:0xd523f0
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0x8dc600
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xbfff3368
+DEL:0xbfff3368
+NEW:0xc23e390
+NEW:0x855400
+NEW:0xc23fc20
+NEW:0xbfff3a64
+DEL:0xbfff3a64
+NEW:0xbfff3a44
+DEL:0xbfff3a44
+NEW:0xbfff3a24
+DEL:0xbfff3a24
+NEW:0xbfff39c4
+DEL:0xbfff39c4
+NEW:0xbfff3964
+DEL:0xbfff3964
+NEW:0xef705f0
+NEW:0x119ac280
+MESH for #<AntTower:0x10deb5ec>:#<Antargis::Mesh:0x10de659c> #<Antargis::Mesh:0x10de659c @__swigtype__="_p_Mesh">
+Array
+[#<Antargis::SceneNode:0x10de4bac @__swigtype__="_p_SceneNode">]
+NEW:0xc2699f0
+NEW:0xc28d7a0
+::GETMESH
+DEL:0xef6fb90
+DEL:0x119ab0d0
+DEL:0x119a22b0
+DEL:0x119986f0
+DEL:0x1198ea30
+DEL:0x11984e70
+DEL:0x1197b1b0
+DEL:0x119715f0
+DEL:0x11967a30
+DEL:0x1195ec50
+DEL:0x11955e70
+DEL:0x1194d000
+DEL:0x11944200
+DEL:0x11936630
+DEL:0x119281e0
+DEL:0x1191a720
+DEL:0x1190c2d0
+DEL:0x118fa780
+DEL:0x118ec540
+DEL:0x118deb80
+DEL:0x118d0630
+DEL:0x118bf2a8
+DEL:0x118bf200
+DEL:0x118b64c0
+DEL:0x118a8070
+DEL:0x1189a6b0
+DEL:0x1188c260
+DEL:0x1187e690
+DEL:0x11870240
+DEL:0x11862880
+DEL:0x11854430
+DEL:0x1183ffd8
+DEL:0x1183ff30
+DEL:0x11836ff0
+DEL:0x11828b10
+DEL:0x1181aa88
+DEL:0x1181a9e0
+DEL:0x11811c10
+DEL:0x118005d0
+DEL:0x116f4228
+DEL:0x116f4180
+DEL:0x116ebd90
+DEL:0x116eabe0
+DEL:0x116e2828
+DEL:0x116e2780
+DEL:0x116d9be0
+DEL:0x116d8af0
+DEL:0x116d02b8
+DEL:0x116d0210
+DEL:0x116cb670
+DEL:0x116ca580
+DEL:0x116c1d48
+DEL:0x116c1ca0
+DEL:0x116bd100
+DEL:0x116bc010
+DEL:0x116b26f0
+DEL:0x116b1600
+DEL:0x116a8dc8
+DEL:0x116a8d20
+DEL:0x116a4180
+DEL:0x116a3090
+DEL:0x1169a858
+DEL:0x1169a7b0
+DEL:0x11695c10
+DEL:0x11694a90
+DEL:0x1168c0b8
+DEL:0x1168c010
+DEL:0x11687470
+DEL:0x11686380
+DEL:0x1167d7d0
+DEL:0x1167c6e0
+DEL:0x11674478
+DEL:0x116743d0
+DEL:0x1166c0e0
+DEL:0x1166afb0
+DEL:0x11662400
+DEL:0x11661280
+DEL:0x11658e68
+DEL:0x11658dc0
+DEL:0x11650b80
+DEL:0x1164fa70
+DEL:0x1163ff10
+DEL:0x1163eda0
+DEL:0x1162f240
+DEL:0x1162e0d0
+DEL:0x1161fbd8
+DEL:0x1161fb30
+DEL:0x116150a0
+DEL:0x11614040
+DEL:0x116044e0
+DEL:0x11603450
+DEL:0x10befa20
+DEL:0x10bee8b0
+DEL:0x10bded50
+DEL:0x10bddbe0
+DEL:0x10bce080
+DEL:0x10bccf10
+DEL:0x10bbbc78
+DEL:0x10bbbbd0
+DEL:0x10bb0f40
+DEL:0x10bafdd0
+DEL:0x10b9b6b8
+DEL:0x10b9b610
+DEL:0x10b90980
+DEL:0x10b8f780
+DEL:0x10b7e4e8
+DEL:0x10b7e440
+DEL:0x10b737b0
+DEL:0x10b72500
+DEL:0x10b71fa0
+DEL:0x10b71a20
+DEL:0x10b652b0
+DEL:0x10b640d0
+DEL:0x10b59170
+DEL:0x10b57ea0
+(ext/3dengine/anim_mesh_data.cc:124:virtual AnimMeshData::~AnimMeshData()):data/models/sheep.anim
+DEL:0xc18128
+DEL:0xc17e00
+DEL:0x10b3afb0
+DEL:0x10b39c40
+DEL:0x10b39650
+DEL:0xef513a0
+DEL:0x10b38d38
+DEL:0x10b38c90
+DEL:0x10b0ee98
+DEL:0x10b0edf0
+DEL:0x10b07650
+DEL:0xefeca30
+DEL:0xefec2e0
+DEL:0xefebca8
+DEL:0xefebc00
+DEL:0xefa28b8
+DEL:0xefa2810
+DEL:0xef80720
+DEL:0x97c000
+DEL:0x960c00
+DEL:0x95f400
+DEL:0x95ac00
+DEL:0x948400
+DEL:0x955c00
+DEL:0x94ea00
+DEL:0x936400
+DEL:0x936000
+DEL:0x903800
+DEL:0xc50ecf4
+DEL:0xc50eca0
+DEL:0xc5121f0
+DEL:0xc50d644
+DEL:0xc50d5f0
+DEL:0xc50d750
+DEL:0xc5107c4
+DEL:0xc510770
+DEL:0xef60cb0
+DEL:0xc50e604
+DEL:0xc50e5b0
+DEL:0xc51ba10
+DEL:0xef60884
+DEL:0xef60830
+DEL:0xef64c80
+DEL:0xc50d254
+DEL:0xc50d200
+DEL:0xc514f90
+DEL:0xc512fd4
+DEL:0xc512f80
+DEL:0xc518360
+DEL:0xc514804
+DEL:0xc5147b0
+DEL:0xc516ba0
+DEL:0xef5c464
+DEL:0xef5c410
+DEL:0xef5b800
+DEL:0xef653d4
+DEL:0xef65380
+DEL:0xef5da30
+DEL:0xef648d4
+DEL:0xef64880
+DEL:0xc518600
+DEL:0xef64b14
+DEL:0xef64ac0
+DEL:0xef649c0
+DEL:0xef64534
+DEL:0xef644e0
+DEL:0xef643e0
+DEL:0xef634b4
+DEL:0xef63460
+DEL:0xef63360
+DEL:0xef64774
+DEL:0xef64720
+DEL:0xef64620
+DEL:0xef61da4
+DEL:0xef61d50
+DEL:0xef61c50
+DEL:0xef61fe4
+DEL:0xef61f90
+DEL:0xef61e90
+DEL:0xef62224
+DEL:0xef621d0
+DEL:0xef620d0
+DEL:0xef62464
+DEL:0xef62410
+DEL:0xef62310
+DEL:0xef61804
+DEL:0xef617b0
+DEL:0xef609c0
+DEL:0xef626a4
+DEL:0xef62650
+DEL:0xef62550
+DEL:0xef5d4e4
+DEL:0xef5d490
+DEL:0xef5eb90
+DEL:0xef5d7b4
+DEL:0xef5d760
+DEL:0xef5d600
+DEL:0xef5d2d4
+DEL:0xef5d280
+DEL:0xef5d140
+DEL:0xef5a7f4
+DEL:0xef5a7a0
+DEL:0xef5a640
+DEL:0xef5abb4
+DEL:0xef5ab60
+DEL:0xef5aa00
+DEL:0xc51cb34
+DEL:0xc51cae0
+DEL:0xc51c9e0
+DEL:0xc511544
+DEL:0xc5114f0
+DEL:0xef5a150
+DEL:0xef5a344
+DEL:0xef5a2f0
+DEL:0xc5116f0
+DEL:0xc514d64
+DEL:0xc514d10
+DEL:0xc514af0
+DEL:0xc518974
+DEL:0xc518920
+DEL:0xc518820
+DEL:0xc518cc4
+DEL:0xc518c70
+DEL:0xc518af0
+DEL:0xc51d304
+DEL:0xc51d2b0
+DEL:0xc51c2d0
+DEL:0xc51cde4
+DEL:0xc51cd90
+DEL:0xc51d410
+DEL:0xc51f384
+DEL:0xc51f330
+DEL:0xc519860
+DEL:0xc51e934
+DEL:0xc51e8e0
+DEL:0xc51e7e0
+DEL:0xc51ed84
+DEL:0xc51ed30
+DEL:0xc51f1b0
+DEL:0xc51d594
+DEL:0xc51d540
+DEL:0xc51ea70
+DEL:0xc520394
+DEL:0xc520340
+DEL:0xc51ebe0
+DEL:0xc520b34
+DEL:0xc520ae0
+DEL:0xc5100d0
+DEL:0xef5e2b4
+DEL:0xef5e260
+DEL:0xc510230
+DEL:0xc515eb4
+DEL:0xc515e60
+DEL:0xc515d60
+DEL:0xc51d8a4
+DEL:0xc51d850
+DEL:0xc515fe0
+DEL:0xef597b4
+DEL:0xef59760
+DEL:0xc511d00
+DEL:0xc51d014
+DEL:0xc51cfc0
+DEL:0xef598a0
+DEL:0xef5b014
+DEL:0xef5afc0
+DEL:0xef5aea0
+DEL:0xef5b214
+DEL:0xef5b1c0
+DEL:0xef630b0
+DEL:0xef63dd4
+DEL:0xef63d80
+DEL:0xef5b300
+DEL:0xef64034
+DEL:0xef63fe0
+DEL:0xef63ec0
+DEL:0xef64234
+DEL:0xef641e0
+DEL:0xc50e750
+DEL:0xc5211e4
+DEL:0xc521190
+DEL:0xc519e10
+DEL:0xc520574
+DEL:0xc520520
+DEL:0xc51e5c0
+DEL:0xc51feb4
+DEL:0xc51fe60
+DEL:0xc520670
+DEL:0xc519584
+DEL:0xc519530
+DEL:0xc516270
+DEL:0xc511874
+DEL:0xc511820
+DEL:0xc513340
+DEL:0xef58f74
+DEL:0xef58f20
+DEL:0xc511960
+DEL:0xc512724
+DEL:0xc5126d0
+DEL:0xef590c0
+DEL:0xef5bec4
+DEL:0xef5be70
+DEL:0xc511030
+DEL:0xc510e24
+DEL:0xc510dd0
+DEL:0xc510cd0
+DEL:0xef5c974
+DEL:0xef5c920
+DEL:0xef5c7c0
+DEL:0xef5c174
+DEL:0xef5c120
+DEL:0xef5bfc0
+DEL:0xef5de14
+DEL:0xef5ddc0
+DEL:0xef5f4a0
+DEL:0xef5e124
+DEL:0xef5e0d0
+DEL:0xef5df50
+DEL:0xef5f904
+DEL:0xef5f8b0
+DEL:0xef61aa0
+DEL:0xc50c550
+DEL:0xc50c514
+DEL:0xc50c4d0
+DEL:0x83ea00
+DEL:0x83e6d4
+DEL:0x83e400
+DEL:0xc240cb0
+DEL:0xc235e60
+DEL:0xc22aee0
+DEL:0xc21f850
+DEL:0xc28d7a0
+DEL:0xc2699f0
+DEL:0x119ac280
+DEL:0xef705f0
+DEL:0x855400
+DEL:0xd523f0
+DEL:0xd523cc
+DEL:0xd52000
+DEL:0x859c00
+DEL:0x859400
+DEL:0x89cbf0
+DEL:0x89cbcc
+DEL:0x89c800
+DEL:0x845000
+DEL:0xef6c830
+DEL:0xc22eaa0
+DEL:0xc23aa30
+DEL:0xef7bac0

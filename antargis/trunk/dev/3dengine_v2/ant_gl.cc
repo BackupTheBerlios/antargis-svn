@@ -1,9 +1,10 @@
 #include <iostream>
-#include <SDL.h>
-#include <SDL_opengl.h>
 
 #include "ant_gl.h"
 #include "ant_sdl.h"
+
+#include <SDL.h>
+#include <SDL_opengl.h>
 
 AntGL::AntGL()
   {
@@ -52,6 +53,29 @@ void AntGL::initVideoMode(int w,int h,bool fs)
 
 
     SDL_WM_SetCaption("Antargis","Antargis");
+    
+    
+    
+    /*
+    // Enable smooth shading 
+    glShadeModel( GL_SMOOTH );
+
+    // Set the background black 
+    glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+
+    // Depth buffer setup 
+    glClearDepth( 1.0f );
+
+    // Enables Depth Testing 
+    glEnable( GL_DEPTH_TEST );
+
+    // The Type Of Depth Test To Do 
+    glDepthFunc( GL_LEQUAL );
+
+    // Really Nice Perspective Calculations 
+    glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
+    */
+    
   }
 
 void AntGL::clearBuffer()

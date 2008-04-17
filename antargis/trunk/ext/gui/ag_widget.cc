@@ -133,6 +133,12 @@ class MWidgetSet:public std::set<AGWidget*>
       if(getAllWidgets())
         getAllWidgets()->erase(this);
     }
+  
+  std::list<AGWidget*> AGWidget::getChildren()
+    {
+      return mChildren;
+    }
+
 
   void AGWidget::removeChild(AGWidget *w)
     {

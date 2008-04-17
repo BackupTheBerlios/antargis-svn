@@ -1,6 +1,14 @@
 #include <ag_vdebug.h>
 #include <ag_video.h>
 
+#include <SDL_opengl.h>
+
+void checkGLReal(const std::string &pString)
+  {
+    agAssertGL(pString);
+  }
+
+
 void agAssertGL(std::string s)
   {
     if(opengl())

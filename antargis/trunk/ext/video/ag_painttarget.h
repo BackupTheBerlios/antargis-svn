@@ -56,6 +56,8 @@ class AGEXPORT AGPaintTarget:public AGRubyObject
   virtual void drawGradientAlpha(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
   virtual void drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr) MSTUB
 
+  virtual void setLineWidth(float w) MSTUB
+  
   virtual void tile(const AGTexture &pSource,const AGRect2 &pTarget, const AGColor &pColor) MSTUB
    
   virtual AGRect2 getRect() const

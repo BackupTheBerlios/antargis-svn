@@ -545,6 +545,11 @@ void AGPainter::drawCircle(const AGVector2 &p,float rad,const AGColor &color)
         }
   }
 
+void AGPainter::setLineWidth(float w)
+  {
+    mTarget->setLineWidth(w);
+  }
+
 void AGPainter::pushMatrix()
   {
     ps.push_back(mCurrent);

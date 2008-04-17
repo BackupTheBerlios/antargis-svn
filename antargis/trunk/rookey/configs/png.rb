@@ -5,7 +5,8 @@ module Rookey
   class PNGConfig<RubyConfig
     provides :png
     needs :compiler
-    
+    needs :z
+        
     def run(config)
       checkLibrary(config,"png","png_get_io_ptr")
     end   

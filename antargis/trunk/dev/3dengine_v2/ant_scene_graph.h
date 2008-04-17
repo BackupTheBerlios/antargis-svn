@@ -15,7 +15,7 @@ public:
   virtual void add(AntSceneNode *pNode);
   virtual void erase(AntSceneNode *pNode);
   
-  const std::set<AntSceneNode*> getAllNodes() const;
+  const std::set<AntSceneNode*> &getAllNodes() const;
   
   virtual void render(const AntCamera &pCamera,const AntRenderMode &pRenderMode);
 

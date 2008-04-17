@@ -136,6 +136,7 @@ class AGEXPORT AGSurface:public AGPaintTarget
 
   friend class AGFontEngine;
   friend class AGSDLScreen;
+  friend class AntTextureData;
   size_t mVersion;
 
   static AGDecryptor *mDecryptor;  

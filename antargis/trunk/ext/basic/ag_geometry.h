@@ -440,6 +440,8 @@ class AGEXPORT AGRect2
   AGVector2 getV1() const;
   AGVector2 getV01() const;
   AGVector2 getV10() const;
+  
+  AGVector2 getMiddle() const;
 
   AGRect2 shrink(float f) const;
   AGRect2 grow(float f) const;
