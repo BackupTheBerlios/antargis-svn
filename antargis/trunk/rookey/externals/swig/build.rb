@@ -27,7 +27,11 @@ end
 
 def unzipTar(file)
   puts "Unzipping #{file}"
-  system("tar xvfz #{file} >/dev/null")
+  if file=~/tar.gz$/
+    system("tar xvfz #{file} >/dev/null")
+  else
+    system("unzip #{file}")
+  end
   puts "Ready."
 end
 
