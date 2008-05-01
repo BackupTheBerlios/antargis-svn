@@ -101,7 +101,6 @@ void general_markfunc(void *ptr)
   {
     if(!ptr)
       {
-        // FIXME: add logging!!!
         std::cerr<<("WARNING: a ptr==0 was given in general_markfunc!")<<std::endl;
         return; // ignore this !
       }

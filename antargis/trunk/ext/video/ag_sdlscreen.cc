@@ -51,20 +51,15 @@ void AGSDLScreen::update(const std::list<AGRect2> &rs)
     CTRACE;
     SDL_Rect *nrs=new SDL_Rect[rs.size()];
 
-    cdebug("RS:"<<rs.size());
-
     AGRect2 scr=getRect();
     size_t j=0;
     for(std::list<AGRect2>::const_iterator i=rs.begin();i!=rs.end();i++,j++)
       {
         AGRect2 n=scr.intersect(*i);
-        //      #warning "FIXME: 
         nrs[j].x=(Sint16)n.x();
         nrs[j].y=(Sint16)n.y();
         nrs[j].w=(Uint16)n.w();
         nrs[j].h=(Uint16)n.h();
-        cdebug(*i);
-        ///      #error FIXME
       }
 
     SDL_UpdateRects(s,rs.size(),nrs);

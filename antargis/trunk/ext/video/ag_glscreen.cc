@@ -304,6 +304,15 @@ void AGGLScreen::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRe
     AGGLPainter::fillRects(pRects);
   }
 
+void AGGLScreen::fillPoly(const std::vector<AGVector2> &pPoly,const AGColor &pColor)
+  {
+    AGGLPainter::fillPoly(pPoly,pColor);
+  }
+void AGGLScreen::drawPoly(const std::vector<AGVector2> &pPoly,const AGColor &pColor)
+  {
+    AGGLPainter::drawPoly(pPoly,pColor,mLineWidth);
+  }
+
 
 AGRect2 AGGLScreen::getRect() const
 {

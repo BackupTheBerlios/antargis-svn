@@ -262,7 +262,8 @@ void AGEditLine::setText(const AGStringUtf8 &s)
 AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   AGWidget(pParent,pRect),mCursorTime(0),mCursorLast(SDL_GetTicks()),
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
-  mMultiLine(true),mWrapLines(true)
+  mMultiLine(true),mWrapLines(true),
+  sigModified(this,"sigModified")
   {
     mInserting=true;
     mMaxLength=-1;
@@ -307,9 +308,7 @@ void AGEdit::draw(AGPainter &p)
 
     std::list<AGEditLine>::iterator i=mLines.begin();
 
-    //  cdebug(pRect);
-    //  cdebug("getRect:"<<getRect());
-    AGRect2 mr(getRect());//pRect.project(getRect()));
+    AGRect2 mr(getRect());
 
     AGColor cursorC=AGColor(0,0,0,0x7f);
     if(mShowCursor) // && opengl())
@@ -401,6 +400,168 @@ bool AGEdit::eventKeyUp(AGEvent *m)
       }
     return false;
   }
+
+
+bool AGEdit::processKey(SDLKey k,Uint16 unicode)
+  {
+    AGStringUtf8 ins;
+    bool doInsert=false;
+    bool used=false;
+    if(k==SDLK_RIGHT)
+      {
+        getActLine();
+        if(actLine->length()>mCx)
+          mCx++;
+        else if(mCy<(int)mLines.size()-1)
+          {
+            mCy++;
+            mCx=0;
+          }
+        return true;
+      }
+    else if(k==SDLK_LEFT)
+      {
+        if(mCx>0)
+          mCx--;
+        else if(mCy>0)
+          {
+            mCy--;
+            getActLine();
+            mCx=actLine->length();
+          }
+
+        return true;
+      }
+    else if(k==SDLK_UP && mMultiLine)
+      {
+        if(mCy>0)
+          mCy--;
+        getActLine();
+        if(mCx>=actLine->length())
+          mCx=actLine->length();
+        return true;
+      }
+    else if(k==SDLK_DOWN && mMultiLine)
+      {
+        if((int)mLines.size()>mCy+1)
+          mCy++;
+        getActLine();
+        if(mCx>=actLine->length())
+          mCx=actLine->length();
+        return true;
+      }
+    else if(k==SDLK_SPACE)
+      {
+        doInsert=true;
+        ins=" ";
+      }
+    else if(k==SDLK_BACKSPACE)
+      {
+        if(mCx>0)
+          {
+            doDelete(mCx-1);
+            mCx--;
+          }
+        else if(mCy>0 && mMultiLine)
+          {
+            mCy--;
+            getActLine();
+            mCx=actLine->length();
+            if(!actLine->hardEnd())
+              {
+                // delete last char
+                doDelete(actLine->length()-1);
+                mCx--;
+              }
+            mergeLine(mCy);
+          }
+        checkWrap();
+        used=true;
+      }
+    else if(k==SDLK_DELETE)
+      {
+        doDelete(mCx);
+        checkWrap();
+        used=true;
+      }
+    else if(k==SDLK_RETURN)
+      {
+        if(mMultiLine) 
+          {
+            getActLine();
+            AGEditLine l=actLine->split(mCx);
+            l.setAlign(mAlign);
+            l.setVAlign(mVAlign);
+            mCx=0;
+            mCy++;
+            insertLine(l);
+            checkWrap();
+          }
+        used=true;
+      }
+    else if(k==SDLK_END)
+      {
+        getActLine();
+        mCx=actLine->length();
+        used=true;
+      }
+    else if(k==SDLK_HOME)
+      {
+        mCx=0;
+        used=true;
+      }
+
+    else if(k==SDLK_LSHIFT)
+      {
+        used=true;
+        mLShift=true;
+      }
+    else if(k==SDLK_RSHIFT)
+      {
+        used=true;
+        mRShift=true;
+      }
+    else if(k==SDLK_LCTRL)
+      {
+        used=true;
+        mLCtrl=true;
+      }
+    else if(k==SDLK_RCTRL)
+      {
+        used=true;
+        mRCtrl=true;
+      }
+    else if(k==SDLK_LALT)
+      {
+        cdebug("lalt");
+        mLAlt=true;
+      }
+    else if(k==SDLK_RALT)
+      {
+        cdebug("ralt");
+        mRAlt=true;
+      }
+    else if((unicode&0xFFF8)!=0 || (k>=SDLK_0 && k<=SDLK_9) || (k>=SDLK_a && k<=SDLK_z))
+      {
+        ins=AGStringUtf8(unicode2Utf8(unicode));
+        cdebug((int)ins.toString()[0]<<"  "<<(int)ins.toString()[1]);
+
+        doInsert=true;
+      }
+    cdebug("KEY:"<<SDL_GetKeyName(k)<<"  "<<k);
+
+    if(doInsert)
+      {
+        if(insert(ins))
+          mCx++;
+        checkWrap();
+        return true;
+      }
+    if(used)
+      return true;
+    
+  }
+
 bool AGEdit::eventKeyDown(AGEvent *m)
   {
     if(!mMutable)
@@ -412,161 +573,15 @@ bool AGEdit::eventKeyDown(AGEvent *m)
       {
         SDLKey k=m->getKey();
         Uint16 unicode=m->getUnicode();
-        AGStringUtf8 ins;
-        bool doInsert=false;
-        bool used=false;
-        if(k==SDLK_RIGHT)
+        
+        bool result=processKey(k,unicode);
+        if(result)
           {
-            getActLine();
-            if(actLine->length()>mCx)
-              mCx++;
-            else if(mCy<(int)mLines.size()-1)
-              {
-                mCy++;
-                mCx=0;
-              }
-            return true;
+            std::cout<<"MODIFIED"<<std::endl;
+            sigModified(m);
           }
-        else if(k==SDLK_LEFT)
-          {
-            if(mCx>0)
-              mCx--;
-            else if(mCy>0)
-              {
-                mCy--;
-                getActLine();
-                mCx=actLine->length();
-              }
-
-            return true;
-          }
-        else if(k==SDLK_UP && mMultiLine)
-          {
-            if(mCy>0)
-              mCy--;
-            getActLine();
-            if(mCx>=actLine->length())
-              mCx=actLine->length();
-            return true;
-          }
-        else if(k==SDLK_DOWN && mMultiLine)
-          {
-            if((int)mLines.size()>mCy+1)
-              mCy++;
-            getActLine();
-            if(mCx>=actLine->length())
-              mCx=actLine->length();
-            return true;
-          }
-        else if(k==SDLK_SPACE)
-          {
-            doInsert=true;
-            ins=" ";
-          }
-        else if(k==SDLK_BACKSPACE)
-          {
-            if(mCx>0)
-              {
-                doDelete(mCx-1);
-                mCx--;
-              }
-            else if(mCy>0 && mMultiLine)
-              {
-                mCy--;
-                getActLine();
-                mCx=actLine->length();
-                if(!actLine->hardEnd())
-                  {
-                    // delete last char
-                    doDelete(actLine->length()-1);
-                    mCx--;
-                  }
-                mergeLine(mCy);
-              }
-            checkWrap();
-            used=true;
-          }
-        else if(k==SDLK_DELETE)
-          {
-            doDelete(mCx);
-            checkWrap();
-            used=true;
-          }
-        else if(k==SDLK_RETURN)
-          {
-            if(mMultiLine) 
-              {
-                getActLine();
-                AGEditLine l=actLine->split(mCx);
-                l.setAlign(mAlign);
-                l.setVAlign(mVAlign);
-                mCx=0;
-                mCy++;
-                insertLine(l);
-                checkWrap();
-              }
-            used=true;
-          }
-        else if(k==SDLK_END)
-          {
-            getActLine();
-            mCx=actLine->length();
-            used=true;
-          }
-        else if(k==SDLK_HOME)
-          {
-            mCx=0;
-            used=true;
-          }
-
-        else if(k==SDLK_LSHIFT)
-          {
-            used=true;
-            mLShift=true;
-          }
-        else if(k==SDLK_RSHIFT)
-          {
-            used=true;
-            mRShift=true;
-          }
-        else if(k==SDLK_LCTRL)
-          {
-            used=true;
-            mLCtrl=true;
-          }
-        else if(k==SDLK_RCTRL)
-          {
-            used=true;
-            mRCtrl=true;
-          }
-        else if(k==SDLK_LALT)
-          {
-            cdebug("lalt");
-            mLAlt=true;
-          }
-        else if(k==SDLK_RALT)
-          {
-            cdebug("ralt");
-            mRAlt=true;
-          }
-        else if((unicode&0xFFF8)!=0 || (k>=SDLK_0 && k<=SDLK_9) || (k>=SDLK_a && k<=SDLK_z))
-          {
-            ins=AGStringUtf8(unicode2Utf8(unicode));
-            cdebug((int)ins.toString()[0]<<"  "<<(int)ins.toString()[1]);
-
-            doInsert=true;
-          }
-        cdebug("KEY:"<<SDL_GetKeyName(k)<<"  "<<k);
-
-        if(doInsert)
-          {
-            if(insert(ins))
-              mCx++;
-            checkWrap();
-            return true;
-          }
-        if(used)
-          return true;
+        
+        return result;
       }
     return false;
   }

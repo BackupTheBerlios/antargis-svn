@@ -32,9 +32,6 @@
  *
 */
 
-
-//FIXME: add quadtree
-
 template<class T>
 class QuadTree;
 
@@ -69,7 +66,6 @@ class AGEXPORT AntMap:public HeightMap
   AntEntity *getByName(const AGString &pName);
 
   AntEntity *getNext(AntEntity *me,const AGString &pType,size_t atLeast=0);
-//  std::vector<AntEntityPtr> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
   std::vector<PAntEntity> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
 
   void setHeuristic(HeuristicFunction *pFunction);

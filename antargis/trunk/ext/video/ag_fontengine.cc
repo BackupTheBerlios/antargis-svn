@@ -49,7 +49,6 @@ bool fontEngineInited=false;
 
 TTF_Font *getFont(std::string s,int i)
   {
-    TRACE;
     FontInfo info;
     info.pName=s;
     info.size=i;

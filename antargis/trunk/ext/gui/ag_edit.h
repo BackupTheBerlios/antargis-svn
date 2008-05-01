@@ -121,6 +121,8 @@ class AGEXPORT AGEdit:public AGWidget
   void setInsert(bool pInsert);
 
   void setCursor(int p);
+  
+  AGSignal sigModified;
 
  private:
 
@@ -128,6 +130,7 @@ class AGEXPORT AGEdit:public AGWidget
   void insertLine(AGEditLine l);
   void mergeLine(int p);
   void checkWrap();
+  bool processKey(SDLKey k,Uint16 unicode);
 
   std::list<AGEditLine> mLines;
   AGEditLine *actLine;
@@ -162,7 +165,5 @@ class AGEXPORT AGEdit:public AGWidget
 
   int mMaxLength;
 };
-
-//AGEdit &toAGEdit(AGWidget &w);
 
 #endif

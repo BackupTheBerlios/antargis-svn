@@ -39,6 +39,9 @@ namespace AGGLPainter
   
   void fillRect(const AGRect2 &pRect,const AGColor &c);
   void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
+  void fillPoly(const std::vector<AGVector2> &pVecs,const AGColor &pColor);
+
+  void drawPoly(const std::vector<AGVector2> &pVecs,const AGColor &pColor,float pWidth);
 
   void drawBorder(const AGRect2& rect,int W, const AGColor& c1, const AGColor& c2);
 

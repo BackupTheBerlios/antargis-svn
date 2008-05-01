@@ -25,7 +25,8 @@
 #include <map>
 #include <list>
 #include <SDL.h>
-#include "ag_geometry.h"
+#include <ag_base.h>
+#include <ag_geometry.h>
 #include "ag_screen.h"
 #include "ag_gl.h"
 
@@ -34,6 +35,7 @@
 class AGColor;
 
 typedef GLuint TextureID;
+
 
 class AGEXPORT AGGLObject
 {
@@ -65,6 +67,8 @@ class AGEXPORT AGGLScreen:public AGScreen
 
   virtual void fillRect(const AGRect2 &pRect,const AGColor &c);
   virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects);
+  virtual void fillPoly(const std::vector<AGVector2> &pPoly,const AGColor &pColor);
+  virtual void drawPoly(const std::vector<AGVector2> &pPoly,const AGColor &pColor);
   virtual void drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c);
 
   virtual AGRect2 getRect() const;

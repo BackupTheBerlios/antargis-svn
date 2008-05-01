@@ -33,6 +33,49 @@ namespace AGGLPainter
     {
       glColor4f(c.r/255.0,c.g/255.0,c.b/255.0,c.a/255.0);
     }
+  
+  void fillPoly(const std::vector<AGVector2> &pVecs,const AGColor &pColor)
+    {
+      STACKTRACE;
+
+      AGRenderContext context;
+      context.setColor(pColor);
+      context.setCulling(false);
+      context.setAlpha(0,GL_NONE);
+      context.setDepthTest(false);
+      context.begin();
+
+      // turned
+      glBegin(GL_POLYGON);
+      for(std::vector<AGVector2>::const_iterator i=pVecs.begin();i!=pVecs.end();i++)
+        {
+          glVertex2fv(*i);
+        }
+      glEnd();
+      
+    } 
+  
+  void drawPoly(const std::vector<AGVector2> &pVecs,const AGColor &pColor,float pWidth)
+      {
+        STACKTRACE;
+
+        AGRenderContext context;
+        context.setColor(pColor);
+        context.setCulling(false);
+        context.setAlpha(0,GL_NONE);
+        context.setDepthTest(false);
+        context.begin();
+        glLineWidth(pWidth);
+
+        // turned
+        glBegin(GL_LINE_LOOP);
+        for(std::vector<AGVector2>::const_iterator i=pVecs.begin();i!=pVecs.end();i++)
+          {
+            glVertex2fv(*i);
+          }
+        glEnd();
+        
+      }
 
   void blit(const AGTexture &pSource,const AGRect2 &pRect,const AGRect2 &pSrc,const AGColor &pColor)
     {

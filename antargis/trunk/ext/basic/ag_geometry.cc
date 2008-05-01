@@ -671,6 +671,7 @@ AGMatrix3::AGMatrix3(float x,float y)
 
   }
 
+
 AGMatrix3 AGMatrix3::transposed() const
 {
   AGMatrix3 a;
@@ -947,8 +948,8 @@ std::vector<AGVector2> AGTriangle2::getNormals() const
 {
   std::vector<AGVector2> l;
   l.push_back((p[1]-p[0]).normalized().normal());
+  l.push_back((p[2]-p[0]).normalized().normal());
   l.push_back((p[2]-p[1]).normalized().normal());
-  l.push_back((p[0]-p[2]).normalized().normal());
   return l;
 }
 
@@ -964,11 +965,31 @@ std::vector<AGLine2> AGTriangle2::getLines() const
 bool AGTriangle2::contains(const AGVector2 &pp) const
 {
   std::vector<AGVector2> l=getNormals(); // BEWARE: dont' change the order in getNormals!!!
+cdebug(pp);
+  cdebug(l[0]);
+  cdebug(l[1]);
+  cdebug(l[2]);
+  
+  cdebug(p[0]);
+  cdebug(p[1]);
+  cdebug(p[2]);
+  
+  cdebug((pp-p[2])*l[0]);
+  cdebug((pp-p[0])*l[1]);
+  cdebug((pp-p[1])*l[2]);
+
 
   if(AGsign((pp-p[0])*l[0])==AGsign((p[2]-p[0])*l[0]))
-    if(AGsign((pp-p[1])*l[1])==AGsign((p[0]-p[1])*l[1]))
-      if(AGsign((pp-p[2])*l[2])==AGsign((p[1]-p[2])*l[2]))
+    if(AGsign((pp-p[0])*l[1])==AGsign((p[1]-p[0])*l[1]))
+      if(AGsign((pp-p[1])*l[2])==AGsign((p[0]-p[1])*l[2]))
         return true;
+  
+  /*
+  if(AGsign((pp-p[2])*l[0])==AGsign((p[2]-p[2])*l[0]))
+    if(AGsign((pp-p[0])*l[1])==AGsign((p[0]-p[0])*l[1]))
+      if(AGsign((pp-p[1])*l[2])==AGsign((p[1]-p[1])*l[2]))
+        return true;
+        */
   return false;
 }
 
@@ -1227,6 +1248,14 @@ AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y),v1(x+w,y+h)
   {
   }
+
+AGVector2 AGRect2::clip(const AGVector2 &v) const
+{
+  return AGVector2(std::max(std::min(v[0],v1[0]),v0[0]),
+      std::max(std::min(v[1],v1[1]),v0[1])
+      );
+}
+
 
 AGRect2 AGRect2::alignGrid() const
 {
@@ -1543,6 +1572,10 @@ bool AGRect2::collide(const AGRect2 &r) const
 AGRect2 AGRect2::operator+(const AGVector2 &v) const
 {
   return AGRect2(v0+v,v1+v);
+}
+AGRect2 AGRect2::operator-(const AGVector2 &v) const
+{
+  return AGRect2(v0-v,v1-v);
 }
 AGRect2 &AGRect2::operator+=(const AGVector2 &v)
 {

@@ -193,6 +193,7 @@ void AGTable::arrange()
   {
     CTRACE;
     int mx,my;
+    cdebug(getName());
 
     // first get the fixed sizes
     int fx,fy;
@@ -227,6 +228,31 @@ void AGTable::arrange()
           }
         mfx=std::max(mfx,fx);
       }
+    
+    // TODO: assign width's and heights for all fixed !!! 
+    for(mx=0;mx<w;mx++)
+      for(my=0;my<h;my++)
+        {
+          cdebug(mx<<":"<<my);
+          if(cols[mx].second)
+            {
+              AGWidget *wd=children[mx+my*w];
+              if(wd)
+                {
+                  wd->setWidth(cols[mx].first);
+                }
+            }
+          if(rows[my].second)
+            {
+              cdebug("fixed y:"<<my);
+              AGWidget *wd=children[mx+my*w];
+              if(wd)
+                {
+                  cdebug("setH:"<<wd<<typeid(*wd).name());
+                  wd->setHeight(rows[my].first);
+                }
+            }
+        }
 
     // assign width's and height's for all non-fixed
     for(mx=0;mx<w;mx++)
@@ -292,12 +318,14 @@ void AGTable::arrange()
 
 void AGTable::setWidth(float w)
   {
+    CTRACE;
     cdebug(w);
     AGWidget::setWidth(w);
     arrange();
   }
 void AGTable::setHeight(float w)
   {
+    CTRACE;
     AGWidget::setHeight(w);
     arrange();
   }
@@ -310,3 +338,22 @@ size_t AGTable::getColumns() const
 {
   return cols.size();
 }
+
+
+void AGTable::modifyColumn(size_t index,float w)
+  {
+    if(cols.size()>index)
+      {
+        cols[index].first=w;
+      }
+    arrange();
+  }
+void AGTable::modifyRow(size_t index,float w)
+  {
+    CTRACE;
+    if(rows.size()>index)
+      {
+        rows[index].first=w;
+      }
+    arrange();
+  }

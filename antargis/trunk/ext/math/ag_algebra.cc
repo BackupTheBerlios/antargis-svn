@@ -7,14 +7,14 @@
 
 AGMatrixN::AGMatrixN(size_t w,size_t h):m(w*h,0),
 mW(w),mH(h)
-{
-}
+  {
+  }
 
 AGMatrixN::AGMatrixN(const AGMatrixN &n):m(n.m),
 mW(n.mW),
 mH(n.mH)
-{
-}
+  {
+  }
 
 void AGMatrixN::set(size_t x,size_t y,float v)
   {
@@ -30,21 +30,33 @@ float AGMatrixN::get(size_t x,size_t y) const
 }
 
 AGMatrixN &AGMatrixN::operator*=(const AGMatrixN &p)
-{
-  assert(mW==p.mH);
-  AGMatrixN n(p.mW,mH);
-  for(size_t x=0;x<p.mW;x++)
-    for(size_t y=0;y<mH;y++)
-      {
-        float v=0;
-        for(size_t k=0;k<mW;k++)
-          v+=get(k,y)*p.get(x,k);
-        n.set(x,y,v);
-      }
-  *this=n;
-  return *this;
+  {
+    assert(mW==p.mH);
+    AGMatrixN n(p.mW,mH);
+    for(size_t x=0;x<p.mW;x++)
+      for(size_t y=0;y<mH;y++)
+        {
+          float v=0;
+          for(size_t k=0;k<mW;k++)
+            v+=get(k,y)*p.get(x,k);
+          n.set(x,y,v);
+        }
+    *this=n;
+    return *this;
+  }
 
-}
+
+AGMatrixN &AGMatrixN::operator+=(const AGMatrixN &p)
+  {
+    assert(mW==p.mW && mH==p.mH);
+    for(size_t x=0;x<p.mW;x++)
+      for(size_t y=0;y<mH;y++)
+        {
+          set(x,y,get(x,y)+p.get(x,y));
+        }
+    return *this;
+  }
+
 AGMatrixN AGMatrixN::operator*(const AGMatrixN &p) const
 {
   assert(mW==p.mH);
@@ -59,6 +71,16 @@ AGMatrixN AGMatrixN::operator*(const AGMatrixN &p) const
       }
   return n;
 }
+
+AGMatrixN AGMatrixN::operator*(float f) const
+{
+  AGMatrixN n(mW,mH);
+  for(size_t x=0;x<mW;x++)
+    for(size_t y=0;y<mH;y++)
+      n.set(x,y,get(x,y)*f);
+  return n;
+}
+
 
 AGMatrixN AGMatrixN::operator-(const AGMatrixN &p) const
 {
@@ -193,5 +215,71 @@ void AGMatrixN::swapCols(size_t a,size_t b)
         float t=get(a,y);
         set(a,y,get(b,y));
         set(b,y,t);
+      }
+  }
+
+size_t AGMatrixN::width() const
+{
+  return mW;
+}
+size_t AGMatrixN::height() const
+{
+  return mH;
+}
+
+AGMatrixN AGMatrixN::skipRow(size_t i) const
+{
+  assert(height()>1);
+  assert(i<height());
+  AGMatrixN n(width(),height()-1);
+
+  for(size_t x=0;x<width();x++)
+    {
+      for(size_t y=0;y<i;y++)
+        n.set(x,y,get(x,y));
+      for(size_t y=i+1;y<height();y++)
+        n.set(x,y-1,get(x,y));
+    }
+  return n;
+}
+AGMatrixN AGMatrixN::skipCol(size_t i) const
+{
+  assert(width()>1);
+  assert(i<width());
+  AGMatrixN n(width()-1,height());
+ 
+  for(size_t y=0;y<height();y++)
+    {
+      for(size_t x=0;x<i;x++)
+        n.set(x,y,get(x,y));
+      for(size_t x=i+1;x<width();x++)
+        n.set(x-1,y,get(x,y));
+    }
+  return n;
+}
+
+
+template<class T> float determinant(const T&t)
+  {
+    // FIXME: det for non-quad matrices ???
+    assert(t.width()==t.height());
+    if(t.width()>2)
+      {
+        AGMatrixN n(t.width()-1,t.height());
+        AGMatrixN l(t.skipCol(0));
+        float c;
+        // take always first row for reduction
+        for(size_t i=0;i<t.height();i++)
+          {
+            c=(i&1)?-1:1;
+            n+=t.skipRow(i)*t.get(0,i)*c;
+          }
+        return determinant(n);
+      }
+    else
+      {
+        assert(t.width()==2);
+        assert(t.height()==2);
+        return t.get(0,0)*t.get(1,1)-t.get(1,0)*t.get(0,1);
       }
   }

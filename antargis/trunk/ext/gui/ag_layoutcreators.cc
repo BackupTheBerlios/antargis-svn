@@ -14,6 +14,8 @@
 #include <ag_theme.h>
 #include <ag_window.h>
 #include <ag_screenwidget.h>
+#include <ag_cell.h>
+#include <ag_scrollingwidget.h>
 
 #include "ag_layoutfactory.h"
 
@@ -380,7 +382,7 @@ public:
 
   virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
     {
-      setResult(new AGWidget(pParent,pRect));
+      setResult(new AGCell(pParent,pRect));
     }
 };
 IMPLEMENT_COMPONENT_FACTORY(Cell);
@@ -490,6 +492,31 @@ public:
 IMPLEMENT_COMPONENT_FACTORY(ScreenWidget);
 
 
+
+
+// AGListBox creator
+class AGScrollingWidgetCreator:public AGLayoutCreator
+{
+public:
+  REGISTER_COMPONENT(AGScrollingWidget,"scrollingWidget")
+
+  virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+    {
+      CTRACE;
+      AGScrollingWidget *w;
+      setResult(w=new AGScrollingWidget(pParent,pRect));
+      AGRect2 r=pRect.origin();
+      AGString s=(pNode.get("clientRect"));
+      if(s.length()>0)
+        {
+          r=AGRect2(s);
+        }
+      w->setClientRect(r);
+    }
+};
+IMPLEMENT_COMPONENT_FACTORY(ScrollingWidget);
+
+
 void AGLayout::registerLayouts()
   {
     TRACE;
@@ -510,5 +537,6 @@ void AGLayout::registerLayouts()
     getLayoutFactory()->addCreator("radio",new AGRadioLayoutCreator);
     //  getLayoutFactory()->addCreator("miniMap",new AGMiniMapLayoutCreator);
     getLayoutFactory()->addCreator("screenWidget",new AGScreenWidgetLayoutCreator);
+    getLayoutFactory()->addCreator("scrollingWidget", new AGScrollingWidgetCreator);
 
   }

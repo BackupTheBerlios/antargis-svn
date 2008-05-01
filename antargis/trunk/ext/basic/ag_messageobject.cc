@@ -27,8 +27,8 @@ SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 
 // AGEvent
 AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e)
-{
-}
+  {
+  }
 AGEvent::~AGEvent()
   {
   }
@@ -175,21 +175,21 @@ AGCPPListener::~AGCPPListener()
 // AGSignal
 
 AGSignal::AGSignal():mCaller(0)
-{
-}
+  {
+  }
 
 //AGSignal::AGSignal(const AGSignal &s):mListeners(s.mListeners
 
 
 
 AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
-{
-}
+  {
+  }
 
 AGSignal::AGSignal(AGMessageObject *pCaller,const AGString &pName):
   mName(pName),mCaller(pCaller)
-  {
-  }
+    {
+    }
 
 AGSignal::~AGSignal()
   {
@@ -255,9 +255,6 @@ void AGSignal::disconnect(AGCPPListener *pListener)
 bool AGSignal::signal(AGEvent *m)
   {
     CTRACE;
-    //cdebug("event:"<<*m);
-    //  cdebug("listeners:"<<mListeners.size());
-    // cdebug("simplelist:"<<mSimpleListeners.size());
     m->setName(mName);
     std::set<AGListener*>::iterator i=mListeners.begin();
     bool value=false;
@@ -279,10 +276,10 @@ bool AGSignal::signal(AGEvent *m)
   }
 
 bool AGSignal::operator()(AGEvent *m)
-{
-  m->setName(mName);
-  return signal(m);
-}
+  {
+    m->setName(mName);
+    return signal(m);
+  }
 
 // AGMessageObject
 
@@ -301,8 +298,8 @@ AGMessageObject::AGMessageObject():
   sigSysWM(this,"sigSysWM"),
   sigVideoResize(this,"sigVideoResize"),
   mCanReceiveMessages(true)
-  {
-  }
+    {
+    }
 
 AGMessageObject::~AGMessageObject()
   {
@@ -488,7 +485,7 @@ AGString toString(SDL_Event *pEvent)
     if(pEvent)
       {
         switch(pEvent->type)
-        {
+          {
         case SDL_ACTIVEEVENT:
           os<<"SDL_ACTIVEEVENT:"<<(int)pEvent->active.gain<<":"<<(int)pEvent->active.state;
           break;
@@ -538,7 +535,7 @@ AGString toString(SDL_Event *pEvent)
           dbout(1,"UNKNOWN SDL_EVENT:"<<pEvent->type);
           os<<"SDL_NOEVENT";
           break;
-        }
+          }
         if(os.str().length())
           return os.str();
 

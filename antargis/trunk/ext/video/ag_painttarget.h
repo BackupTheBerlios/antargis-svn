@@ -49,6 +49,9 @@ class AGEXPORT AGPaintTarget:public AGRubyObject
   virtual void fillRect(const AGRect2 &pr,const AGColor &c) MSTUB
 
   virtual void fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pr) MSTUB
+  
+  virtual void fillPoly(const std::vector<AGVector2>&pPoly,const AGColor &pColor) MSTUB
+  virtual void drawPoly(const std::vector<AGVector2>&pPoly,const AGColor &pColor) MSTUB
    
   virtual void blit(const AGTexture &pSource,const std::vector<std::pair<AGRect2,AGRect2> > &pSrcDestRects,const AGColor &pColor)
     MSTUB

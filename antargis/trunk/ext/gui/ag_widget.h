@@ -23,8 +23,10 @@
 #ifndef AG_WIDGET_H
 #define AG_WIDGET_H
 
+#include "ag_base.h"
 #include "ag_geometry.h"
 #include "ag_messageobject.h"
+#include "ag_projection.h"
 
 #include <list>
 
@@ -76,6 +78,8 @@ class AGApplication;
 class AGEXPORT AGWidget:public AGMessageObject
 {
 public:
+  typedef std::list<AGWidget*> Children;
+  
   AGWidget(AGWidget *pParent,const AGRect2 &r);
   virtual ~AGWidget();
 
@@ -87,6 +91,8 @@ public:
   virtual void draw(AGPainter &p);
   virtual void drawAfter(AGPainter &p);
   virtual void drawAll(AGPainter &p);
+  virtual void drawChild(AGPainter &p,AGWidget *pWidget);
+  
   AGRect2 getRect() const;
   virtual AGRect2 getClientRect() const;
   void setRect(const AGRect2 &pRect);
@@ -180,6 +186,7 @@ public:
 
   AGRect2 getScreenRect() const;
   AGVector2 getScreenPosition() const;
+  
   AGVector2 fromScreen(const AGVector2 &p) const;
 
   // focus
@@ -216,8 +223,23 @@ public:
   void clearChangeRects();
   
   std::list<AGWidget*> getChildren();
+  
+  bool hovered() const;
+  
+  void setClient(const AGRect2 &pWorld,const AGProjection2D &pProj);
+  
+  
+  virtual bool eventMouseButtonDownClipped(AGEvent *pEvent,const AGVector2 &pPosition);
+  virtual bool eventMouseButtonUpClipped(AGEvent *pEvent,const AGVector2 &pPosition);
+  virtual bool eventMouseMotionClipped(AGEvent *pEvent,const AGVector2 &pPosition);
+protected:
+  
 
 private:
+  
+  AGRect2 getChildRect(const AGRect2 &pRect) const;
+  bool containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const;
+  
 
   AGApplication *mApp;
 
@@ -235,7 +257,10 @@ private:
 
   std::list<AGWidget*> mToClear;
 
-  AGRect2 mr;
+  AGRect2 mr,mClientWorld;
+  AGProjection2D mClientProj;
+  bool mUseClientRect;
+  
   AGWidget *mParent;
   bool mChildrenEventFirst;
   bool mChildrenDrawFirst;
@@ -264,8 +289,6 @@ protected:
   std::list<AGWidget*> mChildren;
 
 };
-
-//AGWidget *toAGWidget(AGMessageObject *o);
 
 AGEXPORT void setNewClippingTechnique(bool f);
 AGEXPORT bool getNewClippingTechnique();

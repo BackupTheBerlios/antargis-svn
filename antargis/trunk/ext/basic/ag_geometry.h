@@ -423,6 +423,7 @@ class AGEXPORT AGRect2
   void include(const AGVector2 &v);
 
   AGRect2 operator+(const AGVector2 &v) const;
+  AGRect2 operator-(const AGVector2 &v) const;
   AGRect2 &operator+=(const AGVector2 &v);
   AGRect2 &operator-=(const AGVector2 &v);
 
@@ -470,6 +471,8 @@ class AGEXPORT AGRect2
   float y0() const;
   float x1() const;
   float y1() const;
+  
+  AGVector2 clip(const AGVector2 &v) const;
 
   AGRect2 origin() const;
 

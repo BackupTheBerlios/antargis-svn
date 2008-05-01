@@ -1,12 +1,62 @@
 <?xml version="1.0"?>
 <layout name="CampaignEditorLayout">
-  <table cols="2" rows="1" name="SideBar">
-    <colsize col="0" fixed="128"/>
+<dragEnvironment name="dragEnvironment">
+<table cols="1" rows="2">
+  <rowsize row="0" fixed="30"/>
+  <cell col="0" row="0">
+    <toolBar>
+      <frame width="5">
+        <button text="Save" name="save"/>
+      </frame>
+    </toolBar>
+  </cell>
+  <cell col="0" row="1">
+  <table cols="2" rows="2" name="bigTable">
+    <colsize col="0" fixed="100"/>
+    <rowsize row="1" fixed="50"/>
+    
     <cell col="0" row="0">
-      <dragSources name="dragSources"/>
+      <table cols="1" rows="4">
+        <rowsize row="0" fixed="100"/>
+        <rowsize row="1" fixed="100"/>
+        <rowsize row="2" fixed="100"/>
+        <cell col="0" row="0">
+          <dragSource class="DragBox" text="Level"/>
+        </cell>
+        <cell col="0" row="1">
+          <dragSource class="DragBoxStory" text="Story"/>
+        </cell>
+        <cell col="0" row="2">
+          <dragTrash/>
+        </cell>
+      </table>
     </cell>
+    
+    <!--
     <cell col="1" row="0">
-      <dragGrid name="dragGrid"/>
+        <dragGrid name="dragGrid" cellWidth="100" hoverColor='#9999FF' edit="textEdit"/>
+    </cell>
+    -->
+    
+    <cell col="1" row="0">
+      <scrollingWidget clientRect="(0,0,1600,1024)">
+        <dragGrid name="dragGrid" cellWidth="100" hoverColor='#9999FF' edit="textEdit"/>
+      </scrollingWidget>
+    </cell>
+    
+    <cell col="1" row="1" name="a">
+      <table cols="2" rows="1" name="b">
+        <colsize col="1" fixed="50"/>
+        <cell col="0" row="0">
+          <edit name="textEdit"/>
+        </cell>
+        <cell col="1" row="0">
+          <button name="weiter"/>
+        </cell>
+      </table>
     </cell>
   </table>
+  </cell>
+  </table>
+</dragEnvironment>
 </layout>

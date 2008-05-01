@@ -13,3 +13,4 @@
 %template(AGVector2List) std::list<AGVector2>;
 
 
+%template(AGStringMap) std::map<AGString,AGString>;

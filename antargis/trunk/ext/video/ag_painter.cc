@@ -145,6 +145,11 @@ void AGProjection::translate(const AGVector2 &v)
     a.get(2,1)+=v[1];
   }
 
+void AGProjection::transform(const AGMatrix3 &pMatrix)
+  {
+    a*=pMatrix;
+  }
+
 void AGProjection::setClip(const AGRect2&p)
   {
     clip=clip.intersect(p);
@@ -330,7 +335,6 @@ void AGPainter::tile(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
               float h=std::min(pSrc.h(),pDest.y1()-y);
               blit(pSource,AGRect2(x,y,w,h),AGRect2(pSrc.x0(),pSrc.y0(),w,h));
             }
-
       }
     else
       {
@@ -422,20 +426,15 @@ void AGPainter::renderText(const AGStringUtf8 &pText,const AGVector2 &p,const AG
 void AGPainter::drawBorder(const AGRect2& pRect,int width, const AGColor& c1, const AGColor& c2)
   {
     STACKTRACE;
+    // GL-screen has its own implementation
     AGGLScreen *glScreen=dynamic_cast<AGGLScreen*>(mTarget.getPtr());
     if(glScreen)
       {
-#warning "add clipping in gl"
         glScreen->clip(mCurrent.clip);
         glScreen->drawBorder(mCurrent.project(pRect),width,c1,c2);
-        //      glScreen->fillRect(AGRect2(0,0,1024,768),c1);
         glScreen->unclip();
         return;
       }
-    // FIXME: 
-    // 1) maybe improve gl-renderer by using triangles
-    // 2) otherwise use line-drawing (which is clipped and transformed itself
-    // 3) transform is done for each line - maybe is slow
     AGRect2 d=pRect;
 
     for(int t=0;t<width;t++)
@@ -472,6 +471,30 @@ void AGPainter::fillRect(const AGRect2 &pDest,const AGColor &c)
         mTarget->fillRect(p,c);
       }
   }
+
+
+void AGPainter::fillPoly(const std::vector<AGVector2> &pPoly,const AGColor &c)
+  {
+    //FIXME: add clipping for none-GL (?) - for performance ?
+    
+    std::vector<AGVector2> projected;
+    for(std::vector<AGVector2>::const_iterator i=pPoly.begin();i!=pPoly.end();i++)
+      projected.push_back(mCurrent.project(*i));
+     
+    mTarget->fillPoly(projected,c);
+  }
+
+void AGPainter::drawPoly(const std::vector<AGVector2> &pPoly,const AGColor &c)
+  {
+    //FIXME: add clipping for none-GL (?) - for performance ?
+    
+    std::vector<AGVector2> projected;
+    for(std::vector<AGVector2>::const_iterator i=pPoly.begin();i!=pPoly.end();i++)
+      projected.push_back(mCurrent.project(*i));
+     
+    mTarget->drawPoly(projected,c);
+  }
+
 
 void AGPainter::fillRects(const std::vector<std::pair<AGRect2,AGVector4> > &pRects)
   {

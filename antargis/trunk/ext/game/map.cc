@@ -276,18 +276,16 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
 
 AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
   {
-    //  assert(mHeuristicFunction);
     // FIXME: optimize this - use quadtree
 
     assert(me);
 
     std::multimap<float,AntEntity*> ents;
 
-
     EntityList::iterator i=mEntities.begin();
-    AGVector2 p=me->getPos2D(); // FIXME: check for reachability, too ??
-    //  float dist=0;
+    AGVector2 p=me->getPos2D();
 
+    // reachability is checked through heuristic
     for(;i!=mEntities.end();i++)
       {
         if(me!=*i)
@@ -322,7 +320,6 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
           j--;
         assert((j!=ents.end()));
         e=j->second;
-        //      cdebug("DIST:"<<j->first);
       }
 
     return e;
