@@ -55,6 +55,8 @@ public:
   int parseHex() const;
 
   static AGString toHex(int i);
+  
+  bool matches(const std::string &regex) const;
 };
 
 #endif

@@ -804,6 +804,11 @@ AGString AGMatrix3::toString() const
 // AGTriangle2
 /////////////////////////////////////////////////////////////////////////////
 
+AGTriangle2::AGTriangle2()
+  {
+    
+  }
+
 AGTriangle2::AGTriangle2(const AGVector2 &v0,const AGVector2 &v1,const AGVector2 &v2)
   {
     p[0]=v0;

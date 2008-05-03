@@ -260,7 +260,7 @@ class AGEXPORT AntEntity:public AGRubyObject
 
     // used only by Map - so that Position gets updated, when onGround
     void eventMapChanged();
-    virtual void move(float pTime); // move entity FIXME: del move
+    void move(float pTime); // move entity FIXME: del move
 
     void mark();
 

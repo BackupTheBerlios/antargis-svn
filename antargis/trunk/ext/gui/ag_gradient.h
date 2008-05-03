@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2005 by David Kamphausen. All rights reserved.
+ * Copyright (c) 2008 by David Kamphausen. All rights reserved.
  *
- * ag_background.h
+ * ag_gradient.h
  * by David Kamphausen (david.kamphausen@web.de)
  *
  * The "Antargis" project, including all files needed to compile it,
@@ -18,37 +18,20 @@
  * License along with this program.
  */
 
-// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+#ifndef AG_GRADIENT_H
+#define AG_GRADIENT_H
 
-#ifndef AG_BACKGROUND_H
-#define AG_BACKGROUND_H
-
-#include <string>
-#include "ag_geometry.h"
-#include "ag_texture.h"
 #include "ag_color.h"
 
-class AGPainter;
-
-/** AGBackground is a helper class for widget-drawing
-    It is used to draw gradients and tiled backgrounds of widgets.
-    It is themable.
- */
-class AGEXPORT AGBackground
-{
- public:
-  AGBackground(const AGString &pThemeName="");
-  AGBackground(const AGColor &pColor);
-
-  void draw(const AGRect2 &r,AGPainter &p);
-
-  void useTextures();
- private:
-  const AGTexture *mTexture;
+class AGGradient
+  {
+public:
+  AGGradient();
+  AGGradient(const AGColor &c0,const AGColor &c1,const AGColor &c2,const AGColor &c3);
+  
+  
+private:
   AGColor mColors[4];
-
-  bool mColor;
-  int mBorder;
-};
+  };
 
 #endif

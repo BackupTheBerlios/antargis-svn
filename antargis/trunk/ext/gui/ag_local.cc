@@ -32,6 +32,7 @@ AGLocalizer::~AGLocalizer()
 
 AGStringUtf8 AGLocalizer::find(const AGString &p)
   {
+    cdebug("WARNING: Default Localizer used!");
     return AGStringUtf8(p);
   }
 
@@ -53,5 +54,7 @@ AGStringUtf8 translate(const AGString &s)
 
     if(l)
       return l->find(s);
+    else
+      cdebug("No Localizer found!");
     return AGStringUtf8(s);
   }

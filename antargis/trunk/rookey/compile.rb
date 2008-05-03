@@ -120,8 +120,12 @@ module Rookey
 	    objectName.sub(/\.o$/,"").sub(/^#{getBuildDir}[\/\\]/,"")
 	  end
 	  
+    def getPlainBuildDir
+      ".build_"+@config["host_os"]
+    end
+    
 	  def getBuildDir
-	    File.join(Dir.pwd,".build_"+@config["host_os"])
+	    File.join(Dir.pwd,getPlainBuildDir)
 	  end
     def Compiler.getDepsDir
       File.join(Dir.pwd,".deps")

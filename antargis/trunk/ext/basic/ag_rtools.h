@@ -5,6 +5,7 @@
 #include <string>
 
 AGEXPORT std::string rubyHash(const std::string &p);
+AGEXPORT bool rubyMatchRegex(const std::string &p,const std::string &pregex);
 
 
 

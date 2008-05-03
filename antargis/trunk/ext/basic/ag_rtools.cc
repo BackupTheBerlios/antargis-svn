@@ -37,3 +37,13 @@ std::string rubyHashOld(const std::string &p)
 
   return s;
 }
+
+
+bool rubyMatchRegex(const std::string &p,const std::string &pregex)
+  {
+    VALUE rp=rb_str_new(p.c_str(),p.length());
+    VALUE rregex=rb_str_new(pregex.c_str(),pregex.length());
+    
+    VALUE ret=rb_reg_match(rp,rregex);
+    return ret==Qtrue;
+  }

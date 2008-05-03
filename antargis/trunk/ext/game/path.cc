@@ -694,7 +694,6 @@ std::list<std::pair<size_t,size_t> > getPossibleNeighbors(size_t w,size_t h,cons
     for(x=-r+1;x<r;x++)
       for(y=0;y<r;y++)
         if(x>0 || y>0)
-          //  if(x!=y) // FIXME
           {
             dx=x*res+curPos.first;
             dy=y*res+curPos.second;

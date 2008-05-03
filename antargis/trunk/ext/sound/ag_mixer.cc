@@ -58,14 +58,12 @@ void channelDone(int channel)
 int getFreeChannel()
   {
     mSoundMutex->enter();
-    // FIXME: lock
     int c=-1;
     if(mFreeChannels.size())
       {
         c=*mFreeChannels.begin();
         mFreeChannels.erase(c);
       }
-    // FIXME: unlock
     mSoundMutex->leave();
     return c;
   }

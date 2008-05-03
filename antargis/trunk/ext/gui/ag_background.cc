@@ -82,26 +82,6 @@ AGBackground::AGBackground(const AGString &pThemeName):mTexture(0)
   mBorder=theme->getInt(pThemeName+"."+"border");
 }
 
-/*
-AGBackground::AGBackground(const AGBackground &p):mTexture(0)
-{
-  if(p.mTexture)
-    mTexture=new AGTexture(*p.mTexture);
-  mColors[0]=p.mColors[0];
-  mColors[1]=p.mColors[1];
-  mColors[2]=p.mColors[2];
-  mColors[3]=p.mColors[3];
-
-  mColor=p.mColor;
-  mBorder=p.mBorder;
-}
-
-AGBackground::~AGBackground()
-{
-  delete mTexture;
-  }*/
-
-
 /// draws the background on painter in the given rectangle
 void AGBackground::draw(const AGRect2 &r,AGPainter &p)
   {

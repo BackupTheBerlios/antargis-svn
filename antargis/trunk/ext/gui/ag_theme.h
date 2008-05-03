@@ -23,6 +23,7 @@
 #ifndef AG_THEME_H
 #define AG_THEME_H
 
+#include "ag_base.h"
 #include "ag_font.h"
 #include "ag_surface.h"
 
@@ -48,7 +49,6 @@ class AGEXPORT AGTheme
 
   std::string getSurfaceName(const AGString &pName);
   void setSurfaceName(const AGString &pName,const std::string &pSurface);
-
 
   bool hasSurface(const AGString &pName) const;
   bool hasColor(const AGString &pName) const;

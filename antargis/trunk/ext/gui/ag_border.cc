@@ -30,8 +30,7 @@ AGBorder::AGBorder(const AGString &pTheme)
 
     if((mEnable=getTheme()->hasSurface(imageName)))
       {
-        AGSurface surface(getTheme()->getSurface(imageName));
-        //      mSurface=getTextureManager()->makeTexture(getTheme()->getSurface(pTheme+".image"));
+        //AGSurface surface(getTheme()->getSurface(imageName)); // not used ???
         mTexture=&getTextureCache()->get(getTheme()->getSurfaceName(imageName));
         mWidth=mTexture->width()/3;
 
@@ -48,6 +47,21 @@ AGBorder::AGBorder(const AGString &pTheme)
         mWidth=0;
         mTexture=0;
       }
+  }
+
+AGBorder::AGBorder(const AGSurface &pSurface,const AGString &pFilename)
+  {
+    mTexture=&getTextureCache()->get(pFilename);
+    mWidth=mTexture->width()/3;
+
+    // build textures
+    for(int y=0;y<3;y++)
+      for(int x=0;x<3;x++)
+        {
+          AGRect2 r(x*mWidth,y*mWidth,mWidth,mWidth);
+          mTextures.push_back(&getTextureCache()->get(pFilename,r));
+        }
+    
   }
 
 void AGBorder::draw(const AGRect2 &pd,AGPainter &p)

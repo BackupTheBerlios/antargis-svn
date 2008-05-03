@@ -44,7 +44,7 @@
    - AGTriangle2 - 2d triangle (eats AGVector3)
 
    ATTENTION: the classes may NOT be virtual, as they're possibly used in an array, where then the size is NOT sizeof(v[x]) !!!
-*/
+ */
 
 
 class AGRect2;
@@ -54,16 +54,16 @@ class Node;
 /** \brief Simple structure holding an angle in degrees
  */
 struct AGEXPORT AGAngle
-{
-  float angle;
-  
-  /// @param an angle in degrees
-  explicit AGAngle(float a);
-};
+  {
+    float angle;
+
+    /// @param an angle in degrees
+    explicit AGAngle(float a);
+  };
 
 class AGEXPORT AGVector2
-{
- public:
+  {
+public:
   float v[2];
 
   AGVector2(const AGString &s);
@@ -77,7 +77,7 @@ class AGEXPORT AGVector2
 
   AGVector2 dim2() const;
 
-  
+
 #ifdef SWIG
   %rename(x) getX() const;
   %rename(y) getY() const;
@@ -133,12 +133,12 @@ class AGEXPORT AGVector2
   (operator float*)();
   (operator const float*)() const;
 #endif
-};
+  };
 
 // 2-dim homogenous vector
 class AGEXPORT AGVector3
-{
- public:
+  {
+public:
   float v[3];
 
   AGVector3(const AGVector2 &p,float h=1.0f);
@@ -151,7 +151,7 @@ class AGEXPORT AGVector3
   void setY(float pY);
   void setZ(float pZ);
 
-  
+
 #ifdef SWIG
   %rename(x) getX() const;
   %rename(y) getY() const;
@@ -168,8 +168,8 @@ class AGEXPORT AGVector3
   AGVector3 operator-(const AGVector3 &p) const;
   AGVector3 operator+(const AGVector3 &p) const;
 #ifdef SWIG
-%rename(add) operator+=(const AGVector3 &p);
-%rename(sub) operator-=(const AGVector3 &p);
+  %rename(add) operator+=(const AGVector3 &p);
+  %rename(sub) operator-=(const AGVector3 &p);
 #endif
   AGVector3 &operator+=(const AGVector3 &p);
   AGVector3 &operator-=(const AGVector3 &p);
@@ -210,27 +210,27 @@ class AGEXPORT AGVector3
 #ifndef SWIG
   (operator float*)();
 #endif
-};
+  };
 
 
 class AGEXPORT AGMatrix3
-{
-  float a[3][3];
- public:
-  struct Row
   {
-    AGMatrix3 *matrix;
-    int y;
+    float a[3][3];
+public:
+  struct Row
+    {
+      AGMatrix3 *matrix;
+      int y;
 
-    float &operator[](size_t x)
-    {
-      return matrix->get(x,y);
-    }
-    float operator[](size_t x) const
-    {
-      return matrix->get(x,y);
-    }
-  };
+      float &operator[](size_t x)
+      {
+        return matrix->get(x,y);
+      }
+      float operator[](size_t x) const
+      {
+        return matrix->get(x,y);
+      }
+    };
 
   AGMatrix3();
   AGMatrix3(const AGAngle &a); // rotate
@@ -256,21 +256,21 @@ class AGEXPORT AGMatrix3
 
   void swapRows(size_t a,size_t b);
   void swapCols(size_t a,size_t b);
-  
+
 
 #ifdef SWIG
   %rename(to_s) toString() const;
 #endif
   AGString toString() const;
-};
+  };
 
 class AGEXPORT AGLine2
-{
-  AGVector2 v0,v1;
- public:
+  {
+    AGVector2 v0,v1;
+public:
   AGLine2();
   AGLine2(const AGVector2 &pv0,const AGVector2 &pv1);
-  
+
   AGVector2 getV0() const;
   AGVector2 getV1() const;
 
@@ -295,15 +295,15 @@ class AGEXPORT AGLine2
   %rename(to_s) toString() const;
 #endif
   AGString toString() const;
-};
+  };
 
 class AGEXPORT AGLine3
-{
-  AGVector3 v0,v1;
- public:
+  {
+    AGVector3 v0,v1;
+public:
   AGLine3();
   AGLine3(const AGVector3 &pv0,const AGVector3 &pv1);
-  
+
   AGVector3 getV0() const;
   AGVector3 getV1() const;
 
@@ -313,7 +313,7 @@ class AGEXPORT AGLine3
   AGVector3 collisionPoint(const AGLine3 &l) const;
   AGVector3 collisionPointNI(const AGLine3 &l) const; // no inclusion test
   bool includes(const AGVector3 &v) const;
-  */
+   */
   //  AGBox3 getBBox() const;
 
   //  AGVector3 normal() const;
@@ -327,18 +327,19 @@ class AGEXPORT AGLine3
   %rename(to_s) toString() const;
 #endif
   AGString toString() const;
-};
+  };
 
 class AGEXPORT AGCollisionData
-{
-};
+  {
+  };
 
 class AGRect2;
 
 class AGEXPORT AGTriangle2
-{
-  AGVector2 p[3];
- public:
+  {
+    AGVector2 p[3];
+public:
+  AGTriangle2();
   AGTriangle2(const AGVector2 &v0,const AGVector2 &v1,const AGVector2 &v2);
 
   AGVector2 operator[](int index) const;
@@ -372,13 +373,13 @@ class AGEXPORT AGTriangle2
   %rename(to_s) toString() const;
 #endif
   AGString toString() const;
-};
+  };
 
 class AGEXPORT AGCircle2
-{
-  AGVector2 p;
-  float radius;
- public:
+  {
+    AGVector2 p;
+    float radius;
+public:
   AGCircle2(const AGVector2 &v,float rad);
 
   bool inCircle(const AGTriangle2 &t) const;
@@ -390,15 +391,15 @@ class AGEXPORT AGCircle2
   float getRadius() const;
 
   std::list<AGVector2> collide(const AGLine2 &pLine) const;
-};
+  };
 
 class AGVector4;
 class AGEXPORT AGTriangle3
-{
-  AGVector3 p[3];
- public:
+  {
+    AGVector3 p[3];
+public:
   AGTriangle3(const AGVector3 &v0,const AGVector3 &v1,const AGVector3 &v2);
-  
+
   // (x,y,z,0) for no collision 
   // (x,y,z,1) for collision in point (x,y,z)
   AGVector4 collide(const AGLine3 &pLine) const;
@@ -406,12 +407,12 @@ class AGEXPORT AGTriangle3
   AGString toString() const;
 
   AGVector3 operator[](int index) const;
-};
+  };
 
 class AGEXPORT AGRect2
-{
-  AGVector2 v0,v1;
- public:
+  {
+    AGVector2 v0,v1;
+public:
   AGRect2();
   AGRect2(const AGVector2 &pv0,const AGVector2 &pv1);
   AGRect2(float x,float y,float w,float h);
@@ -441,7 +442,7 @@ class AGEXPORT AGRect2
   AGVector2 getV1() const;
   AGVector2 getV01() const;
   AGVector2 getV10() const;
-  
+
   AGVector2 getMiddle() const;
 
   AGRect2 shrink(float f) const;
@@ -471,7 +472,7 @@ class AGEXPORT AGRect2
   float y0() const;
   float x1() const;
   float y1() const;
-  
+
   AGVector2 clip(const AGVector2 &v) const;
 
   AGRect2 origin() const;
@@ -496,12 +497,12 @@ class AGEXPORT AGRect2
   %rename(to_s) toString() const;
 #endif
   AGString toString() const;
-};
+  };
 
 
 class AGEXPORT AGVector4
-{
- public:
+  {
+public:
   float v[4];
 
   AGVector4(float pX,float pY,float pZ,float pW=1.0f);
@@ -514,7 +515,7 @@ class AGEXPORT AGVector4
   void setZ(float pZ);
   void setW(float pW);
 
-  
+
 #ifdef SWIG
   %rename(x) getX() const;
   %rename(y) getY() const;
@@ -529,8 +530,8 @@ class AGEXPORT AGVector4
   AGVector4 operator-(const AGVector4 &p) const;
   AGVector4 operator+(const AGVector4 &p) const;
 #ifdef SWIG
-%rename(add) operator+=(const AGVector4 &p);
-%rename(sub) operator-=(const AGVector4 &p);
+  %rename(add) operator+=(const AGVector4 &p);
+  %rename(sub) operator-=(const AGVector4 &p);
 #endif
   AGVector4 &operator+=(const AGVector4 &p);
   AGVector4 &operator-=(const AGVector4 &p);
@@ -587,32 +588,30 @@ class AGEXPORT AGVector4
   (operator float*)();
   (operator const float*)() const;
 #endif
-};
+  };
 
 class AGEXPORT AGMatrix4
-{
-  float a[16];
- public:
-  struct MRow
   {
-    AGMatrix4 *matrix;
-    int y;
+    float a[16];
+public:
+  struct MRow
+    {
+      AGMatrix4 *matrix;
+      int y;
 
-    float &operator[](size_t x)
-    {
-      return matrix->get(x,y);
-    }
-    float operator[](size_t x) const
-    {
-      return matrix->get(x,y);
-    }
-  };
+      float &operator[](size_t x)
+      {
+        return matrix->get(x,y);
+      }
+      float operator[](size_t x) const
+      {
+        return matrix->get(x,y);
+      }
+    };
 
   AGMatrix4();
   AGMatrix4(float v[16]);
   AGMatrix4(float angle,const AGVector3 &d);
-  // FIXME: add quaternion
-  //  AGMatrix4(const AGAngle &a);
   AGMatrix4(const AGVector4 &a);
   void set(size_t x,size_t y,float f);
   float get(size_t x,size_t y) const;
@@ -650,24 +649,24 @@ class AGEXPORT AGMatrix4
 #endif
 
   AGVector4 getRow(size_t i) const;
-};
+  };
 
 // axis-aligned
 class AGEXPORT AGRect3
-{
-  AGVector3 base,dir;
- public:
+  {
+    AGVector3 base,dir;
+public:
   AGRect3(const AGVector3 &pBase,const AGVector3 &pDir);
 
   bool collides(const AGLine3&pLine) const;
 
   AGString toString() const;
-};
+  };
 
 // axis-aligned
 class AGEXPORT AGBox3
-{
- public:
+  {
+public:
   AGVector3 base,dir;
 
   AGBox3();
@@ -698,9 +697,9 @@ class AGEXPORT AGBox3
 
   bool valid() const;
 
- private:
+private:
   bool mValid;
-};
+  };
 
 #ifndef SWIG
 AGEXPORT std::ostream &operator<<(std::ostream &o,const AGVector2&v);

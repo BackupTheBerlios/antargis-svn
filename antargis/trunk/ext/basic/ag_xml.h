@@ -115,6 +115,7 @@ class AGEXPORT Document
     bool parseFile(const AGString &pFilename);
 
     Node &root();
+    const Node &root() const;
 
     AGString toString(bool forceIndent=false) const;
 

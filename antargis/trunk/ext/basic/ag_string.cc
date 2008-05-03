@@ -1,6 +1,7 @@
 #include <ag_string.h>
 #include <ag_debug.h>
 #include <ag_utf8.h>
+#include <ag_rtools.h>
 
 ///////////
 // AGString
@@ -218,20 +219,7 @@ bool AGString::toBool() const
 }
 
 
-/*std::string AGString::get(size_t pos) const
+bool AGString::matches(const std::string &regex) const
 {
-  return agSubStr(s,pos,1);
+  return rubyMatchRegex(*this,regex);
 }
-void AGString::set(size_t pos,const std::string &pStr)
-{
-  mLength=npos;
-  s=agSubStr(s,0,pos)+pStr+agSubStr(s,pos+1,std::string::npos);
-  }*/
-
-/*
-std::ostream &operator<<(std::ostream &o,const AGString &s)
-{
-  o<<s;
-  return o;
-}
- */

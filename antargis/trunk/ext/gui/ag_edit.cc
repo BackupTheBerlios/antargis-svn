@@ -304,7 +304,7 @@ void AGEdit::draw(AGPainter &p)
     int completeHeight=0;
     x=y=cy=0;
 
-    drawBackground(p);//pRect);
+    drawBackground(p);
 
     std::list<AGEditLine>::iterator i=mLines.begin();
 
@@ -323,28 +323,18 @@ void AGEdit::draw(AGPainter &p)
         completeHeight+=i->height();
       }
 
-    //  cdebug("completeHeight:"<<completeHeight);
-    //  cdebug("height:"<<getRect().h);
     if(mVAlign==EDIT_VCENTER)
       y=(int)(getRect().h()/2-completeHeight/2);
-    //  cdebug("y:"<<y);
 
     i=mLines.begin();
 
-
-    //  cdebug("mRect:"<<getRect());
-    //  cdebug("mViewCy:"<<mViewCy);
     for(int k=0;k<mViewCy;k++)
       i++;
 
-    //  cdebug("mLines:"<<mLines.size());
     for(;i!=mLines.end();i++)
       {
-        //      cdebug((*i).getText());
-        //      cdebug("("<<x<<";"<<y<<")");
-        //      cdebug(mr);
-        i->draw(p,AGVector2(x,y),getRect().origin());//pRect.project(getRect()));
-        if(cy+mViewCy==mCy && mMutable && hasFocus()) // FIXME: Change show cursor only if widget has focus
+        i->draw(p,AGVector2(x,y),getRect().origin());
+        if(cy+mViewCy==mCy && mMutable && hasFocus())
           i->drawCursor(p,mCx,AGVector2(x,y),getRect(),cursorC);
         y+=i->height();
         if(y>getRect().h())

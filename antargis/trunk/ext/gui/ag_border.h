@@ -34,6 +34,7 @@ class AGEXPORT AGBorder
 {
  public:
   AGBorder(const AGString &pTheme="");
+  AGBorder(const AGSurface &pSurface,const AGString &pSurfaceName);
 
   void draw(const AGRect2 &r,AGPainter &p);
 

@@ -373,6 +373,12 @@ Node &Document::root()
     return *mRoot;
   }
 
+const Node &Document::root() const
+{
+  return *mRoot;
+}
+
+
 /*
 Node *Document::getRootNode()
 {

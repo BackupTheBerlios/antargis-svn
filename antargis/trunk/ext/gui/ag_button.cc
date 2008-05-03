@@ -58,7 +58,6 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,i
     setTheme("");
     mChecked=false;
 
-    //  cdebug("borderWidth:"<<borderWidth);
     mEnabled=true;
 
     if(opengl())

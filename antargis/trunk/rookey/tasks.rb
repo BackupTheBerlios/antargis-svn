@@ -151,9 +151,12 @@ module Rookey
     sourceDirs=files.map{|file|File.split(file)[0]}.sort.uniq
     
     config=Rookey::getConfig
+    sourceDirs << "."
     config.add("INCLUDEDIRS",sourceDirs.join(" "))
+    
+    compiler=Rookey::Compiler.new(config)
         
-    swigTarget = Rookey::swig({name+"_swig.cc"=>swigInterface},config)
+    swigTarget = Rookey::swig({File.join(compiler.getPlainBuildDir,name+"_swig.cc")=>swigInterface},config)
     
     
     targets = Rookey::compile(cppFiles+[swigTarget],config)
