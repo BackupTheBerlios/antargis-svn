@@ -1,3 +1,0 @@
-ROOKEY_CONFIG={
-
-}
