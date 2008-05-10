@@ -2,16 +2,31 @@ require 'ruby/gui/testing.rb'
 
 describe "AGEdit" do
   include GuiTest
-  it "should ignore pressing RETURN,ESCAPE when not in multiline mode" do
+  before(:each) do
     @app=makeTestAppClass(AGApplication).new
-    widget=AGEdit.new(nil,AGRect2.new(20,20,200,50))
-    @app.setMainWidget(widget)
+    @widget=AGEdit.new(nil,AGRect2.new(20,20,200,50))
+    @app.setMainWidget(@widget)
     @app.step
+  end
+  
+  it "should accept RETURN as newline" do
     key('a')
-    widget.getText.to_s.should == "a"
-    #"it should work".should == ""
-    
-    #while true; @app.run;end
+    key(SDLK_RETURN.chr)
+    key('a')
+    @widget.getText.to_s.should == "a\na"
+  end
+  
+  it "should ignore ESCAPE" do
+    key('a')
+    key(SDLK_ESCAPE.chr)
+    @widget.getText.to_s.should == "a"
+  end
+  
+  it "should ignore pressing RETURN when not in multiline mode" do
+    @widget.setMulti(false)
+    key('a')
+    key(SDLK_RETURN.chr)
+    @widget.getText.to_s.should == "a"
   end
 end
 

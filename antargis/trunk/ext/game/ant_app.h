@@ -15,11 +15,7 @@
  * 
  *    For information about the overall-architecture please refer to the ruby-documentation at: ../ruby/index.html
  *
- * 
-
-
-
- */
+  */
 
 
 

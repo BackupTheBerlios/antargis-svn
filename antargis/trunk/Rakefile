@@ -31,7 +31,7 @@ alias :oldSystem :system
 def system(cmd)
   #puts Dir.pwd
   if cmd=~/ruby .*/
-    cmd.gsub!(/^ruby/,"./starter")
+    cmd=cmd.gsub(/^ruby/,"./starter")
   end
   #puts cmd
   oldSystem(cmd)

@@ -3,21 +3,9 @@ Dir.chdir(File.split(File.split(File.expand_path(__FILE__))[0])[0])
 require 'pp'
 require 'ruby/antargislib.rb'
 
+
 #if Object.respond_to?(:define_cmethod)
 	
-	class Object
-		def define_cmethod(method_name, method = nil, &proc)
-			if proc.nil?
-				raise ArgumentError
-			else
-				method = proc
-			end if method.nil?
-		
-			(class << self; self; end).module_eval do
-				define_method( method_name.to_sym, method )
-			end
-		end
-	end
 	
 	$MY_KERNEL=self
 	def kernel

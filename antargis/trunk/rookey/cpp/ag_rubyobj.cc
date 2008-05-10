@@ -1,6 +1,5 @@
+#include "ag_base.h"
 #include "ag_rubyobj.h"
-//#include "ag_debug.h"
-//#include "ag_profiler.h"
 #include <assert.h>
 #include <typeinfo>
 #include <set>
@@ -13,12 +12,11 @@
 #endif
 #include <ruby.h>
 
-//#include <ag_main.h>
-
 bool mRubyQuitting=false;
 
 // this set keeps track of all valid instances of AGRubyObject
 std::set<AGRubyObject*> mRubyObjects;
+std::set<AGRubyObject*> mRemovedRubyObjects;
 
 void setQuitting()
   {
@@ -42,13 +40,16 @@ AGEXPORT bool rubyObjectExists(void *po)
 
 AGRubyObject::AGRubyObject()
   {
+    //std::cerr<<"AGRubyObject::new:"<<this<<std::endl;
     mRubyObjects.insert(this);
   }
 AGRubyObject::~AGRubyObject()
   {
+    //std::cerr<<"AGRubyObject::Removed:"<<this<<std::endl;
     for(std::set<AGBaseObject*>::iterator i=mReferences.begin();i!=mReferences.end();i++)
       (*i)->baseClear();
     mRubyObjects.erase(this);
+    mRemovedRubyObjects.insert(this);
   }
 
 
@@ -62,6 +63,7 @@ void AGRubyObject::mark()
 // recursive should be set true only in one direction, otherwise you'll generate endless-loops (!!)
 void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
   {
+    //std::cerr<<"markObject:"<<o<<std::endl;
     // o must be a valid ruby-object
     assert(mRubyObjects.find(o)!=mRubyObjects.end());
 
@@ -69,6 +71,7 @@ void AGRubyObject::markObject(AGRubyObject *o, bool recursive)
     VALUE v=convertCpp2Ruby(o);
     if(v!=Qnil)
       {
+        //std::cout<<"V:"<<v<<std::endl;
         // then mark it
         rb_gc_mark(v);
       }
@@ -107,6 +110,8 @@ void general_markfunc(void *ptr)
     assert(ptr);
     // the given object must be a AGRubyObject and it must be valid (it's in mRubyObjects)
     AGRubyObject *o=static_cast<AGRubyObject*>(ptr);
+    if(mRubyObjects.find(o)==mRubyObjects.end())
+      std::cerr<<"OLD RUBYOBJ:"<<(mRemovedRubyObjects.find(o)!=mRemovedRubyObjects.end())<<":"<<o<<std::endl;
     assert(mRubyObjects.find(o)!=mRubyObjects.end());
 
 #ifdef GCDEBUG

@@ -56,7 +56,7 @@ class AGEXPORT AGButton:public AGWidget
      DISABLED        //!< the button disabled (greyed)
    };
 
-  AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,int id=-1);
+  AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText="",int id=-1);
 
   void setSurface(AGSurface pSurface,bool pChangeSize=false);
   void setTexture(const AGTexture &pTexture);
@@ -71,6 +71,7 @@ class AGEXPORT AGButton:public AGWidget
 
   virtual void setWidth(float w);
   virtual void setHeight(float w);
+  void setRect(const AGRect2 &r);
 
   virtual AGStringUtf8 getCaption() const;
 
@@ -94,6 +95,8 @@ class AGEXPORT AGButton:public AGWidget
   bool isOpaque() const;
 
  private:
+   
+  void updateClientRects();
   AGStringUtf8 mText;
   int mID;
   AGString mTheme;

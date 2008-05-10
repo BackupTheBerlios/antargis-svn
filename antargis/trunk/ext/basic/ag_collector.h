@@ -1,9 +1,10 @@
 #ifndef AG_COLLECTOR_H
 #define AG_COLLECTOR_H
 
-#include <set>
-
+#include <ag_base.h>
 #include <ag_rubyobj.h>
+
+#include <set>
 
 class AGEXPORT AGCollector:public AGRubyObject
 {

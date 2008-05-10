@@ -42,8 +42,13 @@ class AGEXPORT AGLayout:public AGWidget
 
   static void registerLayouts();
 
+  virtual void mark();
  private:
+  void insertTempWidget(AGWidget *pWidget);
+   
   std::map<int,AGWidget*> mTabIndices;
+  
+  std::set<AGWidget*> mTempWidgets;
 };
 
 AGEXPORT AGWidget *parseNode(AGWidget *pParent,const Node &pNode);

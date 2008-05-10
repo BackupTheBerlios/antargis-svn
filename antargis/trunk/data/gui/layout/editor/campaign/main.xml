@@ -2,14 +2,13 @@
 <layout name="CampaignEditorLayout">
 <dragEnvironment name="dragEnvironment">
 <table cols="1" rows="2">
-  <rowsize row="0" fixed="30"/>
+  <rowsize row="0" fixed="50"/>
   <cell col="0" row="0">
     <toolBar>
-      <frame width="5">
-        <button text="Save" name="save"/>
-      </frame>
+         <toolButton text="Save" name="save" caption="muh"/>
     </toolBar>
   </cell>
+  
   <cell col="0" row="1">
   <table cols="2" rows="2" name="bigTable">
     <colsize col="0" fixed="100"/>
@@ -32,11 +31,6 @@
       </table>
     </cell>
     
-    <!--
-    <cell col="1" row="0">
-        <dragGrid name="dragGrid" cellWidth="100" hoverColor='#9999FF' edit="textEdit"/>
-    </cell>
-    -->
     
     <cell col="1" row="0">
       <scrollingWidget clientRect="(0,0,1600,1024)">
@@ -58,5 +52,6 @@
   </table>
   </cell>
   </table>
+  <appearEffect name="showEdit" table="bigTable" row="1" size="50" duration="10"/>
 </dragEnvironment>
 </layout>

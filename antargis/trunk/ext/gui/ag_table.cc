@@ -193,7 +193,6 @@ void AGTable::arrange()
   {
     CTRACE;
     int mx,my;
-    cdebug(getName());
 
     // first get the fixed sizes
     int fx,fy;
@@ -233,7 +232,6 @@ void AGTable::arrange()
     for(mx=0;mx<w;mx++)
       for(my=0;my<h;my++)
         {
-          cdebug(mx<<":"<<my);
           if(cols[mx].second)
             {
               AGWidget *wd=children[mx+my*w];
@@ -244,11 +242,9 @@ void AGTable::arrange()
             }
           if(rows[my].second)
             {
-              cdebug("fixed y:"<<my);
               AGWidget *wd=children[mx+my*w];
               if(wd)
                 {
-                  cdebug("setH:"<<wd<<typeid(*wd).name());
                   wd->setHeight(rows[my].first);
                 }
             }

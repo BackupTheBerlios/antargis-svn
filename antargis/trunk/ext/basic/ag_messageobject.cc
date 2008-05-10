@@ -325,13 +325,9 @@ void AGMessageObject::popSignal(AGSignal *pSignal)
 
 bool AGMessageObject::processEvent(AGEvent* agEvent) 
   {
-
-    //  dbout(1,"typeid:"<<typeid(this).name());
-    //  TRACE;
-    //  SDL_Event e;
+    cdebug(agEvent->getKey()<<":"<<typeid(*this).name());
     bool rc=false;
 
-    //  const AGSDLEvent *agEvent=reinterpret_cast<const AGSDLEvent*>(pEvent);
     if(agEvent->isSDLEvent())
       {
         const SDL_Event &event=agEvent->get();

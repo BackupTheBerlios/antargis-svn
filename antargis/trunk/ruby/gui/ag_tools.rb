@@ -170,4 +170,27 @@ module Antargis
 			AGVector2.new(a,b)
 		end
 	end
+  class AGRubyMessageObject<AGMessageObject
+    def initialize()
+      super
+      @map={}
+    end
+    def signal(e)
+      id=[e.getCaller,e.getName]
+      if @map[id]
+        @map[id].each{|b|b.call(e)}
+      end
+    end
+    def append(from,to)
+      id=[from.getCaller,from.getName]
+      @map[id]||=[]
+      @map[id]<<to
+    end
+  end
+#  class AGSignal
+#    
+#    def connect(&block)
+#      
+#    end
+#  end
 end

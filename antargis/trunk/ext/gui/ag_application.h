@@ -130,12 +130,12 @@ class AGEXPORT AGApplication:public AGMessageObject
 
   void setDemoTime(float t);
   
+  bool doEvent(const SDL_Event &e);
  private:
   void clearOldMousePosition();
   void drawCursor();
 
   void flushEventQueue();
-  bool doEvent(const SDL_Event &e);
 
   bool mRunning;
   bool mIdleCalls;

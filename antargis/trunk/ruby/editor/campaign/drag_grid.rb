@@ -59,7 +59,6 @@ module Antargis
 
     private
     
-    
     def createRoundRect(rect,radius)
       x=AGVector2.new(radius,0)
       y=AGVector2.new(0,radius)
@@ -108,9 +107,64 @@ module Antargis
       setRect(o+(-to.getScreenRect.getV0))
     end
   end
-  
-    
 end
+
+class Effect<AGWidget
+  def initialize(p,r,node)
+    super(p,r)
+    @registered=false
+    @running=false
+    @duration=node["duration"].to_f
+    run
+  end
+  def draw(p)
+    if @registered==false
+      registerEffect
+    end
+  end
+  def run
+    @running=true
+    @time=0
+  end
+  def eventFrame(t)
+    pp @running
+    #exit
+    if @running
+      @time+=t
+     # exit
+      @running=false if @time>=@duration
+      @time=@duration if @time>@duration 
+      step(@time/@duration)
+    end
+  end
+  def step(per)
+    pp per
+    exit
+  end
+  private
+  def registerEffect
+    if getApp
+      getApp.sigFrame.connect(self,:eventFrame)
+      @registered=true
+    end
+  end
+end
+
+class AppearEffect<Effect
+  def initialize(p,r,node)
+    super
+    @name=node["name"]
+    @target=node["table"]
+    @row=node["row"].to_i
+    @size=50
+    
+  end
+  def step(amount)
+    table=getApp.getMainWidget.getChild(@target)
+    table.modifyRow(@row,amount*@size)
+  end
+end
+
 
 class AGHoverWidget<AGWidget
   attr_reader :hovered
@@ -426,15 +480,46 @@ class AGWidgetWithConfig<AGWidget
 end
 
 class ToolBar<AGWidgetWithConfig
+  attr_reader :borderWidth
   def initialize(p,r,ops)
     super
     @ul=getColor("ul","#CCCCCC")
     @ur=getColor("ur","#CCCCCC")
     @ll=getColor("ll","#999999")
     @lr=getColor("lr","#999999")
+    @borderWidth=ops["borderWidth"].to_i
   end
   def draw(p)
     p.drawGradient(getRect.origin,@ul,@ur,@ll,@lr)
+  end
+  def getNextChildRect
+    cCount=getChildren.length
+    getChildRects[cCount].shrink(3)
+  end
+  
+  def getChildRects
+    rectSize=[width,height].min
+    rects=[]
+    0.upto(width/rectSize){|x|
+      0.upto(height/rectSize){|y|
+        rects<<AGRect.new(x,y,rectSize,rectSize)
+      }
+    }
+    rects
+  end
+end
+
+class ToolButton<AGButton
+  def initialize(p,r,ops)
+    puts "MUH1"
+    puts self.object_id
+    text=AGStringUtf8.new("HUP") #ops["text"])
+    super(p,r,text)
+    setCaching(false)
+    puts "MUH2"
+    setRect(p.getNextChildRect)
+    setCaption(text)
+    setName(ops["name"])
   end
 end
 
@@ -556,27 +641,63 @@ class DragSource<AGHoverWidget
 end
 
 
-[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar].each{|c|standardLayoutCreator(c)}
+[DragGrid,DragSource,DragTrash,DragEnvironment,ToolBar,ToolButton,AppearEffect].each{|c|standardLayoutCreator(c)}
+
+class RubySignal
+  def initialize(name)
+    @name=name
+    @receivers=[]
+  end
+  def connect(object,method)
+    @receivers<<[object,method]
+  end
+  def call(*s)
+    @receivers.each{|p|
+      object,method=p
+      object.send(method,*s)
+    }
+  end  
+end
+def createSignal(x)
+  signal=RubySignal.new(x)
+  self.define_cmethod(x) {|*s|
+    puts s.length
+    if s.length==0
+      signal
+    else
+      signal.call(*s)
+    end
+  }
+end
 
 class MApp<AGApplication
   def initialize()
     super
+    createSignal :sigFrame
     layout=AGLayout.new(nil)
     @layout=layout
-    layout.loadXML(loadFile("data/gui/layout/editor/campaign/main.xml"))
+    file=File.join('data','gui','layout','editor','campaign','main.xml')
+    layout.loadXML( loadFile(file) )
     setMainWidget(layout)
-    layout.getChild("bigTable").modifyRow(1,10)
-    env=layout.getChild("dragEnvironment")
-    @grid=layout.getChild("dragGrid")
-    addHandler(env,:sigClick,:eventDeselect)
+    layout.setApp(self)
+    if layout.getChild("bigTable")
+	    layout.getChild("bigTable").modifyRow(1,10)
+	    env=layout.getChild("dragEnvironment")
+	    @grid=layout.getChild("dragGrid")
+	    addHandler(env,:sigClick,:eventDeselect)
+    end
+    
+    
   end
   def eventDeselect
     @grid.select(nil)
   end
   def eventFrame(t)
     pp 1/t
+    sigFrame(t)
     super
   end
+  
 end
 
 app=MApp.new

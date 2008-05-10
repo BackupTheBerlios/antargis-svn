@@ -48,6 +48,7 @@ AGLayout::AGLayout(AGWidget *pgParent):
 void AGLayout::loadXML(const std::string &pXMLData)
   {
     CTRACE;
+    getLayoutFactory()->pushLayout(this);
 
     // disable GC here
     // marking makes problems here - as the widgets are not inserted into the tree 
@@ -83,6 +84,8 @@ void AGLayout::loadXML(const std::string &pXMLData)
         AGWidget *w=mTabIndices.begin()->second;
         w->gainCompleteFocus(); // is ok, because till here layout isn't inserted into screen yet
       }
+    getLayoutFactory()->popLayout();
+    mTempWidgets.clear();
   }
 
 bool AGLayout::eventKeyDown(AGEvent *m)
@@ -221,4 +224,15 @@ void parseChildren(AGWidget *pParent,const Node &pNode)
       }
   }
 
+void AGLayout::insertTempWidget(AGWidget *pWidget)
+  {
+    mTempWidgets.insert(pWidget);
+  }
 
+
+void AGLayout::mark()
+  {
+    AGWidget::mark();
+    for(std::set<AGWidget*>::iterator i=mTempWidgets.begin();i!=mTempWidgets.end();i++)
+      markObject(*i);
+  }

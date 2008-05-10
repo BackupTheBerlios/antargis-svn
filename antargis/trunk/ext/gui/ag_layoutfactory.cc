@@ -33,6 +33,8 @@ void AGLayoutCreator::create(AGWidget *pParent,const AGRect2 &pRect,const Node &
 void AGLayoutCreator::setResult(AGWidget *pWidget)
   {
     mWidget=pWidget;
+    if(mWidget)
+      getLayoutFactory()->getCurrentLayout()->addChildRef(mWidget);
   }
 AGWidget *AGLayoutCreator::getResult()
   {
@@ -94,6 +96,22 @@ AGWidget *AGLayoutFactory::create(AGWidget *pParent,const AGRect2 &pRect,const N
       }
     return 0;
   }
+
+void AGLayoutFactory::pushLayout(AGLayout *pLayout)
+  {
+    mCurrentLayouts.push_back(pLayout);
+  }
+void AGLayoutFactory::popLayout()
+  {
+    mCurrentLayouts.pop_back();
+  }
+
+AGLayout *AGLayoutFactory::getCurrentLayout()
+  {
+    return mCurrentLayouts.back();
+  }
+
+
 
 AGLayoutFactory *mLayoutFactory=0;
 AGLayoutFactory *getLayoutFactory()

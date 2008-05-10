@@ -115,7 +115,9 @@ protected
     s1="SDL_KEYDOWN:0:1:0:#{sym}:0:#{sym}"
     puts s1
     #exit
-    @app.eventKeyDown(newEvent(@app,"",toSDLEvent(s1)))
-    @app.eventKeyUp(newEvent(@app,"",toSDLEvent("SDL_KEYUP:0:0:0:#{sym}:0:#{sym}")))
+    puts @app
+    pp @app.methods.sort
+    @app.doEvent(toSDLEvent(s1))
+    @app.doEvent(toSDLEvent("SDL_KEYUP:0:0:0:#{sym}:0:#{sym}"))
   end
 end

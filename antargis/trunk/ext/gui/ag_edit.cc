@@ -30,10 +30,10 @@
 
 AGEditLine::AGEditLine(const AGStringUtf8 &pText,AGFont pFont,bool pHardEnd):
   mText(pText),mFont(pFont),mHardEnd(pHardEnd)
-  {
-    mAlign=EDIT_LEFT;
-    mVAlign=EDIT_TOP;
-  }
+    {
+      mAlign=EDIT_LEFT;
+      mVAlign=EDIT_TOP;
+    }
 
 AGEditLine::~AGEditLine()
   {
@@ -264,32 +264,33 @@ AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   mMultiLine(true),mWrapLines(true),
   sigModified(this,"sigModified")
-  {
-    mInserting=true;
-    mMaxLength=-1;
-    mMutable=true;
-    mShowCursor=true;
-    AGFont font1("FreeSans.ttf",14);
-    AGFont font2("FreeSans.ttf",13);
-    font1.setColor(AGColor(0,0,0));
-    font2.setColor(AGColor(0,0,0xFF));
-    AGEditLine l("",font1,true);
-    mAlign=EDIT_LEFT;
-    mVAlign=EDIT_TOP;
-    l.setAlign(mAlign);
-    l.setVAlign(mVAlign);
-    mLines.push_back(l);
+    {
+      CTRACE;
+      mInserting=true;
+      mMaxLength=-1;
+      mMutable=true;
+      mShowCursor=true;
+      AGFont font1("FreeSans.ttf",14);
+      AGFont font2("FreeSans.ttf",13);
+      font1.setColor(AGColor(0,0,0));
+      font2.setColor(AGColor(0,0,0xFF));
+      AGEditLine l("",font1,true);
+      mAlign=EDIT_LEFT;
+      mVAlign=EDIT_TOP;
+      l.setAlign(mAlign);
+      l.setVAlign(mVAlign);
+      mLines.push_back(l);
 
-    mCx=mCy=0;
-    mViewCy=0;
+      mCx=mCy=0;
+      mViewCy=0;
 
-    AGString t=mTheme;
-    if(t.length())
-      t+=".";
-    mBackground=AGBackground(t+"edit.background");
-    mDrawBackground=true;
-    setTheme("edit");
-  }
+      AGString t=mTheme;
+      if(t.length())
+        t+=".";
+      mBackground=AGBackground(t+"edit.background");
+      mDrawBackground=true;
+      setTheme("edit");
+    }
 
 void AGEdit::setMaxLength(int i)
   {
@@ -299,7 +300,7 @@ void AGEdit::setMaxLength(int i)
 
 void AGEdit::draw(AGPainter &p)
   {
-
+    //    cdebug("text:"<<getText());
     int x,y,cy;
     int completeHeight=0;
     x=y=cy=0;
@@ -397,6 +398,8 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
     AGStringUtf8 ins;
     bool doInsert=false;
     bool used=false;
+
+    cdebug(k<<"::"<<SDLK_RETURN);
     if(k==SDLK_RIGHT)
       {
         getActLine();
@@ -476,6 +479,8 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
       }
     else if(k==SDLK_RETURN)
       {
+        cdebug("RETUURN!");
+        cdebug(mMultiLine);
         if(mMultiLine) 
           {
             getActLine();
@@ -531,6 +536,8 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
         cdebug("ralt");
         mRAlt=true;
       }
+    else if(k==SDLK_ESCAPE)
+      {}
     else if((unicode&0xFFF8)!=0 || (k>=SDLK_0 && k<=SDLK_9) || (k>=SDLK_a && k<=SDLK_z))
       {
         ins=AGStringUtf8(unicode2Utf8(unicode));
@@ -539,7 +546,7 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
         doInsert=true;
       }
     cdebug("KEY:"<<SDL_GetKeyName(k)<<"  "<<k);
-
+    cdebug("INSERT:"<<doInsert);
     if(doInsert)
       {
         if(insert(ins))
@@ -549,7 +556,7 @@ bool AGEdit::processKey(SDLKey k,Uint16 unicode)
       }
     if(used)
       return true;
-    
+    return false;
   }
 
 bool AGEdit::eventKeyDown(AGEvent *m)
@@ -563,14 +570,14 @@ bool AGEdit::eventKeyDown(AGEvent *m)
       {
         SDLKey k=m->getKey();
         Uint16 unicode=m->getUnicode();
-        
+
         bool result=processKey(k,unicode);
         if(result)
           {
             std::cout<<"MODIFIED"<<std::endl;
             sigModified(m);
           }
-        
+
         return result;
       }
     return false;

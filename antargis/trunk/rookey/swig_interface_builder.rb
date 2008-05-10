@@ -195,6 +195,13 @@ template <>
           swig_type_info *ty = SWIG_TypeDynamicCast($1_descriptor,(void **) &$1);
           $result = SWIG_NewPointerObj($1, ty, $owner);
         }        
+        %typemap(directorin) #{c.name} *, #{c.name} & {
+          if($1)
+          {
+          swig_type_info *ty = SWIG_TypeDynamicCast($1_descriptor,(void **) &$1);
+          $input = SWIG_NewPointerObj($1, ty, $owner);
+          }
+        }        
         %{
         
         swig_type_info* #{c.name}_dynamic_cast(void **p)

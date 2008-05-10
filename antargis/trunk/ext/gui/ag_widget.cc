@@ -51,7 +51,7 @@ bool getNewClippingTechnique()
     return gNewClippingTechnique;
   }
 
-
+/*
 // FIXME: This shouldn't be needed anymore !!
 class MWidgetSet:public std::set<AGWidget*>
 {
@@ -80,7 +80,7 @@ MWidgetSet *getAllWidgets()
       }
     return mPAllWidgets;
   }
-
+*/
 AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
@@ -91,25 +91,28 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
   mHasFocus(false),mFocus(0)
 
-{
-  mChangeRect=AGRect2(0,0,0,0);
-  mCache=0;
-  mCacheTouched=false;
-  mTooltipWidget=0;
-  mModal=false;
-  if(getAllWidgets())
-    getAllWidgets()->insert(this);
+  {
+    CTRACE;
+    if(mParent)
+      mParent->addChildRef(this);
+    
+    mChangeRect=AGRect2(0,0,0,0);
+    mCache=0;
+    mCacheTouched=false;
+    mTooltipWidget=0;
+    mModal=false;
+    //if(getAllWidgets())
+    //  getAllWidgets()->insert(this);
 
-  getMain()->getCollector()->insertGlobal(this);
-}
+    getMain()->getCollector()->insertGlobal(this);
+  }
 
 AGWidget::~AGWidget()
   {
     CTRACE;
 
-    if(!mParent)
-      if(hasMain())
-        getMain()->getCollector()->removeGlobal(this);
+    if(hasMain())
+      getMain()->getCollector()->removeGlobal(this);
 
     std::list<AGWidget*>::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
@@ -118,18 +121,19 @@ AGWidget::~AGWidget()
       }
     if(getParent())
       {
-        if(getAllWidgets())
+        /*if(getAllWidgets())
           {
             if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
               {
                 dbout(5000,"WARNING:Error in ~AGWidget!!!");
               }
-            else
+            else*/
+           
               getParent()->eventChildrenDeleted(this);
-          }
+          //}
       }
-    if(getAllWidgets())
-      getAllWidgets()->erase(this);
+    //if(getAllWidgets())
+    //  getAllWidgets()->erase(this);
   }
 
 std::list<AGWidget*> AGWidget::getChildren()
@@ -254,6 +258,8 @@ bool AGWidget::processEvent(AGEvent *event)
   {
     if(!mVisible)
       return false;
+    cdebug("proc");
+    cdebug(event->getKey());
 
     bool processed = false;
     // do i have a capturehook set ? (modal)
@@ -424,8 +430,17 @@ bool AGWidget::eventMouseClick(AGEvent *m)
     return false;
   }
 
+void AGWidget::addChildRef(AGWidget *pWidget)
+  {
+    assert(pWidget);
+    mRefChildren.insert(pWidget);
+  }
+
+
 void AGWidget::addChild(AGWidget *w)
   {
+    mRefChildren.erase(w);
+    
     mChildren.push_front(w); // set on top
     if(mHasFocus && w->canFocus())
       {
@@ -535,8 +550,6 @@ void AGWidget::setWidth(float w)
   }
 void AGWidget::setHeight(float h)
   {
-    CTRACE;
-    cdebug(getName());
     regChange();
     mr.setHeight(h);
     regChange();
@@ -667,19 +680,19 @@ bool AGWidget::eventLostFocus()
 void AGWidget::gainCompleteFocus(AGWidget *pWidget)
   {
 #ifdef FOCUS_BY_SORT
-if(mParent)
-  mParent->gainCompleteFocus(this);
-if(pWidget)
-  {
-    //      dbout(5000,mChildren.size());
-    std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
-    if(i!=mChildren.end())
+    if(mParent)
+      mParent->gainCompleteFocus(this);
+    if(pWidget)
       {
-        mChildren.erase(i);
-        mChildren.push_front(pWidget);
+        //      dbout(5000,mChildren.size());
+        std::list<AGWidget*>::iterator i=std::find(mChildren.begin(),mChildren.end(),pWidget);
+        if(i!=mChildren.end())
+          {
+            mChildren.erase(i);
+            mChildren.push_front(pWidget);
+          }
+        //      dbout(5000,mChildren.size());
       }
-    //      dbout(5000,mChildren.size());
-  }
 #endif
   }
 
@@ -845,10 +858,10 @@ bool AGWidget::isOpaque() const
 
 AGWidget *AGWidget::getChild(const AGString &pName)
   {
-    CTRACE;
     if(mName==pName)
       return this;
 
+    
     AGWidget *w=0;
     std::list<AGWidget*>::iterator i=mChildren.begin();
 
@@ -876,6 +889,14 @@ void AGWidget::mark()
     // mark mToClear also - as it can be that they are still used on stack
     for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)
       markObject(*i);
+
+  
+    for(std::set<AGWidget*>::iterator i=mRefChildren.begin();i!=mRefChildren.end();i++)
+      {
+        assert((*i));
+        markObject(*i);
+      }
+
   }
 
 
@@ -1155,12 +1176,12 @@ void AGWidget::setApp(AGApplication *pApp)
 
 
 AGRect2 AGWidget::getChildRect(const AGRect2 &pRect) const
-  {
-    if(mUseClientRect)
-        mClientProj.project(pRect);
-    else
-      return pRect;
-  }
+{
+  if(mUseClientRect)
+    mClientProj.project(pRect);
+  else
+    return pRect;
+}
 bool AGWidget::containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const
 {
   return getChildRect(pWidget->getRect()).contains(pVector);

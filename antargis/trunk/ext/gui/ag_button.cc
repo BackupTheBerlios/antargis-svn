@@ -42,6 +42,7 @@ AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,i
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
   {
+    CTRACE;
     mImageW=0;
     setTheme("");
     AGFont font("FreeSans.ttf");
@@ -112,6 +113,8 @@ void AGButton::setTexture(const AGTexture &pTexture)
 
 void AGButton::draw(AGPainter &p)
   {
+    assert(mTextW);
+//    cdebug(mTextW->getText());
     p.pushMatrix();
     p.transform(AGRect2(0,0,width(),height()).shrink(borderWidth));
     AGRect2 pr=getRect().origin();
@@ -218,22 +221,32 @@ bool AGButton::eventMouseButtonUp(AGEvent *e)
     return AGWidget::eventMouseButtonUp(e);
   }
 
+void AGButton::setRect(const AGRect2 &r)
+  {
+    AGWidget::setRect(r);
+    updateClientRects();
+  }
+
 void AGButton::setWidth(float w)
   {
     assert(w>=0);
     AGWidget::setWidth(w);
-    std::list<AGWidget*>::iterator i=mChildren.begin();
-    for(;i!=mChildren.end();i++)
-      (*i)->setRect(getRect().shrink(borderWidth));
+    updateClientRects();
   }
 void AGButton::setHeight(float h)
   {
     assert(h>=0);
     AGWidget::setHeight(h);
+    updateClientRects();
+  }
+
+void AGButton::updateClientRects()
+  {
     std::list<AGWidget*>::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
       (*i)->setRect(getRect().shrink(borderWidth));
   }
+
 
 /**
    \return returns the text displayed on the button
@@ -270,6 +283,7 @@ void AGButton::setEnabled(bool pEnable)
 
 void AGButton::setTheme(const AGString &pTheme)
   {
+    CTRACE;
     queryRedraw();
     mTheme=addPoint(pTheme);
 

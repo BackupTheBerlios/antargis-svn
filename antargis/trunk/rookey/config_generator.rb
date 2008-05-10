@@ -76,9 +76,7 @@ EOT
 	      getPath.map{|dir|
 	        
 	        p=File.join(dir,program)
-          #puts "TEST:"+p
 	        p=nil unless File.exists?(p)
-          #puts "RES:"+p.to_s
           p
 	      }
       }.flatten.uniq-[nil]
@@ -144,7 +142,7 @@ EOT
 	    configurators.each{|c|
 	      unless run.member?(c)
 		      if c.needs.select{|s|not ok.member?(s)}.length == 0
-		        log "Running congurator #{c}"
+		        log "Running configurator #{c}"
 		        c.new.run(config)
 		        ok+=c.provides
 		        ok.uniq!

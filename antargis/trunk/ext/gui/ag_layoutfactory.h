@@ -27,6 +27,7 @@
 #include <ag_utf8.h>
 #include <ag_widget.h>
 #include <ag_xml.h>
+#include <ag_layout.h>
 
 class AGEXPORT AGLayoutCreator:public AGSingleton
 {
@@ -41,8 +42,9 @@ class AGEXPORT AGLayoutCreator:public AGSingleton
 
   void mark();
  private:
+   
   AGWidget *mWidget;
-    //std::string mName;
+  
 
 };
 
@@ -60,6 +62,15 @@ class AGEXPORT AGLayoutFactory
   AGWidget *create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode);
   
   friend AGLayoutFactory *getLayoutFactory();
+  
+  friend void AGLayout::loadXML(const std::string &pXMLData);
+
+  AGLayout *getCurrentLayout();
+ private:
+  std::list<AGLayout*> mCurrentLayouts;
+  void pushLayout(AGLayout *pLayout);
+  void popLayout();
+
 };
 
 AGEXPORT AGLayoutFactory *getLayoutFactory();

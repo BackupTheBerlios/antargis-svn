@@ -95,7 +95,7 @@ public:
   
   AGRect2 getRect() const;
   virtual AGRect2 getClientRect() const;
-  void setRect(const AGRect2 &pRect);
+  virtual void setRect(const AGRect2 &pRect);
 
   void setParent(AGWidget *pParent);
   AGWidget *getParent();
@@ -232,6 +232,8 @@ public:
   virtual bool eventMouseButtonDownClipped(AGEvent *pEvent,const AGVector2 &pPosition);
   virtual bool eventMouseButtonUpClipped(AGEvent *pEvent,const AGVector2 &pPosition);
   virtual bool eventMouseMotionClipped(AGEvent *pEvent,const AGVector2 &pPosition);
+
+  void addChildRef(AGWidget *pWidget);
 protected:
   
 
@@ -285,6 +287,8 @@ private:
   AGStringUtf8 mTooltip;
   AGTooltip *mTooltipWidget;
 
+  std::set<AGWidget*> mRefChildren;
+  
 protected:
   std::list<AGWidget*> mChildren;
 

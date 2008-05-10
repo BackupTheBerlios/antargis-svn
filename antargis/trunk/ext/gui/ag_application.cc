@@ -255,6 +255,7 @@ bool AGApplication::doEvent(const SDL_Event &event)
     if(mOverlay)
       processed=mOverlay->processEvent(message);
 
+    cdebug(processed);
     if(!processed)
       {
         if(!processed && mainWidget)
@@ -461,6 +462,7 @@ void AGApplication::tryQuit()
 bool AGApplication::eventKeyDown(AGEvent *m)
   {
     CTRACE;
+    cdebug("M:"<<m->getKey());
     if(m->isSDLEvent())
       {
         SDLKey k=m->getKey();

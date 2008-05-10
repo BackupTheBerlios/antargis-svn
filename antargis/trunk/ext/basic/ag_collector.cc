@@ -3,27 +3,30 @@
 #include <ag_main.h>
 
 void AGCollector::insertGlobal(AGRubyObject *pObject)
-{
-  //  CTRACE;
-  mGlobals.insert(pObject);
-}
+  {
+    // cdebug(pObject<<":"<<typeid(*pObject).name());
+    mGlobals.insert(pObject);
+  }
 
 void AGCollector::removeGlobal(AGRubyObject *pObject)
-{
-  //  CTRACE;
-  mGlobals.erase(pObject);
-}
+  {
+    //cdebug(pObject<<":"<<typeid(*pObject).name());
+    mGlobals.erase(pObject);
+  }
 
 void AGCollector::mark()
-{
-  //  CTRACE;
-  for(std::set<AGRubyObject*>::iterator i=mGlobals.begin();i!=mGlobals.end();i++)
-    markObject(*i);
-}
+  {
+    for(std::set<AGRubyObject*>::iterator i=mGlobals.begin();i!=mGlobals.end();i++)
+      {
+        // cdebug(*i);
+
+        markObject(*i);
+      }
+  }
 
 AGCollector *getCollector()
-{
-  if(getMain())
-    return getMain()->getCollector();
-  return 0;
-}
+  {
+    if(getMain())
+      return getMain()->getCollector();
+    return 0;
+  }

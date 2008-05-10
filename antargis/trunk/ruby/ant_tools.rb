@@ -26,7 +26,7 @@ def getAnimMeshData(file)
 end
 
 def displayError(error)
-	getSoundManager.playWave("data/sound/error.wav")
+  getSoundManager.playWave(["data","sound","error.wav"].join("/"))
 	playSound(error)
 	dputs "ERROR:"+error.to_s
 end
@@ -72,3 +72,16 @@ def assert(text="",&block)
 end
 
 
+class Object
+  def define_cmethod(method_name, method = nil, &proc)
+    if proc.nil?
+      raise ArgumentError
+    else
+      method = proc
+    end if method.nil?
+  
+    (class << self; self; end).module_eval do
+      define_method( method_name.to_sym, method )
+    end
+  end
+end
