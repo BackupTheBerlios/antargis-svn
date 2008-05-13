@@ -26,7 +26,8 @@
 SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 
 // AGEvent
-AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e)
+AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e),
+  mMousePosition(0)
   {
   }
 AGEvent::~AGEvent()
@@ -83,8 +84,20 @@ const SDL_Event &AGEvent::get() const
   return mEvent;
 }
 
+void AGEvent::setMousePosition(const AGVector2 &p)
+  {
+    if(mMousePosition)
+      *mMousePosition=p;
+    else
+      mMousePosition=new AGVector2(p);
+  }
+
+
 AGVector2 AGEvent::getMousePosition() const
 {
+  if(mMousePosition)
+    return *mMousePosition;
+  
   assert(eventOk(mEvent));
   AGVector2 p;
   switch(mEvent.type) {
@@ -325,7 +338,6 @@ void AGMessageObject::popSignal(AGSignal *pSignal)
 
 bool AGMessageObject::processEvent(AGEvent* agEvent) 
   {
-    cdebug(agEvent->getKey()<<":"<<typeid(*this).name());
     bool rc=false;
 
     if(agEvent->isSDLEvent())

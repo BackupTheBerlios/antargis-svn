@@ -127,11 +127,8 @@ class Effect<AGWidget
     @time=0
   end
   def eventFrame(t)
-    pp @running
-    #exit
     if @running
       @time+=t
-     # exit
       @running=false if @time>=@duration
       @time=@duration if @time>@duration 
       step(@time/@duration)
@@ -488,21 +485,26 @@ class ToolBar<AGWidgetWithConfig
     @ll=getColor("ll","#999999")
     @lr=getColor("lr","#999999")
     @borderWidth=ops["borderWidth"].to_i
+    @count=0
   end
   def draw(p)
     p.drawGradient(getRect.origin,@ul,@ur,@ll,@lr)
   end
   def getNextChildRect
     cCount=getChildren.length
+    #cCount=@count
+    #@count+=1
+    #p getChildRects,cCount
+    #exit
     getChildRects[cCount].shrink(3)
   end
   
   def getChildRects
     rectSize=[width,height].min
     rects=[]
-    0.upto(width/rectSize){|x|
-      0.upto(height/rectSize){|y|
-        rects<<AGRect.new(x,y,rectSize,rectSize)
+    0.upto(width/rectSize-1){|x|
+      0.upto(height/rectSize-1){|y|
+        rects<<AGRect.new(x*rectSize,y*rectSize,rectSize,rectSize)
       }
     }
     rects
@@ -513,12 +515,13 @@ class ToolButton<AGButton
   def initialize(p,r,ops)
     puts "MUH1"
     puts self.object_id
-    text=AGStringUtf8.new("HUP") #ops["text"])
+    text=AGStringUtf8.new("HUP")
     super(p,r,text)
     setCaching(false)
     puts "MUH2"
     setRect(p.getNextChildRect)
     setCaption(text)
+    setSurface(AGSurface::load(ops["caption-image"])) if ops["caption-image"]
     setName(ops["name"])
   end
 end
@@ -661,7 +664,6 @@ end
 def createSignal(x)
   signal=RubySignal.new(x)
   self.define_cmethod(x) {|*s|
-    puts s.length
     if s.length==0
       signal
     else
@@ -670,7 +672,7 @@ def createSignal(x)
   }
 end
 
-class MApp<AGApplication
+class CampaignEditorApp<AGApplication
   def initialize()
     super
     createSignal :sigFrame
@@ -693,12 +695,9 @@ class MApp<AGApplication
     @grid.select(nil)
   end
   def eventFrame(t)
-    pp 1/t
     sigFrame(t)
     super
   end
   
 end
 
-app=MApp.new
-app.run

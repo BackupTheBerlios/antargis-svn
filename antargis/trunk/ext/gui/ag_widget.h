@@ -235,7 +235,7 @@ public:
 
   void addChildRef(AGWidget *pWidget);
 protected:
-  
+  virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
 
 private:
   

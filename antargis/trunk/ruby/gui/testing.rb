@@ -107,9 +107,37 @@ protected
 		TestWidget.new(@app.getMainWidget.getChild(widgetName))
 	end
 	def clickScreen(x,y)
-		@app.eventMouseButtonDown(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONDOWN:0:1:1:#{x.to_i}:#{y.to_i}")))
-		@app.eventMouseButtonUp(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONUP:0:1:1:#{x.to_i}:#{y.to_i}")))
+	  pos=AGVector2.new(x,y)
+	  mouseDown(pos)
+    mouseUp(pos)
+		#@app.eventMouseButtonDown(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONDOWN:0:1:1:#{x.to_i}:#{y.to_i}")))
+		#@app.eventMouseButtonUp(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONUP:0:1:1:#{x.to_i}:#{y.to_i}")))
 	end
+  
+  def mouseMotion(pos)
+    
+    x=pos[0]
+    y=pos[1]
+    @@oldPos||=pos
+    
+    d=pos-@@oldPos
+    dx=d[0].to_i
+    dy=d[1].to_i
+    p x,y,dx,dy
+    @app.doEvent(toSDLEvent("SDL_MOUSEMOTION:0:1:#{x.to_i}:#{y.to_i}:#{dx}:#{dy}"))
+  end
+  
+  def mouseDown(pos)
+    x=pos[0]
+    y=pos[1]
+    @app.doEvent(toSDLEvent("SDL_MOUSEBUTTONDOWN:0:1:1:#{x.to_i}:#{y.to_i}"))
+  end
+  def mouseUp(pos)
+    x=pos[0]
+    y=pos[1]
+    @app.doEvent(toSDLEvent("SDL_MOUSEBUTTONUP:0:1:1:#{x.to_i}:#{y.to_i}"))
+  end
+  
   def key(pkey)
     sym=pkey[0]
     s1="SDL_KEYDOWN:0:1:0:#{sym}:0:#{sym}"

@@ -80,7 +80,7 @@ MWidgetSet *getAllWidgets()
       }
     return mPAllWidgets;
   }
-*/
+ */
 AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
@@ -91,21 +91,21 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
   mHasFocus(false),mFocus(0)
 
-  {
-    CTRACE;
-    if(mParent)
-      mParent->addChildRef(this);
-    
-    mChangeRect=AGRect2(0,0,0,0);
-    mCache=0;
-    mCacheTouched=false;
-    mTooltipWidget=0;
-    mModal=false;
-    //if(getAllWidgets())
-    //  getAllWidgets()->insert(this);
+    {
+      CTRACE;
+      if(mParent)
+        mParent->addChildRef(this);
 
-    getMain()->getCollector()->insertGlobal(this);
-  }
+      mChangeRect=AGRect2(0,0,0,0);
+      mCache=0;
+      mCacheTouched=false;
+      mTooltipWidget=0;
+      mModal=false;
+      //if(getAllWidgets())
+      //  getAllWidgets()->insert(this);
+
+      getMain()->getCollector()->insertGlobal(this);
+    }
 
 AGWidget::~AGWidget()
   {
@@ -128,9 +128,9 @@ AGWidget::~AGWidget()
                 dbout(5000,"WARNING:Error in ~AGWidget!!!");
               }
             else*/
-           
-              getParent()->eventChildrenDeleted(this);
-          //}
+
+        getParent()->eventChildrenDeleted(this);
+        //}
       }
     //if(getAllWidgets())
     //  getAllWidgets()->erase(this);
@@ -258,8 +258,6 @@ bool AGWidget::processEvent(AGEvent *event)
   {
     if(!mVisible)
       return false;
-    cdebug("proc");
-    cdebug(event->getKey());
 
     bool processed = false;
     // do i have a capturehook set ? (modal)
@@ -269,7 +267,8 @@ bool AGWidget::processEvent(AGEvent *event)
 
     std::list<AGWidget*> children=mChildren; // copy children, so that changes do not affect iteration
     for(i=children.begin();i!=children.end() && !processed; i++)
-      processed=(*i)->processEvent(event);
+      //      processed=(*i)->processEvent(event);
+      processed=letChildProcess(*i,event);
 
     if(processed)
       return processed;
@@ -285,6 +284,12 @@ bool AGWidget::processEvent(AGEvent *event)
       return true;
     return false;
   }
+
+bool AGWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
+  {
+    return pChild->processEvent(event);
+  }
+
 
 bool AGWidget::eventShow()
   {
@@ -440,7 +445,7 @@ void AGWidget::addChildRef(AGWidget *pWidget)
 void AGWidget::addChild(AGWidget *w)
   {
     mRefChildren.erase(w);
-    
+
     mChildren.push_front(w); // set on top
     if(mHasFocus && w->canFocus())
       {
@@ -547,12 +552,14 @@ void AGWidget::setWidth(float w)
     regChange();
     mr.setWidth(w);
     regChange();
+    queryRedraw();
   }
 void AGWidget::setHeight(float h)
   {
     regChange();
     mr.setHeight(h);
     regChange();
+    queryRedraw();
   }
 
 void AGWidget::setTop(float y)
@@ -861,7 +868,7 @@ AGWidget *AGWidget::getChild(const AGString &pName)
     if(mName==pName)
       return this;
 
-    
+
     AGWidget *w=0;
     std::list<AGWidget*>::iterator i=mChildren.begin();
 
@@ -890,7 +897,7 @@ void AGWidget::mark()
     for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)
       markObject(*i);
 
-  
+
     for(std::set<AGWidget*>::iterator i=mRefChildren.begin();i!=mRefChildren.end();i++)
       {
         assert((*i));

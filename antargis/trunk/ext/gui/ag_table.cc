@@ -314,14 +314,11 @@ void AGTable::arrange()
 
 void AGTable::setWidth(float w)
   {
-    CTRACE;
-    cdebug(w);
     AGWidget::setWidth(w);
     arrange();
   }
 void AGTable::setHeight(float w)
   {
-    CTRACE;
     AGWidget::setHeight(w);
     arrange();
   }

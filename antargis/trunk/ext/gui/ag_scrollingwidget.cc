@@ -30,6 +30,21 @@ AGScrollingWidget::AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect):
     {
     }
 
+bool AGScrollingWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
+  {
+    bool retValue;
+    AGVector2 old=event->getMousePosition();
+    
+    event->setMousePosition(old+mVector);
+    
+    retValue=pChild->processEvent(event);
+    
+    event->setMousePosition(old);
+    
+    return retValue;
+  }
+
+
 void AGScrollingWidget::setClientRect(const AGRect2 &pRect)
   {
     mClient=pRect;
@@ -47,7 +62,6 @@ bool AGScrollingWidget::eventMouseButtonDown(AGEvent *pEvent)
     bool result=AGWidget::eventMouseButtonDown(pEvent);
     cdebug(getScreenRect());
     cdebug(pEvent->getMousePosition());
-    //if((getScreenRect()+mVector).contains(pEvent->getMousePosition()))
     if(hovered())
       {
         mDragging=true;

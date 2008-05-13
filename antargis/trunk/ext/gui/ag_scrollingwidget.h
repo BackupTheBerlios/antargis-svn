@@ -39,7 +39,9 @@ public:
   AGRect2 getClientRect() const;
   
   AGRect2 getScreenRect() const;
-  
+protected:
+  virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
+
 private:
   AGRect2 mClient;
   AGVector2 mVector;
