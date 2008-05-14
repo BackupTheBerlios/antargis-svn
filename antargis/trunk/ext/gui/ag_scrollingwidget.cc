@@ -86,8 +86,7 @@ bool AGScrollingWidget::eventDragBy(AGEvent *pEvent,const AGVector2 &pVector)
       {
         mVector-=pVector;
         cdebug(mVector);
-        AGRect2 client=AGRect2(0,0,mClient.width()-width(),mClient.height()-height());
-        mVector=client.clip(mVector);
+        mVector=clip(mVector);
         cdebug(mVector);
       }
     return AGWidget::eventDragBy(pEvent,pVector);
@@ -104,3 +103,13 @@ AGRect2 AGScrollingWidget::getScreenRect() const
 }
 
 
+void AGScrollingWidget::setVector(const AGVector2 &pVector)
+  {
+   mVector=clip(pVector); 
+  }
+
+AGVector2 AGScrollingWidget::clip(const AGVector2 &pVector)
+  {
+    AGRect2 client=AGRect2(0,0,mClient.width()-width(),mClient.height()-height());
+    return client.clip(pVector);
+  }

@@ -9,9 +9,17 @@ describe "Campaign editor" do
     @app=makeTestAppClass(CampaignEditorApp).new
   end
   it "should be possible to place levels on the grid" do
-    
-    drag(getSourceMiddle("levelSource"),getGridPos(1,1),50)
+    drag(getSourceMiddle("levelSource"),getGridPos(1,1),10)
+    grid.getAllDescendants.select{|c|c.is_a?(DragBox)}.length.should == 1
   end
+  
+  it "should not use widgets for DragTargets anymore" do
+    # define DragTarget, if not yet defined
+    class DragTarget
+    end
+    grid.getAllDescendants.select{|c|c.is_a?(DragTarget)}.length.should == 0
+  end
+  
   it "should be possible to place stories on the grid"
   it "should be possible to define a start-node"
   it "should be possible to draw arrows from one node to another"
@@ -30,6 +38,7 @@ describe "Campaign editor" do
       @app.step
     }
     mouseUp(to)
+    #@app.step while true
   end
   
   def getSourceMiddle(name)
@@ -41,6 +50,9 @@ describe "Campaign editor" do
   end
   def getGridPos(x,y)
     gridWidth=50
-    (AGRect2.new(x*gridWidth,y*gridWidth,gridWidth,gridWidth)+getWidget("dragGrid").getScreenRect.getV0).getMiddle
+    (AGRect2.new(x*gridWidth,y*gridWidth,gridWidth,gridWidth)+grid.getScreenRect.getV0).getMiddle
+  end
+  def grid
+    getWidget("dragGrid")
   end
 end

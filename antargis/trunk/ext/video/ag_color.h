@@ -64,6 +64,8 @@ class AGEXPORT AGColor:public SDL_Color
   void light(Uint8 l);
 
   //  SDL_Color sdlColor() const;
+  
+  bool operator==(const AGColor &c) const;
 
   //  Uint8 r,g,b;
   Uint8 a;

@@ -253,7 +253,7 @@ bool AGApplication::doEvent(const SDL_Event &event)
     if (mOverlay)
       processed=mOverlay->processEvent(message);
 
-    cdebug(processed);
+//    cdebug(processed);
     if (!processed)
       {
         if (!processed && mainWidget)

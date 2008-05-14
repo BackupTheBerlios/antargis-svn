@@ -196,3 +196,11 @@ AGColor AGColor::operator+(const AGColor &c) const
   return AGColor(r+c.r, g+c.g, b+c.b);
 }
 
+
+bool AGColor::operator==(const AGColor &c) const
+{
+  return r==c.r &&
+  g==c.g &&
+  b==c.b &&
+  a==c.a;
+}

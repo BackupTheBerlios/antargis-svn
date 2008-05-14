@@ -315,6 +315,7 @@ class DragBox<AGHoverWidget
   
   def eventMouseButtonUp(e)
     return super unless @dragging
+    #moveToContext()
     cells=getDragEnvironment.getDragTargets
     scells=cells.select{|c|c.getScreenRect.shrink(10).contains(getMiddle)}
     cell=scells[0]

@@ -118,41 +118,41 @@ void AGGLObject::onScreenUp()
 AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
   w(VW),h(VH),
   rw(W),rh(H)
-  {
-    if(w<rw)
-      w=rw;
-    if(h<rh)
-      h=rh;
+    {
+      if(w<rw)
+        w=rw;
+      if(h<rh)
+        h=rh;
 
-    mLineWidth=2;
+      mLineWidth=2;
 
-    cdebug("w:"<<w<<" h:"<<h);
+      cdebug("w:"<<w<<" h:"<<h);
 
-    // init GL
-    glEnable(GL_TEXTURE_2D);
-    glShadeModel(GL_SMOOTH);
-    glClearColor(0.0f,0.0f,0.0f,0.0f); // clear bgcolor
-    glClearDepth(1.0f);      // clear depth buffer
-    glEnable(GL_DEPTH_TEST); // enable depth test
-    glDepthFunc(GL_LEQUAL); // set type depth test
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
-    glEnable(GL_BLEND);
+      // init GL
+      glEnable(GL_TEXTURE_2D);
+      glShadeModel(GL_SMOOTH);
+      glClearColor(0.0f,0.0f,0.0f,0.0f); // clear bgcolor
+      glClearDepth(1.0f);      // clear depth buffer
+      glEnable(GL_DEPTH_TEST); // enable depth test
+      glDepthFunc(GL_LEQUAL); // set type depth test
+      glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
+      glEnable(GL_BLEND);
 
-    glViewport( 0, 0, rw, rh );
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity( );
+      glViewport( 0, 0, rw, rh );
+      glMatrixMode( GL_PROJECTION );
+      glLoadIdentity( );
 
-    GLfloat ratio;
+      GLfloat ratio;
 
-    ratio = ( float )w / ( float )h;
+      ratio = ( float )w / ( float )h;
 
-    //  gluPerspective( 45.0f, ratio, 1.0f, 100.0f );
+      //  gluPerspective( 45.0f, ratio, 1.0f, 100.0f );
 
-    gluOrtho2D(0,w,0,h);
+      gluOrtho2D(0,w,0,h);
 
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity( );
-  }
+      glMatrixMode( GL_MODELVIEW );
+      glLoadIdentity( );
+    }
 
 
 
@@ -167,45 +167,51 @@ AGSurface AGGLScreen::screenshot(bool frontBuffer)
 
     //  SDL_Surface *surface=s.surface()->surface;
 
-    unsigned char *buffer=new unsigned char[getWidth()*getHeight()*4];
+    unsigned char *buffer=new unsigned char[getWidth()*getHeight()*4+16];
 
     if(frontBuffer)
-      glReadBuffer(GL_FRONT);
+      //  glReadBuffer(GL_FRONT);
+      glReadBuffer(GL_FRONT_LEFT);
     else
       glReadBuffer(GL_BACK);
 
     cdebug(s.surface());
     cdebug(s.surface()->surface);
 
-    glPixelStorei(GL_PACK_ALIGNMENT, 2);
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
     assertGL;
     glPixelStorei(GL_PACK_ROW_LENGTH, getWidth());
     //                surface->pitch / surface->format->BytesPerPixel);
+
+    //glPixelStorei(GL_PACK_SKIP_PIXELS,0);
+    //glPixelStorei(GL_PACK_SKIP_ROWS,0);
     assertGL;
 
 
-      {
-        TRACE;
-        glReadPixels(0,0,getWidth(),getHeight(),GL_RGBA,GL_UNSIGNED_BYTE,buffer);//s.surface()->surface);
-        glReadBuffer(GL_BACK);
-      }
+    {
+      TRACE;
+      cdebug(getWidth());
+      cdebug(getHeight());
+      glReadPixels(0,0,getWidth(),getHeight(),GL_RGBA,GL_UNSIGNED_BYTE,buffer);//s.surface()->surface);
+      glReadBuffer(GL_BACK);
+    }
 
-        {
-          // copy
-          TRACE;
-          int h=getHeight()-1;
-          for(int x=0;x<(int)getWidth();x++)
-            for(int y=0;y<(int)getHeight();y++)
-              {
-                unsigned char*p=buffer+((x+(h-y)*getWidth())*4);
-                AGColor c(p[0],p[1],p[2],p[3]);
-                s.putPixel(x,y,c);
-              }
-        }
+    {
+      // copy
+      TRACE;
+      int h=getHeight()-1;
+      for(int x=0;x<(int)getWidth();x++)
+        for(int y=0;y<(int)getHeight();y++)
+          {
+            unsigned char*p=buffer+((x+(h-y)*getWidth())*4);
+            AGColor c(p[0],p[1],p[2],p[3]);
+            s.putPixel(x,y,c);
+          }
+    }
 
-
-        delete [] buffer;
-        return s;
+    assertGL;
+    delete [] buffer;
+    return s;
   }
 
 

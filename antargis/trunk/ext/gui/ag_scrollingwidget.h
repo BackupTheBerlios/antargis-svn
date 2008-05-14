@@ -39,8 +39,11 @@ public:
   AGRect2 getClientRect() const;
   
   AGRect2 getScreenRect() const;
+  
+  void setVector(const AGVector2 &pVector);
 protected:
   virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
+  AGVector2 clip(const AGVector2 &pVector);
 
 private:
   AGRect2 mClient;

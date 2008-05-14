@@ -132,26 +132,26 @@ AGInternalSurface::~AGInternalSurface()
 ///////////////////////////////////////////////////////////////////////
 
 AGSurface::AGSurface(AGInternalSurface *i):s(i)
-{
-  getSurfaceManager()->registerMe(this);
-}
+    {
+      getSurfaceManager()->registerMe(this);
+    }
 
 
 AGSurface::AGSurface():
   s(0)
-  {
-    getSurfaceManager()->registerMe(this);
-  }
+      {
+        getSurfaceManager()->registerMe(this);
+      }
 AGSurface::AGSurface(int w,int h):
   s(AGCreate32BitSurface(w,h))
-  {
-    getSurfaceManager()->registerMe(this);
-  }
+      {
+        getSurfaceManager()->registerMe(this);
+      }
 AGSurface::AGSurface(const AGSurface &p):
   s(p.s)
-  {
-    getSurfaceManager()->registerMe(this);
-  }
+      {
+        getSurfaceManager()->registerMe(this);
+      }
 
 bool AGSurface::valid() const
 {
@@ -204,6 +204,30 @@ AGSurface &AGSurface::operator=(const AGSurface &p)
     s=p.s;
     return *this;
   }
+
+bool AGSurface::operator==(const AGSurface &p) const
+{
+  cdebug("operator==");
+  if(width()!=p.width())
+    {
+      cdebug("width:"<<width()<<"!="<<p.width());
+      return false;
+    }
+  if(height()!=p.height())
+    {
+      cdebug("height:"<<height()<<"!="<<p.height());
+      return false;
+    }
+  for(size_t y=0;y<height();y++)
+    for(size_t x=0;x<width();x++)
+      if(getPixel(x,y)!=p.getPixel(x,y))
+        {
+          cdebug(x<<":"<<y<<":"<<getPixel(x,y)<<"!="<<p.getPixel(x,y));
+          return false;
+        }
+  return true;
+}
+
 
 
 void AGSurface::putPixel(int x,int y,const AGColor &c)
