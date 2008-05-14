@@ -10,6 +10,8 @@ module Rookey
         when /darwin/
           config.add("INCLUDEDIRS","/usr/X11/include")        
           config.add("LDFLAGS","-Wl,-framework,OpenGL")
+        else
+          config.add("LDFLAGS","-lGL -lGLU")
       end      
     end   
   end 

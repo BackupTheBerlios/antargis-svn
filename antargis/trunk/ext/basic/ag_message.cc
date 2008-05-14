@@ -1,4 +1,5 @@
 #include "ag_message.h"
+#include "ag_debug.h"
 
 AGMessageData::AGMessageData(size_t pID):
   mID(pID)
