@@ -21,6 +21,7 @@ describe "Screenshots" do
     getScreen.flip
     0.upto(black.width-1) {|x|
       0.upto(black.height-1){|y|
+        #black.getPixel(x,y).should ==blackColor
 #        black.getPixel(x,y).should ==blackColor
       }
     }
