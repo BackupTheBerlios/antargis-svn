@@ -84,6 +84,9 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
     if(fs)
       videoFlags|=SDL_FULLSCREEN;
+    
+    if(gl)
+      videoFlags|=SDL_DOUBLEBUF;
 
 
     cdebug("SDL_Init...");

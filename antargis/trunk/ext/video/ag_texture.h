@@ -88,6 +88,8 @@ class AGEXPORT AGTexture:public AGPaintTarget
   bool is3d() const;
 
   void clearContent();
+  
+  AGSurface getSurface() const;
 
  private:
 

@@ -40,6 +40,10 @@ class AGEXPORT MiniMap:public AGWidget
 
   virtual bool eventMouseClick(AGEvent *m);
   virtual bool eventMouseButtonDown(AGEvent *m);
+  
+  AGSignal sigMoved;
+  
+  AGVector2 getMapPosition() const;
 
  private:
   // adds some fancy noise to the map display
@@ -57,6 +61,8 @@ class AGEXPORT MiniMap:public AGWidget
   SceneBase *mScene;
   AGTexture *mTexture;
   AGSurface mSurface;
+  
+  AGVector2 mPos;
 };
 
 //MiniMap *toMiniMap(AGWidget *w);

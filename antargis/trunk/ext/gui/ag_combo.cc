@@ -96,7 +96,7 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
     if(ops.size()>0)
       mListBox->selectItem(mID);
 
-    getApplication()->setOverlay(mListBox);
+    getApp()->setOverlay(mListBox);
     return true;
   }
 
@@ -105,7 +105,7 @@ bool AGComboBox::eventSelected(AGEvent *pEvent)
     CTRACE;
     mID=mListBox->getSelectedID();
     update();
-    getApplication()->setOverlay(0);
+    getApp()->setOverlay(0);
 
     sigSelect(new AGEvent(this,"sigSelect"));
     return true;

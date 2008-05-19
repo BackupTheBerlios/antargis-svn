@@ -118,41 +118,41 @@ void AGGLObject::onScreenUp()
 AGGLScreen::AGGLScreen(int W,int H,int VW,int VH):
   w(VW),h(VH),
   rw(W),rh(H)
-    {
-      if(w<rw)
-        w=rw;
-      if(h<rh)
-        h=rh;
+        {
+          if(w<rw)
+            w=rw;
+          if(h<rh)
+            h=rh;
 
-      mLineWidth=2;
+          mLineWidth=2;
 
-      cdebug("w:"<<w<<" h:"<<h);
+          cdebug("w:"<<w<<" h:"<<h);
 
-      // init GL
-      glEnable(GL_TEXTURE_2D);
-      glShadeModel(GL_SMOOTH);
-      glClearColor(0.0f,0.0f,0.0f,0.0f); // clear bgcolor
-      glClearDepth(1.0f);      // clear depth buffer
-      glEnable(GL_DEPTH_TEST); // enable depth test
-      glDepthFunc(GL_LEQUAL); // set type depth test
-      glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
-      glEnable(GL_BLEND);
+          // init GL
+          glEnable(GL_TEXTURE_2D);
+          glShadeModel(GL_SMOOTH);
+          glClearColor(0.0f,0.0f,0.0f,0.0f); // clear bgcolor
+          glClearDepth(1.0f);      // clear depth buffer
+          glEnable(GL_DEPTH_TEST); // enable depth test
+          glDepthFunc(GL_LEQUAL); // set type depth test
+          glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // GL_NICEST // best perspective correction
+          glEnable(GL_BLEND);
 
-      glViewport( 0, 0, rw, rh );
-      glMatrixMode( GL_PROJECTION );
-      glLoadIdentity( );
+          glViewport( 0, 0, rw, rh );
+          glMatrixMode( GL_PROJECTION );
+          glLoadIdentity( );
 
-      GLfloat ratio;
+          GLfloat ratio;
 
-      ratio = ( float )w / ( float )h;
+          ratio = ( float )w / ( float )h;
 
-      //  gluPerspective( 45.0f, ratio, 1.0f, 100.0f );
+          //  gluPerspective( 45.0f, ratio, 1.0f, 100.0f );
 
-      gluOrtho2D(0,w,0,h);
+          gluOrtho2D(0,w,0,h);
 
-      glMatrixMode( GL_MODELVIEW );
-      glLoadIdentity( );
-    }
+          glMatrixMode( GL_MODELVIEW );
+          glLoadIdentity( );
+        }
 
 
 
@@ -161,13 +161,59 @@ AGGLScreen::~AGGLScreen()
   { 
   }
 
-AGSurface AGGLScreen::screenshot(bool frontBuffer)
+AGTexture AGGLScreen::screenshot(bool frontBuffer)
+  {
+	assert(0);
+    AGTexture t(getWidth(),getHeight());
+    
+    AGGLTexture *glTexture=t.glTexture();
+    AGRenderContext c;
+    c.setTexture(glTexture);
+    c.begin();
+    
+    if(frontBuffer)
+      glReadBuffer(GL_FRONT_LEFT);
+    else
+      glReadBuffer(GL_BACK);
+
+    assertGL;
+    glTexParameteri(glTexture->getTarget(), 
+        GL_TEXTURE_STORAGE_HINT_APPLE, 
+        GL_STORAGE_CACHED_APPLE); 
+    assertGL;
+    glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE); 
+    assertGL;
+
+
+    glTexParameteri(glTexture->getTarget(),GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_SHARED_APPLE); 
+    assertGL;
+    glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE,GL_TRUE); 
+
+    assertGL;
+    glReadBuffer(GL_FRONT_LEFT);
+    glFinish();
+    assertGL;
+    glCopyTexSubImage2D(glTexture->getTarget(), 
+    0,0,0,0,0,getWidth(),getHeight()); 
+    assertGL;
+    // Dootherworkprocessinghere,usingadoubleortriplebuffer 
+    glReadBuffer(GL_BACK);
+
+    
+    return t;
+  }
+
+AGSurface AGGLScreen::screenshotSurface(bool frontBuffer)
   {
     AGSurface s(getWidth(),getHeight());
 
-    //  SDL_Surface *surface=s.surface()->surface;
+    size_t bufSize=getWidth()*getHeight()*4+16;
+    glFinish();
 
-    unsigned char *buffer=new unsigned char[getWidth()*getHeight()*4+16];
+    unsigned char *buffer=new unsigned char[bufSize];
+
+    for(size_t i=0;i<bufSize;i++)
+      buffer[i]=0x13;
 
     if(frontBuffer)
       //  glReadBuffer(GL_FRONT);
@@ -181,10 +227,6 @@ AGSurface AGGLScreen::screenshot(bool frontBuffer)
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     assertGL;
     glPixelStorei(GL_PACK_ROW_LENGTH, getWidth());
-    //                surface->pitch / surface->format->BytesPerPixel);
-
-    //glPixelStorei(GL_PACK_SKIP_PIXELS,0);
-    //glPixelStorei(GL_PACK_SKIP_ROWS,0);
     assertGL;
 
 
@@ -192,9 +234,27 @@ AGSurface AGGLScreen::screenshot(bool frontBuffer)
       TRACE;
       cdebug(getWidth());
       cdebug(getHeight());
+      glFinish();
       glReadPixels(0,0,getWidth(),getHeight(),GL_RGBA,GL_UNSIGNED_BYTE,buffer);//s.surface()->surface);
       glReadBuffer(GL_BACK);
     }
+
+    bool changed=false;
+    bool everything0=true;
+
+    for(size_t i=0;i<bufSize;i++)
+      {
+        if(buffer[i]!=0x13)
+          changed=true;
+        if(buffer[i]!=0 && buffer[i]!=0x13)
+          {
+            everything0=false;
+            //cdebug(i);
+          }
+      }
+
+    cdebug("Buffer was changed:"<<(changed?"yes":"no"));
+    cdebug("Everything zero:"<<(everything0?"yes":"no"));
 
     {
       // copy
@@ -211,6 +271,9 @@ AGSurface AGGLScreen::screenshot(bool frontBuffer)
 
     assertGL;
     delete [] buffer;
+
+
+
     return s;
   }
 

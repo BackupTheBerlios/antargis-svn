@@ -81,7 +81,8 @@ class AGEXPORT AGGLScreen:public AGScreen
 
   virtual void begin(); // call before start drawing
 
-  AGSurface screenshot(bool frontBuffer=true);
+  AGSurface screenshotSurface(bool frontBuffer=true);
+  AGTexture screenshot(bool frontBuffer=true);
 
   void flip();
   virtual void update(const std::list<AGRect2> &rs); // call this instead of flip, if you want

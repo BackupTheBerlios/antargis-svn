@@ -121,14 +121,14 @@ void AGRenderContext::begin()
         if(mTexture->is3d())
           {
             glDisable(GL_TEXTURE_2D);
-            glEnable(GL_TEXTURE_3D);
-            glBindTexture(GL_TEXTURE_3D,mTexture->id());
+            glEnable(mTexture->getTarget());
+            glBindTexture(mTexture->getTarget(),mTexture->id());
           }
         else
           {
             glDisable(GL_TEXTURE_3D);
-            glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D,mTexture->id());
+            glEnable(mTexture->getTarget());
+            glBindTexture(mTexture->getTarget(),mTexture->id());
           }
       }
     else

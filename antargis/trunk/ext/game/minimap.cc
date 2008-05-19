@@ -295,17 +295,27 @@ bool MiniMap::eventMouseClick(AGEvent *m)
 
     v=toMapCoords(v);
 
+    mPos=v;
+    sigMoved(m);
+    /*
     //  mScene->setCamera(AGVector4(v[0],v[1],0,0));
-    AGApplication *app=getApplication();
+    AGApplication *app=getApp();
+    assert(app);
     if(app)
       {
         GLApp *glapp=dynamic_cast<GLApp*>(app);
         if(glapp)
           glapp->setCamera(v);
       }
-
+*/
     return true;
   }
+
+AGVector2 MiniMap::getMapPosition() const
+{
+	return mPos;
+}
+
 
 AGVector2 MiniMap::toMapCoords(AGVector2 v) const
 {

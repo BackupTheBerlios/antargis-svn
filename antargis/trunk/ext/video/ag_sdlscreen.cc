@@ -201,9 +201,15 @@ void AGSDLScreen::unclip()
       }
   }
 
-AGSurface AGSDLScreen::screenshot(bool frontBuffer)
+AGSurface AGSDLScreen::screenshotSurface(bool frontBuffer)
   {
     AGInternalSurface *surface=new AGInternalSurface;
     surface->surface=s;
     return AGSurface(surface).copy();
+  }
+AGTexture AGSDLScreen::screenshot(bool frontBuffer)
+  {
+    AGInternalSurface *surface=new AGInternalSurface;
+    surface->surface=s;
+    return AGTexture(AGSurface(surface).copy());
   }

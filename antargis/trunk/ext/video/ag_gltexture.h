@@ -32,10 +32,11 @@ class AGInternalSurface;
    You shouldn't use it directly - all functionality is provided by AGTexture.
  */
 class AGEXPORT AGGLTexture
-{
- public:
+  {
+public:
   AGGLTexture(size_t W,size_t H,GLint format=GL_RGBA);
   AGGLTexture(size_t W,size_t H,size_t D,GLint format=GL_RGBA);
+
   ~AGGLTexture();
 
   void setSurface(AGInternalSurface *pSurface,const AGVector2 &offset=AGVector2(0,0));
@@ -48,14 +49,29 @@ class AGEXPORT AGGLTexture
   size_t height() const;
   size_t depth() const;
 
- private:
+  AGSurface getSurface() const;
+  
+  GLenum getTarget() const
+  {
+    return mTarget;
+  }
+
+private:
+
+  void initDMABuffer();
   size_t w,h,d;
 
   /// is this a 3d-texture?
   bool m3d;
+  bool mRectTex;
+  GLenum mTarget;
 
   GLuint mID;
-};
+
+
+  static char *dmaBuffer;
+
+  };
 
 #endif
 

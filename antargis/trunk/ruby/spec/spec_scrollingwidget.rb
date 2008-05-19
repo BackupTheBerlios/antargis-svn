@@ -1,5 +1,6 @@
 require 'ruby/gui/testing.rb'
 
+if false
 class MyTestApp<AGApplication
   BIGRECT=AGRect2.new(0,0,200,200)
   SMALLRECT=AGRect2.new(0,0,100,100)
@@ -49,4 +50,5 @@ describe "AGScrollingWidget" do
     
   end
   it "shouldn't draw anything when the widget is scrolled to the right lower corner"
+end
 end

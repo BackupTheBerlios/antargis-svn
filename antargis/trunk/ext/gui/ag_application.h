@@ -163,7 +163,7 @@ class AGEXPORT AGApplication:public AGMessageObject
    So it will be correct after finishing a frame, when you are
    using nested AGApplications.
 */
-AGEXPORT AGApplication *getApplication(); // returns current active application
+//AGEXPORT AGApplication *getApplication(); // returns current active application
 
 AGEXPORT void disableKeyrepeat();
 

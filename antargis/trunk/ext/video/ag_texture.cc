@@ -103,17 +103,17 @@ AGTexture::AGTexture()
   }
 
 AGTexture::AGTexture(int W,int H):w(W),h(H),s(0)
-{
-  m3d=0;
-  version=0;
-  mTexture=0;
-  mSDLTexture=0;
-  mTextureUsed=false;
-  mPainting=false;
-  getSurfaceManager()->registerMe(this);
-  mCleared=true;
-  mFBO=0;
-}
+  {
+    m3d=0;
+    version=0;
+    mTexture=0;
+    mSDLTexture=0;
+    mTextureUsed=false;
+    mPainting=false;
+    getSurfaceManager()->registerMe(this);
+    mCleared=true;
+    mFBO=0;
+  }
 
 
 
@@ -207,17 +207,21 @@ AGInternalSurface *AGTexture::sdlTexture()
 AGGLTexture *AGTexture::glTexture()
   {
     assert(opengl());
+    cdebug(mTexture);
     if(mTexture==0)
       {
         if(s)
           if(s->glTexture && version==s->version)
             mTexture=s->glTexture;
+        cdebug(mTexture);
         if(!mTexture)
           {
+            cdebug(m3d);
             if(m3d)
               mTexture=new AGGLTexture(nextpow2(std::min(w,h)),nextpow2(std::min(w,h)),nextpow2(std::max(w,h)/std::min(w,h)));
             else
               mTexture=new AGGLTexture(nextpow2(w),nextpow2(h));
+            cdebug(mTexture);
             if(s)
               {
                 mTexture->setSurface(s);
@@ -343,8 +347,6 @@ void AGTexture::endPaint()
 
             glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, mTexture->width(),mTexture->height(),0);
 
-            //            getScreen().flip();
-            //            SDL_Delay(1000);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
           }
 
@@ -404,10 +406,6 @@ extern size_t gUsedTexMemory;
 
 void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2 &pSrc)
   {
-    //  if(gUsedTexMemory>20000000)
-    //    throw int();
-
-
     if(opengl())
       {
         assert(mTexture);
@@ -587,3 +585,11 @@ void AGTexture::clearContent()
   {
     mCleared=true;
   }
+
+
+AGSurface AGTexture::getSurface() const
+{
+  if(mTexture)
+    return mTexture->getSurface();
+  return AGSurface();
+}

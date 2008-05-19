@@ -305,7 +305,7 @@ bool AGWidget::eventMouseEnter()
     if(mTooltip.length())
       {
         mTooltipWidget=new AGTooltip(getScreenRect(),mTooltip);
-        getApplication()->setTooltip(mTooltipWidget);
+        getApp()->setTooltip(mTooltipWidget);
       }
 
     return false;
@@ -314,7 +314,7 @@ bool AGWidget::eventMouseLeave()
   {
     if(mTooltipWidget)
       {
-        getApplication()->resetTooltip(mTooltipWidget);
+        getApp()->resetTooltip(mTooltipWidget);
         mTooltipWidget=0;
       }
     return false;
@@ -387,8 +387,17 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
             if(was)
               {
                 e->setName("sigClick");
-                if(!isParent(getApplication()->getOverlay()))
-                  getApplication()->setOverlay(0);
+                AGApplication *app=getApp();
+                assert(app);
+                if(app)
+                  {
+                    AGWidget *overlay=getApp()->getOverlay();
+                    //if(overlay)
+                      if(!isParent(overlay))
+                        app->setOverlay(0);
+                  }
+                if(!isParent(getApp()->getOverlay())) //FIXME: crashes here
+                  getApp()->setOverlay(0);
 
                 if(canFocus())
                   gainFocus();
@@ -1177,7 +1186,7 @@ AGApplication *AGWidget::getApp()
 
 void AGWidget::setApp(AGApplication *pApp)
   {
-    assert(!mApp);
+    assert((!mApp)||mApp==pApp||(pApp==0));
     mApp=pApp;
   }
 
@@ -1193,3 +1202,4 @@ bool AGWidget::containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const
 {
   return getChildRect(pWidget->getRect()).contains(pVector);
 }
+

@@ -38,15 +38,15 @@ void disableKeyrepeat()
     SDL_EnableKeyRepeat(0, 0);
   }
 
-AGApplication *gApplication=0;
+//AGApplication *gApplication=0;
 
 AGVector2 gAppCursorPos;
-
+/*
 AGApplication *getApplication()
   {
     return gApplication;
   }
-
+*/
 AGApplication::AGApplication() :
   mRunning(true), mIdleCalls(true), mainWidget(0), mTooltip(0), mOverlay(0)
   {
@@ -63,6 +63,8 @@ AGApplication::AGApplication() :
 AGApplication::~AGApplication()
   {
     CTRACE;
+    if(mainWidget)
+    	mainWidget->setApp(0);
     delete mCursor;
   }
 
@@ -77,6 +79,7 @@ void AGApplication::setKeyRepeat(bool enable)
 void AGApplication::setMainWidget(AGWidget *w)
   {
     mainWidget=w;
+    mainWidget->setApp(this);
     setOverlay(0);
     if (w)
       w->redraw();
@@ -104,7 +107,7 @@ bool AGApplication::run()
     float t;
     mRunning=true;
 
-    gApplication=this;
+    //gApplication=this;
 
     flushEventQueue();
     last=now=SDL_GetTicks();
@@ -115,7 +118,7 @@ bool AGApplication::run()
       {
         STACKTRACE;
 
-        gApplication=this;
+        //gApplication=this;
 
           {
             // event handling
@@ -206,7 +209,7 @@ bool AGApplication::run()
         loopCount++;
         //      dbout(2,"Running:"<<mRunning);
       }
-    gApplication=0;
+    //gApplication=0;
 
     return true;
   }
@@ -241,6 +244,7 @@ SDL_Event AGApplication::getNewEvent()
 bool AGApplication::doEvent(const SDL_Event &event)
   {
     STACKTRACE;
+    CTRACE;
     SDL_Event e;
 
     // eat up old mouse motion events

@@ -21,6 +21,7 @@
 #include "ag_screen.h"
 #include "ag_debug.h"
 #include "ag_surface.h"
+#include "ag_texture.h"
 
 ////////////////////////////////////////////////////////////////////////
 // AGScreen
@@ -48,8 +49,13 @@ size_t AGScreen::getHeight() const
 }
 
 
-AGSurface AGScreen::screenshot(bool frontBuffer)
+AGSurface AGScreen::screenshotSurface(bool frontBuffer)
   {
     cdebug("NOT YET IMPLEMENTED");
     return AGSurface(0,0);
+  }
+AGTexture AGScreen::screenshot(bool frontBuffer)
+  {
+    cdebug("NOT YET IMPLEMENTED");
+    return AGTexture(0,0);
   }

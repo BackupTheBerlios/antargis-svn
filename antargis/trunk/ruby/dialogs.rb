@@ -239,7 +239,7 @@ end
 def takeScreenshot
 	$app.hidePanel
 	$app.draw
-	s=getScreen.screenshot
+	s=getScreen.screenshotSurface
 	$app.showPanel
 	s
 end
