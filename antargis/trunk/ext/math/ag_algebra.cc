@@ -14,7 +14,7 @@ mW(4),mH(4)
         }
   }
 
-
+// another dummy commit
 AGMatrixN::AGMatrixN(const AGMatrix3 &p):m(3*3,0),
 mW(3),mH(3)
   {
