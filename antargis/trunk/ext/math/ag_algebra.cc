@@ -3,14 +3,27 @@
 #include "ag_gauss.h"
 #include "ag_stringstream.h"
 
+// convert from AGMatrix4
 AGMatrixN::AGMatrixN(const AGMatrix4 &p):m(4*4,0),
 mW(4),mH(4)
   {
-    for(size_t x=0;x<p.mW;x++)
-      for(size_t y=0;y<mH;y++)
-#error FIXME
+    for(size_t x=0;x<4;x++)
+      for(size_t y=0;y<4;y++)
+        {
+          set(x,y,p.get(x,y));
+        }
   }
 
+
+AGMatrixN::AGMatrixN(const AGMatrix3 &p):m(3*3,0),
+mW(3),mH(3)
+  {
+    for(size_t x=0;x<3;x++)
+      for(size_t y=0;y<3;y++)
+        {
+          set(x,y,p.get(x,y));
+        }
+  }
 
 
 AGMatrixN::AGMatrixN(size_t w,size_t h):m(w*h,0),
