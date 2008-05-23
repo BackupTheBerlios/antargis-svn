@@ -51,42 +51,13 @@ bool getNewClippingTechnique()
     return gNewClippingTechnique;
   }
 
-/*
-// FIXME: This shouldn't be needed anymore !!
-class MWidgetSet:public std::set<AGWidget*>
-{
-public:
-  virtual ~MWidgetSet();
-};
-MWidgetSet *mPAllWidgets=0; // workaround - to check if still widget exists or not
-bool mWidgetSetDeleted=false;
 
-MWidgetSet::~MWidgetSet()
-  {
-    CTRACE;
-    mPAllWidgets=0;
-    mWidgetSetDeleted=true;
-  }
-
-MWidgetSet *getAllWidgets()
-  {
-    if(!mPAllWidgets)
-      {
-        if(!mWidgetSetDeleted)
-          {
-            mPAllWidgets=new MWidgetSet;
-            REGISTER_SINGLETON(mPAllWidgets);
-          }
-      }
-    return mPAllWidgets;
-  }
- */
 AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
   sigClick(this,"sigClick"),
   mApp(0),
-  mr(r),mClientWorld(r.origin()),mUseClientRect(false),
+  mRect(r),mClientWorld(r.origin()),mUseClientRect(false),
   mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),
   mFixedWidth(false),mFixedHeight(false),mVisible(true),mCaching(false),
   mHasFocus(false),mFocus(0)
@@ -101,8 +72,6 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
       mCacheTouched=false;
       mTooltipWidget=0;
       mModal=false;
-      //if(getAllWidgets())
-      //  getAllWidgets()->insert(this);
 
       getMain()->getCollector()->insertGlobal(this);
     }
@@ -120,20 +89,7 @@ AGWidget::~AGWidget()
         (*i)->setParent(0);
       }
     if(getParent())
-      {
-        /*if(getAllWidgets())
-          {
-            if(getAllWidgets()->find(getParent())==getAllWidgets()->end())
-              {
-                dbout(5000,"WARNING:Error in ~AGWidget!!!");
-              }
-            else*/
-
-        getParent()->eventChildrenDeleted(this);
-        //}
-      }
-    //if(getAllWidgets())
-    //  getAllWidgets()->erase(this);
+      getParent()->eventChildrenDeleted(this);
   }
 
 std::list<AGWidget*> AGWidget::getChildren()
@@ -231,19 +187,38 @@ void AGWidget::drawAll(AGPainter &p)
 
 void AGWidget::drawChild(AGPainter &p,AGWidget *pWidget)
   {
-    pWidget->drawAll(p);
+    if(mUseClientRect)
+      {
+        p.pushMatrix();
+        p.transform(mClientProj.getMatrix());
+        pWidget->drawAll(p);
+        p.popMatrix();
+      }
+    else
+      pWidget->drawAll(p);
   }
+
+AGProjection2D AGWidget::getClientProjection() const
+{
+  return mClientProj;
+}
+
+AGRect2 AGWidget::getClientWorld() const
+{
+  return mClientWorld;
+}
+
 
 AGRect2 AGWidget::getRect() const
 {
-  return mr;
+  return mRect;
 }
 
 AGRect2 AGWidget::getClientRect() const
 {
   if(mUseClientRect)
     return mClientWorld;
-  return mr.origin();
+  return mRect.origin();
 }
 
 void AGWidget::setClient(const AGRect2 &pWorld,const AGProjection2D &pProjection)
@@ -256,6 +231,7 @@ void AGWidget::setClient(const AGRect2 &pWorld,const AGProjection2D &pProjection
 
 bool AGWidget::processEvent(AGEvent *event)
   {
+    //CTRACE;
     if(!mVisible)
       return false;
 
@@ -267,7 +243,6 @@ bool AGWidget::processEvent(AGEvent *event)
 
     std::list<AGWidget*> children=mChildren; // copy children, so that changes do not affect iteration
     for(i=children.begin();i!=children.end() && !processed; i++)
-      //      processed=(*i)->processEvent(event);
       processed=letChildProcess(*i,event);
 
     if(processed)
@@ -287,7 +262,19 @@ bool AGWidget::processEvent(AGEvent *event)
 
 bool AGWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
   {
-    return pChild->processEvent(event);
+    bool retValue;
+    AGVector2 old=event->getRelMousePosition();
+    AGVector2 newP;
+    if(mUseClientRect)
+      newP=mClientProj.inverse().project(old);
+    else
+      newP=old-getRect().getV0();
+    event->setRelMousePosition(newP);
+
+    retValue=pChild->processEvent(event);
+    event->setRelMousePosition(old);
+
+    return retValue;
   }
 
 
@@ -333,7 +320,7 @@ bool AGWidget::eventMouseMotion(AGEvent *e)
 
     if(e->isSDLEvent())
       {
-        if(getScreenRect().contains(e->getMousePosition()))
+        if(getRect().contains(e->getRelMousePosition()))
           {
             if(!mMouseIn)
               {
@@ -349,7 +336,6 @@ bool AGWidget::eventMouseMotion(AGEvent *e)
                 eventMouseLeave() || sigMouseLeave(e);
               }
           }
-
         if(mButtonDown)
           {
             AGVector2 v=e->getMousePosition()-mOldMousePos;
@@ -363,10 +349,12 @@ bool AGWidget::eventMouseMotion(AGEvent *e)
 
 bool AGWidget::eventMouseButtonDown(AGEvent *e)
   {
+    CTRACE;
     if(e->isSDLEvent())
       {
-        if(getScreenRect().contains(e->getMousePosition()))
+        if(getRect().contains(e->getRelMousePosition()))
           {
+            cdebug(getName());
             mButtonDown=true;
             mOldMousePos=e->getMousePosition();
           }
@@ -382,10 +370,12 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
 
     if(e->isSDLEvent())
       {
-        if(getScreenRect().contains(e->getMousePosition()))
+        //        cdebug(e->getRelMousePosition()<<"::"<<getRect());
+        if(getRect().contains(e->getRelMousePosition()))
           {
             if(was)
               {
+                //                cdebug("click");
                 e->setName("sigClick");
                 AGApplication *app=getApp();
                 assert(app);
@@ -393,8 +383,8 @@ bool AGWidget::eventMouseButtonUp(AGEvent *e)
                   {
                     AGWidget *overlay=getApp()->getOverlay();
                     //if(overlay)
-                      if(!isParent(overlay))
-                        app->setOverlay(0);
+                    if(!isParent(overlay))
+                      app->setOverlay(0);
                   }
                 if(!isParent(getApp()->getOverlay())) //FIXME: crashes here
                   getApp()->setOverlay(0);
@@ -506,7 +496,7 @@ void AGWidget::regChange()
 void AGWidget::setRect(const AGRect2 &pRect)
   {
     regChange();
-    mr=pRect;
+    mRect=pRect;
     regChange();
     if(mParent)
       mParent->redraw();
@@ -538,12 +528,12 @@ float AGWidget::minHeight() const
 
 float AGWidget::width() const
 {
-  return mr.w();
+  return mRect.w();
 }
 
 float AGWidget::height() const
 {
-  return mr.h();
+  return mRect.h();
 }
 
 bool AGWidget::fixedWidth() const
@@ -559,14 +549,14 @@ bool AGWidget::fixedHeight() const
 void AGWidget::setWidth(float w)
   {
     regChange();
-    mr.setWidth(w);
+    mRect.setWidth(w);
     regChange();
     queryRedraw();
   }
 void AGWidget::setHeight(float h)
   {
     regChange();
-    mr.setHeight(h);
+    mRect.setHeight(h);
     regChange();
     queryRedraw();
   }
@@ -574,33 +564,33 @@ void AGWidget::setHeight(float h)
 void AGWidget::setTop(float y)
   {
     regChange();
-    mr.setTop(y);
+    mRect.setTop(y);
     regChange();
   }
 void AGWidget::setLeft(float x)
   {
     regChange();
-    mr.setLeft(x);
+    mRect.setLeft(x);
     regChange();
   }
 float AGWidget::bottom() const
 {
-  return mr[1][1];
+  return mRect[1][1];
 }
 float AGWidget::right() const
 {
-  return mr[1][0];
+  return mRect[1][0];
 }
 
 
 float AGWidget::top() const
 {
-  return mr.y();
+  return mRect.y();
 }
 
 float AGWidget::left() const
 {
-  return mr.x();
+  return mRect.x();
 }
 
 void AGWidget::show()
@@ -626,6 +616,8 @@ void AGWidget::setVisible(bool v)
 
 void AGWidget::setParent(AGWidget *pParent)
   {
+    //mOldMousePos.setX(-20000); // set oldmousepos invalid -- see eventMouseMotion 
+
     if(!mParent)
       {
         if(hasMain())
@@ -1203,3 +1195,8 @@ bool AGWidget::containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const
   return getChildRect(pWidget->getRect()).contains(pVector);
 }
 
+void AGWidget::setButtonDown(bool value,const AGVector2 &startVector)
+  {
+    mOldMousePos=startVector;
+    mButtonDown=value;
+  }

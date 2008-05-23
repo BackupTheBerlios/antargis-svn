@@ -131,6 +131,9 @@ class AGEXPORT AGApplication:public AGMessageObject
   void setDemoTime(float t);
   
   bool doEvent(const SDL_Event &e);
+  
+  AGSignal sigFrameFinished;
+  
  private:
   void clearOldMousePosition();
   void drawCursor();
@@ -152,7 +155,7 @@ class AGEXPORT AGApplication:public AGMessageObject
   SDL_Event mEvent;
 
   float mDemoTime;
-
+  
  public:
   void mark();
 };

@@ -1,6 +1,8 @@
 #ifndef AG_PROJECTION
 #define AG_PROJECTION
 
+// INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
+
 #include <ag_base.h>
 #include <ag_geometry.h>
 
@@ -19,6 +21,8 @@ public:
   AGProjection2D inverse() const;
 
   void pushProjection(const AGProjection2D &p);
+  
+  AGMatrix3 getMatrix() const;
 private:
   bool mInited;
   AGMatrix3 m;

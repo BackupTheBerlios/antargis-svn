@@ -107,12 +107,13 @@ protected
 		TestWidget.new(@app.getMainWidget.getChild(widgetName))
 	end
 	def clickScreen(x,y)
-	  pos=AGVector2.new(x,y)
-	  mouseDown(pos)
-    mouseUp(pos)
-		#@app.eventMouseButtonDown(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONDOWN:0:1:1:#{x.to_i}:#{y.to_i}")))
-		#@app.eventMouseButtonUp(newEvent(@app,"",toSDLEvent("SDL_MOUSEBUTTONUP:0:1:1:#{x.to_i}:#{y.to_i}")))
+	  click(AGVector2.new(x,y))
 	end
+  
+  def click(pos)
+    mouseDown(pos)
+    mouseUp(pos)
+  end
   
   def mouseMotion(pos)
     

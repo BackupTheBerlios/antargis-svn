@@ -27,11 +27,15 @@ SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 
 // AGEvent
 AGEvent::AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &e):mCaller(pCaller),mName(pName),mEvent(e),
-  mMousePosition(0)
+  mMousePosition(0),mRelMousePosition(0)
   {
   }
 AGEvent::~AGEvent()
   {
+    if(mMousePosition)
+      delete mMousePosition;
+    if(mRelMousePosition)
+      delete mRelMousePosition;
   }
 
 
@@ -84,13 +88,20 @@ const SDL_Event &AGEvent::get() const
   return mEvent;
 }
 
-void AGEvent::setMousePosition(const AGVector2 &p)
+void AGEvent::setRelMousePosition(const AGVector2 &p)
   {
-    if(mMousePosition)
-      *mMousePosition=p;
+    if(mRelMousePosition)
+      *mRelMousePosition=p;
     else
-      mMousePosition=new AGVector2(p);
+      mRelMousePosition=new AGVector2(p);
   }
+
+AGVector2 AGEvent::getRelMousePosition() const
+{
+  if(mRelMousePosition)
+    return *mRelMousePosition;
+  return getMousePosition();
+}
 
 
 AGVector2 AGEvent::getMousePosition() const
@@ -267,7 +278,6 @@ void AGSignal::disconnect(AGCPPListener *pListener)
 
 bool AGSignal::signal(AGEvent *m)
   {
-    CTRACE;
     m->setName(mName);
     std::set<AGListener*>::iterator i=mListeners.begin();
     bool value=false;

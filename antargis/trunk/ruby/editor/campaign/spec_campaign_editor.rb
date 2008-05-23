@@ -1,4 +1,3 @@
-if false
 require File.join(File.split(__FILE__)[0],"..","..","spec_helper.rb")
 require File.join(File.split(__FILE__)[0],"..","..","gui","testing.rb")
 require File.join(File.split(__FILE__)[0],"drag_grid.rb")
@@ -13,12 +12,17 @@ describe "Campaign editor" do
     grid.getAllDescendants.select{|c|c.is_a?(DragBox)}.length.should == 1
   end
   
+  it "should be possible to move the grid" do
+  end
+  
   it "should not use widgets for DragTargets anymore" do
     # define DragTarget, if not yet defined
     class DragTarget
     end
     grid.getAllDescendants.select{|c|c.is_a?(DragTarget)}.length.should == 0
   end
+  
+  
   
   it "should be possible to place stories on the grid"
   it "should be possible to define a start-node"
@@ -57,4 +61,3 @@ describe "Campaign editor" do
   end
 end
 
-end

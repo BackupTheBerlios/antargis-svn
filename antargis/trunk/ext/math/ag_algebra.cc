@@ -3,6 +3,14 @@
 #include "ag_gauss.h"
 #include "ag_stringstream.h"
 
+AGMatrixN::AGMatrixN(const AGMatrix4 &p):m(4*4,0),
+mW(4),mH(4)
+  {
+    for(size_t x=0;x<p.mW;x++)
+      for(size_t y=0;y<mH;y++)
+#error FIXME
+  }
+
 
 
 AGMatrixN::AGMatrixN(size_t w,size_t h):m(w*h,0),

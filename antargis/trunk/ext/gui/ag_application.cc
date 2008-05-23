@@ -38,16 +38,11 @@ void disableKeyrepeat()
     SDL_EnableKeyRepeat(0, 0);
   }
 
-//AGApplication *gApplication=0;
 
 AGVector2 gAppCursorPos;
-/*
-AGApplication *getApplication()
-  {
-    return gApplication;
-  }
-*/
+
 AGApplication::AGApplication() :
+	sigFrameFinished(this,"sigFrameFinished"),
   mRunning(true), mIdleCalls(true), mainWidget(0), mTooltip(0), mOverlay(0)
   {
     assertGL;
@@ -125,52 +120,23 @@ bool AGApplication::run()
             STACKTRACE;
             // check for finished music
             getMain()->repeatedCalls();
-            //  getSoundManager()->checkFinished();
 
             now=SDL_GetTicks();
-            /*
-             // pull motion events (may flood the eventqueue)
-             while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_MOUSEMOTIONMASK) > 0)
-             ;
-             */
             clearOldMousePosition();
-            //  dbout(2,"loop pre-event:"<<loopCount);
             event=getNewEvent();
             if (eventOk(event))
               {
                 do
                   {
-                    //    dbout(2,"eventok  "<<toString(&event));
                     doEvent(event);
                     if (mIdleCalls)
                       {
-                        //        dbout(2,"getNewEvent...  (idlecalls:"<<mIdleCalls<<")");
                         event=getNewEvent();
                       }
                     else
                       resetEvent(event);
                   } while (eventOk(event));
               }
-            //  dbout(2,"loop post-event:"<<loopCount);
-            /*
-             if(mIdleCalls) 
-             {
-             if (SDL_PollEvent(&event) == 0) 
-             eventIdle();
-             else
-             {
-             do
-             {
-             doEvent(&event);
-             }while(SDL_PollEvent(&event)!=0);
-             }
-
-             } 
-             else 
-             {
-             SDL_WaitEvent(&event);
-             doEvent(&event);
-             }*/
 
             if (mDemoTime>=0)
               {
@@ -432,6 +398,10 @@ void AGApplication::draw()
         changeList=mainWidget->aquireChanges();
         mainWidget->clearChangeRects();
       }
+    
+    
+    sigFrameFinished(new AGEvent(this,"sigFrameFinished"));
+    
     if (opengl())// || true)
       getScreen().flip();
     else
@@ -457,7 +427,6 @@ void AGApplication::draw()
 
 void AGApplication::tryQuit()
   {
-    CTRACE;
     mRunning=false;
   }
 
@@ -515,7 +484,7 @@ void AGApplication::delay(int ms)
 /// mark my mainWidget and my tooltip, as they can be ruby-objects
 void AGApplication::mark()
   {
-    CTRACE;
+//    CTRACE;
     if (mainWidget)
       markObject(mainWidget);
     if (mTooltip)

@@ -68,7 +68,8 @@ class AGEXPORT AGEvent
   void setCaller(AGListener *pCaller);
   AGString getName() const;
 
-  void setMousePosition(const AGVector2 &p);
+  void setRelMousePosition(const AGVector2 &p);
+  AGVector2 getRelMousePosition() const;
   
   AGVector2 getMousePosition() const;
   SDLKey getKey() const;
@@ -93,6 +94,7 @@ class AGEXPORT AGEvent
 
   AGVector2 mVector;
   AGVector2 *mMousePosition;
+  AGVector2 *mRelMousePosition;
 
  protected:
   static SDL_Event NullEvent;

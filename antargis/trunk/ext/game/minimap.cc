@@ -10,12 +10,12 @@ MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
   AGWidget(p,r),
   mMap(pMap),
   mSurface(r.w(),r.h())
-  {
-    mMapBorder=24;
-    mScene=0;
-    mTexture=new AGTexture(mSurface);
-    setMap(mMap);
-  }
+	  {
+	    mMapBorder=24;
+	    mScene=0;
+	    mTexture=new AGTexture(mSurface);
+	    setMap(mMap);
+	  }
 
 MiniMap::~MiniMap()
   {
@@ -266,7 +266,7 @@ bool MiniMap::eventMouseButtonDown(AGEvent *m)
 
     // eat up event - so antView, doesn't get it
     if(m->isSDLEvent())
-      if(getScreenRect().contains(m->getMousePosition()))
+      if(getRect().contains(m->getRelMousePosition()))
         return true;
     return false;
   }
@@ -307,13 +307,13 @@ bool MiniMap::eventMouseClick(AGEvent *m)
         if(glapp)
           glapp->setCamera(v);
       }
-*/
+     */
     return true;
   }
 
 AGVector2 MiniMap::getMapPosition() const
 {
-	return mPos;
+  return mPos;
 }
 
 
@@ -369,15 +369,15 @@ MiniMap *toMiniMap(AGWidget *w)
 
 // AGLayout creator
 class AGMiniMapLayoutCreator:public AGLayoutCreator
-{
-public:
-  REGISTER_COMPONENT(MiniMap,"miniMap")
+  {
+    public:
+      REGISTER_COMPONENT(MiniMap,"miniMap")
 
-  virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-    {
-      setResult(new MiniMap(pParent,pRect,0));
-    }
-};
+      virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
+        {
+          setResult(new MiniMap(pParent,pRect,0));
+        }
+  };
 
 void registerMinimapCreator()
   {

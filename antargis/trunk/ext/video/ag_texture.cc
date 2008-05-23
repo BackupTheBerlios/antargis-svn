@@ -207,7 +207,6 @@ AGInternalSurface *AGTexture::sdlTexture()
 AGGLTexture *AGTexture::glTexture()
   {
     assert(opengl());
-    cdebug(mTexture);
     if(mTexture==0)
       {
         if(s)

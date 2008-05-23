@@ -4,6 +4,7 @@ require 'pp'
 # TODO:
 # * put all draggable-objects within context of DragEnvironemt
 
+setDebugLevel(0)
 
 module Arrows
   def createArrowPolies(from,to,width)
@@ -104,6 +105,7 @@ module Antargis
       p=getParent
       p.removeChild(self)
       to.addChild(self)
+      #setParent(to)
       setRect(o+(-to.getScreenRect.getV0))
     end
   end
@@ -164,17 +166,10 @@ end
 
 
 class AGHoverWidget<AGWidget
-  attr_reader :hovered
   attr_accessor :hoverBorder
   def initialize(*s)
     super
-    @hovered=false
     @hoverBorder=5
-  end
-  def eventMouseMotion(e)
-    r=super
-    @hovered=getScreenRect.shrink(@hoverBorder).contains(e.getMousePosition)
-    r
   end
 end
 
@@ -260,7 +255,7 @@ class DragBox<AGHoverWidget
     radius=8
     c1=@color
     c2=@color
-    if @hovered or @dragging
+    if hovered or @dragging
       c2*=1.2
     end
     
@@ -271,6 +266,7 @@ class DragBox<AGHoverWidget
   end
   def eventDragBy(e,v)
     super
+    p "DRAGGIGN #{v}"
     if @dragging
       setRect(getRect+v)
       return true
@@ -285,17 +281,17 @@ class DragBox<AGHoverWidget
   end
   
   def startDragging
+    @dragging=true
     moveToContext(getDragEnvironment)
   end
   
   def eventMouseButtonDown(e)
     r=super
-    sRect=getScreenRect
-    if sRect.contains(e.getMousePosition)
+    sRect=getRect
+    if sRect.contains(e.getRelMousePosition)
       
       getDragGrid.select(self) if getDragGrid
-	    if sRect.shrink(BORDER_WIDTH).contains(e.getMousePosition)
-	      @dragging=true
+	    if sRect.shrink(BORDER_WIDTH).contains(e.getRelMousePosition)
 	      startDragging
         return true
 	    elsif @lastCell
@@ -310,7 +306,9 @@ class DragBox<AGHoverWidget
     puts "STARTLINE"
     env=getAncestor(DragGrid)
     env.addChild(line=DragLine.new(env,env.getRect,self))
-    line.eventMouseButtonDown(e)
+    line.setButtonDown(true,e.getMousePosition) # enable dragging
+    line.startDragging(e)
+    #line.eventMouseButtonDown(e)
   end
   
   def eventMouseButtonUp(e)
@@ -386,8 +384,13 @@ class DragLine<AGWidget
   
   def draw(p)
     startP=getPos(@startObject)
-    endP=@pos unless @endObject
-    endP=getPos(@endObject) if @endObject
+    if @endObject
+      endP=getPos(@endObject)
+    else
+      endP=@pos
+    end
+    #endP=@pos unless @endObject
+    #endP=getPos(@endObject) if @endObject
     
     if @endObject and @startObject
 	    if @moving==false and (@endObject.visible==false or @startObject.visible==false)
@@ -398,6 +401,7 @@ class DragLine<AGWidget
     white=AGColor.new(0xFF,0xFF,0x88) if @hovered
     black=AGColor.new(0,0,0)
     p.setLineWidth(1)
+    p "---",startP,endP,"_--"
     p.drawArrow(startP,endP,5,white,black)
     middle=(endP+startP)*0.5
     
@@ -410,6 +414,11 @@ class DragLine<AGWidget
       @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
     end
     true
+  end
+  
+  def startDragging(e)
+    @moving=true
+    @pos=e.getMousePosition+(getRect.getV0-getScreenRect.getV0)
   end
   
   def eventMouseMotion(e)
@@ -623,7 +632,11 @@ class DragSource<AGHoverWidget
     if getScreenRect.shrink(BORDER+SECBORDER).contains(e.getMousePosition)
       # FIXME: dragenvironment is not == Screenspace evtl.
       getDragEnvironment.addChild(o=@mClass.new(getDragEnvironment,getScreenRect.shrink(BORDER),@text))
-      o.eventMouseButtonDown(e)
+      o.setName("DRAG")
+      o.setButtonDown(true,e.getMousePosition)
+      o.startDragging
+      #letChildProcess(o,e)
+      #o.eventMouseButtonDown(e)
       return true
     end
     
@@ -693,7 +706,7 @@ class CampaignEditorApp<AGApplication
     
   end
   def eventDeselect
-    @grid.select(nil)
+    @grid.select(nil) if @grid
   end
   def eventFrame(t)
     sigFrame(t)

@@ -608,6 +608,46 @@ AGVector2 AGSurface::shrink2Fit(int alphaThresh)
 
   }
 
+/**
+ * \return if this and pSurface have the same extends, this is sum_pixel((this(pixel)-pSurface(pixel)^2)
+ *         otherwise it's -1 
+ *         the used norm for colors is sqrt((r0-r1)^2+(g0-g1)^2+(b0-b1)^2+(a0-a1)^2)
+ * */
+float AGSurface::similarity(const AGSurface &pSurface) const
+{
+  float value=0;
+  if(pSurface.width()!=width() || pSurface.height()!=height())
+    {
+      return -1;
+    }
+  AGColor c0,c1;
+  float r,g,b,a;
+  for(size_t x=0;x<width();x++)
+    for(size_t y=0;y<height();y++)
+      {
+        c0=getPixel(x,y);
+        c1=pSurface.getPixel(x,y);
+        r=c0.r-c1.r;
+        b=c0.b-c1.b;
+        g=c0.g-c1.g;
+        a=c0.a-c1.a;
+        value+=sqrt(r*r+b*b+g*g+a*a)/float(0xFF);
+      }
+  return value;
+}
+
+
+bool AGSurface::similarTo(const AGSurface &pSurface,float threshold) const
+{
+  float s=similarity(pSurface);
+  if(s<0)
+    return s;
+  if(width()==0 && height()==0)
+    return true;
+  return sqrt(s)/(width()*height())<threshold;
+}
+
+
 
 void AGSurface::setDecryptor(AGDecryptor *pDecryptor)
   {

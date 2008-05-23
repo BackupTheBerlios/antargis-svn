@@ -112,6 +112,7 @@ public:
 
   virtual bool eventMouseButtonDown(AGEvent *m);
   virtual bool eventMouseButtonUp(AGEvent *m);
+  void setButtonDown(bool value,const AGVector2 &startVector);
 
   virtual bool eventGotFocus();
   virtual bool eventLostFocus();
@@ -227,6 +228,8 @@ public:
   bool hovered() const;
   
   void setClient(const AGRect2 &pWorld,const AGProjection2D &pProj);
+  AGProjection2D getClientProjection() const;
+  AGRect2 getClientWorld() const;
   
   
   virtual bool eventMouseButtonDownClipped(AGEvent *pEvent,const AGVector2 &pPosition);
@@ -259,7 +262,7 @@ private:
 
   std::list<AGWidget*> mToClear;
 
-  AGRect2 mr,mClientWorld;
+  AGRect2 mRect,mClientWorld;
   AGProjection2D mClientProj;
   bool mUseClientRect;
   

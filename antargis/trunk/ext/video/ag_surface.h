@@ -125,9 +125,12 @@ class AGEXPORT AGSurface:public AGPaintTarget
 
   AGVector2 shrink2Fit(int alphaThresh=20);
 
-  // private:
-
   AGSurface(AGInternalSurface *i);
+  
+  float similarity(const AGSurface &pSurface) const;
+  bool similarTo(const AGSurface &pSurface,float threshold=0.1) const;
+  
+  
 
  private:
 

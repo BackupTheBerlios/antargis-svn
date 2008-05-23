@@ -3,6 +3,7 @@
 <dragEnvironment name="dragEnvironment">
 <table cols="1" rows="2">
   <rowsize row="0" fixed="50"/>
+  
   <cell col="0" row="0">
     <toolBar>
          <toolButton text="Save" name="save" caption="muh" caption-image="gui/save.png"/>
@@ -23,12 +24,14 @@
         <cell col="0" row="0">
           <dragSource name="levelSource" class="DragBox" text="Level"/>
         </cell>
+        
         <cell col="0" row="1">
           <dragSource name ="storySource" class="DragBoxStory" text="Story"/>
         </cell>
         <cell col="0" row="2">
           <dragTrash/>
         </cell>
+        
       </table>
     </cell>
     
@@ -38,6 +41,8 @@
         <dragGrid name="dragGrid" cellWidth="100" hoverColor='#9999FF' edit="textEdit"/>
       </scrollingWidget>
     </cell>
+    
+    
     
     <cell col="1" row="1" name="a">
       <table cols="2" rows="1" name="b">
@@ -50,9 +55,12 @@
         </cell>
       </table>
     </cell>
+    
   </table>
   </cell>
   </table>
+  
   <appearEffect name="showEdit" table="bigTable" row="1" size="40" duration="0.2"/>
+  
 </dragEnvironment>
 </layout>

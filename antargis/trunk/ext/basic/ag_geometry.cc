@@ -670,6 +670,12 @@ AGMatrix3::AGMatrix3(float x,float y)
     a[2][1]=0.0f;
 
   }
+AGMatrix3::AGMatrix3(const AGMatrix3 &m)
+  {
+    for(size_t x=0;x<3;x++)
+      for(size_t y=0;y<3;y++)
+        a[x][y]=m.a[x][y];
+  }
 
 
 AGMatrix3 AGMatrix3::transposed() const
@@ -684,6 +690,7 @@ AGMatrix3 AGMatrix3::transposed() const
 
 AGMatrix3 AGMatrix3::inverted() const
 {
+  CTRACE;
   // gauss-alg.
   AGMatrix3 a;
   AGMatrix3 b(*this);
@@ -1407,6 +1414,12 @@ AGRect2 AGRect2::shrink(float f) const
   AGVector2 d(f,f);
   return AGRect2(v0+d,v1-d);
 }
+
+AGRect2 AGRect2::shrinkToTopLeft(float w,float h) const
+{
+  return AGRect2(x(),y(),this->w()-w,this->h()-h);
+}
+
 
 AGRect2 AGRect2::grow(float f) const
 {
@@ -2155,16 +2168,6 @@ AGMatrix4::AGMatrix4()
 
     get(0,0)=get(1,1)=get(2,2)=get(3,3)=1.0f;
   }
-
-/*AGMatrix3::AGMatrix4(const AGAngle &n)
-{
-  a[0][0]=cos(n.angle);
-  a[1][0]=sin(n.angle);
-  a[0][1]=-sin(n.angle);
-  a[1][1]=cos(n.angle);
-  a[2][0]=a[2][1]=a[0][2]=a[1][2]=0.0f;
-  a[2][2]=1.0f;
-  }*/
 
 AGMatrix4::AGMatrix4(const AGVector4 &n)
   {

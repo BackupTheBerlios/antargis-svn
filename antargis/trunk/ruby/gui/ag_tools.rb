@@ -88,11 +88,11 @@ module AGHandler
 
 	private
 	def makeHandlerName(object,event)
-		if object.respond_to?(:getName)
-			return object.getName+":"+event.to_s
-		else
+		#if object.respond_to?(:getName)
+		#	return object.getName+":"+event.to_s
+		#else
 			return object.object_id.to_s+":"+event.to_s
-		end
+		#end
 	end
 end
 

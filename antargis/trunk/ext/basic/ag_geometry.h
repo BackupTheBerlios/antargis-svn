@@ -236,6 +236,7 @@ public:
   AGMatrix3(const AGAngle &a); // rotate
   AGMatrix3(const AGVector3 &a); // transpose
   AGMatrix3(float x,float y); // scale
+  AGMatrix3(const AGMatrix3 &m);
   void set(size_t x,size_t y,float f);
   float get(size_t x,size_t y) const;
   float &get(size_t x,size_t y);
@@ -446,6 +447,7 @@ public:
   AGVector2 getMiddle() const;
 
   AGRect2 shrink(float f) const;
+  AGRect2 shrinkToTopLeft(float w,float h) const;
   AGRect2 grow(float f) const;
 
   void setX(float p);

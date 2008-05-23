@@ -24,12 +24,14 @@
 
 AGScrollingWidget::AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect):
   AGWidget(pParent,pRect),
-  mClient(pRect.origin()),
-  mVector(0,0),
+  //mClient(pRect.origin()),
+  //mVector(0,0),
   mDragging(false)
     {
+      AGRect2 r=getRect().origin();
+      setClient(r,AGProjection2D(r,r));
     }
-
+/*
 bool AGScrollingWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
   {
     bool retValue;
@@ -43,30 +45,39 @@ bool AGScrollingWidget::letChildProcess(AGWidget *pChild,AGEvent *event)
     
     return retValue;
   }
-
+*/
 
 void AGScrollingWidget::setClientRect(const AGRect2 &pRect)
   {
-    mClient=pRect;
+    AGRect2 r=getRect().origin();
+    setClient(pRect,AGProjection2D(r,r));
   }
 
-void AGScrollingWidget::drawChild(AGPainter &pPainter,AGWidget *pChild)
+void AGScrollingWidget::setVector(const AGVector2 &pVector)
   {
-    pPainter.pushMatrix();
-    pPainter.transform(mClient-mVector);
-    AGWidget::drawChild(pPainter,pChild);
-    pPainter.popMatrix();
+    AGProjection2D p=getClientProjection();
+    AGRect2 from=getRect().origin();
+    AGRect2 to=p.project(from);
+    AGVector2 v=pVector;
+    v=-getClientWorld().shrinkToTopLeft(from.width(),from.height()).clip(-v);
+    setClient(getClientWorld(),AGProjection2D(from,to.origin()+v));
+    
   }
+
+AGVector2 AGScrollingWidget::getVector() const
+{
+  AGProjection2D p=getClientProjection();
+  return p.project(AGVector2(0,0));
+}
+
+
 bool AGScrollingWidget::eventMouseButtonDown(AGEvent *pEvent)
   {
     bool result=AGWidget::eventMouseButtonDown(pEvent);
-    cdebug(getScreenRect());
-    cdebug(pEvent->getMousePosition());
     if(hovered())
       {
         mDragging=true;
         cdebug("dragging!");
-        //return true;
       }
     return result;
   }
@@ -84,32 +95,9 @@ bool AGScrollingWidget::eventDragBy(AGEvent *pEvent,const AGVector2 &pVector)
   {
     if(mDragging)
       {
-        mVector-=pVector;
-        cdebug(mVector);
-        mVector=clip(mVector);
-        cdebug(mVector);
+        setVector(getVector()+pVector);
       }
     return AGWidget::eventDragBy(pEvent,pVector);
   }
 
-AGRect2 AGScrollingWidget::getClientRect() const
-{
-  return mClient;
-}
 
-AGRect2 AGScrollingWidget::getScreenRect() const
-{
-  return AGWidget::getScreenRect()-mVector;
-}
-
-
-void AGScrollingWidget::setVector(const AGVector2 &pVector)
-  {
-   mVector=clip(pVector); 
-  }
-
-AGVector2 AGScrollingWidget::clip(const AGVector2 &pVector)
-  {
-    AGRect2 client=AGRect2(0,0,mClient.width()-width(),mClient.height()-height());
-    return client.clip(pVector);
-  }

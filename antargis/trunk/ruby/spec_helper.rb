@@ -107,6 +107,18 @@ def observe(object,method,&block)
 	observer.run {block.call(observer)}
 end
 
+class Object
+  def method_missing(name,*s)
+    alt=name.to_s.gsub(/\?$/,"")
+    if respond_to?(alt) and alt!=name
+      self.send(alt,*s)
+    else
+      super
+    end
+    
+  end
+end
+
 #class A
 #	def b
 #		puts "B"

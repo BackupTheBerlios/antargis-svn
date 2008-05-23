@@ -31,20 +31,19 @@
 #include <ag_clip.h>
 #include <ag_base.h>
 
-
 #include <list>
 
 class AGTriangle2;
 class AGRect2;
 
-struct AGEXPORT AGProjection
+struct AGEXPORT AGPaintProjection
 {
   AGMatrix3 a;
   AGRect2 clip;
   AGClipping advancedClipping;
 
-  AGProjection(const AGRect2 &pClip);
-  AGProjection(const AGClipping &pClip);
+  AGPaintProjection(const AGRect2 &pClip);
+  AGPaintProjection(const AGClipping &pClip);
 
   AGVector2 project(const AGVector2 &p) const;
   bool pointOk(const AGVector2 &p) const;
@@ -126,6 +125,7 @@ class AGEXPORT AGPainter
   void clip(const AGClipping &clip);
 
   void transform(const AGRect2 &r);
+  void transform(const AGMatrix3 &m);
 
   AGVector2 project(const AGVector2 &p) const;
   bool pointOk(const AGVector2 &p) const;
@@ -133,9 +133,9 @@ class AGEXPORT AGPainter
   AGPaintTarget *getTarget();
 
  private:
-  std::list<AGProjection> ps;
+  std::list<AGPaintProjection> ps;
 
-  AGProjection mCurrent;
+  AGPaintProjection mCurrent;
 
   gc_ptr<AGPaintTarget> mTarget;
 };

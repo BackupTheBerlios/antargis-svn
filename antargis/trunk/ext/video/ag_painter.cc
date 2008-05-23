@@ -37,7 +37,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 
-AGProjection::AGProjection(const AGRect2 &pClip):clip(pClip)
+AGPaintProjection::AGPaintProjection(const AGRect2 &pClip):clip(pClip)
 {
   a.set(0,0,1);
   a.set(0,1,0);
@@ -50,7 +50,7 @@ AGProjection::AGProjection(const AGRect2 &pClip):clip(pClip)
   a.set(2,2,0);
 }
 
-AGProjection::AGProjection(const AGClipping &pClip):advancedClipping(pClip)
+AGPaintProjection::AGPaintProjection(const AGClipping &pClip):advancedClipping(pClip)
 {
   a.set(0,0,1);
   a.set(0,1,0);
@@ -64,30 +64,30 @@ AGProjection::AGProjection(const AGClipping &pClip):advancedClipping(pClip)
 }
 
 
-AGVector2 AGProjection::project(const AGVector2 &p) const
+AGVector2 AGPaintProjection::project(const AGVector2 &p) const
 {
   AGVector2 r=(a*AGVector3(p[0],p[1],1)).dim2();
 
   return r;
 }
-bool AGProjection::pointOk(const AGVector2 &p) const
+bool AGPaintProjection::pointOk(const AGVector2 &p) const
 {
   return clip.contains(p);
 }
 
-AGRect2 AGProjection::project(const AGRect2 &p) const
+AGRect2 AGPaintProjection::project(const AGRect2 &p) const
 {
   AGRect2 r((a*AGVector3(p[0],1)).dim2(),
       (a*AGVector3(p[1],1)).dim2());
   return r;
 }
-AGRect2 AGProjection::clipRect(AGRect2 target) const
+AGRect2 AGPaintProjection::clipRect(AGRect2 target) const
 {
   return clip.intersect(target);
 }
 
 
-std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) const
+std::pair<AGRect2,AGRect2> AGPaintProjection::clipRect(AGRect2 target,AGRect2 src) const
 {
   AGRect2 i=clip.intersect(target);
   if(i.width()<=0 || i.height()<=0)
@@ -139,24 +139,24 @@ std::pair<AGRect2,AGRect2> AGProjection::clipRect(AGRect2 target,AGRect2 src) co
   return std::make_pair(target,src);
 }
 
-void AGProjection::translate(const AGVector2 &v)
+void AGPaintProjection::translate(const AGVector2 &v)
   {
     a.get(2,0)+=v[0];
     a.get(2,1)+=v[1];
   }
 
-void AGProjection::transform(const AGMatrix3 &pMatrix)
+void AGPaintProjection::transform(const AGMatrix3 &pMatrix)
   {
     a*=pMatrix;
   }
 
-void AGProjection::setClip(const AGRect2&p)
+void AGPaintProjection::setClip(const AGRect2&p)
   {
     clip=clip.intersect(p);
   }
 
 
-AGRect2 AGProjection::getRect() const
+AGRect2 AGPaintProjection::getRect() const
 {
   AGRect2 r=clip;
 
@@ -164,7 +164,7 @@ AGRect2 AGProjection::getRect() const
   return r;
 }
 
-AGLine2 AGProjection::clipLine(AGLine2 l) const
+AGLine2 AGPaintProjection::clipLine(AGLine2 l) const
 {
   AGLine2 d;
 
@@ -596,6 +596,11 @@ void AGPainter::clip(const AGRect2 &r)
     AGRect2 p=mCurrent.project(r);
     mCurrent.setClip(p);
     mTarget->clip(mCurrent.clip);
+  }
+
+void AGPainter::transform(const AGMatrix3 &m)
+  {
+    mCurrent.transform(m);
   }
 
 void AGPainter::transform(const AGRect2 &r)

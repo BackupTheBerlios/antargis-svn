@@ -31,23 +31,14 @@ public:
   AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect);
   void setClientRect(const AGRect2 &pRect);
   
-  void drawChild(AGPainter &pPainter,AGWidget *pChild);
   bool eventMouseButtonDown(AGEvent *pEvent);
   bool eventMouseButtonUp(AGEvent *pEvent);
   bool eventDragBy(AGEvent *pEvent,const AGVector2 &pVector);
-  
-  AGRect2 getClientRect() const;
-  
-  AGRect2 getScreenRect() const;
-  
-  void setVector(const AGVector2 &pVector);
-protected:
-  virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
-  AGVector2 clip(const AGVector2 &pVector);
 
-private:
-  AGRect2 mClient;
-  AGVector2 mVector;
+  void setVector(const AGVector2 &p);
+  AGVector2 getVector() const;
+  
+ private:
   bool mDragging;
   
   };
