@@ -110,6 +110,12 @@ EOT
 "%module(directors=\"1\") #{@moduleName}
 %feature(\"autodoc\",\"1\");
 
+/*
+%feature(\"director:except\") {
+ throw Swig::DirectorMethodException($error);
+}
+*/
+
 #{importInterfaces}
 
 #{stlIncludes}

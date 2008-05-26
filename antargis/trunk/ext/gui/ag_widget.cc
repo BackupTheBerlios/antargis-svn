@@ -56,6 +56,7 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
   sigMouseLeave(this,"sigMouseLeave"),
   sigClick(this,"sigClick"),
+  sigDragBy(this,"sigDragBy"),
   mApp(0),
   mRect(r),mClientWorld(r.origin()),mUseClientRect(false),
   mParent(pParent),mChildrenEventFirst(false),mChildrenDrawFirst(false),mMouseIn(false),mButtonDown(false),

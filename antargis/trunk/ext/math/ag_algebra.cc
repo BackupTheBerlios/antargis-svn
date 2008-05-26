@@ -70,7 +70,7 @@ AGMatrixN &AGMatrixN::operator*=(const AGMatrixN &p)
 AGMatrixN &AGMatrixN::operator+=(const AGMatrixN &p)
   {
     assert(mW==p.mW && mH==p.mH);
-    for(size_t x=0;x<p.mW;x++)
+    for(size_t x=0;x<mW;x++)
       for(size_t y=0;y<mH;y++)
         {
           set(x,y,get(x,y)+p.get(x,y));
@@ -286,14 +286,15 @@ template<class T> float determinant(const T&t)
     assert(t.width()==t.height());
     if(t.width()>2)
       {
-        AGMatrixN n(t.width()-1,t.height());
+        AGMatrixN n(t.width()-1,t.height()-1);
         AGMatrixN l(t.skipCol(0));
+        assert(l.width()==t.height()-1);
         float c;
         // take always first row for reduction
         for(size_t i=0;i<t.height();i++)
           {
             c=(i&1)?-1:1;
-            n+=t.skipRow(i)*t.get(0,i)*c;
+            n+=l.skipRow(i)*t.get(0,i)*c;
           }
         return determinant(n);
       }
@@ -304,3 +305,5 @@ template<class T> float determinant(const T&t)
         return t.get(0,0)*t.get(1,1)-t.get(1,0)*t.get(0,1);
       }
   }
+
+template float determinant<AGMatrixN>(const AGMatrixN&p);

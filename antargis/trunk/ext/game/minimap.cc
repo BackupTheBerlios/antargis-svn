@@ -9,13 +9,14 @@
 MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
   AGWidget(p,r),
   mMap(pMap),
-  mSurface(r.w(),r.h())
-	  {
-	    mMapBorder=24;
-	    mScene=0;
-	    mTexture=new AGTexture(mSurface);
-	    setMap(mMap);
-	  }
+  mSurface(r.w(),r.h()),
+  sigMoved(this,"sigMoved")
+    {
+      mMapBorder=24;
+      mScene=0;
+      mTexture=new AGTexture(mSurface);
+      setMap(mMap);
+    }
 
 MiniMap::~MiniMap()
   {
@@ -25,14 +26,12 @@ MiniMap::~MiniMap()
 
 bool MiniMap::mapChangedComplete(AGEvent *e)
   {
-    //  CTRACE;
     mapChangedP(true);
     return false;
   }
 
 bool MiniMap::mapChanged(AGEvent *e)
   {
-    //  CTRACE;
     mapChangedP(false);
     return false;
   }
@@ -265,19 +264,23 @@ bool MiniMap::eventMouseButtonDown(AGEvent *m)
     AGWidget::eventMouseButtonDown(m);
 
     // eat up event - so antView, doesn't get it
+    return(hovered());
+    /*      ret
     if(m->isSDLEvent())
       if(getRect().contains(m->getRelMousePosition()))
         return true;
-    return false;
+    return false;*/
   }
 
 bool MiniMap::eventMouseClick(AGEvent *m)
   {
+    cdebug("clicked");
     AGVector2 p(m->getMousePosition()-getScreenRect()[0]);
     if(mMap==0 || mScene==0)
       return AGWidget::eventMouseClick(m);
 
     AGVector2 v(p);
+    cdebug("clicked");
 
     float w=25*getRect().w()/mMap->getW();
     float h=25*getRect().h()/mMap->getH();
@@ -294,7 +297,7 @@ bool MiniMap::eventMouseClick(AGEvent *m)
       v[1]=height()-h;
 
     v=toMapCoords(v);
-
+    cdebug("sigMoved");
     mPos=v;
     sigMoved(m);
     /*

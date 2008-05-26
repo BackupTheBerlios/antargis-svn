@@ -3,7 +3,7 @@ Dir.chdir(File.split(File.split(File.expand_path(__FILE__))[0])[0])
 require 'pp'
 require 'ruby/antargislib.rb'
 
-setDebugLevel(0)
+#setDebugLevel(0)
 
 #if Object.respond_to?(:define_cmethod)
 	

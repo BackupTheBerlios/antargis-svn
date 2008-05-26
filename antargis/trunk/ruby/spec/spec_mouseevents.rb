@@ -69,9 +69,7 @@ describe "MouseEvents on simple widgets (no scaling or hiding)" do
     
   end
   
-  it "shuold handle dragging correctly" do
-    @app.step while true
-  end
+  it "shuold handle dragging correctly"
 end
 
 describe "MouseEvents on complex widgets (with scaling and hiding)" do

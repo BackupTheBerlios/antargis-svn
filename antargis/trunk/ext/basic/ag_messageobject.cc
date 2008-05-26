@@ -196,6 +196,7 @@ AGCPPListener::~AGCPPListener()
 
 
 
+/*
 // AGSignal
 
 AGSignal::AGSignal():mCaller(0)
@@ -209,7 +210,7 @@ AGSignal::AGSignal():mCaller(0)
 AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
   {
   }
-
+*/
 AGSignal::AGSignal(AGMessageObject *pCaller,const AGString &pName):
   mName(pName),mCaller(pCaller)
     {

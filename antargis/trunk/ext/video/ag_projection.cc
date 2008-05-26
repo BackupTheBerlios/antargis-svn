@@ -30,6 +30,8 @@ AGProjection2D::AGProjection2D(const AGRect2 &from, const AGRect2 &to) :
     AGMatrix3 m3(to.getV0());
 
     m=m3*m2*m1;
+    
+    assert(isInvertable(m));
   }
 
 AGRect2 AGProjection2D::project(const AGRect2 &r) const

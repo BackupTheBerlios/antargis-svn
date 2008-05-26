@@ -42,7 +42,7 @@ void disableKeyrepeat()
 AGVector2 gAppCursorPos;
 
 AGApplication::AGApplication() :
-	sigFrameFinished(this,"sigFrameFinished"),
+  sigFrameFinished(this,"sigFrameFinished"),
   mRunning(true), mIdleCalls(true), mainWidget(0), mTooltip(0), mOverlay(0)
   {
     assertGL;
@@ -59,7 +59,7 @@ AGApplication::~AGApplication()
   {
     CTRACE;
     if(mainWidget)
-    	mainWidget->setApp(0);
+      mainWidget->setApp(0);
     delete mCursor;
   }
 

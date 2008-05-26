@@ -166,8 +166,8 @@ class AGMessageObject;
 class AGEXPORT AGSignal
 {
  public:
-  AGSignal();
-  AGSignal(AGMessageObject *pCaller);
+  //AGSignal();
+  //AGSignal(AGMessageObject *pCaller);
   AGSignal(AGMessageObject *pCaller,const AGString &pName);
 
   virtual ~AGSignal();

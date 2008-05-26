@@ -4,7 +4,7 @@ require 'pp'
 # TODO:
 # * put all draggable-objects within context of DragEnvironemt
 
-setDebugLevel(0)
+#setDebugLevel(0)
 
 module Arrows
   def createArrowPolies(from,to,width)
